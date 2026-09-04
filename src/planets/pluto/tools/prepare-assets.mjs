@@ -5,10 +5,13 @@ import { resolve } from "node:path";
 
 import sharp from "sharp";
 import { decodeElevationGrid, elevationRaster } from "./elevation-raster.mjs";
+import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from "./missing-coverage.mjs";
+import { bakeSurfaceRaster } from "./surface-raster.mjs";
 
 import {
   ensurePlutoPreparationDirectories,
   PLUTO_PUBLIC_ROOT,
+  PLUTO_STAGING_ROOT,
 } from "./preparation-paths.mjs";
 import { validatePlutoSourceGroup } from "./source-manifest.mjs";
 
@@ -25,13 +28,14 @@ await ensurePlutoPreparationDirectories();
 
 const lensPlans = Object.freeze([
   { id: "surface", label: "Surface", input: "surface/pluto-color-mosaic.jpg", output: "pluto-surface",
-    qualification: "New Horizons MVIC color mosaic; black areas are unmapped" },
+    qualification: "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset" },
   { id: "topography", label: "Topography", input: "lenses/pluto-dem.tif", output: "pluto-topography",
-    qualification: "USGS stereo elevation; authored blue/tan/red scale −8/0/+8 km; black is no data" },
+    qualification: "USGS stereo elevation; authored blue/tan/red scale −8/0/+8 km; gray grid: no elevation data" },
   { id: "monochrome", label: "Monochrome", input: "lenses/pluto-monochrome.tif", output: "pluto-monochrome",
-    qualification: "USGS New Horizons LORRI/MVIC mosaic; black areas are unmapped" },
+    qualification: "USGS New Horizons LORRI/MVIC mosaic; gray grid: no imagery in this dataset" },
 ]);
 const elevation = decodeElevationGrid(await readFile(resolve(import.meta.dirname, "../source/lenses/pluto-dem.tif")));
+const surfaceRasterCells = JSON.parse(await readFile(resolve(PLUTO_STAGING_ROOT, "surface-raster-plan.json")));
 
 for (const plan of lensPlans) await prepareLens(plan);
 await Promise.all([1, 2].map(writeCurvatureMaterial));
@@ -79,18 +83,29 @@ await writeFile(
 
 async function prepareLens(plan) {
   const input = resolve(import.meta.dirname, "../source", plan.input);
+  // Read the coverage before resampling: dark observed terrain is not no-data.
+  // USGS documents monochrome observations as 1–255, reserving zero for gaps.
+  const source = plan.id === "topography" ? null : await sharp(input, { limitInputPixels: false })
+    .raw().toBuffer({ resolveWithObject: true });
+  const sourceMissing = source && blackFillCoverage(source.data, source.info, { southConnected: plan.id === "surface" });
+  let thumbnailRaster;
   for (const density of [1, 2]) {
     const width = 1024 * density;
     const height = 512 * density;
-    const { data, info } = plan.id === "topography"
+    const raster = plan.id === "topography"
       ? elevationRaster(elevation, width, height)
       : await sharp(input, { limitInputPixels: false }).resize(width, height, { fit: "fill" }).removeAlpha().toColourspace("srgb").raw().toBuffer({ resolveWithObject: true });
+    const { info } = raster;
+    const missing = raster.missing ?? sampleCoverage(sourceMissing, source.info, width, height);
+    const data = paintMissingCoverage(raster.data, info, missing);
+    if (density === 2) thumbnailRaster = { data, info };
     const surface = orientLatitudeBands(data, {
       width,
       height,
       channels: info.channels,
       bandCount: 16,
     });
+    const rasterizedSurface = bakeSurfaceRaster(surface, { width, height, channels: info.channels }, surfaceRasterCells, density);
     const poles = preparePolarAtlas(data, {
       width,
       height,
@@ -100,8 +115,8 @@ async function prepareLens(plan) {
     });
     const suffix = density === 2 ? "@2x" : "";
     await Promise.all([
-      sharp(surface, { raw: { width, height, channels: info.channels } })
-        .webp({ quality: 88, smartSubsample: true })
+      sharp(rasterizedSurface.data, { raw: { width: rasterizedSurface.width, height: rasterizedSurface.height, channels: 4 } })
+        .webp({ quality: 88, alphaQuality: 100, smartSubsample: true })
         .toFile(resolve(PLUTO_PUBLIC_ROOT, `${plan.output}${suffix}.webp`)),
       sharp(poles, {
         raw: {
@@ -117,8 +132,7 @@ async function prepareLens(plan) {
         )),
     ]);
   }
-  const raster = plan.id === "topography" ? elevationRaster(elevation, 1024, 512) : null;
-  const thumbnail = (raster ? sharp(raster.data, { raw: raster.info }) : sharp(input, { limitInputPixels: false }))
+  const thumbnail = sharp(thumbnailRaster.data, { raw: thumbnailRaster.info })
     .resize(96, 96, { fit: "cover", position: "centre", kernel: sharp.kernel.lanczos3 })
     .removeAlpha().toColourspace("srgb");
   await thumbnail

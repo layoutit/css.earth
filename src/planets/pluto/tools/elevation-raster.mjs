@@ -35,10 +35,13 @@ export function elevationColor(metres) {
 
 export function elevationRaster(grid, width, height) {
   const data = Buffer.alloc(width * height * 3);
+  const missing = new Uint8Array(width * height);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const sourceX = Math.min(grid.width - 1, Math.floor((x + 0.5) * grid.width / width));
     const sourceY = Math.min(grid.height - 1, Math.floor((y + 0.5) * grid.height / height));
-    data.set(elevationColor(grid.sample(sourceX, sourceY)), (y * width + x) * 3);
+    const metres = grid.sample(sourceX, sourceY);
+    missing[y * width + x] = Number(metres === -32768);
+    data.set(elevationColor(metres), (y * width + x) * 3);
   }
-  return { data, info: { width, height, channels: 3 } };
+  return { data, info: { width, height, channels: 3 }, missing };
 }

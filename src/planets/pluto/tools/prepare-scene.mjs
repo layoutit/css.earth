@@ -12,8 +12,8 @@ import {
   resolvePolyTextureLeafGeometry,
 } from "@layoutit/polycss";
 
-import { prepareProjectiveTextureLayer } from
-  "../../../platform/projective-surface-raster.mjs";
+import { PLUTO_SURFACE_ATLAS, prepareSurfaceRasterCell } from "./surface-raster.mjs";
+import { ensurePlutoPreparationDirectories, PLUTO_STAGING_ROOT } from "./preparation-paths.mjs";
 
 import { readPlutoFacts } from "./physical-source.mjs";
 import { validatePlutoSourceGroup } from "./source-manifest.mjs";
@@ -32,7 +32,6 @@ const POLAR_INNER_INSET = 2.4;
 const CAMERA_ZOOM = 1.1;
 const CAMERA_PITCH = 40;
 const ROTATION_SECONDS = 84;
-const PROJECTIVE_TEXTURE_RASTER_SCALE = 2;
 const PLAN_OPTIONS = Object.freeze({
   tileSize: TILE_SIZE,
   layerElevation: TILE_SIZE,
@@ -66,6 +65,7 @@ const camera = createPolyCamera({
   zoom: CAMERA_ZOOM,
   distance: 0,
 });
+const surfaceRasterCells = [];
 const bands = prepareSphereBands(config);
 const leafCount = bands.reduce((sum, band) => sum + band.leaves.length, 0);
 const scene = Object.freeze({
@@ -115,7 +115,7 @@ const scene = Object.freeze({
     latitudeSegments: LATITUDE_SEGMENTS,
     longitudeSegments: LONGITUDE_SEGMENTS,
     assets: Object.freeze({
-      surface: config.texture,
+      surface: { ...config.texture, width: PLUTO_SURFACE_ATLAS.width, height: PLUTO_SURFACE_ATLAS.height },
       poles: config.poles,
     }),
     bands,
@@ -136,6 +136,8 @@ await writeFile(
   "// Generated from checked Pluto sources. Do not edit by hand.\n" +
     `export const PREPARED_PLUTO_SCENE = ${JSON.stringify(scene)};\n`,
 );
+await ensurePlutoPreparationDirectories();
+await writeFile(resolve(PLUTO_STAGING_ROOT, "surface-raster-plan.json"), JSON.stringify(surfaceRasterCells));
 
 function prepareSphereBands(body) {
   const leaves = [
@@ -322,21 +324,25 @@ function textureStyle(polygon, index, seamEdges) {
     polygon.presentationCellSize ?? geometry.leafWidth,
     polygon.presentationCellSize ?? geometry.leafHeight,
   );
+  const raster = !polygon.polarCap ? prepareSurfaceRasterCell(fitted, surfaceRasterCells.length) : null;
+  if (raster) surfaceRasterCells.push(raster);
+  const presentation = raster ? {
+    ...fitted,
+    leafWidth: raster.width,
+    leafHeight: raster.height,
+    backgroundPosition: [-raster.x, -raster.y],
+    backgroundSize: [PLUTO_SURFACE_ATLAS.width, PLUTO_SURFACE_ATLAS.height],
+  } : fitted;
   return {
     style: `transform:matrix3d(${fitted.matrix})` +
-      preparedAtlasDimensions(fitted.leafWidth, fitted.leafHeight) +
-      `;background-position:${fitted.backgroundPosition
+      preparedAtlasDimensions(presentation.leafWidth, presentation.leafHeight) +
+      `;background-position:${presentation.backgroundPosition
         .map((value) => value === 0 ? "0px" : formatCssLength(value)).join(" ")}` +
-      `;background-size:${fitted.backgroundSize.map(formatCssLength).join(" ")}`,
-    ...(!polygon.polarCap ? {
-      projectiveTextureLayer: prepareProjectiveTextureLayer(
-        fitted.matrix,
-        PROJECTIVE_TEXTURE_RASTER_SCALE,
-      ),
-    } : {}),
+      `;background-size:${presentation.backgroundSize.map(formatCssLength).join(" ")}`,
+    ...(raster ? { projectiveTextureLayer: raster.layer } : {}),
     sourceRect: fitted.sourceRect,
-    leafWidth: fitted.leafWidth,
-    leafHeight: fitted.leafHeight,
+    leafWidth: presentation.leafWidth,
+    leafHeight: presentation.leafHeight,
     projection: fitted.projection,
     lighting: "source",
     lightingOverlay: false,

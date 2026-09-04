@@ -18,7 +18,7 @@ const panel = {
   moreFacts: [
     { label: "Classification", value: "Dwarf planet" },
     { label: "Rotation", value: `${Math.abs(source.rotationDays)} days, retrograde` },
-    { label: "Black map areas", value: "Unmapped, not shadow" },
+    { label: "Gray grid areas", value: "No data in this dataset", title: "The grid marks missing imagery or elevation, depending on the selected lens. It is not surface detail." },
     { label: "Elevation colors", value: "Blue −8 km · tan 0 · red +8 km", title: "USGS heights relative to a 1,188.3 km reference sphere. Colors are an authored display scale, not surface color." },
   ],
 };

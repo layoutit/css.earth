@@ -33,6 +33,28 @@ test("publishes one prepared retained Pluto scene", () => {
   assert.equal(PREPARED_PLUTO_SCENE.camera.yawBounded, false);
 });
 
+test("bakes Pluto homographies into textures while keeping scene frames affine", () => {
+  const leaves = PREPARED_PLUTO_SCENE.body.bands.flatMap(({ leaves }) => leaves);
+  let projectiveFaces = 0;
+  for (const leaf of leaves) {
+    const layer = leaf.projectiveTextureLayer;
+    if (layer) {
+      assert.equal(layer.textureMatrix, "1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1");
+      const frame = layer.frameMatrix.split(",").map(Number);
+      assert.deepEqual([frame[3], frame[7], frame[11], frame[15]], [0, 0, 0, 1]);
+    }
+    const matrix = leaf.style.match(/matrix3d\(([^)]+)\)/u)?.[1].split(",").map(Number);
+    assert.equal(matrix?.length, 16);
+    assert.ok(matrix.every(Number.isFinite));
+    // A projective denominator must stay positive across all four corners.
+    for (const x of [0, leaf.leafWidth]) for (const y of [0, leaf.leafHeight]) {
+      assert.ok(matrix[3] * x + matrix[7] * y + matrix[15] > 0);
+    }
+    if (layer) projectiveFaces++;
+  }
+  assert.equal(projectiveFaces, 448);
+});
+
 test("prepares sourced MVIC color, USGS elevation, and LORRI/MVIC lenses", async () => {
   assert.equal(PREPARED_PLUTO_LENSES.schema, "csspluto-prepared-lenses@1");
   assert.equal(PREPARED_PLUTO_LENSES.defaultLens, "surface");
@@ -45,8 +67,8 @@ test("prepares sourced MVIC color, USGS elevation, and LORRI/MVIC lenses", async
     ["surface", "topography", "monochrome"]);
   for (const lens of PREPARED_PLUTO_LENSES.controls) {
     for (const [url, width, height] of [
-      [lens.surfaceUrl, 1024, 512],
-      [lens.surface2xUrl, 2048, 1024],
+      [lens.surfaceUrl, 2112, 924],
+      [lens.surface2xUrl, 4224, 1848],
       [lens.polesUrl, 512, 128],
       [lens.poles2xUrl, 1024, 256],
       [lens.thumbnailUrl, 96, 96],
