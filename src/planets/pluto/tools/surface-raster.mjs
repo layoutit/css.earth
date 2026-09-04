@@ -49,7 +49,10 @@ export function bakeSurfaceRaster(data, { width, height, channels }, cells, dens
         const u = px * source.w / denominator / 2, v = py * source.w / denominator / 2;
         if (u < 0 || v < 0 || u > source.width || v > source.height) continue;
         const sx = (u - source.backgroundPosition[0]) * scaleX - 0.5;
-        const sy = (v - source.backgroundPosition[1]) * scaleY - 0.5;
+        // Each full-band leaf runs south-to-north; the source image runs
+        // north-to-south. Reverse the coordinate before interpolation so edge
+        // taps still read adjacent latitudes, not separately reversed bands.
+        const sy = (source.height - v - source.backgroundPosition[1]) * scaleY - 0.5;
         for (let c = 0; c < 3; c++) rgb[c] += sample(sx, sy, c);
         count++;
       }

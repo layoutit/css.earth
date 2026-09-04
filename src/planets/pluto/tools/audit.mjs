@@ -17,10 +17,11 @@ await mkdir(resolve(root, ".."), { recursive: true });
 await mkdir(root); // Never silently overwrite prior evidence.
 await verifyPlutoSourceManifest();
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const manifest = JSON.parse(await readFile(new URL("../runtime-assets.json", import.meta.url)));
+const manifestBytes = await readFile(new URL("../runtime-assets.json", import.meta.url));
+const manifest = JSON.parse(manifestBytes);
 const expected = new Map(manifest.assets.map((entry) => [entry.filename, entry]));
 const source = JSON.parse(await readFile(new URL("../source/manifest.json", import.meta.url)));
-const report = { qualification: "SOURCE-BOUND BROWSER PRESENTATION; not native camera or pixel parity", baseUrl, capturedAt: new Date().toISOString(), channel: "chrome", headless: true, preparedSceneSha256: sha(await readFile(new URL("../runtime/preparedScene.mjs", import.meta.url))), sourceInputs: source.inputs, views: [], runtime: [] };
+const report = { qualification: "SOURCE-BOUND BROWSER PRESENTATION; not native camera or pixel parity", baseUrl, capturedAt: new Date().toISOString(), channel: "chrome", headless: true, runtimeManifestSha256: sha(manifestBytes), preparedSceneSha256: sha(await readFile(new URL("../runtime/preparedScene.mjs", import.meta.url))), sourceInputs: source.inputs, views: [], runtime: [] };
 
 // Observation references, separate from browser captures: these are flat source
 // products, so no misleading source-map-to-globe pixel-difference is reported.
@@ -107,7 +108,7 @@ try {
     assert.equal(runtime.nodes, 931);
     if (report.runtime.length) assert.deepEqual([...loaded].sort(), report.runtime[0].loadedAndVerified, "Display scaling changed the loaded asset bank");
     assert.deepEqual(problems, []); assert.deepEqual(external, []);
-    report.runtime.push({ dpr, ...runtime, loadedAndVerified: [...loaded].sort(), problems, external, measurement: "3 second rAF/CDP sample; not compositor frame-drop proof", frameCount: frames.length, frameP95Ms: [...frames].sort((a, b) => a - b)[Math.floor(frames.length * 0.95)], taskDurationMs: (after.TaskDuration - before.TaskDuration) * 1000, layoutCount: after.LayoutCount - before.LayoutCount, recalcStyleCount: after.RecalcStyleCount - before.RecalcStyleCount });
+    report.runtime.push({ dpr, ...runtime, loadedAndVerified: [...loaded].sort(), loadedAssetHashes: Object.fromEntries([...loaded].sort().map(file => [file, expected.get(file).sha256])), problems, external, measurement: "3 second rAF/CDP sample; not compositor frame-drop proof", frameCount: frames.length, frameP95Ms: [...frames].sort((a, b) => a - b)[Math.floor(frames.length * 0.95)], taskDurationMs: (after.TaskDuration - before.TaskDuration) * 1000, layoutCount: after.LayoutCount - before.LayoutCount, recalcStyleCount: after.RecalcStyleCount - before.RecalcStyleCount });
     await context.close();
   }
 } finally { await browser.close(); }
