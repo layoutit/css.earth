@@ -88,9 +88,6 @@ export function mountMoonClient(stage, { onError }) {
       ]));
       if (lifetime.disposed) return;
       mounted = mountPreparedMoon(stage, lifetime);
-      lifetime.onDispose(() => {
-        if (mounted.camera.parentNode === stage) delete stage.dataset.lens;
-      });
       await lenses.bindRuntime(mounted);
       if (lifetime.disposed) return;
       animations = Object.freeze(stage.getAnimations({ subtree: true }));
@@ -177,6 +174,9 @@ function mountPreparedMoon(stage, lifetime) {
     plan.camera.style,
   );
   lifetime.onDispose(() => camera.remove());
+  lifetime.onDispose(() => {
+    if (camera.parentNode === stage) delete stage.dataset.lens;
+  });
   const scene = createMesh("polycss-scene", plan.camera.sceneStyle);
   const system = createMesh("moon-system", plan.body.systemTransform);
   scene.appendChild(system);

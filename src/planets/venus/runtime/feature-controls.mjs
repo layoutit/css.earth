@@ -31,8 +31,14 @@ export function createVenusFeatureControls({
     }
     input.checked = settings[name];
     input.addEventListener("change", () => {
-      settings[name] = input.checked;
-      stage.classList.toggle(hiddenClass, !input.checked);
+      if (lifetime.disposed) return;
+      try {
+        stage.classList.toggle(hiddenClass, !input.checked);
+        if (lifetime.disposed) return;
+        settings[name] = input.checked;
+      } catch (error) {
+        if (!lifetime.disposed) onError(error);
+      }
     }, { signal: events.signal });
   }
   const shadows = root.querySelector('input[name="shadows"][type="checkbox"]');
@@ -41,10 +47,14 @@ export function createVenusFeatureControls({
   }
   shadows.checked = false;
   shadows.addEventListener("change", () => {
+    if (lifetime.disposed) return;
     try {
       onShadowsVisibilityChange?.(shadows.checked);
+      if (lifetime.disposed) return;
       settings.shadows = shadows.checked;
-    } catch (error) { onError(error); }
+    } catch (error) {
+      if (!lifetime.disposed) onError(error);
+    }
   }, { signal: events.signal });
   const speed = root.querySelector('button[name="speed"]');
   if (!(speed instanceof HTMLButtonElement)) {
