@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, symlink, unlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
@@ -9,6 +9,7 @@ import sharp from "sharp";
 import { OBJECTS } from "../objects.mjs";
 import {
   loadMarkerDescriptors,
+  moveNavigationFile,
   prepareNavigation,
 } from "../../tools/prepare-navigation.mjs";
 
@@ -20,8 +21,9 @@ const expectedOutputHashes = Object.freeze({
   "download-marker@2x.webp": "670fb0ea4c67d011427dec16858efd98dc9a2dce914865bfb15e976a81e75173",
   "github-marker.webp": "383e97a9726672e1b9e8109c5db583bbc188a6cbbe9073101e33f118f7350a13",
   "github-marker@2x.webp": "a710f0afb1815524a5695ba78e999222430d59f7da515dca4550bd06e7fb4a9d",
-  "planet-markers.webp": "319722f1ece2f5b206043ed450b6577299d10ceb1b943d45c9e25d819714d54a",
-  "planet-markers@2x.webp": "e113080e6cec3ac58321e1b9525d1e45886981d15654a0ddcd3333fdce11f2bf",
+  // Reviewed 11-object Q75 atlases, NOT pixel parity with the old 9-object atlas.
+  "planet-markers.webp": "f803942d9fd8e88cc6401c7e2b946d9c057bd9742418d8cf2a30697a82783fbe",
+  "planet-markers@2x.webp": "6abf950d0f07b7a1c32882cc4eb425935ae7d5f637cb74aef9de9a21ddd39ebd",
   "share-marker.webp": "b74f154b94b4dd17ac8818e47e1fb5ea07799431d3254521d5517300aa90f8e8",
   "share-marker@2x.webp": "4611f24161d95d8a4f1d7668e901755f5cdb6ff890d92bf9927ad65a331c2c01",
   "settings-marker.webp": "e4f9d6dce0ea4121fa193dd316bb6c077c3901c9fa9f79a0f7adae8d9a0fa34f",
@@ -56,7 +58,7 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
     source.origin && source.credit && source.license && source.expectedSha256));
 });
 
-test("regenerates the accepted marker atlases byte-identically", async (context) => {
+test("reproduces the reviewed 11-object atlases and unchanged utility markers", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-"));
   context.after(() => rm(root, { recursive: true, force: true }));
   const presentationPath = resolve(root, "prepared-navigation-markers.mjs");
@@ -65,7 +67,8 @@ test("regenerates the accepted marker atlases byte-identically", async (context)
   assert.deepEqual((await readdir(root)).filter((file) => file !== "prepared-navigation-markers.mjs").sort(), Object.keys(expectedOutputHashes).sort());
   for (const [filename, expected] of Object.entries(expectedOutputHashes)) {
     const bytes = await readFile(resolve(root, filename));
-    assert.equal(createHash("sha256").update(bytes).digest("hex"), filename.startsWith("planet-markers") ? createHash("sha256").update(await readFile(resolve(projectRoot, "public/navigation", filename))).digest("hex") : expected);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), expected, filename);
+    assert.equal(createHash("sha256").update(await readFile(resolve(projectRoot, "public/navigation", filename))).digest("hex"), expected, `Published ${filename}`);
   }
   for (const filename of transparentMarkerFiles) {
     const { data, info } = await sharp(resolve(root, filename))
@@ -79,8 +82,8 @@ test("regenerates the accepted marker atlases byte-identically", async (context)
   }
 });
 
-for (const failure of ["object source", "late utility source", "publication"]) {
-  test(`failed ${failure} preserves accepted navigation files`, async (context) => {
+for (const failure of ["object source", "late utility source", "publication", "rollback"]) {
+  test(`failed ${failure} preserves accepted files or recoverable backups outside public`, async (context) => {
     const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-failure-"));
     context.after(() => rm(root, { recursive: true, force: true }));
     for (const path of ["src/planets/new-body/tools", "src/planets/new-body/source", "src/navigation/source", "site", "public/navigation"]) {
@@ -110,10 +113,50 @@ for (const failure of ["object source", "late utility source", "publication"]) {
     const filenames = (await readdir(outputRoot)).sort();
     const options = { projectRoot: root, planets: [{ id: "new-body" }] };
     // A missing presentation parent fails after all staged atlases are installed.
-    if (failure === "publication") options.presentationPath = resolve(root, "missing/presentation.mjs");
+    if (["publication", "rollback"].includes(failure)) options.presentationPath = resolve(root, "missing/presentation.mjs");
+    if (failure === "rollback") {
+      options.moveFile = async (source, target) => {
+        if (source.endsWith("/backup-0")) throw new Error("injected rollback failure");
+        await moveNavigationFile(source, target);
+      };
+      await assert.rejects(prepareNavigation(options), (error) => error instanceof AggregateError && /rollback failed/.test(error.message) && error.errors.some((entry) => /injected rollback/.test(entry.message)));
+      const cache = resolve(root, "node_modules/.cache");
+      const [recovery] = await readdir(cache);
+      assert.match(recovery, /^navigation-prepare-/u);
+      assert.equal(await readFile(resolve(cache, recovery, "backup-0"), "utf8"), "accepted blackhole-marker.png");
+      // Vite copies all of public, including dot directories. Neither staged
+      // assets nor the preserved recovery directory can enter that tree.
+      assert.deepEqual(await readdir(resolve(root, "public")), ["navigation"]);
+      for (const [path, bytes] of previous) {
+        if (path === resolve(outputRoot, "blackhole-marker.png")) continue;
+        assert.equal(await readFile(path, "utf8"), bytes, path);
+      }
+      return;
+    }
     await assert.rejects(prepareNavigation(options), failure === "publication" ? /ENOENT/ : /source size drifted/);
     for (const [path, bytes] of previous) assert.equal(await readFile(path, "utf8"), bytes, path);
     assert.deepEqual((await readdir(outputRoot)).sort(), filenames);
     assert.deepEqual(await readdir(resolve(root, "public")), ["navigation"]);
+    assert.deepEqual(await readdir(resolve(root, "node_modules/.cache")), []);
   });
 }
+
+test("cross-device moves copy and unlink safely for publication and rollback", async (context) => {
+  const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-exdev-"));
+  context.after(() => rm(root, { recursive: true, force: true }));
+  const source = resolve(root, "source"), target = resolve(root, "target");
+  const io = { copyFile, unlink, rename: async () => { throw Object.assign(new Error("cross device"), { code: "EXDEV" }); } };
+  await writeFile(source, "accepted");
+  await moveNavigationFile(source, target, io);
+  assert.equal(await readFile(target, "utf8"), "accepted");
+  await assert.rejects(readFile(source), { code: "ENOENT" });
+  await moveNavigationFile(target, source, io);
+  assert.equal(await readFile(source, "utf8"), "accepted");
+  await assert.rejects(readFile(target), { code: "ENOENT" });
+  await assert.rejects(moveNavigationFile(source, target, { ...io, unlink: async (path) => {
+    if (path === source) throw new Error("unlink blocked");
+    await unlink(path);
+  } }), /unlink blocked/u);
+  assert.equal(await readFile(source, "utf8"), "accepted");
+  await assert.rejects(readFile(target), { code: "ENOENT" });
+});

@@ -31,11 +31,13 @@ test("derives search results and navigation from the one object registry", async
     assert.match(source, /<PlanetObjectResults/u);
     assert.doesNotMatch(source, /OBJECTS\.map|planet-object-marker|planet-object-browser-title/u);
   }
-  assert.match(results, /PLANET_SEARCH_OBJECTS\.map\(\(object, index\)/u);
+  assert.match(results, /PLANET_SEARCH_OBJECTS\.map\(\(object\)/u);
   assert.match(results, /href=\{object\.route\}/u);
   assert.match(results, /data-object-id=\{object\.id\}/u);
   assert.match(results, /import PlanetNavigationMarker from "\.\/PlanetNavigationMarker\.astro";/u);
-  assert.match(results, /<PlanetNavigationMarker[\s\S]*?planetId=\{object\.id\}[\s\S]*?index=\{index\}/u);
+  assert.match(results, /<PlanetNavigationMarker[\s\S]*?planetId=\{object\.id\}/u);
+  assert.doesNotMatch(results, /index=|count=/u);
+  assert.match(results, /object\.classification === "star" && object\.distanceAu === 0 \? "Our star"/u);
   assert.match(results, /class="planet-object-distance-value">\{object\.distanceAu\}<\/span>\{" "\}[\s\S]*?class="planet-object-distance-unit">AU<\/span>/u);
   assert.match(client, /querySelectorAll\("\[data-maps-search\]"\)/u);
   assert.match(client, /item\.dataset\.objectName\?\.includes\(query\)/u);

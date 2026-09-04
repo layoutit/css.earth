@@ -15,12 +15,15 @@ test("accepts every object-owned marker recipe", async () => {
   for (const descriptor of await loadMarkerDescriptors()) {
     assert.equal(validateMarkerDescriptor(descriptor), descriptor);
     assert.match(descriptor.source.expectedSha256, /^[0-9a-f]{64}$/u);
-    assert.ok(descriptor.source.origin.length > 0);
+    assert.ok(["http:", "https:"].includes(new URL(descriptor.source.origin).protocol));
     assert.ok(descriptor.source.credit.length > 0);
   }
 });
 
 test("rejects unsafe recipes and drifted source bytes", async (context) => {
+  for (const origin of ["Hubble OPAL colour map", "https://", "file:///local", "javascript:alert(1)"]) {
+    assert.throws(() => validateMarkerDescriptor({ ...marsMarker, source: { ...marsMarker.source, origin } }), /source/u);
+  }
   assert.throws(() => validateMarkerDescriptor({
     ...marsMarker,
     source: { ...marsMarker.source, path: "../outside.jpg" },

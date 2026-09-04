@@ -8,16 +8,19 @@ import sharp from "sharp";
 import { decodeElevationGrid, elevationRaster } from "./elevation-raster.mjs";
 import { verifyPlutoSourceManifest } from "./source-manifest.mjs";
 import { PREPARED_PLUTO_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_PLUTO_SCENE } from "../runtime/preparedScene.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4211";
-const root = resolve("output/playwright/pluto-visual");
-await mkdir(root, { recursive: true });
+assert.ok(process.argv[3], "Provide a fresh evidence directory.");
+const root = resolve(process.argv[3]);
+await mkdir(resolve(root, ".."), { recursive: true });
+await mkdir(root); // Never silently overwrite prior evidence.
 await verifyPlutoSourceManifest();
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const manifest = JSON.parse(await readFile(new URL("../runtime-assets.json", import.meta.url)));
 const expected = new Map(manifest.assets.map((entry) => [entry.filename, entry]));
 const source = JSON.parse(await readFile(new URL("../source/manifest.json", import.meta.url)));
-const report = { qualification: "SOURCE-BOUND BROWSER PRESENTATION; not native camera or pixel parity", baseUrl, sourceInputs: source.inputs, views: [], runtime: [] };
+const report = { qualification: "SOURCE-BOUND BROWSER PRESENTATION; not native camera or pixel parity", baseUrl, capturedAt: new Date().toISOString(), channel: "chrome", headless: true, preparedSceneSha256: sha(await readFile(new URL("../runtime/preparedScene.mjs", import.meta.url))), sourceInputs: source.inputs, views: [], runtime: [] };
 
 // Observation references, separate from browser captures: these are flat source
 // products, so no misleading source-map-to-globe pixel-difference is reported.
@@ -55,17 +58,32 @@ try {
     await page.evaluate(() => { window.__pluto.pause(); for (const a of document.getAnimations()) { a.pause(); a.currentTime = 0; } });
     await page.screenshot({ path: resolve(root, `pluto-dpr${dpr}-shell.png`) });
     const pitch = await page.evaluate(() => window.__pluto.camera.state().controlPitch);
+    const defaultZoom = await page.evaluate(() => window.__pluto.camera.state().zoom);
+    const leaves = PREPARED_PLUTO_SCENE.body.bands.flatMap((band) => band.leaves);
+    const published = await page.locator(".pluto-body > s").evaluateAll((elements, expected) => elements.map((element, index) => {
+      const probe = document.createElement("s");
+      probe.style.cssText = expected[index].style;
+      if (expected[index].projectiveTextureLayer) probe.style.transform = `matrix3d(${expected[index].projectiveTextureLayer.frameMatrix})`;
+      const texture = element.firstElementChild;
+      const m = texture && new DOMMatrix(texture.style.transform);
+      return { matches: element.style.transform === probe.style.transform, children: element.childElementCount, affine: !m || (m.m14 === 0 && m.m24 === 0 && m.m44 === 1) };
+    }), leaves);
+    assert.equal(published.length, leaves.length);
+    for (const [index, leaf] of leaves.entries()) {
+      assert.deepEqual(published[index], { matches: true, children: leaf.projectiveTextureLayer ? 1 : 0, affine: true });
+    }
     for (const lens of PREPARED_PLUTO_LENSES.controls) {
       await page.evaluate((id) => window.__pluto.lenses.select(id), lens.id);
-      for (const [view, controlPitch] of [["default", pitch], ["north", 0], ["south", 89]]) {
-        await page.evaluate((controlPitch) => window.__pluto.camera.setState({ controlPitch }), controlPitch);
+      for (const [view, controlPitch, controlYaw, zoom] of [["boundary", 0, 180, defaultZoom], ["rotated", 89, 110, defaultZoom], ["zoom", 34, 150, 2.2]]) {
+        await page.evaluate((state) => window.__pluto.camera.setState(state), { controlPitch, controlYaw, zoom });
         await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
         const file = `pluto-${lens.id}-${view}-dpr${dpr}.png`;
-        await page.locator(".planet-stage").screenshot({ path: resolve(root, file) });
-        report.views.push({ dpr, lens: lens.id, view, controlPitch, file, sha256: sha(await readFile(resolve(root, file))) });
+        if (view === "zoom") await page.screenshot({ path: resolve(root, file) });
+        else await page.locator(".pluto-material").screenshot({ path: resolve(root, file) });
+        report.views.push({ dpr, lens: lens.id, view, controlPitch, controlYaw, zoom, file, sha256: sha(await readFile(resolve(root, file))) });
       }
     }
-    await page.evaluate((controlPitch) => { window.__pluto.camera.setState({ controlPitch }); return window.__pluto.lenses.select("surface"); }, pitch);
+    await page.evaluate((state) => { window.__pluto.camera.setState(state); return window.__pluto.lenses.select("surface"); }, { controlPitch: pitch, controlYaw: 0, zoom: defaultZoom });
     const before = Object.fromEntries((await cdp.send("Performance.getMetrics")).metrics.map(({ name, value }) => [name, value]));
     const frames = await page.evaluate(async () => {
       const samples = []; let previous = performance.now();
@@ -86,6 +104,8 @@ try {
       assert.ok(loaded.has(lens.poles2xUrl.split("/").at(-1)));
     }
     assert.equal(runtime.stableDomIdentity, true); assert.equal(runtime.density, 2); assert.equal(runtime.cameraCount, 1); assert.equal(runtime.canvasCount + runtime.sceneSvgCount, 0);
+    assert.equal(runtime.nodes, 931);
+    if (report.runtime.length) assert.deepEqual([...loaded].sort(), report.runtime[0].loadedAndVerified, "Display scaling changed the loaded asset bank");
     assert.deepEqual(problems, []); assert.deepEqual(external, []);
     report.runtime.push({ dpr, ...runtime, loadedAndVerified: [...loaded].sort(), problems, external, measurement: "3 second rAF/CDP sample; not compositor frame-drop proof", frameCount: frames.length, frameP95Ms: [...frames].sort((a, b) => a - b)[Math.floor(frames.length * 0.95)], taskDurationMs: (after.TaskDuration - before.TaskDuration) * 1000, layoutCount: after.LayoutCount - before.LayoutCount, recalcStyleCount: after.RecalcStyleCount - before.RecalcStyleCount });
     await context.close();

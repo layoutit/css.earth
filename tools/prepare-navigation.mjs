@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
-import { lstat, mkdir, mkdtemp, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { constants } from "node:fs";
+import { copyFile, lstat, mkdir, mkdtemp, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
@@ -59,10 +60,14 @@ export async function prepareNavigation({
   outputRoot = resolve(projectRoot, "public/navigation"),
   planets = PLANET_MARKER_PLANETS,
   presentationPath = resolve(projectRoot, "site/prepared-navigation-markers.mjs"),
+  moveFile = moveNavigationFile,
 } = {}) {
   const descriptors = await loadMarkerDescriptors({ planets, projectRoot });
-  await mkdir(dirname(outputRoot), { recursive: true });
-  const staging = await mkdtemp(resolve(dirname(outputRoot), ".navigation-prepare-"));
+  // A crash or failed rollback must never leave recoverable source/backups in
+  // public/, which Vite copies recursively (including dot directories).
+  const cacheRoot = resolve(projectRoot, "node_modules/.cache");
+  await mkdir(cacheRoot, { recursive: true });
+  const staging = await mkdtemp(resolve(cacheRoot, "navigation-prepare-"));
   let cleanup = true;
   try {
     const stagedOutput = resolve(staging, "assets");
@@ -80,7 +85,7 @@ export async function prepareNavigation({
     changes.push(...[...new Set(obsolete)].map((filename) => ({ target: resolve(outputRoot, filename) })).filter(({ target }) => !generatedTargets.has(target)));
     changes.push({ source: stagedPresentation, target: presentationPath });
     await mkdir(outputRoot, { recursive: true });
-    try { await publishNavigation(changes, staging); }
+    try { await publishNavigation(changes, staging, moveFile); }
     catch (error) {
       // If rollback itself fails, preserve the backups for recovery.
       cleanup = !(error instanceof AggregateError);
@@ -94,7 +99,7 @@ export async function prepareNavigation({
 
 // Preparation must finish before touching accepted files. Roll back a failed
 // publication too; this is not a live-server or crash-atomic release mechanism.
-async function publishNavigation(changes, staging) {
+async function publishNavigation(changes, staging, moveFile) {
   const applied = [];
   try {
     for (const [index, change] of changes.entries()) {
@@ -103,10 +108,10 @@ async function publishNavigation(changes, staging) {
       });
       if (previous && !previous.isFile()) throw new Error(`Navigation output is not a regular file: ${change.target}`);
       const entry = { ...change, backup: previous ? resolve(staging, `backup-${index}`) : null, installed: false };
-      if (entry.backup) await rename(entry.target, entry.backup);
+      if (entry.backup) await moveFile(entry.target, entry.backup);
       applied.push(entry);
       if (entry.source) {
-        await rename(entry.source, entry.target);
+        await moveFile(entry.source, entry.target);
         entry.installed = true;
       }
     }
@@ -115,11 +120,29 @@ async function publishNavigation(changes, staging) {
     for (const entry of applied.reverse()) {
       try {
         if (entry.installed) await unlink(entry.target);
-        if (entry.backup) await rename(entry.backup, entry.target);
+        if (entry.backup) await moveFile(entry.backup, entry.target);
       } catch (failure) { failures.push(failure); }
     }
     if (failures.length) throw new AggregateError([error, ...failures], `Navigation rollback failed; backups remain in ${staging}`);
     throw error;
+  }
+}
+
+// Default staging is on the project's device. Custom outputs or symlinked
+// caches may cross devices; preserve move semantics for both install/rollback.
+export async function moveNavigationFile(source, target, io = { rename, copyFile, unlink }) {
+  try { await io.rename(source, target); }
+  catch (error) {
+    if (error.code !== "EXDEV") throw error;
+    await io.copyFile(source, target, constants.COPYFILE_EXCL);
+    try { await io.unlink(source); }
+    catch (failure) {
+      try { await io.unlink(target); }
+      catch (cleanupFailure) {
+        throw new AggregateError([failure, cleanupFailure], `Navigation move failed; recovery copy remains at ${target}`);
+      }
+      throw failure;
+    }
   }
 }
 

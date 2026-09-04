@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { defineObject, defineObjects } from "../object-schema.mjs";
+import { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from "../object-schema.mjs";
 import { OBJECTS, requireObject } from "../objects.mjs";
 import {
   discoverPlanetTests,
@@ -43,6 +43,12 @@ test("defines one generic renderable-object contract", () => {
 });
 
 test("rejects invalid object definitions and renderer-specific fields", () => {
+  for (const classification of ["Planet", "planets", "dwarf-plannet", "", undefined]) {
+    assert.throws(() => defineObject({ ...fixture, classification }), /Invalid object definition/);
+  }
+  for (const classification of OBJECT_CLASSIFICATIONS) {
+    assert.equal(defineObject({ ...fixture, classification }).classification, classification);
+  }
   assert.throws(() => defineObject(null), /must be an object/);
   assert.throws(() => defineObject({ ...fixture, id: "Saturn" }),
     /Invalid object definition/);

@@ -181,14 +181,14 @@
     },
     {
       "path": "stars/LICENSE.md",
-      "expectedBytes": 387,
-      "expectedSha256": "6cff6933451962c3db6fc5dc1f8989a8cee8af1cd919fcd43960ac6c1770ec7e",
+      "expectedBytes": 656,
+      "expectedSha256": "0e18ae8586f57984d99faa2c39880a60cfa1254d726223d35c1aa66d87cd6d79",
       "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
-      "expectedBytes": 1271,
-      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
+      "expectedBytes": 1395,
+      "expectedSha256": "2148f82d076d4b11a3e25be02fe4f9414df6d43f8f6461ff88f7eadf2cb08af1",
       "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
     }
   ]
