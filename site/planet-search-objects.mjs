@@ -1,22 +1,16 @@
 import { OBJECTS } from "./objects.mjs";
 
-const PRIMARY_PLANET_IDS = new Set([
-  "mercury",
-  "venus",
-  "earth",
-  "mars",
-  "jupiter",
-  "saturn",
-  "uranus",
-  "neptune",
-]);
+// Classification describes an object; it never disables an interaction gate.
+export function objectNavigation(objects) {
+  const search = Object.freeze(objects.toSorted((left, right) =>
+    left.distanceAu - right.distanceAu));
+  return Object.freeze({
+    search,
+    planets: Object.freeze(search.filter(({ classification }) =>
+      classification === "planet")),
+  });
+}
 
-export const PLANET_SEARCH_OBJECTS = Object.freeze(
-  OBJECTS
-    .filter(({ distanceAu }) => distanceAu > 0)
-    .toSorted((left, right) => left.distanceAu - right.distanceAu),
-);
-
-export const PLANET_NAVIGATION_OBJECTS = Object.freeze(
-  PLANET_SEARCH_OBJECTS.filter(({ id }) => PRIMARY_PLANET_IDS.has(id)),
-);
+const navigation = objectNavigation(OBJECTS);
+export const PLANET_SEARCH_OBJECTS = navigation.search;
+export const PLANET_NAVIGATION_OBJECTS = navigation.planets;

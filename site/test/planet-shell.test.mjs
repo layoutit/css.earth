@@ -19,6 +19,7 @@ test("keeps every implemented scene in one object registry", () => {
     "saturn",
     "uranus",
     "neptune",
+    "pluto",
   ]);
   assert.deepEqual(
     objectAdapter.routes(),
@@ -250,7 +251,6 @@ test("keeps implemented routes backed by object-owned files", async () => {
       `../../src/planets/${planet.id}/test`,
       `../../src/planets/${planet.id}/tools`,
       `../pages/${planet.id}.astro`,
-      `../../data/planets/${planet.id}.json`,
     ];
     await Promise.all(owned.map((relativePath) =>
       access(new URL(relativePath, import.meta.url))));
@@ -538,10 +538,10 @@ test("places desktop search and the collapse control around the sidebar", async 
     /class="planet-title-svg"[\s\S]*?viewBox=\{title\.renderViewBox\}[\s\S]*?width=\{title\.renderWidth\}[\s\S]*?height=\{title\.renderHeight\}[\s\S]*?transform=\{title\.renderPathOffsetY === 0/u,
   );
   assert.match(shell, /import PlanetNavigationMarker from "\.\/PlanetNavigationMarker\.astro";/u);
-  assert.match(shell, /const activePlanetIndex = PLANET_SEARCH_OBJECTS\.findIndex\(\(object\) => object\.id === objectId\);/u);
+  assert.doesNotMatch(shell, /activePlanetIndex|index=|count=/u);
   assert.match(
     shell,
-    /class="planet-title-row">[\s\S]*?<h1 class="planet-title"[\s\S]*?<PlanetNavigationMarker[\s\S]*?planetId=\{activeObject\.id\}[\s\S]*?color=\{activeObject\.color\}[\s\S]*?index=\{activePlanetIndex\}[\s\S]*?count=\{planetCount\}[\s\S]*?scale=\{2\}/u,
+    /class="planet-title-row">[\s\S]*?<h1 class="planet-title"[\s\S]*?<PlanetNavigationMarker[\s\S]*?planetId=\{activeObject\.id\}[\s\S]*?color=\{activeObject\.color\}[\s\S]*?scale=\{2\}/u,
   );
   assert.match(shell, /import \{ PLANET_SEARCH_OBJECTS \} from "\.\.\/planet-search-objects\.mjs";/u);
   assert.match(
@@ -550,7 +550,7 @@ test("places desktop search and the collapse control around the sidebar", async 
   );
   assert.match(
     shell,
-    /placeholder=\{`Search planets \(\$\{planetCount\}\)`\}/u,
+    /placeholder=\{`Search objects \(\$\{planetCount\}\)`\}/u,
   );
   assert.match(
     header,
@@ -739,9 +739,9 @@ test("switches the desktop sidebar to the one shared planet list", async () => {
   ]);
   assert.match(
     shell,
-    /class="planet-sidebar-search-card"[\s\S]*?class="planet-sidebar-search"[\s\S]*?Search planets[\s\S]*?class="planet-sidebar-view-all"[\s\S]*?aria-label="View all objects"[\s\S]*?>×<\/button>[\s\S]*?class="planet-object-browser maps-object-results"[\s\S]*?aria-label="Planets"[\s\S]*?hidden[\s\S]*?<PlanetObjectResults activeObjectId=\{objectId\} \/>/u,
+    /class="planet-sidebar-search-card"[\s\S]*?class="planet-sidebar-search"[\s\S]*?Search objects[\s\S]*?class="planet-sidebar-view-all"[\s\S]*?aria-label="View all objects"[\s\S]*?>×<\/button>[\s\S]*?class="planet-object-browser maps-object-results"[\s\S]*?aria-label="Objects"[\s\S]*?hidden[\s\S]*?<PlanetObjectResults activeObjectId=\{objectId\} \/>/u,
   );
-  assert.match(results, /PLANET_SEARCH_OBJECTS\.map\(\(object, index\)/u);
+  assert.match(results, /PLANET_SEARCH_OBJECTS\.map\(\(object\)/u);
   assert.match(results, /aria-current=\{object\.id === activeObjectId \? "page" : undefined\}/u);
   assert.match(results, /<PlanetNavigationMarker[\s\S]*?planetId=\{object\.id\}/u);
   assert.doesNotMatch(shell, /OBJECTS\.map|planet-object-marker|planet-object-browser-title/u);

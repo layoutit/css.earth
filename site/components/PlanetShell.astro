@@ -127,7 +127,6 @@ const hasLenses = Boolean(lenses && lenses.controls.length > 0);
 const hasSettings = Boolean(settings && settings.controls.length > 0);
 const planetCount = PLANET_SEARCH_OBJECTS.length;
 const activeObject = OBJECTS.find((object) => object.id === objectId);
-const activePlanetIndex = PLANET_SEARCH_OBJECTS.findIndex((object) => object.id === objectId);
 const hasResources = resources.length > 0;
 const orderedCharts = orderScientificCharts(charts);
 const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
@@ -142,8 +141,8 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
     <input
       class="planet-sidebar-search"
       type="search"
-      placeholder={`Search planets (${planetCount})`}
-      aria-label={`Search ${planetCount} planets`}
+      placeholder={`Search objects (${planetCount})`}
+      aria-label={`Search ${planetCount} objects`}
       autocomplete="off"
       value={activeObject?.name ?? ""}
     />
@@ -160,7 +159,7 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
     <nav
       id={`${objectId}-object-browser`}
       class="planet-object-browser maps-object-results"
-      aria-label="Planets"
+      aria-label="Objects"
       hidden
     >
       <PlanetObjectResults activeObjectId={objectId} />
@@ -186,11 +185,9 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
             />
           </svg>
         </h1>
-        {activeObject && activePlanetIndex >= 0 && <PlanetNavigationMarker
+        {activeObject && <PlanetNavigationMarker
           planetId={activeObject.id}
           color={activeObject.color}
-          index={activePlanetIndex}
-          count={planetCount}
           scale={2}
         />}
       </div>

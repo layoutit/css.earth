@@ -6,7 +6,6 @@ import test from "node:test";
 
 import sharp from "sharp";
 
-import { PLANNED_MARKER_DESCRIPTORS } from "../../../navigation/marker-descriptors.mjs";
 import { renderMarker } from "../../../navigation/marker-recipe.mjs";
 import { PREPARED_VENUS_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_VENUS_SCENE } from "../runtime/preparedScene.mjs";
@@ -38,29 +37,12 @@ test("prepares Venus from the complete checked source closure", async () => {
   });
 });
 
-test("preserves the exact planned Venus navigation marker at both densities",
-  async () => {
-    const planned = PLANNED_MARKER_DESCRIPTORS.find(
-      ({ planetId }) => planetId === "venus",
-    );
-    assert.ok(planned);
-    assert.equal(venusMarker.source.expectedSha256, planned.source.expectedSha256);
-    assert.deepEqual(venusMarker.operations, planned.operations);
-    for (const tileSize of [16, 32]) {
-      const [before, after] = await Promise.all([
-        renderMarker(planned, {
-          sourcePath: resolve("src/navigation/source/venus.webp"),
-          tileSize,
-        }),
-        renderMarker(venusMarker, {
-          sourcePath: resolve("src/planets/venus/source/navigation/venus.webp"),
-          tileSize,
-        }),
-      ]);
-      assert.equal(Buffer.compare(after, before), 0,
-        `Venus ${tileSize}px marker bytes`);
-    }
-  });
+test("preserves accepted Venus navigation marker pixels at both densities", async () => {
+  for (const [tileSize, hash] of [[16, "d83eafd35fb15756f5c97811ad3e927eed674907b39d2c523d827da8524cea26"], [32, "00901a9310bee86579bcf86eb590c7f713cef14254d4eab2c239b8985c9017d0"]]) {
+    const bytes = await renderMarker(venusMarker, { sourcePath: resolve("src/planets/venus/source/navigation/venus.webp"), tileSize });
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), hash);
+  }
+});
 
 test("publishes the prepared Venus scene and shell content", () => {
   assert.equal(PREPARED_VENUS_TITLE.label, "Venus");

@@ -2,6 +2,7 @@ export default Object.freeze({
   schema: "cssearth-navigation-marker@1",
   planetId: "saturn",
   owner: "object",
+  presentation: Object.freeze({"size":15,"ringAngle":-18,"ringExtra":14,"ringHeight":6,"ringOpacity":0.62,"ringColorShare":78,"ringOutlineOpacity":42,"ringOutlineOffset":1,"scale":{"ringExtra":20,"ringHeight":7,"ringOutlineOffset":2}}),
   source: Object.freeze({
     path: "saturn-surface-original.jpg",
     expectedBytes: 1036492,

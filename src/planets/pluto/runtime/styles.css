@@ -1,0 +1,122 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.example-stage {
+  container-type: size;
+  isolation: isolate;
+  pointer-events: none;
+  background: #000;
+}
+
+html:not([data-ready="true"]) .example-stage { opacity: 0.001; }
+
+.pluto-input-surface {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+}
+
+html[data-ready="true"] .pluto-input-surface { pointer-events: auto; }
+
+@media (max-width: 820px), (orientation: portrait) {
+  .pluto-input-surface {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 100svh;
+    touch-action: pan-y;
+  }
+}
+
+.example-stage > :is(.polycss-camera, .pluto-material-root) {
+  --pluto-side-padding: 16px;
+  --pluto-shell-scale: min(
+    1,
+    calc((100cqw - var(--pluto-side-padding) - var(--pluto-side-padding)) / 1920px),
+    calc(100cqh / 1080px)
+  );
+  position: absolute;
+  inset: 0;
+  scale: calc(var(--pluto-shell-scale) / var(--planet-viewport-zoom-divisor));
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polycss-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polycss-mesh {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform-origin: 0 0 0;
+}
+
+.polycss-scene s {
+  position: absolute;
+  display: block;
+  width: var(--polycss-atlas-width, 64px);
+  height: var(--polycss-atlas-height, 64px);
+  margin: 0;
+  padding: 0;
+  transform-origin: 0 0;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.pluto-body {
+  transform-style: preserve-3d;
+  animation-name: pluto-sphere-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.pluto-body:not(.pluto-body-polar) > s {
+  background-image: var(--pluto-surface-texture);
+}
+
+.pluto-body-polar > s { background-image: var(--pluto-poles-texture); }
+
+.pluto-material-root {
+  z-index: 2;
+  transform-style: flat;
+}
+
+.pluto-material {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: 512px;
+  height: 512px;
+  margin: -256px 0 0 -256px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 512px 512px;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+html[data-playing="true"] .pluto-body { animation-play-state: running; }
+
+@keyframes pluto-sphere-spin {
+  from { transform: rotateZ(180deg); }
+  to { transform: rotateZ(540deg); }
+}

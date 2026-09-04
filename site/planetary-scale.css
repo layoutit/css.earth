@@ -77,31 +77,15 @@
   width: calc(var(--planet-size) + var(--planet-ring-extra));
   height: var(--planet-ring-height);
   box-sizing: border-box;
-  border: 1px solid currentColor;
+  border: 1px solid var(--planet-ring-color, currentColor);
+  outline: var(--planet-ring-outline, none);
+  outline-offset: var(--planet-ring-outline-offset, 0);
   border-radius: 50%;
-  opacity: 0.65;
+  opacity: var(--planet-ring-opacity, 0.65);
   transform: translate(-50%, -50%) rotate(var(--planet-ring-angle));
   content: "";
 }
 
-.scale-planet.jupiter > .scale-stop::before {
-  opacity: 0.62;
-}
-
-.scale-planet.saturn > .scale-stop::before {
-  border-color: color-mix(in srgb, currentColor 78%, white 22%);
-  outline: 1px solid color-mix(in srgb, currentColor 42%, transparent);
-  outline-offset: 2px;
-  opacity: 0.62;
-}
-
-.scale-planet.uranus > .scale-stop::before {
-  opacity: 0.55;
-}
-
-.scale-planet.neptune > .scale-stop::before {
-  opacity: 0.56;
-}
 
 .scale-marker {
   inset: calc(29.5px - var(--planet-size) / 2) auto auto 50%;
