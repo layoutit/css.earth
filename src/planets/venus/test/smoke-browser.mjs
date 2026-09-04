@@ -500,7 +500,7 @@ async function proveResponsiveZoomProfiles(browser) {
       waitUntil: "networkidle",
     });
     await page.waitForFunction(() => window.__venus?.ready === true);
-    reports.push(await page.evaluate(({ viewportWidth, viewportHeight }) => {
+    reports.push(await page.evaluate(({ viewportWidth, viewportHeight, preparedZoom }) => {
       const root = document.querySelector(".polycss-camera");
       const stage = document.querySelector(".planet-stage");
       const sidebar = document.querySelector(".planet-sidebar");
@@ -510,7 +510,7 @@ async function proveResponsiveZoomProfiles(browser) {
       const stageBounds = stage.getBoundingClientRect();
       const sidebarBounds = sidebar?.getBoundingClientRect();
       const rootScale = rootBounds.width / stageBounds.width;
-      const bodyDiameter = 496 * zoom * rootScale;
+      const bodyDiameter = 496 * preparedZoom * rootScale;
       const sidePanel = sidebarBounds?.width < viewportWidth * 0.75;
       const sidebarRight = sidePanel ? sidebarBounds?.right ?? 0 : 0;
       const unobstructedSceneWidth = viewportWidth - sidebarRight;
@@ -529,7 +529,7 @@ async function proveResponsiveZoomProfiles(browser) {
           unobstructedSceneWidth).toFixed(3)),
         sceneCenterOffset: Number((sceneCenter - availableCenter).toFixed(3)),
       };
-    }, { viewportWidth: width, viewportHeight: height }));
+    }, { viewportWidth: width, viewportHeight: height, preparedZoom: PREPARED_VENUS_SCENE.camera.defaultZoom }));
     await page.close();
   }
   return reports;
@@ -552,7 +552,7 @@ async function proveResponsiveFitContinuity(browser) {
         window.__venus.camera.stats().responsiveBaseZoom !== previous,
       previousBaseZoom);
     }
-    const sample = await page.evaluate(() => {
+    const sample = await page.evaluate((preparedZoom) => {
       const root = document.querySelector(".polycss-camera");
       const stage = document.querySelector(".planet-stage");
       const sidebar = document.querySelector(".planet-sidebar");
@@ -560,12 +560,12 @@ async function proveResponsiveFitContinuity(browser) {
       const rootScale = root.getBoundingClientRect().width /
         stage.getBoundingClientRect().width;
       return {
-        diameter: 496 * window.__venus.camera.state().zoom * rootScale,
+        diameter: 496 * preparedZoom * rootScale,
         mobile: getComputedStyle(sidebar).position === "relative" &&
           getComputedStyle(input).position === "absolute" &&
           getComputedStyle(input).touchAction === "pan-y",
       };
-    });
+    }, PREPARED_VENUS_SCENE.camera.defaultZoom);
     diameters.push(sample.diameter);
     mobileModes.push(sample.mobile);
   }
@@ -594,7 +594,7 @@ async function proveMobilePreviewFit(browser) {
       waitUntil: "networkidle",
     });
     await page.waitForFunction(() => window.__venus?.ready === true);
-    reports.push(await page.evaluate(({ viewportWidth, viewportHeight }) => {
+    reports.push(await page.evaluate(({ viewportWidth, viewportHeight, preparedZoom }) => {
       const rootBounds = document.querySelector(".polycss-camera")
         .getBoundingClientRect();
       const stageBounds = document.querySelector(".planet-stage")
@@ -602,13 +602,13 @@ async function proveMobilePreviewFit(browser) {
       const sheetBounds = document.querySelector(".planet-sidebar")
         .getBoundingClientRect();
       const shellScale = rootBounds.width / stageBounds.width;
-      const diameter = 496 * window.__venus.camera.state().zoom * shellScale;
+      const diameter = 496 * preparedZoom * shellScale;
       return {
         width: viewportWidth,
         height: viewportHeight,
         clearance: Number(((sheetBounds.top - diameter) / 2).toFixed(1)),
       };
-    }, { viewportWidth: width, viewportHeight: height }));
+    }, { viewportWidth: width, viewportHeight: height, preparedZoom: PREPARED_VENUS_SCENE.camera.defaultZoom }));
     await page.close();
   }
   return reports;

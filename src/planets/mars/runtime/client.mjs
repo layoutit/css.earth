@@ -1,3 +1,5 @@
+import { createPreparedCameraPublisher } from
+  "../../../platform/prepared-camera-runtime.mjs";
 import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
 import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
 import { createLatestSelection } from "../../../platform/latest-selection.mjs";
@@ -491,10 +493,16 @@ function createMarsOrbit(stage, mounted, materialCache, shadowsVisible, lifetime
   let lastMaterialPresentation = "";
   let responsiveFit = null;
 
+  const publishCamera = createPreparedCameraPublisher({
+    cameraElement: mounted.camera,
+    sceneElement: mounted.scene,
+    objectId: "mars",
+    defaultZoom: plan.defaultZoom,
+    sceneScale: plan.sceneScale,
+  });
   const publish = () => {
     if (destroyedOrbit) return;
-    mounted.scene.style.transform =
-      `scale(${plan.sceneScale}) ${orientation.scene()}`;
+    publishCamera({ sceneMatrix: orientation.scene(), zoom: safeCamera.state.zoom });
     const skyboxOrientation = orientation.skybox();
     mounted.cubicSky.setOrientation({
       matrix: skyboxOrientation.matrix,
@@ -504,10 +512,6 @@ function createMarsOrbit(stage, mounted, materialCache, shadowsVisible, lifetime
     sunViewDirection = skyboxOrientation.sunViewDirection;
     mounted.skySun.setViewDirection(sunViewDirection);
     mounted.materialCounter.style.transform = orientation.counterRotation();
-    const zoomScale = safeCamera.state.zoom / plan.defaultZoom;
-    mounted.camera.style.scale =
-      "calc(var(--mars-shell-scale) / (" +
-      `var(--planet-viewport-zoom-divisor) / ${zoomScale}))`;
     publishMaterialDirection(skyboxOrientation.sunViewDirection);
     publications += 1;
   };

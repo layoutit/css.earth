@@ -1,3 +1,4 @@
+import { createPreparedCameraPublisher, preparedCameraZoomScale } from "./prepared-camera-runtime.mjs";
 import {
   createPolyCamera,
   createPolyOrbitControls,
@@ -876,7 +877,11 @@ export function createRetainedCubicSkyOrbit({
   let skySunViewDirection = directionalSunPlan?.referenceViewDirection ??
     skyPlan.sun?.initialViewDirection ?? null;
   let sunPresentation = directionalSun?.state() ?? null;
-  let publishedSceneMatrix = null;
+  const publishCamera = createPreparedCameraPublisher({
+    cameraElement, sceneElement, objectId,
+    defaultZoom: cameraPlan.defaultZoom,
+    sceneScale: cameraPlan.sceneScale,
+  });
   let publishedSkyboxMatrix = null;
   let publishedZoom = null;
   let materialSunViewDirection = hasDirectionalSun &&
@@ -889,14 +894,9 @@ export function createRetainedCubicSkyOrbit({
     const sceneMatrix = orientation.scene();
     const sky = orientation.skybox();
     const zoom = safeCamera.state.zoom;
-    const sceneChanged = sceneMatrix !== publishedSceneMatrix;
     const skyboxChanged = sky.matrix !== publishedSkyboxMatrix;
     const zoomChanged = zoom !== publishedZoom;
-    if (sceneChanged) {
-      sceneElement.style.transform =
-        `scale(${cameraPlan.sceneScale}) ${sceneMatrix}`;
-      publishedSceneMatrix = sceneMatrix;
-    }
+    publishCamera({ sceneMatrix, zoom });
     if (skyboxChanged || zoomChanged) {
       cubicSky.setOrientation({
         matrix: sky.matrix,
@@ -905,13 +905,7 @@ export function createRetainedCubicSkyOrbit({
       });
       publishedSkyboxMatrix = sky.matrix;
     }
-    if (zoomChanged) {
-      const zoomScale = zoom / cameraPlan.defaultZoom;
-      cameraElement.style.scale =
-        `calc(var(--${objectId}-shell-scale) / (` +
-        `var(--planet-viewport-zoom-divisor) / ${zoomScale}))`;
-      publishedZoom = zoom;
-    }
+    publishedZoom = zoom;
     if (skyboxChanged) {
       skySunViewDirection = sky.sunViewDirection;
       sunPresentation = skySunViewDirection === null
@@ -1185,7 +1179,8 @@ export function selectPreparedResponsiveZoom({
   if (!stageBounds?.width || !stageBounds.height || !cameraBounds.width) {
     throw new TypeError("Responsive planet viewport bounds are invalid.");
   }
-  const shellScale = cameraBounds.width / stageBounds.width;
+  const shellScale = cameraBounds.width / stageBounds.width /
+    preparedCameraZoomScale(cameraElement);
   const aspectRatio = stageBounds.width / stageBounds.height;
   const narrowPortraitProgress = smoothstep(
     fit.narrowPortraitAspectRatio,

@@ -1,3 +1,5 @@
+import { createPreparedCameraPublisher } from
+  "../../../platform/prepared-camera-runtime.mjs";
 import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
 import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
 import { createLatestSelection } from "../../../platform/latest-selection.mjs";
@@ -394,20 +396,31 @@ function createVenusOrbitControls({ inputSurface, mounted, plan, lifetime, onErr
       });
     },
   });
+  const sceneScale = plan.defaultZoom / BASE_TILE;
+  const publishCamera = createPreparedCameraPublisher({
+    cameraElement: mounted.scene.cameraEl,
+    sceneElement: mounted.scene.sceneElement,
+    objectId: "venus",
+    defaultZoom: plan.defaultZoom,
+    sceneScale,
+  });
   const controlScene = Object.freeze({
     host: inputSurface,
     cameraEl: mounted.scene.cameraEl,
     sceneElement: mounted.scene.sceneElement,
     camera: safeCamera,
     applyCamera() {
+      // Keep PolyCSS camera state available to object diagnostics; the shared
+      // publisher owns the retained DOM transform and zoom.
       mounted.camera.update({
         rotX: preparedScenePitch(safeCamera.state.rotX, plan),
         rotY: safeCamera.state.rotY,
         zoom: safeCamera.state.zoom,
       });
-      mounted.scene.applyCamera();
-      mounted.scene.sceneElement.style.transform =
-        `scale(${safeCamera.state.zoom / BASE_TILE}) ${orientation.scene()}`;
+      publishCamera({ sceneMatrix: orientation.scene(), zoom: safeCamera.state.zoom });
+      mounted.scene.cameraEl.dataset.polycssCameraRotX = String(mounted.camera.state.rotX);
+      mounted.scene.cameraEl.dataset.polycssCameraRotY = String(mounted.camera.state.rotY);
+      mounted.scene.cameraEl.dataset.polycssCameraZoom = String(safeCamera.state.zoom);
       mounted.scene.cameraEl.dataset.venusCameraMatrix = orientation.scene();
       mounted.materialComposite.style.setProperty(
         "--venus-camera-zoom",

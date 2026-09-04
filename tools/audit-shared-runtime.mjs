@@ -10,6 +10,9 @@ import { OBJECTS } from "../site/objects.mjs";
 import { loadPlanetBrowserProfile } from "../site/test/load-browser-profile.mjs";
 import { compareCaptures, assertSceneCoverage } from "./object-contract-visual.mjs";
 import { saturnSceneCoverage } from "./saturn-scene-coverage.mjs";
+import {
+  snapshotAuditSources, verifyAuditSource, assertAuditResponse,
+} from "./audit-source-identity.mjs";
 import { captureFixedReadbacks } from "./readback-sequence.mjs";
 
 const [mode, baseUrl, sourceArgument, outputArgument, option] = process.argv.slice(2);
@@ -21,9 +24,9 @@ const sourceRoot = resolve(sourceArgument), root = resolve(outputArgument), outp
 await mkdir(root, { recursive: true });
 await mkdir(output); // Refuse to overwrite evidence.
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const report = { protocol: "immutable-headless-native-readback-pairs@4", mode, sourceRoot, baseUrl, capturedAt: new Date().toISOString(), headless: true, fingerprints: {}, sourceHashes: {}, harnessHashes: {}, expectedCaptureCount: 0, captures: [], errors: [], comparisons: [] };
+const report = { protocol: "immutable-headless-native-readback-pairs@5", mode, sourceRoot, baseUrl, capturedAt: new Date().toISOString(), headless: true, fingerprints: {}, sourceHashes: {}, harnessHashes: {}, expectedCaptureCount: 0, captures: [], errors: [], comparisons: [] };
 if (reportOnly) {
-  report.protocol = "report-only-fixed-six-native-readbacks@2";
+  report.protocol = "report-only-fixed-six-native-readbacks@3";
   report.qualification = "Diagnostic only; does not satisfy the strict acceptance gate.";
 }
 report.reportOnly = reportOnly;
@@ -75,6 +78,8 @@ async function gpuProof() {
   };
 }
 try {
+  const sourceSnapshot = await snapshotAuditSources(sourceRoot);
+  report.sourceIdentity = await verifyAuditSource(baseUrl, sourceSnapshot);
   browser = await chromium.launch({ channel: "chrome", headless: true, args: report.browserArgs });
   report.browser = browser.version();
   browserSession = await browser.newBrowserCDPSession();
@@ -123,18 +128,27 @@ try {
       for (const pose of [{ id: "default" }, ...(kind === "scene" ? extraPoses : [])]) {
       const context = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: scale, reducedMotion: "reduce" });
       try {
-        const page = await context.newPage(), checks = [], loaded = new Map();
+        const page = await context.newPage(), checks = [], loaded = new Map(), loadedCode = new Map();
         page.on("pageerror", (error) => report.errors.push(`${object.id}: ${error.message}`));
         page.on("response", (response) => {
-          const pathname = new URL(response.url()).pathname;
-          if (!pathname.startsWith(`/scenes/${object.id}/`) || response.status() >= 300 && response.status() < 400) return;
           checks.push((async () => {
-            const asset = expected.get(pathname.split("/").at(-1));
-            assert.ok(asset, `Undeclared asset ${pathname}`);
-            const bytes = await response.body();
-            assert.equal(bytes.length, asset.bytes, pathname);
-            assert.equal(sha(bytes), asset.sha256, pathname);
-            loaded.set(pathname, asset.sha256);
+            const url = new URL(response.url());
+            const pathname = url.pathname;
+            assertAuditResponse({ url: response.url(), status: response.status(),
+              headers: await response.allHeaders() }, baseUrl, report.sourceIdentity);
+            if (pathname.startsWith(`/scenes/${object.id}/`)) {
+              const asset = expected.get(pathname.split("/").at(-1));
+              assert.ok(asset, `Undeclared asset ${pathname}`);
+              const bytes = await response.body();
+              assert.equal(bytes.length, asset.bytes, pathname);
+              assert.equal(sha(bytes), asset.sha256, pathname);
+              loaded.set(pathname, asset.sha256);
+            } else if (["document", "script", "stylesheet"].includes(response.request().resourceType())) {
+              const key = pathname + url.search;
+              const hash = sha(await response.body());
+              if (loadedCode.has(key)) assert.equal(loadedCode.get(key), hash, `Application response changed: ${key}`);
+              loadedCode.set(key, hash);
+            }
           })().catch((error) => report.errors.push(error.message)));
         });
         if (kind === "scene") await page.addInitScript(() => {
@@ -280,11 +294,15 @@ try {
         // readback at a few dark pixels despite an unchanged paused state.
         const frame = await capture(kind === "scene" ? page.locator(".planet-stage") : page, kind === "scene");
         await Promise.all(checks);
+        assert.deepEqual(report.errors, [], "Every response must belong to the recorded audit server");
+        await verifyAuditSource(baseUrl, sourceSnapshot, report.sourceIdentity.session);
+        assert.ok(loadedCode.size > 0, `${prefix}: application response bytes verified`);
+        const loadedApplication = Object.fromEntries([...loadedCode].sort(([a], [b]) => a.localeCompare(b)));
         assert.ok(loaded.size > 0, `${prefix}: loaded bytes verified`);
         const loadedAssets = Object.fromEntries([...loaded].sort(([a], [b]) => a.localeCompare(b)));
         const gpuAfter = await gpuProof();
         assert.deepEqual(gpuAfter, gpuBefore, "GPU identity must remain stable during capture");
-        const record = { prefix, kind, pose: pose.id, poseState, loadedAssets, versionLabel, gpu: gpuAfter, frameSha256s: frame.frames.map(sha), coverage: frame.validation, captureAttempts: frame.attempts,
+        const record = { prefix, kind, pose: pose.id, poseState, loadedAssets, loadedApplication, versionLabel, gpu: gpuAfter, frameSha256s: frame.frames.map(sha), coverage: frame.validation, captureAttempts: frame.attempts,
           ...(reportOnly ? { observedPose, repeatable: frame.repeatable, stateHashes: frame.stateHashes } : {}) };
         report.captures.push(record);
         for (const [phase, png] of frame.frames.entries()) {
@@ -310,6 +328,9 @@ try {
       } finally { await context.close(); }
     }
   }
+  await verifyAuditSource(baseUrl, sourceSnapshot, report.sourceIdentity.session);
+  assert.deepEqual(await snapshotAuditSources(sourceRoot), sourceSnapshot,
+    "Audit source tree changed during capture");
   for (const [file, hash] of Object.entries(report.sourceHashes)) {
     assert.equal(sha(await readFile(resolve(sourceRoot, file))), hash, `Source changed during capture: ${file}`);
   }

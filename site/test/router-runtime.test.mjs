@@ -86,6 +86,34 @@ test("loading remembers latest intent but cannot resume; media events never rewr
   h.router.destroy();
 });
 
+test("playback reads cannot consume a pending media notification", async () => {
+  const h = harness();
+  await h.router.settled;
+  h.media.matches = true;
+  h.media.dispatchEvent(new Event("change"));
+  h.shells[0].onMotionChange(true);
+  let reads = 0;
+  Object.defineProperty(h.media, "matches", { configurable: true, get() { reads += 1; return false; } });
+  // The native value has changed, but its notification has not arrived yet.
+  // Diagnostic reads must preserve the same policy the scene has applied.
+  for (let i = 0; i < 5; i += 1) {
+    assert.equal(h.router.playback().allowed, false);
+    assert.equal(h.router.state().lifecycle, "paused");
+  }
+  assert.equal(reads, 0);
+  h.media.dispatchEvent(new Event("change"));
+  assert.equal(h.router.playback().allowed, true);
+  assert.equal(h.router.state().lifecycle, "mounted");
+  assert.equal(reads, 1);
+  h.windowTarget.dispatchEvent(new Event("pagehide"));
+  Object.defineProperty(h.media, "matches", { configurable: true, value: true });
+  show(h);
+  await h.router.settled;
+  assert.equal(h.router.playback().reason, "reduced-motion");
+  assert.equal(h.router.state().lifecycle, "paused");
+  h.router.destroy();
+});
+
 test("repeated restoration has bounded subscriptions; old callbacks cannot affect the replacement", async () => {
   const oldReady = deferred();
   const h = harness((_, index) => index === 0 ? { ready: oldReady.promise } : {});
