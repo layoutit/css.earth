@@ -10,6 +10,7 @@ import { PREPARED_MARS_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_MARS_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import { PREPARED_VENUS_SCENE } from "../../venus/runtime/preparedScene.mjs";
 import { PREPARED_VENUS_SKY_SUN } from "../../venus/runtime/preparedSkySun.mjs";
+import { createVenusFeatureControls } from "../../venus/runtime/feature-controls.mjs";
 
 // Exercise the actual object coordination functions with controlled native
 // boundaries. Shared camera/input math has separate source-backed tests.
@@ -24,6 +25,104 @@ const marsFactory = await objectFactory("mars", "createMarsOrbit");
 const venusFactory = await objectFactory("venus", "createVenusOrbitControls");
 const jupiterFactory = await objectFactory("jupiter", "createJupiterOrbit");
 const flush = () => new Promise(setImmediate);
+
+test("Venus feature toggles publish normal state and release their listeners", (t) => {
+  const f = venusFeatureFixture(t);
+  const controls = f.create();
+  for (const name of ["atmosphere", "stars"]) {
+    f.inputs[name].checked = false;
+    f.change(name)();
+    assert.equal(controls.state()[name], false);
+    assert.equal(f.classes.has(`venus-hide-${name}`), true);
+    f.inputs[name].checked = true;
+    f.change(name)();
+    assert.equal(controls.state()[name], true);
+    assert.equal(f.classes.has(`venus-hide-${name}`), false);
+  }
+  f.inputs.shadows.checked = true;
+  f.change("shadows")();
+  assert.equal(controls.state().shadows, true);
+  assert.deepEqual(f.shadowValues, [true]);
+  assert.deepEqual(f.errors, []);
+  f.lifetime.destroy();
+  assert.equal(f.listenerCount(), 0);
+});
+
+for (const name of ["atmosphere", "stars"]) {
+  test(`Venus ${name} publication failure retires once and stops later callbacks`, (t) => {
+    const f = venusFeatureFixture(t);
+    const controls = f.create();
+    const callbacks = ["atmosphere", "stars", "shadows"].map(f.change);
+    f.inputs[name].checked = false;
+    f.featureFailure = new Error(`${name} publication failed`);
+    assert.doesNotThrow(f.change(name));
+    assert.deepEqual(f.errors, [f.featureFailure]);
+    assert.equal(f.lifetime.disposed, true);
+    assert.equal(controls.state()[name], true, "failed publication cannot advance committed control state");
+    assert.equal(f.classes.size, 0, "fatal cleanup removes partial feature presentation");
+    assert.equal(f.listenerCount(), 0);
+    const writes = [...f.writes];
+    const state = controls.state();
+    for (const callback of callbacks) assert.doesNotThrow(callback);
+    assert.deepEqual(f.writes, writes);
+    assert.deepEqual(controls.state(), state);
+    assert.deepEqual(f.shadowValues, []);
+    assert.equal(f.errors.length, 1);
+  });
+
+  test(`Venus ${name} stops control-state publication after synchronous disposal`, (t) => {
+    const f = venusFeatureFixture(t);
+    const controls = f.create();
+    f.inputs[name].checked = false;
+    f.onFeaturePublish = () => f.lifetime.destroy();
+    assert.doesNotThrow(f.change(name));
+    assert.equal(controls.state()[name], true);
+    assert.equal(f.classes.size, 0);
+    assert.equal(f.lifetime.disposed, true);
+    assert.deepEqual(f.errors, []);
+  });
+}
+
+test("Venus retained feature callbacks are inert after ordinary disposal", (t) => {
+  const f = venusFeatureFixture(t);
+  const controls = f.create();
+  const callbacks = ["atmosphere", "stars", "shadows"].map(f.change);
+  f.lifetime.destroy();
+  const writes = [...f.writes];
+  const state = controls.state();
+  for (const input of Object.values(f.inputs)) input.checked = !input.checked;
+  for (const callback of callbacks) assert.doesNotThrow(callback);
+  assert.deepEqual(controls.state(), state);
+  assert.deepEqual(f.writes, writes);
+  assert.deepEqual(f.shadowValues, []);
+  assert.deepEqual(f.errors, []);
+});
+
+for (const throwAfterRetirement of [false, true]) {
+  test(`Venus shadow callback retirement stops its publication (${throwAfterRetirement ? "throw" : "return"})`, (t) => {
+    const f = venusFeatureFixture(t);
+    const controls = f.create();
+    f.inputs.shadows.checked = true;
+    f.onShadowPublish = () => {
+      f.lifetime.destroy();
+      if (throwAfterRetirement) throw new Error("already retired by the nested publisher");
+    };
+    assert.doesNotThrow(f.change("shadows"));
+    assert.equal(controls.state().shadows, false);
+    assert.deepEqual(f.errors, []);
+  });
+}
+
+test("Venus initial feature binding failure still throws to startup", (t) => {
+  const f = venusFeatureFixture(t);
+  const controls = f.create();
+  const failure = new Error("initial shadow publication failed");
+  f.onShadowPublish = () => { throw failure; };
+  assert.throws(() => controls.bindRuntime({ animations: [] }), (error) => error === failure);
+  assert.deepEqual(f.errors, []);
+  assert.equal(f.lifetime.disposed, false, "the startup owner handles construction failure");
+  assert.equal(f.inputs.speed.disabled, true);
+});
 
 for (const id of ["sun", "venus", "mars", "jupiter"]) {
   const name = id === "sun" || id === "venus" ? "mountPreparedScene" : "mountPreparedBody";
@@ -206,6 +305,55 @@ for (const failDecode of [false, true]) {
       console.error = previousError;
     }
   });
+}
+
+function venusFeatureFixture(t) {
+  const previous = Object.fromEntries(["document", "HTMLElement", "HTMLInputElement", "HTMLButtonElement"]
+    .map((name) => [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
+  const f = { lifetime: createSceneLifetime(), classes: new Set(), errors: [], writes: [],
+    shadowValues: [], featureFailure: null, onFeaturePublish: null, onShadowPublish: null };
+  class Element {
+    constructor() { this.listeners = new Map(); this.dataset = {}; this.checked = true; }
+    addEventListener(name, callback, { signal } = {}) {
+      this.listeners.set(name, callback);
+      signal?.addEventListener("abort", () => this.removeEventListener(name, callback), { once: true });
+    }
+    removeEventListener(name, callback) {
+      if (this.listeners.get(name) === callback) this.listeners.delete(name);
+    }
+    setAttribute() {}
+  }
+  f.inputs = Object.fromEntries(["atmosphere", "stars", "shadows", "speed"]
+    .map((name) => [name, new Element()]));
+  const root = new Element();
+  root.querySelector = (selector) => f.inputs[/name="([^"]+)"/.exec(selector)?.[1]] ?? null;
+  const stage = new Element();
+  stage.classList = {
+    toggle(name, value) {
+      f.writes.push(`toggle:${name}:${value}`);
+      if (value) f.classes.add(name); else f.classes.delete(name);
+      if (f.featureFailure) throw f.featureFailure;
+      f.onFeaturePublish?.();
+    },
+    remove(name) { f.writes.push(`remove:${name}`); f.classes.delete(name); },
+  };
+  globalThis.document = { querySelector: () => root };
+  globalThis.HTMLElement = globalThis.HTMLInputElement = globalThis.HTMLButtonElement = Element;
+  t.after(() => {
+    f.lifetime.destroy();
+    for (const [name, descriptor] of Object.entries(previous)) {
+      if (descriptor) Object.defineProperty(globalThis, name, descriptor);
+      else delete globalThis[name];
+    }
+  });
+  f.create = () => createVenusFeatureControls({
+    stage, lifetime: f.lifetime,
+    onError(error) { f.errors.push(error); f.lifetime.destroy(); },
+    onShadowsVisibilityChange(value) { f.shadowValues.push(value); f.onShadowPublish?.(); },
+  });
+  f.change = (name) => f.inputs[name].listeners.get("change");
+  f.listenerCount = () => Object.values(f.inputs).reduce((count, input) => count + input.listeners.size, 0);
+  return f;
 }
 
 function localOrbitFixture(id) {

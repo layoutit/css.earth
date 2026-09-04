@@ -42,6 +42,113 @@ class Element {
 
 const ids = ["moon", "pluto", "sun", "venus", "mars", "jupiter"];
 
+for (const id of ["moon", "pluto"]) {
+  const name = id[0].toUpperCase() + id.slice(1);
+  const key = id.toUpperCase();
+  const source = await readFile(new URL(`../../${id}/runtime/client.mjs`, import.meta.url), "utf8");
+  const start = source.indexOf(`function mountPrepared${name}(`);
+  const end = source.indexOf("\nfunction ", start + 1);
+  assert.ok(start >= 0 && end > start);
+  const dependencies = {};
+  for (const [suffix, file] of [["SCENE", "preparedScene"], ["LENSES", "preparedLenses"],
+    ["STARFIELD", "preparedStarfield"], ["SKY_SUN", "preparedSkySun"]]) {
+    const exports = await import(`../../${id}/runtime/${file}.mjs`);
+    dependencies[`PREPARED_${key}_${suffix}`] = exports[`PREPARED_${key}_${suffix}`];
+  }
+  const factory = new Function("dependencies", `const {
+    PREPARED_${key}_SCENE, PREPARED_${key}_LENSES, PREPARED_${key}_STARFIELD,
+    PREPARED_${key}_SKY_SUN, createMesh, document, createPreparedProjectiveTextureLeaf,
+    mountRetainedCubicSky, mountRetainedDirectionalSun, CANONICAL_PREPARED_IMAGE_DENSITY
+  } = dependencies; ${source.slice(start, end)}; return mountPrepared${name};`);
+
+  function fixture(failure = null) {
+    const stage = ownedNode();
+    const lifetime = createSceneLifetime();
+    const sentinel = new Error(`injected ${failure} constructor failure`);
+    let skyDisposals = 0;
+    const mount = factory({
+      ...dependencies, CANONICAL_PREPARED_IMAGE_DENSITY: 2,
+      document: { createElement: () => ownedNode() },
+      createMesh: () => ownedNode(),
+      createPreparedProjectiveTextureLeaf() {
+        if (failure === "leaf") throw sentinel;
+        return ownedNode();
+      },
+      mountRetainedCubicSky() {
+        if (failure === "sky") throw sentinel;
+        const root = ownedNode(); stage.appendChild(root);
+        return { faceCount: 6, destroy() { skyDisposals += 1; root.remove(); } };
+      },
+      mountRetainedDirectionalSun() {
+        if (failure === "sun") throw sentinel;
+        const root = ownedNode(); stage.appendChild(root);
+        return { destroy() { root.remove(); } };
+      },
+    });
+    return { stage, lifetime, sentinel, mount, skyDisposals: () => skyDisposals };
+  }
+
+  for (const failure of ["sky", "sun"]) {
+    test(`${name} releases attached lens metadata after ${failure} construction fails`, () => {
+      const f = fixture(failure);
+      assert.throws(() => f.mount(f.stage, f.lifetime), (error) => error === f.sentinel);
+      assert.equal(f.stage.dataset.lens, dependencies[`PREPARED_${key}_LENSES`].defaultLens);
+      assert.deepEqual(f.lifetime.destroy(), []);
+      assert.equal(Object.hasOwn(f.stage.dataset, "lens"), false);
+      assert.equal(f.stage.children.length, 0);
+      assert.equal(f.skyDisposals(), failure === "sun" ? 1 : 0);
+      assert.deepEqual(f.lifetime.destroy(), []);
+    });
+  }
+
+  test(`${name} partial constructor cleanup preserves a replacement's lens and roots`, () => {
+    const f = fixture("sun");
+    assert.throws(() => f.mount(f.stage, f.lifetime), (error) => error === f.sentinel);
+    const replacement = ownedNode();
+    f.stage.replaceChildren(replacement);
+    f.stage.dataset.lens = "replacement";
+    assert.deepEqual(f.lifetime.destroy(), []);
+    assert.equal(f.stage.dataset.lens, "replacement");
+    assert.deepEqual(f.stage.children, [replacement]);
+    assert.equal(f.skyDisposals(), 1);
+  });
+
+  test(`${name} cleanup still removes roots when owned lens deletion throws`, () => {
+    const f = fixture("sun");
+    assert.throws(() => f.mount(f.stage, f.lifetime), (error) => error === f.sentinel);
+    const deletionError = new Error("lens deletion failed");
+    f.stage.dataset = new Proxy(f.stage.dataset, { deleteProperty() { throw deletionError; } });
+    assert.deepEqual(f.lifetime.destroy(), [deletionError]);
+    assert.equal(f.stage.children.length, 0);
+    assert.equal(f.skyDisposals(), 1);
+  });
+
+  test(`${name} failure before attachment does not clear unowned lens metadata`, () => {
+    const f = fixture("leaf");
+    f.stage.dataset.lens = "previous";
+    assert.throws(() => f.mount(f.stage, f.lifetime), (error) => error === f.sentinel);
+    assert.deepEqual(f.lifetime.destroy(), []);
+    assert.equal(f.stage.dataset.lens, "previous");
+    assert.equal(f.stage.children.length, 0);
+  });
+}
+
+function ownedNode() {
+  return {
+    dataset: {}, style: { setProperty() {} }, children: [], parentNode: null,
+    appendChild(child) { child.remove(); this.children.push(child); child.parentNode = this; },
+    replaceChildren(...children) {
+      for (const child of [...this.children]) child.remove();
+      for (const child of children) this.appendChild(child);
+    },
+    remove() {
+      if (this.parentNode) this.parentNode.children.splice(this.parentNode.children.indexOf(this), 1);
+      this.parentNode = null;
+    },
+    querySelectorAll() { return this.children.flatMap((child) => [child, ...child.querySelectorAll()]); },
+  };
+}
+
 for (const id of ids) {
   const name = id[0].toUpperCase() + id.slice(1);
   const { [`mount${name}Client`]: mount } = await import(`../../${id}/runtime/client.mjs`);
