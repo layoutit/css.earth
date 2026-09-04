@@ -194,6 +194,16 @@ test("publishes the prepared Earth title and retained scene", async () => {
   const rasterLeaves = surfaceLeaves.filter(({ className }) =>
     className.includes("earth-surface-leaf"));
   assert.equal(rasterLeaves.length, 448);
+  // High-resolution imagery must not create oversized local CSS raster boxes.
+  const interiorRasterLeaves = PREPARED_EARTH_SCENE.interior.outerBodyBands
+    .flatMap(({ leaves }) => leaves)
+    .filter(({ className }) => className.includes("earth-surface-leaf"));
+  assert.equal(interiorRasterLeaves.length, 308);
+  for (const leaf of [...rasterLeaves, ...interiorRasterLeaves]) {
+    assert.equal(leaf.projectiveTextureLayer.rasterScale, 4);
+    assert.ok(leaf.leafWidth * leaf.projectiveTextureLayer.rasterScale <= 128);
+    assert.ok(leaf.leafHeight * leaf.projectiveTextureLayer.rasterScale <= 128);
+  }
   assert.ok(rasterLeaves.every(({ className, style, leafWidth, leafHeight }) =>
     leafWidth <= 32 && leafHeight <= 32 &&
     style.includes("background-position:") &&
