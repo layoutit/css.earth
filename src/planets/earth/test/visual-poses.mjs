@@ -1,4 +1,4 @@
-// Extra visual evidence for the isolated raster-box fix, not runtime policy.
+// Close-up regression evidence at the existing camera limit, not runtime policy.
 export const visualPoses = Object.freeze([
   Object.freeze({
     id: "maximum-normal",

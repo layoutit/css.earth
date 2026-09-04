@@ -1,8 +1,9 @@
 # Shared runtime architecture before catalog expansion
 
 Status: All five implementation workstreams and functional gates are complete.
-Strict matched visual acceptance is blocked by nonrepeatable baseline captures.
-The PR is a draft, not ready to merge. See the
+Strict matched visual acceptance remains blocked. The inspected `earth-8x`
+workaround introduced close-up stretching and was withdrawn; its other WIP is
+excluded. The PR remains a draft, not ready to merge. See the
 [implementation and evidence record](shared-runtime-implementation.md).
 
 Date: 2026-09-04
@@ -563,6 +564,14 @@ Source, prepared assets, and runtime-manifest bytes remain unchanged. Do not
 regenerate assets to make a refactor pass. If testing a clean checkout requires
 restoration/preparation, use the existing isolated workflow and verify that it
 reproduces baseline bytes.
+
+Execution note, 2026-09-04: the user identified `earth-8x` as a possible source
+of an Earth fix. Its uncommitted raster-scale change was tested in isolation,
+but matched close-ups showed new stretched wedges. It was withdrawn. The
+architecture branch therefore keeps the original Earth preparation, imagery,
+manifests, and camera limits. No city paging or deeper-zoom WIP is included.
+The temporary `main` plus workaround fixture is diagnostic evidence only;
+its repeatable captures do not qualify either image quality or this PR.
 
 Record startup requests, retained images, cache bounds, and listener/timer state
 before/after repeated interactions and remounts. No new per-frame coordination
