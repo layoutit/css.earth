@@ -337,6 +337,7 @@ export function createUnboundedMatrixDragControls({
   let wheelTargetRebases = 0;
   const interruptionCounts = {
     drag: 0,
+    pointer: 0,
     wheel: 0,
     "fly-to": 0,
     programmatic: 0,
@@ -550,6 +551,7 @@ export function createUnboundedMatrixDragControls({
     if (!isTrackballMetrics(measuredTrackball)) {
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
     }
+    interruptMotion("pointer");
     pointerId = event.pointerId;
     pointerDragging = false;
     pointerDownX = event.clientX;
