@@ -46,7 +46,9 @@ const POLAR_RADIUS = EQUATORIAL_RADIUS * 6356.752 / 6378.137;
 const TILE_SIZE = 50;
 const SEAM_BLEED = 0.15;
 const PLANET_SEAM_BLEED = 0;
-const PROJECTIVE_TEXTURE_RASTER_SCALE = 16.25;
+// Asset resolution must not enlarge CSS raster boxes. Large inverse-scaled
+// boxes lose surface tiles in Chrome even with identical projected geometry.
+const PROJECTIVE_TEXTURE_RASTER_SCALE = 4;
 const INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE = 4;
 const SURFACE_OVERLAP = 0.008;
 const POLAR_CAP_BAND_SPAN = 1;
