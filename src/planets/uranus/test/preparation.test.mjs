@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { createHash } from "node:crypto";
 
 import sharp from "sharp";
 
@@ -9,7 +10,6 @@ import {
   renderMarker,
   validateMarkerDescriptor,
 } from "../../../navigation/marker-recipe.mjs";
-import { PLANNED_MARKER_DESCRIPTORS } from "../../../navigation/marker-descriptors.mjs";
 import { verifyRuntimeAssetClosure } from "../../../platform/runtime-asset-closure.mjs";
 import { PREPARED_URANUS_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_ORBIT_GUIDES } from "../runtime/preparedMoonOrbitArcs.mjs";
@@ -30,35 +30,11 @@ test("verifies the complete Uranus source closure", async () => {
   });
 });
 
-test("prepares the source-bound Uranus navigation marker", async () => {
-  assert.equal(validateMarkerDescriptor(uranusNavigationMarker),
-    uranusNavigationMarker);
-  const planned = PLANNED_MARKER_DESCRIPTORS.find(
-    ({ planetId }) => planetId === "uranus",
-  );
-  assert.ok(planned);
-  assert.equal(uranusNavigationMarker.source.expectedSha256,
-    planned.source.expectedSha256);
-  assert.deepEqual(uranusNavigationMarker.operations, planned.operations);
-  for (const tileSize of [16, 32]) {
-    const [before, after] = await Promise.all([
-      renderMarker(planned, {
-        sourcePath: fileURLToPath(new URL(
-          "../../../navigation/source/uranus.jpg",
-          import.meta.url,
-        )),
-        tileSize,
-      }),
-      renderMarker(uranusNavigationMarker, {
-        sourcePath: fileURLToPath(new URL(
-          "../source/navigation/uranus.jpg",
-          import.meta.url,
-        )),
-        tileSize,
-      }),
-    ]);
-    assert.equal(Buffer.compare(after, before), 0,
-      `Uranus ${tileSize}px marker bytes`);
+test("preserves accepted Uranus navigation marker pixels at both densities", async () => {
+  assert.equal(validateMarkerDescriptor(uranusNavigationMarker), uranusNavigationMarker);
+  for (const [tileSize, hash] of [[16, "3921a22517ad9b52becf4490254d3361c42a2a4ef7526ff5fa33a7cf65b2bc25"], [32, "435eff78c4b0b90d1f79058e3bcda7ec53a073fa4077e40899e32dafacd1a7c7"]]) {
+    const bytes = await renderMarker(uranusNavigationMarker, { sourcePath: fileURLToPath(new URL("../source/navigation/uranus.jpg", import.meta.url)), tileSize });
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), hash);
   }
 });
 

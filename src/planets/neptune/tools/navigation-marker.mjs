@@ -2,6 +2,7 @@ export default Object.freeze({
   schema: "cssearth-navigation-marker@1",
   planetId: "neptune",
   owner: "object",
+  presentation: Object.freeze({"size":10,"ringAngle":-28,"ringExtra":11,"ringHeight":4,"ringOpacity":0.56}),
   source: Object.freeze({
     path: "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
     expectedBytes: 789926,

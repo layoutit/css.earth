@@ -27,21 +27,11 @@
   width: calc(var(--planet-size) + var(--planet-ring-extra));
   height: var(--planet-ring-height);
   box-sizing: border-box;
-  border: 1px solid currentColor;
+  border: 1px solid var(--planet-ring-color, currentColor);
+  outline: var(--planet-ring-outline, none);
+  outline-offset: var(--planet-ring-outline-offset, 0);
   border-radius: 50%;
-  opacity: 0.65;
+  opacity: var(--planet-ring-opacity, 0.65);
   transform: translate(-50%, -50%) rotate(var(--planet-ring-angle));
   content: "";
 }
-
-.planet-navigation-marker.jupiter::before { opacity: 0.62; }
-
-.planet-navigation-marker.saturn::before {
-  border-color: color-mix(in srgb, currentColor 78%, white 22%);
-  outline: 1px solid color-mix(in srgb, currentColor 42%, transparent);
-  outline-offset: 1px;
-  opacity: 0.62;
-}
-
-.planet-navigation-marker.uranus::before { opacity: 0.55; }
-.planet-navigation-marker.neptune::before { opacity: 0.56; }

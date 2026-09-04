@@ -1,0 +1,195 @@
+{
+  "schema": "csspluto-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "surface-pluto-color-mosaic-jpg",
+      "path": "surface/pluto-color-mosaic.jpg",
+      "expectedBytes": 952315,
+      "expectedSha256": "1c13296bb0d2678224f3579033c4fe4cd302dc2a0afa02c94a0ff1baa56d53c9",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926",
+      "credit": "NASA/JHUAPL/SwRI",
+      "license": "NASA/USGS public scientific data with attribution",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
+      "consumers": [
+        "scene",
+        "lenses",
+        "navigation"
+      ]
+    },
+    {
+      "id": "lenses-pluto-monochrome-tif",
+      "path": "lenses/pluto-monochrome.tif",
+      "expectedBytes": 309806463,
+      "expectedSha256": "592b7fb0f88cafa0bedf9f33bb71e983952a250ee8577edf2abfe814b473356b",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
+      "credit": "NASA/JHUAPL/SwRI/LPI via USGS",
+      "license": "NASA/USGS public scientific data with attribution",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+      ],
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
+      "consumers": [
+        "lenses"
+      ]
+    },
+    {
+      "id": "lenses-pluto-dem-tif",
+      "path": "lenses/pluto-dem.tif",
+      "expectedBytes": 619512743,
+      "expectedSha256": "259b3e962540285f9833b13b4ad28c6b38aadb68300a52d733990b4b8870a640",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
+      "credit": "NASA/JHUAPL/SwRI/LPI via USGS",
+      "license": "NASA/USGS public scientific data with attribution",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+      ],
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
+      "consumers": [
+        "lenses"
+      ]
+    },
+    {
+      "id": "orbit-jpl-physical-html",
+      "path": "orbit/jpl-physical.html",
+      "expectedBytes": 58244,
+      "expectedSha256": "e49a487947295c389ba6e5833dd8fb04b63e826d39f70c123881882096e5e68b",
+      "origin": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "credit": "NASA JPL Solar System Dynamics",
+      "license": "NASA/USGS public scientific data with attribution",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
+      "consumers": [
+        "scene",
+        "panel"
+      ]
+    },
+    {
+      "id": "editorial-nasa-pluto-json",
+      "path": "editorial/nasa-pluto.json",
+      "expectedBytes": 49300,
+      "expectedSha256": "ddca919aaf3733cef2867efd40761ee17751eb1f6f53253ca20cc93749b995e3",
+      "origin": "https://science.nasa.gov/wp-json/wp/v2/topic/107487",
+      "credit": "NASA/JHUAPL/SwRI",
+      "license": "NASA/USGS public scientific data with attribution",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
+      "consumers": [
+        "scene",
+        "panel"
+      ]
+    },
+    {
+      "id": "presentation-title-mark-mjs",
+      "path": "presentation/title-mark.mjs",
+      "expectedBytes": 2218,
+      "expectedSha256": "608178c43c9547621bdedd91e1cb7817c4d2aa40afadd9b1f4ffc932083dbfdb",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "stars-eso0932a-tif",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://www.eso.org/public/images/eso0932a/"
+      ],
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "stars-hyg-v41-field-json",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 144990,
+      "expectedSha256": "49eb1e69ecf508ebebf98e688b5732c96200d9abf3252754a78f2fdd45a1e303",
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/blob/main/LICENSE"
+      ],
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "lenses-pluto-dem-lbl",
+      "path": "lenses/pluto-dem.lbl",
+      "expectedBytes": 1576,
+      "expectedSha256": "361b36ebeac1c0d2cec091fd9ef5f34366608ee811ec65c9e4ca773db9f11131",
+      "origin": "https://astrogeology.usgs.gov/ckan/dataset/f1332f71-8003-4a75-a330-acce6a3bf09f/resource/70d0d3ac-6ccb-4062-9cc7-25565ef776a4/download/pluto_newhorizons_global_dem_300m_jul2017_16bit.lbl",
+      "credit": "NASA/JHUAPL/SwRI/LPI via USGS",
+      "license": "NASA/USGS public scientific data with attribution",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+      ],
+      "acquisition": "Pinned source snapshot, retrieved 2026-09-04; verified SHA-256, never silently refreshed",
+      "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
+      "consumers": [
+        "lenses"
+      ]
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "lenses/usgs-dem-metadata.html",
+      "expectedBytes": 25207,
+      "expectedSha256": "caafd0096791c639294a6cd0d29adb10c1727eb938139615d1a16f2cddc73bcb",
+      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
+    },
+    {
+      "path": "lenses/usgs-mosaic-metadata.html",
+      "expectedBytes": 25135,
+      "expectedSha256": "362ce087006af038bcad43df5df57deb2216a67e305097794348081025c7210d",
+      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
+    },
+    {
+      "path": "surface/nasa-color-metadata.html",
+      "expectedBytes": 250769,
+      "expectedSha256": "c0d2f605bb3b08a5c7b6728739b4ca2f411b68685e1b5c8426e05538f167f275",
+      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 387,
+      "expectedSha256": "6cff6933451962c3db6fc5dc1f8989a8cee8af1cd919fcd43960ac6c1770ec7e",
+      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 1271,
+      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
+      "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ export default Object.freeze({
   schema: "cssearth-navigation-marker@1",
   planetId: "venus",
   owner: "object",
+  presentation: Object.freeze({"size":7}),
   source: Object.freeze({
     path: "navigation/venus.webp",
     expectedBytes: 210095,

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { mkdir, unlink } from "node:fs/promises";
-import { resolve } from "node:path";
+import { lstat, mkdir, mkdtemp, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
@@ -14,38 +14,35 @@ import {
   NAVIGATION_SHARE_SOURCE,
   NAVIGATION_SUN_SOURCE,
   NAVIGATION_SUPERNOVA_SOURCE,
-  PLANNED_MARKER_DESCRIPTORS,
 } from "../src/navigation/marker-descriptors.mjs";
 import {
   renderMarker,
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
 } from "../src/navigation/marker-recipe.mjs";
+import { validateMarkerPresentation } from "../src/navigation/marker-presentation.mjs";
 import { OBJECTS } from "../site/objects.mjs";
 import { optimizePreparedQ75Webp } from "./prepared-webp.mjs";
 
 const markerTileSize = 16;
 const PLANET_MARKER_PLANETS = Object.freeze(
-  OBJECTS.filter(({ id }) => id !== "sun")
+  OBJECTS
     .toSorted((left, right) => left.distanceAu - right.distanceAu),
 );
-const IMPLEMENTED_PLANET_IDS = new Set(OBJECTS.map(({ id }) => id));
 
 export async function loadMarkerDescriptors({
   planets = PLANET_MARKER_PLANETS,
   projectRoot = resolve(import.meta.dirname, ".."),
 } = {}) {
-  const planned = new Map(PLANNED_MARKER_DESCRIPTORS.map((descriptor) =>
-    [descriptor.planetId, descriptor]));
   const descriptors = [];
   for (const planet of planets) {
-    const descriptor = IMPLEMENTED_PLANET_IDS.has(planet.id)
-      ? await loadObjectDescriptor(planet.id, projectRoot)
-      : planned.get(planet.id);
+    const descriptor = await loadObjectDescriptor(planet.id, projectRoot);
     if (!descriptor) {
       throw new Error(`Navigation marker descriptor is missing: ${planet.id}.`);
     }
     validateMarkerDescriptor(descriptor);
+    validateMarkerPresentation(descriptor.presentation);
+    if (descriptor.owner !== "object") throw new Error(`Object marker must be owned by ${planet.id}.`);
     if (descriptor.planetId !== planet.id) {
       throw new Error(`Navigation marker identity drifted: ${planet.id}.`);
     }
@@ -61,14 +58,73 @@ export async function prepareNavigation({
   projectRoot = resolve(import.meta.dirname, ".."),
   outputRoot = resolve(projectRoot, "public/navigation"),
   planets = PLANET_MARKER_PLANETS,
+  presentationPath = resolve(projectRoot, "site/prepared-navigation-markers.mjs"),
 } = {}) {
-  const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
   const descriptors = await loadMarkerDescriptors({ planets, projectRoot });
-  await mkdir(outputRoot, { recursive: true });
-  await Promise.all(descriptors.map(({ planetId }) =>
-    unlink(resolve(outputRoot, `${planetId}.webp`)).catch((error) => {
-      if (error.code !== "ENOENT") throw error;
-    })));
+  await mkdir(dirname(outputRoot), { recursive: true });
+  const staging = await mkdtemp(resolve(dirname(outputRoot), ".navigation-prepare-"));
+  let cleanup = true;
+  try {
+    const stagedOutput = resolve(staging, "assets");
+    await mkdir(stagedOutput);
+    const result = await renderNavigation({ projectRoot, outputRoot: stagedOutput, descriptors });
+    const presentations = Object.fromEntries(descriptors.map((descriptor, index) => [descriptor.planetId, { index, count: descriptors.length, presentation: descriptor.presentation }]));
+    const stagedPresentation = resolve(staging, "presentation.mjs");
+    await writeFile(stagedPresentation, "// Generated from object-owned marker recipes. Do not edit.\nexport const PREPARED_NAVIGATION_MARKERS = Object.freeze(" + JSON.stringify(presentations) + ");\n");
+    const changes = (await readdir(stagedOutput)).sort().map((filename) => ({
+      source: resolve(stagedOutput, filename), target: resolve(outputRoot, filename),
+    }));
+    const generatedTargets = new Set(changes.map(({ target }) => target));
+    const obsolete = [...descriptors.map(({ planetId }) => `${planetId}.webp`),
+      "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp"];
+    changes.push(...[...new Set(obsolete)].map((filename) => ({ target: resolve(outputRoot, filename) })).filter(({ target }) => !generatedTargets.has(target)));
+    changes.push({ source: stagedPresentation, target: presentationPath });
+    await mkdir(outputRoot, { recursive: true });
+    try { await publishNavigation(changes, staging); }
+    catch (error) {
+      // If rollback itself fails, preserve the backups for recovery.
+      cleanup = !(error instanceof AggregateError);
+      throw error;
+    }
+    return Object.freeze({ ...result, outputRoot });
+  } finally {
+    if (cleanup) await rm(staging, { recursive: true, force: true });
+  }
+}
+
+// Preparation must finish before touching accepted files. Roll back a failed
+// publication too; this is not a live-server or crash-atomic release mechanism.
+async function publishNavigation(changes, staging) {
+  const applied = [];
+  try {
+    for (const [index, change] of changes.entries()) {
+      const previous = await lstat(change.target).catch((error) => {
+        if (error.code !== "ENOENT") throw error;
+      });
+      if (previous && !previous.isFile()) throw new Error(`Navigation output is not a regular file: ${change.target}`);
+      const entry = { ...change, backup: previous ? resolve(staging, `backup-${index}`) : null, installed: false };
+      if (entry.backup) await rename(entry.target, entry.backup);
+      applied.push(entry);
+      if (entry.source) {
+        await rename(entry.source, entry.target);
+        entry.installed = true;
+      }
+    }
+  } catch (error) {
+    const failures = [];
+    for (const entry of applied.reverse()) {
+      try {
+        if (entry.installed) await unlink(entry.target);
+        if (entry.backup) await rename(entry.backup, entry.target);
+      } catch (failure) { failures.push(failure); }
+    }
+    if (failures.length) throw new AggregateError([error, ...failures], `Navigation rollback failed; backups remain in ${staging}`);
+    throw error;
+  }
+}
+
+async function renderNavigation({ projectRoot, outputRoot, descriptors }) {
+  const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
 
   for (const density of [1, 2]) {
     const tileSize = markerTileSize * density;
@@ -164,14 +220,6 @@ export async function prepareNavigation({
     NAVIGATION_BLACKHOLE_SOURCE,
     resolve(navigationSourceRoot, NAVIGATION_BLACKHOLE_SOURCE.path),
   );
-  await Promise.all([
-    "blackhole-marker.webp",
-    "blackhole-marker@2x.webp",
-    "supernova-marker.webp",
-    "supernova-marker@2x.webp",
-  ].map((filename) => unlink(resolve(outputRoot, filename)).catch((error) => {
-    if (error.code !== "ENOENT") throw error;
-  })));
   const blackHoleLuminance = Object.freeze([0.2126, 0.7152, 0.0722]);
   for (const density of [1, 2]) {
     const tileSize = 48 * density;
@@ -391,7 +439,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   console.log(JSON.stringify({
     ...result,
     planetMarkerAtlas:
-      `${markers.length} prepared 16px raster markers with 2x density`,
+      `${result.planetCount} prepared 16px raster markers with 2x density`,
     sunMarker: "NASA HMI raster marker with 2x density",
     blackHoleMarker: "NASA/GSFC simulated accretion-disk marker with 2x density",
     supernovaMarker: "NASA/ESA/CSA Webb MIRI Cassiopeia A marker with 2x density",

@@ -10,8 +10,8 @@ const planetCount = PLANET_SEARCH_OBJECTS.length;
     <input
       class="planet-sidebar-search"
       type="search"
-      placeholder={`Search planets (${planetCount})`}
-      aria-label={`Search ${planetCount} planets`}
+      placeholder={`Search objects (${planetCount})`}
+      aria-label={`Search ${planetCount} objects`}
       autocomplete="off"
       spellcheck="false"
       autofocus
@@ -19,7 +19,7 @@ const planetCount = PLANET_SEARCH_OBJECTS.length;
     <button class="planet-sidebar-view-all" type="button" aria-pressed="true">Hide</button>
   </div>
   <div class="planet-drawer-content">
-    <nav class="planet-object-browser maps-object-results" aria-label="Planets">
+    <nav class="planet-object-browser maps-object-results" aria-label="Objects">
       <PlanetObjectResults />
       <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
     </nav>

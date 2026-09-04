@@ -23,9 +23,11 @@ Use `src/planets/<id>/` as the planet boundary:
 - `test/*.test.mjs`: source, prepared-output, renderer, page, and regression
   assertions.
 
-Prepare editorial text into `data/planets/<id>.json`. Record its source URL,
-source id, upstream modification time, retrieval date, and credit. Do not fetch
-editorial services in the browser.
+Prepare editorial text inside the object package, with checked provenance and
+provider-specific validation. The existing NASA importer uses `data/planets/`,
+but that path and NASA's record schema are not generic requirements. Pluto's
+owned NASA/JPL snapshots and parser are an example. Do not fetch editorial
+services in the browser.
 
 ## Object package contract
 
@@ -60,12 +62,22 @@ All planet cameras follow the established Saturn interaction behavior:
 These are observable behavior requirements. They do not prescribe a camera
 bank, matrix representation, default composition, or renderer implementation.
 
-Add one record to `site/objects.mjs` with the exact route `/<id>/` and a lazy
-scene loader. `site/object-adapter.mjs` is the single adapter for the Sun,
+Add one record to `site/objects.mjs` with a factual `classification`, the exact
+route `/<id>/`, and a lazy scene loader. `site/object-adapter.mjs` is the single adapter for the Sun,
 planets, and any future renderable object; it must not contain an object-specific
 branch.
 Add a thin `site/pages/<id>.astro` route that renders the object-owned page.
 The registry rejects missing loaders and route mismatches.
+
+Search includes every registry entry, including the Sun. The logarithmic planet
+scale selects `classification === "planet"`; it has no object-id allowlist.
+Classification never turns off interaction or lifecycle tests.
+
+Each package supplies `tools/navigation-marker.mjs`: pinned source, preparation
+recipe, and marker presentation. Run `pnpm prepare:navigation` after a registry
+or marker change. It prepares the common raster atlas and shell presentation
+module together. Missing or invalid descriptors fail; no planned-object fallback
+exists. Both shell marker views use the same prepared package data.
 
 ## Object, renderer, and shell boundaries
 
