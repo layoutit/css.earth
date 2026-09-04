@@ -11,7 +11,7 @@ const controls = Object.freeze([
     thumbnailUrl: "/scenes/earth/earth-lens-normal.webp",
     surfaceUrl: "/scenes/earth/earth-surface.webp",
     polesUrl: "/scenes/earth/earth-surface-poles.webp",
-    maximumZoom: 8,
+    maximumZoom: 4,
     qualification: "NASA Blue Marble visible-color composite",
   }),
   Object.freeze({
@@ -21,7 +21,7 @@ const controls = Object.freeze([
     thumbnailUrl: "/scenes/earth/earth-lens-topography.webp",
     surfaceUrl: "/scenes/earth/earth-topography.webp",
     polesUrl: "/scenes/earth/earth-topography-poles.webp",
-    maximumZoom: 8,
+    maximumZoom: 4,
     qualification: "NASA Blue Marble topography and bathymetry",
   }),
   Object.freeze({
@@ -31,7 +31,7 @@ const controls = Object.freeze([
     thumbnailUrl: "/scenes/earth/earth-lens-night-lights.webp",
     surfaceUrl: "/scenes/earth/earth-night-lights.webp",
     polesUrl: "/scenes/earth/earth-night-lights-poles.webp",
-    maximumZoom: 8,
+    maximumZoom: 4,
     qualification: "NASA Black Marble 2016 global composite",
   }),
   Object.freeze({

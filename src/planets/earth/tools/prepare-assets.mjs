@@ -76,8 +76,8 @@ if (materialsOnly) {
 async function prepareMap(input, name, {
   compositeClouds = false,
 } = {}) {
-  const width = 8192;
-  const height = 4096;
+  const width = 4096;
+  const height = 2048;
   const { data, info } = await sharp(input)
     .resize(width, height, { fit: "fill" })
     .removeAlpha()
@@ -95,7 +95,7 @@ async function prepareMap(input, name, {
     width,
     height,
     channels: info.channels,
-    density: 4,
+    density: 2,
     canonical: true,
     outputRoot: surfaceOutputRoot,
     name,
