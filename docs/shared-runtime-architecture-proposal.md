@@ -2,12 +2,12 @@
 
 Status: All five shared-runtime workstreams are implemented. The separately
 authorized Earth affine-texture repair is implemented. Source verification,
-598 tests, build, and the complete headless browser suite pass. On 2026-09-04,
-the user accepted the shown Earth screenshots and Pixelmatch 0.1 comparisons.
-The full matched visual matrix remains unverified; this acceptance does not
-replace that result or authorize merge. The inspected
-`earth-8x` scalar workaround was withdrawn; its other WIP is excluded.
-The PR remains a draft, not ready to merge. See the
+612 tests, build, and the complete headless browser suite pass. On 2026-09-04,
+the user accepted both the shown Earth comparisons and the complete fixed-six
+readback matrix described in the evidence record. The strict exact-pixel audit
+still reports baseline readback instability; it has not been relabeled as a
+pass. The inspected `earth-8x` scalar workaround was withdrawn; its other WIP
+is excluded. See the
 [implementation and evidence record](shared-runtime-implementation.md).
 
 Date: 2026-09-04

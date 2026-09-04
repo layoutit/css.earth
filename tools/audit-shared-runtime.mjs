@@ -10,15 +10,26 @@ import { OBJECTS } from "../site/objects.mjs";
 import { loadPlanetBrowserProfile } from "../site/test/load-browser-profile.mjs";
 import { compareCaptures, assertSceneCoverage } from "./object-contract-visual.mjs";
 import { saturnSceneCoverage } from "./saturn-scene-coverage.mjs";
+import { captureFixedReadbacks } from "./readback-sequence.mjs";
 
-const [mode, baseUrl, sourceArgument, outputArgument] = process.argv.slice(2);
+const [mode, baseUrl, sourceArgument, outputArgument, option] = process.argv.slice(2);
 assert.ok(["baseline", "candidate"].includes(mode) && baseUrl && sourceArgument && outputArgument,
-  "Use baseline|candidate BASE_URL SERVED_WORKTREE FRESH_EVIDENCE_DIRECTORY");
+  "Use baseline|candidate BASE_URL SERVED_WORKTREE FRESH_EVIDENCE_DIRECTORY [--report-only]");
+assert.ok(option === undefined || option === "--report-only", "Unknown audit option");
+const reportOnly = option === "--report-only";
 const sourceRoot = resolve(sourceArgument), root = resolve(outputArgument), output = resolve(root, mode);
 await mkdir(root, { recursive: true });
 await mkdir(output); // Refuse to overwrite evidence.
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const report = { protocol: "immutable-headless-native-readback-pairs@4", mode, sourceRoot, baseUrl, capturedAt: new Date().toISOString(), headless: true, fingerprints: {}, sourceHashes: {}, harnessHashes: {}, expectedCaptureCount: 0, captures: [], errors: [], comparisons: [] };
+if (reportOnly) {
+  report.protocol = "report-only-fixed-six-native-readbacks@2";
+  report.qualification = "Diagnostic only; does not satisfy the strict acceptance gate.";
+}
+report.reportOnly = reportOnly;
+report.complete = false;
+report.repeatabilityFailures = [];
+report.visualFailures = [];
 const harnessRoot = resolve(import.meta.dirname, "..");
 // Include repository code/data imported indirectly by the registry, profiles,
 // controls, and prepared-state modules. Dependencies are pinned by the lockfile.
@@ -84,6 +95,7 @@ try {
     const fingerprints = {};
     for (const file of ["runtime-assets.json", ...names.map((name) => `runtime/${name}`)]) {
       fingerprints[file] = sha(await readFile(resolve(packagePath, file)));
+      report.sourceHashes[`src/planets/${object.id}/${file}`] = fingerprints[file];
     }
     report.fingerprints[object.id] = fingerprints;
     if (baseline) assert.deepEqual(fingerprints, baseline.fingerprints[object.id], `${object.id}: prepared bytes unchanged`);
@@ -144,12 +156,90 @@ try {
         });
         const poseState = pose.apply ? await pose.apply(page) : null;
         if (pose.apply) await page.waitForLoadState("networkidle");
+        const observedPose = reportOnly ? {
+          camera: await profile.camera(page),
+          lens: (await profile.lens(page)).id,
+          visibleLens: await profile.visibleLens(page),
+          cameraTransform: await page.locator(".planet-stage .polycss-camera").evaluate((camera) => ({
+            transform: getComputedStyle(camera).transform,
+            perspective: getComputedStyle(camera).perspective,
+            transformOrigin: getComputedStyle(camera).transformOrigin,
+          })),
+        } : null;
+        if (reportOnly) {
+          assert.ok(Number.isFinite(observedPose.camera.pitch) && Number.isFinite(observedPose.camera.zoom));
+          assert.equal(typeof observedPose.lens, "string");
+          assert.equal(observedPose.visibleLens, observedPose.lens);
+        }
         assert.equal(await profile.selectedDensity(page), 2, "Canonical highest-density bank");
         assert.equal(await profile.stable(page), true);
         const gpuBefore = await gpuProof();
         const versionLabel = await page.locator(".planet-wordmark-version").textContent();
         const prefix = `${object.id}-${width}-scale${scale}${pose.id === "default" ? "" : `-${pose.id}`}`;
         const capture = async (target, scene) => {
+          if (reportOnly) {
+            // Fixed schedule, not a favorable-frame search. Preserve every
+            // measured frame even when the stream cannot qualify as repeatable.
+            const framesPath = resolve(output, `${prefix}-${kind}-frames`);
+            await mkdir(framesPath);
+            await page.waitForTimeout(2_000);
+            const validation = [], stateHashes = [];
+            const sequence = await captureFixedReadbacks({
+              snapshot: () => page.evaluate(() => {
+                const stage = document.querySelector(".planet-stage");
+                const properties = ["transform", "transformOrigin", "width", "height",
+                  "backgroundImage", "backgroundPosition", "backgroundSize", "opacity",
+                  "display", "visibility", "perspective", "perspectiveOrigin", "clipPath"];
+                return {
+                  cameras: stage.querySelectorAll(".polycss-camera").length,
+                  nodes: [stage, ...stage.querySelectorAll("*")].map((node) => {
+                    const style = getComputedStyle(node);
+                    return [node.tagName, [...node.attributes].map(({ name, value }) => [name, value]),
+                      properties.map((property) => style[property])];
+                  }),
+                  animations: document.getAnimations().map((animation) => ({
+                    time: animation.currentTime, state: animation.playState,
+                    pending: animation.pending, rate: animation.playbackRate,
+                  })),
+                };
+              }),
+              capture: async () => {
+                await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))));
+                await page.waitForTimeout(100);
+                return target.screenshot({ caret: "initial" });
+              },
+              validate: async (png, phase) => {
+                if (object.id === "saturn" && scene) {
+                  try {
+                    validation.push(await assertSceneCoverage(png, saturnSceneCoverage(width, scale)));
+                  } catch (error) {
+                    // Report every missing-region frame, then measure the rest.
+                    // This mode always fails qualification; the strict path
+                    // below still throws immediately on incomplete coverage.
+                    const failure = { prefix, kind, phase, error: error.message };
+                    report.visualFailures.push(failure);
+                    validation.push({ failed: true, ...failure });
+                  }
+                }
+              },
+              onFrame: async ({ index, image, before, after }) => {
+                await writeFile(resolve(framesPath, `frame_${String(index).padStart(4, "0")}.png`), image);
+                const beforeBytes = JSON.stringify(before), afterBytes = JSON.stringify(after);
+                stateHashes.push({ before: sha(beforeBytes), after: sha(afterBytes) });
+                if (index === 0) await writeFile(resolve(framesPath, "state.json"), beforeBytes + "\n");
+                await writeFile(resolve(framesPath, "state-hashes.json"), JSON.stringify(stateHashes) + "\n");
+                if (beforeBytes !== afterBytes) {
+                  await writeFile(resolve(framesPath, `frame_${index}-changed-state.json`),
+                    JSON.stringify({ before, after }) + "\n");
+                }
+              },
+            });
+            assert.equal(sequence.state.cameras, 1);
+            assert.ok(sequence.state.nodes.length > 20);
+            if (!sequence.repeatablePairs) report.repeatabilityFailures.push(`${prefix}-${kind}`);
+            return { frames: sequence.frames, attempts: 3, validation,
+              repeatable: sequence.repeatablePairs, stateHashes };
+          }
           let previous = null, matches = 0;
           const history = [];
           for (let attempts = 1; attempts <= 24; attempts++) {
@@ -194,15 +284,18 @@ try {
         const loadedAssets = Object.fromEntries([...loaded].sort(([a], [b]) => a.localeCompare(b)));
         const gpuAfter = await gpuProof();
         assert.deepEqual(gpuAfter, gpuBefore, "GPU identity must remain stable during capture");
-        const record = { prefix, kind, pose: pose.id, poseState, loadedAssets, versionLabel, gpu: gpuAfter, frameSha256s: frame.frames.map(sha), coverage: frame.validation, captureAttempts: frame.attempts };
+        const record = { prefix, kind, pose: pose.id, poseState, loadedAssets, versionLabel, gpu: gpuAfter, frameSha256s: frame.frames.map(sha), coverage: frame.validation, captureAttempts: frame.attempts,
+          ...(reportOnly ? { observedPose, repeatable: frame.repeatable, stateHashes: frame.stateHashes } : {}) };
         report.captures.push(record);
         for (const [phase, png] of frame.frames.entries()) {
-          const filename = `${prefix}-${kind}${phase ? "-phase1" : ""}.png`;
+          const filename = `${prefix}-${kind}${phase ? `-phase${phase}` : ""}.png`;
           await writeFile(resolve(output, filename), png);
           if (baseline) {
             const reference = baseline.captures.find((entry) => entry.prefix === prefix && entry.kind === kind);
             assert.ok(reference, prefix);
             assert.deepEqual(poseState, reference.poseState, `${prefix}: matched camera/lens pose`);
+            if (reportOnly) assert.deepEqual(observedPose, reference.observedPose,
+              `${prefix}: matched observed camera and lens`);
             assert.deepEqual(loadedAssets, reference.loadedAssets, `${prefix}: loaded identity`);
             assert.equal(versionLabel, reference.versionLabel, `${prefix}: match rendered build metadata`);
             assert.deepEqual(gpuAfter, reference.gpu, `${prefix}: match native GPU identity`);
@@ -228,9 +321,11 @@ try {
   if (baseline) {
     assert.deepEqual(report.harnessHashes, baseline.harnessHashes, "Match recorded repository harness inputs");
     assert.equal(report.expectedCaptureCount, baseline.expectedCaptureCount);
-    assert.equal(report.comparisons.length, report.expectedCaptureCount * 2);
-    assert.ok(report.comparisons.every(({ changedPixels }) => changedPixels === 0), "Unintended pixels changed; inspect absolute differences.");
+    assert.equal(report.comparisons.length, report.expectedCaptureCount * (reportOnly ? 6 : 2));
+    report.exactComparisonPass = report.comparisons.every(({ changedPixels }) => changedPixels === 0);
+    if (!reportOnly) assert.ok(report.exactComparisonPass, "Unintended pixels changed; inspect absolute differences.");
   }
+  report.complete = true;
 } catch (error) { report.errors.push(error.stack); process.exitCode = 1; }
 finally {
   try { await browserSession?.detach(); }
@@ -241,3 +336,6 @@ finally {
 }
 console.log(JSON.stringify({ output, captures: report.captures.length, errors: report.errors }));
 if (report.errors.length) process.exitCode = 1;
+// A report-only run can collect the entire matrix successfully and still fail
+// qualification. It must never be consumed as a passing strict audit.
+if (reportOnly) process.exitCode = 1;

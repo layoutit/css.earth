@@ -5,12 +5,13 @@ in one architectural PR. It covers the Sun, Mercury, Venus, Earth, Moon, Mars,
 Jupiter, Saturn, Uranus, Neptune, and Pluto.
 
 Status: the shared architecture and explicitly authorized Earth repair are
-implemented. Source verification, all 598 tests, build, and the full headless
+implemented. Source verification, all 612 tests, build, and the full headless
 browser suite pass.
 The inspected `earth-8x` raster workaround introduced close-up stretching and
-was withdrawn. On 2026-09-04, the user accepted the shown Earth screenshots
-and Pixelmatch 0.1 comparisons. The full matched visual matrix remains
-unverified; the PR remains a draft.
+was withdrawn. On 2026-09-04, the user accepted the shown Earth screenshots,
+their Pixelmatch 0.1 comparisons, and the later complete fixed-six readback
+matrix. The strict exact-pixel protocol remains failed and is not reported as
+a pass; the explicit human decision closes the visual gate for this PR.
 
 ## User acceptance of the shown Earth visuals
 
@@ -25,16 +26,53 @@ using Pixelmatch 7.2.0 with `threshold: 0.1` and default anti-alias exclusion:
 
 The second comparison includes the intentional Earth texture-preparation
 change. This is human approval of the displayed result, not a claim of zero
-pixel differences or a new general mismatch allowance. It does not establish
-that the full 96-condition architecture comparison passed, or authorize merge.
-The earlier failed exact checks remain recorded below; no automated threshold
-or mask was changed.
+pixel differences or a new general mismatch allowance. The earlier failed
+exact checks remain recorded below; no automated threshold or mask was changed.
 
 The input PNG hashes, options, counts, and output diff hashes are recorded in
 `output/earth-pixelmatch-0p1-jwoHPe/report.json`. The ignored reproduction script
 is `output/review-pixelmatch-0p1.mjs`; it reads the original saved captures
 without opening a browser or altering them. Both diff images were shown inline
 to the user before acceptance.
+
+## User acceptance of the complete fixed-six matrix
+
+The final headless diagnostic captured all 96 matched conditions for both the
+Earth-only baseline and candidate. Each condition retained six consecutive
+native readbacks without retries or favorable-frame selection: 576 matched
+pairs in total. It verified the same observed camera/lens pose, loaded prepared
+bytes, GPU identity, rendered version, source hashes, harness hashes, and stable
+pre/post DOM state for every condition.
+
+Pixelmatch 7.2.0 at `threshold: 0.1`, with default anti-alias exclusion, found
+573 of 576 pairs unchanged. Of the three nonzero pairs:
+
+| Pair | Mismatched pixels | Percentage | Interpretation |
+| --- | ---: | ---: | --- |
+| Saturn, 1440 wide, DPR 2, scene, phase 0 | 121,817 of 5,184,000 | 2.349865% | The baseline omitted an upper-ring region; the candidate was complete. Phases 1–5 were byte-identical. |
+| Earth, 390 wide, DPR 2, shell, phase 1 | 29 of 1,404,000 | 0.002066% | Sparse readback variation. |
+| Earth, 1440 wide, DPR 2, shell, phase 0 | 1 of 5,184,000 | 0.000019% | One Pixelmatch-visible pixel. |
+
+The remaining nine objects were Pixelmatch-zero across all 432 pairs. The
+candidate had no missing-region coverage failure. The baseline had one, on the
+same Saturn phase-0 frame. Both sides had 12 nonrepeatable six-frame conditions;
+these are reported, not discarded. An independent sequence comparison confirms
+that Saturn phase 0 differs and phases 1–5 are byte-identical.
+
+On 2026-09-04, after the baseline, candidate, and absolute Pixelmatch evidence
+were shown, the user said "accepted". This explicit human decision accepts the
+complete matrix for this PR. It does not convert the diagnostic into a strict
+exact-pixel pass, create a reusable tolerance, waive future visual review, or
+authorize merge. Evidence is under `output/shared-runtime-report-only-2/`;
+Pixelmatch details are in
+`output/shared-runtime-report-only-2/pixelmatch-0p1-UjvQKp/report.json`.
+An adversarial subagent review independently rehashed all 1,152 top-level PNGs,
+all 1,152 frame copies, 384 state records, 277 source entries, 806 harness
+entries, 76 prepared fingerprints, and 305 unique loaded assets. It recomputed
+all three nonzero Pixelmatch results and confirmed that report-only mode always
+exits nonzero while the unchanged strict path remains fail-closed. Its result is
+`PASS_WITH_QUALIFICATIONS`; the report is
+`output/shared-runtime-report-only-2-review.md`.
 
 ## What changed
 
@@ -140,11 +178,11 @@ visual checks remain separate from source, unit, and build success.
 | Gate | Result | Local report |
 | --- | --- | --- |
 | `pnpm acquire:planets -- --verify-only` | Pass with Earth repair | `output/runtime-source-verify-earth-final.log` |
-| `pnpm test` | 598 passed; none failed or skipped | `output/runtime-unit-tests-earth-final.log` |
+| `pnpm test` | 612 passed; none failed or skipped | Fresh 2026-09-04 terminal run; exit 0 |
 | `pnpm build` | Pass with Earth repair | `output/runtime-build-earth-final.log` |
-| `pnpm test:browser http://127.0.0.1:4230` | Pass with Earth repair; exit 0 | `output/runtime-browser-earth-pages-final.log` |
+| `pnpm test:browser http://127.0.0.1:4230` | Pass at the final working tree; exit 0 | Playback `runtime-playback-1788547083056`; complex `runtime-complex-1788547171029` |
 | Earth preparation | 6 passed; 221 runtime asset hashes verified | `output/earth-affine-paged-preparation-tests.log` |
-| Matched visual regression | Unmet; independent Earth-only baseline repeatability failed | See below |
+| Matched visual regression | Accepted by explicit human review of the complete 96-condition, 576-pair diagnostic; strict exact protocol remains failed | `output/shared-runtime-report-only-2/` |
 | `git diff --check` | Pass before commit | Git working tree |
 
 The completed architecture browser run before the Earth repair used installed headless Google Chrome
@@ -179,12 +217,14 @@ They reran 35 focused tests and verified all 221 runtime asset hashes. A final
 finding that canonical-page declarations were not consumed by conformance was
 closed: conformance now asserts their actual requests, and the full rerun
 passes both display scales. The separate visual review verified the failed
-288-frame baseline check below; it did not approve visual acceptance.
+288-frame baseline check below. The later complete matrix and explicit user
+decision are recorded above.
 
 Independent implementation reviews covered playback/lifetime/error boundaries,
 async presentation races, cleanup after partial failure, image ownership, and
 all eleven integrations. Repaired findings received focused regression tests
-and review. Matched visual acceptance remains a separate, unmet requirement.
+and review. The separate visual decision is recorded above without relabeling
+the failed strict protocol.
 
 Late acceptance checks found and closed stage-attribute cleanup omissions,
 old-camera cleanup affecting replacement state, and an enabled speed button
@@ -367,7 +407,7 @@ The later affine repair supersedes that restored scene. Its independent
 baseline qualification remains failed as described above; the branch pointer
 alone did not supply a validated fix.
 
-### Capture contract retained for the eventual comparison
+### Strict capture contract and accepted report-only comparison
 
 The audit is `immutable-headless-native-readback-pairs@4`: installed Chrome,
 hardware renderer/device identity, enabled GPU composition and rasterization,
@@ -377,12 +417,12 @@ object-owned Earth exterior/cutaway close-ups at the existing maximum zoom,
 two widths, and two display scales: 96 conditions and 192 phase comparisons.
 No software-composited or headed result can qualify this protocol.
 
-Run the complete comparison only with a qualified, explicitly identified
-baseline. The eventual architecture comparison uses main plus the identical
+Strict qualification still requires a qualified, explicitly identified
+baseline. The architecture comparison uses main plus the identical
 Earth-only repair, not raw main: prepared-byte identity checks correctly reject
 raw main paired with the repaired candidate. The current Earth-only fixture
-still fails its independent repeatability check, so these are conditional
-reproduction commands, not a completed or currently qualified comparison:
+still fails its independent repeatability check, so these commands reproduce
+the strict path, not the accepted report-only matrix:
 
 ```sh
 node tools/audit-shared-runtime.mjs baseline http://127.0.0.1:4281 \
@@ -397,9 +437,10 @@ the same Git-derived `Version 0.6` build metadata. For a fresh reproduction,
 keep that metadata matched too: apply the candidate diff without committing it
 to a second checkout of the same base before starting its server. Do not mask
 the label. The audit verifies the rendered label and served source hashes.
-No complete baseline/candidate comparison qualifies this PR. Neither failed
-raw-main captures, the rejected trial's repeatability, nor isolated calibration
-counts as complete acceptance.
+The complete fixed-six report-only matrix is recorded and explicitly accepted
+above. That decision closes this PR's visual gate without claiming that the
+strict exact protocol passed. Failed raw-main captures, the rejected trial's
+repeatability, and isolated calibration still do not count as strict acceptance.
 
 ## Evidence limits
 
@@ -409,9 +450,10 @@ reclamation, or compositor performance gains. Synthetic visibility/lifecycle
 events test ordering; only the separate navigation/back test claims real
 back/forward-cache admission.
 
-Raw visual evidence is preserved. Failed or nonrepeatable capture runs are
-invalid qualification runs, not silently discarded passing results. Pixel
-tolerance and masks must not be widened to hide a refactor regression.
+Raw visual evidence is preserved. Failed or nonrepeatable capture runs are not
+silently discarded or relabeled as strict passes. The final complete diagnostic
+was accepted by explicit human review with its failures disclosed. Pixel
+tolerance and masks were not widened to hide a refactor regression.
 
 Source inputs and all non-Earth prepared assets are unchanged. The authorized
 Earth exception changes its preparation, manifest, generated scene and lens
