@@ -155,7 +155,7 @@ async function auditSaturn() {
   });
   try {
     await load(page, "saturn");
-    await page.evaluate(() => window.__saturn.pause());
+    await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
     await settle(page);
     const shell = "saturn-shell.png";
     await page.screenshot({ path: resolve(outputRoot, shell) });
@@ -212,7 +212,7 @@ async function auditMars() {
   });
   try {
     await load(page, "mars");
-    await page.evaluate(() => window.__mars.pause());
+    await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
     await settleMars(page);
     const shell = "mars-shell.png";
     await page.screenshot({ path: resolve(outputRoot, shell) });

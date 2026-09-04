@@ -3,7 +3,7 @@ import { chromium } from "playwright";
 
 import { OBJECTS } from "../objects.mjs";
 import { MOBILE_TOUCH_ACTION } from "../runtime-policy.mjs";
-import { loadPlanetBrowserProfile } from "./load-browser-profile.mjs";
+import { loadPlanetBrowserProfile, assertRenderedObjectControls } from "./load-browser-profile.mjs";
 import { GOOGLE_EARTH_SURFACE_FLY_TO } from
   "../../src/platform/google-earth-surface-fly-to.mjs";
 import { GOOGLE_EARTH_DRAG_INERTIA } from
@@ -13,6 +13,8 @@ const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const requestedId = process.argv[3] ?? null;
 const renderOnly = process.env.CSSEARTH_RENDER_ONLY === "1";
 const densityOnly = process.env.CSSEARTH_DENSITY_ONLY === "1";
+const CASE_TIMEOUT_MS = 120_000;
+const REQUEST_START_TIMEOUT_MS = 30_000;
 const implemented = OBJECTS;
 const selected = requestedId
   ? implemented.filter(({ id }) => id === requestedId)
@@ -28,26 +30,86 @@ try {
   for (const planet of selected) {
     const profile = await loadPlanetBrowserProfile(planet);
     if (densityOnly) {
-      reports.push(await provePreparedDensity(browser, planet, profile, 1));
-      reports.push(await provePreparedDensity(browser, planet, profile, 2));
+      reports.push(await runCase(planet, "dpr-1", () => provePreparedDensity(browser, planet, profile, 1)));
+      reports.push(await runCase(planet, "dpr-2", () => provePreparedDensity(browser, planet, profile, 2)));
       continue;
     }
-    reports.push(await proveDesktop(browser, planet, profile));
-    reports.push(await proveMobile(browser, planet, profile));
-    reports.push(await provePreReadyTarget(browser, planet, profile, true));
-    reports.push(await provePreReadyTarget(browser, planet, profile, false));
-    reports.push(await provePreparedDensity(browser, planet, profile, 1));
-    reports.push(await provePreparedDensity(browser, planet, profile, 2));
-    reports.push(await proveLensRace(browser, planet, profile));
-    reports.push(await proveLensRejection(browser, planet, profile));
-    reports.push(await proveLensDestroy(browser, planet, profile));
+    reports.push(await runCase(planet, "initial-shell", () => proveInitialShell(browser, planet, profile)));
+    reports.push(await runCase(planet, "desktop", () => proveDesktop(browser, planet, profile)));
+    reports.push(await runCase(planet, "mobile", () => proveMobile(browser, planet, profile)));
+    for (const motionRequested of [false, true]) {
+      for (const hidden of [true, false]) {
+        reports.push(await runCase(planet, `pre-ready-${hidden ? "hidden" : "visible"}-motion-${motionRequested ? "on" : "off"}`,
+          () => provePreReadyTarget(browser, planet, profile, hidden, motionRequested)));
+      }
+    }
+    reports.push(await runCase(planet, "dpr-1", () => provePreparedDensity(browser, planet, profile, 1)));
+    reports.push(await runCase(planet, "dpr-2", () => provePreparedDensity(browser, planet, profile, 2)));
+    if ((profile.objectControls.lenses?.controls.length ?? 0) > 1) {
+      reports.push(await runCase(planet, "lens-race", () => proveLensRace(browser, planet, profile)));
+      reports.push(await runCase(planet, "lens-reacquire", () => proveLensReacquire(browser, planet, profile)));
+      reports.push(await runCase(planet, "lens-rejection", () => proveLensRejection(browser, planet, profile)));
+      reports.push(await runCase(planet, "lens-destroy", () => proveLensDestroy(browser, planet, profile)));
+    }
   }
 } finally {
   await browser.close();
 }
 
-async function provePreReadyTarget(browser, planet, profile, finalHidden) {
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+async function runCase(planet, name, prove) {
+  const label = `${planet.id}/${name}`;
+  const startedAt = performance.now();
+  console.error(`[conformance] START ${label}`);
+  try {
+    const report = await within(prove(), CASE_TIMEOUT_MS, `${label}: case exceeded ${CASE_TIMEOUT_MS}ms`);
+    console.error(`[conformance] PASS ${label} (${Math.round(performance.now() - startedAt)}ms)`);
+    return report;
+  } catch (error) {
+    console.error(`[conformance] FAIL ${label}: ${error.message}`);
+    throw error;
+  }
+}
+
+async function within(promise, milliseconds, message) {
+  let timer;
+  try {
+    return await Promise.race([promise, new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error(message)), milliseconds);
+    })]);
+  } finally { clearTimeout(timer); }
+}
+
+function observed(promise) {
+  // A parallel gated selection can reject before its eventual joined await,
+  // especially when a timeout closes the page. Keep that outcome observed.
+  promise.catch(() => {});
+  return promise;
+}
+
+async function proveInitialShell(browser, planet, profile) {
+  // With scripting disabled, no object binder can mask an enabled SSR control.
+  const page = await browser.newPage({ javaScriptEnabled: false });
+  try {
+    const response = await page.goto(new URL(planet.route, baseUrl).href, {
+      waitUntil: "domcontentloaded",
+    });
+    assert.ok(response?.ok(), `${planet.id}: initial shell must load successfully`);
+    const speed = page.locator('button[name="speed"]');
+    const supportsSpeed = profile.objectControls.settings?.controls.some(
+      ({ name }) => name === "speed",
+    ) ?? false;
+    assert.equal(await speed.count(), Number(supportsSpeed),
+      `${planet.id}: initial shell must render only supported speed controls`);
+    if (supportsSpeed) {
+      assert.equal(await speed.isDisabled(), true,
+        `${planet.id}: initial HTML must disable speed before object binding`);
+    }
+    return { id: planet.id, viewport: "initial-shell", speedDisabled: supportsSpeed };
+  } finally { await page.close(); }
+}
+
+async function provePreReadyTarget(browser, planet, profile, finalHidden, motionRequested) {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
   const evidence = observePage(page, baseUrl);
   let releaseAssets;
   let markStarted;
@@ -66,24 +128,33 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden) {
     await page.goto(new URL(planet.route, baseUrl).href, {
       waitUntil: "domcontentloaded",
     });
-    await started;
+    await within(started, REQUEST_START_TIMEOUT_MS,
+      `${planet.id}: no startup request reached /scenes/${planet.id}/`);
+    await assertRenderedObjectControls(page, profile);
     assert.equal(await page.evaluate(() => window.__cssEarth?.lifecycle), "loading",
       `${planet.id}: gated preparation must remain loading`);
-    const preReadyButtons = page.locator('button[name="lens"]');
-    if (profile.audit.lensRace.preReadyDisabled) {
+    if (profile.objectControls.lenses?.controls.length && profile.audit.lensRace?.preReadyDisabled) {
       await page.waitForFunction(() =>
         [...document.querySelectorAll('button[name="lens"]')].every(
           (button) => button.disabled,
         ));
-    } else {
+    } else if (profile.objectControls.lenses?.controls.length) {
+      const testId = profile.audit.lensRace?.slowId ?? profile.objectControls.lenses.defaultLens;
       await page.locator(
-        `button[name="lens"][value="${profile.audit.lensRace.slowId}"]`,
+        `button[name="lens"][value="${testId}"]`,
       ).evaluate((button) => button.click());
       assert.equal(await page.locator(
         'button[name="lens"][aria-pressed="true"]',
-      ).getAttribute("value"), profile.audit.lensRace.defaultId,
+      ).getAttribute("value"), profile.objectControls.lenses.defaultLens,
       `${planet.id}: pre-ready lens input must not publish a selection`);
     }
+    if (profile.objectControls.settings?.controls.some(({ name }) => name === "speed")) {
+      assert.equal(await page.locator('button[name="speed"]').isDisabled(), true,
+        `${planet.id}: speed must be disabled until runtime binding`);
+    }
+    await page.locator('input[name="motion"]').evaluate((input, requested) => {
+      if (input.checked !== requested) input.click();
+    }, motionRequested);
     await setDocumentVisibility(page, true);
     if (!finalHidden) await setDocumentVisibility(page, false);
     assert.notEqual(await page.evaluate(() =>
@@ -92,21 +163,24 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden) {
     releaseAssets();
     await page.waitForFunction(() => window.__cssEarth?.ready === true);
     await profile.waitForRuntime(page);
+    const expectedPlaying = motionRequested && !finalHidden;
     const lifecycle = await page.evaluate(() => window.__cssEarth.lifecycle);
-    assert.equal(lifecycle, "paused",
-      `${planet.id}: default motion-off state must survive pre-ready visibility`);
+    assert.equal(lifecycle, expectedPlaying ? "mounted" : "paused",
+      `${planet.id}: readiness must apply the latest shared Motion and visibility`);
+    assert.equal(await page.locator('input[name="motion"]').isChecked(), motionRequested,
+      `${planet.id}: visibility changes must preserve Motion intent`);
     const animationStates = await page.locator(".planet-stage").evaluate((stage) =>
       stage.getAnimations({ subtree: true }).map(({ playState }) => playState));
-    assert.ok(animationStates.every((state) => state === "paused"),
-      `${planet.id}: pre-ready completion must preserve motion off`);
+    assert.ok(expectedPlaying
+      ? animationStates.length === 0 || animationStates.includes("running")
+      : animationStates.every((state) => state === "paused"),
+    `${planet.id}: actual animations must obey the latest ready playback permission`);
     assert.equal(await profile.stable(page), true,
       `${planet.id}: pre-ready lifecycle must preserve retained identity`);
     assertEvidence(evidence, planet.id);
     return {
       id: planet.id,
-      viewport: finalHidden
-        ? "pre-ready-hidden-motion-off"
-        : "pre-ready-visible-motion-off",
+      viewport: `pre-ready-${finalHidden ? "hidden" : "visible"}-motion-${motionRequested ? "on" : "off"}`,
       animationCount: animationStates.length,
     };
   } finally {
@@ -115,38 +189,65 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden) {
   }
 }
 
+async function installDecodeGate(page, assetPath) {
+  await page.addInitScript((pathname) => {
+    const decode = Image.prototype.decode;
+    globalThis.__preparedImageDecodes = Object.create(null);
+    const probe = globalThis.__preparedDecodeGate = {
+      pathname, holding: true, started: false, pending: [],
+    };
+    Image.prototype.decode = function preparedDecode(...arguments_) {
+      const path = new URL(this.currentSrc || this.src, location.href).pathname;
+      globalThis.__preparedImageDecodes[path] =
+        (globalThis.__preparedImageDecodes[path] ?? 0) + 1;
+      // Decode the actual prepared bytes first. Holding HTTP itself while an
+      // owner clears src can leave Chrome's canceled decode unsettled forever.
+      // This gate controls completion and can always release retired work.
+      return decode.apply(this, arguments_).then((value) => {
+        if (path !== probe.pathname || !probe.holding) return value;
+        probe.started = true;
+        return new Promise((resolve) => probe.pending.push(() => resolve(value)));
+      });
+    };
+  }, new URL(assetPath, baseUrl).pathname);
+}
+
+async function waitForDecodeGate(page, planet, race) {
+  try {
+    await page.waitForFunction(() => globalThis.__preparedDecodeGate?.started,
+      undefined, { timeout: REQUEST_START_TIMEOUT_MS });
+  } catch (cause) {
+    throw new Error(`${planet.id}: ${race.slowId} did not reach prepared decode gate ${race.slowAsset}`, { cause });
+  }
+}
+
+async function releaseDecodeGate(page) {
+  if (page.isClosed()) return;
+  await page.evaluate(() => {
+    const probe = globalThis.__preparedDecodeGate;
+    if (!probe) return;
+    probe.holding = false;
+    for (const release of probe.pending.splice(0)) release();
+  });
+}
+
 async function proveLensRace(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
   const evidence = observePage(page, baseUrl);
   const race = profile.audit.lensRace;
-  await page.addInitScript(() => {
-    const decode = Image.prototype.decode;
-    globalThis.__preparedImageDecodes = Object.create(null);
-    Image.prototype.decode = function preparedDecode(...arguments_) {
-      const pathname = new URL(this.currentSrc || this.src).pathname;
-      globalThis.__preparedImageDecodes[pathname] =
-        (globalThis.__preparedImageDecodes[pathname] ?? 0) + 1;
-      return decode.apply(this, arguments_);
-    };
-  });
-  let releaseSlow;
-  let markSlowStarted;
-  const slowGate = new Promise((resolve) => { releaseSlow = resolve; });
-  const slowStarted = new Promise((resolve) => { markSlowStarted = resolve; });
-  await page.route(`**${race.slowAsset}`, async (route) => {
-    markSlowStarted();
-    await slowGate;
-    await route.continue();
-  });
+  await installDecodeGate(page, race.slowAsset);
   try {
     await loadPlanet(page, planet, profile);
-    const slowSelection = profile.selectLens(page, race.slowId);
-    await slowStarted;
-    await profile.selectLens(page, race.winnerId);
-    const repeatedSlowSelection = profile.selectLens(page, race.slowId);
-    await profile.selectLens(page, race.winnerId);
-    releaseSlow();
-    await Promise.all([slowSelection, repeatedSlowSelection]);
+    const slowSelection = observed(profile.selectLens(page, race.slowId));
+    await waitForDecodeGate(page, planet, race);
+    const repeatedSlowSelection = observed(profile.selectLens(page, race.slowId));
+    // Both A requests overlap the same live entry. A later committed winner
+    // may retire it; coalescing does not imply reusing a retired decode.
+    await within(profile.selectLens(page, race.winnerId), REQUEST_START_TIMEOUT_MS,
+      `${planet.id}: winning lens ${race.winnerId} did not settle while ${race.slowId} was gated`);
+    await releaseDecodeGate(page);
+    await within(Promise.all([slowSelection, repeatedSlowSelection]), REQUEST_START_TIMEOUT_MS,
+      `${planet.id}: retired ${race.slowId} selections did not settle after releasing ${race.slowAsset}`);
     await assertLensConsistency(page, planet, profile, race.winnerId);
     const slowPath = new URL(race.slowAsset, baseUrl).pathname;
     const slowDecodeCount = await page.evaluate((pathname) =>
@@ -163,9 +264,35 @@ async function proveLensRace(browser, planet, profile) {
       slowDecodeCount,
     };
   } finally {
-    releaseSlow?.();
+    await releaseDecodeGate(page);
     await page.close();
   }
+}
+
+async function proveLensReacquire(browser, planet, profile) {
+  const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
+  const evidence = observePage(page, baseUrl);
+  const race = profile.audit.lensRace;
+  await installDecodeGate(page, race.slowAsset);
+  try {
+    await loadPlanet(page, planet, profile);
+    const first = observed(profile.selectLens(page, race.slowId));
+    await waitForDecodeGate(page, planet, race);
+    await profile.selectLens(page, race.winnerId);
+    await assertLensConsistency(page, planet, profile, race.winnerId);
+    const reacquired = observed(profile.selectLens(page, race.slowId));
+    await page.waitForFunction(() => {
+      const root = document.querySelector(".planet-lenses");
+      return root?.getAttribute("aria-busy") === "true" || root?.classList.contains("is-loading");
+    });
+    await releaseDecodeGate(page);
+    await Promise.all([first, reacquired]);
+    await assertLensConsistency(page, planet, profile, race.slowId);
+    assert.equal(await profile.stable(page), true,
+      `${planet.id}: A/B/A reacquisition must preserve retained nodes`);
+    assertEvidence(evidence, planet.id);
+    return { id: planet.id, viewport: "lens-reacquire", lens: race.slowId };
+  } finally { await releaseDecodeGate(page); await page.close(); }
 }
 
 async function proveLensRejection(browser, planet, profile) {
@@ -175,16 +302,20 @@ async function proveLensRejection(browser, planet, profile) {
   await page.route(`**${race.slowAsset}`, (route) => route.fulfill({
     status: 200,
     contentType: "image/webp",
+    headers: { "cache-control": "no-store" },
     body: "invalid prepared image",
   }));
   try {
     await loadPlanet(page, planet, profile);
     await assert.rejects(profile.selectLens(page, race.slowId));
     await assertLensConsistency(page, planet, profile, race.defaultId);
+    await page.unroute(`**${race.slowAsset}`);
+    await profile.selectLens(page, race.slowId);
+    await assertLensConsistency(page, planet, profile, race.slowId);
     assert.equal(await profile.stable(page), true,
-      `${planet.id}: a rejected lens must preserve retained nodes`);
+      `${planet.id}: rejection and same-URL retry must preserve retained nodes`);
     assertEvidence(evidence, planet.id);
-    return { id: planet.id, viewport: "lens-rejection", lens: race.defaultId };
+    return { id: planet.id, viewport: "lens-rejection-retry", lens: race.slowId };
   } finally {
     await page.close();
   }
@@ -194,21 +325,13 @@ async function proveLensDestroy(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
   const evidence = observePage(page, baseUrl);
   const race = profile.audit.lensRace;
-  let releaseSlow;
-  let markSlowStarted;
-  const slowGate = new Promise((resolve) => { releaseSlow = resolve; });
-  const slowStarted = new Promise((resolve) => { markSlowStarted = resolve; });
-  await page.route(`**${race.slowAsset}`, async (route) => {
-    markSlowStarted();
-    await slowGate;
-    await route.continue();
-  });
+  await installDecodeGate(page, race.slowAsset);
   try {
     await loadPlanet(page, planet, profile);
-    const selection = profile.selectLens(page, race.slowId);
-    await slowStarted;
+    const selection = observed(profile.selectLens(page, race.slowId));
+    await waitForDecodeGate(page, planet, race);
     await page.evaluate(() => window.dispatchEvent(new Event("pagehide")));
-    releaseSlow();
+    await releaseDecodeGate(page);
     await selection;
     await waitFrames(page);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
@@ -234,7 +357,7 @@ async function proveLensDestroy(browser, planet, profile) {
     assertEvidence(evidence, planet.id);
     return { id: planet.id, viewport: "lens-destroy" };
   } finally {
-    releaseSlow?.();
+    await releaseDecodeGate(page);
     await page.close();
   }
 }
@@ -556,12 +679,22 @@ async function beginRetainedProbe(page) {
 
 async function exerciseRetainedInteractions(page, planet, profile) {
   const retained = profile.audit.retained;
-  for (const id of retained.lensIds) {
-    await profile.selectLens(page, id);
+  await assertRenderedObjectControls(page, profile);
+  const lensIds = profile.objectControls.lenses?.controls.length ? retained.lensIds : [];
+  for (const id of lensIds) {
+    await page.locator(`button[name="lens"][value="${id}"]`).evaluate((button) => button.click());
+    await page.waitForFunction(() => {
+      const root = document.querySelector(".planet-lenses");
+      return root?.getAttribute("aria-busy") !== "true" && !root?.classList.contains("is-loading");
+    });
     await assertLensConsistency(page, planet, profile, id);
   }
-  await profile.selectLens(page, retained.lensIds[0]);
-  await assertLensConsistency(page, planet, profile, retained.lensIds[0]);
+  if (lensIds.length) {
+    await profile.selectLens(page, lensIds[0]);
+    await assertLensConsistency(page, planet, profile, lensIds[0]);
+  }
+
+  if (!profile.objectControls.settings?.controls.some(({ name }) => name === "speed")) return;
 
   const speed = page.locator('button[name="speed"]');
   assert.equal(await speed.count(), 1, `${planet.id}: speed control must exist`);
@@ -1036,6 +1169,7 @@ async function loadPlanet(page, planet, profile) {
     waitUntil: "networkidle",
   });
   assert.equal(response?.status(), 200, `${planet.id}: route must return 200`);
+  await assertRenderedObjectControls(page, profile);
   await page.waitForFunction(() => window.__cssEarth?.ready === true);
   await profile.waitForRuntime(page);
   await assertStandaloneMoonContract(page, planet);

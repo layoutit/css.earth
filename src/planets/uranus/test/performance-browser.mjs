@@ -59,7 +59,7 @@ try {
       })),
   }));
   await page.evaluate(() => {
-    window.__uranus.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__uranusLongTasks = [];
     window.__uranus.camera.setState({ controlPitch: 0, zoom: 0.8 });
   });

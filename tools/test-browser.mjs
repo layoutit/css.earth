@@ -9,6 +9,9 @@ for (const args of [
   ["site/test/planet-introduction-browser.mjs", baseUrl],
   ["site/test/object-navigation-browser.mjs", baseUrl],
   ["site/test/planet-browser-conformance.mjs", baseUrl],
+  ["site/test/runtime-playback-browser.mjs", baseUrl],
+  ["site/test/runtime-complex-browser.mjs", baseUrl],
+  ["site/test/runtime-bfcache-browser.mjs", baseUrl],
   ["tools/run-implemented-planets.mjs", "browser", baseUrl],
 ]) {
   await new Promise((resolve, reject) => {

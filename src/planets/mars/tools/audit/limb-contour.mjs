@@ -41,7 +41,7 @@ try {
     const page = await context.newPage();
     await page.goto(baseUrl.href, { waitUntil: "networkidle" });
     await page.waitForFunction(() => window.__mars?.ready === true);
-    await page.evaluate(() => window.__mars.pause());
+    await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
     for (const pitch of PITCHES) {
       await page.evaluate(({ pitch }) => {
         window.__mars.setView({ pitch, zoom: 0.8 });

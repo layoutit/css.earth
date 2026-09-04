@@ -1,6 +1,8 @@
+import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
+
 const ROW_SHARD_CACHE_MODEL = "row-shard-cache";
 
-export function createMercuryRowShardCache(plan) {
+export function createMercuryRowShardCache(plan, { onError = console.error } = {}) {
   const transport = plan?.transport;
   if (transport?.model !== ROW_SHARD_CACHE_MODEL ||
       !Array.isArray(plan.rows) || plan.rows.length === 0 ||
@@ -9,7 +11,7 @@ export function createMercuryRowShardCache(plan) {
       !Number.isSafeInteger(transport.maximumRetainedRowCount) ||
       transport.maximumRetainedRowCount < 1 ||
       transport.maximumRetainedRowCount > 3 ||
-      !Array.isArray(transport.initialWarmRows)) {
+      !Array.isArray(transport.initialWarmRows) || typeof onError !== "function") {
     throw new TypeError("Invalid prepared Mercury material row-shard plan.");
   }
 
@@ -46,6 +48,7 @@ export function createMercuryRowShardCache(plan) {
       }
     },
     presentation(frameIndex) {
+      if (destroyed) return null;
       const prepared = plan.presentations[frameIndex];
       if (!prepared) {
         throw new RangeError(`Unprepared Mercury material frame: ${frameIndex}.`);
@@ -111,7 +114,7 @@ export function createMercuryRowShardCache(plan) {
         nextWarmRow() === null) return;
     let task;
     task = runWarmPump()
-      .catch((error) => console.error(error))
+      .catch((error) => { if (!destroyed) console.error(error); })
       .finally(() => {
         if (warmTask !== task) return;
         warmTask = null;
@@ -135,7 +138,8 @@ export function createMercuryRowShardCache(plan) {
       }
       if (target) {
         targetReadyNotifications += 1;
-        readyCallback?.();
+        // Keep publication exceptions separate from recoverable native decode.
+        try { readyCallback?.(); } catch (error) { onError(error); }
       }
     }
   }
@@ -220,8 +224,7 @@ function createPreparedImagePool(capacity) {
       const ticket = ++slot.ticket;
       slot.key = key;
       slot.ready = false;
-      slot.image.src = url;
-      const pending = slot.image.decode().then(() => {
+      const pending = decodePreparedImage(slot.image, url).then(() => {
         if (destroyed || slot.ticket !== ticket) return false;
         slot.pending = null;
         slot.ready = true;
@@ -232,7 +235,7 @@ function createPreparedImagePool(capacity) {
         slot.pending = null;
         slot.ready = false;
         slot.key = null;
-        slot.image.removeAttribute("src");
+        releasePreparedImage(slot.image);
         throw new Error(`Prepared Mercury material image decode failed: ${url}`, {
           cause: error,
         });
@@ -254,13 +257,17 @@ function createPreparedImagePool(capacity) {
       if (destroyed) return;
       destroyed = true;
       byKey.clear();
+      const errors = [];
       for (const slot of slots) {
         slot.ticket += 1;
-        slot.image.removeAttribute("src");
         slot.key = null;
         slot.pending = null;
         slot.ready = false;
+        try { releasePreparedImage(slot.image); } catch (error) { errors.push(error); }
+        slot.image = null;
       }
+      slots.length = 0;
+      if (errors.length) throw new AggregateError(errors, "Mercury row cleanup failed.");
     },
   });
   return pool;

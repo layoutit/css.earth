@@ -14,8 +14,8 @@ test("keeps Neptune on retained DOM and prepared runtime transport", async () =>
   assert.match(client, /plan\.fixedMaterialPlane/u);
   assert.doesNotMatch(client, /neptune-material-composite/u);
   assert.match(client, /createPreparedOrbitMaterialCache/u);
-  assert.match(client, /releaseResources\(\)/u);
-  assert.match(client, /entry\.images\.forEach\(releaseDecodedImage\)/u);
+  assert.match(client, /lifetime\.destroy\(\)/u);
+  assert.match(client, /entry\.store\.destroy\(\)/u);
   assert.match(client, /root\.classList\.remove\("is-loading"\)/u);
   assert.doesNotMatch(client, /mountPreparedOrbitGuide/u);
   assert.doesNotMatch(client, /createPreparedOrbitGuideInteraction/u);

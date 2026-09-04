@@ -47,7 +47,7 @@ try {
       });
       await page.goto(`${baseUrl}/saturn/`, { waitUntil: "networkidle" });
       await page.waitForFunction(() => window.__saturn?.ready && window.__cssEarth?.ready);
-      await page.evaluate(() => { window.__saturn.pause(); for (const a of document.getAnimations()) { a.pause(); a.currentTime = 0; } });
+      await page.evaluate(() => { { const motion = document.querySelector(".planet-motion-setting"); if (motion.checked) motion.click(); } for (const a of document.getAnimations()) { a.pause(); a.currentTime = 0; } });
       await page.evaluate(async () => {
         await document.fonts.ready;
         await Promise.all([...document.images].filter((image) => image.currentSrc).map((image) => image.decode()));

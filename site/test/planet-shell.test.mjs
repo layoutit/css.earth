@@ -362,7 +362,7 @@ test("renders optional source media through one planet-neutral panel contract", 
 test("renders concise per-lens descriptions without a general introduction", async () => {
   const [shell, saturnPanel] = await Promise.all([
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
-    readFile(new URL("../../src/planets/saturn/site/SaturnPanel.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../src/planets/saturn/site/control-content.mjs", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(shell, /planet-lenses-introduction|Explore this object in new ways/u);
   assert.match(shell, /class="planet-lens-description">\{lens\.description\}<\/span>/u);
@@ -665,7 +665,7 @@ test("places desktop search and the collapse control around the sidebar", async 
   assert.doesNotMatch(styles, /content:\s*"⚙︎"/u);
   assert.match(
     shell,
-    /id=\{`\$\{objectId\}-resources`\}[\s\S]*?id=\{`\$\{objectId\}-settings`\}[\s\S]*?class="planet-settings-panel planet-settings-flyout"[\s\S]*?class="planet-panel-summary"[\s\S]*?class="planet-panel-heading">\{settings\.title\.label\}[\s\S]*?class="planet-panel-icon planet-settings-gear"[\s\S]*?aria-hidden="true">⚙︎<\/span>[\s\S]*?class="planet-motion-setting"[\s\S]*?name="motion"[\s\S]*?class="planet-setting-text">Motion[\s\S]*?class="planet-setting-description"[\s\S]*?planet-setting-state-on[\s\S]*?planet-setting-state-off[\s\S]*?planet-setting-state-auto[\s\S]*?settings\.controls\.map/u,
+    /id=\{`\$\{objectId\}-resources`\}[\s\S]*?id=\{`\$\{objectId\}-settings`\}[\s\S]*?class="planet-settings-panel planet-settings-flyout"[\s\S]*?class="planet-panel-summary"[\s\S]*?class="planet-panel-heading">\{PREPARED_SHELL_TITLES\.settings\.label\}[\s\S]*?class="planet-panel-icon planet-settings-gear"[\s\S]*?aria-hidden="true">⚙︎<\/span>[\s\S]*?class="planet-motion-setting"[\s\S]*?name="motion"[\s\S]*?class="planet-setting-text">Motion[\s\S]*?class="planet-setting-description"[\s\S]*?planet-setting-state-on[\s\S]*?planet-setting-state-off[\s\S]*?planet-setting-state-auto[\s\S]*?settings\?\.controls[\s\S]*?\[\][\s\S]*?\.map/u,
   );
   assert.match(
     shell,
@@ -716,7 +716,7 @@ test("places desktop search and the collapse control around the sidebar", async 
   );
   assert.match(
     client,
-    /createSidebarController\(documentTarget, windowTarget\)[\s\S]*?\.planet-sidebar-toggle[\s\S]*?body\.dataset\.sidebarCollapsed[\s\S]*?toggle\.ariaExpanded = String\(!next\)[\s\S]*?Expand information sidebar[\s\S]*?Collapse information sidebar/u,
+    /createSidebarController\(documentTarget, windowTarget, lifetime\)[\s\S]*?\.planet-sidebar-toggle[\s\S]*?body\.dataset\.sidebarCollapsed[\s\S]*?toggle\.ariaExpanded = String\(!next\)[\s\S]*?Expand information sidebar[\s\S]*?Collapse information sidebar/u,
   );
   assert.match(
     siteStyles,

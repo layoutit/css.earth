@@ -85,10 +85,10 @@ try {
     window.__jupiterSmokeRetained.rings === document.querySelector(".jupiter-rings") &&
     window.__jupiterSmokeRetained.material === document.querySelector(".jupiter-material")), true);
 
-  await page.evaluate(() => window.__jupiter.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   assert.ok(await page.locator(".planet-stage").evaluate((stage) =>
     stage.getAnimations({ subtree: true }).every(({ playState }) => playState === "paused")));
-  await page.evaluate(() => window.__jupiter.resume());
+  await page.evaluate(() => (!document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
 
   await page.evaluate(() => window.__jupiter.setView({ pitch: 20.9, zoom: 1.1 }));
   await page.setViewportSize({ width: 390, height: 844 });
@@ -130,9 +130,9 @@ try {
       speed,
       speedState: speed?.dataset.state,
     });
-    const runtime = window.__jupiter;
-    runtime.destroy();
-    runtime.destroy();
+    window.dispatchEvent(new PageTransitionEvent("pagehide"));
+    window.dispatchEvent(new PageTransitionEvent("pagehide"));
+
     window.__jupiterSmokeDestroyedControls.speed?.click();
   });
   assert.deepEqual(await page.evaluate(() => ({
@@ -202,7 +202,7 @@ async function assertVerticalDragDirection(page) {
 
 async function assertMaterialProjectionLock(page) {
   await page.evaluate(() => {
-    window.__jupiter.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__jupiter.setView({
       pitch: 45,
       controlYaw: 42,
@@ -380,7 +380,7 @@ async function assertPreparedRings(page) {
 
 async function assertRenderedRingReadable(page) {
   await page.evaluate(() => {
-    window.__jupiter.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__jupiter.setView({ pitch: 89, zoom: 1.1 });
   });
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() =>
@@ -405,7 +405,7 @@ async function assertRenderedRingReadable(page) {
   await control.evaluate((element) => element.click());
   await page.evaluate(() => {
     window.__jupiter.setView({ pitch: 20.9, yaw: -105, zoom: 1.1 });
-    window.__jupiter.resume();
+    (!document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
   });
 
   const [visibleRaster, hiddenRaster] = await Promise.all([

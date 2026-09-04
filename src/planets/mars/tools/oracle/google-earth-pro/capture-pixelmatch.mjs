@@ -95,7 +95,7 @@ try {
       '.planet-settings input[name="shadows"]',
     );
     if (shadows.checked) shadows.click();
-    window.__mars.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__mars.setView(view);
     for (const animation of stage.getAnimations({ subtree: true })) {
       animation.pause();

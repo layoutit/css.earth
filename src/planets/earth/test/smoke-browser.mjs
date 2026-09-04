@@ -229,7 +229,7 @@ try {
     pathname.includes("earth-moon-")), false);
   assert.deepEqual(problems, []);
   if (process.env.EARTH_SCREENSHOT) {
-    await page.evaluate(() => window.__earth.pause());
+    await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
     await page.screenshot({ path: process.env.EARTH_SCREENSHOT });
   }
   for (const name of ["atmosphere"]) {

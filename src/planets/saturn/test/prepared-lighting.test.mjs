@@ -398,7 +398,7 @@ test("warms the prepared material CSS raster before declaring ready", async () =
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../site/SaturnHead.astro", import.meta.url), "utf8"),
   ]);
-  const paintGate = client.indexOf("await waitForPreparedScenePaint()");
+  const paintGate = client.indexOf("await waitForScenePaint(lifetime)");
 
   assert.ok(paintGate >= 0);
   assert.match(head,
@@ -444,7 +444,7 @@ test("publishes Saturn through cssEarth's object registry", async () => {
   ]);
   assert.match(layout, /class="planet-stage example-stage"/);
   assert.match(router, /get mountedObjectCount\(\)/);
-  assert.match(router, /return activeMount \? 1 : 0/);
+  assert.match(router, /mountedObjectCount: active\?\.mount \? 1 : 0/);
   assert.ok(objects.OBJECTS.some(({ id }) => id === "saturn"));
   assert.match(client, /csssaturn-prepared-runtime-scene@1/);
   assert.match(css,

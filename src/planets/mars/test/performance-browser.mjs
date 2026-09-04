@@ -51,7 +51,7 @@ try {
       })),
   }));
   await page.evaluate(() => {
-    window.__mars.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__marsLongTasks = [];
     window.__mars.setView({ pitch: 0, zoom: 0.8 });
   });
