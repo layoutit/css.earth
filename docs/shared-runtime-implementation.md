@@ -8,7 +8,33 @@ Status: the shared architecture and explicitly authorized Earth repair are
 implemented. Source verification, all 598 tests, build, and the full headless
 browser suite pass.
 The inspected `earth-8x` raster workaround introduced close-up stretching and
-was withdrawn. The PR remains a draft; visual acceptance is not yet complete.
+was withdrawn. On 2026-09-04, the user accepted the shown Earth screenshots
+and Pixelmatch 0.1 comparisons. The full matched visual matrix remains
+unverified; the PR remains a draft.
+
+## User acceptance of the shown Earth visuals
+
+After reviewing the original captures and their Pixelmatch diffs, the user
+said "accepted" on 2026-09-04. The accepted evidence is these two comparisons,
+using Pixelmatch 7.2.0 with `threshold: 0.1` and default anti-alias exclusion:
+
+| Shown comparison | Image dimensions | Mismatched pixels | Percentage |
+| --- | --- | --- | --- |
+| Unchanged Earth-only baseline, captured frame 0 versus frame 5 | 2880×1800 | 62 of 5,184,000 | 0.001196% |
+| Raw main versus repaired Earth, matched maximum-zoom close-up | 1440×900 | 105,620 of 1,296,000 | 8.149691% |
+
+The second comparison includes the intentional Earth texture-preparation
+change. This is human approval of the displayed result, not a claim of zero
+pixel differences or a new general mismatch allowance. It does not establish
+that the full 96-condition architecture comparison passed, or authorize merge.
+The earlier failed exact checks remain recorded below; no automated threshold
+or mask was changed.
+
+The input PNG hashes, options, counts, and output diff hashes are recorded in
+`output/earth-pixelmatch-0p1-jwoHPe/report.json`. The ignored reproduction script
+is `output/review-pixelmatch-0p1.mjs`; it reads the original saved captures
+without opening a browser or altering them. Both diff images were shown inline
+to the user before acceptance.
 
 ## What changed
 
