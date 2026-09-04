@@ -31,9 +31,12 @@ of being drawn to a `<canvas>`.
 
 The shared shell loads the selected body from an open-ended object registry and
 mounts one retained scene and one camera. Each object package owns its
-scientific sources, textures, geometry, lighting, controls, and presentation
-choices. The shell owns navigation, information panels, loading, lifecycle, and
-responsive behavior.
+scientific sources, textures, geometry, lighting, optional control content, and
+material presentation. All objects use one shared camera controller for input,
+orientation, zoom, responsive fitting, and camera cleanup. The shell owns
+navigation, information panels, loading, lifecycle, and responsive behavior.
+The [generic contract proof](docs/generic-runtime-contract-proof.md) includes
+all registered objects and an unregistered fixture in real Chrome at DPR 1 and 2.
 
 ## Build and Runtime
 

@@ -126,7 +126,8 @@ test("keeps Sun projection on retained transform and visibility updates", async 
   assert.match(runtime, /root\.style\.top/u);
   assert.match(runtime, /root\.hidden/u);
   assert.match(client, /mountRetainedDirectionalSun/u);
-  assert.match(client, /mounted\.skySun\.setViewDirection/u);
+  assert.match(client, /directionalSun: mounted\.skySun/u);
+  assert.match(client, /createRetainedCubicSkyOrbit/u);
   assert.doesNotMatch(client, /google-maps-sun\.png|mw1\.google\.com/u);
   assert.doesNotMatch(css,
     /filter\s*:|mask(?:-image)?\s*:|clip-path\s*:|mix-blend-mode\s*:|gradient\(/u);

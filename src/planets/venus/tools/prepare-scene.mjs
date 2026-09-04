@@ -192,6 +192,7 @@ const prepared = Object.freeze({
     minimumZoom: 0.42,
     maximumZoom: 4,
     defaultZoom,
+    sceneScale: defaultZoom / TILE_SIZE,
     logicalBodyDiameter: RADIUS * 2,
     responsiveFit,
     horizontalOrbit: true,

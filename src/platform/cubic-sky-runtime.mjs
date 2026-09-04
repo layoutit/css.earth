@@ -1048,6 +1048,8 @@ export function createRetainedCubicSkyOrbit({
   return Object.freeze({
     mobilePageFlow: () => inputPolicy.mobile,
     initialResponsiveZoom: () => initialResponsiveZoom,
+    // Native cache notifications report failures through the same fatal owner.
+    invalidate: guardNative(publish),
     refresh() {
       if (lifetime.disposed) return;
       try { publish(); } catch (error) {

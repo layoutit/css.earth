@@ -1,5 +1,3 @@
-import { createPreparedCameraPublisher } from
-  "../../../platform/prepared-camera-runtime.mjs";
 import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
 import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
 import { createLatestSelection } from "../../../platform/latest-selection.mjs";
@@ -13,20 +11,9 @@ import { PREPARED_MARS_SKY_SUN } from "./preparedSkySun.mjs";
 import { createRowShardCache } from "./preparedRowCache.mjs";
 import { bindSpeedControl } from "../../../platform/planet-feature-controls.mjs";
 import {
-  createPolyCamera,
-  createPolyOrbitControls,
-} from "@layoutit/polycss";
-import {
-  createCubicSkyCameraOrientation,
-  createUnboundedMatrixDragControls,
-  measureRetainedPlanetFlyToDisc,
-  measureRetainedPlanetTrackball,
+  createRetainedCubicSkyOrbit,
   mountRetainedCubicSky,
-  preparedScenePitch,
-  selectPreparedResponsiveZoom,
 } from "../../../platform/cubic-sky-runtime.mjs";
-import { googleEarthDirectAngularDegreesPerTrackballRadius } from
-  "../../../platform/google-earth-drag-inertia.mjs";
 import { validatePreparedCubicSky } from
   "../../../platform/cubic-sky-contract.mjs";
 import { mountRetainedDirectionalSun } from
@@ -36,9 +23,7 @@ import { viewSunDirectionToPreparedLightDirection } from
 import { registerBodyDependentLayers } from
   "../../../platform/body-layer-registration.mjs";
 import {
-  bindResponsiveOrbitPolicy,
   CANONICAL_PREPARED_IMAGE_DENSITY,
-  MOBILE_VIEWPORT_QUERY,
 } from "../../../../site/runtime-policy.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
@@ -438,289 +423,47 @@ function mountPreparedBody(stage, plan, lifetime) {
 }
 
 function createMarsOrbit(stage, mounted, materialCache, shadowsVisible, lifetime, onError) {
-  const plan = PREPARED_MARS_CAMERA;
   const lighting = PREPARED_MARS_LIGHTING;
-  if (plan.schema !== "cssmars-prepared-camera@2" ||
-      lighting.schema !== "cssmars-prepared-lighting@5" ||
-      plan.cameraModel !== "accumulated-matrix3d" ||
-      plan.horizontalOrbit !== true || plan.pitchBounded !== false ||
-      plan.yawBounded !== false || !Number.isFinite(plan.sceneScale) ||
-      typeof shadowsVisible !== "function") {
-    throw new TypeError("Mars shared cubic-sky camera contract drifted.");
-  }
-  const camera = createPolyCamera(plan.state);
-  const orientation = createCubicSkyCameraOrientation({
-    controlPitch: camera.state.rotX,
-    controlYaw: camera.state.rotY,
-    cameraPlan: plan,
-    skyPlan: PREPARED_MARS_SCENE.starfield,
-    requireSun: false,
-    sunDirection: PREPARED_MARS_SKY_SUN.localDirection,
-    sunReferenceViewDirection:
-      PREPARED_MARS_SKY_SUN.referenceViewDirection,
-  });
-  const safeCamera = Object.freeze({
-    get state() {
-      return camera.state;
-    },
-    update(partial) {
-      camera.update({
-        ...partial,
-        ...(partial.zoom === undefined ? {} : {
-          zoom: clamp(partial.zoom, plan.minimumZoom, plan.maximumZoom),
-        }),
-      });
-    },
-  });
-  let interactionStarts = 0;
-  let interactionEnds = 0;
-  let publications = 0;
-  let destroyedOrbit = false;
-  const frames = new Set();
-  lifetime.onDispose(() => { destroyedOrbit = true; });
-  lifetime.onDispose(() => {
-    const pending = [...frames];
-    frames.clear();
-    const errors = [];
-    for (const frame of pending) {
-      try { cancelAnimationFrame(frame); } catch (error) { errors.push(error); }
-    }
-    if (errors.length) throw new AggregateError(errors, "Mars frame cleanup failed.");
-  });
-  let sunViewDirection = PREPARED_MARS_SKY_SUN.localDirection;
+  let sunViewDirection;
   let materialFrame = lighting.defaultFrame;
   let materialLightRollDegrees = 0;
   let lastMaterialPresentation = "";
-  let responsiveFit = null;
-
-  const publishCamera = createPreparedCameraPublisher({
+  const camera = createRetainedCubicSkyOrbit({
+    stage, inputSurface: stage,
     cameraElement: mounted.camera,
     sceneElement: mounted.scene,
+    cubicSky: mounted.cubicSky,
+    skyPlan: PREPARED_MARS_SCENE.starfield,
+    directionalSun: mounted.skySun,
+    directionalSunPlan: PREPARED_MARS_SKY_SUN,
+    cameraPlan: PREPARED_MARS_CAMERA,
     objectId: "mars",
-    defaultZoom: plan.defaultZoom,
-    sceneScale: plan.sceneScale,
+    mobilePreviewElement: stage.ownerDocument.querySelector(".planet-sidebar"),
+    onError,
+    onPublish(state) {
+      sunViewDirection = state.skySunViewDirection;
+      mounted.materialCounter.style.transform = state.counterRotation;
+      publishMaterialDirection(sunViewDirection);
+    },
   });
-  const publish = () => {
-    if (destroyedOrbit) return;
-    publishCamera({ sceneMatrix: orientation.scene(), zoom: safeCamera.state.zoom });
-    const skyboxOrientation = orientation.skybox();
-    mounted.cubicSky.setOrientation({
-      matrix: skyboxOrientation.matrix,
-      zoom: safeCamera.state.zoom,
-      defaultZoom: plan.defaultZoom,
-    });
-    sunViewDirection = skyboxOrientation.sunViewDirection;
-    mounted.skySun.setViewDirection(sunViewDirection);
-    mounted.materialCounter.style.transform = orientation.counterRotation();
-    publishMaterialDirection(skyboxOrientation.sunViewDirection);
-    publications += 1;
-  };
-  const schedule = () => {
-    handleRuntimeEvent(() => {
-      const frame = requestAnimationFrame(() => {
-        frames.delete(frame);
-        handleRuntimeEvent(publish);
-      });
-      frames.add(frame);
-    });
-  };
-  materialCache.onReady(schedule);
+  lifetime.onDispose(camera.destroy);
   lifetime.onDispose(() => materialCache.onReady(null));
-  const scene = Object.freeze({
-    host: stage,
-    cameraEl: mounted.camera,
-    sceneElement: mounted.scene,
-    camera: safeCamera,
-    applyCamera: () => handleRuntimeEvent(publish),
-  });
-  const mobileQuery = matchMedia(MOBILE_VIEWPORT_QUERY);
-  const wheelControls = createPolyOrbitControls(scene, {
-    drag: false,
-    wheel: !mobileQuery.matches,
-    minZoom: plan.minimumZoom,
-    maxZoom: plan.maximumZoom,
-  });
-  lifetime.onDispose(() => wheelControls.destroy());
-  const dragControls = createUnboundedMatrixDragControls({
-    onError,
-    inputSurface: stage,
-    trackballMetrics: () => Object.freeze({
-      ...measureRetainedPlanetTrackball({
-        stage,
-        cameraElement: mounted.camera,
-        logicalBodyDiameter: plan.logicalBodyDiameter,
-      }),
-      angularDegreesPerTrackballRadius:
-        googleEarthDirectAngularDegreesPerTrackballRadius(
-          safeCamera.state.zoom,
-        ),
-    }),
-    flyToTrackballMetrics: () => measureRetainedPlanetFlyToDisc({
-      stage,
-      cameraElement: mounted.camera,
-      logicalBodyDiameter: plan.logicalBodyDiameter,
-    }),
-    surfaceFlyToState: () => Object.freeze({
-      zoom: safeCamera.state.zoom,
-      minimumZoom: plan.minimumZoom,
-      maximumZoom: plan.maximumZoom,
-    }),
-    onStart() {
-      interactionStarts += 1;
-    },
-    onEnd() {
-      interactionEnds += 1;
-    },
-    rotate({ controlPitchDelta, controlYawDelta, zoom }) {
-      handleRuntimeEvent(() => {
-        const previousPitch = safeCamera.state.rotX;
-        safeCamera.update({
-          rotX: previousPitch + controlPitchDelta,
-          rotY: safeCamera.state.rotY + controlYawDelta,
-          ...(zoom === undefined ? {} : { zoom }),
-        });
-        orientation.rotate({
-          renderedPitchDelta:
-            preparedScenePitch(safeCamera.state.rotX, plan) -
-              preparedScenePitch(previousPitch, plan),
-          yawDelta: controlYawDelta,
-        });
-        publish();
-      });
-    },
-  });
-  lifetime.onDispose(() => dragControls.destroy());
-  const controls = Object.freeze({
-    update(options) {
-      wheelControls.update(options);
-      dragControls.update(options);
-    },
-    destroy() {
-      dragControls.destroy();
-      wheelControls.destroy();
-    },
-  });
-  const inputPolicy = bindResponsiveOrbitPolicy({
-    onError,
-    controls,
-    inputSurface: stage,
-    mediaQuery: mobileQuery,
-  });
-  lifetime.onDispose(() => inputPolicy.destroy());
-  const windowTarget = stage.ownerDocument.defaultView;
-  responsiveFit = selectPreparedResponsiveZoom({
-    stage,
-    cameraElement: mounted.camera,
-    plan,
-    mobile: inputPolicy.mobile,
-    mobilePreviewElement:
-      stage.ownerDocument.querySelector(".planet-sidebar"),
-  });
-  safeCamera.update({ zoom: responsiveFit.zoom });
-  const initialResponsiveZoom = responsiveFit.zoom;
-  const handleViewportResize = () => {
-    handleRuntimeEvent(() => {
-      responsiveFit = selectPreparedResponsiveZoom({
-        stage,
-        cameraElement: mounted.camera,
-        plan,
-        mobile: inputPolicy.mobile,
-        mobilePreviewElement:
-          stage.ownerDocument.querySelector(".planet-sidebar"),
-      });
-      publish();
-    });
-  };
-  lifetime.onDispose(() => windowTarget?.removeEventListener("resize", handleViewportResize));
-  windowTarget?.addEventListener("resize", handleViewportResize, {
-    passive: true,
-  });
-  publish();
-
+  materialCache.onReady(camera.invalidate);
   return Object.freeze({
-    initialResponsiveZoom() {
-      return initialResponsiveZoom;
-    },
-    refresh() {
-      publish();
-    },
-    setState({
-      pitch,
-      controlPitch = pitch,
-      controlYaw,
-      zoom,
-    } = {}) {
-      dragControls.stop();
-      const resetsOrientation = controlPitch !== undefined ||
-        controlYaw !== undefined;
-      safeCamera.update({
-        ...(controlPitch === undefined ? {} : { rotX: controlPitch }),
-        ...(controlYaw === undefined ? {} : { rotY: controlYaw }),
-        ...(zoom === undefined ? {} : { zoom }),
-      });
-      if (resetsOrientation) {
-        orientation.reset({
-          controlPitch: safeCamera.state.rotX,
-          controlYaw: safeCamera.state.rotY,
-        });
-      }
-      publish();
-      return this.state();
-    },
-    state() {
-      return Object.freeze({
-        pitch: safeCamera.state.rotX,
-        controlPitch: safeCamera.state.rotX,
-        controlYaw: safeCamera.state.rotY,
-        zoom: safeCamera.state.zoom,
-      });
-    },
+    ...camera,
     skyState() {
-      const sunPresentation = mounted.skySun.state();
       return Object.freeze({
+        ...camera.skyState(),
         sunViewDirection: Object.freeze([...sunViewDirection]),
-        sunVisible: sunPresentation.visible,
-        sunPresentation,
+        sunPresentation: mounted.skySun.state(),
         shadowsEnabled: shadowsVisible(),
         materialMode: shadowsVisible()
-          ? "directional-terminator-and-atmosphere"
-          : "full-phase-atmosphere",
+          ? "directional-terminator-and-atmosphere" : "full-phase-atmosphere",
         materialFrame,
         materialLightRollDegrees,
       });
     },
-    stats() {
-      return Object.freeze({
-        minimumPitchDegrees: plan.minimumControlPitchDegrees,
-        maximumPitchDegrees: plan.maximumControlPitchDegrees,
-        defaultControlPitchDegrees: plan.defaultControlPitchDegrees,
-        defaultControlYawDegrees: plan.defaultControlYawDegrees,
-        pitchBounded: plan.pitchBounded,
-        yawBounded: plan.yawBounded,
-        cameraModel: plan.cameraModel,
-        responsiveFitModel: responsiveFit.model,
-        responsiveWidthShare: responsiveFit.widthShare,
-        responsiveBaseZoom: responsiveFit.zoom,
-        interactionStarts,
-        interactionEnds,
-        publications,
-        dragInertia: dragControls.stats(),
-      });
-    },
-    destroy() {
-      if (destroyedOrbit) return;
-      destroyedOrbit = true;
-      windowTarget?.removeEventListener("resize", handleViewportResize);
-      materialCache.onReady(null);
-      inputPolicy.destroy();
-      controls.destroy();
-    },
   });
-
-  function handleRuntimeEvent(callback) {
-    if (lifetime.disposed || destroyedOrbit) return;
-    try { callback(); } catch (error) { onError(error); }
-  }
 
   function publishMaterialDirection(direction) {
     const materialDirection =
