@@ -4,9 +4,10 @@ This implements the [approved proposal](shared-runtime-architecture-proposal.md)
 in one architectural PR. It covers the Sun, Mercury, Venus, Earth, Moon, Mars,
 Jupiter, Saturn, Uranus, Neptune, and Pluto.
 
-Status: the shared architecture and explicitly authorized Earth repair are
-implemented. Source verification, all 612 tests, build, and the full headless
-browser suite pass.
+Status: the shared architecture, explicitly authorized Earth repair, and common
+orbit-controller migration are implemented. All eleven objects now construct
+the same retained orbit controller. See the [generic contract proof](generic-runtime-contract-proof.md)
+for the current source, browser, negative-control, and validation evidence.
 The inspected `earth-8x` raster workaround introduced close-up stretching and
 was withdrawn. On 2026-09-04, the user accepted the shown Earth screenshots,
 their Pixelmatch 0.1 comparisons, and the later complete fixed-six readback
@@ -149,6 +150,7 @@ mismatch. Evidence: `output/earth-affine-asset-reproducibility.md`.
 
 | Obligation | Executable evidence |
 | --- | --- |
+| One orbit controller for every package; unregistered IDs use the same contract | `site/test/generic-orbit-contract.test.mjs`, `site/test/generic-orbit-browser.mjs`, `site/test/object-orbit-failure.test.mjs` |
 | Playback policy and stale session isolation | `site/test/runtime-policy.test.mjs`, `site/test/router-runtime.test.mjs`, `site/test/runtime-playback-browser.mjs` |
 | Cleanup, cancellation, and callback failure | `src/platform/scene-lifetime.test.mjs`, `src/platform/cubic-sky-lifetime.test.mjs`, `site/test/shell-lifetime.test.mjs`, package lifetime tests |
 | Image ownership, late settlement, retry, and bounded caches | `src/platform/prepared-image-store.test.mjs` and object-owned row/group/neighborhood cache tests |
@@ -448,8 +450,10 @@ repeatability, and isolated calibration still do not count as strict acceptance.
 
 ## Generalized camera projection repair
 
-All object camera publications now use `src/platform/prepared-camera-runtime.mjs`,
-including Mercury, Venus, and Mars, which retain separate orbit controllers.
+All object camera publications use `src/platform/prepared-camera-runtime.mjs`
+through the same `createRetainedCubicSkyOrbit` controller. Mercury, Venus, and
+Mars now supply material publication hooks to that controller; their private
+camera state, input listeners, responsive fitting, and cleanup were removed.
 The publisher preserves the perspective and scene scale supplied by preparation.
 Zoom scales the entire camera; it does not move the scene toward the perspective
 plane. Responsive fitting removes that zoom factor before measuring the viewport.
@@ -462,7 +466,8 @@ repair. The offending depth projection was not in the earlier PR head. This PR
 now provides one publication path and a registry-derived regression gate so a
 future camera change cannot silently omit a separate object runtime.
 
-`site/test/prepared-camera-browser.mjs` runs first in `pnpm test:browser`. Every
+`site/test/prepared-camera-browser.mjs` follows the generic-controller proof in
+`pnpm test:browser`. Every
 registered object is checked in installed Chrome at DPR 1 and 2: default and
 rotated views, both zoom limits, real pointer drag, wheel zoom, retained identity,
 constant perspective and scene scale, and zero scene depth translation. Set
@@ -476,7 +481,10 @@ coverage in its prepared map, not an atmosphere fallback.
 
 ![Default object views at DPR 2](images/prepared-camera-all-objects.png)
 
-Local evidence: `output/playwright/pr2-generalized-camera-20260904/final-screenshots/`.
+The current preview comes from
+`output/playwright/pr2-generic-contract-20260904/final-camera/`.
+The earlier projection-repair evidence remains in
+`output/playwright/pr2-generalized-camera-20260904/final-screenshots/`.
 The repaired main checkout independently passed all 20 object/DPR combinations.
 A controlled mutation reinstating the projection function from local-main
 `d97c12a` failed the new test on Saturn's nonzero scene depth. The local main aggregate run hit unrelated sidebar-layout test failures; its
@@ -518,9 +526,10 @@ production endpoint or change shipped object rendering. The new protocol does
 not retroactively upgrade the earlier accepted report-only matrix or claim a
 new full strict comparison.
 
-## Follow-up validation: 2026-09-04
+## Projection-repair validation at `be3ddf6`: 2026-09-04
 
-The final branch run passed all required gates:
+That commit's branch run passed all required gates. The subsequent controller
+migration has its own [current validation record](generic-runtime-contract-proof.md).
 
 - `pnpm acquire:planets -- --verify-only`: all eleven registered objects.
 - `pnpm test`: 616 passing tests, zero failures.
@@ -553,7 +562,9 @@ silently discarded or relabeled as strict passes. The final complete diagnostic
 was accepted by explicit human review with its failures disclosed. Pixel
 tolerance and masks were not widened to hide a refactor regression.
 
-Source inputs and all non-Earth prepared assets are unchanged. The authorized
+Source inputs and all non-Earth prepared imagery are unchanged. Venus's prepared
+camera now explicitly supplies `sceneScale: 0.038`; removing that added field
+leaves its prepared scene identical to `be3ddf6`. The authorized
 Earth exception changes its preparation, manifest, generated scene and lens
 metadata, and reproducible public assets as described above. There is no new
 clock, scheduler, renderer, dependency, object registry, or placeholder object.

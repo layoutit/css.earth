@@ -1,35 +1,8 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { createPreparedCameraPublisher } from "./prepared-camera-runtime.mjs";
-import { createSceneLifetime } from "./scene-lifetime.mjs";
+import { Surface, orbitFixture } from "./test/orbit-fixture.mjs";
 import { createUnboundedMatrixDragControls } from "./cubic-sky-runtime.mjs";
 
-class Surface {
-  constructor() {
-    this.listeners = new Map();
-    this.style = { removeProperty: (name) => { delete this.style[name]; } };
-    this.ownerDocument = { defaultView: this };
-    this.frames = new Set();
-    this.nextFrame = 0;
-    this.captured = new Set();
-  }
-  addEventListener(name, callback) {
-    if (!this.listeners.has(name)) this.listeners.set(name, new Set());
-    this.listeners.get(name).add(callback);
-  }
-  removeEventListener(name, callback) { this.listeners.get(name)?.delete(callback); }
-  listenerCount() { return [...this.listeners.values()].reduce((sum, set) => sum + set.size, 0); }
-  dispatch(name, partial = {}) {
-    const event = { preventDefault() {}, pointerId: 1, button: 0, clientX: 0, clientY: 0, timeStamp: 0, ...partial };
-    for (const callback of this.listeners.get(name) ?? []) callback(event);
-  }
-  requestAnimationFrame() { const id = ++this.nextFrame; this.frames.add(id); return id; }
-  cancelAnimationFrame(id) { this.frames.delete(id); }
-  setPointerCapture(id) { this.captured.add(id); }
-  hasPointerCapture(id) { return this.captured.has(id); }
-  releasePointerCapture(id) { this.captured.delete(id); }
-}
 
 test("drag constructor removes partially attached listeners if initial style publication fails", () => {
   const previous = globalThis.HTMLElement;
@@ -75,16 +48,6 @@ test("drag destruction releases listeners and capture even if interaction comple
   } finally { globalThis.HTMLElement = previous; }
 });
 
-const source = await readFile(new URL("./cubic-sky-runtime.mjs", import.meta.url), "utf8");
-const start = source.indexOf("export function createRetainedCubicSkyOrbit(");
-const end = source.indexOf("\nexport function preparedScenePitch", start);
-const factory = new Function("dependencies", `const { createSceneLifetime, createPreparedCameraPublisher, HTMLElement,
-  validatePreparedCubicSky, validateDirectionalSunPlan, createPolyCamera,
-  createCubicSkyCameraOrientation, matchMedia, MOBILE_VIEWPORT_QUERY,
-  createUnboundedMatrixDragControls, createPolyOrbitControls, bindResponsiveOrbitPolicy,
-  selectPreparedResponsiveZoom, clamp } = dependencies;
-  ${source.slice(start, end).replace("export ", "")}
-  return createRetainedCubicSkyOrbit;`);
 
 test("live cubic publication failure retires every owner once before reporting fatal", () => {
   const fixture = orbitFixture(null);
@@ -157,50 +120,3 @@ test("cubic orbit destruction is idempotent and disables later camera publicatio
   assert.equal(orbit.stats().publications, publications);
   assert.equal(orbit.state().zoom, 1);
 });
-
-function orbitFixture(failure, cleanupFailure = false) {
-  const owners = new Set();
-  const stage = new Surface();
-  const acquire = (name) => {
-    if (failure === name) throw new Error(`${name} failure`);
-    owners.add(name);
-    return { mobile: false, update() {}, stop() {}, stats() { return {}; },
-      destroy() {
-        owners.delete(name);
-        if (cleanupFailure && name === "wheel") throw new Error("wheel cleanup failure");
-      },
-    };
-  };
-  const create = factory({
-    createSceneLifetime, createPreparedCameraPublisher, HTMLElement: Surface,
-    validatePreparedCubicSky() {}, validateDirectionalSunPlan() {},
-    createPolyCamera(state) { return { state, update(value) { Object.assign(state, value); } }; },
-    createCubicSkyCameraOrientation() {
-      return { scene: () => "matrix3d(1)", skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: null }),
-        counterRotation() {}, billboardCounterRotation() {}, reset() {},
-      };
-    },
-    matchMedia: () => ({ matches: false }), MOBILE_VIEWPORT_QUERY: "mobile",
-    createUnboundedMatrixDragControls: () => acquire("drag"),
-    createPolyOrbitControls: () => acquire("wheel"),
-    bindResponsiveOrbitPolicy: () => acquire("policy"),
-    selectPreparedResponsiveZoom() {
-      if (failure === "fit") throw new Error("fit failure");
-      return { zoom: 1, model: "unit", widthShare: 0.5 };
-    },
-    clamp: (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value)),
-  });
-  const cameraPlan = Object.fromEntries([
-    "minimumControlPitchDegrees", "maximumControlPitchDegrees", "defaultControlPitchDegrees",
-    "defaultControlYawDegrees", "initialScenePitchDegrees", "maximumScenePitchDegrees",
-    "minimumZoom", "maximumZoom", "defaultZoom", "sceneScale", "logicalBodyDiameter",
-  ].map((key) => [key, key === "maximumZoom" ? 10 : 1]));
-  Object.assign(cameraPlan, { cameraModel: "accumulated-matrix3d", pitchBounded: false, yawBounded: false });
-  return { create, owners, stage, arguments: {
-    onError(error) { throw error; },
-    stage, inputSurface: stage, cameraElement: new Surface(), sceneElement: new Surface(),
-    cubicSky: { root: { isConnected: true }, setOrientation() {} }, skyPlan: {},
-    cameraPlan, objectId: "unit", requireSun: false,
-    onPublish() { if (failure === "publish") throw new Error("publish failure"); },
-  } };
-}

@@ -1,8 +1,10 @@
 # Shared runtime architecture before catalog expansion
 
-Status: All five shared-runtime workstreams are implemented. The separately
-authorized Earth affine-texture repair is implemented. Source verification,
-612 tests, build, and the complete headless browser suite pass. On 2026-09-04,
+Status: All five shared-runtime workstreams and the common orbit-controller
+migration are implemented. All eleven registered objects use the same controller;
+an unregistered fixture exercises the generic adapter and controller in Chrome.
+See the [current generic contract proof](generic-runtime-contract-proof.md).
+The separately authorized Earth affine-texture repair is implemented. On 2026-09-04,
 the user accepted both the shown Earth comparisons and the complete fixed-six
 readback matrix described in the evidence record. The strict exact-pixel audit
 still reports baseline readback instability; it has not been relabeled as a
@@ -45,7 +47,9 @@ authorities are not. Passing the playback fix alone does not complete this PR.
 - Object-owned geometry, materials, scientific content, prepared inventories,
   camera plans, and retained rendering. Preserve stable DOM and existing bounded
   on-demand mount exceptions.
-- Existing camera input, inertia, fly-to, zoom limits, and responsive policy.
+- One shared implementation of camera input, state, inertia, fly-to, zoom limits,
+  responsive fitting, and failure cleanup: `createRetainedCubicSkyOrbit`.
+  Objects pass prepared camera plans and retained material publication hooks.
 - Existing animation mechanisms. **No new clock or time source.** Saturn's
   clock wrapper already drives native browser animations without a per-frame
   timer. Sharing playback decisions does not require replacing that wrapper.

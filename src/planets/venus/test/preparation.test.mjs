@@ -506,7 +506,7 @@ test("keeps Venus runtime code on prepared retained-DOM paths", async () => {
   assert.doesNotMatch(acquire, /\.\.\/\.\.\/saturn/u);
   assert.equal([...client.matchAll(/devicePixelRatio/gu)].length, 0);
   assert.match(client, /createPolyCamera/u);
-  assert.match(client, /createPolyOrbitControls/u);
+  assert.match(client, /createRetainedCubicSkyOrbit/u);
   assert.match(client, /createPolyScene/u);
   assert.doesNotMatch(client,
     /fetch\(|XMLHttpRequest|canvas|getContext\(|style\.filter/u);

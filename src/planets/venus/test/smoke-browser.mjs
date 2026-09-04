@@ -66,6 +66,7 @@ try {
     renderedPitch: Number(document.querySelector(".polycss-camera")
       ?.dataset.polycssCameraRotX),
   })), {
+    pitch: 34.230769230769226,
     controlPitch: 34.230769230769226,
     controlYaw: -105,
     zoom: 1.6196,

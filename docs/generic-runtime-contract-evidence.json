@@ -1,0 +1,989 @@
+{
+  "schema": "cssearth-generic-runtime-contract-evidence@1",
+  "date": "2026-09-04",
+  "previousHead": "be3ddf65d781bf08552afa35e0343cf7d0895299",
+  "baseUrl": "http://127.0.0.1:4230",
+  "mutation": false,
+  "source": {
+    "site/runtime-policy.mjs": "e2ebf4332c16b15d13c3c2da9b6a821e5430a81f45b0a1ce9d7871c9dd6c149e",
+    "src/platform/cubic-sky-contract.mjs": "18eee1cd2aa7a187c1556ba6ffbb94be481ffe2867180f3424d56e6a519ebb6e",
+    "src/platform/cubic-sky-runtime.mjs": "1f5ad005a24c93c532e2e6f0ce5498726da4c2013d63b9c13a30969d257cb68d",
+    "src/platform/directional-sun-contract.mjs": "99970f27799c30c4e188eb9a77ffbc481193980e2a5aeb4d3ce65f8a35c76048",
+    "src/platform/directional-sun-coordinate.mjs": "f97b6a128e920954dda86a3d33ede8d5830f09e8cfd4dceace6f0bc689c31cad",
+    "src/platform/google-earth-drag-inertia.mjs": "8e611e973b2b2db71f7272dda955f3526acbef08e5d1cd62d82835764f5da767",
+    "src/platform/google-earth-surface-fly-to.mjs": "ec89ee1e12afd696abcd897025f5fa714d73e77e23be66d0408fc5f8023a6447",
+    "src/platform/prepared-camera-runtime.mjs": "a5486ecbfab81260864e63da6373333bba4e097e09ce82610f1cf60adf7ba4c9",
+    "src/platform/scene-lifetime.mjs": "35f373a8ae62707bd6f82907c2a3ae0888ead608de93acc597080f6a764f0fe6",
+    "src/planets/sun/runtime/client.mjs": "b12348ae06460d84460a92cc6c204f2f80e6c8f4f465ec22a0740d3b8a33b74e",
+    "src/planets/mercury/runtime/client.mjs": "ade24894b3b20ed21e7fd0f8bd572f2a6d0a9c66f819645304e09d1965783988",
+    "src/planets/venus/runtime/client.mjs": "f52f3078237b0ff9104b3d3c1d8d1dbe6ddb3311b7938c4ac09a9afd84c5db42",
+    "src/planets/earth/runtime/client.mjs": "ade33fbfa3776dcb8549e8b5d34f1b3085eb0551e8ece67fc8960d54ab2b257e",
+    "src/planets/moon/runtime/client.mjs": "3126c2c9e79d896e4e0e47d1c157590cd0e74832bb0f865b8da8b93464cddc4a",
+    "src/planets/mars/runtime/client.mjs": "59317979e93d8b6a6b0bf0efd38c5100de845254c49052c9790d0fcfaa3a49c0",
+    "src/planets/jupiter/runtime/client.mjs": "bf01ff46c5ef6776c701cac781ecbbf72cf85703fb82e5fc201f2a8e12d156d2",
+    "src/planets/saturn/runtime/client.mjs": "1a0a94578f8ff6c6d7cb2dca0821acae93fabf2784aab9ff069a8a23911bfad7",
+    "src/planets/uranus/runtime/client.mjs": "9ed8886250f1b100266853160bfe79c7f68911b098f0f602da9a0d467b522a81",
+    "src/planets/neptune/runtime/client.mjs": "8fd0011b3bbf2868a9bd9dc0fed3ff243988d09fc298b5241e7c5115749b64d3",
+    "src/planets/pluto/runtime/client.mjs": "8207031226cf37039e8787c18e51efa152cda49dc5df8d49fc6c3e119b249e1e"
+  },
+  "ownership": {
+    "entries": [
+      {
+        "id": "sun",
+        "owner": "src/planets/sun/runtime/client.mjs",
+        "runtimeModules": 4,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "mercury",
+        "owner": "src/planets/mercury/runtime/client.mjs",
+        "runtimeModules": 8,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "venus",
+        "owner": "src/planets/venus/runtime/client.mjs",
+        "runtimeModules": 6,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "earth",
+        "owner": "src/planets/earth/runtime/client.mjs",
+        "runtimeModules": 7,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "moon",
+        "owner": "src/planets/moon/runtime/client.mjs",
+        "runtimeModules": 5,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "mars",
+        "owner": "src/planets/mars/runtime/client.mjs",
+        "runtimeModules": 9,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "jupiter",
+        "owner": "src/planets/jupiter/runtime/client.mjs",
+        "runtimeModules": 12,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "saturn",
+        "owner": "src/planets/saturn/runtime/client.mjs",
+        "runtimeModules": 11,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "uranus",
+        "owner": "src/planets/uranus/runtime/client.mjs",
+        "runtimeModules": 9,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "neptune",
+        "owner": "src/planets/neptune/runtime/client.mjs",
+        "runtimeModules": 8,
+        "sharedControllerCalls": 1
+      },
+      {
+        "id": "pluto",
+        "owner": "src/planets/pluto/runtime/client.mjs",
+        "runtimeModules": 5,
+        "sharedControllerCalls": 1
+      }
+    ],
+    "sharedClosure": [
+      "site/runtime-policy.mjs",
+      "src/platform/cubic-sky-contract.mjs",
+      "src/platform/cubic-sky-runtime.mjs",
+      "src/platform/directional-sun-contract.mjs",
+      "src/platform/directional-sun-coordinate.mjs",
+      "src/platform/google-earth-drag-inertia.mjs",
+      "src/platform/google-earth-surface-fly-to.mjs",
+      "src/platform/prepared-camera-runtime.mjs",
+      "src/platform/scene-lifetime.mjs"
+    ]
+  },
+  "registered": [
+    {
+      "id": "sun",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "sun",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "mercury",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "mercury",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "venus",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "venus",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "earth",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "earth",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "moon",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "moon",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "mars",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "mars",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "jupiter",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "jupiter",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "saturn",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "saturn",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "uranus",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "uranus",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "neptune",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "neptune",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "pluto",
+      "dpr": 1,
+      "calls": [
+        {
+          "objectId": "pluto",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "sun",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "sun",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "mercury",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "mercury",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "venus",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "venus",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "earth",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "earth",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "moon",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "moon",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "mars",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "mars",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "jupiter",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "jupiter",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "saturn",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "saturn",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "uranus",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "uranus",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "neptune",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "neptune",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    },
+    {
+      "id": "pluto",
+      "dpr": 2,
+      "calls": [
+        {
+          "objectId": "pluto",
+          "cameraIsMounted": true,
+          "sceneIsMounted": true
+        }
+      ],
+      "cameras": 1
+    }
+  ],
+  "unregistered": [
+    {
+      "dpr": 1,
+      "initial": {
+        "state": {
+          "pitch": 34,
+          "controlPitch": 34,
+          "controlYaw": 0,
+          "zoom": 1.296
+        },
+        "transform": "scale(0.04) matrix3d(1, 0, 0, 0, 0, 0.766044, 0.642788, 0, 0, -0.642788, 0.766044, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "dragged": {
+        "state": {
+          "pitch": 50.9,
+          "controlPitch": 50.9,
+          "controlYaw": 31.9,
+          "zoom": 1.296
+        },
+        "transform": "scale(0.04) matrix3d(0.849229, -0.0636381, -0.524176, 0, 0.297609, 0.877696, 0.375604, 0, 0.436165, -0.474973, 0.764304, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "wheeled": {
+        "state": {
+          "pitch": 56.3,
+          "controlPitch": 56.3,
+          "controlYaw": 48.12,
+          "zoom": 1.6579
+        },
+        "transform": "scale(0.04) matrix3d(0.670047, -0.107698, -0.734465, 0, 0.382734, 0.89789, 0.217504, 0, 0.636044, -0.426842, 0.642848, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "mobile": {
+        "state": {
+          "pitch": 56.3,
+          "controlPitch": 56.3,
+          "controlYaw": 48.12,
+          "zoom": 2
+        },
+        "transform": "scale(0.04) matrix3d(0.670047, -0.107698, -0.734465, 0, 0.382734, 0.89789, 0.217504, 0, 0.636044, -0.426842, 0.642848, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "restored": {
+        "state": {
+          "pitch": 56.3,
+          "controlPitch": 56.3,
+          "controlYaw": 48.12,
+          "zoom": 2
+        },
+        "transform": "scale(0.04) matrix3d(0.670047, -0.107698, -0.734465, 0, 0.382734, 0.89789, 0.217504, 0, 0.636044, -0.426842, 0.642848, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "retired": {
+        "cameras": 0,
+        "detached": true,
+        "inert": true
+      }
+    },
+    {
+      "dpr": 2,
+      "initial": {
+        "state": {
+          "pitch": 34,
+          "controlPitch": 34,
+          "controlYaw": 0,
+          "zoom": 1.296
+        },
+        "transform": "scale(0.04) matrix3d(1, 0, 0, 0, 0, 0.766044, 0.642788, 0, 0, -0.642788, 0.766044, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "dragged": {
+        "state": {
+          "pitch": 50.9,
+          "controlPitch": 50.9,
+          "controlYaw": 31.9,
+          "zoom": 1.296
+        },
+        "transform": "scale(0.04) matrix3d(0.849229, -0.0636381, -0.524176, 0, 0.297609, 0.877696, 0.375604, 0, 0.436165, -0.474973, 0.764304, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "wheeled": {
+        "state": {
+          "pitch": 56.31,
+          "controlPitch": 56.31,
+          "controlYaw": 48.11,
+          "zoom": 1.4658
+        },
+        "transform": "scale(0.04) matrix3d(0.669951, -0.107785, -0.73454, 0, 0.382755, 0.897921, 0.21734, 0, 0.636132, -0.426756, 0.642818, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "mobile": {
+        "state": {
+          "pitch": 56.31,
+          "controlPitch": 56.31,
+          "controlYaw": 48.11,
+          "zoom": 2
+        },
+        "transform": "scale(0.04) matrix3d(0.669951, -0.107785, -0.73454, 0, 0.382755, 0.897921, 0.21734, 0, 0.636132, -0.426756, 0.642818, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "restored": {
+        "state": {
+          "pitch": 56.31,
+          "controlPitch": 56.31,
+          "controlYaw": 48.11,
+          "zoom": 2
+        },
+        "transform": "scale(0.04) matrix3d(0.669951, -0.107785, -0.73454, 0, 0.382755, 0.897921, 0.21734, 0, 0.636132, -0.426756, 0.642818, 0, 0, 0, 0, 1)",
+        "perspective": "1e+06px",
+        "retained": true,
+        "calls": [
+          "unregistered-contract-probe"
+        ]
+      },
+      "retired": {
+        "cameras": 0,
+        "detached": true,
+        "inert": true
+      }
+    }
+  ],
+  "browser": "152.0.7977.76",
+  "harness": {
+    "tools/generic-orbit-contract.mjs": "1f7ca9e01ee3a173911aaf23b9b7240745b3aa58bf822597a581042ea3af3b3d",
+    "site/test/generic-orbit-contract.test.mjs": "a843b83ab73fa29f70f61ea68fe5cd37896a37cb6f5aaf78c06bf5dd629f1a29",
+    "site/test/generic-orbit-browser.mjs": "5660efa3871dc70ea3caca743512d1cfa9d0901e2354b6390dec56250ea6a645",
+    "site/test/object-orbit-failure.test.mjs": "1b17ab0adba5243e32f5b194b0b16afb4eb5f22aad5207bdab7334e202648ffa",
+    "src/platform/test/orbit-fixture.mjs": "4f12229882bc2847fccf13420864d525431388137549258f038b3a0844fa7b81",
+    "src/platform/test/object-material-orbit-fixture.mjs": "ef828cee91b83a5fbf02722235d079699c6cd3d1540801ad0f31aa8ec5e0759e",
+    "site/test/prepared-camera-browser.mjs": "b19f55ff8057eb5858c23003f0eeb59478a4e945d1568547df80044896903189",
+    "tools/test-browser.mjs": "4adba320a88a2e0b4f648c0ebd305249f9652971049bb131123d0cb4fb748e6d"
+  },
+  "negativeControls": {
+    "previousHead": {
+      "oldHead": "be3ddf65d781bf08552afa35e0343cf7d0895299",
+      "oldHeadRejected": "src/planets/mercury/runtime/client.mjs: createPreparedCameraPublisher belongs to the shared controller",
+      "current": {
+        "entries": [
+          {
+            "id": "sun",
+            "owner": "src/planets/sun/runtime/client.mjs",
+            "runtimeModules": 4,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "mercury",
+            "owner": "src/planets/mercury/runtime/client.mjs",
+            "runtimeModules": 8,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "venus",
+            "owner": "src/planets/venus/runtime/client.mjs",
+            "runtimeModules": 6,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "earth",
+            "owner": "src/planets/earth/runtime/client.mjs",
+            "runtimeModules": 7,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "moon",
+            "owner": "src/planets/moon/runtime/client.mjs",
+            "runtimeModules": 5,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "mars",
+            "owner": "src/planets/mars/runtime/client.mjs",
+            "runtimeModules": 9,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "jupiter",
+            "owner": "src/planets/jupiter/runtime/client.mjs",
+            "runtimeModules": 12,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "saturn",
+            "owner": "src/planets/saturn/runtime/client.mjs",
+            "runtimeModules": 11,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "uranus",
+            "owner": "src/planets/uranus/runtime/client.mjs",
+            "runtimeModules": 9,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "neptune",
+            "owner": "src/planets/neptune/runtime/client.mjs",
+            "runtimeModules": 8,
+            "sharedControllerCalls": 1
+          },
+          {
+            "id": "pluto",
+            "owner": "src/planets/pluto/runtime/client.mjs",
+            "runtimeModules": 5,
+            "sharedControllerCalls": 1
+          }
+        ],
+        "sharedClosure": [
+          "site/runtime-policy.mjs",
+          "src/platform/cubic-sky-contract.mjs",
+          "src/platform/cubic-sky-runtime.mjs",
+          "src/platform/directional-sun-contract.mjs",
+          "src/platform/directional-sun-coordinate.mjs",
+          "src/platform/google-earth-drag-inertia.mjs",
+          "src/platform/google-earth-surface-fly-to.mjs",
+          "src/platform/prepared-camera-runtime.mjs",
+          "src/platform/scene-lifetime.mjs"
+        ]
+      }
+    },
+    "hardcodedWhitelist": {
+      "error": "page.evaluate: Error: mutation: hardcoded object registry\n    at createRetainedCubicSkyOrbit (http://127.0.0.1:4230/src/platform/cubic-sky-runtime.mjs:792:126)\n    at eval (eval at evaluate (:302:30), <anonymous>:36:26)\n    at eval (eval at evaluate (:302:30), <anonymous>:42:25)\n    at async <anonymous>:328:30\n    at /Users/ekrof/fed/cssEarth-runtime/site/test/generic-orbit-browser.mjs:49:18"
+    }
+  },
+  "validation": {
+    "acquire": "passed",
+    "unitTests": 629,
+    "build": "passed",
+    "fullBrowser": "passed",
+    "conformanceCases": 143,
+    "projectionCases": 22,
+    "projectionScreenshots": 154
+  },
+  "legacyPerformance": {
+    "status": "failed existing retained-node budget",
+    "initialElementBudget": 540,
+    "measured": {
+      "previous-head": {
+        "stageElements": 1814,
+        "retainedLeaves": 900
+      },
+      "current": {
+        "stageElements": 1814,
+        "retainedLeaves": 900
+      }
+    }
+  },
+  "savedFrameDiagnostic": {
+    "note": "Diagnostic saved-frame comparison, not a qualified strict baseline. Crop: x 620, y 0, width 2260, height 1740 pixels.",
+    "comparisons": [
+      {
+        "id": "sun",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "mercury",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "venus",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "earth",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "moon",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "mars",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "jupiter",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "saturn",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "uranus",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "neptune",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "pluto",
+        "name": "default",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "sun",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "mercury",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "venus",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "earth",
+        "name": "rotated",
+        "mismatch": 348,
+        "total": 3932400
+      },
+      {
+        "id": "moon",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "mars",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "jupiter",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "saturn",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "uranus",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "neptune",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "pluto",
+        "name": "rotated",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "sun",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "mercury",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "venus",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "earth",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "moon",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "mars",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "jupiter",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "saturn",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "uranus",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "neptune",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "pluto",
+        "name": "minimum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "sun",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "mercury",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "venus",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "earth",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "moon",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "mars",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "jupiter",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "saturn",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "uranus",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "neptune",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      },
+      {
+        "id": "pluto",
+        "name": "maximum",
+        "mismatch": 0,
+        "total": 3932400
+      }
+    ]
+  },
+  "preview": {
+    "output": "docs/images/prepared-camera-all-objects.png",
+    "inputs": [
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/sun-dpr2-default.png",
+        "sha256": "4592a7601bf7534eb6e98d1a1c1b9439769a1241f752caf5f9aa630090fec86f"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/mercury-dpr2-default.png",
+        "sha256": "e0fe81d89bc294d133cd341207fb3926cc9207f9442543135f85dd32cbf7274f"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/venus-dpr2-default.png",
+        "sha256": "3c7e69375170a762051ef6d29c454b78e379035dbd2a237978243a4c6b226795"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/earth-dpr2-default.png",
+        "sha256": "d00370a57e7010cc156a18d0981dbfe8577fece37fdddb732a9fa6fa73c99ed7"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/moon-dpr2-default.png",
+        "sha256": "9ae2fd57cbf69755615b488dbf67c2df3a629a57845b45e2028c388ad4cba4b3"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/mars-dpr2-default.png",
+        "sha256": "8ec3b61cb87e609cd5df0945d758fde8c946b39a71731c897f78c43be1a85c31"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/jupiter-dpr2-default.png",
+        "sha256": "6ef2852d7fab5205eac45025feea4197ed20a219eec27ed337806064d890c45a"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/saturn-dpr2-default.png",
+        "sha256": "35a8b050bf9f15d16967c052f7ba8ac6c506f24b5e65187ef3e729a17123ffa4"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/uranus-dpr2-default.png",
+        "sha256": "4cbdcab973afe95c58c4676b86a29629bde21c4c9a1ee511389c0e76d0126ff3"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/neptune-dpr2-default.png",
+        "sha256": "ea452aef7766f53a9b457a6062d96b71447149881b263037600eb37835ebfbe8"
+      },
+      {
+        "path": "output/playwright/pr2-generic-contract-20260904/final-camera/pluto-dpr2-default.png",
+        "sha256": "3b425f2a12f13ea78d3fb4ab4ed634c22ceb87e5c9ce490069ac682277dbe11d"
+      }
+    ]
+  },
+  "localEvidenceHashes": {
+    "output/playwright/pr2-generic-contract-20260904/acquire.log": "fbb77ae1f6d7b73f69876be6802f6642810b725543d7ee0127f97bfad8069c7f",
+    "output/playwright/pr2-generic-contract-20260904/test.log": "51114147482686f480c4f970de29fee554610de396883c5cb5138d989e8ed92d",
+    "output/playwright/pr2-generic-contract-20260904/build.log": "f1bd959070c7a0a8283061de9d65fcc0771b27f8fad8c0fcf20f4606f70a5251",
+    "output/playwright/pr2-generic-contract-20260904/browser.log": "a5d90f29d294d7b1e2cec651868c650b7d8b4145e70b40ab488bcf7682390d63",
+    "output/playwright/pr2-generic-contract-20260904/source-ownership-proof.json": "f43d0de685bbcf4e845bf6685c5ed4ea9043525864ab6e56fc01c3f2c7caf47b",
+    "output/playwright/pr2-generic-contract-20260904/final-contract/report.json": "74ea6dbda944a7596cc2515383be9a3f5ca7586d28ad8dcecc6cb57993d58b1b",
+    "output/playwright/pr2-generic-contract-20260904/final-camera/report.json": "161324b6f5c2699f4f93533a4d24f89354ec1698fec1518b44c6461addadb01e",
+    "output/playwright/pr2-generic-contract-20260904/rejected-whitelist/report.json": "4585e784bfff923f4357206fdfef685921e58553ea0b445315be9bd205f336f9",
+    "output/playwright/pr2-generic-contract-20260904/mercury-node-comparison.json": "1d336a72325358a5a19fa81075c869fe310c217d3c1ae8f6577621392cfea44b",
+    "output/playwright/pr2-generic-contract-20260904/pose-inspection.json": "f8d0b0a7e91a2c0bed1a8ecc41542ee9271a41c1edd6ba04affe813c4ca0e640",
+    "output/playwright/pr2-generic-contract-20260904/preview-inputs.json": "278c6f7952bb9c67f9a4a74026c592e4b65decf6ac800af9db6ec1507b717d4f"
+  }
+}

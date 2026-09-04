@@ -13,7 +13,7 @@ test("keeps Mercury runtime free of network, alternate renderers, and forbidden 
     `${client}\n${styles}`,
     /--mercury-(?:camera-zoom-scale|disc-zoom)/u,
   );
-  assert.match(client, /createPreparedCameraPublisher/u);
+  assert.match(client, /createRetainedCubicSkyOrbit/u);
   assert.match(client, /materialRoot\.style\.scale/u);
   assert.match(client,
     /resume\(\) \{[\s\S]*?shouldPlay = true;[\s\S]*?if \(!mounted\) return;/u);
