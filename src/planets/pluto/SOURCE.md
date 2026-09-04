@@ -35,14 +35,20 @@ The provider pages and labels are checked in alongside the data.
 
 ## Observation limits and authored choices
 
-Black regions are missing observations, not a dark hemisphere or fabricated
-terrain. Neither mosaic nor DEM covers all of Pluto. Source resolution varies
-across the flyby mosaic. The original gaps remain black through preparation.
-Texture interpolation/compression may soften their edges; no surface is inpainted.
+Neither mosaic nor DEM covers all of Pluto. Source resolution varies across the
+flyby mosaic. A neutral gray cartographic grid marks identified gaps; it is not
+terrain or inferred observations. The source maps remain unchanged on disk.
+For the color JPEG, only exactly black pixels connected to the southern border
+are marked. Nonzero JPEG edge pixels remain untouched, so a dark boundary fringe
+can remain. The monochrome product reserves zero for gaps; the DEM uses −32,768.
+Coverage is sampled separately before image interpolation. No surface is inpainted.
 
 The full 2:1 maps use north-to-south latitude rows and a common 0–360° longitude
 domain. Atlas rows are reversed inside each retained latitude band and polar
-leaves are resampled at prepare time. The source maps remain unchanged on disk.
+leaves are resampled at prepare time. Regular-face projective warps are baked
+into RGBA atlas cells; the browser retains affine frames and flat child textures.
+This avoids Chrome's triangular projective-child flattening artifacts without
+changing the shared renderer or deriving geometry at runtime.
 The DEM uses nearest source samples before this atlas conversion. Its authored
 blue/tan/red palette is linear at −8/0/+8 km and clips outside that range.
 It is an elevation color overlay, not geometry displacement or surface color.
@@ -63,6 +69,7 @@ refreshed. Git contains the metadata, provider snapshots, title source, and
 license notices. No additional source-provider registry is required.
 
 Acceptance requires the same unskipped Chrome conformance matrix as every other
-object, including DPR 1/2, lens races, fly-to, speed, retained identity, visibility,
+object, including both display-scale conditions using the same highest-density
+bank, lens races, fly-to, speed, retained identity, visibility,
 and teardown. Test passes do not establish native-image parity. Fresh capture
 and Saturn scene-regression reports are recorded separately in the PR evidence.

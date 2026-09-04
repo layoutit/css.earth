@@ -6,12 +6,10 @@ import { markerStyle } from "../../src/navigation/marker-presentation.mjs";
 interface Props {
   planetId: string;
   color: string;
-  index: number;
-  count: number;
   scale?: number;
 }
 
-const { planetId, color, index, count, scale = 1 } = Astro.props;
+const { planetId, color, scale = 1 } = Astro.props;
 const { ringed, style } = markerStyle(PREPARED_NAVIGATION_MARKERS[planetId], { color, scale });
 ---
 

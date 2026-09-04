@@ -25,6 +25,9 @@ export function validateMarkerDescriptor(descriptor) {
     throw new TypeError("Navigation marker descriptor is invalid.");
   }
   validateMarkerSource(descriptor.source);
+  if (descriptor.owner === "object" && !httpOrigin(descriptor.source.origin)) {
+    throw new TypeError("Object marker source must have an HTTP(S) origin.");
+  }
   for (const operation of descriptor.operations) validateOperation(operation);
   if (descriptor.operations.at(-1).type !== "png") {
     throw new TypeError("Navigation marker recipe must end with png.");
@@ -42,6 +45,11 @@ export function validateMarkerSource(source) {
     throw new TypeError("Navigation marker source is invalid.");
   }
   return source;
+}
+
+function httpOrigin(value) {
+  try { return ["http:", "https:"].includes(new URL(value).protocol); }
+  catch { return false; }
 }
 
 export async function validateMarkerSourceBytes(source, sourcePath) {

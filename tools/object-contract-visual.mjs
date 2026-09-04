@@ -1,19 +1,41 @@
 import assert from "node:assert/strict";
 import sharp from "sharp";
 
-// Require repeated identical captures. The caller supplies the bounded settling
-// interval so unit tests do not need a browser or timers.
-export async function stableCapture(capture, { maxAttempts = 24, requiredMatches = 3 } = {}) {
+// Stability alone is not completeness. Every caller must explicitly validate
+// its settled frame; the scene audit uses independent pinned coverage probes.
+export async function stableCapture(capture, { validate, maxAttempts = 24, requiredMatches = 3 } = {}) {
+  assert.equal(typeof validate, "function", "Capture needs an independent validator");
   assert.ok(Number.isInteger(requiredMatches) && requiredMatches >= 2);
   assert.ok(Number.isInteger(maxAttempts) && maxAttempts >= requiredMatches);
   let previous, matches = 0;
   for (let attempts = 1; attempts <= maxAttempts; attempts++) {
     const png = await capture();
     matches = previous?.equals(png) ? matches + 1 : 1;
-    if (matches >= requiredMatches) return { png, attempts };
+    if (matches >= requiredMatches) return { png, attempts, validation: await validate(png) };
     previous = png;
   }
   throw new Error(`Visual capture did not stabilize in ${maxAttempts} attempts.`);
+}
+
+// Physical-pixel probes must be fixed independently of the frames being tested.
+// This is a missing-region sentinel, not whole-image or native-renderer parity.
+export async function assertSceneCoverage(png, { width, height, regions, threshold = 60 }) {
+  const { data, info } = await sharp(png).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  assert.equal(info.width, width, "Scene coverage width changed");
+  assert.equal(info.height, height, "Scene coverage height changed");
+  assert.ok(regions.length > 0, "Scene coverage needs independent regions");
+  return regions.map(({ name, x, y, width: w, height: h, minimumFraction }) => {
+    assert.ok([x, y, w, h].every(Number.isInteger) && x >= 0 && y >= 0 && w > 0 && h > 0 && x + w <= width && y + h <= height, "Invalid scene coverage region");
+    assert.ok(minimumFraction > 0 && minimumFraction <= 1, "Invalid scene coverage floor");
+    let visible = 0;
+    for (let row = y; row < y + h; row++) for (let col = x; col < x + w; col++) {
+      const i = (row * width + col) * 4;
+      if (data[i] > threshold && data[i + 1] > threshold && data[i + 2] > threshold && data[i + 3] === 255) visible++;
+    }
+    const fraction = visible / (w * h);
+    assert.ok(fraction >= minimumFraction, `Incomplete scene: ${name} coverage ${fraction.toFixed(4)} < ${minimumFraction}`);
+    return { name, visible, pixels: w * h, fraction, minimumFraction };
+  });
 }
 
 // Regions are physical-pixel rectangles for intentional marker-raster changes

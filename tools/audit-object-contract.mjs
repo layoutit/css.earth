@@ -5,7 +5,8 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
-import { compareCaptures, stableCapture } from "./object-contract-visual.mjs";
+import { assertSceneCoverage, compareCaptures, stableCapture } from "./object-contract-visual.mjs";
+import { SATURN_COVERAGE_PROTOCOL, saturnSceneCoverage } from "./saturn-scene-coverage.mjs";
 
 const mode = process.argv[2];
 assert.ok(["baseline", "candidate"].includes(mode));
@@ -66,7 +67,8 @@ try {
         await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
         await page.waitForTimeout(100);
       };
-      const stable = async (target, label) => {
+      const coverage = saturnSceneCoverage(width, dpr);
+      const stable = async (target, label, scene = false) => {
         const frames = [];
         try {
           return await stableCapture(async () => {
@@ -74,7 +76,9 @@ try {
             const png = await target.screenshot();
             frames.push(png);
             return png;
-          });
+          }, { validate: (png) => scene || width === 1440
+            ? assertSceneCoverage(png, coverage)
+            : { qualification: "Overlays obscure the probes; coverage is checked on the unmasked scene." } });
         } catch (error) {
           for (const [index, png] of frames.entries()) await writeFile(resolve(output, `${prefix}-${label}-unstable-${index}.png`), png);
           throw new Error(`INVALID ${prefix} ${label}: ${error.message}`, { cause: error });
@@ -87,7 +91,7 @@ try {
         // Hide only shell overlays. The scene is compared with no exclusions.
         const hidden = await page.addStyleTag({ content: "body > :not(.planet-stage):not(script):not(style), .planet-stage ~ * { visibility:hidden!important } .planet-stage { visibility:visible!important }" });
         let scene;
-        try { scene = await stable(stage, `scene-${attempt}`); }
+        try { scene = await stable(stage, `scene-${attempt}`, true); }
         finally { await hidden.evaluate((element) => element.remove()); }
         const restored = await stable(page, `restored-${attempt}`);
         const roundTrip = await compareCaptures(shell.png, restored.png);
@@ -103,16 +107,17 @@ try {
       assert.ok(verifiedAssets.size > 0, "No Saturn browser asset bytes verified");
       const loadedAssets = [...verifiedAssets].sort();
       if (captures.length) assert.deepEqual(loadedAssets, captures[0].verifiedAssets, "Viewport or screen scaling changed the selected Saturn asset bank");
-      captures.push({ prefix, shellSha256: sha(accepted.shell.png), sceneSha256: sha(accepted.scene.png), markerRegions, captureAttempts, verifiedAssets: loadedAssets });
+      captures.push({ prefix, shellSha256: sha(accepted.shell.png), sceneSha256: sha(accepted.scene.png), coverage: accepted.scene.validation, markerRegions, captureAttempts, verifiedAssets: loadedAssets });
       await context.close();
     }
   }
 } catch (error) { errors.push(error.stack); }
 finally { await browser.close(); }
-const report = { mode, baseUrl, sourceRoot, capturedAt: new Date().toISOString(), browser: browser.version(), channel: "chrome", headless: true, markerRasterFringePhysicalPixels: 1, fingerprints, captures, errors, comparisons: [] };
+const report = { mode, baseUrl, sourceRoot, capturedAt: new Date().toISOString(), browser: browser.version(), channel: "chrome", headless: true, coverageProtocol: SATURN_COVERAGE_PROTOCOL, markerRasterFringePhysicalPixels: 1, fingerprints, captures, errors, comparisons: [] };
 try { if (mode === "candidate" && errors.length === 0) {
   const baseline = JSON.parse(await readFile(resolve(root, "baseline/report.json")));
   assert.equal(baseline.errors.length, 0, "Baseline has browser or asset errors");
+  assert.equal(baseline.coverageProtocol, SATURN_COVERAGE_PROTOCOL, "Baseline needs independent scene coverage validation");
   assert.equal(report.markerRasterFringePhysicalPixels, baseline.markerRasterFringePhysicalPixels, "Marker comparison protocol changed");
   assert.deepEqual(fingerprints, baseline.fingerprints, "Saturn prepared/runtime bytes changed");
   assert.equal(report.browser, baseline.browser, "Chrome version changed");

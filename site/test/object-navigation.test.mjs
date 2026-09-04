@@ -23,6 +23,9 @@ test("search contains every object, including the Sun; only planets enter the sc
 });
 
 test("prepared marker identity, atlas order, and presentation follow packages", async () => {
+  for (const [searchIndex, { id }] of PLANET_SEARCH_OBJECTS.entries()) {
+    assert.equal(PREPARED_NAVIGATION_MARKERS[id].index, searchIndex, `Search/atlas order drifted: ${id}`);
+  }
   const descriptors = await loadMarkerDescriptors();
   assert.deepEqual(Object.keys(PREPARED_NAVIGATION_MARKERS), descriptors.map(({ planetId }) => planetId));
   for (const [index, descriptor] of descriptors.entries()) {

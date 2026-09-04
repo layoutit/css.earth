@@ -9,6 +9,12 @@ const OBJECT_INPUT_KEYS = new Set([
   "description",
 ]);
 
+// Classification vocabulary, not a registry of object identities. Extend this
+// list deliberately when a package introduces a new kind of body.
+export const OBJECT_CLASSIFICATIONS = Object.freeze([
+  "star", "planet", "satellite", "dwarf-planet", "asteroid", "comet",
+]);
+
 export function defineObject(input) {
   if (!input || typeof input !== "object" || Array.isArray(input)) {
     throw new TypeError("Object definition must be an object.");
@@ -20,7 +26,7 @@ export function defineObject(input) {
   }
 
   const { id, name, classification, color, distanceAu, route, loadScene, description } = input;
-  if (!safeId(id) || !nonEmpty(name) || !safeId(classification) ||
+  if (!safeId(id) || !nonEmpty(name) || !OBJECT_CLASSIFICATIONS.includes(classification) ||
       !/^#[0-9a-f]{6}$/u.test(color ?? "") ||
       !Number.isFinite(distanceAu) || distanceAu < 0 ||
       route !== `/${id}/` || typeof loadScene !== "function" ||
