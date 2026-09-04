@@ -17,7 +17,7 @@ import {
 } from "../../../platform/cubic-sky-runtime.mjs";
 import { validatePreparedCubicSky } from
   "../../../platform/cubic-sky-contract.mjs";
-import { viewSunDirectionToPreparedLightDirection } from
+import { viewSunDirectionToPhysicalLightDirection } from
   "../../../platform/directional-sun-coordinate.mjs";
 import { mountRetainedDirectionalSun } from
   "../../../platform/directional-sun-runtime.mjs";
@@ -428,6 +428,13 @@ export function mountMercuryClient(stage) {
       sunDirection: PREPARED_MERCURY_SKY_SUN.localDirection,
       sunReferenceViewDirection:
         PREPARED_MERCURY_SKY_SUN.referenceViewDirection,
+      // Mercury's Sun direction is observed, so it stays fixed in the
+      // prepared scene frame instead of following the presentation sky, and
+      // the overlay below uses the physical light map: a Sun on screen means
+      // the camera sees the night side. The stars ride the same scene matrix
+      // so they cross the screen exactly like the Sun.
+      sunTracksScene: true,
+      skyTracksScene: true,
     });
     const safeCamera = Object.freeze({
       get state() {
@@ -447,7 +454,7 @@ export function mountMercuryClient(stage) {
     let publications = 0;
     let destroyedOrbit = false;
     let skySunViewDirection = PREPARED_MERCURY_SKY_SUN.referenceViewDirection;
-    let sunViewDirection = viewSunDirectionToPreparedLightDirection(
+    let sunViewDirection = viewSunDirectionToPhysicalLightDirection(
       skySunViewDirection,
     );
     let materialFrame = PREPARED_MERCURY_SCENE.material.defaultFrame;
@@ -464,7 +471,7 @@ export function mountMercuryClient(stage) {
         defaultZoom: plan.defaultZoom,
       });
       skySunViewDirection = skyboxOrientation.sunViewDirection;
-      sunViewDirection = viewSunDirectionToPreparedLightDirection(
+      sunViewDirection = viewSunDirectionToPhysicalLightDirection(
         skySunViewDirection,
       );
       mounted.skySun.setViewDirection(skySunViewDirection);
@@ -960,7 +967,11 @@ export function mountMercuryClient(stage) {
         setState: orbit.setState,
         stats: orbit.stats,
       }),
-      sky: Object.freeze({ state: orbit.skyState }),
+      sky: Object.freeze({
+        state: orbit.skyState,
+        sceneRegistration: PREPARED_MERCURY_SCENE.starfield.sceneRegistration,
+        sunLocalDirection: PREPARED_MERCURY_SKY_SUN.localDirection,
+      }),
       lenses: Object.freeze({
         state: lensControls.state,
         select: lensControls.select,
@@ -999,7 +1010,8 @@ function validatePreparedStarfield() {
     requireSun: false,
   });
   if (PREPARED_MERCURY_SCENE.starfield.cameraContract !==
-      "inverse-unbounded-accumulated-matrix3d") {
+        "scene-locked-unbounded-accumulated-matrix3d" ||
+      typeof PREPARED_MERCURY_SCENE.starfield.sceneRegistration !== "string") {
     throw new TypeError("Mercury cubic-sky camera binding is incompatible.");
   }
 }
