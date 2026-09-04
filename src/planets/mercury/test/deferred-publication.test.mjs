@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { createPreparedCameraPublisher } from "../../../platform/prepared-camera-runtime.mjs";
 import { createSceneLifetime } from "../../../platform/scene-lifetime.mjs";
 
 // Execute the actual object-owned camera with minimal transport/input fixtures.
@@ -10,7 +11,7 @@ const start = source.indexOf("  function createVerticalOrbit() {");
 const end = source.indexOf("\n  function publishMaterialFrame(", start);
 const factory = new Function("dependencies", `const {
   PREPARED_MERCURY_SCENE, PREPARED_MERCURY_SKY_SUN, PREPARED_MERCURY_ASSETS,
-  createPolyCamera, createCubicSkyCameraOrientation, viewSunDirectionToPreparedLightDirection,
+  createPreparedCameraPublisher, createPolyCamera, createCubicSkyCameraOrientation, viewSunDirectionToPreparedLightDirection,
   lifetime, onError, mounted, inputSurface, stage, createPolyOrbitControls,
   createUnboundedMatrixDragControls, matchMedia, MOBILE_VIEWPORT_QUERY,
   bindResponsiveOrbitPolicy, selectPreparedResponsiveZoom, materialCache,
@@ -23,7 +24,7 @@ for (const origin of ["cache-ready", "wheel", "resize", "refresh", "setState", "
     const lifetime = createSceneLifetime(), errors = [], owners = new Set(), listeners = new Map();
     let readyCallback, wheelScene, dragOptions, policyOptions, fail = false, writes = 0;
     const style = {};
-    Object.defineProperty(style, "transform", { set() {
+    Object.defineProperty(style, "scale", { set() {
       if (fail) throw new Error("Mercury style publication failed");
       writes += 1;
     } });
@@ -32,15 +33,15 @@ for (const origin of ["cache-ready", "wheel", "resize", "refresh", "setState", "
       removeEventListener: (name) => listeners.delete(name) };
     const acquire = (name) => { owners.add(name); return { mobile: false, update() {}, stop() {}, stats: () => ({}),
       destroy: () => owners.delete(name) }; };
-    const orbit = factory({ lifetime, onError(error) {
+    const orbit = factory({ createPreparedCameraPublisher, lifetime, onError(error) {
       assert.equal(lifetime.disposed, true);
       assert.equal(owners.size, 0);
       errors.push(error);
     }, stage, inputSurface: { ownerDocument: { defaultView: windowTarget } },
-      mounted: { sceneRoot: { style }, cameraRoot: { style: {} }, materialRoot: { style: {} },
+      mounted: { sceneRoot: { style: {} }, cameraRoot: { style: {} }, materialRoot: { style },
         materialLeaf: {}, cubicSky: { setOrientation() {} }, skySun: { setViewDirection() {} }, viewBank: { syncPitch() {} } },
       PREPARED_MERCURY_SCENE: { camera: { cameraModel: "accumulated-matrix3d", horizontalOrbit: true,
-        pitchBounded: false, yawBounded: false, sceneScale: 1, state: { zoom: 1 },
+        pitchBounded: false, yawBounded: false, sceneScale: 1, defaultZoom: 1, state: { zoom: 1 },
         defaultControlPitchDegrees: 30, defaultControlYawDegrees: 0, minimumZoom: 0.1, maximumZoom: 4 }, starfield: {}, material: { defaultFrame: 0 } },
       PREPARED_MERCURY_SKY_SUN: { referenceViewDirection: [0, 0, 1] }, PREPARED_MERCURY_ASSETS: { lighting: {} },
       createPolyCamera(state) { return { state, update: (value) => Object.assign(state, value) }; },

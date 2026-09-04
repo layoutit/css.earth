@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { createPreparedCameraPublisher } from "./prepared-camera-runtime.mjs";
 import { createSceneLifetime } from "./scene-lifetime.mjs";
 import { createUnboundedMatrixDragControls } from "./cubic-sky-runtime.mjs";
 
@@ -77,7 +78,7 @@ test("drag destruction releases listeners and capture even if interaction comple
 const source = await readFile(new URL("./cubic-sky-runtime.mjs", import.meta.url), "utf8");
 const start = source.indexOf("export function createRetainedCubicSkyOrbit(");
 const end = source.indexOf("\nexport function preparedScenePitch", start);
-const factory = new Function("dependencies", `const { createSceneLifetime, HTMLElement,
+const factory = new Function("dependencies", `const { createSceneLifetime, createPreparedCameraPublisher, HTMLElement,
   validatePreparedCubicSky, validateDirectionalSunPlan, createPolyCamera,
   createCubicSkyCameraOrientation, matchMedia, MOBILE_VIEWPORT_QUERY,
   createUnboundedMatrixDragControls, createPolyOrbitControls, bindResponsiveOrbitPolicy,
@@ -171,7 +172,7 @@ function orbitFixture(failure, cleanupFailure = false) {
     };
   };
   const create = factory({
-    createSceneLifetime, HTMLElement: Surface,
+    createSceneLifetime, createPreparedCameraPublisher, HTMLElement: Surface,
     validatePreparedCubicSky() {}, validateDirectionalSunPlan() {},
     createPolyCamera(state) { return { state, update(value) { Object.assign(state, value); } }; },
     createCubicSkyCameraOrientation() {

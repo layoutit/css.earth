@@ -24,6 +24,7 @@ export function createSceneRouter({
   let destroyed = false;
   let nextGeneration = 0;
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
+  let reducedMotionActive = false;
 
   // These survive scene teardown so a persisted document can restore itself.
   windowTarget.addEventListener("pagehide", destroyActiveScene);
@@ -57,9 +58,10 @@ export function createSceneRouter({
       documentTarget.addEventListener("visibilitychange", syncPlayback);
       session.lifetime.onDispose(() =>
         documentTarget.removeEventListener("visibilitychange", syncPlayback));
-      reducedMotion?.addEventListener("change", syncPlayback);
+      reducedMotionActive = reducedMotion?.matches === true;
+      reducedMotion?.addEventListener("change", syncReducedMotion);
       session.lifetime.onDispose(() =>
-        reducedMotion?.removeEventListener("change", syncPlayback));
+        reducedMotion?.removeEventListener("change", syncReducedMotion));
       publishSceneState();
       const shell = mountShell({
         objectId, documentTarget, windowTarget, motionEnabled,
@@ -106,7 +108,7 @@ export function createSceneRouter({
       ...automaticPlaybackPolicy({
         sceneState, motionRequested: motionEnabled,
         documentHidden: documentTarget.hidden,
-        reducedMotion: reducedMotion?.matches === true,
+        reducedMotion: reducedMotionActive,
       }),
     });
   }
@@ -119,6 +121,13 @@ export function createSceneRouter({
       mountedObjectCount: active?.mount ? 1 : 0,
       ready: sceneState === "ready",
     });
+  }
+
+  function syncReducedMotion() {
+    // Reading MediaQueryList.matches can update Chrome's change baseline.
+    // Sample at notification boundaries, never from diagnostic getters.
+    reducedMotionActive = reducedMotion?.matches === true;
+    syncPlayback();
   }
 
   function syncPlayback() {

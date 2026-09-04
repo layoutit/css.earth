@@ -374,7 +374,7 @@ The fixture is preserved as diagnostic evidence, not an accepted baseline.
 
 Its full headless run produced 96 repeatable conditions, 192 phase images,
 and 576 sequence frames, with no capture errors. Independent checks verified
-124 served-source hashes, 800 repository harness hashes, 76 prepared/manifest
+124 checkout-file hashes, 800 repository harness hashes, 76 prepared/manifest
 fingerprints, 293 unique loaded assets, and all 44 Saturn coverage probes.
 The record is `output/shared-runtime-visual-earth-fix/baseline/report.json`.
 **Repeatability was not image-quality acceptance:** visual inspection found
@@ -409,10 +409,10 @@ alone did not supply a validated fix.
 
 ### Strict capture contract and accepted report-only comparison
 
-The audit is `immutable-headless-native-readback-pairs@4`: installed Chrome,
+The earlier audit was `immutable-headless-native-readback-pairs@4`: installed Chrome,
 hardware renderer/device identity, enabled GPU composition and rasterization,
 zero GPU crashes, matched recorded repository harness inputs, and unchanged
-served source hashes. It retains all 88 original conditions and adds eight
+checkout-file hashes. It retains all 88 original conditions and adds eight
 object-owned Earth exterior/cutaway close-ups at the existing maximum zoom,
 two widths, and two display scales: 96 conditions and 192 phase comparisons.
 No software-composited or headed result can qualify this protocol.
@@ -425,10 +425,14 @@ still fails its independent repeatability check, so these commands reproduce
 the strict path, not the accepted report-only matrix:
 
 ```sh
-node tools/audit-shared-runtime.mjs baseline http://127.0.0.1:4281 \
+# Start dedicated servers in separate terminals using unused ports:
+node tools/serve-shared-runtime-audit.mjs /Users/ekrof/fed/cssEarth-runtime-earth-affine-baseline 4293
+node tools/serve-shared-runtime-audit.mjs /Users/ekrof/fed/cssEarth-runtime 4292
+# Then capture with this same harness:
+node tools/audit-shared-runtime.mjs baseline http://127.0.0.1:4293 \
   /Users/ekrof/fed/cssEarth-runtime-earth-affine-baseline output/shared-runtime-visual-new
 # Only after the complete baseline has no errors:
-node tools/audit-shared-runtime.mjs candidate http://127.0.0.1:4230 \
+node tools/audit-shared-runtime.mjs candidate http://127.0.0.1:4292 \
   /Users/ekrof/fed/cssEarth-runtime output/shared-runtime-visual-new
 ```
 
@@ -436,11 +440,105 @@ Use a fresh evidence directory for every attempt. Both recorded servers display
 the same Git-derived `Version 0.6` build metadata. For a fresh reproduction,
 keep that metadata matched too: apply the candidate diff without committing it
 to a second checkout of the same base before starting its server. Do not mask
-the label. The audit verifies the rendered label and served source hashes.
+the label. The current audit verifies the rendered label, checkout identity, source snapshot, server session, and application response hashes.
 The complete fixed-six report-only matrix is recorded and explicitly accepted
 above. That decision closes this PR's visual gate without claiming that the
 strict exact protocol passed. Failed raw-main captures, the rejected trial's
 repeatability, and isolated calibration still do not count as strict acceptance.
+
+## Generalized camera projection repair
+
+All object camera publications now use `src/platform/prepared-camera-runtime.mjs`,
+including Mercury, Venus, and Mars, which retain separate orbit controllers.
+The publisher preserves the perspective and scene scale supplied by preparation.
+Zoom scales the entire camera; it does not move the scene toward the perspective
+plane. Responsive fitting removes that zoom factor before measuring the viewport.
+Object-owned material companions continue to receive the same zoom.
+
+This closes the gap exposed by the later local-main camera change: changing
+perspective and depth separated Saturn's material disc from its body and rings,
+and Mars's separate camera left its atmospheric rim detached after a shared-only
+repair. The offending depth projection was not in the earlier PR head. This PR
+now provides one publication path and a registry-derived regression gate so a
+future camera change cannot silently omit a separate object runtime.
+
+`site/test/prepared-camera-browser.mjs` runs first in `pnpm test:browser`. Every
+registered object is checked in installed Chrome at DPR 1 and 2: default and
+rotated views, both zoom limits, real pointer drag, wheel zoom, retained identity,
+constant perspective and scene scale, and zero scene depth translation. Set
+`CSSEARTH_CAMERA_OUTPUT` to retain the screenshots and measured report.
+
+The 2026-09-04 run retained 154 screenshots across 22 object/DPR combinations
+(Chrome 152.0.7977.76, 1440×900 CSS pixels). The default, rotated, close-up and
+post-input views were inspected. All eleven objects passed the projection and
+retained-identity assertions. The gray grid on Pluto represents missing source
+coverage in its prepared map, not an atmosphere fallback.
+
+![Default object views at DPR 2](images/prepared-camera-all-objects.png)
+
+Local evidence: `output/playwright/pr2-generalized-camera-20260904/final-screenshots/`.
+The repaired main checkout independently passed all 20 object/DPR combinations.
+A controlled mutation reinstating the projection function from local-main
+`d97c12a` failed the new test on Saturn's nonzero scene depth. The local main aggregate run hit unrelated sidebar-layout test failures; its
+aggregate gates are not reported as passing.
+
+## Playback notification consistency
+
+The complete browser run exposed intermittent resume failures on Jupiter and Mars
+when reduced motion was cleared. The router's diagnostic getter reevaluated
+`MediaQueryList.matches` while polling for playback. In [Chrome 152's implementation](https://github.com/chromium/chromium/blob/152.0.7977.76/third_party/blink/renderer/core/css/media_query_list.cc#L82-L112),
+that getter updates the same match baseline used to decide whether a change
+notification is needed. Reading it before notification could leave the diagnostic
+policy ahead of the applied scene state.
+
+The router now samples the preference when mounting and when its native change
+event arrives. Playback getters read that applied snapshot. A regression test
+covers reads before notification and preference changes while the document is
+in the back/forward cache. The browser playback test and its five-second deadline
+remain unchanged.
+
+## Served-source identity correction
+
+The earlier protocols hashed checkout files and verified scene asset responses.
+They did not bind the served application code to that checkout. Their historical
+records remain as captured, but do not prove served-code identity.
+
+Current strict protocol `immutable-headless-native-readback-pairs@5` and diagnostic
+protocol `report-only-fixed-six-native-readbacks@3` require the dedicated server
+above. It fingerprints the served source tree, reports its canonical checkout
+path and a fresh session identifier, and stamps every response. The audit checks
+those fields before capture, on every browser response, after each condition,
+and at completion. It also records the actual HTML, JavaScript and CSS response
+hashes alongside prepared asset hashes. A source change retires the server;
+a restart requires a new audit. Ordinary dev servers and mismatched checkout
+paths are rejected before any capture can be attributed to them.
+
+The server instrumentation lives only in the audit tools. It does not add a
+production endpoint or change shipped object rendering. The new protocol does
+not retroactively upgrade the earlier accepted report-only matrix or claim a
+new full strict comparison.
+
+## Follow-up validation: 2026-09-04
+
+The final branch run passed all required gates:
+
+- `pnpm acquire:planets -- --verify-only`: all eleven registered objects.
+- `pnpm test`: 616 passing tests, zero failures.
+- `pnpm build`: passed.
+- `pnpm test:browser http://127.0.0.1:4230`: passed as one complete run.
+
+The browser run includes all 22 object/DPR projection cases and 154 screenshots,
+143 conformance cases, 22 playback cases, six complex interaction cases, real
+back/forward restoration for all eleven objects, and each object's smoke tests.
+The final playback run passed after the router correction, with the existing
+browser test and timeout unchanged. Earlier failed runs remain in local evidence.
+
+Logs and screenshot reports are in
+`output/playwright/pr2-generalized-camera-20260904/`: `acquire.log`,
+`test-final.log`, `build-final.log`, `browser-fixed-final.log`, and
+`final-screenshots/report.json`. The served-source tooling probe independently
+verified 91 response identities and hashes; an ordinary server was rejected
+before capture. This is a tooling check, not a new full strict visual comparison.
 
 ## Evidence limits
 

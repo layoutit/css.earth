@@ -1,3 +1,4 @@
+import { createPreparedCameraPublisher } from "../../../platform/prepared-camera-runtime.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -386,6 +387,7 @@ function localOrbitFixture(id) {
   };
   const cache = { onReady(callback) { f.callbacks.ready = callback; }, presentation: () => null };
   const dependencies = {
+    createPreparedCameraPublisher,
     PREPARED_MARS_CAMERA, PREPARED_MARS_LIGHTING, PREPARED_MARS_SCENE, PREPARED_MARS_SKY_SUN,
     PREPARED_VENUS_SCENE, PREPARED_VENUS_SKY_SUN, BASE_TILE: 64,
     MOBILE_VIEWPORT_QUERY: "mobile", matchMedia: () => ({ matches: false }),
@@ -394,7 +396,9 @@ function localOrbitFixture(id) {
       return { state, update(value) { Object.assign(state, value); } };
     },
     createCubicSkyCameraOrientation: () => ({
-      scene: () => "matrix3d(1)", skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: [1, 0, 0] }),
+      // Force a changed scene so the retained publisher reaches the failing
+      // style boundary rather than correctly skipping an idle write.
+      scene: () => f.failPublication ? "matrix3d(2)" : "matrix3d(1)", skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: [1, 0, 0] }),
       counterRotation: () => "matrix3d(1)", rotate() {}, reset() {},
     }),
     createPolyOrbitControls(scene) { f.callbacks.wheel = scene; return acquire("wheel"); },

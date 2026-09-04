@@ -1,3 +1,5 @@
+import { createPreparedCameraPublisher } from
+  "../../../platform/prepared-camera-runtime.mjs";
 import { createPolyCamera, createPolyOrbitControls } from "@layoutit/polycss";
 
 import {
@@ -483,11 +485,17 @@ export function mountMercuryClient(stage, { onError } = {}) {
     );
     let materialFrame = PREPARED_MERCURY_SCENE.material.defaultFrame;
     let materialLightRollDegrees = 0;
+    const publishCamera = createPreparedCameraPublisher({
+      cameraElement: mounted.cameraRoot,
+      sceneElement: mounted.sceneRoot,
+      objectId: "mercury",
+      defaultZoom: plan.defaultZoom,
+      sceneScale: plan.sceneScale,
+    });
     const publish = () => {
       if (destroyedOrbit || lifetime.disposed || !mounted) return;
       const controlPitch = safeCamera.state.rotX;
-      mounted.sceneRoot.style.transform =
-        `scale(${plan.sceneScale}) ${orientation.scene()}`;
+      publishCamera({ sceneMatrix: orientation.scene(), zoom: safeCamera.state.zoom });
       const skyboxOrientation = orientation.skybox();
       mounted.cubicSky.setOrientation({
         matrix: skyboxOrientation.matrix,
@@ -500,10 +508,6 @@ export function mountMercuryClient(stage, { onError } = {}) {
       );
       mounted.skySun.setViewDirection(skySunViewDirection);
       mounted.viewBank.syncPitch(controlPitch);
-      const zoomScale = safeCamera.state.zoom / plan.state.zoom;
-      mounted.cameraRoot.style.scale =
-        "calc(var(--mercury-shell-scale) / (" +
-        `var(--planet-viewport-zoom-divisor) / ${zoomScale}))`;
       mounted.materialRoot.style.scale =
         "calc(var(--mercury-shell-scale) / (" +
         `var(--planet-viewport-zoom-divisor) / ${safeCamera.state.zoom}))`;
