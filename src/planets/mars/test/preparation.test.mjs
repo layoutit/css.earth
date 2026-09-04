@@ -71,7 +71,7 @@ test("keeps preparation-only files out of public output", async () => {
     "utf8",
   );
   assert.match(packageSource,
-    /"prepare:planets": "pnpm prepare:titles && pnpm prepare:planet-title-sources && pnpm prepare:scientific-charts && node tools\/run-implemented-planets\.mjs prepare"/u);
+    /"prepare:planets": "pnpm prepare:titles && pnpm prepare:planet-title-sources && pnpm prepare:scientific-charts && node tools\/run-implemented-planets\.mjs prepare && pnpm prepare:navigation"/u);
   assert.doesNotMatch(packageSource, /"prepare:(?:mars|saturn)"/u);
 });
 test("prepares the Mars shell title without a runtime font", () => {

@@ -25,17 +25,19 @@ test("derives search results and navigation from the one object registry", async
     readFile(new URL("../maps-search-client.mjs", import.meta.url), "utf8"),
   ]);
   assert.match(registryView, /import \{ OBJECTS \} from "\.\/objects\.mjs";/u);
-  assert.match(registryView, /OBJECTS[\s\S]*?filter\(\(\{ distanceAu \}\) => distanceAu > 0\)[\s\S]*?toSorted/u);
+  assert.match(registryView, /objectNavigation\(OBJECTS\)/u);
   for (const source of [explorer, shell]) {
     assert.match(source, /import PlanetObjectResults from "\.\/PlanetObjectResults\.astro";/u);
     assert.match(source, /<PlanetObjectResults/u);
     assert.doesNotMatch(source, /OBJECTS\.map|planet-object-marker|planet-object-browser-title/u);
   }
-  assert.match(results, /PLANET_SEARCH_OBJECTS\.map\(\(object, index\)/u);
+  assert.match(results, /PLANET_SEARCH_OBJECTS\.map\(\(object\)/u);
   assert.match(results, /href=\{object\.route\}/u);
   assert.match(results, /data-object-id=\{object\.id\}/u);
   assert.match(results, /import PlanetNavigationMarker from "\.\/PlanetNavigationMarker\.astro";/u);
-  assert.match(results, /<PlanetNavigationMarker[\s\S]*?planetId=\{object\.id\}[\s\S]*?index=\{index\}/u);
+  assert.match(results, /<PlanetNavigationMarker[\s\S]*?planetId=\{object\.id\}/u);
+  assert.doesNotMatch(results, /index=|count=/u);
+  assert.match(results, /object\.classification === "star" && object\.distanceAu === 0 \? "Our star"/u);
   assert.match(results, /class="planet-object-distance-value">\{object\.distanceAu\}<\/span>\{" "\}[\s\S]*?class="planet-object-distance-unit">AU<\/span>/u);
   assert.match(client, /querySelectorAll\("\[data-maps-search\]"\)/u);
   assert.match(client, /item\.dataset\.objectName\?\.includes\(query\)/u);
@@ -98,10 +100,11 @@ test("keeps the Maps-style shell separate from retained object rendering", async
   assert.match(styles, /\.planet-object-distance-unit\s*\{\s*font-size:\s*12px;\s*\}/u);
   assert.match(results, /import PlanetNavigationMarker from "\.\/PlanetNavigationMarker\.astro";/u);
   assert.match(results, /<PlanetNavigationMarker[\s\S]*?planetId=\{object\.id\}/u);
-  assert.match(marker, /mercury:[\s\S]*?size: 5[\s\S]*?saturn:[\s\S]*?ringAngle: -18, ringExtra: 14, ringHeight: 6[\s\S]*?neptune:[\s\S]*?ringAngle: -28/u);
+  assert.match(marker, /markerStyle\(PREPARED_NAVIGATION_MARKERS\[planetId\]/u);
+  assert.doesNotMatch(marker, /mercury:|saturn:|neptune:/u);
   assert.match(markerStyles, /url\("\/navigation\/planet-markers@2x\.webp"\)/u);
   assert.doesNotMatch(markerStyles, /image-set\(|planet-markers\.webp/u);
-  assert.match(markerStyles, /\.planet-navigation-marker\.saturn::before[\s\S]*?outline-offset:\s*1px;/u);
+  assert.match(markerStyles, /outline-offset:\s*var\(--planet-ring-outline-offset, 0\);/u);
   const pathData = (source) => [...source.matchAll(/<path[\s\S]*?\sd="([^"]+)"/gu)].map((match) => match[1]);
   assert.equal(pathData(reusedWordmark).length, 2);
   assert.match(styles, /\.planet-sidebar \.maps-object-results/u);

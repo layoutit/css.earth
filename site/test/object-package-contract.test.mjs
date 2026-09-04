@@ -1,17 +1,41 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { createHash } from "node:crypto";
+import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { dirname, resolve } from "node:path";
 
 import { OBJECTS } from "../objects.mjs";
-import { planetInformationSource } from "../../tools/planet-information-sources.mjs";
+import { planetInformationSource, validatePlanetEditorial } from "../../tools/planet-information-sources.mjs";
 import {
   objectPackagePaths,
   validateObjectPackageFiles,
   validatePlanetData,
-  validatePlanetEditorial,
   validateRuntimeAssetManifest,
 } from "../../tools/object-package-contract.mjs";
 
 const implemented = OBJECTS;
+
+test("accepts a complete non-NASA package and still rejects corrupt or undeclared bytes", async (context) => {
+  const projectRoot = await mkdtemp(resolve(tmpdir(), "cssearth-provider-neutral-"));
+  context.after(() => rm(projectRoot, { recursive: true, force: true }));
+  const object = { id: "local-body", name: "LocalBody" };
+  const paths = objectPackagePaths(object, projectRoot);
+  for (const file of paths.requiredFiles) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
+  const bytes = Buffer.from("owned prepared bytes");
+  const hash = createHash("sha256").update(bytes).digest("hex");
+  await mkdir(paths.publicAssets, { recursive: true });
+  await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
+  await writeFile(resolve(paths.sourceRoot, "local-data.bin"), bytes);
+  await writeFile(paths.runtimeAssets, JSON.stringify({ schema: "csslocal-body-runtime-assets@1", assets: [{ filename: "surface.webp", bytes: bytes.length, sha256: hash }] }));
+  await writeFile(paths.sourceManifest, JSON.stringify({ schema: "csslocal-body-authoritative-sources@1", inputs: [{ id: "local", path: "local-data.bin", expectedSha256: hash, expectedBytes: bytes.length, origin: "Project-authored test fixture", credit: "cssEarth", license: "MIT", acquisition: "Checked local fixture", redistribution: "MIT", consumers: ["scene"] }], generatedIntermediates: [], documents: [] }));
+  assert.deepEqual(await validatePlanetData(object, { projectRoot }), { assetCount: 1, sourceInputCount: 1 });
+  await writeFile(resolve(paths.publicAssets, "surface.webp"), "corrupt");
+  await assert.rejects(validatePlanetData(object, { projectRoot }), /runtime asset drifted/);
+  await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
+  await writeFile(resolve(paths.sourceRoot, "undeclared.bin"), "hidden source");
+  await assert.rejects(validatePlanetData(object, { projectRoot }), /undeclared|Undeclared|closure/);
+});
 
 test("derives the complete owned file contract from planet identity", () => {
   const planet = implemented[0];
@@ -34,9 +58,7 @@ test("derives the complete owned file contract from planet identity", () => {
   assert.ok(paths.requiredFiles.includes(
     `/project/src/planets/${planet.id}/tools/acquire.mjs`,
   ));
-  assert.ok(paths.requiredFiles.includes(
-    `/project/data/planets/${planet.id}.json`,
-  ));
+  assert.ok(paths.requiredFiles.every((file) => !file.includes('/data/planets/')));
 });
 
 test("requires every registered object package file", async () => {
@@ -115,5 +137,5 @@ test("verifies checked-in data and runtime asset bytes for every object package"
   for (const planet of implemented) results.push(await validatePlanetData(planet));
   assert.ok(results.every(({ assetCount }) => assetCount > 0));
   assert.ok(results.every(({ sourceInputCount }) => sourceInputCount > 0));
-  assert.ok(results.every(({ editorialSourceId }) => editorialSourceId > 0));
+  assert.ok(results.every((result) => !('editorialSourceId' in result)));
 });

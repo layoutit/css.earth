@@ -1,7 +1,6 @@
 ---
 import {
   PLANET_NAVIGATION_OBJECTS,
-  PLANET_SEARCH_OBJECTS,
 } from "../planet-search-objects.mjs";
 import {
   PLANETARY_SCALE_LABEL,
@@ -9,6 +8,8 @@ import {
 } from "../planetary-scale.mjs";
 import { MOBILE_VIEWPORT_QUERY } from "../runtime-policy.mjs";
 import "../planetary-scale.css";
+import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
+import { markerStyle } from "../../src/navigation/marker-presentation.mjs";
 
 interface Props {
   activeObjectId: string;
@@ -16,38 +17,15 @@ interface Props {
 
 const { activeObjectId } = Astro.props;
 const orbitingObjects = PLANET_NAVIGATION_OBJECTS;
-const markerPresentation = Object.freeze({
-  mercury: Object.freeze({ size: 5 }),
-  venus: Object.freeze({ size: 7 }),
-  earth: Object.freeze({ size: 7 }),
-  moon: Object.freeze({ size: 6 }),
-  mars: Object.freeze({ size: 6 }),
-  jupiter: Object.freeze({ size: 16, ringAngle: -2, ringExtra: 12, ringHeight: 5 }),
-  saturn: Object.freeze({ size: 15, ringAngle: -18, ringExtra: 20, ringHeight: 7 }),
-  uranus: Object.freeze({ size: 10, ringAngle: 78, ringExtra: 11, ringHeight: 4 }),
-  neptune: Object.freeze({ size: 10, ringAngle: -28, ringExtra: 11, ringHeight: 4 }),
-});
-
-const stops = positionPlanetsByDistance(orbitingObjects).map((objectRecord, index) => {
-  const presentation = markerPresentation[objectRecord.id];
-  if (!presentation) return null;
-  const ringed = presentation.ringAngle !== undefined;
+const stops = positionPlanetsByDistance(orbitingObjects).map((objectRecord) => {
+  const { ringed, style } = markerStyle(PREPARED_NAVIGATION_MARKERS[objectRecord.id], { color: objectRecord.color, view: "scale" });
   return Object.freeze({
     ...objectRecord,
     active: objectRecord.id === activeObjectId,
     ringed,
-    style: [
-      `--planet-offset:${objectRecord.scalePositionPercent}%`,
-      `--planet-color:${objectRecord.color}`,
-      `--planet-size:${presentation.size}px`,
-      `--planet-marker-count:${PLANET_SEARCH_OBJECTS.length}`,
-      `--planet-marker-position:${((PLANET_SEARCH_OBJECTS.findIndex(({ id }) => id === objectRecord.id) / (PLANET_SEARCH_OBJECTS.length - 1)) * 100).toFixed(4)}%`,
-      ringed ? `--planet-ring-angle:${presentation.ringAngle}deg` : "",
-      ringed ? `--planet-ring-extra:${presentation.ringExtra}px` : "",
-      ringed ? `--planet-ring-height:${presentation.ringHeight}px` : "",
-    ].filter(Boolean).join(";"),
+    style: `--planet-offset:${objectRecord.scalePositionPercent}%;${style}`,
   });
-}).filter(Boolean);
+});
 ---
 
 <details class="planetary-navigation">

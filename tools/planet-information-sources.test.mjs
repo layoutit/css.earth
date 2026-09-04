@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFile } from "node:fs/promises";
 
 import {
   PLANET_INFORMATION_SOURCES,
@@ -7,7 +8,14 @@ import {
   validatePlanetInformationSnapshot,
 } from "./planet-information-sources.mjs";
 
-test("owns the exact NASA Science records for every renderable object", () => {
+test("validates every checked snapshot owned by the NASA editorial importer", async () => {
+  for (const source of PLANET_INFORMATION_SOURCES) {
+    const snapshot = JSON.parse(await readFile(new URL(`../data/planets/${source.id}.json`, import.meta.url), "utf8"));
+    assert.equal(validatePlanetInformationSnapshot(snapshot), source);
+  }
+});
+
+test("owns the exact records in the existing NASA editorial collection", () => {
   assert.deepEqual(
     PLANET_INFORMATION_SOURCES.map(({ id, sourceId }) => [id, sourceId]),
     [

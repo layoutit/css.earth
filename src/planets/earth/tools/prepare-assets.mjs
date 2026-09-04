@@ -3,6 +3,7 @@
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
+import { textureTintFactors } from "@layoutit/polycss";
 import { packProjectiveSurfaceRaster } from
   "../../../platform/projective-surface-raster.mjs";
 import {

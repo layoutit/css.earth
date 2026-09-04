@@ -311,7 +311,9 @@ try {
   assert.ok(Math.abs(Math.hypot(...initialMaterialState.sunViewDirection) - 1) <
     1e-9);
   assert.ok(Number.isFinite(initialMaterialState.lightRollDegrees));
-  await drag(page, 0, 150);
+  // At zoom 1, 150 px turns about 44.5 degrees and is not a short pitch.
+  // Keep this local-lighting check below 9 degrees; wide drags follow below.
+  await drag(page, 0, 30);
   assert.ok((await page.evaluate(() => window.__venus.camera.state().controlPitch)) >
     34.230769230769226);
   const materialAfterShortPitch = await page.evaluate(() =>

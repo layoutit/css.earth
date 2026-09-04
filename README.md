@@ -55,8 +55,9 @@ pnpm acquire:planets -- --verify-only
 pnpm prepare:planets
 ```
 
-Planet descriptions are prepared separately from NASA Science and committed
-under `data/planets/`:
+The existing NASA description collection is prepared separately and committed
+under `data/planets/`. Other objects may own their source snapshots and parsers;
+this importer is not a condition of the object contract:
 
 ```sh
 pnpm prepare:planet-info -- saturn
@@ -64,7 +65,12 @@ pnpm prepare:planet-info
 ```
 
 The importer validates NASA's record identity and structured content schema.
-It does not fall back to scraping rendered webpages.
+It does not fall back to scraping rendered webpages. Pluto uses checked,
+object-owned NASA and JPL sources, without adding another registry entry here.
+
+Search includes the Sun, planets, Moon, and Pluto. The planet distance scale
+remains a planet-only view derived from classification. To run every browser
+gate against an isolated server, use `pnpm test:browser http://127.0.0.1:4211`.
 
 ## License and Data
 
