@@ -6,10 +6,10 @@ const steps = Object.freeze([
   ["verify-source-manifest.mjs", "--probe"],
   ["prepare-title.mjs"],
   ["prepare-panel-content.mjs"],
+  ["prepare-scene.mjs"],
   ["prepare-assets.mjs"],
   ["prepare-starfield.mjs"],
   ["prepare-sky-sun.mjs"],
-  ["prepare-scene.mjs"],
   ["prepare-runtime-asset-manifest.mjs"],
 ]);
 
