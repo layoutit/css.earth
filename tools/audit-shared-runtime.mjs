@@ -18,7 +18,15 @@ const sourceRoot = resolve(sourceArgument), root = resolve(outputArgument), outp
 await mkdir(root, { recursive: true });
 await mkdir(output); // Refuse to overwrite evidence.
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const report = { protocol: "immutable-settled-readback-pairs@2", mode, sourceRoot, baseUrl, capturedAt: new Date().toISOString(), fingerprints: {}, sourceHashes: {}, captures: [], errors: [], comparisons: [] };
+const report = { protocol: "immutable-headless-native-readback-pairs@4", mode, sourceRoot, baseUrl, capturedAt: new Date().toISOString(), headless: true, fingerprints: {}, sourceHashes: {}, harnessHashes: {}, expectedCaptureCount: 0, captures: [], errors: [], comparisons: [] };
+const harnessRoot = resolve(import.meta.dirname, "..");
+// Include repository code/data imported indirectly by the registry, profiles,
+// controls, and prepared-state modules. Dependencies are pinned by the lockfile.
+const harnessFiles = execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", "site", "src", "tools", "package.json", "pnpm-lock.yaml"], { cwd: harnessRoot, encoding: "utf8" })
+  .split("\0").filter((file) => /\.(?:[cm]?js|ts|json|astro|css|ya?ml)$/.test(file));
+for (const file of [...new Set(harnessFiles)].sort()) {
+  report.harnessHashes[file] = sha(await readFile(resolve(harnessRoot, file)));
+}
 report.gitHead = execFileSync("git", ["rev-parse", "HEAD"], { cwd: sourceRoot, encoding: "utf8" }).trim();
 report.gitStatus = execFileSync("git", ["status", "--porcelain"], { cwd: sourceRoot, encoding: "utf8" }).trim();
 const platformFiles = (await readdir(resolve(sourceRoot, "src/platform")))
@@ -28,13 +36,43 @@ for (const file of ["site/scene-router.mjs", "site/runtime-policy.mjs", "site/pl
   report.sourceHashes[file] = sha(await readFile(resolve(sourceRoot, file)));
 }
 const baseline = mode === "candidate" ? JSON.parse(await readFile(resolve(root, "baseline/report.json"))) : null;
-const browser = await chromium.launch({ channel: "chrome", headless: true });
-report.browser = browser.version();
+// Keep the native scrollbar out of the content viewport. Captures are always
+// headless; the audit must not open windows on the user's desktop.
+report.browserArgs = ["--hide-scrollbars"];
+let browser, browserSession;
+async function gpuProof() {
+  const { gpu } = await browserSession.send("SystemInfo.getInfo");
+  assert.equal(gpu.featureStatus.gpu_compositing, "enabled", "Native GPU composition required");
+  assert.equal(gpu.featureStatus.rasterization, "enabled", "Native GPU rasterization required");
+  assert.equal(gpu.auxAttributes.processCrashCount, 0, "GPU crash invalidates capture evidence");
+  const renderer = gpu.auxAttributes.glRenderer;
+  const hardware = /\b(?:Apple|NVIDIA|AMD|ATI|Intel|Qualcomm|Adreno|Mali|PowerVR)\b/i;
+  assert.equal(typeof renderer, "string", "Renderer identity is required");
+  assert.doesNotMatch(renderer, /SwiftShader|llvmpipe|softpipe|software|\bWARP\b|Microsoft Basic/i,
+    "Software rendering cannot qualify the native-GPU audit");
+  assert.match(renderer, hardware, "A recognized hardware renderer is required");
+  assert.ok(gpu.devices.some(({ vendorString, deviceString }) =>
+    hardware.test(`${vendorString ?? ""} ${deviceString ?? ""}`)),
+  "A hardware device identity is required");
+  return {
+    devices: gpu.devices,
+    compositor: gpu.featureStatus.gpu_compositing,
+    rasterization: gpu.featureStatus.rasterization,
+    renderer: gpu.auxAttributes.glRenderer,
+    backend: gpu.auxAttributes.skiaBackendType,
+    processCrashCount: gpu.auxAttributes.processCrashCount,
+  };
+}
 try {
+  browser = await chromium.launch({ channel: "chrome", headless: true, args: report.browserArgs });
+  report.browser = browser.version();
+  browserSession = await browser.newBrowserCDPSession();
   if (baseline) {
     assert.deepEqual(baseline.errors, []);
     assert.equal(baseline.protocol, report.protocol);
     assert.equal(report.browser, baseline.browser);
+    assert.equal(report.headless, baseline.headless, "Match window presentation mode");
+    assert.deepEqual(report.browserArgs, baseline.browserArgs);
   }
   for (const object of OBJECTS) {
     const packagePath = resolve(sourceRoot, `src/planets/${object.id}`);
@@ -52,7 +90,25 @@ try {
     const inventory = JSON.parse(await readFile(resolve(packagePath, "runtime-assets.json")));
     const expected = new Map(inventory.assets.map((asset) => [asset.filename, asset]));
     const profile = await loadPlanetBrowserProfile(object);
-    for (const scale of [1, 2]) for (const width of [390, 1440]) for (const kind of ["shell", "scene"]) {
+    const testPath = resolve(import.meta.dirname, `../src/planets/${object.id}/test`);
+    const hasExtraPoses = (await readdir(testPath)).includes("visual-poses.mjs");
+    for (const file of ["browser-profile.mjs", ...(hasExtraPoses ? ["visual-poses.mjs"] : [])]) {
+      assert.ok(Object.hasOwn(report.harnessHashes, `src/planets/${object.id}/test/${file}`),
+        "Visual profiles must belong to the starting harness snapshot");
+    }
+    const extraPoses = hasExtraPoses
+      ? (await import(new URL(`../src/planets/${object.id}/test/visual-poses.mjs`, import.meta.url))).visualPoses
+      : [];
+    assert.ok(Array.isArray(extraPoses));
+    for (const pose of extraPoses) {
+      assert.match(pose.id, /^[a-z][a-z0-9-]+$/);
+      assert.notEqual(pose.id, "default");
+      assert.equal(typeof pose.apply, "function");
+    }
+    assert.equal(new Set(extraPoses.map(({ id }) => id)).size, extraPoses.length);
+    report.expectedCaptureCount += 8 + 4 * extraPoses.length;
+    for (const scale of [1, 2]) for (const width of [390, 1440]) for (const kind of ["shell", "scene"])
+      for (const pose of [{ id: "default" }, ...(kind === "scene" ? extraPoses : [])]) {
       const context = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: scale, reducedMotion: "reduce" });
       try {
         const page = await context.newPage(), checks = [], loaded = new Map();
@@ -80,14 +136,19 @@ try {
         await page.waitForFunction(() => window.__cssEarth?.ready);
         await profile.waitForRuntime(page);
         await profile.pause(page);
+        await page.mouse.move(0, 0);
         await page.evaluate(async () => {
           for (const animation of document.getAnimations()) { animation.pause(); animation.currentTime = 0; }
           await document.fonts.ready;
           await Promise.all([...document.images].filter((image) => image.currentSrc).map((image) => image.decode()));
         });
+        const poseState = pose.apply ? await pose.apply(page) : null;
+        if (pose.apply) await page.waitForLoadState("networkidle");
         assert.equal(await profile.selectedDensity(page), 2, "Canonical highest-density bank");
         assert.equal(await profile.stable(page), true);
-        const prefix = `${object.id}-${width}-scale${scale}`;
+        const gpuBefore = await gpuProof();
+        const versionLabel = await page.locator(".planet-wordmark-version").textContent();
+        const prefix = `${object.id}-${width}-scale${scale}${pose.id === "default" ? "" : `-${pose.id}`}`;
         const capture = async (target, scene) => {
           let previous = null, matches = 0;
           const history = [];
@@ -131,7 +192,9 @@ try {
         await Promise.all(checks);
         assert.ok(loaded.size > 0, `${prefix}: loaded bytes verified`);
         const loadedAssets = Object.fromEntries([...loaded].sort(([a], [b]) => a.localeCompare(b)));
-        const record = { prefix, kind, loadedAssets, frameSha256s: frame.frames.map(sha), coverage: frame.validation, captureAttempts: frame.attempts };
+        const gpuAfter = await gpuProof();
+        assert.deepEqual(gpuAfter, gpuBefore, "GPU identity must remain stable during capture");
+        const record = { prefix, kind, pose: pose.id, poseState, loadedAssets, versionLabel, gpu: gpuAfter, frameSha256s: frame.frames.map(sha), coverage: frame.validation, captureAttempts: frame.attempts };
         report.captures.push(record);
         for (const [phase, png] of frame.frames.entries()) {
           const filename = `${prefix}-${kind}${phase ? "-phase1" : ""}.png`;
@@ -139,7 +202,10 @@ try {
           if (baseline) {
             const reference = baseline.captures.find((entry) => entry.prefix === prefix && entry.kind === kind);
             assert.ok(reference, prefix);
+            assert.deepEqual(poseState, reference.poseState, `${prefix}: matched camera/lens pose`);
             assert.deepEqual(loadedAssets, reference.loadedAssets, `${prefix}: loaded identity`);
+            assert.equal(versionLabel, reference.versionLabel, `${prefix}: match rendered build metadata`);
+            assert.deepEqual(gpuAfter, reference.gpu, `${prefix}: match native GPU identity`);
             const bytes = await readFile(resolve(root, "baseline", filename));
             assert.equal(sha(bytes), reference.frameSha256s[phase]);
             const { diff, ...comparison } = await compareCaptures(bytes, png);
@@ -154,10 +220,23 @@ try {
   for (const [file, hash] of Object.entries(report.sourceHashes)) {
     assert.equal(sha(await readFile(resolve(sourceRoot, file))), hash, `Source changed during capture: ${file}`);
   }
-  if (baseline) assert.ok(report.comparisons.every(({ changedPixels }) => changedPixels === 0), "Unintended pixels changed; inspect absolute differences.");
+  for (const [file, hash] of Object.entries(report.harnessHashes)) {
+    assert.equal(sha(await readFile(resolve(harnessRoot, file))), hash, `Harness changed during capture: ${file}`);
+  }
+  assert.equal(report.captures.length, report.expectedCaptureCount, "Complete visual matrix required");
+  assert.equal(new Set(report.captures.map(({ prefix, kind }) => `${prefix}-${kind}`)).size, report.captures.length);
+  if (baseline) {
+    assert.deepEqual(report.harnessHashes, baseline.harnessHashes, "Match recorded repository harness inputs");
+    assert.equal(report.expectedCaptureCount, baseline.expectedCaptureCount);
+    assert.equal(report.comparisons.length, report.expectedCaptureCount * 2);
+    assert.ok(report.comparisons.every(({ changedPixels }) => changedPixels === 0), "Unintended pixels changed; inspect absolute differences.");
+  }
 } catch (error) { report.errors.push(error.stack); process.exitCode = 1; }
 finally {
-  await browser.close();
+  try { await browserSession?.detach(); }
+  catch (error) { report.errors.push(`CDP cleanup: ${error.message}`); }
+  try { await browser?.close(); }
+  catch (error) { report.errors.push(`Browser cleanup: ${error.message}`); }
   await writeFile(resolve(output, "report.json"), JSON.stringify(report, null, 2) + "\n");
 }
 console.log(JSON.stringify({ output, captures: report.captures.length, errors: report.errors }));
