@@ -31,7 +31,7 @@ try {
       const page = await context.newPage();
       const errors = [];
       page.on("pageerror", (error) => errors.push(error.message));
-      const record = { id: object.id, deviceScaleFactor, samples: [] };
+      const record = { id: object.id, deviceScaleFactor, samples: [], playbackWaits: [] };
       report.cases.push(record);
       try {
         await page.goto(new URL(object.route, baseUrl).href);
@@ -95,12 +95,14 @@ try {
       async function sample(label) {
         const state = await page.evaluate(() => ({
           lifecycle: window.__cssEarth.lifecycle,
+          playback: window.__cssEarth.playback,
           requested: document.querySelector(".planet-motion-setting").checked,
           playing: document.documentElement.dataset.playing,
           speed: document.querySelector('button[name="speed"]')?.dataset.state ?? null,
           animations: document.querySelector(".planet-stage")
             .getAnimations({ subtree: true }).map((animation) => ({
-              state: animation.playState, time: animation.currentTime, rate: animation.playbackRate,
+              state: animation.playState, pending: animation.pending,
+              time: animation.currentTime, rate: animation.playbackRate,
             })),
         }));
         record.samples.push({ label, ...state });
@@ -123,13 +125,69 @@ try {
           `${object.id}: ${label}: no continued clock advancement`));
       }
       async function running(label) {
+        const timeoutMilliseconds = 5_000;
+        const timing = { label, timeoutMilliseconds };
+        record.playbackWaits.push(timing);
+        const readinessStarted = Date.now();
+        // Media-query delivery and Animation.play() are asynchronous. Start the
+        // observation window only after policy permits playback and a native
+        // animation has finished its pending play task, not at emulateMedia().
+        try {
+          await page.waitForFunction(() => {
+            const app = window.__cssEarth;
+            return app?.playback.motionRequested && app.playback.allowed &&
+              app.lifecycle === "mounted" &&
+              document.querySelector(".planet-motion-setting").checked &&
+              document.documentElement.dataset.playing === "true" &&
+              document.querySelector(".planet-stage")
+                .getAnimations({ subtree: true }).some((animation) =>
+                  animation.playState === "running" && !animation.pending &&
+                  Number.isFinite(animation.currentTime));
+          }, null, { polling: "raf", timeout: timeoutMilliseconds });
+        } catch (error) {
+          await sample(`${label}: playback did not start`);
+          throw error;
+        } finally {
+          timing.readinessWaitMilliseconds = Date.now() - readinessStarted;
+        }
         const before = await sample(label);
+        const observationStarted = Date.now();
         await page.waitForTimeout(140);
+        const advancementStarted = Date.now();
+        try {
+          // RAF polling bounds first-frame scheduling delays but cannot pass
+          // merely because attributes say "running": a real clock must advance.
+          await page.waitForFunction((baseline) => {
+            const app = window.__cssEarth;
+            const animations = document.querySelector(".planet-stage")
+              .getAnimations({ subtree: true });
+            return app?.playback.motionRequested && app.playback.allowed &&
+              app.lifecycle === "mounted" &&
+              document.documentElement.dataset.playing === "true" &&
+              animations.length === baseline.length &&
+              animations.some((animation, index) =>
+                animation.playState === "running" && !animation.pending &&
+                Number.isFinite(animation.currentTime) &&
+                Number.isFinite(baseline[index].time) &&
+                animation.currentTime > baseline[index].time);
+          }, before.animations, { polling: "raf", timeout: timeoutMilliseconds });
+        } catch (error) {
+          await sample(`${label}: clock did not advance`);
+          throw error;
+        } finally {
+          timing.advancementWaitMilliseconds = Date.now() - advancementStarted;
+          timing.observationMilliseconds = Date.now() - observationStarted;
+        }
         const after = await sample(`${label}: advancing`);
         assert.equal(after.lifecycle, "mounted", `${object.id}: ${label}: router`);
         assert.equal(after.playing, "true", `${object.id}: ${label}: publication`);
-        assert.ok(after.animations.some(({ state, time }, index) =>
-          state === "running" && time > before.animations[index].time),
+        assert.equal(after.requested, true, `${object.id}: ${label}: Motion intent`);
+        assert.equal(after.playback.allowed, true, `${object.id}: ${label}: policy`);
+        assert.equal(after.animations.length, before.animations.length);
+        assert.ok(after.animations.some(({ state, pending, time }, index) =>
+          state === "running" && !pending && Number.isFinite(time) &&
+          Number.isFinite(before.animations[index].time) &&
+          time > before.animations[index].time),
         `${object.id}: ${label}: actual clock advances`);
       }
     }

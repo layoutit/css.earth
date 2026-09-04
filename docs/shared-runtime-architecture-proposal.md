@@ -1,9 +1,11 @@
 # Shared runtime architecture before catalog expansion
 
-Status: All five implementation workstreams and functional gates are complete.
-Strict matched visual acceptance remains blocked. The inspected `earth-8x`
-workaround introduced close-up stretching and was withdrawn; its other WIP is
-excluded. The PR remains a draft, not ready to merge. See the
+Status: All five shared-runtime workstreams are implemented. The separately
+authorized Earth affine-texture repair is implemented. Source verification,
+598 tests, build, and the complete headless browser suite pass. Strict matched
+visual acceptance remains unresolved. The inspected
+`earth-8x` scalar workaround was withdrawn; its other WIP is excluded.
+The PR remains a draft, not ready to merge. See the
 [implementation and evidence record](shared-runtime-implementation.md).
 
 Date: 2026-09-04
@@ -485,7 +487,7 @@ case and executable contract tests.
 | 3. Image ownership | Shared decode/release in all clients; tested store and four ownership migrations; every specialized loader satisfies disposal/retry/publication rules without changed cache limits. |
 | 4. Controls | Shared speed/selection; Moon/Pluto, Sun/Venus, Mars/Jupiter, Earth/Mercury/Uranus, then Neptune/Saturn. Preserve each presentation model. |
 | 5. Authoring surface | Optional controls, content-derived profiles, diagnostic cleanup, and next-object documentation. No reduction in existing coverage. |
-| 6. Final combined proof | Full gates at final head; fresh baseline/candidate comparisons; unchanged prepared bytes; updated contract/proof map. |
+| 6. Final combined proof | Full gates at final head; fresh baseline/candidate comparisons; unchanged prepared bytes except the documented Earth repair; identical prepared bytes in the Earth-only comparison fixture and candidate; updated contract/proof map. |
 
 Tests accompany each slice. Complete every workstream in this PR rather than
 merging a playback-only first installment. Start from then-current main in a
@@ -560,16 +562,27 @@ changes are the reduced-motion explanation, disabled pre-ready speed, and truthf
 busy/pending states. No-control fixtures also retain the shared Settings panel.
 Test those states separately from unchanged ready-state scene comparisons.
 
-Source, prepared assets, and runtime-manifest bytes remain unchanged. Do not
-regenerate assets to make a refactor pass. If testing a clean checkout requires
+Source inputs remain unchanged. Prepared assets and runtime-manifest bytes stay
+unchanged except for the explicitly authorized Earth repair below. Do not
+regenerate unrelated assets to make a refactor pass. If testing a clean checkout requires
 restoration/preparation, use the existing isolated workflow and verify that it
 reproduces baseline bytes.
 
 Execution note, 2026-09-04: the user identified `earth-8x` as a possible source
 of an Earth fix. Its uncommitted raster-scale change was tested in isolation,
 but matched close-ups showed new stretched wedges. It was withdrawn. The
-architecture branch therefore keeps the original Earth preparation, imagery,
-manifests, and camera limits. No city paging or deeper-zoom WIP is included.
+trial did not qualify as a repair. The user subsequently explicitly authorized
+fixing Earth within this PR. The narrow exception is Earth-owned preparation:
+bake its surface homography into RGBA atlas pixels and transport affine frames,
+including matching cutaway-outer addresses. Preserve checked source inputs,
+canonical 8K source sampling, geometry, retained leaf counts, and zoom 8. No
+city paging or deeper-zoom WIP is included. Earth regeneration also corrects
+seven demonstrated pre-existing recipe/output mismatches: six inner-shell pole
+images and the night-lights thumbnail. The unchanged checked recipes reproduce
+the corrected bytes; these RGB changes are explicitly included in the Earth
+exception and identical comparison fixture. The implementation record documents
+their provenance and limits. Qualify the repair separately, then
+compare the architecture against `main` plus that identical Earth-only repair.
 The temporary `main` plus workaround fixture is diagnostic evidence only;
 its repeatable captures do not qualify either image quality or this PR.
 
@@ -606,7 +619,7 @@ candidate. Review fatal lifecycle paths, async presentation races, and cache
 ownership adversarially at final head; repaired findings need fresh proof.
 
 Do not expand this into a universal clock, renderer, scheduler, plugin system,
-camera redesign, route/package rename, or source/preparation rewrite. Shared
+camera redesign, route/package rename, or unrelated source/preparation rewrite. Shared
 helpers must accept prepared data/operations, not grow per-object switches.
 Specialized rendering/cache algorithms stay local, while their lifetime and
 publication obligations remain shared and enforced.

@@ -4,10 +4,11 @@ This implements the [approved proposal](shared-runtime-architecture-proposal.md)
 in one architectural PR. It covers the Sun, Mercury, Venus, Earth, Moon, Mars,
 Jupiter, Saturn, Uranus, Neptune, and Pluto.
 
-Status: all architecture workstreams, functional gates, and independent code
-reviews are complete. Strict matched visual acceptance remains blocked.
+Status: the shared architecture and explicitly authorized Earth repair are
+implemented. Source verification, all 598 tests, build, and the full headless
+browser suite pass.
 The inspected `earth-8x` raster workaround introduced close-up stretching and
-was withdrawn. The PR remains a draft; the visual requirement is not waived.
+was withdrawn. The PR remains a draft; visual acceptance is not yet complete.
 
 ## What changed
 
@@ -31,16 +32,54 @@ the rendered controls.
 
 Specialized row, material-neighborhood, and grouped-image caches remain inside
 their object packages. Camera math, drag/inertia/fly-to behavior, Saturn's native
-compositor wrapper, and asset banks are unchanged.
+compositor wrapper, and all non-Earth asset banks are unchanged.
 Both tested display scales use the same highest-density bank.
 
 The user identified `earth-8x` as a possible source of an Earth fix. Commit
 `849ac46` temporarily copied only its uncommitted 16.25-to-4 raster-scale
 change. A later close-up review rejected it; the generator, regenerated scene,
 and added scale-bound assertions were restored exactly to `91dae216`.
-The final diff contains no Earth preparation or asset change. City paging,
-deeper zoom, yaw changes, dependencies, and policy WIP were never copied.
+The subsequent Earth repair below changes Earth preparation and its surface
+image ownership. City paging, deeper zoom, yaw changes, dependencies, and
+policy WIP were never copied.
 The user's `earth-8x` worktree was not modified.
+
+### Earth surface repair
+
+Earth now bakes the surface's projective texture warp into transparent raster
+pixels ahead of runtime. The retained scene transports affine rectangles;
+the shared renderer is unchanged. This follows the existing Pluto preparation
+approach, with Earth-owned source mapping and image-bank ownership.
+
+The plan contains 448 exterior cells. The 308 cutaway outer cells reuse their
+exact geometry and atlas addresses. Source sampling remains tied to the 8K
+input, the existing geometry and overlap remain, and maximum zoom stays 8.
+Tests check composed geometry, directional source-sampling density, continuous
+latitude sampling, longitude wrapping, page bounds, and cutaway reuse.
+
+Seven static pages, each no larger than 4096×4096, replace one large image.
+The largest page is 61.75 MiB and the complete exterior bank is 361.375 MiB
+when expressed as uncompressed RGBA byte counts. These are dimensional costs,
+not measurements of browser or GPU memory. A single-image trial had unacceptable
+cold-start stalls and was rejected; paging bounds individual image size, not
+the complete bank's size.
+
+The object owns only its active surface bank and latest pending bank, with
+two owned page decodes at a time. Hidden surface palettes contain no image URLs.
+Retirement clears image ownership without waiting for a cancelled native
+decode promise to settle. Tests cover stale A/B/A completion, never-settling
+cancelled decode, failed preparation preserving the visible view, fatal
+publication, and teardown. Neither display scale selects another asset bank.
+
+Full Earth regeneration also corrects seven pre-existing recipe/asset
+mismatches: the six inner-shell pole images and the night-lights thumbnail.
+The unchanged main preparation functions reproduce the new bytes exactly;
+the old/new execution order gives identical bytes and does not mutate source
+buffers. The old poles were lossy despite the checked lossless recipe. Source
+inputs and image-library versions match. These are real RGB changes with
+unchanged pole alpha, not merely container metadata. Their historical encoding
+settings are unknown. Restoring only old bytes would conceal the reproducibility
+mismatch. Evidence: `output/earth-affine-asset-reproducibility.md`.
 
 ## Proof map
 
@@ -53,6 +92,8 @@ The user's `earth-8x` worktree was not modified.
 | Real compound/deferred publication | `site/test/runtime-complex-browser.mjs`: Neptune's later material row and Saturn's coupled lens/interior/rings/shadows |
 | Optional controls without weaker existing coverage | `site/test/load-browser-profile.test.mjs`, shell/contract/package tests, rendered-control conformance |
 | Retained DOM, interactions, and canonical bank | `site/test/planet-browser-conformance.mjs` and all eleven package browser suites |
+| Earth affine preparation and complete paged-bank selection | `src/planets/earth/test/surface-raster.test.mjs`, `preparation.test.mjs`, and prepared-page-derived `browser-profile.mjs` |
+| Earth page ownership, stale selection, failed decode, and hidden palettes | `src/planets/earth/test/surface-image-banks.test.mjs` and `runtime-lifetime.test.mjs` |
 | Actual back/forward-cache admission | `site/test/runtime-bfcache-browser.mjs`, including `pageshow.persisted` and document identity |
 | Matched scene/shell regression | `tools/audit-shared-runtime.mjs`: Chrome version, prepared hashes, loaded-response hashes, raw captures, absolute differences, and Saturn coverage |
 
@@ -64,26 +105,55 @@ Candidate server: `http://127.0.0.1:4230`.
 The reports below are local ignored artifacts, not hosted CI or independent
 approval. The initial architecture implementation is commit `91dae216`.
 The completion audit then repaired two additional object-local failure paths
-in Moon/Pluto and Venus, described below. The temporary Earth workaround has
-no net effect on the final tree; all prepared assets remain unchanged.
+in Moon/Pluto and Venus, described below. The temporary scalar Earth workaround
+has no net effect; the separately authorized affine repair is described above.
+
+The following table records the latest Earth-repair qualification. Browser and
+visual checks remain separate from source, unit, and build success.
 
 | Gate | Result | Local report |
 | --- | --- | --- |
-| `pnpm acquire:planets -- --verify-only` | Pass after lifecycle repairs | `output/runtime-source-verify-lifecycle-review.log` |
-| `pnpm test` | 570 passed; none failed or skipped | `output/runtime-unit-tests-lifecycle-review.log` |
-| `pnpm build` | Pass after lifecycle repairs | `output/runtime-build-lifecycle-review.log` |
-| `pnpm test:browser http://127.0.0.1:4230` | Pass after lifecycle repairs, exit 0 | `output/runtime-browser-lifecycle-review.log` |
-| Earth preparation after withdrawal | 6 passed; original generated bytes restored | `output/earth-raster-workaround-revert-tests.log` |
-| Matched visual regression | Blocked; workaround fixture rejected | See below |
-| `git diff --check` | Pass during acceptance; repeat before commit | Git working tree |
+| `pnpm acquire:planets -- --verify-only` | Pass with Earth repair | `output/runtime-source-verify-earth-final.log` |
+| `pnpm test` | 598 passed; none failed or skipped | `output/runtime-unit-tests-earth-final.log` |
+| `pnpm build` | Pass with Earth repair | `output/runtime-build-earth-final.log` |
+| `pnpm test:browser http://127.0.0.1:4230` | Pass with Earth repair; exit 0 | `output/runtime-browser-earth-pages-final.log` |
+| Earth preparation | 6 passed; 221 runtime asset hashes verified | `output/earth-affine-paged-preparation-tests.log` |
+| Matched visual regression | Unmet; independent Earth-only baseline repeatability failed | See below |
+| `git diff --check` | Pass before commit | Git working tree |
 
-The latest full architecture browser run used installed headless Google Chrome
+The completed architecture browser run before the Earth repair used installed headless Google Chrome
 `152.0.7977.76`. It passed
 shared shell, introduction, and navigation gates; all 143 object conformance
 cases; 22 playback cases; six complex/deferred-selection cases; real
 back/forward-cache restoration for all eleven objects; and all eleven
 package-specific browser suites. Both display scales loaded the same canonical
 highest-density bank.
+
+The final Earth-repair run passed that same complete browser suite, including
+all 143 conformance cases, 22 playback cases, six complex-selection cases,
+real back/forward-cache admission for all eleven objects, and all eleven
+package suites. Conformance now verifies requests for all seven canonical
+Earth surface pages and its pole asset at both display scales. Earth smoke
+checks actual rendered page URLs, complete requested banks, empty hidden
+palettes, and one settled owned bank. Its separate doubled-scale run also
+passed with 999 retained leaves (`output/earth-affine-smoke-pages-2.log`).
+
+The final run includes two evidence-harness corrections. Playback observation
+now waits for permitted, mounted, nonpending native playback before requiring
+actual clock advancement; it still fails stuck or frozen clocks. Earth's
+old single-image count and unused pseudo-element checks were replaced with
+prepared-page-derived counts and actual rendered texture checks. The earlier
+failed runs are retained, not relabeled as passing. Final playback and complex
+reports are `output/playwright/runtime-playback-1788542752082/report.json` and
+`output/playwright/runtime-complex-1788542839353/report.json`.
+
+Independent Earth closure reviews checked source mapping, geometry, sampling,
+bank retirement, stale selection, publication failures, and fixture isolation.
+They reran 35 focused tests and verified all 221 runtime asset hashes. A final
+finding that canonical-page declarations were not consumed by conformance was
+closed: conformance now asserts their actual requests, and the full rerun
+passes both display scales. The separate visual review verified the failed
+288-frame baseline check below; it did not approve visual acceptance.
 
 Independent implementation reviews covered playback/lifetime/error boundaries,
 async presentation races, cleanup after partial failure, image ownership, and
@@ -161,6 +231,52 @@ application changes. A later explicit software-composited headless diagnostic
 also failed on two unchanged Earth baseline captures (3,095 changed pixels).
 Its failed report is `output/headless-software-calibration-1/report.json`.
 
+The affine Earth diagnostic at `output/earth-affine-paged-diagnostic-1/report.json`
+completed 24 fresh contexts. Twenty met the exact repeated-pair criterion.
+Four did not: default desktop and maximum-normal mobile at doubled display
+scale, each repeated twice. Analysis of all six retained frames per failure
+found only 11–27 isolated varying pixels, maximum RGB range one, no alpha
+change, and no edge-adjacent varying pixels. These exact failures remain
+failures; they are not reported as zero-pixel parity. The separate calibration
+investigation is recorded in `output/earth-affine-readback-calibration.md`.
+
+### Independent Earth-only baseline and fixed-schedule check
+
+The new comparison fixture at
+`/Users/ekrof/fed/cssEarth-runtime-earth-affine-baseline` contains raw main plus
+only the Earth affine repair. It retains main's shared runtime, router,
+lifetimes, clocks, and selection handling. All 221 Earth assets and 26 source
+files match the candidate. The minimally adapted old Earth client has SHA256
+`f3c55b98aae8832f972da7cb6bda22e9f595866e105cc27e40bb273c0c5f84d1`.
+The independent fixture review is in `output/earth-affine-baseline-fixture/`.
+
+Its fixed-schedule A/A check captured 288 frames across 48 fresh contexts:
+16 Earth conditions, three contexts each, six frames each. Two contexts per
+condition established observed bounds, frozen before the third holdout.
+Every frame was retained. No favorable pair, region mask, or discarded early
+frame was used. This was a measurement, not an authorized tolerance change.
+
+The check failed. Early default-shell captures changed by up to 65 RGB levels
+on mobile and 55 on desktop; the desktop scene changed by up to 16. Later
+frames became exact or showed sparse one-level variation. Eleven conditions
+were byte-identical across all 18 frames, but that does not qualify the other
+five. The desktop doubled-scale shell holdout exceeded its frozen maximum
+pair count (39,194 versus 39,193) and union count (39,223 versus 39,217).
+These findings supersede any suggestion that the broader failure consists
+only of one-level readback noise.
+
+Independent review verified all 288 PNG hashes, 576 pre/post state snapshots,
+763 source hashes, seven harness hashes, actual loaded-byte hashes, and native
+GPU/server identity. Camera, styles, paused animation times, and bank state
+were unchanged. Early raster-detail settling is consistent with the images,
+but the check does not prove a particular Chrome internal cause. Neither
+later stable frames nor a fitted bound establish image-quality acceptance.
+Full evidence: `output/earth-affine-aa-baseline-1/report.json` and
+`output/earth-affine-aa-review.md`. The result remains failed; the strict
+matched baseline/candidate gate is unchanged and unmet.
+
+### Earlier rejected diagnostics
+
 A headed diagnostic completed 88 baseline conditions but its candidate failed
 after 29: only 54 of 58 completed phase comparisons matched. Four Earth phases
 had missing tiles, and the next Earth condition was unstable. The reports at
@@ -215,13 +331,15 @@ repeats. Reports are `output/earth-raster-scale-diagnostic-{1,2}/report.json`.
 No alternative was accepted. The likely boundary is Chrome's flattened raster
 coverage/filtering; its exact GPU mechanism remains unproven.
 
-The trial was withdrawn. Earth's generator, scene, and existing preparation
-tests match `91dae216` exactly again; scene SHA256 is
+The trial was withdrawn before the affine repair. At that point, Earth's
+generator, scene, and existing preparation tests matched `91dae216` exactly;
+the restored scene SHA256 was
 `865e1b5e813c8de649b0050ddfca96c5d49708f291d02d2de6203d12cdd2f8b6`.
-All six Earth preparation tests pass after regeneration. No complete candidate
+All six Earth preparation tests passed after that regeneration. No complete candidate
 matrix was run against the rejected trial, and no 192-comparison pass is claimed.
-The remaining requirement is a qualified Earth rendering repair or an explicit
-decision about that pre-existing blocker; the branch pointer did not supply one.
+The later affine repair supersedes that restored scene. Its independent
+baseline qualification remains failed as described above; the branch pointer
+alone did not supply a validated fix.
 
 ### Capture contract retained for the eventual comparison
 
@@ -234,12 +352,16 @@ two widths, and two display scales: 96 conditions and 192 phase comparisons.
 No software-composited or headed result can qualify this protocol.
 
 Run the complete comparison only with a qualified, explicitly identified
-baseline. With untouched main, the current blocker remains reproducible:
+baseline. The eventual architecture comparison uses main plus the identical
+Earth-only repair, not raw main: prepared-byte identity checks correctly reject
+raw main paired with the repaired candidate. The current Earth-only fixture
+still fails its independent repeatability check, so these are conditional
+reproduction commands, not a completed or currently qualified comparison:
 
 ```sh
-node tools/audit-shared-runtime.mjs baseline http://127.0.0.1:4261 \
-  /Users/ekrof/fed/cssEarth-runtime-baseline output/shared-runtime-visual-new
-# Only after the baseline has no errors:
+node tools/audit-shared-runtime.mjs baseline http://127.0.0.1:4281 \
+  /Users/ekrof/fed/cssEarth-runtime-earth-affine-baseline output/shared-runtime-visual-new
+# Only after the complete baseline has no errors:
 node tools/audit-shared-runtime.mjs candidate http://127.0.0.1:4230 \
   /Users/ekrof/fed/cssEarth-runtime output/shared-runtime-visual-new
 ```
@@ -265,6 +387,7 @@ Raw visual evidence is preserved. Failed or nonrepeatable capture runs are
 invalid qualification runs, not silently discarded passing results. Pixel
 tolerance and masks must not be widened to hide a refactor regression.
 
-No source inputs, runtime asset manifests, public asset bytes, or prepared scene
-data are changed in the final diff. There is no new clock, scheduler, renderer,
-dependency, object registry, or placeholder object.
+Source inputs and all non-Earth prepared assets are unchanged. The authorized
+Earth exception changes its preparation, manifest, generated scene and lens
+metadata, and reproducible public assets as described above. There is no new
+clock, scheduler, renderer, dependency, object registry, or placeholder object.

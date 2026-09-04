@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { EARTH_STAGING_ROOT } from "./preparation-paths.mjs";
+import { earthSurfacePageUrls } from "./surface-raster.mjs";
+
+const { pages } = JSON.parse(await readFile(resolve(EARTH_STAGING_ROOT, "surface-raster-plan.json"), "utf8"));
 
 const controls = Object.freeze([
   Object.freeze({
@@ -10,6 +14,7 @@ const controls = Object.freeze([
     shortLabel: "RGB",
     thumbnailUrl: "/scenes/earth/earth-lens-normal.webp",
     surfaceUrl: "/scenes/earth/earth-surface.webp",
+    surfaceUrls: earthSurfacePageUrls("earth-surface", pages.length),
     polesUrl: "/scenes/earth/earth-surface-poles.webp",
     maximumZoom: 8,
     qualification: "NASA Blue Marble visible-color composite",
@@ -20,6 +25,7 @@ const controls = Object.freeze([
     shortLabel: "TOPO",
     thumbnailUrl: "/scenes/earth/earth-lens-topography.webp",
     surfaceUrl: "/scenes/earth/earth-topography.webp",
+    surfaceUrls: earthSurfacePageUrls("earth-topography", pages.length),
     polesUrl: "/scenes/earth/earth-topography-poles.webp",
     maximumZoom: 8,
     qualification: "NASA Blue Marble topography and bathymetry",
@@ -30,6 +36,7 @@ const controls = Object.freeze([
     shortLabel: "VIIRS",
     thumbnailUrl: "/scenes/earth/earth-lens-night-lights.webp",
     surfaceUrl: "/scenes/earth/earth-night-lights.webp",
+    surfaceUrls: earthSurfacePageUrls("earth-night-lights", pages.length),
     polesUrl: "/scenes/earth/earth-night-lights-poles.webp",
     maximumZoom: 8,
     qualification: "NASA Black Marble 2016 global composite",
