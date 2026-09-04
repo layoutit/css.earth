@@ -255,7 +255,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
     PREPARED_EARTH_SCENE.material.lighting.frames.at(-1).transform,
   );
   assert.equal("interior" in PREPARED_EARTH_SCENE.material, false);
-  assert.equal(PREPARED_EARTH_SCENE.camera.maximumZoom, 4);
+  assert.equal(PREPARED_EARTH_SCENE.camera.maximumZoom, 8);
   assert.equal(PREPARED_EARTH_SCENE.body.assets.surface.url,
     "/scenes/earth/earth-surface.webp");
   assert.equal(PREPARED_EARTH_SCENE.body.assets.poles.url,
@@ -273,7 +273,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
           .metadata();
         return { width, height };
       })),
-    [{ width: 4160, height: 3072 }, { width: 1024, height: 256 }],
+    [{ width: 8320, height: 6144 }, { width: 2048, height: 512 }],
   );
   const polarLeaves = surfaceLeaves.filter(({ className }) =>
     className.includes("earth-polar"));
