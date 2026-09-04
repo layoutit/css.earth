@@ -2,6 +2,14 @@ import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import sharp from "sharp";
 
+import {
+  ICRS_TO_GALACTIC,
+  directionFromDegrees,
+  transformDirection,
+  transposeMatrix,
+} from "../../../platform/galactic-frame.mjs";
+import { PREPARED_MERCURY_SCENE } from "../runtime/preparedScene.mjs";
+
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const browser = await chromium.launch({
   headless: true,
@@ -117,11 +125,16 @@ try {
     },
   });
 
-  await page.evaluate(() => {
+  // Await the lens switch: the gap probe below relies on the enhanced
+  // colour map, where a neutral dark pixel cannot be surface content.
+  await page.evaluate(async () => {
     document.querySelector(".mercury-material-root").style.visibility = "hidden";
-    window.__mercury.lenses.select("enhanced");
+    await window.__mercury.lenses.select("enhanced");
   });
-  for (const controlPitch of [0, 89]) {
+  // Probe the equatorial view and a steep southern view. Steeper still and the
+  // south polar cap enters the inner disc, whose permanently shadowed craters
+  // are legitimately black in the source mosaic.
+  for (const controlPitch of [50, 89]) {
     await page.evaluate((pitch) => window.__mercury.camera.setState({
       controlPitch: pitch,
       zoom: 1.1,
@@ -228,16 +241,243 @@ try {
     control.checked = true;
     control.dispatchEvent(new Event("change", { bubbles: true }));
   });
+  // Default framing: the Sun stands on screen left (half phase) and the
+  // terminator is vertical up to the Sun's ecliptic latitude, north up.
+  await page.evaluate(() => window.__mercury.camera.setState({
+    controlPitch: window.__mercury.camera.stats().defaultControlPitchDegrees,
+    controlYaw: window.__mercury.camera.stats().defaultControlYawDegrees,
+    zoom: 1.1,
+  }));
+  await nextPaint(page);
+  const defaultFraming = await page.evaluate(() => ({
+    ...window.__mercury.sky.state(),
+    sunHidden: document.querySelector(".mercury-directional-sun").hidden,
+  }));
+  assert.ok(defaultFraming.skySunViewDirection[0] < -0.98);
+  assert.ok(Math.abs(defaultFraming.skySunViewDirection[1]) < 0.1);
+  assert.ok(Math.abs(defaultFraming.skySunViewDirection[2]) < 0.1);
+  assert.ok(Math.abs(defaultFraming.materialFrame - 128) < 16);
+  assert.equal(defaultFraming.sunHidden, true);
+  await page.evaluate(() => {
+    document.querySelector(".mercury-skybox").style.visibility = "hidden";
+  });
+  await nextPaint(page);
+  const framingDisc = await page.locator(".mercury-material").boundingBox();
+  assert.ok(framingDisc);
+  const framing = await litDirection(await page.screenshot({
+    clip: framingDisc,
+  }));
+  await page.evaluate(() => {
+    document.querySelector(".mercury-skybox").style.removeProperty("visibility");
+  });
+  // Lit direction measured from the disc luminance: 180 degrees is screen
+  // left; the terminator is perpendicular to it.
+  assert.ok(Math.abs(framing.litDirectionDegrees - 180) < 8,
+    `lit direction ${framing.litDirectionDegrees}`);
+  // Half phase: the luminance centroid sits well off centre, toward the Sun.
+  assert.ok(framing.centroidRadiusShare > 0.2,
+    `centroid offset ${framing.centroidRadiusShare}`);
+
+  // The sky rides the scene matrix through the prepared registration, in
+  // both the reset (setState) and the accumulated (drag) camera paths, so
+  // stars and Sun cross the screen identically.
+  const skyLock = await page.evaluate(() => {
+    const registration = new DOMMatrix(
+      window.__mercury.sky.sceneRegistration,
+    );
+    const compare = () => {
+      const scene = new DOMMatrix(
+        document.querySelector(".mercury-scene").style.transform
+          .replace(/^scale\([^)]*\)\s*/u, ""),
+      );
+      const sky = new DOMMatrix(
+        document.querySelector(".mercury-skybox-orientation").style.transform,
+      );
+      const expected = scene.multiply(registration);
+      let maximumError = 0;
+      for (const key of ["m11", "m12", "m13", "m21", "m22", "m23", "m31",
+        "m32", "m33"]) {
+        maximumError = Math.max(maximumError, Math.abs(sky[key] - expected[key]));
+      }
+      return maximumError;
+    };
+    const errors = [];
+    for (const [controlPitch, controlYaw] of [[34.23, 0], [10, 140], [80, -300]]) {
+      window.__mercury.camera.setState({ controlPitch, controlYaw });
+      errors.push(compare());
+    }
+    return errors;
+  });
+  assert.ok(skyLock.every((error) => error < 1e-6), `sky lock ${skyLock}`);
+  await page.evaluate(() => window.__mercury.camera.setState({
+    controlPitch: window.__mercury.camera.stats().defaultControlPitchDegrees,
+    controlYaw: window.__mercury.camera.stats().defaultControlYawDegrees,
+    zoom: 1.1,
+  }));
+  await drag(page, ".mercury-input-surface", 90, 40);
+  const draggedSkyLock = await page.evaluate(() => {
+    window.__mercury.camera.setState({ zoom: 1.1 });
+    const registration = new DOMMatrix(
+      window.__mercury.sky.sceneRegistration,
+    );
+    const scene = new DOMMatrix(
+      document.querySelector(".mercury-scene").style.transform
+        .replace(/^scale\([^)]*\)\s*/u, ""),
+    );
+    const sky = new DOMMatrix(
+      document.querySelector(".mercury-skybox-orientation").style.transform,
+    );
+    const expected = scene.multiply(registration);
+    const sunDirection = window.__mercury.sky.state().skySunViewDirection;
+    const sunLocal = window.__mercury.sky.sunLocalDirection;
+    const sunExpected = [
+      scene.m11 * sunLocal[0] + scene.m21 * sunLocal[1] + scene.m31 * sunLocal[2],
+      -(scene.m12 * sunLocal[0] + scene.m22 * sunLocal[1] + scene.m32 * sunLocal[2]),
+      scene.m13 * sunLocal[0] + scene.m23 * sunLocal[1] + scene.m33 * sunLocal[2],
+    ];
+    let maximumError = 0;
+    for (const key of ["m11", "m12", "m13", "m21", "m22", "m23", "m31", "m32",
+      "m33"]) {
+      maximumError = Math.max(maximumError, Math.abs(sky[key] - expected[key]));
+    }
+    return {
+      skyError: maximumError,
+      sunError: Math.max(...sunExpected.map((value, axis) =>
+        Math.abs(value - sunDirection[axis]))),
+      moved: window.__mercury.camera.state().controlYaw !== 0,
+    };
+  });
+  assert.ok(draggedSkyLock.moved);
+  assert.ok(draggedSkyLock.skyError < 1e-6, `dragged sky ${draggedSkyLock.skyError}`);
+  assert.ok(draggedSkyLock.sunError < 1e-6, `dragged sun ${draggedSkyLock.sunError}`);
+
+  // Astrometric sky: the Milky Way must cross the screen where the J2000
+  // galactic frame, Mercury's pole and the ecliptic presentation frame put
+  // it. Measured on the rendered high-contrast faces with the body hidden,
+  // against a prediction that projects the galactic equator through the
+  // published registration and the live scene matrix.
+  await page.evaluate(() => {
+    document.body.dataset.skyContrast = "high";
+  });
+  await page.waitForFunction(() => performance.getEntriesByType("resource")
+    .filter(({ name }) =>
+      /mercury-starfield-(?:front|right|back|left|top|bottom)@2x\.webp$/u
+        .test(name)).length >= 6);
+  const galacticToIcrs = transposeMatrix(ICRS_TO_GALACTIC);
+  const skyRegistration = parseCssMatrix(
+    PREPARED_MERCURY_SCENE.starfield.sceneRegistration,
+  );
+  for (const [controlPitch, controlYaw, expectedInclination] of [
+    // Scene pitch 0 looking away from the centre: the plane's 60.2 degree
+    // inclination shows as 180 - 60.2 from the horizontal.
+    [89, 0, 119.8],
+    // The same pose turned onto the galactic centre: 60.2 degrees.
+    [89, 176, 60.2],
+  ]) {
+    await page.evaluate(([pitch, yaw]) => window.__mercury.camera.setState({
+      controlPitch: pitch,
+      controlYaw: yaw,
+      zoom: 1.1,
+    }), [controlPitch, controlYaw]);
+    await nextPaint(page);
+    const view = await page.evaluate(() => {
+      const sky = document.querySelector(".mercury-skybox");
+      const box = sky.getBoundingClientRect();
+      const scene = new DOMMatrix(document.querySelector(".mercury-scene")
+        .style.transform.replace(/^scale\([^)]*\)\s*/u, ""));
+      return {
+        scene: [scene.m11, scene.m21, scene.m31, scene.m12, scene.m22,
+          scene.m32, scene.m13, scene.m23, scene.m33],
+        perspective: parseFloat(getComputedStyle(sky).perspective),
+        box: { x: box.x, y: box.y, width: box.width, height: box.height },
+      };
+    });
+    const skyMatrix = multiplyMatrices(view.scene, skyRegistration);
+    const project = (direction) => {
+      const [x, y, z] = transformDirection(skyMatrix, direction);
+      return z < 0
+        ? [view.box.width / 2 + view.perspective * x / -z,
+          view.box.height / 2 + view.perspective * y / -z]
+        : null;
+    };
+    const planePoints = [];
+    for (let longitude = 0; longitude < 360; longitude += 0.25) {
+      const point = project(transformDirection(
+        galacticToIcrs,
+        directionFromDegrees(longitude, 0),
+      ));
+      if (point && point[0] >= 0 && point[0] < view.box.width &&
+          point[1] >= 0 && point[1] < view.box.height) {
+        planePoints.push([point[0], point[1], 1]);
+      }
+    }
+    const predictedAngle = principalAxisDegrees(planePoints);
+    assert.ok(Math.abs(predictedAngle - expectedInclination) < 1,
+      `predicted band angle ${predictedAngle} at ${controlPitch}/${controlYaw}`);
+    // Sky only: hide every sibling along the skybox's ancestor chain (body,
+    // Sun sprite, lighting overlay, shell chrome) for the shot.
+    await page.evaluate(() => {
+      const hidden = [];
+      let node = document.querySelector(".mercury-skybox");
+      while (node && node !== document.body) {
+        for (const sibling of node.parentElement.children) {
+          if (sibling === node) continue;
+          hidden.push([sibling, sibling.style.visibility]);
+          sibling.style.visibility = "hidden";
+        }
+        node = node.parentElement;
+      }
+      window.__mercurySkyShotRestore = () => {
+        for (const [element, visibility] of hidden) {
+          element.style.visibility = visibility;
+        }
+        delete window.__mercurySkyShotRestore;
+      };
+    });
+    await nextPaint(page);
+    const band = await milkyWayBand(await page.screenshot({ clip: view.box }));
+    await page.evaluate(() => window.__mercurySkyShotRestore());
+    await nextPaint(page);
+    assert.ok(Math.abs(band.angleDegrees - predictedAngle) < 6,
+      `Milky Way band ${band.angleDegrees} vs predicted ${predictedAngle} ` +
+      `at ${controlPitch}/${controlYaw}`);
+    if (controlYaw === 176) {
+      // The bulge is the brightest sky region and must sit on the predicted
+      // galactic centre (within 6 degrees: the photographic peak is not the
+      // dynamical centre).
+      const centre = project(transformDirection(galacticToIcrs, [1, 0, 0]));
+      assert.ok(centre);
+      const separation = Math.hypot(band.peak[0] - centre[0],
+        band.peak[1] - centre[1]);
+      assert.ok(separation < view.perspective * Math.tan(6 * Math.PI / 180),
+        `bulge peak ${band.peak} vs galactic centre ${centre}`);
+    }
+  }
+  await page.evaluate(() => {
+    delete document.body.dataset.skyContrast;
+  });
+
   const sunSweep = await page.evaluate(() => {
-    const pitch = window.__mercury.camera.stats().defaultControlPitchDegrees;
+    const stats = window.__mercury.camera.stats();
     const samples = [];
-    for (let yaw = -105; yaw <= 255; yaw += 15) {
-      window.__mercury.camera.setState({ controlPitch: pitch, controlYaw: yaw });
-      samples.push({ yaw, ...window.__mercury.sky.state() });
+    // The observed Sun rides the body, so covering the full phase range needs
+    // the pitch axis too: at the default scene pitch the Sun never stands far
+    // behind the camera for any yaw.
+    for (const pitch of [
+      stats.defaultControlPitchDegrees,
+      stats.maximumPitchDegrees,
+    ]) {
+      for (let yaw = -105; yaw <= 255; yaw += 15) {
+        window.__mercury.camera.setState({
+          controlPitch: pitch,
+          controlYaw: yaw,
+        });
+        samples.push({ pitch, yaw, ...window.__mercury.sky.state() });
+      }
     }
     return samples;
   });
-  assert.equal(sunSweep.length, 25);
+  assert.equal(sunSweep.length, 50);
   assert.ok(Math.min(...sunSweep.map(({ sunViewDirection }) =>
     sunViewDirection[2])) < -0.75);
   assert.ok(Math.max(...sunSweep.map(({ sunViewDirection }) =>
@@ -275,7 +515,12 @@ try {
   }));
   assert.ok(interiorMetrics.orangePixels > 15_000);
   assert.ok(interiorMetrics.shellPixels > 5_000);
-  assert.ok(interiorMetrics.orangeGapFraction < 0.01);
+  // The default camera stands south of the ecliptic and sees both section
+  // faces: their axis seam and the hollow shell at the south end are not
+  // mesh gaps, so allow a few percent; a missing or misaligned section leaf
+  // would leave far more of the span unpainted.
+  assert.ok(interiorMetrics.orangeGapFraction < 0.05,
+    `interior gap fraction ${interiorMetrics.orangeGapFraction}`);
   await page.evaluate(() => window.__mercury.camera.setState({ controlPitch: 0 }));
   await nextPaint(page);
   const interiorLowMetrics = await interiorContinuity(await page.screenshot({
@@ -362,6 +607,97 @@ try {
   await browser.close();
 }
 
+function parseCssMatrix(cssTransform) {
+  const values = cssTransform.slice("matrix3d(".length, -1).split(",")
+    .map(Number);
+  assert.equal(values.length, 16);
+  return [
+    values[0], values[4], values[8],
+    values[1], values[5], values[9],
+    values[2], values[6], values[10],
+  ];
+}
+
+function multiplyMatrices(a, b) {
+  const result = new Array(9);
+  for (let row = 0; row < 3; row += 1) {
+    for (let column = 0; column < 3; column += 1) {
+      result[row * 3 + column] = a[row * 3] * b[column] +
+        a[row * 3 + 1] * b[3 + column] + a[row * 3 + 2] * b[6 + column];
+    }
+  }
+  return result;
+}
+
+// Orientation of the principal axis of weighted screen samples, degrees from
+// the horizontal with y up, in [0, 180).
+function principalAxisDegrees(samples) {
+  let weight = 0;
+  let meanX = 0;
+  let meanY = 0;
+  for (const [x, y, k] of samples) {
+    weight += k;
+    meanX += k * x;
+    meanY += k * y;
+  }
+  meanX /= weight;
+  meanY /= weight;
+  let xx = 0;
+  let yy = 0;
+  let xy = 0;
+  for (const [x, y, k] of samples) {
+    const dx = x - meanX;
+    const dy = -(y - meanY);
+    xx += k * dx * dx;
+    yy += k * dy * dy;
+    xy += k * dx * dy;
+  }
+  return (0.5 * Math.atan2(2 * xy, xx - yy) * 180 / Math.PI + 180) % 180;
+}
+
+// The diffuse band: blurred luminance above its 90th percentile, weighted by
+// the excess, plus the brightest blurred pixel.
+async function milkyWayBand(image) {
+  const { data, info } = await sharp(image).raw().toBuffer({
+    resolveWithObject: true,
+  });
+  const width = info.width;
+  const height = info.height;
+  const luminance = new Uint8Array(width * height);
+  for (let index = 0; index < width * height; index += 1) {
+    const offset = index * info.channels;
+    luminance[index] = Math.min(255, Math.round(
+      0.2126 * data[offset] + 0.7152 * data[offset + 1] +
+        0.0722 * data[offset + 2],
+    ));
+  }
+  const { data: blurredRaw, info: blurredInfo } = await sharp(
+    Buffer.from(luminance),
+    { raw: { width, height, channels: 1 } },
+  ).blur(12).raw().toBuffer({ resolveWithObject: true });
+  const blurred = new Uint8Array(width * height);
+  for (let index = 0; index < width * height; index += 1) {
+    blurred[index] = blurredRaw[index * blurredInfo.channels];
+  }
+  const sorted = Array.from(blurred).sort((a, b) => a - b);
+  const threshold = sorted[Math.floor(sorted.length * 0.9)];
+  const samples = [];
+  let peakValue = -1;
+  let peak = null;
+  for (let y = 0; y < height; y += 2) {
+    for (let x = 0; x < width; x += 2) {
+      const value = blurred[y * width + x];
+      if (value > peakValue) {
+        peakValue = value;
+        peak = [x, y];
+      }
+      if (value > threshold) samples.push([x, y, value - threshold]);
+    }
+  }
+  assert.ok(samples.length > 1_000, "sky too dark to measure");
+  return { angleDegrees: principalAxisDegrees(samples), peak, threshold };
+}
+
 async function drag(page, selector, deltaX, deltaY) {
   const box = await page.locator(selector).boundingBox();
   assert.ok(box);
@@ -384,6 +720,37 @@ async function wheel(page, selector, deltaY) {
 async function nextPaint(page) {
   await page.evaluate(() => new Promise((resolve) =>
     requestAnimationFrame(() => requestAnimationFrame(resolve))));
+}
+
+// Luminance-weighted centroid of the disc, in screen coordinates. The lit
+// direction is its angle (0 right, 90 up, 180 left); the terminator is
+// perpendicular to it.
+async function litDirection(image) {
+  const { data, info } = await sharp(image).raw().toBuffer({
+    resolveWithObject: true,
+  });
+  const centerX = info.width / 2;
+  const centerY = info.height / 2;
+  const radius = Math.min(centerX, centerY) * 0.95;
+  let weight = 0;
+  let momentX = 0;
+  let momentY = 0;
+  for (let y = 0; y < info.height; y += 1) {
+    for (let x = 0; x < info.width; x += 1) {
+      if (Math.hypot(x - centerX, y - centerY) > radius) continue;
+      const offset = (y * info.width + x) * info.channels;
+      const luminance = 0.2126 * data[offset] + 0.7152 * data[offset + 1] +
+        0.0722 * data[offset + 2];
+      weight += luminance;
+      momentX += luminance * (x - centerX);
+      momentY += luminance * (y - centerY);
+    }
+  }
+  return {
+    litDirectionDegrees: Math.atan2(-momentY / weight, momentX / weight) *
+      180 / Math.PI,
+    centroidRadiusShare: Math.hypot(momentX / weight, momentY / weight) / radius,
+  };
 }
 
 async function neutralDarkDiscFraction(image) {

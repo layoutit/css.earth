@@ -11,6 +11,7 @@ import { PREPARED_MERCURY_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_MERCURY_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_MERCURY_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import { PREPARED_MERCURY_STARFIELD } from "../runtime/preparedStarfield.mjs";
+import { MERCURY_PRESENTATION_FRAME } from "../tools/scene-camera-pose.mjs";
 
 test("publishes one prepared retained Mercury scene", () => {
   assert.equal(
@@ -31,7 +32,7 @@ test("publishes one prepared retained Mercury scene", () => {
     PREPARED_MERCURY_SCENE.camera.defaultControlPitchDegrees,
     89 * (1 - 40 / 65),
   );
-  assert.equal(PREPARED_MERCURY_SCENE.camera.defaultControlYawDegrees, -105);
+  assert.equal(PREPARED_MERCURY_SCENE.camera.defaultControlYawDegrees, 0);
   assert.equal(PREPARED_MERCURY_SCENE.camera.responsiveFit.model,
     "continuous-aspect-smoothstep");
   assert.equal(PREPARED_MERCURY_SCENE.camera.runtimeGeometryDerivation, false);
@@ -39,6 +40,27 @@ test("publishes one prepared retained Mercury scene", () => {
   assert.equal(PREPARED_MERCURY_SCENE.material.frameCount, 256);
   assert.equal(PREPARED_MERCURY_SCENE.material.defaultFrame, 230);
   assert.equal(PREPARED_MERCURY_SCENE.bodyTransform, "rotateZ(-118deg)");
+  assert.equal(PREPARED_MERCURY_SCENE.interior.bodyTransform, "rotateZ(120deg)");
+  assert.equal(
+    PREPARED_MERCURY_SCENE.systemTransform,
+    MERCURY_PRESENTATION_FRAME.cssTransform,
+  );
+  assert.equal(
+    PREPARED_MERCURY_SCENE.presentationFrame.model,
+    "ecliptic-north-up-sun-left-presentation-frame",
+  );
+  assert.deepEqual(
+    [...PREPARED_MERCURY_SCENE.presentationFrame.sunDirection],
+    [...PREPARED_MERCURY_SKY_SUN.localDirection],
+  );
+  assert.equal(
+    PREPARED_MERCURY_SCENE.starfield.cameraContract,
+    "scene-locked-unbounded-accumulated-matrix3d",
+  );
+  assert.match(
+    PREPARED_MERCURY_SCENE.starfield.sceneRegistration,
+    /^matrix3d\((?:[^,]+,){15}1\)$/u,
+  );
   assert.equal(
     PREPARED_MERCURY_SCENE.interior.schema,
     "cssmercury-prepared-cutaway@1",
@@ -113,7 +135,7 @@ test("publishes one prepared retained Mercury scene", () => {
   assert.equal(PREPARED_MERCURY_STARFIELD.runtimeRasterization, false);
   assert.equal(
     PREPARED_MERCURY_SCENE.starfield.cameraContract,
-    "inverse-unbounded-accumulated-matrix3d",
+    "scene-locked-unbounded-accumulated-matrix3d",
   );
   assert.equal(PREPARED_MERCURY_SCENE.counts.starfieldFaceCount, 6);
   assert.equal(PREPARED_MERCURY_SCENE.counts.sunBillboardCount, 1);
