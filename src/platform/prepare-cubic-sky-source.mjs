@@ -47,6 +47,11 @@ export async function preparePlanetCubicSky({
   includeSun = true,
   cameraContract = null,
   pointSourceContract = null,
+  // Opt-in astrometric registration (see astrometric-sky-registration.mjs):
+  // the cube is sampled in ICRF through a derived rotation chain instead of
+  // the shared hand-registered Euler angles. Objects that do not opt in keep
+  // their accepted sky untouched.
+  astrometricSampling = null,
   sourceSchema = `css${objectId}-prepared-star-source@1`,
 }) {
   if (!/^[a-z][a-z0-9-]*$/u.test(objectId) ||
@@ -76,6 +81,13 @@ export async function preparePlanetCubicSky({
         pointSourceContract.backgroundDiffuseGain >= DIFFUSE_GAIN ||
         typeof pointSourceContract.source !== "string" ||
         typeof pointSourceContract.sourcePath !== "string"
+      )) ||
+      (astrometricSampling !== null && (
+        typeof astrometricSampling.model !== "string" ||
+        typeof astrometricSampling.cubeFrame !== "string" ||
+        !Array.isArray(astrometricSampling.matrix) ||
+        astrometricSampling.matrix.length !== 9 ||
+        astrometricSampling.matrix.some((value) => !Number.isFinite(value))
       ))) {
     throw new TypeError("Planet cubic-sky preparation arguments are invalid.");
   }
@@ -104,6 +116,7 @@ if (photo.info.width !== PHOTO_WIDTH ||
 const diffusePhoto = await prepareWrappedDiffuse(photo.data, photo.info);
 const basis = equatorialCubemapBasis(catalog.projection);
 const registration = rotationMatrix(REGISTRATION_ROTATION_DEGREES);
+const astrometricMatrix = astrometricSampling?.matrix ?? null;
 const sunOracle = includeSun
   ? validateCubicSkySunOracle(JSON.parse(await readFile(resolve(
     sourceRoot,
@@ -133,6 +146,7 @@ for (const density of [1, 2]) {
       photo.info,
       DETAIL_GAIN,
       DIFFUSE_GAIN,
+      astrometricMatrix,
     );
     const photographicStandardPixels = prepareStandardCubicSkyPixels(
       highContrastPixels,
@@ -149,6 +163,7 @@ for (const density of [1, 2]) {
         photo.info,
         pointSourceContract.backgroundDetailGain,
         pointSourceContract.backgroundDiffuseGain,
+        astrometricMatrix,
       ));
     const pointSelectionPixels = pointSourceContract !== null && density === 1
       ? prepareStandardCubicSkyPixels(preparePhotographicFace(
@@ -161,6 +176,7 @@ for (const density of [1, 2]) {
         photo.info,
         pointSourceContract.backgroundDetailGain,
         DIFFUSE_GAIN,
+        astrometricMatrix,
       ))
       : standardPixels;
     return {
@@ -263,8 +279,10 @@ const prepared = Object.freeze({
   faceSize: FACE_SIZE,
   faceSize2x: FACE_SIZE * 2,
   faces: Object.freeze(faces.map((face) => Object.freeze(face))),
-  centerRaDegrees: catalog.projection.centerRaDegrees,
-  centerDecDegrees: catalog.projection.centerDecDegrees,
+  ...(astrometricSampling === null ? {
+    centerRaDegrees: catalog.projection.centerRaDegrees,
+    centerDecDegrees: catalog.projection.centerDecDegrees,
+  } : {}),
   cameraPitchResponse: cameraContract?.rotationResponse ??
     CUBIC_SKY_STANDARD.cameraPitchResponse,
   cameraZoomResponse: cameraContract?.zoomResponse ??
@@ -290,14 +308,22 @@ const prepared = Object.freeze({
     }),
   }),
   standardPresentation: CUBIC_SKY_STANDARD.standardPresentation,
-  photographicRegistration: Object.freeze({
-    rotationDegrees: REGISTRATION_ROTATION_DEGREES,
-    rotationOrder: "rotate-z-after-y-after-x-in-cubemap-local-direction-space",
+  ...(astrometricSampling === null ? {
+    photographicRegistration: Object.freeze({
+      rotationDegrees: REGISTRATION_ROTATION_DEGREES,
+      rotationOrder:
+        "rotate-z-after-y-after-x-in-cubemap-local-direction-space",
+    }),
+  } : {
+    astrometricRegistration: astrometricSampling,
   }),
   catalogRegistration: Object.freeze({
     source: "HYG Stellar Database v4.1",
     sourceLicense: "CC-BY-SA-4.0",
-    role: "coordinate-registration audit; photograph owns visible stars",
+    role: astrometricSampling === null
+      ? "coordinate-registration audit; photograph owns visible stars"
+      : "retained source record only; the photograph is registered " +
+        "astrometrically and owns visible stars",
   }),
   ...(cameraContract === null ? {} : {
     cameraContract: Object.freeze({ ...cameraContract }),
@@ -367,8 +393,14 @@ const prepared = Object.freeze({
   runtimeRasterization: false,
   orientation: "camera-rotation-only-no-translation-or-parallax",
   qualification:
-    "source-photographed full sky; orientation is registered to Galactic " +
-    `coordinates but no observer epoch or ${objectName} ephemeris is claimed; ` +
+    (astrometricSampling === null
+      ? "source-photographed full sky; orientation is registered to Galactic " +
+        `coordinates but no observer epoch or ${objectName} ephemeris is ` +
+        "claimed; "
+      : "source-photographed full sky sampled in ICRF through the J2000 " +
+        "galactic frame and the anchor-registered panorama; the scene " +
+        `registration carries the ${objectName} pole and epoch; Solar System ` +
+        "objects in the mosaic are capture artefacts; ") +
     (includeSun
       ? "the external Sun is prepared into the cubemap"
       : "no Sun is baked into the cubemap"),
@@ -399,6 +431,7 @@ function preparePhotographicFace(
   sourceInfo,
   detailGain,
   diffuseGain,
+  astrometricMatrix = null,
 ) {
   const pixels = Buffer.alloc(faceSize * faceSize * 3);
   const matrix = ICRS_STANDARD_TO_GALACTIC;
@@ -411,28 +444,46 @@ function preparePhotographicFace(
       const directionX = cameraX / cameraLength;
       const directionY = cameraY / cameraLength;
       const directionZ = cameraZ / cameraLength;
-      const registeredX = registration[0] * directionX +
-        registration[1] * directionY + registration[2] * directionZ;
-      const registeredY = registration[3] * directionX +
-        registration[4] * directionY + registration[5] * directionZ;
-      const registeredZ = registration[6] * directionX +
-        registration[7] * directionY + registration[8] * directionZ;
-      const equatorialX = basis.right[0] * registeredX -
-        basis.up[0] * registeredY - basis.forward[0] * registeredZ;
-      const equatorialY = basis.right[1] * registeredX -
-        basis.up[1] * registeredY - basis.forward[1] * registeredZ;
-      const equatorialZ = basis.right[2] * registeredX -
-        basis.up[2] * registeredY - basis.forward[2] * registeredZ;
-      const galacticX = matrix[0] * equatorialX +
-        matrix[1] * equatorialZ + matrix[2] * equatorialY;
-      const galacticY = matrix[3] * equatorialX +
-        matrix[4] * equatorialZ + matrix[5] * equatorialY;
-      const galacticZ = clamp(
-        matrix[6] * equatorialX + matrix[7] * equatorialZ +
-          matrix[8] * equatorialY,
-        -1,
-        1,
-      );
+      let galacticX;
+      let galacticY;
+      let galacticZ;
+      if (astrometricMatrix !== null) {
+        // Cube-local direction is an ICRF direction; the matrix takes it
+        // straight into the panorama's galactic frame.
+        galacticX = astrometricMatrix[0] * directionX +
+          astrometricMatrix[1] * directionY + astrometricMatrix[2] * directionZ;
+        galacticY = astrometricMatrix[3] * directionX +
+          astrometricMatrix[4] * directionY + astrometricMatrix[5] * directionZ;
+        galacticZ = clamp(
+          astrometricMatrix[6] * directionX + astrometricMatrix[7] * directionY +
+            astrometricMatrix[8] * directionZ,
+          -1,
+          1,
+        );
+      } else {
+        const registeredX = registration[0] * directionX +
+          registration[1] * directionY + registration[2] * directionZ;
+        const registeredY = registration[3] * directionX +
+          registration[4] * directionY + registration[5] * directionZ;
+        const registeredZ = registration[6] * directionX +
+          registration[7] * directionY + registration[8] * directionZ;
+        const equatorialX = basis.right[0] * registeredX -
+          basis.up[0] * registeredY - basis.forward[0] * registeredZ;
+        const equatorialY = basis.right[1] * registeredX -
+          basis.up[1] * registeredY - basis.forward[1] * registeredZ;
+        const equatorialZ = basis.right[2] * registeredX -
+          basis.up[2] * registeredY - basis.forward[2] * registeredZ;
+        galacticX = matrix[0] * equatorialX +
+          matrix[1] * equatorialZ + matrix[2] * equatorialY;
+        galacticY = matrix[3] * equatorialX +
+          matrix[4] * equatorialZ + matrix[5] * equatorialY;
+        galacticZ = clamp(
+          matrix[6] * equatorialX + matrix[7] * equatorialZ +
+            matrix[8] * equatorialY,
+          -1,
+          1,
+        );
+      }
       const galacticLongitude = Math.atan2(galacticY, galacticX);
       const galacticLatitude = Math.asin(galacticZ);
       const sourceX = (Math.PI - galacticLongitude) / (2 * Math.PI) *
