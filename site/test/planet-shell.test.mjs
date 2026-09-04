@@ -19,6 +19,7 @@ test("keeps every implemented scene in one object registry", () => {
     "saturn",
     "uranus",
     "neptune",
+    "pluto",
   ]);
   assert.deepEqual(
     objectAdapter.routes(),
@@ -250,7 +251,6 @@ test("keeps implemented routes backed by object-owned files", async () => {
       `../../src/planets/${planet.id}/test`,
       `../../src/planets/${planet.id}/tools`,
       `../pages/${planet.id}.astro`,
-      `../../data/planets/${planet.id}.json`,
     ];
     await Promise.all(owned.map((relativePath) =>
       access(new URL(relativePath, import.meta.url))));
@@ -550,7 +550,7 @@ test("places desktop search and the collapse control around the sidebar", async 
   );
   assert.match(
     shell,
-    /placeholder=\{`Search planets \(\$\{planetCount\}\)`\}/u,
+    /placeholder=\{`Search objects \(\$\{planetCount\}\)`\}/u,
   );
   assert.match(
     header,
@@ -739,7 +739,7 @@ test("switches the desktop sidebar to the one shared planet list", async () => {
   ]);
   assert.match(
     shell,
-    /class="planet-sidebar-search-card"[\s\S]*?class="planet-sidebar-search"[\s\S]*?Search planets[\s\S]*?class="planet-sidebar-view-all"[\s\S]*?aria-label="View all objects"[\s\S]*?>×<\/button>[\s\S]*?class="planet-object-browser maps-object-results"[\s\S]*?aria-label="Planets"[\s\S]*?hidden[\s\S]*?<PlanetObjectResults activeObjectId=\{objectId\} \/>/u,
+    /class="planet-sidebar-search-card"[\s\S]*?class="planet-sidebar-search"[\s\S]*?Search objects[\s\S]*?class="planet-sidebar-view-all"[\s\S]*?aria-label="View all objects"[\s\S]*?>×<\/button>[\s\S]*?class="planet-object-browser maps-object-results"[\s\S]*?aria-label="Objects"[\s\S]*?hidden[\s\S]*?<PlanetObjectResults activeObjectId=\{objectId\} \/>/u,
   );
   assert.match(results, /PLANET_SEARCH_OBJECTS\.map\(\(object, index\)/u);
   assert.match(results, /aria-current=\{object\.id === activeObjectId \? "page" : undefined\}/u);

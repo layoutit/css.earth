@@ -1,0 +1,45 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from
+  "../../../../site/prepared-shell-titles.mjs";
+import { PREPARED_PLUTO_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_PLUTO_TITLE } from "./preparedTitle.mjs";
+import { PREPARED_PLUTO_LENSES } from "../runtime/preparedLenses.mjs";
+
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_PLUTO_LENSES.defaultLens,
+  controls: PREPARED_PLUTO_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lens.qualification,
+    title: `${lens.label}: ${lens.qualification}`,
+  })),
+};
+
+const resources = [
+  { label: "NASA", role: "facts", description: "Pluto facts", href: "https://science.nasa.gov/dwarf-planets/pluto/facts/" },
+  { label: "New Horizons", role: "surface", description: "MVIC color map", href: "https://science.nasa.gov/resource/pluto-global-color-map/" },
+  { label: "USGS", role: "maps", description: "Mosaic and elevation", href: "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m" },
+  { label: "JPL", role: "physical", description: "Physical parameters", href: "https://ssd.jpl.nasa.gov/planets/phys_par.html" },
+  { label: "ESO", role: "stars", description: "Background star field", href: "https://www.eso.org/public/images/eso0932a/" },
+];
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="pluto"
+  title={PREPARED_PLUTO_TITLE}
+  introduction={PREPARED_PLUTO_PANEL.introduction}
+  facts={PREPARED_PLUTO_PANEL.facts}
+  moreFacts={PREPARED_PLUTO_PANEL.moreFacts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

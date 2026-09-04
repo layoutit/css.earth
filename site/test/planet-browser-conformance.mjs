@@ -764,7 +764,10 @@ async function proveInteractionInterruptions(page, planet, profile) {
   assert.equal(activeFly.activeMotionCount, 1,
     `${planet.id}: fly-to must be the only active camera motion`);
   const zoomBeforeFlyWheel = (await profile.camera(page)).zoom;
-  await wheel(page, profile.inputSelector, -40);
+  // Zoom out: some valid fly-to targets already equal maximumZoom (for
+  // example Venus: 1.9 * 2.33 clamps to 4). An inward wheel cannot rebase
+  // that target, so it cannot exercise the exact-one-rebase assertion below.
+  await wheel(page, profile.inputSelector, 40);
   const flyAfterWheel = await interactionStats(page, planet.id);
   assert.equal(flyAfterWheel.activeMode, "fly-to",
     `${planet.id}: wheel zoom must coexist with fly-to`);

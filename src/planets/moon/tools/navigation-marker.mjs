@@ -2,6 +2,7 @@ export default Object.freeze({
   schema: "cssearth-navigation-marker@1",
   planetId: "moon",
   owner: "object",
+  presentation: Object.freeze({"size":6}),
   source: Object.freeze({
     path: "surface/lroc-color-2k.jpg",
     expectedBytes: 457942,

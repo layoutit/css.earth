@@ -2,6 +2,7 @@ export default Object.freeze({
   schema: "cssearth-navigation-marker@1",
   planetId: "mars",
   owner: "object",
+  presentation: Object.freeze({"size":6}),
   source: Object.freeze({
     path: "presentation/navigation-marker.jpg",
     expectedBytes: 139134,

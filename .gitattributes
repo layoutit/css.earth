@@ -1,0 +1,6 @@
+# Preserve hash-pinned upstream snapshots byte-for-byte, including whitespace.
+src/planets/pluto/source/lenses/pluto-dem.lbl -whitespace
+src/planets/pluto/source/lenses/usgs-dem-metadata.html -whitespace
+src/planets/pluto/source/lenses/usgs-mosaic-metadata.html -whitespace
+src/planets/pluto/source/orbit/jpl-physical.html -whitespace
+src/planets/pluto/source/surface/nasa-color-metadata.html -whitespace

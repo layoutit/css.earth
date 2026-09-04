@@ -78,3 +78,17 @@ function source(id, sourceId, name, expectedTitle, canonicalPath) {
 function validDate(value) {
   return typeof value === "string" && Number.isFinite(Date.parse(value));
 }
+
+// This NASA snapshot rule belongs to this provider, not the generic object package.
+export function validatePlanetEditorial(planet, editorial) {
+  const source = planetInformationSource(planet.id);
+  try {
+    validatePlanetInformationSnapshot(editorial);
+  } catch (cause) {
+    throw new TypeError(`Planet ${planet.id} editorial snapshot is incompatible.`);
+  }
+  if (planet.name !== source.name || editorial.planet !== planet.name) {
+    throw new TypeError(`Planet ${planet.id} editorial snapshot is incompatible.`);
+  }
+  return true;
+}

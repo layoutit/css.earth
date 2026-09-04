@@ -18,6 +18,7 @@ const loadScene = async () => () => {};
 const fixture = Object.freeze({
   id: "fixture",
   name: "Fixture",
+  classification: "dwarf-planet",
   color: "#abcdef",
   distanceAu: 1,
   route: "/fixture/",
@@ -30,6 +31,7 @@ test("defines one generic renderable-object contract", () => {
   assert.deepEqual(Object.keys(objectRecord), [
     "id",
     "name",
+    "classification",
     "color",
     "distanceAu",
     "route",
@@ -79,6 +81,7 @@ test("keeps one open-ended object registry with unique ids and routes", () => {
     "saturn",
     "uranus",
     "neptune",
+    "pluto",
   ]);
   assert.ok(OBJECTS.every((objectRecord) =>
     Object.keys(objectRecord).join("\0") === Object.keys(OBJECTS[0]).join("\0")));

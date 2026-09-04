@@ -142,8 +142,8 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
     <input
       class="planet-sidebar-search"
       type="search"
-      placeholder={`Search planets (${planetCount})`}
-      aria-label={`Search ${planetCount} planets`}
+      placeholder={`Search objects (${planetCount})`}
+      aria-label={`Search ${planetCount} objects`}
       autocomplete="off"
       value={activeObject?.name ?? ""}
     />
@@ -160,7 +160,7 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
     <nav
       id={`${objectId}-object-browser`}
       class="planet-object-browser maps-object-results"
-      aria-label="Planets"
+      aria-label="Objects"
       hidden
     >
       <PlanetObjectResults activeObjectId={objectId} />

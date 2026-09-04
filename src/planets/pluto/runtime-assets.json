@@ -1,0 +1,220 @@
+{
+  "schema": "csspluto-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "pluto-curvature.webp",
+      "bytes": 17840,
+      "sha256": "f60e458f46c96da4b865f8c2c9586e0c5b47a3937ef640132a811fa7a43d503f"
+    },
+    {
+      "filename": "pluto-curvature@2x.webp",
+      "bytes": 48440,
+      "sha256": "44e7182701e1b726820365b7f2bb420c34bd3e77684ede4d7f94b73c9f56b038"
+    },
+    {
+      "filename": "pluto-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "filename": "pluto-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "filename": "pluto-monochrome-poles.webp",
+      "bytes": 3836,
+      "sha256": "989a42e70178bc6986b8c8a64150e167abb511b5a5e8b8e14f332a94931d4dc5"
+    },
+    {
+      "filename": "pluto-monochrome-poles@2x.webp",
+      "bytes": 13164,
+      "sha256": "5860e06acfc4fede233f0ffb8fc151f38ef3d2875b26a081c824c60cc44935a7"
+    },
+    {
+      "filename": "pluto-monochrome-thumbnail.webp",
+      "bytes": 1722,
+      "sha256": "39d07d9e157be3076a2d5c9700e021eaf7ab3b2cb02f307a0500cfad8596d5c5"
+    },
+    {
+      "filename": "pluto-monochrome.webp",
+      "bytes": 85802,
+      "sha256": "161dda8474514747d1a48eb4b7653dd97551a96f1d3496bd04e0c7047c3713e2"
+    },
+    {
+      "filename": "pluto-monochrome@2x.webp",
+      "bytes": 290262,
+      "sha256": "22ed987095702c93fd392bdedf688526e881d0535476bb678ca565859e803b32"
+    },
+    {
+      "filename": "pluto-starfield-back-standard.webp",
+      "bytes": 294528,
+      "sha256": "9b58c375386b2728d419fd0512d3154c4a59351a1fde5b03969c11509aa0c6a4"
+    },
+    {
+      "filename": "pluto-starfield-back-standard@2x.webp",
+      "bytes": 1073274,
+      "sha256": "1f850dc6daca82790f20345f652746e5464b38d04ea0d7b1a3a6644e4d756b77"
+    },
+    {
+      "filename": "pluto-starfield-back.webp",
+      "bytes": 604224,
+      "sha256": "05ca17562e0835098effd060ab9c754701bc000c9307fbf164834ae1c28a762e"
+    },
+    {
+      "filename": "pluto-starfield-back@2x.webp",
+      "bytes": 2367208,
+      "sha256": "2f365f0dd50f454ed963778dd2777172006dd873d49bf25e258bed71ee4f2aa2"
+    },
+    {
+      "filename": "pluto-starfield-bottom-standard.webp",
+      "bytes": 172048,
+      "sha256": "5c9d92aea731a0b0998c9cdcfb049bb34388eac3f1075631241dd2a2106f3701"
+    },
+    {
+      "filename": "pluto-starfield-bottom-standard@2x.webp",
+      "bytes": 589596,
+      "sha256": "d0e08cc4cefc2e59cb44016887b6868a6d89065525ed9792e204a94549642667"
+    },
+    {
+      "filename": "pluto-starfield-bottom.webp",
+      "bytes": 351892,
+      "sha256": "74f3f5153d74de2f693a5dd7e3939933bed3048e9118b8ee36a44db4ca072db2"
+    },
+    {
+      "filename": "pluto-starfield-bottom@2x.webp",
+      "bytes": 1309698,
+      "sha256": "fc94446b76a45a91979ce7814ec11f2d3c069153e2cc8035b34c73c45a36cc03"
+    },
+    {
+      "filename": "pluto-starfield-front-standard.webp",
+      "bytes": 410722,
+      "sha256": "8c5b4ed8480b07a30f61aab5254c8601e23eff0f06dcd28fa45cc50dad657013"
+    },
+    {
+      "filename": "pluto-starfield-front-standard@2x.webp",
+      "bytes": 1402212,
+      "sha256": "4694fe3878fc9781ee87866a1f4848befcd91b43bb7f85d13cb542ce8a5457c5"
+    },
+    {
+      "filename": "pluto-starfield-front.webp",
+      "bytes": 768032,
+      "sha256": "97be168b3b1ca164c9d6ce1ccf0cd2373baac3b9501a808d9aa3a21b9483ef22"
+    },
+    {
+      "filename": "pluto-starfield-front@2x.webp",
+      "bytes": 2832202,
+      "sha256": "a28a808a08b3e365d923c1553c461815b6a878bdf0f35e162fb04751b5518e91"
+    },
+    {
+      "filename": "pluto-starfield-left-standard.webp",
+      "bytes": 306818,
+      "sha256": "99fa8178d58a5ae649d21137e915207523a5a5ec469feba6321ba0b7db6f6e60"
+    },
+    {
+      "filename": "pluto-starfield-left-standard@2x.webp",
+      "bytes": 1153544,
+      "sha256": "cbdbd655c85daf987b025fe1136a86113e81a148bc29ec6688f77714ca04ad47"
+    },
+    {
+      "filename": "pluto-starfield-left.webp",
+      "bytes": 628102,
+      "sha256": "0cd4c110978a6d88e89fa76b70db815facd168b3b7d9c1dffc71acf9e41e2759"
+    },
+    {
+      "filename": "pluto-starfield-left@2x.webp",
+      "bytes": 2357886,
+      "sha256": "7be2b4e542ab9833fbb8d2348a27097e7c1d02f51de68d892f841f681fe8c8dd"
+    },
+    {
+      "filename": "pluto-starfield-right-standard.webp",
+      "bytes": 347120,
+      "sha256": "808f4ebeb68246cfe23f64ab2373686dbf187b6baf99d2ed904dfd18dc6e5e77"
+    },
+    {
+      "filename": "pluto-starfield-right-standard@2x.webp",
+      "bytes": 1276530,
+      "sha256": "213d9fdbd6a835e6d1e3a2f162691674b36ea1f59234941afc021770455a3eb3"
+    },
+    {
+      "filename": "pluto-starfield-right.webp",
+      "bytes": 685496,
+      "sha256": "9fa7ae676490e9be9f187c9f47559192abd642c8272555e915cf5382f2ae9b11"
+    },
+    {
+      "filename": "pluto-starfield-right@2x.webp",
+      "bytes": 2557186,
+      "sha256": "367a8efd49f1b8ee62e1e42c5dfbfc994e2b00a2989d926526a187e71b5fc04e"
+    },
+    {
+      "filename": "pluto-starfield-top-standard.webp",
+      "bytes": 135394,
+      "sha256": "a6669e1a6d002a0fc42908f6d7da3a23ba5886b5d400d3b603a97dbccb5b684e"
+    },
+    {
+      "filename": "pluto-starfield-top-standard@2x.webp",
+      "bytes": 441990,
+      "sha256": "663f66e2bab44098d34617a204533df743e7c44cd39c23a48ee6fc227ddf71a8"
+    },
+    {
+      "filename": "pluto-starfield-top.webp",
+      "bytes": 277824,
+      "sha256": "93d287016aab6740b83bcfee54d436bf821cd863e5a392a65146a3822e356d45"
+    },
+    {
+      "filename": "pluto-starfield-top@2x.webp",
+      "bytes": 994212,
+      "sha256": "b46b579a9188c11efdeb4c5584345f04a741c4a04322d8daa4d46ac7c07c3456"
+    },
+    {
+      "filename": "pluto-surface-poles.webp",
+      "bytes": 3812,
+      "sha256": "89d49c7cc183f4b3f1e54bf46d2c4fe77886c70d12535ea9b95cf73feba853ac"
+    },
+    {
+      "filename": "pluto-surface-poles@2x.webp",
+      "bytes": 11364,
+      "sha256": "faf3936838d547f39177d394488b4171989aee0c5b3e9bffcd9b580282c6de8d"
+    },
+    {
+      "filename": "pluto-surface-thumbnail.webp",
+      "bytes": 1846,
+      "sha256": "7df648f90cdf604d83aa2e434802248e3b838804c48364d833aefabdcdfcda4d"
+    },
+    {
+      "filename": "pluto-surface.webp",
+      "bytes": 76606,
+      "sha256": "02259f246a33ce1d5a0d2c98cd9000d8eaa15afe046617a43ff3dff480f75d29"
+    },
+    {
+      "filename": "pluto-surface@2x.webp",
+      "bytes": 205838,
+      "sha256": "88311a33885abad85330fffb58a683aa381d47f03a0826165ae7d0198f04cda8"
+    },
+    {
+      "filename": "pluto-topography-poles.webp",
+      "bytes": 4058,
+      "sha256": "a2684f02df419cadda56a440bc9d0481af88566e450f5c2fb02ba934009c5989"
+    },
+    {
+      "filename": "pluto-topography-poles@2x.webp",
+      "bytes": 9884,
+      "sha256": "7ce86762cdcb887a06ebe8ed24d05c46bbc715d7a4433c0229333f89c95b5f51"
+    },
+    {
+      "filename": "pluto-topography-thumbnail.webp",
+      "bytes": 1474,
+      "sha256": "d11ca632d30ca289f207ba482d451e046b7f3c39d3697ea114d7fd4b67b023f6"
+    },
+    {
+      "filename": "pluto-topography.webp",
+      "bytes": 42434,
+      "sha256": "20a06d0779af61808beeb9f0a31a7af631978f0a64238cc30dad1a289870a936"
+    },
+    {
+      "filename": "pluto-topography@2x.webp",
+      "bytes": 118346,
+      "sha256": "cd9260769217822b3bd3ee7f667cd46cf129377870626c30cfefda1b583b6a0b"
+    }
+  ]
+}

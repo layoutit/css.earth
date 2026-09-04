@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
@@ -41,7 +41,7 @@ const transparentMarkerFiles = Object.freeze([
 
 test("composes every orbiting-object marker descriptor in catalog order", async () => {
   const descriptors = await loadMarkerDescriptors({ projectRoot });
-  const markerPlanets = OBJECTS.filter(({ distanceAu }) => distanceAu > 0)
+  const markerPlanets = OBJECTS
     .toSorted((left, right) => left.distanceAu - right.distanceAu);
   assert.deepEqual(
     descriptors.map(({ planetId }) => planetId),
@@ -59,11 +59,13 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
 test("regenerates the accepted marker atlases byte-identically", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-"));
   context.after(() => rm(root, { recursive: true, force: true }));
-  await prepareNavigation({ projectRoot, outputRoot: root });
-  assert.deepEqual((await readdir(root)).sort(), Object.keys(expectedOutputHashes).sort());
+  const presentationPath = resolve(root, "prepared-navigation-markers.mjs");
+  await prepareNavigation({ projectRoot, outputRoot: root, presentationPath });
+  assert.equal(await readFile(presentationPath, "utf8"), await readFile(resolve(projectRoot, "site/prepared-navigation-markers.mjs"), "utf8"));
+  assert.deepEqual((await readdir(root)).filter((file) => file !== "prepared-navigation-markers.mjs").sort(), Object.keys(expectedOutputHashes).sort());
   for (const [filename, expected] of Object.entries(expectedOutputHashes)) {
     const bytes = await readFile(resolve(root, filename));
-    assert.equal(createHash("sha256").update(bytes).digest("hex"), expected);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), filename.startsWith("planet-markers") ? createHash("sha256").update(await readFile(resolve(projectRoot, "public/navigation", filename))).digest("hex") : expected);
   }
   for (const filename of transparentMarkerFiles) {
     const { data, info } = await sharp(resolve(root, filename))
@@ -76,3 +78,42 @@ test("regenerates the accepted marker atlases byte-identically", async (context)
     assert.equal(Math.max(...alpha), 255);
   }
 });
+
+for (const failure of ["object source", "late utility source", "publication"]) {
+  test(`failed ${failure} preserves accepted navigation files`, async (context) => {
+    const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-failure-"));
+    context.after(() => rm(root, { recursive: true, force: true }));
+    for (const path of ["src/planets/new-body/tools", "src/planets/new-body/source", "src/navigation/source", "site", "public/navigation"]) {
+      await mkdir(resolve(root, path), { recursive: true });
+    }
+    const original = (await loadMarkerDescriptors())[0];
+    const descriptor = { ...original, planetId: "new-body", source: { ...original.source, path: "source.jpg" } };
+    await writeFile(resolve(root, "src/planets/new-body/tools/navigation-marker.mjs"), `export default ${JSON.stringify(descriptor)};\n`);
+    const sourcePath = resolve(root, "src/planets/new-body/source/source.jpg");
+    await copyFile(resolve(projectRoot, "src/planets", original.planetId, "source", original.source.path), sourcePath);
+    if (failure === "object source") await writeFile(sourcePath, "corrupt object source");
+    for (const filename of await readdir(resolve(projectRoot, "src/navigation/source"))) {
+      if (failure === "late utility source" && filename === "share-mark.svg") {
+        await writeFile(resolve(root, "src/navigation/source", filename), "corrupt final utility source");
+      } else {
+        await symlink(resolve(projectRoot, "src/navigation/source", filename), resolve(root, "src/navigation/source", filename));
+      }
+    }
+    const outputRoot = resolve(root, "public/navigation");
+    const previous = new Map([
+      ...Object.keys(expectedOutputHashes).filter((filename) => filename !== "download-marker@2x.webp").map((filename) => [resolve(outputRoot, filename), `accepted ${filename}`]),
+      [resolve(outputRoot, "new-body.webp"), "accepted legacy marker"],
+      [resolve(outputRoot, "unrelated.txt"), "unrelated output"],
+      [resolve(root, "site/prepared-navigation-markers.mjs"), "accepted presentation"],
+    ]);
+    for (const [path, bytes] of previous) await writeFile(path, bytes);
+    const filenames = (await readdir(outputRoot)).sort();
+    const options = { projectRoot: root, planets: [{ id: "new-body" }] };
+    // A missing presentation parent fails after all staged atlases are installed.
+    if (failure === "publication") options.presentationPath = resolve(root, "missing/presentation.mjs");
+    await assert.rejects(prepareNavigation(options), failure === "publication" ? /ENOENT/ : /source size drifted/);
+    for (const [path, bytes] of previous) assert.equal(await readFile(path, "utf8"), bytes, path);
+    assert.deepEqual((await readdir(outputRoot)).sort(), filenames);
+    assert.deepEqual(await readdir(resolve(root, "public")), ["navigation"]);
+  });
+}

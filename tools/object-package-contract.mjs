@@ -9,10 +9,6 @@ import {
   validateSourceManifest,
   verifySourceManifest,
 } from "../src/platform/source-manifest.mjs";
-import {
-  planetInformationSource,
-  validatePlanetInformationSnapshot,
-} from "./planet-information-sources.mjs";
 
 export function objectPackagePaths(objectRecord, projectRoot = process.cwd()) {
   const root = resolve(projectRoot, "src", "planets", objectRecord.id);
@@ -29,12 +25,11 @@ export function objectPackagePaths(objectRecord, projectRoot = process.cwd()) {
       resolve(root, "test", "smoke-browser.mjs"),
       resolve(root, "tools", "acquire.mjs"),
       resolve(root, "tools", "prepare.mjs"),
+      resolve(root, "tools", "navigation-marker.mjs"),
       resolve(root, "tools", "verify-source-manifest.mjs"),
       resolve(root, "tools", "compact-production-assets.mjs"),
       resolve(projectRoot, "site", "pages", `${objectRecord.id}.astro`),
-      resolve(projectRoot, "data", "planets", `${objectRecord.id}.json`),
     ]),
-    editorial: resolve(projectRoot, "data", "planets", `${objectRecord.id}.json`),
     runtimeAssets: resolve(root, "runtime-assets.json"),
     sourceManifest: resolve(root, "source", "manifest.json"),
     sourceRoot: resolve(root, "source"),
@@ -59,19 +54,6 @@ export async function validateObjectPackageFiles(
   return paths;
 }
 
-export function validatePlanetEditorial(planet, editorial) {
-  const source = planetInformationSource(planet.id);
-  try {
-    validatePlanetInformationSnapshot(editorial);
-  } catch (cause) {
-    throw new TypeError(`Planet ${planet.id} editorial snapshot is incompatible.`);
-  }
-  if (planet.name !== source.name || editorial.planet !== planet.name) {
-    throw new TypeError(`Planet ${planet.id} editorial snapshot is incompatible.`);
-  }
-  return true;
-}
-
 export { validateRuntimeAssetManifest };
 
 export async function validatePlanetData(
@@ -79,12 +61,10 @@ export async function validatePlanetData(
   { projectRoot = process.cwd() } = {},
 ) {
   const paths = await validateObjectPackageFiles(planet, { projectRoot });
-  const [editorial, runtimeAssets, sourceManifest] = await Promise.all([
-    readJson(paths.editorial),
+  const [runtimeAssets, sourceManifest] = await Promise.all([
     readJson(paths.runtimeAssets),
     readJson(paths.sourceManifest),
   ]);
-  validatePlanetEditorial(planet, editorial);
   validateRuntimeAssetManifest(planet.id, runtimeAssets);
   validateSourceManifest(planet.id, sourceManifest);
   await verifyRuntimeAssetClosure({
@@ -99,7 +79,6 @@ export async function validatePlanetData(
   });
   return Object.freeze({
     assetCount: runtimeAssets.assets.length,
-    editorialSourceId: editorial.sourceId,
     sourceInputCount: sourceManifest.inputs.length,
   });
 }
