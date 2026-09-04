@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
+import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../runtime/preparedStarfield.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
@@ -69,7 +70,8 @@ try {
     '/scenes/earth/earth-surface-poles.webp")'), true);
   assert.equal(
     initial.retainedInteractiveImageCount,
-    2 + PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1 +
+    PREPARED_EARTH_SCENE.body.assets.surface.urls.length + 1 +
+      PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1 +
       PREPARED_EARTH_SCENE.material.atmosphere.transport.initialWarmRows.length,
   );
   const startupAssets = [...requestedAssets];
@@ -123,18 +125,36 @@ try {
   for (const id of ["topography", "night-lights", "cross-section", "normal"]) {
     await page.evaluate((lens) => window.__earth.lenses.select(lens), id);
     assert.equal(await page.evaluate(() => window.__earth.assertStableDomIdentity()), true);
-    if (["normal", "topography"].includes(id)) {
-      const textures = await page.evaluate(() => ({
-        surface: getComputedStyle(document.querySelector(
-          ".earth-body:not(.earth-body-polar) > s",
-        ), "::before").backgroundImage,
-        poles: getComputedStyle(document.querySelector(
-          ".earth-body-polar > s",
-        )).backgroundImage,
-      }));
-      assert.equal(textures.surface.includes("@2x"), false);
-      assert.equal(textures.poles.includes("@2x"), false);
-    }
+    const textures = await page.evaluate(() => {
+      const images = (selector) => [...new Set([...document.querySelectorAll(selector)]
+        .map((element) => getComputedStyle(element).backgroundImage))].sort();
+      return {
+        exterior: images(".earth-body:not(.earth-body-polar) > s > .polycss-projective-texture"),
+        interior: images(".earth-cutaway-body:not(.earth-cutaway-body-polar) > s > .polycss-projective-texture"),
+        bank: window.__earth.renderStats.textureStats.surfaceBanks(),
+      };
+    });
+    const interior = id === "cross-section";
+    const urls = interior ? PREPARED_EARTH_SCENE.interior.outerAssets.surface.twoUrls
+      : PREPARED_EARTH_LENSES.controls.find((lens) => lens.id === id).surfaceUrls;
+    // The cutaway omits some exterior cells, so it need not display every
+    // page in its complete prepared bank. Compare its actual prepared addresses.
+    const displayedUrls = interior ? [...new Set(PREPARED_EARTH_SCENE.interior.outerBodyBands
+      .flatMap((band) => band.leaves)
+      .map((leaf) => leaf.style.match(/--earth-surface-page-(\d+)/u)?.[1])
+      .filter((page) => page !== undefined).map((page) => urls[Number(page)]))] : urls;
+    assert.ok(displayedUrls.length > 0 && displayedUrls.every(Boolean));
+    assert.deepEqual(textures[interior ? "interior" : "exterior"],
+      displayedUrls.map((url) => `url("${new URL(url, baseUrl).href}")`).sort(),
+      `${id}: every rendered surface page belongs to the canonical bank`);
+    for (const url of urls) assert.ok(requestedAssets.includes(url),
+      `${id}: the complete canonical bank was requested`);
+    assert.deepEqual(textures[interior ? "exterior" : "interior"], ["none"],
+      `${id}: hidden surface pages do not retain image URLs`);
+    assert.deepEqual(textures.bank, {
+      activeId: id, pendingId: null, retainedBankCount: 1,
+      inFlightPageCount: 0, queuedPageCount: 0,
+    });
   }
   await page.waitForFunction(() => {
     const caches = window.__earth.renderStats.textureStats.materialCaches;

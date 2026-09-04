@@ -816,6 +816,12 @@ async function provePreparedDensity(browser, planet, profile, density) {
     await loadPlanet(page, planet, profile);
     assert.equal(await profile.selectedDensity(page), 2,
       `${planet.id}: DPR ${density} must select the canonical high-density bank`);
+    const canonicalAssets = profile.audit.canonicalPreparedAssets ?? [];
+    assert.ok(Array.isArray(canonicalAssets));
+    for (const url of canonicalAssets) {
+      assert.ok(requestedPaths.has(url),
+        `${planet.id}: DPR ${density} must request canonical ${url}`);
+    }
     for (const pair of profile.audit.preparedAssetPairs) {
       const selectedAsset = pair.two;
       const rejectedAsset = pair.one;
@@ -839,6 +845,7 @@ async function provePreparedDensity(browser, planet, profile, density) {
       id: planet.id,
       viewport: `dpr-${density}`,
       selectedDensity: 2,
+      requestedCanonicalAssets: [...canonicalAssets].sort(),
       interactionInterruptions,
       ...(densityOnly
         ? { browserProblemsOutsideDensityProof: evidence.problems }

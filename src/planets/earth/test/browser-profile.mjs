@@ -1,3 +1,5 @@
+import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
+
 export const browserProfile = Object.freeze({
   id: "earth",
   inputSelector: ".earth-input-surface",
@@ -5,7 +7,7 @@ export const browserProfile = Object.freeze({
     finalScope: "outer",
     fullComparisonWidths: Object.freeze([390, 820, 1200]),
     canonicalPreparedAssets: Object.freeze([
-      "/scenes/earth/earth-surface.webp",
+      ...PREPARED_EARTH_SCENE.body.assets.surface.urls,
       "/scenes/earth/earth-surface-poles.webp",
     ]),
     preparedAssetPairs: Object.freeze([

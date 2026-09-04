@@ -47,7 +47,12 @@ for (const [id, mount, lenses] of clients) {
     try {
       const client = mount(fixture.stage, { onError: () => assert.fail("Startup must reject ready") });
       const failure = assert.rejects(client.ready, /Prepared image did not decode/u);
-      fixture.images[0].reject(new Error("failed startup image"));
+      await new Promise((resolve) => setImmediate(resolve));
+      const startupImage = id === "earth"
+        ? fixture.images.find((image) => image.src.endsWith("/earth-surface.webp"))
+        : fixture.images[0];
+      assert.ok(startupImage, "the intended startup surface decode must have started");
+      startupImage.reject(new Error("failed startup image"));
       await failure;
       assert.ok(fixture.images.every((image) => image.src === ""));
       assert.equal(fixture.listeners.size, 0);

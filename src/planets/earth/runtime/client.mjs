@@ -21,6 +21,11 @@ import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-
 import { createPreparedImageStore } from "../../../platform/prepared-image-store.mjs";
 import { createLatestSelection } from "../../../platform/latest-selection.mjs";
 import { bindSpeedControl } from "../../../platform/planet-feature-controls.mjs";
+import {
+  createEarthSurfaceImageBanks,
+  publishEarthSurfacePages,
+  requireEarthSurfacePages,
+} from "./surface-image-banks.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 const lensOwners = new WeakMap();
@@ -76,6 +81,8 @@ export function mountEarthClient(stage, { onError } = {}) {
   const materialCaches = Object.freeze({ lighting, atmosphere });
   const imageStore = createPreparedImageStore();
   lifetime.onDispose(imageStore.destroy);
+  let surfaceBanks = null;
+  lifetime.onDispose(() => surfaceBanks?.destroy());
   let shouldPlay = false;
   let mounted = null;
   let camera = null;
@@ -115,10 +122,15 @@ export function mountEarthClient(stage, { onError } = {}) {
 
   async function start() {
     try {
+      surfaceBanks = createEarthSurfaceImageBanks({
+        imageStore,
+        banks: earthSurfaceBankInventory(),
+      });
       features = createEarthFeatureControls(stage, lifetime, onError);
       lenses = createEarthLensControls({
         stage,
         decodePreparedImage,
+        surfaceBanks,
         lifetime,
         onError,
       });
@@ -168,8 +180,12 @@ export function mountEarthClient(stage, { onError } = {}) {
 
   async function decodeInitialPreparedImages() {
     const plan = PREPARED_EARTH_SCENE;
+    const initial = surfaceBanks.request(PREPARED_EARTH_LENSES.defaultLens);
+    const decoded = await initial.ready;
+    if (lifetime.disposed) return;
+    if (!decoded) throw new Error("Earth initial surface bank was retired.");
+    surfaceBanks.commit(initial);
     for (const pair of [
-      plan.body.assets.surface,
       plan.body.assets.poles,
       ...PREPARED_EARTH_STARFIELD.faces.flatMap(({
         url,
@@ -217,6 +233,7 @@ export function mountEarthClient(stage, { onError } = {}) {
           get pendingInteractiveImageCount() {
             return imageStore.stats().pendingCount;
           },
+          surfaceBanks: surfaceBanks.stats,
           materialCaches: Object.freeze({
             lighting: materialCaches.lighting.stats,
             atmosphere: materialCaches.atmosphere.stats,
@@ -264,9 +281,10 @@ function mountPreparedEarth(host, lifetime) {
     className: "earth-body",
     polarClassName: "earth-body-polar",
     textureUrls: Object.freeze({
-      surface: canonicalPreparedUrl(plan.body.assets.surface),
+      surface: requireEarthSurfacePages(plan.body.assets.surface.urls),
       poles: canonicalPreparedUrl(plan.body.assets.poles),
     }),
+    surfacePageCount: plan.body.assets.surface.urls.length,
   });
 
   const presentation = plan.interior.presentationLock;
@@ -275,7 +293,8 @@ function mountPreparedEarth(host, lifetime) {
       typeof presentation.transform !== "string") {
     throw new Error("Earth prepared interior presentation is incompatible.");
   }
-  const cutaway = createPreparedInterior(plan);
+  const interiorMount = createPreparedInterior(plan);
+  const cutaway = interiorMount.root;
   let cutawayCounter = createMesh("earth-cutaway-counter", "");
   const presentationRoot = createMesh(
     "earth-cutaway-presentation",
@@ -297,6 +316,15 @@ function mountPreparedEarth(host, lifetime) {
         throw new Error("Earth prepared view bank is destroyed.");
       }
       return false;
+    },
+    publishSurfacePages(urls) {
+      if (destroyedViewBank) throw new Error("Earth prepared view bank is destroyed.");
+      publishEarthSurfacePages(interiorMount.carriers.surface, urls,
+        plan.interior.outerAssets.surface.twoUrls.length);
+    },
+    clearSurfacePages() {
+      publishEarthSurfacePages(interiorMount.carriers.surface, [],
+        plan.interior.outerAssets.surface.twoUrls.length);
     },
     syncCounterRotation(counterRotation) {
       if (cutawayCounter) cutawayCounter.style.transform = counterRotation;
@@ -401,7 +429,7 @@ function mountPreparedEarth(host, lifetime) {
 
 function createPreparedInterior(plan) {
   const cutaway = createMesh("earth-cutaway", "");
-  mountPreparedSphereBands({
+  const carriers = mountPreparedSphereBands({
     system: cutaway,
     bands: plan.interior.outerBodyBands,
     meshTransform: plan.earth.meshTransform,
@@ -409,9 +437,11 @@ function createPreparedInterior(plan) {
     polarClassName: "earth-cutaway-body-polar",
     polarLeafClassMarker: "earth-interior-outer-polar",
     textureUrls: Object.freeze({
-      surface: canonicalPreparedUrl(plan.interior.outerAssets.surface),
+      // Retain the cutaway nodes without referencing its large hidden atlas.
+      surface: [],
       poles: canonicalPreparedUrl(plan.interior.outerAssets.poles),
     }),
+    surfacePageCount: plan.interior.outerAssets.surface.twoUrls.length,
   });
   for (const shell of plan.interior.shells) {
     const shellMesh = createMesh(
@@ -442,7 +472,7 @@ function createPreparedInterior(plan) {
   }
   sections.appendChild(sectionFragment);
   cutaway.appendChild(sections);
-  return cutaway;
+  return Object.freeze({ root: cutaway, carriers });
 }
 
 function mountPreparedSphereBands({
@@ -453,6 +483,7 @@ function mountPreparedSphereBands({
   polarClassName,
   polarLeafClassMarker = "earth-polar",
   textureUrls,
+  surfacePageCount,
 }) {
   const carriers = new Map();
   const surface = [];
@@ -472,11 +503,12 @@ function mountPreparedSphereBands({
       if (polar) polarCarriers.push(carrier);
       else surface.push(carrier);
       system.appendChild(carrier);
+      if (polar) {
+        carrier.style.setProperty("--earth-poles-texture", `url("${textureUrls.poles}")`);
+      } else {
+        publishEarthSurfacePages([carrier], textureUrls.surface, surfacePageCount);
+      }
     }
-    carrier.style.setProperty(
-      polar ? "--earth-poles-texture" : "--earth-surface-texture",
-      `url("${textureUrls[polar ? "poles" : "surface"]}")`,
-    );
     const fragment = document.createDocumentFragment();
     for (const leaf of band.leaves) fragment.appendChild(createTextureLeaf(leaf));
     carrier.appendChild(fragment);
@@ -688,9 +720,10 @@ function setStyle(element, property, value) {
   return 1;
 }
 
-function createEarthLensControls({
+export function createEarthLensControls({
   stage,
   decodePreparedImage,
+  surfaceBanks,
   lifetime,
   onError,
 }) {
@@ -763,34 +796,46 @@ function createEarthLensControls({
     const lens = controls.get(id);
     if (!lens) throw new RangeError(`Unknown Earth lens: ${id}.`);
     if (!bound || lifetime.disposed) return false;
+    let ticket;
     return selection.run({
-      prepare: async () => {
-        if (lens.view === "interior") await warmInterior();
-        else await Promise.all([
-          decodePreparedImage(lens.surfaceUrl),
-          decodePreparedImage(lens.polesUrl),
-        ]);
+      prepare: async ({ isCurrent }) => {
+        ticket = surfaceBanks.request(id);
+        const decoded = await ticket.ready;
+        if (!isCurrent()) return ticket;
+        if (!decoded) throw new Error("Earth requested surface bank was retired.");
+        if (lens.view === "interior") await warmInterior(isCurrent);
+        else await decodePreparedImage(lens.polesUrl);
+        return ticket;
       },
-      commit() {
+      commit(prepared) {
         if (!mounted) throw new Error("Earth presentation is unavailable.");
         if (lens.view === "interior") {
           mounted.viewBank.mountInterior();
+          mounted.viewBank.publishSurfacePages(prepared.urls);
           stage.dataset.view = "interior";
           delete stage.dataset.lens;
+          publishEarthSurfacePages(mounted.bodyCarriers.surface, [],
+            PREPARED_EARTH_SCENE.body.assets.surface.urls.length);
         } else {
           publishBodyTexture(lens);
           delete stage.dataset.view;
           stage.dataset.lens = lens.id;
+          mounted.viewBank.clearSurfacePages();
         }
         onLensChange?.(lens);
         active = lens.id;
         publish();
+        surfaceBanks.commit(prepared);
       },
-      onCurrentFailure: publish,
+      discard: (prepared) => surfaceBanks.discard(prepared),
+      onCurrentFailure() {
+        surfaceBanks.discard(ticket);
+        publish();
+      },
     });
   }
 
-  async function warmInterior() {
+  async function warmInterior(isCurrent) {
     const pairs = [];
     const seen = new Set();
     const add = (pair) => {
@@ -800,7 +845,6 @@ function createEarthLensControls({
         pairs.push(pair);
       }
     };
-    add(PREPARED_EARTH_SCENE.interior.outerAssets.surface);
     add(PREPARED_EARTH_SCENE.interior.outerAssets.poles);
     for (const shell of PREPARED_EARTH_SCENE.interior.shells) {
       for (const leaf of shell.leaves) add(leaf.asset);
@@ -809,17 +853,15 @@ function createEarthLensControls({
       add(leaf.asset);
     }
     for (const pair of pairs) {
-      if (lifetime.disposed) return;
+      if (!isCurrent()) return;
       await decodePreparedImage(pair);
     }
   }
 
   function publishBodyTexture(lens) {
-    const surfaceUrl = lens.surfaceUrl;
     const polesUrl = lens.polesUrl;
-    for (const carrier of mounted.bodyCarriers.surface) {
-      carrier.style.setProperty("--earth-surface-texture", `url("${surfaceUrl}")`);
-    }
+    publishEarthSurfacePages(mounted.bodyCarriers.surface, lens.surfaceUrls,
+      PREPARED_EARTH_SCENE.body.assets.surface.urls.length);
     for (const carrier of mounted.bodyCarriers.polar) {
       carrier.style.setProperty("--earth-poles-texture", `url("${polesUrl}")`);
     }
@@ -830,6 +872,32 @@ function createEarthLensControls({
       button.setAttribute("aria-pressed", String(id === active));
     }
   }
+}
+
+function earthSurfaceBankInventory() {
+  const body = PREPARED_EARTH_SCENE.body.assets.surface;
+  const bodyPages = requireEarthSurfacePages(body.urls, "Earth default surface");
+  const outer = PREPARED_EARTH_SCENE.interior.outerAssets.surface;
+  const outerOne = requireEarthSurfacePages(outer.oneUrls, "Earth interior source surface");
+  const outerTwo = requireEarthSurfacePages(outer.twoUrls, "Earth canonical interior surface");
+  if (outer.one !== outerOne[0] || outer.two !== outerTwo[0] ||
+      outerOne.length !== bodyPages.length || outerTwo.length !== bodyPages.length ||
+      body.url !== bodyPages[0]) {
+    throw new TypeError("Earth prepared surface page metadata is inconsistent.");
+  }
+  const banks = PREPARED_EARTH_LENSES.controls.map((lens) => {
+    const urls = lens.view === "interior" ? outerTwo
+      : requireEarthSurfacePages(lens.surfaceUrls, `Earth ${lens.id} surface`);
+    if (urls.length !== bodyPages.length || lens.view !== "interior" && lens.surfaceUrl !== urls[0]) {
+      throw new TypeError("Earth lens surface page metadata is inconsistent.");
+    }
+    if (lens.id === PREPARED_EARTH_LENSES.defaultLens &&
+        JSON.stringify(urls) !== JSON.stringify(bodyPages)) {
+      throw new TypeError("Earth default lens does not match its prepared surface pages.");
+    }
+    return Object.freeze({ id: lens.id, urls });
+  });
+  return Object.freeze(banks);
 }
 
 function canonicalPreparedUrl(asset) {
