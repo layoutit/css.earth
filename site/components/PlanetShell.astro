@@ -1,0 +1,411 @@
+---
+import { OBJECTS } from "../objects.mjs";
+import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
+import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
+import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
+import { orderScientificCharts } from "../scientific-chart-order.mjs";
+import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
+import PlanetObjectResults from "./PlanetObjectResults.astro";
+
+interface PreparedIcon {
+  label: string;
+  src: string;
+  width: number;
+  height: number;
+}
+
+interface PreparedTitle {
+  label: string;
+  src: string;
+  width: number;
+  height: number;
+}
+
+interface PlanetTitle {
+  label: string;
+  viewBox: string;
+  renderViewBox: string;
+  renderWidth: number;
+  renderHeight: number;
+  renderPathOffsetY: number;
+  path: string;
+}
+
+interface Fact {
+  label: string;
+  value: string;
+  title?: string;
+}
+
+interface Chart {
+  id: string;
+  title: Pick<PreparedTitle, "label">;
+  open?: boolean;
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+}
+
+interface GalleryItem {
+  id: string;
+  label: string;
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption: string;
+  sourceUrl: string;
+}
+
+interface Gallery {
+  id: string;
+  title: PreparedTitle;
+  open?: boolean;
+  qualification?: string;
+  items: GalleryItem[];
+}
+
+interface Lens {
+  id: string;
+  label: string;
+  thumbnailUrl: string;
+  description: string;
+  title: string;
+}
+
+interface Setting {
+  kind: "cycle" | "toggle";
+  name: string;
+  label: string;
+  state?: string;
+  checked?: boolean;
+}
+
+interface Resource {
+  label: string;
+  role: string;
+  description: string;
+  href: string;
+}
+
+interface Props {
+  objectId: string;
+  title: PlanetTitle;
+  introduction?: string;
+  facts?: Fact[];
+  moreFacts?: Fact[];
+  galleries?: Gallery[];
+  charts?: Chart[];
+  resources?: Resource[];
+  lenses?: {
+    title: PreparedTitle;
+    controls: Lens[];
+    defaultLens: string;
+  };
+  settings?: {
+    title: PreparedTitle;
+    controls: Setting[];
+  };
+}
+
+const {
+  objectId,
+  title,
+  introduction = "",
+  facts = [],
+  moreFacts = [],
+  galleries = [],
+  charts = [],
+  resources = [],
+  lenses,
+  settings,
+} = Astro.props;
+const allFacts = [...facts, ...moreFacts];
+const hasFacts = allFacts.length > 0;
+const hasLenses = Boolean(lenses && lenses.controls.length > 0);
+const hasSettings = Boolean(settings && settings.controls.length > 0);
+const planetCount = PLANET_SEARCH_OBJECTS.length;
+const activeObject = OBJECTS.find((object) => object.id === objectId);
+const activePlanetIndex = PLANET_SEARCH_OBJECTS.findIndex((object) => object.id === objectId);
+const hasResources = resources.length > 0;
+const orderedCharts = orderScientificCharts(charts);
+const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
+  reflectance: PREPARED_SHELL_ICONS.reflectance,
+  "temperature-pressure": PREPARED_SHELL_ICONS.temperaturePressure,
+  "photometric-phase": PREPARED_SHELL_ICONS.photometricPhase,
+});
+---
+
+<aside id={`${objectId}-sidebar`} class="planet-sidebar" aria-label="Planet information">
+  <div class="planet-sidebar-search-card">
+    <input
+      class="planet-sidebar-search"
+      type="search"
+      placeholder={`Search planets (${planetCount})`}
+      aria-label={`Search ${planetCount} planets`}
+      autocomplete="off"
+      value={activeObject?.name ?? ""}
+    />
+    <button
+      class="planet-sidebar-view-all"
+      type="button"
+      aria-controls={`${objectId}-object-browser`}
+      aria-label="View all objects"
+      aria-pressed="false"
+    >×</button>
+  </div>
+  <div class="planet-drawer-content" id={`${objectId}-information`}>
+    <button class="planet-sheet-handle" type="button" aria-label="Resize information sheet" aria-expanded="false"></button>
+    <nav
+      id={`${objectId}-object-browser`}
+      class="planet-object-browser maps-object-results"
+      aria-label="Planets"
+      hidden
+    >
+      <PlanetObjectResults activeObjectId={objectId} />
+      <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
+    </nav>
+    <div class="planet-information-panel">
+      <section class="planet-selected-panel">
+      <div class="planet-title-row">
+        <h1 class="planet-title" aria-label={title.label}>
+          <svg
+            class="planet-title-svg"
+            viewBox={title.renderViewBox}
+            width={title.renderWidth}
+            height={title.renderHeight}
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d={title.path}
+              transform={title.renderPathOffsetY === 0
+                ? undefined
+                : `translate(0 ${title.renderPathOffsetY})`}
+            />
+          </svg>
+        </h1>
+        {activeObject && activePlanetIndex >= 0 && <PlanetNavigationMarker
+          planetId={activeObject.id}
+          color={activeObject.color}
+          index={activePlanetIndex}
+          count={planetCount}
+          scale={2}
+        />}
+      </div>
+      {introduction && <p class="planet-introduction">{introduction}</p>}
+      {hasFacts && <details id={`${objectId}-factsheet`} class="planet-factsheet-disclosure">
+        <summary class="planet-factsheet-summary">
+          <span class="planet-factsheet-show">Show factsheet</span>
+          <span class="planet-factsheet-hide">Hide factsheet</span>
+        </summary>
+        <div class="planet-factsheet-content">
+          <div class="planet-facts">
+            <ul class="planet-primary-facts">
+              {allFacts.map((fact) => (
+                <li title={fact.title}>
+                  <span class="planet-fact-label">{fact.label}</span>
+                  <span class="planet-fact-value">{fact.value}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </details>}
+      </section>
+      {hasLenses && lenses && <details id={`${objectId}-lenses`} class="planet-lenses" open>
+        <summary class="planet-panel-summary">
+          <h2 class="planet-panel-heading">{lenses.title.label}</h2>
+          <img
+            class="planet-panel-icon"
+            src={PREPARED_SHELL_ICONS.lenses.src}
+            width={PREPARED_SHELL_ICONS.lenses.width}
+            height={PREPARED_SHELL_ICONS.lenses.height}
+            alt=""
+          />
+        </summary>
+        <div id={`${objectId}-layers-menu`} class="planet-layers-menu">
+          <nav class="planet-observation-controls" aria-label="Surface lenses">
+            {lenses.controls.map((lens) => (
+              <div class="planet-observation-option">
+                <button
+                  class="planet-observation-control"
+                  type="button"
+                  name="lens"
+                  value={lens.id}
+                  aria-pressed={lens.id === lenses.defaultLens ? "true" : "false"}
+                  title={lens.title}
+                >
+                  <img class="planet-lens-icon" src={lens.thumbnailUrl} width="14" height="14" alt="" />
+                  <span class="planet-lens-copy">
+                    <span class="planet-lens-label">{lens.label}</span>
+                    <span class="planet-lens-description">{lens.description}</span>
+                  </span>
+                </button>
+              </div>
+            ))}
+          </nav>
+        </div>
+      </details>}
+      {orderedCharts.map((chart) => (
+      <details id={`${objectId}-${chart.id}`} class="planet-chart-panel">
+        <summary class="planet-panel-summary">
+          <h2 class="planet-panel-heading">{chart.title.label}</h2>
+          {chartIcons[chart.id] && <img
+            class="planet-panel-icon"
+            src={chartIcons[chart.id].src}
+            width={chartIcons[chart.id].width}
+            height={chartIcons[chart.id].height}
+            alt=""
+          />}
+        </summary>
+        <img
+          class="planet-chart"
+          src={chart.src}
+          width={chart.width}
+          height={chart.height}
+          alt={chart.alt}
+        />
+      </details>
+      ))}
+      {galleries.map((gallery) => (
+      <details id={`${objectId}-${gallery.id}`} class="planet-gallery-panel">
+        <summary class="planet-panel-summary">
+          <h2 class="planet-panel-heading">{gallery.title.label}</h2>
+          <span class="planet-panel-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="planet-gallery" aria-label={gallery.title.label}>
+          {gallery.items.map((item) => (
+            <figure class="planet-gallery-item" data-gallery-item={item.id}>
+              <img
+                class="planet-gallery-image"
+                src={item.src}
+                width={item.width}
+                height={item.height}
+                alt={item.alt}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class="planet-gallery-caption">
+                <strong>{item.label}</strong>
+                <span>{item.caption}</span>
+                <a class="planet-gallery-source" href={item.sourceUrl} target="_blank" rel="noreferrer">Archive file</a>
+              </figcaption>
+            </figure>
+          ))}
+          {gallery.qualification && <p class="planet-gallery-qualification">{gallery.qualification}</p>}
+        </div>
+      </details>
+      ))}
+      {hasResources && <details id={`${objectId}-resources`} class="planet-resources-panel">
+        <summary class="planet-panel-summary">
+          <h2 class="planet-panel-heading">{PREPARED_SHELL_TITLES.resources.label}</h2>
+          <img
+            class="planet-panel-icon"
+            src={PREPARED_SHELL_ICONS.resources.src}
+            width={PREPARED_SHELL_ICONS.resources.width}
+            height={PREPARED_SHELL_ICONS.resources.height}
+            alt=""
+          />
+        </summary>
+        <div class="planet-resources-links">
+          {resources.map((resource) => (
+            <a
+              class="planet-resource-row"
+              href={resource.href}
+              title={resource.description}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="planet-resource-description">{resource.description}</span>
+              <span class="planet-resource-label">{resource.label}</span>
+            </a>
+          ))}
+        </div>
+      </details>}
+      {hasSettings && settings && <details
+        id={`${objectId}-settings`}
+        class="planet-settings-panel planet-settings-flyout"
+      >
+        <summary class="planet-panel-summary">
+          <h2 class="planet-panel-heading">{settings.title.label}</h2>
+          <span class="planet-panel-icon planet-settings-gear" aria-hidden="true">⚙︎</span>
+        </summary>
+        <div class="planet-settings">
+          <label class="planet-setting-control planet-motion-setting-control">
+            <input class="planet-motion-setting" type="checkbox" name="motion" />
+            <span class="planet-setting-text">Motion</span>
+            <span class="planet-setting-description">
+              <span class="planet-setting-state-on">On</span>
+              <span class="planet-setting-state-off">Off</span>
+              <span class="planet-setting-state-auto">Auto</span>
+            </span>
+          </label>
+          <label class="planet-setting-control planet-sky-contrast-setting-control">
+            <input
+              class="planet-sky-contrast-setting"
+              type="checkbox"
+              name="skyContrast"
+            />
+            <span class="planet-setting-text">High contrast</span>
+            <span class="planet-setting-description">
+              <span class="planet-setting-state-on">On</span>
+              <span class="planet-setting-state-off">Off</span>
+              <span class="planet-setting-state-auto">Auto</span>
+            </span>
+          </label>
+          {settings.controls.map((setting) => setting.kind === "cycle" ? (
+            <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
+              <span class="planet-setting-text">{setting.label}</span>
+            </button>
+          ) : (
+            <label class="planet-setting-control">
+              <input type="checkbox" name={setting.name} checked={setting.checked} />
+              <span class="planet-setting-text">{setting.label}</span>
+              <span class="planet-setting-description">
+                <span class="planet-setting-state-on">On</span>
+                <span class="planet-setting-state-off">Off</span>
+                <span class="planet-setting-state-auto">Auto</span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </details>}
+    </div>
+  </div>
+</aside>
+{hasResources && <footer
+  class="planet-attribution-footer"
+  aria-label={`${title.label} scene sources`}
+>
+  {resources.map((resource, index) => (
+    <>
+      {index > 0 && <span class="planet-attribution-separator" aria-hidden="true">·</span>}
+      <a
+        class="planet-attribution-link"
+        href={resource.href}
+        title={resource.description}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span class="planet-attribution-role">{resource.role}</span>
+        <span class="planet-attribution-source">{resource.label}</span>
+      </a>
+    </>
+  ))}
+  <span class="planet-attribution-separator" aria-hidden="true">·</span>
+  <span class="planet-attribution-developed">
+    Developed by <a
+      class="planet-attribution-developed-link"
+      href="https://github.com/layoutit"
+      target="_blank"
+      rel="noreferrer"
+    >layoutit</a> with <a
+      class="planet-attribution-developed-link"
+      href="https://github.com/LayoutitStudio/polycss"
+      target="_blank"
+      rel="noreferrer"
+    >PolyCSS</a>
+  </span>
+</footer>}

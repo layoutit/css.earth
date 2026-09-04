@@ -1,0 +1,14 @@
+---
+import "../runtime/styles.css";
+import "../../../../site/planet-shell.css";
+import PlanetLayout from "../../../../site/layouts/PlanetLayout.astro";
+import VenusHead from "./VenusHead.astro";
+import VenusOverlay from "./VenusOverlay.astro";
+import VenusPanel from "./VenusPanel.astro";
+---
+
+<PlanetLayout objectId="venus">
+  <VenusHead slot="planet-head" />
+  <VenusPanel slot="planet-ui" />
+  <VenusOverlay slot="planet-overlay" />
+</PlanetLayout>

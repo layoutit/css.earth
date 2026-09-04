@@ -1,0 +1,17 @@
+---
+import { PREPARED_JUPITER_LIGHTING } from "../runtime/preparedLighting.mjs";
+import { PREPARED_JUPITER_RINGS } from "../runtime/preparedRings.mjs";
+
+const initialMaterials = PREPARED_JUPITER_LIGHTING.transport.initialWarmRows.map(
+  (rowIndex) => PREPARED_JUPITER_LIGHTING.rows[rowIndex],
+);
+---
+
+<link rel="preload" href="/scenes/jupiter/jupiter-surface@2x.webp" as="image" type="image/webp" />
+<link rel="preload" href="/scenes/jupiter/jupiter-poles@2x.webp" as="image" type="image/webp" />
+{Object.values(PREPARED_JUPITER_RINGS.assets).map(({ url, url2x }) => (
+  <link rel="preload" href={url2x} as="image" type="image/webp" />
+))}
+{initialMaterials.map(({ url }) => (
+  <link rel="preload" href={url} as="image" type="image/webp" />
+))}

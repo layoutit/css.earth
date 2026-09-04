@@ -1,0 +1,54 @@
+{
+  "name": "cssearth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1 --port 4210",
+    "build": "astro build && pnpm assemble:planets",
+    "acquire:planets": "node tools/run-implemented-planets.mjs acquire",
+    "assemble:planets": "node tools/run-implemented-planets.mjs assemble",
+    "prepare:checkout": "node tools/restore-source-inputs.mjs && pnpm prepare:planets",
+    "preview": "astro preview --host 127.0.0.1 --port 4210",
+    "prepare:planet-info": "node tools/prepare-planet-information.mjs",
+    "prepare:navigation": "node tools/prepare-navigation.mjs",
+    "prepare:planet-title-sources": "node tools/prepare-planet-title-sources.mjs",
+    "prepare:titles": "node tools/prepare-shell-titles.mjs",
+    "prepare:icons": "node tools/prepare-shell-icons.mjs",
+    "prepare:scientific-charts": "node tools/prepare-scientific-charts.mjs",
+    "prepare:shell": "pnpm prepare:titles && pnpm prepare:icons",
+    "prepare:planets": "pnpm prepare:titles && pnpm prepare:planet-title-sources && pnpm prepare:scientific-charts && node tools/run-implemented-planets.mjs prepare",
+    "test:platform": "node --test src/platform/*.test.mjs src/navigation/*.test.mjs tools/*.test.mjs",
+    "test:planets": "node tools/run-implemented-planets.mjs test",
+    "test:shell": "node --test site/test/*.test.mjs",
+    "test": "pnpm test:platform && pnpm test:shell && pnpm test:planets",
+    "test:browser:introductions": "node site/test/planet-introduction-browser.mjs",
+    "test:browser:shell": "node site/test/smoke-browser.mjs && pnpm test:browser:introductions",
+    "test:browser:conformance": "node site/test/planet-browser-conformance.mjs",
+    "test:browser:planets": "node tools/run-implemented-planets.mjs browser",
+    "test:browser": "pnpm test:browser:shell && pnpm test:browser:conformance && pnpm test:browser:planets",
+    "benchmark:compare": "node tools/compare-planet-benchmarks.mjs",
+    "benchmark:payloads": "node tools/measure-object-payloads.mjs",
+    "oracle:venus": "node src/planets/venus/tools/oracle/run.mjs",
+    "analyze:trace:saturn": "node src/planets/saturn/tools/audit/analyze-user-trace.mjs",
+    "trace:saturn": "node src/planets/saturn/tools/audit/trace.mjs"
+  },
+  "dependencies": {
+    "@layoutit/polycss": "0.2.11"
+  },
+  "devDependencies": {
+    "astro": "^7.2.4",
+    "classic-level": "3.0.0",
+    "cwebp-bin": "8.0.0",
+    "fontkit": "2.0.4",
+    "pixelmatch": "7.2.0",
+    "playwright": "1.60.0",
+    "pngjs": "7.0.0",
+    "sharp": "0.35.3",
+    "vite": "7.3.1"
+  }
+}

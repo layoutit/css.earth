@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-planetary-scientific-context@1",
+  "sources": {
+    "photometricPhase": {
+      "title": "Computing Apparent Planetary Magnitudes for The Astronomical Almanac",
+      "authors": ["Anthony Mallama", "James L. Hilton"],
+      "journal": "Astronomy and Computing",
+      "arxiv": "1808.01973",
+      "url": "https://arxiv.org/abs/1808.01973",
+      "sourcePdfSha256": "805e53ab8f921c55e1c5e3dd64bbd567f806cdba56148625afcddfc650b6f9a7",
+      "retrievedAt": "2026-09-01",
+      "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
+    }
+  },
+  "planets": {
+    "mercury": {
+      "phase": {
+        "maximumAngleDegrees": 170,
+        "segments": [
+          { "maximumAngleDegrees": 170, "kind": "polynomialMagnitude", "coefficients": [-0.613, 0.06328, -0.0016336, 0.000033644, -3.4265e-7, 1.6893e-9, -3.0334e-12] }
+        ]
+      }
+    },
+    "venus": {
+      "phase": {
+        "maximumAngleDegrees": 179,
+        "segments": [
+          { "maximumAngleDegrees": 163.7, "kind": "polynomialMagnitude", "coefficients": [-4.384, -0.001044, 0.0003687, -0.000002814, 8.938e-9] },
+          { "maximumAngleDegrees": 179, "kind": "polynomialMagnitude", "coefficients": [236.05828, -2.81914, 0.00839034] }
+        ]
+      }
+    },
+    "earth": {
+      "phase": {
+        "maximumAngleDegrees": 180,
+        "segments": [
+          { "maximumAngleDegrees": 180, "kind": "polynomialMagnitude", "coefficients": [-3.99, -0.00106, 0.0002054] }
+        ]
+      }
+    },
+    "mars": {
+      "phase": {
+        "maximumAngleDegrees": 180,
+        "segments": [
+          { "maximumAngleDegrees": 50, "kind": "polynomialMagnitude", "coefficients": [-1.601, 0.02267, -0.0001302] },
+          { "maximumAngleDegrees": 180, "kind": "polynomialMagnitude", "coefficients": [-0.367, -0.02573, 0.0003445] }
+        ],
+        "qualification": "The published greater-than-50-degree branch is an approximation derived by averaging the Mercury and Earth dimming curves."
+      }
+    },
+    "jupiter": {
+      "phase": {
+        "maximumAngleDegrees": 130,
+        "segments": [
+          { "maximumAngleDegrees": 12, "kind": "polynomialMagnitude", "coefficients": [-9.395, -0.00037, 0.000616] },
+          { "maximumAngleDegrees": 130, "kind": "albedoPolynomialMagnitude", "constant": -9.428, "coefficients": [1, -1.507, -0.363, -0.062, 2.809, -1.876] }
+        ],
+        "qualification": "The greater-than-12-degree Cassini branch is limited to 130 degrees because the source paper reports no constraining data beyond that angle."
+      }
+    },
+    "saturn": {
+      "phase": {
+        "maximumAngleDegrees": 150,
+        "segments": [
+          { "maximumAngleDegrees": 6, "kind": "polynomialMagnitude", "coefficients": [-8.95, -0.00037, 0.000616] },
+          { "maximumAngleDegrees": 150, "kind": "polynomialMagnitude", "coefficients": [-8.94, 0.0002446, 0.0002672, -0.000001505, 4.767e-9] }
+        ],
+        "qualification": "Globe-only phase curve. The rings are excluded because no wide-angle combined planet-and-ring equation is available."
+      }
+    },
+    "uranus": {
+      "phase": {
+        "maximumAngleDegrees": 154,
+        "segments": [
+          { "maximumAngleDegrees": 154, "kind": "polynomialMagnitude", "coefficients": [-7.11, 0.006587, 0.0001045] }
+        ],
+        "qualification": "Sub-observer and sub-solar latitude are held fixed so the curve isolates phase-angle dependence."
+      }
+    },
+    "neptune": {
+      "phase": {
+        "maximumAngleDegrees": 133,
+        "segments": [
+          { "maximumAngleDegrees": 133, "kind": "polynomialMagnitude", "coefficients": [-7, 0.007944, 0.00009617] }
+        ],
+        "qualification": "The post-2000 brightness constant is held fixed so the curve isolates phase-angle dependence."
+      }
+    }
+  }
+}

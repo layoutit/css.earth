@@ -1,0 +1,82 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
+import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_EARTH_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_EARTH_TITLE } from "./preparedTitle.mjs";
+
+const charts = [
+  {
+    id: "reflectance",
+    title: PREPARED_SHELL_TITLES.reflectance,
+    open: true,
+    src: "/scenes/earth/earth-atmosphere-spectrum.svg",
+    width: 306,
+    height: 141,
+    alt: "NASA PSG modeled disk reflectance of Earth from 350 to 1000 nanometers.",
+  },
+  {
+    id: "photometric-phase",
+    title: SCIENTIFIC_CHART_TITLES.photometricPhase,
+    open: false,
+    src: "/scenes/earth/earth-photometric-phase-curve.svg",
+    width: 306,
+    height: 141,
+    alt: "Earth V-band brightness change across phase angles from zero to 180 degrees.",
+  },
+  {
+    id: "temperature-pressure",
+    title: PREPARED_SHELL_TITLES.temperaturePressure,
+    open: false,
+    src: "/scenes/earth/earth-temperature-pressure-profile.svg",
+    width: 306,
+    height: 141,
+    alt: "NASA PSG standard Earth atmospheric temperature and pressure profile.",
+  },
+];
+const lensDescriptions: Record<string, string> = {
+  normal: "Blue Marble visible color",
+  topography: "Land and seafloor relief",
+  "night-lights": "Black Marble night lights",
+  "cross-section": "Interior structure",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_EARTH_LENSES.defaultLens,
+  controls: PREPARED_EARTH_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lensDescriptions[lens.id],
+    title: `${lens.label}: ${lens.qualification}`,
+  })),
+};
+const resources = [
+  { label: "NASA", role: "imagery", description: "Surface & clouds", href: "https://science.nasa.gov/earth/" },
+  { label: "JPL", role: "facts", description: "Earth-Moon facts", href: "https://ssd.jpl.nasa.gov/sats/" },
+  { label: "OpenSpace", role: "scene", description: "Globe & atmosphere", href: "https://github.com/OpenSpace/OpenSpace" },
+  { label: "PSG", role: "spectra", description: "Spectrum & profile", href: "https://psg.gsfc.nasa.gov/" },
+  { label: "HYG", role: "stars", description: "Background star field", href: "https://github.com/astronexus/HYG-Database" },
+];
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
+    { kind: "toggle", name: "atmosphere", label: "Atmosphere", checked: true },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="earth"
+  title={PREPARED_EARTH_TITLE}
+  introduction={PREPARED_EARTH_PANEL.introduction}
+  facts={PREPARED_EARTH_PANEL.facts}
+  moreFacts={PREPARED_EARTH_PANEL.moreFacts}
+  charts={charts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

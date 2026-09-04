@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-google-earth-pro-atmosphere-presentation-response@1",
+  "qualification": "NATIVE_HEADLESS_LAYER_ISOLATION_AND_LINKED_SHADER_BOUND",
+  "sourceProduct": "Google Earth Pro 7.3.7.1327 Mars patched oracle",
+  "capturedAt": "2026-09-02T18:26:30.439Z",
+  "evidence": {
+    "rendererSha256": "b656a4d024891b58956677785cb706d7dd52c6b60c5269cd7bed8d8c6f23c70f",
+    "linkedFragmentShaderSha256": "76a68a9b258938d18861dcd469cf3feebfb4dc4b2ad0a62cd2feaafc4b579df5",
+    "layerMatrixEvidenceSha256": "4e40582048f8a52ec915300fb73e19a41f4ca8844c5f92899f7dfb1e3ce6c9cc",
+    "everyCaptureStable": true,
+    "everyCaptureHeadless": true,
+    "sourceShaderBound": true,
+    "sunIlluminationDifferenceCaptured": true,
+    "atmosphereDifferenceCaptured": true,
+    "isolatedCapturesClassifiedByGoogleUniform": true
+  },
+  "observedResponse": {
+    "sunDirectionUniform": "cameraToSunDirAndExposure.xyz",
+    "exposureUniform": "cameraToSunDirAndExposure.w",
+    "exposure": 0.2,
+    "exposureRole": "camera-response-not-body-irradiance",
+    "toneMap": "one-minus-exp-negative-radiance-times-exposure",
+    "rayleighPhase": "0.75-times-one-plus-view-sun-cosine-squared",
+    "skyAlphaLuminanceScale": 2,
+    "darkAtmosphereBelowSunZenithCosine": -0.15
+  },
+  "transferPolicy": {
+    "transferred": [
+      "sun-direction-response",
+      "exponential-tone-map-shape",
+      "luminance-driven-opacity"
+    ],
+    "bodySpecific": [
+      "effective-solar-irradiance",
+      "apparent-exposure",
+      "atmosphere-height",
+      "scattering-coefficients",
+      "scale-heights",
+      "chromaticity",
+      "density",
+      "twilight-width",
+      "limb-concentration",
+      "opacity-response"
+    ],
+    "googlePixelsRedistributed": false,
+    "googleShaderBytesRedistributed": false
+  },
+  "cleanRoomTransfer": {
+    "bodySunIntensitySource": "openspace-body-atmosphere-model",
+    "twilightWidthSource": "body-atmosphere-height-over-radius",
+    "limbConcentrationSource": "body-rayleigh-air-mass",
+    "mieContribution": 0.08,
+    "earthMaximumOpacity": 0.44
+  }
+}

@@ -1,0 +1,717 @@
+{
+  "schema": "csssun-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "inter-sun-title-vector",
+      "path": "presentation/title-mark.mjs",
+      "expectedSha256": "832d4b97dddee0dd6e51835307b6aed90d8cefc39bd3671e78225bde6eed005f",
+      "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Sun outline",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
+      "redistribution": "project-authored SVG outline with Inter attribution",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 2122
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260513",
+      "path": "sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/13/20260513_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201610,
+      "expectedSha256": "3f892eddb79a3e0918968f789ffde00296fd1dab3db70deb4a3a0e84e2987fd8"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260514",
+      "path": "sdo/continuum/CR2311/20260514_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/14/20260514_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201167,
+      "expectedSha256": "89397586ef57d2855b5e7e17c1cabc9d614e91b248891dedce7faffd46c40799"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260515",
+      "path": "sdo/continuum/CR2311/20260515_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/15/20260515_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201160,
+      "expectedSha256": "76cd18e53cdb2300d975f4b5daecdb98ecbe6f928a85f7bf6e573142c6e0b9d8"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260516",
+      "path": "sdo/continuum/CR2311/20260516_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/16/20260516_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 200916,
+      "expectedSha256": "8def98477239d28fe06ee770e221fe65ec7f04b9a0d087849738efb8dadd7fa8"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260517",
+      "path": "sdo/continuum/CR2311/20260517_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/17/20260517_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201242,
+      "expectedSha256": "36c257e8a54e3225c0dd3ec1b483eb68e590c6763158d75f0aaa3a81cc2c305c"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260518",
+      "path": "sdo/continuum/CR2311/20260518_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/18/20260518_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201369,
+      "expectedSha256": "6c8f6a2aeba52e13bce42ee142b79a69edfd37dba530547ced0e6032c6121089"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260519",
+      "path": "sdo/continuum/CR2311/20260519_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/19/20260519_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201555,
+      "expectedSha256": "76ed3f989b3fdc725de3cf6a84816bf9aad0fc375c3e2a9bcf3604eaaf4c99df"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260520",
+      "path": "sdo/continuum/CR2311/20260520_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/20/20260520_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201528,
+      "expectedSha256": "1b9002ef8e5a81ddea7487b4411aa5be2e4daf02b0afffe1440fb18d6070bbc2"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260521",
+      "path": "sdo/continuum/CR2311/20260521_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/21/20260521_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201697,
+      "expectedSha256": "c429676a01c47cb871edce7821363ee79df6e42861cc1e88a1d87f3b276e4343"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260522",
+      "path": "sdo/continuum/CR2311/20260522_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/22/20260522_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201436,
+      "expectedSha256": "82bbdcb50a5555dddbe7d2d1cb5ab50665fe0433a9ba6278c7bca03a12f21f5b"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260523",
+      "path": "sdo/continuum/CR2311/20260523_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/23/20260523_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201398,
+      "expectedSha256": "a9ded4a39f69c2cb0a026c74b91a57e9e4d8cfecae1c66c66856c8d11f9f0627"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260524",
+      "path": "sdo/continuum/CR2311/20260524_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/24/20260524_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201853,
+      "expectedSha256": "ec35222f178e689b06ea8f5258abe4aec9eb5b75e3ff679ecd8a52c3bb92de1d"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260525",
+      "path": "sdo/continuum/CR2311/20260525_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/25/20260525_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201921,
+      "expectedSha256": "a4b6963e8255a1e4b8fe70f2f7419f742a6a2067537127b475075ffa36f88062"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260527",
+      "path": "sdo/continuum/CR2311/20260527_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201937,
+      "expectedSha256": "2d653bb2d39bcc24e8598951a16b8cf1397292ee1aeff034ce7bd82ca1e7ab7c"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260528",
+      "path": "sdo/continuum/CR2311/20260528_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/28/20260528_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201925,
+      "expectedSha256": "9826280d78c56635353ad01bd361f22844314e1a190daad461db4b5c66a57433"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260529",
+      "path": "sdo/continuum/CR2311/20260529_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/29/20260529_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 202146,
+      "expectedSha256": "9e3ac8a22f13778ea1554e36172cd522646c99f7cb1d8e87eba644fb32842ef5"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260530",
+      "path": "sdo/continuum/CR2311/20260530_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/30/20260530_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 202431,
+      "expectedSha256": "ee23ebd76fba906742ad5963f8f73273bed0e2ff1c2ca216316952bbd4ed37ba"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260531",
+      "path": "sdo/continuum/CR2311/20260531_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/31/20260531_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201895,
+      "expectedSha256": "04acaf1f08d85eac2618b81db5b5746fec37907f5b1992540ef86421be272668"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260601",
+      "path": "sdo/continuum/CR2311/20260601_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/01/20260601_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201902,
+      "expectedSha256": "2969b0723e9f7bb30f03d57883c6911a68526730dcbebd906d020c6df241ca58"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260602",
+      "path": "sdo/continuum/CR2311/20260602_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/02/20260602_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 202123,
+      "expectedSha256": "87b1112185053c05a486607f1afd543ccba1037b34358cfa4064b0849d9afe23"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260603",
+      "path": "sdo/continuum/CR2311/20260603_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/03/20260603_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 202360,
+      "expectedSha256": "0341a126279acb1bf26dcd253ccd8ceb345ce488b10f93bbaf38c677ab418b26"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260604",
+      "path": "sdo/continuum/CR2311/20260604_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/04/20260604_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 202812,
+      "expectedSha256": "2e755fdcca312d4e89b9ef00261198f41628ddb3bbbf08ea10e87b5aed74ea0a"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260605",
+      "path": "sdo/continuum/CR2311/20260605_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/05/20260605_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 202269,
+      "expectedSha256": "1ba5981f51630ad9829eafbe23f51bce9a928438e3c6bb8e36968335c88d66d4"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260606",
+      "path": "sdo/continuum/CR2311/20260606_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/06/20260606_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 202113,
+      "expectedSha256": "5e9f63736d8fecd37afb5b30354a558c54dc6a9b11c09772f7e23deac25df251"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260607",
+      "path": "sdo/continuum/CR2311/20260607_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/07/20260607_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 202295,
+      "expectedSha256": "2d3a622440eee08738e68cb09a38320d733abf4473a2fd84cfabfc7a1d33a1c0"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260608",
+      "path": "sdo/continuum/CR2311/20260608_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/08/20260608_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201556,
+      "expectedSha256": "8d54b5872061e422d32ac27495d33903460d9cc9d06d487771183e6049514e9f"
+    },
+    {
+      "id": "sdo-hmi-continuum-cr2311-20260609",
+      "path": "sdo/continuum/CR2311/20260609_000000_1024_HMIIC.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/09/20260609_000000_1024_HMIIC.jpg",
+      "credit": "NASA/SDO and the HMI science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned daily SDO HMI continuum browse JPEG at 00:00 UTC for the CR2311 central-meridian mosaic",
+      "redistribution": "Redistributed with NASA/SDO/HMI credit and no endorsement",
+      "consumers": [
+        "continuum",
+        "scene",
+        "lenses"
+      ],
+      "expectedBytes": 201690,
+      "expectedSha256": "b26903c43d0ae028d9b95f7609234d1270446ce50cf2d3c43216c8c6f359bbfc"
+    },
+    {
+      "id": "jsoc-hmi-cr2311-radial-field-synoptic-map",
+      "path": "hmi/CR2311-synopMr.fits",
+      "origin": "https://jsoc1.stanford.edu/SUM89/D2005165426/S00000/synopMr.fits",
+      "credit": "NASA/SDO and the HMI science team; Joint Science Operations Center",
+      "license": "SDO data use policy",
+      "licenseEvidence": [
+        "https://sdo.gsfc.nasa.gov/data/rules.php",
+        "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
+      ],
+      "acquisition": "Exact hmi.mrsynop_small_720s[2311] synopMr FITS record",
+      "redistribution": "Redistributed with NASA/SDO/HMI/JSOC credit and no endorsement",
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 1039680,
+      "expectedSha256": "d118b3b2c82315e397c147fa0e5706ffc78130ed7a3febc23abafd8fa4643ee3"
+    },
+    {
+      "id": "sdo-aia-171-cr2311-context",
+      "path": "sdo/context/CR2311/20260527_000710_1024_0171.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000710_1024_0171.jpg",
+      "credit": "NASA/SDO and the AIA science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned SDO AIA 171 browse JPEG within Carrington Rotation 2311",
+      "redistribution": "Redistributed with NASA/SDO/AIA credit and no endorsement",
+      "consumers": [
+        "corona"
+      ],
+      "expectedBytes": 192428,
+      "expectedSha256": "2b28d6df1b92cb1b352c6ce52eb7236039092f63fbaf95dc2921cd5e80cf83a6"
+    },
+    {
+      "id": "sdo-aia-304-cr2311-context",
+      "path": "sdo/context/CR2311/20260527_000906_1024_0304.jpg",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000906_1024_0304.jpg",
+      "credit": "NASA/SDO and the AIA science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned SDO AIA 304 browse JPEG within Carrington Rotation 2311",
+      "redistribution": "Redistributed with NASA/SDO/AIA credit and no endorsement",
+      "consumers": [
+        "corona"
+      ],
+      "expectedBytes": 206926,
+      "expectedSha256": "8ae7e4557012f9d4840a2c326158fb9db338f8b5d8dcde3f390bab858456757e"
+    },
+    {
+      "id": "sdo-aia-304-cr2311-synoptic-map",
+      "path": "sdo/synoptic/AIA0304/CR2311.fits",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits",
+      "credit": "NASA/SDO and the AIA science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned AIA 304 Carrington Rotation 2311 synoptic FITS map",
+      "redistribution": "Redistributed with NASA/SDO/AIA credit and no endorsement",
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 31106880,
+      "expectedSha256": "5ac6f520574f74b25c03da86791457eafcfd96d9bad80d2ab961fe5008d624ca"
+    },
+    {
+      "id": "sdo-aia-171-cr2311-synoptic-map",
+      "path": "sdo/synoptic/AIA0171/CR2311.fits",
+      "origin": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits",
+      "credit": "NASA/SDO and the AIA science team",
+      "license": "NASA media usage guidelines and SDO data use policy",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://sdo.gsfc.nasa.gov/data/rules.php"
+      ],
+      "acquisition": "Exact pinned AIA 171 Carrington Rotation 2311 synoptic FITS map",
+      "redistribution": "Redistributed with NASA/SDO/AIA credit and no endorsement",
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 31106880,
+      "expectedSha256": "af19f906ca278b25f137340bc1a89948fdc30a2f9cb8b6fe8e58ae98e467258a"
+    },
+    {
+      "id": "nasa-science-sun-facts-108082",
+      "path": "editorial/sun.json",
+      "origin": "https://science.nasa.gov/sun/facts/",
+      "credit": "NASA Science",
+      "license": "United States government work; NASA media usage guidelines apply",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Normalized from the pinned NASA Science record and block APIs",
+      "redistribution": "Redistributed with NASA credit and no endorsement",
+      "consumers": [
+        "panel"
+      ],
+      "expectedBytes": 11481,
+      "expectedSha256": "d07e94cf068cbf0815d8f9a0dfc3614c3b30bab087a3154c800a957b1f443bb8"
+    },
+    {
+      "id": "hyg-v41-sun-field",
+      "path": "stars/hyg-v41-field.json",
+      "origin": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
+      "credit": "David Nash / Astronexus",
+      "license": "CC-BY-SA-4.0, see stars/LICENSE.md",
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database",
+        "https://creativecommons.org/licenses/by-sa/4.0/"
+      ],
+      "acquisition": "node src/planets/sun/tools/acquire.mjs --refresh re-identifies the checked deterministic HYG v4.1 field subset for Sun",
+      "redistribution": "permitted under CC-BY-SA-4.0 with attribution and share-alike",
+      "consumers": [
+        "starfield"
+      ],
+      "expectedBytes": 144971,
+      "expectedSha256": "7027ab18259eb6a89108ecbe625b3ffed565f29f7ed8535e7d168e7da8250e03"
+    },
+    {
+      "id": "eso-sun-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained",
+      "consumers": [
+        "starfield",
+        "scene"
+      ],
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 720,
+      "expectedSha256": "bcb1b5abc17f466212b99ae53bb7c30636ab6c78ed10071ff05f9fe96c69865b",
+      "purpose": "HYG v4.1 attribution and CC-BY-SA-4.0 license record"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 1249,
+      "expectedSha256": "7233b1758835da866f0e36e9f659fe4a93e80b91eab1ac1c5fa24a228da7a629",
+      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    }
+  ]
+}

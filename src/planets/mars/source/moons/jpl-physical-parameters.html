@@ -1,0 +1,3846 @@
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" /><!-- prevent favicon.ico noise -->
+  <link rel="stylesheet" href="/css/font-awesome.min.css" />
+  <!--<link rel="stylesheet" href="/css/dataTables.fontAwesome.css" />-->
+  <link rel="stylesheet" href="/css/dataTables.bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/responsive.bootstrap.min.css" />
+
+
+  <link rel="stylesheet" href="/css/styles.css" />
+  <title>Planetary Satellite Physical Parameters</title>
+</head>
+
+  <body>
+<a class="sr-only sr-only-focusable" href="#main_content">Skip Navigation</a>
+
+
+
+
+<div id="banner" class="top-banner">
+  <img class="img-responsive banner" src="/images/ssd_banner.png" alt="banner" />
+  <img class="img-responsive banner-small" src="/images/ssd_banner_small.png" alt="banner" />
+  <img src="/images/logo_nasa_trio.png" alt="Trio-Logo" class="overlay-trilogo" />
+  <a id="link_nasa" class="hide-ext-link" href="https://www.nasa.gov/" title="NASA"
+    ><span class="sr-only">NASA</span></a>
+  <a id="link_jpl" class="hide-ext-link" href="https://www.jpl.nasa.gov/" title="JPL"
+    ><span class="sr-only">JPL</span></a>
+  <a id="link_caltech" class="hide-ext-link" href="https://www.caltech.edu/" title="Caltech"
+    ><span class="sr-only">Caltech</span></a>
+  <img src="/images/ssd_title_overlay.png" alt="SSD Solar System Dynamics" class="overlay-ssd-title" />
+</div>
+
+<!-- Beginning of navigation bar -->
+
+
+<div id="topnav">
+
+<nav class="navbar navbar-default navbar-inverse">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <span class="home-menu">Home</span>
+        
+        <img class="home-menu-mobile" src="/images/ssd_title_overlay.png" alt="SSD Solar System Dynamics Home" />
+      </a>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+      
+      <!--DEBUG: join=About<br/>  rec=About-->
+        
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle"
+          data-toggle="dropdown">About<br/>&nbsp;<span class="caret"></span></a>
+          
+          <ul class="dropdown-menu dropdown-menu-left">
+          
+          
+            
+            <li><a href="/about/" class="">What does SSD do?</a></li>
+            
+          
+            
+            <li><a href="/faq.html" class="">FAQ</a></li>
+            
+          
+            
+            <li><a href="/sitemap.html" class="">Sitemap</a></li>
+            
+          
+            
+            <li><a href="/contact/" class="">Contact Us</a></li>
+            
+          
+          </ul>
+        </li>
+        
+      
+      <!--DEBUG: join=Orbits &amp;<br/>Ephemerides  rec=Orbits &amp;Ephemerides-->
+        
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle"
+          data-toggle="dropdown">Orbits &amp;<br/>Ephemerides&nbsp;<span class="caret"></span></a>
+          
+          <ul class="dropdown-menu dropdown-menu-left">
+          
+          
+            
+            <li><a href="/orbits.html" class="landing-page-item">Introduction</a></li>
+            
+          
+            
+          
+            
+            <li><a href="/horizons/" class="">Horizons System</a></li>
+            
+          
+            
+            <li><a href="/planets/orbits.html" class="">Planets</a></li>
+            
+          
+            
+            <li><a href="/sats/orbits.html" class="">Planetary Satellites</a></li>
+            
+          
+            
+            <li><a href="/sb/orbits.html" class="">Small Bodies</a></li>
+            
+          
+            
+            <li><a href="/tools/orbit_viewer.html" class="">Orbit Viewer</a></li>
+            
+          
+            
+            <li><a href="/ephem.html" class="">Download Ephemerides</a></li>
+            
+          
+          </ul>
+        </li>
+        
+      
+      <!--DEBUG: join=Planets<br/>  rec=Planets-->
+        
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle"
+          data-toggle="dropdown">Planets<br/>&nbsp;<span class="caret"></span></a>
+          
+          <ul class="dropdown-menu dropdown-menu-left">
+          
+          
+            
+            <li><a href="/planets/" class="landing-page-item">Introduction</a></li>
+            
+          
+            
+            <li><a href="/planets/orbits.html" class="">Orbits &amp; Ephemerides</a></li>
+            
+          
+            
+            <li><a href="/planets/phys_par.html" class="">Physical Parameters</a></li>
+            
+          
+            
+            <li><a href="/tools/gravity.html" class="">Gravity Fields</a></li>
+            
+          
+            
+            <li><a href="/planets/obs_data.html" class="">Observational Data</a></li>
+            
+          
+            
+            <li><a href="/planets/discovery.html" class="">Discovery Circumstances</a></li>
+            
+          
+            
+          
+            
+          
+            
+          
+          </ul>
+        </li>
+        
+      
+      <!--DEBUG: join=Planetary<br/>Satellites  rec=PlanetarySatellites-->
+        
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle"
+          data-toggle="dropdown">Planetary<br/>Satellites&nbsp;<span class="caret"></span></a>
+          
+          <ul class="dropdown-menu dropdown-menu-left">
+          
+          
+            
+            <li><a href="/sats/" class="landing-page-item">Introduction</a></li>
+            
+          
+            
+            <li><a href="/sats/orbits.html" class="">Orbits &amp; Ephemerides</a></li>
+            
+          
+            
+          
+            
+            <li><a href="/sats/phys_par/" class="">Physical Parameters</a></li>
+            
+          
+            
+            <li><a href="/sats/obs_data.html" class="">Observational Data</a></li>
+            
+          
+            
+            <li><a href="/sats/discovery.html" class="">Discovery Circumstances</a></li>
+            
+          
+          </ul>
+        </li>
+        
+      
+      <!--DEBUG: join=Small Bodies<br/>  rec=Small Bodies-->
+        
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle"
+          data-toggle="dropdown">Small Bodies<br/>&nbsp;<span class="caret"></span></a>
+          
+          <ul class="dropdown-menu dropdown-menu-left">
+          
+          
+            
+            <li><a href="/sb/" class="landing-page-item">Introduction</a></li>
+            
+          
+            
+            <li><a href="/sb/orbits.html" class="">Orbits &amp; Ephemerides</a></li>
+            
+          
+            
+          
+            
+            <li><a href="/tools/sbdb_lookup.html" class="">Database Lookup</a></li>
+            
+          
+            
+            <li><a href="/tools/sbdb_query.html" class="">Database Query</a></li>
+            
+          
+            
+            <li><a href="/tools/mdesign.html" class="">Mission Design</a></li>
+            
+          
+            
+            <li><a href="/tools/sb_ident.html" class="">Identification</a></li>
+            
+          
+            
+            <li><a href="/tools/sbwobs.html" class="">What&apos;s Observable?</a></li>
+            
+          
+            
+            <li><a href="/sb/meteor_streams.html" class="">Meteor Streams</a></li>
+            
+          
+            
+            <li><a href="/sb/targets.html" class="">Mission Targets</a></li>
+            
+          
+            
+            <li><a href="/sb/sats.html" class="">Satellites</a></li>
+            
+          
+            
+            <li><a href="/sb/radar.html" class="">Radar Astrometry</a></li>
+            
+          
+            
+            <li><a href="/diagrams/" class="">Diagrams and Charts</a></li>
+            
+          
+            
+            <li><a href="/tools/gravity.html" class="">Gravity Fields</a></li>
+            
+          
+            
+            <li><a href="/sb/great_comets.html" class="">Great Comets</a></li>
+            
+          
+            
+            <li><a href="/sb/neos.html" class="">Near-Earth Objects</a></li>
+            
+          
+            
+          
+            
+          
+          </ul>
+        </li>
+        
+      
+      <!--DEBUG: join=Tools<br/>  rec=Tools-->
+        
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle"
+          data-toggle="dropdown">Tools<br/>&nbsp;<span class="caret"></span></a>
+          
+          <ul class="dropdown-menu">
+          
+          
+            
+            <li><a href="/tools/" class="landing-page-item">Description of Tools</a></li>
+            
+          
+            
+            <li><a href="/horizons/" class="">Horizons System</a></li>
+            
+          
+            
+            <li><a href="/ephem.html" class="">Download Ephemerides</a></li>
+            
+          
+            
+            <li><a href="/tools/sbdb_lookup.html" class="">Small-Body Database Lookup</a></li>
+            
+          
+            
+            <li><a href="/tools/sbdb_query.html" class="">Small-Body Database Query</a></li>
+            
+          
+            
+            <li><a href="/tools/mdesign.html" class="">Small-Body Mission Design</a></li>
+            
+          
+            
+            <li><a href="/tools/sb_ident.html" class="">Small-Body Identification</a></li>
+            
+          
+            
+            <li><a href="/tools/sbwobs.html" class="">Small-Body Observability</a></li>
+            
+          
+            
+            <li><a href="/tools/orbit_viewer.html" class="">Orbit Viewer</a></li>
+            
+          
+            
+            <li><a href="/tools/gravity.html" class="">Gravity Field Visualization</a></li>
+            
+          
+            
+            <li><a href="/tools/jdc/" class="">JD Date/Time Converter</a></li>
+            
+          
+            
+            <li><a href="/api.html" class="">APIs</a></li>
+            
+          
+          </ul>
+        </li>
+        
+      
+      <!--DEBUG: join=Extras<br/>  rec=Extras-->
+        
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle"
+          data-toggle="dropdown">Extras<br/>&nbsp;<span class="caret"></span></a>
+          
+          <ul class="dropdown-menu">
+          
+          
+            
+            <li><a href="/extras.html" class="landing-page-item">Description of Extras</a></li>
+            
+          
+            
+            <li><a href="/astro_par.html" class="">Astrodynamic Parameters</a></li>
+            
+          
+            
+            <li><a href="/diagrams/" class="">Diagrams and Charts</a></li>
+            
+          
+            
+            <li><a href="/obs_data.html" class="">Observational Data</a></li>
+            
+          
+            
+            <li><a href="/tools/periodic_orbits.html" class="">Three-Body Periodic Orbits</a></li>
+            
+          
+            
+            <li><a href="/tools/orbit_diagram.html" class="">Custom Orbit Visualization</a></li>
+            
+          
+            
+            <li><a href="/api.html" class="">APIs</a></li>
+            
+          
+            
+            <li><a href="/doc/" class="">Technical Documents</a></li>
+            
+          
+            
+            <li><a href="/discovery.html" class="">Discovery Circumstances</a></li>
+            
+          
+            
+            <li><a href="/announcements/" class="">Announcements</a></li>
+            
+          
+            
+            <li><a href="/email_list.html" class="">Email Lists</a></li>
+            
+          
+            
+            <li><a href="/glossary/" class="">Glossary</a></li>
+            
+          
+            
+            <li><a href="/links.html" class="">Related Sites</a></li>
+            
+          
+            
+            <li><a href="/faq.html" class="">FAQ</a></li>
+            
+          
+            
+            <li><a href="/sitemap.html" class="">Sitemap</a></li>
+            
+          
+            
+            <li><a href="/contact/" class="">Contact Us</a></li>
+            
+          
+          </ul>
+        </li>
+        
+      
+      </ul>
+    </div>
+
+  </div>
+
+</nav>
+<!-- End of navigation bar -->
+
+<!-- Breadcrumbs -->
+
+<ol id="breadcrumb" class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  
+  <li><a href="/sats/">Planetary Satellites</a></li>
+  
+  
+  <li class="active">Planetary Satellite Physical Parameters</li>
+  
+</ol>
+
+<!-- End of Breadcrumbs -->
+
+
+
+
+<div class="fixed-content-margin"></div>
+
+</div>
+
+
+<!-- page content: begin -->
+<div id="main_content" tabindex="-1" class="container-fluid hide-tabindex"> <!-- begin main container -->
+
+  <!-- check for JavaScript -->
+  <noscript>
+    <div class="alert alert-danger">
+<h4>Please enable JavaScript for this website.</h4>
+
+<p>
+This website makes extensive use of JavaScript.
+The top menus will not function without it
+and most tools will also not work.
+</p>
+
+<p>
+If you do not know how to enable JavaScript in your web browser,
+you should be able find instructions by searching the web for
+"enable javascript in my browser" (or similar).
+</p>
+
+    </div>
+  </noscript>
+
+  
+
+<h1 class="no-top-margin">Planetary Satellite Physical Parameters</h1>
+
+
+
+  
+  
+<!-- subnav: start -->
+<div class="row">
+  <div class="col-xs-12">
+<ul class="nav nav-tabs" role="tablist">
+<li role="presentation"><a href="/sats/phys_par/" aria-controls="c_tab" role="tab">Main Table</a>
+<li role="presentation" class="active"><a href="/sats/phys_par/sep.html" aria-controls="s_tab" role="tab">Grouped Tables</a>
+</ul>
+
+  </div>
+</div>
+<!-- subnav: end -->
+
+
+<div ng-app="satPhysPar" ng-controller="satPhysParCtrl">
+
+  <p class="space-above">
+The following table lists currently available physical parameters
+for planetary satellites.
+
+Tables are grouped by planet.
+
+Table <a href="#legend">column headings</a> are described below.
+  </p>
+
+
+
+
+
+
+
+
+<div class="modal" id="MAR099" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: MAR099
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1600-01-01</li>
+          <li><b>Stop:</b>  2600-01-02</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/mar099.bsp" download>mar099.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> M. Brozović, R. A. Jacobson, R. S. Park (2025) &quot;Revised Ephemerides of the Martian Satellites, Phobos and Deimos&quot;. <i>AJ</i>&nbsp;<b>00</b>:00.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="JUP365" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: JUP365
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1600-01-10</li>
+          <li><b>Stop:</b>  2200-01-10</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/jup365.bsp" download>jup365.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> R. A. Jacobson (2021) &quot;The Orbits of the Regular Jovian Satellites and the Orientation of the Pole of Jupiter&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="JUP347" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: JUP347
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1799-12-21</li>
+          <li><b>Stop:</b>  2200-01-11</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/jup347.bsp" download>jup347.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> R. A. Jacobson (2025) &quot;Ephemerides of the Jovian irregulars &mdash; JUP347&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="JUP348" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: JUP348
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1799-01-16</li>
+          <li><b>Stop:</b>  2199-12-15</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/jup348.bsp" download>jup348.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> M. Brozović (2026) &quot;Delivery of ephemerides of the four provisional Jovian irregulars from JUP348&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="JUP349" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: JUP349
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1799-01-16</li>
+          <li><b>Stop:</b>  2199-12-15</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/jup349.bsp" download>jup349.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> M. Brozović, R. A. Jacobson (2026) &quot;Delivery of ephemerides of the 14 provisional Jovian irregulars from JUP349&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="SAT441" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: SAT441
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1749-12-30</li>
+          <li><b>Stop:</b>  2250-01-06</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/sat441l.bsp" download>sat441l.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> R. A. Jacobson (2022) &quot;The Orbits of the Main Saturnian Satellites, the Saturnian System Gravity Field, and the Orientation of Saturn's Pole&quot;. <i>AJ</i>&nbsp;<b>164</b>:199-217.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="SAT415" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: SAT415
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1990-06-14</li>
+          <li><b>Stop:</b>  2018-01-18</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/180927AP_RE_90165_18018.bsp" download>180927AP_RE_90165_18018.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> R. A. Jacobson (2018) &quot;Rock ephemeris file from fit to all Cassini data &mdash; SAT415&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="SAT456" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: SAT456
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1749-12-12</li>
+          <li><b>Stop:</b>  2150-01-08</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/sat456.bsp" download>sat456.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> R. A. Jacobson (2025) &quot;Ephemerides of the IAU recognized Saturnian irregulars &mdash; SAT456&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="SAT457" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: SAT457
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1750-01-01</li>
+          <li><b>Stop:</b>  2150-01-10</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/sat457.bsp" download>sat457.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> R. A. Jacobson (2025) &quot;Redelivery of ephemerides of the provisional Saturnian irregulars from SAT454 &mdash; SAT457&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="SAT455" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: SAT455
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1750-01-15</li>
+          <li><b>Stop:</b>  2150-01-05</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/sat455.bsp" download>sat455.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> M. Brozović, R. A. Jacobson (2025) &quot;Ephemerides of the 129 new Saturanian irregulars &mdash; SAT455&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="SAT458" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: SAT458
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1749-12-27</li>
+          <li><b>Stop:</b>  2150-01-05</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp//home/sat/Ephemerides/Saturn/sat458.bsp" download>/home/sat/Ephemerides/Saturn/sat458.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> R. A. Jacobson (2026) &quot;Delivery of ephemerides of the provisional Saturnian irregulars from SAT458&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="URA182" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: URA182
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1550-01-10</li>
+          <li><b>Stop:</b>  2650-01-03</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/ura182.bsp" download>ura182.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> Robert A. Jacobson, Ryan S. Park (2025) &quot;The Orbits of Uranus, Its Satellites and Rings, the Gravity Field of the Uranian System, and the Orientation of the Poles of Uranus and Its Satellites&quot;. <i>AJ</i>&nbsp;<b>169</b>:65-82.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="URA184" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: URA184
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1900-01-01</li>
+          <li><b>Stop:</b>  2100-01-24</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/ura184.bsp" download>ura184.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> M. Brozovic (2025) &quot;Update of the Uranian rocks orbits with JWST data &mdash; URA184&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="URA117" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: URA117
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1600-01-04</li>
+          <li><b>Stop:</b>  2399-12-17</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/ura117.bsp" download>ura117.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> S. S. Sheppard, D. J. Tholen, M. Brozović, R. A. Jacobson, C. A. Trujillo, P. S. Lykawa, Alexandersen M. (2024) &quot;New Moons of Uranus and Neptune from Ultra-Deep Pencil Beam Surveys&quot;. <i>AJ</i>, pp.&nbsp;.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="NEP097" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: NEP097
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1800-01-01</li>
+          <li><b>Stop:</b>  2100-01-10</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/nep097.bsp" download>nep097.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> M. Brozović (2020) &quot;Update of the inner Neptunian satellite orbits &mdash; NEP097&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="NEP105" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: NEP105
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1600-01-04</li>
+          <li><b>Stop:</b>  2400-01-02</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/nep105.bsp" download>nep105.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> R. A. Jacobson (2024) &quot;Update of the orbit of the irregular Neptunian satellite Nereid with data through 2021 &mdash; NEP105&quot;. personal communication to Horizons/NAIF.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="NEP104" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: NEP104
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1600-01-04</li>
+          <li><b>Stop:</b>  2399-12-25</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/nep104.bsp" download>nep104.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> S. S. Sheppard, D. J. Tholen, M. Brozović, R. A. Jacobson, C. A. Trujillo, P. S. Lykawa, Alexandersen M. (2024) &quot;New Moons of Uranus and Neptune from Ultra-Deep Pencil Beam Surveys&quot;. <i>AJ</i>, pp.&nbsp;.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="PLU060" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Planetary Satellite Ephemeris: PLU060
+          <button type="button" class="close" data-dismiss="modal" area-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><b>Start:</b> 1800-01-02</li>
+          <li><b>Stop:</b>  2199-12-30</li>
+          <li><b>Data File:</b>
+    
+            <a href="https://ssd.jpl.nasa.gov/ftp/eph/satellites/bsp/plu060.bsp" download>plu060.bsp</a>
+          </li>
+    
+          <li><b>Reference:</b> M. Brozović, R. A. Jacobson (2024) &quot;Post-New Horizons orbits and masses for the satellites of Pluto&quot;. <i>AJ</i>&nbsp;<b>167</b>:256.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      
+      <h3 class="panel-title">Satellites of Earth</h3>
+    </div>
+    <div class="panel-body sat-elem-panel">
+      <p>
+        <span class="text-nowrap"><b>Planet GM:</b> 398600.436 &pm; 0.001
+          km<sup>3</sup> s<sup>-2</sup></span>
+        <span class="text-nowrap">(ref:
+        DE440)
+        
+        </span>
+      </p>
+
+<table class="sat-phys-par table table-striped table-bordered table-hover table-responsive">
+  <thead>
+    <tr>
+      <th class="text-left">Satellite<br/>&nbsp;</th>
+      
+      
+      <th class="text-center">GM
+        <br/>(km<sup>3</sup>/s<sup>2</sup>)</th>
+      
+      <th class="text-center">Mean Radius
+        <br/>(km)</th>
+      
+      <th class="text-center">Mean Density
+        <br/>(g/cm<sup>3</sup>)</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td class="text-left">Moon</td>
+      
+      
+      <td class="text-center">
+        
+        4902.800
+        
+        
+        &pm;0.001
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          [DE440]
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1737.4
+        
+        
+        &pm;0.1
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        3.344
+        
+        
+        &pm;0.001
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+  
+  </tbody>
+</table>
+
+    </div>
+  </div>
+
+
+  
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      
+      <h3 class="panel-title">Satellites of Mars</h3>
+    </div>
+    <div class="panel-body sat-elem-panel">
+      <p>
+        <span class="text-nowrap"><b>Planet GM:</b> 42828.37362 &pm; 0.0008
+          km<sup>3</sup> s<sup>-2</sup></span>
+        <span class="text-nowrap">(ref:
+        
+          <a href="#MAR097" ng-click="$event.preventDefault();open('#MAR097')">MAR097)</a>
+        
+        </span>
+      </p>
+
+<table class="sat-phys-par table table-striped table-bordered table-hover table-responsive">
+  <thead>
+    <tr>
+      <th class="text-left">Satellite<br/>&nbsp;</th>
+      
+      
+      <th class="text-center">GM
+        <br/>(km<sup>3</sup>/s<sup>2</sup>)</th>
+      
+      <th class="text-center">Mean Radius
+        <br/>(km)</th>
+      
+      <th class="text-center">Mean Density
+        <br/>(g/cm<sup>3</sup>)</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td class="text-left">Phobos</td>
+      
+      
+      <td class="text-center">
+        
+        0.0007087
+        
+        
+        &pm;0.0000006
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#MAR097" ng-click="$event.preventDefault();open('#MAR097')">[MAR097]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        11.08
+        
+        
+        &pm;0.04
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.872
+        
+        
+        &pm;0.076
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Deimos</td>
+      
+      
+      <td class="text-center">
+        
+        0.0000962
+        
+        
+        &pm;0.0000028
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#MAR097" ng-click="$event.preventDefault();open('#MAR097')">[MAR097]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        6.2
+        
+        
+        &pm;0.24
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.471
+        
+        
+        &pm;0.166
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+  
+  </tbody>
+</table>
+
+    </div>
+  </div>
+
+
+  
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      
+      <h3 class="panel-title">Satellites of Jupiter</h3>
+    </div>
+    <div class="panel-body sat-elem-panel">
+      <p>
+        <span class="text-nowrap"><b>Planet GM:</b> 126686531.9 &pm; 0.42
+          km<sup>3</sup> s<sup>-2</sup></span>
+        <span class="text-nowrap">(ref:
+        
+          <a href="#JUP365" ng-click="$event.preventDefault();open('#JUP365')">JUP365)</a>
+        
+        </span>
+      </p>
+
+<table class="sat-phys-par table table-striped table-bordered table-hover table-responsive">
+  <thead>
+    <tr>
+      <th class="text-left">Satellite<br/>&nbsp;</th>
+      
+      
+      <th class="text-center">GM
+        <br/>(km<sup>3</sup>/s<sup>2</sup>)</th>
+      
+      <th class="text-center">Mean Radius
+        <br/>(km)</th>
+      
+      <th class="text-center">Mean Density
+        <br/>(g/cm<sup>3</sup>)</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td class="text-left">Io</td>
+      
+      
+      <td class="text-center">
+        
+        5959.91547
+        
+        
+        &pm;0.00135
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#JUP365" ng-click="$event.preventDefault();open('#JUP365')">[JUP365]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1821.49
+        
+        
+        &pm;0.50
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        3.5276
+        
+        
+        &pm;0.0029
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Europa</td>
+      
+      
+      <td class="text-center">
+        
+        3202.71210
+        
+        
+        &pm;0.00181
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#JUP365" ng-click="$event.preventDefault();open('#JUP365')">[JUP365]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1560.80
+        
+        
+        &pm;0.30
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        3.0130
+        
+        
+        &pm;0.0017
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Ganymede</td>
+      
+      
+      <td class="text-center">
+        
+        9887.83275
+        
+        
+        &pm;0.00247
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#JUP365" ng-click="$event.preventDefault();open('#JUP365')">[JUP365]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        2631.20
+        
+        
+        &pm;1.70
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.9416
+        
+        
+        &pm;0.0038
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Callisto</td>
+      
+      
+      <td class="text-center">
+        
+        7179.28340
+        
+        
+        &pm;0.00324
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#JUP365" ng-click="$event.preventDefault();open('#JUP365')">[JUP365]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        2410.30
+        
+        
+        &pm;1.50
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.8340
+        
+        
+        &pm;0.0034
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Amalthea</td>
+      
+      
+      <td class="text-center">
+        
+        0.16456
+        
+        
+        &pm;0.00867
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#JUP365" ng-click="$event.preventDefault();open('#JUP365')">[JUP365]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        83.50
+        
+        
+        &pm;3.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.0111
+        
+        
+        &pm;0.1213
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Thebe</td>
+      
+      
+      <td class="text-center">
+        
+        0.03015
+        
+        
+        &pm;0.01250
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#JUP365" ng-click="$event.preventDefault();open('#JUP365')">[JUP365]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        49.30
+        
+        
+        &pm;4.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.9000
+        
+        
+        &pm;0.4327
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Adrastea</td>
+      
+      
+      <td class="text-center">
+        
+        0.00014
+        
+        
+        &pm;0.00020
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#JUP365" ng-click="$event.preventDefault();open('#JUP365')">[JUP365]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        8.20
+        
+        
+        &pm;4.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.9018
+        
+        
+        &pm;1.8507
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Metis</td>
+      
+      
+      <td class="text-center">
+        
+        0.00250
+        
+        
+        &pm;0.00160
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#JUP365" ng-click="$event.preventDefault();open('#JUP365')">[JUP365]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        21.50
+        
+        
+        &pm;4.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.9002
+        
+        
+        &pm;0.7642
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Himalia</td>
+      
+      
+      <td class="text-center">
+        
+        0.15155
+        
+        
+        &pm;0.05763
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#JUP344" ng-click="$event.preventDefault();open('#JUP344')">[JUP344]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        85.00
+        
+        
+        &pm;10.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.8827
+        
+        
+        &pm;0.4580
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+  
+  </tbody>
+</table>
+
+    </div>
+  </div>
+
+
+  
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      
+      <h3 class="panel-title">Satellites of Saturn</h3>
+    </div>
+    <div class="panel-body sat-elem-panel">
+      <p>
+        <span class="text-nowrap"><b>Planet GM:</b> 37931206.23 &pm; 0.24
+          km<sup>3</sup> s<sup>-2</sup></span>
+        <span class="text-nowrap">(ref:
+        
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">SAT441)</a>
+        
+        </span>
+      </p>
+
+<table class="sat-phys-par table table-striped table-bordered table-hover table-responsive">
+  <thead>
+    <tr>
+      <th class="text-left">Satellite<br/>&nbsp;</th>
+      
+      
+      <th class="text-center">GM
+        <br/>(km<sup>3</sup>/s<sup>2</sup>)</th>
+      
+      <th class="text-center">Mean Radius
+        <br/>(km)</th>
+      
+      <th class="text-center">Mean Density
+        <br/>(g/cm<sup>3</sup>)</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td class="text-left">Mimas</td>
+      
+      
+      <td class="text-center">
+        
+        2.50349
+        
+        
+        &pm;0.00014
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        198.20
+        
+        
+        &pm;0.40
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.1501
+        
+        
+        &pm;0.0070
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Enceladus</td>
+      
+      
+      <td class="text-center">
+        
+        7.21037
+        
+        
+        &pm;0.00009
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        252.10
+        
+        
+        &pm;0.20
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.6097
+        
+        
+        &pm;0.0038
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Tethys</td>
+      
+      
+      <td class="text-center">
+        
+        41.21353
+        
+        
+        &pm;0.00031
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        531.10
+        
+        
+        &pm;0.60
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.9840
+        
+        
+        &pm;0.0033
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Dione</td>
+      
+      
+      <td class="text-center">
+        
+        73.11607
+        
+        
+        &pm;0.00005
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        561.40
+        
+        
+        &pm;0.40
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.4781
+        
+        
+        &pm;0.0032
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Rhea</td>
+      
+      
+      <td class="text-center">
+        
+        153.94175
+        
+        
+        &pm;0.00041
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        763.50
+        
+        
+        &pm;0.60
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.2372
+        
+        
+        &pm;0.0029
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Titan</td>
+      
+      
+      <td class="text-center">
+        
+        8978.13710
+        
+        
+        &pm;0.00025
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        2574.76
+        
+        
+        &pm;0.02
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.8814
+        
+        
+        &pm;0.0001
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Hyperion</td>
+      
+      
+      <td class="text-center">
+        
+        0.37049
+        
+        
+        &pm;0.00005
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        135.00
+        
+        
+        &pm;4.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.5386
+        
+        
+        &pm;0.0479
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Iapetus</td>
+      
+      
+      <td class="text-center">
+        
+        120.51511
+        
+        
+        &pm;0.00242
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        734.30
+        
+        
+        &pm;2.80
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.0887
+        
+        
+        &pm;0.0125
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Phoebe</td>
+      
+      
+      <td class="text-center">
+        
+        0.55479
+        
+        
+        &pm;0.00108
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        106.50
+        
+        
+        &pm;0.70
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.6428
+        
+        
+        &pm;0.0326
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Janus</td>
+      
+      
+      <td class="text-center">
+        
+        0.12662
+        
+        
+        &pm;0.00007
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT415" ng-click="$event.preventDefault();open('#SAT415')">[SAT415]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        89.2
+        
+        
+        &pm;0.8
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.6381
+        
+        
+        &pm;0.0172
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Epimetheus</td>
+      
+      
+      <td class="text-center">
+        
+        0.03514
+        
+        
+        &pm;0.00002
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT415" ng-click="$event.preventDefault();open('#SAT415')">[SAT415]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        58.2
+        
+        
+        &pm;1.2
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.6375
+        
+        
+        &pm;0.0394
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Helene</td>
+      
+      
+      <td class="text-center">
+        
+        0.00048
+        
+        
+        &pm;0.00002
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT441" ng-click="$event.preventDefault();open('#SAT441')">[SAT441]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        18.00
+        
+        
+        &pm;0.40
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.2918
+        
+        
+        &pm;0.0217
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Atlas</td>
+      
+      
+      <td class="text-center">
+        
+        0.00037
+        
+        
+        &pm;0.00001
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT415" ng-click="$event.preventDefault();open('#SAT415')">[SAT415]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        15.1
+        
+        
+        &pm;0.8
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.3850
+        
+        
+        &pm;0.0613
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Prometheus</td>
+      
+      
+      <td class="text-center">
+        
+        0.01071
+        
+        
+        &pm;0.00001
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT415" ng-click="$event.preventDefault();open('#SAT415')">[SAT415]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        43.1
+        
+        
+        &pm;1.2
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.4784
+        
+        
+        &pm;0.0400
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Pandora</td>
+      
+      
+      <td class="text-center">
+        
+        0.00926
+        
+        
+        &pm;0.00002
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT415" ng-click="$event.preventDefault();open('#SAT415')">[SAT415]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        40.6
+        
+        
+        &pm;1.5
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.4948
+        
+        
+        &pm;0.0549
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Pan</td>
+      
+      
+      <td class="text-center">
+        
+        0.00028
+        
+        
+        &pm;0.00014
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#SAT415" ng-click="$event.preventDefault();open('#SAT415')">[SAT415]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        14.0
+        
+        
+        &pm;1.2
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.3650
+        
+        
+        &pm;0.2052
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+  
+  </tbody>
+</table>
+
+    </div>
+  </div>
+
+
+  
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      
+      <h3 class="panel-title">Satellites of Uranus</h3>
+    </div>
+    <div class="panel-body sat-elem-panel">
+      <p>
+        <span class="text-nowrap"><b>Planet GM:</b> 5793951.3 &pm; 4.4
+          km<sup>3</sup> s<sup>-2</sup></span>
+        <span class="text-nowrap">(ref:
+        
+          <a href="#URA111" ng-click="$event.preventDefault();open('#URA111')">URA111)</a>
+        
+        </span>
+      </p>
+
+<table class="sat-phys-par table table-striped table-bordered table-hover table-responsive">
+  <thead>
+    <tr>
+      <th class="text-left">Satellite<br/>&nbsp;</th>
+      
+      
+      <th class="text-center">GM
+        <br/>(km<sup>3</sup>/s<sup>2</sup>)</th>
+      
+      <th class="text-center">Mean Radius
+        <br/>(km)</th>
+      
+      <th class="text-center">Mean Density
+        <br/>(g/cm<sup>3</sup>)</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td class="text-left">Ariel</td>
+      
+      
+      <td class="text-center">
+        
+        83.5
+        
+        
+        &pm;1.4
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#URA111" ng-click="$event.preventDefault();open('#URA111')">[URA111]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        578.9
+        
+        
+        &pm;0.6
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.539
+        
+        
+        &pm;0.026
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Umbriel</td>
+      
+      
+      <td class="text-center">
+        
+        85.1
+        
+        
+        &pm;1.9
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#URA111" ng-click="$event.preventDefault();open('#URA111')">[URA111]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        584.7
+        
+        
+        &pm;2.8
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.523
+        
+        
+        &pm;0.041
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Titania</td>
+      
+      
+      <td class="text-center">
+        
+        226.9
+        
+        
+        &pm;4.1
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#URA111" ng-click="$event.preventDefault();open('#URA111')">[URA111]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        788.9
+        
+        
+        &pm;1.8
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.653
+        
+        
+        &pm;0.032
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Oberon</td>
+      
+      
+      <td class="text-center">
+        
+        205.3
+        
+        
+        &pm;5.8
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#URA111" ng-click="$event.preventDefault();open('#URA111')">[URA111]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        761.4
+        
+        
+        &pm;2.6
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.664
+        
+        
+        &pm;0.050
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Miranda</td>
+      
+      
+      <td class="text-center">
+        
+        4.3
+        
+        
+        &pm;0.2
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#URA111" ng-click="$event.preventDefault();open('#URA111')">[URA111]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        235.8
+        
+        
+        &pm;0.7
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.178
+        
+        
+        &pm;0.053
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+  
+  </tbody>
+</table>
+
+    </div>
+  </div>
+
+
+  
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      
+      <h3 class="panel-title">Satellites of Neptune</h3>
+    </div>
+    <div class="panel-body sat-elem-panel">
+      <p>
+        <span class="text-nowrap"><b>Planet GM:</b> 6835099.97 &pm; 9.63
+          km<sup>3</sup> s<sup>-2</sup></span>
+        <span class="text-nowrap">(ref:
+        
+          <a href="#NEP097" ng-click="$event.preventDefault();open('#NEP097')">NEP097)</a>
+        
+        </span>
+      </p>
+
+<table class="sat-phys-par table table-striped table-bordered table-hover table-responsive">
+  <thead>
+    <tr>
+      <th class="text-left">Satellite<br/>&nbsp;</th>
+      
+      
+      <th class="text-center">GM
+        <br/>(km<sup>3</sup>/s<sup>2</sup>)</th>
+      
+      <th class="text-center">Mean Radius
+        <br/>(km)</th>
+      
+      <th class="text-center">Mean Density
+        <br/>(g/cm<sup>3</sup>)</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td class="text-left">Triton</td>
+      
+      
+      <td class="text-center">
+        
+        1428.49546
+        
+        
+        &pm;0.61603
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#NEP097" ng-click="$event.preventDefault();open('#NEP097')">[NEP097]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1352.60
+        
+        
+        &pm;2.40
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        2.0649
+        
+        
+        &pm;0.0110
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Nereid</td>
+      
+      
+      <td class="text-center">
+        
+        0.00000
+        
+        
+        &pm;0.00000
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#NEP101" ng-click="$event.preventDefault();open('#NEP101')">[NEP101]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        170.00
+        
+        
+        &pm;25.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        
+        n/a
+        
+        
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Naiad</td>
+      
+      
+      <td class="text-center">
+        
+        0.00853
+        
+        
+        &pm;0.00480
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#NEP097" ng-click="$event.preventDefault();open('#NEP097')">[NEP097]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        29.00
+        
+        
+        &pm;6.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.2511
+        
+        
+        &pm;1.0478
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Thalassa</td>
+      
+      
+      <td class="text-center">
+        
+        0.02359
+        
+        
+        &pm;0.00522
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#NEP097" ng-click="$event.preventDefault();open('#NEP097')">[NEP097]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        40.00
+        
+        
+        &pm;8.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.3184
+        
+        
+        &pm;0.8432
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Despina</td>
+      
+      
+      <td class="text-center">
+        
+        0.11673
+        
+        
+        &pm;0.25263
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#NEP097" ng-click="$event.preventDefault();open('#NEP097')">[NEP097]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        74.00
+        
+        
+        &pm;10.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.0304
+        
+        
+        &pm;2.2689
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Galatea</td>
+      
+      
+      <td class="text-center">
+        
+        0.18990
+        
+        
+        &pm;0.76278
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#NEP097" ng-click="$event.preventDefault();open('#NEP097')">[NEP097]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        79.00
+        
+        
+        &pm;12.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.3777
+        
+        
+        &pm;5.5695
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Larissa</td>
+      
+      
+      <td class="text-center">
+        
+        0.25484
+        
+        
+        &pm;3.12230
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#NEP097" ng-click="$event.preventDefault();open('#NEP097')">[NEP097]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        96.00
+        
+        
+        &pm;7.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.0303
+        
+        
+        &pm;12.626
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Proteus</td>
+      
+      
+      <td class="text-center">
+        
+        2.58342
+        
+        
+        &pm;2.42070
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#NEP097" ng-click="$event.preventDefault();open('#NEP097')">[NEP097]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        208.00
+        
+        
+        &pm;8.00
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[1]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.0269
+        
+        
+        &pm;0.9695
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+  
+  </tbody>
+</table>
+
+    </div>
+  </div>
+
+
+  
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      
+      <h3 class="panel-title">Satellites of Pluto</h3>
+    </div>
+    <div class="panel-body sat-elem-panel">
+      <p>
+        <span class="text-nowrap"><b>Planet GM:</b> 869.3 &pm; 0.4
+          km<sup>3</sup> s<sup>-2</sup></span>
+        <span class="text-nowrap">(ref:
+        
+          <a href="#PLU060" ng-click="$event.preventDefault();open('#PLU060')">PLU060)</a>
+        
+        </span>
+      </p>
+
+<table class="sat-phys-par table table-striped table-bordered table-hover table-responsive">
+  <thead>
+    <tr>
+      <th class="text-left">Satellite<br/>&nbsp;</th>
+      
+      
+      <th class="text-center">GM
+        <br/>(km<sup>3</sup>/s<sup>2</sup>)</th>
+      
+      <th class="text-center">Mean Radius
+        <br/>(km)</th>
+      
+      <th class="text-center">Mean Density
+        <br/>(g/cm<sup>3</sup>)</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr>
+      <td class="text-left">Charon</td>
+      
+      
+      <td class="text-center">
+        
+        106.1
+        
+        
+        &pm;0.3
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#PLU060" ng-click="$event.preventDefault();open('#PLU060')">[PLU060]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        606.0
+        
+        
+        &pm;0.5
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[2]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.853
+        
+        
+        &pm;0.004
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Nix</td>
+      
+      
+      <td class="text-center">
+        
+        0.0015
+        
+        
+        &pm;0.0005
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#PLU060" ng-click="$event.preventDefault();open('#PLU060')">[PLU060]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        18.0
+        
+        
+        &pm;1.0
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[3]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        0.88
+        
+        
+        &pm;0.31
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Hydra</td>
+      
+      
+      <td class="text-center">
+        
+        0.0020
+        
+        
+        &pm;0.0003
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#PLU060" ng-click="$event.preventDefault();open('#PLU060')">[PLU060]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        18.5
+        
+        
+        &pm;1.0
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[3]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        1.21
+        
+        
+        &pm;0.19
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[*]</span></a>
+          
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Kerberos</td>
+      
+      
+      <td class="text-center">
+        
+        <0.0002
+        
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#PLU060" ng-click="$event.preventDefault();open('#PLU060')">[PLU060]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        6.0
+        
+        
+        &pm;1.0
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[3]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        
+        n/a
+        
+        
+        
+      </td>
+      
+    </tr>
+    
+    <tr>
+      <td class="text-left">Styx</td>
+      
+      
+      <td class="text-center">
+        
+        <0.0003
+        
+        
+        
+          
+        <span class="sat-phys-par-ref">
+            
+          <a href="#PLU060" ng-click="$event.preventDefault();open('#PLU060')">[PLU060]</a>
+        </span>
+            
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        5.2
+        
+        
+        &pm;1.0
+        
+        
+          
+        <a href="#refs"><span class="sat-phys-par-ref">[3]</span></a>
+          
+        
+      </td>
+      
+      <td class="text-center">
+        
+        
+        n/a
+        
+        
+        
+      </td>
+      
+    </tr>
+    
+  
+  </tbody>
+</table>
+
+    </div>
+  </div>
+
+
+
+<a id="notes" class="anchor"></a>
+<h4>Notes</h4>
+<ul>
+  <li><code>GM</code> of the satellite is taken from the specified ephemeris.
+  <li><code>Mean Radius</code> references are listed below.</li>
+  <li>[ ref=<code>*</code> ] <code>Mean Density</code> is derived from the specified <code>GM</code> and <code>Mean Radius</code>.</li>
+</ul>
+
+<a id="legend" class="anchor"></a>
+<div class="panel panel-default space-above">
+  <div class="panel-heading">
+    <h3 class="panel-title">Table Column Descriptions</h3>
+  </div>
+  <div class="panel-body horiz-scroll">
+    <table class="legend table-hover table-striped">
+      <tbody>
+
+        <tr>
+          <th class="text-nowrap">GM</th>
+          <td>See <a href="/glossary/albedo.html">glossary definition of GM</a>.</td>
+        </tr>
+
+        <tr>
+          <th class="text-nowrap">Mean Radius</th>
+          <td>Radius of a sphere with the equivalent volume of the planetary satellite.</td>
+        </tr>
+
+        <tr>
+          <th class="text-nowrap">Mean Density</th>
+          <td>Density computed using the volume of a sphere with the specified <code>mean radius</code> and mass (derived from <code>GM</code>) of the planet.</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<a id="refs" class="anchor"></a>
+<div class="panel panel-default space-above">
+  <div class="panel-heading">
+    <h3 class="panel-title">Mean Radius References</h3>
+  </div>
+  <div class="panel-body">
+    <ol class="sat-ephem-ref">
+
+      <li>B.&nbsp;A. Archinal, C.&nbsp;H. Acton, M.&nbsp;F. A’Hearn, et&nbsp;al. (2018) &quot;Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015&quot;. <i>Celest.~Mech.</i>&nbsp;<b>130</b>:22.</li>
+
+      <li>Francis Nimmo, Orkan Umurhan, Carey M. Lisse, Carver J. Bierson, Tod R. Lauer, Marc W. Buie, Henry B. Throop, Josh A. Kammer, James H. Roberts, William B. McKinnon, Amanda M. Zangari, Jeffrey M. Moore, S. Alan Stern, Leslie A. Young, Harold A. Weaver, Cathy B. Olkin, Kim Ennico (2017) &quot;Mean radius and shape of Pluto and Charon from New Horizons images&quot;. <i>Icarus</i>&nbsp;<b>287</b>:12-29.</li>
+
+      <li>S. Alan Stern, William M. Grundy, William B. McKinnon, Harold A. Weaver, Leslie A. Young (2018) &quot;The Pluto System After New Horizons&quot;. <i>Annual Review of Astronomy and Astrophysics</i>&nbsp;<b>56</b>:357-392.</li>
+
+      <li>R.&nbsp;A. Jacobson (2021) &quot;The Orbits of the Regular Jovian Satellites and the Orientation of the Pole of Jupiter&quot;. <i>submitted to AJ</i>&nbsp;<b> </b>: .</li>
+
+      <li>R.&nbsp;A. Jacobson (2021) &quot;The Orbits of the Major Saturnian Satellites,the Trajectories of Spacecraft at Saturn, the Gravity Field of the Saturnian System, and the Orientation of Saturn's Pole&quot;. personal communication to Horizons/NAIF.</li>
+
+    </ol>
+  </div>
+</div>
+
+
+</div>
+
+<!-- end of page content -->
+
+
+
+
+
+<div id="footer" class="container-fluid footer">
+  <div class="row">
+    <div class="col-sm-5 col-xs-12">
+      <img class="ssd-logo" src="/images/ssd_logo.png" alt="SSD Logo" />
+    </div>
+    <div class="col-sm-3 col-xs-12">
+      <div class="link-inv">
+        <a href="/sitemap.html"><i class="fa-fw fa fa-list-alt"></i> Site Map</a>
+      </div>
+      <div class="link-inv">
+        <a href="https://www.jpl.nasa.gov/caltechjpl-privacy-policies-and-important-notices"><i class="fa-fw fa fa-user-secret"></i> Privacy</a>
+      </div>
+      <div class="link-inv">
+        <a href="https://www.jpl.nasa.gov/jpl-image-use-policy"><i class="fa-fw fa fa-picture-o"></i> Image Policy</a>
+      </div>
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      <div class=" link-inv">
+        <a href="/contact/"><i class="fa-fw fa fa-envelope"></i> Contact Us</a>
+      </div>
+      <div class="text-smaller">
+        <span class="footer-label text-nowrap">Site Manager:</span>
+        <span class="text-nowrap">Ryan Park</span>
+      </div>
+      <div class="text-smaller2">
+        <span class="footer-label text-nowrap">Site Design:</span>
+        <span class="text-nowrap">Alan B. Chamberlin</span>
+        
+      </div>
+      <div class="text-smaller2">
+        <span class="footer-label text-nowrap">URS Clearance:</span>
+        <span class="text-nowrap">CL#21-4165</span>
+      </div>
+    </div>
+  </div>
+  <!-- Full-width sponsor row at the bottom -->
+  <div class="row" style="margin-top:10px;">
+    <div class="col-xs-12 text-center link-inv" style="font-size:16px;">
+      The JPL Solar System Dynamics group’s ephemeris development, maintenance, and improvement tasks are primarily supported by
+      NASA’s <a href="https://ammos.nasa.gov/">Advanced Multi-Mission Operations System</a>,
+      which is funded by
+      <a href="https://science.nasa.gov/solar-system">NASA’s Science Mission Directorate </a>.
+    </div>
+  </div>
+  
+    
+  <script id="_fed_an_ua_tag" type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NASA&subagency=JPL&sdor=false"></script>
+    
+  
+</div>
+
+
+
+</div> <!-- end of main container -->
+
+
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/sprintf.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.min.js"></script>
+<script src="/js/dataTables.responsive.min.js"></script>
+<script src="/js/dataTables.conditionalPaging.js"></script>
+<script src="/js/dataTables.select.min.js"></script>
+<script src="/tools/common/js/vendor/dataTables.select.min.js"></script>
+
+<script src="/js/responsive.bootstrap.min.js"></script>
+
+
+<script src="/js/angular.min.js"></script>
+<script src="/js/angular-sanitize.min.js"></script>
+
+  
+  
+  
+<script src="/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+  
+<script src="/sats/phys_par/phys_par.js"></script>
+  
+
+
+
+
+
+
+
+
+<script>
+$(function() {
+  $("a[class='anchor-modal']").click( function(e) {
+    e.preventDefault();
+    var href = $(this).attr('href');
+    $(href).modal('toggle');
+  });
+});
+</script>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </body>
+</html>

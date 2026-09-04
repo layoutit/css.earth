@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <metadata>{"origin":"Project-authored navigation control","credit":"cssEarth","license":"MIT"}</metadata>
+  <defs>
+    <mask id="settings-planet" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+      <rect width="24" height="24" fill="black"/>
+      <circle cx="12" cy="12" r="10" fill="white"/>
+      <g>
+        <path fill="black" d="M10.4 6.5h3.2l.35 1.45c.36.15.7.35 1 .58l1.44-.43 1.6 2.77-1.09 1.02c.06.39.06.78 0 1.17l1.09 1.02-1.6 2.77-1.44-.43c-.3.23-.64.43-1 .58l-.35 1.45h-3.2l-.35-1.45c-.36-.15-.7-.35-1-.58l-1.44.43-1.6-2.77 1.09-1.02a4.1 4.1 0 0 1 0-1.17L6.01 9.87l1.6-2.77 1.44.43c.3-.23.64-.43 1-.58L10.4 6.5Z"/>
+        <circle cx="12" cy="12" r="2.15" fill="white"/>
+      </g>
+    </mask>
+  </defs>
+  <circle cx="12" cy="12" r="10" mask="url(#settings-planet)"/>
+</svg>

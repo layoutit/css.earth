@@ -1,0 +1,14 @@
+---
+import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
+
+const atmosphereTransport = PREPARED_EARTH_SCENE.material.atmosphere.transport;
+const initialAtmosphereRows = atmosphereTransport.initialWarmRows.map(
+  (rowIndex) => PREPARED_EARTH_SCENE.material.atmosphere.preparedRows[rowIndex],
+);
+---
+
+<link rel="preload" href="/scenes/earth/earth-surface.webp" as="image" type="image/webp" />
+<link rel="preload" href="/scenes/earth/earth-lighting-shadowless@2x.webp" as="image" type="image/webp" />
+{initialAtmosphereRows.map(({ assets }) => (
+  <link rel="preload" href={assets.two || assets.one} as="image" type="image/webp" />
+))}

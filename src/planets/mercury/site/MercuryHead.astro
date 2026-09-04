@@ -1,0 +1,11 @@
+<link rel="preload" href="/scenes/mercury/mercury-surface-normal@2x.webp" as="image" type="image/webp" />
+<link rel="preload" href="/scenes/mercury/mercury-poles@2x.webp" as="image" type="image/webp" />
+<link rel="preload" href="/scenes/mercury/mercury-lighting-2x-row-28.webp" as="image" type="image/webp" />
+{["front", "right", "back", "left", "top", "bottom"].map((face) => (
+  <link
+    rel="preload"
+    href={`/scenes/mercury/mercury-starfield-${face}-standard@2x.webp`}
+    as="image"
+    type="image/webp"
+  />
+))}

@@ -1,0 +1,226 @@
+{
+  "schema": "cssuranus-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "inter-uranus-title-vector",
+      "path": "presentation/title-mark.mjs",
+      "expectedSha256": "dfe91c839b556a96e1bb73e9f639260ee939fd37089cf8b2787374defc72ee21",
+      "expectedBytes": 3658,
+      "origin": "Inter Variable 4.001 git-9221beed3, prepared Uranus outline",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
+      "redistribution": "project-authored SVG outline with Inter attribution",
+      "consumers": ["title"]
+    },
+    {
+      "id": "hubble-opal-uranus-2025a-color",
+      "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+      "expectedSha256": "854ba9d0b744c2d6e6b646d315847a3528b94b4f0b8970cc4285d71228e69c7b",
+      "expectedBytes": 787756,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+      "credit": "NASA, ESA, STScI, and the OPAL team",
+      "license": "STScI public science archive data",
+      "acquisition": "pinned Hubble OPAL Cycle 33 rotation-A global-map product",
+      "redistribution": "checked scientific archive product with full credit",
+      "consumers": ["scene", "lenses"]
+    },
+    {
+      "id": "hubble-opal-uranus-2025a-fq727n",
+      "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
+      "expectedSha256": "36ff34743fff69c09ec03b90b3d3e193d9b17e5dfdc41a3cacb2fae878d37c79",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
+      "credit": "NASA, ESA, STScI, and the OPAL team",
+      "license": "STScI public science archive data",
+      "acquisition": "pinned Hubble OPAL Cycle 33 FQ727N global-map product",
+      "redistribution": "checked scientific archive product with full credit",
+      "consumers": ["lenses"]
+    },
+    {
+      "id": "hubble-opal-uranus-2025a-f845m",
+      "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
+      "expectedSha256": "96afebec48e8da3b5b72a80909a0041ddd50255ce5101f51cab3ffda1e151ac8",
+      "expectedBytes": 1045440,
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
+      "credit": "NASA, ESA, STScI, and the OPAL team",
+      "license": "STScI public science archive data",
+      "acquisition": "pinned Hubble OPAL Cycle 33 F845M global-map product",
+      "redistribution": "checked scientific archive product with full credit",
+      "consumers": ["lenses"]
+    },
+    {
+      "id": "pds-uranus-ring-table",
+      "path": "rings/uranus-rings-table.html",
+      "expectedSha256": "de6a861aacdd4de68cbfebc1975feaf2b1d4d0392eea21c3083d4225b24bbf4a",
+      "expectedBytes": 29588,
+      "origin": "https://pds-rings.seti.org/uranus/uranus_rings_table.html",
+      "credit": "NASA Planetary Data System Rings Node",
+      "license": "United States government scientific data",
+      "acquisition": "checked PDS Uranus ring table snapshot",
+      "redistribution": "checked scientific table with source credit",
+      "consumers": ["rings"]
+    },
+    {
+      "id": "jpl-uranus-discovery-table",
+      "path": "moons/jpl-discovery.html",
+      "expectedSha256": "4836d801269036704bcc685000d198d92a3eb36dc9622b298b3e7c94d8c0daa5",
+      "expectedBytes": 116148,
+      "origin": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+      "credit": "NASA/JPL Solar System Dynamics",
+      "license": "United States government scientific data",
+      "acquisition": "checked JPL satellite discovery table snapshot",
+      "redistribution": "checked factual table with source credit",
+      "consumers": ["moons"]
+    },
+    {
+      "id": "jpl-uranus-elements-table",
+      "path": "moons/jpl-elements.html",
+      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
+      "expectedBytes": 418952,
+      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+      "credit": "NASA/JPL Solar System Dynamics",
+      "license": "United States government scientific data",
+      "acquisition": "checked JPL separate satellite mean-elements table snapshot",
+      "redistribution": "checked factual table with source credit",
+      "consumers": ["moons"]
+    },
+    {
+      "id": "jpl-uranus-physical-parameters",
+      "path": "physical/jpl-physical.html",
+      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
+      "expectedBytes": 84633,
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+      "credit": "NASA/JPL Solar System Dynamics",
+      "license": "United States government scientific data",
+      "acquisition": "checked JPL satellite physical-parameter table snapshot",
+      "redistribution": "checked factual table with source credit",
+      "consumers": ["scene", "moons"]
+    },
+    {
+      "id": "voyager-pia01361-uranus-moons",
+      "path": "moons/pia01361-major-moons.jpg",
+      "expectedSha256": "146065b99164ce5554a24c7979e57ab12bffd5ebec2a8df0e9b3e43e739ab4e1",
+      "expectedBytes": 49428,
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01361/PIA01361.tif?fit=clip&h=800&w=2537",
+      "credit": "NASA/JPL, Voyager 2 Imaging Science Subsystem",
+      "license": "NASA and JPL public media reuse policies",
+      "acquisition": "checked PIA01361 dynamic image response; source bytes identify as JPEG",
+      "redistribution": "checked source image and prepared crops with full credit",
+      "consumers": ["moons"]
+    },
+    {
+      "id": "nasa-pia18182-uranus-navigation-disc",
+      "path": "navigation/uranus.jpg",
+      "expectedSha256": "3dcc83114f1a25caa1ae1a1436830fffaa15a3e429666dbf4c68bcf035e8932b",
+      "expectedBytes": 83489,
+      "origin": "https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg",
+      "credit": "NASA/JPL-Caltech",
+      "license": "NASA media usage guidelines",
+      "acquisition": "node src/planets/uranus/tools/acquire.mjs --refresh",
+      "redistribution": "checked NASA image with full credit and no endorsement claim",
+      "consumers": ["navigation", "scene", "lenses"]
+    },
+    {
+      "id": "webb-uranus-navigation-reference",
+      "path": "reference/webb-uranus-nircam.png",
+      "expectedSha256": "f2b4e331c6648544fd3bd55277197404b22fe7dbfeb90bf8ed9154626abe5adc",
+      "expectedBytes": 2239413,
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2023/04/STScI-01GWQDPJTF1MY8ZGN4WBMWMACJ.png?crop=faces%2Cfocalpoint&fit=clip&h=1268&w=1268",
+      "credit": "NASA, ESA, CSA, STScI; image processing Joseph DePasquale (STScI)",
+      "license": "NASA, ESA, CSA, and STScI public media policies",
+      "acquisition": "checked NASA Science dynamic image response",
+      "redistribution": "checked visual reference with full credit",
+      "consumers": ["reference"]
+    },
+    {
+      "id": "nasa-psg-uranus-expanded-configuration",
+      "path": "atmosphere/psg-uranus-20260830.cfg",
+      "expectedSha256": "8bca8db27545003285fdf45d84ed06cb82c2a0365e3c07dedfb87715df9c0d0c",
+      "expectedBytes": 8815,
+      "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, OBJECT-DATE=2026/08/30 12:00, OBJECT-NAME=Uranus",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government scientific model response",
+      "acquisition": "pinned expanded PSG configuration",
+      "redistribution": "checked text configuration with NASA attribution",
+      "consumers": ["charts"]
+    },
+    {
+      "id": "nasa-psg-uranus-r240-rif",
+      "path": "atmosphere/psg-uranus-r240-rif.txt",
+      "expectedSha256": "84ab228415b34a5871182dd64285ba653ee6de495767af2c190ff441ff7e2567",
+      "expectedBytes": 11944,
+      "origin": "https://psg.gsfc.nasa.gov/api.php, type=rad, pinned configuration, 0.35 to 1.0 um, R=240, rif",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government scientific model response",
+      "acquisition": "checked ASCII response with only the request timestamp and elapsed-time comment lines removed",
+      "redistribution": "checked model response with NASA attribution",
+      "consumers": ["charts"]
+    },
+    {
+      "id": "hyg-v41-uranus-cubic-sky-registration",
+      "path": "stars/hyg-v41-field.json",
+      "expectedSha256": "0d3febfe0b5a88ea0a22614787252eb7a83faa697038def7a252a5331ff59311",
+      "expectedBytes": 144992,
+      "origin": "HYG Stellar Database v4.1 commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
+      "credit": "David Nash / Astronexus",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": ["stars/LICENSE.md"],
+      "acquisition": "Prepared deterministic coordinate-registration subset from the pinned HYG v4.1 source.",
+      "redistribution": "Share-alike prepared subset with attribution and license evidence.",
+      "consumers": ["starfield"]
+    },
+    {
+      "id": "eso-uranus-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "expectedBytes": 29082084,
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
+      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": ["starfield", "scene"]
+    },
+    {
+      "id": "google-maps-uranus-cubic-sky-sun-oracle-asset",
+      "path": "sun/google-maps-sun.png",
+      "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
+      "expectedBytes": 10947,
+      "origin": "https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference",
+      "license": "Google proprietary; no redistribution grant verified",
+      "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
+      "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
+      "consumers": ["starfield", "sun-oracle", "scene"]
+    },
+    {
+      "id": "google-maps-uranus-cubic-sky-sun-oracle-measurements",
+      "path": "sun/google-maps-sun-oracle.json",
+      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
+      "expectedBytes": 2895,
+      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
+      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
+      "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
+      "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
+      "consumers": ["starfield", "sun-oracle", "scene", "lighting"]
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "expectedSha256": "5590879b8df6e808e0c8287a28fe7c1a421b1eca88cb23575b5a82a470c989b2",
+      "expectedBytes": 597,
+      "purpose": "HYG v4.1 attribution and CC-BY-SA-4.0 license record"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
+      "expectedBytes": 1271,
+      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+---
+import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
+import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
+
+interface Props {
+  activeObjectId?: string;
+}
+
+const { activeObjectId } = Astro.props;
+const planetCount = PLANET_SEARCH_OBJECTS.length;
+---
+
+<ul class="planet-object-list">
+  {PLANET_SEARCH_OBJECTS.map((object, index) => (
+    <li class="planet-object-item" data-object-name={object.name.toLocaleLowerCase("en")}>
+      <a
+        class:list={["planet-object-link", { "is-active": object.id === activeObjectId }]}
+        href={object.route}
+        data-object-id={object.id}
+        aria-current={object.id === activeObjectId ? "page" : undefined}
+      >
+        <PlanetNavigationMarker
+          planetId={object.id}
+          color={object.color}
+          index={index}
+          count={planetCount}
+        />
+        <span class="planet-object-name">{object.name}</span>
+        <span class="planet-object-distance">
+          <span class="planet-object-distance-value">{object.distanceAu}</span>{" "}
+          <span class="planet-object-distance-unit">AU</span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>

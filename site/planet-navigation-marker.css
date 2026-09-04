@@ -1,0 +1,47 @@
+.planet-navigation-marker {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 34px;
+  color: var(--planet-color);
+}
+
+.planet-navigation-marker > i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: var(--planet-size);
+  height: var(--planet-size);
+  border-radius: 50%;
+  background: url("/navigation/planet-markers@2x.webp")
+    var(--planet-marker-position) center /
+    calc(var(--planet-marker-count) * 100%) 100% no-repeat;
+  transform: translate(-50%, -50%);
+}
+
+.planet-navigation-marker.ringed::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--planet-size) + var(--planet-ring-extra));
+  height: var(--planet-ring-height);
+  box-sizing: border-box;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.65;
+  transform: translate(-50%, -50%) rotate(var(--planet-ring-angle));
+  content: "";
+}
+
+.planet-navigation-marker.jupiter::before { opacity: 0.62; }
+
+.planet-navigation-marker.saturn::before {
+  border-color: color-mix(in srgb, currentColor 78%, white 22%);
+  outline: 1px solid color-mix(in srgb, currentColor 42%, transparent);
+  outline-offset: 1px;
+  opacity: 0.62;
+}
+
+.planet-navigation-marker.uranus::before { opacity: 0.55; }
+.planet-navigation-marker.neptune::before { opacity: 0.56; }

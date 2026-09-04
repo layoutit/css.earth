@@ -1,0 +1,135 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.mars-stage {
+  container-type: size;
+  isolation: isolate;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+  cursor: grab;
+  touch-action: none;
+}
+
+.mars-stage:active {
+  cursor: grabbing;
+}
+
+.mars-stage > .polycss-camera {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.mars-stage > .planet-render-root {
+  --mars-shell-scale: min(
+    1,
+    calc((100cqw - 32px) / 512px),
+    calc(100cqh / 512px)
+  );
+  scale: calc(var(--mars-shell-scale) / var(--planet-viewport-zoom-divisor));
+  transform-origin: 50% 50%;
+}
+
+.mars-material {
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.mars-material-plane > s {
+  position: absolute;
+  display: block;
+  width: 512px;
+  height: 512px;
+  transform-origin: 50% 50%;
+  backface-visibility: visible;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 512px 512px;
+  pointer-events: none;
+}
+
+.mars-material-counter,
+.mars-material-plane {
+  transform-style: preserve-3d;
+}
+
+.polycss-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polycss-mesh {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform-origin: 0 0 0;
+}
+
+.mars-body {
+  animation: mars-body-spin 48s linear infinite paused;
+}
+
+.mars-body > s {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  transform-origin: 0 0;
+  backface-visibility: hidden;
+  background-image: url("/scenes/mars/mars-surface@2x.webp");
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-clip: border-box;
+  pointer-events: none;
+}
+
+.mars-body > .mars-pole {
+  backface-visibility: visible;
+  background-image: url("/scenes/mars/mars-poles@2x.webp");
+}
+
+.mars-stage[data-lens="elevation"] .mars-body > s:not(.mars-pole) {
+  background-image: url("/scenes/mars/mars-lens-elevation@2x.webp");
+}
+
+.mars-stage[data-lens="elevation"] .mars-body > .mars-pole {
+  background-image:
+    url("/scenes/mars/mars-lens-elevation-poles@2x.webp");
+}
+
+.mars-stage[data-lens="thermal"] .mars-body > s:not(.mars-pole) {
+  background-image: url("/scenes/mars/mars-lens-thermal@2x.webp");
+}
+
+.mars-stage[data-lens="thermal"] .mars-body > .mars-pole {
+  background-image: url("/scenes/mars/mars-lens-thermal-poles@2x.webp");
+}
+
+html[data-playing="true"] .mars-body {
+  animation-play-state: running;
+}
+
+@keyframes mars-body-spin {
+  from { transform: rotateZ(-145deg); }
+  to { transform: rotateZ(-505deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mars-body {
+    animation: none;
+  }
+}

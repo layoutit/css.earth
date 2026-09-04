@@ -1,0 +1,340 @@
+:root {
+  --maps-panel-left: 20px;
+  --maps-panel-width: 340px;
+}
+
+.maps-brand-button {
+  position: fixed;
+  z-index: 195;
+  top: 10px;
+  left: 20px;
+  display: block;
+  width: 205px;
+  height: 49px;
+  color: var(--shell-text);
+  font: 14px/1.4 var(--shell-ui-font);
+  text-decoration: none;
+}
+
+.maps-brand-button .planet-wordmark {
+  position: relative;
+  display: block;
+  width: 205px;
+  height: 49px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  opacity: 1;
+}
+
+.maps-brand-button .planet-wordmark-svg {
+  position: relative;
+  top: -3px;
+  display: block;
+  width: 213px;
+  height: 49px;
+  overflow: visible;
+  opacity: .9;
+  transform: none;
+}
+
+.maps-brand-button .planet-wordmark-css,
+.maps-brand-button .planet-wordmark-earth { fill: currentColor; }
+
+.maps-brand-button .planet-wordmark-version {
+  position: absolute;
+  top: 42px;
+  left: 1.5px;
+  display: block;
+  color: #aaa;
+  font: 14px/1.2 var(--shell-ui-font);
+  opacity: .75;
+  white-space: nowrap;
+}
+
+.planet-header-rail > .maps-brand-button {
+  position: relative;
+  top: auto;
+  left: auto;
+  flex: 0 0 205px;
+  pointer-events: auto;
+}
+
+@media (min-width: 961px) {
+  .maps-brand-button,
+  .maps-brand-button .planet-wordmark {
+    height: 59px;
+  }
+
+  .planet-header-rail {
+    flex-basis: var(--maps-panel-width);
+    margin-left: 2px;
+  }
+}
+
+.planet-header-rail > .planet-sidebar-toggle {
+  top: 0;
+  height: 49px;
+}
+
+.planet-header-rail > .planet-sidebar-toggle .planet-action-marker {
+  top: 3px;
+}
+
+.planet-header-rail > .planet-sidebar-toggle .planet-blackhole-marker {
+  top: -1px;
+  left: -4px;
+}
+
+.planet-header-rail > .planet-sidebar-toggle span {
+  top: 42px;
+  right: 0;
+  left: auto;
+  transform: none;
+  text-align: right;
+}
+
+.maps-explorer-sidebar,
+body[data-object-shell] .planet-sidebar {
+  position: fixed;
+  z-index: 160;
+  inset: 81px auto 10px var(--maps-panel-left);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: var(--maps-panel-width);
+  height: auto;
+  max-height: calc(100dvh - 91px);
+  padding: 0;
+  overflow: hidden auto;
+  background: transparent;
+  scrollbar-width: none;
+  pointer-events: auto;
+}
+
+.maps-explorer-sidebar::-webkit-scrollbar,
+body[data-object-shell] .planet-sidebar::-webkit-scrollbar { display: none; }
+
+.maps-explorer-sidebar .planet-sidebar-search-card {
+  position: relative;
+  display: block;
+  flex: 0 0 44px;
+  width: 100%;
+  height: 44px;
+}
+
+.maps-explorer-sidebar .planet-sidebar-search {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  padding: 11px 76px 13px 43px;
+  border: 0;
+  border-radius: 4px;
+  color: var(--shell-text);
+  background-color: #151515;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7' fill='none' stroke='%23aaa' stroke-width='1.5'/%3E%3Cpath d='m16 16 5 5' fill='none' stroke='%23aaa' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 18px calc(50% - 1px);
+  background-size: 15px 15px;
+  font: 400 0.9375rem/20px var(--shell-ui-font);
+  outline: 0;
+}
+
+.maps-explorer-sidebar .planet-sidebar-search:focus { background-color: #1e1e1e; }
+.maps-explorer-sidebar .planet-sidebar-search::placeholder { color: var(--shell-text-muted); opacity: 1; }
+.maps-explorer-sidebar .planet-sidebar-search::-webkit-search-cancel-button { display: none; }
+
+.maps-explorer-sidebar .planet-sidebar-view-all {
+  appearance: none;
+  position: absolute;
+  top: 0;
+  right: 12px;
+  display: block;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--shell-text-muted);
+  background: transparent;
+  font: 400 0.8125rem/20px var(--shell-ui-font);
+  cursor: pointer;
+}
+
+.maps-explorer-sidebar .planet-drawer-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.planet-sidebar .maps-object-results {
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 12px 6px 20px;
+  border-radius: 4px;
+  color: var(--shell-text-secondary);
+  background: #151515;
+  pointer-events: auto;
+}
+
+.planet-sidebar .maps-object-results[hidden],
+.planet-sidebar .maps-object-results .planet-object-item[hidden] { display: none; }
+
+.planet-sidebar .maps-object-results .planet-object-list {
+  position: relative;
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.planet-sidebar .maps-object-results .planet-object-list::before {
+  position: absolute;
+  top: 17px;
+  bottom: 17px;
+  left: 5.5px;
+  width: 0;
+  border-left: 1px dotted rgb(223 223 223 / 28%);
+  transform: translateX(-0.5px);
+  content: "";
+}
+
+.planet-sidebar .maps-object-results .planet-object-link {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 11px minmax(0, 1fr) max-content;
+  align-items: center;
+  gap: 12px;
+  height: 34px;
+  color: var(--shell-text-secondary);
+  text-decoration: none;
+}
+.planet-sidebar .maps-object-results .planet-navigation-marker { justify-self: center; }
+.planet-sidebar .maps-object-results .planet-navigation-marker.ringed::before { content: none; }
+.planet-sidebar .maps-object-results .planet-object-name { overflow: hidden; font: 400 0.9375rem/20px var(--shell-ui-font); text-overflow: ellipsis; white-space: nowrap; }
+.planet-sidebar .maps-object-results .planet-object-distance { color: var(--shell-text-muted); font: 400 13px/20px var(--shell-ui-font); white-space: nowrap; }
+.planet-sidebar .maps-object-results .planet-object-distance-unit { font-size: 12px; }
+.planet-sidebar .maps-object-results .planet-object-link:hover,
+.planet-sidebar .maps-object-results .planet-object-link:focus-visible,
+.planet-sidebar .maps-object-results .planet-object-link.is-active { color: var(--shell-text); outline: 0; }
+.planet-sidebar .maps-object-results .planet-object-link.is-active .planet-object-name { text-decoration: underline; text-underline-offset: 3px; }
+.planet-sidebar .maps-object-results .planet-object-empty { height: 40px; margin: 0; color: var(--shell-text-muted); font: 400 0.875rem/40px var(--shell-ui-font); }
+
+.maps-empty-stage {
+  position: fixed;
+  inset: 0 0 0 calc(var(--maps-panel-left) + var(--maps-panel-width) + 20px);
+  overflow: hidden;
+  background: #000;
+}
+
+body[data-object-shell][data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
+
+@media (min-width: 961px) {
+  body[data-object-shell] .planet-sidebar .planet-sidebar-search {
+    padding: 11px 76px 13px 43px;
+    border-radius: 4px;
+    background-color: #151515;
+    background-position: 18px calc(50% - 1px);
+  }
+
+  body[data-object-shell] .planet-sidebar .planet-sidebar-search:focus {
+    background-color: #1e1e1e;
+  }
+
+  body[data-object-shell] .planet-sidebar :is(
+    .planet-information-panel,
+    .planet-object-browser
+  ) {
+    border-radius: 4px;
+    background: #151515;
+  }
+}
+
+@media (min-width: 821px) and (orientation: landscape) {
+  body[data-object-shell] .planet-sidebar .planet-settings-flyout:not([open]) {
+    display: none;
+  }
+
+  body[data-object-shell] .planet-sidebar .planet-settings-flyout[open] {
+    position: fixed;
+    z-index: 190;
+    top: 81px;
+    right: 20px;
+    display: block;
+    width: 240px;
+    max-height: calc(100dvh - 101px);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 15px 18px;
+    overflow: hidden auto;
+    border: 0;
+    border-radius: 4px;
+    color: var(--shell-text-secondary);
+    background: #151515;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 35%);
+    pointer-events: auto;
+  }
+
+  body[data-object-shell] .planet-settings-flyout > .planet-panel-summary {
+    display: none;
+  }
+
+  body[data-object-shell] .planet-settings-flyout > .planet-settings {
+    gap: 0;
+    margin-top: 0;
+    font: 400 14px/1.3 var(--shell-ui-font);
+  }
+
+  body[data-object-shell] .planet-settings-flyout .planet-setting-description,
+  body[data-object-shell] .planet-settings-flyout
+    .planet-setting-control[data-state]::after {
+    font: 14px/1.3 var(--shell-ui-font);
+  }
+}
+
+@media (max-width: 960px) {
+  :root { --maps-panel-left: 8px; --maps-panel-width: min(340px, calc(100vw - 16px)); }
+  .maps-brand-button { display: none; }
+  body[data-object-shell] .maps-brand-button { display: contents; }
+  .maps-explorer-sidebar { inset: 8px 8px auto 8px; width: auto; max-height: calc(100dvh - 16px); }
+  .maps-empty-stage { inset: 0; }
+}
+
+@media (min-width: 821px) and (max-width: 960px) and (orientation: landscape) {
+  body[data-object-shell] .planet-sidebar {
+    inset: auto 8px 8px 8px;
+    width: auto;
+    max-height: 44dvh;
+  }
+}
+
+@media (max-width: 820px), (orientation: portrait) {
+  body[data-object-shell] .planet-header-rail > .maps-brand-button {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    display: block;
+  }
+
+  body[data-object-shell] > .planet-sidebar {
+    position: relative;
+    z-index: 100;
+    inset: auto;
+    order: 1;
+    width: calc(100% - 16px);
+    height: auto;
+    max-height: none;
+    margin: -65svh 8px 0;
+    padding: 0;
+    overflow: visible;
+    background: transparent;
+  }
+}

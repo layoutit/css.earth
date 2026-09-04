@@ -1,0 +1,48 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { PREPARED_SUN_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_SUN_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_SUN_TITLE } from "./preparedTitle.mjs";
+
+const lensDescriptions: Record<string, string> = {
+  photosphere: "HMI continuum",
+  magnetic: "HMI radial field",
+  chromosphere: "AIA at 304 Å",
+  corona: "AIA at 171 Å",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_SUN_LENSES.defaultLens,
+  controls: PREPARED_SUN_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lensDescriptions[lens.id],
+    title: lens.qualification,
+  })),
+};
+const resources = [
+  { label: "NASA Science", description: "Facts & interior", href: "https://science.nasa.gov/sun/facts/" },
+  { label: "NASA SDO", description: "Solar surface & corona", href: "https://sdo.gsfc.nasa.gov/data/synoptic/" },
+  { label: "JSOC HMI", description: "Magnetic surface lens", href: "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html" },
+  { label: "HYG", description: "Background star field", href: "https://github.com/astronexus/HYG-Database" },
+];
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="sun"
+  title={PREPARED_SUN_TITLE}
+  introduction={PREPARED_SUN_PANEL.introduction}
+  facts={PREPARED_SUN_PANEL.facts}
+  moreFacts={PREPARED_SUN_PANEL.moreFacts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

@@ -1,0 +1,326 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.example-stage {
+  container-type: size;
+  isolation: isolate;
+  pointer-events: none;
+  background: #000;
+}
+
+html:not([data-ready="true"]) .example-stage {
+  /* Keep the mounted scene paintable while the loading gate warms CSS images. */
+  opacity: 0.001;
+}
+
+.saturn-input-surface {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+}
+
+html[data-ready="true"] .saturn-input-surface {
+  pointer-events: auto;
+}
+
+.saturn-input-surface:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 72%);
+  outline-offset: -4px;
+}
+
+@media (max-width: 820px), (orientation: portrait) {
+  .saturn-input-surface {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 100svh;
+    touch-action: pan-y;
+  }
+}
+
+.example-stage > .polycss-camera {
+  --saturn-scene-side-padding: 16px;
+  --saturn-reference-width: 1920px;
+  --saturn-reference-height: 1080px;
+  --saturn-point-size: 2px;
+  --saturn-shell-scale: min(
+    1,
+    calc(
+      (
+        100cqw
+        - var(--saturn-scene-side-padding)
+        - var(--saturn-scene-side-padding)
+      ) / var(--saturn-reference-width)
+    ),
+    calc(100cqh / var(--saturn-reference-height))
+  );
+  position: absolute;
+  inset: 0;
+  scale: calc(var(--saturn-shell-scale) / var(--planet-viewport-zoom-divisor));
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polycss-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.polycss-mesh {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform-origin: 0 0 0;
+}
+
+.saturn-body {
+  transform-style: preserve-3d;
+  animation-name: saturn-body-spin;
+  animation-duration: 72s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.saturn-cutaway,
+.saturn-interior-shell,
+.saturn-interior-sections {
+  transform-style: preserve-3d;
+}
+
+.saturn-cutaway {
+  visibility: hidden;
+}
+
+.saturn-interior-material {
+  visibility: hidden;
+}
+
+.saturn-cutaway-body {
+  animation: none;
+}
+
+.planet-stage[data-view="interior"] .saturn-cutaway {
+  visibility: visible;
+}
+
+.planet-stage[data-view="interior"] .saturn-interior-material {
+  visibility: visible;
+}
+
+.planet-stage[data-view="interior"] .saturn-system > .saturn-body,
+.planet-stage[data-view="interior"] .saturn-exterior-material {
+  visibility: hidden;
+}
+
+.polycss-scene b,
+.polycss-scene s,
+.polycss-scene u {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.polycss-scene b {
+  width: calc(var(--saturn-point-size) / var(--saturn-shell-scale));
+  height: calc(var(--saturn-point-size) / var(--saturn-shell-scale));
+  background: currentColor;
+  backface-visibility: visible;
+}
+
+.polycss-scene s {
+  width: var(--polycss-atlas-width, 64px);
+  height: var(--polycss-atlas-height, 64px);
+  background-origin: border-box;
+  background-clip: border-box;
+}
+
+.polycss-scene u {
+  width: 0;
+  height: 0;
+  box-sizing: content-box;
+  border: 0 solid transparent;
+  border-color: transparent transparent currentColor transparent;
+  border-width: 0 16px 32px 16px;
+}
+
+.saturn-ring-plane > s,
+.saturn-ring-orbit > s {
+  backface-visibility: visible;
+}
+
+.saturn-body:not(.saturn-body-polar) > s {
+  --polycss-projective-texture-image:
+    url("/scenes/saturn/saturn-surface-body.jpg");
+  background-image: var(--polycss-projective-texture-image);
+}
+
+.saturn-interior-metallic-shell > s:not(.saturn-interior-pole) {
+  background-image: url("/scenes/saturn/saturn-interior-metallic@2x.webp");
+  background-size: 1024px 512px;
+}
+
+.saturn-interior-core-shell > s:not(.saturn-interior-pole) {
+  background-image: url("/scenes/saturn/saturn-interior-core@2x.webp");
+  background-size: 1024px 512px;
+}
+
+.planet-stage[data-lens="ultraviolet"]
+  .saturn-body:not(.saturn-body-polar):not(.saturn-cutaway-polar-band) > s {
+  --polycss-projective-texture-image:
+    url("/scenes/saturn/saturn-surface-ultraviolet@2x.webp") !important;
+}
+
+.planet-stage[data-lens="methane"]
+  .saturn-body:not(.saturn-body-polar):not(.saturn-cutaway-polar-band) > s {
+  --polycss-projective-texture-image:
+    url("/scenes/saturn/saturn-surface-methane@2x.webp") !important;
+}
+
+.planet-stage[data-lens="thermal"]
+  .saturn-body:not(.saturn-body-polar):not(.saturn-cutaway-polar-band) > s {
+  --polycss-projective-texture-image:
+    url("/scenes/saturn/saturn-surface-thermal@2x.webp") !important;
+}
+
+.planet-stage[data-lens="ultraviolet"]
+  .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-ultraviolet.webp") !important;
+}
+
+.planet-stage[data-lens="methane"]
+  .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-methane.webp") !important;
+}
+
+.planet-stage[data-lens="thermal"]
+  .saturn-body-polar > s {
+  background-image: url("/scenes/saturn/saturn-poles-thermal.webp") !important;
+}
+
+.planet-stage[data-lens="ultraviolet"]
+  .saturn-cutaway-polar-band > s {
+  background-image: url(
+    "/scenes/saturn/saturn-interior-outer-poles-ultraviolet@2x.webp"
+  ) !important;
+}
+
+.planet-stage[data-lens="methane"]
+  .saturn-cutaway-polar-band > s {
+  background-image: url(
+    "/scenes/saturn/saturn-interior-outer-poles-methane@2x.webp"
+  ) !important;
+}
+
+.planet-stage[data-lens="thermal"]
+  .saturn-cutaway-polar-band > s {
+  background-image: url(
+    "/scenes/saturn/saturn-interior-outer-poles-thermal@2x.webp"
+  ) !important;
+}
+
+.planet-stage[data-lens="ultraviolet"] .saturn-ring-plane > s {
+  background-image:
+    url("/scenes/saturn/saturn-rings-ultraviolet@2x.webp") !important;
+}
+
+.planet-stage[data-lens="methane"] .saturn-ring-plane > s {
+  background-image: url("/scenes/saturn/saturn-rings-methane@2x.webp") !important;
+}
+
+.planet-stage[data-lens="thermal"] .saturn-ring-plane > s {
+  background-image: url("/scenes/saturn/saturn-rings-thermal@2x.webp") !important;
+}
+
+.saturn-ring-plane > s,
+.saturn-ring-orbit > s,
+.saturn-ring-shadow > s,
+.saturn-ring-surface b,
+.saturn-ring-billboard b {
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.saturn-ring-billboard b {
+  rotate: z 128deg;
+}
+
+.saturn-ring-flat {
+  transform-style: flat;
+}
+
+.saturn-ring-shadow > s,
+.saturn-ring-plane > s,
+.saturn-ring-orbit > s {
+  backface-visibility: visible;
+}
+
+.saturn-ring-orbit {
+  animation-name: saturn-ring-orbit;
+  animation-duration: 101.873s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.saturn-ring-plane {
+  animation-name: none;
+}
+
+.planet-stage.saturn-hide-rings :is(
+  .saturn-ring-plane,
+  .saturn-ring-orbit,
+  .saturn-ring-billboard,
+  .saturn-ring-shadow
+) {
+  visibility: hidden;
+}
+
+.planet-stage.saturn-hide-shadows .saturn-ring-shadow {
+  visibility: hidden;
+}
+
+html[data-playing="true"] :is(
+  .saturn-body,
+  .saturn-ring-orbit
+) {
+  animation-play-state: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-playing="true"] :is(
+    .saturn-body,
+    .saturn-ring-orbit
+  ) {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes saturn-ring-orbit {
+  from { transform: rotateZ(-128deg); }
+  to { transform: rotateZ(-488deg); }
+}
+
+@keyframes saturn-body-spin {
+  from { transform: rotateZ(-128deg); }
+  to { transform: rotateZ(-488deg); }
+}

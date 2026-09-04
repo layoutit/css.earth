@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-google-maps-sun-oracle@1",
+  "observedAt": "2026-08-31",
+  "canonicalUrl": "https://www.google.com/maps/space/venus/",
+  "asset": {
+    "url": "https://mw1.google.com/mw-weather/static/sun.png",
+    "format": "png",
+    "width": 128,
+    "height": 128,
+    "channels": 3,
+    "alpha": false,
+    "bytes": 10947,
+    "sha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f"
+  },
+  "luminanceBounds": [
+    { "minimum": 1, "bounds": [3, 3, 124, 125], "pixelCount": 11626 },
+    { "minimum": 4, "bounds": [12, 11, 115, 117], "pixelCount": 8516 },
+    { "minimum": 8, "bounds": [16, 15, 111, 113], "pixelCount": 7302 },
+    { "minimum": 16, "bounds": [21, 20, 106, 108], "pixelCount": 5789 },
+    { "minimum": 32, "bounds": [27, 26, 100, 102], "pixelCount": 4149 },
+    { "minimum": 64, "bounds": [35, 36, 91, 94], "pixelCount": 2261 },
+    { "minimum": 128, "bounds": [47, 48, 80, 83], "pixelCount": 758 },
+    { "minimum": 224, "bounds": [54, 55, 73, 75], "pixelCount": 255 }
+  ],
+  "radialMedianLuminance": [
+    [8, 235],
+    [10, 191],
+    [12, 159],
+    [16, 116],
+    [20, 91],
+    [24, 72],
+    [28, 57],
+    [32, 43],
+    [40, 21],
+    [48, 8],
+    [56, 2]
+  ],
+  "rayPeaks": [
+    [1, 24, 1.2, 18],
+    [11, 33, 1.35, 32],
+    [24, 29, 1.25, 21],
+    [35, 39, 1.5, 49],
+    [47, 25, 1.2, 13],
+    [63, 37, 1.45, 39],
+    [75, 35, 1.3, 22],
+    [83, 44, 1.45, 58],
+    [89, 42, 1.4, 55],
+    [111, 38, 1.4, 29],
+    [126, 38, 1.4, 30],
+    [141, 28, 1.25, 16],
+    [171, 24, 1.2, 10],
+    [180, 32, 1.3, 20],
+    [196, 40, 1.4, 27],
+    [210, 28, 1.2, 16],
+    [221, 24, 1.2, 10],
+    [251, 31, 1.25, 18],
+    [267, 39, 1.4, 35],
+    [275, 31, 1.3, 25],
+    [292, 31, 1.3, 24],
+    [304, 40, 1.45, 46],
+    [332, 40, 1.4, 33],
+    [346, 32, 1.35, 33]
+  ],
+  "presentation": {
+    "model": "prepared direction-space Sun inside the rotating full-sky cubemap",
+    "defaultView": "outside the viewport beyond the illuminated limb",
+    "orbitView": "enters the viewport from the illuminated limb",
+    "lightBinding": "billboard direction and Venus terminator share one direction",
+    "sourceTreatment": "3 px source median followed by luminance levels with no radial masking",
+    "coronaModel": "Google source shape with spike rejection, a 55 luminance black point, and 1.2 gamma",
+    "sourceMedianRadius": 3,
+    "sourceBlackPoint": 55,
+    "sourceLevelGamma": 1.2,
+    "compositeModel": "prepare-time screen composite; source black remains neutral"
+  },
+  "qualification": {
+    "use": "visual-oracle measurements only",
+    "redistribution": "exact Google asset retained as a local visual-oracle input; redistribution rights are unverified",
+    "preparedOutput": "deterministic source-filtered and levelled screen-composited cubemap bake",
+    "scientificFidelity": "unproven; direction is presentation-derived, not ephemeris-derived"
+  }
+}

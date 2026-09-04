@@ -1,0 +1,122 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.example-stage {
+  container-type: size;
+  isolation: isolate;
+  pointer-events: none;
+  background: #000;
+}
+
+html:not([data-ready="true"]) .example-stage { opacity: 0.001; }
+
+.moon-input-surface {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+}
+
+html[data-ready="true"] .moon-input-surface { pointer-events: auto; }
+
+@media (max-width: 820px), (orientation: portrait) {
+  .moon-input-surface {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 100svh;
+    touch-action: pan-y;
+  }
+}
+
+.example-stage > :is(.polycss-camera, .moon-material-root) {
+  --moon-side-padding: 16px;
+  --moon-shell-scale: min(
+    1,
+    calc((100cqw - var(--moon-side-padding) - var(--moon-side-padding)) / 1920px),
+    calc(100cqh / 1080px)
+  );
+  position: absolute;
+  inset: 0;
+  scale: calc(var(--moon-shell-scale) / var(--planet-viewport-zoom-divisor));
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polycss-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polycss-mesh {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform-origin: 0 0 0;
+}
+
+.polycss-scene s {
+  position: absolute;
+  display: block;
+  width: var(--polycss-atlas-width, 64px);
+  height: var(--polycss-atlas-height, 64px);
+  margin: 0;
+  padding: 0;
+  transform-origin: 0 0;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.moon-body {
+  transform-style: preserve-3d;
+  animation-name: moon-sphere-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.moon-body:not(.moon-body-polar) > s {
+  background-image: var(--moon-surface-texture);
+}
+
+.moon-body-polar > s { background-image: var(--moon-poles-texture); }
+
+.moon-material-root {
+  z-index: 2;
+  transform-style: flat;
+}
+
+.moon-material {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: 512px;
+  height: 512px;
+  margin: -256px 0 0 -256px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 512px 512px;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+html[data-playing="true"] .moon-body { animation-play-state: running; }
+
+@keyframes moon-sphere-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(-360deg); }
+}

@@ -1,0 +1,10 @@
+---
+import { PREPARED_MARS_LIGHTING } from "../runtime/preparedLighting.mjs";
+
+const materialTwo = PREPARED_MARS_LIGHTING.banks["2"];
+const initialMaterialTwo = materialTwo.rows[materialTwo.transport.defaultRow];
+---
+
+<link rel="preload" href="/scenes/mars/mars-surface@2x.webp" as="image" type="image/webp" />
+<link rel="preload" href="/scenes/mars/mars-poles@2x.webp" as="image" type="image/webp" />
+<link rel="preload" href={initialMaterialTwo.url} as="image" type="image/webp" />

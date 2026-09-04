@@ -1,0 +1,490 @@
+{
+  "schema": "cssjupiter-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "jupiter-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "filename": "jupiter-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "filename": "jupiter-lens-methane-poles.webp",
+      "bytes": 33318,
+      "sha256": "5f940c8a085acbf409bba36bd0540547e375cd899b3bb94331fb27b56a07ce65"
+    },
+    {
+      "filename": "jupiter-lens-methane-poles@2x.webp",
+      "bytes": 61976,
+      "sha256": "a2ab2be20fae287dbafdf343bf45c4bd71975dc310a14e65742a96a0edcaf065"
+    },
+    {
+      "filename": "jupiter-lens-methane-thumbnail.webp",
+      "bytes": 494,
+      "sha256": "1b18f51b2571f71c2ac23ef34c89dd1fe8fb7ffa4caede35275ad407b0c74f56"
+    },
+    {
+      "filename": "jupiter-lens-methane.webp",
+      "bytes": 105144,
+      "sha256": "9ed8e882cc040a6d37ae969e1608ae83e15bfd3be83a05451ebeccdf8e614e1c"
+    },
+    {
+      "filename": "jupiter-lens-methane@2x.webp",
+      "bytes": 283828,
+      "sha256": "fd219921d48114b140b0ac5ae8ea7034486f1c93764c20b1e2aafd39594ae89f"
+    },
+    {
+      "filename": "jupiter-lens-normal.webp",
+      "bytes": 1892,
+      "sha256": "7644cad9b7ca876bf4689a8ac54ee9308431bcb3d8f46b8815c29c4580edc2e0"
+    },
+    {
+      "filename": "jupiter-lens-ultraviolet-poles.webp",
+      "bytes": 25028,
+      "sha256": "683938d2f5865e1d15fd5f97db5f29a8ff8f6d638c6d0aacd75f694c50b1761f"
+    },
+    {
+      "filename": "jupiter-lens-ultraviolet-poles@2x.webp",
+      "bytes": 41630,
+      "sha256": "70217c575ed7e91d0b44aa7d870ab8e9d6eed05c372a9d23e03927b707255fda"
+    },
+    {
+      "filename": "jupiter-lens-ultraviolet-thumbnail.webp",
+      "bytes": 858,
+      "sha256": "0ae5bce27e49ae6804fa89ff9630573418b712da1218bce38a4a584b3752dec3"
+    },
+    {
+      "filename": "jupiter-lens-ultraviolet.webp",
+      "bytes": 110668,
+      "sha256": "9f1c34ebc43a610ca872ee60064a28ba9184abbefb9e2260ef4c0d581f0d0689"
+    },
+    {
+      "filename": "jupiter-lens-ultraviolet@2x.webp",
+      "bytes": 358306,
+      "sha256": "a3f8581bfebe00af21b85380ecd0a86ba1ebdcc65498341d28ac33e438cdddfd"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-00.webp",
+      "bytes": 132806,
+      "sha256": "c702858fb7c93ec7db96b1d83813ea5cc1d3bbaf510eb30d89a5f9a821217468"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-01.webp",
+      "bytes": 132424,
+      "sha256": "1fd968346a6087616e1c3bc75769c425dac556635eced35c7145b7cbbcd2d90d"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-02.webp",
+      "bytes": 133440,
+      "sha256": "04ebf569aa8376a37f1f5ec9943721457eddd9847c7d6820fbf8186027465e14"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-03.webp",
+      "bytes": 132442,
+      "sha256": "3393387b7993112275d859d828c35eaea63e947fb1536c2001d7effd5047cd7d"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-04.webp",
+      "bytes": 132420,
+      "sha256": "3dc5de4037e07f22300049ddd9d1aee61f697034a92e6c787f5c3d49d57ffdaa"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-05.webp",
+      "bytes": 132250,
+      "sha256": "4ee38dfac5105f0e3d927c901f9424bcc0c435cb9e74915c936932ff8b755b79"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-06.webp",
+      "bytes": 132380,
+      "sha256": "0472463debd656f5cb1d431ea6e0be2ec7679b2ddfd35c83eb68172a7a258c0f"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-07.webp",
+      "bytes": 132544,
+      "sha256": "886e0687e0223a0fe0af28e71056138cf44d9f1c123b0a56a44e72cdfeecd8bf"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-08.webp",
+      "bytes": 130890,
+      "sha256": "e6ed9764e42f8caf399043cc8b35cb59854441ccd67bb1f3942f749d269292f3"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-09.webp",
+      "bytes": 130170,
+      "sha256": "74861d6cb32c7dd22caea145a50139b9bb0717e8f18a8f269e4dbbe811d7c7d1"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-10.webp",
+      "bytes": 131016,
+      "sha256": "85050df5c57b0f18df4f334cf6fc9dd67efd1e33aada9d0d5c2129a867ccb754"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-11.webp",
+      "bytes": 130486,
+      "sha256": "71754c04400c82b05f1787d731a093ffe348b55f4b658c5cd1d995e2c185bf0b"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-12.webp",
+      "bytes": 130726,
+      "sha256": "ba2b7047b6f36b57c80f9a49d406649b4d3a691265f323023feeb89b5ed06193"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-13.webp",
+      "bytes": 131594,
+      "sha256": "e608d46950bd11ac3b163cebd983eec806c8678430bf2e98e2329ac4fc984842"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-14.webp",
+      "bytes": 132290,
+      "sha256": "e093674842331eb855929dbf380c32e1d70678634209756277740a0431905712"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-15.webp",
+      "bytes": 131058,
+      "sha256": "db3ab2cff933224fc3d22bbaf2769a472328ee85c9dd1d8786e32ab84a5e87dc"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-16.webp",
+      "bytes": 130306,
+      "sha256": "8982c924e42deeef72fe292b448f68e11bcc412cead8129ee9b51b9f360c6f38"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-17.webp",
+      "bytes": 129196,
+      "sha256": "738c65fc7a1ec0024dc1d76e607232951c0317fe5c5ff01b5e37f96fea5aebbd"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-18.webp",
+      "bytes": 128592,
+      "sha256": "410dba1979b9ac43a52534d127628188abb6a0698316c02f1b4dbee80406538c"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-19.webp",
+      "bytes": 128860,
+      "sha256": "78545c874437b5151fc7494914c6af87b4bf79839353c51de9a27d0b9b36b33b"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-20.webp",
+      "bytes": 128050,
+      "sha256": "90e91b6784b6f81aba84031c80227ca70f2164c6d6d7eb6f1b1056eb85b2291b"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-21.webp",
+      "bytes": 127454,
+      "sha256": "f8b23ebeb4050164abed4086939a29bf2031d5550c737c86cba2408881671682"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-22.webp",
+      "bytes": 128796,
+      "sha256": "bd27a24e1ef0a36d636338045d5894044139f63f5b5e35fb5c87441a57796752"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-23.webp",
+      "bytes": 127230,
+      "sha256": "e47eaeb2f28c45306e7a255ae7e0655d3ca41864867356cae7d9796fc7b3f0eb"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-24.webp",
+      "bytes": 127190,
+      "sha256": "ab22b2ac12fe9d778217b2e4140624b4dd0156fc305f88c2f6e8f0e0e619d60e"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-25.webp",
+      "bytes": 127934,
+      "sha256": "e18b141b070caa356aef6fa4197b3b696c4db281dc54e146cdf215061f50f06b"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-26.webp",
+      "bytes": 126964,
+      "sha256": "9341c41b007023b46c0cbeaa96e67281977690f2566aa6e59058a0abbbf9b998"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-27.webp",
+      "bytes": 126320,
+      "sha256": "9411b63f15bbaa59bf53b4766e5becabcc678e6bb07d438ad378a395c37f0a2d"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-28.webp",
+      "bytes": 126902,
+      "sha256": "18e16c3e87687f216407ba13c91c07a0220f4e7dd419abb475d3184aec8bd4a6"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-29.webp",
+      "bytes": 124692,
+      "sha256": "88a0bd859285561558e26867d210c0215a5ca4b1839f15b07fe271b411c635b3"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-30.webp",
+      "bytes": 122876,
+      "sha256": "78f05a4dfe82eb6c3f07c66488477ded03eb6ff7b33bbccc550489de62dbe8df"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-31.webp",
+      "bytes": 123308,
+      "sha256": "cc282512e02e657a288569287898f8bb9f23fb973718c6e5b02b3261c6f2eb52"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-32.webp",
+      "bytes": 122744,
+      "sha256": "985b457f827c48fd6605eaf57ea98edac2a91c92bf98cd0cf344cb611aa73a8f"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-33.webp",
+      "bytes": 124620,
+      "sha256": "5f56bd3a4fb44d0d0898c2b489214898d3203bf19ec8a8c7ec60aecc655d3723"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-34.webp",
+      "bytes": 125104,
+      "sha256": "ec4a584ac2e134e027c879fd0665eccb8784fb93ab6b2fbc5bae7186c90ffd27"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-35.webp",
+      "bytes": 119724,
+      "sha256": "f7401fb74af3537a9b0dd036487810818ff014d707cc84ee13e99f7629f4a31e"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-36.webp",
+      "bytes": 120222,
+      "sha256": "14ea8d2943f899887cb5f459891798c6cb65b897e07026aa2d800ac7731b0b9b"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-37.webp",
+      "bytes": 121056,
+      "sha256": "a7c8241c15b89b714376012aa7e4c006a2c495b2db79e49dda7297d55469d8d3"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-38.webp",
+      "bytes": 120592,
+      "sha256": "2fcae73b21d3efce6296a568711c43b48623bcaebc5e9ba3dd2483725f557d20"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-39.webp",
+      "bytes": 117946,
+      "sha256": "005d13727fd025a862d09ef3d3d8421e37851d297f26a8ba1d7405258bc3deca"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-40.webp",
+      "bytes": 117478,
+      "sha256": "cc6e13ae79a80c0c4570d3ec3b380e8f88a2e5d51d72d117673e47387bf5ed98"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-41.webp",
+      "bytes": 116044,
+      "sha256": "57802bfa56ca9bf13b366a656717dec63dda7f6ed604dff98186b86d9d04ca54"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-42.webp",
+      "bytes": 113772,
+      "sha256": "b4010dc7ff598c759cbb2c06049f0d6ee0392ff0cf398470f4f74edd3872d0f0"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-43.webp",
+      "bytes": 111362,
+      "sha256": "f18970d2cfaca1c6e2558264bff46773c36b46133d9a24836232bbd0931efdef"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-44.webp",
+      "bytes": 107512,
+      "sha256": "ebec6233bfdcf5205f0ebb2c12f15c182826957c20f5a612287bee06f43b456a"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-row-45.webp",
+      "bytes": 33900,
+      "sha256": "267f70d7f593b0f7827f287169ad543fef35e14670bfd59c3b8dda8db3cff8e7"
+    },
+    {
+      "filename": "jupiter-material-183bd1d0dcc0-shadowless.webp",
+      "bytes": 47938,
+      "sha256": "5a3ac8f22d31abb44d143eb31ac5f0c79fdd251aec8ced2c2dc2dd377c125817"
+    },
+    {
+      "filename": "jupiter-moon-billboards.webp",
+      "bytes": 4438,
+      "sha256": "063d335bb3d6a363f264652dd74cb28dc3a71b6cff21c1858a4cefac5556f5a1"
+    },
+    {
+      "filename": "jupiter-moon-billboards@2x.webp",
+      "bytes": 14488,
+      "sha256": "41a4f6ed4e7250c1ab7c96753a7c945c1bf428d10a407c71a0611597d284044c"
+    },
+    {
+      "filename": "jupiter-moon-orbit-arcs.svg",
+      "bytes": 178,
+      "sha256": "9d81f7c4f04108df5c51539f4799599105a5a9262ff1ebaebb2a5f04ad67ea5d"
+    },
+    {
+      "filename": "jupiter-moon-orbit-arcs@2x.svg",
+      "bytes": 177,
+      "sha256": "1ba1a15d1d97327acda0fb42f39f97bf7b1a0adf94540654fdc4d61af1520e2c"
+    },
+    {
+      "filename": "jupiter-photometric-phase-curve.svg",
+      "bytes": 4528,
+      "sha256": "e270b0df9cba0f4043ac51fa35ab15638592c8e4bc2274811bb01b433d5b4c4b"
+    },
+    {
+      "filename": "jupiter-poles.webp",
+      "bytes": 40468,
+      "sha256": "880f40ba2e590f2549521911642e440519130f995107428c296f9bdff313875e"
+    },
+    {
+      "filename": "jupiter-poles@2x.webp",
+      "bytes": 65022,
+      "sha256": "9289200493bffc8bf2468e11bc1d2ee0836015310f34a40b0199d26c085f90f3"
+    },
+    {
+      "filename": "jupiter-reflectance-spectrum.svg",
+      "bytes": 5872,
+      "sha256": "c9f142878f3b5864846f669b42e26446df71a1a4f8f230b284768ace1eaf116e"
+    },
+    {
+      "filename": "jupiter-rings.webp",
+      "bytes": 45252,
+      "sha256": "08e8062e08ee42d1baa2b232cc0fb549aa205142f59bfec5973f512a454c9e3a"
+    },
+    {
+      "filename": "jupiter-rings@2x.webp",
+      "bytes": 70254,
+      "sha256": "02461da752c1fa0d20c8d28d5750c2f8f36b025685d7dc622c794beed84b109d"
+    },
+    {
+      "filename": "jupiter-starfield-back-standard.webp",
+      "bytes": 294528,
+      "sha256": "9b58c375386b2728d419fd0512d3154c4a59351a1fde5b03969c11509aa0c6a4"
+    },
+    {
+      "filename": "jupiter-starfield-back-standard@2x.webp",
+      "bytes": 1073274,
+      "sha256": "1f850dc6daca82790f20345f652746e5464b38d04ea0d7b1a3a6644e4d756b77"
+    },
+    {
+      "filename": "jupiter-starfield-back.webp",
+      "bytes": 604224,
+      "sha256": "05ca17562e0835098effd060ab9c754701bc000c9307fbf164834ae1c28a762e"
+    },
+    {
+      "filename": "jupiter-starfield-back@2x.webp",
+      "bytes": 2367208,
+      "sha256": "2f365f0dd50f454ed963778dd2777172006dd873d49bf25e258bed71ee4f2aa2"
+    },
+    {
+      "filename": "jupiter-starfield-bottom-standard.webp",
+      "bytes": 172048,
+      "sha256": "5c9d92aea731a0b0998c9cdcfb049bb34388eac3f1075631241dd2a2106f3701"
+    },
+    {
+      "filename": "jupiter-starfield-bottom-standard@2x.webp",
+      "bytes": 589596,
+      "sha256": "d0e08cc4cefc2e59cb44016887b6868a6d89065525ed9792e204a94549642667"
+    },
+    {
+      "filename": "jupiter-starfield-bottom.webp",
+      "bytes": 351892,
+      "sha256": "74f3f5153d74de2f693a5dd7e3939933bed3048e9118b8ee36a44db4ca072db2"
+    },
+    {
+      "filename": "jupiter-starfield-bottom@2x.webp",
+      "bytes": 1309698,
+      "sha256": "fc94446b76a45a91979ce7814ec11f2d3c069153e2cc8035b34c73c45a36cc03"
+    },
+    {
+      "filename": "jupiter-starfield-front-standard.webp",
+      "bytes": 410722,
+      "sha256": "8c5b4ed8480b07a30f61aab5254c8601e23eff0f06dcd28fa45cc50dad657013"
+    },
+    {
+      "filename": "jupiter-starfield-front-standard@2x.webp",
+      "bytes": 1402212,
+      "sha256": "4694fe3878fc9781ee87866a1f4848befcd91b43bb7f85d13cb542ce8a5457c5"
+    },
+    {
+      "filename": "jupiter-starfield-front.webp",
+      "bytes": 768032,
+      "sha256": "97be168b3b1ca164c9d6ce1ccf0cd2373baac3b9501a808d9aa3a21b9483ef22"
+    },
+    {
+      "filename": "jupiter-starfield-front@2x.webp",
+      "bytes": 2832202,
+      "sha256": "a28a808a08b3e365d923c1553c461815b6a878bdf0f35e162fb04751b5518e91"
+    },
+    {
+      "filename": "jupiter-starfield-left-standard.webp",
+      "bytes": 306818,
+      "sha256": "99fa8178d58a5ae649d21137e915207523a5a5ec469feba6321ba0b7db6f6e60"
+    },
+    {
+      "filename": "jupiter-starfield-left-standard@2x.webp",
+      "bytes": 1153544,
+      "sha256": "cbdbd655c85daf987b025fe1136a86113e81a148bc29ec6688f77714ca04ad47"
+    },
+    {
+      "filename": "jupiter-starfield-left.webp",
+      "bytes": 628102,
+      "sha256": "0cd4c110978a6d88e89fa76b70db815facd168b3b7d9c1dffc71acf9e41e2759"
+    },
+    {
+      "filename": "jupiter-starfield-left@2x.webp",
+      "bytes": 2357886,
+      "sha256": "7be2b4e542ab9833fbb8d2348a27097e7c1d02f51de68d892f841f681fe8c8dd"
+    },
+    {
+      "filename": "jupiter-starfield-right-standard.webp",
+      "bytes": 347120,
+      "sha256": "808f4ebeb68246cfe23f64ab2373686dbf187b6baf99d2ed904dfd18dc6e5e77"
+    },
+    {
+      "filename": "jupiter-starfield-right-standard@2x.webp",
+      "bytes": 1276530,
+      "sha256": "213d9fdbd6a835e6d1e3a2f162691674b36ea1f59234941afc021770455a3eb3"
+    },
+    {
+      "filename": "jupiter-starfield-right.webp",
+      "bytes": 685496,
+      "sha256": "9fa7ae676490e9be9f187c9f47559192abd642c8272555e915cf5382f2ae9b11"
+    },
+    {
+      "filename": "jupiter-starfield-right@2x.webp",
+      "bytes": 2557186,
+      "sha256": "367a8efd49f1b8ee62e1e42c5dfbfc994e2b00a2989d926526a187e71b5fc04e"
+    },
+    {
+      "filename": "jupiter-starfield-top-standard.webp",
+      "bytes": 135394,
+      "sha256": "a6669e1a6d002a0fc42908f6d7da3a23ba5886b5d400d3b603a97dbccb5b684e"
+    },
+    {
+      "filename": "jupiter-starfield-top-standard@2x.webp",
+      "bytes": 441990,
+      "sha256": "663f66e2bab44098d34617a204533df743e7c44cd39c23a48ee6fc227ddf71a8"
+    },
+    {
+      "filename": "jupiter-starfield-top.webp",
+      "bytes": 277824,
+      "sha256": "93d287016aab6740b83bcfee54d436bf821cd863e5a392a65146a3822e356d45"
+    },
+    {
+      "filename": "jupiter-starfield-top@2x.webp",
+      "bytes": 994212,
+      "sha256": "b46b579a9188c11efdeb4c5584345f04a741c4a04322d8daa4d46ac7c07c3456"
+    },
+    {
+      "filename": "jupiter-surface.webp",
+      "bytes": 438634,
+      "sha256": "348a1e106bed9c842776b2e99b4c884d4294d5b043787697e3e0f94013843130"
+    },
+    {
+      "filename": "jupiter-surface@2x.webp",
+      "bytes": 1152216,
+      "sha256": "af40915f0201552826264e6608599e0d72bb732a8cbb5a4ae70ef8101165e02b"
+    },
+    {
+      "filename": "jupiter-temperature-pressure-profile.svg",
+      "bytes": 2341,
+      "sha256": "20a5fe8cad7a2fb189d93bc232dba8e3e7fed4a0a516cf9686ef80c0c63cfab3"
+    }
+  ]
+}

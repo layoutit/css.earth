@@ -1,0 +1,515 @@
+{
+  "schema": "cssneptune-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "neptune-atmosphere-spectrum.svg",
+      "bytes": 5801,
+      "sha256": "8007dc42c6527e8a6d0137fceea07bd2afc156ca9665934d62d24603c0822c7f"
+    },
+    {
+      "filename": "neptune-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "filename": "neptune-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "filename": "neptune-lens-methane.webp",
+      "bytes": 490,
+      "sha256": "87340f2be6071a4195e2bd522bb6b6b56ce0d21a186f371889883ea21ac6f681"
+    },
+    {
+      "filename": "neptune-lens-near-infrared.webp",
+      "bytes": 352,
+      "sha256": "d1cc245defcacb3fc251f26f804bdba1b424311af177b12bdf255c1e573c9ff4"
+    },
+    {
+      "filename": "neptune-lens-normal.webp",
+      "bytes": 238,
+      "sha256": "3ed7c32964f2a5a56de2bb2a9f5774ea3831947d3c1fc1927ae935285f311739"
+    },
+    {
+      "filename": "neptune-material-methane-shadowless.webp",
+      "bytes": 103744,
+      "sha256": "e85233638211d95abfb09c8c7c4859738e9f0dec093762c1b33eb19ec8730348"
+    },
+    {
+      "filename": "neptune-material-methane.webp",
+      "bytes": 190302,
+      "sha256": "adde6785924ede245a7a948c12b4ab80f67047789a5eba23a171b955375f4b0c"
+    },
+    {
+      "filename": "neptune-material-near-infrared-shadowless.webp",
+      "bytes": 98102,
+      "sha256": "010de775ab03810b72c13fe33567853f6669f026a681a4495727f2420b4ae750"
+    },
+    {
+      "filename": "neptune-material-near-infrared.webp",
+      "bytes": 182704,
+      "sha256": "eae4280e38357fb02cf77dc61293f830fd1982cadf00525705cf55fbd693dca5"
+    },
+    {
+      "filename": "neptune-material-normal-shadowless.webp",
+      "bytes": 104452,
+      "sha256": "4ab5f612f72f748682b3d9e46ef027e62d88ed6fe10ccd69078297431881f452"
+    },
+    {
+      "filename": "neptune-material-normal.webp",
+      "bytes": 192124,
+      "sha256": "0adbf33ef6dfbedfaed4e9113d1d7ec8a6ba4e3a952daa3edd8b58ce6730d7bd"
+    },
+    {
+      "filename": "neptune-moon-dots.webp",
+      "bytes": 1198,
+      "sha256": "f76981fa672e66c873bcdc2763a1aa5f96fc2f5bcf9458b75336153b53de09e7"
+    },
+    {
+      "filename": "neptune-moon-dots@2x.webp",
+      "bytes": 3234,
+      "sha256": "e2dad11aa07851b939f839de2b76de0e7a18a55365a1d2ed3631a0df770e9500"
+    },
+    {
+      "filename": "neptune-moon-orbit-arcs.svg",
+      "bytes": 178,
+      "sha256": "cdf6b3cc97e99f151b5cc549dff1393ed25c404b2c7a3834e0af204069f5a191"
+    },
+    {
+      "filename": "neptune-moon-orbit-arcs@2x.svg",
+      "bytes": 177,
+      "sha256": "3a3256ad527303cbc8490531066bb8da8cea2f01abc3c8d8b65378127a5ded5c"
+    },
+    {
+      "filename": "neptune-orbit-bank.f64z",
+      "bytes": 614728,
+      "sha256": "e5dc741a1d3c9e0969688ca397ce9b07596b1fa1e52d04db5e48745539c1c4a2"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-00.webp",
+      "bytes": 108974,
+      "sha256": "07afe17190b60a0fc09fe09a2b5423403152de0b98b51f10adf43e867872ae18"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-01.webp",
+      "bytes": 109532,
+      "sha256": "03d806fd8714e83c1b970264b18a500ed241496ffc217eaa64196f3cb4ad0108"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-02.webp",
+      "bytes": 110370,
+      "sha256": "fc96fb3e2ab4367c1ccac5348d0ef987788c5a2c5e2aa9157c08e77670afac84"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-03.webp",
+      "bytes": 110174,
+      "sha256": "a0742ddb869253823102650bdf071e52b43aacc8de43f84166946fad961df5cd"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-04.webp",
+      "bytes": 110072,
+      "sha256": "64ca4640a9446a4bd6d51773eb1d2d1ea47d847a85974697182e6a2c7c0353e1"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-05.webp",
+      "bytes": 108946,
+      "sha256": "71bf19686eb1c5135ecc10f17dbe9b124dca4212272521c19b47ae9c64205338"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-06.webp",
+      "bytes": 108214,
+      "sha256": "7d5484bac88a2305a70cda4049d75805ac282798bd3083f81a7e7dc078bf9363"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-07.webp",
+      "bytes": 110106,
+      "sha256": "0ac6c8cb7f4f0838dfbe1e667917943945e2de31428c672c04dd4705693efe18"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-08.webp",
+      "bytes": 110818,
+      "sha256": "8384cf3a5e4d6d9d735d6c123a5905cb17e60d2e21d046a77d00c28cc81c7033"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-09.webp",
+      "bytes": 110170,
+      "sha256": "7b4ce4c9f05be07066a9fa97b354e4c583c7e4016ce45cf80123afd34c1da406"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-10.webp",
+      "bytes": 109720,
+      "sha256": "5611aceedee3e07322257956304850a42f25765b014fd6f4bf2a7d913b86e759"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-11.webp",
+      "bytes": 108354,
+      "sha256": "293f66720a0222669578bc987c831d91753d87bc3b35da90909ab0b7789df30e"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-12.webp",
+      "bytes": 106858,
+      "sha256": "b7a271da03b01384d58391a0a0d17905d724ddd4f2730b79fa24521708a7c574"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-13.webp",
+      "bytes": 105748,
+      "sha256": "5ef68b46c035a488a50410a63848655d021138ecd79aef31bebf96f7bde2e762"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-14.webp",
+      "bytes": 103848,
+      "sha256": "5690660fb40bf246657640a5ff9b6ee974eb4eae0b2ece211cadea8c81da56d6"
+    },
+    {
+      "filename": "neptune-orbit-material-methane-row-15.webp",
+      "bytes": 101680,
+      "sha256": "be28eed22bcd4ba2feaf904ce7239d3f6092d8b49c62884e54fcd2cef4c9d821"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-00.webp",
+      "bytes": 106456,
+      "sha256": "a6a0e075b8b583fb95e09934e74bcb6cf8e9ad3790707e747f85316960b84069"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-01.webp",
+      "bytes": 107502,
+      "sha256": "3eaae6e02ead2634bc39c287de364ab3c55cc81089287ee9708292ce13dc8845"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-02.webp",
+      "bytes": 108326,
+      "sha256": "61d0ebd5fd70dca440324e817d671143c786d6a694e5392cf6d919791f71fe96"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-03.webp",
+      "bytes": 108192,
+      "sha256": "85938f35014d70c525adc890c76a71fb64deb40b0ee96889d89494318ed92a0f"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-04.webp",
+      "bytes": 107992,
+      "sha256": "e2a3fff0c99235a5a9468c1036b03ad884860b326e8278d8fe2db2b2376842d2"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-05.webp",
+      "bytes": 106972,
+      "sha256": "f4fba9cd057d960650aca7110c8f96372cb4be69ec0b73ce0127d5a947ca711b"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-06.webp",
+      "bytes": 106108,
+      "sha256": "17a64a32d865815b934f5a868b54fa2e616725d7d6d12d00865845fdc919a484"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-07.webp",
+      "bytes": 107718,
+      "sha256": "3ded65bc7a9bb1a1aa5a86e37b0572332a74d2ed79cefd0f3b8380fe2141215f"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-08.webp",
+      "bytes": 107958,
+      "sha256": "d4e2b1d1ff4cc5e83606268d653a76c379d1a6444f73789a123a4e9dc2007a32"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-09.webp",
+      "bytes": 107650,
+      "sha256": "b44d1c6456f38b614762097b2affef4ae6d2821b2ecedc1035af507cdadc6f52"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-10.webp",
+      "bytes": 107672,
+      "sha256": "e82a817ad4fdc980f6e35724918d6a70eea7f217104a1edb97bca0223d6fb565"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-11.webp",
+      "bytes": 106522,
+      "sha256": "1b27a674a814cfee246b0f82f91312af6df34233cd9b974554b412a225e2e7e4"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-12.webp",
+      "bytes": 104896,
+      "sha256": "f6c7fb610339fcf6ff08e30578eef29615d5250f72ed672d733ef6ff6664c70e"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-13.webp",
+      "bytes": 103998,
+      "sha256": "eae1d7dae231056038f655314e5e7e246d2bd718fd429c8dd5bcc4aba340d67e"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-14.webp",
+      "bytes": 101654,
+      "sha256": "299dbda987e71b41b0ba921d63497a1a969f002dc5595d7532f249ee42b6df2a"
+    },
+    {
+      "filename": "neptune-orbit-material-near-infrared-row-15.webp",
+      "bytes": 99716,
+      "sha256": "04f5ff28b381fd1ac8e806a0a1b4069443f61696ea9916717b44e9ab642364a4"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-00.webp",
+      "bytes": 107974,
+      "sha256": "c589978d10146919b14135b52af2d168b9141d3e63d13ce7e57b814ea565c3e4"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-01.webp",
+      "bytes": 109242,
+      "sha256": "f6a0afc41878f234d7c73a122daa91fcbb2fb907edd8d1037b7faa162a3c9b02"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-02.webp",
+      "bytes": 109884,
+      "sha256": "e227d20168b00c279610f9cb636cc3c5ef87eca0db84e32e6207fa60f58aed16"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-03.webp",
+      "bytes": 109656,
+      "sha256": "8168cea6352a1d6da0e313b94a2ee5e2b6525ed49f3147d939864ab5c1b6b9dc"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-04.webp",
+      "bytes": 109308,
+      "sha256": "256fa6bbc06f6de8b6c4a6466e64e35152d58ef1137a7b3d751ce0e48c7f4258"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-05.webp",
+      "bytes": 108478,
+      "sha256": "15a46ba70f9d3cfd1471e8a1512738caaeda25919b6d4b3f29be332b53cb5993"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-06.webp",
+      "bytes": 107634,
+      "sha256": "a3e2a8819c1ee7706205a490b1011876b5b5fb58f63422aa9ee0bdf8f46fdda2"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-07.webp",
+      "bytes": 109418,
+      "sha256": "01cb8c32f742470211485dfcf90ae2907edc1be8c83142b1deac4482e58823f2"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-08.webp",
+      "bytes": 109882,
+      "sha256": "106a28a0c8ee5ff2de7806f29488f7cf14c0a5297ca39f5fe52b389632136f7d"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-09.webp",
+      "bytes": 109516,
+      "sha256": "c1d90c60044aebbaa1f1ded0281ee4f531db442efa101687d0a46ccee872b5a8"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-10.webp",
+      "bytes": 109256,
+      "sha256": "856741f9d12db49495112233bd6ad961e590c22ff7e8c36e7392dd2be217bc23"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-11.webp",
+      "bytes": 107836,
+      "sha256": "5eabdb8a39e80012895d06dbb58f0809414d5001b006d54b4ec9916afa8e7e4b"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-12.webp",
+      "bytes": 106576,
+      "sha256": "ac192d21a0a9ff8b766251487d40f15078718a599fbce4b4dda7b9a7435788d8"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-13.webp",
+      "bytes": 105554,
+      "sha256": "ebfd3e09e8ac86dbcf43de21200c27f8b91a1134aa654f657fc868ad5321df6b"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-14.webp",
+      "bytes": 103510,
+      "sha256": "695ceb9ca4443429136db410ecd415de113baa7d0a531e29ed04fcffd711cf7f"
+    },
+    {
+      "filename": "neptune-orbit-material-normal-row-15.webp",
+      "bytes": 101360,
+      "sha256": "eeb42bc3401e4e07722b63d1d0a14e5fee404939380727204922c408c962d44c"
+    },
+    {
+      "filename": "neptune-photometric-phase-curve.svg",
+      "bytes": 4485,
+      "sha256": "2d4a4054c5ba6956a3f521156bacf459cbc02a2130236bd90c8ea4bfc555fc8f"
+    },
+    {
+      "filename": "neptune-poles-methane.webp",
+      "bytes": 4868,
+      "sha256": "601a631e22c98f39fac791ed9378624ee111671d6632f30751e1817549fb1840"
+    },
+    {
+      "filename": "neptune-poles-near-infrared.webp",
+      "bytes": 4298,
+      "sha256": "be95fcd06421f806fe0514b6548ab5d142845c49bc4dc3b5b287b1dbdd42643b"
+    },
+    {
+      "filename": "neptune-poles-normal.webp",
+      "bytes": 4538,
+      "sha256": "39cac48326dacbddae02aceb05ae10078619c80d068a1dd6e2d4a7f669d1bbad"
+    },
+    {
+      "filename": "neptune-rings.webp",
+      "bytes": 7914,
+      "sha256": "2d60b788f47a34bb14a78029f7908436ca67bb151da24d0c7ca1789f72482e54"
+    },
+    {
+      "filename": "neptune-rings@2x.webp",
+      "bytes": 18770,
+      "sha256": "cb8e523b451366a748d99affbda55b9526e22326abbe62780e48c00a8a86fed5"
+    },
+    {
+      "filename": "neptune-starfield-back-standard.webp",
+      "bytes": 294528,
+      "sha256": "9b58c375386b2728d419fd0512d3154c4a59351a1fde5b03969c11509aa0c6a4"
+    },
+    {
+      "filename": "neptune-starfield-back-standard@2x.webp",
+      "bytes": 1073274,
+      "sha256": "1f850dc6daca82790f20345f652746e5464b38d04ea0d7b1a3a6644e4d756b77"
+    },
+    {
+      "filename": "neptune-starfield-back.webp",
+      "bytes": 604224,
+      "sha256": "05ca17562e0835098effd060ab9c754701bc000c9307fbf164834ae1c28a762e"
+    },
+    {
+      "filename": "neptune-starfield-back@2x.webp",
+      "bytes": 2367208,
+      "sha256": "2f365f0dd50f454ed963778dd2777172006dd873d49bf25e258bed71ee4f2aa2"
+    },
+    {
+      "filename": "neptune-starfield-bottom-standard.webp",
+      "bytes": 172048,
+      "sha256": "5c9d92aea731a0b0998c9cdcfb049bb34388eac3f1075631241dd2a2106f3701"
+    },
+    {
+      "filename": "neptune-starfield-bottom-standard@2x.webp",
+      "bytes": 589596,
+      "sha256": "d0e08cc4cefc2e59cb44016887b6868a6d89065525ed9792e204a94549642667"
+    },
+    {
+      "filename": "neptune-starfield-bottom.webp",
+      "bytes": 351892,
+      "sha256": "74f3f5153d74de2f693a5dd7e3939933bed3048e9118b8ee36a44db4ca072db2"
+    },
+    {
+      "filename": "neptune-starfield-bottom@2x.webp",
+      "bytes": 1309698,
+      "sha256": "fc94446b76a45a91979ce7814ec11f2d3c069153e2cc8035b34c73c45a36cc03"
+    },
+    {
+      "filename": "neptune-starfield-front-standard.webp",
+      "bytes": 410722,
+      "sha256": "8c5b4ed8480b07a30f61aab5254c8601e23eff0f06dcd28fa45cc50dad657013"
+    },
+    {
+      "filename": "neptune-starfield-front-standard@2x.webp",
+      "bytes": 1402212,
+      "sha256": "4694fe3878fc9781ee87866a1f4848befcd91b43bb7f85d13cb542ce8a5457c5"
+    },
+    {
+      "filename": "neptune-starfield-front.webp",
+      "bytes": 768032,
+      "sha256": "97be168b3b1ca164c9d6ce1ccf0cd2373baac3b9501a808d9aa3a21b9483ef22"
+    },
+    {
+      "filename": "neptune-starfield-front@2x.webp",
+      "bytes": 2832202,
+      "sha256": "a28a808a08b3e365d923c1553c461815b6a878bdf0f35e162fb04751b5518e91"
+    },
+    {
+      "filename": "neptune-starfield-left-standard.webp",
+      "bytes": 306818,
+      "sha256": "99fa8178d58a5ae649d21137e915207523a5a5ec469feba6321ba0b7db6f6e60"
+    },
+    {
+      "filename": "neptune-starfield-left-standard@2x.webp",
+      "bytes": 1153544,
+      "sha256": "cbdbd655c85daf987b025fe1136a86113e81a148bc29ec6688f77714ca04ad47"
+    },
+    {
+      "filename": "neptune-starfield-left.webp",
+      "bytes": 628102,
+      "sha256": "0cd4c110978a6d88e89fa76b70db815facd168b3b7d9c1dffc71acf9e41e2759"
+    },
+    {
+      "filename": "neptune-starfield-left@2x.webp",
+      "bytes": 2357886,
+      "sha256": "7be2b4e542ab9833fbb8d2348a27097e7c1d02f51de68d892f841f681fe8c8dd"
+    },
+    {
+      "filename": "neptune-starfield-right-standard.webp",
+      "bytes": 347120,
+      "sha256": "808f4ebeb68246cfe23f64ab2373686dbf187b6baf99d2ed904dfd18dc6e5e77"
+    },
+    {
+      "filename": "neptune-starfield-right-standard@2x.webp",
+      "bytes": 1276530,
+      "sha256": "213d9fdbd6a835e6d1e3a2f162691674b36ea1f59234941afc021770455a3eb3"
+    },
+    {
+      "filename": "neptune-starfield-right.webp",
+      "bytes": 685496,
+      "sha256": "9fa7ae676490e9be9f187c9f47559192abd642c8272555e915cf5382f2ae9b11"
+    },
+    {
+      "filename": "neptune-starfield-right@2x.webp",
+      "bytes": 2557186,
+      "sha256": "367a8efd49f1b8ee62e1e42c5dfbfc994e2b00a2989d926526a187e71b5fc04e"
+    },
+    {
+      "filename": "neptune-starfield-top-standard.webp",
+      "bytes": 135394,
+      "sha256": "a6669e1a6d002a0fc42908f6d7da3a23ba5886b5d400d3b603a97dbccb5b684e"
+    },
+    {
+      "filename": "neptune-starfield-top-standard@2x.webp",
+      "bytes": 441990,
+      "sha256": "663f66e2bab44098d34617a204533df743e7c44cd39c23a48ee6fc227ddf71a8"
+    },
+    {
+      "filename": "neptune-starfield-top.webp",
+      "bytes": 277824,
+      "sha256": "93d287016aab6740b83bcfee54d436bf821cd863e5a392a65146a3822e356d45"
+    },
+    {
+      "filename": "neptune-starfield-top@2x.webp",
+      "bytes": 994212,
+      "sha256": "b46b579a9188c11efdeb4c5584345f04a741c4a04322d8daa4d46ac7c07c3456"
+    },
+    {
+      "filename": "neptune-surface-methane.webp",
+      "bytes": 161114,
+      "sha256": "c247caadd3db25d77c40c51f8ff430b08e6e40db2d3bb65f6e23c2ca9a20d916"
+    },
+    {
+      "filename": "neptune-surface-methane@2x.webp",
+      "bytes": 288044,
+      "sha256": "509fe52e07466fbae77b4170056761ca946231350b2853bf8245221910d91818"
+    },
+    {
+      "filename": "neptune-surface-near-infrared.webp",
+      "bytes": 128466,
+      "sha256": "c8c466d8ef412fd16bdf3db7daf0cdd50dcd7f2f0910c261dcb64c4ad865d792"
+    },
+    {
+      "filename": "neptune-surface-near-infrared@2x.webp",
+      "bytes": 235582,
+      "sha256": "a31fa4f8160f21034bd2df0535409b209196a1450d9f1853e9c7bde1bb116781"
+    },
+    {
+      "filename": "neptune-surface-normal.webp",
+      "bytes": 104812,
+      "sha256": "b0cac21dfcc32a73767696908bacbfc95394cb078fecd650e92e2d9bb6f95135"
+    },
+    {
+      "filename": "neptune-surface-normal@2x.webp",
+      "bytes": 188994,
+      "sha256": "c48aa9bbc66893cb65dd6521dd7649f52b34bce1aa12e440aa34aebfda731c12"
+    },
+    {
+      "filename": "neptune-temperature-pressure-profile.svg",
+      "bytes": 2240,
+      "sha256": "ad0a341d6832fbca2ff3ca969eb90c013c8d0ec58b878f4ba5120688c2cdb70b"
+    }
+  ]
+}

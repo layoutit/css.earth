@@ -1,0 +1,186 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.jupiter-stage {
+  --planet-render-reference-width: 1280px;
+  --planet-render-reference-height: 720px;
+  --planet-render-side-padding: 16px;
+  container-type: size;
+  isolation: isolate;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background-color: #000;
+  cursor: grab;
+  touch-action: none;
+}
+
+.jupiter-stage:active {
+  cursor: grabbing;
+}
+
+.jupiter-stage > .planet-render-root {
+  --jupiter-shell-scale: min(
+    1,
+    calc(
+      (
+        100cqw
+        - var(--planet-render-side-padding)
+        - var(--planet-render-side-padding)
+      ) / var(--planet-render-reference-width)
+    ),
+    calc(100cqh / var(--planet-render-reference-height))
+  );
+  position: absolute;
+  inset: 0;
+  scale: calc(
+    var(--jupiter-shell-scale) / var(--planet-viewport-zoom-divisor)
+  );
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.jupiter-stage > .polycss-camera {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.jupiter-material {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.jupiter-material > s {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 512px;
+  height: 512px;
+  transform-origin: 0 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 512px 512px;
+  pointer-events: none;
+}
+
+.polycss-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polycss-mesh {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform-origin: 0 0 0;
+}
+
+.jupiter-body {
+  animation: jupiter-body-spin 36s linear infinite paused;
+}
+
+.jupiter-rings {
+  transform-style: preserve-3d;
+}
+
+.jupiter-rings > s {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+  transform-origin: 0 0;
+  backface-visibility: visible;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.jupiter-stage.jupiter-hide-rings .jupiter-rings {
+  visibility: hidden;
+}
+
+.jupiter-body > s {
+  position: absolute;
+  display: block;
+  margin: 0;
+  padding: 0;
+  transform-origin: 0 0;
+  backface-visibility: hidden;
+  background-image: url("/scenes/jupiter/jupiter-surface@2x.webp");
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-clip: border-box;
+  pointer-events: none;
+}
+
+.jupiter-body > .jupiter-pole {
+  background-image: url("/scenes/jupiter/jupiter-poles@2x.webp");
+}
+
+.jupiter-stage[data-lens="ultraviolet"] .jupiter-body > s:not(.jupiter-pole) {
+  background-image:
+    url("/scenes/jupiter/jupiter-lens-ultraviolet@2x.webp");
+}
+
+.jupiter-stage[data-lens="ultraviolet"] .jupiter-body > .jupiter-pole {
+  background-image:
+    url("/scenes/jupiter/jupiter-lens-ultraviolet-poles@2x.webp");
+}
+
+.jupiter-stage[data-lens="ultraviolet"] .jupiter-body > .jupiter-pole-inner,
+.jupiter-stage[data-lens="methane"] .jupiter-body > .jupiter-pole-inner {
+  visibility: hidden;
+}
+
+.jupiter-stage[data-lens="methane"] .jupiter-body > s:not(.jupiter-pole) {
+  background-image: url("/scenes/jupiter/jupiter-lens-methane@2x.webp");
+}
+
+.jupiter-stage[data-lens="methane"] .jupiter-body > .jupiter-pole {
+  background-image:
+    url("/scenes/jupiter/jupiter-lens-methane-poles@2x.webp");
+}
+
+.polycss-scene u {
+  width: 0;
+  height: 0;
+  box-sizing: content-box;
+  border: 0 solid transparent;
+  border-color: transparent transparent currentColor transparent;
+  border-width: 0 16px 32px;
+}
+
+html[data-playing="true"] .jupiter-body {
+  animation-play-state: running;
+}
+
+@keyframes jupiter-body-spin {
+  from { transform: rotateZ(-145deg); }
+  to { transform: rotateZ(-505deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jupiter-body {
+    animation: none;
+  }
+}

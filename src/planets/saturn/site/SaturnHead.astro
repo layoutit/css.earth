@@ -1,0 +1,23 @@
+---
+import {
+  PREPARED_SATURN_RUNTIME_SCENE,
+} from "../runtime/preparedSceneRuntime.mjs";
+
+const orbitRuntime =
+  PREPARED_SATURN_RUNTIME_SCENE.preparedLighting.orbitAtlas.runtimeShards;
+const initialOrbitVariant = orbitRuntime.variants[orbitRuntime.defaultVariant];
+const initialOrbitRows = orbitRuntime.model === "prepared-variant-single-atlas"
+  ? []
+  : orbitRuntime.initialWarmRows.map(
+    (rowIndex) => initialOrbitVariant.rows[rowIndex],
+  );
+---
+<link rel="preload" href="/scenes/saturn/saturn-surface-body.jpg" as="image" type="image/jpeg" />
+<link rel="preload" href="/scenes/saturn/saturn-poles.webp" as="image" type="image/webp" />
+<link rel="preload" href={initialOrbitVariant.defaultPresentation.assetUrl} as="image" type="image/webp" />
+{initialOrbitRows.map(({ assetUrl }) => (
+  <link rel="preload" href={assetUrl} as="image" type="image/webp" />
+))}
+<link rel="preload" href="/scenes/saturn/saturn-weather.webp" as="image" type="image/webp" />
+<link rel="preload" href="/scenes/saturn/saturn-rings@2x.webp" as="image" type="image/webp" />
+<link rel="preload" href="/scenes/saturn/saturn-ring-shadow.webp" as="image" type="image/webp" />

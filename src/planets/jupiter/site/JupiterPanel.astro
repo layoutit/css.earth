@@ -1,0 +1,87 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
+import { PREPARED_JUPITER_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_JUPITER_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_JUPITER_TITLE } from "./preparedTitle.mjs";
+
+const charts = [
+  {
+    id: "reflectance",
+    title: PREPARED_SHELL_TITLES.reflectance,
+    open: true,
+    src: "/scenes/jupiter/jupiter-reflectance-spectrum.svg",
+    width: 306,
+    height: 141,
+    alt: "Modeled disk reflectance of Jupiter from 350 to 998 nanometers.",
+  },
+  {
+    id: "photometric-phase",
+    title: SCIENTIFIC_CHART_TITLES.photometricPhase,
+    open: false,
+    src: "/scenes/jupiter/jupiter-photometric-phase-curve.svg",
+    width: 306,
+    height: 141,
+    alt: "Jupiter V-band brightness change across phase angles from zero to 130 degrees.",
+  },
+  {
+    id: "temperature-pressure",
+    title: PREPARED_SHELL_TITLES.temperaturePressure,
+    open: false,
+    src: "/scenes/jupiter/jupiter-temperature-pressure-profile.svg",
+    width: 306,
+    height: 141,
+    alt: "Modeled Jupiter atmospheric temperature from 10 bar to 10 nanobar.",
+  },
+];
+
+const lensDescriptions: Record<string, string> = {
+  normal: "Hubble visible color",
+  ultraviolet: "Hubble at 275 nm",
+  methane: "Hubble at 889 nm",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_JUPITER_LENSES.defaultLens,
+  controls: PREPARED_JUPITER_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lensDescriptions[lens.id],
+    title: `${lens.measurement}. ${lens.qualification}`,
+  })),
+};
+const resources = [
+  { label: "NASA", role: "imagery", description: "Facts & moon imagery", href: "https://science.nasa.gov/jupiter/jupiter-facts/" },
+  { label: "Hubble", role: "texture", description: "Planet texture", href: "https://science.nasa.gov/asset/hubble/jupiter-global-map-2019/" },
+  { label: "Juno North", role: "imagery", description: "Polar cyclones", href: "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/" },
+  { label: "Juno South", role: "imagery", description: "Polar cyclones", href: "https://science.nasa.gov/photojournal/jupiters-south-pole-cyclones-in-2016/" },
+  { label: "Hubble OPAL", role: "lenses", description: "UV & methane lenses", href: "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32" },
+  { label: "JPL", role: "orbits", description: "Moon orbits", href: "https://ssd.jpl.nasa.gov/sats/" },
+  { label: "PDS Rings", role: "rings", description: "Ring geometry", href: "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html" },
+  { label: "PSG", role: "spectra", description: "Atmosphere & spectrum", href: "https://psg.gsfc.nasa.gov/" },
+  { label: "OpenSpace", role: "scene", description: "Globe & scene", href: "https://github.com/OpenSpace/OpenSpace" },
+];
+
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
+    { kind: "toggle", name: "rings", label: "Rings", checked: true },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="jupiter"
+  title={PREPARED_JUPITER_TITLE}
+  introduction={PREPARED_JUPITER_PANEL.introduction}
+  facts={PREPARED_JUPITER_PANEL.facts}
+  moreFacts={PREPARED_JUPITER_PANEL.moreFacts}
+  charts={charts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

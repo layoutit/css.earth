@@ -1,0 +1,225 @@
+{
+  "schema": "cssmars-google-earth-interaction-corpus@1",
+  "version": 1,
+  "coordinateContract": {
+    "space": "measured-planet-disc",
+    "origin": "disc-center",
+    "units": "measured-disc-radius",
+    "xDirection": "right",
+    "yDirection": "down",
+    "range": [-1, 1]
+  },
+  "timeContract": {
+    "clock": "scenario-relative-monotonic",
+    "units": "milliseconds",
+    "dispatchRule": "Each event is dispatched at its exact offset from the accepted scenario start."
+  },
+  "splitContract": {
+    "training": 9,
+    "heldOut": 3,
+    "heldOutFraction": 0.25
+  },
+  "scenarios": [
+    {
+      "id": "training-baseline-low-horizontal-near",
+      "set": "training",
+      "tags": ["baseline-drag-release", "speed-low", "horizontal", "zoom-near"],
+      "startCamera": {"latitude": 20, "longitude": 45, "distance": 8500000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "move-0", "kind": "move", "atMilliseconds": 0, "discX": -0.42, "discY": 0.02, "button": 0, "clickCount": 1},
+        {"id": "down-0", "kind": "down", "atMilliseconds": 64, "discX": -0.42, "discY": 0.02, "button": 0, "clickCount": 1},
+        {"id": "drag-1", "kind": "drag", "atMilliseconds": 128, "discX": -0.28, "discY": 0.02, "button": 0, "clickCount": 1},
+        {"id": "drag-2", "kind": "drag", "atMilliseconds": 192, "discX": -0.14, "discY": 0.02, "button": 0, "clickCount": 1},
+        {"id": "drag-3", "kind": "drag", "atMilliseconds": 256, "discX": 0, "discY": 0.02, "button": 0, "clickCount": 1},
+        {"id": "drag-4", "kind": "drag", "atMilliseconds": 320, "discX": 0.14, "discY": 0.02, "button": 0, "clickCount": 1},
+        {"id": "drag-5", "kind": "drag", "atMilliseconds": 384, "discX": 0.28, "discY": 0.02, "button": 0, "clickCount": 1},
+        {"id": "up-0", "kind": "up", "atMilliseconds": 448, "discX": 0.42, "discY": 0.02, "button": 0, "clickCount": 1}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "release-velocity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "training-baseline-medium-vertical-default",
+      "set": "training",
+      "tags": ["baseline-drag-release", "speed-medium", "vertical", "zoom-default"],
+      "startCamera": {"latitude": 0, "longitude": 0, "distance": 11000000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "move-0", "kind": "move", "atMilliseconds": 0, "discX": 0.05, "discY": -0.4, "button": 0, "clickCount": 1},
+        {"id": "down-0", "kind": "down", "atMilliseconds": 32, "discX": 0.05, "discY": -0.4, "button": 0, "clickCount": 1},
+        {"id": "drag-1", "kind": "drag", "atMilliseconds": 64, "discX": 0.05, "discY": -0.24, "button": 0, "clickCount": 1},
+        {"id": "drag-2", "kind": "drag", "atMilliseconds": 96, "discX": 0.05, "discY": -0.08, "button": 0, "clickCount": 1},
+        {"id": "drag-3", "kind": "drag", "atMilliseconds": 128, "discX": 0.05, "discY": 0.08, "button": 0, "clickCount": 1},
+        {"id": "drag-4", "kind": "drag", "atMilliseconds": 160, "discX": 0.05, "discY": 0.24, "button": 0, "clickCount": 1},
+        {"id": "drag-5", "kind": "drag", "atMilliseconds": 192, "discX": 0.05, "discY": 0.4, "button": 0, "clickCount": 1},
+        {"id": "up-0", "kind": "up", "atMilliseconds": 224, "discX": 0.05, "discY": 0.48, "button": 0, "clickCount": 1}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "release-velocity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "training-baseline-high-diagonal-far",
+      "set": "training",
+      "tags": ["baseline-drag-release", "speed-high", "diagonal", "zoom-far"],
+      "startCamera": {"latitude": -20, "longitude": -45, "distance": 16000000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "move-0", "kind": "move", "atMilliseconds": 0, "discX": -0.42, "discY": -0.34, "button": 0, "clickCount": 1},
+        {"id": "down-0", "kind": "down", "atMilliseconds": 12, "discX": -0.42, "discY": -0.34, "button": 0, "clickCount": 1},
+        {"id": "drag-1", "kind": "drag", "atMilliseconds": 24, "discX": -0.25, "discY": -0.2, "button": 0, "clickCount": 1},
+        {"id": "drag-2", "kind": "drag", "atMilliseconds": 36, "discX": -0.08, "discY": -0.06, "button": 0, "clickCount": 1},
+        {"id": "drag-3", "kind": "drag", "atMilliseconds": 48, "discX": 0.09, "discY": 0.08, "button": 0, "clickCount": 1},
+        {"id": "drag-4", "kind": "drag", "atMilliseconds": 60, "discX": 0.26, "discY": 0.22, "button": 0, "clickCount": 1},
+        {"id": "up-0", "kind": "up", "atMilliseconds": 72, "discX": 0.43, "discY": 0.36, "button": 0, "clickCount": 1}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "release-velocity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "training-inertia-interrupted-by-wheel",
+      "set": "training",
+      "tags": ["inertia-interrupted-by-wheel", "speed-high", "horizontal", "zoom-default"],
+      "startCamera": {"latitude": 0, "longitude": 0, "distance": 11000000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "move-0", "kind": "move", "atMilliseconds": 0, "discX": -0.38, "discY": 0.04, "button": 0, "clickCount": 1},
+        {"id": "down-0", "kind": "down", "atMilliseconds": 12, "discX": -0.38, "discY": 0.04, "button": 0, "clickCount": 1},
+        {"id": "drag-1", "kind": "drag", "atMilliseconds": 24, "discX": -0.18, "discY": 0.04, "button": 0, "clickCount": 1},
+        {"id": "drag-2", "kind": "drag", "atMilliseconds": 36, "discX": 0.02, "discY": 0.04, "button": 0, "clickCount": 1},
+        {"id": "drag-3", "kind": "drag", "atMilliseconds": 48, "discX": 0.22, "discY": 0.04, "button": 0, "clickCount": 1},
+        {"id": "up-0", "kind": "up", "atMilliseconds": 60, "discX": 0.42, "discY": 0.04, "button": 0, "clickCount": 1},
+        {"id": "wheel-0", "kind": "wheel", "atMilliseconds": 190, "discX": 0.1, "discY": -0.06, "deltaY": -120}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "release-velocity", "zoom-trajectory", "interruption-latency", "post-interruption-velocity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "training-fly-to-interrupted-by-drag",
+      "set": "training",
+      "tags": ["fly-to-interrupted-by-threshold-drag", "speed-medium", "diagonal", "zoom-near"],
+      "startCamera": {"latitude": 20, "longitude": 45, "distance": 8500000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "double-down-1", "kind": "down", "atMilliseconds": 0, "discX": 0.42, "discY": -0.18, "button": 0, "clickCount": 1},
+        {"id": "double-up-1", "kind": "up", "atMilliseconds": 40, "discX": 0.42, "discY": -0.18, "button": 0, "clickCount": 1},
+        {"id": "double-down-2", "kind": "down", "atMilliseconds": 90, "discX": 0.42, "discY": -0.18, "button": 0, "clickCount": 2},
+        {"id": "double-up-2", "kind": "up", "atMilliseconds": 130, "discX": 0.42, "discY": -0.18, "button": 0, "clickCount": 2},
+        {"id": "move-0", "kind": "move", "atMilliseconds": 350, "discX": -0.12, "discY": -0.08, "button": 0, "clickCount": 1},
+        {"id": "down-0", "kind": "down", "atMilliseconds": 382, "discX": -0.12, "discY": -0.08, "button": 0, "clickCount": 1},
+        {"id": "drag-under-threshold", "kind": "drag", "atMilliseconds": 414, "discX": -0.1, "discY": -0.06, "button": 0, "clickCount": 1},
+        {"id": "drag-over-threshold", "kind": "drag", "atMilliseconds": 446, "discX": 0.02, "discY": 0.06, "button": 0, "clickCount": 1},
+        {"id": "drag-2", "kind": "drag", "atMilliseconds": 478, "discX": 0.2, "discY": 0.24, "button": 0, "clickCount": 1},
+        {"id": "up-0", "kind": "up", "atMilliseconds": 510, "discX": 0.32, "discY": 0.36, "button": 0, "clickCount": 1}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "fly-to-trajectory", "threshold-crossing-time", "interruption-latency", "velocity-continuity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "training-repeated-double-click",
+      "set": "training",
+      "tags": ["repeated-double-click", "zoom-default"],
+      "startCamera": {"latitude": 0, "longitude": 0, "distance": 11000000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "first-down-1", "kind": "down", "atMilliseconds": 0, "discX": 0.38, "discY": -0.22, "button": 0, "clickCount": 1},
+        {"id": "first-up-1", "kind": "up", "atMilliseconds": 40, "discX": 0.38, "discY": -0.22, "button": 0, "clickCount": 1},
+        {"id": "first-down-2", "kind": "down", "atMilliseconds": 90, "discX": 0.38, "discY": -0.22, "button": 0, "clickCount": 2},
+        {"id": "first-up-2", "kind": "up", "atMilliseconds": 130, "discX": 0.38, "discY": -0.22, "button": 0, "clickCount": 2},
+        {"id": "second-down-1", "kind": "down", "atMilliseconds": 300, "discX": -0.28, "discY": 0.3, "button": 0, "clickCount": 1},
+        {"id": "second-up-1", "kind": "up", "atMilliseconds": 340, "discX": -0.28, "discY": 0.3, "button": 0, "clickCount": 1},
+        {"id": "second-down-2", "kind": "down", "atMilliseconds": 390, "discX": -0.28, "discY": 0.3, "button": 0, "clickCount": 2},
+        {"id": "second-up-2", "kind": "up", "atMilliseconds": 430, "discX": -0.28, "discY": 0.3, "button": 0, "clickCount": 2}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "fly-to-trajectory", "replacement-transition", "interruption-latency", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "training-wheel-during-fly-to",
+      "set": "training",
+      "tags": ["wheel-during-fly-to", "zoom-far"],
+      "startCamera": {"latitude": -20, "longitude": -45, "distance": 16000000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "double-down-1", "kind": "down", "atMilliseconds": 0, "discX": 0.34, "discY": 0.28, "button": 0, "clickCount": 1},
+        {"id": "double-up-1", "kind": "up", "atMilliseconds": 40, "discX": 0.34, "discY": 0.28, "button": 0, "clickCount": 1},
+        {"id": "double-down-2", "kind": "down", "atMilliseconds": 90, "discX": 0.34, "discY": 0.28, "button": 0, "clickCount": 2},
+        {"id": "double-up-2", "kind": "up", "atMilliseconds": 130, "discX": 0.34, "discY": 0.28, "button": 0, "clickCount": 2},
+        {"id": "wheel-0", "kind": "wheel", "atMilliseconds": 300, "discX": 0.12, "discY": 0.1, "deltaY": -120}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "fly-to-trajectory", "zoom-trajectory", "interruption-latency", "post-interruption-velocity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "training-drag-during-inertia",
+      "set": "training",
+      "tags": ["drag-during-inertia", "speed-high", "horizontal", "zoom-default"],
+      "startCamera": {"latitude": 0, "longitude": 0, "distance": 11000000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "first-move", "kind": "move", "atMilliseconds": 0, "discX": -0.4, "discY": -0.04, "button": 0, "clickCount": 1},
+        {"id": "first-down", "kind": "down", "atMilliseconds": 12, "discX": -0.4, "discY": -0.04, "button": 0, "clickCount": 1},
+        {"id": "first-drag-1", "kind": "drag", "atMilliseconds": 24, "discX": -0.12, "discY": -0.04, "button": 0, "clickCount": 1},
+        {"id": "first-drag-2", "kind": "drag", "atMilliseconds": 36, "discX": 0.16, "discY": -0.04, "button": 0, "clickCount": 1},
+        {"id": "first-up", "kind": "up", "atMilliseconds": 48, "discX": 0.44, "discY": -0.04, "button": 0, "clickCount": 1},
+        {"id": "second-move", "kind": "move", "atMilliseconds": 190, "discX": 0.18, "discY": 0.12, "button": 0, "clickCount": 1},
+        {"id": "second-down", "kind": "down", "atMilliseconds": 206, "discX": 0.18, "discY": 0.12, "button": 0, "clickCount": 1},
+        {"id": "second-drag-1", "kind": "drag", "atMilliseconds": 238, "discX": 0.02, "discY": 0.24, "button": 0, "clickCount": 1},
+        {"id": "second-drag-2", "kind": "drag", "atMilliseconds": 270, "discX": -0.16, "discY": 0.36, "button": 0, "clickCount": 1},
+        {"id": "second-up", "kind": "up", "atMilliseconds": 302, "discX": -0.3, "discY": 0.44, "button": 0, "clickCount": 1}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "release-velocity", "interruption-latency", "replacement-transition", "velocity-continuity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "training-baseline-medium-diagonal-default",
+      "set": "training",
+      "tags": ["baseline-drag-release", "speed-medium", "diagonal", "zoom-default"],
+      "startCamera": {"latitude": 0, "longitude": 0, "distance": 11000000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "move-0", "kind": "move", "atMilliseconds": 0, "discX": -0.34, "discY": 0.3, "button": 0, "clickCount": 1},
+        {"id": "down-0", "kind": "down", "atMilliseconds": 32, "discX": -0.34, "discY": 0.3, "button": 0, "clickCount": 1},
+        {"id": "drag-1", "kind": "drag", "atMilliseconds": 64, "discX": -0.18, "discY": 0.15, "button": 0, "clickCount": 1},
+        {"id": "drag-2", "kind": "drag", "atMilliseconds": 96, "discX": -0.02, "discY": 0, "button": 0, "clickCount": 1},
+        {"id": "drag-3", "kind": "drag", "atMilliseconds": 128, "discX": 0.14, "discY": -0.15, "button": 0, "clickCount": 1},
+        {"id": "up-0", "kind": "up", "atMilliseconds": 160, "discX": 0.3, "discY": -0.3, "button": 0, "clickCount": 1}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "release-velocity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "heldout-baseline-high-vertical-near",
+      "set": "heldout",
+      "tags": ["baseline-drag-release", "speed-high", "vertical", "zoom-near"],
+      "startCamera": {"latitude": 20, "longitude": 45, "distance": 8500000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "move-0", "kind": "move", "atMilliseconds": 0, "discX": -0.08, "discY": -0.42, "button": 0, "clickCount": 1},
+        {"id": "down-0", "kind": "down", "atMilliseconds": 12, "discX": -0.08, "discY": -0.42, "button": 0, "clickCount": 1},
+        {"id": "drag-1", "kind": "drag", "atMilliseconds": 24, "discX": -0.08, "discY": -0.14, "button": 0, "clickCount": 1},
+        {"id": "drag-2", "kind": "drag", "atMilliseconds": 36, "discX": -0.08, "discY": 0.14, "button": 0, "clickCount": 1},
+        {"id": "up-0", "kind": "up", "atMilliseconds": 48, "discX": -0.08, "discY": 0.42, "button": 0, "clickCount": 1}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "release-velocity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "heldout-inertia-wheel-far-horizontal",
+      "set": "heldout",
+      "tags": ["inertia-interrupted-by-wheel", "speed-medium", "horizontal", "zoom-far"],
+      "startCamera": {"latitude": -20, "longitude": -45, "distance": 16000000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "move-0", "kind": "move", "atMilliseconds": 0, "discX": -0.36, "discY": -0.12, "button": 0, "clickCount": 1},
+        {"id": "down-0", "kind": "down", "atMilliseconds": 28, "discX": -0.36, "discY": -0.12, "button": 0, "clickCount": 1},
+        {"id": "drag-1", "kind": "drag", "atMilliseconds": 56, "discX": -0.12, "discY": -0.12, "button": 0, "clickCount": 1},
+        {"id": "drag-2", "kind": "drag", "atMilliseconds": 84, "discX": 0.12, "discY": -0.12, "button": 0, "clickCount": 1},
+        {"id": "up-0", "kind": "up", "atMilliseconds": 112, "discX": 0.36, "discY": -0.12, "button": 0, "clickCount": 1},
+        {"id": "wheel-0", "kind": "wheel", "atMilliseconds": 270, "discX": -0.06, "discY": 0.08, "deltaY": 96}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "release-velocity", "zoom-trajectory", "interruption-latency", "post-interruption-velocity", "settled-endpoint", "frame-cadence"]
+    },
+    {
+      "id": "heldout-repeated-fly-to-then-drag",
+      "set": "heldout",
+      "tags": ["repeated-double-click", "fly-to-interrupted-by-threshold-drag", "zoom-default"],
+      "startCamera": {"latitude": 0, "longitude": 0, "distance": 11000000, "tilt": 0, "azimuth": 0},
+      "events": [
+        {"id": "first-down-1", "kind": "down", "atMilliseconds": 0, "discX": 0.26, "discY": -0.3, "button": 0, "clickCount": 1},
+        {"id": "first-up-1", "kind": "up", "atMilliseconds": 36, "discX": 0.26, "discY": -0.3, "button": 0, "clickCount": 1},
+        {"id": "first-down-2", "kind": "down", "atMilliseconds": 84, "discX": 0.26, "discY": -0.3, "button": 0, "clickCount": 2},
+        {"id": "first-up-2", "kind": "up", "atMilliseconds": 120, "discX": 0.26, "discY": -0.3, "button": 0, "clickCount": 2},
+        {"id": "second-down-1", "kind": "down", "atMilliseconds": 270, "discX": -0.32, "discY": 0.18, "button": 0, "clickCount": 1},
+        {"id": "second-up-1", "kind": "up", "atMilliseconds": 306, "discX": -0.32, "discY": 0.18, "button": 0, "clickCount": 1},
+        {"id": "second-down-2", "kind": "down", "atMilliseconds": 354, "discX": -0.32, "discY": 0.18, "button": 0, "clickCount": 2},
+        {"id": "second-up-2", "kind": "up", "atMilliseconds": 390, "discX": -0.32, "discY": 0.18, "button": 0, "clickCount": 2},
+        {"id": "move-0", "kind": "move", "atMilliseconds": 520, "discX": -0.08, "discY": -0.04, "button": 0, "clickCount": 1},
+        {"id": "down-0", "kind": "down", "atMilliseconds": 548, "discX": -0.08, "discY": -0.04, "button": 0, "clickCount": 1},
+        {"id": "drag-under-threshold", "kind": "drag", "atMilliseconds": 576, "discX": -0.06, "discY": -0.02, "button": 0, "clickCount": 1},
+        {"id": "drag-over-threshold", "kind": "drag", "atMilliseconds": 604, "discX": 0.08, "discY": 0.12, "button": 0, "clickCount": 1},
+        {"id": "up-0", "kind": "up", "atMilliseconds": 632, "discX": 0.26, "discY": 0.3, "button": 0, "clickCount": 1}
+      ],
+      "expectedMeasuredOutputs": ["accepted-input-records", "frame-camera-matrices", "camera-trajectory", "fly-to-trajectory", "replacement-transition", "threshold-crossing-time", "interruption-latency", "velocity-continuity", "settled-endpoint", "frame-cadence"]
+    }
+  ]
+}

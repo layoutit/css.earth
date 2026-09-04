@@ -1,0 +1,70 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.example-stage {
+  container-type: size;
+  isolation: isolate;
+  pointer-events: none;
+  background: #000;
+}
+
+html:not([data-ready="true"]) .example-stage { opacity: 0.001; }
+
+.neptune-input-surface {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+}
+html[data-ready="true"] .neptune-input-surface { pointer-events: auto; }
+
+@media (max-width: 820px), (orientation: portrait) {
+  .neptune-input-surface { position: absolute; inset: 0 auto auto 0; width: 100%; height: 100svh; touch-action: pan-y; }
+}
+
+.example-stage > .polycss-camera {
+  --neptune-scene-side-padding: 16px;
+  --neptune-reference-width: 1920px;
+  --neptune-reference-height: 1080px;
+  --neptune-shell-scale: min(1, calc((100cqw - var(--neptune-scene-side-padding) * 2) / var(--neptune-reference-width)), calc(100cqh / var(--neptune-reference-height)));
+  position: absolute;
+  inset: 0;
+  scale: calc(var(--neptune-shell-scale) / var(--planet-viewport-zoom-divisor));
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.neptune-body {
+  transform-style: preserve-3d;
+  animation-name: neptune-body-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+html[data-playing="true"] .neptune-body { animation-play-state: running; }
+
+.polycss-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
+.polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+.polycss-scene :is(b, i, s) { position: absolute; display: block; transform-origin: 0 0; margin: 0; padding: 0; line-height: 0; text-decoration: none; backface-visibility: hidden; background-repeat: no-repeat; pointer-events: none; }
+.polycss-scene s { width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px); background-origin: border-box; background-clip: border-box; }
+
+.neptune-body:not(.neptune-body-polar) > .neptune-surface-face {
+  background-image: var(--neptune-surface-image) !important;
+}
+.neptune-body-polar > s {
+  background-image: var(--neptune-poles-image) !important;
+}
+
+.neptune-ring-plane > s { backface-visibility: visible; }
+.planet-stage.neptune-hide-rings .neptune-ring-plane { visibility: hidden; }
+@keyframes neptune-body-spin {
+  from { transform: rotateZ(-128deg); }
+  to { transform: rotateZ(-488deg); }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-earth-interior-source@1",
+  "qualification": "Schematic radial section based on NASA Science layer descriptions; not seismic tomography.",
+  "sourceUrl": "https://science.nasa.gov/earth/facts/",
+  "sourceId": 48583,
+  "earthRadiusKm": 6378,
+  "layers": [
+    { "id": "crust", "label": "Crust", "outerRadiusKm": 6378, "innerRadiusKm": 6348, "color": "#8b795e" },
+    { "id": "mantle", "label": "Mantle", "outerRadiusKm": 6348, "innerRadiusKm": 3478, "color": "#cf5d35" },
+    { "id": "outer-core", "label": "Outer core", "outerRadiusKm": 3478, "innerRadiusKm": 1221, "color": "#ef9c3b" },
+    { "id": "inner-core", "label": "Inner core", "outerRadiusKm": 1221, "innerRadiusKm": 0, "color": "#f5d580" }
+  ]
+}

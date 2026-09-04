@@ -1,0 +1,43 @@
+---
+import PlanetHeader from "../components/PlanetHeader.astro";
+import { googleAnalyticsBootstrap } from "../google-analytics.mjs";
+import { requireObject } from "../objects.mjs";
+import "../../src/platform/cubic-sky.css";
+import "../site.css";
+import "../maps-shell.css";
+
+interface Props {
+  objectId: string;
+}
+
+const { objectId } = Astro.props;
+const objectRecord = requireObject(objectId);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={objectRecord.description} />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <script is:inline set:html={googleAnalyticsBootstrap}></script>
+    <slot name="planet-head" />
+    <title>{objectRecord.name} - Powered by PolyCSS</title>
+  </head>
+  <body class="loading" data-object-shell={objectRecord.id}>
+    <PlanetHeader objectId={objectRecord.id} />
+    <slot name="planet-ui" />
+    <main
+      class="planet-stage example-stage"
+      data-object-id={objectRecord.id}
+      aria-label={`Interactive 3D CSS visualization of ${objectRecord.name}`}
+      aria-busy="true"
+    ></main>
+    <slot name="planet-overlay" />
+    <script>
+      import "../scene-router.mjs";
+    </script>
+  </body>
+</html>

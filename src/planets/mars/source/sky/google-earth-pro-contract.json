@@ -1,0 +1,102 @@
+{
+  "schema": "cssmars-google-earth-pro-sky-contract@1",
+  "sourceProduct": "Google Earth Pro 7.3.7.1327 Mars mode",
+  "captureQualification": "NATIVE_HEADLESS_CAMERA_SKYMAP_CATALOGUE_SUN_EQUATIONS_WITH_MEASURED_RESIDUALS",
+  "captureDate": "2026-09-02",
+  "sampleCount": 201,
+  "camera": {
+    "projection": {
+      "focalX": 1.7320508201475806,
+      "focalY": 2.7993685669425816,
+      "horizontalFovDegrees": 59.999999639646695,
+      "verticalFovDegreesAtReferenceViewport": 39.3158349229759,
+      "referenceViewport": [2093, 1295]
+    },
+    "orientation": {
+      "radial": "n = [cos(lat)*sin(lon), -sin(lat), cos(lat)*cos(lon)]",
+      "rightAtZeroHeading": "r = [-cos(lon), 0, sin(lon)]",
+      "upAtZeroHeading": "u = [sin(lat)*sin(lon), cos(lat), sin(lat)*cos(lon)]",
+      "maximumAngularResidualDegrees": 0.000002561320938754782
+    },
+    "cubicTransport": {
+      "rotationResponse": -1,
+      "zoomResponse": 0,
+      "runtimeProjection": false
+    }
+  },
+  "sky": {
+    "sourcePasses": ["plate-carree-sky-map", "5000-point-star-catalogue"],
+    "catalogue": {
+      "drawCount": 5000,
+      "pointSizePixels": 4.5,
+      "radialResponseTextureSize": [32, 1],
+      "exposure": 40,
+      "pointSizeZoomResponse": 0,
+      "qualification": "Exact live linked shader and draw-state measurements; catalogue bytes are not redistributed."
+    },
+    "replacement": {
+      "source": "ESO eso0932a all-sky panorama",
+      "license": "CC-BY-4.0",
+      "transport": "prepared-six-face-cubemap"
+    },
+    "googleTextureRedistributed": false
+  },
+  "sun": {
+    "independentBillboard": true,
+    "sourcePixelsRedistributed": false,
+    "referenceTimeUtc": "2026-09-02T19:45:51.226Z",
+    "bodyDirectionAtReference": [
+      0.888810066045983,
+      0.13368164386698683,
+      0.43834448164469403
+    ],
+    "bodyDirectionMaximumAngularResidualDegrees": 0.007034751932936133,
+    "defaultCameraBinding": {
+      "nativeSampleId": "longitude-orbit-5deg-047",
+      "nativeCamera": {
+        "latitude": 0,
+        "longitude": 50,
+        "heading": 0,
+        "tilt": 0,
+        "distanceMeters": 7800000
+      },
+      "viewDirection": [
+        -0.22665800735781813,
+        0.13368726790267432,
+        -0.9647558562150849
+      ],
+      "qualification": "Fully visible native Sun pose recovered from the exact Sun model-view translation and bound to the default cssEarth camera."
+    },
+    "centerDistanceOverFar": 0.9395660778622476,
+    "halfExtentOverFar": 0.056785294765488575,
+    "halfExtentOverCenter": 0.06043778729728664,
+    "apparentViewportHeightShare": 0.16918764201558587,
+    "maximumCenterReplayResidualPixels": 0.23802346625592666,
+    "appearance": {
+      "nativeTextureSize": [
+        128,
+        128
+      ],
+      "nativeBlend": [
+        "SRC_ALPHA",
+        "ONE"
+      ],
+      "analyticRadialFit": {
+        "model": "opaque-core-generalized-exponential-falloff",
+        "coreRadiusPixels": 18.9,
+        "falloffScalePixels": 17.8,
+        "falloffExponent": 1.36,
+        "redProfileSumSquaredResidual": 0.0010404800442828858,
+        "qualification": "Least-squares fit to annular red-channel means from the bound native 128 by 128 Sun texture; fitted values only, no source pixels."
+      }
+    },
+    "cullingStates": [
+      "fully-visible",
+      "partially-visible",
+      "outside-viewport",
+      "behind-camera",
+      "planet-occulted"
+    ]
+  },
+  "qualification": "Repository-authored factual measurements of native behavior. No Google texture or shader bytes are redistributed by the prepared scene."
+}
