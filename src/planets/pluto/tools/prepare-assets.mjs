@@ -99,13 +99,7 @@ async function prepareLens(plan) {
     const missing = raster.missing ?? sampleCoverage(sourceMissing, source.info, width, height);
     const data = paintMissingCoverage(raster.data, info, missing);
     if (density === 2) thumbnailRaster = { data, info };
-    const surface = orientLatitudeBands(data, {
-      width,
-      height,
-      channels: info.channels,
-      bandCount: 16,
-    });
-    const rasterizedSurface = bakeSurfaceRaster(surface, { width, height, channels: info.channels }, surfaceRasterCells, density);
+    const rasterizedSurface = bakeSurfaceRaster(data, { width, height, channels: info.channels }, surfaceRasterCells, density);
     const poles = preparePolarAtlas(data, {
       width,
       height,
@@ -166,29 +160,6 @@ async function writeCurvatureMaterial(density) {
     PLUTO_PUBLIC_ROOT,
     `pluto-curvature${suffix}.webp`,
   ));
-}
-
-function orientLatitudeBands(data, { width, height, channels, bandCount }) {
-  const bandHeight = height / bandCount;
-  if (!Buffer.isBuffer(data) || !Number.isInteger(bandHeight)) {
-    throw new Error("Pluto texture does not match its prepared latitude grid.");
-  }
-  const output = Buffer.alloc(data.length);
-  const rowBytes = width * channels;
-  for (let band = 0; band < bandCount; band += 1) {
-    const bandStart = band * bandHeight;
-    for (let row = 0; row < bandHeight; row += 1) {
-      const sourceRow = bandStart + row;
-      const outputRow = bandStart + bandHeight - 1 - row;
-      data.copy(
-        output,
-        outputRow * rowBytes,
-        sourceRow * rowBytes,
-        (sourceRow + 1) * rowBytes,
-      );
-    }
-  }
-  return output;
 }
 
 function preparePolarAtlas(data, {

@@ -44,8 +44,9 @@ can remain. The monochrome product reserves zero for gaps; the DEM uses −32,76
 Coverage is sampled separately before image interpolation. No surface is inpainted.
 
 The full 2:1 maps use north-to-south latitude rows and a common 0–360° longitude
-domain. Atlas rows are reversed inside each retained latitude band and polar
-leaves are resampled at prepare time. Regular-face projective warps are baked
+domain. Each retained face's south-to-north coordinate is mapped into the
+continuous source image before interpolation, including at latitude-band edges.
+Polar leaves are resampled at prepare time. Regular-face projective warps are baked
 into RGBA atlas cells; the browser retains affine frames and flat child textures.
 This avoids Chrome's triangular projective-child flattening artifacts without
 changing the shared renderer or deriving geometry at runtime.

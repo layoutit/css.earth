@@ -174,3 +174,49 @@ zero scene differences across six conditions, with shell differences of
 532/532/1,164 and 2,098/2,098/4,548 pixels within marker footprints. These numbers
 describe the intentional atlas change, **not marker-pixel preservation**. The
 fresh review-repair run supersedes that run for merge readiness.
+
+## Final latitude-sampling repair
+
+The final adversarial review found one further Pluto defect: bilinear sampling
+across separately reversed latitude bands mixed rows from unrelated latitudes.
+The repair keeps the original north-to-south source raster and reverses each
+face's coordinate before interpolation. It does not clamp individual bands.
+Only six surface-lens images and their manifest entries change; all other 37
+assets, affine frames, runtime geometry, and canonical asset selection stay fixed.
+
+Six new regression cases cover both edges of all 16 bands, interiors, global
+latitude clamping, longitude wrapping, and partial-alpha coverage with affine,
+expanding, and contracting projections at both prepared resolutions. Independent
+mutation checks reinstate the former reordered-band pipeline and try per-band
+clamping: every new case rejects both faults; the two older tests still pass.
+
+A separate author-local diagnostic solves the original 3D homography, then
+samples each prepared source rectangle. All 7,924,800 covered pixels across three
+lenses and both prepared resolutions match exactly. Raw alpha and raw
+non-boundary RGB remain unchanged from the prior bake. Encoding those checked
+pixels reproduces all six new WebPs byte-for-byte, matching the generated files
+and manifest.
+These are source-sampling and encoding checks, not browser/source pixel parity.
+
+Fresh evidence is under `output/playwright/pluto-latitude-fix-20260904/` and
+`output/adversarial-pluto-20260904/fix-oracle-*.json`, and remains author-local.
+The browser report now records the exact runtime-manifest hash and each verified
+loaded image hash, so unchanged geometry or filenames cannot identify old image
+bytes as corrected. Eighteen new Chrome captures match the corrected manifest,
+retain 931 nodes, and load the same highest-density bank at both display scales.
+Fine retained-face seams and the documented surface JPEG fringe remain visible;
+the presentation is not claimed to be seam-free.
+
+An independent archive snapshot with the fix applied reproduced all 43 assets
+and seven generated modules/manifests byte-for-byte. It used the same host and
+dependency installation, plus copied and rehashed pinned source inputs; this is
+not a fresh network acquisition or second-machine result. Its author-local
+record is `output/playwright/pluto-latitude-isolated-repro-20260904.json`.
+
+Post-repair gates all pass: source verification for eleven objects, 367 tests
+with no failures or skips, the production build, and the full aggregate Chrome
+suite (shell, introductions, navigation, shared conformance, and all eleven
+object-specific suites). Logs use
+`output/playwright/pluto-latitude-fix-{acquire,test,build,browser}-20260904.log`.
+Three independent review lanes found no further actionable defect in this fix.
+These local gates are not hosted CI or GitHub approval. No merge was performed.
