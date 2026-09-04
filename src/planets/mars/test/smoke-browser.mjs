@@ -112,10 +112,10 @@ try {
     window.__marsSmokeRetained.body === document.querySelector(".mars-body") &&
     window.__marsSmokeRetained.material === document.querySelector(".mars-material")), true);
 
-  await page.evaluate(() => window.__mars.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   assert.ok(await page.locator(".planet-stage").evaluate((stage) =>
     stage.getAnimations({ subtree: true }).every(({ playState }) => playState === "paused")));
-  await page.evaluate(() => window.__mars.resume());
+  await page.evaluate(() => (!document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
 
   await page.setViewportSize({ width: 390, height: 844 });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390);
@@ -128,9 +128,9 @@ try {
       speed,
       speedState: speed?.dataset.state,
     });
-    const runtime = window.__mars;
-    runtime.destroy();
-    runtime.destroy();
+    window.dispatchEvent(new PageTransitionEvent("pagehide"));
+    window.dispatchEvent(new PageTransitionEvent("pagehide"));
+
     window.__marsSmokeDestroyedControls.speed?.click();
   });
   assert.deepEqual(await page.evaluate(() => ({

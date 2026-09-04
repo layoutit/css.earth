@@ -1,3 +1,5 @@
+import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
+
 export function mountPlanetShell({
   objectId,
   documentTarget = document,
@@ -9,46 +11,35 @@ export function mountPlanetShell({
   if (!(drawer instanceof windowTarget.HTMLElement)) {
     throw new Error("Planet shell information drawer is missing.");
   }
-
-  const sidebar = createSidebarController(documentTarget, windowTarget);
-  const objectBrowser = createObjectBrowserController(
-    documentTarget,
-    windowTarget,
-  );
-  const sheet = createSheetController(drawer, windowTarget);
-  const chartAlignment = createChartPixelAlignmentController(
-    drawer,
-    windowTarget,
-  );
+  const lifetime = createSceneLifetime();
   let settingsController;
-  let panels;
+  function own(controller) {
+    lifetime.onDispose(() => controller.destroy());
+    return controller;
+  }
   try {
-    settingsController = createSettingsController(
-      documentTarget,
-      windowTarget,
-      { motionEnabled, onMotionChange },
-    );
-    panels = createPanelController(drawer, objectId, windowTarget);
+    own(createSidebarController(documentTarget, windowTarget, lifetime));
+    own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
+    own(createSheetController(drawer, windowTarget, lifetime));
+    own(createChartPixelAlignmentController(drawer, windowTarget, lifetime));
+    settingsController = own(createSettingsController(
+      documentTarget, windowTarget, { motionEnabled, onMotionChange }, lifetime,
+    ));
+    own(createPanelController(drawer, objectId, windowTarget, lifetime));
   } catch (error) {
-    sidebar.destroy();
-    objectBrowser.destroy();
-    sheet.destroy();
-    chartAlignment.destroy();
-    settingsController?.destroy();
+    const cleanupErrors = lifetime.destroy();
+    if (cleanupErrors.length) {
+      throw new AggregateError([error, ...cleanupErrors], error.message, { cause: error });
+    }
     throw error;
   }
-  let destroyed = false;
-
   return Object.freeze({
+    setPlaybackState(state) {
+      if (!lifetime.disposed) settingsController.setPlaybackState(state);
+    },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
-      sidebar.destroy();
-      objectBrowser.destroy();
-      sheet.destroy();
-      chartAlignment.destroy();
-      settingsController.destroy();
-      panels.destroy();
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Shell cleanup failed.");
     },
   });
 }
@@ -57,6 +48,7 @@ function createSettingsController(
   documentTarget,
   windowTarget,
   { motionEnabled, onMotionChange },
+  lifetime,
 ) {
   if (typeof onMotionChange !== "function") {
     throw new TypeError("Planet shell motion change handler must be a function.");
@@ -74,6 +66,7 @@ function createSettingsController(
     throw new Error("Planet shell settings controls are incomplete.");
   }
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
   let highContrastSky = false;
 
@@ -110,6 +103,17 @@ function createSettingsController(
   renderSkyContrast();
 
   return Object.freeze({
+    setPlaybackState({ motionRequested, reason }) {
+      motionOn = motionRequested === true;
+      renderMotion();
+      const row = motion.closest(".planet-motion-setting-control");
+      const explanation = row.querySelector(".planet-motion-blocked");
+      const blocked = motionOn && reason === "reduced-motion";
+      row.dataset.motionBlocked = String(blocked);
+      explanation.hidden = !blocked;
+      if (blocked) motion.setAttribute("aria-describedby", explanation.id);
+      else motion.removeAttribute("aria-describedby");
+    },
     destroy() {
       events.abort();
       delete documentTarget.body.dataset.skyContrast;
@@ -117,7 +121,7 @@ function createSettingsController(
   });
 }
 
-function createObjectBrowserController(documentTarget, windowTarget) {
+function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   const search = documentTarget.querySelector(".planet-sidebar-search");
   const searchCard = documentTarget.querySelector(".planet-sidebar-search-card");
   const trigger = documentTarget.querySelector(".planet-sidebar-view-all");
@@ -139,6 +143,7 @@ function createObjectBrowserController(documentTarget, windowTarget) {
   }
 
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   const selectedSearchValue = search.value;
   let open = false;
   const filter = () => {
@@ -209,13 +214,18 @@ function createObjectBrowserController(documentTarget, windowTarget) {
   });
 }
 
-function createChartPixelAlignmentController(drawer, windowTarget) {
+function createChartPixelAlignmentController(drawer, windowTarget, lifetime) {
   const charts = [...drawer.querySelectorAll(".planet-chart")]
     .filter((chart) => chart instanceof windowTarget.HTMLElement);
   const panels = [...drawer.querySelectorAll(".planet-chart-panel")]
     .filter((panel) => panel instanceof windowTarget.HTMLDetailsElement);
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   let frame = 0;
+  lifetime.onDispose(() => {
+    if (frame !== 0) windowTarget.cancelAnimationFrame(frame);
+    frame = 0;
+  });
 
   const align = () => {
     frame = 0;
@@ -249,7 +259,7 @@ function createChartPixelAlignmentController(drawer, windowTarget) {
   });
 }
 
-function createSidebarController(documentTarget, windowTarget) {
+function createSidebarController(documentTarget, windowTarget, lifetime) {
   const sidebar = documentTarget.querySelector(".planet-sidebar");
   const toggle = documentTarget.querySelector(".planet-sidebar-toggle");
   if (!(sidebar instanceof windowTarget.HTMLElement)) {
@@ -261,6 +271,7 @@ function createSidebarController(documentTarget, windowTarget) {
 
   const body = documentTarget.body;
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   const collapsed = () => body.dataset.sidebarCollapsed === "true";
   const render = (next) => {
     if (next) body.dataset.sidebarCollapsed = "true";
@@ -284,7 +295,7 @@ function createSidebarController(documentTarget, windowTarget) {
   });
 }
 
-function createSheetController(drawer, windowTarget) {
+function createSheetController(drawer, windowTarget, lifetime) {
   const handle = drawer.querySelector(".planet-sheet-handle");
   if (!(handle instanceof windowTarget.HTMLButtonElement)) {
     throw new Error("Planet shell sheet handle is missing.");
@@ -297,7 +308,13 @@ function createSheetController(drawer, windowTarget) {
   let moved = false;
   let tracking = false;
   let draggedAt = -Infinity;
+  let snapFrame = 0;
+  lifetime.onDispose(() => {
+    if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
+    snapFrame = 0;
+  });
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   const limit = () => Math.max(0, windowTarget.innerHeight * 0.35 - 56);
   const expanded = () => drawer.classList.contains("is-expanded");
   const currentOffset = () => {
@@ -318,8 +335,11 @@ function createSheetController(drawer, windowTarget) {
     drawer.classList.toggle("is-expanded", next);
     handle.ariaExpanded = String(next);
     drawer.classList.remove("is-dragging");
-    windowTarget.requestAnimationFrame(() =>
-      drawer.style.removeProperty("transform"));
+    if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
+    snapFrame = windowTarget.requestAnimationFrame(() => {
+      snapFrame = 0;
+      if (!lifetime.disposed) drawer.style.removeProperty("transform");
+    });
   };
 
   handle.addEventListener("pointerdown", (event) => {
@@ -382,7 +402,7 @@ function createSheetController(drawer, windowTarget) {
   });
 }
 
-function createPanelController(drawer, objectId, windowTarget) {
+function createPanelController(drawer, objectId, windowTarget, lifetime) {
   const storageKey = `css.earth:${objectId}:panels`;
   const informationPanel = drawer.querySelector(".planet-information-panel");
   if (!(informationPanel instanceof windowTarget.HTMLElement)) {
@@ -401,6 +421,7 @@ function createPanelController(drawer, objectId, windowTarget) {
   } catch {}
 
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   const save = () => {
     try {
       windowTarget.localStorage.setItem(

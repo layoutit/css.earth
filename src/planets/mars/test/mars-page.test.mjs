@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { objectControls } from "../site/control-content.mjs";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
@@ -39,11 +40,10 @@ test("keeps Mars content free of Saturn and invented feature UI", () => {
 });
 
 test("wires every prepared Mars lens and only supported settings", () => {
-  assert.match(panel, /PREPARED_MARS_LENSES\.controls\.map/u);
+  assert.match(panel, /control-content\.mjs/u);
+  assert.deepEqual(objectControls.lenses.controls.map(({ id }) => id), PREPARED_MARS_LENSES.controls.map(({ id }) => id));
   assert.equal(PREPARED_MARS_LENSES.controls.length, 3);
-  assert.match(panel, /name: "speed"/u);
-  assert.match(panel, /name: "shadows"/u);
-  assert.doesNotMatch(panel, /name: "moons"|name: "rings"|name: "features"/u);
+  assert.deepEqual(objectControls.settings.controls.map(({ name }) => name), ["speed", "shadows"]);
   assert.match(client, /createMarsPanelControls/u);
   assert.match(client, /"\.planet-drawer-content \.planet-lenses"/u);
   assert.match(client, /"\.planet-settings-panel \.planet-settings"/u);

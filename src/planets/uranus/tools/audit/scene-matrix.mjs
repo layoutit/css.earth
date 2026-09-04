@@ -53,7 +53,7 @@ try {
     throw new Error(`Uranus returned ${response?.status() ?? "no response"}.`);
   }
   await page.waitForFunction(() => window.__uranus?.ready === true);
-  await page.evaluate(() => window.__uranus.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
 
   for (const lens of ["normal", "methane", "near-infrared"]) {
     await page.evaluate((id) => window.__uranus.lenses.select(id), lens);

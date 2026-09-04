@@ -26,7 +26,7 @@ export const browserProfile = Object.freeze({
     }),
   }),
   async waitForRuntime(page) { await page.waitForFunction(() => window.__earth?.ready === true); },
-  pause(page) { return page.evaluate(() => window.__earth.pause()); },
+  pause(page) { return page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click())); },
   camera(page) {
     return page.evaluate(() => {
       const { controlPitch: pitch, zoom } = window.__earth.camera.state();

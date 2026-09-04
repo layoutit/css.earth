@@ -1,3 +1,6 @@
+import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
+import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
+import { createLatestSelection } from "../../../platform/latest-selection.mjs";
 import {
   BASE_TILE,
   createPolyCamera,
@@ -35,44 +38,46 @@ import { PREPARED_VENUS_SKY_SUN } from "./preparedSkySun.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
-export function mountVenusClient(stage) {
+export function mountVenusClient(stage, { onError }) {
+  if (typeof onError !== "function") throw new TypeError("Venus requires onError.");
+  const lifetime = createSceneLifetime();
+  const warmImages = new Set();
+  lifetime.onDispose(() => {
+    releaseImageGroup(warmImages);
+  });
+  const decodeWarm = (url, url2x) => decodeImage(url, url2x, warmImages);
   const inputSurface = document.querySelector(".venus-input-surface");
   if (!(inputSurface instanceof HTMLElement)) {
     throw new Error("Venus input surface is missing.");
   }
-  let destroyed = false;
-  let shouldPlay = true;
+  let shouldPlay = false;
   let mounted = null;
   let orbitCamera = null;
   let featureControls = null;
   let lensControls = null;
   let sceneAnimations = Object.freeze([]);
-  let resourcesReleased = false;
   let ready;
   const controller = Object.freeze({
     get ready() {
       return ready;
     },
     pause() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = false;
-      document.documentElement.dataset.playing = "false";
+
       for (const animation of sceneAnimations) animation.pause();
     },
     resume() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = true;
       if (!mounted) return;
-      document.documentElement.dataset.playing = "true";
+
       for (const animation of sceneAnimations) animation.play();
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
       shouldPlay = false;
-      releaseResources();
-      delete document.documentElement.dataset.playing;
-      if (DEVELOPMENT_DIAGNOSTICS && window.__venus) delete window.__venus;
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Venus cleanup failed.");
     },
   });
   ready = start();
@@ -81,16 +86,16 @@ export function mountVenusClient(stage) {
   async function start() {
     try {
       featureControls = createVenusFeatureControls({
-        stage,
+        stage, lifetime, onError,
         onShadowsVisibilityChange(visible) {
           mounted?.setShadowsEnabled(visible);
           orbitCamera?.refresh();
         },
       });
-      lensControls = createVenusLensControls({ stage });
-      await Promise.all([
+      lensControls = createVenusLensControls({ stage, lifetime, onError });
+      await lifetime.wait(Promise.all([
         lensControls.prepare(PREPARED_VENUS_LENSES.defaultLens),
-        decodeImage(
+        decodeWarm(
           PREPARED_VENUS_SCENE.material.lightingUrl,
           PREPARED_VENUS_SCENE.material.lighting2xUrl,
         ),
@@ -100,18 +105,20 @@ export function mountVenusClient(stage) {
           highContrastUrl,
           highContrastUrl2x,
         }) => [
-          decodeImage(url, url2x),
-          decodeImage(highContrastUrl, highContrastUrl2x),
+          decodeWarm(url, url2x),
+          decodeWarm(highContrastUrl, highContrastUrl2x),
         ]),
-        decodeImage(
+        decodeWarm(
           PREPARED_VENUS_SKY_SUN.asset.url,
           PREPARED_VENUS_SKY_SUN.asset.url2x,
         ),
-      ]);
-      if (destroyed) return;
-      mounted = mountPreparedScene(stage, PREPARED_VENUS_SCENE);
+      ]));
+      if (lifetime.disposed) return;
+      mounted = mountPreparedScene(stage, PREPARED_VENUS_SCENE, lifetime);
+      warmImages.clear();
       sceneAnimations = Object.freeze(stage.getAnimations({ subtree: true }));
       for (const animation of sceneAnimations) {
+        lifetime.onDispose(() => animation.cancel());
         animation.currentTime = 0;
         if (shouldPlay) animation.play();
         else animation.pause();
@@ -120,17 +127,19 @@ export function mountVenusClient(stage) {
         inputSurface,
         mounted,
         plan: PREPARED_VENUS_SCENE.camera,
+        lifetime,
+        onError,
       });
       orbitCamera.setState({ zoom: orbitCamera.initialResponsiveZoom() });
       lensControls.bindRuntime();
       featureControls.bindRuntime({ animations: sceneAnimations });
-      document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
-      await waitForPaint();
-      if (destroyed) return;
+
+      await waitForScenePaint(lifetime);
+      if (lifetime.disposed) return;
       if (DEVELOPMENT_DIAGNOSTICS) {
-        window.__venus = Object.freeze({
+        const diagnostics = window.__venus = Object.freeze({
           ready: true,
-          pause: controller.pause,
+
           renderStats: Object.freeze({
             textureStats: Object.freeze({
               selectedPreparedDensity: CANONICAL_PREPARED_IMAGE_DENSITY,
@@ -155,34 +164,19 @@ export function mountVenusClient(stage) {
           stableNodes: mounted.stableNodes,
           assertStableDomIdentity: mounted.assertStableDomIdentity,
         });
+        lifetime.onDispose(() => { if (window.__venus === diagnostics) delete window.__venus; });
       }
     } catch (error) {
-      if (destroyed) return;
-      releaseResources();
+      if (lifetime.disposed) return;
+      const cleanupErrors = lifetime.destroy();
+      if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], "Venus startup failed.", { cause: error });
       throw error;
     }
   }
 
-  function releaseResources() {
-    if (resourcesReleased) return;
-    resourcesReleased = true;
-    orbitCamera?.destroy();
-    orbitCamera = null;
-    lensControls?.destroy();
-    lensControls = null;
-    featureControls?.destroy();
-    featureControls = null;
-    mounted?.destroy();
-    mounted = null;
-    sceneAnimations = Object.freeze([]);
-    stage.replaceChildren();
-    stage.classList.remove("venus-hide-atmosphere", "venus-hide-stars");
-    delete stage.dataset.lens;
-    delete stage.dataset.view;
-  }
 }
 
-function mountPreparedScene(stage, plan) {
+function mountPreparedScene(stage, plan, lifetime) {
   if (plan.schema !== "cssvenus-prepared-runtime-scene@1" ||
       plan.runtimeGeometry !== false || plan.runtimeRasterization !== false) {
     throw new TypeError("Venus retained scene plan is incompatible.");
@@ -190,6 +184,10 @@ function mountPreparedScene(stage, plan) {
   validatePreparedCubicSky(plan.starfield, { requireSun: false });
   const camera = createPolyCamera(plan.camera.state);
   const scene = createPolyScene(stage, { camera });
+  lifetime.onDispose(() => scene.destroy());
+  lifetime.onDispose(() => {
+    if (scene.cameraEl.parentNode === stage) delete stage.dataset.lens;
+  });
   scene.cameraEl.classList.add("planet-render-root");
   const system = createMesh(
     "venus-system",
@@ -205,6 +203,7 @@ function mountPreparedScene(stage, plan) {
   scene.sceneElement.appendChild(system);
 
   const materialComposite = document.createElement("div");
+  lifetime.onDispose(() => materialComposite.remove());
   materialComposite.className = "venus-material-composite planet-render-root";
   materialComposite.ariaHidden = "true";
   materialComposite.style.setProperty("--venus-camera-zoom", String(camera.state.zoom));
@@ -222,6 +221,7 @@ function mountPreparedScene(stage, plan) {
     objectId: "venus",
     requireSun: false,
   });
+  lifetime.onDispose(() => cubicSky.destroy());
   const skySun = mountRetainedDirectionalSun({
     host: stage,
     plan: PREPARED_VENUS_SKY_SUN,
@@ -229,6 +229,7 @@ function mountPreparedScene(stage, plan) {
     objectId: "venus",
     before: scene.cameraEl,
   });
+  lifetime.onDispose(() => skySun.destroy());
   const skybox = cubicSky.root;
   const skyboxCube = cubicSky.cube;
   const layerRegistration = registerBodyDependentLayers({
@@ -361,7 +362,7 @@ function createMesh(className, style) {
   return mesh;
 }
 
-function createVenusOrbitControls({ inputSurface, mounted, plan }) {
+function createVenusOrbitControls({ inputSurface, mounted, plan, lifetime, onError }) {
   const referenceMinimumPitch = plan.minimumControlPitchDegrees;
   const referenceMaximumPitch = plan.maximumControlPitchDegrees;
   const minimumZoom = plan.minimumZoom;
@@ -421,13 +422,18 @@ function createVenusOrbitControls({ inputSurface, mounted, plan }) {
     },
   });
   const mediaQuery = matchMedia(MOBILE_VIEWPORT_QUERY);
-  const wheelControls = createPolyOrbitControls(controlScene, {
+  const wheelControls = createPolyOrbitControls({
+    ...controlScene,
+    applyCamera: () => handleRuntimeEvent(() => controlScene.applyCamera()),
+  }, {
     drag: false,
     wheel: !mediaQuery.matches,
     minZoom: minimumZoom,
     maxZoom: maximumZoom,
   });
+  lifetime.onDispose(() => wheelControls.destroy());
   const dragControls = createUnboundedMatrixDragControls({
+    onError,
     inputSurface,
     trackballMetrics: () => measureRetainedPlanetTrackball({
       stage: mounted.scene.cameraEl.closest(".planet-stage"),
@@ -440,20 +446,23 @@ function createVenusOrbitControls({ inputSurface, mounted, plan }) {
       maximumZoom,
     }),
     rotate({ controlPitchDelta, controlYawDelta, zoom }) {
-      const previousPitch = safeCamera.state.rotX;
-      safeCamera.update({
-        rotX: previousPitch + controlPitchDelta,
-        rotY: safeCamera.state.rotY + controlYawDelta,
-        ...(zoom === undefined ? {} : { zoom }),
+      handleRuntimeEvent(() => {
+        const previousPitch = safeCamera.state.rotX;
+        safeCamera.update({
+          rotX: previousPitch + controlPitchDelta,
+          rotY: safeCamera.state.rotY + controlYawDelta,
+          ...(zoom === undefined ? {} : { zoom }),
+        });
+        orientation.rotate({
+          renderedPitchDelta: preparedScenePitch(safeCamera.state.rotX, plan) -
+            preparedScenePitch(previousPitch, plan),
+          yawDelta: controlYawDelta,
+        });
+        controlScene.applyCamera();
       });
-      orientation.rotate({
-        renderedPitchDelta: preparedScenePitch(safeCamera.state.rotX, plan) -
-          preparedScenePitch(previousPitch, plan),
-        yawDelta: controlYawDelta,
-      });
-      controlScene.applyCamera();
     },
   });
+  lifetime.onDispose(() => dragControls.destroy());
   const controls = Object.freeze({
     update(options) {
       wheelControls.update(options);
@@ -465,10 +474,12 @@ function createVenusOrbitControls({ inputSurface, mounted, plan }) {
     },
   });
   const inputPolicy = bindResponsiveOrbitPolicy({
+    onError,
     controls,
     inputSurface,
     mediaQuery,
   });
+  lifetime.onDispose(() => inputPolicy.destroy());
   const windowTarget = inputSurface.ownerDocument.defaultView;
   let responsiveFit = selectPreparedResponsiveZoom({
     stage: mounted.scene.cameraEl.closest(".planet-stage"),
@@ -481,16 +492,19 @@ function createVenusOrbitControls({ inputSurface, mounted, plan }) {
   safeCamera.update({ zoom: responsiveFit.zoom });
   const initialResponsiveZoom = responsiveFit.zoom;
   const handleViewportResize = () => {
-    responsiveFit = selectPreparedResponsiveZoom({
-      stage: mounted.scene.cameraEl.closest(".planet-stage"),
-      cameraElement: mounted.scene.cameraEl,
-      plan,
-      mobile: mediaQuery.matches,
-      mobilePreviewElement:
-        inputSurface.ownerDocument.querySelector(".planet-sidebar"),
+    handleRuntimeEvent(() => {
+      responsiveFit = selectPreparedResponsiveZoom({
+        stage: mounted.scene.cameraEl.closest(".planet-stage"),
+        cameraElement: mounted.scene.cameraEl,
+        plan,
+        mobile: mediaQuery.matches,
+        mobilePreviewElement:
+          inputSurface.ownerDocument.querySelector(".planet-sidebar"),
+      });
+      controlScene.applyCamera();
     });
-    controlScene.applyCamera();
   };
+  lifetime.onDispose(() => windowTarget?.removeEventListener("resize", handleViewportResize));
   windowTarget?.addEventListener("resize", handleViewportResize, {
     passive: true,
   });
@@ -547,6 +561,11 @@ function createVenusOrbitControls({ inputSurface, mounted, plan }) {
       controls.destroy();
     },
   });
+
+  function handleRuntimeEvent(callback) {
+    if (lifetime.disposed) return;
+    try { callback(); } catch (error) { onError(error); }
+  }
 }
 
 function preparedMaterialFrame(lightViewZ, material) {
@@ -580,7 +599,7 @@ function normalizeDegrees(degrees) {
   return (degrees % 360 + 540) % 360 - 180;
 }
 
-function createVenusLensControls({ stage }) {
+function createVenusLensControls({ stage, lifetime, onError }) {
   if (PREPARED_VENUS_LENSES.schema !== "cssvenus-prepared-lenses@1") {
     throw new TypeError("Venus lens plan is incompatible.");
   }
@@ -594,27 +613,46 @@ function createVenusLensControls({ stage }) {
   const buttons = new Map([...root.querySelectorAll('button[name="lens"]')].map(
     (button) => [button.value, button],
   ));
-  if (buttons.size !== controlsById.size) {
+  if (buttons.size !== controlsById.size || controlsById.size !== PREPARED_VENUS_LENSES.controls.length ||
+      buttons.size !== root.querySelectorAll('button[name="lens"]').length ||
+      [...buttons.keys()].some((id) => !controlsById.has(id))) {
     throw new Error("Venus lens selector does not match prepared lenses.");
   }
   root.classList.add("is-loading");
   for (const button of buttons.values()) button.disabled = true;
   const cache = new Map();
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   let activeId = PREPARED_VENUS_LENSES.defaultLens;
   let activeReady = false;
-  let request = 0;
-  let destroyed = false;
+  let desiredId = activeId;
   for (const [id, button] of buttons) {
     button.addEventListener("click", () => void select(id).catch((error) => {
       console.error(error);
     }), { signal: events.signal });
   }
+  const selection = createLatestSelection({
+    lifetime, onFatalError: onError,
+    onBusyChange(busy) { root.classList.toggle("is-loading", busy); },
+  });
+  lifetime.onDispose(() => {
+    activeReady = false;
+    root.classList.remove("is-loading");
+    for (const button of buttons.values()) button.disabled = true;
+  });
+  lifetime.onDispose(() => {
+    const errors = [];
+    for (const [id, entry] of cache) {
+      try { releaseLensDecode(id, entry); } catch (error) { errors.push(error); }
+    }
+    cache.clear();
+    if (errors.length) throw new AggregateError(errors, "Lens cleanup failed.");
+  });
   return Object.freeze({
     prepare,
     select,
     bindRuntime() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       activeReady = true;
       publish(activeId);
       root.classList.remove("is-loading");
@@ -627,65 +665,44 @@ function createVenusLensControls({ stage }) {
       return [...cache.values()].reduce((count, entry) =>
         count + (entry.images?.length ?? 0), 0);
     },
-    destroy() {
-      if (destroyed) return;
-      destroyed = true;
-      activeReady = false;
-      request += 1;
-      events.abort();
-      root.classList.remove("is-loading");
-      for (const button of buttons.values()) button.disabled = true;
-      for (const [id, entry] of cache) releaseLensDecode(id, entry);
-      cache.clear();
-      delete stage.dataset.lens;
-      delete stage.dataset.view;
-    },
+
   });
 
   async function select(id) {
-    if (!controlsById.has(id)) {
-      throw new RangeError(`Unknown Venus lens: ${id}.`);
-    }
-    if (!activeReady || destroyed) return false;
-    const selectionRequest = ++request;
-    root.classList.add("is-loading");
-    for (const [cachedId, entry] of cache) {
-      if (cachedId !== id && cachedId !== activeId) entry.wanted = false;
-    }
-    try {
-      await prepare(id);
-      if (destroyed || selectionRequest !== request) return false;
-      activeId = id;
-      publish(id);
-      releaseInactiveLensImages(id);
-      return true;
-    } finally {
-      if (selectionRequest === request) root.classList.remove("is-loading");
-    }
+    if (!controlsById.has(id)) throw new RangeError(`Unknown Venus lens: ${id}.`);
+    if (lifetime.disposed || !activeReady) return false;
+    desiredId = id;
+    return selection.run({
+      prepare: () => prepare(id),
+      commit() {
+        publish(id);
+        activeId = id;
+        releaseInactiveLensImages(id);
+      },
+      onCurrentFailure() { desiredId = activeId; },
+      discard() {
+        const entry = cache.get(id);
+        if (entry && id !== activeId && id !== desiredId) releaseLensDecode(id, entry);
+      },
+    });
   }
 
   function prepare(id) {
+    if (lifetime.disposed) return Promise.resolve(null);
     const lens = controlsById.get(id);
     if (!lens) throw new RangeError(`Unknown Venus lens: ${id}.`);
     const existing = cache.get(id);
-    if (existing) {
-      existing.wanted = true;
-      return existing.promise;
-    }
-    const entry = { images: null, promise: null, released: false, wanted: true };
-    entry.promise = Promise.all([
-      decodeImage(lens.surfaceUrl, lens.surface2xUrl),
-      decodeImage(lens.polesUrl, lens.poles2xUrl),
-      decodeImage(lens.materialUrl, lens.material2xUrl),
-    ]).then((images) => {
-      entry.images = images;
-      if (!entry.wanted || destroyed) releaseLensDecode(id, entry);
-      return images;
-    }).catch((error) => {
-      if (cache.get(id) === entry) cache.delete(id);
-      throw error;
-    });
+    if (existing) return existing.promise;
+    const urls = [lens.surface2xUrl || lens.surfaceUrl, lens.poles2xUrl || lens.polesUrl, lens.material2xUrl || lens.materialUrl];
+    const entry = { images: urls.map(() => Object.assign(new Image(), { decoding: "async" })), promise: null, released: false };
     cache.set(id, entry);
+    entry.promise = Promise.all(entry.images.map((image, index) =>
+      decodePreparedImage(image, urls[index]))).then((images) =>
+      entry.released ? null : images, (error) => {
+        if (entry.released) return null;
+        releaseLensDecode(id, entry);
+        throw error;
+      });
     return entry.promise;
   }
 
@@ -697,13 +714,12 @@ function createVenusLensControls({ stage }) {
   }
 
   function releaseLensDecode(id, entry) {
-    entry.wanted = false;
-    if (!entry.images || entry.released) return;
+    if (entry.released) return;
     entry.released = true;
-    entry.images.forEach(releaseDecodedImage);
-    entry.images = null;
-    entry.promise = null;
     if (cache.get(id) === entry) cache.delete(id);
+    const images = entry.images;
+    entry.images = [];
+    releaseImageGroup(images);
   }
 
   function publish(id) {
@@ -715,28 +731,22 @@ function createVenusLensControls({ stage }) {
   }
 }
 
-function releaseDecodedImage(image) {
-  if (!(image instanceof HTMLImageElement)) return;
-  image.removeAttribute("src");
-}
-
-async function decodeImage(url, url2x) {
-  const selected = url2x || url;
-  const image = new Image();
-  image.decoding = "async";
-  image.src = selected;
-  await image.decode();
-  if (!image.naturalWidth || !image.naturalHeight) {
-    throw new Error(`Prepared Venus image did not decode: ${selected}.`);
-  }
-  return image;
-}
-
-function waitForPaint() {
-  return new Promise((resolve) => requestAnimationFrame(() =>
-    requestAnimationFrame(resolve)));
+function decodeImage(url, url2x, owner) {
+  const image = Object.assign(new Image(), { decoding: "async" });
+  owner.add(image);
+  return decodePreparedImage(image, url2x || url);
 }
 
 function clamp(value, minimum, maximum) {
   return Math.max(minimum, Math.min(maximum, value));
+}
+
+function releaseImageGroup(images) {
+  const errors = [];
+  for (const image of images) {
+    try { releasePreparedImage(image); } catch (error) { errors.push(error); }
+  }
+  if (Array.isArray(images)) images.length = 0;
+  else images.clear();
+  if (errors.length) throw new AggregateError(errors, "Prepared image cleanup failed.");
 }

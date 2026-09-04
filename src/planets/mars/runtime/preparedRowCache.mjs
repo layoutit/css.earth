@@ -1,3 +1,5 @@
+import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
+
 const ROW_SHARD_CACHE_MODEL = "row-shard-cache";
 
 export function createRowShardCache(plan) {
@@ -260,8 +262,7 @@ function createPreparedImagePool(capacity) {
       const ticket = ++slot.ticket;
       slot.key = key;
       slot.ready = false;
-      slot.image.src = url;
-      const pending = slot.image.decode().then(() => {
+      const pending = decodePreparedImage(slot.image, url).then(() => {
         if (destroyed || slot.ticket !== ticket) return false;
         slot.pending = null;
         slot.ready = true;
@@ -272,7 +273,7 @@ function createPreparedImagePool(capacity) {
         slot.pending = null;
         slot.ready = false;
         slot.key = null;
-        slot.image.removeAttribute("src");
+        releasePreparedImage(slot.image);
         throw new Error(`Prepared material image decode failed: ${url}`, {
           cause: error,
         });
@@ -297,13 +298,16 @@ function createPreparedImagePool(capacity) {
       if (destroyed) return;
       destroyed = true;
       byKey.clear();
+      const errors = [];
       for (const slot of slots) {
         slot.ticket += 1;
-        slot.image.removeAttribute("src");
+        try { releasePreparedImage(slot.image); } catch (error) { errors.push(error); }
         slot.key = null;
         slot.pending = null;
         slot.ready = false;
       }
+      slots.length = 0;
+      if (errors.length) throw new AggregateError(errors, "Prepared row cleanup failed.");
     },
   });
   return pool;

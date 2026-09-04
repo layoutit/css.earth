@@ -21,16 +21,23 @@ import { viewSunDirectionToPreparedLightDirection } from
   "../../../platform/directional-sun-coordinate.mjs";
 import { mountRetainedDirectionalSun } from
   "../../../platform/directional-sun-runtime.mjs";
-import { PLANET_SPEED_STATES } from "../../../platform/planet-feature-controls.mjs";
+import { bindSpeedControl } from "../../../platform/planet-feature-controls.mjs";
+import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
+import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
+import { createLatestSelection } from "../../../platform/latest-selection.mjs";
 import { PREPARED_MERCURY_ASSETS } from "./preparedAssets.mjs";
 import { PREPARED_MERCURY_LENSES } from "./preparedLenses.mjs";
 import { createMercuryRowShardCache } from "./preparedRowCache.mjs";
+import { createMercuryLensImageGroups } from "./lens-image-groups.mjs";
 import { PREPARED_MERCURY_SCENE } from "./preparedScene.mjs";
 import { PREPARED_MERCURY_SKY_SUN } from "./preparedSkySun.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
+const lensOwners = new WeakMap();
 
-export function mountMercuryClient(stage) {
+export function mountMercuryClient(stage, { onError } = {}) {
+  if (typeof onError !== "function") throw new TypeError("Mercury requires onError.");
+  const lifetime = createSceneLifetime();
   const inputSurface = document.querySelector(".mercury-input-surface");
   if (!(inputSurface instanceof HTMLElement)) {
     throw new Error("Mercury input surface is missing.");
@@ -49,45 +56,57 @@ export function mountMercuryClient(stage) {
       PREPARED_MERCURY_ASSETS.lighting.frameCount - 1) {
     throw new Error("Mercury has no prepared full-phase curvature frame.");
   }
-  const materialCache = createMercuryRowShardCache(materialBank);
-  let destroyed = false;
-  let shouldPlay = true;
+  const materialCache = createMercuryRowShardCache(materialBank, { onError });
+  lifetime.onDispose(materialCache.destroy);
+  const warmImages = new Set();
+  lifetime.onDispose(() => {
+    const owned = [...warmImages];
+    warmImages.clear();
+    const errors = [];
+    for (const image of owned) {
+      try { releasePreparedImage(image); } catch (error) { errors.push(error); }
+    }
+    if (errors.length) throw new AggregateError(errors, "Mercury warm image cleanup failed.");
+  });
+  let shouldPlay = false;
   let mounted = null;
   let orbit = null;
   let lensControls = null;
   let settingControls = null;
   let animations = Object.freeze([]);
   let ready = null;
-  let resourcesReleased = false;
   let shadowsEnabled = false;
+  let diagnostics = null;
+  lifetime.onDispose(() => {
+    if (window.__mercury === diagnostics) delete window.__mercury;
+  });
 
   const controller = Object.freeze({
     get ready() {
       return ready;
     },
     pause() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = false;
-      document.documentElement.dataset.playing = "false";
       for (const animation of animations) animation.pause();
     },
     resume() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = true;
       if (!mounted) return;
-      document.documentElement.dataset.playing = "true";
       for (const animation of animations) animation.play();
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
       shouldPlay = false;
-      releaseResources();
-      delete document.documentElement.dataset.playing;
-      if (DEVELOPMENT_DIAGNOSTICS && window.__mercury) delete window.__mercury;
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Mercury cleanup failed.");
     },
   });
-  ready = start();
+  ready = lifetime.wait(start()).then((result) => result.value).catch((error) => {
+    const cleanupErrors = lifetime.destroy();
+    if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], error.message, { cause: error });
+    throw error;
+  });
   return controller;
 
   async function start() {
@@ -118,24 +137,27 @@ export function mountMercuryClient(stage) {
           PREPARED_MERCURY_SKY_SUN.asset.url2x,
         ),
       ]);
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       mounted = mountPreparedScene(stage);
+      // Warm-only handles are no longer needed once retained leaves own URLs.
+      warmImages.clear();
       animations = Object.freeze(stage.getAnimations({ subtree: true }));
       for (const animation of animations) {
+        lifetime.onDispose(() => animation.cancel());
+        animation.pause();
         animation.currentTime = 0;
-        if (!shouldPlay) animation.pause();
       }
       orbit = createVerticalOrbit();
       lensControls.bind();
       settingControls.bind();
+      if (lifetime.disposed) return;
+      if (shouldPlay) for (const animation of animations) animation.play();
       orbit.setState({ zoom: orbit.initialResponsiveZoom() });
-      await waitForPreparedScenePaint();
-      if (destroyed) return;
-      document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
+      await waitForScenePaint(lifetime);
+      if (lifetime.disposed) return;
       if (DEVELOPMENT_DIAGNOSTICS) publishDiagnostics();
     } catch (error) {
-      if (destroyed) return;
-      releaseResources();
+      if (lifetime.disposed) return;
       throw error;
     }
   }
@@ -144,37 +166,24 @@ export function mountMercuryClient(stage) {
     return url2x || url;
   }
 
-  async function decodePrepared(url, url2x = "") {
+  async function decodePrepared(url, url2x = "", owner = warmImages) {
+    if (lifetime.disposed) return null;
     const selected = canonicalPreparedUrl(url, url2x);
     const image = new Image();
+    owner.add(image);
     image.decoding = "sync";
-    image.src = selected;
     try {
-      await image.decode();
+      await decodePreparedImage(image, selected);
     } catch (error) {
-      throw new Error(`Prepared Mercury image decode failed: ${selected}`, {
-        cause: error,
-      });
+      if (owner.delete(image)) {
+        try { releasePreparedImage(image); } catch (cleanupError) {
+          throw new AggregateError([error, cleanupError], error.message, { cause: error });
+        }
+      }
+      if (lifetime.disposed) return null;
+      throw error;
     }
     return image;
-  }
-
-  function releaseResources() {
-    if (resourcesReleased) return;
-    resourcesReleased = true;
-    lensControls?.destroy();
-    lensControls = null;
-    settingControls?.destroy();
-    settingControls = null;
-    orbit?.destroy();
-    orbit = null;
-    materialCache.destroy();
-    mounted?.viewBank.destroy();
-    mounted?.roots.forEach((root) => root.remove());
-    mounted = null;
-    animations = Object.freeze([]);
-    delete stage.dataset.lens;
-    delete stage.dataset.view;
   }
 
   function mountPreparedScene(host) {
@@ -182,6 +191,13 @@ export function mountMercuryClient(stage) {
     delete stage.dataset.lens;
     delete stage.dataset.view;
     const cameraRoot = document.createElement("div");
+    lifetime.onDispose(() => cameraRoot.remove());
+    lifetime.onDispose(() => {
+      if (cameraRoot.parentNode !== host) return;
+      delete host.dataset.lens;
+      delete host.dataset.view;
+      host.classList.remove("mercury-hide-shadows");
+    });
     cameraRoot.className = "polycss-camera mercury-camera planet-render-root";
     cameraRoot.style.perspective = "1000000px";
 
@@ -210,10 +226,12 @@ export function mountMercuryClient(stage) {
     body.append(...PREPARED_MERCURY_SCENE.bodyLeaves.map(createLeaf));
     system.appendChild(body);
     const viewBank = createPreparedViewBank(system, normal);
+    lifetime.onDispose(viewBank.destroy);
     sceneRoot.appendChild(system);
     cameraRoot.appendChild(sceneRoot);
 
     const materialRoot = document.createElement("div");
+    lifetime.onDispose(() => materialRoot.remove());
     materialRoot.className = "mercury-material-root planet-render-root";
     const materialLeaf = document.createElement("s");
     materialLeaf.className = "mercury-material";
@@ -227,6 +245,7 @@ export function mountMercuryClient(stage) {
       objectId: "mercury",
       requireSun: false,
     });
+    lifetime.onDispose(cubicSky.destroy);
     host.append(cameraRoot, materialRoot);
     const skySun = mountRetainedDirectionalSun({
       host,
@@ -235,6 +254,7 @@ export function mountMercuryClient(stage) {
       objectId: "mercury",
       before: cameraRoot,
     });
+    lifetime.onDispose(skySun.destroy);
     const stableNodes = Object.freeze([...host.querySelectorAll("*")]);
     const stableParents = Object.freeze(stableNodes.map((node) => node.parentNode));
     return Object.freeze({
@@ -446,6 +466,17 @@ export function mountMercuryClient(stage) {
     let interactionEnds = 0;
     let publications = 0;
     let destroyedOrbit = false;
+    const retireFailure = (error) => {
+      if (destroyedOrbit || lifetime.disposed) return;
+      const cleanupErrors = lifetime.destroy();
+      onError(cleanupErrors.length
+        ? new AggregateError([error, ...cleanupErrors], error.message, { cause: error })
+        : error);
+    };
+    const guardNative = (callback) => (...args) => {
+      if (destroyedOrbit || lifetime.disposed) return;
+      try { return callback(...args); } catch (error) { retireFailure(error); }
+    };
     let skySunViewDirection = PREPARED_MERCURY_SKY_SUN.referenceViewDirection;
     let sunViewDirection = viewSunDirectionToPreparedLightDirection(
       skySunViewDirection,
@@ -453,7 +484,7 @@ export function mountMercuryClient(stage) {
     let materialFrame = PREPARED_MERCURY_SCENE.material.defaultFrame;
     let materialLightRollDegrees = 0;
     const publish = () => {
-      if (destroyedOrbit || !mounted) return;
+      if (destroyedOrbit || lifetime.disposed || !mounted) return;
       const controlPitch = safeCamera.state.rotX;
       mounted.sceneRoot.style.transform =
         `scale(${plan.sceneScale}) ${orientation.scene()}`;
@@ -484,7 +515,7 @@ export function mountMercuryClient(stage) {
       cameraEl: mounted.cameraRoot,
       sceneElement: mounted.sceneRoot,
       camera: safeCamera,
-      applyCamera: publish,
+      applyCamera: guardNative(publish),
     });
     const mobileQuery = matchMedia(MOBILE_VIEWPORT_QUERY);
     const wheelControls = createPolyOrbitControls(scene, {
@@ -493,8 +524,10 @@ export function mountMercuryClient(stage) {
       minZoom: plan.minimumZoom,
       maxZoom: plan.maximumZoom,
     });
+    lifetime.onDispose(wheelControls.destroy);
     const dragControls = createUnboundedMatrixDragControls({
       inputSurface,
+      onError: retireFailure,
       trackballMetrics: () => measureRetainedPlanetTrackball({
         stage,
         cameraElement: mounted.cameraRoot,
@@ -527,6 +560,7 @@ export function mountMercuryClient(stage) {
         publish();
       },
     });
+    lifetime.onDispose(dragControls.destroy);
     const controls = Object.freeze({
       update(options) {
         wheelControls.update(options);
@@ -541,7 +575,9 @@ export function mountMercuryClient(stage) {
       controls,
       inputSurface,
       mediaQuery: mobileQuery,
+      onError: retireFailure,
     });
+    lifetime.onDispose(policy.destroy);
     const windowTarget = inputSurface.ownerDocument.defaultView;
     let responsiveFit = selectPreparedResponsiveZoom({
       stage,
@@ -552,7 +588,7 @@ export function mountMercuryClient(stage) {
     });
     safeCamera.update({ zoom: responsiveFit.zoom });
     const initialResponsiveZoom = responsiveFit.zoom;
-    const handleViewportResize = () => {
+    const handleViewportResize = guardNative(() => {
       responsiveFit = selectPreparedResponsiveZoom({
         stage,
         cameraElement: mounted.cameraRoot,
@@ -562,11 +598,13 @@ export function mountMercuryClient(stage) {
           stage.ownerDocument.querySelector(".planet-sidebar"),
       });
       publish();
-    };
+    });
     windowTarget?.addEventListener("resize", handleViewportResize, {
       passive: true,
     });
-    materialCache.onReady(publish);
+    lifetime.onDispose(() => windowTarget?.removeEventListener("resize", handleViewportResize));
+    lifetime.onDispose(() => { destroyedOrbit = true; materialCache.onReady(null); });
+    materialCache.onReady(guardNative(publish));
     return Object.freeze({
       initialResponsiveZoom() {
         return initialResponsiveZoom;
@@ -596,6 +634,8 @@ export function mountMercuryClient(stage) {
         });
       },
       setState({ controlPitch, controlYaw, zoom } = {}) {
+        if (destroyedOrbit || lifetime.disposed) return this.state();
+        try {
         dragControls.stop();
         const resetsOrientation = controlPitch !== undefined ||
           controlYaw !== undefined;
@@ -611,10 +651,12 @@ export function mountMercuryClient(stage) {
           });
         }
         publish();
+        } catch (error) { retireFailure(error); throw error; }
         return this.state();
       },
       refresh() {
-        publish();
+        if (destroyedOrbit || lifetime.disposed) return;
+        try { publish(); } catch (error) { retireFailure(error); throw error; }
       },
       stats() {
         return Object.freeze({
@@ -709,18 +751,41 @@ export function mountMercuryClient(stage) {
     }
     const lenses = new Map(PREPARED_MERCURY_LENSES.controls.map((lens) =>
       [lens.id, lens]));
-    const buttons = new Map([...root.querySelectorAll('button[name="lens"]')].map(
+    const buttonList = [...root.querySelectorAll('button[name="lens"]')];
+    const buttons = new Map(buttonList.map(
       (button) => [button.value, button],
     ));
-    if (buttons.size !== lenses.size) {
+    if (buttons.size !== lenses.size || buttonList.length !== buttons.size ||
+        lenses.size !== PREPARED_MERCURY_LENSES.controls.length ||
+        [...lenses.keys()].some((id) => !buttons.has(id))) {
       throw new Error("Mercury lens selector does not match prepared lenses.");
     }
     const events = new AbortController();
-    const decoded = new Map();
+    const owner = {};
+    lensOwners.set(root, owner);
+    const images = createMercuryLensImageGroups();
+    lifetime.onDispose(images.destroy);
     let activeLens = PREPARED_MERCURY_LENSES.defaultLens;
-    let request = 0;
+    let desiredLens = activeLens;
     let bound = false;
-    let destroyedLenses = false;
+    let busy = false;
+    const selection = createLatestSelection({
+      lifetime, onFatalError: onError,
+      onBusyChange(value) {
+        busy = value;
+        root.classList.toggle("is-loading", value);
+        root.setAttribute("aria-busy", String(value));
+      },
+    });
+    lifetime.onDispose(() => {
+      bound = false;
+      events.abort();
+      if (lensOwners.get(root) !== owner) return;
+      lensOwners.delete(root);
+      root.classList.remove("is-loading");
+      root.setAttribute("aria-busy", "false");
+      for (const button of buttons.values()) button.disabled = true;
+    });
     root.classList.add("is-loading");
     for (const button of buttons.values()) button.disabled = true;
     for (const [id, button] of buttons) {
@@ -731,48 +796,29 @@ export function mountMercuryClient(stage) {
     publishSelection();
     return Object.freeze({
       state() {
-        return Object.freeze({ id: activeLens, ready: bound && !destroyedLenses });
+        return Object.freeze({ id: activeLens, ready: bound && !busy && !lifetime.disposed });
       },
       bind() {
-        if (destroyedLenses) return;
+        if (lifetime.disposed) return;
         bound = true;
         root.classList.remove("is-loading");
         for (const button of buttons.values()) button.disabled = false;
       },
       select,
-      destroy() {
-        if (destroyedLenses) return;
-        destroyedLenses = true;
-        bound = false;
-        request += 1;
-        events.abort();
-        root.classList.remove("is-loading");
-        for (const button of buttons.values()) button.disabled = true;
-        for (const [id, entry] of decoded) releaseLensDecode(id, entry);
-        decoded.clear();
-        delete stage.dataset.lens;
-        delete stage.dataset.view;
-      },
       retainedImageCount() {
-        return [...decoded.values()].reduce(
-          (count, entry) => count + (entry.images?.length ?? 0),
-          0,
-        );
+        return images.stats().retainedImageCount;
       },
     });
 
     async function select(id) {
       const lens = lenses.get(id);
       if (!lens) throw new RangeError(`Unknown Mercury lens: ${id}.`);
-      if (destroyedLenses || !bound) return false;
-      const selectionRequest = ++request;
-      root.classList.add("is-loading");
-      try {
-        await prepareLens(lens);
-        if (destroyed || destroyedLenses || selectionRequest !== request ||
-            !mounted) {
-          return false;
-        }
+      if (lifetime.disposed || !bound) return false;
+      desiredLens = id;
+      return selection.run({
+        prepare: () => prepareLens(lens),
+        commit() {
+        if (!mounted) throw new Error("Mercury presentation is unavailable.");
         if (lens.view === "exterior") {
           const surfaceUrl = canonicalPreparedUrl(
             lens.surfaceUrl,
@@ -811,82 +857,49 @@ export function mountMercuryClient(stage) {
         }
         activeLens = id;
         publishSelection();
-        releaseInactiveLensImages(id);
-        return true;
-      } finally {
-        if (selectionRequest === request) root.classList.remove("is-loading");
-      }
+        images.retainOnly([id]);
+        },
+        onCurrentFailure() {
+          desiredLens = activeLens;
+          images.retainOnly([activeLens]);
+          publishSelection();
+        },
+        discard() { images.retainOnly([activeLens, desiredLens]); },
+      });
     }
 
     function prepareLens(lens) {
       if (lens.id === PREPARED_MERCURY_LENSES.defaultLens) {
         return Promise.resolve(Object.freeze([]));
       }
-      let entry = decoded.get(lens.id);
-      if (!entry) {
-        entry = {
-          images: null,
-          promise: null,
-          released: false,
-          wanted: true,
-        };
-        const requests = lens.view === "interior"
-          ? preparedInteriorDecodeRequests()
-          : [decodePrepared(lens.surfaceUrl, lens.surface2xUrl)];
-        entry.promise = Promise.all(requests).then((images) => {
-          entry.images = images;
-          if (!entry.wanted) releaseLensDecode(lens.id, entry);
-          return images;
-        }, (error) => {
-          if (decoded.get(lens.id) === entry) decoded.delete(lens.id);
-          throw error;
-        });
-        decoded.set(lens.id, entry);
-      }
-      entry.wanted = true;
-      return entry.promise;
+      return images.load(lens.id, lens.view === "interior"
+        ? preparedInteriorDecodeRequests()
+        : [canonicalPreparedUrl(lens.surfaceUrl, lens.surface2xUrl)]);
     }
 
     function preparedInteriorDecodeRequests() {
       return [
-        decodePrepared(
+        canonicalPreparedUrl(
           PREPARED_MERCURY_ASSETS.interior.outerSurfaceUrl,
           PREPARED_MERCURY_ASSETS.interior.outerSurface2xUrl,
         ),
-        decodePrepared(
+        canonicalPreparedUrl(
           PREPARED_MERCURY_ASSETS.interior.outerPolesUrl,
           PREPARED_MERCURY_ASSETS.interior.outerPoles2xUrl,
         ),
-        decodePrepared(
+        canonicalPreparedUrl(
           PREPARED_MERCURY_ASSETS.interior.coreUrl,
           PREPARED_MERCURY_ASSETS.interior.core2xUrl,
         ),
-        decodePrepared(
+        canonicalPreparedUrl(
           PREPARED_MERCURY_ASSETS.interior.corePolesUrl,
           PREPARED_MERCURY_ASSETS.interior.corePoles2xUrl,
         ),
-        decodePrepared(
+        canonicalPreparedUrl(
           PREPARED_MERCURY_ASSETS.interior.sectionUrl,
           PREPARED_MERCURY_ASSETS.interior.section2xUrl,
         ),
       ];
-    }
-
-    function releaseInactiveLensImages(selectedId) {
-      for (const [id, entry] of decoded) {
-        if (id === selectedId) continue;
-        releaseLensDecode(id, entry);
-      }
-    }
-
-    function releaseLensDecode(id, entry) {
-      entry.wanted = false;
-      if (!entry.images || entry.released) return;
-      entry.released = true;
-      entry.images.forEach(releaseDecodedImage);
-      if (decoded.get(id) === entry) decoded.delete(id);
-      entry.images = null;
-      entry.promise = null;
     }
 
     function publishSelection() {
@@ -904,45 +917,31 @@ export function mountMercuryClient(stage) {
       throw new Error("Mercury settings controls are incomplete.");
     }
     const events = new AbortController();
-    let speedIndex = PLANET_SPEED_STATES.findIndex(({ value }) => value === 1);
     let bound = false;
-    speed.dataset.state = "normal";
-    speed.setAttribute("aria-label", "Speed: normal");
     shadows.checked = false;
-    const onSpeed = () => {
-      speedIndex = (speedIndex + 1) % PLANET_SPEED_STATES.length;
-      publishSpeed();
-    };
+    const speedControl = bindSpeedControl({
+      button: speed, lifetime, onError,
+      onChange(rate) { for (const animation of animations) animation.playbackRate = rate; },
+    });
+    lifetime.onDispose(() => { bound = false; events.abort(); });
     const onShadows = () => {
-      shadowsEnabled = shadows.checked;
-      stage.classList.toggle("mercury-hide-shadows", !shadows.checked);
-      orbit?.refresh();
+      if (lifetime.disposed) return;
+      try {
+        shadowsEnabled = shadows.checked;
+        stage.classList.toggle("mercury-hide-shadows", !shadows.checked);
+        orbit?.refresh();
+      } catch (error) { onError(error); }
     };
     return Object.freeze({
       bind() {
         if (bound) return;
         bound = true;
-        speed.addEventListener("click", onSpeed, { signal: events.signal });
         shadows.addEventListener("change", onShadows, { signal: events.signal });
-        publishSpeed();
+        for (const animation of animations) animation.playbackRate = speedControl.state().speed;
+        speedControl.setEnabled(true);
         onShadows();
       },
-      destroy() {
-        if (!bound) return;
-        bound = false;
-        events.abort();
-        shadowsEnabled = false;
-        for (const animation of animations) animation.playbackRate = 1;
-        stage.classList.remove("mercury-hide-shadows");
-      },
     });
-
-    function publishSpeed() {
-      const state = PLANET_SPEED_STATES[speedIndex];
-      speed.dataset.state = state.label;
-      speed.setAttribute("aria-label", `Speed: ${state.label}`);
-      for (const animation of animations) animation.playbackRate = state.value;
-    }
   }
 
   function lensById(id) {
@@ -952,9 +951,8 @@ export function mountMercuryClient(stage) {
   }
 
   function publishDiagnostics() {
-    window.__mercury = Object.freeze({
+    diagnostics = Object.freeze({
       ready: true,
-      pause: controller.pause,
       camera: Object.freeze({
         state: orbit.state,
         setState: orbit.setState,
@@ -987,6 +985,7 @@ export function mountMercuryClient(stage) {
       stableNodes: mounted.stableNodes,
       assertStableDomIdentity: mounted.assertStableDomIdentity,
     });
+    window.__mercury = diagnostics;
   }
 }
 
@@ -1002,16 +1001,6 @@ function validatePreparedStarfield() {
       "inverse-unbounded-accumulated-matrix3d") {
     throw new TypeError("Mercury cubic-sky camera binding is incompatible.");
   }
-}
-
-function waitForPreparedScenePaint() {
-  return new Promise((resolve) => requestAnimationFrame(() =>
-    requestAnimationFrame(resolve)));
-}
-
-function releaseDecodedImage(image) {
-  if (!(image instanceof HTMLImageElement)) return;
-  image.removeAttribute("src");
 }
 
 function clamp(value, minimum, maximum) {

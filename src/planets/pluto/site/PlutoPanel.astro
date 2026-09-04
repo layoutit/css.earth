@@ -1,22 +1,12 @@
 ---
+import { objectControls } from "./control-content.mjs";
+const { lenses, settings } = objectControls;
 import PlanetShell from "../../../../site/components/PlanetShell.astro";
 import { PREPARED_SHELL_TITLES } from
   "../../../../site/prepared-shell-titles.mjs";
 import { PREPARED_PLUTO_PANEL } from "./preparedPanel.mjs";
 import { PREPARED_PLUTO_TITLE } from "./preparedTitle.mjs";
-import { PREPARED_PLUTO_LENSES } from "../runtime/preparedLenses.mjs";
 
-const lenses = {
-  title: PREPARED_SHELL_TITLES.lenses,
-  defaultLens: PREPARED_PLUTO_LENSES.defaultLens,
-  controls: PREPARED_PLUTO_LENSES.controls.map((lens) => ({
-    id: lens.id,
-    label: lens.label,
-    thumbnailUrl: lens.thumbnailUrl,
-    description: lens.qualification,
-    title: `${lens.label}: ${lens.qualification}`,
-  })),
-};
 
 const resources = [
   { label: "NASA", role: "facts", description: "Pluto facts", href: "https://science.nasa.gov/dwarf-planets/pluto/facts/" },
@@ -25,12 +15,6 @@ const resources = [
   { label: "JPL", role: "physical", description: "Physical parameters", href: "https://ssd.jpl.nasa.gov/planets/phys_par.html" },
   { label: "ESO", role: "stars", description: "Background star field", href: "https://www.eso.org/public/images/eso0932a/" },
 ];
-const settings = {
-  title: PREPARED_SHELL_TITLES.settings,
-  controls: [
-    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
-  ],
-};
 ---
 
 <PlanetShell

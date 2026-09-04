@@ -437,6 +437,8 @@ async function domEvidence(page) {
 
 async function freezeInfiniteAnimations(page) {
   await page.evaluate(() => {
+    const motion = document.querySelector(".planet-motion-setting");
+    if (motion.checked) motion.click();
     for (const animation of document.getAnimations()) {
       animation.pause();
       const timing = animation.effect?.getTiming();

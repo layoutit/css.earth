@@ -130,7 +130,7 @@ console.log(JSON.stringify({ ok: true, route: "/neptune/", reports }, null, 2));
 
 async function assertRingCompleteness(page, density) {
   const geometry = await page.evaluate(() => {
-    window.__neptune.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     const hidden = [
       ...document.querySelectorAll(".planet-sidebar, .planet-topbar"),
     ];

@@ -1,3 +1,6 @@
+import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
+import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
+import { createLatestSelection } from "../../../platform/latest-selection.mjs";
 import { PREPARED_JUPITER_SCENE } from "./preparedScene.mjs";
 import { createPreparedProjectiveTextureLeaf } from
   "../../../platform/prepared-projective-texture-leaf.mjs";
@@ -26,11 +29,16 @@ import {
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 const JUPITER_CUBIC_CAMERA = PREPARED_JUPITER_CAMERA;
 
-export function mountJupiterClient(stage) {
+export function mountJupiterClient(stage, { onError }) {
+  if (typeof onError !== "function") throw new TypeError("Jupiter requires onError.");
+  const lifetime = createSceneLifetime();
+  const warmImages = new Set();
+  lifetime.onDispose(() => {
+    releaseImageGroup(warmImages);
+  });
   if (!(stage instanceof HTMLElement)) {
     throw new TypeError("Jupiter stage must be an HTML element.");
   }
-  let destroyed = false;
   const assets = Object.freeze([
     ...PREPARED_JUPITER_STARFIELD.faces.flatMap(({
       url,
@@ -46,34 +54,47 @@ export function mountJupiterClient(stage) {
       asset.url2x || asset.url),
     PREPARED_JUPITER_LIGHTING.shadowless.url,
   ]);
-  let shouldPlay = true;
+  let shouldPlay = false;
   let animations = Object.freeze([]);
   let mounted = null;
   let orbit = null;
   let featureControls = null;
   let lensControls = null;
   let activeLens = PREPARED_JUPITER_LENSES.defaultLens;
-  let lensRequest = 0;
-  let resourcesReleased = false;
   const lensDecodePromises = new Map();
   const materialCache = createRowShardCache(PREPARED_JUPITER_LIGHTING);
+  lifetime.onDispose(() => materialCache.destroy());
+  lifetime.onDispose(() => {
+    const errors = [];
+    for (const entry of lensDecodePromises.values()) {
+      try { releaseLensEntry(entry); } catch (error) { errors.push(error); }
+    }
+    lensDecodePromises.clear();
+    if (errors.length) throw new AggregateError(errors, "Lens cleanup failed.");
+  });
+  let desiredLens = activeLens;
+  const selection = createLatestSelection({
+    lifetime, onFatalError: onError,
+    onBusyChange(busy) { lensControls?.setBusy(busy); },
+  });
   let ready = null;
   stage.classList.add("jupiter-stage");
+  lifetime.onDispose(() => stage.classList.remove("jupiter-stage"));
   const controller = Object.freeze({
     get ready() {
       return ready;
     },
     pause() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = false;
-      document.documentElement.dataset.playing = "false";
+
       for (const animation of animations) animation.pause();
     },
     resume() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = true;
       if (!mounted) return;
-      document.documentElement.dataset.playing = "true";
+
       for (const animation of animations) animation.play();
     },
     setView(state) {
@@ -90,11 +111,9 @@ export function mountJupiterClient(stage) {
       return lensState();
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
       shouldPlay = false;
-      lensRequest += 1;
-      releaseScene();
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Jupiter cleanup failed.");
     },
   });
   ready = start();
@@ -103,7 +122,7 @@ export function mountJupiterClient(stage) {
   async function start() {
     try {
       featureControls = createPlanetFeatureControls({
-        stage,
+        stage, lifetime, onError,
         classes: Object.freeze({
           rings: "jupiter-hide-rings",
           shadows: "jupiter-hide-shadows",
@@ -112,39 +131,42 @@ export function mountJupiterClient(stage) {
           orbit?.setShadowsEnabled(visible);
         },
       });
-      lensControls = createJupiterLensControls({ selectLens });
-      await Promise.all([
-        Promise.all(assets.map(decodeImage)),
+      lensControls = createJupiterLensControls({ selectLens, lifetime });
+      await lifetime.wait(Promise.all([
+        Promise.all(assets.map((url) => decodeImage(url, warmImages))),
         materialCache.prepareInitial(),
-      ]);
-      if (destroyed) return;
-      mounted = mountPreparedBody(stage, PREPARED_JUPITER_SCENE);
+      ]));
+      if (lifetime.disposed) return;
+      mounted = mountPreparedBody(stage, PREPARED_JUPITER_SCENE, lifetime);
+      warmImages.clear();
       orbit = createJupiterOrbit(
         stage,
         mounted,
         materialCache,
+        lifetime,
+        onError,
       );
+      lifetime.onDispose(() => orbit.destroy());
       animations = Object.freeze(stage.getAnimations({ subtree: true }));
       for (const animation of animations) {
+        lifetime.onDispose(() => animation.cancel());
         animation.currentTime = 0;
-        if (!shouldPlay) animation.pause();
+        if (shouldPlay) animation.play();
+        else animation.pause();
       }
       featureControls.bindRuntime({ animations });
       lensControls.bindReady();
-      document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
-      await new Promise((resolve) => requestAnimationFrame(() =>
-        requestAnimationFrame(resolve)));
-      if (destroyed) return;
+
+      await waitForScenePaint(lifetime);
+      if (lifetime.disposed) return;
       if (DEVELOPMENT_DIAGNOSTICS) {
-        window.__jupiter = Object.freeze({
+        const diagnostics = window.__jupiter = Object.freeze({
           ready: true,
           setView: controller.setView,
           view: controller.view,
           selectLens: controller.selectLens,
           lens: controller.lens,
-          pause: controller.pause,
-          resume: controller.resume,
-          destroy: controller.destroy,
+
           stableNodes: mounted.stableNodes,
           assertStableDomIdentity: mounted.assertStableDomIdentity,
           dom: Object.freeze({
@@ -167,10 +189,12 @@ export function mountJupiterClient(stage) {
             materialCache: materialCache.stats,
           }),
         });
+        lifetime.onDispose(() => { if (window.__jupiter === diagnostics) delete window.__jupiter; });
       }
     } catch (error) {
-      if (destroyed) return;
-      releaseScene();
+      if (lifetime.disposed) return;
+      const cleanupErrors = lifetime.destroy();
+      if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], "Jupiter startup failed.", { cause: error });
       throw error;
     }
   }
@@ -178,131 +202,113 @@ export function mountJupiterClient(stage) {
   async function selectLens(id) {
     const lens = PREPARED_JUPITER_LENSES.controls.find((entry) => entry.id === id);
     if (!lens) throw new RangeError(`Unknown Jupiter lens: ${id}.`);
-    if (destroyed || !mounted) return lensState();
-    const request = ++lensRequest;
-    let decoding = Promise.resolve();
-    if (lens.id !== PREPARED_JUPITER_LENSES.defaultLens) {
-      decoding = lensDecodePromises.get(lens.id);
-      if (!decoding) {
-        decoding = decodeLens(lens).catch((error) => {
-          lensDecodePromises.delete(lens.id);
-          throw error;
-        });
-        lensDecodePromises.set(lens.id, decoding);
-      }
-    }
-    await decoding;
-    if (destroyed || request !== lensRequest) return lensState();
-    if (lens.id === PREPARED_JUPITER_LENSES.defaultLens) {
-      delete stage.dataset.lens;
-    } else {
-      stage.dataset.lens = lens.id;
-    }
-    activeLens = lens.id;
-    lensControls?.publishLens(activeLens);
+    if (lifetime.disposed || !mounted) return lensState();
+    desiredLens = id;
+    await selection.run({
+      prepare: async () => {
+        if (id === PREPARED_JUPITER_LENSES.defaultLens) return null;
+        let entry = lensDecodePromises.get(id);
+        if (!entry) {
+          entry = { images: new Set(), promise: null, released: false };
+          lensDecodePromises.set(id, entry);
+          entry.promise = Promise.all([
+            decodeImage(lens.surface2xUrl || lens.surfaceUrl, entry.images),
+            decodeImage(lens.poles2xUrl || lens.polesUrl, entry.images),
+          ]).then(() => undefined, (error) => {
+            if (entry.released) return;
+            if (lensDecodePromises.get(id) === entry) lensDecodePromises.delete(id);
+            releaseLensEntry(entry);
+            throw error;
+          });
+        }
+        await entry.promise;
+        return entry;
+      },
+      commit(entry) {
+        if (id === PREPARED_JUPITER_LENSES.defaultLens) delete stage.dataset.lens;
+        else stage.dataset.lens = id;
+        activeLens = id;
+        lensControls?.publishLens(id);
+        // The retained CSS presentation now owns the warmed URLs.
+        entry?.images.clear();
+      },
+      onCurrentFailure() { desiredLens = activeLens; },
+      discard(entry) {
+        if (entry && id !== activeLens && id !== desiredLens) {
+          if (lensDecodePromises.get(id) === entry) lensDecodePromises.delete(id);
+          releaseLensEntry(entry);
+        }
+      },
+    });
     return lensState();
+  }
+
+  function releaseLensEntry(entry) {
+    if (entry.released) return;
+    entry.released = true;
+    releaseImageGroup(entry.images);
   }
 
   function lensState() {
     return Object.freeze({
       id: activeLens,
-      ready: mounted !== null && !destroyed,
+      ready: mounted !== null && !lifetime.disposed,
     });
   }
 
-  function releaseScene() {
-    if (resourcesReleased) return;
-    resourcesReleased = true;
-    featureControls?.destroy();
-    featureControls = null;
-    lensControls?.destroy();
-    lensControls = null;
-    orbit?.destroy();
-    orbit = null;
-    materialCache.destroy();
-    mounted?.skySun.destroy();
-    mounted?.cubicSky.destroy();
-    lensDecodePromises.clear();
-    mounted = null;
-    animations = Object.freeze([]);
-    delete stage.dataset.lens;
-    stage.classList.remove("jupiter-stage");
-    delete document.documentElement.dataset.playing;
-    stage.replaceChildren();
-    if (DEVELOPMENT_DIAGNOSTICS && window.__jupiter) delete window.__jupiter;
-  }
 }
 
-function createJupiterLensControls({ selectLens }) {
+function createJupiterLensControls({ selectLens, lifetime }) {
   const root = document.querySelector(".planet-lenses");
-  if (!(root instanceof HTMLElement)) {
-    throw new Error("Jupiter lens selector is missing.");
-  }
-  const events = new AbortController();
-  let destroyed = false;
-  let ready = false;
-  let controlRequest = 0;
+  if (!(root instanceof HTMLElement)) throw new Error("Jupiter lens selector is missing.");
   const lensButtons = [...root.querySelectorAll('button[name="lens"]')];
-  if (lensButtons.length !== PREPARED_JUPITER_LENSES.controls.length) {
+  const ids = new Set(lensButtons.map((button) => button.value));
+  if (ids.size !== lensButtons.length || ids.size !== PREPARED_JUPITER_LENSES.controls.length ||
+      PREPARED_JUPITER_LENSES.controls.some(({ id }) => !ids.has(id))) {
     throw new Error("Jupiter lens selector does not match prepared lenses.");
   }
+  const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
+  let ready = false;
+  lifetime.onDispose(() => {
+    ready = false;
+    root.classList.remove("is-loading");
+    for (const button of lensButtons) button.disabled = true;
+  });
   root.classList.add("is-loading");
-  for (const button of lensButtons) button.disabled = true;
   for (const button of lensButtons) {
-    button.addEventListener("click", () => void applyLens(button), {
-      signal: events.signal,
-    });
+    button.disabled = true;
+    button.addEventListener("click", () => {
+      if (ready && !lifetime.disposed) void selectLens(button.value).catch(console.error);
+    }, { signal: events.signal });
   }
   publishLens(PREPARED_JUPITER_LENSES.defaultLens);
   return Object.freeze({
     publishLens,
+    setBusy(busy) { root.classList.toggle("is-loading", busy); },
     bindReady() {
-      if (destroyed) return false;
+      if (lifetime.disposed) return false;
       ready = true;
       root.classList.remove("is-loading");
       for (const button of lensButtons) button.disabled = false;
       return true;
     },
-    destroy() {
-      if (destroyed) return;
-      destroyed = true;
-      ready = false;
-      controlRequest += 1;
-      events.abort();
-      root.classList.remove("is-loading");
-      for (const button of lensButtons) button.disabled = true;
-    },
   });
-
-  async function applyLens(button) {
-    if (!ready || destroyed) return;
-    const request = ++controlRequest;
-    root.classList.add("is-loading");
-    try {
-      const state = await selectLens(button.value);
-      if (!destroyed) publishLens(state.id);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      if (!destroyed && request === controlRequest) {
-        root.classList.remove("is-loading");
-      }
-    }
-  }
-
   function publishLens(id) {
-    if (destroyed) return;
-    for (const candidate of lensButtons) {
-      candidate.setAttribute("aria-pressed", String(candidate.value === id));
-    }
+    if (lifetime.disposed) return;
+    for (const button of lensButtons) button.setAttribute("aria-pressed", String(button.value === id));
   }
 }
 
-function mountPreparedBody(stage, plan) {
+function mountPreparedBody(stage, plan, lifetime) {
   if (plan.schema !== "cssjupiter-prepared-retained-body@1") {
     throw new TypeError("Jupiter retained body plan is incompatible.");
   }
   const camera = createMesh("polycss-camera planet-render-root", plan.camera.style);
+  lifetime.onDispose(() => camera.remove());
+  lifetime.onDispose(() => {
+    if (camera.parentNode === stage) delete stage.dataset.lens;
+  });
   const scene = createMesh("polycss-scene", plan.camera.sceneStyle);
   const system = createMesh("jupiter-system", plan.systemTransform);
   const body = createMesh("jupiter-body", plan.bodyTransform);
@@ -354,6 +360,7 @@ function mountPreparedBody(stage, plan) {
     objectId: "jupiter",
     requireSun: false,
   });
+  lifetime.onDispose(() => cubicSky.destroy());
   const skySun = mountRetainedDirectionalSun({
     host: stage,
     plan: PREPARED_JUPITER_SKY_SUN,
@@ -361,6 +368,7 @@ function mountPreparedBody(stage, plan) {
     objectId: "jupiter",
     before: camera,
   });
+  lifetime.onDispose(() => skySun.destroy());
   const layerRegistration = registerBodyDependentLayers({
     objectId: "jupiter",
     sceneElement: scene,
@@ -393,7 +401,7 @@ function mountPreparedBody(stage, plan) {
   });
 }
 
-function createJupiterOrbit(stage, mounted, materialCache) {
+function createJupiterOrbit(stage, mounted, materialCache, lifetime, onError) {
   if (PREPARED_JUPITER_LIGHTING.schema !==
       "cssjupiter-prepared-lighting@3") {
     throw new TypeError("Jupiter prepared lighting plan is incompatible.");
@@ -454,9 +462,14 @@ function createJupiterOrbit(stage, mounted, materialCache) {
       ? normalizeDegrees(azimuth - baseLightAzimuthDegrees)
       : 0);
   };
-  materialCache.onReady(() => orbit?.refresh());
+  materialCache.onReady(() => {
+    if (lifetime.disposed) return;
+    try { orbit?.refresh(); } catch (error) { onError(error); }
+  });
+  lifetime.onDispose(() => materialCache.onReady(null));
   orbit = createRetainedCubicSkyOrbit({
     stage,
+    onError,
     inputSurface: stage,
     cameraElement: mounted.camera,
     sceneElement: mounted.scene,
@@ -507,16 +520,18 @@ function createMesh(className, style) {
   return element;
 }
 
-function decodeImage(source) {
-  const image = new Image();
-  image.decoding = "sync";
-  image.src = source;
-  return image.decode();
+function decodeImage(source, owner) {
+  const image = Object.assign(new Image(), { decoding: "sync" });
+  owner.add(image);
+  return decodePreparedImage(image, source);
 }
 
-function decodeLens(lens) {
-  return Promise.all([
-    decodeImage(lens.surface2xUrl || lens.surfaceUrl),
-    decodeImage(lens.poles2xUrl || lens.polesUrl),
-  ]);
+function releaseImageGroup(images) {
+  const errors = [];
+  for (const image of images) {
+    try { releasePreparedImage(image); } catch (error) { errors.push(error); }
+  }
+  if (Array.isArray(images)) images.length = 0;
+  else images.clear();
+  if (errors.length) throw new AggregateError(errors, "Prepared image cleanup failed.");
 }

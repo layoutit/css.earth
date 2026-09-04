@@ -105,10 +105,11 @@ test("keeps the runtime free of forbidden render paths", async () => {
   assert.match(client, /createRetainedCubicSkyOrbit/);
   assert.match(client, /mountRetainedCubicSky/);
   assert.match(client, /requireSun:\s*false/u);
-  assert.match(client, /PLANET_SPEED_STATES/u);
-  assert.match(client, /releaseResources\(\)/u);
+  assert.match(client, /bindSpeedControl/u);
+  assert.match(client, /lifetime\.destroy\(\)/u);
   assert.match(client, /root\.classList\.add\("is-loading"\)/u);
-  assert.match(client, /entry\.images\.forEach\(releaseDecodedImage\)/u);
+  assert.match(client, /releaseImageGroup\(images\)/u);
+  assert.match(client, /releasePreparedImage\(image\)/u);
   assert.doesNotMatch(`${client}\n${styles}`, /data-speed|\bslow\b/u);
   assert.doesNotMatch(client, /sun-material-composite|sun-material-spin/u);
   assert.doesNotMatch(styles, /\.sun-body\s*\{[^}]*opacity\s*:/su);

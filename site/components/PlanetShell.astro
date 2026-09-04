@@ -4,6 +4,7 @@ import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
 import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
+import { requireObjectControls } from "../scene-contract.mjs";
 import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 
@@ -121,10 +122,10 @@ const {
   lenses,
   settings,
 } = Astro.props;
+requireObjectControls({ lenses, settings }, objectId);
 const allFacts = [...facts, ...moreFacts];
 const hasFacts = allFacts.length > 0;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
-const hasSettings = Boolean(settings && settings.controls.length > 0);
 const planetCount = PLANET_SEARCH_OBJECTS.length;
 const activeObject = OBJECTS.find((object) => object.id === objectId);
 const hasResources = resources.length > 0;
@@ -321,12 +322,12 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
           ))}
         </div>
       </details>}
-      {hasSettings && settings && <details
+      <details
         id={`${objectId}-settings`}
         class="planet-settings-panel planet-settings-flyout"
       >
         <summary class="planet-panel-summary">
-          <h2 class="planet-panel-heading">{settings.title.label}</h2>
+          <h2 class="planet-panel-heading">{PREPARED_SHELL_TITLES.settings.label}</h2>
           <span class="planet-panel-icon planet-settings-gear" aria-hidden="true">⚙︎</span>
         </summary>
         <div class="planet-settings">
@@ -337,6 +338,9 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
               <span class="planet-setting-state-on">On</span>
               <span class="planet-setting-state-off">Off</span>
               <span class="planet-setting-state-auto">Auto</span>
+            </span>
+            <span id={`${objectId}-motion-blocked`} class="planet-motion-blocked" hidden>
+              Paused by reduced motion
             </span>
           </label>
           <label class="planet-setting-control planet-sky-contrast-setting-control">
@@ -352,8 +356,8 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
               <span class="planet-setting-state-auto">Auto</span>
             </span>
           </label>
-          {settings.controls.map((setting) => setting.kind === "cycle" ? (
-            <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
+          {(settings?.controls ?? []).map((setting) => setting.kind === "cycle" ? (
+            <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`} disabled={setting.name === "speed"}>
               <span class="planet-setting-text">{setting.label}</span>
             </button>
           ) : (
@@ -368,7 +372,7 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
             </label>
           ))}
         </div>
-      </details>}
+      </details>
     </div>
   </div>
 </aside>

@@ -224,5 +224,6 @@ test("keeps unattended playback on compositor animations", async () => {
   assert.doesNotMatch(client, /setInterval|setTimeout|DOMMatrix|canvas|getContext/);
   assert.doesNotMatch(css,
     /clip-path|mask:|filter:|linear-gradient|radial-gradient|mix-blend-mode/);
-  assert.match(css, /html\[data-playing="true"\] \.mars-body/);
+  assert.doesNotMatch(css, /data-playing|prefers-reduced-motion/);
+  assert.match(css, /animation: mars-body-spin[^;]*paused/);
 });

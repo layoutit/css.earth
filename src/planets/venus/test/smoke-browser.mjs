@@ -349,7 +349,7 @@ try {
     })), { visibility: "visible", display: "block" });
   assert.equal(await page.evaluate(() => window.__venus.material.state().frame), 31);
 
-  await page.evaluate(() => window.__venus.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.getAnimations({ subtree: true }).every(({ playState }) => playState === "paused")),
   true);

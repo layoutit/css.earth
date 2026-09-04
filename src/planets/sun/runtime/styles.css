@@ -123,9 +123,6 @@ html[data-ready="true"] .sun-input-surface {
     calc(496px * var(--sun-camera-zoom, 1));
 }
 
-html[data-playing="true"] .sun-body {
-  animation-play-state: running;
-}
 
 @keyframes sun-body-spin {
   from { transform: rotateZ(-90deg); }

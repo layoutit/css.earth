@@ -43,7 +43,7 @@ export const browserProfile = Object.freeze({
     return page.waitForFunction(() => window.__uranus?.ready === true);
   },
   pause(page) {
-    return page.evaluate(() => window.__uranus.pause());
+    return page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   },
   playbackRunning(page) {
     return page.locator(".planet-stage").evaluate((stage) =>

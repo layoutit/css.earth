@@ -596,6 +596,17 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   white-space: nowrap;
 }
 
+.planet-motion-setting-control[data-motion-blocked="true"] .planet-setting-description {
+  display: none;
+}
+
+.planet-motion-blocked:not([hidden]) {
+  grid-column: 3;
+  grid-row: 1;
+  color: var(--shell-text-secondary);
+  font: 12px/1.4 var(--shell-ui-font);
+}
+
 .planet-setting-control::before {
   align-self: center;
   grid-column: 2;

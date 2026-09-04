@@ -1,3 +1,6 @@
+import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
+import { createPreparedImageStore } from "../../../platform/prepared-image-store.mjs";
+import { createLatestSelection } from "../../../platform/latest-selection.mjs";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from
   "../../../../site/runtime-policy.mjs";
 import { createPreparedProjectiveTextureLeaf } from
@@ -10,7 +13,7 @@ import { validatePreparedCubicSky } from
   "../../../platform/cubic-sky-contract.mjs";
 import { mountRetainedDirectionalSun } from
   "../../../platform/directional-sun-runtime.mjs";
-import { PLANET_SPEED_STATES } from
+import { bindSpeedControl } from
   "../../../platform/planet-feature-controls.mjs";
 import { PREPARED_PLUTO_LENSES } from "./preparedLenses.mjs";
 import { PREPARED_PLUTO_SCENE } from "./preparedScene.mjs";
@@ -19,15 +22,16 @@ import { PREPARED_PLUTO_STARFIELD } from "./preparedStarfield.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
-export function mountPlutoClient(stage) {
+export function mountPlutoClient(stage, { onError }) {
+  if (typeof onError !== "function") throw new TypeError("Pluto requires onError.");
+  const lifetime = createSceneLifetime();
   const inputSurface = document.querySelector(".pluto-input-surface");
   if (!(inputSurface instanceof HTMLElement)) {
     throw new Error("Pluto input surface is missing.");
   }
-  const retainedImages = new Map();
-  const pendingImages = new Map();
-  let destroyed = false;
-  let shouldPlay = true;
+  const images = createPreparedImageStore();
+  lifetime.onDispose(() => images.destroy());
+  let shouldPlay = false;
   let mounted = null;
   let orbit = null;
   let lenses = null;
@@ -38,36 +42,22 @@ export function mountPlutoClient(stage) {
   const controller = Object.freeze({
     get ready() { return ready; },
     pause() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = false;
-      document.documentElement.dataset.playing = "false";
+
       for (const animation of animations) animation.pause();
     },
     resume() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = true;
       if (!mounted) return;
-      document.documentElement.dataset.playing = "true";
+
       for (const animation of animations) animation.play();
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
       shouldPlay = false;
-      lenses?.destroy();
-      speedControls?.destroy();
-      orbit?.destroy();
-      mounted?.skySun.destroy();
-      mounted?.cubicSky.destroy();
-      mounted?.materialRoot.remove();
-      mounted?.camera.remove();
-      for (const image of retainedImages.values()) image.src = "";
-      retainedImages.clear();
-      pendingImages.clear();
-      stage.replaceChildren();
-      delete stage.dataset.lens;
-      delete document.documentElement.dataset.playing;
-      if (DEVELOPMENT_DIAGNOSTICS && window.__pluto) delete window.__pluto;
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Pluto cleanup failed.");
     },
   });
   ready = start();
@@ -78,10 +68,12 @@ export function mountPlutoClient(stage) {
       validatePreparedCubicSky(PREPARED_PLUTO_STARFIELD, { requireSun: false });
       lenses = createPlutoLensControls({
         stage,
+        lifetime,
+        onError,
         decodePreparedImage: decodePair,
       });
-      speedControls = createPlutoSpeedControls();
-      await Promise.all([
+      speedControls = createPlutoSpeedControls({ lifetime, onError });
+      await lifetime.wait(Promise.all([
         decodePair(PREPARED_PLUTO_SCENE.body.assets.surface),
         decodePair(PREPARED_PLUTO_SCENE.body.assets.poles),
         decodePair(PREPARED_PLUTO_LENSES.material),
@@ -93,13 +85,17 @@ export function mountPlutoClient(stage) {
           }),
         ]),
         decodePair(PREPARED_PLUTO_SKY_SUN.asset),
-      ]);
-      if (destroyed) return;
-      mounted = mountPreparedPluto(stage);
+      ]));
+      if (lifetime.disposed) return;
+      mounted = mountPreparedPluto(stage, lifetime);
+      lifetime.onDispose(() => {
+        if (mounted.camera.parentNode === stage) delete stage.dataset.lens;
+      });
       await lenses.bindRuntime(mounted);
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       animations = Object.freeze(stage.getAnimations({ subtree: true }));
       for (const animation of animations) {
+        lifetime.onDispose(() => animation.cancel());
         animation.currentTime = 0;
         if (shouldPlay) animation.play();
         else animation.pause();
@@ -107,6 +103,7 @@ export function mountPlutoClient(stage) {
       speedControls.bindRuntime({ animations });
       orbit = createRetainedCubicSkyOrbit({
         stage,
+        onError,
         inputSurface,
         cameraElement: mounted.camera,
         sceneElement: mounted.scene,
@@ -124,53 +121,27 @@ export function mountPlutoClient(stage) {
             `var(--planet-viewport-zoom-divisor) / ${zoomScale}))`;
         },
       });
-      document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
-      await waitForPaint();
-      if (destroyed) return;
+
+      lifetime.onDispose(() => orbit.destroy());
+      await waitForScenePaint(lifetime);
+      if (lifetime.disposed) return;
       if (DEVELOPMENT_DIAGNOSTICS) publishDiagnostics();
     } catch (error) {
-      if (destroyed) return;
-      controller.destroy();
+      if (lifetime.disposed) return;
+      const cleanupErrors = lifetime.destroy();
+      if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], "Pluto startup failed.", { cause: error });
       throw error;
     }
   }
 
   function decodePair(pair) {
-    const one = pair.one ?? pair.url;
-    const two = pair.two ?? pair.url2x;
-    const url = two || one;
-    const retained = retainedImages.get(url);
-    if (retained) return Promise.resolve(retained);
-    let promise = pendingImages.get(url);
-    if (!promise) {
-      promise = decodeImage(url).then((image) => {
-        pendingImages.delete(url);
-        if (!destroyed) retainedImages.set(url, image);
-        return image;
-      }, (error) => {
-        pendingImages.delete(url);
-        throw error;
-      });
-      pendingImages.set(url, promise);
-    }
-    return promise;
-  }
-
-  async function decodeImage(url) {
-    const image = new Image();
-    image.decoding = "async";
-    image.src = url;
-    await image.decode();
-    if (!image.naturalWidth || !image.naturalHeight) {
-      throw new Error(`Prepared Pluto image did not decode: ${url}.`);
-    }
-    return image;
+    return images.load(pair.two || pair.url2x || pair.one || pair.url);
   }
 
   function publishDiagnostics() {
-    window.__pluto = Object.freeze({
+    lifetime.onDispose(() => { if (window.__pluto === diagnostics) delete window.__pluto; });
+    const diagnostics = window.__pluto = Object.freeze({
       ready: true,
-      pause: controller.pause,
       camera: Object.freeze({
         state: orbit.state,
         setState: orbit.setState,
@@ -182,8 +153,8 @@ export function mountPlutoClient(stage) {
       renderStats: Object.freeze({
         textureStats: Object.freeze({
           selectedPreparedDensity: CANONICAL_PREPARED_IMAGE_DENSITY,
-          get retainedInteractiveImageCount() { return retainedImages.size; },
-          get pendingInteractiveImageCount() { return pendingImages.size; },
+          get retainedInteractiveImageCount() { return images.stats().retainedCount; },
+          get pendingInteractiveImageCount() { return images.stats().pendingCount; },
         }),
       }),
       dom: mounted.domStats,
@@ -193,7 +164,7 @@ export function mountPlutoClient(stage) {
   }
 }
 
-function mountPreparedPluto(stage) {
+function mountPreparedPluto(stage, lifetime) {
   const plan = PREPARED_PLUTO_SCENE;
   if (plan.schema !== "csspluto-prepared-retained-scene@1" ||
       plan.counts.runtimeGeometryPreparation !== false ||
@@ -205,6 +176,7 @@ function mountPreparedPluto(stage) {
     "polycss-camera pluto-camera planet-render-root",
     plan.camera.style,
   );
+  lifetime.onDispose(() => camera.remove());
   const scene = createMesh("polycss-scene", plan.camera.sceneStyle);
   const system = createMesh("pluto-system", plan.body.systemTransform);
   scene.appendChild(system);
@@ -233,6 +205,7 @@ function mountPreparedPluto(stage) {
     system.appendChild(carrier);
   }
   const materialRoot = createMesh("pluto-material-root planet-render-root");
+  lifetime.onDispose(() => materialRoot.remove());
   const materialLeaf = document.createElement("s");
   materialLeaf.className = "pluto-material";
   materialLeaf.style.backgroundImage =
@@ -247,6 +220,7 @@ function mountPreparedPluto(stage) {
     objectId: "pluto",
     requireSun: false,
   });
+  lifetime.onDispose(() => cubicSky.destroy());
   const skySun = mountRetainedDirectionalSun({
     host: stage,
     plan: PREPARED_PLUTO_SKY_SUN,
@@ -254,6 +228,7 @@ function mountPreparedPluto(stage) {
     objectId: "pluto",
     before: camera,
   });
+  lifetime.onDispose(() => skySun.destroy());
   const stableNodes = Object.freeze([...stage.querySelectorAll("*")]);
   const stableParents = stableNodes.map((node) => node.parentNode);
   const domStats = Object.freeze({
@@ -290,7 +265,7 @@ function mountPreparedPluto(stage) {
   });
 }
 
-function createPlutoLensControls({ stage, decodePreparedImage }) {
+function createPlutoLensControls({ stage, decodePreparedImage, lifetime, onError }) {
   const root = document.querySelector(".planet-lenses");
   if (!(root instanceof HTMLElement)) {
     throw new Error("Pluto lens selector is missing.");
@@ -299,15 +274,26 @@ function createPlutoLensControls({ stage, decodePreparedImage }) {
     [lens.id, lens]));
   const buttons = new Map([...root.querySelectorAll('button[name="lens"]')]
     .map((button) => [button.value, button]));
-  if (buttons.size !== controls.size) {
+  if (buttons.size !== controls.size || controls.size !== PREPARED_PLUTO_LENSES.controls.length ||
+      buttons.size !== root.querySelectorAll('button[name="lens"]').length ||
+      [...buttons.keys()].some((id) => !controls.has(id))) {
     throw new Error("Pluto lens selector does not match prepared lenses.");
   }
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   let active = PREPARED_PLUTO_LENSES.defaultLens;
-  let request = 0;
   let bound = false;
-  let destroyed = false;
   let mounted = null;
+  const selection = createLatestSelection({
+    lifetime, onFatalError: onError,
+    onBusyChange(busy) { root.classList.toggle("is-loading", busy); },
+  });
+  lifetime.onDispose(() => {
+    bound = false;
+    mounted = null;
+    root.classList.remove("is-loading");
+    for (const button of buttons.values()) button.disabled = true;
+  });
   root.classList.add("is-loading");
   for (const button of buttons.values()) button.disabled = true;
   for (const [id, button] of buttons) {
@@ -317,53 +303,45 @@ function createPlutoLensControls({ stage, decodePreparedImage }) {
   }
   publish();
   return Object.freeze({
-    state: () => Object.freeze({ id: active, ready: bound && !destroyed }),
+    state: () => Object.freeze({ id: active, ready: bound && !lifetime.disposed }),
     select,
     async bindRuntime(nextMounted) {
-      if (destroyed) return false;
+      if (lifetime.disposed) return false;
       mounted = nextMounted;
       bound = true;
       root.classList.remove("is-loading");
       for (const button of buttons.values()) button.disabled = false;
       return true;
     },
-    destroy() {
-      if (destroyed) return;
-      destroyed = true;
-      bound = false;
-      request += 1;
-      events.abort();
-      root.classList.remove("is-loading");
-      for (const button of buttons.values()) button.disabled = true;
-      mounted = null;
-    },
+
   });
 
   async function select(id) {
     const lens = controls.get(id);
     if (!lens) throw new RangeError(`Unknown Pluto lens: ${id}.`);
-    if (!bound || destroyed) return false;
-    const selection = ++request;
-    await Promise.all([
-      decodePreparedImage({ one: lens.surfaceUrl, two: lens.surface2xUrl }),
-      decodePreparedImage({ one: lens.polesUrl, two: lens.poles2xUrl }),
-    ]);
-    if (destroyed || selection !== request) return false;
-    const surfaceUrl = lens.surface2xUrl || lens.surfaceUrl;
-    const polesUrl = lens.poles2xUrl || lens.polesUrl;
-    for (const carrier of mounted.bodyCarriers.surface) {
-      carrier.style.setProperty(
-        "--pluto-surface-texture",
-        `url("${surfaceUrl}")`,
-      );
-    }
-    for (const carrier of mounted.bodyCarriers.polar) {
-      carrier.style.setProperty("--pluto-poles-texture", `url("${polesUrl}")`);
-    }
-    stage.dataset.lens = lens.id;
-    active = lens.id;
-    publish();
-    return true;
+    if (!bound || lifetime.disposed) return false;
+    return selection.run({
+      prepare: () => Promise.all([
+        decodePreparedImage({ one: lens.surfaceUrl, two: lens.surface2xUrl }),
+        decodePreparedImage({ one: lens.polesUrl, two: lens.poles2xUrl }),
+      ]),
+      commit() {
+        const surfaceUrl = lens.surface2xUrl || lens.surfaceUrl;
+        const polesUrl = lens.poles2xUrl || lens.polesUrl;
+        for (const carrier of mounted.bodyCarriers.surface) {
+          carrier.style.setProperty(
+            "--pluto-surface-texture",
+            `url("${surfaceUrl}")`,
+          );
+        }
+        for (const carrier of mounted.bodyCarriers.polar) {
+          carrier.style.setProperty("--pluto-poles-texture", `url("${polesUrl}")`);
+        }
+        stage.dataset.lens = lens.id;
+        active = lens.id;
+        publish();
+      },
+    });
   }
 
   function publish() {
@@ -373,43 +351,24 @@ function createPlutoLensControls({ stage, decodePreparedImage }) {
   }
 }
 
-function createPlutoSpeedControls() {
+function createPlutoSpeedControls({ lifetime, onError }) {
   const button = document.querySelector('button[name="speed"]');
-  if (!(button instanceof HTMLButtonElement)) {
-    throw new Error("Pluto speed control is missing.");
-  }
-  const events = new AbortController();
   let animations = Object.freeze([]);
-  let stateIndex = PLANET_SPEED_STATES.findIndex(({ value }) => value === 1);
-  let bound = false;
-  button.addEventListener("click", () => {
-    if (!bound) return;
-    stateIndex = (stateIndex + 1) % PLANET_SPEED_STATES.length;
-    publish();
-  }, { signal: events.signal });
+  const speed = bindSpeedControl({
+    button, lifetime, onError,
+    onChange(value) {
+      for (const animation of animations) animation.playbackRate = value;
+    },
+  });
+  lifetime.onDispose(() => { animations = Object.freeze([]); });
   return Object.freeze({
     bindRuntime({ animations: nextAnimations }) {
       animations = Object.freeze([...nextAnimations]);
-      bound = true;
-      publish();
+      for (const animation of animations) animation.playbackRate = speed.state().speed;
+      speed.setEnabled(true);
     },
-    state() {
-      return Object.freeze({ speed: PLANET_SPEED_STATES[stateIndex].value });
-    },
-    destroy() {
-      bound = false;
-      events.abort();
-      for (const animation of animations) animation.playbackRate = 1;
-      animations = Object.freeze([]);
-    },
+    state: () => Object.freeze({ speed: speed.state().speed }),
   });
-
-  function publish() {
-    const state = PLANET_SPEED_STATES[stateIndex];
-    button.dataset.state = state.label;
-    button.setAttribute("aria-label", `Speed: ${state.label}`);
-    for (const animation of animations) animation.playbackRate = state.value;
-  }
 }
 
 function createMesh(className, style) {
@@ -417,9 +376,4 @@ function createMesh(className, style) {
   mesh.className = `polycss-mesh ${className}`;
   if (style) mesh.style.cssText = style;
   return mesh;
-}
-
-function waitForPaint() {
-  return new Promise((resolve) => requestAnimationFrame(() =>
-    requestAnimationFrame(resolve)));
 }

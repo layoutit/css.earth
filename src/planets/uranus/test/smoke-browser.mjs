@@ -51,7 +51,7 @@ try {
     fixedMaterialCount: 1,
     stable: true,
   });
-  await page.evaluate(() => window.__uranus.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   const shadowControl = page.locator('input[name="shadows"]');
   await shadowControl.evaluate((input) => {
     input.checked = false;
@@ -94,7 +94,7 @@ async function assertCompleteRingVisibility(browser, baseUrl) {
       await page.waitForFunction(() =>
         window.__cssEarth?.ready && window.__uranus?.ready);
       const geometry = await page.evaluate(() => {
-        window.__uranus.pause();
+        (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
         const rect = document.querySelector(
           ".uranus-fixed-material-leaf",
         ).getBoundingClientRect();

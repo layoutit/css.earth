@@ -48,7 +48,7 @@ export const browserProfile = Object.freeze({
     await page.waitForFunction(() => window.__mercury?.ready === true);
   },
   pause(page) {
-    return page.evaluate(() => window.__mercury.pause());
+    return page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   },
   playbackRunning(page) {
     return page.locator(".planet-stage").evaluate((stage) =>

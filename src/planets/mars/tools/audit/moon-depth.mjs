@@ -44,7 +44,7 @@ try {
   }
   await page.waitForFunction(() => window.__mars?.ready === true);
   await page.evaluate(() => {
-    window.__mars.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__mars.setView({ pitch: 65, zoom: 0.8 });
     for (const animation of document.getAnimations()) animation.pause();
   });

@@ -230,7 +230,7 @@ async function openPlanet(planet) {
     document.documentElement.dataset.ready === "true", planet, {
     timeout: 120_000,
   });
-  await page.evaluate((id) => window[`__${id}`].pause(), planet);
+  await page.evaluate((id) => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()), planet);
   await settle(page);
   return Object.freeze({
     page,

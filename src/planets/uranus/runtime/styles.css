@@ -126,13 +126,6 @@ html[data-ready="true"] .uranus-input-surface {
   visibility: hidden;
 }
 
-html[data-playing="true"] :is(
-  .uranus-body,
-  .uranus-ring-orbit
-) {
-  animation-play-state: running;
-}
-
 @keyframes uranus-body-spin {
   from { transform: rotateZ(-176deg); }
   to { transform: rotateZ(-536deg); }

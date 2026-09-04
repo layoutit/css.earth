@@ -17,6 +17,7 @@ const browser = await chromium.launch({
 
 try {
   for (const route of routes) {
+    console.log(`Shell smoke: ${route}`);
     const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
     const browserProblems = [];
     page.on("console", (message) => {
@@ -62,8 +63,11 @@ try {
 }
 
 async function provePlanetLifecycleRaces(browser, planet) {
+  console.log(`Lifecycle import: ${planet.id}`);
   await proveInterruptedImport(browser, planet.id);
+  console.log(`Lifecycle decode: ${planet.id}`);
   await proveInterruptedDecode(browser, planet.id);
+  console.log(`Lifecycle restoration: ${planet.id}`);
   await proveRepeatedMountedDestroy(browser, planet);
 }
 
@@ -83,7 +87,7 @@ async function proveInterruptedImport(browser, planetId) {
   const navigation = page.goto(new URL(`/${planetId}/`, baseUrl).href, {
     waitUntil: "domcontentloaded",
   });
-  await started;
+  await boundedGate(started, `${planetId}: object import request`);
   await dispatchPersisted(page, "pagehide");
   assert.equal(await page.locator(".polycss-camera").count(), 0,
     "destroy before object renderer import must not mount a camera");
@@ -115,7 +119,7 @@ async function proveInterruptedDecode(browser, planetId) {
   await page.goto(new URL(`/${planetId}/`, baseUrl).href, {
     waitUntil: "domcontentloaded",
   });
-  await started;
+  await boundedGate(started, `${planetId}: prepared image request`);
   await dispatchPersisted(page, "pagehide");
   assert.equal(await page.locator(".polycss-camera").count(), 0,
     "destroy during decode must not retain a camera");
@@ -192,6 +196,15 @@ function captureProblems(page) {
     problems.push(`pageerror: ${error.message}`);
   });
   return problems;
+}
+
+async function boundedGate(promise, label) {
+  let timer;
+  try {
+    return await Promise.race([promise, new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error(`Timed out waiting for ${label}`)), 30_000);
+    })]);
+  } finally { clearTimeout(timer); }
 }
 
 function dispatchPersisted(page, type) {
