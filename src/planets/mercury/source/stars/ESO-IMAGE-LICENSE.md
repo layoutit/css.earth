@@ -23,3 +23,18 @@ The preparation pipeline adapts the published equirectangular panorama into
 six retained CSS cubemap faces and applies documented luminance levels. It does
 not add or bake a Sun. The complete ESO credit is exposed in Mercury's source
 resources.
+
+## Astrometric registration (Mercury)
+
+The panorama is an equirectangular map in galactic coordinates. Its pixel
+convention was measured on the image rather than assumed: galactic longitude
+is 0 at the column centre and increases leftward (the sky seen from inside),
+galactic latitude is +90 at the top row. Anchor blobs located in the 6000 x
+3000 pixels: Large Magellanic Cloud (4367, 2028), Small Magellanic Cloud
+(3995, 2206), Orion Nebula (5566, 1835), Andromeda Galaxy (1038, 1887),
+Pleiades (272, 1920). The mosaic frame is rotated 3.8 degrees from the J2000
+galactic frame; the fitted rigid correction is derived from these anchors in
+`src/platform/eso-panorama-registration.mjs` and registers all five to within
+0.3 degrees. The bright spiked point source near pixel (1848, 2472) matches no
+star and is one of the Solar System objects ESO notes were captured during
+the mosaic; it is not used as an anchor.

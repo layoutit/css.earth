@@ -12,17 +12,20 @@ import {
   resolvePolyTextureLeafGeometry,
 } from "@layoutit/polycss";
 
-import { CUBIC_SKY_STANDARD } from "../../../platform/cubic-sky-contract.mjs";
-import { viewSunDirectionToPreparedLightDirection } from
-  "../../../platform/directional-sun-coordinate.mjs";
+import { prepareAstrometricSkySceneRegistration } from
+  "../../../platform/astrometric-sky-registration.mjs";
+import {
+  MERCURY_CAMERA_POSE,
+  MERCURY_PRESENTATION_FRAME,
+} from "./scene-camera-pose.mjs";
+import { requireBodyFixedSunDirection } from
+  "../../../platform/solar-geometry.mjs";
 import {
   createProjectiveSurfaceRasterPresentation,
   fitProjectiveTextureGeometryToStableLayout,
   prepareProjectiveTextureLayer,
 } from "../../../platform/projective-surface-raster.mjs";
 import { PREPARED_MERCURY_ASSETS } from "../runtime/preparedAssets.mjs";
-import { PREPARED_MERCURY_SKY_SUN } from
-  "../runtime/preparedSkySun.mjs";
 import { PREPARED_MERCURY_STARFIELD } from "../runtime/preparedStarfield.mjs";
 import { validateMercurySourceGroup } from "./source-manifest.mjs";
 
@@ -42,14 +45,14 @@ const LAYER_ELEVATION = 50;
 const SEAM_BLEED = 0;
 const PROJECTIVE_TEXTURE_RASTER_SCALE = 4;
 const CAMERA_ZOOM = 1.1;
-const TARGET_CAMERA_SCENE_PITCH = 40;
+const TARGET_CAMERA_SCENE_PITCH = MERCURY_CAMERA_POSE.initialScenePitchDegrees;
 const MINIMUM_CONTROL_PITCH = 0;
 const MAXIMUM_CONTROL_PITCH = 89;
 const MAXIMUM_SCENE_PITCH = 65;
 const DEFAULT_CONTROL_PITCH = MAXIMUM_CONTROL_PITCH *
   (1 - TARGET_CAMERA_SCENE_PITCH / MAXIMUM_SCENE_PITCH);
 const DEFAULT_CAMERA_SCENE_PITCH = TARGET_CAMERA_SCENE_PITCH;
-const DEFAULT_CONTROL_YAW = CUBIC_SKY_STANDARD.defaultControlYawDegrees;
+const DEFAULT_CONTROL_YAW = MERCURY_CAMERA_POSE.defaultControlYawDegrees;
 const RESPONSIVE_FIT = Object.freeze({
   model: "continuous-aspect-smoothstep",
   portraitBaseWidthShare: 0.34,
@@ -70,6 +73,11 @@ const CAMERA_DURATION_MILLISECONDS =
 const INTERIOR_ASSIST_START_CONTROL_PITCH = 55;
 const INTERIOR_ASSIST_MAXIMUM_DEGREES = 32;
 const MESH_ROTATION_Z = 118;
+// The cutaway does not spin with the body, so it is turned about its pole to
+// present the cross-section face to the default camera (measured: the orange
+// core area peaks there). Presentation only; the yaw axis is the ecliptic
+// pole, seven degrees off the body pole, so this is a fit, not an identity.
+const CUTAWAY_MESH_ROTATION_Z = -120;
 const PRESENTATION_ROTATION_SECONDS = 72;
 const CUTAWAY_CENTER_LONGITUDE_DEGREES =
   PREPARED_MERCURY_ASSETS.interior.cutaway.centerLongitudeDegrees;
@@ -96,9 +104,11 @@ const planOptions = Object.freeze({
   textureLighting: "baked",
   seamBleed: SEAM_BLEED,
   directionalLight: Object.freeze({
-    direction: viewSunDirectionToPreparedLightDirection(
-      PREPARED_MERCURY_SKY_SUN.referenceViewDirection,
-    ),
+    // PolyCSS lights in scene space, like three.js, and the sphere polygons
+    // are authored in the body-fixed frame. The Sun direction therefore goes
+    // in unchanged; the view-space reference direction belongs to the screen
+    // -space lighting overlay, not to this bake.
+    direction: requireBodyFixedSunDirection("mercury"),
     color: "#ffffff",
     intensity: Math.PI,
   }),
@@ -165,6 +175,17 @@ const sectionLeaves = Object.freeze([
   index,
 )));
 const defaultFrame = PREPARED_MERCURY_ASSETS.lighting.defaultFrame;
+// The sky is astrometric: the cube was sampled in ICRF, and this registration
+// (ICRF -> Mercury body-fixed -> ecliptic presentation frame) is the only
+// orientation applied to it. It must match the frame the cube was sampled in.
+const skySceneRegistration = prepareAstrometricSkySceneRegistration("mercury");
+if (PREPARED_MERCURY_STARFIELD.astrometricRegistration?.cubeFrame !==
+      skySceneRegistration.cubeFrame) {
+  throw new Error(
+    "Mercury starfield was not prepared in the astrometric cube frame; " +
+      "run prepare-starfield.mjs first.",
+  );
+}
 const scene = Object.freeze({
   schema: "cssmercury-prepared-retained-scene@3",
   camera: Object.freeze({
@@ -200,7 +221,18 @@ const scene = Object.freeze({
     }),
     runtimeGeometryDerivation: false,
   }),
-  systemTransform: buildPolyMeshTransform({ rotation: [2, 0, -20] }),
+  // The body system is placed in the ecliptic presentation frame: ecliptic
+  // north up, the Sun to the left at zero yaw. Body polygons stay in the
+  // body-fixed frame and the spin animation turns them about their own pole.
+  systemTransform: MERCURY_PRESENTATION_FRAME.cssTransform,
+  presentationFrame: Object.freeze({
+    model: MERCURY_PRESENTATION_FRAME.model,
+    sunDirection: MERCURY_PRESENTATION_FRAME.sunDirection,
+    poleDirection: MERCURY_PRESENTATION_FRAME.poleDirection,
+    sunEclipticLatitudeDegrees:
+      MERCURY_PRESENTATION_FRAME.sunEclipticLatitudeDegrees,
+    poleTiltDegrees: MERCURY_PRESENTATION_FRAME.poleTiltDegrees,
+  }),
   meshRotationDegrees: MESH_ROTATION_Z,
   bodyTransform: buildPolyMeshTransform({ rotation: [0, 0, MESH_ROTATION_Z] }),
   bodyLeaves: Object.freeze([...leaves, ...innerPolarLeaves]),
@@ -231,7 +263,14 @@ const scene = Object.freeze({
   }),
   starfield: Object.freeze({
     ...PREPARED_MERCURY_STARFIELD,
-    cameraContract: "inverse-unbounded-accumulated-matrix3d",
+    // The sky rides the scene matrix so it crosses the screen exactly like
+    // the Sun; the registration is the ICRF cube's orientation in the scene
+    // (ecliptic presentation) frame, derived from Mercury's pole and epoch.
+    cameraContract: "scene-locked-unbounded-accumulated-matrix3d",
+    sceneRegistration: skySceneRegistration.cssTransform,
+    sceneRegistrationModel: skySceneRegistration.model,
+    sceneRegistrationChain: skySceneRegistration.chain,
+    sceneRegistrationEpoch: skySceneRegistration.epoch,
   }),
   interior: Object.freeze({
     ...PREPARED_MERCURY_ASSETS.interior,
@@ -250,7 +289,9 @@ const scene = Object.freeze({
     }),
     coreLatitudeSegments: INTERIOR_LATITUDE_SEGMENTS,
     coreLongitudeSegments: INTERIOR_LONGITUDE_SEGMENTS,
-    bodyTransform: buildPolyMeshTransform({ rotation: [0, 0, MESH_ROTATION_Z] }),
+    bodyTransform: buildPolyMeshTransform({
+      rotation: [0, 0, CUTAWAY_MESH_ROTATION_Z],
+    }),
     outerBodyLeaves: cutawayBodyLeaves,
     coreLeaves,
     sectionLeaves,
