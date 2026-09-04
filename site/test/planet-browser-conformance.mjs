@@ -723,7 +723,7 @@ async function proveInteractionInterruptions(page, planet, profile) {
     zoom: bounds.defaultZoom,
   });
 
-  await drag(page, profile.inputSelector, 0, 150);
+  await drag(page, profile.inputSelector, 90, 150);
   const inertiaBeforeWheel = await interactionStats(page, planet.id);
   assert.equal(inertiaBeforeWheel.activeMode, "inertia",
     `${planet.id}: fast release must enter inertia before wheel interruption`);
@@ -745,6 +745,56 @@ async function proveInteractionInterruptions(page, planet, profile) {
   assert.ok(Math.abs(
     (await profile.camera(page)).pitch - pitchAfterWheel,
   ) > 0.001, `${planet.id}: rotational inertia must continue through wheel zoom`);
+
+  const stopCoordinates = await surfaceFlyCoordinates(page);
+  const inertiaBeforePointer = await interactionStats(page, planet.id);
+  assert.equal(inertiaBeforePointer.activeMode, "inertia",
+    `${planet.id}: rotation must still be active before the stop press`);
+  await page.mouse.move(
+    stopCoordinates.surface.x,
+    stopCoordinates.surface.y,
+  );
+  await page.mouse.down();
+  const inertiaAfterPointer = await interactionStats(page, planet.id);
+  assert.equal(inertiaAfterPointer.activeMode, "idle",
+    `${planet.id}: pointer-down must stop inertia before pointer-up`);
+  assert.equal(inertiaAfterPointer.activeMotionCount, 0,
+    `${planet.id}: a surface pointer must leave no camera motion owner`);
+  assert.equal(inertiaAfterPointer.pendingPointer, true,
+    `${planet.id}: the stop press must remain available for a new drag`);
+  assert.equal(
+    inertiaAfterPointer.cancels,
+    inertiaBeforePointer.cancels + 1,
+    `${planet.id}: a surface pointer must cancel inertia exactly once`,
+  );
+  assert.equal(
+    inertiaAfterPointer.interruptions.pointer,
+    inertiaBeforePointer.interruptions.pointer + 1,
+    `${planet.id}: a surface pointer interruption must be recorded once`,
+  );
+  assert.deepEqual(inertiaAfterPointer.lastInterruption, {
+    from: "inertia",
+    to: "pointer",
+  }, `${planet.id}: a surface pointer must own the inertia interruption`);
+  const stoppedPose = await cameraPose(page, planet.id);
+  await waitFrames(page);
+  assert.deepEqual(await cameraPose(page, planet.id), stoppedPose,
+    `${planet.id}: both axes must stay stopped while the pointer is held`);
+  await page.mouse.move(
+    stopCoordinates.surface.x + 1,
+    stopCoordinates.surface.y + 1,
+  );
+  await page.mouse.up();
+  await waitFrames(page);
+  assert.deepEqual(await cameraPose(page, planet.id), stoppedPose,
+    `${planet.id}: click jitter and release must not restart rotation`);
+  const releasedPointer = await interactionStats(page, planet.id);
+  assert.equal(releasedPointer.pendingPointer, false,
+    `${planet.id}: pointer-up must clear the pending press`);
+  assert.equal(releasedPointer.activeMotionCount, 0,
+    `${planet.id}: pointer-up without a drag must remain idle`);
+  assert.equal(releasedPointer.starts, inertiaBeforePointer.starts,
+    `${planet.id}: pointer-up without a drag must not launch another throw`);
 
   await profile.setCamera(page, {
     pitch: bounds.defaultPitch,
@@ -809,8 +859,8 @@ async function proveInteractionInterruptions(page, planet, profile) {
   );
   assert.deepEqual(flyAfterDrag.lastInterruption, {
     from: "fly-to",
-    to: "drag",
-  }, `${planet.id}: drag must own the fly-to interruption`);
+    to: "pointer",
+  }, `${planet.id}: pointer-down must own the fly-to interruption`);
 
   await profile.setCamera(page, {
     pitch: bounds.defaultPitch,
@@ -857,6 +907,7 @@ async function proveInteractionInterruptions(page, planet, profile) {
 
   return {
     wheelCoexistedWithInertia: true,
+    pointerStoppedInertia: true,
     wheelCoexistedWithFlyTo: true,
     dragInterruptedFlyTo: true,
     repeatedDoubleClickRestartedFlyTo: true,
@@ -867,6 +918,18 @@ async function proveInteractionInterruptions(page, planet, profile) {
 function interactionStats(page, objectId) {
   return page.evaluate((id) =>
     globalThis[`__${id}`].camera.stats().dragInertia, objectId);
+}
+
+function cameraPose(page, objectId) {
+  return page.evaluate((id) => {
+    const camera = globalThis[`__${id}`].camera.state();
+    return {
+      controlPitch: camera.controlPitch,
+      controlYaw: camera.controlYaw,
+      zoom: camera.zoom,
+      pose: camera.pose,
+    };
+  }, objectId);
 }
 
 async function proveBreakpointCrossings(page, planet, profile, bounds, baseline) {
