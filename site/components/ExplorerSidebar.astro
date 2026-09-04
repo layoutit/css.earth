@@ -1,0 +1,27 @@
+---
+import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
+import PlanetObjectResults from "./PlanetObjectResults.astro";
+
+const planetCount = PLANET_SEARCH_OBJECTS.length;
+---
+
+<aside class="planet-sidebar maps-explorer-sidebar" aria-label="Object explorer">
+  <div class="planet-sidebar-search-card" data-maps-search>
+    <input
+      class="planet-sidebar-search"
+      type="search"
+      placeholder={`Search planets (${planetCount})`}
+      aria-label={`Search ${planetCount} planets`}
+      autocomplete="off"
+      spellcheck="false"
+      autofocus
+    />
+    <button class="planet-sidebar-view-all" type="button" aria-pressed="true">Hide</button>
+  </div>
+  <div class="planet-drawer-content">
+    <nav class="planet-object-browser maps-object-results" aria-label="Planets">
+      <PlanetObjectResults />
+      <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
+    </nav>
+  </div>
+</aside>

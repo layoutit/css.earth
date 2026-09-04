@@ -1,0 +1,88 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
+import { PREPARED_SATURN_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_SATURN_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_SATURN_TITLE } from "./preparedTitle.mjs";
+
+const charts = [
+  {
+    id: "reflectance",
+    title: PREPARED_SHELL_TITLES.reflectance,
+    open: true,
+    src: "/scenes/saturn/saturn-atmosphere-spectrum.svg",
+    width: 306,
+    height: 141,
+    alt: "Modeled disk reflectance of Saturn from 350 to 1000 nanometers, including the methane absorption band at 889 nanometers.",
+  },
+  {
+    id: "photometric-phase",
+    title: SCIENTIFIC_CHART_TITLES.photometricPhase,
+    open: false,
+    src: "/scenes/saturn/saturn-photometric-phase-curve.svg",
+    width: 306,
+    height: 141,
+    alt: "Saturn globe-only V-band brightness change across phase angles from zero to 150 degrees.",
+  },
+  {
+    id: "temperature-pressure",
+    title: PREPARED_SHELL_TITLES.temperaturePressure,
+    open: false,
+    src: "/scenes/saturn/saturn-temperature-pressure-profile.svg",
+    width: 306,
+    height: 141,
+    alt: "Saturn atmospheric temperature from 10 bar to 2 nanobar, showing the cold tropopause and warmer upper atmosphere.",
+  },
+];
+
+const lensDescriptions: Record<string, string> = {
+  normal: "Visible color",
+  ultraviolet: "Hubble at 225 nm",
+  methane: "Hubble at 889 nm",
+  thermal: "Cassini infrared",
+  "cross-section": "Interior structure",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_SATURN_LENSES.defaultLens,
+  controls: PREPARED_SATURN_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lensDescriptions[lens.id],
+    title: lens.falseColor
+      ? `${lens.label}, ${lens.filter} false color`
+      : lens.label,
+  })),
+};
+const resources = [
+  { label: "NASA", role: "imagery", description: "Thermal lens & hexagon", href: "https://science.nasa.gov/saturn/" },
+  { label: "JPL", role: "orbits", description: "Moon orbits", href: "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html" },
+  { label: "OpenSpace", role: "scene", description: "Planet, rings & moons", href: "https://github.com/OpenSpace/OpenSpace" },
+  { label: "Hubble OPAL", role: "lenses", description: "UV & methane lenses", href: "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32" },
+  { label: "PSG", role: "spectra", description: "Spectrum & profile", href: "https://psg.gsfc.nasa.gov/" },
+  { label: "HYG", role: "stars", description: "Background star field", href: "https://github.com/astronexus/HYG-Database" },
+];
+
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
+    { kind: "toggle", name: "rings", label: "Features", checked: true },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="saturn"
+  title={PREPARED_SATURN_TITLE}
+  introduction={PREPARED_SATURN_PANEL.introduction}
+  facts={PREPARED_SATURN_PANEL.facts}
+  moreFacts={PREPARED_SATURN_PANEL.moreFacts}
+  charts={charts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

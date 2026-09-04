@@ -1,0 +1,93 @@
+.planet-cubic-sky {
+  --planet-cubic-sky-half-side: max(100cqw, 100cqh);
+  --planet-cubic-sky-zoom: 1;
+  --planet-cubic-sky-camera-distance: max(
+    50cqh,
+    calc(86.60254cqh * var(--planet-cubic-sky-zoom))
+  );
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  perspective: var(--planet-cubic-sky-camera-distance);
+  perspective-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.planet-cubic-sky-cube,
+.planet-cubic-sky-orientation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.planet-cubic-sky-cube {
+  transform: translateZ(var(--planet-cubic-sky-camera-distance));
+}
+
+.planet-cubic-sky-face {
+  position: absolute;
+  top: calc(-1 * var(--planet-cubic-sky-half-side));
+  left: calc(-1 * var(--planet-cubic-sky-half-side));
+  width: calc(2 * var(--planet-cubic-sky-half-side));
+  height: calc(2 * var(--planet-cubic-sky-half-side));
+  background-image: var(--planet-cubic-sky-standard-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+body[data-sky-contrast="high"] .planet-cubic-sky-face {
+  background-image: var(--planet-cubic-sky-high-contrast-image);
+}
+
+.planet-cubic-sky-front {
+  transform: translateZ(calc(-1 * var(--planet-cubic-sky-half-side)))
+    scale(1.002);
+}
+
+.planet-cubic-sky-right {
+  transform: translateX(var(--planet-cubic-sky-half-side)) rotateY(-90deg)
+    scale(1.002);
+}
+
+.planet-cubic-sky-back {
+  transform: translateZ(var(--planet-cubic-sky-half-side)) rotateY(180deg)
+    scale(1.002);
+}
+
+.planet-cubic-sky-left {
+  transform: translateX(calc(-1 * var(--planet-cubic-sky-half-side)))
+    rotateY(90deg) scale(1.002);
+}
+
+.planet-cubic-sky-top {
+  transform: translateY(calc(-1 * var(--planet-cubic-sky-half-side)))
+    rotateX(-90deg) scale(1.002);
+}
+
+.planet-cubic-sky-bottom {
+  transform: translateY(var(--planet-cubic-sky-half-side)) rotateX(90deg)
+    scale(1.002);
+}
+
+.planet-directional-sun {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transform: translate(-50%, -50%);
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.planet-directional-sun[hidden] {
+  display: none;
+}

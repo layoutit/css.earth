@@ -1,0 +1,14 @@
+---
+import "../runtime/styles.css";
+import "../../../../site/planet-shell.css";
+import PlanetLayout from "../../../../site/layouts/PlanetLayout.astro";
+import MarsHead from "./MarsHead.astro";
+import MarsOverlay from "./MarsOverlay.astro";
+import MarsPanel from "./MarsPanel.astro";
+---
+
+<PlanetLayout objectId="mars">
+  <MarsHead slot="planet-head" />
+  <MarsPanel slot="planet-ui" />
+  <MarsOverlay slot="planet-overlay" />
+</PlanetLayout>

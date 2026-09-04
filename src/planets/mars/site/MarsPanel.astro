@@ -1,0 +1,82 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
+import { PREPARED_MARS_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_MARS_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_MARS_TITLE } from "./preparedTitle.mjs";
+
+const charts = [
+  {
+    id: "reflectance",
+    title: PREPARED_SHELL_TITLES.reflectance,
+    open: true,
+    src: "/scenes/mars/mars-reflectance-spectrum.svg",
+    width: 306,
+    height: 141,
+    alt: "Modeled disk reflectance of Mars from 350 to 998 nanometers.",
+  },
+  {
+    id: "photometric-phase",
+    title: SCIENTIFIC_CHART_TITLES.photometricPhase,
+    open: false,
+    src: "/scenes/mars/mars-photometric-phase-curve.svg",
+    width: 306,
+    height: 141,
+    alt: "Mars V-band brightness change across phase angles from zero to 180 degrees.",
+  },
+  {
+    id: "temperature-pressure",
+    title: PREPARED_SHELL_TITLES.temperaturePressure,
+    open: false,
+    src: "/scenes/mars/mars-temperature-pressure-profile.svg",
+    width: 306,
+    height: 141,
+    alt: "Mars atmospheric temperature and pressure through 244 kilometers altitude.",
+  },
+];
+
+const lensDescriptions: Record<string, string> = {
+  normal: "Viking visible color",
+  elevation: "MOLA shaded relief",
+  thermal: "THEMIS infrared",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_MARS_LENSES.defaultLens,
+  controls: PREPARED_MARS_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lensDescriptions[lens.id],
+    title: `${lens.measurement}. ${lens.qualification}`,
+  })),
+};
+const resources = [
+  { label: "NASA", role: "facts", description: "Facts & interior", href: "https://science.nasa.gov/mars/facts/" },
+  { label: "USGS", role: "imagery", description: "Surface & thermal lenses", href: "https://astrogeology.usgs.gov/" },
+  { label: "JPL", role: "orbits", description: "Moon orbits", href: "https://ssd.jpl.nasa.gov/sats/" },
+  { label: "OpenSpace", role: "scene", description: "Atmosphere & moons", href: "https://github.com/OpenSpace/OpenSpace" },
+  { label: "ESA/Hubble", role: "lighting", description: "Limb & lighting", href: "https://esahubble.org/images/heic1609a/" },
+  { label: "PSG", role: "spectra", description: "Spectrum & profile", href: "https://psg.gsfc.nasa.gov/" },
+];
+
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="mars"
+  title={PREPARED_MARS_TITLE}
+  introduction={PREPARED_MARS_PANEL.introduction}
+  facts={PREPARED_MARS_PANEL.facts}
+  charts={charts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

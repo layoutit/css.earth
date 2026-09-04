@@ -1,0 +1,83 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
+import { PREPARED_URANUS_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_URANUS_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_URANUS_TITLE } from "./preparedTitle.mjs";
+
+const charts = [
+  {
+    id: "reflectance",
+    title: PREPARED_SHELL_TITLES.reflectance,
+    open: true,
+    src: "/scenes/uranus/uranus-atmosphere-spectrum.svg",
+    width: 306,
+    height: 141,
+    alt: "Modeled disk reflectance of Uranus from 350 to 1000 nanometers from a checked NASA PSG response.",
+  },
+  {
+    id: "photometric-phase",
+    title: SCIENTIFIC_CHART_TITLES.photometricPhase,
+    open: false,
+    src: "/scenes/uranus/uranus-photometric-phase-curve.svg",
+    width: 306,
+    height: 141,
+    alt: "Uranus V-band brightness change across phase angles from zero to 154 degrees.",
+  },
+  {
+    id: "temperature-pressure",
+    title: PREPARED_SHELL_TITLES.temperaturePressure,
+    open: false,
+    src: "/scenes/uranus/uranus-temperature-pressure-profile.svg",
+    width: 306,
+    height: 141,
+    alt: "Uranus atmospheric temperature by pressure from the checked NASA PSG model configuration.",
+  },
+];
+
+const lensDescriptions: Record<string, string> = {
+  normal: "Hubble visible color",
+  methane: "Hubble at 727 nm",
+  "near-infrared": "Hubble at 845 nm",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_URANUS_LENSES.defaultLens,
+  controls: PREPARED_URANUS_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lensDescriptions[lens.id],
+    title: lens.falseColor ? `${lens.label}: ${lens.qualification}` : lens.qualification,
+  })),
+};
+const resources = [
+  { label: "Hubble OPAL", role: "imagery", description: "Texture & lenses", href: "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33" },
+  { label: "NASA", role: "facts", description: "Facts & polar colour", href: "https://science.nasa.gov/uranus/facts/" },
+  { label: "JPL", role: "moons", description: "Moon portraits & orbits", href: "https://ssd.jpl.nasa.gov/sats/elem/" },
+  { label: "PDS Rings", role: "rings", description: "Ring geometry", href: "https://pds-rings.seti.org/uranus/uranus_rings_table.html" },
+  { label: "PSG", role: "spectra", description: "Spectrum & profile", href: "https://psg.gsfc.nasa.gov/" },
+];
+
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
+    { kind: "toggle", name: "rings", label: "Features", checked: true },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="uranus"
+  title={PREPARED_URANUS_TITLE}
+  introduction={PREPARED_URANUS_PANEL.introduction}
+  facts={PREPARED_URANUS_PANEL.facts}
+  moreFacts={PREPARED_URANUS_PANEL.moreFacts}
+  charts={charts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

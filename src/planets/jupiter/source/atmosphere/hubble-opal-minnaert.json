@@ -1,0 +1,41 @@
+{
+  "schema": "cssjupiter-hubble-opal-minnaert@1",
+  "source": {
+    "title": "First Results from the Hubble OPAL Program: Jupiter in 2015",
+    "authors": [
+      "Amy A. Simon",
+      "Michael H. Wong",
+      "Glenn S. Orton"
+    ],
+    "publicationDate": "2015-10-07",
+    "doi": "10.1088/0004-637X/812/1/55",
+    "url": "https://esahubble.org/static/archives/releases/science_papers/heic1522a.pdf",
+    "table": 1,
+    "figure": 1
+  },
+  "mapComposite": {
+    "sourceProduct": "Hubble OPAL WFC3 Jupiter visible global map",
+    "red": {
+      "filter": "F631N",
+      "wavelengthNanometers": 631,
+      "minnaertK": 0.999
+    },
+    "green": {
+      "filter": "F502N",
+      "wavelengthNanometers": 502,
+      "minnaertK": 0.95
+    },
+    "blue": {
+      "filter": "F395N",
+      "wavelengthNanometers": 395,
+      "minnaertK": 0.85
+    }
+  },
+  "photometricLaw": {
+    "name": "Minnaert",
+    "radianceFactor": "nadirReflectance * incidenceCosine^k * emissionCosine^(k - 1)",
+    "incidenceCosine": "max(0, normal dot light)",
+    "emissionCosine": "max(0, normal dot observer)"
+  },
+  "qualification": "Checked normalized factual transcription of Table 1 and Figure 1. The source paper is linked but not redistributed."
+}

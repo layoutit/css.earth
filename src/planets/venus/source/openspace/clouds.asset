@@ -1,0 +1,50 @@
+local venusAsset = asset.require("scene/solarsystem/planets/venus/globe")
+
+
+
+local texturesPath = asset.resource({
+  Name = "Venus Textures",
+  Type = "HttpSynchronization",
+  Identifier = "venus_textures",
+  Version = 2
+})
+
+
+local Layer = {
+  Identifier = "Clouds_Magellan_Combo_NewYork",
+  Name = "Clouds Magellan Combo [New York]",
+  Enabled = asset.enabled,
+  ZIndex = 20,
+  Type = "TileProviderByLevel",
+  LevelTileProviders = {
+    {
+      MaxLevel = 3,
+      TileProvider = {
+        Identifier = "Clouds",
+        Name = "Clouds",
+        FilePath = texturesPath .. "venus_clouds.jpg"
+      }
+    },
+    {
+      MaxLevel = 7,
+      TileProvider = {
+        Identifier = "Magellan_Mosaic_NewYork",
+        Name = "Magellan Mosaic [New York]",
+        FilePath = asset.resource("magellan_mosaic_newyork.vrt"),
+        BlendMode = "Color",
+        Settings = { Gamma = 2.0 }
+      }
+    }
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(venusAsset.Venus.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(venusAsset.Venus.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export(Layer)

@@ -1,0 +1,74 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
+import { PREPARED_MERCURY_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_MERCURY_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_MERCURY_TITLE } from "./preparedTitle.mjs";
+
+const charts = [
+  {
+    id: "reflectance",
+    title: PREPARED_SHELL_TITLES.reflectance,
+    open: true,
+    src: "/scenes/mercury/mercury-surface-albedo.svg",
+    width: 306,
+    height: 141,
+    alt: "Area-weighted global mean MESSENGER MASCS reflectance from 350 to 1000 nanometers, prepared from 60,704 usable one-degree cells per channel.",
+  },
+  {
+    id: "photometric-phase",
+    title: SCIENTIFIC_CHART_TITLES.photometricPhase,
+    open: false,
+    src: "/scenes/mercury/mercury-photometric-phase-curve.svg",
+    width: 306,
+    height: 141,
+    alt: "Mercury V-band brightness change across phase angles from zero to 170 degrees.",
+  },
+];
+
+const lensDescriptions: Record<string, string> = {
+  normal: "MESSENGER at 750 nm",
+  enhanced: "USGS enhanced color + BDR coverage",
+  topography: "MESSENGER shaded relief",
+  interior: "Interior structure",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_MERCURY_LENSES.defaultLens,
+  controls: PREPARED_MERCURY_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lensDescriptions[lens.id],
+    title: lens.falseColor ? `${lens.label}, ${lens.filter} false color` : lens.filter,
+  })),
+};
+const resources = [
+  { label: "NASA", role: "facts", description: "Facts & interior", href: "https://science.nasa.gov/mercury/facts/" },
+  { label: "USGS", role: "terrain", description: "Surface & terrain lenses", href: "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products" },
+  { label: "DLR MASCS", role: "spectrum", description: "Reflectance spectrum", href: "https://doi.org/10.5281/zenodo.7433033" },
+  { label: "OpenSpace", role: "scene", description: "Globe & lighting", href: "https://github.com/OpenSpace/OpenSpace" },
+  { label: "ESO", role: "stars", description: "Photographic full-sky panorama", href: "https://www.eso.org/public/images/eso0932a/" },
+];
+
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="mercury"
+  title={PREPARED_MERCURY_TITLE}
+  introduction={PREPARED_MERCURY_PANEL.introduction}
+  facts={PREPARED_MERCURY_PANEL.facts}
+  moreFacts={PREPARED_MERCURY_PANEL.moreFacts}
+  charts={charts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

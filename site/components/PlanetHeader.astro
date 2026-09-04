@@ -1,0 +1,41 @@
+---
+import CssEarthWordmark from "./CssEarthWordmark.astro";
+import PlanetaryScale from "./PlanetaryScale.astro";
+
+interface Props {
+  objectId: string;
+}
+
+const { objectId } = Astro.props;
+---
+
+<header class="planet-topbar">
+  <div class="planet-header-rail">
+    <CssEarthWordmark />
+    <button
+      class="planet-header-action planet-sidebar-toggle"
+      type="button"
+      aria-controls={`${objectId}-sidebar`}
+      aria-expanded="true"
+      aria-label="Collapse information sidebar"
+    >
+      <i class="planet-action-marker planet-blackhole-marker" aria-hidden="true"></i>
+      <i class="planet-action-marker planet-supernova-marker" aria-hidden="true"></i>
+      <span class="planet-sidebar-collapse-label">Collapse</span>
+      <span class="planet-sidebar-expand-label">Expand</span>
+    </button>
+  </div>
+  <PlanetaryScale activeObjectId={objectId} />
+  <div class="planet-header-actions">
+    <button
+      class="planet-header-action planet-settings-action"
+      type="button"
+      aria-controls={`${objectId}-settings`}
+      aria-expanded="false"
+      aria-label="Open settings"
+    >
+      <i class="planet-action-marker planet-settings-marker" aria-hidden="true"></i>
+      <span>Settings</span>
+    </button>
+  </div>
+</header>

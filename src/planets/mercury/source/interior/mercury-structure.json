@@ -1,0 +1,45 @@
+{
+  "schema": "cssmercury-structure@1",
+  "planetRadiusKm": 2440,
+  "metallicCoreRadiusKm": 2074,
+  "metallicCoreRadiusFraction": 0.85,
+  "outerShellThicknessKm": 366,
+  "publishedApproximateOuterShellThicknessKm": 400,
+  "structureQualification": "Schematic radial cross-section prepared from NASA Science dimensions. The rendered 366 km combined mantle-crust shell is the difference between the published 2,440 km planet radius and 2,074 km core radius; NASA separately rounds the shell to about 400 km. No additional radial boundary is claimed.",
+  "surface": {
+    "humanEyeDescription": "greyish-brown",
+    "dayMaximumCelsius": 430,
+    "nightMinimumCelsius": -180,
+    "atmosphere": "none; thin exosphere only"
+  },
+  "presentation": {
+    "model": "declared-illustrative-retained-cross-section",
+    "palette": {
+      "combinedMantleCrust": [112, 108, 101],
+      "metallicCore": [158, 94, 55],
+      "layerContact": [55, 49, 44]
+    },
+    "lighting": {
+      "model": "prepared-object-space-lambert-and-illustrative-depth-shading",
+      "worldLightDirection": [0.883835, -0.385595, 0.264864]
+    },
+    "cutaway": {
+      "centerLongitudeDegrees": -56.25,
+      "widthDegrees": 112.5
+    },
+    "qualification": "The retained radii come from the cited NASA dimensions. Interior colors, fine texture, contact shading, and rim shading are declared illustrative presentation choices, not direct observations or measured natural colors. Prepared outer-surface lighting uses the same pinned OpenSpace direction as the exterior scene; exposed interior shading is illustrative and does not claim sunlight inside Mercury."
+  },
+  "sources": [
+    {
+      "url": "https://science.nasa.gov/mercury/facts/",
+      "credit": "NASA Science",
+      "retrievedAt": "2026-08-30"
+    },
+    {
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "retrievedAt": "2026-08-30",
+      "qualification": "The pinned PSG configuration reports ATMOSPHERE-STRUCTURE None and a 600 K modeled surface state for its selected geometry."
+    }
+  ]
+}

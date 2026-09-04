@@ -1,0 +1,83 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
+import { PREPARED_VENUS_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_VENUS_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_VENUS_TITLE } from "./preparedTitle.mjs";
+
+const charts = [
+  {
+    id: "reflectance",
+    title: PREPARED_SHELL_TITLES.reflectance,
+    open: true,
+    src: "/scenes/venus/venus-atmosphere-spectrum.svg",
+    width: 306,
+    height: 141,
+    alt: "Modeled disk reflectance of Venus from 350 to 1000 nanometers using the checked NASA PSG atmosphere response.",
+  },
+  {
+    id: "photometric-phase",
+    title: SCIENTIFIC_CHART_TITLES.photometricPhase,
+    open: false,
+    src: "/scenes/venus/venus-photometric-phase-curve.svg",
+    width: 306,
+    height: 141,
+    alt: "Venus V-band brightness change across phase angles from zero to 179 degrees.",
+  },
+  {
+    id: "temperature-pressure",
+    title: PREPARED_SHELL_TITLES.temperaturePressure,
+    open: false,
+    src: "/scenes/venus/venus-temperature-pressure-profile.svg",
+    width: 306,
+    height: 141,
+    alt: "Venus atmospheric temperature from 92.1 bar to the upper atmosphere in the checked NASA PSG model.",
+  },
+];
+const lensDescriptions: Record<string, string> = {
+  clouds: "Visible cloud deck",
+  radar: "Magellan radar mosaic",
+  elevation: "Magellan shaded relief",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_VENUS_LENSES.defaultLens,
+  controls: PREPARED_VENUS_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lensDescriptions[lens.id],
+    title: lens.qualification,
+  })),
+};
+const resources = [
+  { label: "NASA", role: "facts", description: "Facts & portrait", href: "https://science.nasa.gov/venus/" },
+  { label: "USGS", role: "terrain", description: "Radar and elevation lenses", href: "https://astrogeology.usgs.gov/search/map/venus-magellan-global-products" },
+  { label: "OpenSpace", role: "atmosphere", description: "Clouds & atmosphere", href: "https://github.com/OpenSpace/OpenSpace" },
+  { label: "PSG", role: "spectra", description: "Spectrum & profile", href: "https://psg.gsfc.nasa.gov/" },
+  { label: "ESO/S. Brunier", role: "sky", description: "Photographic full sky", href: "https://www.eso.org/public/images/eso0932a/" },
+  { label: "HYG", role: "stars", description: "Star-coordinate audit", href: "https://github.com/astronexus/HYG-Database" },
+];
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
+    { kind: "toggle", name: "atmosphere", label: "Atmosphere", checked: true },
+    { kind: "toggle", name: "stars", label: "Stars", checked: true },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="venus"
+  title={PREPARED_VENUS_TITLE}
+  introduction={PREPARED_VENUS_PANEL.introduction}
+  facts={PREPARED_VENUS_PANEL.facts}
+  moreFacts={PREPARED_VENUS_PANEL.moreFacts}
+  charts={charts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

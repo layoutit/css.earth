@@ -1,0 +1,220 @@
+{
+  "schema": "cssmoon-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "moon-crustal-thickness-poles.webp",
+      "bytes": 13380,
+      "sha256": "fd4ba671d89e385a596b6459a988262d91a6db407870e0f8925afee0c85a2652"
+    },
+    {
+      "filename": "moon-crustal-thickness-poles@2x.webp",
+      "bytes": 35532,
+      "sha256": "cd0d657288278f16ce42254b7526f7dacba27a4e45c3b22b862665eed0ff60be"
+    },
+    {
+      "filename": "moon-crustal-thickness-thumbnail.webp",
+      "bytes": 4676,
+      "sha256": "42dd84a4036d4d996c1c98cbb685f25219bfd212dc01cee5c5f408adc172fb3b"
+    },
+    {
+      "filename": "moon-crustal-thickness.webp",
+      "bytes": 213074,
+      "sha256": "c751f7d4915fca9c2e6f68841318acc39dc9b5794d379519c6373378e9db17ac"
+    },
+    {
+      "filename": "moon-crustal-thickness@2x.webp",
+      "bytes": 476264,
+      "sha256": "5c2b146fe3c147075fed83797cee3ae2e0e4197ee40229572c7e71de7731abee"
+    },
+    {
+      "filename": "moon-curvature.webp",
+      "bytes": 17840,
+      "sha256": "f60e458f46c96da4b865f8c2c9586e0c5b47a3937ef640132a811fa7a43d503f"
+    },
+    {
+      "filename": "moon-curvature@2x.webp",
+      "bytes": 48440,
+      "sha256": "44e7182701e1b726820365b7f2bb420c34bd3e77684ede4d7f94b73c9f56b038"
+    },
+    {
+      "filename": "moon-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "filename": "moon-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "filename": "moon-starfield-back-standard.webp",
+      "bytes": 294528,
+      "sha256": "9b58c375386b2728d419fd0512d3154c4a59351a1fde5b03969c11509aa0c6a4"
+    },
+    {
+      "filename": "moon-starfield-back-standard@2x.webp",
+      "bytes": 1073274,
+      "sha256": "1f850dc6daca82790f20345f652746e5464b38d04ea0d7b1a3a6644e4d756b77"
+    },
+    {
+      "filename": "moon-starfield-back.webp",
+      "bytes": 604224,
+      "sha256": "05ca17562e0835098effd060ab9c754701bc000c9307fbf164834ae1c28a762e"
+    },
+    {
+      "filename": "moon-starfield-back@2x.webp",
+      "bytes": 2367208,
+      "sha256": "2f365f0dd50f454ed963778dd2777172006dd873d49bf25e258bed71ee4f2aa2"
+    },
+    {
+      "filename": "moon-starfield-bottom-standard.webp",
+      "bytes": 172048,
+      "sha256": "5c9d92aea731a0b0998c9cdcfb049bb34388eac3f1075631241dd2a2106f3701"
+    },
+    {
+      "filename": "moon-starfield-bottom-standard@2x.webp",
+      "bytes": 589596,
+      "sha256": "d0e08cc4cefc2e59cb44016887b6868a6d89065525ed9792e204a94549642667"
+    },
+    {
+      "filename": "moon-starfield-bottom.webp",
+      "bytes": 351892,
+      "sha256": "74f3f5153d74de2f693a5dd7e3939933bed3048e9118b8ee36a44db4ca072db2"
+    },
+    {
+      "filename": "moon-starfield-bottom@2x.webp",
+      "bytes": 1309698,
+      "sha256": "fc94446b76a45a91979ce7814ec11f2d3c069153e2cc8035b34c73c45a36cc03"
+    },
+    {
+      "filename": "moon-starfield-front-standard.webp",
+      "bytes": 410722,
+      "sha256": "8c5b4ed8480b07a30f61aab5254c8601e23eff0f06dcd28fa45cc50dad657013"
+    },
+    {
+      "filename": "moon-starfield-front-standard@2x.webp",
+      "bytes": 1402212,
+      "sha256": "4694fe3878fc9781ee87866a1f4848befcd91b43bb7f85d13cb542ce8a5457c5"
+    },
+    {
+      "filename": "moon-starfield-front.webp",
+      "bytes": 768032,
+      "sha256": "97be168b3b1ca164c9d6ce1ccf0cd2373baac3b9501a808d9aa3a21b9483ef22"
+    },
+    {
+      "filename": "moon-starfield-front@2x.webp",
+      "bytes": 2832202,
+      "sha256": "a28a808a08b3e365d923c1553c461815b6a878bdf0f35e162fb04751b5518e91"
+    },
+    {
+      "filename": "moon-starfield-left-standard.webp",
+      "bytes": 306818,
+      "sha256": "99fa8178d58a5ae649d21137e915207523a5a5ec469feba6321ba0b7db6f6e60"
+    },
+    {
+      "filename": "moon-starfield-left-standard@2x.webp",
+      "bytes": 1153544,
+      "sha256": "cbdbd655c85daf987b025fe1136a86113e81a148bc29ec6688f77714ca04ad47"
+    },
+    {
+      "filename": "moon-starfield-left.webp",
+      "bytes": 628102,
+      "sha256": "0cd4c110978a6d88e89fa76b70db815facd168b3b7d9c1dffc71acf9e41e2759"
+    },
+    {
+      "filename": "moon-starfield-left@2x.webp",
+      "bytes": 2357886,
+      "sha256": "7be2b4e542ab9833fbb8d2348a27097e7c1d02f51de68d892f841f681fe8c8dd"
+    },
+    {
+      "filename": "moon-starfield-right-standard.webp",
+      "bytes": 347120,
+      "sha256": "808f4ebeb68246cfe23f64ab2373686dbf187b6baf99d2ed904dfd18dc6e5e77"
+    },
+    {
+      "filename": "moon-starfield-right-standard@2x.webp",
+      "bytes": 1276530,
+      "sha256": "213d9fdbd6a835e6d1e3a2f162691674b36ea1f59234941afc021770455a3eb3"
+    },
+    {
+      "filename": "moon-starfield-right.webp",
+      "bytes": 685496,
+      "sha256": "9fa7ae676490e9be9f187c9f47559192abd642c8272555e915cf5382f2ae9b11"
+    },
+    {
+      "filename": "moon-starfield-right@2x.webp",
+      "bytes": 2557186,
+      "sha256": "367a8efd49f1b8ee62e1e42c5dfbfc994e2b00a2989d926526a187e71b5fc04e"
+    },
+    {
+      "filename": "moon-starfield-top-standard.webp",
+      "bytes": 135394,
+      "sha256": "a6669e1a6d002a0fc42908f6d7da3a23ba5886b5d400d3b603a97dbccb5b684e"
+    },
+    {
+      "filename": "moon-starfield-top-standard@2x.webp",
+      "bytes": 441990,
+      "sha256": "663f66e2bab44098d34617a204533df743e7c44cd39c23a48ee6fc227ddf71a8"
+    },
+    {
+      "filename": "moon-starfield-top.webp",
+      "bytes": 277824,
+      "sha256": "93d287016aab6740b83bcfee54d436bf821cd863e5a392a65146a3822e356d45"
+    },
+    {
+      "filename": "moon-starfield-top@2x.webp",
+      "bytes": 994212,
+      "sha256": "b46b579a9188c11efdeb4c5584345f04a741c4a04322d8daa4d46ac7c07c3456"
+    },
+    {
+      "filename": "moon-surface-poles.webp",
+      "bytes": 5624,
+      "sha256": "048cf0d10edddc0ed7babcf4364f03b9c18eaa98858999b3e769c3c80f8190d8"
+    },
+    {
+      "filename": "moon-surface-poles@2x.webp",
+      "bytes": 14032,
+      "sha256": "7a3729490730deab48820f38c4dfd413d33857defb0310775e7308bfaa555c11"
+    },
+    {
+      "filename": "moon-surface-thumbnail.webp",
+      "bytes": 2752,
+      "sha256": "d781200e2456b17193e6c8f97bacf2fc8b21c095351b524f814cd029c06734b7"
+    },
+    {
+      "filename": "moon-surface.webp",
+      "bytes": 139914,
+      "sha256": "ba3e8fc8df0eb68c3e35354eceeef55edf09a04bdfd2b0a0341b965b5693ac58"
+    },
+    {
+      "filename": "moon-surface@2x.webp",
+      "bytes": 468882,
+      "sha256": "46ca2b9b271f4a0bc628a899f710ac065b5c4fdbd01af38570b090f7c53be7cb"
+    },
+    {
+      "filename": "moon-topography-poles.webp",
+      "bytes": 19094,
+      "sha256": "4d507e8542b08d3c48deb4928fa5139ff3f79e9888a7e74b489b28d1c15bba57"
+    },
+    {
+      "filename": "moon-topography-poles@2x.webp",
+      "bytes": 49528,
+      "sha256": "b4ab3abc2633c67ce6bf6d8d8a23117cad8ab2614bc8048f4c6c6c590a01c245"
+    },
+    {
+      "filename": "moon-topography-thumbnail.webp",
+      "bytes": 3228,
+      "sha256": "157ee5ed9df127b6fefe20978369ac55c2d2f497df667a70a0018dbf0eec8b40"
+    },
+    {
+      "filename": "moon-topography.webp",
+      "bytes": 220064,
+      "sha256": "b5922fe5586b3c6ecf2c18c7660b7db5e2845de61cf3df0e856620698b9476a8"
+    },
+    {
+      "filename": "moon-topography@2x.webp",
+      "bytes": 498286,
+      "sha256": "91c2971cf964104000296d3786eeb8a5d6e54199629d9b44fb43f619a3b86639"
+    }
+  ]
+}

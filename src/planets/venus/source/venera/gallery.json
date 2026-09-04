@@ -1,0 +1,54 @@
+{
+  "schema": "cssvenus-venera-surface-gallery-source@1",
+  "id": "surface-photographs",
+  "label": "Surface photographs",
+  "sourcePage": "https://pds-geosciences.wustl.edu/missions/venera/",
+  "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
+  "qualification": "Exact institutional archive files. These are historical camera panoramas with the source archive's assembly and tonal processing, not modern restorations.",
+  "items": [
+    {
+      "id": "venera-9",
+      "label": "Venera 9 · 1975",
+      "sourcePath": "venera/venera9.gif",
+      "publicFilename": "venus-venera-9.gif",
+      "sourceUrl": "https://pds-geosciences.wustl.edu/venera/GIF/venera9.gif",
+      "width": 980,
+      "height": 234,
+      "alt": "Black-and-white Venera 9 surface panorama showing angular rocks, soil, the horizon, and part of the lander.",
+      "caption": "One of the first photos returned from the surface of another planet; angular rocks and lander hardware are visible."
+    },
+    {
+      "id": "venera-10",
+      "label": "Venera 10 · 1975",
+      "sourcePath": "venera/venera10.gif",
+      "publicFilename": "venus-venera-10.gif",
+      "sourceUrl": "https://pds-geosciences.wustl.edu/venera/GIF/venera10.gif",
+      "width": 980,
+      "height": 250,
+      "alt": "Black-and-white Venera 10 surface panorama showing flat rock slabs, fine material, and parts of the lander.",
+      "caption": "Flat rock slabs and fine surface material appear beneath diffuse daylight; spacecraft parts occupy the foreground."
+    },
+    {
+      "id": "venera-13",
+      "label": "Venera 13 · 1982",
+      "sourcePath": "venera/venera13.jpg",
+      "publicFilename": "venus-venera-13.jpg",
+      "sourceUrl": "https://pds-geosciences.wustl.edu/venera/JPEG/venera13.jpg",
+      "width": 969,
+      "height": 438,
+      "alt": "Two black-and-white Venera 13 surface panoramas showing slab-like rocks, soil, calibration targets, and lander hardware.",
+      "caption": "Two camera panoramas show slab-like rocks, soil, calibration targets, and lander hardware."
+    },
+    {
+      "id": "venera-14",
+      "label": "Venera 14 · 1982",
+      "sourcePath": "venera/venera14.jpg",
+      "publicFilename": "venus-venera-14.jpg",
+      "sourceUrl": "https://pds-geosciences.wustl.edu/venera/JPEG/venera14.jpg",
+      "width": 983,
+      "height": 492,
+      "alt": "Two black-and-white Venera 14 surface panoramas showing layered rock slabs and parts of the lander.",
+      "caption": "Two camera panoramas show layered rock slabs and spacecraft hardware at the landing site."
+    }
+  ]
+}

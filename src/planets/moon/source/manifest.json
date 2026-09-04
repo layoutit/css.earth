@@ -1,0 +1,149 @@
+{
+  "schema": "cssmoon-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "nasa-lro-moon-color",
+      "path": "surface/lroc-color-2k.jpg",
+      "expectedSha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
+      "expectedBytes": 457942,
+      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg",
+      "credit": "NASA SVS, LRO, LROC and LOLA",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": ["https://svs.gsfc.nasa.gov/4720/", "https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "acquisition": "checked NASA SVS CGI Moon Kit colour map",
+      "redistribution": "NASA image with mission credit and no endorsement claim",
+      "consumers": ["scene", "navigation"]
+    },
+    {
+      "id": "nasa-lro-lola-topography",
+      "path": "lenses/lola-topography-print.jpg",
+      "expectedSha256": "d8724a424e50926e0aeb722a3eff817895a100e8e30c5c34c1637913870bb0f9",
+      "expectedBytes": 158981,
+      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/LDEM_16.0centered.0centered_print.jpg",
+      "credit": "NASA GSFC Scientific Visualization Studio; LRO LOLA",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": ["https://svs.gsfc.nasa.gov/4014/", "https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "acquisition": "checked NASA SVS cylindrical LOLA elevation map",
+      "redistribution": "NASA image with mission credit and no endorsement claim",
+      "consumers": ["lenses"]
+    },
+    {
+      "id": "nasa-grail-crustal-thickness",
+      "path": "lenses/grail-crustal-thickness-print.jpg",
+      "expectedSha256": "d791cb16b0e6ee74bda94ca5bc1577fc9589a9e7d70cdade255ad199f83a5e95",
+      "expectedBytes": 300978,
+      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg",
+      "credit": "NASA GSFC Scientific Visualization Studio; GRAIL",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": ["https://svs.gsfc.nasa.gov/4014/", "https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "acquisition": "checked NASA SVS cylindrical GRAIL crustal-thickness map",
+      "redistribution": "NASA image with mission credit and no endorsement claim",
+      "consumers": ["lenses"]
+    },
+    {
+      "id": "jpl-satellite-physical",
+      "path": "orbit/jpl-satellite-physical.html",
+      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
+      "expectedBytes": 84633,
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+      "credit": "NASA JPL Solar System Dynamics",
+      "license": "United States government factual data",
+      "licenseEvidence": ["https://www.jpl.nasa.gov/jpl-image-use-policy/"],
+      "acquisition": "checked satellite physical-parameter authority page",
+      "redistribution": "checked authority page with JPL attribution",
+      "consumers": ["scene", "panel"]
+    },
+    {
+      "id": "jpl-satellite-elements",
+      "path": "orbit/jpl-satellite-elements.html",
+      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
+      "expectedBytes": 418952,
+      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+      "credit": "NASA JPL Solar System Dynamics",
+      "license": "United States government factual data",
+      "licenseEvidence": ["https://www.jpl.nasa.gov/jpl-image-use-policy/"],
+      "acquisition": "checked satellite mean-elements authority page",
+      "redistribution": "checked authority page with JPL attribution",
+      "consumers": ["scene", "panel"]
+    },
+    {
+      "id": "prepared-moon-facts",
+      "path": "orbit/moon.json",
+      "expectedSha256": "3c0097bcf6b166cb0ba2d03c3cc290902983e448baf82eb64e60d25257cd6d4f",
+      "expectedBytes": 745,
+      "origin": "https://ssd.jpl.nasa.gov/sats/",
+      "credit": "NASA JPL Solar System Dynamics",
+      "license": "United States government factual data",
+      "licenseEvidence": ["https://www.jpl.nasa.gov/jpl-image-use-policy/"],
+      "acquisition": "checked structured extraction bound to the two authority-page hashes",
+      "redistribution": "factual values with JPL attribution",
+      "consumers": ["scene", "panel"]
+    },
+    {
+      "id": "openspace-moon-globe-config",
+      "path": "openspace/moon-globe.asset",
+      "expectedSha256": "a3353ce4708cbf5095482b52cac7f69db3f9cec828f7f8fd36bdd4019e2bd119",
+      "expectedBytes": 1700,
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/earth/moon/globe.asset",
+      "credit": "OpenSpace Project",
+      "license": "MIT, see ../../LICENSE.OPENSPACE-MIT",
+      "acquisition": "checked configuration at pinned OpenSpace commit",
+      "redistribution": "permitted with OpenSpace MIT notice",
+      "consumers": ["scene"]
+    },
+    {
+      "id": "moon-title-mark",
+      "path": "presentation/title-mark.mjs",
+      "expectedSha256": "db28d248c05b5a6fe2ec1fd1b5134d6f729a2802d03a37f3a8a771807f9f52ef",
+      "expectedBytes": 2832,
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": ["https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"],
+      "acquisition": "deterministically generated Moon title path from the repository-pinned Inter font",
+      "redistribution": "generated outline under the Inter license",
+      "consumers": ["title"]
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "expectedBytes": 29082084,
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": ["https://www.eso.org/public/images/eso0932a/"],
+      "acquisition": "checked ESO all-sky panorama",
+      "redistribution": "CC BY 4.0 with attribution",
+      "consumers": ["starfield"]
+    },
+    {
+      "id": "hyg-registration-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedSha256": "49eb1e69ecf508ebebf98e688b5732c96200d9abf3252754a78f2fdd45a1e303",
+      "expectedBytes": 144990,
+      "origin": "https://github.com/astronexus/HYG-Database/releases/tag/v4.1",
+      "credit": "David Nash",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": ["https://github.com/astronexus/HYG-Database/blob/main/LICENSE"],
+      "acquisition": "checked prepared registration field from HYG v4.1",
+      "redistribution": "CC BY-SA 4.0 with attribution",
+      "consumers": ["starfield"]
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
+      "expectedBytes": 1271,
+      "purpose": "Checked ESO image credit and CC BY 4.0 evidence"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedSha256": "6cff6933451962c3db6fc5dc1f8989a8cee8af1cd919fcd43960ac6c1770ec7e",
+      "expectedBytes": 387,
+      "purpose": "Checked HYG database attribution and license notice"
+    }
+  ]
+}

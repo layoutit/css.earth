@@ -1,0 +1,350 @@
+{
+  "schema": "cssmars-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "inter-mars-title-vector",
+      "path": "presentation/title-mark.mjs",
+      "expectedSha256": "0e2eaebc28d1d43c2a9d09efd1c9ceccf0e56727baf79b065deda5ab81108273",
+      "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Mars outline",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
+      "redistribution": "project-authored SVG outline with Inter attribution",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 3325
+    },
+    {
+      "id": "nasa-hubble-mars-navigation-marker",
+      "path": "presentation/navigation-marker.jpg",
+      "expectedSha256": "f55dad386a7d45e2758c0dc1d520c40dc6f2aaa517f08451facba738e121b8cb",
+      "origin": "https://science.nasa.gov/wp-content/uploads/2023/04/hs-2016-15-a-full_tif-jpg.webp",
+      "credit": "NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Bell (ASU), and M. Wolff (Space Science Institute)",
+      "license": "Creative Commons Attribution 4.0 International under ESA/Hubble reuse terms",
+      "licenseEvidence": [
+        "https://science.nasa.gov/image-detail/hs-2016-15-a-full_tif_for_promo/",
+        "https://esahubble.org/images/heic1609a/",
+        "https://esahubble.org/copyright/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "checked full-disc Hubble source snapshot",
+      "redistribution": "prepared cropped navigation derivative under CC BY 4.0 with the full unaltered source credit and no endorsement claim",
+      "consumers": [
+        "navigation",
+        "atmosphere",
+        "lighting"
+      ],
+      "expectedBytes": 139134
+    },
+    {
+      "id": "openspace-mars-globe",
+      "path": "openspace/globe.asset",
+      "expectedSha256": "63193fe00325bed70f3f3ed55dc016d3dcc21b5795ae05f00e57b66813dada92",
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/globe.asset",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/globe.asset"
+      ],
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked MIT source snapshot",
+      "consumers": [
+        "body",
+        "scene"
+      ],
+      "expectedBytes": 1753
+    },
+    {
+      "id": "openspace-mars-atmosphere",
+      "path": "openspace/atmosphere.asset",
+      "expectedSha256": "0850b8906314a8d72072b60ae3a3e0f0eb37525292955d911767310d2ed97ac5",
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset"
+      ],
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked MIT source snapshot",
+      "consumers": [
+        "atmosphere",
+        "lighting"
+      ],
+      "expectedBytes": 2044
+    },
+    {
+      "id": "openspace-mars-kernels",
+      "path": "openspace/kernels.asset",
+      "expectedSha256": "0aa4b3b9efdb9feadd547a112fb0c222eecb641bdaad6a1326224e457a28ffbe",
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/kernels.asset",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked MIT source snapshot",
+      "consumers": [
+        "scene",
+        "moons"
+      ],
+      "expectedBytes": 600
+    },
+    {
+      "id": "openspace-phobos-globe",
+      "path": "openspace/phobos-globe.asset",
+      "expectedSha256": "fdad04aec33f6c977351f1e61a47af84472af8a9e7a76c597b0b70d7078eb6b3",
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/phobos/globe.asset",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked MIT source snapshot",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 912
+    },
+    {
+      "id": "openspace-deimos-globe",
+      "path": "openspace/deimos-globe.asset",
+      "expectedSha256": "97d82ac4d3d78a21222601faded261fae7670570f76c6a94b26024f2d34b5f89",
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/deimos/globe.asset",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked MIT source snapshot",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 912
+    },
+    {
+      "id": "usgs-viking-mdim21-color",
+      "path": "surface/mars-viking-mdim21-color-1km.jpg",
+      "expectedSha256": "fdfcd335559c3dc67052b7e8a9565d850e336ac0d1f3ea7f5eb7826ffb44ecb2",
+      "origin": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg",
+      "credit": "USGS Astrogeology, NASA Ames, NASA Viking",
+      "license": "NASA/PDS United States government data",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked government data product without logos",
+      "consumers": [
+        "body",
+        "lenses"
+      ],
+      "expectedBytes": 36708552
+    },
+    {
+      "id": "usgs-mola-pseudocolor",
+      "path": "lenses/mola-pseudocolor-z3.png",
+      "expectedSha256": "25a0b3ade0d01fc28bb04e452ed8780f023d9ac76092d60d47be81b7f6af9e2d",
+      "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
+      "credit": "USGS Astrogeology, NASA Mars Global Surveyor MOLA",
+      "license": "NASA/PDS United States government data",
+      "acquisition": "tools/acquire-sources.mjs --refresh stitches the complete 16 by 8 level-3 TMS snapshot",
+      "redistribution": "checked prepared government-data mosaic without logos",
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 18716720
+    },
+    {
+      "id": "usgs-themis-ir-day",
+      "path": "lenses/themis-ir-day-z3.png",
+      "expectedSha256": "e31b41a6e44547f882b86ca1c8c12efe80a1c4b320d06a7aee41304eb74387d1",
+      "origin": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
+      "credit": "USGS Astrogeology, Arizona State University, NASA Mars Odyssey THEMIS",
+      "license": "NASA/PDS United States government data",
+      "acquisition": "tools/acquire-sources.mjs --refresh stitches the complete 14 by 7 level-3 TMS snapshot",
+      "redistribution": "checked prepared government-data mosaic without logos",
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 7267744
+    },
+    {
+      "id": "openspace-phobos-model",
+      "path": "moons/phobos.glb",
+      "expectedSha256": "757712101e4fbcf9527942ee664a3bc6dfe3ab460466b760f4bf51ee85dbd8d3",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/mars/phobos/model/1/Phobos_1_1000.glb",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/phobos/model.asset"
+      ],
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked MIT model snapshot",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 3855016
+    },
+    {
+      "id": "openspace-deimos-model",
+      "path": "moons/deimos.glb",
+      "expectedSha256": "5d5da763970acffe88aac26d3c3bd0fa66c5bef251d1bb4bfe2ae5fd723507e4",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/mars/deimos/model/1/Deimos_1_1000.glb",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/deimos/model.asset"
+      ],
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked MIT model snapshot",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 1600012
+    },
+    {
+      "id": "jpl-mars-satellite-physical-parameters",
+      "path": "moons/jpl-physical-parameters.html",
+      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
+      "license": "United States government data",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked source snapshot",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 84633
+    },
+    {
+      "id": "jpl-mars-satellite-mean-elements",
+      "path": "moons/jpl-mean-elements.html",
+      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
+      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
+      "license": "United States government data",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked source snapshot",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 418952
+    },
+    {
+      "id": "nasa-psg-mars-configuration",
+      "path": "atmosphere/psg-mars-20260829.cfg",
+      "expectedSha256": "da649c1b783a9390697db2f49a25667b518b5c923ddb7ac426037c97c08f8dde",
+      "origin": "https://psg.gsfc.nasa.gov/api.php",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government generated data",
+      "acquisition": "tools/acquire-sources.mjs --refresh expands a pinned Mars ephemeris seed",
+      "redistribution": "checked generated source snapshot",
+      "consumers": [
+        "atmosphere",
+        "spectrum"
+      ],
+      "expectedBytes": 11093
+    },
+    {
+      "id": "nasa-psg-mars-reflectance",
+      "path": "atmosphere/psg-mars-r240-rif.txt",
+      "expectedSha256": "1f6c5f4ccecbf41ab44a27e9eeab07d99170697cb21ffda2137cef393290e3d4",
+      "origin": "https://psg.gsfc.nasa.gov/api.php",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government generated data",
+      "acquisition": "tools/acquire-sources.mjs --refresh requests I/F at R 240 from the pinned configuration",
+      "redistribution": "checked generated source snapshot",
+      "consumers": [
+        "spectrum"
+      ],
+      "expectedBytes": 11908
+    },
+    {
+      "id": "hyg-v41-cubic-sky-registration",
+      "path": "stars/hyg-v41-field.json",
+      "expectedSha256": "b1a35dbb883a26a69cf61fffc36bac48be948972a1ba68d892e003b98a753332",
+      "expectedBytes": 144988,
+      "origin": "HYG Stellar Database v4.1 commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
+      "credit": "David Nash / Astronexus",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": [
+        "stars/LICENSE.md"
+      ],
+      "acquisition": "Prepared deterministic coordinate-registration subset from the pinned HYG v4.1 source.",
+      "redistribution": "Share-alike prepared subset with attribution and license evidence.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "expectedBytes": 29082084,
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield",
+        "scene"
+      ]
+    },
+    {
+      "id": "google-earth-pro-mars-sky-behavior-contract",
+      "path": "sky/google-earth-pro-contract.json",
+      "expectedSha256": "360618f1638471e2f3be37907a67c815104af4e9a57e713cf1938159ae9ad8a0",
+      "expectedBytes": 3561,
+      "origin": "Headless local measurements of Google Earth Pro 7.3.7.1327 Mars mode on 2026-09-02",
+      "credit": "Repository-authored clean-room behavioral measurements",
+      "license": "Repository-authored factual measurements; no Google image, texture, or shader bytes",
+      "acquisition": "201 native headless camera trajectories with isolated sky-map, star-catalogue, and Sun draw-state instrumentation.",
+      "redistribution": "Factual equations and residual measurements only.",
+      "consumers": [
+        "starfield",
+        "scene",
+        "lighting",
+        "camera",
+        "sky-sun"
+      ]
+    },
+    {
+      "id": "google-maps-cubic-sky-sun-oracle-asset",
+      "path": "sun/google-maps-sun.png",
+      "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
+      "expectedBytes": 10947,
+      "origin": "https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference",
+      "license": "Google proprietary; no redistribution grant verified",
+      "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the source for the generic cubic-sky presentation standard.",
+      "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
+      "consumers": [
+        "sun-oracle"
+      ]
+    },
+    {
+      "id": "google-maps-cubic-sky-sun-oracle-measurements",
+      "path": "sun/google-maps-sun-oracle.json",
+      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
+      "expectedBytes": 2895,
+      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
+      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
+      "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
+      "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
+      "consumers": [
+        "sun-oracle"
+      ]
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "expectedSha256": "5590879b8df6e808e0c8287a28fe7c1a421b1eca88cb23575b5a82a470c989b2",
+      "expectedBytes": 597,
+      "purpose": "HYG v4.1 attribution and CC-BY-SA-4.0 license record"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
+      "expectedBytes": 1271,
+      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    }
+  ]
+}

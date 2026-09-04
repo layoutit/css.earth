@@ -1,0 +1,132 @@
+{
+  "schema": "csssaturn-interior-sources@1",
+  "defaultView": "exterior",
+  "cutaway": {
+    "centerLongitudeDegrees": -56.25,
+    "widthDegrees": 112.5,
+    "metallicShellRadius": 0.68,
+    "diffuseCoreVisualRadius": 0.44,
+    "diffuseCoreTransitionRadius": 0.6,
+    "qualification": "schematic source-backed interior model; radial transitions are prepared presentation ranges, not directly imaged boundaries"
+  },
+  "palette": {
+    "molecularEnvelope": [187, 147, 103],
+    "metallicHydrogen": [119, 132, 145],
+    "diffuseCore": [196, 121, 79],
+    "deepCore": [224, 159, 101]
+  },
+  "interiorLenses": {
+    "ultraviolet": {
+      "filter": "F225W",
+      "wavelength": "225 nm",
+      "model": "prepared-schematic-spectral-response-depth-map",
+      "qualification": "false-color atmospheric spectral response over a schematic interior; deep layers are contextual and not directly observed",
+      "palette": {
+        "molecularEnvelope": [172, 151, 220],
+        "metallicHydrogen": [91, 58, 139],
+        "diffuseCore": [62, 42, 94],
+        "deepCore": [36, 29, 55]
+      },
+      "sectionResponse": {
+        "innerFloor": 0.72,
+        "startRadius": 0.45,
+        "exponent": 1.3
+      },
+      "shellGain": {
+        "metallic": 0.92,
+        "core": 0.78
+      }
+    },
+    "methane": {
+      "filter": "FQ889N",
+      "wavelength": "889 nm",
+      "model": "prepared-schematic-spectral-response-depth-map",
+      "qualification": "false-color methane-band atmospheric absorption over a schematic interior; deep layers are contextual and not directly observed",
+      "palette": {
+        "molecularEnvelope": [111, 181, 184],
+        "metallicHydrogen": [25, 93, 103],
+        "diffuseCore": [15, 55, 65],
+        "deepCore": [8, 30, 37]
+      },
+      "sectionResponse": {
+        "innerFloor": 0.62,
+        "startRadius": 0.62,
+        "exponent": 1.8
+      },
+      "shellGain": {
+        "metallic": 0.82,
+        "core": 0.65
+      }
+    },
+    "thermal": {
+      "filter": "VIMS 1.19-5.06 um composite",
+      "wavelength": "1.19-5.06 um",
+      "model": "prepared-schematic-thermal-response-depth-map",
+      "qualification": "Cassini VIMS and CIRS-informed thermal false color over a schematic interior; deep layers are contextual and not directly observed",
+      "palette": {
+        "molecularEnvelope": [114, 35, 23],
+        "metallicHydrogen": [158, 49, 24],
+        "diffuseCore": [221, 91, 31],
+        "deepCore": [255, 184, 72]
+      },
+      "sectionResponse": {
+        "innerFloor": 1,
+        "startRadius": 0,
+        "exponent": 1
+      },
+      "shellGain": {
+        "metallic": 0.95,
+        "core": 1
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "nasa-jpl-saturn-interior-cutaway",
+      "url": "https://science.nasa.gov/resource/saturn-interior-cutaway-illustration/",
+      "assetUrl": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/s/Saturn_Poster_FullRez1d.jpg",
+      "assetSha256": "63881b2853d29c63d196bd859790dad15750fd6c409e8641377d87053c8d54c6",
+      "assetBytes": 32371836,
+      "credit": "NASA/JPL-Caltech",
+      "use": "composition labels and visual reference only; no source pixels are redistributed"
+    },
+    {
+      "id": "mankovich-fuller-2021-diffuse-core",
+      "url": "https://doi.org/10.1038/s41550-021-01448-3",
+      "repositoryUrl": "https://authors.library.caltech.edu/records/3cfjn-nw512",
+      "finding": "diffuse stably stratified core-envelope transition extends to approximately 60 percent of Saturn radius",
+      "use": "diffuse core extent and scientific qualification"
+    },
+    {
+      "id": "movshovitz-et-al-saturn-density-profiles",
+      "url": "https://doi.org/10.7291/D1P07G",
+      "license": "CC0",
+      "use": "gravity-constrained continuous-density reference; supports smooth rather than hard layer transitions"
+    },
+    {
+      "id": "nasa-hubble-wavelengths-saturn",
+      "url": "https://science.nasa.gov/mission/hubble/science/science-behind-the-discoveries/wavelengths/",
+      "use": "ultraviolet false-color interpretation of Saturn haze, cloud, gas, and ring response"
+    },
+    {
+      "id": "stsci-wfc3-uvis-filter-reference",
+      "url": "https://hst-docs.stsci.edu/wfc3ihb/chapter-6-uvis-imaging-with-wfc3/6-5-uvis-spectral-elements",
+      "use": "F225W ultraviolet and FQ889N methane-filter identification"
+    },
+    {
+      "id": "simon-et-al-2022-giant-planet-atmospheres",
+      "url": "https://ntrs.nasa.gov/citations/20220004467",
+      "use": "Saturn wavelength-dependent atmospheric appearance and strong 889 nm methane-band darkness"
+    },
+    {
+      "id": "cassini-vims-pia17469",
+      "url": "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/",
+      "use": "thermal false-color palette and the 4.88-5.06 um internal-heat response"
+    },
+    {
+      "id": "cassini-cirs-thermal-mapping",
+      "url": "https://science.nasa.gov/mission/cassini/spacecraft/cassini-orbiter/composite-infrared-spectrometer/",
+      "use": "temperature interpretation for Saturn's atmosphere and rings"
+    }
+  ]
+}

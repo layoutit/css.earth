@@ -1,0 +1,431 @@
+{
+  "schema": "csssaturn-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "inter-saturn-title-vector",
+      "path": "presentation/title-mark.mjs",
+      "expectedSha256": "cb0aced786d60aec377a044df7edb6c5fa0dea7cabb4677c75a83a13ff88b677",
+      "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Saturn outline",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
+      "redistribution": "project-authored SVG outline with Inter attribution",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 3721
+    },
+    {
+      "id": "openspace-saturn-surface",
+      "path": "saturn-surface-original.jpg",
+      "expectedSha256": "5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/1/saturn.jpg",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset",
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/layers/colorlayers/saturn_texture.asset"
+      ],
+      "acquisition": "checked snapshot from OpenSpace saturn_textures",
+      "redistribution": "permitted with the OpenSpace MIT notice",
+      "consumers": [
+        "navigation",
+        "scene"
+      ],
+      "expectedBytes": 1036492
+    },
+    {
+      "id": "openspace-saturn-ring-color",
+      "path": "color_original_single.png",
+      "expectedSha256": "952b8de4343127e2188a6fb293d499e3e8b7c19147f5a2d727c525f8e9bcebda",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset"
+      ],
+      "acquisition": "checked snapshot from OpenSpace saturn_textures version 4",
+      "redistribution": "permitted with the OpenSpace MIT notice",
+      "consumers": [
+        "assets",
+        "starfield"
+      ],
+      "expectedBytes": 2059
+    },
+    {
+      "id": "openspace-saturn-ring-transparency",
+      "path": "trans_original_single.png",
+      "expectedSha256": "37a40a8217961cda634a3fe48775072f5097b40d8945cfaf82bdfb58b98caf2a",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/globe.asset"
+      ],
+      "acquisition": "checked snapshot from OpenSpace saturn_textures version 4",
+      "redistribution": "permitted with the OpenSpace MIT notice",
+      "consumers": [
+        "assets"
+      ],
+      "expectedBytes": 2303
+    },
+    {
+      "id": "cassini-pia21611-polar-map",
+      "path": "cassini-pia21611.jpg",
+      "expectedSha256": "2e9765b2ffada33d74bfbe0443ea0bbf59bb15f27a128b7ba99160fdeb78f177",
+      "origin": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/",
+      "credit": "NASA/JPL-Caltech/Space Science Institute/Hampton University",
+      "license": "NASA and JPL public media reuse policies; the source page carries no separate copyright restriction",
+      "licenseEvidence": [
+        "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/",
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "checked PIA21611 product snapshot",
+      "redistribution": "checked source image and prepared derivative with the full source credit and no endorsement claim",
+      "consumers": [
+        "scene"
+      ],
+      "expectedBytes": 105281
+    },
+    {
+      "id": "saturn-approved-fixed-material",
+      "path": "approved/saturn-fixed-material.webp",
+      "expectedSha256": "e25f97df1892978a1140e9c6a27a4b9976c047f8b92162d0a8d898ba13a85007",
+      "origin": "accepted cssEarth Saturn fixed-camera material prepared from the declared Saturn surface, rings, camera, lighting, and atmosphere model",
+      "credit": "cssEarth adapter preparation",
+      "license": "project-authored prepared presentation",
+      "acquisition": "checked accepted preparation snapshot; decoded RGBA is validated before derivative generation",
+      "redistribution": "project runtime asset",
+      "consumers": [
+        "scene"
+      ],
+      "expectedBytes": 154240
+    },
+    {
+      "id": "saturn-approved-static-weather",
+      "path": "saturn-weather-static.webp",
+      "expectedSha256": "04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3",
+      "origin": "accepted cssEarth Saturn three-storm texel snapshot prepared from the declared Saturn surface and documented storm kernels",
+      "credit": "cssEarth adapter preparation using the OpenSpace Saturn surface",
+      "license": "project-authored prepared presentation over the OpenSpace MIT source",
+      "acquisition": "checked accepted static snapshot; node src/planets/saturn/tools/prepare-weather-source.mjs validates and copies it without re-encoding",
+      "redistribution": "project runtime asset with OpenSpace attribution",
+      "consumers": [
+        "scene",
+        "weather"
+      ],
+      "expectedBytes": 1692
+    },
+    {
+      "id": "nasa-psg-saturn-expanded-configuration",
+      "path": "atmosphere/psg-saturn-20260829.cfg",
+      "expectedSha256": "93165938d49f7682b5b9bf9b23537a1ed3a0c3f91fc6cec4f4af9e2274d9682e",
+      "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, wephm=y, watm=y, OBJECT-DATE=2026/08/29 12:00, OBJECT-NAME=Saturn",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "U.S. government scientific model response",
+      "acquisition": "node src/planets/saturn/tools/acquire-atmosphere-spectrum.mjs with the checked seed and generator parameters documented in SOURCE.md",
+      "redistribution": "checked text configuration with NASA attribution",
+      "consumers": [
+        "spectrum",
+        "temperature-pressure-profile"
+      ],
+      "expectedBytes": 8260
+    },
+    {
+      "id": "nasa-psg-saturn-r240-rif-response",
+      "path": "atmosphere/psg-saturn-r240-rif.txt",
+      "expectedSha256": "7908cd301b19cbeba2e08a29457f621296860b29ea5f021dea4dea2041fbf1b6",
+      "origin": "https://psg.gsfc.nasa.gov/api.php, type=rad, pinned expanded configuration, 0.35 to 1.0 um, R=240, rif",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "U.S. government scientific model response",
+      "acquisition": "checked raw ASCII response acquired on 2026-08-29; preparation reads this local snapshot only",
+      "redistribution": "checked model response with NASA attribution",
+      "consumers": [
+        "spectrum"
+      ],
+      "expectedBytes": 11913
+    },
+    {
+      "id": "hyg-v41-saturn-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedSha256": "0aec282e4c6362d498fd85452a1bb4ac11a76a67409b752c30b99f00c57fb70e",
+      "origin": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
+      "credit": "David Nash / Astronexus",
+      "license": "CC-BY-SA-4.0, see stars/LICENSE.md",
+      "acquisition": "prepared checked subset of HYG v4.1",
+      "redistribution": "permitted under CC-BY-SA-4.0 with attribution and share-alike",
+      "consumers": [
+        "assets"
+      ],
+      "expectedBytes": 144992
+    },
+    {
+      "id": "saturn-interior-model",
+      "path": "interior/manifest.json",
+      "expectedSha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
+      "origin": "adapter-owned checked scientific presentation specification with sources recorded inside the file",
+      "credit": "NASA/JPL-Caltech and cited scientific authors",
+      "license": "project-authored specification; external references retain their own terms",
+      "acquisition": "checked repository source",
+      "redistribution": "project specification may be redistributed with its embedded source qualifications",
+      "consumers": [
+        "interior"
+      ],
+      "expectedBytes": 5097
+    },
+    {
+      "id": "saturn-moon-catalog",
+      "path": "moons/saturn-moons.json",
+      "expectedSha256": "5dcb5b297e06026d3b150de94484274cd5a34e4e10dfdcdb97e74664d3eb56c5",
+      "origin": "normalized facts from JPL Solar System Dynamics discovery and mean-elements tables plus one orbital radius from MPC MPEC 2026-M19; only source URLs and hashes are retained",
+      "credit": "NASA/JPL Solar System Dynamics and the Minor Planet Center",
+      "license": "NASA/JPL United States government data; the MPC circular is cited but not redistributed",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/sats/discovery.html",
+        "https://ssd.jpl.nasa.gov/sats/elem/",
+        "https://minorplanetcenter.net/mpec/K26/K26M19.html"
+      ],
+      "acquisition": "node src/planets/saturn/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes",
+      "redistribution": "normalized factual data only; no MPC circular text is redistributed",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 226054
+    },
+    {
+      "id": "openspace-dione-map",
+      "path": "moons/dione.jpg",
+      "expectedSha256": "418fdc4ea2b53103350be26ee8a1569e9d9abd21be32aafaf2e801eeff495077",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/dione/textures/1/dione.jpg",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/dione/layers/colorlayers/dione_texture.asset"
+      ],
+      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "redistribution": "permitted with the OpenSpace MIT notice",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 5159886
+    },
+    {
+      "id": "openspace-enceladus-map",
+      "path": "moons/enceladus.jpg",
+      "expectedSha256": "5ba6590ca057565369bcb5e5785a3d4c0deeb9635af2e20701aa25e5d330ce31",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/enceladus/textures/1/enceladus.jpg",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/enceladus/layers/colorlayers/enceladus_texture.asset"
+      ],
+      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "redistribution": "permitted with the OpenSpace MIT notice",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 4858450
+    },
+    {
+      "id": "openspace-iapetus-map",
+      "path": "moons/iapetus.jpg",
+      "expectedSha256": "d49a3795bf5e831fb1ce040c58b66a0c81ca1a5d73badca077b24c3c8e67ec9b",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/iapetus/textures/1/iapetus.jpg",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/iapetus/layers/colorlayers/iapetus_texture.asset"
+      ],
+      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "redistribution": "permitted with the OpenSpace MIT notice",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 3998916
+    },
+    {
+      "id": "openspace-mimas-map",
+      "path": "moons/mimas.jpg",
+      "expectedSha256": "d55601e1661a9c47046a06303f308f6f32b5e53eeed69ca708ff37b6d0580ffb",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/mimas/textures/1/mimas.jpg",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/mimas/layers/colorlayers/mimas_texture.asset"
+      ],
+      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "redistribution": "permitted with the OpenSpace MIT notice",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 1370319
+    },
+    {
+      "id": "openspace-rhea-map",
+      "path": "moons/rhea.jpg",
+      "expectedSha256": "17df9b4dae4c7e40aa42f0d06e44ca4f7962817a7764e936a01395f6aa2e159f",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/rhea/textures/1/rhea.jpg",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/rhea/layers/colorlayers/rhea_texture.asset"
+      ],
+      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "redistribution": "permitted with the OpenSpace MIT notice",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 7578314
+    },
+    {
+      "id": "openspace-tethys-map",
+      "path": "moons/tethys.jpg",
+      "expectedSha256": "a0c4a0344f2361b781977e9ef9679a8cd99dd6cffacf2c1f1212a3afafa2f7d9",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/tethys/textures/1/tethys.jpg",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/tethys/layers/colorlayers/tethys_texture.asset"
+      ],
+      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "redistribution": "permitted with the OpenSpace MIT notice",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 1483819
+    },
+    {
+      "id": "openspace-titan-cassini-mosaic",
+      "path": "moons/titan.tif",
+      "expectedSha256": "5052b9f679d5e5a3e5c35c19bbac8349fcb0a6c17a8b0027b00ed8d735cc1477",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/titan/textures/2/Titan_ISS_P19658_Mosaic_Global_4km_os.tif",
+      "credit": "USGS and NASA/PDS Cassini ISS via OpenSpace",
+      "license": "NASA/PDS source data with OpenSpace attribution",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/titan/layers/colorlayers/cassini_iss_global_mosaic_4km_local.asset"
+      ],
+      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "redistribution": "prepared derivative with USGS, NASA/PDS, and OpenSpace credit",
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 8169258
+    },
+    {
+      "id": "hubble-opal-2025a-f225w",
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
+      "expectedSha256": "501c88e880a65a009fea9d86b66fe4b824abc0a07a56c0f382abe593cc08f314",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms",
+      "acquisition": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "redistribution": "prepared false-color derivative with source credit",
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 6482880
+    },
+    {
+      "id": "hubble-opal-2025b-f225w",
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
+      "expectedSha256": "0a1e41e4f4de7bb0a026d29b303dfbcf55f902382c2e621dfd522d95881c75d3",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms",
+      "acquisition": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "redistribution": "prepared false-color derivative with source credit",
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 6482880
+    },
+    {
+      "id": "hubble-opal-2025a-fq889n",
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
+      "expectedSha256": "2913da896d5e33c292d8c7a95a699cee606067b743b0bb2cab06ce51be90af53",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms",
+      "acquisition": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "redistribution": "prepared false-color derivative with source credit",
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 6482880
+    },
+    {
+      "id": "hubble-opal-2025b-fq889n",
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
+      "expectedSha256": "709166ace6d89028ef8ab884323f0d886281054dac2378584f82ce2c5f90e459",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms",
+      "acquisition": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "redistribution": "prepared false-color derivative with source credit",
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 6482880
+    },
+    {
+      "id": "eso-saturn-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "expectedBytes": 29082084,
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
+      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": ["starfield", "scene"]
+    },
+    {
+      "id": "google-maps-saturn-cubic-sky-sun-oracle-asset",
+      "path": "sun/google-maps-sun.png",
+      "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
+      "expectedBytes": 10947,
+      "origin": "https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference",
+      "license": "Google proprietary; no redistribution grant verified",
+      "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
+      "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
+      "consumers": ["starfield", "sun-oracle", "scene"]
+    },
+    {
+      "id": "google-maps-saturn-cubic-sky-sun-oracle-measurements",
+      "path": "sun/google-maps-sun-oracle.json",
+      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
+      "expectedBytes": 2895,
+      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
+      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
+      "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
+      "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
+      "consumers": ["starfield", "sun-oracle", "scene", "lighting"]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "path": "lenses/manifest.json",
+      "expectedSha256": "4fe757b1e66df8328b15951f8488accac0717f0208da155a2b05cbc2365a3403",
+      "generator": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "expectedBytes": 2316
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "HYG subset attribution and CC-BY-SA-4.0 terms",
+      "expectedBytes": 596,
+      "expectedSha256": "65dfc6192994d4b6c6f725a336aa1a8862f554eb5062e75f77b6e79f186d1a58"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
+      "expectedBytes": 1271,
+      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    }
+  ]
+}

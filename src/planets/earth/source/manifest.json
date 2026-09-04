@@ -1,0 +1,285 @@
+{
+  "schema": "cssearth-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "nasa-earth-navigation-globe",
+      "path": "earth-navigation.jpg",
+      "expectedSha256": "48ccd32ef57d182662999905841109095d66d68d69e27dba7decc6e134a811a0",
+      "expectedBytes": 183367,
+      "origin": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001016/GSFC_20171208_Archive_e001016~large.jpg",
+      "credit": "NASA",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "acquisition": "checked NASA Earth globe for the navigation marker",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "consumers": ["navigation"]
+    },
+    {
+      "id": "nasa-blue-marble-december",
+      "path": "blue-marble-december.jpg",
+      "expectedSha256": "b0ffc9d12205689aeaec66116bbae2c4c263fcd98a0cbadba8d5488567b53278",
+      "expectedBytes": 23931114,
+      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg",
+      "credit": "NASA Earth Observatory",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "acquisition": "checked Blue Marble Next Generation December 2004 snapshot",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "consumers": ["navigation", "scene", "lenses"]
+    },
+    {
+      "id": "nasa-blue-marble-topography",
+      "path": "blue-marble-topography.jpg",
+      "expectedSha256": "3006c58b1272362db0a8c2df02dc07cea4b12dfe820b7dc4a159a075caf5d4d4",
+      "expectedBytes": 29868040,
+      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x21600x10800.jpg",
+      "credit": "NASA Earth Observatory",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "acquisition": "checked Blue Marble topography and bathymetry snapshot",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "consumers": ["lenses"]
+    },
+    {
+      "id": "nasa-blue-marble-clouds",
+      "path": "blue-marble-clouds.tif",
+      "expectedSha256": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
+      "expectedBytes": 35870468,
+      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif",
+      "credit": "NASA Visible Earth",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "acquisition": "checked Blue Marble Clouds global TIFF",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "consumers": ["scene"]
+    },
+    {
+      "id": "nasa-black-marble-2016",
+      "path": "black-marble-2016.jpg",
+      "expectedSha256": "230aac448ae68c358be433dd518888cccb3a85ccf66f7b44326441c324ad6725",
+      "expectedBytes": 8106233,
+      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg",
+      "credit": "NASA Earth Observatory",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "acquisition": "checked Black Marble 2016 global 3 km image at 13500 by 6750 pixels",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "consumers": ["lenses"]
+    },
+    {
+      "id": "jpl-satellite-physical",
+      "path": "moon/jpl-satellite-physical.html",
+      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
+      "expectedBytes": 84633,
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+      "credit": "NASA JPL Solar System Dynamics",
+      "license": "United States government factual data",
+      "licenseEvidence": ["https://www.jpl.nasa.gov/jpl-image-use-policy/"],
+      "acquisition": "checked satellite physical-parameter authority page",
+      "redistribution": "checked authority page with JPL attribution",
+      "consumers": ["moon"]
+    },
+    {
+      "id": "jpl-satellite-elements",
+      "path": "moon/jpl-satellite-elements.html",
+      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
+      "expectedBytes": 418952,
+      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+      "credit": "NASA JPL Solar System Dynamics",
+      "license": "United States government factual data",
+      "licenseEvidence": ["https://www.jpl.nasa.gov/jpl-image-use-policy/"],
+      "acquisition": "checked satellite mean-elements authority page",
+      "redistribution": "checked authority page with JPL attribution",
+      "consumers": ["moon"]
+    },
+    {
+      "id": "nasa-earth-editorial-record",
+      "path": "editorial/nasa-earth-record.json",
+      "expectedSha256": "3818e2c43d202bffd757e32b0279915c1b2903c97069e591203f200e5467f218",
+      "expectedBytes": 80805,
+      "origin": "https://science.nasa.gov/wp-json/wp/v2/topic/48583",
+      "credit": "NASA Science",
+      "license": "United States government editorial content",
+      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "acquisition": "checked canonical Earth topic record retrieved 2026-08-30",
+      "redistribution": "selected factual text with NASA Science attribution",
+      "consumers": ["editorial", "panel", "interior"]
+    },
+    {
+      "id": "nasa-psg-earth-configuration",
+      "path": "atmosphere/psg-earth-20260830.cfg",
+      "expectedSha256": "f658cc3471595caddbe04ae5fbfde6523f3ef160ec0bd5ba3074635f3561834e",
+      "expectedBytes": 27346,
+      "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, Earth, 2026-08-30 12:00",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government scientific model response",
+      "acquisition": "expanded Earth configuration with the leading non-configuration warning removed and declared R=120 generator block appended",
+      "redistribution": "checked text configuration with NASA attribution",
+      "consumers": ["spectrum"]
+    },
+    {
+      "id": "nasa-psg-earth-spectrum",
+      "path": "atmosphere/psg-earth-r120-rif.txt",
+      "expectedSha256": "0dab314d53880a46cf05f0a60dc535b386fa57ef5d980dceb20bbcc00a35f08a",
+      "expectedBytes": 6404,
+      "origin": "https://psg.gsfc.nasa.gov/api.php, type=rad, pinned Earth configuration, 0.35 to 1.0 um, R=120, I/F",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government scientific model response",
+      "acquisition": "checked response with only volatile synthesis-clock comments normalized",
+      "redistribution": "checked numerical model response with NASA attribution",
+      "consumers": ["spectrum"]
+    },
+    {
+      "id": "openspace-earth-globe-config",
+      "path": "openspace/earth-globe.asset",
+      "expectedSha256": "e73d5452846f54e26d3e6477977bef5c76aac3c0091a592ce14527d39ff39fa4",
+      "expectedBytes": 1588,
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/earth/globe.asset",
+      "credit": "OpenSpace Project",
+      "license": "MIT, see ../../LICENSE.OPENSPACE-MIT",
+      "acquisition": "checked configuration at pinned OpenSpace commit",
+      "redistribution": "permitted with OpenSpace MIT notice",
+      "consumers": ["source-verification"]
+    },
+    {
+      "id": "openspace-earth-atmosphere-config",
+      "path": "openspace/earth-atmosphere.asset",
+      "expectedSha256": "9473aa3177363c097fa24eedb205da08ad926266828bde0b1aac7d57faee840a",
+      "expectedBytes": 2437,
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/earth/atmosphere.asset",
+      "credit": "OpenSpace Project",
+      "license": "MIT, see ../../LICENSE.OPENSPACE-MIT",
+      "acquisition": "checked configuration at pinned OpenSpace commit",
+      "redistribution": "permitted with OpenSpace MIT notice",
+      "consumers": ["atmosphere"]
+    },
+    {
+      "id": "google-earth-pro-atmosphere-presentation-response",
+      "path": "atmosphere/google-earth-pro-presentation-response.json",
+      "expectedSha256": "258603b886b0079cde14c23585e22b52f7752b26ec6e3248a3e6b8f93f059673",
+      "expectedBytes": 2071,
+      "origin": "Google Earth Pro 7.3.7.1327 linked shader and headless isolated-layer captures recorded locally on 2026-09-02",
+      "credit": "Google Earth Pro presentation reference; measurements recorded by this project",
+      "license": "Repository-authored factual measurements; no Google pixels or shader bytes redistributed",
+      "acquisition": "Headless native layer isolation with the active linked shader and Sun-direction uniform bound to the same capture run.",
+      "redistribution": "Factual response measurements and a clean-room prepared approximation only.",
+      "consumers": ["atmosphere"]
+    },
+    {
+      "id": "inter-earth-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "expectedBytes": 862936,
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": ["https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"],
+      "acquisition": "checked Inter Variable font at pinned commit",
+      "redistribution": "permitted under SIL OFL 1.1",
+      "consumers": ["title"]
+    },
+    {
+      "id": "hyg-v41-earth-field",
+      "path": "stars/hygdata_v41.csv",
+      "expectedSha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
+      "expectedBytes": 33932548,
+      "origin": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
+      "credit": "David Nash and Astronexus",
+      "license": "CC BY-SA 4.0, see stars/LICENSE.md",
+      "licenseEvidence": ["https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce"],
+      "acquisition": "checked HYG Database v4.1 CSV at pinned commit",
+      "redistribution": "permitted under CC BY-SA 4.0 with attribution and share-alike",
+      "consumers": ["stars"]
+    },
+    {
+      "id": "hyg-v41-earth-cubic-sky-registration",
+      "path": "stars/hyg-v41-field.json",
+      "expectedSha256": "49eb1e69ecf508ebebf98e688b5732c96200d9abf3252754a78f2fdd45a1e303",
+      "expectedBytes": 144990,
+      "origin": "HYG Stellar Database v4.1 commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
+      "credit": "David Nash / Astronexus",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": ["stars/LICENSE.md"],
+      "acquisition": "Prepared deterministic coordinate-registration subset from the pinned HYG v4.1 source.",
+      "redistribution": "Share-alike prepared subset with attribution and license evidence.",
+      "consumers": ["starfield"]
+    },
+    {
+      "id": "eso-earth-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "expectedBytes": 29082084,
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
+      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": ["starfield", "scene"]
+    },
+    {
+      "id": "google-maps-earth-cubic-sky-sun-oracle-asset",
+      "path": "sun/google-maps-sun.png",
+      "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
+      "expectedBytes": 10947,
+      "origin": "https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference",
+      "license": "Google proprietary; no redistribution grant verified",
+      "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
+      "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
+      "consumers": ["starfield", "sun-oracle", "scene"]
+    },
+    {
+      "id": "google-maps-earth-cubic-sky-sun-oracle-measurements",
+      "path": "sun/google-maps-sun-oracle.json",
+      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
+      "expectedBytes": 2895,
+      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
+      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
+      "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
+      "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
+      "consumers": ["starfield", "sun-oracle", "scene", "lighting"]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "path": "presentation/title-mark.mjs",
+      "expectedSha256": "09a320559134c615bff94243a0bc316814f9e612fec424f400e3d40115a270a6",
+      "expectedBytes": 2649,
+      "generator": "tools/prepare-planet-title-sources.mjs"
+    },
+    {
+      "path": "moon/earth-moon.json",
+      "expectedSha256": "3c0097bcf6b166cb0ba2d03c3cc290902983e448baf82eb64e60d25257cd6d4f",
+      "expectedBytes": 745,
+      "generator": "src/planets/earth/tools/prepare-source-intermediates.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "interior/earth-interior.json",
+      "expectedSha256": "c0578b8e31058dd4949fff1f9d6ab8017a03a1d3a78ce976674a40661a57a81a",
+      "expectedBytes": 731,
+      "purpose": "Source-qualified schematic Earth interior presentation specification"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88",
+      "expectedBytes": 4370,
+      "purpose": "Exact Inter pinned-commit SIL OFL 1.1 redistribution license"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedSha256": "6cff6933451962c3db6fc5dc1f8989a8cee8af1cd919fcd43960ac6c1770ec7e",
+      "expectedBytes": 387,
+      "purpose": "HYG Database attribution and share-alike notice"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
+      "expectedBytes": 1271,
+      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    }
+  ]
+}

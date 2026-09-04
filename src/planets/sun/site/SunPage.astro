@@ -1,0 +1,14 @@
+---
+import "../runtime/styles.css";
+import "../../../../site/planet-shell.css";
+import PlanetLayout from "../../../../site/layouts/PlanetLayout.astro";
+import SunHead from "./SunHead.astro";
+import SunOverlay from "./SunOverlay.astro";
+import SunPanel from "./SunPanel.astro";
+---
+
+<PlanetLayout objectId="sun">
+  <SunHead slot="planet-head" />
+  <SunPanel slot="planet-ui" />
+  <SunOverlay slot="planet-overlay" />
+</PlanetLayout>

@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-earth-moon-source@1",
+  "epoch": "2000-01-01.5 TDB",
+  "earthGmKm3PerS2": 398600.436,
+  "id": "moon",
+  "naifId": 301,
+  "meanOrbitRadiusKm": 384400,
+  "eccentricity": 0.0554,
+  "inclinationDegrees": 5.16,
+  "longitudeAscendingNodeDegrees": 125.08,
+  "orbitalPeriodDays": 27.322,
+  "gmKm3PerS2": 4902.8,
+  "meanRadiusKm": 1737.4,
+  "meanDensityGPerCm3": 3.344,
+  "sources": {
+    "physical": {
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+      "sha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440"
+    },
+    "elements": {
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+      "sha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8"
+    }
+  }
+}

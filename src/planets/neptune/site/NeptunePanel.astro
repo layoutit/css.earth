@@ -1,0 +1,43 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
+import { PREPARED_NEPTUNE_LENSES } from "../runtime/preparedLenses.mjs";
+import { PREPARED_NEPTUNE_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_NEPTUNE_TITLE } from "./preparedTitle.mjs";
+
+const charts = [
+  { id: "reflectance", title: PREPARED_SHELL_TITLES.reflectance, open: true, src: "/scenes/neptune/neptune-atmosphere-spectrum.svg", width: 306, height: 141, alt: "Modeled disk reflectance of Neptune from 350 to 1000 nanometers, showing strong methane absorption toward the near infrared." },
+  { id: "photometric-phase", title: SCIENTIFIC_CHART_TITLES.photometricPhase, open: false, src: "/scenes/neptune/neptune-photometric-phase-curve.svg", width: 306, height: 141, alt: "Neptune V-band brightness change across phase angles from zero to 133 degrees." },
+  { id: "temperature-pressure", title: PREPARED_SHELL_TITLES.temperaturePressure, open: false, src: "/scenes/neptune/neptune-temperature-pressure-profile.svg", width: 306, height: 141, alt: "Neptune atmospheric temperature from 100 bar to 0.1 microbar in the NASA PSG vertical atmosphere model." },
+];
+const lensDescriptions: Record<string, string> = {
+  normal: "True color + Hubble detail",
+  methane: "Hubble at 619 nm",
+  "near-infrared": "Hubble at 845 nm",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_NEPTUNE_LENSES.defaultLens,
+  controls: PREPARED_NEPTUNE_LENSES.controls.map((lens) => ({ id: lens.id, label: lens.label, thumbnailUrl: lens.thumbnailUrl, description: lensDescriptions[lens.id], title: lens.falseColor ? `${lens.label}, ${lens.filter} false color` : lens.label })),
+};
+const resources = [
+  { label: "NASA", role: "facts", description: "Facts & interior", href: "https://science.nasa.gov/neptune/" },
+  { label: "Hubble OPAL", role: "imagery", description: "Texture & lenses", href: "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/" },
+  { label: "JPL", role: "orbits", description: "Moon orbits", href: "https://ssd.jpl.nasa.gov/sats/" },
+  { label: "PDS Rings", role: "rings", description: "Ring geometry", href: "https://pds-rings.seti.org/neptune/" },
+  { label: "OpenSpace", role: "scene", description: "Globe & moons", href: "https://github.com/OpenSpace/OpenSpace" },
+  { label: "PSG", role: "spectra", description: "Spectrum & profile", href: "https://psg.gsfc.nasa.gov/" },
+  { label: "HYG", role: "stars", description: "Background star field", href: "https://github.com/astronexus/HYG-Database" },
+];
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
+    { kind: "toggle", name: "rings", label: "Features", checked: true },
+  ],
+};
+---
+
+<PlanetShell objectId="neptune" title={PREPARED_NEPTUNE_TITLE} introduction={PREPARED_NEPTUNE_PANEL.introduction} facts={PREPARED_NEPTUNE_PANEL.facts} moreFacts={PREPARED_NEPTUNE_PANEL.moreFacts} charts={charts} resources={resources} lenses={lenses} settings={settings} />

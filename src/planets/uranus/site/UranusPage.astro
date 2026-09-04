@@ -1,0 +1,14 @@
+---
+import "../runtime/styles.css";
+import "../../../../site/planet-shell.css";
+import PlanetLayout from "../../../../site/layouts/PlanetLayout.astro";
+import UranusHead from "./UranusHead.astro";
+import UranusOverlay from "./UranusOverlay.astro";
+import UranusPanel from "./UranusPanel.astro";
+---
+
+<PlanetLayout objectId="uranus">
+  <UranusHead slot="planet-head" />
+  <UranusPanel slot="planet-ui" />
+  <UranusOverlay slot="planet-overlay" />
+</PlanetLayout>

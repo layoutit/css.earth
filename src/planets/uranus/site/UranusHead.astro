@@ -1,0 +1,8 @@
+---
+import { PREPARED_URANUS_SCENE } from "../runtime/preparedScene.mjs";
+
+const assets = PREPARED_URANUS_SCENE.assets;
+---
+<link rel="preload" href={assets.surfaces.normal["2"].surface.url} as="image" type="image/webp" />
+<link rel="preload" href={assets.surfaces.normal["2"].poles.url} as="image" type="image/webp" />
+<link rel="preload" href={assets.rings["2"].url} as="image" type="image/webp" />

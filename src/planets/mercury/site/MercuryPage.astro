@@ -1,0 +1,14 @@
+---
+import "../runtime/styles.css";
+import "../../../../site/planet-shell.css";
+import PlanetLayout from "../../../../site/layouts/PlanetLayout.astro";
+import MercuryHead from "./MercuryHead.astro";
+import MercuryOverlay from "./MercuryOverlay.astro";
+import MercuryPanel from "./MercuryPanel.astro";
+---
+
+<PlanetLayout objectId="mercury">
+  <MercuryHead slot="planet-head" />
+  <MercuryPanel slot="planet-ui" />
+  <MercuryOverlay slot="planet-overlay" />
+</PlanetLayout>

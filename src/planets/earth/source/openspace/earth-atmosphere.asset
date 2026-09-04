@@ -1,0 +1,91 @@
+local sunAsset = asset.require("scene/solarsystem/sun/globe")
+local moonAsset = asset.require("./moon/globe")
+local globe = asset.require("./globe")
+
+
+
+local Atmosphere = {
+  Identifier = "EarthAtmosphere",
+  Parent = globe.Earth.Identifier,
+  Renderable = {
+    Type = "RenderableAtmosphere",
+    -- Atmosphere radius in Km
+    AtmosphereHeight = 6447.0 - 6377.0,
+    PlanetRadius = 6377.0,
+    PlanetAverageGroundReflectance = 0.1,
+    GroundRadianceEmission = 0.6,
+    SunIntensity = 6.9,
+    Rayleigh = {
+      Coefficients = {
+        -- Wavelengths are given in 10^-9m
+        Wavelengths = { 680, 550, 440 },
+        -- Reflection coefficients are given in km^-1
+        Scattering = { 0.0058, 0.0135, 0.0331 },
+        -- In Rayleigh scattering, the coefficients of absorption and scattering are the same.
+      },
+      -- Thickness of atmosphere if its density were uniform, in Km
+      H_R = 8.0
+    },
+    --[[
+      Ozone = {
+      Coefficients = {
+        -- Extinction coefficients
+        Extinction = {3.426, 8.298, 0.356}
+      },
+      H_O = 8.0
+    },
+    ]]
+    -- Default
+    Mie = {
+      Coefficients = {
+        -- Reflection coefficients are given in km^-1
+        Scattering = { 0.004, 0.004, 0.004 },
+        -- Extinction coefficients are a fraction of the Mie coefficients
+        Extinction = { 0.004 / 0.9, 0.004 / 0.9, 0.004 / 0.9 }
+      },
+      -- Height scale (atmosphere thickness for constant density) in Km
+      H_M = 1.2,
+      -- Mie Phase Function Value (G e [-1.0, 1.0]. If G = 1.0, Mie phase function = Rayleigh Phase Function)
+      G = 0.85
+    },
+    Debug = {
+      PreCalculatedTextureScale = 1.0,
+      SaveCalculatedTextures = false
+    },
+    ShadowGroup = {
+      Sources = {
+        { Name = sunAsset.Sun.Identifier, Radius = 696300000 }
+      },
+      Casters = {
+        { Name = moonAsset.Moon.Identifier, Radius = 1737000 }
+      }
+    }
+  },
+  GUI = {
+    Name = "Earth Atmosphere",
+    Path = "/Solar System/Planets/Earth",
+    Description = "Atmosphere of Earth",
+    Focusable = false
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Atmosphere)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Atmosphere)
+end)
+
+asset.export(Atmosphere)
+
+
+
+asset.meta = {
+  Name = "Earth Atmosphere",
+  Description = "RenderableAtmosphere for Earth",
+  Author = "OpenSpace Team",
+  URL = "https://openspaceproject.com",
+  License = "MIT license"
+}

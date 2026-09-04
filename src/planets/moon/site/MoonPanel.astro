@@ -1,0 +1,50 @@
+---
+import PlanetShell from "../../../../site/components/PlanetShell.astro";
+import { PREPARED_SHELL_TITLES } from
+  "../../../../site/prepared-shell-titles.mjs";
+import { PREPARED_MOON_PANEL } from "./preparedPanel.mjs";
+import { PREPARED_MOON_TITLE } from "./preparedTitle.mjs";
+import { PREPARED_MOON_LENSES } from "../runtime/preparedLenses.mjs";
+
+const lensDescriptions: Record<string, string> = {
+  surface: "LRO visible-colour surface",
+  topography: "LOLA elevation",
+  crust: "GRAIL crustal thickness",
+};
+const lenses = {
+  title: PREPARED_SHELL_TITLES.lenses,
+  defaultLens: PREPARED_MOON_LENSES.defaultLens,
+  controls: PREPARED_MOON_LENSES.controls.map((lens) => ({
+    id: lens.id,
+    label: lens.label,
+    thumbnailUrl: lens.thumbnailUrl,
+    description: lensDescriptions[lens.id],
+    title: `${lens.label}: ${lens.qualification}`,
+  })),
+};
+
+const resources = [
+  { label: "NASA Science", role: "facts", description: "Moon facts", href: "https://science.nasa.gov/moon/facts/" },
+  { label: "NASA SVS", role: "surface", description: "LRO colour map", href: "https://svs.gsfc.nasa.gov/4720/" },
+  { label: "JPL", role: "orbit", description: "Physical & orbital data", href: "https://ssd.jpl.nasa.gov/sats/" },
+  { label: "OpenSpace", role: "scene", description: "Globe configuration", href: "https://github.com/OpenSpace/OpenSpace" },
+  { label: "ESO", role: "stars", description: "Background star field", href: "https://www.eso.org/public/images/eso0932a/" },
+];
+const settings = {
+  title: PREPARED_SHELL_TITLES.settings,
+  controls: [
+    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
+  ],
+};
+---
+
+<PlanetShell
+  objectId="moon"
+  title={PREPARED_MOON_TITLE}
+  introduction={PREPARED_MOON_PANEL.introduction}
+  facts={PREPARED_MOON_PANEL.facts}
+  moreFacts={PREPARED_MOON_PANEL.moreFacts}
+  resources={resources}
+  lenses={lenses}
+  settings={settings}
+/>

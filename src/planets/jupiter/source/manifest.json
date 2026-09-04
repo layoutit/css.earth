@@ -1,0 +1,359 @@
+{
+  "schema": "cssjupiter-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "inter-jupiter-title-vector",
+      "path": "presentation/title-mark.mjs",
+      "expectedSha256": "b9a93788a097d79e61c0be4829ef1a5d450234feba10f775349c7592621481ef",
+      "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Jupiter outline",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
+      "redistribution": "project-authored SVG outline with Inter attribution",
+      "consumers": ["title"],
+      "expectedBytes": 3355
+    },
+    {
+      "id": "nasa-hubble-jupiter-navigation-marker",
+      "path": "presentation/navigation-marker.png",
+      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
+      "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
+      "credit": "NASA, ESA, STScI, and Amy Simon",
+      "license": "NASA media usage guidelines and credited partner rights",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked full-disc Hubble source snapshot",
+      "consumers": ["navigation", "atmosphere", "lighting"],
+      "expectedBytes": 1166501
+    },
+    {
+      "id": "openspace-jupiter-globe",
+      "path": "openspace/globe.asset",
+      "expectedSha256": "35f7f9cc623ff01803c2f2bb1e24a1680303ab70469e7b66660a7a5b2419f743",
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/globe.asset",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked MIT source snapshot",
+      "consumers": ["body", "scene", "lighting"],
+      "expectedBytes": 1443
+    },
+    {
+      "id": "openspace-jupiter-kernels",
+      "path": "openspace/kernels.asset",
+      "expectedSha256": "4c71313bfdd1657dee5198638bf239a4de1bb3b61ceac5dd58c1849f2ca601a3",
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/kernels.asset",
+      "credit": "OpenSpace Team",
+      "license": "MIT",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked MIT source snapshot",
+      "consumers": ["scene", "moons"],
+      "expectedBytes": 1037
+    },
+    {
+      "id": "nasa-hubble-jupiter-global-map-2019",
+      "path": "surface/hubble-jupiter-global-map-2019.png",
+      "expectedSha256": "e79f89b68b4f1c73387b9871e82a31fb4f53e3885fb2f53dd074d8ac78cb38e3",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png",
+      "credit": "NASA, ESA, A. Simon (NASA GSFC), and M. H. Wong (UC Berkeley)",
+      "license": "NASA media usage guidelines and credited partner rights",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked Hubble WFC3 global-map snapshot",
+      "consumers": ["body", "lenses"],
+      "expectedBytes": 6720450
+    },
+    {
+      "id": "nasa-juno-jupiter-north-pole-detail-pia24239",
+      "path": "surface/juno-pia24239-north-pole-detail.tif",
+      "expectedSha256": "4a58389a26e0619fff294955c5dc07cd1dbf37d9593a714929b41fb57abd72be",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Emma Wälimäki",
+      "license": "CC BY",
+      "licenseEvidence": [
+        "https://science.nasa.gov/photojournal/jupiter-north-pole-detail/"
+      ],
+      "acquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "redistribution": "checked NASA Photojournal PIA24239 north-polar-region image product",
+      "consumers": ["body"],
+      "expectedBytes": 193959
+    },
+    {
+      "id": "nasa-juno-jupiter-north-polar-projection-pia23808",
+      "path": "surface/juno-pia23808-north-polar-projection.jpg",
+      "expectedSha256": "85f84960270f7619c8ecd7cf933da860cff690d078709cbd6e342d0f83b45ac8",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Gerald Eichstädt",
+      "license": "NASA/JPL Media Usage Guidelines with contributor credit",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/"
+      ],
+      "acquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "redistribution": "checked NASA Photojournal north-polar projection; color is explicitly extreme false color and is not transported into the runtime asset",
+      "consumers": ["body"],
+      "expectedBytes": 633958
+    },
+    {
+      "id": "nasa-juno-jupiter-south-polar-cyclones-pia23556",
+      "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
+      "expectedSha256": "92de7d816bbff6e220c893ded36d0811a21a4f74b13ebc337f9c1a3fc8d1e817",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg",
+      "credit": "NASA/JPL-Caltech/SwRI/ASI/INAF/JIRAM",
+      "license": "NASA/JPL Media Usage Guidelines with institutional credit",
+      "licenseEvidence": [
+        "https://science.nasa.gov/photojournal/jupiters-south-pole-cyclones-in-2016/"
+      ],
+      "acquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "redistribution": "checked NASA Photojournal 5-micron south-polar cyclone image; infrared palette is not transported into the runtime asset",
+      "consumers": ["body"],
+      "expectedBytes": 909084
+    },
+    {
+      "id": "nasa-juno-jupiter-south-pole-visible-pia21382",
+      "path": "surface/juno-pia21382-south-pole-visible.jpg",
+      "expectedSha256": "c419932d9d5b0d3b01691779f6ff65869d82d5f768908174fc13715170fdb77e",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg",
+      "credit": "Enhanced image by John Landino, based on NASA/JPL-Caltech/SwRI/MSSS data",
+      "license": "CC BY",
+      "licenseEvidence": [
+        "https://science.nasa.gov/photojournal/jovian-stormy-weather/"
+      ],
+      "acquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "redistribution": "checked NASA Photojournal visible-light south-polar image used only for prepared palette chroma",
+      "consumers": ["body"],
+      "expectedBytes": 154800
+    },
+    {
+      "id": "hyg-v41-jupiter-representative-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedSha256": "9b0236a19dbda49f966f38373bf8a783a1b971523791101eecc017d9994bcca3",
+      "origin": "prepared subset of HYG Stellar Database v4.1 at commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
+      "credit": "David Nash / Astronexus",
+      "license": "CC-BY-SA-4.0",
+      "licenseEvidence": ["stars/LICENSE.md"],
+      "acquisition": "checked deterministic subset of the pinned HYG v4.1 catalog snapshot",
+      "redistribution": "catalog-derived representative field with source ids, magnitudes, color indices, and projection provenance",
+      "consumers": ["starfield"],
+      "expectedBytes": 144994
+    },
+    {
+      "id": "hyg-v41-license",
+      "path": "stars/LICENSE.md",
+      "expectedSha256": "65dfc6192994d4b6c6f725a336aa1a8862f554eb5062e75f77b6e79f186d1a58",
+      "origin": "HYG Stellar Database v4.1 repository LICENSE",
+      "credit": "David Nash / Astronexus",
+      "license": "CC-BY-SA-4.0",
+      "acquisition": "checked license snapshot accompanying the prepared catalog subset",
+      "redistribution": "license and attribution record",
+      "consumers": ["starfield"],
+      "expectedBytes": 596
+    },
+    {
+      "id": "hubble-opal-jupiter-f275w",
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
+      "expectedSha256": "ab7fe8bc644233c22bc6d86af42d54c60d49e24a6699ff116e797a80e4ff1796",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, and M. H. Wong",
+      "license": "CC BY 4.0",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked Hubble OPAL high-level science product",
+      "consumers": ["lenses"],
+      "expectedBytes": 25925760
+    },
+    {
+      "id": "hubble-opal-jupiter-fq889n",
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
+      "expectedSha256": "4bdbeb4a4f9fbfe0daa737c4ba29de31b0626fb6e58c54e0142ef6d3aa6ef5ea",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
+      "credit": "NASA, ESA, A. A. Simon, and M. H. Wong",
+      "license": "CC BY 4.0",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked Hubble OPAL high-level science product",
+      "consumers": ["lenses"],
+      "expectedBytes": 25925760
+    },
+    {
+      "id": "jpl-satellite-physical-parameters",
+      "path": "moons/jpl-physical-parameters.html",
+      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
+      "license": "United States government data",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked source snapshot",
+      "consumers": ["moons"],
+      "expectedBytes": 84633
+    },
+    {
+      "id": "jpl-satellite-mean-elements",
+      "path": "moons/jpl-mean-elements.html",
+      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
+      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
+      "license": "United States government data",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked source snapshot",
+      "consumers": ["moons"],
+      "expectedBytes": 418952
+    },
+    {
+      "id": "jupiter-moon-catalog",
+      "path": "moons/jupiter-moons.json",
+      "expectedSha256": "2b2b221a145f841c0c00924e6f963786d34304510b400765cd636b4d2d8a8d79",
+      "origin": "normalized facts from JPL Solar System Dynamics discovery and mean-elements tables; only source URLs and hashes are retained",
+      "credit": "NASA/JPL Solar System Dynamics",
+      "license": "NASA/JPL United States government data",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/sats/discovery.html",
+        "https://ssd.jpl.nasa.gov/sats/elem/"
+      ],
+      "acquisition": "node src/planets/jupiter/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes",
+      "redistribution": "normalized factual data only; source HTML is not redistributed",
+      "consumers": ["moons"],
+      "expectedBytes": 87703
+    },
+    {
+      "id": "nasa-galileo-galilean-satellites",
+      "path": "moons/galilean-satellites-pia01299.jpg",
+      "expectedSha256": "44d8d6890bcfe1a217584407ec0186ff40eb916e266b161800c4013b3731e8f4",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01299/PIA01299.jpg?crop=faces%2Cfocalpoint&fit=clip&h=635&w=1870",
+      "credit": "NASA/JPL/DLR",
+      "license": "NASA media usage guidelines and credited partner rights",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked Galileo comparative montage snapshot",
+      "consumers": ["moons"],
+      "expectedBytes": 161334
+    },
+    {
+      "id": "pds-jupiter-ring-statistics",
+      "path": "rings/pds-jupiter-rings-table.html",
+      "expectedSha256": "61c744fe0610a60306c45cc7d2a587fb7582a0f4738db47a7421daaec7603597",
+      "origin": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
+      "credit": "NASA Planetary Data System Ring-Moon Systems Node",
+      "license": "United States government scientific data",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked PDS factual table snapshot",
+      "consumers": ["rings"],
+      "expectedBytes": 20293
+    },
+    {
+      "id": "pds-jupiter-main-ring-halo-caption",
+      "path": "rings/pds-pia00701.html",
+      "expectedSha256": "938d301980cc9bd764b3e1ef84880d0d8cdd542e60271ed8569cb59272447fec",
+      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA00701.html",
+      "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
+      "license": "United States government scientific data",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked PDS observation caption snapshot",
+      "consumers": ["rings"],
+      "expectedBytes": 16498
+    },
+    {
+      "id": "pds-jupiter-gossamer-caption",
+      "path": "rings/pds-pia01623.html",
+      "expectedSha256": "5cdad6f5b3544111beee0a97e78acc1f0ebf17d24fc6288221c461562cd56a65",
+      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA01623.html",
+      "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
+      "license": "United States government scientific data",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked PDS observation caption snapshot",
+      "consumers": ["rings"],
+      "expectedBytes": 17061
+    },
+    {
+      "id": "nasa-galileo-jupiter-main-ring-halo",
+      "path": "rings/pia00701.jpg",
+      "expectedSha256": "6cba8822a2cc938efe3505842b1c2f0d28e63228eab617ec023737b0ba8ab606",
+      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA00701-med.jpg",
+      "credit": "NASA/JPL Galileo",
+      "license": "NASA media usage guidelines",
+      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "redistribution": "checked Galileo observational image snapshot",
+      "consumers": ["rings"],
+      "expectedBytes": 10021
+    },
+    {
+      "id": "hubble-opal-jupiter-minnaert",
+      "path": "atmosphere/hubble-opal-minnaert.json",
+      "expectedSha256": "86bc3c4b7b60d77e5088c1804521619bb077cd53ea6e1538549b80f603356fbe",
+      "origin": "normalized Table 1 and Figure 1 facts from https://doi.org/10.1088/0004-637X/812/1/55",
+      "credit": "Amy A. Simon, Michael H. Wong, and Glenn S. Orton",
+      "license": "factual values transcribed from the cited paper",
+      "licenseEvidence": [
+        "https://esahubble.org/static/archives/releases/science_papers/heic1522a.pdf"
+      ],
+      "acquisition": "checked project-authored transcription validated by Jupiter preparation; the paper itself is not redistributed",
+      "redistribution": "normalized factual data only",
+      "consumers": ["atmosphere", "lighting"],
+      "expectedBytes": 1228
+    },
+    {
+      "id": "nasa-psg-jupiter-configuration",
+      "path": "atmosphere/psg-jupiter-20260830.cfg",
+      "expectedSha256": "8878d1d05c0973a4c4d501542810b20242d9cee0f2964cd01cb48c19ec785d33",
+      "origin": "https://psg.gsfc.nasa.gov/api.php",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government generated data",
+      "acquisition": "tools/acquire-sources.mjs --refresh expands a pinned Jupiter ephemeris seed",
+      "redistribution": "checked generated source snapshot",
+      "consumers": ["atmosphere", "lighting", "spectrum"],
+      "expectedBytes": 8813
+    },
+    {
+      "id": "nasa-psg-jupiter-reflectance",
+      "path": "atmosphere/psg-jupiter-r240-rif.txt",
+      "expectedSha256": "b2da904d4a929b7e84b355de383394d0bf50ee6c720db2c5f9f95b32355e71bb",
+      "origin": "https://psg.gsfc.nasa.gov/api.php",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government generated data",
+      "acquisition": "tools/acquire-sources.mjs --refresh requests I/F at R 240 from the pinned configuration",
+      "redistribution": "checked generated source snapshot",
+      "consumers": ["spectrum"],
+      "expectedBytes": 11912
+    },
+    {
+      "id": "eso-jupiter-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "expectedBytes": 29082084,
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
+      "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": ["starfield", "scene"]
+    },
+    {
+      "id": "google-maps-jupiter-cubic-sky-sun-oracle-asset",
+      "path": "sun/google-maps-sun.png",
+      "expectedSha256": "e9c2b33612abd121905845cd19aad83382b977e2a68b68058bc6702292b15e9f",
+      "expectedBytes": 10947,
+      "origin": "https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference",
+      "license": "Google proprietary; no redistribution grant verified",
+      "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
+      "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
+      "consumers": ["starfield", "sun-oracle", "scene"]
+    },
+    {
+      "id": "google-maps-jupiter-cubic-sky-sun-oracle-measurements",
+      "path": "sun/google-maps-sun-oracle.json",
+      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
+      "expectedBytes": 2895,
+      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
+      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
+      "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
+      "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
+      "consumers": ["starfield", "sun-oracle", "scene", "lighting"]
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
+      "expectedBytes": 1271,
+      "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    }
+  ]
+}
