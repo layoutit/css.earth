@@ -50,6 +50,10 @@ export function createPreparedPlayback() {
       if (entry?.mode !== "pose" || !Number.isFinite(time)) throw new TypeError("Prepared pose seek requires a registered pose animation and finite time.");
       animation.currentTime = time;
     },
+    resetMotion() {
+      if (destroyed) return;
+      for (const { animation, mode } of handles.values()) if (mode === "motion") animation.currentTime = 0;
+    },
     setAllowed(value) { if (destroyed) return; allowed = value === true; applyAll(); },
     setReady(value = true) { if (destroyed) return; ready = value === true; applyAll(); },
     setSelection(next) {

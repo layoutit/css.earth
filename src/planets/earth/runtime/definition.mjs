@@ -7,6 +7,7 @@ import { PREPARED_EARTH_STARFIELD } from "./preparedStarfield.mjs";
 import { PREPARED_EARTH_SKY_SUN } from "./preparedSkySun.mjs";
 import { cameraPlan } from "./camera-plan.mjs";
 import { banks, pageKeys, interiorUrls, materialDemand } from "./material.mjs";
+import { PREPARED_EARTH_PLACES } from "./preparedPlaces.mjs";
 import { createPresentation } from "./presentation.mjs";
 const celestial = preparedSkyResources(PREPARED_EARTH_STARFIELD, PREPARED_EARTH_SKY_SUN, "mounted");
 const interiorKeys = interiorUrls.map((_, index) => `interior:${index}`);
@@ -23,7 +24,13 @@ const entries = [...celestial,
 export const runtimeDefinition = Object.freeze({
   schema: OBJECT_RUNTIME_SCHEMA, id: "earth", controls: objectControls,
   camera: cameraPlan, sky: PREPARED_EARTH_STARFIELD, sun: PREPARED_EARTH_SKY_SUN, inputSelector: ".earth-input-surface",
-  assets: { entries, pools: [preparedResourcePool("mounted", entries),
+  destinations: { catalog: PREPARED_EARTH_PLACES, defaultLens: "normal",
+    statuses: { detail: "WorldCover imagery · 2021. Source gaps retain the Earth base map.",
+      overview: "Earth overview. WorldCover detail is unavailable at this location." } },
+  // Bound celestial decoding alongside the large surface pages. Starting all
+  // mounted images together made Chrome repeatedly decode pages during its
+  // first raster pass, delaying the production globe by roughly 15 seconds.
+  assets: { entries, pools: [preparedResourcePool("mounted", entries, { concurrency: 2 }),
     preparedResourcePool("default-materials", entries, { retention: "warm" }),
     preparedResourcePool("pages", entries, { retention: "selection", concurrency: 2, capacity: banks[0].urls.length * 2 }),
     ...["lighting", "atmosphere"].map(id => preparedResourcePool(id, entries, { retention: "selection", reuse: true,
@@ -36,7 +43,7 @@ export const runtimeDefinition = Object.freeze({
   resolvePresentation({ selection, view, previousPlan }) {
     const lens = PREPARED_EARTH_LENSES.controls.find(lens => lens.id === selection.lensId);
     const material = materialDemand(selection, view, previousPlan);
-    return { ...material, required: [...pageKeys(lens.id), ...(lens.view === "interior" ? interiorKeys : [`poles:${lens.id}`]), ...material.required] };
+    return { ...material, navigation: { maximumZoom: lens.maximumZoom, camera: lens.camera ?? null }, required: [...pageKeys(lens.id), ...(lens.view === "interior" ? interiorKeys : [`poles:${lens.id}`]), ...material.required] };
   },
   createPresentation,
 });

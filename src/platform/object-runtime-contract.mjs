@@ -9,9 +9,9 @@ import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, requirePr
 export const OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@1";
 const definitionKeys = new Set(["schema", "id", "controls", "camera", "sky", "sun",
   "inputSelector", "assets", "initialSelection", "reduceSelection",
-  "resolvePresentation", "createPresentation"]);
+  "resolvePresentation", "createPresentation", "destinations"]);
 const presentationKeys = new Set(["cameraElement", "sceneElement", "bodyLayers",
-  "nativeAnimations", "commitSelection", "publishFrame", "observe"]);
+  "nativeAnimations", "commitSelection", "publishFrame", "observe", "motionFrame", "pageLayers"]);
 const retentionModes = new Set(["selection", "mount", "warm"]);
 const nonempty = value => typeof value === "string" && value.length > 0;
 
@@ -160,6 +160,12 @@ export function requireResolvedPresentation(plan, definition) {
     const controls = new Map((definition.controls.lenses?.controls ?? []).map(lens => [lens.id, lens]));
     requireResourceKeys(plan.pressedLenses, controls, "Pressed lenses");
   }
+  if (plan.navigation !== undefined) {
+    const { maximumZoom, camera } = record(plan.navigation, "Selection navigation");
+    if (!Number.isFinite(maximumZoom) || maximumZoom < definition.camera.minimumZoom || maximumZoom > definition.camera.maximumZoom ||
+        camera != null && (![camera.controlPitch, camera.controlYaw, camera.zoom].every(Number.isFinite) ||
+          camera.zoom < definition.camera.minimumZoom || camera.zoom > maximumZoom)) throw new TypeError("Selection navigation requires bounded prepared camera values.");
+  }
   return Object.freeze({ ...plan, required: Object.freeze([...plan.required]),
     prewarm: Object.freeze([...(plan.prewarm ?? [])]) });
 }
@@ -192,6 +198,13 @@ export function requireObjectRuntimeDefinition(definition, { objectId = definiti
   if (definition.inputSelector != null && !nonempty(definition.inputSelector)) {
     throw new TypeError("Object input selector must be supplied data or null for the stage.");
   }
+  if (definition.destinations !== undefined) {
+    const { catalog, defaultLens, statuses } = record(definition.destinations, "Destinations");
+    if (!catalog?.url?.startsWith("/scenes/") || !Number.isSafeInteger(catalog.bytes) || catalog.bytes < 1 ||
+        !Number.isSafeInteger(catalog.count) || catalog.count < 1 || !/^[a-f0-9]{64}$/.test(catalog.sha256 ?? "") ||
+        !definition.controls.lenses?.controls.some(lens => lens.id === defaultLens) ||
+        !nonempty(statuses?.detail) || !nonempty(statuses?.overview)) throw new TypeError("Destinations require a pinned catalogue, default lens and status content.");
+  }
   requirePreparedResourceCatalog(definition.assets);
   requireObjectSelection(definition.initialSelection, definition.controls);
   for (const [name, value] of Object.entries(initialObjectSelection(definition.controls))) {
@@ -220,6 +233,18 @@ export function requireObjectPresentation(presentation, { stage } = {}) {
       !presentation.cameraElement.contains(presentation.sceneElement) ||
       presentation.cameraElement.closest(".planet-stage") !== stage)) {
     throw new TypeError("Presentation camera and scene must belong to the mounted stage.");
+  }
+  if (presentation.motionFrame !== undefined && (!Array.isArray(presentation.motionFrame) ||
+      !presentation.motionFrame.length || presentation.motionFrame.some(node => !presentation.sceneElement.contains(node)))) {
+    throw new TypeError("Motion frame anchors must belong to the retained scene.");
+  }
+  if (presentation.pageLayers !== undefined) {
+    if (!Array.isArray(presentation.pageLayers) || new Set(presentation.pageLayers.map(layer => layer.id)).size !== presentation.pageLayers.length ||
+        presentation.pageLayers.some(layer => !nonempty(layer.id) || !layer.plan || !nonempty(layer.className) ||
+          !nonempty(layer.textureClassName) || !Array.isArray(layer.lensIds) || !layer.lensIds.length ||
+          !presentation.sceneElement.contains(layer.system) || !layer.system.contains(layer.carrier))) {
+      throw new TypeError("Prepared page layers require unique ids, content and retained anchors.");
+    }
   }
   assertBodyLayerRegistrations(presentation.bodyLayers, presentation.sceneElement);
   Object.freeze(presentation.bodyLayers);

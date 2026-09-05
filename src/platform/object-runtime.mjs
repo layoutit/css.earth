@@ -1,3 +1,5 @@
+import { mountPreparedMapPages } from "./prepared-map/city-pages.mjs";
+import { createPreparedDestinations } from "./prepared-destinations.mjs";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../site/runtime-policy.mjs";
 import { createSceneLifetime, waitForSceneDocument, waitForScenePaint } from "./scene-lifetime.mjs";
 import { createPreparedResidency } from "./prepared-residency.mjs";
@@ -13,6 +15,7 @@ import { initialObjectSelection, invokeRuntimeHook, requireObjectPresentation, r
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
   createPlayback: createPreparedPlayback, createSelection: createObjectSelectionRuntime, createControls: createObjectControlBinding, createOrbit: createRetainedCubicSkyOrbit,
+  mountPages: mountPreparedMapPages,
   mountSky: mountRetainedCubicSky, mountSun: mountRetainedDirectionalSun,
   waitDocument: waitForSceneDocument, waitPaint: waitForScenePaint });
 
@@ -23,10 +26,10 @@ export function createObjectRuntime(definition, services = nativeServices) {
   const prepared = definition.schema === PREPARED_OBJECT_RUNTIME_SCHEMA;
   const initialSelection = prepared ? initialObjectSelection(definition.controls) : definition.initialSelection;
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage, { onError } = {}) {
+  return function mountObject(stage, { onError, onMotionRequest = () => {} } = {}) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     requireObjectRuntimeDefinition(definition, { objectId: stage?.dataset?.objectId });
-    if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function") {
+    if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
     }
     const lifetime = environment.createLifetime();
@@ -34,6 +37,9 @@ export function createObjectRuntime(definition, services = nativeServices) {
     const ready = new Promise((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
     ready.catch(() => {});
     let mounted = null, orbit = null, currentView = null, reference = null, previousPublication = null;
+    const pageLayers = new Map();
+    let allowed = false, navigatedLens = null, maximumZoom = definition.camera.maximumZoom;
+    const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
     let revision = 0, selection = null, controls = null, diagnostics = null;
     const playback = environment.createPlayback();
@@ -60,9 +66,15 @@ export function createObjectRuntime(definition, services = nativeServices) {
       registerAnimation: playback.register,
       seekAnimation: playback.seek,
     });
-    const controller = Object.freeze({ ready,
-      pause() { if (!lifetime.disposed) guarded(() => playback.setAllowed(false)); },
-      resume() { if (!lifetime.disposed) guarded(() => playback.setAllowed(true)); },
+    const destinations = definition.destinations ? createPreparedDestinations({ plan: definition.destinations,
+      ready, lifetime, selectLens: id => selection.dispatch({ kind: "lens", id }),
+      navigate: camera => { stopMotion(); alignMotionFrame(); return orbit.flyToState(camera); },
+      reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
+        controlYaw: definition.camera.defaultControlYawDegrees, zoom: orbit.initialResponsiveZoom() }),
+    }) : null;
+    const controller = Object.freeze({ ready, ...(destinations ? { destinations } : {}),
+      pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
+      resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
       destroy() {
         if (!settled) { settled = true; resolveReady(); }
         const errors = lifetime.destroy();
@@ -72,6 +84,32 @@ export function createObjectRuntime(definition, services = nativeServices) {
     start().catch(fatal);
     return controller;
 
+    function syncPagePlayback() {
+      const running = allowed && (selection?.state().committed?.speed ?? initialSelection.speed ?? 1) !== 0;
+      for (const layer of pageLayers.values()) layer.setPlaying(running);
+    }
+    function setAllowed(value) { allowed = value; playback.setAllowed(value); syncPagePlayback(); }
+    function stopMotion() { onMotionRequest(false); setAllowed(false); }
+    function alignMotionFrame() {
+      if (!mounted.motionFrame?.length) return;
+      const window = stage.ownerDocument.defaultView;
+      const frame = () => mounted.motionFrame.reduce((matrix, element) => matrix.multiply(
+        new window.DOMMatrix(window.getComputedStyle(element).transform)), new window.DOMMatrix());
+      const before = frame();
+      playback.resetMotion();
+      orbit.rebaseScene(before.multiply(frame().inverse()));
+    }
+    function publishSelection(state) {
+      controls.publish(state);
+      if (!state.committed || state.pending || !orbit || state.committed.lensId === navigatedLens) return;
+      navigatedLens = state.committed.lensId;
+      const navigation = state.plan?.navigation;
+      if (!navigation) return;
+      maximumZoom = navigation.maximumZoom;
+      if (navigation.camera) { stopMotion(); alignMotionFrame(); }
+      orbit.setState({ zoom: Math.min(orbit.state().zoom, maximumZoom) });
+      if (navigation.camera) orbit.flyToState(navigation.camera);
+    }
     function fatal(error) {
       if (lifetime.disposed) return;
       // Invalidate the session before any cleanup can trigger a native callback.
@@ -90,6 +128,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       currentView = Object.freeze({ ...publication, reference, previous: previousPublication, revision: ++revision });
       previousPublication = publication;
       selection?.setView(currentView);
+      for (const layer of pageLayers.values()) layer.publish(currentView);
     }
     async function start() {
       await lifetime.wait(environment.waitDocument(lifetime, stage.ownerDocument));
@@ -104,6 +143,13 @@ export function createObjectRuntime(definition, services = nativeServices) {
       mounted = requireObjectPresentation(prepared ? mountPreparedPresentation(stage, context, definition)
         : invokeRuntimeHook(definition, "createPresentation", [stage, context]), { stage });
       if (lifetime.disposed) return;
+      for (const layer of mounted.pageLayers ?? []) {
+        const pages = environment.mountPages({ ...layer, stage, scene: mounted.sceneElement, camera: mounted.cameraElement,
+          own: context.own, onError: fatal });
+        pageLayers.set(layer.id, pages);
+        pages.setLens({ id: initialSelection.lensId });
+      }
+      syncPagePlayback();
       // Presentation owns its roots immediately during construction, including
       // partial construction failures. Shared celestial layers join afterwards.
       const cubicSky = environment.mountSky({ host: stage, plan: definition.sky,
@@ -123,13 +169,16 @@ export function createObjectRuntime(definition, services = nativeServices) {
       const inputSurface = definition.inputSelector == null ? stage : stage.ownerDocument.querySelector(definition.inputSelector);
       if (inputSurface?.nodeType !== 1) throw new Error("Declared object input surface is missing.");
       selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime,
-        onCommit: next => playback.setSelection(next), onFatalError: fatal,
-        onChange: state => controls.publish(state),
+        onCommit: next => {
+          playback.setSelection(next);
+          for (const layer of pageLayers.values()) { layer.setLens({ id: next.lensId }); layer.setPlaying(allowed && (next.speed ?? 1) !== 0); }
+        }, onFatalError: fatal,
+        onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });
       context.own(() => selection.destroy());
       orbit = environment.createOrbit({ stage, inputSurface, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
         cubicSky, skyPlan: definition.sky, directionalSun, directionalSunPlan: definition.sun ?? null,
-        cameraPlan: definition.camera, objectId: definition.id, requireSun: false,
+        cameraPlan, objectId: definition.id, requireSun: false,
         mobilePreviewElement: stage.ownerDocument.querySelector(".planet-sidebar"), onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit.destroy());
       if (lifetime.disposed) return;
@@ -164,7 +213,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       const selectLens = id => selection.dispatch({ kind: "lens", id });
       diagnostics = Object.freeze({ ready: true,
         view: () => orbit.state(), setView: state => orbit.setState(state), lens: lensState, selectLens,
-        camera: Object.freeze({ state: orbit.state, setState: orbit.setState, stats: () => Object.freeze({ ...observe().camera, ...orbit.stats() }) }),
+        camera: Object.freeze({ state: orbit.state, setState: orbit.setState, flyToState: orbit.flyToState, stats: () => Object.freeze({ ...observe().camera, ...orbit.stats() }) }),
         sky: Object.freeze({ state: () => Object.freeze({ ...observe().sky, ...orbit.skyState(),
           sunViewDirection: currentView?.sunViewDirection ?? null, skySunViewDirection: currentView?.skySunViewDirection ?? null,
           sunPresentation: currentView?.sunPresentation }) }),
@@ -183,7 +232,8 @@ export function createObjectRuntime(definition, services = nativeServices) {
           retainedSkyboxFaceCount: stage.querySelectorAll(".planet-cubic-sky-face").length,
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
         runtime: Object.freeze({ lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
-          selection: selection.state, controls: controls.stats, view: () => currentView }),
+          selection: selection.state, controls: controls.stats, view: () => currentView,
+          pages: () => Object.freeze(Object.fromEntries([...pageLayers].map(([id, layer]) => [id, layer.stats()]))) }),
         stableNodes: nodes,
         assertStableDomIdentity() {
           const current = [...stage.querySelectorAll("*")];

@@ -2,7 +2,8 @@ import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mj
 import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
 
 const lensDescriptions = {
-  normal: "Blue Marble visible color",
+  normal: "Blue Marble + WorldCover 2021",
+  "buenos-aires-noise": "2025 daytime estimates · dBA",
   topography: "Land and seafloor relief",
   "night-lights": "Black Marble night lights",
   "cross-section": "Interior structure",
@@ -16,6 +17,8 @@ const lenses = {
     thumbnailUrl: lens.thumbnailUrl,
     description: lensDescriptions[lens.id],
     title: `${lens.label}: ${lens.qualification}`,
+    legend: lens.legend,
+    legendNote: lens.id === "buenos-aires-noise" ? "APrA · 2025 daytime estimates. Uncolored areas have no estimate." : undefined,
   })),
 };
 const settings = {

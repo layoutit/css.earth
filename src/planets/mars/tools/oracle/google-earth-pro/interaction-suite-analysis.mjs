@@ -14,8 +14,21 @@ const matrix = value => value.slice(9, -1).split(",").map(Number);
 export const hash = bytes => createHash("sha256").update(bytes).digest("hex");
 export const json = async path => JSON.parse(await readFile(path, "utf8"));
 
-export async function readNativeRun(path) {
+export function assertMotionOnlyReference(report) {
+  const firstInput = Math.min(...report.inputs.filter(event =>
+    event.event === "native-input-accepted").map(event => event.acceptedMonotonicSeconds));
+  assert.ok(Number.isFinite(firstInput), "Reference contains no accepted input");
+  assert.equal(report.captureConfiguration?.captureUntilRest, false,
+    "Motion-only timing requires a native reference without gesture readback");
+  assert.ok(report.frames.length > 0 && report.frames.every(frame =>
+    frame.monotonicSeconds < firstInput),
+  "Native pixel capture overlaps the measured input interval");
+}
+
+export async function readNativeRun(path, { frameSource = "pixels" } = {}) {
+  assert.ok(["pixels", "motion"].includes(frameSource));
   const report = await json(path);
+  if (frameSource === "motion") assertMotionOnlyReference(report);
   assert.equal(report.before.visibleWindowCount, 0);
   assert.equal(report.after.visibleWindowCount, 0);
   assert.notEqual(report.before.frontmostApplication?.pid, report.pid);
@@ -32,7 +45,20 @@ export async function readNativeRun(path) {
   const bySequence = new Map(decoded.frames.map(f => [f.frameSequence, f]));
   const first = bySequence.get(report.frames[0].presentIndex);
   assert.ok(first?.matricesCaptured);
-  const frames = report.frames.map(f => {
+  const traceClockOffsetSeconds = report.frames[0].monotonicSeconds -
+    first.monotonicNanoseconds / 1e9;
+  const capturedPaths = new Map(report.frames.map(frame => [frame.presentIndex, frame.path]));
+  const observations = frameSource === "motion"
+    ? decoded.frames.filter(frame => frame.matricesCaptured &&
+      frame.frameSequence >= first.frameSequence &&
+      frame.frameSequence <= report.stopObservation.lastPresentedSequence).map(frame => ({
+        monotonicSeconds: frame.monotonicNanoseconds / 1e9 + traceClockOffsetSeconds,
+        presentIndex: frame.frameSequence,
+        path: capturedPaths.get(frame.frameSequence) ?? null,
+      }))
+    : report.frames;
+  assert.ok(observations.length > 1, "Reference motion interval is empty");
+  const frames = observations.map(f => {
     const pose = bySequence.get(f.presentIndex);
     assert.ok(pose?.matricesCaptured, "Rendered frame lacks its native camera record");
     return { time: (f.monotonicSeconds - start) * 1000,
@@ -42,8 +68,10 @@ export async function readNativeRun(path) {
       path: f.path, presentIndex: f.presentIndex };
   });
   assertIncreasing(frames.map(f => f.time));
-  const inputs = receipts.map(e => ({ ...report.gesture.find(g => g.id === e.id),
-    time: (e.acceptedMonotonicSeconds - start) * 1000 }));
+  const inputs = report.consumedGesture
+    ? report.consumedGesture.map(event => ({ ...event, time: event.atMilliseconds }))
+    : receipts.map(e => ({ ...report.gesture.find(g => g.id === e.id),
+      time: (e.acceptedMonotonicSeconds - start) * 1000 }));
   const eventRecords = (await readFile(report.eventLog ?? resolve(dirname(path), "events.jsonl"), "utf8"))
     .trim().split("\n").filter(Boolean).map(JSON.parse);
   const wheelReceipts = verifyWheelReceipts(report, eventRecords);
@@ -92,7 +120,9 @@ export function verifyMouseReceipts(report, records) {
 
 export async function readBrowserRun(path) {
   const report = await json(path);
-  assert.equal(report.timingMode, "normal", "Suite timing evidence requires the natural browser clock");
+  assert.ok(["normal", "motion-only"].includes(report.timingMode),
+    "Suite timing evidence requires the natural browser clock");
+  if (report.timingMode === "motion-only") assert.equal(report.readbackDuringGesture, false);
   assert.ok(report.stopObservation && !report.failures.length);
   assert.equal(report.finalNodes, report.state.nodes);
   const first = matrix(report.state.pose.scene);
@@ -222,13 +252,14 @@ export function bindInputReceipts(native, browser) {
 
 export async function verifyProvenance(nativePath, browserPath, calibrationRoot) {
   const n = await json(nativePath), b = browserPath ? await json(browserPath) : null;
+  const nativeDirectory = dirname(n.sourceReport ?? nativePath);
   const source = (await json(resolve(calibrationRoot, "manifest.json"))).source;
   const sourceBytes = await readFile(resolve(calibrationRoot, source.path));
   assert.equal(hash(sourceBytes), source.encodedSha256);
   const raster = await sharp(sourceBytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   assert.equal(hash(raster.data), source.decodedRgbaSha256);
   assert.equal(n.calibrationSha256, source.decodedRgbaSha256);
-  const mapping = await json(resolve(dirname(nativePath), "mapping/texture-map.json"));
+  const mapping = await json(resolve(nativeDirectory, "mapping/texture-map.json"));
   assert.ok(n.bindings.length > 0, "Native capture has no audited texture bindings");
   const tiles = new Map();
   for (const binding of n.bindings) {
@@ -248,7 +279,7 @@ export async function verifyProvenance(nativePath, browserPath, calibrationRoot)
       tiles.set(tile.uploadPath, binding.decodedRgbaSha256);
     }
   }
-  const process = await json(resolve(dirname(nativePath), "process.json"));
+  const process = await json(resolve(nativeDirectory, "process.json"));
   assert.equal(hash(await readFile(process.executable)), process.executableSha256);
   const nativeFrames = [];
   for (const frame of n.frames) nativeFrames.push({ path: frame.path, sha256: hash(await readFile(frame.path)) });

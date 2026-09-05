@@ -566,7 +566,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   );
   assert.match(
     shell,
-    /placeholder=\{`Search objects \(\$\{planetCount\}\)`\}/u,
+    /placeholder=\{destinations\?\.searchLabel \?\? `Search objects \(\$\{planetCount\}\)`\}/u,
   );
   assert.doesNotMatch(header, /planetary-search-desktop|Search objects/u);
   assert.doesNotMatch(wordmark, /__CSSEARTH_VERSION__|versionLabel|planet-wordmark-version/u);
@@ -711,7 +711,7 @@ test("switches the desktop sidebar to the one shared planet list", async () => {
   assert.doesNotMatch(shell, /OBJECTS\.map|planet-object-marker|planet-object-browser-title/u);
   assert.match(
     client,
-    /createObjectBrowserController\([\s\S]*?\.planet-sidebar-search-card[\s\S]*?\.planet-sidebar-view-all[\s\S]*?\.planet-object-browser[\s\S]*?const selectedSearchValue = search\.value;[\s\S]*?if \(query\.length === 0\)[\s\S]*?item\.hidden = true;[\s\S]*?empty\.hidden = true;[\s\S]*?browser\.hidden = true;[\s\S]*?return;[\s\S]*?browser\.hidden = false;[\s\S]*?item\.dataset\.objectName[\s\S]*?if \(next && resetQuery\) search\.value = "";[\s\S]*?if \(!next\) search\.value = selectedSearchValue;[\s\S]*?trigger\.ariaLabel = next[\s\S]*?`Show \$\{selectedSearchValue\} information`[\s\S]*?trigger\.textContent = "×";[\s\S]*?trigger\.addEventListener\("click"[\s\S]*?render\(true, \{ resetQuery: true \}\)[\s\S]*?search\.addEventListener\("input"[\s\S]*?search\.addEventListener\("focus", \(\) => search\.select\(\)[\s\S]*?search\.addEventListener\("keydown"[\s\S]*?event\.key !== "Escape"[\s\S]*?documentTarget\.addEventListener\("pointerdown"[\s\S]*?searchCard\.contains\(event\.target\)[\s\S]*?search\.blur\(\)/u,
+    /createObjectBrowserController\([\s\S]*?\.planet-sidebar-search-card[\s\S]*?\.planet-sidebar-view-all[\s\S]*?\.planet-object-browser[\s\S]*?const selectedSearchValue = search\.value;[\s\S]*?if \(query\.length === 0\)[\s\S]*?item\.hidden = true;[\s\S]*?empty\.hidden = true;[\s\S]*?browser\.hidden = true;[\s\S]*?return;[\s\S]*?browser\.hidden = false;[\s\S]*?item\.dataset\.objectName[\s\S]*?if \(next && resetQuery\) search\.value = "";[\s\S]*?if \(!next\) search\.value = currentSearchValue;[\s\S]*?trigger\.ariaLabel = next[\s\S]*?`Show \$\{selectedSearchValue\} information`[\s\S]*?trigger\.textContent = "×";[\s\S]*?trigger\.addEventListener\("click"[\s\S]*?render\(true, \{ resetQuery: true \}\)[\s\S]*?search\.addEventListener\("input"[\s\S]*?search\.addEventListener\("focus", \(\) => search\.select\(\)[\s\S]*?search\.addEventListener\("keydown"[\s\S]*?event\.key !== "Escape"[\s\S]*?documentTarget\.addEventListener\("pointerdown"[\s\S]*?searchCard\.contains\(event\.target\)[\s\S]*?search\.blur\(\)/u,
   );
   assert.match(mapsStyles, /\.planet-sidebar-view-all\s*\{[^}]*width:\s*44px;[^}]*height:\s*44px;/u);
   assert.doesNotMatch(mapsStyles, /planet-sidebar-search-submit/u);

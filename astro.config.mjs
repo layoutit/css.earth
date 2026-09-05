@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process";
 
 import { defineConfig } from "astro/config";
+import { wmtsLocalMirror } from "./src/planets/earth/tools/wmts-local-server.mjs";
 
 function cssEarthVersion() {
   try {
@@ -21,6 +22,7 @@ export default defineConfig({
   output: "static",
   devToolbar: { enabled: false },
   vite: {
+    plugins: [wmtsLocalMirror()],
     define: {
       __CSSEARTH_VERSION__: JSON.stringify(cssEarthVersion()),
     },

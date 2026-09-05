@@ -2,6 +2,74 @@
   "schema": "cssearth-authoritative-sources@1",
   "inputs": [
     {
+      "id": "geonames-cities15000-zip",
+      "path": "places/cities15000.zip",
+      "expectedSha256": "308217930b39218bc8d4eb55937056740c2420d543381e22786031eb521d9875",
+      "expectedBytes": 3315027,
+      "origin": "https://download.geonames.org/export/dump/cities15000.zip",
+      "credit": "GeoNames",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Checked-in GeoNames snapshot acquired 2026-09-04; daily upstream files may change",
+      "redistribution": "CC-BY-4.0 with GeoNames attribution",
+      "consumers": [
+        "places"
+      ]
+    },
+    {
+      "id": "geonames-countryinfo-txt",
+      "path": "places/countryInfo.txt",
+      "expectedSha256": "93bafc525813f22e4711ff9ed6d626343094ce48c26388dc7c49189b3d7d5512",
+      "expectedBytes": 31678,
+      "origin": "https://download.geonames.org/export/dump/countryInfo.txt",
+      "credit": "GeoNames",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Checked-in GeoNames snapshot acquired 2026-09-04; daily upstream files may change",
+      "redistribution": "CC-BY-4.0 with GeoNames attribution",
+      "consumers": [
+        "places"
+      ]
+    },
+    {
+      "id": "geonames-admin1codesascii-txt",
+      "path": "places/admin1CodesASCII.txt",
+      "expectedSha256": "590651498043f674accda2b7f46d21286cda0e290b02f8561c5005eee9a5448c",
+      "expectedBytes": 151536,
+      "origin": "https://download.geonames.org/export/dump/admin1CodesASCII.txt",
+      "credit": "GeoNames",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Checked-in GeoNames snapshot acquired 2026-09-04; daily upstream files may change",
+      "redistribution": "CC-BY-4.0 with GeoNames attribution",
+      "consumers": [
+        "places"
+      ]
+    },
+    {
+      "id": "geonames-readme-geonames-txt",
+      "path": "places/README.geonames.txt",
+      "expectedSha256": "b1957379b6c1242c700c98ac9a8aa0a09f56c3c0a50ee72175527005f48ef2c5",
+      "expectedBytes": 8843,
+      "origin": "https://download.geonames.org/export/dump/readme.txt",
+      "credit": "GeoNames",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Checked-in GeoNames snapshot acquired 2026-09-04; daily upstream files may change",
+      "redistribution": "CC-BY-4.0 with GeoNames attribution",
+      "consumers": [
+        "places"
+      ]
+    },
+    {
       "id": "nasa-earth-navigation-globe",
       "path": "earth-navigation.jpg",
       "expectedSha256": "48ccd32ef57d182662999905841109095d66d68d69e27dba7decc6e134a811a0",
@@ -9,10 +77,14 @@
       "origin": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001016/GSFC_20171208_Archive_e001016~large.jpg",
       "credit": "NASA",
       "license": "NASA media usage guidelines",
-      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
       "acquisition": "checked NASA Earth globe for the navigation marker",
       "redistribution": "NASA image with credit and no endorsement claim",
-      "consumers": ["navigation"]
+      "consumers": [
+        "navigation"
+      ]
     },
     {
       "id": "nasa-blue-marble-december",
@@ -22,10 +94,16 @@
       "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg",
       "credit": "NASA Earth Observatory",
       "license": "NASA media usage guidelines",
-      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
       "acquisition": "checked Blue Marble Next Generation December 2004 snapshot",
       "redistribution": "NASA image with credit and no endorsement claim",
-      "consumers": ["navigation", "scene", "lenses"]
+      "consumers": [
+        "navigation",
+        "scene",
+        "lenses"
+      ]
     },
     {
       "id": "nasa-blue-marble-topography",
@@ -35,10 +113,14 @@
       "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x21600x10800.jpg",
       "credit": "NASA Earth Observatory",
       "license": "NASA media usage guidelines",
-      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
       "acquisition": "checked Blue Marble topography and bathymetry snapshot",
       "redistribution": "NASA image with credit and no endorsement claim",
-      "consumers": ["lenses"]
+      "consumers": [
+        "lenses"
+      ]
     },
     {
       "id": "nasa-blue-marble-clouds",
@@ -48,10 +130,14 @@
       "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif",
       "credit": "NASA Visible Earth",
       "license": "NASA media usage guidelines",
-      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
       "acquisition": "checked Blue Marble Clouds global TIFF",
       "redistribution": "NASA image with credit and no endorsement claim",
-      "consumers": ["scene"]
+      "consumers": [
+        "scene"
+      ]
     },
     {
       "id": "nasa-black-marble-2016",
@@ -61,10 +147,14 @@
       "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg",
       "credit": "NASA Earth Observatory",
       "license": "NASA media usage guidelines",
-      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
       "acquisition": "checked Black Marble 2016 global 3 km image at 13500 by 6750 pixels",
       "redistribution": "NASA image with credit and no endorsement claim",
-      "consumers": ["lenses"]
+      "consumers": [
+        "lenses"
+      ]
     },
     {
       "id": "jpl-satellite-physical",
@@ -74,10 +164,14 @@
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
       "credit": "NASA JPL Solar System Dynamics",
       "license": "United States government factual data",
-      "licenseEvidence": ["https://www.jpl.nasa.gov/jpl-image-use-policy/"],
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
       "acquisition": "checked satellite physical-parameter authority page",
       "redistribution": "checked authority page with JPL attribution",
-      "consumers": ["moon"]
+      "consumers": [
+        "moon"
+      ]
     },
     {
       "id": "jpl-satellite-elements",
@@ -87,10 +181,14 @@
       "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
       "credit": "NASA JPL Solar System Dynamics",
       "license": "United States government factual data",
-      "licenseEvidence": ["https://www.jpl.nasa.gov/jpl-image-use-policy/"],
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
       "acquisition": "checked satellite mean-elements authority page",
       "redistribution": "checked authority page with JPL attribution",
-      "consumers": ["moon"]
+      "consumers": [
+        "moon"
+      ]
     },
     {
       "id": "nasa-earth-editorial-record",
@@ -100,10 +198,16 @@
       "origin": "https://science.nasa.gov/wp-json/wp/v2/topic/48583",
       "credit": "NASA Science",
       "license": "United States government editorial content",
-      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
       "acquisition": "checked canonical Earth topic record retrieved 2026-08-30",
       "redistribution": "selected factual text with NASA Science attribution",
-      "consumers": ["editorial", "panel", "interior"]
+      "consumers": [
+        "editorial",
+        "panel",
+        "interior"
+      ]
     },
     {
       "id": "nasa-psg-earth-configuration",
@@ -115,7 +219,9 @@
       "license": "United States government scientific model response",
       "acquisition": "expanded Earth configuration with the leading non-configuration warning removed and declared R=120 generator block appended",
       "redistribution": "checked text configuration with NASA attribution",
-      "consumers": ["spectrum"]
+      "consumers": [
+        "spectrum"
+      ]
     },
     {
       "id": "nasa-psg-earth-spectrum",
@@ -127,7 +233,9 @@
       "license": "United States government scientific model response",
       "acquisition": "checked response with only volatile synthesis-clock comments normalized",
       "redistribution": "checked numerical model response with NASA attribution",
-      "consumers": ["spectrum"]
+      "consumers": [
+        "spectrum"
+      ]
     },
     {
       "id": "openspace-earth-globe-config",
@@ -139,7 +247,9 @@
       "license": "MIT, see ../../LICENSE.OPENSPACE-MIT",
       "acquisition": "checked configuration at pinned OpenSpace commit",
       "redistribution": "permitted with OpenSpace MIT notice",
-      "consumers": ["source-verification"]
+      "consumers": [
+        "source-verification"
+      ]
     },
     {
       "id": "openspace-earth-atmosphere-config",
@@ -151,7 +261,9 @@
       "license": "MIT, see ../../LICENSE.OPENSPACE-MIT",
       "acquisition": "checked configuration at pinned OpenSpace commit",
       "redistribution": "permitted with OpenSpace MIT notice",
-      "consumers": ["atmosphere"]
+      "consumers": [
+        "atmosphere"
+      ]
     },
     {
       "id": "google-earth-pro-atmosphere-presentation-response",
@@ -163,7 +275,9 @@
       "license": "Repository-authored factual measurements; no Google pixels or shader bytes redistributed",
       "acquisition": "Headless native layer isolation with the active linked shader and Sun-direction uniform bound to the same capture run.",
       "redistribution": "Factual response measurements and a clean-room prepared approximation only.",
-      "consumers": ["atmosphere"]
+      "consumers": [
+        "atmosphere"
+      ]
     },
     {
       "id": "inter-earth-title-font",
@@ -173,10 +287,14 @@
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
-      "licenseEvidence": ["https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"],
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
       "acquisition": "checked Inter Variable font at pinned commit",
       "redistribution": "permitted under SIL OFL 1.1",
-      "consumers": ["title"]
+      "consumers": [
+        "title"
+      ]
     },
     {
       "id": "hyg-v41-earth-field",
@@ -186,10 +304,14 @@
       "origin": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
       "credit": "David Nash and Astronexus",
       "license": "CC BY-SA 4.0, see stars/LICENSE.md",
-      "licenseEvidence": ["https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce"],
+      "licenseEvidence": [
+        "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce"
+      ],
       "acquisition": "checked HYG Database v4.1 CSV at pinned commit",
       "redistribution": "permitted under CC BY-SA 4.0 with attribution and share-alike",
-      "consumers": ["stars"]
+      "consumers": [
+        "stars"
+      ]
     },
     {
       "id": "hyg-v41-earth-cubic-sky-registration",
@@ -199,10 +321,14 @@
       "origin": "HYG Stellar Database v4.1 commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
       "credit": "David Nash / Astronexus",
       "license": "CC-BY-SA-4.0",
-      "licenseEvidence": ["stars/LICENSE.md"],
+      "licenseEvidence": [
+        "stars/LICENSE.md"
+      ],
       "acquisition": "Prepared deterministic coordinate-registration subset from the pinned HYG v4.1 source.",
       "redistribution": "Share-alike prepared subset with attribution and license evidence.",
-      "consumers": ["starfield"]
+      "consumers": [
+        "starfield"
+      ]
     },
     {
       "id": "eso-earth-milky-way-panorama",
@@ -212,10 +338,15 @@
       "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
       "credit": "ESO/S. Brunier",
       "license": "CC-BY-4.0",
-      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
       "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": ["starfield", "scene"]
+      "consumers": [
+        "starfield",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-earth-cubic-sky-sun-oracle-asset",
@@ -227,7 +358,11 @@
       "license": "Google proprietary; no redistribution grant verified",
       "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
       "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": ["starfield", "sun-oracle", "scene"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-earth-cubic-sky-sun-oracle-measurements",
@@ -239,7 +374,82 @@
       "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
       "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
       "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": ["starfield", "sun-oracle", "scene", "lighting"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene",
+        "lighting"
+      ]
+    },
+    {
+      "id": "buenos-aires-noise-source",
+      "path": "noise/buenos-aires-day-2025.geojson.gz",
+      "expectedSha256": "eb58201a66c8c531155035eb57e574a790db4830d6309cc8dff4262ba44c3370",
+      "expectedBytes": 33858376,
+      "origin": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/agencia-de-proteccion-ambiental/mapa-ruido/medicion_de_ruido_diurno.geojson",
+      "credit": "Buenos Aires APrA",
+      "license": "CC-BY-2.5-AR",
+      "licenseEvidence": [
+        "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
+        "https://creativecommons.org/licenses/by/2.5/ar/"
+      ],
+      "acquisition": "Pinned 2025 daytime noise GeoJSON, retrieved 2026-09-05; archive preserves exact source bytes",
+      "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
+      "consumers": [
+        "noise-lens"
+      ]
+    },
+    {
+      "id": "buenos-aires-noise-pin",
+      "path": "noise/manifest.json",
+      "expectedSha256": "6bbfdee5d1c9213b8916034c98136e69f41b1078839a2452e23a2cb62e86155e",
+      "expectedBytes": 1165,
+      "origin": "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
+      "credit": "Buenos Aires APrA",
+      "license": "CC-BY-2.5-AR",
+      "licenseEvidence": [
+        "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
+        "https://creativecommons.org/licenses/by/2.5/ar/"
+      ],
+      "acquisition": "Pinned 2025 daytime noise GeoJSON, retrieved 2026-09-05; archive preserves exact source bytes",
+      "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
+      "consumers": [
+        "noise-lens"
+      ]
+    },
+    {
+      "id": "worldcover-wmts-release",
+      "path": "city/wmts-release.json",
+      "expectedSha256": "779c9cc235f444a14ced20582a340c32921719028995814fa56509294842bf6c",
+      "expectedBytes": 2897443,
+      "origin": "https://esa-worldcover.org/en/data-access",
+      "credit": "ESA WorldCover project 2021 / Copernicus Sentinel data",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://esa-worldcover.org/en/data-access"
+      ],
+      "acquisition": "Generated geometry release inventory from the pinned WorldCover source footprints and accepted Earth scene; no imagery copied",
+      "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
+      "consumers": [
+        "city-wmts"
+      ]
+    },
+    {
+      "id": "worldcover-geographic-rebind",
+      "path": "city/geographic-rebind.json",
+      "expectedSha256": "6da869e304c7a969727897017dc52deadafd2d9c65f2d59b1db0e45ae14e9ea4",
+      "expectedBytes": 659,
+      "origin": "https://esa-worldcover.org/en/data-access",
+      "credit": "ESA WorldCover project 2021 / Copernicus Sentinel data",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://esa-worldcover.org/en/data-access"
+      ],
+      "acquisition": "Verified byte-identical geographic frames when integrating the PR2 affine raster representation; complete pack hashes rechecked",
+      "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
+      "consumers": [
+        "city-wmts"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -257,6 +467,42 @@
     }
   ],
   "documents": [
+    {
+      "path": "places/manifest.json",
+      "expectedSha256": "1dc6c7bc7c74a497c9de76245d6f1b10f979507cee0b940a4722001ab3d97099",
+      "expectedBytes": 1359,
+      "purpose": "Pinned GeoNames place catalogue snapshot, license and source hashes; not imagery coverage"
+    },
+    {
+      "path": "city/catalog-pin.json",
+      "expectedSha256": "48ffd4c2edf268f6c629f066615751f2b6c49419554b412e5c91e2b7c9d4c4da",
+      "expectedBytes": 861,
+      "purpose": "Observation date, hash and qualification of the complete WorldCover RGBNIR object inventory"
+    },
+    {
+      "path": "city/worldcover-rgbnir-2021.json.gz",
+      "expectedSha256": "a3bce0d3857d7845b59fb12cf067068cd15db7638df8e497a755e989f43b28bc",
+      "expectedBytes": 628807,
+      "purpose": "Preparation-only global source tile availability and publisher object pins; not pixel or runtime coverage"
+    },
+    {
+      "path": "city/manifest.json",
+      "expectedSha256": "7058cb9d1c2cb2ac1aa4d16073d2a5b6ef71fe0c778423cf765972fe6a690326",
+      "expectedBytes": 6531,
+      "purpose": "Pinned WorldCover source tiles, extracted-pixel hashes, RGB recipe, delivery origin and representative paging scope"
+    },
+    {
+      "path": "city/r2-cors.json",
+      "expectedSha256": "4d9db512d4308ee0e738c28f34d836b361eb0e8a74fbef3f3246fcc7376cd956",
+      "expectedBytes": 504,
+      "purpose": "Read-only cross-origin delivery policy with exact range response headers for the canonical R2 asset bucket"
+    },
+    {
+      "path": "city/provenance.json",
+      "expectedSha256": "de3e2092f53de90d2611a9f1e0af6af3aa22b2a45705dca60abadbe5779b0c5b",
+      "expectedBytes": 22261,
+      "purpose": "Verified source GeoTIFF metadata, geographic extraction windows, nodata counts and pixel hashes"
+    },
     {
       "path": "interior/earth-interior.json",
       "expectedSha256": "c0578b8e31058dd4949fff1f9d6ab8017a03a1d3a78ce976674a40661a57a81a",
@@ -280,6 +526,18 @@
       "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
       "expectedBytes": 1271,
       "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    },
+    {
+      "path": "city/published-coverage.json.gz",
+      "expectedSha256": "6f22eccaf59696d8b9e1e195e9d94b36cf1e7bbc8f9bf961bf5c8249724dc229",
+      "expectedBytes": 139459,
+      "purpose": "Verified publication receipts, source-window provenance and immutable index heads for integrated geographic coverage"
+    },
+    {
+      "path": "city/r2-cache-rule.json",
+      "expectedSha256": "6f661ba270eec5e578ad7939305b2bf6c38d5d1d00c4a98231bbc94972772b65",
+      "expectedBytes": 489,
+      "purpose": "Narrow immutable geometry cache rule deployed to the public asset domain"
     }
   ]
 }

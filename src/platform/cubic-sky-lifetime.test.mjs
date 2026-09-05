@@ -147,3 +147,63 @@ test("disposing during a release publication cannot restart the coast", t => {
   assert.equal(surface.captured.size, 0);
   assert.equal(controls.stats().active, false);
 });
+
+for (const action of ["complete", "wheel", "destroy", "failure"]) {
+  test(`destination flight settles and releases its frame on ${action}`, async () => {
+    const previous = globalThis.HTMLElement;
+    globalThis.HTMLElement = Surface;
+    const surface = new Surface(), samples = [], errors = [];
+    const controls = createUnboundedMatrixDragControls({ inputSurface: surface,
+      trackballMetrics: () => ({ centerX: 0, centerY: 0, radius: 200, surfaceRadius: 200, focalLength: 600 }),
+      rotate() {}, onError: error => errors.push(error) });
+    try {
+      const completion = controls.flyTo({ durationMilliseconds: 100, sample(progress) {
+        samples.push(progress);
+        if (action === "failure") throw new Error("destination publication");
+      } });
+      surface.tick(0);
+      if (action === "complete") surface.tick(100);
+      if (action === "wheel") surface.dispatch("wheel", { deltaY: 100 });
+      if (action === "destroy") controls.destroy();
+      assert.deepEqual(await completion, { completed: action === "complete" });
+      const count = samples.length;
+      surface.tick(200);
+      assert.equal(samples.length, count);
+      assert.equal(surface.frames.size, 0);
+      assert.equal(controls.stats().destinationFlyTo.active, false);
+      assert.equal(errors.length, action === "failure" ? 1 : 0);
+      controls.destroy();
+      assert.deepEqual(await controls.flyTo({ sample() {} }), { completed: false });
+      assert.equal(surface.listenerCount(), 0);
+    } finally { controls.destroy(); globalThis.HTMLElement = previous; }
+  });
+}
+
+test("a fresh accelerating drag after interrupting flight owns its own release", t => {
+  const previous = globalThis.HTMLElement;
+  globalThis.HTMLElement = Surface;
+  t.after(() => { globalThis.HTMLElement = previous; });
+  const surface = new Surface();
+  const controls = createUnboundedMatrixDragControls({ inputSurface:surface,
+    trackballMetrics:() => ({ centerX:0, centerY:0, radius:200,
+      surfaceRadius:200, focalLength:600,
+      sceneMatrix:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),
+    surfaceFlyToState:() => ({ zoom:1, minimumZoom:0.5, maximumZoom:4 }),
+    rotate() {},
+  });
+  t.after(() => controls.destroy());
+  surface.dispatch("mousedown", { detail:2, clientX:30, clientY:20 });
+  surface.tick(0); surface.tick(100);
+  assert.equal(controls.stats().activeMode, "fly-to");
+  surface.dispatch("pointerdown", { timeStamp:110 });
+  surface.tick(110);
+  for (const [index, clientX] of [10, 25, 45, 80].entries()) {
+    const timeStamp = 130 + index * 20;
+    surface.dispatch("pointermove", { clientX, timeStamp }); surface.tick(timeStamp);
+  }
+  surface.dispatch("pointerup", { clientX:80, timeStamp:195 });
+  assert.equal(controls.stats().surfaceFlyTo.cancels, 1);
+  assert.equal(controls.stats().activeMode, "inertia");
+  assert.equal(controls.stats().starts, 1);
+  assert.equal(surface.frames.size, 1);
+});

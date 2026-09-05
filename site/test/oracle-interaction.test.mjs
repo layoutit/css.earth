@@ -1,6 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { compareTrajectories, bindInputReceipts, verifyWheelReceipts, interruptionObservations } from
+import { mkdtemp, writeFile, readFile, rm } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { compareTrajectories, bindInputReceipts, verifyWheelReceipts, interruptionObservations,
+  assertMotionOnlyReference, readBrowserRun } from
   "../../src/planets/mars/tools/oracle/google-earth-pro/interaction-suite-analysis.mjs";
 
 const pose = (time, degrees) => {
@@ -67,4 +72,72 @@ test("oracle registration rejects an independent CSS translation of the scene", 
   assert.doesNotThrow(()=>assertRegisteredProjection(native,browser));
   browser.state.trackball.centerX+=170;
   assert.throws(()=>assertRegisteredProjection(native,browser),/body position differs/);
+});
+
+test("motion-only timing rejects reference readback overlapping the gesture", () => {
+  const report = { captureConfiguration: { captureUntilRest: false },
+    inputs: [{ event: "native-input-accepted", acceptedMonotonicSeconds: 10 }],
+    frames: [{ monotonicSeconds: 9 }, { monotonicSeconds: 9.5 }] };
+  assert.doesNotThrow(() => assertMotionOnlyReference(report));
+  assert.throws(() => assertMotionOnlyReference({ ...report,
+    captureConfiguration: { captureUntilRest: true } }), /without gesture readback/);
+  assert.throws(() => assertMotionOnlyReference({ ...report,
+    frames: [{ monotonicSeconds: 10.1 }, ...report.frames] }), /overlaps/);
+  assert.throws(() => assertMotionOnlyReference({ ...report, inputs: [] }), /no accepted input/);
+});
+
+test("natural motion reports retain the observed clock and reject hidden readback", async t => {
+  const directory = await mkdtemp(join(tmpdir(), "cssearth-motion-report-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const path = join(directory, "report.json");
+  const scene = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
+  const sample = timestamp => ({ timestamp, pose: { scene }, zoom: 1,
+    interaction: { activeMode: "idle", activeMotionCount: 0, wheelZoom: { active: false } } });
+  const report = { timingMode: "motion-only", readbackDuringGesture: false,
+    stopObservation: { elapsedMilliseconds: 550 }, failures: [], finalNodes: 12,
+    state: { nodes: 12, pose: { scene }, trackball: { focalLength: 600 } },
+    epoch: 1000, zoom: 1, clock: { timeOrigin: 500 },
+    inputs: [{ type: "pointerup", receivedAt: 525 }],
+    motionSamples: [sample(1010), sample(1030)] };
+  const read = async patch => {
+    await writeFile(path, JSON.stringify({ ...report, ...patch }));
+    return readBrowserRun(path);
+  };
+  const result = await read({});
+  assert.deepEqual(result.frames.map(frame => frame.time), [10, 30]);
+  assert.equal(result.inputs[0].time, 25);
+  await assert.rejects(read({ readbackDuringGesture: true }));
+  await assert.rejects(read({ timingMode: "frame-locked" }), /natural browser clock/);
+  assert.equal((await read({ timingMode: "normal", readbackDuringGesture: true })).frames.length, 2);
+});
+
+test("input pairing retains the final consumed release position even without a throw", async t => {
+  const directory = await mkdtemp(join(tmpdir(), "cssearth-release-pairing-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const gesture = ["down", "drag", "drag", "up"].map((kind, index) => ({
+    id:`input-${index}`, kind, x:[.5, .51, .53, .55][index], y:.5,
+  }));
+  const history = [[0, 0, 1], [.02, 0, 1.02], [.04, 0, 1.04], [.04, 0, 1.06]];
+  const records = [3, 4].map(length => ({ t:100 + (length - 1) * .02 + .01,
+    clock:1 + (length - 1) * .02 + .01, point:[length === 3 ? .06 : .1, 0],
+    history:history.slice(0, length), average:[0, 0], window:0 }));
+  await writeFile(join(directory, "input-history.jsonl"), records.map(JSON.stringify).join("\n"));
+  await writeFile(join(directory, "frame-timing.tsv"), "100\t0.016\t1\n100.05\t0.016\t1.05\n");
+  await writeFile(join(directory, "report.json"), JSON.stringify({
+    gesture, captureConfiguration:{captureUntilRest:false},
+    frames:[{monotonicSeconds:99.9}],
+    viewport:{width:100, height:100, sceneLeft:0, contentWidth:100},
+    inputs:[{event:"native-input-batch-accepted", acceptedMonotonicSeconds:100},
+      ...gesture.map((event, index) => ({event:"native-input-accepted", id:event.id,
+        acceptedMonotonicSeconds:100 + index * .02}))],
+  }));
+  execFileSync(process.execPath, [new URL(
+    "../../src/planets/mars/tools/oracle/google-earth-pro/pair-rendered-motion-inputs.mjs",
+    import.meta.url).pathname, directory]);
+  const result = JSON.parse(await readFile(join(directory, "paired-input-report.json")));
+  assert.equal(result.consumedInputEvidence.launch.history.length, 4);
+  assert.deepEqual(result.consumedGesture.map(event => event.kind), ["down", "drag", "drag", "drag", "up"]);
+  assert.equal(result.consumedGesture.at(-2).id, "input-3:position");
+  assert.ok(Math.abs(result.consumedGesture.at(-2).x - .55) < 1e-12);
+  assert.equal(result.consumedGesture.at(-1).x, result.consumedGesture.at(-2).x);
 });

@@ -69,7 +69,6 @@ if (materialsOnly) {
     await Promise.all([
       prepareEarthMaterialBanks(),
       prepareInteriorAssets(),
-      prepareStarfield(),
       prepareLensThumbnail(source("blue-marble-december.jpg"), "earth-lens-normal.webp"),
       prepareLensThumbnail(source("blue-marble-topography.jpg"), "earth-lens-topography.webp"),
       prepareLensThumbnail(source("black-marble-2016.jpg"), "earth-lens-night-lights.webp"),
@@ -898,38 +897,6 @@ function hexRgb(value) {
   ));
 }
 
-async function prepareStarfield() {
-  const csv = await readFile(source("stars/hygdata_v41.csv"), "utf8");
-  const stars = csv.split("\n").slice(1).map((line) => {
-    const cells = line.split(",").map((value) => value.replace(/^"|"$/gu, ""));
-    return { ra: Number(cells[7]), dec: Number(cells[8]), mag: Number(cells[13]), ci: Number(cells[16]) };
-  }).filter(({ ra, dec, mag }) => Number.isFinite(ra) && Number.isFinite(dec) && Number.isFinite(mag) && mag <= 6.8)
-    .sort((left, right) => left.mag - right.mag)
-    .slice(0, 1800);
-  if (stars.length !== 1800) throw new Error(`HYG Earth star selection contains ${stars.length} entries.`);
-  const width = 1920;
-  const height = 1080;
-  const rgb = Buffer.alloc(width * height * 3);
-  for (const star of stars) {
-    const x = Math.max(0, Math.min(width - 1, Math.round((star.ra / 24) * (width - 1))));
-    const y = Math.max(0, Math.min(height - 1, Math.round(((90 - star.dec) / 180) * (height - 1))));
-    const intensity = Math.max(96, Math.min(255, Math.round(255 - (star.mag + 1.5) * 23)));
-    const radius = star.mag < 1 ? 2 : star.mag < 3 ? 1 : 0;
-    const tint = starColor(star.ci);
-    for (let oy = -radius; oy <= radius; oy += 1) for (let ox = -radius; ox <= radius; ox += 1) {
-      const px = x + ox;
-      const py = y + oy;
-      if (px < 0 || py < 0 || px >= width || py >= height) continue;
-      const falloff = ox === 0 && oy === 0 ? 1 : 0.42;
-      const offset = (py * width + px) * 3;
-      for (let channel = 0; channel < 3; channel += 1) rgb[offset + channel] = Math.max(rgb[offset + channel], Math.round(intensity * tint[channel] * falloff));
-    }
-  }
-  await sharp(rgb, { raw: { width, height, channels: 3 } })
-    .webp({ quality: 82, smartSubsample: true })
-    .toFile(output("earth-starfield.webp"));
-}
-
 async function prepareLensThumbnail(input, filename) {
   const metadata = await sharp(input).metadata();
   const cropSize = Math.round(metadata.height / 2);
@@ -947,12 +914,7 @@ async function prepareLensThumbnail(input, filename) {
     .toFile(output(filename));
 }
 
-function starColor(ci) {
-  if (!Number.isFinite(ci)) return [0.92, 0.95, 1];
-  const red = Math.max(0.72, Math.min(1, 0.94 + ci * 0.08));
-  const blue = Math.max(0.72, Math.min(1, 1 - ci * 0.12));
-  return [red, 0.94, blue];
-}
+
 
 function smoothstep(edge0, edge1, value) {
   const progress = clamp((value - edge0) / (edge1 - edge0), 0, 1);

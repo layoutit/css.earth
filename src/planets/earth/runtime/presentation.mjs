@@ -6,6 +6,8 @@ import { PREPARED_EARTH_SCENE } from "./preparedScene.mjs";
 import { PREPARED_EARTH_LENSES } from "./preparedLenses.mjs";
 import { publishEarthSurfacePages, requireEarthSurfacePages } from "./surface-pages.mjs";
 import { pageKeys, materialState } from "./material.mjs";
+import { PREPARED_EARTH_CITY_PAGES } from "./preparedCityPages.mjs";
+import { PREPARED_EARTH_NOISE } from "./preparedNoise.mjs";
 export function createPresentation(stage, context) {
   const plan = PREPARED_EARTH_SCENE;
   if (plan.schema !== "cssearth-prepared-retained-scene@6" ||
@@ -83,6 +85,12 @@ export function createPresentation(stage, context) {
   let materialAddressWrites = 0, materialFrame = null;
   const applied = { lighting: null, atmosphere: null };
   return Object.freeze({ cameraElement: camera, sceneElement: scene, bodyLayers: Object.freeze([registration]),
+    motionFrame: Object.freeze([system, bodyCarriers.surface[0]]),
+    pageLayers: Object.freeze([
+      { id: "city", plan: PREPARED_EARTH_CITY_PAGES, lensIds: ["normal", "buenos-aires-noise"] },
+      { id: "noise", plan: PREPARED_EARTH_NOISE, lensIds: ["buenos-aires-noise"] },
+    ].map(layer => Object.freeze({ ...layer, carrier: bodyCarriers.surface[0], system,
+      className: "earth-city-page", textureClassName: "earth-api-texture" }))),
     commitSelection({ selection, resources }) {
       const lens = PREPARED_EARTH_LENSES.controls.find(lens => lens.id === selection.lensId);
       const urls = pageKeys(lens.id).map(key => resources.url(key));
