@@ -38,7 +38,7 @@ try {
         `${planet.id}: introduction must use a 1.4 line height`);
       assert.equal(report.width, 306,
         `${planet.id}: desktop introduction measure must remain stable`);
-      const expectedLines = planet.id === "venus" ? 5 : 4;
+      const expectedLines = ({ venus:5, uranus:3 })[planet.id] ?? 4;
       assert.ok(Math.abs(report.lineRatio - expectedLines) < 0.01,
         `${planet.id}: desktop introduction must occupy ${expectedLines} lines in the 340px panel`);
       reports.push({

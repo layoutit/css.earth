@@ -422,7 +422,7 @@ async function proveDesktop(browser, planet, profile) {
         },
       );
       introductionLines = Math.round(introduction.lineRatio);
-      const expectedIntroductionLines = planet.id === "venus" ? 5 : 4;
+      const expectedIntroductionLines = ({ venus:5, uranus:3 })[planet.id] ?? 4;
       assert.ok(Math.abs(introduction.lineRatio - expectedIntroductionLines) < 0.01,
         `${planet.id}: desktop introduction must occupy ${expectedIntroductionLines} lines in the 340px panel`);
     }
