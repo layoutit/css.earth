@@ -24,7 +24,8 @@ test("application geometry has one owner, separate from component appearance", a
   assert.match(layout, /--explorer-search-height:\s*48px/u);
   assert.match(layout, /--explorer-surface-background:\s*#151515/u);
   assert.match(layout, /--explorer-(?:rail|panel)-background:\s*var\(--explorer-surface-background\)/u);
-  assert.match(layout, /--explorer-panel-width:\s*360px/u);
+  assert.match(layout, /--explorer-panel-width:\s*340px/u);
+  assert.match(layout, /--explorer-scene-offset:\s*170px/u);
   assert.doesNotMatch(layout, /explorer-header-height|planet-topbar|planet-header-rail/u);
   assert.match(layout, /--explorer-content-inset:\s*20px/u);
   assert.match(layout, /--explorer-logo-size:\s*36px/u);
@@ -42,6 +43,7 @@ test("application geometry has one owner, separate from component appearance", a
   assert.doesNotMatch(layout, /\.planet-sidebar-wordmark\s*\{/u);
   assert.doesNotMatch(layout, /planet-brand-footer|explorer-footer-height/u);
   assert.match(layout, /--explorer-card-padding-left:\s*calc\(var\(--explorer-content-inset\) - var\(--explorer-panel-padding\)\)/u);
+  assert.match(layout, /\.planet-stage\s*\{[^}]*inset-inline-start:\s*0;[^}]*translate:\s*var\(--explorer-scene-offset\) 0;/u);
 });
 
 test("wordmark uses tight prepared bounds and ordinary inline baseline alignment", async () => {
