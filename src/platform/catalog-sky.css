@@ -1,0 +1,93 @@
+/* A prepared catalogue sky (see catalog-sky-runtime.mjs): retained star
+   elements on a sphere of the focal length inside a perspective root that
+   shares the photographic sky's eye, moved by the same skybox matrix; and a
+   screen-space overlay of retained caption elements above named stars. */
+.planet-catalog-sky {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  perspective: var(--planet-catalog-sky-focal);
+  perspective-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.planet-catalog-sky-cube,
+.planet-catalog-sky-orientation,
+.planet-catalog-sky-band {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+/* The eye sits at the cube's centre: the cube is pushed forward by the
+   focal length, exactly as the photographic cube is. */
+.planet-catalog-sky-cube {
+  transform: translateZ(var(--planet-catalog-sky-focal));
+}
+
+.planet-catalog-sky-band {
+  top: 0;
+  left: 0;
+}
+
+.planet-catalog-sky-band[hidden] {
+  display: none;
+}
+
+/* A star: a disc of its prepared radius and colour at its prepared
+   luminance, with a compact bloom (the reference's halo reaches 2.5 radii
+   and peaks at 0.08) drawn as a soft shadow of the same colour whose
+   extent and alpha the runtime writes from the prepared halo constants,
+   placed by its prepared angles on the sphere whose radius the runtime
+   writes. */
+.planet-catalog-star {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: calc(2 * var(--planet-catalog-star-radius));
+  height: calc(2 * var(--planet-catalog-star-radius));
+  margin: calc(-1 * var(--planet-catalog-star-radius)) 0 0
+    calc(-1 * var(--planet-catalog-star-radius));
+  border-radius: 50%;
+  background-color: rgb(var(--planet-catalog-star-rgb));
+  box-shadow: 0 0 calc(var(--planet-catalog-star-halo-blur, 1.25) * var(--planet-catalog-star-radius))
+    calc(var(--planet-catalog-star-halo-spread, 0.25) * var(--planet-catalog-star-radius))
+    rgb(var(--planet-catalog-star-rgb) / var(--planet-catalog-star-halo-alpha, 0.16));
+  pointer-events: none;
+}
+
+/* Captions: the shell's navigation rail typography by its tokens (the
+   font stack and the secondary text colour); the runtime writes the size
+   that lands capitals at the policy's cap height, and the rail's opacity is
+   the policy's alpha ceiling. */
+.planet-catalog-sky-labels {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  font-family: var(--shell-ui-font);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--shell-text-secondary);
+  pointer-events: none;
+}
+
+.planet-catalog-label,
+.planet-catalog-sky-measure s {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  white-space: nowrap;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.planet-catalog-sky-measure {
+  visibility: hidden;
+}
