@@ -147,3 +147,32 @@ test("disposing during a release publication cannot restart the coast", t => {
   assert.equal(surface.captured.size, 0);
   assert.equal(controls.stats().active, false);
 });
+
+test("a fresh accelerating drag after interrupting flight owns its own release", t => {
+  const previous = globalThis.HTMLElement;
+  globalThis.HTMLElement = Surface;
+  t.after(() => { globalThis.HTMLElement = previous; });
+  const surface = new Surface();
+  const controls = createUnboundedMatrixDragControls({ inputSurface:surface,
+    trackballMetrics:() => ({ centerX:0, centerY:0, radius:200,
+      surfaceRadius:200, focalLength:600,
+      sceneMatrix:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),
+    surfaceFlyToState:() => ({ zoom:1, minimumZoom:0.5, maximumZoom:4 }),
+    rotate() {},
+  });
+  t.after(() => controls.destroy());
+  surface.dispatch("mousedown", { detail:2, clientX:30, clientY:20 });
+  surface.tick(0); surface.tick(100);
+  assert.equal(controls.stats().activeMode, "fly-to");
+  surface.dispatch("pointerdown", { timeStamp:110 });
+  surface.tick(110);
+  for (const [index, clientX] of [10, 25, 45, 80].entries()) {
+    const timeStamp = 130 + index * 20;
+    surface.dispatch("pointermove", { clientX, timeStamp }); surface.tick(timeStamp);
+  }
+  surface.dispatch("pointerup", { clientX:80, timeStamp:195 });
+  assert.equal(controls.stats().surfaceFlyTo.cancels, 1);
+  assert.equal(controls.stats().activeMode, "inertia");
+  assert.equal(controls.stats().starts, 1);
+  assert.equal(surface.frames.size, 1);
+});
