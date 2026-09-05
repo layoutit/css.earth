@@ -20,7 +20,7 @@ export async function prepareVenusPresentation() {
   const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
   const camera=b.element("div","polycss-camera planet-render-root",plan.camera.style);
   const scene=b.element("div","polycss-scene",plan.camera.sceneStyle,{"aria-hidden":"true","data-polycss-lighting":"baked"});
-  const system=b.mesh("venus-system",`transform:rotateY(${-plan.body.axialTiltDegrees}deg)`),body=b.mesh("venus-body","");
+  const system=b.mesh("venus-system",`transform:rotateY(${-plan.body.axialTiltDegrees}deg)`),body=b.mesh("venus-body","",{style:""});
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);b.append(system,body);
   for(const leaf of plan.body.leaves)b.append(body,b.leaf(leaf));
   const composite=b.element("div","venus-material-composite planet-render-root","",{"aria-hidden":"true"});

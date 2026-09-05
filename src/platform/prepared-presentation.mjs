@@ -50,7 +50,7 @@ export function mountPreparedPresentation(stage, context, definition) {
     nodes.push(node);
     if (record.parent === -1) { roots.push(node); context.own(() => node.remove()); }
     if (record.className !== null) node.className = record.className;
-    node.style.cssText = record.style;
+    if (record.style) node.style.cssText = record.style;
     // Keep property assignment distinct from cssText. Chrome's numeric CSS
     // parser can otherwise change the original prepared matrix precision.
     for (const propertyId of record.properties) {

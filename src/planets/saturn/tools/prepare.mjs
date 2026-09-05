@@ -14,7 +14,7 @@ const steps = Object.freeze([
   ["prepare-panel-content.mjs"],
   ["prepare-lenses.mjs"],
   ["prepare-interior.mjs"],
-  ["prepare-scene.mjs"],
+  ["prepare-scene.mjs", "--compose"],
   ["prepare-leaf-layouts.mjs"],
   ["prepare-starfield.mjs"],
   ["prepare-sky-sun.mjs"],
