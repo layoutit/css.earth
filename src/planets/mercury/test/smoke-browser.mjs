@@ -73,6 +73,9 @@ try {
     systemMarkerCount: document.querySelectorAll(".mercury-system-marker").length,
     sunMarkerCount: document.querySelectorAll(".mercury-sun-marker").length,
     systemGroupCount: document.querySelectorAll(".planet-heliocentric-system").length,
+    captionCount: document.querySelectorAll(".mercury-caption").length,
+    captionMeasureCount: document.querySelectorAll(".planet-heliocentric-caption-measure").length,
+    retainedCaptionCount: window.__mercury.dom.retainedCaptionCount,
   }));
   assert.deepEqual(baseline, {
     title: "Mercury - Powered by PolyCSS",
@@ -85,8 +88,9 @@ try {
     // interior, the billboard disc and the material overlay, and the orbit
     // overlay's piece pool and body marker (2242), plus the planetary
     // system's group, its 1536 orbit pieces (twelve rings), twelve markers
-    // with their phase overlays, and the Sun marker (1562).
-    stageElements: 3804,
+    // with their phase overlays, the Sun marker (1562), and the captions:
+    // their group, eight retained slots and fourteen measuring elements (23).
+    stageElements: 3827,
     cameraCount: 1,
     skyboxFaceCount: 6,
     sunCount: 1,
@@ -103,6 +107,9 @@ try {
     systemMarkerCount: 12,
     sunMarkerCount: 1,
     systemGroupCount: 1,
+    captionCount: 8,
+    captionMeasureCount: 14,
+    retainedCaptionCount: 8,
   });
   const startupMercuryResources = await page.evaluate(() =>
     performance.getEntriesByType("resource")
@@ -133,7 +140,7 @@ try {
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
     viewBank: { interiorMounted: window.__mercury.dom.interiorMounted, retainedInteriorNodeCount: window.__mercury.dom.retainedInteriorNodeCount },
   })), {
-    elements: 3804,
+    elements: 3827,
     interiorLeaves: 446,
     viewBank: {
       interiorMounted: true,
@@ -645,7 +652,7 @@ try {
   for (const sample of lodLadder) {
     assert.equal(sample.datasetLod, sample.stage);
     assert.equal(sample.stable, true);
-    assert.equal(sample.elements, 3804);
+    assert.equal(sample.elements, 3827);
     assert.equal(sample.materialFrame, lodLadder[0].materialFrame);
     assert.ok(Math.abs(sample.billboardStyleOpacity - sample.billboardOpacity) <
       1e-6);
@@ -713,7 +720,7 @@ try {
     `far bound ${farSystem.maximumDistanceAu} au`);
   assert.ok(farSystem.wheelNotches > 20 && farSystem.wheelNotches < 40);
   assert.equal(farSystem.stable, true);
-  assert.equal(farSystem.elements, 3804);
+  assert.equal(farSystem.elements, 3827);
 
   // Back in close: the row cache resumes on the retained rows.
   assert.equal(await page.evaluate(() => {
@@ -729,7 +736,7 @@ try {
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.childElementCount), baseline.stageChildren);
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-    stage.querySelectorAll("*").length), 3804);
+    stage.querySelectorAll("*").length), 3827);
   assert.equal(await page.evaluate(() =>
     window.__mercury.assertStableDomIdentity()), true);
   assert.deepEqual(externalRequests, []);

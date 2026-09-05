@@ -4,6 +4,16 @@ import {
   validTrailSpans,
   validatePreparedHeliocentricView,
 } from "./heliocentric-view.mjs";
+import {
+  LABEL_OWNER_BODY,
+  LABEL_OWNER_FOCUS,
+  LABEL_OWNER_SUN,
+  createLabelDeclutter,
+  createLabelSlots,
+  labelBox,
+  labelFontPixels,
+  validateLabelPolicy,
+} from "./label-field.mjs";
 
 // Mounts the retained DOM of a body's heliocentric neighbourhood and moves it
 // with the camera:
@@ -34,6 +44,9 @@ export function mountRetainedHeliocentricView({
   sunImageUrl,
   markerSprite,
   systemMarkers = null,
+  // Captions (see label-field.mjs): a policy and a name per body, the
+  // observer's own included; null draws no captions.
+  labels = null,
   orbitPoolSpare = 48,
   systemPoolSpare = 8,
 }) {
@@ -52,6 +65,13 @@ export function mountRetainedHeliocentricView({
     throw new TypeError("A prepared planetary system needs a marker sprite for the Sun and every body, and the phase atlas.");
   }
   const phaseAtlas = system === null ? null : systemMarkers.phase;
+  if (labels !== null) {
+    validateLabelPolicy(labels.policy);
+    const needed = [objectId, ...(system === null ? [] : ["sun", ...system.bodies.map((body) => body.id)])];
+    if (needed.some((id) => typeof labels.names?.[id] !== "string" || labels.names[id].length === 0)) {
+      throw new TypeError("Captions need a name for the observer, the Sun and every system body.");
+    }
+  }
   const document = host.ownerDocument;
   const sunRoot = document.createElement("div");
   sunRoot.className =
@@ -163,6 +183,49 @@ export function mountRetainedHeliocentricView({
     sunMarker.style.visibility = "hidden";
     overlay.appendChild(sunMarker);
   }
+  // Captions: a fixed pool of retained caption elements in the overlay,
+  // laid out above their markers by the one declutter pass, and one hidden
+  // measuring element per name so each caption's width per cap height is
+  // read from the retained DOM once at mount (no canvas, no per-frame
+  // measurement). Their font is the shell's UI stack at the size that lands
+  // capitals at the policy's cap height.
+  let labelField = null;
+  if (labels !== null) {
+    const policy = labels.policy;
+    const fontPixels = labelFontPixels(policy);
+    const group = document.createElement("div");
+    group.className = `planet-heliocentric-captions ${objectId}-captions`;
+    group.style.fontSize = `${fontPixels}px`;
+    const widthPerCapHeight = new Map();
+    const measures = [];
+    for (const [id, name] of Object.entries(labels.names)) {
+      const measure = document.createElement("s");
+      measure.className = "planet-heliocentric-caption-measure";
+      measure.textContent = name;
+      group.appendChild(measure);
+      measures.push([id, measure]);
+    }
+    const elements = [];
+    for (let index = 0; index < policy.poolSize; index += 1) {
+      const element = document.createElement("s");
+      element.className = `planet-heliocentric-caption ${objectId}-caption`;
+      element.style.opacity = "0";
+      element.style.visibility = "hidden";
+      group.appendChild(element);
+      elements.push(element);
+    }
+    overlay.appendChild(group);
+    labelField = {
+      policy, group, elements, measures, widthPerCapHeight,
+      declutter: createLabelDeclutter({ capacity: policy.candidateCapacity, spacingPixels: policy.spacingPixels }),
+      pool: createLabelSlots({ poolSize: policy.poolSize, maxAlpha: policy.maxAlpha, maxAlphaStep: policy.maxAlphaStep }),
+      published: elements.map(() => ({ text: null, transform: null, opacity: null, hidden: true })),
+      measured: false,
+      settled: false,
+      accepted: [],
+      candidates: 0,
+    };
+  }
   host.appendChild(overlay);
 
   let lastProjection = null;
@@ -201,6 +264,7 @@ export function mountRetainedHeliocentricView({
     retainedSystemOrbitPieceCount: systemPoolSize,
     retainedSystemMarkerCount: systemMarkerElements.size,
     retainedSunMarkerCount: sunMarker === null ? 0 : 1,
+    retainedCaptionCount: labelField === null ? 0 : labelField.elements.length,
     publish({
       rotation,
       distance,
@@ -228,6 +292,7 @@ export function mountRetainedHeliocentricView({
         publishSystem(projection);
         publishSunMarker(projection);
       }
+      if (labelField !== null) publishCaptions(projection);
       return projection;
     },
     setOrbitOpacity(opacity) {
@@ -294,6 +359,26 @@ export function mountRetainedHeliocentricView({
           : Number(publishedMarkerOpacity),
         trailSpans: trailSpans ?? plan.orbit.trailSpans,
         trailSpansSource: trailSpans === null ? "prepared" : "session",
+        ...(labelField === null ? {} : {
+          captions: Object.freeze({
+            policy: labelField.policy,
+            candidateCount: labelField.candidates,
+            acceptedCount: labelField.accepted.length,
+            // Every candidate of the last pass with its box, and which were
+            // accepted: enough for a test to recompute the pass on its own.
+            candidates: Object.freeze((labelField.candidateList ?? []).map((candidate) => Object.freeze({
+              key: candidate.key, owner: candidate.owner, id: candidate.id, text: candidate.text,
+              priority: candidate.priority, anchor: candidate.anchor, alpha: candidate.alpha, ...candidate.box,
+              accepted: labelField.accepted.includes(candidate),
+            }))),
+            poolSize: labelField.policy.poolSize,
+            widthPerCapHeight: Object.freeze(Object.fromEntries(labelField.widthPerCapHeight)),
+            slots: Object.freeze(labelField.pool.slots.map((slot) => Object.freeze({
+              occupant: slot.occupant, text: slot.text, alpha: slot.alpha, target: slot.target,
+              anchor: slot.anchor, bottomOffsetPx: slot.bottomOffsetPx,
+            }))),
+          }),
+        }),
         ...(system === null ? {} : {
           systemOpacity,
           systemPieceCount: activeSystemPieceCount,
@@ -432,6 +517,89 @@ export function mountRetainedHeliocentricView({
     if (hidden !== publishedSunMarkerHidden) {
       sunMarker.style.visibility = hidden ? "hidden" : "";
       publishedSunMarkerHidden = hidden;
+    }
+  }
+
+  // Captions for every marker on screen: the observer (always admitted, at
+  // its marker's opacity), the Sun (by its marker), and each system body
+  // (by brightness, once the system is visible). The pass, the slots and
+  // the writes are all bounded by the policy's pool.
+  function publishCaptions(projection) {
+    const field = labelField;
+    if (!field.measured) {
+      // Once: the retained measuring elements' widths, per cap height.
+      const capPixels = field.policy.capPixels;
+      for (const [id, element] of field.measures) {
+        const width = element.getBoundingClientRect().width;
+        field.widthPerCapHeight.set(id, width > 0 ? width / capPixels : field.policy.boxHeightCaps * 3);
+      }
+      field.measured = true;
+    }
+    const { policy, declutter } = field;
+    declutter.reset();
+    const candidates = [];
+    const consider = (owner, id, priority, screen, markerRadiusPx, alpha) => {
+      if (!(alpha > 0) || screen === null || screen === undefined) return;
+      const geometry = labelBox(policy, { widthPerCapHeight: field.widthPerCapHeight.get(id), markerRadiusPx });
+      const anchor = [screen[0], screen[1]];
+      declutter.add({ owner, id, priority, anchor, ...geometry });
+      candidates.push({ owner, id, key: `${owner}:${id}`, priority, anchor, alpha,
+        text: labels.names[id], bottomOffsetPx: geometry.bottomOffsetPx,
+        box: Object.freeze({ widthPx: geometry.widthPx, bottomOffsetPx: geometry.bottomOffsetPx, topOffsetPx: geometry.topOffsetPx }) });
+    };
+    // The observer: its marker sits at the root's centre (the projection
+    // places the body there); admitted above everything once the marker
+    // shows, exactly as the reference labels its focused body.
+    const ownMarkerOpacity = publishedMarkerOpacity === null ? 0 : Number(publishedMarkerOpacity);
+    consider(LABEL_OWNER_FOCUS, objectId, Number.MAX_SAFE_INTEGER, [0, 0], markerSprite.size / 2, ownMarkerOpacity);
+    if (system !== null) {
+      // The Sun: brightest of all (the reference ranks by -magnitude; the
+      // Sun's -27 puts it above every planet), once its marker floors in.
+      const sunVisible = !publishedSunMarkerHidden && projection.sun.screen !== undefined;
+      consider(LABEL_OWNER_SUN, "sun", 27, sunVisible ? projection.sun.screen : null,
+        systemMarkers.sun.size / 2, sunMarkerOpacity);
+      if (projection.system !== null) {
+        for (const body of projection.system.bodies) {
+          const prepared = system.bodies.find(({ id }) => id === body.id);
+          // Brightness ranks: magnitudes below the brightest, negated.
+          consider(LABEL_OWNER_BODY, body.id, -prepared.illumination.magnitudesBelowBrightest,
+            body.marker.visible ? body.marker.screen : null, systemMarkers.bodies[body.id].size / 2, systemOpacity);
+        }
+      }
+    }
+    field.candidates = candidates.length;
+    field.candidateList = candidates;
+    const acceptedKeys = new Set(declutter.resolve().map((entry) => `${entry.owner}:${entry.id}`));
+    field.accepted = candidates.filter((candidate) => acceptedKeys.has(candidate.key));
+    const slots = field.pool.assign(field.accepted, field.settled);
+    field.settled = true;
+    for (let index = 0; index < slots.length; index += 1) {
+      const slot = slots[index];
+      const element = field.elements[index];
+      const published = field.published[index];
+      const hidden = slot.occupant === null || slot.alpha <= 0;
+      if (!hidden) {
+        if (published.text !== slot.text) {
+          element.textContent = slot.text;
+          published.text = slot.text;
+        }
+        // Bottom-centre of the caption at the anchor, `bottomOffset` above it.
+        const transform = `translate(${formatNumber(slot.anchor[0])}px, ` +
+          `${formatNumber(slot.anchor[1] - slot.bottomOffsetPx)}px) translate(-50%, -100%)`;
+        if (published.transform !== transform) {
+          element.style.transform = transform;
+          published.transform = transform;
+        }
+        const opacity = formatNumber(slot.alpha);
+        if (published.opacity !== opacity) {
+          element.style.opacity = opacity;
+          published.opacity = opacity;
+        }
+      }
+      if (published.hidden !== hidden) {
+        element.style.visibility = hidden ? "hidden" : "";
+        published.hidden = hidden;
+      }
     }
   }
 
