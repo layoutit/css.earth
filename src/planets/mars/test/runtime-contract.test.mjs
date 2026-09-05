@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { runtimeDefinition } from "../runtime/definition.mjs";
+import { materialFrameFor } from "../runtime/material.mjs";
 import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../platform/test/object-runtime-package.mjs";
 import { OBJECTS } from "../../../../site/objects.mjs";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mjs";
@@ -18,7 +19,8 @@ test("Mars retains a visible fallback through a row miss, recoverable decode fai
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     assert.equal(f.residency.stats().pools.find(pool => pool.id === "lighting").nativeSlots, 3);
-    assert.equal(f.presentation.observe().material.appliedFrame, 255);
+    assert.equal(f.presentation.observe().material.appliedFrame,
+      materialFrameFor(runtimeDefinition.initialSelection, f.view));
     const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); assert.equal(await request, true);
     const previous = f.presentation.observe().material.appliedFrame;
     const view = { ...f.view, skySunViewDirection: [0, 0, 1], revision: 2 };

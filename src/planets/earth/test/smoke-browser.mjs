@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
+import { checkDirectionalAtmosphere } from "../../../platform/test/illumination-browser.mjs";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../runtime/preparedStarfield.mjs";
@@ -97,6 +98,7 @@ try {
   assert.ok(Math.abs(initialPoleAxis.north.x - initialPoleAxis.south.x) <
     initialPoleAxis.south.y - initialPoleAxis.north.y,
     "Earth's starting polar axis must be closer to vertical than horizontal");
+  await checkDirectionalAtmosphere(page, { id: "earth", phaseKey: "atmosphere", rollKey: "atmosphereLightRollDegrees" });
   const cameraTransforms = await page.evaluate(async ({ initialCamera }) => {
     const scene = document.querySelector(".planet-stage .polycss-scene");
     const sky = document.querySelector(".earth-skybox-orientation");

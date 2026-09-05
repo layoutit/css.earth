@@ -9,9 +9,13 @@ test("Earth shared row demand coalesces transient camera views and keeps both ma
   try {
     const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
     const count = f.jobs.length;
-    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], revision: 2 }); await f.flush();
-    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], revision: 3 }); await f.flush();
-    assert.equal(f.jobs.length, count, "transient camera demands wait for the common stability timer");
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], skySunViewDirection: [0, 0, 1], revision: 2 }); await f.flush();
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], skySunViewDirection: [1, 0, 0], revision: 3 }); await f.flush();
+    const started = f.jobs.slice(count);
+    assert.ok(started.length > 0, "atmosphere rows start while the camera is moving");
+    assert.ok(started.every(job => job.url.includes("earth-atmosphere-")),
+      "ground-lighting rows still wait for the common stability timer");
+    for (const id of ["lighting", "atmosphere"]) assert.ok(pool(f, id).nativeSlots <= 3);
     await f.settle();
     assert.equal(f.presentation.observe().material.lighting, "64");
     assert.equal(f.presentation.observe().material.atmosphere, "64");
@@ -24,9 +28,9 @@ test("Earth superseded material decode cannot suppress a newer camera target", a
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
-    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], revision: 2 }); await f.flush(); f.advanceTimers(); await f.flush();
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], skySunViewDirection: [0, 0, 1], revision: 2 }); await f.flush(); f.advanceTimers(); await f.flush();
     const old = f.jobs.filter(job => !job.done);
-    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], revision: 3 }); await f.flush();
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], skySunViewDirection: [1, 0, 0], revision: 3 }); await f.flush();
     for (const job of old) { job.done = true; job.reject(new Error("stale row")); }
     await f.settle();
     assert.equal(f.presentation.observe().material.lighting, "64"); assert.equal(f.presentation.observe().material.atmosphere, "64");
@@ -38,7 +42,7 @@ test("Earth interior, night lights, and atmosphere visibility stop demand for hi
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
-    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], revision: 2 }); await f.settle();
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], skySunViewDirection: [1, 0, 0], revision: 2 }); await f.settle();
     const night = f.selection.dispatch({ kind: "lens", id: "night-lights" }); await f.settle(); await night;
     assert.ok(!f.selection.state().plan.required.some(key => key.startsWith("lighting:")));
     assert.ok(pool(f, "lighting").resident <= 3); assert.ok(pool(f, "atmosphere").resident > 0);
@@ -46,7 +50,7 @@ test("Earth interior, night lights, and atmosphere visibility stop demand for hi
     assert.ok(!f.selection.state().plan.required.some(key => key.startsWith("atmosphere:")));
     const interior = f.selection.dispatch({ kind: "lens", id: "cross-section" }); await f.settle(); await interior;
     const before = f.jobs.length;
-    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], revision: 3 }); await f.settle();
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], skySunViewDirection: [0, 0, 1], revision: 3 }); await f.settle();
     assert.equal(f.jobs.length, before);
     assert.ok(pool(f, "lighting").resident <= 3); assert.ok(pool(f, "atmosphere").resident <= 3);
   } finally { f.restore(); }

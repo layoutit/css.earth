@@ -1,3 +1,5 @@
+import { preparedIlluminationState } from "../../../platform/prepared-illumination.mjs";
+import { viewSunDirectionToPreparedLightDirection } from "../../../platform/directional-sun-coordinate.mjs";
 import { PREPARED_EARTH_SCENE } from "./preparedScene.mjs";
 import { PREPARED_EARTH_LENSES } from "./preparedLenses.mjs";
 import { canonicalPreparedAsset } from "../../../platform/prepared-object-assets.mjs";
@@ -20,11 +22,16 @@ export function materialState(selection, view) {
   const state = { frame };
   for (const id of ["lighting", "atmosphere"]) {
     const plan = PREPARED_EARTH_SCENE.material[id];
-    const mode = id === "lighting" && !selection.shadows ? "shadowless"
+    const illumination = plan.illumination
+      ? preparedIlluminationState(plan.illumination, viewSunDirectionToPreparedLightDirection(view.skySunViewDirection))
+      : null;
+    const mode = illumination ? "directional" : id === "lighting" && !selection.shadows ? "shadowless"
       : Math.abs(pitch - plan.defaultScenePitchDegrees) < 0.01 ? "default" : "directional";
     const enabled = exterior && (id === "lighting" ? selection.shadows && selection.lensId !== "night-lights" : selection.atmosphere);
-    state[id] = { mode, enabled, row: plan.frames[frame].rowIndex,
-      key: mode === "directional" ? `${id}:${plan.frames[frame].rowIndex}` : `${mode}:${id}` };
+    const selectedFrame = illumination?.frame ?? frame;
+    state[id] = { mode, enabled, frame: selectedFrame, rollDegrees: illumination?.rollDegrees,
+      row: plan.frames[selectedFrame].rowIndex,
+      key: mode === "directional" ? `${id}:${plan.frames[selectedFrame].rowIndex}` : `${mode}:${id}` };
   }
   return state;
 }

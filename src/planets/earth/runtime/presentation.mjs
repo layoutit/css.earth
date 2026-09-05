@@ -1,3 +1,4 @@
+import { publishPreparedIllumination } from "../../../platform/prepared-illumination.mjs";
 import { createPreparedProjectiveTextureLeaf } from "../../../platform/prepared-projective-texture-leaf.mjs";
 import { registerBodyDependentLayers } from "../../../platform/body-layer-registration.mjs";
 import { createPreparedPlanarRotationPublisher } from "../../../platform/prepared-planar-rotation.mjs";
@@ -83,6 +84,7 @@ export function createPresentation(stage, context) {
   const publishers = Object.fromEntries([["lighting", lightingLeaf], ["atmosphere", atmosphereLeaf]].map(([id, leaf]) =>
     [id, createPreparedPlanarRotationPublisher({ element: leaf, width: plan.material[id].presentationTileSize })]));
   let materialAddressWrites = 0, materialFrame = null;
+  let atmosphereLightRollDegrees = 0;
   const applied = { lighting: null, atmosphere: null };
   return Object.freeze({ cameraElement: camera, sceneElement: scene, bodyLayers: Object.freeze([registration]),
     motionFrame: Object.freeze([system, bodyCarriers.surface[0]]),
@@ -113,22 +115,23 @@ export function createPresentation(stage, context) {
       for (const [id, leaf] of [["lighting", lightingLeaf], ["atmosphere", atmosphereLeaf]]) {
         const item = state[id], material = plan.material[id];
         const frame = item.mode === "shadowless" ? material.shadowlessPresentation
-          : item.mode === "default" ? material.defaultPresentation : material.frames[state.frame];
+          : item.mode === "default" ? material.defaultPresentation : material.frames[item.frame];
         const url = item.enabled || item.mode !== "directional" ? resources.url(item.key) : null;
-        if (url && (item.enabled || item.mode !== "directional")) {
-          for (const [property, value] of [["backgroundImage", `url("${url}")`], ["backgroundPosition", frame.backgroundPosition], ["backgroundSize", frame.backgroundSize]]) {
-            if (leaf.style[property] !== value) { leaf.style[property] = value; materialAddressWrites++; }
-          }
-          leaf.dataset.materialFrame = item.mode === "directional" ? String(state.frame) : item.mode;
+        const azimuth = direction => Math.atan2(direction[1], direction[0]) * 180 / Math.PI;
+        const roll = item.rollDegrees ?? (id === "lighting" && !selection.shadows ? 0
+          : normalizeDegrees(azimuth(view.sunViewDirection) - azimuth(view.reference.sunViewDirection)));
+        const publication = publishPreparedIllumination(leaf, url ? { ...frame, url } : null, roll, publishers[id]);
+        if (publication) {
+          if (id === "atmosphere") atmosphereLightRollDegrees = roll;
+          materialAddressWrites += publication.writes;
+          leaf.dataset.materialFrame = item.mode === "directional" ? String(item.frame) : item.mode;
           applied[id] = leaf.dataset.materialFrame;
         }
-        const azimuth = direction => Math.atan2(direction[1], direction[0]) * 180 / Math.PI;
-        publishers[id](id === "lighting" && !selection.shadows ? 0 : normalizeDegrees(azimuth(view.sunViewDirection) - azimuth(view.reference.sunViewDirection)));
       }
     },
     observe() {
       registration.assertRegistered();
-      return { material: { materialFrame, ...applied, materialAddressWrites }, camera: { materialAddressWrites },
+      return { material: { materialFrame, ...applied, atmosphereLightRollDegrees, materialAddressWrites }, camera: { materialAddressWrites },
         dom: { interiorMounted: true, interiorLeafCount: cutaway.querySelectorAll("b, s, u").length } };
     },
   });

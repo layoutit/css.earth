@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
+import { checkDirectionalAtmosphere } from "../../../platform/test/illumination-browser.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const browser = await chromium.launch({
@@ -30,6 +31,7 @@ try {
   assertSharedDepthContext(baseline);
   assertRegisteredMaterial(baseline);
   await assertDirectionalSunContract(page);
+  await checkDirectionalAtmosphere(page, { id: "mars", phaseKey: "materialFrame", rollKey: "materialLightRollDegrees" });
   await page.evaluate(() => {
     window.__marsSmokeRetained = Object.freeze({
       camera: document.querySelector(".polycss-camera"),

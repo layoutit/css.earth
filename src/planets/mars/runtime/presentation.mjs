@@ -1,13 +1,13 @@
 import { createPreparedProjectiveTextureLeaf } from "../../../platform/prepared-projective-texture-leaf.mjs";
 import { validatePreparedCubicSky } from "../../../platform/cubic-sky-contract.mjs";
 import { registerBodyDependentLayers } from "../../../platform/body-layer-registration.mjs";
-import { viewSunDirectionToPreparedLightDirection } from "../../../platform/directional-sun-coordinate.mjs";
+import { publishPreparedIllumination } from "../../../platform/prepared-illumination.mjs";
 import { preparedRowPresentation } from "../../../platform/prepared-row-presentation.mjs";
 import { PREPARED_MARS_SCENE } from "./preparedScene.mjs";
 import { PREPARED_MARS_CAMERA } from "./preparedCamera.mjs";
 import { PREPARED_MARS_LIGHTING } from "./preparedLighting.mjs";
 import { PREPARED_MARS_LENSES } from "./preparedLenses.mjs";
-import { materialBank, materialFrameFor } from "./material.mjs";
+import { materialBank, materialIlluminationFor } from "./material.mjs";
 
 export function createPresentation(stage, context) {
   const plan = PREPARED_MARS_SCENE;
@@ -63,7 +63,7 @@ export function createPresentation(stage, context) {
   const registration = registerBodyDependentLayers({ objectId: "mars", sceneElement: scene,
     bodySystem: system, lightingOverlays: [materialCounter] });
   let materialFrame = PREPARED_MARS_LIGHTING.defaultFrame, materialLightRollDegrees = 0;
-  let sunViewDirection = null, shadowsEnabled = false, appliedFrame = null, appliedRow = null, lastMaterialPresentation = "";
+  let sunViewDirection = null, shadowsEnabled = false, appliedFrame = null, appliedRow = null;
   return Object.freeze({
     cameraElement: camera, sceneElement: scene, bodyLayers: Object.freeze([registration]),
     commitSelection({ selection }) {
@@ -74,28 +74,19 @@ export function createPresentation(stage, context) {
       sunViewDirection = view.skySunViewDirection;
       shadowsEnabled = selection.shadows;
       materialCounter.style.transform = view.counterRotation;
-      materialFrame = materialFrameFor(selection, view);
-      const presentation = preparedRowPresentation(materialBank, materialFrame, resources, "lighting:");
-      if (presentation) {
-        const key = `${presentation.url}|${presentation.backgroundPosition}|${presentation.backgroundSize}`;
-        if (key !== lastMaterialPresentation) {
-          materialLeaf.style.backgroundImage = `url("${presentation.url}")`;
-          materialLeaf.style.backgroundPosition = presentation.backgroundPosition;
-          materialLeaf.style.backgroundSize = presentation.backgroundSize;
-          lastMaterialPresentation = key;
-        }
+      const illumination = materialIlluminationFor(selection, view);
+      materialFrame = illumination.phaseFrame;
+      const presentation = preparedRowPresentation(materialBank, illumination.frame, resources, "lighting:");
+      if (publishPreparedIllumination(materialLeaf, presentation, illumination.rollDegrees)) {
+        materialLightRollDegrees = illumination.rollDegrees;
         appliedFrame = presentation.frameIndex;
         appliedRow = presentation.rowIndex;
       }
-      const direction = viewSunDirectionToPreparedLightDirection(sunViewDirection);
-      materialLightRollDegrees = !shadowsEnabled || Math.hypot(direction[0], direction[1]) < 1e-9 ? 0
-        : normalizeDegrees(Math.atan2(direction[1], direction[0]) * 180 / Math.PI - PREPARED_MARS_LIGHTING.baseLightAzimuthDegrees);
-      materialLeaf.style.rotate = `${materialLightRollDegrees}deg`;
     },
     observe() {
       registration.assertRegistered();
       const state = { materialFrame, materialLightRollDegrees, sunViewDirection, shadowsEnabled,
-        materialMode: shadowsEnabled ? "directional-terminator-and-atmosphere" : "full-phase-atmosphere" };
+        materialMode: shadowsEnabled ? "directional-terminator-and-atmosphere" : "directional-atmosphere-without-ground-shadow" };
       return { material: { ...state, appliedFrame, appliedRow }, sky: state,
         dom: { retainedSunBillboardCount: 1, retainedSunCubemapBakeCount: 0 },
         renderStats: { idleJavaScriptLoops: 0 } };
@@ -103,9 +94,6 @@ export function createPresentation(stage, context) {
   });
 }
 
-function normalizeDegrees(degrees) {
-  return (degrees % 360 + 540) % 360 - 180;
-}
 
 function createMesh(className, style) {
   const element = document.createElement("div");

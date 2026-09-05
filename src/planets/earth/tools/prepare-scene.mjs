@@ -23,6 +23,9 @@ import {
   EARTH_MATERIAL_PRESENTATION_SIZE,
   EARTH_MATERIAL_TILE_SIZE,
   readEarthAtmosphereModel,
+  EARTH_ATMOSPHERE_ILLUMINATION,
+  EARTH_ATMOSPHERE_DEFAULT_FRAME,
+  earthAtmosphereProfile,
 } from "./atmosphere-model.mjs";
 import { validateEarthSourceGroup } from "./source-manifest.mjs";
 import { createEarthSurfaceRasterPlan, EARTH_SURFACE_ATLAS, earthSurfacePageUrls } from "./surface-raster.mjs";
@@ -148,6 +151,7 @@ const atmosphereMaterial = prepareMaterialBank({
     EQUATORIAL_RADIUS * EARTH_ATMOSPHERE_MODEL.outerRadiusRatio,
   depthBias: 1.5,
   source: EARTH_ATMOSPHERE_MODEL,
+  illumination: EARTH_ATMOSPHERE_ILLUMINATION,
 });
 const interior = prepareInteriorPlan();
 const surfaceLeafCount = countLeaves(bodyBands);
@@ -795,6 +799,7 @@ function prepareMaterialBank({
   depthBias,
   source = null,
   supportsShadowless = false,
+  illumination = null,
 }) {
   const frameCount = 128;
   const columns = Math.sqrt(EARTH_MATERIAL_FRAMES_PER_SHARD);
@@ -810,7 +815,7 @@ function prepareMaterialBank({
   const shardWidth = stride * columns;
   const shardHeight = stride * rows;
   const presentationScale = presentationTileSize / sourceTileSize;
-  const defaultFrame = Math.round((65 - CAMERA_SCENE_PITCH_DEGREES) /
+  const defaultFrame = illumination ? EARTH_ATMOSPHERE_DEFAULT_FRAME : Math.round((65 - CAMERA_SCENE_PITCH_DEGREES) /
     65 * (frameCount - 1));
   const frames = Object.freeze(Array.from({ length: frameCount },
     (_, frameIndex) => {
@@ -905,6 +910,7 @@ function prepareMaterialBank({
       ? "prepared-openspace-atmosphere-with-google-directional-response-bank"
       : "prepared-fixed-world-view-bank-bounded-square-shards",
     source,
+    ...(illumination ? { illumination, atmosphereProfile: earthAtmosphereProfile(source) } : {}),
     frameCount,
     columns,
     rows,
