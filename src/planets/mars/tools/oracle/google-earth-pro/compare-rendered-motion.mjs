@@ -20,6 +20,10 @@ assert.ok(Number.isFinite(threshold) && threshold >= 0 && threshold <= 1,
 const pixelmatchOptions = { threshold, includeAA:true, alpha:0.1, diffColor:[255,0,0] };
 const n = JSON.parse(await readFile(resolve(nativeArgument)));
 const b = JSON.parse(await readFile(resolve(browserArgument)));
+assert.notEqual(b.timingMode, "motion-only",
+  "Motion-only traces contain boundary images, not a rendered video sequence");
+assert.notEqual(n.captureConfiguration?.captureUntilRest, false,
+  "Reference boundary images are not a rendered video sequence");
 assert.equal(n.calibrationSha256, b.calibrationSha256);
 assert.ok(n.bindings.every(entry => entry.mapped));
 const out = resolve(outputArgument), size = n.crop.width;
