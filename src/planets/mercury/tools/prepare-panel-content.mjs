@@ -22,18 +22,16 @@ const panel = Object.freeze({
   planetId: "mercury",
   introduction: "Closest to the Sun, Mercury is the smallest planet: a cratered terrestrial world with a large metallic core and extreme surface temperatures.",
   facts: Object.freeze([
-    Object.freeze({ label: "Distance", value: `${evidence.averageDistanceMillionKm} million km` }),
-    Object.freeze({ label: "Diameter", value: `${formatNumber(evidence.radiusKm * 2)} km` }),
-    Object.freeze({ label: "Year", value: `${evidence.orbitalPeriodEarthDays} Earth days` }),
-    Object.freeze({ label: "Day", value: `${evidence.solarDayEarthDays} Earth days`, title: `One complete solar day; the sidereal rotation period is ${evidence.siderealRotationEarthDays} Earth days.` }),
+    Object.freeze({ id: "distance-from-sun", label: "Distance from Sun", value: `${evidence.averageDistanceMillionKm} million km` }),
+    Object.freeze({ id: "diameter", label: "Diameter", value: `${formatNumber(evidence.radiusKm * 2)} km` }),
+    Object.freeze({ id: "orbital-period", label: "Orbital period", value: `${evidence.orbitalPeriodEarthDays} Earth days` }),
+    Object.freeze({ id: "rotation-period", label: "Rotation period", value: `${evidence.siderealRotationEarthDays} Earth days` }),
+    Object.freeze({ id: "axial-tilt", label: "Axial tilt", value: `${evidence.axialTiltDegrees}°` }),
+    Object.freeze({ id: "moon-count", label: "Moons", value: evidence.moonCount === 0 ? "None" : String(evidence.moonCount) }),
+    Object.freeze({ id: "ring-system", label: "Rings", value: evidence.ringCount === 0 ? "None" : "Present" }),
   ]),
   moreFacts: Object.freeze([
-    Object.freeze({ label: "Light time", value: `${evidence.lightTimeMinutes} min` }),
-    Object.freeze({ label: "Tilt", value: `${evidence.axialTiltDegrees}°` }),
-    Object.freeze({ label: "Moons", value: String(evidence.moonCount) }),
-    Object.freeze({ label: "Rings", value: String(evidence.ringCount) }),
-    Object.freeze({ label: "Day high", value: `${evidence.dayMaximumCelsius}°C` }),
-    Object.freeze({ label: "Night low", value: `${formatSigned(evidence.nightMinimumCelsius)}°C` }),
+    Object.freeze({ id: "surface-temperature", label: "Surface temperature", value: `${formatSigned(evidence.nightMinimumCelsius)}–${evidence.dayMaximumCelsius}°C` }),
   ]),
   sources: Object.freeze({
     editorial: Object.freeze({

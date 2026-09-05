@@ -24,7 +24,15 @@ test("supplies complete Mars content to the shared shell", () => {
   assert.match(shell, /class="planet-sidebar"/u);
   assert.match(shell, /class="planet-selected-panel"/u);
   assert.deepEqual(PREPARED_MARS_PANEL.facts.map(({ label }) => label),
-    ["Distance", "Diameter", "Year", "Day", "Moons"]);
+    [
+      "Distance from Sun",
+      "Diameter",
+      "Orbital period",
+      "Rotation period",
+      "Axial tilt",
+      "Moons",
+      "Rings",
+    ]);
   assert.match(panel, /mars-reflectance-spectrum\.svg/u);
   assert.match(panel, /mars-temperature-pressure-profile\.svg/u);
   assert.equal(mars.sourceId, 107740);

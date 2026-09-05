@@ -3,6 +3,7 @@ import { OBJECTS } from "../objects.mjs";
 import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
 import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
+import { orderFacts } from "../fact-order.mjs";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
 import { requireObjectControls } from "../scene-contract.mjs";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
@@ -33,9 +34,9 @@ interface PlanetTitle {
 }
 
 interface Fact {
+  id: string;
   label: string;
   value: string;
-  title?: string;
 }
 
 interface Chart {
@@ -125,8 +126,12 @@ const {
   settings,
 } = Astro.props;
 requireObjectControls({ lenses, settings }, objectId);
-const allFacts = [...facts, ...moreFacts];
+const allFacts = orderFacts(facts, moreFacts);
 const hasFacts = allFacts.length > 0;
+const factsheetPreviewCount = 4;
+const initialFacts = allFacts.slice(0, factsheetPreviewCount);
+const remainingFacts = allFacts.slice(factsheetPreviewCount);
+const hasRemainingFacts = remainingFacts.length > 0;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
 const speedSetting = settings?.controls.find((setting) =>
   setting.kind === "cycle" && setting.name === "speed");
@@ -246,13 +251,27 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
         {hasFacts && <div class="planet-factsheet-body">
           <div class="planet-facts">
             <ul class="planet-primary-facts">
-              {allFacts.map((fact) => (
-                <li title={fact.title}>
+              {initialFacts.map((fact) => (
+                <li data-fact-id={fact.id}>
                   <span class="planet-fact-label">{fact.label}</span>
                   <span class="planet-fact-value">{fact.value}</span>
                 </li>
               ))}
             </ul>
+            {hasRemainingFacts && <details class="planet-facts-overflow">
+              <summary class="planet-facts-toggle">
+                <span class="planet-facts-more">View more</span>
+                <span class="planet-facts-less">View less</span>
+              </summary>
+              <ul class="planet-additional-facts">
+                {remainingFacts.map((fact) => (
+                  <li data-fact-id={fact.id}>
+                    <span class="planet-fact-label">{fact.label}</span>
+                    <span class="planet-fact-value">{fact.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </details>}
           </div>
         </div>}
       </details>

@@ -23,10 +23,12 @@ export function parsePlutoFacts(jpl, nasa) {
   assert.match(text, /tilted 57 degrees/u);
   assert.match(text, /retrograde rotation/u);
   assert.match(text, /five known moons/u);
+  assert.match(text, /There are no known rings around Pluto/u);
   return Object.freeze({
     meanRadiusKm: values[1], meanDensityGPerCm3: values[3],
     rotationDays: values[4], orbitalPeriodYears: values[5],
     meanHeliocentricDistanceAu: 39, displayAxisTiltDegrees: 57,
+    moonCount: 5, ringCount: 0,
     sourceUrl: nasa.link, modified: nasa.modified,
   });
 }
