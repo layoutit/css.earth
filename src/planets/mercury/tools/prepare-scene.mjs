@@ -38,8 +38,10 @@ const RADIUS = 230;
 // IAU/NASA mean radius of Mercury; fixes the kilometre value of one scene unit.
 const MERCURY_MEAN_RADIUS_KILOMETERS = 2439.7;
 // Wheel dolly: the camera distance scales by exp(delta * step) per wheel
-// delta unit, so a full range of 4.7e4 takes roughly 90 notches of 100.
-const DOLLY_WHEEL_STEP_PER_DELTA = 0.0012;
+// delta unit. The full range (ln of the maximum over the minimum distance,
+// about 11.6) takes some 20 mouse notches of 100, or about 1900 trackpad
+// pixels; the step is multiplicative, so fine control near the body is kept.
+const DOLLY_WHEEL_STEP_PER_DELTA = 0.006;
 // The camera never comes closer to the body's centre than this many radii.
 const MINIMUM_DISTANCE_RADII = 1.2;
 // The orbit line fades out as the true disc grows past these shares of the
