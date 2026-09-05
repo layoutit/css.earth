@@ -18,19 +18,21 @@ test("prepares Saturn from a complete checked source closure", async () => {
   });
 });
 
-test("optimizes material inputs before every Saturn scene pass", async () => {
+test("retains the prepared source encodings through both Saturn material passes", async () => {
   const source = await readFile(
     new URL("../tools/prepare.mjs", import.meta.url),
     "utf8",
   );
-  const optimize = source.indexOf('["optimize-runtime-assets.mjs"]');
+  const assets = source.indexOf('["prepare-assets.mjs"]');
   const baseScene = source.indexOf('["prepare-scene.mjs", "--base"]');
+  const lenses = source.indexOf('["prepare-lenses.mjs"]');
   const completeScene = source.indexOf('["prepare-scene.mjs"]');
-  assert.ok(optimize >= 0);
-  assert.ok(baseScene > optimize);
-  assert.ok(completeScene > baseScene);
-  assert.equal(source.indexOf('["optimize-runtime-assets.mjs"]', optimize + 1),
-    -1);
+  assert.ok(assets >= 0);
+  assert.ok(baseScene > assets);
+  assert.ok(lenses > baseScene);
+  assert.ok(completeScene > lenses);
+  assert.equal(source.indexOf('["prepare-assets.mjs"]', assets + 1), -1);
+  assert.equal(source.includes('["optimize-runtime-assets.mjs"]'), false);
 });
 
 test("executes every pinned Saturn acquisition verifier", async () => {

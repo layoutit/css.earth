@@ -10,7 +10,7 @@ const lastLevel=Number(arg("last-level","14")),workers=Number(arg("workers","4")
 if(!Number.isInteger(lastLevel)||lastLevel<8||lastLevel>14||!Number.isInteger(workers)||workers<1||workers>6)throw new Error("Invalid bounded preparation settings.");
 const catalog=await readWorldCoverCatalog(),entries=[...catalog.entries.values()];
 const levels=Array.from({length:lastLevel-4},(_,i)=>prepareWmtsCoverage(entries,i+5,{includePolar:true}));
-const inputs=["runtime/preparedScene.mjs","tools/city/wmts-page-geometry.mjs","tools/city/wmts-polar-geometry.mjs","tools/city/wms-page-geometry.mjs","tools/city/page-geometry.mjs","tools/city/prepare-wmts-tree.mjs","tools/city/encode-prepared-block.mjs","runtime/prepared-block.mjs","tools/refine-wmts-stubs.mjs"];
+const inputs=["runtime/preparedScene.mjs","tools/city/wmts-page-geometry.mjs","tools/city/wmts-polar-geometry.mjs","tools/city/wms-page-geometry.mjs","tools/city/page-geometry.mjs","tools/city/prepare-wmts-tree.mjs","tools/city/encode-prepared-block.mjs","../../platform/prepared-map/prepared-block.mjs","../../platform/prepared-map/prepared-block-transport.mjs","tools/refine-wmts-stubs.mjs"];
 const hashes=Object.fromEntries(await Promise.all(inputs.map(async path=>[path,hashBytes(await readFile(new URL(`../${path}`,import.meta.url)))])));
 const version=hashBytes(JSON.stringify({schema:1,lastLevel,source:catalog.pin.expectedSha256,hashes})).slice(0,16);
 const directory=new URL(`.local/wmts-global/${version}/`,root).pathname;await mkdir(directory,{recursive:true});

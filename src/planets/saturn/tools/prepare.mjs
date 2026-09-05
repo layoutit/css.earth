@@ -3,8 +3,9 @@ import { runPreparationSteps } from "../../../platform/preparation-runner.mjs";
 const steps = Object.freeze([
   ["verify-source-manifest.mjs", "--probe"],
   ["prepare-title.mjs"],
+  // These encoded images are retained runtime assets and material inputs.
+  // Keep prepare-assets' accepted bytes, including RGB below transparent texels.
   ["prepare-assets.mjs"],
-  ["optimize-runtime-assets.mjs"],
   ["prepare-weather-source.mjs"],
   ["prepare-atmosphere-spectrum.mjs"],
   ["prepare-scene.mjs", "--base"],

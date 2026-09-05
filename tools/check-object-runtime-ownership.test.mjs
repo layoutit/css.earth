@@ -1,11 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { OBJECTS } from "../site/objects.mjs";
 import { auditObjectRuntimeOwnership, inspectObjectRuntimeModule } from "./check-object-runtime-ownership.mjs";
 import { objectControls } from "../src/planets/moon/site/control-content.mjs";
 import { requireObjectRuntimeDefinition } from "../src/platform/object-runtime-contract.mjs";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mjs";
+import { readPreparedJsonModule } from "./check-prepared-presentation.mjs";
 
 const root = "/ownership-fixture", prefix = "src/planets/moon/runtime/";
 const client = prefix + "client.mjs", definitionPath = prefix + "definition.mjs";
@@ -14,10 +16,15 @@ import { runtimeDefinition as definition } from './definition.mjs';
 export const mountMoonClient = bind(definition);`;
 const definition = await readFile(new URL("../src/planets/moon/runtime/definition.mjs", import.meta.url), "utf8");
 const prepared = await readFile(new URL("../src/planets/moon/runtime/preparedPresentation.mjs", import.meta.url), "utf8");
+const registrySource = await readFile(new URL("../site/objects.mjs", import.meta.url), "utf8");
+const objectSchema = await readFile(new URL("../site/object-schema.mjs", import.meta.url), "utf8");
 const shared = `import { createPolyCamera } from '@layoutit/polycss';
 export function createObjectRuntime(definition) { return createPolyCamera(definition); }`;
 function fixture(extra = {}, definitionTail = "") {
   const files = { [client]: binding, [definitionPath]: definition + definitionTail,
+    "site/objects.mjs": registrySource, "site/object-schema.mjs": objectSchema,
+    "site/layouts/PlanetLayout.astro": "<main><slot /></main>",
+    "site/components/PlanetShell.astro": "<aside><slot /></aside>",
     [prefix + "preparedPresentation.mjs"]: prepared,
     "src/planets/moon/site/control-content.mjs": `export const objectControls = ${JSON.stringify(objectControls)};`,
     "src/platform/prepared-presentation-contract.mjs": `export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@2";`,
@@ -35,6 +42,8 @@ test("accepts one bound factory and the real existing Moon plan; static proof ne
   assert.equal(report.cameraFactorySites.length, 1);
   assert.equal(report.nativeOwnership.status, "UNPROVEN");
   assert.match(report.sourceHashes[prefix + "preparedPresentation.mjs"], /^[a-f0-9]{64}$/);
+  assert.match(report.sourceHashes["site/objects.mjs"], /^[a-f0-9]{64}$/);
+  assert.deepEqual(report.entries[0].entry, { file: client, exported: "mountMoonClient", registry: "site/objects.mjs" });
 });
 test("follows imported helpers instead of trusting a thin client", async () => {
   const options = fixture({ [prefix + "hidden.mjs"]: "export function hidden() { return new Image(); }" },
@@ -93,6 +102,40 @@ test("object controls cannot hide an executor behind label projection", async ()
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [controlsPath]:
     `export const objectControls = ${JSON.stringify(objectControls)};\nconst action = node => node.style.transform = 'none';` })), /static prepared content/);
 });
+test("common shell ownership follows actual Astro imports, template expressions, and client scripts", async () => {
+  const shell = "site/components/PlanetShell.astro", helper = "site/shared-content.mjs";
+  const files = { [shell]: `---
+import { label } from '../shared-content.mjs';
+interface Props { title: string }
+---
+<aside>{label}</aside>
+<script>import '../shared-client.mjs';</script>`,
+    [helper]: "export const label = freeze('Details'); function freeze(value) { return Object.freeze(value); }",
+    "site/shared-client.mjs": "export function bind() {}" };
+  const report = await auditObjectRuntimeOwnership(fixture(files));
+  for (const file of Object.keys(files)) {
+    assert.ok(report.sharedClosure.includes(file), file);
+    assert.match(report.sourceHashes[file], /^[a-f0-9]{64}$/);
+  }
+  for (const [changed, expected] of [
+    [{ [helper]: "export const label = 'Details'; if (object.id === 'moon') act();" }, /shared-content.mjs.*object-ID dispatch/],
+    [{ "site/shared-client.mjs": "import { createPolyCamera } from '@layoutit/polycss'; createPolyCamera({});" }, /native camera factory site; found 2/],
+    [{ [shell]: files[shell].replace("{label}", "{object.id === 'moon' ? label : ''}") }, /PlanetShell.astro.*object-ID dispatch/],
+    [{ [shell]: files[shell].replace("import '../shared-client.mjs';", "import('../shared-client.mjs');") }, /PlanetShell.astro.*Dynamic runtime imports/],
+    [{ [helper]: "export { data } from '../src/planets/moon/site/generated.mjs';" }, /Shared runtime imports an object package/],
+    [{ [shell]: "<script>const broken = ;</script>" }, /Invalid runtime source/],
+  ]) await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files, ...changed })), expected);
+});
+test("literal navigation content is allowed only through the shell closure, not runtime dispatch", async () => {
+  const file = "site/navigation-content.mjs";
+  const content = `export const MARKERS = Object.freeze(${JSON.stringify({moon:{label:"Moon"},saturn:{label:"Saturn"}})});`;
+  const files = { [file]: content,
+    "site/components/PlanetShell.astro": "---\nimport { MARKERS } from '../navigation-content.mjs';\n---\n<nav>{Object.values(MARKERS).map(marker => marker.label)}</nav>" };
+  assert.equal((await auditObjectRuntimeOwnership(fixture(files))).complete, true);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files,
+    "src/platform/object-runtime.mjs": shared + "\nimport { MARKERS } from '../../site/navigation-content.mjs';" })), /navigation-content.mjs.*object-ID dispatch/);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files, [file]: content + "\nexport function dispatch(id) { return MARKERS[id](); }" })), /navigation-content.mjs.*object-ID dispatch/);
+});
 test("malicious generated code is rejected without importing it", async () => {
   const key = "__executedPreparedOwnershipPayload"; delete globalThis[key];
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [prefix + "preparedPresentation.mjs"]:
@@ -109,9 +152,29 @@ test("a content validation failure cannot be labeled migrated", async () => {
   await assert.rejects(auditObjectRuntimeOwnership({ ...fixture(), verifyDefinition() { throw new Error("actual content mismatch"); } }), /actual content mismatch/);
 });
 
+test("the actual Moon registry import must point to the audited client and return its bound export", async () => {
+  for (const source of [
+    registrySource.replace("../src/planets/moon/runtime/client.mjs", "../src/planets/moon/site/private-loader.mjs"),
+    registrySource.replace("return mountMoonClient;", "return () => mountMoonClient();"),
+    registrySource.replace("return mountMoonClient;", "mountMoonClient(); return mountMoonClient;"),
+    registrySource.replace("loadScene,\n    description:", "loadScene: () => loadScene(),\n    description:"),
+  ]) await assert.rejects(auditObjectRuntimeOwnership(fixture({ "site/objects.mjs": source })), /Actual OBJECTS registry|registered runtime loader/);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding.replace("mountMoonClient", "differentExport") })), /one bound shared factory export/);
+});
+test("an actual generated Uranus site module cannot execute preparation through a literal-looking export", async () => {
+  const file = resolve("src/planets/uranus/site/preparedLensControls.mjs");
+  const { name, value } = readPreparedJsonModule(await readFile(file, "utf8"));
+  const executable = `export const ${name} = (() => (${JSON.stringify(value)}))();`;
+  await assert.rejects(auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "uranus"),
+    readText: path => path === file ? executable : readFile(path, "utf8") }), /preparedLensControls.mjs.*non-shared reachable module must be serialized data/);
+});
+
 test("the actual OBJECTS registry has only normalized packages and one shared source closure", async () => {
   const report = await auditObjectRuntimeOwnership();
   assert.equal(report.complete, true);
   assert.deepEqual(report.entries.map(entry => entry.id), OBJECTS.map(object => object.id));
   assert.ok(report.entries.every(entry => entry.factoryCalls === 1 && entry.owners.length === 0 && entry.orphanExecutors.length === 0));
+  assert.ok(report.sharedClosure.includes("site/components/PlanetShell.astro"));
+  assert.ok(report.sharedClosure.includes("site/prepared-shell-titles.mjs"));
+  assert.ok(!report.sharedClosure.includes("src/planets/uranus/site/preparedLensControls.mjs"));
 });

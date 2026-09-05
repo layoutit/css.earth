@@ -25,6 +25,16 @@ export function requireCaptureReports(before, after) {
     assert.ok(before.harnessHashes[file], `Missing pinned capture implementation: ${file}`);
     assert.equal(after.harnessHashes[file], before.harnessHashes[file], `Pinned capture implementation: ${file}`);
   }
+  if(before.preparedTransportProtocol!==undefined||after.preparedTransportProtocol!==undefined||
+      before.protocol==="immutable-headless-native-readback-pairs@6"||
+      before.protocol==="report-only-fixed-six-native-readbacks@4") {
+    assert.ok(before.preparedTransportProtocol,"Prepared transport verifier protocol is required");
+    assert.equal(after.preparedTransportProtocol,before.preparedTransportProtocol,"Same prepared transport protocol");
+    assert.ok(Object.keys(before.preparedTransportHarnessHashes??{}).length,"Pinned prepared transport implementation is required");
+    assert.deepEqual(after.preparedTransportHarnessHashes,before.preparedTransportHarnessHashes,"Same prepared transport implementation");
+    for(const [file,hash]of Object.entries(before.preparedTransportHarnessHashes))assert.equal(before.harnessHashes[file],hash,"Transport verifier belongs to pinned capture harness");
+    assert.deepEqual(after.harnessHashes,before.harnessHashes,"Use the same complete capture harness for both sources");
+  }
 }
 export function selectCaptureObjects(report, objectIds) {
   requireCaptureReports(report, report);

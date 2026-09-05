@@ -101,3 +101,13 @@ test("neighborhood data cannot exceed replacement capacity or introduce executab
     assert.throws(() => requirePreparedPresentation(plan, { controls: objectControls }));
   }
 });
+
+for (const target of ["camera", "scene"]) test(`an existing prepared native animation cannot target the ${target}`, async () => {
+  const { runtimeDefinition: mercury } = await import("../planets/mercury/runtime/definition.mjs");
+  const definition = structuredClone(mercury);
+  requireObjectRuntimeDefinition(definition);
+  const animation = definition.animations.find(entry => entry.id === "mercury-interior-presentation-orbit");
+  assert.ok(animation, "Use Mercury's actual prepared native transform animation");
+  animation.target = definition.tree[target];
+  assert.throws(() => requireObjectRuntimeDefinition(definition), /animation.*(?:camera|scene)/i);
+});

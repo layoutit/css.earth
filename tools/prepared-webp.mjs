@@ -9,6 +9,13 @@ const execFileAsync = promisify(execFile);
 export const PREPARED_Q75_WEBP_ENCODING = "webp-q75-alpha-q100";
 
 export async function optimizePreparedLosslessWebp(inputPath) {
+  return optimizeCandidate(inputPath, ["-lossless", "-z", "9", "-exact"],
+    assertSameRgba, null);
+}
+
+// Terminal display encoding may discard RGB only where alpha is zero. Do not
+// use this policy for rasters that a later preparer decodes or interpolates.
+export async function optimizePreparedDisplayLosslessWebp(inputPath) {
   return optimizeCandidate(inputPath, ["-lossless", "-z", "9"],
     assertSameVisiblePixels, null);
 }
@@ -55,25 +62,42 @@ async function optimizeCandidate(inputPath, argumentsBeforeInput, validate, enco
   }
 }
 
-async function assertSameVisiblePixels(originalPath, candidatePath) {
+async function assertSameRgba(originalPath, candidatePath) {
   const [original, candidate] = await Promise.all([
     decodeRgba(originalPath),
     decodeRgba(candidatePath),
   ]);
   assertSameDimensions(originalPath, original, candidate, "Lossless WebP");
-  for (let offset = 0; offset < original.data.length; offset += 4) {
-    const originalAlpha = original.data[offset + 3];
-    const candidateAlpha = candidate.data[offset + 3];
-    if (originalAlpha !== candidateAlpha) {
+  // Offline consumers may interpolate unassociated RGBA or use RGB beneath
+  // transparent texels. Lossless transport must preserve all four channels.
+  for (let offset = 0; offset < original.data.length; offset += 1) {
+    if (original.data[offset] !== candidate.data[offset]) {
       throw new Error(
-        `Lossless WebP alpha changed for ${originalPath} at pixel ${offset / 4}.`,
+        `Lossless WebP RGBA changed for ${originalPath} at pixel ` +
+        `${Math.floor(offset / 4)}, channel ${offset % 4}.`,
       );
     }
-    if (originalAlpha === 0) continue;
+  }
+}
+
+async function assertSameVisiblePixels(originalPath, candidatePath) {
+  const [original, candidate] = await Promise.all([
+    decodeRgba(originalPath),
+    decodeRgba(candidatePath),
+  ]);
+  assertSameDimensions(originalPath, original, candidate, "Display-lossless WebP");
+  for (let offset = 0; offset < original.data.length; offset += 4) {
+    const alpha = original.data[offset + 3];
+    if (alpha !== candidate.data[offset + 3]) {
+      throw new Error(
+        `Display-lossless WebP alpha changed for ${originalPath} at pixel ${offset / 4}.`,
+      );
+    }
+    if (alpha === 0) continue;
     for (let channel = 0; channel < 3; channel += 1) {
       if (original.data[offset + channel] !== candidate.data[offset + channel]) {
         throw new Error(
-          `Lossless WebP visible RGB changed for ${originalPath} at pixel ` +
+          `Display-lossless WebP visible RGB changed for ${originalPath} at pixel ` +
           `${offset / 4}, channel ${channel}.`,
         );
       }
