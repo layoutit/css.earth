@@ -417,6 +417,9 @@ test("places a scalable Surface Lens browser after the retained chart switcher",
   assert.match(shell, /lenses\.controls\.map\(\(lens\) => \([\s\S]*?class="planet-observation-option"[\s\S]*?class="planet-observation-control"[\s\S]*?lens\.legend && <section[\s\S]*?class="planet-lens-legend-panel"[\s\S]*?data-lens-legend=\{lens\.id\}[\s\S]*?lens\.legend\.kind === "scale"[\s\S]*?class="planet-lens-legend-scale-row"[\s\S]*?class="planet-lens-legend-labels"[\s\S]*?lens\.legend\.kind === "categories"[\s\S]*?class="planet-lens-legend-categories"[\s\S]*?class="planet-lens-legend-swatch"/u);
   assert.match(styles, /\.planet-lens-legend-panel\s*\{[\s\S]*?width:\s*100%;[\s\S]*?padding:\s*2px 0 8px;[\s\S]*?background:\s*transparent;/u);
   assert.match(styles, /\.planet-lens-legend-scale-row\s*\{[\s\S]*?align-items:\s*center;[\s\S]*?height:\s*24px;/u);
+  assert.match(shell, /lens\.legend\.src \|\| lens\.legend\.colors[\s\S]*?class="planet-lens-legend-scale planet-lens-legend-segments"[\s\S]*?lens\.legend\.colors\?\.map/u);
+  assert.match(styles, /\.planet-lens-legend-segments\s*\{[\s\S]*?display:\s*flex;[\s\S]*?overflow:\s*hidden;/u);
+  assert.match(styles, /\.planet-lens-legend-segment\s*\{[\s\S]*?background:\s*var\(--planet-lens-legend-color\);/u);
   assert.match(styles, /\.planet-lens-legend-categories li\s*\{[\s\S]*?grid-template-columns:\s*8px max-content minmax\(8px, 1fr\) max-content;[\s\S]*?height:\s*24px;/u);
   assert.match(client, /const legends = \[\.\.\.root\.querySelectorAll\("\[data-lens-legend\]"\)\][\s\S]*?const renderLegend = \(\) => \{[\s\S]*?legend\.hidden = !expanded;[\s\S]*?button\.ariaExpanded = String\(expanded\);[\s\S]*?new windowTarget\.MutationObserver\(renderLegend\)/u);
   assert.match(client, /createLensBrowserController\(drawer, windowTarget, lifetime\)[\s\S]*?empty\.hidden = visible !== 0/u);
