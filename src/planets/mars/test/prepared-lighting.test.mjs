@@ -23,6 +23,7 @@ import {
 test("derives Mars illumination from checked PSG and OpenSpace sources", () => {
   assert.equal(PREPARED_MARS_LIGHTING.schema, "cssmars-prepared-lighting@5");
   assert.equal(PREPARED_MARS_LIGHTING.frameCount, 256);
+  assert.equal(PREPARED_MARS_LIGHTING.shadowlessFrameOffset, 256);
   assert.equal(PREPARED_MARS_LIGHTING.presentationFrameSize, 512);
   assert.deepEqual(PREPARED_MARS_LIGHTING.preparedPixelDensities, [1, 2]);
   assert.deepEqual(
@@ -99,11 +100,11 @@ test("fits every Sun phase to one prepared oblate mesh silhouette", () => {
   ));
   assert.equal(
     PREPARED_MARS_LIGHTING.atmosphere.externalHalo,
-    "prepared-analytic-oblate-silhouette-overscan",
+    "prepared-exponential-shell-outside-body-silhouette",
   );
 
   const frames = [0, 18, 65].map((pitchDegrees) =>
-    prepareMarsMaterialFrame(pitchDegrees, 1));
+    prepareMarsMaterialFrame(pitchDegrees, 1, { atmosphere: false }));
   assert.equal(new Set(frames.map(({ silhouetteCoverage }) =>
     createHash("sha256").update(silhouetteCoverage).digest("hex"))).size, 3,
   "camera elevation must prepare three distinct projected mesh silhouettes");
@@ -151,15 +152,15 @@ test("pins both bounded density banks to their exact runtime bytes", async () =>
     assert.equal(bank.schema, "cssmars-prepared-lighting-bank@1");
     assert.equal(bank.preparedPixelDensity, density);
     assert.equal(bank.frameSize, 512 * density);
-    assert.equal(bank.rows.length, 256);
-    assert.equal(bank.presentations.length, 256);
+    assert.equal(bank.rows.length, 512);
+    assert.equal(bank.presentations.length, 512);
     assert.equal(bank.transport.framesPerRow, 1);
     assert.equal(bank.transport.encoding, "webp-q75-alpha-q100");
-    assert.equal(bank.transport.rowCount, 256);
+    assert.equal(bank.transport.rowCount, 512);
     assert.deepEqual(bank.transport.initialWarmRows, [
-      Math.max(0, PREPARED_MARS_LIGHTING.defaultFrame - 1),
-      PREPARED_MARS_LIGHTING.defaultFrame,
-      Math.min(255, PREPARED_MARS_LIGHTING.defaultFrame + 1),
+      256 + Math.max(0, PREPARED_MARS_LIGHTING.defaultFrame - 1),
+      256 + PREPARED_MARS_LIGHTING.defaultFrame,
+      256 + Math.min(255, PREPARED_MARS_LIGHTING.defaultFrame + 1),
     ]);
     assert.ok(bank.transport.maximumDecodedWorkingSetBytes <= 13_000_000,
       `DPR ${density} decoded working set must stay below Saturn's accepted bound`);
@@ -180,7 +181,7 @@ test("pins both bounded density banks to their exact runtime bytes", async () =>
     assert.equal(totalBytes, bank.totalBytes);
     assert.deepEqual(
       bank.presentations.map(({ frameIndex }) => frameIndex),
-      Array.from({ length: 256 }, (_, index) => index),
+      Array.from({ length: 512 }, (_, index) => index),
     );
   }
 });

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { runtimeDefinition } from "../runtime/definition.mjs";
-import { materialFor } from "../runtime/material.mjs";
+import { mountPreparedPresentation, resolvePreparedPresentation } from "../../../platform/prepared-presentation.mjs";
 import { preparedSelectionFixture, retainedPresentationFixture } from "../../../platform/test/object-runtime-package.mjs";
 
 const pool = (f, id) => f.residency.stats().pools.find(pool => pool.id === id);
@@ -16,14 +16,14 @@ for (const failAtElement of [1, 2, 3]) test(`Neptune partial construction preser
   const f = retainedPresentationFixture(runtimeDefinition, { failAtElement });
   try {
     f.stage.dataset.lens = "previous";
-    assert.throws(() => runtimeDefinition.createPresentation(f.stage, f.context), /injected native/);
+    assert.throws(() => mountPreparedPresentation(f.stage, f.context, runtimeDefinition), /injected native/);
     assert.deepEqual(f.lifetime.destroy(), []); assert.equal(f.stage.dataset.lens, "previous");
   } finally { f.restore(); }
 });
 for (const replacement of [false, true]) test(`Neptune cleanup respects retained root identity (${replacement})`, () => {
   const f = retainedPresentationFixture(runtimeDefinition);
   try {
-    runtimeDefinition.createPresentation(f.stage, f.context);
+    mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
     if (replacement) { f.stage.replaceChildren(f.document.createElement("div")); f.stage.dataset.lens = "replacement"; }
     assert.deepEqual(f.lifetime.destroy(), []);
     assert.equal(f.stage.dataset.lens, replacement ? "replacement" : undefined);
@@ -42,9 +42,9 @@ test("Neptune waits for the current camera row before committing a delayed lens"
     for (const job of firstJobs) { job.done = true; job.resolve(); } await f.flush();
     assert.equal(f.stage.dataset.lens, "normal");
     await f.settle(); assert.equal(await request, true);
-    const facts = materialFor(f.selection.state().committed, view);
-    assert.equal(f.presentation.observe().material.appliedRow, facts.lens.orbitMaterial.presentations[facts.frame].rowIndex);
-    assert.ok(f.residency.resources.has(facts.rowKey));
+    const facts = resolvePreparedPresentation(runtimeDefinition, { selection: f.selection.state().committed, view }).materials.lighting;
+    assert.equal(f.presentation.observe().material.appliedRow, facts.row);
+    assert.ok(f.residency.resources.has(`lighting:methane:${facts.row}`));
     assert.ok(pool(f, "lighting").nativeSlots <= 3);
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }

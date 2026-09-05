@@ -1,20 +1,21 @@
 import { pathToFileURL } from "node:url";
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
+import { prepareCssomDeclarationReads } from "../../../../tools/prepared-cssom.mjs";
 import { createPreparedNodeTree } from "../../../../tools/prepared-node-tree.mjs";
 import { writePreparedPresentation } from "../../../../tools/prepare-presentation.mjs";
 import { objectControls } from "../site/control-content.mjs";
 import { PREPARED_SUN_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_SUN_LENSES } from "../runtime/preparedLenses.mjs";
 
-export function prepareSunPresentation() {
+export async function prepareSunPresentation() {
   const plan=PREPARED_SUN_SCENE,lenses=PREPARED_SUN_LENSES,layers=["surface","poles","corona","limb"];
   const celestial=preparedSkyResources(plan.starfield,null,"warm");
   const entries=[...celestial,...lenses.controls.flatMap(lens=>layers.map(layer=>({
     key:`${layer}:${lens.id}`,url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material",
   })))];
   const required=id=>layers.map(layer=>`${layer}:${id}`);
-  const b=createPreparedNodeTree();
+  const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
   const camera=b.mesh("polycss-camera sun-camera planet-render-root","perspective:1000000px");
   const scene=b.mesh("polycss-scene","");
   const system=b.mesh("sun-system",`transform:rotateY(${-plan.body.axialTiltDegrees}deg)`);
@@ -46,5 +47,5 @@ export function prepareSunPresentation() {
   };
 }
 if(import.meta.url===pathToFileURL(process.argv[1]??"").href){
-  await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs",import.meta.url),prepareSunPresentation(),objectControls);
+  await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs",import.meta.url),await prepareSunPresentation(),objectControls);
 }

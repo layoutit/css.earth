@@ -9,7 +9,7 @@ import { resampleMappedPageRgba } from "./city/resample-page.mjs";
 import { prepareCityIndex } from "./city/prepare-index.mjs";
 import { prepareCityParentPages, writeCityCore } from "./city/prepare-parent-pages.mjs";
 import { assembleCityCoveragePlan, readPublishedCoverage } from "./city/published-coverage.mjs";
-import { normalizeCityAssetOrigin, preparedCityAssetUrl } from "../runtime/city-asset-url.mjs";
+import { normalizeCityAssetOrigin, preparedCityAssetUrl } from "../../../platform/prepared-map/city-asset-url.mjs";
 import { childAddresses, createCityGeographicSampler, createCityCoverageSampler, cityPageRasterDensity, pageKey, prepareCityPageGeometry,
   CITY_PAGE_LAST_LEVEL, CITY_POLAR_PAGE_LAST_LEVEL, CITY_PAGE_RASTER_SCALE } from "./city/page-geometry.mjs";
 

@@ -40,5 +40,4 @@ export const browserProfile = createObjectBrowserProfile({
     }),
   }),
   visibleViews: [{ attribute: "data-view", value: "interior", lensId: "cross-section" }],
-  independentLenses: [{ id: "cross-section", selectionKey: "interior" }],
 });

@@ -1,4 +1,4 @@
-import { isPreparedCityAssetUrl } from "../../runtime/city-asset-url.mjs";
+import { isPreparedCityAssetUrl } from "../../../../platform/prepared-map/city-asset-url.mjs";
 import { pageKey } from "./page-geometry.mjs";
 
 export function expectedGlobalCityFace(face, jobs) {
@@ -43,7 +43,7 @@ export function validateGlobalCityFaceReceipt(receipt, expected, source, catalog
   }
   const directory = receipt.heads[0].directory;
   if (!directory || !Number.isSafeInteger(directory.bytes) || directory.bytes < 1 ||
-      !isPreparedCityAssetUrl({ dataset: source.dataset, assetOrigin: source.delivery.assetOrigin },
+      !isPreparedCityAssetUrl({ assetPath: "/scenes/earth/", dataset: source.dataset, assetOrigin: source.delivery.assetOrigin },
         directory.url, "index", directory.sha256)) {
     throw new Error(`Invalid global city face head: ${expected.face.key}`);
   }

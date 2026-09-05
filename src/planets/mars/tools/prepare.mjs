@@ -13,6 +13,7 @@ const steps = Object.freeze([
   ["prepare-atmosphere-spectrum.mjs"],
   ["prepare-temperature-pressure.mjs"],
   ["prepare-lenses.mjs"],
+  ["prepare-presentation.mjs"],
   ["prepare-runtime-asset-manifest.mjs"],
 ]);
 

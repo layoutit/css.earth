@@ -7,7 +7,7 @@ import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
 export function presentationFixture(definition) {
   const { camera, sky, sun, inputSelector, assets, controls } = definition;
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, inputSelector, assets,
-    tree: { camera: 0, scene: 1, nodes: [
+    tree: { camera: 0, scene: 1, properties: [], nodes: [
       { parent: -1, tag: "div", className: "polycss-camera", style: "perspective:1000000px", properties: [], attributes: {} },
       { parent: 0, tag: "div", className: "polycss-scene", style: "", properties: [], attributes: {} },
       { parent: 1, tag: "div", className: "polycss-mesh", style: "", properties: [], attributes: {} },
@@ -61,15 +61,18 @@ test("finite material tables cover frame sources, row policies, remaps and bindi
   const plan = fixture();
   const address = { resource: "curvature", frame: 0, row: 0, backgroundPosition: "0px 0px", backgroundSize: "1024px 1024px" };
   const track = { id: "lighting", target: 3, frame: { source: "sun-z", minimum: -1, maximum: 1, count: 1, baseFrame: 0, remap: null }, defaultPose: [],
-    banks: [{ id: "normal", frames: [address], default: address, fixed: address }],
+    banks: [{ id: "normal", frames: [address], default: address, fixed: address,
+      rows: [{ row: 0, resource: "curvature", firstFrame: 0, lastFrame: 0 }] }],
     demand: { mode: "current", prewarm: "none", capacity: 3, framesPerRow: 16, defaultFrame: 0, initialRows: [0], holdHiddenNeighborhood: false, fallback: "hold" },
     rotation: null, frameAttribute: null, modeAttribute: null, quoted: true };
   plan.materials = [track];
   for (const variant of plan.variants) variant.materials = [{ track: "lighting", bank: "normal", mode: "frames", enabled: true, rotationEnabled: true, frameOverride: null, clearWhenHidden: false, fixedMode: "shadowless" }];
   for (const source of ["sun-z", "prepared-light-z", "scene-pitch", "reference-sun-z"]) {
     track.frame.source = source;
-    for (const mode of ["current", "directional", "visible-directional", "away-enabled-or-lens-change", "neighborhood"]) {
+    for (const mode of ["current", "visible", "visible-directional", "away-enabled-or-lens-change", "neighborhood"]) {
       track.demand.mode = mode;
+      if (mode === "neighborhood") track.demand.neighborhoodOffsets = [0];
+      else delete track.demand.neighborhoodOffsets;
       for (const fallback of ["hold", "same-column", "nearest-frame"]) {
         track.demand.fallback = fallback; requirePreparedPresentation(plan, { controls: moon.controls });
       }
@@ -80,4 +83,21 @@ test("finite material tables cover frame sources, row policies, remaps and bindi
   track.frame.remap.kind = "expression"; assert.throws(() => requirePreparedPresentation(plan, { controls: moon.controls }), /remap/);
   track.frame.remap = null; track.banks[0].frames = [];
   assert.throws(() => requirePreparedPresentation(plan, { controls: moon.controls }), /every material frame/);
+});
+
+test("neighborhood data cannot exceed replacement capacity or introduce executable observations", async () => {
+  const { PREPARED_PRESENTATION } = await import("../planets/uranus/runtime/preparedPresentation.mjs");
+  const { objectControls } = await import("../planets/uranus/site/control-content.mjs");
+  for (const change of [
+    plan => { plan.materials[0].demand.capacity = 5; },
+    plan => { plan.materials[0].demand.neighborhoodOffsets = [-1, 1]; },
+    plan => { plan.materials[0].demand.neighborhoodOffsets = [-1, 0, 0]; },
+    plan => { plan.materials[0].demand.neighborhoodOffsets = [-1, 0, .5]; },
+    plan => { plan.materials[0].demand.neighborhoodOffsets = [-1, 0, 100]; },
+    plan => { plan.materials[0].demand.prewarm = "directional"; },
+    plan => { plan.observations.publications[0].field = "evaluate"; },
+  ]) {
+    const plan = structuredClone(PREPARED_PRESENTATION); change(plan);
+    assert.throws(() => requirePreparedPresentation(plan, { controls: objectControls }));
+  }
 });

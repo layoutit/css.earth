@@ -8,7 +8,6 @@ import { createObjectControlBinding } from "./object-control-binding.mjs";
 import { createPreparedPlayback } from "./prepared-playback.mjs";
 import { createRetainedCubicSkyOrbit, mountRetainedCubicSky } from "./cubic-sky-runtime.mjs";
 import { mountRetainedDirectionalSun } from "./directional-sun-runtime.mjs";
-import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-presentation-contract.mjs";
 import { mountPreparedPresentation } from "./prepared-presentation.mjs";
 import { initialObjectSelection, invokeRuntimeHook, requireObjectPresentation, requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
 
@@ -23,8 +22,7 @@ const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, crea
 // used only by native-boundary unit tests; object clients bind one definition.
 export function createObjectRuntime(definition, services = nativeServices) {
   requireObjectRuntimeDefinition(definition);
-  const prepared = definition.schema === PREPARED_OBJECT_RUNTIME_SCHEMA;
-  const initialSelection = prepared ? initialObjectSelection(definition.controls) : definition.initialSelection;
+  const initialSelection = initialObjectSelection(definition.controls);
   const environment = { ...nativeServices, ...services };
   return function mountObject(stage, { onError, onMotionRequest = () => {} } = {}) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
@@ -140,8 +138,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       const startup = await lifetime.wait(resources.prepareStartup());
       if (lifetime.disposed || startup.cancelled) return;
       startupDecodedAssets = resources.stats().decodes;
-      mounted = requireObjectPresentation(prepared ? mountPreparedPresentation(stage, context, definition)
-        : invokeRuntimeHook(definition, "createPresentation", [stage, context]), { stage });
+      mounted = requireObjectPresentation(mountPreparedPresentation(stage, context, definition), { stage });
       if (lifetime.disposed) return;
       for (const layer of mounted.pageLayers ?? []) {
         const pages = environment.mountPages({ ...layer, stage, scene: mounted.sceneElement, camera: mounted.cameraElement,
@@ -233,6 +230,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
         runtime: Object.freeze({ lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection.state, controls: controls.stats, view: () => currentView,
+          presentation: () => Object.freeze({ ...observe().presentation }),
           pages: () => Object.freeze(Object.fromEntries([...pageLayers].map(([id, layer]) => [id, layer.stats()]))) }),
         stableNodes: nodes,
         assertStableDomIdentity() {

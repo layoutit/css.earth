@@ -6,7 +6,7 @@ test("keeps Mercury runtime free of network, alternate renderers, and forbidden 
   const [client, styles, presentation] = await Promise.all([
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/preparedPresentation.mjs", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(client, /\bfetch\s*\(|XMLHttpRequest|WebSocket/iu);
   assert.doesNotMatch(client, /createElement\(["'](?:canvas|svg)["']\)/iu);
@@ -15,14 +15,14 @@ test("keeps Mercury runtime free of network, alternate renderers, and forbidden 
     /--mercury-(?:camera-zoom-scale|disc-zoom)/u,
   );
   assert.match(client, /createObjectRuntime/u);
-  assert.match(presentation, /materialRoot\.style\.scale/u);
+  assert.match(presentation, /"kind":"shell-scale"/u);
   assert.doesNotMatch(`${client}\n${styles}`, /dataset\.speed|data-speed/u);
   assert.doesNotMatch(
     styles,
     /(?:clip-path|(?:-webkit-)?mask|filter\s*:|gradient\(|mix-blend-mode)/iu,
   );
   assert.match(presentation, /full-phase-curvature/u);
-  assert.match(presentation, /shadowlessPresentation/u);
+  assert.match(presentation, /"resource":"shadowless"/u);
   assert.doesNotMatch(
     styles,
     /mercury-hide-shadows[^}]*mercury-material-root[^}]*visibility\s*:\s*hidden/iu,

@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { prepareCityPageGeometry, pageKey } from "./page-geometry.mjs";
-import { preparedCityAssetUrl } from "../../runtime/city-asset-url.mjs";
+import { preparedCityAssetUrl } from "../../../../platform/prepared-map/city-asset-url.mjs";
 
 // Three tree levels per immutable directory. The application imports only the
 // bounded level-zero heads, never a worldwide list of page URLs or matrices.

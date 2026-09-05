@@ -3,8 +3,9 @@ import { applyPreparedProjectiveLayout, scalePreparedBackgroundAddresses, scaleP
 const cssName = name => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 // Preparation only: these inputs are the checked-in CSS declaration records,
 // with no inline semicolons in quoted URLs. Preserve their cascade order.
-export function preparedDeclarations(text = "") {
+export function preparedDeclarations(text = "", nativeReads = null) {
   const values = new Map(), properties = [];
+  const serialized = new Map(Object.entries(nativeReads ?? {}));
   for (const declaration of text.split(";")) {
     if (!declaration.trim()) continue;
     const colon = declaration.indexOf(":");
@@ -18,17 +19,17 @@ export function preparedDeclarations(text = "") {
     preparedRecord: () => ({ style: text, properties: [...properties] }),
   };
   return new Proxy(methods, {
-    get(target, name) { if (name === "cssText") return [...values].map(([key, value]) => `${key}:${value}`).join(";"); return target[name] ?? values.get(cssName(name)) ?? ""; },
-    set(_target, name, value) { values.set(cssName(name), String(value)); properties.push({ name, value: String(value), custom: false }); return true; },
+    get(target, name) { if (name === "cssText") return [...values].map(([key, value]) => `${key}:${value}`).join(";"); return target[name] ?? serialized.get(name) ?? values.get(cssName(name)) ?? ""; },
+    set(_target, name, value) { serialized.delete(name); values.set(cssName(name), String(value)); properties.push({ name, value: String(value), custom: false }); return true; },
   });
 }
 
 // The preparer resolves grouping, leaf expansion, atlas scaling and final node
 // order. Runtime receives only tag/parent/class/style/attribute records.
-export function createPreparedNodeTree() {
+export function createPreparedNodeTree({ cssomReads = new Map() } = {}) {
   const roots = [], created = new Set();
   function element(tag = "div", className = null, style = "", attributes = {}) {
-    const node = { tag, className, style: preparedDeclarations(style), attributes: { ...attributes }, children: [], parent: null };
+    const node = { tag, className, style: preparedDeclarations(style, cssomReads.get(style)), attributes: { ...attributes }, children: [], parent: null };
     created.add(node); return node;
   }
   function append(parent, ...nodes) {
@@ -63,18 +64,25 @@ export function createPreparedNodeTree() {
     append(node, texture); return node;
   }
   function finish({ camera, scene, registrations, stageClasses = [] }) {
-    const nodes = [], indices = new Map(), visiting = new Set();
+    const nodes = [], indices = new Map(), visiting = new Set(), properties = [], propertyIds = new Map();
+    const intern = property => {
+      const key=JSON.stringify(property);
+      if(!propertyIds.has(key)){propertyIds.set(key,properties.length);properties.push(property);}
+      return propertyIds.get(key);
+    };
     function visit(node, parent) {
       if (visiting.has(node) || indices.has(node)) throw new TypeError("Prepared tree contains a cycle or duplicate.");
       visiting.add(node); const index = nodes.length; indices.set(node, index);
-      nodes.push({ parent, tag: node.tag, className: node.className, ...node.style.preparedRecord(), attributes: node.attributes });
+      const prepared=node.style.preparedRecord();
+      nodes.push({ parent, tag: node.tag, className: node.className, style:prepared.style,
+        properties:prepared.properties.map(intern), attributes: node.attributes });
       for (const child of node.children) visit(child, index);
       visiting.delete(node);
     }
     for (const root of roots) visit(root, -1);
     if (nodes.length !== created.size) throw new TypeError("Prepared tree contains unattached nodes.");
     const index = node => { if (!indices.has(node)) throw new TypeError("Undeclared prepared node reference."); return indices.get(node); };
-    return { index, tree: { nodes, camera: index(camera), scene: index(scene), stageClasses,
+    return { index, tree: { nodes, properties, camera: index(camera), scene: index(scene), stageClasses,
       registrations: registrations.map(registration => ({ bodySystem: index(registration.bodySystem), lightingOverlays: registration.lightingOverlays.map(index) })) } };
   }
   return { element, mesh: (className, style = "", attributes = {}) => element("div", `polycss-mesh ${className}`, style, attributes), append, leaf, finish };

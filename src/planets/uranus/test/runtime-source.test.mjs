@@ -4,7 +4,7 @@ import test from "node:test";
 
 test("keeps Uranus runtime free of acquisition and forbidden renderers", async () => {
   const [client, styles] = await Promise.all([
-    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/preparedPresentation.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(client, /\bfetch\s*\(|XMLHttpRequest|WebSocket/iu);
@@ -12,9 +12,9 @@ test("keeps Uranus runtime free of acquisition and forbidden renderers", async (
   assert.doesNotMatch(styles, /clip-path|mask(?:-image)?\s*:|filter\s*:|linear-gradient|radial-gradient|mix-blend-mode/iu);
   const { runtimeDefinition } = await import("../runtime/definition.mjs");
   assert.equal(runtimeDefinition.id, "uranus");
-  assert.match(client, /for \(const band of plan\.bodyBands\)/u);
+  assert.ok(runtimeDefinition.tree.nodes.some(node => node.className?.includes("uranus-body")));
   assert.doesNotMatch(client, /uranus-material-composite planet-render-root/u);
-  assert.match(client, /scene\.appendChild\(fixedMaterialCounter\)/u);
+  assert.ok(runtimeDefinition.viewBindings.some(binding => binding.kind === "counter-rotation" && runtimeDefinition.tree.nodes[binding.target].className.includes("uranus-fixed-material-counter")));
   assert.equal(runtimeDefinition.sky.faces.length, 6);
   assert.deepEqual(runtimeDefinition.controls.settings.controls.map(control => control.name), ["speed", "shadows", "rings"]);
   assert.doesNotMatch(client, /uranus-moon|moonAtlas|OrbitGuide/u);

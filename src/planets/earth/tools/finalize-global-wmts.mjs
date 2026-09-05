@@ -4,7 +4,7 @@ import { PREPARED_EARTH_SCENE as scene } from "../runtime/preparedScene.mjs";
 import { coverageLookup,prepareTreeSection,prepareTileNode,childrenOf,hashBytes,tileKey } from "./city/prepare-wmts-tree.mjs";
 import { encodePreparedBlock } from "./city/encode-prepared-block.mjs";
 import { prepareWmtsTile } from "./city/wmts-page-geometry.mjs";
-import { PREPARED_BLOCK_ENCODING } from "../runtime/prepared-block-transport.mjs";
+import { PREPARED_BLOCK_ENCODING } from "../../../platform/prepared-map/prepared-block-transport.mjs";
 
 export async function finalizeGlobalWmts(directory,{verify=true}={}){
   const inputs=JSON.parse(await readFile(`${directory}/inputs.json`,"utf8")),{version,levels,dataset}=inputs;

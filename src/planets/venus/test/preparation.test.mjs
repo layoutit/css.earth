@@ -509,7 +509,7 @@ test("keeps Venus runtime code on prepared retained-DOM paths", async () => {
     readFile(new URL("../tools/acquire.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/preparedPresentation.mjs", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(acquire, /\.\.\/\.\.\/saturn/u);
   assert.equal([...client.matchAll(/devicePixelRatio/gu)].length, 0);

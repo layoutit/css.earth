@@ -3,20 +3,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
 import { objectControls } from "../planets/moon/site/control-content.mjs";
-import { PREPARED_MOON_SCENE } from "../planets/moon/runtime/preparedScene.mjs";
-import { PREPARED_MOON_STARFIELD } from "../planets/moon/runtime/preparedStarfield.mjs";
+import { runtimeDefinition as moonDefinition } from "../planets/moon/runtime/definition.mjs";
 import { OBJECT_RUNTIME_SCHEMA, initialObjectSelection, invokeRuntimeHook,
   reduceObjectSelection, requireObjectAction, requireObjectPresentation,
   requireObjectRuntimeDefinition, requireObjectSelection, requireResolvedPresentation } from "./object-runtime-contract.mjs";
 
 function definition(overrides = {}) {
-  return { schema: OBJECT_RUNTIME_SCHEMA, id: "moon", controls: objectControls,
-    camera: PREPARED_MOON_SCENE.camera, sky: PREPARED_MOON_STARFIELD,
-    assets: { entries: [{ key: "surface", url: PREPARED_MOON_SCENE.body.assets.surface.two, pool: "surface" }],
-      pools: [{ id: "surface", capacity: 2, concurrency: 2, reuse: false, retention: "selection" }], startup: ["surface"] },
-    initialSelection: initialObjectSelection(objectControls), reduceSelection: reduceObjectSelection,
-    resolvePresentation() { return { required: ["surface"], prewarm: [] }; },
-    createPresentation() {}, ...overrides };
+  return { ...moonDefinition, assets: structuredClone(moonDefinition.assets), ...overrides };
 }
 function presentation(overrides = {}) {
   const { cameraElement, sceneElement, bodyLayers } = bodyLayerFixture();
@@ -40,29 +33,30 @@ test("identity and content must match the mounted registry object", () => {
   assert.equal(requireObjectRuntimeDefinition(value, { objectId: "moon", controls: objectControls }), value);
   assert.throws(() => requireObjectRuntimeDefinition(value, { objectId: "pluto" }), /identity/);
   assert.throws(() => requireObjectRuntimeDefinition(value, { controls: { ...objectControls } }), /actual control-content/);
-  assert.throws(() => requireObjectRuntimeDefinition(definition({ start() {} })), /unsupported/);
-  assert.throws(() => requireObjectRuntimeDefinition(definition({ initialSelection: { lensId: "topography", speed: 1 } })), /default/);
+  assert.throws(() => requireObjectRuntimeDefinition(definition({ start() {} })), /acyclic JSON|unsupported/);
+  assert.throws(() => requireObjectRuntimeDefinition(definition({ initialSelection: { lensId: "topography", speed: 1 } })), /unsupported/);
+  assert.throws(() => requireObjectRuntimeDefinition(definition({ schema: "cssearth-object-runtime@1" })), /data-only/);
   assert.throws(() => requireObjectRuntimeDefinition(definition({ controls: { lenses: { controls: [{ id: "a" }, { id: "a" }] }, settings: null } })), /IDs/);
 });
 
 test("rejects invalid pool capacity, unknown startup keys and undeclared resolved resources", () => {
   const value = definition();
-  value.assets.pools[0].concurrency = 3;
+  value.assets.pools[0].concurrency = value.assets.pools[0].capacity + 1;
   assert.throws(() => requireObjectRuntimeDefinition(value), /pool/);
   const missing = definition(); missing.assets.startup = ["absent"];
   assert.throws(() => requireObjectRuntimeDefinition(missing), /undeclared/);
   assert.throws(() => requireResolvedPresentation({ required: ["absent"] }, definition()), /undeclared/);
-  assert.throws(() => requireResolvedPresentation({ required: ["surface"], prewarm: ["absent"] }, definition()), /undeclared/);
+  assert.throws(() => requireResolvedPresentation({ required: [moonDefinition.assets.entries[0].key], prewarm: ["absent"] }, definition()), /undeclared/);
   assert.throws(() => requireResolvedPresentation({ required: [], pressedLenses: ["absent"] }, definition()), /undeclared/);
 });
 
 for (const name of ["reduceSelection", "resolvePresentation", "createPresentation"]) {
-  test(`${name} cannot be an async hook or return a promise from an ordinary function`, async () => {
-    assert.throws(() => requireObjectRuntimeDefinition(definition({ [name]: async () => ({}) })), /synchronous/);
-    const value = definition({ [name]() { return Promise.reject(new Error("late rejection")); } });
-    requireObjectRuntimeDefinition(value);
-    assert.throws(() => invokeRuntimeHook(value, name, []), /thenable/);
-    await new Promise(resolve => setImmediate(resolve));
+  test(`${name} is rejected before package code can execute`, () => {
+    let invoked = false;
+    for (const callback of [async () => { invoked = true; }, () => { invoked = true; return Promise.resolve(); }, () => { invoked = true; }]) {
+      assert.throws(() => requireObjectRuntimeDefinition(definition({ [name]: callback })), /acyclic JSON|unsupported/);
+    }
+    assert.equal(invoked, false);
   });
 }
 

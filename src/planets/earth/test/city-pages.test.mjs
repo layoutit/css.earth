@@ -9,10 +9,10 @@ import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { pageBounds, childAddresses, prepareCityPageGeometry, createCityGeographicSampler,
   createCityCoverageSampler, cityPageRasterDensity, cityGeographicFrame } from "../tools/city/page-geometry.mjs";
 import { resamplePageRgba, resampleMappedPageRgba } from "../tools/city/resample-page.mjs";
-import { projectCityPage, selectCityPages } from "../runtime/city-page-selection.mjs";
-import { createCityIndex } from "../runtime/city-index.mjs";
+import { projectCityPage, selectCityPages } from "../../../platform/prepared-map/city-page-selection.mjs";
+import { createCityIndex } from "../../../platform/prepared-map/city-index.mjs";
 import { isPreparedCityAssetUrl, normalizeCityAssetOrigin,
-  preparedCityAssetUrl } from "../runtime/city-asset-url.mjs";
+  preparedCityAssetUrl } from "../../../platform/prepared-map/city-asset-url.mjs";
 import { readCityFixture } from "./city-fixture.mjs";
 import { assembleParentCore, copyCoreIntoGutter, prepareCityParentPages, writeCityCore } from "../tools/city/prepare-parent-pages.mjs";
 

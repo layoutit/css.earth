@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { gzipSync } from "node:zlib";
 import { PREPARED_EARTH_SCENE as scene } from "../../runtime/preparedScene.mjs";
-import { decodePreparedBlock, restoreWmtsRecords } from "../../runtime/prepared-block.mjs";
+import { decodePreparedBlock, restoreWmtsRecords } from "../../../../platform/prepared-map/prepared-block.mjs";
 import { encodePreparedBlock, packWmtsRecords } from "./encode-prepared-block.mjs";
 import { prepareWmtsTile, wmtsAddress } from "./wmts-page-geometry.mjs";
 
