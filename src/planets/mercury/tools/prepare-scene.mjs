@@ -20,6 +20,9 @@ import {
 } from "./scene-camera-pose.mjs";
 import { requireBodyFixedSunDirection } from
   "../../../platform/solar-geometry.mjs";
+import { prepareHeliocentricView } from
+  "../../../platform/heliocentric-view.mjs";
+import { PREPARED_MERCURY_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import {
   createProjectiveSurfaceRasterPresentation,
   fitProjectiveTextureGeometryToStableLayout,
@@ -32,6 +35,33 @@ import { validateMercurySourceGroup } from "./source-manifest.mjs";
 const LATITUDE_SEGMENTS = 16;
 const LONGITUDE_SEGMENTS = 32;
 const RADIUS = 230;
+// IAU/NASA mean radius of Mercury; fixes the kilometre value of one scene unit.
+const MERCURY_MEAN_RADIUS_KILOMETERS = 2439.7;
+// Wheel dolly: the camera distance scales by exp(delta * step) per wheel
+// delta unit, so a full range of 4.7e4 takes roughly 90 notches of 100.
+const DOLLY_WHEEL_STEP_PER_DELTA = 0.0012;
+// The camera never comes closer to the body's centre than this many radii.
+const MINIMUM_DISTANCE_RADII = 1.2;
+// The orbit line fades out as the true disc grows past these shares of the
+// viewport height, so the close portrait keeps its clean disc.
+const ORBIT_LINE_FADE = Object.freeze({
+  visibleBelowDiscHeightShare: 0.12,
+  hiddenAboveDiscHeightShare: 0.3,
+});
+// Level of detail as the camera dollies out, keyed on the projected silhouette
+// diameter in CSS pixels. Three retained stages cross-fade, the finer one
+// staying painted beneath the coarser one until that is opaque, so nothing
+// pops: the full geometry; a flat albedo disc under the same lighting overlay
+// (drawn from the billboard lighting atlas, so the row shards stop
+// streaming); and the shared 5-pixel navigation sprite once a crescent can
+// no longer be read.
+const LEVEL_OF_DETAIL = Object.freeze({
+  model: "silhouette-diameter-crossfade",
+  billboardFadeStartDiscPixels: 20,
+  billboardFullDiscPixels: 14,
+  markerFadeStartDiscPixels: 8,
+  markerFullDiscPixels: 4.5,
+});
 const SOURCE_WIDTH = 2048;
 const SOURCE_HEIGHT = 1024;
 const SOURCE_CELL_WIDTH = SOURCE_WIDTH / LONGITUDE_SEGMENTS;
@@ -219,6 +249,35 @@ const scene = Object.freeze({
       zoom: CAMERA_ZOOM,
       distance: 0,
     }),
+    // A true perspective camera. The projection is the one the retained sky
+    // cube and the Sun sprite were prepared for (60 degrees horizontal), so
+    // the body, the Sun, the orbit and the stars share a single camera. The
+    // eye sits on the camera root's axis, `focal` in front of it; framing is
+    // a dolly along that axis, not an image scale.
+    projection: Object.freeze({
+      model: "css-perspective-shared-with-sky",
+      horizontalFovDegrees:
+        PREPARED_MERCURY_STARFIELD.projection.horizontalFovDegrees,
+      focalLengthOverViewportWidth:
+        PREPARED_MERCURY_STARFIELD.projection.focalLengthOverViewportWidth,
+      cssPerspective: PREPARED_MERCURY_STARFIELD.projection.cssPerspective,
+      eyeOnCameraRootAxis: true,
+      nearPlaneClipping: "javascript-before-publication",
+    }),
+    dolly: Object.freeze({
+      model: "multiplicative-wheel-distance",
+      wheelStepPerDelta: DOLLY_WHEEL_STEP_PER_DELTA,
+      minimumDistanceRadii: MINIMUM_DISTANCE_RADII,
+      // Far enough that the whole orbit fits the vertical field of view with
+      // the body at the centre, and a little more.
+      maximumDistanceOverOrbitExtent: 4,
+      // Zoom is a framing alias: the silhouette diameter over the logical
+      // body diameter, times the default zoom, so the material overlay and
+      // the responsive fit keep their prepared meaning.
+      zoomIsSilhouetteFraming: true,
+    }),
+    orbitLineFade: ORBIT_LINE_FADE,
+    levelOfDetail: LEVEL_OF_DETAIL,
     runtimeGeometryDerivation: false,
   }),
   // The body system is placed in the ecliptic presentation frame: ecliptic
@@ -252,6 +311,19 @@ const scene = Object.freeze({
       rasterGutter: SURFACE_RASTER_GUTTER,
       rasterOverscan: SURFACE_RASTER_OVERSCAN,
       runtimeEdgeDiscovery: false,
+    }),
+  }),
+  // The Sun at its observed distance and the orbit as a true ellipse, around
+  // the body in the same presentation frame as the body system.
+  heliocentricView: prepareHeliocentricView({
+    bodyId: "mercury",
+    presentationFrame: MERCURY_PRESENTATION_FRAME,
+    bodyRadiusUnits: RADIUS,
+    bodyRadiusKilometers: MERCURY_MEAN_RADIUS_KILOMETERS,
+    sunSprite: Object.freeze({
+      imagePixels: PREPARED_MERCURY_SKY_SUN.asset.density1.width,
+      opaqueCoreDiameterShare:
+        PREPARED_MERCURY_SKY_SUN.distanceScaling.spriteOpaqueCoreDiameterShare,
     }),
   }),
   material: Object.freeze({

@@ -1,5 +1,3 @@
-import { createPolyCamera, createPolyOrbitControls } from "@layoutit/polycss";
-
 import {
   bindResponsiveOrbitPolicy,
   CANONICAL_PREPARED_IMAGE_DENSITY,
@@ -10,7 +8,6 @@ import { createPreparedProjectiveTextureLeaf } from
 import {
   createCubicSkyCameraOrientation,
   createUnboundedMatrixDragControls,
-  measureRetainedPlanetTrackball,
   mountRetainedCubicSky,
   preparedScenePitch,
   selectPreparedResponsiveZoom,
@@ -19,9 +16,17 @@ import { validatePreparedCubicSky } from
   "../../../platform/cubic-sky-contract.mjs";
 import { viewSunDirectionToPhysicalLightDirection } from
   "../../../platform/directional-sun-coordinate.mjs";
-import { mountRetainedDirectionalSun } from
-  "../../../platform/directional-sun-runtime.mjs";
+import {
+  distanceForSilhouetteRadius,
+  rotationFromMatrix3d,
+  silhouetteRadiusAtDistance,
+  validatePreparedHeliocentricView,
+} from "../../../platform/heliocentric-view.mjs";
+import { mountRetainedHeliocentricView } from
+  "../../../platform/heliocentric-view-runtime.mjs";
 import { PLANET_SPEED_STATES } from "../../../platform/planet-feature-controls.mjs";
+import { PREPARED_NAVIGATION_MARKERS } from
+  "../../../../site/prepared-navigation-markers.mjs";
 import { PREPARED_MERCURY_ASSETS } from "./preparedAssets.mjs";
 import { PREPARED_MERCURY_LENSES } from "./preparedLenses.mjs";
 import { createMercuryRowShardCache } from "./preparedRowCache.mjs";
@@ -29,6 +34,9 @@ import { PREPARED_MERCURY_SCENE } from "./preparedScene.mjs";
 import { PREPARED_MERCURY_SKY_SUN } from "./preparedSkySun.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
+// The shell's navigation atlas (see site/planet-navigation-marker.css): the
+// far-view marker is the header's Mercury sprite, from the same file.
+const NAVIGATION_MARKER_ATLAS_URL = "/navigation/planet-markers@2x.webp";
 
 export function mountMercuryClient(stage) {
   const inputSurface = document.querySelector(".mercury-input-surface");
@@ -49,6 +57,18 @@ export function mountMercuryClient(stage) {
       PREPARED_MERCURY_ASSETS.lighting.frameCount - 1) {
     throw new Error("Mercury has no prepared full-phase curvature frame.");
   }
+  // The far view's lighting: every frame in one small atlas, so the billboard
+  // keeps the phase while the row shards stop streaming.
+  const billboardLighting = materialBank.billboard;
+  if (billboardLighting?.schema !== "cssmercury-prepared-lighting-billboard@1" ||
+      billboardLighting.presentations.length !==
+        PREPARED_MERCURY_ASSETS.lighting.frameCount) {
+    throw new Error("Mercury has no prepared billboard lighting atlas.");
+  }
+  const navigationMarker = PREPARED_NAVIGATION_MARKERS.mercury;
+  if (!navigationMarker || !(navigationMarker.presentation?.size > 0)) {
+    throw new Error("Mercury has no prepared navigation marker.");
+  }
   const materialCache = createMercuryRowShardCache(materialBank);
   let destroyed = false;
   let shouldPlay = true;
@@ -60,6 +80,7 @@ export function mountMercuryClient(stage) {
   let ready = null;
   let resourcesReleased = false;
   let shadowsEnabled = false;
+  let orbitEnabled = true;
 
   const controller = Object.freeze({
     get ready() {
@@ -96,6 +117,7 @@ export function mountMercuryClient(stage) {
       settingControls = createSettingControls();
       const normal = lensById("normal");
       validatePreparedStarfield();
+      validatePreparedHeliocentricView(PREPARED_MERCURY_SCENE.heliocentricView);
       await Promise.all([
         decodePrepared(normal.surfaceUrl, normal.surface2xUrl),
         decodePrepared(
@@ -104,6 +126,8 @@ export function mountMercuryClient(stage) {
         ),
         materialCache.prepareInitial(),
         decodePrepared(shadowlessPresentation.url),
+        decodePrepared(billboardLighting.url),
+        decodePrepared(NAVIGATION_MARKER_ATLAS_URL),
         ...PREPARED_MERCURY_SCENE.starfield.faces.flatMap(({
           url,
           url2x,
@@ -175,15 +199,19 @@ export function mountMercuryClient(stage) {
     animations = Object.freeze([]);
     delete stage.dataset.lens;
     delete stage.dataset.view;
+    delete stage.dataset.lod;
   }
 
   function mountPreparedScene(host) {
     const normal = lensById("normal");
     delete stage.dataset.lens;
     delete stage.dataset.view;
+    // Two perspective roots share one eye (set per layout below): the Sun's,
+    // painted first so the body covers it, and the body camera's.
+    const sunRoot = document.createElement("div");
+    sunRoot.className = "mercury-sun-camera planet-render-root";
     const cameraRoot = document.createElement("div");
     cameraRoot.className = "polycss-camera mercury-camera planet-render-root";
-    cameraRoot.style.perspective = "1000000px";
 
     const sceneRoot = document.createElement("div");
     sceneRoot.className = "polycss-scene mercury-scene";
@@ -215,10 +243,15 @@ export function mountMercuryClient(stage) {
 
     const materialRoot = document.createElement("div");
     materialRoot.className = "mercury-material-root planet-render-root";
+    // The billboard: a flat disc of the surface's mean colour fitted to the
+    // same silhouette as the overlay above it, which lights it.
+    const billboard = document.createElement("s");
+    billboard.className = "mercury-billboard";
+    materialRoot.style.setProperty("--mercury-billboard-color", normal.billboardColor);
     const materialLeaf = document.createElement("s");
     materialLeaf.className = "mercury-material";
     publishMaterialFrame(materialLeaf, PREPARED_MERCURY_SCENE.material.defaultFrame);
-    materialRoot.appendChild(materialLeaf);
+    materialRoot.append(billboard, materialLeaf);
 
     const cubicSky = mountRetainedCubicSky({
       host,
@@ -227,25 +260,39 @@ export function mountMercuryClient(stage) {
       objectId: "mercury",
       requireSun: false,
     });
-    host.append(cameraRoot, materialRoot);
-    const skySun = mountRetainedDirectionalSun({
+    host.append(sunRoot, cameraRoot, materialRoot);
+    // The Sun at its true distance in its own perspective root, the orbit as
+    // a true ellipse in an overlay sharing the camera root's box.
+    const heliocentric = mountRetainedHeliocentricView({
+      sunRoot,
       host,
-      plan: PREPARED_MERCURY_SKY_SUN,
-      imageDensity: CANONICAL_PREPARED_IMAGE_DENSITY,
+      plan: PREPARED_MERCURY_SCENE.heliocentricView,
       objectId: "mercury",
-      before: cameraRoot,
+      sunImageUrl: canonicalPreparedUrl(
+        PREPARED_MERCURY_SKY_SUN.asset.url,
+        PREPARED_MERCURY_SKY_SUN.asset.url2x,
+      ),
+      // The shell's own Mercury marker, tile and size, from the shared atlas.
+      markerSprite: Object.freeze({
+        url: NAVIGATION_MARKER_ATLAS_URL,
+        index: navigationMarker.index,
+        count: navigationMarker.count,
+        size: navigationMarker.presentation.size,
+      }),
     });
     const stableNodes = Object.freeze([...host.querySelectorAll("*")]);
     const stableParents = Object.freeze(stableNodes.map((node) => node.parentNode));
     return Object.freeze({
       roots: Object.freeze([
         cubicSky.root,
-        skySun.root,
+        sunRoot,
         cameraRoot,
         materialRoot,
+        heliocentric.overlay,
       ]),
       cubicSky,
-      skySun,
+      heliocentric,
+      sunRoot,
       skybox: cubicSky.root,
       skyboxCube: cubicSky.cube,
       skyboxOrientation: cubicSky.orientation,
@@ -255,6 +302,7 @@ export function mountMercuryClient(stage) {
       viewBank,
       materialRoot,
       materialLeaf,
+      billboard,
       stableNodes,
       retainedInitialNodeCount: stableNodes.length,
       retainedSkyboxFaceCount:
@@ -262,6 +310,7 @@ export function mountMercuryClient(stage) {
       retainedSunCount: 1,
       retainedSunBillboardCount: 1,
       retainedSunCubemapBakeCount: 0,
+      retainedOrbitPieceCount: heliocentric.retainedOrbitPieceCount,
       assertStableDomIdentity() {
         for (let index = 0; index < stableNodes.length; index += 1) {
           if (!stableNodes[index].isConnected ||
@@ -409,19 +458,99 @@ export function mountMercuryClient(stage) {
 
   function createVerticalOrbit() {
     const plan = PREPARED_MERCURY_SCENE.camera;
+    const heliocentricPlan = PREPARED_MERCURY_SCENE.heliocentricView;
     if (plan.cameraModel !== "accumulated-matrix3d" ||
         plan.horizontalOrbit !== true || plan.pitchBounded !== false ||
-        plan.yawBounded !== false || !Number.isFinite(plan.sceneScale)) {
-      throw new Error("Mercury Venus-compatible camera contract drifted.");
+        plan.yawBounded !== false || !Number.isFinite(plan.sceneScale) ||
+        plan.projection?.model !== "css-perspective-shared-with-sky" ||
+        plan.dolly?.model !== "multiplicative-wheel-distance" ||
+        !Number.isFinite(plan.dolly.wheelStepPerDelta) ||
+        !Number.isFinite(plan.dolly.minimumDistanceRadii) ||
+        !Number.isFinite(plan.dolly.maximumDistanceOverOrbitExtent) ||
+        !Number.isFinite(plan.orbitLineFade?.visibleBelowDiscHeightShare) ||
+        !Number.isFinite(plan.orbitLineFade?.hiddenAboveDiscHeightShare) ||
+        plan.levelOfDetail?.model !== "silhouette-diameter-crossfade" ||
+        !(plan.levelOfDetail.billboardFadeStartDiscPixels >
+          plan.levelOfDetail.billboardFullDiscPixels) ||
+        !(plan.levelOfDetail.billboardFullDiscPixels >
+          plan.levelOfDetail.markerFadeStartDiscPixels) ||
+        !(plan.levelOfDetail.markerFadeStartDiscPixels >
+          plan.levelOfDetail.markerFullDiscPixels) ||
+        !(plan.levelOfDetail.markerFullDiscPixels > 0)) {
+      throw new Error("Mercury perspective camera contract drifted.");
     }
-    const camera = createPolyCamera({
-      ...plan.state,
+    const levelOfDetail = plan.levelOfDetail;
+    const bodyRadius = heliocentricPlan.units.bodyRadiusUnits;
+    const kilometersPerUnit = heliocentricPlan.units.kilometersPerUnit;
+    const maximumDistance = plan.dolly.maximumDistanceOverOrbitExtent *
+      heliocentricPlan.orbit.maximumExtentUnits;
+    // The camera: a pose (control pitch and yaw, accumulated into the scene
+    // matrix by the sky orientation below) and a dolly distance from the
+    // body's centre in scene units. The focal length is the camera root's
+    // CSS perspective, re-read when the viewport changes.
+    const cameraState = {
       rotX: plan.defaultControlPitchDegrees,
       rotY: plan.defaultControlYawDegrees,
-    });
+      distance: 0,
+    };
+    let focal = 0;
+    let viewportWidth = 1;
+    let viewportHeight = 1;
+    // The eye sits at the sky's vanishing point; the shell lays the body's
+    // root out beside its chrome, so the body is viewed slightly off-axis.
+    // The offset is the principal point relative to the root's centre.
+    let principalOffset = Object.freeze([0, 0]);
+    const measureViewport = () => {
+      const view = mounted.cameraRoot.ownerDocument.defaultView;
+      const nextFocal = parseFloat(
+        view.getComputedStyle(mounted.cameraRoot).perspective,
+      );
+      const bounds = mounted.cameraRoot.getBoundingClientRect();
+      if (!(nextFocal > 0) || !(bounds.width > 0) || !(bounds.height > 0)) {
+        throw new Error("Mercury perspective camera root has no projection.");
+      }
+      focal = nextFocal;
+      viewportWidth = bounds.width;
+      viewportHeight = bounds.height;
+      const skyBounds = mounted.skybox.getBoundingClientRect();
+      const [skyOriginX, skyOriginY] = view.getComputedStyle(mounted.skybox)
+        .perspectiveOrigin.split(" ").map(parseFloat);
+      principalOffset = Object.freeze([
+        skyBounds.x + skyOriginX - (bounds.x + bounds.width / 2),
+        skyBounds.y + skyOriginY - (bounds.y + bounds.height / 2),
+      ].map((value) => Number.isFinite(value) ? value : 0));
+      const origin = `calc(50% + ${formatNumber(principalOffset[0])}px) ` +
+        `calc(50% + ${formatNumber(principalOffset[1])}px)`;
+      mounted.cameraRoot.style.perspectiveOrigin = origin;
+      mounted.sunRoot.style.perspectiveOrigin = origin;
+    };
+    measureViewport();
+    // Zoom stays the framing alias the responsive fit and the material
+    // overlay speak: silhouette diameter over the logical body diameter,
+    // times the default zoom.
+    const zoomToDistance = (zoom) => distanceForSilhouetteRadius(
+      bodyRadius,
+      focal,
+      Math.max(1e-6, zoom / plan.defaultZoom * plan.logicalBodyDiameter / 2),
+      principalOffset,
+    );
+    // The round trip through the distance is exact only to floating point;
+    // the alias reports the prepared bound itself at the bound.
+    const distanceToZoom = (distance) => {
+      const zoom =
+        silhouetteRadiusAtDistance(bodyRadius, focal, distance, principalOffset) *
+          2 / plan.logicalBodyDiameter * plan.defaultZoom;
+      return Math.abs(zoom - plan.maximumZoom) < 1e-9 ? plan.maximumZoom : zoom;
+    };
+    const minimumDistance = () => Math.max(
+      plan.dolly.minimumDistanceRadii * bodyRadius,
+      zoomToDistance(plan.maximumZoom),
+    );
+    const clampDistance = (distance) =>
+      clamp(distance, minimumDistance(), maximumDistance);
     const orientation = createCubicSkyCameraOrientation({
-      controlPitch: camera.state.rotX,
-      controlYaw: camera.state.rotY,
+      controlPitch: cameraState.rotX,
+      controlYaw: cameraState.rotY,
       cameraPlan: plan,
       skyPlan: PREPARED_MERCURY_SCENE.starfield,
       requireSun: false,
@@ -438,20 +567,27 @@ export function mountMercuryClient(stage) {
     });
     const safeCamera = Object.freeze({
       get state() {
-        return camera.state;
+        return Object.freeze({
+          rotX: cameraState.rotX,
+          rotY: cameraState.rotY,
+          distance: cameraState.distance,
+          zoom: distanceToZoom(cameraState.distance),
+        });
       },
       update(partial) {
-        camera.update({
-          ...partial,
-          ...(partial.zoom === undefined ? {} : {
-            zoom: clamp(partial.zoom, plan.minimumZoom, plan.maximumZoom),
-          }),
-        });
+        if (partial.rotX !== undefined) cameraState.rotX = partial.rotX;
+        if (partial.rotY !== undefined) cameraState.rotY = partial.rotY;
+        if (partial.distance !== undefined) {
+          cameraState.distance = clampDistance(partial.distance);
+        } else if (partial.zoom !== undefined) {
+          cameraState.distance = clampDistance(zoomToDistance(partial.zoom));
+        }
       },
     });
     let interactionStarts = 0;
     let interactionEnds = 0;
     let publications = 0;
+    let wheelDollies = 0;
     let destroyedOrbit = false;
     let skySunViewDirection = PREPARED_MERCURY_SKY_SUN.referenceViewDirection;
     let sunViewDirection = viewSunDirectionToPhysicalLightDirection(
@@ -459,57 +595,158 @@ export function mountMercuryClient(stage) {
     );
     let materialFrame = PREPARED_MERCURY_SCENE.material.defaultFrame;
     let materialLightRollDegrees = 0;
+    let projection = null;
+    let lodStage = "geometry";
+    let billboardOpacity = 0;
+    let markerOpacity = 0;
+    let publishedBillboardOpacity = null;
     const publish = () => {
       if (destroyedOrbit || !mounted) return;
       const controlPitch = safeCamera.state.rotX;
+      const distance = cameraState.distance;
+      // The Sun and the orbit, resolved relative to the camera in float64;
+      // the same projection places the body.
+      projection = mounted.heliocentric.publish({
+        rotation: rotationFromMatrix3d(orientation.sceneMatrix()),
+        distance,
+        focal,
+        viewportWidth,
+        viewportHeight,
+        principalOffset,
+      });
+      // The body: its centre `distance` from the eye on the line that
+      // projects to the root's centre, then the accumulated scene rotation.
+      // The scene scale must be uniform in three dimensions: a 2D scale()
+      // leaves the body's depth unscaled, which a real perspective camera
+      // notices (the near hemisphere would sit behind the eye).
+      const [bodyX, bodyY, bodyZ] = projection.body.translate;
       mounted.sceneRoot.style.transform =
-        `scale(${plan.sceneScale}) ${orientation.scene()}`;
+        `translate3d(${formatNumber(bodyX)}px, ${formatNumber(bodyY)}px, ` +
+        `${formatNumber(bodyZ)}px) ` +
+        `scale3d(${plan.sceneScale}, ${plan.sceneScale}, ${plan.sceneScale}) ` +
+        orientation.scene();
+      const zoom = distanceToZoom(distance);
       const skyboxOrientation = orientation.skybox();
       mounted.cubicSky.setOrientation({
         matrix: skyboxOrientation.matrix,
-        zoom: safeCamera.state.zoom,
+        zoom,
         defaultZoom: plan.defaultZoom,
       });
       skySunViewDirection = skyboxOrientation.sunViewDirection;
       sunViewDirection = viewSunDirectionToPhysicalLightDirection(
         skySunViewDirection,
       );
-      mounted.skySun.setViewDirection(skySunViewDirection);
+      const discHeightShare = projection.body.silhouetteDiameter /
+        viewportHeight;
+      mounted.heliocentric.setOrbitOpacity(
+        (plan.orbitLineFade.hiddenAboveDiscHeightShare - discHeightShare) /
+          (plan.orbitLineFade.hiddenAboveDiscHeightShare -
+            plan.orbitLineFade.visibleBelowDiscHeightShare),
+      );
       mounted.viewBank.syncPitch(controlPitch);
-      const zoomScale = safeCamera.state.zoom / plan.state.zoom;
-      mounted.cameraRoot.style.scale =
-        "calc(var(--mercury-shell-scale) / (" +
-        `var(--planet-viewport-zoom-divisor) / ${zoomScale}))`;
-      mounted.materialRoot.style.scale =
-        "calc(var(--mercury-shell-scale) / (" +
-        `var(--planet-viewport-zoom-divisor) / ${safeCamera.state.zoom}))`;
-      publishMaterialDirection(sunViewDirection);
+      // The terminator overlay is fitted to the projected silhouette: an
+      // ellipse, slightly elongated and shifted outward when off-axis.
+      // Fitted to the mathematical silhouette exactly: the prepared lighting
+      // frames are registered to that disc, and at a thin crescent even a
+      // pixel of inflation moves the overlay's crescent off the painted one.
+      const { silhouette } = projection.body;
+      const limbCover = 1;
+      const unitScale = 2 * plan.defaultZoom / plan.logicalBodyDiameter;
+      const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) *
+        180 / Math.PI;
+      mounted.materialRoot.style.transform =
+        `translate(${formatNumber(silhouette.centre[0])}px, ` +
+        `${formatNumber(silhouette.centre[1])}px) ` +
+        `rotate(${formatNumber(radialAngle)}deg) ` +
+        `scale(${formatNumber(silhouette.radialSemiAxis * limbCover * unitScale)}, ` +
+        `${formatNumber(silhouette.tangentialSemiAxis * limbCover * unitScale)}) ` +
+        `rotate(${formatNumber(-radialAngle)}deg)`;
+      publishLevelOfDetail(projection.body.silhouetteDiameter);
+      publishMaterialDirection(sunViewDirection, materialSource());
       publications += 1;
     };
-    const scene = Object.freeze({
-      host: inputSurface,
-      cameraEl: mounted.cameraRoot,
-      sceneElement: mounted.sceneRoot,
-      camera: safeCamera,
-      applyCamera: publish,
-    });
+    // The stage from the projected disc: the coarser stage fades in over the
+    // finer one, which stays painted until the coarser is opaque and then
+    // hides. Only changed values are written.
+    const publishLevelOfDetail = (silhouetteDiameter) => {
+      billboardOpacity = clamp(
+        (levelOfDetail.billboardFadeStartDiscPixels - silhouetteDiameter) /
+          (levelOfDetail.billboardFadeStartDiscPixels -
+            levelOfDetail.billboardFullDiscPixels),
+        0,
+        1,
+      );
+      markerOpacity = clamp(
+        (levelOfDetail.markerFadeStartDiscPixels - silhouetteDiameter) /
+          (levelOfDetail.markerFadeStartDiscPixels -
+            levelOfDetail.markerFullDiscPixels),
+        0,
+        1,
+      );
+      lodStage = markerOpacity >= 1
+        ? "marker"
+        : billboardOpacity >= 1
+          ? "billboard"
+          : billboardOpacity > 0 ? "crossfade" : "geometry";
+      if (stage.dataset.lod !== lodStage) stage.dataset.lod = lodStage;
+      const opacity = formatNumber(billboardOpacity);
+      if (opacity !== publishedBillboardOpacity) {
+        mounted.materialRoot.style.setProperty(
+          "--mercury-billboard-opacity",
+          opacity,
+        );
+        publishedBillboardOpacity = opacity;
+      }
+      mounted.heliocentric.setMarkerOpacity(markerOpacity);
+    };
+    // As soon as the billboard starts fading in the overlay draws from the
+    // billboard atlas, and the row shards stop streaming; at that size the
+    // two are the same picture.
+    const materialSource = () => lodStage === "geometry" ? "rows" : "billboard";
     const mobileQuery = matchMedia(MOBILE_VIEWPORT_QUERY);
-    const wheelControls = createPolyOrbitControls(scene, {
-      drag: false,
-      wheel: !mobileQuery.matches,
-      minZoom: plan.minimumZoom,
-      maxZoom: plan.maximumZoom,
+    // Wheel dolly: multiplicative in distance, so one notch is the same
+    // relative step at the surface and at the orbit's scale.
+    let wheelEnabled = !mobileQuery.matches;
+    const onWheel = (event) => {
+      if (!wheelEnabled || destroyedOrbit) return;
+      event.preventDefault();
+      const delta = event.deltaY *
+        (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 100 : 1);
+      safeCamera.update({
+        distance: cameraState.distance *
+          Math.exp(delta * plan.dolly.wheelStepPerDelta),
+      });
+      wheelDollies += 1;
+      publish();
+    };
+    inputSurface.addEventListener("wheel", onWheel, { passive: false });
+    const wheelControls = Object.freeze({
+      update(options) {
+        if (options.wheel !== undefined) wheelEnabled = options.wheel;
+      },
+      destroy() {
+        inputSurface.removeEventListener("wheel", onWheel);
+      },
     });
+    const trackball = () => {
+      const bounds = mounted.cameraRoot.getBoundingClientRect();
+      return Object.freeze({
+        centerX: (bounds.left + bounds.right) / 2,
+        centerY: (bounds.top + bounds.bottom) / 2,
+        // A small body still orbits comfortably: the trackball never shrinks
+        // below a fifth of the viewport's short side.
+        radius: Math.max(
+          projection?.body.silhouetteRadius ?? bodyRadius,
+          Math.min(viewportWidth, viewportHeight) / 5,
+        ),
+      });
+    };
     const dragControls = createUnboundedMatrixDragControls({
       inputSurface,
-      trackballMetrics: () => measureRetainedPlanetTrackball({
-        stage,
-        cameraElement: mounted.cameraRoot,
-        logicalBodyDiameter: plan.logicalBodyDiameter,
-      }),
+      trackballMetrics: trackball,
       surfaceFlyToState: () => Object.freeze({
         zoom: safeCamera.state.zoom,
-        minimumZoom: plan.minimumZoom,
+        minimumZoom: distanceToZoom(maximumDistance),
         maximumZoom: plan.maximumZoom,
       }),
       onStart() {
@@ -550,6 +787,23 @@ export function mountMercuryClient(stage) {
       mediaQuery: mobileQuery,
     });
     const windowTarget = inputSurface.ownerDocument.defaultView;
+    // The shell moves the render roots when the sidebar collapses; the eye
+    // stays at the sky's vanishing point, so re-measure the offset then.
+    const relayout = () => {
+      if (destroyedOrbit || !mounted) return;
+      measureViewport();
+      safeCamera.update({ distance: cameraState.distance });
+      publish();
+    };
+    const sidebarObserver = new MutationObserver(relayout);
+    sidebarObserver.observe(stage.ownerDocument.body, {
+      attributes: true,
+      attributeFilter: ["data-sidebar-collapsed"],
+    });
+    const onTransitionEnd = (event) => {
+      if (event.propertyName === "translate") relayout();
+    };
+    stage.addEventListener("transitionend", onTransitionEnd);
     let responsiveFit = selectPreparedResponsiveZoom({
       stage,
       cameraElement: mounted.cameraRoot,
@@ -560,6 +814,7 @@ export function mountMercuryClient(stage) {
     safeCamera.update({ zoom: responsiveFit.zoom });
     const initialResponsiveZoom = responsiveFit.zoom;
     const handleViewportResize = () => {
+      measureViewport();
       responsiveFit = selectPreparedResponsiveZoom({
         stage,
         cameraElement: mounted.cameraRoot,
@@ -568,6 +823,7 @@ export function mountMercuryClient(stage) {
         mobilePreviewElement:
           stage.ownerDocument.querySelector(".planet-sidebar"),
       });
+      safeCamera.update({ distance: cameraState.distance });
       publish();
     };
     windowTarget?.addEventListener("resize", handleViewportResize, {
@@ -586,30 +842,62 @@ export function mountMercuryClient(stage) {
           controlPitch: safeCamera.state.rotX,
           controlYaw: safeCamera.state.rotY,
           zoom: safeCamera.state.zoom,
+          distance: cameraState.distance,
+          distanceKilometers: cameraState.distance * kilometersPerUnit,
+          distanceRadii: cameraState.distance / bodyRadius,
+          focal,
+          principalOffset,
+          offAxisDegrees: projection?.body.offAxisDegrees ?? null,
+          silhouetteRadius: projection?.body.silhouetteRadius ?? null,
         });
       },
       skyState() {
+        const heliocentric = mounted.heliocentric.state();
         return Object.freeze({
           sunViewDirection: Object.freeze([...sunViewDirection]),
           skySunViewDirection: Object.freeze([...skySunViewDirection]),
-          sunVisible: mounted.skySun.state().visible,
-          sunClassification: mounted.skySun.state().classification,
+          sunVisible: heliocentric.sun?.visible ?? false,
+          sunClassification: heliocentric.sun?.classification ?? "unpublished",
+          sunCenterNdc: heliocentric.sun?.centerNdc ?? null,
+          sunSpriteDiameter: heliocentric.sun?.spriteDiameter ?? null,
           shadowsEnabled,
           materialMode: shadowsEnabled
             ? "directional-terminator"
             : "full-phase-curvature",
           materialFrame,
           materialLightRollDegrees,
+          orbitEnabled,
+          orbitPieceCount: heliocentric.orbitPieceCount,
+          orbitOpacity: heliocentric.orbitOpacity,
+          bodyMarkerOpacity: heliocentric.markerOpacity,
+          lod: Object.freeze({
+            stage: lodStage,
+            silhouetteDiameter: projection?.body.silhouetteDiameter ?? null,
+            billboardOpacity,
+            markerOpacity,
+            materialSource: materialSource(),
+            rowStreaming: materialCache.stats().active,
+          }),
         });
       },
-      setState({ controlPitch, controlYaw, zoom } = {}) {
+      setState({
+        controlPitch,
+        controlYaw,
+        zoom,
+        distance,
+        distanceKilometers,
+      } = {}) {
         dragControls.stop();
         const resetsOrientation = controlPitch !== undefined ||
           controlYaw !== undefined;
         safeCamera.update({
           ...(controlPitch === undefined ? {} : { rotX: controlPitch }),
           ...(controlYaw === undefined ? {} : { rotY: controlYaw }),
-          ...(zoom === undefined ? {} : { zoom }),
+          ...(distanceKilometers !== undefined
+            ? { distance: distanceKilometers / kilometersPerUnit }
+            : distance !== undefined
+              ? { distance }
+              : zoom !== undefined ? { zoom } : {}),
         });
         if (resetsOrientation) {
           orientation.reset({
@@ -632,6 +920,19 @@ export function mountMercuryClient(stage) {
           pitchBounded: plan.pitchBounded,
           yawBounded: plan.yawBounded,
           cameraModel: plan.cameraModel,
+          projection: plan.projection,
+          dolly: Object.freeze({
+            ...plan.dolly,
+            minimumDistance: minimumDistance(),
+            maximumDistance,
+            minimumDistanceKilometers: minimumDistance() * kilometersPerUnit,
+            maximumDistanceKilometers: maximumDistance * kilometersPerUnit,
+            wheelDollies,
+          }),
+          // The zoom alias's bounds: the prepared close framing and the
+          // whole-orbit dolly distance seen through the same alias.
+          minimumZoom: distanceToZoom(maximumDistance),
+          maximumZoom: plan.maximumZoom,
           responsiveFitModel: responsiveFit.model,
           responsiveWidthShare: responsiveFit.widthShare,
           responsiveBaseZoom: responsiveFit.zoom,
@@ -639,26 +940,41 @@ export function mountMercuryClient(stage) {
           interactionEnds,
           publications,
           dragInertia: dragControls.stats(),
-          runtimeTransformStringWrites: publications * 2,
+          // Scene, sky orientation, the Sun billboard and the material
+          // scale, plus one per visible orbit piece.
+          runtimeTransformStringWrites: publications * 4,
+          orbitPieceCount: mounted.heliocentric.state().orbitPieceCount,
+          orbitPoolOverflows: mounted.heliocentric.state().orbitPoolOverflows,
         });
       },
       destroy() {
         if (destroyedOrbit) return;
         destroyedOrbit = true;
         windowTarget?.removeEventListener("resize", handleViewportResize);
+        sidebarObserver.disconnect();
+        stage.removeEventListener("transitionend", onTransitionEnd);
         controls.destroy();
         policy.destroy();
         materialCache.onReady(null);
       },
     });
 
-    function publishMaterialDirection(direction) {
+    function publishMaterialDirection(direction, source) {
       const lighting = PREPARED_MERCURY_ASSETS.lighting;
+      if (source === "billboard") materialCache.suspend();
       if (!shadowsEnabled) {
-        publishShadowlessMaterial(
-          mounted.materialLeaf,
-          shadowlessPresentation,
-        );
+        if (source === "billboard") {
+          publishBillboardMaterialFrame(
+            mounted.materialLeaf,
+            shadowlessPresentation.frameIndex,
+          );
+          mounted.materialLeaf.style.setProperty("--mercury-light-roll", "0deg");
+        } else {
+          publishShadowlessMaterial(
+            mounted.materialLeaf,
+            shadowlessPresentation,
+          );
+        }
         materialFrame = shadowlessPresentation.frameIndex;
         materialLightRollDegrees = 0;
         return;
@@ -672,7 +988,11 @@ export function mountMercuryClient(stage) {
       const frame = Math.round(
         amount * (PREPARED_MERCURY_SCENE.material.frameCount - 1),
       );
-      publishMaterialFrame(mounted.materialLeaf, frame);
+      if (source === "billboard") {
+        publishBillboardMaterialFrame(mounted.materialLeaf, frame);
+      } else {
+        publishMaterialFrame(mounted.materialLeaf, frame);
+      }
       materialFrame = frame;
       if (Math.hypot(direction[0], direction[1]) < 1e-9) return;
       const roll = normalizeDegrees(
@@ -688,11 +1008,28 @@ export function mountMercuryClient(stage) {
   }
 
   function publishMaterialFrame(leaf, frameIndex) {
+    // Asking the row cache for the frame is what keeps its rows streaming.
     const presentation = materialCache.presentation(frameIndex);
-    if (!presentation || leaf.dataset.materialFrame === String(frameIndex)) {
+    if (!presentation || (leaf.dataset.materialSource === "rows" &&
+        leaf.dataset.materialFrame === String(frameIndex))) {
       return;
     }
     delete leaf.dataset.materialMode;
+    leaf.dataset.materialSource = "rows";
+    leaf.dataset.materialFrame = String(frameIndex);
+    leaf.style.backgroundImage = `url("${presentation.url}")`;
+    leaf.style.backgroundPosition = presentation.backgroundPosition;
+    leaf.style.backgroundSize = presentation.backgroundSize;
+  }
+
+  function publishBillboardMaterialFrame(leaf, frameIndex) {
+    if (leaf.dataset.materialSource === "billboard" &&
+        leaf.dataset.materialFrame === String(frameIndex)) {
+      return;
+    }
+    const presentation = billboardLighting.presentations[frameIndex];
+    delete leaf.dataset.materialMode;
+    leaf.dataset.materialSource = "billboard";
     leaf.dataset.materialFrame = String(frameIndex);
     leaf.style.backgroundImage = `url("${presentation.url}")`;
     leaf.style.backgroundPosition = presentation.backgroundPosition;
@@ -702,6 +1039,7 @@ export function mountMercuryClient(stage) {
   function publishShadowlessMaterial(leaf, presentation) {
     if (leaf.dataset.materialMode === "full-phase-curvature") return;
     leaf.dataset.materialMode = "full-phase-curvature";
+    leaf.dataset.materialSource = "rows";
     delete leaf.dataset.materialFrame;
     leaf.style.backgroundImage = `url("${presentation.url}")`;
     leaf.style.backgroundPosition = presentation.backgroundPosition;
@@ -780,6 +1118,10 @@ export function mountMercuryClient(stage) {
             !mounted) {
           return false;
         }
+        mounted.materialRoot.style.setProperty(
+          "--mercury-billboard-color",
+          lens.billboardColor,
+        );
         if (lens.view === "exterior") {
           const surfaceUrl = canonicalPreparedUrl(
             lens.surfaceUrl,
@@ -906,8 +1248,10 @@ export function mountMercuryClient(stage) {
   function createSettingControls() {
     const speed = document.querySelector('button[name="speed"]');
     const shadows = document.querySelector('input[name="shadows"]');
+    const orbitLine = document.querySelector('input[name="orbit"]');
     if (!(speed instanceof HTMLButtonElement) ||
-        !(shadows instanceof HTMLInputElement)) {
+        !(shadows instanceof HTMLInputElement) ||
+        !(orbitLine instanceof HTMLInputElement)) {
       throw new Error("Mercury settings controls are incomplete.");
     }
     const events = new AbortController();
@@ -916,6 +1260,7 @@ export function mountMercuryClient(stage) {
     speed.dataset.state = "normal";
     speed.setAttribute("aria-label", "Speed: normal");
     shadows.checked = false;
+    orbitLine.checked = true;
     const onSpeed = () => {
       speedIndex = (speedIndex + 1) % PLANET_SPEED_STATES.length;
       publishSpeed();
@@ -925,22 +1270,32 @@ export function mountMercuryClient(stage) {
       stage.classList.toggle("mercury-hide-shadows", !shadows.checked);
       orbit?.refresh();
     };
+    // The orbit line is retained either way; the class only hides it, so
+    // toggling neither re-lays-out nor republishes the scene.
+    const onOrbit = () => {
+      orbitEnabled = orbitLine.checked;
+      stage.classList.toggle("mercury-hide-orbit", !orbitLine.checked);
+    };
     return Object.freeze({
       bind() {
         if (bound) return;
         bound = true;
         speed.addEventListener("click", onSpeed, { signal: events.signal });
         shadows.addEventListener("change", onShadows, { signal: events.signal });
+        orbitLine.addEventListener("change", onOrbit, { signal: events.signal });
         publishSpeed();
         onShadows();
+        onOrbit();
       },
       destroy() {
         if (!bound) return;
         bound = false;
         events.abort();
         shadowsEnabled = false;
+        orbitEnabled = true;
         for (const animation of animations) animation.playbackRate = 1;
         stage.classList.remove("mercury-hide-shadows");
+        stage.classList.remove("mercury-hide-orbit");
       },
     });
 
@@ -955,6 +1310,9 @@ export function mountMercuryClient(stage) {
   function lensById(id) {
     const lens = PREPARED_MERCURY_LENSES.controls.find((item) => item.id === id);
     if (!lens) throw new RangeError(`Unknown Mercury lens: ${id}.`);
+    if (!/^#[0-9a-f]{6}$/u.test(lens.billboardColor ?? "")) {
+      throw new Error(`Mercury lens ${id} has no prepared billboard colour.`);
+    }
     return lens;
   }
 
@@ -971,6 +1329,29 @@ export function mountMercuryClient(stage) {
         state: orbit.skyState,
         sceneRegistration: PREPARED_MERCURY_SCENE.starfield.sceneRegistration,
         sunLocalDirection: PREPARED_MERCURY_SKY_SUN.localDirection,
+        heliocentricView: Object.freeze({
+          schema: PREPARED_MERCURY_SCENE.heliocentricView.schema,
+          units: PREPARED_MERCURY_SCENE.heliocentricView.units,
+          sun: Object.freeze({
+            direction: PREPARED_MERCURY_SCENE.heliocentricView.sun.direction,
+            distanceAu: PREPARED_MERCURY_SCENE.heliocentricView.sun.distanceAu,
+            radiusKilometers:
+              PREPARED_MERCURY_SCENE.heliocentricView.sun.radiusKilometers,
+          }),
+          orbit: Object.freeze({
+            semiMajorAxisAu:
+              PREPARED_MERCURY_SCENE.heliocentricView.orbit.semiMajorAxisAu,
+            eccentricity:
+              PREPARED_MERCURY_SCENE.heliocentricView.orbit.eccentricity,
+            inclinationDegrees:
+              PREPARED_MERCURY_SCENE.heliocentricView.orbit.inclinationDegrees,
+            normal: PREPARED_MERCURY_SCENE.heliocentricView.orbit.normal,
+            perihelionDirection:
+              PREPARED_MERCURY_SCENE.heliocentricView.orbit.perihelionDirection,
+            vertexCount:
+              PREPARED_MERCURY_SCENE.heliocentricView.orbit.vertexCount,
+          }),
+        }),
       }),
       lenses: Object.freeze({
         state: lensControls.state,
@@ -992,6 +1373,9 @@ export function mountMercuryClient(stage) {
         retainedSunCount: mounted.retainedSunCount,
         retainedSunBillboardCount: mounted.retainedSunBillboardCount,
         retainedSunCubemapBakeCount: mounted.retainedSunCubemapBakeCount,
+        retainedOrbitPieceCount: mounted.retainedOrbitPieceCount,
+        retainedBillboardCount: 1,
+        retainedBodyMarkerCount: 1,
         runtimeDomGrowthPolicy: "none",
         viewBank: mounted.viewBank.state,
       }),
@@ -1003,6 +1387,10 @@ export function mountMercuryClient(stage) {
 
 function normalizeDegrees(degrees) {
   return (degrees % 360 + 540) % 360 - 180;
+}
+
+function formatNumber(value) {
+  return Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
 }
 
 function validatePreparedStarfield() {
