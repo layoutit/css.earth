@@ -229,6 +229,21 @@ try {
   }
 
   // ---------------------------------------------------------------------
+  // The wheel is a dolly: the eye moves along its own axis. Wheel events
+  // with the cursor off the disc centre change the distance and nothing
+  // else; the painted scene rotation is the same text before and after.
+  // ---------------------------------------------------------------------
+  report.wheel = [];
+  for (const [name, offset, deltaY] of [
+    ["disc-out", [0.5, 0.2], 100],
+    ["sky-out", [1.8, -0.6], 100],
+    ["disc-in", [-0.5, 0.3], -100],
+  ]) {
+    await resetToDefault(page);
+    report.wheel.push(await measureWheelDolly(page, geometry, name, offset, deltaY));
+  }
+
+  // ---------------------------------------------------------------------
   // The sky: Milky Way band at two controlled poses, compact anchors at
   // poses that centre each of them.
   // ---------------------------------------------------------------------
@@ -618,6 +633,41 @@ async function measureDragTranslation(page, geometry, name, delta) {
     skyShift,
     bodyShift,
   };
+}
+
+// Six wheel events at a cursor `offset` (in disc radii from the disc centre)
+// must move the camera distance and leave the painted scene rotation
+// exactly as it was: the matrix3d text is compared, not a tolerance.
+async function measureWheelDolly(page, geometry, name, offset, deltaY) {
+  const readRotation = () => page.locator(".mercury-scene").evaluate(
+    (element) => /matrix3d\([^)]*\)/u.exec(element.style.transform)?.[0] ?? null,
+  );
+  const readDistance = () => page.evaluate(() => window.__mercury.camera.state().distance);
+  const before = await readRotation();
+  const distanceBefore = await readDistance();
+  const angles = oracle.scenePitchYawDegrees(await readPose(page));
+  await page.mouse.move(
+    geometry.discCentre[0] + offset[0] * geometry.discRadius,
+    geometry.discCentre[1] + offset[1] * geometry.discRadius,
+  );
+  for (let event = 0; event < 6; event += 1) {
+    await page.mouse.wheel(0, deltaY);
+    await page.waitForTimeout(40);
+  }
+  await page.waitForTimeout(320);
+  await nextPaint(page);
+  const after = await readRotation();
+  const distanceAfter = await readDistance();
+  const afterAngles = oracle.scenePitchYawDegrees(await readPose(page));
+  const result = {
+    name, offset, deltaY, distanceBefore, distanceAfter,
+    rotationHeld: before !== null && before === after,
+    yawDriftDegrees: afterAngles.yawDegrees - angles.yawDegrees,
+    pitchDriftDegrees: afterAngles.pitchDegrees - angles.pitchDegrees,
+  };
+  check(`wheel-${name}-holds-scene-rotation`,
+    result.rotationHeld && distanceAfter !== distanceBefore, result);
+  return result;
 }
 
 async function measureBand(page, geometry, id) {

@@ -157,12 +157,28 @@ export const MUTATIONS = Object.freeze([
     served: { url: "/src/planets/mercury/runtime/preparedStarfield.mjs", changed: true },
     expect: /sky-anchor/u,
   },
+  // The wheel dolly moves the eye along its axis and holds no surface
+  // anchor; a controller that keeps the scale camera's anchor turns the
+  // scene on every off-centre wheel event.
+  {
+    id: "wheel-dolly-holds-anchor",
+    description: "the perspective dolly keeps the scale camera's surface anchor (off-centre wheel turns the scene)",
+    file: "src/platform/prepared-wheel-zoom.mjs",
+    find: "    anchor = dolly === null ? { x:event.clientX, y:event.clientY } : null;",
+    replace: "    anchor = { x:event.clientX, y:event.clientY }; /* MUTATION wheel-dolly-holds-anchor */",
+    prepare: [],
+    served: { url: "/src/platform/prepared-wheel-zoom.mjs", marker: "MUTATION wheel-dolly-holds-anchor" },
+    expect: /wheel-.*-holds-scene-rotation/u,
+  },
+  // The heliocentric preparation refuses a body-fixed Sun direction that
+  // disagrees with the orbital facts, so the mirrored Sun is applied where
+  // the lighting and the sprite take their direction from the frame.
   {
     id: "from-sun-direction",
-    description: "body-fixed Sun direction negated (from-Sun instead of to-Sun)",
-    file: "src/platform/solar-geometry.mjs",
-    find: "  mercury: Object.freeze([\n    0.9590465723427557,\n    -0.28324830064510237,\n    0.00026881085002734145,\n  ]),",
-    replace: "  mercury: Object.freeze([ /* MUTATION from-sun-direction */\n    -0.9590465723427557,\n    0.28324830064510237,\n    -0.00026881085002734145,\n  ]),",
+    description: "prepared Sun direction negated (from-Sun instead of to-Sun) for the lighting and the sprite",
+    file: "src/planets/mercury/tools/prepare-sky-sun.mjs",
+    find: "const sceneDirection = MERCURY_PRESENTATION_FRAME.sunDirection;",
+    replace: "const sceneDirection = Object.freeze(MERCURY_PRESENTATION_FRAME.sunDirection.map((value) => -value)); /* MUTATION from-sun-direction */",
     prepare: SUN_PREPARE,
     served: { url: "/src/planets/mercury/runtime/preparedSkySun.mjs", changed: true },
     expect: /sky-anchor|band-angle|lit-direction-matches-oracle|sun-sprite-position/u,
