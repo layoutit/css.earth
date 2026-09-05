@@ -76,7 +76,10 @@ test("switches prepared lenses without filters, canvas, or DOM growth", async ()
   const { runtimeDefinition } = await import("../runtime/definition.mjs");
   assert.equal(runtimeDefinition.controls.lenses.defaultLens, PREPARED_MARS_LENSES.defaultLens);
   for (const lens of PREPARED_MARS_LENSES.controls) {
-    const plan = runtimeDefinition.resolvePresentation({ selection: { ...runtimeDefinition.initialSelection, lensId: lens.id } });
+    const plan = runtimeDefinition.resolvePresentation({
+      selection: { ...runtimeDefinition.initialSelection, lensId: lens.id },
+      view: { skySunViewDirection: runtimeDefinition.sun.referenceViewDirection },
+    });
     assert.ok(plan.required.includes(`surface:${lens.id}`));
     assert.ok(plan.required.includes(`poles:${lens.id}`));
   }

@@ -168,8 +168,14 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
     }
     directionalFrames.push({ alpha, centerY: weightedY / alpha });
   }
-  assert.ok(directionalFrames[0].alpha > directionalFrames[1].alpha * 2);
-  assert.ok(directionalFrames[1].centerY - directionalFrames[0].centerY > 80);
+  assert.equal(atmosphere.illumination.minimumLightViewZ, -1);
+  assert.equal(atmosphere.illumination.maximumLightViewZ, 1);
+  assert.ok(directionalFrames[1].alpha > directionalFrames[0].alpha,
+    "the full-phase atmosphere illuminates more of the disc than the backlit shell");
+  for (const frame of directionalFrames) {
+    assert.ok(Math.abs(frame.centerY - (atmosphere.sourceTileSize - 1) / 2) < 1,
+      "the two axial phase endpoints must be vertically symmetric");
+  }
 });
 
 test("publishes the prepared Earth title and retained scene", async () => {

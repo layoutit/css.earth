@@ -35,7 +35,9 @@ export const runtimeDefinition = Object.freeze({
     preparedResourcePool("pages", entries, { retention: "selection", concurrency: 2, capacity: banks[0].urls.length * 2 }),
     ...["lighting", "atmosphere"].map(id => preparedResourcePool(id, entries, { retention: "selection", reuse: true,
       capacity: PREPARED_EARTH_SCENE.material[id].transport.maximumRetainedRowCount, concurrency: 3,
-      eviction: "capacity", stabilityMilliseconds: 120, decoding: "sync" }))],
+      // Full-phase atmosphere can cross a four-frame shard within 120 ms.
+      // Load it immediately so continuous input cannot postpone every new row.
+      eviction: "capacity", stabilityMilliseconds: id === "atmosphere" ? 0 : 120, decoding: "sync" }))],
     startup: [...celestial.map(entry => entry.key), ...pageKeys(PREPARED_EARTH_LENSES.defaultLens),
       "poles:normal", "shadowless:lighting", "default:lighting", "default:atmosphere",
       ...PREPARED_EARTH_SCENE.material.atmosphere.transport.initialWarmRows.map(index => `atmosphere:${index}`)] },

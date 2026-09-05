@@ -9,6 +9,7 @@ import {
   EARTH_MATERIAL_FRAMES_PER_SHARD,
   EARTH_MATERIAL_TILE_SIZE,
   readEarthAtmosphereModel,
+  prepareEarthAtmosphereFrame,
 } from "./atmosphere-model.mjs";
 import { validateEarthSourceGroup } from "./source-manifest.mjs";
 import { ensureEarthPreparationDirectories, EARTH_PUBLIC_ROOT, EARTH_STAGING_ROOT } from "./preparation-paths.mjs";
@@ -352,6 +353,7 @@ async function prepareEarthMaterialBanks() {
           const frame = renderEarthMaterialFrame({
             size,
             scenePitchDegrees,
+            phaseFrame: frameIndex,
             role,
             atmosphereModel: EARTH_ATMOSPHERE_MODEL,
           });
@@ -397,7 +399,11 @@ function renderEarthMaterialFrame({
   role,
   atmosphereModel,
   shadowless = false,
+  phaseFrame,
 }) {
+  if (role === "atmosphere") {
+    return prepareEarthAtmosphereFrame({ size, frame: phaseFrame, model: atmosphereModel }).data;
+  }
   const radius = size * 0.468;
   const center = (size - 1) / 2;
   const rgba = Buffer.alloc(size * size * 4);
@@ -465,94 +471,10 @@ function renderEarthMaterialFrame({
         ) * 255);
         continue;
       }
-      const atmosphere = preparedAtmosphereTexel({
-        normal: hit.normal,
-        view,
-        objectLight,
-        lightAlignment,
-        model: atmosphereModel,
-      });
-      rgba[offset] = atmosphere.r;
-      rgba[offset + 1] = atmosphere.g;
-      rgba[offset + 2] = atmosphere.b;
-      rgba[offset + 3] = atmosphere.a;
+
     }
   }
   return rgba;
-}
-
-function preparedAtmosphereTexel({
-  normal,
-  view,
-  objectLight,
-  lightAlignment,
-  model,
-}) {
-  if (model?.schema !== "cssearth-openspace-atmosphere-source@1") {
-    throw new TypeError("Earth atmosphere model is incompatible.");
-  }
-  const response = model.presentationResponse;
-  if (response?.schema !==
-      "cssearth-google-earth-pro-atmosphere-presentation-response@1") {
-    throw new TypeError("Earth atmosphere presentation response is incompatible.");
-  }
-  const observed = response.observedResponse;
-  const transfer = response.cleanRoomTransfer;
-  const viewAlignment = Math.max(0, dotVector(normal, view));
-  const rayleighHorizon = Math.sqrt(
-    2 * model.rayleigh.scaleHeightKm / model.planetRadiusKm,
-  );
-  const mieHorizon = Math.sqrt(
-    2 * model.mie.scaleHeightKm / model.planetRadiusKm,
-  );
-  const rayleighAirMass = 1 / Math.sqrt(
-    viewAlignment ** 2 + rayleighHorizon ** 2,
-  );
-  const mieAirMass = 1 / Math.sqrt(
-    viewAlignment ** 2 + mieHorizon ** 2,
-  );
-  const rayleigh = model.rayleigh.scatteringPerKm.map((coefficient) =>
-    1 - Math.exp(
-      -coefficient * model.rayleigh.scaleHeightKm * rayleighAirMass,
-    ));
-  const mie = model.mie.scatteringPerKm.map((coefficient) =>
-    1 - Math.exp(
-      -coefficient * model.mie.scaleHeightKm * mieAirMass,
-    ));
-  const scatteringAlignment = clamp(dotVector(objectLight, view), -1, 1);
-  const rayleighPhase = 0.75 * (1 + scatteringAlignment ** 2);
-  const g = model.mie.anisotropy;
-  const miePhase = (1 - g ** 2) / Math.pow(
-    1 + g ** 2 - 2 * g * scatteringAlignment,
-    1.5,
-  );
-  const signal = rayleigh.map((value, channel) =>
-    value * rayleighPhase +
-      mie[channel] * miePhase * transfer.mieContribution);
-  const twilightCosine = Math.sqrt(
-    2 * model.atmosphereHeightKm / model.planetRadiusKm,
-  );
-  const sunlight = smoothstep(
-    -twilightCosine,
-    twilightCosine,
-    lightAlignment,
-  );
-  const color = signal.map((value) => 1 - Math.exp(
-    -value * sunlight * model.sunIntensity * observed.exposure,
-  ));
-  const luminance = color[0] * 0.3 + color[1] * 0.59 + color[2] * 0.11;
-  const limb = clamp(rayleighAirMass * rayleighHorizon, 0, 1);
-  const alpha = clamp(
-    luminance * observed.skyAlphaLuminanceScale * limb,
-    0,
-    transfer.earthMaximumOpacity,
-  );
-  return {
-    r: Math.round(color[0] * 255),
-    g: Math.round(color[1] * 255),
-    b: Math.round(color[2] * 255),
-    a: Math.round(alpha * 255),
-  };
 }
 
 function blitRgba(sourceRgba, sourceWidth, sourceHeight, targetRgba,
