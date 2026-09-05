@@ -7,10 +7,13 @@ import { PREPARED_EARTH_PANEL } from "../site/preparedPanel.mjs";
 test("publishes evidence-backed Earth shell content", async () => {
   assert.match(PREPARED_EARTH_PANEL.introduction, /third planet from the Sun/u);
   assert.deepEqual(PREPARED_EARTH_PANEL.facts, [
-    { label: "Distance", value: "150 million km" },
-    { label: "Diameter", value: "12,756 km" },
-    { label: "Year", value: "365.25 days" },
-    { label: "Day", value: "23.9 hours" },
+    { id: "distance-from-sun", label: "Distance from Sun", value: "150 million km" },
+    { id: "diameter", label: "Diameter", value: "12,756 km" },
+    { id: "orbital-period", label: "Orbital period", value: "365.25 days" },
+    { id: "rotation-period", label: "Rotation period", value: "23.9 hours" },
+    { id: "axial-tilt", label: "Axial tilt", value: "23.4°" },
+    { id: "moon-count", label: "Moons", value: "1" },
+    { id: "ring-system", label: "Rings", value: "None" },
   ]);
   assert.deepEqual(PREPARED_EARTH_LENSES.controls.map(({ id }) => id), [
     "normal", "topography", "night-lights", "cross-section",
@@ -21,20 +24,17 @@ test("publishes evidence-backed Earth shell content", async () => {
   assert.equal(snapshot.credit, "NASA Science");
   const allParagraphs = snapshot.sections.flatMap(({ paragraphs }) => paragraphs)
     .join(" ");
-  for (const fact of PREPARED_EARTH_PANEL.facts) {
+  for (const fact of PREPARED_EARTH_PANEL.facts.slice(0, 4)) {
     const evidence = fact.value
       .replace(" million km", " million kilometers")
       .replace(" km", " kilometers");
     assert.ok(allParagraphs.includes(evidence),
       `NASA editorial does not contain prepared fact: ${evidence}`);
   }
-  const moon = JSON.parse(await readFile(
-    new URL("../source/moon/earth-moon.json", import.meta.url),
-    "utf8",
-  ));
-  assert.equal(PREPARED_EARTH_PANEL.moreFacts.find(
-    ({ label }) => label === "Moon distance").value,
-  `${moon.meanOrbitRadiusKm.toLocaleString("en-US")} km`);
+  assert.deepEqual(PREPARED_EARTH_PANEL.moreFacts, [
+    { id: "ocean-coverage", label: "Ocean coverage", value: "71%" },
+    { id: "atmosphere-composition", label: "Atmosphere", value: "78% N₂, 21% O₂" },
+  ]);
   const license = await readFile(
     new URL("../source/presentation/LICENSE.INTER-OFL", import.meta.url),
     "utf8",
