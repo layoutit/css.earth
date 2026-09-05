@@ -16,6 +16,17 @@ import {
 // and the material overlays speak: silhouette diameter over the logical body
 // diameter, times the default zoom.
 //
+// A plan may also opt into `drag: { model: "screen-axis-tumble" }`: every
+// pointer sample is taken as if it started at the trackball's centre, so a
+// drag anywhere on screen tumbles the scene about the screen axes. The
+// shared virtual trackball twists the scene about the view axis once the
+// pointer leaves its disc, which at a far dolly (the body a few pixels wide,
+// the disc a fifth of the viewport) is nearly everywhere: measured as a
+// 0.99 roll share and 11-27 degrees per 240 px stroke off-centre against
+// 82 degrees of pure tumble at the centre. Rotation itself is unbounded on
+// every path; the control pitch anchors in the plan calibrate the affine
+// control-to-scene map and clamp nothing.
+//
 // A plan whose heliocentric view carries the planetary system opts into the
 // wider dolly (`dolly.maximumDistanceOverSystemExtent` against the system's
 // extent instead of the body's orbit), the system's fade-in with distance
@@ -44,6 +55,7 @@ export function validatePerspectiveCameraPlan(plan) {
         !Number.isFinite(plan.planetarySystem.hiddenBelowDistanceOverOrbitExtent) ||
         !(plan.planetarySystem.visibleAboveDistanceOverOrbitExtent >
           plan.planetarySystem.hiddenBelowDistanceOverOrbitExtent))) ||
+      (plan.drag !== undefined && plan.drag?.model !== "screen-axis-tumble") ||
       (plan.sunMarker !== undefined && (
         plan.sunMarker?.model !== "sprite-diameter-crossfade" ||
         !(plan.sunMarker.fadeStartSpritePixels > plan.sunMarker.fullSpritePixels) ||
@@ -357,6 +369,8 @@ export function createPerspectiveDolly({
         viewportWidth: stageBounds.width,
         viewportCenterX: (stageBounds.left ?? 0) + stageBounds.width / 2,
         viewportCenterY: (stageBounds.top ?? 0) + stageBounds.height / 2,
+        // Pointer samples are re-based to the centre: tumble everywhere.
+        tumbleOnly: cameraPlan.drag?.model === "screen-axis-tumble",
       });
     },
     state() {
@@ -394,6 +408,10 @@ export function createPerspectiveDolly({
         }),
         levelOfDetail,
         orbitLineFade: cameraPlan.orbitLineFade,
+        drag: cameraPlan.drag ?? null,
+        // Nothing on any input path clamps the pitch or the yaw; the
+        // control pitch anchors only calibrate the control-to-scene map.
+        rotationBounds: "none",
         planetarySystem: system === null ? null : Object.freeze({
           fade: systemFade,
           sunMarker,

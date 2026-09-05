@@ -824,21 +824,32 @@ export function createUnboundedMatrixDragControls({
         accumulatedPitch = 0;
         accumulatedYaw = 0;
       }
+      // A tumble-only trackball (perspective plans that opt in) takes every
+      // sample as if it started at the trackball's centre, so the scene
+      // tumbles about the screen axes wherever the pointer is instead of
+      // twisting about the view axis outside the disc.
+      const sampleStart = activeTrackball.tumbleOnly
+        ? [activeTrackball.centerX, activeTrackball.centerY]
+        : [previousX, previousY];
+      const sampleEnd = activeTrackball.tumbleOnly
+        ? [activeTrackball.centerX + (sampleEvent.clientX - previousX),
+          activeTrackball.centerY + (sampleEvent.clientY - previousY)]
+        : [sampleEvent.clientX, sampleEvent.clientY];
       const projected = projectGoogleEarthTrackballDelta({
-        previousX,
-        previousY,
-        currentX: sampleEvent.clientX,
-        currentY: sampleEvent.clientY,
         ...activeTrackball,
+        previousX: sampleStart[0],
+        previousY: sampleStart[1],
+        currentX: sampleEnd[0],
+        currentY: sampleEnd[1],
       });
       const fittedPitch = projected.pitchDegrees *
         (activeTrackball.pitchResponse ??
           GOOGLE_EARTH_DRAG_INERTIA.directPitchResponse);
       const sampleRotation = projectSphereDrag({
-        previousX,
-        previousY,
-        currentX: sampleEvent.clientX,
-        currentY: sampleEvent.clientY,
+        previousX: sampleStart[0],
+        previousY: sampleStart[1],
+        currentX: sampleEnd[0],
+        currentY: sampleEnd[1],
         centerX: activeTrackball.centerX,
         centerY: activeTrackball.centerY,
         opticalCenterX: activeTrackball.opticalCenterX,

@@ -41,6 +41,10 @@ const SUITES = Object.freeze({
     script: resolve(projectRoot, "src/planets/mercury/test/planetary-system-browser.mjs"),
     name: "mercury-planetary-system",
   }),
+  rotation: Object.freeze({
+    script: resolve(projectRoot, "src/planets/mercury/test/rotation-limits-browser.mjs"),
+    name: "mercury-rotation-limits",
+  }),
 });
 const toolsDirectory = resolve(projectRoot, "src/planets/mercury/tools");
 const backupRoot = resolve(projectRoot, "node_modules/.cache/mercury-geometry-mutation-gate");
@@ -267,6 +271,18 @@ export const MUTATIONS = Object.freeze([
     served: { url: "/src/platform/heliocentric-view.mjs", marker: "MUTATION trail-full-loop" },
     expect: /trail-absent-ahead-|trail-fades-backwards-/u,
     suite: "system",
+  },
+  // Free rotation: the trackball twists again outside its disc.
+  {
+    id: "drag-trackball-twist",
+    description: "the tumble-only trackball is switched off (off-centre drags twist about the view axis)",
+    file: "src/platform/perspective-dolly.mjs",
+    find: "        tumbleOnly: cameraPlan.drag?.model === \"screen-axis-tumble\",",
+    replace: "        tumbleOnly: false, /* MUTATION drag-trackball-twist */",
+    prepare: [],
+    served: { url: "/src/platform/perspective-dolly.mjs", marker: "MUTATION drag-trackball-twist" },
+    expect: /drag-(default|far)-(offcentre|corner)-.*-tumbles/u,
+    suite: "rotation",
   },
   // Phase and brightness on the markers.
   {

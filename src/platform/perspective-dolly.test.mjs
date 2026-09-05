@@ -257,3 +257,13 @@ test("the wheel's whole travel stays within the intended tens-of-notches range",
   assert.ok(wheelNotchesEndToEnd > 20 && wheelNotchesEndToEnd < 40,
     `wheelNotchesEndToEnd ${wheelNotchesEndToEnd} is outside (20, 40)`);
 });
+
+
+test("a plan may opt into the tumble-only drag and the trackball carries it; other drag models are refused", () => {
+  const plan = PREPARED_MERCURY_SCENE.camera;
+  assert.equal(plan.drag.model, "screen-axis-tumble");
+  assert.equal(validatePerspectiveCameraPlan(plan), plan);
+  assert.throws(() => validatePerspectiveCameraPlan({ ...plan, drag: { model: "virtual-trackball" } }), TypeError);
+  const { drag, ...withoutDrag } = plan;
+  assert.equal(validatePerspectiveCameraPlan(withoutDrag), withoutDrag);
+});
