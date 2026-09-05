@@ -49,6 +49,10 @@ const SUITES = Object.freeze({
     script: resolve(projectRoot, "src/planets/mercury/test/label-field-browser.mjs"),
     name: "mercury-label-field",
   }),
+  stars: Object.freeze({
+    script: resolve(projectRoot, "src/planets/mercury/test/catalogue-stars-browser.mjs"),
+    name: "mercury-catalogue-stars",
+  }),
 });
 const toolsDirectory = resolve(projectRoot, "src/planets/mercury/tools");
 const backupRoot = resolve(projectRoot, "node_modules/.cache/mercury-geometry-mutation-gate");
@@ -311,6 +315,52 @@ export const MUTATIONS = Object.freeze([
     expect: /marker-position-(pluto|eris)|orbit-(shape|axis-backprojected)-(pluto|eris)-dwarf/u,
     suite: "system",
   },
+  // Catalogue stars: their placement, their photometry, the stamped bands
+  // and the photograph's retreat to diffuse light.
+  {
+    id: "stars-mirrored",
+    description: "retained stars placed at mirrored right ascension (x negated in the cube)",
+    file: "src/platform/prepare-catalogue-stars.mjs",
+    find: "  const yaw = Math.atan2(-x, -z) * 180 / Math.PI;",
+    replace: "  x = -x; const yaw = Math.atan2(-x, -z) * 180 / Math.PI; /* MUTATION stars-mirrored */",
+    prepare: SKY_PREPARE,
+    served: { url: "/src/planets/mercury/runtime/preparedStarfield.mjs", changed: true },
+    expect: /star-.*-painted-at-oracle-/u,
+    suite: "stars",
+  },
+  {
+    id: "stars-uniform-size",
+    description: "every retained star presented at one radius (magnitude no longer reads as size)",
+    file: "src/platform/prepare-catalogue-stars.mjs",
+    find: "    retainedRadiusPx: Math.min(RETAINED_RADIUS_MAX_PX, Math.max(POINT_MIN_RADIUS_PX, raw * RETAINED_RADIUS_SHARE)),",
+    replace: "    retainedRadiusPx: 1.5, /* MUTATION stars-uniform-size */",
+    prepare: SKY_PREPARE,
+    served: { url: "/src/planets/mercury/runtime/preparedStarfield.mjs", changed: true },
+    expect: /star-size-follows-magnitude-/u,
+    suite: "stars",
+  },
+  {
+    id: "stars-photograph-detail-kept",
+    description: "the photograph keeps its point detail beside the catalogue points (stars drawn twice)",
+    file: "src/platform/prepare-cubic-sky-source.mjs",
+    find: "  const photographDetailGain = catalogueStars === null ? DETAIL_GAIN : 0;",
+    replace: "  const photographDetailGain = DETAIL_GAIN; /* MUTATION stars-photograph-detail-kept */",
+    prepare: SKY_PREPARE,
+    served: { url: "/src/planets/mercury/runtime/preparedStarfield.mjs", changed: true },
+    expect: /photograph-does-not-repaint-/u,
+    suite: "stars",
+  },
+  {
+    id: "stars-not-stamped",
+    description: "the stamped bands are skipped (the faint sky is empty)",
+    file: "src/platform/prepare-cubic-sky-source.mjs",
+    find: "    if (star.presentation !== \"stamped\") continue;",
+    replace: "    if (star.presentation !== \"never\") continue; /* MUTATION stars-not-stamped */",
+    prepare: SKY_PREPARE,
+    served: { url: "/src/planets/mercury/runtime/preparedStarfield.mjs", changed: true },
+    expect: /faint-stars-stamped-/u,
+    suite: "stars",
+  },
   // Captions: the declutter pass, the placement and the ranking.
   {
     id: "captions-no-declutter",
@@ -342,7 +392,7 @@ export const MUTATIONS = Object.freeze([
     replace: "      while (position > 0 && candidates[position - 1].priority > priority) position -= 1; /* MUTATION captions-priority-inverted */",
     prepare: [],
     served: { url: "/src/platform/label-field.mjs", marker: "MUTATION captions-priority-inverted" },
-    expect: /sun-caption-wins-/u,
+    expect: /declutter-matches-reference-rule-/u,
     suite: "labels",
   },
   // Free rotation: the trackball twists again outside its disc.

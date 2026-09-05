@@ -94,15 +94,61 @@ export function mountRetainedCubicSky({
     );
     orientation.appendChild(element);
   }
+  // Catalogue stars (opt-in, see prepare-catalogue-stars.mjs): the retained
+  // band as points just inside the faces, each placed by its prepared cube
+  // transform, sized by a scale the root's size sets (a point at 0.99 of the
+  // half side appears at perspective / (0.99 half side) of its CSS size),
+  // coloured and dimmed by the chain's luminance. Retained once; the
+  // orientation's matrix carries them with the faces.
+  let starGroup = null;
+  let starResizeObserver = null;
+  const stars = plan.catalogueStars ?? null;
+  if (stars !== null) {
+    starGroup = document.createElement("div");
+    starGroup.className = `planet-cubic-sky-stars ${objectId}-skybox-stars`;
+    for (const star of stars.retained) {
+      const element = document.createElement("s");
+      element.className = `planet-cubic-sky-star planet-cubic-sky-star-${star.band}`;
+      element.style.setProperty("--planet-cubic-sky-star-radius", `${star.radiusPx}px`);
+      element.style.backgroundColor = `rgb(${star.color[0]}, ${star.color[1]}, ${star.color[2]})`;
+      element.style.opacity = String(star.luminance);
+      element.style.transform = star.transform;
+      if (star.name) element.dataset.name = star.name;
+      element.dataset.magnitude = String(star.magnitude);
+      element.dataset.direction = star.direction.join(",");
+      starGroup.appendChild(element);
+    }
+    orientation.appendChild(starGroup);
+  }
   cube.appendChild(orientation);
   root.appendChild(cube);
   host.prepend(root);
+  const measureStarScale = () => {
+    if (starGroup === null) return;
+    const view = root.ownerDocument.defaultView;
+    const perspective = parseFloat(view.getComputedStyle(root).perspective);
+    const halfSide = Math.max(root.clientWidth, root.clientHeight);
+    if (!(perspective > 0) || !(halfSide > 0)) return;
+    const scale = perspective / (stars.retainedRadiusShareOfHalfSide * halfSide);
+    starGroup.style.setProperty("--planet-cubic-sky-star-scale", scale.toFixed(5));
+  };
+  measureStarScale();
+  if (starGroup !== null && typeof ResizeObserver === "function") {
+    starResizeObserver = new ResizeObserver(() => measureStarScale());
+    starResizeObserver.observe(root);
+  }
   let publishedMatrix = null;
   let publishedZoomScale = null;
   return Object.freeze({
     root,
     cube,
     orientation,
+    starGroup,
+    retainedStarCount: starGroup === null ? 0 : starGroup.childElementCount,
+    catalogueStars: stars === null ? null : Object.freeze({
+      limitingMagnitude: stars.limitingMagnitude, count: stars.count, stampedCount: stars.stampedCount,
+      retainedCount: stars.retainedCount, bands: stars.bands, coexistence: stars.coexistence,
+    }),
     faceCount: orientation.querySelectorAll(".planet-cubic-sky-face").length,
     setOrientation({ matrix, zoom, defaultZoom }) {
       if (typeof matrix !== "string" || !Number.isFinite(zoom) ||
@@ -123,6 +169,7 @@ export function mountRetainedCubicSky({
       }
     },
     destroy() {
+      starResizeObserver?.disconnect();
       root.remove();
     },
   });
