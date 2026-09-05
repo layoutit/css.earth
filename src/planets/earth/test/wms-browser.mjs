@@ -96,11 +96,11 @@ try{
       for(const sample of samples){
         await page.evaluate(camera=>window.__earth.camera.setState(camera),sample.camera);
         await page.waitForFunction(()=>{
-          const s=window.__earth.cityPages.stats();
+          const s=window.__earth.runtime.pages().city;
           return s.desired.length>0&&!s.pendingSelection&&!s.activeLoads&&!s.index.activeLoads;
         },null,{timeout:60000});
         const state=await page.evaluate(()=>({
-          paging:window.__earth.cityPages.stats(),stable:window.__earth.assertStableDomIdentity(),
+          paging:window.__earth.runtime.pages().city,stable:window.__earth.assertStableDomIdentity(),
           identical:[...document.querySelector(".planet-stage").querySelectorAll("*")].every((n,i)=>n===window.__wmsNodes[i]),
           nodes:window.__wmsNodes.length,
         }));
@@ -114,7 +114,7 @@ try{
         console.log(JSON.stringify({dpr,sample:sample.id,pages:state.paging.desired.length,complete,errors:state.paging.errors}));
       }
       await page.evaluate(()=>window.__earth.camera.setState({zoom:1.1}));
-      await page.waitForFunction(()=>window.__earth.cityPages.stats().retained.length===0);
+      await page.waitForFunction(()=>window.__earth.runtime.pages().city.retained.length===0);
       assert.equal(run.requests.some(url=>url.includes("earth-assets.lowpoly.cc")),false);
       assert.deepEqual(run.pageErrors,[]);
       await Promise.all(pending);

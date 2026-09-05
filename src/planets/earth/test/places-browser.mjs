@@ -11,7 +11,7 @@ const { places } = JSON.parse(await readFile(new URL("../../../../public/scenes/
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const reports = [];
 const imagerySettled = page => page.waitForFunction(() => {
-  const state = window.__earth.cityPages.stats();
+  const state = window.__earth.runtime.pages().city;
   return !state.pendingSelection && state.activeLoads === 0 && state.index.activeLoads === 0 &&
     state.desired.length > 0 && state.desired.every(key => state.retained.some(slot => slot.key === key && slot.published));
 }, null, { timeout: 60000 });
@@ -56,7 +56,7 @@ try {
       assert.ok(centered.z > 0 && centered.pixels < 20, JSON.stringify(centered));
       assert.equal(await page.locator(".planet-destination-name").innerText(), "Buenos Aires");
       assert.match(await page.locator(".planet-destination-status").innerText(), /WorldCover imagery/u);
-      const city = await page.evaluate(() => window.__earth.cityPages.stats());
+      const city = await page.evaluate(() => window.__earth.runtime.pages().city);
       assert.deepEqual(city.errors, []);
       assert.deepEqual(city.index.errors, []);
       await page.screenshot({ path: new URL(`${label}-buenos-aires.png`, output).pathname });
@@ -73,7 +73,7 @@ try {
       assert.match(await page.locator(".planet-destination-status").innerText(), /WorldCover imagery/u);
       assert.equal(await page.evaluate(() => window.__earth.camera.state().zoom), 1024);
       await imagerySettled(page);
-      const tokyo = await page.evaluate(() => window.__earth.cityPages.stats());
+      const tokyo = await page.evaluate(() => window.__earth.runtime.pages().city);
       assert.deepEqual(tokyo.errors, []);
       assert.deepEqual(tokyo.index.errors, []);
       await page.screenshot({ path: new URL(`${label}-tokyo.png`, output).pathname });

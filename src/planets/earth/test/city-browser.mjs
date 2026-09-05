@@ -144,9 +144,9 @@ try {
           }
         }
         for(const collapsed of mobile||edge.prefix!=='face-boundary' ? [] : [true,false]) {
-          const before=await page.evaluate(()=>window.__earth.cityPages.stats().selectionRuns);
+          const before=await page.evaluate(()=>window.__earth.runtime.pages().city.selectionRuns);
           await page.locator('.planet-sidebar-toggle').click();
-          await page.waitForFunction(before=>window.__earth.cityPages.stats().selectionRuns>before,before);
+          await page.waitForFunction(before=>window.__earth.runtime.pages().city.selectionRuns>before,before);
           await settle(page);
           assert.equal(await page.evaluate(()=>document.body.dataset.sidebarCollapsed==='true'),collapsed);
           assert.equal((await snapshot(page)).identical,true);
@@ -279,7 +279,7 @@ try {
         await route.continue().catch(()=>{});
       });
       await page.evaluate(()=>window.__earth.camera.setState({zoom:2048}));
-      await page.waitForFunction(()=>window.__earth.cityPages.stats().activeLoads>0);
+      await page.waitForFunction(()=>window.__earth.runtime.pages().city.activeLoads>0);
       await page.evaluate(()=>window.__earth.camera.setState({zoom:1.1}));
       await settle(page);
       await page.waitForTimeout(350);
@@ -383,7 +383,7 @@ async function measureCityMotion(page,root) {
       if(window.__cityMotionStop)return;
       const m=new DOMMatrix(getComputedStyle(scene).transform).multiply(new DOMMatrix(getComputedStyle(system).transform)).multiply(new DOMMatrix(getComputedStyle(carrier).transform));
       window.__cityMotionRecords.push({time:performance.now(),playing:document.documentElement.dataset.playing==='true',
-        matrix:Array.from(m.toFloat64Array()),scale:parseFloat(getComputedStyle(camera).scale),viewport,city:window.__earth.cityPages.stats()});
+        matrix:Array.from(m.toFloat64Array()),scale:parseFloat(getComputedStyle(camera).scale),viewport,city:window.__earth.runtime.pages().city});
       requestAnimationFrame(collect);
     };
     requestAnimationFrame(collect);
@@ -444,7 +444,7 @@ async function checkCityHandoff(page,root,dpr) {
   await page.route('**/city-*.webp',pauseHandoff);
   try {
     await page.evaluate(()=>window.__earth.camera.setState({zoom:4096}));
-    await page.waitForFunction(()=>window.__earth.cityPages.stats().activeLoads>0);
+    await page.waitForFunction(()=>window.__earth.runtime.pages().city.activeLoads>0);
     proof.handoffPending=await snapshot(page);
     proof.priorPageBounds=await page.evaluate(()=>{
       const stage=document.querySelector('.planet-stage').getBoundingClientRect();
@@ -474,12 +474,12 @@ async function checkCityHandoff(page,root,dpr) {
 async function settle(page) {
   await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
   await page.waitForFunction(()=>{
-    const s=window.__earth.cityPages.stats();return !s.pendingSelection && s.activeLoads===0 && s.index.activeLoads===0;
+    const s=window.__earth.runtime.pages().city;return !s.pendingSelection && s.activeLoads===0 && s.index.activeLoads===0;
   });
 }
 
 async function snapshot(page) {
-  return page.evaluate(()=>({city:window.__earth.cityPages.stats(),camera:window.__earth.camera.state(),
+  return page.evaluate(()=>({city:window.__earth.runtime.pages().city,camera:window.__earth.camera.state(),
     stable:window.__earth.assertStableDomIdentity(),nodes:document.querySelector('.planet-stage').querySelectorAll('*').length,
     identical:[...document.querySelector('.planet-stage').querySelectorAll('*')].every((n,i)=>n===window.__cityNodes[i]),
     longTasks:[...window.__cityLongTasks]}));

@@ -505,22 +505,27 @@ test("ships three source-qualified DPR-specific Venus lenses", async () => {
 });
 
 test("keeps Venus runtime code on prepared retained-DOM paths", async () => {
-  const [acquire, client, styles] = await Promise.all([
+  const [acquire, client, styles, presentation] = await Promise.all([
     readFile(new URL("../tools/acquire.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(acquire, /\.\.\/\.\.\/saturn/u);
   assert.equal([...client.matchAll(/devicePixelRatio/gu)].length, 0);
-  assert.match(client, /createPolyCamera/u);
-  assert.match(client, /createRetainedCubicSkyOrbit/u);
-  assert.match(client, /createPolyScene/u);
+  const { auditObjectRuntimeOwnership } = await import("../../../../tools/check-object-runtime-ownership.mjs");
+  const { OBJECTS } = await import("../../../../site/objects.mjs");
+  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "venus") });
+  assert.equal(audit.complete, true);
+  assert.ok(audit.sharedClosure.includes("src/platform/cubic-sky-runtime.mjs"));
+  assert.match(presentation, /createPolyCamera/u);
+  assert.match(presentation, /createPolyScene/u);
   assert.doesNotMatch(client,
     /fetch\(|XMLHttpRequest|canvas|getContext\(|style\.filter/u);
   assert.doesNotMatch(styles,
     /clip-path|(?:-webkit-)?mask|filter:|gradient\(|mix-blend-mode/u);
   assert.doesNotMatch(styles, /opacity:\s*0\.58/u);
-  assert.match(client, /materialComposite|venus-material-composite/u);
+  assert.match(presentation, /materialComposite|venus-material-composite/u);
   assert.match(styles, /venus-material-composite/u);
   assert.match(styles,
     /\.example-stage\s*>\s*:is\(\.polycss-camera, \.venus-material-composite\)\s*\{/u);

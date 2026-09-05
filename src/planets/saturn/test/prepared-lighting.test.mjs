@@ -366,7 +366,7 @@ test("ships a prepared cropped ring-shadow bitmap on the original logical plane"
 
 test("uses only prepared material addresses for orbit-responsive lighting", async () => {
   const [client, preparer, generated] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
     readFile(new URL("../tools/prepare-scene.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/preparedScene.mjs", import.meta.url), "utf8"),
   ]);
@@ -378,13 +378,11 @@ test("uses only prepared material addresses for orbit-responsive lighting", asyn
     9);
   assert.ok(bodyLeaves.every(({ style }) =>
     !style.includes("saturn-material.webp")));
-  assert.match(client,
-    /publishAtlasPresentation\(\s*mounted\.fixedMaterialLeaf,\s*materialPresentation/u);
-  assert.match(client,
-    /orbitMaterialCache\.presentation\(\s*materialFrame/);
-  assert.match(client, /materialFrame = Math\.round\(clamp\(/);
+  assert.match(client, /publishAtlas\(fixedMaterialLeaf/u);
+  assert.match(client, /exterior\.presentations\[state\.materialFrame\]/u);
+
   assert.doesNotMatch(client, /materialBlend|lowerMaterialFrame|upperMaterialFrame/);
-  assert.match(client, /onPublish: publish/);
+  assert.match(client, /publishFrame\(/u);
   assert.doesNotMatch(client, /getImageData|putImageData|drawImage/);
   assert.doesNotMatch(client, /createPreparedSaturnWeatherPlayer|weatherPlayer|weatherTargets/);
   assert.match(preparer, /prepareFixedMaterialPlane/);
@@ -394,11 +392,12 @@ test("uses only prepared material addresses for orbit-responsive lighting", asyn
 
 test("warms the prepared material CSS raster before declaring ready", async () => {
   const [client, css, head] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../site/SaturnHead.astro", import.meta.url), "utf8"),
   ]);
-  const paintGate = client.indexOf("await waitForScenePaint(lifetime)");
+  const runtime = await readFile(new URL("../../../platform/object-runtime.mjs", import.meta.url), "utf8");
+  const paintGate = runtime.indexOf("environment.waitPaint(");
 
   assert.ok(paintGate >= 0);
   assert.match(head,
@@ -415,15 +414,15 @@ test("warms the prepared material CSS raster before declaring ready", async () =
 test("uses the shared prepared cubic starfield and independent Sun", async () => {
   const [css, client, starfieldModule, sunModule] = await Promise.all([
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
     import("../runtime/preparedStarfield.mjs"),
     import("../runtime/preparedSkySun.mjs"),
   ]);
   const starfield = starfieldModule.PREPARED_SATURN_STARFIELD;
   const sun = sunModule.PREPARED_SATURN_SKY_SUN;
   assert.doesNotMatch(css, /saturn-starfield\.webp/u);
-  assert.match(client, /PREPARED_SATURN_STARFIELD\.faces\.flatMap/u);
-  assert.match(client, /mountRetainedCubicSky\(\{/u);
+  const { runtimeDefinition: definition } = await import("../runtime/definition.mjs");
+  assert.equal(definition.sky, starfield); assert.equal(definition.sun, sun);
   assert.doesNotMatch(client, /createStar|Math\.random/);
   assert.equal(starfield.schema, "cssearth-prepared-cubic-sky@2");
   assert.equal(starfield.faces.length, 6);
@@ -431,14 +430,14 @@ test("uses the shared prepared cubic starfield and independent Sun", async () =>
   assert.equal(sun.schema, "cssearth-prepared-directional-sun@3");
   assert.equal(sun.bakedIntoStarfield, false);
   assert.equal(sun.billboard, true);
-  assert.match(client, /mountRetainedDirectionalSun/u);
+
 });
 
 test("publishes Saturn through cssEarth's object registry", async () => {
   const [layout, router, client, css, objects] = await Promise.all([
     readFile(new URL("../../../../site/layouts/PlanetLayout.astro", import.meta.url), "utf8"),
     readFile(new URL("../../../../site/scene-router.mjs", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     import("../../../../site/objects.mjs"),
   ]);

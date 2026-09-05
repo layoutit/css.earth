@@ -1,6 +1,5 @@
 import { PREPARED_EARTH_SCENE } from "./preparedScene.mjs";
-
-export const EARTH_CUBIC_CAMERA = Object.freeze({
+export const cameraPlan = Object.freeze({
   cameraModel: "accumulated-matrix3d",
   minimumControlPitchDegrees: 0,
   maximumControlPitchDegrees: 89,
@@ -31,3 +30,6 @@ export const EARTH_CUBIC_CAMERA = Object.freeze({
     maximumZoom: 2,
   }),
 });
+
+// Preparation and runtime consume the same canonical camera.
+export const EARTH_CUBIC_CAMERA = cameraPlan;

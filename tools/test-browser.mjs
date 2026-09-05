@@ -5,7 +5,7 @@ import { spawn } from "node:child_process";
 // isolated worktrees test their own server without touching another checkout.
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 for (const args of [
-  ["site/test/generic-orbit-browser.mjs", baseUrl],
+  ["site/test/object-runtime-browser.mjs", baseUrl],
   ["site/test/prepared-camera-browser.mjs", baseUrl],
   ["site/test/smoke-browser.mjs", baseUrl],
   ["site/test/planet-introduction-browser.mjs", baseUrl],

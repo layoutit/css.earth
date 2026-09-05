@@ -1,88 +1,73 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createMercuryLensImageGroups } from "../runtime/lens-image-groups.mjs";
+import { runtimeDefinition } from "../runtime/definition.mjs";
+import { preparedSelectionFixture, retainedPresentationFixture } from "../../../platform/test/object-runtime-package.mjs";
+const pool = f => f.residency.stats().pools.find(pool => pool.id === "lenses");
 
-function fixture() {
-  const images = [];
-  const groups = createMercuryLensImageGroups({ createImage() {
-    const image = {
-      src: "", naturalWidth: 1, naturalHeight: 1,
-      decode() { return new Promise((resolve, reject) => { this.resolve = resolve; this.reject = reject; }); },
-      removeAttribute(name) {
-        if (name !== "src") return;
-        this.releaseAttempts = (this.releaseAttempts ?? 0) + 1;
-        if (this.failRelease) throw new Error("release failed");
-        this.src = "";
-      },
-    };
-    images.push(image);
-    return image;
-  } });
-  return { images, groups };
-}
-
-test("Mercury partial lens failure releases all siblings and retries with independent identity", async () => {
-  const { images, groups } = fixture();
-  const first = groups.load("interior", ["/outer", "/core", "/section"]);
-  assert.equal(groups.load("interior", ["/outer"]), first);
-  assert.equal(groups.stats().retainedImageCount, 3);
-  images[0].resolve();
-  images[1].reject(new Error("core failed"));
-  await assert.rejects(first, /Prepared image did not decode: \/core/u);
-  assert.ok(images.every(({ src }) => src === ""));
-  assert.equal(groups.stats().retainedImageCount, 0);
-  const retry = groups.load("interior", ["/outer", "/core", "/section"]);
-  images[2].reject(new Error("retired sibling"));
-  for (const image of images.slice(3)) image.resolve();
-  assert.equal((await retry).length, 3);
-  assert.equal(groups.stats().retainedImageCount, 3);
-  groups.destroy();
+test("Mercury partial interior failure retires all siblings and retries independently", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const pending = f.selection.dispatch({ kind: "lens", id: "interior" });
+    const rejection = assert.rejects(pending, /decode/); await f.flush();
+    const original = f.jobs.filter(job => !job.done); assert.equal(original.length, 5);
+    original[0].done = true; original[0].resolve(); original[1].done = true; original[1].reject(new Error("core failed"));
+    await rejection; assert.ok(original.every(job => job.image.src === ""));
+    assert.equal(pool(f).resident, 0); assert.equal(f.stage.dataset.view, undefined);
+    const retry = f.selection.dispatch({ kind: "lens", id: "interior" }); await f.settle(); assert.equal(await retry, true);
+    assert.equal(f.stage.dataset.view, "interior"); assert.equal(pool(f).resident, 5); assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
 });
 
-test("Mercury retirement and disposal release pending images before late native settlement", async () => {
-  const { images, groups } = fixture();
-  const first = groups.load("a", ["/a"]);
-  groups.retainOnly([]);
-  const replacement = groups.load("a", ["/a"]);
-  images[0].resolve();
-  assert.equal(await first, null);
-  assert.equal(images[1].src, "/a");
-  groups.destroy();
-  assert.equal(images[1].src, "");
-  images[1].reject(new Error("destroyed replacement"));
-  assert.equal(await replacement, null);
-  assert.equal(await groups.load("b", ["/b"]), null);
-  assert.equal(images.length, 2);
+test("Mercury supersession and disposal settle without native completion", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const old = f.selection.dispatch({ kind: "lens", id: "interior" }); await f.flush(); const retired = f.jobs.filter(job => !job.done);
+    const winner = f.selection.dispatch({ kind: "lens", id: "enhanced" }); await f.flush();
+    assert.equal(await old, false); assert.ok(retired.every(job => job.image.src === ""));
+    await f.settle(); assert.equal(await winner, true); assert.equal(f.stage.dataset.lens, "enhanced");
+    const pending = f.selection.dispatch({ kind: "lens", id: "interior" }); await f.flush();
+    f.lifetime.destroy(); assert.equal(await pending, false); assert.equal(pool(f).resident, 0);
+    for (const job of f.jobs.filter(job => !job.done)) job.reject(new Error("late")); await f.flush();
+    assert.equal(f.residency.stats().images.entries.length, 0); assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
 });
 
-for (const operation of ["retainOnly", "destroy"]) {
-  test(`Mercury ${operation} releases all image groups even when one native release throws`, async () => {
-    const { images, groups } = fixture();
-    const first = groups.load("a", ["/a-1", "/a-2"]);
-    const second = groups.load("b", ["/b"]);
-    images[0].failRelease = true;
-    assert.throws(() => groups[operation]([]), AggregateError);
-    assert.ok(images.every((image) => image.releaseAttempts === 1));
-    assert.ok(images.slice(1).every((image) => image.src === ""));
-    assert.equal(groups.stats().retainedImageCount, 0);
-    images.forEach((image) => image.reject(new Error("late decode")));
-    assert.deepEqual(await Promise.all([first, second]), [null, null]);
-    groups.destroy();
-  });
-}
+test("Mercury retains one prepared interior and its shared pose animation across lens changes", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const nodes = f.stage.querySelectorAll("*");
+    assert.equal(f.animations.length, 1);
+    f.playback.setAllowed(true);
+    for (const id of ["interior", "enhanced", "interior", "normal", "interior"]) {
+      const request = f.selection.dispatch({ kind: "lens", id }); await f.settle(); assert.equal(await request, true);
+      assert.deepEqual(f.stage.querySelectorAll("*"), nodes); assert.equal(f.animations.length, 1);
+    }
+    const change = f.selection.dispatch({ kind: "cycle", name: "speed", value: 2 }); await f.settle(); await change;
+    f.selection.setView({ ...f.view, controlPitch: 89, revision: 2 }); await f.settle();
+    const pose = f.playback.stats().animations[0];
+    assert.equal(pose.mode, "pose"); assert.equal(pose.running, false); assert.equal(pose.rate, 1);
+    assert.equal(pose.currentTime, 89000);
+    f.lifetime.destroy(); assert.equal(f.animations[0].playState, "idle");
+  } finally { f.restore(); }
+});
 
-test("Mercury partial decode and cleanup failure preserve the primary error and release siblings", async () => {
-  const { images, groups } = fixture();
-  const first = groups.load("a", ["/a-1", "/a-2"]);
-  images[0].failRelease = true;
-  images[0].reject(new Error("primary decode failure"));
-  await assert.rejects(first, (error) => {
-    assert.ok(error instanceof AggregateError);
-    assert.match(error.message, /Prepared image did not decode/u);
-    assert.equal(error.cause, error.errors[0]);
-    return true;
-  });
-  assert.ok(images.every((image) => image.releaseAttempts === 1));
-  images[1].reject(new Error("late sibling"));
-  groups.destroy();
+test("Mercury native cleanup failure releases every other lens owner", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const pending = f.selection.dispatch({ kind: "lens", id: "interior" }); await f.flush();
+    const jobs = f.jobs.filter(job => !job.done);
+    jobs[0].image.removeAttribute = () => { throw new Error("native release failed"); };
+    assert.equal(f.lifetime.destroy().length, 1); assert.equal(await pending, false);
+    assert.ok(jobs.slice(1).every(job => job.image.src === ""));
+    assert.equal(f.residency.stats().images.entries.length, 0); assert.equal(f.listenerCount(), 0);
+  } finally { f.restore(); }
+});
+
+for (const failAtElement of [1, 2, 3]) test(`Mercury partial construction leaves the previous presentation intact (${failAtElement})`, () => {
+  const f = retainedPresentationFixture(runtimeDefinition, { failAtElement });
+  try {
+    f.stage.dataset.lens = "previous";
+    assert.throws(() => runtimeDefinition.createPresentation(f.stage, f.context), /injected native/);
+    f.lifetime.destroy(); assert.equal(f.stage.dataset.lens, "previous");
+  } finally { f.restore(); }
 });

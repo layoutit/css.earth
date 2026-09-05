@@ -92,7 +92,7 @@ test("publishes a prepared retained Saturn interior view", () => {
 
 test("ships lossless DPR assets and keeps view switching declarative", async () => {
   const [client, styles, preparer, manifestText] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../tools/prepare-interior.mjs", import.meta.url), "utf8"),
     readFile(new URL("../source/interior/manifest.json", import.meta.url), "utf8"),
@@ -116,9 +116,6 @@ test("ships lossless DPR assets and keeps view switching declarative", async () 
   assert.match(preparer, /webp\(\{ lossless: true \}\)/u);
   assert.match(client, /stage\.dataset\.view = "interior"/u);
   assert.match(client, /delete stage\.dataset\.view/u);
-  assert.match(client, /interiorAtmosphereCache\.presentation/u);
-  assert.match(client, /interiorAtmosphereCache\.defaultPresentation/u);
-  assert.match(client, /preparedInteriorDecodeRequests\(\)/u);
   assert.doesNotMatch(client,
     /decodeImage\(INTERIOR_ATMOSPHERE_TEXTURE_URL\)/u);
   assert.match(client,
@@ -126,12 +123,10 @@ test("ships lossless DPR assets and keeps view switching declarative", async () 
   assert.doesNotMatch(client,
     /interiorAtmosphereLeaf\.style\.backgroundImage =\s*\n\s*`url/u);
   assert.match(client, /function createPreparedInterior\(plan\)/u);
-  assert.match(client, /viewBank\.mountInterior\(\)/u);
   assert.match(client, /const cutaway = createPreparedInterior\(plan\)/u);
   assert.match(client, /system\.appendChild\(cutaway\)/u);
   assert.match(client, /interiorMounted: true/u);
-  assert.match(client,
-    /runtimeDomGrowthPolicy: "none-retained-scene-complete-at-mount"/u);
+
   assert.match(client, /if \(leaf\.className\) element\.className = leaf\.className/u);
   assert.doesNotMatch(styles,
     /saturn-interior-section-(?:ultraviolet|methane|thermal)/u);

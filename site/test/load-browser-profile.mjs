@@ -1,3 +1,4 @@
+import { isObjectBrowserProfile } from "./object-browser-profile.mjs";
 import assert from "node:assert/strict";
 import { requireObjectControls } from "../scene-contract.mjs";
 
@@ -24,6 +25,8 @@ export async function loadPlanetBrowserProfile(planet) {
     import.meta.url,
   );
   const { browserProfile } = await import(profileUrl.href);
+  assert.ok(isObjectBrowserProfile(browserProfile), `${planet.id}: profile must use the common browser-profile factory`);
+  assert.equal(browserProfile.objectControls, objectControls, `${planet.id}: profile requires actual control content`);
   return validatePlanetBrowserProfile(planet, browserProfile, objectControls);
 }
 

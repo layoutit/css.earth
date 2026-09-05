@@ -52,7 +52,7 @@ try {
     sunCubemapBakeCount: 0,
     materialCompositeRootCount: 1,
     cameraMaterialCount: 0,
-    retainedLeafCount: 450,
+    retainedLeafCount: 452, // 450 body leaves, one material plane, one Sun billboard.
     stableDomIdentity: true,
     animationCount: 1,
     canvasCount: 0,
@@ -519,9 +519,8 @@ async function proveResponsiveZoomProfiles(browser) {
       const sidebarRight = sidePanel ? sidebarBounds?.right ?? 0 : 0;
       const unobstructedSceneWidth = viewportWidth - sidebarRight;
       const sceneCenter = rootBounds.left + rootBounds.width / 2;
-      const availableCenter = sidePanel
-        ? (sidebarRight + viewportWidth) / 2
-        : viewportWidth / 2;
+      // The shared shell now lets the stage fill the viewport behind its dock.
+      const availableCenter = stageBounds.left + stageBounds.width / 2;
       return {
         width: viewportWidth,
         height: viewportHeight,

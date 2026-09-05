@@ -32,7 +32,7 @@ try {
       await page.locator('button[name="lens"][value="buenos-aires-noise"]').click();
       await page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
       await page.waitForFunction(() => {
-        const state = window.__earth.noisePages.stats();
+        const state = window.__earth.runtime.pages().noise;
         return state.desired.length === 16 && !state.activeLoads &&
           state.desired.every(key => state.retained.some(page => page.key === key && page.published));
       }, null, { timeout: 30000 });
@@ -41,7 +41,7 @@ try {
         times: document.getAnimations().map(animation => animation.currentTime),
         animationStates: document.getAnimations().map(animation => animation.playState),
         camera: window.__earth.camera.state(), stable: window.__earth.assertStableDomIdentity(),
-        noise: window.__earth.noisePages.stats(),
+        noise: window.__earth.runtime.pages().noise,
       }));
       assert.equal(after.motion, false, "The object request updates shared playback intent and its control");
       assert.ok(after.times.every(time => time === 0));
