@@ -9,10 +9,17 @@ test("publishes the prepared Saturn shell content", () => {
   assert.equal(PREPARED_SATURN_TITLE.label, "Saturn");
   assert.match(PREPARED_SATURN_PANEL.introduction, /sixth planet from the Sun/u);
   assert.deepEqual(PREPARED_SATURN_PANEL.facts, [
-    { label: "Distance", value: "1.4 billion km" },
-    { label: "Diameter", value: "120,500 km" },
-    { label: "Year", value: "29.4 Earth yrs" },
-    { label: "Day", value: "10.7 hours" },
+    { id: "distance-from-sun", label: "Distance from Sun", value: "1.4 billion km" },
+    { id: "diameter", label: "Diameter", value: "120,500 km" },
+    { id: "orbital-period", label: "Orbital period", value: "29.4 Earth years" },
+    { id: "rotation-period", label: "Rotation period", value: "10.7 hours" },
+    { id: "axial-tilt", label: "Axial tilt", value: "26.73°" },
+    { id: "moon-count", label: "Moons", value: "274" },
+    { id: "ring-system", label: "Rings", value: "Present" },
+  ]);
+  assert.deepEqual(PREPARED_SATURN_PANEL.moreFacts, [
+    { id: "ring-span", label: "Ring span", value: "282,000 km" },
+    { id: "ring-thickness", label: "Ring thickness", value: "10 m" },
   ]);
   assert.equal(PREPARED_SATURN_PANEL.moonCountPolicy.editorial, 274);
   assert.equal(PREPARED_SATURN_PANEL.moonCountPolicy.rendered, 293);

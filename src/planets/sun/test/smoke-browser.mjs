@@ -104,7 +104,7 @@ try {
   }
 
   await page.evaluate(() => {
-    window.__sun.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     const animation = document.querySelector(".sun-body").getAnimations()[0];
     animation.pause();
     animation.currentTime = 0;

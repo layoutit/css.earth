@@ -2,11 +2,14 @@ import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
+import { auditObjectRuntimeOwnership } from "../../tools/check-object-runtime-ownership.mjs";
 import { OBJECTS } from "../objects.mjs";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../runtime-policy.mjs";
 
 test("every object mounts one canonical high-density image bank", async () => {
   assert.equal(CANONICAL_PREPARED_IMAGE_DENSITY, 2);
+  const ownership = await auditObjectRuntimeOwnership();
+  assert.equal(ownership.complete, true);
   for (const objectRecord of OBJECTS) {
     const objectRoot = new URL(
       `../../src/planets/${objectRecord.id}/`,
@@ -20,11 +23,7 @@ test("every object mounts one canonical high-density image bank", async () => {
       ),
       readFile(new URL("runtime/styles.css", objectRoot), "utf8"),
     ]);
-    assert.match(
-      client,
-      /CANONICAL_PREPARED_IMAGE_DENSITY/u,
-      `${objectRecord.id}: client must use the canonical image bank`,
-    );
+    assert.ok(ownership.entries.find(entry => entry.id === objectRecord.id).closure.includes("src/platform/object-runtime.mjs"));
     assert.doesNotMatch(
       client,
       /devicePixelRatio/u,
@@ -55,7 +54,7 @@ test("every object mounts one canonical high-density image bank", async () => {
     for (const { fileName, source } of runtimeSources) {
       assert.doesNotMatch(
         source,
-        /image-set\(/u,
+        /image-set\(|devicePixelRatio/u,
         `${objectRecord.id}/${fileName}: runtime must not select assets by device DPR`,
       );
     }
@@ -80,8 +79,6 @@ test("the shared shell mounts only canonical high-density image assets", async (
     );
   }
   assert.match(sources[0].source, /planet-markers@2x\.webp/u);
-  assert.match(sources[1].source, /planet-markers@2x\.webp/u);
-  assert.match(sources[2].source, /blackhole-marker@2x\.png/u);
-  assert.match(sources[2].source, /supernova-marker@2x\.png/u);
-  assert.match(sources[2].source, /settings-marker@2x\.webp/u);
+  assert.doesNotMatch(sources[1].source, /planet-markers(?:@2x)?\.webp/u);
+  assert.doesNotMatch(sources[2].source, /blackhole-marker|supernova-marker|settings-marker/u);
 });

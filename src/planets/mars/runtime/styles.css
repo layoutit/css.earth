@@ -119,17 +119,8 @@ body {
   background-image: url("/scenes/mars/mars-lens-thermal-poles@2x.webp");
 }
 
-html[data-playing="true"] .mars-body {
-  animation-play-state: running;
-}
 
 @keyframes mars-body-spin {
   from { transform: rotateZ(-145deg); }
   to { transform: rotateZ(-505deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mars-body {
-    animation: none;
-  }
 }

@@ -1,0 +1,45 @@
+---
+import MaterialSymbol from "./MaterialSymbol.astro";
+
+interface Props {
+  objectId: string;
+}
+
+const { objectId } = Astro.props;
+---
+
+<nav class="explorer-rail" aria-label="Explorer">
+  <button
+    class="explorer-rail-button explorer-rail-explore"
+    type="button"
+    aria-label="Planet information"
+    aria-controls={`${objectId}-information`}
+    aria-pressed="true"
+  >
+    <span class="explorer-rail-icon">
+      <MaterialSymbol name="explore" />
+    </span>
+  </button>
+  <button
+    class="explorer-rail-button explorer-rail-about"
+    type="button"
+    aria-label="About"
+    aria-controls={`${objectId}-about`}
+    aria-pressed="false"
+  >
+    <span class="explorer-rail-icon">
+      <MaterialSymbol name="help" />
+    </span>
+  </button>
+  <button
+    class="explorer-rail-button planet-settings-action"
+    type="button"
+    aria-label="Settings"
+    aria-controls={`${objectId}-settings`}
+    aria-pressed="false"
+  >
+    <span class="explorer-rail-icon">
+      <MaterialSymbol name="settings" />
+    </span>
+  </button>
+</nav>

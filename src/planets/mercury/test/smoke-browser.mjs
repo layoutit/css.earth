@@ -64,9 +64,9 @@ try {
     sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
     stable: window.__mercury.assertStableDomIdentity(),
     density: window.__mercury.renderStats.textureStats.selectedPreparedDensity,
-    interiorMounted: window.__mercury.dom.viewBank().interiorMounted,
-    sunBillboardCount: window.__mercury.dom.retainedSunBillboardCount,
-    sunCubemapBakeCount: window.__mercury.dom.retainedSunCubemapBakeCount,
+    interiorMounted: window.__mercury.dom.interiorMounted,
+    sunBillboardCount: document.querySelectorAll(".mercury-directional-sun").length,
+    sunCubemapBakeCount: Number(document.querySelectorAll(".planet-cubic-sky-face .mercury-directional-sun").length),
   }));
   assert.deepEqual(baseline, {
     title: "Mercury - Powered by PolyCSS",
@@ -119,7 +119,7 @@ try {
   assert.deepEqual(await page.evaluate(() => ({
     elements: document.querySelector(".planet-stage").querySelectorAll("*").length,
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
-    viewBank: window.__mercury.dom.viewBank(),
+    viewBank: { interiorMounted: window.__mercury.dom.interiorMounted, retainedInteriorNodeCount: window.__mercury.dom.retainedInteriorNodeCount },
   })), {
     elements: 2242,
     interiorLeaves: 446,
@@ -245,6 +245,7 @@ try {
     control.checked = true;
     control.dispatchEvent(new Event("change", { bubbles: true }));
   });
+  await page.waitForFunction(() => window.__mercury.runtime.selection().committed.shadows === true);
   // Default framing: the Sun stands on screen left (half phase) and the
   // terminator is vertical up to the Sun's ecliptic latitude, north up.
   await page.evaluate(() => window.__mercury.camera.setState({
@@ -315,7 +316,11 @@ try {
     }
     return errors;
   });
-  assert.ok(skyLock.every((error) => error < 1e-6), `sky lock ${skyLock}`);
+  // The scene matrix is read back from the specified style, which Chrome
+  // serialises to six decimals: a 3x3 product of such values carries a few
+  // 1e-6 of rounding. A sky off the scene by any real amount is 1e-2 or more.
+  const SKY_LOCK_TOLERANCE = 1e-5;
+  assert.ok(skyLock.every((error) => error < SKY_LOCK_TOLERANCE), `sky lock ${skyLock}`);
   await page.evaluate(() => window.__mercury.camera.setState({
     controlPitch: window.__mercury.camera.stats().defaultControlPitchDegrees,
     controlYaw: window.__mercury.camera.stats().defaultControlYawDegrees,
@@ -355,8 +360,8 @@ try {
     };
   });
   assert.ok(draggedSkyLock.moved);
-  assert.ok(draggedSkyLock.skyError < 1e-6, `dragged sky ${draggedSkyLock.skyError}`);
-  assert.ok(draggedSkyLock.sunError < 1e-6, `dragged sun ${draggedSkyLock.sunError}`);
+  assert.ok(draggedSkyLock.skyError < SKY_LOCK_TOLERANCE, `dragged sky ${draggedSkyLock.skyError}`);
+  assert.ok(draggedSkyLock.sunError < SKY_LOCK_TOLERANCE, `dragged sun ${draggedSkyLock.sunError}`);
 
   // Astrometric sky: the Milky Way must cross the screen where the J2000
   // galactic frame, Mercury's pole and the ecliptic presentation frame put
@@ -479,7 +484,8 @@ try {
           controlPitch: pitch,
           controlYaw: yaw,
         });
-        samples.push({ pitch, yaw, ...window.__mercury.sky.state() });
+        samples.push({ pitch, yaw, ...window.__mercury.sky.state(),
+          sunViewDirection: window.__mercury.runtime.view().sunViewDirection });
       }
     }
     return samples;
@@ -504,6 +510,7 @@ try {
     control.checked = false;
     control.dispatchEvent(new Event("change", { bubbles: true }));
   });
+  await page.waitForFunction(() => window.__mercury.runtime.selection().committed.shadows === false);
   assert.equal(await page.locator(".mercury-material-root").evaluate(
     (element) => getComputedStyle(element).visibility,
   ), "visible");
@@ -575,6 +582,7 @@ try {
     control.checked = true;
     control.dispatchEvent(new Event("change", { bubbles: true }));
   });
+  await page.waitForFunction(() => window.__mercury.runtime.selection().committed.shadows === true);
   const lodLadder = await page.evaluate(() => {
     const stats = window.__mercury.camera.stats();
     const stage = document.querySelector(".planet-stage");
@@ -607,8 +615,7 @@ try {
         materialImage: document.querySelector(".mercury-material")
           .style.backgroundImage,
         materialFrame: sky.materialFrame,
-        rowStreaming: window.__mercury.renderStats.textureStats
-          .materialCache().active,
+        rowStreaming: sky.lod.rowStreaming,
         stable: window.__mercury.assertStableDomIdentity(),
         elements: stage.querySelectorAll("*").length,
       });
@@ -653,6 +660,7 @@ try {
     control.checked = false;
     control.dispatchEvent(new Event("change", { bubbles: true }));
   });
+  await page.waitForFunction(() => window.__mercury.runtime.selection().committed.shadows === false);
 
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.childElementCount), baseline.stageChildren);
@@ -693,12 +701,14 @@ try {
       control.checked = true;
       control.dispatchEvent(new Event("change", { bubbles: true }));
     });
+    await dpr2Page.waitForFunction(() => window.__mercury.runtime.selection().committed.shadows === true);
     await dpr2Page.evaluate(() => {
       document.querySelector(".mercury-skybox").style.visibility = "hidden";
       const orbit = document.querySelector('input[name="orbit"]');
       orbit.checked = false;
       orbit.dispatchEvent(new Event("change", { bubbles: true }));
     });
+    await dpr2Page.waitForFunction(() => window.__mercury.runtime.selection().committed.orbit === false);
     const lodPhases = [];
     for (const diameter of [40, 17, 12]) {
       const shot = await dpr2Page.evaluate((nextDiameter) => {

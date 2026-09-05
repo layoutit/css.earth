@@ -21,7 +21,7 @@ import {
 import { requireBodyFixedSunDirection } from
   "../../../platform/solar-geometry.mjs";
 import { prepareHeliocentricView } from
-  "../../../platform/heliocentric-view.mjs";
+  "../../../platform/prepare-heliocentric-view.mjs";
 import { PREPARED_MERCURY_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import {
   createProjectiveSurfaceRasterPresentation,

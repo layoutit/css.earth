@@ -5,10 +5,19 @@ export const MOBILE_VIEWPORT_QUERY =
 export const MOBILE_TOUCH_ACTION = "pan-y";
 export const CANONICAL_PREPARED_IMAGE_DENSITY = 2;
 
-export function bindResponsiveOrbitPolicy({ controls, inputSurface, mediaQuery }) {
+export function automaticPlaybackPolicy({ sceneState, motionRequested, documentHidden, reducedMotion }) {
+  const reason = sceneState !== "ready" ? "unavailable"
+    : !motionRequested ? "motion-off"
+      : documentHidden ? "hidden"
+        : reducedMotion ? "reduced-motion" : "allowed";
+  return Object.freeze({ allowed: reason === "allowed", reason });
+}
+
+export function bindResponsiveOrbitPolicy({ controls, inputSurface, mediaQuery, onError = null }) {
   if (typeof controls?.update !== "function" ||
       typeof inputSurface?.style?.removeProperty !== "function" ||
-      typeof mediaQuery?.addEventListener !== "function") {
+      typeof mediaQuery?.addEventListener !== "function" ||
+      (onError !== null && typeof onError !== "function")) {
     throw new TypeError("Responsive orbit policy requires controls, input, and media query.");
   }
   let destroyed = false;
@@ -21,17 +30,39 @@ export function bindResponsiveOrbitPolicy({ controls, inputSurface, mediaQuery }
       inputSurface.style.removeProperty("touch-action");
     }
   };
-  mediaQuery.addEventListener("change", sync);
-  sync();
+  const onChange = () => {
+    try { sync(); } catch (error) {
+      if (onError === null) throw error;
+      try { destroy(); } catch (cleanupError) {
+        onError(new AggregateError([error, cleanupError], error.message, { cause: error }));
+        return;
+      }
+      onError(error);
+    }
+  };
+  mediaQuery.addEventListener("change", onChange);
+  try { sync(); } catch (error) {
+    destroyed = true;
+    const errors = [error];
+    try { mediaQuery.removeEventListener("change", onChange); } catch (failure) { errors.push(failure); }
+    try { inputSurface.style.removeProperty("touch-action"); } catch (failure) { errors.push(failure); }
+    if (errors.length > 1) throw new AggregateError(errors, error.message, { cause: error });
+    throw error;
+  }
   return Object.freeze({
     get mobile() {
       return mediaQuery.matches;
     },
-    destroy() {
+    destroy,
+  });
+  function destroy() {
       if (destroyed) return;
       destroyed = true;
-      mediaQuery.removeEventListener("change", sync);
+      mediaQuery.removeEventListener("change", onChange);
       inputSurface.style.removeProperty("touch-action");
-    },
-  });
+  }
+}
+
+export function isOrbitDragStart({ isPrimary, button }) {
+  return isPrimary && button === 0;
 }

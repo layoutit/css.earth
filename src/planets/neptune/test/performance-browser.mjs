@@ -60,7 +60,7 @@ try {
       })),
   }));
   await page.evaluate(() => {
-    window.__neptune.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__neptuneLongTasks = [];
     window.__neptune.camera.setState({ controlPitch: 0, zoom: 0.8 });
   });

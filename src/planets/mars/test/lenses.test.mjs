@@ -73,17 +73,16 @@ test("switches prepared lenses without filters, canvas, or DOM growth", async ()
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
-  assert.match(client, /selectLens/u);
-  assert.match(client, /lensDecodePromises\.get\(lens\.id\)/u);
-  assert.match(client, /lensDecodePromises\.set\(lens\.id, decoding\)/u);
-  assert.match(client,
-    /lens\.id !== PREPARED_MARS_LENSES\.defaultLens/u);
-  assert.match(client, /await decoding/u);
-  assert.match(client, /destroyed \|\| request !== lensRequest/u);
-  assert.match(client, /stage\.dataset\.lens = lens\.id/u);
-  assert.match(client, /panelControls\?\.publishLens\(activeLens\)/u);
-  assert.match(client, /publishLens\(state\.id\)/u);
-  assert.match(client, /ready: mounted !== null && !destroyed/u);
+  const { runtimeDefinition } = await import("../runtime/definition.mjs");
+  assert.equal(runtimeDefinition.controls.lenses.defaultLens, PREPARED_MARS_LENSES.defaultLens);
+  for (const lens of PREPARED_MARS_LENSES.controls) {
+    const plan = runtimeDefinition.resolvePresentation({
+      selection: { ...runtimeDefinition.initialSelection, lensId: lens.id },
+      view: { skySunViewDirection: runtimeDefinition.sun.referenceViewDirection },
+    });
+    assert.ok(plan.required.includes(`surface:${lens.id}`));
+    assert.ok(plan.required.includes(`poles:${lens.id}`));
+  }
   assert.doesNotMatch(client, /style\.filter|canvas|getContext\(/u);
   assert.match(css, /data-lens="elevation"/u);
   assert.match(css, /data-lens="thermal"/u);

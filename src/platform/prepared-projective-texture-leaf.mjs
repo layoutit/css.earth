@@ -31,7 +31,21 @@ export function scalePreparedBackgroundAddresses(style, scale) {
   style.backgroundSize = scalePreparedPixelLengths(style.backgroundSize, scale);
 }
 
-export function createPreparedProjectiveTextureLeaf(prepared) {
+export function applyPreparedProjectiveLayout(style, layout, rasterScale) {
+  if (!Number.isFinite(rasterScale) || rasterScale < 1) {
+    throw new TypeError("Prepared projective texture raster scale is invalid.");
+  }
+  for (const property of ["width", "height", "backgroundSize"]) {
+    const variable = property === "backgroundSize" ? "" : style.getPropertyValue?.(`--polycss-atlas-${property}`);
+    if (!style[property] && !variable && layout?.[property]) style[property] = layout[property];
+    const preparedValue = style[property] || variable;
+    if (rasterScale > 1 && (!preparedValue || preparedValue === "auto")) {
+      throw new TypeError(`Scaled projective leaf requires explicit prepared ${property}.`);
+    }
+  }
+}
+
+export function createPreparedProjectiveTextureLeaf(prepared, layout = null) {
   const leaf = document.createElement(prepared.tag ?? "s");
   if (prepared.className) leaf.className = prepared.className;
   leaf.style.cssText = prepared.style;
@@ -41,13 +55,12 @@ export function createPreparedProjectiveTextureLeaf(prepared) {
     throw new TypeError("Prepared projective texture layer is incompatible.");
   }
   const rasterScale = layer.rasterScale ?? 1;
-  if (!Number.isFinite(rasterScale) || rasterScale < 1) {
-    throw new TypeError("Prepared projective texture raster scale is invalid.");
-  }
+  applyPreparedProjectiveLayout(leaf.style, layout, rasterScale);
 
   const texture = document.createElement("span");
   texture.className = "polycss-projective-texture";
   texture.style.cssText = prepared.style;
+  applyPreparedProjectiveLayout(texture.style, layout, rasterScale);
   texture.style.position = "absolute";
   texture.style.inset = "0 auto auto 0";
   texture.style.display = "block";
@@ -70,7 +83,9 @@ export function createPreparedProjectiveTextureLeaf(prepared) {
   texture.style.pointerEvents = "none";
 
   leaf.style.transform = `matrix3d(${layer.frameMatrix})`;
-  leaf.style.transformStyle = "flat";
+  // The frame and texture matrices form one projective transform. Flattening
+  // between them distorts texel boundaries into wedges at oblique angles.
+  leaf.style.transformStyle = "preserve-3d";
   for (const property of [
     "--polycss-atlas-width",
     "--polycss-atlas-height",

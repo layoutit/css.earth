@@ -5,9 +5,10 @@ import {
 
 // Mounts the retained DOM of a body's heliocentric neighbourhood and moves it
 // with the camera:
-//   - the Sun, a billboard in `sunRoot`, a perspective root that shares the
-//     body camera's eye and is painted beneath the body's root, so the body
-//     covers the Sun when the Sun is beyond it;
+//   - the Sun, a billboard in its own perspective root (`sunRoot`, inserted
+//     before the body's camera root so it paints beneath it and the body
+//     covers the Sun when the Sun is beyond it); the shared orbit gives both
+//     roots the same eye;
 //   - the orbit, a fixed pool of screen-space line pieces in an overlay root
 //     that shares the camera root's box, written from the projection's
 //     camera-relative float64 result;
@@ -18,8 +19,8 @@ import {
 // Everything is created once; publication only rewrites transforms and
 // visibility on the retained nodes.
 export function mountRetainedHeliocentricView({
-  sunRoot,
   host,
+  before = null,
   plan,
   objectId,
   sunImageUrl,
@@ -27,7 +28,8 @@ export function mountRetainedHeliocentricView({
   orbitPoolSpare = 48,
 }) {
   validatePreparedHeliocentricView(plan);
-  if (!(sunRoot instanceof HTMLElement) || !(host instanceof HTMLElement) ||
+  if (!(host instanceof HTMLElement) ||
+      (before !== null && !(before instanceof HTMLElement)) ||
       !/^[a-z][a-z0-9-]*$/u.test(objectId) || typeof sunImageUrl !== "string" ||
       typeof markerSprite?.url !== "string" ||
       !Number.isSafeInteger(markerSprite.index) || markerSprite.index < 0 ||
@@ -37,6 +39,11 @@ export function mountRetainedHeliocentricView({
     throw new TypeError("Retained heliocentric view mount arguments are invalid.");
   }
   const document = host.ownerDocument;
+  const sunRoot = document.createElement("div");
+  sunRoot.className =
+    `planet-heliocentric-sun-camera planet-render-root ${objectId}-sun-camera`;
+  sunRoot.ariaHidden = "true";
+  host.insertBefore(sunRoot, before);
   const sun = document.createElement("s");
   // `<object>-directional-sun` is kept as an alias: it is the selector the
   // object's existing sky tests isolate the Sun by.
@@ -90,6 +97,9 @@ export function mountRetainedHeliocentricView({
   let destroyed = false;
 
   return Object.freeze({
+    plan,
+    root: sunRoot,
+    sunRoot,
     sun,
     overlay,
     marker,
@@ -146,7 +156,7 @@ export function mountRetainedHeliocentricView({
     destroy() {
       if (destroyed) return;
       destroyed = true;
-      sun.remove();
+      sunRoot.remove();
       overlay.remove();
     },
   });

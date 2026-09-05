@@ -26,17 +26,15 @@ const prepared = Object.freeze({
   retrievedAt: editorial.retrievedAt,
   introduction: editorial.introduction,
   facts: Object.freeze([
-    Object.freeze({ label: "Radius", value: `${physical.meanRadiusKm.toLocaleString("en-US")} km` }),
-    Object.freeze({ label: "Earth distance", value: `${physical.meanOrbitRadiusKm.toLocaleString("en-US")} km` }),
-    Object.freeze({ label: "Orbit", value: `${physical.orbitalPeriodDays} days` }),
-    Object.freeze({ label: "Density", value: `${physical.meanDensityGPerCm3} g/cm³` }),
+    Object.freeze({ id: "distance-from-earth", label: "Distance from Earth", value: `${physical.meanOrbitRadiusKm.toLocaleString("en-US")} km` }),
+    Object.freeze({ id: "radius", label: "Radius", value: `${physical.meanRadiusKm.toLocaleString("en-US")} km` }),
+    Object.freeze({ id: "orbital-period", label: "Orbital period", value: `${physical.orbitalPeriodDays} days` }),
+    Object.freeze({ id: "rotation-period", label: "Rotation period", value: "Synchronous" }),
+    Object.freeze({ id: "orbital-inclination", label: "Orbital inclination", value: `${physical.inclinationDegrees}°` }),
+    Object.freeze({ id: "orbital-eccentricity", label: "Orbital eccentricity", value: String(physical.eccentricity) }),
+    Object.freeze({ id: "density", label: "Density", value: `${physical.meanDensityGPerCm3} g/cm³` }),
   ]),
-  moreFacts: Object.freeze([
-    Object.freeze({ label: "NAIF id", value: String(physical.naifId) }),
-    Object.freeze({ label: "Inclination", value: `${physical.inclinationDegrees}°` }),
-    Object.freeze({ label: "Eccentricity", value: String(physical.eccentricity) }),
-    Object.freeze({ label: "Rotation", value: "synchronous" }),
-  ]),
+  moreFacts: Object.freeze([]),
 });
 await writeFile(
   resolve(import.meta.dirname, "../site/preparedPanel.mjs"),

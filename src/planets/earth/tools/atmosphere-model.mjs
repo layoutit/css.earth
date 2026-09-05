@@ -1,3 +1,6 @@
+import { prepareAtmosphereFrame } from "../../../../tools/prepared-atmosphere.mjs";
+import { PREPARED_EARTH_SKY_SUN } from "../runtime/preparedSkySun.mjs";
+import { viewSunDirectionToPreparedLightDirection } from "../../../platform/directional-sun-coordinate.mjs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import {
@@ -158,4 +161,39 @@ function deepFreeze(value) {
     if (nested && typeof nested === "object") deepFreeze(nested);
   }
   return Object.freeze(value);
+}
+
+export const EARTH_ATMOSPHERE_ILLUMINATION = Object.freeze({
+  frameCount: 128, minimumLightViewZ: -1, maximumLightViewZ: 1,
+  baseLightAzimuthDegrees: 0,
+});
+export const EARTH_ATMOSPHERE_DEFAULT_FRAME = Math.round(
+  (1 + viewSunDirectionToPreparedLightDirection(PREPARED_EARTH_SKY_SUN.referenceViewDirection)[2]) / 2 *
+    (EARTH_ATMOSPHERE_ILLUMINATION.frameCount - 1));
+
+export function earthAtmosphereProfile(model) {
+  const response = model.presentationResponse;
+  return {
+    radiusKm: model.planetRadiusKm, heightKm: model.atmosphereHeightKm,
+    layers: [
+      { ...model.rayleigh, phase: "rayleigh", weight: 1 },
+      { ...model.mie, phase: "mie", weight: response.cleanRoomTransfer.mieContribution },
+    ],
+    transfer: { mode: "scattering-rgb",
+      intensity: model.sunIntensity, exposure: response.observedResponse.exposure,
+      alphaScale: response.observedResponse.skyAlphaLuminanceScale,
+      maximumAlpha: response.cleanRoomTransfer.earthMaximumOpacity, limbConcentration: true },
+  };
+}
+
+export function prepareEarthAtmosphereFrame({ size, frame = EARTH_ATMOSPHERE_DEFAULT_FRAME, model }) {
+  const z = -1 + 2 * frame / (EARTH_ATMOSPHERE_ILLUMINATION.frameCount - 1);
+  if (!Number.isInteger(frame) || Math.abs(z) > 1) throw new RangeError("Invalid Earth atmosphere frame.");
+  // The existing prepared material plane spans the atmospheric outer radius.
+  const radius = size * .468 / model.outerRadiusRatio;
+  return prepareAtmosphereFrame({
+    width: size, disc: { centerX: size / 2, centerY: size / 2, radiusX: radius, radiusY: radius },
+    profile: earthAtmosphereProfile(model),
+    lightDirection: [Math.sqrt(Math.max(0, 1 - z * z)), 0, z],
+  });
 }

@@ -6,10 +6,9 @@ import {
   viewSunDirectionToPreparedLightDirection,
 } from "./directional-sun-coordinate.mjs";
 import { requireBodyFixedSunDirection } from "./solar-geometry.mjs";
-import {
-  cssDirectionToViewDirection,
-  prepareSunReferenceViewDirection,
-} from "./solar-view-direction.mjs";
+import { prepareSunReferenceViewDirection } from
+  "./prepare-sun-view-direction.mjs";
+import { cssDirectionToViewDirection } from "./solar-view-direction.mjs";
 
 // The retained sprite projects `forward = -z` and hides the Sun when forward
 // is not positive (see directional-sun-runtime.mjs).

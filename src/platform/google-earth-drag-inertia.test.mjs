@@ -1,27 +1,53 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { projectSphereDrag } from "./sphere-drag.mjs";
 
 import {
   advanceGoogleEarthDragThrow,
   createGoogleEarthDragHistory,
-  estimateGoogleEarthDragThrow,
+  estimateGoogleEarthDragThrow as estimateDragThrow,
   GOOGLE_EARTH_DRAG_INERTIA,
   googleEarthDirectAngularDegreesPerTrackballRadius,
+  directPitchResponseForZoom,
   projectGoogleEarthTrackballDelta,
   recordGoogleEarthDragSample,
   resetGoogleEarthDragHistory,
 } from "./google-earth-drag-inertia.mjs";
 
+const trackball = {centerX:346.5,centerY:300,surfaceRadius:144.65263161811257,
+  focalLength:598.73636504};
+const estimateGoogleEarthDragThrow = options => estimateDragThrow({trackball,...options});
+
 test("binds the Google Earth Pro trackball and throw constants", () => {
   assert.equal(GOOGLE_EARTH_DRAG_INERTIA.averagingFrameCount, 5);
   assert.equal(GOOGLE_EARTH_DRAG_INERTIA.historyCapacity, 16);
-  assert.equal(GOOGLE_EARTH_DRAG_INERTIA.minimumThrowDisplacementPixels, 5);
+  assert.equal(GOOGLE_EARTH_DRAG_INERTIA.minimumThrowDisplacementPixels, 2.5);
   assert.equal(GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds, 100);
   assert.equal(
     GOOGLE_EARTH_DRAG_INERTIA.directAngularDegreesPerTrackballRadius,
     47.5,
   );
-  assert.equal(GOOGLE_EARTH_DRAG_INERTIA.directPitchResponse, 1);
+  assert.equal(
+    GOOGLE_EARTH_DRAG_INERTIA.directPitchResponse,
+    1,
+  );
+  assert.equal(
+    GOOGLE_EARTH_DRAG_INERTIA.directPitchResponseEvidence
+      .calibrationScenarios.length,
+    2,
+  );
+  assert.equal(
+    directPitchResponseForZoom(1.0748129675810474),
+    1.2025381100738586,
+  );
+  assert.equal(
+    directPitchResponseForZoom(1.7793002915451894),
+    1.3504854183805297,
+  );
+  assert.ok(
+    directPitchResponseForZoom(1.4599145299145297) >
+      directPitchResponseForZoom(1.0748129675810474),
+  );
   assert.equal(
     googleEarthDirectAngularDegreesPerTrackballRadius(1.7793002915451894),
     40.81009111550928,
@@ -92,6 +118,10 @@ test("projects drag distance through the fitted apparent-disc response", () => {
   });
   assert.ok(diagonal.pitchDegrees > 0);
   assert.ok(diagonal.yawDegrees > 0);
+  assert.equal(
+    diagonal.pitchDegrees * GOOGLE_EARTH_DRAG_INERTIA.directPitchResponse,
+    diagonal.yawDegrees,
+  );
 });
 
 test("retains sixteen angular samples in fixed-capacity storage", () => {
@@ -114,11 +144,11 @@ test("retains sixteen angular samples in fixed-capacity storage", () => {
   assert.equal(history.x, xStorage);
 });
 
-test("requires a fresh five-pixel release and averages angular motion", () => {
+test("requires a fresh release displacement change and averages angular motion", () => {
   const history = createGoogleEarthDragHistory();
   for (let index = 0; index < 8; index += 1) {
     recordGoogleEarthDragSample(history, {
-      x: index * 10,
+      x: index * 10 + (index === 7 ? 6 : 0),
       y: index * -5,
       timestamp: index * (1000 / 60),
       pitch: index * -0.5,
@@ -132,8 +162,16 @@ test("requires a fresh five-pixel release and averages angular motion", () => {
   });
   assert.ok(throwState);
   assert.equal(throwState.averagingSampleCount, 6);
-  assert.ok(Math.abs(throwState.yawDegreesPerMillisecond - 0.06) < 1e-12);
-  assert.ok(Math.abs(throwState.pitchDegreesPerMillisecond + 0.03) < 1e-12);
+  const averagingMilliseconds = 5 * (1000 / 60) + 10;
+  assert.ok(Math.abs(
+    throwState.yawDegreesPerMillisecond - 5 / averagingMilliseconds,
+  ) < 1e-12);
+  assert.ok(Math.abs(
+    throwState.pitchDegreesPerMillisecond + 2.5 / averagingMilliseconds,
+  ) < 1e-12);
+  assert.ok(Math.abs(
+    throwState.averagingMilliseconds - averagingMilliseconds,
+  ) < 1e-12);
 
   const belowGate = createGoogleEarthDragHistory();
   recordGoogleEarthDragSample(belowGate, {
@@ -155,6 +193,35 @@ test("requires a fresh five-pixel release and averages angular motion", () => {
   }), null);
 });
 
+test("includes the final release pause in launch velocity", () => {
+  const history = createGoogleEarthDragHistory();
+  for (let index = 0; index < 4; index += 1) {
+    recordGoogleEarthDragSample(history, {
+      x: index * 12 + (index === 3 ? 6 : 0),
+      y: 0,
+      timestamp: index * 16,
+      pitch: 0,
+      yaw: index * 2,
+    });
+  }
+  const immediate = estimateGoogleEarthDragThrow({
+    history,
+    releaseTimestamp: 48,
+  });
+  const paused = estimateGoogleEarthDragThrow({
+    history,
+    releaseTimestamp: 138,
+  });
+  assert.ok(immediate);
+  assert.ok(paused);
+  assert.equal(paused.averagingSampleCount, 3);
+  assert.equal(paused.averagingMilliseconds, 122);
+  assert.ok(
+    paused.yawDegreesPerMillisecond <
+      immediate.yawDegreesPerMillisecond / 2,
+  );
+});
+
 test("caps launch velocity and applies the native frame-time decay", () => {
   const history = createGoogleEarthDragHistory();
   recordGoogleEarthDragSample(history, {
@@ -166,9 +233,17 @@ test("caps launch velocity and applies the native frame-time decay", () => {
   recordGoogleEarthDragSample(history, {
     x: 200, y: -200, timestamp: 2, pitch: -200, yaw: 200,
   });
-  const throwState = estimateGoogleEarthDragThrow({
+  assert.equal(estimateGoogleEarthDragThrow({
     history,
     releaseTimestamp: 2,
+  }).averagingSampleCount, 3,
+  "the native release can launch from a press and two movements");
+  recordGoogleEarthDragSample(history, {
+    x: 450, y: -450, timestamp: 3, pitch: -450, yaw: 450,
+  });
+  const throwState = estimateGoogleEarthDragThrow({
+    history,
+    releaseTimestamp: 3,
   });
   assert.equal(throwState.pitchDegreesPerMillisecond, -0.03);
   assert.equal(throwState.yawDegreesPerMillisecond, 0.09);
@@ -203,4 +278,122 @@ test("stops only after velocity reaches 0.33 percent of launch", () => {
     frames += 1;
   }
   assert.ok(frames >= 405 && frames <= 410, `unexpected frame count ${frames}`);
+});
+
+test("release projects averaged pointer velocity at the endpoint after ring wrap", () => {
+  const history = createGoogleEarthDragHistory();
+  const storage = history.x;
+  for (let i = 0; i < 24; i++) {
+    recordGoogleEarthDragSample(history, {
+      x: 200 + i * 3 + (i === 23 ? 6 : 0), y: 50 + i * 3, timestamp: i * 40,
+      pitch: i * 0.25, yaw: i * 0.5,
+    });
+  }
+  const launch = estimateGoogleEarthDragThrow({ history, releaseTimestamp: 925 });
+  const frameMilliseconds = 1000 / 60;
+  const intervals = launch.averagingSampleCount - 1;
+  const rawExpected = projectSphereDrag({previousX:275,previousY:119,
+    currentX:275+(intervals*3+6)/launch.averagingMilliseconds*frameMilliseconds,
+    currentY:119+intervals*3/launch.averagingMilliseconds*frameMilliseconds,
+    ...trackball,radius:trackball.surfaceRadius});
+  const expected = rawExpected;
+  const sine = Math.hypot(...expected.slice(0,3));
+  const scale = 2*Math.atan2(sine,expected[3])/sine/frameMilliseconds;
+  assert.deepEqual(launch.launchRotation,expected);
+  expected.slice(0,3).forEach((v,i)=>assert.ok(Math.abs(launch.angularVelocity[i]-v*scale)<1e-12));
+  const offAxis = { ...trackball, opticalCenterX:trackball.centerX-25,
+    opticalCenterY:trackball.centerY+40 };
+  const shifted = estimateDragThrow({ history, trackball:offAxis, releaseTimestamp:925 });
+  const shiftedExpected = projectSphereDrag({ previousX:275, previousY:119,
+    currentX:275+(intervals*3+6)/launch.averagingMilliseconds*frameMilliseconds,
+    currentY:119+intervals*3/launch.averagingMilliseconds*frameMilliseconds,
+    ...offAxis, radius:offAxis.surfaceRadius });
+  assert.deepEqual(shifted.launchRotation,shiftedExpected);
+  assert.notDeepEqual(shifted.angularVelocity,launch.angularVelocity);
+  assert.ok(Math.abs(Math.hypot(...shifted.angularVelocity)-Math.hypot(...launch.angularVelocity))<1e-12);
+  assert.equal(shifted.averagingMilliseconds,launch.averagingMilliseconds);
+  assert.equal(history.x, storage);
+  assert.equal(storage.length, 16);
+  assert.equal(estimateGoogleEarthDragThrow({ history, releaseTimestamp: 1021 }), null);
+  resetGoogleEarthDragHistory(history);
+  assert.equal(history.x, storage);
+  assert.equal(estimateGoogleEarthDragThrow({ history, releaseTimestamp: 925 }), null);
+});
+
+test("legacy control velocity caps do not rescale the physical trackball throw", () => {
+  const launches = [];
+  for (const controlScale of [1,100]) {
+    const history = createGoogleEarthDragHistory();
+    for (let i=0;i<4;i++) recordGoogleEarthDragSample(history,{
+      x:300+i*10+(i===3?6:0),y:280+i*10,timestamp:i*10,
+      pitch:i*controlScale,yaw:i*controlScale,
+    });
+    launches.push(estimateGoogleEarthDragThrow({history,releaseTimestamp:30}));
+  }
+  assert.deepEqual(launches[0].angularVelocity,launches[1].angularVelocity);
+  assert.ok(Math.hypot(...launches[0].angularVelocity)>0);
+});
+
+test("constant pointer steps do not throw, including after ring wrap", () => {
+  for (const count of [4, 13, 40]) {
+    const history = createGoogleEarthDragHistory();
+    for (let i = 0; i < count; i++) recordGoogleEarthDragSample(history, {
+      x: 261 + i * 4.5, y: 288 + i * 1.2,
+      timestamp: i * 25, pitch: i, yaw: i * 2,
+    });
+    assert.equal(estimateGoogleEarthDragThrow({
+      history, releaseTimestamp: (count - 1) * 25 + 15,
+    }), null);
+  }
+});
+
+test("accelerating release uses the change from two movement samples earlier", () => {
+  for (const finalStep of [6.99, 7, 9.5]) {
+    const history = createGoogleEarthDragHistory();
+    let x = 261;
+    for (let i = 0; i < 13; i++) {
+      if (i > 0) x += i === 12 ? finalStep : 4.5;
+      recordGoogleEarthDragSample(history, {
+        x, y: 288, timestamp: i * 25, pitch: 0, yaw: i,
+      });
+    }
+    assert.equal(estimateGoogleEarthDragThrow({
+      history, releaseTimestamp: 315,
+    }) !== null, finalStep >= 7);
+  }
+});
+
+test("a reversal with a four-pixel release change still coasts", () => {
+  const history = createGoogleEarthDragHistory();
+  const deltas = [[0,0],[5,2],[5,1],[5,2],[5,1],[5,2],[5,1],
+    [-10,2],[-10,1],[-10,2],[-10,1],[-10,5],[-10,5]];
+  let x=575,y=290;
+  for (const [i,[dx,dy]] of deltas.entries()) {
+    x+=dx;y+=dy;
+    recordGoogleEarthDragSample(history,{x,y,timestamp:i*38,pitch:y-290,yaw:x-575});
+  }
+  const launch=estimateGoogleEarthDragThrow({history,releaseTimestamp:12*38+15,
+    frameMilliseconds:38});
+  assert.ok(launch);
+  assert.ok(launch.angularVelocity[1]<0);
+});
+
+test("release distinguishes equal adjacent steps from the two-step history comparison", () => {
+  // The reference release reads the newest movement and the movement two
+  // slots earlier. These cases distinguish that rule from adjacent deltas.
+  for (const padding of [0, 20]) {
+    for (const [steps, shouldCoast] of [[[10, 20, 20], true], [[10, 20, 10], false]]) {
+      const history = createGoogleEarthDragHistory();
+      let x = 260;
+      recordGoogleEarthDragSample(history, { x, y:300, timestamp:0, pitch:0, yaw:0 });
+      for (const [index, step] of [...Array(padding).fill(1), ...steps].entries()) {
+        x += step;
+        recordGoogleEarthDragSample(history, {
+          x, y:300, timestamp:(index + 1) * 20, pitch:0, yaw:x - 260,
+        });
+      }
+      assert.equal(estimateGoogleEarthDragThrow({ history,
+        releaseTimestamp:(padding + steps.length) * 20 + 1 }) !== null, shouldCoast);
+    }
+  }
 });

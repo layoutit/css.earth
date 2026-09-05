@@ -104,7 +104,7 @@ try {
       stableDomIdentity: window.__mercury.assertStableDomIdentity(),
       selectedPreparedDensity:
         window.__mercury.renderStats.textureStats.selectedPreparedDensity,
-      materialCache: window.__mercury.renderStats.textureStats.materialCache(),
+      materialCache: window.__mercury.runtime.resources().pools.find(pool => pool.id === "lighting"),
       cameraTransport: window.__mercury.camera.stats(),
     };
   });
@@ -131,6 +131,9 @@ try {
       compositedLayers: compositedLayerCount,
     },
   };
+  // Preserve measured failures as evidence as well as successful runs.
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
   assert.ok(report.initialRetainedNodeCount <=
     SATURN_STANDARD_MAX_INITIAL_RETAINED_NODES);
   assert.ok(report.interactiveRetainedNodeCount <=
@@ -143,13 +146,11 @@ try {
   assert.equal(report.cameraTransport.cameraModel, "accumulated-matrix3d");
   assert.equal(report.cameraTransport.pitchBounded, false);
   assert.equal(report.cameraTransport.yawBounded, false);
-  assert.ok(report.cameraTransport.runtimeTransformStringWrites > 0);
-  assert.equal(report.materialCache.maximumRetainedRowCount, 3);
-  assert.ok(report.materialCache.retainedRowCount <= 3);
+  assert.ok(report.cameraTransport.publications > 0);
+  assert.equal(report.materialCache.capacity, 3);
+  assert.ok(report.materialCache.nativeSlots <= 3);
   assert.ok(report.synchronousPublicationMilliseconds < 50);
   assert.ok(report.framePublicationMilliseconds.p95 < 35);
-  await mkdir(dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
   console.log(JSON.stringify(report, null, 2));
 } finally {
   await browser.close();

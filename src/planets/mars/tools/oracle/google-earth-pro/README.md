@@ -131,3 +131,64 @@ The implementation-ready contract is
 The remaining unproven fields are native pointer-drag easing/inertia, a
 repeatably pinned timeline epoch, roll and non-default FOV, and alternate native
 save-render aspect ratios.
+
+## Repeatable interaction suite
+
+`pnpm oracle:interactions --config <local-config.json>` runs the gesture corpus,
+three regression gestures, native repeats, Chrome replay, and a visual report.
+The regressions cover sky drag across the limb, a wheel event while the pointer
+is held, and a click that stops coasting. Other cases cover drag release,
+zoom, repeated double clicks, and interruptions between motion types.
+
+The local configuration identifies existing, owned oracle artifacts:
+
+```json
+{
+  "appRoot": "/absolute/repo/.local/oracles/google-earth-pro/owned-headless-clone",
+  "renderHook": "/absolute/repo/output/playwright/owned-hook.dylib",
+  "seedAudit": "/absolute/repo/output/playwright/seed/draws.jsonl",
+  "outputRoot": "/absolute/worktree/output/playwright/interaction-suite",
+  "browserUrl": "http://127.0.0.1:4210/mars/",
+  "pointerTransport": "qt",
+  "repeatCount": 3,
+  "evidenceRoot": "/absolute/repo"
+}
+```
+
+`evidenceRoot` defaults to the current checkout. Set it when an isolated
+worktree reuses the canonical checkout's local oracle. It must contain the
+calibration master, prepared calibration atlases, cache address index, and
+initial browser registration used by the recorder. These inputs are local
+analysis artifacts; the suite verifies their hashes before comparing frames.
+The native clone must be inside that root's `.local/oracles` directory.
+The recorder refuses to launch while another Google Earth process is running.
+
+Use `--resume` to continue the same configuration. Use `--resume --replay` to
+capture changed browser code while retaining native records and prior browser
+captures. `--only <scenario-id>` selects a case for a fresh output directory;
+`--native-only` records native evidence without starting Chrome. If
+`browserUrl` is omitted, the runner starts and closes an isolated Astro server.
+
+The report includes two comparisons:
+
+- Natural clock: Chrome receives the recorded native gestures, with its actual
+  delivery delay and frame cadence retained in the evidence.
+- Controlled frames: Chrome receives the native consumed pointer history and
+  native frame intervals. It computes its own camera state; native camera
+  poses are never replayed into the application.
+
+Each video shows native, browser, and absolute RGB difference multiplied by
+four. The report separates camera rotation, apparent radius, projected center,
+input delivery delay, and variation between native repeats. Frame identity,
+initial registration, source pixels, and browser resource bytes are checked.
+A measured case establishes coverage; it does not by itself establish parity.
+Qt delivery and synchronous native pixel readback do not prove physical input
+latency or presentation timing.
+
+The application uses one controller in `src/platform/cubic-sky-runtime.mjs` for
+all registered objects. Native calibration uses Mars; the `OBJECTS`-derived
+Chrome conformance suite checks shared behavior at DPR 1 and DPR 2. The
+prepared rendering lens remains separate from the native interaction rays.
+Flight easing and interrupted-flight trajectories still require numeric
+comparison; this suite reports residuals instead of treating successful
+captures as an exact match.

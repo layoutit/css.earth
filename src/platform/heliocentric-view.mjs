@@ -3,9 +3,11 @@
 // the body-centred presentation frame the retained scene is prepared in, plus
 // the camera-relative projection that puts them on screen.
 //
-// Preparation (`prepareHeliocentricView`) runs in the object's prepare tools
-// and only transports orbital facts from the checked-in solar geometry into
-// the scene frame; the vertex ring is static geometry and is prepared here.
+// Preparation (`prepareHeliocentricView`, prepare-heliocentric-view.mjs) runs
+// in the object's prepare tools and only transports orbital facts from the
+// checked-in solar geometry into the scene frame; the vertex ring is static
+// geometry prepared there. This module is runtime-only: it carries no solar
+// geometry, so the shared runtime closure stays free of per-body catalogues.
 // Projection (`projectHeliocentricView`) runs per camera publication: it
 // resolves every position relative to the camera in float64, clips the orbit
 // against the near plane and a padded frustum, hides the parts of the orbit
@@ -21,167 +23,11 @@
 // (`Rx(pitch) Ry(yaw)`); the camera looks down -z from `(0, 0, distance)`
 // world units in front of the body's centre after that rotation.
 
-import {
-  ASTRONOMICAL_UNIT_KILOMETERS,
-  requireBodyFixedOrbitNormal,
-  requireBodyFixedSunDirection,
-  requireHeliocentricOrbit,
-} from "./solar-geometry.mjs";
-
 export const PREPARED_HELIOCENTRIC_VIEW_SCHEMA =
   "cssearth-prepared-heliocentric-view@1";
 
 // IAU 2015 resolution B3 nominal solar radius.
 export const NOMINAL_SOLAR_RADIUS_KILOMETERS = 695700;
-
-const UNIFORM_ORBIT_SEGMENTS = 360;
-// Chords right at the body are refined by halving so the polyline stays
-// straight through the body as the camera closes in on it.
-const LOCAL_REFINEMENT_HALVINGS = 8;
-
-export function prepareHeliocentricView({
-  bodyId,
-  presentationFrame,
-  bodyRadiusUnits,
-  bodyRadiusKilometers,
-  sunSprite,
-}) {
-  if (!/^[a-z][a-z0-9-]*$/u.test(bodyId ?? "") ||
-      typeof presentationFrame?.toPresentation !== "function" ||
-      !Array.isArray(presentationFrame.basis) ||
-      !positive(bodyRadiusUnits) || !positive(bodyRadiusKilometers) ||
-      !positive(sunSprite?.opaqueCoreDiameterShare) ||
-      !Number.isSafeInteger(sunSprite.imagePixels) ||
-      sunSprite.imagePixels <= 0) {
-    throw new TypeError("Heliocentric view preparation arguments are invalid.");
-  }
-  const basisDeterminant = determinant(presentationFrame.basis);
-  if (Math.abs(basisDeterminant - 1) > 1e-9) {
-    throw new RangeError(
-      "The presentation frame must be a proper rotation for orbital cross " +
-        "products to survive the change of frame.",
-    );
-  }
-  const orbit = requireHeliocentricOrbit(bodyId);
-  const kilometersPerUnit = bodyRadiusKilometers / bodyRadiusUnits;
-  const unitsPerAu = ASTRONOMICAL_UNIT_KILOMETERS / kilometersPerUnit;
-  const sunDirection = normalize(presentationFrame.toPresentation(
-    requireBodyFixedSunDirection(bodyId),
-  ));
-  const orbitNormal = normalize(presentationFrame.toPresentation(
-    requireBodyFixedOrbitNormal(bodyId),
-  ));
-  const perihelionDirection = normalize(presentationFrame.toPresentation(
-    orbit.perihelionDirection,
-  ));
-  if (Math.abs(dot(orbitNormal, perihelionDirection)) > 1e-9) {
-    throw new RangeError("Perihelion direction is not in the orbital plane.");
-  }
-  // Direction of motion at perihelion; true anomaly grows along it.
-  const perihelionMotion = normalize(cross(orbitNormal, perihelionDirection));
-  const semiMajorAxisUnits = orbit.semiMajorAxisAu * unitsPerAu;
-  const eccentricity = orbit.eccentricity;
-  const semiMinorAxisUnits = semiMajorAxisUnits *
-    Math.sqrt(1 - eccentricity * eccentricity);
-  const sunDistanceUnits = orbit.heliocentricDistanceAu * unitsPerAu;
-  const sunPosition = scale(sunDirection, sunDistanceUnits);
-  // The Sun sits at a focus; the centre is a·e from it, away from perihelion.
-  const center = add(
-    sunPosition,
-    scale(perihelionDirection, -semiMajorAxisUnits * eccentricity),
-  );
-  const majorAxis = scale(perihelionDirection, semiMajorAxisUnits);
-  const minorAxis = scale(perihelionMotion, semiMinorAxisUnits);
-  const pointAt = (eccentricAnomaly) => add(
-    center,
-    add(
-      scale(majorAxis, Math.cos(eccentricAnomaly)),
-      scale(minorAxis, Math.sin(eccentricAnomaly)),
-    ),
-  );
-  const trueAnomaly = orbit.trueAnomalyDegrees * Math.PI / 180;
-  const bodyEccentricAnomaly = 2 * Math.atan2(
-    Math.sqrt(1 - eccentricity) * Math.sin(trueAnomaly / 2),
-    Math.sqrt(1 + eccentricity) * Math.cos(trueAnomaly / 2),
-  );
-  const bodyResidual = magnitude(pointAt(bodyEccentricAnomaly));
-  if (bodyResidual > 1e-6 * semiMajorAxisUnits) {
-    throw new RangeError(
-      `The body is ${bodyResidual} units off its own orbit; the orbital ` +
-        "facts disagree with the Sun direction.",
-    );
-  }
-  const step = 2 * Math.PI / UNIFORM_ORBIT_SEGMENTS;
-  const offsets = new Set();
-  for (let index = 0; index < UNIFORM_ORBIT_SEGMENTS; index += 1) {
-    offsets.add(index * step);
-  }
-  for (let halving = 1; halving <= LOCAL_REFINEMENT_HALVINGS; halving += 1) {
-    const local = step / 2 ** halving;
-    offsets.add(local);
-    offsets.add(2 * Math.PI - local);
-  }
-  const vertices = [...offsets].sort((a, b) => a - b).map((offset, index) =>
-    index === 0
-      ? Object.freeze([0, 0, 0])
-      : Object.freeze(pointAt(bodyEccentricAnomaly + offset).map(round)));
-  const maximumExtentUnits = vertices.reduce(
-    (extent, vertex) => Math.max(extent, magnitude(vertex)),
-    0,
-  );
-  const sunRadiusUnits = NOMINAL_SOLAR_RADIUS_KILOMETERS / kilometersPerUnit;
-  return Object.freeze({
-    schema: PREPARED_HELIOCENTRIC_VIEW_SCHEMA,
-    model: "body-centred-true-ellipse-and-sun-at-observed-distance",
-    bodyId,
-    presentationFrame: presentationFrame.model,
-    units: Object.freeze({
-      kilometersPerUnit,
-      unitsPerAu,
-      bodyRadiusUnits,
-      bodyRadiusKilometers,
-    }),
-    sun: Object.freeze({
-      direction: sunDirection,
-      distanceUnits: sunDistanceUnits,
-      distanceAu: orbit.heliocentricDistanceAu,
-      position: Object.freeze(sunPosition.map(round)),
-      radiusUnits: sunRadiusUnits,
-      radiusKilometers: NOMINAL_SOLAR_RADIUS_KILOMETERS,
-      // The clean-room sprite's opaque core is the photosphere; the glow
-      // around it is the rest of the raster, so the billboard is wider.
-      sprite: Object.freeze({
-        imagePixels: sunSprite.imagePixels,
-        opaqueCoreDiameterShare: sunSprite.opaqueCoreDiameterShare,
-        worldDiameterUnits: 2 * sunRadiusUnits /
-          sunSprite.opaqueCoreDiameterShare,
-      }),
-    }),
-    orbit: Object.freeze({
-      semiMajorAxisAu: orbit.semiMajorAxisAu,
-      semiMajorAxisUnits,
-      semiMinorAxisUnits,
-      eccentricity,
-      inclinationDegrees: orbit.inclinationDegrees,
-      perihelionAu: orbit.perihelionAu,
-      aphelionAu: orbit.aphelionAu,
-      trueAnomalyDegrees: orbit.trueAnomalyDegrees,
-      bodyEccentricAnomalyDegrees: bodyEccentricAnomaly * 180 / Math.PI,
-      normal: orbitNormal,
-      perihelionDirection,
-      center: Object.freeze(center.map(round)),
-      majorAxis: Object.freeze(majorAxis.map(round)),
-      minorAxis: Object.freeze(minorAxis.map(round)),
-      // Closed ring, in the direction of motion, vertex 0 exactly at the body.
-      vertices: Object.freeze(vertices),
-      vertexCount: vertices.length,
-      uniformSegments: UNIFORM_ORBIT_SEGMENTS,
-      localRefinementHalvings: LOCAL_REFINEMENT_HALVINGS,
-      maximumExtentUnits,
-    }),
-    runtimeGeometryDerivation: false,
-  });
-}
 
 export function validatePreparedHeliocentricView(plan) {
   if (plan?.schema !== PREPARED_HELIOCENTRIC_VIEW_SCHEMA ||
@@ -575,16 +421,16 @@ function lerp(a, b, t) {
   ];
 }
 
-function determinant(basis) {
+export function determinant(basis) {
   const [a, b, c] = basis;
   return dot(a, cross(b, c));
 }
 
-function dot(a, b) {
+export function dot(a, b) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 }
 
-function cross(a, b) {
+export function cross(a, b) {
   return [
     a[1] * b[2] - a[2] * b[1],
     a[2] * b[0] - a[0] * b[2],
@@ -592,29 +438,29 @@ function cross(a, b) {
   ];
 }
 
-function add(a, b) {
+export function add(a, b) {
   return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 }
 
-function scale(vector, factor) {
+export function scale(vector, factor) {
   return [vector[0] * factor, vector[1] * factor, vector[2] * factor];
 }
 
-function magnitude(vector) {
+export function magnitude(vector) {
   return Math.hypot(vector[0], vector[1], vector[2]);
 }
 
-function normalize(vector) {
+export function normalize(vector) {
   const length = magnitude(vector);
   if (!(length > 0)) throw new RangeError("Direction has no magnitude.");
   return Object.freeze([vector[0] / length, vector[1] / length, vector[2] / length]);
 }
 
-function round(value) {
+export function round(value) {
   return Number(value.toFixed(6));
 }
 
-function positive(value) {
+export function positive(value) {
   return Number.isFinite(value) && value > 0;
 }
 

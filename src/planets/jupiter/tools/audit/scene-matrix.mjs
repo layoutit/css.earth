@@ -53,7 +53,7 @@ try {
     throw new Error(`Jupiter returned ${response?.status() ?? "no response"}.`);
   }
   await page.waitForFunction(() => window.__jupiter?.ready === true);
-  await page.evaluate(() => window.__jupiter.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
 
   for (const pitch of [0, 20.9, 55, 89]) {
     await page.setViewportSize({ width: 1440, height: 900 });

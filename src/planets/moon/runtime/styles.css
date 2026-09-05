@@ -114,7 +114,6 @@ html[data-ready="true"] .moon-input-surface { pointer-events: auto; }
   text-decoration: none;
 }
 
-html[data-playing="true"] .moon-body { animation-play-state: running; }
 
 @keyframes moon-sphere-spin {
   from { transform: rotateZ(0deg); }

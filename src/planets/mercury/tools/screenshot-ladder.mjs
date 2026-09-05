@@ -102,9 +102,12 @@ try {
     exitCode = 1;
   } else {
     try {
-      await page.evaluate(() => window.__mercury?.pause?.());
+      await page.evaluate(() => {
+        const input = document.querySelector('input[name="motion"]');
+        if (input.checked) input.click();
+      });
     } catch (error) {
-      consoleLog.push(`pause() threw: ${error instanceof Error ? error.message : String(error)}`);
+      consoleLog.push(`freezing motion threw: ${error instanceof Error ? error.message : String(error)}`);
     }
 
     manifest.initialState = await readCameraState(page);

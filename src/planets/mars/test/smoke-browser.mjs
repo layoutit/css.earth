@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
+import { checkDirectionalAtmosphere } from "../../../platform/test/illumination-browser.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const browser = await chromium.launch({
@@ -30,6 +31,7 @@ try {
   assertSharedDepthContext(baseline);
   assertRegisteredMaterial(baseline);
   await assertDirectionalSunContract(page);
+  await checkDirectionalAtmosphere(page, { id: "mars", phaseKey: "materialFrame", rollKey: "materialLightRollDegrees" });
   await page.evaluate(() => {
     window.__marsSmokeRetained = Object.freeze({
       camera: document.querySelector(".polycss-camera"),
@@ -44,10 +46,14 @@ try {
     for (const lens of ["elevation", "thermal", "normal"]) {
       await page.evaluate((id) => window.__mars.selectLens(id), lens);
     }
-    await page.locator('.planet-settings button[name="speed"]')
-      .evaluate((element) => element.click());
+    await page.locator('.planet-settings input[name="speed"][type="range"]')
+      .evaluate((element) => {
+        element.value = String((Number(element.value) + 1) % 5);
+        element.dispatchEvent(new Event("input", { bubbles: true }));
+      });
     await page.locator('.planet-settings input[name="shadows"]')
       .evaluate((element) => element.click());
+    await page.waitForFunction(() => !window.__mars.runtime.selection().pending);
     const controlState = await page.evaluate(() => ({
       shadowsChecked:
         document.querySelector('.planet-settings input[name="shadows"]').checked,
@@ -97,25 +103,25 @@ try {
     zoom: 1.1,
   }));
   await page.waitForFunction(() =>
-    window.__mars.renderStats.materialCache().pendingCount === 0);
+    window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting").pending === 0);
   const continuity = await endContinuitySampling(page);
   assert.ok(continuity.samples > 0);
   assert.equal(continuity.blankSamples, 0);
   assertMaterialPresentation(await materialPresentation(page));
   const materialCache = await page.evaluate(() =>
-    window.__mars.renderStats.materialCache());
-  assert.ok(materialCache.retainedImageCount <= materialCache.maximumRetainedRowCount);
-  assert.ok(materialCache.imageAllocations <= materialCache.maximumRetainedRowCount);
+    window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting"));
+  assert.ok(materialCache.resident <= materialCache.capacity);
+  assert.ok(materialCache.nativeSlots <= materialCache.capacity);
 
   assert.equal(await page.evaluate(() =>
     window.__marsSmokeRetained.camera === document.querySelector(".polycss-camera") &&
     window.__marsSmokeRetained.body === document.querySelector(".mars-body") &&
     window.__marsSmokeRetained.material === document.querySelector(".mars-material")), true);
 
-  await page.evaluate(() => window.__mars.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   assert.ok(await page.locator(".planet-stage").evaluate((stage) =>
     stage.getAnimations({ subtree: true }).every(({ playState }) => playState === "paused")));
-  await page.evaluate(() => window.__mars.resume());
+  await page.evaluate(() => (!document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
 
   await page.setViewportSize({ width: 390, height: 844 });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390);
@@ -123,15 +129,17 @@ try {
   assert.equal((await runtimeState(page)).stableDomIdentity, true);
 
   await page.evaluate(() => {
-    const speed = document.querySelector('.planet-settings button[name="speed"]');
+    const speed = document.querySelector('.planet-settings input[name="speed"][type="range"]');
     window.__marsSmokeDestroyedControls = Object.freeze({
       speed,
       speedState: speed?.dataset.state,
     });
-    const runtime = window.__mars;
-    runtime.destroy();
-    runtime.destroy();
-    window.__marsSmokeDestroyedControls.speed?.click();
+    window.dispatchEvent(new PageTransitionEvent("pagehide"));
+    window.dispatchEvent(new PageTransitionEvent("pagehide"));
+
+    window.__marsSmokeDestroyedControls.speed?.dispatchEvent(
+      new Event("input", { bubbles: true }),
+    );
   });
   assert.deepEqual(await page.evaluate(() => ({
     stageChildren: document.querySelector(".planet-stage").childElementCount,
@@ -352,7 +360,7 @@ function assertRuntimeState(state) {
   assert.equal(state.stageElementCount, 1047);
   assert.equal(state.retainedLeafCount, 518);
   assert.equal(state.stableDomIdentity, true);
-  assert.equal(state.runtimeDomGrowthPolicy, "fixed-single-object-scene");
+  assert.equal(state.runtimeDomGrowthPolicy, "none");
   assert.equal(state.selectedPreparedDensity, 2);
   assert.equal(state.visibleAssetsDecodedBeforeMount, 18);
   assert.equal(state.idleJavaScriptLoops, 0);

@@ -20,6 +20,9 @@ Use `src/planets/<id>/` as the planet boundary:
   runtime manifest.
 - `site/<Planet>Page.astro`, panel components, head resources, overlays, and
   planet-owned CSS.
+- `site/control-content.mjs`: export the actual `objectControls = { lenses,
+  settings }` consumed by both the panel and browser profile loader. Use null
+  or empty controls for unsupported capabilities; do not invent feature flags.
 - `test/*.test.mjs`: source, prepared-output, renderer, page, and regression
   assertions.
 
@@ -32,7 +35,8 @@ services in the browser.
 ## Object package contract
 
 1. Export one mount function from the planet renderer.
-2. The mount function receives the shared `.planet-stage`.
+2. The mount function receives the shared `.planet-stage` and `{ onError }`.
+   Require that handler; do not install a silent default.
 3. It returns a `ready` promise plus `pause()`, `resume()`, and `destroy()`.
 4. It mounts a stable retained DOM and resolves its `ready` promise. The shared
    router publishes shell readiness and the stage's `aria-busy` state.
@@ -48,7 +52,45 @@ services in the browser.
 The lifecycle methods are behavioral promises, not names alone. `pause()` stops
 the scene's active animations. `resume()` restarts them once. `destroy()`
 cancels pending publication, removes listeners, releases retained resources,
-and remains safe when called again.
+and remains safe when called again. The router alone decides automatic
+playback, combining readiness, the user's Motion request, document visibility,
+and reduced motion. Objects apply the latest command; they do not subscribe to
+those environmental events or publish `html[data-playing]` themselves. Speed
+zero changes the local animation rate, not the shared permission to play.
+
+Use the shared coordination helpers instead of copying a neighboring client:
+
+- `createSceneLifetime()` owns cleanup and logical cancellation. Register each
+  image owner, listener, animation, DOM root, and timer as soon as it exists.
+  Await native startup work through `lifetime.wait()` and check disposal before
+  publication. `waitForScenePaint()` and `waitForSceneDocument()` are cancellable
+  startup waits. They do not add a clock or recurring frame loop.
+- `decodePreparedImage()` and `releasePreparedImage()` transport already-selected
+  URLs. `createPreparedImageStore()` adds mount-local deduplication and explicit
+  release for ordinary assets. Keep row/neighborhood/group eviction policy in
+  the object. Retiring one image must not prevent sibling cleanup if it throws.
+- `bindSpeedControl()` publishes the established five-state speed cycle and
+  reports failed rate application. It never grants playback or starts animations.
+- `createLatestSelection()` separates asynchronous `prepare({ isCurrent })` from
+  synchronous `commit(value)`. Keep one immutable desired snapshot for coupled
+  controls. Guard nested asynchronous cache work with the same request identity.
+  Restore desired state to the last committed snapshot on a current preparation
+  failure; a stale failure cannot reset newer controls or clear their busy state.
+
+`ready` rejects a live startup failure and settles promptly after destruction,
+even if a native decode or frame never completes. Do not dispose inside an inner
+startup catch and then wrap that same work in a cancelling outer wait: that can
+turn a real rejection into apparent cancellation. Recoverable lens preparation
+failures remain local and retryable. Unexpected partial publication or speed
+application calls `onError(error)` and stops immediately; the router may destroy
+the mount synchronously. Cleanup finishes every owner, reports aggregate cleanup
+errors, and preserves the original failure. Cancellation releases ownership; it
+does not promise that Chrome stopped decoding or reclaimed physical memory.
+
+Pluto is a compact example of ordinary image ownership. Earth demonstrates a
+bounded row cache; Uranus demonstrates nested material preparation; Saturn
+demonstrates a coupled presentation snapshot and keeps its existing native
+animation wrapper. These are examples, not renderer templates.
 
 All planet cameras follow the established Saturn interaction behavior:
 
@@ -56,7 +98,7 @@ All planet cameras follow the established Saturn interaction behavior:
 - dragging up moves toward the lower view;
 - horizontal dragging does not add horizontal orbit;
 - wheel direction and zoom bounds remain consistent;
-- at widths up to 680 pixels, vertical page flow remains available with
+- in portrait orientation or at widths up to 820 pixels, vertical page flow remains available with
   `touch-action: pan-y` and wheel zoom is disabled.
 
 These are observable behavior requirements. They do not prescribe a camera
@@ -90,7 +132,9 @@ registered object.
 
 Every registered object uses the shared shell. Introduction, facts, charts,
 lenses, settings, and credits are capabilities supplied by its package. A
-capability with no supplied data produces no placeholder section. The
+capability with no supplied data produces no placeholder section. Shared
+Settings, Motion, and high contrast always exist, even without object extras.
+An absent lens list produces no lens panel. The
 wordmark, typography, panel layout, chart presentation, navigation, fixed
 GitHub action, responsive behavior, and shell controller stay shared.
 
@@ -130,6 +174,11 @@ earned by the lower-level owners and executable proofs below.
 
 | Shared claim | Lower-level owner | Executable proof |
 | --- | --- | --- |
+| One authority combines readiness, Motion intent, visibility and reduced motion, including startup and restoration. | `site/runtime-policy.mjs`, `site/scene-router.mjs` | `site/test/runtime-policy.test.mjs`, `site/test/router-runtime.test.mjs`, `site/test/runtime-playback-browser.mjs`, `site/test/runtime-bfcache-browser.mjs` |
+| Cancellation settles pending work, partial failures clean every owner, and stale callbacks cannot publish. | `src/platform/scene-lifetime.mjs`, object clients | `src/platform/scene-lifetime.test.mjs`, `src/planets/moon/test/runtime-coordination.test.mjs`, `src/planets/earth/test/runtime-lifetime.test.mjs`, `src/planets/saturn/test/runtime-coordination.test.mjs` |
+| Prepared transport deduplicates live requests and retries failure without changing object cache policies. | `src/platform/prepared-image-store.mjs`, object-owned caches | `src/platform/prepared-image-store.test.mjs`, package cache tests, lens rejection/race browser conformance |
+| Speed is separate from playback permission; only current successful selection work commits. | `src/platform/planet-feature-controls.mjs`, `src/platform/latest-selection.mjs` | Their colocated tests, object compound/nested selection tests, retained-interaction browser conformance |
+| Actual content drives optional lens and extra-setting proofs without weakening existing coverage. | Package `site/control-content.mjs`, `site/test/load-browser-profile.mjs` | Control-content/profile fixtures, package contract tests, `site/test/planet-browser-conformance.mjs` |
 | One open-ended object registry contains the Sun and current planets, and every record has a canonical route and lazy scene loader consumed by one generic adapter. | `site/object-schema.mjs`, `site/objects.mjs`, `site/object-adapter.mjs` | `site/test/object-schema.test.mjs`, `site/test/planet-shell.test.mjs` |
 | Every registered object package has the required source, preparation, runtime, page, browser-profile, and asset files. | `tools/object-package-contract.mjs` | `site/test/object-package-contract.test.mjs` |
 | Checked source bytes and provenance form a complete, safe closure. | `src/platform/source-manifest.mjs`, each package's `source/manifest.json` and `tools/acquire.mjs` | `pnpm acquire:planets -- --verify-only`, `src/platform/source-manifest.test.mjs`, package preparation tests |
@@ -149,10 +198,10 @@ earned by the lower-level owners and executable proofs below.
 
 Before marking a planet implemented:
 
-1. Run its planet-owned tests and `pnpm test:shell`.
+1. Run `pnpm acquire:planets -- --verify-only` and the complete `pnpm test`.
 2. Run `pnpm build`.
-3. Run the shared real Chrome smoke for every implemented registry route, then
-   run that planet's focused browser smoke.
+3. Run `pnpm test:browser <served-worktree-url>` in installed Chrome. Standard
+   and doubled display scaling must load the same highest-density asset bank.
 4. Capture focused visual evidence against that planet's accepted baseline.
 5. Confirm the browser makes no source-authority requests and adds no
    unapproved runtime dependency.

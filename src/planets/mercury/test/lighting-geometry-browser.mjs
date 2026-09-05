@@ -127,17 +127,24 @@ try {
     if (!control) return { found: false };
     control.checked = true;
     control.dispatchEvent(new Event("change", { bubbles: true }));
-    return {
-      found: true,
-      hidden: document.querySelector(".planet-stage").classList
-        .contains("mercury-hide-shadows"),
-    };
+    return { found: true };
   });
+  // The selection commits once its prepared material is resident.
+  if (shadows.found) {
+    await page.waitForFunction(() =>
+      window.__mercury.runtime.selection().committed.shadows === true);
+    shadows.hidden = await page.evaluate(() =>
+      document.querySelector(".planet-stage").classList
+        .contains("mercury-hide-shadows"));
+  }
   await nextPaint(page);
   check("shadows-enabled", shadows.found && shadows.hidden === false, shadows);
 
   // Freeze the body's spin so surface texture only moves under drags.
-  await page.evaluate(() => window.__mercury.pause());
+  await page.evaluate(() => {
+    const input = document.querySelector('input[name="motion"]');
+    if (input.checked) input.click();
+  });
   await nextPaint(page);
 
   const geometry = await readGeometry(page);
@@ -153,8 +160,20 @@ try {
     Math.abs(defaultAngles.yawDegrees) < 0.01, defaultAngles);
 
   // Screen target for the on-screen Sun, in focal units (tan of the angles
-  // off the view axis): right of the body, clear of the viewport edge.
-  const sunOnScreenTarget = [0.46, 0.1];
+  // off the view axis): right of the body, clear of the visible viewport
+  // edge (the shell lays the stage out beside its panel, so the vanishing
+  // point is not the viewport's centre) with room for the sprite's glow and
+  // the small drags below.
+  // Either side of the body serves; the side with the room keeps the same
+  // phase the suite was tuned for.
+  const visibleRight = Math.min(geometry.stageBox.x + geometry.stageBox.width,
+    page.viewportSize().width);
+  const visibleLeft = Math.max(geometry.stageBox.x, 0);
+  const roomRight = (visibleRight - geometry.stageCentre[0] - 140) / geometry.skyFocalPixels;
+  const roomLeft = (geometry.stageCentre[0] - visibleLeft - 140) / geometry.skyFocalPixels;
+  const sunOnScreenTarget = roomRight >= roomLeft
+    ? [Math.min(0.46, roomRight), 0.1]
+    : [-Math.min(0.46, roomLeft), 0.1];
   const litPoses = [
     { id: "default", reach: async () => {} },
     // A rightward drag swings the Sun round toward the camera: gibbous
