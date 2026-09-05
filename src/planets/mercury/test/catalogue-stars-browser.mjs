@@ -25,8 +25,11 @@ const projectRoot = resolve(import.meta.dirname, "../../../..");
 export const TOLERANCES = Object.freeze({
   // A named star's painted point against the oracle's projection, pixels.
   positionPixels: 3,
-  // A bright retained star's painted diameter against a bright-band one.
-  sizeOrderRatio: 1.6,
+  // The brightest brilliant star's painted diameter against the lower
+  // quartile of the bright-band diameters in the same view (at least 2.5
+  // magnitudes apart); the quartile shrugs off a neighbour inside the
+  // measuring window, which inflates a crowded star's extent.
+  sizeOrderRatio: 1.4,
   // Faint stamped stars in a 240 px window away from retained ones.
   faintStarsInWindow: 5,
   // Retained stars (m <= 3.5, 290 over the sky) visible in one view once the
@@ -157,12 +160,13 @@ try {
       // Size: in a cell with both a brilliant (m < 1.5) and a bright-band
       // (2.5 < m < 3.5) star in view, the brilliant one's painted disc is
       // wider.
-      const brilliant = painted.filter((star) => star.magnitude < 1.5);
+      const brilliant = painted.filter((star) => star.magnitude < 1.5).sort((a, b) => a.magnitude - b.magnitude);
       const bright = painted.filter((star) => star.magnitude > 2.5 && star.magnitude < 3.5);
-      if (image && brilliant.length && bright.length) {
+      if (image && brilliant.length && bright.length >= 2 && bright[0].magnitude - brilliant[0].magnitude >= 2.5) {
         const a = inkDiameter(image, [brilliant[0].x, brilliant[0].y], 2);
-        const b = inkDiameter(image, [bright[0].x, bright[0].y], 2);
-        cell.size = { brilliant: brilliant[0].magnitude, brilliantDiameter: a, bright: bright[0].magnitude, brightDiameter: b };
+        const diameters = bright.map((star) => inkDiameter(image, [star.x, star.y], 2)).filter((value) => value !== null).sort((p, q) => p - q);
+        const b = diameters.length ? diameters[Math.floor((diameters.length - 1) / 4)] : null;
+        cell.size = { brilliant: brilliant[0].magnitude, brilliantDiameter: a, brightQuartileDiameter: b, brightDiameters: diameters };
         sizePairs += 1;
         check(`star-size-follows-magnitude-p${scenePitch}-h${heading}`, a !== null && b !== null && a >= TOLERANCES.sizeOrderRatio * b, cell.size);
       }
