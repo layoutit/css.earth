@@ -37,6 +37,11 @@ import {
 } from "../../../../tools/prepared-webp.mjs";
 import { validateSaturnSourceGroup } from "./source-manifest.mjs";
 import {
+  fingerprintPreparationFiles,
+  readPreparationReceipt,
+  writePreparationReceipt,
+} from "../../../../tools/preparation-cache.mjs";
+import {
   ensureSaturnPreparationDirectories,
   SATURN_STAGING_ROOT,
 } from "./preparation-paths.mjs";
@@ -2034,7 +2039,48 @@ function writeMaterialAtlasTile({
   }
 }
 
-async function preparePlanetTextures({ baseOnly = false } = {}) {
+function normalMaterialReceipt() {
+  const root = fileURLToPath(new URL("../../../../", import.meta.url));
+  const inputPaths = [
+    "src/planets/saturn/tools/prepare-scene.mjs",
+    "src/planets/saturn/tools/prepare-rgba.mjs",
+    "src/planets/saturn/tools/preparation-paths.mjs",
+    "src/planets/saturn/tools/source-manifest.mjs",
+    "src/platform/projective-surface-raster.mjs",
+    "src/platform/preparation-paths.mjs",
+    "src/platform/source-manifest.mjs",
+    "tools/prepared-webp.mjs",
+    "tools/preparation-cache.mjs",
+    "package.json", "pnpm-lock.yaml",
+    "src/planets/saturn/runtime/preparedRingPoints.mjs",
+    "src/planets/saturn/source/manifest.json",
+    "src/planets/saturn/source/interior/manifest.json",
+    "src/planets/saturn/source/saturn-surface-original.jpg",
+    "src/planets/saturn/source/cassini-pia21611.jpg",
+    "src/planets/saturn/source/approved/saturn-fixed-material.webp",
+    "src/planets/saturn/source/saturn-weather-static.webp",
+    "public/scenes/saturn/saturn-rings.webp",
+  ];
+  const outputPaths = [
+    "src/planets/saturn/.prepared/saturn-surface.jpg",
+    "src/planets/saturn/.prepared/saturn-fixed-material.webp",
+    "public/scenes/saturn/saturn-surface-body.jpg",
+    "public/scenes/saturn/saturn-poles.webp",
+    "public/scenes/saturn/saturn-weather.webp",
+    ...MATERIAL_MODES.flatMap(mode => {
+      const suffix = mode === "full" ? "" : `-normal-${mode}`;
+      return [
+        `src/planets/saturn/.prepared/saturn-orbit-material${suffix}.webp`,
+        `src/planets/saturn/.prepared/saturn-interior-atmosphere${suffix}.webp`,
+      ];
+    }),
+  ];
+  return { root, path: "src/planets/saturn/.prepared/normal-material-masters.json", inputPaths, outputPaths };
+}
+
+async function prepareNormalMaterialMasters() {
+  const receipt = normalMaterialReceipt();
+  const inputs = await fingerprintPreparationFiles(receipt.root, receipt.inputPaths);
   const approvedFixedMaterialAsset = await readFile(
     PLANET_FIXED_MATERIAL_SOURCE_PATH,
   );
@@ -2242,17 +2288,6 @@ async function preparePlanetTextures({ baseOnly = false } = {}) {
     defaultFixedMaterialRawSha256 === approvedReferenceFixedMaterialRawSha256;
   const orbitMaterialAtlas = preparedMaterialModes.full.orbitAtlas;
   const interiorAtmosphereAtlas = preparedMaterialModes.full.interiorAtlas;
-  const interiorLensMaterialAtlases = baseOnly
-    ? Object.freeze({})
-    : Object.freeze(Object.fromEntries(
-      PREPARED_SATURN_LENSES.controls
-        .filter(({ falseColor }) => falseColor)
-        .map(({ id, interiorMaterialPreparationFile }) => [id, Object.freeze({
-          id,
-          url: `/scenes/saturn/saturn-interior-atmosphere-${id}.webp`,
-          path: resolve(SATURN_STAGING_ROOT, interiorMaterialPreparationFile),
-        })]),
-    ));
   await Promise.all([
     sharp(polarOutput, {
       raw: {
@@ -2324,7 +2359,60 @@ async function preparePlanetTextures({ baseOnly = false } = {}) {
   await Promise.all([
     optimizePreparedQ75Webp(PLANET_POLAR_TEXTURE_PATH),
   ]);
+  const phaseMetadata = {
+    approvedReferenceFixedMaterialRawSha256,
+    approvedReferenceAsset: {
+      byteLength: approvedFixedMaterialAsset.byteLength,
+      sha256: createHash("sha256").update(approvedFixedMaterialAsset).digest("hex"),
+    },
+    staticWeatherSourceSha256: createHash("sha256").update(staticWeatherAsset).digest("hex"),
+    initialObjectView,
+    defaultFixedMaterial: materialMetadata(defaultFixedMaterial),
+    defaultInteriorMaterial: materialMetadata(defaultInteriorMaterial),
+    defaultFixedMaterialRawSha256,
+    approvedReferenceMatchesDefault,
+    orbitMaterialAtlas: materialMetadata(orbitMaterialAtlas),
+  };
+  await writePreparationReceipt({ ...receipt, inputs, metadata: phaseMetadata });
+  return phaseMetadata;
+}
+
+// The numerical generator owns normal masters once; composition only transports
+// their verified metadata and combines the already prepared lens rasters.
+async function preparePlanetTextures({ baseOnly = false, composeOnly = false } = {}) {
+  let metadata;
+  if (composeOnly) {
+    const receipt = await readPreparationReceipt(normalMaterialReceipt());
+    if (!receipt) {
+      throw new Error("Saturn normal material inputs changed or are missing; run prepare-scene.mjs --base before --compose.");
+    }
+    metadata = receipt.metadata;
+  } else {
+    metadata = await prepareNormalMaterialMasters();
+  }
   if (baseOnly) return;
+  return composePlanetTextures(metadata);
+}
+
+function materialMetadata({ output, ...metadata }) {
+  return metadata;
+}
+
+async function composePlanetTextures({
+  approvedReferenceFixedMaterialRawSha256, approvedReferenceAsset,
+  staticWeatherSourceSha256, initialObjectView, defaultFixedMaterial,
+  defaultInteriorMaterial, defaultFixedMaterialRawSha256,
+  approvedReferenceMatchesDefault, orbitMaterialAtlas,
+}) {
+  const interiorLensMaterialAtlases = Object.freeze(Object.fromEntries(
+    PREPARED_SATURN_LENSES.controls
+      .filter(({ falseColor }) => falseColor)
+      .map(({ id, interiorMaterialPreparationFile }) => [id, Object.freeze({
+        id,
+        url: `/scenes/saturn/saturn-interior-atmosphere-${id}.webp`,
+        path: resolve(SATURN_STAGING_ROOT, interiorMaterialPreparationFile),
+      })]),
+  ));
   const materialLensIds = Object.freeze([
     DEFAULT_LENS_ID,
     ...PREPARED_SATURN_LENSES.controls
@@ -2674,10 +2762,8 @@ async function preparePlanetTextures({ baseOnly = false } = {}) {
       }),
       approvedReferenceAsset: Object.freeze({
         sourcePath: "source/approved/saturn-fixed-material.webp",
-        assetBytes: approvedFixedMaterialAsset.byteLength,
-        assetSha256: createHash("sha256")
-          .update(approvedFixedMaterialAsset)
-          .digest("hex"),
+        assetBytes: approvedReferenceAsset.byteLength,
+        assetSha256: approvedReferenceAsset.sha256,
         rawSha256: approvedReferenceFixedMaterialRawSha256,
         embeddedInOrbitAtlas: false,
       }),
@@ -2983,9 +3069,7 @@ async function preparePlanetTextures({ baseOnly = false } = {}) {
         atlasHeight: WEATHER_TEXTURE_HEIGHT,
         presentationScale: WEATHER_PRESENTATION_SCALE,
         sourceSnapshotPath: "source/saturn-weather-static.webp",
-        sourceSnapshotSha256: createHash("sha256")
-          .update(staticWeatherAsset)
-          .digest("hex"),
+        sourceSnapshotSha256: staticWeatherSourceSha256,
         retainedOverlayBinding: "existing-mount-time-retained-bare-texture-leaf-references",
         addressPublication: "none-static-prepared-texels",
         runtimePlayback: false,
@@ -4889,7 +4973,7 @@ function mix(start, end, amount) {
 
 const PREPARATION_PHASE = process.argv.includes("--base")
   ? "base"
-  : "complete";
+  : process.argv.includes("--compose") ? "compose" : "complete";
 
 if (PREPARATION_PHASE === "base") {
   await preparePlanetTextures({ baseOnly: true });
@@ -4923,7 +5007,7 @@ const camera = createPolyCamera({
 const {
   surface: preparedSurface,
   lighting: preparedLighting,
-} = await preparePlanetTextures();
+} = await preparePlanetTextures({ composeOnly: PREPARATION_PHASE === "compose" });
 const polarInnerLeaves = preparePolarInnerLeaves();
 const preparedBodyLeaves = prepareBody();
 const bodyLeaves = [...polarInnerLeaves, ...preparedBodyLeaves];

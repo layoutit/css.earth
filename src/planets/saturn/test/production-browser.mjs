@@ -101,14 +101,16 @@ try {
         ["shadows", "saturn-hide-shadows"],
       ]) {
         const control = page.locator(`input[name="${name}"]`);
-        await control.evaluate((element) => element.click());
-        await page.waitForFunction((expectedClass) =>
-          document.querySelector(".planet-stage")?.classList
-            .contains(expectedClass), className);
-        await control.evaluate((element) => element.click());
-        await page.waitForFunction((expectedClass) =>
-          !document.querySelector(".planet-stage")?.classList
-            .contains(expectedClass), className);
+        const initialChecked = await control.isChecked();
+        for (const checked of [false, true, initialChecked]) {
+          await control.evaluate((element, expected) => {
+            if (element.checked !== expected) element.click();
+          }, checked);
+          await page.waitForFunction(({ name, className, checked }) =>
+            document.querySelector(`input[name="${name}"]`)?.checked === checked &&
+            document.querySelector(".planet-stage")?.classList.contains(className) === !checked,
+          { name, className, checked });
+        }
       }
 
       const after = await page.evaluate(() => {

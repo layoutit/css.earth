@@ -6,9 +6,11 @@ demand, publishes materials, and owns camera, resources, playback and cleanup.
 Packages contain source inputs, offline preparation, generated records and actual
 control content. No package presentation executor remains in the runtime closure.
 
-The source architecture passes its current strict audits. The final combined
-acquisition, test, build, real-Chrome, visual and payload checks are still pending;
-this document does not declare the final PR head ready to merge.
+The source architecture passes its strict audits. Native Chrome instrumentation
+also passed all eleven objects at DPR 1 and 2: one actual camera per scene and
+the shared publication path for every observed material target. Final integration,
+aggregate tests and visual qualification remain separate; the PR is not declared
+ready to merge by these ownership results.
 
 ## Runtime and preparation changes
 
@@ -55,6 +57,25 @@ display outputs; its later orbit rasters use fresh raw material buffers. They us
 the explicit shared display-lossless policy, which retains the original encoded
 bytes and verifies visible RGB and alpha. Both Neptune moon atlases retain full
 RGBA optimization. The actual eight-input regression matches all accepted hashes.
+
+Saturn's base phase now generates its normal material masters once and records
+their source and output hashes using the shared preparation receipt. Final
+`--compose` verifies that receipt and combines the prepared lens outputs. It
+fails if the base data is missing or stale. The numerical and encoding recipes
+are unchanged; the second evaluation of roughly 100 million normal material
+texels is removed. Standalone unflagged scene preparation still performs both
+phases. Two forced registry-wide runs took 18m24s and 19m28s, compared with
+44m39s for the previous serial run. Their 3,498 source/output/receipt files were
+identical; all 2,531 accepted image encodings were preserved. Verified incremental
+preparation took 44 seconds with eleven cache hits and no generated-file changes.
+Earth's 25.4 GB pinned input verification accounted for 38 seconds. These local
+measurements cover the preparation refactor before the later panel integration.
+
+One registry-derived scheduler bounds concurrent preparation and waits for every
+started child before reporting failure. Content receipts verify the input set,
+toolchain and every output before reuse. Failed generation cannot produce a valid
+receipt. Explicit full rebuilds bypass reuse; package recipes remain responsible
+for source-specific conversion.
 
 ## Selection and projection corrections
 

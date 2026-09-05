@@ -72,7 +72,13 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       integer(property,"prepared property reference");if(property>=tree.properties.length)fail("undeclared prepared property");
     }
     record(entry.attributes, "attributes", Object.keys(entry.attributes ?? {}));
-    for (const [name, value] of Object.entries(entry.attributes)) { attribute(name); if (typeof value !== "string") fail("prepared attribute values must be strings"); }
+    for (const [name, value] of Object.entries(entry.attributes)) {
+      // Preserve an explicitly present empty source declaration without opening
+      // an alternate channel for CSS or overriding prepared property writes.
+      if (name === "style" && value === "" && entry.style === "" && entry.properties.length === 0) continue;
+      attribute(name);
+      if (typeof value !== "string") fail("prepared attribute values must be strings");
+    }
     if (/\b(?:clip-path|mask(?:-\w+)?|filter|mix-blend-mode|background-blend-mode)\s*:|(?:linear|radial|conic)-gradient\s*\(/i.test(entry.style)) fail("unsupported scene style");
   }
   node(tree.camera); node(tree.scene);
