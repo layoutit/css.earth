@@ -13,6 +13,7 @@ await runPreparationSteps({
     ["prepare-panel-content.mjs"],
     ["prepare-lenses.mjs"],
     ["prepare-scene.mjs"],
+    ["../../../../tools/prepare-object-controls.mjs", "--object=sun"],
     ["prepare-presentation.mjs"],
     ["prepare-runtime-asset-manifest.mjs"],
   ]),
