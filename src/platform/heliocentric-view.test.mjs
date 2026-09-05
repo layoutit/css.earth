@@ -60,11 +60,14 @@ test("at a distance that fits the whole system, every marker is visible with its
     const weighted = plan.system.bodies.find(({ id }) => id === body.id).orbit.trail
       .filter((weight) => weight > 0).length;
     assert.equal(body.orbitSegments.length, weighted, `${body.id} segments`);
-    assert.ok(weighted > 40 && weighted <= 60, `${body.id} trail chords ${weighted}`);
+    // Three quarters of the ring: solid half, fading quarter.
+    assert.ok(weighted >= 88 && weighted <= 90, `${body.id} trail chords ${weighted}`);
     const weights = body.orbitSegments.map((segment) => segment[4]);
     assert.ok(weights.every((weight, index) => index === 0 || weight >= weights[index - 1]),
       `${body.id} trail must strengthen toward the body`);
     assert.ok(weights.at(-1) > 0.99 && weights[0] < 0.05, `${body.id} trail ends ${weights[0]}..${weights.at(-1)}`);
+    // Solid over the half turn nearest the body.
+    assert.ok(weights.slice(-60).every((weight) => weight === 1), `${body.id} solid half`);
     // The strongest segment ends at the marker: the trail terminates at the body.
     const [, , x1, y1] = body.orbitSegments.at(-1);
     assert.ok(Math.hypot(x1 - body.marker.screen[0], y1 - body.marker.screen[1]) < 1e-6);
@@ -74,8 +77,14 @@ test("at a distance that fits the whole system, every marker is visible with its
 test("orbitTrailWeights fades linearly backwards from the body and weighs the leading half nothing", () => {
   const offsets = Array.from({ length: 8 }, (_, index) => index * Math.PI / 4);
   const trail = orbitTrailWeights(offsets);
-  // Chord mid-offsets: pi/8, 3pi/8, ... ; behind = 2pi - mid; weight 1 - behind/pi.
-  assert.deepEqual(trail, [0, 0, 0, 0, 0.125, 0.375, 0.625, 0.875]);
+  // Chord mid-offsets (k + 0.5) pi/4; behind = 2pi - mid. Solid for half a
+  // turn behind (chords 4..7), fading over the next quarter (chords 2, 3),
+  // nothing over the leading quarter (chords 0, 1).
+  assert.deepEqual(trail, [0, 0, 0.25, 0.75, 1, 1, 1, 1]);
+  // The spans are data: a shorter, half-turn trail that fades immediately.
+  assert.deepEqual(orbitTrailWeights(offsets, { solidTurns: 0, fadeTurns: 0.5 }),
+    [0, 0, 0, 0, 0.125, 0.375, 0.625, 0.875]);
+  assert.throws(() => orbitTrailWeights(offsets, { solidTurns: 0.8, fadeTurns: 0.3 }), TypeError);
   assert.throws(() => orbitTrailWeights([0.1, 0.2]), TypeError);
   assert.throws(() => orbitTrailWeights([0, 2, 1]), TypeError);
   assert.throws(() => orbitTrailWeights([0, 7]), TypeError);

@@ -29,7 +29,7 @@ import {
   SOLAR_GEOMETRY_EPOCH_JD_TT,
   SOLAR_GEOMETRY_EPOCH_LABEL,
 } from "./solar-geometry.mjs";
-import { ORBIT_TRAIL_MODEL, orbitTrailWeights } from "./prepare-heliocentric-view.mjs";
+import { ORBIT_TRAIL_MODEL, ORBIT_TRAIL_SPANS, orbitTrailWeights } from "./prepare-heliocentric-view.mjs";
 import {
   add,
   cross,
@@ -269,6 +269,7 @@ export async function preparePlanetarySystem({
         vertexCount: vertices.length,
         trail,
         trailModel: ORBIT_TRAIL_MODEL,
+        trailSpans: ORBIT_TRAIL_SPANS,
         uniformSegments: SYSTEM_ORBIT_SEGMENTS,
       }),
     });

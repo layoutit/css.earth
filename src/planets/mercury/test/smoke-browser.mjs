@@ -701,8 +701,8 @@ try {
   assert.equal(farSystem.nearPieces, 0);
   assert.equal(farSystem.farOpacity, 1);
   assert.equal(farSystem.groupOpacity, "1");
-  // Trails: about half of each ring's chords, minus those clipped away.
-  assert.ok(farSystem.farPieces > 300 && farSystem.farPieces <= 420, `system pieces ${farSystem.farPieces}`);
+  // Trails: three quarters of each ring's chords, minus those clipped away.
+  assert.ok(farSystem.farPieces > 450 && farSystem.farPieces <= 630, `system pieces ${farSystem.farPieces}`);
   assert.equal(farSystem.farMarkers, 7);
   assert.deepEqual(farSystem.farBodies, ["venus:true", "earth:true", "mars:true",
     "jupiter:true", "saturn:true", "uranus:true", "neptune:true"]);
