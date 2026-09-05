@@ -45,6 +45,9 @@ pnpm test:earth-global
 node src/planets/earth/test/wmts-tree-browser.mjs --global --sample=buenos-aires --noise --mobile
 node src/planets/earth/test/city-lens-walkthrough.mjs http://127.0.0.1:4298
 node src/planets/earth/test/noise-destination-browser.mjs http://127.0.0.1:4298
+pnpm preview --port 4228
+pnpm verify:earth-delivery
+pnpm test:earth-delivery http://127.0.0.1:4228
 ```
 
 The shared browser suite needs a development server from this checkout at the supplied URL. The global browser harness starts its own server and exercises the normal app delivery path. It requires the matching local geometry release. Browser harnesses should run sequentially.
@@ -55,14 +58,41 @@ The shared browser suite needs a development server from this checkout at the su
 
 The global packs live outside `public` and `dist`. Development and preview read exact ranges from `.local/wmts-global/<version>/`. Production points to `https://earth-assets.lowpoly.cc/scenes/earth/wmts-<version>/`.
 
-The new global release has not been uploaded. Before deployment:
+Version `fef1519d5f243617` was published on 2026-09-05: all 19,632 objects and 25,344,236,995 bytes match the pinned inventory. Every remote object was checked for size, checksum, content type and immutable cache headers. Real Chrome verified the built application with public geometry and direct provider imagery at DPR 1/2. The feature branch still needs its normal review and application deployment.
 
-1. Upload the pinned 19,632 pack files to that immutable prefix; check uploaded sizes and hashes against the release inventory.
-2. Allow the application origin and GET/HEAD through R2 CORS; allow the `Range` header and expose `Content-Range`, `Content-Length`, `Accept-Ranges` and `ETag`. The older city-image CORS file does not provide this complete range contract.
-3. Configure caching for `.pack` objects and verify real 206 responses, visible CORS headers and cache behaviour through the public custom domain.
-4. Run the city walkthrough and range checks against production before calling the deployment ready.
+The publisher verifies every local SHA-256 before writing. Existing immutable objects must match; missing objects can be resumed. A two-pack public sample must demonstrate exact ranges, CORS and a CDN cache HIT before the full release is uploaded. The S3 bulk path verifies all remote sizes and MD5s against the same locally verified inventory. Geometry packs remain outside Git and the application bundle.
+
+```sh
+pnpm publish:earth-global --sample
+pnpm publish:earth-global --sample --upload
+pnpm verify:earth-delivery
+pnpm publish:earth-global --upload
+pnpm publish:earth-global --verify-only
+```
+
+Without S3 credentials, publication uses the existing Wrangler login. The faster bulk path uses installed `rclone` when `EARTH_R2_ACCESS_KEY_ID` and `EARTH_R2_SECRET_ACCESS_KEY` are present in the process environment. Use a temporary credential scoped to `cssearth-assets`, then revoke it. Secrets are never written to publication reports or command arguments. Planning and verification do not upload anything.
+
+The deployed CORS contract is checked in at `src/planets/earth/source/city/r2-cors.json`. It permits the application origin, GET/HEAD and the `Range` header, and exposes range, size, ETag and cache-status headers. The narrowly scoped cache rule is in `r2-cache-rule.json`: immutable successful responses use their origin cache headers, while HTTP errors are not stored. See Cloudflare's [range CORS settings](https://developers.cloudflare.com/r2/buckets/cors/) and [status-code TTL settings](https://developers.cloudflare.com/cache/how-to/cache-rules/settings/#edge-ttl).
+
+`verify:earth-delivery` fetches coarse, regional and detail ranges through the real public custom domain, validates compressed and decoded hashes, and checks browser CORS and cache behavior. `test:earth-delivery` serves the unchanged built application bytes on `https://css.earth` inside its browser harness, while geometry and imagery go to their real public endpoints. It records Buenos Aires, its noise lens and Tokyo at DPR 1/2, checks script hashes against `dist`, and verifies stable scene nodes and identical density-independent selections. This verifies the built application's production-origin delivery path; it does not deploy the live application.
+
+Standard `pnpm preview` now uses Vite's static preview with the same prepared-pack middleware as development. Astro's static preview discards user Vite plugins, which previously left local geometry requests unavailable. The preview test proves built routes and bounded 206/416/405 responses with packs outside `dist`.
 
 The legacy `publish:earth-city` command publishes the earlier city-image experiment; it does not publish this global WMTS geometry release. Provider imagery is loaded directly and is not reuploaded.
+
+## Targeted performance result
+
+The selector projects prepared corners directly into bounds, reuses those projections while relaxing an over-budget selection, and preserves decoded index wrappers across unrelated residency changes. The accepted flight, prepared geometry, image quality and fixed pools are unchanged. A comparison against the accepted implementation matched all 54,960 projection cases exactly.
+
+Chrome traces from 2026-09-05 measured the same search, flight, drag, noise and return scenario before and after the change. Values below are sampled milliseconds at DPR 1 / DPR 2. Projection is inclusive time; index rebuilding is self time, so these measures must not be added.
+
+| Work | Before | After |
+| --- | ---: | ---: |
+| City-flight projection | 518 / 518 | 112 / 110 |
+| City-flight index rebuild | 134 / 130 | 34 / 32 |
+| Noise-selection projection | 976 / 886 | 196 / 187 |
+
+The updated traces retained all 3,622 scene nodes and reported no checkerboard or missing-content flags across 2,411 presented frame sequences. Drag callback p95 remained 16.7–16.8 ms. Occasional flight stalls remain: the largest was 217 ms wall time with 17 ms of thread CPU under Chrome's frame synchronization. This is a targeted reduction in JavaScript work, not proof of uniformly smooth flights or physical-device performance. These are single traced runs per density; background asset maintenance continued during the updated capture.
 
 ## Visual evidence
 
@@ -72,4 +102,4 @@ The legacy `publish:earth-city` command publishes the earlier city-image experim
 
 The integration recording follows the actual UI: Earth → search Buenos Aires → fly → noise lens → closer zoom. The global Chrome check covers Buenos Aires, Helsinki, Svalbard, the antimeridian, a face seam, Tokyo and a return visit, at DPR 1 and DPR 2. It verifies retained node identity, bounded residency and the exact same canonical data selection at both densities.
 
-Local recording, screenshots and detailed reports are kept under `output/earth-city/global-completion/` and `output/playwright/`. They are excluded from Git. Desktop Chrome and mobile viewport emulation are evidence for those environments; physical mobile devices and production delivery remain unproven.
+Local recording, screenshots and detailed reports are kept under `output/earth-city/global-completion/`, `output/earth-city/finish-line/` and `output/playwright/`. They are excluded from Git. Desktop Chrome and mobile viewport emulation are evidence for those environments; physical mobile devices remain unproven.

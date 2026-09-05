@@ -9,6 +9,7 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
   let activeLoads = 0, requests = 0, aborts = 0, destroyed = false, budgetBlocked = 0;
   let errors = [];
   const limits = plan.index;
+  const resolved = new WeakMap();
   const rebuild = () => {
     nodes = new Map(plan.roots.map(node => [node.key, node]));
     for (const entry of entries.values()) {
@@ -17,7 +18,12 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
     for (const entry of entries.values()) {
       for (const node of entry.data?.nodes ?? []) {
         const coverageParts=nodes.get(node.key)?.coverageParts;
-        nodes.set(node.key, { ...(coverageParts?{coverageParts}:{}), ...node, directory: entry.ref });
+        let cached=resolved.get(node);
+        if(!cached || cached.coverageParts!==coverageParts){
+          cached={coverageParts,value:{...(coverageParts?{coverageParts}:{}),...node,directory:entry.ref}};
+          resolved.set(node,cached);
+        }
+        nodes.set(node.key,cached.value);
       }
     }
   };
@@ -40,8 +46,8 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
       bytes += ref.decodedBytes ?? ref.bytes;
     }
     let mutated = false;
-    for (const [url, entry] of entries) if (!accepted.has(url)) { remove(url, entry); mutated = true; }
-    for (const [url, ref] of accepted) if (!entries.has(url)) { entries.set(url, { ref }); mutated = true; }
+    for (const [url, entry] of entries) if (!accepted.has(url)) { remove(url, entry); mutated ||= !!entry.data; }
+    for (const [url, ref] of accepted) if (!entries.has(url)) entries.set(url, { ref });
     if (mutated) rebuild();
     pump();
   }

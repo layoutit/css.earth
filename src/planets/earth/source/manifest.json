@@ -493,9 +493,9 @@
     },
     {
       "path": "city/r2-cors.json",
-      "expectedSha256": "3332981142d4a0f0d0249587b5d80b479c77699159662e02303a03f72933db02",
-      "expectedBytes": 336,
-      "purpose": "Read-only cross-origin delivery policy for the canonical R2 city asset bucket"
+      "expectedSha256": "4d9db512d4308ee0e738c28f34d836b361eb0e8a74fbef3f3246fcc7376cd956",
+      "expectedBytes": 504,
+      "purpose": "Read-only cross-origin delivery policy with exact range response headers for the canonical R2 asset bucket"
     },
     {
       "path": "city/provenance.json",
@@ -532,6 +532,12 @@
       "expectedSha256": "6f22eccaf59696d8b9e1e195e9d94b36cf1e7bbc8f9bf961bf5c8249724dc229",
       "expectedBytes": 139459,
       "purpose": "Verified publication receipts, source-window provenance and immutable index heads for integrated geographic coverage"
+    },
+    {
+      "path": "city/r2-cache-rule.json",
+      "expectedSha256": "6f661ba270eec5e578ad7939305b2bf6c38d5d1d00c4a98231bbc94972772b65",
+      "expectedBytes": 489,
+      "purpose": "Narrow immutable geometry cache rule deployed to the public asset domain"
     }
   ]
 }

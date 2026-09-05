@@ -10,10 +10,18 @@
         "methods": [
           "GET",
           "HEAD"
+        ],
+        "headers": [
+          "Range"
         ]
       },
       "exposeHeaders": [
-        "ETag"
+        "ETag",
+        "Content-Range",
+        "Content-Length",
+        "Accept-Ranges",
+        "CF-Cache-Status",
+        "Age"
       ],
       "maxAgeSeconds": 86400
     }
