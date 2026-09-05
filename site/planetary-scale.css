@@ -90,6 +90,12 @@
 }
 
 @media (max-width: 1100px), (orientation: portrait) {
+  .scale-stop:not([aria-current="page"]) .scale-label {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) and (hover: none) and (pointer: coarse) {
   .planetary-navigation {
     display: none;
   }

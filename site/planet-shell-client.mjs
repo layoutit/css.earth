@@ -24,6 +24,7 @@ export function mountPlanetShell({
     own(createSheetController(drawer, windowTarget, lifetime));
     own(createChartSwitcherController(drawer, windowTarget, lifetime));
     own(createChartPixelAlignmentController(drawer, windowTarget, lifetime));
+    own(createLensBrowserController(drawer, windowTarget, lifetime));
     settingsController = own(createSettingsController(
       documentTarget, windowTarget, { motionEnabled, onMotionChange }, lifetime,
     ));
@@ -45,6 +46,100 @@ export function mountPlanetShell({
     destroy() {
       const errors = lifetime.destroy();
       if (errors.length) throw new AggregateError(errors, "Shell cleanup failed.");
+    },
+  });
+}
+
+function createLensBrowserController(drawer, windowTarget, lifetime) {
+  const root = drawer.querySelector(".planet-lenses");
+  if (!root) {
+    return Object.freeze({ destroy() {} });
+  }
+
+  const search = root.querySelector(".planet-lens-search");
+  const empty = root.querySelector(".planet-lens-empty");
+  if (!(root instanceof windowTarget.HTMLElement) ||
+      !(search instanceof windowTarget.HTMLInputElement) ||
+      !(empty instanceof windowTarget.HTMLElement)) {
+    throw new Error("Planet shell surface lens browser is incomplete.");
+  }
+
+  const options = [...root.querySelectorAll("[data-lens-option]")]
+    .filter((option) => option instanceof windowTarget.HTMLElement);
+  const buttons = options.map((option) =>
+    option.querySelector('button[name="lens"]'));
+  if (options.length === 0 || buttons.some((button) =>
+    !(button instanceof windowTarget.HTMLButtonElement))) {
+    throw new Error("Planet shell surface lens browser has no valid lenses.");
+  }
+
+  const legends = [...root.querySelectorAll("[data-lens-legend]")]
+    .filter((legend) => legend instanceof windowTarget.HTMLElement);
+  const lensIds = new Set(buttons.map((button) => button.value));
+  if (legends.some((legend) => !lensIds.has(legend.dataset.lensLegend ?? ""))) {
+    throw new Error("Planet shell surface lens legend has no matching lens.");
+  }
+
+  const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
+  const renderLegend = () => {
+    const activeLens = buttons.find((button) => button.ariaPressed === "true")
+      ?.value;
+    for (let index = 0; index < buttons.length; index += 1) {
+      const button = buttons[index];
+      const legend = options[index].querySelector("[data-lens-legend]");
+      if (!(legend instanceof windowTarget.HTMLElement)) continue;
+      const expanded = button.value === activeLens;
+      legend.hidden = !expanded;
+      button.ariaExpanded = String(expanded);
+    }
+  };
+  const legendObserver = new windowTarget.MutationObserver(renderLegend);
+  lifetime.onDispose(() => legendObserver.disconnect());
+  for (const button of buttons) {
+    legendObserver.observe(button, {
+      attributes: true,
+      attributeFilter: ["aria-pressed"],
+    });
+  }
+
+  const filter = () => {
+    const query = search.value.trim().toLocaleLowerCase("en");
+    let visible = 0;
+    for (let index = 0; index < options.length; index += 1) {
+      const option = options[index];
+      const button = buttons[index];
+      const matches = button.textContent.toLocaleLowerCase("en").includes(query);
+      option.hidden = !matches;
+      if (matches) visible += 1;
+    }
+    empty.hidden = visible !== 0;
+  };
+
+  search.addEventListener("input", filter, { signal: events.signal });
+  search.addEventListener("click", (event) => {
+    event.stopPropagation();
+  }, { signal: events.signal });
+  search.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || search.value.length === 0) return;
+    event.preventDefault();
+    search.value = "";
+    filter();
+  }, { signal: events.signal });
+  filter();
+  renderLegend();
+
+  return Object.freeze({
+    destroy() {
+      events.abort();
+      legendObserver.disconnect();
+      search.value = "";
+      for (const option of options) option.hidden = false;
+      empty.hidden = true;
+      for (const legend of legends) legend.hidden = true;
+      for (const button of buttons) {
+        if (button.hasAttribute("aria-expanded")) button.ariaExpanded = "false";
+      }
     },
   });
 }
@@ -309,16 +404,12 @@ function createChartSwitcherController(drawer, windowTarget, lifetime) {
   }
   const previous = switcher.querySelector('.planet-chart-step[data-chart-step="-1"]');
   const next = switcher.querySelector('.planet-chart-step[data-chart-step="1"]');
-  const iconFrame = switcher.querySelector(".planet-chart-current-icon");
   const slides = [...switcher.querySelectorAll(".planet-chart-slide")]
     .filter((slide) => slide instanceof windowTarget.HTMLElement);
   const labels = [...switcher.querySelectorAll(".planet-chart-label")]
     .filter((label) => label instanceof windowTarget.HTMLElement);
-  const icons = [...switcher.querySelectorAll(".planet-chart-icon")]
-    .filter((icon) => icon instanceof windowTarget.HTMLImageElement);
   if (!(previous instanceof windowTarget.HTMLButtonElement) ||
       !(next instanceof windowTarget.HTMLButtonElement) ||
-      !(iconFrame instanceof windowTarget.HTMLElement) ||
       slides.length === 0 || labels.length !== slides.length) {
     throw new Error("Planet shell chart switcher is incomplete.");
   }
@@ -338,8 +429,6 @@ function createChartSwitcherController(drawer, windowTarget, lifetime) {
     switcher.dataset.activeChart = activeId;
     for (const slide of slides) slide.hidden = slide.dataset.chartId !== activeId;
     for (const label of labels) label.hidden = label.dataset.chartLabel !== activeId;
-    for (const icon of icons) icon.hidden = icon.dataset.chartIcon !== activeId;
-    iconFrame.hidden = !icons.some((icon) => icon.dataset.chartIcon === activeId);
 
     const previousSlide = slides[(activeIndex - 1 + slides.length) % slides.length];
     const nextSlide = slides[(activeIndex + 1) % slides.length];
@@ -350,7 +439,9 @@ function createChartSwitcherController(drawer, windowTarget, lifetime) {
     if (notify) switcher.dispatchEvent(new windowTarget.Event("chartchange"));
   };
   for (const button of [previous, next]) {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
       render(activeIndex + Number(button.dataset.chartStep));
     }, { signal: events.signal });
   }

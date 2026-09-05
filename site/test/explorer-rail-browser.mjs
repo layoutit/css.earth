@@ -34,6 +34,9 @@ try {
     await page.goto(new URL(config.route, baseUrl).href);
     await page.waitForFunction(() => document.querySelector(".planet-stage")?.getAttribute("aria-busy") === "false");
     const rail = page.getByRole("navigation", { name: "Explorer", exact: true });
+    const planetaryNavigation = page.locator(".planetary-navigation");
+    assert.equal(await planetaryNavigation.isVisible(), !config.mobile,
+      `${config.label}: top planet navigation follows the desktop/mobile input boundary`);
     const settings = rail.locator(".planet-settings-action");
     const about = rail.getByRole("button", { name: "About", exact: true });
     const explore = rail.getByRole("button", { name: "Planet information", exact: true });
@@ -99,8 +102,8 @@ try {
         "search follows the 48px header by 12px");
       assert.ok(sidebarBox.y + sidebarBox.height <= config.height - 16,
         "the information panel leaves a bottom gap");
-      assert.equal((await page.locator(".planet-stage").boundingBox()).x, 170,
-        "the desktop scene is centered beside the information panel");
+      assert.equal((await page.locator(".planet-stage").boundingBox()).x, 0,
+        "the floating shell does not reserve scene space");
     }
     assert.equal(await page.locator(".planet-sidebar-toggle, .planetary-navigation-toggle, .explorer-rail-menu").count(), 0);
     const factsheetPanel = page.locator(".planet-factsheet-section");
@@ -111,9 +114,13 @@ try {
     const factsheetInitiallyOpen = await factsheetPanel.evaluate((node) => node.open);
     assert.equal(factsheetInitiallyOpen, false,
       `${config.label}: Factsheet starts collapsed`);
+    assert.equal(await factsheetPanel.evaluate((node) => getComputedStyle(node).paddingBottom), "0px",
+      `${config.label}: collapsed Factsheet leaves no empty bottom gap`);
     await factsheetSummary.click();
     assert.equal(await factsheetPanel.evaluate((node) => node.open), !factsheetInitiallyOpen,
       `${config.label}: Factsheet header toggles the whole panel`);
+    assert.equal(await factsheetPanel.evaluate((node) => getComputedStyle(node).paddingBottom), "16px",
+      `${config.label}: expanded Factsheet restores its content spacing`);
     assert.equal(await factsheetPanel.locator(".planet-primary-facts > li").count(), 4,
       `${config.label}: Factsheet previews four facts`);
     const factsOverflow = factsheetPanel.locator(".planet-facts-overflow");
@@ -130,23 +137,34 @@ try {
       `${config.label}: Factsheet returns to its initial state`);
     const chartSwitcher = page.locator(".planet-chart-switcher");
     if (await chartSwitcher.count() > 0) {
+      const chartSummary = chartSwitcher.locator(":scope > .planet-chart-switcher-header");
       const chartSlides = chartSwitcher.locator(".planet-chart-slide");
       const chartIds = await chartSlides.evaluateAll((slides) =>
         slides.map((slide) => slide.dataset.chartId));
       const chartNodes = await chartSlides.elementHandles();
+      assert.equal(await chartSwitcher.evaluate((node) => node.open), true,
+        `${config.label}: chart switcher starts open`);
+      await chartSummary.locator(".planet-chart-switcher-title").click();
+      assert.equal(await chartSwitcher.evaluate((node) => node.open), false,
+        `${config.label}: chart title collapses the switcher`);
+      await chartSummary.locator(".planet-chart-switcher-title").click();
+      assert.equal(await chartSwitcher.evaluate((node) => node.open), true,
+        `${config.label}: chart title expands the switcher`);
       assert.equal(chartIds[0], "reflectance",
         `${config.label}: Reflectance is the default chart`);
       assert.equal(await chartSwitcher.getAttribute("data-active-chart"), chartIds[0]);
       assert.deepEqual(await chartSwitcher.locator(".planet-chart-switcher-controls").evaluate((node) =>
         [...node.children].map((child) => [
-          "planet-chart-previous", "planet-chart-next", "planet-chart-current-icon",
+          "planet-chart-previous", "planet-chart-next",
         ].find((className) => child.classList.contains(className)))), [
-        "planet-chart-previous", "planet-chart-next", "planet-chart-current-icon",
-      ], `${config.label}: chart carets sit immediately left of the current icon`);
+        "planet-chart-previous", "planet-chart-next",
+      ], `${config.label}: chart header contains only the two navigation carets`);
       assert.equal(await chartSlides.evaluateAll((slides) =>
         slides.filter((slide) => !slide.hidden).length), 1);
       if (chartIds.length > 1) {
         await chartSwitcher.locator(".planet-chart-next").click();
+        assert.equal(await chartSwitcher.evaluate((node) => node.open), true,
+          `${config.label}: chart carets do not collapse the switcher`);
         assert.equal(await chartSwitcher.getAttribute("data-active-chart"), chartIds[1],
           `${config.label}: next caret advances the chart`);
         assert.equal(await chartSwitcher.locator(".planet-chart-label:not([hidden])").textContent(),
@@ -159,6 +177,75 @@ try {
         assert.equal(await chartNode.evaluate((node, position) =>
           node.isConnected && node === document.querySelectorAll(".planet-chart-slide")[position], index), true,
         `${config.label}: chart switching retains every prepared chart node`);
+      }
+    }
+    const lensPanel = page.locator(".planet-lenses");
+    if (await lensPanel.count() > 0) {
+      const lensHeading = lensPanel.locator(":scope > .planet-lens-browser-header .planet-panel-heading");
+      assert.equal(await lensPanel.evaluate((node) => node.open), true,
+        `${config.label}: Surface Lens starts open`);
+      await lensHeading.click();
+      assert.equal(await lensPanel.evaluate((node) => node.open), false,
+        `${config.label}: Surface Lens title collapses the list`);
+      await lensHeading.click();
+      assert.equal(await lensPanel.evaluate((node) => node.open), true,
+        `${config.label}: Surface Lens title expands the list`);
+      await lensPanel.locator(".planet-lens-search").click();
+      assert.equal(await lensPanel.evaluate((node) => node.open), true,
+        `${config.label}: focusing lens search does not collapse its panel`);
+      if (config.label === "mercury-desktop") {
+        const legend = page.locator('[data-lens-legend="topography"]');
+        const interiorLegend = page.locator('[data-lens-legend="interior"]');
+        const enhanced = lensPanel.locator('button[name="lens"][value="enhanced"]');
+        const topography = lensPanel.locator('button[name="lens"][value="topography"]');
+        const interior = lensPanel.locator('button[name="lens"][value="interior"]');
+        const normal = lensPanel.locator('button[name="lens"][value="normal"]');
+        assert.equal(await page.locator("[data-lens-legend]").count(), 2,
+          "Mercury retains only its meaningful Topography and Interior legends");
+        assert.equal(await page.locator(".planet-drawer-content > [data-lens-legend]").count(), 0,
+          "Surface Lens has no detached legend card");
+        assert.equal(await page.locator(".planet-observation-option > [data-lens-legend]").count(), 2,
+          "each optional legend is retained inside its lens row");
+        assert.equal(await page.locator("[data-lens-legend]:visible").count(), 0,
+          "Mercury default 750 nm lens does not show a legend");
+        await enhanced.click();
+        await page.waitForFunction(() =>
+          document.querySelector('button[name="lens"][value="enhanced"]')
+            ?.getAttribute("aria-pressed") === "true");
+        assert.equal(await page.locator("[data-lens-legend]:visible").count(), 0,
+          "Mercury Enhanced does not present channel construction as a viewing legend");
+        assert.equal(await enhanced.getAttribute("aria-expanded"), null,
+          "Enhanced is a lens choice, not a legend accordion");
+        await topography.click();
+        await page.waitForFunction(() =>
+          document.querySelector('button[name="lens"][value="topography"]')
+            ?.getAttribute("aria-pressed") === "true");
+        assert.equal(await legend.isVisible(), true,
+          "Mercury Topography lens shows its elevation legend");
+        assert.equal(await legend.locator(".planet-lens-legend-scale-row").evaluate((node) =>
+          getComputedStyle(node).height), "24px",
+        "scale legends share the same first-row height as category legends");
+        assert.deepEqual(await legend.evaluate((node) => {
+          const style = getComputedStyle(node);
+          return { paddingTop: style.paddingTop, paddingBottom: style.paddingBottom };
+        }), { paddingTop: "2px", paddingBottom: "8px" },
+        "scale legends use the same compact accordion spacing as category legends");
+        assert.match(await legend.innerText(), /−5,020[\s\S]*−450[\s\S]*4,140 m/u);
+        await interior.click();
+        await page.waitForFunction(() =>
+          document.querySelector('button[name="lens"][value="interior"]')
+            ?.getAttribute("aria-pressed") === "true");
+        assert.equal(await legend.isVisible(), false,
+          "switching away hides the Topography legend");
+        assert.equal(await interiorLegend.isVisible(), true,
+          "Mercury Interior lens shows its category legend");
+        assert.match(await interiorLegend.innerText(), /Metallic core[\s\S]*85% of radius[\s\S]*Mantle \+ crust[\s\S]*366 km shell/u);
+        await normal.click();
+        await page.waitForFunction(() =>
+          document.querySelector('button[name="lens"][value="normal"]')
+            ?.getAttribute("aria-pressed") === "true");
+        assert.equal(await page.locator("[data-lens-legend]:visible").count(), 0,
+          "returning to 750 nm hides every optional legend");
       }
     }
     assert.equal(await page.locator(".planet-topbar").count(), 0, "branding belongs to the shell, not a separate header");
@@ -356,6 +443,10 @@ try {
       "the source footer has no trailing separator");
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     if (config.mobile) {
+      assert.equal(await page.locator(".planet-resources-panel").isVisible(), false,
+        `${config.label}: resources stay out of the mobile shell`);
+      assert.equal(await attributionFooter.isVisible(), false,
+        `${config.label}: source attribution stays out of the mobile shell`);
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
       await about.click();
       assert.equal(await page.evaluate(() => window.scrollY), 0);
