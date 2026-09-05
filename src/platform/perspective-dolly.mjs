@@ -15,6 +15,12 @@ import {
 // Zoom stays the framing alias the responsive fit, the destination flights
 // and the material overlays speak: silhouette diameter over the logical body
 // diameter, times the default zoom.
+//
+// A plan whose heliocentric view carries the planetary system opts into the
+// wider dolly (`dolly.maximumDistanceOverSystemExtent` against the system's
+// extent instead of the body's orbit), the system's fade-in with distance
+// (`planetarySystem`) and the Sun's marker floor (`sunMarker`). Plans without
+// them keep the body-orbit range exactly as before.
 export const PERSPECTIVE_PROJECTION_MODEL = "css-perspective-shared-with-sky";
 export const SCENE_LOCKED_SKY_CAMERA_CONTRACT =
   "scene-locked-unbounded-accumulated-matrix3d";
@@ -31,6 +37,17 @@ export function validatePerspectiveCameraPlan(plan) {
       !Number.isFinite(plan.dolly.wheelStepPerDelta) ||
       !Number.isFinite(plan.dolly.minimumDistanceRadii) ||
       !Number.isFinite(plan.dolly.maximumDistanceOverOrbitExtent) ||
+      (plan.dolly.maximumDistanceOverSystemExtent !== undefined &&
+        !(plan.dolly.maximumDistanceOverSystemExtent > 0)) ||
+      (plan.planetarySystem !== undefined && (
+        plan.planetarySystem?.model !== "distance-over-orbit-extent-fade" ||
+        !Number.isFinite(plan.planetarySystem.hiddenBelowDistanceOverOrbitExtent) ||
+        !(plan.planetarySystem.visibleAboveDistanceOverOrbitExtent >
+          plan.planetarySystem.hiddenBelowDistanceOverOrbitExtent))) ||
+      (plan.sunMarker !== undefined && (
+        plan.sunMarker?.model !== "sprite-diameter-crossfade" ||
+        !(plan.sunMarker.fadeStartSpritePixels > plan.sunMarker.fullSpritePixels) ||
+        !(plan.sunMarker.fullSpritePixels > 0))) ||
       !Number.isFinite(plan.orbitLineFade?.visibleBelowDiscHeightShare) ||
       !Number.isFinite(plan.orbitLineFade?.hiddenAboveDiscHeightShare) ||
       !(plan.orbitLineFade.hiddenAboveDiscHeightShare >
@@ -90,6 +107,31 @@ export function orbitLineOpacity(fade, discHeightShare) {
   );
 }
 
+// The planetary system fades in with the camera's distance over the body's
+// own orbit extent: hidden while the body's orbit fills the view, opaque
+// once the camera stands well outside it.
+export function planetarySystemOpacity(fade, distanceOverOrbitExtent) {
+  return clamp(
+    (distanceOverOrbitExtent - fade.hiddenBelowDistanceOverOrbitExtent) /
+      (fade.visibleAboveDistanceOverOrbitExtent -
+        fade.hiddenBelowDistanceOverOrbitExtent),
+    0,
+    1,
+  );
+}
+
+// The Sun marker fades in as the Sun sprite's projected diameter falls
+// below the marker's size, the same crossfade as the body's own marker.
+export function sunMarkerOpacity(sunMarker, spriteDiameter) {
+  if (!Number.isFinite(spriteDiameter)) return 0;
+  return clamp(
+    (sunMarker.fadeStartSpritePixels - spriteDiameter) /
+      (sunMarker.fadeStartSpritePixels - sunMarker.fullSpritePixels),
+    0,
+    1,
+  );
+}
+
 export function createPerspectiveDolly({
   cameraPlan,
   heliocentric,
@@ -110,8 +152,19 @@ export function createPerspectiveDolly({
   const levelOfDetail = cameraPlan.levelOfDetail;
   const bodyRadius = plan.units.bodyRadiusUnits;
   const kilometersPerUnit = plan.units.kilometersPerUnit;
-  const maximumDistance = cameraPlan.dolly.maximumDistanceOverOrbitExtent *
-    plan.orbit.maximumExtentUnits;
+  // The planetary system, when the plan carries it and the camera plan opts
+  // in: the dolly reaches the whole system, and the system fades in.
+  const system = plan.system ?? null;
+  const systemFade = system !== null ? cameraPlan.planetarySystem ?? null : null;
+  const sunMarker = system !== null ? cameraPlan.sunMarker ?? null : null;
+  if (system !== null && (typeof heliocentric.setSystemOpacity !== "function" ||
+      typeof heliocentric.setSunMarkerOpacity !== "function")) {
+    throw new TypeError("Perspective dolly requires the mounted planetary system.");
+  }
+  const maximumDistance = system !== null &&
+      cameraPlan.dolly.maximumDistanceOverSystemExtent !== undefined
+    ? cameraPlan.dolly.maximumDistanceOverSystemExtent * system.maximumExtentUnits
+    : cameraPlan.dolly.maximumDistanceOverOrbitExtent * plan.orbit.maximumExtentUnits;
   // Object packages own their prepared perspective as data; the roots are
   // never scaled, so the same eye serves the Sun's root and the body's.
   for (const root of [cameraElement, heliocentric.sunRoot]) {
@@ -131,6 +184,8 @@ export function createPerspectiveDolly({
   let principalOffset = Object.freeze([0, 0]);
   let projection = null;
   let lod = levelOfDetailFor(levelOfDetail, Number.POSITIVE_INFINITY);
+  let systemOpacity = 0;
+  let sunMarkerOpacityValue = 0;
   let publishedSceneTransform = null;
   let transformWrites = 0;
 
@@ -221,6 +276,14 @@ export function createPerspectiveDolly({
     // body's depth unscaled, which a real perspective camera notices.
     publish(sceneMatrix, scenePresentation) {
       const distance = cameraState.distance;
+      // The system's visibility depends on the distance alone, so it is set
+      // before the projection decides whether to work on the system.
+      if (system !== null) {
+        systemOpacity = systemFade === null
+          ? 1
+          : planetarySystemOpacity(systemFade, distance / plan.orbit.maximumExtentUnits);
+        heliocentric.setSystemOpacity(systemOpacity);
+      }
       projection = heliocentric.publish({
         rotation: rotationFromMatrix3d(sceneMatrix),
         distance,
@@ -246,6 +309,12 @@ export function createPerspectiveDolly({
       ));
       lod = levelOfDetailFor(levelOfDetail, projection.body.silhouetteDiameter);
       heliocentric.setMarkerOpacity(lod.markerOpacity);
+      if (system !== null) {
+        sunMarkerOpacityValue = sunMarker === null
+          ? 0
+          : sunMarkerOpacity(sunMarker, projection.sun.spriteDiameter);
+        heliocentric.setSunMarkerOpacity(sunMarkerOpacityValue);
+      }
       return Object.freeze({
         distance,
         focal,
@@ -255,6 +324,13 @@ export function createPerspectiveDolly({
         body: projection.body,
         sun: projection.sun,
         levelOfDetail: lod,
+        ...(system === null ? {} : {
+          planetarySystem: Object.freeze({
+            opacity: systemOpacity,
+            sunMarkerOpacity: sunMarkerOpacityValue,
+            projected: projection.system !== null,
+          }),
+        }),
       });
     },
     // The drag trackball: the projected silhouette. A small body still orbits
@@ -295,6 +371,10 @@ export function createPerspectiveDolly({
       });
     },
     levelOfDetail: () => lod,
+    planetarySystem: () => system === null ? null : Object.freeze({
+      opacity: systemOpacity,
+      sunMarkerOpacity: sunMarkerOpacityValue,
+    }),
     stats({ wheelDollies = 0 } = {}) {
       return Object.freeze({
         projection: cameraPlan.projection,
@@ -304,10 +384,23 @@ export function createPerspectiveDolly({
           maximumDistance,
           minimumDistanceKilometers: minimumDistance() * kilometersPerUnit,
           maximumDistanceKilometers: maximumDistance * kilometersPerUnit,
+          maximumDistanceOverOrbitExtentEffective: maximumDistance / plan.orbit.maximumExtentUnits,
+          // The wheel is multiplicative: the whole range in log-distance,
+          // and the mouse notches (100 delta units each) it takes end to end.
+          logDistanceRange: Math.log(maximumDistance / minimumDistance()),
+          wheelNotchesEndToEnd: Math.log(maximumDistance / minimumDistance()) /
+            (cameraPlan.dolly.wheelStepPerDelta * 100),
           wheelDollies,
         }),
         levelOfDetail,
         orbitLineFade: cameraPlan.orbitLineFade,
+        planetarySystem: system === null ? null : Object.freeze({
+          fade: systemFade,
+          sunMarker,
+          bodyCount: system.bodies.length,
+          maximumExtentUnits: system.maximumExtentUnits,
+          maximumExtentKilometers: system.maximumExtentUnits * kilometersPerUnit,
+        }),
         sceneTransformWrites: transformWrites,
       });
     },

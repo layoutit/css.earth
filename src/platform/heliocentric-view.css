@@ -54,6 +54,31 @@
   pointer-events: none;
 }
 
+/* The planetary system group: the other planets' orbit pieces and markers,
+   with the group's opacity written by the dolly (it fades in as the camera
+   dollies out). Its lines are thinner and fainter than the body's own orbit
+   so that one stays the reference. */
+.planet-heliocentric-system {
+  --planet-orbit-line-thickness: 1px;
+  --planet-orbit-line-color: rgba(255, 243, 224, 0.42);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Planet and Sun markers: screen-space billboards at the shell's marker size
+   for the body; tile, size and opacity are written by the runtime. */
+.planet-heliocentric-system-marker,
+.planet-heliocentric-sun-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
 /* The Sun's own perspective root: it shares the body camera's box and eye
    (the shared orbit writes both roots' perspective and origin from the
    prepared camera plan) and is inserted before the body's root so the body

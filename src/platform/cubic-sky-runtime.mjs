@@ -1562,6 +1562,16 @@ export function createRetainedCubicSkyOrbit({
           orbitPieceCount: view.orbitPieceCount,
           orbitOpacity: view.orbitOpacity,
           bodyMarkerOpacity: view.markerOpacity,
+          ...(view.systemOpacity === undefined ? {} : {
+            planetarySystem: Object.freeze({
+              opacity: view.systemOpacity,
+              orbitPieceCount: view.systemPieceCount,
+              markerVisibleCount: view.systemMarkerVisibleCount,
+              bodies: view.systemBodies,
+              sunMarkerOpacity: view.sunMarkerOpacity,
+              sunMarkerVisible: view.sunMarkerVisible,
+            }),
+          }),
         }),
       });
     },
@@ -1596,6 +1606,8 @@ export function createRetainedCubicSkyOrbit({
           runtimeTransformStringWrites: publications * 4,
           orbitPieceCount: heliocentric.state().orbitPieceCount,
           orbitPoolOverflows: heliocentric.state().orbitPoolOverflows,
+          systemOrbitPieceCount: heliocentric.state().systemPieceCount ?? 0,
+          systemPoolOverflows: heliocentric.state().systemPoolOverflows ?? 0,
         } : {}),
       });
     },

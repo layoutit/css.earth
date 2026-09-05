@@ -157,7 +157,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       heliocentric = definition.heliocentricView == null ? null : environment.mountHeliocentric({ host: stage,
         before: mounted.cameraElement, plan: definition.heliocentricView.plan, objectId: definition.id,
         sunImageUrl: context.density === 2 ? definition.sun.asset.url2x : definition.sun.asset.url,
-        markerSprite: definition.heliocentricView.bodyMarker });
+        markerSprite: definition.heliocentricView.bodyMarker, systemMarkers: definition.heliocentricView.systemMarkers ?? null });
       if (heliocentric) context.own(() => heliocentric.destroy());
       const directionalSun = definition.sun == null || heliocentric ? null : environment.mountSun({ host: stage, plan: definition.sun,
         imageDensity: context.density, objectId: definition.id, before: mounted.cameraElement });
@@ -242,6 +242,9 @@ export function createObjectRuntime(definition, services = nativeServices) {
           retainedSunBillboardCount: definition.sun == null ? 0 : 1,
           retainedOrbitPieceCount: heliocentric?.retainedOrbitPieceCount ?? 0,
           retainedBodyMarkerCount: heliocentric === null ? 0 : 1,
+          retainedSystemOrbitPieceCount: heliocentric?.retainedSystemOrbitPieceCount ?? 0,
+          retainedSystemMarkerCount: heliocentric?.retainedSystemMarkerCount ?? 0,
+          retainedSunMarkerCount: heliocentric?.retainedSunMarkerCount ?? 0,
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
         runtime: Object.freeze({ lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection.state, controls: controls.stats, view: () => currentView,

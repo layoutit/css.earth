@@ -13,6 +13,7 @@ import {
 import {
   NOMINAL_SOLAR_RADIUS_KILOMETERS,
   PREPARED_HELIOCENTRIC_VIEW_SCHEMA,
+  validatePreparedPlanetarySystem,
   add,
   cross,
   determinant,
@@ -35,6 +36,9 @@ export function prepareHeliocentricView({
   bodyRadiusUnits,
   bodyRadiusKilometers,
   sunSprite,
+  // Optional: the rest of the planetary system around this body, prepared by
+  // prepare-planetary-system.mjs in the same frame and units.
+  system,
 }) {
   if (!/^[a-z][a-z0-9-]*$/u.test(bodyId ?? "") ||
       typeof presentationFrame?.toPresentation !== "function" ||
@@ -120,7 +124,7 @@ export function prepareHeliocentricView({
     0,
   );
   const sunRadiusUnits = NOMINAL_SOLAR_RADIUS_KILOMETERS / kilometersPerUnit;
-  return Object.freeze({
+  const plan = Object.freeze({
     schema: PREPARED_HELIOCENTRIC_VIEW_SCHEMA,
     model: "body-centred-true-ellipse-and-sun-at-observed-distance",
     bodyId,
@@ -169,6 +173,17 @@ export function prepareHeliocentricView({
       localRefinementHalvings: LOCAL_REFINEMENT_HALVINGS,
       maximumExtentUnits,
     }),
+    ...(system === undefined ? {} : { system }),
     runtimeGeometryDerivation: false,
   });
+  if (system !== undefined) {
+    // The system was resolved through the frame tree from the same geometry;
+    // its Sun and units must agree with this plan's or the two describe
+    // different scenes.
+    if (Math.abs(system.units?.kilometersPerUnit - kilometersPerUnit) > 1e-9 * kilometersPerUnit) {
+      throw new RangeError("The planetary system was prepared in other units than the heliocentric view.");
+    }
+    validatePreparedPlanetarySystem(system, plan);
+  }
+  return plan;
 }

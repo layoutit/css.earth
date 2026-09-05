@@ -1,7 +1,11 @@
 // A body's heliocentric neighbourhood as real geometry around the body: the
 // Sun at its observed distance and the body's orbit as a true ellipse, both in
 // the body-centred presentation frame the retained scene is prepared in, plus
-// the camera-relative projection that puts them on screen.
+// the camera-relative projection that puts them on screen. A plan may carry
+// the rest of the planetary system (`plan.system`, prepared by
+// prepare-planetary-system.mjs): the other planets' orbits as the same kind
+// of vertex ring and their epoch positions as billboard markers, projected
+// through the same camera on request.
 //
 // Preparation (`prepareHeliocentricView`, prepare-heliocentric-view.mjs) runs
 // in the object's prepare tools and only transports orbital facts from the
@@ -48,7 +52,35 @@ export function validatePreparedHeliocentricView(plan) {
       plan.runtimeGeometryDerivation !== false) {
     throw new TypeError("Prepared heliocentric view is incompatible.");
   }
+  if (plan.system !== undefined) validatePreparedPlanetarySystem(plan.system, plan);
   return plan;
+}
+
+export const PREPARED_PLANETARY_SYSTEM_SCHEMA =
+  "cssearth-prepared-planetary-system@1";
+
+export function validatePreparedPlanetarySystem(system, plan) {
+  if (system?.schema !== PREPARED_PLANETARY_SYSTEM_SCHEMA ||
+      system.observer !== plan.bodyId ||
+      !vector(system.sun?.position) ||
+      system.sun.position.some((component, index) =>
+        Math.abs(component - plan.sun.position[index]) > 1e-3) ||
+      !positive(system.maximumExtentUnits) ||
+      !(system.maximumExtentUnits >= plan.orbit.maximumExtentUnits) ||
+      !Array.isArray(system.bodies) || system.bodies.length === 0 ||
+      system.bodies.some((body) =>
+        !/^[a-z][a-z0-9-]*$/u.test(body?.id ?? "") || body.id === plan.bodyId ||
+        !vector(body.position) || !positive(body.semiMajorAxisUnits) ||
+        !unit(body.orbit?.normal) || !unit(body.orbit?.perihelionDirection) ||
+        !Array.isArray(body.orbit.vertices) || body.orbit.vertices.length < 8 ||
+        body.orbit.vertexCount !== body.orbit.vertices.length ||
+        !body.orbit.vertices.every(vector) ||
+        body.orbit.vertices[0].some((component, index) => component !== body.position[index])) ||
+      new Set(system.bodies.map((body) => body.id)).size !== system.bodies.length ||
+      system.runtimeGeometryDerivation !== false) {
+    throw new TypeError("Prepared planetary system is incompatible.");
+  }
+  return system;
 }
 
 // The camera: a CSS perspective camera whose eye sits `focal` pixels in front
@@ -72,6 +104,7 @@ export function projectHeliocentricView(plan, {
   principalOffset = [0, 0],
   frustumPadding = 1.25,
   nearShare = 0.01,
+  system = false,
 }) {
   if (!Array.isArray(rotation) || rotation.length !== 9 ||
       rotation.some((value) => !Number.isFinite(value)) ||
@@ -184,49 +217,86 @@ export function projectHeliocentricView(plan, {
 
   // The orbit: each chord of the prepared ring, near-clipped, frustum-clipped
   // and cut where the body hides it, as screen-space segments.
-  const vertices = plan.orbit.vertices;
-  const eyes = vertices.map(toEye);
-  const segments = [];
   const hidden = (eye) => rayHitsSphereBefore(eye, bodyCenter, bodyRadius);
-  for (let index = 0; index < eyes.length; index += 1) {
-    let start = eyes[index];
-    let end = eyes[(index + 1) % eyes.length];
-    let startDepth = depthOf(start);
-    let endDepth = depthOf(end);
-    if (startDepth <= near && endDepth <= near) continue;
-    if (startDepth <= near) {
-      start = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
-      startDepth = near;
-    } else if (endDepth <= near) {
-      end = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
-      endDepth = near;
+  const projectRing = (vertices) => {
+    const eyes = vertices.map(toEye);
+    const segments = [];
+    for (let index = 0; index < eyes.length; index += 1) {
+      let start = eyes[index];
+      let end = eyes[(index + 1) % eyes.length];
+      let startDepth = depthOf(start);
+      let endDepth = depthOf(end);
+      if (startDepth <= near && endDepth <= near) continue;
+      if (startDepth <= near) {
+        start = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
+        startDepth = near;
+      } else if (endDepth <= near) {
+        end = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
+        endDepth = near;
+      }
+      const startScreen = project(start);
+      const endScreen = project(end);
+      const window = clipSegmentToRectangle(
+        startScreen,
+        endScreen,
+        clipX,
+        clipY,
+      );
+      if (window === null) continue;
+      // Screen fractions back to eye-space fractions (perspective-correct).
+      const t0 = eyeFraction(window[0], startDepth, endDepth);
+      const t1 = eyeFraction(window[1], startDepth, endDepth);
+      const visibleStart = lerp(start, end, t0);
+      const visibleEnd = lerp(start, end, t1);
+      for (const [pieceStart, pieceEnd] of splitVisible(
+        visibleStart,
+        visibleEnd,
+        hidden,
+      )) {
+        const [x0, y0] = project(pieceStart);
+        const [x1, y1] = project(pieceEnd);
+        if (!Number.isFinite(x0) || !Number.isFinite(y0) ||
+            !Number.isFinite(x1) || !Number.isFinite(y1)) continue;
+        if (Math.hypot(x1 - x0, y1 - y0) < 0.05) continue;
+        segments.push(Object.freeze([x0, y0, x1, y1]));
+      }
     }
-    const startScreen = project(start);
-    const endScreen = project(end);
-    const window = clipSegmentToRectangle(
-      startScreen,
-      endScreen,
-      clipX,
-      clipY,
-    );
-    if (window === null) continue;
-    // Screen fractions back to eye-space fractions (perspective-correct).
-    const t0 = eyeFraction(window[0], startDepth, endDepth);
-    const t1 = eyeFraction(window[1], startDepth, endDepth);
-    const visibleStart = lerp(start, end, t0);
-    const visibleEnd = lerp(start, end, t1);
-    for (const [pieceStart, pieceEnd] of splitVisible(
-      visibleStart,
-      visibleEnd,
-      hidden,
-    )) {
-      const [x0, y0] = project(pieceStart);
-      const [x1, y1] = project(pieceEnd);
-      if (!Number.isFinite(x0) || !Number.isFinite(y0) ||
-          !Number.isFinite(x1) || !Number.isFinite(y1)) continue;
-      if (Math.hypot(x1 - x0, y1 - y0) < 0.05) continue;
-      segments.push(Object.freeze([x0, y0, x1, y1]));
+    return Object.freeze(segments);
+  };
+  const segments = projectRing(plan.orbit.vertices);
+
+  // A point in the scene as a screen-space billboard: where it lands, and
+  // whether it is in front of the camera, inside the viewport and not behind
+  // the body.
+  const projectPoint = (point) => {
+    const eye = toEye(point);
+    const depth = depthOf(eye);
+    if (depth <= near) {
+      return Object.freeze({ visible: false, classification: "behind-camera", depth, screen: null });
     }
+    const [x, y] = project(eye);
+    const inside = Math.abs(x) <= halfWidth && Math.abs(y) <= halfHeight;
+    const occluded = rayHitsSphereBefore(eye, bodyCenter, bodyRadius);
+    return Object.freeze({
+      visible: inside && !occluded,
+      classification: !inside ? "outside-viewport" : occluded ? "behind-body" : "visible",
+      depth,
+      screen: Object.freeze([x, y]),
+    });
+  };
+
+  // The rest of the planetary system, only when asked for: below the fade-in
+  // distance nothing is projected, so a near view costs what it did.
+  let systemProjection = null;
+  if (system && plan.system) {
+    systemProjection = Object.freeze({
+      sun: projectPoint(plan.system.sun.position),
+      bodies: Object.freeze(plan.system.bodies.map((body) => Object.freeze({
+        id: body.id,
+        marker: projectPoint(body.position),
+        orbitSegments: projectRing(body.orbit.vertices),
+      }))),
+    });
   }
 
   return Object.freeze({
@@ -238,7 +308,8 @@ export function projectHeliocentricView(plan, {
     principalOffset: Object.freeze([ox, oy]),
     body,
     sun,
-    orbitSegments: Object.freeze(segments),
+    orbitSegments: segments,
+    system: systemProjection,
   });
 }
 

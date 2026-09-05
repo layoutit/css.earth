@@ -190,12 +190,19 @@ export function requireObjectRuntimeDefinition(definition, { objectId = definiti
     // The Sun as real geometry with the body's orbit: needs the observed Sun
     // plan for its direction and sprite, the perspective camera that frames
     // by dolly, and the shell's own navigation sprite as the far-view marker.
-    const { plan, bodyMarker } = record(definition.heliocentricView, "Heliocentric view");
+    const { plan, bodyMarker, systemMarkers } = record(definition.heliocentricView, "Heliocentric view");
     validatePreparedHeliocentricView(plan);
+    const sprite = marker => Number.isSafeInteger(marker?.index) && marker.index >= 0 &&
+      Number.isSafeInteger(marker.count) && marker.count > marker.index && marker.size > 0;
     if (definition.sun == null || definition.camera.projection?.model !== "css-perspective-shared-with-sky" ||
-        !nonempty(bodyMarker?.url) || !Number.isSafeInteger(bodyMarker.index) || bodyMarker.index < 0 ||
-        !Number.isSafeInteger(bodyMarker.count) || bodyMarker.count <= bodyMarker.index || !(bodyMarker.size > 0)) {
+        !nonempty(bodyMarker?.url) || !sprite(bodyMarker)) {
       throw new TypeError("A heliocentric view requires the observed Sun plan, a perspective camera and the shell's body marker.");
+    }
+    // The planetary system draws every other body and the Sun from the same
+    // atlas: one sprite per prepared body, and one for the Sun.
+    if (plan.system !== undefined && (!nonempty(systemMarkers?.url) || !sprite(systemMarkers.sun) ||
+        plan.system.bodies.some(body => !sprite(systemMarkers.bodies?.[body.id])))) {
+      throw new TypeError("A prepared planetary system requires a shell marker for the Sun and every body.");
     }
   }
   if (definition.inputSelector != null && !nonempty(definition.inputSelector)) {
