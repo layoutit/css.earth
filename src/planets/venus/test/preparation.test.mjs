@@ -518,8 +518,8 @@ test("keeps Venus runtime code on prepared retained-DOM paths", async () => {
   const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "venus") });
   assert.equal(audit.complete, true);
   assert.ok(audit.sharedClosure.includes("src/platform/cubic-sky-runtime.mjs"));
-  assert.match(presentation, /createPolyCamera/u);
-  assert.match(presentation, /createPolyScene/u);
+  assert.doesNotMatch(presentation, /createPolyCamera|createPolyScene|camera\.update/u);
+  assert.equal(PREPARED_VENUS_SCENE.camera.style, "perspective:1000000px");
   assert.doesNotMatch(client,
     /fetch\(|XMLHttpRequest|canvas|getContext\(|style\.filter/u);
   assert.doesNotMatch(styles,

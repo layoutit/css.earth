@@ -1,5 +1,7 @@
 import { createLatestSelection } from "./latest-selection.mjs";
-import { invokeRuntimeHook, requireObjectAction, requireObjectSelection, requireResolvedPresentation } from "./object-runtime-contract.mjs";
+import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-presentation-contract.mjs";
+import { resolvePreparedPresentation } from "./prepared-presentation.mjs";
+import { initialObjectSelection, reduceObjectSelection, invokeRuntimeHook, requireObjectAction, requireObjectSelection, requireResolvedPresentation } from "./object-runtime-contract.mjs";
 
 const sameKeys = (a, b) => a.length === b.length && a.every((key, index) => key === b[index]);
 
@@ -7,7 +9,9 @@ export function createObjectSelectionRuntime({
   definition, presentation, residency, lifetime,
   onChange = () => {}, onCommit = () => {}, onFatalError, onMaterialError = () => {},
 }) {
-  let desired = definition.initialSelection, committed = null, committedPlan = null, view = null;
+  const prepared = definition.schema === PREPARED_OBJECT_RUNTIME_SCHEMA;
+  const initialSelection = prepared ? initialObjectSelection(definition.controls) : definition.initialSelection;
+  let desired = initialSelection, committed = null, committedPlan = null, view = null;
   let active = null, destroyed = false, started = false, busy = false, error = null;
   let requests = 0, passes = 0, commits = 0, framePublications = 0;
   const live = () => !destroyed && !lifetime.disposed;
@@ -20,7 +24,9 @@ export function createObjectSelectionRuntime({
 
   function resolve(selection) {
     try {
-      return requireResolvedPresentation(invokeRuntimeHook(definition, "resolvePresentation", [{ selection, view, previousPlan: committedPlan }]), definition);
+      return requireResolvedPresentation(prepared
+        ? resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan })
+        : invokeRuntimeHook(definition, "resolvePresentation", [{ selection, view, previousPlan: committedPlan }]), definition);
     } catch (failure) { if (live()) onFatalError(failure); throw failure; }
   }
   function frame(nextSelection = committed, nextPlan = committedPlan) {
@@ -114,7 +120,7 @@ export function createObjectSelectionRuntime({
         if (!live() || active !== request) return;
         discard(request);
         discard(request.previous);
-        desired = committed ?? definition.initialSelection;
+        desired = committed ?? initialSelection;
         active = null;
         error = failure.message;
       },
@@ -136,7 +142,7 @@ export function createObjectSelectionRuntime({
       if (!live() || !committed) return Promise.resolve(false);
       const valid = requireObjectAction(definition.controls, action);
       let next;
-      try { next = requireObjectSelection(invokeRuntimeHook(definition, "reduceSelection", [desired, valid]), definition.controls); }
+      try { next = requireObjectSelection(prepared ? reduceObjectSelection(desired, valid) : invokeRuntimeHook(definition, "reduceSelection", [desired, valid]), definition.controls); }
       catch (failure) { onFatalError(failure); throw failure; }
       return run(next, "selection");
     },

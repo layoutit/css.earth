@@ -182,6 +182,7 @@ const prepared = Object.freeze({
   runtimeRasterization: false,
   camera: Object.freeze({
     state: Object.freeze({ ...camera.state }),
+    style: "perspective:1000000px",
     sceneStyle: `transform:${buildPolyCameraSceneTransform(camera.state)}`,
     minimumControlPitchDegrees: 0,
     maximumControlPitchDegrees,
