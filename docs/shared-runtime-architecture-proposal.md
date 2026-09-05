@@ -4,8 +4,8 @@ All eleven entries in [`OBJECTS`](../site/objects.mjs) now use
 `cssearth-object-runtime@2`. Each package supplies prepared presentation data and
 control content to the same runtime. There are no package presentation callbacks,
 private material publishers, or shared branches selected by an object ID.
-The strict source audits pass; final browser, visual, and performance qualification
-remains pending. See [the proof](generic-runtime-contract-proof.md).
+The recorded strict source audits and all-object native ownership checks pass.
+Final integrated visual and performance qualification remains unproven. See [the proof](generic-runtime-contract-proof.md).
 
 ## Ownership and the preparation boundary
 
@@ -22,8 +22,10 @@ remains pending. See [the proof](generic-runtime-contract-proof.md).
 | Optional page layers and destinations | Shared prepared-map and navigation modules | Prepared page trees, carrier indices, catalog and navigation bounds |
 | Diagnostics | Shared runtime and browser-profile implementation | Read-only observation mappings and audit facts |
 
-Source conversion, geometry, atlas creation, atmosphere integration and material
-address generation run offline. The browser validates and decodes data, mounts the
+Source conversion, geometry, atlas creation, atmosphere integration, material
+addresses and control legends are prepared offline. One shared control compiler
+turns each editable `site/control-content.source.mjs` recipe into literal
+`site/control-content.mjs` data before presentation preparation. The browser validates and decodes data, mounts the
 prepared records, selects addresses and applies view-dependent affine transforms.
 It does not import a package builder or derive scene assets. Source and provenance
 stay beside each object. The highest prepared asset density is selected once per

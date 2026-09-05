@@ -6,7 +6,7 @@ demand, publishes materials, and owns camera, resources, playback and cleanup.
 Packages contain source inputs, offline preparation, generated records and actual
 control content. No package presentation executor remains in the runtime closure.
 
-The source architecture passes its strict audits. Native Chrome instrumentation
+The recorded source architecture passes its strict audits. Native Chrome instrumentation
 also passed all eleven objects at DPR 1 and 2: one actual camera per scene and
 the shared publication path for every observed material target. Final integration,
 aggregate tests and visual qualification remain separate; the PR is not declared
@@ -114,8 +114,10 @@ phases, and the Shadows variant supplies `frameOffset: 0` or `256`. Both ranges
 include directional atmosphere. `publishWithAddress` keeps light rotation tied
 to an available address; it prevents a pending material from advancing its
 rotation independently. The same shared material publisher handles both objects.
-Fresh regeneration, provenance verification and final visual qualification of
-these integrated atmosphere changes remain pending.
+The integrated atmosphere inputs and prepared resources are bound to independent
+material and native-state receipts. The forced preparation runs preserve their
+outputs. Strict pixel comparisons retain differences; final visual acceptance
+is not established.
 
 ## Production data closure
 
@@ -128,20 +130,28 @@ titles and defaults, including shared shell title imports.
 The imported generated modules shrink from 146,828 to 753 bytes for Uranus and
 145,284 to 670 bytes for Neptune: 290,689 raw bytes removed from those imports.
 The production client closures no longer reach either large lens module. This
-is a source-payload measurement; final compressed-bundle, transfer and performance
-measurements are pending.
+is a source-payload measurement. A complete earlier all-object transfer capture
+contains 44 measurements; final integrated performance remains unqualified.
 
-## Validation status
+## Final integration and validation status
 
-The current source ownership and prepared-presentation audits pass for all eleven
-objects, with no private owner or shared object-ID dispatch violations. Their 41
-focused regression tests pass. Earlier focused checks also passed 64 Saturn tests,
-five shared ellipsoid tests and 31 Uranus/Neptune checks; the scope and limitations
-are recorded in [the proof](generic-runtime-contract-proof.md).
+The later shared zoom/sky-input and panel/legend commits are preserved through
+normal merges. One common offline control compiler converts each editable
+`site/control-content.source.mjs` recipe to literal runtime control data, including
+legend colors and categories. It runs immediately before presentation preparation;
+source recipes and generated outputs have separate preparation-cache roles.
+Uranus and Neptune keep their small control inputs through this integration.
 
-Earlier visual captures retain unresolved strict pixel differences. Diagnostic
-repeatability and successful focused tests do not convert those failures into a
-pass. Final source hashes, prepared-asset receipts, aggregate gates, native-owner
-observations, matched DPR 1/2 renders and payload/performance results must be bound
-to the final integrated source. The [adapter data inventory](shared-runtime-architecture-proposal.md#remaining-adapter-differences-are-data)
-describes the remaining differences without assigning execution back to packages.
+The recorded source passes strict ownership checks for all eleven objects. Real
+Chrome observed the shared native owners in 22 cases, shared conformance passed
+143 cases, and playback passed 22 cases. The original browser aggregate stopped
+at an obsolete Saturn assertion; its corrected compound harness passed all six
+cases at DPR 1/2. The unit diagnostics recorded 1,093 passes and two obsolete
+preparation-command assertions, whose corrected focused checks passed.
+
+At the user's request, no further full preparation, capture matrix or aggregate
+was launched after the final integration. The current code therefore carries the
+recorded evidence and its source limits, without a final aggregate-green claim.
+Strict rendered differences and final production performance remain unqualified.
+See [the proof and actual adapter differences](generic-runtime-contract-proof.md)
+for the completed measurements and unresolved boundaries. PR2 remains unmerged.

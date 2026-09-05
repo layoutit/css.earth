@@ -1,98 +1,129 @@
 # Generic runtime contract proof
 
-The current strict source audits pass for all eleven registered objects: every
-client binds the same v2 runtime, and each package supplies data to one shared
-scene builder, material publisher, demand interpreter, camera and selection owner.
-No private runtime executor or shared object-ID dispatch is present in the audited
-closure. No new object or route was added to establish this result.
+All eleven existing objects now bind the same prepared runtime. Their packages
+supply literal scene records, material addresses, selection variants and control
+content. One shared implementation builds scenes, publishes materials, resolves
+demand, owns the camera and manages selection, resources, playback and disposal.
+No new object was introduced as proof.
 
-Final native-browser ownership, aggregate gates, full visual comparison and
-payload/performance qualification are **PENDING** for the final integrated source.
-The source audit itself reports native ownership as **UNPROVEN**. PR readiness
-must not be inferred from this source result or the earlier focused checks.
+**Architectural ownership is demonstrated on the recorded qualification source.
+Full visual equivalence and merge readiness are not established.** The final
+integration includes later zoom, sky-input, panel and legend changes. The full
+suite was not repeated after that integration at the user's request.
 
-## Current executable source evidence
+## Evidence boundary
 
-| Claim | Evidence | Current result and limit |
+The implementation commit is `cf45c49540d581c63f618de35dcf6824038d274b`.
+Its 1,217-file application source manifest hashes to
+`e8e38941baa22d9e12d27b2f90cec38aabf15e554efc602e31a34745c6deefdb`.
+That final source has not had another aggregate run.
+
+The completed native run used source
+`534c4e9d1811bc7bb5cda2c16cdcc8bd40dd4f2bf82ab7ecf5154673ca0a4e2d`
+in real Chrome 152.0.7977.76 at DPR 1 and 2. It observed one actual camera per full
+session and the common publisher for every declared material target. Static
+closure checks separately followed the real registry loaders and rejected private
+owners, executable prepared records, extra cameras and shared object-ID dispatch.
+
+The [machine-readable record](prepared-presentation-evidence.json) identifies the
+source, report hashes, preparation timings, comparison counts and delivery limits.
+Raw captures and failed runs remain in the local evidence directory
+`output/presentation-generalization/260905-001/`. A later successful diagnostic
+never overwrites an earlier failed result.
+
+| Check | Recorded result | Limit |
 | --- | --- | --- |
-| Every registered object uses the same runtime | [`check-object-runtime-ownership.mjs`](../tools/check-object-runtime-ownership.mjs) follows the real `OBJECTS` client closures and actual control exports | All 11 use `cssearth-object-runtime@2`; one factory call per client; no private owners or orphan executors. |
-| Shared runtime does not dispatch by object ID | The same audit checks the reachable shared closure and camera factory sites | Zero shared violations; one camera factory site in the common cubic-sky runtime. |
-| Presentations and controls are data | [`check-prepared-presentation.mjs`](../tools/check-prepared-presentation.mjs) parses generated literal exports, validates thin definitions and actual control content, then applies the strict schema | All 11 pass; evidence is `validated-source-data`, with `observedOwners: null`. |
-| Negative ownership and schema fixtures fail as intended | `tools/check-object-runtime-ownership.test.mjs` and `tools/check-prepared-presentation.test.mjs` | 41 focused tests pass in the review snapshot. |
-| Actual native owners and lifetime match the contract | Final real-Chrome instrumentation at DPR 1 and 2 | **PENDING**. Static imports do not observe native cameras, scheduling, writes or resource lifetime. |
+| Strict ownership and prepared-presentation audits | All 11 objects passed; 41 negative/closure regression tests passed | Recorded source, not a rerun of the final integration. |
+| Native ownership | 22/22 cases passed | One camera and common native writers at both DPRs. |
+| Shared browser conformance | 143/143 cases passed | Recorded source. |
+| Native playback | 22/22 cases passed | Recorded source. |
+| Unit aggregate plus remaining-package diagnostics | 1,093/1,095 passed | Two obsolete preparation-command assertions failed. Their corrected focused batch passed; no claim of a green full aggregate. |
+| Compound selection and failure handling | Corrected harness passed 6/6 at DPR 1/2 | The original aggregate stopped on its obsolete Saturn dual-selection assertion. BFCache and package smoke were not reached. |
+| Production build | Passed at source `534c4e9d`; 2,558 files, 912,160,492 bytes | Final panel/control integration was not rebuilt. |
+| All-object production payload capture | 44 measurements completed with no errors | Earlier production sources; does not establish final frame-time budgets. |
 
-The audits record source hashes; the final delivery receipt must bind fresh reports
-to the final source below. Their AST and schema checks are practical regression
-barriers, not formal proofs against arbitrary JavaScript obfuscation.
+## Actual differences between adapters
 
-The [architecture inventory](shared-runtime-architecture-proposal.md) lists the
-remaining adapter data differences. The invariant is shared execution: different
-frame banks, projection parameters, demand policies or optional page records do
-not supply package callbacks. [`prepared-presentation.mjs`](../src/platform/prepared-presentation.mjs)
-mounts all node records; [`prepared-material.mjs`](../src/platform/prepared-material.mjs)
-publishes all material tracks.
+This table comes from the actual prepared definitions joined with observed native
+owners. Node counts cover prepared scene nodes, not the complete application DOM.
+All objects use exclusive lens selection and the same accumulated-matrix camera
+implementation.
 
-## Focused evidence retained during implementation
+| Object | Prepared nodes | Lenses | Variants | Material transport | Additional prepared content |
+| --- | ---: | ---: | ---: | --- | --- |
+| Sun | 1,034 | 4 | 4 | Static selection writes | Coupled surface, limb and corona textures. |
+| Mercury | 1,804 | 4 | 8 | Angle rotation; one lighting bank | Interior pose animation and symmetric row prewarming. |
+| Venus | 904 | 3 | 24 | Angle rotation; one composite bank | Phase remap, atmosphere and stars settings. |
+| Earth | 2,012 | 5 | 20 | Planar rotation; separate lighting and atmosphere banks | Two paged map layers, bounded page pools and destinations. |
+| Moon | 921 | 3 | 3 | Static selection writes | Surface and pole texture banks. |
+| Mars | 1,037 | 3 | 6 | Angle rotation; one composite bank | Two directional ranges, both containing atmosphere. |
+| Jupiter | 1,565 | 3 | 12 | Planar rotation; one lighting bank | Directional row prewarming, rings and moons. |
+| Saturn | 1,908 | 5 | 20 | Shared ellipsoid projection; 16 exterior and 4 interior banks | Prepared ring/shadow geometry and exclusive cross-section. |
+| Uranus | 2,128 | 3 | 12 | Planar rotation; three lighting banks | Three-row neighborhoods protected by six slots. |
+| Neptune | 1,454 | 3 | 12 | Planar rotation; three lighting banks | View-sensitive row demand and static-variant transition slots. |
+| Pluto | 921 | 3 | 3 | Static selection writes | Surface and pole texture banks. |
 
-| Scope | Observed result | What it establishes |
+Radii, frame counts, addresses, fallback rules, resource capacities, labels and
+optional map records differ as data. They do not select private implementations.
+The [architecture inventory](shared-runtime-architecture-proposal.md#remaining-adapter-differences-are-data)
+describes those parameters in more detail.
+
+Saturn's cross-section uses the common single-lens reducer. Selecting it replaces
+an exterior lens; selecting an exterior lens exits it; clicking it again keeps it
+selected. Rings and Shadows remain settings. The shared ellipsoid helper matches
+96 independent native camera/roll transforms and 900 analytic support cases.
+Those checks do not substitute for full-scene pixel qualification.
+
+## Preparation is part of the refactor
+
+`pnpm prepare:planets` uses one bounded registry-derived scheduler and verifies
+input, toolchain and output hashes before reusing an object. A failed producer
+cannot seal a receipt. Shared dependency changes invalidate reuse. Saturn prepares
+its normal material masters once; the composition phase verifies and consumes them.
+`pnpm prepare:planets:full` explicitly bypasses reuse.
+
+| Measured command | Wall time | Result |
 | --- | --- | --- |
-| Saturn selection, shared mount and package checks | 64 tests passed | Exclusive cross-section and committed-state preservation, prepared data and focused shared-runtime behavior. |
-| Parameterized ellipsoid helper | Five tests passed, including 900 independent analytic support cases | Radius, view, aspect, coverage and precision inputs work through a shared projection helper without DOM reads. |
-| Native ellipsoid projection reference | All 96 camera/roll transforms match the [source-bound fixture](../src/planets/saturn/test/fixtures/ellipsoid-projection-reference.json) exactly | Raw transform preservation against the independently captured reference; not a full rendered-frame comparison. |
-| Uranus/Neptune lens-control payload | 31 focused tests passed; actual old/new control objects are deeply equal; repeated control generation is byte-identical | Exact UI content and removal of the two large `preparedLenses.mjs` modules from production client closures. |
-| Earlier Mars, Uranus and Neptune material migrations | Their retained receipts contain 4,608, 13,824 and 13,824 independent material-state cases respectively | Scoped material-state comparisons at those recorded sources; no qualification of later atmosphere or payload changes. |
+| Previous serial preparation | 44m39s | Reference run. |
+| Optimized forced run 1 | 18m24s | All 11 objects regenerated. |
+| Optimized forced run 2 | 19m28s | All 3,498 source/output/receipt files identical to run 1. |
+| Unchanged ordinary preparation | 44s | 11 verified cache hits; zero objects rebuilt. |
 
-These checks cover different snapshots and are not a substitute for one final
-aggregate run. The shared atmosphere source now accepts Earth's Rayleigh/Mie
-profile and Mars's calibrated isotropic profile. Mars's two directional ranges
-use `frameOffset`, and both objects use the same material publisher. Regeneration,
-source acquisition verification and final atmosphere visuals remain pending.
+All 2,531 accepted image encodings were preserved in those forced runs. Earth's
+25.4 GB pinned geometry input accounted for about 38 seconds of the unchanged
+run. These are measurements on this host before the later panel/control
+integration; they are not timing promises for another machine or source revision.
 
-## Strict visual failures still open
+The incoming lens legends are also prepared offline. Editable per-object content
+recipes feed one compiler, and runtime imports literal control data. The compiler
+runs before presentation preparation. The new Mercury legend retains its pinned
+USGS source and the incoming 2,072-byte prepared raster.
 
-The original failed readbacks remain under
-`output/presentation-generalization/260905-001/`. No tolerance, mask or favorable
-phase selection has turned them into passes.
+## Visual and performance limits
 
-| Retained receipt | Original unresolved difference | Status |
-| --- | --- | --- |
-| `B9/qualification-open.json` — Mars | Six desktop DPR 1 speed-3 scene frames; 70,093 changed pixels, maximum channel delta 2 | **OPEN**; subsequent matching diagnostic pairs do not establish the original cause. |
-| `B11/qualification-open.json` — Uranus | Six desktop DPR 1 Shadows scene frames; 46,543 changed pixels per frame, maximum delta 1 | **OPEN**; later exact fresh-mount pairs do not explain the original failure. |
-| `B12/qualification-open.json` — Neptune | Six mobile DPR 1 shell frames; 2,313 changed pixels per frame, maximum delta 1 | **OPEN**; the original candidate values were outside the reference variation. |
+Completed comparisons retain strict failures. Sun and Pluto's compared frames are
+pixel-exact, but their reference repeatability failures still prevent an overall
+strict pass. Other objects contain differences that require qualification; Venus's
+isolated empty-style correction is proven, while its final whole-source receipt
+remains unsealed after the later input and panel changes.
 
-Those receipts have `strictPass: false` and do not qualify the final source.
-Intentional changes, including Saturn's exclusive cross-section and the atmosphere
-work, need their own current behavior and visual evidence. The final comparison
-must retain every ordered readback and identify intentional changes separately.
-No current all-frame pixel-parity or performance-improvement claim is made.
+A bounded Earth experiment established paint-history dependence for one rotated
+case: repainting the unchanged reference reproduced every original candidate
+value at all 31,939 changed pixels in each of its six phases. Computed styles,
+bounding rectangles and all 917 compositor layer identities stayed unchanged;
+only paint counts changed. This explains that difference set. It does not establish
+whole-frame parity or explain differences in other cases or objects.
 
-## Final delivery receipt
+Saturn's first desktop DPR 2 scene readback visibly lacks sections of the back
+rings: 213,328 pixels differ, with a maximum channel difference of 241. The next
+five readbacks match. That first-frame failure remains unexplained and prevents a
+claim that the rendered result is fully qualified.
 
-Populate this table only from the completed combined run. Until then, these fields
-are **PENDING**, including where an earlier source passed a similar gate.
+No masks, relaxed tolerances or favorable-frame selection were used. Strict
+failures remain failures. The exact comparison counts and residual qualifications
+are recorded in the machine-readable evidence and retained diagnostic receipts.
 
-| Required receipt | Final result |
-| --- | --- |
-| Final PR #2 commit and exact source manifest/hash | **PENDING** |
-| Fresh strict ownership and prepared-presentation reports bound to that source | **PENDING** |
-| Prepared-output reproducibility, loaded asset hashes and source/provenance identity | **PENDING** |
-| `pnpm acquire:planets -- --verify-only` | **PENDING** |
-| `pnpm test` | **PENDING** |
-| `pnpm build` | **PENDING** |
-| `pnpm test:browser`, all registered objects in real Chrome at DPR 1 and 2 | **PENDING** |
-| Native owner, retained identity, cancellation, remount and resource-lifetime observations | **PENDING** |
-| Exact reference/candidate source, response bytes, browser/GPU and unchanged harness identity | **PENDING** |
-| Full ordered matched visual comparison, including atmosphere and Saturn selection corrections | **PENDING** |
-| Production closure, compressed payload, transfer and unchanged performance budgets | **PENDING** |
-| Final PR #2 review summary with any remaining failed qualifications | **PENDING** |
-
-The two source reports can be reproduced with:
-
-```sh
-node tools/check-object-runtime-ownership.mjs --all
-node tools/check-prepared-presentation.mjs --all
-```
-
-A ready-to-merge claim requires the final receipts and an explicit account of any
-remaining failures. See [the implementation record](shared-runtime-implementation.md)
-for the code changes and preparation boundary.
+Final production performance workloads and the complete aggregate on the combined
+integration were not run. Earlier baseline budget failures remain disclosed in the
+existing evidence. The PR stays open and unmerged; this document makes no final
+pixel-parity, frame-budget or merge-readiness claim.
