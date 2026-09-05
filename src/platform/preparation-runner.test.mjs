@@ -8,6 +8,7 @@ test("runs an object-owned preparation plan in exact sequence", async () => {
   const calls = [];
   await runPreparationSteps({
     objectName: "Fixture",
+    projectRoot: "/project",
     toolDirectory: "/project/tools",
     steps: [["first.mjs"], ["second.mjs", "--proof"]],
     async runCommand(call) {
@@ -24,6 +25,7 @@ test("stops before later work when one preparation step fails", async () => {
   const calls = [];
   await assert.rejects(runPreparationSteps({
     objectName: "Fixture",
+    projectRoot: "/project",
     toolDirectory: "/project/tools",
     steps: [["first.mjs"], ["second.mjs"], ["third.mjs"]],
     async runCommand({ script }) {

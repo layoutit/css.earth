@@ -163,3 +163,25 @@ html[data-ready="true"] .venus-input-surface {
   from { transform: rotateZ(-118deg); }
   to { transform: rotateZ(-478deg); }
 }
+
+/* Retained sizing previously installed as a side effect of createPolyScene.
+   Scene preparation and the common camera now own this presentation. */
+.planet-stage[data-object-id="venus"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.planet-stage[data-object-id="venus"] .polycss-scene {
+  will-change: transform;
+}
+
+.planet-stage[data-object-id="venus"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}

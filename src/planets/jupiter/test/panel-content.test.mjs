@@ -17,39 +17,16 @@ test("publishes one source-bound Jupiter panel model", () => {
   assert.equal(PREPARED_JUPITER_PANEL.introduction,
     "The fifth planet from the Sun, Jupiter is the solar system's largest planet: a gas giant wrapped in colorful clouds and enormous storms.");
   assert.deepEqual(PREPARED_JUPITER_PANEL.facts, [
-    { label: "Distance", value: "778 million km" },
-    { label: "Diameter", value: "139,822 km" },
-    { label: "Year", value: "12 Earth years" },
-    { label: "Day", value: "9.9 hours" },
-    {
-      label: "Moons",
-      value: "115",
-      title: "JPL catalog snapshot retrieved 2026-08-30T21:12:38Z. Four Galilean moons use source imagery; 111 smaller moons use prepared catalog markers; all 57 IAU-named moons are labeled.",
-    },
+    { id: "distance-from-sun", label: "Distance from Sun", value: "778 million km" },
+    { id: "diameter", label: "Diameter", value: "139,822 km" },
+    { id: "orbital-period", label: "Orbital period", value: "12 Earth years" },
+    { id: "rotation-period", label: "Rotation period", value: "9.9 hours" },
+    { id: "axial-tilt", label: "Axial tilt", value: "3°" },
+    { id: "moon-count", label: "Moons", value: "115" },
+    { id: "ring-system", label: "Rings", value: "Present" },
   ]);
   assert.deepEqual(PREPARED_JUPITER_PANEL.moreFacts, [
-    {
-      label: "Rings",
-      value: "3 parts",
-      title: "A halo, main ring, and gossamer ring; the gossamer ring has Amalthea and Thebe components.",
-    },
-    { label: "Light time", value: "43 min" },
-    { label: "Tilt", value: "3\u00b0" },
-    {
-      label: "Cloud layers",
-      value: "71 km",
-      title: "Combined depth of Jupiter's three likely cloud layers",
-    },
-    {
-      label: "Wind",
-      value: "539 km/h",
-      title: "Upper-atmosphere equatorial wind speed",
-    },
-    {
-      label: "Great Red Spot",
-      value: "500 km",
-      title: "Depth constrained by Juno gravity data",
-    },
-    { label: "Magnetic field", value: "16\u201354\u00d7 Earth" },
+    { id: "wind-speed", label: "Wind", value: "539 km/h" },
+    { id: "great-red-spot-depth", label: "Great Red Spot depth", value: "500 km" },
   ]);
 });

@@ -27,7 +27,7 @@ try {
   }
   await page.waitForFunction(() => window.__mars?.ready === true);
   await page.evaluate(() => {
-    window.__mars.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     for (const orbit of document.querySelectorAll(".mars-moon-orbit")) {
       orbit.style.visibility = "hidden";
     }

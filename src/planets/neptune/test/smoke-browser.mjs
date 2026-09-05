@@ -130,7 +130,7 @@ console.log(JSON.stringify({ ok: true, route: "/neptune/", reports }, null, 2));
 
 async function assertRingCompleteness(page, density) {
   const geometry = await page.evaluate(() => {
-    window.__neptune.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     const hidden = [
       ...document.querySelectorAll(".planet-sidebar, .planet-topbar"),
     ];
@@ -224,14 +224,20 @@ async function proveInteraction(page, retainedCount) {
 
   const rings = page.locator('.planet-settings input[name="rings"]');
   await rings.evaluate((element) => element.click());
+  await page.waitForFunction(() => !window.__neptune.runtime.selection().pending && window.__neptune.features.state().rings === false);
   assert.equal(await page.evaluate(() =>
     window.__neptune.features.state().rings), false);
   assert.equal(await page.locator(".neptune-ring-plane").evaluate((node) =>
     getComputedStyle(node).visibility), "hidden");
   await rings.evaluate((element) => element.click());
+  await page.waitForFunction(() => !window.__neptune.runtime.selection().pending && window.__neptune.features.state().rings === true);
 
-  const speed = page.locator('.planet-settings button[name="speed"]');
-  await speed.evaluate((element) => element.click());
+  const speed = page.locator('.planet-settings input[name="speed"][type="range"]');
+  await speed.evaluate((element) => {
+    element.value = "2";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  await page.waitForFunction(() => window.__neptune.options.state().speed === 2);
   assert.equal(await page.evaluate(() =>
     window.__neptune.options.state().speed), 2);
 

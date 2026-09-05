@@ -8,6 +8,8 @@ const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const outputPath = resolve(
   process.argv[3] ?? "output/mercury-performance.json",
 );
+const deviceScaleFactor = Number(process.argv[4] ?? 1);
+assert.ok([1, 2].includes(deviceScaleFactor));
 const SATURN_STANDARD_MAX_INITIAL_RETAINED_NODES = 540;
 const SATURN_STANDARD_MAX_INTERACTIVE_RETAINED_NODES = 1_040;
 const SATURN_STANDARD_MAX_COMPOSITED_LAYERS = 630;
@@ -16,7 +18,7 @@ const browser = await chromium.launch({ channel: "chrome", headless: true });
 try {
   const context = await browser.newContext({
     viewport: { width: 1440, height: 900 },
-    deviceScaleFactor: 1,
+    deviceScaleFactor,
   });
   const page = await context.newPage();
   const session = await context.newCDPSession(page);
@@ -104,7 +106,7 @@ try {
       stableDomIdentity: window.__mercury.assertStableDomIdentity(),
       selectedPreparedDensity:
         window.__mercury.renderStats.textureStats.selectedPreparedDensity,
-      materialCache: window.__mercury.renderStats.textureStats.materialCache(),
+      materialCache: window.__mercury.runtime.resources().pools.find(pool => pool.id === "lighting"),
       cameraTransport: window.__mercury.camera.stats(),
     };
   });
@@ -118,7 +120,7 @@ try {
     schema: "cssmercury-browser-performance@1",
     route: "/mercury/",
     browser: "Chrome",
-    viewport: { width: 1440, height: 900, deviceScaleFactor: 1 },
+    viewport: { width: 1440, height: 900, deviceScaleFactor },
     ...profile,
     chrome: {
       jsHeapUsedBytes: metric.JSHeapUsedSize,
@@ -131,6 +133,9 @@ try {
       compositedLayers: compositedLayerCount,
     },
   };
+  // Preserve measured failures as evidence as well as successful runs.
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
   assert.ok(report.initialRetainedNodeCount <=
     SATURN_STANDARD_MAX_INITIAL_RETAINED_NODES);
   assert.ok(report.interactiveRetainedNodeCount <=
@@ -143,13 +148,11 @@ try {
   assert.equal(report.cameraTransport.cameraModel, "accumulated-matrix3d");
   assert.equal(report.cameraTransport.pitchBounded, false);
   assert.equal(report.cameraTransport.yawBounded, false);
-  assert.ok(report.cameraTransport.runtimeTransformStringWrites > 0);
-  assert.equal(report.materialCache.maximumRetainedRowCount, 3);
-  assert.ok(report.materialCache.retainedRowCount <= 3);
+  assert.ok(report.cameraTransport.publications > 0);
+  assert.equal(report.materialCache.capacity, 3);
+  assert.ok(report.materialCache.nativeSlots <= 3);
   assert.ok(report.synchronousPublicationMilliseconds < 50);
   assert.ok(report.framePublicationMilliseconds.p95 < 35);
-  await mkdir(dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
   console.log(JSON.stringify(report, null, 2));
 } finally {
   await browser.close();

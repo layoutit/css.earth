@@ -114,7 +114,6 @@ html[data-ready="true"] .pluto-input-surface { pointer-events: auto; }
   text-decoration: none;
 }
 
-html[data-playing="true"] .pluto-body { animation-play-state: running; }
 
 @keyframes pluto-sphere-spin {
   from { transform: rotateZ(180deg); }

@@ -60,7 +60,7 @@ try {
       })),
   }));
   await page.evaluate(() => {
-    window.__neptune.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__neptuneLongTasks = [];
     window.__neptune.camera.setState({ controlPitch: 0, zoom: 0.8 });
   });
@@ -143,6 +143,8 @@ try {
     externalRequests,
     browserProblems,
   });
+  // Preserve the measured report before any budget assertion.
+  console.log(JSON.stringify(report, null, 2));
   if (process.env.NEPTUNE_PERF_REPORT_ONLY !== "1") {
     assert.equal(report.runtime.stableDomIdentity, true);
     assert.equal(report.runtime.retainedLeafCount, 750);
@@ -163,7 +165,7 @@ try {
     assert.ok(report.maximumCompositorLayer.height <= 7_000,
       JSON.stringify(report.maximumCompositorLayer));
   }
-  console.log(JSON.stringify(report, null, 2));
+
   await cdp.detach();
   await context.close();
 } finally {

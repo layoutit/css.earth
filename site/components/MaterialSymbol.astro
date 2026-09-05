@@ -1,0 +1,20 @@
+---
+import { MATERIAL_SYMBOLS_OUTLINED } from "../source/icons/material-symbols-outlined.mjs";
+
+interface Props {
+  name: keyof typeof MATERIAL_SYMBOLS_OUTLINED.icons;
+}
+
+const { name } = Astro.props;
+const symbol = MATERIAL_SYMBOLS_OUTLINED.icons[name];
+---
+
+<svg
+  class="material-symbol"
+  viewBox={MATERIAL_SYMBOLS_OUTLINED.viewBox}
+  data-material-symbol={name}
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d={symbol.path} />
+</svg>

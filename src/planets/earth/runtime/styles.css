@@ -130,10 +130,6 @@ html[data-ready="true"] .earth-input-surface {
   visibility: hidden;
 }
 
-html[data-playing="true"] .earth-body {
-  animation-play-state: running;
-}
-
 @keyframes earth-sphere-spin {
   from { transform: rotateZ(-128deg); }
   to { transform: rotateZ(-488deg); }

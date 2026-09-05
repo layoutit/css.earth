@@ -28,19 +28,17 @@ test("publishes one source-bound Mercury panel model", async () => {
     editorial.sourceId);
   assert.equal(PREPARED_MERCURY_PANEL.sources.editorial.modified,
     editorial.modified);
-  assert.deepEqual(PREPARED_MERCURY_PANEL.facts.map(({ value }) => value), [
-    "58 million km",
-    "4,880 km",
-    "88 Earth days",
-    "176 Earth days",
+  assert.deepEqual(PREPARED_MERCURY_PANEL.facts, [
+    { id: "distance-from-sun", label: "Distance from Sun", value: "58 million km" },
+    { id: "diameter", label: "Diameter", value: "4,880 km" },
+    { id: "orbital-period", label: "Orbital period", value: "88 Earth days" },
+    { id: "rotation-period", label: "Rotation period", value: "59 Earth days" },
+    { id: "axial-tilt", label: "Axial tilt", value: "2°" },
+    { id: "moon-count", label: "Moons", value: "None" },
+    { id: "ring-system", label: "Rings", value: "None" },
   ]);
-  assert.deepEqual(PREPARED_MERCURY_PANEL.moreFacts.map(({ value }) => value), [
-    "3.2 min",
-    "2°",
-    "0",
-    "0",
-    "430°C",
-    "−180°C",
+  assert.deepEqual(PREPARED_MERCURY_PANEL.moreFacts, [
+    { id: "surface-temperature", label: "Surface temperature", value: "−180–430°C" },
   ]);
 
   const panel = await readFile(

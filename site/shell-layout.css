@@ -1,0 +1,168 @@
+/* Application geometry. Tune the dock here, not in planet or component styles. */
+body[data-object-shell] {
+  --explorer-rail-left: 12px;
+  --explorer-rail-item-gap: 0px;
+  --explorer-panel-left: var(--explorer-rail-left);
+  --explorer-panel-width: 340px;
+  --explorer-logo-size: 36px;
+  --explorer-wordmark-size: 36px;
+  --explorer-content-inset: 20px;
+  --explorer-panel-padding: 0px;
+  --explorer-header-top: 8px;
+  --explorer-panel-block-padding: 12px;
+  --explorer-search-height: 48px;
+  --explorer-panel-bottom-gap: 16px;
+  --explorer-header-panel-gap: 12px;
+  --explorer-panel-gap: 8px;
+  --explorer-scene-offset: 170px;
+  --explorer-controls-top: calc(var(--explorer-header-top) + var(--explorer-search-height) + var(--explorer-header-panel-gap));
+  --explorer-dock-width: calc(var(--explorer-panel-left) + var(--explorer-panel-width));
+  --explorer-surface-background: #151515;
+  --explorer-rail-background: var(--explorer-surface-background);
+  --explorer-panel-background: var(--explorer-surface-background);
+  --explorer-divider: #292b2e;
+}
+
+:is(
+  .planet-information-panel,
+  .explorer-about-panel,
+  .planet-sidebar > .explorer-settings-panel
+) {
+  --explorer-card-padding-inline-start: var(--explorer-card-padding-left, 20px);
+  --explorer-card-padding-inline-end: 14px;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  width: 100%;
+  margin: 0;
+  padding-block: 12px 0;
+  padding-inline: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 8px;
+  color: var(--shell-text-secondary);
+  background: var(--explorer-panel-background);
+  box-shadow: none;
+  font: 14px/1.4 var(--shell-ui-font);
+}
+
+.explorer-shell-header {
+  position: fixed;
+  z-index: 200;
+  inset: var(--explorer-header-top) auto auto var(--explorer-rail-left);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(
+    var(--explorer-panel-width),
+    calc(100vw - var(--explorer-rail-left) - 8px)
+  );
+  height: var(--explorer-search-height);
+}
+
+.explorer-shell-wordmark {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  width: max-content;
+  height: var(--explorer-search-height);
+  margin-inline-start: 4px;
+}
+
+.explorer-rail {
+  position: static;
+  flex: 0 0 auto;
+  width: max-content;
+  height: var(--explorer-search-height);
+  max-height: none;
+}
+
+.planet-sidebar {
+  --shell-text-secondary: #a9acb5;
+  position: fixed;
+  z-index: 160;
+  inset: 0 auto auto var(--explorer-panel-left);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--explorer-panel-gap);
+  width: var(--explorer-panel-width);
+  height: auto;
+  max-height: calc(100dvh - var(--explorer-panel-bottom-gap));
+  min-width: 0;
+  margin: 0;
+  padding: var(--explorer-controls-top) var(--explorer-panel-padding) var(--explorer-panel-block-padding);
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  color: var(--shell-text);
+  background: transparent;
+  font: 14px/1.4 var(--shell-ui-font);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.planet-sidebar::-webkit-scrollbar { display: none; }
+
+@media (min-width: 821px) and (orientation: landscape) {
+  .planet-sidebar {
+    --explorer-card-padding-left: calc(var(--explorer-content-inset) - var(--explorer-panel-padding));
+  }
+
+  .planet-stage {
+    inset-inline-start: 0;
+    translate: none;
+  }
+
+  /* Keep the sky full-viewport while shifting only the scene around the dock. */
+  .planet-stage > .planet-render-root {
+    inset-inline-start: var(--explorer-scene-offset);
+    inset-inline-end: calc(-1 * var(--explorer-scene-offset));
+  }
+
+  .planet-stage > .planet-directional-sun {
+    translate: var(--explorer-scene-offset) 0;
+  }
+
+  .planet-attribution-footer {
+    max-width: calc(100% - var(--explorer-dock-width));
+  }
+}
+
+/* Preserve the scene-above-information flow on phones and portrait tablets. */
+@media (max-width: 820px), (orientation: portrait) {
+  html:root,
+  body[data-object-shell] {
+    height: auto;
+    min-height: 100%;
+    overflow: hidden auto;
+  }
+
+  body[data-object-shell] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .planet-stage {
+    position: relative;
+    order: 0;
+    flex: 0 0 100svh;
+    width: 100%;
+    height: 100svh;
+    margin-left: 0;
+    transform: translateY(-32.5svh);
+  }
+
+  .planet-sidebar {
+    position: relative;
+    z-index: 100;
+    inset: auto;
+    order: 1;
+    width: calc(100% - var(--explorer-panel-left) - 8px);
+    height: auto;
+    max-height: none;
+    margin: -65svh 8px 0 var(--explorer-panel-left);
+    padding: 0;
+    overflow: visible;
+    background: transparent;
+  }
+}

@@ -2,10 +2,13 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 
 import sharp from "sharp";
 
 import { PREPARED_JUPITER_SCENE } from "../runtime/preparedScene.mjs";
+import { OBJECTS } from "../../../../site/objects.mjs";
+import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mjs";
 
 test("prepares the source-radii Jupiter body as stable retained topology", () => {
   const scene = PREPARED_JUPITER_SCENE;
@@ -181,13 +184,20 @@ test("prepares seam ownership and polar projection without runtime work", () => 
 });
 
 test("keeps topology and raster work out of the browser runtime", async () => {
-  const [client, css, shellCss] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+  const root = new URL("../../../../", import.meta.url);
+  const ownership = await auditObjectRuntimeOwnership({ root: fileURLToPath(root),
+    objects: OBJECTS.filter(object => object.id === "jupiter") });
+  assert.equal(ownership.complete, true);
+  const closure = [...new Set([...ownership.entries[0].closure, ...ownership.sharedClosure])];
+  assert.ok(closure.includes("src/platform/prepared-presentation.mjs"));
+  for (const path of closure.filter(path => path.endsWith(".mjs"))) {
+    assert.doesNotMatch(await readFile(new URL(path, root), "utf8"),
+      /spherePolygons|computeTextureAtlasPlan|\bsharp\b/, path);
+  }
+  const [css, shellCss] = await Promise.all([
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../../../../site/site.css", import.meta.url), "utf8"),
   ]);
-  assert.doesNotMatch(client, /spherePolygons|computeTextureAtlasPlan|sharp/);
-  assert.match(client, /PREPARED_JUPITER_SCENE/);
   assert.match(css,
     /background-image:\s*url\("\/scenes\/jupiter\/jupiter-surface@2x\.webp"\)/u);
   assert.match(css, /@keyframes jupiter-body-spin/);

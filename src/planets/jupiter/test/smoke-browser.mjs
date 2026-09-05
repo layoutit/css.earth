@@ -51,8 +51,11 @@ try {
     for (const lens of ["ultraviolet", "methane", "normal"]) {
       await page.evaluate((id) => window.__jupiter.selectLens(id), lens);
     }
-    await page.locator('.planet-settings button[name="speed"]')
-      .evaluate((element) => element.click());
+    await page.locator('.planet-settings input[name="speed"][type="range"]')
+      .evaluate((element) => {
+        element.value = String((Number(element.value) + 1) % 5);
+        element.dispatchEvent(new Event("input", { bubbles: true }));
+      });
     await page.mouse.move(930, 520);
     await page.mouse.down();
     await page.mouse.move(930, 300 + pass * 40, { steps: 10 });
@@ -68,16 +71,17 @@ try {
   for (let pitch = 0; pitch <= 89; pitch += 2.5) {
     await page.evaluate((nextPitch) => window.__jupiter.setView({ pitch: nextPitch }), pitch);
   }
+  await page.waitForFunction(() => window.__jupiter.runtime.selection().committed.shadows === true);
   await page.waitForFunction(() =>
-    window.__jupiter.renderStats.materialCache().pendingCount === 0);
+    window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting").pending === 0);
   const continuity = await endContinuitySampling(page);
   assert.ok(continuity.samples > 0);
   assert.equal(continuity.blankSamples, 0);
   assertMaterialPresentation(await materialPresentation(page));
   const materialCache = await page.evaluate(() =>
-    window.__jupiter.renderStats.materialCache());
-  assert.ok(materialCache.retainedImageCount <= materialCache.maximumRetainedRowCount);
-  assert.ok(materialCache.imageAllocations <= materialCache.maximumRetainedRowCount);
+    window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting"));
+  assert.ok(materialCache.resident <= materialCache.capacity);
+  assert.ok(materialCache.nativeSlots <= materialCache.capacity);
 
   assert.equal(await page.evaluate(() =>
     window.__jupiterSmokeRetained.camera === document.querySelector(".polycss-camera") &&
@@ -85,10 +89,10 @@ try {
     window.__jupiterSmokeRetained.rings === document.querySelector(".jupiter-rings") &&
     window.__jupiterSmokeRetained.material === document.querySelector(".jupiter-material")), true);
 
-  await page.evaluate(() => window.__jupiter.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   assert.ok(await page.locator(".planet-stage").evaluate((stage) =>
     stage.getAnimations({ subtree: true }).every(({ playState }) => playState === "paused")));
-  await page.evaluate(() => window.__jupiter.resume());
+  await page.evaluate(() => (!document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
 
   await page.evaluate(() => window.__jupiter.setView({ pitch: 20.9, zoom: 1.1 }));
   await page.setViewportSize({ width: 390, height: 844 });
@@ -125,15 +129,17 @@ try {
   assert.equal((await runtimeState(page)).stableDomIdentity, true);
 
   await page.evaluate(() => {
-    const speed = document.querySelector('.planet-settings button[name="speed"]');
+    const speed = document.querySelector('.planet-settings input[name="speed"][type="range"]');
     window.__jupiterSmokeDestroyedControls = Object.freeze({
       speed,
       speedState: speed?.dataset.state,
     });
-    const runtime = window.__jupiter;
-    runtime.destroy();
-    runtime.destroy();
-    window.__jupiterSmokeDestroyedControls.speed?.click();
+    window.dispatchEvent(new PageTransitionEvent("pagehide"));
+    window.dispatchEvent(new PageTransitionEvent("pagehide"));
+
+    window.__jupiterSmokeDestroyedControls.speed?.dispatchEvent(
+      new Event("input", { bubbles: true }),
+    );
   });
   assert.deepEqual(await page.evaluate(() => ({
     stageChildren: document.querySelector(".planet-stage").childElementCount,
@@ -202,7 +208,7 @@ async function assertVerticalDragDirection(page) {
 
 async function assertMaterialProjectionLock(page) {
   await page.evaluate(() => {
-    window.__jupiter.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__jupiter.setView({
       pitch: 45,
       controlYaw: 42,
@@ -213,8 +219,9 @@ async function assertMaterialProjectionLock(page) {
   if (!(await shadows.isChecked())) {
     await shadows.evaluate((element) => element.click());
   }
+  await page.waitForFunction(() => window.__jupiter.runtime.selection().committed.shadows === true);
   await page.waitForFunction(() =>
-    window.__jupiter.renderStats.materialCache().pendingCount === 0);
+    window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting").pending === 0);
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() =>
     requestAnimationFrame(resolve))));
   const centers = await page.evaluate(() => {
@@ -322,7 +329,7 @@ function assertRuntimeState(state) {
   assert.equal(state.renderRootCount, 1);
   assert.equal(state.stageChildCount, 3);
   assert.equal(state.stageElementCount, 1575);
-  assert.equal(state.retainedLeafCount, 789);
+  assert.equal(state.retainedLeafCount, 790);
   assert.equal(state.stableDomIdentity, true);
   assert.equal(state.runtimeDomGrowthPolicy, "none");
   assert.equal(state.selectedPreparedDensity, 2);
@@ -370,17 +377,17 @@ async function assertPreparedRings(page) {
     `${state.ringSystemWidth}/${state.bodyWidth}`);
 
   const control = page.locator('.planet-settings input[name="rings"]');
-  await control.evaluate((element) => element.click());
+  await toggleRings(page, control);
   assert.equal(await page.locator(".jupiter-rings").evaluate((rings) =>
     getComputedStyle(rings).visibility), "hidden");
-  await control.evaluate((element) => element.click());
+  await toggleRings(page, control);
   assert.notEqual(await page.locator(".jupiter-rings").evaluate((rings) =>
     getComputedStyle(rings).visibility), "hidden");
 }
 
 async function assertRenderedRingReadable(page) {
   await page.evaluate(() => {
-    window.__jupiter.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__jupiter.setView({ pitch: 89, zoom: 1.1 });
   });
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() =>
@@ -400,12 +407,12 @@ async function assertRenderedRingReadable(page) {
   });
   const visible = await page.screenshot();
   const control = page.locator('.planet-settings input[name="rings"]');
-  await control.evaluate((element) => element.click());
+  await toggleRings(page, control);
   const hidden = await page.screenshot();
-  await control.evaluate((element) => element.click());
+  await toggleRings(page, control);
   await page.evaluate(() => {
     window.__jupiter.setView({ pitch: 20.9, yaw: -105, zoom: 1.1 });
-    window.__jupiter.resume();
+    (!document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
   });
 
   const [visibleRaster, hiddenRaster] = await Promise.all([
@@ -455,4 +462,14 @@ async function assertRenderedRingReadable(page) {
     `Jupiter rendered main ring became illegible: ${changedBySixteen}`);
   assert.ok(Math.min(...changedByAngle) >= 20,
     `Jupiter rendered ring silhouette is incomplete: ${changedByAngle.join(",")}`);
+}
+
+
+async function toggleRings(page, control) {
+  const expected = !(await control.isChecked());
+  await control.evaluate(element => element.click());
+  await page.waitForFunction(value => {
+    const state = window.__jupiter.runtime.selection();
+    return !state.pending && state.committed.rings === value;
+  }, expected);
 }

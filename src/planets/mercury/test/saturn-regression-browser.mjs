@@ -43,7 +43,7 @@ try {
         document.documentElement.dataset.ready === "true" &&
         window.__saturn?.ready === true, null, { timeout: 120_000 });
       await page.evaluate(() => {
-        window.__saturn.pause();
+        (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
         for (const animation of document.getAnimations()) {
           animation.pause();
           animation.currentTime = 0;

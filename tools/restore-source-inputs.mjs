@@ -53,6 +53,10 @@ for (const { id, name } of OBJECTS) {
   console.log(`${name}: source inputs restored and verified`);
 }
 
+await run(process.execPath, [
+  resolve(projectRoot, "src/planets/earth/tools/acquire-pinned-global-wmts.mjs"),
+]);
+
 async function fetchPinnedBytes(entry, planetName) {
   if (!fetchedBytes.has(entry.expectedSha256)) {
     fetchedBytes.set(entry.expectedSha256, (async () => {

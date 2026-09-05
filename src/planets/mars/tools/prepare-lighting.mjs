@@ -9,6 +9,8 @@ import { viewSunDirectionToPreparedLightDirection } from
   "../../../platform/directional-sun-coordinate.mjs";
 import {
   MARS_ATMOSPHERE_COLOR,
+  MARS_ATMOSPHERE_RESPONSE,
+  MARS_ATMOSPHERE_PROFILE,
   MARS_DISPLAY_TRANSFER,
   MARS_LIGHT_SOURCE_GEOMETRY,
   MARS_LIGHTING_REFERENCE_CHANNEL,
@@ -25,6 +27,7 @@ import {
   MARS_PUBLISHED_ATMOSPHERE_REFERENCE,
   MARS_WORLD_LIGHT_DIRECTION,
   prepareMarsMaterialFrame,
+  prepareMarsAtmosphereFrame,
   prepareMarsMaterialProjection,
 } from "./prepare-atmosphere.mjs";
 import {
@@ -42,6 +45,7 @@ await ensureMarsPreparationDirectories();
 const bankFingerprintSources = Object.freeze([
   "platform/cubic-sky-contract.mjs",
   "platform/directional-sun-coordinate.mjs",
+  "tools/prepared-atmosphere.mjs",
   "tools/body-geometry.mjs",
   "tools/prepare-atmosphere.mjs",
   "tools/prepare-lighting.mjs",
@@ -56,6 +60,7 @@ const bankFingerprintHash = createHash("sha256");
 for (const path of [
   "../../../platform/cubic-sky-contract.mjs",
   "../../../platform/directional-sun-coordinate.mjs",
+  "../../../../tools/prepared-atmosphere.mjs",
   "./body-geometry.mjs",
   "./prepare-atmosphere.mjs",
   "./prepare-lighting.mjs",
@@ -102,6 +107,7 @@ const output = Object.freeze({
   bankFingerprint,
   bankFingerprintSources,
   frameCount: FRAME_COUNT,
+  shadowlessFrameOffset: FRAME_COUNT,
   defaultFrame: DEFAULT_FRAME,
   presentationFrameSize: MARS_MATERIAL_PRESENTATION_SIZE,
   preparedPixelDensities: MARS_MATERIAL_DENSITIES,
@@ -138,13 +144,16 @@ const output = Object.freeze({
     runtimeRasterization: false,
   }),
   atmosphere: Object.freeze({
-    model: "prepared-openspace-height-hubble-limb-calibration",
+    model: MARS_ATMOSPHERE_RESPONSE.model,
+    response: MARS_ATMOSPHERE_RESPONSE,
+    profile: MARS_ATMOSPHERE_PROFILE,
+    independentOfGroundShadows: true,
     source:
       "OpenSpace Mars atmosphere parameters and published NASA ESA Hubble full disc",
     openSpace: MARS_OPENSPACE_ATMOSPHERE,
     sourceReference: MARS_PUBLISHED_ATMOSPHERE_REFERENCE,
     color: MARS_ATMOSPHERE_COLOR,
-    externalHalo: "prepared-analytic-oblate-silhouette-overscan",
+    externalHalo: "prepared-exponential-shell-outside-body-silhouette",
     runtimeRasterization: false,
     runtimeAtmosphereMath: false,
   }),
@@ -202,23 +211,32 @@ async function prepareDensityBank(pixelDensity) {
   const frameStride = frameSize + rasterFrameGutter * 2;
   const rows = [];
   const presentations = [];
+  const pendingEncodes = [];
   const preparedProjection = pixelDensity === 1
     ? prepareMarsMaterialProjection(PRESENTATION_PITCH_DEGREES, pixelDensity)
     : null;
-  for (let frameIndex = 0; frameIndex < FRAME_COUNT; frameIndex += 1) {
+  let phaseAtmosphere = null;
+  for (let rowIndex = 0; rowIndex < FRAME_COUNT * 2; rowIndex += 1) {
+    const frameIndex = rowIndex % FRAME_COUNT;
+    const shadows = rowIndex < FRAME_COUNT;
     const viewZ = MINIMUM_LIGHT_VIEW_Z +
       frameIndex / (FRAME_COUNT - 1) *
         (MAXIMUM_LIGHT_VIEW_Z - MINIMUM_LIGHT_VIEW_Z);
     const lightDirection = phaseDirection(viewZ);
+    if (pixelDensity === 1) phaseAtmosphere = prepareMarsAtmosphereFrame(
+      PRESENTATION_PITCH_DEGREES, pixelDensity,
+      { lightDirection, preparedProjection },
+    );
     const prepared = pixelDensity === 1
       ? prepareMarsMaterialFrame(
         PRESENTATION_PITCH_DEGREES,
         pixelDensity,
-        { lightDirection, preparedProjection },
+        { lightDirection, preparedProjection, shadows,
+          preparedAtmosphere: phaseAtmosphere },
       )
-      : await prepareDpr2Frame(frameIndex, lightDirection);
-    if (pixelDensity === 1) preparedFrames1x[frameIndex] = prepared.data;
-    if (pixelDensity === 1 && [0, DEFAULT_FRAME, FRAME_COUNT - 1]
+      : await prepareDpr2Frame(rowIndex, lightDirection);
+    if (pixelDensity === 1) preparedFrames1x[rowIndex] = prepared.data;
+    if (pixelDensity === 1 && shadows && [0, DEFAULT_FRAME, FRAME_COUNT - 1]
       .includes(frameIndex)) {
       projectionSamples.push(Object.freeze({
         frameIndex,
@@ -232,8 +250,9 @@ async function prepareDensityBank(pixelDensity) {
       }));
     }
     const filename = `mars-material-${bankFingerprint}-${pixelDensity}x-row-${
-      String(frameIndex).padStart(3, "0")}.webp`;
+      String(rowIndex).padStart(3, "0")}.webp`;
     const path = resolve(MARS_PUBLIC_ROOT, filename);
+    pendingEncodes.push((async () => {
     await sharp(prepared.data, {
       raw: {
         width: prepared.width,
@@ -248,12 +267,12 @@ async function prepareDensityBank(pixelDensity) {
         left: rasterFrameGutter,
         background: { r: 0, g: 0, b: 0, alpha: 0 },
       })
-      .webp({ quality: 75, alphaQuality: 100, effort: 6, smartSubsample: true })
+      .webp({ quality: 75, alphaQuality: 100, effort: 4, smartSubsample: true })
       .toFile(path);
     const bytes = await readFile(path);
     const url = `/scenes/mars/${filename}`;
     rows.push(Object.freeze({
-      rowIndex: frameIndex,
+      rowIndex,
       url,
       encoding: "webp-q75-alpha-q100",
       bytes: bytes.byteLength,
@@ -263,9 +282,11 @@ async function prepareDensityBank(pixelDensity) {
       decodedRgbaBytes: frameStride * frameStride * 4,
     }));
     presentations.push(Object.freeze({
-      frameIndex,
+      frameIndex: rowIndex,
+      phaseFrame: frameIndex,
+      shadows,
       lightViewZ: Number(viewZ.toFixed(9)),
-      rowIndex: frameIndex,
+      rowIndex,
       url,
       backgroundPosition:
         `${-rasterFrameGutter / pixelDensity}px ` +
@@ -274,11 +295,18 @@ async function prepareDensityBank(pixelDensity) {
         `${frameStride / pixelDensity}px ${frameStride / pixelDensity}px`,
       cameraLightDirection: prepared.cameraLightDirection,
     }));
+    })());
+    if (pendingEncodes.length === 4) {
+      await Promise.all(pendingEncodes.splice(0));
+    }
   }
+  await Promise.all(pendingEncodes);
+  rows.sort((a, b) => a.rowIndex - b.rowIndex);
+  presentations.sort((a, b) => a.frameIndex - b.frameIndex);
   const initialWarmRows = Object.freeze([
-    Math.max(0, DEFAULT_FRAME - 1),
-    DEFAULT_FRAME,
-    Math.min(FRAME_COUNT - 1, DEFAULT_FRAME + 1),
+    FRAME_COUNT + Math.max(0, DEFAULT_FRAME - 1),
+    FRAME_COUNT + DEFAULT_FRAME,
+    FRAME_COUNT + Math.min(FRAME_COUNT - 1, DEFAULT_FRAME + 1),
   ]);
   const initialDecodedWorkingSetBytes = initialWarmRows.reduce(
     (total, rowIndex) => total + rows[rowIndex].decodedRgbaBytes,
@@ -307,9 +335,9 @@ async function prepareDensityBank(pixelDensity) {
       rasterFrameGutter,
       framesPerRow: 1,
       rowColumns: 1,
-      rowCount: FRAME_COUNT,
-      defaultFrame: DEFAULT_FRAME,
-      defaultRow: DEFAULT_FRAME,
+      rowCount: FRAME_COUNT * 2,
+      defaultFrame: FRAME_COUNT + DEFAULT_FRAME,
+      defaultRow: FRAME_COUNT + DEFAULT_FRAME,
       initialWarmRows,
       maximumRetainedRowCount: 3,
       addressWritesOnlyOnInput: true,

@@ -22,8 +22,8 @@ const expectedOutputHashes = Object.freeze({
   "github-marker.webp": "383e97a9726672e1b9e8109c5db583bbc188a6cbbe9073101e33f118f7350a13",
   "github-marker@2x.webp": "a710f0afb1815524a5695ba78e999222430d59f7da515dca4550bd06e7fb4a9d",
   // Reviewed 11-object Q75 atlases, NOT pixel parity with the old 9-object atlas.
-  "planet-markers.webp": "f803942d9fd8e88cc6401c7e2b946d9c057bd9742418d8cf2a30697a82783fbe",
-  "planet-markers@2x.webp": "6abf950d0f07b7a1c32882cc4eb425935ae7d5f637cb74aef9de9a21ddd39ebd",
+  "planet-markers.webp": "e919019540147f968390b978577cc9cc697ef73a712c81f9b870b874d3ed4038",
+  "planet-markers@2x.webp": "61ce1d65902dc8b2cdb990f94f35dff97b8d4905419f4467f7af737f541ee510",
   "share-marker.webp": "b74f154b94b4dd17ac8818e47e1fb5ea07799431d3254521d5517300aa90f8e8",
   "share-marker@2x.webp": "4611f24161d95d8a4f1d7668e901755f5cdb6ff890d92bf9927ad65a331c2c01",
   "settings-marker.webp": "e4f9d6dce0ea4121fa193dd316bb6c077c3901c9fa9f79a0f7adae8d9a0fa34f",

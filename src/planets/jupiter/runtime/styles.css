@@ -170,17 +170,8 @@ body {
   border-width: 0 16px 32px;
 }
 
-html[data-playing="true"] .jupiter-body {
-  animation-play-state: running;
-}
 
 @keyframes jupiter-body-spin {
   from { transform: rotateZ(-145deg); }
   to { transform: rotateZ(-505deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .jupiter-body {
-    animation: none;
-  }
 }

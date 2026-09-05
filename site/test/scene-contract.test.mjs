@@ -1,8 +1,7 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { OBJECT_BEHAVIOR } from "../scene-contract.mjs";
+import { OBJECT_BEHAVIOR, requireObjectControls } from "../scene-contract.mjs";
 
 test("registers every body-dependent layer as a synchronized presentation", () => {
   assert.equal(
@@ -28,14 +27,25 @@ test("publishes one off-by-default Shadows control for every planet", async () =
     "jupiter", "saturn", "uranus", "neptune",
   ];
   for (const id of planets) {
-    const name = id[0].toUpperCase() + id.slice(1);
-    const panel = await readFile(new URL(
-      `../../src/planets/${id}/site/${name}Panel.astro`,
+    const { objectControls } = await import(new URL(
+      `../../src/planets/${id}/site/control-content.mjs`,
       import.meta.url,
-    ), "utf8");
-    const controls = panel.match(
-      /\{ kind: "toggle", name: "shadows", label: "Shadows", checked: false \}/gu,
-    ) ?? [];
-    assert.equal(controls.length, 1, `${id} shadow control drifted`);
+    ));
+    const controls = objectControls.settings.controls.filter(({ name }) => name === "shadows");
+    assert.deepEqual(controls, [{ kind: "toggle", name: "shadows", label: "Shadows", checked: false }],
+      `${id} shadow control drifted`);
+  }
+});
+
+test("control content permits empty capabilities but rejects malformed or conflicting declarations", () => {
+  for (const content of [{ lenses: null, settings: null }, { lenses: undefined, settings: undefined },
+    { lenses: { controls: [] }, settings: { controls: [] } }]) {
+    assert.equal(requireObjectControls(content, "future"), content);
+  }
+  for (const content of [{}, { lenses: null }, { lenses: { controls: [{ id: "a" }, { id: "a" }] }, settings: null },
+    { lenses: { default: "missing", controls: [{ id: "a" }] }, settings: null },
+    { lenses: null, settings: { controls: [{ name: "motion", kind: "toggle", label: "Motion", checked: false }] } },
+    { lenses: null, settings: { controls: [{ name: "rings", kind: "invented", label: "Rings" }] } }]) {
+    assert.throws(() => requireObjectControls(content, "future"));
   }
 });

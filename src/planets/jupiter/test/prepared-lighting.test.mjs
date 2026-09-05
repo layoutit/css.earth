@@ -7,6 +7,11 @@ import sharp from "sharp";
 
 import { PREPARED_JUPITER_CAMERA } from "../runtime/preparedCamera.mjs";
 import { PREPARED_JUPITER_LIGHTING } from "../runtime/preparedLighting.mjs";
+import { runtimeDefinition } from "../runtime/definition.mjs";
+import { createPreparedMaterialPublisher } from "../../../platform/prepared-material.mjs";
+import { selectedPreparedVariant } from "../../../platform/prepared-presentation.mjs";
+import { initialObjectSelection } from "../../../platform/object-runtime-contract.mjs";
+import { retainedPresentationFixture } from "../../../platform/test/object-runtime-package.mjs";
 import {
   applyJupiterLinearLight,
   measurePublishedJupiterAtmosphereReference,
@@ -291,21 +296,50 @@ test("prepares the shared unbounded cubic-sky camera contract", () => {
 });
 
 test("keeps unattended playback on compositor animations", async () => {
-  const [client, css] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+  const [materialSource, playbackSource, css] = await Promise.all([
+    readFile(new URL("../../../platform/prepared-material.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../../../platform/prepared-playback.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
-  assert.match(client, /createRetainedCubicSkyOrbit/);
-  assert.match(client, /counterRotationFor/);
-  assert.match(client, /sunViewDirection/);
-  assert.doesNotMatch(client, /orbitBank|DecompressionStream/);
-  assert.match(client, /createRowShardCache/);
-  assert.match(client, /materialCache\.presentation\(materialFrame\)/);
-  assert.match(client, /mounted\.materialLeaf\.style\.backgroundPosition/);
-  assert.doesNotMatch(client, /materialLeaves|\.style\.opacity/);
-  assert.doesNotMatch(client, /setInterval|setTimeout|DOMMatrix|canvas|getContext/);
+  assert.equal(runtimeDefinition.assets.pools.find(pool => pool.id === "lighting").capacity, PREPARED_JUPITER_LIGHTING.transport.maximumRetainedRowCount);
+  const track = runtimeDefinition.materials.find(track => track.id === "lighting");
+  assert.equal(track.demand.fallback, "nearest-frame");
+  assert.equal(track.frame.count, PREPARED_JUPITER_LIGHTING.frameCount);
+  assert.equal(track.rotation.kind, "planar");
+  const bank = track.banks[0];
+  for (const expected of PREPARED_JUPITER_LIGHTING.presentations) {
+    const address = bank.frames[expected.frameIndex];
+    assert.equal(address.backgroundPosition, expected.backgroundPosition);
+    assert.equal(address.backgroundSize, expected.backgroundSize);
+    assert.equal(runtimeDefinition.assets.entries.find(entry => entry.key === address.resource).url, expected.url);
+  }
+  const f = retainedPresentationFixture(runtimeDefinition);
+  try {
+    const element = f.document.createElement("s");
+    element.style.transform = runtimeDefinition.tree.nodes[track.target].properties
+      .map(id => runtimeDefinition.tree.properties[id]).find(property => property.name === "transform").value;
+    const publisher = createPreparedMaterialPublisher(track, element, runtimeDefinition.camera);
+    const selected = selectedPreparedVariant(runtimeDefinition,
+      { ...initialObjectSelection(runtimeDefinition.controls), shadows: true }).materials.find(material => material.track === track.id);
+    const resources = { ...f.resources, has: () => true };
+    for (const [controlPitch, frame] of [[runtimeDefinition.camera.defaultControlPitchDegrees, PREPARED_JUPITER_LIGHTING.transport.defaultFrame],
+      [runtimeDefinition.camera.maximumControlPitchDegrees, 6]]) {
+      const view = { controlPitch, sunViewDirection: [1, 0, 0] }; view.reference = view;
+      publisher.publish(selected, view, resources);
+      const expected = PREPARED_JUPITER_LIGHTING.presentations[frame];
+      assert.equal(publisher.observe().appliedFrame, frame);
+      assert.equal(element.style.backgroundImage, `url(${JSON.stringify(expected.url)})`);
+      assert.equal(element.style.backgroundPosition, expected.backgroundPosition);
+      assert.equal(element.style.backgroundSize, expected.backgroundSize);
+      const before = publisher.observe();
+      publisher.publish(selected, view, resources);
+      assert.deepEqual(publisher.observe(), before, "Unchanged presentation does not add material writes");
+    }
+  } finally { f.restore(); }
+  assert.doesNotMatch(materialSource + playbackSource, /orbitBank|DecompressionStream|setInterval|setTimeout|requestAnimationFrame|canvas|getContext|\.style\.opacity/);
   assert.doesNotMatch(css, /clip-path|mask:|filter:|linear-gradient|radial-gradient|mix-blend-mode/);
-  assert.match(css, /html\[data-playing="true"\] \.jupiter-body/);
+  assert.doesNotMatch(css, /data-playing|prefers-reduced-motion/);
+  assert.match(css, /animation: jupiter-body-spin[^;]*paused/);
 });
 
 function measureReadablePreparedTerminator(frame) {

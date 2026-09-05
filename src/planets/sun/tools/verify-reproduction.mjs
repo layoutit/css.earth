@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from "node:crypto";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm, stat } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { basename, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,9 +12,15 @@ import { SUN_RUNTIME_ASSET_URLS } from "./runtime-asset-inventory.mjs";
 
 export async function verifySunRasterReproduction() {
   const outputRoot = await mkdtemp(resolve(tmpdir(), "csssun-reproduction-"));
+  const modulePath = new URL("../runtime/preparedStarfield.mjs", import.meta.url);
+  const before = await stat(modulePath);
   try {
     await run("prepare-assets.mjs", [`--output=${outputRoot}`]);
     await run("prepare-starfield.mjs", [`--output=${outputRoot}`]);
+    const after = await stat(modulePath);
+    if (before.mtimeMs !== after.mtimeMs || before.size !== after.size) {
+      throw new Error("Isolated reproduction modified the mounted starfield module.");
+    }
     const digest = createHash("sha256");
     let totalBytes = 0;
     for (const url of SUN_RUNTIME_ASSET_URLS) {

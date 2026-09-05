@@ -105,7 +105,11 @@ test("keeps topology and raster work out of the browser runtime", async () => {
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(client, /spherePolygons|computeTextureAtlasPlan|sharp/);
-  assert.match(client, /PREPARED_MARS_SCENE/);
+  const { runtimeDefinition } = await import("../runtime/definition.mjs");
+  const body = runtimeDefinition.tree.nodes.findIndex(node => node.className === "polycss-mesh mars-body");
+  assert.ok(body >= 0);
+  assert.equal(runtimeDefinition.tree.nodes.filter(node => node.parent === body).length,
+    PREPARED_MARS_SCENE.leaves.length);
   assert.match(css,
     /background-image:\s*url\("\/scenes\/mars\/mars-surface@2x\.webp"\)/u);
   assert.match(css, /@keyframes mars-body-spin/);

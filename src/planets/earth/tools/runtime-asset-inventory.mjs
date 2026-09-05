@@ -1,5 +1,8 @@
+import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../runtime/preparedStarfield.mjs";
 import { PREPARED_EARTH_SKY_SUN } from "../runtime/preparedSkySun.mjs";
+import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
+import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
 import { EARTH_MATERIAL_FRAMES_PER_SHARD } from "./atmosphere-model.mjs";
 
 const scene = (filename) => `/scenes/earth/${filename}`;
@@ -26,18 +29,20 @@ const interiorAssets = ["mantle", "outer-core", "inner-core"].flatMap(
 );
 
 export const EARTH_RUNTIME_ASSET_URLS = Object.freeze([
+  ...PREPARED_EARTH_NOISE.assets,
+  "earth-places.json",
   "earth-atmosphere-spectrum.svg",
   "earth-photometric-phase-curve.svg",
   "earth-interior-outer-poles.webp",
   "earth-interior-outer-poles@2x.webp",
-  "earth-interior-outer.webp",
-  "earth-interior-outer@2x.webp",
+  ...PREPARED_EARTH_SCENE.interior.outerAssets.surface.oneUrls,
+  ...PREPARED_EARTH_SCENE.interior.outerAssets.surface.twoUrls,
   "earth-interior-section.webp",
   "earth-interior-section@2x.webp",
   "earth-lens-night-lights.webp",
   "earth-lens-normal.webp",
   "earth-lens-topography.webp",
-  "earth-night-lights.webp",
+  ...new Set(PREPARED_EARTH_LENSES.controls.flatMap(lens => lens.surfaceUrls ?? [])),
   "earth-night-lights-poles.webp",
   ...PREPARED_EARTH_STARFIELD.faces.flatMap(({
     url,
@@ -47,10 +52,8 @@ export const EARTH_RUNTIME_ASSET_URLS = Object.freeze([
   }) => [url, url2x, highContrastUrl, highContrastUrl2x]),
   PREPARED_EARTH_SKY_SUN.asset.url,
   PREPARED_EARTH_SKY_SUN.asset.url2x,
-  "earth-surface.webp",
   "earth-surface-poles.webp",
   "earth-temperature-pressure-profile.svg",
-  "earth-topography.webp",
   "earth-topography-poles.webp",
   "earth-view-interior.webp",
   ...materialAssets,

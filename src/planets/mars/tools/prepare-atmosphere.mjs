@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
 import sharp from "sharp";
+import { prepareAtmosphereFrame, compositePreparedAtmosphere } from "../../../../tools/prepared-atmosphere.mjs";
 
 import {
   MARS_AXIAL_TILT_DEGREES,
@@ -128,12 +129,37 @@ export const MARS_PUBLISHED_ATMOSPHERE_REFERENCE = atmosphereReference;
 export const MARS_ATMOSPHERE_COLOR = atmosphereReference.limbMeanRgb8;
 export const MARS_SURFACE_REFERENCE_COLOR = atmosphereReference.interiorMeanRgb8;
 const MARS_LIMB_MAXIMUM_ALPHA = atmosphereReference.limbChromaticDifference;
-const MARS_LIMB_EXPONENT = atmosphereHeightKm / rayleighScaleHeightKm;
+export const MARS_ATMOSPHERE_RESPONSE = Object.freeze({
+  model: "prepared-sunlit-exponential-shell-column",
+  integrationSamples: 24,
+  scaleHeightKm: rayleighScaleHeightKm,
+  maximumHeightKm: atmosphereHeightKm,
+  calibrationAlpha: MARS_LIMB_MAXIMUM_ALPHA,
+  color: MARS_ATMOSPHERE_COLOR,
+  projection: "full-disc-orthographic-oblate-outline",
+  shadowing: "solid-body-solar-occlusion",
+  transfer: "photographic-limb-calibrated-source-over",
+  scope: "directional-globe-limb-not-a-multiple-scattering-or-exposure-model",
+});
+
+export const MARS_ATMOSPHERE_PROFILE = Object.freeze({
+  radiusKm: atmospherePlanetRadiusKm,
+  heightKm: atmosphereHeightKm,
+  layers: [Object.freeze({
+    scaleHeightKm: rayleighScaleHeightKm,
+    scatteringPerKm: Array(3).fill(-Math.log(1 - MARS_LIMB_MAXIMUM_ALPHA) /
+      (Math.sqrt(Math.PI * rayleighScaleHeightKm / atmospherePlanetRadiusKm / 2) * atmospherePlanetRadiusKm)),
+    phase: "isotropic", weight: 1,
+  })],
+  transfer: Object.freeze({ mode: "calibrated-color", colorRgb: MARS_ATMOSPHERE_COLOR,
+    intensity: 1, exposure: 1, alphaScale: 1, maximumAlpha: 1, limbConcentration: false }),
+});
 
 export function prepareMarsMaterialFrame(
   pitchDegrees,
   pixelDensity,
-  { lightDirection = null, preparedProjection = null } = {},
+  { lightDirection = null, preparedProjection = null,
+    shadows = true, atmosphere = true, preparedAtmosphere = null } = {},
 ) {
   if (!MARS_MATERIAL_DENSITIES.includes(pixelDensity)) {
     throw new RangeError(`Unsupported prepared Mars density: ${pixelDensity}.`);
@@ -163,9 +189,11 @@ export function prepareMarsMaterialFrame(
         materialProjection.screenNormals[normalOffset + 1] * light[1] +
         materialProjection.screenNormals[normalOffset + 2] * light[2],
       );
-      const terminator = prepareOpenSpaceTerminator(incidence);
+      const groundIncidence = shadows ? incidence : Math.max(0,
+        materialProjection.screenNormals[normalOffset + 2]);
+      const terminator = prepareOpenSpaceTerminator(groundIncidence);
       const lightingFactor = (
-        MARS_OPENSPACE_AMBIENT_INTENSITY + incidence * terminator
+        MARS_OPENSPACE_AMBIENT_INTENSITY + groundIncidence * terminator
       ) / (1 + MARS_OPENSPACE_AMBIENT_INTENSITY);
       const desiredChannel = applyMarsLinearLight(
         MARS_LIGHTING_REFERENCE_CHANNEL,
@@ -173,11 +201,7 @@ export function prepareMarsMaterialFrame(
       );
       const shadowAlpha =
         1 - desiredChannel / MARS_LIGHTING_REFERENCE_CHANNEL;
-      const viewAlignment = materialProjection.viewAlignments[pixelIndex];
-      const limb = Math.pow(1 - viewAlignment, MARS_LIMB_EXPONENT);
-      const sunwardAmount = groundRadianceEmission +
-        (1 - groundRadianceEmission) * Math.sqrt(incidence);
-      const atmosphereAlpha = MARS_LIMB_MAXIMUM_ALPHA * limb * sunwardAmount;
+      const atmosphereAlpha = 0;
       const offset = pixelIndex * 4;
       if (materialProjection.fillsMissingSurface[pixelIndex] === 1) {
         writePreparedOpaqueLimbFill(data, offset, {
@@ -194,6 +218,15 @@ export function prepareMarsMaterialFrame(
       }
     }
   }
+  if (atmosphere) {
+    const layer = preparedAtmosphere ?? prepareMarsAtmosphereFrame(
+      pitchDegrees, pixelDensity, { lightDirection: light, preparedProjection },
+    );
+    if (layer.width !== size || layer.height !== size) {
+      throw new TypeError("Prepared Mars atmosphere dimensions drifted.");
+    }
+    compositePreparedAtmosphere(data, layer.data);
+  }
   return Object.freeze({
     data,
     width: size,
@@ -205,6 +238,29 @@ export function prepareMarsMaterialFrame(
     projection: projection.metadata,
     silhouetteCoverage: projection.coverage,
   });
+}
+
+// Object-specific projection and calibration; all shell integration is shared.
+export function prepareMarsAtmosphereFrame(
+  pitchDegrees, pixelDensity,
+  { lightDirection, preparedProjection = null,
+    integrationSamples = MARS_ATMOSPHERE_RESPONSE.integrationSamples } = {},
+) {
+  if (!MARS_MATERIAL_DENSITIES.includes(pixelDensity)) {
+    throw new RangeError("Invalid Mars atmosphere preparation density.");
+  }
+  const light = validateLightDirection(lightDirection ?? cameraLightDirection(pitchDegrees));
+  const size = MARS_MATERIAL_PRESENTATION_SIZE * pixelDensity;
+  const projection = preparedProjection?.projection ??
+    prepareMarsProjectedSilhouette(pitchDegrees, pixelDensity);
+  const frame = prepareAtmosphereFrame({
+    width: size, height: size, lightDirection: light, integrationSamples,
+    disc: { centerX: size / 2, centerY: size / 2,
+      radiusX: MARS_MATERIAL_SURFACE_RADIUS * pixelDensity * projection.metadata.radiusX / MARS_EQUATORIAL_RADIUS,
+      radiusY: MARS_MATERIAL_SURFACE_RADIUS * pixelDensity * projection.metadata.radiusY / MARS_EQUATORIAL_RADIUS },
+    profile: MARS_ATMOSPHERE_PROFILE,
+  });
+  return Object.freeze({ ...frame, cameraLightDirection: light, projection: projection.metadata });
 }
 
 export function prepareMarsMaterialProjection(pitchDegrees, pixelDensity) {

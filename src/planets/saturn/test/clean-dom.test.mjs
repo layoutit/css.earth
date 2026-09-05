@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { PREPARED_PRESENTATION } from "../runtime/preparedPresentation.mjs";
 import { PREPARED_SATURN_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_SATURN_RUNTIME_SCENE } from
   "../runtime/preparedSceneRuntime.mjs";
@@ -8,7 +9,7 @@ import { PREPARED_SATURN_RUNTIME_SCENE } from
 test("mounts prepared PolyCSS texture leaves under retained planet groups", async () => {
   const [client, css, scenePreparer, moonPreparer, preparedSceneSource,
     preparedRuntimeSceneSource, preparedMoonSource] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/definition.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../tools/prepare-scene.mjs", import.meta.url), "utf8"),
     readFile(new URL("../tools/prepare-moons.mjs", import.meta.url), "utf8"),
@@ -27,18 +28,14 @@ test("mounts prepared PolyCSS texture leaves under retained planet groups", asyn
     ["className", "projectiveTextureLayer", "style", "tag"],
   );
 
-  assert.match(client, /preparedSceneRuntime\.mjs/u);
-  assert.match(client, /createRetainedCubicSkyOrbit\(/u);
-  assert.match(client, /mountRetainedCubicSky\(/u);
-  assert.match(client, /mountRetainedDirectionalSun\(/u);
-  assert.match(client, /for \(const band of plan\.bodyBands\)/u);
-  assert.match(client, /createPreparedInterior\(plan\)/u);
-  assert.match(client, /runtimeDomGrowthPolicy: "none-retained-scene-complete-at-mount"/u);
-  assert.match(client, /assertStableDomIdentity/u);
-  assert.match(client, /createPreparedPlaybackClock\(sceneAnimations\)/u);
+  assert.match(client, /preparedPresentation\.mjs/u);
+  const nodes = PREPARED_PRESENTATION.tree.nodes;
+  assert.equal(nodes.filter(node => node.className?.split(/\s+/).includes("polycss-camera")).length, 1);
+  assert.equal(nodes.filter(node => node.className?.split(/\s+/).includes("saturn-cutaway")).length, 1);
+  assert.ok(nodes.some(node => node.className === "polycss-projective-texture"));
+  assert.doesNotMatch(client, /createPresentation|publishFrame|resolvePresentation|document|createElement/);
   assert.doesNotMatch(client,
     /bodyVisibility|createPreparedBodyVisibility/u);
-  assert.match(client, /orbitMaterialCache\.presentation\(materialFrame/u);
   assert.doesNotMatch(client,
     /canvas|getContext\(|new DOMMatrix|loadPreparedOrbitBank|DecompressionStream/u);
   assert.doesNotMatch(client, /PREPARED_SATURN_MOON|saturn-moon/u);

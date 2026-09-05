@@ -41,6 +41,9 @@ test("derives the complete owned file contract from planet identity", () => {
   const planet = implemented[0];
   const paths = objectPackagePaths(planet, "/project");
   assert.ok(paths.requiredFiles.includes(
+    `/project/src/planets/${planet.id}/site/control-content.mjs`,
+  ));
+  assert.ok(paths.requiredFiles.includes(
     `/project/src/planets/${planet.id}/runtime/client.mjs`,
   ));
   assert.ok(paths.requiredFiles.includes(
@@ -70,6 +73,14 @@ test("requires every registered object package file", async () => {
       },
     }),
     /is missing .*runtime\/client\.mjs/,
+  );
+  await assert.rejects(
+    validateObjectPackageFiles(implemented[0], {
+      accessFile: async (file) => {
+        if (file.endsWith("site/control-content.mjs")) throw new Error("ENOENT");
+      },
+    }),
+    /is missing .*site\/control-content\.mjs/,
   );
 });
 

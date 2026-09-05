@@ -6,79 +6,41 @@ import {
   PLANETARY_SCALE_LABEL,
   positionPlanetsByDistance,
 } from "../planetary-scale.mjs";
-import { MOBILE_VIEWPORT_QUERY } from "../runtime-policy.mjs";
+import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
 import "../planetary-scale.css";
-import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
-import { markerStyle } from "../../src/navigation/marker-presentation.mjs";
 
 interface Props {
   activeObjectId: string;
 }
 
 const { activeObjectId } = Astro.props;
-const orbitingObjects = PLANET_NAVIGATION_OBJECTS;
-const stops = positionPlanetsByDistance(orbitingObjects).map((objectRecord) => {
-  const { ringed, style } = markerStyle(PREPARED_NAVIGATION_MARKERS[objectRecord.id], { color: objectRecord.color, view: "scale" });
-  return Object.freeze({
-    ...objectRecord,
-    active: objectRecord.id === activeObjectId,
-    ringed,
-    style: `--planet-offset:${objectRecord.scalePositionPercent}%;${style}`,
-  });
-});
+const positionedPlanets = positionPlanetsByDistance(PLANET_NAVIGATION_OBJECTS);
 ---
 
-<details class="planetary-navigation">
-  <summary class="planetary-navigation-toggle"><span aria-hidden="true"></span>Planets</summary>
-  <button class="planetary-navigation-backdrop" type="button" aria-label="Close planet navigation"></button>
-  <nav class="planetary-scale" aria-label={PLANETARY_SCALE_LABEL}>
-    <span class="planetary-drawer-title" aria-hidden="true">Planets</span>
-    <ol class="scale-stops">
-      {stops.map((planet) => (
-        <li
-          class:list={["scale-planet", planet.id, { active: planet.active, ringed: planet.ringed }]}
-          data-planet-id={planet.id}
-          style={planet.style}
+<nav class="planetary-navigation" aria-label={PLANETARY_SCALE_LABEL}>
+  <ol
+    class="scale-stops"
+    style={`--planet-track-start:${positionedPlanets[0].scalePositionPercent}%`}
+  >
+    {positionedPlanets.map((planet) => (
+      <li
+        class:list={["scale-planet", planet.id, { active: planet.id === activeObjectId }]}
+        data-planet-id={planet.id}
+        style={`--planet-offset:${planet.scalePositionPercent}%`}
+      >
+        <a
+          class="scale-stop"
+          href={planet.route}
+          aria-current={planet.id === activeObjectId ? "page" : undefined}
+          aria-label={`${planet.name}, ${planet.distanceAu} astronomical units from the Sun`}
         >
-          {planet.route ? (
-            <a
-              class="scale-stop"
-              href={planet.route}
-              aria-current={planet.active ? "page" : undefined}
-              aria-label={`${planet.name}, ${planet.distanceAu} astronomical units from the Sun`}
-            >
-              <i class="scale-marker" aria-hidden="true"></i>
-              <span class="scale-label"><b class="scale-name">{planet.name}</b></span>
-            </a>
-          ) : (
-            <span
-              class="scale-stop"
-              aria-label={`${planet.name}, ${planet.distanceAu} astronomical units from the Sun, not yet available`}
-            >
-              <i class="scale-marker" aria-hidden="true"></i>
-              <span class="scale-label"><b class="scale-name">{planet.name}</b></span>
-            </span>
-          )}
-        </li>
-      ))}
-    </ol>
-  </nav>
-</details>
-
-<script define:vars={{ mobileViewportQuery: MOBILE_VIEWPORT_QUERY }}>
-  const navigation = document.querySelector(".planetary-navigation");
-  const backdrop = navigation?.querySelector(".planetary-navigation-backdrop");
-  const mobileNavigation = matchMedia(mobileViewportQuery);
-  const syncNavigation = () => {
-    if (navigation) navigation.open = !mobileNavigation.matches;
-  };
-  syncNavigation();
-  mobileNavigation.addEventListener("change", syncNavigation);
-  backdrop?.addEventListener("click", () => {
-    if (navigation) navigation.open = false;
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && navigation && mobileNavigation.matches) navigation.open = false;
-  });
-
-</script>
+          <PlanetNavigationMarker
+            planetId={planet.id}
+            color={planet.color}
+          />
+          <span class="scale-label">{planet.name}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>

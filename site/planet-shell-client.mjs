@@ -1,3 +1,7 @@
+import { createDestinationBrowser } from "./destination-browser.mjs";
+import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
+import { createExplorerRailController } from "./explorer-rail.mjs";
+
 export function mountPlanetShell({
   objectId,
   documentTarget = document,
@@ -9,46 +13,133 @@ export function mountPlanetShell({
   if (!(drawer instanceof windowTarget.HTMLElement)) {
     throw new Error("Planet shell information drawer is missing.");
   }
-
-  const sidebar = createSidebarController(documentTarget, windowTarget);
-  const objectBrowser = createObjectBrowserController(
-    documentTarget,
-    windowTarget,
-  );
-  const sheet = createSheetController(drawer, windowTarget);
-  const chartAlignment = createChartPixelAlignmentController(
-    drawer,
-    windowTarget,
-  );
-  let settingsController;
-  let panels;
+  const lifetime = createSceneLifetime();
+  let settingsController, objectBrowser;
+  function own(controller) {
+    lifetime.onDispose(() => controller.destroy());
+    return controller;
+  }
   try {
-    settingsController = createSettingsController(
-      documentTarget,
-      windowTarget,
-      { motionEnabled, onMotionChange },
-    );
-    panels = createPanelController(drawer, objectId, windowTarget);
+    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
+    own(createSheetController(drawer, windowTarget, lifetime));
+    own(createChartSwitcherController(drawer, windowTarget, lifetime));
+    own(createChartPixelAlignmentController(drawer, windowTarget, lifetime));
+    own(createLensBrowserController(drawer, windowTarget, lifetime));
+    settingsController = own(createSettingsController(
+      documentTarget, windowTarget, { motionEnabled, onMotionChange }, lifetime,
+    ));
+    own(createPanelController(drawer, objectId, windowTarget, lifetime));
+    own(createExplorerRailController(documentTarget, windowTarget));
   } catch (error) {
-    sidebar.destroy();
-    objectBrowser.destroy();
-    sheet.destroy();
-    chartAlignment.destroy();
-    settingsController?.destroy();
+    const cleanupErrors = lifetime.destroy();
+    if (cleanupErrors.length) {
+      throw new AggregateError([error, ...cleanupErrors], error.message, { cause: error });
+    }
     throw error;
   }
-  let destroyed = false;
+  return Object.freeze({
+    setDestinations(provider) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
+    setMotionEnabled(enabled) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
+    setPlaybackState(state) {
+      if (!lifetime.disposed) settingsController.setPlaybackState(state);
+    },
+    destroy() {
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Shell cleanup failed.");
+    },
+  });
+}
+
+function createLensBrowserController(drawer, windowTarget, lifetime) {
+  const root = drawer.querySelector(".planet-lenses");
+  if (!root) {
+    return Object.freeze({ destroy() {} });
+  }
+
+  const search = root.querySelector(".planet-lens-search");
+  const empty = root.querySelector(".planet-lens-empty");
+  if (!(root instanceof windowTarget.HTMLElement) ||
+      !(search instanceof windowTarget.HTMLInputElement) ||
+      !(empty instanceof windowTarget.HTMLElement)) {
+    throw new Error("Planet shell surface lens browser is incomplete.");
+  }
+
+  const options = [...root.querySelectorAll("[data-lens-option]")]
+    .filter((option) => option instanceof windowTarget.HTMLElement);
+  const buttons = options.map((option) =>
+    option.querySelector('button[name="lens"]'));
+  if (options.length === 0 || buttons.some((button) =>
+    !(button instanceof windowTarget.HTMLButtonElement))) {
+    throw new Error("Planet shell surface lens browser has no valid lenses.");
+  }
+
+  const legends = [...root.querySelectorAll("[data-lens-legend]")]
+    .filter((legend) => legend instanceof windowTarget.HTMLElement);
+  const lensIds = new Set(buttons.map((button) => button.value));
+  if (legends.some((legend) => !lensIds.has(legend.dataset.lensLegend ?? ""))) {
+    throw new Error("Planet shell surface lens legend has no matching lens.");
+  }
+
+  const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
+  const renderLegend = () => {
+    const activeLens = buttons.find((button) => button.ariaPressed === "true")
+      ?.value;
+    for (let index = 0; index < buttons.length; index += 1) {
+      const button = buttons[index];
+      const legend = options[index].querySelector("[data-lens-legend]");
+      if (!(legend instanceof windowTarget.HTMLElement)) continue;
+      const expanded = button.value === activeLens;
+      legend.hidden = !expanded;
+      button.ariaExpanded = String(expanded);
+    }
+  };
+  const legendObserver = new windowTarget.MutationObserver(renderLegend);
+  lifetime.onDispose(() => legendObserver.disconnect());
+  for (const button of buttons) {
+    legendObserver.observe(button, {
+      attributes: true,
+      attributeFilter: ["aria-pressed"],
+    });
+  }
+
+  const filter = () => {
+    const query = search.value.trim().toLocaleLowerCase("en");
+    let visible = 0;
+    for (let index = 0; index < options.length; index += 1) {
+      const option = options[index];
+      const button = buttons[index];
+      const matches = button.textContent.toLocaleLowerCase("en").includes(query);
+      option.hidden = !matches;
+      if (matches) visible += 1;
+    }
+    empty.hidden = visible !== 0;
+  };
+
+  search.addEventListener("input", filter, { signal: events.signal });
+  search.addEventListener("click", (event) => {
+    event.stopPropagation();
+  }, { signal: events.signal });
+  search.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || search.value.length === 0) return;
+    event.preventDefault();
+    search.value = "";
+    filter();
+  }, { signal: events.signal });
+  filter();
+  renderLegend();
 
   return Object.freeze({
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
-      sidebar.destroy();
-      objectBrowser.destroy();
-      sheet.destroy();
-      chartAlignment.destroy();
-      settingsController.destroy();
-      panels.destroy();
+      events.abort();
+      legendObserver.disconnect();
+      search.value = "";
+      for (const option of options) option.hidden = false;
+      empty.hidden = true;
+      for (const legend of legends) legend.hidden = true;
+      for (const button of buttons) {
+        if (button.hasAttribute("aria-expanded")) button.ariaExpanded = "false";
+      }
     },
   });
 }
@@ -57,33 +148,31 @@ function createSettingsController(
   documentTarget,
   windowTarget,
   { motionEnabled, onMotionChange },
+  lifetime,
 ) {
   if (typeof onMotionChange !== "function") {
     throw new TypeError("Planet shell motion change handler must be a function.");
   }
-  const panel = documentTarget.querySelector(".planet-settings-panel");
-  const action = documentTarget.querySelector(".planet-settings-action");
   const motion = documentTarget.querySelector(".planet-motion-setting");
   const skyContrast = documentTarget.querySelector(
     ".planet-sky-contrast-setting",
   );
-  if (!(panel instanceof windowTarget.HTMLDetailsElement) ||
-      !(action instanceof windowTarget.HTMLButtonElement) ||
-      !(motion instanceof windowTarget.HTMLInputElement) ||
+  const speed = documentTarget.querySelector(
+    '.planet-speed-setting[type="range"][name="speed"]',
+  );
+  if (!(motion instanceof windowTarget.HTMLInputElement) ||
+      (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
       !(skyContrast instanceof windowTarget.HTMLInputElement)) {
     throw new Error("Planet shell settings controls are incomplete.");
   }
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
   let highContrastSky = false;
 
-  const renderPanel = () => {
-    action.ariaExpanded = String(panel.open);
-    action.ariaLabel = panel.open ? "Close settings" : "Open settings";
-  };
-
   const renderMotion = () => {
     motion.checked = motionOn;
+    if (speed) speed.disabled = !motionOn || speed.dataset?.runtimeReady === "false";
   };
   const renderSkyContrast = () => {
     skyContrast.checked = highContrastSky;
@@ -100,16 +189,26 @@ function createSettingsController(
     highContrastSky = skyContrast.checked;
     renderSkyContrast();
   }, { signal: events.signal });
-  action.addEventListener("click", () => {
-    panel.open = !panel.open;
-    renderPanel();
-  }, { signal: events.signal });
-  panel.addEventListener("toggle", renderPanel, { signal: events.signal });
-  renderPanel();
   renderMotion();
   renderSkyContrast();
 
   return Object.freeze({
+    setMotionEnabled(next) {
+      motionOn = next === true;
+      renderMotion();
+      onMotionChange(motionOn);
+    },
+    setPlaybackState({ motionRequested, reason }) {
+      motionOn = motionRequested === true;
+      renderMotion();
+      const row = motion.closest(".planet-motion-setting-control");
+      const explanation = row.querySelector(".planet-motion-blocked");
+      const blocked = motionOn && reason === "reduced-motion";
+      row.dataset.motionBlocked = String(blocked);
+      explanation.hidden = !blocked;
+      if (blocked) motion.setAttribute("aria-describedby", explanation.id);
+      else motion.removeAttribute("aria-describedby");
+    },
     destroy() {
       events.abort();
       delete documentTarget.body.dataset.skyContrast;
@@ -117,7 +216,7 @@ function createSettingsController(
   });
 }
 
-function createObjectBrowserController(documentTarget, windowTarget) {
+function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   const search = documentTarget.querySelector(".planet-sidebar-search");
   const searchCard = documentTarget.querySelector(".planet-sidebar-search-card");
   const trigger = documentTarget.querySelector(".planet-sidebar-view-all");
@@ -139,10 +238,22 @@ function createObjectBrowserController(documentTarget, windowTarget) {
   }
 
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   const selectedSearchValue = search.value;
+  let currentSearchValue = selectedSearchValue;
+  let visibleObjects = 0;
+  const destinations = createDestinationBrowser({
+    documentTarget, windowTarget,
+    onResults(count) { empty.hidden = visibleObjects + count > 0; },
+    onSelected(place) { currentSearchValue = place.name; render(false); search.blur(); },
+    onReset() { currentSearchValue = selectedSearchValue; render(false); },
+  });
+  lifetime.onDispose(() => destinations?.destroy());
   let open = false;
   const filter = () => {
     const query = search.value.trim().toLocaleLowerCase("en");
+    visibleObjects = 0;
+    void destinations?.search(query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
       empty.hidden = true;
@@ -156,12 +267,14 @@ function createObjectBrowserController(documentTarget, windowTarget) {
       item.hidden = !match;
       if (match) visible += 1;
     }
-    empty.hidden = visible !== 0;
+    visibleObjects = visible;
+    empty.hidden = visible !== 0 || Boolean(destinations);
   };
   const render = (next, { resetQuery = false } = {}) => {
     open = next;
     if (next && resetQuery) search.value = "";
-    if (!next) search.value = selectedSearchValue;
+    if (!next) search.value = currentSearchValue;
+    destinations?.setOpen(next);
     information.hidden = next;
     browser.hidden = !next;
     trigger.ariaPressed = String(next);
@@ -186,9 +299,33 @@ function createObjectBrowserController(documentTarget, windowTarget) {
     signal: events.signal,
   });
   search.addEventListener("keydown", (event) => {
+    if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
+      const first = [...browser.querySelectorAll("a, button")].find(element =>
+        !element.closest("[hidden]") && !element.disabled);
+      if (first) {
+        event.preventDefault();
+        if (event.key === "Enter") first.click(); else first.focus();
+      }
+    } else if (event.key === "Enter") {
+      event.preventDefault(); render(true); return;
+    }
     if (event.key !== "Escape" || !open) return;
     event.preventDefault();
     render(false);
+  }, { signal: events.signal });
+  browser.addEventListener("keydown", (event) => {
+    const controls = [...browser.querySelectorAll("a, button")].filter(element =>
+      !element.closest("[hidden]") && !element.disabled);
+    const index = controls.indexOf(documentTarget.activeElement);
+    if (event.key === "Escape") { render(false); search.focus(); }
+    else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      const next = index + (event.key === "ArrowDown" ? 1 : -1);
+      if (next < 0) search.focus(); else controls[Math.min(next, controls.length - 1)]?.focus();
+    }
+  }, { signal: events.signal });
+  documentTarget.querySelector(".planet-find-destination")?.addEventListener("click", () => {
+    render(true, { resetQuery: true }); search.focus();
   }, { signal: events.signal });
   documentTarget.addEventListener("pointerdown", (event) => {
     if (documentTarget.activeElement !== search ||
@@ -199,8 +336,11 @@ function createObjectBrowserController(documentTarget, windowTarget) {
   render(false);
 
   return Object.freeze({
+    setDestinations(provider) { destinations?.bind(provider); },
     destroy() {
       events.abort();
+      destinations?.destroy();
+      currentSearchValue = selectedSearchValue;
       search.value = selectedSearchValue;
       for (const item of items) item.hidden = false;
       empty.hidden = true;
@@ -209,13 +349,18 @@ function createObjectBrowserController(documentTarget, windowTarget) {
   });
 }
 
-function createChartPixelAlignmentController(drawer, windowTarget) {
+function createChartPixelAlignmentController(drawer, windowTarget, lifetime) {
   const charts = [...drawer.querySelectorAll(".planet-chart")]
     .filter((chart) => chart instanceof windowTarget.HTMLElement);
-  const panels = [...drawer.querySelectorAll(".planet-chart-panel")]
-    .filter((panel) => panel instanceof windowTarget.HTMLDetailsElement);
+  const switchers = [...drawer.querySelectorAll(".planet-chart-switcher")]
+    .filter((switcher) => switcher instanceof windowTarget.HTMLElement);
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   let frame = 0;
+  lifetime.onDispose(() => {
+    if (frame !== 0) windowTarget.cancelAnimationFrame(frame);
+    frame = 0;
+  });
 
   const align = () => {
     frame = 0;
@@ -232,8 +377,8 @@ function createChartPixelAlignmentController(drawer, windowTarget) {
   };
 
   windowTarget.addEventListener("resize", schedule, { signal: events.signal });
-  for (const panel of panels) {
-    panel.addEventListener("toggle", schedule, { signal: events.signal });
+  for (const switcher of switchers) {
+    switcher.addEventListener("chartchange", schedule, { signal: events.signal });
   }
   for (const chart of charts) {
     chart.addEventListener("load", schedule, { signal: events.signal });
@@ -249,42 +394,67 @@ function createChartPixelAlignmentController(drawer, windowTarget) {
   });
 }
 
-function createSidebarController(documentTarget, windowTarget) {
-  const sidebar = documentTarget.querySelector(".planet-sidebar");
-  const toggle = documentTarget.querySelector(".planet-sidebar-toggle");
-  if (!(sidebar instanceof windowTarget.HTMLElement)) {
-    throw new Error("Planet information sidebar is missing.");
+function createChartSwitcherController(drawer, windowTarget, lifetime) {
+  const switcher = drawer.querySelector(".planet-chart-switcher");
+  if (switcher === null) {
+    return Object.freeze({ destroy() {} });
   }
-  if (!(toggle instanceof windowTarget.HTMLButtonElement)) {
-    throw new Error("Planet sidebar toggle is missing.");
+  if (!(switcher instanceof windowTarget.HTMLElement)) {
+    throw new Error("Planet shell chart switcher is invalid.");
+  }
+  const previous = switcher.querySelector('.planet-chart-step[data-chart-step="-1"]');
+  const next = switcher.querySelector('.planet-chart-step[data-chart-step="1"]');
+  const slides = [...switcher.querySelectorAll(".planet-chart-slide")]
+    .filter((slide) => slide instanceof windowTarget.HTMLElement);
+  const labels = [...switcher.querySelectorAll(".planet-chart-label")]
+    .filter((label) => label instanceof windowTarget.HTMLElement);
+  if (!(previous instanceof windowTarget.HTMLButtonElement) ||
+      !(next instanceof windowTarget.HTMLButtonElement) ||
+      slides.length === 0 || labels.length !== slides.length) {
+    throw new Error("Planet shell chart switcher is incomplete.");
+  }
+  const chartIds = slides.map((slide) => slide.dataset.chartId ?? "");
+  if (chartIds.some((id) => id.length === 0) ||
+      new Set(chartIds).size !== chartIds.length ||
+      labels.some((label) => !chartIds.includes(label.dataset.chartLabel ?? ""))) {
+    throw new Error("Planet shell chart switcher identities are incomplete.");
   }
 
-  const body = documentTarget.body;
   const events = new AbortController();
-  const collapsed = () => body.dataset.sidebarCollapsed === "true";
-  const render = (next) => {
-    if (next) body.dataset.sidebarCollapsed = "true";
-    else delete body.dataset.sidebarCollapsed;
-    toggle.ariaExpanded = String(!next);
-    toggle.ariaLabel = next
-      ? "Expand information sidebar"
-      : "Collapse information sidebar";
-  };
+  lifetime.onDispose(() => events.abort());
+  let activeIndex = Math.max(0, chartIds.indexOf(switcher.dataset.activeChart));
+  const render = (index, notify = true) => {
+    activeIndex = (index + slides.length) % slides.length;
+    const activeId = chartIds[activeIndex];
+    switcher.dataset.activeChart = activeId;
+    for (const slide of slides) slide.hidden = slide.dataset.chartId !== activeId;
+    for (const label of labels) label.hidden = label.dataset.chartLabel !== activeId;
 
-  toggle.addEventListener("click", () => render(!collapsed()), {
-    signal: events.signal,
-  });
-  render(false);
+    const previousSlide = slides[(activeIndex - 1 + slides.length) % slides.length];
+    const nextSlide = slides[(activeIndex + 1) % slides.length];
+    previous.ariaLabel = `Previous chart: ${previousSlide.dataset.chartTitle}`;
+    next.ariaLabel = `Next chart: ${nextSlide.dataset.chartTitle}`;
+    previous.disabled = slides.length < 2;
+    next.disabled = slides.length < 2;
+    if (notify) switcher.dispatchEvent(new windowTarget.Event("chartchange"));
+  };
+  for (const button of [previous, next]) {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      render(activeIndex + Number(button.dataset.chartStep));
+    }, { signal: events.signal });
+  }
+  render(activeIndex, false);
 
   return Object.freeze({
     destroy() {
       events.abort();
-      render(false);
     },
   });
 }
 
-function createSheetController(drawer, windowTarget) {
+function createSheetController(drawer, windowTarget, lifetime) {
   const handle = drawer.querySelector(".planet-sheet-handle");
   if (!(handle instanceof windowTarget.HTMLButtonElement)) {
     throw new Error("Planet shell sheet handle is missing.");
@@ -297,7 +467,13 @@ function createSheetController(drawer, windowTarget) {
   let moved = false;
   let tracking = false;
   let draggedAt = -Infinity;
+  let snapFrame = 0;
+  lifetime.onDispose(() => {
+    if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
+    snapFrame = 0;
+  });
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   const limit = () => Math.max(0, windowTarget.innerHeight * 0.35 - 56);
   const expanded = () => drawer.classList.contains("is-expanded");
   const currentOffset = () => {
@@ -318,8 +494,11 @@ function createSheetController(drawer, windowTarget) {
     drawer.classList.toggle("is-expanded", next);
     handle.ariaExpanded = String(next);
     drawer.classList.remove("is-dragging");
-    windowTarget.requestAnimationFrame(() =>
-      drawer.style.removeProperty("transform"));
+    if (snapFrame) windowTarget.cancelAnimationFrame(snapFrame);
+    snapFrame = windowTarget.requestAnimationFrame(() => {
+      snapFrame = 0;
+      if (!lifetime.disposed) drawer.style.removeProperty("transform");
+    });
   };
 
   handle.addEventListener("pointerdown", (event) => {
@@ -382,7 +561,7 @@ function createSheetController(drawer, windowTarget) {
   });
 }
 
-function createPanelController(drawer, objectId, windowTarget) {
+function createPanelController(drawer, objectId, windowTarget, lifetime) {
   const storageKey = `css.earth:${objectId}:panels`;
   const informationPanel = drawer.querySelector(".planet-information-panel");
   if (!(informationPanel instanceof windowTarget.HTMLElement)) {
@@ -401,6 +580,7 @@ function createPanelController(drawer, objectId, windowTarget) {
   } catch {}
 
   const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
   const save = () => {
     try {
       windowTarget.localStorage.setItem(

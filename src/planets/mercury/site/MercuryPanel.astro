@@ -1,8 +1,9 @@
 ---
+import { objectControls } from "./control-content.mjs";
+const { lenses, settings } = objectControls;
 import PlanetShell from "../../../../site/components/PlanetShell.astro";
 import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
 import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
-import { PREPARED_MERCURY_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_MERCURY_PANEL } from "./preparedPanel.mjs";
 import { PREPARED_MERCURY_TITLE } from "./preparedTitle.mjs";
 
@@ -27,23 +28,6 @@ const charts = [
   },
 ];
 
-const lensDescriptions: Record<string, string> = {
-  normal: "MESSENGER at 750 nm",
-  enhanced: "USGS enhanced color + BDR coverage",
-  topography: "MESSENGER shaded relief",
-  interior: "Interior structure",
-};
-const lenses = {
-  title: PREPARED_SHELL_TITLES.lenses,
-  defaultLens: PREPARED_MERCURY_LENSES.defaultLens,
-  controls: PREPARED_MERCURY_LENSES.controls.map((lens) => ({
-    id: lens.id,
-    label: lens.label,
-    thumbnailUrl: lens.thumbnailUrl,
-    description: lensDescriptions[lens.id],
-    title: lens.falseColor ? `${lens.label}, ${lens.filter} false color` : lens.filter,
-  })),
-};
 const resources = [
   { label: "NASA", role: "facts", description: "Facts & interior", href: "https://science.nasa.gov/mercury/facts/" },
   { label: "USGS", role: "terrain", description: "Surface & terrain lenses", href: "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products" },
@@ -52,13 +36,6 @@ const resources = [
   { label: "ESO", role: "stars", description: "Photographic full-sky panorama", href: "https://www.eso.org/public/images/eso0932a/" },
 ];
 
-const settings = {
-  title: PREPARED_SHELL_TITLES.settings,
-  controls: [
-    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
-    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
-  ],
-};
 ---
 
 <PlanetShell
