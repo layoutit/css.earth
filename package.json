@@ -41,6 +41,7 @@
     "test:browser:conformance": "node site/test/planet-browser-conformance.mjs",
     "test:browser:planets": "node tools/run-implemented-planets.mjs browser",
     "test:browser:mercury-geometry": "node src/planets/mercury/test/lighting-geometry-browser.mjs",
+    "test:browser:mercury-system": "node src/planets/mercury/test/planetary-system-browser.mjs",
     "test:browser:mercury-geometry-mutations": "node src/planets/mercury/test/lighting-geometry-mutation-gate.mjs",
     "test:browser": "node tools/test-browser.mjs",
     "benchmark:compare": "node tools/compare-planet-benchmarks.mjs",

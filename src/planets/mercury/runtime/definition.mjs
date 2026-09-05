@@ -22,6 +22,20 @@ const navigationMarker = PREPARED_NAVIGATION_MARKERS.mercury;
 if (!navigationMarker || !(navigationMarker.presentation?.size > 0)) {
   throw new Error("Mercury has no prepared navigation marker.");
 }
+// The other planets and the Sun as the same atlas tiles at the shell's own
+// sizes: the planetary system's markers are billboards at a fixed screen
+// size, never geometry.
+const atlasSprite = (id) => {
+  const marker = PREPARED_NAVIGATION_MARKERS[id];
+  if (!marker || !(marker.presentation?.size > 0)) throw new Error(`No prepared navigation marker for ${id}.`);
+  return Object.freeze({ index: marker.index, count: marker.count, size: marker.presentation.size });
+};
+const systemMarkers = Object.freeze({
+  url: NAVIGATION_MARKER_ATLAS_URL,
+  sun: atlasSprite("sun"),
+  bodies: Object.freeze(Object.fromEntries(
+    PREPARED_MERCURY_SCENE.heliocentricView.system.bodies.map((body) => [body.id, atlasSprite(body.id)]))),
+});
 const entries = [...preparedSkyResources(PREPARED_MERCURY_SCENE.starfield, PREPARED_MERCURY_SKY_SUN, "warm"),
   { key: "poles", url: canonicalPreparedAsset(PREPARED_MERCURY_ASSETS.poles), pool: "warm" },
   { key: "shadowless", url: materialBank.presentations.at(-1).url, pool: "warm" },
@@ -47,6 +61,7 @@ export const runtimeDefinition = Object.freeze({
       count: navigationMarker.count,
       size: navigationMarker.presentation.size,
     }),
+    systemMarkers,
   }),
   inputSelector: ".mercury-input-surface",
   assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
