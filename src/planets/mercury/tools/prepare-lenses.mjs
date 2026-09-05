@@ -3,10 +3,32 @@
 import { access, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-import { MERCURY_PUBLIC_ROOT } from "./preparation-paths.mjs";
+import sharp from "sharp";
+
+import {
+  ensureMercuryPreparationDirectories,
+  MERCURY_PUBLIC_ROOT,
+  MERCURY_SOURCE_ROOT,
+} from "./preparation-paths.mjs";
 import { validateMercurySourceGroup } from "./source-manifest.mjs";
 
 await validateMercurySourceGroup("lenses");
+await ensureMercuryPreparationDirectories();
+
+const topographyLegendUrl = "/scenes/mercury/mercury-lens-topography-legend.webp";
+const topographyLegendSource = resolve(
+  MERCURY_SOURCE_ROOT,
+  "maps/mercury-topography-legend.png",
+);
+const topographyLegendCrop = await sharp(topographyLegendSource)
+  .extract({ left: 60, top: 6, width: 107, height: 2652 })
+  .png()
+  .toBuffer();
+await sharp(topographyLegendCrop)
+  .rotate(90)
+  .resize({ width: 304, height: 14, fit: "fill", kernel: "nearest" })
+  .webp({ lossless: true })
+  .toFile(resolve(MERCURY_PUBLIC_ROOT, topographyLegendUrl.split("/").at(-1)));
 const controls = Object.freeze([
   Object.freeze({
     id: "normal",
@@ -36,6 +58,16 @@ const controls = Object.freeze([
     thumbnailUrl: "/scenes/mercury/mercury-lens-topography.webp",
     surfaceUrl: "/scenes/mercury/mercury-surface-topography.webp",
     surface2xUrl: "/scenes/mercury/mercury-surface-topography@2x.webp",
+    legend: Object.freeze({
+      kind: "scale",
+      title: "Elevation",
+      meta: "m",
+      src: topographyLegendUrl,
+      width: 304,
+      height: 14,
+      labels: Object.freeze(["−5,020", "−450", "4,140"]),
+      sourceUrl: "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
+    }),
     view: "exterior",
   }),
   Object.freeze({
@@ -46,15 +78,37 @@ const controls = Object.freeze([
     thumbnailUrl: "/scenes/mercury/mercury-lens-interior.webp",
     surfaceUrl: "/scenes/mercury/mercury-interior-section.webp",
     surface2xUrl: "/scenes/mercury/mercury-interior-section@2x.webp",
+    legend: Object.freeze({
+      kind: "categories",
+      title: "Structure",
+      meta: "Schematic",
+      items: Object.freeze([
+        Object.freeze({
+          label: "Metallic core",
+          description: "85% of radius",
+          color: "rgb(158 94 55)",
+        }),
+        Object.freeze({
+          label: "Mantle + crust",
+          description: "366 km shell",
+          color: "rgb(112 108 101)",
+        }),
+      ]),
+      sourceUrl: "https://science.nasa.gov/mercury/facts/",
+    }),
     view: "interior",
   }),
 ]);
 for (const lens of controls) {
-  await Promise.all([
+  const files = [
     access(resolve(MERCURY_PUBLIC_ROOT, lens.thumbnailUrl.split("/").at(-1))),
     access(resolve(MERCURY_PUBLIC_ROOT, lens.surfaceUrl.split("/").at(-1))),
     access(resolve(MERCURY_PUBLIC_ROOT, lens.surface2xUrl.split("/").at(-1))),
-  ]);
+  ];
+  if (lens.legend?.src) {
+    files.push(access(resolve(MERCURY_PUBLIC_ROOT, lens.legend.src.split("/").at(-1))));
+  }
+  await Promise.all(files);
 }
 await writeFile(
   resolve(import.meta.dirname, "../runtime/preparedLenses.mjs"),
