@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
-// Mutation gate for the Mercury lighting and sky geometry browser suite.
+// Mutation gate for the Mercury lighting and sky geometry browser suite and
+// the planetary-system browser suite.
 //
-// The suite exists to catch renders that are self-consistent but wrong. This
-// gate proves it can: each known perturbation is applied to the source, the
-// affected preparation steps are re-run, the suite is run against a dev
-// server, and the suite must go red on a check the mutation was expected to
-// trip. Any mutation that survives fails the gate by name. Every file is
-// restored afterwards, on success, failure, crash or interrupt.
+// The suites exist to catch renders that are self-consistent but wrong. This
+// gate proves they can: each known perturbation is applied to the source, the
+// affected preparation steps are re-run, the mutation's suite is run against
+// a dev server, and the suite must go red on a check the mutation was
+// expected to trip. Any mutation that survives fails the gate by name. Every
+// file is restored afterwards, on success, failure, crash or interrupt.
 //
 // Usage: node src/planets/mercury/test/lighting-geometry-mutation-gate.mjs
 //   [--only <id>[,<id>...]] [--port <port>] [--restore]
@@ -30,8 +31,17 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
-const suiteScript = resolve(projectRoot,
-  "src/planets/mercury/test/lighting-geometry-browser.mjs");
+// The suites a mutation may target; each reports its name in its last line.
+const SUITES = Object.freeze({
+  lighting: Object.freeze({
+    script: resolve(projectRoot, "src/planets/mercury/test/lighting-geometry-browser.mjs"),
+    name: "mercury-lighting-geometry",
+  }),
+  system: Object.freeze({
+    script: resolve(projectRoot, "src/planets/mercury/test/planetary-system-browser.mjs"),
+    name: "mercury-planetary-system",
+  }),
+});
 const toolsDirectory = resolve(projectRoot, "src/planets/mercury/tools");
 const backupRoot = resolve(projectRoot, "node_modules/.cache/mercury-geometry-mutation-gate");
 const backupManifest = join(backupRoot, "manifest.json");
@@ -45,6 +55,7 @@ const SKY_PREPARE = ["prepare-starfield.mjs", "prepare-scene.mjs",
   "prepare-runtime-asset-manifest.mjs"];
 const SUN_PREPARE = ["prepare-sky-sun.mjs", "prepare-scene.mjs",
   "prepare-runtime-asset-manifest.mjs"];
+const SCENE_PREPARE = ["prepare-scene.mjs", "prepare-runtime-asset-manifest.mjs"];
 
 // Files the preparation steps above rewrite; snapshotted once and restored
 // after every prepare-time mutation.
@@ -60,7 +71,8 @@ const PREPARED_OUTPUTS = [
 
 // Each mutation: the source edit (find must occur exactly once), the
 // preparation steps it invalidates, how to confirm the mutated code is what
-// the server serves, and the checks it must trip.
+// the server serves, the checks it must trip, and the suite that must trip
+// them (the lighting suite unless `suite: "system"`).
 export const MUTATIONS = Object.freeze([
   {
     id: "negate-view-y",
@@ -183,6 +195,75 @@ export const MUTATIONS = Object.freeze([
     served: { url: "/src/planets/mercury/runtime/preparedSkySun.mjs", changed: true },
     expect: /sky-anchor|band-angle|lit-direction-matches-oracle|sun-sprite-position/u,
   },
+  // The planetary system. Its preparation self-checks every ring against the
+  // frame-tree position of its body, so a prepare-time mutation must leave
+  // vertex 0 alone to reach the screen; the suite then measures the rest.
+  {
+    id: "system-ring-scale-saturn",
+    description: "Saturn's prepared ring scaled by 1.1 about the Sun (its marker stays put)",
+    file: "src/platform/prepare-planetary-system.mjs",
+    find: "      Object.freeze((index === 0 ? position : pointAt(bodyEccentricAnomaly + index * step)).map(Math.round))));",
+    replace: "      Object.freeze((index === 0 ? position : (id === \"saturn\" ? add(sunPosition, scale(subtract(pointAt(bodyEccentricAnomaly + index * step), sunPosition), 1.1)) : pointAt(bodyEccentricAnomaly + index * step))).map(Math.round)))); /* MUTATION system-ring-scale-saturn */",
+    prepare: SCENE_PREPARE,
+    served: { url: "/src/planets/mercury/runtime/preparedScene.mjs", changed: true },
+    expect: /orbit-(shape|ratio|axis-backprojected)-saturn|marker-on-orbit-saturn/u,
+    suite: "system",
+  },
+  {
+    id: "system-swap-venus-earth",
+    description: "Venus and Earth exchange identities in the prepared system (each marker and ring under the other's name)",
+    file: "src/platform/prepare-planetary-system.mjs",
+    find: "    return Object.freeze({\n      id,\n      radiusKilometers: BODIES[id].meanRadiusKm,",
+    replace: "    return Object.freeze({\n      id: id === \"venus\" ? \"earth\" : id === \"earth\" ? \"venus\" : id, /* MUTATION system-swap-venus-earth */\n      radiusKilometers: BODIES[id].meanRadiusKm,",
+    prepare: SCENE_PREPARE,
+    served: { url: "/src/planets/mercury/runtime/preparedScene.mjs", changed: true },
+    expect: /marker-position-(venus|earth)|orbit-(shape|axis-backprojected)-(venus|earth)/u,
+    suite: "system",
+  },
+  {
+    id: "system-runtime-ring-scale-mars",
+    description: "the runtime projects the third system ring (Mars) scaled by 1.15",
+    file: "src/platform/heliocentric-view.mjs",
+    find: "        orbitSegments: projectRing(body.orbit.vertices),",
+    replace: "        orbitSegments: projectRing(plan.system.bodies.indexOf(body) === 2 ? body.orbit.vertices.map((vertex) => vertex.map((component) => component * 1.15)) : body.orbit.vertices), /* MUTATION system-runtime-ring-scale-mars */",
+    prepare: [],
+    served: { url: "/src/platform/heliocentric-view.mjs", marker: "MUTATION system-runtime-ring-scale-mars" },
+    expect: /orbit-(shape|ratio|axis-backprojected)-mars|marker-on-orbit-mars/u,
+    suite: "system",
+  },
+  {
+    id: "system-runtime-marker-shift",
+    description: "the runtime places every planet marker at the next planet's position",
+    file: "src/platform/heliocentric-view.mjs",
+    find: "        marker: projectPoint(body.position),",
+    replace: "        marker: projectPoint(plan.system.bodies[(plan.system.bodies.indexOf(body) + 1) % plan.system.bodies.length].position), /* MUTATION system-runtime-marker-shift */",
+    prepare: [],
+    served: { url: "/src/platform/heliocentric-view.mjs", marker: "MUTATION system-runtime-marker-shift" },
+    expect: /marker-(position|on-orbit)-/u,
+    suite: "system",
+  },
+  {
+    id: "system-dolly-orbit-bound",
+    description: "the dolly's far bound falls back to four Mercury orbit extents (the system never fits)",
+    file: "src/platform/perspective-dolly.mjs",
+    find: "    ? cameraPlan.dolly.maximumDistanceOverSystemExtent * system.maximumExtentUnits",
+    replace: "    ? cameraPlan.dolly.maximumDistanceOverOrbitExtent * plan.orbit.maximumExtentUnits /* MUTATION system-dolly-orbit-bound */",
+    prepare: [],
+    served: { url: "/src/platform/perspective-dolly.mjs", marker: "MUTATION system-dolly-orbit-bound" },
+    expect: /maximum-dolly-reaches-whole-system|outer-distance-honoured/u,
+    suite: "system",
+  },
+  {
+    id: "system-always-visible",
+    description: "the system ignores its fade and is opaque at every distance",
+    file: "src/platform/perspective-dolly.mjs",
+    find: "          : planetarySystemOpacity(systemFade, distance / plan.orbit.maximumExtentUnits);",
+    replace: "          : 1; /* MUTATION system-always-visible */",
+    prepare: [],
+    served: { url: "/src/platform/perspective-dolly.mjs", marker: "MUTATION system-always-visible" },
+    expect: /system-hidden-at-default-framing|system-fades-in-with-distance/u,
+    suite: "system",
+  },
 ]);
 
 if (restoreOnly) {
@@ -248,12 +329,15 @@ try {
   const baseUrl = server.baseUrl;
   console.log(`suite target: ${baseUrl}`);
 
-  // The unmutated suite must be green, or the gate proves nothing.
-  const baseline = await runSuite(baseUrl);
-  if (!baseline.ok) {
-    throw new Error(`Baseline suite is not green: ${baseline.failed.join(", ")}`);
+  // The unmutated suites must be green, or the gate proves nothing.
+  const suitesInPlay = [...new Set(selected.map(({ suite }) => suite ?? "lighting"))];
+  for (const suite of suitesInPlay) {
+    const baseline = await runSuite(baseUrl, suite);
+    if (!baseline.ok) {
+      throw new Error(`Baseline ${suite} suite is not green: ${baseline.failed.join(", ")}`);
+    }
+    console.log(`baseline ${suite}: green (${baseline.checks.length} checks)`);
   }
-  console.log(`baseline: green (${baseline.checks.length} checks)`);
   const baselineServed = {};
   for (const { served } of selected) {
     if (served.changed) baselineServed[served.url] ??= await fetchText(baseUrl + served.url);
@@ -266,7 +350,7 @@ try {
       applyMutation(mutation);
       for (const step of mutation.prepare) await runPreparation(step);
       await waitForServed(baseUrl, mutation, baselineServed);
-      const run = await runSuite(baseUrl);
+      const run = await runSuite(baseUrl, mutation.suite ?? "lighting");
       const tripped = run.failed.filter((id) => mutation.expect.test(id));
       const status = run.ok
         ? "SURVIVED"
@@ -279,15 +363,17 @@ try {
     }
     outcome.seconds = Math.round((Date.now() - started) / 1000);
     results.push(outcome);
-    console.log(`${outcome.status.padEnd(22)} ${mutation.id.padEnd(28)} ` +
+    console.log(`${outcome.status.padEnd(22)} ${mutation.id.padEnd(30)} ` +
       `${outcome.seconds}s  tripped: ${outcome.tripped.join(", ") || "-"}`);
   }
 
-  // Sources are back: the suite must be green again.
+  // Sources are back: the suites must be green again.
   await waitForServed(baseUrl, null, baselineServed);
-  const final = await runSuite(baseUrl);
-  if (!final.ok) {
-    throw new Error(`Suite not green after restoring: ${final.failed.join(", ")}`);
+  for (const suite of suitesInPlay) {
+    const final = await runSuite(baseUrl, suite);
+    if (!final.ok) {
+      throw new Error(`${suite} suite not green after restoring: ${final.failed.join(", ")}`);
+    }
   }
 } finally {
   cleanup();
@@ -361,9 +447,10 @@ function runPreparation(script) {
   });
 }
 
-function runSuite(baseUrl) {
+function runSuite(baseUrl, suite) {
+  const { script, name } = SUITES[suite];
   return new Promise((resolvePromise, reject) => {
-    const child = spawn(process.execPath, [suiteScript, baseUrl], {
+    const child = spawn(process.execPath, [script, baseUrl], {
       cwd: projectRoot,
       stdio: ["ignore", "pipe", "pipe"],
     });
@@ -378,7 +465,7 @@ function runSuite(baseUrl) {
       const lines = stdout.trim().split("\n");
       try {
         const report = JSON.parse(lines[lines.length - 1]);
-        if (report.suite !== "mercury-lighting-geometry") throw new Error("wrong suite");
+        if (report.suite !== name) throw new Error("wrong suite");
         resolvePromise(report);
       } catch {
         // A crash is red too, but not a verdict: report it as such.
