@@ -31,7 +31,7 @@ export interface FrameModelAccuracy {
 const VSOP_SOURCE_URL = 'https://cdsarc.cds.unistra.fr/viz-bin/cat/VI/81'
 const ELP_SOURCE_URL = 'https://cdsarc.cds.unistra.fr/viz-bin/cat/VI/79'
 const HORIZONS_SOURCE_URL = 'https://ssd.jpl.nasa.gov/horizons/'
-const PROJECT_SOURCE_URL = 'https://github.com/apresmoi/galaxio/blob/main/ARCHITECTURE.md'
+const PROJECT_SOURCE_URL = 'https://github.com/layoutit/cssEarth/blob/main/packages/astronomy/AGENTS.md'
 
 const VSOP_KEY_BY_PLANET: Record<PlanetId, Vsop87BodyKey> = {
   mercury: 'mercury',
@@ -130,7 +130,7 @@ ACCURACY_BY_FRAME.set(
     0,
     null,
     null,
-    'Galaxio reference-frame convention',
+    'cssEarth reference-frame convention',
     PROJECT_SOURCE_URL,
     'The standard tree defines the SSB-to-sol edge as zero. This is a coordinate convention, not a claim about the accuracy of the outer cosmic frames.',
   ),
@@ -217,7 +217,7 @@ for (const planet of PLANET_IDS) {
         0,
         null,
         null,
-        'Galaxio solar-system frame definition',
+        'cssEarth solar-system frame definition',
         PROJECT_SOURCE_URL,
         'No satellites are carried for this planetary system, so the planet-to-system-barycentre correction is identically zero by the model definition.',
       ),

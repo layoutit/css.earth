@@ -72,10 +72,10 @@ they do not derive it).
 
 ## Sync and integrity
 
-`node tools/sync-galaxio.mjs` re-copies these catalogues together with
-`packages/astronomy` and `packages/catalog` from `GALAXIO_ROOT` (default: the
+`node tools/sync-upstream.mjs` re-copies these catalogues together with
+`packages/astronomy` and `packages/catalog` from `UPSTREAM_ROOT` (default: the
 local galaxio checkout) in one idempotent run, and regenerates `upstream.json`
-and `manifest.json`. `tools/sync-galaxio.test.mjs` (run by
+and `manifest.json`. `tools/sync-upstream.test.mjs` (run by
 `pnpm test:platform`) asserts every file matches its recorded hash, no
 unlisted file exists, every current file parses as a version-1 `.gxct` whose
 row count and `meta` match its manifest entry, the excluded catalogues are

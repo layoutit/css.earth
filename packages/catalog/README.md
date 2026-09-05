@@ -19,4 +19,4 @@ stars.numeric('posPc')      // Float32Array, 3 components per row, no copy
 stars.strings('name')[42]   // decoded lazily
 ```
 
-The byte-level spec is in [FORMAT.md](./FORMAT.md). A Python writer lives in the repo's `pipeline/`; `pnpm check:parity` proves the two implementations agree.
+The byte-level spec is in [FORMAT.md](./FORMAT.md). The Python writer lives in the external catalogue pipeline (not part of this repository); `pnpm check:parity` proves the two implementations agree.

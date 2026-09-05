@@ -1,32 +1,42 @@
 #!/usr/bin/env node
-// Vendors galaxio's astronomy and catalog packages and its prepared point
-// catalogues into cssEarth, mirroring galaxio's own layout so a sync is a
-// directory-to-directory copy:
+// Mirrors the astronomy and catalog packages, and the prepared point
+// catalogues, from the author's other project (galaxio) into cssEarth. Both
+// projects are Juan Cruz Fortunatti's; the packages are his own MIT code, so
+// they are presented here as cssEarth's own packages and this sync is an
+// engineering mirror (one source of truth, two repositories), not a
+// third-party vendoring. The catalogue DATA is different: it is third-party
+// science data whose licences travel with it untouched (data/catalogs/NOTICE.md).
 //
-//   packages/astronomy   <-  <galaxio>/packages/astronomy   (git-tracked files)
-//   packages/catalog     <-  <galaxio>/packages/catalog     (git-tracked files)
-//   data/catalogs/<name> <-  <galaxio>/data/catalogs/<name> (VENDORED_CATALOGS)
+// The upstream layout is mirrored so a sync is a directory-to-directory copy:
+//
+//   packages/astronomy   <-  <upstream>/packages/astronomy   (git-tracked files)
+//   packages/catalog     <-  <upstream>/packages/catalog     (git-tracked files)
+//   data/catalogs/<name> <-  <upstream>/data/catalogs/<name> (VENDORED_CATALOGS)
 //
 // Package files are copied byte-for-byte except for one deliberate rewrite:
-// galaxio's identity becomes cssEarth's in the package name and in prose
-// (IDENTITY_RULES). Code, import specifiers, data, and every other file are
-// untouched; the per-file manifest in each upstream.json records both the
-// vendored hash and, for rewritten files, the upstream hash, so the claim
-// "byte-identical apart from the identity replacements" is checkable.
+// the upstream project's identity becomes cssEarth's (IDENTITY_RULES) — the
+// package name, repository URLs, prose, paths into upstream-only directories,
+// and the three identity strings in src/modelAccuracy.ts. No rule changes
+// behaviour: every code rule matches a string literal only. Two upstream files
+// are not mirrored at all (EXCLUDED_FILES). The per-file manifest in each
+// upstream.json records both the mirrored hash and, for rewritten files, the
+// upstream hash, so the claim "byte-identical apart from the identity
+// replacements" is checkable.
 //
-// The catalogues are generated output that galaxio does not commit (its
+// The catalogues are generated output that upstream does not commit (its
 // data/ directory is gitignored and built by pipeline/), so they carry no
-// upstream commit of their own. Their provenance records the galaxio checkout
+// upstream commit of their own. Their provenance records the upstream checkout
 // that held them, the manifest entry each was published under, and their
 // hashes. Two catalogues are deliberately not vendored; see EXCLUDED_CATALOGS.
 //
 // Re-run to pull upstream changes (idempotent; unchanged input is a no-op):
 //
-//   node tools/sync-galaxio.mjs
-//   GALAXIO_ROOT=/path/to/galaxio node tools/sync-galaxio.mjs
+//   node tools/sync-upstream.mjs
+//   UPSTREAM_ROOT=/path/to/checkout node tools/sync-upstream.mjs
 //
-// Never hand-edit the vendored trees: the sync overwrites them and
-// tools/sync-galaxio.test.mjs fails on any drift.
+// Never hand-edit the mirrored trees: the sync overwrites them and
+// tools/sync-upstream.test.mjs fails on any drift — including any upstream
+// identity that leaks back in.
 
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -35,17 +45,34 @@ import { mkdir, readdir, readFile, readlink, rm, symlink, writeFile } from "node
 import { dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
-export const DEFAULT_GALAXIO_ROOT = "/Users/apresmoi/Documents/galaxio";
+export const DEFAULT_UPSTREAM_ROOT = "/Users/apresmoi/Documents/galaxio";
 export const REPO_ROOT = fileURLToPath(new URL("../", import.meta.url));
 
 export const PROVENANCE_FILE = "upstream.json";
-export const LICENSE_FILE = "LICENSE.GALAXIO-MIT";
-export const GALAXIO_REPOSITORY = "https://github.com/apresmoi/galaxio";
+export const LICENSE_FILE = "LICENSE";
+export const UPSTREAM_REPOSITORY = "https://github.com/apresmoi/galaxio";
 export const CSSEARTH_REPOSITORY = "https://github.com/layoutit/cssEarth";
+export const UPSTREAM_NAME = "galaxio";
+export const AUTHOR = "Juan Cruz Fortunatti";
 
-// The only edit applied to upstream files: galaxio's identity becomes
-// cssEarth's in package names and in prose. Each rule names the files it may
-// touch; nothing under src/, tools/, or scripts/ is matched.
+// The upstream project is the same author's other repository. This record
+// exists so the mirror can be refreshed and drift detected; it is not an
+// attribution to an outside party.
+export const ORIGIN_NOTE =
+  `Shared source, same author: this package is maintained in ${AUTHOR}'s other ` +
+  `project (${UPSTREAM_NAME}, ${UPSTREAM_REPOSITORY}) and mirrored here by ` +
+  `tools/sync-upstream.mjs. Both projects are his, and the package is MIT under ` +
+  `his copyright either way, so it is presented as cssEarth's own package. This ` +
+  `file is an engineering sync record (upstream path, commit, per-file hashes), ` +
+  `not a third-party attribution.`;
+
+const PROSE = /(^|\/)[^/]+\.md$/;
+const EXTERNAL_PIPELINE = "the external catalogue pipeline (not part of this repository)";
+
+// The only edit applied to upstream files: the upstream project's identity
+// becomes cssEarth's. Each rule names the files it may touch. The two rules
+// that reach into src/ match string literals in src/modelAccuracy.ts only —
+// a source label and a documentation URL — and change no behaviour.
 export const IDENTITY_RULES = Object.freeze([
   {
     id: "package-name",
@@ -55,20 +82,93 @@ export const IDENTITY_RULES = Object.freeze([
     description: 'package.json "name": @galaxio/<pkg> -> @cssearth/<pkg>',
   },
   {
+    id: "package-urls",
+    files: /^package\.json$/,
+    from: /https:\/\/github\.com\/apresmoi\/galaxio/g,
+    to: CSSEARTH_REPOSITORY,
+    description: "package.json repository, bugs, homepage: the upstream repository URL -> the cssEarth repository URL",
+  },
+  {
     id: "prose-package-name",
-    files: /(^|\/)[^/]+\.md$/,
+    files: PROSE,
     from: /@galaxio\//g,
     to: "@cssearth/",
     description: "*.md: @galaxio/<pkg> -> @cssearth/<pkg> (headings, install and import examples)",
   },
   {
     id: "prose-project-link",
-    files: /(^|\/)[^/]+\.md$/,
+    files: PROSE,
     from: /\[Galaxio\]\(https:\/\/github\.com\/apresmoi\/galaxio\)/g,
     to: `[cssEarth](${CSSEARTH_REPOSITORY})`,
     description: "*.md: the [Galaxio](repo) project link -> [cssEarth](repo)",
   },
+  {
+    id: "prose-pipeline-writer-path",
+    files: PROSE,
+    from: /`pipeline\/galaxio_pipeline\/formats\/catalog\.py`/g,
+    to: `\`formats/catalog.py\` of ${EXTERNAL_PIPELINE}`,
+    description:
+      "*.md: the Python writer's path inside the upstream pipeline/ (absent here) -> " +
+      "`formats/catalog.py` of the external catalogue pipeline (not part of this repository)",
+  },
+  {
+    id: "prose-pipeline-directory",
+    files: PROSE,
+    from: /A Python writer lives in the repo's `pipeline\/`;/g,
+    to: `The Python writer lives in ${EXTERNAL_PIPELINE};`,
+    description:
+      "*.md: \"A Python writer lives in the repo's `pipeline/`\" (absent here) -> " +
+      "the external catalogue pipeline (not part of this repository)",
+  },
+  {
+    id: "prose-architecture-doc",
+    files: PROSE,
+    from: /See `ARCHITECTURE\.md §2` in the repo root for why that matters/g,
+    to: 'See "The frame tree is the whole point" in `AGENTS.md` for why that matters',
+    description:
+      "*.md: the upstream root ARCHITECTURE.md §2 reference (absent here) -> " +
+      'the "The frame tree is the whole point" section of AGENTS.md',
+  },
+  {
+    id: "prose-claude-symlink",
+    files: /^AGENTS\.md$/,
+    from: / ?`CLAUDE\.md` is a symlink to this file\./g,
+    to: "",
+    description:
+      "AGENTS.md: drop the sentence announcing the CLAUDE.md symlink, which is not mirrored (EXCLUDED_FILES)",
+  },
+  {
+    id: "code-project-url",
+    files: /^src\/modelAccuracy\.ts$/,
+    from: /'https:\/\/github\.com\/apresmoi\/galaxio\/blob\/main\/ARCHITECTURE\.md'/g,
+    to: `'${CSSEARTH_REPOSITORY}/blob/main/packages/astronomy/AGENTS.md'`,
+    description:
+      "src/modelAccuracy.ts: PROJECT_SOURCE_URL string literal, the upstream ARCHITECTURE.md -> " +
+      "this package's AGENTS.md in the cssEarth repository (a documentation URL; no behaviour change)",
+  },
+  {
+    id: "code-convention-label",
+    files: /^src\/modelAccuracy\.ts$/,
+    from: /'Galaxio (reference-frame convention|solar-system frame definition)'/g,
+    to: "'cssEarth $1'",
+    description:
+      "src/modelAccuracy.ts: the two 'Galaxio … convention/definition' sourceLabel string literals -> " +
+      "'cssEarth …' (labels only; no behaviour change)",
+  },
 ]);
+
+// Upstream files that are not mirrored at all, with the reason. Recorded in
+// upstream.json under excludedFiles so the omission is auditable.
+export const EXCLUDED_FILES = Object.freeze({
+  "CLAUDE.md":
+    "A symlink to AGENTS.md upstream. Claude Code loads CLAUDE.md per directory, so " +
+    "mirroring it would silently apply the upstream project's operator instructions to " +
+    "any session working in this package. AGENTS.md itself is mirrored as plain documentation.",
+  "scripts/gen_fixture.py":
+    "Imports the upstream Python pipeline (galaxio_pipeline), which is not part of this " +
+    "repository, so it cannot run here. scripts/check-parity.mjs, which invokes it, is " +
+    "mirrored as inert reference; the parity check runs where the pipeline lives.",
+});
 
 export const PACKAGES = Object.freeze([
   {
@@ -92,8 +192,8 @@ export const PACKAGES = Object.freeze([
 export const CATALOGS_DIRECTORY = "data/catalogs";
 export const CATALOGS_MANIFEST_FILE = "manifest.json";
 
-// Catalogues copied whole from <galaxio>/data/catalogs/<name>, every v<N>
-// directory included, with the galaxio builder that produced each one.
+// Catalogues copied whole from <upstream>/data/catalogs/<name>, every v<N>
+// directory included, with the upstream builder that produced each one.
 export const VENDORED_CATALOGS = Object.freeze({
   "stars-hyg": "pipeline/galaxio_pipeline/builders/stars.py",
   "constellations-iau": "pipeline/galaxio_pipeline/builders/constellations.py",
@@ -344,10 +444,15 @@ async function syncPackage(pkg, { root, upstream, license, allowDirty, log }) {
 
   const files = {};
   const rewritten = {};
+  const excluded = {};
   for (const tracked of subtree.trackedFiles) {
     const rel = toPosix(relative(pkg.upstreamDirectory, tracked));
     if (isOwnedFile(target, rel)) {
       throw new Error(`Upstream now ships ${rel}, which collides with a cssEarth-owned file.`);
+    }
+    if (rel in EXCLUDED_FILES) {
+      excluded[rel] = EXCLUDED_FILES[rel];
+      continue;
     }
     const source = join(root, tracked);
     const dest = join(target.dest, rel);
@@ -377,21 +482,26 @@ async function syncPackage(pkg, { root, upstream, license, allowDirty, log }) {
     upstreamPackage: pkg.upstreamPackage,
     license: "MIT",
     licenseFile: LICENSE_FILE,
-    repository: upstream.remote ?? `${GALAXIO_REPOSITORY}.git`,
+    author: AUTHOR,
+    origin: ORIGIN_NOTE,
+    repository: upstream.remote ?? `${UPSTREAM_REPOSITORY}.git`,
     directory: pkg.upstreamDirectory,
     subtreeCommit: subtree.subtreeCommit,
     subtreeCommitDate: subtree.subtreeCommitDate,
     headCommit: upstream.headCommit,
     upstreamDirty: subtree.dirty,
     syncedAt: unchanged ? previous.syncedAt : new Date().toISOString(),
-    syncScript: "tools/sync-galaxio.mjs",
+    syncScript: "tools/sync-upstream.mjs",
     transform:
-      "identity only: files listed under identityRules had galaxio's identity " +
-      "replaced by cssEarth's (see rules); every other file is byte-identical to upstream",
+      "identity only: files listed under identityRules had the upstream project's " +
+      "identity replaced by cssEarth's (see rules; the src/ rules touch string literals " +
+      "only); files listed under excludedFiles are not mirrored; every other file is " +
+      "byte-identical to upstream",
     identityRules: Object.fromEntries(
       IDENTITY_RULES.map((rule) => [rule.id, rule.description]),
     ),
     rewrittenFiles: rewritten,
+    excludedFiles: excluded,
     importNote: IMPORT_NOTE,
     fileCount: Object.keys(files).length,
     byteCount: sumBytes(files),
@@ -399,9 +509,10 @@ async function syncPackage(pkg, { root, upstream, license, allowDirty, log }) {
   };
   await writeProvenance(target, provenance);
   log(
-    `Vendored ${pkg.upstreamPackage}@${subtree.subtreeCommit.slice(0, 12)} as ${pkg.package} ` +
+    `Mirrored ${pkg.upstreamPackage}@${subtree.subtreeCommit.slice(0, 12)} as ${pkg.package} ` +
       `(${provenance.fileCount} files, ${provenance.byteCount} bytes, ` +
-      `${Object.keys(rewritten).length} identity-rewritten) into ${pkg.directory}` +
+      `${Object.keys(rewritten).length} identity-rewritten, ${Object.keys(excluded).length} excluded) ` +
+      `into ${pkg.directory}` +
       `${unchanged ? " — unchanged" : ""}`,
   );
   return provenance;
@@ -502,7 +613,7 @@ async function syncCatalogs({ root, upstream, log }) {
   const provenance = {
     dataset: "galaxio data/catalogs (prepared .gxct point catalogues)",
     format: "@cssearth/catalog .gxct (packages/catalog/FORMAT.md)",
-    repository: upstream.remote ?? `${GALAXIO_REPOSITORY}.git`,
+    repository: upstream.remote ?? `${UPSTREAM_REPOSITORY}.git`,
     directory: "data/catalogs",
     upstreamTracked: false,
     upstreamTrackingNote:
@@ -520,7 +631,7 @@ async function syncCatalogs({ root, upstream, log }) {
       version: manifest.version,
     },
     syncedAt: unchanged ? previous.syncedAt : new Date().toISOString(),
-    syncScript: "tools/sync-galaxio.mjs",
+    syncScript: "tools/sync-upstream.mjs",
     transform:
       "none: every catalogue file is byte-identical to the upstream data/catalogs " +
       "directory; manifest.json is the catalogs/* subset of galaxio's data/manifest.json " +
@@ -545,14 +656,14 @@ async function syncCatalogs({ root, upstream, log }) {
   return provenance;
 }
 
-export async function syncGalaxio({
-  root = process.env.GALAXIO_ROOT ?? DEFAULT_GALAXIO_ROOT,
+export async function syncUpstream({
+  root = process.env.UPSTREAM_ROOT ?? DEFAULT_UPSTREAM_ROOT,
   allowDirty = false,
   log = console.log,
 } = {}) {
   root = resolve(root);
   if (!existsSync(join(root, "packages", "astronomy", "src", "index.ts"))) {
-    throw new Error(`No galaxio checkout at ${root}. Set GALAXIO_ROOT to the galaxio repository root.`);
+    throw new Error(`No ${UPSTREAM_NAME} checkout at ${root}. Set UPSTREAM_ROOT to the ${UPSTREAM_NAME} repository root.`);
   }
   const upstream = upstreamIdentity(root);
   const licensePath = join(upstream.root, "LICENSE");
@@ -569,8 +680,8 @@ export async function syncGalaxio({
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  await syncGalaxio({ allowDirty: process.argv.includes("--allow-dirty") }).catch((error) => {
-    console.error(`sync-galaxio failed: ${error.message}`);
+  await syncUpstream({ allowDirty: process.argv.includes("--allow-dirty") }).catch((error) => {
+    console.error(`sync-upstream failed: ${error.message}`);
     process.exit(1);
   });
 }
