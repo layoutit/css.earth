@@ -236,10 +236,13 @@ try {
   }
   await page.locator("#earth-settings").evaluate((panel) => { panel.open = true; });
   const speedStates = [];
-  for (let index = 0; index < 5; index += 1) {
-    await page.locator('button[name="speed"]')
-      .evaluate((button) => button.click());
-    speedStates.push(await page.locator('button[name="speed"]')
+  for (const value of [2, 3, 4, 0, 1]) {
+    await page.locator('input[name="speed"][type="range"]')
+      .evaluate((input, nextValue) => {
+        input.value = String(nextValue);
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      }, value);
+    speedStates.push(await page.locator('input[name="speed"][type="range"]')
       .getAttribute("data-state"));
   }
   assert.deepEqual(speedStates,

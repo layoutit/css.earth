@@ -686,9 +686,9 @@ export function mountMercuryClient(stage, { onError } = {}) {
   }
 
   function createSettingControls() {
-    const speed = document.querySelector('button[name="speed"]');
+    const speed = document.querySelector('input[name="speed"][type="range"]');
     const shadows = document.querySelector('input[name="shadows"]');
-    if (!(speed instanceof HTMLButtonElement) ||
+    if (!(speed instanceof HTMLInputElement) ||
         !(shadows instanceof HTMLInputElement)) {
       throw new Error("Mercury settings controls are incomplete.");
     }
@@ -696,7 +696,7 @@ export function mountMercuryClient(stage, { onError } = {}) {
     let bound = false;
     shadows.checked = false;
     const speedControl = bindSpeedControl({
-      button: speed, lifetime, onError,
+      input: speed, lifetime, onError,
       onChange(rate) { for (const animation of animations) animation.playbackRate = rate; },
     });
     lifetime.onDispose(() => { bound = false; events.abort(); });

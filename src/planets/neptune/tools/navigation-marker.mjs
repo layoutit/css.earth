@@ -12,6 +12,9 @@ export default Object.freeze({
     license: "MAST public science data terms",
   }),
   operations: Object.freeze([
+    // Use the observed map interior; the top polar rows contain missing-data
+    // wedges and false-color seams that must not enter the small UI marker.
+    Object.freeze({ type: "extract", left: 180, top: 110, width: 361, height: 240 }),
     Object.freeze({ type: "resize", width: "tile", height: "tile", fit: "cover", position: "centre", kernel: "lanczos3" }),
     Object.freeze({ type: "ensure-alpha" }),
     Object.freeze({ type: "ellipse-mask", cx: 0.5, cy: 0.5, rx: 0.48, ry: 0.47 }),

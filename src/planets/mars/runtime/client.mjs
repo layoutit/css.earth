@@ -279,10 +279,10 @@ export function mountMarsClient(stage, { onError }) {
 function createMarsPanelControls({ stage, selectLens, setShadows, setSpeed, lifetime, onError }) {
   const lensRoot = document.querySelector(".planet-drawer-content .planet-lenses");
   const settingsRoot = document.querySelector(".planet-settings-panel .planet-settings");
-  const speedButton = settingsRoot?.querySelector('button[name="speed"]');
+  const speedInput = settingsRoot?.querySelector('input[name="speed"][type="range"]');
   const shadows = settingsRoot?.querySelector('input[name="shadows"]');
   if (!(lensRoot instanceof HTMLElement) || !(settingsRoot instanceof HTMLElement) ||
-      !(speedButton instanceof HTMLButtonElement) || !(shadows instanceof HTMLInputElement)) {
+      !(speedInput instanceof HTMLInputElement) || !(shadows instanceof HTMLInputElement)) {
     throw new Error("Mars panel controls are incomplete.");
   }
   const lensButtons = [...lensRoot.querySelectorAll('button[name="lens"]')];
@@ -299,7 +299,7 @@ function createMarsPanelControls({ stage, selectLens, setShadows, setSpeed, life
     lensRoot.classList.remove("is-loading");
     for (const button of lensButtons) button.disabled = true;
   });
-  const speed = bindSpeedControl({ button: speedButton, lifetime, onError, onChange: setSpeed });
+  const speed = bindSpeedControl({ input: speedInput, lifetime, onError, onChange: setSpeed });
   lensRoot.classList.add("is-loading");
   for (const button of lensButtons) {
     button.disabled = true;

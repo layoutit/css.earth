@@ -9,56 +9,62 @@ import {
 } from "./planet-feature-controls.mjs";
 import { createSceneLifetime } from "./scene-lifetime.mjs";
 
-class Button extends EventTarget {
+class Input extends EventTarget {
   dataset = {};
   attributes = {};
   disabled = false;
+  checked = false;
+  value = "1";
   setAttribute(key, value) { this.attributes[key] = value; }
 }
 
-test("speed binding owns the complete cycle, keeps playback permission separate, and removes its listener", () => {
+test("speed binding owns the stepped range, keeps playback permission separate, and removes its listener", () => {
   const lifetime = createSceneLifetime();
-  const button = new Button();
+  const input = new Input();
   const rates = [];
-  const binding = bindSpeedControl({ button, lifetime, onChange: (rate) => rates.push(rate), onError: assert.fail });
-  assert.equal(button.disabled, true);
-  button.dispatchEvent(new Event("click"));
+  const binding = bindSpeedControl({ input, lifetime, onChange: (rate) => rates.push(rate), onError: assert.fail });
+  assert.equal(input.disabled, true);
+  input.dispatchEvent(new Event("input"));
   assert.deepEqual(rates, []);
   binding.setEnabled(true);
-  for (const label of ["fast", "fastest", "superfast", "off", "normal"]) {
-    button.dispatchEvent(new Event("click"));
-    assert.equal(button.dataset.state, label);
-    assert.equal(button.attributes["aria-label"], `Speed: ${label}`);
+  for (const [value, label] of [[2, "fast"], [3, "fastest"], [4, "superfast"], [0, "off"], [1, "normal"]]) {
+    input.value = String(value);
+    input.dispatchEvent(new Event("input"));
+    assert.equal(input.dataset.state, label);
+    assert.equal(input.attributes["aria-label"], `Speed: ${label}`);
   }
   assert.deepEqual(rates, [2, 3, 4, 0, 1]);
   assert.deepEqual(binding.state(), { speed: 1 });
   lifetime.destroy();
   binding.setEnabled(true);
-  button.dispatchEvent(new Event("click"));
-  assert.equal(button.disabled, true);
+  input.value = "2";
+  input.dispatchEvent(new Event("input"));
+  assert.equal(input.disabled, true);
   assert.deepEqual(rates, [2, 3, 4, 0, 1]);
 });
 
 test("a failed speed publication reports fatal error without advancing displayed state", () => {
   const lifetime = createSceneLifetime();
-  const button = new Button();
+  const input = new Input();
   const error = new Error("publication");
   const errors = [];
-  const binding = bindSpeedControl({ button, lifetime, onChange() { throw error; }, onError(value) { errors.push(value); lifetime.destroy(); } });
+  const binding = bindSpeedControl({ input, lifetime, onChange() { throw error; }, onError(value) { errors.push(value); lifetime.destroy(); } });
   binding.setEnabled(true);
-  button.dispatchEvent(new Event("click"));
+  input.value = "2";
+  input.dispatchEvent(new Event("input"));
   assert.deepEqual(errors, [error]);
-  assert.equal(button.dataset.state, "normal");
-  assert.equal(button.disabled, true);
+  assert.equal(input.dataset.state, "normal");
+  assert.equal(input.value, "1");
+  assert.equal(input.disabled, true);
 });
 
 test("invalid initial speed fails before attaching a listener or cleanup owner", () => {
   const lifetime = createSceneLifetime();
   let listeners = 0;
-  const button = new Button();
-  button.addEventListener = () => { listeners += 1; };
+  const input = new Input();
+  input.addEventListener = () => { listeners += 1; };
   for (const initialValue of [-1, 1.5, "1", Infinity, NaN]) {
-    assert.throws(() => bindSpeedControl({ button, initialValue, lifetime,
+    assert.throws(() => bindSpeedControl({ input, initialValue, lifetime,
       onChange: assert.fail, onError: assert.fail }), /known rate/);
   }
   assert.equal(listeners, 0);
@@ -74,14 +80,13 @@ test("later animation handles inherit current speed without changing playback pe
       remove: (name) => this.classes.delete(name),
     };
   }
-  class Input extends EventTarget { checked = false; }
-  const stage = new Element(), root = new Element(), button = new Button();
+  const stage = new Element(), root = new Element(), speed = new Input();
   const inputs = { rings: new Input(), shadows: new Input() };
-  root.querySelector = (selector) => selector.includes('"speed"') ? button
+  root.querySelector = (selector) => selector.includes('"speed"') ? speed
     : selector.includes('"rings"') ? inputs.rings : inputs.shadows;
   const previous = new Map();
   for (const [name, value] of Object.entries({ HTMLElement: Element, HTMLInputElement: Input,
-    HTMLButtonElement: Button, document: { querySelector: () => root } })) {
+    document: { querySelector: () => root } })) {
     previous.set(name, Object.getOwnPropertyDescriptor(globalThis, name));
     Object.defineProperty(globalThis, name, { configurable: true, writable: true, value });
   }
@@ -101,11 +106,13 @@ test("later animation handles inherit current speed without changing playback pe
   const first = animation(), later = animation(), off = animation();
   controls.bindRuntime({ animations: [first] });
   assert.equal(first.playbackRate, 1);
-  button.dispatchEvent(new Event("click"));
+  speed.value = "2";
+  speed.dispatchEvent(new Event("input"));
   assert.equal(first.playbackRate, 2);
   controls.bindRuntime({ animations: [later] });
   assert.equal(later.playbackRate, 2);
-  for (let count = 0; count < 3; count += 1) button.dispatchEvent(new Event("click"));
+  speed.value = "0";
+  speed.dispatchEvent(new Event("input"));
   assert.deepEqual(controls.optionsState(), { speed: 0 });
   controls.bindRuntime({ animations: [off] });
   assert.equal(off.playbackRate, 0);
@@ -116,10 +123,11 @@ test("later animation handles inherit current speed without changing playback pe
   lifetime.destroy();
   const retired = animation();
   controls.bindRuntime({ animations: [retired] });
-  button.dispatchEvent(new Event("click"));
+  speed.value = "3";
+  speed.dispatchEvent(new Event("input"));
   assert.equal(retired.playbackRate, 99);
   assert.equal(off.playbackRate, 0);
-  assert.equal(button.disabled, true);
+  assert.equal(speed.disabled, true);
 });
 
 test("defaults the shared retained-overlay shadow control to off", () => {

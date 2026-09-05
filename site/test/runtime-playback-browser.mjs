@@ -39,13 +39,14 @@ try {
           window.__cssEarth?.ready && window[`__${id}`]?.ready, object.id);
         await assertRenderedObjectControls(page, profile);
         await paused("default Motion off");
-        await pausedSpeedCycle("Motion off", true);
+        await assertSpeedDisabled("Motion off");
         await page.emulateMedia({ reducedMotion: "reduce" });
         await paused("Motion off; reduced motion on");
         await page.emulateMedia({ reducedMotion: "no-preference" });
         await paused("Motion off; reduced motion cleared");
         await motion(true);
         await running("Motion on");
+        await pausedSpeedCycle("Motion on", true);
         await page.emulateMedia({ reducedMotion: "reduce" });
         await paused("Motion on; reduced motion blocks playback");
         await pausedSpeedCycle("Motion on; reduced motion blocks speed changes");
@@ -61,6 +62,7 @@ try {
         await motion(false);
         await visibility(false);
         await paused("visible; Motion now off");
+        await assertSpeedDisabled("Motion now off");
         assert.deepEqual(errors, [], `${object.id}: no page errors`);
         record.passed = true;
       } finally {
@@ -81,16 +83,27 @@ try {
       }
       async function pausedSpeedCycle(label, fullCycle = false) {
         if (!profile.objectControls.settings?.controls.some(({ name }) => name === "speed")) return;
-        const button = page.locator('button[name="speed"]');
-        assert.equal(await button.getAttribute("data-state"), "normal");
-        for (const state of ["fast", "fastest", "superfast", "off", "normal"]) {
-          await button.evaluate((input) => {
-            if (input.disabled) throw new Error("Ready speed control must be enabled.");
-            input.click();
-          });
-          assert.equal(await button.getAttribute("data-state"), state);
-          if (fullCycle || state === "off" || state === "normal") await paused(`${label}; speed ${state}`);
+        const input = page.locator('input[name="speed"][type="range"]');
+        assert.equal(await input.getAttribute("data-state"), "normal");
+        for (const [state, value] of [["fast", 2], ["fastest", 3], ["superfast", 4], ["off", 0], ["normal", 1]]) {
+          await input.evaluate((control, nextValue) => {
+            if (control.disabled) throw new Error("Ready speed control must be enabled.");
+            control.value = String(nextValue);
+            control.dispatchEvent(new Event("input", { bubbles: true }));
+          }, value);
+          assert.equal(await input.getAttribute("data-state"), state);
+          if (fullCycle || state === "off" || state === "normal") {
+            const lifecycle = await page.evaluate(() => window.__cssEarth.lifecycle);
+            if (lifecycle === "paused") await paused(`${label}; speed ${state}`);
+            else if (state === "off") await stationary(`${label}; speed off`);
+            else await running(`${label}; speed ${state}`);
+          }
         }
+      }
+      async function assertSpeedDisabled(label) {
+        if (!profile.objectControls.settings?.controls.some(({ name }) => name === "speed")) return;
+        assert.equal(await page.locator('input[name="speed"][type="range"]').isDisabled(), true,
+          `${object.id}: ${label} must disable Speed`);
       }
       async function sample(label) {
         const state = await page.evaluate(() => ({
@@ -98,7 +111,7 @@ try {
           playback: window.__cssEarth.playback,
           requested: document.querySelector(".planet-motion-setting").checked,
           playing: document.documentElement.dataset.playing,
-          speed: document.querySelector('button[name="speed"]')?.dataset.state ?? null,
+          speed: document.querySelector('input[name="speed"][type="range"]')?.dataset.state ?? null,
           animations: document.querySelector(".planet-stage")
             .getAnimations({ subtree: true }).map((animation) => ({
               state: animation.playState, pending: animation.pending,
@@ -120,6 +133,21 @@ try {
         assert.ok(after.animations.every(({ state }) => state === "paused"),
           `${object.id}: ${label}: actual animation pause`);
         assert.equal(after.animations.length, before.animations.length);
+        after.animations.forEach(({ time }, index) => assert.ok(
+          Math.abs((time ?? 0) - (before.animations[index].time ?? 0)) < 0.1,
+          `${object.id}: ${label}: no continued clock advancement`));
+      }
+      async function stationary(label) {
+        await page.waitForFunction(() => document.querySelector(".planet-stage")
+          .getAnimations({ subtree: true }).every((animation) => !animation.pending));
+        const before = await sample(label);
+        await page.waitForTimeout(140);
+        const after = await sample(`${label}: settled`);
+        assert.equal(after.lifecycle, "mounted", `${object.id}: ${label}: router remains mounted`);
+        assert.ok(after.animations.length > 0, `${object.id}: observable animations`);
+        assert.equal(after.animations.length, before.animations.length);
+        assert.ok(after.animations.every(({ rate, state }) => rate === 0 || state === "paused"),
+          `${object.id}: ${label}: zero-rate animation state`);
         after.animations.forEach(({ time }, index) => assert.ok(
           Math.abs((time ?? 0) - (before.animations[index].time ?? 0)) < 0.1,
           `${object.id}: ${label}: no continued clock advancement`));

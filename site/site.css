@@ -45,17 +45,6 @@ body {
   transform-origin: 50% 50%;
 }
 
-@media (min-width: 961px) and (orientation: landscape) {
-  .planet-stage > .planet-render-root {
-    translate: 175px 0;
-  }
-
-  body[data-sidebar-collapsed="true"] .planet-stage > .planet-render-root {
-    translate: 0 0;
-  }
-
-}
-
 body.loading::after,
 body.priming::after {
   content: "";

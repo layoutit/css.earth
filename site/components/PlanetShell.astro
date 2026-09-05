@@ -5,8 +5,8 @@ import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
 import { requireObjectControls } from "../scene-contract.mjs";
-import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
+import SearchIcon from "./SearchIcon.astro";
 
 interface PreparedIcon {
   label: string;
@@ -110,6 +110,8 @@ interface Props {
   };
 }
 
+declare const __CSSEARTH_VERSION__: string;
+
 const {
   objectId,
   title,
@@ -126,6 +128,21 @@ requireObjectControls({ lenses, settings }, objectId);
 const allFacts = [...facts, ...moreFacts];
 const hasFacts = allFacts.length > 0;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
+const speedSetting = settings?.controls.find((setting) =>
+  setting.kind === "cycle" && setting.name === "speed");
+const shadowSetting = settings?.controls.find((setting) =>
+  setting.kind === "toggle" && setting.name === "shadows");
+const remainingSettings = settings?.controls.filter((setting) =>
+  setting !== speedSetting && setting !== shadowSetting) ?? [];
+const speedValues: Readonly<Record<string, number>> = Object.freeze({
+  off: 0,
+  normal: 1,
+  fast: 2,
+  fastest: 3,
+  superfast: 4,
+});
+const initialSpeedState = speedSetting?.state ?? "normal";
+const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
 const planetCount = PLANET_SEARCH_OBJECTS.length;
 const activeObject = OBJECTS.find((object) => object.id === objectId);
 const hasResources = resources.length > 0;
@@ -139,6 +156,9 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
 
 <aside id={`${objectId}-sidebar`} class="planet-sidebar" aria-label="Planet information">
   <div class="planet-sidebar-search-card">
+    <span class="planet-sidebar-search-icon">
+      <SearchIcon />
+    </span>
     <input
       class="planet-sidebar-search"
       type="search"
@@ -147,20 +167,36 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
       autocomplete="off"
       value={activeObject?.name ?? ""}
     />
-    <button
-      class="planet-sidebar-view-all"
-      type="button"
-      aria-controls={`${objectId}-object-browser`}
-      aria-label="View all objects"
-      aria-pressed="false"
-    >×</button>
   </div>
+  <section class="explorer-about-panel" id={`${objectId}-about`} aria-labelledby={`${objectId}-about-title`} hidden>
+    <h2 id={`${objectId}-about-title`}>About</h2>
+    <div class="explorer-about-content">
+      <div class="explorer-about-introduction">
+        <p>A 3D CSS planetary explorer. cssEarth renders planets as real HTML and CSS 3D geometry through <a href="https://github.com/LayoutitStudio/polycss">PolyCSS</a>, without a WebGL or canvas scene renderer.</p>
+        <p>It preprocesses planetary data into browser-ready textures, charts, and retained scene plans, then lets you orbit and inspect one planet at a time.</p>
+      </div>
+      <div class="explorer-about-links" aria-label="About details">
+        <div class="explorer-about-row">
+          <span>Version</span>
+          <span class="explorer-about-link-destination">v{__CSSEARTH_VERSION__}</span>
+        </div>
+        <a class="explorer-about-row explorer-about-link" href="https://github.com/layoutit/cssEarth">
+          <span>Source code</span>
+          <span class="explorer-about-link-destination">github.com/layoutit/cssEarth</span>
+        </a>
+        <a class="explorer-about-row explorer-about-link" href="mailto:agustin@lowpoly.gg">
+          <span>Contact</span>
+          <span class="explorer-about-link-destination">agustin@lowpoly.gg</span>
+        </a>
+      </div>
+    </div>
+  </section>
   <div class="planet-drawer-content" id={`${objectId}-information`}>
     <button class="planet-sheet-handle" type="button" aria-label="Resize information sheet" aria-expanded="false"></button>
     <nav
       id={`${objectId}-object-browser`}
       class="planet-object-browser maps-object-results"
-      aria-label="Objects"
+      aria-label="Planets"
       hidden
     >
       <PlanetObjectResults activeObjectId={objectId} />
@@ -168,37 +204,44 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
     </nav>
     <div class="planet-information-panel">
       <section class="planet-selected-panel">
-      <div class="planet-title-row">
-        <h1 class="planet-title" aria-label={title.label}>
-          <svg
-            class="planet-title-svg"
-            viewBox={title.renderViewBox}
-            width={title.renderWidth}
-            height={title.renderHeight}
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d={title.path}
-              transform={title.renderPathOffsetY === 0
-                ? undefined
-                : `translate(0 ${title.renderPathOffsetY})`}
-            />
-          </svg>
-        </h1>
-        {activeObject && <PlanetNavigationMarker
-          planetId={activeObject.id}
-          color={activeObject.color}
-          scale={2}
-        />}
-      </div>
-      {introduction && <p class="planet-introduction">{introduction}</p>}
-      {hasFacts && <details id={`${objectId}-factsheet`} class="planet-factsheet-disclosure">
-        <summary class="planet-factsheet-summary">
-          <span class="planet-factsheet-show">Show factsheet</span>
-          <span class="planet-factsheet-hide">Hide factsheet</span>
+        <div class="planet-title-row">
+          <h1 class="planet-title" aria-label={title.label}>
+            <svg
+              class="planet-title-svg"
+              viewBox={title.renderViewBox}
+              width={title.renderWidth}
+              height={title.renderHeight}
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d={title.path}
+                transform={title.renderPathOffsetY === 0
+                  ? undefined
+                  : `translate(0 ${title.renderPathOffsetY})`}
+              />
+            </svg>
+          </h1>
+        </div>
+        {introduction && <p class="planet-introduction">{introduction}</p>}
+      </section>
+      <details
+        id={`${objectId}-factsheet-panel`}
+        class="planet-factsheet-section"
+        aria-labelledby={`${objectId}-factsheet-title`}
+      >
+        <summary class="planet-factsheet-header planet-panel-summary">
+          <h2 id={`${objectId}-factsheet-title`} class="planet-panel-heading">Factsheet</h2>
+          <img
+            class="planet-panel-icon"
+            data-panel-icon="facts"
+            src={PREPARED_SHELL_ICONS.facts.src}
+            width={PREPARED_SHELL_ICONS.facts.width}
+            height={PREPARED_SHELL_ICONS.facts.height}
+            alt=""
+          />
         </summary>
-        <div class="planet-factsheet-content">
+        {hasFacts && <div class="planet-factsheet-body">
           <div class="planet-facts">
             <ul class="planet-primary-facts">
               {allFacts.map((fact) => (
@@ -209,14 +252,14 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
               ))}
             </ul>
           </div>
-        </div>
-      </details>}
-      </section>
+        </div>}
+      </details>
       {hasLenses && lenses && <details id={`${objectId}-lenses`} class="planet-lenses" open>
         <summary class="planet-panel-summary">
           <h2 class="planet-panel-heading">{lenses.title.label}</h2>
           <img
             class="planet-panel-icon"
+            data-panel-icon="lenses"
             src={PREPARED_SHELL_ICONS.lenses.src}
             width={PREPARED_SHELL_ICONS.lenses.width}
             height={PREPARED_SHELL_ICONS.lenses.height}
@@ -252,6 +295,7 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
           <h2 class="planet-panel-heading">{chart.title.label}</h2>
           {chartIcons[chart.id] && <img
             class="planet-panel-icon"
+            data-panel-icon={chart.id}
             src={chartIcons[chart.id].src}
             width={chartIcons[chart.id].width}
             height={chartIcons[chart.id].height}
@@ -301,6 +345,7 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
           <h2 class="planet-panel-heading">{PREPARED_SHELL_TITLES.resources.label}</h2>
           <img
             class="planet-panel-icon"
+            data-panel-icon="resources"
             src={PREPARED_SHELL_ICONS.resources.src}
             width={PREPARED_SHELL_ICONS.resources.width}
             height={PREPARED_SHELL_ICONS.resources.height}
@@ -322,59 +367,75 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
           ))}
         </div>
       </details>}
-      <details
-        id={`${objectId}-settings`}
-        class="planet-settings-panel planet-settings-flyout"
-      >
-        <summary class="planet-panel-summary">
-          <h2 class="planet-panel-heading">{PREPARED_SHELL_TITLES.settings.label}</h2>
-          <span class="planet-panel-icon planet-settings-gear" aria-hidden="true">⚙︎</span>
-        </summary>
-        <div class="planet-settings">
-          <label class="planet-setting-control planet-motion-setting-control">
-            <input class="planet-motion-setting" type="checkbox" name="motion" />
-            <span class="planet-setting-text">Motion</span>
-            <span class="planet-setting-description">
-              <span class="planet-setting-state-on">On</span>
-              <span class="planet-setting-state-off">Off</span>
-              <span class="planet-setting-state-auto">Auto</span>
-            </span>
-            <span id={`${objectId}-motion-blocked`} class="planet-motion-blocked" hidden>
-              Paused by reduced motion
-            </span>
-          </label>
-          <label class="planet-setting-control planet-sky-contrast-setting-control">
-            <input
-              class="planet-sky-contrast-setting"
-              type="checkbox"
-              name="skyContrast"
-            />
-            <span class="planet-setting-text">High contrast</span>
-            <span class="planet-setting-description">
-              <span class="planet-setting-state-on">On</span>
-              <span class="planet-setting-state-off">Off</span>
-              <span class="planet-setting-state-auto">Auto</span>
-            </span>
-          </label>
-          {(settings?.controls ?? []).map((setting) => setting.kind === "cycle" ? (
-            <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`} disabled={setting.name === "speed"}>
-              <span class="planet-setting-text">{setting.label}</span>
-            </button>
-          ) : (
-            <label class="planet-setting-control">
-              <input type="checkbox" name={setting.name} checked={setting.checked} />
-              <span class="planet-setting-text">{setting.label}</span>
-              <span class="planet-setting-description">
-                <span class="planet-setting-state-on">On</span>
-                <span class="planet-setting-state-off">Off</span>
-                <span class="planet-setting-state-auto">Auto</span>
-              </span>
-            </label>
-          ))}
-        </div>
-      </details>
+
     </div>
+    <button
+      class="planet-sidebar-view-all"
+      type="button"
+      aria-controls={`${objectId}-object-browser`}
+      aria-label="View all objects"
+      aria-pressed="false"
+    >×</button>
   </div>
+<section
+  id={`${objectId}-settings`}
+  class="planet-settings-panel explorer-settings-panel"
+  aria-labelledby={`${objectId}-settings-title`}
+  hidden
+>
+  <h2 id={`${objectId}-settings-title`}>{PREPARED_SHELL_TITLES.settings.label}</h2>
+  <div class="planet-settings">
+    <label class="planet-setting-control planet-motion-setting-control">
+      <input class="planet-motion-setting" type="checkbox" name="motion" />
+      <span class="planet-setting-text">Motion</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+      <span id={`${objectId}-motion-blocked`} class="planet-motion-blocked" hidden>
+        Paused by reduced motion
+      </span>
+    </label>
+    {speedSetting && <label class="planet-setting-control planet-speed-setting-control">
+      <span class="planet-setting-text">{speedSetting.label}</span>
+      <input
+        id={`${objectId}-speed-setting`}
+        class="planet-speed-setting"
+        type="range"
+        name={speedSetting.name}
+        min="0"
+        max="4"
+        step="1"
+        value={initialSpeedValue}
+        data-state={initialSpeedState}
+        aria-label={`${speedSetting.label}: ${initialSpeedState}`}
+        disabled
+      />
+    </label>}
+    {shadowSetting && <label class="planet-setting-control">
+      <input type="checkbox" name={shadowSetting.name} checked={shadowSetting.checked} />
+      <span class="planet-setting-text">{shadowSetting.label}</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>}
+    <label class="planet-setting-control planet-sky-contrast-setting-control">
+      <input
+        class="planet-sky-contrast-setting"
+        type="checkbox"
+        name="skyContrast"
+      />
+      <span class="planet-setting-text">High contrast</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    {remainingSettings.map((setting) => setting.kind === "cycle" ? (
+      <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
+        <span class="planet-setting-text">{setting.label}</span>
+      </button>
+      ) : (
+      <label class="planet-setting-control">
+        <input type="checkbox" name={setting.name} checked={setting.checked} />
+        <span class="planet-setting-text">{setting.label}</span>
+        <span class="planet-setting-switch" aria-hidden="true"></span>
+      </label>
+      ))}
+      </div>
+    </section>
 </aside>
 {hasResources && <footer
   class="planet-attribution-footer"
@@ -395,18 +456,4 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
       </a>
     </>
   ))}
-  <span class="planet-attribution-separator" aria-hidden="true">·</span>
-  <span class="planet-attribution-developed">
-    Developed by <a
-      class="planet-attribution-developed-link"
-      href="https://github.com/layoutit"
-      target="_blank"
-      rel="noreferrer"
-    >layoutit</a> with <a
-      class="planet-attribution-developed-link"
-      href="https://github.com/LayoutitStudio/polycss"
-      target="_blank"
-      rel="noreferrer"
-    >PolyCSS</a>
-  </span>
 </footer>}

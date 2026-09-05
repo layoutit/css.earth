@@ -118,8 +118,9 @@ try {
       await page.locator("#neptune-settings").evaluate((panel) => {
         panel.open = true;
       });
-      await page.locator('button[name="speed"]').evaluate((button) => {
-        button.click();
+      await page.locator('input[name="speed"][type="range"]').evaluate((input) => {
+        input.value = "2";
+        input.dispatchEvent(new Event("input", { bubbles: true }));
       });
       const rings = page.locator('input[name="rings"]');
       await rings.evaluate((input) => input.click());

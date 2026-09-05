@@ -9,38 +9,48 @@ export const PLANET_SPEED_STATES = Object.freeze([
 export const PLANET_SHADOW_DEFAULT = false;
 
 export function bindSpeedControl({
-  button, initialValue = 1, lifetime, onChange, onError,
+  input, initialValue = 1, lifetime, onChange, onError,
 }) {
   let index = PLANET_SPEED_STATES.findIndex(({ value }) => value === initialValue);
-  if (index < 0 || typeof button?.addEventListener !== "function" ||
+  if (index < 0 || typeof input?.addEventListener !== "function" ||
       typeof lifetime?.onDispose !== "function" || typeof onChange !== "function" ||
       typeof onError !== "function") {
-    throw new TypeError("Speed binding requires a known rate, button, lifetime, and callbacks.");
+    throw new TypeError("Speed binding requires a known rate, range input, lifetime, and callbacks.");
   }
   let enabled = false;
   function publish() {
     const selected = PLANET_SPEED_STATES[index];
-    button.dataset.state = selected.label;
-    button.setAttribute("aria-label", `Speed: ${selected.label}`);
-    button.disabled = !enabled;
+    input.value = String(selected.value);
+    input.dataset.state = selected.label;
+    input.setAttribute("aria-label", `Speed: ${selected.label}`);
+    input.disabled = !enabled;
   }
   function change() {
     if (!enabled || lifetime.disposed) return;
-    const next = (index + 1) % PLANET_SPEED_STATES.length;
+    const next = PLANET_SPEED_STATES.findIndex(({ value }) =>
+      value === Number(input.value));
+    if (next < 0) {
+      publish();
+      onError(new RangeError(`Unknown planet speed: ${input.value}.`));
+      return;
+    }
     try {
       onChange(PLANET_SPEED_STATES[next].value);
       if (lifetime.disposed) return;
       index = next;
       publish();
-    } catch (error) { onError(error); }
+    } catch (error) {
+      publish();
+      onError(error);
+    }
   }
   if (!lifetime.disposed) {
-    button.addEventListener("click", change);
+    input.addEventListener("input", change);
   }
   lifetime.onDispose(() => {
     enabled = false;
-    button.removeEventListener("click", change);
-    button.disabled = true;
+    input.removeEventListener("input", change);
+    input.disabled = true;
   });
   if (!lifetime.disposed) publish();
   return Object.freeze({
@@ -80,8 +90,8 @@ export function createPlanetFeatureControls({
   lifetime.onDispose(destroy);
   if (lifetime.disposed) throw new Error("Planet feature controls require a live scene.");
   const shadowsInput = requiredInput("shadows");
-  const speedButton = root.querySelector('button[name="speed"]');
-  if (!(speedButton instanceof HTMLButtonElement)) throw new Error("Planet speed control is missing.");
+  const speedInput = root.querySelector('input[name="speed"][type="range"]');
+  if (!(speedInput instanceof HTMLInputElement)) throw new Error("Planet speed control is missing.");
 
   for (const name of toggleNames) {
     const input = requiredInput(name);
@@ -105,7 +115,7 @@ export function createPlanetFeatureControls({
     } catch (error) { onError(error); }
   }, { signal: events.signal });
   speed = bindSpeedControl({
-    button: speedButton, lifetime, onError,
+    input: speedInput, lifetime, onError,
     onChange(value) {
       for (const animation of animations) animation.playbackRate = value;
       settings.speed = value;

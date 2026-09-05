@@ -56,12 +56,12 @@ export function createVenusFeatureControls({
       if (!lifetime.disposed) onError(error);
     }
   }, { signal: events.signal });
-  const speed = root.querySelector('button[name="speed"]');
-  if (!(speed instanceof HTMLButtonElement)) {
+  const speed = root.querySelector('input[name="speed"][type="range"]');
+  if (!(speed instanceof HTMLInputElement)) {
     throw new Error("Venus speed control is missing.");
   }
   const speedControl = bindSpeedControl({
-    button: speed, lifetime, onError,
+    input: speed, lifetime, onError,
     onChange(value) {
       for (const animation of animations) animation.playbackRate = value;
       settings.speed = value;

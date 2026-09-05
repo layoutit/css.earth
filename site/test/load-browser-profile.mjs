@@ -87,16 +87,25 @@ export function validatePlanetBrowserProfile(planet, browserProfile, objectContr
 
 export async function assertRenderedObjectControls(page, profile) {
   const expectedLenses = profile.objectControls.lenses?.controls.map(({ id }) => id) ?? [];
+  const objectSettings = profile.objectControls.settings?.controls ?? [];
+  const speed = objectSettings.find(({ name, kind }) => name === "speed" && kind === "cycle");
+  const shadows = objectSettings.find(({ name, kind }) => name === "shadows" && kind === "toggle");
+  const remainingSettings = objectSettings.filter((setting) =>
+    setting !== speed && setting !== shadows);
   const expectedSettings = [
-    { name: "motion", kind: "toggle" }, { name: "skyContrast", kind: "toggle" },
-    ...(profile.objectControls.settings?.controls ?? []).map(({ name, kind }) => ({ name, kind })),
+    { name: "motion", kind: "toggle" },
+    ...(speed ? [{ name: speed.name, kind: speed.kind }] : []),
+    ...(shadows ? [{ name: shadows.name, kind: shadows.kind }] : []),
+    { name: "skyContrast", kind: "toggle" },
+    ...remainingSettings.map(({ name, kind }) => ({ name, kind })),
   ];
   const actual = await page.evaluate(() => ({
     lensPanelCount: document.querySelectorAll(".planet-lenses").length,
     settingsPanelCount: document.querySelectorAll(".planet-settings").length,
     lenses: [...document.querySelectorAll('.planet-lenses button[name="lens"]')].map((button) => button.value),
     settings: [...document.querySelectorAll(".planet-settings input, .planet-settings button")]
-      .map((input) => ({ name: input.name, kind: input.tagName === "BUTTON" && input.type === "button"
+      .map((input) => ({ name: input.name, kind: (input.tagName === "BUTTON" && input.type === "button") ||
+        (input.tagName === "INPUT" && input.type === "range")
         ? "cycle" : input.tagName === "INPUT" && input.type === "checkbox" ? "toggle" : "unsupported" })),
   }));
   assert.equal(actual.lensPanelCount, expectedLenses.length ? 1 : 0,

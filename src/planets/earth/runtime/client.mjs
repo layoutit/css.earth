@@ -910,10 +910,10 @@ function createEarthFeatureControls(stage, lifetime, onError) {
   if (!(root instanceof HTMLElement)) {
     throw new Error("Earth options block is missing.");
   }
-  const speed = root.querySelector('button[name="speed"]');
+  const speed = root.querySelector('input[name="speed"][type="range"]');
   const toggles = new Map(["atmosphere", "shadows"].map((name) =>
     [name, root.querySelector(`input[name="${name}"][type="checkbox"]`)]));
-  if (!(speed instanceof HTMLButtonElement) ||
+  if (!(speed instanceof HTMLInputElement) ||
       [...toggles.values()].some((input) =>
         !(input instanceof HTMLInputElement))) {
     throw new Error("Earth feature controls are incomplete.");
@@ -928,7 +928,7 @@ function createEarthFeatureControls(stage, lifetime, onError) {
   let onAtmosphereVisibilityChange = null;
   let onShadowsVisibilityChange = null;
   const speedControl = bindSpeedControl({
-    button: speed, lifetime, onError,
+    input: speed, lifetime, onError,
     onChange(nextRate) { rate = nextRate; applyPlayback(shouldPlay); },
   });
   lifetime.onDispose(() => {
