@@ -69,6 +69,7 @@ export function nativeScenarioTrace({
   revision,
   revisions = [revision],
   tailMs = 1600,
+  measurementEndNanoseconds = null,
 }) {
   const batch = events.find((event) =>
     event.event === "native-input-batch-accepted" &&
@@ -87,7 +88,10 @@ export function nativeScenarioTrace({
   const startNanoseconds = batch.acceptedMonotonicSeconds * 1e9;
   const lastAcceptedNanoseconds = Math.max(...accepted.map((event) =>
     event.acceptedMonotonicSeconds * 1e9));
-  const endNanoseconds = lastAcceptedNanoseconds + tailMs * 1e6;
+  const requestedEndNanoseconds = lastAcceptedNanoseconds + tailMs * 1e6;
+  const endNanoseconds = Number.isFinite(measurementEndNanoseconds)
+    ? Math.min(requestedEndNanoseconds, measurementEndNanoseconds)
+    : requestedEndNanoseconds;
   const frames = decoded.frames.filter((frame) =>
     frame.monotonicNanoseconds >= startNanoseconds - 5e6 &&
     frame.monotonicNanoseconds <= endNanoseconds);
@@ -107,6 +111,8 @@ export function nativeScenarioTrace({
     posted: Object.freeze(posted),
     startNanoseconds,
     endNanoseconds,
+    requestedEndNanoseconds,
+    measurementEndNanoseconds,
     frameCount: frames.length,
     frames: Object.freeze(frames),
     sampleFrames: Object.freeze(sampleOffsetsMilliseconds.map((offset) =>

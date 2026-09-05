@@ -62,3 +62,7 @@ export function bindResponsiveOrbitPolicy({ controls, inputSurface, mediaQuery, 
       inputSurface.style.removeProperty("touch-action");
   }
 }
+
+export function isOrbitDragStart({ isPrimary, button }) {
+  return isPrimary && button === 0;
+}

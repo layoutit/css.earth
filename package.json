@@ -36,7 +36,8 @@
     "benchmark:payloads": "node tools/measure-object-payloads.mjs",
     "oracle:venus": "node src/planets/venus/tools/oracle/run.mjs",
     "analyze:trace:saturn": "node src/planets/saturn/tools/audit/analyze-user-trace.mjs",
-    "trace:saturn": "node src/planets/saturn/tools/audit/trace.mjs"
+    "trace:saturn": "node src/planets/saturn/tools/audit/trace.mjs",
+    "oracle:interactions": "node src/planets/mars/tools/oracle/google-earth-pro/run-interaction-suite.mjs"
   },
   "dependencies": {
     "@layoutit/polycss": "0.2.11"

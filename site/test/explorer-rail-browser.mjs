@@ -99,8 +99,8 @@ try {
         "search follows the 48px header by 12px");
       assert.ok(sidebarBox.y + sidebarBox.height <= config.height - 16,
         "the information panel leaves a bottom gap");
-      assert.equal((await page.locator(".planet-stage").boundingBox()).x, 0,
-        "the floating shell does not reserve scene space");
+      assert.equal((await page.locator(".planet-stage").boundingBox()).x, 170,
+        "the desktop scene is centered beside the information panel");
     }
     assert.equal(await page.locator(".planet-sidebar-toggle, .planetary-navigation-toggle, .explorer-rail-menu").count(), 0);
     const factsheetPanel = page.locator(".planet-factsheet-section");

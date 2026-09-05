@@ -16,7 +16,7 @@ import {
 } from "../../body-geometry.mjs";
 import { prepareMarsPolarAtlas } from "../../polar-projection.mjs";
 
-const GENERATOR_VERSION = "1.0.0";
+const GENERATOR_VERSION = "1.1.0";
 const SOURCE_WIDTH = 4096;
 const SOURCE_HEIGHT = 2048;
 const TILE_SIZE = 256;
@@ -81,7 +81,7 @@ const manifest = Object.freeze({
     latitudeDomainDegrees: Object.freeze([90, -90]),
     gridStepDegrees: 30,
     features: Object.freeze([
-      "labeled latitude-longitude cells",
+      "unlabeled latitude-longitude cells",
       "unequal north and south pole markers",
       "unique cyan-white prime meridian",
       "different magenta and yellow antimeridian seam edges",
@@ -373,18 +373,9 @@ function renderCalibrationSurface() {
   );
 
   for (let latitudeCell = 0; latitudeCell < 6; latitudeCell += 1) {
-    const latitude = 75 - latitudeCell * 30;
     for (let longitudeCell = 0; longitudeCell < 12; longitudeCell += 1) {
-      const longitude = -165 + longitudeCell * 30;
-      const label = `${latitude >= 0 ? "N" : "S"}${String(
-        Math.abs(latitude),
-      ).padStart(2, "0")}${longitude >= 0 ? "E" : "W"}${String(
-        Math.abs(longitude),
-      ).padStart(3, "0")}`;
       const cellX = Math.round(longitudeCell / 12 * SOURCE_WIDTH);
       const cellY = Math.round(latitudeCell / 6 * SOURCE_HEIGHT);
-      drawText(rgba, label, cellX + 26, cellY + 28, 4,
-        [247, 248, 242, 255], [4, 7, 12, 255]);
       const identity = longitudeCell + latitudeCell * 12 + 1;
       drawDot(rgba, cellX + 62 + identity % 211,
         cellY + 122 + identity % 97, 1 + identity % 3,
@@ -392,12 +383,6 @@ function renderCalibrationSurface() {
     }
   }
 
-  drawText(rgba, "P000", primeX + 18, latitudeToY(8), 6,
-    [255, 255, 255, 255], [4, 32, 38, 255]);
-  drawText(rgba, "A180", 22, latitudeToY(-6), 6,
-    [255, 255, 255, 255], [65, 3, 48, 255]);
-  drawText(rgba, "A180", SOURCE_WIDTH - 175, latitudeToY(-6), 6,
-    [18, 15, 2, 255], [255, 230, 66, 255]);
   drawNorthPoleMarker(rgba);
   drawSouthPoleMarker(rgba);
   drawRegistrationDots(rgba);
@@ -411,8 +396,6 @@ function drawNorthPoleMarker(rgba) {
     fillRect(rgba, centerX - 84 + step * 28, 62, 18, 14 + step * 7,
       [240, 250, 255, 255]);
   }
-  drawText(rgba, "N90", centerX - 51, 15, 5,
-    [4, 17, 25, 255], [20, 203, 255, 255]);
 }
 
 function drawSouthPoleMarker(rgba) {
@@ -424,8 +407,6 @@ function drawSouthPoleMarker(rgba) {
     drawRing(rgba, centerX, centerY, radius,
       radius % 16 === 0 ? [12, 9, 5, 255] : [255, 240, 190, 255]);
   }
-  drawText(rgba, "S90", centerX + 48, centerY - 18, 4,
-    [15, 8, 2, 255], [255, 112, 30, 255]);
 }
 
 function drawRegistrationDots(rgba) {
@@ -561,32 +542,6 @@ function drawCross(rgba, centerX, centerY, radius, color) {
   fillRect(rgba, centerX - 1, centerY - radius, 3, radius * 2 + 1, color);
 }
 
-function drawText(rgba, text, left, top, scale, color, background) {
-  const glyphWidth = 5 * scale;
-  const glyphHeight = 7 * scale;
-  const width = text.length * (glyphWidth + scale) + scale * 2;
-  fillRect(rgba, left - scale, top - scale, width, glyphHeight + scale * 2,
-    background);
-  for (let characterIndex = 0;
-       characterIndex < text.length;
-       characterIndex += 1) {
-    const glyph = glyphFor(text[characterIndex]);
-    for (let y = 0; y < 7; y += 1) {
-      for (let x = 0; x < 5; x += 1) {
-        if (glyph[y][x] !== "1") continue;
-        fillRect(
-          rgba,
-          left + characterIndex * (glyphWidth + scale) + x * scale,
-          top + y * scale,
-          scale,
-          scale,
-          color,
-        );
-      }
-    }
-  }
-}
-
 function longitudeToX(longitude) {
   return Math.round((longitude + 180) / 360 * (SOURCE_WIDTH - 1));
 }
@@ -614,27 +569,4 @@ function jsonBytes(value) {
 
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
-}
-
-function glyphFor(character) {
-  const glyphs = {
-  " ": ["00000", "00000", "00000", "00000", "00000", "00000", "00000"],
-  "0": ["01110", "10001", "10011", "10101", "11001", "10001", "01110"],
-  "1": ["00100", "01100", "00100", "00100", "00100", "00100", "01110"],
-  "2": ["01110", "10001", "00001", "00010", "00100", "01000", "11111"],
-  "3": ["11110", "00001", "00001", "01110", "00001", "00001", "11110"],
-  "4": ["00010", "00110", "01010", "10010", "11111", "00010", "00010"],
-  "5": ["11111", "10000", "10000", "11110", "00001", "00001", "11110"],
-  "6": ["01110", "10000", "10000", "11110", "10001", "10001", "01110"],
-  "7": ["11111", "00001", "00010", "00100", "01000", "01000", "01000"],
-  "8": ["01110", "10001", "10001", "01110", "10001", "10001", "01110"],
-  "9": ["01110", "10001", "10001", "01111", "00001", "00001", "01110"],
-  "A": ["01110", "10001", "10001", "11111", "10001", "10001", "10001"],
-  "E": ["11111", "10000", "10000", "11110", "10000", "10000", "11111"],
-  "N": ["10001", "11001", "11001", "10101", "10011", "10011", "10001"],
-  "P": ["11110", "10001", "10001", "11110", "10000", "10000", "10000"],
-  "S": ["01111", "10000", "10000", "01110", "00001", "00001", "11110"],
-  "W": ["10001", "10001", "10001", "10101", "10101", "11011", "10001"],
-  };
-  return glyphs[character] ?? glyphs[" "];
 }
