@@ -164,6 +164,36 @@ test("publishes byte-bound DPR 1 and DPR 2 photographic cubemap faces", async ()
   }
 });
 
+test("publishes a frameless Topography scale without black divider gaps", async () => {
+  const topography = PREPARED_MERCURY_LENSES.controls.find(
+    ({ id }) => id === "topography",
+  );
+  const bytes = await readFile(fileURLToPath(new URL(
+    `../../../../public${topography.legend.src}`,
+    import.meta.url,
+  )));
+  const image = await sharp(bytes).removeAlpha().raw()
+    .toBuffer({ resolveWithObject: true });
+  assert.deepEqual([image.info.width, image.info.height], [304, 14]);
+  for (let x = 0; x < image.info.width; x += 1) {
+    let darkPixels = 0;
+    for (let y = 0; y < image.info.height; y += 1) {
+      const offset = (y * image.info.width + x) * image.info.channels;
+      if (
+        image.data[offset] <= 8 &&
+        image.data[offset + 1] <= 8 &&
+        image.data[offset + 2] <= 8
+      ) {
+        darkPixels += 1;
+      }
+    }
+    assert.ok(
+      darkPixels / image.info.height < 0.95,
+      `unexpected black divider at column ${x}`,
+    );
+  }
+});
+
 test("publishes a byte-bound clean-room Sun independently of the cube", async () => {
   const sun = PREPARED_MERCURY_SKY_SUN;
   assert.equal(sun.asset.sourcePixels, "repository-authored-clean-room-raster");
