@@ -123,7 +123,9 @@ try {
 }
 
 const failed = checks.filter((entry) => !entry.ok).map((entry) => entry.id);
-console.log(JSON.stringify({ suite: "mercury-rotation-limits", ok: failed.length === 0, failed, checks, ...report }));
+// Flushed before exiting: pipe writes are asynchronous on macOS.
+await new Promise((resolve) => process.stdout.write(
+  `${JSON.stringify({ suite: "mercury-rotation-limits", ok: failed.length === 0, failed, checks, ...report })}\n`, resolve));
 process.exit(measureOnly || failed.length === 0 ? 0 : 1);
 
 function check(id, ok, detail) {
