@@ -1,5 +1,4 @@
 import { createLatestSelection } from "./latest-selection.mjs";
-import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-presentation-contract.mjs";
 import { resolvePreparedPresentation } from "./prepared-presentation.mjs";
 import { initialObjectSelection, reduceObjectSelection, invokeRuntimeHook, requireObjectAction, requireObjectSelection, requireResolvedPresentation } from "./object-runtime-contract.mjs";
 
@@ -9,8 +8,7 @@ export function createObjectSelectionRuntime({
   definition, presentation, residency, lifetime,
   onChange = () => {}, onCommit = () => {}, onFatalError, onMaterialError = () => {},
 }) {
-  const prepared = definition.schema === PREPARED_OBJECT_RUNTIME_SCHEMA;
-  const initialSelection = prepared ? initialObjectSelection(definition.controls) : definition.initialSelection;
+  const initialSelection = initialObjectSelection(definition.controls);
   let desired = initialSelection, committed = null, committedPlan = null, view = null;
   let active = null, destroyed = false, started = false, busy = false, error = null;
   let requests = 0, passes = 0, commits = 0, framePublications = 0;
@@ -24,9 +22,7 @@ export function createObjectSelectionRuntime({
 
   function resolve(selection) {
     try {
-      return requireResolvedPresentation(prepared
-        ? resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan })
-        : invokeRuntimeHook(definition, "resolvePresentation", [{ selection, view, previousPlan: committedPlan }]), definition);
+      return requireResolvedPresentation(resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan }), definition);
     } catch (failure) { if (live()) onFatalError(failure); throw failure; }
   }
   function frame(nextSelection = committed, nextPlan = committedPlan) {
@@ -142,7 +138,7 @@ export function createObjectSelectionRuntime({
       if (!live() || !committed) return Promise.resolve(false);
       const valid = requireObjectAction(definition.controls, action);
       let next;
-      try { next = requireObjectSelection(prepared ? reduceObjectSelection(desired, valid) : invokeRuntimeHook(definition, "reduceSelection", [desired, valid]), definition.controls); }
+      try { next = requireObjectSelection(reduceObjectSelection(desired, valid), definition.controls); }
       catch (failure) { onFatalError(failure); throw failure; }
       return run(next, "selection");
     },

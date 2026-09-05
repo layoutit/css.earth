@@ -17,7 +17,7 @@ for (const failure of [null, "construction", "cleanup"]) test(`prepared map life
   const saved = new Map(Object.keys(globals).map(name => [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
   for (const [name, value] of Object.entries(globals)) Object.defineProperty(globalThis, name, { configurable: true, writable: true, value });
   try {
-    const mount = () => mountPreparedMapPages({ plan: { schema: "cssearth-earth-city-pages@1",
+    const mount = () => mountPreparedMapPages({ plan: { schema: "cssearth-prepared-map-pages@1", assetPath: "/scenes/earth/",
       assetOrigin: "https://earth-assets.lowpoly.cc", poolSize: 2, maximumDecodedBytes: 16,
       decodedPageBytes: 4, rasterScale: 1, initialLayer: { frameMatrix: "", textureMatrix: "" },
       roots: [], index: { maximumDirectories: 1, maximumBytes: 1024, maximumConcurrentLoads: 1 } },

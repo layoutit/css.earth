@@ -1,3 +1,4 @@
+import { resolvePreparedPresentation } from "../../../platform/prepared-presentation.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { runtimeDefinition } from "../runtime/definition.mjs";
@@ -46,9 +47,25 @@ test("Uranus camera changes during pending selection revalidate the current neig
     const pending = f.selection.dispatch({ kind: "lens", id: "methane" }); await f.flush();
     const view = { ...f.view, controlPitch: 89, sunViewDirection: [0, 0, -1], revision: 2 };
     f.selection.setView(view); await f.settle(); assert.equal(await pending, true);
-    const expected = runtimeDefinition.resolvePresentation({ selection: f.selection.state().committed, view, previousPlan: f.selection.state().plan });
+    const expected = resolvePreparedPresentation(runtimeDefinition, { selection: f.selection.state().committed, view, previousPlan: f.selection.state().plan });
     assert.deepEqual(rowPool(f).keys.toSorted(), expected.required.filter(key => key.startsWith("row:")).toSorted());
     assert.ok(rowPool(f).resident <= 3); assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
+});
+
+test("Uranus hidden lighting keeps its committed neighborhood and publisher row through camera movement", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const off = f.selection.dispatch({ kind: "toggle", name: "shadows", value: false }); await f.settle(); await off;
+    const active = rowPool(f).keys, row = f.presentation.observe().material.activeMaterialRow;
+    const jobs = f.jobs.length, writes = f.presentation.observe().camera.materialAddressWrites;
+    for (const z of [-1, 1, -.5]) {
+      f.selection.setView({ ...f.view, controlPitch: 89, sunViewDirection: [0, 0, z], revision: f.view.revision + 1 });
+      await f.settle();
+      assert.deepEqual(rowPool(f).keys, active); assert.equal(f.jobs.length, jobs);
+      assert.equal(f.presentation.observe().material.activeMaterialRow, row);
+      assert.equal(f.presentation.observe().camera.materialAddressWrites, writes);
+    }
   } finally { f.restore(); }
 });
 

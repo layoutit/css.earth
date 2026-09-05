@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { runtimeDefinition } from "../runtime/definition.mjs";
-import { variantFor, materialState } from "../runtime/material.mjs";
+import { mountPreparedPresentation, selectedPreparedVariant } from "../../../platform/prepared-presentation.mjs";
 import { preparedSelectionFixture, retainedPresentationFixture } from "../../../platform/test/object-runtime-package.mjs";
 const pool = (f, id) => f.residency.stats().pools.find(pool => pool.id === id);
 const lens = id => ({ kind: "lens", id });
@@ -12,21 +12,21 @@ for (const failAtElement of [1, 2, 3]) test(`Saturn partial construction preserv
   const f = retainedPresentationFixture(runtimeDefinition, { failAtElement });
   try {
     f.stage.dataset.lens = "previous"; f.stage.dataset.view = "previous";
-    assert.throws(() => runtimeDefinition.createPresentation(f.stage, f.context), /injected native/);
+    assert.throws(() => mountPreparedPresentation(f.stage, f.context, runtimeDefinition), /injected native/);
     assert.deepEqual(f.lifetime.destroy(), []); assert.equal(f.stage.dataset.view, "previous");
   } finally { f.restore(); }
 });
 for (const replacement of [false, true]) test(`Saturn cleanup respects root identity (${replacement})`, () => {
   const f = retainedPresentationFixture(runtimeDefinition);
   try {
-    runtimeDefinition.createPresentation(f.stage, f.context);
+    mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
     if (replacement) { f.stage.replaceChildren(f.document.createElement("div")); f.stage.dataset.view = "replacement"; }
     assert.deepEqual(f.lifetime.destroy(), []);
     assert.equal(f.stage.dataset.view, replacement ? "replacement" : undefined);
   } finally { f.restore(); }
 });
 
-test("Saturn commits one coherent latest lens, rings, shadows and independent interior selection", async () => {
+test("Saturn commits one coherent latest exclusive lens with ring and shadow settings", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const root = f.stage.children[0], nodes = root.querySelectorAll("*");
@@ -37,25 +37,69 @@ test("Saturn commits one coherent latest lens, rings, shadows and independent in
     assert.equal(f.stage.dataset.lens, undefined); assert.equal(f.stage.dataset.view, undefined);
     await f.settle(); assert.deepEqual(await Promise.all(requests), [false, false, false, true]);
     const selection = f.selection.state().committed;
-    assert.equal(selection.lensId, "methane"); assert.equal(selection.interior, true);
+    assert.equal(selection.lensId, "cross-section"); assert.equal(Object.hasOwn(selection, "interior"), false);
     assert.equal(selection.rings, false); assert.equal(selection.shadows, true);
-    assert.equal(f.stage.dataset.lens, "methane"); assert.equal(f.stage.dataset.view, "interior");
+    assert.equal(f.stage.dataset.lens, undefined); assert.equal(f.stage.dataset.view, "interior");
     assert.ok(f.stage.classList.contains("saturn-hide-rings")); assert.ok(!f.stage.classList.contains("saturn-hide-shadows"));
-    assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["methane", "cross-section"]);
-    assert.ok(f.residency.resources.has(`exterior:${variantFor(selection)}`));
-    assert.ok(f.residency.resources.has(`interior-material:${variantFor(selection)}`));
+    assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["cross-section"]);
+    const variant = selectedPreparedVariant(runtimeDefinition, selection);
+    assert.equal(variant.materials.find(track => track.track === "exterior").bank, "normal-ringless");
+    assert.ok(f.residency.resources.has("exterior:normal-ringless"));
+    assert.ok(f.residency.resources.has("interior-material:normal-ringless"));
     assert.deepEqual(root.querySelectorAll("*"), nodes); assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });
 
-test("Saturn repeated interior toggles use desired pending state and release abandoned interior leases", async () => {
+test("Saturn repeated cross-section selection stays selected while replacing a pending request", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const a = f.selection.dispatch(lens("cross-section")); await f.flush();
     const b = f.selection.dispatch(lens("cross-section")); await f.settle();
     assert.deepEqual(await Promise.all([a, b]), [false, true]);
-    assert.equal(f.selection.state().committed.interior, false); assert.equal(pool(f, "interior").resident, 0);
-    assert.equal(pool(f, "interior-material").resident, 0); assert.deepEqual(f.errors, []);
+    assert.equal(f.selection.state().committed.lensId, "cross-section"); assert.equal(Object.hasOwn(f.selection.state().committed, "interior"), false);
+    assert.ok(pool(f, "interior").resident > 0); assert.equal(pool(f, "interior-material").resident, 1);
+    assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["cross-section"]); assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
+});
+
+test("Saturn cross-section uses the common single-lens reducer with no remembered exterior state", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const nodes = f.stage.querySelectorAll("*");
+    for (const id of ["cross-section", "thermal", "cross-section", "cross-section", "ultraviolet", "methane", "normal"]) {
+      await select(f, lens(id));
+      const committed = f.selection.state().committed;
+      assert.deepEqual(Object.keys(committed).sort(), ["lensId", "rings", "shadows", "speed"]);
+      assert.equal(committed.lensId, id);
+      assert.equal(f.stage.dataset.view, id === "cross-section" ? "interior" : undefined);
+      assert.equal(f.stage.dataset.lens, ["normal", "cross-section"].includes(id) ? undefined : id);
+      assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), [id]);
+      assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
+    }
+    assert.equal(pool(f, "interior").resident, 0);
+    assert.equal(pool(f, "interior-material").resident, 0);
+    assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
+});
+
+test("Saturn failed cross-section preparation retains the previous exterior lens and permits retry", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    await select(f, lens("thermal"));
+    const before = f.selection.state().committed;
+    const pending = f.selection.dispatch(lens("cross-section"));
+    const rejected = assert.rejects(pending, /did not decode/);
+    await f.flush();
+    const job = f.jobs.find(job => !job.done && job.url.includes("interior"));
+    assert.ok(job); job.done = true; job.reject(new Error("cutaway decode failed"));
+    await rejected;
+    assert.deepEqual(f.selection.state().committed, before);
+    assert.deepEqual(f.selection.state().desired, before);
+    assert.equal(f.stage.dataset.lens, "thermal"); assert.equal(f.stage.dataset.view, undefined);
+    assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["thermal"]);
+    await select(f, lens("cross-section"));
+    assert.equal(f.selection.state().committed.lensId, "cross-section");
+    assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });
 
@@ -93,7 +137,10 @@ test("Saturn delayed compound preparation uses the current camera frame at publi
     const pending = f.selection.dispatch(lens("cross-section")); await f.flush();
     const view = { ...f.view, controlPitch: 72, controlYaw: 31, sunViewDirection: [0, 0, -1], revision: 2 };
     f.selection.setView(view); await f.settle(); assert.equal(await pending, true);
-    assert.equal(f.presentation.observe().material.materialFrame, materialState(f.selection.state().committed, view).materialFrame);
+    const frame = f.presentation.observe().material.materialFrame;
+    assert.notEqual(frame, runtimeDefinition.materials[0].demand.defaultFrame);
+    await select(f, lens("normal"));
+    assert.equal(f.presentation.observe().material.materialFrame, frame);
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });

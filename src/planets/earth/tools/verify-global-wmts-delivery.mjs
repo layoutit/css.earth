@@ -3,7 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import { PREPARED_EARTH_CITY_PAGES as plan } from "../runtime/preparedCityPages.mjs";
-import { readPreparedWmtsBlock } from "../runtime/prepared-block-transport.mjs";
+import { readPreparedWmtsBlock } from "../../../platform/prepared-map/prepared-block-transport.mjs";
 
 const root = resolve(import.meta.dirname, "../../../..");
 const output = resolve(root, `output/earth-city/global-delivery/${Date.now()}`);

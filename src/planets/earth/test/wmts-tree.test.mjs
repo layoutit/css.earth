@@ -4,13 +4,13 @@ import { PREPARED_EARTH_SCENE as scene } from "../runtime/preparedScene.mjs";
 import { prepareRegionPack,coverageLookup } from "../tools/city/prepare-wmts-tree.mjs";
 import { prepareWmtsCoverage } from "../tools/city/wmts-coverage.mjs";
 import { wmtsAddress } from "../tools/city/wmts-page-geometry.mjs";
-import { readPreparedWmtsBlock,preparedReferenceKey } from "../runtime/prepared-block-transport.mjs";
-import { createCityIndex } from "../runtime/city-index.mjs";
-import { selectCityPages } from "../runtime/city-page-selection.mjs";
+import { readPreparedWmtsBlock,preparedReferenceKey } from "../../../platform/prepared-map/prepared-block-transport.mjs";
+import { createCityIndex } from "../../../platform/prepared-map/city-index.mjs";
+import { selectCityPages } from "../../../platform/prepared-map/city-page-selection.mjs";
 const dataset="esa-worldcover-rgbnir-2021-v200",version="1111111111111111";
 const pack=prepareRegionPack(wmtsAddress(-58.38,-34.6,8),scene,()=>true,dataset,version);
 const response=ref=>new Response(pack.bytes.subarray(ref.offset,ref.offset+ref.bytes),{status:206,headers:{"Content-Range":`bytes ${ref.offset}-${ref.offset+ref.bytes-1}/${pack.bytes.length}`}});
-const plan={dataset,geometryVersion:version,assetOrigin:"https://earth-assets.lowpoly.cc",roots:[pack.root],index:{maximumDirectories:48,maximumBytes:3*1024*1024,maximumDirectoryBytes:2*1024*1024,maximumConcurrentLoads:3}};
+const plan={assetPath:"/scenes/earth/",dataset,geometryVersion:version,assetOrigin:"https://earth-assets.lowpoly.cc",roots:[pack.root],index:{maximumDirectories:48,maximumBytes:3*1024*1024,maximumDirectoryBytes:2*1024*1024,maximumConcurrentLoads:3}};
 test("regional ranges decode independently and preserve separate resident sections",async()=>{
   const root=await readPreparedWmtsBlock(response(pack.root.directory),pack.root.directory);
   assert.equal(root.external.length,64);

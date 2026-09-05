@@ -14,7 +14,7 @@ test("preparation expands every actual Moon leaf into a stable ordered tree", ()
   for (const [index, node] of result.tree.nodes.entries()) assert.ok(node.parent < index);
   for (const node of result.tree.nodes.filter(node => node.className === "polycss-projective-texture")) {
     const style = preparedDeclarations(node.style);
-    for (const property of node.properties) { if (property.custom) style.setProperty(property.name, property.value); else style[property.name] = property.value; }
+    for (const propertyId of node.properties) { const property=result.tree.properties[propertyId];if (property.custom) style.setProperty(property.name, property.value); else style[property.name] = property.value; }
     assert.equal(style.backgroundImage, "inherit"); assert.equal(style.transformStyle, "flat"); assert.match(style.transform, /^matrix3d\(/);
     assert.equal(result.tree.nodes[node.parent].tag, "s");
   }

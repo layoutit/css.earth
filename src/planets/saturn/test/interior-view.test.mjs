@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
+import { PREPARED_PRESENTATION } from "../runtime/preparedPresentation.mjs";
 import { PREPARED_SATURN_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_SATURN_VIEWS } from "../runtime/preparedViews.mjs";
 
@@ -92,7 +93,7 @@ test("publishes a prepared retained Saturn interior view", () => {
 
 test("ships lossless DPR assets and keeps view switching declarative", async () => {
   const [client, styles, preparer, manifestText] = await Promise.all([
-    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/definition.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../tools/prepare-interior.mjs", import.meta.url), "utf8"),
     readFile(new URL("../source/interior/manifest.json", import.meta.url), "utf8"),
@@ -114,20 +115,20 @@ test("ships lossless DPR assets and keeps view switching declarative", async () 
     assert.match(asset.asset2x.sha256, /^[a-f0-9]{64}$/u);
   }
   assert.match(preparer, /webp\(\{ lossless: true \}\)/u);
-  assert.match(client, /stage\.dataset\.view = "interior"/u);
-  assert.match(client, /delete stage\.dataset\.view/u);
-  assert.doesNotMatch(client,
-    /decodeImage\(INTERIOR_ATMOSPHERE_TEXTURE_URL\)/u);
-  assert.match(client,
-    /interiorAtmosphereLeaf\.style\.backgroundImage = "none"/u);
-  assert.doesNotMatch(client,
-    /interiorAtmosphereLeaf\.style\.backgroundImage =\s*\n\s*`url/u);
-  assert.match(client, /function createPreparedInterior\(plan\)/u);
-  assert.match(client, /const cutaway = createPreparedInterior\(plan\)/u);
-  assert.match(client, /system\.appendChild\(cutaway\)/u);
-  assert.match(client, /interiorMounted: true/u);
-
-  assert.match(client, /if \(leaf\.className\) element\.className = leaf\.className/u);
+  const variants = PREPARED_PRESENTATION.variants;
+  for (const variant of variants) {
+    const interior = variant.when.lensId === "cross-section";
+    assert.equal(variant.writes.find(write => write.name === "data-view").value, interior ? "interior" : null);
+    const material = variant.materials.find(track => track.track === "interior");
+    assert.equal(material.enabled, interior);
+    assert.equal(material.clearWhenHidden, true);
+    if (interior) assert.match(material.bank, /^normal(?:-|$)/);
+  }
+  assert.equal(PREPARED_PRESENTATION.observations.constants.dom.interiorMounted, true);
+  const cutaway = PREPARED_PRESENTATION.tree.nodes.findIndex(node => node.className === "polycss-mesh saturn-cutaway");
+  assert.ok(cutaway >= 0);
+  assert.ok(PREPARED_PRESENTATION.tree.nodes.some(node => node.parent === cutaway));
+  assert.doesNotMatch(client, /createElement|publishFrame|commitSelection|reduceSelection/);
   assert.doesNotMatch(styles,
     /saturn-interior-section-(?:ultraviolet|methane|thermal)/u);
   assert.match(styles, /\.planet-stage\[data-view="interior"\] \.saturn-cutaway/u);

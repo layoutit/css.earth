@@ -1,6 +1,7 @@
 import { pathToFileURL } from "node:url";
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
+import { prepareCssomDeclarationReads } from "../../../../tools/prepared-cssom.mjs";
 import { createPreparedNodeTree } from "../../../../tools/prepared-node-tree.mjs";
 import { writePreparedPresentation } from "../../../../tools/prepare-presentation.mjs";
 import { objectControls } from "../site/control-content.mjs";
@@ -9,7 +10,7 @@ import { PREPARED_PLUTO_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_PLUTO_STARFIELD } from "../runtime/preparedStarfield.mjs";
 import { PREPARED_PLUTO_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 
-export function preparePlutoPresentation() {
+export async function preparePlutoPresentation() {
   const plan = PREPARED_PLUTO_SCENE, lenses = PREPARED_PLUTO_LENSES;
   const celestial = preparedSkyResources(PREPARED_PLUTO_STARFIELD, PREPARED_PLUTO_SKY_SUN, "mounted");
   const entries = [...celestial,
@@ -20,7 +21,7 @@ export function preparePlutoPresentation() {
     ]),
   ];
   const required = id => [`surface:${id}`, `poles:${id}`];
-  const builder = createPreparedNodeTree();
+  const builder = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.bands.flatMap(band => band.leaves).map(leaf => leaf.style)) });
   const camera = builder.mesh("polycss-camera pluto-camera planet-render-root", plan.camera.style);
   const scene = builder.mesh("polycss-scene", plan.camera.sceneStyle);
   const system = builder.mesh("pluto-system", plan.body.systemTransform);
@@ -54,5 +55,5 @@ export function preparePlutoPresentation() {
   };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
-  await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), preparePlutoPresentation(), objectControls);
+  await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), await preparePlutoPresentation(), objectControls);
 }

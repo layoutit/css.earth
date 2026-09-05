@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
-import { normalizeCityAssetOrigin, preparedCityAssetUrl } from "../runtime/city-asset-url.mjs";
+import { normalizeCityAssetOrigin, preparedCityAssetUrl } from "../../../platform/prepared-map/city-asset-url.mjs";
 import { cityCoverageRoots, planCityCoverage } from "./city/plan-coverage.mjs";
 import { expectedGlobalCityFace } from "./city/global-face-receipts.mjs";
 import { prepareCityIndex } from "./city/prepare-index.mjs";

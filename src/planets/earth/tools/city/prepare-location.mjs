@@ -1,6 +1,6 @@
 import { polarGeographicUv } from "./wmts-polar-geometry.mjs";
 import { prepareCityPageGeometry,cityGeographicFrame } from "./page-geometry.mjs";
-import { EARTH_CUBIC_CAMERA } from "../../runtime/camera-plan.mjs";
+import { EARTH_CUBIC_CAMERA } from "../prepared-camera.mjs";
 
 const degrees = radians => radians * 180 / Math.PI;
 const radians = degrees => degrees * Math.PI / 180;

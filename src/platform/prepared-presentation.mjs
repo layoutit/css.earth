@@ -1,4 +1,7 @@
 import { registerBodyDependentLayers } from "./body-layer-registration.mjs";
+import { preparedScenePitch } from "./cubic-sky-runtime.mjs";
+import { createPreparedMaterialPublisher } from "./prepared-material.mjs";
+import { resolvePreparedMaterialDemand } from "./prepared-material-demand.mjs";
 
 const matches = (variant, selection) => Object.entries(variant.when).every(([name, value]) => selection[name] === value);
 export function selectedPreparedVariant(definition, selection) {
@@ -6,10 +9,20 @@ export function selectedPreparedVariant(definition, selection) {
   if (!variant) throw new TypeError("The selected presentation was not prepared.");
   return variant;
 }
-export function resolvePreparedPresentation(definition, { selection }) {
+export function resolvePreparedPresentation(definition, { selection, view, previousPlan }) {
   const variant = selectedPreparedVariant(definition, selection);
-  if (definition.materials.length) throw new TypeError("Material track publication is not implemented yet.");
-  return { required: variant.required, prewarm: [], pressedLenses: [selection.lensId] };
+  const required = new Set(definition.resourceOrder === "materials-first" ? [] : variant.required);
+  const prewarm = new Set(), materials = {};
+  for (const selected of variant.materials) {
+    const track = definition.materials.find(track => track.id === selected.track);
+    const state = resolvePreparedMaterialDemand(track, selected, view, definition.camera, previousPlan?.materials?.[track.id]);
+    for (const key of state.required) required.add(key);
+    for (const key of state.prewarm) prewarm.add(key);
+    materials[track.id] = state;
+  }
+  if (definition.resourceOrder === "materials-first") for (const key of variant.required) required.add(key);
+  return { required: [...required], prewarm: [...prewarm].filter(key => !required.has(key)), materials, pressedLenses: [selection.lensId],
+    ...(variant.navigation ? { navigation: variant.navigation } : {}) };
 }
 const datasetKey = name => name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 function readAttribute(element, name) {
@@ -40,7 +53,8 @@ export function mountPreparedPresentation(stage, context, definition) {
     node.style.cssText = record.style;
     // Keep property assignment distinct from cssText. Chrome's numeric CSS
     // parser can otherwise change the original prepared matrix precision.
-    for (const property of record.properties) {
+    for (const propertyId of record.properties) {
+      const property = definition.tree.properties[propertyId];
       if (property.custom) node.style.setProperty(property.name, property.value);
       else node.style[property.name] = property.value;
     }
@@ -77,9 +91,14 @@ export function mountPreparedPresentation(stage, context, definition) {
     animation.id = plan.id; context.registerAnimation(animation, { mode: plan.mode });
     return { animation, plan };
   });
-  let selectionPublications = 0, framePublications = 0, styleWrites = 0, transformWrites = 0;
+  const materials = new Map(definition.materials.map(track => [track.id,
+    createPreparedMaterialPublisher(track, nodes[track.target], definition.camera)]));
+  let selectionPublications = 0, framePublications = 0, styleWrites = 0, transformWrites = 0, publishedSelection = null;
   const target = index => index === -1 ? stage : nodes[index];
   return Object.freeze({ cameraElement, sceneElement, bodyLayers,
+    ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
+    ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
+      carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),
     commitSelection({ selection, resources }) {
       const variant = selectedPreparedVariant(definition, selection);
       // Resolve the complete texture group before publishing any part of it.
@@ -96,11 +115,17 @@ export function mountPreparedPresentation(stage, context, definition) {
         else { writeStyle(element, binding.name, value); styleWrites++; }
       }
       selectionPublications++;
+      publishedSelection = selection;
     },
-    publishFrame({ view }) {
+    publishFrame({ selection, view, resources, plan }) {
       for (const binding of definition.viewBindings) {
         const element = target(binding.target);
-        if (binding.kind === "zoom-property") { writeStyle(element, binding.property, String(view.zoom)); styleWrites++; }
+        if (binding.kind === "view-attribute") {
+          let value = binding.source === "scene-pitch" ? preparedScenePitch(view.controlPitch, definition.camera)
+            : binding.source === "control-yaw" ? view.controlYaw : binding.source === "zoom" ? view.zoom : view.sceneMatrix;
+          if (binding.precision !== null) { const scale = 10 ** binding.precision; value = Math.round(value * scale) / scale; }
+          writeAttribute(element, binding.property, String(value));
+        } else if (binding.kind === "zoom-property") { writeStyle(element, binding.property, String(view.zoom)); styleWrites++; }
         else if (binding.kind === "shell-scale") {
           element.style.scale = `calc(var(${binding.variable}) / (var(--planet-viewport-zoom-divisor) / ${view.zoom / binding.defaultZoom}))`;
           transformWrites++;
@@ -111,16 +136,38 @@ export function mountPreparedPresentation(stage, context, definition) {
       }
       for (const { animation, plan } of animations) context.seekAnimation(animation,
         Math.max(0, Math.min(plan.duration, (view.controlPitch - plan.sourceMinimum) * plan.millisecondsPerDegree)));
+      if (materials.size) for (const selected of selectedPreparedVariant(definition, selection).materials)
+        materials.get(selected.track).publish(selected, view, resources, plan?.materials?.[selected.track]);
       framePublications++;
     },
     observe() {
       for (const registration of bodyLayers) registration.assertRegistered();
       const result = { ...definition.observations.constants };
+      for (const observation of definition.observations.materials) {
+        result[observation.category] = { ...result[observation.category],
+          [observation.name]: materials.get(observation.track).observe()[observation.field] };
+      }
       for (const count of definition.observations.counts) {
         const element = nodes[count.target], descendants = element.querySelectorAll(count.kind === "leaves" ? "b, s, u" : "*");
         result[count.category] = { ...result[count.category], [count.name]: descendants.length + Number(count.includeRoot) };
       }
       result.presentation = { nodes: nodes.length, roots: roots.length, selectionPublications, framePublications, styleWrites, transformWrites };
+      for (const observation of definition.observations.publications ?? []) {
+        result[observation.category] = { ...result[observation.category],
+          [observation.name]: result.presentation[observation.field] };
+      }
+      for (const observation of definition.observations.attributes ?? []) {
+        result[observation.category] = { ...result[observation.category],
+          [observation.name]: readAttribute(nodes[observation.target], observation.attribute) ?? observation.default };
+      }
+      for (const observation of definition.observations.selection ?? []) {
+        result[observation.category] = { ...result[observation.category], [observation.name]: publishedSelection?.[observation.key] ?? null };
+      }
+      for (const observation of definition.observations.sums ?? []) {
+        const value = observation.tracks.reduce((sum, id) => sum + materials.get(id).observe()[observation.field],
+          observation.includePresentation ? result.presentation[observation.field] : 0);
+        result[observation.category] = { ...result[observation.category], [observation.name]: value };
+      }
       return result;
     },
   });
