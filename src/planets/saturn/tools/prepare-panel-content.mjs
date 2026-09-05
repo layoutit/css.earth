@@ -11,7 +11,6 @@ const size = sectionText("Size and Distance");
 const orbit = sectionText("Orbit and Rotation");
 const moons = sectionText("Moons");
 const rings = sectionText("Rings");
-const atmosphere = sectionText("Atmosphere");
 const structure = sectionText("Structure");
 
 assertIncludes(editorial.introduction, "sixth planet from the Sun");
@@ -30,22 +29,17 @@ export const PREPARED_SATURN_PANEL = deepFreeze({
   planetId: "saturn",
   introduction: "The sixth planet from the Sun, Saturn is a vast gas giant surrounded by spectacular rings made of countless pieces of ice and rock.",
   facts: [
-    { label: "Distance", value: `${capture(size, /\((1\.4 billion) kilometers\)/u)} km` },
-    { label: "Diameter", value: `${capture(size, /\((120,500) kilometers\)/u)} km` },
-    { label: "Year", value: `${capture(orbit, /about (29\.4) Earth years/u)} Earth yrs` },
-    { label: "Day", value: `${capture(orbit, /takes only (10\.7) hours/u)} hours` },
+    { id: "distance-from-sun", label: "Distance from Sun", value: `${capture(size, /\((1\.4 billion) kilometers\)/u)} km` },
+    { id: "diameter", label: "Diameter", value: `${capture(size, /\((120,500) kilometers\)/u)} km` },
+    { id: "orbital-period", label: "Orbital period", value: `${capture(orbit, /about (29\.4) Earth years/u)} Earth years` },
+    { id: "rotation-period", label: "Rotation period", value: `${capture(orbit, /takes only (10\.7) hours/u)} hours` },
+    { id: "axial-tilt", label: "Axial tilt", value: `${capture(orbit, /tilted by (26\.73) degrees/u)}°` },
+    { id: "moon-count", label: "Moons", value: String(editorialMoonCount) },
+    { id: "ring-system", label: "Rings", value: "Present" },
   ],
   moreFacts: [
-    { label: "Light time", value: `${capture(size, /takes sunlight (80) minutes/u)} min` },
-    { label: "Tilt", value: `${capture(orbit, /tilted by (26\.73) degrees/u)}°` },
-    {
-      label: "Moons",
-      value: String(editorialMoonCount),
-      title: `NASA Science editorial snapshot: ${editorialMoonCount} confirmed moons as of March 2025. The rendered JPL catalog contains ${renderedMoonCount} objects retrieved ${moonCatalog.retrievedAt}.`,
-    },
-    { label: "Ring extent", value: `${capture(rings, /\((282,000) kilometers\)/u)} km`, title: "Maximum extent from Saturn" },
-    { label: "Ring height", value: `${capture(rings, /\((10) meters\)/u)} m`, title: "Typical height of the main rings" },
-    { label: "Wind", value: `${capture(atmosphere, /\((500) meters per second\)/u)} m/s`, title: "Upper-atmosphere equatorial wind speed" },
+    { id: "ring-span", label: "Ring span", value: `${capture(rings, /\((282,000) kilometers\)/u)} km` },
+    { id: "ring-thickness", label: "Ring thickness", value: `${capture(rings, /\((10) meters\)/u)} m` },
   ],
   moonCountPolicy: {
     editorial: editorialMoonCount,

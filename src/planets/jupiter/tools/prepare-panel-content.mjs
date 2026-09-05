@@ -12,7 +12,6 @@ const moons = sectionText("Moons");
 const formation = sectionText("Formation");
 const structure = sectionText("Structure");
 const atmosphere = sectionText("Atmosphere");
-const magnetosphere = sectionText("Magnetosphere");
 const rings = sectionText("Rings");
 
 const distance = capture(size, /\(778 million kilometers\)/u, "778 million km");
@@ -35,48 +34,28 @@ export const PREPARED_JUPITER_PANEL = deepFreeze({
   planetId: "jupiter",
   introduction: "The fifth planet from the Sun, Jupiter is the solar system's largest planet: a gas giant wrapped in colorful clouds and enormous storms.",
   facts: [
-    { label: "Distance", value: distance },
-    { label: "Diameter", value: `${(radius * 2).toLocaleString("en-US")} km` },
-    { label: "Year", value: year },
-    { label: "Day", value: day },
+    { id: "distance-from-sun", label: "Distance from Sun", value: distance },
+    { id: "diameter", label: "Diameter", value: `${(radius * 2).toLocaleString("en-US")} km` },
+    { id: "orbital-period", label: "Orbital period", value: year },
+    { id: "rotation-period", label: "Rotation period", value: day },
+    { id: "axial-tilt", label: "Axial tilt", value: `${capture(orbit, /tilted[^.]+by just (3) degrees/u)}\u00b0` },
     {
+      id: "moon-count",
       label: "Moons",
       value: `${moonCatalog.counts.confirmed}`,
-      title: `JPL catalog snapshot retrieved ${moonCatalog.retrievedAt}. Four Galilean moons use source imagery; 111 smaller moons use prepared catalog markers; all 57 IAU-named moons are labeled.`,
     },
+    { id: "ring-system", label: "Rings", value: "Present" },
   ],
   moreFacts: [
     {
-      label: "Rings",
-      value: `${PREPARED_JUPITER_RINGS.system.parts.length} parts`,
-      title: "A halo, main ring, and gossamer ring; the gossamer ring has Amalthea and Thebe components.",
-    },
-    {
-      label: "Light time",
-      value: `${capture(size, /takes sunlight (43) minutes/u)} min`,
-    },
-    {
-      label: "Tilt",
-      value: `${capture(orbit, /tilted[^.]+by just (3) degrees/u)}\u00b0`,
-    },
-    {
-      label: "Cloud layers",
-      value: `${capture(atmosphere, /span about 44 miles \((71) kilometers\)/u)} km`,
-      title: "Combined depth of Jupiter's three likely cloud layers",
-    },
-    {
+      id: "wind-speed",
       label: "Wind",
       value: `${capture(atmosphere, /\((539) kilometers per hour\)/u)} km/h`,
-      title: "Upper-atmosphere equatorial wind speed",
     },
     {
-      label: "Great Red Spot",
+      id: "great-red-spot-depth",
+      label: "Great Red Spot depth",
       value: `${capture(atmosphere, /depth of about 300 miles \((500) kilometers\)/u)} km`,
-      title: "Depth constrained by Juno gravity data",
-    },
-    {
-      label: "Magnetic field",
-      value: `${capture(magnetosphere, /is (16 to 54) times as powerful/u).replace(" to ", "\u2013")}\u00d7 Earth`,
     },
   ],
   sources: {
