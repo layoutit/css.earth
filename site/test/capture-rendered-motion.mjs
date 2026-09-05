@@ -11,6 +11,7 @@ import { PREPARED_MARS_SCENE } from "../../src/planets/mars/runtime/preparedScen
 import { PREPARED_MARS_CAMERA } from "../../src/planets/mars/runtime/preparedCamera.mjs";
 import { decodeNativeMotionTrace } from "../../src/planets/mars/tools/oracle/google-earth-pro/native-motion-trace-reader.mjs";
 import { renderedMotionSteps } from "./rendered-motion-steps.mjs";
+import { assertMotionOnlyReference } from "../../src/planets/mars/tools/oracle/google-earth-pro/interaction-suite-analysis.mjs";
 
 const root = resolve(import.meta.dirname, "../..");
 const browserUrl = process.env.CSS_EARTH_CAPTURE_URL ??
@@ -19,7 +20,9 @@ const evidenceRoot = process.env.CSS_EARTH_EVIDENCE_ROOT
   ? resolve(process.env.CSS_EARTH_EVIDENCE_ROOT)
   : root;
 const [nativeArgument, outputArgument, timingMode = "paired"] = process.argv.slice(2);
-assert.ok(["paired", "normal", "frame-locked"].includes(timingMode));
+assert.ok(["paired", "normal", "motion-only", "frame-locked"].includes(timingMode));
+const motionOnly = timingMode === "motion-only";
+const naturalClock = timingMode === "normal" || motionOnly;
 assert.ok(nativeArgument && outputArgument, "Provide native report and fresh output directory.");
 const native = JSON.parse(await readFile(resolve(nativeArgument)));
 const nativeInputStart = native.inputs.find(event =>
@@ -33,6 +36,7 @@ const gesture = native.consumedGesture ?? native.gesture.map(event => {
   assert.ok(accepted, `Missing native delivery time for ${event.id}.`);
   return {...event, atMilliseconds:(accepted.acceptedMonotonicSeconds-nativeInputStart)*1000};
 });
+if (motionOnly) assertMotionOnlyReference(native);
 const nativeTrace = decodeNativeMotionTrace(await readFile(native.nativeMotionTrace ?? resolve(nativeArgument, "../motion.bin")));
 const nativeStart = nativeTrace.frames.find(f => f.frameSequence === native.frames[0].presentIndex);
 assert.ok(nativeStart?.matricesCaptured);
@@ -425,15 +429,15 @@ try {
     };
     requestAnimationFrame(sample);
   }, timingMode === "paired" && Boolean(native.nativeFrameClock?.length));
-  recording = true;
-  await cdp.send("Page.startScreencast", { format:"png", everyNthFrame:1,
+  recording = !motionOnly;
+  if (!motionOnly) await cdp.send("Page.startScreencast", { format:"png", everyNthFrame:1,
     maxWidth:browserViewport.width * native.viewport.deviceScaleFactor,
     maxHeight:native.viewport.height * native.viewport.deviceScaleFactor });
   let buttons = 0;
   const replayClock = timingMode === "paired" && native.nativeFrameClock?.length;
   // Natural-clock captures use real browser input for every event, including
   // consumed wheel receipts. Pointer replay is only an offline pairing aid.
-  const replayPointer = timingMode !== "normal" && Boolean(native.consumedGesture);
+  const replayPointer = !naturalClock && Boolean(native.consumedGesture);
   for (const event of replayClock || replayPointer ? gesture.slice(0,1) : gesture) {
     const elapsed = Number(process.hrtime.bigint() - started) / 1e6;
     if (elapsed < event.atMilliseconds) await delay(event.atMilliseconds - elapsed);
@@ -493,7 +497,7 @@ try {
   }
   await delay(Math.max(0, nativeEndMilliseconds - Number(process.hrtime.bigint() - started) / 1e6));
   let stopObservation = null;
-  if (timingMode === "normal") {
+  if (naturalClock) {
     await page.waitForFunction(() => {
       const samples = window.__motionSamples;
       const last = samples.at(-1);
@@ -521,7 +525,7 @@ try {
     window.__motionSampling = false;
     return window.__motionSamples;
   });
-  await cdp.send("Page.stopScreencast");
+  if (!motionOnly) await cdp.send("Page.stopScreencast");
   await Promise.all(writes);
   assert.ok(frames.length > 0, "No compositor image was captured.");
   for (const frame of frames) {
@@ -536,7 +540,8 @@ try {
   await Promise.all(codeWrites);
   await writeFile(resolve(out, "report.json"), JSON.stringify({
     captureToolSha256, codeResources,
-    qualification:"RAW_COMPOSITOR_CAPTURE_REQUIRES_PAIRING", nativeReport:resolve(nativeArgument),
+    qualification:motionOnly ? "MOTION_TRACE_WITH_BOUNDARY_IMAGES_NOT_VIDEO" : "RAW_COMPOSITOR_CAPTURE_REQUIRES_PAIRING", nativeReport:resolve(nativeArgument),
+    readbackDuringGesture:!motionOnly,
     calibrationSha256:native.calibrationSha256, resources:resources.map(({ descriptor })=>descriptor),
     inputTiming:native.consumedInputEvidence?.qualification ?? "native accepted event timestamps",
     inputTransport:replayPointer

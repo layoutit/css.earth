@@ -18,6 +18,8 @@ import {
   composeDragRotation,
   rotationFromAngularVelocity,
 } from "./sphere-drag.mjs";
+import { rotationAxisAngle, sampleDestinationFlight } from "./destination-flight.mjs";
+
 import { viewSunDirectionToPreparedLightDirection } from
   "./directional-sun-coordinate.mjs";
 import { validateDirectionalSunPlan } from
@@ -206,6 +208,28 @@ export function createCubicSkyCameraOrientation({
   reset({ controlPitch, controlYaw });
   return Object.freeze({
     reset,
+    rebaseScene(change) {
+      sceneMatrix = sceneMatrix.multiply(change);
+      invalidatePresentations();
+    },
+    prepareFlight(target) {
+      const from = [sceneMatrix, skyboxMatrix, sunViewMatrix];
+      reset(target);
+      const to = [sceneMatrix, skyboxMatrix, sunViewMatrix];
+      [sceneMatrix, skyboxMatrix, sunViewMatrix] = from;
+      invalidatePresentations();
+      const rotations = to.map((matrix, i) => rotationAxisAngle(matrix.multiply(from[i].inverse())));
+      return Object.freeze({
+        angularDistance: rotations[0].degrees,
+        sample(progress) {
+          const matrices = rotations.map(({ axis, degrees }, i) => progress === 0 ? from[i]
+            : progress === 1 ? to[i]
+            : new DOMMatrix().rotateAxisAngle(...axis, degrees * progress).multiply(from[i]));
+          [sceneMatrix, skyboxMatrix, sunViewMatrix] = matrices;
+          invalidatePresentations();
+        },
+      });
+    },
     snapshot() {
       return Object.freeze({
         schema: "cssearth-camera-pose@1",
@@ -238,6 +262,7 @@ export function createCubicSkyCameraOrientation({
         invalidatePresentations();
         return;
       }
+
       sceneMatrix = new DOMMatrix()
         .rotateAxisAngle(1, 0, 0, renderedPitchDelta)
         .rotateAxisAngle(0, 1, 0, yawDelta)
@@ -396,6 +421,8 @@ export function createUnboundedMatrixDragControls({
   let flyToFrames = 0;
   let flyToCompletions = 0;
   let flyToCancels = 0;
+  const destinationFlight = { starts: 0, frames: 0, completions: 0, cancels: 0 };
+
   const interruptionCounts = {
     drag: 0,
     pointer: 0,
@@ -450,9 +477,11 @@ export function createUnboundedMatrixDragControls({
   const cancelFlyTo = () => {
     if (flyToFrame === null) return;
     cancelFrame(flyToFrame);
+    const motion = flyToMotion;
     flyToFrame = null;
     flyToMotion = null;
-    flyToCancels += 1;
+    if (motion?.sample) { destinationFlight.cancels++; motion.finish(false); }
+    else flyToCancels += 1;
   };
   const cancelPointer = () => {
     pendingDrag = null;
@@ -503,6 +532,23 @@ export function createUnboundedMatrixDragControls({
   const animateFlyTo = (timestamp) => {
     if (flyToMotion === null) return;
     if (flyToMotion.startedAt === null) flyToMotion.startedAt = timestamp;
+    if (flyToMotion.sample) {
+      const motion = flyToMotion;
+      const progress = Math.min(1, Math.max(0, timestamp - motion.startedAt) / motion.durationMilliseconds);
+      motion.sample(progress);
+      if (lifetime.disposed || flyToMotion !== motion) return;
+      destinationFlight.frames++;
+      if (progress < 1) flyToFrame = requestFrame(animateFlyTo);
+      else {
+        flyToFrame = null;
+        flyToMotion = null;
+        destinationFlight.completions++;
+        motion.finish(true);
+        finishInteraction();
+      }
+      return;
+    }
+
     const progress = Math.min(
       1,
       Math.max(0, timestamp - flyToMotion.startedAt) /
@@ -679,6 +725,7 @@ export function createUnboundedMatrixDragControls({
     if (lifetime.disposed) return;
     interruptMotion("pointer");
     if (lifetime.disposed) return;
+
     pointerId = event.pointerId;
     pointerDragging = false;
     previousX = event.clientX;
@@ -835,6 +882,7 @@ export function createUnboundedMatrixDragControls({
       // The zoom controller observes defaultPrevented on the same event.
       event.preventDefault();
       interruptMotion("wheel");
+
       return;
     }
     if (activeMode !== "inertia" && activeMode !== "fly-to") return;
@@ -860,6 +908,14 @@ export function createUnboundedMatrixDragControls({
     }
     lifetime.onDispose(() => inputSurface.style.removeProperty("user-select"));
     lifetime.onDispose(() => inputSurface.style.removeProperty("cursor"));
+    const cancelDestination = guardNative(event => {
+      if (flyToMotion?.sample && (event.key === "Escape" || inputSurface.ownerDocument?.hidden)) interruptMotion("programmatic");
+    });
+    for (const [target,type] of [[windowTarget,"keydown"],[inputSurface.ownerDocument,"visibilitychange"]]) {
+      if (!target?.addEventListener || !target?.removeEventListener) continue;
+      lifetime.onDispose(() => target.removeEventListener(type,cancelDestination));
+      target.addEventListener(type,cancelDestination);
+    }
     inputSurface.style.userSelect = "none";
     syncCursor();
   } catch (error) {
@@ -868,6 +924,30 @@ export function createUnboundedMatrixDragControls({
     throw error;
   }
   return Object.freeze({
+    flyTo({ sample, durationMilliseconds = 4500 }) {
+      if (lifetime.disposed) return Promise.resolve({ completed: false });
+      if (typeof sample !== "function" || !Number.isFinite(durationMilliseconds) || durationMilliseconds <= 0) {
+        throw new TypeError("Invalid destination camera motion.");
+      }
+      try {
+        interruptMotion("programmatic");
+        activeMode = "fly-to";
+        interactionActive = true;
+        destinationFlight.starts++;
+        onStart();
+        if (lifetime.disposed) return Promise.resolve({ completed: false });
+        const completion = new Promise(resolve => {
+          flyToMotion = { sample, durationMilliseconds, startedAt: null, finish: completed => resolve({ completed }) };
+        });
+        flyToFrame = requestFrame(animateFlyTo);
+        return completion;
+      } catch (error) {
+        flyToMotion?.finish?.(false);
+        const cleanup = lifetime.destroy();
+        if (cleanup.length) throw new AggregateError([error, ...cleanup], error.message, { cause: error });
+        throw error;
+      }
+    },
     update(options) {
       if (lifetime.disposed) return;
       if (options.drag !== undefined) drag = options.drag;
@@ -903,12 +983,13 @@ export function createUnboundedMatrixDragControls({
           schema: GOOGLE_EARTH_SURFACE_FLY_TO.schema,
           qualification: GOOGLE_EARTH_SURFACE_FLY_TO.qualification,
           enabled: surfaceFlyToState !== null,
-          active: flyToFrame !== null,
+          active: flyToFrame !== null && !flyToMotion?.sample,
           starts: flyToStarts,
           frames: flyToFrames,
           completions: flyToCompletions,
           cancels: flyToCancels,
         }),
+        destinationFlyTo: Object.freeze({ ...destinationFlight, active: Boolean(flyToMotion?.sample) }),
       });
     },
     destroy() {
@@ -993,6 +1074,11 @@ export function createObjectInteractionControls({
     stop() {
       wheelControls.stop();
       dragControls.stop();
+    },
+    flyTo(options) {
+      if (lifetime.disposed) return Promise.resolve({ completed: false });
+      wheelControls.stop();
+      return dragControls.flyTo(options);
     },
     stats: () => Object.freeze({
       ...dragControls.stats(),
@@ -1258,6 +1344,34 @@ export function createRetainedCubicSkyOrbit({
   return Object.freeze({
     mobilePageFlow: () => inputPolicy.mobile,
     initialResponsiveZoom: () => initialResponsiveZoom,
+    rebaseScene(change) {
+      if (lifetime.disposed) return;
+      try { orientation.rebaseScene(change); publish(); }
+      catch (error) { retireFailure(error); throw error; }
+    },
+    flyToState({ controlPitch, controlYaw, zoom }) {
+      if (lifetime.disposed) return Promise.resolve({ completed: false });
+      try {
+      if (![controlPitch, controlYaw, zoom].every(Number.isFinite)) throw new TypeError("Invalid prepared camera destination.");
+      controls.stop();
+      const start = { ...safeCamera.state };
+      const targetZoom = clamp(zoom, cameraPlan.minimumZoom, cameraPlan.maximumZoom);
+      const flight = orientation.prepareFlight({ controlPitch, controlYaw });
+      const sample = progress => {
+        const frame = sampleDestinationFlight({ startZoom: start.zoom, targetZoom,
+          overviewZoom: cameraPlan.defaultZoom, angularDistance: flight.angularDistance }, progress);
+        safeCamera.update({ rotX: start.rotX + (controlPitch - start.rotX) * frame.rotation,
+          rotY: start.rotY + (controlYaw - start.rotY) * frame.rotation, zoom: frame.zoom });
+        flight.sample(frame.rotation);
+        publish();
+      };
+      if (windowTarget.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        sample(1);
+        return Promise.resolve({ completed: true });
+      }
+      return controls.flyTo({ sample });
+      } catch (error) { retireFailure(error); throw error; }
+    },
     // Native cache notifications report failures through the same fatal owner.
     invalidate: guardNative(publish),
     refresh() {

@@ -69,6 +69,8 @@ interface Gallery {
 }
 
 interface Lens {
+  legend?: { label: string; color: string; }[];
+  legendNote?: string;
   id: string;
   label: string;
   thumbnailUrl: string;
@@ -93,6 +95,7 @@ interface Resource {
 
 interface Props {
   objectId: string;
+  destinations?: { searchLabel: string; description: string; };
   title: PlanetTitle;
   introduction?: string;
   facts?: Fact[];
@@ -124,6 +127,7 @@ const {
   resources = [],
   lenses,
   settings,
+  destinations,
 } = Astro.props;
 requireObjectControls({ lenses, settings }, objectId);
 const allFacts = orderFacts(facts, moreFacts);
@@ -161,7 +165,7 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
 });
 ---
 
-<aside id={`${objectId}-sidebar`} class="planet-sidebar" aria-label="Planet information">
+<aside id={`${objectId}-sidebar`} class="planet-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Planet information">
   <div class="planet-sidebar-search-card">
     <span class="planet-sidebar-search-icon">
       <SearchIcon />
@@ -169,8 +173,8 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
     <input
       class="planet-sidebar-search"
       type="search"
-      placeholder={`Search objects (${planetCount})`}
-      aria-label={`Search ${planetCount} objects`}
+      placeholder={destinations?.searchLabel ?? `Search objects (${planetCount})`}
+      aria-label={destinations?.searchLabel ?? `Search ${planetCount} objects`}
       autocomplete="off"
       value={activeObject?.name ?? ""}
     />
@@ -207,9 +211,30 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
       hidden
     >
       <PlanetObjectResults activeObjectId={objectId} />
+      {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
+        <p class="planet-destination-hint" role="status"></p>
+        <ul class="planet-destination-list">
+          {Array.from({ length: 8 }, () => <li hidden>
+            <button class="planet-destination-result" type="button">
+              <span class="planet-destination-result-name"></span>
+              <span class="planet-destination-result-context"></span>
+            </button>
+          </li>)}
+        </ul>
+      </section>}
       <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
     </nav>
+    {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
+      <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>
+      <h2 class="planet-destination-name"></h2>
+      <p class="planet-destination-context"></p>
+      <p class="planet-destination-status" role="status"></p>
+    </section>}
     <div class="planet-information-panel">
+      {destinations && <section class="planet-destination-intro">
+        <button class="planet-find-destination" type="button">Find a city</button>
+        <p>{destinations.description}</p>
+      </section>}
       <section class="planet-selected-panel">
         <div class="planet-title-row">
           <h1 class="planet-title" aria-label={title.label}>
@@ -379,9 +404,18 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
                     <span class="planet-lens-description">{lens.description}</span>
                   </span>
                 </button>
+
               </div>
             ))}
           </nav>
+          {lenses.controls.filter(lens => lens.legend).map(lens => (
+            <div class="planet-lens-legend" data-lens-legend={lens.id} hidden={lens.id !== lenses.defaultLens}>
+              <p>{lens.legendNote}</p>
+              <ul aria-label={`${lens.label} legend`}>
+                {lens.legend?.map(item => <li><span style={`background-color:${item.color}`} aria-hidden="true"></span>{item.label}</li>)}
+              </ul>
+            </div>
+          ))}
         </div>
       </details>}
       {galleries.map((gallery) => (

@@ -32,7 +32,7 @@ export function earthSurfaceBankInventory() {
       body.url !== bodyPages[0]) {
     throw new TypeError("Earth prepared surface page metadata is inconsistent.");
   }
-  const banks = PREPARED_EARTH_LENSES.controls.map((lens) => {
+  const banks = PREPARED_EARTH_LENSES.controls.filter(lens => !lens.surfaceBankId).map((lens) => {
     const urls = lens.view === "interior" ? outerTwo
       : requireEarthSurfacePages(lens.surfaceUrls, `Earth ${lens.id} surface`);
     if (urls.length !== bodyPages.length || lens.view !== "interior" && lens.surfaceUrl !== urls[0]) {

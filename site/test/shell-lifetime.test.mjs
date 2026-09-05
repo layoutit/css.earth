@@ -70,6 +70,10 @@ test("shell with no optional controls keeps Motion/high contrast and accessible 
   contrast.checked = true; contrast.dispatchEvent(new Event("change"));
   assert.equal(f.documentTarget.body.dataset.skyContrast, "high");
   shell.destroy(); shell.destroy();
+  shell.setMotionEnabled(true);
+  shell.setPlaybackState({ motionRequested: true, reason: "allowed" });
+  assert.equal(motion.checked, false);
+  assert.deepEqual(f.changes, [false]);
   assert.equal(f.frames.size, 0);
   assert.ok(f.elements.every((element) => element.listeners.size === 0));
   motion.checked = true; motion.dispatchEvent(new Event("change"));

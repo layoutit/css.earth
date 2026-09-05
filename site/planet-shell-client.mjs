@@ -1,3 +1,4 @@
+import { createDestinationBrowser } from "./destination-browser.mjs";
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
 import { createExplorerRailController } from "./explorer-rail.mjs";
 
@@ -13,13 +14,13 @@ export function mountPlanetShell({
     throw new Error("Planet shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
-  let settingsController;
+  let settingsController, objectBrowser;
   function own(controller) {
     lifetime.onDispose(() => controller.destroy());
     return controller;
   }
   try {
-    own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
+    objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
     own(createSheetController(drawer, windowTarget, lifetime));
     own(createChartSwitcherController(drawer, windowTarget, lifetime));
     own(createChartPixelAlignmentController(drawer, windowTarget, lifetime));
@@ -36,6 +37,8 @@ export function mountPlanetShell({
     throw error;
   }
   return Object.freeze({
+    setDestinations(provider) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
+    setMotionEnabled(enabled) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
     setPlaybackState(state) {
       if (!lifetime.disposed) settingsController.setPlaybackState(state);
     },
@@ -95,6 +98,11 @@ function createSettingsController(
   renderSkyContrast();
 
   return Object.freeze({
+    setMotionEnabled(next) {
+      motionOn = next === true;
+      renderMotion();
+      onMotionChange(motionOn);
+    },
     setPlaybackState({ motionRequested, reason }) {
       motionOn = motionRequested === true;
       renderMotion();
@@ -137,9 +145,20 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   const selectedSearchValue = search.value;
+  let currentSearchValue = selectedSearchValue;
+  let visibleObjects = 0;
+  const destinations = createDestinationBrowser({
+    documentTarget, windowTarget,
+    onResults(count) { empty.hidden = visibleObjects + count > 0; },
+    onSelected(place) { currentSearchValue = place.name; render(false); search.blur(); },
+    onReset() { currentSearchValue = selectedSearchValue; render(false); },
+  });
+  lifetime.onDispose(() => destinations?.destroy());
   let open = false;
   const filter = () => {
     const query = search.value.trim().toLocaleLowerCase("en");
+    visibleObjects = 0;
+    void destinations?.search(query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
       empty.hidden = true;
@@ -153,12 +172,14 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       item.hidden = !match;
       if (match) visible += 1;
     }
-    empty.hidden = visible !== 0;
+    visibleObjects = visible;
+    empty.hidden = visible !== 0 || Boolean(destinations);
   };
   const render = (next, { resetQuery = false } = {}) => {
     open = next;
     if (next && resetQuery) search.value = "";
-    if (!next) search.value = selectedSearchValue;
+    if (!next) search.value = currentSearchValue;
+    destinations?.setOpen(next);
     information.hidden = next;
     browser.hidden = !next;
     trigger.ariaPressed = String(next);
@@ -183,14 +204,33 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     signal: events.signal,
   });
   search.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      render(true);
-      return;
+    if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
+      const first = [...browser.querySelectorAll("a, button")].find(element =>
+        !element.closest("[hidden]") && !element.disabled);
+      if (first) {
+        event.preventDefault();
+        if (event.key === "Enter") first.click(); else first.focus();
+      }
+    } else if (event.key === "Enter") {
+      event.preventDefault(); render(true); return;
     }
     if (event.key !== "Escape" || !open) return;
     event.preventDefault();
     render(false);
+  }, { signal: events.signal });
+  browser.addEventListener("keydown", (event) => {
+    const controls = [...browser.querySelectorAll("a, button")].filter(element =>
+      !element.closest("[hidden]") && !element.disabled);
+    const index = controls.indexOf(documentTarget.activeElement);
+    if (event.key === "Escape") { render(false); search.focus(); }
+    else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      const next = index + (event.key === "ArrowDown" ? 1 : -1);
+      if (next < 0) search.focus(); else controls[Math.min(next, controls.length - 1)]?.focus();
+    }
+  }, { signal: events.signal });
+  documentTarget.querySelector(".planet-find-destination")?.addEventListener("click", () => {
+    render(true, { resetQuery: true }); search.focus();
   }, { signal: events.signal });
   documentTarget.addEventListener("pointerdown", (event) => {
     if (documentTarget.activeElement !== search ||
@@ -201,8 +241,11 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   render(false);
 
   return Object.freeze({
+    setDestinations(provider) { destinations?.bind(provider); },
     destroy() {
       events.abort();
+      destinations?.destroy();
+      currentSearchValue = selectedSearchValue;
       search.value = selectedSearchValue;
       for (const item of items) item.hidden = false;
       empty.hidden = true;

@@ -1661,3 +1661,10 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     white-space: nowrap;
   }
 }
+
+.planet-lens-legend {padding: 8px 12px 12px; font-size: 12px; line-height: 1.5; color: #c5c7cf;}
+.planet-lens-legend[hidden] {display:none;}
+.planet-lens-legend p {margin:0 0 8px;}
+.planet-lens-legend ul {display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 10px; padding:0; margin:0; list-style:none;}
+.planet-lens-legend li {display:flex; align-items:center; gap:6px; white-space:nowrap;}
+.planet-lens-legend li span {display:inline-block; width:14px; height:10px; flex:none;}

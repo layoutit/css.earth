@@ -1,3 +1,4 @@
+import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../runtime/preparedStarfield.mjs";
 import { PREPARED_EARTH_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
@@ -28,6 +29,8 @@ const interiorAssets = ["mantle", "outer-core", "inner-core"].flatMap(
 );
 
 export const EARTH_RUNTIME_ASSET_URLS = Object.freeze([
+  ...PREPARED_EARTH_NOISE.assets,
+  "earth-places.json",
   "earth-atmosphere-spectrum.svg",
   "earth-photometric-phase-curve.svg",
   "earth-interior-outer-poles.webp",
@@ -39,7 +42,7 @@ export const EARTH_RUNTIME_ASSET_URLS = Object.freeze([
   "earth-lens-night-lights.webp",
   "earth-lens-normal.webp",
   "earth-lens-topography.webp",
-  ...PREPARED_EARTH_LENSES.controls.flatMap(lens => lens.surfaceUrls ?? []),
+  ...new Set(PREPARED_EARTH_LENSES.controls.flatMap(lens => lens.surfaceUrls ?? [])),
   "earth-night-lights-poles.webp",
   ...PREPARED_EARTH_STARFIELD.faces.flatMap(({
     url,

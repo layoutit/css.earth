@@ -30,7 +30,7 @@ function harness(controls = moonControls, mutate = () => {}) {
     state = { ...state, committed: reduceObjectSelection(state.committed ?? initial, action), pending: false };
     state.desired = state.committed; binding.publish(state); return true;
   };
-  mutate({ lensInputs, settingInputs, stage });
+  mutate({ lensInputs, settingInputs, stage, lensRoot });
   const binding = createObjectControlBinding({ stage, controls, initialSelection: initial, getState: () => state,
     onAction(action) { actions.push(action); return actionImplementation(action); }, onError: error => errors.push(error) });
   return { binding, lensInputs, settingInputs, lensRoot, settingsRoot, motion, contrast, errors, actions, initial,
@@ -126,5 +126,21 @@ test("one failed native listener removal does not stop the rest of control clean
   assert.ok(h.lensInputs.every(input => input.disabled));
   assert.equal(h.lensRoot.attributes["aria-busy"], "false");
   h.lensInputs[0].emit("click"); assert.equal(h.actions.length, 0);
+  h.binding.destroy();
+});
+
+
+test("prepared lens legends follow committed selection through pending work", () => {
+  const ids = moonControls.lenses.controls.slice(0, 2).map(lens => lens.id);
+  const legends = ids.map(id => ({ dataset: { lensLegend: id }, hidden: true }));
+  const h = harness(moonControls, ({ lensRoot, lensInputs }) => {
+    lensRoot.querySelectorAll = selector => selector === "[data-lens-legend]" ? legends : lensInputs;
+  });
+  h.ready(); assert.deepEqual(legends.map(legend => legend.hidden), [false, true]);
+  const desired = { ...h.initial, lensId: ids[1] };
+  h.setState({ committed: h.initial, desired, pending: true, plan: null });
+  assert.deepEqual(legends.map(legend => legend.hidden), [false, true]);
+  h.setState({ committed: desired, desired, pending: false, plan: null });
+  assert.deepEqual(legends.map(legend => legend.hidden), [true, false]);
   h.binding.destroy();
 });

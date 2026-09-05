@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import {
@@ -37,6 +38,8 @@ const interiorSource = await readFile(
   resolve(import.meta.dirname, "../source/interior/earth-interior.json"),
   "utf8",
 ).then(JSON.parse);
+const citySource = JSON.parse(await readFile(
+  resolve(import.meta.dirname, "../source/city/manifest.json"), "utf8"));
 if (interiorSource.schema !== "cssearth-earth-interior-source@1") {
   throw new Error("Earth interior source is incompatible.");
 }
@@ -59,7 +62,7 @@ const EARTH_OBLIQUITY_DEGREES = 23.4;
 const EARTH_PRESENTATION_NODE_DEGREES = -60;
 const MESH_ROTATION_Z = 128;
 const CAMERA_ZOOM = 1.1;
-const CAMERA_MAXIMUM_ZOOM = 8;
+const CAMERA_MAXIMUM_ZOOM = citySource.presentation.maximumZoom;
 const CAMERA_SCENE_PITCH_DEGREES = 40;
 const CAMERA_MINIMUM_CONTROL_PITCH_DEGREES = 0;
 const CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES = 89;
@@ -240,8 +243,10 @@ const scene = Object.freeze({
     atmosphereLeafCount: 1,
     directionalSunLeafCount: 1,
     interiorLeafCount: interior.leafCount,
-    retainedLeafCount: surfaceLeafCount + 3,
-    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount,
+    cityPageLeafCount: citySource.presentation.poolSize,
+    noisePageLeafCount: PREPARED_EARTH_NOISE.poolSize,
+    retainedLeafCount: surfaceLeafCount + 3 + citySource.presentation.poolSize + PREPARED_EARTH_NOISE.poolSize,
+    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount + citySource.presentation.poolSize + PREPARED_EARTH_NOISE.poolSize,
     runtimeGeometryPreparation: false,
     runtimeRasterization: false,
   }),
@@ -718,6 +723,7 @@ function textureStyle(polygon, index, seamEdges, seamBleed) {
         `;background-size:${EARTH_SURFACE_ATLAS.pageSize / density}px auto` +
         `;background-image:var(--earth-surface-page-${cell.page})`,
       projectiveTextureLayer: cell.layer,
+      geographicFrameMatrix: fitted.matrix,
       sourceRect: fitted.sourceRect,
       leafWidth: size,
       leafHeight: size,

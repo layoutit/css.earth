@@ -84,7 +84,7 @@ test("Uranus retains only active plus latest pending prepared neighborhoods", as
 });
 
 test("Earth complete page groups retain the committed bank with only two pending decodes", async () => {
-  const banks = PREPARED_EARTH_LENSES.controls.filter(lens => lens.surfaceUrls);
+  const banks = PREPARED_EARTH_LENSES.controls.filter(lens => lens.surfaceUrls && !lens.surfaceBankId);
   const urls = banks.flatMap(lens => lens.surfaceUrls);
   // Page arrays are the prepared lens data; fail if their schema changes.
   assert.ok(urls.length >= 6, "Use the actual prepared surface page banks");

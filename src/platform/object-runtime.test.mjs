@@ -64,7 +64,7 @@ test("one mount owns startup, sky, camera, initial publication, readiness and la
   assert.equal(h.native.playState, "paused"); assert.equal(h.native.currentTime, 0);
   assert.deepEqual(h.events.slice(0, 3), ["sky", "commit", "frame"]);
   assert.equal(h.context().density, 2);
-  assert.equal(h.orbitArguments().cameraPlan, PREPARED_MOON_SCENE.camera);
+  assert.deepEqual(h.orbitArguments().cameraPlan, PREPARED_MOON_SCENE.camera);
   assert.equal(h.orbitArguments().skyPlan, PREPARED_MOON_STARFIELD);
   h.runtime.resume(); assert.equal(h.native.playState, "running");
   h.runtime.destroy(); assert.equal(h.native.cancels, 1);
@@ -179,4 +179,41 @@ test('optional warm decode failure is recoverable but native cleanup failure is 
   h.resourceOptions().onWarmError(new Error('late warm'));
   h.resourceOptions().onCleanupError(new Error('late cleanup'));
   assert.equal(warnings.length, 1); assert.equal(h.errors.length, 1); h.runtime.destroy();
+});
+
+
+test("prepared page layers join shared publication, playback and cleanup", async () => {
+  const events = [];
+  const h = harness({ createPresentation(stage, context) {
+    const { cameraElement, sceneElement, body, bodyLayers } = bodyLayerFixture(stage);
+    context.own(() => cameraElement.remove());
+    return { cameraElement, sceneElement, bodyLayers, commitSelection() {}, publishFrame() {},
+      pageLayers: [{ id: "map", plan: {}, carrier: body, system: body,
+        className: "map-page", textureClassName: "map-texture", lensIds: ["normal"] }] };
+  } }, { mountPages({ own }) {
+    own(() => events.push("destroy"));
+    return { publish: () => events.push("frame"), setLens: lens => events.push(lens.id),
+      setPlaying: value => events.push(value), stats: () => ({}) };
+  } });
+  await h.complete();
+  assert.ok(events.includes("frame"));
+  h.runtime.resume(); assert.equal(events.at(-1), true);
+  h.runtime.pause(); assert.equal(events.at(-1), false);
+  h.runtime.destroy(); assert.equal(events.at(-1), "destroy");
+  h.runtime.resume(); assert.equal(events.at(-1), "destroy");
+  assert.deepEqual(h.errors, []);
+});
+
+test("partial prepared page construction retires the entire mount", async () => {
+  let cleaned = false;
+  const h = harness({ createPresentation(stage, context) {
+    const { cameraElement, sceneElement, body, bodyLayers } = bodyLayerFixture(stage);
+    context.own(() => cameraElement.remove());
+    return { cameraElement, sceneElement, bodyLayers, commitSelection() {}, publishFrame() {},
+      pageLayers: [{ id: "map", plan: {}, carrier: body, system: body,
+        className: "map-page", textureClassName: "map-texture", lensIds: ["normal"] }] };
+  } }, { mountPages({ own }) { own(() => { cleaned = true; }); throw new Error("page construction"); } });
+  await flush(); h.jobs[0].resolve();
+  await assert.rejects(h.runtime.ready, /page construction/);
+  assert.equal(cleaned, true); assert.equal(h.resources().stats().images.entries.length, 0);
 });

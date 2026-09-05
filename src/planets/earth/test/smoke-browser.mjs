@@ -46,7 +46,7 @@ try {
     cameraAnimationTime: document.getAnimations().find(({ id }) =>
       id === "earth-camera-orbit")?.currentTime,
     normalSurfaceImage: getComputedStyle(document.querySelector(
-      ".earth-body:not(.earth-body-polar) > s > " +
+      ".earth-body:not(.earth-body-polar) > s.earth-surface-leaf > " +
       ".polycss-projective-texture",
     )).backgroundImage,
     normalPolesImage: getComputedStyle(document.querySelector(
@@ -81,6 +81,22 @@ try {
   assert.equal(await page.locator('[class*="earth-moon"]').count(), 0);
   assert.equal(await page.locator('input[name="moons"]').count(), 0);
   const initialCamera = await page.evaluate(() => window.__earth.camera.state());
+  assert.equal(initialCamera.controlYaw, PREPARED_EARTH_SCENE.camera.state.rotY,
+    "Earth must mount at its prepared yaw");
+  const initialPoleAxis = await page.evaluate(() => {
+    const center = (pole) => {
+      const bounds = document.querySelector(
+        `.earth-body-polar > .earth-polar-surface-${pole}`,
+      ).getBoundingClientRect();
+      return { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 };
+    };
+    return { north: center("north"), south: center("south") };
+  });
+  assert.ok(initialPoleAxis.north.y < initialPoleAxis.south.y,
+    "Earth must start with north above south");
+  assert.ok(Math.abs(initialPoleAxis.north.x - initialPoleAxis.south.x) <
+    initialPoleAxis.south.y - initialPoleAxis.north.y,
+    "Earth's starting polar axis must be closer to vertical than horizontal");
   const cameraTransforms = await page.evaluate(async ({ initialCamera }) => {
     const scene = document.querySelector(".planet-stage .polycss-scene");
     const sky = document.querySelector(".earth-skybox-orientation");
@@ -130,7 +146,7 @@ try {
       const images = (selector) => [...new Set([...document.querySelectorAll(selector)]
         .map((element) => getComputedStyle(element).backgroundImage))].sort();
       return {
-        exterior: images(".earth-body:not(.earth-body-polar) > s > .polycss-projective-texture"),
+        exterior: images(".earth-body:not(.earth-body-polar) > s.earth-surface-leaf > .polycss-projective-texture"),
         interior: images(".earth-cutaway-body:not(.earth-cutaway-body-polar) > s > .polycss-projective-texture"),
         bank: window.__earth.runtime.resources().pools.find(pool => pool.id === "pages"),
       };
@@ -271,4 +287,9 @@ try {
   }));
 } finally {
   await browser.close();
+}
+
+if (deviceScaleFactor === 1) {
+  await import("./places-browser.mjs");
+  await import("./places-flight-browser.mjs");
 }

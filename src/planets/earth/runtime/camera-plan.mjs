@@ -4,7 +4,7 @@ export const cameraPlan = Object.freeze({
   minimumControlPitchDegrees: 0,
   maximumControlPitchDegrees: 89,
   defaultControlPitchDegrees: 34.230769230769226,
-  defaultControlYawDegrees: -105,
+  defaultControlYawDegrees: PREPARED_EARTH_SCENE.camera.state.rotY,
   materialReferenceControlPitchDegrees: 34.230769230769226,
   materialReferenceControlYawDegrees: 0,
   initialScenePitchDegrees: 40,
@@ -30,3 +30,6 @@ export const cameraPlan = Object.freeze({
     maximumZoom: 2,
   }),
 });
+
+// Preparation and runtime consume the same canonical camera.
+export const EARTH_CUBIC_CAMERA = cameraPlan;

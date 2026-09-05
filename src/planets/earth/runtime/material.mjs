@@ -3,7 +3,10 @@ import { PREPARED_EARTH_LENSES } from "./preparedLenses.mjs";
 import { canonicalPreparedAsset } from "../../../platform/prepared-object-assets.mjs";
 import { earthSurfaceBankInventory } from "./surface-pages.mjs";
 export const banks = earthSurfaceBankInventory();
-export const pageKeys = id => banks.find(bank => bank.id === id).urls.map((_, index) => `page:${id}:${index}`);
+export const pageKeys = id => {
+  const bankId = PREPARED_EARTH_LENSES.controls.find(lens => lens.id === id)?.surfaceBankId ?? id;
+  return banks.find(bank => bank.id === bankId).urls.map((_, index) => `page:${bankId}:${index}`);
+};
 export const interiorUrls = [...new Set([
   PREPARED_EARTH_SCENE.interior.outerAssets.poles,
   ...PREPARED_EARTH_SCENE.interior.shells.flatMap(shell => shell.leaves.map(leaf => leaf.asset)),

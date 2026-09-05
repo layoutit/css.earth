@@ -6,6 +6,7 @@ import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mj
 import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
 import { PREPARED_EARTH_PANEL } from "./preparedPanel.mjs";
 import { PREPARED_EARTH_TITLE } from "./preparedTitle.mjs";
+import { PREPARED_EARTH_PLACES } from "../runtime/preparedPlaces.mjs";
 
 const charts = [
   {
@@ -37,7 +38,10 @@ const charts = [
   },
 ];
 const resources = [
+  { label: "Buenos Aires APrA", role: "noise", description: "2025 daytime noise estimates, CC-BY-2.5-AR", href: "https://data.buenosaires.gob.ar/dataset/mapa-ruido" },
+  { label: "GeoNames", role: "places", description: "City names and locations, CC-BY-4.0", href: "https://www.geonames.org/export/" },
   { label: "NASA", role: "imagery", description: "Surface & clouds", href: "https://science.nasa.gov/earth/" },
+  { label: "ESA WorldCover", role: "imagery", description: "2021 WorldCover satellite composite via Terrascope, CC-BY-4.0", href: "https://esa-worldcover.org/en/data-access" },
   { label: "JPL", role: "facts", description: "Earth-Moon facts", href: "https://ssd.jpl.nasa.gov/sats/" },
   { label: "OpenSpace", role: "scene", description: "Globe & atmosphere", href: "https://github.com/OpenSpace/OpenSpace" },
   { label: "PSG", role: "spectra", description: "Spectrum & profile", href: "https://psg.gsfc.nasa.gov/" },
@@ -55,4 +59,5 @@ const resources = [
   resources={resources}
   lenses={lenses}
   settings={settings}
+  destinations={{ searchLabel: "Search planets and cities", description: `${PREPARED_EARTH_PLACES.count.toLocaleString("en")} cities worldwide.` }}
 />

@@ -728,6 +728,9 @@ async function exerciseRetainedInteractions(page, planet, profile) {
 
   if (!profile.objectControls.settings?.controls.some(({ name }) => name === "speed")) return;
 
+  // A destination lens can deliberately pause motion. Re-establish the speed
+  // scenario's playback precondition through the shared control.
+  if (!await page.locator(".planet-motion-setting").isChecked()) await enableMotion(page, planet.id);
   const speed = page.locator('input[name="speed"][type="range"]');
   assert.equal(await speed.count(), 1, `${planet.id}: speed control must exist`);
   const speedStates = Object.freeze([

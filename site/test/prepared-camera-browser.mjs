@@ -67,8 +67,12 @@ try {
       const assertProjection = (state, zoom) => {
         assert.equal(state.perspective, reference.perspective, `${label}: preserve prepared perspective`);
         assert.ok(Math.abs(state.sceneScale - reference.sceneScale) < 1e-6, `${label}: preserve prepared scene scale`);
-        assert.ok(Math.abs(state.scale / reference.scale - zoom / initial.zoom) < 1e-4,
-          `${label}: zoom scales the complete camera`);
+        // Chrome serializes computed scale to limited significant digits.
+        // Compare relative error so the same precision holds at 1x and 4096x.
+        const renderedRatio = state.scale / reference.scale;
+        const expectedRatio = zoom / initial.zoom;
+        assert.ok(Math.abs(renderedRatio / expectedRatio - 1) < 1e-5,
+          `${label}: zoom scales the complete camera (${renderedRatio} vs ${expectedRatio})`);
       };
       for (const [name, pitch, zoom] of [
         ["rotated", initial.pitch + 80, initial.zoom],

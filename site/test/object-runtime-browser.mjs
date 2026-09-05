@@ -109,6 +109,10 @@ try {
       for (const lens of profile.objectControls.lenses?.controls ?? []) {
         await action(page.locator(`button[name="lens"][value="${lens.id}"]`));
       }
+      // Destination lenses can legitimately turn shared Motion off. Speed
+      // controls require that user intent to be restored before exercising them.
+      await motion.evaluate(input => { if (!input.checked) input.click(); });
+      await page.waitForFunction(() => window.__cssEarth.lifecycle === "mounted");
       for (const control of profile.objectControls.settings?.controls ?? []) {
         const input = page.locator(`.planet-settings [name="${control.name}"]`);
         if (control.kind === "toggle") await action(input);

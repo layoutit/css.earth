@@ -63,13 +63,14 @@ export function createSceneRouter({
       session.lifetime.onDispose(() =>
         reducedMotion?.removeEventListener("change", syncReducedMotion));
       publishSceneState();
+      const requestMotion = (next) => {
+        if (active !== session || session.lifetime.disposed) return;
+        motionEnabled = next === true;
+        syncPlayback();
+      };
       const shell = mountShell({
         objectId, documentTarget, windowTarget, motionEnabled,
-        onMotionChange(next) {
-          if (active !== session || session.lifetime.disposed) return;
-          motionEnabled = next === true;
-          syncPlayback();
-        },
+        onMotionChange: requestMotion,
       });
       session.shell = shell;
       for (const error of session.lifetime.onDispose(() => shell.destroy())) report(error);
@@ -80,6 +81,7 @@ export function createSceneRouter({
       // Keep the raw handle even if validation fails.
       let mount;
       mount = loaded.value(stage, {
+        onMotionRequest: requestMotion,
         onError(error) {
           if (active === session && session.mount === mount) fail(session, error);
         },
@@ -95,6 +97,13 @@ export function createSceneRouter({
       syncPlayback();
       const result = await session.lifetime.wait(ready);
       if (result.cancelled || active !== session) return;
+      if (mount.destinations) shell.setDestinations?.({
+        ...mount.destinations,
+        async select(place) {
+          shell.setMotionEnabled?.(false);
+          return mount.destinations.select(place);
+        },
+      });
       sceneState = "ready";
       syncPlayback();
     } catch (error) {
