@@ -45,6 +45,10 @@ const SUITES = Object.freeze({
     script: resolve(projectRoot, "src/planets/mercury/test/rotation-limits-browser.mjs"),
     name: "mercury-rotation-limits",
   }),
+  labels: Object.freeze({
+    script: resolve(projectRoot, "src/planets/mercury/test/label-field-browser.mjs"),
+    name: "mercury-label-field",
+  }),
 });
 const toolsDirectory = resolve(projectRoot, "src/planets/mercury/tools");
 const backupRoot = resolve(projectRoot, "node_modules/.cache/mercury-geometry-mutation-gate");
@@ -306,6 +310,40 @@ export const MUTATIONS = Object.freeze([
     served: { url: "/src/planets/mercury/runtime/preparedScene.mjs", changed: true },
     expect: /marker-position-(pluto|eris)|orbit-(shape|axis-backprojected)-(pluto|eris)-dwarf/u,
     suite: "system",
+  },
+  // Captions: the declutter pass, the placement and the ranking.
+  {
+    id: "captions-no-declutter",
+    description: "every caption candidate is accepted (overlapping captions drawn on top of one another)",
+    file: "src/platform/label-field.mjs",
+    find: "        candidate.accepted = !blocked;",
+    replace: "        candidate.accepted = true; /* MUTATION captions-no-declutter */",
+    prepare: [],
+    served: { url: "/src/platform/label-field.mjs", marker: "MUTATION captions-no-declutter" },
+    expect: /captions-do-not-overlap-/u,
+    suite: "labels",
+  },
+  {
+    id: "captions-below-markers",
+    description: "captions placed below their markers instead of above",
+    file: "src/platform/heliocentric-view-runtime.mjs",
+    find: "          `${formatNumber(slot.anchor[1] - slot.bottomOffsetPx)}px) translate(-50%, -100%)`;",
+    replace: "          `${formatNumber(slot.anchor[1] + slot.bottomOffsetPx)}px) translate(-50%, 0%)`; /* MUTATION captions-below-markers */",
+    prepare: [],
+    served: { url: "/src/platform/heliocentric-view-runtime.mjs", marker: "MUTATION captions-below-markers" },
+    expect: /captions-above-markers-/u,
+    suite: "labels",
+  },
+  {
+    id: "captions-priority-inverted",
+    description: "the faintest caption wins an overlap instead of the brightest",
+    file: "src/platform/label-field.mjs",
+    find: "      while (position > 0 && candidates[position - 1].priority < priority) position -= 1;",
+    replace: "      while (position > 0 && candidates[position - 1].priority > priority) position -= 1; /* MUTATION captions-priority-inverted */",
+    prepare: [],
+    served: { url: "/src/platform/label-field.mjs", marker: "MUTATION captions-priority-inverted" },
+    expect: /sun-caption-wins-/u,
+    suite: "labels",
   },
   // Free rotation: the trackball twists again outside its disc.
   {

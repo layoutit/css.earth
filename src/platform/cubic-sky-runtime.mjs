@@ -1573,6 +1573,8 @@ export function createRetainedCubicSkyOrbit({
           orbitPieceCount: view.orbitPieceCount,
           orbitOpacity: view.orbitOpacity,
           bodyMarkerOpacity: view.markerOpacity,
+          trailSpans: view.trailSpans ?? null,
+          captions: view.captions ?? null,
           ...(view.systemOpacity === undefined ? {} : {
             planetarySystem: Object.freeze({
               opacity: view.systemOpacity,

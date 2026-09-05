@@ -1,6 +1,7 @@
 import { OBJECT_RUNTIME_SCHEMA, initialObjectSelection, reduceObjectSelection } from "../../../platform/object-runtime-contract.mjs";
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_NAVIGATION_MARKERS } from "../../../../site/prepared-navigation-markers.mjs";
+import { DEFAULT_LABEL_POLICY } from "../../../platform/label-field.mjs";
 import { objectControls } from "../site/control-content.mjs";
 import { PREPARED_MERCURY_SCENE } from "./preparedScene.mjs";
 import { PREPARED_MERCURY_ASSETS } from "./preparedAssets.mjs";
@@ -64,6 +65,16 @@ const entries = [...preparedSkyResources(PREPARED_MERCURY_SCENE.starfield, PREPA
     PREPARED_MERCURY_ASSETS.interior[`${name}Url`], PREPARED_MERCURY_ASSETS.interior[`${name}2xUrl`]) })),
   ...materialBank.rows.map((row, index) => ({ key: `lighting:${index}`, url: row.url, pool: "lighting" })),
 ];
+// Captions above the far-view markers, under the shared label policy
+// (priority declutter, cap-height sizing). The names are the shell's
+// display names (site/objects.mjs), spelled here as this object's own data
+// because the registry's dynamic client imports sit outside the static
+// runtime closure; the dwarf planets have no shell entry.
+const captionNames = Object.freeze({
+  sun: "Sun", mercury: "Mercury", venus: "Venus", earth: "Earth", mars: "Mars", jupiter: "Jupiter",
+  saturn: "Saturn", uranus: "Uranus", neptune: "Neptune", pluto: "Pluto",
+  ceres: "Ceres", eris: "Eris", haumea: "Haumea", makemake: "Makemake",
+});
 export const runtimeDefinition = Object.freeze({
   schema: OBJECT_RUNTIME_SCHEMA, id: "mercury", controls: objectControls,
   camera: PREPARED_MERCURY_SCENE.camera, sky: PREPARED_MERCURY_SCENE.starfield, sun: PREPARED_MERCURY_SKY_SUN,
@@ -79,6 +90,7 @@ export const runtimeDefinition = Object.freeze({
       size: navigationMarker.presentation.size,
     }),
     systemMarkers,
+    labels: Object.freeze({ policy: DEFAULT_LABEL_POLICY, names: captionNames }),
   }),
   inputSelector: ".mercury-input-surface",
   assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
