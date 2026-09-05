@@ -94,7 +94,7 @@ async function proveInitialShell(browser, planet, profile) {
       waitUntil: "domcontentloaded",
     });
     assert.ok(response?.ok(), `${planet.id}: initial shell must load successfully`);
-    const speed = page.locator('button[name="speed"]');
+    const speed = page.locator('input[name="speed"][type="range"]');
     const supportsSpeed = profile.objectControls.settings?.controls.some(
       ({ name }) => name === "speed",
     ) ?? false;
@@ -149,7 +149,7 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden, motion
       `${planet.id}: pre-ready lens input must not publish a selection`);
     }
     if (profile.objectControls.settings?.controls.some(({ name }) => name === "speed")) {
-      assert.equal(await page.locator('button[name="speed"]').isDisabled(), true,
+      assert.equal(await page.locator('input[name="speed"][type="range"]').isDisabled(), true,
         `${planet.id}: speed must be disabled until runtime binding`);
     }
     await page.locator('input[name="motion"]').evaluate((input, requested) => {
@@ -696,7 +696,7 @@ async function exerciseRetainedInteractions(page, planet, profile) {
 
   if (!profile.objectControls.settings?.controls.some(({ name }) => name === "speed")) return;
 
-  const speed = page.locator('button[name="speed"]');
+  const speed = page.locator('input[name="speed"][type="range"]');
   assert.equal(await speed.count(), 1, `${planet.id}: speed control must exist`);
   const speedStates = Object.freeze([
     Object.freeze({ label: "fast", rate: 2 }),
@@ -710,7 +710,10 @@ async function exerciseRetainedInteractions(page, planet, profile) {
   assert.equal(await speed.getAttribute("data-state"), "normal",
     `${planet.id}: speed control must begin at normal`);
   for (const state of speedStates) {
-    await speed.evaluate((button) => button.click());
+    await speed.evaluate((input, value) => {
+      input.value = String(value);
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    }, state.rate);
     await waitFrames(page);
     assert.equal(await speed.getAttribute("data-state"), state.label,
       `${planet.id}: speed control must publish ${state.label}`);
@@ -1122,12 +1125,12 @@ async function responsiveShellState(page) {
 
 function assertResponsiveShell(state, profile, label) {
   assert.equal(state.wordmark, true, `${label}: wordmark must be visible`);
-  assert.equal(state.version, true, `${label}: version must be visible`);
+  assert.equal(state.version, false, `${label}: obsolete version badge must not render`);
   assert.equal(state.search, true, `${label}: object search must be visible`);
   assert.equal(state.information, true,
     `${label}: information panel must be visible`);
-  assert.equal(state.navigationToggle, profile === "mobile",
-    `${label}: navigation control must match the responsive profile`);
+  assert.equal(state.navigationToggle, false,
+    `${label}: obsolete navigation toggle must not render`);
   assert.equal(state.legacySunCount, 0,
     `${label}: legacy Sun navigation must not render`);
   assert.equal(state.overflow, false,
@@ -1210,7 +1213,7 @@ async function enableMotion(page, id) {
   const action = page.locator(".planet-settings-action");
   const motion = page.locator(".planet-motion-setting");
   await action.click();
-  assert.equal(await panel.getAttribute("open"), "",
+  assert.equal(await panel.isVisible(), true,
     `${id}: settings action must open the settings panel`);
   assert.equal(await motion.isChecked(), false,
     `${id}: desktop motion must be off by default`);
@@ -1218,7 +1221,7 @@ async function enableMotion(page, id) {
   await page.waitForFunction(() => window.__cssEarth?.lifecycle === "mounted");
   assert.equal(await motion.isChecked(), true,
     `${id}: motion setting must resume the scene`);
-  await action.click();
+  await page.locator(".explorer-rail-explore").click();
 }
 
 async function sceneState(page, profile) {

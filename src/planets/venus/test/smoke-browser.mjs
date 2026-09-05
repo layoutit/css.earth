@@ -285,10 +285,13 @@ try {
     }
   }
 
-  const speed = settings.locator('button[name="speed"]');
+  const speed = settings.locator('input[name="speed"][type="range"]');
   for (const [value, label] of [[2, "fast"], [3, "fastest"], [4, "superfast"],
     [0, "off"], [1, "normal"]]) {
-    await speed.evaluate((element) => element.click());
+    await speed.evaluate((element, nextValue) => {
+      element.value = String(nextValue);
+      element.dispatchEvent(new Event("input", { bubbles: true }));
+    }, value);
     assert.deepEqual(await page.evaluate(() => window.__venus.options.state()),
       { speed: value });
     assert.equal(await speed.getAttribute("data-state"), label);

@@ -1,4 +1,5 @@
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
+import { createExplorerRailController } from "./explorer-rail.mjs";
 
 export function mountPlanetShell({
   objectId,
@@ -18,7 +19,6 @@ export function mountPlanetShell({
     return controller;
   }
   try {
-    own(createSidebarController(documentTarget, windowTarget, lifetime));
     own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
     own(createSheetController(drawer, windowTarget, lifetime));
     own(createChartPixelAlignmentController(drawer, windowTarget, lifetime));
@@ -26,6 +26,7 @@ export function mountPlanetShell({
       documentTarget, windowTarget, { motionEnabled, onMotionChange }, lifetime,
     ));
     own(createPanelController(drawer, objectId, windowTarget, lifetime));
+    own(createExplorerRailController(documentTarget, windowTarget));
   } catch (error) {
     const cleanupErrors = lifetime.destroy();
     if (cleanupErrors.length) {
@@ -53,15 +54,15 @@ function createSettingsController(
   if (typeof onMotionChange !== "function") {
     throw new TypeError("Planet shell motion change handler must be a function.");
   }
-  const panel = documentTarget.querySelector(".planet-settings-panel");
-  const action = documentTarget.querySelector(".planet-settings-action");
   const motion = documentTarget.querySelector(".planet-motion-setting");
   const skyContrast = documentTarget.querySelector(
     ".planet-sky-contrast-setting",
   );
-  if (!(panel instanceof windowTarget.HTMLDetailsElement) ||
-      !(action instanceof windowTarget.HTMLButtonElement) ||
-      !(motion instanceof windowTarget.HTMLInputElement) ||
+  const speed = documentTarget.querySelector(
+    '.planet-speed-setting[type="range"][name="speed"]',
+  );
+  if (!(motion instanceof windowTarget.HTMLInputElement) ||
+      (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
       !(skyContrast instanceof windowTarget.HTMLInputElement)) {
     throw new Error("Planet shell settings controls are incomplete.");
   }
@@ -70,13 +71,9 @@ function createSettingsController(
   let motionOn = motionEnabled === true;
   let highContrastSky = false;
 
-  const renderPanel = () => {
-    action.ariaExpanded = String(panel.open);
-    action.ariaLabel = panel.open ? "Close settings" : "Open settings";
-  };
-
   const renderMotion = () => {
     motion.checked = motionOn;
+    if (speed) speed.disabled = !motionOn;
   };
   const renderSkyContrast = () => {
     skyContrast.checked = highContrastSky;
@@ -93,12 +90,6 @@ function createSettingsController(
     highContrastSky = skyContrast.checked;
     renderSkyContrast();
   }, { signal: events.signal });
-  action.addEventListener("click", () => {
-    panel.open = !panel.open;
-    renderPanel();
-  }, { signal: events.signal });
-  panel.addEventListener("toggle", renderPanel, { signal: events.signal });
-  renderPanel();
   renderMotion();
   renderSkyContrast();
 
@@ -191,6 +182,11 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     signal: events.signal,
   });
   search.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      render(true);
+      return;
+    }
     if (event.key !== "Escape" || !open) return;
     event.preventDefault();
     render(false);
@@ -255,42 +251,6 @@ function createChartPixelAlignmentController(drawer, windowTarget, lifetime) {
       events.abort();
       if (frame !== 0) windowTarget.cancelAnimationFrame(frame);
       for (const chart of charts) chart.style.removeProperty("translate");
-    },
-  });
-}
-
-function createSidebarController(documentTarget, windowTarget, lifetime) {
-  const sidebar = documentTarget.querySelector(".planet-sidebar");
-  const toggle = documentTarget.querySelector(".planet-sidebar-toggle");
-  if (!(sidebar instanceof windowTarget.HTMLElement)) {
-    throw new Error("Planet information sidebar is missing.");
-  }
-  if (!(toggle instanceof windowTarget.HTMLButtonElement)) {
-    throw new Error("Planet sidebar toggle is missing.");
-  }
-
-  const body = documentTarget.body;
-  const events = new AbortController();
-  lifetime.onDispose(() => events.abort());
-  const collapsed = () => body.dataset.sidebarCollapsed === "true";
-  const render = (next) => {
-    if (next) body.dataset.sidebarCollapsed = "true";
-    else delete body.dataset.sidebarCollapsed;
-    toggle.ariaExpanded = String(!next);
-    toggle.ariaLabel = next
-      ? "Expand information sidebar"
-      : "Collapse information sidebar";
-  };
-
-  toggle.addEventListener("click", () => render(!collapsed()), {
-    signal: events.signal,
-  });
-  render(false);
-
-  return Object.freeze({
-    destroy() {
-      events.abort();
-      render(false);
     },
   });
 }

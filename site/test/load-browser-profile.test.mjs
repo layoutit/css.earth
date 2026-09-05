@@ -31,11 +31,20 @@ function profile(withLenses = false) {
 
 const sharedSettings = Object.freeze([{ name: "motion", kind: "toggle" }, { name: "skyContrast", kind: "toggle" }]);
 function snapshot(controls = emptyControls) {
+  const objectSettings = controls.settings?.controls ?? [];
+  const speed = objectSettings.find(({ name }) => name === "speed");
+  const shadows = objectSettings.find(({ name }) => name === "shadows");
+  const remaining = objectSettings.filter((setting) =>
+    setting !== speed && setting !== shadows);
   return {
     lensPanelCount: controls.lenses?.controls.length ? 1 : 0,
     settingsPanelCount: 1,
     lenses: controls.lenses?.controls.map(({ id }) => id) ?? [],
-    settings: [...sharedSettings, ...(controls.settings?.controls ?? []).map(({ name, kind }) => ({ name, kind }))],
+    settings: [sharedSettings[0],
+      ...(speed ? [{ name: speed.name, kind: speed.kind }] : []),
+      ...(shadows ? [{ name: shadows.name, kind: shadows.kind }] : []),
+      sharedSettings[1],
+      ...remaining.map(({ name, kind }) => ({ name, kind }))],
   };
 }
 const page = (value) => ({ evaluate: async () => value });
@@ -58,7 +67,7 @@ test("declared content requires exact lens and setting DOM before optional check
   await assert.rejects(assertRenderedObjectControls(page({ ...snapshot(populatedControls), lenses: ["normal", "normal"] }), validated), /exact declared lens/u);
   await assert.rejects(assertRenderedObjectControls(page({ ...snapshot(populatedControls), settings: sharedSettings }), validated), /exact declared settings/u);
   const wrongKind = snapshot(populatedControls);
-  wrongKind.settings[2] = { name: "speed", kind: "toggle" };
+  wrongKind.settings[1] = { name: "speed", kind: "toggle" };
   await assert.rejects(assertRenderedObjectControls(page(wrongKind), validated), /exact declared settings/u);
 });
 

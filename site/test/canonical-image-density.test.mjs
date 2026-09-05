@@ -80,8 +80,6 @@ test("the shared shell mounts only canonical high-density image assets", async (
     );
   }
   assert.match(sources[0].source, /planet-markers@2x\.webp/u);
-  assert.match(sources[1].source, /planet-markers@2x\.webp/u);
-  assert.match(sources[2].source, /blackhole-marker@2x\.png/u);
-  assert.match(sources[2].source, /supernova-marker@2x\.png/u);
-  assert.match(sources[2].source, /settings-marker@2x\.webp/u);
+  assert.doesNotMatch(sources[1].source, /planet-markers(?:@2x)?\.webp/u);
+  assert.doesNotMatch(sources[2].source, /blackhole-marker|supernova-marker|settings-marker/u);
 });

@@ -10,6 +10,8 @@ for (const args of [
   ["site/test/smoke-browser.mjs", baseUrl],
   ["site/test/planet-introduction-browser.mjs", baseUrl],
   ["site/test/object-navigation-browser.mjs", baseUrl],
+  ["site/test/explorer-rail-browser.mjs", baseUrl],
+  ["site/test/shell-layout-browser.mjs", baseUrl],
   ["site/test/planet-browser-conformance.mjs", baseUrl],
   ["site/test/runtime-playback-browser.mjs", baseUrl],
   ["site/test/runtime-complex-browser.mjs", baseUrl],

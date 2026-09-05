@@ -352,10 +352,10 @@ function createPlutoLensControls({ stage, decodePreparedImage, lifetime, onError
 }
 
 function createPlutoSpeedControls({ lifetime, onError }) {
-  const button = document.querySelector('button[name="speed"]');
+  const input = document.querySelector('input[name="speed"][type="range"]');
   let animations = Object.freeze([]);
   const speed = bindSpeedControl({
-    button, lifetime, onError,
+    input, lifetime, onError,
     onChange(value) {
       for (const animation of animations) animation.playbackRate = value;
     },

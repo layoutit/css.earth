@@ -279,27 +279,28 @@ async function proveHeaderFeatures(page, route) {
     `${route} must not provide a separate settings sidebar`);
   assert.equal(await panel.count(), 1,
     `${route} must provide one settings panel`);
-  assert.equal(await panel.getAttribute("open"), null,
+  assert.equal(await panel.isHidden(), true,
     `${route} settings panel must be collapsed by default`);
   assert.equal(await settings.isHidden(), true,
     `${route} collapsed settings panel must hide its controls`);
 
   await action.click();
-  assert.equal(await panel.getAttribute("open"), "",
+  assert.equal(await panel.isVisible(), true,
     `${route} settings action must open the settings panel`);
-  assert.equal(await action.getAttribute("aria-expanded"), "true",
-    `${route} settings action must publish its expanded state`);
+  assert.equal(await action.getAttribute("aria-pressed"), "true",
+    `${route} settings action must publish its active state`);
   assert.equal(await settings.isVisible(), true,
     `${route} open settings panel must show its controls`);
-  const [actionBox, panelBox] = await Promise.all([
+  const [actionBox, panelBox, sidebarBox] = await Promise.all([
     action.boundingBox(),
     panel.boundingBox(),
+    page.locator(".planet-sidebar").boundingBox(),
   ]);
-  assert.ok(actionBox && panelBox,
+  assert.ok(actionBox && panelBox && sidebarBox,
     `${route} settings action and panel must have layout boxes`);
-  assert.ok(Math.abs((panelBox.x + panelBox.width) -
-    (actionBox.x + actionBox.width)) < 1,
-  `${route} settings panel must align with the action's right edge`);
+  assert.ok(Math.abs(panelBox.x - sidebarBox.x) < 1 &&
+    Math.abs(panelBox.width - sidebarBox.width) < 1,
+  `${route} settings panel must align with the information rail`);
   assert.ok(panelBox.y >= actionBox.y + actionBox.height,
     `${route} settings panel must open below the action`);
   assert.equal(await motion.isChecked(), false,
@@ -366,9 +367,9 @@ async function proveHeaderFeatures(page, route) {
       `${route} settings panel must restore the object shadow setting`);
   }
 
-  await action.click();
-  assert.equal(await panel.getAttribute("open"), null,
-    `${route} settings action must close the settings panel`);
-  assert.equal(await action.getAttribute("aria-expanded"), "false",
-    `${route} settings action must publish its collapsed state`);
+  await page.locator(".explorer-rail-explore").click();
+  assert.equal(await panel.isHidden(), true,
+    `${route} returning to planet information must close the settings panel`);
+  assert.equal(await action.getAttribute("aria-pressed"), "false",
+    `${route} settings action must publish its inactive state`);
 }

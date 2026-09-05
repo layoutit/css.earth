@@ -24,6 +24,7 @@ function fixture() {
     ".planet-sidebar-search", ".planet-sidebar-search-card", ".planet-sidebar-view-all",
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
+    ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
     ".planet-motion-setting", ".planet-sky-contrast-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
@@ -77,7 +78,7 @@ test("shell with no optional controls keeps Motion/high contrast and accessible 
 
 test("failed shell construction cleans earlier controllers and their scheduled work", () => {
   const f = fixture();
-  f.selectors.delete(".planet-settings-panel");
+  f.selectors.delete(".planet-sky-contrast-setting");
   assert.throws(f.mount, /settings controls are incomplete/);
   assert.equal(f.frames.size, 0);
   assert.ok(f.elements.every((element) => element.listeners.size === 0));

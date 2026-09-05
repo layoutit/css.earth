@@ -66,7 +66,7 @@ function environment(t, controls = PREPARED_SATURN_LENSES.controls) {
   const settingsRoot = new Element();
   const rings = new Input();
   const shadows = new Input();
-  const speed = new Button();
+  const speed = new Input();
   settingsRoot.querySelector = (selector) => selector.includes('"rings"') ? rings
     : selector.includes('"shadows"') ? shadows : speed;
   const stage = new Element();

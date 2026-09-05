@@ -305,7 +305,7 @@ async function assertFeatureBehavior(page) {
 }
 
 async function assertSpeedBehavior(page) {
-  const control = page.locator('.planet-settings button[name="speed"]');
+  const control = page.locator('.planet-settings input[name="speed"][type="range"]');
   for (const [speed, state] of [
     [2, "fast"],
     [3, "fastest"],
@@ -313,7 +313,10 @@ async function assertSpeedBehavior(page) {
     [0, "off"],
     [1, "normal"],
   ]) {
-    await control.evaluate((element) => element.click());
+    await control.evaluate((element, value) => {
+      element.value = String(value);
+      element.dispatchEvent(new Event("input", { bubbles: true }));
+    }, speed);
     assert.equal(await page.evaluate(() =>
       window.__saturn.options.state().speed), speed);
     assert.equal(await control.getAttribute("data-state"), state);

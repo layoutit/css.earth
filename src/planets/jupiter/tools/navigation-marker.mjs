@@ -2,7 +2,7 @@ export default Object.freeze({
   schema: "cssearth-navigation-marker@1",
   planetId: "jupiter",
   owner: "object",
-  presentation: Object.freeze({"size":16,"ringAngle":-2,"ringExtra":12,"ringHeight":5,"ringOpacity":0.62}),
+  presentation: Object.freeze({"size":16,"ringAngle":-2,"ringExtra":6,"ringHeight":3,"ringOpacity":0.25}),
   source: Object.freeze({
     path: "presentation/navigation-marker.png",
     expectedBytes: 1166501,
@@ -13,7 +13,9 @@ export default Object.freeze({
   }),
   operations: Object.freeze([
     Object.freeze({ type: "rotate" }),
-    Object.freeze({ type: "trim", threshold: 10 }),
+    // The source has stray pixels along row 0. Crop the observed disk directly
+    // so automatic trimming cannot retain a black cap above the north limb.
+    Object.freeze({ type: "extract", left: 122, top: 150, width: 1079, height: 1019 }),
     Object.freeze({
       type: "resize",
       width: "tile",
@@ -22,6 +24,8 @@ export default Object.freeze({
       position: "centre",
       kernel: "lanczos3",
     }),
+    Object.freeze({ type: "ensure-alpha" }),
+    Object.freeze({ type: "ellipse-mask", cx: 0.5, cy: 0.5, rx: 0.5, ry: 0.5 }),
     Object.freeze({ type: "png" }),
   ]),
 });

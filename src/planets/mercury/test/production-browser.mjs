@@ -108,9 +108,12 @@ try {
     assert.equal(await material.evaluate((element) =>
       element.style.getPropertyValue("--mercury-disc-zoom")), "");
 
-    const speed = page.locator('button[name="speed"]');
+    const speed = page.locator('input[name="speed"][type="range"]');
     assert.equal(await speed.getAttribute("data-state"), "normal");
-    await speed.evaluate((button) => button.click());
+    await speed.evaluate((input) => {
+      input.value = "2";
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    });
     assert.equal(await speed.getAttribute("data-state"), "fast");
     const shadows = page.locator('input[name="shadows"]');
     await shadows.evaluate((input) => {

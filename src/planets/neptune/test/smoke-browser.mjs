@@ -230,8 +230,11 @@ async function proveInteraction(page, retainedCount) {
     getComputedStyle(node).visibility), "hidden");
   await rings.evaluate((element) => element.click());
 
-  const speed = page.locator('.planet-settings button[name="speed"]');
-  await speed.evaluate((element) => element.click());
+  const speed = page.locator('.planet-settings input[name="speed"][type="range"]');
+  await speed.evaluate((element) => {
+    element.value = "2";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
   assert.equal(await page.evaluate(() =>
     window.__neptune.options.state().speed), 2);
 

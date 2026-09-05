@@ -556,8 +556,8 @@ export function createSaturnFeatureControls({ stage, lifetime, onError }) {
     if (!(input instanceof HTMLInputElement)) throw new Error(`Saturn ${name} control is missing.`);
     return [name, input];
   }));
-  const button = root.querySelector('button[name="speed"]');
-  if (!(button instanceof HTMLButtonElement)) throw new Error("Saturn speed control is missing.");
+  const input = root.querySelector('input[name="speed"][type="range"]');
+  if (!(input instanceof HTMLInputElement)) throw new Error("Saturn speed control is missing.");
   const events = new AbortController();
   let settings = Object.freeze({ rings: true, shadows: false });
   let playback = null;
@@ -572,7 +572,7 @@ export function createSaturnFeatureControls({ stage, lifetime, onError }) {
     onPresentationChange = null;
   });
   const speed = bindSpeedControl({
-    button, lifetime, onError,
+    input, lifetime, onError,
     onChange(value) { playback?.setSpeed(value); },
   });
   for (const [name, input] of inputs) {

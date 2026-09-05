@@ -51,8 +51,11 @@ try {
     for (const lens of ["ultraviolet", "methane", "normal"]) {
       await page.evaluate((id) => window.__jupiter.selectLens(id), lens);
     }
-    await page.locator('.planet-settings button[name="speed"]')
-      .evaluate((element) => element.click());
+    await page.locator('.planet-settings input[name="speed"][type="range"]')
+      .evaluate((element) => {
+        element.value = String((Number(element.value) + 1) % 5);
+        element.dispatchEvent(new Event("input", { bubbles: true }));
+      });
     await page.mouse.move(930, 520);
     await page.mouse.down();
     await page.mouse.move(930, 300 + pass * 40, { steps: 10 });
@@ -125,7 +128,7 @@ try {
   assert.equal((await runtimeState(page)).stableDomIdentity, true);
 
   await page.evaluate(() => {
-    const speed = document.querySelector('.planet-settings button[name="speed"]');
+    const speed = document.querySelector('.planet-settings input[name="speed"][type="range"]');
     window.__jupiterSmokeDestroyedControls = Object.freeze({
       speed,
       speedState: speed?.dataset.state,
@@ -133,7 +136,9 @@ try {
     window.dispatchEvent(new PageTransitionEvent("pagehide"));
     window.dispatchEvent(new PageTransitionEvent("pagehide"));
 
-    window.__jupiterSmokeDestroyedControls.speed?.click();
+    window.__jupiterSmokeDestroyedControls.speed?.dispatchEvent(
+      new Event("input", { bubbles: true }),
+    );
   });
   assert.deepEqual(await page.evaluate(() => ({
     stageChildren: document.querySelector(".planet-stage").childElementCount,

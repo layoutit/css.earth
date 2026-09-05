@@ -120,7 +120,7 @@ function installFixture(id, lenses) {
       this.src = "";
     }
   }
-  const speed = new Button();
+  const speed = new Input();
   const toggles = new Map(["atmosphere", "shadows", "rings"].map((name) => [name, new Input()]));
   const buttons = lenses.controls.map(({ id: value }) => Object.assign(new Button(), { value }));
   const lensRoot = new Element();
