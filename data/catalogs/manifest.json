@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "assets": {
+    "catalogs/stars-hyg": {
+      "key": "catalogs/stars-hyg",
+      "path": "catalogs/stars-hyg/v1/stars-hyg.gxct",
+      "bytes": 4818664,
+      "source": "HYG v4.4 (Hipparcos-Yale-Gliese Database, D. Nash / astronexus)",
+      "license": "CC-BY-SA-4.0",
+      "url": "https://codeberg.org/astronexus/hyg/raw/branch/main/data/hyg/CURRENT/LICENSE",
+      "epoch": "ICRS/J2000 equinox; source astrometry primarily Hipparcos-2007 reduction, epoch J1991.25",
+      "built": "2026-09-02",
+      "extra": {
+        "count": 109389,
+        "columns": [
+          "posPc",
+          "absMag",
+          "teffK",
+          "radiusSolar",
+          "colorIndexBv",
+          "hip",
+          "name",
+          "pmRaMasPerYr",
+          "pmDecMasPerYr"
+        ],
+        "droppedSun": 1,
+        "droppedNonPositiveDist": 0,
+        "droppedSentinelDist": 10224,
+        "totalSourceRows": 119614
+      }
+    },
+    "catalogs/constellations-iau": {
+      "key": "catalogs/constellations-iau",
+      "path": "catalogs/constellations-iau/v1/constellations-iau.gxct",
+      "bytes": 51040,
+      "source": "Stellarium modern_iau sky culture; directions/distances from HYG v4.4 (Hipparcos-Yale-Gliese Database, D. Nash / astronexus)",
+      "license": "CC-BY-SA-4.0",
+      "url": "https://github.com/Stellarium/stellarium/tree/master/skycultures/modern_iau",
+      "epoch": "J2000/ICRS; directions from HYG v4.4 astrometry (see catalogs/stars-hyg meta for its epoch notes)",
+      "built": "2026-09-02",
+      "extra": {
+        "count": 842,
+        "constellations": 88,
+        "droppedSegmentCount": 1
+      }
+    },
+    "catalogs/deepsky": {
+      "key": "catalogs/deepsky",
+      "path": "catalogs/deepsky/v2/deepsky.gxct",
+      "bytes": 927952,
+      "source": "OpenNGC (Mattia Verga), NGC/IC deep-sky database",
+      "license": "CC-BY-SA-4.0",
+      "url": "https://github.com/mattiaverga/OpenNGC",
+      "epoch": "ICRS/J2000; OpenNGC live snapshot, per-row source epochs vary",
+      "built": "2026-09-02",
+      "extra": {
+        "count": 13963,
+        "columns": [
+          "posPc",
+          "name",
+          "type",
+          "commonName",
+          "magV",
+          "magB",
+          "majAxArcmin",
+          "minAxArcmin",
+          "posAngDeg",
+          "surfaceBrightness",
+          "hubbleType",
+          "pgc"
+        ],
+        "droppedMissingRaDec": 7,
+        "totalSourceRows": 13970,
+        "rowsWithKnownDistance": 10457
+      }
+    },
+    "catalogs/globulars": {
+      "key": "catalogs/globulars",
+      "path": "catalogs/globulars/v1/globulars.gxct",
+      "bytes": 5208,
+      "source": "Harris (1996, 2010 edition) Catalog of Milky Way Globular Cluster Parameters",
+      "license": "Free-for-use-with-attribution (Harris 1996, 2010 edition)",
+      "url": "https://physics.mcmaster.ca/resources/globular.html",
+      "epoch": "ICRS/J2000 positions; Harris 1996, revised December 2010",
+      "built": "2026-09-02",
+      "extra": {
+        "count": 157,
+        "columns": [
+          "posPc",
+          "name",
+          "commonName"
+        ]
+      }
+    },
+    "catalogs/nebulae-planetary": {
+      "key": "catalogs/nebulae-planetary",
+      "path": "catalogs/nebulae-planetary/v1/nebulae-planetary.gxct",
+      "bytes": 32080,
+      "source": "Gaia EDR3 matches to HASH Galactic planetary nebulae (Ali et al. 2022, RAA 22, 85013)",
+      "license": "CDS VizieR terms of use",
+      "url": "https://cds.unistra.fr/vizier-org/licences_vizier.html",
+      "epoch": "Gaia EDR3 astrometric epoch J2016.0; ICRS",
+      "built": "2026-09-02",
+      "extra": {
+        "count": 593,
+        "columns": [
+          "posPc",
+          "name",
+          "gaiaSourceId",
+          "gMag"
+        ],
+        "totalSourceRows": 593,
+        "droppedNonPositiveParallax": 0
+      }
+    },
+    "catalogs/snr": {
+      "key": "catalogs/snr",
+      "path": "catalogs/snr/v1/snr.gxct",
+      "bytes": 16800,
+      "source": "Green's catalogue of Galactic supernova remnants (D.A. Green), VizieR VII/297",
+      "license": "CDS VizieR terms of use",
+      "url": "https://cds.unistra.fr/vizier-org/licences_vizier.html",
+      "epoch": "ICRS/J2000",
+      "built": "2026-09-02",
+      "extra": {
+        "count": 310,
+        "columns": [
+          "dirIcrs",
+          "name",
+          "type",
+          "majDiamArcmin",
+          "minDiamArcmin",
+          "flux1GhzJy",
+          "altNames"
+        ]
+      }
+    },
+    "catalogs/hii-regions": {
+      "key": "catalogs/hii-regions",
+      "path": "catalogs/hii-regions/v1/hii-regions.gxct",
+      "bytes": 336888,
+      "source": "WISE Catalog of Galactic HII Regions (Anderson et al. 2014), VizieR J/ApJS/212/1",
+      "license": "CDS VizieR terms of use",
+      "url": "https://cds.unistra.fr/vizier-org/licences_vizier.html",
+      "epoch": "ICRS/J2000 (converted from the catalogue's native Galactic coordinates)",
+      "built": "2026-09-02",
+      "extra": {
+        "count": 8399,
+        "columns": [
+          "posPc",
+          "name",
+          "classification",
+          "radiusArcsec"
+        ],
+        "rowsWithKnownDistance": 1413
+      }
+    },
+    "catalogs/exoplanets": {
+      "key": "catalogs/exoplanets",
+      "path": "catalogs/exoplanets/v1/exoplanets.gxct",
+      "bytes": 354704,
+      "source": "NASA Exoplanet Archive, Planetary Systems (ps) table, default_flag=1",
+      "license": "Public Domain (U.S. Government work)",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/docs/usage_policy.html",
+      "epoch": "ICRS/J2000; live archive snapshot, per-row discovery/parameter epochs vary",
+      "built": "2026-09-02",
+      "extra": {
+        "count": 6227,
+        "columns": [
+          "posPc",
+          "teffK",
+          "radiusSolar",
+          "absMag",
+          "hip",
+          "name",
+          "hostName"
+        ],
+        "droppedMissingOrNonPositiveDist": 127,
+        "totalSourceRows": 6354
+      }
+    }
+  }
+}

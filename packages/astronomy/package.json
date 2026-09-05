@@ -1,0 +1,40 @@
+{
+  "name": "@cssearth/astronomy",
+  "version": "0.0.0",
+  "description": "Time scales, float64 vectors and the reference-frame tree for large-scale 3D scenes. Zero dependencies, zero browser globals.",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": ["astronomy", "ephemeris", "reference-frame", "julian-date", "precision"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apresmoi/galaxio.git",
+    "directory": "packages/astronomy"
+  },
+  "bugs": { "url": "https://github.com/apresmoi/galaxio/issues" },
+  "homepage": "https://github.com/apresmoi/galaxio#readme",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": { "access": "public" },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^3.1.1",
+    "@vitest/coverage-v8": "^3.1.1"
+  }
+}
