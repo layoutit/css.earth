@@ -68,7 +68,8 @@ export async function objectPreparationFiles(root, id) {
   const packageFiles = await listPreparationFiles(root, base);
   const source = JSON.parse(await readFile(resolve(root, base, "source/manifest.json"), "utf8"));
   const generatedSources = new Set(source.generatedIntermediates.map(entry => `${base}/source/${entry.path}`));
-  const output = path => generatedModule(path) || path === `${base}/runtime-assets.json` ||
+  const output = path => generatedModule(path) || path === `${base}/site/control-content.mjs` ||
+    path === `${base}/runtime-assets.json` ||
     path.includes("/.prepared/") || generatedSources.has(path);
   const outputs = [...packageFiles.filter(output), ...await listPreparationFiles(root, `public/scenes/${id}`)];
   const inputs = [...packageFiles.filter(path => !output(path)), ...await preparationFileSets(root, id)];
