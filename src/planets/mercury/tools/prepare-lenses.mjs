@@ -21,10 +21,57 @@ const topographyLegendSource = resolve(
   "maps/mercury-topography-legend.png",
 );
 const topographyLegendCrop = await sharp(topographyLegendSource)
-  .extract({ left: 60, top: 6, width: 107, height: 2652 })
-  .png()
-  .toBuffer();
-await sharp(topographyLegendCrop)
+  // Retain the published color bins while excluding the source image's gray frame.
+  .extract({ left: 66, top: 12, width: 96, height: 2637 })
+  .removeAlpha()
+  .raw()
+  .toBuffer({ resolveWithObject: true });
+const dividerRows = [];
+for (let y = 0; y < topographyLegendCrop.info.height; y += 1) {
+  let darkPixels = 0;
+  for (let x = 0; x < topographyLegendCrop.info.width; x += 1) {
+    const offset = (y * topographyLegendCrop.info.width + x) *
+      topographyLegendCrop.info.channels;
+    if (
+      topographyLegendCrop.data[offset] <= 8 &&
+      topographyLegendCrop.data[offset + 1] <= 8 &&
+      topographyLegendCrop.data[offset + 2] <= 8
+    ) {
+      darkPixels += 1;
+    }
+  }
+  if (darkPixels / topographyLegendCrop.info.width >= 0.95) {
+    dividerRows.push(y);
+  }
+}
+const dividerRuns = [];
+for (const row of dividerRows) {
+  const previous = dividerRuns.at(-1);
+  if (previous && row === previous.end + 1) {
+    previous.end = row;
+  } else {
+    dividerRuns.push({ start: row, end: row });
+  }
+}
+if (dividerRuns.length !== 27) {
+  throw new Error(
+    `Expected 27 internal rows in the pinned USGS legend; found ${dividerRuns.length}.`,
+  );
+}
+const rowBytes = topographyLegendCrop.info.width * topographyLegendCrop.info.channels;
+for (const { start, end } of dividerRuns) {
+  const midpoint = (start + end) / 2;
+  for (let row = start; row <= end; row += 1) {
+    const sourceRow = row <= midpoint ? start - 1 : end + 1;
+    topographyLegendCrop.data.copy(
+      topographyLegendCrop.data,
+      row * rowBytes,
+      sourceRow * rowBytes,
+      (sourceRow + 1) * rowBytes,
+    );
+  }
+}
+await sharp(topographyLegendCrop.data, { raw: topographyLegendCrop.info })
   .rotate(90)
   .resize({ width: 304, height: 14, fit: "fill", kernel: "nearest" })
   .webp({ lossless: true })
