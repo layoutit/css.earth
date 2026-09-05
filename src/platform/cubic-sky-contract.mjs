@@ -145,8 +145,9 @@ export function validatePreparedCubicSky(plan, { requireSun = true } = {}) {
       !Number.isFinite(plan.presentationYawOffsetDegrees) ||
       (plan.catalogueStars !== undefined && (
         plan.catalogueStars?.schema !== "cssearth-prepared-catalogue-stars@1" ||
-        plan.catalogueStars.coexistence !== "photograph-diffuse-only-catalogue-points-once" ||
-        plan.catalogueStars.photographDetailGain !== 0 ||
+        plan.catalogueStars.coexistence !== "photograph-kept-retained-band-holes-catalogue-points-for-bright-stars" ||
+        !(plan.catalogueStars.photographDetailGain > 0) ||
+        !(plan.catalogueStars.photographHoleRadiusFacePixels > 0) ||
         !Number.isFinite(plan.catalogueStars.limitingMagnitude) ||
         !Array.isArray(plan.catalogueStars.retained) || plan.catalogueStars.retained.length === 0 ||
         !Array.isArray(plan.catalogueStars.bands) ||

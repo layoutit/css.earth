@@ -14,9 +14,9 @@
 // bands below are the data such a zoom would switch between.
 //
 // The stars are split by apparent magnitude into bands: the brightest are
-// retained DOM points on the sky cube (crisp, coloured, sized per star),
-// the rest are stamped into the prepared cube faces at preparation. The
-// photograph keeps only its diffuse light, so no star is drawn twice.
+// retained DOM points on the sky cube (crisp, coloured, sized per star) and
+// the photograph's own images of them are removed at preparation; the rest
+// stay photographic, placed by the registered photograph.
 
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -141,14 +141,16 @@ export function starColor(teffK, colorIndexBv) {
   return [255, 255, 255];
 }
 
-// The bands, by apparent magnitude: `retained` stars are DOM points; the
-// others are stamped into the cube faces. The limit is derived from the
-// chain (the magnitude whose raw radius falls to the skip threshold).
+// The bands, by apparent magnitude: `retained` stars are DOM points, drawn
+// from the catalogue with their photographic image removed; the others
+// stay `photographic`, placed by the registered photograph itself. The
+// limit is derived from the chain (the magnitude whose raw radius falls to
+// the skip threshold) and bounds what the record lists.
 export const CATALOGUE_STAR_BANDS = Object.freeze([
   Object.freeze({ id: "brilliant", faintestMagnitude: 1.5, presentation: "retained" }),
   Object.freeze({ id: "bright", faintestMagnitude: 3.5, presentation: "retained" }),
-  Object.freeze({ id: "naked-eye", faintestMagnitude: 5.0, presentation: "stamped" }),
-  Object.freeze({ id: "faint", faintestMagnitude: Number.POSITIVE_INFINITY, presentation: "stamped" }),
+  Object.freeze({ id: "naked-eye", faintestMagnitude: 5.0, presentation: "photographic" }),
+  Object.freeze({ id: "faint", faintestMagnitude: Number.POSITIVE_INFINITY, presentation: "photographic" }),
 ]);
 
 export async function loadCatalogue(path) {

@@ -2,8 +2,8 @@
 // catalogue itself: bright named stars are painted where their ICRS
 // directions project through the same camera the lighting oracle uses for
 // the Sun and the sky anchors; magnitude reads as size; the faint bands are
-// present in the faces; and the photograph no longer paints those stars, so
-// nothing is drawn twice. Orientation is swept, since stars are at infinity
+// present in the faces (photographic, at registered positions); and the
+// photograph no longer paints the retained stars, so nothing is drawn twice. Orientation is swept, since stars are at infinity
 // and the dolly cannot move them.
 //
 // The oracle here decodes the HYG catalogue on its own (through the vendored
@@ -35,9 +35,11 @@ export const TOLERANCES = Object.freeze({
   // Retained stars (m <= 3.5, 290 over the sky) visible in one view once the
   // chrome and the disc are excluded: a few.
   retainedInView: 2,
-  // Peak luminance the diffuse-only photograph may keep at a bright star's
-  // position once the retained points are hidden (no double draw).
-  photographPeakAtStar: 60,
+  // Peak luminance the photograph may keep at a retained star's position
+  // once the points are hidden: its image is removed, its diffuse light
+  // (the sigma-nine smear) stays, measured at 2-56 against 150-plus for the
+  // photographic image itself.
+  photographPeakAtStar: 90,
 });
 
 // Bright stars the sweep looks up, by their HYG names.
@@ -170,14 +172,14 @@ try {
         sizePairs += 1;
         check(`star-size-follows-magnitude-p${scenePitch}-h${heading}`, a !== null && b !== null && a >= TOLERANCES.sizeOrderRatio * b, cell.size);
       }
-      // Faint stamped stars: a 240 px window of black sky clear of retained
-      // stars must show at least a dozen compact points.
+      // Faint stars: a 240 px window of sky clear of retained stars must
+      // still show compact points (the photograph's own).
       if (image) {
         const window = findClearWindow(geometry, visible, painted, 240);
         if (window !== null) {
           const count = compactPoints(image, window, 2);
           cell.faint = { window, count };
-          check(`faint-stars-stamped-p${scenePitch}-h${heading}`, count >= TOLERANCES.faintStarsInWindow, cell.faint);
+          check(`faint-stars-present-p${scenePitch}-h${heading}`, count >= TOLERANCES.faintStarsInWindow, cell.faint);
         }
       }
       sweep.push(cell);
