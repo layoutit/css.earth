@@ -21,6 +21,7 @@ export function mountPlanetShell({
   try {
     own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
     own(createSheetController(drawer, windowTarget, lifetime));
+    own(createChartSwitcherController(drawer, windowTarget, lifetime));
     own(createChartPixelAlignmentController(drawer, windowTarget, lifetime));
     settingsController = own(createSettingsController(
       documentTarget, windowTarget, { motionEnabled, onMotionChange }, lifetime,
@@ -213,8 +214,8 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
 function createChartPixelAlignmentController(drawer, windowTarget, lifetime) {
   const charts = [...drawer.querySelectorAll(".planet-chart")]
     .filter((chart) => chart instanceof windowTarget.HTMLElement);
-  const panels = [...drawer.querySelectorAll(".planet-chart-panel")]
-    .filter((panel) => panel instanceof windowTarget.HTMLDetailsElement);
+  const switchers = [...drawer.querySelectorAll(".planet-chart-switcher")]
+    .filter((switcher) => switcher instanceof windowTarget.HTMLElement);
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let frame = 0;
@@ -238,8 +239,8 @@ function createChartPixelAlignmentController(drawer, windowTarget, lifetime) {
   };
 
   windowTarget.addEventListener("resize", schedule, { signal: events.signal });
-  for (const panel of panels) {
-    panel.addEventListener("toggle", schedule, { signal: events.signal });
+  for (const switcher of switchers) {
+    switcher.addEventListener("chartchange", schedule, { signal: events.signal });
   }
   for (const chart of charts) {
     chart.addEventListener("load", schedule, { signal: events.signal });
@@ -251,6 +252,70 @@ function createChartPixelAlignmentController(drawer, windowTarget, lifetime) {
       events.abort();
       if (frame !== 0) windowTarget.cancelAnimationFrame(frame);
       for (const chart of charts) chart.style.removeProperty("translate");
+    },
+  });
+}
+
+function createChartSwitcherController(drawer, windowTarget, lifetime) {
+  const switcher = drawer.querySelector(".planet-chart-switcher");
+  if (switcher === null) {
+    return Object.freeze({ destroy() {} });
+  }
+  if (!(switcher instanceof windowTarget.HTMLElement)) {
+    throw new Error("Planet shell chart switcher is invalid.");
+  }
+  const previous = switcher.querySelector('.planet-chart-step[data-chart-step="-1"]');
+  const next = switcher.querySelector('.planet-chart-step[data-chart-step="1"]');
+  const iconFrame = switcher.querySelector(".planet-chart-current-icon");
+  const slides = [...switcher.querySelectorAll(".planet-chart-slide")]
+    .filter((slide) => slide instanceof windowTarget.HTMLElement);
+  const labels = [...switcher.querySelectorAll(".planet-chart-label")]
+    .filter((label) => label instanceof windowTarget.HTMLElement);
+  const icons = [...switcher.querySelectorAll(".planet-chart-icon")]
+    .filter((icon) => icon instanceof windowTarget.HTMLImageElement);
+  if (!(previous instanceof windowTarget.HTMLButtonElement) ||
+      !(next instanceof windowTarget.HTMLButtonElement) ||
+      !(iconFrame instanceof windowTarget.HTMLElement) ||
+      slides.length === 0 || labels.length !== slides.length) {
+    throw new Error("Planet shell chart switcher is incomplete.");
+  }
+  const chartIds = slides.map((slide) => slide.dataset.chartId ?? "");
+  if (chartIds.some((id) => id.length === 0) ||
+      new Set(chartIds).size !== chartIds.length ||
+      labels.some((label) => !chartIds.includes(label.dataset.chartLabel ?? ""))) {
+    throw new Error("Planet shell chart switcher identities are incomplete.");
+  }
+
+  const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
+  let activeIndex = Math.max(0, chartIds.indexOf(switcher.dataset.activeChart));
+  const render = (index, notify = true) => {
+    activeIndex = (index + slides.length) % slides.length;
+    const activeId = chartIds[activeIndex];
+    switcher.dataset.activeChart = activeId;
+    for (const slide of slides) slide.hidden = slide.dataset.chartId !== activeId;
+    for (const label of labels) label.hidden = label.dataset.chartLabel !== activeId;
+    for (const icon of icons) icon.hidden = icon.dataset.chartIcon !== activeId;
+    iconFrame.hidden = !icons.some((icon) => icon.dataset.chartIcon === activeId);
+
+    const previousSlide = slides[(activeIndex - 1 + slides.length) % slides.length];
+    const nextSlide = slides[(activeIndex + 1) % slides.length];
+    previous.ariaLabel = `Previous chart: ${previousSlide.dataset.chartTitle}`;
+    next.ariaLabel = `Next chart: ${nextSlide.dataset.chartTitle}`;
+    previous.disabled = slides.length < 2;
+    next.disabled = slides.length < 2;
+    if (notify) switcher.dispatchEvent(new windowTarget.Event("chartchange"));
+  };
+  for (const button of [previous, next]) {
+    button.addEventListener("click", () => {
+      render(activeIndex + Number(button.dataset.chartStep));
+    }, { signal: events.signal });
+  }
+  render(activeIndex, false);
+
+  return Object.freeze({
+    destroy() {
+      events.abort();
     },
   });
 }

@@ -147,6 +147,8 @@ const planetCount = PLANET_SEARCH_OBJECTS.length;
 const activeObject = OBJECTS.find((object) => object.id === objectId);
 const hasResources = resources.length > 0;
 const orderedCharts = orderScientificCharts(charts);
+const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ??
+  orderedCharts[0];
 const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
   reflectance: PREPARED_SHELL_ICONS.reflectance,
   "temperature-pressure": PREPARED_SHELL_ICONS.temperaturePressure,
@@ -254,6 +256,80 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
           </div>
         </div>}
       </details>
+      {defaultChart && <section
+        id={`${objectId}-charts`}
+        class="planet-chart-switcher"
+        data-active-chart={defaultChart.id}
+        aria-labelledby={`${objectId}-charts-title`}
+      >
+        <header class="planet-chart-switcher-header">
+          <h2
+            id={`${objectId}-charts-title`}
+            class="planet-panel-heading planet-chart-switcher-title"
+            aria-live="polite"
+          >
+            {orderedCharts.map((chart) => (
+              <span
+                class="planet-chart-label"
+                data-chart-label={chart.id}
+                hidden={chart.id !== defaultChart.id}
+              >{chart.title.label}</span>
+            ))}
+          </h2>
+          <div class="planet-chart-switcher-controls" aria-label="Choose chart">
+            <button
+              class="planet-chart-step planet-chart-previous"
+              type="button"
+              data-chart-step="-1"
+              aria-controls={`${objectId}-chart-slides`}
+              aria-label="Previous chart"
+              disabled={orderedCharts.length < 2}
+            ><span aria-hidden="true">‹</span></button>
+            <button
+              class="planet-chart-step planet-chart-next"
+              type="button"
+              data-chart-step="1"
+              aria-controls={`${objectId}-chart-slides`}
+              aria-label="Next chart"
+              disabled={orderedCharts.length < 2}
+            ><span aria-hidden="true">›</span></button>
+            <span class="planet-chart-current-icon" aria-hidden="true">
+              {orderedCharts.map((chart) => chartIcons[chart.id] && (
+                <img
+                  class="planet-panel-icon planet-chart-icon"
+                  data-panel-icon={chart.id}
+                  data-chart-icon={chart.id}
+                  src={chartIcons[chart.id].src}
+                  width={chartIcons[chart.id].width}
+                  height={chartIcons[chart.id].height}
+                  alt=""
+                  hidden={chart.id !== defaultChart.id}
+                />
+              ))}
+            </span>
+          </div>
+        </header>
+        <div id={`${objectId}-chart-slides`} class="planet-chart-slides">
+          {orderedCharts.map((chart) => (
+            <figure
+              id={`${objectId}-${chart.id}`}
+              class="planet-chart-slide"
+              data-chart-id={chart.id}
+              data-chart-title={chart.title.label}
+              aria-label={chart.title.label}
+              hidden={chart.id !== defaultChart.id}
+            >
+              <img
+                class="planet-chart"
+                src={chart.src}
+                width={chart.width}
+                height={chart.height}
+                alt={chart.alt}
+              />
+            </figure>
+          ))}
+        </div>
+      </section>}
       {hasLenses && lenses && <details id={`${objectId}-lenses`} class="planet-lenses" open>
         <summary class="planet-panel-summary">
           <h2 class="planet-panel-heading">{lenses.title.label}</h2>
@@ -289,28 +365,6 @@ const chartIcons: Readonly<Record<string, PreparedIcon>> = Object.freeze({
           </nav>
         </div>
       </details>}
-      {orderedCharts.map((chart) => (
-      <details id={`${objectId}-${chart.id}`} class="planet-chart-panel">
-        <summary class="planet-panel-summary">
-          <h2 class="planet-panel-heading">{chart.title.label}</h2>
-          {chartIcons[chart.id] && <img
-            class="planet-panel-icon"
-            data-panel-icon={chart.id}
-            src={chartIcons[chart.id].src}
-            width={chartIcons[chart.id].width}
-            height={chartIcons[chart.id].height}
-            alt=""
-          />}
-        </summary>
-        <img
-          class="planet-chart"
-          src={chart.src}
-          width={chart.width}
-          height={chart.height}
-          alt={chart.alt}
-        />
-      </details>
-      ))}
       {galleries.map((gallery) => (
       <details id={`${objectId}-${gallery.id}`} class="planet-gallery-panel">
         <summary class="planet-panel-summary">
