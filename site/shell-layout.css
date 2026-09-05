@@ -3,7 +3,7 @@ body[data-object-shell] {
   --explorer-rail-left: 12px;
   --explorer-rail-item-gap: 0px;
   --explorer-panel-left: var(--explorer-rail-left);
-  --explorer-panel-width: 360px;
+  --explorer-panel-width: 340px;
   --explorer-logo-size: 36px;
   --explorer-wordmark-size: 36px;
   --explorer-content-inset: 20px;
@@ -14,6 +14,7 @@ body[data-object-shell] {
   --explorer-panel-bottom-gap: 16px;
   --explorer-header-panel-gap: 12px;
   --explorer-panel-gap: 8px;
+  --explorer-scene-offset: 170px;
   --explorer-controls-top: calc(var(--explorer-header-top) + var(--explorer-search-height) + var(--explorer-header-panel-gap));
   --explorer-dock-width: calc(var(--explorer-panel-left) + var(--explorer-panel-width));
   --explorer-surface-background: #151515;
@@ -109,6 +110,7 @@ body[data-object-shell] {
 
   .planet-stage {
     inset-inline-start: 0;
+    translate: var(--explorer-scene-offset) 0;
   }
 
   .planet-attribution-footer {
