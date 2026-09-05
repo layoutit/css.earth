@@ -99,8 +99,8 @@ try {
         "search follows the 48px header by 12px");
       assert.ok(sidebarBox.y + sidebarBox.height <= config.height - 16,
         "the information panel leaves a bottom gap");
-      assert.equal((await page.locator(".planet-stage").boundingBox()).x, 0,
-        "the floating shell does not reserve scene space");
+      assert.equal((await page.locator(".planet-stage").boundingBox()).x, 170,
+        "the desktop scene is centered beside the information panel");
     }
     assert.equal(await page.locator(".planet-sidebar-toggle, .planetary-navigation-toggle, .explorer-rail-menu").count(), 0);
     const factsheetPanel = page.locator(".planet-factsheet-section");
@@ -114,6 +114,17 @@ try {
     await factsheetSummary.click();
     assert.equal(await factsheetPanel.evaluate((node) => node.open), !factsheetInitiallyOpen,
       `${config.label}: Factsheet header toggles the whole panel`);
+    assert.equal(await factsheetPanel.locator(".planet-primary-facts > li").count(), 4,
+      `${config.label}: Factsheet previews four facts`);
+    const factsOverflow = factsheetPanel.locator(".planet-facts-overflow");
+    const factsToggle = factsOverflow.locator(":scope > .planet-facts-toggle");
+    assert.equal(await factsOverflow.evaluate((node) => node.open), false,
+      `${config.label}: remaining facts start hidden`);
+    assert.equal(await factsToggle.innerText(), "View more");
+    await factsToggle.click();
+    assert.equal(await factsOverflow.evaluate((node) => node.open), true,
+      `${config.label}: View more reveals remaining facts`);
+    assert.equal(await factsToggle.innerText(), "View less");
     await factsheetSummary.click();
     assert.equal(await factsheetPanel.evaluate((node) => node.open), factsheetInitiallyOpen,
       `${config.label}: Factsheet returns to its initial state`);

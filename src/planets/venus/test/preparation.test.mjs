@@ -49,10 +49,17 @@ test("publishes the prepared Venus scene and shell content", () => {
   assert.equal(PREPARED_VENUS_PANEL.planetId, "venus");
   assert.match(PREPARED_VENUS_PANEL.introduction, /second planet from the Sun/u);
   assert.deepEqual(PREPARED_VENUS_PANEL.facts, [
-    { label: "Distance", value: "108 million km" },
-    { label: "Diameter", value: "12,104 km" },
-    { label: "Year", value: "225 Earth days" },
-    { label: "Day", value: "243 Earth days" },
+    { id: "distance-from-sun", label: "Distance from Sun", value: "108 million km" },
+    { id: "diameter", label: "Diameter", value: "12,104 km" },
+    { id: "orbital-period", label: "Orbital period", value: "225 Earth days" },
+    { id: "rotation-period", label: "Rotation period", value: "243 Earth days" },
+    { id: "axial-tilt", label: "Axial tilt", value: "3°" },
+    { id: "moon-count", label: "Moons", value: "None" },
+    { id: "ring-system", label: "Rings", value: "None" },
+  ]);
+  assert.deepEqual(PREPARED_VENUS_PANEL.moreFacts, [
+    { id: "surface-temperature", label: "Surface temperature", value: "467°C" },
+    { id: "surface-pressure", label: "Surface pressure", value: "93× Earth" },
   ]);
   assert.equal(PREPARED_VENUS_SCENE.schema,
     "cssvenus-prepared-runtime-scene@1");

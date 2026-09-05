@@ -22,7 +22,7 @@ export const browserProfile = Object.freeze({
       preReadyDisabled: true,
     }),
     retained: Object.freeze({
-      lensIds: Object.freeze(["normal", "topography", "night-lights", "cross-section"]),
+      lensIds: Object.freeze(["normal", "topography", "night-lights", "buenos-aires-noise", "cross-section"]),
       speedClicks: 5,
       allowedMountSelectors: Object.freeze([]),
     }),

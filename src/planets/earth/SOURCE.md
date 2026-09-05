@@ -31,20 +31,7 @@ is deliberately not treated as a body-colour authority.
 The browser mounts the canonical prepared DPR 2 bank, independent of device
 DPR; it performs no scattering, geometry, or raster work at runtime.
 
-The three exterior lenses use one DPR-independent canonical surface and pole
-atlas each. Each surface is prepared at 8,192 × 4,096, packed through the
-existing 16-band projective raster with a 64-pixel physical gutter into an
-8,320 × 6,144 WebP at quality 84. Its logical presentation remains
-2,080 × 1,536 with a 16-pixel gutter, seam bleed 0, and the existing compositor
-overlap. The prepared raster overscan is exactly 0.512 logical pixels: the
-64-pixel presentation cell multiplied by the existing 0.008 compositor
-overlap. This keeps the texture sample aligned with the already-expanded leaf
-without changing its matrix or source rectangle. Each matching pole atlas is
-2,048 × 512. The atlas density changes; the retained leaves, source rectangles,
-geometry, and projective address function do not. The normal, topography, and night-light inputs all contain enough checked
-source detail for this preparation; the night input is the official NASA
-13,500 × 6,750 global file, not an upscale of the former 3,600 × 1,800 source.
-Topography and night lights keep an 8x camera limit. The normal lens supports prepared detail levels up to 4096x; there is no runtime rasterization path.
+The normal, topography and night-light lenses each use seven bounded affine surface pages plus a pole atlas, selected once independently of DPR. Preparation folds the projective texture warp into those raster pages. The noise lens reuses the normal surface bank and adds its own retained transparent pages. The city geometry keeps a separate prepared geographic frame for each accepted Earth face; all 450 frames remained byte-identical during the PR #2 integration. `source/city/geographic-rebind.json` records the migration and full pack-hash verification.
 
 Atmosphere and lighting assets retain their existing prepared pairs. Runtime
 addresses their canonical high-density assets. Earth lighting and
@@ -105,7 +92,7 @@ The normal lens loads the official [ESA WorldCover 2021 RGB composite through Te
 
 `source/city/worldcover-rgbnir-2021.json.gz` is the pinned publisher listing observed on 2026-09-04: 19,359 source objects, with latitude extent 60 degrees south to 83 degrees north. It describes source footprints, including water and nodata, rather than a land mask or pixel-validity guarantee. It does not supply Antarctica or the far northern gap. Blue Marble remains the fallback outside available imagery.
 
-`source/city/wmts-release.json` pins release `977152a7f5db3426`: 94,072,860 WMTS tile addresses at levels 5–14, 106,963,238 prepared image pieces, and 25,344,224,387 compressed geometry bytes across 19,632 packs. The global root has 458 stubs. Coarse packs cover levels 5–7; regional packs contain separately compressed ranges for levels 8–10 and 11–14. Runtime requests only visible prepared branches. Encoded and decoded lengths and SHA-256 hashes are verified before records become resident.
+`source/city/wmts-release.json` pins release `fef1519d5f243617`: 94,072,860 WMTS tile addresses at levels 5–14, 106,963,238 prepared image pieces, and 25,344,236,995 compressed geometry bytes across 19,632 packs. The global root has 458 stubs. Coarse packs cover levels 5–7; regional packs contain separately compressed ranges for levels 8–10 and 11–14. Runtime requests only visible prepared branches. Encoded and decoded lengths and SHA-256 hashes are verified before records become resident.
 
 Geometry is prepared against the accepted Earth face planes. Regular-face seams, Mercator subdivisions, cap mapping and the visible square-cap apron are prepared offline. The polar projection test independently samples the prepared transforms back into provider pixel coordinates. A source image may have several placement pieces; each tile's pieces form one replacement group. No runtime geometry generation, source raster processing, DPR-specific dataset selection, or scene renderer substitution is used.
 

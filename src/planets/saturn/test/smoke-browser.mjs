@@ -87,7 +87,7 @@ async function enableMotion(page) {
   const settings = page.locator(".planet-settings-panel");
   const action = page.locator(".planet-settings-action");
   await action.click();
-  assert.equal(await settings.getAttribute("open"), "");
+  assert.equal(await settings.isVisible(), true);
   await page.locator(".planet-motion-setting-control").click();
   await page.waitForFunction(() =>
     document.documentElement.dataset.playing === "true" &&

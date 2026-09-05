@@ -185,3 +185,20 @@ for (const failure of ["pause", "resume", "report"]) test(`fatal ${failure} fail
   assert.equal(h.errors.length, 1);
   h.router.destroy();
 });
+
+test("an object destination can pause shared motion, and a retired object cannot change intent", async () => {
+  const h = harness(context => ({ requestMotion: context.onMotionRequest }));
+  await h.router.settled;
+  h.shells[0].onMotionChange(true);
+  h.mounts[0].requestMotion(false);
+  assert.equal(h.router.playback().motionRequested, false);
+  assert.equal(h.shells[0].playback.motionRequested, false);
+  assert.deepEqual(h.mounts[0].calls, ["pause", "resume", "pause"]);
+  const retired = h.mounts[0];
+  h.windowTarget.dispatchEvent(new Event("pagehide"));
+  show(h); await h.router.settled;
+  retired.requestMotion(true);
+  assert.equal(h.router.playback().motionRequested, false);
+  assert.deepEqual(h.mounts[1].calls, ["pause"]);
+  h.router.destroy();
+});

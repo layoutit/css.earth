@@ -3,7 +3,7 @@ import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { createPreparedImageStore } from "../../../platform/prepared-image-store.mjs";
 import { createSceneLifetime } from "../../../platform/scene-lifetime.mjs";
-import { createEarthLensControls } from "../runtime/client.mjs";
+import { createEarthLensControls, earthSurfaceBankInventory } from "../runtime/client.mjs";
 import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import {
@@ -250,9 +250,7 @@ function style() {
 }
 
 async function controlsFixture({ decode } = {}) {
-  const bankInventory = PREPARED_EARTH_LENSES.controls.map((lens) => ({ id: lens.id,
-    urls: lens.view === "interior" ? PREPARED_EARTH_SCENE.interior.outerAssets.surface.twoUrls : lens.surfaceUrls,
-  }));
+  const bankInventory = earthSurfaceBankInventory();
   const f = fixture(bankInventory);
   const initial = f.banks.request("normal"); await f.complete(initial); f.banks.commit(initial);
   const original = new Map(["HTMLElement", "document"].map((name) => [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
@@ -263,7 +261,7 @@ async function controlsFixture({ decode } = {}) {
   const buttons = PREPARED_EARTH_LENSES.controls.map(({ id }) => ({ value: id, addEventListener() {},
     setAttribute(name, value) { if (name === "aria-pressed") this.pressed = value; },
   }));
-  const root = new Element(); root.querySelectorAll = () => buttons;
+  const root = new Element(); root.querySelectorAll = () => buttons; root.querySelector = () => null;
   globalThis.HTMLElement = Element; globalThis.document = { querySelector: () => root };
   const stage = { dataset: { lens: "normal" } };
   const body = [{ style: style() }], interior = [{ style: style() }], polar = [{ style: style() }];
@@ -392,5 +390,19 @@ test("Earth actual destruction settles pending selection and prevents late palet
     assert.deepEqual(f.body[0].style.values, before);
     assert.equal(f.banks.stats().retainedBankCount, 0);
     assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
+});
+
+test("Buenos Aires noise reuses the normal surface bank without allocating or retiring its pages", async () => {
+  const f = await controlsFixture();
+  try {
+    const before = f.images.length;
+    assert.equal(await f.controls.select("buenos-aires-noise"), true);
+    assert.equal(f.banks.stats().activeId, "normal");
+    assert.equal(f.banks.stats().retainedBankCount, 1);
+    assert.equal(f.images.length, before);
+    assert.equal(f.images.filter(image => image.releases > 0).length, 0);
+    assert.equal(await f.controls.select("normal"), true);
+    assert.equal(f.images.length, before);
   } finally { f.restore(); }
 });

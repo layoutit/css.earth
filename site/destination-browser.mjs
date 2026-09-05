@@ -21,6 +21,7 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset, 
   }
 
   async function search(value) {
+    if (destroyed) return;
     query = value;
     const request = ++revision;
     clearRows();
@@ -52,7 +53,7 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset, 
   }
 
   async function select(place) {
-    if (!provider || selecting || !place) return;
+    if (destroyed || !provider || selecting || !place) return;
     const request = ++selectionRevision;
     selecting = true;
     for (const button of buttons) button.disabled = true;
@@ -77,7 +78,7 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset, 
       if (!destroyed) hint.textContent = "This city could not open. Select it to retry.";
     } finally {
       selecting = false;
-      for (const button of buttons) button.disabled = false;
+      if (!destroyed) for (const button of buttons) button.disabled = false;
     }
   }
   buttons.forEach((button, index) => button.addEventListener("click", () => void select(matches[index]), { signal: events.signal }));
@@ -90,9 +91,9 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset, 
     onReset();
   }, { signal: events.signal });
   return Object.freeze({
-    bind(next) { provider = next; if (query) void search(query); },
+    bind(next) { if (destroyed) return; provider = next; if (query) void search(query); },
     search,
-    setOpen(open) { panel.hidden = open || !selection; },
-    destroy() { destroyed = true; revision++; selection = null; events.abort(); clearRows(); panel.hidden = true; },
+    setOpen(open) { if (destroyed) return; panel.hidden = open || !selection; },
+    destroy() { if (destroyed) return; destroyed = true; revision++; selection = null; events.abort(); clearRows(); panel.hidden = true; },
   });
 }

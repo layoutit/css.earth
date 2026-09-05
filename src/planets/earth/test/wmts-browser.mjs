@@ -84,7 +84,7 @@ try{
       });
       page.on("request",request=>{if(request.url().includes("/mapproxy/")||request.url().includes("earth-assets.lowpoly.cc"))run.network.push(request.url());});
       await page.goto(`${base}/earth/`);await page.waitForFunction(()=>window.__earth?.ready);
-      await page.evaluate(()=>{window.__earth.pause();window.__wmtsNodes=[...document.querySelector(".planet-stage").querySelectorAll("*")];});
+      await page.evaluate(()=>{{ const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }window.__wmtsNodes=[...document.querySelector(".planet-stage").querySelectorAll("*")];});
       for(const sample of [...samples,{...samples[0],id:`${samples[0].id}-warm`}]){
         // Release the previous view even when testing one location, so a warm
         // result must reacquire actual provider URLs through the HTTP cache.

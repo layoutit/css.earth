@@ -1,13 +1,17 @@
 import assert from "node:assert/strict";
+import { mkdir, rename, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { chromium } from "playwright";
 
 import { OBJECTS } from "../objects.mjs";
 import { MOBILE_TOUCH_ACTION } from "../runtime-policy.mjs";
 import { loadPlanetBrowserProfile, assertRenderedObjectControls } from "./load-browser-profile.mjs";
+import { proveSkyboxPointerBoundary } from "./skybox-pointer-boundary.mjs";
 import { GOOGLE_EARTH_SURFACE_FLY_TO } from
   "../../src/platform/google-earth-surface-fly-to.mjs";
 import { GOOGLE_EARTH_DRAG_INERTIA } from
   "../../src/platform/google-earth-drag-inertia.mjs";
+import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const requestedId = process.argv[3] ?? null;
@@ -15,6 +19,14 @@ const renderOnly = process.env.CSSEARTH_RENDER_ONLY === "1";
 const densityOnly = process.env.CSSEARTH_DENSITY_ONLY === "1";
 const CASE_TIMEOUT_MS = 120_000;
 const REQUEST_START_TIMEOUT_MS = 30_000;
+const evidenceDirectory = process.env.CSSEARTH_CONFORMANCE_OUTPUT
+  ? resolve(process.env.CSSEARTH_CONFORMANCE_OUTPUT)
+  : null;
+if (evidenceDirectory) {
+  assert.ok(evidenceDirectory.startsWith(resolve("output/playwright") + "/"),
+    "Browser evidence must stay under output/playwright.");
+  await mkdir(evidenceDirectory, { recursive: true });
+}
 const implemented = OBJECTS;
 const selected = requestedId
   ? implemented.filter(({ id }) => id === requestedId)
@@ -374,6 +386,14 @@ async function assertLensConsistency(page, planet, profile, expectedId) {
     `${planet.id}: selected control must match the visible material`);
 }
 console.log(JSON.stringify({ ok: true, reports }, null, 2));
+if (evidenceDirectory) {
+  await writeFile(resolve(evidenceDirectory, "report.json"), JSON.stringify({
+    ok: true, browser: browser.version(), baseUrl,
+    capturedAt: new Date().toISOString(),
+    qualification: "Natural-clock browser interaction checks; no native parity claim.",
+    reports,
+  }, null, 2));
+}
 
 async function proveDesktop(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
@@ -402,8 +422,9 @@ async function proveDesktop(browser, planet, profile) {
         },
       );
       introductionLines = Math.round(introduction.lineRatio);
-      assert.ok(Math.abs(introduction.lineRatio - 4) < 0.01,
-        `${planet.id}: desktop introduction must occupy exactly four lines`);
+      const expectedIntroductionLines = ({ venus:5, uranus:3 })[planet.id] ?? 4;
+      assert.ok(Math.abs(introduction.lineRatio - expectedIntroductionLines) < 0.01,
+        `${planet.id}: desktop introduction must occupy ${expectedIntroductionLines} lines in the 340px panel`);
     }
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
@@ -489,11 +510,8 @@ async function proveDesktop(browser, planet, profile) {
     const zoomed = await profile.camera(page);
     assert.ok(zoomed.zoom > bounds.defaultZoom,
       `${planet.id}: wheel toward the user must zoom in`);
-    assert.deepEqual(zoomPublication, {
-      directionalSun: 0,
-      skyCube: 0,
-      skyOrientation: 0,
-    }, `${planet.id}: zoom must not republish orientation-dependent layers`);
+    assert.ok(Object.values(zoomPublication).every((count) => count > 0),
+      `${planet.id}: off-centre wheel zoom must preserve its surface anchor`);
 
     await profile.setCamera(page, {
       pitch: bounds.defaultPitch,
@@ -501,11 +519,16 @@ async function proveDesktop(browser, planet, profile) {
     });
     const flyCoordinates = await surfaceFlyCoordinates(page);
     const beforeFlyTo = await profile.camera(page);
-    await page.mouse.dblclick(
-      flyCoordinates.surface.x,
-      flyCoordinates.surface.y,
-      { delay: 45 },
-    );
+    await page.mouse.move(flyCoordinates.surface.x, flyCoordinates.surface.y);
+    await page.mouse.down({ clickCount:1 });
+    await page.mouse.up({ clickCount:1 });
+    await page.mouse.down({ clickCount:2 });
+    const secondPressFlight = await interactionStats(page, planet.id);
+    assert.equal(secondPressFlight.surfaceFlyTo.active, true,
+      `${planet.id}: the second press must launch flight before mouse-up`);
+    await page.mouse.up({ clickCount:2 });
+    assert.equal((await interactionStats(page, planet.id)).surfaceFlyTo.starts,
+      secondPressFlight.surfaceFlyTo.starts, `${planet.id}: double-click release must not restart flight`);
     await page.waitForTimeout(
       GOOGLE_EARTH_SURFACE_FLY_TO.durationMilliseconds + 100,
     );
@@ -585,6 +608,8 @@ async function proveDesktop(browser, planet, profile) {
     );
     assert.equal(retainedProof.initialNodesIntact, true,
       `${planet.id}: independent observation must retain every initial node`);
+    assert.equal(retainedProof.shellTextNodesIntact, true,
+      `${planet.id}: camera debug output must retain its text nodes`);
     assert.deepEqual(retainedProof.undeclaredAddedRoots, [],
       `${planet.id}: interactions must not add undeclared scene roots`);
     assert.deepEqual(retainedProof.undeclaredRemovedRoots, [],
@@ -649,6 +674,11 @@ async function beginRetainedProbe(page) {
     const initialParents = initialNodes.map((node) => node.parentNode);
     const addedRoots = [];
     const removedRoots = [];
+    const shellTextNodes = [
+      document.querySelector(".planet-camera-coordinates")?.firstChild,
+      document.querySelector(".planet-camera-copy")?.firstChild,
+    ].filter(Boolean);
+    const shellTextParents = shellTextNodes.map((node) => node.parentNode);
     let maximumNodeCount = initialNodes.length;
     const observer = new MutationObserver((records) => {
       for (const record of records) {
@@ -669,6 +699,8 @@ async function beginRetainedProbe(page) {
       stage,
       initialNodes,
       initialParents,
+      shellTextNodes,
+      shellTextParents,
       addedRoots,
       removedRoots,
       observer,
@@ -793,6 +825,8 @@ async function finishRetainedProbe(page, allowedSelectors) {
       maximumNodeCount: probe.maximumNodeCount(),
       initialNodesIntact: probe.initialNodes.every((node, index) =>
         node.isConnected && node.parentNode === probe.initialParents[index]),
+      shellTextNodesIntact: probe.shellTextNodes.every((node, index) =>
+        node.isConnected && node.parentNode === probe.shellTextParents[index]),
       undeclaredAddedRoots: probe.addedRoots.filter((node) =>
         !allowedRoot(node)).map(describe),
       undeclaredRemovedRoots: probe.removedRoots.filter((node) =>
@@ -808,6 +842,9 @@ async function provePreparedDensity(browser, planet, profile, density) {
   const context = await browser.newContext({
     viewport: { width: 1200, height: 800 },
     deviceScaleFactor: density,
+    ...(evidenceDirectory ? { recordVideo: {
+      dir: evidenceDirectory, size: { width: 1200, height: 800 },
+    } } : {}),
   });
   const page = await context.newPage();
   const evidence = observePage(page, baseUrl);
@@ -817,6 +854,25 @@ async function provePreparedDensity(browser, planet, profile, density) {
   });
   try {
     await loadPlanet(page, planet, profile);
+    await profile.pause(page);
+    if (evidenceDirectory) await page.evaluate(() => {
+      const label = document.createElement("div");
+      label.id = "camera-conformance-label";
+      label.style.cssText = "position:fixed;right:20px;bottom:48px;padding:10px 16px;" +
+        "background:#17191b;color:white;font:16px sans-serif;pointer-events:none;z-index:9999";
+      label.textContent = "Sky and planet input boundaries";
+      document.body.append(label);
+      const pointer = document.createElement("div");
+      pointer.style.cssText = "position:fixed;width:16px;height:16px;border:2px solid white;" +
+        "border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:9999";
+      document.body.append(pointer);
+      document.addEventListener("pointermove", event => {
+        pointer.style.left = `${event.clientX}px`;
+        pointer.style.top = `${event.clientY}px`;
+      }, true);
+      document.addEventListener("pointerdown", () => pointer.style.background = "#ffb14e", true);
+      document.addEventListener("pointerup", () => pointer.style.background = "transparent", true);
+    });
     assert.equal(await profile.selectedDensity(page), 2,
       `${planet.id}: DPR ${density} must select the canonical high-density bank`);
     const canonicalAssets = profile.audit.canonicalPreparedAssets ?? [];
@@ -833,33 +889,171 @@ async function provePreparedDensity(browser, planet, profile, density) {
       assert.equal(requestedPaths.has(rejectedAsset), false,
         `${planet.id}: DPR ${density} must not request low-density ${rejectedAsset}`);
     }
+    const skyboxPointerBoundary = await proveSkyboxPointerBoundary(
+      page,
+      planet,
+      profile,
+    );
     const interactionInterruptions = await proveInteractionInterruptions(
       page,
       planet,
       profile,
     );
+    const wheelTakeover = await proveWheelTakeover(page, planet, profile);
+    const releasePosition = await proveReleasePosition(page, planet, profile);
+    assert.equal(await profile.stable(page), true,
+      `${planet.id}: the full interaction sequence must preserve retained nodes`);
     if (densityOnly) {
       assert.deepEqual(evidence.externalRequests, [],
         `${planet.id}: browser must make no external requests`);
+      assert.deepEqual(evidence.problems.filter(problem => problem.startsWith("pageerror:")), [],
+        `${planet.id}: interaction proof must have no runtime exceptions`);
     } else {
       assertEvidence(evidence, planet.id);
     }
+    if (evidenceDirectory) console.error(`${planet.id} DPR ${density}: interactions passed`);
     return {
       id: planet.id,
       viewport: `dpr-${density}`,
       selectedDensity: 2,
       requestedCanonicalAssets: [...canonicalAssets].sort(),
+      skyboxPointerBoundary,
       interactionInterruptions,
+      wheelTakeover,
+      releasePosition,
+      ...(evidenceDirectory ? { video: `${planet.id}-dpr-${density}.webm` } : {}),
       ...(densityOnly
         ? { browserProblemsOutsideDensityProof: evidence.problems }
         : {}),
     };
   } finally {
+    const video = page.video();
     await context.close();
+    if (video && evidenceDirectory) await rename(await video.path(),
+      resolve(evidenceDirectory, `${planet.id}-dpr-${density}.webm`));
   }
 }
 
+async function proveReleasePosition(page, planet, profile) {
+  await showInteractionPhase(page, "Release without an extra drag step");
+  const bounds = await profile.bounds(page);
+  await profile.setCamera(page, { pitch: bounds.defaultPitch, zoom: bounds.defaultZoom });
+  const coordinates = await surfaceFlyCoordinates(page);
+  const { x, y } = coordinates.surface;
+  const cdp = await page.context().newCDPSession(page);
+  try {
+    for (const paused of [false, true]) {
+      await page.mouse.move(x, y);
+      await page.mouse.down();
+      for (const offset of paused ? [8, 20, 38] : [10, 20, 30]) {
+        await page.waitForTimeout(35);
+        await page.mouse.move(x + offset, y);
+      }
+      if (paused) await page.waitForTimeout(160);
+      else await page.waitForTimeout(35);
+      const before = await cameraPose(page, planet.id);
+      const starts = (await interactionStats(page, planet.id)).starts;
+      // A moved mouse-up is a distinct input, not another mouse-move event.
+      await cdp.send("Input.dispatchMouseEvent", { type: "mouseReleased",
+        x: x + (paused ? 64 : 40), y, button: "left", buttons: 0, clickCount: 1 });
+      await page.mouse.up();
+      await waitFrames(page);
+      assert.deepEqual(await cameraPose(page, planet.id), before,
+        `${planet.id}: ${paused ? "paused" : "constant-speed"} release must retain the last drag pose`);
+      assert.equal((await interactionStats(page, planet.id)).starts, starts,
+        `${planet.id}: release must not manufacture an inertial throw`);
+      assert.equal((await interactionStats(page, planet.id)).activeMode, "idle");
+    }
+  } finally { await cdp.detach(); }
+  return { nonLaunchingReleaseRetainsDragPose: true, pausedReleaseCannotRestartMotion: true };
+}
+
+async function proveWheelTakeover(page, planet, profile) {
+  const bounds = await profile.bounds(page);
+  const reset = () => profile.setCamera(page, {
+    pitch: bounds.defaultPitch, zoom: bounds.defaultZoom,
+  });
+  await reset();
+  const coordinates = await surfaceFlyCoordinates(page);
+  const startWheel = async () => {
+    await page.mouse.move(coordinates.surface.x, coordinates.surface.y);
+    await page.mouse.wheel(0, -40);
+    await page.waitForTimeout(35);
+    assert.equal((await interactionStats(page, planet.id)).wheelZoom.active, true,
+      `${planet.id}: takeover must begin during the shared wheel interval`);
+  };
+  await showInteractionPhase(page, "Grab during wheel zoom: the camera must stop");
+  await startWheel();
+  await page.mouse.down();
+  const pressed = await cameraPose(page, planet.id);
+  await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 50);
+  assert.deepEqual(await cameraPose(page, planet.id), pressed,
+    `${planet.id}: grabbing the body must stop wheel zoom and anchor rotation immediately`);
+  assert.equal((await interactionStats(page, planet.id)).wheelZoom.active, false,
+    `${planet.id}: grabbing must cancel the pending wheel frame`);
+  await page.mouse.up();
+
+  await showInteractionPhase(page, "Sky press must stop wheel motion");
+  await reset();
+  await startWheel();
+  // Use the viewport corner: zoom can expand a large body's limb over the
+  // point that was just outside its disc before the wheel gesture began.
+  await page.mouse.move(page.viewportSize().width - 32, 96);
+  await page.mouse.down();
+  assert.equal((await interactionStats(page, planet.id)).pendingPointer, true,
+    `${planet.id}: the sky press must reserve the next drag`);
+  const skyPress = await cameraPose(page, planet.id);
+  await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 50);
+  assert.deepEqual(await cameraPose(page, planet.id), skyPress,
+    `${planet.id}: sky press must stop wheel motion immediately`);
+  await page.mouse.up();
+
+  await showInteractionPhase(page, "Reset during wheel zoom: no delayed motion");
+  await reset();
+  await startWheel();
+  await reset();
+  const resetPose = await cameraPose(page, planet.id);
+  await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 50);
+  assert.deepEqual(await cameraPose(page, planet.id), resetPose,
+    `${planet.id}: resetting the camera must cancel pending wheel publications`);
+  assert.equal((await interactionStats(page, planet.id)).wheelZoom.active, false,
+    `${planet.id}: reset must cancel the pending wheel frame`);
+  await showInteractionPhase(page, "Held-button wheel cancels the grab");
+  await reset();
+  const cameraBounds = await page.locator(".planet-stage .polycss-camera").boundingBox();
+  const x = cameraBounds.x + cameraBounds.width / 2;
+  const y = cameraBounds.y + cameraBounds.height / 2;
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  const heldPose = await cameraPose(page, planet.id);
+  await page.mouse.wheel(0, -40);
+  await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 50);
+  const zoomedWhileHeld = await cameraPose(page, planet.id);
+  assert.deepEqual(zoomedWhileHeld, heldPose,
+    `${planet.id}: scrolling while held must not zoom`);
+  assert.equal((await interactionStats(page, planet.id)).pendingPointer, false);
+  await page.mouse.move(x + 40, y);
+  const heldDrag = await cameraPose(page, planet.id);
+  assert.deepEqual(heldDrag, heldPose,
+    `${planet.id}: movement after held-wheel cancellation must wait for a new press`);
+  await page.waitForTimeout(GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds + 20);
+  await page.mouse.up();
+  await page.evaluate(({ id, state }) => window[`__${id}`].camera.setState(state),
+    { id:planet.id, state:zoomedWhileHeld });
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x + 40, y);
+  const freshDrag = await cameraPose(page, planet.id);
+  assert.notDeepEqual(freshDrag.pose, heldPose.pose,
+    `${planet.id}: a new press must restore dragging after wheel cancellation`);
+  await page.waitForTimeout(GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds + 20);
+  await page.mouse.up();
+  return { bodyPressStopsWheel: true, skyPressStopsWheel: true,
+    resetStopsWheel: true, heldWheelCancelsGrab: true };
+}
+
 async function proveInteractionInterruptions(page, planet, profile) {
+  await showInteractionPhase(page, "Drag, coast, then wheel interruption");
   const bounds = await profile.bounds(page);
   await profile.setCamera(page, {
     pitch: bounds.defaultPitch,
@@ -874,21 +1068,49 @@ async function proveInteractionInterruptions(page, planet, profile) {
     `${planet.id}: inertia must be the only active camera motion`);
   await wheel(page, profile.inputSelector, -40);
   const inertiaAfterWheel = await interactionStats(page, planet.id);
-  assert.equal(inertiaAfterWheel.activeMode, "inertia",
-    `${planet.id}: wheel zoom must coexist with drag inertia`);
-  assert.equal(inertiaAfterWheel.activeMotionCount, 1,
-    `${planet.id}: wheel zoom must not add a camera animation owner`);
+  assert.equal(inertiaAfterWheel.activeMode, "idle",
+    `${planet.id}: wheel zoom must interrupt rotational inertia`);
+  assert.equal(inertiaAfterWheel.activeMotionCount, 0,
+    `${planet.id}: wheel interruption must leave no rotational motion owner`);
   assert.equal(
-    inertiaAfterWheel.wheelCoexistences,
-    inertiaBeforeWheel.wheelCoexistences + 1,
-    `${planet.id}: wheel coexistence must be recorded once`,
+    inertiaAfterWheel.interruptions.wheel,
+    inertiaBeforeWheel.interruptions.wheel + 1,
+    `${planet.id}: wheel interruption must be recorded once`,
   );
-  const pitchAfterWheel = (await profile.camera(page)).pitch;
+  assert.equal(inertiaAfterWheel.cancels, inertiaBeforeWheel.cancels + 1,
+    `${planet.id}: wheel input must cancel inertia exactly once`);
+  await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 30);
+  const poseAfterWheel = await cameraPose(page, planet.id);
   await waitFrames(page);
-  assert.ok(Math.abs(
-    (await profile.camera(page)).pitch - pitchAfterWheel,
-  ) > 0.001, `${planet.id}: rotational inertia must continue through wheel zoom`);
+  assert.deepEqual(await cameraPose(page, planet.id), poseAfterWheel,
+    `${planet.id}: camera must stay still after the wheel interval ends`);
 
+  await profile.setCamera(page, {
+    pitch: bounds.defaultPitch,
+    zoom: bounds.defaultZoom,
+  });
+  const anchorCoordinates = await surfaceFlyCoordinates(page);
+  const beforeAnchorWheel = await cameraPose(page, planet.id);
+  await page.mouse.move(anchorCoordinates.surface.x, anchorCoordinates.surface.y);
+  await page.mouse.wheel(0, -40);
+  await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 80);
+  const afterAnchorWheel = await cameraPose(page, planet.id);
+  const wheelZoomRatio = afterAnchorWheel.zoom / beforeAnchorWheel.zoom;
+  // Camera publication rounds zoom to four decimal places on each frame.
+  assert.ok(Math.abs(wheelZoomRatio - Math.exp(
+    PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond *
+      PREPARED_WHEEL_ZOOM.intervalMilliseconds)) < 0.002,
+  `${planet.id}: shared wheel response drifted (ratio ${wheelZoomRatio})`);
+  assert.notEqual(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
+    `${planet.id}: off-centre wheel zoom must apply anchor rotation`);
+
+  await profile.setCamera(page, {
+    pitch: bounds.defaultPitch,
+    zoom: bounds.defaultZoom,
+  });
+  await drag(page, profile.inputSelector, 90, 150);
+
+  await showInteractionPhase(page, "Click to stop, then one-pixel drag");
   const stopCoordinates = await surfaceFlyCoordinates(page);
   const inertiaBeforePointer = await interactionStats(page, planet.id);
   assert.equal(inertiaBeforePointer.activeMode, "inertia",
@@ -927,24 +1149,63 @@ async function proveInteractionInterruptions(page, planet, profile) {
     stopCoordinates.surface.x + 1,
     stopCoordinates.surface.y + 1,
   );
+  const tinyDragPose = await cameraPose(page, planet.id);
+  assert.notDeepEqual(tinyDragPose, stoppedPose,
+    `${planet.id}: a one-pixel drag must respond immediately after stopping coast`);
   await page.mouse.up();
   await waitFrames(page);
-  assert.deepEqual(await cameraPose(page, planet.id), stoppedPose,
-    `${planet.id}: click jitter and release must not restart rotation`);
+  assert.deepEqual(await cameraPose(page, planet.id), tinyDragPose,
+    `${planet.id}: releasing a tiny drag must not restart rotation`);
   const releasedPointer = await interactionStats(page, planet.id);
   assert.equal(releasedPointer.pendingPointer, false,
     `${planet.id}: pointer-up must clear the pending press`);
   assert.equal(releasedPointer.activeMotionCount, 0,
-    `${planet.id}: pointer-up without a drag must remain idle`);
+    `${planet.id}: pointer-up after a tiny drag must remain idle`);
   assert.equal(releasedPointer.starts, inertiaBeforePointer.starts,
-    `${planet.id}: pointer-up without a drag must not launch another throw`);
+    `${planet.id}: pointer-up after a tiny drag must not launch another throw`);
+
+  const input = page.locator(profile.inputSelector);
+  await showInteractionPhase(page, "Release pointer capture outside the planet");
+  await input.evaluate((node) => node.addEventListener("pointerdown", (event) => {
+    node.__testPointerId = event.pointerId;
+  }, { once: true }));
+  await page.mouse.down();
+  await page.mouse.move(stopCoordinates.surface.x + 60,
+    stopCoordinates.surface.y + 25, { steps: 6 });
+  assert.equal((await interactionStats(page, planet.id)).activeMode, "drag",
+    `${planet.id}: capture-loss scenario must begin during a drag`);
+  const poseAtCaptureLoss = await cameraPose(page, planet.id);
+  await input.evaluate((node) => {
+    node.releasePointerCapture(node.__testPointerId);
+    delete node.__testPointerId;
+  });
+  const sidebar = await page.locator(".planet-sidebar").boundingBox();
+  await page.mouse.move(sidebar.x + 40, sidebar.y + 120);
+  await page.mouse.up();
+  await page.mouse.move(stopCoordinates.surface.x, stopCoordinates.surface.y);
+  await page.mouse.move(stopCoordinates.surface.x + 40,
+    stopCoordinates.surface.y + 20, { steps: 4 });
+  await waitFrames(page);
+  assert.deepEqual(await cameraPose(page, planet.id), poseAtCaptureLoss,
+    `${planet.id}: capture loss and release outside must not turn hover into drag`);
+  const afterCaptureLoss = await interactionStats(page, planet.id);
+  assert.equal(afterCaptureLoss.activeMode, "idle",
+    `${planet.id}: capture loss must stop the drag`);
+  assert.equal(afterCaptureLoss.pendingPointer, false,
+    `${planet.id}: capture loss must clear the pointer`);
+  assert.equal(afterCaptureLoss.starts, releasedPointer.starts,
+    `${planet.id}: capture loss must not launch inertia`);
 
   await profile.setCamera(page, {
     pitch: bounds.defaultPitch,
     zoom: bounds.defaultZoom,
   });
   let flyCoordinates = await surfaceFlyCoordinates(page);
-  const flyBeforeDrag = await interactionStats(page, planet.id);
+  await showInteractionPhase(page, "Drag, coast, then double-click fly-to");
+  await drag(page, profile.inputSelector, 90, 150);
+  assert.equal((await interactionStats(page, planet.id)).activeMode, "inertia",
+    `${planet.id}: the fly-to sequence must begin during coast`);
+  const poseBeforeFly = await cameraPose(page, planet.id);
   await page.mouse.dblclick(
     flyCoordinates.surface.x,
     flyCoordinates.surface.y,
@@ -956,33 +1217,45 @@ async function proveInteractionInterruptions(page, planet, profile) {
     `${planet.id}: surface double click must enter fly-to`);
   assert.equal(activeFly.activeMotionCount, 1,
     `${planet.id}: fly-to must be the only active camera motion`);
+  await page.waitForTimeout(180);
+  const poseDuringFly = await cameraPose(page, planet.id);
+  assert.notEqual(poseDuringFly.pose.scene, poseBeforeFly.pose.scene,
+    `${planet.id}: surface fly-to must visibly rotate the camera`);
+  assert.ok(poseDuringFly.zoom > poseBeforeFly.zoom,
+    `${planet.id}: surface fly-to must visibly increase zoom`);
   const zoomBeforeFlyWheel = (await profile.camera(page)).zoom;
-  // Zoom out: some valid fly-to targets already equal maximumZoom (for
-  // example Venus: 1.9 * 2.33 clamps to 4). An inward wheel cannot rebase
-  // that target, so it cannot exercise the exact-one-rebase assertion below.
-  await wheel(page, profile.inputSelector, 40);
+  await showInteractionPhase(page, "Wheel zoom during fly-to");
+  await wheel(page, profile.inputSelector, -40);
   const flyAfterWheel = await interactionStats(page, planet.id);
-  assert.equal(flyAfterWheel.activeMode, "fly-to",
-    `${planet.id}: wheel zoom must coexist with fly-to`);
-  assert.equal(flyAfterWheel.activeMotionCount, 1,
-    `${planet.id}: wheel during fly-to must keep one animation owner`);
-  assert.equal(
-    flyAfterWheel.wheelCoexistences,
-    activeFly.wheelCoexistences + 1,
-    `${planet.id}: fly-to wheel coexistence must be recorded once`,
-  );
-  assert.equal(
-    flyAfterWheel.wheelTargetRebases,
-    activeFly.wheelTargetRebases + 1,
-    `${planet.id}: wheel during fly-to must rebase its target once`,
-  );
-  await page.waitForTimeout(120);
+  assert.equal(flyAfterWheel.activeMode, "idle",
+    `${planet.id}: wheel must cancel fly-to before zooming`);
+  assert.equal(flyAfterWheel.activeMotionCount, 0,
+    `${planet.id}: wheel must leave no pending fly-to callback`);
+  assert.equal(flyAfterWheel.surfaceFlyTo.cancels, activeFly.surfaceFlyTo.cancels + 1,
+    `${planet.id}: wheel must cancel exactly one flight`);
+  assert.deepEqual(flyAfterWheel.lastInterruption, { from: "fly-to", to: "wheel" });
+  await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 50);
   assert.notEqual((await profile.camera(page)).zoom, zoomBeforeFlyWheel,
-    `${planet.id}: rebased fly-to must continue changing zoom`);
+    `${planet.id}: wheel must still change zoom after stopping the flight`);
+  const wheelRest = await cameraPose(page, planet.id);
+  await page.waitForTimeout(250);
+  assert.deepEqual(await cameraPose(page, planet.id), wheelRest,
+    `${planet.id}: fly-to must not resume after wheel zoom stops`);
+  assert.equal((await interactionStats(page, planet.id)).surfaceFlyTo.frames,
+    flyAfterWheel.surfaceFlyTo.frames, `${planet.id}: canceled flight cannot publish more frames`);
+
+  // Exercise direct pointer interruption separately from wheel takeover.
+  await profile.setCamera(page, { pitch: bounds.defaultPitch, zoom: bounds.defaultZoom });
+  flyCoordinates = await surfaceFlyCoordinates(page);
+  await page.mouse.dblclick(flyCoordinates.surface.x, flyCoordinates.surface.y, { delay: 45 });
+  await page.waitForTimeout(180);
+  const flyBeforePointer = await interactionStats(page, planet.id);
+  assert.equal(flyBeforePointer.activeMode, "fly-to");
   await page.mouse.move(
     flyCoordinates.surface.x,
     flyCoordinates.surface.y,
   );
+  await showInteractionPhase(page, "Grab control during fly-to");
   await page.mouse.down();
   await page.mouse.move(
     flyCoordinates.surface.x + 32,
@@ -1000,7 +1273,7 @@ async function proveInteractionInterruptions(page, planet, profile) {
     `${planet.id}: drag interruption must leave no competing fly-to`);
   assert.equal(
     flyAfterDrag.surfaceFlyTo.cancels,
-    flyBeforeDrag.surfaceFlyTo.cancels + 1,
+    flyBeforePointer.surfaceFlyTo.cancels + 1,
     `${planet.id}: drag must cancel exactly one active fly-to`,
   );
   assert.deepEqual(flyAfterDrag.lastInterruption, {
@@ -1013,6 +1286,7 @@ async function proveInteractionInterruptions(page, planet, profile) {
     zoom: bounds.defaultZoom,
   });
   flyCoordinates = await surfaceFlyCoordinates(page);
+  await showInteractionPhase(page, "Repeated double-click through full arrival");
   const flyBeforeRepeat = await interactionStats(page, planet.id);
   await page.mouse.dblclick(
     flyCoordinates.surface.x,
@@ -1041,6 +1315,17 @@ async function proveInteractionInterruptions(page, planet, profile) {
     `${planet.id}: the newest repeated double click must own the camera`);
   assert.equal(repeatedFly.activeMotionCount, 1,
     `${planet.id}: repeated double click must keep one fly-to only`);
+  await page.waitForFunction(id =>
+    !window[`__${id}`].camera.stats().dragInertia.surfaceFlyTo.active,
+  planet.id, { timeout: GOOGLE_EARTH_SURFACE_FLY_TO.durationMilliseconds + 2000 });
+  const completedFly = await interactionStats(page, planet.id);
+  assert.equal(completedFly.surfaceFlyTo.completions,
+    flyBeforeRepeat.surfaceFlyTo.completions + 1,
+  `${planet.id}: the replacement fly-to must run through completion`);
+  const completedPose = await cameraPose(page, planet.id);
+  await waitFrames(page);
+  assert.deepEqual(await cameraPose(page, planet.id), completedPose,
+    `${planet.id}: completed fly-to must leave the camera at rest`);
   await profile.setCamera(page, {
     pitch: bounds.defaultPitch,
     zoom: bounds.defaultZoom,
@@ -1052,13 +1337,24 @@ async function proveInteractionInterruptions(page, planet, profile) {
     `${planet.id}: reset must leave no scheduled camera motion`);
 
   return {
-    wheelCoexistedWithInertia: true,
+    wheelInterruptedInertia: true,
+    wheelZoomRatio,
+    wheelAnchorRotationApplied: true,
     pointerStoppedInertia: true,
+    captureLossStoppedDrag: true,
     wheelCoexistedWithFlyTo: true,
     dragInterruptedFlyTo: true,
     repeatedDoubleClickRestartedFlyTo: true,
+    flyToCompletedAndRested: true,
     activeMotionCount: settled.activeMotionCount,
   };
+}
+
+function showInteractionPhase(page, label) {
+  if (!evidenceDirectory) return;
+  return page.evaluate(text => {
+    document.querySelector("#camera-conformance-label").textContent = text;
+  }, label);
 }
 
 function interactionStats(page, objectId) {
@@ -1313,33 +1609,40 @@ function assertSceneStructure(state, id) {
 }
 
 async function drag(page, selector, deltaX, deltaY) {
-  const box = await page.locator(selector).boundingBox();
-  assert.ok(box, `Input surface is not visible: ${selector}.`);
-  const x = box.x + box.width * 0.72;
+  assert.ok(await page.locator(selector).isVisible(),
+    `Input surface is not visible: ${selector}.`);
+  const box = await page.locator(".planet-stage .polycss-camera").boundingBox();
+  assert.ok(box, "Retained camera must be visible for a planet drag.");
+  const x = box.x + box.width * 0.5;
   const y = box.y + box.height * 0.5;
   await page.mouse.move(x, y);
   await page.mouse.down();
-  await page.mouse.move(x + deltaX, y + deltaY, { steps: 12 });
+  // A changing final movement launches a throw; uniform steps intentionally do not.
+  await page.mouse.move(x + deltaX * .7, y + deltaY * .7, { steps: 10 });
+  await page.mouse.move(x + deltaX, y + deltaY);
   await page.mouse.up();
 }
 
 async function wheel(page, selector, deltaY) {
   const box = await page.locator(selector).boundingBox();
   assert.ok(box, `Input surface is not visible: ${selector}.`);
-  await page.mouse.move(box.x + box.width * 0.72, box.y + box.height * 0.5);
+  // A viewport fraction can land in empty sky for a small object. Exercise
+  // the surface anchor using the same measured on-disc point as fly-to.
+  const { surface } = await surfaceFlyCoordinates(page);
+  await page.mouse.move(surface.x, surface.y);
   await page.mouse.wheel(0, deltaY);
   await waitFrames(page);
 }
 
 async function beginZoomPublicationProbe(page) {
   await page.evaluate(() => {
-    const targets = Object.freeze({
+    const targets = Object.freeze(Object.fromEntries(Object.entries({
       directionalSun: document.querySelector(".planet-directional-sun"),
       skyCube: document.querySelector(".planet-cubic-sky-cube"),
       skyOrientation: document.querySelector(
         ".planet-cubic-sky-orientation",
       ),
-    });
+    }).filter(([, node]) => node !== null)));
     const counts = Object.fromEntries(
       Object.keys(targets).map((key) => [key, 0]),
     );

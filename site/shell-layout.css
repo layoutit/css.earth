@@ -109,6 +109,7 @@ body[data-object-shell] {
   }
 
   .planet-stage {
+    position: fixed;
     inset-inline-start: 0;
     translate: var(--explorer-scene-offset) 0;
   }

@@ -7,12 +7,15 @@ const output = new URL("../site/preparedPanel.mjs", import.meta.url);
 const size = sectionText("Size and Distance");
 const orbit = sectionText("Orbit and Rotation");
 const moons = sectionText("Moons");
+const rings = sectionText("Rings");
 
 const distance = capture(size, /\(228 million kilometers\)/u, "228 million km");
 const radius = Number(capture(size, /\((3,390) kilometers\)/u).replace(",", ""));
 const year = capture(orbit, /same as (687 Earth days)/u);
 const day = `${capture(orbit, /every (24\.6) hours/u)} hours`;
+const axialTilt = `${capture(orbit, /tilted (25) degrees/u)}°`;
 assertIncludes(moons, "Mars has two small moons");
+assertIncludes(rings, "Mars has no rings");
 for (const required of [
   "dusty, cold, desert world",
   "very thin atmosphere",
@@ -27,12 +30,15 @@ export const PREPARED_MARS_PANEL = deepFreeze({
   planetId: "mars",
   introduction: "Mars is a cold, dusty desert world with a thin atmosphere, polar ice caps, extinct volcanoes, deep canyons, seasons, and weather.",
   facts: [
-    { label: "Distance", value: distance },
-    { label: "Diameter", value: `${(radius * 2).toLocaleString("en-US")} km` },
-    { label: "Year", value: year },
-    { label: "Day", value: day },
-    { label: "Moons", value: String(PREPARED_MARS_MOONS.moons.length) },
+    { id: "distance-from-sun", label: "Distance from Sun", value: distance },
+    { id: "diameter", label: "Diameter", value: `${(radius * 2).toLocaleString("en-US")} km` },
+    { id: "orbital-period", label: "Orbital period", value: year },
+    { id: "rotation-period", label: "Rotation period", value: day },
+    { id: "axial-tilt", label: "Axial tilt", value: axialTilt },
+    { id: "moon-count", label: "Moons", value: String(PREPARED_MARS_MOONS.moons.length) },
+    { id: "ring-system", label: "Rings", value: "None" },
   ],
+  moreFacts: [],
   sources: {
     editorial: {
       sourceId: editorial.sourceId,

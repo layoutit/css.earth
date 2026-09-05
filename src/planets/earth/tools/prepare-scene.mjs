@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import {
@@ -243,8 +244,9 @@ const scene = Object.freeze({
     directionalSunLeafCount: 1,
     interiorLeafCount: interior.leafCount,
     cityPageLeafCount: citySource.presentation.poolSize,
-    retainedLeafCount: surfaceLeafCount + 3 + citySource.presentation.poolSize,
-    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount + citySource.presentation.poolSize,
+    noisePageLeafCount: PREPARED_EARTH_NOISE.poolSize,
+    retainedLeafCount: surfaceLeafCount + 3 + citySource.presentation.poolSize + PREPARED_EARTH_NOISE.poolSize,
+    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount + citySource.presentation.poolSize + PREPARED_EARTH_NOISE.poolSize,
     runtimeGeometryPreparation: false,
     runtimeRasterization: false,
   }),

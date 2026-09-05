@@ -7,7 +7,7 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { pageBounds, childAddresses, prepareCityPageGeometry, createCityGeographicSampler,
-  createCityCoverageSampler, cityPageRasterDensity } from "../tools/city/page-geometry.mjs";
+  createCityCoverageSampler, cityPageRasterDensity, cityGeographicFrame } from "../tools/city/page-geometry.mjs";
 import { resamplePageRgba, resampleMappedPageRgba } from "../tools/city/resample-page.mjs";
 import { projectCityPage, selectCityPages } from "../runtime/city-page-selection.mjs";
 import { createCityIndex } from "../runtime/city-index.mjs";
@@ -24,7 +24,7 @@ test("geographic city longitudes use Blue Marble's antimeridian atlas origin", (
   for (const [x,y,expectedLeaf] of [[345,345,26],[857,157,10],[70,427,18]]) {
     const page = prepareCityPageGeometry({level:5,x,y},PREPARED_EARTH_SCENE);
     const leaf = PREPARED_EARTH_SCENE.body.bands.find(b=>b.latitudeIndex===Math.floor(y/32)).leaves[expectedLeaf];
-    const matrix = leaf.style.match(/matrix3d\(([^)]+)\)/)[1].split(",").map(Number);
+    const matrix = cityGeographicFrame(leaf).split(",").map(Number);
     assert.deepEqual(page.normal,matrix.slice(8,11));
     const midpoint = page.corners[0].map((_,axis)=>page.corners.reduce((sum,p)=>sum+p[axis],0)/4);
     // The prepared CSS basis maps mesh longitude to [sin(lon), cos(lon)].

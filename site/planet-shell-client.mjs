@@ -37,8 +37,8 @@ export function mountPlanetShell({
     throw error;
   }
   return Object.freeze({
-    setDestinations: objectBrowser.setDestinations,
-    setMotionEnabled: settingsController.setMotionEnabled,
+    setDestinations(provider) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
+    setMotionEnabled(enabled) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
     setPlaybackState(state) {
       if (!lifetime.disposed) settingsController.setPlaybackState(state);
     },
@@ -153,6 +153,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     onSelected(place) { currentSearchValue = place.name; render(false); search.blur(); },
     onReset() { currentSearchValue = selectedSearchValue; render(false); },
   });
+  lifetime.onDispose(() => destinations?.destroy());
   let open = false;
   const filter = () => {
     const query = search.value.trim().toLocaleLowerCase("en");

@@ -62,7 +62,7 @@ try{
       if(response.url().includes("mapproxy/wmts"))run.imagery.push({url:response.url(),status:response.status()});});
     try{
       await page.goto(`http://127.0.0.1:${server.address.port}/earth/`);await page.waitForFunction(()=>window.__earth?.ready);
-      await page.evaluate(()=>{window.__earth.pause();window.__savedNodes=[...document.querySelector(".planet-stage").querySelectorAll("*")];});
+      await page.evaluate(()=>{{ const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }window.__savedNodes=[...document.querySelector(".planet-stage").querySelectorAll("*")];});
       for(const sample of [...samples,{...samples[0],id:samples[0].id+"-revisit"}]){
         const camera=noise?noisePlan.camera:prepareLocationCamera(scene,prepareLocationPoint(scene,sample.lon,sample.lat),noise?512:2048);
         const start=Date.now();

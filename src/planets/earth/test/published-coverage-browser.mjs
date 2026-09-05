@@ -41,7 +41,7 @@ try {
       await page.goto(`${base}/earth/`);
       await page.waitForFunction(() => window.__earth?.ready);
       await page.evaluate(() => {
-        window.__earth.pause();
+        { const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }
         window.__coverageNodes = [...document.querySelector(".planet-stage").querySelectorAll("*")];
       });
       for (const sample of samples) {
