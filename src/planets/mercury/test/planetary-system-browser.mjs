@@ -917,6 +917,13 @@ function scanRays(diff, width, height, centre, { angles, step, threshold, minRad
 function measureTrail(rays, camera, body, sunPixel, predicted, markerSize, otherPolars = []) {
   const here = camera.project(body.position);
   const step = camera.project(lighting.subtract(body.position, lighting.scale(body.velocity, -0.01)));
+  // A body behind the camera (a dolly that cannot reach the view) has no
+  // trail to measure: every sample is unjudged rather than a crash.
+  if (here === null || step === null) {
+    const unmeasurable = (offsetDegrees) => ({ offsetDegrees, ambiguous: true, found: null, hits: 0, considered: 0, strength: null });
+    return { motionSign: 0, unmeasurable: true,
+      behind: TOLERANCES.trailBehindDegrees.map(unmeasurable), ahead: TOLERANCES.trailAheadDegrees.map(unmeasurable) };
+  }
   const angleOf = (pixel) => Math.atan2(pixel[1] - sunPixel[1], pixel[0] - sunPixel[0]);
   const motionSign = Math.sign(wrapAngle(angleOf(step) - angleOf(here)));
   const bodyRadius = Math.hypot(here[0] - sunPixel[0], here[1] - sunPixel[1]);
@@ -928,6 +935,9 @@ function measureTrail(rays, camera, body, sunPixel, predicted, markerSize, other
   const sample = (offsetDegrees, direction) => {
     const anomaly = body.eccentricAnomaly + direction * Math.max(offsetDegrees, clearanceDegrees) * Math.PI / 180;
     const pixel = camera.project(body.pointAt(anomaly));
+    if (pixel === null) {
+      return { offsetDegrees, ambiguous: true, found: null, hits: 0, considered: 0, strength: null };
+    }
     const angle = angleOf(pixel);
     const expectedRadius = Math.hypot(pixel[0] - sunPixel[0], pixel[1] - sunPixel[1]);
     // The seven rays nearest the sample angle: on each, the crossing nearest
