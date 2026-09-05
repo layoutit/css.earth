@@ -12,6 +12,9 @@ importers:
         specifier: 0.2.11
         version: 0.2.11
     devDependencies:
+      '@cssearth/astronomy':
+        specifier: workspace:*
+        version: link:packages/astronomy
       astro:
         specifier: ^7.2.4
         version: 7.2.9(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.4.0)

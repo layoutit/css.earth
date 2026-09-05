@@ -222,13 +222,17 @@ export const EXCLUDED_CATALOGS = Object.freeze({
 
 const IMPORT_NOTE =
   "The TypeScript source imports relative modules as `./x.js` while the files " +
-  "are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, " +
-  "so browser-side consumption works verbatim. Node does not: importing " +
-  "src/index.ts directly fails on the first `.js` specifier. When a Node-side " +
-  "consumer is wired (tools/prepare-solar-geometry.mjs is the obvious first), " +
-  "one of these is needed: a sync-time specifier rewrite of `.js` to `.ts`, a " +
-  "small module-resolver hook, or a build step. None is chosen yet; the source " +
-  "stays as upstream wrote it until that decision is made.";
+  "are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that " +
+  "natively, so browser-side consumption works verbatim. Node does not: " +
+  "importing src/index.ts directly fails on the first `.js` specifier. " +
+  "Decision: a package is consumed through its own build step, never a " +
+  "specifier rewrite or a resolver hook, so the source stays byte-identical " +
+  "to its origin. For the astronomy package `pnpm build:astronomy` runs its " +
+  "tsup config into the gitignored dist/, which the workspace link resolves " +
+  "as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); " +
+  "Node-side consumers go through src/platform/astronomy-package.mjs " +
+  "(tools/prepare-solar-geometry.mjs first). A catalog consumer would be " +
+  "wired the same way.";
 
 const toPosix = (path) => path.split(sep).join("/");
 

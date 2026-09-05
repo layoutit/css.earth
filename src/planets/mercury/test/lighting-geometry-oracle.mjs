@@ -8,9 +8,10 @@
 //
 // Inputs:
 //   - Mercury's heliocentric position at the pinned epoch, ICRF axes, from the
-//     galaxio astronomy build (VSOP87A) when it is available, otherwise from a
-//     checked-in JPL Horizons vector (see FALLBACK_EPHEMERIS).
-//   - Mercury's pole from the IAU/WGCCRE rotation elements (galaxio when
+//     vendored astronomy package's build (VSOP87A; `pnpm build:astronomy`)
+//     when it is available, otherwise from a checked-in JPL Horizons vector
+//     (see FALLBACK_EPHEMERIS).
+//   - Mercury's pole from the IAU/WGCCRE rotation elements (the package when
 //     available, otherwise the 2015 WGCCRE report formulas evaluated here).
 //   - The J2000 obliquity (IAU 1976: 84381.448 arcsec).
 //   - The J2000 galactic frame constants (Hipparcos vol. 1 §1.5.3).
@@ -24,8 +25,8 @@
 
 export const EPOCH_JD_TT = 2461286.5;
 
-const DEFAULT_ASTRONOMY_URL =
-  "/Users/apresmoi/Documents/galaxio/packages/astronomy/dist/index.js";
+// The workspace package, through its own build (packages/astronomy/dist).
+const DEFAULT_ASTRONOMY_URL = "@cssearth/astronomy";
 
 // IAU 1976 obliquity of the ecliptic at J2000 (84381.448 arcsec).
 export const OBLIQUITY_J2000_DEGREES = 84381.448 / 3600;
@@ -55,7 +56,7 @@ export const FALLBACK_EPHEMERIS = Object.freeze({
 });
 
 export async function loadMercuryEphemeris({
-  astronomyUrl = process.env.GALAXIO_ASTRONOMY_URL ?? DEFAULT_ASTRONOMY_URL,
+  astronomyUrl = process.env.CSSEARTH_ASTRONOMY_URL ?? DEFAULT_ASTRONOMY_URL,
 } = {}) {
   let astronomy = null;
   try {
@@ -75,7 +76,7 @@ export async function loadMercuryEphemeris({
   );
   const elements = astronomy.bodyRotationAt("mercury", EPOCH_JD_TT);
   const ephemeris = Object.freeze({
-    source: `galaxio astronomy (VSOP87A + IAU/WGCCRE) at ${astronomyUrl}`,
+    source: `astronomy package (VSOP87A + IAU/WGCCRE) at ${astronomyUrl}`,
     fallback: false,
     heliocentricIcrfAu: Object.freeze([...heliocentricIcrfAu]),
     pole: Object.freeze({
@@ -91,7 +92,7 @@ export async function loadMercuryEphemeris({
   );
   if (separation > 0.01) {
     throw new Error(
-      `galaxio Mercury position disagrees with the Horizons vector by ` +
+      `Astronomy package Mercury position disagrees with the Horizons vector by ` +
         `${separation.toFixed(4)} degrees.`,
     );
   }

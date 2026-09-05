@@ -50,9 +50,16 @@ sync. Nothing under it is edited by hand.
   from the provenance fields of `upstream.json`. A local edit fails loudly
   instead of diverging from the source.
 - Workspace: `pnpm-workspace.yaml` lists `packages/*`, so `@cssearth/astronomy`
-  resolves as a workspace package. No cssEarth consumer imports it yet;
-  `tools/prepare-solar-geometry.mjs` still reads a separately built copy
-  through its own environment override (see that script).
-- No specifier rewrite is applied. The source imports `./x.js` for `./x.ts`
-  files; Vite and Astro resolve that, Node does not. The open decision on
-  Node-side consumption is recorded in `upstream.json` under `importNote`.
+  resolves as a workspace package; the root `package.json` depends on it
+  (`workspace:*`). It is consumed through its own build: `pnpm build:astronomy`
+  runs the mirrored `tsup.config.ts` into the gitignored `dist/` (ESM, CJS and
+  types), and `pnpm install` runs that as `postinstall`, so a fresh clone
+  resolves the package from Node and from Vite alike. Consumers are
+  preparation-time only, through `src/platform/astronomy-package.mjs`;
+  `tools/prepare-solar-geometry.mjs` (`pnpm prepare:solar-geometry`) is the
+  first and regenerates `src/platform/solar-geometry.mjs` bit-for-bit. Nothing
+  in the browser runtime imports it; its results are checked in.
+- No specifier rewrite is applied and no loader hook is installed. The source
+  imports `./x.js` for `./x.ts` files; Vite and Astro resolve that, Node does
+  not, which is why the build is the consumption path (`upstream.json` under
+  `importNote`).
