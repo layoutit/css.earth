@@ -1,570 +1,115 @@
-# Shared runtime implementation
-
-This implements the [approved proposal](shared-runtime-architecture-proposal.md)
-in one architectural PR. It covers the Sun, Mercury, Venus, Earth, Moon, Mars,
-Jupiter, Saturn, Uranus, Neptune, and Pluto.
-
-Status: the shared architecture, explicitly authorized Earth repair, and common
-orbit-controller migration are implemented. All eleven objects now construct
-the same retained orbit controller. See the [generic contract proof](generic-runtime-contract-proof.md)
-for the current source, browser, negative-control, and validation evidence.
-The inspected `earth-8x` raster workaround introduced close-up stretching and
-was withdrawn. On 2026-09-04, the user accepted the shown Earth screenshots,
-their Pixelmatch 0.1 comparisons, and the later complete fixed-six readback
-matrix. The strict exact-pixel protocol remains failed and is not reported as
-a pass; the explicit human decision closes the visual gate for this PR.
-
-## User acceptance of the shown Earth visuals
-
-After reviewing the original captures and their Pixelmatch diffs, the user
-said "accepted" on 2026-09-04. The accepted evidence is these two comparisons,
-using Pixelmatch 7.2.0 with `threshold: 0.1` and default anti-alias exclusion:
-
-| Shown comparison | Image dimensions | Mismatched pixels | Percentage |
-| --- | --- | --- | --- |
-| Unchanged Earth-only baseline, captured frame 0 versus frame 5 | 2880×1800 | 62 of 5,184,000 | 0.001196% |
-| Raw main versus repaired Earth, matched maximum-zoom close-up | 1440×900 | 105,620 of 1,296,000 | 8.149691% |
-
-The second comparison includes the intentional Earth texture-preparation
-change. This is human approval of the displayed result, not a claim of zero
-pixel differences or a new general mismatch allowance. The earlier failed
-exact checks remain recorded below; no automated threshold or mask was changed.
-
-The input PNG hashes, options, counts, and output diff hashes are recorded in
-`output/earth-pixelmatch-0p1-jwoHPe/report.json`. The ignored reproduction script
-is `output/review-pixelmatch-0p1.mjs`; it reads the original saved captures
-without opening a browser or altering them. Both diff images were shown inline
-to the user before acceptance.
-
-## User acceptance of the complete fixed-six matrix
-
-The final headless diagnostic captured all 96 matched conditions for both the
-Earth-only baseline and candidate. Each condition retained six consecutive
-native readbacks without retries or favorable-frame selection: 576 matched
-pairs in total. It verified the same observed camera/lens pose, loaded prepared
-bytes, GPU identity, rendered version, source hashes, harness hashes, and stable
-pre/post DOM state for every condition.
-
-Pixelmatch 7.2.0 at `threshold: 0.1`, with default anti-alias exclusion, found
-573 of 576 pairs unchanged. Of the three nonzero pairs:
-
-| Pair | Mismatched pixels | Percentage | Interpretation |
-| --- | ---: | ---: | --- |
-| Saturn, 1440 wide, DPR 2, scene, phase 0 | 121,817 of 5,184,000 | 2.349865% | The baseline omitted an upper-ring region; the candidate was complete. Phases 1–5 were byte-identical. |
-| Earth, 390 wide, DPR 2, shell, phase 1 | 29 of 1,404,000 | 0.002066% | Sparse readback variation. |
-| Earth, 1440 wide, DPR 2, shell, phase 0 | 1 of 5,184,000 | 0.000019% | One Pixelmatch-visible pixel. |
-
-The remaining nine objects were Pixelmatch-zero across all 432 pairs. The
-candidate had no missing-region coverage failure. The baseline had one, on the
-same Saturn phase-0 frame. Both sides had 12 nonrepeatable six-frame conditions;
-these are reported, not discarded. An independent sequence comparison confirms
-that Saturn phase 0 differs and phases 1–5 are byte-identical.
-
-On 2026-09-04, after the baseline, candidate, and absolute Pixelmatch evidence
-were shown, the user said "accepted". This explicit human decision accepts the
-complete matrix for this PR. It does not convert the diagnostic into a strict
-exact-pixel pass, create a reusable tolerance, waive future visual review, or
-authorize merge. Evidence is under `output/shared-runtime-report-only-2/`;
-Pixelmatch details are in
-`output/shared-runtime-report-only-2/pixelmatch-0p1-UjvQKp/report.json`.
-An adversarial subagent review independently rehashed all 1,152 top-level PNGs,
-all 1,152 frame copies, 384 state records, 277 source entries, 806 harness
-entries, 76 prepared fingerprints, and 305 unique loaded assets. It recomputed
-all three nonzero Pixelmatch results and confirmed that report-only mode always
-exits nonzero while the unchanged strict path remains fail-closed. Its result is
-`PASS_WITH_QUALIFICATIONS`; the report is
-`output/shared-runtime-report-only-2-review.md`.
-
-## What changed
-
-The router now owns automatic playback permission. It combines readiness,
-the user's Motion request, visibility, and reduced-motion preference. Objects
-keep their own animations and clocks. Changing speed does not grant playback
-permission, and clearing reduced motion does not turn Motion on.
-
-Three small shared modules coordinate work without knowing object IDs:
-
-- `scene-lifetime.mjs` owns once-only cleanup and cancellable waits.
-- `prepared-image-store.mjs` handles prepared image decoding and ownership.
-- `latest-selection.mjs` prevents stale selections from publishing and
-  separates recoverable preparation failure from fatal publication failure.
-
-The existing speed control is shared across all eleven clients. Each package
-exports its actual lens and extra-settings content. The shell always supplies
-Settings, Motion, and high contrast; a package needs no fake lens or setting
-to use that shell. Browser profiles validate the declared controls against
-the rendered controls.
-
-Specialized row, material-neighborhood, and grouped-image caches remain inside
-their object packages. Camera math, drag/inertia/fly-to behavior, Saturn's native
-compositor wrapper, and all non-Earth asset banks are unchanged.
-Both tested display scales use the same highest-density bank.
-
-The user identified `earth-8x` as a possible source of an Earth fix. Commit
-`849ac46` temporarily copied only its uncommitted 16.25-to-4 raster-scale
-change. A later close-up review rejected it; the generator, regenerated scene,
-and added scale-bound assertions were restored exactly to `91dae216`.
-The subsequent Earth repair below changes Earth preparation and its surface
-image ownership. City paging, deeper zoom, yaw changes, dependencies, and
-policy WIP were never copied.
-The user's `earth-8x` worktree was not modified.
-
-### Earth surface repair
-
-Earth now bakes the surface's projective texture warp into transparent raster
-pixels ahead of runtime. The retained scene transports affine rectangles;
-the shared renderer is unchanged. This follows the existing Pluto preparation
-approach, with Earth-owned source mapping and image-bank ownership.
-
-The plan contains 448 exterior cells. The 308 cutaway outer cells reuse their
-exact geometry and atlas addresses. Source sampling remains tied to the 8K
-input, the existing geometry and overlap remain, and maximum zoom stays 8.
-Tests check composed geometry, directional source-sampling density, continuous
-latitude sampling, longitude wrapping, page bounds, and cutaway reuse.
-
-Seven static pages, each no larger than 4096×4096, replace one large image.
-The largest page is 61.75 MiB and the complete exterior bank is 361.375 MiB
-when expressed as uncompressed RGBA byte counts. These are dimensional costs,
-not measurements of browser or GPU memory. A single-image trial had unacceptable
-cold-start stalls and was rejected; paging bounds individual image size, not
-the complete bank's size.
-
-The object owns only its active surface bank and latest pending bank, with
-two owned page decodes at a time. Hidden surface palettes contain no image URLs.
-Retirement clears image ownership without waiting for a cancelled native
-decode promise to settle. Tests cover stale A/B/A completion, never-settling
-cancelled decode, failed preparation preserving the visible view, fatal
-publication, and teardown. Neither display scale selects another asset bank.
-
-Full Earth regeneration also corrects seven pre-existing recipe/asset
-mismatches: the six inner-shell pole images and the night-lights thumbnail.
-The unchanged main preparation functions reproduce the new bytes exactly;
-the old/new execution order gives identical bytes and does not mutate source
-buffers. The old poles were lossy despite the checked lossless recipe. Source
-inputs and image-library versions match. These are real RGB changes with
-unchanged pole alpha, not merely container metadata. Their historical encoding
-settings are unknown. Restoring only old bytes would conceal the reproducibility
-mismatch. Evidence: `output/earth-affine-asset-reproducibility.md`.
-
-## Proof map
-
-| Obligation | Executable evidence |
-| --- | --- |
-| One orbit controller for every package; unregistered IDs use the same contract | `site/test/generic-orbit-contract.test.mjs`, `site/test/generic-orbit-browser.mjs`, `site/test/object-orbit-failure.test.mjs` |
-| Playback policy and stale session isolation | `site/test/runtime-policy.test.mjs`, `site/test/router-runtime.test.mjs`, `site/test/runtime-playback-browser.mjs` |
-| Cleanup, cancellation, and callback failure | `src/platform/scene-lifetime.test.mjs`, `src/platform/cubic-sky-lifetime.test.mjs`, `site/test/shell-lifetime.test.mjs`, package lifetime tests |
-| Image ownership, late settlement, retry, and bounded caches | `src/platform/prepared-image-store.test.mjs` and object-owned row/group/neighborhood cache tests |
-| Selection order, rollback, and publication failure | `src/platform/latest-selection.test.mjs`, package coordination tests, shared browser conformance |
-| Real compound/deferred publication | `site/test/runtime-complex-browser.mjs`: Neptune's later material row and Saturn's coupled lens/interior/rings/shadows |
-| Optional controls without weaker existing coverage | `site/test/load-browser-profile.test.mjs`, shell/contract/package tests, rendered-control conformance |
-| Retained DOM, interactions, and canonical bank | `site/test/planet-browser-conformance.mjs` and all eleven package browser suites |
-| Earth affine preparation and complete paged-bank selection | `src/planets/earth/test/surface-raster.test.mjs`, `preparation.test.mjs`, and prepared-page-derived `browser-profile.mjs` |
-| Earth page ownership, stale selection, failed decode, and hidden palettes | `src/planets/earth/test/surface-image-banks.test.mjs` and `runtime-lifetime.test.mjs` |
-| Actual back/forward-cache admission | `site/test/runtime-bfcache-browser.mjs`, including `pageshow.persisted` and document identity |
-| Matched scene/shell regression | `tools/audit-shared-runtime.mjs`: Chrome version, prepared hashes, loaded-response hashes, raw captures, absolute differences, and Saturn coverage |
-
-## Local acceptance record
-
-Implementation checkout: `/Users/ekrof/fed/cssEarth-runtime`.
-Base: `4ba3c3c526abdfcf6c26def7fd635451f2d08eea` (`main`).
-Candidate server: `http://127.0.0.1:4230`.
-The reports below are local ignored artifacts, not hosted CI or independent
-approval. The initial architecture implementation is commit `91dae216`.
-The completion audit then repaired two additional object-local failure paths
-in Moon/Pluto and Venus, described below. The temporary scalar Earth workaround
-has no net effect; the separately authorized affine repair is described above.
-
-The following table records the latest Earth-repair qualification. Browser and
-visual checks remain separate from source, unit, and build success.
-
-| Gate | Result | Local report |
-| --- | --- | --- |
-| `pnpm acquire:planets -- --verify-only` | Pass with Earth repair | `output/runtime-source-verify-earth-final.log` |
-| `pnpm test` | 612 passed; none failed or skipped | Fresh 2026-09-04 terminal run; exit 0 |
-| `pnpm build` | Pass with Earth repair | `output/runtime-build-earth-final.log` |
-| `pnpm test:browser http://127.0.0.1:4230` | Pass at the final working tree; exit 0 | Playback `runtime-playback-1788547083056`; complex `runtime-complex-1788547171029` |
-| Earth preparation | 6 passed; 221 runtime asset hashes verified | `output/earth-affine-paged-preparation-tests.log` |
-| Matched visual regression | Accepted by explicit human review of the complete 96-condition, 576-pair diagnostic; strict exact protocol remains failed | `output/shared-runtime-report-only-2/` |
-| `git diff --check` | Pass before commit | Git working tree |
-
-The completed architecture browser run before the Earth repair used installed headless Google Chrome
-`152.0.7977.76`. It passed
-shared shell, introduction, and navigation gates; all 143 object conformance
-cases; 22 playback cases; six complex/deferred-selection cases; real
-back/forward-cache restoration for all eleven objects; and all eleven
-package-specific browser suites. Both display scales loaded the same canonical
-highest-density bank.
-
-The final Earth-repair run passed that same complete browser suite, including
-all 143 conformance cases, 22 playback cases, six complex-selection cases,
-real back/forward-cache admission for all eleven objects, and all eleven
-package suites. Conformance now verifies requests for all seven canonical
-Earth surface pages and its pole asset at both display scales. Earth smoke
-checks actual rendered page URLs, complete requested banks, empty hidden
-palettes, and one settled owned bank. Its separate doubled-scale run also
-passed with 999 retained leaves (`output/earth-affine-smoke-pages-2.log`).
-
-The final run includes two evidence-harness corrections. Playback observation
-now waits for permitted, mounted, nonpending native playback before requiring
-actual clock advancement; it still fails stuck or frozen clocks. Earth's
-old single-image count and unused pseudo-element checks were replaced with
-prepared-page-derived counts and actual rendered texture checks. The earlier
-failed runs are retained, not relabeled as passing. Final playback and complex
-reports are `output/playwright/runtime-playback-1788542752082/report.json` and
-`output/playwright/runtime-complex-1788542839353/report.json`.
-
-Independent Earth closure reviews checked source mapping, geometry, sampling,
-bank retirement, stale selection, publication failures, and fixture isolation.
-They reran 35 focused tests and verified all 221 runtime asset hashes. A final
-finding that canonical-page declarations were not consumed by conformance was
-closed: conformance now asserts their actual requests, and the full rerun
-passes both display scales. The separate visual review verified the failed
-288-frame baseline check below. The later complete matrix and explicit user
-decision are recorded above.
-
-Independent implementation reviews covered playback/lifetime/error boundaries,
-async presentation races, cleanup after partial failure, image ownership, and
-all eleven integrations. Repaired findings received focused regression tests
-and review. The separate visual decision is recorded above without relabeling
-the failed strict protocol.
-
-Late acceptance checks found and closed stage-attribute cleanup omissions,
-old-camera cleanup affecting replacement state, and an enabled speed button
-before the object module loaded. New tests cover those failures, including
-JavaScript-disabled initial HTML and speed changes while Motion, visibility,
-or reduced-motion policy blocks playback. The browser race harness now delays
-successful native decode completion: withholding HTTP while an owner retires
-an image can leave Chrome's cancelled decode unsettled. Per-case deadlines
-prevent that kind of test stall from appearing as an indefinitely running gate.
-
-The completion audit found two more failure paths and repaired them without
-changing rendering, prepared data, or camera behavior:
-
-- Moon/Pluto now register lens-metadata cleanup beside camera ownership, before
-  a sky/Sun constructor can fail. Ten cases cover both failure points, cleanup
-  errors, pre-attachment metadata, and replacement-root protection. Six fail
-  against the previous code and all ten pass with the repair.
-- Venus atmosphere/stars callbacks now observe disposal and route live
-  publication failures through the existing `onError` boundary. Those handlers
-  and shadows stop state writes after synchronous disposal. Nine cases cover
-  normal use, partial publication failure, retained callbacks, nested disposal,
-  and startup throw semantics.
-
-An independent reviewer checked source and test fidelity and reran all 19 new
-cases, then both complete test files (69 passed, none failed or skipped). The
-constructor tests execute the production functions with actual prepared plans
-and controlled dependencies; they prove ownership behavior, not raster parity.
-The Venus tests import the production controls directly. The full post-repair
-source, 570-test, build, and browser gates then passed on the unchanged code
-under review. Playback and compound-selection reports are
-`output/playwright/runtime-playback-1788537310414/report.json` and
-`output/playwright/runtime-complex-1788537396845/report.json`; their recorded
-source hashes were rechecked against the reviewed files. This closes the two
-architecture findings, not the separate Earth visual-comparison blocker.
-
-## Visual qualification and the rejected Earth workaround
-
-The untouched baseline at `4ba3c3c526abdfcf6c26def7fd635451f2d08eea`
-was served from a clean detached worktree,
-`/Users/ekrof/fed/cssEarth-runtime-baseline`, at `http://127.0.0.1:4261`.
-All 1,941 runtime assets were verified against its manifests. Both servers
-displayed `Version 0.6`; an earlier server's stale `Version 0.1` label was not
-treated as a rendering regression or masked out.
-
-Chrome `152.0.7977.76` could not produce a
-repeatable full raw-main baseline matrix.
-Some paused captures differed by one channel level; others omitted large
-rectangular texture or shell regions while camera, animation times, prepared
-image URLs, and computed styles remained unchanged. These are failed
-qualification runs, not accepted visual comparisons.
-
-The audit keeps immutable capture conditions, settles before each screenshot,
-preserves both ordered phases, and requires three identical pairs before
-comparison. It verifies prepared hashes and actual loaded-response hashes,
-records source hashes, refuses evidence overwrite, compares both phases with
-zero pixel tolerance, and checks Saturn body/ring coverage. It does not select
-a favorable phase or use masks. Early Sun/Earth calibration runs passed in
-isolation, but the full raw-main matrix still failed. Isolated success does not qualify
-the complete PR.
-
-A bounded check with preinstalled Chrome Canary `155.0.8041.0` also failed.
-Native Apple M3 Max / Metal / Graphite rendering, GPU composition/rasterization,
-and zero GPU crashes were verified. Sun matched across two fresh contexts, but
-Earth produced 43 distinct images in 48 captures, including visibly missing
-regions. The check stopped before Saturn. Evidence is local:
-`/tmp/cssearth-canary-native-proof-FcQ9E6/report.json`, with raw numbered images
-and the failed frame-sequence package beside it. Browser-backend overrides
-that fell back to software were not accepted as native-GPU evidence; none are
-application changes. A later explicit software-composited headless diagnostic
-also failed on two unchanged Earth baseline captures (3,095 changed pixels).
-Its failed report is `output/headless-software-calibration-1/report.json`.
-
-The affine Earth diagnostic at `output/earth-affine-paged-diagnostic-1/report.json`
-completed 24 fresh contexts. Twenty met the exact repeated-pair criterion.
-Four did not: default desktop and maximum-normal mobile at doubled display
-scale, each repeated twice. Analysis of all six retained frames per failure
-found only 11–27 isolated varying pixels, maximum RGB range one, no alpha
-change, and no edge-adjacent varying pixels. These exact failures remain
-failures; they are not reported as zero-pixel parity. The separate calibration
-investigation is recorded in `output/earth-affine-readback-calibration.md`.
-
-### Independent Earth-only baseline and fixed-schedule check
-
-The new comparison fixture at
-`/Users/ekrof/fed/cssEarth-runtime-earth-affine-baseline` contains raw main plus
-only the Earth affine repair. It retains main's shared runtime, router,
-lifetimes, clocks, and selection handling. All 221 Earth assets and 26 source
-files match the candidate. The minimally adapted old Earth client has SHA256
-`f3c55b98aae8832f972da7cb6bda22e9f595866e105cc27e40bb273c0c5f84d1`.
-The independent fixture review is in `output/earth-affine-baseline-fixture/`.
-
-Its fixed-schedule A/A check captured 288 frames across 48 fresh contexts:
-16 Earth conditions, three contexts each, six frames each. Two contexts per
-condition established observed bounds, frozen before the third holdout.
-Every frame was retained. No favorable pair, region mask, or discarded early
-frame was used. This was a measurement, not an authorized tolerance change.
-
-The check failed. Early default-shell captures changed by up to 65 RGB levels
-on mobile and 55 on desktop; the desktop scene changed by up to 16. Later
-frames became exact or showed sparse one-level variation. Eleven conditions
-were byte-identical across all 18 frames, but that does not qualify the other
-five. The desktop doubled-scale shell holdout exceeded its frozen maximum
-pair count (39,194 versus 39,193) and union count (39,223 versus 39,217).
-These findings supersede any suggestion that the broader failure consists
-only of one-level readback noise.
-
-Independent review verified all 288 PNG hashes, 576 pre/post state snapshots,
-763 source hashes, seven harness hashes, actual loaded-byte hashes, and native
-GPU/server identity. Camera, styles, paused animation times, and bank state
-were unchanged. Early raster-detail settling is consistent with the images,
-but the check does not prove a particular Chrome internal cause. Neither
-later stable frames nor a fitted bound establish image-quality acceptance.
-Full evidence: `output/earth-affine-aa-baseline-1/report.json` and
-`output/earth-affine-aa-review.md`. The result remains failed; the strict
-matched baseline/candidate gate is unchanged and unmet.
-
-### Earlier rejected diagnostics
-
-A headed diagnostic completed 88 baseline conditions but its candidate failed
-after 29: only 54 of 58 completed phase comparisons matched. Four Earth phases
-had missing tiles, and the next Earth condition was unstable. The reports at
-`output/shared-runtime-visual-headed/{baseline,candidate}/report.json` are not
-accepted full comparisons. The user prohibited headed checks afterward; the
-audit now always launches headless Chrome. No further headed checks are used.
-
-### What the 8K branch actually supplied
-
-The inspected branch is `earth-8x`, at `419a0d9e38ec7e7fd3624f2585c7c093648a7d9e`,
-in `/Users/ekrof/fed/cssEarth-earth-8x`. Its commit message explicitly says texture
-stretching is unresolved and the experiment is not a validated rendering fix.
-Its dirty generator changes the projective raster scale from 16.25 to 4 amid
-city paging and deeper-zoom WIP. Independent review found no complementary
-change to the globe's projective helpers, imagery, or CSS.
-
-The isolated trial changed exactly 756 generated texture-layer records: 448
-exterior and 308 cutaway-shell leaves. Local nonpolar CSS boxes changed from
-520×520 to 128×128, while source imagery, UV mapping, geometry, and the existing
-maximum zoom of 8 stayed unchanged. Matrix composition remained equivalent
-within `2e-12`; that numerical result did not establish raster quality.
-These are local CSS dimensions, not measured GPU allocation or sample counts.
-
-The trial fixture at `/Users/ekrof/fed/cssEarth-runtime-fixed-baseline` contains
-main plus only that generator and scene change. All 972 other tracked files
-and 1,971 public files matched the untouched baseline. Its scene SHA256 is
-`b99fb56f5cac54be6ca6b54208fc9f59d6dabe669325d5dcd04a3fb48b46f00a`.
-The fixture is preserved as diagnostic evidence, not an accepted baseline.
-
-Its full headless run produced 96 repeatable conditions, 192 phase images,
-and 576 sequence frames, with no capture errors. Independent checks verified
-124 checkout-file hashes, 800 repository harness hashes, 76 prepared/manifest
-fingerprints, 293 unique loaded assets, and all 44 Saturn coverage probes.
-The record is `output/shared-runtime-visual-earth-fix/baseline/report.json`.
-**Repeatability was not image-quality acceptance:** visual inspection found
-stretched wedges across Tibet and western China at maximum zoom.
-
-Eight matched close-ups of untouched main confirmed the wedges were introduced
-by the scale-4 trial, not by the runtime refactor. See
-`output/earth-raw-closeups-1/report.json`, particularly the matching
-`earth-1440-scale1-maximum-normal-scene.png` images in both directories.
-Raw main is smooth in that region; the trial is visibly stretched. These are
-intentional-change diagnostics, not unchanged-pixel parity. The same trial
-had passed 551 tests and the complete browser suite; those gates did not catch
-this sampling regression.
-
-Bounded headless diagnostics then injected alternative offline-prepared matrices
-before module load, without changing application code. Scales 8 and 8.125 still
-showed close-up stretching. Scale 16 gave different default-shell captures
-across repeated contexts and failed to stabilize the mobile scene in both
-repeats. Reports are `output/earth-raster-scale-diagnostic-{1,2}/report.json`.
-No alternative was accepted. The likely boundary is Chrome's flattened raster
-coverage/filtering; its exact GPU mechanism remains unproven.
-
-The trial was withdrawn before the affine repair. At that point, Earth's
-generator, scene, and existing preparation tests matched `91dae216` exactly;
-the restored scene SHA256 was
-`865e1b5e813c8de649b0050ddfca96c5d49708f291d02d2de6203d12cdd2f8b6`.
-All six Earth preparation tests passed after that regeneration. No complete candidate
-matrix was run against the rejected trial, and no 192-comparison pass is claimed.
-The later affine repair supersedes that restored scene. Its independent
-baseline qualification remains failed as described above; the branch pointer
-alone did not supply a validated fix.
-
-### Strict capture contract and accepted report-only comparison
-
-The earlier audit was `immutable-headless-native-readback-pairs@4`: installed Chrome,
-hardware renderer/device identity, enabled GPU composition and rasterization,
-zero GPU crashes, matched recorded repository harness inputs, and unchanged
-checkout-file hashes. It retains all 88 original conditions and adds eight
-object-owned Earth exterior/cutaway close-ups at the existing maximum zoom,
-two widths, and two display scales: 96 conditions and 192 phase comparisons.
-No software-composited or headed result can qualify this protocol.
-
-Strict qualification still requires a qualified, explicitly identified
-baseline. The architecture comparison uses main plus the identical
-Earth-only repair, not raw main: prepared-byte identity checks correctly reject
-raw main paired with the repaired candidate. The current Earth-only fixture
-still fails its independent repeatability check, so these commands reproduce
-the strict path, not the accepted report-only matrix:
-
-```sh
-# Start dedicated servers in separate terminals using unused ports:
-node tools/serve-shared-runtime-audit.mjs /Users/ekrof/fed/cssEarth-runtime-earth-affine-baseline 4293
-node tools/serve-shared-runtime-audit.mjs /Users/ekrof/fed/cssEarth-runtime 4292
-# Then capture with this same harness:
-node tools/audit-shared-runtime.mjs baseline http://127.0.0.1:4293 \
-  /Users/ekrof/fed/cssEarth-runtime-earth-affine-baseline output/shared-runtime-visual-new
-# Only after the complete baseline has no errors:
-node tools/audit-shared-runtime.mjs candidate http://127.0.0.1:4292 \
-  /Users/ekrof/fed/cssEarth-runtime output/shared-runtime-visual-new
-```
-
-Use a fresh evidence directory for every attempt. Both recorded servers display
-the same Git-derived `Version 0.6` build metadata. For a fresh reproduction,
-keep that metadata matched too: apply the candidate diff without committing it
-to a second checkout of the same base before starting its server. Do not mask
-the label. The current audit verifies the rendered label, checkout identity, source snapshot, server session, and application response hashes.
-The complete fixed-six report-only matrix is recorded and explicitly accepted
-above. That decision closes this PR's visual gate without claiming that the
-strict exact protocol passed. Failed raw-main captures, the rejected trial's
-repeatability, and isolated calibration still do not count as strict acceptance.
-
-## Generalized camera projection repair
-
-All object camera publications use `src/platform/prepared-camera-runtime.mjs`
-through the same `createRetainedCubicSkyOrbit` controller. Mercury, Venus, and
-Mars now supply material publication hooks to that controller; their private
-camera state, input listeners, responsive fitting, and cleanup were removed.
-The publisher preserves the perspective and scene scale supplied by preparation.
-Zoom scales the entire camera; it does not move the scene toward the perspective
-plane. Responsive fitting removes that zoom factor before measuring the viewport.
-Object-owned material companions continue to receive the same zoom.
-
-This closes the gap exposed by the later local-main camera change: changing
-perspective and depth separated Saturn's material disc from its body and rings,
-and Mars's separate camera left its atmospheric rim detached after a shared-only
-repair. The offending depth projection was not in the earlier PR head. This PR
-now provides one publication path and a registry-derived regression gate so a
-future camera change cannot silently omit a separate object runtime.
-
-`site/test/prepared-camera-browser.mjs` follows the generic-controller proof in
-`pnpm test:browser`. Every
-registered object is checked in installed Chrome at DPR 1 and 2: default and
-rotated views, both zoom limits, real pointer drag, wheel zoom, retained identity,
-constant perspective and scene scale, and zero scene depth translation. Set
-`CSSEARTH_CAMERA_OUTPUT` to retain the screenshots and measured report.
-
-The 2026-09-04 run retained 154 screenshots across 22 object/DPR combinations
-(Chrome 152.0.7977.76, 1440×900 CSS pixels). The default, rotated, close-up and
-post-input views were inspected. All eleven objects passed the projection and
-retained-identity assertions. The gray grid on Pluto represents missing source
-coverage in its prepared map, not an atmosphere fallback.
-
-![Default object views at DPR 2](images/prepared-camera-all-objects.png)
-
-The current preview comes from
-`output/playwright/pr2-generic-contract-20260904/final-camera/`.
-The earlier projection-repair evidence remains in
-`output/playwright/pr2-generalized-camera-20260904/final-screenshots/`.
-The repaired main checkout independently passed all 20 object/DPR combinations.
-A controlled mutation reinstating the projection function from local-main
-`d97c12a` failed the new test on Saturn's nonzero scene depth. The local main aggregate run hit unrelated sidebar-layout test failures; its
-aggregate gates are not reported as passing.
-
-## Playback notification consistency
-
-The complete browser run exposed intermittent resume failures on Jupiter and Mars
-when reduced motion was cleared. The router's diagnostic getter reevaluated
-`MediaQueryList.matches` while polling for playback. In [Chrome 152's implementation](https://github.com/chromium/chromium/blob/152.0.7977.76/third_party/blink/renderer/core/css/media_query_list.cc#L82-L112),
-that getter updates the same match baseline used to decide whether a change
-notification is needed. Reading it before notification could leave the diagnostic
-policy ahead of the applied scene state.
-
-The router now samples the preference when mounting and when its native change
-event arrives. Playback getters read that applied snapshot. A regression test
-covers reads before notification and preference changes while the document is
-in the back/forward cache. The browser playback test and its five-second deadline
-remain unchanged.
-
-## Served-source identity correction
-
-The earlier protocols hashed checkout files and verified scene asset responses.
-They did not bind the served application code to that checkout. Their historical
-records remain as captured, but do not prove served-code identity.
-
-Current strict protocol `immutable-headless-native-readback-pairs@5` and diagnostic
-protocol `report-only-fixed-six-native-readbacks@3` require the dedicated server
-above. It fingerprints the served source tree, reports its canonical checkout
-path and a fresh session identifier, and stamps every response. The audit checks
-those fields before capture, on every browser response, after each condition,
-and at completion. It also records the actual HTML, JavaScript and CSS response
-hashes alongside prepared asset hashes. A source change retires the server;
-a restart requires a new audit. Ordinary dev servers and mismatched checkout
-paths are rejected before any capture can be attributed to them.
-
-The server instrumentation lives only in the audit tools. It does not add a
-production endpoint or change shipped object rendering. The new protocol does
-not retroactively upgrade the earlier accepted report-only matrix or claim a
-new full strict comparison.
-
-## Projection-repair validation at `be3ddf6`: 2026-09-04
-
-That commit's branch run passed all required gates. The subsequent controller
-migration has its own [current validation record](generic-runtime-contract-proof.md).
-
-- `pnpm acquire:planets -- --verify-only`: all eleven registered objects.
-- `pnpm test`: 616 passing tests, zero failures.
-- `pnpm build`: passed.
-- `pnpm test:browser http://127.0.0.1:4230`: passed as one complete run.
-
-The browser run includes all 22 object/DPR projection cases and 154 screenshots,
-143 conformance cases, 22 playback cases, six complex interaction cases, real
-back/forward restoration for all eleven objects, and each object's smoke tests.
-The final playback run passed after the router correction, with the existing
-browser test and timeout unchanged. Earlier failed runs remain in local evidence.
-
-Logs and screenshot reports are in
-`output/playwright/pr2-generalized-camera-20260904/`: `acquire.log`,
-`test-final.log`, `build-final.log`, `browser-fixed-final.log`, and
-`final-screenshots/report.json`. The served-source tooling probe independently
-verified 91 response identities and hashes; an ordinary server was rejected
-before capture. This is a tooling check, not a new full strict visual comparison.
-
-## Evidence limits
-
-These checks establish behavior, ownership bounds, and browser regression
-evidence. They do not establish native-renderer parity, physical memory
-reclamation, or compositor performance gains. Synthetic visibility/lifecycle
-events test ordering; only the separate navigation/back test claims real
-back/forward-cache admission.
-
-Raw visual evidence is preserved. Failed or nonrepeatable capture runs are not
-silently discarded or relabeled as strict passes. The final complete diagnostic
-was accepted by explicit human review with its failures disclosed. Pixel
-tolerance and masks were not widened to hide a refactor regression.
-
-Source inputs and all non-Earth prepared imagery are unchanged. Venus's prepared
-camera now explicitly supplies `sceneScale: 0.038`; removing that added field
-leaves its prepared scene identical to `be3ddf6`. The authorized
-Earth exception changes its preparation, manifest, generated scene and lens
-metadata, and reproducible public assets as described above. There is no new
-clock, scheduler, renderer, dependency, object registry, or placeholder object.
+# Shared object runtime implementation
+
+The implementation in PR #2 replaces all eleven private runtime assemblies with
+`createObjectRuntime`. Each package retains its prepared rendering facts. The
+common platform owns every session, control transaction, image lease, residency
+pool, playback coordinator, and orbit binding.
+
+The required acquisition, 818-test, build and full browser gates pass. All eleven
+objects have the completed DPR 1/2 visual comparison. [The proof](generic-runtime-contract-proof.md)
+and [machine-readable evidence](generic-runtime-contract-evidence.json) record
+the exact source, results and remaining pixel/performance qualifications.
+
+## Main changes
+
+- `object-runtime-contract.mjs` validates the actual definition, controls,
+  prepared catalogs, synchronous hooks, retained handles and body registrations.
+- `object-runtime.mjs` assembles one lifetime, resources, playback, controls,
+  selection and camera. The router remains the only playback-permission owner.
+- `prepared-image-store.mjs` uses explicit leases, bounded native slots,
+  cancellation-safe URL coalescing, retries and batched ownership changes.
+- `prepared-residency.mjs` implements all pool mechanics. Packages supply policy
+  records and pure resource demand, including Earth page transitions and the
+  view-sensitive Uranus/Neptune/Saturn presentations.
+- `object-selection-runtime.mjs` owns desired/committed state and applies current
+  camera demand at the actual publication boundary.
+- `prepared-playback.mjs` registers retained CSS/WAAPI animations and applies
+  readiness, router permission, selected speed and prepared roles. Late handles
+  inherit current state. Pose animations stay distinct from rotation playback.
+- `object-control-binding.mjs` binds the existing content once and publishes busy
+  and committed state to both lens and settings panels. Motion remains shared
+  shell policy.
+- `object-browser-profile.mjs` provides one actual-runtime observation/action
+  implementation. Package profiles contain audit facts and view mappings.
+
+There is no new timer-driven animation clock, rendering backend, object registry,
+application route, dependency, or fallback scene.
+
+## Removed private ownership
+
+All eleven clients are four-line bindings. The old Earth, Mercury, Mars, Jupiter,
+and Uranus cache implementations, Earth surface-image owner, Mercury lens-image
+owner, and Venus control coordinator are deleted. Saturn's private lifecycle,
+view-bank coordination, control binding and playback wrapper were removed from
+its client. Neptune's unused binary-orbit loader was removed with its private
+assembly. The unused feature-control binder was removed from the platform;
+its small speed-state data export remains for existing consumers.
+
+Useful failure tests were moved to actual shared owners. In particular, the 24
+Mercury/Venus/Mars orbit-failure cases now compose their real package
+presentations with the real shared mount, resources, selection and orbit. They
+no longer extract a function from a private client that should not exist.
+
+The ownership checker follows imports beyond the object directory. A helper
+moved into another folder is exempt only when it is part of the actual common
+runtime closure. Injected private mounts, listeners, image owners, selection
+schedulers, playback coordinators, control binders, hidden helpers and shared
+object-ID dispatch all fail their intended checks.
+
+## Rendering corrections and preserved behavior
+
+The shared camera keeps prepared perspective and scene scale fixed, applies zoom
+to the camera, and retains zero scene-depth translation. Body-dependent lighting
+layers are registered against the actual mounted scene and checked at every
+publication. These invariants address the detached Saturn material disc shown
+in the original report and prevent an object from silently using a private
+projection path.
+
+Saturn also had 162 retained interior projective leaves missing their prepared
+layout dimensions. `prepare-leaf-layouts.mjs` now supplies the correct 128-pixel
+leaf and 2048×1024 atlas dimensions instead of the generic 64-pixel/1024×512
+fallback. The prepared-leaf audit found no equivalent omission in the other ten
+objects. This is a separately identified visual correction, not unchanged-pixel
+parity with the broken interior.
+
+The incoming PR shell work and common input work at `dd91897` are preserved:
+factsheets/charts, sidebar placement, drag/inertia/fly-to/wheel behavior, and the
+projective texture leaf's preserve-3D path. The canonical dirty main checkout and
+the separate sidebar worktree were not used as implementation targets.
+
+## Evidence method and limits
+
+The comparison baseline is the sealed `dd91897` integration tree. The original
+`ca610599` bundle remains available for migration history. Each bundle covers all
+11 objects, 418 conditions and 2,508 fixed-order native GPU readbacks. Source
+files, prepared assets, loaded bytes, browser/GPU identity and the unchanged
+six-module audit harness are recorded. Every phase is retained, including failed
+captures. No masks, increased tolerance, favorable-phase selection or software
+renderer substitute is used.
+
+Some captures differ in Chrome texture sampling or raster completion. Unchanged
+baseline repeats also differ, but that alone does not establish the cause of
+all candidate differences. Earth's reduced-scale sampling and Neptune's few
+persistent one-level background pixels require explicit qualification. The
+strict byte-identical pixel gate must remain failed where it fails. The final
+proof reports visual findings separately from functional and architectural tests.
+
+Earth's standalone performance checks pass at DPR 1 and 2. A separate production
+workload fails its zero-long-task budget on both builds, with more long tasks in
+the candidate measurement. All of its other production assertions pass at both
+DPRs; the proof records the exact timings and preserved strict failure.
+
+The older Mars and
+Jupiter element-count expectations fail, with identical actual structure in the
+integration reference and candidate: Mars has 518 leaves/1,047 stage elements;
+Jupiter has 790/1,575. Jupiter's 40 ms P95 frame budget also fails: the same
+Shadows-enabled sweep measures 50 ms on both versions at both DPRs. The earlier
+Mercury migration comparison found the same 1,814 stage elements and 925 measured
+layers on reference and candidate, exceeding its old budgets. These limits were
+not increased, and report-only measurements are not budget passes. This work
+makes no performance improvement, native-renderer parity, immediate GPU-memory
+release, or physical-device performance claim.
+
+Older controller-only and Earth affine-repair evidence remains in repository
+history and the local evidence directories. Those earlier acceptances do not
+upgrade the current full-runtime comparison to strict pixel parity.

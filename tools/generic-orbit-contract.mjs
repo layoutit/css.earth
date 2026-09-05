@@ -1,5 +1,6 @@
+import { auditObjectRuntimeOwnership } from "./check-object-runtime-ownership.mjs";
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseAst } from 'vite';
 import { OBJECTS } from '../site/objects.mjs';
@@ -48,46 +49,35 @@ export function inspectObjectOrbitModule(source, file, root = process.cwd()) {
 }
 
 export async function auditGenericOrbitOwnership({ objects = OBJECTS, root = process.cwd(), readText = (path) => readFile(path, 'utf8') } = {}) {
+  const ownership = await auditObjectRuntimeOwnership({ objects, root, readText });
+  const runtimeFile = 'src/platform/object-runtime.mjs';
+  const ast = parseAst(await readText(resolve(root, runtimeFile)));
+  const imported = ast.body.filter(node => node.type === 'ImportDeclaration').flatMap(node =>
+    node.specifiers.filter(specifier => specifier.imported?.name === controller).map(specifier => ({
+      name: specifier.local.name, path: relative(root, resolve(dirname(resolve(root, runtimeFile)), node.source.value)),
+    })));
+  assert.equal(imported.length, 1, 'Common runtime must import exactly one shared orbit implementation');
+  assert.equal(imported[0].path, sharedPath, 'Common runtime orbit import must use the shared controller');
+  let bindings = 0, calls = 0;
+  walk(ast, node => {
+    if (node.type === 'Property' && node.key?.name === 'createOrbit' && node.value?.type === 'Identifier' && node.value.name === imported[0].name) bindings++;
+    if (node.type === 'CallExpression' && node.callee.type === 'MemberExpression' &&
+        node.callee.object.name === 'environment' && node.callee.property.name === 'createOrbit') calls++;
+  });
+  assert.equal(bindings, 1, 'Exactly one shared orbit construction binding is required');
+  assert.equal(calls, 1, 'Exactly one shared orbit construction call is required');
   const entries = [];
-  for (const object of objects) {
-    const directory = resolve(root, 'src/planets', object.id, 'runtime');
-    const files = await modules(directory);
-    let calls = 0;
-    const owners = [];
-    for (const absolute of files) {
-      const file = relative(root, absolute);
-      const facts = inspectObjectOrbitModule(await readText(absolute), file, root);
-      calls += facts.calls;
-      if (facts.calls) owners.push(file);
+  for (const entry of ownership.entries) {
+    const files = entry.closure.filter(file => !ownership.sharedClosure.includes(file));
+    for (const file of files) {
+      const facts = inspectObjectOrbitModule(await readText(resolve(root, file)), file, root);
+      assert.equal(facts.calls, 0, `${entry.id}: object closures cannot construct a second orbit`);
     }
-    assert.equal(calls, 1, `${object.id}: exactly one shared orbit construction in its runtime package`);
-    entries.push({ id: object.id, owner: owners[0], runtimeModules: files.length, sharedControllerCalls: calls });
+    entries.push({ id: entry.id, owner: runtimeFile, runtimeModules: files.length, sharedControllerCalls: calls });
   }
-  const visited = new Set();
-  async function visit(path) {
-    if (visited.has(path)) return;
-    visited.add(path);
-    assert.ok(!relative(root, path).startsWith('src/planets/'), 'Shared orbit imports an object package');
-    const source = await readText(path);
-    const ast = parseAst(source);
-    for (const node of ast.body) {
-      if (node.type === 'ImportDeclaration' && node.source.value.startsWith('.') && node.source.value.endsWith('.mjs'))
-        await visit(resolve(dirname(path), node.source.value));
-    }
-  }
-  await visit(resolve(root, sharedPath));
-  return { entries, sharedClosure: [...visited].map(path => relative(root, path)).sort() };
+  return { entries, sharedClosure: ownership.sharedClosure };
 }
 
-async function modules(directory) {
-  const files = [];
-  for (const entry of await readdir(directory, { withFileTypes: true })) {
-    const path = resolve(directory, entry.name);
-    if (entry.isDirectory()) files.push(...await modules(path));
-    else if (entry.name.endsWith('.mjs')) files.push(path);
-  }
-  return files.sort();
-}
 function walk(node, visit) {
   if (!node || typeof node !== 'object') return;
   if (typeof node.type === 'string') visit(node);

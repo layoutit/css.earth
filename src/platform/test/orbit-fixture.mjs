@@ -42,7 +42,7 @@ const factory = new Function("dependencies", `const { createSceneLifetime, creat
   ${source.slice(start, end).replaceAll("export ", "")}
   return createRetainedCubicSkyOrbit;`);
 
-export function orbitFixture(failure, cleanupFailure = false) {
+export function orbitFixture(failure, cleanupFailure = false, dependencies = {}) {
   const owners = new Set();
   const callbacks = {};
   const stage = new Surface();
@@ -76,6 +76,7 @@ export function orbitFixture(failure, cleanupFailure = false) {
       return { zoom: 1, model: "unit", widthShare: 0.5 };
     },
     clamp: (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value)),
+    ...dependencies,
   });
   const cameraPlan = Object.fromEntries([
     "minimumControlPitchDegrees", "maximumControlPitchDegrees", "defaultControlPitchDegrees",

@@ -105,7 +105,7 @@ test("keeps topology and raster work out of the browser runtime", async () => {
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(client, /spherePolygons|computeTextureAtlasPlan|sharp/);
-  assert.match(client, /PREPARED_MARS_SCENE/);
+  assert.match(await readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"), /PREPARED_MARS_SCENE/);
   assert.match(css,
     /background-image:\s*url\("\/scenes\/mars\/mars-surface@2x\.webp"\)/u);
   assert.match(css, /@keyframes mars-body-spin/);

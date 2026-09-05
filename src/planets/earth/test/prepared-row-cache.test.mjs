@@ -1,155 +1,65 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { runtimeDefinition } from "../runtime/definition.mjs";
+import { preparedSelectionFixture } from "../../../platform/test/object-runtime-package.mjs";
+const pool = (f, id) => f.residency.stats().pools.find(pool => pool.id === id);
 
-import { createEarthRowShardCache } from
-  "../runtime/preparedRowCache.mjs";
-
-const wait = (milliseconds) => new Promise((resolve) => {
-  setTimeout(resolve, milliseconds);
+test("Earth shared row demand coalesces transient camera views and keeps both material pools bounded", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
+    const count = f.jobs.length;
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], revision: 2 }); await f.flush();
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], revision: 3 }); await f.flush();
+    assert.equal(f.jobs.length, count, "transient camera demands wait for the common stability timer");
+    await f.settle();
+    assert.equal(f.presentation.observe().material.lighting, "64");
+    assert.equal(f.presentation.observe().material.atmosphere, "64");
+    for (const id of ["lighting", "atmosphere"]) { assert.ok(pool(f, id).nativeSlots <= 3); assert.equal(pool(f, id).pending, 0); }
+    assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
 });
 
-test("Earth row disposal attempts every slot before reporting release failure", async () => {
-  const previous = globalThis.Image;
-  const images = [];
-  class Image {
-    naturalWidth = 1;
-    naturalHeight = 1;
-    constructor() { this.index = images.length; this.releases = 0; images.push(this); }
-    decode() { return Promise.resolve(); }
-    removeAttribute(name) {
-      if (name !== "src") return;
-      this.releases += 1;
-      if (this.index === 0) throw new Error("release failed");
-      this.src = "";
-    }
-  }
-  globalThis.Image = Image;
-  const cache = createEarthRowShardCache({
-    preparedRows: [0, 1, 2].map((i) => ({ assets: { two: `/row-${i}` } })),
-    frames: [0, 1, 2].map((rowIndex) => ({ rowIndex })),
-    transport: { model: "row-shard-cache", defaultRow: 0, initialWarmRows: [0, 1, 2],
-      maximumRetainedRowCount: 3, initialDecodedWorkingSetBytes: {}, maximumDecodedWorkingSetBytes: {} },
-  });
+test("Earth superseded material decode cannot suppress a newer camera target", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    await cache.prepareInitial();
-    assert.throws(cache.destroy, AggregateError);
-    assert.ok(images.every((image) => image.releases === 1));
-    assert.ok(images.slice(1).every((image) => image.src === ""));
-    assert.equal(cache.stats().retainedImageCount, 0);
-    assert.equal(cache.stats().imageAllocations, 0);
-    assert.doesNotThrow(cache.destroy);
-  } finally { globalThis.Image = previous; }
+    const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], revision: 2 }); await f.flush(); f.advanceTimers(); await f.flush();
+    const old = f.jobs.filter(job => !job.done);
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], revision: 3 }); await f.flush();
+    for (const job of old) { job.done = true; job.reject(new Error("stale row")); }
+    await f.settle();
+    assert.equal(f.presentation.observe().material.lighting, "64"); assert.equal(f.presentation.observe().material.atmosphere, "64");
+    assert.deepEqual(f.errors, []); assert.deepEqual(f.materialErrors, []);
+  } finally { f.restore(); }
 });
 
-test("Earth stale warm failure does not suppress a newer camera row request", async () => {
-  const previous = globalThis.Image;
-  const previousError = console.error;
-  const images = [];
-  class Image {
-    naturalWidth = 1;
-    naturalHeight = 1;
-    constructor() { images.push(this); }
-    decode() { return new Promise((resolve, reject) => { this.resolve = resolve; this.reject = reject; }); }
-    removeAttribute(name) { if (name === "src") this.src = ""; }
-  }
-  globalThis.Image = Image;
-  console.error = () => {};
-  const cache = createEarthRowShardCache({
-    preparedRows: [0, 1, 2, 3].map((i) => ({ assets: { two: `/row-${i}` } })),
-    frames: [0, 1, 2, 3].map((rowIndex) => ({ rowIndex })),
-    transport: { model: "row-shard-cache", defaultRow: 0, initialWarmRows: [0],
-      maximumRetainedRowCount: 2, initialDecodedWorkingSetBytes: {}, maximumDecodedWorkingSetBytes: {} },
-  });
+test("Earth interior, night lights, and atmosphere visibility stop demand for hidden material rows", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    const initial = cache.prepareInitial();
-    images[0].resolve();
-    await initial;
-    cache.presentation(1);
-    await wait(150);
-    assert.equal(images[1].src, "/row-1");
-    cache.presentation(3);
-    images[1].reject(new Error("old row failed"));
-    await wait(150);
-    assert.equal(images[1].src, "/row-3", "new target must still start without another camera event");
-    assert.equal(cache.stats().pendingCount, 1);
-    images[1].resolve();
-    await new Promise((resolve) => setImmediate(resolve));
-    assert.ok(cache.presentation(3));
-    assert.equal(cache.stats().appliedRow, 3);
-  } finally { cache.destroy(); globalThis.Image = previous; console.error = previousError; }
+    const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], revision: 2 }); await f.settle();
+    const night = f.selection.dispatch({ kind: "lens", id: "night-lights" }); await f.settle(); await night;
+    assert.ok(!f.selection.state().plan.required.some(key => key.startsWith("lighting:")));
+    assert.ok(pool(f, "lighting").resident <= 3); assert.ok(pool(f, "atmosphere").resident > 0);
+    const hide = f.selection.dispatch({ kind: "toggle", name: "atmosphere", value: false }); await f.settle(); await hide;
+    assert.ok(!f.selection.state().plan.required.some(key => key.startsWith("atmosphere:")));
+    const interior = f.selection.dispatch({ kind: "lens", id: "cross-section" }); await f.settle(); await interior;
+    const before = f.jobs.length;
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], revision: 3 }); await f.settle();
+    assert.equal(f.jobs.length, before);
+    assert.ok(pool(f, "lighting").resident <= 3); assert.ok(pool(f, "atmosphere").resident <= 3);
+  } finally { f.restore(); }
 });
 
-test("coalesces transient row requests and replaces an evicted image", async () => {
-  const NativeImage = globalThis.Image;
-  const images = [];
-  class PreparedImage {
-    constructor() {
-      this.decoding = "auto";
-      this.src = "";
-      this.naturalWidth = 1;
-      this.naturalHeight = 1;
-      images.push(this);
-    }
-
-    decode() {
-      return Promise.resolve();
-    }
-
-    removeAttribute(name) {
-      if (name === "src") this.src = "";
-    }
-  }
-  globalThis.Image = PreparedImage;
-  const rows = Array.from({ length: 4 }, (_, rowIndex) => ({
-    assets: {
-      one: `/row-${rowIndex}.webp`,
-      two: `/row-${rowIndex}@2x.webp`,
-    },
-  }));
-  const cache = createEarthRowShardCache({
-    preparedRows: rows,
-    frames: rows.map((_, rowIndex) => ({ rowIndex })),
-    transport: {
-      model: "row-shard-cache",
-      defaultRow: 0,
-      initialWarmRows: [0],
-      maximumRetainedRowCount: 2,
-      initialDecodedWorkingSetBytes: { one: 1, two: 2 },
-      maximumDecodedWorkingSetBytes: { one: 1, two: 2 },
-    },
-  });
+test("Earth one native material release failure still retires both pools and every pending slot", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    await cache.prepareInitial();
-    let notifications = 0;
-    let expectedRow = 2;
-    cache.onReady(() => {
-      notifications += 1;
-      cache.presentation(expectedRow);
-    });
-    cache.presentation(1);
-    cache.presentation(2);
-
-    await wait(80);
-    assert.equal(cache.stats().runtimeDecodeCount, 0);
-    await wait(100);
-    assert.equal(cache.stats().appliedRow, 2);
-
-    expectedRow = 3;
-    cache.presentation(3);
-    await wait(180);
-
-    const stats = cache.stats();
-    assert.equal(stats.requestStabilityMilliseconds, 120);
-    assert.equal(stats.runtimeDecodeCount, 2);
-    assert.equal(stats.appliedRow, 3);
-    assert.equal(stats.releaseCount, 1);
-    assert.equal(notifications, 2);
-    assert.equal(images.length, 3);
-    assert.equal(images[0].src, "");
-    assert.equal(images[1].src, "/row-2@2x.webp");
-    assert.equal(images[2].src, "/row-3@2x.webp");
-  } finally {
-    cache.destroy();
-    globalThis.Image = NativeImage;
-  }
+    const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
+    const key = pool(f, "atmosphere").keys[0];
+    const url = runtimeDefinition.assets.entries.find(entry => entry.key === key).url;
+    f.jobs.findLast(job => job.url === url).image.removeAttribute = () => { throw new Error("native release failed"); };
+    assert.equal(f.lifetime.destroy().length, 1);
+    assert.equal(f.residency.stats().images.entries.length, 0); assert.equal(f.listenerCount(), 0);
+  } finally { f.restore(); }
 });

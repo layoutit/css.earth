@@ -14,12 +14,23 @@ import {
   snapshotAuditSources, verifyAuditSource, assertAuditResponse,
 } from "./audit-source-identity.mjs";
 import { captureFixedReadbacks } from "./readback-sequence.mjs";
+import { runtimeAuditPoses } from "./runtime-audit-poses.mjs";
 
-const [mode, baseUrl, sourceArgument, outputArgument, option] = process.argv.slice(2);
+const [mode, baseUrl, sourceArgument, outputArgument, ...options] = process.argv.slice(2);
 assert.ok(["baseline", "candidate"].includes(mode) && baseUrl && sourceArgument && outputArgument,
-  "Use baseline|candidate BASE_URL SERVED_WORKTREE FRESH_EVIDENCE_DIRECTORY [--report-only]");
-assert.ok(option === undefined || option === "--report-only", "Unknown audit option");
-const reportOnly = option === "--report-only";
+  "Use baseline|candidate BASE_URL SERVED_WORKTREE FRESH_EVIDENCE_DIRECTORY [--report-only] [--runtime-matrix] [--object ID] [--reference BASELINE_DIRECTORY]");
+let reportOnly = false, runtimeMatrix = false, objectId, referenceDirectory;
+for (let index = 0; index < options.length; index++) {
+  const option = options[index];
+  if (option === "--report-only") reportOnly = true;
+  else if (option === "--runtime-matrix") runtimeMatrix = true;
+  else if (option === "--object") objectId = options[++index];
+  else if (option === "--reference") referenceDirectory = options[++index];
+  else throw new Error(`Unknown audit option: ${option}`);
+}
+const objects = OBJECTS.filter(({ id }) => objectId === undefined || id === objectId);
+assert.ok(objects.length, "Select an existing object");
+assert.ok(!referenceDirectory || mode === "candidate", "Only a candidate can select a reference");
 const sourceRoot = resolve(sourceArgument), root = resolve(outputArgument), output = resolve(root, mode);
 await mkdir(root, { recursive: true });
 await mkdir(output); // Refuse to overwrite evidence.
@@ -30,6 +41,9 @@ if (reportOnly) {
   report.qualification = "Diagnostic only; does not satisfy the strict acceptance gate.";
 }
 report.reportOnly = reportOnly;
+report.runtimeMatrix = runtimeMatrix;
+report.objectIds = objects.map(({ id }) => id);
+report.scenarios = {};
 report.complete = false;
 report.repeatabilityFailures = [];
 report.visualFailures = [];
@@ -49,7 +63,8 @@ const platformFiles = (await readdir(resolve(sourceRoot, "src/platform")))
 for (const file of ["site/scene-router.mjs", "site/runtime-policy.mjs", "site/planet-shell-client.mjs", "site/planet-shell.css", "site/components/PlanetShell.astro", ...platformFiles]) {
   report.sourceHashes[file] = sha(await readFile(resolve(sourceRoot, file)));
 }
-const baseline = mode === "candidate" ? JSON.parse(await readFile(resolve(root, "baseline/report.json"))) : null;
+const referenceRoot = resolve(referenceDirectory ?? resolve(root, "baseline"));
+const baseline = mode === "candidate" ? JSON.parse(await readFile(resolve(referenceRoot, "report.json"))) : null;
 // Keep the native scrollbar out of the content viewport. Captures are always
 // headless; the audit must not open windows on the user's desktop.
 report.browserArgs = ["--hide-scrollbars"];
@@ -90,7 +105,7 @@ try {
     assert.equal(report.headless, baseline.headless, "Match window presentation mode");
     assert.deepEqual(report.browserArgs, baseline.browserArgs);
   }
-  for (const object of OBJECTS) {
+  for (const object of objects) {
     const packagePath = resolve(sourceRoot, `src/planets/${object.id}`);
     for (const file of (await readdir(resolve(packagePath, "runtime"))).sort()) {
       report.sourceHashes[`src/planets/${object.id}/runtime/${file}`] = sha(await readFile(resolve(packagePath, "runtime", file)));
@@ -113,9 +128,10 @@ try {
       assert.ok(Object.hasOwn(report.harnessHashes, `src/planets/${object.id}/test/${file}`),
         "Visual profiles must belong to the starting harness snapshot");
     }
-    const extraPoses = hasExtraPoses
+    const sourcePoses = hasExtraPoses
       ? (await import(new URL(`../src/planets/${object.id}/test/visual-poses.mjs`, import.meta.url))).visualPoses
       : [];
+    const extraPoses = [...sourcePoses, ...(runtimeMatrix ? runtimeAuditPoses(profile) : [])];
     assert.ok(Array.isArray(extraPoses));
     for (const pose of extraPoses) {
       assert.match(pose.id, /^[a-z][a-z0-9-]+$/);
@@ -123,9 +139,12 @@ try {
       assert.equal(typeof pose.apply, "function");
     }
     assert.equal(new Set(extraPoses.map(({ id }) => id)).size, extraPoses.length);
-    report.expectedCaptureCount += 8 + 4 * extraPoses.length;
+    report.scenarios[object.id] = { dprs: [1, 2], defaultWidths: [390, 1440],
+      poseWidths: runtimeMatrix ? [1440] : [390, 1440], poses: extraPoses.map(({ id }) => id) };
+    report.expectedCaptureCount += 8 + (runtimeMatrix ? 2 : 4) * extraPoses.length;
     for (const scale of [1, 2]) for (const width of [390, 1440]) for (const kind of ["shell", "scene"])
       for (const pose of [{ id: "default" }, ...(kind === "scene" ? extraPoses : [])]) {
+      if (runtimeMatrix && width !== 1440 && pose.id !== "default") continue;
       const context = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: scale, reducedMotion: "reduce" });
       try {
         const page = await context.newPage(), checks = [], loaded = new Map(), loadedCode = new Map();
@@ -151,25 +170,40 @@ try {
             }
           })().catch((error) => report.errors.push(error.message)));
         });
-        if (kind === "scene") await page.addInitScript(() => {
+        if (kind === "scene") await page.addInitScript(({ inputSelector }) => {
           document.addEventListener("DOMContentLoaded", () => {
             const style = document.createElement("style");
-            style.textContent = "body > :not(.planet-stage):not(script):not(style), .planet-stage ~ * { visibility:hidden!important } .planet-stage { visibility:visible!important }";
+            // The transparent input surface must remain hit-testable for the
+            // native gesture cases; hiding shell pixels must not disable input.
+            style.textContent = `body > :not(.planet-stage):not(script):not(style):not(${inputSelector}), .planet-stage ~ :not(${inputSelector}) { visibility:hidden!important } .planet-stage { visibility:visible!important }`;
             document.head.appendChild(style);
           }, { once: true });
-        });
+        }, { inputSelector: profile.inputSelector });
         await page.goto(new URL(object.route, baseUrl).href, { waitUntil: "networkidle" });
         await page.waitForFunction(() => window.__cssEarth?.ready);
         await profile.waitForRuntime(page);
         await profile.pause(page);
         await page.mouse.move(0, 0);
         await page.evaluate(async () => {
-          for (const animation of document.getAnimations()) { animation.pause(); animation.currentTime = 0; }
+          for (const animation of document.getAnimations()) {
+            animation.pause();
+            // CSS rotation is clock-driven. A prepared WAAPI pose can be
+            // camera-addressed, so resetting its time would change the view.
+            if (animation instanceof CSSAnimation) animation.currentTime = 0;
+          }
           await document.fonts.ready;
           await Promise.all([...document.images].filter((image) => image.currentSrc).map((image) => image.decode()));
         });
         const poseState = pose.apply ? await pose.apply(page) : null;
         if (pose.apply) await page.waitForLoadState("networkidle");
+        // Lazy prepared components can register animations during selection.
+        // Every comparison uses the same native phase, including those handles.
+        if (runtimeMatrix) await page.evaluate(() => {
+          for (const animation of document.getAnimations()) {
+            animation.pause();
+            if (animation instanceof CSSAnimation) animation.currentTime = 0;
+          }
+        });
         const observedPose = reportOnly ? {
           camera: await profile.camera(page),
           lens: (await profile.lens(page)).id,
@@ -188,7 +222,7 @@ try {
         assert.equal(await profile.selectedDensity(page), 2, "Canonical highest-density bank");
         assert.equal(await profile.stable(page), true);
         const gpuBefore = await gpuProof();
-        const versionLabel = await page.locator(".planet-wordmark-version").textContent();
+        const versionLabel = await page.locator(".planet-wordmark-version, .explorer-about-row:first-child .explorer-about-link-destination").textContent();
         const prefix = `${object.id}-${width}-scale${scale}${pose.id === "default" ? "" : `-${pose.id}`}`;
         const capture = async (target, scene) => {
           if (reportOnly) {
@@ -223,7 +257,7 @@ try {
                 return target.screenshot({ caret: "initial" });
               },
               validate: async (png, phase) => {
-                if (object.id === "saturn" && scene) {
+                if (object.id === "saturn" && scene && pose.id === "default") {
                   try {
                     validation.push(await assertSceneCoverage(png, saturnSceneCoverage(width, scale)));
                   } catch (error) {
@@ -274,7 +308,7 @@ try {
             if (matches >= 3) {
               const validation = [];
               for (const png of frames) {
-                if (object.id === "saturn" && scene) validation.push(await assertSceneCoverage(png, saturnSceneCoverage(width, scale)));
+                if (object.id === "saturn" && scene && pose.id === "default") validation.push(await assertSceneCoverage(png, saturnSceneCoverage(width, scale)));
               }
               assert.equal(await page.locator(".planet-stage .polycss-camera").count(), 1);
               assert.ok(await page.locator(".planet-stage *").count() > 20);
@@ -302,7 +336,21 @@ try {
         const loadedAssets = Object.fromEntries([...loaded].sort(([a], [b]) => a.localeCompare(b)));
         const gpuAfter = await gpuProof();
         assert.deepEqual(gpuAfter, gpuBefore, "GPU identity must remain stable during capture");
+        const runtimeObservation = runtimeMatrix ? await page.evaluate((id) => {
+          const runtime = window[`__${id}`];
+          return {
+            renderStats: runtime.renderStats, dom: runtime.dom,
+            camera: runtime.camera.stats(), options: runtime.options?.state(),
+            features: runtime.features?.state(), input: window.__runtimeAuditInput ?? null,
+            animations: document.querySelector(".planet-stage").getAnimations({ subtree: true }).map((animation) => ({
+              target: animation.effect?.target?.className, name: animation.animationName,
+              timing: animation.effect?.getTiming(), rate: animation.playbackRate,
+              time: animation.currentTime, state: animation.playState,
+            })),
+          };
+        }, object.id) : null;
         const record = { prefix, kind, pose: pose.id, poseState, loadedAssets, loadedApplication, versionLabel, gpu: gpuAfter, frameSha256s: frame.frames.map(sha), coverage: frame.validation, captureAttempts: frame.attempts,
+          ...(runtimeMatrix ? { runtimeObservation } : {}),
           ...(reportOnly ? { observedPose, repeatable: frame.repeatable, stateHashes: frame.stateHashes } : {}) };
         report.captures.push(record);
         for (const [phase, png] of frame.frames.entries()) {
@@ -317,7 +365,7 @@ try {
             assert.deepEqual(loadedAssets, reference.loadedAssets, `${prefix}: loaded identity`);
             assert.equal(versionLabel, reference.versionLabel, `${prefix}: match rendered build metadata`);
             assert.deepEqual(gpuAfter, reference.gpu, `${prefix}: match native GPU identity`);
-            const bytes = await readFile(resolve(root, "baseline", filename));
+            const bytes = await readFile(resolve(referenceRoot, filename));
             assert.equal(sha(bytes), reference.frameSha256s[phase]);
             const { diff, ...comparison } = await compareCaptures(bytes, png);
             await writeFile(resolve(output, `${prefix}-${kind}-phase${phase}-absolute-diff.png`), diff);
@@ -340,8 +388,20 @@ try {
   assert.equal(report.captures.length, report.expectedCaptureCount, "Complete visual matrix required");
   assert.equal(new Set(report.captures.map(({ prefix, kind }) => `${prefix}-${kind}`)).size, report.captures.length);
   if (baseline) {
-    assert.deepEqual(report.harnessHashes, baseline.harnessHashes, "Match recorded repository harness inputs");
-    assert.equal(report.expectedCaptureCount, baseline.expectedCaptureCount);
+    if (runtimeMatrix) {
+      // Application sources are deliberately changed by a runtime migration.
+      // Freeze executable comparison code; retain both complete source snapshots.
+      const comparisonCode = ["tools/audit-shared-runtime.mjs", "tools/runtime-audit-poses.mjs",
+        "tools/audit-source-identity.mjs", "tools/readback-sequence.mjs",
+        "tools/object-contract-visual.mjs", "tools/saturn-scene-coverage.mjs"];
+      for (const file of comparisonCode) assert.equal(report.harnessHashes[file], baseline.harnessHashes[file],
+        `Comparison implementation changed: ${file}`);
+      assert.equal(baseline.runtimeMatrix, true);
+      for (const id of report.objectIds) assert.deepEqual(report.scenarios[id], baseline.scenarios[id]);
+    } else {
+      assert.deepEqual(report.harnessHashes, baseline.harnessHashes, "Match recorded repository harness inputs");
+      assert.equal(report.expectedCaptureCount, baseline.expectedCaptureCount);
+    }
     assert.equal(report.comparisons.length, report.expectedCaptureCount * (reportOnly ? 6 : 2));
     report.exactComparisonPass = report.comparisons.every(({ changedPixels }) => changedPixels === 0);
     if (!reportOnly) assert.ok(report.exactComparisonPass, "Unintended pixels changed; inspect absolute differences.");

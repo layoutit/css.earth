@@ -55,7 +55,7 @@ try {
   await page.waitForTimeout(500);
   const startup = await page.evaluate(() => ({
     longTasks: [...window.__jupiterLongTasks],
-    cache: window.__jupiter.renderStats.materialCache(),
+    cache: ({ ...window.__jupiter.material.state(), pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") }),
     resources: performance.getEntriesByType("resource")
       .filter(({ name }) => name.includes("/scenes/jupiter/"))
       .map(({ name, transferSize, decodedBodySize }) => ({
@@ -67,11 +67,13 @@ try {
   await page.evaluate(() => {
     (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__jupiterLongTasks = [];
-    window.__jupiter.setView({ pitch: 0, zoom: 0.8 });
+    const shadows = document.querySelector('input[name="shadows"]');
+    if (!shadows.checked) shadows.click();
+    window.__jupiter.setView({ controlPitch: 0, zoom: 0.8 });
   });
   await page.waitForFunction(() => {
-    const cache = window.__jupiter.renderStats.materialCache();
-    return cache.pendingRowCount === 0 && cache.appliedRow === cache.desiredRow;
+    const cache = ({ ...window.__jupiter.material.state(), pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") });
+    return window.__jupiter.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.materialFrame;
   });
   const motion = await page.evaluate(() => new Promise((resolve) => {
     const samples = [];
@@ -83,16 +85,16 @@ try {
         ? progress / 0.75 * 89
         : (1 - progress) / 0.25 * 89;
       const zoom = 0.8 + Math.sin(progress * Math.PI) * 0.3;
-      window.__jupiter.setView({ pitch, zoom });
-      const cache = window.__jupiter.renderStats.materialCache();
+      window.__jupiter.setView({ controlPitch: pitch, zoom });
+      const cache = ({ ...window.__jupiter.material.state(), pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") });
       samples.push({
         interval: now - previous,
-        pitch: window.__jupiter.view().pitch,
+        pitch: window.__jupiter.view().controlPitch,
         zoom: window.__jupiter.view().zoom,
         appliedFrame: cache.appliedFrame,
-        desiredFrame: cache.desiredFrame,
-        pendingRowCount: cache.pendingRowCount,
-        readyRows: cache.readyKeys,
+        desiredFrame: cache.materialFrame,
+        pendingRowCount: cache.pool.pending,
+        readyRows: cache.pool.keys,
       });
       previous = now;
       if (samples.length >= 120) resolve(samples.slice(5));
@@ -101,12 +103,12 @@ try {
     requestAnimationFrame(tick);
   }));
   await page.waitForFunction(() => {
-    const cache = window.__jupiter.renderStats.materialCache();
-    return cache.pendingRowCount === 0 && cache.appliedRow === cache.desiredRow;
+    const cache = ({ ...window.__jupiter.material.state(), pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") });
+    return window.__jupiter.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.materialFrame;
   }, null, { timeout: 10_000 });
   const runtime = await page.evaluate(() => ({
     longTasks: [...window.__jupiterLongTasks],
-    cache: window.__jupiter.renderStats.materialCache(),
+    cache: ({ ...window.__jupiter.material.state(), pool: window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting") }),
     stableDomIdentity: window.__jupiter.assertStableDomIdentity(),
     retainedLeafCount: window.__jupiter.dom.retainedLeafCount,
     stageElementCount: document.querySelector(".planet-stage")
@@ -167,10 +169,10 @@ try {
     assert.equal(report.runtime.retainedLeafCount, 797);
     assert.equal(report.runtime.stageElementCount, 827);
     assert.equal(report.runtime.runningAnimationCount, 0);
-    assert.equal(report.runtime.cache.maximumRetainedRowCount, 3);
-    assert.ok(report.runtime.cache.retainedRowCount <= 3);
-    assert.equal(report.runtime.cache.appliedRow, report.runtime.cache.desiredRow);
-    assert.ok(report.runtime.cache.imageAllocations <= 3);
+    assert.equal(report.runtime.cache.pool.capacity, 3);
+    assert.ok(report.runtime.cache.pool.ready <= 3);
+    assert.equal(report.runtime.cache.appliedFrame, report.runtime.cache.materialFrame);
+    assert.ok(report.runtime.cache.pool.nativeSlots <= 3);
     assert.deepEqual(report.externalRequests, []);
     assert.deepEqual(report.browserProblems, []);
     assert.ok(report.startup.longTasks.every((duration) => duration <= 200),

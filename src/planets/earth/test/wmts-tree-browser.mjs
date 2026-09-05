@@ -69,10 +69,10 @@ try{
         if(noise)await page.evaluate(()=>window.__earth.lenses.select("buenos-aires-noise"));
         await page.evaluate(camera=>window.__earth.camera.setState(camera),camera);
         try{
-          await page.waitForFunction(()=>{const s=window.__earth.cityPages.stats();return s.desired.length>0&&!s.pendingSelection&&!s.activeLoads&&!s.index.activeLoads&&s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));},null,{timeout:120000});
-        }catch(error){run.failure=await page.evaluate(()=>window.__earth.cityPages.stats());throw error;}
-        if(noise)await page.waitForFunction(()=>{const s=window.__earth.noisePages.stats();return s.desired.length>0&&!s.activeLoads&&s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));});
-        const state=await page.evaluate(()=>({paging:window.__earth.cityPages.stats(),noise:window.__earth.noisePages.stats(),stable:window.__earth.assertStableDomIdentity(),identical:[...document.querySelector(".planet-stage").querySelectorAll("*")].every((n,i)=>n===window.__savedNodes[i]),nodes:window.__savedNodes.length}));
+          await page.waitForFunction(()=>{const s=window.__earth.runtime.pages().city;return s.desired.length>0&&!s.pendingSelection&&!s.activeLoads&&!s.index.activeLoads&&s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));},null,{timeout:120000});
+        }catch(error){run.failure=await page.evaluate(()=>window.__earth.runtime.pages().city);throw error;}
+        if(noise)await page.waitForFunction(()=>{const s=window.__earth.runtime.pages().noise;return s.desired.length>0&&!s.activeLoads&&s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));});
+        const state=await page.evaluate(()=>({paging:window.__earth.runtime.pages().city,noise:window.__earth.runtime.pages().noise,stable:window.__earth.assertStableDomIdentity(),identical:[...document.querySelector(".planet-stage").querySelectorAll("*")].every((n,i)=>n===window.__savedNodes[i]),nodes:window.__savedNodes.length}));
         assert.ok(state.stable&&state.identical);assert.deepEqual(state.paging.index.errors,[]);assert.deepEqual(state.paging.errors,[]);
         assert.ok(state.paging.reservedDecodedBytes<=plan.maximumDecodedBytes);assert.ok(state.paging.index.reservedDecodedBytes<=plan.index.maximumBytes);
         run.views.push({id:sample.id,elapsedMs:Date.now()-start,state});
@@ -88,7 +88,7 @@ try{
         console.log(JSON.stringify({dpr,sample:sample.id,elapsedMs:Date.now()-start,pages:state.paging.desired.length,metadata:state.paging.index.reservedDecodedBytes}));
       }
       assert.deepEqual(run.errors,[]);assert.ok(run.ranges.every(r=>r.status===206&&r.range));
-      await page.evaluate(async()=>{await window.__earth.lenses.select("normal");window.__earth.camera.setState({zoom:1.1});});await page.waitForFunction(()=>window.__earth.cityPages.stats().retained.length===0);
+      await page.evaluate(async()=>{await window.__earth.lenses.select("normal");window.__earth.camera.setState({zoom:1.1});});await page.waitForFunction(()=>window.__earth.runtime.pages().city.retained.length===0);
     }finally{await context.close();run.video=await page.video()?.path();}
   }
   if(!mobile)assert.deepEqual(report.runs[0].views.map(v=>v.state.paging.desired),report.runs[1].views.map(v=>v.state.paging.desired));

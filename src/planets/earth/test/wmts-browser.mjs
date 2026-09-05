@@ -89,11 +89,11 @@ try{
         // Release the previous view even when testing one location, so a warm
         // result must reacquire actual provider URLs through the HTTP cache.
         await page.evaluate(()=>window.__earth.camera.setState({zoom:1.1}));
-        await page.waitForFunction(()=>window.__earth.cityPages.stats().retained.length===0);
+        await page.waitForFunction(()=>window.__earth.runtime.pages().city.retained.length===0);
         const start=Date.now(),cacheBefore=run.servedFromCache.length;
         await page.evaluate(camera=>window.__earth.camera.setState(camera),sample.camera);
         await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-        if(!packed&&await page.evaluate(()=>window.__earth.cityPages.stats().desired.length===0)){
+        if(!packed&&await page.evaluate(()=>window.__earth.runtime.pages().city.desired.length===0)){
           const diagnostic=await page.evaluate(async pages=>{
             const {projectCityPage}=await import('/src/planets/earth/runtime/city-page-selection.mjs');
             const stage=document.querySelector('.planet-stage'),camera=stage.querySelector('.polycss-camera');
@@ -103,18 +103,18 @@ try{
             const c=camera.getBoundingClientRect(),s=stage.getBoundingClientRect();
             const viewport={width:stage.clientWidth,height:stage.clientHeight,originX:c.left+c.width/2-s.left,originY:c.top+c.height/2-s.top};
             const projected=pages.map(p=>projectCityPage(p,Array.from(m.toFloat64Array()),parseFloat(getComputedStyle(camera).scale),viewport));
-            return {camera:window.__earth.camera.state(),viewport,visible:projected.filter(p=>p.visible).map(p=>p.span),stats:window.__earth.cityPages.stats()};
+            return {camera:window.__earth.camera.state(),viewport,visible:projected.filter(p=>p.visible).map(p=>p.span),stats:window.__earth.runtime.pages().city};
           },plan.roots);
           run.selectionFailure=diagnostic;throw new Error(`No selected WMTS page: ${JSON.stringify(diagnostic)}`);
         }
-        await page.waitForFunction(()=>window.__earth.cityPages.stats().retained.some(slot=>slot.published),null,{timeout:120000});
+        await page.waitForFunction(()=>window.__earth.runtime.pages().city.retained.some(slot=>slot.published),null,{timeout:120000});
         const firstPaintMs=Date.now()-start;
-        const firstPublished=await page.evaluate(()=>window.__earth.cityPages.stats().retained.filter(slot=>slot.published).length);
+        const firstPublished=await page.evaluate(()=>window.__earth.runtime.pages().city.retained.filter(slot=>slot.published).length);
         await page.waitForFunction(()=>{
-          const s=window.__earth.cityPages.stats();return s.desired.length>0&&!s.pendingSelection&&!s.activeLoads&&!s.index.activeLoads;
+          const s=window.__earth.runtime.pages().city;return s.desired.length>0&&!s.pendingSelection&&!s.activeLoads&&!s.index.activeLoads;
         },null,{timeout:120000});
         const elapsedMs=Date.now()-start;
-        const state=await page.evaluate(()=>({paging:window.__earth.cityPages.stats(),stable:window.__earth.assertStableDomIdentity(),
+        const state=await page.evaluate(()=>({paging:window.__earth.runtime.pages().city,stable:window.__earth.assertStableDomIdentity(),
           identical:[...document.querySelector(".planet-stage").querySelectorAll("*")].every((n,i)=>n===window.__wmtsNodes[i]),nodes:window.__wmtsNodes.length}));
         const complete=state.paging.desired.every(key=>state.paging.retained.some(p=>p.key===key&&p.ready&&p.published));
         run.views.push({id:sample.id,firstPaintMs,firstPublished,elapsedMs,complete,cachedResponses:run.servedFromCache.length-cacheBefore,state});
@@ -133,8 +133,8 @@ try{
         console.log(JSON.stringify({dpr,sample:sample.id,complete,firstPaintMs,elapsedMs,pages:state.paging.desired.length,retries:state.paging.apiImages.retries,cachedResponses:run.servedFromCache.length-cacheBefore}));
       }
       await page.evaluate(()=>window.__earth.camera.setState({zoom:1.1}));
-      await page.waitForFunction(()=>window.__earth.cityPages.stats().retained.length===0);
-      run.released=await page.evaluate(()=>window.__earth.cityPages.stats());
+      await page.waitForFunction(()=>window.__earth.runtime.pages().city.retained.length===0);
+      run.released=await page.evaluate(()=>window.__earth.runtime.pages().city);
       assert.equal(run.released.apiImages.residentImages,0);
       assert.equal(run.network.some(url=>url.includes("earth-assets.lowpoly.cc")),false);
       assert.deepEqual(run.pageErrors,[]);await Promise.all(pending);

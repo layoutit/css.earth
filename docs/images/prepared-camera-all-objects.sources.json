@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-camera-overview@1",
+  "source": "51ee3181174468870e72a52b020a657e89f3c64590c01392ebc8cff88cb6bbe4",
+  "browser": "152.0.7977.76",
+  "dpr": 2,
+  "crop": {
+    "left": 704,
+    "top": 140,
+    "width": 2176,
+    "height": 1550
+  },
+  "resize": {
+    "width": 480,
+    "height": 342
+  },
+  "output": "docs/images/prepared-camera-all-objects.png",
+  "sources": [
+    {
+      "id": "sun",
+      "path": "output/runtime-generalization/B22-v4/camera-final/sun-dpr2-default.png",
+      "sha256": "905802ad63731d240f0fc6dd6a157bf2729659bbe8bead961bcfda1f048b6180"
+    },
+    {
+      "id": "mercury",
+      "path": "output/runtime-generalization/B22-v4/camera-final/mercury-dpr2-default.png",
+      "sha256": "6981cc10838952449f80fda2d26c4cd7b32d0556c9db6cfc66e1b2d990b52d04"
+    },
+    {
+      "id": "venus",
+      "path": "output/runtime-generalization/B22-v4/camera-final/venus-dpr2-default.png",
+      "sha256": "00b25e08b7c379a62e1200359f00bcb9157b32b156f32c79c570674d493ee31e"
+    },
+    {
+      "id": "earth",
+      "path": "output/runtime-generalization/B22-v4/camera-final/earth-dpr2-default.png",
+      "sha256": "ce6d097f83979d5db6f6e101fae19722382eaf2da9050a8cf43a80f25d8fda9c"
+    },
+    {
+      "id": "moon",
+      "path": "output/runtime-generalization/B22-v4/camera-final/moon-dpr2-default.png",
+      "sha256": "9179e81ff83d7e09700491f2661ca39b92862c7164f0d179e212db82341f99a8"
+    },
+    {
+      "id": "mars",
+      "path": "output/runtime-generalization/B22-v4/camera-final/mars-dpr2-default.png",
+      "sha256": "d10569a81314e723572982cc22024bde20d6bf5995f68551d0c25e03c3b95874"
+    },
+    {
+      "id": "jupiter",
+      "path": "output/runtime-generalization/B22-v4/camera-final/jupiter-dpr2-default.png",
+      "sha256": "d044c08468116906bd9850ab9363a265abebe23ee1dcb02806d0f6c540cd8f6c"
+    },
+    {
+      "id": "saturn",
+      "path": "output/runtime-generalization/B22-v4/camera-final/saturn-dpr2-default.png",
+      "sha256": "a2570d2a477356e5653e53deabfac15d3d8733fd335bda164d4f9c117ab23afa"
+    },
+    {
+      "id": "uranus",
+      "path": "output/runtime-generalization/B22-v4/camera-final/uranus-dpr2-default.png",
+      "sha256": "fb225f7207b2326052f23f8b1a52a0b034bfa3de4ccbbc2d613228262f9de223"
+    },
+    {
+      "id": "neptune",
+      "path": "output/runtime-generalization/B22-v4/camera-final/neptune-dpr2-default.png",
+      "sha256": "92c65ca81ea4fcd90a9088443e348289def708673e580cba17d667629052fc0c"
+    },
+    {
+      "id": "pluto",
+      "path": "output/runtime-generalization/B22-v4/camera-final/pluto-dpr2-default.png",
+      "sha256": "6bb86af35cdbce1cbe9f486c0a381e3817bdce4d7c53a9b5722629f0193a3544"
+    }
+  ]
+}

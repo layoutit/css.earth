@@ -89,3 +89,21 @@ test("failed shell construction cleans earlier controllers and their scheduled w
   assert.equal(f.windowTarget.listeners.size, 0);
   assert.equal(f.documentTarget.listeners.size, 0);
 });
+
+test("Motion cannot enable Speed before the shared runtime is ready or after it retires", () => {
+  const f = fixture(), speed = new Element();
+  speed.dataset.runtimeReady = "false";
+  f.selectors.set('.planet-speed-setting[type="range"][name="speed"]', speed);
+  const shell = f.mount();
+  shell.setPlaybackState({ motionRequested: true, reason: "loading" });
+  assert.equal(speed.disabled, true);
+  speed.dataset.runtimeReady = "true";
+  shell.setPlaybackState({ motionRequested: true, reason: "allowed" });
+  assert.equal(speed.disabled, false);
+  shell.setPlaybackState({ motionRequested: false, reason: "motion-off" });
+  assert.equal(speed.disabled, true);
+  speed.dataset.runtimeReady = "false";
+  shell.setPlaybackState({ motionRequested: true, reason: "loading" });
+  assert.equal(speed.disabled, true);
+  shell.destroy();
+});

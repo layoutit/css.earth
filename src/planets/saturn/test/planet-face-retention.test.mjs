@@ -62,7 +62,7 @@ test("does not prepare or mount the removed inner fill", async () => {
   assert.equal("innerFill" in PREPARED_SATURN_SCENE, false);
   assert.equal("innerFillPolygonCount" in counts, false);
   assert.equal(counts.polygonCount, 1_238);
-  const client = await readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8");
+  const client = await readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8");
   assert.doesNotMatch(client, /saturn-inner-fill/);
   assert.doesNotMatch(client, /spherePolygons/);
 });
@@ -196,12 +196,12 @@ test("keeps the complete retained system fixed around its tilt transform", async
 
 test("keeps playback prepared while orbit input selects one dense material state", async () => {
   const [client, css] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(client, /weatherPlayer|createPreparedSaturnWeatherPlayer/);
   assert.match(client,
-    /publishAtlasPresentation\(\s*mounted\.fixedMaterialLeaf,\s*materialPresentation/u);
+    /publishAtlas\(fixedMaterialLeaf/u);
   assert.match(css,
     /\.saturn-body\s*\{[^}]*animation-name:\s*saturn-body-spin;/su);
   assert.match(css,

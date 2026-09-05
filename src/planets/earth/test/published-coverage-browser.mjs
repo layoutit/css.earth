@@ -53,7 +53,7 @@ try {
             identical: [...document.querySelector(".planet-stage").querySelectorAll("*")]
               .every((node, index) => node === window.__coverageNodes[index]),
             nodeCount: document.querySelector(".planet-stage").querySelectorAll("*").length,
-            paging: window.__earth.cityPages.stats(),
+            paging: window.__earth.runtime.pages().city,
           }));
           assert.equal(state.stable, true);
           assert.equal(state.identical, true);
@@ -76,7 +76,7 @@ try {
       }
       await page.evaluate(() => window.__earth.camera.setState({ zoom: 1.1 }));
       await settle(page);
-      run.released = await page.evaluate(() => window.__earth.cityPages.stats());
+      run.released = await page.evaluate(() => window.__earth.runtime.pages().city);
       assert.equal(run.released.retained.length, 0);
       assert.equal(run.released.index.residentDirectories, 0);
       assert.deepEqual(run.pageErrors, []);
@@ -98,7 +98,7 @@ console.log(JSON.stringify({ passed: report.runs.map(run => ({ dpr: run.dpr, vie
 async function settle(page) {
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   await page.waitForFunction(() => {
-    const state = window.__earth.cityPages.stats();
+    const state = window.__earth.runtime.pages().city;
     return !state.pendingSelection && state.activeLoads === 0 && state.index.activeLoads === 0;
   }, null, { timeout: 60000 });
 }

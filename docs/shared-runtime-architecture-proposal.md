@@ -1,651 +1,164 @@
-# Shared runtime architecture before catalog expansion
+# One object runtime for PR #2
 
-Status: All five shared-runtime workstreams and the common orbit-controller
-migration are implemented. All eleven registered objects use the same controller;
-an unregistered fixture exercises the generic adapter and controller in Chrome.
-See the [current generic contract proof](generic-runtime-contract-proof.md).
-The separately authorized Earth affine-texture repair is implemented. On 2026-09-04,
-the user accepted both the shown Earth comparisons and the complete fixed-six
-readback matrix described in the evidence record. The strict exact-pixel audit
-still reports baseline readback instability; it has not been relabeled as a
-pass. The inspected `earth-8x` scalar workaround was withdrawn; its other WIP
-is excluded. See the
-[implementation and evidence record](shared-runtime-implementation.md).
+Status: implemented and verified across all eleven existing objects; visual and performance qualifications are recorded in the proof.
+Delivery: [PR #2](https://github.com/layoutit/cssEarth/pull/2), `refactor/shared-runtime`.
+This document supersedes the earlier proposal that left object-local coordinators in place.
 
-Date: 2026-09-04
+## Architectural goal
 
-Delivery: One new architectural PR, with reviewable commits. This is the full
-proposal, superseding the playback-only outline. The user approved implementation
-and opening the PR on 2026-09-04. Merging remains a separate decision.
+One `OBJECTS` registry, one object adapter, one application shell, and one mounted
+object scene. Every object uses the same implementation for mounting, readiness,
+lifetime, controls, selection transactions, image ownership, residency, playback,
+camera binding, and fatal cleanup. Matching method names or sharing helpers while
+retaining private coordinators does not meet this goal.
 
-## 1. Outcome
+The scope is Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Saturn, Uranus,
+Neptune, and Pluto. No additional object or route is needed to establish this
+contract. The fixed eight-planet list remains a reporting filter.
 
-Unify the runtime architecture before adding many more objects. New objects
-should supply their prepared content and rendering behavior, not copy lifecycle,
-playback-policy, image-request, or control-race machinery from a neighboring
-object. Existing objects must migrate to that same foundation in this PR.
+## Ownership
 
-The PR includes five connected workstreams:
-
-1. One authority for automatic playback and shared status.
-2. A common mount lifetime, cancellation, and failure boundary.
-3. Reusable prepared-image loading with explicit cache ownership.
-4. Shared speed binding and latest-request-wins control transactions.
-5. Optional object controls, content-derived conformance, and a documented
-   authoring path for the next object.
-
-Unify coordination, not every rendering technique. Different prepared materials
-and cache policies are valid object behavior; competing lifecycle or playback
-authorities are not. Passing the playback fix alone does not complete this PR.
-
-### Decisions that stay fixed
-
-- One `OBJECTS` registry, one generic adapter, one shell, one mounted scene,
-  and one camera per scene. Classification remains a reporting filter.
-- One canonical highest-density prepared asset bank, selected once per mount
-  independently of display scaling. No bank switching or runtime quality modes.
-- Object-owned geometry, materials, scientific content, prepared inventories,
-  camera plans, and retained rendering. Preserve stable DOM and existing bounded
-  on-demand mount exceptions.
-- One shared implementation of camera input, state, inertia, fly-to, zoom limits,
-  responsive fitting, and failure cleanup: `createRetainedCubicSkyOrbit`.
-  Objects pass prepared camera plans and retained material publication hooks.
-- Existing animation mechanisms. **No new clock or time source.** Saturn's
-  clock wrapper already drives native browser animations without a per-frame
-  timer. Sharing playback decisions does not require replacing that wrapper.
-- No runtime source derivation, geometry generation, rasterization, canvas,
-  WebGL, scene SVG, masks, filters, gradients, blend modes, or `clip-path`.
-- No new dependency, event bus, base class, universal renderer, feature-plugin
-  system, global cache, or second application state store.
-
-## 2. Evidence and design basis
-
-Source inspection used merged objects-contract tree
-`4ba3c3c526abdfcf6c26def7fd635451f2d08eea`. Inspected worktree HEAD
-`78bc4d7e779ece382873d3bd957773684f497963` has the same tracked tree. Reconcile
-this design with then-current main before implementation; concurrent work in
-the main checkout is outside this document's evidence baseline.
-
-Three subagents independently examined lifecycle/playback, assets, and controls.
-Findings below are source-backed unless identified as a previous browser
-observation. This proposal-writing pass did not run browser acceptance gates.
-
-| Evidence | Design consequence |
-| --- | --- |
-| [Router](../site/scene-router.mjs), lines 187–194, omits readiness/reduced motion from playback. [Saturn](../src/planets/saturn/runtime/client.mjs), lines 266–269, independently resumes when reduced motion clears. | One playback authority, not coordinated copies. |
-| Moon/Pluto's 425-line clients match after substituting names. | Extract their repeated coordination; do not turn their sphere renderer into a universal renderer. |
-| [Router](../site/scene-router.mjs), lines 69 and 81–94, can lose a malformed mount's cleanup handle or interrupt cleanup if a destructor throws. | Retain raw handles before validation and complete failure cleanup. These are source-derived failure paths, not reproduced browser incidents. |
-| [Uranus](../src/planets/uranus/runtime/client.mjs), lines 189–198, retains a rejected static-image promise. | Define retry semantics once. |
-| [Earth's row cache](../src/planets/earth/runtime/preparedRowCache.mjs) protects applied rows and bounds its pool; Saturn and other clients release inactive material/lens groups. | Preserve specialized residency rather than retaining every decoded image until unmount. |
-| [Saturn](../src/planets/saturn/runtime/client.mjs), lines 430–466 and 515–522, combines material selection with an independent interior toggle. | Do not require one exclusive active lens ID. |
-| [Neptune](../src/planets/neptune/runtime/client.mjs), lines 540–550 and 649–658, mutates material inside an awaited setter before the outer selection guard runs. | Guard actual publication, including nested material work. Browser reproduction remains required. |
-| [PlanetShell](../site/components/PlanetShell.astro) makes settings optional but puts Motion inside that conditional panel. [The shell client](../site/planet-shell-client.mjs) requires it; [profile validation](../site/test/load-browser-profile.mjs) requires lens/speed scenarios universally. | Separate mandatory shared controls from optional object controls and derive coverage from supplied content. |
-
-A previous author-local Chrome 152.0.7977.76 probe observed Saturn go from zero
-to six running animations after reduced motion was enabled then cleared, while
-Motion remained off and the router reported paused. Pluto stayed paused. This
-is prior evidence, not fresh acceptance proof or a claim that Pluto introduced
-the defect. Reproduce it on the resolved baseline and save a report before fixing.
-
-## 3. Ownership and interfaces
-
-| Owner | Owns | Must not own |
+| Concern | Executable owner | Object contribution |
 | --- | --- | --- |
-| `site/runtime-policy.mjs` | Pure playback permission and blocked reason; existing input policy. | Listeners, clocks, object IDs, rendering. |
-| `site/scene-router.mjs` | Generation, readiness, Motion intent, environmental gates, effective playback, fatal failure, shared lifecycle/status. | Asset lists, lens models, cache algorithms. |
-| Shell and control binders | Shell markup, events, labels, enabled/busy state, rendering supplied control state. | Playback authority or object rendering decisions. |
-| Shared lifetime | Disposal bookkeeping and cancellation notification. | Another router or renderer wrapper. |
-| Shared image transport/store | Decode/release primitives for all objects; deduplication/lifetime for ordinary selected URLs. | Density selection, manifests, global residency, row/atlas policy. |
-| Shared selection runner | Request identity and guarded commit ordering. | Interior/rings/shadows meaning or prepared material schemas. |
-| Object package | Prepared selection, startup requirements, rendering, speed application, desired presentation state, specialized caches/disposal. | Browser playback policy or global shell status. |
+| Registration, loading, shell | `OBJECTS`, object adapter, router, shared shell | Identity, route, source information, actual control content |
+| Mount, readiness, disposal, fatal errors | `createObjectRuntime`, scene lifetime | Synchronous construction of retained presentation; registered cleanup |
+| Playback permission | Router and runtime policy | None |
+| Applying permission and speed | `createPreparedPlayback` | Native animation handles, prepared roles and rates |
+| Control listeners and busy state | `createObjectControlBinding` | Actual control-content export |
+| Desired/committed state, cancellation, publication ordering | `createObjectSelectionRuntime` | Pure scalar reduction and prepared resource demand |
+| Decode, leases, pinning, retry, reuse, eviction | Prepared residency and image store | Catalog, pool limits, retention policy, required/prewarm keys |
+| Input, camera, projection, sky and directional Sun | Shared orbit, camera publisher, sky and Sun modules | Prepared plans and retained camera/scene handles |
+| Body and material rendering | Shared synchronous invocation boundary | Prepared addresses and writes to owned elements |
+| Diagnostics and browser access | Shared runtime observations and browser-profile factory | Read-only material/source facts, audit coordinate fields and view mappings |
 
-Keep the returned mount interface and add one narrow error-reporting input.
-The following signatures are interface sketches, not drop-in implementation.
+```mermaid
+flowchart TD
+  Registry[One OBJECTS registry] --> Adapter[One object adapter]
+  Adapter --> Runtime[createObjectRuntime]
+  Definition[Object definition and prepared data] --> Runtime
+  Runtime --> Lifecycle[Lifetime and native playback]
+  Runtime --> Controls[Controls and selection transactions]
+  Runtime --> Resources[Leases and bounded residency]
+  Runtime --> Camera[Shared orbit and projection]
+  Runtime --> Presentation[Object presentation and retained material writes]
+```
+
+All eleven `runtime/client.mjs` files contain only imports and one factory binding:
 
 ```js
-mountScene(stage, { onError }) -> {
-  ready,       // Promise: initial success, failure, or logical cancellation
-  pause(),     // synchronous, idempotent; remembers a pre-ready target
-  resume(),    // synchronous, idempotent; remembers a pre-ready target
-  destroy(),   // synchronous invalidation and idempotent cleanup
+import { createObjectRuntime } from "../../../platform/object-runtime.mjs";
+import { runtimeDefinition } from "./definition.mjs";
+
+export const mountMoonClient = createObjectRuntime(runtimeDefinition);
+```
+
+## One definition and presentation contract
+
+`src/platform/object-runtime-contract.mjs` validates `cssearth-object-runtime@1`.
+The definition has identity, actual controls, prepared camera/sky/optional Sun,
+an input selector, an asset catalog, initial scalar selection, and three hooks:
+
+```js
+reduceSelection(selection, action) -> nextSelection
+resolvePresentation({ selection, view, previousPlan }) -> {
+  required, prewarm, pressedLenses, ...preparedMaterialFacts
+}
+createPresentation(stage, context) -> {
+  cameraElement, sceneElement, bodyLayers, nativeAnimations,
+  commitSelection({ selection, plan, view, resources }),
+  publishFrame({ selection, plan, view, resources }),
+  observe(),
 }
 ```
 
-The router always supplies `onError(error)` for fatal failures after a mount is
-returned, including while loading. It is generation- and mount-identity-bound,
-does not throw, and may synchronously destroy the mount. Its caller stops work
-immediately. Old mounts cannot fail their replacements.
+Hooks are synchronous. The invocation boundary rejects async/generator functions
+and ordinary functions that return thenables. Camera and scene handles must
+belong to the mounted stage. `bodyLayers` contains actual registrations created
+by `registerBodyDependentLayers`; fabricated assertion records are rejected.
+Every commit and frame checks connectivity and stable parent identity before
+and after the material writes.
 
-Before returning, constructor/startup failures throw or reject `ready`; a
-constructor cleans its partial resources if it throws. Invalid input and failed
-lens preparation are recoverable and do not call `onError`. Unexpected partial
-presentation or speed-application failure is fatal: `ready` cannot reject again
-after success, and a corrupt scene must not remain reported as healthy. Direct
-adapter tests supply an explicit error spy/handler, not a silent no-op default.
+`context` provides canonical density, prepared-resource reads, immediate cleanup
+registration, native-animation registration, and prepared pose seeking. It does
+not provide a private scheduler, image allocator, listener binder, or lifecycle.
+The public mount remains `{ ready, pause, resume, destroy }`.
 
-This callback is the only planned mount-signature addition. Do not add a service
-container, capability negotiation, subscription protocol, or control registry.
+The common runtime loads startup resources, mounts the presentation and shared
+celestial layers, registers animations, binds one orbit and one selection owner,
+commits the initial presentation, waits for paint, and publishes readiness.
+Disposal invalidates the session first and attempts all owned cleanup. Late
+requests cannot publish into a retired or replacement scene.
 
-## 4. Playback and mount lifetime
+## Selection and residency
 
-### Shared playback policy
+The common selection owner holds desired state separately from committed state.
+It resolves demand against the current camera, protects the committed working
+set while a replacement decodes, rechecks request identity and current demand,
+then commits presentation, resources, frame, and playback before promoting state.
+A failed lens decode keeps the committed presentation and permits explicit retry.
+A partial native publication failure retires the scene through the common fatal
+boundary. Camera updates cannot commit a material plan for an outdated view.
 
-```js
-allowAutomaticPlayback =
-  sceneState === "ready" &&
-  motionRequested &&
-  !documentHidden &&
-  !reducedMotion;
-```
+Pools declare capacity, concurrency, native-image reuse, decoding hint, retention,
+eviction, and an optional stability delay. They do not implement those mechanics.
+Explicit leases coalesce identical URLs, including aliases across pools. Batched
+ownership changes prevent cancelled queued banks from starting extra decodes.
+Required resources stay pinned during transitions. Optional warming is bounded;
+a warm-only handoff releases JavaScript ownership while retaining the decoded
+CSS image source. This is not a claim of immediate browser memory reclamation.
 
-Motion starts off. The checkbox records intent; environmental events never
-rewrite it. Reduced motion blocks automatic playback even after the user asks
-for Motion on, preserving that request for later. This is an intentional common
-product policy, not unchanged behavior for every current client. Direct camera
-motion remains out of scope.
+Assets use the highest prepared density once, independently of DPR. No runtime
+density-bank switching, geometry derivation, rasterization, chart generation, canvas,
+WebGL, SVG scene rendering, masks, filters, gradients, blend modes, or clip paths
+are introduced. Source and provenance remain inside the existing object packages.
 
-The pure function returns permission plus a reason, in this precedence:
-unavailable scene, Motion off, hidden page, reduced motion, allowed. The shell
-gets that result through a small `setPlaybackState(...)` method. Rendering it
-does not emit another Motion-change event. Show a reduced-motion block in the
-existing Motion row, including accessible text, without another control/layout.
+## Differences that remain between objects
 
-Speed zero is separate: playback may be permitted while an object's clock is
-stopped. `data-playing` means shared permission, not observed clock advancement.
+These are rendering facts or policy data consumed by the same runtime.
 
-Move every write/removal of `html[data-playing]` into the router. Remove object
-environment listeners and CSS rules that independently decide automatic
-playback; retain unrelated accessibility styles. Startup, speed changes, lens
-completion, and newly attached animations obey the last shared command.
-
-| State | Publication |
+| Object | Package-owned rendering and demand |
 | --- | --- |
-| Loading or ready but blocked | `data-playing="false"`. |
-| Ready and permitted | `data-playing="true"` only after `resume()` succeeds. |
-| Destroyed or failed | Remove the attribute; publish existing destroyed/error lifecycle. |
-
-### Mount and failure ordering
-
-1. Start a generation and publish loading with playback denied.
-2. Mount the shell with generation-bound callbacks; load the adapter.
-3. Retain the raw mount before lifecycle validation. If invalid, use any
-   available `destroy()` handle before failing.
-4. Initialize a paused target. New automatic animations must be paused before
-   their first visible frame.
-5. Await readiness. Inputs may change, but the app never dispatches `resume()`
-   while loading.
-6. Recheck generation/identity, mark ready, and recompute policy. Apply the
-   command before publishing successful status.
-7. Suppress duplicate effective commands, but initialize every replacement mount.
-
-Preserve pre-ready adapter target-memory semantics. The app deliberately uses
-the stricter policy of never requesting the running target before readiness.
-Do not remove direct adapter lifecycle tests because the router is stricter.
-
-Startup, event-time playback-command, and reported fatal errors converge on one
-router failure path. Invalidate generation and detach active references first;
-attempt all cleanup even if one destructor throws. Preserve the primary error,
-report cleanup errors, and complete terminal publication. A later rejection or
-duplicate report cannot clean up twice or affect a replacement. A destructor
-exception is not proof of resource release: tests must expose surviving work.
-
-### Shared lifetime
-
-Add `src/platform/scene-lifetime.mjs`:
-
-```js
-createSceneLifetime() -> {
-  get disposed,
-  onDispose(callback), // returns cleanup errors if already disposed, otherwise []
-  wait(promise),       // cancellation-aware await; defined below
-  destroy(), // returns collected cleanup errors
-}
-```
-
-Disposal marks the scope closed before callbacks, runs each once in reverse
-registration order, and continues after failures. Registration after disposal
-runs immediately and reports any failure explicitly; it never revives the scope.
-
-Every current object uses this lifetime for mount-owned resources. Register
-ownership as resources are created, including partial controls, image stores,
-cache subscriptions, timers, frame handles, and event listeners. Register a
-specialized cache once and let it manage its owned image handles; registering a
-permanent finalizer for every evicted image would retain those images until
-unmount. Caches keep their entry/request identities, not a competing mount
-lifetime. Remove equivalent duplicated mount-disposal bookkeeping.
-
-Likewise, register each recurring timer/frame controller once, with cleanup of
-its current handles. Do not append a mount-finalizer closure for each completed
-frame, timer, or request. Lifetime storage must be bounded by live owners/work,
-not the total historical number of scheduled operations.
-
-Cleanup removes only owned handles/roots. Old cleanup must not clear a replacement
-stage through unconditional `replaceChildren()` or delete its diagnostics.
-Check lifetime after awaits and immediately before publication. The helper does
-not load scenes, choose assets, decide playback, or implement a renderer.
-
-`lifetime.wait(promise)` returns a promise for `{ cancelled: false, value }` on
-live success, rejects a live failure, or promptly resolves `{ cancelled: true }`
-on disposal. It observes late rejection without changing an already-settled
-result and unregisters its internal cancellation waiter on settlement. Waiting
-after disposal immediately returns the cancelled result while still observing
-the supplied promise. It does not cancel underlying browser work.
-
-All clients use this operation for startup settlement rather than copying their
-own cancellation races. Guard intermediate publication as well as the final
-result; cancelling the outer wait alone cannot stop an inner async function.
-For frame/DOMContentLoaded waits, also cancel the owned handles/remove listeners.
-Destroyed `ready` settles without image work or another frame, and may fulfill
-without a value; router generation prevents ready publication. Live startup
-failure still rejects. A hidden live scene may await paint; a destroyed scene
-may not depend on that paint to settle.
-
-### Document lifetime versus scene lifetime
-
-Keep `pagehide`/`pageshow` listeners at document/router lifetime so restoration
-still works. Visibility and reduced-motion subscriptions belong to the live
-session: remove them on teardown and attach each exactly once on restoration.
-
-Pagehide invalidates the generation, revokes playback, and disposes scene/shell.
-Persisted pageshow preserves Motion intent, rereads the environment, and creates
-one fresh paused mount before policy applies at readiness. Repeated events are
-idempotent. No storage or ordinary-navigation persistence is added.
-
-## 5. Prepared images and cache ownership
-
-Add `src/platform/prepared-image-store.mjs`:
-
-```js
-// Every object/cache uses these transport primitives.
-decodePreparedImage(image, selectedUrl); // Promise<HTMLImageElement>
-releasePreparedImage(image);
-
-// Ordinary prepared assets use this ownership layer.
-createPreparedImageStore({ createImage, decoding }) -> {
-  load(url),     // Promise<HTMLImageElement | null>
-  release(url),  // retire this store's current entry for the URL
-  destroy(),
-  stats(),      // pendingCount, retainedCount
-}
-```
-
-The transport primitive sets `src`, awaits decode, checks natural dimensions,
-and adds URL/cause error context. Allocation/reuse, decoding hint, request
-identity, retry, and release remain with the owner. Row pools pass their existing
-image slots. The primitive must not clear `src` in an old request's failure
-handler: only the owner knows whether that image has since been reused.
-
-The store accepts a nonempty, already-selected URL. Preserve the caller's
-decoding hint; `createImage` is a test seam. Do not interpret object descriptor shapes,
-manifests, or density. The object selects the canonical bank once and supplies
-the same selected URLs to loading and presentation.
-
-- Deduplicate pending work per URL/store; reuse a successful retained image.
-  Track allocation immediately, including pending images.
-- Require positive natural dimensions. Live failure removes that exact entry,
-  releases references, and rejects with URL/cause context. A later explicit
-  load retries; no automatic retry loop.
-- Release retires the current entry; reloading creates a new one. Old handlers
-  compare entry identity and can never delete/populate its replacement.
-- Retired requests resolve `null` when native work settles, including late
-  rejection. Destroy invalidates/releases entries synchronously; later loads
-  return `null` without allocating. Startup cancellation must not wait for
-  these native settlements.
-- Callers still check mount/request identity before using a result. Clearing an
-  image source is best-effort release, not proof of cancelled decoding/network
-  work or immediate browser-memory reclamation.
-- One logical owner controls eviction. No global cache, reference counts,
-  eviction scheduler, or cross-mount sharing.
-
-### Required migration
-
-| Consumers | Shared loading migration | Object-owned behavior preserved |
-| --- | --- | --- |
-| Moon, Pluto | Replace ordinary pending/retained URL maps. | Prepared URL mapping, startup/lens requirements, rendering. |
-| Earth | Replace ordinary static/lens URL map. | Both row caches, protected rows, capacities, coalescing, publication. |
-| Uranus | Replace static `decoded` map, including rejection retry. | Separate material-neighborhood cache and eviction/generation. |
-| Mercury, Venus, Mars, Jupiter, Saturn, Neptune, Sun | Use shared decode/release primitives inside existing loaders and integrate common lifetime/retry/publication rules. Do not force mount-long URL retention. | Warm-only initialization, active-lens groups, bounded rows, single-atlas residency, decode scheduling. |
-
-All eleven use shared decode/release transport, release owned pending/retained
-references, prevent late publication, allow explicit retry after retryable
-failure, and preserve current cache limits.
-The shared store is the default for ordinary prepared images. Specialized
-residency remains object-owned and tested, not a license to copy the ordinary
-store into a new object. Four real consumers prove the reusable store without
-imposing one memory policy on every renderer.
-
-Group loaders must record every allocated image before awaiting `Promise.all`,
-not only store the returned array after total success. Mercury/Saturn currently
-assign group images on success. A partial failure needs to release successful
-and pending siblings, contain late settlement, retain the previous presentation,
-and allow retry. Test that sequence explicitly.
-
-Warm-only startup uses a temporary owner/group: track handles before decoding,
-then drop its explicit image references after the prepared scene has consumed
-the warmup and established its own DOM/CSS asset references. Empty that group;
-do not promote warm-only handles into mount-long retention. Failure/disposal
-releases its remaining handles immediately. Preserve the current successful
-warmup behavior; do not force re-decoding by clearing a source still in use.
-
-## 6. Controls and presentation transactions
-
-### Speed binding
-
-Extract this binder inside `src/platform/planet-feature-controls.mjs`, using the
-existing `PLANET_SPEED_STATES`:
-
-```js
-bindSpeedControl({ button, initialValue: 1, lifetime, onChange, onError }) -> {
-  state(),
-  setEnabled(enabled),
-}
-```
-
-It owns one listener, cycling, value, label, and accessibility state. It never
-collects animations or calls `play()`/`pause()`. The object applies the rate
-through its current mechanism. Existing feature controls and standalone
-clients use the binder; remove duplicate speed tables and binding mechanics.
-
-Start at normal; disable speed until runtime binding is ready. This explicitly
-standardizes inconsistent pre-ready behavior. Attaching later animation handles
-does not reset speed: apply current speed and last playback command before they
-can run. Callback failure cannot publish a successful label; fatal application
-failure enters the router error path.
-
-### Latest-selection runner
-
-Add `src/platform/latest-selection.mjs`. Bind one runner to the mount lifetime
-for each independently committed presentation:
-
-```js
-const selection = createLatestSelection({ lifetime, onBusyChange, onFatalError });
-await selection.run({
-  prepare: async ({ isCurrent }) => preparedResult,
-  commit: (preparedResult) => { /* synchronous object publication */ },
-  onCurrentFailure: (error) => { /* restore object desired/control state */ },
-  discard: (preparedResult) => { /* optional request-owned release */ },
-});
-```
-
-It returns true for commit, false for stale/cancelled work, and rejects current
-preparation failure. Fatal commit failure is reported through `onFatalError`
-and then rejects; callers observe the rejection without publishing into a
-disposed scope. It owns request identity and busy ordering, not a universal
-lens state. Validate control IDs before a request; reject duplicate, missing,
-or mismatched IDs before leaving listeners attached. Equal map sizes do not
-prove identity.
-
-1. Record the request and mark its participating control regions busy. Preserve
-   committed pixels and pressed lens buttons while preparing. Coupled checkboxes
-   may show desired values, explicitly pending under that busy state; they are
-   not proof that the presentation has committed.
-2. Finish required asset/material preparation without mutating visible state.
-   Check both lifetime and request identity immediately before commit.
-3. Commit synchronously: publish object presentation, then committed state and
-   pressed-control projection. No await inside commit. Validate required handles
-   before the first visible write.
-4. A current preparation failure preserves committed presentation. While still
-   current/live, the runner calls synchronous `onCurrentFailure(error)` to restore
-   desired state and coupled controls, then clears busy and rejects. A failure
-   in that restoration is fatal. Caller catches only observe/report rejection;
-   they must not mutate selection state outside the runner's identity guard.
-   Recheck identity after callbacks before further publication. Retry is allowed.
-5. Stale/cancelled work never commits or reports a live-scene error. `discard`
-   releases only request-owned resources, never cache entries shared with a
-   winner. All owned outcomes, including late rejection, must be handled.
-6. Unexpected commit failure invokes `onFatalError` and stops publication. There
-   is no generic rollback of partial DOM writes. After synchronous disposal,
-   neither runner nor caller may touch old controls.
-
-### Complex objects prove the boundary
-
-Every current client with lens controls uses the shared transaction mechanism.
-Start with Moon/Pluto, then migrate the other presentation models:
-
-- Saturn retains material selection plus an independent interior toggle, with
-  potentially multiple pressed controls. Earth/Mercury retain exclusive interior.
-- Neptune completes material-row preparation before visible lens commit. A guard
-  after `await setLens(...)` cannot protect writes inside that setter.
-- Saturn's lens, interior, rings, and shadows share one object-owned desired
-  presentation snapshot and winning transaction where they affect the same
-  material. Each action updates desired state and captures an immutable snapshot
-  before submitting: a rings toggle
-  during pending methane selection must not restore the last committed normal
-  lens. Competing outer/UI and inner/material winners must not remain.
-- Camera caches may warm independently, but callbacks publish only the current
-  committed presentation and current camera state, not a captured obsolete
-  lens/frame. Keep continuous camera updates outside the transaction runner;
-  do not add per-frame coordination or change camera scheduling/timing.
-
-On current recoverable failure, the object resets desired state to its last
-committed snapshot and restores toggle/pressed-control values. Do this only if
-the failed request is still current through `onCurrentFailure`: a stale rejection
-cannot overwrite newer intent. A later unrelated toggle must not silently retry
-a failed lens. A successful commit advances the committed snapshot for the
-entire presentation.
-One busy projection covers all lens/settings regions participating in that
-transaction; a settings winner must not leave an older lens spinner stranded.
-
-Split nested async setters into preparation and guarded synchronous publication.
-Do not solve races by serializing all input, disabling selection until every
-request settles, or rebuilding a scene. Rendering state and resource requirements
-remain object-owned callbacks/data, not flags in the shared runner.
-
-## 7. Optional controls and the next-object path
-
-The shared Settings panel, Motion, and high contrast exist even with zero object
-settings. Use the existing shared Settings title; packages supply optional rows.
-No lenses means no lens panel or binding, not a placeholder capability.
-
-Each package exports `objectControls = { lenses, settings }` from
-`site/control-content.mjs`, moving the existing props out of its panel component
-without changing their values. Both the panel and profile loader import that
-same content; the profile loader uses the object-ID path convention it already
-uses for browser profiles. No capability flags or second registry.
-
-Require the export and validate unique IDs/defaults and supported setting shapes.
-Then compare expected and rendered IDs/names/kinds and counts, including mandatory
-shared controls. Only after that comparison select optional scenarios. Missing
-DOM for a declared control is a failure, not a skip. Missing descriptors or
-required profile methods also fail. All eleven current objects retain their
-lens/speed coverage; empty descriptors are explicit, not inferred from absence.
-
-Playback, lifecycle, camera, assets, and retained-DOM tests always apply. Test
-omitted-content cases in component/helper fixtures, not fake product scenes.
-
-Route every app-level lifecycle mutation through the router: pause/resume use
-the shared Motion path; teardown/restoration tests use the router-owned lifecycle
-path. Remove object-global pause, resume, and destroy shortcuts, including their
-callers in package smokes and profiles. Otherwise direct resume can bypass policy
-and direct destruction can leave router generation/readiness inconsistent.
-Retain object-specific camera, material/cache, and clock observations. Direct
-adapter lifecycle tests can call all three methods outside the app router.
-
-### How an additional object is implemented after this PR
-
-1. Add the existing required package/source/preparation/page files and one
-   `OBJECTS` entry. No new router case or second discovery list.
-2. Validate and select prepared inputs at mount. Use the shared lifetime and
-   ordinary image store; a specialized cache needs a demonstrated residency
-   requirement, shared decode/release transport, and its own bounded tests.
-3. Mount retained rendering paused. Register each resource's cleanup and resolve
-   readiness only after required visible assets and presentation are ready.
-4. Supply object-owned pause/resume/rate application and presentation callbacks;
-   bind common speed/selection machinery only for supplied controls.
-5. Expose actual prepared control content and object observations to the common
-   profile, plus package-specific material/camera/cache tests.
-6. Pass the same registry-derived gates. Do not copy another client's media
-   listeners, disposal flags, ordinary image maps, speed handlers, or request
-   counters as onboarding scaffolding.
-
-Document this path in `src/planets/README.md` using migrated Moon/Pluto as small
-examples and Saturn/Neptune as complex examples. These are examples of one
-contract, not renderer categories. Adding an ordinary object should require no
-shared runtime change; a genuinely new shared requirement needs a demonstrated
-case and executable contract tests.
-
-## 8. Implementation order: one PR
-
-| Commit-sized slice | Required result |
-| --- | --- |
-| 1. Baseline regressions | Reproduce Saturn; add controlled readiness, nested-material, rejection/retry, and cleanup tests. Separate hypotheses from observed failures. |
-| 2. Playback/lifetime/error boundary | Pure policy, router/shell integration, raw-handle cleanup, generation-bound `onError`, cancellable lifetime; all-object removal of policy bypasses. |
-| 3. Image ownership | Shared decode/release in all clients; tested store and four ownership migrations; every specialized loader satisfies disposal/retry/publication rules without changed cache limits. |
-| 4. Controls | Shared speed/selection; Moon/Pluto, Sun/Venus, Mars/Jupiter, Earth/Mercury/Uranus, then Neptune/Saturn. Preserve each presentation model. |
-| 5. Authoring surface | Optional controls, content-derived profiles, diagnostic cleanup, and next-object documentation. No reduction in existing coverage. |
-| 6. Final combined proof | Full gates at final head; fresh baseline/candidate comparisons; unchanged prepared bytes except the documented Earth repair; identical prepared bytes in the Earth-only comparison fixture and candidate; updated contract/proof map. |
-
-Tests accompany each slice. Complete every workstream in this PR rather than
-merging a playback-only first installment. Start from then-current main in a
-safe implementation worktree; do not publish to the already-merged objects PR.
-
-Expected new shared production modules: lifetime, image store, selection runner. Extend
-existing policy/router/shell/feature-control modules and add tests and small
-object-owned content exports. No universal scene wrapper. A shared helper that
-requires object-ID branches or renderer flags has crossed the intended boundary.
-
-Update object-authoring docs, scene-contract explanations, and proof mappings.
-Remove stale duplicated policy literals from docs. Preserve source/runtime
-closure and package checks; executable proof must not become declaration-only
-constants.
-
-## 9. Acceptance and evidence
-
-### Focused tests
-
-| Area | Required cases |
-| --- | --- |
-| Policy | Complete readiness/Motion/visibility/reduced-motion truth table and reason precedence; speed separate from permission. |
-| Router | Motion-on during delayed readiness; initial pause; duplicate events; stale ready/rejection/error/shell callbacks; malformed mount; event-time playback error; cleanup continues after destructor failure. |
-| Lifetime | Reverse once-only cleanup; registration after disposal; no old-stage clearing; destroyed readiness settles with frames never fired; shared wait cancellation/late rejection; repeated schedule/complete keeps owner/waiter storage bounded; no surviving owned listeners/timers. |
-| Images | Shared transport validation; pending coalescing; retained reuse; invalid dimensions; failure/retry; partial group success/failure/late sibling; release A/reacquire B/late A resolve and reject; pending+retained disposal; no post-destroy allocation; independent-store isolation. |
-| Speed | Exact cycle/labels; disabled-before-ready; invalid initial rate; one listener; callback failure; later animation handles inherit current state; disposed controls inert. |
-| Selection | A/B and A/B/A permutations; immutable desired snapshots; current failure then unrelated toggle; stale/current rejection; retry; disposal; nested preparation; commit failure; old/new binding sharing DOM nodes; no stale busy/pressed publication across coupled regions. |
-| Shell/profile | No lenses or extra settings; mandatory Motion usable; exact declared/rendered controls; missing declared controls fail; current coverage retained. |
-
-Use existing test owners: router tests live in
-`site/test/planet-shell.test.mjs`, policy tests in
-`site/test/runtime-policy.test.mjs`; new platform helpers get adjacent tests.
-Keep all object, specialized-cache, source/runtime closure, and package tests.
-
-### Real Chrome behavior, derived from `OBJECTS`
-
-- Motion off; reduced motion on then off: never plays. Motion on; preference
-  changes: resume only if still requested, visible, and ready.
-- Hidden page plus preference/Motion changes: no hidden playback. Speed
-  zero/nonzero and later animation attachment never bypass policy pause.
-- Delayed startup with changed inputs; destroy before ready; release/reject old
-  work after restoration: no early running frame, late publication, or teardown
-  of the replacement by old work.
-- Lens actions through real buttons as well as diagnostics; fail then retry the
-  same URL. Delay a later material-row decode at nondefault camera pitch, after
-  surface decoding, then supersede or destroy it.
-- Saturn material/interior/rings/shadows combinations: check actual material
-  addresses, retained interior, and pressed controls. Preserve Earth/Mercury's
-  different interior semantics. After failed lens preparation, change an unrelated
-  toggle and verify the failed lens is not selected/retried implicitly. An
-  attribute alone is not material proof.
-- Repeated restoration: one scene/camera, one effective event response, stable
-  base nodes, and unchanged specialized-cache limits.
-- Actual animation states and frame-separated time samples, not just attributes.
-  Allow an in-flight frame to settle at pause, but not continued advancement.
-
-Use installed headless Chrome under standard and doubled display scaling.
-**Both conditions load the same canonical highest-density bank.** Record actual
-URLs and loaded-byte hashes; a selected-density constant is not proof.
-
-Synthetic pagehide/pageshow tests establish ordering, not real back/forward-cache
-admission. Also exercise navigation/back and record `pageshow.persisted`; report
-admission or its concrete blocker. Do not call an ordinary reload BFCache proof.
-
-### Visual, resource, and final gates
-
-Compare base/candidate at matched paused poses, viewport, lens/settings, Chrome
-version, and loaded asset identities. Require unchanged scene pixels, including
-Saturn body/ring coverage. Investigate differences rather than widening masks.
-Preserve ordinary shell layout and existing ready-state controls. Intentional UI
-changes are the reduced-motion explanation, disabled pre-ready speed, and truthful
-busy/pending states. No-control fixtures also retain the shared Settings panel.
-Test those states separately from unchanged ready-state scene comparisons.
-
-Source inputs remain unchanged. Prepared assets and runtime-manifest bytes stay
-unchanged except for the explicitly authorized Earth repair below. Do not
-regenerate unrelated assets to make a refactor pass. If testing a clean checkout requires
-restoration/preparation, use the existing isolated workflow and verify that it
-reproduces baseline bytes.
-
-Execution note, 2026-09-04: the user identified `earth-8x` as a possible source
-of an Earth fix. Its uncommitted raster-scale change was tested in isolation,
-but matched close-ups showed new stretched wedges. It was withdrawn. The
-trial did not qualify as a repair. The user subsequently explicitly authorized
-fixing Earth within this PR. The narrow exception is Earth-owned preparation:
-bake its surface homography into RGBA atlas pixels and transport affine frames,
-including matching cutaway-outer addresses. Preserve checked source inputs,
-canonical 8K source sampling, geometry, retained leaf counts, and zoom 8. No
-city paging or deeper-zoom WIP is included. Earth regeneration also corrects
-seven demonstrated pre-existing recipe/output mismatches: six inner-shell pole
-images and the night-lights thumbnail. The unchanged checked recipes reproduce
-the corrected bytes; these RGB changes are explicitly included in the Earth
-exception and identical comparison fixture. The implementation record documents
-their provenance and limits. Qualify the repair separately, then
-compare the architecture against `main` plus that identical Earth-only repair.
-The temporary `main` plus workaround fixture is diagnostic evidence only;
-its repeatable captures do not qualify either image quality or this PR.
-
-Record startup requests, retained images, cache bounds, and listener/timer state
-before/after repeated interactions and remounts. No new per-frame coordination
-or polling. Counts are ownership evidence, not memory measurements; removing
-duplicate code is not a performance claim. Investigate startup/playback
-regressions with matched measurements before calling the PR ready.
-
-Run these existing gates from the implementation checkout. Verify that the
-explicit server URL serves that checkout; reuse a matching server or start one
-on a free loopback port and pass that URL instead.
-
-```sh
-pnpm acquire:planets -- --verify-only
-pnpm test
-pnpm build
-pnpm test:browser http://127.0.0.1:4211
-git diff --check
-```
-
-Record exact base/candidate commits, dirty-state qualifications, commands,
-browser version/channel, served routes, prepared/loaded hashes, and fresh
-evidence paths. Keep large captures local/ignored. Provide reproducible tests
-and scripts in the PR; label local reports as local, not hosted CI or independent
-approval. Passing these gates is not native-renderer or compositor-performance
-parity.
-
-## 10. Completion and overengineering limits
-
-Complete all five workstreams, migrate every current object to common
-coordination, and pass the strengthened contract and final gates on one
-candidate. Review fatal lifecycle paths, async presentation races, and cache
-ownership adversarially at final head; repaired findings need fresh proof.
-
-Do not expand this into a universal clock, renderer, scheduler, plugin system,
-camera redesign, route/package rename, or unrelated source/preparation rewrite. Shared
-helpers must accept prepared data/operations, not grow per-object switches.
-Specialized rendering/cache algorithms stay local, while their lifetime and
-publication obligations remain shared and enforced.
-
-The optional-control fix and authoring path make expansion safer; they do not
-prove arbitrary future shapes/datasets fit without work. Each future package
-earns support through the same executable checks. No placeholder scenes or
-declaration-only assurances.
-
-If a required workstream cannot be completed safely, revise the proposal before
-reducing scope. Do not quietly leave older objects on a parallel orchestration
-path or call a partial extraction the unified architecture.
-
-### Proposal review disposition
-
-Three independent adversarial reviews were followed by targeted closure reviews.
-They required explicit removal of resume/destroy bypasses, bounded lifetime
-registration, reusable cancellation-aware waits, warm-only resource release,
-and current-failure rollback/busy ordering for compound controls. Those changes
-are incorporated above; each reviewer confirmed its findings were addressed.
-
-This is agreement on the written design within those review scopes, not evidence
-that the implementation exists, browser gates pass, or the future PR can merge.
+| Sun | Self-lit surface, poles, corona and limb; no directional-Sun plan; selected material group |
+| Mercury | Retained interior and pose-addressed native animation; exterior lenses; three reusable lighting rows |
+| Venus | Surface/poles plus fixed material composite and prepared light-frame selection |
+| Earth | Complete seven-page surface banks; fourteen-page transition capacity with two concurrent decodes; separate three-row lighting and atmosphere pools |
+| Moon, Pluto | The same prepared sphere-band presentation recipe, parameterized by each package's source data; mount-retained surface/pole lenses |
+| Mars | Prepared surface/poles and a three-row reusable lighting pool |
+| Jupiter | Prepared surface/poles, rings and moons; a three-row reusable lighting pool |
+| Saturn | Rings, ellipsoid correction, retained interior, independent interior toggle, and exterior/interior material variants |
+| Uranus | Prepared body/rings; static lens assets and two protected three-row neighborhoods |
+| Neptune | View-sensitive material variants and three lighting rows; required demand follows current camera state |
+
+Saturn's interior is independent of the exterior lens. Its reducer and demand
+plan express that relationship; there is no Saturn branch in the shared owners.
+Earth's page and row rules likewise supply data to the common residency manager.
+Moon and Pluto share their identical rendering recipe as well as all coordination.
+
+## Implementation chain
+
+The executable Burnlist uses stable IDs and removes items only after their tests
+and evidence are recorded. The implementation followed this dependency order:
+
+1. B1, B25, B27, B26: freeze source/prepared/browser baselines, preserve incoming
+   shell and interaction changes, and seal matching comparisons.
+2. B2–B7: executable contract, explicit resource leases, bounded residency,
+   common mount/playback, selection/publication, and actual control binding.
+3. B24: repair the missing prepared projective-leaf dimensions used by Saturn's
+   retained interior, with separate evidence for the intentional visual change.
+4. B8–B18: migrate Moon, Pluto, Sun, Venus, Mars, Jupiter, Uranus, Neptune,
+   Mercury, Earth, and Saturn, with each package's failure and Chrome evidence.
+5. B19: delete private coordinators and enforce real body-layer registration.
+6. B20–B21: common observations/profiles, production diagnostic removal, deliberate
+   ownership regressions, and actual-owner Chrome instrumentation.
+7. B22: complete required gates and the full existing-object visual matrix.
+8. B23: scoped normal commit/push and updated PR #2. No merge.
+
+Completion requires executable closure checks, actual package and router tests,
+real Chrome DPR 1/2 behavior, and source-bound visual evidence. An ID whitelist,
+a declaration-only counter, or an unregistered demo cannot substitute for those
+checks. The AST checker is a practical regression barrier, not a formal proof
+against arbitrary obfuscated JavaScript.
+
+See [the proof](generic-runtime-contract-proof.md) and
+[the implementation record](shared-runtime-implementation.md) for results and
+any remaining visual/performance qualifications.

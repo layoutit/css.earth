@@ -17,13 +17,16 @@ for (const source of [
   'window.addEventListener("resize", refit);',
   'input.addEventListener("wheel", zoom);',
 ]) test(`rejects object-owned input wiring: ${source}`, () => {
-  assert.throws(() => inspectObjectOrbitModule(source, 'src/planets/probe/runtime/client.mjs', root), /belongs to the shared controller/);
+  assert.throws(() => inspectObjectOrbitModule(source, 'src/planets/moon/runtime/client.mjs', root), /belongs to the shared controller/);
 });
 
-test('rejects a registered object that stops constructing the common controller', async () => {
-  const target = resolve(root, `src/planets/${OBJECTS[0].id}/runtime/client.mjs`);
-  await assert.rejects(auditGenericOrbitOwnership({ root, readText: async (path) => {
+for (const [before, after] of [
+  ['createOrbit: createRetainedCubicSkyOrbit', 'createOrbit: replacementOrbit'],
+  ['environment.createOrbit(', 'environment.replacementOrbit('],
+]) test('rejects removal of the actual common controller binding or construction', async () => {
+  const target = resolve(root, 'src/platform/object-runtime.mjs');
+  await assert.rejects(auditGenericOrbitOwnership({ root, readText: async path => {
     const source = await readFile(path, 'utf8');
-    return path === target ? source.replace(/createRetainedCubicSkyOrbit\(/g, 'replacementOrbit(') : source;
-  } }), /exactly one shared orbit construction/);
+    return path === target ? source.replace(before, after) : source;
+  } }), /one shared orbit construction/i);
 });
