@@ -15,6 +15,7 @@ import {
   BODY_FIXED_SUN_DIRECTIONS,
   BODY_FIXED_TO_ICRF_MATRICES,
   HELIOCENTRIC_ORBITS,
+  SOLAR_GEOMETRY_EPOCH_JD_TT,
 } from "./solar-geometry.mjs";
 import { loadAstronomyPackage } from "./astronomy-package.mjs";
 
@@ -28,6 +29,11 @@ const presentationFrame = prepareEclipticPresentationFrame("mercury");
 // The canonical order the module must nest its rings in, excluding the
 // observer itself.
 const OTHER_BODIES = PLANETARY_SYSTEM_BODIES.filter((id) => id !== "mercury");
+// Planets first, innermost out; then the dwarf planets by semi-major axis.
+const DWARFS = ["ceres", "pluto", "haumea", "makemake", "eris"];
+const ALL_OTHER_BODIES = [...OTHER_BODIES, ...DWARFS];
+const planetsOf = (system) => system.bodies.filter((body) => body.kind === "planet");
+const dwarfsOf = (system) => system.bodies.filter((body) => body.kind === "dwarf-planet");
 
 // Textbook semi-major axes (au), used only as a sanity bound independent of
 // the checked-in VSOP87A-derived elements.
@@ -39,6 +45,7 @@ const TEXTBOOK_SEMI_MAJOR_AXIS_AU = {
   saturn: 9.537,
   uranus: 19.19,
   neptune: 30.07,
+  ceres: 2.77, pluto: 39.48, haumea: 43.1, makemake: 45.4, eris: 67.9,
 };
 
 async function prepareMercurySystem(overrides = {}) {
@@ -97,9 +104,13 @@ function directPositionUnits(id) {
   return scale(presentationFrame.toPresentation(bodyFixedKm), 1 / KILOMETERS_PER_UNIT);
 }
 
-test("prepares the other seven planets, innermost first, each vertex 0 at the body", async () => {
+test("prepares the other seven planets innermost first, then the five dwarf planets, each vertex 0 at the body", async () => {
   const system = await prepareMercurySystem();
-  assert.deepEqual(system.bodies.map((body) => body.id), OTHER_BODIES);
+  assert.deepEqual(system.bodies.map((body) => body.id), ALL_OTHER_BODIES);
+  assert.deepEqual(system.planetIds, OTHER_BODIES);
+  assert.deepEqual(system.dwarfPlanetIds, DWARFS);
+  assert.deepEqual(planetsOf(system).map((body) => body.orbitSource), OTHER_BODIES.map(() => "vsop87a-state-vector-via-solar-geometry"));
+  assert.deepEqual(dwarfsOf(system).map((body) => body.orbitSource), DWARFS.map(() => "jpl-horizons-osculating-elements-via-astronomy-package"));
   for (const body of system.bodies) {
     assert.deepEqual(body.orbit.vertices[0], body.position);
     assert.equal(body.orbit.vertexCount, SYSTEM_ORBIT_SEGMENTS);
@@ -109,7 +120,22 @@ test("prepares the other seven planets, innermost first, each vertex 0 at the bo
 
 test("agrees with an independent frame-tree-free derivation of every body's position", async () => {
   const system = await prepareMercurySystem();
-  for (const body of system.bodies) {
+  // Dwarf planets: the package's own Keplerian position, differenced with
+  // Mercury's VSOP87 position directly.
+  const astronomy = await loadAstronomyPackage();
+  const mercuryMatrix = BODY_FIXED_TO_ICRF_MATRICES.mercury;
+  const transposed = [mercuryMatrix[0], mercuryMatrix[3], mercuryMatrix[6], mercuryMatrix[1], mercuryMatrix[4],
+    mercuryMatrix[7], mercuryMatrix[2], mercuryMatrix[5], mercuryMatrix[8]];
+  const mercuryKm = scale(applyMatrix(mercuryMatrix, BODY_FIXED_SUN_DIRECTIONS.mercury),
+    -HELIOCENTRIC_ORBITS.mercury.heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS);
+  for (const body of dwarfsOf(system)) {
+    const heliocentricKm = astronomy.dwarfPlanetPositionKm(body.id, SOLAR_GEOMETRY_EPOCH_JD_TT);
+    const bodyFixedKm = applyMatrix(transposed, subtract(heliocentricKm, mercuryKm));
+    const direct = scale(presentationFrame.toPresentation(bodyFixedKm), 1 / KILOMETERS_PER_UNIT);
+    const diff = magnitude(subtract(body.position, direct));
+    assert.ok(diff <= Math.max(1, 1e-6 * magnitude(direct)), `${body.id}: ${diff}`);
+  }
+  for (const body of planetsOf(system)) {
     const direct = directPositionUnits(body.id);
     const diff = magnitude(subtract(body.position, direct));
     const tolerance = Math.max(1, 1e-6 * magnitude(direct));
@@ -143,9 +169,10 @@ test("nests every orbit strictly outside the one before it, mercury included", a
     HELIOCENTRIC_ORBITS.venus.perihelionAu > HELIOCENTRIC_ORBITS.mercury.aphelionAu,
     "venus's perihelion must lie outside mercury's aphelion",
   );
-  for (let index = 1; index < system.bodies.length; index += 1) {
-    const inner = system.bodies[index - 1];
-    const outer = system.bodies[index];
+  const planets = planetsOf(system);
+  for (let index = 1; index < planets.length; index += 1) {
+    const inner = planets[index - 1];
+    const outer = planets[index];
     assert.ok(outer.perihelionAu > inner.aphelionAu,
       `${outer.id} perihelion does not clear ${inner.id} aphelion`);
     const innerMax = Math.max(...inner.orbit.vertices.map((vertex) =>
@@ -238,7 +265,11 @@ test("mutation check: the output's semi-major axes stay strictly increasing outw
   // a swap, so this instead pins down the property such a swap would break:
   // the prepared ring order is by increasing semi-major axis.
   const system = await prepareMercurySystem();
-  const axes = system.bodies.map((body) => body.semiMajorAxisAu);
+  const axes = planetsOf(system).map((body) => body.semiMajorAxisAu);
+  const dwarfAxes = dwarfsOf(system).map((body) => body.semiMajorAxisAu);
+  for (let index = 1; index < dwarfAxes.length; index += 1) {
+    assert.ok(dwarfAxes[index] > dwarfAxes[index - 1], `dwarf planets are ordered by semi-major axis: ${dwarfAxes}`);
+  }
   for (let index = 1; index < axes.length; index += 1) {
     assert.ok(axes[index] > axes[index - 1],
       `semiMajorAxisAu is not strictly increasing at index ${index}: ${axes}`);
@@ -278,7 +309,9 @@ test("marker brightness falls with magnitudes below the brightest and floors, Ve
   const system = await preparePlanetarySystem({ bodyId: "mercury", presentationFrame: prepareEclipticPresentationFrame("mercury"), kilometersPerUnit: 2439.7 / 230 });
   const byFlux = [...system.bodies].sort((a, b) => b.illumination.flux - a.illumination.flux);
   assert.equal(byFlux[0].id, "venus");
-  assert.equal(byFlux.at(-1).id, "neptune");
+  // Every dwarf planet sits on the floor; Neptune is the faintest planet.
+  assert.equal(byFlux.at(-1).kind, "dwarf-planet");
+  assert.equal(planetsOf(system).sort((a, b) => a.illumination.flux - b.illumination.flux)[0].id, "neptune");
   assert.equal(byFlux[0].illumination.markerOpacity, 1);
   assert.equal(byFlux.at(-1).illumination.markerOpacity, MARKER_BRIGHTNESS.floor);
   for (let index = 1; index < byFlux.length; index += 1) {
@@ -294,4 +327,25 @@ test("marker brightness falls with magnitudes below the brightest and floors, Ve
   assert.ok(Math.abs(lambertPhaseFunction(0) - 1) < 1e-12);
   assert.ok(Math.abs(lambertPhaseFunction(Math.PI / 2) - 1 / Math.PI) < 1e-12);
   assert.ok(Math.abs(lambertPhaseFunction(Math.PI)) < 1e-12);
+});
+
+
+test("the dwarf planets ride the same frame tree, Pluto's orbit really crosses Neptune's, and Eris sets the extent", async () => {
+  const system = await prepareMercurySystem();
+  const byId = Object.fromEntries(system.bodies.map((body) => [body.id, body]));
+  assert.ok(byId.pluto.perihelionAu < byId.neptune.aphelionAu, "Pluto's perihelion lies inside Neptune's aphelion");
+  assert.ok(byId.pluto.inclinationDegrees > 15, "Pluto's orbit is steeply inclined");
+  for (const body of dwarfsOf(system)) {
+    assert.equal(body.inclinationReference, "icrf-equator");
+    assert.ok(body.illumination.illuminatedFraction >= 0.99, body.id);
+    assert.equal(body.illumination.markerOpacity, MARKER_BRIGHTNESS.floor, body.id);
+    assert.equal(body.orbit.vertexCount, SYSTEM_ORBIT_SEGMENTS);
+    // The position lies on the ellipse from the elements (the ring's own
+    // self-check), between perihelion and aphelion.
+    const r = magnitude(subtract(body.position, system.sun.position)) / system.units.unitsPerAu;
+    assert.ok(r >= body.perihelionAu * (1 - 1e-6) && r <= body.aphelionAu * (1 + 1e-6), `${body.id} r ${r}`);
+  }
+  const extentAu = system.maximumExtentUnits / system.units.unitsPerAu;
+  assert.ok(extentAu > 97 && extentAu < 99, `extent ${extentAu} au is Eris's aphelion`);
+  assert.ok(Math.abs(extentAu - byId.eris.aphelionAu) < 0.6);
 });

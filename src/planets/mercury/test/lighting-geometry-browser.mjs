@@ -278,13 +278,14 @@ try {
 }
 
 const failed = checks.filter(({ ok }) => !ok);
-console.log(JSON.stringify({
+// Flushed before exiting: pipe writes are asynchronous on macOS.
+await new Promise((resolve) => process.stdout.write(`${JSON.stringify({
   ok: failed.length === 0,
   suite: "mercury-lighting-geometry",
   failed: failed.map(({ id }) => id),
   checks,
   report,
-}));
+})}\n`, resolve));
 process.exit(failed.length === 0 ? 0 : 1);
 
 // -----------------------------------------------------------------------

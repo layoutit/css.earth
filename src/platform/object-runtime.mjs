@@ -218,6 +218,14 @@ export function createObjectRuntime(definition, services = nativeServices) {
       diagnostics = Object.freeze({ ready: true,
         view: () => orbit.state(), setView: state => orbit.setState(state), lens: lensState, selectLens,
         camera: Object.freeze({ state: orbit.state, setState: orbit.setState, flyToState: orbit.flyToState, stats: () => Object.freeze({ ...observe().camera, ...orbit.stats() }) }),
+        // Session knob for the orbit trails' spans (turns of the orbit behind
+        // the body: solid, then fading); null restores the prepared spans.
+        // Republishes at once; the prepared plan stays what ships.
+        ...(heliocentric === null ? {} : { orbitTrail: spans => {
+          const applied = heliocentric.setTrailSpans(spans);
+          orbit.refresh();
+          return Object.freeze({ spans: heliocentric.state().trailSpans, source: heliocentric.state().trailSpansSource, applied });
+        } }),
         sky: Object.freeze({ state: () => Object.freeze({ ...observe().sky, ...orbit.skyState(),
           sunViewDirection: currentView?.sunViewDirection ?? null, skySunViewDirection: currentView?.skySunViewDirection ?? null,
           sunPresentation: currentView?.sunPresentation }),

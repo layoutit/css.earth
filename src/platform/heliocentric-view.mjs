@@ -50,11 +50,41 @@ export function validatePreparedHeliocentricView(plan) {
       !plan.orbit.vertices.every(vector) ||
       plan.orbit.vertices[0].some((component) => component !== 0) ||
       !validTrail(plan.orbit.trail, plan.orbit.vertexCount) ||
+      !validBehindTurns(plan.orbit.chordBehindTurns, plan.orbit.vertexCount) ||
+      !validTrailSpans(plan.orbit.trailSpans) ||
       plan.runtimeGeometryDerivation !== false) {
     throw new TypeError("Prepared heliocentric view is incompatible.");
   }
   if (plan.system !== undefined) validatePreparedPlanetarySystem(plan.system, plan);
   return plan;
+}
+
+// The trail: a ring is drawn as the path just travelled, solid for
+// `solidTurns` of an orbit behind the body, fading linearly to nothing over
+// the following `fadeTurns`, never drawn beyond. Each chord carries the
+// share of a turn it lies behind the body (prepared, from the ring's
+// eccentric-anomaly offsets); its weight for a pair of spans follows from
+// that alone, so a session may re-weight the prepared rings without any
+// geometry. The plan carries the spans that ship as `orbit.trailSpans` and
+// the weights they produce as `orbit.trail`.
+export const ORBIT_TRAIL_MODEL = "trailing-orbit-solid-then-linear-fade";
+
+export function validTrailSpans(spans) {
+  return Number.isFinite(spans?.solidTurns) && spans.solidTurns >= 0 &&
+    Number.isFinite(spans.fadeTurns) && spans.fadeTurns > 0 &&
+    spans.solidTurns + spans.fadeTurns < 1;
+}
+
+export function trailWeightsForSpans(chordBehindTurns, spans) {
+  if (!validTrailSpans(spans)) {
+    throw new TypeError("Orbit trail spans must leave part of the orbit undrawn.");
+  }
+  return Object.freeze(chordBehindTurns.map((behind) => {
+    const weight = behind <= spans.solidTurns
+      ? 1
+      : Math.max(0, 1 - (behind - spans.solidTurns) / spans.fadeTurns);
+    return Number(weight.toFixed(6));
+  }));
 }
 
 export const PREPARED_PLANETARY_SYSTEM_SCHEMA =
@@ -77,6 +107,7 @@ export function validatePreparedPlanetarySystem(system, plan) {
         body.orbit.vertexCount !== body.orbit.vertices.length ||
         !body.orbit.vertices.every(vector) ||
         !validTrail(body.orbit.trail, body.orbit.vertexCount) ||
+        !validBehindTurns(body.orbit.chordBehindTurns, body.orbit.vertexCount) ||
         !validIllumination(body.illumination) ||
         body.orbit.vertices[0].some((component, index) => component !== body.position[index])) ||
       new Set(system.bodies.map((body) => body.id)).size !== system.bodies.length ||
@@ -108,6 +139,9 @@ export function projectHeliocentricView(plan, {
   frustumPadding = 1.25,
   nearShare = 0.01,
   system = false,
+  // Per-ring chord weights overriding the prepared trails (a session's
+  // spans); keyed "own" and by body id.
+  trailWeights = null,
 }) {
   if (!Array.isArray(rotation) || rotation.length !== 9 ||
       rotation.some((value) => !Number.isFinite(value)) ||
@@ -271,7 +305,7 @@ export function projectHeliocentricView(plan, {
     }
     return Object.freeze(segments);
   };
-  const segments = projectRing(plan.orbit.vertices, plan.orbit.trail);
+  const segments = projectRing(plan.orbit.vertices, trailWeights?.own ?? plan.orbit.trail);
 
   // A point in the scene as a screen-space billboard: where it lands, and
   // whether it is in front of the camera, inside the viewport and not behind
@@ -302,7 +336,7 @@ export function projectHeliocentricView(plan, {
       bodies: Object.freeze(plan.system.bodies.map((body) => Object.freeze({
         id: body.id,
         marker: projectPoint(body.position),
-        orbitSegments: projectRing(body.orbit.vertices, body.orbit.trail),
+        orbitSegments: projectRing(body.orbit.vertices, trailWeights?.[body.id] ?? body.orbit.trail),
       }))),
     });
   }
@@ -557,6 +591,12 @@ function validIllumination(illumination) {
     illumination.illuminatedFraction >= 0 && illumination.illuminatedFraction <= 1 &&
     Number.isFinite(illumination.lightViewZ) && Math.abs(illumination.lightViewZ) <= 1 &&
     positive(illumination.markerOpacity) && illumination.markerOpacity <= 1;
+}
+
+function validBehindTurns(turns, vertexCount) {
+  return Array.isArray(turns) && turns.length === vertexCount &&
+    turns.every((turn) => Number.isFinite(turn) && turn >= 0 && turn < 1) &&
+    turns[turns.length - 1] < turns[0];
 }
 
 // One weight per chord, each in [0, 1], the last chord (the one returning

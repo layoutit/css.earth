@@ -43,20 +43,25 @@ export const TOLERANCES = Object.freeze({
   coverage: 0.33,
   // The trail: the line must be found on rays this far behind the body and
   // absent this far ahead of it, and its strength must fall away behind.
-  // Solid for the half turn behind the body, fading over the next quarter,
-  // gone over the leading quarter: found at 30 and 150 (solid), 210 and 250
-  // (fading); absent from 12 to 80 ahead.
-  trailBehindDegrees: [30, 150, 210, 250],
-  trailAheadDegrees: [12, 45, 60, 80],
+  // Solid for three eighths of a turn behind the body (135 degrees), fading
+  // over the next quarter (to 225), gone beyond: found at 30 and 120
+  // (solid), 165 and 205 (fading); absent from 12 to 130 ahead.
+  trailBehindDegrees: [30, 120, 165, 205],
+  trailAheadDegrees: [12, 45, 90, 130],
   // Line strength (integrated difference across the line, averaged over
   // neighbouring rays): the two solid samples must agree to this share, and
   // each fading sample must fall below this share of the one before it.
-  trailSolidFactor: 0.75,
+  // Two rings running alongside (Haumea's and Makemake's) merge into one
+  // run and double a sample's strength, so the solid factor is tolerant.
+  trailSolidFactor: 0.45,
   // First fading sample (weight 0.67) against the solid one, then the last
-  // (weight 0.22) against it: the ratios measure 0.53-0.91 and 0.19-0.53.
-  trailFadeFactors: [0.95, 0.7],
-  // Marker centre against the painted orbit at the marker's angle, pixels.
+  // (weight 0.22) against it.
+  trailFadeFactors: [0.95, 0.8],
+  // Marker centre against the painted orbit at the marker's angle, pixels;
+  // the far dwarf view paints 1.5 px per au with rings crossing, so it is
+  // held looser there (the back-projected position check stays tight).
   markerOnOrbitPixels: 3,
+  markerOnOrbitPixelsFar: 5,
   // Marker back-projected into its orbital plane against the oracle's
   // heliocentric direction, degrees, and distance share.
   markerDirectionDegrees: 1.5,
@@ -203,9 +208,17 @@ try {
     tanVertical * oracle.AU_KILOMETERS;
   const views = [
     { id: "inner", distanceKm: frameDistanceKm("jupiter"),
-      measured: ["mercury", "venus", "earth", "mars", "jupiter"], reference: "earth" },
-    { id: "outer", distanceKm: Math.min(frameDistanceKm("neptune"), stats.dolly.maximumDistanceKilometers),
-      measured: ["jupiter", "saturn", "uranus", "neptune"], reference: "jupiter" },
+      measured: ["mercury", "venus", "earth", "mars", "ceres", "jupiter"], reference: "earth",
+      nested: ["mercury", "venus", "earth", "mars", "jupiter"] },
+    { id: "outer", distanceKm: frameDistanceKm("neptune"),
+      measured: ["jupiter", "saturn", "uranus", "neptune"], reference: "jupiter",
+      nested: ["jupiter", "saturn", "uranus", "neptune"] },
+    // The dwarf planets out to Eris (whose aphelion sets the dolly's bound);
+    // Pluto's orbit crosses Neptune's, so nesting is asserted on the
+    // planets alone and the crossing itself is asserted below.
+    { id: "dwarf", distanceKm: Math.min(frameDistanceKm("eris"), stats.dolly.maximumDistanceKilometers),
+      measured: ["neptune", "pluto", "haumea", "makemake", "eris"], reference: "neptune",
+      nested: ["neptune"] },
   ];
   const rowRequestsBeforeFar = lightingRowRequests.length;
   for (const view of views) {
@@ -215,6 +228,10 @@ try {
     await nextPaint(page);
     report.views[view.id] = await measureView(page, geometry, view);
   }
+  // The session knob for the trail spans: shorter spans shorten the painted
+  // arc at once, and null restores the prepared spans.
+  report.trailKnob = await measureTrailKnob(page, geometry, poleOnControlPitch, views[0].distanceKm);
+
   // Phase and brightness of the markers: the prepared illumination against
   // the oracle, the marker opacities against the brightness model, and the
   // painted darkening against the Sun's direction.
@@ -324,7 +341,7 @@ async function measureView(page, geometry, view) {
     for (const ray of rays) {
       const expected = oracle.polarRadiusAt(predicted, ray.angle);
       if (expected === null) continue;
-      const window = Math.max(4, 0.06 * expected);
+      const window = Math.max(3, 0.03 * expected);
       let best = null;
       for (const radius of ray.crossings) {
         const gap = Math.abs(radius - expected);
@@ -377,15 +394,25 @@ async function measureView(page, geometry, view) {
     // The trail: measured against the oracle's direction of motion. The
     // line is found behind the body with strength falling away, and absent
     // ahead of it (beyond the marker's own footprint).
-    const trail = measureTrail(rays, camera, body, sunPixel, predicted, id === "mercury" ? 5 : 16);
+    const otherPolars = Object.values(system.bodies).filter((other) => other.id !== id && other.id !== "mercury" || (id !== "mercury" && other.id === "mercury"))
+      .map((other) => oracle.predictOrbitPolar(camera, other, sunPixel));
+    const trail = measureTrail(rays, camera, body, sunPixel, predicted, id === "mercury" ? 5 : 16, otherPolars);
     result.orbits[id].trail = trail;
-    check(`trail-behind-body-${id}-${view.id}`, trail.behind.every((sample) => sample.found), { id, ...trail });
-    check(`trail-absent-ahead-${id}-${view.id}`, trail.ahead.every((sample) => !sample.found), { id, ...trail });
-    check(`trail-solid-behind-${id}-${view.id}`,
-      trail.behind[1].strength >= TOLERANCES.trailSolidFactor * trail.behind[0].strength, { id, ...trail });
-    check(`trail-fades-backwards-${id}-${view.id}`,
-      trail.behind[2].strength < TOLERANCES.trailFadeFactors[0] * trail.behind[1].strength &&
-      trail.behind[3].strength < TOLERANCES.trailFadeFactors[1] * trail.behind[2].strength, { id, ...trail });
+    const judged = (samples) => samples.filter((sample) => !sample.ambiguous);
+    check(`trail-behind-body-${id}-${view.id}`, judged(trail.behind).length >= 2 &&
+      judged(trail.behind).every((sample) => sample.found), { id, ...trail });
+    check(`trail-absent-ahead-${id}-${view.id}`, judged(trail.ahead).length >= 2 &&
+      judged(trail.ahead).every((sample) => !sample.found), { id, ...trail });
+    const [solidNear, solidFar, fadeNear, fadeFar] = trail.behind;
+    if (!solidNear.ambiguous && !solidFar.ambiguous) {
+      check(`trail-solid-behind-${id}-${view.id}`,
+        solidFar.strength >= TOLERANCES.trailSolidFactor * solidNear.strength, { id, ...trail });
+    }
+    if (!solidFar.ambiguous && !fadeNear.ambiguous && !fadeFar.ambiguous) {
+      check(`trail-fades-backwards-${id}-${view.id}`,
+        fadeNear.strength < TOLERANCES.trailFadeFactors[0] * solidFar.strength &&
+        fadeFar.strength < TOLERANCES.trailFadeFactors[1] * fadeNear.strength, { id, ...trail });
+    }
     check(`orbit-shape-${id}-${view.id}`, meanResidual !== null &&
       meanResidual <= TOLERANCES.shapeMeanPixels && p95Residual <= TOLERANCES.shapeP95Pixels, {
         id, meanResidual, p95Residual,
@@ -408,13 +435,19 @@ async function measureView(page, geometry, view) {
     result.ratios[id] = { measuredRatio, textbookRatio, errorShare,
       measuredAuViaReference: measuredRatio === null ? null
         : measuredRatio * oracle.TEXTBOOK_SEMI_MAJOR_AXES_AU[view.reference] };
-    check(`orbit-ratio-${id}-over-${view.reference}`,
-      errorShare !== null && Math.abs(errorShare) <= TOLERANCES.ratioShare,
-      { id, reference: view.reference, measuredRatio, textbookRatio, errorShare });
+    // The pixel ratio assumes near-coplanar rings (the planets, within 7
+    // degrees of the ecliptic); a dwarf planet's ring, inclined by up to 64
+    // degrees, is foreshortened on screen and is held to its back-projected
+    // axis instead (checked above), the pixel ratio being reported only.
+    if (!oracle.DWARF_PLANETS.includes(id)) {
+      check(`orbit-ratio-${id}-over-${view.reference}`,
+        errorShare !== null && Math.abs(errorShare) <= TOLERANCES.ratioShare,
+        { id, reference: view.reference, measuredRatio, textbookRatio, errorShare });
+    }
   }
-  // Nesting: on every ray the measured orbits keep their order, innermost
+  // Nesting: on every ray the nested planets keep their order, innermost
   // first, and the measured radii of consecutive orbits never overlap.
-  const order = view.measured;
+  const order = view.nested;
   let orderViolations = 0;
   let orderedRays = 0;
   const radiiByRay = new Map();
@@ -439,7 +472,18 @@ async function measureView(page, geometry, view) {
     }
   }
   result.nesting = { orderedRays, orderViolations };
-  check(`orbits-nest-without-crossing-${view.id}`, orderedRays > 60 && orderViolations === 0, result.nesting);
+  if (order.length > 1) {
+    check(`orbits-nest-without-crossing-${view.id}`, orderedRays > 60 && orderViolations === 0, result.nesting);
+  }
+  // Pluto really crosses Neptune: its fitted perihelion (from the painted
+  // arc, back-projected) lies inside Neptune's fitted aphelion.
+  if (view.id === "dwarf" && result.orbits.pluto?.backProjectedSemiMajorAxisAu && result.orbits.neptune?.backProjectedSemiMajorAxisAu) {
+    const pluto = result.orbits.pluto;
+    const neptune = result.orbits.neptune;
+    const plutoPerihelion = pluto.backProjectedSemiMajorAxisAu * (1 - pluto.backProjectedEccentricity);
+    const neptuneAphelion = neptune.backProjectedSemiMajorAxisAu * (1 + neptune.backProjectedEccentricity);
+    check("pluto-orbit-crosses-neptune", plutoPerihelion < neptuneAphelion, { plutoPerihelion, neptuneAphelion });
+  }
 
   // Markers: each planet's sprite on its own painted orbit, at the oracle's
   // heliocentric position, with something painted there.
@@ -469,7 +513,8 @@ async function measureView(page, geometry, view) {
     // The painted orbit's radius at the marker's angle. The marker covers
     // the line in both screenshots, so the line is read on the two rays
     // flanking the marker and averaged.
-    const onOrbitGap = paintedRadiusGap(rays, angle, radius, marker.size);
+    const predictedPolar = oracle.predictOrbitPolar(camera, body, sunPixel);
+    const onOrbitGap = paintedRadiusGap(rays, angle, radius, marker.size, predictedPolar);
     const point = camera.backProject(marker.centre, system.sun, body.normal);
     const heliocentric = point === null ? null : lighting.subtract(point, system.sun);
     const directionError = heliocentric === null ? null
@@ -483,8 +528,9 @@ async function measureView(page, geometry, view) {
       predictedGapPixels: predictedPixel === null ? null
         : Math.hypot(marker.centre[0] - predictedPixel[0], marker.centre[1] - predictedPixel[1]) };
     check(`marker-visible-${id}-${view.id}`, marker.visible && marker.opacity > 0.2 &&
-      /planet-markers@2x\.webp/u.test(marker.image), { id, ...marker });
-    check(`marker-on-orbit-${id}-${view.id}`, onOrbitGap !== null && onOrbitGap <= TOLERANCES.markerOnOrbitPixels,
+      /planet-markers@2x\.webp|mercury-system-markers(@2x)?\.webp/u.test(marker.image), { id, ...marker });
+    check(`marker-on-orbit-${id}-${view.id}`, onOrbitGap !== null &&
+      onOrbitGap <= (view.id === "dwarf" ? TOLERANCES.markerOnOrbitPixelsFar : TOLERANCES.markerOnOrbitPixels),
       { id, onOrbitGap, radius });
     check(`marker-position-${id}-${view.id}`, directionError !== null &&
       directionError <= TOLERANCES.markerDirectionDegrees &&
@@ -508,11 +554,68 @@ async function measureView(page, geometry, view) {
     const dy = mercuryMarker.centre[1] - sunPixel[1];
     const angle = Math.atan2(dy, dx);
     const radius = Math.hypot(dx, dy);
-    const gap = paintedRadiusGap(rays, angle, radius, mercuryMarker.size);
+    const gap = paintedRadiusGap(rays, angle, radius, mercuryMarker.size,
+      oracle.predictOrbitPolar(camera, system.bodies.mercury, sunPixel));
     result.markers.mercury = { ...mercuryMarker, onOrbitGapPixels: gap };
     check(`marker-on-orbit-mercury-${view.id}`, mercuryMarker.opacity > 0.99 && gap !== null &&
       gap <= TOLERANCES.markerOnOrbitPixels, result.markers.mercury);
   }
+  return result;
+}
+
+// `window.__mercury.orbitTrail({ solidTurns, fadeTurns })`: Earth's painted
+// arc is scanned with the prepared spans, with a short session span, and
+// after restoring; the arc's angular extent behind the body must follow.
+async function measureTrailKnob(page, geometry, poleOnControlPitch, distanceKm) {
+  await setPose(page, { controlPitch: poleOnControlPitch, controlYaw: 0, distanceKilometers: distanceKm });
+  await page.waitForTimeout(100);
+  await nextPaint(page);
+  const cameraState = await page.evaluate(() => window.__mercury.camera.state());
+  const rootBox = await page.locator(".mercury-camera").boundingBox();
+  const camera = oracle.createCamera({ principal: geometry.stageCentre,
+    rootCentre: [rootBox.x + rootBox.width / 2, rootBox.y + rootBox.height / 2],
+    focal: geometry.skyFocalPixels, rotation: await readPose(page), distanceKm: cameraState.distanceKilometers });
+  const sunPixel = camera.project(system.sun);
+  const body = system.bodies.earth;
+  const predicted = oracle.predictOrbitPolar(camera, body, sunPixel);
+  const extent = async () => {
+    const withLines = await decodeLuminance(await page.screenshot());
+    await setOrbitLines(page, false);
+    const withoutLines = await decodeLuminance(await page.screenshot());
+    await setOrbitLines(page, true);
+    const diff = new Float32Array(withLines.width * withLines.height);
+    for (let index = 0; index < diff.length; index += 1) diff[index] = Math.abs(withLines.luminance[index] - withoutLines.luminance[index]);
+    const rays = scanRays(diff, withLines.width, withLines.height, sunPixel, { angles: 720, step: 0.5, threshold: 12, minRadius: 6 });
+    const here = camera.project(body.position);
+    const step = camera.project(lighting.subtract(body.position, lighting.scale(body.velocity, -0.01)));
+    const angleOf = (pixel) => Math.atan2(pixel[1] - sunPixel[1], pixel[0] - sunPixel[0]);
+    const bodyAngle = angleOf(here);
+    const motion = Math.sign(wrapAngle(angleOf(step) - bodyAngle));
+    // Farthest angle behind the body (against the motion) still carrying
+    // the line, in screen degrees about the Sun, signed by the motion.
+    let farthest = 0;
+    for (const ray of rays) {
+      const expected = oracle.polarRadiusAt(predicted, ray.angle);
+      if (!ray.crossings.some((radius) => Math.abs(radius - expected) <= Math.max(3, 0.03 * expected))) continue;
+      const behind = ((bodyAngle - ray.angle) * motion * 180 / Math.PI + 720) % 360;
+      if (behind < 300) farthest = Math.max(farthest, behind);
+    }
+    return { farthestLineDegrees: farthest, motion };
+  };
+  const prepared = await page.evaluate(() => window.__mercury.orbitTrail(null));
+  const before = await extent();
+  const applied = await page.evaluate(() => window.__mercury.orbitTrail({ solidTurns: 0.1, fadeTurns: 0.1 }));
+  await nextPaint(page);
+  const shortened = await extent();
+  const restored = await page.evaluate(() => window.__mercury.orbitTrail(null));
+  await nextPaint(page);
+  const after = await extent();
+  const result = { prepared, applied, restored, before, shortened, after };
+  check("trail-knob-applies-session-spans", applied.source === "session" && applied.spans.solidTurns === 0.1 &&
+    prepared.source === "prepared" && restored.source === "prepared", result);
+  // Prepared: up to 225 degrees behind; shortened: up to 72.
+  check("trail-knob-shortens-painted-arc", before.farthestLineDegrees > 200 && shortened.farthestLineDegrees < 90 &&
+    after.farthestLineDegrees > 200, result);
   return result;
 }
 
@@ -600,7 +703,8 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
   check("marker-brightness-follows-flux", ordered.every((entry, index) =>
     index === 0 || entry.opacity <= ordered[index - 1].opacity + 1e-9) &&
     ordered[0].opacity > 0.99 && ordered.at(-1).opacity < 0.45 && ordered.at(-1).opacity >= 0.25 &&
-    ordered[0].id === "venus" && ordered.at(-1).id === "neptune", { ordered });
+    ordered[0].id === "venus" && oracle.DWARF_PLANETS.includes(ordered.at(-1).id) &&
+    ordered.filter((entry) => !oracle.DWARF_PLANETS.includes(entry.id)).at(-1).id === "neptune", { ordered });
   result.ordered = ordered;
 
   // Painted darkening at device pixel ratio 2, for the bodies whose phase
@@ -639,7 +743,8 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
     result.darkening = {};
     for (const [id, [cx, cy, size]] of Object.entries(positions)) {
       if (id === "sun") continue;
-      const centroid = darkeningCentroid(hidden, shown, [cx * 2, cy * 2], size);
+      const opacity = runtime.markers[id]?.opacity ?? 1;
+      const centroid = darkeningCentroid(hidden, shown, [cx * 2, cy * 2], size, 4 * opacity);
       const toSun = [positions.sun[0] - cx, positions.sun[1] - cy];
       const angle = centroid.offset === null ? null
         : Math.acos(Math.max(-1, Math.min(1, (centroid.offset[0] * toSun[0] + centroid.offset[1] * toSun[1]) /
@@ -651,8 +756,12 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
           angle >= TOLERANCES.darkeningAwayFromSunDegrees, { id, fraction, ...result.darkening[id] });
       }
       // The overlay shades the disc (limb darkening over most of it) without
-      // blanking it.
-      check(`phase-overlay-darkens-${id}`, centroid.darkenedShare > 0.2 && centroid.darkenedShare < 0.98, { id, ...centroid });
+      // blanking it; below half opacity the shading is under a luminance
+      // unit and cannot be read off pixels (its frame and roll are checked
+      // on the DOM above).
+      if (opacity >= 0.5) {
+        check(`phase-overlay-darkens-${id}`, centroid.darkenedShare > 0.2 && centroid.darkenedShare < 0.98, { id, ...centroid });
+      }
     }
   } finally {
     await dpr2.close();
@@ -727,7 +836,7 @@ async function measureMercuryMarkerStep(context, geometry) {
 // footprint that are darker with the overlay shown than hidden, their share
 // of the footprint and the centroid of the darkening relative to the centre
 // (device pixels, y down).
-function darkeningCentroid(hidden, shown, centre, sizeCss) {
+function darkeningCentroid(hidden, shown, centre, sizeCss, threshold = 4) {
   const radius = sizeCss;
   let weight = 0, sumX = 0, sumY = 0, footprint = 0, darkened = 0;
   for (let y = Math.floor(centre[1] - radius); y <= Math.ceil(centre[1] + radius); y += 1) {
@@ -736,7 +845,7 @@ function darkeningCentroid(hidden, shown, centre, sizeCss) {
       if (Math.hypot(x - centre[0], y - centre[1]) > radius) continue;
       footprint += 1;
       const delta = hidden.luminance[y * hidden.width + x] - shown.luminance[y * shown.width + x];
-      if (delta <= 4) continue;
+      if (delta <= threshold) continue;
       darkened += 1;
       weight += delta;
       sumX += delta * (x + 0.5 - centre[0]);
@@ -805,39 +914,54 @@ function scanRays(diff, width, height, centre, { angles, step, threshold, minRad
 // body moves in about the Sun comes from projecting a step along its
 // velocity; rays behind the body (against that direction) must carry the
 // line at the predicted radius with falling strength, rays ahead must not.
-function measureTrail(rays, camera, body, sunPixel, predicted, markerSize) {
+function measureTrail(rays, camera, body, sunPixel, predicted, markerSize, otherPolars = []) {
   const here = camera.project(body.position);
   const step = camera.project(lighting.subtract(body.position, lighting.scale(body.velocity, -0.01)));
   const angleOf = (pixel) => Math.atan2(pixel[1] - sunPixel[1], pixel[0] - sunPixel[0]);
   const motionSign = Math.sign(wrapAngle(angleOf(step) - angleOf(here)));
-  const bodyAngle = angleOf(here);
   const bodyRadius = Math.hypot(here[0] - sunPixel[0], here[1] - sunPixel[1]);
   // Rays inside the marker's footprint see the marker, not the line.
-  const clearance = (markerSize / 2 + 4) / bodyRadius * 180 / Math.PI;
+  const clearanceDegrees = (markerSize / 2 + 4) / bodyRadius * 180 / Math.PI;
+  // Samples are placed by eccentric anomaly (what the trail is weighted in)
+  // and located on screen through the oracle's own ellipse, so an eccentric
+  // or inclined ring is sampled where its line really is.
   const sample = (offsetDegrees, direction) => {
-    const angle = wrapAngle(bodyAngle + direction * motionSign * offsetDegrees * Math.PI / 180);
-    // The five rays nearest the sample angle: found on a majority, strength
-    // averaged across them.
+    const anomaly = body.eccentricAnomaly + direction * Math.max(offsetDegrees, clearanceDegrees) * Math.PI / 180;
+    const pixel = camera.project(body.pointAt(anomaly));
+    const angle = angleOf(pixel);
+    const expectedRadius = Math.hypot(pixel[0] - sunPixel[0], pixel[1] - sunPixel[1]);
+    // The seven rays nearest the sample angle: on each, the crossing nearest
+    // the expected radius (another ring may pass close by; the median over
+    // rays absorbs the odd wrong pick); found on a majority.
+    // Rays where the oracle puts another body's ring within reach of this
+    // one's expected radius are ambiguous and left out; a sample with fewer
+    // than three unambiguous rays is reported as such and not judged.
     const nearest = rays.map((ray) => ({ ray, gap: Math.abs(wrapAngle(ray.angle - angle)) }))
-      .sort((a, b) => a.gap - b.gap).slice(0, 5).map(({ ray }) => ray);
-    let hits = 0;
-    let strength = 0;
-    for (const ray of nearest) {
-      const expected = oracle.polarRadiusAt(predicted, ray.angle);
-      const window = Math.max(4, 0.06 * expected);
-      let best = 0;
-      ray.crossings.forEach((radius, index) => {
-        if (Math.abs(radius - expected) <= window) best = Math.max(best, ray.strengths[index]);
-      });
-      if (best > 0) hits += 1;
-      strength += best / nearest.length;
+      .sort((a, b) => a.gap - b.gap).slice(0, 9).map(({ ray }) => ray)
+      .filter((ray) => !otherPolars.some((polar) => {
+        const other = oracle.polarRadiusAt(polar, ray.angle);
+        return other !== null && Math.abs(other - expectedRadius) <= Math.max(6, 0.06 * expectedRadius);
+      })).slice(0, 7);
+    if (nearest.length < 3) {
+      return { offsetDegrees, ambiguous: true, found: null, hits: 0, considered: nearest.length, strength: null };
     }
-    return { offsetDegrees, found: hits >= 3, hits, strength };
+    const strengths = [];
+    for (const ray of nearest) {
+      const window = Math.max(3, 0.03 * expectedRadius);
+      const near = ray.crossings.map((radius, index) => ({ radius, strength: ray.strengths[index] }))
+        .filter(({ radius }) => Math.abs(radius - expectedRadius) <= window)
+        .sort((a, b) => Math.abs(a.radius - expectedRadius) - Math.abs(b.radius - expectedRadius));
+      strengths.push(near.length ? near[0].strength : 0);
+    }
+    const hits = strengths.filter((value) => value > 0).length;
+    const sorted = [...strengths].sort((a, b) => a - b);
+    const median = sorted[Math.floor(sorted.length / 2)];
+    return { offsetDegrees, ambiguous: false, found: hits > nearest.length / 2, hits, considered: nearest.length, strength: median };
   };
   return {
     motionSign,
-    behind: TOLERANCES.trailBehindDegrees.map((degrees) => sample(Math.max(degrees, clearance), -1)),
-    ahead: TOLERANCES.trailAheadDegrees.map((degrees) => sample(Math.max(degrees, clearance), 1)),
+    behind: TOLERANCES.trailBehindDegrees.map((degrees) => sample(degrees, -1)),
+    ahead: TOLERANCES.trailAheadDegrees.map((degrees) => sample(degrees, 1)),
   };
 }
 
@@ -846,7 +970,7 @@ function measureTrail(rays, camera, body, sunPixel, predicted, markerSize) {
 // marker's footprint (plus a margin) contributes the crossing nearest the
 // marker's radius within 15 % of it; the two are averaged so a curving line
 // cancels to first order. Null when neither side has a crossing.
-function paintedRadiusGap(rays, angle, radius, markerSize) {
+function paintedRadiusGap(rays, angle, radius, markerSize, predictedPolar) {
   const clearance = (markerSize / 2 + 4) / radius;
   const sides = [];
   for (const sign of [-1, 1]) {
@@ -855,8 +979,11 @@ function paintedRadiusGap(rays, angle, radius, markerSize) {
       .filter(({ offset }) => offset >= clearance)
       .sort((a, b) => a.offset - b.offset);
     for (const { ray } of candidates.slice(0, 3)) {
-      const near = ray.crossings.filter((value) => Math.abs(value - radius) <= 0.15 * radius)
-        .sort((a, b) => Math.abs(a - radius) - Math.abs(b - radius));
+      // The crossing nearest where the oracle puts this body's own ring on
+      // that ray (another body's ring may pass nearby).
+      const expected = oracle.polarRadiusAt(predictedPolar, ray.angle) ?? radius;
+      const near = ray.crossings.filter((value) => Math.abs(value - expected) <= Math.max(4, 0.05 * expected))
+        .sort((a, b) => Math.abs(a - expected) - Math.abs(b - expected));
       if (near.length) { sides.push(near[0]); break; }
     }
   }

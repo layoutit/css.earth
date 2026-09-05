@@ -153,7 +153,8 @@ test("carries the planetary system around Mercury", () => {
   const system = heliocentricView.system;
   assert.equal(validatePreparedPlanetarySystem(system, heliocentricView), system);
   assert.deepEqual(system.bodies.map((body) => body.id),
-    ["venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"]);
+    ["venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune",
+      "ceres", "pluto", "haumea", "makemake", "eris"]);
   assert.equal(camera.dolly.maximumDistanceOverSystemExtent, 3);
   assert.equal(camera.planetarySystem.model, "distance-over-orbit-extent-fade");
   assert.ok(camera.planetarySystem.visibleAboveDistanceOverOrbitExtent >
@@ -170,8 +171,8 @@ test("carries the planetary system around Mercury", () => {
     `wheelNotchesEndToEnd ${wheelNotchesEndToEnd} is outside (20, 40)`);
 
   const extentAu = system.maximumExtentUnits / heliocentricView.units.unitsPerAu;
-  assert.ok(extentAu > 30 && extentAu < 31,
-    `system extent ${extentAu} au is not Neptune's orbit`);
+  assert.ok(extentAu > 97 && extentAu < 99,
+    `system extent ${extentAu} au is not Eris's aphelion`);
 });
 
 test("uses the common object orbit without a decoded transform bank", async () => {

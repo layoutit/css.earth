@@ -193,7 +193,8 @@ export function requireObjectRuntimeDefinition(definition, { objectId = definiti
     const { plan, bodyMarker, systemMarkers } = record(definition.heliocentricView, "Heliocentric view");
     validatePreparedHeliocentricView(plan);
     const sprite = marker => Number.isSafeInteger(marker?.index) && marker.index >= 0 &&
-      Number.isSafeInteger(marker.count) && marker.count > marker.index && marker.size > 0;
+      Number.isSafeInteger(marker.count) && marker.count > marker.index && marker.size > 0 &&
+      (marker.url === undefined || nonempty(marker.url));
     if (definition.sun == null || definition.camera.projection?.model !== "css-perspective-shared-with-sky" ||
         !nonempty(bodyMarker?.url) || !sprite(bodyMarker)) {
       throw new TypeError("A heliocentric view requires the observed Sun plan, a perspective camera and the shell's body marker.");

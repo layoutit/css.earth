@@ -22,6 +22,7 @@ export const MERCURY_RUNTIME_ASSET_URLS = Object.freeze([
     ...dpr(`mercury-starfield-${face}`),
   ]),
   ...dpr("mercury-directional-sun"),
+  ...dpr("mercury-system-markers"),
   "mercury-photometric-phase-curve.svg",
   "mercury-surface-albedo.svg",
   "mercury-lens-normal.webp",

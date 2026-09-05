@@ -29,8 +29,9 @@ import {
   SOLAR_GEOMETRY_EPOCH_JD_TT,
   SOLAR_GEOMETRY_EPOCH_LABEL,
 } from "./solar-geometry.mjs";
-import { ORBIT_TRAIL_MODEL, ORBIT_TRAIL_SPANS, orbitTrailWeights } from "./prepare-heliocentric-view.mjs";
+import { ORBIT_TRAIL_MODEL, ORBIT_TRAIL_SPANS, chordBehindTurns } from "./prepare-heliocentric-view.mjs";
 import {
+  trailWeightsForSpans,
   add,
   cross,
   determinant,
@@ -56,6 +57,11 @@ export const PLANETARY_SYSTEM_BODIES = Object.freeze([
   "uranus",
   "neptune",
 ]);
+// The five dwarf planets, by semi-major axis. Their orbits come from the
+// astronomy package's JPL Horizons osculating elements (ICRF, heliocentric,
+// one epoch) rather than the VSOP87 state vectors, and they are not held to
+// nest: Pluto's crosses Neptune's, which is real and shown.
+export const DWARF_PLANET_BODIES = Object.freeze(["ceres", "pluto", "haumea", "makemake", "eris"]);
 
 // Uniform chords per ring. The other planets' orbits are seen from far away
 // (they fade in only once the observer's whole orbit fits the view), so a
@@ -105,6 +111,7 @@ export async function preparePlanetarySystem({
   presentationFrame,
   kilometersPerUnit,
   bodies = PLANETARY_SYSTEM_BODIES,
+  dwarfPlanets = DWARF_PLANET_BODIES,
   astronomy = null,
 }) {
   if (!/^[a-z][a-z0-9-]*$/u.test(bodyId ?? "") ||
@@ -112,7 +119,9 @@ export async function preparePlanetarySystem({
       !Array.isArray(presentationFrame.basis) ||
       !positive(kilometersPerUnit) ||
       !Array.isArray(bodies) || !bodies.includes(bodyId) ||
-      bodies.some((id) => !HELIOCENTRIC_ORBITS[id] || !(GEOMETRIC_ALBEDO[id] > 0))) {
+      bodies.some((id) => !HELIOCENTRIC_ORBITS[id] || !(GEOMETRIC_ALBEDO[id] > 0)) ||
+      !Array.isArray(dwarfPlanets) || dwarfPlanets.some((id) => !(GEOMETRIC_ALBEDO[id] > 0)) ||
+      dwarfPlanets.some((id) => bodies.includes(id))) {
     throw new TypeError("Planetary system preparation arguments are invalid.");
   }
   if (Math.abs(determinant(presentationFrame.basis) - 1) > 1e-9) {
@@ -128,7 +137,13 @@ export async function preparePlanetarySystem({
     M_PER_AU,
     M_PER_KM,
     BODIES,
+    DWARF_PLANET_IDS,
+    dwarfPlanetElements,
+    dwarfPlanetPositionKm,
   } = astronomy ?? await loadAstronomyPackage();
+  if (dwarfPlanets.some((id) => !DWARF_PLANET_IDS.includes(id))) {
+    throw new TypeError("An unknown dwarf planet was requested.");
+  }
   if (Math.abs(M_PER_AU / M_PER_KM - ASTRONOMICAL_UNIT_KILOMETERS) > 1e-6) {
     throw new RangeError("The astronomy unit ladder disagrees with the IAU 2012 au.");
   }
@@ -151,6 +166,17 @@ export async function preparePlanetarySystem({
       "sun",
       M_PER_KM,
       heliocentricIcrfAu(id),
+      BODIES[id].meanRadiusKm * M_PER_KM,
+    ));
+  }
+  // Dwarf planets: the package's own Keplerian position at the epoch (km,
+  // ICRF, heliocentric), as one more km frame each under the Sun.
+  for (const id of dwarfPlanets) {
+    tree.add(fixedFrame(
+      id,
+      "sun",
+      M_PER_KM,
+      scale(dwarfPlanetPositionKm(id, SOLAR_GEOMETRY_EPOCH_JD_TT), 1 / ASTRONOMICAL_UNIT_KILOMETERS),
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));
   }
@@ -191,11 +217,63 @@ export async function preparePlanetarySystem({
     );
   }
 
-  const others = bodies.filter((id) => id !== bodyId).map((id) => {
+  // ICRF directions (already in the common frame) into the presentation
+  // frame, for the dwarf planets' elements.
+  const icrfDirectionToScene = (direction) => normalize(
+    presentationFrame.toPresentation(applyMatrix(observerToBodyFixed, direction)),
+  );
+  // Orbit orientation from Keplerian angles: the ascending node about ICRF
+  // +z, the inclination about the node line, the argument of periapsis in
+  // the orbital plane. The normal is the angular momentum direction (the
+  // motion is prograde by construction), the perihelion direction the
+  // eccentricity vector's.
+  const keplerOrientation = ({ inclinationRad, ascendingNodeRad, argumentOfPeriapsisRad }) => {
+    const cosO = Math.cos(ascendingNodeRad), sinO = Math.sin(ascendingNodeRad);
+    const cosI = Math.cos(inclinationRad), sinI = Math.sin(inclinationRad);
+    const cosW = Math.cos(argumentOfPeriapsisRad), sinW = Math.sin(argumentOfPeriapsisRad);
+    return {
+      normalIcrf: [sinO * sinI, -cosO * sinI, cosI],
+      perihelionIcrf: [
+        cosO * cosW - sinO * sinW * cosI,
+        sinO * cosW + cosO * sinW * cosI,
+        sinW * sinI,
+      ],
+    };
+  };
+  const orbitFacts = (id) => {
+    if (dwarfPlanets.includes(id)) {
+      const elements = dwarfPlanetElements(id);
+      const { normalIcrf, perihelionIcrf } = keplerOrientation(elements);
+      return {
+        kind: "dwarf-planet",
+        semiMajorAxisAu: elements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
+        eccentricity: elements.eccentricity,
+        inclinationDegrees: elements.inclinationRad * 180 / Math.PI,
+        inclinationReference: "icrf-equator",
+        normal: icrfDirectionToScene(normalIcrf),
+        perihelionDirection: icrfDirectionToScene(perihelionIcrf),
+        // The true anomaly follows from the position below.
+        trueAnomalyDegrees: null,
+        source: "jpl-horizons-osculating-elements-via-astronomy-package",
+      };
+    }
     const orbit = HELIOCENTRIC_ORBITS[id];
+    return {
+      kind: "planet",
+      semiMajorAxisAu: orbit.semiMajorAxisAu,
+      eccentricity: orbit.eccentricity,
+      inclinationDegrees: orbit.inclinationDegrees,
+      inclinationReference: "j2000-ecliptic",
+      normal: directionToScene(id, BODY_FIXED_ORBIT_NORMAL_DIRECTIONS[id]),
+      perihelionDirection: directionToScene(id, orbit.perihelionDirection),
+      trueAnomalyDegrees: orbit.trueAnomalyDegrees,
+      source: "vsop87a-state-vector-via-solar-geometry",
+    };
+  };
+  const others = [...bodies.filter((id) => id !== bodyId), ...dwarfPlanets].map((id) => {
+    const orbit = orbitFacts(id);
     const position = toScene(resolveKilometers(id));
-    const normal = directionToScene(id, BODY_FIXED_ORBIT_NORMAL_DIRECTIONS[id]);
-    const perihelionDirection = directionToScene(id, orbit.perihelionDirection);
+    const { normal, perihelionDirection } = orbit;
     if (Math.abs(dot(normal, perihelionDirection)) > 1e-9) {
       throw new RangeError(`${id}: perihelion direction is not in the orbital plane.`);
     }
@@ -210,11 +288,21 @@ export async function preparePlanetarySystem({
       center,
       add(scale(majorAxis, Math.cos(eccentricAnomaly)), scale(minorAxis, Math.sin(eccentricAnomaly))),
     );
-    const trueAnomaly = orbit.trueAnomalyDegrees * Math.PI / 180;
-    const bodyEccentricAnomaly = 2 * Math.atan2(
-      Math.sqrt(1 - eccentricity) * Math.sin(trueAnomaly / 2),
-      Math.sqrt(1 + eccentricity) * Math.cos(trueAnomaly / 2),
-    );
+    // The body's eccentric anomaly: from the planet's prepared true anomaly,
+    // or (dwarf planets) from its position projected onto the ellipse axes.
+    const bodyEccentricAnomaly = orbit.trueAnomalyDegrees === null
+      ? Math.atan2(
+        dot(subtract(position, center), perihelionMotion) / semiMinorAxisUnits,
+        dot(subtract(position, center), perihelionDirection) / semiMajorAxisUnits,
+      )
+      : 2 * Math.atan2(
+        Math.sqrt(1 - eccentricity) * Math.sin(orbit.trueAnomalyDegrees * Math.PI / 360),
+        Math.sqrt(1 + eccentricity) * Math.cos(orbit.trueAnomalyDegrees * Math.PI / 360),
+      );
+    const trueAnomalyDegrees = orbit.trueAnomalyDegrees ?? (2 * Math.atan2(
+      Math.sqrt(1 + eccentricity) * Math.sin(bodyEccentricAnomaly / 2),
+      Math.sqrt(1 - eccentricity) * Math.cos(bodyEccentricAnomaly / 2),
+    ) * 180 / Math.PI + 360) % 360;
     // The ellipse from the elements must pass through the position the tree
     // resolved from the Sun direction: two derivations of one state vector.
     const ringResidual = magnitude(subtract(pointAt(bodyEccentricAnomaly), position));
@@ -230,7 +318,8 @@ export async function preparePlanetarySystem({
     // rounding is below 1e-7 relative and the prepared module stays small.
     const vertices = Object.freeze(Array.from({ length: SYSTEM_ORBIT_SEGMENTS }, (_, index) =>
       Object.freeze((index === 0 ? position : pointAt(bodyEccentricAnomaly + index * step)).map(Math.round))));
-    const trail = orbitTrailWeights(Array.from({ length: SYSTEM_ORBIT_SEGMENTS }, (_, index) => index * step));
+    const behindTurns = chordBehindTurns(Array.from({ length: SYSTEM_ORBIT_SEGMENTS }, (_, index) => index * step));
+    const trail = trailWeightsForSpans(behindTurns, ORBIT_TRAIL_SPANS);
     // Illumination from the observer (at the origin): Sun-body-observer.
     const toSun = subtract(sunPosition, position);
     const toObserver = scale(position, -1);
@@ -240,6 +329,8 @@ export async function preparePlanetarySystem({
       ((magnitude(toSun) * kilometersPerUnit) ** 2 * (magnitude(toObserver) * kilometersPerUnit) ** 2);
     return Object.freeze({
       id,
+      kind: orbit.kind,
+      orbitSource: orbit.source,
       radiusKilometers: BODIES[id].meanRadiusKm,
       illumination: {
         model: MARKER_BRIGHTNESS.model,
@@ -252,15 +343,16 @@ export async function preparePlanetarySystem({
       },
       position: Object.freeze(position.map(Math.round)),
       distanceUnits: magnitude(position),
-      heliocentricDistanceAu: orbit.heliocentricDistanceAu,
+      heliocentricDistanceAu: magnitude(toSun) / unitsPerAu,
       semiMajorAxisAu: orbit.semiMajorAxisAu,
       semiMajorAxisUnits,
       semiMinorAxisUnits,
       eccentricity,
       inclinationDegrees: orbit.inclinationDegrees,
-      perihelionAu: orbit.perihelionAu,
-      aphelionAu: orbit.aphelionAu,
-      trueAnomalyDegrees: orbit.trueAnomalyDegrees,
+      inclinationReference: orbit.inclinationReference,
+      perihelionAu: orbit.semiMajorAxisAu * (1 - eccentricity),
+      aphelionAu: orbit.semiMajorAxisAu * (1 + eccentricity),
+      trueAnomalyDegrees,
       orbit: Object.freeze({
         normal,
         perihelionDirection,
@@ -268,6 +360,7 @@ export async function preparePlanetarySystem({
         vertices,
         vertexCount: vertices.length,
         trail,
+        chordBehindTurns: behindTurns,
         trailModel: ORBIT_TRAIL_MODEL,
         trailSpans: ORBIT_TRAIL_SPANS,
         uniformSegments: SYSTEM_ORBIT_SEGMENTS,
@@ -325,6 +418,8 @@ export async function preparePlanetarySystem({
     units: Object.freeze({ kilometersPerUnit, unitsPerAu }),
     sun: Object.freeze({ position: Object.freeze(sunPosition.map(round)) }),
     bodies: Object.freeze(bodiesWithBrightness),
+    planetIds: Object.freeze(bodies.filter((id) => id !== bodyId)),
+    dwarfPlanetIds: Object.freeze([...dwarfPlanets]),
     markerBrightness: MARKER_BRIGHTNESS,
     maximumExtentUnits,
     runtimeGeometryDerivation: false,
