@@ -377,3 +377,23 @@ test("a reversal with a four-pixel release change still coasts", () => {
   assert.ok(launch);
   assert.ok(launch.angularVelocity[1]<0);
 });
+
+test("release distinguishes equal adjacent steps from the two-step history comparison", () => {
+  // The reference release reads the newest movement and the movement two
+  // slots earlier. These cases distinguish that rule from adjacent deltas.
+  for (const padding of [0, 20]) {
+    for (const [steps, shouldCoast] of [[[10, 20, 20], true], [[10, 20, 10], false]]) {
+      const history = createGoogleEarthDragHistory();
+      let x = 260;
+      recordGoogleEarthDragSample(history, { x, y:300, timestamp:0, pitch:0, yaw:0 });
+      for (const [index, step] of [...Array(padding).fill(1), ...steps].entries()) {
+        x += step;
+        recordGoogleEarthDragSample(history, {
+          x, y:300, timestamp:(index + 1) * 20, pitch:0, yaw:x - 260,
+        });
+      }
+      assert.equal(estimateGoogleEarthDragThrow({ history,
+        releaseTimestamp:(padding + steps.length) * 20 + 1 }) !== null, shouldCoast);
+    }
+  }
+});

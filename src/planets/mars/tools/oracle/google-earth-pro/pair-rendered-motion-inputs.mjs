@@ -12,7 +12,8 @@ const historyPath = n.inputHistoryPath ?? resolve(dir, "input-history.jsonl");
 const timingPath = n.frameTimingPath ?? resolve(dir, "frame-timing.tsv");
 const records = (await readFile(historyPath, "utf8")).trim().split("\n").map(JSON.parse);
 const batch = n.inputs.find(e => e.event === "native-input-batch-accepted").acceptedMonotonicSeconds;
-const end = n.frames.at(-1).monotonicSeconds;
+const end = n.captureConfiguration?.captureUntilRest === false
+  ? records.at(-1).t : n.frames.at(-1).monotonicSeconds;
 const offsets = records.filter(r => r.clock > 0).map(r => r.t-r.clock).sort((a,b) => a-b);
 const offset = offsets[offsets.length >> 1];
 const local = records.filter(r => r.t >= batch && r.t <= end);
@@ -52,12 +53,11 @@ if (pointerAccepted.some(e => e.kind === "drag")) {
     batch + group[0].atMilliseconds / 1000 - .02 &&
     r.history[0][2] + offset < batch + nextPressMilliseconds / 1000 - .02);
   const thrown = related.find(r => r.average.some(v => v !== 0));
-  const deliveredBeforeRelease = group.slice(0, -1).filter((event, i, events) =>
-    i === 0 || event.x !== events[i - 1].x || event.y !== events[i - 1].y);
-  // A release position enters the motion history only when the release
-  // launches inertia. A non-launching release may still update the stored
-  // pointer point after the camera has stopped, so do not replay it as drag.
-  const sampleCount = thrown?.history.length ?? deliveredBeforeRelease.length;
+  // A non-launching release can still consume its final pointer position.
+  // That delta participates in the release decision; dropping it can turn a
+  // stopped reference into a browser throw. Use the observed complete history,
+  // then verify every reconstructed position against delivered input below.
+  const sampleCount = thrown?.history.length ?? Math.max(0, ...related.map(r => r.history.length));
   assert.ok(sampleCount <= 16, "Pointer history ring wrapped; full consumption cannot be reconstructed.");
   const complete = related.filter(r => r.history.length === sampleCount);
   if (!complete.length && accepted.some(e => e.kind === "wheel" && e.qtButtons === 1 &&
