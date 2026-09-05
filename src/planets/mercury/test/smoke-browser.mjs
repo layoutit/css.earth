@@ -73,11 +73,15 @@ try {
     mountedObjectCount: 1,
     activeObjectId: "mercury",
     stageCount: 1,
-    stageChildren: 4,
-    stageElements: 1814,
+    // Sky, Sun root, body camera, material overlay, orbit overlay.
+    stageChildren: 5,
+    // Sky faces, the Sun billboard, the perspective camera with its body and
+    // interior, the billboard disc and the material overlay, and the orbit
+    // overlay's piece pool and body marker.
+    stageElements: 2242,
     cameraCount: 1,
     skyboxFaceCount: 6,
-    sunCount: 0,
+    sunCount: 1,
     bodyLeafCount: 452,
     interiorLeafCount: 446,
     canvasCount: 0,
@@ -117,7 +121,7 @@ try {
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
     viewBank: window.__mercury.dom.viewBank(),
   })), {
-    elements: 1814,
+    elements: 2242,
     interiorLeaves: 446,
     viewBank: {
       interiorMounted: true,
@@ -286,9 +290,12 @@ try {
       window.__mercury.sky.sceneRegistration,
     );
     const compare = () => {
+      // The scene transform is the camera's dolly and the uniform scene
+      // scale ahead of the accumulated rotation; only the rotation is
+      // compared.
       const scene = new DOMMatrix(
         document.querySelector(".mercury-scene").style.transform
-          .replace(/^scale\([^)]*\)\s*/u, ""),
+          .replace(/^(?:translate3d\([^)]*\)\s*)?scale(?:3d)?\([^)]*\)\s*/u, ""),
       );
       const sky = new DOMMatrix(
         document.querySelector(".mercury-skybox-orientation").style.transform,
@@ -322,7 +329,7 @@ try {
     );
     const scene = new DOMMatrix(
       document.querySelector(".mercury-scene").style.transform
-        .replace(/^scale\([^)]*\)\s*/u, ""),
+        .replace(/^(?:translate3d\([^)]*\)\s*)?scale(?:3d)?\([^)]*\)\s*/u, ""),
     );
     const sky = new DOMMatrix(
       document.querySelector(".mercury-skybox-orientation").style.transform,
@@ -559,10 +566,98 @@ try {
   assert.ok((await page.evaluate(() => window.__mercury.camera.state())).zoom >
     originalCamera.zoom);
 
+  // Level of detail: dolly out through the three retained stages. The
+  // coarser stage fades in over the finer one, which hides only once it is
+  // covered; the overlay keeps the same frame (the phase) throughout and
+  // draws from the billboard atlas, so the row cache stops streaming; the
+  // marker is the shell's own navigation sprite; nothing mounts or unmounts.
+  await page.locator('input[name="shadows"]').evaluate((control) => {
+    control.checked = true;
+    control.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+  const lodLadder = await page.evaluate(() => {
+    const stats = window.__mercury.camera.stats();
+    const stage = document.querySelector(".planet-stage");
+    const samples = [];
+    for (const diameter of [40, 20, 17, 13, 10, 7, 5.5, 4.4, 3]) {
+      window.__mercury.camera.setState({
+        controlPitch: stats.defaultControlPitchDegrees,
+        controlYaw: stats.defaultControlYawDegrees,
+        zoom: 1.1 * diameter / 460,
+      });
+      const sky = window.__mercury.sky.state();
+      const marker = document.querySelector(".mercury-body-marker");
+      samples.push({
+        diameter,
+        stage: sky.lod.stage,
+        datasetLod: stage.dataset.lod,
+        billboardOpacity: sky.lod.billboardOpacity,
+        billboardStyleOpacity: Number(getComputedStyle(
+          document.querySelector(".mercury-billboard"),
+        ).opacity),
+        markerOpacity: Number(getComputedStyle(marker).opacity),
+        markerImage: getComputedStyle(marker).backgroundImage,
+        markerSize: marker.getBoundingClientRect().width,
+        sceneVisibility: getComputedStyle(
+          document.querySelector(".mercury-scene"),
+        ).visibility,
+        overlayVisibility: getComputedStyle(
+          document.querySelector(".mercury-material-root"),
+        ).visibility,
+        materialImage: document.querySelector(".mercury-material")
+          .style.backgroundImage,
+        materialFrame: sky.materialFrame,
+        rowStreaming: window.__mercury.renderStats.textureStats
+          .materialCache().active,
+        stable: window.__mercury.assertStableDomIdentity(),
+        elements: stage.querySelectorAll("*").length,
+      });
+    }
+    window.__mercury.camera.setState({ zoom: 1.1 });
+    return samples;
+  });
+  assert.deepEqual(lodLadder.map(({ stage }) => stage), [
+    "geometry", "geometry", "crossfade", "billboard", "billboard", "billboard",
+    "billboard", "marker", "marker",
+  ]);
+  for (const sample of lodLadder) {
+    assert.equal(sample.datasetLod, sample.stage);
+    assert.equal(sample.stable, true);
+    assert.equal(sample.elements, 2242);
+    assert.equal(sample.materialFrame, lodLadder[0].materialFrame);
+    assert.ok(Math.abs(sample.billboardStyleOpacity - sample.billboardOpacity) <
+      1e-6);
+    assert.equal(sample.sceneVisibility,
+      ["billboard", "marker"].includes(sample.stage) ? "hidden" : "visible");
+    assert.equal(sample.overlayVisibility,
+      sample.stage === "marker" ? "hidden" : "visible");
+    assert.equal(sample.rowStreaming, sample.stage === "geometry");
+    assert.match(sample.materialImage, sample.stage === "geometry"
+      ? /mercury-lighting-2x-row-\d+\.webp/u
+      : /mercury-lighting-2x-billboard\.webp/u);
+    assert.match(sample.markerImage, /\/navigation\/planet-markers@2x\.webp/u);
+    assert.equal(sample.markerSize, 5);
+  }
+  assert.deepEqual(lodLadder.map(({ billboardOpacity }) => billboardOpacity > 0),
+    [false, false, true, true, true, true, true, true, true]);
+  assert.deepEqual(lodLadder.map(({ markerOpacity }) => Math.round(markerOpacity * 100) / 100),
+    [0, 0, 0, 0, 0, 0.29, 0.71, 1, 1]);
+  assert.ok(lodLadder[2].billboardOpacity > 0.4 &&
+    lodLadder[2].billboardOpacity < 0.6);
+  // Back in close: the row cache resumes on the retained rows.
+  assert.equal(await page.evaluate(() => {
+    const { stage, rowStreaming } = window.__mercury.sky.state().lod;
+    return `${stage}/${rowStreaming}`;
+  }), "geometry/true");
+  await page.locator('input[name="shadows"]').evaluate((control) => {
+    control.checked = false;
+    control.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.childElementCount), baseline.stageChildren);
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-    stage.querySelectorAll("*").length), 1814);
+    stage.querySelectorAll("*").length), 2242);
   assert.equal(await page.evaluate(() =>
     window.__mercury.assertStableDomIdentity()), true);
   assert.deepEqual(externalRequests, []);
@@ -590,6 +685,56 @@ try {
           .test(name)).length), 6);
     assert.equal(await dpr2Page.evaluate(() =>
       window.__mercury.assertStableDomIdentity()), true);
+    // The phase survives both crossfades: at the default framing the Sun
+    // stands on screen left, and the painted lit direction of the geometry,
+    // of the billboard fading in over it, and of the billboard alone all
+    // point there, with the same off-centre luminance of a half phase.
+    await dpr2Page.locator('input[name="shadows"]').evaluate((control) => {
+      control.checked = true;
+      control.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    await dpr2Page.evaluate(() => {
+      document.querySelector(".mercury-skybox").style.visibility = "hidden";
+      const orbit = document.querySelector('input[name="orbit"]');
+      orbit.checked = false;
+      orbit.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    const lodPhases = [];
+    for (const diameter of [40, 17, 12]) {
+      const shot = await dpr2Page.evaluate((nextDiameter) => {
+        const stats = window.__mercury.camera.stats();
+        window.__mercury.camera.setState({
+          controlPitch: stats.defaultControlPitchDegrees,
+          controlYaw: stats.defaultControlYawDegrees,
+          zoom: 1.1 * nextDiameter / 460,
+        });
+        const box = document.querySelector(".mercury-camera")
+          .getBoundingClientRect();
+        return {
+          stage: window.__mercury.sky.state().lod.stage,
+          clip: {
+            x: box.x + box.width / 2 - nextDiameter,
+            y: box.y + box.height / 2 - nextDiameter,
+            width: 2 * nextDiameter,
+            height: 2 * nextDiameter,
+          },
+        };
+      }, diameter);
+      await nextPaint(dpr2Page);
+      lodPhases.push({
+        diameter,
+        stage: shot.stage,
+        ...await litDirection(await dpr2Page.screenshot({ clip: shot.clip })),
+      });
+    }
+    assert.deepEqual(lodPhases.map(({ stage }) => stage),
+      ["geometry", "crossfade", "billboard"]);
+    for (const phase of lodPhases) {
+      assert.ok(Math.abs(phase.litDirectionDegrees - 180) < 15,
+        `lit direction ${phase.litDirectionDegrees} at ${phase.diameter}px`);
+      assert.ok(phase.centroidRadiusShare > 0.15,
+        `centroid offset ${phase.centroidRadiusShare} at ${phase.diameter}px`);
+    }
   } finally {
     await dpr2Context.close();
   }

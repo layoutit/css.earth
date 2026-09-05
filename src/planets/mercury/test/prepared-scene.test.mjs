@@ -244,6 +244,49 @@ test("prepares every Mercury lighting angle at native DPR resolution", async () 
   }
 });
 
+test("prepares every lighting angle again in one billboard atlas for the far view", async () => {
+  for (const density of [1, 2]) {
+    const bank = PREPARED_MERCURY_ASSETS.lighting.banks[String(density)];
+    const billboard = bank.billboard;
+    assert.equal(billboard.schema, "cssmercury-prepared-lighting-billboard@1");
+    assert.equal(billboard.frameCount, 256);
+    assert.equal(billboard.presentations.length, 256);
+    assert.equal(billboard.frameSize, 24 * density);
+    assert.equal(billboard.width, billboard.columns * billboard.frameSize);
+    assert.equal(billboard.height, billboard.rowCount * billboard.frameSize);
+    assert.ok(billboard.columns * billboard.rowCount >= 256);
+    const path = fileURLToPath(new URL(
+      `../../../../public${billboard.url}`,
+      import.meta.url,
+    ));
+    const bytes = await readFile(path);
+    assert.equal(bytes.byteLength, billboard.bytes);
+    assert.equal(
+      createHash("sha256").update(bytes).digest("hex"),
+      billboard.sha256,
+    );
+    const metadata = await sharp(path).metadata();
+    assert.equal(metadata.width, billboard.width);
+    assert.equal(metadata.height, billboard.height);
+    // Every frame addresses its own tile in the disc box the overlay uses.
+    const size = billboard.presentationFrameSize;
+    for (const presentation of billboard.presentations) {
+      assert.equal(presentation.url, billboard.url);
+      assert.equal(presentation.backgroundPosition,
+        `${-(presentation.frameIndex % billboard.columns) * size}px ` +
+        `${-Math.floor(presentation.frameIndex / billboard.columns) * size}px`);
+      assert.equal(presentation.backgroundSize,
+        `${billboard.columns * size}px ${billboard.rowCount * size}px`);
+    }
+  }
+  const lod = PREPARED_MERCURY_SCENE.camera.levelOfDetail;
+  assert.equal(lod.model, "silhouette-diameter-crossfade");
+  assert.ok(lod.billboardFadeStartDiscPixels > lod.billboardFullDiscPixels);
+  assert.ok(lod.billboardFullDiscPixels > lod.markerFadeStartDiscPixels);
+  assert.ok(lod.markerFadeStartDiscPixels > lod.markerFullDiscPixels);
+  assert.ok(lod.markerFullDiscPixels > 0);
+});
+
 test("reuses the exact full-phase frame for symmetric shadowless curvature", async () => {
   for (const density of [1, 2]) {
     const bank = PREPARED_MERCURY_ASSETS.lighting.banks[String(density)];

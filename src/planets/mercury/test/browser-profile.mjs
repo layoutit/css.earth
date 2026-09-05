@@ -77,8 +77,10 @@ export const browserProfile = Object.freeze({
         maximumPitch: stats.maximumPitchDegrees,
         defaultPitch: stats.defaultControlPitchDegrees,
         pitchBounded: stats.pitchBounded,
-        minimumZoom: 0.42,
-        maximumZoom: 4,
+        // The perspective camera dollies out to the whole orbit: the alias's
+        // minimum is far below the prepared close-framing minimum of 0.42.
+        minimumZoom: stats.minimumZoom,
+        maximumZoom: stats.maximumZoom,
         defaultZoom: 1.1,
       };
     });
