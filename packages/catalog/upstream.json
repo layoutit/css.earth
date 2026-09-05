@@ -2,79 +2,101 @@
   "package": "@cssearth/catalog",
   "upstreamPackage": "@galaxio/catalog",
   "license": "MIT",
-  "licenseFile": "LICENSE.GALAXIO-MIT",
+  "licenseFile": "LICENSE",
+  "author": "Juan Cruz Fortunatti",
+  "origin": "Shared source, same author: this package is maintained in Juan Cruz Fortunatti's other project (galaxio, https://github.com/apresmoi/galaxio) and mirrored here by tools/sync-upstream.mjs. Both projects are his, and the package is MIT under his copyright either way, so it is presented as cssEarth's own package. This file is an engineering sync record (upstream path, commit, per-file hashes), not a third-party attribution.",
   "repository": "https://github.com/apresmoi/galaxio.git",
   "directory": "packages/catalog",
   "subtreeCommit": "773ec45daa35731381cf68af5a26e2e24a758c25",
   "subtreeCommitDate": "2026-08-30T08:36:59+02:00",
   "headCommit": "d5b22f85212bdcf7f8fe063bfc32867056eafd57",
   "upstreamDirty": false,
-  "syncedAt": "2026-09-05T20:43:09.160Z",
-  "syncScript": "tools/sync-galaxio.mjs",
-  "transform": "identity only: files listed under identityRules had galaxio's identity replaced by cssEarth's (see rules); every other file is byte-identical to upstream",
+  "syncedAt": "2026-09-05T20:58:26.653Z",
+  "syncScript": "tools/sync-upstream.mjs",
+  "transform": "identity only: files listed under identityRules had the upstream project's identity replaced by cssEarth's (see rules; the src/ rules touch string literals only); files listed under excludedFiles are not mirrored; every other file is byte-identical to upstream",
   "identityRules": {
     "package-name": "package.json \"name\": @galaxio/<pkg> -> @cssearth/<pkg>",
+    "package-urls": "package.json repository, bugs, homepage: the upstream repository URL -> the cssEarth repository URL",
     "prose-package-name": "*.md: @galaxio/<pkg> -> @cssearth/<pkg> (headings, install and import examples)",
-    "prose-project-link": "*.md: the [Galaxio](repo) project link -> [cssEarth](repo)"
+    "prose-project-link": "*.md: the [Galaxio](repo) project link -> [cssEarth](repo)",
+    "prose-pipeline-writer-path": "*.md: the Python writer's path inside the upstream pipeline/ (absent here) -> `formats/catalog.py` of the external catalogue pipeline (not part of this repository)",
+    "prose-pipeline-directory": "*.md: \"A Python writer lives in the repo's `pipeline/`\" (absent here) -> the external catalogue pipeline (not part of this repository)",
+    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md §2 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
+    "prose-claude-symlink": "AGENTS.md: drop the sentence announcing the CLAUDE.md symlink, which is not mirrored (EXCLUDED_FILES)",
+    "code-project-url": "src/modelAccuracy.ts: PROJECT_SOURCE_URL string literal, the upstream ARCHITECTURE.md -> this package's AGENTS.md in the cssEarth repository (a documentation URL; no behaviour change)",
+    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio … convention/definition' sourceLabel string literals -> 'cssEarth …' (labels only; no behaviour change)"
   },
   "rewrittenFiles": {
     "AGENTS.md": [
-      "prose-package-name"
+      "prose-package-name",
+      "prose-pipeline-writer-path",
+      "prose-claude-symlink"
+    ],
+    "FORMAT.md": [
+      "prose-pipeline-writer-path"
     ],
     "README.md": [
       "prose-package-name",
-      "prose-project-link"
+      "prose-project-link",
+      "prose-pipeline-directory"
     ],
     "package.json": [
-      "package-name"
+      "package-name",
+      "package-urls"
     ]
   },
+  "excludedFiles": {
+    "CLAUDE.md": "A symlink to AGENTS.md upstream. Claude Code loads CLAUDE.md per directory, so mirroring it would silently apply the upstream project's operator instructions to any session working in this package. AGENTS.md itself is mirrored as plain documentation.",
+    "scripts/gen_fixture.py": "Imports the upstream Python pipeline (galaxio_pipeline), which is not part of this repository, so it cannot run here. scripts/check-parity.mjs, which invokes it, is mirrored as inert reference; the parity check runs where the pipeline lives."
+  },
   "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. When a Node-side consumer is wired (tools/prepare-solar-geometry.mjs is the obvious first), one of these is needed: a sync-time specifier rewrite of `.js` to `.ts`, a small module-resolver hook, or a build step. None is chosen yet; the source stays as upstream wrote it until that decision is made.",
-  "fileCount": 14,
-  "byteCount": 23495,
+  "fileCount": 12,
+  "byteCount": 22820,
   "files": {
     "AGENTS.md": {
-      "sha256": "eff45ffcbacb6a4692c4ef552107edf579b5d45fc2e73727d17cc105d2c6382a",
-      "bytes": 2272,
+      "sha256": "5284a156cbcb8118bf76a08f52dcbe1aee3e6c800b95849f3685d0a3870896e4",
+      "bytes": 2311,
       "upstreamSha256": "980794ee0c5b2fc40a2cea04343a145a3fd0dd3a76a82b202ddde17d8692a603",
       "upstreamBytes": 2271,
       "identityRules": [
-        "prose-package-name"
+        "prose-package-name",
+        "prose-pipeline-writer-path",
+        "prose-claude-symlink"
       ]
     },
-    "CLAUDE.md": {
-      "symlink": "AGENTS.md"
-    },
     "FORMAT.md": {
-      "sha256": "e143837de3d084a3196fcb8b19dfa43d5f59e7aab1a9ac6141ee20a684bc9aff",
-      "bytes": 2939
+      "sha256": "4c640abe1c26cbeb6ac27cdf5ac66984ebbcb32f527fc75dfb3c49154f964272",
+      "bytes": 2978,
+      "upstreamSha256": "e143837de3d084a3196fcb8b19dfa43d5f59e7aab1a9ac6141ee20a684bc9aff",
+      "upstreamBytes": 2939,
+      "identityRules": [
+        "prose-pipeline-writer-path"
+      ]
     },
     "README.md": {
-      "sha256": "dbd75b380cd0fb20d74975301546ca94e0669a8d745a25bced98c99d6ec82fcc",
-      "bytes": 886,
+      "sha256": "aef11ceb36007188ba81a35d1371fc6368a14e2c973482f917b89c2fb03b178b",
+      "bytes": 927,
       "upstreamSha256": "22341cebaf2c382673314608eb0241bb661000dbf252c5346afff4e950a6027c",
       "upstreamBytes": 881,
       "identityRules": [
         "prose-package-name",
-        "prose-project-link"
+        "prose-project-link",
+        "prose-pipeline-directory"
       ]
     },
     "package.json": {
-      "sha256": "8b9b864fbfb159c788824cf4d512849d71e87228665969e2f24a4efbbf5ce888",
-      "bytes": 1185,
+      "sha256": "880467732d6a8a039e4251da4a0a166bc6042b6988f810a5080be276a008e9d7",
+      "bytes": 1188,
       "upstreamSha256": "321cd568a7f7430eedc7f0f36291143cf4bb702fb13017ee5dc4cf8eed149695",
       "upstreamBytes": 1184,
       "identityRules": [
-        "package-name"
+        "package-name",
+        "package-urls"
       ]
     },
     "scripts/check-parity.mjs": {
       "sha256": "c420783597e9e3ae5247aa8f4fc87476df1ef67c62817b0ea14fef178d52a21c",
       "bytes": 2131
-    },
-    "scripts/gen_fixture.py": {
-      "sha256": "c1b938a4d7acc8e132b690ce6b1abcb62a6ee4d52e17a007954a5d7e1df4c0e1",
-      "bytes": 797
     },
     "src/catalog.test.ts": {
       "sha256": "17f6f5221b9c753b6e02acf3428f5520e9fadd17a2cbf8d7cf5b1553ef18600b",

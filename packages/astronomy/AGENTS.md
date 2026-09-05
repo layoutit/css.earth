@@ -1,7 +1,7 @@
 # @cssearth/astronomy — operator notes
 
 Pure math. Time scales, float64 vectors, the reference-frame tree, and (from M2)
-the ephemeris series. `CLAUDE.md` is a symlink to this file.
+the ephemeris series.
 
 ## Hard boundaries
 

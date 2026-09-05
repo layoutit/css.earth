@@ -19,7 +19,7 @@ const frames = new FrameTree()
 frames.resolve('earth', { frame: 'sun', offset: [0, 0, 0] }, nowJdTt())
 ```
 
-The frame tree exists so that absolute world coordinates are never computed: positions are always resolved from one frame into another, keeping the numbers involved comparable in size. See `ARCHITECTURE.md §2` in the repo root for why that matters across 26 orders of magnitude.
+The frame tree exists so that absolute world coordinates are never computed: positions are always resolved from one frame into another, keeping the numbers involved comparable in size. See "The frame tree is the whole point" in `AGENTS.md` for why that matters across 26 orders of magnitude.
 
 ## Ephemerides
 

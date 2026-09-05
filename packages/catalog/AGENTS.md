@@ -1,10 +1,10 @@
 # @cssearth/catalog — operator notes
 
-The `.gxct` container: reader, writer, spec. `CLAUDE.md` is a symlink to this file.
+The `.gxct` container: reader, writer, spec.
 
 ## This format is a two-language contract
 
-The **Python writer** in `pipeline/galaxio_pipeline/formats/catalog.py` builds
+The **Python writer** in `formats/catalog.py` of the external catalogue pipeline (not part of this repository) builds
 every shipped catalogue. The **TypeScript reader** here is what the browser
 runs. They are separate implementations of one spec, and unit tests on each side
 prove only that each is self-consistent.
@@ -13,7 +13,7 @@ prove only that each is self-consistent.
 
 1. `FORMAT.md` — the spec is the source of truth, not either implementation
 2. `src/format.ts` + `src/read.ts` + `src/write.ts`
-3. `pipeline/galaxio_pipeline/formats/catalog.py`
+3. `formats/catalog.py` of the external catalogue pipeline (not part of this repository)
 4. `pnpm check:parity` — must pass before the change is done
 
 Skipping (3) produces data the browser reads as garbage with no error, because

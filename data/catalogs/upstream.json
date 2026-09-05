@@ -14,7 +14,7 @@
     "version": 1
   },
   "syncedAt": "2026-09-05T20:43:09.174Z",
-  "syncScript": "tools/sync-galaxio.mjs",
+  "syncScript": "tools/sync-upstream.mjs",
   "transform": "none: every catalogue file is byte-identical to the upstream data/catalogs directory; manifest.json is the catalogs/* subset of galaxio's data/manifest.json restricted to the vendored catalogues",
   "licenseNote": "These datasets are not MIT. Each catalogue carries its own terms, recorded per catalogue below under manifestEntry.license / .url and spelled out with the required attribution in NOTICE.md and the LICENSE.* files beside this manifest.",
   "catalogs": {

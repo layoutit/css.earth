@@ -1,26 +1,30 @@
 import assert from "node:assert/strict";
-import { existsSync, lstatSync, readlinkSync } from "node:fs";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import test from "node:test";
 
 import {
+  AUTHOR,
   CATALOGS_MANIFEST_FILE,
   EXCLUDED_CATALOGS,
+  EXCLUDED_FILES,
   IDENTITY_RULES,
   LICENSE_FILE,
   PACKAGES,
   PROVENANCE_FILE,
   TARGETS,
+  UPSTREAM_NAME,
   VENDORED_CATALOGS,
   applyIdentityRules,
   buildManifest,
   isOwnedFile,
+  listFiles,
   listVendoredFiles,
   manifestProblems,
   readProvenance,
   targetFor,
-} from "./sync-galaxio.mjs";
+} from "./sync-upstream.mjs";
 
 const REQUIRED_FILES = {
   astronomy: [
@@ -52,8 +56,15 @@ const REQUIRED_FILES = {
   ],
 };
 
-// The identity rewrite may only ever touch these files in a package.
-const REWRITABLE = ["package.json", "README.md", "AGENTS.md"];
+// The identity rewrite may only ever touch these files in a package. The one
+// file under src/ may only be touched by the two string-literal rules.
+const REWRITABLE = ["package.json", "README.md", "AGENTS.md", "FORMAT.md", "src/modelAccuracy.ts"];
+const CODE_RULES = ["code-project-url", "code-convention-label"];
+
+// upstream.json is the one place the other project may be named, and only in
+// these provenance fields (what it is, where it lives, what was rewritten).
+const PROVENANCE_FIELDS_NAMING_UPSTREAM = ["upstreamPackage", "origin", "repository", "identityRules", "excludedFiles"];
+const NAMES_UPSTREAM = new RegExp(UPSTREAM_NAME, "i");
 
 const onDisk = ({ sha256, bytes, symlink }) => (symlink ? { symlink } : { sha256, bytes });
 
@@ -97,10 +108,21 @@ for (const pkg of PACKAGES) {
     for (const path of REQUIRED_FILES[pkg.id]) assert.ok(path in files, `${path} is vendored`);
     const testFiles = Object.keys(files).filter((path) => path.endsWith(".test.ts"));
     assert.ok(testFiles.length >= 1, `upstream tests are carried across (${testFiles.length})`);
-    assert.equal(files["CLAUDE.md"]?.symlink, "AGENTS.md", "the CLAUDE.md symlink is preserved");
-    const link = join(target.dest, "CLAUDE.md");
-    assert.ok(lstatSync(link).isSymbolicLink());
-    assert.equal(readlinkSync(link), "AGENTS.md");
+  });
+
+  test(`${pkg.directory}: the excluded upstream files are absent, and recorded with their reasons`, async () => {
+    const { files, excludedFiles } = await readProvenance(target);
+    for (const [path, reason] of Object.entries(excludedFiles)) {
+      assert.equal(reason, EXCLUDED_FILES[path], `${path} is excluded for the declared reason`);
+      assert.ok(!(path in files), `${path} is not in the manifest`);
+      assert.ok(!existsSync(join(target.dest, path)), `${path} is not on disk`);
+    }
+    assert.ok("CLAUDE.md" in excludedFiles, "the CLAUDE.md symlink is excluded");
+    assert.ok(!existsSync(join(target.dest, "CLAUDE.md")), "no CLAUDE.md, symlink or file");
+    assert.ok(!Object.values(files).some((entry) => "symlink" in entry), "no symlink is mirrored");
+    if (pkg.id === "catalog") {
+      assert.ok("scripts/gen_fixture.py" in excludedFiles, "gen_fixture.py is excluded");
+    }
   });
 
   test(`${pkg.directory}: provenance records the upstream commit and the open import question`, async () => {
@@ -113,7 +135,10 @@ for (const pkg of PACKAGES) {
     assert.match(provenance.headCommit, /^[0-9a-f]{40}$/);
     assert.equal(provenance.upstreamDirty, false);
     assert.ok(Number.isFinite(Date.parse(provenance.syncedAt)));
-    assert.equal(provenance.syncScript, "tools/sync-galaxio.mjs");
+    assert.equal(provenance.syncScript, "tools/sync-upstream.mjs");
+    assert.equal(provenance.author, AUTHOR);
+    assert.match(provenance.origin, /same author/);
+    assert.match(provenance.origin, /not a third-party attribution/);
     assert.match(provenance.transform, /identity only/);
     assert.match(provenance.importNote, /Node does not/);
     assert.match(provenance.importNote, /specifier rewrite|resolver hook|build step/);
@@ -123,7 +148,7 @@ for (const pkg of PACKAGES) {
     );
   });
 
-  test(`${pkg.directory}: only the identity was rewritten, and only in prose and the package name`, async () => {
+  test(`${pkg.directory}: only the identity was rewritten, in prose, package metadata, and two code strings`, async () => {
     const { files, rewrittenFiles } = await readProvenance(target);
     for (const path of Object.keys(rewrittenFiles)) {
       assert.ok(REWRITABLE.includes(path), `${path} may be identity-rewritten`);
@@ -136,15 +161,48 @@ for (const pkg of PACKAGES) {
       assert.equal(entry.identityRules, undefined);
     }
     for (const path of Object.keys(files)) {
-      if (path.startsWith("src/") || path.startsWith("tools/") || path.startsWith("scripts/")) {
+      if (path === "src/modelAccuracy.ts") {
+        for (const rule of rewrittenFiles[path] ?? []) {
+          assert.ok(CODE_RULES.includes(rule), `${path} is only touched by the string-literal rules (${rule})`);
+        }
+      } else if (path.startsWith("src/") || path.startsWith("tools/") || path.startsWith("scripts/")) {
         assert.ok(!(path in rewrittenFiles), `${path} is code and stays verbatim`);
       }
     }
+    for (const rule of IDENTITY_RULES) {
+      if (CODE_RULES.includes(rule.id)) assert.equal(String(rule.files), String(/^src\/modelAccuracy\.ts$/));
+      else assert.ok(!rule.files.test("src/anything.ts"), `${rule.id} cannot reach src/`);
+    }
     const manifest = JSON.parse(await readFile(join(target.dest, "package.json"), "utf8"));
     assert.equal(manifest.name, pkg.package);
+    assert.equal(manifest.repository.url, "https://github.com/layoutit/cssEarth.git");
+    assert.equal(manifest.repository.directory, pkg.directory);
+    assert.equal(manifest.bugs.url, "https://github.com/layoutit/cssEarth/issues");
+    assert.equal(manifest.homepage, "https://github.com/layoutit/cssEarth#readme");
     const readme = await readFile(join(target.dest, "README.md"), "utf8");
-    assert.doesNotMatch(readme, /@galaxio\//);
     assert.match(readme, new RegExp(`^# ${pkg.package.replace("/", "\\/")}`));
+    const agents = await readFile(join(target.dest, "AGENTS.md"), "utf8");
+    assert.doesNotMatch(agents, /CLAUDE\.md/, "AGENTS.md no longer announces a CLAUDE.md symlink");
+  });
+
+  test(`${pkg.directory}: nothing in the directory names the other project, except upstream.json's provenance fields`, async () => {
+    for (const path of await listFiles(target.dest)) {
+      const rel = path.slice(target.dest.length + 1);
+      if (rel === PROVENANCE_FILE) continue;
+      assert.doesNotMatch(await readFile(path, "utf8"), NAMES_UPSTREAM, `${rel} does not name ${UPSTREAM_NAME}`);
+    }
+    const provenance = await readProvenance(target);
+    for (const [key, value] of Object.entries(provenance)) {
+      if (PROVENANCE_FIELDS_NAMING_UPSTREAM.includes(key)) continue;
+      assert.doesNotMatch(JSON.stringify(value), NAMES_UPSTREAM, `upstream.json ${key} does not name ${UPSTREAM_NAME}`);
+    }
+    for (const path of ["FORMAT.md", "AGENTS.md", "README.md"]) {
+      const file = join(target.dest, path);
+      if (!existsSync(file)) continue;
+      const text = await readFile(file, "utf8");
+      assert.doesNotMatch(text, /pipeline\/[a-z_]+\/formats/, `${path} cites no path into a pipeline this repo lacks`);
+      assert.doesNotMatch(text, /ARCHITECTURE\.md/, `${path} cites no root ARCHITECTURE.md this repo lacks`);
+    }
   });
 
   test(`${pkg.directory}: the vendored source is verbatim upstream, specifiers untouched`, async () => {
@@ -153,39 +211,79 @@ for (const pkg of PACKAGES) {
     assert.doesNotMatch(index, /\.ts'/);
   });
 
-  test(`${pkg.directory}: the MIT licence and attribution travel with the copy`, async () => {
+  test(`${pkg.directory}: the package carries its own MIT licence under the author's copyright`, async () => {
+    assert.equal(LICENSE_FILE, "LICENSE");
     const license = await readFile(join(target.dest, LICENSE_FILE), "utf8");
     assert.match(license, /^MIT License/);
-    assert.match(license, /Copyright \(c\) 2026 Juan Cruz Fortunatti/);
+    assert.match(license, new RegExp(`Copyright \\(c\\) 2026 ${AUTHOR}`));
     assert.match(license, /Permission is hereby granted, free of charge/);
+    assert.ok(!existsSync(join(target.dest, "LICENSE.GALAXIO-MIT")), "no separately-branded licence file remains");
     const notice = await readFile(join(target.dest, "NOTICE.md"), "utf8");
     assert.match(notice, /MIT License/);
-    assert.match(notice, new RegExp(LICENSE_FILE.replaceAll(".", "\\.")));
-    assert.match(notice, new RegExp(pkg.upstreamPackage.replace("/", "\\/")));
+    assert.match(notice, /`LICENSE`/);
+    assert.match(notice, new RegExp(pkg.package.replace("/", "\\/")));
+    assert.match(notice, new RegExp(AUTHOR));
+    assert.match(notice, /cssEarth's own package/);
   });
 }
 
-test("identity rules rewrite prose and the package name, and nothing in code", () => {
+test("identity rules rewrite prose, package metadata, foreign paths, and two code string literals", () => {
   const readme = Buffer.from(
     "# @galaxio/astronomy\n\nbehind [Galaxio](https://github.com/apresmoi/galaxio).\n" +
-      "`pipeline/galaxio_pipeline/formats/catalog.py`\n",
+      "`pipeline/galaxio_pipeline/formats/catalog.py`\n" +
+      "See `ARCHITECTURE.md §2` in the repo root for why that matters across 26 orders.\n" +
+      "A Python writer lives in the repo's `pipeline/`; `pnpm check:parity` proves it.\n",
   );
   const rewritten = applyIdentityRules("README.md", readme);
-  assert.deepEqual(rewritten.applied, ["prose-package-name", "prose-project-link"]);
+  assert.deepEqual(rewritten.applied, [
+    "prose-package-name",
+    "prose-project-link",
+    "prose-pipeline-writer-path",
+    "prose-pipeline-directory",
+    "prose-architecture-doc",
+  ]);
   assert.equal(
     rewritten.content.toString(),
     "# @cssearth/astronomy\n\nbehind [cssEarth](https://github.com/layoutit/cssEarth).\n" +
-      "`pipeline/galaxio_pipeline/formats/catalog.py`\n",
+      "`formats/catalog.py` of the external catalogue pipeline (not part of this repository)\n" +
+      'See "The frame tree is the whole point" in `AGENTS.md` for why that matters across 26 orders.\n' +
+      "The Python writer lives in the external catalogue pipeline (not part of this repository); `pnpm check:parity` proves it.\n",
   );
 
-  const manifest = Buffer.from('{\n  "name": "@galaxio/catalog",\n  "homepage": "https://github.com/apresmoi/galaxio#readme"\n}\n');
-  const renamed = applyIdentityRules("package.json", manifest);
-  assert.deepEqual(renamed.applied, ["package-name"]);
-  assert.match(renamed.content.toString(), /"name": "@cssearth\/catalog"/);
-  assert.match(renamed.content.toString(), /apresmoi\/galaxio#readme/, "URLs are left alone");
+  const agents = Buffer.from("# @galaxio/catalog — operator notes\n\nThe container. `CLAUDE.md` is a symlink to this file.\n");
+  const notes = applyIdentityRules("AGENTS.md", agents);
+  assert.deepEqual(notes.applied, ["prose-package-name", "prose-claude-symlink"]);
+  assert.equal(notes.content.toString(), "# @cssearth/catalog — operator notes\n\nThe container.\n");
+  assert.deepEqual(applyIdentityRules("README.md", agents).applied, ["prose-package-name"], "only AGENTS.md drops the symlink sentence");
 
-  const code = Buffer.from("const PROJECT_SOURCE_URL = 'https://github.com/apresmoi/galaxio/blob/main/ARCHITECTURE.md'\n// @galaxio/astronomy\n");
-  for (const path of ["src/modelAccuracy.ts", "scripts/gen_fixture.py", "tools/lib/sources.mjs"]) {
+  const manifest = Buffer.from(
+    '{\n  "name": "@galaxio/catalog",\n  "repository": { "url": "https://github.com/apresmoi/galaxio.git" },\n' +
+      '  "bugs": { "url": "https://github.com/apresmoi/galaxio/issues" },\n  "homepage": "https://github.com/apresmoi/galaxio#readme"\n}\n',
+  );
+  const renamed = applyIdentityRules("package.json", manifest);
+  assert.deepEqual(renamed.applied, ["package-name", "package-urls"]);
+  assert.deepEqual(JSON.parse(renamed.content.toString()), {
+    name: "@cssearth/catalog",
+    repository: { url: "https://github.com/layoutit/cssEarth.git" },
+    bugs: { url: "https://github.com/layoutit/cssEarth/issues" },
+    homepage: "https://github.com/layoutit/cssEarth#readme",
+  });
+
+  const code = Buffer.from(
+    "const PROJECT_SOURCE_URL = 'https://github.com/apresmoi/galaxio/blob/main/ARCHITECTURE.md'\n" +
+      "    'Galaxio reference-frame convention',\n        'Galaxio solar-system frame definition',\n" +
+      "// @galaxio/astronomy\nconst galaxio = 1\n",
+  );
+  const model = applyIdentityRules("src/modelAccuracy.ts", code);
+  assert.deepEqual(model.applied, CODE_RULES);
+  assert.equal(
+    model.content.toString(),
+    "const PROJECT_SOURCE_URL = 'https://github.com/layoutit/cssEarth/blob/main/packages/astronomy/AGENTS.md'\n" +
+      "    'cssEarth reference-frame convention',\n        'cssEarth solar-system frame definition',\n" +
+      "// @galaxio/astronomy\nconst galaxio = 1\n",
+    "only the three string literals change; comments and identifiers are not the rules' business",
+  );
+  for (const path of ["src/frames.ts", "src/index.ts", "scripts/gen_fixture.py", "tools/lib/sources.mjs"]) {
     const untouched = applyIdentityRules(path, code);
     assert.deepEqual(untouched.applied, []);
     assert.equal(untouched.content, code);

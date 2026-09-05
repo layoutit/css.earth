@@ -9,7 +9,7 @@ the bytes for data that is 95 % `Float32Array`. A `.gxct` column becomes a GPU
 buffer with no copy and no decode.
 
 **Two implementations must agree**: the TypeScript reader/writer in this
-package, and the Python writer in `pipeline/galaxio_pipeline/formats/catalog.py`
+package, and the Python writer in `formats/catalog.py` of the external catalogue pipeline (not part of this repository)
 that builds the shipped data. `pnpm check:parity` generates a file with one and
 reads it with the other. Changing this document without changing both is a bug.
 

@@ -1,10 +1,11 @@
 # Catalog notice
 
-This directory contains `@galaxio/catalog` by Juan Cruz Fortunatti,
-copyright (c) 2026, distributed under the MIT License, vendored as
-`@cssearth/catalog`. See `LICENSE.GALAXIO-MIT` for the full licence text and
-`upstream.json` for the exact upstream commit it was copied from and the
-identity rewrite applied to its package name and prose.
+`@cssearth/catalog` is cssEarth's own package, by Juan Cruz Fortunatti,
+copyright (c) 2026, distributed under the MIT License in `LICENSE`. The same
+author maintains it in another of his projects and mirrors it here; that is an
+engineering arrangement, not a third-party dependency, and `upstream.json`
+records the mirror (source path, commit, per-file hashes) so it can be
+refreshed and drift detected.
 
 The licence covers the format specification, reader, writer, and scripts in
 this directory only. The `.gxct` catalogues under `data/catalogs` are
