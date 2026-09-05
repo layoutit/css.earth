@@ -35,6 +35,8 @@ const interiorSource = await readFile(
   resolve(import.meta.dirname, "../source/interior/earth-interior.json"),
   "utf8",
 ).then(JSON.parse);
+const citySource = JSON.parse(await readFile(
+  resolve(import.meta.dirname, "../source/city/manifest.json"), "utf8"));
 if (interiorSource.schema !== "cssearth-earth-interior-source@1") {
   throw new Error("Earth interior source is incompatible.");
 }
@@ -46,7 +48,9 @@ const POLAR_RADIUS = EQUATORIAL_RADIUS * 6356.752 / 6378.137;
 const TILE_SIZE = 50;
 const SEAM_BLEED = 0.15;
 const PLANET_SEAM_BLEED = 0;
-const PROJECTIVE_TEXTURE_RASTER_SCALE = 16.25;
+// Asset resolution must not enlarge CSS raster boxes. Large inverse-scaled
+// boxes lose surface tiles in Chrome even with identical projected geometry.
+const PROJECTIVE_TEXTURE_RASTER_SCALE = 4;
 const INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE = 4;
 const SURFACE_OVERLAP = 0.008;
 const POLAR_CAP_BAND_SPAN = 1;
@@ -58,7 +62,7 @@ const EARTH_OBLIQUITY_DEGREES = 23.4;
 const EARTH_PRESENTATION_NODE_DEGREES = -60;
 const MESH_ROTATION_Z = 128;
 const CAMERA_ZOOM = 1.1;
-const CAMERA_MAXIMUM_ZOOM = 8;
+const CAMERA_MAXIMUM_ZOOM = citySource.presentation.maximumZoom;
 const CAMERA_SCENE_PITCH_DEGREES = 40;
 const CAMERA_MINIMUM_CONTROL_PITCH_DEGREES = 0;
 const CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES = 89;
@@ -236,8 +240,9 @@ const scene = Object.freeze({
     atmosphereLeafCount: 1,
     directionalSunLeafCount: 1,
     interiorLeafCount: interior.leafCount,
-    retainedLeafCount: surfaceLeafCount + 3,
-    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount,
+    cityPageLeafCount: citySource.presentation.poolSize,
+    retainedLeafCount: surfaceLeafCount + 3 + citySource.presentation.poolSize,
+    maximumRetainedLeafCount: surfaceLeafCount + 3 + interior.leafCount + citySource.presentation.poolSize,
     runtimeGeometryPreparation: false,
     runtimeRasterization: false,
   }),

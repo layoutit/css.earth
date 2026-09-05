@@ -76,6 +76,13 @@ export function createSceneRouter({
       syncPlayback();
       await mount.ready;
       if (generation !== sceneGeneration || activeMount !== mount) return;
+      if (mount.destinations) shell.setDestinations?.({
+        ...mount.destinations,
+        async select(place) {
+          shell.setMotionEnabled?.(false);
+          return mount.destinations.select(place);
+        },
+      });
       sceneState = "ready";
       publishSceneState();
     } catch (error) {

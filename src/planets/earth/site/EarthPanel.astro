@@ -5,6 +5,7 @@ import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-title
 import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_EARTH_PANEL } from "./preparedPanel.mjs";
 import { PREPARED_EARTH_TITLE } from "./preparedTitle.mjs";
+import { PREPARED_EARTH_PLACES } from "../runtime/preparedPlaces.mjs";
 
 const charts = [
   {
@@ -36,7 +37,8 @@ const charts = [
   },
 ];
 const lensDescriptions: Record<string, string> = {
-  normal: "Blue Marble visible color",
+  normal: "Blue Marble + WorldCover 2021",
+  "buenos-aires-noise": "2025 daytime estimates · dBA",
   topography: "Land and seafloor relief",
   "night-lights": "Black Marble night lights",
   "cross-section": "Interior structure",
@@ -50,10 +52,15 @@ const lenses = {
     thumbnailUrl: lens.thumbnailUrl,
     description: lensDescriptions[lens.id],
     title: `${lens.label}: ${lens.qualification}`,
+    legend: lens.legend,
+    legendNote: lens.id === "buenos-aires-noise" ? "APrA · 2025 daytime estimates. Uncolored areas have no estimate." : undefined,
   })),
 };
 const resources = [
+  { label: "Buenos Aires APrA", role: "noise", description: "2025 daytime noise estimates, CC-BY-2.5-AR", href: "https://data.buenosaires.gob.ar/dataset/mapa-ruido" },
+  { label: "GeoNames", role: "places", description: "City names and locations, CC-BY-4.0", href: "https://www.geonames.org/export/" },
   { label: "NASA", role: "imagery", description: "Surface & clouds", href: "https://science.nasa.gov/earth/" },
+  { label: "ESA WorldCover", role: "imagery", description: "2021 WorldCover satellite composite via Terrascope, CC-BY-4.0", href: "https://esa-worldcover.org/en/data-access" },
   { label: "JPL", role: "facts", description: "Earth-Moon facts", href: "https://ssd.jpl.nasa.gov/sats/" },
   { label: "OpenSpace", role: "scene", description: "Globe & atmosphere", href: "https://github.com/OpenSpace/OpenSpace" },
   { label: "PSG", role: "spectra", description: "Spectrum & profile", href: "https://psg.gsfc.nasa.gov/" },
@@ -79,4 +86,5 @@ const settings = {
   resources={resources}
   lenses={lenses}
   settings={settings}
+  destinations={{ searchLabel: "Search planets and cities", description: `${PREPARED_EARTH_PLACES.count.toLocaleString("en")} cities worldwide.` }}
 />

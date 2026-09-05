@@ -57,6 +57,7 @@ export const OBJECT_BEHAVIOR = Object.freeze({
       "lenses",
       "settings",
       "credits",
+      "destinations",
     ]),
   }),
 });

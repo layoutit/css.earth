@@ -1,9 +1,14 @@
+import { PREPARED_EARTH_NOISE } from "./preparedNoise.mjs";
+import { EARTH_CUBIC_CAMERA } from "./camera-plan.mjs";
+import { PREPARED_EARTH_PLACES } from "./preparedPlaces.mjs";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from
   "../../../../site/runtime-policy.mjs";
 import { createPreparedProjectiveTextureLeaf } from
   "../../../platform/prepared-projective-texture-leaf.mjs";
 import { PREPARED_EARTH_LENSES } from "./preparedLenses.mjs";
 import { PREPARED_EARTH_SCENE } from "./preparedScene.mjs";
+import { PREPARED_EARTH_CITY_PAGES } from "./preparedCityPages.mjs";
+import { mountEarthCityPages } from "./city-pages.mjs";
 import { PREPARED_EARTH_SKY_SUN } from "./preparedSkySun.mjs";
 import { PREPARED_EARTH_STARFIELD } from "./preparedStarfield.mjs";
 import { createEarthRowShardCache } from "./preparedRowCache.mjs";
@@ -19,37 +24,7 @@ import { createPreparedPlanarRotationPublisher } from
   "../../../platform/prepared-planar-rotation.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
-const EARTH_CUBIC_CAMERA = Object.freeze({
-  cameraModel: "accumulated-matrix3d",
-  minimumControlPitchDegrees: 0,
-  maximumControlPitchDegrees: 89,
-  defaultControlPitchDegrees: 34.230769230769226,
-  defaultControlYawDegrees: -105,
-  materialReferenceControlPitchDegrees: 34.230769230769226,
-  materialReferenceControlYawDegrees: 0,
-  initialScenePitchDegrees: 40,
-  maximumScenePitchDegrees: 65,
-  minimumZoom: PREPARED_EARTH_SCENE.camera.minimumZoom,
-  maximumZoom: PREPARED_EARTH_SCENE.camera.maximumZoom,
-  defaultZoom: PREPARED_EARTH_SCENE.camera.defaultZoom,
-  sceneScale: 0.022,
-  logicalBodyDiameter: 460,
-  pitchBounded: false,
-  yawBounded: false,
-  responsiveFit: Object.freeze({
-    model: "continuous-aspect-smoothstep",
-    portraitBaseWidthShare: 0.34,
-    narrowPortraitWidthShareGain: 0.08,
-    landscapeWidthShareGain: 0.02,
-    narrowPortraitAspectRatio: 0.46,
-    portraitAspectRatio: 0.75,
-    squareAspectRatio: 1,
-    maximumHeightShare: 0.61,
-    maximumMobilePreviewShare: 0.925,
-    minimumZoom: 0.42,
-    maximumZoom: 2,
-  }),
-});
+
 
 export function mountEarthClient(stage) {
   const inputSurface = document.querySelector(".earth-input-surface");
@@ -77,11 +52,52 @@ export function mountEarthClient(stage) {
   let ready = null;
   const controller = Object.freeze({
     get ready() { return ready; },
+    destinations: Object.freeze({
+      async load(signal) {
+        const response = await fetch(PREPARED_EARTH_PLACES.url, { signal });
+        if (!response.ok) throw new Error("City catalogue request failed.");
+        const bytes = await response.arrayBuffer();
+        if (bytes.byteLength !== PREPARED_EARTH_PLACES.bytes) throw new Error("City catalogue size drifted.");
+        const digest = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
+          .map(value => value.toString(16).padStart(2, "0")).join("");
+        if (digest !== PREPARED_EARTH_PLACES.sha256) throw new Error("City catalogue identity drifted.");
+        const catalog = JSON.parse(new TextDecoder().decode(bytes));
+        if (catalog.schema !== "cssearth-prepared-destinations@1" || catalog.places.length !== PREPARED_EARTH_PLACES.count) {
+          throw new Error("City catalogue is incompatible.");
+        }
+        return catalog;
+      },
+      async select(place) {
+        await ready;
+        if (destroyed) throw new Error("Earth was unmounted.");
+        await lenses.select("normal");
+        if (destroyed) throw new Error("Earth was unmounted.");
+        controller.pause();
+        const frame = () => new DOMMatrix(getComputedStyle(mounted.system).transform)
+          .multiply(new DOMMatrix(getComputedStyle(mounted.bodyCarriers.surface[0]).transform));
+        const before = frame();
+        for (const animation of animations) animation.currentTime = 0;
+        camera.rebaseScene(before.multiply(frame().inverse()));
+        const arrival = camera.flyToState(place.camera);
+        return { status: place.coverage === "detail"
+          ? "WorldCover imagery · 2021. Source gaps retain the Earth base map."
+          : "Earth overview. WorldCover detail is unavailable at this location.", arrival };
+      },
+      reset() {
+        if (!destroyed && camera) return camera.flyToState({
+          controlPitch: EARTH_CUBIC_CAMERA.defaultControlPitchDegrees,
+          controlYaw: EARTH_CUBIC_CAMERA.defaultControlYawDegrees,
+          zoom: camera.initialResponsiveZoom(),
+        });
+      },
+    }),
     pause() {
       if (destroyed) return;
       shouldPlay = false;
       document.documentElement.dataset.playing = "false";
       features?.applyPlayback(false);
+      mounted?.cityPages.setPlaying(false);
+      mounted?.noisePages.setPlaying(false);
     },
     resume() {
       if (destroyed) return;
@@ -89,6 +105,8 @@ export function mountEarthClient(stage) {
       if (!mounted) return;
       document.documentElement.dataset.playing = "true";
       features?.applyPlayback(true);
+      mounted?.cityPages.setPlaying(true);
+      mounted?.noisePages.setPlaying(true);
     },
     destroy() {
       if (destroyed) return;
@@ -97,6 +115,8 @@ export function mountEarthClient(stage) {
       lenses?.destroy();
       features?.destroy();
       camera?.destroy();
+      mounted?.cityPages.destroy();
+      mounted?.noisePages.destroy();
       mounted?.viewBank.destroy();
       mounted?.skySun.destroy();
       mounted?.cubicSky.destroy();
@@ -152,6 +172,8 @@ export function mountEarthClient(stage) {
         onShadowsVisibilityChange: camera.setShadowsEnabled,
       });
       features.applyPlayback(shouldPlay);
+      mounted.cityPages.setPlaying(shouldPlay);
+      mounted.noisePages.setPlaying(shouldPlay);
       document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
       await waitForPreparedScenePaint();
       if (destroyed) return;
@@ -211,9 +233,12 @@ export function mountEarthClient(stage) {
       camera: Object.freeze({
         state: camera.state,
         setState: camera.setState,
+        flyToState: camera.flyToState,
         stats: camera.stats,
       }),
       lenses: Object.freeze({ state: lenses.state, select: lenses.select }),
+      cityPages: Object.freeze({ stats: mounted.cityPages.stats }),
+      noisePages: Object.freeze({ stats: mounted.noisePages.stats }),
       features: Object.freeze({ state: features.state }),
       options: Object.freeze({ state: features.optionsState }),
       renderStats: Object.freeze({
@@ -269,6 +294,16 @@ function mountPreparedEarth(host) {
       poles: canonicalPreparedUrl(plan.body.assets.poles),
     }),
   });
+  const cityPages = mountEarthCityPages({
+    plan: PREPARED_EARTH_CITY_PAGES, carrier: bodyCarriers.surface[0],
+    system, scene, camera, stage: host,
+  });
+
+  const noisePages = mountEarthCityPages({
+    plan: PREPARED_EARTH_NOISE, carrier: bodyCarriers.surface[0],
+    system, scene, camera, stage: host,
+  });
+  noisePages.setLens({id:"normal"});
 
   const presentation = plan.interior.presentationLock;
   if (presentation?.schema !==
@@ -379,6 +414,8 @@ function mountPreparedEarth(host) {
     lightingLeaf,
     atmosphereLeaf,
     bodyCarriers,
+    cityPages,
+    noisePages,
     viewBank,
     stableNodes,
     domStats,
@@ -497,6 +534,7 @@ function createEarthVerticalOrbitControls({
   materialCaches,
 }) {
   let orbit = null;
+  let lensMaximumZoom = PREPARED_EARTH_SCENE.camera.maximumZoom;
   let baseLightAzimuthDegrees = null;
   let materialAddressWrites = 0;
   let atmosphereEnabled = true;
@@ -566,15 +604,25 @@ function createEarthVerticalOrbitControls({
     skyPlan: PREPARED_EARTH_STARFIELD,
     directionalSun: mounted.skySun,
     directionalSunPlan: PREPARED_EARTH_SKY_SUN,
-    cameraPlan: EARTH_CUBIC_CAMERA,
+    cameraPlan: Object.freeze({
+      ...EARTH_CUBIC_CAMERA,
+      get maximumZoom() { return lensMaximumZoom; },
+    }),
     objectId: "earth",
     mobilePreviewElement: stage.ownerDocument.querySelector(".planet-sidebar"),
-    onPublish: publishMaterialDirection,
+    onPublish(presentation) {
+      publishMaterialDirection(presentation);
+      mounted.cityPages.publish(presentation);
+      mounted.noisePages.publish(presentation);
+    },
   });
   return Object.freeze({
     mobilePageFlow: orbit.mobilePageFlow,
+    initialResponsiveZoom: orbit.initialResponsiveZoom,
     refresh: orbit.refresh,
     setState: orbit.setState,
+    flyToState: orbit.flyToState,
+    rebaseScene: orbit.rebaseScene,
     state: orbit.state,
     setAtmosphereEnabled(visible) {
       atmosphereEnabled = Boolean(visible);
@@ -582,10 +630,14 @@ function createEarthVerticalOrbitControls({
       orbit.refresh();
     },
     setLens(lens) {
+      mounted.cityPages.setLens(lens);
+      mounted.noisePages.setLens(lens);
+      lensMaximumZoom = lens.maximumZoom;
       exteriorEnabled = lens?.view !== "interior";
       lightingLensEnabled = lens?.id !== "night-lights";
       syncMaterialCacheVisibility();
-      orbit.refresh();
+      orbit.setState({ zoom: Math.min(orbit.state().zoom, lensMaximumZoom) });
+      if(lens.camera)orbit.flyToState(lens.camera);
     },
     setShadowsEnabled(visible) {
       shadowsEnabled = Boolean(visible);
@@ -802,6 +854,8 @@ function createEarthLensControls({
   function publish() {
     for (const [id, button] of buttons) {
       button.setAttribute("aria-pressed", String(id === active));
+      const legend=root.querySelector(`[data-lens-legend="${id}"]`);
+      if(legend)legend.hidden=id!==active;
     }
   }
 }

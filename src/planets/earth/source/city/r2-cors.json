@@ -1,0 +1,21 @@
+{
+  "rules": [
+    {
+      "allowed": {
+        "origins": [
+          "https://css.earth",
+          "http://127.0.0.1:4210",
+          "http://127.0.0.1:4228"
+        ],
+        "methods": [
+          "GET",
+          "HEAD"
+        ]
+      },
+      "exposeHeaders": [
+        "ETag"
+      ],
+      "maxAgeSeconds": 86400
+    }
+  ]
+}
