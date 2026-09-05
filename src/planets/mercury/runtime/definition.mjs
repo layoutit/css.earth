@@ -6,6 +6,7 @@ import { PREPARED_MERCURY_SCENE } from "./preparedScene.mjs";
 import { PREPARED_MERCURY_ASSETS } from "./preparedAssets.mjs";
 import { PREPARED_MERCURY_LENSES } from "./preparedLenses.mjs";
 import { PREPARED_MERCURY_SKY_SUN } from "./preparedSkySun.mjs";
+import { PREPARED_MERCURY_SYSTEM_MARKERS } from "./preparedSystemMarkers.mjs";
 import { BILLBOARD_LIGHTING_KEY, billboardLighting, materialBank, materialDemand } from "./material.mjs";
 import { createPresentation } from "./presentation.mjs";
 const interiorKeys = ["outerSurface", "outerPoles", "core", "corePoles", "section"];
@@ -27,8 +28,15 @@ if (!navigationMarker || !(navigationMarker.presentation?.size > 0)) {
 // size, never geometry.
 const atlasSprite = (id) => {
   const marker = PREPARED_NAVIGATION_MARKERS[id];
-  if (!marker || !(marker.presentation?.size > 0)) throw new Error(`No prepared navigation marker for ${id}.`);
-  return Object.freeze({ index: marker.index, count: marker.count, size: marker.presentation.size });
+  if (marker && marker.presentation?.size > 0) {
+    return Object.freeze({ index: marker.index, count: marker.count, size: marker.presentation.size });
+  }
+  // Dwarf planets without a navigation tile draw from Mercury's prepared
+  // system-marker strip (synthetic discs; see prepare-system-markers.mjs).
+  const tile = PREPARED_MERCURY_SYSTEM_MARKERS.tiles[id];
+  if (!tile) throw new Error(`No prepared marker for ${id}.`);
+  return Object.freeze({ url: canonicalPreparedAsset(PREPARED_MERCURY_SYSTEM_MARKERS.density1.url,
+    PREPARED_MERCURY_SYSTEM_MARKERS.density2.url), index: tile.index, count: tile.count, size: tile.size });
 };
 const systemMarkers = Object.freeze({
   url: NAVIGATION_MARKER_ATLAS_URL,

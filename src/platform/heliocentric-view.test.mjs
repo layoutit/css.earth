@@ -3,6 +3,7 @@ import test from "node:test";
 
 import { orbitTrailWeights } from "./prepare-heliocentric-view.mjs";
 import {
+  trailWeightsForSpans,
   validatePreparedHeliocentricView,
   projectHeliocentricView,
   validatePreparedPlanetarySystem,
@@ -51,7 +52,7 @@ test("a visible marker lands within half a pixel of one of its own orbit's segme
 test("at a distance that fits the whole system, every marker is visible with its trailing half-orbit", () => {
   const distance = plan.system.maximumExtentUnits * 3;
   const projection = project({ rotation: LOOKING_DOWN_THE_POLE, distance, system: true });
-  assert.equal(projection.system.bodies.length, 7);
+  assert.equal(projection.system.bodies.length, 12);
   for (const body of projection.system.bodies) {
     assert.equal(body.marker.classification, "visible");
     assert.ok(body.marker.visible);
@@ -60,14 +61,14 @@ test("at a distance that fits the whole system, every marker is visible with its
     const weighted = plan.system.bodies.find(({ id }) => id === body.id).orbit.trail
       .filter((weight) => weight > 0).length;
     assert.equal(body.orbitSegments.length, weighted, `${body.id} segments`);
-    // Three quarters of the ring: solid half, fading quarter.
-    assert.ok(weighted >= 88 && weighted <= 90, `${body.id} trail chords ${weighted}`);
+    // Five eighths of the ring: solid for three eighths, fading a quarter.
+    assert.ok(weighted >= 74 && weighted <= 76, `${body.id} trail chords ${weighted}`);
     const weights = body.orbitSegments.map((segment) => segment[4]);
     assert.ok(weights.every((weight, index) => index === 0 || weight >= weights[index - 1]),
       `${body.id} trail must strengthen toward the body`);
     assert.ok(weights.at(-1) > 0.99 && weights[0] < 0.05, `${body.id} trail ends ${weights[0]}..${weights.at(-1)}`);
-    // Solid over the half turn nearest the body.
-    assert.ok(weights.slice(-60).every((weight) => weight === 1), `${body.id} solid half`);
+    // Solid over the three eighths of a turn nearest the body.
+    assert.ok(weights.slice(-44).every((weight) => weight === 1), `${body.id} solid span`);
     // The strongest segment ends at the marker: the trail terminates at the body.
     const [, , x1, y1] = body.orbitSegments.at(-1);
     assert.ok(Math.hypot(x1 - body.marker.screen[0], y1 - body.marker.screen[1]) < 1e-6);
@@ -77,10 +78,18 @@ test("at a distance that fits the whole system, every marker is visible with its
 test("orbitTrailWeights fades linearly backwards from the body and weighs the leading half nothing", () => {
   const offsets = Array.from({ length: 8 }, (_, index) => index * Math.PI / 4);
   const trail = orbitTrailWeights(offsets);
-  // Chord mid-offsets (k + 0.5) pi/4; behind = 2pi - mid. Solid for half a
-  // turn behind (chords 4..7), fading over the next quarter (chords 2, 3),
-  // nothing over the leading quarter (chords 0, 1).
-  assert.deepEqual(trail, [0, 0, 0.25, 0.75, 1, 1, 1, 1]);
+  // Chord mid-offsets (k + 0.5) pi/4; behind = (7.5 - k) / 8 turns. Solid
+  // for three eighths behind (chords 5..7), fading over the next quarter
+  // (chords 3, 4: 0.5 and 1 turn... behind 0.5625 -> 0.25, 0.4375 -> 0.75),
+  // nothing beyond five eighths (chords 0..2).
+  assert.deepEqual(trail, [0, 0, 0, 0.25, 0.75, 1, 1, 1]);
+  // The runtime re-weights the prepared rings from their chord angles: with
+  // the prepared spans it reproduces the prepared trail exactly.
+  assert.deepEqual(trailWeightsForSpans(plan.orbit.chordBehindTurns, plan.orbit.trailSpans), plan.orbit.trail);
+  for (const body of plan.system.bodies) {
+    assert.deepEqual(trailWeightsForSpans(body.orbit.chordBehindTurns, body.orbit.trailSpans), body.orbit.trail, body.id);
+  }
+  assert.throws(() => trailWeightsForSpans(plan.orbit.chordBehindTurns, { solidTurns: 0.5, fadeTurns: 0.5 }), TypeError);
   // The spans are data: a shorter, half-turn trail that fades immediately.
   assert.deepEqual(orbitTrailWeights(offsets, { solidTurns: 0, fadeTurns: 0.5 }),
     [0, 0, 0, 0, 0.125, 0.375, 0.625, 0.875]);

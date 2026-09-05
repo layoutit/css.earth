@@ -19,10 +19,11 @@ const DEFAULT_BASE_URL = "http://127.0.0.1:4210";
 const DEFAULT_OUT_DIR =
   "/private/tmp/claude-501/-Users-apresmoi-Documents-cssEarth/" +
   "77ccf69f-07a2-4417-9a0f-3e55cc967ee8/scratchpad/mercury-ladder";
-// Out to the whole planetary system: the dolly's far bound is about 91 AU
-// (1.36e10 km); the last steps frame Mars, Jupiter, Saturn and Neptune.
+// Out to the whole planetary system: the dolly's far bound is about 294 AU
+// (4.4e10 km, three times Eris's aphelion); the last steps frame Mars,
+// Jupiter, Saturn, Neptune and the dwarf planets out to Eris.
 const DEFAULT_DISTANCES_KM = [8000, 20000, 100000, 1e6, 1e7, 6e7, 1.6e8,
-  4.5e8, 1.2e9, 3e9, 6e9, 1.36e10];
+  4.5e8, 1.2e9, 3e9, 6e9, 1.36e10, 2.6e10, 4.4e10];
 const DEV_SERVER_READY_TIMEOUT_MS = 90_000;
 const PROBE_TIMEOUT_MS = 2000;
 

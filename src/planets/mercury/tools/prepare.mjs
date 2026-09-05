@@ -9,6 +9,7 @@ const steps = Object.freeze([
   ["prepare-sky-sun.mjs"],
   ["prepare-lenses.mjs"],
   ["prepare-charts.mjs"],
+  ["prepare-system-markers.mjs"],
   ["prepare-scene.mjs"],
   ["prepare-runtime-asset-manifest.mjs"],
 ]);

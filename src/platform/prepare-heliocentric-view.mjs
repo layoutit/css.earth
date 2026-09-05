@@ -13,6 +13,7 @@ import {
 import {
   NOMINAL_SOLAR_RADIUS_KILOMETERS,
   PREPARED_HELIOCENTRIC_VIEW_SCHEMA,
+  trailWeightsForSpans,
   validatePreparedPlanetarySystem,
   add,
   cross,
@@ -30,40 +31,34 @@ const UNIFORM_ORBIT_SEGMENTS = 360;
 // straight through the body as the camera closes in on it.
 const LOCAL_REFINEMENT_HALVINGS = 8;
 
-// The orbit is drawn as the path just travelled, not a closed loop: solid
-// for `solidTurns` of an orbit behind the body, fading linearly to nothing
-// across the following `fadeTurns`, and never drawn beyond that. With
-// vertices in the direction of motion at eccentric-anomaly offsets
+// The trail (see heliocentric-view.mjs): the spans that ship, as data the
+// look is tuned by, and the share of a turn each chord lies behind the body.
+// With vertices in the direction of motion at eccentric-anomaly offsets
 // `offsets` ahead of the body (offset 0 is the body, the last chord returns
-// to it), a chord whose mid-offset is `delta` lies `2pi - delta` behind the
-// body. The spans are prepared data (the look is tuned by eye), carried in
-// the plan as `orbit.trailSpans`.
-export const ORBIT_TRAIL_MODEL = "trailing-orbit-solid-then-linear-fade";
+// to it), a chord whose mid-offset is `delta` lies `2pi - delta` behind.
+import { ORBIT_TRAIL_MODEL } from "./heliocentric-view.mjs";
+export { ORBIT_TRAIL_MODEL };
 export const ORBIT_TRAIL_SPANS = Object.freeze({
   // Turns of the orbit behind the body drawn at full strength.
-  solidTurns: 0.5,
+  solidTurns: 0.375,
   // Turns over which the line then fades to nothing.
   fadeTurns: 0.25,
 });
 
-export function orbitTrailWeights(offsets, spans = ORBIT_TRAIL_SPANS) {
+export function chordBehindTurns(offsets) {
   if (!Array.isArray(offsets) || offsets.length < 2 || offsets[0] !== 0 ||
       offsets.some((offset, index) => index > 0 && !(offset > offsets[index - 1])) ||
       !(offsets[offsets.length - 1] < 2 * Math.PI)) {
     throw new TypeError("Orbit trail offsets must ascend from zero within one turn.");
   }
-  if (!(spans?.solidTurns >= 0) || !(spans.fadeTurns > 0) ||
-      !(spans.solidTurns + spans.fadeTurns < 1)) {
-    throw new TypeError("Orbit trail spans must leave part of the orbit undrawn.");
-  }
-  const solid = spans.solidTurns * 2 * Math.PI;
-  const fade = spans.fadeTurns * 2 * Math.PI;
   return Object.freeze(offsets.map((offset, index) => {
     const next = index + 1 < offsets.length ? offsets[index + 1] : 2 * Math.PI;
-    const behind = 2 * Math.PI - (offset + next) / 2;
-    const weight = behind <= solid ? 1 : Math.max(0, 1 - (behind - solid) / fade);
-    return Number(weight.toFixed(6));
+    return Number(((2 * Math.PI - (offset + next) / 2) / (2 * Math.PI)).toFixed(8));
   }));
+}
+
+export function orbitTrailWeights(offsets, spans = ORBIT_TRAIL_SPANS) {
+  return trailWeightsForSpans(chordBehindTurns(offsets), spans);
 }
 
 export function prepareHeliocentricView({
@@ -156,7 +151,8 @@ export function prepareHeliocentricView({
     index === 0
       ? Object.freeze([0, 0, 0])
       : Object.freeze(pointAt(bodyEccentricAnomaly + offset).map(round)));
-  const trail = orbitTrailWeights(sortedOffsets);
+  const behindTurns = chordBehindTurns(sortedOffsets);
+  const trail = trailWeightsForSpans(behindTurns, ORBIT_TRAIL_SPANS);
   const maximumExtentUnits = vertices.reduce(
     (extent, vertex) => Math.max(extent, magnitude(vertex)),
     0,
@@ -209,6 +205,7 @@ export function prepareHeliocentricView({
       vertexCount: vertices.length,
       // The trail: one weight per chord (chord k joins vertex k to k + 1).
       trail,
+      chordBehindTurns: behindTurns,
       trailModel: ORBIT_TRAIL_MODEL,
       trailSpans: ORBIT_TRAIL_SPANS,
       uniformSegments: UNIFORM_ORBIT_SEGMENTS,

@@ -203,8 +203,12 @@ export function buildSystemOracle(state) {
       centre,
       add(scale(perihelion, a * Math.cos(eccentricAnomaly)), scale(motion, b * Math.sin(eccentricAnomaly))),
     );
+    // The body's own eccentric anomaly on that ellipse, from its position.
+    const fromCentre = subtract(position, centre);
+    const eccentricAnomaly = Math.atan2(dot(fromCentre, motion) / b, dot(fromCentre, perihelion) / a);
     bodies[id] = Object.freeze({
       id,
+      eccentricAnomaly,
       semiMajorAxisAu,
       eccentricity,
       perihelionAu: semiMajorAxisAu * (1 - eccentricity),

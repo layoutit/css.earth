@@ -84,9 +84,9 @@ try {
     // Sky faces, the Sun billboard, the perspective camera with its body and
     // interior, the billboard disc and the material overlay, and the orbit
     // overlay's piece pool and body marker (2242), plus the planetary
-    // system's group, its 896 orbit pieces, seven planet markers with their
-    // phase overlays, and the Sun marker (912).
-    stageElements: 3154,
+    // system's group, its 1536 orbit pieces (twelve rings), twelve markers
+    // with their phase overlays, and the Sun marker (1562).
+    stageElements: 3804,
     cameraCount: 1,
     skyboxFaceCount: 6,
     sunCount: 1,
@@ -99,8 +99,8 @@ try {
     interiorMounted: true,
     sunBillboardCount: 1,
     sunCubemapBakeCount: 0,
-    systemOrbitPieceCount: 896,
-    systemMarkerCount: 7,
+    systemOrbitPieceCount: 1536,
+    systemMarkerCount: 12,
     sunMarkerCount: 1,
     systemGroupCount: 1,
   });
@@ -133,7 +133,7 @@ try {
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
     viewBank: { interiorMounted: window.__mercury.dom.interiorMounted, retainedInteriorNodeCount: window.__mercury.dom.retainedInteriorNodeCount },
   })), {
-    elements: 3154,
+    elements: 3804,
     interiorLeaves: 446,
     viewBank: {
       interiorMounted: true,
@@ -645,7 +645,7 @@ try {
   for (const sample of lodLadder) {
     assert.equal(sample.datasetLod, sample.stage);
     assert.equal(sample.stable, true);
-    assert.equal(sample.elements, 3154);
+    assert.equal(sample.elements, 3804);
     assert.equal(sample.materialFrame, lodLadder[0].materialFrame);
     assert.ok(Math.abs(sample.billboardStyleOpacity - sample.billboardOpacity) <
       1e-6);
@@ -701,17 +701,19 @@ try {
   assert.equal(farSystem.nearPieces, 0);
   assert.equal(farSystem.farOpacity, 1);
   assert.equal(farSystem.groupOpacity, "1");
-  // Trails: three quarters of each ring's chords, minus those clipped away.
-  assert.ok(farSystem.farPieces > 450 && farSystem.farPieces <= 630, `system pieces ${farSystem.farPieces}`);
-  assert.equal(farSystem.farMarkers, 7);
+  // Trails: five eighths of each of the twelve rings' chords (900), minus
+  // those clipped away.
+  assert.ok(farSystem.farPieces > 600 && farSystem.farPieces <= 900, `system pieces ${farSystem.farPieces}`);
+  assert.equal(farSystem.farMarkers, 12);
   assert.deepEqual(farSystem.farBodies, ["venus:true", "earth:true", "mars:true",
-    "jupiter:true", "saturn:true", "uranus:true", "neptune:true"]);
+    "jupiter:true", "saturn:true", "uranus:true", "neptune:true",
+    "ceres:true", "pluto:true", "haumea:true", "makemake:true", "eris:true"]);
   assert.equal(farSystem.farSunMarker, true);
-  assert.ok(farSystem.maximumDistanceAu > 80 && farSystem.maximumDistanceAu < 100,
+  assert.ok(farSystem.maximumDistanceAu > 280 && farSystem.maximumDistanceAu < 310,
     `far bound ${farSystem.maximumDistanceAu} au`);
   assert.ok(farSystem.wheelNotches > 20 && farSystem.wheelNotches < 40);
   assert.equal(farSystem.stable, true);
-  assert.equal(farSystem.elements, 3154);
+  assert.equal(farSystem.elements, 3804);
 
   // Back in close: the row cache resumes on the retained rows.
   assert.equal(await page.evaluate(() => {
@@ -727,7 +729,7 @@ try {
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.childElementCount), baseline.stageChildren);
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-    stage.querySelectorAll("*").length), 3154);
+    stage.querySelectorAll("*").length), 3804);
   assert.equal(await page.evaluate(() =>
     window.__mercury.assertStableDomIdentity()), true);
   assert.deepEqual(externalRequests, []);

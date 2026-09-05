@@ -70,7 +70,7 @@ export function materialOrbitFixture(id) {
     mountSun: () => ({ root: { isConnected: true }, state: () => ({ visible: true }), setViewDirection: () => ({ visible: true }), destroy() {} }),
     mountHeliocentric: () => ({ root: { isConnected: true }, sunRoot: { isConnected: true, style: {} }, overlay: { isConnected: true },
       plan: definition.heliocentricView?.plan, retainedOrbitPieceCount: 0, publish: () => ({}), setOrbitOpacity() {}, setMarkerOpacity() {},
-      setSystemOpacity() {}, setSunMarkerOpacity() {},
+      setSystemOpacity() {}, setSunMarkerOpacity() {}, setTrailSpans() { return null; },
       state: () => ({ sun: null, orbitPieceCount: 0, orbitOpacity: 1, markerOpacity: 0, orbitPoolOverflows: 0 }), destroy() {} }),
     createOrbit(options) { f.orbit = shared.create(options); return f.orbit; },
   });

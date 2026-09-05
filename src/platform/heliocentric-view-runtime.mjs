@@ -1,5 +1,7 @@
 import {
   projectHeliocentricView,
+  trailWeightsForSpans,
+  validTrailSpans,
   validatePreparedHeliocentricView,
 } from "./heliocentric-view.mjs";
 
@@ -123,7 +125,9 @@ export function mountRetainedHeliocentricView({
       element.className =
         `planet-heliocentric-system-marker ${objectId}-system-marker`;
       element.dataset.body = body.id;
-      applySprite(element, { ...systemMarkers.bodies[body.id], url: systemMarkers.url });
+      // A body's sprite may come from its own strip (the dwarf planets have
+      // no navigation tile); otherwise from the shared atlas.
+      applySprite(element, { url: systemMarkers.url, ...systemMarkers.bodies[body.id] });
       // Brightness: the prepared flux as opacity, so Venus is brilliant and
       // Neptune sits on the floor; the group's opacity fades them together.
       element.style.opacity = String(body.illumination.markerOpacity);
@@ -179,6 +183,9 @@ export function mountRetainedHeliocentricView({
   const systemMarkerHidden = new Map();
   let systemOpacity = 0;
   let sunMarkerOpacity = 0;
+  // A session's trail spans: null draws the prepared trails.
+  let trailSpans = null;
+  let trailWeights = null;
   let destroyed = false;
 
   return Object.freeze({
@@ -212,6 +219,7 @@ export function mountRetainedHeliocentricView({
         principalOffset,
         // Nothing of the system is projected while it is invisible.
         system: system !== null && systemOpacity > 0,
+        trailWeights,
       });
       lastProjection = projection;
       publishSun(projection);
@@ -244,6 +252,25 @@ export function mountRetainedHeliocentricView({
       systemGroup.style.opacity = value;
       publishedSystemOpacity = value;
     },
+    // Re-weights every prepared ring for a session's spans (null restores
+    // the prepared trails); the next publication draws them.
+    setTrailSpans(spans) {
+      if (spans === null || spans === undefined) {
+        trailSpans = null;
+        trailWeights = null;
+        return null;
+      }
+      if (!validTrailSpans(spans)) {
+        throw new TypeError("Orbit trail spans must be finite turns leaving part of the orbit undrawn.");
+      }
+      trailSpans = Object.freeze({ solidTurns: spans.solidTurns, fadeTurns: spans.fadeTurns });
+      const weights = { own: trailWeightsForSpans(plan.orbit.chordBehindTurns, trailSpans) };
+      for (const body of system?.bodies ?? []) {
+        weights[body.id] = trailWeightsForSpans(body.orbit.chordBehindTurns, trailSpans);
+      }
+      trailWeights = Object.freeze(weights);
+      return trailSpans;
+    },
     setSunMarkerOpacity(opacity) {
       if (sunMarker === null) throw new Error("The plan carries no Sun marker.");
       sunMarkerOpacity = clamp(opacity, 0, 1);
@@ -265,6 +292,8 @@ export function mountRetainedHeliocentricView({
         markerOpacity: publishedMarkerOpacity === null
           ? 0
           : Number(publishedMarkerOpacity),
+        trailSpans: trailSpans ?? plan.orbit.trailSpans,
+        trailSpansSource: trailSpans === null ? "prepared" : "session",
         ...(system === null ? {} : {
           systemOpacity,
           systemPieceCount: activeSystemPieceCount,
