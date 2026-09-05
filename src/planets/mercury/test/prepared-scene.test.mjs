@@ -291,6 +291,8 @@ test("qualifies observation products without claiming false color as normal", ()
   assert.equal(lenses.get("enhanced").falseColor, true);
   assert.equal(lenses.get("enhanced").label, "Enhanced");
   assert.match(lenses.get("enhanced").filter, /coverage completion/u);
+  assert.equal(lenses.get("enhanced").legend, undefined,
+    "false-color channel construction is provenance, not a surface legend");
   assert.equal(
     PREPARED_MERCURY_ASSETS.surfaces.enhanced.coverageCompletion
       .directEnhancedColorClaim,
@@ -301,6 +303,35 @@ test("qualifies observation products without claiming false color as normal", ()
       .filledPixelCount > 0,
   );
   assert.equal(lenses.get("topography").falseColor, true);
+  assert.deepEqual(lenses.get("topography").legend, {
+    kind: "scale",
+    title: "Elevation",
+    meta: "m",
+    src: "/scenes/mercury/mercury-lens-topography-legend.webp",
+    width: 304,
+    height: 14,
+    labels: ["−5,020", "−450", "4,140"],
+    sourceUrl: "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
+  });
+  assert.equal(lenses.get("normal").legend, undefined);
+  assert.deepEqual(lenses.get("interior").legend, {
+    kind: "categories",
+    title: "Structure",
+    meta: "Schematic",
+    items: [
+      {
+        label: "Metallic core",
+        description: "85% of radius",
+        color: "rgb(158 94 55)",
+      },
+      {
+        label: "Mantle + crust",
+        description: "366 km shell",
+        color: "rgb(112 108 101)",
+      },
+    ],
+    sourceUrl: "https://science.nasa.gov/mercury/facts/",
+  });
   assert.match(lenses.get("interior").filter, /retained 3D/u);
   assert.match(PREPARED_MERCURY_ASSETS.interior.qualification, /Schematic/u);
 });

@@ -8,6 +8,7 @@ import {
   bindResponsiveOrbitPolicy,
   isOrbitDragStart,
   MOBILE_VIEWPORT_QUERY,
+  SKYBOX_DRAG_ENABLED,
 } from "../../site/runtime-policy.mjs";
 import { createSceneLifetime } from "./scene-lifetime.mjs";
 import {
@@ -718,6 +719,11 @@ export function createUnboundedMatrixDragControls({
     if (!isTrackballMetrics(measuredTrackball)) {
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
     }
+    // Restrict the start only: an owned planet drag still continues off-disc.
+    if (!SKYBOX_DRAG_ENABLED && Math.hypot(
+      event.clientX - measuredTrackball.centerX,
+      event.clientY - measuredTrackball.centerY,
+    ) > measuredTrackball.surfaceRadius) return;
     // Mouse compatibility events carry the second-press click count. Blocking
     // them here would postpone double-click flights until the final release.
     if (event.pointerType !== "mouse") event.preventDefault();

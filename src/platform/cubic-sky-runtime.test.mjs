@@ -127,22 +127,22 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
   const beforeSkyPress = publications.length;
   const skyX = trackball.centerX + trackball.surfaceRadius + 1;
   surface.emit("pointerdown",skyX,710);
-  assert.equal(controls.stats().activeMode,"idle",
-    "a sky press interrupts an existing coast");
-  assert.equal(controls.stats().pendingPointer,true,
-    "a sky press reserves the next drag");
-  assert.equal(surface.captured,true,"sky input captures the pointer");
+  assert.equal(controls.stats().activeMode,"inertia",
+    "a disabled sky press must not interrupt the existing coast");
+  assert.equal(controls.stats().pendingPointer,false,
+    "a sky press must not reserve a drag");
+  assert.equal(surface.captured,false,"disabled sky input does not capture the pointer");
+  controls.stop();
   surface.emit("pointermove",330,720); tick(720);
   surface.emit("pointerup",330,850);
-  assert.equal(publications.length,beforeSkyPress+1,
-    "a gesture starting on sky continues onto the planet");
-  assert.equal(pending.size,0,"a short sky drag leaves no inertia callback");
-  controls.stop();
+  assert.equal(publications.length,beforeSkyPress,
+    "entering the planet from a disabled sky press must not start a drag");
+  assert.equal(pending.size,0,"disabled sky input leaves no callback");
   surface.emit("pointerdown",skyX,750);
   surface.emit("pointermove",skyX+1,760); tick(760);
   surface.emit("pointerup",skyX+1,770);
-  assert.equal(publications.length,beforeSkyPress+2,
-    "one-pixel sky input is published on the next frame");
+  assert.equal(publications.length,beforeSkyPress,
+    "one-pixel sky input must not publish movement");
   assert.equal(pending.size,0,"released sky input schedules no idle work");
   const beforeRimDrag = publications.length;
   const rimX = trackball.centerX + trackball.surfaceRadius - 1;

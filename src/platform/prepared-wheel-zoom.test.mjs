@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { WHEEL_ZOOM_SPEED_MULTIPLIER } from "../../site/runtime-policy.mjs";
 
 import {
   createPreparedWheelZoomControls,
@@ -7,7 +8,8 @@ import {
   zoomOutRayRotation,
 } from "./prepared-wheel-zoom.mjs";
 
-test("wheel direction selects one fixed 200 ms zoom velocity", (t) => {
+for (const speedMultiplier of [1, WHEEL_ZOOM_SPEED_MULTIPLIER]) test(
+`wheel zoom retains its timing, anchoring and cancellation at speed ${speedMultiplier}`, (t) => {
   const original = globalThis.HTMLElement;
   t.after(() => {
     if (original === undefined) delete globalThis.HTMLElement;
@@ -29,7 +31,7 @@ test("wheel direction selects one fixed 200 ms zoom velocity", (t) => {
   const published = [];
   const controls = createPreparedWheelZoomControls({
     inputSurface:surface, camera,
-    minimumZoom:.4, maximumZoom:4,
+    minimumZoom:.4, maximumZoom:4, speedMultiplier, useScrollDistance: false,
     trackballMetrics:() => ({ centerX:300, centerY:300,
       opticalCenterX:300, opticalCenterY:300, radius:120,
       surfaceRadius:120, focalLength:600 }),
@@ -44,7 +46,7 @@ test("wheel direction selects one fixed 200 ms zoom velocity", (t) => {
   };
   emit(-1, 0); tick(100); tick(200);
   assert.ok(Math.abs(camera.state.zoom - Math.exp(
-    PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * 200)) < 1e-12);
+    PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * speedMultiplier * 200)) < 1e-12);
   const first = camera.state.zoom;
   emit(999, 300); tick(400); tick(500);
   assert.ok(Math.abs(camera.state.zoom - 1) < 1e-12,
@@ -64,6 +66,58 @@ test("wheel direction selects one fixed 200 ms zoom velocity", (t) => {
   controls.destroy();
   assert.equal(surface.listeners.size, 0);
   assert.equal(pending.size, 0);
+});
+
+test("scroll distance stays precise across wheel notches, trackpad streams and browser units", async t => {
+  const { Surface } = await import("./test/orbit-fixture.mjs");
+  const prior = globalThis.HTMLElement; globalThis.HTMLElement = Surface;
+  t.after(() => { globalThis.HTMLElement = prior; });
+  function fixture() {
+    const surface = new Surface(), camera = { state: { zoom: 1 } };
+    const controls = createPreparedWheelZoomControls({ inputSurface: surface, camera,
+      minimumZoom: .4, maximumZoom: 4,
+      trackballMetrics: () => ({ centerX: 0, centerY: 0, surfaceRadius: 120, focalLength: 600 }),
+      rotate(value) { camera.state.zoom = value.zoom; },
+    });
+    return { surface, camera, controls };
+  }
+  function replay(events) {
+    const f = fixture();
+    try {
+      for (const event of events) {
+        f.surface.tick(event.timeStamp);
+        f.surface.dispatch("wheel", event);
+      }
+      f.surface.tick(events.at(-1).timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds);
+      assert.equal(f.controls.stats().active, false);
+      assert.equal(f.surface.frames.size, 0);
+      return f.camera.state.zoom;
+    } finally { f.controls.destroy(); }
+  }
+  const notch = replay([{ deltaY: -100, timeStamp: 0 }]);
+  const stream = replay(Array.from({ length: 50 }, (_, i) => ({ deltaY: -2, timeStamp: i * 8 })));
+  const slowStream = replay(Array.from({ length: 50 }, (_, i) => ({ deltaY: -2, timeStamp: i * 240 })));
+  const lineUnits = replay([{ deltaY: -6.25, deltaMode: 1, timeStamp: 0 }]);
+  const pageUnits = replay([{ deltaY: -.125, deltaMode: 2, timeStamp: 0 }]);
+  const tiny = replay([{ deltaY: -1, timeStamp: 0 }]);
+  assert.ok(tiny > 1 && tiny < 1.01, "a one-pixel movement must not behave like a full notch");
+  assert.ok(Math.abs(notch - Math.exp(.216 * WHEEL_ZOOM_SPEED_MULTIPLIER)) < 1e-12);
+  for (const zoom of [stream, slowStream, lineUnits, pageUnits]) {
+    assert.ok(Math.abs(zoom - notch) < 1e-12, "equal scroll travel must produce equal zoom, independent of event cadence");
+  }
+  assert.equal(replay([{ deltaY: -1000000, timeStamp: 0 }]), 4);
+  assert.equal(replay([{ deltaY: 1000000, timeStamp: 0 }]), .4);
+  const f = fixture();
+  try {
+    f.surface.dispatch("wheel", { deltaY: -100, timeStamp: 0 }); f.surface.tick(80);
+    const before = f.camera.state.zoom;
+    f.surface.dispatch("wheel", { deltaY: 1, timeStamp: 80 }); f.surface.tick(100);
+    assert.ok(f.camera.state.zoom < before, "reversal must drop the unfinished opposite-direction target");
+    f.controls.stop();
+    const stopped = f.camera.state.zoom; f.surface.tick(300);
+    assert.equal(f.camera.state.zoom, stopped);
+    assert.equal(f.surface.frames.size, 0);
+  } finally { f.controls.destroy(); }
 });
 
 test("zoom-out follows the native viewing-ray scale instead of a surface grab", () => {

@@ -15,6 +15,7 @@ const lenses = {
     label: lens.label,
     thumbnailUrl: lens.thumbnailUrl,
     description: lensDescriptions[lens.id],
+    legend: lens.legend,
     title: lens.falseColor ? `${lens.label}, ${lens.filter} false color` : lens.filter,
   })),
 };
