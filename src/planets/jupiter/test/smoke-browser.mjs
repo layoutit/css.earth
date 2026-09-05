@@ -71,6 +71,7 @@ try {
   for (let pitch = 0; pitch <= 89; pitch += 2.5) {
     await page.evaluate((nextPitch) => window.__jupiter.setView({ pitch: nextPitch }), pitch);
   }
+  await page.waitForFunction(() => window.__jupiter.runtime.selection().committed.shadows === true);
   await page.waitForFunction(() =>
     window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting").pending === 0);
   const continuity = await endContinuitySampling(page);
@@ -218,6 +219,7 @@ async function assertMaterialProjectionLock(page) {
   if (!(await shadows.isChecked())) {
     await shadows.evaluate((element) => element.click());
   }
+  await page.waitForFunction(() => window.__jupiter.runtime.selection().committed.shadows === true);
   await page.waitForFunction(() =>
     window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting").pending === 0);
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() =>
@@ -375,10 +377,10 @@ async function assertPreparedRings(page) {
     `${state.ringSystemWidth}/${state.bodyWidth}`);
 
   const control = page.locator('.planet-settings input[name="rings"]');
-  await control.evaluate((element) => element.click());
+  await toggleRings(page, control);
   assert.equal(await page.locator(".jupiter-rings").evaluate((rings) =>
     getComputedStyle(rings).visibility), "hidden");
-  await control.evaluate((element) => element.click());
+  await toggleRings(page, control);
   assert.notEqual(await page.locator(".jupiter-rings").evaluate((rings) =>
     getComputedStyle(rings).visibility), "hidden");
 }
@@ -405,9 +407,9 @@ async function assertRenderedRingReadable(page) {
   });
   const visible = await page.screenshot();
   const control = page.locator('.planet-settings input[name="rings"]');
-  await control.evaluate((element) => element.click());
+  await toggleRings(page, control);
   const hidden = await page.screenshot();
-  await control.evaluate((element) => element.click());
+  await toggleRings(page, control);
   await page.evaluate(() => {
     window.__jupiter.setView({ pitch: 20.9, yaw: -105, zoom: 1.1 });
     (!document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
@@ -460,4 +462,14 @@ async function assertRenderedRingReadable(page) {
     `Jupiter rendered main ring became illegible: ${changedBySixteen}`);
   assert.ok(Math.min(...changedByAngle) >= 20,
     `Jupiter rendered ring silhouette is incomplete: ${changedByAngle.join(",")}`);
+}
+
+
+async function toggleRings(page, control) {
+  const expected = !(await control.isChecked());
+  await control.evaluate(element => element.click());
+  await page.waitForFunction(value => {
+    const state = window.__jupiter.runtime.selection();
+    return !state.pending && state.committed.rings === value;
+  }, expected);
 }

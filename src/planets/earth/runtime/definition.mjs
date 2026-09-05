@@ -27,7 +27,10 @@ export const runtimeDefinition = Object.freeze({
   destinations: { catalog: PREPARED_EARTH_PLACES, defaultLens: "normal",
     statuses: { detail: "WorldCover imagery · 2021. Source gaps retain the Earth base map.",
       overview: "Earth overview. WorldCover detail is unavailable at this location." } },
-  assets: { entries, pools: [preparedResourcePool("mounted", entries),
+  // Bound celestial decoding alongside the large surface pages. Starting all
+  // mounted images together made Chrome repeatedly decode pages during its
+  // first raster pass, delaying the production globe by roughly 15 seconds.
+  assets: { entries, pools: [preparedResourcePool("mounted", entries, { concurrency: 2 }),
     preparedResourcePool("default-materials", entries, { retention: "warm" }),
     preparedResourcePool("pages", entries, { retention: "selection", concurrency: 2, capacity: banks[0].urls.length * 2 }),
     ...["lighting", "atmosphere"].map(id => preparedResourcePool(id, entries, { retention: "selection", reuse: true,
