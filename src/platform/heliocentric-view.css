@@ -79,6 +79,18 @@
   pointer-events: none;
 }
 
+/* A marker's phase: the object's billboard lighting frame over the sprite,
+   scaled to the marker and rolled toward the Sun by the runtime. */
+.planet-heliocentric-marker-phase {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
 /* The Sun's own perspective root: it shares the body camera's box and eye
    (the shared orbit writes both roots' perspective and origin from the
    prepared camera plan) and is inserted before the body's root so the body

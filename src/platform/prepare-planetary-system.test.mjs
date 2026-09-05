@@ -5,6 +5,9 @@ import {
   PLANETARY_SYSTEM_BODIES,
   SYSTEM_ORBIT_SEGMENTS,
   preparePlanetarySystem,
+  MARKER_BRIGHTNESS,
+  markerOpacityForMagnitudes,
+  lambertPhaseFunction,
 } from "./prepare-planetary-system.mjs";
 import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mjs";
 import {
@@ -240,4 +243,55 @@ test("mutation check: the output's semi-major axes stay strictly increasing outw
     assert.ok(axes[index] > axes[index - 1],
       `semiMajorAxisAu is not strictly increasing at index ${index}: ${axes}`);
   }
+});
+
+// Illumination and brightness, prepared from Mercury's vantage.
+test("lights every body from Mercury's vantage: phase from Sun-body-observer, only Venus can ever be a crescent", async () => {
+  const system = await preparePlanetarySystem({ bodyId: "mercury", presentationFrame: prepareEclipticPresentationFrame("mercury"), kilometersPerUnit: 2439.7 / 230 });
+  const sun = system.sun.position;
+  for (const body of system.bodies) {
+    // Recomputed here from the body's own position: the angle at the body
+    // between the Sun and the observer at the origin.
+    const toSun = sun.map((c, i) => c - body.position[i]);
+    const toObserver = body.position.map((c) => -c);
+    const cosine = (toSun[0] * toObserver[0] + toSun[1] * toObserver[1] + toSun[2] * toObserver[2]) /
+      (Math.hypot(...toSun) * Math.hypot(...toObserver));
+    const phase = Math.acos(cosine) * 180 / Math.PI;
+    // Positions are rounded to whole units after the phase was computed:
+    // a few 1e-8 relative, well under a millidegree.
+    assert.ok(Math.abs(body.illumination.phaseAngleDegrees - phase) < 1e-3, body.id);
+    assert.ok(Math.abs(body.illumination.illuminatedFraction - (1 + cosine) / 2) < 1e-6, body.id);
+    assert.ok(Math.abs(body.illumination.lightViewZ - cosine) < 1e-6, body.id);
+    // Geometry: a body outside the observer's orbit can never be seen at a
+    // phase angle beyond asin(observer aphelion / body perihelion).
+    if (body.id !== "venus") {
+      const bound = Math.asin(HELIOCENTRIC_ORBITS.mercury.aphelionAu / body.perihelionAu) * 180 / Math.PI;
+      assert.ok(body.illumination.phaseAngleDegrees <= bound + 1e-9, `${body.id} phase ${body.illumination.phaseAngleDegrees} > ${bound}`);
+      assert.ok(body.illumination.illuminatedFraction >= 0.9, body.id);
+    }
+  }
+  const jupiterOut = system.bodies.filter(({ id }) => ["jupiter", "saturn", "uranus", "neptune"].includes(id));
+  assert.ok(jupiterOut.every((body) => body.illumination.illuminatedFraction >= 0.99));
+});
+
+test("marker brightness falls with magnitudes below the brightest and floors, Venus opaque, Neptune on the floor", async () => {
+  const system = await preparePlanetarySystem({ bodyId: "mercury", presentationFrame: prepareEclipticPresentationFrame("mercury"), kilometersPerUnit: 2439.7 / 230 });
+  const byFlux = [...system.bodies].sort((a, b) => b.illumination.flux - a.illumination.flux);
+  assert.equal(byFlux[0].id, "venus");
+  assert.equal(byFlux.at(-1).id, "neptune");
+  assert.equal(byFlux[0].illumination.markerOpacity, 1);
+  assert.equal(byFlux.at(-1).illumination.markerOpacity, MARKER_BRIGHTNESS.floor);
+  for (let index = 1; index < byFlux.length; index += 1) {
+    assert.ok(byFlux[index].illumination.markerOpacity <= byFlux[index - 1].illumination.markerOpacity);
+    assert.ok(byFlux[index].illumination.magnitudesBelowBrightest >= byFlux[index - 1].illumination.magnitudesBelowBrightest);
+  }
+  // At least three distinct opacities: never stickers of one intensity.
+  assert.ok(new Set(system.bodies.map((body) => body.illumination.markerOpacity)).size >= 5);
+  assert.equal(markerOpacityForMagnitudes(0), 1);
+  assert.equal(markerOpacityForMagnitudes(MARKER_BRIGHTNESS.magnitudeRange / 2), Number((MARKER_BRIGHTNESS.floor + (1 - MARKER_BRIGHTNESS.floor) / 2).toFixed(4)));
+  assert.equal(markerOpacityForMagnitudes(99), MARKER_BRIGHTNESS.floor);
+  // Lambert: full at zero phase, a quarter at quadrature... (1/pi), nothing at new.
+  assert.ok(Math.abs(lambertPhaseFunction(0) - 1) < 1e-12);
+  assert.ok(Math.abs(lambertPhaseFunction(Math.PI / 2) - 1 / Math.PI) < 1e-12);
+  assert.ok(Math.abs(lambertPhaseFunction(Math.PI)) < 1e-12);
 });

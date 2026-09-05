@@ -35,6 +35,15 @@ const systemMarkers = Object.freeze({
   sun: atlasSprite("sun"),
   bodies: Object.freeze(Object.fromEntries(
     PREPARED_MERCURY_SCENE.heliocentricView.system.bodies.map((body) => [body.id, atlasSprite(body.id)]))),
+  // Each marker carries its phase from Mercury's own billboard lighting
+  // atlas (the same frames the far-view overlay draws), scaled down.
+  phase: Object.freeze({
+    url: billboardLighting.url, columns: billboardLighting.columns, rowCount: billboardLighting.rowCount,
+    frameCount: billboardLighting.frameCount,
+    minimumLightViewZ: PREPARED_MERCURY_ASSETS.lighting.minimumLightViewZ,
+    maximumLightViewZ: PREPARED_MERCURY_ASSETS.lighting.maximumLightViewZ,
+    baseLightAzimuthDegrees: PREPARED_MERCURY_ASSETS.lighting.baseLightAzimuthDegrees,
+  }),
 });
 const entries = [...preparedSkyResources(PREPARED_MERCURY_SCENE.starfield, PREPARED_MERCURY_SKY_SUN, "warm"),
   { key: "poles", url: canonicalPreparedAsset(PREPARED_MERCURY_ASSETS.poles), pool: "warm" },

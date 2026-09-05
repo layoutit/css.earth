@@ -201,8 +201,9 @@ export function requireObjectRuntimeDefinition(definition, { objectId = definiti
     // The planetary system draws every other body and the Sun from the same
     // atlas: one sprite per prepared body, and one for the Sun.
     if (plan.system !== undefined && (!nonempty(systemMarkers?.url) || !sprite(systemMarkers.sun) ||
-        plan.system.bodies.some(body => !sprite(systemMarkers.bodies?.[body.id])))) {
-      throw new TypeError("A prepared planetary system requires a shell marker for the Sun and every body.");
+        plan.system.bodies.some(body => !sprite(systemMarkers.bodies?.[body.id])) ||
+        !nonempty(systemMarkers.phase?.url) || !(systemMarkers.phase.frameCount > 1))) {
+      throw new TypeError("A prepared planetary system requires a shell marker for the Sun and every body, and a phase atlas.");
     }
   }
   if (definition.inputSelector != null && !nonempty(definition.inputSelector)) {

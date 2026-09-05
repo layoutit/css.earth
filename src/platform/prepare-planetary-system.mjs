@@ -29,6 +29,7 @@ import {
   SOLAR_GEOMETRY_EPOCH_JD_TT,
   SOLAR_GEOMETRY_EPOCH_LABEL,
 } from "./solar-geometry.mjs";
+import { ORBIT_TRAIL_MODEL, orbitTrailWeights } from "./prepare-heliocentric-view.mjs";
 import {
   add,
   cross,
@@ -63,6 +64,42 @@ export const PLANETARY_SYSTEM_BODIES = Object.freeze([
 // pool stays under a thousand pieces.
 export const SYSTEM_ORBIT_SEGMENTS = 120;
 
+// Geometric albedos, NASA planetary fact sheet (dwarf planets: JPL SBDB /
+// occultation literature). With the mean radii from the astronomy package's
+// body table these are the only non-geometric inputs of the brightness
+// model; everything else is the epoch's geometry.
+export const GEOMETRIC_ALBEDO = Object.freeze({
+  mercury: 0.142, venus: 0.689, earth: 0.434, mars: 0.170,
+  jupiter: 0.538, saturn: 0.499, uranus: 0.488, neptune: 0.442,
+  pluto: 0.52, ceres: 0.09, eris: 0.96, haumea: 0.80, makemake: 0.81,
+});
+
+// Illumination and brightness are as seen from the observer body, not from
+// the dolly's eye: the scene is the observer's sky and the far dolly is a
+// presentational vantage. (From the eye at the pole-on far bound every
+// planet would sit at quadrature, half-lit, which reads as wrong and is
+// not what the object's neighbourhood shows.) The phase angle is
+// Sun-body-observer; the illuminated fraction is (1 + cos alpha) / 2; the
+// flux is p R^2 Phi(alpha) / (r^2 d^2) with a Lambert-sphere phase function,
+// relative to the brightest body. The marker's opacity is that flux on a
+// magnitude scale: opaque for the brightest, falling linearly in magnitudes
+// to a floor at `magnitudeRange` below it, so a faint body stays findable
+// but never as visible as a bright one.
+export const MARKER_BRIGHTNESS = Object.freeze({
+  model: "observer-vantage-lambert-flux-magnitude-opacity",
+  floor: 0.3,
+  magnitudeRange: 12.5,
+});
+
+export function lambertPhaseFunction(alphaRadians) {
+  return ((Math.PI - alphaRadians) * Math.cos(alphaRadians) + Math.sin(alphaRadians)) / Math.PI;
+}
+
+export function markerOpacityForMagnitudes(magnitudesBelowBrightest) {
+  const share = Math.max(0, Math.min(1, 1 - magnitudesBelowBrightest / MARKER_BRIGHTNESS.magnitudeRange));
+  return Number((MARKER_BRIGHTNESS.floor + (1 - MARKER_BRIGHTNESS.floor) * share).toFixed(4));
+}
+
 export async function preparePlanetarySystem({
   bodyId,
   presentationFrame,
@@ -75,7 +112,7 @@ export async function preparePlanetarySystem({
       !Array.isArray(presentationFrame.basis) ||
       !positive(kilometersPerUnit) ||
       !Array.isArray(bodies) || !bodies.includes(bodyId) ||
-      bodies.some((id) => !HELIOCENTRIC_ORBITS[id])) {
+      bodies.some((id) => !HELIOCENTRIC_ORBITS[id] || !(GEOMETRIC_ALBEDO[id] > 0))) {
     throw new TypeError("Planetary system preparation arguments are invalid.");
   }
   if (Math.abs(determinant(presentationFrame.basis) - 1) > 1e-9) {
@@ -193,9 +230,26 @@ export async function preparePlanetarySystem({
     // rounding is below 1e-7 relative and the prepared module stays small.
     const vertices = Object.freeze(Array.from({ length: SYSTEM_ORBIT_SEGMENTS }, (_, index) =>
       Object.freeze((index === 0 ? position : pointAt(bodyEccentricAnomaly + index * step)).map(Math.round))));
+    const trail = orbitTrailWeights(Array.from({ length: SYSTEM_ORBIT_SEGMENTS }, (_, index) => index * step));
+    // Illumination from the observer (at the origin): Sun-body-observer.
+    const toSun = subtract(sunPosition, position);
+    const toObserver = scale(position, -1);
+    const phaseAngle = Math.acos(Math.max(-1, Math.min(1,
+      dot(toSun, toObserver) / (magnitude(toSun) * magnitude(toObserver)))));
+    const fluxKm = GEOMETRIC_ALBEDO[id] * BODIES[id].meanRadiusKm ** 2 * lambertPhaseFunction(phaseAngle) /
+      ((magnitude(toSun) * kilometersPerUnit) ** 2 * (magnitude(toObserver) * kilometersPerUnit) ** 2);
     return Object.freeze({
       id,
       radiusKilometers: BODIES[id].meanRadiusKm,
+      illumination: {
+        model: MARKER_BRIGHTNESS.model,
+        phaseAngleDegrees: phaseAngle * 180 / Math.PI,
+        illuminatedFraction: (1 + Math.cos(phaseAngle)) / 2,
+        // The light's view-space depth for the lighting atlas: +1 fully lit.
+        lightViewZ: Math.cos(phaseAngle),
+        geometricAlbedo: GEOMETRIC_ALBEDO[id],
+        flux: fluxKm,
+      },
       position: Object.freeze(position.map(Math.round)),
       distanceUnits: magnitude(position),
       heliocentricDistanceAu: orbit.heliocentricDistanceAu,
@@ -213,7 +267,23 @@ export async function preparePlanetarySystem({
         center: Object.freeze(center.map(Math.round)),
         vertices,
         vertexCount: vertices.length,
+        trail,
+        trailModel: ORBIT_TRAIL_MODEL,
         uniformSegments: SYSTEM_ORBIT_SEGMENTS,
+      }),
+    });
+  });
+  // Brightness relative to the brightest body, as marker opacity.
+  const brightestFlux = others.reduce((peak, body) => Math.max(peak, body.illumination.flux), 0);
+  const bodiesWithBrightness = others.map((body) => {
+    const magnitudesBelowBrightest = -2.5 * Math.log10(body.illumination.flux / brightestFlux);
+    return Object.freeze({
+      ...body,
+      illumination: Object.freeze({
+        ...body.illumination,
+        fluxShareOfBrightest: body.illumination.flux / brightestFlux,
+        magnitudesBelowBrightest,
+        markerOpacity: markerOpacityForMagnitudes(magnitudesBelowBrightest),
       }),
     });
   });
@@ -230,7 +300,7 @@ export async function preparePlanetarySystem({
       );
     }
   }
-  const maximumExtentUnits = others.reduce(
+  const maximumExtentUnits = bodiesWithBrightness.reduce(
     (extent, body) => body.orbit.vertices.reduce(
       (inner, vertex) => Math.max(inner, magnitude(vertex)),
       Math.max(extent, body.distanceUnits),
@@ -253,7 +323,8 @@ export async function preparePlanetarySystem({
     epochLabel: SOLAR_GEOMETRY_EPOCH_LABEL,
     units: Object.freeze({ kilometersPerUnit, unitsPerAu }),
     sun: Object.freeze({ position: Object.freeze(sunPosition.map(round)) }),
-    bodies: Object.freeze(others),
+    bodies: Object.freeze(bodiesWithBrightness),
+    markerBrightness: MARKER_BRIGHTNESS,
     maximumExtentUnits,
     runtimeGeometryDerivation: false,
   });

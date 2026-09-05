@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import { orbitTrailWeights } from "./prepare-heliocentric-view.mjs";
 import {
+  validatePreparedHeliocentricView,
   projectHeliocentricView,
   validatePreparedPlanetarySystem,
 } from "./heliocentric-view.mjs";
@@ -46,16 +48,40 @@ test("a visible marker lands within half a pixel of one of its own orbit's segme
   }
 });
 
-test("at a distance that fits the whole system, every marker is visible with a full ring", () => {
+test("at a distance that fits the whole system, every marker is visible with its trailing half-orbit", () => {
   const distance = plan.system.maximumExtentUnits * 3;
   const projection = project({ rotation: LOOKING_DOWN_THE_POLE, distance, system: true });
   assert.equal(projection.system.bodies.length, 7);
   for (const body of projection.system.bodies) {
     assert.equal(body.marker.classification, "visible");
     assert.ok(body.marker.visible);
-    assert.ok(body.orbitSegments.length > 100,
-      `${body.id} only has ${body.orbitSegments.length} segments`);
+    // The trail: exactly the chords with a positive weight, none ahead of
+    // the body, each segment carrying its weight, the last one at the body.
+    const weighted = plan.system.bodies.find(({ id }) => id === body.id).orbit.trail
+      .filter((weight) => weight > 0).length;
+    assert.equal(body.orbitSegments.length, weighted, `${body.id} segments`);
+    assert.ok(weighted > 40 && weighted <= 60, `${body.id} trail chords ${weighted}`);
+    const weights = body.orbitSegments.map((segment) => segment[4]);
+    assert.ok(weights.every((weight, index) => index === 0 || weight >= weights[index - 1]),
+      `${body.id} trail must strengthen toward the body`);
+    assert.ok(weights.at(-1) > 0.99 && weights[0] < 0.05, `${body.id} trail ends ${weights[0]}..${weights.at(-1)}`);
+    // The strongest segment ends at the marker: the trail terminates at the body.
+    const [, , x1, y1] = body.orbitSegments.at(-1);
+    assert.ok(Math.hypot(x1 - body.marker.screen[0], y1 - body.marker.screen[1]) < 1e-6);
   }
+});
+
+test("orbitTrailWeights fades linearly backwards from the body and weighs the leading half nothing", () => {
+  const offsets = Array.from({ length: 8 }, (_, index) => index * Math.PI / 4);
+  const trail = orbitTrailWeights(offsets);
+  // Chord mid-offsets: pi/8, 3pi/8, ... ; behind = 2pi - mid; weight 1 - behind/pi.
+  assert.deepEqual(trail, [0, 0, 0, 0, 0.125, 0.375, 0.625, 0.875]);
+  assert.throws(() => orbitTrailWeights([0.1, 0.2]), TypeError);
+  assert.throws(() => orbitTrailWeights([0, 2, 1]), TypeError);
+  assert.throws(() => orbitTrailWeights([0, 7]), TypeError);
+  // The plan's own rings validate only as trails: a closed loop is refused.
+  const loop = { ...plan, orbit: { ...plan.orbit, trail: plan.orbit.trail.map(() => 1) } };
+  assert.throws(() => validatePreparedHeliocentricView(loop), TypeError);
 });
 
 test("a close default framing never throws and always returns finite segment geometry", () => {

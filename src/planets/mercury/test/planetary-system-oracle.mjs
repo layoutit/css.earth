@@ -31,6 +31,11 @@ import {
 export const PLANETS = Object.freeze([
   "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune",
 ]);
+// The five dwarf planets: their state vectors come from the astronomy
+// package's Keplerian propagation of JPL Horizons osculating elements
+// (ICRF, heliocentric, epoch 2026-Jan-01); there is no checked-in fallback,
+// so their checks need the package build.
+export const DWARF_PLANETS = Object.freeze(["ceres", "pluto", "haumea", "makemake", "eris"]);
 
 // Textbook mean semi-major axes (NASA planetary fact sheet, au): the
 // end-to-end reference the painted orbit ratios are checked against. They
@@ -38,6 +43,8 @@ export const PLANETS = Object.freeze([
 export const TEXTBOOK_SEMI_MAJOR_AXES_AU = Object.freeze({
   mercury: 0.387, venus: 0.723, earth: 1.000, mars: 1.524,
   jupiter: 5.203, saturn: 9.537, uranus: 19.19, neptune: 30.07,
+  // JPL SBDB / NASA dwarf planet fact sheets (mean values).
+  ceres: 2.77, pluto: 39.48, haumea: 43.1, makemake: 45.4, eris: 67.9,
 });
 
 // IAU 2012 astronomical unit and the Gaussian gravitational constant
@@ -85,6 +92,27 @@ export const FALLBACK_STATE_VECTORS = Object.freeze({
   }),
 });
 
+// Geometric albedos (NASA planetary fact sheet) and mean radii (IAU/WGCCRE,
+// km): the only non-geometric inputs of the brightness model below.
+export const GEOMETRIC_ALBEDO = Object.freeze({
+  mercury: 0.142, venus: 0.689, earth: 0.434, mars: 0.170,
+  jupiter: 0.538, saturn: 0.499, uranus: 0.488, neptune: 0.442,
+  pluto: 0.52, ceres: 0.09, eris: 0.96, haumea: 0.80, makemake: 0.81,
+});
+export const MEAN_RADIUS_KILOMETERS = Object.freeze({
+  mercury: 2439.4, venus: 6051.8, earth: 6371.0, mars: 3389.5,
+  jupiter: 69911, saturn: 58232, uranus: 25362, neptune: 24622,
+  pluto: 1188.3, ceres: 469.7, eris: 1163, haumea: 797.6, makemake: 738.8,
+});
+// Seconds per day and the au, for the dwarf planets' km/day state vectors.
+const SECONDS_PER_DAY = 86400;
+
+// Lambert sphere phase function: the share of the geometric-albedo flux a
+// diffusely reflecting sphere sends toward an observer at phase angle alpha.
+export function lambertPhaseFunction(alphaRadians) {
+  return ((Math.PI - alphaRadians) * Math.cos(alphaRadians) + Math.sin(alphaRadians)) / Math.PI;
+}
+
 const DEFAULT_ASTRONOMY_URL = "@cssearth/astronomy";
 
 export async function loadPlanetStateVectors({
@@ -116,10 +144,20 @@ export async function loadPlanetStateVectors({
       throw new Error(`${id}: the astronomy build disagrees with the checked-in vector by ${separation.toFixed(4)} degrees.`);
     }
   }
+  // Dwarf planets: Keplerian state at the epoch, km and km/day, into au.
+  const dwarfVectors = {};
+  for (const id of DWARF_PLANETS) {
+    const state = astronomy.keplerStateKm(astronomy.dwarfPlanetElements(id), EPOCH_JD_TT);
+    dwarfVectors[id] = Object.freeze({
+      heliocentricIcrfAu: Object.freeze(state.positionKm.map((value) => value / AU_KILOMETERS)),
+      velocityAuPerDay: Object.freeze(state.velocityKmPerDay.map((value) => value / AU_KILOMETERS)),
+    });
+  }
   return Object.freeze({
-    source: `astronomy package (VSOP87A) at ${astronomyUrl}`,
+    source: `astronomy package (VSOP87A, Keplerian dwarf planets) at ${astronomyUrl}`,
     fallback: false,
     vectors: Object.freeze(vectors),
+    dwarfVectors: Object.freeze(dwarfVectors),
   });
 }
 
@@ -139,8 +177,9 @@ export function buildSystemOracle(state) {
     scale(lighting.icrfToPresentation(vectorAu), AU_KILOMETERS);
   const sun = toPresentationKm(scale(mercury.heliocentricIcrfAu, -1));
   const bodies = {};
-  for (const id of PLANETS) {
-    const { heliocentricIcrfAu: r, velocityAuPerDay: v } = state.vectors[id];
+  const allVectors = { ...state.vectors, ...(state.dwarfVectors ?? {}) };
+  for (const id of Object.keys(allVectors)) {
+    const { heliocentricIcrfAu: r, velocityAuPerDay: v } = allVectors[id];
     const distance = Math.hypot(...r);
     const speedSquared = dot(v, v);
     const semiMajorAxisAu = 1 / (2 / distance - speedSquared / GM_SUN_AU3_PER_DAY2);
@@ -153,6 +192,7 @@ export function buildSystemOracle(state) {
     const normalIcrf = normalize(cross(r, v));
     // Presentation-frame, Mercury-centred, kilometres.
     const position = add(sun, toPresentationKm(r));
+    const velocity = toPresentationKm(v);
     const normal = lighting.icrfToPresentation(normalIcrf);
     const perihelion = lighting.icrfToPresentation(perihelionIcrf);
     const motion = normalize(cross(normal, perihelion));
@@ -171,11 +211,37 @@ export function buildSystemOracle(state) {
       aphelionAu: semiMajorAxisAu * (1 + eccentricity),
       heliocentricDistanceAu: distance,
       position,
+      // Kilometres per day, presentation frame: the direction of motion.
+      velocity,
       normal,
       pointAt,
     });
   }
-  return Object.freeze({ epochJdTt: EPOCH_JD_TT, source: state.source, sun, bodies, lighting });
+  // Illumination as seen from Mercury (the observer at the origin): the
+  // phase angle Sun-body-observer, the illuminated fraction, and the flux
+  // p R^2 Phi(alpha) / (r^2 d^2) relative to the brightest body.
+  const illumination = {};
+  let brightest = 0;
+  for (const id of Object.keys(allVectors)) {
+    if (id === "mercury") continue;
+    const body = bodies[id];
+    const toSun = subtract(sun, body.position);
+    const toObserver = scale(body.position, -1);
+    const phaseAngle = Math.acos(Math.max(-1, Math.min(1,
+      dot(toSun, toObserver) / (Math.hypot(...toSun) * Math.hypot(...toObserver)))));
+    const flux = GEOMETRIC_ALBEDO[id] * MEAN_RADIUS_KILOMETERS[id] ** 2 * lambertPhaseFunction(phaseAngle) /
+      (Math.hypot(...toSun) ** 2 * Math.hypot(...toObserver) ** 2);
+    illumination[id] = { phaseAngleDegrees: phaseAngle * 180 / Math.PI,
+      illuminatedFraction: (1 + Math.cos(phaseAngle)) / 2, flux };
+    brightest = Math.max(brightest, flux);
+  }
+  for (const id of Object.keys(illumination)) {
+    illumination[id].fluxShareOfBrightest = illumination[id].flux / brightest;
+    illumination[id].magnitudesBelowBrightest = -2.5 * Math.log10(illumination[id].fluxShareOfBrightest);
+    illumination[id] = Object.freeze(illumination[id]);
+  }
+  return Object.freeze({ epochJdTt: EPOCH_JD_TT, source: state.source, sun, bodies, lighting,
+    illumination: Object.freeze(illumination), dwarfPlanets: Object.keys(state.dwarfVectors ?? {}) });
 }
 
 // A pinhole camera read off the page (page pixel coordinates, y down):
@@ -260,6 +326,35 @@ export function polarRadiusAt(polar, angle) {
   const [a0, r0] = polar[low];
   const [a1, r1] = polar[high];
   return a1 === a0 ? r0 : r0 + (r1 - r0) * (angle - a0) / (a1 - a0);
+}
+
+// Least-squares fit of a conic with one focus at the origin to polar
+// samples: 1 / r = A + B cos t + C sin t, so p = 1 / A, e = |(B, C)| / A and
+// the semi-major axis a = p / (1 - e^2). Works on any arc, which is what a
+// trail leaves; needs samples spanning a fair share of the ellipse.
+export function fitFocalConic(samples) {
+  let s11 = 0, s12 = 0, s13 = 0, s22 = 0, s23 = 0, s33 = 0, t1 = 0, t2 = 0, t3 = 0;
+  for (const [angle, radius] of samples) {
+    const c = Math.cos(angle), n = Math.sin(angle), y = 1 / radius;
+    s11 += 1; s12 += c; s13 += n; s22 += c * c; s23 += c * n; s33 += n * n;
+    t1 += y; t2 += y * c; t3 += y * n;
+  }
+  const solved = solve3([[s11, s12, s13], [s12, s22, s23], [s13, s23, s33]], [t1, t2, t3]);
+  if (solved === null) return null;
+  const [A, B, C] = solved;
+  if (!(A > 0)) return null;
+  const p = 1 / A;
+  const e = Math.hypot(B, C) / A;
+  if (!(e < 1)) return null;
+  return { p, e, a: p / (1 - e * e), perihelionAngle: Math.atan2(C, B), samples: samples.length };
+}
+
+function solve3(m, v) {
+  const det = (a) => a[0][0] * (a[1][1] * a[2][2] - a[1][2] * a[2][1]) -
+    a[0][1] * (a[1][0] * a[2][2] - a[1][2] * a[2][0]) + a[0][2] * (a[1][0] * a[2][1] - a[1][1] * a[2][0]);
+  const d = det(m);
+  if (Math.abs(d) < 1e-30) return null;
+  return [0, 1, 2].map((column) => det(m.map((row, i) => row.map((value, j) => j === column ? v[i] : value))) / d);
 }
 
 export function angleDegrees(a, b) {
