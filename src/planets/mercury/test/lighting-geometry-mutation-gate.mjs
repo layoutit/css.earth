@@ -366,7 +366,9 @@ export const MUTATIONS = Object.freeze([
     replace: "            180 / Math.PI - phaseAtlas.baseLightAzimuthDegrees + 180) * 4) / 4; /* MUTATION phase-lit-away */",
     prepare: [],
     served: { url: "/src/platform/heliocentric-view-runtime.mjs", marker: "MUTATION phase-lit-away" },
-    expect: /phase-darkening-away-from-sun-/u,
+    // At this epoch every planet is near full, so the darkening centroid is
+    // dormant; the DOM roll check is what catches it (both are listed).
+    expect: /phase-rolled-toward-sun-|phase-darkening-away-from-sun-/u,
     suite: "system",
   },
   {
