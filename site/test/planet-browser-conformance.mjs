@@ -4,7 +4,8 @@ import { resolve } from "node:path";
 import { chromium } from "playwright";
 
 import { OBJECTS } from "../objects.mjs";
-import { MOBILE_TOUCH_ACTION, WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../runtime-policy.mjs";
+import { MOBILE_TOUCH_ACTION, WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
+  WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../runtime-policy.mjs";
 import { loadPlanetBrowserProfile, assertRenderedObjectControls } from "./load-browser-profile.mjs";
 import { proveSkyboxPointerBoundary } from "./skybox-pointer-boundary.mjs";
 import { proveWheelZoomDistance, wheelWithReceipt } from "./wheel-zoom-distance.mjs";
@@ -998,19 +999,19 @@ async function proveWheelTakeover(page, planet, profile) {
     `${planet.id}: grabbing must cancel the pending wheel frame`);
   await page.mouse.up();
 
-  await showInteractionPhase(page, "Disabled sky press must leave wheel motion alone");
+  await showInteractionPhase(page, "Sky press must stop wheel motion");
   await reset();
   await startWheel();
   // Use the viewport corner: zoom can expand a large body's limb over the
   // point that was just outside its disc before the wheel gesture began.
   await page.mouse.move(page.viewportSize().width - 32, 96);
   await page.mouse.down();
-  assert.equal((await interactionStats(page, planet.id)).pendingPointer, false,
-    `${planet.id}: the disabled sky press must not reserve a drag`);
+  assert.equal((await interactionStats(page, planet.id)).pendingPointer, true,
+    `${planet.id}: the sky press must reserve an orbit drag`);
   const skyPress = await cameraPose(page, planet.id);
   await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 50);
-  assert.ok((await cameraPose(page, planet.id)).zoom > skyPress.zoom,
-    `${planet.id}: the disabled sky press must not interrupt wheel motion`);
+  assert.deepEqual(await cameraPose(page, planet.id), skyPress,
+    `${planet.id}: a sky press must stop wheel motion immediately`);
   await page.mouse.up();
 
   await showInteractionPhase(page, "Reset during wheel zoom: no delayed motion");
@@ -1053,7 +1054,7 @@ async function proveWheelTakeover(page, planet, profile) {
     `${planet.id}: a new press must restore dragging after wheel cancellation`);
   await page.waitForTimeout(GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds + 20);
   await page.mouse.up();
-  return { bodyPressStopsWheel: true, skyPressLeavesWheelUnchanged: true,
+  return { bodyPressStopsWheel: true, skyPressStopsWheel: true,
     resetStopsWheel: true, heldWheelCancelsGrab: true };
 }
 
@@ -1100,12 +1101,17 @@ async function proveInteractionInterruptions(page, planet, profile) {
   const anchorScrollPixels = await wheelWithReceipt(page, -40);
   await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 80);
   const afterAnchorWheel = await cameraPose(page, planet.id);
+  const anchorInputKind = await page.evaluate(id =>
+    window[`__${id}`].camera.stats().dragInertia.wheelZoom.inputKind, planet.id);
+  const anchorSpeed = WHEEL_ZOOM_USE_SCROLL_DISTANCE && anchorInputKind === "wheel"
+    ? WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : WHEEL_ZOOM_SPEED_MULTIPLIER;
   const wheelZoomRatio = afterAnchorWheel.zoom / beforeAnchorWheel.zoom;
   // Camera publication rounds zoom to four decimal places on each frame.
   assert.ok(Math.abs(wheelZoomRatio - Math.exp(
     PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond *
-      WHEEL_ZOOM_SPEED_MULTIPLIER * PREPARED_WHEEL_ZOOM.intervalMilliseconds *
-      (WHEEL_ZOOM_USE_SCROLL_DISTANCE ? -anchorScrollPixels / 100 : 1))) < 0.002,
+      anchorSpeed * PREPARED_WHEEL_ZOOM.intervalMilliseconds *
+      (WHEEL_ZOOM_USE_SCROLL_DISTANCE
+        ? -anchorScrollPixels / 100 : 1))) < 0.002,
   `${planet.id}: shared wheel response drifted (ratio ${wheelZoomRatio})`);
   assert.notEqual(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
     `${planet.id}: off-centre wheel zoom must apply anchor rotation`);
