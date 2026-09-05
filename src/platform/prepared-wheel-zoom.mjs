@@ -1,8 +1,8 @@
 import { projectSphereDrag } from "./sphere-drag.mjs";
+import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../../site/runtime-policy.mjs";
 
-// Fixed by the isolated wheel-handler trace and its rendered frame sequence.
-// A wheel event selects a direction and extends one 200 ms motion interval;
-// event magnitude does not multiply the velocity.
+// Reference response from the isolated wheel-handler trace. The shared policy
+// adds scroll-distance sensitivity; disabling it restores the timed response.
 export const PREPARED_WHEEL_ZOOM = Object.freeze({
   schema: "cssearth-prepared-wheel-zoom@1",
   intervalMilliseconds: 200,
@@ -21,6 +21,8 @@ export function createPreparedWheelZoomControls({
   rotate,
   minimumZoom,
   maximumZoom,
+  speedMultiplier = WHEEL_ZOOM_SPEED_MULTIPLIER,
+  useScrollDistance = WHEEL_ZOOM_USE_SCROLL_DISTANCE,
   onError = null,
 }) {
   if (!(inputSurface instanceof HTMLElement) ||
@@ -28,6 +30,8 @@ export function createPreparedWheelZoomControls({
       typeof trackballMetrics !== "function" || typeof rotate !== "function" ||
       ![minimumZoom, maximumZoom].every(Number.isFinite) ||
       minimumZoom <= 0 || maximumZoom < minimumZoom ||
+      !Number.isFinite(speedMultiplier) || speedMultiplier <= 0 ||
+      typeof useScrollDistance !== "boolean" ||
       (onError !== null && typeof onError !== "function")) {
     throw new TypeError("Prepared wheel zoom controls are invalid.");
   }
@@ -49,6 +53,7 @@ export function createPreparedWheelZoomControls({
   let expiresAt = 0;
   let previousTimestamp = null;
   let anchor = null;
+  let targetZoom = null;
   let events = 0;
   let frames = 0;
 
@@ -58,9 +63,11 @@ export function createPreparedWheelZoomControls({
     previousTimestamp = null;
     direction = 0;
     anchor = null;
+    targetZoom = null;
   };
   const animate = timestamp => {
     if (previousTimestamp === null) previousTimestamp = timestamp;
+    const remaining = expiresAt - previousTimestamp;
     const elapsed = Math.max(0, Math.min(
       timestamp - previousTimestamp,
       expiresAt - previousTimestamp,
@@ -69,7 +76,9 @@ export function createPreparedWheelZoomControls({
     if (elapsed > 0 && direction !== 0) {
       const previousZoom = camera.state.zoom;
       const zoom = clamp(previousZoom * Math.exp(
-        direction * PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * elapsed,
+        useScrollDistance
+          ? Math.log(targetZoom / previousZoom) * Math.min(1, elapsed / remaining)
+          : direction * PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * speedMultiplier * elapsed,
       ), minimumZoom, maximumZoom);
       let rotation;
       if (anchor !== null && zoom !== previousZoom) {
@@ -104,9 +113,20 @@ export function createPreparedWheelZoomControls({
     }
   };
   const onWheel = event => {
-    if (!enabled || event.deltaY === 0 || event.defaultPrevented) return;
+    if (!enabled || !Number.isFinite(event.deltaY) || event.deltaY === 0 || event.defaultPrevented) return;
     event.preventDefault();
-    direction = -Math.sign(event.deltaY);
+    const nextDirection = -Math.sign(event.deltaY);
+    if (useScrollDistance) {
+      // Normalize browser units, not guessed device identities. A 100-pixel
+      // wheel step uses the reference interval; small trackpad deltas stay small.
+      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2
+        ? inputSurface.clientHeight || windowTarget.innerHeight || 800 : 1;
+      const origin = frame !== null && direction === nextDirection ? targetZoom : camera.state.zoom;
+      targetZoom = clamp(origin * Math.exp(-event.deltaY * unit / 100 *
+        PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * speedMultiplier *
+        PREPARED_WHEEL_ZOOM.intervalMilliseconds), minimumZoom, maximumZoom);
+    }
+    direction = nextDirection;
     expiresAt = event.timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds;
     anchor = { x:event.clientX, y:event.clientY };
     events += 1;

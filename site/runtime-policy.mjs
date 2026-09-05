@@ -4,6 +4,9 @@ export const MOBILE_VIEWPORT_QUERY =
   `(max-width: ${MOBILE_VIEWPORT_MAX}px), (orientation: portrait)`;
 export const MOBILE_TOUCH_ACTION = "pan-y";
 export const CANONICAL_PREPARED_IMAGE_DENSITY = 2;
+export const SKYBOX_DRAG_ENABLED = false;
+export const WHEEL_ZOOM_SPEED_MULTIPLIER = 4;
+export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
 
 export function automaticPlaybackPolicy({ sceneState, motionRequested, documentHidden, reducedMotion }) {
   const reason = sceneState !== "ready" ? "unavailable"
