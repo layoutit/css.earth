@@ -224,8 +224,8 @@ export const MUTATIONS = Object.freeze([
     id: "system-runtime-ring-scale-mars",
     description: "the runtime projects the third system ring (Mars) scaled by 1.15",
     file: "src/platform/heliocentric-view.mjs",
-    find: "        orbitSegments: projectRing(body.orbit.vertices),",
-    replace: "        orbitSegments: projectRing(plan.system.bodies.indexOf(body) === 2 ? body.orbit.vertices.map((vertex) => vertex.map((component) => component * 1.15)) : body.orbit.vertices), /* MUTATION system-runtime-ring-scale-mars */",
+    find: "        orbitSegments: projectRing(body.orbit.vertices, body.orbit.trail),",
+    replace: "        orbitSegments: projectRing(plan.system.bodies.indexOf(body) === 2 ? body.orbit.vertices.map((vertex) => vertex.map((component) => component * 1.15)) : body.orbit.vertices, body.orbit.trail), /* MUTATION system-runtime-ring-scale-mars */",
     prepare: [],
     served: { url: "/src/platform/heliocentric-view.mjs", marker: "MUTATION system-runtime-ring-scale-mars" },
     expect: /orbit-(shape|ratio|axis-backprojected)-mars|marker-on-orbit-mars/u,
@@ -240,6 +240,66 @@ export const MUTATIONS = Object.freeze([
     prepare: [],
     served: { url: "/src/platform/heliocentric-view.mjs", marker: "MUTATION system-runtime-marker-shift" },
     expect: /marker-(position|on-orbit)-/u,
+    suite: "system",
+  },
+  // The trail. Its direction is prepared (the weights fade against the
+  // direction of motion) and its extent is enforced at projection.
+  // (A prepare-time inversion is refused by the trail validator before it
+  // reaches the screen, so the direction is attacked at projection.)
+  {
+    id: "trail-inverted",
+    description: "the runtime mirrors the trail weights so the line leads the body instead of trailing it",
+    file: "src/platform/heliocentric-view.mjs",
+    find: "      const weight = trail[index];\n      if (!(weight > 0)) continue;",
+    replace: "      const weight = trail[trail.length - 1 - index]; /* MUTATION trail-inverted */\n      if (!(weight > 0)) continue;",
+    prepare: [],
+    served: { url: "/src/platform/heliocentric-view.mjs", marker: "MUTATION trail-inverted" },
+    expect: /trail-(behind-body|absent-ahead)-/u,
+    suite: "system",
+  },
+  {
+    id: "trail-full-loop",
+    description: "the runtime projects every chord at full strength (closed loops again)",
+    file: "src/platform/heliocentric-view.mjs",
+    find: "      const weight = trail[index];\n      if (!(weight > 0)) continue;",
+    replace: "      const weight = 1; /* MUTATION trail-full-loop */",
+    prepare: [],
+    served: { url: "/src/platform/heliocentric-view.mjs", marker: "MUTATION trail-full-loop" },
+    expect: /trail-absent-ahead-|trail-fades-backwards-/u,
+    suite: "system",
+  },
+  // Phase and brightness on the markers.
+  {
+    id: "phase-lit-away",
+    description: "every marker's phase overlay is rolled 180 degrees (lit side away from the Sun)",
+    file: "src/platform/heliocentric-view-runtime.mjs",
+    find: "            180 / Math.PI - phaseAtlas.baseLightAzimuthDegrees) * 4) / 4;",
+    replace: "            180 / Math.PI - phaseAtlas.baseLightAzimuthDegrees + 180) * 4) / 4; /* MUTATION phase-lit-away */",
+    prepare: [],
+    served: { url: "/src/platform/heliocentric-view-runtime.mjs", marker: "MUTATION phase-lit-away" },
+    expect: /phase-darkening-away-from-sun-/u,
+    suite: "system",
+  },
+  {
+    id: "phase-inverted-vantage",
+    description: "phase angles prepared from the far side (Jupiter shows a crescent from Mercury)",
+    file: "src/platform/prepare-planetary-system.mjs",
+    find: "    const toObserver = scale(position, -1);",
+    replace: "    const toObserver = position; /* MUTATION phase-inverted-vantage */",
+    prepare: SCENE_PREPARE,
+    served: { url: "/src/planets/mercury/runtime/preparedScene.mjs", changed: true },
+    expect: /no-crescent-beyond-venus|phase-fraction-matches-oracle-/u,
+    suite: "system",
+  },
+  {
+    id: "brightness-flat",
+    description: "every marker prepared at full brightness (stickers of one intensity)",
+    file: "src/platform/prepare-planetary-system.mjs",
+    find: "        markerOpacity: markerOpacityForMagnitudes(magnitudesBelowBrightest),",
+    replace: "        markerOpacity: 1, /* MUTATION brightness-flat */",
+    prepare: SCENE_PREPARE,
+    served: { url: "/src/planets/mercury/runtime/preparedScene.mjs", changed: true },
+    expect: /marker-brightness-follows-flux/u,
     suite: "system",
   },
   {
@@ -334,7 +394,8 @@ try {
   for (const suite of suitesInPlay) {
     const baseline = await runSuite(baseUrl, suite);
     if (!baseline.ok) {
-      throw new Error(`Baseline ${suite} suite is not green: ${baseline.failed.join(", ")}`);
+      throw new Error(`Baseline ${suite} suite is not green: ${baseline.failed.join(", ")}` +
+        (baseline.crashed ? `\n${baseline.crashed}` : ""));
     }
     console.log(`baseline ${suite}: green (${baseline.checks.length} checks)`);
   }
@@ -348,15 +409,32 @@ try {
     let outcome;
     try {
       applyMutation(mutation);
-      for (const step of mutation.prepare) await runPreparation(step);
-      await waitForServed(baseUrl, mutation, baselineServed);
-      const run = await runSuite(baseUrl, mutation.suite ?? "lighting");
-      const tripped = run.failed.filter((id) => mutation.expect.test(id));
-      const status = run.ok
-        ? "SURVIVED"
-        : tripped.length > 0 ? "caught" : "red-for-other-reasons";
-      outcome = { id: mutation.id, status, failed: run.failed, tripped,
-        crashed: run.crashed ?? null };
+      let prepared = true;
+      let preparationError = null;
+      for (const step of mutation.prepare) {
+        try {
+          await runPreparation(step);
+        } catch (error) {
+          // A preparation that refuses the mutation never reaches the
+          // screen: not a suite verdict, and not a gate crash either.
+          prepared = false;
+          preparationError = error.message;
+          break;
+        }
+      }
+      if (!prepared) {
+        outcome = { id: mutation.id, status: "refused-by-preparation", failed: [], tripped: [],
+          crashed: preparationError };
+      } else {
+        await waitForServed(baseUrl, mutation, baselineServed);
+        const run = await runSuite(baseUrl, mutation.suite ?? "lighting");
+        const tripped = run.failed.filter((id) => mutation.expect.test(id));
+        const status = run.ok
+          ? "SURVIVED"
+          : tripped.length > 0 ? "caught" : "red-for-other-reasons";
+        outcome = { id: mutation.id, status, failed: run.failed, tripped,
+          crashed: run.crashed ?? null };
+      }
     } finally {
       restore(mutation.file);
       if (mutation.prepare.length > 0) for (const path of PREPARED_OUTPUTS) restore(path);

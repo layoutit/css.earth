@@ -165,7 +165,7 @@ html[data-ready="true"] .mercury-input-surface {
 .mercury-material-root {
   --mercury-disc-size: 460px;
   --mercury-billboard-opacity: 0;
-  z-index: 1;
+  z-index: 3;
 }
 
 /* Level of detail (the stage is `data-lod` on the stage element, the
@@ -196,7 +196,12 @@ html[data-ready="true"] .mercury-input-surface {
   visibility: hidden;
 }
 
-.planet-stage[data-lod="marker"] .mercury-material-root {
+/* At the marker stage the flat disc gives way to the navigation sprite, but
+   the lighting overlay stays alive over it (floored to the sprite's size by
+   the runtime) so the marker keeps the phase and never steps up to a fully
+   lit sprite brighter than the body it replaces. The material root paints
+   above the orbit overlay for that reason. */
+.planet-stage[data-lod="marker"] .mercury-billboard {
   visibility: hidden;
 }
 

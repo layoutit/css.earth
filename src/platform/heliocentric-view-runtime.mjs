@@ -45,9 +45,11 @@ export function mountRetainedHeliocentricView({
   const system = plan.system ?? null;
   if (system !== null && (typeof systemMarkers?.url !== "string" ||
       !validSprite(systemMarkers.sun) ||
-      system.bodies.some((body) => !validSprite(systemMarkers.bodies?.[body.id])))) {
-    throw new TypeError("A prepared planetary system needs a marker sprite for the Sun and every body.");
+      system.bodies.some((body) => !validSprite(systemMarkers.bodies?.[body.id])) ||
+      !validPhaseAtlas(systemMarkers.phase))) {
+    throw new TypeError("A prepared planetary system needs a marker sprite for the Sun and every body, and the phase atlas.");
   }
+  const phaseAtlas = system === null ? null : systemMarkers.phase;
   const document = host.ownerDocument;
   const sunRoot = document.createElement("div");
   sunRoot.className =
@@ -100,6 +102,8 @@ export function mountRetainedHeliocentricView({
   systemGroup.className = `planet-heliocentric-system ${objectId}-planetary-system`;
   const systemPieces = [];
   const systemMarkerElements = new Map();
+  const systemPhaseElements = new Map();
+  const publishedPhaseRolls = new Map();
   let systemPoolSize = 0;
   if (system !== null) {
     systemPoolSize = system.bodies.reduce(
@@ -120,9 +124,26 @@ export function mountRetainedHeliocentricView({
         `planet-heliocentric-system-marker ${objectId}-system-marker`;
       element.dataset.body = body.id;
       applySprite(element, { ...systemMarkers.bodies[body.id], url: systemMarkers.url });
+      // Brightness: the prepared flux as opacity, so Venus is brilliant and
+      // Neptune sits on the floor; the group's opacity fades them together.
+      element.style.opacity = String(body.illumination.markerOpacity);
       element.style.visibility = "hidden";
+      // Phase: the object's own billboard lighting atlas, the frame chosen
+      // once from the prepared light depth, scaled to the marker and rolled
+      // every publication so its lit side faces the Sun on screen.
+      const phase = document.createElement("s");
+      phase.className = "planet-heliocentric-marker-phase";
+      const frame = phaseFrameFor(phaseAtlas, body.illumination.lightViewZ);
+      const size = systemMarkers.bodies[body.id].size;
+      phase.style.backgroundImage = `url("${phaseAtlas.url}")`;
+      phase.style.backgroundSize = `${phaseAtlas.columns * size}px ${phaseAtlas.rowCount * size}px`;
+      phase.style.backgroundPosition = `${-(frame % phaseAtlas.columns) * size}px ` +
+        `${-Math.floor(frame / phaseAtlas.columns) * size}px`;
+      phase.dataset.frame = String(frame);
+      element.appendChild(phase);
       systemGroup.appendChild(element);
       systemMarkerElements.set(body.id, element);
+      systemPhaseElements.set(body.id, { element: phase, frame });
     }
     systemGroup.style.opacity = "0";
     overlay.appendChild(systemGroup);
@@ -258,6 +279,11 @@ export function mountRetainedHeliocentricView({
               classification: body.marker.classification,
               screen: body.marker.screen,
               orbitPieceCount: body.orbitSegments.length,
+              illumination: Object.freeze({
+                ...system.bodies.find(({ id }) => id === body.id).illumination,
+                phaseFrame: systemPhaseElements.get(body.id).frame,
+                phaseRollDegrees: publishedPhaseRolls.get(body.id) ?? null,
+              }),
             }))),
           sunMarkerOpacity,
           sunMarkerVisible: !publishedSunMarkerHidden,
@@ -338,6 +364,18 @@ export function mountRetainedHeliocentricView({
           element.style.transform = transform;
           publishedSystemMarkerTransforms.set(body.id, transform);
         }
+        // The lit side faces the Sun: the atlas lights from screen right
+        // at zero roll, so the roll is the Sun's on-screen direction from
+        // the marker (y up, as the object's own overlay measures it).
+        const sunScreen = projection.sun.screen ?? null;
+        if (sunScreen !== null) {
+          const roll = Math.round((Math.atan2(-(sunScreen[1] - state.screen[1]), sunScreen[0] - state.screen[0]) *
+            180 / Math.PI - phaseAtlas.baseLightAzimuthDegrees) * 4) / 4;
+          if (publishedPhaseRolls.get(body.id) !== roll) {
+            systemPhaseElements.get(body.id).element.style.transform = `rotate(${roll}deg)`;
+            publishedPhaseRolls.set(body.id, roll);
+          }
+        }
       }
       setMarkerHidden(body.id, element, !state.visible);
     }
@@ -382,7 +420,7 @@ export function mountRetainedHeliocentricView({
 function writePieces(pool, segments, previousCount) {
   const count = Math.min(segments.length, pool.length);
   for (let index = 0; index < count; index += 1) {
-    const [x0, y0, x1, y1] = segments[index];
+    const [x0, y0, x1, y1, weight] = segments[index];
     const dx = x1 - x0;
     const dy = y1 - y0;
     const length = Math.hypot(dx, dy);
@@ -390,12 +428,35 @@ function writePieces(pool, segments, previousCount) {
     piece.style.transform = `matrix(${formatNumber(dx)},${formatNumber(dy)},${
       formatNumber(-dy / length)},${formatNumber(dx / length)},${
       formatNumber(x0)},${formatNumber(y0)})`;
+    // The chord's trail weight: the line fades backwards from the body.
+    const opacity = formatNumber(weight);
+    if (piece.style.opacity !== opacity) piece.style.opacity = opacity;
     if (piece.style.visibility !== "") piece.style.visibility = "";
   }
   for (let index = count; index < previousCount; index += 1) {
     pool[index].style.visibility = "hidden";
   }
   return { count, overflowed: segments.length > pool.length };
+}
+
+// The lighting atlas: a grid of frames indexed by the light's view depth,
+// lit from `baseLightAzimuthDegrees` at zero roll.
+function validPhaseAtlas(atlas) {
+  return typeof atlas?.url === "string" && Number.isSafeInteger(atlas.columns) && atlas.columns > 0 &&
+    Number.isSafeInteger(atlas.rowCount) && atlas.rowCount > 0 &&
+    Number.isSafeInteger(atlas.frameCount) && atlas.frameCount > 1 &&
+    atlas.frameCount <= atlas.columns * atlas.rowCount &&
+    Number.isFinite(atlas.minimumLightViewZ) && Number.isFinite(atlas.maximumLightViewZ) &&
+    atlas.maximumLightViewZ > atlas.minimumLightViewZ &&
+    Number.isFinite(atlas.baseLightAzimuthDegrees);
+}
+
+// The same frame choice as the object's own overlay: the light's view depth
+// mapped across the atlas's range.
+function phaseFrameFor(atlas, lightViewZ) {
+  return Math.round(Math.max(0, Math.min(1,
+    (lightViewZ - atlas.minimumLightViewZ) / (atlas.maximumLightViewZ - atlas.minimumLightViewZ))) *
+    (atlas.frameCount - 1));
 }
 
 function validSprite(sprite) {

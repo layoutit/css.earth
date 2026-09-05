@@ -84,9 +84,9 @@ try {
     // Sky faces, the Sun billboard, the perspective camera with its body and
     // interior, the billboard disc and the material overlay, and the orbit
     // overlay's piece pool and body marker (2242), plus the planetary
-    // system's group, its 896 orbit pieces, seven planet markers and the
-    // Sun marker (905).
-    stageElements: 3147,
+    // system's group, its 896 orbit pieces, seven planet markers with their
+    // phase overlays, and the Sun marker (912).
+    stageElements: 3154,
     cameraCount: 1,
     skyboxFaceCount: 6,
     sunCount: 1,
@@ -133,7 +133,7 @@ try {
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
     viewBank: { interiorMounted: window.__mercury.dom.interiorMounted, retainedInteriorNodeCount: window.__mercury.dom.retainedInteriorNodeCount },
   })), {
-    elements: 3147,
+    elements: 3154,
     interiorLeaves: 446,
     viewBank: {
       interiorMounted: true,
@@ -624,6 +624,9 @@ try {
         overlayVisibility: getComputedStyle(
           document.querySelector(".mercury-material-root"),
         ).visibility,
+        discVisibility: getComputedStyle(
+          document.querySelector(".mercury-billboard"),
+        ).visibility,
         materialImage: document.querySelector(".mercury-material")
           .style.backgroundImage,
         materialFrame: sky.materialFrame,
@@ -642,13 +645,16 @@ try {
   for (const sample of lodLadder) {
     assert.equal(sample.datasetLod, sample.stage);
     assert.equal(sample.stable, true);
-    assert.equal(sample.elements, 3147);
+    assert.equal(sample.elements, 3154);
     assert.equal(sample.materialFrame, lodLadder[0].materialFrame);
     assert.ok(Math.abs(sample.billboardStyleOpacity - sample.billboardOpacity) <
       1e-6);
     assert.equal(sample.sceneVisibility,
       ["billboard", "marker"].includes(sample.stage) ? "hidden" : "visible");
-    assert.equal(sample.overlayVisibility,
+    // The lighting overlay stays alive at every stage (over the marker at
+    // the far stage, floored to its size); the flat disc hides there.
+    assert.equal(sample.overlayVisibility, "visible");
+    assert.equal(sample.discVisibility,
       sample.stage === "marker" ? "hidden" : "visible");
     assert.equal(sample.rowStreaming, sample.stage === "geometry");
     assert.match(sample.materialImage, sample.stage === "geometry"
@@ -695,7 +701,8 @@ try {
   assert.equal(farSystem.nearPieces, 0);
   assert.equal(farSystem.farOpacity, 1);
   assert.equal(farSystem.groupOpacity, "1");
-  assert.ok(farSystem.farPieces > 600, `system pieces ${farSystem.farPieces}`);
+  // Trails: about half of each ring's chords, minus those clipped away.
+  assert.ok(farSystem.farPieces > 300 && farSystem.farPieces <= 420, `system pieces ${farSystem.farPieces}`);
   assert.equal(farSystem.farMarkers, 7);
   assert.deepEqual(farSystem.farBodies, ["venus:true", "earth:true", "mars:true",
     "jupiter:true", "saturn:true", "uranus:true", "neptune:true"]);
@@ -704,7 +711,7 @@ try {
     `far bound ${farSystem.maximumDistanceAu} au`);
   assert.ok(farSystem.wheelNotches > 20 && farSystem.wheelNotches < 40);
   assert.equal(farSystem.stable, true);
-  assert.equal(farSystem.elements, 3147);
+  assert.equal(farSystem.elements, 3154);
 
   // Back in close: the row cache resumes on the retained rows.
   assert.equal(await page.evaluate(() => {
@@ -720,7 +727,7 @@ try {
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.childElementCount), baseline.stageChildren);
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-    stage.querySelectorAll("*").length), 3147);
+    stage.querySelectorAll("*").length), 3154);
   assert.equal(await page.evaluate(() =>
     window.__mercury.assertStableDomIdentity()), true);
   assert.deepEqual(externalRequests, []);

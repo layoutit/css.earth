@@ -1,11 +1,15 @@
 import { createPreparedProjectiveTextureLeaf } from "../../../platform/prepared-projective-texture-leaf.mjs";
 import { registerBodyDependentLayers } from "../../../platform/body-layer-registration.mjs";
 import { canonicalPreparedAsset as canonicalPreparedUrl } from "../../../platform/prepared-object-assets.mjs";
+import { PREPARED_NAVIGATION_MARKERS } from "../../../../site/prepared-navigation-markers.mjs";
 import { PREPARED_MERCURY_SCENE } from "./preparedScene.mjs";
 import { PREPARED_MERCURY_ASSETS } from "./preparedAssets.mjs";
 import { PREPARED_MERCURY_LENSES } from "./preparedLenses.mjs";
 import { BILLBOARD_LIGHTING_KEY, billboardLighting, materialBank, materialFrameFor, materialSourceFor } from "./material.mjs";
 const GEOMETRY_LEVEL_OF_DETAIL = Object.freeze({ stage: "geometry", silhouetteDiameter: null, billboardOpacity: 0, markerOpacity: 0 });
+// The lighting overlay never shrinks below the marker it lights at the far
+// stage: the sprite is a size floor, and the overlay's phase must cover it.
+const MARKER_RADIUS = PREPARED_NAVIGATION_MARKERS.mercury.presentation.size / 2;
 export function createPresentation(stage, context) {
   const document = stage.ownerDocument;
   const shadowlessPresentation = materialBank.presentations.at(-1);
@@ -107,10 +111,12 @@ export function createPresentation(stage, context) {
       if (silhouette) {
         const unitScale = 2 * PREPARED_MERCURY_SCENE.camera.defaultZoom / PREPARED_MERCURY_SCENE.camera.logicalBodyDiameter;
         const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
+        const radial = Math.max(silhouette.radialSemiAxis, MARKER_RADIUS);
+        const tangential = Math.max(silhouette.tangentialSemiAxis, MARKER_RADIUS);
         materialRoot.style.transform =
           `translate(${formatNumber(silhouette.centre[0])}px, ${formatNumber(silhouette.centre[1])}px) ` +
           `rotate(${formatNumber(radialAngle)}deg) ` +
-          `scale(${formatNumber(silhouette.radialSemiAxis * unitScale)}, ${formatNumber(silhouette.tangentialSemiAxis * unitScale)}) ` +
+          `scale(${formatNumber(radial * unitScale)}, ${formatNumber(tangential * unitScale)}) ` +
           `rotate(${formatNumber(-radialAngle)}deg)`;
       }
       // Level of detail from the camera's published stage: the coarser stage

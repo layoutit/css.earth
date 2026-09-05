@@ -49,6 +49,7 @@ export function validatePreparedHeliocentricView(plan) {
       plan.orbit.vertexCount !== plan.orbit.vertices.length ||
       !plan.orbit.vertices.every(vector) ||
       plan.orbit.vertices[0].some((component) => component !== 0) ||
+      !validTrail(plan.orbit.trail, plan.orbit.vertexCount) ||
       plan.runtimeGeometryDerivation !== false) {
     throw new TypeError("Prepared heliocentric view is incompatible.");
   }
@@ -75,6 +76,8 @@ export function validatePreparedPlanetarySystem(system, plan) {
         !Array.isArray(body.orbit.vertices) || body.orbit.vertices.length < 8 ||
         body.orbit.vertexCount !== body.orbit.vertices.length ||
         !body.orbit.vertices.every(vector) ||
+        !validTrail(body.orbit.trail, body.orbit.vertexCount) ||
+        !validIllumination(body.illumination) ||
         body.orbit.vertices[0].some((component, index) => component !== body.position[index])) ||
       new Set(system.bodies.map((body) => body.id)).size !== system.bodies.length ||
       system.runtimeGeometryDerivation !== false) {
@@ -218,10 +221,15 @@ export function projectHeliocentricView(plan, {
   // The orbit: each chord of the prepared ring, near-clipped, frustum-clipped
   // and cut where the body hides it, as screen-space segments.
   const hidden = (eye) => rayHitsSphereBefore(eye, bodyCenter, bodyRadius);
-  const projectRing = (vertices) => {
+  // Only the trailing chords (weight above zero) are projected; each segment
+  // carries its chord's trail weight as its opacity, so the line fades
+  // backwards from the body and the leading half of the orbit is never drawn.
+  const projectRing = (vertices, trail) => {
     const eyes = vertices.map(toEye);
     const segments = [];
     for (let index = 0; index < eyes.length; index += 1) {
+      const weight = trail[index];
+      if (!(weight > 0)) continue;
       let start = eyes[index];
       let end = eyes[(index + 1) % eyes.length];
       let startDepth = depthOf(start);
@@ -258,12 +266,12 @@ export function projectHeliocentricView(plan, {
         if (!Number.isFinite(x0) || !Number.isFinite(y0) ||
             !Number.isFinite(x1) || !Number.isFinite(y1)) continue;
         if (Math.hypot(x1 - x0, y1 - y0) < 0.05) continue;
-        segments.push(Object.freeze([x0, y0, x1, y1]));
+        segments.push(Object.freeze([x0, y0, x1, y1, weight]));
       }
     }
     return Object.freeze(segments);
   };
-  const segments = projectRing(plan.orbit.vertices);
+  const segments = projectRing(plan.orbit.vertices, plan.orbit.trail);
 
   // A point in the scene as a screen-space billboard: where it lands, and
   // whether it is in front of the camera, inside the viewport and not behind
@@ -294,7 +302,7 @@ export function projectHeliocentricView(plan, {
       bodies: Object.freeze(plan.system.bodies.map((body) => Object.freeze({
         id: body.id,
         marker: projectPoint(body.position),
-        orbitSegments: projectRing(body.orbit.vertices),
+        orbitSegments: projectRing(body.orbit.vertices, body.orbit.trail),
       }))),
     });
   }
@@ -538,6 +546,26 @@ export function positive(value) {
 function vector(value) {
   return Array.isArray(value) && value.length === 3 &&
     value.every(Number.isFinite);
+}
+
+// Prepared illumination from the observer's vantage: a phase, the light's
+// view depth for the lighting atlas, and the marker's brightness as opacity.
+function validIllumination(illumination) {
+  return Number.isFinite(illumination?.phaseAngleDegrees) &&
+    illumination.phaseAngleDegrees >= 0 && illumination.phaseAngleDegrees <= 180 &&
+    Number.isFinite(illumination.illuminatedFraction) &&
+    illumination.illuminatedFraction >= 0 && illumination.illuminatedFraction <= 1 &&
+    Number.isFinite(illumination.lightViewZ) && Math.abs(illumination.lightViewZ) <= 1 &&
+    positive(illumination.markerOpacity) && illumination.markerOpacity <= 1;
+}
+
+// One weight per chord, each in [0, 1], the last chord (the one returning
+// to the body) at full strength and at least one chord weightless: a trail,
+// never a closed loop.
+function validTrail(trail, vertexCount) {
+  return Array.isArray(trail) && trail.length === vertexCount &&
+    trail.every((weight) => Number.isFinite(weight) && weight >= 0 && weight <= 1) &&
+    trail[trail.length - 1] > 0.9 && trail.some((weight) => weight === 0);
 }
 
 function unit(value) {

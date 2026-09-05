@@ -30,6 +30,29 @@ const UNIFORM_ORBIT_SEGMENTS = 360;
 // straight through the body as the camera closes in on it.
 const LOCAL_REFINEMENT_HALVINGS = 8;
 
+// The orbit is drawn as the path just travelled, not a closed loop: full
+// strength at the body, fading backwards along the direction the body came
+// from, gone half an orbit behind it. With vertices in the direction of
+// motion at eccentric-anomaly offsets `offsets` ahead of the body (offset 0
+// is the body, the last chord returns to it), a chord whose mid-offset is
+// `delta` lies `2pi - delta` behind the body; its weight is linear in that
+// angle, one at the body and zero at pi. Chords ahead of the body weigh
+// nothing and are never projected.
+export const ORBIT_TRAIL_MODEL = "trailing-half-orbit-linear-fade";
+
+export function orbitTrailWeights(offsets) {
+  if (!Array.isArray(offsets) || offsets.length < 2 || offsets[0] !== 0 ||
+      offsets.some((offset, index) => index > 0 && !(offset > offsets[index - 1])) ||
+      !(offsets[offsets.length - 1] < 2 * Math.PI)) {
+    throw new TypeError("Orbit trail offsets must ascend from zero within one turn.");
+  }
+  return Object.freeze(offsets.map((offset, index) => {
+    const next = index + 1 < offsets.length ? offsets[index + 1] : 2 * Math.PI;
+    const behind = 2 * Math.PI - (offset + next) / 2;
+    return Number(Math.max(0, Math.min(1, 1 - behind / Math.PI)).toFixed(6));
+  }));
+}
+
 export function prepareHeliocentricView({
   bodyId,
   presentationFrame,
@@ -115,10 +138,12 @@ export function prepareHeliocentricView({
     offsets.add(local);
     offsets.add(2 * Math.PI - local);
   }
-  const vertices = [...offsets].sort((a, b) => a - b).map((offset, index) =>
+  const sortedOffsets = [...offsets].sort((a, b) => a - b);
+  const vertices = sortedOffsets.map((offset, index) =>
     index === 0
       ? Object.freeze([0, 0, 0])
       : Object.freeze(pointAt(bodyEccentricAnomaly + offset).map(round)));
+  const trail = orbitTrailWeights(sortedOffsets);
   const maximumExtentUnits = vertices.reduce(
     (extent, vertex) => Math.max(extent, magnitude(vertex)),
     0,
@@ -169,6 +194,9 @@ export function prepareHeliocentricView({
       // Closed ring, in the direction of motion, vertex 0 exactly at the body.
       vertices: Object.freeze(vertices),
       vertexCount: vertices.length,
+      // The trail: one weight per chord (chord k joins vertex k to k + 1).
+      trail,
+      trailModel: ORBIT_TRAIL_MODEL,
       uniformSegments: UNIFORM_ORBIT_SEGMENTS,
       localRefinementHalvings: LOCAL_REFINEMENT_HALVINGS,
       maximumExtentUnits,
