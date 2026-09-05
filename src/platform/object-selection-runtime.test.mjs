@@ -7,6 +7,7 @@ import { mountPreparedPresentation } from "./prepared-presentation.mjs";
 import { runtimeDefinition as earthDefinition } from "../planets/earth/runtime/definition.mjs";
 import { runtimeDefinition as saturnDefinition } from "../planets/saturn/runtime/definition.mjs";
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
+import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mjs";
 
 const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
@@ -34,9 +35,10 @@ function harness({ onTicket } = {}) {
   function view(row, withinRow = 0) {
     const track = definition.materials[1], frame = 20 + row * 32 + withinRow;
     const z = frame / (track.frame.count - 1) * 2 - 1;
+    const direction = [Math.sqrt(1 - z * z), 0, z];
     const next = { controlPitch: 37, controlYaw: 10, zoom: definition.camera.defaultZoom,
       revision: ++revision, sceneMatrix: matrix, counterRotation: matrix, counterRotationFor: () => matrix,
-      sunViewDirection: [Math.sqrt(1 - z * z), 0, z], skySunViewDirection: [Math.sqrt(1 - z * z), 0, z] };
+      sunViewDirection: direction, skySunViewDirection: viewSunDirectionToPreparedLightDirection(direction) };
     next.reference = currentView?.reference ?? next; currentView = next; coordinator.setView(next); return next;
   }
   view(0); const initialReady = coordinator.start();

@@ -80,14 +80,16 @@ export async function prepareEarthPresentation() {
   const {tree,index}=b.finish({camera,scene,registrations:[{bodySystem:system,lightingOverlays:[materialCounter]}]});
   const tracks=["lighting","atmosphere"].map(id=>{
     const material=plan.material[id],address=(frame,resource,frameIndex=null,row=null)=>({resource,frame:frameIndex,row,backgroundPosition:frame.backgroundPosition,backgroundSize:frame.backgroundSize});
-    return {id,target:index(materialNodes[id]),frame:{source:"sun-z",minimum:-1,maximum:1,count:material.frameCount,baseFrame:0,remap:null},
-      defaultPose:[{source:"frame",scale:-65/(material.frameCount-1),offset:65,value:material.defaultScenePitchDegrees,epsilon:0.01}],
+    const illumination=material.illumination;
+    return {id,target:index(materialNodes[id]),frame:{source:illumination?"prepared-light-z":"sun-z",minimum:illumination?.minimumLightViewZ??-1,maximum:illumination?.maximumLightViewZ??1,count:material.frameCount,baseFrame:0,remap:null},
+      defaultPose:illumination?[]:[{source:"frame",scale:-65/(material.frameCount-1),offset:65,value:material.defaultScenePitchDegrees,epsilon:0.01}],
       banks:[{id,frames:material.frames.map(frame=>address(frame,`${id}:${frame.rowIndex}`,frame.frameIndex,frame.rowIndex)),
         default:address(material.defaultPresentation,`default:${id}`),fixed:id==="lighting"?address(material.shadowlessPresentation,"shadowless:lighting"):null,
         rows:material.preparedRows.map((_,row)=>({row,resource:`${id}:${row}`,firstFrame:row*material.framesPerShard,lastFrame:Math.min(material.frameCount-1,(row+1)*material.framesPerShard-1)}))}],
       demand:{mode:"visible-directional",prewarm:"symmetric",capacity:material.transport.maximumRetainedRowCount,framesPerRow:material.framesPerShard,
         defaultFrame:material.defaultFrame,defaultRow:material.transport.defaultRow,initialRows:material.transport.initialWarmRows,holdHiddenNeighborhood:false,fallback:"hold"},
-      rotation:{kind:"planar",source:"view-sun",reference:"initial",baseDegrees:0,zeroAtPole:false,polePolicy:"azimuth",width:material.presentationTileSize,height:material.presentationTileSize},
+      rotation:{kind:"planar",source:illumination?"prepared-light":"view-sun",reference:illumination?"prepared":"initial",baseDegrees:illumination?.baseLightAzimuthDegrees??0,
+        zeroAtPole:!!illumination,...(illumination?{publishWithAddress:true}:{polePolicy:"azimuth"}),width:material.presentationTileSize,height:material.presentationTileSize},
       frameAttribute:null,modeAttribute:null,quoted:true};
   });
   const variants=lenses.controls.flatMap(lens=>[false,true].flatMap(shadows=>[false,true].map(atmosphere=>{
@@ -100,7 +102,7 @@ export async function prepareEarthPresentation() {
         {kind:"attribute",target:-1,name:"data-view",value:isInterior?"interior":null},
         {kind:"attribute",target:-1,name:"data-lens",value:isInterior?null:lens.id},
         {kind:"class",target:-1,name:"earth-hide-atmosphere",value:!atmosphere}],
-      materials:tracks.map(track=>({track:track.id,bank:track.id,mode:track.id==="lighting"&&!shadows?"fixed":"default-pose",
+      materials:tracks.map(track=>({track:track.id,bank:track.id,mode:track.id==="lighting"&&!shadows?"fixed":plan.material[track.id].illumination?"frames":"default-pose",
         enabled:!isInterior&&(track.id==="lighting"?shadows&&lens.id!=="night-lights":atmosphere),rotationEnabled:track.id!=="lighting"||shadows,
         frameOverride:null,clearWhenHidden:false,fixedMode:"shadowless",publishWhenHidden:"static",
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
@@ -109,7 +111,7 @@ export async function prepareEarthPresentation() {
     destinations:{catalog,defaultLens:"normal",statuses:{detail:"WorldCover imagery · 2021. Source gaps retain the Earth base map.",overview:"Earth overview. WorldCover detail is unavailable at this location."}},
     assets:{entries,pools:[preparedResourcePool("mounted",entries,{concurrency:2}),preparedResourcePool("default-materials",entries,{retention:"warm"}),
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2}),
-      ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:120,decoding:"sync"}))],
+      ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
       startup:[...celestial.map(entry=>entry.key),...pageKeys(lenses.controls.find(lens=>lens.id===lenses.defaultLens)),"poles:normal","shadowless:lighting","default:lighting","default:atmosphere",
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
     tree,variants,materials:tracks,viewBindings:[materialCounter,cutawayCounter].map(node=>({kind:"counter-rotation",target:index(node),systemTransform:null})),animations:[],
@@ -117,7 +119,8 @@ export async function prepareEarthPresentation() {
     pageLayers:[{id:"city",plan:PREPARED_EARTH_CITY_PAGES,lensIds:["normal","buenos-aires-noise"]},{id:"noise",plan:PREPARED_EARTH_NOISE,lensIds:["buenos-aires-noise"]}]
       .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:"/scenes/earth/"},carrier:index(body.surface[0]),system:index(system),className:"earth-city-page",textureClassName:"earth-api-texture"})),
     observations:{constants:{dom:{interiorMounted:true}},counts:[{category:"dom",name:"interiorLeafCount",target:index(cutaway),kind:"leaves",includeRoot:false}],
-      materials:[{category:"material",name:"materialFrame",track:"lighting",field:"frame"}],
+      materials:[{category:"material",name:"materialFrame",track:"lighting",field:"frame"},
+        {category:"material",name:"atmosphereLightRollDegrees",track:"atmosphere",field:"lightRollDegrees"}],
       attributes:tracks.map(track=>({category:"material",name:track.id,target:track.target,attribute:"data-material-frame",default:null})),
       sums:["material","camera"].map(category=>({category,name:"materialAddressWrites",tracks:tracks.map(track=>track.id),field:"addressWrites",includePresentation:false}))}};
 }
