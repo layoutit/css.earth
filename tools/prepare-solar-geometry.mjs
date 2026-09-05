@@ -9,19 +9,19 @@
 //
 // Positions and velocities come from VSOP87A (heliocentric rectangular, J2000
 // ecliptic, rotated to ICRF) and orientations from the IAU/WGCCRE rotation
-// elements, both provided by the galaxio astronomy package. The orbit normal
+// elements, both provided by the vendored astronomy package
+// (packages/astronomy, consumed through its own build; see
+// src/platform/astronomy-package.mjs). The orbit normal
 // is the specific angular momentum direction of the state vector,
 // normalize(r x v): no orbital elements are involved, and its angle to the
 // ecliptic pole reproduces the tabulated inclinations (Earth's, which defines
 // the ecliptic, comes out at 0.003 degrees). Regenerating requires that
-// package; building cssEarth does not, because the computed vectors are
-// checked in.
+// package's build (`pnpm prepare:solar-geometry` builds it first); building
+// cssEarth does not, because the computed vectors are checked in.
 
 import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-
-const ASTRONOMY_URL = process.env.GALAXIO_ASTRONOMY_URL ??
-  "/Users/apresmoi/Documents/galaxio/packages/astronomy/dist/index.js";
+import { loadAstronomyPackage } from "../src/platform/astronomy-package.mjs";
 
 // 2026-09-04T00:00:00 TT.
 const EPOCH_JD_TT = 2461286.5;
@@ -50,13 +50,7 @@ const {
   bodyFixedToIcrf,
   OBLIQUITY_J2000_RAD,
   BODIES: ASTRONOMY_BODY_DATA,
-} = await import(ASTRONOMY_URL).catch((cause) => {
-  throw new Error(
-    `Solar geometry regeneration needs the galaxio astronomy build at ` +
-      `${ASTRONOMY_URL}. Set GALAXIO_ASTRONOMY_URL to override.`,
-    { cause },
-  );
-});
+} = await loadAstronomyPackage();
 
 // The J2000 ecliptic north pole in ICRF: the ICRF +z axis tilted by the
 // obliquity about +x.
@@ -71,7 +65,7 @@ const ASTRONOMICAL_UNIT_KILOMETERS = 149597870.7;
 
 // Gaussian gravitational constant k, historically used to define the
 // astronomical system of units: GM_sun = k^2 in AU^3/day^2 by construction
-// (Gauss, 1809; still the IAU-adopted value). The galaxio build exports the
+// (Gauss, 1809; still the IAU-adopted value). The astronomy build exports the
 // Sun's GM in km^3/s^2 instead (BODIES.sun.gravitationalParameterKm3PerS2 =
 // 132712440041.93938, JPL Horizons), which is not already in AU^3/day^2; but
 // converting it with the IAU 2012 AU (149597870.7 km) reproduces k^2 to
@@ -90,7 +84,7 @@ const GM_SUN_AU3_PER_DAY2 = GAUSSIAN_GRAVITATIONAL_CONSTANT ** 2;
     Math.abs(gmSunFromBuild - GM_SUN_AU3_PER_DAY2) / GM_SUN_AU3_PER_DAY2;
   if (relativeDifference > 1e-12) {
     throw new Error(
-      `Gaussian k^2 (${GM_SUN_AU3_PER_DAY2}) disagrees with the galaxio ` +
+      `Gaussian k^2 (${GM_SUN_AU3_PER_DAY2}) disagrees with the astronomy ` +
         `build's Sun GM converted to AU^3/day^2 (${gmSunFromBuild}) by ` +
         `${relativeDifference}; re-derive GM_SUN_AU3_PER_DAY2 from the build.`,
     );

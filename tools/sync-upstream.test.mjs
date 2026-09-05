@@ -125,7 +125,7 @@ for (const pkg of PACKAGES) {
     }
   });
 
-  test(`${pkg.directory}: provenance records the upstream commit and the open import question`, async () => {
+  test(`${pkg.directory}: provenance records the upstream commit and the import decision`, async () => {
     const provenance = await readProvenance(target);
     assert.equal(provenance.package, pkg.package);
     assert.equal(provenance.upstreamPackage, pkg.upstreamPackage);
@@ -141,7 +141,8 @@ for (const pkg of PACKAGES) {
     assert.match(provenance.origin, /not a third-party attribution/);
     assert.match(provenance.transform, /identity only/);
     assert.match(provenance.importNote, /Node does not/);
-    assert.match(provenance.importNote, /specifier rewrite|resolver hook|build step/);
+    assert.match(provenance.importNote, /build step/);
+    assert.match(provenance.importNote, /pnpm build:astronomy/);
     assert.deepEqual(
       Object.keys(provenance.identityRules).sort(),
       IDENTITY_RULES.map((rule) => rule.id).sort(),

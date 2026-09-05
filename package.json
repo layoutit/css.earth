@@ -9,6 +9,8 @@
   },
   "scripts": {
     "dev": "astro dev --host 127.0.0.1 --port 4210",
+    "postinstall": "pnpm build:astronomy",
+    "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build": "astro build && pnpm assemble:planets",
     "acquire:planets": "node tools/run-implemented-planets.mjs acquire",
     "assemble:planets": "node tools/run-implemented-planets.mjs assemble",
@@ -22,7 +24,8 @@
     "prepare:wordmark": "node tools/prepare-wordmark-rail.mjs",
     "prepare:scientific-charts": "node tools/prepare-scientific-charts.mjs",
     "prepare:shell": "pnpm prepare:titles && pnpm prepare:icons && pnpm prepare:wordmark",
-    "prepare:planets": "pnpm prepare:titles && pnpm prepare:wordmark && pnpm prepare:planet-title-sources && pnpm prepare:scientific-charts && node tools/run-implemented-planets.mjs prepare && pnpm prepare:navigation",
+    "prepare:solar-geometry": "pnpm build:astronomy && node tools/prepare-solar-geometry.mjs",
+    "prepare:planets": "pnpm build:astronomy && pnpm prepare:titles && pnpm prepare:wordmark && pnpm prepare:planet-title-sources && pnpm prepare:scientific-charts && node tools/run-implemented-planets.mjs prepare && pnpm prepare:navigation",
     "publish:earth-city": "node src/planets/earth/tools/publish-city-pages.mjs",
     "publish:earth-global": "node src/planets/earth/tools/publish-global-wmts.mjs",
     "verify:earth-delivery": "node src/planets/earth/tools/verify-global-wmts-delivery.mjs",
@@ -48,12 +51,12 @@
     "prepare:earth-global": "node src/planets/earth/tools/prepare-global-wmts.mjs && node src/planets/earth/tools/integrate-global-wmts.mjs --latest",
     "test:earth-global": "node src/planets/earth/test/wmts-tree-browser.mjs --global",
     "oracle:interactions": "node src/planets/mars/tools/oracle/google-earth-pro/run-interaction-suite.mjs"
-
   },
   "dependencies": {
     "@layoutit/polycss": "0.2.11"
   },
   "devDependencies": {
+    "@cssearth/astronomy": "workspace:*",
     "astro": "^7.2.4",
     "classic-level": "3.0.0",
     "cwebp-bin": "8.0.0",
