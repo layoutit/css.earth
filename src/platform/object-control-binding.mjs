@@ -12,6 +12,8 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const lensInputs = [...(lensRoot?.querySelectorAll('button[name="lens"]') ?? [])];
   const settingsInputs = [...(settingsRoot?.querySelectorAll("input[name], button[name]") ?? [])]
     .filter(input => !["motion", "skyContrast"].includes(input.name));
+  const legends = [...(lensRoot?.querySelectorAll("[data-lens-legend]") ?? [])]
+    .filter(legend => legend.dataset?.lensLegend !== undefined);
   const lenses = new Map(lensInputs.map(input => [input.value, input]));
   const settings = new Map(settingsInputs.map(input => [input.name, input]));
   const lensPlans = controls.lenses?.controls ?? [], settingPlans = controls.settings?.controls ?? [];
@@ -56,6 +58,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       input.disabled = !ready;
       input.setAttribute("aria-pressed", String(pressed.has(id)));
     }
+    for (const legend of legends) legend.hidden = !pressed.has(legend.dataset.lensLegend);
     for (const control of settingPlans) {
       const input = settings.get(control.name);
       if (control.kind === "toggle") input.checked = shown[control.name];

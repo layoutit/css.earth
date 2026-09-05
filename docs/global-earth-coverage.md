@@ -30,7 +30,7 @@ The source listing extends from 60° south to 83° north and includes water and 
 
 PR #2's affine base raster pages and this feature's geographic frames coexist. All 450 geographic frames remained byte-identical across the integration. The migration rechecked every pack hash without building a second full copy of the world. Its proof is pinned in `src/planets/earth/source/city/geographic-rebind.json`.
 
-PR #2 is integrated through `8524ce3ba6bd93aaa0b81a47701dda553179ab1b`. Earth binds the same `createObjectRuntime` factory as every other object. Its presentation supplies retained frame anchors and prepared page-layer data. The shared owner mounts and retires map transport, forwards camera and selection publications, and applies playback permission. Pinned catalogue loading and destination flights also belong to the shared runtime; the package supplies camera poses, source content and status text. Development page observations are available through `runtime.pages()`.
+PR #2 is integrated through `5bfa2d2447a46f82ca5c2369e0b447c7f47c680c`. Earth binds the same `createObjectRuntime` factory as every other object. Its presentation supplies retained frame anchors and prepared page-layer data. The shared owner mounts and retires map transport, forwards camera and selection publications, and applies playback permission. Pinned catalogue loading and destination flights also belong to the shared runtime; the package supplies camera poses, source content and status text. Development page observations are available through `runtime.pages()`.
 
 The regular globe now uses PR #2's seven bounded surface pages. Topography and night lights retain their 8× zoom limit. Normal imagery and the noise lens support the prepared city-detail range. The accepted city flight keeps its 4.5-second pose interpolation; wheel, pointer, Escape and document hiding cancel it, and reduced motion jumps to the destination.
 
@@ -90,11 +90,15 @@ Chrome traces from 2026-09-05 measured the same search, flight, drag, noise and 
 
 | Work | Before | After |
 | --- | ---: | ---: |
-| City-flight projection | 518 / 518 | 112 / 110 |
-| City-flight index rebuild | 134 / 130 | 34 / 32 |
-| Noise-selection projection | 976 / 886 | 196 / 187 |
+| City-flight projection | 518 / 518 | 111 / 109 |
+| City-flight index rebuild | 134 / 130 | 31 / 37 |
+| Noise-selection projection | 976 / 886 | 229 / 200 |
 
-These measurements precede the final shared-runtime integration. The updated traces retained all 3,622 scene nodes and reported no checkerboard or missing-content flags across 2,411 presented frame sequences. Drag callback p95 remained 16.7–16.8 ms. Occasional flight stalls remain: the largest was 217 ms wall time with 17 ms of thread CPU under Chrome's frame synchronization. This is a targeted reduction in JavaScript work, not proof of uniformly smooth flights or physical-device performance. These are single traced runs per density; background asset maintenance continued during the updated capture.
+The final production traces include the shared runtime and retain all 3,622 scene nodes. No checkerboard or missing-content flags were reported across 2,400 presented frame sequences. Drag callback p95 remained 16.7–16.8 ms. The measured cold city flights took 4.56 seconds, including UI dispatch, with callback p95 of 33.2–33.3 ms. Occasional flight stalls remain: the largest cold-flight task was 108 ms wall time with 7.7 ms of thread CPU under Chrome's frame processing. These are single traced runs per density on desktop Chrome, not proof of uniformly smooth flights or physical-device performance.
+
+The integration initially exposed a production startup regression: repeated raster-time decoding extended readiness to 15.66 / 15.70 seconds. Limiting the mounted image pool to two concurrent decodes reduced final cold readiness to 1.257 / 1.260 seconds, with unchanged assets and layout. Serializing only surface-page decoding did not fix the regression. The final traces use built application files, a local geometry mirror and real provider imagery; separate delivery checks exercise public Cloudflare geometry.
+
+![Final production performance checkpoint](images/global-earth-performance.png)
 
 ## Visual evidence
 
