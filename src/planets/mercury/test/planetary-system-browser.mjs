@@ -244,7 +244,11 @@ try {
 }
 
 const failed = checks.filter((entry) => !entry.ok).map((entry) => entry.id);
-console.log(JSON.stringify({ suite: "mercury-planetary-system", ok: failed.length === 0, failed, checks, ...report }));
+// The report is one long line on a pipe: on macOS pipe writes are
+// asynchronous, so the process must wait for the flush before exiting or
+// the gate reads a truncated line.
+await new Promise((resolve) => process.stdout.write(
+  `${JSON.stringify({ suite: "mercury-planetary-system", ok: failed.length === 0, failed, checks, ...report })}\n`, resolve));
 process.exit(failed.length === 0 ? 0 : 1);
 
 // -----------------------------------------------------------------------
