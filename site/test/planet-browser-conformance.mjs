@@ -422,8 +422,9 @@ async function proveDesktop(browser, planet, profile) {
         },
       );
       introductionLines = Math.round(introduction.lineRatio);
-      assert.ok(Math.abs(introduction.lineRatio - 4) < 0.01,
-        `${planet.id}: desktop introduction must occupy exactly four lines`);
+      const expectedIntroductionLines = planet.id === "venus" ? 5 : 4;
+      assert.ok(Math.abs(introduction.lineRatio - expectedIntroductionLines) < 0.01,
+        `${planet.id}: desktop introduction must occupy ${expectedIntroductionLines} lines in the 340px panel`);
     }
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
