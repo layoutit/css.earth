@@ -241,6 +241,11 @@ export function createCubicSkyCameraOrientation({
       scenePresentation ??= formatMatrix3d(sceneMatrix);
       return scenePresentation;
     },
+    // The accumulated scene rotation itself, for consumers that project
+    // scene-frame geometry with the same camera in JavaScript.
+    sceneMatrix() {
+      return sceneMatrix;
+    },
     counterRotation(localMatrix = null) {
       if (counterPresentations.has(localMatrix)) {
         return counterPresentations.get(localMatrix);

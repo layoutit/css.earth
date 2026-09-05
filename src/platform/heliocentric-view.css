@@ -1,0 +1,55 @@
+/* A body's heliocentric neighbourhood (see heliocentric-view-runtime.mjs):
+   the Sun billboard lives inside the object's perspective camera root so it
+   depth-sorts against the body; the orbit line and the body marker live in an
+   overlay root that shares the camera root's box and is written from the same
+   camera-relative projection. */
+.planet-heliocentric-sun {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.planet-heliocentric-sun[hidden] {
+  display: none;
+}
+
+.planet-heliocentric-orbit {
+  --planet-orbit-line-thickness: 1.5px;
+  --planet-orbit-line-color: rgba(255, 243, 224, 0.6);
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+}
+
+.planet-heliocentric-orbit-piece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 1px;
+  height: var(--planet-orbit-line-thickness);
+  margin-top: calc(var(--planet-orbit-line-thickness) / -2);
+  background-color: var(--planet-orbit-line-color);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* The body's navigation sprite; size, atlas tile and opacity are written by
+   the runtime from the shared marker recipe and the object's level-of-detail
+   policy. */
+.planet-heliocentric-body-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
