@@ -2,6 +2,7 @@
 
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 
 import {
   CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,
@@ -26,7 +27,8 @@ await preparePlanetCubicSky({
   objectId: "sun",
   sourceRoot: SUN_SOURCE_ROOT,
   publicRoot: outputRoot,
-  preparedModulePath: new URL("../runtime/preparedStarfield.mjs", import.meta.url),
+  preparedModulePath: outputArgument ? pathToFileURL(resolve(outputRoot, "preparedStarfield.mjs"))
+    : new URL("../runtime/preparedStarfield.mjs", import.meta.url),
   ensureDirectories: outputArgument
     ? () => mkdir(outputRoot, { recursive: true })
     : ensureSunPreparationDirectories,
