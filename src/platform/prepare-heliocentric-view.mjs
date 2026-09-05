@@ -30,26 +30,39 @@ const UNIFORM_ORBIT_SEGMENTS = 360;
 // straight through the body as the camera closes in on it.
 const LOCAL_REFINEMENT_HALVINGS = 8;
 
-// The orbit is drawn as the path just travelled, not a closed loop: full
-// strength at the body, fading backwards along the direction the body came
-// from, gone half an orbit behind it. With vertices in the direction of
-// motion at eccentric-anomaly offsets `offsets` ahead of the body (offset 0
-// is the body, the last chord returns to it), a chord whose mid-offset is
-// `delta` lies `2pi - delta` behind the body; its weight is linear in that
-// angle, one at the body and zero at pi. Chords ahead of the body weigh
-// nothing and are never projected.
-export const ORBIT_TRAIL_MODEL = "trailing-half-orbit-linear-fade";
+// The orbit is drawn as the path just travelled, not a closed loop: solid
+// for `solidTurns` of an orbit behind the body, fading linearly to nothing
+// across the following `fadeTurns`, and never drawn beyond that. With
+// vertices in the direction of motion at eccentric-anomaly offsets
+// `offsets` ahead of the body (offset 0 is the body, the last chord returns
+// to it), a chord whose mid-offset is `delta` lies `2pi - delta` behind the
+// body. The spans are prepared data (the look is tuned by eye), carried in
+// the plan as `orbit.trailSpans`.
+export const ORBIT_TRAIL_MODEL = "trailing-orbit-solid-then-linear-fade";
+export const ORBIT_TRAIL_SPANS = Object.freeze({
+  // Turns of the orbit behind the body drawn at full strength.
+  solidTurns: 0.5,
+  // Turns over which the line then fades to nothing.
+  fadeTurns: 0.25,
+});
 
-export function orbitTrailWeights(offsets) {
+export function orbitTrailWeights(offsets, spans = ORBIT_TRAIL_SPANS) {
   if (!Array.isArray(offsets) || offsets.length < 2 || offsets[0] !== 0 ||
       offsets.some((offset, index) => index > 0 && !(offset > offsets[index - 1])) ||
       !(offsets[offsets.length - 1] < 2 * Math.PI)) {
     throw new TypeError("Orbit trail offsets must ascend from zero within one turn.");
   }
+  if (!(spans?.solidTurns >= 0) || !(spans.fadeTurns > 0) ||
+      !(spans.solidTurns + spans.fadeTurns < 1)) {
+    throw new TypeError("Orbit trail spans must leave part of the orbit undrawn.");
+  }
+  const solid = spans.solidTurns * 2 * Math.PI;
+  const fade = spans.fadeTurns * 2 * Math.PI;
   return Object.freeze(offsets.map((offset, index) => {
     const next = index + 1 < offsets.length ? offsets[index + 1] : 2 * Math.PI;
     const behind = 2 * Math.PI - (offset + next) / 2;
-    return Number(Math.max(0, Math.min(1, 1 - behind / Math.PI)).toFixed(6));
+    const weight = behind <= solid ? 1 : Math.max(0, 1 - (behind - solid) / fade);
+    return Number(weight.toFixed(6));
   }));
 }
 
@@ -197,6 +210,7 @@ export function prepareHeliocentricView({
       // The trail: one weight per chord (chord k joins vertex k to k + 1).
       trail,
       trailModel: ORBIT_TRAIL_MODEL,
+      trailSpans: ORBIT_TRAIL_SPANS,
       uniformSegments: UNIFORM_ORBIT_SEGMENTS,
       localRefinementHalvings: LOCAL_REFINEMENT_HALVINGS,
       maximumExtentUnits,

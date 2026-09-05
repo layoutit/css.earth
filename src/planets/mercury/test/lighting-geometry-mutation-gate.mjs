@@ -262,6 +262,17 @@ export const MUTATIONS = Object.freeze([
     suite: "system",
   },
   {
+    id: "trail-half-span",
+    description: "trails prepared with no solid span (fade from the body, gone at a half turn)",
+    file: "src/platform/prepare-heliocentric-view.mjs",
+    find: "  solidTurns: 0.5,",
+    replace: "  solidTurns: 0, /* MUTATION trail-half-span */",
+    prepare: SCENE_PREPARE,
+    served: { url: "/src/planets/mercury/runtime/preparedScene.mjs", changed: true },
+    expect: /trail-solid-behind-|trail-behind-body-/u,
+    suite: "system",
+  },
+  {
     id: "trail-full-loop",
     description: "the runtime projects every chord at full strength (closed loops again)",
     file: "src/platform/heliocentric-view.mjs",

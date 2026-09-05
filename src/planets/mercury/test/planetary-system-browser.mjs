@@ -43,13 +43,18 @@ export const TOLERANCES = Object.freeze({
   coverage: 0.33,
   // The trail: the line must be found on rays this far behind the body and
   // absent this far ahead of it, and its strength must fall away behind.
-  trailBehindDegrees: [12, 45, 90, 120],
-  trailAheadDegrees: [12, 45, 90, 150],
+  // Solid for the half turn behind the body, fading over the next quarter,
+  // gone over the leading quarter: found at 30 and 150 (solid), 210 and 250
+  // (fading); absent from 12 to 80 ahead.
+  trailBehindDegrees: [30, 150, 210, 250],
+  trailAheadDegrees: [12, 45, 60, 80],
   // Line strength (integrated difference across the line, averaged over
-  // neighbouring rays) at each sample behind the body must fall to below
-  // this share of the sample two steps closer to the body (adjacent samples
-  // near the body differ by only a few per cent in weight).
-  trailFadeFactor: 0.8,
+  // neighbouring rays): the two solid samples must agree to this share, and
+  // each fading sample must fall below this share of the one before it.
+  trailSolidFactor: 0.75,
+  // First fading sample (weight 0.67) against the solid one, then the last
+  // (weight 0.22) against it: the ratios measure 0.53-0.91 and 0.19-0.53.
+  trailFadeFactors: [0.95, 0.7],
   // Marker centre against the painted orbit at the marker's angle, pixels.
   markerOnOrbitPixels: 3,
   // Marker back-projected into its orbital plane against the oracle's
@@ -372,8 +377,11 @@ async function measureView(page, geometry, view) {
     result.orbits[id].trail = trail;
     check(`trail-behind-body-${id}-${view.id}`, trail.behind.every((sample) => sample.found), { id, ...trail });
     check(`trail-absent-ahead-${id}-${view.id}`, trail.ahead.every((sample) => !sample.found), { id, ...trail });
-    check(`trail-fades-backwards-${id}-${view.id}`, trail.behind.every((sample, index) =>
-      index < 2 || sample.strength < TOLERANCES.trailFadeFactor * trail.behind[index - 2].strength), { id, ...trail });
+    check(`trail-solid-behind-${id}-${view.id}`,
+      trail.behind[1].strength >= TOLERANCES.trailSolidFactor * trail.behind[0].strength, { id, ...trail });
+    check(`trail-fades-backwards-${id}-${view.id}`,
+      trail.behind[2].strength < TOLERANCES.trailFadeFactors[0] * trail.behind[1].strength &&
+      trail.behind[3].strength < TOLERANCES.trailFadeFactors[1] * trail.behind[2].strength, { id, ...trail });
     check(`orbit-shape-${id}-${view.id}`, meanResidual !== null &&
       meanResidual <= TOLERANCES.shapeMeanPixels && p95Residual <= TOLERANCES.shapeP95Pixels, {
         id, meanResidual, p95Residual,
