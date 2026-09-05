@@ -91,3 +91,40 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
 .planet-directional-sun[hidden] {
   display: none;
 }
+
+/* Catalogue stars of the retained band (see prepare-catalogue-stars.mjs):
+   discs placed on their prepared cube transforms just inside the faces,
+   sized so a `--planet-cubic-sky-star-radius` in screen pixels holds across
+   the cube's perspective (the runtime sets the scale from the root's size),
+   coloured by temperature and dimmed by the chain's luminance. */
+.planet-cubic-sky-stars {
+  --planet-cubic-sky-star-scale: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.planet-cubic-sky-star {
+  --planet-cubic-sky-star-radius: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: calc(2 * var(--planet-cubic-sky-star-radius) / var(--planet-cubic-sky-star-scale));
+  height: calc(2 * var(--planet-cubic-sky-star-radius) / var(--planet-cubic-sky-star-scale));
+  margin: calc(-1 * var(--planet-cubic-sky-star-radius) / var(--planet-cubic-sky-star-scale)) 0 0
+    calc(-1 * var(--planet-cubic-sky-star-radius) / var(--planet-cubic-sky-star-scale));
+  border-radius: 50%;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* The brilliant band carries a soft bloom, the reference's compact halo. */
+.planet-cubic-sky-star-brilliant {
+  box-shadow: 0 0 calc(2.5 * var(--planet-cubic-sky-star-radius) / var(--planet-cubic-sky-star-scale)) currentColor;
+  color: inherit;
+}

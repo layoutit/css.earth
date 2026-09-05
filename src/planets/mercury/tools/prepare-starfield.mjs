@@ -8,6 +8,8 @@ import { prepareAstrometricCubeSampling } from
   "../../../platform/astrometric-sky-registration.mjs";
 import { preparePlanetCubicSky } from
   "../../../platform/prepare-cubic-sky-source.mjs";
+import { prepareCatalogueStars } from
+  "../../../platform/prepare-catalogue-stars.mjs";
 import {
   ensureMercuryPreparationDirectories,
   MERCURY_PUBLIC_ROOT,
@@ -33,4 +35,11 @@ await preparePlanetCubicSky({
   // registration prepared alongside the scene carries Mercury's pole and
   // the epoch. No hand-tuned Euler angles.
   astrometricSampling: prepareAstrometricCubeSampling(),
+  // The stars that make sense to draw: the HYG catalogue to the limit the
+  // photometric chain derives at the prepared 60-degree field, stamped into
+  // the faces or retained as points, over the photograph's diffuse light
+  // only (the photographic point selection is superseded).
+  catalogueStars: await prepareCatalogueStars({
+    fovDegrees: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD.horizontalFovDegrees,
+  }),
 });

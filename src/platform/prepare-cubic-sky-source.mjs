@@ -1,3 +1,8 @@
+import {
+  RETAINED_STAR_RADIUS_SHARE_OF_HALF_SIDE,
+  cubeFaceOf,
+  retainedStarTransform,
+} from "./prepare-catalogue-stars.mjs";
 import { createHash } from "node:crypto";
 import { readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -52,6 +57,13 @@ export async function preparePlanetCubicSky({
   // the shared hand-registered Euler angles. Objects that do not opt in keep
   // their accepted sky untouched.
   astrometricSampling = null,
+  // Opt-in catalogue stars (see prepare-catalogue-stars.mjs): the photograph
+  // keeps only its diffuse light (detail gain zero, so no star is drawn
+  // twice), the stamped bands are painted into the faces from their ICRS
+  // directions, and the retained band is carried in the plan for the runtime
+  // to mount as points on the same cube. Supersedes the photographic
+  // point-source selection, which is then not applied.
+  catalogueStars = null,
   sourceSchema = `css${objectId}-prepared-star-source@1`,
 }) {
   if (!/^[a-z][a-z0-9-]*$/u.test(objectId) ||
@@ -91,6 +103,11 @@ export async function preparePlanetCubicSky({
       ))) {
     throw new TypeError("Planet cubic-sky preparation arguments are invalid.");
   }
+  if (catalogueStars !== null && (catalogueStars.schema !== "cssearth-prepared-catalogue-stars@1" ||
+      !Array.isArray(catalogueStars.stars) || catalogueStars.stars.length === 0)) {
+    throw new TypeError("Catalogue stars for the cubic sky are invalid.");
+  }
+  const photographDetailGain = catalogueStars === null ? DETAIL_GAIN : 0;
   const objectName = objectId[0].toUpperCase() + objectId.slice(1);
   await validateSourceGroup("starfield");
   await ensureDirectories();
@@ -144,14 +161,14 @@ for (const density of [1, 2]) {
       photo.data,
       diffusePhoto,
       photo.info,
-      DETAIL_GAIN,
+      photographDetailGain,
       DIFFUSE_GAIN,
       astrometricMatrix,
     );
     const photographicStandardPixels = prepareStandardCubicSkyPixels(
       highContrastPixels,
     );
-    const standardPixels = pointSourceContract === null
+    const standardPixels = pointSourceContract === null || catalogueStars !== null
       ? photographicStandardPixels
       : prepareStandardCubicSkyPixels(preparePhotographicFace(
         id,
@@ -187,7 +204,7 @@ for (const density of [1, 2]) {
       standardPixels,
     };
   });
-  if (pointSourceContract !== null && density === 1) {
+  if (pointSourceContract !== null && catalogueStars === null && density === 1) {
     selectedPointSources = selectPhotographicPointSources(
       preparedFaces,
       pointSourceContract.drawCount,
@@ -199,7 +216,13 @@ for (const density of [1, 2]) {
     highContrastPixels,
     standardPixels,
   } of preparedFaces) {
-    if (pointSourceContract !== null) {
+    if (catalogueStars !== null) {
+      // The stamped bands, at their ICRS directions (cube-local axes).
+      for (const facePixels of [standardPixels, highContrastPixels]) {
+        stampCatalogueStars({ faceId: id, facePixels, faceSize, density, stars: catalogueStars.stars });
+      }
+    }
+    if (pointSourceContract !== null && catalogueStars === null) {
       applyPreparedPointSources({
         pixels: standardPixels,
         faceSize,
@@ -295,6 +318,33 @@ const prepared = Object.freeze({
     blackPoint: BLACK_POINT,
     gamma: LEVEL_GAMMA,
     gain: GAIN,
+  }),
+  ...(catalogueStars === null ? {} : {
+    catalogueStars: Object.freeze({
+      schema: catalogueStars.schema,
+      model: catalogueStars.model,
+      source: catalogueStars.source,
+      // The photograph is the Milky Way's diffuse light only; every star
+      // drawn comes from the catalogue, once: the stamped bands in the
+      // faces, the retained band as points on the same cube.
+      coexistence: "photograph-diffuse-only-catalogue-points-once",
+      photographDetailGain,
+      limitingMagnitude: catalogueStars.limitingMagnitude,
+      exposure: catalogueStars.exposure,
+      bands: catalogueStars.bands,
+      count: catalogueStars.count,
+      stampedCount: catalogueStars.count - catalogueStars.retainedCount,
+      retainedCount: catalogueStars.retainedCount,
+      retainedRadiusShareOfHalfSide: RETAINED_STAR_RADIUS_SHARE_OF_HALF_SIDE,
+      retained: Object.freeze(catalogueStars.stars.filter((star) => star.presentation === "retained").map((star) => Object.freeze({
+        hip: star.hip, name: star.name, magnitude: star.magnitude, band: star.band,
+        direction: star.direction, radiusPx: star.retainedRadiusPx, luminance: star.luminance, color: star.color,
+        transform: retainedStarTransform(star.direction),
+      }))),
+      // Named stars beyond the retained band are not carried: checks read
+      // the catalogue itself.
+      namedRetainedCount: catalogueStars.stars.filter((star) => star.name && star.presentation === "retained").length,
+    }),
   }),
   photographicSeparation: Object.freeze({
     model: CUBIC_SKY_STANDARD.photographicSeparation.model,
@@ -760,6 +810,37 @@ function equatorialCubemapBasis(projection) {
       -Math.sin(declination) * Math.sin(rightAscension),
     ]),
   });
+}
+
+// Paints the stamped bands into a face: each star a small Gaussian at its
+// face pixel, its peak the chain's luminance in the star's colour, added to
+// the diffuse photograph and clamped. Sub-pixel radii (the faint bands)
+// become a single softened pixel, which the face's own upscaling spreads to
+// about what a faint star should be on screen.
+function stampCatalogueStars({ faceId, facePixels, faceSize, density, stars }) {
+  // Face pixels per screen pixel at the face centre: a face spans 90
+  // degrees over faceSize pixels against the stage's 60-degree field.
+  const facePixelsPerScreenPixel = (faceSize / 2) / (1247 / density * Math.tan(Math.PI / 4)) * (1 / density);
+  for (const star of stars) {
+    if (star.presentation !== "stamped") continue;
+    const { face, u, v } = cubeFaceOf(star.direction);
+    if (face !== faceId) continue;
+    const centreX = (u + 1) / 2 * (faceSize - 1);
+    const centreY = (v + 1) / 2 * (faceSize - 1);
+    const sigma = Math.max(0.55, star.rawRadiusPx * facePixelsPerScreenPixel * density * 0.6);
+    const reach = Math.ceil(sigma * 2.5);
+    for (let y = Math.max(0, Math.floor(centreY - reach)); y <= Math.min(faceSize - 1, Math.ceil(centreY + reach)); y += 1) {
+      for (let x = Math.max(0, Math.floor(centreX - reach)); x <= Math.min(faceSize - 1, Math.ceil(centreX + reach)); x += 1) {
+        const distance = Math.hypot(x - centreX, y - centreY);
+        const weight = Math.exp(-(distance * distance) / (2 * sigma * sigma)) * star.luminance;
+        if (weight < 1 / 255) continue;
+        const offset = (y * faceSize + x) * 3;
+        facePixels[offset] = Math.min(255, facePixels[offset] + Math.round(star.color[0] * weight));
+        facePixels[offset + 1] = Math.min(255, facePixels[offset + 1] + Math.round(star.color[1] * weight));
+        facePixels[offset + 2] = Math.min(255, facePixels[offset + 2] + Math.round(star.color[2] * weight));
+      }
+    }
+  }
 }
 
 function cubeFaceDirection(face, u, v) {
