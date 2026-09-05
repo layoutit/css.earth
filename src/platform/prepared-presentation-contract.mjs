@@ -264,6 +264,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       for (const key of ["enabled", "rotationEnabled", "clearWhenHidden"]) if (typeof selected[key] !== "boolean") fail(`selected ${key} must be boolean`);
       if (selected.frameOverride !== null && (!Number.isSafeInteger(selected.frameOverride) || selected.frameOverride < 0 || selected.frameOverride >= track.frame.count)) fail("frame override is outside prepared addresses");
       if (selected.frameOffset !== undefined && (!Number.isSafeInteger(selected.frameOffset) || selected.frameOffset < 0 ||
+          selected.frameOffset > 0 && selected.frameOffset <= (track.frame.maximumFrame??track.frame.count-1) ||
           selected.frameOffset+(track.frame.maximumFrame??track.frame.count-1)>=track.frame.count)) fail("frame offset is outside prepared addresses");
       if(selected.publishWhenHidden!==undefined)choice(selected.publishWhenHidden,new Set(["always","static","never"]),"hidden address publication");
       string(selected.fixedMode, "fixed mode");
