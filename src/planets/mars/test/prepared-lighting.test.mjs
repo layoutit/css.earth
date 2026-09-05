@@ -214,10 +214,11 @@ test("keeps unattended playback on compositor animations", async () => {
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
-  assert.match(client, /createRetainedCubicSkyOrbit/);
-  assert.match(client, /createRowShardCache/);
-  assert.match(client, /materialCache\.presentation\(frame\)/);
-  assert.match(client, /mounted\.materialLeaf\.style\.backgroundPosition/);
+  const { runtimeDefinition } = await import("../runtime/definition.mjs");
+  const pool = runtimeDefinition.assets.pools.find(pool => pool.id === "lighting");
+  assert.equal(pool.capacity, PREPARED_MARS_LIGHTING.banks[2].transport.maximumRetainedRowCount);
+  assert.equal(pool.reuse, true);
+  assert.equal(pool.eviction, "capacity");
   assert.doesNotMatch(client, /materialLeaves|\.style\.opacity/);
   assert.doesNotMatch(client, /setInterval|setTimeout|DOMMatrix|canvas|getContext/);
   assert.doesNotMatch(css,

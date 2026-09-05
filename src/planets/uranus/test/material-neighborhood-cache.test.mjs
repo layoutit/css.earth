@@ -1,75 +1,72 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createUranusMaterialNeighborhoodCache } from "../runtime/material-neighborhood-cache.mjs";
+import { runtimeDefinition } from "../runtime/definition.mjs";
+import { preparedSelectionFixture } from "../../../platform/test/object-runtime-package.mjs";
+const rowPool = f => f.residency.stats().pools.find(pool => pool.id === "rows");
 
-const rows = (name) => Array.from({ length: 16 }, (_, i) => `/${name}-${i}`);
-function fixture() {
-  const images = [];
-  const cache = createUranusMaterialNeighborhoodCache({ createImage() {
-    const image = { src: "", naturalWidth: 1, naturalHeight: 1,
-      decode() { return new Promise((resolve, reject) => { this.resolve = resolve; this.reject = reject; }); },
-      removeAttribute(name) { if (name === "src") this.src = ""; },
-    };
-    images.push(image);
-    return image;
-  } });
-  return { images, cache };
-}
-
-test("Uranus pending lens preserves active neighborhood and failure remains retryable", async () => {
-  const { cache, images } = fixture();
-  const initial = cache.warm(rows("normal"), 4);
-  images.forEach((image) => image.resolve());
-  await initial;
-  const lens = cache.prepare(rows("methane"), 4);
-  assert.equal(cache.stats().retainedCount, 3);
-  assert.equal(cache.stats().pendingCount, 3);
-  images[3].resolve();
-  images[4].reject(new Error("material failed"));
-  await assert.rejects(lens, /Prepared image did not decode/u);
-  assert.ok(images.slice(0, 3).every((image) => image.src.startsWith("/normal")));
-  assert.ok(images.slice(3).every((image) => image.src === ""));
-  const retry = cache.prepare(rows("methane"), 4);
-  images[5].reject(new Error("late sibling"));
-  images.slice(6).forEach((image) => image.resolve());
-  const prepared = await retry;
-  prepared.commit();
-  assert.equal(cache.stats().retainedCount, 3);
-  assert.ok(images.slice(0, 3).every((image) => image.src === ""));
-  cache.destroy();
+test("Uranus pending lens preserves the active neighborhood and a failed row remains retryable", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const active = rowPool(f).keys;
+    assert.equal(active.length, 3);
+    const request = f.selection.dispatch({ kind: "lens", id: "methane" });
+    const rejection = assert.rejects(request, /decode/); await f.flush();
+    assert.equal(rowPool(f).resident, 6); assert.equal(rowPool(f).pending, 3);
+    const requestedRow = runtimeDefinition.assets.entries.find(entry => entry.key.startsWith("row:methane:" ) && f.jobs.some(job => job.url === entry.url));
+    const job = f.jobs.find(job => job.url === requestedRow.url); job.done = true; job.reject(new Error("material decode failed"));
+    await rejection; await f.flush();
+    assert.equal(f.selection.state().committed.lensId, "normal");
+    assert.deepEqual(rowPool(f).keys, active);
+    assert.equal(f.lifetime.disposed, false);
+    const retry = f.selection.dispatch({ kind: "lens", id: "methane" }); await f.settle(); assert.equal(await retry, true);
+    assert.ok(rowPool(f).keys.every(key => key.startsWith("row:methane:")));
+    assert.equal(rowPool(f).resident, 3); assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
 });
 
-test("Uranus A/B/A preparation contains old settlements and keeps camera neighborhood independent", async () => {
-  const { cache, images } = fixture();
-  const a = cache.prepare(rows("a"), 3);
-  const b = cache.prepare(rows("b"), 3);
-  const secondA = cache.prepare(rows("a"), 3);
-  const camera = cache.warm(rows("normal"), 12);
-  assert.equal(cache.stats().pendingCount, 6);
-  images.slice(0, 6).forEach((image) => image.reject(new Error("retired")));
-  images.slice(6).forEach((image) => image.resolve());
-  assert.equal(await a, null);
-  assert.equal(await b, null);
-  await camera;
-  const prepared = await secondA;
-  prepared.commit();
-  assert.equal(cache.stats().retainedCount, 3);
-  cache.destroy();
-  assert.equal(await cache.prepare(rows("c"), 4), null);
-  assert.ok(images.every((image) => image.src === ""));
+test("Uranus A/B/A replacement cannot release the winning active neighborhood", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const active = rowPool(f).keys;
+    const a = f.selection.dispatch({ kind: "lens", id: "methane" }); await f.flush();
+    const b = f.selection.dispatch({ kind: "lens", id: "near-infrared" }); await f.flush();
+    const winner = f.selection.dispatch({ kind: "lens", id: "normal" }); await f.flush();
+    assert.deepEqual(await Promise.all([a, b, winner]), [false, false, true]);
+    for (const job of f.jobs.filter(job => !job.done)) { job.done = true; job.reject(new Error("late retired row")); }
+    await f.flush(); assert.deepEqual(rowPool(f).keys, active);
+    assert.equal(f.stage.dataset.lens, "normal"); assert.deepEqual(f.errors, []);
+    assert.equal(rowPool(f).resident, 3);
+  } finally { f.restore(); }
 });
 
-test("Uranus camera ownership failures are synchronous, native decode failures remain asynchronous", async () => {
-  const { cache, images } = fixture();
-  const initial = cache.warm(rows("normal"), 4);
-  images.forEach((image) => image.resolve());
-  await initial;
-  images[0].removeAttribute = (name) => { if (name === "src") throw new Error("release failed"); };
-  assert.throws(() => cache.warm(rows("normal"), 12), AggregateError);
-  assert.equal(images[1].src, "", "release failure must not strand siblings");
-  const retry = cache.warm(rows("normal"), 12);
-  images[3].reject(new Error("decode failed"));
-  await assert.rejects(retry, /Prepared image did not decode/u);
-  cache.destroy();
-  images.slice(4).forEach((image) => image.reject(new Error("late decode")));
+test("Uranus camera changes during pending selection revalidate the current neighborhood", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
+    const pending = f.selection.dispatch({ kind: "lens", id: "methane" }); await f.flush();
+    const view = { ...f.view, controlPitch: 89, sunViewDirection: [0, 0, -1], revision: 2 };
+    f.selection.setView(view); await f.settle(); assert.equal(await pending, true);
+    const expected = runtimeDefinition.resolvePresentation({ selection: f.selection.state().committed, view, previousPlan: f.selection.state().plan });
+    assert.deepEqual(rowPool(f).keys.toSorted(), expected.required.filter(key => key.startsWith("row:")).toSorted());
+    assert.ok(rowPool(f).resident <= 3); assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
+});
+
+
+test("Uranus native row release failure is fatal and still releases sibling ownership", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const key = rowPool(f).keys[0], url = runtimeDefinition.assets.entries.find(entry => entry.key === key).url;
+    const native = f.jobs.find(job => job.url === url).image;
+    native.removeAttribute = () => { throw new Error("native release failed"); };
+    const previous = f.selection.state().committed;
+    const pending = f.selection.dispatch({ kind: "lens", id: "methane" });
+    const outcome = pending.catch(error => error); await f.settle(); await outcome;
+    assert.equal(f.lifetime.disposed, true); assert.equal(f.errors.length, 1);
+    assert.deepEqual(f.selection.state().committed, previous);
+    assert.equal(f.residency.stats().images.entries.length, 0);
+    assert.equal(f.listenerCount(), 0);
+    for (const job of f.jobs) job.reject(new Error("late")); await f.flush();
+    assert.equal(f.errors.length, 1);
+  } finally { f.restore(); }
 });

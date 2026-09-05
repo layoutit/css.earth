@@ -292,16 +292,17 @@ test("prepares the shared unbounded cubic-sky camera contract", () => {
 
 test("keeps unattended playback on compositor animations", async () => {
   const [client, css] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
-  assert.match(client, /createRetainedCubicSkyOrbit/);
+  const { runtimeDefinition } = await import("../runtime/definition.mjs");
+  assert.equal(runtimeDefinition.assets.pools.find(pool => pool.id === "lighting").capacity, PREPARED_JUPITER_LIGHTING.transport.maximumRetainedRowCount);
   assert.match(client, /counterRotationFor/);
   assert.match(client, /sunViewDirection/);
   assert.doesNotMatch(client, /orbitBank|DecompressionStream/);
-  assert.match(client, /createRowShardCache/);
-  assert.match(client, /materialCache\.presentation\(materialFrame\)/);
-  assert.match(client, /mounted\.materialLeaf\.style\.backgroundPosition/);
+  assert.match(client, /preparedRowPresentation/);
+  assert.match(client, /"nearest-frame"/);
+  assert.match(client, /materialLeaf\.style\.backgroundPosition/);
   assert.doesNotMatch(client, /materialLeaves|\.style\.opacity/);
   assert.doesNotMatch(client, /setInterval|setTimeout|DOMMatrix|canvas|getContext/);
   assert.doesNotMatch(css, /clip-path|mask:|filter:|linear-gradient|radial-gradient|mix-blend-mode/);

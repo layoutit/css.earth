@@ -74,7 +74,7 @@ function createSettingsController(
 
   const renderMotion = () => {
     motion.checked = motionOn;
-    if (speed) speed.disabled = !motionOn;
+    if (speed) speed.disabled = !motionOn || speed.dataset?.runtimeReady === "false";
   };
   const renderSkyContrast = () => {
     skyContrast.checked = highContrastSky;

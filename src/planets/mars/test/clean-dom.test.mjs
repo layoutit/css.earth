@@ -22,45 +22,26 @@ test("keeps the Mars scene as one fixed retained PolyCSS tree", async () => {
     leaves.length === 1 && leaves.every(({ tag, style }) =>
       ["b", "s", "u"].includes(tag) && typeof style === "string")));
 
-  assert.match(client, /createDocumentFragment\(\)/u);
-  assert.match(client, /scene\.appendChild\(materialCounter\)/u);
-  assert.match(client, /stage\.replaceChildren\(camera\)/u);
-  assert.match(client, /runtimeDomGrowthPolicy: "fixed-single-object-scene"/u);
-  assert.match(client,
-    /const materialBank = PREPARED_MARS_LIGHTING\.banks\[[\s\S]*?String\(CANONICAL_PREPARED_IMAGE_DENSITY\)[\s\S]*?\]/u);
-  assert.match(client, /createRowShardCache\(materialBank\)/u);
-  assert.match(client, /bindSpeedControl/u);
-  assert.doesNotMatch(client, /materialBank\s*\?\?|banks\["1"\]\s*\|\|/u);
-  assert.match(client, /const materialLeaf = document\.createElement\("s"\)/u);
-  assert.match(client,
-    /PREPARED_MARS_CAMERA\.materialDepthContract\.planeTransform/u);
-  assert.match(client,
-    /createMesh\(\s*"mars-system mars-material-system",\s*plan\.systemTransform,?\s*\)/u);
-  assert.doesNotMatch(client,
-    /mounted\.materialLeaf\.style\.transform = zoomState\.materialTransform/u);
-  assert.doesNotMatch(client, /function materialTransform/u);
-  assert.doesNotMatch(client,
-    /mounted\.material\.style\.transform = materialTransform/u);
-  assert.doesNotMatch(client, /materialLeaves/u);
-  assert.match(client, /idleJavaScriptLoops: 0/u);
-  assert.match(client, /assertStableDomIdentity/u);
-  assert.match(client, /lensDecodePromises\.get\(id\)/u);
-  assert.match(client, /"\.planet-drawer-content \.planet-lenses"/u);
-  assert.match(client, /"\.planet-settings-panel \.planet-settings"/u);
-  assert.doesNotMatch(client, /document\.querySelector\("\.planet-header"\)/u);
-  assert.match(client, /if \(lifetime\.disposed\) return/u);
-  assert.match(client,
-    /resume\(\) \{[\s\S]*?shouldPlay = true;[\s\S]*?if \(!mounted\) return;/u);
-  assert.match(client, /lifetime\.destroy\(\)/u);
-  assert.doesNotMatch(client, /stage\.replaceChildren\(\)/u);
-  assert.match(client, /lifetime\.onDispose\(\(\) => camera\.remove\(\)\)/u);
-  assert.match(client, /events\.abort\(\)/u);
-  assert.doesNotMatch(client, /style\.setProperty\(/u);
-  assert.doesNotMatch(client, /canvas|getContext\(|requestIdleCallback/u);
-  assert.doesNotMatch(client, /setInterval|setTimeout/u);
-  assert.doesNotMatch(client,
-    /preparedMoonPlaneBasis|preparedMoonBasisMatrix|preparedMoonProjectedRadii|preparedMoonLocalLabelMatrix/u);
-  assert.doesNotMatch(client, /PREPARED_MARS_MOONS|mars-moon/u);
+  const { runtimeDefinition } = await import("../runtime/definition.mjs");
+  const { retainedPresentationFixture } = await import("../../../platform/test/object-runtime-package.mjs");
+  const f = retainedPresentationFixture(runtimeDefinition);
+  try {
+    const presentation = runtimeDefinition.createPresentation(f.stage, f.context);
+    const nodes = f.stage.querySelectorAll("*");
+    const material = nodes.find(node => node.classList.contains("mars-material-plane"));
+    const { PREPARED_MARS_CAMERA } = await import("../runtime/preparedCamera.mjs");
+    assert.equal(material.style.transform, PREPARED_MARS_CAMERA.materialDepthContract.planeTransform);
+    assert.equal(material.children.length, 1);
+    assert.equal(material.children[0].tagName, "S");
+    assert.equal(nodes.filter(node => ["B", "S", "U"].includes(node.tagName)).length, 517);
+    for (const lens of runtimeDefinition.controls.lenses.controls) {
+      presentation.commitSelection({ selection: { ...runtimeDefinition.initialSelection, lensId: lens.id } });
+      assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
+    }
+    presentation.observe();
+    f.lifetime.destroy(); assert.equal(f.stage.children.length, 0);
+  } finally { f.restore(); }
+  assert.doesNotMatch(client, /canvas|getContext|requestIdleCallback|setInterval|setTimeout|PREPARED_MARS_MOONS|mars-moon/u);
   assert.doesNotMatch(css, /mars-moon/u);
   assert.doesNotMatch(client, /Math\.(?:cos|sin)/u);
   assert.doesNotMatch(client,

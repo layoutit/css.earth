@@ -13,13 +13,13 @@ function harness() {
     images.push(image);
     return image;
   } });
-  return { images, store };
+  return { images, store, lease: store.createLease() };
 }
 
 test("destroy retires every image even when one native release throws", async () => {
-  const { store, images } = harness();
-  const first = store.load("/first.webp");
-  const second = store.load("/second.webp");
+  const { store, images, lease } = harness();
+  const first = lease.load("/first.webp");
+  const second = lease.load("/second.webp");
   images[0].removeAttribute = () => { throw new Error("release"); };
   assert.throws(() => store.destroy(), AggregateError);
   assert.equal(images[1].src, "");
@@ -31,7 +31,8 @@ test("destroy retires every image even when one native release throws", async ()
 
 test("image construction failures are rejected loads and do not poison retries", async () => {
   const store = createPreparedImageStore({ createImage() { throw new Error("allocation"); } });
-  await assert.rejects(store.load("/image.webp"), /allocation/);
+  const lease = store.createLease();
+  await assert.rejects(lease.load("/image.webp"), /allocation/);
   assert.deepEqual(store.stats(), { pendingCount: 0, retainedCount: 0 });
 });
 
@@ -45,61 +46,61 @@ test("release still clears src if clearing srcset fails", () => {
 });
 
 test("deduplicates pending work and retains successful decoded identity", async () => {
-  const { store, images } = harness();
-  const a = store.load("/selected.webp");
-  assert.equal(store.load("/selected.webp"), a);
+  const { store, images, lease } = harness();
+  const a = lease.load("/selected.webp");
+  assert.equal(lease.load("/selected.webp"), a);
   assert.equal(images.length, 1);
   assert.equal(images[0].calls, 1);
   assert.deepEqual(store.stats(), { pendingCount: 1, retainedCount: 0 });
   images[0].resolve();
   assert.equal(await a, images[0]);
-  assert.equal(await store.load("/selected.webp"), images[0]);
+  assert.equal(await lease.load("/selected.webp"), images[0]);
   assert.deepEqual(store.stats(), { pendingCount: 0, retainedCount: 1 });
   store.destroy();
   assert.equal(images[0].src, "");
 });
 
 for (const badDimensions of [false, true]) test(`failed decode permits explicit retry (${badDimensions})`, async () => {
-  const { store, images } = harness();
-  const failed = store.load("/selected.webp");
+  const { store, images, lease } = harness();
+  const failed = lease.load("/selected.webp");
   if (badDimensions) { images[0].naturalWidth = 0; images[0].resolve(); }
   else images[0].reject(new Error("network"));
   await assert.rejects(failed, /selected.webp/);
   assert.equal(images[0].src, "");
   assert.deepEqual(store.stats(), { pendingCount: 0, retainedCount: 0 });
-  const retried = store.load("/selected.webp");
+  const retried = lease.load("/selected.webp");
   images[1].resolve();
   assert.equal(await retried, images[1]);
 });
 
 for (const rejectOld of [false, true]) test(`released old request cannot retire replacement (${rejectOld})`, async () => {
-  const { store, images } = harness();
-  const a = store.load("/selected.webp");
-  assert.equal(store.release("/selected.webp"), true);
-  const b = store.load("/selected.webp");
+  const { store, images, lease } = harness();
+  const a = lease.load("/selected.webp");
+  assert.equal(lease.release("/selected.webp"), true);
+  const b = lease.load("/selected.webp");
   if (rejectOld) images[0].reject(new Error("late"));
   else images[0].resolve();
   assert.equal(await a, null);
   assert.deepEqual(store.stats(), { pendingCount: 1, retainedCount: 0 });
   images[1].resolve();
   assert.equal(await b, images[1]);
-  assert.equal(store.release("/selected.webp"), true);
-  assert.equal(store.release("/selected.webp"), false);
+  assert.equal(lease.release("/selected.webp"), true);
+  assert.equal(lease.release("/selected.webp"), false);
 });
 
 test("destroy releases pending and retained images, not independent stores", async () => {
-  const { store, images } = harness();
-  const pending = store.load("/pending.webp");
-  const retained = store.load("/retained.webp");
+  const { store, images, lease } = harness();
+  const pending = lease.load("/pending.webp");
+  const retained = lease.load("/retained.webp");
   images[1].resolve();
   await retained;
   const other = harness();
-  const otherLoad = other.store.load("/pending.webp");
+  const otherLoad = other.lease.load("/pending.webp");
   store.destroy();
   store.destroy();
   assert.deepEqual(images.map(({ src }) => src), ["", ""]);
   assert.deepEqual(store.stats(), { pendingCount: 0, retainedCount: 0 });
-  assert.equal(await store.load("/new.webp"), null);
+  assert.equal(await lease.load("/new.webp"), null);
   assert.equal(images.length, 2);
   images[0].reject(new Error("destroyed"));
   assert.equal(await pending, null);

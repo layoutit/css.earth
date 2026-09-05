@@ -127,8 +127,12 @@ test("keeps runtime scene work retained and CSS-only", async () => {
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
-  assert.match(client, /createRetainedCubicSkyOrbit/u);
-  assert.match(client, /mountRetainedDirectionalSun/u);
+  const { auditObjectRuntimeOwnership } = await import("../../../../tools/check-object-runtime-ownership.mjs");
+  const { OBJECTS } = await import("../../../../site/objects.mjs");
+  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "pluto") });
+  assert.equal(audit.complete, true);
+  assert.ok(audit.sharedClosure.includes("src/platform/cubic-sky-runtime.mjs"));
+  assert.ok(audit.sharedClosure.includes("src/platform/directional-sun-runtime.mjs"));
   assert.doesNotMatch(client, /createElement\(["']canvas/u);
   assert.doesNotMatch(client, /createElementNS/u);
   assert.doesNotMatch(styles,

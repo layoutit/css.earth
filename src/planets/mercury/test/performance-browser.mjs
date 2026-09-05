@@ -104,7 +104,7 @@ try {
       stableDomIdentity: window.__mercury.assertStableDomIdentity(),
       selectedPreparedDensity:
         window.__mercury.renderStats.textureStats.selectedPreparedDensity,
-      materialCache: window.__mercury.renderStats.textureStats.materialCache(),
+      materialCache: window.__mercury.runtime.resources().pools.find(pool => pool.id === "lighting"),
       cameraTransport: window.__mercury.camera.stats(),
     };
   });
@@ -147,8 +147,8 @@ try {
   assert.equal(report.cameraTransport.pitchBounded, false);
   assert.equal(report.cameraTransport.yawBounded, false);
   assert.ok(report.cameraTransport.publications > 0);
-  assert.equal(report.materialCache.maximumRetainedRowCount, 3);
-  assert.ok(report.materialCache.retainedRowCount <= 3);
+  assert.equal(report.materialCache.capacity, 3);
+  assert.ok(report.materialCache.nativeSlots <= 3);
   assert.ok(report.synchronousPublicationMilliseconds < 50);
   assert.ok(report.framePublicationMilliseconds.p95 < 35);
   console.log(JSON.stringify(report, null, 2));
