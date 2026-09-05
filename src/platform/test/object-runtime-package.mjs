@@ -7,7 +7,9 @@ import { createObjectControlBinding } from "../object-control-binding.mjs";
 import { createObjectSelectionRuntime } from "../object-selection-runtime.mjs";
 import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coordinate.mjs";
 import { createSceneLifetime } from "../scene-lifetime.mjs";
-import { requireObjectRuntimeDefinition, requireResolvedPresentation } from "../object-runtime-contract.mjs";
+import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../prepared-presentation-contract.mjs";
+import { mountPreparedPresentation, resolvePreparedPresentation } from "../prepared-presentation.mjs";
+import { initialObjectSelection, requireObjectRuntimeDefinition, requireResolvedPresentation } from "../object-runtime-contract.mjs";
 
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 
@@ -22,7 +24,9 @@ export function objectRuntimePackageTests(definition) {
       skySunViewDirection: definition.sun?.referenceViewDirection ?? null,
       sunViewDirection: definition.sun ? viewSunDirectionToPreparedLightDirection(definition.sun.referenceViewDirection) : null };
     view.reference = view;
-    requireResolvedPresentation(definition.resolvePresentation({ selection: definition.initialSelection, view }), definition);
+    const selection = definition.initialSelection ?? initialObjectSelection(definition.controls);
+    requireResolvedPresentation(definition.schema === PREPARED_OBJECT_RUNTIME_SCHEMA
+      ? resolvePreparedPresentation(definition, { selection, view }) : definition.resolvePresentation({ selection, view }), definition);
   });
 
   function fixture() {
@@ -181,7 +185,9 @@ export async function preparedSelectionFixture(definition) {
   } });
   f.lifetime.onDispose(() => residency.destroy());
   const startup = residency.prepareStartup(); await settle(); await startup;
-  const presentation = definition.createPresentation(f.stage, { ...f.context, resources: residency.resources });
+  const presentation = definition.schema === PREPARED_OBJECT_RUNTIME_SCHEMA
+    ? mountPreparedPresentation(f.stage, { ...f.context, resources: residency.resources }, definition)
+    : definition.createPresentation(f.stage, { ...f.context, resources: residency.resources });
   residency.finishStartup();
   const inputs = new Map(), buttons = [];
   const input = fields => ({ dataset: {}, disabled: false, listeners: new Map(), ...fields,
@@ -201,7 +207,7 @@ export async function preparedSelectionFixture(definition) {
     onChange: state => binding?.publish(state), onFatalError(error) { errors.push(error); f.lifetime.destroy(); },
     onMaterialError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => selection.destroy());
-  binding = createObjectControlBinding({ stage: f.stage, controls: definition.controls, initialSelection: definition.initialSelection,
+  binding = createObjectControlBinding({ stage: f.stage, controls: definition.controls, initialSelection: definition.initialSelection ?? initialObjectSelection(definition.controls),
     getState: selection.state, onAction: selection.dispatch, onError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => binding.destroy());
   const view = { controlPitch: definition.camera.defaultControlPitchDegrees ?? 0,

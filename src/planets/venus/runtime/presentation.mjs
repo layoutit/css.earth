@@ -1,4 +1,3 @@
-import { createPolyCamera, createPolyScene } from "@layoutit/polycss";
 import { createPreparedProjectiveTextureLeaf } from "../../../platform/prepared-projective-texture-leaf.mjs";
 import { preparedScenePitch } from "../../../platform/cubic-sky-runtime.mjs";
 import { validatePreparedCubicSky } from "../../../platform/cubic-sky-contract.mjs";
@@ -15,13 +14,20 @@ export function createPresentation(stage, context) {
     throw new TypeError("Venus retained scene plan is incompatible.");
   }
   validatePreparedCubicSky(plan.starfield, { requireSun: false });
-  const camera = createPolyCamera(plan.camera.state);
-  const scene = createPolyScene(stage, { camera });
-  context.own(() => scene.destroy());
+  const cameraElement = document.createElement("div");
+  const sceneElement = document.createElement("div");
+  context.own(() => cameraElement.remove());
+  cameraElement.className = "polycss-camera planet-render-root";
+  cameraElement.style.cssText = plan.camera.style;
+  sceneElement.className = "polycss-scene";
+  sceneElement.ariaHidden = "true";
+  sceneElement.dataset.polycssLighting = "baked";
+  sceneElement.style.cssText = plan.camera.sceneStyle;
+  cameraElement.appendChild(sceneElement);
+  stage.appendChild(cameraElement);
   context.own(() => {
-    if (scene.cameraEl.parentNode === stage) delete stage.dataset.lens;
+    if (cameraElement.parentNode === stage) delete stage.dataset.lens;
   });
-  scene.cameraEl.classList.add("planet-render-root");
   const system = createMesh(
     "venus-system",
     `transform:rotateY(${-plan.body.axialTiltDegrees}deg)`,
@@ -33,13 +39,13 @@ export function createPresentation(stage, context) {
   }
   body.appendChild(fragment);
   system.appendChild(body);
-  scene.sceneElement.appendChild(system);
+  sceneElement.appendChild(system);
 
   const materialComposite = document.createElement("div");
   context.own(() => materialComposite.remove());
   materialComposite.className = "venus-material-composite planet-render-root";
   materialComposite.ariaHidden = "true";
-  materialComposite.style.setProperty("--venus-camera-zoom", String(camera.state.zoom));
+  materialComposite.style.setProperty("--venus-camera-zoom", String(plan.camera.defaultZoom));
   const material = document.createElement("s");
   material.className = "venus-fixed-material";
   material.style.backgroundSize = plan.material.backgroundSize;
@@ -48,13 +54,13 @@ export function createPresentation(stage, context) {
   materialComposite.appendChild(material);
   stage.appendChild(materialComposite);
   const registration = registerBodyDependentLayers({ objectId: "venus",
-    sceneElement: scene.sceneElement, bodySystem: system, lightingOverlays: [material] });
+    sceneElement: sceneElement, bodySystem: system, lightingOverlays: [material] });
   let materialFrame = plan.material.defaultFrame, materialLightRollDegrees = 0;
   let sunViewDirection = viewSunDirectionToPreparedLightDirection(PREPARED_VENUS_SKY_SUN.referenceViewDirection);
   let shadowsEnabled = false;
   for (const name of ["venus-hide-atmosphere", "venus-hide-stars"]) context.own(() => stage.classList.remove(name));
   return Object.freeze({
-    cameraElement: scene.cameraEl, sceneElement: scene.sceneElement,
+    cameraElement: cameraElement, sceneElement: sceneElement,
     bodyLayers: Object.freeze([registration]),
     commitSelection({ selection }) {
       stage.dataset.lens = selection.lensId;
@@ -63,11 +69,10 @@ export function createPresentation(stage, context) {
       stage.classList.toggle("venus-hide-stars", !selection.stars);
     },
     publishFrame({ selection, view: state }) {
-      camera.update({ rotX: preparedScenePitch(state.controlPitch, plan.camera), rotY: state.controlYaw, zoom: state.zoom });
-      scene.cameraEl.dataset.polycssCameraRotX = String(camera.state.rotX);
-      scene.cameraEl.dataset.polycssCameraRotY = String(camera.state.rotY);
-      scene.cameraEl.dataset.polycssCameraZoom = String(state.zoom);
-      scene.cameraEl.dataset.venusCameraMatrix = state.sceneMatrix;
+      cameraElement.dataset.polycssCameraRotX = String(Math.round(preparedScenePitch(state.controlPitch, plan.camera) * 100) / 100);
+      cameraElement.dataset.polycssCameraRotY = String(state.controlYaw);
+      cameraElement.dataset.polycssCameraZoom = String(state.zoom);
+      cameraElement.dataset.venusCameraMatrix = state.sceneMatrix;
       materialComposite.style.setProperty("--venus-camera-zoom", String(state.zoom));
       sunViewDirection = state.sunViewDirection;
       shadowsEnabled = selection.shadows;

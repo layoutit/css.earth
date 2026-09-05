@@ -4,6 +4,8 @@ import { PLANET_SPEED_STATES } from "./planet-feature-controls.mjs";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.mjs";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.mjs";
 
+import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, requirePreparedPresentation } from "./prepared-presentation-contract.mjs";
+
 export const OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@1";
 const definitionKeys = new Set(["schema", "id", "controls", "camera", "sky", "sun",
   "inputSelector", "assets", "initialSelection", "reduceSelection",
@@ -163,6 +165,14 @@ export function requireResolvedPresentation(plan, definition) {
 }
 
 export function requireObjectRuntimeDefinition(definition, { objectId = definition?.id, controls } = {}) {
+  if (definition?.schema === PREPARED_OBJECT_RUNTIME_SCHEMA) {
+    const { schema, id, controls: suppliedControls, ...prepared } = definition;
+    if (!/^[a-z][a-z0-9-]*$/.test(id ?? "") || id !== objectId) throw new TypeError(`Object runtime identity does not match ${objectId}.`);
+    if (controls !== undefined && suppliedControls !== controls) throw new TypeError(`${objectId} must supply its actual control-content export.`);
+    requirePreparedResourceCatalog(prepared.assets);
+    requirePreparedPresentation({ ...prepared, schema: PREPARED_PRESENTATION_SCHEMA }, { controls: suppliedControls });
+    return definition;
+  }
   keys(definition, definitionKeys, "Object runtime definition");
   if (definition.schema !== OBJECT_RUNTIME_SCHEMA ||
       !/^[a-z][a-z0-9-]*$/.test(definition.id ?? "") || definition.id !== objectId) {
