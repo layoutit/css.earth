@@ -127,26 +127,30 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
   const beforeSkyPress = publications.length;
   const skyX = trackball.centerX + trackball.surfaceRadius + 1;
   surface.emit("pointerdown",skyX,710);
-  assert.equal(controls.stats().activeMode,"inertia",
-    "a disabled sky press must not interrupt the existing coast");
-  assert.equal(controls.stats().pendingPointer,false,
-    "a sky press must not reserve a drag");
-  assert.equal(surface.captured,false,"disabled sky input does not capture the pointer");
-  controls.stop();
+  assert.equal(controls.stats().activeMode,"idle",
+    "a sky press interrupts the existing coast");
+  assert.equal(controls.stats().pendingPointer,true,
+    "a sky press reserves an orbit drag");
+  assert.equal(surface.captured,true,"sky input captures the pointer");
+  assert.equal(controls.stats().projection,"screen-plane-orbit");
   surface.emit("pointermove",330,720); tick(720);
+  assert.equal(controls.stats().projection,"screen-plane-orbit",
+    "crossing onto the planet does not switch a sky-start gesture to sphere drag");
   surface.emit("pointerup",330,850);
-  assert.equal(publications.length,beforeSkyPress,
-    "entering the planet from a disabled sky press must not start a drag");
-  assert.equal(pending.size,0,"disabled sky input leaves no callback");
+  assert.equal(publications.length,beforeSkyPress+1,
+    "a sky-start gesture continues onto the planet");
+  assert.equal(pending.size,0,"a paused sky release leaves no callback");
   surface.emit("pointerdown",skyX,750);
   surface.emit("pointermove",skyX+1,760); tick(760);
   surface.emit("pointerup",skyX+1,770);
-  assert.equal(publications.length,beforeSkyPress,
-    "one-pixel sky input must not publish movement");
+  assert.equal(publications.length,beforeSkyPress+2,
+    "one-pixel radial sky input moves instead of sticking to the rim");
   assert.equal(pending.size,0,"released sky input schedules no idle work");
   const beforeRimDrag = publications.length;
   const rimX = trackball.centerX + trackball.surfaceRadius - 1;
   surface.emit("pointerdown",rimX,800);
+  assert.equal(controls.stats().projection,"screen-space-sphere",
+    "a new planet press retains the original sphere mapping");
   surface.emit("pointermove",skyX,810); tick(810);
   const atRim = publications.length;
   assert.equal(atRim,beforeRimDrag+1,
@@ -215,6 +219,77 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
   assert.equal(pending.size,0);
   controls.destroy();
   assert.equal(surface.listeners.size,0);
+});
+
+test("sky orbit keeps screen axes through reversals, limb crossings and release", async t => {
+  const { Surface } = await import("./test/orbit-fixture.mjs");
+  const prior = globalThis.HTMLElement;
+  globalThis.HTMLElement = Surface;
+  t.after(() => {
+    if (prior === undefined) delete globalThis.HTMLElement;
+    else globalThis.HTMLElement = prior;
+  });
+  const trackball = { centerX: 500, centerY: 400, radius: 200,
+    surfaceRadius: 220, focalLength: 900, angularDegreesPerTrackballRadius: 48,
+    pitchResponse: 1.3 };
+  const surface = new Surface(), publications = [];
+  let reads = 0;
+  const controls = createUnboundedMatrixDragControls({ inputSurface: surface,
+    trackballMetrics: () => { reads++; return trackball; },
+    rotate: value => publications.push(value) });
+  const emit = (type, x, y, timeStamp) => surface.dispatch(type, { clientX: x, clientY: y, timeStamp });
+  const close = (actual, expected) => actual.forEach((value, i) =>
+    assert.ok(Math.abs(value - expected[i]) < 1e-12, `${actual} differs from ${expected}`));
+  const screenRotation = (dx, dy) => {
+    const radiansPerPixel = 48 / 200 * Math.PI / 180;
+    return rotationFromAngularVelocity([-dy * radiansPerPixel, dx * radiansPerPixel, 0], 1);
+  };
+  try {
+    for (const [x, y, dx, dy] of [[900, 400, 40, 0], [900, 400, 0, 40],
+      [100, 100, -20, 30], [900, 400, -400, 0]]) {
+      controls.stop();
+      emit("pointerdown", x, y, 0); surface.tick(0);
+      const readsAtPress = reads;
+      emit("pointermove", x + dx, y + dy, 30); surface.tick(30);
+      const forward = publications.at(-1).rotation;
+      close(forward, screenRotation(dx, dy));
+      assert.equal(controls.stats().projection, "screen-plane-orbit");
+      emit("pointermove", x, y, 60); surface.tick(60);
+      close(composeDragRotation(publications.at(-1).rotation, forward), [0, 0, 0, 1]);
+      assert.equal(reads, readsAtPress, "sky movement does not add layout reads");
+      emit("pointerup", x, y, 200);
+      assert.equal(surface.frames.size, 0, "paused release leaves no callbacks");
+    }
+    // Radial movement would be zero under the planet's rim-clamped projection.
+    emit("pointerdown", 900, 400, 300); surface.tick(300);
+    for (const [x, time] of [[908, 335], [920, 370], [938, 405]]) {
+      emit("pointermove", x, 400, time); surface.tick(time);
+    }
+    emit("pointerup", 938, 400, 405.1);
+    assert.equal(controls.stats().activeMode, "inertia");
+    assert.equal(controls.stats().projection, "screen-plane-orbit");
+    for (const time of [440, 475]) {
+      surface.tick(time);
+      const q = publications.at(-1).rotation;
+      assert.ok(q[1] > 0, "release continues the same radial orbit direction");
+      close([q[0], q[2]], [0, 0]);
+    }
+    emit("pointerdown", 900, 400, 480);
+    const stopped = publications.length;
+    surface.tick(500);
+    assert.equal(publications.length, stopped, "a sky click stops the coast");
+    emit("pointerup", 900, 400, 501);
+    assert.equal(surface.frames.size, 0);
+    emit("pointerdown", 500, 400, 600);
+    emit("pointermove", 530, 420, 630); surface.tick(630);
+    close(publications.at(-1).rotation, projectSphereDrag({ ...trackball,
+      radius: trackball.surfaceRadius, previousX: 500, previousY: 400, currentX: 530, currentY: 420 }));
+    assert.equal(controls.stats().projection, "screen-space-sphere",
+      "the next planet drag uses the unchanged sphere math");
+    emit("pointercancel", 530, 420, 631);
+    assert.equal(surface.frames.size, 0);
+  } finally { controls.destroy(); }
+  assert.equal(surface.listenerCount(), 0);
 });
 
 test("wheel takes over a flight without leaving a camera callback", (t) => {

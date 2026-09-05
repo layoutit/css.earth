@@ -26,19 +26,22 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
       const before = await cameraPose(page, planet.id);
       await page.mouse.move(sky.x, sky.y);
       await page.mouse.down();
-      assert.equal((await motionStats(page, planet.id)).pendingPointer, false,
-        `${planet.id}: disabled sky press must not own a drag`);
+      assert.equal((await motionStats(page, planet.id)).pendingPointer, true,
+        `${planet.id}: sky press must own an orbit drag`);
+      assert.equal((await motionStats(page, planet.id)).projection, "screen-plane-orbit");
       assert.deepEqual(await cameraPose(page, planet.id), before,
         `${planet.id}: a stationary sky press must not rotate`);
       await page.mouse.move(sky.x - 40, sky.y + 20, { steps: 4 });
       const skyDragged = await cameraPose(page, planet.id);
-      assert.deepEqual(skyDragged, before,
-        `${planet.id}: dragging empty sky must not move the camera`);
+      assert.notDeepEqual(skyDragged.pose, before.pose,
+        `${planet.id}: dragging empty sky must orbit the camera`);
       await page.mouse.move(body.x, body.y, { steps: 4 });
       const crossed = await cameraPose(page, planet.id);
-      assert.deepEqual(crossed, skyDragged,
-        `${planet.id}: entering the planet from sky must not acquire a drag`);
-      assert.equal((await motionStats(page, planet.id)).activeMode, "idle");
+      assert.notDeepEqual(crossed.pose, skyDragged.pose,
+        `${planet.id}: a sky orbit continues onto the planet`);
+      assert.equal((await motionStats(page, planet.id)).activeMode, "drag");
+      assert.equal((await motionStats(page, planet.id)).projection, "screen-plane-orbit",
+        `${planet.id}: crossing the limb cannot switch the gesture mapping`);
       await page.waitForTimeout(150);
       await page.mouse.up();
       assert.deepEqual(await cameraPose(page, planet.id), crossed,
@@ -56,6 +59,7 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
 
       await page.mouse.move(body.x, body.y);
       await page.mouse.down();
+      assert.equal((await motionStats(page, planet.id)).projection, "screen-space-sphere");
       const beforeBodyDrag = await cameraPose(page, planet.id);
       await page.mouse.move(body.x + 1, body.y + 1);
       const tinyDrag = await cameraPose(page, planet.id);
@@ -66,6 +70,8 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
         `${planet.id}: a captured planet drag must continue outside the disc`);
       assert.equal((await motionStats(page, planet.id)).activeMode, "drag",
         `${planet.id}: leaving the disc must preserve drag ownership`);
+      assert.equal((await motionStats(page, planet.id)).projection, "screen-space-sphere",
+        `${planet.id}: planet-start drags retain their mapping outside the disc`);
       await page.mouse.up();
       assert.equal((await motionStats(page, planet.id)).pendingPointer, false,
         `${planet.id}: releasing outside must clear pointer ownership`);

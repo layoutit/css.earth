@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { WHEEL_ZOOM_SPEED_MULTIPLIER } from "../../site/runtime-policy.mjs";
+import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER } from "../../site/runtime-policy.mjs";
 
 import {
   createPreparedWheelZoomControls,
@@ -68,7 +68,7 @@ for (const speedMultiplier of [1, WHEEL_ZOOM_SPEED_MULTIPLIER]) test(
   assert.equal(pending.size, 0);
 });
 
-test("scroll distance stays precise across wheel notches, trackpad streams and browser units", async t => {
+test("wheel steps use a gentler gain without clipping precision gestures", async t => {
   const { Surface } = await import("./test/orbit-fixture.mjs");
   const prior = globalThis.HTMLElement; globalThis.HTMLElement = Surface;
   t.after(() => { globalThis.HTMLElement = prior; });
@@ -101,12 +101,31 @@ test("scroll distance stays precise across wheel notches, trackpad streams and b
   const pageUnits = replay([{ deltaY: -.125, deltaMode: 2, timeStamp: 0 }]);
   const tiny = replay([{ deltaY: -1, timeStamp: 0 }]);
   assert.ok(tiny > 1 && tiny < 1.01, "a one-pixel movement must not behave like a full notch");
-  assert.ok(Math.abs(notch - Math.exp(.216 * WHEEL_ZOOM_SPEED_MULTIPLIER)) < 1e-12);
-  for (const zoom of [stream, slowStream, lineUnits, pageUnits]) {
-    assert.ok(Math.abs(zoom - notch) < 1e-12, "equal scroll travel must produce equal zoom, independent of event cadence");
+  assert.ok(Math.abs(notch - Math.exp(.216 * WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER)) < 1e-12);
+  assert.ok(notch > 1.2 && notch < 1.25, "a coarse notch must be a modest zoom step");
+  for (const zoom of [stream, slowStream]) {
+    assert.ok(Math.abs(zoom - Math.exp(.216 * WHEEL_ZOOM_SPEED_MULTIPLIER)) < 1e-12,
+      "small trackpad events retain the exact previous response regardless of cadence");
   }
-  assert.equal(replay([{ deltaY: -1000000, timeStamp: 0 }]), 4);
-  assert.equal(replay([{ deltaY: 1000000, timeStamp: 0 }]), .4);
+  for (const zoom of [lineUnits, pageUnits]) assert.ok(Math.abs(zoom - notch) < 1e-12);
+  for (const pixels of [1, 5, 10, 20, 25]) {
+    assert.ok(Math.abs(replay([{ deltaY: -pixels, timeStamp: 0 }]) -
+      Math.exp(.216 * WHEEL_ZOOM_SPEED_MULTIPLIER * pixels / 100)) < 1e-12);
+  }
+  assert.ok(Math.abs(replay([{ deltaY: -2, timeStamp: 0 }, { deltaY: -98, timeStamp: 8 }]) - stream) < 1e-12,
+    "a large accelerated trackpad packet retains the full precision gain, not a per-event cap");
+  assert.ok(Math.abs(replay([{ deltaY: -100, ctrlKey: true, timeStamp: 0 }]) - stream) < 1e-12,
+    "pinch-wheel input keeps the precision gain");
+  assert.ok(Math.abs(replay([{ deltaY: -100, timeStamp: 0 }, { deltaY: -100, timeStamp: 8 }]) - notch ** 2) < 1e-12,
+    "rapid mouse notches do not switch to trackpad gain");
+  assert.ok(Math.abs(replay([{ deltaY: -2, timeStamp: 0 }, { deltaY: -100, timeStamp: 500 }]) -
+    Math.exp(.216 * (WHEEL_ZOOM_SPEED_MULTIPLIER * .02 + WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER))) < 1e-12,
+    "a new mouse gesture does not inherit the preceding trackpad classification");
+  assert.ok(Math.abs(replay([{ deltaY: -100, timeStamp: 0 }, { deltaY: -2, timeStamp: 8 }]) -
+    Math.exp(.216 * (WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER + WHEEL_ZOOM_SPEED_MULTIPLIER * .02))) < 1e-12,
+    "switching to a precision device takes effect immediately");
+  assert.equal(replay(Array.from({ length: 10 }, (_, i) => ({ deltaY: -100, timeStamp: i * 20 }))), 4);
+  assert.equal(replay(Array.from({ length: 10 }, (_, i) => ({ deltaY: 100, timeStamp: i * 20 }))), .4);
   const f = fixture();
   try {
     f.surface.dispatch("wheel", { deltaY: -100, timeStamp: 0 }); f.surface.tick(80);

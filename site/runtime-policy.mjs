@@ -4,9 +4,26 @@ export const MOBILE_VIEWPORT_QUERY =
   `(max-width: ${MOBILE_VIEWPORT_MAX}px), (orientation: portrait)`;
 export const MOBILE_TOUCH_ACTION = "pan-y";
 export const CANONICAL_PREPARED_IMAGE_DENSITY = 2;
-export const SKYBOX_DRAG_ENABLED = false;
+export const SKYBOX_DRAG_ENABLED = true;
 export const WHEEL_ZOOM_SPEED_MULTIPLIER = 4;
+export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
+
+// WheelEvent has no device type. Infer discrete steps from line/page units or
+// coarse pixel steps; keep accelerated packets on the current precision gesture.
+export function wheelZoomInputKind(event, previousKind = null, previousTimestamp = -Infinity) {
+  if (event.deltaMode === 1 || event.deltaMode === 2) return "wheel";
+  if (event.ctrlKey || event.deltaX) return "trackpad";
+  const magnitude = Math.abs(event.deltaY);
+  // Some desktop wheel drivers emit this fractional pixel quantum per notch.
+  const wheelQuantum = 4.000244140625;
+  if (magnitude >= wheelQuantum &&
+      Math.abs(magnitude / wheelQuantum - Math.round(magnitude / wheelQuantum)) < 1e-6) return "wheel";
+  if (magnitude < 40 || !Number.isInteger(magnitude)) return "trackpad";
+  if (previousKind === "trackpad" && event.timeStamp >= previousTimestamp &&
+      event.timeStamp - previousTimestamp < 400) return "trackpad";
+  return "wheel";
+}
 
 export function automaticPlaybackPolicy({ sceneState, motionRequested, documentHidden, reducedMotion }) {
   const reason = sceneState !== "ready" ? "unavailable"

@@ -402,6 +402,16 @@ export function createUnboundedMatrixDragControls({
   let accumulatedPitch = 0;
   let accumulatedYaw = 0;
   let activeTrackball = null;
+  let skyGesture = false;
+  const projectSkyRotation = pointer => {
+    const projected = projectGoogleEarthTrackballDelta({
+      ...activeTrackball, ...pointer, radius: activeTrackball.radius,
+    });
+    return rotationFromAngularVelocity([
+      -projected.pitchDegrees * Math.PI / 180,
+      projected.yawDegrees * Math.PI / 180, 0,
+    ], 1);
+  };
   let trackballInvalidated = false;
   let previousPointerTimestamp = null;
   let cadenceFrame = null;
@@ -719,11 +729,11 @@ export function createUnboundedMatrixDragControls({
     if (!isTrackballMetrics(measuredTrackball)) {
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
     }
-    // Restrict the start only: an owned planet drag still continues off-disc.
-    if (!SKYBOX_DRAG_ENABLED && Math.hypot(
+    const startsOnSky = Math.hypot(
       event.clientX - measuredTrackball.centerX,
       event.clientY - measuredTrackball.centerY,
-    ) > measuredTrackball.surfaceRadius) return;
+    ) > measuredTrackball.surfaceRadius;
+    if (!SKYBOX_DRAG_ENABLED && startsOnSky) return;
     // Mouse compatibility events carry the second-press click count. Blocking
     // them here would postpone double-click flights until the final release.
     if (event.pointerType !== "mouse") event.preventDefault();
@@ -732,6 +742,8 @@ export function createUnboundedMatrixDragControls({
     interruptMotion("pointer");
     if (lifetime.disposed) return;
 
+    // Keep the chosen mapping until release, including crossings of the limb.
+    skyGesture = startsOnSky;
     pointerId = event.pointerId;
     pointerDragging = false;
     previousX = event.clientX;
@@ -801,9 +813,9 @@ export function createUnboundedMatrixDragControls({
         ...activeTrackball,
       });
       const fittedPitch = projected.pitchDegrees *
-        (activeTrackball.pitchResponse ??
+        (skyGesture ? 1 : activeTrackball.pitchResponse ??
           GOOGLE_EARTH_DRAG_INERTIA.directPitchResponse);
-      const sampleRotation = projectSphereDrag({
+      const sampleRotation = (skyGesture ? projectSkyRotation : projectSphereDrag)({
         previousX,
         previousY,
         currentX: sampleEvent.clientX,
@@ -862,7 +874,8 @@ export function createUnboundedMatrixDragControls({
       releaseAge <= GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds;
     const throwState = wasDragging && event.type === "pointerup" && freshRelease
       ? estimateGoogleEarthDragThrow({ history, releaseTimestamp: event.timeStamp,
-        trackball: activeTrackball, frameMilliseconds }) : null;
+        trackball: activeTrackball, frameMilliseconds,
+        projectRotation: skyGesture ? projectSkyRotation : undefined }) : null;
     // A rejected release clears the native rotation pending for the next
     // present. A throw keeps that movement as part of its launch.
     if (throwState !== null) flushPendingDrag();
@@ -971,7 +984,8 @@ export function createUnboundedMatrixDragControls({
     stats() {
       return Object.freeze({
         schema: GOOGLE_EARTH_DRAG_INERTIA.schema,
-        projection: "screen-space-sphere",
+        projection: skyGesture && (pointerId !== null || inertiaState !== null)
+          ? "screen-plane-orbit" : "screen-space-sphere",
         historyStorage: "fixed-capacity-float64-ring",
         activeMode,
         activeMotionCount:

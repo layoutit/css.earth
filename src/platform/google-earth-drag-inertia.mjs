@@ -162,10 +162,12 @@ export function estimateGoogleEarthDragThrow({
   releaseTimestamp,
   frameMilliseconds = 1000 / 60,
   trackball,
+  projectRotation = projectSphereDrag,
 }) {
   validateHistory(history);
   if (!Number.isFinite(releaseTimestamp) ||
-      !Number.isFinite(frameMilliseconds) || frameMilliseconds <= 0) {
+      !Number.isFinite(frameMilliseconds) || frameMilliseconds <= 0 ||
+      typeof projectRotation !== "function") {
     throw new TypeError("Google Earth drag throw inputs are invalid.");
   }
   if (history.length < 2) return null;
@@ -228,7 +230,7 @@ export function estimateGoogleEarthDragThrow({
   if (speed === 0) return null;
   // Average pointer velocity, then project a forward step at the release
   // point. Averaging older rotations uses a different tangent and speed.
-  const delta = projectSphereDrag({
+  const delta = projectRotation({
     previousX: history.x[latestIndex], previousY: history.y[latestIndex],
     currentX: history.x[latestIndex] +
       (history.x[latestIndex] - history.x[averageStartIndex]) / elapsed * frameMilliseconds,

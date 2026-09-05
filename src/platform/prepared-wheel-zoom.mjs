@@ -1,5 +1,6 @@
 import { projectSphereDrag } from "./sphere-drag.mjs";
-import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../../site/runtime-policy.mjs";
+import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
+  WHEEL_ZOOM_USE_SCROLL_DISTANCE, wheelZoomInputKind } from "../../site/runtime-policy.mjs";
 
 // Reference response from the isolated wheel-handler trace. The shared policy
 // adds scroll-distance sensitivity; disabling it restores the timed response.
@@ -54,6 +55,8 @@ export function createPreparedWheelZoomControls({
   let previousTimestamp = null;
   let anchor = null;
   let targetZoom = null;
+  let inputKind = null;
+  let previousInputTimestamp = -Infinity;
   let events = 0;
   let frames = 0;
 
@@ -117,13 +120,14 @@ export function createPreparedWheelZoomControls({
     event.preventDefault();
     const nextDirection = -Math.sign(event.deltaY);
     if (useScrollDistance) {
-      // Normalize browser units, not guessed device identities. A 100-pixel
-      // wheel step uses the reference interval; small trackpad deltas stay small.
+      inputKind = wheelZoomInputKind(event, inputKind, previousInputTimestamp);
+      previousInputTimestamp = event.timeStamp;
+      const inputSpeed = inputKind === "wheel" ? WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : speedMultiplier;
       const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2
         ? inputSurface.clientHeight || windowTarget.innerHeight || 800 : 1;
       const origin = frame !== null && direction === nextDirection ? targetZoom : camera.state.zoom;
       targetZoom = clamp(origin * Math.exp(-event.deltaY * unit / 100 *
-        PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * speedMultiplier *
+        PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * inputSpeed *
         PREPARED_WHEEL_ZOOM.intervalMilliseconds), minimumZoom, maximumZoom);
     }
     direction = nextDirection;
@@ -151,7 +155,7 @@ export function createPreparedWheelZoomControls({
       if (!enabled) stop();
     },
     destroy,
-    stats: () => Object.freeze({ active:frame !== null, events, frames }),
+    stats: () => Object.freeze({ active:frame !== null, events, frames, inputKind }),
   });
 }
 
