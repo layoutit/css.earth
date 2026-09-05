@@ -7,10 +7,9 @@ import {
 } from "./solar-geometry.mjs";
 import { prepareEclipticPresentationFrame } from
   "./solar-presentation-frame.mjs";
-import {
-  cssDirectionToViewDirection,
-  prepareSunReferenceViewDirection,
-} from "./solar-view-direction.mjs";
+import { prepareSunReferenceViewDirection } from
+  "./prepare-sun-view-direction.mjs";
+import { cssDirectionToViewDirection } from "./solar-view-direction.mjs";
 
 const BODIES = [
   "mercury",

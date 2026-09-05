@@ -8,7 +8,7 @@ import { PREPARED_SATURN_RUNTIME_SCENE } from
 test("mounts prepared PolyCSS texture leaves under retained planet groups", async () => {
   const [client, css, scenePreparer, moonPreparer, preparedSceneSource,
     preparedRuntimeSceneSource, preparedMoonSource] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../tools/prepare-scene.mjs", import.meta.url), "utf8"),
     readFile(new URL("../tools/prepare-moons.mjs", import.meta.url), "utf8"),
@@ -28,17 +28,10 @@ test("mounts prepared PolyCSS texture leaves under retained planet groups", asyn
   );
 
   assert.match(client, /preparedSceneRuntime\.mjs/u);
-  assert.match(client, /createRetainedCubicSkyOrbit\(/u);
-  assert.match(client, /mountRetainedCubicSky\(/u);
-  assert.match(client, /mountRetainedDirectionalSun\(/u);
   assert.match(client, /for \(const band of plan\.bodyBands\)/u);
   assert.match(client, /createPreparedInterior\(plan\)/u);
-  assert.match(client, /runtimeDomGrowthPolicy: "none-retained-scene-complete-at-mount"/u);
-  assert.match(client, /assertStableDomIdentity/u);
-  assert.match(client, /createPreparedPlaybackClock\(sceneAnimations\)/u);
   assert.doesNotMatch(client,
     /bodyVisibility|createPreparedBodyVisibility/u);
-  assert.match(client, /orbitMaterialCache\.presentation\(materialFrame/u);
   assert.doesNotMatch(client,
     /canvas|getContext\(|new DOMMatrix|loadPreparedOrbitBank|DecompressionStream/u);
   assert.doesNotMatch(client, /PREPARED_SATURN_MOON|saturn-moon/u);

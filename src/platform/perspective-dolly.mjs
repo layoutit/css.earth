@@ -1,0 +1,323 @@
+import {
+  distanceForSilhouetteRadius,
+  rotationFromMatrix3d,
+  silhouetteRadiusAtDistance,
+} from "./heliocentric-view.mjs";
+
+// A true perspective camera for the shared orbit: the eye sits at the sky's
+// vanishing point (the camera root's CSS perspective, re-read whenever the
+// viewport or the shell layout changes) and frames by dolly. The prepared
+// camera plan declares it with `projection.model`, its wheel `dolly`, the
+// `orbitLineFade` and the `levelOfDetail` crossfade; the body's heliocentric
+// neighbourhood (Sun, orbit, marker) is projected with the same camera in
+// float64 and the body is placed by the same projection.
+//
+// Zoom stays the framing alias the responsive fit, the destination flights
+// and the material overlays speak: silhouette diameter over the logical body
+// diameter, times the default zoom.
+export const PERSPECTIVE_PROJECTION_MODEL = "css-perspective-shared-with-sky";
+export const SCENE_LOCKED_SKY_CAMERA_CONTRACT =
+  "scene-locked-unbounded-accumulated-matrix3d";
+
+export function isPerspectiveCameraPlan(plan) {
+  return plan?.projection?.model === PERSPECTIVE_PROJECTION_MODEL;
+}
+
+export function validatePerspectiveCameraPlan(plan) {
+  if (plan?.projection?.model !== PERSPECTIVE_PROJECTION_MODEL ||
+      typeof plan.projection.cssPerspective !== "string" ||
+      !plan.projection.cssPerspective ||
+      plan.dolly?.model !== "multiplicative-wheel-distance" ||
+      !Number.isFinite(plan.dolly.wheelStepPerDelta) ||
+      !Number.isFinite(plan.dolly.minimumDistanceRadii) ||
+      !Number.isFinite(plan.dolly.maximumDistanceOverOrbitExtent) ||
+      !Number.isFinite(plan.orbitLineFade?.visibleBelowDiscHeightShare) ||
+      !Number.isFinite(plan.orbitLineFade?.hiddenAboveDiscHeightShare) ||
+      !(plan.orbitLineFade.hiddenAboveDiscHeightShare >
+        plan.orbitLineFade.visibleBelowDiscHeightShare) ||
+      plan.levelOfDetail?.model !== "silhouette-diameter-crossfade" ||
+      !(plan.levelOfDetail.billboardFadeStartDiscPixels >
+        plan.levelOfDetail.billboardFullDiscPixels) ||
+      !(plan.levelOfDetail.billboardFullDiscPixels >
+        plan.levelOfDetail.markerFadeStartDiscPixels) ||
+      !(plan.levelOfDetail.markerFadeStartDiscPixels >
+        plan.levelOfDetail.markerFullDiscPixels) ||
+      !(plan.levelOfDetail.markerFullDiscPixels > 0) ||
+      !Number.isFinite(plan.logicalBodyDiameter) ||
+      !(plan.defaultZoom > 0) || !(plan.maximumZoom > 0) ||
+      !Number.isFinite(plan.sceneScale)) {
+    throw new TypeError("Perspective camera contract drifted.");
+  }
+  return plan;
+}
+
+// The stage from the projected disc: the coarser stage fades in over the
+// finer one, which stays painted until the coarser is opaque and then hides.
+export function levelOfDetailFor(levelOfDetail, silhouetteDiameter) {
+  const billboardOpacity = clamp(
+    (levelOfDetail.billboardFadeStartDiscPixels - silhouetteDiameter) /
+      (levelOfDetail.billboardFadeStartDiscPixels -
+        levelOfDetail.billboardFullDiscPixels),
+    0,
+    1,
+  );
+  const markerOpacity = clamp(
+    (levelOfDetail.markerFadeStartDiscPixels - silhouetteDiameter) /
+      (levelOfDetail.markerFadeStartDiscPixels -
+        levelOfDetail.markerFullDiscPixels),
+    0,
+    1,
+  );
+  const stage = markerOpacity >= 1
+    ? "marker"
+    : billboardOpacity >= 1
+      ? "billboard"
+      : billboardOpacity > 0 ? "crossfade" : "geometry";
+  return Object.freeze({
+    stage,
+    silhouetteDiameter,
+    billboardOpacity,
+    markerOpacity,
+  });
+}
+
+export function orbitLineOpacity(fade, discHeightShare) {
+  return clamp(
+    (fade.hiddenAboveDiscHeightShare - discHeightShare) /
+      (fade.hiddenAboveDiscHeightShare - fade.visibleBelowDiscHeightShare),
+    0,
+    1,
+  );
+}
+
+export function createPerspectiveDolly({
+  cameraPlan,
+  heliocentric,
+  cameraElement,
+  sceneElement,
+  skyElement,
+  stage,
+}) {
+  validatePerspectiveCameraPlan(cameraPlan);
+  const plan = heliocentric?.plan;
+  if (!plan?.units || !(plan.units.bodyRadiusUnits > 0) ||
+      !(plan.units.kilometersPerUnit > 0) ||
+      !(plan.orbit?.maximumExtentUnits > 0) ||
+      !cameraElement?.style || !sceneElement?.style || !skyElement ||
+      !heliocentric.sunRoot?.style || !stage) {
+    throw new TypeError("Perspective dolly requires the mounted heliocentric view.");
+  }
+  const levelOfDetail = cameraPlan.levelOfDetail;
+  const bodyRadius = plan.units.bodyRadiusUnits;
+  const kilometersPerUnit = plan.units.kilometersPerUnit;
+  const maximumDistance = cameraPlan.dolly.maximumDistanceOverOrbitExtent *
+    plan.orbit.maximumExtentUnits;
+  // Object packages own their prepared perspective as data; the roots are
+  // never scaled, so the same eye serves the Sun's root and the body's.
+  for (const root of [cameraElement, heliocentric.sunRoot]) {
+    root.style.perspective = cameraPlan.projection.cssPerspective;
+  }
+  const cameraState = {
+    rotX: cameraPlan.defaultControlPitchDegrees,
+    rotY: cameraPlan.defaultControlYawDegrees,
+    distance: 0,
+  };
+  let focal = 0;
+  let viewportWidth = 1;
+  let viewportHeight = 1;
+  // The eye sits at the sky's vanishing point; the shell lays the body's root
+  // out beside its chrome, so the body is viewed slightly off-axis. The
+  // offset is the principal point relative to the root's centre.
+  let principalOffset = Object.freeze([0, 0]);
+  let projection = null;
+  let lod = levelOfDetailFor(levelOfDetail, Number.POSITIVE_INFINITY);
+  let publishedSceneTransform = null;
+  let transformWrites = 0;
+
+  const measure = () => {
+    const view = cameraElement.ownerDocument.defaultView;
+    const nextFocal = parseFloat(view.getComputedStyle(cameraElement).perspective);
+    const bounds = cameraElement.getBoundingClientRect();
+    if (!(nextFocal > 0) || !(bounds.width > 0) || !(bounds.height > 0)) {
+      throw new Error("Perspective camera root has no projection.");
+    }
+    focal = nextFocal;
+    viewportWidth = bounds.width;
+    viewportHeight = bounds.height;
+    const skyBounds = skyElement.getBoundingClientRect();
+    const [skyOriginX, skyOriginY] = view.getComputedStyle(skyElement)
+      .perspectiveOrigin.split(" ").map(parseFloat);
+    principalOffset = Object.freeze([
+      skyBounds.x + skyOriginX - (bounds.x + bounds.width / 2),
+      skyBounds.y + skyOriginY - (bounds.y + bounds.height / 2),
+    ].map((value) => Number.isFinite(value) ? value : 0));
+    const origin = `calc(50% + ${formatNumber(principalOffset[0])}px) ` +
+      `calc(50% + ${formatNumber(principalOffset[1])}px)`;
+    cameraElement.style.perspectiveOrigin = origin;
+    heliocentric.sunRoot.style.perspectiveOrigin = origin;
+  };
+  const zoomToDistance = (zoom) => distanceForSilhouetteRadius(
+    bodyRadius,
+    focal,
+    Math.max(1e-6, zoom / cameraPlan.defaultZoom * cameraPlan.logicalBodyDiameter / 2),
+    principalOffset,
+  );
+  // The round trip through the distance is exact only to floating point;
+  // the alias reports the prepared bound itself at the bound.
+  const distanceToZoom = (distance) => {
+    const zoom = silhouetteRadiusAtDistance(bodyRadius, focal, distance, principalOffset) *
+      2 / cameraPlan.logicalBodyDiameter * cameraPlan.defaultZoom;
+    return Math.abs(zoom - cameraPlan.maximumZoom) < 1e-9 ? cameraPlan.maximumZoom : zoom;
+  };
+  const minimumDistance = () => Math.max(
+    cameraPlan.dolly.minimumDistanceRadii * bodyRadius,
+    zoomToDistance(cameraPlan.maximumZoom),
+  );
+  const clampDistance = (distance) =>
+    clamp(distance, minimumDistance(), maximumDistance);
+  measure();
+  // The prepared default framing until the responsive fit is selected: the
+  // camera is never inside the body, even before its first publication.
+  cameraState.distance = clampDistance(zoomToDistance(cameraPlan.defaultZoom));
+
+  const camera = Object.freeze({
+    get state() {
+      return Object.freeze({
+        rotX: cameraState.rotX,
+        rotY: cameraState.rotY,
+        distance: cameraState.distance,
+        zoom: distanceToZoom(cameraState.distance),
+      });
+    },
+    update(partial) {
+      if (partial.rotX !== undefined) cameraState.rotX = partial.rotX;
+      if (partial.rotY !== undefined) cameraState.rotY = partial.rotY;
+      if (partial.distanceKilometers !== undefined) {
+        cameraState.distance = clampDistance(partial.distanceKilometers / kilometersPerUnit);
+      } else if (partial.distance !== undefined) {
+        cameraState.distance = clampDistance(partial.distance);
+      } else if (partial.zoom !== undefined) {
+        cameraState.distance = clampDistance(zoomToDistance(partial.zoom));
+      }
+    },
+  });
+
+  return Object.freeze({
+    camera,
+    measure,
+    // The alias bounds: the prepared close framing and the whole-orbit dolly
+    // distance seen through the same alias.
+    minimumZoom: () => distanceToZoom(maximumDistance),
+    maximumZoom: () => cameraPlan.maximumZoom,
+    // Re-clamps the distance after the viewport (and so the focal length)
+    // changed.
+    reclamp() {
+      camera.update({ distance: cameraState.distance });
+    },
+    // Projects the Sun, the orbit and the body for the accumulated scene
+    // rotation and places the body: its centre `distance` from the eye on the
+    // line that projects to the root's centre, then the rotation. The scene
+    // scale must be uniform in three dimensions: a 2D scale() leaves the
+    // body's depth unscaled, which a real perspective camera notices.
+    publish(sceneMatrix, scenePresentation) {
+      const distance = cameraState.distance;
+      projection = heliocentric.publish({
+        rotation: rotationFromMatrix3d(sceneMatrix),
+        distance,
+        focal,
+        viewportWidth,
+        viewportHeight,
+        principalOffset,
+      });
+      const [bodyX, bodyY, bodyZ] = projection.body.translate;
+      const transform =
+        `translate3d(${formatNumber(bodyX)}px, ${formatNumber(bodyY)}px, ` +
+        `${formatNumber(bodyZ)}px) ` +
+        `scale3d(${cameraPlan.sceneScale}, ${cameraPlan.sceneScale}, ` +
+        `${cameraPlan.sceneScale}) ${scenePresentation}`;
+      if (transform !== publishedSceneTransform) {
+        sceneElement.style.transform = transform;
+        publishedSceneTransform = transform;
+        transformWrites += 1;
+      }
+      heliocentric.setOrbitOpacity(orbitLineOpacity(
+        cameraPlan.orbitLineFade,
+        projection.body.silhouetteDiameter / viewportHeight,
+      ));
+      lod = levelOfDetailFor(levelOfDetail, projection.body.silhouetteDiameter);
+      heliocentric.setMarkerOpacity(lod.markerOpacity);
+      return Object.freeze({
+        distance,
+        focal,
+        viewportWidth,
+        viewportHeight,
+        principalOffset,
+        body: projection.body,
+        sun: projection.sun,
+        levelOfDetail: lod,
+      });
+    },
+    // The drag trackball: the projected silhouette. A small body still orbits
+    // comfortably: the trackball never shrinks below a fifth of the
+    // viewport's short side, and the sphere the drag rides is that disc.
+    trackball() {
+      const bounds = cameraElement.getBoundingClientRect();
+      const stageBounds = stage.getBoundingClientRect();
+      const silhouette = projection?.body.silhouette;
+      const centerX = bounds.x + bounds.width / 2 + (silhouette?.centre[0] ?? 0);
+      const centerY = bounds.y + bounds.height / 2 + (silhouette?.centre[1] ?? 0);
+      const radius = Math.max(
+        projection?.body.silhouetteRadius ?? bodyRadius,
+        Math.min(viewportWidth, viewportHeight) / 5,
+      );
+      return Object.freeze({
+        centerX,
+        centerY,
+        opticalCenterX: bounds.x + bounds.width / 2 + principalOffset[0],
+        opticalCenterY: bounds.y + bounds.height / 2 + principalOffset[1],
+        radius,
+        surfaceRadius: radius,
+        focalLength: focal,
+        viewportWidth: stageBounds.width,
+        viewportCenterX: (stageBounds.left ?? 0) + stageBounds.width / 2,
+        viewportCenterY: (stageBounds.top ?? 0) + stageBounds.height / 2,
+      });
+    },
+    state() {
+      return Object.freeze({
+        distance: cameraState.distance,
+        distanceKilometers: cameraState.distance * kilometersPerUnit,
+        distanceRadii: cameraState.distance / bodyRadius,
+        focal,
+        principalOffset,
+        offAxisDegrees: projection?.body.offAxisDegrees ?? null,
+        silhouetteRadius: projection?.body.silhouetteRadius ?? null,
+      });
+    },
+    levelOfDetail: () => lod,
+    stats({ wheelDollies = 0 } = {}) {
+      return Object.freeze({
+        projection: cameraPlan.projection,
+        dolly: Object.freeze({
+          ...cameraPlan.dolly,
+          minimumDistance: minimumDistance(),
+          maximumDistance,
+          minimumDistanceKilometers: minimumDistance() * kilometersPerUnit,
+          maximumDistanceKilometers: maximumDistance * kilometersPerUnit,
+          wheelDollies,
+        }),
+        levelOfDetail,
+        orbitLineFade: cameraPlan.orbitLineFade,
+        sceneTransformWrites: transformWrites,
+      });
+    },
+  });
+}
+
+function formatNumber(value) {
+  return Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
+}
+
+function clamp(value, minimum, maximum) {
+  return Math.max(minimum, Math.min(maximum, value));
+}

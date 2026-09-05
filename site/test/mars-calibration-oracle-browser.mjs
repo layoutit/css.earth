@@ -233,7 +233,7 @@ async function captureDensity(browserInstance, density) {
         return image.decode();
       };
       await Promise.all([decode(surfaceUrl), decode(polesUrl)]);
-      window.__mars.pause();
+      { const motion = document.querySelector(".planet-motion-setting"); if (motion.checked) motion.click(); }
       for (const animation of document.getAnimations()) {
         animation.currentTime = 0;
         animation.pause();

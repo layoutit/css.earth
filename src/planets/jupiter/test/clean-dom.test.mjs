@@ -25,35 +25,27 @@ test("keeps the Jupiter scene as one fixed retained PolyCSS tree", async () => {
     leaves.length === 1 && leaves.every(({ tag, style }) =>
       ["b", "s", "u"].includes(tag) && typeof style === "string")));
 
-  assert.match(client, /createDocumentFragment\(\)/u);
-  assert.match(client,
-    /createMesh\("polycss-camera planet-render-root", plan\.camera\.style\)/u);
-  assert.match(client,
-    /createMesh\(\s*"jupiter-fixed-material-counter"/u);
-  assert.match(client,
-    /PREPARED_JUPITER_CAMERA\.materialDepthPresentation\.materialMeshTransform/u);
-  assert.match(client, /scene\.appendChild\(materialSystem\)/u);
-  assert.match(client, /stage\.replaceChildren\(camera\)/u);
-  assert.doesNotMatch(client, /jupiter-render-composite/u);
-  assert.match(client, /runtimeDomGrowthPolicy: "none"/u);
-  assert.match(client, /const stableNodes = Object\.freeze\(\[/u);
-  assert.match(client, /PREPARED_JUPITER_RINGS\.leaves/u);
-  assert.match(client, /createRowShardCache\(PREPARED_JUPITER_LIGHTING\)/u);
-  assert.match(client, /createRetainedCubicSkyOrbit\(/u);
-  assert.match(client, /mountRetainedCubicSky\(/u);
-  assert.doesNotMatch(client, /loadPreparedOrbitBank|DecompressionStream/u);
-  assert.match(client, /const materialLeaf = document\.createElement\("s"\)/u);
-  assert.doesNotMatch(client, /materialLeaves/u);
-  assert.match(client, /idleJavaScriptLoops: 0/u);
-  assert.match(client, /assertStableDomIdentity/u);
-  assert.match(client, /lensDecodePromises\.get\(lens\.id\)/u);
-  assert.match(client, /if \(destroyed\) return/u);
-  assert.match(client,
-    /resume\(\) \{[\s\S]*?shouldPlay = true;[\s\S]*?if \(!mounted\) return;/u);
-  assert.match(client, /releaseScene\(\)/u);
-  assert.match(client, /stage\.replaceChildren\(\)/u);
-  assert.match(client, /events\.abort\(\)/u);
-  assert.equal((client.match(/style\.setProperty\(/gu) ?? []).length, 0);
+  const { runtimeDefinition } = await import("../runtime/definition.mjs");
+  const { retainedPresentationFixture } = await import("../../../platform/test/object-runtime-package.mjs");
+  const f = retainedPresentationFixture(runtimeDefinition);
+  try {
+    const presentation = runtimeDefinition.createPresentation(f.stage, f.context);
+    const nodes = f.stage.querySelectorAll("*");
+    const material = nodes.find(node => node.classList.contains("jupiter-material"));
+    const rings = nodes.find(node => node.classList.contains("jupiter-rings"));
+    const { PREPARED_JUPITER_CAMERA } = await import("../runtime/preparedCamera.mjs");
+    assert.equal(material.style.transform, PREPARED_JUPITER_CAMERA.materialDepthPresentation.materialMeshTransform.replace(/^transform:/, ""));
+    assert.equal(material.children.length, 1);
+    assert.equal(material.children[0].tagName, "S");
+    assert.equal(rings.children.length, PREPARED_JUPITER_RINGS.retainedDom.leafCount);
+    assert.equal(nodes.filter(node => ["B", "S", "U"].includes(node.tagName)).length, 789);
+    for (const lens of runtimeDefinition.controls.lenses.controls) {
+      presentation.commitSelection({ selection: { ...runtimeDefinition.initialSelection, lensId: lens.id } });
+      assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
+    }
+    presentation.observe();
+    f.lifetime.destroy(); assert.equal(f.stage.children.length, 0);
+  } finally { f.restore(); }
   assert.doesNotMatch(client, /PREPARED_JUPITER_MOONS|jupiter-moon/u);
   assert.doesNotMatch(css, /jupiter-moon/u);
   assert.doesNotMatch(client,

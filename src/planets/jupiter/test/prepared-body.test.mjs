@@ -182,7 +182,7 @@ test("prepares seam ownership and polar projection without runtime work", () => 
 
 test("keeps topology and raster work out of the browser runtime", async () => {
   const [client, css, shellCss] = await Promise.all([
-    readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../../../../site/site.css", import.meta.url), "utf8"),
   ]);

@@ -250,7 +250,7 @@ async function auditPlanet(planet) {
       timeout: 120_000,
     });
     await page.evaluate((planetId) => {
-      window[`__${planetId}`].pause();
+      (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
       for (const animation of document.getAnimations()) {
         animation.pause();
         animation.currentTime = 0;

@@ -147,18 +147,16 @@ test("publishes one prepared retained Mercury scene", () => {
   );
 });
 
-test("uses the shared Venus cubic-sky camera without a decoded transform bank", async () => {
+test("uses the common object orbit without a decoded transform bank", async () => {
   const client = await readFile(new URL("../runtime/client.mjs", import.meta.url),
     "utf8");
   const cubicSkyRuntime = await readFile(new URL(
     "../../../platform/cubic-sky-runtime.mjs",
     import.meta.url,
   ), "utf8");
-  assert.match(client, /createCubicSkyCameraOrientation/u);
-  assert.match(client, /mountRetainedCubicSky/u);
+  assert.match(client, /createObjectRuntime/u);
   assert.match(cubicSkyRuntime, /new DOMMatrix\(\)/u);
-  assert.match(client, /controlYawDelta/u);
-  assert.match(client, /sunViewDirection/u);
+  assert.match(cubicSkyRuntime, /controlYawDelta/u);
   assert.doesNotMatch(
     client,
     /preparedOrbitBank|DecompressionStream|TextDecoder|encodedBase64/u,

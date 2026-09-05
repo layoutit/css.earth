@@ -1,0 +1,50 @@
+/* One inline baseline, like ordinary text. SVG metrics stay inside this component. */
+.maps-brand-button {
+  display: block;
+  width: max-content;
+  color: var(--shell-text);
+  font-size: 0;
+  line-height: 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.planet-wordmark {
+  display: inline;
+}
+
+.planet-wordmark-two-line {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  line-height: 0;
+  opacity: .9;
+}
+
+.planet-wordmark-two-line > svg {
+  display: block;
+  overflow: visible;
+  fill: currentColor;
+}
+
+.planet-wordmark-svg {
+  /* Tight bounds: 85.64 x 16.27; source font: 22px; baseline: y=23. */
+  display: inline-block;
+  font-size: var(--explorer-wordmark-size, 36px);
+  width: calc(85.64em / 22);
+  height: calc(16.27em / 22);
+  vertical-align: calc(-0.26em / 22);
+  overflow: visible;
+  opacity: .9;
+}
+
+.planet-wordmark-css,
+.planet-wordmark-earth {
+  fill: currentColor;
+}
+
+.maps-brand-button:focus-visible {
+  outline: 2px solid #b5d8fa;
+  outline-offset: 4px;
+}

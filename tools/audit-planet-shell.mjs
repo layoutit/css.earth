@@ -513,7 +513,7 @@ function selectorsFor() {
     title: ".planet-title",
     introduction: ".planet-introduction",
     facts: ".planet-facts-panel",
-    charts: ".planet-chart-panel",
+    charts: ".planet-chart-switcher",
     lenses: ".planet-lenses",
     settings: ".planet-settings-panel",
     summary: ".planet-panel-summary",

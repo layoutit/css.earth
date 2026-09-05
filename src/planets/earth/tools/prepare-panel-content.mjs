@@ -73,18 +73,17 @@ const panel = Object.freeze({
   planetId: "earth",
   introduction,
   facts: Object.freeze([
-    { label: "Distance", value: `${distanceKm} million km` },
-    { label: "Diameter", value: `${diameterKm} km` },
-    { label: "Year", value: yearDays },
-    { label: "Day", value: dayHours },
+    { id: "distance-from-sun", label: "Distance from Sun", value: `${distanceKm} million km` },
+    { id: "diameter", label: "Diameter", value: `${diameterKm} km` },
+    { id: "orbital-period", label: "Orbital period", value: yearDays },
+    { id: "rotation-period", label: "Rotation period", value: dayHours },
+    { id: "axial-tilt", label: "Axial tilt", value: axialTilt },
+    { id: "moon-count", label: "Moons", value: "1" },
+    { id: "ring-system", label: "Rings", value: "None" },
   ]),
   moreFacts: Object.freeze([
-    { label: "Moon", value: "1" },
-    { label: "Moon distance", value: `${moon.meanOrbitRadiusKm.toLocaleString("en-US")} km` },
-    { label: "Axial tilt", value: axialTilt },
-    { label: "Ocean coverage", value: oceanCoverage },
-    { label: "Atmosphere", value: `${nitrogen.replace(" nitrogen", " N₂")}, ${oxygen.replace(" oxygen", " O₂")}` },
-    { label: "Rings", value: "None" },
+    { id: "ocean-coverage", label: "Ocean coverage", value: oceanCoverage },
+    { id: "atmosphere-composition", label: "Atmosphere", value: `${nitrogen.replace(" nitrogen", " N₂")}, ${oxygen.replace(" oxygen", " O₂")}` },
   ]),
   sources: Object.freeze({
     editorial: Object.freeze({

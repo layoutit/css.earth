@@ -1,6 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <OpenGL/gl.h>
+#import <Security/SecKeychain.h>
 #import <objc/runtime.h>
 
 #include <atomic>
@@ -20,6 +21,8 @@
 #include <unistd.h>
 
 static void AppendEvent(NSDictionary *event);
+
+#include "rendered-frame-capture.h"
 
 namespace {
 
@@ -503,6 +506,7 @@ static void RecordMotionFrame(NSOpenGLContext *context, SEL command) {
     glGetFloatv(GL_MODELVIEW_MATRIX, frame.modelView);
     glGetFloatv(GL_PROJECTION_MATRIX, frame.projection);
   }
+  CaptureRenderedFrame(context, frame.frameSequence, frame.inputSerial);
   frame.instrumentationEndedTicks = mach_continuous_time();
   OriginalFlushBuffer(context, command);
   frame.presentEndedTicks = mach_continuous_time();
@@ -917,14 +921,14 @@ static void AppendEvent(NSDictionary *event) {
   if (json == nil) return;
   NSMutableData *line = [json mutableCopy];
   [line appendData:[@"\n" dataUsingEncoding:NSUTF8StringEncoding]];
-  NSFileManager *manager = [NSFileManager defaultManager];
-  if (![manager fileExistsAtPath:path]) {
-    [manager createFileAtPath:path contents:nil attributes:nil];
+  static pthread_mutex_t eventLock = PTHREAD_MUTEX_INITIALIZER;
+  pthread_mutex_lock(&eventLock);
+  const int descriptor = open(path.fileSystemRepresentation, O_CREAT | O_WRONLY | O_APPEND, 0600);
+  if (descriptor >= 0) {
+    WriteAll(descriptor, line.bytes, line.length);
+    close(descriptor);
   }
-  NSFileHandle *handle = [NSFileHandle fileHandleForWritingAtPath:path];
-  [handle seekToEndOfFile];
-  [handle writeData:line];
-  [handle closeFile];
+  pthread_mutex_unlock(&eventLock);
 }
 
 static NSString *InputControlPath(void) {
@@ -1124,6 +1128,129 @@ static BOOL DeliverInputEventToQNSView(
   return YES;
 }
 
+static void AuditWheelWidgets(void) {
+  static bool recorded = false;
+  if (recorded) return;
+  recorded = true;
+  QtList<QWidget *> widgets = QApplication::allWidgets();
+  for (int i = 0; i < widgets.size(); i++) {
+    QWidget *widget = widgets.at(i);
+    if (widget == nullptr) continue;
+    AppendEvent(@{@"event":@"wheel-widget", @"name":QtString(widget->objectName())});
+  }
+}
+
+static BOOL DeliverQtMouse(NSDictionary *specification, NSView *view, NSEvent *event) {
+  struct Point { double x; double y; };
+  using Construct = void (*)(void *, int, const Point &, int, int, int);
+  using Notify = bool (*)(QObject *, QObject *, void *);
+  using Destroy = void (*)(void *);
+  const auto construct = reinterpret_cast<Construct>(dlsym(RTLD_DEFAULT,
+    "_ZN11QMouseEventC1EN6QEvent4TypeERK7QPointFN2Qt11MouseButtonE6QFlagsIS6_ES7_INS5_16KeyboardModifierEE"));
+  const auto notify = reinterpret_cast<Notify>(dlsym(RTLD_DEFAULT,
+    "_ZN16QCoreApplication14notifyInternalEP7QObjectP6QEvent"));
+  auto **application = reinterpret_cast<QObject **>(dlsym(RTLD_DEFAULT,
+    "_ZN16QCoreApplication4selfE"));
+  const auto destroy = reinterpret_cast<Destroy>(dlsym(RTLD_DEFAULT,"_ZN11QMouseEventD1Ev"));
+  QWidget *target = nullptr;
+  QtList<QWidget *> widgets = QApplication::allWidgets();
+  int matches = 0;
+  for (int i = 0; i < widgets.size(); i++) {
+    QWidget *widget = widgets.at(i);
+    if (widget != nullptr && [QtString(widget->objectName()) isEqualToString:specification[@"qtMouseTarget"]]) {
+      target = widget; matches++;
+    }
+  }
+  if (matches != 1 || construct == nullptr || notify == nullptr || destroy == nullptr ||
+      application == nullptr || *application == nullptr ||
+      !IsFiniteNumber(specification[@"qtX"]) || !IsFiniteNumber(specification[@"qtY"])) return NO;
+  NSString *kind = specification[@"kind"];
+  const bool down = [kind isEqualToString:@"down"], up = [kind isEqualToString:@"up"];
+  const bool drag = [kind isEqualToString:@"drag"];
+  const int type = down ? ([specification[@"clickCount"] intValue] == 2 ? 4 : 2) : up ? 3 : 5;
+  const int button = (down || up) ? 1 : 0, buttons = (down || drag) ? 1 : 0;
+  const Point position = {[specification[@"qtX"] doubleValue],[specification[@"qtY"] doubleValue]};
+  alignas(16) unsigned char storage[512] = {};
+  construct(storage,type,position,button,buttons,0);
+  RecordAcceptedInput(view, NSSelectorFromString(@"qtMouseEvent:"), event);
+  const double before = MonotonicSeconds();
+  const bool accepted = notify(*application,target,storage);
+  const double after = MonotonicSeconds();
+  destroy(storage);
+  AppendEvent(@{@"event":@"qt-mouse-delivered", @"id":specification[@"id"],
+    @"target":specification[@"qtMouseTarget"], @"x":@(position.x), @"y":@(position.y),
+    @"type":@(type), @"button":@(button), @"buttons":@(buttons), @"accepted":@(accepted),
+    @"before":@(before), @"after":@(after)});
+  return YES;
+}
+
+static BOOL DeliverQtWheel(NSDictionary *specification, NSView *view, NSEvent *event) {
+  struct Point { double x; double y; };
+  using Construct = void (*)(void *, const Point &, int, int, int, int);
+  using Notify = bool (*)(QObject *, QObject *, void *);
+  using Destroy = void (*)(void *);
+  const auto construct = reinterpret_cast<Construct>(dlsym(RTLD_DEFAULT,
+    "_ZN11QWheelEventC1ERK7QPointFi6QFlagsIN2Qt11MouseButtonEES3_INS4_16KeyboardModifierEENS4_11OrientationE"));
+  const auto notify = reinterpret_cast<Notify>(dlsym(RTLD_DEFAULT,
+    "_ZN16QCoreApplication14notifyInternalEP7QObjectP6QEvent"));
+  auto **application = reinterpret_cast<QObject **>(dlsym(RTLD_DEFAULT,
+    "_ZN16QCoreApplication4selfE"));
+  const auto destroy = reinterpret_cast<Destroy>(dlsym(RTLD_DEFAULT,"_ZN11QWheelEventD1Ev"));
+  QWidget *target = nullptr;
+  QtList<QWidget *> widgets = QApplication::allWidgets();
+  int matches = 0;
+  for (int i = 0; i < widgets.size(); i++) {
+    QWidget *widget = widgets.at(i);
+    if (widget != nullptr && [QtString(widget->objectName()) isEqualToString:specification[@"qtWheelTarget"]]) {
+      target = widget; matches++;
+    }
+  }
+  if (matches != 1 || construct == nullptr || notify == nullptr || destroy == nullptr ||
+      application == nullptr || *application == nullptr ||
+      !IsFiniteNumber(specification[@"qtX"]) || !IsFiniteNumber(specification[@"qtY"]) ||
+      !IsFiniteNumber(specification[@"qtDelta"])) return NO;
+  alignas(16) unsigned char storage[512] = {};
+  const Point position = {[specification[@"qtX"] doubleValue],[specification[@"qtY"] doubleValue]};
+  const int delta = [specification[@"qtDelta"] intValue];
+  const int buttons = [specification[@"qtButtons"] intValue];
+  if (buttons != 0 && buttons != 1) return NO;
+  construct(storage,position,delta,buttons,0,2);
+  // Slot 23 is the wheel handler in this captured QWidget ABI.
+  void *handler = (*reinterpret_cast<void ***>(target))[23];
+  Dl_info handlerImage = {};
+  dladdr(handler,&handlerImage);
+  uintptr_t receiverOffset = 0;
+  uintptr_t zoomOffset = 0;
+  NSMutableArray *listeners = [NSMutableArray array];
+  if ((uintptr_t)handler-(uintptr_t)handlerImage.dli_fbase == 0x0098d3dc) {
+    auto receiver = *reinterpret_cast<void **>(reinterpret_cast<uintptr_t>(target)+0x48);
+    void *receiverHandler = (*reinterpret_cast<void ***>(receiver))[27];
+    receiverOffset = (uintptr_t)receiverHandler-(uintptr_t)handlerImage.dli_fbase;
+    if (receiverOffset == 0x003b0914) {
+      auto navigation = *reinterpret_cast<uintptr_t **>((uintptr_t)handlerImage.dli_fbase+0x0120a538);
+      zoomOffset = reinterpret_cast<uintptr_t *>(navigation[0])[33]-(uintptr_t)handlerImage.dli_fbase;
+      auto list = *reinterpret_cast<uintptr_t **>((uintptr_t)receiver+0x128);
+      auto node = reinterpret_cast<uintptr_t *>(list[1]);
+      for (int i=0; node != list && i<64; i++, node=reinterpret_cast<uintptr_t *>(node[1])) {
+        auto table = *reinterpret_cast<uintptr_t **>(node[2]);
+        [listeners addObject:@{ @"handlerOffset":@(table[7]-(uintptr_t)handlerImage.dli_fbase),
+          @"disabled":@(*reinterpret_cast<unsigned char *>((uintptr_t)node+0x1a)) }];
+      }
+    }
+  }
+  RecordAcceptedInput(view, NSSelectorFromString(@"qtScrollWheel:"), event);
+  const double before = MonotonicSeconds();
+  const bool accepted = notify(*application,target,storage);
+  const double after = MonotonicSeconds();
+  destroy(storage);
+  AppendEvent(@{@"event":@"qt-wheel-delivered", @"id":specification[@"id"],
+    @"target":specification[@"qtWheelTarget"], @"x":@(position.x), @"y":@(position.y),
+    @"delta":@(delta), @"buttons":@(buttons), @"accepted":@(accepted), @"before":@(before), @"after":@(after),
+    @"handlerOffset":@((uintptr_t)handler-(uintptr_t)handlerImage.dli_fbase),
+    @"receiverOffset":@(receiverOffset), @"zoomOffset":@(zoomOffset), @"listeners":listeners});
+  return YES;
+}
+
 static void DispatchInputEvent(NSDictionary *specification,
                                NSUInteger revision,
                                NSTimeInterval sourceTimestamp) {
@@ -1164,9 +1291,10 @@ static void DispatchInputEvent(NSDictionary *specification,
     return;
   }
   NSRect bounds = target.bounds;
+  BOOL targetFlipped = target.isFlipped;
   NSPoint targetPoint = NSMakePoint(
     NSMinX(bounds) + x * NSWidth(bounds),
-    NSMinY(bounds) + (1 - y) * NSHeight(bounds));
+    NSMinY(bounds) + (targetFlipped ? y : 1 - y) * NSHeight(bounds));
   NSPoint windowPoint = [target convertPoint:targetPoint toView:nil];
   NSTimeInterval dispatchedAt = MonotonicSeconds();
   NSEvent *event = nil;
@@ -1194,32 +1322,35 @@ static void DispatchInputEvent(NSDictionary *specification,
                               pressure:[kind isEqualToString:@"up"] ? 0 : 1];
   } else if ([kind isEqualToString:@"wheel"] &&
              IsFiniteNumber(specification[@"deltaY"])) {
+    AuditWheelWidgets();
     double deltaY = [specification[@"deltaY"] doubleValue];
+    BOOL lineWheel = [specification[@"wheelUnit"] isEqualToString:@"line"];
     CGEventRef scrollEvent = CGEventCreateScrollWheelEvent(
       NULL,
-      kCGScrollEventUnitPixel,
+      lineWheel ? kCGScrollEventUnitLine : kCGScrollEventUnitPixel,
       1,
       (int32_t)llround(deltaY));
     if (scrollEvent != NULL) {
       CGEventSetTimestamp(
         scrollEvent,
         (CGEventTimestamp)llround(sourceTimestamp * NSEC_PER_SEC));
-      CGEventSetDoubleValueField(
+      if (!lineWheel) CGEventSetDoubleValueField(
         scrollEvent,
         kCGScrollWheelEventFixedPtDeltaAxis1,
         deltaY);
-      CGEventSetIntegerValueField(
+      if (!lineWheel) CGEventSetIntegerValueField(
         scrollEvent,
         kCGScrollWheelEventPointDeltaAxis1,
         (int64_t)llround(deltaY));
       CGEventSetIntegerValueField(
         scrollEvent,
         kCGScrollWheelEventIsContinuous,
-        1);
+        lineWheel ? 0 : 1);
       event = [NSEvent eventWithCGEvent:scrollEvent];
       CFRelease(scrollEvent);
       @try {
         [event setValue:@(window.windowNumber) forKey:@"windowNumber"];
+        if (event.window != window) [event setValue:window forKey:@"window"];
         [event setValue:[NSValue valueWithPoint:windowPoint]
                  forKey:@"location"];
       } @catch (NSException *exception) {
@@ -1245,6 +1376,14 @@ static void DispatchInputEvent(NSDictionary *specification,
     });
     return;
   }
+  if ([kind isEqualToString:@"wheel"]) AppendEvent(@{
+    @"event": @"wheel-event-fields", @"revision": @(revision), @"id": identifier,
+    @"deltaY": @(event.deltaY), @"scrollingDeltaY": @(event.scrollingDeltaY),
+    @"precise": @(event.hasPreciseScrollingDeltas), @"phase": @(event.phase),
+    @"momentumPhase": @(event.momentumPhase),
+    @"eventWindowNumber": @(event.windowNumber), @"resolvedWindowNumber": @(event.window.windowNumber),
+    @"locationX": @(event.locationInWindow.x), @"locationY": @(event.locationInWindow.y),
+  });
   objc_setAssociatedObject(
     event, &InputRevisionAssociation, @(revision),
     OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -1255,7 +1394,10 @@ static void DispatchInputEvent(NSDictionary *specification,
     event, &InputKindAssociation, kind,
     OBJC_ASSOCIATION_RETAIN_NONATOMIC);
   NSUInteger acceptedBefore = AcceptedInputSerial;
-  BOOL dispatched = DeliverInputEventToQNSView(target, kind, event);
+  const BOOL qtWheel = [kind isEqualToString:@"wheel"] && specification[@"qtWheelTarget"] != nil;
+  const BOOL qtMouse = !qtWheel && specification[@"qtMouseTarget"] != nil;
+  BOOL dispatched = qtWheel ? DeliverQtWheel(specification,target,event) :
+    qtMouse ? DeliverQtMouse(specification,target,event) : DeliverInputEventToQNSView(target, kind, event);
   BOOL delivered = dispatched && AcceptedInputSerial > acceptedBefore;
   AppendEvent(@{
     @"event": @"native-input-posted",
@@ -1267,9 +1409,14 @@ static void DispatchInputEvent(NSDictionary *specification,
     @"postedMonotonicSeconds": @(dispatchedAt),
     @"returnedMonotonicSeconds": @(MonotonicSeconds()),
     @"delivered": @(delivered),
-    @"dispatchFamily": @"direct-AppKit-QNSView-handler",
+    @"dispatchFamily": qtWheel ? @"Qt-wheel-event" : qtMouse ? @"Qt-mouse-event" : @"direct-AppKit-QNSView-handler",
     @"normalizedX": @(x),
     @"normalizedY": @(y),
+    @"targetIsFlipped": @(targetFlipped),
+    @"targetX": @(targetPoint.x),
+    @"targetY": @(targetPoint.y),
+    @"windowX": @(windowPoint.x),
+    @"windowY": @(windowPoint.y),
     @"contentWidth": @(NSWidth(bounds)),
     @"contentHeight": @(NSHeight(bounds)),
     @"windowNumber": @(window.windowNumber),
@@ -1301,6 +1448,7 @@ static void PollInputControl(void) {
         revision > LastInputRevision && events.count <= 256) {
       LastInputRevision = revision;
       NSTimeInterval acceptedAt = MonotonicSeconds();
+      ArmRenderedFrames(revision, [control[@"captureMilliseconds"] doubleValue]);
       AppendEvent(@{
         @"event": @"native-input-batch-accepted",
         @"revision": @(revision),
@@ -1343,6 +1491,7 @@ static void PollInputControl(void) {
           dispatch_get_main_queue(),
           ^{
             StopMotionFrameTrace();
+            DrainRenderedFrames();
             AppendEvent(@{
               @"event": @"native-termination-started",
               @"revision": @(revision),
@@ -1504,6 +1653,11 @@ static void CompleteConfiguration(void) {
     SetQtToggle(@"Sun", sun);
   }
   ConfigureOracleContentSize();
+  const char *captureHook = getenv("CSSEARTH_ORACLE_RENDER_HOOK");
+  if (captureHook != nullptr && captureHook[0] != '\0') {
+    void *handle = dlopen(captureHook, RTLD_NOW | RTLD_LOCAL);
+    AppendEvent(@{ @"event": @"render-hook-loaded", @"loaded": @(handle != nullptr) });
+  }
   RecordRuntimeState(@"configured");
   [NSApp hide:nil];
   AppendEvent(@{
@@ -1556,6 +1710,12 @@ static void StartConfiguration(void) {
 
 __attribute__((constructor)) static void InstallHeadlessMarsOracle(void) {
   @autoreleasepool {
+    // Capture does not need saved credentials. Fail closed instead of asking
+    // the user to authorize a keychain lookup by this isolated process.
+    if (getenv("CSSEARTH_ORACLE_FRAME_DIRECTORY") != nullptr &&
+        SecKeychainSetUserInteractionAllowed(false) != errSecSuccess) {
+      abort();
+    }
     InstallCalibrationShaderInterposition();
     InstallWindowSuppression();
     BOOL motionFrameTraceInstalled = InstallMotionFrameTrace();

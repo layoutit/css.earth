@@ -31,9 +31,15 @@ of being drawn to a `<canvas>`.
 
 The shared shell loads the selected body from an open-ended object registry and
 mounts one retained scene and one camera. Each object package owns its
-scientific sources, textures, geometry, lighting, controls, and presentation
-choices. The shell owns navigation, information panels, loading, lifecycle, and
-responsive behavior.
+scientific sources, textures, geometry, lighting, optional control content, and
+material presentation. One shared runtime owns mounting, readiness, controls,
+selection transactions, image residency, playback, camera binding, and cleanup.
+All eleven clients bind the same factory. The shell owns navigation, information
+panels, playback permission, and responsive behavior.
+The [architecture](docs/shared-runtime-architecture-proposal.md) explains the
+contract and the rendering differences that remain inside each package. The
+[proof](docs/generic-runtime-contract-proof.md) uses the actual registered objects
+in real Chrome at DPR 1 and 2.
 
 ## Build and Runtime
 

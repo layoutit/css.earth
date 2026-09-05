@@ -53,3 +53,14 @@
   background-repeat: no-repeat;
   pointer-events: none;
 }
+
+/* The Sun's own perspective root: it shares the body camera's box and eye
+   (the shared orbit writes both roots' perspective and origin from the
+   prepared camera plan) and is inserted before the body's root so the body
+   paints over it. */
+.planet-heliocentric-sun-camera {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}

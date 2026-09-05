@@ -1,3 +1,4 @@
+import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -12,19 +13,20 @@ import {
 } from "../tools/atmosphere-model.mjs";
 import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
+import { PREPARED_EARTH_CITY_PAGES } from "../runtime/preparedCityPages.mjs";
 import { PREPARED_EARTH_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../runtime/preparedStarfield.mjs";
 import { PREPARED_EARTH_TITLE } from "../site/preparedTitle.mjs";
-import { verifyEarthSourceManifest } from "../tools/source-manifest.mjs";
+import { earthSourceManifest, verifyEarthSourceManifest } from "../tools/source-manifest.mjs";
 
 const execFileAsync = promisify(execFile);
 const publicRoot = resolve("public/scenes/earth");
 
 test("prepares Earth from a complete checked source closure", async () => {
   assert.deepEqual(await verifyEarthSourceManifest(), {
-    inputCount: 19,
+    inputCount: earthSourceManifest().inputs.length,
     generatedIntermediateCount: 2,
-    documentCount: 4,
+    documentCount: earthSourceManifest().documents.length,
   });
 });
 
@@ -33,7 +35,7 @@ test("verifies Earth acquisition without a network request", async () => {
     new URL("../tools/acquire.mjs", import.meta.url).pathname,
     "--verify-only",
   ]);
-  assert.match(stdout, /"inputCount": 19/u);
+  assert.match(stdout, new RegExp(`"inputCount": ${earthSourceManifest().inputs.length}`, "u"));
 });
 
 test("prepares the shared photographed cubic sky and independent Sun", () => {
@@ -166,8 +168,14 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
     }
     directionalFrames.push({ alpha, centerY: weightedY / alpha });
   }
-  assert.ok(directionalFrames[0].alpha > directionalFrames[1].alpha * 2);
-  assert.ok(directionalFrames[1].centerY - directionalFrames[0].centerY > 80);
+  assert.equal(atmosphere.illumination.minimumLightViewZ, -1);
+  assert.equal(atmosphere.illumination.maximumLightViewZ, 1);
+  assert.ok(directionalFrames[1].alpha > directionalFrames[0].alpha,
+    "the full-phase atmosphere illuminates more of the disc than the backlit shell");
+  for (const frame of directionalFrames) {
+    assert.ok(Math.abs(frame.centerY - (atmosphere.sourceTileSize - 1) / 2) < 1,
+      "the two axial phase endpoints must be vertically symmetric");
+  }
 });
 
 test("publishes the prepared Earth title and retained scene", async () => {
@@ -180,9 +188,11 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal("moon" in PREPARED_EARTH_SCENE, false);
   assert.equal(Object.keys(PREPARED_EARTH_SCENE.counts).some((key) =>
     /moon|orbitGuide/u.test(key)), false);
-  assert.equal(PREPARED_EARTH_SCENE.counts.retainedLeafCount, 453);
+  assert.equal(PREPARED_EARTH_SCENE.counts.retainedLeafCount,
+    453 + PREPARED_EARTH_CITY_PAGES.poolSize + PREPARED_EARTH_NOISE.poolSize);
   assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 546);
-  assert.equal(PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount, 999);
+  assert.equal(PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount,
+    PREPARED_EARTH_SCENE.counts.retainedLeafCount + PREPARED_EARTH_SCENE.counts.interiorLeafCount);
   assert.equal(PREPARED_EARTH_SCENE.counts.runtimeGeometryPreparation, false);
   assert.equal(PREPARED_EARTH_SCENE.counts.runtimeRasterization, false);
   const surfaceLeaves = PREPARED_EARTH_SCENE.body.bands.flatMap(({ leaves }) =>
@@ -195,7 +205,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
     className.includes("earth-surface-leaf"));
   assert.equal(rasterLeaves.length, 448);
   assert.ok(rasterLeaves.every(({ className, style, leafWidth, leafHeight }) =>
-    leafWidth <= 32 && leafHeight <= 32 &&
+    leafWidth <= 96 && leafHeight <= 96 &&
     style.includes("background-position:") &&
     style.includes("background-size:") &&
     !style.includes("--polycss-projective-texture-") &&
@@ -255,7 +265,8 @@ test("publishes the prepared Earth title and retained scene", async () => {
     PREPARED_EARTH_SCENE.material.lighting.frames.at(-1).transform,
   );
   assert.equal("interior" in PREPARED_EARTH_SCENE.material, false);
-  assert.equal(PREPARED_EARTH_SCENE.camera.maximumZoom, 8);
+  assert.equal(PREPARED_EARTH_SCENE.camera.maximumZoom,
+    PREPARED_EARTH_CITY_PAGES.maximumZoom);
   assert.equal(PREPARED_EARTH_SCENE.body.assets.surface.url,
     "/scenes/earth/earth-surface.webp");
   assert.equal(PREPARED_EARTH_SCENE.body.assets.poles.url,
@@ -273,8 +284,30 @@ test("publishes the prepared Earth title and retained scene", async () => {
           .metadata();
         return { width, height };
       })),
-    [{ width: 8320, height: 6144 }, { width: 2048, height: 512 }],
+    [{ width: 4096, height: 3536 }, { width: 2048, height: 512 }],
   );
+  const pages = PREPARED_EARTH_SCENE.body.assets.surface.pages;
+  assert.equal(pages.length, 7);
+  assert.ok(pages.every(({ width, height }) => width <= 4096 && height <= 4096));
+  for (const lens of PREPARED_EARTH_LENSES.controls.filter(lens => lens.surfaceUrls)) {
+    assert.equal(lens.surfaceUrls.length, pages.length);
+    for (const [index, url] of lens.surfaceUrls.entries()) {
+      const image = await sharp(resolve(publicRoot, url.split("/").at(-1))).metadata();
+      assert.deepEqual({ width: image.width, height: image.height }, pages[index]);
+      assert.equal(image.hasAlpha, true, "prebaked outside-quad pixels need alpha");
+    }
+  }
+  for (const [key, scale] of [["oneUrls", 0.25], ["twoUrls", 0.5]]) {
+    const urls = PREPARED_EARTH_SCENE.interior.outerAssets.surface[key];
+    assert.equal(urls.length, pages.length);
+    for (const [index, url] of urls.entries()) {
+      const image = await sharp(resolve(publicRoot, url.split("/").at(-1))).metadata();
+      assert.deepEqual({ width: image.width, height: image.height }, {
+        width: pages[index].width * scale, height: pages[index].height * scale,
+      });
+      assert.equal(image.hasAlpha, true);
+    }
+  }
   const polarLeaves = surfaceLeaves.filter(({ className }) =>
     className.includes("earth-polar"));
   assert.equal(polarLeaves.some(({ className }) =>

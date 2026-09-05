@@ -6,11 +6,12 @@
 // must be stable and directly comparable across runs.
 //
 // The lighting overlay frame index is derived from the Sun's view-direction
-// z (see publishMaterialDirection in ../runtime/client.mjs): frameCount is
-// 256, in 32 rows of 8 frames each (../runtime/preparedRowCache.mjs), and a
-// 3-row neighbourhood is warmed around the desired row. A pure dolly (no
-// rotation) does not move the Sun's view direction, so it must not fetch
-// rows; rotating the camera does.
+// z (see materialFrameFor in ../runtime/material.mjs): frameCount is 256, in
+// 32 rows of 8 frames each, and a neighbourhood of rows around the desired
+// one is warmed by materialDemand (../runtime/material.mjs) through the
+// shared prepared residency (../../../platform/prepared-residency.mjs). A
+// pure dolly (no rotation) does not move the Sun's view direction, so it
+// must not fetch rows; rotating the camera does.
 //
 // Assumes the target server is already running; unlike screenshot-ladder.mjs
 // this script never spawns a dev server itself.
@@ -213,9 +214,12 @@ async function runScenario(browserInstance, scenarioName, config) {
   }
 
   try {
-    await page.evaluate(() => window.__mercury?.pause?.());
+    await page.evaluate(() => {
+      const input = document.querySelector('input[name="motion"]');
+      if (input.checked) input.click();
+    });
   } catch (error) {
-    problems.push(`pause() threw: ${error instanceof Error ? error.message : String(error)}`);
+    problems.push(`freezing motion threw: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   // The row cache is only exercised with shadows on.
@@ -242,8 +246,7 @@ async function runScenario(browserInstance, scenarioName, config) {
   // Start counting.
   const markWallTime = Date.now();
   const markPerfTime = await page.evaluate(() => performance.now());
-  const materialCacheStart = await page.evaluate(() =>
-    window.__mercury.renderStats.textureStats.materialCache());
+  const materialCacheStart = await page.evaluate(readLightingPoolSnapshot);
 
   const stepRecords = [];
   const distanceLadder = geometricLadder(
@@ -285,8 +288,7 @@ async function runScenario(browserInstance, scenarioName, config) {
   // Let in-flight requests finish.
   await page.waitForTimeout(FINAL_DRAIN_MS);
 
-  const materialCacheEnd = await page.evaluate(() =>
-    window.__mercury.renderStats.textureStats.materialCache());
+  const materialCacheEnd = await page.evaluate(readLightingPoolSnapshot);
 
   const performanceEntries = await page.evaluate((mark) =>
     performance.getEntriesByType("resource")
@@ -435,6 +437,21 @@ function summaryLine(scenarioName, result) {
     `performanceRowBytes.encodedBodySize=${result.performanceRowBytes.encodedBodySize} ` +
     `performanceRowBytes.transferSize=${result.performanceRowBytes.transferSize} ` +
     `problems=${result.problems.length}`;
+}
+
+// The lighting row residency pool, plus the level-of-detail state governing
+// whether it is actually streaming.
+function readLightingPoolSnapshot() {
+  const pool = window.__mercury.runtime.resources().pools
+    .find((candidate) => candidate.id === "lighting");
+  const { lod } = window.__mercury.sky.state();
+  return {
+    resident: pool?.resident ?? 0,
+    ready: pool?.ready ?? 0,
+    pending: pool?.pending ?? 0,
+    keys: pool?.keys ?? [],
+    lod,
+  };
 }
 
 async function nextPaint(page) {

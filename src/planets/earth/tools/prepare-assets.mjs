@@ -4,15 +4,15 @@ import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
 import { textureTintFactors } from "@layoutit/polycss";
-import { packProjectiveSurfaceRaster } from
-  "../../../platform/projective-surface-raster.mjs";
+import { bakeEarthSurfaceRaster, EARTH_SURFACE_ATLAS, earthSurfacePageUrls } from "./surface-raster.mjs";
 import {
   EARTH_MATERIAL_FRAMES_PER_SHARD,
   EARTH_MATERIAL_TILE_SIZE,
   readEarthAtmosphereModel,
+  prepareEarthAtmosphereFrame,
 } from "./atmosphere-model.mjs";
 import { validateEarthSourceGroup } from "./source-manifest.mjs";
-import { ensureEarthPreparationDirectories, EARTH_PUBLIC_ROOT } from "./preparation-paths.mjs";
+import { ensureEarthPreparationDirectories, EARTH_PUBLIC_ROOT, EARTH_STAGING_ROOT } from "./preparation-paths.mjs";
 
 sharp.concurrency(2);
 const surfacesOnly = process.argv.includes("--surfaces-only");
@@ -38,6 +38,10 @@ const [EARTH_ATMOSPHERE_MODEL] = await Promise.all([
   ]),
 ]);
 await ensureEarthPreparationDirectories();
+const surfaceRasterPlan = materialsOnly ? null : JSON.parse(await readFile(
+  resolve(EARTH_STAGING_ROOT, "surface-raster-plan.json"), "utf8"));
+if (surfaceRasterPlan && (JSON.stringify(surfaceRasterPlan.atlas) !== JSON.stringify(EARTH_SURFACE_ATLAS) ||
+    surfaceRasterPlan.cells.length !== 448)) throw new Error("Prepare the current Earth scene before its surface assets.");
 
 const source = (path) => resolve(import.meta.dirname, "../source", path);
 const output = (path) => resolve(EARTH_PUBLIC_ROOT, path);
@@ -66,7 +70,6 @@ if (materialsOnly) {
     await Promise.all([
       prepareEarthMaterialBanks(),
       prepareInteriorAssets(),
-      prepareStarfield(),
       prepareLensThumbnail(source("blue-marble-december.jpg"), "earth-lens-normal.webp"),
       prepareLensThumbnail(source("blue-marble-topography.jpg"), "earth-lens-topography.webp"),
       prepareLensThumbnail(source("black-marble-2016.jpg"), "earth-lens-night-lights.webp"),
@@ -160,19 +163,22 @@ async function writeSphereAssets({ data, width, height, channels, density,
         .toBuffer();
     }
   }
-  const oriented = projectiveSurface
-    ? packProjectiveSurfaceRaster(surfaceData, {
-      width: surfaceWidth,
-      height: surfaceHeight,
-      channels,
-      bandCount,
-      gutter: surfaceHeight / bandCount / 4,
-    })
-    : { data: orientLatitudeBands(
-      surfaceData,
-      { width: surfaceWidth, height: surfaceHeight, channels },
-      bandCount,
-    ), packedWidth: surfaceWidth, packedHeight: surfaceHeight };
+  if (projectiveSurface) {
+    const urls = earthSurfacePageUrls(name, surfaceRasterPlan.pages.length, suffix);
+    for (const [page, url] of urls.entries()) {
+      const raster = bakeEarthSurfaceRaster(surfaceData, {
+        width: surfaceWidth, height: surfaceHeight, channels,
+      }, surfaceRasterPlan.cells, surfaceWidth / 1024, page);
+      await sharp(raster.data, { raw: raster })
+        .webp({ ...webp, alphaQuality: 100 })
+        .toFile(resolve(outputRoot, url.split("/").at(-1)));
+    }
+  } else {
+    const oriented = orientLatitudeBands(surfaceData,
+      { width: surfaceWidth, height: surfaceHeight, channels }, bandCount);
+    await sharp(oriented, { raw: { width: surfaceWidth, height: surfaceHeight, channels } })
+      .webp(webp).toFile(resolve(outputRoot, `${name}${suffix}.webp`));
+  }
   const polarTileSize = 128 * density * polarCapBandSpan;
   const poles = preparePolarAtlas(data, {
     width,
@@ -183,22 +189,13 @@ async function writeSphereAssets({ data, width, height, channels, density,
       Math.PI / bandCount * polarCapBandSpan,
     longitudeOffsetRadians: longitudeOffsetDegrees * Math.PI / 180,
   });
-  await Promise.all([
-    sharp(oriented.data, { raw: {
-      width: oriented.packedWidth,
-      height: oriented.packedHeight,
-      channels,
-    } })
-      .webp(webp)
-      .toFile(resolve(outputRoot, `${name}${suffix}.webp`)),
-    sharp(poles, { raw: {
+  await sharp(poles, { raw: {
       width: polarTileSize * 4,
       height: polarTileSize,
       channels: 4,
     } })
       .webp({ ...webp, alphaQuality: 100 })
-      .toFile(resolve(outputRoot, `${name}-poles${suffix}.webp`)),
-  ]);
+      .toFile(resolve(outputRoot, `${name}-poles${suffix}.webp`));
 }
 
 function stringArgument(prefix) {
@@ -356,6 +353,7 @@ async function prepareEarthMaterialBanks() {
           const frame = renderEarthMaterialFrame({
             size,
             scenePitchDegrees,
+            phaseFrame: frameIndex,
             role,
             atmosphereModel: EARTH_ATMOSPHERE_MODEL,
           });
@@ -401,7 +399,11 @@ function renderEarthMaterialFrame({
   role,
   atmosphereModel,
   shadowless = false,
+  phaseFrame,
 }) {
+  if (role === "atmosphere") {
+    return prepareEarthAtmosphereFrame({ size, frame: phaseFrame, model: atmosphereModel }).data;
+  }
   const radius = size * 0.468;
   const center = (size - 1) / 2;
   const rgba = Buffer.alloc(size * size * 4);
@@ -469,94 +471,10 @@ function renderEarthMaterialFrame({
         ) * 255);
         continue;
       }
-      const atmosphere = preparedAtmosphereTexel({
-        normal: hit.normal,
-        view,
-        objectLight,
-        lightAlignment,
-        model: atmosphereModel,
-      });
-      rgba[offset] = atmosphere.r;
-      rgba[offset + 1] = atmosphere.g;
-      rgba[offset + 2] = atmosphere.b;
-      rgba[offset + 3] = atmosphere.a;
+
     }
   }
   return rgba;
-}
-
-function preparedAtmosphereTexel({
-  normal,
-  view,
-  objectLight,
-  lightAlignment,
-  model,
-}) {
-  if (model?.schema !== "cssearth-openspace-atmosphere-source@1") {
-    throw new TypeError("Earth atmosphere model is incompatible.");
-  }
-  const response = model.presentationResponse;
-  if (response?.schema !==
-      "cssearth-google-earth-pro-atmosphere-presentation-response@1") {
-    throw new TypeError("Earth atmosphere presentation response is incompatible.");
-  }
-  const observed = response.observedResponse;
-  const transfer = response.cleanRoomTransfer;
-  const viewAlignment = Math.max(0, dotVector(normal, view));
-  const rayleighHorizon = Math.sqrt(
-    2 * model.rayleigh.scaleHeightKm / model.planetRadiusKm,
-  );
-  const mieHorizon = Math.sqrt(
-    2 * model.mie.scaleHeightKm / model.planetRadiusKm,
-  );
-  const rayleighAirMass = 1 / Math.sqrt(
-    viewAlignment ** 2 + rayleighHorizon ** 2,
-  );
-  const mieAirMass = 1 / Math.sqrt(
-    viewAlignment ** 2 + mieHorizon ** 2,
-  );
-  const rayleigh = model.rayleigh.scatteringPerKm.map((coefficient) =>
-    1 - Math.exp(
-      -coefficient * model.rayleigh.scaleHeightKm * rayleighAirMass,
-    ));
-  const mie = model.mie.scatteringPerKm.map((coefficient) =>
-    1 - Math.exp(
-      -coefficient * model.mie.scaleHeightKm * mieAirMass,
-    ));
-  const scatteringAlignment = clamp(dotVector(objectLight, view), -1, 1);
-  const rayleighPhase = 0.75 * (1 + scatteringAlignment ** 2);
-  const g = model.mie.anisotropy;
-  const miePhase = (1 - g ** 2) / Math.pow(
-    1 + g ** 2 - 2 * g * scatteringAlignment,
-    1.5,
-  );
-  const signal = rayleigh.map((value, channel) =>
-    value * rayleighPhase +
-      mie[channel] * miePhase * transfer.mieContribution);
-  const twilightCosine = Math.sqrt(
-    2 * model.atmosphereHeightKm / model.planetRadiusKm,
-  );
-  const sunlight = smoothstep(
-    -twilightCosine,
-    twilightCosine,
-    lightAlignment,
-  );
-  const color = signal.map((value) => 1 - Math.exp(
-    -value * sunlight * model.sunIntensity * observed.exposure,
-  ));
-  const luminance = color[0] * 0.3 + color[1] * 0.59 + color[2] * 0.11;
-  const limb = clamp(rayleighAirMass * rayleighHorizon, 0, 1);
-  const alpha = clamp(
-    luminance * observed.skyAlphaLuminanceScale * limb,
-    0,
-    transfer.earthMaximumOpacity,
-  );
-  return {
-    r: Math.round(color[0] * 255),
-    g: Math.round(color[1] * 255),
-    b: Math.round(color[2] * 255),
-    a: Math.round(alpha * 255),
-  };
 }
 
 function blitRgba(sourceRgba, sourceWidth, sourceHeight, targetRgba,
@@ -721,6 +639,7 @@ async function prepareInteriorOuterPoles() {
       channels: info.channels,
       density,
       name: "earth-interior-outer",
+      projectiveSurface: true,
       bandCount: 16,
       longitudeOffsetDegrees: 0,
       webp: { quality: 88, smartSubsample: true },
@@ -900,38 +819,6 @@ function hexRgb(value) {
   ));
 }
 
-async function prepareStarfield() {
-  const csv = await readFile(source("stars/hygdata_v41.csv"), "utf8");
-  const stars = csv.split("\n").slice(1).map((line) => {
-    const cells = line.split(",").map((value) => value.replace(/^"|"$/gu, ""));
-    return { ra: Number(cells[7]), dec: Number(cells[8]), mag: Number(cells[13]), ci: Number(cells[16]) };
-  }).filter(({ ra, dec, mag }) => Number.isFinite(ra) && Number.isFinite(dec) && Number.isFinite(mag) && mag <= 6.8)
-    .sort((left, right) => left.mag - right.mag)
-    .slice(0, 1800);
-  if (stars.length !== 1800) throw new Error(`HYG Earth star selection contains ${stars.length} entries.`);
-  const width = 1920;
-  const height = 1080;
-  const rgb = Buffer.alloc(width * height * 3);
-  for (const star of stars) {
-    const x = Math.max(0, Math.min(width - 1, Math.round((star.ra / 24) * (width - 1))));
-    const y = Math.max(0, Math.min(height - 1, Math.round(((90 - star.dec) / 180) * (height - 1))));
-    const intensity = Math.max(96, Math.min(255, Math.round(255 - (star.mag + 1.5) * 23)));
-    const radius = star.mag < 1 ? 2 : star.mag < 3 ? 1 : 0;
-    const tint = starColor(star.ci);
-    for (let oy = -radius; oy <= radius; oy += 1) for (let ox = -radius; ox <= radius; ox += 1) {
-      const px = x + ox;
-      const py = y + oy;
-      if (px < 0 || py < 0 || px >= width || py >= height) continue;
-      const falloff = ox === 0 && oy === 0 ? 1 : 0.42;
-      const offset = (py * width + px) * 3;
-      for (let channel = 0; channel < 3; channel += 1) rgb[offset + channel] = Math.max(rgb[offset + channel], Math.round(intensity * tint[channel] * falloff));
-    }
-  }
-  await sharp(rgb, { raw: { width, height, channels: 3 } })
-    .webp({ quality: 82, smartSubsample: true })
-    .toFile(output("earth-starfield.webp"));
-}
-
 async function prepareLensThumbnail(input, filename) {
   const metadata = await sharp(input).metadata();
   const cropSize = Math.round(metadata.height / 2);
@@ -949,12 +836,7 @@ async function prepareLensThumbnail(input, filename) {
     .toFile(output(filename));
 }
 
-function starColor(ci) {
-  if (!Number.isFinite(ci)) return [0.92, 0.95, 1];
-  const red = Math.max(0.72, Math.min(1, 0.94 + ci * 0.08));
-  const blue = Math.max(0.72, Math.min(1, 1 - ci * 0.12));
-  return [red, 0.94, blue];
-}
+
 
 function smoothstep(edge0, edge1, value) {
   const progress = clamp((value - edge0) / (edge1 - edge0), 0, 1);

@@ -10,7 +10,7 @@ import {
   requireBodyFixedSunDirection,
 } from "../../../platform/solar-geometry.mjs";
 import { prepareSunReferenceViewDirection } from
-  "../../../platform/solar-view-direction.mjs";
+  "../../../platform/prepare-sun-view-direction.mjs";
 import {
   MERCURY_CAMERA_POSE,
   MERCURY_PRESENTATION_FRAME,

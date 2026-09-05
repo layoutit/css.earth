@@ -56,7 +56,7 @@ try {
     await cdp.send("Performance.enable");
     await page.goto(`${baseUrl}/pluto/`, { waitUntil: "networkidle" });
     await page.waitForFunction(() => window.__pluto?.ready && window.__cssEarth?.ready);
-    await page.evaluate(() => { window.__pluto.pause(); for (const a of document.getAnimations()) { a.pause(); a.currentTime = 0; } });
+    await page.evaluate(() => { (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()); for (const a of document.getAnimations()) { a.pause(); a.currentTime = 0; } });
     await page.screenshot({ path: resolve(root, `pluto-dpr${dpr}-shell.png`) });
     const pitch = await page.evaluate(() => window.__pluto.camera.state().controlPitch);
     const defaultZoom = await page.evaluate(() => window.__pluto.camera.state().zoom);

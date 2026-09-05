@@ -52,15 +52,14 @@ html[data-ready="true"] .mercury-input-surface {
 
 /* A true perspective camera: the eye sits at the sky's vanishing point, 0.866
    of the stage width in front of the stage (a 60 degree horizontal field of
-   view), the same camera the sky cube was prepared for. The runtime writes
-   the perspective origin so the eye stays on the sky's axis wherever the
-   shell lays the root out, and frames by dolly; the roots are never scaled.
-   The Sun's root shares the eye and paints first, beneath the body. */
+   view), the same camera the sky cube was prepared for. The shared orbit
+   writes the perspective from the prepared camera plan and the perspective
+   origin so the eye stays on the sky's axis wherever the shell lays the root
+   out, and frames by dolly; the roots are never scaled. The Sun's root shares
+   the eye and paints first, beneath the body. */
 .mercury-sun-camera,
 .mercury-camera {
   z-index: 1;
-  perspective: 86.60254037844386cqw;
-  perspective-origin: 50% 50%;
   transform-style: preserve-3d;
 }
 
@@ -87,10 +86,6 @@ html[data-ready="true"] .mercury-input-surface {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-play-state: paused;
-}
-
-html[data-playing="true"] .mercury-body {
-  animation-play-state: running;
 }
 
 .mercury-body > s,
@@ -243,12 +238,6 @@ html[data-playing="true"] .mercury-body {
 .planet-stage[data-view="interior"]:not([data-lod="billboard"]):not([data-lod="marker"])
   .mercury-cutaway {
   visibility: visible;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mercury-body {
-    animation-play-state: paused !important;
-  }
 }
 
 @keyframes mercury-body-spin {

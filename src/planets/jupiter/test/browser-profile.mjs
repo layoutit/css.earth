@@ -1,6 +1,9 @@
-export const browserProfile = Object.freeze({
-  id: "jupiter",
-  inputSelector: ".planet-stage",
+import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mjs";
+import { objectControls } from "../site/control-content.mjs";
+
+export const browserProfile = createObjectBrowserProfile({
+  id: "jupiter", inputSelector: ".planet-stage", controls: objectControls,
+  cameraFields: ["pitch", "controlPitch", "controlYaw", "zoom"],
   audit: Object.freeze({
     finalScope: "outer",
     fullComparisonWidths: Object.freeze([390, 820, 1200]),
@@ -39,62 +42,4 @@ export const browserProfile = Object.freeze({
       allowedMountSelectors: Object.freeze([]),
     }),
   }),
-  async waitForRuntime(page) {
-    await page.waitForFunction(() => window.__jupiter?.ready === true);
-  },
-  pause(page) {
-    return page.evaluate(() => window.__jupiter.pause());
-  },
-  camera(page) {
-    return page.evaluate(() => window.__jupiter.view());
-  },
-  setCamera(page, { pitch, zoom }) {
-    return page.evaluate((state) => window.__jupiter.setView(state), { pitch, zoom });
-  },
-  bounds(page) {
-    return page.evaluate(() => ({
-      minimumPitch: 0,
-      maximumPitch: 89,
-      defaultPitch: 20.9,
-      pitchBounded: false,
-      minimumZoom: 0.42,
-      maximumZoom: 4,
-      defaultZoom: 1.1,
-    }));
-  },
-  stable(page) {
-    return page.evaluate(() => window.__jupiter.assertStableDomIdentity());
-  },
-  runtimePresent(page) {
-    return page.evaluate(() => typeof window.__jupiter !== "undefined");
-  },
-  retainedImages(page) {
-    return page.evaluate(() =>
-      window.__jupiter?.renderStats.materialCache().retainedImageCount ?? null);
-  },
-  selectedDensity(page) {
-    return page.evaluate(() =>
-      window.__jupiter?.renderStats.selectedPreparedDensity ?? null);
-  },
-  selectLens(page, id) {
-    return page.evaluate((lensId) => window.__jupiter.selectLens(lensId), id);
-  },
-  lens(page) {
-    return page.evaluate(() => window.__jupiter.lens());
-  },
-  visibleLens(page) {
-    return page.locator(".planet-stage").evaluate((stage) =>
-      stage.dataset.lens || "normal");
-  },
-  pressedLens(page) {
-    return page.locator('button[name="lens"][aria-pressed="true"]').getAttribute(
-      "value",
-    );
-  },
-  retainedReport(page) {
-    return page.evaluate(() => ({
-      initialNodeCount: window.__jupiter.dom.retainedInitialNodeCount,
-      stableNodeCount: window.__jupiter.stableNodes.length,
-    }));
-  },
 });

@@ -185,35 +185,20 @@ test("keeps every prepared ring alpha texel unchanged across lenses", async () =
   }
 });
 
-test("selects only prepared image sources at startup", async () => {
-  const client = await readFile(
-    resolve(objectRoot, "runtime/client.mjs"),
-    "utf8",
-  );
-  assert.match(client, /stage\.dataset\.lens = activeLens/);
-  assert.match(
-    client,
-    /decodeImage\(\s*lens\.surfaceUrl,\s*lens\.surface2xUrl,/u,
-  );
-  assert.match(client, /selectedPreparedDensity:\s*CANONICAL_PREPARED_IMAGE_DENSITY/u);
-  assert.doesNotMatch(client, /const imageDensity\s*=/u);
-  assert.equal([...client.matchAll(/devicePixelRatio/gu)].length, 0);
-  assert.doesNotMatch(client,
-    /matchMedia\([^)]*(?:resolution|device-pixel-ratio)|devicePixelRatio.*addEventListener/u);
-  assert.match(client, /await lensControls\.bindRuntime/u);
-  assert.match(client, /for \(const button of buttons\.values\(\)\) button\.disabled = true/u);
-  assert.match(client,
-    /await onLensChange\([\s\S]*?\{ interior: nextInterior \},[\s\S]*?\)/u);
-  assert.match(client, /destroyed \|\| request !== selectionRequest/u);
-  assert.match(client, /decoded\.delete\(lens\.id\)/u);
-  assert.match(client, /entry\.wanted = true/u);
-  assert.match(client, /return entry\.promise/u);
-  assert.match(client, /releaseLensDecode\(id, entry\)/u);
-  assert.match(client, /ready: bound && !destroyed/u);
-  assert.match(client, /viewBank\.mountInterior\(\)/u);
-  assert.match(client, /stage\.dataset\.view = "interior"/u);
-  assert.doesNotMatch(client, /decodeImage\(lens\.interiorMaterialUrl\)/u);
-  assert.doesNotMatch(client, /style\.filter|canvas|getContext\(/);
+test("declares canonical prepared lens resources and compound view selection", async () => {
+  const { runtimeDefinition: definition } = await import("../runtime/definition.mjs");
+  for (const lens of PREPARED_SATURN_LENSES.controls.filter(lens => lens.view !== "interior")) {
+    const selected = definition.reduceSelection(definition.initialSelection, { kind: "lens", id: lens.id });
+    const plan = definition.resolvePresentation({ selection: selected });
+    const resources = plan.required.map(key => definition.assets.entries.find(entry => entry.key === key));
+    assert.ok(resources.every(Boolean));
+    for (const url of [lens.surface2xUrl || lens.surfaceUrl, lens.polesUrl, lens.ring2xUrl || lens.ringUrl]) {
+      assert.ok(resources.some(entry => entry.url === url), `${lens.id}: canonical resource ${url}`);
+    }
+    const cutaway = definition.reduceSelection(selected, { kind: "lens", id: "cross-section" });
+    assert.equal(cutaway.lensId, lens.id); assert.equal(cutaway.interior, true);
+    assert.deepEqual(definition.resolvePresentation({ selection: cutaway }).pressedLenses, [lens.id, "cross-section"]);
+  }
 });
 
 async function alpha(filename) {
