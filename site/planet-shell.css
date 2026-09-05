@@ -160,7 +160,19 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   height: 14px;
   margin: 0;
   border: 0;
+  image-rendering: pixelated;
   object-fit: fill;
+}
+
+.planet-lens-legend-segments {
+  display: flex;
+  overflow: hidden;
+}
+
+.planet-lens-legend-segment {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--planet-lens-legend-color);
 }
 
 .planet-lens-legend-labels {
@@ -1434,6 +1446,8 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-observation-controls {
     gap: 8px;
+    max-height: none;
+    overflow: visible;
   }
 
 }

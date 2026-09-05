@@ -72,6 +72,7 @@ interface Lens {
     title: string;
     meta?: string;
     src?: string;
+    colors?: string[];
     width?: number;
     height?: number;
     labels?: string[];
@@ -401,15 +402,30 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                   aria-label={`${lens.label} legend`}
                   hidden={lens.id !== lenses.defaultLens}
                 >
-                  {lens.legend.kind === "scale" && lens.legend.src && lens.legend.labels && <>
+                  {lens.legend.kind === "scale" && lens.legend.labels &&
+                    (lens.legend.src || lens.legend.colors) && <>
                     <div class="planet-lens-legend-scale-row">
-                      <img
-                        class="planet-lens-legend-scale"
-                        src={lens.legend.src}
-                        width={lens.legend.width}
-                        height={lens.legend.height}
-                        alt={`${lens.legend.title} color scale from ${lens.legend.labels[0]} to ${lens.legend.labels.at(-1)} ${lens.legend.meta ?? ""}`}
-                      />
+                      {lens.legend.src
+                        ? <img
+                            class="planet-lens-legend-scale"
+                            src={lens.legend.src}
+                            width={lens.legend.width}
+                            height={lens.legend.height}
+                            alt={`${lens.legend.title} color scale from ${lens.legend.labels[0]} to ${lens.legend.labels.at(-1)} ${lens.legend.meta ?? ""}`}
+                          />
+                        : <span
+                            class="planet-lens-legend-scale planet-lens-legend-segments"
+                            role="img"
+                            aria-label={`${lens.legend.title} color scale from ${lens.legend.labels[0]} to ${lens.legend.labels.at(-1)} ${lens.legend.meta ?? ""}`}
+                          >
+                            {lens.legend.colors?.map((color) => (
+                              <span
+                                class="planet-lens-legend-segment"
+                                style={`--planet-lens-legend-color: ${color}`}
+                                aria-hidden="true"
+                              ></span>
+                            ))}
+                          </span>}
                     </div>
                     <div class="planet-lens-legend-labels" aria-hidden="true">
                       {lens.legend.labels.map((label, index) => (

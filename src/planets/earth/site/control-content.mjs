@@ -1,5 +1,8 @@
 import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { prepareLensCategoryLegend } from
+  "../../../../site/prepared-lens-legends.mjs";
 import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
+import earthInterior from "../source/interior/earth-interior.json" with { type: "json" };
 
 const lensDescriptions = {
   normal: "Blue Marble + WorldCover 2021",
@@ -7,6 +10,20 @@ const lensDescriptions = {
   topography: "Land and seafloor relief",
   "night-lights": "Black Marble night lights",
   "cross-section": "Interior structure",
+};
+const lensLegends = {
+  "cross-section": prepareLensCategoryLegend({
+    title: "Structure",
+    meta: "Schematic",
+    sourceUrl: earthInterior.sourceUrl,
+    items: earthInterior.layers.map((layer) => ({
+      label: layer.label,
+      description: layer.innerRadiusKm === 0
+        ? "to the center"
+        : `${layer.innerRadiusKm.toLocaleString("en-US")} km inner radius`,
+      color: layer.color,
+    })),
+  }),
 };
 const lenses = {
   title: PREPARED_SHELL_TITLES.lenses,
@@ -17,7 +34,7 @@ const lenses = {
     thumbnailUrl: lens.thumbnailUrl,
     description: lensDescriptions[lens.id],
     title: `${lens.label}: ${lens.qualification}`,
-    legend: lens.legend,
+    legend: lens.legend ?? lensLegends[lens.id],
     legendNote: lens.id === "buenos-aires-noise" ? "APrA · 2025 daytime estimates. Uncolored areas have no estimate." : undefined,
   })),
 };
