@@ -29,7 +29,7 @@ test("keeps the Mars scene as one fixed retained PolyCSS tree", async () => {
   assert.match(client,
     /const materialBank = PREPARED_MARS_LIGHTING\.banks\[[\s\S]*?String\(CANONICAL_PREPARED_IMAGE_DENSITY\)[\s\S]*?\]/u);
   assert.match(client, /createRowShardCache\(materialBank\)/u);
-  assert.match(client, /PLANET_SPEED_STATES/u);
+  assert.match(client, /bindSpeedControl/u);
   assert.doesNotMatch(client, /materialBank\s*\?\?|banks\["1"\]\s*\|\|/u);
   assert.match(client, /const materialLeaf = document\.createElement\("s"\)/u);
   assert.match(client,
@@ -44,15 +44,16 @@ test("keeps the Mars scene as one fixed retained PolyCSS tree", async () => {
   assert.doesNotMatch(client, /materialLeaves/u);
   assert.match(client, /idleJavaScriptLoops: 0/u);
   assert.match(client, /assertStableDomIdentity/u);
-  assert.match(client, /lensDecodePromises\.get\(lens\.id\)/u);
+  assert.match(client, /lensDecodePromises\.get\(id\)/u);
   assert.match(client, /"\.planet-drawer-content \.planet-lenses"/u);
   assert.match(client, /"\.planet-settings-panel \.planet-settings"/u);
   assert.doesNotMatch(client, /document\.querySelector\("\.planet-header"\)/u);
-  assert.match(client, /if \(destroyed\) return/u);
+  assert.match(client, /if \(lifetime\.disposed\) return/u);
   assert.match(client,
     /resume\(\) \{[\s\S]*?shouldPlay = true;[\s\S]*?if \(!mounted\) return;/u);
-  assert.match(client, /releaseScene\(\)/u);
-  assert.match(client, /stage\.replaceChildren\(\)/u);
+  assert.match(client, /lifetime\.destroy\(\)/u);
+  assert.doesNotMatch(client, /stage\.replaceChildren\(\)/u);
+  assert.match(client, /lifetime\.onDispose\(\(\) => camera\.remove\(\)\)/u);
   assert.match(client, /events\.abort\(\)/u);
   assert.doesNotMatch(client, /style\.setProperty\(/u);
   assert.doesNotMatch(client, /canvas|getContext\(|requestIdleCallback/u);

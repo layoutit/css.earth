@@ -3,15 +3,15 @@
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
-import { packProjectiveSurfaceRaster } from
-  "../../../platform/projective-surface-raster.mjs";
+import { textureTintFactors } from "@layoutit/polycss";
+import { bakeEarthSurfaceRaster, EARTH_SURFACE_ATLAS, earthSurfacePageUrls } from "./surface-raster.mjs";
 import {
   EARTH_MATERIAL_FRAMES_PER_SHARD,
   EARTH_MATERIAL_TILE_SIZE,
   readEarthAtmosphereModel,
 } from "./atmosphere-model.mjs";
 import { validateEarthSourceGroup } from "./source-manifest.mjs";
-import { ensureEarthPreparationDirectories, EARTH_PUBLIC_ROOT } from "./preparation-paths.mjs";
+import { ensureEarthPreparationDirectories, EARTH_PUBLIC_ROOT, EARTH_STAGING_ROOT } from "./preparation-paths.mjs";
 
 sharp.concurrency(2);
 const surfacesOnly = process.argv.includes("--surfaces-only");
@@ -37,6 +37,10 @@ const [EARTH_ATMOSPHERE_MODEL] = await Promise.all([
   ]),
 ]);
 await ensureEarthPreparationDirectories();
+const surfaceRasterPlan = materialsOnly ? null : JSON.parse(await readFile(
+  resolve(EARTH_STAGING_ROOT, "surface-raster-plan.json"), "utf8"));
+if (surfaceRasterPlan && (JSON.stringify(surfaceRasterPlan.atlas) !== JSON.stringify(EARTH_SURFACE_ATLAS) ||
+    surfaceRasterPlan.cells.length !== 448)) throw new Error("Prepare the current Earth scene before its surface assets.");
 
 const source = (path) => resolve(import.meta.dirname, "../source", path);
 const output = (path) => resolve(EARTH_PUBLIC_ROOT, path);
@@ -159,19 +163,22 @@ async function writeSphereAssets({ data, width, height, channels, density,
         .toBuffer();
     }
   }
-  const oriented = projectiveSurface
-    ? packProjectiveSurfaceRaster(surfaceData, {
-      width: surfaceWidth,
-      height: surfaceHeight,
-      channels,
-      bandCount,
-      gutter: surfaceHeight / bandCount / 4,
-    })
-    : { data: orientLatitudeBands(
-      surfaceData,
-      { width: surfaceWidth, height: surfaceHeight, channels },
-      bandCount,
-    ), packedWidth: surfaceWidth, packedHeight: surfaceHeight };
+  if (projectiveSurface) {
+    const urls = earthSurfacePageUrls(name, surfaceRasterPlan.pages.length, suffix);
+    for (const [page, url] of urls.entries()) {
+      const raster = bakeEarthSurfaceRaster(surfaceData, {
+        width: surfaceWidth, height: surfaceHeight, channels,
+      }, surfaceRasterPlan.cells, surfaceWidth / 1024, page);
+      await sharp(raster.data, { raw: raster })
+        .webp({ ...webp, alphaQuality: 100 })
+        .toFile(resolve(outputRoot, url.split("/").at(-1)));
+    }
+  } else {
+    const oriented = orientLatitudeBands(surfaceData,
+      { width: surfaceWidth, height: surfaceHeight, channels }, bandCount);
+    await sharp(oriented, { raw: { width: surfaceWidth, height: surfaceHeight, channels } })
+      .webp(webp).toFile(resolve(outputRoot, `${name}${suffix}.webp`));
+  }
   const polarTileSize = 128 * density * polarCapBandSpan;
   const poles = preparePolarAtlas(data, {
     width,
@@ -182,22 +189,13 @@ async function writeSphereAssets({ data, width, height, channels, density,
       Math.PI / bandCount * polarCapBandSpan,
     longitudeOffsetRadians: longitudeOffsetDegrees * Math.PI / 180,
   });
-  await Promise.all([
-    sharp(oriented.data, { raw: {
-      width: oriented.packedWidth,
-      height: oriented.packedHeight,
-      channels,
-    } })
-      .webp(webp)
-      .toFile(resolve(outputRoot, `${name}${suffix}.webp`)),
-    sharp(poles, { raw: {
+  await sharp(poles, { raw: {
       width: polarTileSize * 4,
       height: polarTileSize,
       channels: 4,
     } })
       .webp({ ...webp, alphaQuality: 100 })
-      .toFile(resolve(outputRoot, `${name}-poles${suffix}.webp`)),
-  ]);
+      .toFile(resolve(outputRoot, `${name}-poles${suffix}.webp`));
 }
 
 function stringArgument(prefix) {
@@ -720,6 +718,7 @@ async function prepareInteriorOuterPoles() {
       channels: info.channels,
       density,
       name: "earth-interior-outer",
+      projectiveSurface: true,
       bandCount: 16,
       longitudeOffsetDegrees: 0,
       webp: { quality: 88, smartSubsample: true },

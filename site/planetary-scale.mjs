@@ -1,5 +1,5 @@
 export const PLANETARY_SCALE_LABEL =
-  "Planets by mean distance from the Sun, logarithmic scale";
+  "Planets ordered by mean distance from the Sun";
 
 const TRACK_START_PERCENT = 6;
 const TRACK_END_PERCENT = 100;

@@ -13,11 +13,11 @@ test("keeps Mercury runtime free of network, alternate renderers, and forbidden 
     `${client}\n${styles}`,
     /--mercury-(?:camera-zoom-scale|disc-zoom)/u,
   );
-  assert.match(client, /cameraRoot\.style\.scale/u);
+  assert.match(client, /createRetainedCubicSkyOrbit/u);
   assert.match(client, /materialRoot\.style\.scale/u);
   assert.match(client,
     /resume\(\) \{[\s\S]*?shouldPlay = true;[\s\S]*?if \(!mounted\) return;/u);
-  assert.match(client, /PLANET_SPEED_STATES/u);
+  assert.match(client, /bindSpeedControl/u);
   assert.doesNotMatch(`${client}\n${styles}`, /dataset\.speed|data-speed/u);
   assert.doesNotMatch(
     styles,

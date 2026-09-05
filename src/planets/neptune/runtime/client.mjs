@@ -1,4 +1,7 @@
 import { createPlanetFeatureControls } from "../../../platform/planet-feature-controls.mjs";
+import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
+import { createLatestSelection } from "../../../platform/latest-selection.mjs";
+import { createPreparedImageStore, decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
 import { createPreparedProjectiveTextureLeaf } from "../../../platform/prepared-projective-texture-leaf.mjs";
 import { registerBodyDependentLayers } from
   "../../../platform/body-layer-registration.mjs";
@@ -51,49 +54,72 @@ const NEPTUNE_CUBIC_CAMERA = Object.freeze({
   }),
 });
 
-export function mountNeptuneClient(stage) {
+export function mountNeptuneClient(stage, { onError } = {}) {
+  if (typeof onError !== "function") throw new TypeError("Neptune requires a fatal-error handler.");
   const inputSurface = document.querySelector(".neptune-input-surface");
   if (!(inputSurface instanceof HTMLElement)) throw new Error("Neptune input surface is missing.");
-  let destroyed = false;
-  let shouldPlay = true;
+  const lifetime = createSceneLifetime();
+  let shouldPlay = false;
   let mounted = null;
   let orbitCamera = null;
   let orbitMaterialCache = null;
   let featureControls = null;
   let lensControls = null;
   let sceneAnimations = Object.freeze([]);
-  let resourcesReleased = false;
+  let diagnostic = null;
+  lifetime.onDispose(() => {
+    mounted = null;
+    orbitCamera = null;
+    orbitMaterialCache = null;
+    featureControls = null;
+    lensControls = null;
+    sceneAnimations = Object.freeze([]);
+  });
+  const warmImages = new Set();
+  lifetime.onDispose(() => {
+    const images = [...warmImages];
+    warmImages.clear();
+    const errors = [];
+    for (const image of images) {
+      try { releasePreparedImage(image); } catch (error) { errors.push(error); }
+    }
+    if (errors.length) throw new AggregateError(errors, "Neptune startup image cleanup failed.");
+  });
+  lifetime.onDispose(() => {
+    if (DEVELOPMENT_DIAGNOSTICS && window.__neptune === diagnostic) delete window.__neptune;
+  });
   const controller = Object.freeze({
     get ready() { return ready; },
     pause() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = false;
-      document.documentElement.dataset.playing = "false";
       for (const animation of sceneAnimations) animation.pause();
     },
     resume() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = true;
       if (!mounted) return;
-      document.documentElement.dataset.playing = "true";
       for (const animation of sceneAnimations) animation.play();
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
       shouldPlay = false;
-      releaseResources();
-      delete document.documentElement.dataset.playing;
-      if (DEVELOPMENT_DIAGNOSTICS && window.__neptune) delete window.__neptune;
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Neptune cleanup failed.");
     },
   });
-  const ready = start();
+  const ready = lifetime.wait(start()).then(({ value }) => value).catch((error) => {
+    const cleanupErrors = lifetime.destroy();
+    if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], error.message, { cause: error });
+    throw error;
+  });
   return controller;
 
   async function start() {
     try {
       featureControls = createPlanetFeatureControls({
         stage,
+        lifetime,
+        onError,
         classes: Object.freeze({
           rings: "neptune-hide-rings",
           shadows: "neptune-hide-shadows",
@@ -102,10 +128,12 @@ export function mountNeptuneClient(stage) {
           orbitCamera?.setShadowsEnabled(visible);
         },
       });
-      lensControls = createLensControls({ stage });
+      lensControls = createLensControls({ stage, lifetime, onError });
       orbitMaterialCache = createPreparedOrbitMaterialCache(
         PREPARED_NEPTUNE_LENSES,
+        { onError },
       );
+      lifetime.onDispose(orbitMaterialCache.destroy);
       const normal = PREPARED_NEPTUNE_LENSES.controls.find(({ id }) => id === PREPARED_NEPTUNE_LENSES.defaultLens);
       await Promise.all([
         lensControls.prepare(normal.id),
@@ -127,33 +155,36 @@ export function mountNeptuneClient(stage) {
           PREPARED_NEPTUNE_SCENE.camera.orbitPlayback.initialScenePitchDegrees,
         ),
       ]);
-      if (destroyed) return;
-      mounted = mountPreparedScene(stage, PREPARED_NEPTUNE_SCENE);
+      if (lifetime.disposed) return;
+      mounted = mountPreparedScene(stage, PREPARED_NEPTUNE_SCENE, lifetime);
+      warmImages.clear();
       sceneAnimations = Object.freeze(stage.getAnimations({ subtree: true }));
+      for (const animation of sceneAnimations) lifetime.onDispose(() => animation.cancel());
       for (const animation of sceneAnimations) {
         animation.currentTime = 0;
-        if (!shouldPlay) animation.pause();
+        animation.pause();
       }
-      await nextPaint();
-      if (destroyed) return;
+      await waitForScenePaint(lifetime);
+      if (lifetime.disposed) return;
       orbitCamera = createNeptuneCubicOrbit({
         stage,
+        onError,
         inputSurface,
         mounted,
         orbitMaterialCache,
         initialLens: PREPARED_NEPTUNE_LENSES.defaultLens,
       });
+      lifetime.onDispose(orbitCamera.destroy);
       mounted.ringLeaf.style.backgroundImage = `url("${RING_2X_URL}")`;
       lensControls.bindRuntime({
         materialLeaf: mounted.fixedMaterialLeaf,
         orbitCamera,
       });
       featureControls.bindRuntime({ animations: sceneAnimations });
-      document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
+      if (shouldPlay) for (const animation of sceneAnimations) animation.play();
       if (DEVELOPMENT_DIAGNOSTICS) {
-        window.__neptune = Object.freeze({
+        diagnostic = Object.freeze({
         ready: true,
-        pause: controller.pause,
         camera: Object.freeze({ state: orbitCamera.state, setState: orbitCamera.setState, stats: orbitCamera.stats }),
         features: Object.freeze({ state: featureControls.state }),
         options: Object.freeze({ state: featureControls.optionsState }),
@@ -170,39 +201,27 @@ export function mountNeptuneClient(stage) {
         stableNodes: mounted.stableNodes,
         assertStableDomIdentity: mounted.assertStableDomIdentity,
         });
+        window.__neptune = diagnostic;
       }
     } catch (error) {
-      if (destroyed) return;
-      releaseResources();
+      if (lifetime.disposed) return;
       throw error;
     }
   }
 
-  function releaseResources() {
-    if (resourcesReleased) return;
-    resourcesReleased = true;
-    featureControls?.destroy();
-    featureControls = null;
-    lensControls?.destroy();
-    lensControls = null;
-    orbitCamera?.destroy();
-    orbitCamera = null;
-    orbitMaterialCache?.destroy();
-    orbitMaterialCache = null;
-    mounted?.skySun.destroy();
-    mounted?.cubicSky.destroy();
-    mounted?.camera.remove();
-    mounted = null;
-    sceneAnimations = Object.freeze([]);
-    delete stage.dataset.lens;
-    stage.style.removeProperty("--neptune-surface-image");
-    stage.style.removeProperty("--neptune-poles-image");
+  function decodeImage(url, url2x = "") {
+    if (lifetime.disposed) return Promise.resolve(null);
+    const image = new Image();
+    warmImages.add(image);
+    return decodePreparedImage(image, url2x || url);
   }
 }
 
-function mountPreparedScene(host, plan) {
+function mountPreparedScene(host, plan, lifetime) {
   if (plan.schema !== "cssneptune-prepared-runtime-scene@1") throw new TypeError("Neptune retained scene plan is incompatible.");
   const camera = document.createElement("div");
+  lifetime.onDispose(() => camera.remove());
+  ownNeptunePresentationCleanup(host, camera, lifetime);
   camera.className = "polycss-camera planet-render-root";
   camera.style.cssText = plan.camera.style;
   const scene = createMesh("polycss-scene", plan.camera.initialTransform);
@@ -255,6 +274,7 @@ function mountPreparedScene(host, plan) {
     objectId: "neptune",
     requireSun: false,
   });
+  lifetime.onDispose(cubicSky.destroy);
   const skySun = mountRetainedDirectionalSun({
     host,
     plan: PREPARED_NEPTUNE_SKY_SUN,
@@ -262,6 +282,7 @@ function mountPreparedScene(host, plan) {
     objectId: "neptune",
     before: camera,
   });
+  lifetime.onDispose(skySun.destroy);
   const layerRegistration = registerBodyDependentLayers({
     objectId: "neptune",
     sceneElement: scene,
@@ -435,6 +456,7 @@ function float64LittleEndianValues(buffer, expectedCount) {
 
 function createNeptuneCubicOrbit({
   stage,
+  onError,
   inputSurface,
   mounted,
   orbitMaterialCache,
@@ -524,6 +546,7 @@ function createNeptuneCubicOrbit({
     objectId: "neptune",
     mobilePreviewElement: stage.ownerDocument.querySelector(".planet-sidebar"),
     onPublish: publish,
+    onError,
   });
   return Object.freeze({
     mobilePageFlow: orbit.mobilePageFlow,
@@ -537,19 +560,25 @@ function createNeptuneCubicOrbit({
       orbit.refresh();
       return true;
     },
-    async setLens(id) {
-      const state = orbit.state();
-      const useDefault = Math.abs(
-        state.controlPitch - NEPTUNE_CUBIC_CAMERA.defaultControlPitchDegrees,
-      ) < 0.01;
-      if (!useDefault) {
-        await orbitMaterialCache.preparePresentation(materialFrame, id);
-      }
+    prepareLens(id, { isCurrent }) {
+      orbitMaterialCache.clearSelection();
+      return prepareCurrentNeptuneMaterial({
+        id, isCurrent, cache: orbitMaterialCache,
+        readState: () => ({
+          frame: materialFrame,
+          useDefault: Math.abs(orbit.state().controlPitch -
+            NEPTUNE_CUBIC_CAMERA.defaultControlPitchDegrees) < 0.01,
+        }),
+      });
+    },
+    commitLens(id) {
       activeLens = id;
       lastMaterialPresentationKey = null;
       orbit.refresh();
+      orbitMaterialCache.clearSelection();
       return true;
     },
+    cancelLensPreparation: orbitMaterialCache.clearSelection,
     stats() {
       return Object.freeze({
         ...orbit.stats(),
@@ -566,141 +595,149 @@ function createNeptuneCubicOrbit({
   });
 }
 
-function createLensControls({ stage }) {
+export function createLensControls({ stage, lifetime, onError }) {
   const root = document.querySelector(".planet-lenses");
   if (!(root instanceof HTMLElement)) throw new Error("Neptune lens selector is missing.");
-  const lenses = new Map(PREPARED_NEPTUNE_LENSES.controls.map((lens) => [lens.id, lens]));
-  const buttons = new Map([...root.querySelectorAll('button[name="lens"]')].map((button) => [button.value, button]));
-  if (buttons.size !== lenses.size) throw new Error("Neptune lens selector does not match prepared lenses.");
+  const controls = PREPARED_NEPTUNE_LENSES.controls;
+  const lenses = new Map(controls.map((lens) => [lens.id, lens]));
+  const buttonList = [...root.querySelectorAll('button[name="lens"]')];
+  const buttons = new Map(buttonList.map((button) => [button.value, button]));
+  if (lenses.size !== controls.length || buttons.size !== buttonList.length ||
+      buttons.size !== lenses.size || [...buttons.keys()].some((id) => !lenses.has(id))) {
+    throw new Error("Neptune lens selector does not match prepared lenses.");
+  }
   const decoded = new Map();
   const events = new AbortController();
   let active = PREPARED_NEPTUNE_LENSES.defaultLens;
-  let request = 0;
+  let desired = active;
   let ready = false;
-  let destroyed = false;
   let materialLeaf = null;
   let orbitCamera = null;
+  const selection = createLatestSelection({
+    lifetime,
+    onBusyChange: (busy) => root.classList.toggle("is-loading", busy),
+    onFatalError: onError,
+  });
+  lifetime.onDispose(() => {
+    ready = false;
+    events.abort();
+    root.classList.remove("is-loading");
+    for (const button of buttons.values()) button.disabled = true;
+    materialLeaf = null;
+    orbitCamera = null;
+  });
+  lifetime.onDispose(() => releaseLensImages());
   root.classList.add("is-loading");
   for (const button of buttons.values()) button.disabled = true;
-  for (const [id, button] of buttons) button.addEventListener("click", () => void select(id).catch(console.error), { signal: events.signal });
+  for (const [id, button] of buttons) button.addEventListener("click",
+    () => void select(id).catch((error) => { if (!lifetime.disposed) console.error(error); }),
+    { signal: events.signal });
   publish();
   return Object.freeze({
-    state() { return Object.freeze({ id: active, ready: ready && !destroyed }); },
+    state() { return Object.freeze({ id: active, ready: ready && !lifetime.disposed }); },
     prepare,
     select,
     bindRuntime(runtime) {
-      if (destroyed) return;
-      if (!(runtime?.materialLeaf instanceof HTMLElement)) {
-        throw new TypeError("Neptune material leaf binding is missing.");
-      }
-      if (typeof runtime.orbitCamera?.setLens !== "function") {
-        throw new TypeError("Neptune orbit-material binding is missing.");
+      if (lifetime.disposed) return;
+      if (!(runtime?.materialLeaf instanceof HTMLElement) ||
+          typeof runtime.orbitCamera?.prepareLens !== "function" ||
+          typeof runtime.orbitCamera?.commitLens !== "function") {
+        throw new TypeError("Neptune material binding is incomplete.");
       }
       materialLeaf = runtime.materialLeaf;
       orbitCamera = runtime.orbitCamera;
-      applyPreparedLens(lenses.get(active), { material: false });
+      applyPreparedLens(lenses.get(active));
       ready = true;
       publish();
       root.classList.remove("is-loading");
       for (const button of buttons.values()) button.disabled = false;
-    },
-    destroy() {
-      if (destroyed) return;
-      destroyed = true;
-      ready = false;
-      request += 1;
-      events.abort();
-      root.classList.remove("is-loading");
-      for (const button of buttons.values()) button.disabled = true;
-      for (const [id, entry] of decoded) releaseEntry(id, entry);
-      decoded.clear();
-      materialLeaf = null;
-      orbitCamera = null;
-      stage.style.removeProperty("--neptune-surface-image");
-      stage.style.removeProperty("--neptune-poles-image");
-      delete stage.dataset.lens;
     },
   });
 
   function prepare(id) {
     const lens = lenses.get(id);
     if (!lens) throw new RangeError(`Unknown Neptune lens: ${id}.`);
+    if (lifetime.disposed) return Promise.resolve(null);
     let entry = decoded.get(id);
     if (!entry) {
-      entry = { images: null, promise: null, wanted: true, released: false };
+      const store = createPreparedImageStore();
+      entry = { store, promise: null };
+      decoded.set(id, entry);
       entry.promise = Promise.all([
-        decodeImage(lens.surfaceUrl, lens.surface2xUrl),
-        decodeImage(lens.polesUrl),
-        decodeImage(lens.materialUrl),
-        decodeImage(lens.shadowlessMaterialUrl),
-      ]).then((images) => {
-        entry.images = images;
-        if (!entry.wanted) releaseEntry(id, entry);
-        return images;
-      }, (error) => {
+        lens.surface2xUrl || lens.surfaceUrl,
+        lens.polesUrl,
+        lens.materialUrl,
+        lens.shadowlessMaterialUrl,
+      ].map((url) => store.load(url))).catch((error) => {
         if (decoded.get(id) === entry) decoded.delete(id);
+        try { store.destroy(); } catch (cleanupError) {
+          throw new AggregateError([error, cleanupError], error.message, { cause: error });
+        }
         throw error;
       });
-      decoded.set(id, entry);
     }
-    entry.wanted = true;
     return entry.promise;
   }
-  async function select(id) {
+  function select(id) {
     if (!lenses.has(id)) throw new RangeError(`Unknown Neptune lens: ${id}.`);
-    if (!ready || destroyed) return false;
-    const selection = ++request;
-    root.classList.add("is-loading");
-    try {
-      await prepare(id);
-      if (destroyed || selection !== request) return false;
-      await orbitCamera.setLens(id);
-      if (destroyed || selection !== request) return false;
-      active = id;
-      applyPreparedLens(lenses.get(id), { material: false });
-      publish();
-      releaseInactiveEntries(id);
-      return true;
-    } finally {
-      if (selection === request) root.classList.remove("is-loading");
-    }
+    if (!ready || lifetime.disposed) return Promise.resolve(false);
+    desired = id;
+    return selection.run({
+      prepare: async ({ isCurrent }) => {
+        releaseLensImages(new Set([active, desired]));
+        await prepare(id);
+        if (!isCurrent()) return;
+        await orbitCamera.prepareLens(id, { isCurrent });
+      },
+      commit: () => {
+        if (!materialLeaf || !orbitCamera) throw new Error("Neptune runtime was released.");
+        orbitCamera.commitLens(id);
+        if (lifetime.disposed) return;
+        applyPreparedLens(lenses.get(id));
+        active = id;
+        publish();
+        releaseLensImages(new Set([active, desired]));
+      },
+      onCurrentFailure() {
+        desired = active;
+        releaseLensImages(new Set([active]));
+        orbitCamera?.cancelLensPreparation?.();
+      },
+      discard() {
+        if (!lifetime.disposed) releaseLensImages(new Set([active, desired]));
+      },
+    });
   }
-  function releaseInactiveEntries(selectedId) {
+  function applyPreparedLens(lens) {
+    stage.style.setProperty("--neptune-surface-image", `url("${lens.surface2xUrl || lens.surfaceUrl}")`);
+    stage.style.setProperty("--neptune-poles-image", `url("${lens.polesUrl}")`);
+  }
+  function releaseLensImages(keepIds = new Set()) {
+    const errors = [];
     for (const [id, entry] of decoded) {
-      if (id !== selectedId) releaseEntry(id, entry);
+      if (keepIds.has(id)) continue;
+      decoded.delete(id);
+      try { entry.store.destroy(); } catch (error) { errors.push(error); }
     }
-  }
-  function releaseEntry(id, entry) {
-    entry.wanted = false;
-    if (!entry.images || entry.released) return;
-    entry.released = true;
-    entry.images.forEach(releaseDecodedImage);
-    if (decoded.get(id) === entry) decoded.delete(id);
-    entry.images = null;
-    entry.promise = null;
-  }
-  function applyPreparedLens(lens, { material = true } = {}) {
-    stage.style.setProperty(
-      "--neptune-surface-image",
-      `url("${lens.surface2xUrl || lens.surfaceUrl}")`,
-    );
-    stage.style.setProperty(
-      "--neptune-poles-image",
-      `url("${lens.polesUrl}")`,
-    );
-    if (material) {
-      materialLeaf.style.backgroundImage = `url("${lens.materialUrl}")`;
-      materialLeaf.style.backgroundPosition = "0px 0px";
-      materialLeaf.style.backgroundSize = "1024px 1024px";
-    }
+    if (errors.length) throw new AggregateError(errors, "Neptune lens group cleanup failed.");
   }
   function publish() {
-    stage.dataset.lens = active;
+    if (ready) stage.dataset.lens = active;
     for (const [id, button] of buttons) button.setAttribute("aria-pressed", String(id === active));
   }
 }
 
-function createPreparedOrbitMaterialCache(lensPlan) {
+export function ownNeptunePresentationCleanup(stage, camera, lifetime) {
+  lifetime.onDispose(() => {
+    if (camera.parentNode !== stage) return;
+    stage.style.removeProperty("--neptune-surface-image");
+    stage.style.removeProperty("--neptune-poles-image");
+    delete stage.dataset.lens;
+  });
+}
+
+export function createPreparedOrbitMaterialCache(lensPlan, { onError = reportPreparedDecodeError } = {}) {
+  if (typeof onError !== "function") throw new TypeError("Neptune row cache requires a publication-error handler.");
   const variants = new Map(lensPlan.controls.map((lens) => [lens.id, lens]));
   for (const lens of variants.values()) {
     const orbit = lens.orbitMaterial;
@@ -720,6 +757,8 @@ function createPreparedOrbitMaterialCache(lensPlan) {
   let clock = 0;
   let decodeCount = 0;
   let releaseCount = 0;
+  let appliedKey = null;
+  let selectionKey = null;
 
   return Object.freeze({
     async prepareInitial() {
@@ -739,10 +778,15 @@ function createPreparedOrbitMaterialCache(lensPlan) {
       return Math.round(clamp(normalized, 0, 1) *
         (orbit.frameCount - 1));
     },
-    async preparePresentation(frameIndex, id) {
+    async preparePresentation(frameIndex, id, { protect = false } = {}) {
       const presentation = requirePresentation(frameIndex, id);
+      if (protect && !destroyed) selectionKey = rowKey(id, presentation.rowIndex);
       await prepareRow(id, presentation.rowIndex);
       return presentation;
+    },
+    clearSelection() { selectionKey = null; },
+    hasPresentation(frameIndex, id) {
+      return retained.has(rowKey(id, requirePresentation(frameIndex, id).rowIndex));
     },
     presentation(frameIndex, id) {
       const presentation = requirePresentation(frameIndex, id);
@@ -750,14 +794,17 @@ function createPreparedOrbitMaterialCache(lensPlan) {
       const entry = retained.get(key);
       if (entry) {
         entry.used = ++clock;
+        appliedKey = key;
         return presentation;
       }
       void prepareRow(id, presentation.rowIndex).then(() => {
-        if (!destroyed) readyCallback?.();
+        if (destroyed) return;
+        try { readyCallback?.(); } catch (error) { onError(error); }
       }, reportPreparedDecodeError);
       return null;
     },
     defaultPresentation(id) {
+      appliedKey = null;
       const lens = requireLens(id);
       return Object.freeze({
         assetUrl: lens.materialUrl,
@@ -766,6 +813,7 @@ function createPreparedOrbitMaterialCache(lensPlan) {
       });
     },
     shadowlessPresentation(id) {
+      appliedKey = null;
       const lens = requireLens(id);
       return Object.freeze({
         assetUrl: lens.shadowlessMaterialUrl,
@@ -790,9 +838,17 @@ function createPreparedOrbitMaterialCache(lensPlan) {
       if (destroyed) return;
       destroyed = true;
       readyCallback = null;
-      for (const { image } of retained.values()) image.src = "";
+      appliedKey = null;
+      selectionKey = null;
+      const images = new Set([...retained.values(), ...pending.values()].map(({ image }) => image));
       retained.clear();
       pending.clear();
+      const errors = [];
+      for (const image of images) {
+        releaseCount += 1;
+        try { releasePreparedImage(image); } catch (error) { errors.push(error); }
+      }
+      if (errors.length) throw new AggregateError(errors, "Neptune row image cleanup failed.");
     },
   });
 
@@ -824,38 +880,56 @@ function createPreparedOrbitMaterialCache(lensPlan) {
       return Promise.resolve(true);
     }
     const existing = pending.get(key);
-    if (existing) return existing;
+    if (existing) return existing.promise;
     const row = requireLens(id).orbitMaterial.rows[rowIndex];
     if (!row) throw new RangeError(`Unprepared Neptune orbit row: ${key}.`);
-    const promise = decodeImage(row.assetUrl, "", 1).then((image) => {
-      pending.delete(key);
-      if (destroyed) {
-        image.src = "";
+    const image = new Image();
+    const entry = { image, promise: null };
+    pending.set(key, entry);
+    entry.promise = decodePreparedImage(image, row.assetUrl).then(() => {
+      if (destroyed || pending.get(key) !== entry) {
         return false;
       }
+      pending.delete(key);
       retained.set(key, { image, used: ++clock });
       decodeCount += 1;
       evictRows(key);
       return true;
     }, (error) => {
+      if (destroyed || pending.get(key) !== entry) return false;
       pending.delete(key);
+      try { releasePreparedImage(image); } catch (cleanupError) {
+        throw new AggregateError([error, cleanupError], error.message, { cause: error });
+      }
       throw error;
     });
-    pending.set(key, promise);
-    return promise;
+    return entry.promise;
   }
 
   function evictRows(protectedKey) {
     while (retained.size > maximumRetainedRowCount) {
       const candidates = [...retained.entries()]
-        .filter(([key]) => key !== protectedKey)
+        .filter(([key]) => key !== protectedKey && key !== appliedKey && key !== selectionKey)
         .sort((left, right) => left[1].used - right[1].used);
       const candidate = candidates[0];
       if (!candidate) return;
-      candidate[1].image.src = "";
       retained.delete(candidate[0]);
       releaseCount += 1;
+      releasePreparedImage(candidate[1].image);
     }
+  }
+}
+
+export async function prepareCurrentNeptuneMaterial({ id, isCurrent, cache, readState }) {
+  while (isCurrent()) {
+    const needed = readState();
+    if (needed.useDefault) return;
+    await cache.preparePresentation(needed.frame, id, { protect: true });
+    if (!isCurrent()) return;
+    const latest = readState();
+    if (latest.useDefault || cache.hasPresentation(latest.frame, id)) return;
+    // Camera events remain independent. If the pose crossed a prepared row
+    // during decode, warm that current row before the synchronous lens commit.
   }
 }
 
@@ -867,20 +941,7 @@ function reportPreparedDecodeError(error) {
   console.error(error);
 }
 
-async function decodeImage(url, url2x) {
-  const image = new Image();
-  image.src = url2x || url;
-  await image.decode();
-  return image;
-}
-
-function releaseDecodedImage(image) {
-  if (!(image instanceof HTMLImageElement)) return;
-  image.removeAttribute("src");
-}
-
 function createMesh(className, style) { const mesh = document.createElement("div"); mesh.className = className.includes("polycss-") ? className : `polycss-mesh ${className}`; if (style) mesh.style.cssText = style; return mesh; }
 function createTextureLeaf(leaf) { return createPreparedProjectiveTextureLeaf(leaf); }
-function nextPaint() { return new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))); }
 function clamp(value, minimum, maximum) { return Math.max(minimum, Math.min(maximum, value)); }
 function normalizeDegrees(value) { return ((value + 180) % 360 + 360) % 360 - 180; }

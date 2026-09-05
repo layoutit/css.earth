@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { objectControls } from "../site/control-content.mjs";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
@@ -11,10 +12,11 @@ const files = await Promise.all([
   readFile(new URL("../site/MarsPanel.astro", import.meta.url), "utf8"),
   readFile(new URL("../../../../site/components/PlanetShell.astro", import.meta.url), "utf8"),
   readFile(new URL("../../../../site/planet-shell.css", import.meta.url), "utf8"),
+  readFile(new URL("../../../../site/shell-layout.css", import.meta.url), "utf8"),
   readFile(new URL("../site/MarsPage.astro", import.meta.url), "utf8"),
   readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
 ]);
-const [panel, shell, css, page, client] = files;
+const [panel, shell, css, shellLayout, page, client] = files;
 
 test("supplies complete Mars content to the shared shell", () => {
   assert.match(panel, /<PlanetShell[\s\S]*?objectId="mars"/u);
@@ -39,11 +41,10 @@ test("keeps Mars content free of Saturn and invented feature UI", () => {
 });
 
 test("wires every prepared Mars lens and only supported settings", () => {
-  assert.match(panel, /PREPARED_MARS_LENSES\.controls\.map/u);
+  assert.match(panel, /control-content\.mjs/u);
+  assert.deepEqual(objectControls.lenses.controls.map(({ id }) => id), PREPARED_MARS_LENSES.controls.map(({ id }) => id));
   assert.equal(PREPARED_MARS_LENSES.controls.length, 3);
-  assert.match(panel, /name: "speed"/u);
-  assert.match(panel, /name: "shadows"/u);
-  assert.doesNotMatch(panel, /name: "moons"|name: "rings"|name: "features"/u);
+  assert.deepEqual(objectControls.settings.controls.map(({ name }) => name), ["speed", "shadows"]);
   assert.match(client, /createMarsPanelControls/u);
   assert.match(client, /"\.planet-drawer-content \.planet-lenses"/u);
   assert.match(client, /"\.planet-settings-panel \.planet-settings"/u);
@@ -51,12 +52,12 @@ test("wires every prepared Mars lens and only supported settings", () => {
   assert.equal(PLANET_SPEED_STATES.at(-1)?.label, "superfast");
 });
 
-test("uses the sole responsive shell stylesheet", () => {
+test("keeps responsive shell geometry generic and centralized", () => {
   assert.match(page, /site\/planet-shell\.css/u);
-  assert.match(css, /--planet-shell-width:\s*340px/u);
-  assert.match(css, /font:\s*14px\/1\.4 var\(--shell-ui-font\)/u);
-  assert.match(css, /@media \(max-width: 820px\)/u);
-  assert.match(css,
+  assert.match(shellLayout, /--explorer-panel-width:\s*360px/u);
+  assert.match(shellLayout, /font:\s*14px\/1\.4 var\(--shell-ui-font\)/u);
+  assert.match(shellLayout, /@media \(max-width: 820px\), \(orientation: portrait\)/u);
+  assert.match(shellLayout,
     /@media \(min-width: 821px\) and \(orientation: landscape\)/u);
-  assert.doesNotMatch(css, /\.mars-|\.saturn-/u);
+  for (const source of [css, shellLayout]) assert.doesNotMatch(source, /\.mars-|\.saturn-/u);
 });

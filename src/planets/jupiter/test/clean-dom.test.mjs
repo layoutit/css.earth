@@ -46,12 +46,13 @@ test("keeps the Jupiter scene as one fixed retained PolyCSS tree", async () => {
   assert.doesNotMatch(client, /materialLeaves/u);
   assert.match(client, /idleJavaScriptLoops: 0/u);
   assert.match(client, /assertStableDomIdentity/u);
-  assert.match(client, /lensDecodePromises\.get\(lens\.id\)/u);
-  assert.match(client, /if \(destroyed\) return/u);
+  assert.match(client, /lensDecodePromises\.get\(id\)/u);
+  assert.match(client, /if \(lifetime\.disposed\) return/u);
   assert.match(client,
     /resume\(\) \{[\s\S]*?shouldPlay = true;[\s\S]*?if \(!mounted\) return;/u);
-  assert.match(client, /releaseScene\(\)/u);
-  assert.match(client, /stage\.replaceChildren\(\)/u);
+  assert.match(client, /lifetime\.destroy\(\)/u);
+  assert.doesNotMatch(client, /stage\.replaceChildren\(\)/u);
+  assert.match(client, /lifetime\.onDispose\(\(\) => camera\.remove\(\)\)/u);
   assert.match(client, /events\.abort\(\)/u);
   assert.equal((client.match(/style\.setProperty\(/gu) ?? []).length, 0);
   assert.doesNotMatch(client, /PREPARED_JUPITER_MOONS|jupiter-moon/u);

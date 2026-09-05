@@ -50,7 +50,7 @@ export const browserProfile = Object.freeze({
     await page.waitForFunction(() => window.__mars?.ready === true);
   },
   pause(page) {
-    return page.evaluate(() => window.__mars.pause());
+    return page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   },
   camera(page) {
     return page.evaluate(() => window.__mars.view());

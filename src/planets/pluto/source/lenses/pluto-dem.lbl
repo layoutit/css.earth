@@ -1,0 +1,60 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 100200
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 24888
+      Lines   = 12444
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = SignedWord
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+    ^Core     = Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif
+  End_Object
+
+  Group = Instrument
+    SpacecraftName            = "NEW HORIZONS"
+    InstrumentId              = LORRI
+    TargetName                = Pluto
+    SpacecraftClockStartCount = 3/0299167846:45250
+    ExposureDuration          = 0.149999999999999994
+  End_Group
+
+  Group = Archive
+    HighSpeedCompressionMode    = LOSSLESS
+    ObservationCompletionStatus = COMPLETE
+    SequenceDescription         = NONE
+  End_Group
+
+  Group = Mapping
+    TargetName           = Pluto
+    EquatorialRadius     = 1188300.0 <meters>
+    PolarRadius          = 1188300.0 <meters>
+    LatitudeType         = Planetographic
+    LongitudeDirection   = PositiveEast
+    LongitudeDomain      = 180
+    MinimumLatitude      = -90.0
+    MinimumLongitude     = 0.0
+    MaximumLatitude      = 90.0
+    MaximumLongitude     = 360.0
+    ProjectionName       = Equirectangular
+    CenterLongitude      = 180.0
+    CenterLatitude       = 0.0
+    UpperLeftCornerX     = -3733200.0
+    UpperLeftCornerY     = 1866600.0
+    PixelResolution      = 300.0 <meters/pixel>
+    Scale                = 69.132491671495 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1576            
+End_Object
+
+End

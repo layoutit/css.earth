@@ -1,5 +1,5 @@
 import { polarGeographicUv } from "./wmts-polar-geometry.mjs";
-import { prepareCityPageGeometry } from "./page-geometry.mjs";
+import { prepareCityPageGeometry,cityGeographicFrame } from "./page-geometry.mjs";
 import { EARTH_CUBIC_CAMERA } from "../../runtime/camera-plan.mjs";
 
 const degrees = radians => radians * 180 / Math.PI;
@@ -40,7 +40,7 @@ export function prepareLocationPoint(scene, longitude, latitude) {
   let targetLatitude = latitude;
   const leaf = scene.body.bands.find(b => b.latitudeIndex === band)
     .leaves[Math.floor(((lon + 180) % 360) / 11.25)];
-  const m = leaf.style.match(/matrix3d\(([^)]+)\)/)[1].split(",").map(Number);
+  const m = cityGeographicFrame(leaf).split(",").map(Number);
   const pointAt = lat => {
     const [u, v] = pageCoordinates(page, lon, lat);
     const x = -.25 + 32.5 * u, y = -.25 + 32.5 * v;

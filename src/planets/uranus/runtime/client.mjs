@@ -17,8 +17,13 @@ import {
 } from "../../../platform/cubic-sky-runtime.mjs";
 import { mountRetainedDirectionalSun } from
   "../../../platform/directional-sun-runtime.mjs";
+import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
+import { createPreparedImageStore } from "../../../platform/prepared-image-store.mjs";
+import { createLatestSelection } from "../../../platform/latest-selection.mjs";
+import { createUranusMaterialNeighborhoodCache } from "./material-neighborhood-cache.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
+const lensOwners = new WeakMap();
 const URANUS_CUBIC_CAMERA = Object.freeze({
   cameraModel: "accumulated-matrix3d",
   minimumControlPitchDegrees: 0,
@@ -51,23 +56,27 @@ const URANUS_CUBIC_CAMERA = Object.freeze({
   }),
 });
 
-export function mountUranusClient(stage) {
+export function mountUranusClient(stage, { onError } = {}) {
+  if (typeof onError !== "function") throw new TypeError("Uranus requires onError.");
+  const lifetime = createSceneLifetime();
   const inputSurface = document.querySelector(".uranus-input-surface");
   if (!(inputSurface instanceof HTMLElement)) {
     throw new Error("Uranus input surface is missing.");
   }
-  const decoded = new Map();
-  const materialDecoded = new Map();
-  let desiredMaterialUrls = new Set();
-  let materialWarmGeneration = 0;
-  let destroyed = false;
-  let shouldPlay = true;
+  const imageStore = createPreparedImageStore();
+  lifetime.onDispose(imageStore.destroy);
+  const materialCache = createUranusMaterialNeighborhoodCache();
+  lifetime.onDispose(materialCache.destroy);
+  const decode = imageStore.load;
+  let shouldPlay = false;
   let mounted = null;
   let cameraControls = null;
   let featureControls = null;
   let lensControls = null;
   let animations = Object.freeze([]);
   let ready;
+  let diagnostics = null;
+  lifetime.onDispose(() => { if (window.__uranus === diagnostics) delete window.__uranus; });
 
   disableLensButtons(true);
   const controller = Object.freeze({
@@ -75,53 +84,35 @@ export function mountUranusClient(stage) {
       return ready;
     },
     pause() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = false;
       for (const animation of animations) animation.pause();
-      document.documentElement.dataset.playing = "false";
     },
     resume() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = true;
       for (const animation of animations) animation.play();
-      if (mounted) document.documentElement.dataset.playing = "true";
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
       shouldPlay = false;
-      lensControls?.destroy();
-      featureControls?.destroy();
-      cameraControls?.destroy();
-      mounted?.skySun.destroy();
-      mounted?.cubicSky.destroy();
-      mounted?.camera.remove();
-      mounted = null;
-      animations = Object.freeze([]);
-      for (const task of decoded.values()) {
-        void task.then(releaseDecodedImage, () => {});
-      }
-      decoded.clear();
-      desiredMaterialUrls = new Set();
-      materialWarmGeneration += 1;
-      for (const task of materialDecoded.values()) {
-        void task.then(releaseDecodedImage, () => {});
-      }
-      materialDecoded.clear();
-      disableLensButtons(true);
-      cameraControls = null;
-      featureControls = null;
-      lensControls = null;
-      delete document.documentElement.dataset.playing;
-      delete stage.dataset.lens;
-      if (DEVELOPMENT_DIAGNOSTICS && window.__uranus) delete window.__uranus;
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Uranus cleanup failed.");
     },
   });
-  ready = start();
+  ready = lifetime.wait(start()).then((result) => result.value).catch((error) => {
+    const cleanupErrors = lifetime.destroy();
+    if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], error.message, { cause: error });
+    throw error;
+  });
   return controller;
 
   async function start() {
     try {
+      featureControls = createPlanetFeatureControls({
+        stage, lifetime, onError,
+        classes: Object.freeze({ rings: "uranus-hide-rings", shadows: "uranus-hide-shadows" }),
+        onShadowsVisibilityChange: (visible) => cameraControls?.setShadowsEnabled(visible),
+      });
       const assets = selectedAssets();
       const initialMaterialRow = materialRowIndexForPitch(
         PREPARED_URANUS_RUNTIME_SCENE.camera.defaultPitch,
@@ -133,16 +124,17 @@ export function mountUranusClient(stage) {
         decode(assets.poles),
         decode(assets.defaultMaterial),
         decode(assets.shadowlessMaterial),
-        warmMaterialRows(assets.materialRows, initialMaterialRow),
+        materialCache.warm(assets.materialRows, initialMaterialRow),
         decode(assets.ring),
         decode(assets.ringShadow),
       ]);
-      if (destroyed) return;
-      mounted = mountPreparedScene(stage, assets);
+      if (lifetime.disposed) return;
+      mounted = mountPreparedScene(stage, assets, lifetime);
       animations = Object.freeze(stage.getAnimations({ subtree: true }));
       for (const animation of animations) {
+        lifetime.onDispose(() => animation.cancel());
+        animation.pause();
         animation.currentTime = 0;
-        if (!shouldPlay) animation.pause();
       }
       cameraControls = createUranusCubicCamera({
         stage,
@@ -151,62 +143,46 @@ export function mountUranusClient(stage) {
         defaultMaterial: assets.defaultMaterial,
         shadowlessMaterial: assets.shadowlessMaterial,
         materialRows: assets.materialRows,
+        onError,
         onMaterialRowChange(rowIndex, rows) {
-          void warmMaterialRows(rows, rowIndex).catch((error) => {
-            console.error(error);
+          void materialCache.warm(rows, rowIndex).catch((error) => {
+            if (lifetime.disposed) return;
+            if (error instanceof AggregateError) onError(error);
+            else console.error(error);
           });
         },
       });
-      featureControls = createPlanetFeatureControls({
-        stage,
-        classes: Object.freeze({
-          rings: "uranus-hide-rings",
-          shadows: "uranus-hide-shadows",
-        }),
-        onShadowsVisibilityChange: cameraControls.setShadowsEnabled,
-      });
+      lifetime.onDispose(cameraControls.destroy);
       featureControls.bindRuntime({ animations });
-      lensControls = bindLensControls({
+      if (lifetime.disposed) return;
+      if (shouldPlay) for (const animation of animations) animation.play();
+      lensControls = bindUranusLensControls({
         stage,
         surfaceRoots: mounted.bodyBands.map(({ element }) => element),
         cameraControls,
         decode,
-        warmMaterialRows,
-        destroyed: () => destroyed,
+        prepareMaterialRows: materialCache.prepare,
+        lifetime, onError,
       });
-      await twoFrames();
-      if (destroyed) return;
+      await waitForScenePaint(lifetime);
+      if (lifetime.disposed) return;
       disableLensButtons(false);
-      document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
       if (DEVELOPMENT_DIAGNOSTICS) publishDiagnostics();
     } catch (error) {
-      if (destroyed) return;
-      controller.destroy();
+      if (lifetime.disposed) return;
       throw error;
     }
   }
 
-  function decode(url) {
-    if (decoded.has(url)) return decoded.get(url);
-    const task = new Promise((resolve, reject) => {
-      const image = new Image();
-      image.decoding = "async";
-      image.src = url;
-      image.decode().then(() => resolve(image), reject);
-    });
-    decoded.set(url, task);
-    return task;
-  }
-
   function publishDiagnostics() {
-    window.__uranus = Object.freeze({
+    diagnostics = Object.freeze({
       ready: true,
-      pause: controller.pause,
       renderStats: Object.freeze({
         textureStats: Object.freeze({
           selectedPreparedDensity: CANONICAL_PREPARED_IMAGE_DENSITY,
           get retainedInteractiveImageCount() {
-            return decoded.size + materialDecoded.size;
+            const material = materialCache.stats();
+            return imageStore.stats().retainedCount + material.retainedCount + material.pendingCount;
           },
         }),
       }),
@@ -226,44 +202,7 @@ export function mountUranusClient(stage) {
         select: lensControls.select,
       }),
     });
-  }
-
-  async function warmMaterialRows(rows, rowIndex) {
-    if (!Array.isArray(rows) || rows.length !== 16 ||
-        !Number.isSafeInteger(rowIndex)) {
-      throw new TypeError("Uranus prepared material neighborhood is invalid.");
-    }
-    const generation = ++materialWarmGeneration;
-    desiredMaterialUrls = new Set(materialRowNeighborhood(
-      rowIndex,
-      rows.length,
-    ).map((index) => rows[index]));
-    await Promise.all([...desiredMaterialUrls].map(decodeMaterial));
-    pruneMaterialImages();
-    return !destroyed && generation === materialWarmGeneration;
-  }
-
-  function decodeMaterial(url) {
-    if (materialDecoded.has(url)) return materialDecoded.get(url);
-    const task = new Promise((resolve, reject) => {
-      const image = new Image();
-      image.decoding = "async";
-      image.src = url;
-      image.decode().then(() => resolve(image), reject);
-    }).catch((error) => {
-      materialDecoded.delete(url);
-      throw error;
-    });
-    materialDecoded.set(url, task);
-    return task;
-  }
-
-  function pruneMaterialImages() {
-    for (const [url, task] of materialDecoded) {
-      if (desiredMaterialUrls.has(url)) continue;
-      materialDecoded.delete(url);
-      void task.then(releaseDecodedImage, () => {});
-    }
+    window.__uranus = diagnostics;
   }
 }
 
@@ -276,20 +215,6 @@ function materialRowIndexForPitch(controlPitch) {
   );
   return PREPARED_URANUS_RUNTIME_SCENE.preparedLighting
     .presentations[frameIndex].rowIndex;
-}
-
-function materialRowNeighborhood(rowIndex, rowCount) {
-  const indexes = [];
-  for (const candidate of [rowIndex - 1, rowIndex, rowIndex + 1]) {
-    const bounded = Math.max(0, Math.min(rowCount - 1, candidate));
-    if (!indexes.includes(bounded)) indexes.push(bounded);
-  }
-  return Object.freeze(indexes);
-}
-
-function releaseDecodedImage(image) {
-  image.removeAttribute("src");
-  image.src = "";
 }
 
 function selectedAssets() {
@@ -317,13 +242,17 @@ function selectedAssets() {
   });
 }
 
-function mountPreparedScene(stage, assets) {
+function mountPreparedScene(stage, assets, lifetime) {
   const plan = PREPARED_URANUS_RUNTIME_SCENE;
   if (plan.schema !== "cssuranus-prepared-runtime-scene@1") {
     throw new TypeError("Uranus retained scene plan is incompatible.");
   }
-  stage.dataset.lens = "normal";
   const camera = element("div", "polycss-camera planet-render-root");
+  lifetime.onDispose(() => camera.remove());
+  lifetime.onDispose(() => {
+    if (camera.parentNode !== stage) return;
+    delete stage.dataset.lens;
+  });
   camera.style.cssText = plan.camera.style;
   const scene = element("div", "polycss-scene");
   scene.style.cssText = plan.camera.sceneStyle;
@@ -392,6 +321,7 @@ function mountPreparedScene(stage, assets) {
   scene.appendChild(fixedMaterialCounter);
 
   stage.replaceChildren(camera);
+  stage.dataset.lens = "normal";
   const cubicSky = mountRetainedCubicSky({
     host: stage,
     plan: PREPARED_URANUS_STARFIELD,
@@ -399,6 +329,7 @@ function mountPreparedScene(stage, assets) {
     objectId: "uranus",
     requireSun: false,
   });
+  lifetime.onDispose(cubicSky.destroy);
   const skySun = mountRetainedDirectionalSun({
     host: stage,
     plan: PREPARED_URANUS_SKY_SUN,
@@ -406,6 +337,7 @@ function mountPreparedScene(stage, assets) {
     objectId: "uranus",
     before: camera,
   });
+  lifetime.onDispose(skySun.destroy);
   const layerRegistration = registerBodyDependentLayers({
     objectId: "uranus",
     sceneElement: scene,
@@ -460,6 +392,7 @@ function createUranusCubicCamera({
   shadowlessMaterial,
   materialRows,
   onMaterialRowChange,
+  onError,
 }) {
   const lighting = PREPARED_URANUS_RUNTIME_SCENE.preparedLighting;
   if (!Array.isArray(materialRows) || materialRows.length !== lighting.rowCount) {
@@ -563,6 +496,7 @@ function createUranusCubicCamera({
     objectId: "uranus",
     mobilePreviewElement: stage.ownerDocument.querySelector(".planet-sidebar"),
     onPublish: publish,
+    onError,
   });
   return Object.freeze({
     state: orbit.state,
@@ -603,20 +537,46 @@ function createUranusCubicCamera({
   });
 }
 
-function bindLensControls({
+export function bindUranusLensControls({
   stage,
   surfaceRoots,
   cameraControls,
   decode,
-  warmMaterialRows,
-  destroyed,
+  prepareMaterialRows,
+  lifetime,
+  onError,
 }) {
   const controls = new Map(PREPARED_URANUS_LENSES.controls.map((lens) => [lens.id, lens]));
+  const root = document.querySelector(".planet-lenses");
   const buttons = [...document.querySelectorAll('button[name="lens"]')];
+  if (!(root instanceof HTMLElement) || controls.size !== PREPARED_URANUS_LENSES.controls.length ||
+      buttons.length !== controls.size || new Set(buttons.map((button) => button.value)).size !== buttons.length ||
+      buttons.some((button) => !controls.has(button.value))) {
+    throw new Error("Uranus lens selector does not match prepared lenses.");
+  }
   let activeId = PREPARED_URANUS_LENSES.defaultLens;
-  let request = 0;
+  let desiredId = activeId;
   let ready = true;
   const events = new AbortController();
+  const owner = {};
+  lensOwners.set(root, owner);
+  const selection = createLatestSelection({
+    lifetime, onFatalError: onError,
+    onBusyChange(value) {
+      ready = !value;
+      root.classList.toggle("is-loading", value);
+      root.setAttribute("aria-busy", String(value));
+    },
+  });
+  lifetime.onDispose(() => {
+    ready = false;
+    events.abort();
+    if (lensOwners.get(root) !== owner) return;
+    lensOwners.delete(root);
+    root.classList.remove("is-loading");
+    root.setAttribute("aria-busy", "false");
+    for (const button of buttons) button.disabled = true;
+  });
   for (const button of buttons) {
     button.addEventListener("click", () => void selectLens(button.value).catch((error) => {
       console.error(error);
@@ -624,19 +584,17 @@ function bindLensControls({
   }
   return Object.freeze({
     state() {
-      return Object.freeze({ id: activeId, ready });
+      return Object.freeze({ id: activeId, ready: ready && !lifetime.disposed });
     },
     select: selectLens,
-    destroy() {
-      request += 1;
-      events.abort();
-    },
   });
 
   async function selectLens(id) {
     const lens = controls.get(id);
     if (!lens) throw new RangeError(`Unknown Uranus lens: ${id}.`);
-    const currentRequest = ++request;
+    if (lifetime.disposed) return false;
+    desiredId = id;
+    const desired = Object.freeze({ id: desiredId });
     const preparedAssets = PREPARED_URANUS_RUNTIME_SCENE.assets;
     const densityKey = String(CANONICAL_PREPARED_IMAGE_DENSITY);
     const selectedSurface = preparedAssets.surfaces[id][densityKey];
@@ -650,36 +608,37 @@ function bindLensControls({
       defaultMaterial,
       shadowlessMaterial,
     ];
-    const materialRow = materialRowIndexForPitch(
-      cameraControls.state().controlPitch,
-    );
-    ready = false;
-    try {
-      await Promise.all([
-        ...assets.map(decode),
-        warmMaterialRows(materialRows, materialRow),
-      ]);
-    } catch (error) {
-      if (currentRequest === request) ready = true;
-      throw error;
-    }
-    if (destroyed() || currentRequest !== request) return false;
-    for (const surfaceRoot of surfaceRoots) {
-      surfaceRoot.style.setProperty("--uranus-surface-image", `url(${assets[0]})`);
-      surfaceRoot.style.setProperty("--uranus-poles-image", `url(${assets[1]})`);
-    }
-    cameraControls.setMaterialRows(
-      materialRows,
-      defaultMaterial,
-      shadowlessMaterial,
-    );
-    stage.dataset.lens = id;
-    activeId = id;
-    ready = true;
-    for (const button of buttons) {
-      button.setAttribute("aria-pressed", String(button.value === id));
-    }
-    return true;
+    return selection.run({
+      prepare: async ({ isCurrent }) => {
+        await Promise.all(assets.map(decode));
+        while (isCurrent()) {
+          const materialRow = cameraControls.stats().activeMaterialRow;
+          const prepared = await prepareMaterialRows(materialRows, materialRow);
+          if (!isCurrent()) { prepared?.discard(); return null; }
+          if (cameraControls.stats().activeMaterialRow === materialRow) return prepared;
+          prepared?.discard();
+        }
+        return null;
+      },
+      commit(prepared) {
+        if (!prepared || !surfaceRoots.length) throw new Error("Uranus material preparation is unavailable.");
+        prepared.commit();
+        for (const surfaceRoot of surfaceRoots) {
+          surfaceRoot.style.setProperty("--uranus-surface-image", `url(${assets[0]})`);
+          surfaceRoot.style.setProperty("--uranus-poles-image", `url(${assets[1]})`);
+        }
+        cameraControls.setMaterialRows(materialRows, defaultMaterial, shadowlessMaterial);
+        stage.dataset.lens = desired.id;
+        activeId = desired.id;
+        publish();
+      },
+      onCurrentFailure() { desiredId = activeId; publish(); },
+      discard(prepared) { prepared?.discard(); },
+    });
+  }
+
+  function publish() {
+    for (const button of buttons) button.setAttribute("aria-pressed", String(button.value === activeId));
   }
 }
 
@@ -723,8 +682,4 @@ function clamp(value, minimum, maximum) {
 
 function normalizeDegrees(value) {
   return ((value + 180) % 360 + 360) % 360 - 180;
-}
-
-function twoFrames() {
-  return new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 }

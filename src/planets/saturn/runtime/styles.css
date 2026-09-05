@@ -299,22 +299,6 @@ html[data-ready="true"] .saturn-input-surface {
   visibility: hidden;
 }
 
-html[data-playing="true"] :is(
-  .saturn-body,
-  .saturn-ring-orbit
-) {
-  animation-play-state: running;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html[data-playing="true"] :is(
-    .saturn-body,
-    .saturn-ring-orbit
-  ) {
-    animation-play-state: paused;
-  }
-}
-
 @keyframes saturn-ring-orbit {
   from { transform: rotateZ(-128deg); }
   to { transform: rotateZ(-488deg); }

@@ -2,6 +2,7 @@ export default Object.freeze({
   schema: "cssearth-navigation-marker@1",
   planetId: "uranus",
   owner: "object",
+  presentation: Object.freeze({"size":10,"ringAngle":78,"ringExtra":11,"ringHeight":4,"ringOpacity":0.55}),
   source: Object.freeze({
     path: "navigation/uranus.jpg",
     expectedBytes: 83489,

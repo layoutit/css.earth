@@ -1,8 +1,9 @@
 ---
+import { objectControls } from "./control-content.mjs";
+const { lenses, settings } = objectControls;
 import PlanetShell from "../../../../site/components/PlanetShell.astro";
 import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
 import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
-import { PREPARED_URANUS_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_URANUS_PANEL } from "./preparedPanel.mjs";
 import { PREPARED_URANUS_TITLE } from "./preparedTitle.mjs";
 
@@ -36,22 +37,6 @@ const charts = [
   },
 ];
 
-const lensDescriptions: Record<string, string> = {
-  normal: "Hubble visible color",
-  methane: "Hubble at 727 nm",
-  "near-infrared": "Hubble at 845 nm",
-};
-const lenses = {
-  title: PREPARED_SHELL_TITLES.lenses,
-  defaultLens: PREPARED_URANUS_LENSES.defaultLens,
-  controls: PREPARED_URANUS_LENSES.controls.map((lens) => ({
-    id: lens.id,
-    label: lens.label,
-    thumbnailUrl: lens.thumbnailUrl,
-    description: lensDescriptions[lens.id],
-    title: lens.falseColor ? `${lens.label}: ${lens.qualification}` : lens.qualification,
-  })),
-};
 const resources = [
   { label: "Hubble OPAL", role: "imagery", description: "Texture & lenses", href: "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33" },
   { label: "NASA", role: "facts", description: "Facts & polar colour", href: "https://science.nasa.gov/uranus/facts/" },
@@ -60,14 +45,6 @@ const resources = [
   { label: "PSG", role: "spectra", description: "Spectrum & profile", href: "https://psg.gsfc.nasa.gov/" },
 ];
 
-const settings = {
-  title: PREPARED_SHELL_TITLES.settings,
-  controls: [
-    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
-    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
-    { kind: "toggle", name: "rings", label: "Features", checked: true },
-  ],
-};
 ---
 
 <PlanetShell

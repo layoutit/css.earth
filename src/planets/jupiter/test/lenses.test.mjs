@@ -110,16 +110,17 @@ test("switches prepared lenses without filters, canvas, or DOM growth", async ()
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
   assert.match(client, /selectLens/u);
-  assert.match(client, /lensDecodePromises\.get\(lens\.id\)/u);
-  assert.match(client, /lensDecodePromises\.set\(lens\.id, decoding\)/u);
+  assert.match(client, /lensDecodePromises\.get\(id\)/u);
+  assert.match(client, /lensDecodePromises\.set\(id, entry\)/u);
   assert.match(client,
-    /lens\.id !== PREPARED_JUPITER_LENSES\.defaultLens/u);
-  assert.match(client, /await decoding/u);
-  assert.match(client, /destroyed \|\| request !== lensRequest/u);
-  assert.match(client, /stage\.dataset\.lens = lens\.id/u);
-  assert.match(client, /lensControls\?\.publishLens\(activeLens\)/u);
-  assert.match(client, /publishLens\(state\.id\)/u);
-  assert.match(client, /ready: mounted !== null && !destroyed/u);
+    /id === PREPARED_JUPITER_LENSES\.defaultLens/u);
+  assert.match(client, /await entry\.promise/u);
+  assert.match(client, /await selection\.run\(/u);
+  assert.match(client, /stage\.dataset\.lens = id/u);
+  assert.match(client, /lensControls\?\.publishLens\(id\)/u);
+  assert.match(client, /createLatestSelection/u);
+  assert.doesNotMatch(client, /controlRequest|lensRequest/u);
+  assert.match(client, /ready: mounted !== null && !lifetime\.disposed/u);
   assert.doesNotMatch(client, /style\.filter|canvas|getContext\(/u);
   assert.match(css, /data-lens="ultraviolet"/u);
   assert.match(css, /data-lens="methane"/u);

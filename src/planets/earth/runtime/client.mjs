@@ -22,34 +22,52 @@ import { mountRetainedDirectionalSun } from
   "../../../platform/directional-sun-runtime.mjs";
 import { createPreparedPlanarRotationPublisher } from
   "../../../platform/prepared-planar-rotation.mjs";
+import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
+import { createPreparedImageStore } from "../../../platform/prepared-image-store.mjs";
+import { createLatestSelection } from "../../../platform/latest-selection.mjs";
+import { bindSpeedControl } from "../../../platform/planet-feature-controls.mjs";
+import {
+  createEarthSurfaceImageBanks,
+  publishEarthSurfacePages,
+  requireEarthSurfacePages,
+} from "./surface-image-banks.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
+const lensOwners = new WeakMap();
 
-
-export function mountEarthClient(stage) {
+export function mountEarthClient(stage, { onError } = {}) {
+  if (typeof onError !== "function") throw new TypeError("Earth requires onError.");
+  const lifetime = createSceneLifetime();
   const inputSurface = document.querySelector(".earth-input-surface");
   if (!(inputSurface instanceof HTMLElement)) {
     throw new Error("Earth input surface is missing.");
   }
-  const materialCaches = Object.freeze({
-    lighting: createEarthRowShardCache(
-      PREPARED_EARTH_SCENE.material.lighting,
-      { enabled: false },
-    ),
-    atmosphere: createEarthRowShardCache(
-      PREPARED_EARTH_SCENE.material.atmosphere,
-    ),
-  });
-  const retainedImages = new Map();
-  const pendingImages = new Map();
-  let destroyed = false;
-  let shouldPlay = true;
+  const lighting = createEarthRowShardCache(
+    PREPARED_EARTH_SCENE.material.lighting,
+    { enabled: false, onError },
+  );
+  lifetime.onDispose(lighting.destroy);
+  const atmosphere = createEarthRowShardCache(
+    PREPARED_EARTH_SCENE.material.atmosphere,
+    { onError },
+  );
+  lifetime.onDispose(atmosphere.destroy);
+  const materialCaches = Object.freeze({ lighting, atmosphere });
+  const imageStore = createPreparedImageStore();
+  lifetime.onDispose(imageStore.destroy);
+  let surfaceBanks = null;
+  lifetime.onDispose(() => surfaceBanks?.destroy());
+  let shouldPlay = false;
   let mounted = null;
   let camera = null;
   let features = null;
   let lenses = null;
   let animations = Object.freeze([]);
   let ready = null;
+  let diagnostics = null;
+  lifetime.onDispose(() => {
+    if (window.__earth === diagnostics) delete window.__earth;
+  });
   const controller = Object.freeze({
     get ready() { return ready; },
     destinations: Object.freeze({
@@ -69,9 +87,9 @@ export function mountEarthClient(stage) {
       },
       async select(place) {
         await ready;
-        if (destroyed) throw new Error("Earth was unmounted.");
+        if (lifetime.disposed) throw new Error("Earth was unmounted.");
         await lenses.select("normal");
-        if (destroyed) throw new Error("Earth was unmounted.");
+        if (lifetime.disposed) throw new Error("Earth was unmounted.");
         controller.pause();
         const frame = () => new DOMMatrix(getComputedStyle(mounted.system).transform)
           .multiply(new DOMMatrix(getComputedStyle(mounted.bodyCarriers.surface[0]).transform));
@@ -84,7 +102,7 @@ export function mountEarthClient(stage) {
           : "Earth overview. WorldCover detail is unavailable at this location.", arrival };
       },
       reset() {
-        if (!destroyed && camera) return camera.flyToState({
+        if (!lifetime.disposed && camera) return camera.flyToState({
           controlPitch: EARTH_CUBIC_CAMERA.defaultControlPitchDegrees,
           controlYaw: EARTH_CUBIC_CAMERA.defaultControlYawDegrees,
           zoom: camera.initialResponsiveZoom(),
@@ -92,56 +110,46 @@ export function mountEarthClient(stage) {
       },
     }),
     pause() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = false;
-      document.documentElement.dataset.playing = "false";
       features?.applyPlayback(false);
       mounted?.cityPages.setPlaying(false);
       mounted?.noisePages.setPlaying(false);
     },
     resume() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = true;
       if (!mounted) return;
-      document.documentElement.dataset.playing = "true";
       features?.applyPlayback(true);
       mounted?.cityPages.setPlaying(true);
       mounted?.noisePages.setPlaying(true);
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
       shouldPlay = false;
-      lenses?.destroy();
-      features?.destroy();
-      camera?.destroy();
-      mounted?.cityPages.destroy();
-      mounted?.noisePages.destroy();
-      mounted?.viewBank.destroy();
-      mounted?.skySun.destroy();
-      mounted?.cubicSky.destroy();
-      mounted?.camera.remove();
-      materialCaches.lighting.destroy();
-      materialCaches.atmosphere.destroy();
-      for (const image of retainedImages.values()) image.src = "";
-      retainedImages.clear();
-      pendingImages.clear();
-      stage.classList.remove("earth-hide-atmosphere");
-      delete stage.dataset.lens;
-      delete stage.dataset.view;
-      delete document.documentElement.dataset.playing;
-      if (DEVELOPMENT_DIAGNOSTICS && window.__earth) delete window.__earth;
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Earth cleanup failed.");
     },
   });
-  ready = start();
+  ready = lifetime.wait(start()).then((result) => result.value).catch((error) => {
+    const cleanupErrors = lifetime.destroy();
+    if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], error.message, { cause: error });
+    throw error;
+  });
   return controller;
 
   async function start() {
     try {
-      features = createEarthFeatureControls(stage);
+      surfaceBanks = createEarthSurfaceImageBanks({
+        imageStore,
+        banks: earthSurfaceBankInventory(),
+      });
+      features = createEarthFeatureControls(stage, lifetime, onError);
       lenses = createEarthLensControls({
         stage,
         decodePreparedImage,
+        surfaceBanks,
+        lifetime,
+        onError,
       });
       const initialFeatures = features.state();
       materialCaches.lighting.setEnabled(initialFeatures.shadows);
@@ -151,21 +159,27 @@ export function mountEarthClient(stage) {
         materialCaches.lighting.prepareInitial(),
         materialCaches.atmosphere.prepareInitial(),
       ]);
-      if (destroyed) return;
-      mounted = mountPreparedEarth(stage);
+      if (lifetime.disposed) return;
+      mounted = mountPreparedEarth(stage, lifetime);
       animations = Object.freeze(stage.getAnimations({ subtree: true }));
-      for (const animation of animations) animation.currentTime = 0;
+      for (const animation of animations) {
+        lifetime.onDispose(() => animation.cancel());
+        animation.pause();
+        animation.currentTime = 0;
+      }
       camera = createEarthVerticalOrbitControls({
         stage,
         inputSurface,
         mounted,
         materialCaches,
+        onError,
       });
+      lifetime.onDispose(camera.destroy);
       camera.refresh();
       await lenses.bindRuntime(mounted, {
         onLensChange: camera.setLens,
       });
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       features.bindRuntime({
         animations,
         onAtmosphereVisibilityChange: camera.setAtmosphereEnabled,
@@ -174,21 +188,23 @@ export function mountEarthClient(stage) {
       features.applyPlayback(shouldPlay);
       mounted.cityPages.setPlaying(shouldPlay);
       mounted.noisePages.setPlaying(shouldPlay);
-      document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
-      await waitForPreparedScenePaint();
-      if (destroyed) return;
+      await waitForScenePaint(lifetime);
+      if (lifetime.disposed) return;
       if (DEVELOPMENT_DIAGNOSTICS) publishDiagnostics();
     } catch (error) {
-      if (destroyed) return;
-      controller.destroy();
+      if (lifetime.disposed) return;
       throw error;
     }
   }
 
   async function decodeInitialPreparedImages() {
     const plan = PREPARED_EARTH_SCENE;
+    const initial = surfaceBanks.request(PREPARED_EARTH_LENSES.defaultLens);
+    const decoded = await initial.ready;
+    if (lifetime.disposed) return;
+    if (!decoded) throw new Error("Earth initial surface bank was retired.");
+    surfaceBanks.commit(initial);
     for (const pair of [
-      plan.body.assets.surface,
       plan.body.assets.poles,
       ...PREPARED_EARTH_STARFIELD.faces.flatMap(({
         url,
@@ -204,32 +220,19 @@ export function mountEarthClient(stage) {
         two: PREPARED_EARTH_SKY_SUN.asset.url2x,
       },
       plan.material.lighting.shadowlessAssets,
-    ]) await decodePreparedImage(pair);
+    ]) {
+      if (lifetime.disposed) return;
+      await decodePreparedImage(pair);
+    }
   }
 
   function decodePreparedImage(pair) {
-    const url = canonicalPreparedUrl(pair);
-    const retained = retainedImages.get(url);
-    if (retained) return Promise.resolve(retained);
-    let promise = pendingImages.get(url);
-    if (!promise) {
-      promise = decodeImage(url).then((image) => {
-        pendingImages.delete(url);
-        if (!destroyed) retainedImages.set(url, image);
-        return image;
-      }, (error) => {
-        pendingImages.delete(url);
-        throw error;
-      });
-      pendingImages.set(url, promise);
-    }
-    return promise;
+    return imageStore.load(canonicalPreparedUrl(pair));
   }
 
   function publishDiagnostics() {
-    window.__earth = Object.freeze({
+    diagnostics = Object.freeze({
       ready: true,
-      pause: controller.pause,
       camera: Object.freeze({
         state: camera.state,
         setState: camera.setState,
@@ -245,13 +248,14 @@ export function mountEarthClient(stage) {
         textureStats: Object.freeze({
           selectedPreparedDensity: CANONICAL_PREPARED_IMAGE_DENSITY,
           get retainedInteractiveImageCount() {
-            return retainedImages.size +
+            return imageStore.stats().retainedCount +
               materialCaches.lighting.stats().retainedImageCount +
               materialCaches.atmosphere.stats().retainedImageCount;
           },
           get pendingInteractiveImageCount() {
-            return pendingImages.size;
+            return imageStore.stats().pendingCount;
           },
+          surfaceBanks: surfaceBanks.stats,
           materialCaches: Object.freeze({
             lighting: materialCaches.lighting.stats,
             atmosphere: materialCaches.atmosphere.stats,
@@ -264,16 +268,25 @@ export function mountEarthClient(stage) {
       assertStableDomIdentity: mounted.assertStableDomIdentity,
       animation: Object.freeze({ stats: camera.stats }),
     });
+    window.__earth = diagnostics;
   }
 }
 
-function mountPreparedEarth(host) {
+function mountPreparedEarth(host, lifetime) {
   const plan = PREPARED_EARTH_SCENE;
   if (plan.schema !== "cssearth-prepared-retained-scene@6" ||
       plan.interior?.schema !== "cssearth-prepared-cutaway@2") {
     throw new TypeError("Earth retained scene plan is incompatible.");
   }
   const camera = document.createElement("div");
+  lifetime.onDispose(() => camera.remove());
+  lifetime.onDispose(() => {
+    if (camera.parentNode !== host) return;
+    delete host.dataset.lens;
+    delete host.dataset.view;
+    host.classList.remove("earth-hide-atmosphere");
+  });
+  delete host.dataset.view;
   camera.className = "polycss-camera planet-render-root";
   camera.style.cssText = plan.camera.style;
   const scene = document.createElement("div");
@@ -290,19 +303,22 @@ function mountPreparedEarth(host) {
     className: "earth-body",
     polarClassName: "earth-body-polar",
     textureUrls: Object.freeze({
-      surface: canonicalPreparedUrl(plan.body.assets.surface),
+      surface: requireEarthSurfacePages(plan.body.assets.surface.urls),
       poles: canonicalPreparedUrl(plan.body.assets.poles),
     }),
+    surfacePageCount: plan.body.assets.surface.urls.length,
   });
   const cityPages = mountEarthCityPages({
     plan: PREPARED_EARTH_CITY_PAGES, carrier: bodyCarriers.surface[0],
     system, scene, camera, stage: host,
   });
+  lifetime.onDispose(cityPages.destroy);
 
   const noisePages = mountEarthCityPages({
     plan: PREPARED_EARTH_NOISE, carrier: bodyCarriers.surface[0],
     system, scene, camera, stage: host,
   });
+  lifetime.onDispose(noisePages.destroy);
   noisePages.setLens({id:"normal"});
 
   const presentation = plan.interior.presentationLock;
@@ -311,7 +327,8 @@ function mountPreparedEarth(host) {
       typeof presentation.transform !== "string") {
     throw new Error("Earth prepared interior presentation is incompatible.");
   }
-  const cutaway = createPreparedInterior(plan);
+  const interiorMount = createPreparedInterior(plan);
+  const cutaway = interiorMount.root;
   let cutawayCounter = createMesh("earth-cutaway-counter", "");
   const presentationRoot = createMesh(
     "earth-cutaway-presentation",
@@ -334,6 +351,15 @@ function mountPreparedEarth(host) {
       }
       return false;
     },
+    publishSurfacePages(urls) {
+      if (destroyedViewBank) throw new Error("Earth prepared view bank is destroyed.");
+      publishEarthSurfacePages(interiorMount.carriers.surface, urls,
+        plan.interior.outerAssets.surface.twoUrls.length);
+    },
+    clearSurfacePages() {
+      publishEarthSurfacePages(interiorMount.carriers.surface, [],
+        plan.interior.outerAssets.surface.twoUrls.length);
+    },
     syncCounterRotation(counterRotation) {
       if (cutawayCounter) cutawayCounter.style.transform = counterRotation;
     },
@@ -351,6 +377,7 @@ function mountPreparedEarth(host) {
       cutawayCounter = null;
     },
   });
+  lifetime.onDispose(viewBank.destroy);
 
   const materialSystem = createMesh("earth-system", plan.earth.systemTransform);
   const materialMesh = createMesh("earth-material", plan.material.transform);
@@ -372,6 +399,7 @@ function mountPreparedEarth(host) {
     objectId: "earth",
     requireSun: false,
   });
+  lifetime.onDispose(cubicSky.destroy);
   const skySun = mountRetainedDirectionalSun({
     host,
     plan: PREPARED_EARTH_SKY_SUN,
@@ -379,6 +407,7 @@ function mountPreparedEarth(host) {
     objectId: "earth",
     before: camera,
   });
+  lifetime.onDispose(skySun.destroy);
   const layerRegistration = registerBodyDependentLayers({
     objectId: "earth",
     sceneElement: scene,
@@ -436,7 +465,7 @@ function mountPreparedEarth(host) {
 
 function createPreparedInterior(plan) {
   const cutaway = createMesh("earth-cutaway", "");
-  mountPreparedSphereBands({
+  const carriers = mountPreparedSphereBands({
     system: cutaway,
     bands: plan.interior.outerBodyBands,
     meshTransform: plan.earth.meshTransform,
@@ -444,9 +473,11 @@ function createPreparedInterior(plan) {
     polarClassName: "earth-cutaway-body-polar",
     polarLeafClassMarker: "earth-interior-outer-polar",
     textureUrls: Object.freeze({
-      surface: canonicalPreparedUrl(plan.interior.outerAssets.surface),
+      // Retain the cutaway nodes without referencing its large hidden atlas.
+      surface: [],
       poles: canonicalPreparedUrl(plan.interior.outerAssets.poles),
     }),
+    surfacePageCount: plan.interior.outerAssets.surface.twoUrls.length,
   });
   for (const shell of plan.interior.shells) {
     const shellMesh = createMesh(
@@ -477,7 +508,7 @@ function createPreparedInterior(plan) {
   }
   sections.appendChild(sectionFragment);
   cutaway.appendChild(sections);
-  return cutaway;
+  return Object.freeze({ root: cutaway, carriers });
 }
 
 function mountPreparedSphereBands({
@@ -488,6 +519,7 @@ function mountPreparedSphereBands({
   polarClassName,
   polarLeafClassMarker = "earth-polar",
   textureUrls,
+  surfacePageCount,
 }) {
   const carriers = new Map();
   const surface = [];
@@ -507,11 +539,12 @@ function mountPreparedSphereBands({
       if (polar) polarCarriers.push(carrier);
       else surface.push(carrier);
       system.appendChild(carrier);
+      if (polar) {
+        carrier.style.setProperty("--earth-poles-texture", `url("${textureUrls.poles}")`);
+      } else {
+        publishEarthSurfacePages([carrier], textureUrls.surface, surfacePageCount);
+      }
     }
-    carrier.style.setProperty(
-      polar ? "--earth-poles-texture" : "--earth-surface-texture",
-      `url("${textureUrls[polar ? "poles" : "surface"]}")`,
-    );
     const fragment = document.createDocumentFragment();
     for (const leaf of band.leaves) fragment.appendChild(createTextureLeaf(leaf));
     carrier.appendChild(fragment);
@@ -532,6 +565,7 @@ function createEarthVerticalOrbitControls({
   inputSurface,
   mounted,
   materialCaches,
+  onError,
 }) {
   let orbit = null;
   let lensMaximumZoom = PREPARED_EARTH_SCENE.camera.maximumZoom;
@@ -615,6 +649,7 @@ function createEarthVerticalOrbitControls({
       mounted.cityPages.publish(presentation);
       mounted.noisePages.publish(presentation);
     },
+    onError,
   });
   return Object.freeze({
     mobilePageFlow: orbit.mobilePageFlow,
@@ -736,9 +771,12 @@ function setStyle(element, property, value) {
   return 1;
 }
 
-function createEarthLensControls({
+export function createEarthLensControls({
   stage,
   decodePreparedImage,
+  surfaceBanks,
+  lifetime,
+  onError,
 }) {
   const root = document.querySelector(".planet-lenses");
   if (!(root instanceof HTMLElement)) {
@@ -746,18 +784,42 @@ function createEarthLensControls({
   }
   const controls = new Map(PREPARED_EARTH_LENSES.controls.map((lens) =>
     [lens.id, lens]));
-  const buttons = new Map([...root.querySelectorAll('button[name="lens"]')]
+  const buttonList = [...root.querySelectorAll('button[name="lens"]')];
+  const buttons = new Map(buttonList
     .map((button) => [button.value, button]));
-  if (buttons.size !== controls.size) {
+  if (buttons.size !== controls.size || buttonList.length !== buttons.size ||
+      controls.size !== PREPARED_EARTH_LENSES.controls.length ||
+      [...controls.keys()].some((id) => !buttons.has(id))) {
     throw new Error("Earth lens selector does not match prepared lenses.");
   }
   const events = new AbortController();
+  const owner = {};
+  lensOwners.set(root, owner);
   let active = PREPARED_EARTH_LENSES.defaultLens;
-  let request = 0;
   let bound = false;
-  let destroyed = false;
+  let busy = false;
   let mounted = null;
   let onLensChange = null;
+  const selection = createLatestSelection({
+    lifetime,
+    onFatalError: onError,
+    onBusyChange(value) {
+      busy = value;
+      root.classList.toggle("is-loading", value);
+      root.setAttribute("aria-busy", String(value));
+    },
+  });
+  lifetime.onDispose(() => {
+    bound = false;
+    events.abort();
+    mounted = null;
+    onLensChange = null;
+    if (lensOwners.get(root) !== owner) return;
+    lensOwners.delete(root);
+    root.classList.remove("is-loading");
+    root.setAttribute("aria-busy", "false");
+    for (const button of buttons.values()) button.disabled = true;
+  });
   root.classList.add("is-loading");
   for (const button of buttons.values()) button.disabled = true;
   for (const [id, button] of buttons) {
@@ -767,10 +829,10 @@ function createEarthLensControls({
   }
   publish();
   return Object.freeze({
-    state: () => Object.freeze({ id: active, ready: bound && !destroyed }),
+    state: () => Object.freeze({ id: active, ready: bound && !busy && !lifetime.disposed }),
     select,
     async bindRuntime(nextMounted, runtime = {}) {
-      if (destroyed) return false;
+      if (lifetime.disposed) return false;
       mounted = nextMounted;
       onLensChange = runtime.onLensChange ?? null;
       bound = true;
@@ -779,47 +841,52 @@ function createEarthLensControls({
       onLensChange?.(controls.get(active));
       return true;
     },
-    destroy() {
-      if (destroyed) return;
-      destroyed = true;
-      bound = false;
-      request += 1;
-      events.abort();
-      root.classList.remove("is-loading");
-      for (const button of buttons.values()) button.disabled = true;
-      mounted = null;
-      onLensChange = null;
-    },
   });
 
   async function select(id) {
     const lens = controls.get(id);
     if (!lens) throw new RangeError(`Unknown Earth lens: ${id}.`);
-    if (!bound || destroyed) return false;
-    const selection = ++request;
-    if (lens.view === "interior") {
-      await warmInterior();
-    } else {
-      await decodePreparedImage(lens.surfaceUrl);
-      await decodePreparedImage(lens.polesUrl);
-    }
-    if (destroyed || selection !== request) return false;
-    if (lens.view === "interior") {
-      mounted.viewBank.mountInterior();
-      stage.dataset.view = "interior";
-      delete stage.dataset.lens;
-    } else {
-      publishBodyTexture(lens);
-      delete stage.dataset.view;
-      stage.dataset.lens = lens.id;
-    }
-    active = lens.id;
-    publish();
-    onLensChange?.(lens);
-    return true;
+    if (!bound || lifetime.disposed) return false;
+    let ticket;
+    return selection.run({
+      prepare: async ({ isCurrent }) => {
+        ticket = surfaceBanks.request(id);
+        const decoded = await ticket.ready;
+        if (!isCurrent()) return ticket;
+        if (!decoded) throw new Error("Earth requested surface bank was retired.");
+        if (lens.view === "interior") await warmInterior(isCurrent);
+        else await decodePreparedImage(lens.polesUrl);
+        return ticket;
+      },
+      commit(prepared) {
+        if (!mounted) throw new Error("Earth presentation is unavailable.");
+        if (lens.view === "interior") {
+          mounted.viewBank.mountInterior();
+          mounted.viewBank.publishSurfacePages(prepared.urls);
+          stage.dataset.view = "interior";
+          delete stage.dataset.lens;
+          publishEarthSurfacePages(mounted.bodyCarriers.surface, [],
+            PREPARED_EARTH_SCENE.body.assets.surface.urls.length);
+        } else {
+          publishBodyTexture(lens);
+          delete stage.dataset.view;
+          stage.dataset.lens = lens.id;
+          mounted.viewBank.clearSurfacePages();
+        }
+        onLensChange?.(lens);
+        active = lens.id;
+        publish();
+        surfaceBanks.commit(prepared);
+      },
+      discard: (prepared) => surfaceBanks.discard(prepared),
+      onCurrentFailure() {
+        surfaceBanks.discard(ticket);
+        publish();
+      },
+    });
   }
 
-  async function warmInterior() {
+  async function warmInterior(isCurrent) {
     const pairs = [];
     const seen = new Set();
     const add = (pair) => {
@@ -829,7 +896,6 @@ function createEarthLensControls({
         pairs.push(pair);
       }
     };
-    add(PREPARED_EARTH_SCENE.interior.outerAssets.surface);
     add(PREPARED_EARTH_SCENE.interior.outerAssets.poles);
     for (const shell of PREPARED_EARTH_SCENE.interior.shells) {
       for (const leaf of shell.leaves) add(leaf.asset);
@@ -837,15 +903,16 @@ function createEarthLensControls({
     for (const leaf of PREPARED_EARTH_SCENE.interior.sectionLeaves) {
       add(leaf.asset);
     }
-    for (const pair of pairs) await decodePreparedImage(pair);
+    for (const pair of pairs) {
+      if (!isCurrent()) return;
+      await decodePreparedImage(pair);
+    }
   }
 
   function publishBodyTexture(lens) {
-    const surfaceUrl = lens.surfaceUrl;
     const polesUrl = lens.polesUrl;
-    for (const carrier of mounted.bodyCarriers.surface) {
-      carrier.style.setProperty("--earth-surface-texture", `url("${surfaceUrl}")`);
-    }
+    publishEarthSurfacePages(mounted.bodyCarriers.surface, lens.surfaceUrls,
+      PREPARED_EARTH_SCENE.body.assets.surface.urls.length);
     for (const carrier of mounted.bodyCarriers.polar) {
       carrier.style.setProperty("--earth-poles-texture", `url("${polesUrl}")`);
     }
@@ -860,59 +927,81 @@ function createEarthLensControls({
   }
 }
 
+function earthSurfaceBankInventory() {
+  const body = PREPARED_EARTH_SCENE.body.assets.surface;
+  const bodyPages = requireEarthSurfacePages(body.urls, "Earth default surface");
+  const outer = PREPARED_EARTH_SCENE.interior.outerAssets.surface;
+  const outerOne = requireEarthSurfacePages(outer.oneUrls, "Earth interior source surface");
+  const outerTwo = requireEarthSurfacePages(outer.twoUrls, "Earth canonical interior surface");
+  if (outer.one !== outerOne[0] || outer.two !== outerTwo[0] ||
+      outerOne.length !== bodyPages.length || outerTwo.length !== bodyPages.length ||
+      body.url !== bodyPages[0]) {
+    throw new TypeError("Earth prepared surface page metadata is inconsistent.");
+  }
+  const banks = PREPARED_EARTH_LENSES.controls.map((lens) => {
+    const urls = lens.view === "interior" ? outerTwo
+      : requireEarthSurfacePages(lens.surfaceUrls, `Earth ${lens.id} surface`);
+    if (urls.length !== bodyPages.length || lens.view !== "interior" && lens.surfaceUrl !== urls[0]) {
+      throw new TypeError("Earth lens surface page metadata is inconsistent.");
+    }
+    if (lens.id === PREPARED_EARTH_LENSES.defaultLens &&
+        JSON.stringify(urls) !== JSON.stringify(bodyPages)) {
+      throw new TypeError("Earth default lens does not match its prepared surface pages.");
+    }
+    return Object.freeze({ id: lens.id, urls });
+  });
+  return Object.freeze(banks);
+}
+
 function canonicalPreparedUrl(asset) {
   if (typeof asset === "string") return asset;
   return asset.url || asset.two || asset.one;
 }
 
-function createEarthFeatureControls(stage) {
+function createEarthFeatureControls(stage, lifetime, onError) {
   const root = document.querySelector(".planet-settings");
   if (!(root instanceof HTMLElement)) {
     throw new Error("Earth options block is missing.");
   }
-  const speed = root.querySelector('button[name="speed"]');
+  const speed = root.querySelector('input[name="speed"][type="range"]');
   const toggles = new Map(["atmosphere", "shadows"].map((name) =>
     [name, root.querySelector(`input[name="${name}"][type="checkbox"]`)]));
-  if (!(speed instanceof HTMLButtonElement) ||
+  if (!(speed instanceof HTMLInputElement) ||
       [...toggles.values()].some((input) =>
         !(input instanceof HTMLInputElement))) {
     throw new Error("Earth feature controls are incomplete.");
   }
   const events = new AbortController();
-  const rates = Object.freeze([
-    Object.freeze({ label: "off", value: 0 }),
-    Object.freeze({ label: "normal", value: 1 }),
-    Object.freeze({ label: "fast", value: 2 }),
-    Object.freeze({ label: "fastest", value: 3 }),
-    Object.freeze({ label: "superfast", value: 4 }),
-  ]);
   const classes = Object.freeze({
     atmosphere: "earth-hide-atmosphere",
   });
-  let rateIndex = 1;
   let animations = Object.freeze([]);
-  let shouldPlay = true;
+  let shouldPlay = false;
+  let rate = 1;
   let onAtmosphereVisibilityChange = null;
   let onShadowsVisibilityChange = null;
-  speed.addEventListener("click", () => {
-    rateIndex = (rateIndex + 1) % rates.length;
-    publishSpeed();
-    applyPlayback(shouldPlay);
-  }, { signal: events.signal });
+  const speedControl = bindSpeedControl({
+    input: speed, lifetime, onError,
+    onChange(nextRate) { rate = nextRate; applyPlayback(shouldPlay); },
+  });
+  lifetime.onDispose(() => {
+    events.abort();
+    animations = Object.freeze([]);
+    onAtmosphereVisibilityChange = null;
+    onShadowsVisibilityChange = null;
+  });
   for (const [name, input] of toggles) {
     const className = classes[name];
     if (className) stage.classList.toggle(className, !input.checked);
     input.addEventListener("change", () => {
-      if (className) stage.classList.toggle(className, !input.checked);
-      if (name === "atmosphere") {
-        onAtmosphereVisibilityChange?.(input.checked);
-      }
-      if (name === "shadows") {
-        onShadowsVisibilityChange?.(input.checked);
-      }
+      if (lifetime.disposed) return;
+      try {
+        if (className) stage.classList.toggle(className, !input.checked);
+        if (name === "atmosphere") onAtmosphereVisibilityChange?.(input.checked);
+        if (name === "shadows") onShadowsVisibilityChange?.(input.checked);
+      } catch (error) { onError(error); }
     }, { signal: events.signal });
   }
-  publishSpeed();
   return Object.freeze({
     bindRuntime(runtime) {
       animations = Object.freeze(runtime.animations);
@@ -922,34 +1011,19 @@ function createEarthFeatureControls(stage) {
         runtime.onShadowsVisibilityChange ?? null;
       onAtmosphereVisibilityChange?.(toggles.get("atmosphere").checked);
       onShadowsVisibilityChange?.(toggles.get("shadows").checked);
+      applyPlayback(shouldPlay);
+      speedControl.setEnabled(true);
     },
     applyPlayback,
     state: () => Object.freeze({
       atmosphere: toggles.get("atmosphere").checked,
       shadows: toggles.get("shadows").checked,
     }),
-    optionsState: () => Object.freeze({ speed: rates[rateIndex].value }),
-    destroy() {
-      for (const className of Object.values(classes)) {
-        stage.classList.remove(className);
-      }
-      for (const animation of animations) animation.playbackRate = 1;
-      events.abort();
-      animations = Object.freeze([]);
-      onAtmosphereVisibilityChange = null;
-      onShadowsVisibilityChange = null;
-    },
+    optionsState: () => Object.freeze({ speed: speedControl.state().speed }),
   });
-
-  function publishSpeed() {
-    const rate = rates[rateIndex];
-    speed.dataset.state = rate.label;
-    speed.setAttribute("aria-label", `Speed: ${rate.label}`);
-  }
 
   function applyPlayback(nextShouldPlay) {
     shouldPlay = nextShouldPlay;
-    const rate = rates[rateIndex].value;
     for (const animation of animations) {
       animation.playbackRate = rate || 1;
       if (shouldPlay && rate > 0) animation.play();
@@ -965,18 +1039,6 @@ function createMesh(className, style) {
     : `polycss-mesh ${className}`;
   if (style) element.style.cssText = style;
   return element;
-}
-
-function decodeImage(url) {
-  const image = new Image();
-  image.decoding = "async";
-  image.src = url;
-  return image.decode().then(() => image);
-}
-
-function waitForPreparedScenePaint() {
-  return new Promise((resolve) =>
-    requestAnimationFrame(() => requestAnimationFrame(resolve)));
 }
 
 function clamp(value, minimum, maximum) {

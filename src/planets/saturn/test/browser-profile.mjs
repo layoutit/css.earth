@@ -41,7 +41,7 @@ export const browserProfile = Object.freeze({
     await page.waitForFunction(() => window.__saturn?.ready === true);
   },
   pause(page) {
-    return page.evaluate(() => window.__saturn.pause());
+    return page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   },
   camera(page) {
     return page.evaluate(() => {

@@ -193,7 +193,7 @@ test("selects only prepared image sources at startup", async () => {
   assert.match(client, /stage\.dataset\.lens = activeLens/);
   assert.match(
     client,
-    /decodeImage\(\s*lens\.surfaceUrl,\s*lens\.surface2xUrl,/u,
+    /lens\.surface2xUrl \|\| lens\.surfaceUrl/u,
   );
   assert.match(client, /selectedPreparedDensity:\s*CANONICAL_PREPARED_IMAGE_DENSITY/u);
   assert.doesNotMatch(client, /const imageDensity\s*=/u);
@@ -202,14 +202,14 @@ test("selects only prepared image sources at startup", async () => {
     /matchMedia\([^)]*(?:resolution|device-pixel-ratio)|devicePixelRatio.*addEventListener/u);
   assert.match(client, /await lensControls\.bindRuntime/u);
   assert.match(client, /for \(const button of buttons\.values\(\)\) button\.disabled = true/u);
-  assert.match(client,
-    /await onLensChange\([\s\S]*?\{ interior: nextInterior \},[\s\S]*?\)/u);
-  assert.match(client, /destroyed \|\| request !== selectionRequest/u);
+  assert.match(client, /createLatestSelection/u);
+  assert.match(client, /camera\.preparePresentation/u);
+  assert.match(client, /camera\.commitPresentation/u);
   assert.match(client, /decoded\.delete\(lens\.id\)/u);
-  assert.match(client, /entry\.wanted = true/u);
+  assert.match(client, /createPreparedImageStore/u);
   assert.match(client, /return entry\.promise/u);
-  assert.match(client, /releaseLensDecode\(id, entry\)/u);
-  assert.match(client, /ready: bound && !destroyed/u);
+  assert.match(client, /entry\.store\.destroy\(\)/u);
+  assert.match(client, /ready: bound && !lifetime\.disposed/u);
   assert.match(client, /viewBank\.mountInterior\(\)/u);
   assert.match(client, /stage\.dataset\.view = "interior"/u);
   assert.doesNotMatch(client, /decodeImage\(lens\.interiorMaterialUrl\)/u);

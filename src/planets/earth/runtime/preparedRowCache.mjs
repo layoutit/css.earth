@@ -1,10 +1,11 @@
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from
   "../../../../site/runtime-policy.mjs";
+import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
 
 const ROW_SHARD_CACHE_MODEL = "row-shard-cache";
 const ROW_SHARD_REQUEST_STABILITY_MILLISECONDS = 120;
 
-export function createEarthRowShardCache(plan, { enabled = true } = {}) {
+export function createEarthRowShardCache(plan, { enabled = true, onError = console.error } = {}) {
   const transport = plan?.transport;
   if (transport?.model !== ROW_SHARD_CACHE_MODEL ||
       !Array.isArray(plan.preparedRows) || plan.preparedRows.length === 0 ||
@@ -14,7 +15,7 @@ export function createEarthRowShardCache(plan, { enabled = true } = {}) {
       transport.maximumRetainedRowCount < 1 ||
       transport.maximumRetainedRowCount > 3 ||
       !Array.isArray(transport.initialWarmRows) ||
-      typeof enabled !== "boolean") {
+      typeof enabled !== "boolean" || typeof onError !== "function") {
     throw new TypeError("Invalid prepared Earth material row-shard plan.");
   }
 
@@ -39,6 +40,7 @@ export function createEarthRowShardCache(plan, { enabled = true } = {}) {
   let targetReadyNotifications = 0;
   let staleWarmPasses = 0;
   let suppressedPresentationCount = 0;
+  let failedRevision = null;
 
   return Object.freeze({
     async prepareInitial() {
@@ -48,6 +50,7 @@ export function createEarthRowShardCache(plan, { enabled = true } = {}) {
         await Promise.all([...desiredRows].map(async (rowIndex) => {
           if (await warmRow(rowIndex, rowIndex === desiredRow)) noteDecode();
         }));
+        if (destroyed) return false;
         appliedRow = desiredRow;
         return true;
       } finally {
@@ -55,6 +58,10 @@ export function createEarthRowShardCache(plan, { enabled = true } = {}) {
       }
     },
     presentation(frameIndex) {
+      if (destroyed) return null;
+      // A new camera publication is an explicit retry; the warm pump itself
+      // must not retry a failed URL indefinitely.
+      failedRevision = null;
       const prepared = plan.frames[frameIndex];
       if (!prepared) {
         throw new RangeError(`Unprepared Earth material frame: ${frameIndex}.`);
@@ -139,6 +146,7 @@ export function createEarthRowShardCache(plan, { enabled = true } = {}) {
     if (destroyed || !transportEnabled || desiredRow === null || warmTask) {
       return;
     }
+    if (failedRevision === desiredRevision) return;
     if (nextWarmRow() === null) {
       if (warmTimer !== null) clearTimeout(warmTimer);
       warmTimer = null;
@@ -158,9 +166,13 @@ export function createEarthRowShardCache(plan, { enabled = true } = {}) {
   }
 
   function startWarmPass() {
+    const revision = desiredRevision;
     let task;
     task = runWarmPass()
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        failedRevision = revision;
+        if (!destroyed) console.error(error);
+      })
       .finally(() => {
         if (warmTask !== task) return;
         warmTask = null;
@@ -186,7 +198,8 @@ export function createEarthRowShardCache(plan, { enabled = true } = {}) {
     }
     if (target) {
       targetReadyNotifications += 1;
-      readyCallback?.();
+      // Decoding is recoverable; failure while publishing decoded state is not.
+      try { readyCallback?.(); } catch (error) { onError(error); }
     }
   }
 
@@ -269,14 +282,13 @@ function createPreparedImagePool(capacity) {
       if (slot.key !== null) {
         byKey.delete(slot.key);
         releaseCount += 1;
-        slot.image.removeAttribute("src");
+        releasePreparedImage(slot.image);
         slot.image = createPreparedImage();
       }
       const ticket = ++slot.ticket;
       slot.key = key;
       slot.ready = false;
-      slot.image.src = url;
-      const pending = slot.image.decode().then(() => {
+      const pending = decodePreparedImage(slot.image, url).then(() => {
         if (destroyed || slot.ticket !== ticket) return false;
         slot.pending = null;
         slot.ready = true;
@@ -287,7 +299,7 @@ function createPreparedImagePool(capacity) {
         slot.pending = null;
         slot.ready = false;
         slot.key = null;
-        slot.image.removeAttribute("src");
+        releasePreparedImage(slot.image);
         throw new Error(`Prepared Earth material image decode failed: ${url}`, {
           cause: error,
         });
@@ -309,13 +321,17 @@ function createPreparedImagePool(capacity) {
       if (destroyed) return;
       destroyed = true;
       byKey.clear();
+      const errors = [];
       for (const slot of slots) {
         slot.ticket += 1;
-        slot.image.removeAttribute("src");
         slot.key = null;
         slot.pending = null;
         slot.ready = false;
+        try { releasePreparedImage(slot.image); } catch (error) { errors.push(error); }
+        slot.image = null;
       }
+      slots.length = 0;
+      if (errors.length) throw new AggregateError(errors, "Earth row cleanup failed.");
     },
   });
   return pool;

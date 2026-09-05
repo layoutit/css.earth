@@ -24,6 +24,8 @@ import {
   readEarthAtmosphereModel,
 } from "./atmosphere-model.mjs";
 import { validateEarthSourceGroup } from "./source-manifest.mjs";
+import { createEarthSurfaceRasterPlan, EARTH_SURFACE_ATLAS, earthSurfacePageUrls } from "./surface-raster.mjs";
+import { ensureEarthPreparationDirectories, EARTH_STAGING_ROOT } from "./preparation-paths.mjs";
 
 const [EARTH_ATMOSPHERE_MODEL] = await Promise.all([
   readEarthAtmosphereModel(),
@@ -48,9 +50,6 @@ const POLAR_RADIUS = EQUATORIAL_RADIUS * 6356.752 / 6378.137;
 const TILE_SIZE = 50;
 const SEAM_BLEED = 0.15;
 const PLANET_SEAM_BLEED = 0;
-// Asset resolution must not enlarge CSS raster boxes. Large inverse-scaled
-// boxes lose surface tiles in Chrome even with identical projected geometry.
-const PROJECTIVE_TEXTURE_RASTER_SCALE = 4;
 const INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE = 4;
 const SURFACE_OVERLAP = 0.008;
 const POLAR_CAP_BAND_SPAN = 1;
@@ -132,6 +131,7 @@ const systemTransform = `transform:${buildPolyMeshTransform({
 })} ${buildPolyMeshTransform({
   rotation: [EARTH_OBLIQUITY_DEGREES, 0, 0],
 })}`;
+const surfaceRasterPlan = createEarthSurfaceRasterPlan();
 const bodyBands = prepareSphereBands(bodyConfig, 72);
 const lightingMaterial = prepareMaterialBank({
   id: "lighting",
@@ -211,7 +211,9 @@ const scene = Object.freeze({
     longitudeSegments: BODY_LONGITUDE_SEGMENTS,
     polarCapBandSpan: POLAR_CAP_BAND_SPAN,
     assets: Object.freeze({
-      surface: bodyConfig.texture,
+      surface: { ...bodyConfig.texture, atlas: EARTH_SURFACE_ATLAS,
+        urls: earthSurfacePageUrls("earth-surface", surfaceRasterPlan.pages.length),
+        pages: surfaceRasterPlan.pages },
       poles: bodyConfig.poles,
     }),
     seamRepair: Object.freeze({
@@ -253,6 +255,11 @@ await writeFile(
   "// Generated from checked Earth sources. Do not edit by hand.\n" +
     `export const PREPARED_EARTH_SCENE = ${JSON.stringify(scene)};\n`,
 );
+await ensureEarthPreparationDirectories();
+if (surfaceRasterPlan.cells.length !== 448) throw new Error("Earth surface raster coverage is incomplete.");
+await writeFile(resolve(EARTH_STAGING_ROOT, "surface-raster-plan.json"),
+  JSON.stringify({ atlas: EARTH_SURFACE_ATLAS, cells: surfaceRasterPlan.cells,
+    pages: surfaceRasterPlan.pages }));
 
 function prepareSphereBands(config, visualRotationSeconds) {
   const leaves = [
@@ -572,6 +579,8 @@ function prepareInteriorPlan() {
       surface: Object.freeze({
         one: "/scenes/earth/earth-interior-outer.webp",
         two: "/scenes/earth/earth-interior-outer@2x.webp",
+        oneUrls: earthSurfacePageUrls("earth-interior-outer", surfaceRasterPlan.pages.length),
+        twoUrls: earthSurfacePageUrls("earth-interior-outer", surfaceRasterPlan.pages.length, "@2x"),
       }),
       poles: Object.freeze({
         one: "/scenes/earth/earth-interior-outer-poles.webp",
@@ -700,6 +709,27 @@ function textureStyle(polygon, index, seamEdges, seamBleed) {
       overscan: polygon.surfaceRaster.overscan,
     })
     : fitted;
+  if (polygon.surfaceRaster) {
+    const cell = surfaceRasterPlan.prepare(fitted, rasterPresentation,
+      (polygon.latitudeIndex - 1) * BODY_LONGITUDE_SEGMENTS + polygon.longitudeIndex);
+    const density = EARTH_SURFACE_ATLAS.density;
+    const size = cell.size / density;
+    return {
+      style: `transform:matrix3d(${cell.layer.frameMatrix})` +
+        preparedAtlasDimensions(size, size) +
+        `;background-position:${-cell.x / density}px ${-cell.y / density}px` +
+        `;background-size:${EARTH_SURFACE_ATLAS.pageSize / density}px auto` +
+        `;background-image:var(--earth-surface-page-${cell.page})`,
+      projectiveTextureLayer: cell.layer,
+      geographicFrameMatrix: fitted.matrix,
+      sourceRect: fitted.sourceRect,
+      leafWidth: size,
+      leafHeight: size,
+      projection: fitted.projection,
+      lighting: "source",
+      lightingOverlay: false,
+    };
+  }
   const backgroundPosition = rasterPresentation.backgroundPosition
     .map((value) => value === 0 ? "0px" : formatCssLength(value)).join(" ");
   const backgroundSize = rasterPresentation.backgroundSize
@@ -711,9 +741,7 @@ function textureStyle(polygon, index, seamEdges, seamBleed) {
       `;background-size:${backgroundSize}`,
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fitted.matrix,
-      polygon.surfaceRaster
-        ? PROJECTIVE_TEXTURE_RASTER_SCALE
-        : INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE,
+      INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE,
     ),
     sourceRect: fitted.sourceRect,
     leafWidth: fitted.leafWidth,

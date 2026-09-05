@@ -214,9 +214,7 @@ test("keeps unattended playback on compositor animations", async () => {
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
-  assert.match(client, /createPolyOrbitControls/);
-  assert.match(client, /createCubicSkyCameraOrientation/);
-  assert.match(client, /createUnboundedMatrixDragControls/);
+  assert.match(client, /createRetainedCubicSkyOrbit/);
   assert.match(client, /createRowShardCache/);
   assert.match(client, /materialCache\.presentation\(frame\)/);
   assert.match(client, /mounted\.materialLeaf\.style\.backgroundPosition/);
@@ -224,5 +222,6 @@ test("keeps unattended playback on compositor animations", async () => {
   assert.doesNotMatch(client, /setInterval|setTimeout|DOMMatrix|canvas|getContext/);
   assert.doesNotMatch(css,
     /clip-path|mask:|filter:|linear-gradient|radial-gradient|mix-blend-mode/);
-  assert.match(css, /html\[data-playing="true"\] \.mars-body/);
+  assert.doesNotMatch(css, /data-playing|prefers-reduced-motion/);
+  assert.match(css, /animation: mars-body-spin[^;]*paused/);
 });

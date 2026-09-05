@@ -1,40 +1,3 @@
-const STANDARD_DISC_OPERATIONS = Object.freeze([
-  Object.freeze({ type: "rotate" }),
-  Object.freeze({ type: "trim", threshold: 10 }),
-  Object.freeze({
-    type: "resize",
-    width: "tile",
-    height: "tile",
-    fit: "cover",
-    position: "centre",
-    kernel: "lanczos3",
-  }),
-  Object.freeze({ type: "png" }),
-]);
-
-export const PLANNED_MARKER_DESCRIPTORS = Object.freeze([
-  marker("mercury", "mercury.jpg", 876817,
-    "5ea3d3b713fce74f6b45faa182023210ada11ae62b8b51183a5fc134e7ce1304",
-    "https://science.nasa.gov/wp-content/uploads/2023/11/mercury-messenger-globe-pia15162.jpg",
-    "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington"),
-  marker("venus", "venus.webp", 210095,
-    "59ff56b81de18402302f1e397384bd1d7fecff906d04ef229a64462fe516f42a",
-    "https://science.nasa.gov/wp-content/uploads/2023/05/688-venus-1200-jpg.webp",
-    "NASA/JPL-Caltech"),
-  marker("earth", "earth.jpg", 183367,
-    "48ccd32ef57d182662999905841109095d66d68d69e27dba7decc6e134a811a0",
-    "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001016/GSFC_20171208_Archive_e001016~large.jpg",
-    "NASA"),
-  marker("uranus", "uranus.jpg", 83489,
-    "3dcc83114f1a25caa1ae1a1436830fffaa15a3e429666dbf4c68bcf035e8932b",
-    "https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg",
-    "NASA/JPL-Caltech"),
-  marker("neptune", "neptune.jpg", 179592,
-    "3cf960937217cb53d52f67d0c30d53c694cfbafc2ac8ca137c6539eb12a2a312",
-    "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/0/PIA01492-1.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
-    "NASA/JPL"),
-]);
-
 export const NAVIGATION_SUN_SOURCE = Object.freeze({
   path: "sun-hmi.jpg",
   expectedBytes: 39336,
@@ -97,20 +60,3 @@ export const NAVIGATION_SHARE_SOURCE = Object.freeze({
   credit: "cssEarth",
   license: "MIT",
 });
-
-function marker(planetId, path, expectedBytes, expectedSha256, origin, credit) {
-  return Object.freeze({
-    schema: "cssearth-navigation-marker@1",
-    planetId,
-    owner: "navigation",
-    source: Object.freeze({
-      path,
-      expectedBytes,
-      expectedSha256,
-      origin,
-      credit,
-      license: "NASA media usage guidelines and credited partner rights",
-    }),
-    operations: STANDARD_DISC_OPERATIONS,
-  });
-}

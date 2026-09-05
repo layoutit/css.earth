@@ -2,6 +2,7 @@ export default Object.freeze({
   schema: "cssearth-navigation-marker@1",
   planetId: "mercury",
   owner: "object",
+  presentation: Object.freeze({"size":5}),
   source: Object.freeze({
     path: "navigation/mercury.jpg",
     expectedBytes: 876817,
