@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { initialObjectSelection } from "../../../platform/object-runtime-contract.mjs";
+import { mountPreparedPresentation } from "../../../platform/prepared-presentation.mjs";
 import { runtimeDefinition } from "../runtime/definition.mjs";
 import { objectRuntimePackageTests, retainedPresentationFixture } from "../../../platform/test/object-runtime-package.mjs";
 
@@ -8,10 +10,10 @@ objectRuntimePackageTests(runtimeDefinition);
 test("Pluto keeps finite retained bands across every sourced lens", () => {
   const f = retainedPresentationFixture(runtimeDefinition);
   try {
-    const presentation = runtimeDefinition.createPresentation(f.stage, f.context);
+    const presentation = mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
     const nodes = f.stage.querySelectorAll("*");
     for (const lens of runtimeDefinition.controls.lenses.controls) {
-      const selection = { ...runtimeDefinition.initialSelection, lensId: lens.id };
+      const selection = { ...initialObjectSelection(runtimeDefinition.controls), lensId: lens.id };
       presentation.commitSelection({ selection, resources: f.resources });
       assert.equal(f.stage.dataset.lens, lens.id);
       assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
@@ -25,7 +27,7 @@ test("Pluto partial retained construction leaves an existing presentation untouc
   const f = retainedPresentationFixture(runtimeDefinition, { failAtElement: 6 });
   try {
     f.stage.dataset.lens = "previous";
-    assert.throws(() => runtimeDefinition.createPresentation(f.stage, f.context), /native element failure/);
+    assert.throws(() => mountPreparedPresentation(f.stage, f.context, runtimeDefinition), /native element failure/);
     assert.deepEqual(f.lifetime.destroy(), []);
     assert.equal(f.stage.dataset.lens, "previous");
     assert.equal(f.stage.children.length, 0);
@@ -35,7 +37,7 @@ test("Pluto presentation disposal preserves a replacement and continues through 
   for (const replacement of [false, true]) {
     const f = retainedPresentationFixture(runtimeDefinition);
     try {
-      runtimeDefinition.createPresentation(f.stage, f.context);
+      mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
       if (replacement) {
         f.stage.replaceChildren(f.document.createElement("div")); f.stage.dataset.lens = "replacement";
       } else f.stage.dataset = new Proxy(f.stage.dataset, { deleteProperty() { throw new Error("metadata failed"); } });

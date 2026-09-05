@@ -1,3 +1,4 @@
+import { mountPreparedPresentation } from "../../../platform/prepared-presentation.mjs";
 import { runtimeDefinition } from "../runtime/definition.mjs";
 import { objectRuntimePackageTests } from "../../../platform/test/object-runtime-package.mjs";
 
@@ -11,7 +12,7 @@ import { retainedPresentationFixture } from "../../../platform/test/object-runti
 for (const replacement of [false, true]) test(`Sun retires owned lens metadata and preserves replacements (${replacement})`, () => {
   const f = retainedPresentationFixture(runtimeDefinition);
   try {
-    runtimeDefinition.createPresentation(f.stage, f.context); f.stage.dataset.lens = "selected";
+    mountPreparedPresentation(f.stage, f.context, runtimeDefinition); f.stage.dataset.lens = "selected";
     if (replacement) { f.stage.replaceChildren(f.document.createElement("div")); f.stage.dataset.lens = "replacement"; }
     assert.deepEqual(f.lifetime.destroy(), []);
     assert.equal(f.stage.dataset.lens, replacement ? "replacement" : undefined);

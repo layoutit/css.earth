@@ -27,7 +27,7 @@ export function preparedDeclarations(text = "") {
 // order. Runtime receives only tag/parent/class/style/attribute records.
 export function createPreparedNodeTree() {
   const roots = [], created = new Set();
-  function element(tag = "div", className = "", style = "", attributes = {}) {
+  function element(tag = "div", className = null, style = "", attributes = {}) {
     const node = { tag, className, style: preparedDeclarations(style), attributes: { ...attributes }, children: [], parent: null };
     created.add(node); return node;
   }
@@ -39,7 +39,7 @@ export function createPreparedNodeTree() {
     }
   }
   function leaf(prepared, layout = null) {
-    const node = element(prepared.tag ?? "s", prepared.className ?? "", prepared.style);
+    const node = element(prepared.tag ?? "s", prepared.className || null, prepared.style);
     const layer = prepared.projectiveTextureLayer;
     if (!layer) return node;
     if (layer.schema !== "polycss-prepared-projective-texture-layer@1") throw new TypeError("Prepared projective layer is incompatible.");

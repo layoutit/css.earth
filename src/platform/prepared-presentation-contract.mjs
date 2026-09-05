@@ -61,7 +61,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     integer(entry.parent, "node parent", -1);
     if (entry.parent >= index) fail("node parents must precede children");
     choice(entry.tag, tags, "retained tag");
-    if (typeof entry.className !== "string" || typeof entry.style !== "string") fail("node class/style must be prepared strings");
+    if (entry.className !== null && typeof entry.className !== "string" || typeof entry.style !== "string") fail("node class/style must be prepared strings or an absent class");
     for (const property of array(entry.properties, "prepared style properties")) {
       record(property, "prepared style property", ["name", "value", "custom"]);
       string(property.name, "prepared property name");
