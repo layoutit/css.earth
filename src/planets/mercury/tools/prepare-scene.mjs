@@ -310,6 +310,12 @@ const scene = Object.freeze({
     }),
     orbitLineFade: ORBIT_LINE_FADE,
     levelOfDetail: LEVEL_OF_DETAIL,
+    // Free orbit in every direction: a drag anywhere on screen tumbles the
+    // scene about the screen axes (no twist outside the trackball's disc),
+    // and nothing clamps pitch or yaw. The control pitch anchors above
+    // (minimum, maximum, default) only calibrate the affine control-to-scene
+    // pitch map; `pitchBounded: false` is the measured truth.
+    drag: Object.freeze({ model: "screen-axis-tumble" }),
     planetarySystem: PLANETARY_SYSTEM_FADE,
     sunMarker: SUN_MARKER,
     runtimeGeometryDerivation: false,
