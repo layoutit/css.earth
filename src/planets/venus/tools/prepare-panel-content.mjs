@@ -22,18 +22,17 @@ const panel = deepFreeze({
   planetId: "venus",
   introduction: "Venus is the second planet from the Sun and our closest planetary neighbor. It is the hottest planet in the solar system, often called Earth's twin.",
   facts: [
-    { label: "Distance", value: `${capture(size, /\((108 million) kilometers\)/u)} km` },
-    { label: "Diameter", value: `${capture(size, /\((12,104) kilometers\)/u)} km` },
-    { label: "Year", value: `${capture(orbit, /takes only (225) Earth days/u)} Earth days` },
-    { label: "Day", value: `${capture(orbit, /day.*?would be (243) Earth days long/u)} Earth days` },
+    { id: "distance-from-sun", label: "Distance from Sun", value: `${capture(size, /\((108 million) kilometers\)/u)} km` },
+    { id: "diameter", label: "Diameter", value: `${capture(size, /\((12,104) kilometers\)/u)} km` },
+    { id: "orbital-period", label: "Orbital period", value: `${capture(orbit, /takes only (225) Earth days/u)} Earth days` },
+    { id: "rotation-period", label: "Rotation period", value: `${capture(orbit, /day.*?would be (243) Earth days long/u)} Earth days` },
+    { id: "axial-tilt", label: "Axial tilt", value: `${wordNumber(capture(orbit, /tilt is only (three) degrees/u))}°` },
+    { id: "moon-count", label: "Moons", value: "None" },
+    { id: "ring-system", label: "Rings", value: "None" },
   ],
   moreFacts: [
-    { label: "Light time", value: `${wordNumber(capture(size, /takes about (six) minutes/u))} min` },
-    { label: "Tilt", value: `${wordNumber(capture(orbit, /tilt is only (three) degrees/u))}°` },
-    { label: "Moons", value: "0", title: "Venus has no natural moons." },
-    { label: "Rings", value: "0", title: "Venus has no rings." },
-    { label: "Surface", value: `${capture(surface, /\((467) Celsius\)/u)}°C` },
-    { label: "Pressure", value: `${capture(atmosphere, /crushing (93) times/u)}× Earth` },
+    { id: "surface-temperature", label: "Surface temperature", value: `${capture(surface, /\((467) Celsius\)/u)}°C` },
+    { id: "surface-pressure", label: "Surface pressure", value: `${capture(atmosphere, /crushing (93) times/u)}× Earth` },
   ],
   sources: {
     editorial: {

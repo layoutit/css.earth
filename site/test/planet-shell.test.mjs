@@ -420,29 +420,33 @@ test("places the retained chart switcher after Factsheet and before Surface Lens
   assert.doesNotMatch(client, /createLayersController|MutationObserver|layersOpen/u);
 });
 
-test("keeps the introduction below the title and shows all facts in a collapsed-by-default panel", async () => {
+test("keeps the introduction below the title and previews four facts in a collapsed-by-default panel", async () => {
   const [shell, styles] = await Promise.all([
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
     readFile(new URL("../planet-shell.css", import.meta.url), "utf8"),
   ]);
   assert.match(
     shell,
-    /class="planet-selected-panel"[\s\S]*?class="planet-title"[\s\S]*?class="planet-introduction"[\s\S]*?<\/section>\s*<details[\s\S]*?id=\{`\$\{objectId\}-factsheet-panel`\}[\s\S]*?class="planet-factsheet-section"[\s\S]*?<summary class="planet-factsheet-header planet-panel-summary">[\s\S]*?>Factsheet<\/h2>[\s\S]*?class="planet-panel-icon"[\s\S]*?data-panel-icon="facts"[\s\S]*?PREPARED_SHELL_ICONS\.facts\.src[\s\S]*?<\/summary>\s*\{hasFacts && <div class="planet-factsheet-body">[\s\S]*?class="planet-facts"[\s\S]*?class="planet-primary-facts"[\s\S]*?allFacts\.map\(\(fact\)[\s\S]*?<\/div>\}\s*<\/details>/u,
+    /class="planet-selected-panel"[\s\S]*?class="planet-title"[\s\S]*?class="planet-introduction"[\s\S]*?<\/section>\s*<details[\s\S]*?id=\{`\$\{objectId\}-factsheet-panel`\}[\s\S]*?class="planet-factsheet-section"[\s\S]*?<summary class="planet-factsheet-header planet-panel-summary">[\s\S]*?>Factsheet<\/h2>[\s\S]*?class="planet-panel-icon"[\s\S]*?data-panel-icon="facts"[\s\S]*?PREPARED_SHELL_ICONS\.facts\.src[\s\S]*?<\/summary>\s*\{hasFacts && <div class="planet-factsheet-body">[\s\S]*?class="planet-facts"[\s\S]*?class="planet-primary-facts"[\s\S]*?initialFacts\.map\(\(fact\)[\s\S]*?class="planet-facts-overflow"[\s\S]*?View more[\s\S]*?class="planet-additional-facts"[\s\S]*?remainingFacts\.map\(\(fact\)[\s\S]*?<\/div>\}\s*<\/details>/u,
   );
   assert.doesNotMatch(shell, /class="planet-factsheet-section"[^>]*\sopen/u);
-  assert.doesNotMatch(shell, /View more|View less|planet-factsheet-disclosure|planet-factsheet-summary/u);
+  assert.match(shell, /const factsheetPreviewCount = 4;/u);
+  assert.match(shell, /const initialFacts = allFacts\.slice\(0, factsheetPreviewCount\);/u);
+  assert.match(shell, /const remainingFacts = allFacts\.slice\(factsheetPreviewCount\);/u);
+  assert.match(shell, /class="planet-facts-toggle"[\s\S]*?View more[\s\S]*?View less/u);
   assert.doesNotMatch(shell, /planet-learn-more|learnMoreUrl|Learn more/u);
   assert.doesNotMatch(shell, /PREPARED_SHELL_TITLES\.facts/u);
   assert.match(shell, /PREPARED_SHELL_ICONS\.facts/u);
   assert.doesNotMatch(shell, /planet-information-cross|Close .* information/u);
   assert.doesNotMatch(styles, /planet-information-cross/u);
-  assert.match(shell, /const allFacts = \[\.\.\.facts, \.\.\.moreFacts\];/u);
+  assert.match(shell, /import \{ orderFacts \} from "\.\.\/fact-order\.mjs";/u);
+  assert.match(shell, /const allFacts = orderFacts\(facts, moreFacts\);/u);
   assert.match(
     shell,
-    /allFacts\.map\(\(fact\) => \([\s\S]*?<li title=\{fact\.title\}>[\s\S]*?class="planet-fact-label">\{fact\.label\}[\s\S]*?class="planet-fact-value">\{fact\.value\}/u,
+    /initialFacts\.map\(\(fact\) => \([\s\S]*?<li data-fact-id=\{fact\.id\}>[\s\S]*?remainingFacts\.map\(\(fact\) => \([\s\S]*?<li data-fact-id=\{fact\.id\}>/u,
   );
-  assert.doesNotMatch(shell, /visibleFacts|hiddenFacts|hasHiddenFacts|planet-more-facts|Show more|Show less/u);
-  assert.doesNotMatch(styles, /planet-more-facts/u);
+  assert.match(styles, /\.planet-facts-overflow\[open\] > \.planet-additional-facts\s*\{[^}]*grid-row:\s*1;/u);
+  assert.match(styles, /\.planet-facts-overflow\[open\] > \.planet-facts-toggle\s*\{[^}]*grid-row:\s*2;/u);
   assert.match(
     shell,
     /import \{ PREPARED_SHELL_TITLES \} from "\.\.\/prepared-shell-titles\.mjs";/u,

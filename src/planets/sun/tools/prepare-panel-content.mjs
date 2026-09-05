@@ -30,17 +30,17 @@ const prepared = Object.freeze({
   retrievedAt: snapshot.retrievedAt,
   introduction: "At the center of our solar system, the Sun is a 4.5-billion-year-old yellow dwarf star. Its light and heat make life on Earth possible.",
   facts: Object.freeze([
-    Object.freeze({ label: "Radius", value: "700,000 km" }),
-    Object.freeze({ label: "Distance from Earth", value: "150 million km" }),
-    Object.freeze({ label: "Equatorial rotation", value: "25 Earth days" }),
-    Object.freeze({ label: "Galactic orbit", value: "230 million years" }),
+    Object.freeze({ id: "radius", label: "Radius", value: "700,000 km" }),
+    Object.freeze({ id: "distance-from-earth", label: "Distance from Earth", value: "150 million km" }),
+    Object.freeze({ id: "rotation-period", label: "Rotation period", value: "25 Earth days" }),
+    Object.freeze({ id: "galactic-orbit", label: "Galactic orbit", value: "230 million years" }),
   ]),
   moreFacts: Object.freeze([
-    Object.freeze({ label: "Age", value: "4.5 billion years" }),
-    Object.freeze({ label: "Solar-system mass", value: "99.8%" }),
-    Object.freeze({ label: "Photosphere", value: "5,500 °C" }),
-    Object.freeze({ label: "Core", value: "15 million °C" }),
-    Object.freeze({ label: "Magnetic cycle", value: "about 11 years" }),
+    Object.freeze({ id: "age", label: "Age", value: "4.5 billion years" }),
+    Object.freeze({ id: "solar-system-mass", label: "Solar system mass", value: "99.8%" }),
+    Object.freeze({ id: "photosphere-temperature", label: "Photosphere temperature", value: "5,500°C" }),
+    Object.freeze({ id: "core-temperature", label: "Core temperature", value: "15 million °C" }),
+    Object.freeze({ id: "magnetic-cycle", label: "Magnetic cycle", value: "About 11 years" }),
   ]),
 });
 

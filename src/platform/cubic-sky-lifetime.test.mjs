@@ -15,7 +15,7 @@ test("drag constructor removes partially attached listeners if initial style pub
     });
     assert.throws(() => createUnboundedMatrixDragControls({
       inputSurface: surface,
-      trackballMetrics: () => ({ centerX: 0, centerY: 0, radius: 200 }),
+      trackballMetrics: () => ({ centerX: 0, centerY: 0, radius: 200, surfaceRadius:200, focalLength:600 }),
       rotate() {},
     }), /style failure/);
     assert.equal(surface.listenerCount(), 0);
@@ -31,12 +31,13 @@ test("drag destruction releases listeners and capture even if interaction comple
     let updates = 0;
     const controls = createUnboundedMatrixDragControls({
       inputSurface: surface,
-      trackballMetrics: () => ({ centerX: 0, centerY: 0, radius: 200 }),
+      trackballMetrics: () => ({ centerX: 0, centerY: 0, radius: 200, surfaceRadius:200, focalLength:600 }),
       rotate() { updates += 1; },
       onEnd() { throw new Error("completion failure"); },
     });
     surface.dispatch("pointerdown");
     surface.dispatch("pointermove", { clientX: 50, timeStamp: 16 });
+    surface.tick(16);
     assert.ok(updates > 0);
     assert.throws(() => controls.destroy(), /cleanup failed/);
     assert.equal(surface.listenerCount(), 0);
@@ -75,10 +76,11 @@ test("native drag publication failure releases capture/listeners and reports ins
   try {
     const surface = new Surface(), errors = [];
     const controls = createUnboundedMatrixDragControls({ inputSurface: surface,
-      trackballMetrics: () => ({ centerX: 0, centerY: 0, radius: 200 }),
+      trackballMetrics: () => ({ centerX: 0, centerY: 0, radius: 200, surfaceRadius:200, focalLength:600 }),
       rotate() { throw new Error("drag publication"); }, onError: (error) => errors.push(error) });
     surface.dispatch("pointerdown");
     surface.dispatch("pointermove", { clientX: 50, timeStamp: 16 });
+    surface.tick(16);
     assert.equal(errors.length, 1);
     assert.equal(surface.listenerCount(), 0);
     assert.equal(surface.frames.size, 0);
@@ -120,3 +122,59 @@ test("cubic orbit destruction is idempotent and disables later camera publicatio
   assert.equal(orbit.stats().publications, publications);
   assert.equal(orbit.state().zoom, 1);
 });
+
+test("disposing during a release publication cannot restart the coast", t => {
+  const previous = globalThis.HTMLElement;
+  globalThis.HTMLElement = Surface;
+  t.after(() => { globalThis.HTMLElement = previous; });
+  const surface = new Surface();
+  let disposeOnPublish = false;
+  const controls = createUnboundedMatrixDragControls({
+    inputSurface: surface,
+    trackballMetrics: () => ({ centerX:0, centerY:0, radius:200,
+      surfaceRadius:200, focalLength:600 }),
+    rotate() { if (disposeOnPublish) controls.destroy(); },
+  });
+  surface.dispatch("pointerdown");
+  for (let step=1; step<=4; step++) {
+    surface.dispatch("pointermove", { clientX:[10,25,45,80][step-1], timeStamp:step*16 });
+    surface.tick(step*16);
+  }
+  disposeOnPublish = true;
+  surface.dispatch("pointerup", { clientX:80, timeStamp:72 });
+  assert.equal(surface.listenerCount(), 0);
+  assert.equal(surface.frames.size, 0);
+  assert.equal(surface.captured.size, 0);
+  assert.equal(controls.stats().active, false);
+});
+
+for (const action of ["complete", "wheel", "destroy", "failure"]) {
+  test(`destination flight settles and releases its frame on ${action}`, async () => {
+    const previous = globalThis.HTMLElement;
+    globalThis.HTMLElement = Surface;
+    const surface = new Surface(), samples = [], errors = [];
+    const controls = createUnboundedMatrixDragControls({ inputSurface: surface,
+      trackballMetrics: () => ({ centerX: 0, centerY: 0, radius: 200, surfaceRadius: 200, focalLength: 600 }),
+      rotate() {}, onError: error => errors.push(error) });
+    try {
+      const completion = controls.flyTo({ durationMilliseconds: 100, sample(progress) {
+        samples.push(progress);
+        if (action === "failure") throw new Error("destination publication");
+      } });
+      surface.tick(0);
+      if (action === "complete") surface.tick(100);
+      if (action === "wheel") surface.dispatch("wheel", { deltaY: 100 });
+      if (action === "destroy") controls.destroy();
+      assert.deepEqual(await completion, { completed: action === "complete" });
+      const count = samples.length;
+      surface.tick(200);
+      assert.equal(samples.length, count);
+      assert.equal(surface.frames.size, 0);
+      assert.equal(controls.stats().destinationFlyTo.active, false);
+      assert.equal(errors.length, action === "failure" ? 1 : 0);
+      controls.destroy();
+      assert.deepEqual(await controls.flyTo({ sample() {} }), { completed: false });
+      assert.equal(surface.listenerCount(), 0);
+    } finally { controls.destroy(); globalThis.HTMLElement = previous; }
+  });
+}

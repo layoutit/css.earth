@@ -3,11 +3,12 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import sharp from "sharp";
+import { flatTileBounds, sampleCalibrationTile } from "./calibration-tile-address.mjs";
 
 const options = parseArguments(process.argv.slice(2));
 const calibrationRoot = resolve(
-  import.meta.dirname,
-  "../../../../../../.local/oracles/google-earth-pro/calibration",
+  process.env.CSS_EARTH_EVIDENCE_ROOT ?? resolve(import.meta.dirname, "../../../../../.."),
+  ".local/oracles/google-earth-pro/calibration",
 );
 const calibrationManifestPath = resolve(calibrationRoot, "manifest.json");
 const calibrationSourcePath = resolve(
@@ -23,6 +24,7 @@ const mappingPath = resolve(outputRoot, "texture-map.tsv");
 const reportPath = resolve(outputRoot, "texture-map.json");
 const cacheTransformKeyPath = resolve(outputRoot, "cache-transform-key.bin");
 await mkdir(rawRoot, { recursive: true });
+await mkdir(resolve(outputRoot,"dxt1"), {recursive:true});
 
 const [calibrationManifest, cacheIndex, auditText, source] = await Promise.all([
   readJson(calibrationManifestPath),
@@ -51,17 +53,20 @@ for (const entry of cacheIndex.entries) {
 }
 const draws = auditText.trim().split("\n").filter(Boolean).map((line) =>
   JSON.parse(line));
+const seedText = options.seedAudit ? await readFile(resolve(options.seedAudit), "utf8") : "";
+const seedDraws = seedText.trim().split("\n").filter(Boolean).map(JSON.parse);
 if (draws.length === 0) throw new Error("The ground draw audit is empty.");
 const requestedRevision = options.revision === undefined
   ? Math.max(...draws.map(({ revision }) => revision))
   : Number(options.revision);
 const latestDraws = new Map();
-for (const draw of draws) {
-  if (draw.revision !== requestedRevision) continue;
+for (const draw of [...draws.filter(draw=>draw.revision<=requestedRevision), ...seedDraws]) {
+  // Keep previously observed coarse tiles: a coast can return to them after
+  // a later warm-up has used only the finer levels.
   if (draw.textureWidth !== 256 || draw.textureHeight !== 256 ||
       draw.internalFormat !== 33776 || !draw.compressed ||
       draw.compressedByteCount !== 32768) continue;
-  latestDraws.set(drawKey(draw), draw);
+  latestDraws.set(`${draw.compressedPath}:${drawKey(draw)}`, draw);
 }
 if (latestDraws.size === 0) {
   throw new Error(`No 256x256 Google ground draws at revision ${requestedRevision}.`);
@@ -125,14 +130,20 @@ for (const { draw, compressedBytes } of observedDraws) {
     });
     preparedTiles.set(tileKey, calibrationTile);
   }
+  // Retain the audited compressed bytes for exact identity checks when the
+  // renderer binds the same tile through a different geometry buffer.
+  const sourceDxt1Path=resolve(outputRoot,"dxt1",`${compressedSha256}.bin`);
+  await writeFile(sourceDxt1Path, compressedBytes);
   mappings.push(Object.freeze({
     originalTexture: draw.texture,
     program: draw.program,
     vertexBuffer: draw.vertexBuffer,
     elementBuffer: draw.elementBuffer,
-    auditRevision: draw.revision,
+    auditRevision: requestedRevision,
+    observedRevision: draw.revision,
     drawId: draw.drawId,
-    originalCompressedPath: draw.compressedPath,
+    originalCompressedPath: sourceDxt1Path,
+    auditCompressedPath: draw.compressedPath,
     originalCompressedByteCount: compressedBytes.length,
     originalCompressedSha256: compressedSha256,
     transformedCachePayloadSha256: transformedPayloadSha256,
@@ -147,12 +158,52 @@ for (const { draw, compressedBytes } of observedDraws) {
       row: address.row,
       col: address.col,
       longitudeRangeDegrees: address.longitudeRangeDegrees,
-      latitudeRangeDegrees: address.latitudeRangeDegrees,
+      latitudeRangeDegrees: [flatTileBounds(address.level, address.row, address.col).south,
+        flatTileBounds(address.level, address.row, address.col).north],
     }),
     calibrationTile,
     registrationQualification:
       "EXACT_REVERSIBLE_BYTES_TO_GOOGLE_CACHE_QUADTREE_ADDRESS",
   }));
+}
+const auditedMappingCount = mappings.length;
+// Cover the indexed resolution envelope reached by the warm-up. A repeated
+// gesture can cross different tile boundaries when its input timing varies.
+const coverageMaximumLevel = Math.max(1,...mappings.map(mapping=>mapping.googleCacheAddress.level));
+const groundPrograms = new Set(observedDraws.map(({ draw }) => draw.program));
+for (const address of cacheIndex.entries.filter(entry => entry.level <= coverageMaximumLevel)) {
+  const payload = await readFile(address.cachePayloadPath);
+  if (sha256(payload) !== address.cachePayloadSha256) {
+    throw new Error("Coarse cache payload hash drifted.");
+  }
+  const compressedBytes = xorBuffers(payload, cacheTransform.keyBytes);
+  const compressedSha256 = sha256(compressedBytes);
+  const tileKey = `${address.level}:${address.path}`;
+  let calibrationTile = preparedTiles.get(tileKey);
+  if (calibrationTile === undefined) {
+    calibrationTile = await prepareCalibrationTile({ source, address, rawRoot,
+      sourceDecodedRgbaSha256: calibrationManifest.source.decodedRgbaSha256 });
+    preparedTiles.set(tileKey, calibrationTile);
+  }
+  const sourceDxt1Path=resolve(outputRoot,"dxt1",`${compressedSha256}.bin`);
+  await writeFile(sourceDxt1Path, compressedBytes);
+  for (const program of groundPrograms) {
+    if (mappings.some(mapping => mapping.program === program &&
+        mapping.originalCompressedSha256 === compressedSha256)) continue;
+    mappings.push(Object.freeze({
+      originalTexture: 0, program, vertexBuffer: 0, elementBuffer: 0,
+      auditRevision: requestedRevision, observedRevision: null,
+      originalCompressedPath: sourceDxt1Path,
+      originalCompressedByteCount: compressedBytes.length,
+      originalCompressedSha256: compressedSha256,
+      transformedCachePayloadSha256: address.cachePayloadSha256,
+      cacheTransformKeySha256: cacheTransform.keySha256,
+      googleCacheAddress: { level: address.level, path: address.path,
+        row: address.row, col: address.col },
+      calibrationTile,
+      registrationQualification: "EXACT_CACHE_BYTES_REVERSED_WITH_AUDITED_KEY",
+    }));
+  }
 }
 mappings.sort((left, right) =>
   left.program - right.program ||
@@ -171,17 +222,19 @@ const mappingBytes = Buffer.from(mappings.map((mapping) => [
   mapping.googleCacheAddress.row,
   mapping.calibrationTile.uploadPath,
   mapping.calibrationTile.uploadRgbaSha256,
+  mapping.originalCompressedPath,
 ].join("\t")).join("\n") + "\n");
 await writeFile(mappingPath, mappingBytes);
 const report = Object.freeze({
   schema: "cssmars-google-earth-pro-calibration-texture-map@3",
-  qualification: mappings.length === latestDraws.size
+  qualification: auditedMappingCount === latestDraws.size
     ? "EXACT_GOOGLE_DXT1_DRAWS_BOUND_TO_CALIBRATION_TILES"
     : "INVALID_UNMAPPED_GOOGLE_DRAWS",
   generatedAt: new Date().toISOString(),
   revision: requestedRevision,
   auditPath: resolve(options.audit),
   auditSha256: sha256(Buffer.from(auditText)),
+  seedAudit: options.seedAudit ? {path:resolve(options.seedAudit),sha256:sha256(Buffer.from(seedText))} : null,
   cacheIndexPath,
   cacheIndexSha256: sha256(await readFile(cacheIndexPath)),
   cacheTransform: Object.freeze({
@@ -202,6 +255,8 @@ const report = Object.freeze({
   mappingPath,
   mappingSha256: sha256(mappingBytes),
   auditedDrawCount: latestDraws.size,
+  coverageMaximumLevel,
+  coarseFallbackMappingCount: mappings.length - auditedMappingCount,
   mappingCount: mappings.length,
   uniqueGoogleTextureCount: new Set(mappings.map(({ originalTexture }) =>
     originalTexture)).size,
@@ -333,34 +388,11 @@ async function prepareCalibrationTile({
   rawRoot,
   sourceDecodedRgbaSha256,
 }) {
-  const divisions = 2 ** address.level;
-  const sourceLeft = Math.floor(address.col * source.info.width / divisions);
-  const sourceRight = Math.floor(
-    (address.col + 1) * source.info.width / divisions,
-  );
-  const topDownRow = divisions - 1 - address.row;
-  const sourceTop = Math.floor(topDownRow * source.info.height / divisions);
-  const sourceBottom = Math.floor(
-    (topDownRow + 1) * source.info.height / divisions,
-  );
-  if (sourceRight <= sourceLeft || sourceBottom <= sourceTop) {
-    throw new Error(
-      `Calibration source has insufficient resolution for z${address.level} ` +
-      `${address.path}.`,
-    );
-  }
-  const topDown = await sharp(source.data, {
-    raw: {
-      width: source.info.width,
-      height: source.info.height,
-      channels: 4,
-    },
-  }).extract({
-    left: sourceLeft,
-    top: sourceTop,
-    width: sourceRight - sourceLeft,
-    height: sourceBottom - sourceTop,
-  }).resize(256, 256, { fit: "fill", kernel: "nearest" }).raw().toBuffer();
+  const { topDown, bounds } = sampleCalibrationTile(source, address);
+  const sourceLeft = (bounds.west + 180) / 360 * source.info.width;
+  const sourceRight = (bounds.east + 180) / 360 * source.info.width;
+  const sourceTop = (90 - bounds.north) / 180 * source.info.height;
+  const sourceBottom = (90 - bounds.south) / 180 * source.info.height;
   const uploadRgba = await sharp(topDown, {
     raw: { width: 256, height: 256, channels: 4 },
   }).flip().raw().toBuffer();
@@ -378,6 +410,7 @@ async function prepareCalibrationTile({
     width: 256,
     height: 256,
     channels: 4,
+    sampling: "pixel-center nearest; square angular tile; unused polar rows edge-clamped",
     sourceCrop: Object.freeze({
       left: sourceLeft,
       top: sourceTop,
@@ -420,6 +453,7 @@ function parseArguments(arguments_) {
     const name = arguments_[index];
     const value = arguments_[index + 1];
     if (name === "--audit") parsed.audit = value;
+    if (name === "--seed-audit") parsed.seedAudit = value;
     if (name === "--output") parsed.output = value;
     if (name === "--cache-index") parsed.cacheIndex = value;
     if (name === "--revision") parsed.revision = value;

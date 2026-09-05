@@ -22,7 +22,7 @@ const controls = Object.freeze([
     qualification: "NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
   }),
   Object.freeze({
-    id: "buenos-aires-noise", label: "Buenos Aires noise", shortLabel: "dBA",
+    id: "buenos-aires-noise", surfaceBankId: "normal", label: "Buenos Aires noise", shortLabel: "dBA",
     thumbnailUrl: "/scenes/earth/earth-lens-noise.webp",
     surfaceUrl: "/scenes/earth/earth-surface.webp", polesUrl: "/scenes/earth/earth-surface-poles.webp",
     surfaceUrls: earthSurfacePageUrls("earth-surface", pages.length),

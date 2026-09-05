@@ -42,7 +42,7 @@ export const EARTH_RUNTIME_ASSET_URLS = Object.freeze([
   "earth-lens-night-lights.webp",
   "earth-lens-normal.webp",
   "earth-lens-topography.webp",
-  ...PREPARED_EARTH_LENSES.controls.flatMap(lens => lens.surfaceUrls ?? []),
+  ...new Set(PREPARED_EARTH_LENSES.controls.flatMap(lens => lens.surfaceUrls ?? [])),
   "earth-night-lights-poles.webp",
   ...PREPARED_EARTH_STARFIELD.faces.flatMap(({
     url,

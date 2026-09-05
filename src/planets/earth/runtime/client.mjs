@@ -35,8 +35,9 @@ import {
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 const lensOwners = new WeakMap();
 
-export function mountEarthClient(stage, { onError } = {}) {
+export function mountEarthClient(stage, { onError, onMotionRequest = () => {} } = {}) {
   if (typeof onError !== "function") throw new TypeError("Earth requires onError.");
+  if (typeof onMotionRequest !== "function") throw new TypeError("Earth requires a motion request callback.");
   const lifetime = createSceneLifetime();
   const inputSurface = document.querySelector(".earth-input-surface");
   if (!(inputSurface instanceof HTMLElement)) {
@@ -91,11 +92,7 @@ export function mountEarthClient(stage, { onError } = {}) {
         await lenses.select("normal");
         if (lifetime.disposed) throw new Error("Earth was unmounted.");
         controller.pause();
-        const frame = () => new DOMMatrix(getComputedStyle(mounted.system).transform)
-          .multiply(new DOMMatrix(getComputedStyle(mounted.bodyCarriers.surface[0]).transform));
-        const before = frame();
-        for (const animation of animations) animation.currentTime = 0;
-        camera.rebaseScene(before.multiply(frame().inverse()));
+        alignPreparedGeography();
         const arrival = camera.flyToState(place.camera);
         return { status: place.coverage === "detail"
           ? "WorldCover imagery · 2021. Source gaps retain the Earth base map."
@@ -137,6 +134,14 @@ export function mountEarthClient(stage, { onError } = {}) {
   });
   return controller;
 
+  function alignPreparedGeography() {
+    const frame = () => new DOMMatrix(getComputedStyle(mounted.system).transform)
+      .multiply(new DOMMatrix(getComputedStyle(mounted.bodyCarriers.surface[0]).transform));
+    const before = frame();
+    for (const animation of animations) animation.currentTime = 0;
+    camera.rebaseScene(before.multiply(frame().inverse()));
+  }
+
   async function start() {
     try {
       surfaceBanks = createEarthSurfaceImageBanks({
@@ -177,7 +182,14 @@ export function mountEarthClient(stage, { onError } = {}) {
       lifetime.onDispose(camera.destroy);
       camera.refresh();
       await lenses.bindRuntime(mounted, {
-        onLensChange: camera.setLens,
+        onLensChange(lens) {
+          if (lens.camera) {
+            onMotionRequest(false);
+            controller.pause();
+            alignPreparedGeography();
+          }
+          camera.setLens(lens);
+        },
       });
       if (lifetime.disposed) return;
       features.bindRuntime({
@@ -850,7 +862,7 @@ export function createEarthLensControls({
     let ticket;
     return selection.run({
       prepare: async ({ isCurrent }) => {
-        ticket = surfaceBanks.request(id);
+        ticket = surfaceBanks.request(lens.surfaceBankId ?? id);
         const decoded = await ticket.ready;
         if (!isCurrent()) return ticket;
         if (!decoded) throw new Error("Earth requested surface bank was retired.");
@@ -927,7 +939,7 @@ export function createEarthLensControls({
   }
 }
 
-function earthSurfaceBankInventory() {
+export function earthSurfaceBankInventory() {
   const body = PREPARED_EARTH_SCENE.body.assets.surface;
   const bodyPages = requireEarthSurfacePages(body.urls, "Earth default surface");
   const outer = PREPARED_EARTH_SCENE.interior.outerAssets.surface;
@@ -950,7 +962,15 @@ function earthSurfaceBankInventory() {
     }
     return Object.freeze({ id: lens.id, urls });
   });
-  return Object.freeze(banks);
+  for (const lens of PREPARED_EARTH_LENSES.controls) {
+    if (!lens.surfaceBankId) continue;
+    const source = banks.find(bank => bank.id === lens.surfaceBankId);
+    if (!source || JSON.stringify(source.urls) !== JSON.stringify(lens.surfaceUrls)) {
+      throw new TypeError("Earth overlay must reuse its declared surface bank unchanged.");
+    }
+  }
+  return Object.freeze(banks.filter(bank =>
+    !PREPARED_EARTH_LENSES.controls.find(lens => lens.id === bank.id).surfaceBankId));
 }
 
 function canonicalPreparedUrl(asset) {

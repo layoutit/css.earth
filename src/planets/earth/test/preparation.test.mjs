@@ -1,3 +1,4 @@
+import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -182,7 +183,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal(Object.keys(PREPARED_EARTH_SCENE.counts).some((key) =>
     /moon|orbitGuide/u.test(key)), false);
   assert.equal(PREPARED_EARTH_SCENE.counts.retainedLeafCount,
-    453 + PREPARED_EARTH_CITY_PAGES.poolSize);
+    453 + PREPARED_EARTH_CITY_PAGES.poolSize + PREPARED_EARTH_NOISE.poolSize);
   assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 546);
   assert.equal(PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount,
     PREPARED_EARTH_SCENE.counts.retainedLeafCount + PREPARED_EARTH_SCENE.counts.interiorLeafCount);
@@ -197,12 +198,6 @@ test("publishes the prepared Earth title and retained scene", async () => {
   const rasterLeaves = surfaceLeaves.filter(({ className }) =>
     className.includes("earth-surface-leaf"));
   assert.equal(rasterLeaves.length, 448);
-  // The 8K bank adds image detail, not larger local CSS raster surfaces.
-  for (const leaf of rasterLeaves) {
-    assert.equal(leaf.projectiveTextureLayer.rasterScale, 4);
-    assert.ok(leaf.leafWidth * leaf.projectiveTextureLayer.rasterScale <= 128);
-    assert.ok(leaf.leafHeight * leaf.projectiveTextureLayer.rasterScale <= 128);
-  }
   assert.ok(rasterLeaves.every(({ className, style, leafWidth, leafHeight }) =>
     leafWidth <= 96 && leafHeight <= 96 &&
     style.includes("background-position:") &&

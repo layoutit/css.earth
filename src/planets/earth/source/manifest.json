@@ -420,7 +420,7 @@
     {
       "id": "worldcover-wmts-release",
       "path": "city/wmts-release.json",
-      "expectedSha256": "41df012cd0889044a9ea9caf30724438e565080e75f7e7ca6c2b5f3d42485372",
+      "expectedSha256": "779c9cc235f444a14ced20582a340c32921719028995814fa56509294842bf6c",
       "expectedBytes": 2897443,
       "origin": "https://esa-worldcover.org/en/data-access",
       "credit": "ESA WorldCover project 2021 / Copernicus Sentinel data",
@@ -429,6 +429,23 @@
         "https://esa-worldcover.org/en/data-access"
       ],
       "acquisition": "Generated geometry release inventory from the pinned WorldCover source footprints and accepted Earth scene; no imagery copied",
+      "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
+      "consumers": [
+        "city-wmts"
+      ]
+    },
+    {
+      "id": "worldcover-geographic-rebind",
+      "path": "city/geographic-rebind.json",
+      "expectedSha256": "6da869e304c7a969727897017dc52deadafd2d9c65f2d59b1db0e45ae14e9ea4",
+      "expectedBytes": 659,
+      "origin": "https://esa-worldcover.org/en/data-access",
+      "credit": "ESA WorldCover project 2021 / Copernicus Sentinel data",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://esa-worldcover.org/en/data-access"
+      ],
+      "acquisition": "Verified byte-identical geographic frames when integrating the PR2 affine raster representation; complete pack hashes rechecked",
       "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
       "consumers": [
         "city-wmts"

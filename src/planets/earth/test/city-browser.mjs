@@ -62,7 +62,7 @@ try {
       await page.waitForFunction(() => window.__earth?.ready);
       const documentTimeOrigin=await page.evaluate(()=>performance.timeOrigin);
       await page.evaluate(({pages,roots}) => {
-        window.__earth.pause();
+        { const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }
         window.__cityPlan = {pages,roots};
         window.__cityNodes = [...document.querySelector('.planet-stage').querySelectorAll('*')];
         window.__cityLongTasks = [];
@@ -391,7 +391,7 @@ async function measureCityMotion(page,root) {
   await page.locator('.planet-motion-setting-control').click();
   await page.waitForFunction(()=>document.documentElement.dataset.playing==='true');
   await page.waitForTimeout(2500);
-  await page.evaluate(()=>{window.__cityMotionStop=true;window.__earth.pause();});
+  await page.evaluate(()=>{window.__cityMotionStop=true;{ const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }});
   await page.locator('.planet-settings-action').click();
   await settle(page);
   const records=await page.evaluate(()=>window.__cityMotionRecords);

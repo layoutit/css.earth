@@ -70,7 +70,9 @@ export function createPreparedProjectiveTextureLeaf(prepared) {
   texture.style.pointerEvents = "none";
 
   leaf.style.transform = `matrix3d(${layer.frameMatrix})`;
-  leaf.style.transformStyle = "flat";
+  // The frame and texture matrices form one projective transform. Flattening
+  // between them distorts texel boundaries into wedges at oblique angles.
+  leaf.style.transformStyle = "preserve-3d";
   for (const property of [
     "--polycss-atlas-width",
     "--polycss-atlas-height",

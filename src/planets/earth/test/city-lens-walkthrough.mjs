@@ -25,7 +25,7 @@ try{
     },noise,{timeout:120000});
   };
   await page.goto(`${base}/earth/`);await page.waitForFunction(()=>window.__earth?.ready);
-  await page.evaluate(()=>{window.__earth.pause();window.__walkthroughNodes=[...document.querySelector(".planet-stage").querySelectorAll("*")];});
+  await page.evaluate(()=>{{ const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }window.__walkthroughNodes=[...document.querySelector(".planet-stage").querySelectorAll("*")];});
   await checkpoint("01-globe");await page.waitForTimeout(1000);
   await page.locator(".planet-sidebar-search").fill("Buenos Aires");
   const destination=page.getByRole("button",{name:"Buenos Aires, Buenos Aires F.D., Argentina",exact:true});
