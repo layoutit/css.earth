@@ -22,6 +22,8 @@ import { requireBodyFixedSunDirection } from
   "../../../platform/solar-geometry.mjs";
 import { prepareHeliocentricView } from
   "../../../platform/prepare-heliocentric-view.mjs";
+import { preparePlanetarySystem } from
+  "../../../platform/prepare-planetary-system.mjs";
 import { PREPARED_MERCURY_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import {
   createProjectiveSurfaceRasterPresentation,
@@ -39,11 +41,37 @@ const RADIUS = 230;
 const MERCURY_MEAN_RADIUS_KILOMETERS = 2439.7;
 // Wheel dolly: the camera distance scales by exp(delta * step) per wheel
 // delta unit. The full range (ln of the maximum over the minimum distance,
-// about 11.6) takes some 20 mouse notches of 100, or about 1900 trackpad
-// pixels; the step is multiplicative, so fine control near the body is kept.
+// about 15.4 now that the dolly reaches the whole planetary system) takes
+// some 26 mouse notches of 100, or about 2600 trackpad pixels; the step is
+// multiplicative, so fine control near the body is kept and the outer
+// system goes by in a few notches.
 const DOLLY_WHEEL_STEP_PER_DELTA = 0.006;
 // The camera never comes closer to the body's centre than this many radii.
 const MINIMUM_DISTANCE_RADII = 1.2;
+// The dolly's far bound over the planetary system's extent from Mercury
+// (Neptune's orbit, about 30.4 AU): far enough that the whole system fits
+// the vertical field of view in landscape with a little to spare, the same
+// rule as the body-orbit bound below.
+const MAXIMUM_DISTANCE_OVER_SYSTEM_EXTENT = 3;
+// The other planets' orbits and markers fade in with the camera's distance
+// over Mercury's own orbit extent: hidden while Mercury's orbit still fills
+// the view (at 1.5 times the extent the orbit spans about half the height),
+// opaque once the camera stands well outside it.
+const PLANETARY_SYSTEM_FADE = Object.freeze({
+  model: "distance-over-orbit-extent-fade",
+  hiddenBelowDistanceOverOrbitExtent: 1.5,
+  visibleAboveDistanceOverOrbitExtent: 2.5,
+});
+// The Sun's marker floor: the shell's 16-pixel Sun tile fades in as the Sun
+// sprite's projected diameter (glow included) falls below it, and holds
+// once the sprite is the size of the tile's core. At the whole-system dolly
+// the true sprite is under half a pixel; this is a deliberate departure
+// from the Sun's true angular size, as for the planet markers.
+const SUN_MARKER = Object.freeze({
+  model: "sprite-diameter-crossfade",
+  fadeStartSpritePixels: 16,
+  fullSpritePixels: 8,
+});
 // The orbit line fades out as the true disc grows past these shares of the
 // viewport height, so the close portrait keeps its clean disc.
 const ORBIT_LINE_FADE = Object.freeze({
@@ -271,8 +299,10 @@ const scene = Object.freeze({
       wheelStepPerDelta: DOLLY_WHEEL_STEP_PER_DELTA,
       minimumDistanceRadii: MINIMUM_DISTANCE_RADII,
       // Far enough that the whole orbit fits the vertical field of view with
-      // the body at the centre, and a little more.
+      // the body at the centre, and a little more. Superseded by the system
+      // bound below while the heliocentric view carries the system.
       maximumDistanceOverOrbitExtent: 4,
+      maximumDistanceOverSystemExtent: MAXIMUM_DISTANCE_OVER_SYSTEM_EXTENT,
       // Zoom is a framing alias: the silhouette diameter over the logical
       // body diameter, times the default zoom, so the material overlay and
       // the responsive fit keep their prepared meaning.
@@ -280,6 +310,8 @@ const scene = Object.freeze({
     }),
     orbitLineFade: ORBIT_LINE_FADE,
     levelOfDetail: LEVEL_OF_DETAIL,
+    planetarySystem: PLANETARY_SYSTEM_FADE,
+    sunMarker: SUN_MARKER,
     runtimeGeometryDerivation: false,
   }),
   // The body system is placed in the ecliptic presentation frame: ecliptic
@@ -316,7 +348,9 @@ const scene = Object.freeze({
     }),
   }),
   // The Sun at its observed distance and the orbit as a true ellipse, around
-  // the body in the same presentation frame as the body system.
+  // the body in the same presentation frame as the body system, with the
+  // rest of the planetary system (epoch positions through the frame tree,
+  // orbits as true ellipses) in the same frame and units.
   heliocentricView: prepareHeliocentricView({
     bodyId: "mercury",
     presentationFrame: MERCURY_PRESENTATION_FRAME,
@@ -326,6 +360,11 @@ const scene = Object.freeze({
       imagePixels: PREPARED_MERCURY_SKY_SUN.asset.density1.width,
       opaqueCoreDiameterShare:
         PREPARED_MERCURY_SKY_SUN.distanceScaling.spriteOpaqueCoreDiameterShare,
+    }),
+    system: await preparePlanetarySystem({
+      bodyId: "mercury",
+      presentationFrame: MERCURY_PRESENTATION_FRAME,
+      kilometersPerUnit: MERCURY_MEAN_RADIUS_KILOMETERS / RADIUS,
     }),
   }),
   material: Object.freeze({
