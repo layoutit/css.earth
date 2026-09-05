@@ -550,7 +550,7 @@ test("places desktop search and the collapse control around the sidebar", async 
   );
   assert.match(
     shell,
-    /placeholder=\{`Search planets \(\$\{planetCount\}\)`\}/u,
+    /placeholder=\{destinations\?\.searchLabel \?\? `Search planets \(\$\{planetCount\}\)`\}/u,
   );
   assert.match(
     header,
@@ -747,7 +747,7 @@ test("switches the desktop sidebar to the one shared planet list", async () => {
   assert.doesNotMatch(shell, /OBJECTS\.map|planet-object-marker|planet-object-browser-title/u);
   assert.match(
     client,
-    /createObjectBrowserController\([\s\S]*?\.planet-sidebar-search-card[\s\S]*?\.planet-sidebar-view-all[\s\S]*?\.planet-object-browser[\s\S]*?const selectedSearchValue = search\.value;[\s\S]*?if \(query\.length === 0\)[\s\S]*?item\.hidden = true;[\s\S]*?empty\.hidden = true;[\s\S]*?browser\.hidden = true;[\s\S]*?return;[\s\S]*?browser\.hidden = false;[\s\S]*?item\.dataset\.objectName[\s\S]*?if \(next && resetQuery\) search\.value = "";[\s\S]*?if \(!next\) search\.value = selectedSearchValue;[\s\S]*?trigger\.ariaLabel = next[\s\S]*?`Show \$\{selectedSearchValue\} information`[\s\S]*?trigger\.textContent = "×";[\s\S]*?trigger\.addEventListener\("click"[\s\S]*?render\(true, \{ resetQuery: true \}\)[\s\S]*?search\.addEventListener\("input"[\s\S]*?search\.addEventListener\("focus", \(\) => search\.select\(\)[\s\S]*?search\.addEventListener\("keydown"[\s\S]*?event\.key !== "Escape"[\s\S]*?documentTarget\.addEventListener\("pointerdown"[\s\S]*?searchCard\.contains\(event\.target\)[\s\S]*?search\.blur\(\)/u,
+    /createObjectBrowserController\([\s\S]*?\.planet-sidebar-search-card[\s\S]*?\.planet-sidebar-view-all[\s\S]*?\.planet-object-browser[\s\S]*?const selectedSearchValue = search\.value;[\s\S]*?if \(query\.length === 0\)[\s\S]*?item\.hidden = true;[\s\S]*?empty\.hidden = true;[\s\S]*?browser\.hidden = true;[\s\S]*?return;[\s\S]*?browser\.hidden = false;[\s\S]*?item\.dataset\.objectName[\s\S]*?if \(next && resetQuery\) search\.value = "";[\s\S]*?if \(!next\) search\.value = currentSearchValue;[\s\S]*?trigger\.ariaLabel = next[\s\S]*?`Show \$\{selectedSearchValue\} information`[\s\S]*?trigger\.textContent = "×";[\s\S]*?trigger\.addEventListener\("click"[\s\S]*?render\(true, \{ resetQuery: true \}\)[\s\S]*?search\.addEventListener\("input"[\s\S]*?search\.addEventListener\("focus", \(\) => search\.select\(\)[\s\S]*?search\.addEventListener\("keydown"[\s\S]*?event\.key !== "Escape"[\s\S]*?documentTarget\.addEventListener\("pointerdown"[\s\S]*?searchCard\.contains\(event\.target\)[\s\S]*?search\.blur\(\)/u,
   );
   assert.match(styles, /\.planet-sidebar-view-all\s*\{[\s\S]*?right:\s*12px;[\s\S]*?height:\s*44px;[\s\S]*?font:\s*400 0\.8125rem\/20px var\(--shell-ui-font\);[\s\S]*?text-decoration:\s*none;/u);
   assert.doesNotMatch(styles, /\.planet-object-browser-title|\.planet-object-marker|\.planet-object-link\s*\{[\s\S]*?height:\s*40px;/u);

@@ -1,3 +1,5 @@
+import { createDestinationBrowser } from "./destination-browser.mjs";
+
 export function mountPlanetShell({
   objectId,
   documentTarget = document,
@@ -40,6 +42,8 @@ export function mountPlanetShell({
   let destroyed = false;
 
   return Object.freeze({
+    setDestinations: objectBrowser.setDestinations,
+    setMotionEnabled: settingsController.setMotionEnabled,
     destroy() {
       if (destroyed) return;
       destroyed = true;
@@ -110,6 +114,11 @@ function createSettingsController(
   renderSkyContrast();
 
   return Object.freeze({
+    setMotionEnabled(next) {
+      motionOn = next === true;
+      renderMotion();
+      onMotionChange(motionOn);
+    },
     destroy() {
       events.abort();
       delete documentTarget.body.dataset.skyContrast;
@@ -140,9 +149,19 @@ function createObjectBrowserController(documentTarget, windowTarget) {
 
   const events = new AbortController();
   const selectedSearchValue = search.value;
+  let currentSearchValue = selectedSearchValue;
+  let visibleObjects = 0;
+  const destinations = createDestinationBrowser({
+    documentTarget, windowTarget,
+    onResults(count) { empty.hidden = visibleObjects + count > 0; },
+    onSelected(place) { currentSearchValue = place.name; render(false); search.blur(); },
+    onReset() { currentSearchValue = selectedSearchValue; render(false); },
+  });
   let open = false;
   const filter = () => {
     const query = search.value.trim().toLocaleLowerCase("en");
+    visibleObjects = 0;
+    void destinations?.search(query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
       empty.hidden = true;
@@ -156,12 +175,14 @@ function createObjectBrowserController(documentTarget, windowTarget) {
       item.hidden = !match;
       if (match) visible += 1;
     }
-    empty.hidden = visible !== 0;
+    visibleObjects = visible;
+    empty.hidden = visible !== 0 || Boolean(destinations);
   };
   const render = (next, { resetQuery = false } = {}) => {
     open = next;
     if (next && resetQuery) search.value = "";
-    if (!next) search.value = selectedSearchValue;
+    if (!next) search.value = currentSearchValue;
+    destinations?.setOpen(next);
     information.hidden = next;
     browser.hidden = !next;
     trigger.ariaPressed = String(next);
@@ -186,9 +207,31 @@ function createObjectBrowserController(documentTarget, windowTarget) {
     signal: events.signal,
   });
   search.addEventListener("keydown", (event) => {
+    if (open && (event.key === "Enter" || event.key === "ArrowDown")) {
+      const first = [...browser.querySelectorAll("a, button")].find(element =>
+        !element.closest("[hidden]") && !element.disabled);
+      if (first) {
+        event.preventDefault();
+        if (event.key === "Enter") first.click(); else first.focus();
+      }
+    }
     if (event.key !== "Escape" || !open) return;
     event.preventDefault();
     render(false);
+  }, { signal: events.signal });
+  browser.addEventListener("keydown", (event) => {
+    const controls = [...browser.querySelectorAll("a, button")].filter(element =>
+      !element.closest("[hidden]") && !element.disabled);
+    const index = controls.indexOf(documentTarget.activeElement);
+    if (event.key === "Escape") { render(false); search.focus(); }
+    else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      const next = index + (event.key === "ArrowDown" ? 1 : -1);
+      if (next < 0) search.focus(); else controls[Math.min(next, controls.length - 1)]?.focus();
+    }
+  }, { signal: events.signal });
+  documentTarget.querySelector(".planet-find-destination")?.addEventListener("click", () => {
+    render(true, { resetQuery: true }); search.focus();
   }, { signal: events.signal });
   documentTarget.addEventListener("pointerdown", (event) => {
     if (documentTarget.activeElement !== search ||
@@ -199,8 +242,11 @@ function createObjectBrowserController(documentTarget, windowTarget) {
   render(false);
 
   return Object.freeze({
+    setDestinations(provider) { destinations?.bind(provider); },
     destroy() {
       events.abort();
+      destinations?.destroy();
+      currentSearchValue = selectedSearchValue;
       search.value = selectedSearchValue;
       for (const item of items) item.hidden = false;
       empty.hidden = true;

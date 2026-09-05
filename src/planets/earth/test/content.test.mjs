@@ -13,7 +13,7 @@ test("publishes evidence-backed Earth shell content", async () => {
     { label: "Day", value: "23.9 hours" },
   ]);
   assert.deepEqual(PREPARED_EARTH_LENSES.controls.map(({ id }) => id), [
-    "normal", "topography", "night-lights", "cross-section",
+    "normal", "buenos-aires-noise", "topography", "night-lights", "cross-section",
   ]);
   const snapshot = JSON.parse(await readFile(new URL("../../../../data/planets/earth.json", import.meta.url), "utf8"));
   assert.equal(snapshot.sourceId, 48583);

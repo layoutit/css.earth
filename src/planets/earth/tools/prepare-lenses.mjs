@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
+const city = JSON.parse(await readFile(new URL("../source/city/manifest.json", import.meta.url), "utf8"));
 
 const controls = Object.freeze([
   Object.freeze({
@@ -11,8 +13,15 @@ const controls = Object.freeze([
     thumbnailUrl: "/scenes/earth/earth-lens-normal.webp",
     surfaceUrl: "/scenes/earth/earth-surface.webp",
     polesUrl: "/scenes/earth/earth-surface-poles.webp",
-    maximumZoom: 8,
-    qualification: "NASA Blue Marble visible-color composite",
+    maximumZoom: city.presentation.maximumZoom,
+    qualification: "NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
+  }),
+  Object.freeze({
+    id: "buenos-aires-noise", label: "Buenos Aires noise", shortLabel: "dBA",
+    thumbnailUrl: "/scenes/earth/earth-lens-noise.webp",
+    surfaceUrl: "/scenes/earth/earth-surface.webp", polesUrl: "/scenes/earth/earth-surface-poles.webp",
+    maximumZoom: city.presentation.maximumZoom, camera: PREPARED_EARTH_NOISE.camera,
+    qualification: PREPARED_EARTH_NOISE.qualification, legend: PREPARED_EARTH_NOISE.legend,
   }),
   Object.freeze({
     id: "topography",
@@ -40,6 +49,7 @@ const controls = Object.freeze([
     shortLabel: "CUT",
     thumbnailUrl: "/scenes/earth/earth-view-interior.webp",
     view: "interior",
+    maximumZoom: 8,
     qualification: "Schematic NASA Science source-backed interior",
   }),
 ]);
@@ -50,7 +60,7 @@ const prepared = Object.freeze({
   runtimeRasterization: false,
   controls,
   provenance: Object.freeze({
-    normal: "NASA Earth Observatory Blue Marble Next Generation December 2004",
+    normal: "NASA Blue Marble Next Generation December 2004; ESA WorldCover 2021 v200 RGBNIR, CC-BY-4.0",
     topography: "NASA Earth Observatory Blue Marble topography and bathymetry December 2004",
     nightLights: "NASA Earth Observatory Black Marble 2016",
     interior: "NASA Science Facts About Earth, schematic presentation",
