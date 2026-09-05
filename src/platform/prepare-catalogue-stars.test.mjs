@@ -102,7 +102,7 @@ test("the real catalogue prepares to the derived limit, banded, brightest first,
     assert.ok(Math.abs(Math.hypot(...star.direction) - 1) < 1e-6);
     // Banded on the unrounded magnitude; the recorded one is rounded.
     if (Math.abs(star.magnitude - 3.5) > 0.002) {
-      assert.equal(star.presentation, star.magnitude < 3.5 ? "retained" : "stamped");
+      assert.equal(star.presentation, star.magnitude < 3.5 ? "retained" : "photographic");
     }
   }
   const sirius = prepared.stars.find((star) => star.name === "Sirius");

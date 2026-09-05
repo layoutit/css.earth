@@ -146,7 +146,7 @@ export function mountRetainedCubicSky({
     starGroup,
     retainedStarCount: starGroup === null ? 0 : starGroup.childElementCount,
     catalogueStars: stars === null ? null : Object.freeze({
-      limitingMagnitude: stars.limitingMagnitude, count: stars.count, stampedCount: stars.stampedCount,
+      limitingMagnitude: stars.limitingMagnitude, count: stars.count, photographicCount: stars.photographicCount,
       retainedCount: stars.retainedCount, bands: stars.bands, coexistence: stars.coexistence,
     }),
     faceCount: orientation.querySelectorAll(".planet-cubic-sky-face").length,
