@@ -1046,6 +1046,7 @@ export function createObjectInteractionControls({
   rotate,
   minimumZoom,
   maximumZoom,
+  dolly = null,
   onStart,
   onEnd,
   onError = null,
@@ -1100,6 +1101,7 @@ export function createObjectInteractionControls({
     },
     minimumZoom,
     maximumZoom,
+    dolly,
   });
   lifetime.onDispose(() => wheelControls.destroy());
   return Object.freeze({
@@ -1355,6 +1357,7 @@ export function createRetainedCubicSkyOrbit({
     controlPitchDelta,
     controlYawDelta,
     zoom,
+    distance,
     rotation,
   }) => {
     const previousPitch = safeCamera.state.rotX;
@@ -1362,6 +1365,7 @@ export function createRetainedCubicSkyOrbit({
       rotX: previousPitch + controlPitchDelta,
       rotY: safeCamera.state.rotY + controlYawDelta,
       ...(zoom === undefined ? {} : { zoom }),
+      ...(distance === undefined ? {} : { distance }),
     });
     orientation.rotate({
       renderedPitchDelta:
@@ -1386,6 +1390,11 @@ export function createRetainedCubicSkyOrbit({
     rotate: publishCameraDelta,
     minimumZoom: minimumZoom(),
     maximumZoom: maximumZoom(),
+    // The prepared wheel dolly: the eye moves along its axis, with no
+    // surface anchor to hold.
+    dolly: perspective
+      ? Object.freeze({ stepPerDelta: cameraPlan.dolly.wheelStepPerDelta })
+      : null,
     onStart() {
       interactionStarts += 1;
       onInteractionStart();

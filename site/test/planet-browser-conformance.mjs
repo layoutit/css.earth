@@ -504,14 +504,21 @@ async function proveDesktop(browser, planet, profile) {
       pitch: bounds.defaultPitch,
       zoom: bounds.defaultZoom,
     });
+    const dolly = await wheelDolly(page, planet.id);
     await beginZoomPublicationProbe(page);
     await wheel(page, profile.inputSelector, -240);
     const zoomPublication = await finishZoomPublicationProbe(page);
     const zoomed = await profile.camera(page);
     assert.ok(zoomed.zoom > bounds.defaultZoom,
       `${planet.id}: wheel toward the user must zoom in`);
-    assert.ok(Object.values(zoomPublication).every((count) => count > 0),
-      `${planet.id}: off-centre wheel zoom must preserve its surface anchor`);
+    if (dolly) {
+      assert.ok(["skyCube", "skyOrientation"].every((key) =>
+        (zoomPublication[key] ?? 0) === 0),
+      `${planet.id}: a wheel dolly must not turn the sky at infinity`);
+    } else {
+      assert.ok(Object.values(zoomPublication).every((count) => count > 0),
+        `${planet.id}: off-centre wheel zoom must preserve its surface anchor`);
+    }
 
     await profile.setCamera(page, {
       pitch: bounds.defaultPitch,
@@ -1093,19 +1100,31 @@ async function proveInteractionInterruptions(page, planet, profile) {
     zoom: bounds.defaultZoom,
   });
   const anchorCoordinates = await surfaceFlyCoordinates(page);
+  const dolly = await wheelDolly(page, planet.id);
   const beforeAnchorWheel = await cameraPose(page, planet.id);
+  const distanceBefore = dolly ? await cameraDistance(page, planet.id) : null;
   await page.mouse.move(anchorCoordinates.surface.x, anchorCoordinates.surface.y);
   await page.mouse.wheel(0, -40);
   await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 80);
   const afterAnchorWheel = await cameraPose(page, planet.id);
-  const wheelZoomRatio = afterAnchorWheel.zoom / beforeAnchorWheel.zoom;
-  // Camera publication rounds zoom to four decimal places on each frame.
-  assert.ok(Math.abs(wheelZoomRatio - Math.exp(
-    PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond *
-      PREPARED_WHEEL_ZOOM.intervalMilliseconds)) < 0.002,
-  `${planet.id}: shared wheel response drifted (ratio ${wheelZoomRatio})`);
-  assert.notEqual(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
-    `${planet.id}: off-centre wheel zoom must apply anchor rotation`);
+  if (dolly) {
+    // A perspective dolly: the prepared step per wheel delta moves the eye
+    // along its axis, and there is no surface anchor to hold.
+    const distanceRatio = (await cameraDistance(page, planet.id)) / distanceBefore;
+    assert.ok(Math.abs(distanceRatio - Math.exp(-40 * dolly.wheelStepPerDelta)) < 1e-6,
+      `${planet.id}: prepared wheel dolly step drifted (ratio ${distanceRatio})`);
+    assert.equal(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
+      `${planet.id}: a wheel dolly must not turn the scene`);
+  } else {
+    const wheelZoomRatio = afterAnchorWheel.zoom / beforeAnchorWheel.zoom;
+    // Camera publication rounds zoom to four decimal places on each frame.
+    assert.ok(Math.abs(wheelZoomRatio - Math.exp(
+      PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond *
+        PREPARED_WHEEL_ZOOM.intervalMilliseconds)) < 0.002,
+    `${planet.id}: shared wheel response drifted (ratio ${wheelZoomRatio})`);
+    assert.notEqual(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
+      `${planet.id}: off-centre wheel zoom must apply anchor rotation`);
+  }
 
   await profile.setCamera(page, {
     pitch: bounds.defaultPitch,
@@ -1363,6 +1382,22 @@ function showInteractionPhase(page, label) {
 function interactionStats(page, objectId) {
   return page.evaluate((id) =>
     globalThis[`__${id}`].camera.stats().dragInertia, objectId);
+}
+
+// The object's prepared wheel dolly when its camera is the shared
+// perspective projection; null for the scale camera.
+function wheelDolly(page, objectId) {
+  return page.evaluate((id) => {
+    const stats = globalThis[`__${id}`].camera.stats();
+    return stats.projection?.model === "css-perspective-shared-with-sky"
+      ? stats.dolly
+      : null;
+  }, objectId);
+}
+
+function cameraDistance(page, objectId) {
+  return page.evaluate((id) =>
+    globalThis[`__${id}`].camera.state().distance, objectId);
 }
 
 function cameraPose(page, objectId) {
