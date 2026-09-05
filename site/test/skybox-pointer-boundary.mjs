@@ -26,19 +26,19 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
       const before = await cameraPose(page, planet.id);
       await page.mouse.move(sky.x, sky.y);
       await page.mouse.down();
-      assert.equal((await motionStats(page, planet.id)).pendingPointer, true,
-        `${planet.id}: sky press must own the next drag`);
+      assert.equal((await motionStats(page, planet.id)).pendingPointer, false,
+        `${planet.id}: disabled sky press must not own a drag`);
       assert.deepEqual(await cameraPose(page, planet.id), before,
         `${planet.id}: a stationary sky press must not rotate`);
       await page.mouse.move(sky.x - 40, sky.y + 20, { steps: 4 });
       const skyDragged = await cameraPose(page, planet.id);
-      assert.notDeepEqual(skyDragged.pose, before.pose,
-        `${planet.id}: dragging empty sky must rotate`);
+      assert.deepEqual(skyDragged, before,
+        `${planet.id}: dragging empty sky must not move the camera`);
       await page.mouse.move(body.x, body.y, { steps: 4 });
       const crossed = await cameraPose(page, planet.id);
-      assert.notDeepEqual(crossed.pose, skyDragged.pose,
-        `${planet.id}: a sky drag must continue onto the planet`);
-      assert.equal((await motionStats(page, planet.id)).activeMode, "drag");
+      assert.deepEqual(crossed, skyDragged,
+        `${planet.id}: entering the planet from sky must not acquire a drag`);
+      assert.equal((await motionStats(page, planet.id)).activeMode, "idle");
       await page.waitForTimeout(150);
       await page.mouse.up();
       assert.deepEqual(await cameraPose(page, planet.id), crossed,

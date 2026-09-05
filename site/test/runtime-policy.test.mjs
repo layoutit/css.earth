@@ -8,6 +8,9 @@ import {
   DESKTOP_VIEWPORT_MIN,
   MOBILE_VIEWPORT_MAX,
   MOBILE_VIEWPORT_QUERY,
+  SKYBOX_DRAG_ENABLED,
+  WHEEL_ZOOM_SPEED_MULTIPLIER,
+  WHEEL_ZOOM_USE_SCROLL_DISTANCE,
 } from "../runtime-policy.mjs";
 
 test("automatic playback has one complete readiness, intent and environment policy", () => {
@@ -38,6 +41,15 @@ test("keeps one shared orientation-aware responsive shell boundary", () => {
 
 test("uses one canonical high-density image bank for every mount", () => {
   assert.equal(CANONICAL_PREPARED_IMAGE_DENSITY, 2);
+});
+
+test("skybox drag remains disabled by the shared input policy", () => {
+  assert.equal(SKYBOX_DRAG_ENABLED, false);
+});
+
+test("wheel zoom uses one shared four-times speed preference", () => {
+  assert.equal(WHEEL_ZOOM_SPEED_MULTIPLIER, 4);
+  assert.equal(WHEEL_ZOOM_USE_SCROLL_DISTANCE, true);
 });
 
 test("updates wheel and touch policy without replacing controls", () => {

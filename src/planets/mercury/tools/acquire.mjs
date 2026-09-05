@@ -15,15 +15,36 @@ import {
 
 const refresh = process.argv.includes("--refresh");
 const refreshStarfieldPhoto = process.argv.includes("--refresh-starfield-photo");
+const refreshTopographyLegend = process.argv.includes("--refresh-topography-legend");
 const verifyOnly = process.argv.includes("--verify-only");
-if ([refresh, refreshStarfieldPhoto, verifyOnly].filter(Boolean).length > 1) {
+if ([
+  refresh,
+  refreshStarfieldPhoto,
+  refreshTopographyLegend,
+  verifyOnly,
+].filter(Boolean).length > 1) {
   throw new TypeError(
     "Mercury acquisition accepts one refresh or verification mode at a time.",
   );
 }
 if (refresh) await refreshSources();
 if (refreshStarfieldPhoto) await refreshPhotographicStarfield();
+if (refreshTopographyLegend) await refreshMercuryTopographyLegend();
 console.log(JSON.stringify(await verifyMercurySourceManifest(), null, 2));
+
+async function refreshMercuryTopographyLegend() {
+  const manifest = mercurySourceManifest();
+  const entries = new Map(manifest.inputs.map((entry) => [entry.id, entry]));
+  const entry = requiredEntry(entries, "usgs-messenger-topography-legend");
+  const bytes = Buffer.from(await checkedFetch(entry.origin));
+  await publishSourceBytes({
+    destination: resolve(import.meta.dirname, "../source", entry.path),
+    bytes,
+    entry,
+    planetName: "Mercury",
+  });
+  console.log("Mercury USGS topography legend source refreshed.");
+}
 
 async function refreshPhotographicStarfield() {
   const manifest = mercurySourceManifest();

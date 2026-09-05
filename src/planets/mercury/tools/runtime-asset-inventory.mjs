@@ -25,5 +25,6 @@ export const MERCURY_RUNTIME_ASSET_URLS = Object.freeze([
   "mercury-lens-normal.webp",
   "mercury-lens-enhanced.webp",
   "mercury-lens-topography.webp",
+  "mercury-lens-topography-legend.webp",
   "mercury-lens-interior.webp",
 ].map(scene));
