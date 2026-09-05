@@ -374,7 +374,7 @@ export async function captureCssEarthBrowser({
         await page.evaluate(async (camera) => {
           await window.__venus.lenses.select(camera.lens);
           window.__venus.camera.setState(camera);
-          window.__venus.pause();
+          (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
           for (const animation of document.getAnimations()) {
             animation.pause();
             animation.currentTime = 0;

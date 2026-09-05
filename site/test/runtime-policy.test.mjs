@@ -3,11 +3,29 @@ import test from "node:test";
 
 import {
   bindResponsiveOrbitPolicy,
+  automaticPlaybackPolicy,
   CANONICAL_PREPARED_IMAGE_DENSITY,
   DESKTOP_VIEWPORT_MIN,
   MOBILE_VIEWPORT_MAX,
   MOBILE_VIEWPORT_QUERY,
 } from "../runtime-policy.mjs";
+
+test("automatic playback has one complete readiness, intent and environment policy", () => {
+  for (const sceneState of ["loading", "ready", "error", "destroyed"]) {
+    for (const motionRequested of [false, true]) {
+      for (const documentHidden of [false, true]) {
+        for (const reducedMotion of [false, true]) {
+          const reason = sceneState !== "ready" ? "unavailable"
+            : !motionRequested ? "motion-off" : documentHidden ? "hidden"
+              : reducedMotion ? "reduced-motion" : "allowed";
+          assert.deepEqual(automaticPlaybackPolicy({
+            sceneState, motionRequested, documentHidden, reducedMotion,
+          }), { allowed: reason === "allowed", reason });
+        }
+      }
+    }
+  }
+});
 
 test("keeps one shared orientation-aware responsive shell boundary", () => {
   assert.equal(MOBILE_VIEWPORT_MAX, 820);
@@ -54,6 +72,29 @@ test("updates wheel and touch policy without replacing controls", () => {
   mediaQuery.setMatches(true);
   assert.equal(updates.length, 3);
   assert.ok(removed.length >= 2);
+});
+
+test("initial responsive failure removes its subscription and preserves startup rejection", () => {
+  const mediaQuery = new FakeMediaQuery(false), failure = new Error("initial update");
+  assert.throws(() => bindResponsiveOrbitPolicy({ mediaQuery,
+    inputSurface: { style: { removeProperty() {} } },
+    controls: { update() { throw failure; } }, onError: assert.fail,
+  }), (error) => error === failure);
+  assert.equal(mediaQuery.listenerCount, 0);
+});
+
+test("live responsive failure retires the subscription before reporting fatal", () => {
+  const mediaQuery = new FakeMediaQuery(false), errors = [];
+  let fail = false;
+  const policy = bindResponsiveOrbitPolicy({ mediaQuery,
+    inputSurface: { style: { removeProperty() {} } },
+    controls: { update() { if (fail) throw new Error("live update"); } },
+    onError(error) { assert.equal(mediaQuery.listenerCount, 0); errors.push(error); },
+  });
+  fail = true;
+  mediaQuery.setMatches(true); mediaQuery.setMatches(false);
+  assert.equal(errors.length, 1);
+  policy.destroy();
 });
 
 class FakeMediaQuery extends EventTarget {

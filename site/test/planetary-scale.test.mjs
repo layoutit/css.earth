@@ -21,7 +21,7 @@ test("derives the accessible logarithmic scale from catalog distances", () => {
   ]);
   const stops = positionPlanetsByDistance(orbitingPlanets);
   assert.equal(PLANETARY_SCALE_LABEL,
-    "Planets by mean distance from the Sun, logarithmic scale");
+    "Planets ordered by mean distance from the Sun");
   assert.equal(stops[0].scalePositionPercent, 6);
   assert.equal(stops.at(-1).scalePositionPercent, 100);
   assert.deepEqual(stops.map(({ id }) => id), orbitingPlanets.map(({ id }) => id));

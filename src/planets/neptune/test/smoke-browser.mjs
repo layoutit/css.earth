@@ -130,7 +130,7 @@ console.log(JSON.stringify({ ok: true, route: "/neptune/", reports }, null, 2));
 
 async function assertRingCompleteness(page, density) {
   const geometry = await page.evaluate(() => {
-    window.__neptune.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     const hidden = [
       ...document.querySelectorAll(".planet-sidebar, .planet-topbar"),
     ];
@@ -230,8 +230,11 @@ async function proveInteraction(page, retainedCount) {
     getComputedStyle(node).visibility), "hidden");
   await rings.evaluate((element) => element.click());
 
-  const speed = page.locator('.planet-settings button[name="speed"]');
-  await speed.evaluate((element) => element.click());
+  const speed = page.locator('.planet-settings input[name="speed"][type="range"]');
+  await speed.evaluate((element) => {
+    element.value = "2";
+    element.dispatchEvent(new Event("input", { bubbles: true }));
+  });
   assert.equal(await page.evaluate(() =>
     window.__neptune.options.state().speed), 2);
 

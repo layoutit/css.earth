@@ -8,6 +8,77 @@ const wait = (milliseconds) => new Promise((resolve) => {
   setTimeout(resolve, milliseconds);
 });
 
+test("Earth row disposal attempts every slot before reporting release failure", async () => {
+  const previous = globalThis.Image;
+  const images = [];
+  class Image {
+    naturalWidth = 1;
+    naturalHeight = 1;
+    constructor() { this.index = images.length; this.releases = 0; images.push(this); }
+    decode() { return Promise.resolve(); }
+    removeAttribute(name) {
+      if (name !== "src") return;
+      this.releases += 1;
+      if (this.index === 0) throw new Error("release failed");
+      this.src = "";
+    }
+  }
+  globalThis.Image = Image;
+  const cache = createEarthRowShardCache({
+    preparedRows: [0, 1, 2].map((i) => ({ assets: { two: `/row-${i}` } })),
+    frames: [0, 1, 2].map((rowIndex) => ({ rowIndex })),
+    transport: { model: "row-shard-cache", defaultRow: 0, initialWarmRows: [0, 1, 2],
+      maximumRetainedRowCount: 3, initialDecodedWorkingSetBytes: {}, maximumDecodedWorkingSetBytes: {} },
+  });
+  try {
+    await cache.prepareInitial();
+    assert.throws(cache.destroy, AggregateError);
+    assert.ok(images.every((image) => image.releases === 1));
+    assert.ok(images.slice(1).every((image) => image.src === ""));
+    assert.equal(cache.stats().retainedImageCount, 0);
+    assert.equal(cache.stats().imageAllocations, 0);
+    assert.doesNotThrow(cache.destroy);
+  } finally { globalThis.Image = previous; }
+});
+
+test("Earth stale warm failure does not suppress a newer camera row request", async () => {
+  const previous = globalThis.Image;
+  const previousError = console.error;
+  const images = [];
+  class Image {
+    naturalWidth = 1;
+    naturalHeight = 1;
+    constructor() { images.push(this); }
+    decode() { return new Promise((resolve, reject) => { this.resolve = resolve; this.reject = reject; }); }
+    removeAttribute(name) { if (name === "src") this.src = ""; }
+  }
+  globalThis.Image = Image;
+  console.error = () => {};
+  const cache = createEarthRowShardCache({
+    preparedRows: [0, 1, 2, 3].map((i) => ({ assets: { two: `/row-${i}` } })),
+    frames: [0, 1, 2, 3].map((rowIndex) => ({ rowIndex })),
+    transport: { model: "row-shard-cache", defaultRow: 0, initialWarmRows: [0],
+      maximumRetainedRowCount: 2, initialDecodedWorkingSetBytes: {}, maximumDecodedWorkingSetBytes: {} },
+  });
+  try {
+    const initial = cache.prepareInitial();
+    images[0].resolve();
+    await initial;
+    cache.presentation(1);
+    await wait(150);
+    assert.equal(images[1].src, "/row-1");
+    cache.presentation(3);
+    images[1].reject(new Error("old row failed"));
+    await wait(150);
+    assert.equal(images[1].src, "/row-3", "new target must still start without another camera event");
+    assert.equal(cache.stats().pendingCount, 1);
+    images[1].resolve();
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.ok(cache.presentation(3));
+    assert.equal(cache.stats().appliedRow, 3);
+  } finally { cache.destroy(); globalThis.Image = previous; console.error = previousError; }
+});
+
 test("coalesces transient row requests and replaces an evicted image", async () => {
   const NativeImage = globalThis.Image;
   const images = [];
@@ -15,6 +86,8 @@ test("coalesces transient row requests and replaces an evicted image", async () 
     constructor() {
       this.decoding = "auto";
       this.src = "";
+      this.naturalWidth = 1;
+      this.naturalHeight = 1;
       images.push(this);
     }
 

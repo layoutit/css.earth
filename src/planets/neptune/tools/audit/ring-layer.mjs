@@ -26,7 +26,7 @@ try {
   await page.goto(new URL("/neptune/", baseUrl).href, { waitUntil: "networkidle" });
   await page.waitForFunction(() => window.__neptune?.ready === true);
   const geometry = await page.evaluate(() => {
-    window.__neptune.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     const material = document.querySelector(".neptune-exterior-material")
       .getBoundingClientRect();
     for (const selector of [

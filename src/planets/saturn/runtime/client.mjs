@@ -20,6 +20,11 @@ import { registerBodyDependentLayers } from
 import { mountRetainedDirectionalSun } from
   "../../../platform/directional-sun-runtime.mjs";
 
+import { createSceneLifetime, waitForSceneDocument, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
+import { createLatestSelection } from "../../../platform/latest-selection.mjs";
+import { bindSpeedControl } from "../../../platform/planet-feature-controls.mjs";
+import { createPreparedImageStore, decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
+
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
 const PLANET_SURFACE_TEXTURE_URL = "/scenes/saturn/saturn-surface-body.jpg";
@@ -60,14 +65,14 @@ const SATURN_CUBIC_CAMERA = Object.freeze({
   }),
 });
 
-export function mountSaturnClient(stage) {
+export function mountSaturnClient(stage, { onError } = {}) {
+  if (typeof onError !== "function") throw new TypeError("Saturn requires a fatal-error handler.");
   const inputSurface = document.querySelector(".saturn-input-surface");
   if (!(inputSurface instanceof HTMLElement)) {
     throw new Error("Saturn input surface is missing.");
   }
-  let destroyed = false;
-  const reducedMotionQuery = matchMedia("(prefers-reduced-motion: reduce)");
-  let shouldPlay = !reducedMotionQuery.matches;
+  const lifetime = createSceneLifetime();
+  let shouldPlay = false;
   let mounted = null;
   let ready = null;
   let orbitCamera = null;
@@ -77,51 +82,73 @@ export function mountSaturnClient(stage) {
   let playbackClock = null;
   let orbitMaterialCache = null;
   let interiorAtmosphereCache = null;
-  let resourcesReleased = false;
+  let diagnostic = null;
+  lifetime.onDispose(() => {
+    mounted = null;
+    orbitCamera = null;
+    featureControls = null;
+    lensControls = null;
+    playbackClock = null;
+    orbitMaterialCache = null;
+    interiorAtmosphereCache = null;
+    sceneAnimations = Object.freeze([]);
+  });
+  const warmImages = new Set();
+  lifetime.onDispose(() => {
+    const images = [...warmImages];
+    warmImages.clear();
+    const errors = [];
+    for (const image of images) {
+      try { releasePreparedImage(image); } catch (error) { errors.push(error); }
+    }
+    if (errors.length) throw new AggregateError(errors, "Saturn startup image cleanup failed.");
+  });
+  lifetime.onDispose(() => {
+    if (DEVELOPMENT_DIAGNOSTICS && window.__saturn === diagnostic) delete window.__saturn;
+  });
   const controller = Object.freeze({
     get ready() {
       return ready;
     },
     pause() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = false;
-      document.documentElement.dataset.playing = "false";
       playbackClock?.pause();
     },
     resume() {
-      if (destroyed) return;
-      if (reducedMotionQuery.matches) return;
+      if (lifetime.disposed) return;
       shouldPlay = true;
       if (!mounted) return;
-      document.documentElement.dataset.playing = "true";
       playbackClock?.resume();
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
       shouldPlay = false;
-      releaseResources();
-      delete document.documentElement.dataset.playing;
-      if (DEVELOPMENT_DIAGNOSTICS && window.__saturn) delete window.__saturn;
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Saturn cleanup failed.");
     },
   });
-  reducedMotionQuery.addEventListener("change", onReducedMotionChange);
-  ready = start();
+  ready = lifetime.wait(start()).then(({ value }) => value).catch((error) => {
+    const cleanupErrors = lifetime.destroy();
+    if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], error.message, { cause: error });
+    throw error;
+  });
   return controller;
 
   async function start() {
     try {
-      await waitForSaturnDocumentReady();
-      if (destroyed) return;
-      featureControls = createSaturnFeatureControls({ stage });
-      lensControls = createSaturnLensControls({ stage });
+      await waitForSceneDocument(lifetime);
+      if (lifetime.disposed) return;
+      featureControls = createSaturnFeatureControls({ stage, lifetime, onError });
+      lensControls = createSaturnLensControls({ stage, lifetime, onError, featureControls });
       orbitMaterialCache = createPreparedOrbitMaterialCache(
         PREPARED_SATURN_SCENE.preparedLighting.orbitAtlas,
       );
+      lifetime.onDispose(orbitMaterialCache.destroy);
       interiorAtmosphereCache = createPreparedVariantAtlasCache(
         PREPARED_SATURN_SCENE.interior.atmosphere.runtimeShards,
         "interior atmosphere",
       );
+      lifetime.onDispose(interiorAtmosphereCache.destroy);
       await Promise.all([
         orbitMaterialCache.prepareInitial(),
         Promise.all([
@@ -152,14 +179,19 @@ export function mountSaturnClient(stage) {
           )),
         ]),
       ]);
-      if (destroyed) return;
-      mounted = mountPreparedScene(stage, PREPARED_SATURN_SCENE);
+      if (lifetime.disposed) return;
+      mounted = mountPreparedScene(stage, PREPARED_SATURN_SCENE, lifetime);
+      warmImages.clear();
       sceneAnimations = Object.freeze(stage.getAnimations({ subtree: true }));
+      for (const animation of sceneAnimations) lifetime.onDispose(() => animation.cancel());
       playbackClock = createPreparedPlaybackClock(sceneAnimations);
-      await waitForPreparedScenePaint();
-      if (destroyed) return;
+      lifetime.onDispose(playbackClock.destroy);
+      await waitForScenePaint(lifetime);
+      if (lifetime.disposed) return;
       orbitCamera = createSaturnCubicOrbitControls({
         stage,
+        lifetime,
+        onError,
         inputSurface,
         mounted,
         cameraState: PREPARED_SATURN_SCENE.camera.state,
@@ -174,23 +206,19 @@ export function mountSaturnClient(stage) {
         systemTiltDegrees:
           -PREPARED_SATURN_SCENE.preparedRingSource.shadowModel.systemTiltDegrees,
       });
+      lifetime.onDispose(orbitCamera.destroy);
       await lensControls.bindRuntime({
-        onLensChange: orbitCamera.setLens,
         viewBank: mounted.viewBank,
         camera: orbitCamera,
-        releaseInteriorMaterial: orbitCamera.releaseInterior,
       });
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       featureControls.bindRuntime({
         playback: playbackClock,
-        onRingShadowModeChange: orbitCamera.setRingShadowVisibility,
       });
-      document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
       if (shouldPlay) playbackClock.resume();
       if (DEVELOPMENT_DIAGNOSTICS) {
-        window.__saturn = Object.freeze({
+        diagnostic = Object.freeze({
           ready: true,
-          pause: controller.pause,
           renderStats: Object.freeze({
             textureStats: Object.freeze({
               selectedPreparedDensity: CANONICAL_PREPARED_IMAGE_DENSITY,
@@ -232,40 +260,20 @@ export function mountSaturnClient(stage) {
           stableNodes: mounted.stableNodes,
           assertStableDomIdentity: mounted.assertStableDomIdentity,
         });
+        window.__saturn = diagnostic;
       }
     } catch (error) {
-      if (destroyed) return;
-      releaseResources();
+      if (lifetime.disposed) return;
       throw error;
     }
   }
 
-  function releaseResources() {
-    if (resourcesReleased) return;
-    resourcesReleased = true;
-    reducedMotionQuery.removeEventListener("change", onReducedMotionChange);
-    featureControls?.destroy();
-    featureControls = null;
-    lensControls?.destroy();
-    lensControls = null;
-    orbitCamera?.destroy();
-    orbitCamera = null;
-    mounted?.skySun.destroy();
-    mounted?.cubicSky.destroy();
-    mounted?.camera.remove();
-    mounted = null;
-    playbackClock?.destroy();
-    playbackClock = null;
-    sceneAnimations = Object.freeze([]);
-    orbitMaterialCache?.destroy();
-    orbitMaterialCache = null;
-    interiorAtmosphereCache?.destroy();
-    interiorAtmosphereCache = null;
-  }
-
-  function onReducedMotionChange({ matches }) {
-    if (matches) controller.pause();
-    else controller.resume();
+  function decodeImage(url, url2x = "") {
+    if (lifetime.disposed) return Promise.resolve(null);
+    const image = new Image();
+    image.decoding = "sync";
+    warmImages.add(image);
+    return decodePreparedImage(image, url2x || url);
   }
 }
 
@@ -343,369 +351,268 @@ function createPreparedPlaybackClock(animations) {
   }
 }
 
-function createSaturnLensControls({ stage }) {
+export function createSaturnLensControls({ stage, lifetime, onError, featureControls }) {
   const root = document.querySelector(".planet-lenses");
-  if (!(root instanceof HTMLElement)) {
-    throw new Error("Saturn lens selector is missing.");
-  }
-  const lenses = new Map(PREPARED_SATURN_LENSES.controls.map((lens) =>
-    [lens.id, lens]));
-  const buttons = new Map([...root.querySelectorAll('button[name="lens"]')].map(
-    (button) => [button.value, button],
-  ));
-  if (buttons.size !== lenses.size) {
+  if (!(root instanceof HTMLElement)) throw new Error("Saturn lens selector is missing.");
+  const controls = PREPARED_SATURN_LENSES.controls;
+  const lenses = new Map(controls.map((lens) => [lens.id, lens]));
+  const buttonList = [...root.querySelectorAll('button[name="lens"]')];
+  const buttons = new Map(buttonList.map((button) => [button.value, button]));
+  if (lenses.size !== controls.length || buttons.size !== buttonList.length ||
+      buttons.size !== lenses.size || [...buttons.keys()].some((id) => !lenses.has(id))) {
     throw new Error("Saturn lens selector does not match prepared lenses.");
   }
   const events = new AbortController();
   const decoded = new Map();
-  let activeLens = PREPARED_SATURN_LENSES.defaultLens;
-  let interiorActive = false;
-  let onLensChange = null;
+  let committed = Object.freeze({
+    lensId: PREPARED_SATURN_LENSES.defaultLens, interior: false, rings: true, shadows: false,
+  });
+  let desired = committed;
   let viewBank = null;
   let camera = null;
-  let releaseInteriorMaterial = null;
-  let selectionRequest = 0;
   let bound = false;
-  let destroyed = false;
+  const selection = createLatestSelection({
+    lifetime,
+    onBusyChange(busy) {
+      root.classList.toggle("is-loading", busy);
+      root.setAttribute("aria-busy", String(busy));
+      featureControls.setBusy(busy);
+    },
+    onFatalError: onError,
+  });
+  lifetime.onDispose(() => {
+    bound = false;
+    events.abort();
+    root.classList.remove("is-loading");
+    root.removeAttribute("aria-busy");
+    for (const button of buttons.values()) button.disabled = true;
+    camera = null;
+    viewBank = null;
+  });
+  lifetime.onDispose(() => releaseUnusedImages(true));
   root.classList.add("is-loading");
   for (const button of buttons.values()) button.disabled = true;
   for (const [id, button] of buttons) {
-    button.addEventListener("click", () => void select(id).catch((error) => {
-      console.error(error);
-    }), {
-      signal: events.signal,
-    });
+    button.addEventListener("click",
+      () => void select(id).catch((error) => { if (!lifetime.disposed) console.error(error); }),
+      { signal: events.signal });
   }
+  featureControls.bindPresentation((patch) => {
+    desired = Object.freeze({ ...desired, ...patch });
+    featureControls.project(desired);
+    return bound ? submit(desired) : Promise.resolve(false);
+  });
   publishSelection();
   return Object.freeze({
     state() {
-      return Object.freeze({
-        id: activeLens,
-        interior: interiorActive,
-        ready: bound && !destroyed,
-      });
+      return Object.freeze({ id: committed.lensId, interior: committed.interior, ready: bound && !lifetime.disposed });
     },
     select,
     async bindRuntime(runtime) {
-      if (destroyed) return false;
-      if (typeof runtime.onLensChange !== "function" ||
-          typeof runtime.releaseInteriorMaterial !== "function" ||
-          typeof runtime.camera?.refresh !== "function" ||
+      if (lifetime.disposed) return false;
+      if (typeof runtime.camera?.preparePresentation !== "function" ||
+          typeof runtime.camera?.commitPresentation !== "function" ||
+          typeof runtime.camera?.releaseUnused !== "function" ||
           typeof runtime.viewBank?.mountInterior !== "function") {
         throw new TypeError("Saturn lens runtime is incomplete.");
       }
-      onLensChange = runtime.onLensChange;
-      viewBank = runtime.viewBank;
       camera = runtime.camera;
-      releaseInteriorMaterial = runtime.releaseInteriorMaterial;
-      await onLensChange(
-        preparedMaterialLensId(lenses.get(activeLens)),
-        { interior: false },
-      );
-      if (destroyed) return false;
+      viewBank = runtime.viewBank;
+      await submit(desired);
+      if (lifetime.disposed) return false;
       bound = true;
-      root.classList.remove("is-loading");
       for (const button of buttons.values()) button.disabled = false;
       return true;
     },
-    destroy() {
-      if (destroyed) return;
-      destroyed = true;
-      bound = false;
-      selectionRequest += 1;
-      events.abort();
-      root.classList.remove("is-loading");
-      for (const button of buttons.values()) button.disabled = true;
-      for (const [id, entry] of decoded) releaseLensDecode(id, entry);
-      decoded.clear();
-      onLensChange = null;
-      viewBank = null;
-      camera = null;
-      releaseInteriorMaterial = null;
-      delete stage.dataset.lens;
-      delete stage.dataset.view;
-    },
   });
 
-  async function select(id) {
+  function select(id) {
     const lens = lenses.get(id);
     if (!lens) throw new RangeError(`Unknown Saturn lens: ${id}.`);
-    if (!bound || destroyed) return false;
-    const request = ++selectionRequest;
-    const crossSectionControl = lens.view === "interior";
-    const nextInterior = crossSectionControl
-      ? !interiorActive
-      : interiorActive;
-    const nextMaterialLens = crossSectionControl
-      ? lenses.get(activeLens)
-      : lens;
-    root.classList.add("is-loading");
-    try {
-      await prepareLens(lens);
-      if (destroyed || request !== selectionRequest) return false;
-      await onLensChange(
-        preparedMaterialLensId(nextMaterialLens),
-        { interior: nextInterior },
-      );
-      if (destroyed || request !== selectionRequest) return false;
-      if (!crossSectionControl) activeLens = id;
-      interiorActive = nextInterior;
-      if (interiorActive) {
-        viewBank.mountInterior();
-        stage.dataset.view = "interior";
-        camera?.refresh();
-      } else {
-        delete stage.dataset.view;
-        releaseInteriorMaterial();
-      }
-      if (activeLens === PREPARED_SATURN_LENSES.defaultLens) {
-        delete stage.dataset.lens;
-      } else {
-        stage.dataset.lens = activeLens;
-      }
-      publishSelection();
-      releaseInactiveLensImages();
-      return true;
-    } finally {
-      if (request === selectionRequest) root.classList.remove("is-loading");
-    }
+    if (!bound || lifetime.disposed) return Promise.resolve(false);
+    desired = Object.freeze(lens.view === "interior"
+      ? { ...desired, interior: !desired.interior }
+      : { ...desired, lensId: id });
+    return submit(desired);
+  }
+
+  function submit(snapshot) {
+    return selection.run({
+      prepare: async ({ isCurrent }) => {
+        await Promise.all([
+          prepareLens(lenses.get(snapshot.lensId)),
+          ...(snapshot.interior
+            ? controls.filter((lens) => lens.view === "interior").map(prepareLens)
+            : []),
+        ]);
+        if (!isCurrent()) return;
+        return camera.preparePresentation({
+          ...snapshot, lensId: preparedMaterialLensId(lenses.get(snapshot.lensId)),
+        }, { isCurrent });
+      },
+      commit: (material) => {
+        if (!camera || !viewBank) throw new Error("Saturn presentation runtime was released.");
+        // Validate and publish the prepared material synchronously. The camera
+        // reads the current pose, never a pose captured by the async request.
+        camera.validatePresentation(material);
+        if (snapshot.interior) {
+          viewBank.mountInterior();
+          stage.dataset.view = "interior";
+        } else {
+          delete stage.dataset.view;
+        }
+        featureControls.project(snapshot, { committed: true });
+        camera.commitPresentation(material);
+        if (lifetime.disposed) return;
+        committed = snapshot;
+        const activeLens = committed.lensId;
+        if (activeLens === PREPARED_SATURN_LENSES.defaultLens) delete stage.dataset.lens;
+        else stage.dataset.lens = activeLens;
+        publishSelection();
+        releaseUnusedImages();
+        camera.releaseUnused();
+      },
+      onCurrentFailure() {
+        desired = committed;
+        featureControls.project(committed);
+        releaseUnusedImages();
+        camera?.releaseUnused();
+      },
+      discard() {
+        if (lifetime.disposed) return;
+        releaseUnusedImages();
+        camera?.releaseUnused(desired);
+      },
+    });
   }
 
   function prepareLens(lens) {
-    if (lens.id === PREPARED_SATURN_LENSES.defaultLens) {
-      return Promise.resolve(Object.freeze([]));
-    }
+    if (lifetime.disposed || lens.id === PREPARED_SATURN_LENSES.defaultLens) return Promise.resolve(null);
     let entry = decoded.get(lens.id);
     if (!entry) {
-      entry = {
-        images: null,
-        promise: null,
-        released: false,
-        wanted: true,
-      };
-      const requests = lens.view === "interior"
-        ? preparedInteriorDecodeRequests()
-        : [
-          decodeImage(
-            lens.surfaceUrl,
-            lens.surface2xUrl,
-          ),
-          decodeImage(lens.polesUrl),
-          decodeImage(lens.ringUrl, lens.ring2xUrl),
-          ...(PREPARED_SATURN_VIEWS.assets.outerPoles[lens.id]
-            ? [decodePreparedViewAsset(
-              PREPARED_SATURN_VIEWS.assets.outerPoles[lens.id],
-            )]
-            : []),
-        ];
-      entry.promise = Promise.all(requests).then((images) => {
-        entry.images = images;
-        if (!entry.wanted) releaseLensDecode(lens.id, entry);
-        return images;
-      }, (error) => {
+      const store = createPreparedImageStore({ decoding: "sync" });
+      entry = { store, promise: null };
+      decoded.set(lens.id, entry);
+      const urls = lens.view === "interior" ? preparedInteriorDecodeRequests() : [
+        lens.surface2xUrl || lens.surfaceUrl,
+        lens.polesUrl,
+        lens.ring2xUrl || lens.ringUrl,
+        ...(PREPARED_SATURN_VIEWS.assets.outerPoles[lens.id]
+          ? [preparedViewAssetUrl(PREPARED_SATURN_VIEWS.assets.outerPoles[lens.id])] : []),
+      ];
+      // The store owns every allocation before Promise.all can reject.
+      entry.promise = Promise.all(urls.map((url) => store.load(url))).catch((error) => {
         if (decoded.get(lens.id) === entry) decoded.delete(lens.id);
+        try { store.destroy(); } catch (cleanupError) {
+          throw new AggregateError([error, cleanupError], error.message, { cause: error });
+        }
         throw error;
       });
-      decoded.set(lens.id, entry);
     }
-    entry.wanted = true;
     return entry.promise;
   }
 
   function publishSelection() {
     for (const [id, button] of buttons) {
-      const lens = lenses.get(id);
-      const selected = lens.view === "interior"
-        ? interiorActive
-        : id === activeLens;
-      button.setAttribute("aria-pressed", String(selected));
+      button.setAttribute("aria-pressed", String(lenses.get(id).view === "interior"
+        ? committed.interior : id === committed.lensId));
     }
   }
 
-  function releaseInactiveLensImages() {
+  function releaseUnusedImages(all = false) {
+    const errors = [];
     for (const [id, entry] of decoded) {
-      if (id === activeLens ||
-          (interiorActive && lenses.get(id)?.view === "interior")) continue;
-      releaseLensDecode(id, entry);
+      if (!all && (id === committed.lensId || id === desired.lensId ||
+          ((committed.interior || desired.interior) && lenses.get(id)?.view === "interior"))) continue;
+      decoded.delete(id);
+      try { entry.store.destroy(); } catch (error) { errors.push(error); }
     }
-  }
-
-  function releaseLensDecode(id, entry) {
-    entry.wanted = false;
-    if (!entry.images || entry.released) return;
-    entry.released = true;
-    entry.images.forEach(releaseDecodedImage);
-    if (decoded.get(id) === entry) decoded.delete(id);
-    entry.images = null;
-    entry.promise = null;
+    if (errors.length) throw new AggregateError(errors, "Saturn lens group cleanup failed.");
   }
 }
 
 function preparedMaterialLensId(lens) {
-  if (typeof lens?.materialLens !== "string") {
-    throw new Error("Saturn prepared material lens identity is missing.");
-  }
+  if (typeof lens?.materialLens !== "string") throw new Error("Saturn prepared material lens identity is missing.");
   return lens.materialLens;
 }
 
 function preparedInteriorDecodeRequests() {
   const plan = PREPARED_SATURN_VIEWS.interiorLenses.normal;
-  if (!plan) {
-    throw new Error("Saturn normal cross-section plan is missing.");
-  }
+  if (!plan) throw new Error("Saturn normal cross-section plan is missing.");
   return [
-    ...Object.values(plan.assets).map(decodePreparedViewAsset),
+    ...Object.values(plan.assets).map(preparedViewAssetUrl),
     ...(PREPARED_SATURN_VIEWS.assets.outerPoles.normal
-      ? [decodePreparedViewAsset(
-        PREPARED_SATURN_VIEWS.assets.outerPoles.normal,
-      )]
-      : []),
+      ? [preparedViewAssetUrl(PREPARED_SATURN_VIEWS.assets.outerPoles.normal)] : []),
   ];
 }
 
-function decodePreparedViewAsset(asset) {
-  return decodeImage(asset.url, asset.url2x);
-}
+function preparedViewAssetUrl(asset) { return asset.url2x || asset.url; }
 
-function createSaturnFeatureControls({ stage }) {
-  const settings = {
-    rings: true,
-    shadows: false,
-    speed: 1,
-  };
+export function createSaturnFeatureControls({ stage, lifetime, onError }) {
   const root = document.querySelector(".planet-settings");
-  if (!(root instanceof HTMLElement)) {
-    throw new Error("Saturn options block is missing.");
-  }
-  const featureBindings = Object.freeze([
-    Object.freeze({
-      name: "rings",
-      hiddenClass: "saturn-hide-rings",
-    }),
-    Object.freeze({
-      name: "shadows",
-      hiddenClass: "saturn-hide-shadows",
-    }),
-  ]);
+  if (!(root instanceof HTMLElement)) throw new Error("Saturn options block is missing.");
+  const inputs = new Map(["rings", "shadows"].map((name) => {
+    const input = root.querySelector(`input[name="${name}"][type="checkbox"]`);
+    if (!(input instanceof HTMLInputElement)) throw new Error(`Saturn ${name} control is missing.`);
+    return [name, input];
+  }));
+  const input = root.querySelector('input[name="speed"][type="range"]');
+  if (!(input instanceof HTMLInputElement)) throw new Error("Saturn speed control is missing.");
   const events = new AbortController();
+  let settings = Object.freeze({ rings: true, shadows: false });
   let playback = null;
-  let onRingShadowModeChange = null;
-  for (const { name, hiddenClass } of featureBindings) {
-    const input = root.querySelector(
-      `input[name="${name}"][type="checkbox"]`,
-    );
-    if (!(input instanceof HTMLInputElement)) {
-      throw new Error(`Saturn ${name} control is missing.`);
-    }
-    input.checked = settings[name];
+  let onPresentationChange = null;
+  lifetime.onDispose(() => {
+    events.abort();
+    for (const input of inputs.values()) input.disabled = true;
+    root.classList.remove("is-loading");
+    root.removeAttribute("aria-busy");
+    stage.classList.remove("saturn-hide-rings", "saturn-hide-shadows");
+    playback = null;
+    onPresentationChange = null;
+  });
+  const speed = bindSpeedControl({
+    input, lifetime, onError,
+    onChange(value) { playback?.setSpeed(value); },
+  });
+  for (const [name, input] of inputs) {
+    input.disabled = true;
     input.addEventListener("change", () => {
-      const visible = input.checked;
-      settings[name] = visible;
-      if (hiddenClass) stage.classList.toggle(hiddenClass, !visible);
-      void onRingShadowModeChange?.({
-        rings: settings.rings,
-        shadows: settings.shadows,
-      }).catch((error) => console.error(error));
-    }, { signal: events.signal });
-    if (hiddenClass) stage.classList.toggle(hiddenClass, !settings[name]);
-  }
-  bindOptionCycle({
-    root,
-    events,
-    name: "speed",
-    label: "Speed",
-    states: Object.freeze([
-      Object.freeze({ label: "off", value: 0 }),
-      Object.freeze({ label: "normal", value: 1 }),
-      Object.freeze({ label: "fast", value: 2 }),
-      Object.freeze({ label: "fastest", value: 3 }),
-      Object.freeze({ label: "superfast", value: 4 }),
-    ]),
-    initialValue: settings.speed,
-    onChange(speed) {
-      settings.speed = speed;
-      playback?.setSpeed(speed);
-    },
-  });
-  return Object.freeze({
-    state() {
-      return Object.freeze({
-        rings: settings.rings,
-        shadows: settings.shadows,
-      });
-    },
-    optionsState() {
-      return Object.freeze({
-        speed: settings.speed,
-      });
-    },
-    bindRuntime(runtime) {
-      playback = runtime.playback;
-      onRingShadowModeChange = runtime.onRingShadowModeChange ?? null;
-      playback.setSpeed(settings.speed);
-      void onRingShadowModeChange?.({
-        rings: settings.rings,
-        shadows: settings.shadows,
-      }).catch((error) => console.error(error));
-    },
-    destroy() {
-      for (const binding of featureBindings) {
-        if (binding.hiddenClass) stage.classList.remove(binding.hiddenClass);
+      if (lifetime.disposed || input.disabled) return;
+      try {
+        void onPresentationChange?.({ [name]: input.checked }).catch((error) => {
+          if (!lifetime.disposed) console.error(error);
+        });
+      } catch (error) {
+        if (!lifetime.disposed) onError(error);
       }
-      events.abort();
-      playback = null;
-      onRingShadowModeChange = null;
+    }, { signal: events.signal });
+  }
+  project(settings, { committed: true });
+  return Object.freeze({
+    state: () => settings,
+    optionsState: speed.state,
+    project,
+    setBusy(busy) {
+      root.classList.toggle("is-loading", busy);
+      root.setAttribute("aria-busy", String(busy));
+    },
+    bindPresentation(callback) { onPresentationChange = callback; },
+    bindRuntime({ playback: clock }) {
+      if (lifetime.disposed) return;
+      playback = clock;
+      playback.setSpeed(speed.state().speed);
+      for (const input of inputs.values()) input.disabled = false;
+      speed.setEnabled(true);
     },
   });
-}
 
-function bindOptionCycle({
-  root,
-  events,
-  name,
-  label,
-  states,
-  initialValue,
-  onChange,
-}) {
-  const button = root.querySelector(
-    `button[name="${name}"]`,
-  );
-  if (!(button instanceof HTMLButtonElement)) {
-    throw new Error(`Saturn ${name} control is missing.`);
+  function project(snapshot, { committed = false } = {}) {
+    for (const [name, input] of inputs) input.checked = snapshot[name];
+    if (!committed) return;
+    settings = Object.freeze({ rings: snapshot.rings, shadows: snapshot.shadows });
+    for (const name of inputs.keys()) stage.classList.toggle(`saturn-hide-${name}`, !snapshot[name]);
   }
-  let stateIndex = states.findIndex(({ value }) => value === initialValue);
-  if (stateIndex < 0) {
-    throw new Error(`Saturn ${name} control has an invalid initial value.`);
-  }
-  publish();
-  button.addEventListener("click", () => {
-    stateIndex = (stateIndex + 1) % states.length;
-    const state = states[stateIndex];
-    publish();
-    onChange(state.value);
-  }, { signal: events.signal });
-
-  function publish() {
-    const state = states[stateIndex];
-    button.dataset.state = state.label;
-    button.setAttribute("aria-label", `${label}: ${state.label}`);
-  }
-}
-
-async function decodeImage(url, url2x = "") {
-  const image = new Image();
-  image.decoding = "sync";
-  const selectedUrl = url2x || url;
-  image.src = selectedUrl;
-  try {
-    await image.decode();
-  } catch (error) {
-    throw new Error(`Prepared image decode failed: ${selectedUrl}`, {
-      cause: error,
-    });
-  }
-  return image;
 }
 
 function createPreparedOrbitMaterialCache(atlas) {
@@ -739,7 +646,7 @@ function createPreparedVariantAtlasCache(plan, label) {
   });
 }
 
-function createPreparedRowCache({
+export function createPreparedRowCache({
   label,
   plan,
   variants,
@@ -758,6 +665,7 @@ function createPreparedRowCache({
     residentImages: Object.freeze([]),
     residentReady: false,
     pendingResident: null,
+    pendingImage: null,
     desiredRow: null,
     appliedRow: null,
     defaultReady: false,
@@ -788,6 +696,17 @@ function createPreparedRowCache({
       }
     },
     prepareVariant,
+    isPrepared(variantId) {
+      return !destroyed && states.get(variantId)?.residentReady === true;
+    },
+    releaseUnused(keepVariant = null) {
+      const errors = [];
+      for (const [id, state] of states) {
+        if (state.active || id === keepVariant) continue;
+        try { releaseState(state); } catch (error) { errors.push(error); }
+      }
+      if (errors.length) throw new AggregateError(errors, `Saturn ${label} inactive atlas cleanup failed.`);
+    },
     async preparePresentation(frameIndex, variantId = activeVariant) {
       const variant = requireVariant(variantId);
       const state = states.get(variantId);
@@ -844,13 +763,11 @@ function createPreparedRowCache({
     destroy() {
       if (destroyed) return;
       destroyed = true;
+      const errors = [];
       for (const state of states.values()) {
-        state.active = false;
-        state.appliedRow = null;
-        state.desiredRow = null;
-        releaseResidentImages(state);
-        releaseDefaultImage(state);
+        try { releaseState(state); } catch (error) { errors.push(error); }
       }
+      if (errors.length) throw new AggregateError(errors, `Saturn ${label} atlas cleanup failed.`);
     },
     stats() {
       const activeState = states.get(activeVariant);
@@ -893,6 +810,7 @@ function createPreparedRowCache({
   });
 
   async function prepareVariant(variantId) {
+    if (destroyed) return false;
     const variant = requireVariant(variantId);
     const state = states.get(variantId);
     await warmResidentRows(state, variant);
@@ -935,17 +853,20 @@ function createPreparedRowCache({
   }
 
   function warmResidentRows(state, variant) {
+    if (destroyed) return Promise.resolve(false);
     if (state.residentReady) return Promise.resolve(true);
     if (state.pendingResident) return state.pendingResident;
     const generation = state.generation;
     const preparingAtRequest = preparingStartup;
-    const request = decodeImage(
-      variant.runtimeAtlas.assetUrl,
-      canonicalHighDensity ? variant.runtimeAtlas.asset2xUrl : "",
-    ).then((image) => {
+    const image = new Image();
+    image.decoding = "sync";
+    state.pendingImage = image;
+    const request = decodePreparedImage(image,
+      (canonicalHighDensity && variant.runtimeAtlas.asset2xUrl) || variant.runtimeAtlas.assetUrl,
+    ).then(() => {
       if (state.pendingResident === request) state.pendingResident = null;
+      if (state.pendingImage === image) state.pendingImage = null;
       if (destroyed || state.generation !== generation) {
-        releaseDecodedImage(image);
         return false;
       }
       state.residentImages = Object.freeze([image]);
@@ -958,7 +879,12 @@ function createPreparedRowCache({
       noteDecode();
       return true;
     }, (error) => {
+      if (destroyed || state.generation !== generation) return false;
       if (state.pendingResident === request) state.pendingResident = null;
+      if (state.pendingImage === image) state.pendingImage = null;
+      try { releasePreparedImage(image); } catch (cleanupError) {
+        throw new AggregateError([error, cleanupError], error.message, { cause: error });
+      }
       throw error;
     });
     state.pendingResident = request;
@@ -980,6 +906,9 @@ function createPreparedRowCache({
   }
 
   function releaseState(state) {
+    const images = new Set([state.pendingImage, ...state.residentImages]);
+    images.delete(null);
+    residentReleaseCount += state.residentImages.length;
     state.generation += 1;
     state.active = false;
     state.appliedRow = null;
@@ -987,54 +916,26 @@ function createPreparedRowCache({
     state.defaultReady = false;
     state.pendingDefault = null;
     state.pendingResident = null;
-    releaseResidentImages(state);
-    releaseDefaultImage(state);
-  }
-
-  function releaseResidentImages(state) {
-    if (state.residentImages.length === 0) {
-      state.residentReady = false;
-      return;
-    }
-    residentReleaseCount += state.residentImages.length;
-    for (const image of state.residentImages) releaseDecodedImage(image);
+    state.pendingImage = null;
     state.residentImages = Object.freeze([]);
     state.residentReady = false;
-  }
-
-  function releaseDefaultImage(state) {
-    if (state.defaultImage === null) {
-      state.defaultReady = false;
-      return;
-    }
     state.defaultImage = null;
-    state.defaultReady = false;
+    const errors = [];
+    for (const image of images) {
+      try { releasePreparedImage(image); } catch (error) { errors.push(error); }
+    }
+    if (errors.length) throw new AggregateError(errors, `Saturn ${label} image cleanup failed.`);
   }
 }
 
-async function waitForSaturnDocumentReady() {
-  if (document.readyState !== "loading") return;
-  await new Promise((resolve) => {
-    document.addEventListener("DOMContentLoaded", resolve, { once: true });
-  });
-}
-
-async function waitForPreparedScenePaint() {
-  await new Promise((resolve) => requestAnimationFrame(resolve));
-  await new Promise((resolve) => requestAnimationFrame(resolve));
-}
-
-function releaseDecodedImage(image) {
-  if (!(image instanceof HTMLImageElement)) return;
-  image.removeAttribute("src");
-}
-
-function mountPreparedScene(host, plan) {
+function mountPreparedScene(host, plan, lifetime) {
   if (plan.schema !== "csssaturn-prepared-runtime-scene@1" ||
       plan.interior?.schema !== "csssaturn-prepared-cutaway@1") {
     throw new TypeError("Saturn retained scene plan is incompatible.");
   }
   const camera = document.createElement("div");
+  lifetime.onDispose(() => camera.remove());
+  ownSaturnPresentationCleanup(host, camera, lifetime);
   camera.className = "polycss-camera planet-render-root";
   camera.style.cssText = plan.camera.style;
   const scene = document.createElement("div");
@@ -1177,6 +1078,7 @@ function mountPreparedScene(host, plan) {
     objectId: "saturn",
     requireSun: false,
   });
+  lifetime.onDispose(cubicSky.destroy);
   const skySun = mountRetainedDirectionalSun({
     host,
     plan: PREPARED_SATURN_SKY_SUN,
@@ -1184,6 +1086,7 @@ function mountPreparedScene(host, plan) {
     objectId: "saturn",
     before: camera,
   });
+  lifetime.onDispose(skySun.destroy);
   const layerRegistration = registerBodyDependentLayers({
     objectId: "saturn",
     sceneElement: scene,
@@ -1263,6 +1166,14 @@ function mountPreparedScene(host, plan) {
   });
 }
 
+export function ownSaturnPresentationCleanup(stage, camera, lifetime) {
+  lifetime.onDispose(() => {
+    if (camera.parentNode !== stage) return;
+    delete stage.dataset.lens;
+    delete stage.dataset.view;
+  });
+}
+
 function createPreparedInterior(plan) {
   const cutaway = createMesh("saturn-cutaway", "");
   for (const band of plan.interior.outerBodyBands) {
@@ -1311,6 +1222,8 @@ function createPreparedInterior(plan) {
 
 function createSaturnCubicOrbitControls({
   stage,
+  lifetime,
+  onError,
   inputSurface,
   mounted,
   interactionFrames,
@@ -1333,11 +1246,6 @@ function createSaturnCubicOrbitControls({
   let orbit = null;
   let activeMaterialLens = PREPARED_SATURN_LENSES.defaultLens;
   let activeMaterialMode = "full";
-  let requestedMaterialVariant = materialVariantId(
-    activeMaterialLens,
-    activeMaterialMode,
-  );
-  let lensSelectionRequest = 0;
   let materialFrame = interactionFrames.defaultFrame.frameIndex;
   let lastMaterialPresentationKey = null;
   let lastInteriorPresentationKey = null;
@@ -1376,6 +1284,7 @@ function createSaturnCubicOrbitControls({
     controlPitch,
     controlYaw,
   }) => {
+    if (lifetime.disposed) return;
     const localCounter = counterRotationFor(
       mounted.materialSystem.style.transform,
     );
@@ -1470,91 +1379,53 @@ function createSaturnCubicOrbitControls({
     objectId: "saturn",
     mobilePreviewElement: stage.ownerDocument.querySelector(".planet-sidebar"),
     onPublish: publish,
+    onError,
   });
-  const prepareVariant = async ({ lensId, mode, interior }) => {
-    const variantId = materialVariantId(lensId, mode);
-    const request = ++lensSelectionRequest;
-    requestedMaterialVariant = variantId;
-    const state = orbit.state();
-    const useDefault = Math.abs(
-      state.controlPitch - SATURN_CUBIC_CAMERA.defaultControlPitchDegrees,
-    ) < 0.01 && Math.abs(
-      state.controlYaw - SATURN_CUBIC_CAMERA.defaultControlYawDegrees,
-    ) < 0.01;
-    if (useDefault) await orbitMaterialCache.prepareDefault(variantId);
-    else await orbitMaterialCache.preparePresentation(materialFrame, variantId);
-    if (interior) {
-      if (useDefault) await interiorAtmosphereCache.prepareDefault(variantId);
-      else {
-        const interiorFrame = Math.round(
-          materialFrame / Math.max(1, materialOrbitAtlas.frameCount - 1) *
-            (interiorAtmosphereAtlas.frameCount - 1),
-        );
-        await interiorAtmosphereCache.preparePresentation(
-          interiorFrame,
-          variantId,
-        );
-      }
-    }
-    if (request !== lensSelectionRequest) {
-      if (variantId !== requestedMaterialVariant) {
-        orbitMaterialCache.releaseVariant(variantId);
-        interiorAtmosphereCache.releaseVariant(variantId);
-      }
-      return false;
-    }
-    activeMaterialLens = lensId;
-    activeMaterialMode = mode;
-    lastMaterialPresentationKey = null;
-    lastInteriorPresentationKey = null;
-    orbit.refresh();
-    return true;
-  };
+  const modeFor = ({ rings, shadows }) => !rings
+    ? shadows ? "ringless" : "ringless-no-shadows"
+    : shadows ? "full" : "no-shadows";
 
+  const validatePresentation = (prepared) => {
+    if (!prepared || !orbitMaterialCache.isPrepared(prepared.variantId) ||
+        (prepared.interior && !interiorAtmosphereCache.isPrepared(prepared.variantId))) {
+      throw new Error("Saturn presentation assets are not ready.");
+    }
+  };
   return Object.freeze({
     mobilePageFlow: orbit.mobilePageFlow,
     refresh: orbit.refresh,
     setState: orbit.setState,
     state: orbit.state,
-    async setLens(id, { interior = stage.dataset.view === "interior" } = {}) {
-      if (!materialLensById.has(id)) {
-        throw new RangeError(`Unknown Saturn material lens: ${id}.`);
-      }
-      return prepareVariant({
-        lensId: id,
-        mode: activeMaterialMode,
-        interior,
-      });
+    async preparePresentation({ lensId, rings, shadows, interior }, { isCurrent }) {
+      if (!materialLensById.has(lensId)) throw new RangeError(`Unknown Saturn material lens: ${lensId}.`);
+      if (!isCurrent()) return null;
+      const mode = modeFor({ rings, shadows });
+      const variantId = materialVariantId(lensId, mode);
+      // An entire prepared atlas covers every current camera pose. Preparation
+      // changes cache residency only; activation belongs to the winning commit.
+      await orbitMaterialCache.prepareVariant(variantId);
+      if (!isCurrent()) return null;
+      if (interior) await interiorAtmosphereCache.prepareVariant(variantId);
+      if (!isCurrent()) return null;
+      return Object.freeze({ lensId, mode, variantId, interior });
     },
-    setRingShadowVisibility({ rings, shadows }) {
-      const mode = !rings
-        ? shadows ? "ringless" : "ringless-no-shadows"
-        : shadows ? "full" : "no-shadows";
-      if (mode === activeMaterialMode) return Promise.resolve(false);
-      return prepareVariant({
-        lensId: activeMaterialLens,
-        mode,
-        interior: stage.dataset.view === "interior",
-      });
-    },
-    async prepareInterior(id) {
-      const state = orbit.state();
-      const variantId = materialVariantId(id, activeMaterialMode);
-      const useDefault = Math.abs(
-        state.controlPitch - SATURN_CUBIC_CAMERA.defaultControlPitchDegrees,
-      ) < 0.01;
-      if (useDefault) return interiorAtmosphereCache.prepareDefault(variantId);
-      const frame = Math.round(
-        materialFrame / Math.max(1, materialOrbitAtlas.frameCount - 1) *
-          (interiorAtmosphereAtlas.frameCount - 1),
-      );
-      return interiorAtmosphereCache.preparePresentation(frame, variantId);
-    },
-    releaseInterior() {
-      interiorAtmosphereCache.release();
-      mounted.interiorAtmosphereLeaf.style.backgroundImage = "none";
+    validatePresentation,
+    commitPresentation(prepared) {
+      validatePresentation(prepared);
+      activeMaterialLens = prepared.lensId;
+      activeMaterialMode = prepared.mode;
+      lastMaterialPresentationKey = null;
       lastInteriorPresentationKey = null;
-      return true;
+      if (!prepared.interior) {
+        interiorAtmosphereCache.release();
+        mounted.interiorAtmosphereLeaf.style.backgroundImage = "none";
+      }
+      orbit.refresh();
+    },
+    releaseUnused(desired = null) {
+      const variant = desired ? materialVariantId(desired.lensId, modeFor(desired)) : null;
+      orbitMaterialCache.releaseUnused(variant);
+      interiorAtmosphereCache.releaseUnused(desired?.interior ? variant : null);
     },
     stats() {
       return Object.freeze({
@@ -1566,7 +1437,6 @@ function createSaturnCubicOrbitControls({
       });
     },
     destroy() {
-      lensSelectionRequest += 1;
       orbit.destroy();
     },
   });

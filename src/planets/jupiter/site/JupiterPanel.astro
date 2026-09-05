@@ -1,8 +1,9 @@
 ---
+import { objectControls } from "./control-content.mjs";
+const { lenses, settings } = objectControls;
 import PlanetShell from "../../../../site/components/PlanetShell.astro";
 import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
 import { SCIENTIFIC_CHART_TITLES } from "../../../../site/scientific-chart-titles.mjs";
-import { PREPARED_JUPITER_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_JUPITER_PANEL } from "./preparedPanel.mjs";
 import { PREPARED_JUPITER_TITLE } from "./preparedTitle.mjs";
 
@@ -36,22 +37,6 @@ const charts = [
   },
 ];
 
-const lensDescriptions: Record<string, string> = {
-  normal: "Hubble visible color",
-  ultraviolet: "Hubble at 275 nm",
-  methane: "Hubble at 889 nm",
-};
-const lenses = {
-  title: PREPARED_SHELL_TITLES.lenses,
-  defaultLens: PREPARED_JUPITER_LENSES.defaultLens,
-  controls: PREPARED_JUPITER_LENSES.controls.map((lens) => ({
-    id: lens.id,
-    label: lens.label,
-    thumbnailUrl: lens.thumbnailUrl,
-    description: lensDescriptions[lens.id],
-    title: `${lens.measurement}. ${lens.qualification}`,
-  })),
-};
 const resources = [
   { label: "NASA", role: "imagery", description: "Facts & moon imagery", href: "https://science.nasa.gov/jupiter/jupiter-facts/" },
   { label: "Hubble", role: "texture", description: "Planet texture", href: "https://science.nasa.gov/asset/hubble/jupiter-global-map-2019/" },
@@ -64,14 +49,6 @@ const resources = [
   { label: "OpenSpace", role: "scene", description: "Globe & scene", href: "https://github.com/OpenSpace/OpenSpace" },
 ];
 
-const settings = {
-  title: PREPARED_SHELL_TITLES.settings,
-  controls: [
-    { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
-    { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
-    { kind: "toggle", name: "rings", label: "Rings", checked: true },
-  ],
-};
 ---
 
 <PlanetShell

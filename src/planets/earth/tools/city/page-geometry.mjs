@@ -39,6 +39,12 @@ export function pageKey({ level, x, y }) {
   return `${level}-${x}-${y}`;
 }
 
+// Geographic placement is independent of the renderer's prepared raster box.
+// PR2 bakes that warp into surface atlases and retains this original face basis.
+export function cityGeographicFrame(leaf) {
+  return leaf.geographicFrameMatrix ?? leaf.style.match(/matrix3d\(([^)]+)\)/)[1];
+}
+
 // Partition the accepted face itself, including its presentation apron. Paging
 // nominal geographic rectangles left that apron uncovered: a neighboring coarse
 // face could cover city texels. Geographic reprojection belongs in preparation.
@@ -56,7 +62,7 @@ export function prepareCityPageGeometry(address, scene) {
   const longitudeIndex = Math.floor(meshWest / 11.25);
   const leaf = scene.body.bands.find((band) => band.latitudeIndex === bandIndex)
     .leaves[longitudeIndex];
-  const matrix = leaf.style.match(/matrix3d\(([^)]+)\)/)[1].split(",").map(Number);
+  const matrix = cityGeographicFrame(leaf).split(",").map(Number);
   const gutterDegrees = (bounds.east - bounds.west) * CITY_PAGE_GUTTER / CITY_PAGE_PIXELS;
   const outer = {
     west: bounds.west - gutterDegrees, east: bounds.east + gutterDegrees,
@@ -139,7 +145,7 @@ const faceCaches=new WeakMap();
 function acceptedFace(scene, b, x) {
   if(b<0||b>15)throw new Error('Invalid accepted face.');
   const leafIndex=b===0||b===15?0:(x+32)%32;
-  const m=scene.body.bands.find(p=>p.latitudeIndex===b).leaves[leafIndex].style.match(/matrix3d\(([^)]+)\)/)[1].split(',').map(Number);
+  const m=cityGeographicFrame(scene.body.bands.find(p=>p.latitudeIndex===b).leaves[leafIndex]).split(',').map(Number);
   const origin=m.slice(12,15),u=origin.map((v,i)=>m[i]-m[3]*v),v=origin.map((v,i)=>m[i+4]-m[7]*v);
   let normal=cross(u,v);normal=normal.map(n=>n/Math.hypot(...normal));
   return {origin,u,v,normal,d:dot(normal,origin)};

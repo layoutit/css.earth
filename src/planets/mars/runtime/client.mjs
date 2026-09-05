@@ -1,3 +1,6 @@
+import { createSceneLifetime, waitForScenePaint } from "../../../platform/scene-lifetime.mjs";
+import { decodePreparedImage, releasePreparedImage } from "../../../platform/prepared-image-store.mjs";
+import { createLatestSelection } from "../../../platform/latest-selection.mjs";
 import { PREPARED_MARS_SCENE } from "./preparedScene.mjs";
 import { createPreparedProjectiveTextureLeaf } from
   "../../../platform/prepared-projective-texture-leaf.mjs";
@@ -6,22 +9,11 @@ import { PREPARED_MARS_LIGHTING } from "./preparedLighting.mjs";
 import { PREPARED_MARS_LENSES } from "./preparedLenses.mjs";
 import { PREPARED_MARS_SKY_SUN } from "./preparedSkySun.mjs";
 import { createRowShardCache } from "./preparedRowCache.mjs";
-import { PLANET_SPEED_STATES } from "../../../platform/planet-feature-controls.mjs";
+import { bindSpeedControl } from "../../../platform/planet-feature-controls.mjs";
 import {
-  createPolyCamera,
-  createPolyOrbitControls,
-} from "@layoutit/polycss";
-import {
-  createCubicSkyCameraOrientation,
-  createUnboundedMatrixDragControls,
-  measureRetainedPlanetFlyToDisc,
-  measureRetainedPlanetTrackball,
+  createRetainedCubicSkyOrbit,
   mountRetainedCubicSky,
-  preparedScenePitch,
-  selectPreparedResponsiveZoom,
 } from "../../../platform/cubic-sky-runtime.mjs";
-import { googleEarthDirectAngularDegreesPerTrackballRadius } from
-  "../../../platform/google-earth-drag-inertia.mjs";
 import { validatePreparedCubicSky } from
   "../../../platform/cubic-sky-contract.mjs";
 import { mountRetainedDirectionalSun } from
@@ -31,18 +23,21 @@ import { viewSunDirectionToPreparedLightDirection } from
 import { registerBodyDependentLayers } from
   "../../../platform/body-layer-registration.mjs";
 import {
-  bindResponsiveOrbitPolicy,
   CANONICAL_PREPARED_IMAGE_DENSITY,
-  MOBILE_VIEWPORT_QUERY,
 } from "../../../../site/runtime-policy.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
-export function mountMarsClient(stage) {
+export function mountMarsClient(stage, { onError }) {
+  if (typeof onError !== "function") throw new TypeError("Mars requires onError.");
+  const lifetime = createSceneLifetime();
+  const warmImages = new Set();
+  lifetime.onDispose(() => {
+    releaseImageGroup(warmImages);
+  });
   if (!(stage instanceof HTMLElement)) {
     throw new TypeError("Mars stage must be an HTML element.");
   }
-  let destroyed = false;
   const materialBank = PREPARED_MARS_LIGHTING.banks[
     String(CANONICAL_PREPARED_IMAGE_DENSITY)
   ];
@@ -63,35 +58,48 @@ export function mountMarsClient(stage) {
     }) => [url2x || url, highContrastUrl2x || highContrastUrl]),
     PREPARED_MARS_SKY_SUN.asset.url2x || PREPARED_MARS_SKY_SUN.asset.url,
   ]);
-  let shouldPlay = true;
+  let shouldPlay = false;
   let animations = Object.freeze([]);
   let mounted = null;
   let orbit = null;
   let panelControls = null;
   let activeLens = PREPARED_MARS_LENSES.defaultLens;
-  let lensRequest = 0;
-  let resourcesReleased = false;
   const lensDecodePromises = new Map();
   let playbackRate = 1;
   let shadowsEnabled = false;
   const materialCache = createRowShardCache(materialBank);
+  lifetime.onDispose(() => materialCache.destroy());
+  lifetime.onDispose(() => {
+    const errors = [];
+    for (const entry of lensDecodePromises.values()) {
+      try { releaseLensEntry(entry); } catch (error) { errors.push(error); }
+    }
+    lensDecodePromises.clear();
+    if (errors.length) throw new AggregateError(errors, "Lens cleanup failed.");
+  });
+  let desiredLens = activeLens;
+  const selection = createLatestSelection({
+    lifetime, onFatalError: onError,
+    onBusyChange(busy) { panelControls?.setBusy(busy); },
+  });
   let ready = null;
   stage.classList.add("mars-stage");
+  lifetime.onDispose(() => stage.classList.remove("mars-stage"));
   const controller = Object.freeze({
     get ready() {
       return ready;
     },
     pause() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = false;
-      document.documentElement.dataset.playing = "false";
+
       for (const animation of animations) animation.pause();
     },
     resume() {
-      if (destroyed) return;
+      if (lifetime.disposed) return;
       shouldPlay = true;
       if (!mounted) return;
-      document.documentElement.dataset.playing = "true";
+
       if (playbackRate > 0) {
         for (const animation of animations) animation.play();
       }
@@ -110,11 +118,9 @@ export function mountMarsClient(stage) {
       return lensState();
     },
     destroy() {
-      if (destroyed) return;
-      destroyed = true;
       shouldPlay = false;
-      lensRequest += 1;
-      releaseScene();
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Mars cleanup failed.");
     },
   });
   ready = start();
@@ -122,26 +128,8 @@ export function mountMarsClient(stage) {
 
   async function start() {
     try {
-      await Promise.all([
-        Promise.all(assets.map(decodeImage)),
-        materialCache.prepareInitial(),
-      ]);
-      if (destroyed) return;
-      mounted = mountPreparedBody(stage, PREPARED_MARS_SCENE);
-      orbit = createMarsOrbit(
-        stage,
-        mounted,
-        materialCache,
-        () => shadowsEnabled,
-      );
-      animations = Object.freeze(stage.getAnimations({ subtree: true }));
-      for (const animation of animations) {
-        animation.currentTime = 0;
-        animation.playbackRate = playbackRate;
-        if (!shouldPlay) animation.pause();
-      }
       panelControls = createMarsPanelControls({
-        stage,
+        stage, lifetime, onError,
         selectLens,
         setShadows(visible) {
           shadowsEnabled = visible;
@@ -159,20 +147,41 @@ export function mountMarsClient(stage) {
           }
         },
       });
-      document.documentElement.dataset.playing = shouldPlay ? "true" : "false";
-      await new Promise((resolve) => requestAnimationFrame(() =>
-        requestAnimationFrame(resolve)));
-      if (destroyed) return;
+
+      await lifetime.wait(Promise.all([
+        Promise.all(assets.map((url) => decodeImage(url, warmImages))),
+        materialCache.prepareInitial(),
+      ]));
+      if (lifetime.disposed) return;
+      mounted = mountPreparedBody(stage, PREPARED_MARS_SCENE, lifetime);
+      warmImages.clear();
+      orbit = createMarsOrbit(
+        stage,
+        mounted,
+        materialCache,
+        () => shadowsEnabled,
+        lifetime,
+        onError,
+      );
+      animations = Object.freeze(stage.getAnimations({ subtree: true }));
+      for (const animation of animations) {
+        lifetime.onDispose(() => animation.cancel());
+        animation.currentTime = 0;
+        animation.playbackRate = playbackRate;
+        if (shouldPlay && playbackRate > 0) animation.play();
+        else animation.pause();
+      }
+      panelControls.bindReady();
+      await waitForScenePaint(lifetime);
+      if (lifetime.disposed) return;
       if (DEVELOPMENT_DIAGNOSTICS) {
-        window.__mars = Object.freeze({
+        const diagnostics = window.__mars = Object.freeze({
           ready: true,
           setView: controller.setView,
           view: controller.view,
           selectLens: controller.selectLens,
           lens: controller.lens,
-          pause: controller.pause,
-          resume: controller.resume,
-          destroy: controller.destroy,
+
           stableNodes: mounted.stableNodes,
           assertStableDomIdentity: mounted.assertStableDomIdentity,
           dom: Object.freeze({
@@ -198,10 +207,12 @@ export function mountMarsClient(stage) {
             materialCache: materialCache.stats,
           }),
         });
+        lifetime.onDispose(() => { if (window.__mars === diagnostics) delete window.__mars; });
       }
     } catch (error) {
-      if (destroyed) return;
-      releaseScene();
+      if (lifetime.disposed) return;
+      const cleanupErrors = lifetime.destroy();
+      if (cleanupErrors.length) throw new AggregateError([error, ...cleanupErrors], "Mars startup failed.", { cause: error });
       throw error;
     }
   }
@@ -209,135 +220,116 @@ export function mountMarsClient(stage) {
   async function selectLens(id) {
     const lens = PREPARED_MARS_LENSES.controls.find((entry) => entry.id === id);
     if (!lens) throw new RangeError(`Unknown Mars lens: ${id}.`);
-    if (destroyed || !mounted) return lensState();
-    const request = ++lensRequest;
-    let decoding = Promise.resolve();
-    if (lens.id !== PREPARED_MARS_LENSES.defaultLens) {
-      decoding = lensDecodePromises.get(lens.id);
-      if (!decoding) {
-        decoding = decodeLens(lens).catch((error) => {
-          lensDecodePromises.delete(lens.id);
-          throw error;
-        });
-        lensDecodePromises.set(lens.id, decoding);
-      }
-    }
-    await decoding;
-    if (destroyed || request !== lensRequest) return lensState();
-    if (lens.id === PREPARED_MARS_LENSES.defaultLens) {
-      delete stage.dataset.lens;
-    } else {
-      stage.dataset.lens = lens.id;
-    }
-    activeLens = lens.id;
-    panelControls?.publishLens(activeLens);
+    if (lifetime.disposed || !mounted) return lensState();
+    desiredLens = id;
+    await selection.run({
+      prepare: async () => {
+        if (id === PREPARED_MARS_LENSES.defaultLens) return null;
+        let entry = lensDecodePromises.get(id);
+        if (!entry) {
+          entry = { images: new Set(), promise: null, released: false };
+          lensDecodePromises.set(id, entry);
+          entry.promise = Promise.all([
+            decodeImage(lens.surface2xUrl || lens.surfaceUrl, entry.images),
+            decodeImage(lens.poles2xUrl || lens.polesUrl, entry.images),
+          ]).then(() => undefined, (error) => {
+            if (entry.released) return;
+            if (lensDecodePromises.get(id) === entry) lensDecodePromises.delete(id);
+            releaseLensEntry(entry);
+            throw error;
+          });
+        }
+        await entry.promise;
+        return entry;
+      },
+      commit(entry) {
+        if (id === PREPARED_MARS_LENSES.defaultLens) delete stage.dataset.lens;
+        else stage.dataset.lens = id;
+        activeLens = id;
+        panelControls?.publishLens(id);
+        // The retained CSS presentation now owns the warmed URLs.
+        entry?.images.clear();
+      },
+      onCurrentFailure() { desiredLens = activeLens; },
+      discard(entry) {
+        if (entry && id !== activeLens && id !== desiredLens) {
+          if (lensDecodePromises.get(id) === entry) lensDecodePromises.delete(id);
+          releaseLensEntry(entry);
+        }
+      },
+    });
     return lensState();
+  }
+
+  function releaseLensEntry(entry) {
+    if (entry.released) return;
+    entry.released = true;
+    releaseImageGroup(entry.images);
   }
 
   function lensState() {
     return Object.freeze({
       id: activeLens,
-      ready: mounted !== null && !destroyed,
+      ready: mounted !== null && !lifetime.disposed,
     });
   }
 
-  function releaseScene() {
-    if (resourcesReleased) return;
-    resourcesReleased = true;
-    panelControls?.destroy();
-    panelControls = null;
-    orbit?.destroy();
-    orbit = null;
-    materialCache.destroy();
-    lensDecodePromises.clear();
-    mounted = null;
-    animations = Object.freeze([]);
-    delete stage.dataset.lens;
-    stage.classList.remove("mars-stage");
-    delete document.documentElement.dataset.playing;
-    stage.replaceChildren();
-    if (DEVELOPMENT_DIAGNOSTICS && window.__mars) delete window.__mars;
-  }
 }
 
-function createMarsPanelControls({
-  stage,
-  selectLens,
-  setShadows,
-  setSpeed,
-}) {
-  const lensRoot = document.querySelector(
-    ".planet-drawer-content .planet-lenses",
-  );
-  const settingsRoot = document.querySelector(
-    ".planet-settings-panel .planet-settings",
-  );
-  const speedButton = settingsRoot?.querySelector('button[name="speed"]');
+function createMarsPanelControls({ stage, selectLens, setShadows, setSpeed, lifetime, onError }) {
+  const lensRoot = document.querySelector(".planet-drawer-content .planet-lenses");
+  const settingsRoot = document.querySelector(".planet-settings-panel .planet-settings");
+  const speedInput = settingsRoot?.querySelector('input[name="speed"][type="range"]');
   const shadows = settingsRoot?.querySelector('input[name="shadows"]');
-  if (!(lensRoot instanceof HTMLElement) ||
-      !(settingsRoot instanceof HTMLElement) ||
-      !(speedButton instanceof HTMLButtonElement) ||
-      !(shadows instanceof HTMLInputElement)) {
+  if (!(lensRoot instanceof HTMLElement) || !(settingsRoot instanceof HTMLElement) ||
+      !(speedInput instanceof HTMLInputElement) || !(shadows instanceof HTMLInputElement)) {
     throw new Error("Mars panel controls are incomplete.");
   }
-  const events = new AbortController();
-  let destroyed = false;
-  let controlRequest = 0;
-  const lensButtons = [...(lensRoot?.querySelectorAll('button[name="lens"]') ?? [])];
-  for (const button of lensButtons) {
-    button.addEventListener("click", () => void applyLens(button), {
-      signal: events.signal,
-    });
+  const lensButtons = [...lensRoot.querySelectorAll('button[name="lens"]')];
+  const ids = new Set(lensButtons.map((button) => button.value));
+  if (ids.size !== lensButtons.length || ids.size !== PREPARED_MARS_LENSES.controls.length ||
+      PREPARED_MARS_LENSES.controls.some(({ id }) => !ids.has(id))) {
+    throw new Error("Mars lens selector does not match prepared lenses.");
   }
-  const speedStates = PLANET_SPEED_STATES;
-  speedButton.addEventListener("click", () => {
-    const index = speedStates.findIndex(({ label }) =>
-      label === speedButton.dataset.state);
-    const next = speedStates[(index + 1) % speedStates.length];
-    speedButton.dataset.state = next.label;
-    speedButton.setAttribute("aria-label", `Speed: ${next.label}`);
-    setSpeed(next.value);
-  }, { signal: events.signal });
-  shadows.addEventListener("change", () => setShadows(shadows.checked), {
-    signal: events.signal,
+  const events = new AbortController();
+  lifetime.onDispose(() => events.abort());
+  let ready = false;
+  lifetime.onDispose(() => {
+    ready = false;
+    lensRoot.classList.remove("is-loading");
+    for (const button of lensButtons) button.disabled = true;
   });
+  const speed = bindSpeedControl({ input: speedInput, lifetime, onError, onChange: setSpeed });
+  lensRoot.classList.add("is-loading");
+  for (const button of lensButtons) {
+    button.disabled = true;
+    button.addEventListener("click", () => {
+      if (ready && !lifetime.disposed) void selectLens(button.value).catch(console.error);
+    }, { signal: events.signal });
+  }
+  shadows.addEventListener("change", () => {
+    if (lifetime.disposed) return;
+    try { setShadows(shadows.checked); } catch (error) { onError(error); }
+  }, { signal: events.signal });
   setShadows(shadows.checked);
   return Object.freeze({
     publishLens,
-    destroy() {
-      if (destroyed) return;
-      destroyed = true;
-      controlRequest += 1;
-      events.abort();
-      lensRoot?.classList.remove("is-loading");
-      for (const button of lensButtons) button.disabled = true;
+    setBusy(busy) { lensRoot.classList.toggle("is-loading", busy); },
+    bindReady() {
+      if (lifetime.disposed) return;
+      ready = true;
+      speed.setEnabled(true);
+      lensRoot.classList.remove("is-loading");
+      for (const button of lensButtons) button.disabled = false;
     },
   });
-
-  async function applyLens(button) {
-    const request = ++controlRequest;
-    lensRoot?.classList.add("is-loading");
-    try {
-      const state = await selectLens(button.value);
-      if (!destroyed) publishLens(state.id);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      if (!destroyed && request === controlRequest) {
-        lensRoot?.classList.remove("is-loading");
-      }
-    }
-  }
-
   function publishLens(id) {
-    if (destroyed) return;
-    for (const candidate of lensButtons) {
-      candidate.setAttribute("aria-pressed", String(candidate.value === id));
-    }
+    if (lifetime.disposed) return;
+    for (const button of lensButtons) button.setAttribute("aria-pressed", String(button.value === id));
   }
 }
 
-function mountPreparedBody(stage, plan) {
+function mountPreparedBody(stage, plan, lifetime) {
   if (plan.schema !== "cssmars-prepared-retained-body@1") {
     throw new TypeError("Mars retained body plan is incompatible.");
   }
@@ -350,6 +342,10 @@ function mountPreparedBody(stage, plan) {
     "polycss-camera mars-camera planet-render-root",
     "perspective:1000000px",
   );
+  lifetime.onDispose(() => camera.remove());
+  lifetime.onDispose(() => {
+    if (camera.parentNode === stage) delete stage.dataset.lens;
+  });
   const scene = createMesh("polycss-scene", "");
   const system = createMesh("mars-system", plan.systemTransform);
   const body = createMesh("mars-body", plan.bodyTransform);
@@ -387,6 +383,7 @@ function mountPreparedBody(stage, plan) {
     objectId: "mars",
     requireSun: false,
   });
+  lifetime.onDispose(() => cubicSky.destroy());
   const skySun = mountRetainedDirectionalSun({
     host: stage,
     plan: PREPARED_MARS_SKY_SUN,
@@ -394,6 +391,7 @@ function mountPreparedBody(stage, plan) {
     objectId: "mars",
     before: camera,
   });
+  lifetime.onDispose(() => skySun.destroy());
   const layerRegistration = registerBodyDependentLayers({
     objectId: "mars",
     sceneElement: scene,
@@ -424,251 +422,46 @@ function mountPreparedBody(stage, plan) {
   });
 }
 
-function createMarsOrbit(stage, mounted, materialCache, shadowsVisible) {
-  const plan = PREPARED_MARS_CAMERA;
+function createMarsOrbit(stage, mounted, materialCache, shadowsVisible, lifetime, onError) {
   const lighting = PREPARED_MARS_LIGHTING;
-  if (plan.schema !== "cssmars-prepared-camera@2" ||
-      lighting.schema !== "cssmars-prepared-lighting@5" ||
-      plan.cameraModel !== "accumulated-matrix3d" ||
-      plan.horizontalOrbit !== true || plan.pitchBounded !== false ||
-      plan.yawBounded !== false || !Number.isFinite(plan.sceneScale) ||
-      typeof shadowsVisible !== "function") {
-    throw new TypeError("Mars shared cubic-sky camera contract drifted.");
-  }
-  const camera = createPolyCamera(plan.state);
-  const orientation = createCubicSkyCameraOrientation({
-    controlPitch: camera.state.rotX,
-    controlYaw: camera.state.rotY,
-    cameraPlan: plan,
-    skyPlan: PREPARED_MARS_SCENE.starfield,
-    requireSun: false,
-    sunDirection: PREPARED_MARS_SKY_SUN.localDirection,
-    sunReferenceViewDirection:
-      PREPARED_MARS_SKY_SUN.referenceViewDirection,
-  });
-  const safeCamera = Object.freeze({
-    get state() {
-      return camera.state;
-    },
-    update(partial) {
-      camera.update({
-        ...partial,
-        ...(partial.zoom === undefined ? {} : {
-          zoom: clamp(partial.zoom, plan.minimumZoom, plan.maximumZoom),
-        }),
-      });
-    },
-  });
-  let interactionStarts = 0;
-  let interactionEnds = 0;
-  let publications = 0;
-  let destroyedOrbit = false;
-  let sunViewDirection = PREPARED_MARS_SKY_SUN.localDirection;
+  let sunViewDirection;
   let materialFrame = lighting.defaultFrame;
   let materialLightRollDegrees = 0;
   let lastMaterialPresentation = "";
-  let responsiveFit = null;
-
-  const publish = () => {
-    if (destroyedOrbit) return;
-    mounted.scene.style.transform =
-      `scale(${plan.sceneScale}) ${orientation.scene()}`;
-    const skyboxOrientation = orientation.skybox();
-    mounted.cubicSky.setOrientation({
-      matrix: skyboxOrientation.matrix,
-      zoom: safeCamera.state.zoom,
-      defaultZoom: plan.defaultZoom,
-    });
-    sunViewDirection = skyboxOrientation.sunViewDirection;
-    mounted.skySun.setViewDirection(sunViewDirection);
-    mounted.materialCounter.style.transform = orientation.counterRotation();
-    const zoomScale = safeCamera.state.zoom / plan.defaultZoom;
-    mounted.camera.style.scale =
-      "calc(var(--mars-shell-scale) / (" +
-      `var(--planet-viewport-zoom-divisor) / ${zoomScale}))`;
-    publishMaterialDirection(skyboxOrientation.sunViewDirection);
-    publications += 1;
-  };
-  const schedule = () => requestAnimationFrame(publish);
-  materialCache.onReady(schedule);
-  const scene = Object.freeze({
-    host: stage,
-    cameraEl: mounted.camera,
-    sceneElement: mounted.scene,
-    camera: safeCamera,
-    applyCamera: publish,
-  });
-  const mobileQuery = matchMedia(MOBILE_VIEWPORT_QUERY);
-  const wheelControls = createPolyOrbitControls(scene, {
-    drag: false,
-    wheel: !mobileQuery.matches,
-    minZoom: plan.minimumZoom,
-    maxZoom: plan.maximumZoom,
-  });
-  const dragControls = createUnboundedMatrixDragControls({
-    inputSurface: stage,
-    trackballMetrics: () => Object.freeze({
-      ...measureRetainedPlanetTrackball({
-        stage,
-        cameraElement: mounted.camera,
-        logicalBodyDiameter: plan.logicalBodyDiameter,
-      }),
-      angularDegreesPerTrackballRadius:
-        googleEarthDirectAngularDegreesPerTrackballRadius(
-          safeCamera.state.zoom,
-        ),
-    }),
-    flyToTrackballMetrics: () => measureRetainedPlanetFlyToDisc({
-      stage,
-      cameraElement: mounted.camera,
-      logicalBodyDiameter: plan.logicalBodyDiameter,
-    }),
-    surfaceFlyToState: () => Object.freeze({
-      zoom: safeCamera.state.zoom,
-      minimumZoom: plan.minimumZoom,
-      maximumZoom: plan.maximumZoom,
-    }),
-    onStart() {
-      interactionStarts += 1;
-    },
-    onEnd() {
-      interactionEnds += 1;
-    },
-    rotate({ controlPitchDelta, controlYawDelta, zoom }) {
-      const previousPitch = safeCamera.state.rotX;
-      safeCamera.update({
-        rotX: previousPitch + controlPitchDelta,
-        rotY: safeCamera.state.rotY + controlYawDelta,
-        ...(zoom === undefined ? {} : { zoom }),
-      });
-      orientation.rotate({
-        renderedPitchDelta:
-          preparedScenePitch(safeCamera.state.rotX, plan) -
-            preparedScenePitch(previousPitch, plan),
-        yawDelta: controlYawDelta,
-      });
-      publish();
-    },
-  });
-  const controls = Object.freeze({
-    update(options) {
-      wheelControls.update(options);
-      dragControls.update(options);
-    },
-    destroy() {
-      dragControls.destroy();
-      wheelControls.destroy();
-    },
-  });
-  const inputPolicy = bindResponsiveOrbitPolicy({
-    controls,
-    inputSurface: stage,
-    mediaQuery: mobileQuery,
-  });
-  const windowTarget = stage.ownerDocument.defaultView;
-  responsiveFit = selectPreparedResponsiveZoom({
-    stage,
+  const camera = createRetainedCubicSkyOrbit({
+    stage, inputSurface: stage,
     cameraElement: mounted.camera,
-    plan,
-    mobile: inputPolicy.mobile,
-    mobilePreviewElement:
-      stage.ownerDocument.querySelector(".planet-sidebar"),
+    sceneElement: mounted.scene,
+    cubicSky: mounted.cubicSky,
+    skyPlan: PREPARED_MARS_SCENE.starfield,
+    directionalSun: mounted.skySun,
+    directionalSunPlan: PREPARED_MARS_SKY_SUN,
+    cameraPlan: PREPARED_MARS_CAMERA,
+    objectId: "mars",
+    mobilePreviewElement: stage.ownerDocument.querySelector(".planet-sidebar"),
+    onError,
+    onPublish(state) {
+      sunViewDirection = state.skySunViewDirection;
+      mounted.materialCounter.style.transform = state.counterRotation;
+      publishMaterialDirection(sunViewDirection);
+    },
   });
-  safeCamera.update({ zoom: responsiveFit.zoom });
-  const initialResponsiveZoom = responsiveFit.zoom;
-  const handleViewportResize = () => {
-    responsiveFit = selectPreparedResponsiveZoom({
-      stage,
-      cameraElement: mounted.camera,
-      plan,
-      mobile: inputPolicy.mobile,
-      mobilePreviewElement:
-        stage.ownerDocument.querySelector(".planet-sidebar"),
-    });
-    publish();
-  };
-  windowTarget?.addEventListener("resize", handleViewportResize, {
-    passive: true,
-  });
-  publish();
-
+  lifetime.onDispose(camera.destroy);
+  lifetime.onDispose(() => materialCache.onReady(null));
+  materialCache.onReady(camera.invalidate);
   return Object.freeze({
-    initialResponsiveZoom() {
-      return initialResponsiveZoom;
-    },
-    refresh() {
-      publish();
-    },
-    setState({
-      pitch,
-      controlPitch = pitch,
-      controlYaw,
-      zoom,
-    } = {}) {
-      dragControls.stop();
-      const resetsOrientation = controlPitch !== undefined ||
-        controlYaw !== undefined;
-      safeCamera.update({
-        ...(controlPitch === undefined ? {} : { rotX: controlPitch }),
-        ...(controlYaw === undefined ? {} : { rotY: controlYaw }),
-        ...(zoom === undefined ? {} : { zoom }),
-      });
-      if (resetsOrientation) {
-        orientation.reset({
-          controlPitch: safeCamera.state.rotX,
-          controlYaw: safeCamera.state.rotY,
-        });
-      }
-      publish();
-      return this.state();
-    },
-    state() {
-      return Object.freeze({
-        pitch: safeCamera.state.rotX,
-        controlPitch: safeCamera.state.rotX,
-        controlYaw: safeCamera.state.rotY,
-        zoom: safeCamera.state.zoom,
-      });
-    },
+    ...camera,
     skyState() {
-      const sunPresentation = mounted.skySun.state();
       return Object.freeze({
+        ...camera.skyState(),
         sunViewDirection: Object.freeze([...sunViewDirection]),
-        sunVisible: sunPresentation.visible,
-        sunPresentation,
+        sunPresentation: mounted.skySun.state(),
         shadowsEnabled: shadowsVisible(),
         materialMode: shadowsVisible()
-          ? "directional-terminator-and-atmosphere"
-          : "full-phase-atmosphere",
+          ? "directional-terminator-and-atmosphere" : "full-phase-atmosphere",
         materialFrame,
         materialLightRollDegrees,
       });
-    },
-    stats() {
-      return Object.freeze({
-        minimumPitchDegrees: plan.minimumControlPitchDegrees,
-        maximumPitchDegrees: plan.maximumControlPitchDegrees,
-        defaultControlPitchDegrees: plan.defaultControlPitchDegrees,
-        defaultControlYawDegrees: plan.defaultControlYawDegrees,
-        pitchBounded: plan.pitchBounded,
-        yawBounded: plan.yawBounded,
-        cameraModel: plan.cameraModel,
-        responsiveFitModel: responsiveFit.model,
-        responsiveWidthShare: responsiveFit.widthShare,
-        responsiveBaseZoom: responsiveFit.zoom,
-        interactionStarts,
-        interactionEnds,
-        publications,
-        dragInertia: dragControls.stats(),
-      });
-    },
-    destroy() {
-      if (destroyedOrbit) return;
-      destroyedOrbit = true;
-      windowTarget?.removeEventListener("resize", handleViewportResize);
-      materialCache.onReady(null);
-      inputPolicy.destroy();
-      controls.destroy();
     },
   });
 
@@ -729,16 +522,18 @@ function createMesh(className, style) {
   return element;
 }
 
-function decodeImage(source) {
-  const image = new Image();
-  image.decoding = "sync";
-  image.src = source;
-  return image.decode();
+function decodeImage(source, owner) {
+  const image = Object.assign(new Image(), { decoding: "sync" });
+  owner.add(image);
+  return decodePreparedImage(image, source);
 }
 
-function decodeLens(lens) {
-  return Promise.all([
-    decodeImage(lens.surface2xUrl || lens.surfaceUrl),
-    decodeImage(lens.poles2xUrl || lens.polesUrl),
-  ]);
+function releaseImageGroup(images) {
+  const errors = [];
+  for (const image of images) {
+    try { releasePreparedImage(image); } catch (error) { errors.push(error); }
+  }
+  if (Array.isArray(images)) images.length = 0;
+  else images.clear();
+  if (errors.length) throw new AggregateError(errors, "Prepared image cleanup failed.");
 }

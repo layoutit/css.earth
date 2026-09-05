@@ -138,7 +138,7 @@ try {
       ({ name, value }) => [name, value],
     ),
   );
-  await page.evaluate(() => window.__earth.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   const describedLayers = await Promise.all(layers.map(async (layer) => {
     let className = "";
     if (layer.backendNodeId) {

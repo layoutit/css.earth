@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { defineObject, defineObjects } from "../object-schema.mjs";
+import { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from "../object-schema.mjs";
 import { OBJECTS, requireObject } from "../objects.mjs";
 import {
   discoverPlanetTests,
@@ -18,6 +18,7 @@ const loadScene = async () => () => {};
 const fixture = Object.freeze({
   id: "fixture",
   name: "Fixture",
+  classification: "dwarf-planet",
   color: "#abcdef",
   distanceAu: 1,
   route: "/fixture/",
@@ -30,6 +31,7 @@ test("defines one generic renderable-object contract", () => {
   assert.deepEqual(Object.keys(objectRecord), [
     "id",
     "name",
+    "classification",
     "color",
     "distanceAu",
     "route",
@@ -41,6 +43,12 @@ test("defines one generic renderable-object contract", () => {
 });
 
 test("rejects invalid object definitions and renderer-specific fields", () => {
+  for (const classification of ["Planet", "planets", "dwarf-plannet", "", undefined]) {
+    assert.throws(() => defineObject({ ...fixture, classification }), /Invalid object definition/);
+  }
+  for (const classification of OBJECT_CLASSIFICATIONS) {
+    assert.equal(defineObject({ ...fixture, classification }).classification, classification);
+  }
   assert.throws(() => defineObject(null), /must be an object/);
   assert.throws(() => defineObject({ ...fixture, id: "Saturn" }),
     /Invalid object definition/);
@@ -79,6 +87,7 @@ test("keeps one open-ended object registry with unique ids and routes", () => {
     "saturn",
     "uranus",
     "neptune",
+    "pluto",
   ]);
   assert.ok(OBJECTS.every((objectRecord) =>
     Object.keys(objectRecord).join("\0") === Object.keys(OBJECTS[0]).join("\0")));

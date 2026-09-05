@@ -31,9 +31,12 @@ of being drawn to a `<canvas>`.
 
 The shared shell loads the selected body from an open-ended object registry and
 mounts one retained scene and one camera. Each object package owns its
-scientific sources, textures, geometry, lighting, controls, and presentation
-choices. The shell owns navigation, information panels, loading, lifecycle, and
-responsive behavior.
+scientific sources, textures, geometry, lighting, optional control content, and
+material presentation. All objects use one shared camera controller for input,
+orientation, zoom, responsive fitting, and camera cleanup. The shell owns
+navigation, information panels, loading, lifecycle, and responsive behavior.
+The [generic contract proof](docs/generic-runtime-contract-proof.md) includes
+all registered objects and an unregistered fixture in real Chrome at DPR 1 and 2.
 
 ## Build and Runtime
 
@@ -55,8 +58,9 @@ pnpm acquire:planets -- --verify-only
 pnpm prepare:planets
 ```
 
-Planet descriptions are prepared separately from NASA Science and committed
-under `data/planets/`:
+The existing NASA description collection is prepared separately and committed
+under `data/planets/`. Other objects may own their source snapshots and parsers;
+this importer is not a condition of the object contract:
 
 ```sh
 pnpm prepare:planet-info -- saturn
@@ -64,7 +68,12 @@ pnpm prepare:planet-info
 ```
 
 The importer validates NASA's record identity and structured content schema.
-It does not fall back to scraping rendered webpages.
+It does not fall back to scraping rendered webpages. Pluto uses checked,
+object-owned NASA and JPL sources, without adding another registry entry here.
+
+Search includes the Sun, planets, Moon, and Pluto. The planet distance scale
+remains a planet-only view derived from classification. To run every browser
+gate against an isolated server, use `pnpm test:browser http://127.0.0.1:4211`.
 
 ## License and Data
 

@@ -66,6 +66,7 @@ try {
     renderedPitch: Number(document.querySelector(".polycss-camera")
       ?.dataset.polycssCameraRotX),
   })), {
+    pitch: 34.230769230769226,
     controlPitch: 34.230769230769226,
     controlYaw: -105,
     zoom: 1.6196,
@@ -284,10 +285,13 @@ try {
     }
   }
 
-  const speed = settings.locator('button[name="speed"]');
+  const speed = settings.locator('input[name="speed"][type="range"]');
   for (const [value, label] of [[2, "fast"], [3, "fastest"], [4, "superfast"],
     [0, "off"], [1, "normal"]]) {
-    await speed.evaluate((element) => element.click());
+    await speed.evaluate((element, nextValue) => {
+      element.value = String(nextValue);
+      element.dispatchEvent(new Event("input", { bubbles: true }));
+    }, value);
     assert.deepEqual(await page.evaluate(() => window.__venus.options.state()),
       { speed: value });
     assert.equal(await speed.getAttribute("data-state"), label);
@@ -311,7 +315,9 @@ try {
   assert.ok(Math.abs(Math.hypot(...initialMaterialState.sunViewDirection) - 1) <
     1e-9);
   assert.ok(Number.isFinite(initialMaterialState.lightRollDegrees));
-  await drag(page, 0, 150);
+  // At zoom 1, 150 px turns about 44.5 degrees and is not a short pitch.
+  // Keep this local-lighting check below 9 degrees; wide drags follow below.
+  await drag(page, 0, 30);
   assert.ok((await page.evaluate(() => window.__venus.camera.state().controlPitch)) >
     34.230769230769226);
   const materialAfterShortPitch = await page.evaluate(() =>
@@ -347,7 +353,7 @@ try {
     })), { visibility: "visible", display: "block" });
   assert.equal(await page.evaluate(() => window.__venus.material.state().frame), 31);
 
-  await page.evaluate(() => window.__venus.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.getAnimations({ subtree: true }).every(({ playState }) => playState === "paused")),
   true);
@@ -498,7 +504,7 @@ async function proveResponsiveZoomProfiles(browser) {
       waitUntil: "networkidle",
     });
     await page.waitForFunction(() => window.__venus?.ready === true);
-    reports.push(await page.evaluate(({ viewportWidth, viewportHeight }) => {
+    reports.push(await page.evaluate(({ viewportWidth, viewportHeight, preparedZoom }) => {
       const root = document.querySelector(".polycss-camera");
       const stage = document.querySelector(".planet-stage");
       const sidebar = document.querySelector(".planet-sidebar");
@@ -508,7 +514,7 @@ async function proveResponsiveZoomProfiles(browser) {
       const stageBounds = stage.getBoundingClientRect();
       const sidebarBounds = sidebar?.getBoundingClientRect();
       const rootScale = rootBounds.width / stageBounds.width;
-      const bodyDiameter = 496 * zoom * rootScale;
+      const bodyDiameter = 496 * preparedZoom * rootScale;
       const sidePanel = sidebarBounds?.width < viewportWidth * 0.75;
       const sidebarRight = sidePanel ? sidebarBounds?.right ?? 0 : 0;
       const unobstructedSceneWidth = viewportWidth - sidebarRight;
@@ -527,7 +533,7 @@ async function proveResponsiveZoomProfiles(browser) {
           unobstructedSceneWidth).toFixed(3)),
         sceneCenterOffset: Number((sceneCenter - availableCenter).toFixed(3)),
       };
-    }, { viewportWidth: width, viewportHeight: height }));
+    }, { viewportWidth: width, viewportHeight: height, preparedZoom: PREPARED_VENUS_SCENE.camera.defaultZoom }));
     await page.close();
   }
   return reports;
@@ -550,7 +556,7 @@ async function proveResponsiveFitContinuity(browser) {
         window.__venus.camera.stats().responsiveBaseZoom !== previous,
       previousBaseZoom);
     }
-    const sample = await page.evaluate(() => {
+    const sample = await page.evaluate((preparedZoom) => {
       const root = document.querySelector(".polycss-camera");
       const stage = document.querySelector(".planet-stage");
       const sidebar = document.querySelector(".planet-sidebar");
@@ -558,12 +564,12 @@ async function proveResponsiveFitContinuity(browser) {
       const rootScale = root.getBoundingClientRect().width /
         stage.getBoundingClientRect().width;
       return {
-        diameter: 496 * window.__venus.camera.state().zoom * rootScale,
+        diameter: 496 * preparedZoom * rootScale,
         mobile: getComputedStyle(sidebar).position === "relative" &&
           getComputedStyle(input).position === "absolute" &&
           getComputedStyle(input).touchAction === "pan-y",
       };
-    });
+    }, PREPARED_VENUS_SCENE.camera.defaultZoom);
     diameters.push(sample.diameter);
     mobileModes.push(sample.mobile);
   }
@@ -592,7 +598,7 @@ async function proveMobilePreviewFit(browser) {
       waitUntil: "networkidle",
     });
     await page.waitForFunction(() => window.__venus?.ready === true);
-    reports.push(await page.evaluate(({ viewportWidth, viewportHeight }) => {
+    reports.push(await page.evaluate(({ viewportWidth, viewportHeight, preparedZoom }) => {
       const rootBounds = document.querySelector(".polycss-camera")
         .getBoundingClientRect();
       const stageBounds = document.querySelector(".planet-stage")
@@ -600,13 +606,13 @@ async function proveMobilePreviewFit(browser) {
       const sheetBounds = document.querySelector(".planet-sidebar")
         .getBoundingClientRect();
       const shellScale = rootBounds.width / stageBounds.width;
-      const diameter = 496 * window.__venus.camera.state().zoom * shellScale;
+      const diameter = 496 * preparedZoom * shellScale;
       return {
         width: viewportWidth,
         height: viewportHeight,
         clearance: Number(((sheetBounds.top - diameter) / 2).toFixed(1)),
       };
-    }, { viewportWidth: width, viewportHeight: height }));
+    }, { viewportWidth: width, viewportHeight: height, preparedZoom: PREPARED_VENUS_SCENE.camera.defaultZoom }));
     await page.close();
   }
   return reports;

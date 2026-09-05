@@ -204,7 +204,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
     assert.ok(leaf.leafHeight * leaf.projectiveTextureLayer.rasterScale <= 128);
   }
   assert.ok(rasterLeaves.every(({ className, style, leafWidth, leafHeight }) =>
-    leafWidth <= 32 && leafHeight <= 32 &&
+    leafWidth <= 96 && leafHeight <= 96 &&
     style.includes("background-position:") &&
     style.includes("background-size:") &&
     !style.includes("--polycss-projective-texture-") &&
@@ -283,8 +283,30 @@ test("publishes the prepared Earth title and retained scene", async () => {
           .metadata();
         return { width, height };
       })),
-    [{ width: 8320, height: 6144 }, { width: 2048, height: 512 }],
+    [{ width: 4096, height: 3536 }, { width: 2048, height: 512 }],
   );
+  const pages = PREPARED_EARTH_SCENE.body.assets.surface.pages;
+  assert.equal(pages.length, 7);
+  assert.ok(pages.every(({ width, height }) => width <= 4096 && height <= 4096));
+  for (const lens of PREPARED_EARTH_LENSES.controls.filter(lens => lens.surfaceUrls)) {
+    assert.equal(lens.surfaceUrls.length, pages.length);
+    for (const [index, url] of lens.surfaceUrls.entries()) {
+      const image = await sharp(resolve(publicRoot, url.split("/").at(-1))).metadata();
+      assert.deepEqual({ width: image.width, height: image.height }, pages[index]);
+      assert.equal(image.hasAlpha, true, "prebaked outside-quad pixels need alpha");
+    }
+  }
+  for (const [key, scale] of [["oneUrls", 0.25], ["twoUrls", 0.5]]) {
+    const urls = PREPARED_EARTH_SCENE.interior.outerAssets.surface[key];
+    assert.equal(urls.length, pages.length);
+    for (const [index, url] of urls.entries()) {
+      const image = await sharp(resolve(publicRoot, url.split("/").at(-1))).metadata();
+      assert.deepEqual({ width: image.width, height: image.height }, {
+        width: pages[index].width * scale, height: pages[index].height * scale,
+      });
+      assert.equal(image.hasAlpha, true);
+    }
+  }
   const polarLeaves = surfaceLeaves.filter(({ className }) =>
     className.includes("earth-polar"));
   assert.equal(polarLeaves.some(({ className }) =>

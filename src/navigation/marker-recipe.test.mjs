@@ -5,27 +5,25 @@ import { resolve } from "node:path";
 import test from "node:test";
 
 import marsMarker from "../planets/mars/tools/navigation-marker.mjs";
-import saturnMarker from "../planets/saturn/tools/navigation-marker.mjs";
-import { PLANNED_MARKER_DESCRIPTORS } from "./marker-descriptors.mjs";
+import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mjs";
 import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
 } from "./marker-recipe.mjs";
 
-test("accepts the generic planned and object-owned marker recipes", () => {
-  for (const descriptor of [
-    ...PLANNED_MARKER_DESCRIPTORS,
-    marsMarker,
-    saturnMarker,
-  ]) {
+test("accepts every object-owned marker recipe", async () => {
+  for (const descriptor of await loadMarkerDescriptors()) {
     assert.equal(validateMarkerDescriptor(descriptor), descriptor);
     assert.match(descriptor.source.expectedSha256, /^[0-9a-f]{64}$/u);
-    assert.ok(descriptor.source.origin.startsWith("http"));
+    assert.ok(["http:", "https:"].includes(new URL(descriptor.source.origin).protocol));
     assert.ok(descriptor.source.credit.length > 0);
   }
 });
 
 test("rejects unsafe recipes and drifted source bytes", async (context) => {
+  for (const origin of ["Hubble OPAL colour map", "https://", "file:///local", "javascript:alert(1)"]) {
+    assert.throws(() => validateMarkerDescriptor({ ...marsMarker, source: { ...marsMarker.source, origin } }), /source/u);
+  }
   assert.throws(() => validateMarkerDescriptor({
     ...marsMarker,
     source: { ...marsMarker.source, path: "../outside.jpg" },

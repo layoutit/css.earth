@@ -4,6 +4,10 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
 const city = JSON.parse(await readFile(new URL("../source/city/manifest.json", import.meta.url), "utf8"));
+import { EARTH_STAGING_ROOT } from "./preparation-paths.mjs";
+import { earthSurfacePageUrls } from "./surface-raster.mjs";
+
+const { pages } = JSON.parse(await readFile(resolve(EARTH_STAGING_ROOT, "surface-raster-plan.json"), "utf8"));
 
 const controls = Object.freeze([
   Object.freeze({
@@ -12,6 +16,7 @@ const controls = Object.freeze([
     shortLabel: "RGB",
     thumbnailUrl: "/scenes/earth/earth-lens-normal.webp",
     surfaceUrl: "/scenes/earth/earth-surface.webp",
+    surfaceUrls: earthSurfacePageUrls("earth-surface", pages.length),
     polesUrl: "/scenes/earth/earth-surface-poles.webp",
     maximumZoom: city.presentation.maximumZoom,
     qualification: "NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
@@ -20,6 +25,7 @@ const controls = Object.freeze([
     id: "buenos-aires-noise", label: "Buenos Aires noise", shortLabel: "dBA",
     thumbnailUrl: "/scenes/earth/earth-lens-noise.webp",
     surfaceUrl: "/scenes/earth/earth-surface.webp", polesUrl: "/scenes/earth/earth-surface-poles.webp",
+    surfaceUrls: earthSurfacePageUrls("earth-surface", pages.length),
     maximumZoom: city.presentation.maximumZoom, camera: PREPARED_EARTH_NOISE.camera,
     qualification: PREPARED_EARTH_NOISE.qualification, legend: PREPARED_EARTH_NOISE.legend,
   }),
@@ -29,6 +35,7 @@ const controls = Object.freeze([
     shortLabel: "TOPO",
     thumbnailUrl: "/scenes/earth/earth-lens-topography.webp",
     surfaceUrl: "/scenes/earth/earth-topography.webp",
+    surfaceUrls: earthSurfacePageUrls("earth-topography", pages.length),
     polesUrl: "/scenes/earth/earth-topography-poles.webp",
     maximumZoom: 8,
     qualification: "NASA Blue Marble topography and bathymetry",
@@ -39,6 +46,7 @@ const controls = Object.freeze([
     shortLabel: "VIIRS",
     thumbnailUrl: "/scenes/earth/earth-lens-night-lights.webp",
     surfaceUrl: "/scenes/earth/earth-night-lights.webp",
+    surfaceUrls: earthSurfacePageUrls("earth-night-lights", pages.length),
     polesUrl: "/scenes/earth/earth-night-lights-poles.webp",
     maximumZoom: 8,
     qualification: "NASA Black Marble 2016 global composite",
