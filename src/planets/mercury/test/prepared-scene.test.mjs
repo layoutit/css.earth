@@ -12,6 +12,7 @@ import { PREPARED_MERCURY_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_MERCURY_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import { PREPARED_MERCURY_STARFIELD } from "../runtime/preparedStarfield.mjs";
 import { MERCURY_PRESENTATION_FRAME } from "../tools/scene-camera-pose.mjs";
+import { validatePreparedPlanetarySystem } from "../../../platform/heliocentric-view.mjs";
 
 test("publishes one prepared retained Mercury scene", () => {
   assert.equal(
@@ -145,6 +146,32 @@ test("publishes one prepared retained Mercury scene", () => {
       .changesPhysicalAxialTiltClaim,
     false,
   );
+});
+
+test("carries the planetary system around Mercury", () => {
+  const { heliocentricView, camera } = PREPARED_MERCURY_SCENE;
+  const system = heliocentricView.system;
+  assert.equal(validatePreparedPlanetarySystem(system, heliocentricView), system);
+  assert.deepEqual(system.bodies.map((body) => body.id),
+    ["venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"]);
+  assert.equal(camera.dolly.maximumDistanceOverSystemExtent, 3);
+  assert.equal(camera.planetarySystem.model, "distance-over-orbit-extent-fade");
+  assert.ok(camera.planetarySystem.visibleAboveDistanceOverOrbitExtent >
+    camera.planetarySystem.hiddenBelowDistanceOverOrbitExtent);
+  assert.equal(camera.sunMarker.model, "sprite-diameter-crossfade");
+  assert.ok(camera.sunMarker.fadeStartSpritePixels > camera.sunMarker.fullSpritePixels);
+
+  const maximumDistance = 3 * system.maximumExtentUnits;
+  const minimumDistance = camera.dolly.minimumDistanceRadii *
+    heliocentricView.units.bodyRadiusUnits;
+  const wheelNotchesEndToEnd = Math.log(maximumDistance / minimumDistance) /
+    (camera.dolly.wheelStepPerDelta * 100);
+  assert.ok(wheelNotchesEndToEnd > 20 && wheelNotchesEndToEnd < 40,
+    `wheelNotchesEndToEnd ${wheelNotchesEndToEnd} is outside (20, 40)`);
+
+  const extentAu = system.maximumExtentUnits / heliocentricView.units.unitsPerAu;
+  assert.ok(extentAu > 30 && extentAu < 31,
+    `system extent ${extentAu} au is not Neptune's orbit`);
 });
 
 test("uses the common object orbit without a decoded transform bank", async () => {

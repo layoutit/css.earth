@@ -67,6 +67,12 @@ try {
     interiorMounted: window.__mercury.dom.interiorMounted,
     sunBillboardCount: document.querySelectorAll(".mercury-directional-sun").length,
     sunCubemapBakeCount: Number(document.querySelectorAll(".planet-cubic-sky-face .mercury-directional-sun").length),
+    // The planetary system: a retained piece pool for the seven other
+    // orbits, one marker per planet and one for the Sun, mounted once.
+    systemOrbitPieceCount: window.__mercury.dom.retainedSystemOrbitPieceCount,
+    systemMarkerCount: document.querySelectorAll(".mercury-system-marker").length,
+    sunMarkerCount: document.querySelectorAll(".mercury-sun-marker").length,
+    systemGroupCount: document.querySelectorAll(".planet-heliocentric-system").length,
   }));
   assert.deepEqual(baseline, {
     title: "Mercury - Powered by PolyCSS",
@@ -77,8 +83,10 @@ try {
     stageChildren: 5,
     // Sky faces, the Sun billboard, the perspective camera with its body and
     // interior, the billboard disc and the material overlay, and the orbit
-    // overlay's piece pool and body marker.
-    stageElements: 2242,
+    // overlay's piece pool and body marker (2242), plus the planetary
+    // system's group, its 896 orbit pieces, seven planet markers and the
+    // Sun marker (905).
+    stageElements: 3147,
     cameraCount: 1,
     skyboxFaceCount: 6,
     sunCount: 1,
@@ -91,6 +99,10 @@ try {
     interiorMounted: true,
     sunBillboardCount: 1,
     sunCubemapBakeCount: 0,
+    systemOrbitPieceCount: 896,
+    systemMarkerCount: 7,
+    sunMarkerCount: 1,
+    systemGroupCount: 1,
   });
   const startupMercuryResources = await page.evaluate(() =>
     performance.getEntriesByType("resource")
@@ -121,7 +133,7 @@ try {
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
     viewBank: { interiorMounted: window.__mercury.dom.interiorMounted, retainedInteriorNodeCount: window.__mercury.dom.retainedInteriorNodeCount },
   })), {
-    elements: 2242,
+    elements: 3147,
     interiorLeaves: 446,
     viewBank: {
       interiorMounted: true,
@@ -630,7 +642,7 @@ try {
   for (const sample of lodLadder) {
     assert.equal(sample.datasetLod, sample.stage);
     assert.equal(sample.stable, true);
-    assert.equal(sample.elements, 2242);
+    assert.equal(sample.elements, 3147);
     assert.equal(sample.materialFrame, lodLadder[0].materialFrame);
     assert.ok(Math.abs(sample.billboardStyleOpacity - sample.billboardOpacity) <
       1e-6);
@@ -651,6 +663,49 @@ try {
     [0, 0, 0, 0, 0, 0.29, 0.71, 1, 1]);
   assert.ok(lodLadder[2].billboardOpacity > 0.4 &&
     lodLadder[2].billboardOpacity < 0.6);
+  // The planetary system: hidden at the close framings above, opaque at the
+  // dolly's far bound with every planet and the Sun marker on screen when
+  // looking down on the ecliptic, and nothing mounts or unmounts on the way.
+  const farSystem = await page.evaluate(() => {
+    const stats = window.__mercury.camera.stats();
+    const near = window.__mercury.sky.state().planetarySystem;
+    // Scene pitch is affine in the control pitch: 89 is 0 degrees, the
+    // default is 40, so this control pitch looks straight down the pole.
+    const poleOn = 89 - (89 - stats.defaultControlPitchDegrees) * 90 / 40;
+    window.__mercury.camera.setState({ controlPitch: poleOn, controlYaw: 0,
+      distanceKilometers: stats.dolly.maximumDistanceKilometers });
+    const far = window.__mercury.sky.state().planetarySystem;
+    const group = document.querySelector(".planet-heliocentric-system");
+    const result = {
+      nearOpacity: near.opacity, nearPieces: near.orbitPieceCount,
+      farOpacity: far.opacity, farPieces: far.orbitPieceCount, farMarkers: far.markerVisibleCount,
+      farBodies: far.bodies.map(({ id, visible }) => `${id}:${visible}`),
+      farSunMarker: far.sunMarkerVisible && far.sunMarkerOpacity === 1,
+      groupOpacity: getComputedStyle(group).opacity,
+      maximumDistanceAu: stats.dolly.maximumDistanceKilometers / 149597870.7,
+      wheelNotches: stats.dolly.wheelNotchesEndToEnd,
+      stable: window.__mercury.assertStableDomIdentity(),
+      elements: document.querySelector(".planet-stage").querySelectorAll("*").length,
+    };
+    window.__mercury.camera.setState({ controlPitch: stats.defaultControlPitchDegrees,
+      controlYaw: stats.defaultControlYawDegrees, zoom: 1.1 });
+    return result;
+  });
+  assert.equal(farSystem.nearOpacity, 0);
+  assert.equal(farSystem.nearPieces, 0);
+  assert.equal(farSystem.farOpacity, 1);
+  assert.equal(farSystem.groupOpacity, "1");
+  assert.ok(farSystem.farPieces > 600, `system pieces ${farSystem.farPieces}`);
+  assert.equal(farSystem.farMarkers, 7);
+  assert.deepEqual(farSystem.farBodies, ["venus:true", "earth:true", "mars:true",
+    "jupiter:true", "saturn:true", "uranus:true", "neptune:true"]);
+  assert.equal(farSystem.farSunMarker, true);
+  assert.ok(farSystem.maximumDistanceAu > 80 && farSystem.maximumDistanceAu < 100,
+    `far bound ${farSystem.maximumDistanceAu} au`);
+  assert.ok(farSystem.wheelNotches > 20 && farSystem.wheelNotches < 40);
+  assert.equal(farSystem.stable, true);
+  assert.equal(farSystem.elements, 3147);
+
   // Back in close: the row cache resumes on the retained rows.
   assert.equal(await page.evaluate(() => {
     const { stage, rowStreaming } = window.__mercury.sky.state().lod;
@@ -665,7 +720,7 @@ try {
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.childElementCount), baseline.stageChildren);
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-    stage.querySelectorAll("*").length), 2242);
+    stage.querySelectorAll("*").length), 3147);
   assert.equal(await page.evaluate(() =>
     window.__mercury.assertStableDomIdentity()), true);
   assert.deepEqual(externalRequests, []);
