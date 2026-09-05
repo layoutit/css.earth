@@ -193,6 +193,8 @@ try {
     }),
     externalRequests: external,
   };
+  // Preserve the measured report before any budget assertion.
+  console.log(JSON.stringify(report, null, 2));
   assert.equal(
     report.selectedPreparedDensity,
     CANONICAL_PREPARED_IMAGE_DENSITY,
@@ -256,7 +258,7 @@ try {
     JSON.stringify({ startupLongTasks: report.startup.longTasks }));
   assert.ok(report.frameIntervalP95Milliseconds <= 40,
     JSON.stringify({ p95: report.frameIntervalP95Milliseconds }));
-  console.log(JSON.stringify(report, null, 2));
+
 } finally {
   await browser.close();
 }

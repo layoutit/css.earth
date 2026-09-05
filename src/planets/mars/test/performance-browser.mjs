@@ -147,8 +147,10 @@ try {
     maximumCompositorLayer,
     externalRequests,
   });
+  // Preserve the measured report before any budget assertion.
+  console.log(JSON.stringify(report, null, 2));
   if (process.env.MARS_PERF_REPORT_ONLY === "1") {
-    console.log(JSON.stringify(report, null, 2));
+
     await cdp.detach();
     await context.close();
     process.exitCode = 0;
@@ -174,7 +176,7 @@ try {
     JSON.stringify(report.maximumCompositorLayer));
   assert.ok(report.maximumCompositorLayer.height <= 2880,
     JSON.stringify(report.maximumCompositorLayer));
-  console.log(JSON.stringify(report, null, 2));
+
   await cdp.detach();
   await context.close();
   }

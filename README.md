@@ -51,7 +51,12 @@ banks. At runtime, the browser only loads and displays these prepared assets.
 Large source binaries and generated browser assets are intentionally not
 committed. Their URLs, sizes, hashes, provenance, preparation code, and runtime
 inventories are committed. `prepare:checkout` restores the exact source bytes
-and generates `public/scenes/` locally.
+and Earth's published geometry release, then generates `public/scenes/` locally.
+The pinned worldwide release contains 19,632 packs (25.4 GB) outside Git and
+`dist`. Acquisition resumes valid local packs and validates every replacement
+before publishing it atomically to `.local/wmts-global/<version>/`.
+See [Earth reproduction](docs/global-earth-coverage.md#reproduction-and-checks)
+for acquisition and explicit geometry-authoring commands.
 
 After preparation, verify the local source closure or regenerate the browser
 assets with:

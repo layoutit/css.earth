@@ -73,3 +73,33 @@ test('a missing or loading object still requires successful readiness before ret
     }), /Readiness did not arrive/);
   }
 });
+
+test('the actual Saturn profile observes one exclusive lens and rejects the former dual selection', async () => {
+  const profile = await loadPlanetBrowserProfile(OBJECTS.find(object => object.id === 'saturn'));
+  const pressed = [], selected = [], committed = { lensId: 'normal' };
+  const page = { async evaluate(fn, payload) {
+    return structuredClone(await runInNewContext(`(${fn.toString()})(payload)`, {
+      payload,
+      document: { querySelectorAll(selector) {
+        assert.equal(selector, 'button[name="lens"][aria-pressed="true"]');
+        return pressed.map(value => ({ value }));
+      } },
+      window: { __saturn: {
+        lenses: { state: () => ({ id: committed.lensId, ready: true }), select(id) {
+          selected.push(id); committed.lensId = id; return true;
+        } },
+        runtime: { selection: () => ({ committed }) },
+      } },
+    }));
+  } };
+  assert.equal(await profile.pressedLens(page), null);
+  for (const id of ['cross-section', 'cross-section', 'ultraviolet', 'normal']) {
+    assert.equal(await profile.selectLens(page, id), true);
+    pressed.splice(0, pressed.length, id);
+    assert.equal((await profile.lens(page)).id, id);
+    assert.equal(await profile.pressedLens(page), id);
+  }
+  assert.deepEqual(selected, ['cross-section', 'cross-section', 'ultraviolet', 'normal']);
+  pressed.splice(0, pressed.length, 'ultraviolet', 'cross-section');
+  await assert.rejects(profile.pressedLens(page), /exclusive.*multiple pressed buttons/);
+});

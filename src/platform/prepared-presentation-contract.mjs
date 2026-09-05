@@ -299,6 +299,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   for (const animation of array(plan.animations, "animations")) {
     record(animation, "animation", ["target", "id", "keyframes", "duration", "mode", "sourceMinimum", "millisecondsPerDegree"]);
     node(animation.target); string(animation.id, "animation id");
+    if ([tree.camera, tree.scene].includes(animation.target)) fail("prepared animation cannot target the camera or scene");
     if (animation.mode !== "pose" || !(animation.duration > 0)) fail("unsupported prepared animation");
     finite(animation.sourceMinimum, "animation minimum"); finite(animation.millisecondsPerDegree, "animation time mapping");
     if (!array(animation.keyframes, "keyframes").length) fail("prepared animation has no keyframes");

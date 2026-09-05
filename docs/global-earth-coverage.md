@@ -36,6 +36,25 @@ The regular globe now uses PR #2's seven bounded surface pages. Topography and n
 
 ## Reproduction and checks
 
+A fresh checkout uses `pnpm prepare:checkout`: it restores pinned source bytes
+and the published worldwide geometry release, then runs ordinary preparation.
+Existing valid packs are reused. Missing or corrupt packs are downloaded from
+the origin, version and filenames bound by the checked-in release inventory;
+size and SHA-256 must match before an atomic replacement. Acquisition uses at
+most four concurrent pack requests and never authors or publishes a release.
+The focused acquisition command is:
+
+```sh
+node src/planets/earth/tools/acquire-pinned-global-wmts.mjs
+```
+
+`pnpm acquire:planets` includes this acquisition. Its `--verify-only` mode,
+including the focused helper's `--verify-only`, reads every pinned pack without
+network access or writes and fails if any source or pack is missing or corrupt.
+Ordinary `pnpm prepare:planets` verifies the acquired release and regenerates
+the coarse runtime binding from its pinned inputs. Its 94,072,860 worldwide
+tiles remain acquired geometry; ordinary preparation does not regenerate them.
+
 Run these from the feature checkout:
 
 ```sh
@@ -54,7 +73,7 @@ pnpm test:earth-delivery http://127.0.0.1:4228
 
 The shared browser suite needs a development server from this checkout at the supplied URL. The global browser harness starts its own server and exercises the normal app delivery path. It requires the matching local geometry release. Browser harnesses should run sequentially.
 
-`pnpm prepare:earth-global` reproduces the world, resumes verified regions, and reserves 8 GiB of disk headroom. Allow approximately 25.4 GB for the release, in addition to sources and preparation space. A changed geometry recipe creates a new version, so account for both versions before rebuilding. The completed-version pointer is published only after refinement and full hash verification.
+`pnpm prepare:earth-global` explicitly authors the worldwide geometry, resumes verified regions, and reserves 8 GiB of disk headroom. Allow approximately 25.4 GB for the release, in addition to sources and preparation space. A changed geometry recipe creates a new version, so account for both versions before rebuilding. The completed-version pointer is written only after refinement and full hash verification. This command is separate from restoring the already published release; a newly authored version requires its own publication before production can use its URLs.
 
 ## Deployment boundary
 

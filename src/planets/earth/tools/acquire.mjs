@@ -38,6 +38,7 @@ if (verifyOnly) {
   await run("prepare-places.mjs", ["--verify-only"]);
   console.log(JSON.stringify(await verifyEarthSourceManifest(), null, 2));
   await run("prepare-city-pages.mjs", ["--offline", "--verify-only"]);
+  await run("acquire-pinned-global-wmts.mjs", ["--verify-only"]);
   process.exit(0);
 }
 
@@ -78,6 +79,7 @@ await run("prepare-editorial.mjs");
 await run("prepare-city-pages.mjs");
 await run("prepare-places.mjs");
 console.log(JSON.stringify(await verifyEarthSourceManifest(), null, 2));
+await run("acquire-pinned-global-wmts.mjs");
 
 async function acquirePsg() {
   const seed = `<OBJECT-DATE>2026/08/30 12:00\n<OBJECT-NAME>Earth\n<GEOMETRY-REF>User`;

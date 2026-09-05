@@ -13,6 +13,7 @@ import {
 } from "@layoutit/polycss";
 
 import {
+  optimizePreparedDisplayLosslessWebp,
   optimizePreparedLosslessWebp,
   optimizePreparedQ75Webp,
   PREPARED_Q75_WEBP_ENCODING,
@@ -366,8 +367,10 @@ async function prepareSurfaces() {
         height: 512,
       }).resize(48, 48).webp({ quality: 90, effort: 6 }).toFile(thumbOutput),
     ]);
-    await optimizePreparedLosslessWebp(materialOutput);
-    await optimizePreparedLosslessWebp(shadowlessMaterialOutput);
+    // These are terminal display images. Orbit rows use fresh raw material
+    // buffers below, so retain the accepted visible-RGB/alpha encoding policy.
+    await optimizePreparedDisplayLosslessWebp(materialOutput);
+    await optimizePreparedDisplayLosslessWebp(shadowlessMaterialOutput);
     const orbitMaterial = await prepareOrbitMaterialRows(id, atmosphereColor);
     controls.push(deepFreeze({
       id,

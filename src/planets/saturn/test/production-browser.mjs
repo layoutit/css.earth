@@ -66,13 +66,13 @@ try {
       });
       assert.deepEqual(initial, {
         title: "Saturn - Powered by PolyCSS",
-        descendants: 1_322,
-        leaves: 1_246,
+        descendants: 1_918,
+        leaves: 939,
         canvas: 0,
         sceneSvg: 0,
         cutaways: 1,
-        minorMoons: 285,
-        renderRoots: 2,
+        minorMoons: 0,
+        renderRoots: 1,
       });
       assert.equal(await page.evaluate(() => window.__cssEarth), undefined);
       assert.equal(await page.evaluate(() => window.__saturn), undefined);
@@ -83,18 +83,18 @@ try {
       await page.keyboard.press("Home");
       await page.keyboard.press("=");
       await page.keyboard.press("-");
-      await page.locator('button[name="lens"][value="ultraviolet"]').click();
-      await page.waitForFunction(() =>
-        document.querySelector(".planet-stage")?.dataset.lens === "ultraviolet");
-      await page.locator('button[name="lens"][value="cross-section"]').click();
-      await page.waitForFunction(() =>
-        document.querySelector(".planet-stage")?.dataset.view === "interior");
-      await page.locator('button[name="lens"][value="thermal"]').click();
-      await page.waitForFunction(() =>
-        document.querySelector(".planet-stage")?.dataset.lens === "thermal");
-      await page.locator('button[name="lens"][value="cross-section"]').click();
-      await page.waitForFunction(() =>
-        !document.querySelector(".planet-stage")?.dataset.view);
+      for (const id of ["ultraviolet", "cross-section", "thermal", "cross-section", "cross-section", "normal"]) {
+        await page.locator(`button[name="lens"][value="${id}"]`).click();
+        await page.waitForFunction((lensId) => {
+          const stage = document.querySelector(".planet-stage");
+          const pressed = [...document.querySelectorAll('button[name="lens"][aria-pressed="true"]')];
+          return pressed.length === 1 && pressed[0].value === lensId &&
+            (stage.dataset.view ?? null) === (lensId === "cross-section" ? "interior" : null) &&
+            (stage.dataset.lens ?? null) === (["normal", "cross-section"].includes(lensId) ? null : lensId);
+        }, id);
+        assert.deepEqual(await page.locator('button[name="lens"][aria-pressed="true"]')
+          .evaluateAll(buttons => buttons.map(button => button.value)), [id]);
+      }
 
       for (const [name, className] of [
         ["rings", "saturn-hide-rings"],

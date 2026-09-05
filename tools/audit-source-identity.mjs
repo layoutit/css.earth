@@ -79,7 +79,9 @@ export async function verifyAuditSource(baseUrl, expected, session) {
   return identity;
 }
 
-export function assertAuditResponse({ url, status, headers }, baseUrl, identity) {
+export function assertAuditResponse({ url, status, headers, requestUrl = url, redirectedFrom }, baseUrl, identity) {
+  assert.equal(url, requestUrl, `Audit response changed its request URL: ${url}`);
+  assert.ok(!redirectedFrom, `Redirected response cannot establish audit source identity: ${url}`);
   assert.equal(new URL(url).origin, new URL(baseUrl).origin, `External response cannot establish audit source identity: ${url}`);
   assert.ok(status >= 200 && status < 300, `Audit response failed (${status}): ${url}`);
   assert.equal(headers[SOURCE_HEADER], identity.sha256, `Response is not bound to the recorded audit source: ${url}`);

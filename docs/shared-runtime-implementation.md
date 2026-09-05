@@ -1,115 +1,126 @@
 # Shared object runtime implementation
 
-The implementation in PR #2 replaces all eleven private runtime assemblies with
-`createObjectRuntime`. Each package retains its prepared rendering facts. The
-common platform owns every session, control transaction, image lease, residency
-pool, playback coordinator, and orbit binding.
+PR #2 now uses data-only prepared presentations for all eleven registered objects.
+The shared runtime builds each retained scene, resolves selection and material
+demand, publishes materials, and owns camera, resources, playback and cleanup.
+Packages contain source inputs, offline preparation, generated records and actual
+control content. No package presentation executor remains in the runtime closure.
 
-The required acquisition, 818-test, build and full browser gates pass. All eleven
-objects have the completed DPR 1/2 visual comparison. [The proof](generic-runtime-contract-proof.md)
-and [machine-readable evidence](generic-runtime-contract-evidence.json) record
-the exact source, results and remaining pixel/performance qualifications.
+The source architecture passes its current strict audits. The final combined
+acquisition, test, build, real-Chrome, visual and payload checks are still pending;
+this document does not declare the final PR head ready to merge.
 
-## Main changes
+## Runtime and preparation changes
 
-- `object-runtime-contract.mjs` validates the actual definition, controls,
-  prepared catalogs, synchronous hooks, retained handles and body registrations.
-- `object-runtime.mjs` assembles one lifetime, resources, playback, controls,
-  selection and camera. The router remains the only playback-permission owner.
-- `prepared-image-store.mjs` uses explicit leases, bounded native slots,
-  cancellation-safe URL coalescing, retries and batched ownership changes.
-- `prepared-residency.mjs` implements all pool mechanics. Packages supply policy
-  records and pure resource demand, including Earth page transitions and the
-  view-sensitive Uranus/Neptune/Saturn presentations.
-- `object-selection-runtime.mjs` owns desired/committed state and applies current
-  camera demand at the actual publication boundary.
-- `prepared-playback.mjs` registers retained CSS/WAAPI animations and applies
-  readiness, router permission, selected speed and prepared roles. Late handles
-  inherit current state. Pose animations stay distinct from rotation playback.
-- `object-control-binding.mjs` binds the existing content once and publishes busy
-  and committed state to both lens and settings panels. Motion remains shared
-  shell policy.
-- `object-browser-profile.mjs` provides one actual-runtime observation/action
-  implementation. Package profiles contain audit facts and view mappings.
+[`object-runtime.mjs`](../src/platform/object-runtime.mjs) assembles one lifetime,
+control binding, resource owner, playback owner, selection owner and orbit binding.
+The router supplies playback permission. Every client is an imports-only binding
+to this factory, and every definition binds `cssearth-object-runtime@2` to a
+validated `PREPARED_PRESENTATION` and its actual control export.
 
-There is no new timer-driven animation clock, rendering backend, object registry,
-application route, dependency, or fallback scene.
+[`prepared-presentation.mjs`](../src/platform/prepared-presentation.mjs) is the
+single scene builder and selection-write interpreter. Offline preparation emits
+final retained node records, source-derived styles, asset references and exhaustive
+lens/toggle variants. Runtime nodes reference a shared style-property dictionary.
+Assignments remain ordered after the initial `cssText`; this preserves the native
+CSS parsing behavior of the prepared matrix strings while avoiding repeated
+property payloads.
 
-## Removed private ownership
+[`prepared-material.mjs`](../src/platform/prepared-material.mjs) publishes every
+dynamic material track. It selects a prepared frame and address, applies the
+configured fallback, and transports the view-dependent rotation. The companion
+[demand interpreter](../src/platform/prepared-material-demand.mjs) handles current,
+visible, directional and neighboring-row policies from records. Objects may have
+zero, one or multiple tracks without adding a publisher implementation.
 
-All eleven clients are four-line bindings. The old Earth, Mercury, Mars, Jupiter,
-and Uranus cache implementations, Earth surface-image owner, Mercury lens-image
-owner, and Venus control coordinator are deleted. Saturn's private lifecycle,
-view-bank coordination, control binding and playback wrapper were removed from
-its client. Neptune's unused binary-orbit loader was removed with its private
-assembly. The unused feature-control binder was removed from the platform;
-its small speed-state data export remains for existing consumers.
+The shared resource owners protect the committed working set while a replacement
+decodes. Pools declare capacity, concurrency, stability delay, retention and native
+slot reuse. Cancellation, retry, URL coalescing, lease release and eviction stay in
+the common implementation. A selection resolves all required texture writes before
+publishing any of them. Native body-layer registrations verify the retained scene
+relationship at the publication boundary.
 
-Useful failure tests were moved to actual shared owners. In particular, the 24
-Mercury/Venus/Mars orbit-failure cases now compose their real package
-presentations with the real shared mount, resources, selection and orbit. They
-no longer extract a function from a private client that should not exist.
+Earth's optional destination catalog, page layers, motion-frame indices and
+navigation bounds use the same shared navigation and prepared-map owners. These
+are optional data fields in the contract, with no Earth-ID branch in the runtime.
 
-The ownership checker follows imports beyond the object directory. A helper
-moved into another folder is exempt only when it is part of the actual common
-runtime closure. Injected private mounts, listeners, image owners, selection
-schedulers, playback coordinators, control binders, hidden helpers and shared
-object-ID dispatch all fail their intended checks.
+Saturn's normal preparation retains the encoded ring, shadow and motion images
+produced by its source recipe. Those images also feed later material preparation,
+which consumes RGB beneath transparent texels. Re-optimizing them changed both
+the accepted asset bytes and derived foreground-ring colors. The extra Saturn
+optimization step is removed. The shared lossless optimizer used elsewhere now
+preserves and verifies all RGBA bytes; this does not authorize re-encoding an
+already accepted runtime asset. Neptune's six default material images are terminal
+display outputs; its later orbit rasters use fresh raw material buffers. They use
+the explicit shared display-lossless policy, which retains the original encoded
+bytes and verifies visible RGB and alpha. Both Neptune moon atlases retain full
+RGBA optimization. The actual eight-input regression matches all accepted hashes.
 
-## Rendering corrections and preserved behavior
+## Selection and projection corrections
 
-The shared camera keeps prepared perspective and scene scale fixed, applies zoom
-to the camera, and retains zero scene-depth translation. Body-dependent lighting
-layers are registered against the actual mounted scene and checked at every
-publication. These invariants address the detached Saturn material disc shown
-in the original report and prevent an object from silently using a private
-projection path.
+Saturn now has one selected lens. Cross-section is exclusive, re-clicking it is
+idempotent, and an exterior lens exits it. Rings and Shadows remain independent
+settings. Delayed, failed and cancelled transitions preserve the committed lens;
+there is no separate interior flag or remembered exterior selection.
 
-Saturn also had 162 retained interior projective leaves missing their prepared
-layout dimensions. `prepare-leaf-layouts.mjs` now supplies the correct 128-pixel
-leaf and 2048×1024 atlas dimensions instead of the generic 64-pixel/1024×512
-fallback. The prepared-leaf audit found no equivalent omission in the other ten
-objects. This is a separately identified visual correction, not unchanged-pixel
-parity with the broken interior.
+Saturn's ellipsoid inputs are prepared offline. The shared
+[ellipsoid helper](../src/platform/prepared-ellipsoid-projection.mjs) receives radii,
+static matrices, centering, coverage, material dimensions and the current view.
+It returns the affine material transform without reading the DOM or deriving
+scene geometry. The same helper accepts sphere, oblate and prolate parameters.
+The two material tracks use its prepared projection data; there is no Saturn
+publisher branch.
 
-The incoming PR shell work and common input work at `dd91897` are preserved:
-factsheets/charts, sidebar placement, drag/inertia/fly-to/wheel behavior, and the
-projective texture leaf's preserve-3D path. The canonical dirty main checkout and
-the separate sidebar worktree were not used as implementation targets.
+Prepared numeric-transport fields preserve the accepted native CSS transform
+precision, including fractional truncation and significant-digit serialization.
+They describe the transport, not an object ID. The source-bound fixture contains
+96 independently captured native camera/roll poses; the shared helper matches
+all raw transform strings. A separate analytic test covers 900 parameterized
+ellipsoid supports. These prove the scoped projection behavior, not full-scene
+pixel parity or final browser ownership.
 
-## Evidence method and limits
+## Atmosphere and material ranges
 
-The comparison baseline is the sealed `dd91897` integration tree. The original
-`ca610599` bundle remains available for migration history. Each bundle covers all
-11 objects, 418 conditions and 2,508 fixed-order native GPU readbacks. Source
-files, prepared assets, loaded bytes, browser/GPU identity and the unchanged
-six-module audit harness are recorded. Every phase is retained, including failed
-captures. No masks, increased tolerance, favorable-phase selection or software
-renderer substitute is used.
+Earth and Mars call the common offline `prepareAtmosphereFrame` integrator with
+different source profiles. Earth's profile contains Rayleigh and Mie layers,
+source light intensity and recorded camera exposure/opacity response. Mars uses
+an isotropic exponential shell calibrated to its source limb color and opacity.
+Their source/model conversion stays under each package's preparation tools.
 
-Some captures differ in Chrome texture sampling or raster completion. Unchanged
-baseline repeats also differ, but that alone does not establish the cause of
-all candidate differences. Earth's reduced-scale sampling and Neptune's few
-persistent one-level background pixels require explicit qualification. The
-strict byte-identical pixel gate must remain failed where it fails. The final
-proof reports visual findings separately from functional and architectural tests.
+Earth retains separate lighting and atmosphere tracks. Mars uses one composite
+track with 512 prepared addresses: the directional frame selects one of 256
+phases, and the Shadows variant supplies `frameOffset: 0` or `256`. Both ranges
+include directional atmosphere. `publishWithAddress` keeps light rotation tied
+to an available address; it prevents a pending material from advancing its
+rotation independently. The same shared material publisher handles both objects.
+Fresh regeneration, provenance verification and final visual qualification of
+these integrated atmosphere changes remain pending.
 
-Earth's standalone performance checks pass at DPR 1 and 2. A separate production
-workload fails its zero-long-task budget on both builds, with more long tasks in
-the candidate measurement. All of its other production assertions pass at both
-DPRs; the proof records the exact timings and preserved strict failure.
+## Production data closure
 
-The older Mars and
-Jupiter element-count expectations fail, with identical actual structure in the
-integration reference and candidate: Mars has 518 leaves/1,047 stage elements;
-Jupiter has 790/1,575. Jupiter's 40 ms P95 frame budget also fails: the same
-Shadows-enabled sweep measures 50 ms on both versions at both DPRs. The earlier
-Mercury migration comparison found the same 1,814 stage elements and 925 measured
-layers on reference and candidate, exceeding its old budgets. These limits were
-not increased, and report-only measurements are not budget passes. This work
-makes no performance improvement, native-renderer parity, immediate GPU-memory
-release, or physical-device performance claim.
+Uranus and Neptune control modules now import small generated lens-control records
+instead of material-bearing `preparedLenses.mjs` modules. The existing scene
+preparation chain generates these records offline. The actual `objectControls`
+objects compare deeply equal before and after, preserving labels, descriptions,
+titles and defaults, including shared shell title imports.
 
-Older controller-only and Earth affine-repair evidence remains in repository
-history and the local evidence directories. Those earlier acceptances do not
-upgrade the current full-runtime comparison to strict pixel parity.
+The imported generated modules shrink from 146,828 to 753 bytes for Uranus and
+145,284 to 670 bytes for Neptune: 290,689 raw bytes removed from those imports.
+The production client closures no longer reach either large lens module. This
+is a source-payload measurement; final compressed-bundle, transfer and performance
+measurements are pending.
+
+## Validation status
+
+The current source ownership and prepared-presentation audits pass for all eleven
+objects, with no private owner or shared object-ID dispatch violations. Their 41
+focused regression tests pass. Earlier focused checks also passed 64 Saturn tests,
+five shared ellipsoid tests and 31 Uranus/Neptune checks; the scope and limitations
+are recorded in [the proof](generic-runtime-contract-proof.md).
+
+Earlier visual captures retain unresolved strict pixel differences. Diagnostic
+repeatability and successful focused tests do not convert those failures into a
+pass. Final source hashes, prepared-asset receipts, aggregate gates, native-owner
+observations, matched DPR 1/2 renders and payload/performance results must be bound
+to the final integrated source. The [adapter data inventory](shared-runtime-architecture-proposal.md#remaining-adapter-differences-are-data)
+describes the remaining differences without assigning execution back to packages.

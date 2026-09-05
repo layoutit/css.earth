@@ -89,7 +89,7 @@ export async function prepareEarthPresentation() {
       demand:{mode:"visible-directional",prewarm:"symmetric",capacity:material.transport.maximumRetainedRowCount,framesPerRow:material.framesPerShard,
         defaultFrame:material.defaultFrame,defaultRow:material.transport.defaultRow,initialRows:material.transport.initialWarmRows,holdHiddenNeighborhood:false,fallback:"hold"},
       rotation:{kind:"planar",source:illumination?"prepared-light":"view-sun",reference:illumination?"prepared":"initial",baseDegrees:illumination?.baseLightAzimuthDegrees??0,
-        zeroAtPole:!!illumination,...(illumination?{publishWithAddress:true}:{polePolicy:"azimuth"}),width:material.presentationTileSize,height:material.presentationTileSize},
+        zeroAtPole:!!illumination,publishWithAddress:true,...(!illumination?{polePolicy:"azimuth"}:{}),width:material.presentationTileSize,height:material.presentationTileSize},
       frameAttribute:null,modeAttribute:null,quoted:true};
   });
   const variants=lenses.controls.flatMap(lens=>[false,true].flatMap(shadows=>[false,true].map(atmosphere=>{

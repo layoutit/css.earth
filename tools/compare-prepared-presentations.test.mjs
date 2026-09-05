@@ -37,3 +37,31 @@ test('an explicit package subset requires a complete sealed source report', asyn
   assert.throws(()=>selectCaptureObjects(report,['venus']),/Missing captured/);
   assert.throws(()=>selectCaptureObjects({...report,captures:report.captures.slice(0,3)},['moon']),/Complete capture/);
 });
+test('extended capture reports require the exact complete transport harness on both sources', () => {
+  const files = ['audit-shared-runtime','runtime-audit-poses','audit-source-identity','readback-sequence','object-contract-visual','saturn-scene-coverage','audit-prepared-transport'];
+  const transport = {'tools/audit-prepared-transport.mjs':'transport-sha'};
+  const report = {complete:true,errors:[],sourceIdentity:{sha256:'a'.repeat(64)},
+    protocol:'immutable-headless-native-readback-pairs@6',captures:[],expectedCaptureCount:0,
+    preparedTransportProtocol:'cssearth-source-bound-prepared-transport@1',
+    harnessHashes:{...Object.fromEntries(files.map(file=>[`tools/${file}.mjs`,'sha'])),...transport},
+    preparedTransportHarnessHashes:transport};
+  requireCaptureReports(report,structuredClone(report));
+  for (const mutate of [
+    r=>delete r.preparedTransportProtocol,
+    r=>r.preparedTransportProtocol='another-protocol',
+    r=>delete r.preparedTransportHarnessHashes,
+    r=>r.preparedTransportHarnessHashes['tools/audit-prepared-transport.mjs']='altered',
+    r=>r.harnessHashes['tools/audit-prepared-transport.mjs']='altered',
+    r=>r.harnessHashes['tools/unrecorded-helper.mjs']='unbound',
+  ]) {
+    const candidate=structuredClone(report); mutate(candidate);
+    assert.throws(()=>requireCaptureReports(report,candidate));
+  }
+  const stripped=structuredClone(report);
+  delete stripped.preparedTransportProtocol;
+  delete stripped.preparedTransportHarnessHashes;
+  assert.throws(()=>requireCaptureReports(stripped,stripped),/transport verifier protocol/);
+  const detached=structuredClone(report);
+  detached.preparedTransportHarnessHashes['tools/unrecorded-helper.mjs']='unbound';
+  assert.throws(()=>requireCaptureReports(detached,detached),/belongs to pinned/);
+});
