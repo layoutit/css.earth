@@ -117,6 +117,39 @@ try {
     await factsheetSummary.click();
     assert.equal(await factsheetPanel.evaluate((node) => node.open), factsheetInitiallyOpen,
       `${config.label}: Factsheet returns to its initial state`);
+    const chartSwitcher = page.locator(".planet-chart-switcher");
+    if (await chartSwitcher.count() > 0) {
+      const chartSlides = chartSwitcher.locator(".planet-chart-slide");
+      const chartIds = await chartSlides.evaluateAll((slides) =>
+        slides.map((slide) => slide.dataset.chartId));
+      const chartNodes = await chartSlides.elementHandles();
+      assert.equal(chartIds[0], "reflectance",
+        `${config.label}: Reflectance is the default chart`);
+      assert.equal(await chartSwitcher.getAttribute("data-active-chart"), chartIds[0]);
+      assert.deepEqual(await chartSwitcher.locator(".planet-chart-switcher-controls").evaluate((node) =>
+        [...node.children].map((child) => [
+          "planet-chart-previous", "planet-chart-next", "planet-chart-current-icon",
+        ].find((className) => child.classList.contains(className)))), [
+        "planet-chart-previous", "planet-chart-next", "planet-chart-current-icon",
+      ], `${config.label}: chart carets sit immediately left of the current icon`);
+      assert.equal(await chartSlides.evaluateAll((slides) =>
+        slides.filter((slide) => !slide.hidden).length), 1);
+      if (chartIds.length > 1) {
+        await chartSwitcher.locator(".planet-chart-next").click();
+        assert.equal(await chartSwitcher.getAttribute("data-active-chart"), chartIds[1],
+          `${config.label}: next caret advances the chart`);
+        assert.equal(await chartSwitcher.locator(".planet-chart-label:not([hidden])").textContent(),
+          await chartSlides.nth(1).getAttribute("data-chart-title"));
+        await chartSwitcher.locator(".planet-chart-previous").click();
+        assert.equal(await chartSwitcher.getAttribute("data-active-chart"), chartIds[0],
+          `${config.label}: previous caret returns to Reflectance`);
+      }
+      for (const [index, chartNode] of chartNodes.entries()) {
+        assert.equal(await chartNode.evaluate((node, position) =>
+          node.isConnected && node === document.querySelectorAll(".planet-chart-slide")[position], index), true,
+        `${config.label}: chart switching retains every prepared chart node`);
+      }
+    }
     assert.equal(await page.locator(".planet-topbar").count(), 0, "branding belongs to the shell, not a separate header");
     assert.equal(await rail.locator(".maps-brand-button").count(), 0);
     assert.equal(await page.locator(".planet-brand-footer").count(), 0);

@@ -57,7 +57,11 @@ try {
     assert.equal(await page.evaluate(() => window.__cssEarth), undefined);
     assert.equal(await page.evaluate(() => window.__mercury), undefined);
 
-    await page.locator("#mercury-reflectance summary").click();
+    assert.equal(await page.locator("#mercury-charts")
+      .getAttribute("data-active-chart"), "reflectance");
+    await page.locator("#mercury-charts .planet-chart-next").click();
+    assert.equal(await page.locator("#mercury-charts")
+      .getAttribute("data-active-chart"), "photometric-phase");
     assert.equal(await page.locator("#mercury-temperature-pressure").count(), 0);
     assert.equal(await page.locator(
       'img[src="/scenes/mercury/mercury-no-atmosphere-profile.svg"]',

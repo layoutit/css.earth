@@ -257,7 +257,7 @@ test("keeps implemented routes backed by object-owned files", async () => {
   }
 });
 
-test("renders source-backed charts in canonical order with shell-owned collapsed defaults", async () => {
+test("renders source-backed charts in one canonical switcher with Reflectance first", async () => {
   const panels = [
     ["mercury", "Mercury", [
       "reflectance", "photometric-phase",
@@ -306,7 +306,9 @@ test("renders source-backed charts in canonical order with shell-owned collapsed
     "utf8",
   );
   assert.match(shell, /class="planet-lenses" open>/u);
-  assert.doesNotMatch(shell, /open=\{chart\.open\}|open=\{gallery\.open\}/u);
+  assert.match(shell, /const defaultChart = orderedCharts\.find\(\(chart\) => chart\.id === "reflectance"\)/u);
+  assert.match(shell, /class="planet-chart-switcher"[\s\S]*?data-active-chart=\{defaultChart\.id\}/u);
+  assert.doesNotMatch(shell, /class="planet-chart-panel"|open=\{chart\.open\}|open=\{gallery\.open\}/u);
 
   const mercury = await readFile(
     new URL("../../src/planets/mercury/site/MercuryPanel.astro", import.meta.url),
@@ -372,17 +374,21 @@ test("renders concise per-lens descriptions without a general introduction", asy
   assert.match(saturnPanel, /thermal:\s*"Cassini infrared"/u);
 });
 
-test("places the thumbnail lens panel after Factsheet and before the charts", async () => {
+test("places the retained chart switcher after Factsheet and before Surface Lens", async () => {
   const [shell, client, styles, siteStyles] = await Promise.all([
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
     readFile(new URL("../planet-shell-client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../planet-shell.css", import.meta.url), "utf8"),
     readFile(new URL("../site.css", import.meta.url), "utf8"),
   ]);
-  assert.match(
-    shell,
-    /class="planet-selected-panel">[\s\S]*?id=\{`\$\{objectId\}-factsheet-panel`\}[\s\S]*?class="planet-factsheet-body"[\s\S]*?allFacts\.map\(\(fact\)[\s\S]*?<\/div>\}\s*<\/details>\s*\{hasLenses && lenses && <details id=\{`\$\{objectId\}-lenses`\} class="planet-lenses" open>[\s\S]*?class="planet-layers-menu"[\s\S]*?lenses\.controls\.map\(\(lens\)[\s\S]*?class="planet-observation-control"[\s\S]*?aria-pressed=\{lens\.id === lenses\.defaultLens[\s\S]*?class="planet-lens-icon" src=\{lens\.thumbnailUrl\}[\s\S]*?class="planet-lens-label">\{lens\.label\}[\s\S]*?class="planet-lens-description">\{lens\.description\}[\s\S]*?<\/details>\}\s*\{orderedCharts\.map\(\(chart\)[\s\S]*?<\/details>\s*\)\)\}\s*\{galleries\.map\(\(gallery\)/u,
-  );
+  const factsheetIndex = shell.indexOf('class="planet-factsheet-section"');
+  const chartsIndex = shell.indexOf('class="planet-chart-switcher"');
+  const lensesIndex = shell.indexOf('class="planet-lenses"');
+  assert.ok(factsheetIndex >= 0 && factsheetIndex < chartsIndex && chartsIndex < lensesIndex);
+  assert.match(shell, /class="planet-chart-switcher-controls"[\s\S]*?data-chart-step="-1"[\s\S]*?data-chart-step="1"[\s\S]*?class="planet-chart-current-icon"/u);
+  assert.match(shell, /orderedCharts\.map\(\(chart\) => \([\s\S]*?class="planet-chart-slide"[\s\S]*?hidden=\{chart\.id !== defaultChart\.id\}/u);
+  assert.match(client, /createChartSwitcherController[\s\S]*?activeIndex = \(index \+ slides\.length\) % slides\.length/u);
+  assert.match(client, /slide\.hidden = slide\.dataset\.chartId !== activeId/u);
   assert.doesNotMatch(shell, /planet-lenses-card|planet-layers-trigger|planet-layers-thumbnail|planet-layers-caption|planet-layers-glyph/u);
   assert.match(
     styles,
@@ -468,7 +474,7 @@ test("keeps the introduction below the title and shows all facts in a collapsed-
   assert.match(styles, /\.planet-panel-icon\[data-panel-icon="temperature-pressure"\]\s*\{[^}]*--planet-panel-icon-scale:\s*0\.9;/u);
   assert.match(
     shell,
-    /class="planet-panel-heading">\{chart\.title\.label\}<\/h2>[\s\S]*?chartIcons\[chart\.id\][\s\S]*?class="planet-panel-icon"[\s\S]*?data-panel-icon=\{chart\.id\}/u,
+    /class="planet-chart-label"[\s\S]*?data-chart-label=\{chart\.id\}[\s\S]*?\{chart\.title\.label\}[\s\S]*?class="planet-panel-icon planet-chart-icon"[\s\S]*?data-panel-icon=\{chart\.id\}/u,
   );
   assert.match(
     shell,
@@ -507,6 +513,7 @@ test("aligns prepared charts to device pixels after layout", async () => {
   assert.match(client, /devicePixelRatio/u);
   assert.match(client, /Math\.round\(top \* density\) \/ density/u);
   assert.match(client, /chart\.style\.setProperty\("translate"/u);
+  assert.match(client, /addEventListener\("chartchange", schedule/u);
 });
 
 test("keeps the shared sidebar content and controls intact", async () => {
@@ -626,7 +633,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.doesNotMatch(styles, /border-top:\s*1px solid/u);
   assert.match(
     styles,
-    /\.planet-information-panel > :is\([\s\S]*?\.planet-chart-panel[\s\S]*?\):has\(~ :is\([\s\S]*?\.planet-chart-panel[\s\S]*?\)\)\s*\{[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);/u,
+    /\.planet-information-panel > :is\([\s\S]*?\.planet-chart-switcher[\s\S]*?\):has\(~ :is\([\s\S]*?\.planet-chart-switcher[\s\S]*?\)\)\s*\{[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);/u,
   );
   assert.match(
     styles,

@@ -181,7 +181,7 @@ function assertRuntimeState(state) {
 
 async function assertPreparedInformation(page) {
   assert.equal(await page.locator(
-    '.planet-chart-panel:has(img[src="/scenes/saturn/saturn-atmosphere-spectrum.svg"]) h2',
+    '.planet-chart-label[data-chart-label="reflectance"]',
   )
     .textContent(),
     "Reflectance spectrum");
