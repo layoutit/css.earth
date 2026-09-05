@@ -60,6 +60,12 @@ export function createMercuryRowShardCache(plan) {
       requestWarm();
       return prepared;
     },
+    // Stop streaming: no further rows are requested and the warm pump exits
+    // after any decode in flight, while every retained row stays retained.
+    // The next presentation() call resumes.
+    suspend() {
+      active = false;
+    },
     onReady(callback) {
       readyCallback = callback;
     },

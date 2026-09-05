@@ -10,6 +10,8 @@ export const MERCURY_RUNTIME_ASSET_URLS = Object.freeze([
     dpr(`mercury-surface-${lens}`)),
   ...dpr("mercury-poles"),
   ...lightingRows,
+  "mercury-lighting-1x-billboard.webp",
+  "mercury-lighting-2x-billboard.webp",
   ...dpr("mercury-interior-outer"),
   ...dpr("mercury-interior-outer-poles"),
   ...dpr("mercury-interior-core"),
