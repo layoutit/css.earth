@@ -75,10 +75,9 @@ try {
     requestAnimationFrame(sample);
   }));
   await page.waitForFunction(() => {
-    const caches = window.__earth.renderStats.textureStats.materialCaches;
-    return [caches.lighting(), caches.atmosphere()].every((cache) =>
-      cache.pendingRowCount === 0 &&
-        (!cache.enabled || cache.appliedRow === cache.desiredRow));
+    const runtime = window.__earth.runtime, selected = runtime.selection();
+    return !selected.pending && !selected.loadingMaterial && runtime.resources().pools
+      .filter(pool => ["lighting", "atmosphere"].includes(pool.id)).every(pool => pool.pending === 0);
   }, null, { timeout: 10_000 });
   const runtime = await page.evaluate(() => {
     const resources = performance.getEntriesByType("resource")
@@ -103,12 +102,9 @@ try {
       ),
       resourceCount: resources.length,
       cameraStats: window.__earth.camera.stats(),
-      materialCaches: {
-        lighting: window.__earth.renderStats.textureStats.materialCaches
-          .lighting(),
-        atmosphere: window.__earth.renderStats.textureStats.materialCaches
-          .atmosphere(),
-      },
+      materialCaches: Object.fromEntries(window.__earth.runtime.resources().pools
+        .filter(pool => ["lighting", "atmosphere"].includes(pool.id)).map(pool => [pool.id, pool])),
+      selection: window.__earth.runtime.selection(),
       embeddedMoonElementCount:
         document.querySelectorAll('[class*="earth-moon"]').length,
     };
@@ -119,9 +115,9 @@ try {
     );
     if (!(input instanceof HTMLInputElement)) return null;
     if (input.checked) input.click();
-    const stats = () => window.__earth.renderStats.textureStats.materialCaches
-      .atmosphere();
-    while (stats().pendingRowCount !== 0) {
+    const stats = () => ({ pool: window.__earth.runtime.resources().pools.find(pool => pool.id === "atmosphere"),
+      decodes: window.__earth.runtime.resources().decodes, selection: window.__earth.runtime.selection() });
+    while (stats().pool.pending !== 0 || stats().selection.pending) {
       await new Promise((resolve) => requestAnimationFrame(resolve));
     }
     const before = stats();
@@ -204,7 +200,8 @@ try {
   assert.equal(report.retainedLeafCount,
     PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount);
   const startupRetainedImageCount =
-    2 + PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1 +
+    PREPARED_EARTH_SCENE.body.assets.surface.urls.length + 1 +
+      PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1 +
       PREPARED_EARTH_SCENE.material.atmosphere.transport.initialWarmRows.length;
   assert.equal(report.startup.retainedImageCount, startupRetainedImageCount);
   assert.ok(report.retainedImageCount <= startupRetainedImageCount + 4,
@@ -216,15 +213,13 @@ try {
   assert.ok(report.cameraStats.materialAddressWrites > 0,
     JSON.stringify(report.cameraStats));
   for (const cache of Object.values(report.materialCaches)) {
-    assert.equal(cache.model, "row-shard-cache");
-    assert.equal(cache.maximumRetainedRowCount, 3);
-    assert.ok(cache.retainedRowCount <= 3, JSON.stringify(cache));
-    if (cache.enabled) {
-      assert.equal(cache.appliedRow, cache.desiredRow, JSON.stringify(cache));
-    }
+    assert.equal(cache.capacity, 3);
+    assert.ok(cache.nativeSlots <= 3, JSON.stringify(cache));
+    assert.equal(cache.pending, 0);
   }
-  assert.equal(report.materialCaches.lighting.enabled, false);
-  assert.equal(report.materialCaches.lighting.runtimeDecodeCount, 0);
+  assert.equal(report.selection.committed.shadows, false);
+  assert.equal(report.materialCaches.lighting.resident, 0);
+  assert.ok(!report.selection.plan.required.some(key => key.startsWith("lighting:")));
   assert.equal(report.materialRowRequests.lighting.length, 0);
   assert.ok(new Set(report.materialRowRequests.atmosphere).size <=
     PREPARED_EARTH_SCENE.material.atmosphere.shardCount,
@@ -232,10 +227,11 @@ try {
   assert.ok(report.materialRowRequests.atmosphere.length <= 24,
     JSON.stringify(report.materialRowRequests.atmosphere));
   assert.ok(report.hiddenAtmosphereTransport);
-  assert.equal(report.hiddenAtmosphereTransport.before.enabled, false);
+  assert.equal(report.hiddenAtmosphereTransport.before.selection.committed.atmosphere, false);
+  assert.deepEqual(report.hiddenAtmosphereTransport.after.pool.keys, report.hiddenAtmosphereTransport.before.pool.keys);
   assert.equal(
-    report.hiddenAtmosphereTransport.after.runtimeDecodeCount,
-    report.hiddenAtmosphereTransport.before.runtimeDecodeCount,
+    report.hiddenAtmosphereTransport.after.decodes,
+    report.hiddenAtmosphereTransport.before.decodes,
   );
   const transferBudget = 34_000_000;
   assert.ok(report.transferBytes < transferBudget,

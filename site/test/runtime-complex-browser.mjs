@@ -122,7 +122,7 @@ async function snapshot(page, id) {
     };
     return {
       lifecycle: window.__cssEarth.lifecycle,
-      lens: runtime?.lenses.state() ?? null,
+      lens: runtime ? { ...runtime.lenses.state(), ...("interior" in runtime.runtime.selection().committed ? { interior: runtime.runtime.selection().committed.interior } : {}) } : null,
       features: runtime?.features.state() ?? null,
       camera: runtime?.camera.state() ?? null,
       cameraStats: runtime?.camera.stats() ?? null,
@@ -146,7 +146,7 @@ function assertAddress(actual, expected) {
 
 async function setNondefaultNeptuneCamera(page, controlPitch, waitForRows = true) {
   await page.evaluate((pitch) => window.__neptune.camera.setState({ controlPitch: pitch, controlYaw: 20 }), controlPitch);
-  if (waitForRows) await page.waitForFunction(() => window.__neptune.camera.stats().orbitMaterialCache.pendingRowCount === 0);
+  if (waitForRows) await page.waitForFunction(() => window.__neptune.runtime.resources().pools.find(pool => pool.id === "lighting").pending === 0);
 }
 
 async function neptuneRace(page, record) {

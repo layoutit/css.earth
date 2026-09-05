@@ -214,5 +214,6 @@ test("retains prepared guide provenance without mounting it in Jupiter", async (
     "utf8");
   assert.doesNotMatch(client, /mountPreparedOrbitGuide/u);
   assert.doesNotMatch(client, /createPreparedOrbitGuideInteraction/u);
-  assert.match(client, /createPlanetFeatureControls/u);
+  const { runtimeDefinition } = await import("../runtime/definition.mjs");
+  assert.deepEqual(runtimeDefinition.controls.settings.controls.filter(control => control.kind === "toggle").map(control => control.name), ["shadows", "rings"]);
 });

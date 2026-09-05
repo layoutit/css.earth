@@ -37,6 +37,7 @@ try {
     canvasCount: document.querySelectorAll("canvas").length,
     sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
     retainedLeafCount: window.__earth.dom.retainedLeafCount,
+    sunLeafCount: document.querySelectorAll(".planet-directional-sun").length,
     stageElementCount: document.querySelector(".planet-stage")
       .querySelectorAll("*").length,
     sceneTransform: getComputedStyle(document.querySelector(
@@ -131,7 +132,7 @@ try {
       return {
         exterior: images(".earth-body:not(.earth-body-polar) > s > .polycss-projective-texture"),
         interior: images(".earth-cutaway-body:not(.earth-cutaway-body-polar) > s > .polycss-projective-texture"),
-        bank: window.__earth.renderStats.textureStats.surfaceBanks(),
+        bank: window.__earth.runtime.resources().pools.find(pool => pool.id === "pages"),
       };
     });
     const interior = id === "cross-section";
@@ -151,22 +152,17 @@ try {
       `${id}: the complete canonical bank was requested`);
     assert.deepEqual(textures[interior ? "exterior" : "interior"], ["none"],
       `${id}: hidden surface pages do not retain image URLs`);
-    assert.deepEqual(textures.bank, {
-      activeId: id, pendingId: null, retainedBankCount: 1,
-      inFlightPageCount: 0, queuedPageCount: 0,
-    });
+    assert.equal(textures.bank.resident, urls.length);
+    assert.equal(textures.bank.pending, 0);
+    assert.ok(textures.bank.keys.every(key => key.startsWith(`page:${id}:`)));
   }
   await page.waitForFunction(() => {
-    const caches = window.__earth.renderStats.textureStats.materialCaches;
-    return [caches.lighting(), caches.atmosphere()].every((cache) =>
-      cache.pendingRowCount === 0);
+    return window.__earth.runtime.resources().pools.filter(pool => ["lighting", "atmosphere"].includes(pool.id)).every(pool => pool.pending === 0);
   });
   await page.evaluate(() => window.__earth.lenses.select("cross-section"));
   const hiddenMaterialBefore = await page.evaluate(() => ({
-    lighting: window.__earth.renderStats.textureStats.materialCaches
-      .lighting(),
-    atmosphere: window.__earth.renderStats.textureStats.materialCaches
-      .atmosphere(),
+    lighting: window.__earth.runtime.resources().pools.find(pool => pool.id === "lighting"),
+    atmosphere: window.__earth.runtime.resources().pools.find(pool => pool.id === "atmosphere"),
   }));
   await page.evaluate(() => window.__earth.camera.setState({
     controlPitch: 89,
@@ -184,13 +180,13 @@ try {
     )).transform,
     stageElementCount: document.querySelector(".planet-stage")
       .querySelectorAll("*").length,
-    viewBank: window.__earth.viewBank.state(),
+    viewBank: { interiorMounted: window.__earth.dom.interiorMounted,
+      interiorLeafCount: window.__earth.dom.interiorLeafCount },
+    required: window.__earth.runtime.selection().plan.required,
     rasterCircleCount: document.querySelectorAll(".earth-interior-material").length,
     materialCaches: {
-      lighting: window.__earth.renderStats.textureStats.materialCaches
-        .lighting(),
-      atmosphere: window.__earth.renderStats.textureStats.materialCaches
-        .atmosphere(),
+      lighting: window.__earth.runtime.resources().pools.find(pool => pool.id === "lighting"),
+      atmosphere: window.__earth.runtime.resources().pools.find(pool => pool.id === "atmosphere"),
     },
   }));
   assert.equal(cutaway.leafCount, PREPARED_EARTH_SCENE.interior.leafCount);
@@ -204,21 +200,16 @@ try {
   });
   assert.equal(cutaway.rasterCircleCount, 0);
   for (const role of ["lighting", "atmosphere"]) {
-    assert.equal(cutaway.materialCaches[role].enabled, false);
-    assert.equal(
-      cutaway.materialCaches[role].runtimeDecodeCount,
-      hiddenMaterialBefore[role].runtimeDecodeCount,
-    );
+    assert.ok(!cutaway.required.some(key => key.startsWith(`${role}:`)));
+    assert.deepEqual(cutaway.materialCaches[role].keys, hiddenMaterialBefore[role].keys);
   }
   await page.evaluate(() => window.__earth.lenses.select("normal"));
   await page.evaluate(() => window.__earth.lenses.select("cross-section"));
   assert.equal(await page.locator(".earth-cutaway").count(), 1);
   const runtimeStats = await page.evaluate(() => ({
     camera: window.__earth.camera.stats(),
-    lighting: window.__earth.renderStats.textureStats.materialCaches
-      .lighting(),
-    atmosphere: window.__earth.renderStats.textureStats.materialCaches
-      .atmosphere(),
+    lighting: window.__earth.runtime.resources().pools.find(pool => pool.id === "lighting"),
+    atmosphere: window.__earth.runtime.resources().pools.find(pool => pool.id === "atmosphere"),
   }));
   assert.equal(runtimeStats.camera.owner, "shared-retained-cubic-sky-orbit");
   assert.equal(runtimeStats.camera.runtimeGeometryPreparation, false);
@@ -226,9 +217,8 @@ try {
   assert.equal(runtimeStats.camera.yawBounded, false);
   assert.ok(runtimeStats.camera.publications > 0);
   for (const cache of [runtimeStats.lighting, runtimeStats.atmosphere]) {
-    assert.equal(cache.model, "row-shard-cache");
-    assert.ok(cache.retainedRowCount <= 3, JSON.stringify(cache));
-    assert.equal(cache.maximumRetainedRowCount, 3);
+    assert.ok(cache.nativeSlots <= 3, JSON.stringify(cache));
+    assert.equal(cache.capacity, 3);
   }
   for (const name of ["atmosphere"]) {
     await page.locator(`input[name="${name}"]`).evaluate((input) => input.click());

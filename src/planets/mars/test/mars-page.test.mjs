@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { runtimeDefinition } from "../runtime/definition.mjs";
 import { objectControls } from "../site/control-content.mjs";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -53,9 +54,7 @@ test("wires every prepared Mars lens and only supported settings", () => {
   assert.deepEqual(objectControls.lenses.controls.map(({ id }) => id), PREPARED_MARS_LENSES.controls.map(({ id }) => id));
   assert.equal(PREPARED_MARS_LENSES.controls.length, 3);
   assert.deepEqual(objectControls.settings.controls.map(({ name }) => name), ["speed", "shadows"]);
-  assert.match(client, /createMarsPanelControls/u);
-  assert.match(client, /"\.planet-drawer-content \.planet-lenses"/u);
-  assert.match(client, /"\.planet-settings-panel \.planet-settings"/u);
+  assert.equal(runtimeDefinition.controls, objectControls);
   assert.doesNotMatch(client, /querySelector\([^\n]*\.mars-(?:header|lenses|options|settings)/u);
   assert.equal(PLANET_SPEED_STATES.at(-1)?.label, "superfast");
 });

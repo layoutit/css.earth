@@ -51,6 +51,7 @@ try {
       });
     await page.locator('.planet-settings input[name="shadows"]')
       .evaluate((element) => element.click());
+    await page.waitForFunction(() => !window.__mars.runtime.selection().pending);
     const controlState = await page.evaluate(() => ({
       shadowsChecked:
         document.querySelector('.planet-settings input[name="shadows"]').checked,
@@ -100,15 +101,15 @@ try {
     zoom: 1.1,
   }));
   await page.waitForFunction(() =>
-    window.__mars.renderStats.materialCache().pendingCount === 0);
+    window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting").pending === 0);
   const continuity = await endContinuitySampling(page);
   assert.ok(continuity.samples > 0);
   assert.equal(continuity.blankSamples, 0);
   assertMaterialPresentation(await materialPresentation(page));
   const materialCache = await page.evaluate(() =>
-    window.__mars.renderStats.materialCache());
-  assert.ok(materialCache.retainedImageCount <= materialCache.maximumRetainedRowCount);
-  assert.ok(materialCache.imageAllocations <= materialCache.maximumRetainedRowCount);
+    window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting"));
+  assert.ok(materialCache.resident <= materialCache.capacity);
+  assert.ok(materialCache.nativeSlots <= materialCache.capacity);
 
   assert.equal(await page.evaluate(() =>
     window.__marsSmokeRetained.camera === document.querySelector(".polycss-camera") &&
@@ -357,7 +358,7 @@ function assertRuntimeState(state) {
   assert.equal(state.stageElementCount, 1047);
   assert.equal(state.retainedLeafCount, 518);
   assert.equal(state.stableDomIdentity, true);
-  assert.equal(state.runtimeDomGrowthPolicy, "fixed-single-object-scene");
+  assert.equal(state.runtimeDomGrowthPolicy, "none");
   assert.equal(state.selectedPreparedDensity, 2);
   assert.equal(state.visibleAssetsDecodedBeforeMount, 18);
   assert.equal(state.idleJavaScriptLoops, 0);

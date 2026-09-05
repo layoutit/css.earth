@@ -72,15 +72,15 @@ try {
     await page.evaluate((nextPitch) => window.__jupiter.setView({ pitch: nextPitch }), pitch);
   }
   await page.waitForFunction(() =>
-    window.__jupiter.renderStats.materialCache().pendingCount === 0);
+    window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting").pending === 0);
   const continuity = await endContinuitySampling(page);
   assert.ok(continuity.samples > 0);
   assert.equal(continuity.blankSamples, 0);
   assertMaterialPresentation(await materialPresentation(page));
   const materialCache = await page.evaluate(() =>
-    window.__jupiter.renderStats.materialCache());
-  assert.ok(materialCache.retainedImageCount <= materialCache.maximumRetainedRowCount);
-  assert.ok(materialCache.imageAllocations <= materialCache.maximumRetainedRowCount);
+    window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting"));
+  assert.ok(materialCache.resident <= materialCache.capacity);
+  assert.ok(materialCache.nativeSlots <= materialCache.capacity);
 
   assert.equal(await page.evaluate(() =>
     window.__jupiterSmokeRetained.camera === document.querySelector(".polycss-camera") &&
@@ -219,7 +219,7 @@ async function assertMaterialProjectionLock(page) {
     await shadows.evaluate((element) => element.click());
   }
   await page.waitForFunction(() =>
-    window.__jupiter.renderStats.materialCache().pendingCount === 0);
+    window.__jupiter.runtime.resources().pools.find(pool => pool.id === "lighting").pending === 0);
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() =>
     requestAnimationFrame(resolve))));
   const centers = await page.evaluate(() => {
@@ -327,7 +327,7 @@ function assertRuntimeState(state) {
   assert.equal(state.renderRootCount, 1);
   assert.equal(state.stageChildCount, 3);
   assert.equal(state.stageElementCount, 1575);
-  assert.equal(state.retainedLeafCount, 789);
+  assert.equal(state.retainedLeafCount, 790);
   assert.equal(state.stableDomIdentity, true);
   assert.equal(state.runtimeDomGrowthPolicy, "none");
   assert.equal(state.selectedPreparedDensity, 2);

@@ -41,7 +41,7 @@ try {
   await page.waitForTimeout(500);
   const startup = await page.evaluate(() => ({
     longTasks: [...window.__marsLongTasks],
-    cache: window.__mars.renderStats.materialCache(),
+    cache: ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") }),
     resources: performance.getEntriesByType("resource")
       .filter(({ name }) => name.includes("/scenes/mars/"))
       .map(({ name, transferSize, decodedBodySize }) => ({
@@ -53,11 +53,13 @@ try {
   await page.evaluate(() => {
     (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     window.__marsLongTasks = [];
-    window.__mars.setView({ pitch: 0, zoom: 0.8 });
+    const shadows = document.querySelector('input[name="shadows"]');
+    if (!shadows.checked) shadows.click();
+    window.__mars.setView({ controlPitch: 0, zoom: 0.8 });
   });
   await page.waitForFunction(() => {
-    const cache = window.__mars.renderStats.materialCache();
-    return cache.pendingRowCount === 0 && cache.appliedRow === cache.desiredRow;
+    const cache = ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") });
+    return window.__mars.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.materialFrame;
   });
   const motion = await page.evaluate(() => new Promise((resolve) => {
     const samples = [];
@@ -69,16 +71,16 @@ try {
         ? progress / 0.75 * 65
         : (1 - progress) / 0.25 * 65;
       const zoom = 0.8 + Math.sin(progress * Math.PI) * 0.3;
-      window.__mars.setView({ pitch, zoom });
-      const cache = window.__mars.renderStats.materialCache();
+      window.__mars.setView({ controlPitch: pitch, zoom });
+      const cache = ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") });
       samples.push({
         interval: now - previous,
-        pitch: window.__mars.view().pitch,
+        pitch: window.__mars.view().controlPitch,
         zoom: window.__mars.view().zoom,
         appliedFrame: cache.appliedFrame,
-        desiredFrame: cache.desiredFrame,
-        pendingRowCount: cache.pendingRowCount,
-        readyRows: cache.readyKeys,
+        desiredFrame: cache.materialFrame,
+        pendingRowCount: cache.pool.pending,
+        readyRows: cache.pool.keys,
       });
       previous = now;
       if (samples.length >= 120) resolve(samples.slice(5));
@@ -87,12 +89,12 @@ try {
     requestAnimationFrame(tick);
   }));
   await page.waitForFunction(() => {
-    const cache = window.__mars.renderStats.materialCache();
-    return cache.pendingRowCount === 0 && cache.appliedRow === cache.desiredRow;
+    const cache = ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") });
+    return window.__mars.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.materialFrame;
   }, null, { timeout: 10_000 });
   const runtime = await page.evaluate(() => ({
     longTasks: [...window.__marsLongTasks],
-    cache: window.__mars.renderStats.materialCache(),
+    cache: ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") }),
     stableDomIdentity: window.__mars.assertStableDomIdentity(),
     retainedLeafCount: window.__mars.dom.retainedLeafCount,
     stageElementCount: document.querySelector(".planet-stage")
@@ -155,10 +157,10 @@ try {
   assert.equal(report.runtime.retainedLeafCount, 520);
   assert.equal(report.runtime.stageElementCount, 551);
   assert.equal(report.runtime.runningAnimationCount, 0);
-  assert.equal(report.runtime.cache.maximumRetainedRowCount, 3);
-  assert.ok(report.runtime.cache.retainedRowCount <= 3);
-  assert.equal(report.runtime.cache.appliedRow, report.runtime.cache.desiredRow);
-  assert.ok(report.runtime.cache.imageAllocations <= 3);
+  assert.equal(report.runtime.cache.pool.capacity, 3);
+  assert.ok(report.runtime.cache.pool.ready <= 3);
+  assert.equal(report.runtime.cache.appliedFrame, report.runtime.cache.materialFrame);
+  assert.ok(report.runtime.cache.pool.nativeSlots <= 3);
   assert.deepEqual(report.externalRequests, []);
   assert.ok(report.startup.longTasks.every((duration) => duration <= 200),
     JSON.stringify({ startupLongTasks: report.startup.longTasks }));

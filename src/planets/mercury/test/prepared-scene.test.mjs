@@ -132,11 +132,9 @@ test("uses the common object orbit without a decoded transform bank", async () =
     "../../../platform/cubic-sky-runtime.mjs",
     import.meta.url,
   ), "utf8");
-  assert.match(client, /createRetainedCubicSkyOrbit/u);
-  assert.match(client, /mountRetainedCubicSky/u);
+  assert.match(client, /createObjectRuntime/u);
   assert.match(cubicSkyRuntime, /new DOMMatrix\(\)/u);
   assert.match(cubicSkyRuntime, /controlYawDelta/u);
-  assert.match(client, /sunViewDirection/u);
   assert.doesNotMatch(
     client,
     /preparedOrbitBank|DecompressionStream|TextDecoder|encodedBase64/u,

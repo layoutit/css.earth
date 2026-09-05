@@ -109,18 +109,13 @@ test("switches prepared lenses without filters, canvas, or DOM growth", async ()
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
   ]);
-  assert.match(client, /selectLens/u);
-  assert.match(client, /lensDecodePromises\.get\(id\)/u);
-  assert.match(client, /lensDecodePromises\.set\(id, entry\)/u);
-  assert.match(client,
-    /id === PREPARED_JUPITER_LENSES\.defaultLens/u);
-  assert.match(client, /await entry\.promise/u);
-  assert.match(client, /await selection\.run\(/u);
-  assert.match(client, /stage\.dataset\.lens = id/u);
-  assert.match(client, /lensControls\?\.publishLens\(id\)/u);
-  assert.match(client, /createLatestSelection/u);
-  assert.doesNotMatch(client, /controlRequest|lensRequest/u);
-  assert.match(client, /ready: mounted !== null && !lifetime\.disposed/u);
+  const { runtimeDefinition } = await import("../runtime/definition.mjs");
+  assert.equal(runtimeDefinition.controls.lenses.controls.length, PREPARED_JUPITER_LENSES.controls.length);
+  for (const lens of PREPARED_JUPITER_LENSES.controls) {
+    const entries = runtimeDefinition.assets.entries.filter(entry => [`surface:${lens.id}`, `poles:${lens.id}`].includes(entry.key));
+    assert.deepEqual(entries.map(entry => entry.url), [lens.surface2xUrl, lens.poles2xUrl]);
+    assert.ok(entries.every(entry => entry.pool === "warm"));
+  }
   assert.doesNotMatch(client, /style\.filter|canvas|getContext\(/u);
   assert.match(css, /data-lens="ultraviolet"/u);
   assert.match(css, /data-lens="methane"/u);

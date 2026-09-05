@@ -109,3 +109,18 @@ test("failure rollback cannot clear a new request started by its callback", asyn
   gate.resolve("replacement");
   assert.equal(await replacement, true);
 });
+
+test("revalidation retries preparation within one action and keeps busy until the current view commits", async () => {
+  const h = harness(); let view = 0, passes = 0;
+  const result = await h.run(null, { prepare() { const prepared = view; passes++; return prepared; },
+    revalidate(prepared) { if (passes === 1) view = 1; return prepared === view; },
+    commit(prepared) { h.commits.push(prepared); }, discard(prepared) { h.discarded.push(prepared); } });
+  assert.equal(result, true); assert.equal(passes, 2);
+  assert.deepEqual(h.commits, [1]); assert.deepEqual(h.discarded, [0]); assert.deepEqual(h.busy, [true, false]);
+});
+test("an asynchronous revalidation hook is fatal and its late rejection is observed", async () => {
+  const h = harness();
+  await assert.rejects(h.run(Promise.resolve(1), { revalidate() { return Promise.reject(new Error("late")); } }), /synchronous/);
+  assert.equal(h.fatal.length, 1); assert.deepEqual(h.commits, []);
+  await new Promise(setImmediate);
+});
