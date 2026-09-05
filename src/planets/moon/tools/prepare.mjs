@@ -10,6 +10,8 @@ const steps = Object.freeze([
   ["prepare-starfield.mjs"],
   ["prepare-sky-sun.mjs"],
   ["prepare-scene.mjs"],
+  ["../../../../tools/prepare-object-controls.mjs", "--object=moon"],
+  ["prepare-presentation.mjs"],
   ["prepare-runtime-asset-manifest.mjs"],
 ]);
 

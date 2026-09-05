@@ -1,0 +1,75 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { runtimeDefinition } from "../runtime/definition.mjs";
+import { objectRuntimePackageTests, retainedPresentationFixture } from "../../../platform/test/object-runtime-package.mjs";
+import { mountPreparedPresentation } from "../../../platform/prepared-presentation.mjs";
+import { initialObjectSelection } from "../../../platform/object-runtime-contract.mjs";
+import { OBJECTS } from "../../../../site/objects.mjs";
+import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mjs";
+objectRuntimePackageTests(runtimeDefinition);
+test("Earth's actual import closure has only shared runtime owners", async () => {
+  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "earth") });
+  assert.equal(audit.complete, true);
+  for (const name of ["object-runtime", "prepared-residency", "object-selection-runtime", "object-control-binding", "prepared-playback", "cubic-sky-runtime"]) {
+    assert.ok(audit.sharedClosure.includes(`src/platform/${name}.mjs`));
+  }
+});
+
+test("Earth keeps each held material image and rotation paired until its directional row is decoded", () => {
+  const f = retainedPresentationFixture(runtimeDefinition);
+  const Matrix = globalThis.DOMMatrix, calls = [];
+  // The fixture does not calculate matrices. Record the actual requested native
+  // operations so a rotation of an old image cannot pass as an unchanged style.
+  globalThis.DOMMatrix = class extends Matrix {
+    rotate(degrees) { this.degrees = degrees; return this; }
+    multiply(other) { calls.push({ projection: this.value, degrees: other.degrees }); return this; }
+  };
+  try {
+    const presentation = mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
+    const mesh = f.stage.querySelectorAll("*").find(node => node.className === "polycss-mesh earth-material");
+    const [lighting, atmosphere] = mesh.children;
+    const projection = { lighting: lighting.style.transform, atmosphere: atmosphere.style.transform };
+    const capture = () => [lighting, atmosphere].map(leaf => ({ image: leaf.style.backgroundImage,
+      position: leaf.style.backgroundPosition, size: leaf.style.backgroundSize, frame: leaf.dataset.materialFrame }));
+    const initialSelection = initialObjectSelection(runtimeDefinition.controls);
+    function publish({ z, roll, available = [], shadows = true, lensId = "normal" }) {
+      const radial = Math.sqrt(1 - z * z), direction = [Math.cos(roll) * radial, Math.sin(roll) * radial, z];
+      const keys = runtimeDefinition.assets.entries.map(entry => entry.key).filter(key =>
+        !key.startsWith("lighting:") && !key.startsWith("atmosphere:") || available.includes(key.split(":")[0]));
+      const ready = new Set(keys), resources = { has: key => ready.has(key), readyKeys: () => keys,
+        url: key => ready.has(key) ? f.resources.url(key) : null };
+      const selection = { ...initialSelection, lensId, shadows, atmosphere: true };
+      const view = { controlPitch: 40, controlYaw: 0, zoom: 1.1,
+        counterRotation: "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)",
+        sunViewDirection: direction, skySunViewDirection: [direction[0], -direction[1], -direction[2]],
+        reference: { sunViewDirection: [1, 0, 0], skySunViewDirection: [1, 0, 0] } };
+      calls.length = 0;
+      presentation.commitSelection({ selection, view, resources });
+      presentation.publishFrame({ selection, view, resources });
+      return capture();
+    }
+    const original = publish({ z: .1, roll: 0, available: ["lighting", "atmosphere"] });
+    assert.equal(calls.length, 2);
+    assert.deepEqual(publish({ z: .6, roll: 1.3 }), original);
+    assert.deepEqual(calls, [], "neither held image may rotate while the new rows are missing");
+
+    const partial = publish({ z: .6, roll: 1.3, available: ["lighting"] });
+    assert.notDeepEqual(partial[0], original[0]);
+    assert.deepEqual(partial[1], original[1]);
+    assert.deepEqual(calls.map(call => call.projection), [projection.lighting]);
+    const complete = publish({ z: .6, roll: 1.3, available: ["lighting", "atmosphere"] });
+    assert.deepEqual(complete[0], partial[0]);
+    assert.notDeepEqual(complete[1], partial[1]);
+    assert.deepEqual(calls.map(call => call.projection), [projection.atmosphere]);
+
+    const shadowless = publish({ z: .6, roll: 1.3, shadows: false });
+    assert.equal(shadowless[0].frame, "shadowless");
+    assert.deepEqual(calls, [{ projection: projection.lighting, degrees: 0 }]);
+    assert.deepEqual(publish({ z: -.4, roll: 2.7 }), shadowless);
+    assert.deepEqual(calls, [], "a mode change cannot rotate the retained shadowless image");
+    assert.deepEqual(publish({ z: -.4, roll: 2.7, lensId: "cross-section", available: ["lighting", "atmosphere"] }), shadowless);
+    assert.deepEqual(calls, [], "hidden directional materials retain their last complete publication");
+    publish({ z: -.4, roll: 2.7, available: ["lighting", "atmosphere"] });
+    assert.deepEqual(calls.map(call => call.projection), [projection.lighting, projection.atmosphere]);
+  } finally { f.restore(); }
+});

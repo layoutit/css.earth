@@ -21,6 +21,7 @@ export function objectPackagePaths(objectRecord, projectRoot = process.cwd()) {
       resolve(root, "runtime-assets.json"),
       resolve(root, "runtime", "client.mjs"),
       resolve(root, "site", `${objectRecord.name}Page.astro`),
+      resolve(root, "site", "control-content.mjs"),
       resolve(root, "test", "browser-profile.mjs"),
       resolve(root, "test", "smoke-browser.mjs"),
       resolve(root, "tools", "acquire.mjs"),

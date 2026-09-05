@@ -41,3 +41,26 @@ test("scales variable-backed prepared background addresses", () => {
   assert.equal(style.backgroundPosition, "var(--mercury-surface-position)");
   assert.equal(style.backgroundSize, "4160px 3072px");
 });
+
+const { applyPreparedProjectiveLayout } = await import("./prepared-projective-texture-leaf.mjs");
+test("scaled projective leaves reject missing prepared dimensions and texture size", () => {
+  for (const missing of ["width", "height", "backgroundSize"]) {
+    const style = { width: "64px", height: "64px", backgroundSize: "1024px 512px", [missing]: "" };
+    assert.throws(() => applyPreparedProjectiveLayout(style, null, 2), new RegExp(missing));
+    const layout = { [missing]: missing === "backgroundSize" ? "1024px 512px" : "64px" };
+    applyPreparedProjectiveLayout(style, layout, 2);
+    assert.equal(style[missing], layout[missing]);
+  }
+});
+test("existing explicit atlas dimensions and addresses remain unchanged when defaults are supplied", () => {
+  const values = { "--polycss-atlas-width": "256px", "--polycss-atlas-height": "256px" };
+  const style = { width: "", height: "", backgroundSize: "512px 256px", getPropertyValue: name => values[name] ?? "" };
+  const before = { ...style };
+  applyPreparedProjectiveLayout(style, { width: "64px", height: "64px", backgroundSize: "1024px 512px" }, 2);
+  assert.deepEqual(style, before);
+});
+test("unscaled CSS leaves retain their existing layout contract", () => {
+  const style = { width: "", height: "", backgroundSize: "" };
+  applyPreparedProjectiveLayout(style, null, 1);
+  assert.deepEqual(style, { width: "", height: "", backgroundSize: "" });
+});

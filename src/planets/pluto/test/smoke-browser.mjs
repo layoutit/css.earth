@@ -73,7 +73,7 @@ try {
     lens: { id: "surface", ready: true },
   });
 
-  await page.evaluate(() => window.__pluto.pause());
+  await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   await waitForPaint(page);
   const surface = await page.locator(".example-stage").screenshot();
   await page.evaluate(() => window.__pluto.lenses.select("topography"));

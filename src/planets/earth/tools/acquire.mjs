@@ -3,6 +3,7 @@
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { spawn } from "node:child_process";
+import { gzipSync } from "node:zlib";
 import { publishSourceBytes } from "../../../platform/source-acquisition.mjs";
 import {
   assertEarthSourceBytes,
@@ -33,7 +34,11 @@ urls.set("openspace/earth-globe.asset", "https://raw.githubusercontent.com/OpenS
 urls.set("openspace/earth-atmosphere.asset", "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/earth/atmosphere.asset");
 
 if (verifyOnly) {
+  await run("prepare-noise-lens.mjs", ["--verify-only"]);
+  await run("prepare-places.mjs", ["--verify-only"]);
   console.log(JSON.stringify(await verifyEarthSourceManifest(), null, 2));
+  await run("prepare-city-pages.mjs", ["--offline", "--verify-only"]);
+  await run("acquire-pinned-global-wmts.mjs", ["--verify-only"]);
   process.exit(0);
 }
 
@@ -58,6 +63,7 @@ for (const entry of manifest.inputs) {
   });
   if (!response.ok) throw new Error(`Earth source request failed for ${entry.path}: ${response.status}.`);
   let bytes = Buffer.from(await response.arrayBuffer());
+  if (entry.path === "noise/buenos-aires-day-2025.geojson.gz") bytes = gzipSync(bytes,{level:9});
   if (entry.path === "editorial/nasa-earth-record.json") {
     const record = JSON.parse(bytes);
     if (record.id !== 48583 || record.title?.rendered !== "Facts About Earth" || record.link !== "https://science.nasa.gov/earth/facts/") {
@@ -70,7 +76,10 @@ for (const entry of manifest.inputs) {
 
 await run("prepare-source-intermediates.mjs");
 await run("prepare-editorial.mjs");
+await run("prepare-city-pages.mjs");
+await run("prepare-places.mjs");
 console.log(JSON.stringify(await verifyEarthSourceManifest(), null, 2));
+await run("acquire-pinned-global-wmts.mjs");
 
 async function acquirePsg() {
   const seed = `<OBJECT-DATE>2026/08/30 12:00\n<OBJECT-NAME>Earth\n<GEOMETRY-REF>User`;
@@ -123,9 +132,9 @@ async function exists(path) {
   try { await access(path); return true; } catch { return false; }
 }
 
-function run(file) {
+function run(file, argumentsList = []) {
   return new Promise((resolvePromise, reject) => {
-    const child = spawn(process.execPath, [resolve(import.meta.dirname, file)], { stdio: "inherit" });
+    const child = spawn(process.execPath, [resolve(import.meta.dirname, file), ...argumentsList], { stdio: "inherit" });
     child.once("error", reject);
     child.once("exit", (code, signal) => code === 0 ? resolvePromise() : reject(new Error(`Earth acquisition helper failed with ${signal ?? `exit ${code}`}.`)));
   });

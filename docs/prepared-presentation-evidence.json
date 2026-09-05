@@ -1,0 +1,1220 @@
+{
+  "schema": "cssearth-prepared-presentation-delivery@1",
+  "recordedAt": "2026-09-05T22:15:49.649071+00:00",
+  "delivery": {
+    "implementationCommit": "cf45c49540d581c63f618de35dcf6824038d274b",
+    "sourceSha256": "e8e38941baa22d9e12d27b2f90cec38aabf15e554efc602e31a34745c6deefdb",
+    "sourceFiles": 1217,
+    "sourceReceipt": {
+      "path": "output/presentation-generalization/260905-001/B24/delivery-source.json",
+      "sha256": "4c2d9d462d8a8a258ae6eb375d3087e9425b83da4e7790093bee31c75dc6395b",
+      "bytes": 147281
+    },
+    "integratedIncoming": [
+      "28424ef6",
+      "f06df515",
+      "91fae0bc",
+      "2101c63b"
+    ],
+    "fullAggregateRepeatedAfterIntegration": false,
+    "additionalFullPreparationRepeated": false,
+    "reason": "Further full preparation, capture matrices and aggregate reruns were stopped at the user request.",
+    "mergeReadiness": "UNPROVEN",
+    "merged": false
+  },
+  "native": {
+    "sourceSha256": "534c4e9d1811bc7bb5cda2c16cdcc8bd40dd4f2bf82ab7ecf5154673ca0a4e2d",
+    "browser": "152.0.7977.76",
+    "dprs": [
+      1,
+      2
+    ],
+    "objects": 11,
+    "ownershipCases": 22,
+    "ownershipPassed": 22,
+    "conformancePassed": 143,
+    "playbackPassed": 22,
+    "report": {
+      "path": "output/presentation-generalization/260905-001/B19/browser-aggregate-native-534c4e9d/receipt.json",
+      "sha256": "aba9419569d0323ee56fcc0bf4e7ca8f64c9fb0cbc2a6264d52e5de324ff5535",
+      "bytes": 20441
+    },
+    "matrix": {
+      "path": "output/presentation-generalization/260905-001/B19/browser-aggregate-native-534c4e9d/adapter-differences.json",
+      "sha256": "3e8dedb3b19d385798827ef31aa1d6d10095e24e2747343d9467fdabcefcbcaf",
+      "bytes": 79692
+    },
+    "aggregateOutcome": {
+      "path": "output/presentation-generalization/260905-001/B19/browser-aggregate-native-534c4e9d/aggregate-outcome.json",
+      "sha256": "195ca17260feb4a66b5ebdf256423e0b397b5cf8635797612b7b02fb832df1ec",
+      "bytes": 2203
+    },
+    "aggregateComplete": false,
+    "aggregateExitCode": 1,
+    "originalAggregateFailure": "Obsolete Saturn dual-selection assertion. Corrected compound harness passed 6 cases; full aggregate not repeated.",
+    "correctedCompound": {
+      "path": "output/presentation-generalization/260905-001/B21/runtime-complex-exclusive-534c4e9d-v2/qualified/qualification.json",
+      "sha256": "8a99cc583bf75e046045737c1ba6f5ce4908034f679b5a6d2b8d9f3b8c0c5838",
+      "bytes": 600771
+    },
+    "notReached": [
+      "BFCache",
+      "package browser smoke"
+    ]
+  },
+  "units": {
+    "sourceSha256": "534c4e9d1811bc7bb5cda2c16cdcc8bd40dd4f2bf82ab7ecf5154673ca0a4e2d",
+    "combinedDiagnosticsTests": 1095,
+    "passed": 1093,
+    "obsoleteAssertionsFailed": 2,
+    "correctedFocusedAssertionsPassed": true,
+    "finalAggregateGreen": false
+  },
+  "preparation": {
+    "report": {
+      "path": "output/presentation-generalization/260905-001/B20/optimized/report.json",
+      "sha256": "d944dcc988b8f3dfc19c9d2d2bbd6129d2d762d5466fd4c78c12214eab46f79e",
+      "bytes": 15282
+    },
+    "forcedSeconds": [
+      1104.128788416,
+      1168.0215430840003
+    ],
+    "previousSerialSeconds": 2678.896752375,
+    "verifiedWarmSeconds": 44.003999832999995,
+    "warmCacheHits": 11,
+    "warmRebuilt": [],
+    "identicalFiles": 3498,
+    "identicalManifestSha256": "e75d854a304b36db12080b58a84b1e3346699ef391f3feb8abcf15a3e758057e",
+    "acceptedImageFiles": 2531,
+    "scope": "Before later panel/control integration. The forced source/output identities are retained in the pinned report.",
+    "controlsCompiler": "tools/prepare-object-controls.mjs",
+    "literalControlsGenerated": 11
+  },
+  "adaptersAtRecordedNativeSource": [
+    {
+      "id": "sun",
+      "nodes": 1034,
+      "variants": 4,
+      "controls": {
+        "lenses": [
+          "photosphere",
+          "magnetic",
+          "chromosphere",
+          "corona"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          }
+        ]
+      },
+      "materialTracks": [],
+      "resources": 28,
+      "pools": [
+        {
+          "id": "warm",
+          "capacity": 12,
+          "concurrency": 12,
+          "retention": "warm",
+          "reuse": false
+        },
+        {
+          "id": "material",
+          "capacity": 8,
+          "concurrency": 8,
+          "retention": "selection",
+          "reuse": false
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": []
+    },
+    {
+      "id": "mercury",
+      "nodes": 1804,
+      "variants": 8,
+      "controls": {
+        "lenses": [
+          "normal",
+          "enhanced",
+          "topography",
+          "interior"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          },
+          {
+            "name": "shadows",
+            "kind": "toggle"
+          }
+        ]
+      },
+      "materialTracks": [
+        {
+          "id": "lighting",
+          "frame": {
+            "source": "sun-z",
+            "minimum": -1,
+            "maximum": 1,
+            "count": 256,
+            "baseFrame": 0,
+            "remap": null
+          },
+          "demand": {
+            "mode": "current",
+            "prewarm": "symmetric",
+            "capacity": 3,
+            "framesPerRow": 8,
+            "defaultFrame": 230,
+            "initialRows": [
+              27,
+              28,
+              29
+            ],
+            "holdHiddenNeighborhood": false,
+            "fallback": "hold"
+          },
+          "rotation": "angle",
+          "banks": 1
+        }
+      ],
+      "resources": 55,
+      "pools": [
+        {
+          "id": "warm",
+          "capacity": 16,
+          "concurrency": 16,
+          "retention": "warm",
+          "reuse": false,
+          "decoding": "sync"
+        },
+        {
+          "id": "lenses",
+          "capacity": 6,
+          "concurrency": 6,
+          "retention": "selection",
+          "reuse": false,
+          "decoding": "sync"
+        },
+        {
+          "id": "lighting",
+          "capacity": 3,
+          "concurrency": 3,
+          "retention": "selection",
+          "reuse": true,
+          "decoding": "sync",
+          "eviction": "capacity"
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [
+        {
+          "id": "mercury-interior-presentation-orbit",
+          "mode": "pose",
+          "target": 908
+        }
+      ],
+      "pageLayers": []
+    },
+    {
+      "id": "venus",
+      "nodes": 904,
+      "variants": 24,
+      "controls": {
+        "lenses": [
+          "clouds",
+          "radar",
+          "elevation"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          },
+          {
+            "name": "shadows",
+            "kind": "toggle"
+          },
+          {
+            "name": "atmosphere",
+            "kind": "toggle"
+          },
+          {
+            "name": "stars",
+            "kind": "toggle"
+          }
+        ]
+      },
+      "materialTracks": [
+        {
+          "id": "lighting",
+          "frame": {
+            "source": "sun-z",
+            "minimum": -0.98,
+            "maximum": 0.98,
+            "count": 32,
+            "baseFrame": 0,
+            "span": 30,
+            "maximumFrame": 30,
+            "remap": {
+              "kind": "phase-plateau",
+              "lowerTransition": [
+                -0.92,
+                -0.85
+              ],
+              "plateau": [
+                -0.85,
+                -0.65
+              ],
+              "upperTransition": [
+                -0.65,
+                -0.5
+              ],
+              "plateauViewZ": -0.79
+            }
+          },
+          "demand": {
+            "mode": "current",
+            "prewarm": "none",
+            "capacity": 1,
+            "framesPerRow": 32,
+            "defaultFrame": 31,
+            "initialRows": [],
+            "holdHiddenNeighborhood": false,
+            "fallback": "hold"
+          },
+          "rotation": "angle",
+          "banks": 1
+        }
+      ],
+      "resources": 23,
+      "pools": [
+        {
+          "id": "warm",
+          "capacity": 14,
+          "concurrency": 14,
+          "retention": "warm",
+          "reuse": false
+        },
+        {
+          "id": "material",
+          "capacity": 6,
+          "concurrency": 6,
+          "retention": "selection",
+          "reuse": false
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": []
+    },
+    {
+      "id": "earth",
+      "nodes": 2012,
+      "variants": 20,
+      "controls": {
+        "lenses": [
+          "normal",
+          "buenos-aires-noise",
+          "topography",
+          "night-lights",
+          "cross-section"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          },
+          {
+            "name": "shadows",
+            "kind": "toggle"
+          },
+          {
+            "name": "atmosphere",
+            "kind": "toggle"
+          }
+        ]
+      },
+      "materialTracks": [
+        {
+          "id": "lighting",
+          "frame": {
+            "source": "sun-z",
+            "minimum": -1,
+            "maximum": 1,
+            "count": 128,
+            "baseFrame": 0,
+            "remap": null
+          },
+          "demand": {
+            "mode": "visible-directional",
+            "prewarm": "symmetric",
+            "capacity": 3,
+            "framesPerRow": 4,
+            "defaultFrame": 49,
+            "defaultRow": 31,
+            "initialRows": [
+              31
+            ],
+            "holdHiddenNeighborhood": false,
+            "fallback": "hold"
+          },
+          "rotation": "planar",
+          "banks": 1
+        },
+        {
+          "id": "atmosphere",
+          "frame": {
+            "source": "prepared-light-z",
+            "minimum": -1,
+            "maximum": 1,
+            "count": 128,
+            "baseFrame": 0,
+            "remap": null
+          },
+          "demand": {
+            "mode": "visible-directional",
+            "prewarm": "symmetric",
+            "capacity": 3,
+            "framesPerRow": 4,
+            "defaultFrame": 125,
+            "defaultRow": 31,
+            "initialRows": [
+              31
+            ],
+            "holdHiddenNeighborhood": false,
+            "fallback": "hold"
+          },
+          "rotation": "planar",
+          "banks": 1
+        }
+      ],
+      "resources": 120,
+      "pools": [
+        {
+          "id": "mounted",
+          "capacity": 25,
+          "concurrency": 2,
+          "retention": "mount",
+          "reuse": false
+        },
+        {
+          "id": "default-materials",
+          "capacity": 2,
+          "concurrency": 2,
+          "retention": "warm",
+          "reuse": false
+        },
+        {
+          "id": "pages",
+          "capacity": 14,
+          "concurrency": 2,
+          "retention": "selection",
+          "reuse": false
+        },
+        {
+          "id": "lighting",
+          "capacity": 3,
+          "concurrency": 3,
+          "retention": "selection",
+          "reuse": true,
+          "eviction": "capacity",
+          "stabilityMilliseconds": 120,
+          "decoding": "sync"
+        },
+        {
+          "id": "atmosphere",
+          "capacity": 3,
+          "concurrency": 3,
+          "retention": "selection",
+          "reuse": true,
+          "eviction": "capacity",
+          "stabilityMilliseconds": 0,
+          "decoding": "sync"
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": [
+        {
+          "lensIds": [
+            "normal",
+            "buenos-aires-noise"
+          ],
+          "schema": "cssearth-prepared-map-pages@1",
+          "roots": 458,
+          "poolSize": 512
+        },
+        {
+          "lensIds": [
+            "buenos-aires-noise"
+          ],
+          "schema": "cssearth-prepared-map-pages@1",
+          "roots": 16,
+          "poolSize": 32
+        }
+      ]
+    },
+    {
+      "id": "moon",
+      "nodes": 921,
+      "variants": 3,
+      "controls": {
+        "lenses": [
+          "surface",
+          "topography",
+          "crust"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          }
+        ]
+      },
+      "materialTracks": [],
+      "resources": 20,
+      "pools": [
+        {
+          "id": "mounted",
+          "capacity": 20,
+          "concurrency": 20,
+          "retention": "mount",
+          "reuse": false
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": []
+    },
+    {
+      "id": "mars",
+      "nodes": 1037,
+      "variants": 6,
+      "controls": {
+        "lenses": [
+          "normal",
+          "elevation",
+          "thermal"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          },
+          {
+            "name": "shadows",
+            "kind": "toggle"
+          }
+        ]
+      },
+      "materialTracks": [
+        {
+          "id": "lighting",
+          "frame": {
+            "source": "prepared-light-z",
+            "minimum": -1,
+            "maximum": 1,
+            "count": 512,
+            "span": 255,
+            "maximumFrame": 255,
+            "baseFrame": 0,
+            "remap": null
+          },
+          "demand": {
+            "mode": "current",
+            "prewarm": "none",
+            "capacity": 3,
+            "framesPerRow": 1,
+            "defaultFrame": 251,
+            "initialRows": [
+              506,
+              507,
+              508
+            ],
+            "holdHiddenNeighborhood": false,
+            "fallback": "same-column"
+          },
+          "rotation": "angle",
+          "banks": 1
+        }
+      ],
+      "resources": 531,
+      "pools": [
+        {
+          "id": "warm",
+          "capacity": 19,
+          "concurrency": 19,
+          "retention": "warm",
+          "reuse": false,
+          "decoding": "sync"
+        },
+        {
+          "id": "lighting",
+          "capacity": 3,
+          "concurrency": 3,
+          "retention": "selection",
+          "reuse": true,
+          "decoding": "sync",
+          "eviction": "capacity"
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": []
+    },
+    {
+      "id": "jupiter",
+      "nodes": 1565,
+      "variants": 12,
+      "controls": {
+        "lenses": [
+          "normal",
+          "ultraviolet",
+          "methane"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          },
+          {
+            "name": "shadows",
+            "kind": "toggle"
+          },
+          {
+            "name": "rings",
+            "kind": "toggle"
+          }
+        ]
+      },
+      "materialTracks": [
+        {
+          "id": "lighting",
+          "frame": {
+            "source": "scene-pitch",
+            "minimum": -3.13,
+            "maximum": 86.87,
+            "count": 181,
+            "baseFrame": 0,
+            "step": 0.5,
+            "remap": null
+          },
+          "demand": {
+            "mode": "current",
+            "prewarm": "directional",
+            "capacity": 3,
+            "framesPerRow": 4,
+            "defaultFrame": 86,
+            "initialRows": [
+              20,
+              21,
+              22
+            ],
+            "holdHiddenNeighborhood": false,
+            "preserveFrameWhenFixed": true,
+            "fallback": "nearest-frame"
+          },
+          "rotation": "planar",
+          "banks": 1
+        }
+      ],
+      "resources": 67,
+      "pools": [
+        {
+          "id": "warm",
+          "capacity": 21,
+          "concurrency": 21,
+          "retention": "warm",
+          "reuse": false,
+          "decoding": "sync"
+        },
+        {
+          "id": "lighting",
+          "capacity": 3,
+          "concurrency": 3,
+          "retention": "selection",
+          "reuse": true,
+          "decoding": "sync",
+          "eviction": "capacity"
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": []
+    },
+    {
+      "id": "saturn",
+      "nodes": 1908,
+      "variants": 20,
+      "controls": {
+        "lenses": [
+          "normal",
+          "ultraviolet",
+          "methane",
+          "thermal",
+          "cross-section"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          },
+          {
+            "name": "shadows",
+            "kind": "toggle"
+          },
+          {
+            "name": "rings",
+            "kind": "toggle"
+          }
+        ]
+      },
+      "materialTracks": [
+        {
+          "id": "exterior",
+          "frame": {
+            "source": "reference-sun-z",
+            "minimum": 0,
+            "maximum": 2,
+            "count": 256,
+            "baseFrame": 98,
+            "remap": null
+          },
+          "demand": {
+            "mode": "current",
+            "prewarm": "none",
+            "capacity": 2,
+            "framesPerRow": 256,
+            "defaultFrame": 98,
+            "initialRows": [],
+            "holdHiddenNeighborhood": false,
+            "fallback": "hold"
+          },
+          "rotation": "ellipsoid",
+          "banks": 16
+        },
+        {
+          "id": "interior",
+          "frame": {
+            "source": "reference-sun-z",
+            "minimum": 0,
+            "maximum": 2,
+            "count": 256,
+            "baseFrame": 98,
+            "remap": null
+          },
+          "demand": {
+            "mode": "visible",
+            "prewarm": "none",
+            "capacity": 2,
+            "framesPerRow": 256,
+            "defaultFrame": 98,
+            "initialRows": [],
+            "holdHiddenNeighborhood": false,
+            "fallback": "hold"
+          },
+          "rotation": "ellipsoid",
+          "banks": 4
+        }
+      ],
+      "resources": 60,
+      "pools": [
+        {
+          "id": "warm",
+          "capacity": 22,
+          "concurrency": 22,
+          "retention": "warm",
+          "reuse": false,
+          "decoding": "sync"
+        },
+        {
+          "id": "lenses",
+          "capacity": 8,
+          "concurrency": 8,
+          "retention": "selection",
+          "reuse": false,
+          "decoding": "sync"
+        },
+        {
+          "id": "interior",
+          "capacity": 6,
+          "concurrency": 6,
+          "retention": "selection",
+          "reuse": false,
+          "decoding": "sync"
+        },
+        {
+          "id": "exterior-material",
+          "capacity": 2,
+          "concurrency": 2,
+          "retention": "selection",
+          "reuse": false,
+          "decoding": "sync"
+        },
+        {
+          "id": "interior-material",
+          "capacity": 2,
+          "concurrency": 2,
+          "retention": "selection",
+          "reuse": false,
+          "decoding": "sync"
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": []
+    },
+    {
+      "id": "uranus",
+      "nodes": 2128,
+      "variants": 12,
+      "controls": {
+        "lenses": [
+          "normal",
+          "methane",
+          "near-infrared"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          },
+          {
+            "name": "shadows",
+            "kind": "toggle"
+          },
+          {
+            "name": "rings",
+            "kind": "toggle"
+          }
+        ]
+      },
+      "materialTracks": [
+        {
+          "id": "lighting",
+          "frame": {
+            "source": "reference-sun-z",
+            "minimum": 0,
+            "maximum": 2,
+            "count": 256,
+            "baseFrame": 98,
+            "remap": null
+          },
+          "demand": {
+            "mode": "neighborhood",
+            "prewarm": "none",
+            "capacity": 6,
+            "framesPerRow": 16,
+            "defaultFrame": 98,
+            "initialRows": [
+              5,
+              6,
+              7
+            ],
+            "holdHiddenNeighborhood": true,
+            "neighborhoodOffsets": [
+              -1,
+              0,
+              1
+            ],
+            "fallback": "hold"
+          },
+          "rotation": "planar",
+          "banks": 3
+        }
+      ],
+      "resources": 75,
+      "pools": [
+        {
+          "id": "mounted",
+          "capacity": 27,
+          "concurrency": 27,
+          "retention": "mount",
+          "reuse": false
+        },
+        {
+          "id": "rows",
+          "capacity": 6,
+          "concurrency": 6,
+          "retention": "selection",
+          "reuse": false
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": []
+    },
+    {
+      "id": "neptune",
+      "nodes": 1454,
+      "variants": 12,
+      "controls": {
+        "lenses": [
+          "normal",
+          "methane",
+          "near-infrared"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          },
+          {
+            "name": "shadows",
+            "kind": "toggle"
+          },
+          {
+            "name": "rings",
+            "kind": "toggle"
+          }
+        ]
+      },
+      "materialTracks": [
+        {
+          "id": "lighting",
+          "frame": {
+            "source": "reference-sun-z",
+            "minimum": 0,
+            "maximum": 2,
+            "count": 256,
+            "baseFrame": 98,
+            "remap": null
+          },
+          "demand": {
+            "mode": "away-enabled-or-lens-change",
+            "prewarm": "none",
+            "capacity": 3,
+            "framesPerRow": 16,
+            "defaultFrame": 98,
+            "initialRows": [
+              5,
+              6,
+              7
+            ],
+            "holdHiddenNeighborhood": false,
+            "fallback": "hold"
+          },
+          "rotation": "planar",
+          "banks": 3
+        }
+      ],
+      "resources": 74,
+      "pools": [
+        {
+          "id": "warm",
+          "capacity": 14,
+          "concurrency": 14,
+          "retention": "warm",
+          "reuse": false
+        },
+        {
+          "id": "variant",
+          "capacity": 8,
+          "concurrency": 8,
+          "retention": "selection",
+          "reuse": false
+        },
+        {
+          "id": "lighting",
+          "capacity": 3,
+          "concurrency": 3,
+          "retention": "selection",
+          "reuse": false,
+          "eviction": "capacity"
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": []
+    },
+    {
+      "id": "pluto",
+      "nodes": 921,
+      "variants": 3,
+      "controls": {
+        "lenses": [
+          "surface",
+          "topography",
+          "monochrome"
+        ],
+        "settings": [
+          {
+            "name": "speed",
+            "kind": "cycle"
+          }
+        ]
+      },
+      "materialTracks": [],
+      "resources": 20,
+      "pools": [
+        {
+          "id": "mounted",
+          "capacity": 20,
+          "concurrency": 20,
+          "retention": "mount",
+          "reuse": false
+        }
+      ],
+      "cameraNodes": 1,
+      "sceneNodes": 1,
+      "animations": [],
+      "pageLayers": []
+    }
+  ],
+  "visual": {
+    "comparedObjects": 10,
+    "comparedFrames": 2280,
+    "changedFrames": 355,
+    "comparisons": [
+      {
+        "id": "sun",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B22/comparisons-retry/sun/report.json",
+          "sha256": "d6937f97793f90971586d971e716e5b4c3bae283c6062b40906527640c0d5cc0",
+          "bytes": 60353
+        },
+        "complete": true,
+        "frames": 216,
+        "changedFrames": 0,
+        "comparatorErrors": 0,
+        "exactPixels": true,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 16,
+        "candidateRepeatabilityFailures": 16,
+        "referenceReport": "5fea89765eec3adc92f376de49dc1c2f0790fdea8071b86df59f1aba673b3c1d",
+        "candidateReport": "7d03e314e50cddfc052527c9579e1f876548820b58221fad7a179edfafd1e19c",
+        "representationReceipt": "50327f87a15c5ad1677a1e482173b56795929639d8b7e0ee46672e53a30269df"
+      },
+      {
+        "id": "mercury",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B22/comparisons-retry/mercury/report.json",
+          "sha256": "f1f25798c133ce48ff7a7d1ce964230f55e6e0a960f6947b0fd7b29bf81e16cb",
+          "bytes": 65076
+        },
+        "complete": true,
+        "frames": 228,
+        "changedFrames": 96,
+        "comparatorErrors": 0,
+        "exactPixels": false,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 2,
+        "candidateRepeatabilityFailures": 2,
+        "referenceReport": "5fea89765eec3adc92f376de49dc1c2f0790fdea8071b86df59f1aba673b3c1d",
+        "candidateReport": "7f672b4d52c53da92079075b2b4cdb719f041b93e869612753abed0ef22c3c94",
+        "representationReceipt": "c9836929734be4d12fcc03b5f85fc0206b3f9340191cb1e6ddfc4a60fe8717a7"
+      },
+      {
+        "id": "earth",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B28/earth-pixels-534c4e9d1811/report.json",
+          "sha256": "8e65f24e3392dc4919da924dcd0c74f98a5e841f7830e435622b61ca4949cb4a",
+          "bytes": 84681
+        },
+        "complete": true,
+        "frames": 276,
+        "changedFrames": 189,
+        "comparatorErrors": 0,
+        "exactPixels": false,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 20,
+        "candidateRepeatabilityFailures": 20,
+        "referenceReport": "895e0b26334cb833ef517912d23d9e4d549bf996961aa4c702d9746fca01cad4",
+        "candidateReport": "ed4882673e63cd0d68dda80484734973bd1d2a22cdec5de35b5dd44c1ab84e95",
+        "representationReceipt": "02fe735fe54b1f5b5077b204e324198d8a8a89f2f42efda0f7051e7e78a0a05b"
+      },
+      {
+        "id": "moon",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B22/comparisons-retry/moon/report.json",
+          "sha256": "492e3a30f4c4eb070aed7ab41d035ac14ace18cd1f682cad63367132a987b8b3",
+          "bytes": 56375
+        },
+        "complete": true,
+        "frames": 204,
+        "changedFrames": 7,
+        "comparatorErrors": 0,
+        "exactPixels": false,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 1,
+        "candidateRepeatabilityFailures": 2,
+        "referenceReport": "5fea89765eec3adc92f376de49dc1c2f0790fdea8071b86df59f1aba673b3c1d",
+        "candidateReport": "6c9ca96d2210637370d82a7d14a05b7b6c961cb6dcf56cf7cc8e1b0056467999",
+        "representationReceipt": "fd13c7db2c3c5de1f18b8236b5045f97c8095546d130b0e66f66ef8c24988daf"
+      },
+      {
+        "id": "mars",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B28/mars-pixels-89d0e9c3075a/report.json",
+          "sha256": "2f65c79c5e93c40b6b2856ab0ad6ff9b2fc5965d3eb46845e751112d31fa327f",
+          "bytes": 60418
+        },
+        "complete": true,
+        "frames": 216,
+        "changedFrames": 26,
+        "comparatorErrors": 0,
+        "exactPixels": false,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 2,
+        "candidateRepeatabilityFailures": 4,
+        "referenceReport": "430d9b6ac9e0a4d85ec11176664b24a2bd79fcc46403a76d22556acf0c1e71db",
+        "candidateReport": "94793e18abb1aae0b6d5259e5bfbf79e7ad9dce1616793f1f70416341254ffca",
+        "representationReceipt": "b0a3136c33f2d9fc538eefef5f1b1860016fec879bd25a67f968671922517126"
+      },
+      {
+        "id": "jupiter",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B22/comparisons-retry/jupiter/report.json",
+          "sha256": "3b9382562a436fe2f9a11260f384cbd2902d0b77beea4e2c01885d6e04b937d1",
+          "bytes": 66771
+        },
+        "complete": true,
+        "frames": 228,
+        "changedFrames": 14,
+        "comparatorErrors": 0,
+        "exactPixels": false,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 16,
+        "candidateRepeatabilityFailures": 16,
+        "referenceReport": "5fea89765eec3adc92f376de49dc1c2f0790fdea8071b86df59f1aba673b3c1d",
+        "candidateReport": "c4c8c3086f504c556c369af572d01d7b400c050eab6044ddb84e1305c0e15b90",
+        "representationReceipt": "8f71bd9384b5cbd6561641adb753bf851f3cc09c1fb3e9560e071ce93e0de4ef"
+      },
+      {
+        "id": "saturn",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B22/comparisons-retry/saturn/report.json",
+          "sha256": "9442362c23c4928a284edc4ec7f6b5f183197df34a03e7336599c808c43b6e21",
+          "bytes": 72124
+        },
+        "complete": true,
+        "frames": 252,
+        "changedFrames": 16,
+        "comparatorErrors": 0,
+        "exactPixels": false,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 9,
+        "candidateRepeatabilityFailures": 10,
+        "referenceReport": "5fea89765eec3adc92f376de49dc1c2f0790fdea8071b86df59f1aba673b3c1d",
+        "candidateReport": "dc6dc0028662f454389bce6b3216f8945b50fe494615cf04926667706f8dc6a8",
+        "representationReceipt": "091e3f114fcb76dc6a28169c501a5691c543e32d64d81d16f015a52247ffa167"
+      },
+      {
+        "id": "uranus",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B22/comparisons-retry/uranus/report.json",
+          "sha256": "669c524d7d7c83be24960c173e17a43911fa7577e74dd8f5557244fe9d2c1672",
+          "bytes": 64405
+        },
+        "complete": true,
+        "frames": 228,
+        "changedFrames": 3,
+        "comparatorErrors": 0,
+        "exactPixels": false,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 2,
+        "candidateRepeatabilityFailures": 2,
+        "referenceReport": "5fea89765eec3adc92f376de49dc1c2f0790fdea8071b86df59f1aba673b3c1d",
+        "candidateReport": "55f2e4f6022f9e57ef0e18329b28ea3e10db7f758f478158072e2032a4006577",
+        "representationReceipt": "f00088e0f0f73e3d51a01a8c54a93c9a6e5e04c3efe5016dff0d82d1e91c5fc5"
+      },
+      {
+        "id": "neptune",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B22/comparisons-retry/neptune/report.json",
+          "sha256": "9d10c1378b53dde6ddb0c217d00cb7187f46ef6afd5a1ce0e0bd29b4943bf768",
+          "bytes": 64847
+        },
+        "complete": true,
+        "frames": 228,
+        "changedFrames": 4,
+        "comparatorErrors": 0,
+        "exactPixels": false,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 2,
+        "candidateRepeatabilityFailures": 2,
+        "referenceReport": "5fea89765eec3adc92f376de49dc1c2f0790fdea8071b86df59f1aba673b3c1d",
+        "candidateReport": "0a42220284ef5a69e698901c82a01b418e4e632bc4b15f86b6a7426e4877a96a",
+        "representationReceipt": "0375f087def4c105af90518085f9a292cd69c0f1424eb13f40c8286ceb3ae967"
+      },
+      {
+        "id": "pluto",
+        "report": {
+          "path": "output/presentation-generalization/260905-001/B22/comparisons-retry/pluto/report.json",
+          "sha256": "ba0b2f777121fa5cccb16f9f584657ed821b7f5b7c888503470eef59820d6f2c",
+          "bytes": 56817
+        },
+        "complete": true,
+        "frames": 204,
+        "changedFrames": 0,
+        "comparatorErrors": 0,
+        "exactPixels": true,
+        "strictPass": false,
+        "baselineRepeatabilityFailures": 1,
+        "candidateRepeatabilityFailures": 1,
+        "referenceReport": "5fea89765eec3adc92f376de49dc1c2f0790fdea8071b86df59f1aba673b3c1d",
+        "candidateReport": "90cb8bd972e0e44db384dda1467ef030f2d243862eabd384f9891ea67db01609",
+        "representationReceipt": "c5cf7b78c526264085943fdf1ccb6c6cfaef9bb959f59df582a4c819554c952c"
+      }
+    ],
+    "venusWholeSourceSealed": false,
+    "venusAssessment": {
+      "path": "output/presentation-generalization/260905-001/B22/venus-final-source-correspondence.json",
+      "sha256": "9bfa3b2569c380b2671681f8e275cf30f8c9f08ecdf64d830637f5b37b31f3f6",
+      "bytes": 86067
+    },
+    "residualDiagnosis": {
+      "path": "output/presentation-generalization/260905-001/B22/pixel-diagnosis-final/summary.json",
+      "sha256": "08207df04df9473427cadc8410efa4a31ea9f6458aff19782864e3bf00e0268b",
+      "bytes": 11114
+    },
+    "earthRepaintWitness": {
+      "path": "output/presentation-generalization/260905-001/B22/pixel-diagnosis-final/earth-causality/receipt.json",
+      "sha256": "884ec29cc03417c77735b6de28c51d5d29c37c29339975ecf3377609f1783bf3",
+      "bytes": 49779
+    },
+    "strictPass": false,
+    "saturnFirstFrame": {
+      "changedPixels": 213328,
+      "maximumChannelDelta": 241,
+      "followingFiveFramesExact": true,
+      "appearance": "Missing back-ring regions",
+      "qualification": "UNPROVEN"
+    },
+    "masksOrToleranceChanges": false
+  },
+  "production": {
+    "builtSourceSha256": "534c4e9d1811bc7bb5cda2c16cdcc8bd40dd4f2bf82ab7ecf5154673ca0a4e2d",
+    "build": {
+      "path": "output/presentation-generalization/260905-001/B23/builds/candidate-final/build-receipt.json",
+      "sha256": "5a704cbd92770f0ba18ce89c43702acedea343918526b4460e0a6c90f15f5a0e",
+      "bytes": 476810
+    },
+    "files": 2558,
+    "bytes": 912160492,
+    "earlierPayloadCapture": {
+      "path": "output/presentation-generalization/260905-001/B23/payloads/report.json",
+      "sha256": "cd695627c8a5a9ba9de1c8d0450ed21a49007852bc71e82811f81396b1c98859",
+      "bytes": 1626205
+    },
+    "earlierPayloadMeasurements": 44,
+    "finalIntegratedBuildRepeated": false,
+    "finalPerformanceQualified": false
+  }
+}

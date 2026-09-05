@@ -125,18 +125,16 @@ test("publishes one prepared retained Mercury scene", () => {
   );
 });
 
-test("uses the shared Venus cubic-sky camera without a decoded transform bank", async () => {
+test("uses the common object orbit without a decoded transform bank", async () => {
   const client = await readFile(new URL("../runtime/client.mjs", import.meta.url),
     "utf8");
   const cubicSkyRuntime = await readFile(new URL(
     "../../../platform/cubic-sky-runtime.mjs",
     import.meta.url,
   ), "utf8");
-  assert.match(client, /createCubicSkyCameraOrientation/u);
-  assert.match(client, /mountRetainedCubicSky/u);
+  assert.match(client, /createObjectRuntime/u);
   assert.match(cubicSkyRuntime, /new DOMMatrix\(\)/u);
-  assert.match(client, /controlYawDelta/u);
-  assert.match(client, /sunViewDirection/u);
+  assert.match(cubicSkyRuntime, /controlYawDelta/u);
   assert.doesNotMatch(
     client,
     /preparedOrbitBank|DecompressionStream|TextDecoder|encodedBase64/u,
@@ -163,6 +161,36 @@ test("publishes byte-bound DPR 1 and DPR 2 photographic cubemap faces", async ()
       assert.equal(metadata.width, url.includes("@2x") ? 2048 : 1024);
       assert.equal(metadata.height, url.includes("@2x") ? 2048 : 1024);
     }
+  }
+});
+
+test("publishes a frameless Topography scale without black divider gaps", async () => {
+  const topography = PREPARED_MERCURY_LENSES.controls.find(
+    ({ id }) => id === "topography",
+  );
+  const bytes = await readFile(fileURLToPath(new URL(
+    `../../../../public${topography.legend.src}`,
+    import.meta.url,
+  )));
+  const image = await sharp(bytes).removeAlpha().raw()
+    .toBuffer({ resolveWithObject: true });
+  assert.deepEqual([image.info.width, image.info.height], [304, 14]);
+  for (let x = 0; x < image.info.width; x += 1) {
+    let darkPixels = 0;
+    for (let y = 0; y < image.info.height; y += 1) {
+      const offset = (y * image.info.width + x) * image.info.channels;
+      if (
+        image.data[offset] <= 8 &&
+        image.data[offset + 1] <= 8 &&
+        image.data[offset + 2] <= 8
+      ) {
+        darkPixels += 1;
+      }
+    }
+    assert.ok(
+      darkPixels / image.info.height < 0.95,
+      `unexpected black divider at column ${x}`,
+    );
   }
 });
 
@@ -293,6 +321,8 @@ test("qualifies observation products without claiming false color as normal", ()
   assert.equal(lenses.get("enhanced").falseColor, true);
   assert.equal(lenses.get("enhanced").label, "Enhanced");
   assert.match(lenses.get("enhanced").filter, /coverage completion/u);
+  assert.equal(lenses.get("enhanced").legend, undefined,
+    "false-color channel construction is provenance, not a surface legend");
   assert.equal(
     PREPARED_MERCURY_ASSETS.surfaces.enhanced.coverageCompletion
       .directEnhancedColorClaim,
@@ -303,6 +333,35 @@ test("qualifies observation products without claiming false color as normal", ()
       .filledPixelCount > 0,
   );
   assert.equal(lenses.get("topography").falseColor, true);
+  assert.deepEqual(lenses.get("topography").legend, {
+    kind: "scale",
+    title: "Elevation",
+    meta: "m",
+    src: "/scenes/mercury/mercury-lens-topography-legend.webp",
+    width: 304,
+    height: 14,
+    labels: ["−5,020", "−450", "4,140"],
+    sourceUrl: "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
+  });
+  assert.equal(lenses.get("normal").legend, undefined);
+  assert.deepEqual(lenses.get("interior").legend, {
+    kind: "categories",
+    title: "Structure",
+    meta: "Schematic",
+    items: [
+      {
+        label: "Metallic core",
+        description: "85% of radius",
+        color: "rgb(158 94 55)",
+      },
+      {
+        label: "Mantle + crust",
+        description: "366 km shell",
+        color: "rgb(112 108 101)",
+      },
+    ],
+    sourceUrl: "https://science.nasa.gov/mercury/facts/",
+  });
   assert.match(lenses.get("interior").filter, /retained 3D/u);
   assert.match(PREPARED_MERCURY_ASSETS.interior.qualification, /Schematic/u);
 });

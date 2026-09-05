@@ -100,10 +100,6 @@ html[data-ready="true"] .mercury-input-surface {
   animation-play-state: paused;
 }
 
-html[data-playing="true"] .mercury-body {
-  animation-play-state: running;
-}
-
 .mercury-body > s,
 .mercury-cutaway-body > s,
 .mercury-interior-core > s,
@@ -213,12 +209,6 @@ html[data-playing="true"] .mercury-body {
 
 .planet-stage[data-view="interior"] .mercury-cutaway {
   visibility: visible;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mercury-body {
-    animation-play-state: paused !important;
-  }
 }
 
 @keyframes mercury-body-spin {

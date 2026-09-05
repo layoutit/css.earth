@@ -56,9 +56,9 @@ try {
     sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
     stable: window.__mercury.assertStableDomIdentity(),
     density: window.__mercury.renderStats.textureStats.selectedPreparedDensity,
-    interiorMounted: window.__mercury.dom.viewBank().interiorMounted,
-    sunBillboardCount: window.__mercury.dom.retainedSunBillboardCount,
-    sunCubemapBakeCount: window.__mercury.dom.retainedSunCubemapBakeCount,
+    interiorMounted: window.__mercury.dom.interiorMounted,
+    sunBillboardCount: document.querySelectorAll(".planet-directional-sun").length,
+    sunCubemapBakeCount: Number(document.querySelectorAll(".planet-cubic-sky-face .planet-directional-sun").length),
   }));
   assert.deepEqual(baseline, {
     title: "Mercury - Powered by PolyCSS",
@@ -107,7 +107,7 @@ try {
   assert.deepEqual(await page.evaluate(() => ({
     elements: document.querySelector(".planet-stage").querySelectorAll("*").length,
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
-    viewBank: window.__mercury.dom.viewBank(),
+    viewBank: { interiorMounted: window.__mercury.dom.interiorMounted, retainedInteriorNodeCount: window.__mercury.dom.retainedInteriorNodeCount },
   })), {
     elements: 1814,
     interiorLeaves: 446,
@@ -228,12 +228,14 @@ try {
     control.checked = true;
     control.dispatchEvent(new Event("change", { bubbles: true }));
   });
+  await page.waitForFunction(() => window.__mercury.runtime.selection().committed.shadows === true);
   const sunSweep = await page.evaluate(() => {
     const pitch = window.__mercury.camera.stats().defaultControlPitchDegrees;
     const samples = [];
     for (let yaw = -105; yaw <= 255; yaw += 15) {
       window.__mercury.camera.setState({ controlPitch: pitch, controlYaw: yaw });
-      samples.push({ yaw, ...window.__mercury.sky.state() });
+      samples.push({ yaw, ...window.__mercury.sky.state(),
+        sunViewDirection: window.__mercury.runtime.view().sunViewDirection });
     }
     return samples;
   });

@@ -1,12 +1,16 @@
+import { projectSphereDrag } from "./sphere-drag.mjs";
+
 export const GOOGLE_EARTH_DRAG_INERTIA = Object.freeze({
-  schema: "cssearth-google-earth-pro-trackball-throw@5",
+  schema: "cssearth-google-earth-pro-trackball-throw@10",
   qualification:
-    "GOOGLE_EARTH_PRO_7.3.7.1327_DECOMPILED_THROW_AND_NATIVE_DIRECT_FIT",
+    "GOOGLE_EARTH_PRO_7.3.7.1327_NATIVE_PROJECTION_AND_DECOMPILED_THROW",
   rendererSha256:
     "11c6efe1ea0a75535485ab3804a09fc6f2ad3dd7c43f8c7d695a48d928890cd0",
   historyCapacity: 16,
   averagingFrameCount: 5,
-  minimumThrowDisplacementPixels: 5,
+  // The normalized pointer spans two units across the viewport. Its release
+  // threshold of five viewport-scaled units is 2.5 CSS pixels, not five.
+  minimumThrowDisplacementPixels: 2.5,
   releaseFreshnessMilliseconds: 100,
   directAngularDegreesPerTrackballRadius: 47.5,
   directAngularResponseByZoom: Object.freeze({
@@ -17,6 +21,20 @@ export const GOOGLE_EARTH_DRAG_INERTIA = Object.freeze({
     maximumDegrees: 52.5,
   }),
   directPitchResponse: 1,
+  directPitchResponseByZoom: Object.freeze({
+    model: "linear-clamped-native-pure-vertical-fit",
+    intercept: 0.9768198038991756,
+    slopePerZoom: 0.21000705516484433,
+    minimum: 1.2025381100738586,
+    maximum: 1.3504854183805297,
+  }),
+  directPitchResponseEvidence: Object.freeze({
+    model: "two-point-native-endpoint-to-browser-pure-vertical-fit",
+    calibrationScenarios: Object.freeze([
+      "training-baseline-high-vertical-near",
+      "training-baseline-high-vertical-far",
+    ]),
+  }),
   maximumPitchVelocityDegreesPerSecond: 30,
   maximumYawVelocityDegreesPerSecond: 90,
   rotationalDampingSeconds: 1.2,
@@ -31,6 +49,18 @@ export const GOOGLE_EARTH_DRAG_INERTIA = Object.freeze({
   }),
 });
 
+export function googleEarthInteractionTrackball(metrics) {
+  if (!Number.isFinite(metrics?.viewportWidth) || metrics.viewportWidth <= 0) {
+    throw new TypeError("Google Earth interaction viewport is invalid.");
+  }
+  // The observed native horizontal projection is cot(30 degrees). Keep
+  // input rays independent of the prepared texture camera's perspective.
+  return Object.freeze({ ...metrics, renderFocalLength: metrics.focalLength,
+    opticalCenterX: metrics.viewportCenterX ?? metrics.opticalCenterX,
+    opticalCenterY: metrics.viewportCenterY ?? metrics.opticalCenterY,
+    focalLength: metrics.viewportWidth * Math.sqrt(3) / 2 });
+}
+
 export function googleEarthDirectAngularDegreesPerTrackballRadius(zoom) {
   if (!Number.isFinite(zoom) || zoom <= 0) {
     throw new TypeError("Google Earth direct angular response zoom is invalid.");
@@ -40,6 +70,18 @@ export function googleEarthDirectAngularDegreesPerTrackballRadius(zoom) {
     response.interceptDegrees + response.slopeDegreesPerZoom * zoom,
     response.minimumDegrees,
     response.maximumDegrees,
+  );
+}
+
+export function directPitchResponseForZoom(zoom) {
+  if (!Number.isFinite(zoom) || zoom <= 0) {
+    throw new TypeError("Direct pitch response zoom is invalid.");
+  }
+  const response = GOOGLE_EARTH_DRAG_INERTIA.directPitchResponseByZoom;
+  return clamp(
+    response.intercept + response.slopePerZoom * zoom,
+    response.minimum,
+    response.maximum,
   );
 }
 
@@ -119,6 +161,7 @@ export function estimateGoogleEarthDragThrow({
   history,
   releaseTimestamp,
   frameMilliseconds = 1000 / 60,
+  trackball,
 }) {
   validateHistory(history);
   if (!Number.isFinite(releaseTimestamp) ||
@@ -134,12 +177,18 @@ export function estimateGoogleEarthDragThrow({
     return null;
   }
 
-  // Google checks the last two pointer intervals before it launches a throw.
+  // Release compares movement deltas two samples apart, not pointer positions.
+  // The press contributes a zero delta. Keep positions in the existing ring
+  // and derive these two deltas without allocating another history buffer.
   const gateOffset = Math.max(0, history.length - 3);
   const gateIndex = historyIndex(history, gateOffset);
+  const previousIndex = historyIndex(history, latestOffset - 1);
+  const beforeGateIndex = historyIndex(history, Math.max(0, gateOffset - 1));
   if (Math.hypot(
-    history.x[latestIndex] - history.x[gateIndex],
-    history.y[latestIndex] - history.y[gateIndex],
+    history.x[latestIndex] - history.x[previousIndex] -
+      (history.x[gateIndex] - history.x[beforeGateIndex]),
+    history.y[latestIndex] - history.y[previousIndex] -
+      (history.y[gateIndex] - history.y[beforeGateIndex]),
   ) < GOOGLE_EARTH_DRAG_INERTIA.minimumThrowDisplacementPixels) {
     return null;
   }
@@ -147,19 +196,18 @@ export function estimateGoogleEarthDragThrow({
   const averagingWindow = frameMilliseconds *
     GOOGLE_EARTH_DRAG_INERTIA.averagingFrameCount;
   let averageStartOffset = history.length - 2;
+  let includedIntervals = 1;
   while (averageStartOffset > 0) {
-    const candidateIndex = historyIndex(history, averageStartOffset - 1);
-    if (history.timestamp[latestIndex] - history.timestamp[candidateIndex] >
-        averagingWindow) break;
+    const elapsedToCurrentStart = releaseTimestamp -
+      history.timestamp[historyIndex(history, averageStartOffset)];
+    if (includedIntervals > 1 && elapsedToCurrentStart > averagingWindow) {
+      break;
+    }
     averageStartOffset -= 1;
+    includedIntervals += 1;
   }
-  averageStartOffset = Math.min(
-    averageStartOffset,
-    Math.max(0, history.length - 3),
-  );
   const averageStartIndex = historyIndex(history, averageStartOffset);
-  const elapsed = history.timestamp[latestIndex] -
-    history.timestamp[averageStartIndex];
+  const elapsed = releaseTimestamp - history.timestamp[averageStartIndex];
   if (elapsed <= 0) return null;
 
   const maximumPitchVelocity =
@@ -178,12 +226,33 @@ export function estimateGoogleEarthDragThrow({
   );
   const speed = Math.hypot(pitch, yaw);
   if (speed === 0) return null;
+  // Average pointer velocity, then project a forward step at the release
+  // point. Averaging older rotations uses a different tangent and speed.
+  const delta = projectSphereDrag({
+    previousX: history.x[latestIndex], previousY: history.y[latestIndex],
+    currentX: history.x[latestIndex] +
+      (history.x[latestIndex] - history.x[averageStartIndex]) / elapsed * frameMilliseconds,
+    currentY: history.y[latestIndex] +
+      (history.y[latestIndex] - history.y[averageStartIndex]) / elapsed * frameMilliseconds,
+    centerX: trackball?.centerX, centerY: trackball?.centerY,
+    opticalCenterX: trackball?.opticalCenterX, opticalCenterY: trackball?.opticalCenterY,
+    radius: trackball?.surfaceRadius, focalLength: trackball?.focalLength,
+  });
+  const sine = Math.hypot(delta[0], delta[1], delta[2]);
+  const angle = 2 * Math.atan2(sine, Math.abs(delta[3]));
+  const scale = sine > 1e-12
+    ? angle / (sine * frameMilliseconds) * (delta[3] < 0 ? -1 : 1)
+    : 0;
   return Object.freeze({
     pitchDegreesPerMillisecond: pitch,
     yawDegreesPerMillisecond: yaw,
     initialSpeedDegreesPerMillisecond: speed,
     averagingSampleCount: history.length - averageStartOffset,
     averagingMilliseconds: elapsed,
+    launchRotation: Object.freeze(delta),
+    angularVelocity: Object.freeze([
+      delta[0] * scale, delta[1] * scale, delta[2] * scale,
+    ]),
   });
 }
 

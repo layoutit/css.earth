@@ -1,6 +1,8 @@
-export const browserProfile = Object.freeze({
-  id: "moon",
-  inputSelector: ".moon-input-surface",
+import { createObjectBrowserProfile } from "../../../../site/test/object-browser-profile.mjs";
+import { objectControls } from "../site/control-content.mjs";
+
+export const browserProfile = createObjectBrowserProfile({
+  id: "moon", inputSelector: ".moon-input-surface", controls: objectControls,
   audit: Object.freeze({
     finalScope: "outer",
     fullComparisonWidths: Object.freeze([390, 820, 1200]),
@@ -39,72 +41,4 @@ export const browserProfile = Object.freeze({
       allowedMountSelectors: Object.freeze([]),
     }),
   }),
-  async waitForRuntime(page) {
-    await page.waitForFunction(() => window.__moon?.ready === true);
-  },
-  pause(page) {
-    return page.evaluate(() => window.__moon.pause());
-  },
-  camera(page) {
-    return page.evaluate(() => {
-      const { controlPitch: pitch, zoom } = window.__moon.camera.state();
-      return { pitch, zoom };
-    });
-  },
-  setCamera(page, { pitch, zoom }) {
-    return page.evaluate(({ pitch: controlPitch, zoom: nextZoom }) =>
-      window.__moon.camera.setState({ controlPitch, zoom: nextZoom }), {
-      pitch,
-      zoom,
-    });
-  },
-  bounds(page) {
-    return page.evaluate(() => {
-      const stats = window.__moon.camera.stats();
-      return {
-        minimumPitch: stats.minimumPitchDegrees,
-        maximumPitch: stats.maximumPitchDegrees,
-        defaultPitch: stats.defaultControlPitchDegrees,
-        pitchBounded: stats.pitchBounded,
-        minimumZoom: 0.42,
-        maximumZoom: 4,
-        defaultZoom: 1.1,
-      };
-    });
-  },
-  stable(page) {
-    return page.evaluate(() => window.__moon.assertStableDomIdentity());
-  },
-  runtimePresent(page) {
-    return page.evaluate(() => typeof window.__moon !== "undefined");
-  },
-  retainedImages(page) {
-    return page.evaluate(() =>
-      window.__moon?.renderStats.textureStats.retainedInteractiveImageCount ??
-        null);
-  },
-  selectedDensity(page) {
-    return page.evaluate(() =>
-      window.__moon?.renderStats.textureStats.selectedPreparedDensity ?? null);
-  },
-  selectLens(page, id) {
-    return page.evaluate((lensId) => window.__moon.lenses.select(lensId), id);
-  },
-  lens(page) {
-    return page.evaluate(() => window.__moon.lenses.state());
-  },
-  visibleLens(page) {
-    return page.locator(".planet-stage").evaluate((stage) =>
-      stage.dataset.lens || "surface");
-  },
-  pressedLens(page) {
-    return page.locator('button[name="lens"][aria-pressed="true"]')
-      .getAttribute("value");
-  },
-  retainedReport(page) {
-    return page.evaluate(() => ({
-      initialNodeCount: window.__moon.dom.retainedInitialNodeCount,
-      stableNodeCount: window.__moon.stableNodes.length,
-    }));
-  },
 });

@@ -3,11 +3,32 @@ import test from "node:test";
 
 import {
   bindResponsiveOrbitPolicy,
+  automaticPlaybackPolicy,
   CANONICAL_PREPARED_IMAGE_DENSITY,
   DESKTOP_VIEWPORT_MIN,
   MOBILE_VIEWPORT_MAX,
   MOBILE_VIEWPORT_QUERY,
+  SKYBOX_DRAG_ENABLED,
+  WHEEL_ZOOM_SPEED_MULTIPLIER,
+  WHEEL_ZOOM_USE_SCROLL_DISTANCE,
 } from "../runtime-policy.mjs";
+
+test("automatic playback has one complete readiness, intent and environment policy", () => {
+  for (const sceneState of ["loading", "ready", "error", "destroyed"]) {
+    for (const motionRequested of [false, true]) {
+      for (const documentHidden of [false, true]) {
+        for (const reducedMotion of [false, true]) {
+          const reason = sceneState !== "ready" ? "unavailable"
+            : !motionRequested ? "motion-off" : documentHidden ? "hidden"
+              : reducedMotion ? "reduced-motion" : "allowed";
+          assert.deepEqual(automaticPlaybackPolicy({
+            sceneState, motionRequested, documentHidden, reducedMotion,
+          }), { allowed: reason === "allowed", reason });
+        }
+      }
+    }
+  }
+});
 
 test("keeps one shared orientation-aware responsive shell boundary", () => {
   assert.equal(MOBILE_VIEWPORT_MAX, 820);
@@ -20,6 +41,15 @@ test("keeps one shared orientation-aware responsive shell boundary", () => {
 
 test("uses one canonical high-density image bank for every mount", () => {
   assert.equal(CANONICAL_PREPARED_IMAGE_DENSITY, 2);
+});
+
+test("skybox drag remains disabled by the shared input policy", () => {
+  assert.equal(SKYBOX_DRAG_ENABLED, false);
+});
+
+test("wheel zoom uses one shared four-times speed preference", () => {
+  assert.equal(WHEEL_ZOOM_SPEED_MULTIPLIER, 4);
+  assert.equal(WHEEL_ZOOM_USE_SCROLL_DISTANCE, true);
 });
 
 test("updates wheel and touch policy without replacing controls", () => {
@@ -54,6 +84,29 @@ test("updates wheel and touch policy without replacing controls", () => {
   mediaQuery.setMatches(true);
   assert.equal(updates.length, 3);
   assert.ok(removed.length >= 2);
+});
+
+test("initial responsive failure removes its subscription and preserves startup rejection", () => {
+  const mediaQuery = new FakeMediaQuery(false), failure = new Error("initial update");
+  assert.throws(() => bindResponsiveOrbitPolicy({ mediaQuery,
+    inputSurface: { style: { removeProperty() {} } },
+    controls: { update() { throw failure; } }, onError: assert.fail,
+  }), (error) => error === failure);
+  assert.equal(mediaQuery.listenerCount, 0);
+});
+
+test("live responsive failure retires the subscription before reporting fatal", () => {
+  const mediaQuery = new FakeMediaQuery(false), errors = [];
+  let fail = false;
+  const policy = bindResponsiveOrbitPolicy({ mediaQuery,
+    inputSurface: { style: { removeProperty() {} } },
+    controls: { update() { if (fail) throw new Error("live update"); } },
+    onError(error) { assert.equal(mediaQuery.listenerCount, 0); errors.push(error); },
+  });
+  fail = true;
+  mediaQuery.setMatches(true); mediaQuery.setMatches(false);
+  assert.equal(errors.length, 1);
+  policy.destroy();
 });
 
 class FakeMediaQuery extends EventTarget {

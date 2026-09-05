@@ -54,7 +54,7 @@ try {
   }
   await page.waitForFunction(() => window.__uranus?.ready === true);
   await page.evaluate(() => {
-    window.__uranus.pause();
+    (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click());
     for (const selector of [
       ".planet-topbar",
       ".planet-sidebar",

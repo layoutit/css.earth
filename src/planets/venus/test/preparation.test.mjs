@@ -49,10 +49,17 @@ test("publishes the prepared Venus scene and shell content", () => {
   assert.equal(PREPARED_VENUS_PANEL.planetId, "venus");
   assert.match(PREPARED_VENUS_PANEL.introduction, /second planet from the Sun/u);
   assert.deepEqual(PREPARED_VENUS_PANEL.facts, [
-    { label: "Distance", value: "108 million km" },
-    { label: "Diameter", value: "12,104 km" },
-    { label: "Year", value: "225 Earth days" },
-    { label: "Day", value: "243 Earth days" },
+    { id: "distance-from-sun", label: "Distance from Sun", value: "108 million km" },
+    { id: "diameter", label: "Diameter", value: "12,104 km" },
+    { id: "orbital-period", label: "Orbital period", value: "225 Earth days" },
+    { id: "rotation-period", label: "Rotation period", value: "243 Earth days" },
+    { id: "axial-tilt", label: "Axial tilt", value: "3°" },
+    { id: "moon-count", label: "Moons", value: "None" },
+    { id: "ring-system", label: "Rings", value: "None" },
+  ]);
+  assert.deepEqual(PREPARED_VENUS_PANEL.moreFacts, [
+    { id: "surface-temperature", label: "Surface temperature", value: "467°C" },
+    { id: "surface-pressure", label: "Surface pressure", value: "93× Earth" },
   ]);
   assert.equal(PREPARED_VENUS_SCENE.schema,
     "cssvenus-prepared-runtime-scene@1");
@@ -498,22 +505,27 @@ test("ships three source-qualified DPR-specific Venus lenses", async () => {
 });
 
 test("keeps Venus runtime code on prepared retained-DOM paths", async () => {
-  const [acquire, client, styles] = await Promise.all([
+  const [acquire, client, styles, presentation] = await Promise.all([
     readFile(new URL("../tools/acquire.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/preparedPresentation.mjs", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(acquire, /\.\.\/\.\.\/saturn/u);
   assert.equal([...client.matchAll(/devicePixelRatio/gu)].length, 0);
-  assert.match(client, /createPolyCamera/u);
-  assert.match(client, /createPolyOrbitControls/u);
-  assert.match(client, /createPolyScene/u);
+  const { auditObjectRuntimeOwnership } = await import("../../../../tools/check-object-runtime-ownership.mjs");
+  const { OBJECTS } = await import("../../../../site/objects.mjs");
+  const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "venus") });
+  assert.equal(audit.complete, true);
+  assert.ok(audit.sharedClosure.includes("src/platform/cubic-sky-runtime.mjs"));
+  assert.doesNotMatch(presentation, /createPolyCamera|createPolyScene|camera\.update/u);
+  assert.equal(PREPARED_VENUS_SCENE.camera.style, "perspective:1000000px");
   assert.doesNotMatch(client,
     /fetch\(|XMLHttpRequest|canvas|getContext\(|style\.filter/u);
   assert.doesNotMatch(styles,
     /clip-path|(?:-webkit-)?mask|filter:|gradient\(|mix-blend-mode/u);
   assert.doesNotMatch(styles, /opacity:\s*0\.58/u);
-  assert.match(client, /materialComposite|venus-material-composite/u);
+  assert.match(presentation, /materialComposite|venus-material-composite/u);
   assert.match(styles, /venus-material-composite/u);
   assert.match(styles,
     /\.example-stage\s*>\s*:is\(\.polycss-camera, \.venus-material-composite\)\s*\{/u);

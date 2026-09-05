@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
+import { checkDirectionalAtmosphere } from "../../../platform/test/illumination-browser.mjs";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
+import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../runtime/preparedStarfield.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
@@ -36,6 +38,7 @@ try {
     canvasCount: document.querySelectorAll("canvas").length,
     sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
     retainedLeafCount: window.__earth.dom.retainedLeafCount,
+    sunLeafCount: document.querySelectorAll(".planet-directional-sun").length,
     stageElementCount: document.querySelector(".planet-stage")
       .querySelectorAll("*").length,
     sceneTransform: getComputedStyle(document.querySelector(
@@ -44,7 +47,7 @@ try {
     cameraAnimationTime: document.getAnimations().find(({ id }) =>
       id === "earth-camera-orbit")?.currentTime,
     normalSurfaceImage: getComputedStyle(document.querySelector(
-      ".earth-body:not(.earth-body-polar) > s > " +
+      ".earth-body:not(.earth-body-polar) > s.earth-surface-leaf > " +
       ".polycss-projective-texture",
     )).backgroundImage,
     normalPolesImage: getComputedStyle(document.querySelector(
@@ -69,7 +72,8 @@ try {
     '/scenes/earth/earth-surface-poles.webp")'), true);
   assert.equal(
     initial.retainedInteractiveImageCount,
-    2 + PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1 +
+    PREPARED_EARTH_SCENE.body.assets.surface.urls.length + 1 +
+      PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1 +
       PREPARED_EARTH_SCENE.material.atmosphere.transport.initialWarmRows.length,
   );
   const startupAssets = [...requestedAssets];
@@ -78,6 +82,23 @@ try {
   assert.equal(await page.locator('[class*="earth-moon"]').count(), 0);
   assert.equal(await page.locator('input[name="moons"]').count(), 0);
   const initialCamera = await page.evaluate(() => window.__earth.camera.state());
+  assert.equal(initialCamera.controlYaw, PREPARED_EARTH_SCENE.camera.state.rotY,
+    "Earth must mount at its prepared yaw");
+  const initialPoleAxis = await page.evaluate(() => {
+    const center = (pole) => {
+      const bounds = document.querySelector(
+        `.earth-body-polar > .earth-polar-surface-${pole}`,
+      ).getBoundingClientRect();
+      return { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 };
+    };
+    return { north: center("north"), south: center("south") };
+  });
+  assert.ok(initialPoleAxis.north.y < initialPoleAxis.south.y,
+    "Earth must start with north above south");
+  assert.ok(Math.abs(initialPoleAxis.north.x - initialPoleAxis.south.x) <
+    initialPoleAxis.south.y - initialPoleAxis.north.y,
+    "Earth's starting polar axis must be closer to vertical than horizontal");
+  await checkDirectionalAtmosphere(page, { id: "earth", phaseKey: "atmosphere", rollKey: "atmosphereLightRollDegrees" });
   const cameraTransforms = await page.evaluate(async ({ initialCamera }) => {
     const scene = document.querySelector(".planet-stage .polycss-scene");
     const sky = document.querySelector(".earth-skybox-orientation");
@@ -123,30 +144,43 @@ try {
   for (const id of ["topography", "night-lights", "cross-section", "normal"]) {
     await page.evaluate((lens) => window.__earth.lenses.select(lens), id);
     assert.equal(await page.evaluate(() => window.__earth.assertStableDomIdentity()), true);
-    if (["normal", "topography"].includes(id)) {
-      const textures = await page.evaluate(() => ({
-        surface: getComputedStyle(document.querySelector(
-          ".earth-body:not(.earth-body-polar) > s",
-        ), "::before").backgroundImage,
-        poles: getComputedStyle(document.querySelector(
-          ".earth-body-polar > s",
-        )).backgroundImage,
-      }));
-      assert.equal(textures.surface.includes("@2x"), false);
-      assert.equal(textures.poles.includes("@2x"), false);
-    }
+    const textures = await page.evaluate(() => {
+      const images = (selector) => [...new Set([...document.querySelectorAll(selector)]
+        .map((element) => getComputedStyle(element).backgroundImage))].sort();
+      return {
+        exterior: images(".earth-body:not(.earth-body-polar) > s.earth-surface-leaf > .polycss-projective-texture"),
+        interior: images(".earth-cutaway-body:not(.earth-cutaway-body-polar) > s > .polycss-projective-texture"),
+        bank: window.__earth.runtime.resources().pools.find(pool => pool.id === "pages"),
+      };
+    });
+    const interior = id === "cross-section";
+    const urls = interior ? PREPARED_EARTH_SCENE.interior.outerAssets.surface.twoUrls
+      : PREPARED_EARTH_LENSES.controls.find((lens) => lens.id === id).surfaceUrls;
+    // The cutaway omits some exterior cells, so it need not display every
+    // page in its complete prepared bank. Compare its actual prepared addresses.
+    const displayedUrls = interior ? [...new Set(PREPARED_EARTH_SCENE.interior.outerBodyBands
+      .flatMap((band) => band.leaves)
+      .map((leaf) => leaf.style.match(/--earth-surface-page-(\d+)/u)?.[1])
+      .filter((page) => page !== undefined).map((page) => urls[Number(page)]))] : urls;
+    assert.ok(displayedUrls.length > 0 && displayedUrls.every(Boolean));
+    assert.deepEqual(textures[interior ? "interior" : "exterior"],
+      displayedUrls.map((url) => `url("${new URL(url, baseUrl).href}")`).sort(),
+      `${id}: every rendered surface page belongs to the canonical bank`);
+    for (const url of urls) assert.ok(requestedAssets.includes(url),
+      `${id}: the complete canonical bank was requested`);
+    assert.deepEqual(textures[interior ? "exterior" : "interior"], ["none"],
+      `${id}: hidden surface pages do not retain image URLs`);
+    assert.equal(textures.bank.resident, urls.length);
+    assert.equal(textures.bank.pending, 0);
+    assert.ok(textures.bank.keys.every(key => key.startsWith(`page:${id}:`)));
   }
   await page.waitForFunction(() => {
-    const caches = window.__earth.renderStats.textureStats.materialCaches;
-    return [caches.lighting(), caches.atmosphere()].every((cache) =>
-      cache.pendingRowCount === 0);
+    return window.__earth.runtime.resources().pools.filter(pool => ["lighting", "atmosphere"].includes(pool.id)).every(pool => pool.pending === 0);
   });
   await page.evaluate(() => window.__earth.lenses.select("cross-section"));
   const hiddenMaterialBefore = await page.evaluate(() => ({
-    lighting: window.__earth.renderStats.textureStats.materialCaches
-      .lighting(),
-    atmosphere: window.__earth.renderStats.textureStats.materialCaches
-      .atmosphere(),
+    lighting: window.__earth.runtime.resources().pools.find(pool => pool.id === "lighting"),
+    atmosphere: window.__earth.runtime.resources().pools.find(pool => pool.id === "atmosphere"),
   }));
   await page.evaluate(() => window.__earth.camera.setState({
     controlPitch: 89,
@@ -164,13 +198,13 @@ try {
     )).transform,
     stageElementCount: document.querySelector(".planet-stage")
       .querySelectorAll("*").length,
-    viewBank: window.__earth.viewBank.state(),
+    viewBank: { interiorMounted: window.__earth.dom.interiorMounted,
+      interiorLeafCount: window.__earth.dom.interiorLeafCount },
+    required: window.__earth.runtime.selection().plan.required,
     rasterCircleCount: document.querySelectorAll(".earth-interior-material").length,
     materialCaches: {
-      lighting: window.__earth.renderStats.textureStats.materialCaches
-        .lighting(),
-      atmosphere: window.__earth.renderStats.textureStats.materialCaches
-        .atmosphere(),
+      lighting: window.__earth.runtime.resources().pools.find(pool => pool.id === "lighting"),
+      atmosphere: window.__earth.runtime.resources().pools.find(pool => pool.id === "atmosphere"),
     },
   }));
   assert.equal(cutaway.leafCount, PREPARED_EARTH_SCENE.interior.leafCount);
@@ -184,21 +218,16 @@ try {
   });
   assert.equal(cutaway.rasterCircleCount, 0);
   for (const role of ["lighting", "atmosphere"]) {
-    assert.equal(cutaway.materialCaches[role].enabled, false);
-    assert.equal(
-      cutaway.materialCaches[role].runtimeDecodeCount,
-      hiddenMaterialBefore[role].runtimeDecodeCount,
-    );
+    assert.ok(!cutaway.required.some(key => key.startsWith(`${role}:`)));
+    assert.deepEqual(cutaway.materialCaches[role].keys, hiddenMaterialBefore[role].keys);
   }
   await page.evaluate(() => window.__earth.lenses.select("normal"));
   await page.evaluate(() => window.__earth.lenses.select("cross-section"));
   assert.equal(await page.locator(".earth-cutaway").count(), 1);
   const runtimeStats = await page.evaluate(() => ({
     camera: window.__earth.camera.stats(),
-    lighting: window.__earth.renderStats.textureStats.materialCaches
-      .lighting(),
-    atmosphere: window.__earth.renderStats.textureStats.materialCaches
-      .atmosphere(),
+    lighting: window.__earth.runtime.resources().pools.find(pool => pool.id === "lighting"),
+    atmosphere: window.__earth.runtime.resources().pools.find(pool => pool.id === "atmosphere"),
   }));
   assert.equal(runtimeStats.camera.owner, "shared-retained-cubic-sky-orbit");
   assert.equal(runtimeStats.camera.runtimeGeometryPreparation, false);
@@ -206,9 +235,8 @@ try {
   assert.equal(runtimeStats.camera.yawBounded, false);
   assert.ok(runtimeStats.camera.publications > 0);
   for (const cache of [runtimeStats.lighting, runtimeStats.atmosphere]) {
-    assert.equal(cache.model, "row-shard-cache");
-    assert.ok(cache.retainedRowCount <= 3, JSON.stringify(cache));
-    assert.equal(cache.maximumRetainedRowCount, 3);
+    assert.ok(cache.nativeSlots <= 3, JSON.stringify(cache));
+    assert.equal(cache.capacity, 3);
   }
   for (const name of ["atmosphere"]) {
     await page.locator(`input[name="${name}"]`).evaluate((input) => input.click());
@@ -216,10 +244,13 @@ try {
   }
   await page.locator("#earth-settings").evaluate((panel) => { panel.open = true; });
   const speedStates = [];
-  for (let index = 0; index < 5; index += 1) {
-    await page.locator('button[name="speed"]')
-      .evaluate((button) => button.click());
-    speedStates.push(await page.locator('button[name="speed"]')
+  for (const value of [2, 3, 4, 0, 1]) {
+    await page.locator('input[name="speed"][type="range"]')
+      .evaluate((input, nextValue) => {
+        input.value = String(nextValue);
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      }, value);
+    speedStates.push(await page.locator('input[name="speed"][type="range"]')
       .getAttribute("data-state"));
   }
   assert.deepEqual(speedStates,
@@ -229,7 +260,7 @@ try {
     pathname.includes("earth-moon-")), false);
   assert.deepEqual(problems, []);
   if (process.env.EARTH_SCREENSHOT) {
-    await page.evaluate(() => window.__earth.pause());
+    await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
     await page.screenshot({ path: process.env.EARTH_SCREENSHOT });
   }
   for (const name of ["atmosphere"]) {
@@ -258,4 +289,9 @@ try {
   }));
 } finally {
   await browser.close();
+}
+
+if (deviceScaleFactor === 1) {
+  await import("./places-browser.mjs");
+  await import("./places-flight-browser.mjs");
 }
