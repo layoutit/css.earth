@@ -14,6 +14,12 @@ export const PREPARED_WHEEL_ZOOM = Object.freeze({
   }),
 });
 
+// Two wheel models share one controller. The scale camera zooms at the traced
+// velocity and holds the surface point under the cursor (the anchor). A
+// perspective `dolly` moves the eye along its own axis toward the body's
+// centre instead: the camera distance scales by exp(deltaY * stepPerDelta)
+// per wheel event, spread over the same 200 ms interval, and no surface
+// anchor exists to hold, so the wheel never turns the scene.
 export function createPreparedWheelZoomControls({
   inputSurface,
   camera,
@@ -21,6 +27,7 @@ export function createPreparedWheelZoomControls({
   rotate,
   minimumZoom,
   maximumZoom,
+  dolly = null,
   onError = null,
 }) {
   if (!(inputSurface instanceof HTMLElement) ||
@@ -28,6 +35,7 @@ export function createPreparedWheelZoomControls({
       typeof trackballMetrics !== "function" || typeof rotate !== "function" ||
       ![minimumZoom, maximumZoom].every(Number.isFinite) ||
       minimumZoom <= 0 || maximumZoom < minimumZoom ||
+      (dolly !== null && !(dolly.stepPerDelta > 0)) ||
       (onError !== null && typeof onError !== "function")) {
     throw new TypeError("Prepared wheel zoom controls are invalid.");
   }
@@ -49,6 +57,9 @@ export function createPreparedWheelZoomControls({
   let expiresAt = 0;
   let previousTimestamp = null;
   let anchor = null;
+  // The dolly's outstanding log-distance, consumed evenly by the interval's
+  // end; each wheel event adds its own share and extends the interval.
+  let pendingLogDistance = 0;
   let events = 0;
   let frames = 0;
 
@@ -58,6 +69,20 @@ export function createPreparedWheelZoomControls({
     previousTimestamp = null;
     direction = 0;
     anchor = null;
+    pendingLogDistance = 0;
+  };
+  const anchorRotation = (scale) => {
+    const trackball = trackballMetrics();
+    return direction < 0 ? zoomOutRayRotation(trackball, anchor, scale) : projectSphereDrag({
+      ...trackball,
+      radius: trackball.surfaceRadius,
+      previousX: anchor.x,
+      previousY: anchor.y,
+      currentX: trackball.centerX +
+        (anchor.x - trackball.centerX) / scale,
+      currentY: trackball.centerY +
+        (anchor.y - trackball.centerY) / scale,
+    });
   };
   const animate = timestamp => {
     if (previousTimestamp === null) previousTimestamp = timestamp;
@@ -65,42 +90,46 @@ export function createPreparedWheelZoomControls({
       timestamp - previousTimestamp,
       expiresAt - previousTimestamp,
     ));
+    const remaining = Math.max(elapsed, expiresAt - previousTimestamp);
     previousTimestamp = timestamp;
     if (elapsed > 0 && direction !== 0) {
       const previousZoom = camera.state.zoom;
-      const zoom = clamp(previousZoom * Math.exp(
-        direction * PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * elapsed,
-      ), minimumZoom, maximumZoom);
-      let rotation;
-      if (anchor !== null && zoom !== previousZoom) {
-        const trackball = trackballMetrics();
-        const scale = zoom / previousZoom;
-        rotation = direction < 0 ? zoomOutRayRotation(trackball, anchor, scale) : projectSphereDrag({
-          ...trackball,
-          radius: trackball.surfaceRadius,
-          previousX: anchor.x,
-          previousY: anchor.y,
-          currentX: trackball.centerX +
-            (anchor.x - trackball.centerX) / scale,
-          currentY: trackball.centerY +
-            (anchor.y - trackball.centerY) / scale,
-        });
+      let zoom, distance, scale;
+      if (dolly === null) {
+        zoom = clamp(previousZoom * Math.exp(
+          direction * PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * elapsed,
+        ), minimumZoom, maximumZoom);
+        scale = zoom / previousZoom;
+      } else {
+        const step = pendingLogDistance * elapsed / remaining;
+        pendingLogDistance -= step;
+        distance = camera.state.distance * Math.exp(step);
+        // The silhouette's scale on this frame, for the anchor if one is held.
+        scale = Math.exp(-step);
       }
+      const rotation = anchor !== null && scale !== 1 ? anchorRotation(scale) : undefined;
       rotate({
         controlPitchDelta: 0,
         controlYawDelta: 0,
-        zoom,
+        ...(zoom === undefined ? {} : { zoom }),
+        ...(distance === undefined ? {} : { distance }),
         ...(rotation === undefined ? {} : { rotation }),
       });
       if (disposed) return;
       frames += 1;
+      // A clamped dolly drops what the bound refused.
+      if (distance !== undefined && camera.state.distance !== distance) pendingLogDistance = 0;
     }
-    if (timestamp < expiresAt && camera.state.zoom > minimumZoom &&
-        camera.state.zoom < maximumZoom) {
+    const continuing = dolly === null
+      ? timestamp < expiresAt && camera.state.zoom > minimumZoom &&
+        camera.state.zoom < maximumZoom
+      : pendingLogDistance !== 0;
+    if (continuing) {
       frame = requestFrame(animate);
     } else {
       frame = null;
       previousTimestamp = null;
+      pendingLogDistance = 0;
     }
   };
   const onWheel = event => {
@@ -108,7 +137,9 @@ export function createPreparedWheelZoomControls({
     event.preventDefault();
     direction = -Math.sign(event.deltaY);
     expiresAt = event.timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds;
-    anchor = { x:event.clientX, y:event.clientY };
+    // A dolly has no surface anchor: the eye moves along its own axis.
+    anchor = dolly === null ? { x:event.clientX, y:event.clientY } : null;
+    if (dolly !== null) pendingLogDistance += event.deltaY * dolly.stepPerDelta;
     events += 1;
     if (frame === null) {
       previousTimestamp = event.timeStamp;
