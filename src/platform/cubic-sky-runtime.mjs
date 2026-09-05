@@ -1,15 +1,23 @@
 import { createPreparedCameraPublisher, preparedCameraZoomScale } from "./prepared-camera-runtime.mjs";
 import {
+  BASE_TILE,
   createPolyCamera,
-  createPolyOrbitControls,
 } from "@layoutit/polycss";
 
 import {
   bindResponsiveOrbitPolicy,
+  isOrbitDragStart,
   MOBILE_VIEWPORT_QUERY,
 } from "../../site/runtime-policy.mjs";
 import { createSceneLifetime } from "./scene-lifetime.mjs";
-import { validatePreparedCubicSky } from "./cubic-sky-contract.mjs";
+import {
+  validatePreparedCubicSky,
+} from "./cubic-sky-contract.mjs";
+import {
+  projectSphereDrag,
+  composeDragRotation,
+  rotationFromAngularVelocity,
+} from "./sphere-drag.mjs";
 import { viewSunDirectionToPreparedLightDirection } from
   "./directional-sun-coordinate.mjs";
 import { validateDirectionalSunPlan } from
@@ -20,6 +28,8 @@ import {
   estimateGoogleEarthDragThrow,
   GOOGLE_EARTH_DRAG_INERTIA,
   googleEarthDirectAngularDegreesPerTrackballRadius,
+  googleEarthInteractionTrackball,
+  directPitchResponseForZoom,
   projectGoogleEarthTrackballDelta,
   recordGoogleEarthDragSample,
   resetGoogleEarthDragHistory,
@@ -29,6 +39,9 @@ import {
   planGoogleEarthSurfaceFlyTo,
   sampleGoogleEarthSurfaceFlyTo,
 } from "./google-earth-surface-fly-to.mjs";
+import { createPreparedWheelZoomControls } from "./prepared-wheel-zoom.mjs";
+
+const POINTER_POSITION_EPSILON = 1e-6;
 
 export function mountRetainedCubicSky({
   host,
@@ -193,7 +206,38 @@ export function createCubicSkyCameraOrientation({
   reset({ controlPitch, controlYaw });
   return Object.freeze({
     reset,
-    rotate({ renderedPitchDelta, yawDelta }) {
+    snapshot() {
+      return Object.freeze({
+        schema: "cssearth-camera-pose@1",
+        scene: formatMatrix3d(sceneMatrix),
+        skybox: formatMatrix3d(skyboxMatrix),
+        sunView: formatMatrix3d(sunViewMatrix),
+      });
+    },
+    restore(snapshot) {
+      if (snapshot?.schema !== "cssearth-camera-pose@1") {
+        throw new TypeError("Cubic-sky camera pose is invalid.");
+      }
+      sceneMatrix = parseCameraPoseMatrix(snapshot.scene, "scene");
+      skyboxMatrix = parseCameraPoseMatrix(snapshot.skybox, "skybox");
+      sunViewMatrix = parseCameraPoseMatrix(snapshot.sunView, "sun view");
+      invalidatePresentations();
+    },
+    rotate({ renderedPitchDelta, yawDelta, rotation }) {
+      if (rotation) {
+        sceneMatrix = dragRotationMatrix(rotation).multiply(sceneMatrix);
+        // The background uses the opposite X/Y view axes; Z stays coupled.
+        const viewDelta = dragRotationMatrix([
+          rotation[0] * skyPlan.cameraPitchResponse,
+          -rotation[1],
+          -rotation[2] * skyPlan.cameraPitchResponse,
+          rotation[3],
+        ]);
+        skyboxMatrix = viewDelta.multiply(skyboxMatrix);
+        sunViewMatrix = viewDelta.multiply(sunViewMatrix);
+        invalidatePresentations();
+        return;
+      }
       sceneMatrix = new DOMMatrix()
         .rotateAxisAngle(1, 0, 0, renderedPitchDelta)
         .rotateAxisAngle(0, 1, 0, yawDelta)
@@ -297,6 +341,7 @@ export function createUnboundedMatrixDragControls({
   flyToTrackballMetrics = trackballMetrics,
   rotate,
   surfaceFlyToState = null,
+  onPointerStart = () => {},
   onStart = () => {},
   onEnd = () => {},
   onError = null,
@@ -307,6 +352,7 @@ export function createUnboundedMatrixDragControls({
       typeof rotate !== "function" ||
       (surfaceFlyToState !== null &&
         typeof surfaceFlyToState !== "function") ||
+      typeof onPointerStart !== "function" ||
       typeof onStart !== "function" || typeof onEnd !== "function" ||
       (onError !== null && typeof onError !== "function")) {
     throw new TypeError("Unbounded matrix drag controls are invalid.");
@@ -325,13 +371,16 @@ export function createUnboundedMatrixDragControls({
   let wheel = true;
   let pointerId = null;
   let pointerDragging = false;
-  let pointerDownX = 0;
-  let pointerDownY = 0;
   let previousX = 0;
   let previousY = 0;
   let accumulatedPitch = 0;
   let accumulatedYaw = 0;
   let activeTrackball = null;
+  let trackballInvalidated = false;
+  let previousPointerTimestamp = null;
+  let cadenceFrame = null;
+  let previousCadenceTimestamp = null;
+  let frameMilliseconds = 1000 / 60;
   const history = createGoogleEarthDragHistory();
   let inertiaFrame = null;
   let inertiaState = null;
@@ -347,10 +396,9 @@ export function createUnboundedMatrixDragControls({
   let flyToFrames = 0;
   let flyToCompletions = 0;
   let flyToCancels = 0;
-  let wheelCoexistences = 0;
-  let wheelTargetRebases = 0;
   const interruptionCounts = {
     drag: 0,
+    pointer: 0,
     wheel: 0,
     "fly-to": 0,
     programmatic: 0,
@@ -361,6 +409,27 @@ export function createUnboundedMatrixDragControls({
   const windowTarget = inputSurface.ownerDocument.defaultView;
   const requestFrame = (callback) => windowTarget.requestAnimationFrame(guardNative(callback));
   const cancelFrame = windowTarget.cancelAnimationFrame.bind(windowTarget);
+  let pendingDrag = null;
+  const flushPendingDrag = () => {
+    if (pendingDrag === null) return;
+    const update = pendingDrag;
+    pendingDrag = null;
+    rotate(update);
+  };
+  const cancelCadence = () => {
+    if (cadenceFrame !== null) cancelFrame(cadenceFrame);
+    cadenceFrame = null;
+    previousCadenceTimestamp = null;
+  };
+  const measureCadence = timestamp => {
+    if (previousCadenceTimestamp !== null && timestamp > previousCadenceTimestamp) {
+      frameMilliseconds = timestamp - previousCadenceTimestamp;
+    }
+    previousCadenceTimestamp = timestamp;
+    flushPendingDrag();
+    if (lifetime.disposed) return;
+    cadenceFrame = requestFrame(measureCadence);
+  };
   const syncCursor = () => {
     if (lifetime.disposed) return;
     inputSurface.style.cursor = drag ? "grab" : "";
@@ -386,6 +455,8 @@ export function createUnboundedMatrixDragControls({
     flyToCancels += 1;
   };
   const cancelPointer = () => {
+    pendingDrag = null;
+    cancelCadence();
     if (pointerId === null) return;
     const activePointerId = pointerId;
     pointerId = null;
@@ -432,13 +503,6 @@ export function createUnboundedMatrixDragControls({
   const animateFlyTo = (timestamp) => {
     if (flyToMotion === null) return;
     if (flyToMotion.startedAt === null) flyToMotion.startedAt = timestamp;
-    const currentZoom = surfaceFlyToState?.()?.zoom;
-    if (Number.isFinite(currentZoom) && flyToMotion.lastPublishedZoom > 0) {
-      const externalZoomRatio = currentZoom / flyToMotion.lastPublishedZoom;
-      if (Math.abs(externalZoomRatio - 1) > 1e-9) {
-        flyToMotion.zoomScale *= externalZoomRatio;
-      }
-    }
     const progress = Math.min(
       1,
       Math.max(0, timestamp - flyToMotion.startedAt) /
@@ -448,24 +512,22 @@ export function createUnboundedMatrixDragControls({
       flyToMotion.plan,
       progress,
     );
-    const zoom = Math.min(
-      flyToMotion.plan.maximumZoom,
-      Math.max(
-        flyToMotion.plan.minimumZoom,
-        sample.zoom * flyToMotion.zoomScale,
-      ),
-    );
+    const zoom = sample.zoom;
     rotate({
       controlPitchDelta:
         sample.pitchDeltaDegrees - flyToMotion.previousPitchDelta,
       controlYawDelta:
         sample.yawDeltaDegrees - flyToMotion.previousYawDelta,
       zoom,
+      rotation: composeDragRotation(
+        sample.rotation,
+        conjugateRotation(flyToMotion.previousRotation),
+      ),
     });
     if (lifetime.disposed) return;
     flyToMotion.previousPitchDelta = sample.pitchDeltaDegrees;
     flyToMotion.previousYawDelta = sample.yawDeltaDegrees;
-    flyToMotion.lastPublishedZoom = zoom;
+    flyToMotion.previousRotation = sample.rotation;
     flyToFrames += 1;
     if (!sample.complete) {
       flyToFrame = requestFrame(animateFlyTo);
@@ -476,7 +538,8 @@ export function createUnboundedMatrixDragControls({
     flyToCompletions += 1;
     finishInteraction();
   };
-  const onDoubleClick = (event) => {
+  let completedDoublePress = null;
+  const beginSurfaceFlyTo = (event) => {
     if (!drag || surfaceFlyToState === null || event.button !== 0) return;
     const measuredTrackball = flyToTrackballMetrics();
     if (!isTrackballMetrics(measuredTrackball)) {
@@ -491,8 +554,9 @@ export function createUnboundedMatrixDragControls({
       minimumZoom: cameraState?.minimumZoom,
       maximumZoom: cameraState?.maximumZoom,
     });
-    if (plan === null) return;
+    if (plan === null) return false;
     event.preventDefault();
+    cancelPointer();
     const wasInteractionActive = interactionActive;
     replaceCameraMotion("fly-to");
     flyToMotion = {
@@ -500,8 +564,7 @@ export function createUnboundedMatrixDragControls({
       startedAt: null,
       previousPitchDelta: 0,
       previousYawDelta: 0,
-      zoomScale: 1,
-      lastPublishedZoom: plan.startZoom,
+      previousRotation: [0, 0, 0, 1],
     };
     flyToStarts += 1;
     if (!wasInteractionActive) {
@@ -510,6 +573,25 @@ export function createUnboundedMatrixDragControls({
     }
     if (lifetime.disposed) return;
     flyToFrame = requestFrame(animateFlyTo);
+    return true;
+  };
+  const onMouseDown = event => {
+    if (event.detail !== 2 || event.button !== 0) return;
+    // Native Qt starts a flight on the second press. Browser dblclick arrives
+    // after its release, so recognize that same press via MouseEvent.detail.
+    if (beginSurfaceFlyTo(event)) completedDoublePress = {
+      x:event.clientX, y:event.clientY, timestamp:event.timeStamp,
+    };
+  };
+  const onDoubleClick = event => {
+    const prior = completedDoublePress;
+    completedDoublePress = null;
+    if (prior && event.clientX === prior.x && event.clientY === prior.y &&
+        event.timeStamp >= prior.timestamp && event.timeStamp - prior.timestamp < 1000) {
+      event.preventDefault();
+      return;
+    }
+    beginSurfaceFlyTo(event);
   };
   const animateInertia = (timestamp) => {
     if (inertiaState === null) return;
@@ -533,6 +615,12 @@ export function createUnboundedMatrixDragControls({
       rotate({
         controlPitchDelta: step.pitchDeltaDegrees,
         controlYawDelta: step.yawDeltaDegrees,
+        rotation: rotationFromAngularVelocity(
+          inertiaState.angularVelocity,
+          elapsedMilliseconds * Math.hypot(
+            step.pitchDegreesPerMillisecond, step.yawDegreesPerMillisecond,
+          ) / inertiaState.initialSpeedDegreesPerMillisecond,
+        ),
       });
       if (lifetime.disposed) return;
       inertiaFrames += 1;
@@ -545,15 +633,33 @@ export function createUnboundedMatrixDragControls({
       finishInteraction();
     }
   };
-  const startInertia = (releaseTimestamp) => {
-    const throwState = estimateGoogleEarthDragThrow({
-      history,
-      releaseTimestamp,
-    });
+  const startInertia = (throwState, releaseTimestamp, releaseFrameTimestamp) => {
     if (throwState === null) return false;
+    // The release frame projects the pointer and advances the first coast
+    // step. Compose both rotations before publishing the retained scene.
+    const firstStep = advanceGoogleEarthDragThrow({
+      ...throwState,
+      elapsedMilliseconds: frameMilliseconds,
+    });
+    rotate({
+      rotation: composeDragRotation(
+        rotationFromAngularVelocity(throwState.angularVelocity,
+          frameMilliseconds * Math.hypot(firstStep.pitchDegreesPerMillisecond,
+            firstStep.yawDegreesPerMillisecond) /
+              throwState.initialSpeedDegreesPerMillisecond),
+        throwState.launchRotation,
+      ),
+      controlPitchDelta: throwState.pitchDegreesPerMillisecond * frameMilliseconds +
+        firstStep.pitchDeltaDegrees,
+      controlYawDelta: throwState.yawDegreesPerMillisecond * frameMilliseconds +
+        firstStep.yawDeltaDegrees,
+    });
+    if (lifetime.disposed) return false;
     inertiaState = {
       ...throwState,
-      previousTimestamp: releaseTimestamp,
+      pitchDegreesPerMillisecond: firstStep.pitchDegreesPerMillisecond,
+      yawDegreesPerMillisecond: firstStep.yawDegreesPerMillisecond,
+      previousTimestamp: releaseFrameTimestamp ?? releaseTimestamp,
     };
     activeMode = "inertia";
     inertiaStarts += 1;
@@ -561,22 +667,30 @@ export function createUnboundedMatrixDragControls({
     return true;
   };
   const onPointerDown = (event) => {
-    if (!drag || pointerId !== null || event.isPrimary === false ||
-        event.button !== 0) return;
-    event.preventDefault();
+    if (!drag || pointerId !== null || !isOrbitDragStart(event)) return;
     const measuredTrackball = trackballMetrics();
     if (!isTrackballMetrics(measuredTrackball)) {
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
     }
+    // Mouse compatibility events carry the second-press click count. Blocking
+    // them here would postpone double-click flights until the final release.
+    if (event.pointerType !== "mouse") event.preventDefault();
+    onPointerStart();
+    if (lifetime.disposed) return;
+    interruptMotion("pointer");
+    if (lifetime.disposed) return;
     pointerId = event.pointerId;
     pointerDragging = false;
-    pointerDownX = event.clientX;
-    pointerDownY = event.clientY;
     previousX = event.clientX;
     previousY = event.clientY;
+    previousPointerTimestamp = event.timeStamp;
     accumulatedPitch = 0;
     accumulatedYaw = 0;
+    pendingDrag = null;
     activeTrackball = measuredTrackball;
+    trackballInvalidated = false;
+    frameMilliseconds = 1000 / 60;
+    cadenceFrame = requestFrame(measureCadence);
     resetGoogleEarthDragHistory(history);
     recordGoogleEarthDragSample(history, {
       x: event.clientX,
@@ -595,20 +709,16 @@ export function createUnboundedMatrixDragControls({
     const sampleEvents = coalesced.length > 0 ? coalesced : [event];
     let pitchDelta = 0;
     let yawDelta = 0;
+    let rotation = [0, 0, 0, 1];
     for (const sampleEvent of sampleEvents) {
-      if (pointerDragging && sampleEvent.clientX === previousX &&
-          sampleEvent.clientY === previousY) {
+      if (Math.abs(sampleEvent.clientX - previousX) <=
+            POINTER_POSITION_EPSILON &&
+          Math.abs(sampleEvent.clientY - previousY) <=
+            POINTER_POSITION_EPSILON) {
         continue;
       }
       if (!pointerDragging) {
-        const displacement = Math.hypot(
-          sampleEvent.clientX - pointerDownX,
-          sampleEvent.clientY - pointerDownY,
-        );
-        if (displacement <
-            GOOGLE_EARTH_DRAG_INERTIA.minimumThrowDisplacementPixels) {
-          continue;
-        }
+        // Pointer ownership persists when wheel zoom changes the camera.
         const wasInteractionActive = interactionActive;
         replaceCameraMotion("drag");
         pointerDragging = true;
@@ -618,6 +728,18 @@ export function createUnboundedMatrixDragControls({
           if (lifetime.disposed) return;
         }
       }
+      if (trackballInvalidated) {
+        const measuredTrackball = trackballMetrics();
+        if (!isTrackballMetrics(measuredTrackball)) {
+          throw new TypeError("Unbounded matrix drag trackball is invalid.");
+        }
+        activeTrackball = measuredTrackball;
+        trackballInvalidated = false;
+        // Velocity from before zoom belongs to a different screen projection.
+        resetGoogleEarthDragHistory(history);
+        accumulatedPitch = 0;
+        accumulatedYaw = 0;
+      }
       const projected = projectGoogleEarthTrackballDelta({
         previousX,
         previousY,
@@ -626,13 +748,28 @@ export function createUnboundedMatrixDragControls({
         ...activeTrackball,
       });
       const fittedPitch = projected.pitchDegrees *
-        GOOGLE_EARTH_DRAG_INERTIA.directPitchResponse;
+        (activeTrackball.pitchResponse ??
+          GOOGLE_EARTH_DRAG_INERTIA.directPitchResponse);
+      const sampleRotation = projectSphereDrag({
+        previousX,
+        previousY,
+        currentX: sampleEvent.clientX,
+        currentY: sampleEvent.clientY,
+        centerX: activeTrackball.centerX,
+        centerY: activeTrackball.centerY,
+        opticalCenterX: activeTrackball.opticalCenterX,
+        opticalCenterY: activeTrackball.opticalCenterY,
+        radius: activeTrackball.surfaceRadius,
+        focalLength: activeTrackball.focalLength,
+      });
+      rotation = composeDragRotation(sampleRotation, rotation);
       pitchDelta += fittedPitch;
       yawDelta += projected.yawDegrees;
       accumulatedPitch += fittedPitch;
       accumulatedYaw += projected.yawDegrees;
       previousX = sampleEvent.clientX;
       previousY = sampleEvent.clientY;
+      previousPointerTimestamp = sampleEvent.timeStamp;
       recordGoogleEarthDragSample(history, {
         x: sampleEvent.clientX,
         y: sampleEvent.clientY,
@@ -641,12 +778,21 @@ export function createUnboundedMatrixDragControls({
         yaw: accumulatedYaw,
       });
     }
-    if (pitchDelta !== 0 || yawDelta !== 0) {
-      rotate({
+    if (pitchDelta !== 0 || yawDelta !== 0 ||
+        Math.abs(rotation[0]) + Math.abs(rotation[1]) + Math.abs(rotation[2]) > 1e-12) {
+      const update = {
         controlPitchDelta: pitchDelta,
         controlYawDelta: yawDelta,
-      });
+        rotation,
+      };
+      pendingDrag = pendingDrag === null ? update : {
+        controlPitchDelta: pendingDrag.controlPitchDelta + pitchDelta,
+        controlYawDelta: pendingDrag.controlYawDelta + yawDelta,
+        rotation: composeDragRotation(rotation, pendingDrag.rotation),
+      };
+      return update;
     }
+    return null;
   };
   const onPointerMove = (event) => {
     if (!drag || event.pointerId !== pointerId) return;
@@ -656,46 +802,45 @@ export function createUnboundedMatrixDragControls({
   const endPointer = (event) => {
     if (event.pointerId !== pointerId) return;
     const wasDragging = pointerDragging;
+    // Native Qt release consumes the existing movement history. The release
+    // location is not another movement and cannot refresh a paused drag.
+    const releaseAge = event.timeStamp - previousPointerTimestamp;
+    const freshRelease = releaseAge >= 0 &&
+      releaseAge <= GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds;
+    const throwState = wasDragging && event.type === "pointerup" && freshRelease
+      ? estimateGoogleEarthDragThrow({ history, releaseTimestamp: event.timeStamp,
+        trackball: activeTrackball, frameMilliseconds }) : null;
+    // A rejected release clears the native rotation pending for the next
+    // present. A throw keeps that movement as part of its launch.
+    if (throwState !== null) flushPendingDrag();
+    else pendingDrag = null;
+    if (lifetime.disposed) return;
+    const releaseFrameTimestamp = previousCadenceTimestamp;
+    cancelCadence();
     pointerId = null;
     pointerDragging = false;
     syncCursor();
     if (inputSurface.hasPointerCapture(event.pointerId)) {
       inputSurface.releasePointerCapture(event.pointerId);
     }
-    if (wasDragging && event.type === "pointerup" &&
-        startInertia(event.timeStamp)) return;
+    if (throwState !== null) {
+      if (startInertia(throwState, event.timeStamp, releaseFrameTimestamp)) return;
+    }
     if (wasDragging) finishInteraction();
   };
-  const onWheel = () => {
-    if (!wheel || (activeMode !== "inertia" && activeMode !== "fly-to")) {
+  const onWheel = (event) => {
+    if (!wheel || event.deltaY === 0) return;
+    if (pointerId !== null) {
+      // Native held-button controls consume the wheel and end the grab.
+      // The zoom controller observes defaultPrevented on the same event.
+      event.preventDefault();
+      interruptMotion("wheel");
       return;
     }
-    wheelCoexistences += 1;
-    if (activeMode !== "fly-to" || flyToMotion === null) return;
-    const motion = flyToMotion;
-    const publishedZoom = motion.lastPublishedZoom;
-    windowTarget.queueMicrotask(guardNative(() => {
-      if (flyToMotion !== motion || activeMode !== "fly-to") return;
-      const wheelZoom = surfaceFlyToState?.()?.zoom;
-      if (!Number.isFinite(wheelZoom) || publishedZoom <= 0) return;
-      const targetZoom = clamp(
-        motion.plan.targetZoom * Math.pow(
-          wheelZoom / publishedZoom,
-          GOOGLE_EARTH_SURFACE_FLY_TO.wheelTargetResponse,
-        ),
-        motion.plan.minimumZoom,
-        motion.plan.maximumZoom,
-      );
-      if (Math.abs(targetZoom - motion.plan.targetZoom) < 1e-9) return;
-      motion.plan = Object.freeze({ ...motion.plan, targetZoom });
-      rotate({
-        controlPitchDelta: 0,
-        controlYawDelta: 0,
-        zoom: publishedZoom,
-      });
-      if (lifetime.disposed) return;
-      wheelTargetRebases += 1;
-    }));
+    if (activeMode !== "inertia" && activeMode !== "fly-to") return;
+    // Native fly-wheel rest trace: the first wheel receipt stops the flight.
+    // Cancel its pending frame before the wheel controller starts publishing.
+    interruptMotion("wheel");
   };
   lifetime.onDispose(() => interruptMotion("destroy"));
   try {
@@ -704,8 +849,10 @@ export function createUnboundedMatrixDragControls({
       ["pointermove", onPointerMove],
       ["pointerup", endPointer],
       ["pointercancel", endPointer],
+      ["lostpointercapture", endPointer],
+      ["mousedown", onMouseDown],
       ["dblclick", onDoubleClick],
-      ["wheel", onWheel, { passive: true }],
+      ["wheel", onWheel, { passive: false }],
     ]) {
       const guarded = guardNative(callback);
       lifetime.onDispose(() => inputSurface.removeEventListener(name, guarded));
@@ -732,6 +879,9 @@ export function createUnboundedMatrixDragControls({
       if (lifetime.disposed) return;
       interruptMotion("programmatic");
     },
+    invalidateTrackball() {
+      if (pointerId !== null) trackballInvalidated = true;
+    },
     stats() {
       return Object.freeze({
         schema: GOOGLE_EARTH_DRAG_INERTIA.schema,
@@ -742,8 +892,6 @@ export function createUnboundedMatrixDragControls({
           Number(pointerDragging) + Number(inertiaFrame !== null) +
           Number(flyToFrame !== null),
         pendingPointer: pointerId !== null && !pointerDragging,
-        wheelCoexistences,
-        wheelTargetRebases,
         active: inertiaFrame !== null,
         starts: inertiaStarts,
         frames: inertiaFrames,
@@ -768,6 +916,98 @@ export function createUnboundedMatrixDragControls({
       if (errors.length) throw new AggregateError(errors, "Drag controls cleanup failed.");
     },
   });
+}
+
+// Object adapters supply rendering and camera facts. This is the sole assembly
+// point for shared drag, fly-to and wheel behavior, including their lifecycle.
+export function createObjectInteractionControls({
+  inputSurface,
+  camera,
+  trackballMetrics,
+  sceneMatrix,
+  rotate,
+  minimumZoom,
+  maximumZoom,
+  onStart,
+  onEnd,
+  onError = null,
+}) {
+  if (typeof sceneMatrix !== "function") {
+    throw new TypeError("Object interaction controls require the current scene matrix.");
+  }
+  const lifetime = createSceneLifetime();
+  const fail = error => {
+    const cleanup = lifetime.destroy();
+    const failure = cleanup.length ? new AggregateError([error, ...cleanup], error.message, { cause:error }) : error;
+    if (onError === null) throw failure;
+    onError(failure);
+  };
+  try {
+  const interactionTrackballMetrics = () =>
+    googleEarthInteractionTrackball(trackballMetrics());
+  const dragControls = createUnboundedMatrixDragControls({
+    inputSurface,
+    onError: fail,
+    trackballMetrics: () => Object.freeze({
+      ...interactionTrackballMetrics(),
+      angularDegreesPerTrackballRadius:
+        googleEarthDirectAngularDegreesPerTrackballRadius(camera.state.zoom),
+      pitchResponse: directPitchResponseForZoom(camera.state.zoom),
+    }),
+    flyToTrackballMetrics: () => Object.freeze({
+      ...interactionTrackballMetrics(),
+      sceneMatrix: sceneMatrix(),
+    }),
+    surfaceFlyToState: () => Object.freeze({
+      zoom: camera.state.zoom,
+      minimumZoom,
+      maximumZoom,
+    }),
+    onPointerStart: () => wheelControls.stop(),
+    onStart,
+    onEnd,
+    rotate,
+  });
+  lifetime.onDispose(() => dragControls.destroy());
+  // The motion observer must receive each wheel event before zoom starts.
+  const wheelControls = createPreparedWheelZoomControls({
+    inputSurface,
+    onError: fail,
+    camera,
+    trackballMetrics: interactionTrackballMetrics,
+    rotate(delta) {
+      rotate(delta);
+      // Measure the changed camera only if a held pointer moves again.
+      dragControls.invalidateTrackball();
+    },
+    minimumZoom,
+    maximumZoom,
+  });
+  lifetime.onDispose(() => wheelControls.destroy());
+  return Object.freeze({
+    update(options) {
+      if (lifetime.disposed) return;
+      wheelControls.update(options);
+      dragControls.update(options);
+    },
+    stop() {
+      wheelControls.stop();
+      dragControls.stop();
+    },
+    stats: () => Object.freeze({
+      ...dragControls.stats(),
+      wheelZoom: wheelControls.stats(),
+    }),
+    destroy() {
+      const errors = lifetime.destroy();
+      if (errors.length) throw new AggregateError(errors, "Object input cleanup failed.");
+    },
+  });
+  } catch (error) {
+    const cleanup = lifetime.destroy();
+    if (cleanup.length) throw new AggregateError([error, ...cleanup], error.message, { cause:error });
+    throw error;
+  }
 }
 
 export function createRetainedCubicSkyOrbit({
@@ -936,38 +1176,42 @@ export function createRetainedCubicSkyOrbit({
     }));
     publications += 1;
   };
-  const scene = Object.freeze({
-    host: inputSurface,
-    cameraEl: cameraElement,
-    sceneElement,
-    camera: safeCamera,
-    applyCamera: guardNative(publish),
-  });
   const mobileQuery = matchMedia(MOBILE_VIEWPORT_QUERY);
-  const dragControls = createUnboundedMatrixDragControls({
+  const publishCameraDelta = ({
+    controlPitchDelta,
+    controlYawDelta,
+    zoom,
+    rotation,
+  }) => {
+    const previousPitch = safeCamera.state.rotX;
+    safeCamera.update({
+      rotX: previousPitch + controlPitchDelta,
+      rotY: safeCamera.state.rotY + controlYawDelta,
+      ...(zoom === undefined ? {} : { zoom }),
+    });
+    orientation.rotate({
+      renderedPitchDelta:
+        preparedScenePitch(safeCamera.state.rotX, cameraPlan) -
+          preparedScenePitch(previousPitch, cameraPlan),
+      yawDelta: controlYawDelta,
+      rotation,
+    });
+    publish();
+  };
+  const controls = createObjectInteractionControls({
     inputSurface,
     onError: retireFailure,
-    trackballMetrics: () => Object.freeze({
-      ...measureRetainedPlanetTrackball({
-        stage,
-        cameraElement,
-        logicalBodyDiameter: cameraPlan.logicalBodyDiameter,
-      }),
-      angularDegreesPerTrackballRadius:
-        googleEarthDirectAngularDegreesPerTrackballRadius(
-          safeCamera.state.zoom,
-        ),
-    }),
-    flyToTrackballMetrics: () => measureRetainedPlanetFlyToDisc({
+    camera: safeCamera,
+    trackballMetrics: () => measureRetainedPlanetTrackball({
       stage,
       cameraElement,
       logicalBodyDiameter: cameraPlan.logicalBodyDiameter,
+      sceneScale: cameraPlan.sceneScale,
     }),
-    surfaceFlyToState: () => Object.freeze({
-      zoom: safeCamera.state.zoom,
-      minimumZoom: cameraPlan.minimumZoom,
-      maximumZoom: cameraPlan.maximumZoom,
-    }),
+    sceneMatrix: () => orientation.scene(),
+    rotate: publishCameraDelta,
+    minimumZoom: cameraPlan.minimumZoom,
+    maximumZoom: cameraPlan.maximumZoom,
     onStart() {
       interactionStarts += 1;
       onInteractionStart();
@@ -976,42 +1220,8 @@ export function createRetainedCubicSkyOrbit({
       interactionEnds += 1;
       onInteractionEnd();
     },
-    rotate({ controlPitchDelta, controlYawDelta, zoom }) {
-      const previousPitch = safeCamera.state.rotX;
-      safeCamera.update({
-        rotX: previousPitch + controlPitchDelta,
-        rotY: safeCamera.state.rotY + controlYawDelta,
-        ...(zoom === undefined ? {} : { zoom }),
-      });
-      orientation.rotate({
-        renderedPitchDelta:
-          preparedScenePitch(safeCamera.state.rotX, cameraPlan) -
-            preparedScenePitch(previousPitch, cameraPlan),
-        yawDelta: controlYawDelta,
-      });
-      publish();
-    },
   });
-  lifetime.onDispose(() => dragControls.destroy());
-  // Register this after the motion observer. The wheel update remains an
-  // independent zoom channel; an active throw or fly-to rebases on its result.
-  const wheelControls = createPolyOrbitControls(scene, {
-    drag: false,
-    wheel: !mobileQuery.matches,
-    minZoom: cameraPlan.minimumZoom,
-    maxZoom: cameraPlan.maximumZoom,
-  });
-  lifetime.onDispose(() => wheelControls.destroy());
-  const controls = Object.freeze({
-    update(options) {
-      wheelControls.update(options);
-      dragControls.update(options);
-    },
-    destroy() {
-      dragControls.destroy();
-      wheelControls.destroy();
-    },
-  });
+  lifetime.onDispose(() => controls.destroy());
   const inputPolicy = bindResponsiveOrbitPolicy({
     controls,
     inputSurface,
@@ -1058,10 +1268,10 @@ export function createRetainedCubicSkyOrbit({
         throw error;
       }
     },
-    setState({ pitch, controlPitch = pitch, controlYaw, zoom } = {}) {
+    setState({ pitch, controlPitch = pitch, controlYaw, zoom, pose } = {}) {
       if (lifetime.disposed) return this.state();
       try {
-      dragControls.stop();
+      controls.stop();
       const resetsOrientation = controlPitch !== undefined ||
         controlYaw !== undefined;
       safeCamera.update({
@@ -1069,7 +1279,9 @@ export function createRetainedCubicSkyOrbit({
         ...(controlYaw === undefined ? {} : { rotY: controlYaw }),
         ...(zoom === undefined ? {} : { zoom }),
       });
-      if (resetsOrientation) {
+      if (pose !== undefined) {
+        orientation.restore(pose);
+      } else if (resetsOrientation) {
         orientation.reset({
           controlPitch: safeCamera.state.rotX,
           controlYaw: safeCamera.state.rotY,
@@ -1080,12 +1292,16 @@ export function createRetainedCubicSkyOrbit({
       return this.state();
     },
     state() {
-      return Object.freeze({
+      const state = {
         pitch: safeCamera.state.rotX,
         controlPitch: safeCamera.state.rotX,
         controlYaw: safeCamera.state.rotY,
         zoom: safeCamera.state.zoom,
+      };
+      Object.defineProperty(state, "pose", {
+        value: orientation.snapshot(),
       });
+      return Object.freeze(state);
     },
     skyState() {
       const currentSunPresentation = directionalSun?.state() ??
@@ -1122,7 +1338,7 @@ export function createRetainedCubicSkyOrbit({
         directionalSunBillboardCount: hasDirectionalSun ? 1 : 0,
         interactionStarts,
         interactionEnds,
-        dragInertia: dragControls.stats(),
+        dragInertia: controls.stats(),
         runtimeGeometryPreparation: false,
       });
     },
@@ -1227,6 +1443,23 @@ function formatMatrix3d(matrix) {
     : Number(value.toFixed(12))).join(",")})`;
 }
 
+function parseCameraPoseMatrix(value, label) {
+  if (typeof value !== "string" || !value.startsWith("matrix3d(")) {
+    throw new TypeError(`Cubic-sky camera ${label} matrix is invalid.`);
+  }
+  const matrix = new DOMMatrix(value);
+  const values = [
+    matrix.m11, matrix.m12, matrix.m13, matrix.m14,
+    matrix.m21, matrix.m22, matrix.m23, matrix.m24,
+    matrix.m31, matrix.m32, matrix.m33, matrix.m34,
+    matrix.m41, matrix.m42, matrix.m43, matrix.m44,
+  ];
+  if (values.some((component) => !Number.isFinite(component))) {
+    throw new TypeError(`Cubic-sky camera ${label} matrix is invalid.`);
+  }
+  return matrix;
+}
+
 function createSceneMatrix(controlPitch, controlYaw, cameraPlan) {
   return new DOMMatrix()
     .rotateAxisAngle(1, 0, 0, preparedScenePitch(controlPitch, cameraPlan))
@@ -1250,24 +1483,64 @@ export function measureRetainedPlanetTrackball({
   stage,
   cameraElement,
   logicalBodyDiameter,
+  sceneScale = 1 / BASE_TILE,
 }) {
+  if (!Number.isFinite(sceneScale) || sceneScale <= 0) {
+    throw new TypeError("Retained planet scene scale is invalid.");
+  }
   const stageBounds = stage.getBoundingClientRect();
   const cameraBounds = cameraElement.getBoundingClientRect();
-  const computedScale = cameraElement.ownerDocument.defaultView
-    .getComputedStyle(cameraElement).scale;
-  const scale = retainedPlanetUniformScale(computedScale) ?? Math.min(
+  const style = cameraElement.ownerDocument.defaultView
+    .getComputedStyle(cameraElement);
+  const scale = retainedPlanetUniformScale(style.scale) ?? Math.min(
     cameraBounds.width / stageBounds.width,
     cameraBounds.height / stageBounds.height,
   );
+  const perspective = Number.parseFloat(style.perspective);
+  const depthRadius = logicalBodyDiameter * BASE_TILE / 2;
+  if (!Number.isFinite(perspective) || perspective <= depthRadius) {
+    throw new TypeError("Retained planet camera perspective is invalid.");
+  }
+  const distance = perspective / depthRadius;
+  const centerX = (cameraBounds.left + cameraBounds.right) / 2;
+  const centerY = (cameraBounds.top + cameraBounds.bottom) / 2;
+  const origin = style.perspectiveOrigin?.trim().split(/\s+/u) ?? [];
+  const originOffset = (value, size) => value === undefined ? 0 :
+    (value.endsWith("%") ? Number.parseFloat(value) / 100 * size :
+      Number.parseFloat(value)) - size / 2;
+  const surfaceRadius = perspective * sceneScale * scale /
+    Math.sqrt(distance ** 2 - 1);
   const metrics = {
-    centerX: (cameraBounds.left + cameraBounds.right) / 2,
-    centerY: (cameraBounds.top + cameraBounds.bottom) / 2,
+    centerX,
+    centerY,
+    opticalCenterX: centerX + scale * originOffset(origin[0],
+      cameraElement.offsetWidth ?? cameraBounds.width / scale),
+    opticalCenterY: centerY + scale * originOffset(origin[1],
+      cameraElement.offsetHeight ?? cameraBounds.height / scale),
     radius: logicalBodyDiameter * scale / 2,
+    surfaceRadius,
+    focalLength: perspective * sceneScale * scale,
+    viewportWidth: stageBounds.width,
+    viewportCenterX: (stageBounds.left ?? 0) + stageBounds.width / 2,
+    viewportCenterY: (stageBounds.top ?? 0) + stageBounds.height / 2,
   };
   if (!isTrackballMetrics(metrics)) {
     throw new TypeError("Retained planet trackball bounds are invalid.");
   }
   return metrics;
+}
+
+function dragRotationMatrix([x, y, z, w]) {
+  return new DOMMatrix([
+    1 - 2 * (y * y + z * z), 2 * (x * y + z * w), 2 * (x * z - y * w), 0,
+    2 * (x * y - z * w), 1 - 2 * (x * x + z * z), 2 * (y * z + x * w), 0,
+    2 * (x * z + y * w), 2 * (y * z - x * w), 1 - 2 * (x * x + y * y), 0,
+    0, 0, 0, 1,
+  ]);
+}
+
+function conjugateRotation([x, y, z, w]) {
+  return [-x, -y, -z, w];
 }
 
 export function measureRetainedPlanetFlyToDisc({
@@ -1304,7 +1577,11 @@ export function retainedPlanetUniformScale(value) {
 function isTrackballMetrics(metrics) {
   return metrics !== null && typeof metrics === "object" &&
     Number.isFinite(metrics.centerX) && Number.isFinite(metrics.centerY) &&
-    Number.isFinite(metrics.radius) && metrics.radius > 0;
+    (metrics.opticalCenterX === undefined || Number.isFinite(metrics.opticalCenterX)) &&
+    (metrics.opticalCenterY === undefined || Number.isFinite(metrics.opticalCenterY)) &&
+    Number.isFinite(metrics.radius) && metrics.radius > 0 &&
+    (metrics.pitchResponse === undefined ||
+      (Number.isFinite(metrics.pitchResponse) && metrics.pitchResponse > 0));
 }
 
 function smoothstep(minimum, maximum, value) {

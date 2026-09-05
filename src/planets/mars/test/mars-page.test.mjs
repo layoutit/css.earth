@@ -54,7 +54,7 @@ test("wires every prepared Mars lens and only supported settings", () => {
 
 test("keeps responsive shell geometry generic and centralized", () => {
   assert.match(page, /site\/planet-shell\.css/u);
-  assert.match(shellLayout, /--explorer-panel-width:\s*360px/u);
+  assert.match(shellLayout, /--explorer-panel-width:\s*340px/u);
   assert.match(shellLayout, /font:\s*14px\/1\.4 var\(--shell-ui-font\)/u);
   assert.match(shellLayout, /@media \(max-width: 820px\), \(orientation: portrait\)/u);
   assert.match(shellLayout,

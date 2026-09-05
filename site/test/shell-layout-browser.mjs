@@ -80,7 +80,8 @@ try {
         near(result.rail.y, result.header.y, "rail and wordmark share one row");
         near(result.rail.height, result.header.height, "rail and header share one height");
         assert.ok(result.rail.bottom < config.height, `${config.name}: rail ends before the viewport bottom`);
-        near(result.stage.left, 0, "floating shell leaves the scene full-width");
+        near(result.stage.left, mobile ? 0 : 170, "scene offset follows the responsive panel layout");
+        near(result.stage.width, config.width, "scene retains its full viewport width");
         near(result.wordmarkSlot.x, 16, "wordmark left inset");
         near(result.wordmarkSlot.y, 8, "wordmark top inset");
         near(result.wordmarkSlot.height, 48, "wordmark row height");

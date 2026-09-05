@@ -1,4 +1,5 @@
 #import <Cocoa/Cocoa.h>
+#import <objc/runtime.h>
 
 #include <OpenGL/gl.h>
 
@@ -18,8 +19,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 
 #include <vector>
+#include <atomic>
+#include <malloc/malloc.h>
+#include <mach/mach_vm.h>
 
 namespace {
 
@@ -109,6 +114,7 @@ struct CalibrationMapping {
   int y;
   char rawPath[PATH_MAX];
   char decodedSha256[65];
+  char sourcePath[PATH_MAX];
 };
 
 struct CalibrationTexture {
@@ -790,6 +796,8 @@ static void AuditGroundDraw(
   Functions.activeTexture(static_cast<GLenum>(previousActiveTexture));
 }
 
+static bool ReadExactFile(const char *path, void *bytes, size_t byteCount);
+
 static bool FindCalibrationMapping(
     const AuditedGroundDraw &draw,
     CalibrationMapping *mapping) {
@@ -799,9 +807,14 @@ static bool FindCalibrationMapping(
   if (file == nullptr) return false;
   CalibrationMapping candidate = {};
   bool found = false;
-  while (fscanf(
-      file,
-      "%u\t%u\t%u\t%u\t%u\t%d\t%d\t%d\t%1023s\t%64s\n",
+  bool loadedOriginal = false;
+  std::vector<uint8_t> originalBytes(32768), auditedBytes(32768);
+  char line[4096];
+  while (fgets(line,sizeof(line),file) != nullptr) {
+    candidate = {};
+    const int columns = sscanf(
+      line,
+      "%u\t%u\t%u\t%u\t%u\t%d\t%d\t%d\t%1023s\t%64s\t%1023s",
       &candidate.originalTexture,
       &candidate.program,
       &candidate.vertexBuffer,
@@ -811,13 +824,31 @@ static bool FindCalibrationMapping(
       &candidate.x,
       &candidate.y,
       candidate.rawPath,
-      candidate.decodedSha256) == 10) {
-    if (candidate.originalTexture == draw.texture &&
-        candidate.program == draw.program &&
-        candidate.vertexBuffer == draw.vertexBuffer &&
-        candidate.elementBuffer == draw.elementBuffer) {
+      candidate.decodedSha256,
+      candidate.sourcePath);
+    if (columns < 10) break;
+    if (candidate.program != draw.program) continue;
+    // Buffer names are not texture identity. An unfamiliar binding may use
+    // an existing tile only when all compressed source bytes match its audit.
+    bool exactBytes = false;
+    if (Functions.getCompressedTexImage != nullptr) {
+      if (!loadedOriginal) {
+        Functions.getCompressedTexImage(GL_TEXTURE_2D, 0, originalBytes.data());
+        loadedOriginal = true;
+      }
+      char sourcePath[1100] = {};
+      const int length = columns == 11
+        ? snprintf(sourcePath,sizeof(sourcePath),"%s",candidate.sourcePath)
+        : snprintf(sourcePath, sizeof(sourcePath), "%s.source-dxt1", candidate.rawPath);
+      if (length > 0 && static_cast<size_t>(length) < sizeof(sourcePath) &&
+          ReadExactFile(sourcePath, auditedBytes.data(), auditedBytes.size())) {
+        exactBytes = memcmp(originalBytes.data(), auditedBytes.data(), originalBytes.size()) == 0;
+      }
+    }
+    if (exactBytes) {
       *mapping = candidate;
       found = true;
+      break;
     }
   }
   fclose(file);
@@ -1171,6 +1202,8 @@ static void DrawWithLayerMode(
   if (!Ready()) return;
   ProgramClassification classification = ClassifyCurrentProgram();
   bool isGround = classification.groundTextureLocation >= 0;
+  const bool calibrationOnly = getenv("CSSEARTH_ORACLE_CALIBRATION_ONLY") != nullptr;
+  if (calibrationOnly && !isGround) return;
   if (isGround) {
     AuditGroundDraw(
       classification, drawKind, first, count, indexType, indices);
@@ -1237,7 +1270,7 @@ static void DrawWithLayerMode(
       classification, &samplerUnit, &previousActiveTexture);
     if (!CurrentTextureIsGoogleDxt1Albedo()) {
       Functions.activeTexture(static_cast<GLenum>(previousActiveTexture));
-      draw();
+      if (!calibrationOnly) draw();
       return;
     }
     const AuditedGroundDraw drawKey = CurrentGroundDrawKey(
@@ -1586,8 +1619,136 @@ static void RebindGoogleEarthDrawCalls() {
   AppendInstallLine(reboundArrays, reboundElements);
 }
 
+using PresentFunction = void (*)(id, SEL);
+static PresentFunction UnpacedPresent = nullptr;
+static double PresentInterval = 0;
+static std::atomic<double> *CaptureDeadline = nullptr;
+static const double *FramePeriod = nullptr;
+static const double *FrameClock = nullptr;
+static FILE *FrameTimingLog = nullptr;
+static uintptr_t TrackballVtable = 0;
+static uintptr_t TrackballObjects[8] = {};
+static size_t TrackballCount = 0;
+static FILE *InputHistoryLog = nullptr;
+static double (*InputClock)() = nullptr;
+
+static bool ReadLocalState(uintptr_t address, void *target, size_t size) {
+  mach_vm_size_t copied = 0;
+  return mach_vm_read_overwrite(mach_task_self(), address, size,
+    reinterpret_cast<mach_vm_address_t>(target), &copied) == KERN_SUCCESS && copied == size;
+}
+
+static kern_return_t LocalZoneReader(task_t, vm_address_t address, vm_size_t, void **target) {
+  *target = reinterpret_cast<void *>(address);
+  return KERN_SUCCESS;
+}
+
+static void FindInputHistory(task_t, void *, unsigned, vm_range_t *ranges, unsigned count) {
+  for (unsigned index = 0; index < count && TrackballCount < 8; index++) {
+    if (ranges[index].size < 0x210 || ranges[index].size > 0x1000) continue;
+    uintptr_t vtable = 0;
+    if (ReadLocalState(ranges[index].address, &vtable, sizeof(vtable)) && vtable == TrackballVtable) {
+      TrackballObjects[TrackballCount++] = ranges[index].address;
+    }
+  }
+}
+
+static void RecordInputHistory(double timestamp) {
+  static bool inspected = false;
+  if (InputHistoryLog == nullptr || CaptureDeadline == nullptr || CaptureDeadline->load() <= 0) return;
+  if (!inspected) {
+    inspected = true;
+    vm_address_t *zones = nullptr; unsigned count = 0;
+    if (malloc_get_all_zones(mach_task_self(), LocalZoneReader, &zones, &count) == KERN_SUCCESS) {
+      for (unsigned index = 0; index < count; index++) {
+        auto *zone = reinterpret_cast<malloc_zone_t *>(zones[index]);
+        if (zone->introspect != nullptr && zone->introspect->enumerator != nullptr) {
+          zone->introspect->enumerator(mach_task_self(), nullptr, MALLOC_PTR_IN_USE_RANGE_TYPE,
+            zones[index], LocalZoneReader, FindInputHistory);
+        }
+      }
+    }
+  }
+  for (size_t index = 0; index < TrackballCount; index++) {
+    alignas(8) uint8_t state[0x210] = {};
+    if (!ReadLocalState(TrackballObjects[index], state, sizeof(state))) continue;
+    const auto number = [&](size_t offset) { double value; memcpy(&value,state+offset,8); return value; };
+    int length = 0, next = 0;
+    memcpy(&length,state+0x1e8,4); memcpy(&next,state+0x1ec,4);
+    if (length < 0 || length > 16 || next < 0 || next >= 16) continue;
+    fprintf(InputHistoryLog,"{\"t\":%.9f,\"clock\":%.9f,\"object\":%zu,\"length\":%d,\"next\":%d,\"window\":%.9f,\"average\":[%.9f,%.9f],\"point\":[%.9f,%.9f],\"history\":[",
+      timestamp,InputClock==nullptr?0:InputClock(),index,length,next,number(0x1e0),number(0x50),number(0x58),number(0x1f8),number(0x200));
+    for(int i=0;i<length;i++) {
+      const int slot=(next-length+1+i+16)%16;
+      fprintf(InputHistoryLog,"%s[%.9f,%.9f,%.9f]",i==0?"":",",number(0x60+slot*16),number(0x68+slot*16),number(0x160+slot*8));
+    }
+    fprintf(InputHistoryLog,"]}\n");
+  }
+  fflush(InputHistoryLog);
+}
+
+static void PacedPresent(id context, SEL selector) {
+  static thread_local double nextPresent = 0;
+  const double started = [NSProcessInfo processInfo].systemUptime;
+  RecordInputHistory(started);
+  if (CaptureDeadline != nullptr && CaptureDeadline->load() > 0) {
+    CaptureDeadline->store(started + 60);
+  }
+  if (FrameTimingLog != nullptr && FramePeriod != nullptr) {
+    fprintf(FrameTimingLog, "%.9f\t%.9f\t%.9f\n", started, *FramePeriod,
+      FrameClock == nullptr ? 0 : *FrameClock);
+    fflush(FrameTimingLog);
+  }
+  UnpacedPresent(context, selector);
+  const double now = [NSProcessInfo processInfo].systemUptime;
+  if (nextPresent > now) {
+    const double remaining = nextPresent - now;
+    timespec pause = { static_cast<time_t>(remaining),
+      static_cast<long>((remaining - floor(remaining)) * 1e9) };
+    nanosleep(&pause, nullptr);
+  }
+  nextPresent = [NSProcessInfo processInfo].systemUptime + PresentInterval;
+}
+
 __attribute__((constructor)) static void InstallLayerRenderHook() {
   @autoreleasepool {
+    // A hidden drawable has no display vsync. Pace both the unrecorded and
+    // recorded runs alike; leave the camera's own clock and math untouched.
+    const char *frameRate = getenv("CSSEARTH_ORACLE_PRESENT_HZ");
+    if (frameRate != nullptr && (atof(frameRate) == 60 || atof(frameRate) == 30)) {
+      if (getenv("CSSEARTH_ORACLE_CAPTURE_UNTIL_REST") != nullptr) {
+        CaptureDeadline = reinterpret_cast<std::atomic<double> *>(FindImageSymbol(
+          "/libcssmars_googleearth_oracle.dylib", "__ZL14RasterDeadline"));
+      }
+      const char *timingPath = getenv("CSSEARTH_ORACLE_FRAME_TIMING_LOG");
+      if (timingPath != nullptr) {
+        for (uint32_t index = 0; index < _dyld_image_count(); index++) {
+          const char *name = _dyld_get_image_name(index);
+          if (name == nullptr || strstr(name, "/libgoogleearth_pro.dylib") == nullptr) continue;
+          const auto *base = reinterpret_cast<const uint8_t *>(_dyld_get_image_header(index));
+          const uint8_t getter[] = {0xf2,0x0f,0x10,0x05,0x12,0xd4,0x0e,0x01};
+          if (memcmp(base + 0x103a8e, getter, sizeof(getter)) == 0) {
+            FramePeriod = reinterpret_cast<const double *>(base + 0x11f0ea8);
+            // The frame timer stores its elapsed-clock sample after computing dt.
+            const uint8_t frameStore[] = {0xf2,0x0f,0x11,0x05,0xf0,0x27,0x0d,0x01};
+            if (memcmp(base + 0x103b40, frameStore, sizeof(frameStore)) == 0) {
+              FrameClock = reinterpret_cast<const double *>(base + 0x11d6338);
+            }
+            InputClock = reinterpret_cast<double (*)()>(const_cast<uint8_t *>(base + 0x11a93c));
+            FrameTimingLog = fopen(timingPath, "w");
+            TrackballVtable = reinterpret_cast<uintptr_t>(base + 0x110d338);
+            const char *historyPath = getenv("CSSEARTH_ORACLE_INPUT_HISTORY_LOG");
+            if (historyPath != nullptr) InputHistoryLog = fopen(historyPath,"w");
+          }
+        }
+      }
+      Method present = class_getInstanceMethod([NSOpenGLContext class], @selector(flushBuffer));
+      if (present != nullptr) {
+        PresentInterval = 1.0 / atof(frameRate);
+        UnpacedPresent = reinterpret_cast<PresentFunction>(method_getImplementation(present));
+        method_setImplementation(present, reinterpret_cast<IMP>(PacedPresent));
+      }
+    }
     ResolveFunctions();
     HeadlessSetQtToggle = reinterpret_cast<HeadlessSetQtToggleFunction>(
       FindImageSymbol(

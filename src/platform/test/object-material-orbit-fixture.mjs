@@ -59,7 +59,10 @@ export function materialOrbitFixture(id) {
     ? factory(f.stage, mounted, materialCache, () => false, lifetime, dependencies.onError)
     : factory({ inputSurface: f.stage, mounted, plan: PREPARED_VENUS_SCENE.camera, lifetime, onError: dependencies.onError });
   f.event = (name, orbit) => {
-    if (name === 'wheel') return f.callbacks.wheel.applyCamera;
+    if (name === 'wheel') return () => {
+      try { f.callbacks.wheel.rotate({ controlPitchDelta:0, controlYawDelta:0, zoom:2 }); }
+      catch (error) { f.callbacks.wheel.onError(error); }
+    };
     if (name === 'resize') return [...f.stage.listeners.get('resize')][0];
     if (name === 'invalidate') return f.ready ?? orbit.invalidate;
     if (name === 'refresh') return () => orbit.refresh();
