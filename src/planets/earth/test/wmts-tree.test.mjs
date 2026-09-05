@@ -76,3 +76,24 @@ test("loaded metadata that proves an empty view remains resident until its stub 
   matrix[12]=2000;
   assert.deepEqual(selectCityPages(localPlan,nodes,matrix,1,{width:800,height:600}).directories,[]);
 });
+
+test("wide views reveal the base surface when complete root groups exceed either budget, then recover",()=>{
+  const normal=[0,0,1],nodes=new Map(),roots=[];
+  for(const [i,x] of [-200,0,200].entries()){
+    const corners=[[x,-10,0],[x+10,-10,0],[x+10,10,0],[x,10,0]];
+    const pieces=["apron","strip"].map(part=>({key:`${i}-${part}`,corners,normal,width:256,height:256,children:[]}));
+    const root={key:`root-${i}`,level:5,corners,normal,pages:pieces.map(p=>p.key),children:[],maximumCssSpan:384};
+    roots.push(root);for(const node of [root,...pieces])nodes.set(node.key,node);
+  }
+  const matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
+  // First constrain slots, then independently constrain decoded bytes.
+  for(const limits of [{poolSize:8,maximumDecodedBytes:16*256*256*4},{poolSize:16,maximumDecodedBytes:8*256*256*4}]){
+    const localPlan={topology:"wmts-quadtree@1",roots,...limits};
+    const wide=selectCityPages(localPlan,nodes,matrix,1,{width:800,height:600});
+    assert.deepEqual(wide.keys,[]);
+    assert.equal(wide.baseSurfaceFallback,"retained-budget");
+    const close=selectCityPages(localPlan,nodes,matrix,1,{width:400,height:600});
+    assert.deepEqual(new Set(close.keys),new Set(["0-apron","0-strip","1-apron","1-strip"]));
+    assert.equal(close.baseSurfaceFallback,undefined);
+  }
+});

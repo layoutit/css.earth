@@ -5,11 +5,16 @@ import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { prepareLocationPoint } from "../tools/city/prepare-location.mjs";
 
 const base = process.argv[2] ?? "http://127.0.0.1:4228";
-const output = new URL("../../../../output/playwright/city-selection/", import.meta.url);
+const output = new URL(`../../../../output/playwright/city-selection-${Date.now()}/`, import.meta.url);
 await mkdir(output, { recursive: true });
 const { places } = JSON.parse(await readFile(new URL("../../../../public/scenes/earth/earth-places.json", import.meta.url), "utf8"));
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const reports = [];
+const imagerySettled = page => page.waitForFunction(() => {
+  const state = window.__earth.cityPages.stats();
+  return !state.pendingSelection && state.activeLoads === 0 && state.index.activeLoads === 0 &&
+    state.desired.length > 0 && state.desired.every(key => state.retained.some(slot => slot.key === key && slot.published));
+}, null, { timeout: 60000 });
 try {
   for (const [label, viewport, dpr, mobile] of [
     ["desktop-1", { width: 1440, height: 1000 }, 1, false],
@@ -37,11 +42,7 @@ try {
       await search.press("Enter");
       await page.locator(".planet-destination-panel").waitFor();
       await page.waitForFunction(() => document.querySelector('.planet-destination-panel').ariaBusy === 'false');
-      await page.waitForFunction(() => {
-        const state = window.__earth.cityPages.stats();
-        return !state.pendingSelection && state.activeLoads === 0 && state.index.activeLoads === 0 &&
-          state.desired.length > 0 && state.desired.every(key => state.retained.some(slot => slot.key === key && slot.published));
-      }, null, { timeout: 60000 });
+      await imagerySettled(page);
       const buenosAires = places.find(place => place.id === "3435910");
       const point = prepareLocationPoint(PREPARED_EARTH_SCENE, buenosAires.longitude, buenosAires.latitude);
       const centered = await page.evaluate(point => {
@@ -71,6 +72,10 @@ try {
       await page.waitForFunction(() => document.querySelector('.planet-destination-panel').ariaBusy === 'false');
       assert.match(await page.locator(".planet-destination-status").innerText(), /WorldCover imagery/u);
       assert.equal(await page.evaluate(() => window.__earth.camera.state().zoom), 1024);
+      await imagerySettled(page);
+      const tokyo = await page.evaluate(() => window.__earth.cityPages.stats());
+      assert.deepEqual(tokyo.errors, []);
+      assert.deepEqual(tokyo.index.errors, []);
       await page.screenshot({ path: new URL(`${label}-tokyo.png`, output).pathname });
       await search.fill("qqqzzzimpossiblecity");
       await page.getByText("No matching cities. Try a city name and country.", { exact: true }).waitFor();
@@ -84,11 +89,14 @@ try {
       assert.deepEqual(errors, []);
       reports.push({ label, dpr, mobileEmulation: mobile, cameraErrorCssPixels: centered.pixels,
         sceneNodes: await page.evaluate(() => window.__placeSceneNodes.length), catalogRequests: catalogRequests.length,
+        destinationPages: { buenosAires: [...city.desired].sort(), tokyo: [...tokyo.desired].sort() },
         cityPages: city.retained.filter(slot => slot.published).length, cityUrls: [...cityUrls].sort(), errors });
       console.log(`PASS ${label}: city search, keyboard selection, camera target, imagery, globe return, no coverage, stable DOM`);
     } finally { await context.close(); }
   }
-  assert.deepEqual(reports[0].cityUrls, reports[1].cityUrls, "DPR selects the same prepared city assets");
+  // Flights sample different intermediate views as frame and network timing
+  // vary. Compare the fully published destination assets at identical poses.
+  assert.deepEqual(reports[0].destinationPages, reports[1].destinationPages, "DPR selects the same prepared city assets");
   const fault = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
   try {
     const page = await fault.newPage();

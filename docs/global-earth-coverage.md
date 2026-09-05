@@ -15,6 +15,8 @@ Earth can search 34,135 GeoNames cities and fly to their prepared camera poses. 
 
 The memory limits describe the application's pools and decoded transport data. They do not measure Chrome's full process or GPU memory. The noise overlay reuses the normal surface image bank. It does not decode another copy of the globe textures.
 
+When a wide view needs more image pieces than the fixed pool can hold, it shows the existing Blue Marble surface. Detail resumes as the camera moves closer. Tile groups stay complete and the pool does not grow during flights.
+
 The source listing extends from 60° south to 83° north and includes water and nodata. It is a footprint inventory, not a land mask or a guarantee of valid pixels everywhere. Blue Marble remains behind the available detail. Terrascope's availability and production traffic terms remain external dependencies; unlimited free traffic is unproven.
 
 ## Prepared release

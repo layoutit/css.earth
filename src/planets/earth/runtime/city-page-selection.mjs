@@ -132,14 +132,15 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport){
     const next=request(entry,path);
     if(entry.node.stub)return null;
     const own=(entry.node.pages??[]).map(inspect).filter(p=>p.visible&&p.span>=1).map(p=>({...p,path:next}));
-    if(entry.node.children.length && (entry.span>entry.node.maximumCssSpan)){
+    const refine=!plan.coarsestCut && entry.span>entry.node.maximumCssSpan*(plan.selectionScale??1);
+    if(entry.node.children.length && refine){
       const childGroups=entry.node.children.map(key=>visit(key,next));
       if(childGroups.every(g=>g!==null)){
         const deeper=childGroups.flat();
         if(deeper.length<=capacity&&deeper.reduce((s,p)=>s+p.node.width*p.node.height*4,0)<=byteCapacity)return deeper;
       }
     }
-    if(own.length && entry.node.children.length && entry.span>entry.node.maximumCssSpan && fallbacks.length<12)fallbacks.push({key,span:entry.span,own:own.length,children:entry.node.children.map(key=>({key,stub:pages.get(key).stub,pages:pages.get(key).pages?.length}))});
+    if(own.length && entry.node.children.length && refine && fallbacks.length<12)fallbacks.push({key,span:entry.span,own:own.length,children:entry.node.children.map(key=>({key,stub:pages.get(key).stub,pages:pages.get(key).pages?.length}))});
     return own;
   };
   const roots=plan.roots.map(root=>inspect(root.key)).filter(p=>p.visible).sort((a,b)=>Math.hypot(...a.center)-Math.hypot(...b.center));
@@ -147,10 +148,12 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport){
   // Refinement can span adjacent root tiles. If their combined detail exceeds
   // the fixed pool, choose a coarser prepared cut for the entire viewport.
   if(selected.length>capacity||selected.reduce((s,p)=>s+p.node.width*p.node.height*4,0)>byteCapacity){
-    if((plan.selectionScale??1)>64)throw new Error("Prepared WMTS coverage exceeds the retained budget.");
-    const relaxed={...plan,selectionScale:(plan.selectionScale??1)*2};
-    const nodes=new Map([...pages].map(([key,node])=>[key,node.pages?{...node,maximumCssSpan:node.maximumCssSpan*2}:node]));
-    const result=selectWmtsTree(relaxed,nodes,matrix,scale,viewport);
+    // Near globe scale, even the complete coarsest cut can exceed the pool.
+    // Reveal the retained base surface for that view, without publishing a
+    // partial tile group or expanding the budget. Later views retry normally.
+    if(plan.coarsestCut)return {keys:[],directories:[...directories.values()],baseSurfaceFallback:"retained-budget",selectionScale:plan.selectionScale};
+    const relaxed={...plan,selectionScale:(plan.selectionScale??1)*2,coarsestCut:(plan.selectionScale??1)>=64};
+    const result=selectWmtsTree(relaxed,pages,matrix,scale,viewport);
     const faces={};for(const p of selected)faces[p.node.coarseKey]=(faces[p.node.coarseKey]??0)+1;
     // A coarser drawable cut must not cancel discovery of finer metadata.
     // In particular, polar source strips can need fewer visible leaves after

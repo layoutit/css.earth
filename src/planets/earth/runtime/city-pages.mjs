@@ -99,7 +99,7 @@ export function mountEarthCityPages({ plan, carrier, system, scene, camera, stag
       progressiveInitialView=!slots.some(slot=>slot.published)&&selection.keys.every(key=>
         ["terrascope-wms@1","terrascope-wmts@1"].includes(index.nodes().get(key)?.rasterSource));
     }
-    selectionDiagnostics={fallbacks:selection.fallbacks,scale:selection.selectionScale,cuts:selection.cuts};
+    selectionDiagnostics={fallbacks:selection.fallbacks,scale:selection.selectionScale,cuts:selection.cuts,baseSurfaceFallback:selection.baseSurfaceFallback};
     desired = selection.keys;
     // Transport at most half a pool of selected prepared records. Directory
     // eviction must not invalidate a page that is already queued for loading.

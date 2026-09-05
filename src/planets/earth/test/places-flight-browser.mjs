@@ -3,7 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
 
 const base = process.argv[2] ?? "http://127.0.0.1:4228";
-const output = new URL("../../../../output/playwright/city-fly-to/", import.meta.url);
+const output = new URL(`../../../../output/playwright/city-fly-to-${Date.now()}/`, import.meta.url);
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const reports = [];
