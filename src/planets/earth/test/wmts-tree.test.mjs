@@ -26,8 +26,10 @@ test("regional ranges decode independently and preserve separate resident sectio
     for(let i=0;i<100&&index.stats().activeLoads;i++)await new Promise(r=>setTimeout(r,20));
     assert.equal(changed,3);assert.equal(index.stats().residentDirectories,3);assert.deepEqual(index.stats().errors,[]);
     assert.equal(index.nodes().get(root.external[0].key).stub,undefined);assert.equal(index.nodes().get(root.external[1].key).stub,undefined);
+    const retained=index.nodes().get(root.external[1].key);
     index.update([pack.root.directory,b]);assert.equal(index.nodes().get(root.external[0].key).stub,true);
     assert.equal(index.nodes().get(root.external[1].key).stub,undefined);
+    assert.equal(index.nodes().get(root.external[1].key),retained,"unrelated section eviction preserves decoded node identity");
   }finally{index.destroy();}
 });
 test("range transport rejects a full-file response, shifted range, and corrupt bytes",async()=>{

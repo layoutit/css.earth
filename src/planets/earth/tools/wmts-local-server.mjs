@@ -2,8 +2,7 @@ import { open,stat } from "node:fs/promises";
 
 // A local mirror of the immutable production packs. Keep the world dataset
 // outside the static application bundle; production reads the same bytes on R2.
-export function wmtsLocalMirror(){
-  const directory=new URL("../../../../.local/wmts-global/",import.meta.url);
+export function wmtsLocalMirror({directory=new URL("../../../../.local/wmts-global/",import.meta.url)}={}){
   const install=server=>{server.middlewares.use(async(req,res,next)=>{
     const match=/^\/scenes\/earth\/wmts-([a-f0-9]{16})\/((?:5|8)-\d+-\d+\.pack)$/u.exec(req.url??"");
     if(!match)return next();

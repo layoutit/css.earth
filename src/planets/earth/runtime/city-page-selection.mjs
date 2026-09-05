@@ -1,30 +1,40 @@
 import { preparedReferenceKey } from "./prepared-block-transport.mjs";
 export function projectCityPage(page, matrix, scale, viewport) {
   if(page.coverageParts){
-    const parts=page.coverageParts.map(part=>projectCityPage(part,matrix,scale,viewport)).filter(part=>part.visible);
-    return {visible:parts.length>0,span:Math.max(0,...parts.map(part=>part.span)),center:parts.sort((a,b)=>Math.hypot(...a.center)-Math.hypot(...b.center))[0]?.center??[0,0]};
+    let visible=false,span=0,center=[0,0],distance=Infinity;
+    for(const part of page.coverageParts){
+      const projected=projectCityPage(part,matrix,scale,viewport);
+      if(!projected.visible)continue;
+      visible=true;span=Math.max(span,projected.span);
+      const next=Math.hypot(...projected.center);
+      if(next<distance){distance=next;center=projected.center;}
+    }
+    return {visible,span,center};
   }
-  const project = (corners) => corners.map(([x, y, z]) => {
-    const p = [0, 1, 2].map((row) => matrix[row] * x + matrix[row + 4] * y +
-      matrix[row + 8] * z + matrix[row + 12]);
-    const perspective = 1 / (1 - p[2] / 1_000_000);
-    return [p[0] * perspective * scale, p[1] * perspective * scale, p[2]];
-  });
-  const points = project(page.corners);
-  const xs = points.map((p) => p[0]);
-  const ys = points.map((p) => p[1]);
-  const left = Math.min(...xs), right = Math.max(...xs);
-  const top = Math.min(...ys), bottom = Math.max(...ys);
+  const [left,right,top,bottom]=projectBounds(page.corners,matrix,scale);
   const front = matrix[2] * page.normal[0] + matrix[6] * page.normal[1] + matrix[10] * page.normal[2] + (page.normalSlack??0)*Math.hypot(matrix[2],matrix[6],matrix[10]) > 0;
-  const coverage = page.coverageCorners ? project(page.coverageCorners) : points;
-  const coverX = coverage.map(point=>point[0]), coverY = coverage.map(point=>point[1]);
+  const [coverLeft,coverRight,coverTop,coverBottom]=page.coverageCorners?projectBounds(page.coverageCorners,matrix,scale):[left,right,top,bottom];
   const originX=viewport.originX??viewport.width/2,originY=viewport.originY??viewport.height/2;
   return {
-    visible: front && Math.min(...coverX) < viewport.width-originX && Math.max(...coverX) > -originX &&
-      Math.min(...coverY) < viewport.height-originY && Math.max(...coverY) > -originY,
+    visible: front && coverLeft < viewport.width-originX && coverRight > -originX &&
+      coverTop < viewport.height-originY && coverBottom > -originY,
     span: Math.max(right - left, bottom - top),
     center: [(left+right)/2+originX-viewport.width/2,(top+bottom)/2+originY-viewport.height/2],
   };
+}
+
+// Project the prepared corners directly into bounds, without allocating point
+// and coordinate arrays for each corner on every camera update.
+function projectBounds(corners,matrix,scale){
+  let left=Infinity,right=-Infinity,top=Infinity,bottom=-Infinity;
+  for(const [x,y,z] of corners){
+    const px=matrix[0]*x+matrix[4]*y+matrix[8]*z+matrix[12];
+    const py=matrix[1]*x+matrix[5]*y+matrix[9]*z+matrix[13];
+    const pz=matrix[2]*x+matrix[6]*y+matrix[10]*z+matrix[14];
+    const perspective=1/(1-pz/1_000_000),sx=px*perspective*scale,sy=py*perspective*scale;
+    left=Math.min(left,sx);right=Math.max(right,sx);top=Math.min(top,sy);bottom=Math.max(bottom,sy);
+  }
+  return [left,right,top,bottom];
 }
 
 export function selectCityPages(plan, pages, matrix, scale, viewport) {
@@ -87,8 +97,8 @@ export function selectCityPages(plan, pages, matrix, scale, viewport) {
 }
 
 
-function selectWmtsTree(plan,pages,matrix,scale,viewport){
-  const projected=new Map(),directories=new Map(),capacity=Math.floor(plan.poolSize/2),byteCapacity=Math.floor(plan.maximumDecodedBytes/2);
+function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
+  const directories=new Map(),capacity=Math.floor(plan.poolSize/2),byteCapacity=Math.floor(plan.maximumDecodedBytes/2);
   const inspect=key=>{
     const node=pages.get(key);if(!node)throw new Error(`Missing prepared WMTS tree node ${key}.`);
     if(!projected.has(key)){
@@ -153,7 +163,7 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport){
     // partial tile group or expanding the budget. Later views retry normally.
     if(plan.coarsestCut)return {keys:[],directories:[...directories.values()],baseSurfaceFallback:"retained-budget",selectionScale:plan.selectionScale};
     const relaxed={...plan,selectionScale:(plan.selectionScale??1)*2,coarsestCut:(plan.selectionScale??1)>=64};
-    const result=selectWmtsTree(relaxed,pages,matrix,scale,viewport);
+    const result=selectWmtsTree(relaxed,pages,matrix,scale,viewport,projected);
     const faces={};for(const p of selected)faces[p.node.coarseKey]=(faces[p.node.coarseKey]??0)+1;
     // A coarser drawable cut must not cancel discovery of finer metadata.
     // In particular, polar source strips can need fewer visible leaves after
