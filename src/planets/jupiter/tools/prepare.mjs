@@ -15,6 +15,8 @@ const steps = Object.freeze([
   ["prepare-atmosphere-spectrum.mjs"],
   ["prepare-temperature-pressure.mjs"],
   ["prepare-lenses.mjs"],
+  ["../../../../tools/prepare-object-controls.mjs", "--object=jupiter"],
+  ["prepare-presentation.mjs"],
   ["prepare-runtime-asset-manifest.mjs"],
 ]);
 

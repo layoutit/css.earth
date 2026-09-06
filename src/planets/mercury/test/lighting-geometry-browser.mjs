@@ -31,6 +31,10 @@ export const TOLERANCES = Object.freeze({
   // Lit direction of the composite (albedo texture under the overlay): the
   // surface albedo pulls the centroid by several degrees, so this is coarse.
   compositeLitDirectionDegrees: 10,
+  // Below this oracle illuminated fraction the composite's lit pixels are a sliver
+  // of the limb whose centroid is set by the surface albedo alone (the
+  // overlay's own direction is still judged at 2 degrees); not judged.
+  compositeMinimumIlluminatedFraction: 0.1,
   // Terminator line (fitted crossings on the overlay) against the oracle.
   terminatorDegrees: 2,
   // Illuminated fraction against (1 + cos phase) / 2. The prepared material
@@ -391,12 +395,14 @@ async function measureLighting(page, geometry, id) {
       expected: expectedLit,
       margin: TOLERANCES.litDirectionDegrees - Math.abs(litError),
     });
-  check(`${id}-composite-lit-direction-matches-oracle`,
-    Math.abs(compositeLitError) < TOLERANCES.compositeLitDirectionDegrees, {
-      measured: lighting.litDirectionDegrees,
-      expected: expectedLit,
-      margin: TOLERANCES.compositeLitDirectionDegrees - Math.abs(compositeLitError),
-    });
+  if (expectedFraction >= TOLERANCES.compositeMinimumIlluminatedFraction) {
+    check(`${id}-composite-lit-direction-matches-oracle`,
+      Math.abs(compositeLitError) < TOLERANCES.compositeLitDirectionDegrees, {
+        measured: lighting.litDirectionDegrees,
+        expected: expectedLit,
+        margin: TOLERANCES.compositeLitDirectionDegrees - Math.abs(compositeLitError),
+      });
+  }
   check(`${id}-illuminated-fraction-matches-phase`,
     Math.abs(fraction - expectedFraction) < TOLERANCES.illuminatedFraction, {
       measured: fraction,

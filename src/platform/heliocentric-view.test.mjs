@@ -162,3 +162,28 @@ test("validatePreparedPlanetarySystem rejects every drifted variant of the real 
   assert.throws(() => validatePreparedPlanetarySystem(badRuntimeFlag, plan),
     /Prepared planetary system is incompatible/u);
 });
+
+test("a visible rectangle narrower than the root decides which markers count as on screen", () => {
+  const distance = plan.system.maximumExtentUnits * 3;
+  const whole = project({ rotation: LOOKING_DOWN_THE_POLE, distance, system: true });
+  // The shell lays the root out past the stage's edge: only the part of the
+  // root left of x = 50 is on screen; every projection is unchanged.
+  const visibleRect = { left: -720, top: -450, right: 50, bottom: 450 };
+  const clipped = project({ rotation: LOOKING_DOWN_THE_POLE, distance, system: true, visibleRect });
+  assert.equal(clipped.system.bodies.length, whole.system.bodies.length);
+  let changed = 0;
+  for (const [index, body] of clipped.system.bodies.entries()) {
+    const reference = whole.system.bodies[index];
+    assert.deepEqual(body.marker.screen, reference.marker.screen, `${body.id} projects the same`);
+    const inside = body.marker.screen[0] >= visibleRect.left && body.marker.screen[0] <= visibleRect.right &&
+      body.marker.screen[1] >= visibleRect.top && body.marker.screen[1] <= visibleRect.bottom;
+    assert.equal(body.marker.classification, inside ? reference.marker.classification : "outside-viewport", body.id);
+    assert.equal(body.marker.visible, inside && reference.marker.visible, body.id);
+    if (body.marker.classification !== reference.marker.classification) changed += 1;
+  }
+  assert.ok(changed > 0, "markers in the root's off-screen strip are outside");
+  assert.ok(changed < clipped.system.bodies.length, "markers on screen stay visible");
+  for (const rect of [{ left: 0, top: 0, right: 0, bottom: 10 }, { left: "0", top: 0, right: 1, bottom: 1 }, { left: 0, top: 5, right: 1, bottom: 1 }]) {
+    assert.throws(() => project({ rotation: LOOKING_DOWN_THE_POLE, distance, system: true, visibleRect: rect }), /invalid/u);
+  }
+});

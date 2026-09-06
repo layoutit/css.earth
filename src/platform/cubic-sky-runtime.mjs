@@ -8,6 +8,7 @@ import {
   bindResponsiveOrbitPolicy,
   isOrbitDragStart,
   MOBILE_VIEWPORT_QUERY,
+  SKYBOX_DRAG_ENABLED,
 } from "../../site/runtime-policy.mjs";
 import { createSceneLifetime } from "./scene-lifetime.mjs";
 import {
@@ -485,6 +486,16 @@ export function createUnboundedMatrixDragControls({
   let accumulatedPitch = 0;
   let accumulatedYaw = 0;
   let activeTrackball = null;
+  let skyGesture = false;
+  const projectSkyRotation = pointer => {
+    const projected = projectGoogleEarthTrackballDelta({
+      ...activeTrackball, ...pointer, radius: activeTrackball.radius,
+    });
+    return rotationFromAngularVelocity([
+      -projected.pitchDegrees * Math.PI / 180,
+      projected.yawDegrees * Math.PI / 180, 0,
+    ], 1);
+  };
   let trackballInvalidated = false;
   let previousPointerTimestamp = null;
   let cadenceFrame = null;
@@ -802,6 +813,16 @@ export function createUnboundedMatrixDragControls({
     if (!isTrackballMetrics(measuredTrackball)) {
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
     }
+    const startsOnSky = Math.hypot(
+      event.clientX - measuredTrackball.centerX,
+      event.clientY - measuredTrackball.centerY,
+    ) > measuredTrackball.surfaceRadius;
+    // A tumble-only trackball (perspective plans that opt in) takes every
+    // press as a sky press: the screen-plane orbit mapping, wherever the
+    // pointer is, so the scene tumbles about the screen axes instead of
+    // twisting about the view axis outside the disc.
+    const tumbleOnly = measuredTrackball.tumbleOnly === true;
+    if (!SKYBOX_DRAG_ENABLED && startsOnSky && !tumbleOnly) return;
     // Mouse compatibility events carry the second-press click count. Blocking
     // them here would postpone double-click flights until the final release.
     if (event.pointerType !== "mouse") event.preventDefault();
@@ -810,6 +831,8 @@ export function createUnboundedMatrixDragControls({
     interruptMotion("pointer");
     if (lifetime.disposed) return;
 
+    // Keep the chosen mapping until release, including crossings of the limb.
+    skyGesture = startsOnSky || tumbleOnly;
     pointerId = event.pointerId;
     pointerDragging = false;
     previousX = event.clientX;
@@ -871,32 +894,21 @@ export function createUnboundedMatrixDragControls({
         accumulatedPitch = 0;
         accumulatedYaw = 0;
       }
-      // A tumble-only trackball (perspective plans that opt in) takes every
-      // sample as if it started at the trackball's centre, so the scene
-      // tumbles about the screen axes wherever the pointer is instead of
-      // twisting about the view axis outside the disc.
-      const sampleStart = activeTrackball.tumbleOnly
-        ? [activeTrackball.centerX, activeTrackball.centerY]
-        : [previousX, previousY];
-      const sampleEnd = activeTrackball.tumbleOnly
-        ? [activeTrackball.centerX + (sampleEvent.clientX - previousX),
-          activeTrackball.centerY + (sampleEvent.clientY - previousY)]
-        : [sampleEvent.clientX, sampleEvent.clientY];
       const projected = projectGoogleEarthTrackballDelta({
+        previousX,
+        previousY,
+        currentX: sampleEvent.clientX,
+        currentY: sampleEvent.clientY,
         ...activeTrackball,
-        previousX: sampleStart[0],
-        previousY: sampleStart[1],
-        currentX: sampleEnd[0],
-        currentY: sampleEnd[1],
       });
       const fittedPitch = projected.pitchDegrees *
-        (activeTrackball.pitchResponse ??
+        (skyGesture ? 1 : activeTrackball.pitchResponse ??
           GOOGLE_EARTH_DRAG_INERTIA.directPitchResponse);
-      const sampleRotation = projectSphereDrag({
-        previousX: sampleStart[0],
-        previousY: sampleStart[1],
-        currentX: sampleEnd[0],
-        currentY: sampleEnd[1],
+      const sampleRotation = (skyGesture ? projectSkyRotation : projectSphereDrag)({
+        previousX,
+        previousY,
+        currentX: sampleEvent.clientX,
+        currentY: sampleEvent.clientY,
         centerX: activeTrackball.centerX,
         centerY: activeTrackball.centerY,
         opticalCenterX: activeTrackball.opticalCenterX,
@@ -951,7 +963,8 @@ export function createUnboundedMatrixDragControls({
       releaseAge <= GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds;
     const throwState = wasDragging && event.type === "pointerup" && freshRelease
       ? estimateGoogleEarthDragThrow({ history, releaseTimestamp: event.timeStamp,
-        trackball: activeTrackball, frameMilliseconds }) : null;
+        trackball: activeTrackball, frameMilliseconds,
+        projectRotation: skyGesture ? projectSkyRotation : undefined }) : null;
     // A rejected release clears the native rotation pending for the next
     // present. A throw keeps that movement as part of its launch.
     if (throwState !== null) flushPendingDrag();
@@ -1060,7 +1073,8 @@ export function createUnboundedMatrixDragControls({
     stats() {
       return Object.freeze({
         schema: GOOGLE_EARTH_DRAG_INERTIA.schema,
-        projection: "screen-space-sphere",
+        projection: skyGesture && (pointerId !== null || inertiaState !== null)
+          ? "screen-plane-orbit" : "screen-space-sphere",
         historyStorage: "fixed-capacity-float64-ring",
         activeMode,
         activeMotionCount:
@@ -1481,7 +1495,9 @@ export function createRetainedCubicSkyOrbit({
   const initialResponsiveZoom = responsiveFit.zoom;
   const windowTarget = stage.ownerDocument.defaultView;
   const handleViewportResize = guardNative(() => {
-    perspective?.measure();
+    // The dolly keeps its framing across the resize (the shared contract:
+    // a breakpoint crossing preserves the camera state).
+    perspective?.remeasure();
     responsiveFit = selectPreparedResponsiveZoom({
       stage,
       cameraElement,
@@ -1489,7 +1505,6 @@ export function createRetainedCubicSkyOrbit({
       mobile: inputPolicy.mobile,
       mobilePreviewElement,
     });
-    perspective?.reclamp();
     publish();
   });
   lifetime.onDispose(() => windowTarget?.removeEventListener("resize", handleViewportResize));
@@ -1500,8 +1515,7 @@ export function createRetainedCubicSkyOrbit({
     // The shell moves the render roots when the sidebar collapses; the eye
     // stays at the sky's vanishing point, so re-measure the offset then.
     const relayout = guardNative(() => {
-      perspective.measure();
-      perspective.reclamp();
+      perspective.remeasure();
       publish();
     });
     const sidebarObserver = new MutationObserver(relayout);

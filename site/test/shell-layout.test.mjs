@@ -43,7 +43,9 @@ test("application geometry has one owner, separate from component appearance", a
   assert.doesNotMatch(layout, /\.planet-sidebar-wordmark\s*\{/u);
   assert.doesNotMatch(layout, /planet-brand-footer|explorer-footer-height/u);
   assert.match(layout, /--explorer-card-padding-left:\s*calc\(var\(--explorer-content-inset\) - var\(--explorer-panel-padding\)\)/u);
-  assert.match(layout, /\.planet-stage\s*\{[^}]*inset-inline-start:\s*0;[^}]*translate:\s*var\(--explorer-scene-offset\) 0;/u);
+  assert.match(layout, /\.planet-stage\s*\{[^}]*inset-inline-start:\s*0;[^}]*translate:\s*none;/u);
+  assert.match(layout, /\.planet-stage > \.planet-render-root\s*\{[^}]*inset-inline-start:\s*var\(--explorer-scene-offset\);[^}]*inset-inline-end:\s*calc\(-1 \* var\(--explorer-scene-offset\)\);/u);
+  assert.match(layout, /\.planet-stage > \.planet-directional-sun\s*\{[^}]*translate:\s*var\(--explorer-scene-offset\) 0;/u);
 });
 
 test("wordmark uses tight prepared bounds and ordinary inline baseline alignment", async () => {

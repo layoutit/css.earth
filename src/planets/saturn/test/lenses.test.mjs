@@ -6,6 +6,9 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { PREPARED_SATURN_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_SATURN_SCENE } from "../runtime/preparedScene.mjs";
+import { initialObjectSelection, reduceObjectSelection } from "../../../platform/object-runtime-contract.mjs";
+import { resolvePreparedPresentation } from "../../../platform/prepared-presentation.mjs";
+import { viewSunDirectionToPreparedLightDirection } from "../../../platform/directional-sun-coordinate.mjs";
 
 const objectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const publicRoot = resolve(objectRoot, "../../../public/scenes/saturn");
@@ -185,19 +188,26 @@ test("keeps every prepared ring alpha texel unchanged across lenses", async () =
   }
 });
 
-test("declares canonical prepared lens resources and compound view selection", async () => {
+test("declares canonical prepared lens resources and exclusive cross-section selection", async () => {
   const { runtimeDefinition: definition } = await import("../runtime/definition.mjs");
+  const initial = initialObjectSelection(definition.controls);
+  const view = { controlPitch: definition.camera.defaultControlPitchDegrees, controlYaw: definition.camera.defaultControlYawDegrees,
+    sunViewDirection: viewSunDirectionToPreparedLightDirection(definition.sun.referenceViewDirection) };
+  view.reference = view;
   for (const lens of PREPARED_SATURN_LENSES.controls.filter(lens => lens.view !== "interior")) {
-    const selected = definition.reduceSelection(definition.initialSelection, { kind: "lens", id: lens.id });
-    const plan = definition.resolvePresentation({ selection: selected });
+    const selected = reduceObjectSelection(initial, { kind: "lens", id: lens.id });
+    const plan = resolvePreparedPresentation(definition, { selection: selected, view });
     const resources = plan.required.map(key => definition.assets.entries.find(entry => entry.key === key));
     assert.ok(resources.every(Boolean));
     for (const url of [lens.surface2xUrl || lens.surfaceUrl, lens.polesUrl, lens.ring2xUrl || lens.ringUrl]) {
       assert.ok(resources.some(entry => entry.url === url), `${lens.id}: canonical resource ${url}`);
     }
-    const cutaway = definition.reduceSelection(selected, { kind: "lens", id: "cross-section" });
-    assert.equal(cutaway.lensId, lens.id); assert.equal(cutaway.interior, true);
-    assert.deepEqual(definition.resolvePresentation({ selection: cutaway }).pressedLenses, [lens.id, "cross-section"]);
+    const cutaway = reduceObjectSelection(selected, { kind: "lens", id: "cross-section" });
+    assert.equal(cutaway.lensId, "cross-section"); assert.equal(Object.hasOwn(cutaway, "interior"), false);
+    const cutawayPlan = resolvePreparedPresentation(definition, { selection: cutaway, view });
+    assert.deepEqual(cutawayPlan.pressedLenses, ["cross-section"]);
+    assert.ok(cutawayPlan.required.includes("surface:normal"));
+    assert.ok(cutawayPlan.required.includes("interior-material:normal-no-shadows"));
   }
 });
 

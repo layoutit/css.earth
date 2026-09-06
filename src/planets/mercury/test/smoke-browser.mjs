@@ -299,7 +299,7 @@ try {
   });
   // Lit direction measured from the disc luminance: 180 degrees is screen
   // left; the terminator is perpendicular to it.
-  assert.ok(Math.abs(framing.litDirectionDegrees - 180) < 8,
+  assert.ok(Math.abs(angleFrom180(framing.litDirectionDegrees)) < 8,
     `lit direction ${framing.litDirectionDegrees}`);
   // Half phase: the luminance centroid sits well off centre, toward the Sun.
   assert.ok(framing.centroidRadiusShare > 0.2,
@@ -814,7 +814,7 @@ try {
     assert.deepEqual(lodPhases.map(({ stage }) => stage),
       ["geometry", "crossfade", "billboard"]);
     for (const phase of lodPhases) {
-      assert.ok(Math.abs(phase.litDirectionDegrees - 180) < 15,
+      assert.ok(Math.abs(angleFrom180(phase.litDirectionDegrees)) < 15,
         `lit direction ${phase.litDirectionDegrees} at ${phase.diameter}px`);
       assert.ok(phase.centroidRadiusShare > 0.15,
         `centroid offset ${phase.centroidRadiusShare} at ${phase.diameter}px`);
@@ -954,6 +954,12 @@ async function nextPaint(page) {
 // Luminance-weighted centroid of the disc, in screen coordinates. The lit
 // direction is its angle (0 right, 90 up, 180 left); the terminator is
 // perpendicular to it.
+// The lit direction is measured on the branch cut (the Sun is dead left, so
+// the centroid direction sits at +/-180); compare it modulo a full turn.
+function angleFrom180(degrees) {
+  return ((degrees - 180) % 360 + 540) % 360 - 180;
+}
+
 async function litDirection(image) {
   const { data, info } = await sharp(image).raw().toBuffer({
     resolveWithObject: true,

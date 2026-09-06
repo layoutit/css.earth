@@ -109,11 +109,11 @@ export const MUTATIONS = Object.freeze([
   {
     id: "light-roll-180",
     description: "material light roll offset by 180 degrees",
-    file: "src/planets/mercury/runtime/presentation.mjs",
-    find: "          PREPARED_MERCURY_ASSETS.lighting.baseLightAzimuthDegrees) : 0;",
-    replace: "          PREPARED_MERCURY_ASSETS.lighting.baseLightAzimuthDegrees + 180) : 0; /* MUTATION light-roll-180 */",
+    file: "src/platform/prepared-material.mjs",
+    find: "        const base=rotation.reference===\"initial\"?Math.atan2(reference[1],reference[0])*180/Math.PI:rotation.baseDegrees;",
+    replace: "        const base=rotation.reference===\"initial\"?Math.atan2(reference[1],reference[0])*180/Math.PI:rotation.baseDegrees+180; /* MUTATION light-roll-180 */",
     prepare: [],
-    served: { url: "/src/planets/mercury/runtime/presentation.mjs", marker: "MUTATION light-roll-180" },
+    served: { url: "/src/platform/prepared-material.mjs", marker: "MUTATION light-roll-180" },
     expect: /lit-direction-matches-oracle|terminator|lit-side-faces/u,
   },
   // The sky rides the scene matrix through the prepared registration on every

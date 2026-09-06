@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { gzipSync } from "node:zlib";
 import { encodePreparedBlock, packWmtsRecords } from "./encode-prepared-block.mjs";
-import { PREPARED_BLOCK_ENCODING } from "../../runtime/prepared-block-transport.mjs";
+import { PREPARED_BLOCK_ENCODING } from "../../../../platform/prepared-map/prepared-block-transport.mjs";
 
 // Spatial chunks are independent of destinations. The same block addresses
 // apply to an arbitrary view, a search result, or a flight across a face seam.

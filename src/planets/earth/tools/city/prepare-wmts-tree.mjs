@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { gzipSync } from "node:zlib";
 import { prepareWmtsTile } from "./wmts-page-geometry.mjs";
 import { encodePreparedBlock, packWmtsRecords } from "./encode-prepared-block.mjs";
-import { PREPARED_BLOCK_ENCODING } from "../../runtime/prepared-block-transport.mjs";
+import { PREPARED_BLOCK_ENCODING } from "../../../../platform/prepared-map/prepared-block-transport.mjs";
 
 export const tileKey = ({zoom,x,y}) => `wmts-tile-${zoom}-${x}-${y}`;
 export const hashBytes = bytes => createHash("sha256").update(bytes).digest("hex");

@@ -96,8 +96,7 @@ export function sourceTilesForBounds(bounds, catalog) {
   return {available,unavailable};
 }
 
-export async function readWorldCoverCatalog() {
-  const directory=new URL("../../source/city/",import.meta.url);
+export async function readWorldCoverCatalog({directory=new URL("../../source/city/",import.meta.url)}={}) {
   const pin=JSON.parse(await readFile(new URL("catalog-pin.json",directory),"utf8"));
   if(pin.schema!=="cssearth-worldcover-inventory-pin@1"||pin.path!=="worldcover-rgbnir-2021.json.gz"||
     pin.expectedBytes>1024*1024||pin.expectedDecodedBytes>16*1024*1024)throw new Error("Invalid WorldCover catalog pin.");

@@ -1,31 +1,90 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { preparedIlluminationState, publishPreparedIllumination } from "./prepared-illumination.mjs";
+import { createPreparedMaterialPublisher, preparedMaterialState } from "./prepared-material.mjs";
+import { selectedPreparedVariant } from "./prepared-presentation.mjs";
+import { initialObjectSelection, requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
+import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
+import { runtimeDefinition as mars } from "../planets/mars/runtime/definition.mjs";
+import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mjs";
 
-const plan = { frameCount: 128, minimumLightViewZ: -1, maximumLightViewZ: 1,
-  baseLightAzimuthDegrees: 0, shadowlessFrameOffset: 128 };
-test("prepared illumination covers the full phase sphere independently of shadows", () => {
-  for (const [direction, frame, angle] of [[[0, 0, -1], 0, 0], [[0, 0, 1], 127, 0],
-    [[1, 0, 0], 64, 0], [[0, 1, 0], 64, 90], [[-1, 0, 0], 64, -180], [[0, -1, 0], 64, -90]]) {
-    const on = preparedIlluminationState(plan, direction, true);
-    const off = preparedIlluminationState(plan, direction, false);
-    assert.deepEqual(on, { phaseFrame: frame, frame, rollDegrees: angle });
-    assert.deepEqual(off, { ...on, frame: frame + 128 });
-    assert.deepEqual(preparedIlluminationState({ ...plan, shadowlessFrameOffset: undefined }, direction, false), on);
+const track = mars.materials[0], phaseMaximum = track.frame.maximumFrame, bankLength = phaseMaximum + 1;
+const selected = shadows => selectedPreparedVariant(mars, { ...initialObjectSelection(mars.controls), shadows }).materials[0];
+const roll = direction => {
+  if (Math.hypot(direction[0], direction[1]) < 1e-9) return 0;
+  const value = Math.atan2(direction[1], direction[0]) * 180 / Math.PI - track.rotation.baseDegrees;
+  return (value % 360 + 540) % 360 - 180;
+};
+function view(direction) {
+  const value = { controlPitch: mars.camera.defaultControlPitchDegrees, controlYaw: mars.camera.defaultControlYawDegrees,
+    sunViewDirection: direction, skySunViewDirection: viewSunDirectionToPreparedLightDirection(direction) };
+  value.reference = value; return value;
+}
+function fixture() {
+  const f = retainedPresentationFixture(mars), element = f.document.createElement("s");
+  const resources = { ...f.resources, has: () => true, readyKeys: () => [] };
+  return { ...f, element, resources, publisher: createPreparedMaterialPublisher(track, element, mars.camera) };
+}
+
+test("the actual Mars material covers the complete phase sphere with two disjoint shadow modes", t => {
+  const f = fixture(); t.after(f.restore);
+  assert.equal(track.frame.count, bankLength * 2);
+  for (const [direction, phase] of [[[0, 0, -1], 0], [[0, 0, 1], phaseMaximum],
+    [[1, 0, 0], Math.round(phaseMaximum / 2)], [[0, 1, 0], Math.round(phaseMaximum / 2)],
+    [[-1, 0, 0], Math.round(phaseMaximum / 2)], [[0, -1, 0], Math.round(phaseMaximum / 2)]]) {
+    for (const shadows of [true, false]) {
+      const state = preparedMaterialState(track, selected(shadows), view(direction), mars.camera);
+      assert.equal(state.calculatedFrame, phase); assert.equal(state.frame, phase + (shadows ? 0 : bankLength));
+      f.publisher.publish(selected(shadows), view(direction), f.resources);
+      const observed = f.publisher.observe();
+      assert.equal(observed.calculatedFrame, phase); assert.equal(observed.appliedFrame, state.frame);
+      assert.ok(Math.abs(observed.lightRollDegrees - roll(direction)) < 1e-10);
+      assert.equal(f.element.style.rotate, `${observed.lightRollDegrees}deg`);
+    }
   }
 });
-test("missing decoded material retains the applied image and rotation together", () => {
-  const element = { style: {} }, p = { url: "prepared.webp", backgroundPosition: "0px 0px", backgroundSize: "512px 512px" };
-  assert.equal(publishPreparedIllumination(element, p, 20).writes, 3);
-  const before = { ...element.style };
-  assert.equal(publishPreparedIllumination(element, null, 80), false);
-  assert.deepEqual(element.style, before);
-  assert.equal(publishPreparedIllumination(element, p, 20).writes, 0);
-  let angle;
-  publishPreparedIllumination(element, p, 90, value => angle = value);
-  assert.equal(angle, 90);
+test("missing native addresses retain the applied image and rotation together", t => {
+  const f = fixture(); t.after(f.restore); const selection = selected(false);
+  f.publisher.publish(selection, view([1, 0, 0]), f.resources);
+  const properties = ["backgroundImage", "backgroundPosition", "backgroundSize", "rotate"];
+  const before = properties.map(name => f.element.style[name]), observed = f.publisher.observe();
+  assert.ok(observed.addressWrites > 0);
+  f.publisher.publish(selection, view([0, 1, 0]), { has: () => false, readyKeys: () => [], url() { throw new Error("Missing data cannot be addressed"); } });
+  assert.deepEqual(properties.map(name => f.element.style[name]), before);
+  assert.equal(f.publisher.observe().appliedFrame, observed.appliedFrame);
+  assert.equal(f.publisher.observe().addressWrites, observed.addressWrites);
+  assert.equal(f.publisher.observe().transformWrites, observed.transformWrites);
+  f.publisher.publish(selection, view([1, 0, 0]), f.resources);
+  assert.equal(f.publisher.observe().addressWrites, observed.addressWrites);
+  f.publisher.publish(selection, view([0, 1, 0]), f.resources);
+  assert.notEqual(f.element.style.rotate, before[3]);
 });
-test("prepared illumination rejects malformed directions and overlapping modes", () => {
-  assert.throws(() => preparedIlluminationState(plan, [1, 0, 1]), /Invalid/);
-  assert.throws(() => preparedIlluminationState({ ...plan, shadowlessFrameOffset: 1 }, [1, 0, 0], false), /offset/);
+test("a missing decoded URL fails before native image or rotation publication", t => {
+  const f = fixture(); t.after(f.restore); const selection = selected(true);
+  f.publisher.publish(selection, view([1, 0, 0]), f.resources);
+  const before = [f.element.style.backgroundImage, f.element.style.rotate];
+  assert.throws(() => f.publisher.publish(selection, view([0, 1, 0]), { has: () => true, url: () => null }), /no decoded URL/);
+  assert.deepEqual([f.element.style.backgroundImage, f.element.style.rotate], before);
+});
+test("the generic contract rejects invalid or overlapping prepared frame offsets", () => {
+  requireObjectRuntimeDefinition(mars);
+  for (const frameOffset of [-1, 0.5, 1, bankLength - 1, bankLength + 1, track.frame.count]) {
+    const invalid = structuredClone(mars);
+    invalid.variants.find(variant => variant.when.shadows === false).materials[0].frameOffset = frameOffset;
+    assert.throws(() => requireObjectRuntimeDefinition(invalid), /offset/);
+  }
+});
+test("the common material boundary rejects malformed directions and invalid prepared numeric bounds", () => {
+  for (const direction of [[1, 0, 1], [0, 0, 0], [NaN, 0, 1], [1, 0], null]) {
+    const value = { controlPitch: 0, controlYaw: 0, skySunViewDirection: direction };
+    assert.throws(() => preparedMaterialState(track, selected(true), value, mars.camera), /direction is invalid/);
+  }
+  for (const mutate of [
+    record => record.frame.maximum = record.frame.minimum,
+    record => record.frame.maximum = Infinity,
+    record => record.frame.count = 0,
+    record => record.rotation.baseDegrees = NaN,
+  ]) {
+    const invalid = structuredClone(mars); mutate(invalid.materials[0]);
+    assert.throws(() => requireObjectRuntimeDefinition(invalid), /Prepared presentation/);
+  }
 });

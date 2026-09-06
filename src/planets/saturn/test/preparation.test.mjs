@@ -18,19 +18,51 @@ test("prepares Saturn from a complete checked source closure", async () => {
   });
 });
 
-test("optimizes material inputs before every Saturn scene pass", async () => {
+test("prepares normal masters once before lenses and verifies them for final composition", async () => {
   const source = await readFile(
     new URL("../tools/prepare.mjs", import.meta.url),
     "utf8",
   );
-  const optimize = source.indexOf('["optimize-runtime-assets.mjs"]');
+  const assets = source.indexOf('["prepare-assets.mjs"]');
   const baseScene = source.indexOf('["prepare-scene.mjs", "--base"]');
-  const completeScene = source.indexOf('["prepare-scene.mjs"]');
-  assert.ok(optimize >= 0);
-  assert.ok(baseScene > optimize);
-  assert.ok(completeScene > baseScene);
-  assert.equal(source.indexOf('["optimize-runtime-assets.mjs"]', optimize + 1),
-    -1);
+  const lenses = source.indexOf('["prepare-lenses.mjs"]');
+  const completeScene = source.indexOf('["prepare-scene.mjs", "--compose"]');
+  assert.ok(assets >= 0);
+  assert.ok(baseScene > assets);
+  assert.ok(lenses > baseScene);
+  assert.ok(completeScene > lenses);
+  assert.equal(source.indexOf('["prepare-assets.mjs"]', assets + 1), -1);
+  assert.equal(source.includes('["optimize-runtime-assets.mjs"]'), false);
+  assert.equal(source.includes('["prepare-scene.mjs"]'), false);
+});
+
+test("composition consumes the verified phase and never reruns its numerical generator", async () => {
+  const source = await readFile(new URL("../tools/prepare-scene.mjs", import.meta.url), "utf8");
+  const start = source.indexOf("async function preparePlanetTextures(");
+  const end = source.indexOf("\nfunction materialMetadata(", start);
+  assert.ok(start > 0 && end > start);
+  // Execute the actual phase dispatcher with counted operations. The image
+  // generator and composer stay untouched; this proves their phase ownership.
+  const compile = new Function("prepareNormalMaterialMasters", "readPreparationReceipt",
+    "normalMaterialReceipt", "composePlanetTextures", `return (${source.slice(start, end)});`);
+  const events = [], metadata = { reference: "prepared-normal-materials" };
+  let receipt = { metadata };
+  const dispatch = compile(
+    async () => { events.push("generate"); return metadata; },
+    async () => { events.push("verify"); return receipt; },
+    () => ({}),
+    async value => { assert.equal(value, metadata); events.push("compose"); return value; },
+  );
+  await dispatch({ baseOnly: true });
+  await dispatch({ composeOnly: true });
+  assert.deepEqual(events, ["generate", "verify", "compose"]);
+  events.length = 0;
+  receipt = null;
+  await assert.rejects(dispatch({ composeOnly: true }), /run prepare-scene.mjs --base before --compose/);
+  assert.deepEqual(events, ["verify"], "invalid masters must not silently trigger numerical regeneration");
+  events.length = 0;
+  await dispatch();
+  assert.deepEqual(events, ["generate", "compose"], "standalone authoring must remain complete");
 });
 
 test("executes every pinned Saturn acquisition verifier", async () => {

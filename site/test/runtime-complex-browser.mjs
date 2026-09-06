@@ -4,7 +4,10 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import { PREPARED_NEPTUNE_LENSES } from "../../src/planets/neptune/runtime/preparedLenses.mjs";
-import { PREPARED_SATURN_RUNTIME_SCENE as SATURN } from "../../src/planets/saturn/runtime/preparedSceneRuntime.mjs";
+import { runtimeDefinition as SATURN } from "../../src/planets/saturn/runtime/definition.mjs";
+import { selectedPreparedVariant } from "../../src/platform/prepared-presentation.mjs";
+import { preparedMaterialState } from "../../src/platform/prepared-material.mjs";
+import { waitForAuditPreparedReadiness } from "../../tools/audit-prepared-readiness.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const selected = process.argv[3] ?? "all";
@@ -14,7 +17,9 @@ await mkdir(output, { recursive: true });
 const report = { capturedAt: new Date().toISOString(), baseUrl, source: {}, cases: [] };
 for (const file of ["site/scene-router.mjs", "src/platform/latest-selection.mjs",
   "src/planets/saturn/runtime/client.mjs", "src/planets/neptune/runtime/client.mjs",
-  "src/planets/saturn/runtime/preparedSceneRuntime.mjs", "src/planets/neptune/runtime/preparedLenses.mjs"]) {
+  "src/planets/saturn/runtime/definition.mjs", "src/planets/saturn/runtime/preparedPresentation.mjs",
+  "src/platform/prepared-presentation.mjs", "src/platform/prepared-material.mjs",
+  "src/planets/neptune/runtime/preparedLenses.mjs"]) {
   report.source[file] = createHash("sha256").update(await readFile(file)).digest("hex");
 }
 const browser = await chromium.launch({ channel: "chrome", headless: true });
@@ -103,17 +108,21 @@ async function clickLens(page, id) {
   await page.locator(`button[name="lens"][value="${id}"]`).evaluate((button) => button.click());
 }
 
-async function settled(page, id, lens) {
-  await page.waitForFunction(({ objectId, lensId }) => {
+async function settled(page, id, lens, controls = {}) {
+  await page.waitForFunction(({ objectId, lensId, controls }) => {
     const runtime = window[`__${objectId}`];
+    const selection = runtime?.runtime.selection();
     return runtime?.lenses.state().id === lensId &&
+      selection?.committed?.lensId === lensId && !selection.pending &&
+      Object.entries(controls).every(([name, value]) => selection.committed[name] === value) &&
       !document.querySelector(".planet-lenses").classList.contains("is-loading");
-  }, { objectId: id, lensId: lens });
+  }, { objectId: id, lensId: lens, controls });
 }
 
 async function snapshot(page, id) {
   return page.evaluate((objectId) => {
     const runtime = window[`__${objectId}`];
+    const selection = runtime?.runtime.selection(), view = runtime?.runtime.view();
     const stage = document.querySelector(".planet-stage");
     const material = (name) => {
       const leaf = stage.querySelector(`.${objectId}-${name}-material`);
@@ -122,7 +131,13 @@ async function snapshot(page, id) {
     };
     return {
       lifecycle: window.__cssEarth.lifecycle,
-      lens: runtime ? { ...runtime.lenses.state(), ...("interior" in runtime.runtime.selection().committed ? { interior: runtime.runtime.selection().committed.interior } : {}) } : null,
+      lens: runtime ? runtime.lenses.state() : null,
+      selection: selection ? { desired: selection.desired, committed: selection.committed,
+        pending: selection.pending, error: selection.error } : null,
+      materialView: view ? { controlPitch: view.controlPitch, controlYaw: view.controlYaw,
+        sunViewDirection: view.sunViewDirection, skySunViewDirection: view.skySunViewDirection,
+        reference: { sunViewDirection: view.reference.sunViewDirection,
+          skySunViewDirection: view.reference.skySunViewDirection } } : null,
       features: runtime?.features.state() ?? null,
       camera: runtime?.camera.state() ?? null,
       cameraStats: runtime?.camera.stats() ?? null,
@@ -198,55 +213,105 @@ async function neptuneDestroy(page, record) {
 }
 
 async function saturnCompound(page, record) {
+  const observe = async label => {
+    const state = await snapshot(page, "saturn");
+    record.samples.push({ label, ...state });
+    return state;
+  };
   await page.evaluate(() => window.__saturn.camera.setState({ controlPitch: 59, controlYaw: 24 }));
-  const before = await snapshot(page, "saturn");
+  await waitForAuditPreparedReadiness(page, "saturn");
+  const before = await observe("before");
   await page.evaluate(() => window.__runtimeComplexProbe.hold("saturn-orbit-material-methane"));
   await clickLens(page, "methane");
   await page.waitForFunction(() => window.__runtimeComplexProbe.pending.length > 0);
-  await clickLens(page, "cross-section");
-  await toggle(page, "rings", false);
-  await toggle(page, "shadows", true);
-  const pending = await snapshot(page, "saturn");
+  const pending = await observe("methane decode held");
   assert.equal(pending.lens.id, "normal");
-  assert.equal(pending.lens.interior, false);
+  assert.equal(pending.selection.desired.lensId, "methane");
+  assert.deepEqual(pending.pressed, ["normal"]);
   assert.deepEqual(pending.exterior, before.exterior);
   assert.equal(pending.busy, true);
   assert.equal(pending.settingsBusy, true);
-  await page.evaluate(() => window.__runtimeComplexProbe.release());
-  await settled(page, "saturn", "methane");
-  const winner = await snapshot(page, "saturn");
+
+  // Cross-section replaces methane through the same exclusive lens reducer.
+  // It must commit even while the superseded methane decode remains held.
+  await clickLens(page, "cross-section");
+  await toggle(page, "rings", false);
+  await toggle(page, "shadows", true);
+  await settled(page, "saturn", "cross-section", { rings: false, shadows: true });
+  const winner = await observe("exclusive cross-section winner");
   assert.deepEqual(winner.features, { rings: false, shadows: true });
-  assert.equal(winner.lens.interior, true);
   assert.equal(winner.view, "interior");
-  assert.deepEqual(winner.pressed.sort(), ["cross-section", "methane"]);
-  assertAddress(winner.exterior, SATURN.preparedLighting.orbitAtlas.runtimeShards
-    .variants["methane-ringless"].presentations[winner.cameraStats.materialFrame]);
-  const interiorFrame = Math.round(winner.cameraStats.materialFrame /
-    (SATURN.preparedLighting.orbitAtlas.frameCount - 1) * (SATURN.interior.atmosphere.frameCount - 1));
-  assertAddress(winner.interior, SATURN.interior.atmosphere.runtimeShards
-    .variants["methane-ringless"].presentations[interiorFrame]);
+  assert.deepEqual(winner.pressed, ["cross-section"]);
+  assert.ok(winner.heldDecodes.length > 0, "Winner must not wait for the superseded decode");
+  assertSaturnAddresses(winner);
   assert.equal(winner.settingsBusy, false);
   assert.equal(winner.stable, true);
-  await page.evaluate(() => window.__runtimeComplexProbe.hold("saturn-orbit-material-thermal-ringless.webp", "fail"));
+  await page.evaluate(() => window.__runtimeComplexProbe.release());
+  await page.evaluate(() => new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done))));
+  const released = await observe("superseded methane completed");
+  assert.equal(released.lens.id, "cross-section");
+  assert.deepEqual(released.pressed, ["cross-section"]);
+  assert.deepEqual(released.exterior, winner.exterior);
+  assert.deepEqual(released.interior, winner.interior);
+  assert.deepEqual(released.features, winner.features);
+
+  const thermalUrl = saturnAddresses(winner, { ...winner.selection.committed, lensId: "thermal" }).exterior.assetUrl;
+  await page.evaluate(url => window.__runtimeComplexProbe.hold(url, "fail"), thermalUrl);
   await clickLens(page, "thermal");
-  await page.waitForFunction(() => window.__runtimeComplexProbe.calls.some((path) => path.includes("saturn-orbit-material-thermal-ringless.webp")));
-  await settled(page, "saturn", "methane");
-  const failure = await snapshot(page, "saturn");
+  await page.waitForFunction(url => window.__runtimeComplexProbe.calls.includes(url), thermalUrl);
+  await settled(page, "saturn", "cross-section");
+  const failure = await observe("thermal decode rejected");
+  assert.ok(failure.selection.error, "The injected failure must reach the selection boundary");
+  assert.deepEqual(failure.selection.desired, failure.selection.committed);
+  assert.deepEqual(failure.pressed, ["cross-section"]);
+  assert.equal(failure.view, "interior");
   assert.deepEqual(failure.exterior, winner.exterior);
+  assert.deepEqual(failure.interior, winner.interior);
   const failedAttempts = await page.evaluate(() => window.__runtimeComplexProbe.calls.filter((path) => path.includes("saturn-orbit-material-thermal")).length);
   await page.evaluate(() => window.__runtimeComplexProbe.release());
   await toggle(page, "rings", true);
-  await settled(page, "saturn", "methane");
-  const afterToggle = await snapshot(page, "saturn");
+  await settled(page, "saturn", "cross-section", { rings: true, shadows: true });
+  const afterToggle = await observe("unrelated rings toggle");
   assert.deepEqual(afterToggle.features, { rings: true, shadows: true });
-  assert.equal(afterToggle.lens.interior, true);
-  assertAddress(afterToggle.exterior, SATURN.preparedLighting.orbitAtlas.runtimeShards
-    .variants.methane.presentations[afterToggle.cameraStats.materialFrame]);
+  assert.deepEqual(afterToggle.pressed, ["cross-section"]);
+  assert.equal(afterToggle.view, "interior");
+  assertSaturnAddresses(afterToggle);
   assert.equal(await page.evaluate(() => window.__runtimeComplexProbe.calls.filter((path) => path.includes("saturn-orbit-material-thermal")).length), failedAttempts,
     "An unrelated setting must not implicitly retry a failed material lens");
   assert.equal(afterToggle.stable, true);
   assert.equal(afterToggle.lifecycle, "paused");
-  record.samples.push({ label: "before", ...before }, { label: "compound request pending", ...pending },
-    { label: "compound winner", ...winner }, { label: "current lens failed", ...failure },
-    { label: "unrelated rings toggle", ...afterToggle });
+
+  await clickLens(page, "thermal");
+  await settled(page, "saturn", "thermal");
+  const retried = await observe("explicit thermal retry");
+  assert.deepEqual(retried.pressed, ["thermal"]);
+  assertSaturnAddresses(retried);
+  assert.ok(await page.evaluate(() => window.__runtimeComplexProbe.calls.filter((path) => path.includes("saturn-orbit-material-thermal")).length) > failedAttempts);
+  assert.equal(retried.stable, true);
+}
+
+function saturnAddresses(observation, selection = observation.selection.committed) {
+  const variant = selectedPreparedVariant(SATURN, selection);
+  return Object.fromEntries(variant.materials.map(selected => {
+    const track = SATURN.materials.find(track => track.id === selected.track);
+    if (!selected.enabled && selected.clearWhenHidden) return [track.id, null];
+    const { address } = preparedMaterialState(track, selected, observation.materialView, SATURN.camera);
+    const resource = SATURN.assets.entries.find(entry => entry.key === address.resource);
+    assert.ok(resource, "Expected material address belongs to the actual normalized definition");
+    return [track.id, { ...address, assetUrl: resource.url }];
+  }));
+}
+
+function assertSaturnAddresses(observation) {
+  const variant = selectedPreparedVariant(SATURN, observation.selection.committed);
+  assert.equal(observation.view, variant.writes.find(binding =>
+    binding.target === -1 && binding.kind === "attribute" && binding.name === "data-view").value);
+  for (const binding of variant.writes.filter(binding => binding.target === -1 && binding.kind === "class")) {
+    assert.equal(observation.classes.split(/\s+/).includes(binding.name), binding.value,
+      "The retained stage must publish the actual selected class binding");
+  }
+  for (const [track, address] of Object.entries(saturnAddresses(observation))) {
+    if (address) assertAddress(observation[track], address);
+    else assert.equal(observation[track].image, "none", "Hidden interior material must be cleared");
+  }
 }

@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { spawn } from "node:child_process";
 import { mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
-import { normalizeCityAssetOrigin } from "../../runtime/city-asset-url.mjs";
+import { normalizeCityAssetOrigin } from "../../../../platform/prepared-map/city-asset-url.mjs";
 
 export const CITY_R2_WRANGLER_VERSION = "4.129.0";
 export const CITY_R2_CACHE_CONTROL = "public, max-age=31536000, immutable";

@@ -1,5 +1,6 @@
 const DATASET = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 const FILENAME = /^[a-z0-9][a-z0-9._-]*$/u;
+export const isPreparedAssetPath = value => typeof value === "string" && /^\/scenes\/[a-z][a-z0-9-]*\/$/u.test(value);
 
 export function normalizeCityAssetOrigin(value) {
   if (typeof value !== "string") throw new TypeError("Invalid prepared city asset origin.");
@@ -21,19 +22,20 @@ export function preparedCityAssetUrl(assetOrigin, keyPrefix, filename) {
 }
 
 export function isPreparedCityAssetUrl(plan, value, kind, sha256) {
-  if (!plan || !DATASET.test(plan.dataset ?? "") ||
+  if (!plan || !isPreparedAssetPath(plan.assetPath) || !DATASET.test(plan.dataset ?? "") ||
       !/^[0-9a-f]{64}$/u.test(sha256 ?? "")) return false;
   let origin;
   try { origin = normalizeCityAssetOrigin(plan.assetOrigin); } catch { return false; }
   let url;
   try { url = new URL(value); } catch { return false; }
   if (url.origin !== origin || url.search || url.hash) return false;
+  if (!url.pathname.startsWith(plan.assetPath)) return false;
   const prefix = kind === "index" ? "city-index-" : kind === "page" ? "city-" : null;
   const extension = kind === "index" ? "json" : kind === "page" ? "webp" : null;
   if (!prefix) return false;
   const escapedDataset = plan.dataset.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
   return new RegExp(
-    `^/scenes/earth/${prefix}${escapedDataset}-\\d+-\\d+-\\d+-${sha256.slice(0, 16)}\\.${extension}$`,
+    `^${prefix}${escapedDataset}-\\d+-\\d+-\\d+-${sha256.slice(0, 16)}\\.${extension}$`,
     "u",
-  ).test(url.pathname);
+  ).test(url.pathname.slice(plan.assetPath.length));
 }

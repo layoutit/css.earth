@@ -46,7 +46,10 @@ export const TOLERANCES = Object.freeze({
   // Solid for three eighths of a turn behind the body (135 degrees), fading
   // over the next quarter (to 225), gone beyond: found at 30 and 120
   // (solid), 165 and 205 (fading); absent from 12 to 130 ahead.
-  trailBehindDegrees: [30, 120, 165, 205],
+  // Five samples behind: two in the solid three eighths, two in the fading
+  // quarter, plus one between so a ring crossing another's (ambiguous, left
+  // unjudged) still leaves two judged samples.
+  trailBehindDegrees: [30, 75, 120, 165, 205],
   trailAheadDegrees: [12, 45, 90, 130],
   // Line strength (integrated difference across the line, averaged over
   // neighbouring rays): the two solid samples must agree to this share, and
@@ -403,7 +406,8 @@ async function measureView(page, geometry, view) {
       judged(trail.behind).every((sample) => sample.found), { id, ...trail });
     check(`trail-absent-ahead-${id}-${view.id}`, judged(trail.ahead).length >= 2 &&
       judged(trail.ahead).every((sample) => !sample.found), { id, ...trail });
-    const [solidNear, solidFar, fadeNear, fadeFar] = trail.behind;
+    const at = (degrees) => trail.behind.find((sample) => sample.offsetDegrees === degrees);
+    const [solidNear, solidFar, fadeNear, fadeFar] = [at(30), at(120), at(165), at(205)];
     if (!solidNear.ambiguous && !solidFar.ambiguous) {
       check(`trail-solid-behind-${id}-${view.id}`,
         solidFar.strength >= TOLERANCES.trailSolidFactor * solidNear.strength, { id, ...trail });

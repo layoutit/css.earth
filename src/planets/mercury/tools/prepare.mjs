@@ -12,6 +12,8 @@ const steps = Object.freeze([
   ["prepare-charts.mjs"],
   ["prepare-system-markers.mjs"],
   ["prepare-scene.mjs"],
+  ["../../../../tools/prepare-object-controls.mjs", "--object=mercury"],
+  ["prepare-presentation.mjs"],
   ["prepare-runtime-asset-manifest.mjs"],
 ]);
 
