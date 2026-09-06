@@ -143,3 +143,45 @@ test('blank clicks after the native double-click interval are not swallowed', ()
   assert.equal(f.interrupted, 1);
   f.fire('pointerup', 620); f.destroy();
 });
+
+test('hover uses the same retained target as picking and restores the input cursor', () => {
+  const f = fixture();
+  f.surface.style.cursor = 'grab';
+  f.document.targets = [f.target];
+  f.fire('pointermove', 0, { buttons: 0 });
+  assert.equal(f.target.dataset.objectHovered, 'true');
+  assert.equal(f.surface.style.cursor, 'pointer');
+  assert.equal(f.selections, 0);
+  f.document.targets = [];
+  f.fire('pointermove', 10, { buttons: 0 });
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  assert.equal(f.surface.style.cursor, 'grab');
+  f.document.targets = [f.target];
+  f.target.ariaDisabled = 'true';
+  f.fire('pointermove', 20, { buttons: 0 });
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  f.target.ariaDisabled = 'false';
+  f.fire('pointermove', 30, { buttons: 0, pointerType: 'touch' });
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  f.fire('pointermove', 40, { buttons: 0 });
+  f.destroy();
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  assert.equal(f.surface.style.cursor, 'grab');
+  assert.equal(getEventListeners(f.surface, 'pointerleave').length, 0);
+  assert.equal(getEventListeners(f.window, 'blur').length, 0);
+});
+
+test('hover clears before a drag and on leaving the scene', () => {
+  const f = fixture(); f.document.targets = [f.target];
+  f.fire('pointermove', 0, { buttons: 0 });
+  f.fire('pointerdown', 10);
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  f.fire('pointermove', 20, { buttons: 1, clientX: 580 });
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  f.fire('pointerup', 30);
+  f.fire('pointermove', 40, { buttons: 0 });
+  assert.equal(f.target.dataset.objectHovered, 'true');
+  f.fire('pointerleave', 50, { buttons: 0 });
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  f.destroy();
+});

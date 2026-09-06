@@ -557,7 +557,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.doesNotMatch(shell, /PlanetNavigationMarker|activePlanetIndex/u);
   assert.match(
     shell,
-    /class="planet-title-row">\s*<h1 class="planet-title"[\s\S]*?<\/h1>[\s\S]*?class="planet-classification-tag planet-title-tag"[\s\S]*?class="planet-distance-tag planet-title-tag"[\s\S]*?<\/div>/u,
+    /class="planet-title-row">\s*<h1 class="planet-title"[\s\S]*?<\/h1>[\s\S]*?class="planet-system-tag planet-title-tag"[\s\S]*?>\{activeObject\.systemName\}<\/button>[\s\S]*?class="planet-classification-tag planet-title-tag"[\s\S]*?>\{classificationLabel\}<\/button>[\s\S]*?<\/div>/u,
   );
   assert.match(shell, /import \{ PLANET_SEARCH_OBJECTS, objectClassificationLabel \} from "\.\.\/planet-search-objects\.mjs";/u);
   assert.match(

@@ -94,10 +94,11 @@ export function requireObject(id) {
   return objectRecord;
 }
 
-function object(id, name, classification, color, distanceAu, description, loadScene, worldFrame = null) {
+function object(id, name, classification, color, distanceAu, description, loadScene, worldFrame = null, systemName = "Solar System") {
   return defineObject({
     id,
     name,
+    systemName,
     classification,
     color,
     distanceAu,

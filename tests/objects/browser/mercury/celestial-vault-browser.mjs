@@ -4,6 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import sharp from "sharp";
+import prepared from '../../../../src/planets/mercury/prepared/runtime.json' with { type: 'json' };
 
 const baseUrl = process.argv.find(argument => /^https?:/u.test(argument)) ?? "http://127.0.0.1:4210";
 const output = resolve(process.env.CELESTIAL_VAULT_DUMP ?? ".local/celestial-vault-browser");
@@ -16,6 +17,17 @@ const check = (id, ok, detail = {}) => {
 const browser = await chromium.launch({ headless: true, channel: process.env.PLAYWRIGHT_CHANNEL ?? "chrome", timeout: 20000 });
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 });
+  // Test-only destinations keep the preserved star path in the occlusion proof.
+  // The application does not expose catalogue labels without a real destination.
+  await page.addInitScript(ids => {
+    const destinations = new Set(ids);
+    document.addEventListener('objectnavigationquery', event => {
+      if (destinations.has(event.detail?.objectId)) event.preventDefault();
+    });
+    document.addEventListener('objectnavigate', event => {
+      if (destinations.has(event.detail?.objectId)) window.__vaultSelection = event.detail.objectId;
+    });
+  }, prepared.heliocentricView.labels.stars.records.map(star => star.id));
   page.on("pageerror", error => errors.push(error.message));
   await page.goto(new URL("/mercury/", baseUrl).href, { waitUntil: "networkidle", timeout: 30000 });
   await page.waitForFunction(() => window.__mercury?.ready === true, null, { timeout: 20000 });

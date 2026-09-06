@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
-import { bindObjectNavigationTarget } from './heliocentric-navigation.js';
+import { bindObjectNavigationTarget, supportsObjectNavigation } from './heliocentric-navigation.js';
 
 class Target extends EventTarget {
   style = { pointerEvents: '', cursor: '' };
@@ -10,6 +10,20 @@ class Target extends EventTarget {
   setAttribute(name: string, value: string) { this.attributes.set(name, value); }
   removeAttribute(name: string) { this.attributes.delete(name); }
 }
+
+test('a catalogue label needs explicit application navigation support', () => {
+  const host = new EventTarget();
+  assert.equal(supportsObjectNavigation(host, 'star:123'), false);
+  const query = (event: Event) => {
+    assert.equal(event.bubbles, true);
+    if ('detail' in event && (event.detail as {objectId: string}).objectId === 'star:456') event.preventDefault();
+  };
+  host.addEventListener('objectnavigationquery', query);
+  assert.equal(supportsObjectNavigation(host, 'star:123'), false);
+  assert.equal(supportsObjectNavigation(host, 'star:456'), true);
+  host.removeEventListener('objectnavigationquery', query);
+  assert.equal(supportsObjectNavigation(host, 'star:456'), false);
+});
 
 function keyboard(key: string, repeat = false): Event {
   const event = new Event('keydown', { cancelable: true });

@@ -75,7 +75,7 @@ export function mountRetainedCubicSky({
     writeStarRadius(element, presentation, maxRadiusPx);
     element.style.setProperty("--planet-cubic-sky-star-halo",
       `rgb(${star.color[0]} ${star.color[1]} ${star.color[2]} / ${Number(presentation.haloAlpha.toFixed(3))})`);
-    element.style.opacity = String(Number(presentation.luminance.toFixed(4)));
+    element.style.setProperty("--planet-cubic-sky-star-luminance", String(Number(presentation.luminance.toFixed(4))));
   };
   if (stars !== null) {
     starGroup = document.createElement("div");
@@ -112,7 +112,7 @@ export function mountRetainedCubicSky({
       hintsLimitMagnitude: Number(limits.hintsLimitMagnitude.toFixed(3)),
       pinMagnitude: Number(limits.pinMagnitude.toFixed(3)),
       retainedCount: starElements.length,
-      drawnCount: starElements.filter(({ element }) => element.style.opacity !== "0").length,
+      drawnCount: starElements.filter(({ presentation }) => presentation !== null && presentation.luminance > 0).length,
       writes: starExposureWrites,
     });
   };
@@ -187,7 +187,7 @@ export function mountRetainedCubicSky({
         const presentation = sessionExposure === null ? star : starPresentation(exposure, star.magnitude);
         entry.presentation = presentation;
         if (presentation === null) {
-          element.style.opacity = "0";
+          element.style.setProperty("--planet-cubic-sky-star-luminance", "0");
         } else writeStar(element, star, presentation, exposure.maxRadiusPx);
         starExposureWrites += 1;
       }
