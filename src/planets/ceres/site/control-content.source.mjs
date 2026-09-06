@@ -1,8 +1,9 @@
+import { LENS_LABELS, prepareLensLabels } from "../../../../site/prepare-lens-labels.mjs";
 import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
 import { SCIENCE_LENSES } from "../science-lenses.mjs";
 
 export const objectControls = Object.freeze({
-  lenses: { title: PREPARED_SHELL_TITLES.lenses, defaultLens: "normal", controls: [
+  lenses: prepareLensLabels({ title: PREPARED_SHELL_TITLES.lenses, defaultLens: "normal", controls: [
     { id: "normal", label: "Monochrome", description: "Dawn visible-light mosaic",
       title: "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
       thumbnailUrl: "/scenes/ceres/ceres-normal-thumbnail.webp" },
@@ -16,7 +17,7 @@ export const objectControls = Object.freeze({
         src: `/scenes/ceres/ceres-${lens.id}-legend.webp`, width: 256, height: 16,
         labels: lens.labels, meta: lens.units, sourceUrl: lens.sourceUrl },
     })),
-  ] },
+  ] }, { normal: LENS_LABELS.monochrome, enhanced: LENS_LABELS.enhancedColor, elevation: LENS_LABELS.elevation }),
   settings: { title: PREPARED_SHELL_TITLES.settings, controls: [
     { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
     { kind: "toggle", name: "shadows", label: "Shadows", checked: false },

@@ -32,6 +32,14 @@ but that path and NASA's record schema are not generic requirements. Pluto's
 owned NASA/JPL snapshots and parser are an example. Do not fetch editorial
 services in the browser.
 
+Use `LENS_LABELS` and `prepareLensLabels` from
+`site/prepare-lens-labels.mjs` in `site/control-content.source.mjs` for shared
+concepts. Select labels from source meaning: `normal` can mean Monochrome or
+Visible color. Elevation, Enhanced color, Thermal infrared, and Cross section
+use the same names across bodies; instrument and coverage details stay in
+descriptions. New concepts may keep package-owned names. Regenerate the literal
+controls with `node tools/prepare-object-controls.mjs --object=<id>`.
+
 ## Object package contract
 
 1. Export one mount function from the planet renderer.
