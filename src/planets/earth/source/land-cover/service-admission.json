@@ -1,0 +1,979 @@
+{
+  "retrievedAt": "2026-09-06T06:24:11.934Z",
+  "browser": "152.0.7977.76",
+  "origin": "http://127.0.0.1:4228",
+  "capabilitySha256": "45a1807d6296b16affb95c3bb49084b117eb1c46b792e3cec2565c46b0ad3fcd",
+  "legendSha256": "9b3567e1c4f9cef7e0b414152e845c2209cd23ac2c5cb74b59b53a83cae35583",
+  "contract": {
+    "id": "esa-worldcover-map-10m-2021-v2_map",
+    "title": "WORLDCOVER MAP 2021",
+    "matrixId": "webmercator",
+    "crs": "urn:ogc:def:crs:EPSG:3857",
+    "lower": [
+      -180,
+      -85.0511287798066
+    ],
+    "upper": [
+      180,
+      85.0511287798066
+    ],
+    "format": "image/png",
+    "template": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png",
+    "matrices": [
+      {
+        "Identifier": "00",
+        "ScaleDenominator": "559082264.0287176",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "1",
+        "MatrixHeight": "1"
+      },
+      {
+        "Identifier": "01",
+        "ScaleDenominator": "279541132.0143588",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "2",
+        "MatrixHeight": "2"
+      },
+      {
+        "Identifier": "02",
+        "ScaleDenominator": "139770566.0071794",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "4",
+        "MatrixHeight": "4"
+      },
+      {
+        "Identifier": "03",
+        "ScaleDenominator": "69885283.0035897",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "8",
+        "MatrixHeight": "8"
+      },
+      {
+        "Identifier": "04",
+        "ScaleDenominator": "34942641.50179485",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "16",
+        "MatrixHeight": "16"
+      },
+      {
+        "Identifier": "05",
+        "ScaleDenominator": "17471320.750897426",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "32",
+        "MatrixHeight": "32"
+      },
+      {
+        "Identifier": "06",
+        "ScaleDenominator": "8735660.375448713",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "64",
+        "MatrixHeight": "64"
+      },
+      {
+        "Identifier": "07",
+        "ScaleDenominator": "4367830.187724357",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "128",
+        "MatrixHeight": "128"
+      },
+      {
+        "Identifier": "08",
+        "ScaleDenominator": "2183915.0938621783",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "256",
+        "MatrixHeight": "256"
+      },
+      {
+        "Identifier": "09",
+        "ScaleDenominator": "1091957.5469310891",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "512",
+        "MatrixHeight": "512"
+      },
+      {
+        "Identifier": "10",
+        "ScaleDenominator": "545978.7734655446",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "1024",
+        "MatrixHeight": "1024"
+      },
+      {
+        "Identifier": "11",
+        "ScaleDenominator": "272989.3867327723",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "2048",
+        "MatrixHeight": "2048"
+      },
+      {
+        "Identifier": "12",
+        "ScaleDenominator": "136494.6933663861",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "4096",
+        "MatrixHeight": "4096"
+      },
+      {
+        "Identifier": "13",
+        "ScaleDenominator": "68247.3466831931",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "8192",
+        "MatrixHeight": "8192"
+      },
+      {
+        "Identifier": "14",
+        "ScaleDenominator": "34123.6733415965",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "16384",
+        "MatrixHeight": "16384"
+      },
+      {
+        "Identifier": "15",
+        "ScaleDenominator": "17061.8366707983",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "32768",
+        "MatrixHeight": "32768"
+      },
+      {
+        "Identifier": "16",
+        "ScaleDenominator": "8530.9183353991",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "65536",
+        "MatrixHeight": "65536"
+      },
+      {
+        "Identifier": "17",
+        "ScaleDenominator": "4265.4591676996",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "131072",
+        "MatrixHeight": "131072"
+      },
+      {
+        "Identifier": "18",
+        "ScaleDenominator": "2132.7295838498",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "262144",
+        "MatrixHeight": "262144"
+      },
+      {
+        "Identifier": "19",
+        "ScaleDenominator": "1066.3647919249",
+        "TopLeftCorner": "-20037508.342789244 20037508.342789244",
+        "TileWidth": "256",
+        "TileHeight": "256",
+        "MatrixWidth": "524288",
+        "MatrixHeight": "524288"
+      }
+    ],
+    "legend": [
+      {
+        "value": 10,
+        "label": "Tree cover",
+        "color": "#006400",
+        "alpha": 255
+      },
+      {
+        "value": 20,
+        "label": "Shrubland",
+        "color": "#ffbb22",
+        "alpha": 255
+      },
+      {
+        "value": 30,
+        "label": "Grassland",
+        "color": "#ffff4c",
+        "alpha": 255
+      },
+      {
+        "value": 40,
+        "label": "Cropland",
+        "color": "#f096ff",
+        "alpha": 255
+      },
+      {
+        "value": 50,
+        "label": "Built-up",
+        "color": "#fa0000",
+        "alpha": 255
+      },
+      {
+        "value": 60,
+        "label": "Bare / sparse vegetation",
+        "color": "#b4b4b4",
+        "alpha": 255
+      },
+      {
+        "value": 70,
+        "label": "Snow and ice",
+        "color": "#f0f0f0",
+        "alpha": 255
+      },
+      {
+        "value": 80,
+        "label": "Permanent water bodies",
+        "color": "#0064c8",
+        "alpha": 255
+      },
+      {
+        "value": 90,
+        "label": "Herbaceous wetland",
+        "color": "#0096a0",
+        "alpha": 255
+      },
+      {
+        "value": 95,
+        "label": "Mangroves",
+        "color": "#00cf75",
+        "alpha": 255
+      },
+      {
+        "value": 100,
+        "label": "Moss and lichen",
+        "color": "#fae6a0",
+        "alpha": 255
+      }
+    ]
+  },
+  "browserCapabilities": {
+    "status": 200,
+    "type": "cors",
+    "milliseconds": 839.1000000238419,
+    "headers": {
+      "content-length": "21505",
+      "content-type": "application/xml"
+    },
+    "bytes": 21505,
+    "sha256": "45a1807d6296b16affb95c3bb49084b117eb1c46b792e3cec2565c46b0ad3fcd"
+  },
+  "requests": [
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/1.0.0/WMTSCapabilities.xml",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "21505",
+        "content-type": "application/xml"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/14/5535/9872.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "4d725cc80b0a19601d9487c1488a839b",
+        "access-control-allow-origin": "*",
+        "content-length": "7873",
+        "content-type": "image/png",
+        "last-modified": "Thu, 06 Aug 2026 02:51:37 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/14/14549/6451.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "7fc905dc0252430e57052ba715d877bf",
+        "access-control-allow-origin": "*",
+        "content-length": "4762",
+        "content-type": "image/png",
+        "last-modified": "Tue, 02 Jun 2026 17:22:19 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/12/2086/1974.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "d4aa309e5b4252b178f05a4435190674",
+        "access-control-allow-origin": "*",
+        "content-length": "12124",
+        "content-type": "image/png",
+        "last-modified": "Wed, 13 May 2026 03:29:20 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/10/338/611.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "b97b9718162285b5437cbab886236156",
+        "access-control-allow-origin": "*",
+        "content-length": "7088",
+        "content-type": "image/png",
+        "last-modified": "Tue, 05 May 2026 21:12:57 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/08/137/111.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "e6e06fbdcc726cda1e33c6507c80da13",
+        "access-control-allow-origin": "*",
+        "content-length": "856",
+        "content-type": "image/png",
+        "last-modified": "Tue, 19 May 2026 20:48:12 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/08/255/139.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "aabb5e266a9b6081040d75c2b61b5d85",
+        "access-control-allow-origin": "*",
+        "content-length": "3894",
+        "content-type": "image/png",
+        "last-modified": "Sun, 10 May 2026 01:49:58 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/08/0/139.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "f8cf6dd1906f8b00cbbc70849c5fd74d",
+        "access-control-allow-origin": "*",
+        "content-length": "1668",
+        "content-type": "image/png",
+        "last-modified": "Sun, 10 May 2026 01:49:58 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/06/35/7.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "92f9ab7d0b3242e4df1856359e1e2649",
+        "access-control-allow-origin": "*",
+        "content-length": "7315",
+        "content-type": "image/png",
+        "last-modified": "Tue, 07 Apr 2026 11:04:25 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/06/32/56.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "634a6618fd3c6e0dfb2f9e7680ff8aea",
+        "access-control-allow-origin": "*",
+        "content-length": "67",
+        "content-type": "image/png",
+        "last-modified": "Fri, 19 Jun 2026 19:31:12 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/05/16/16.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "a11faa1166019ea4001d033b27b4600e",
+        "access-control-allow-origin": "*",
+        "content-length": "1801",
+        "content-type": "image/png",
+        "last-modified": "Tue, 07 Apr 2026 11:07:08 GMT"
+      }
+    },
+    {
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/14/5535/9872.png",
+      "status": 200,
+      "fromDiskCache": false,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "etag": "4d725cc80b0a19601d9487c1488a839b",
+        "access-control-allow-origin": "*",
+        "content-length": "7873",
+        "content-type": "image/png",
+        "last-modified": "Thu, 06 Aug 2026 02:51:37 GMT"
+      }
+    }
+  ],
+  "samples": [
+    {
+      "name": "Buenos Aires",
+      "longitude": -58.38,
+      "latitude": -34.6,
+      "zoom": 14,
+      "x": 5535,
+      "y": 9872,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/14/5535/9872.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 284.7000000178814,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "7873",
+        "content-type": "image/png",
+        "last-modified": "Thu, 06 Aug 2026 02:51:37 GMT"
+      },
+      "bytes": 7873,
+      "sha256": "45ef873985d90c10313c846a1b1ef7d9a64383bf916025f4f2133da95c7d1d69",
+      "width": 256,
+      "height": 256,
+      "emptySentinel": false,
+      "pixels": {
+        "transparent": 0,
+        "palette": 65536,
+        "other": 0
+      },
+      "colors": [
+        [
+          "#fa0000",
+          47925
+        ],
+        [
+          "#006400",
+          8227
+        ],
+        [
+          "#0064c8",
+          5229
+        ],
+        [
+          "#ffff4c",
+          2667
+        ],
+        [
+          "#0096a0",
+          847
+        ],
+        [
+          "#b4b4b4",
+          640
+        ],
+        [
+          "#ffbb22",
+          1
+        ]
+      ]
+    },
+    {
+      "name": "Tokyo",
+      "longitude": 139.69,
+      "latitude": 35.69,
+      "zoom": 14,
+      "x": 14549,
+      "y": 6451,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/14/14549/6451.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 303.30000001192093,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "4762",
+        "content-type": "image/png",
+        "last-modified": "Tue, 02 Jun 2026 17:22:19 GMT"
+      },
+      "bytes": 4762,
+      "sha256": "92e19d66ec87ae97fdbc3dcb7bb3b7c9f10dcdf68a1d6ac04ebd16484d270126",
+      "width": 256,
+      "height": 256,
+      "emptySentinel": false,
+      "pixels": {
+        "transparent": 0,
+        "palette": 65536,
+        "other": 0
+      },
+      "colors": [
+        [
+          "#fa0000",
+          53928
+        ],
+        [
+          "#006400",
+          10491
+        ],
+        [
+          "#0064c8",
+          782
+        ],
+        [
+          "#ffff4c",
+          178
+        ],
+        [
+          "#b4b4b4",
+          92
+        ],
+        [
+          "#f096ff",
+          65
+        ]
+      ]
+    },
+    {
+      "name": "Lagos coast",
+      "longitude": 3.4,
+      "latitude": 6.44,
+      "zoom": 12,
+      "x": 2086,
+      "y": 1974,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/12/2086/1974.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 275.09999999403954,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "12124",
+        "content-type": "image/png",
+        "last-modified": "Wed, 13 May 2026 03:29:20 GMT"
+      },
+      "bytes": 12124,
+      "sha256": "61da54504701696ad62326f35caf50b23fb344158154c98930429d9e05b36288",
+      "width": 256,
+      "height": 256,
+      "emptySentinel": false,
+      "pixels": {
+        "transparent": 0,
+        "palette": 65536,
+        "other": 0
+      },
+      "colors": [
+        [
+          "#fa0000",
+          31880
+        ],
+        [
+          "#0064c8",
+          22012
+        ],
+        [
+          "#ffff4c",
+          3855
+        ],
+        [
+          "#b4b4b4",
+          3043
+        ],
+        [
+          "#006400",
+          2309
+        ],
+        [
+          "#00cf75",
+          2002
+        ],
+        [
+          "#0096a0",
+          335
+        ],
+        [
+          "#f096ff",
+          68
+        ],
+        [
+          "#ffbb22",
+          32
+        ]
+      ]
+    },
+    {
+      "name": "Argentina cropland",
+      "longitude": -61,
+      "latitude": -33,
+      "zoom": 10,
+      "x": 338,
+      "y": 611,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/10/338/611.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 283.59999999403954,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "7088",
+        "content-type": "image/png",
+        "last-modified": "Tue, 05 May 2026 21:12:57 GMT"
+      },
+      "bytes": 7088,
+      "sha256": "2510bc61589e573e0dc4fe634863f2eea0172e59119a9cf4a622776248aace11",
+      "width": 256,
+      "height": 256,
+      "emptySentinel": false,
+      "pixels": {
+        "transparent": 0,
+        "palette": 65536,
+        "other": 0
+      },
+      "colors": [
+        [
+          "#f096ff",
+          58902
+        ],
+        [
+          "#ffff4c",
+          3654
+        ],
+        [
+          "#fa0000",
+          1730
+        ],
+        [
+          "#006400",
+          1219
+        ],
+        [
+          "#0064c8",
+          25
+        ],
+        [
+          "#b4b4b4",
+          5
+        ],
+        [
+          "#0096a0",
+          1
+        ]
+      ]
+    },
+    {
+      "name": "Sahara",
+      "longitude": 13,
+      "latitude": 23,
+      "zoom": 8,
+      "x": 137,
+      "y": 111,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/08/137/111.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 268,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "856",
+        "content-type": "image/png",
+        "last-modified": "Tue, 19 May 2026 20:48:12 GMT"
+      },
+      "bytes": 856,
+      "sha256": "60f32fbff761410a6a10ecbba62f185815e6a64b89367a2e308abd2f7f82d387",
+      "width": 256,
+      "height": 256,
+      "emptySentinel": false,
+      "pixels": {
+        "transparent": 0,
+        "palette": 65536,
+        "other": 0
+      },
+      "colors": [
+        [
+          "#b4b4b4",
+          65536
+        ]
+      ]
+    },
+    {
+      "name": "Dateline west",
+      "longitude": 179.95,
+      "latitude": -16.5,
+      "zoom": 8,
+      "x": 255,
+      "y": 139,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/08/255/139.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 277.89999997615814,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "3894",
+        "content-type": "image/png",
+        "last-modified": "Sun, 10 May 2026 01:49:58 GMT"
+      },
+      "bytes": 3894,
+      "sha256": "d15262a8fb863a4feb0bec5d91c09617698ed6995915ed6f9c503b0c1c8fac0a",
+      "width": 256,
+      "height": 256,
+      "emptySentinel": false,
+      "pixels": {
+        "transparent": 36392,
+        "palette": 29144,
+        "other": 0
+      },
+      "colors": [
+        [
+          "#0064c8",
+          20262
+        ],
+        [
+          "#006400",
+          6914
+        ],
+        [
+          "#ffff4c",
+          1504
+        ],
+        [
+          "#00cf75",
+          412
+        ],
+        [
+          "#f096ff",
+          46
+        ],
+        [
+          "#fa0000",
+          5
+        ],
+        [
+          "#b4b4b4",
+          1
+        ]
+      ]
+    },
+    {
+      "name": "Dateline east",
+      "longitude": -179.95,
+      "latitude": -16.5,
+      "zoom": 8,
+      "x": 0,
+      "y": 139,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/08/0/139.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 268.90000000596046,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "1668",
+        "content-type": "image/png",
+        "last-modified": "Sun, 10 May 2026 01:49:58 GMT"
+      },
+      "bytes": 1668,
+      "sha256": "551a029feb3f328b4a037648dd21559add2779092c3784945355fe0cf7e1b360",
+      "width": 256,
+      "height": 256,
+      "emptySentinel": false,
+      "pixels": {
+        "transparent": 25118,
+        "palette": 40418,
+        "other": 0
+      },
+      "colors": [
+        [
+          "#0064c8",
+          40256
+        ],
+        [
+          "#0096a0",
+          152
+        ],
+        [
+          "#006400",
+          9
+        ],
+        [
+          "#00cf75",
+          1
+        ]
+      ]
+    },
+    {
+      "name": "High Arctic",
+      "longitude": 20,
+      "latitude": 80,
+      "zoom": 6,
+      "x": 35,
+      "y": 7,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/06/35/7.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 310.09999999403954,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "7315",
+        "content-type": "image/png",
+        "last-modified": "Tue, 07 Apr 2026 11:04:25 GMT"
+      },
+      "bytes": 7315,
+      "sha256": "0cfb3686890c1bd213d176708b6d6c3cc9ca8729d0212188623a70a80bf6c64f",
+      "width": 256,
+      "height": 256,
+      "emptySentinel": false,
+      "pixels": {
+        "transparent": 0,
+        "palette": 65536,
+        "other": 0
+      },
+      "colors": [
+        [
+          "#f0f0f0",
+          28356
+        ],
+        [
+          "#0064c8",
+          25347
+        ],
+        [
+          "#b4b4b4",
+          10595
+        ],
+        [
+          "#fae6a0",
+          1177
+        ],
+        [
+          "#0096a0",
+          48
+        ],
+        [
+          "#ffff4c",
+          13
+        ]
+      ]
+    },
+    {
+      "name": "Antarctica",
+      "longitude": 0,
+      "latitude": -80,
+      "zoom": 6,
+      "x": 32,
+      "y": 56,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/06/32/56.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 268.19999998807907,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "67",
+        "content-type": "image/png",
+        "last-modified": "Fri, 19 Jun 2026 19:31:12 GMT"
+      },
+      "bytes": 67,
+      "sha256": "ebf4f635a17d10d6eb46ba680b70142419aa3220f228001a036d311a22ee9d2a",
+      "width": 1,
+      "height": 1,
+      "emptySentinel": true,
+      "pixels": {
+        "transparent": 1,
+        "palette": 0,
+        "other": 0
+      },
+      "colors": []
+    },
+    {
+      "name": "Open ocean",
+      "longitude": 0,
+      "latitude": 0,
+      "zoom": 5,
+      "x": 16,
+      "y": 16,
+      "url": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/05/16/16.png",
+      "status": 200,
+      "type": "cors",
+      "milliseconds": 275.5,
+      "headers": {
+        "cache-control": "public, max-age=259200, s-maxage=259200",
+        "content-length": "1801",
+        "content-type": "image/png",
+        "last-modified": "Tue, 07 Apr 2026 11:07:08 GMT"
+      },
+      "bytes": 1801,
+      "sha256": "353d1cea62c404763698e1c50a6b43942e316c04abfcd009523d445690bb5ad5",
+      "width": 256,
+      "height": 256,
+      "emptySentinel": false,
+      "pixels": {
+        "transparent": 61301,
+        "palette": 4235,
+        "other": 0
+      },
+      "colors": [
+        [
+          "#006400",
+          2911
+        ],
+        [
+          "#0064c8",
+          1107
+        ],
+        [
+          "#ffff4c",
+          174
+        ],
+        [
+          "#00cf75",
+          31
+        ],
+        [
+          "#0096a0",
+          9
+        ],
+        [
+          "#b4b4b4",
+          2
+        ],
+        [
+          "#fa0000",
+          1
+        ]
+      ]
+    }
+  ],
+  "repeat": {
+    "status": 200,
+    "bytes": 7873,
+    "milliseconds": 264.2000000178814,
+    "sha256": "45ef873985d90c10313c846a1b1ef7d9a64383bf916025f4f2133da95c7d1d69"
+  },
+  "qualification": "Ten sequential bounded samples, plus one repeated tile; no load test or global valid-pixel proof. The owned fixture route disables browser HTTP cache; the repeat proves byte equality and declared cache headers, not a browser cache hit.",
+  "geometryCompatibility": {
+    "release": "fef1519d5f243617",
+    "topology": "wmts-quadtree@1",
+    "minimumViewZoom": 8,
+    "initialTile": {
+      "level": 14,
+      "x": 5535,
+      "y": 9872,
+      "width": 256,
+      "height": 256,
+      "imageryUrl": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-s2rgbnir-10m-2021-v2_tcc/webmercator/14/5535/9872.png",
+      "mapUrl": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/14/5535/9872.png"
+    },
+    "comparison": "Both capability layers declare the same matrix set; its dimensions/origin match the existing preparer. The accepted initial geometry tile and browser-sampled map tile have identical addressing.",
+    "preparedModuleSha256": "e63cdaf8cb6776a60d4c888206de703e3f95be46bf7c2671d1c10709bf3693a4"
+  }
+}

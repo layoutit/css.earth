@@ -518,6 +518,63 @@
       "consumers": [
         "places"
       ]
+    },
+    {
+      "id": "worldcover-land-cover-wmtscapabilities-xml",
+      "path": "land-cover/WMTSCapabilities.xml",
+      "expectedSha256": "45a1807d6296b16affb95c3bb49084b117eb1c46b792e3cec2565c46b0ad3fcd",
+      "expectedBytes": 21505,
+      "origin": "https://mapproxy.terrascope.be/mapproxy/wmts/1.0.0/WMTSCapabilities.xml",
+      "credit": "ESA WorldCover consortium / VITO Terrascope",
+      "license": "Public OGC service metadata; WorldCover data CC-BY-4.0",
+      "licenseEvidence": [
+        "https://esa-worldcover.org/en/data-access",
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html"
+      ],
+      "acquisition": "Pinned bounded service admission on 2026-09-06. See land-cover/manifest.json; source updates require a reviewed integrity pin.",
+      "redistribution": "WorldCover visualization and symbology with required attribution; service metadata retains publisher identity.",
+      "consumers": [
+        "land-cover"
+      ]
+    },
+    {
+      "id": "worldcover-land-cover-esaworldcover-colorlegend-qml",
+      "path": "land-cover/ESAWorldCover_ColorLegend.qml",
+      "expectedSha256": "9b3567e1c4f9cef7e0b414152e845c2209cd23ac2c5cb74b59b53a83cae35583",
+      "expectedBytes": 4777,
+      "origin": "https://esa-worldcover.s3.amazonaws.com/v100/2020/docs/ESAWorldCover_ColorLegend.qml",
+      "credit": "ESA WorldCover consortium / VITO Terrascope",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://esa-worldcover.org/en/data-access",
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html"
+      ],
+      "acquisition": "Pinned bounded service admission on 2026-09-06. See land-cover/manifest.json; source updates require a reviewed integrity pin.",
+      "redistribution": "WorldCover visualization and symbology with required attribution; service metadata retains publisher identity.",
+      "consumers": [
+        "land-cover"
+      ]
+    },
+    {
+      "id": "worldcover-land-cover-empty-png",
+      "path": "land-cover/empty.png",
+      "expectedSha256": "ebf4f635a17d10d6eb46ba680b70142419aa3220f228001a036d311a22ee9d2a",
+      "expectedBytes": 67,
+      "origin": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/06/32/56.png",
+      "credit": "ESA WorldCover consortium / VITO Terrascope",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://esa-worldcover.org/en/data-access",
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html"
+      ],
+      "acquisition": "Pinned bounded service admission on 2026-09-06. See land-cover/manifest.json; source updates require a reviewed integrity pin.",
+      "redistribution": "WorldCover visualization and symbology with required attribution; service metadata retains publisher identity.",
+      "consumers": [
+        "land-cover"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -606,6 +663,18 @@
       "expectedSha256": "6f661ba270eec5e578ad7939305b2bf6c38d5d1d00c4a98231bbc94972772b65",
       "expectedBytes": 489,
       "purpose": "Narrow immutable geometry cache rule deployed to the public asset domain"
+    },
+    {
+      "path": "land-cover/manifest.json",
+      "expectedSha256": "fddd601adce0431545409bdfb9ebc94581a29a2c9d6febdc2239e6618ab6a3cd",
+      "expectedBytes": 3865,
+      "purpose": "WorldCover 2021 source version, direct provider addressing, official legend, no-data identity and service conditions"
+    },
+    {
+      "path": "land-cover/service-admission.json",
+      "expectedSha256": "199f181c48d78b2282b867bdf90563e2bcbed9edb3821e34a8d5fe687112174a",
+      "expectedBytes": 26875,
+      "purpose": "Real-Chrome CORS/status/cache/dimension/palette sample receipt; not global valid-pixel or availability proof"
     }
   ]
 }

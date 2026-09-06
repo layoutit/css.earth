@@ -1,0 +1,93 @@
+{
+  "schema": "cssearth-land-cover-source@1",
+  "dataset": "esa-worldcover-map-2021-v200",
+  "title": "ESA WorldCover 2021",
+  "year": 2021,
+  "algorithm": "v200",
+  "publisher": "ESA WorldCover consortium",
+  "sourcePage": "https://esa-worldcover.org/en/data-access",
+  "citation": "https://doi.org/10.5281/zenodo.7254221",
+  "license": "CC-BY-4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
+  "retrievedAt": "2026-09-06T06:24:11.934Z",
+  "qualification": "Categorical RGB visualization of the 2021 land-cover product, not pixel-value analysis or a live observation. Projected service extent is not a promise of valid data everywhere. Transparent pixels and the pinned empty-image sentinel indicate no source classification.",
+  "service": {
+    "layer": "esa-worldcover-map-10m-2021-v2_map",
+    "matrixSet": "webmercator",
+    "crs": "urn:ogc:def:crs:EPSG:3857",
+    "urlTemplate": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png",
+    "extent": [
+      -180,
+      -85.0511287798066,
+      180,
+      85.0511287798066
+    ],
+    "tileSize": 256,
+    "levels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "authentication": "Public map layer; browser requests omit credentials.",
+    "cacheSeconds": 259200,
+    "emptyImage": {
+      "path": "empty.png",
+      "origin": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/06/32/56.png",
+      "bytes": 67,
+      "sha256": "ebf4f635a17d10d6eb46ba680b70142419aa3220f228001a036d311a22ee9d2a",
+      "width": 1,
+      "height": 1
+    },
+    "identity": "Versioned provider imagery; sample hashes record observed bytes, not immutable future responses.",
+    "termsUrl": "https://terrascope.be/en/terms-use",
+    "documentationUrl": "https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html",
+    "conditions": "Use must not degrade open services or adversely affect other users. The reviewed terms give no numeric request quota or uninterrupted-service guarantee. Bound requests and handle unavailability."
+  },
+  "legend": {
+    "path": "ESAWorldCover_ColorLegend.qml",
+    "qualification": "The official 2021 data-access page links this standard symbology in its v100 documentation directory. All opaque pixels in the ten admitted sample tiles match these eleven colors."
+  },
+  "geometry": {
+    "release": "fef1519d5f243617",
+    "compatibleGrid": true,
+    "qualification": "Existing imagery and map layers share the same Web Mercator matrix, 256-pixel tiles and row/column orientation. Reuse geographic frames; imagery coverage and no-data must be evaluated separately. This does not certify all source pixels or whole-globe overview rendering."
+  },
+  "inputs": [
+    {
+      "path": "WMTSCapabilities.xml",
+      "origin": "https://mapproxy.terrascope.be/mapproxy/wmts/1.0.0/WMTSCapabilities.xml",
+      "bytes": 21505,
+      "sha256": "45a1807d6296b16affb95c3bb49084b117eb1c46b792e3cec2565c46b0ad3fcd"
+    },
+    {
+      "path": "ESAWorldCover_ColorLegend.qml",
+      "origin": "https://esa-worldcover.s3.amazonaws.com/v100/2020/docs/ESAWorldCover_ColorLegend.qml",
+      "bytes": 4777,
+      "sha256": "9b3567e1c4f9cef7e0b414152e845c2209cd23ac2c5cb74b59b53a83cae35583"
+    },
+    {
+      "path": "empty.png",
+      "origin": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/06/32/56.png",
+      "bytes": 67,
+      "sha256": "ebf4f635a17d10d6eb46ba680b70142419aa3220f228001a036d311a22ee9d2a"
+    }
+  ]
+}

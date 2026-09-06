@@ -170,3 +170,35 @@ emulation. It exercises search, keyboard selection, camera centering, imagery
 loading, globe return, globally available destinations and retained scene identity. Phone
 emulation is not physical-device proof. Reports and actual screenshots are in
 `output/playwright/city-selection/`.
+
+### WorldCover land-cover service admission
+
+`source/land-cover/` pins the 2021 v200 product identity, the Terrascope MapProxy
+WMTS capabilities, the official QGIS color legend and the observed empty-image
+sentinel. This admits a source for integration; it does not yet add a new lens.
+The provider's `esa-worldcover-map-10m-2021-v2_map` is a categorical RGB map, not
+the numerical classification raster. The eleven labels/colors come from the
+symbology linked by the official data-access page, not an authored color scale.
+
+Its Web Mercator grid uses 256-pixel tiles and the same matrix identifiers,
+origin and row/column orientation as the existing imagery geometry. The
+projected extent ends at ±85.0511287798066 degrees. Ten sequential real-Chrome
+CORS probes, totaling 47,448 PNG bytes, covered cities, cropland, desert, coasts,
+the dateline and high latitudes. Every opaque sample pixel matched the source
+palette. Some tiles have transparent gaps; the Antarctic sample was the pinned
+67-byte, fully transparent 1×1 PNG. Grid compatibility is separate from imagery
+footprint and valid-pixel coverage. Whole-globe overview rendering is not proved
+by this admission.
+
+The observed tile responses declare a three-day public cache lifetime. Requests
+omitted credentials. The service's terms prohibit degrading open services or
+affecting other users; the reviewed pages specify no numeric request allowance
+or uninterrupted availability guarantee. Versioned URLs are not content-hash
+immutability promises. `service-admission.json` retains browser/header/sample
+receipts and the comparison against geometry release `fef1519d5f243617`.
+
+Recheck with `node src/planets/earth/test/worldcover-source-browser.mjs <origin>`.
+The test's owned fixture route disables browser HTTP cache, so its repeated tile
+proves matching source bytes, not a cache hit. It never downloads the global
+classification raster. Source, attribution, terms and the integration limits are
+recorded in `source/land-cover/manifest.json`.
