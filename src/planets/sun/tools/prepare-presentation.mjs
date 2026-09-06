@@ -32,7 +32,7 @@ export async function prepareSunPresentation() {
   const {tree,index}=b.finish({camera,scene});
   const layerTargets=[body,body,corona,limb];
   return {schema:PREPARED_PRESENTATION_SCHEMA,camera:plan.camera,sky:plan.starfield,sun:null,
-    inputSelector:".sun-input-surface",assets:{entries,pools:[
+    assets:{entries,pools:[
       preparedResourcePool("warm",entries,{retention:"warm"}),
       preparedResourcePool("material",entries,{retention:"selection",capacity:8,concurrency:8}),
     ],startup:[...celestial.map(entry=>entry.key),...required(lenses.defaultLens)]},tree,

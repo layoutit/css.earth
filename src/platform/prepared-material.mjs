@@ -2,11 +2,8 @@ import { createPreparedPlanarRotationPublisher } from "./prepared-planar-rotatio
 import { createPreparedEllipsoidProjection } from "./prepared-ellipsoid-projection.mjs";
 
 const degrees = angle => (angle % 360 + 540) % 360 - 180;
-const lightDirection = (mapping, direction) => [0, 1, 2].map(row =>
-  direction.reduce((sum, value, column) => sum + mapping.lightBasis[row*3+column]*value, 0));
-
 export function preparedMaterialFrame(mapping, view) {
-  const phase = lightDirection(mapping, view.sunViewDirection)[2];
+  const phase = view.sunViewDirection[2];
   let low = 0, high = mapping.thresholds.length;
   while (low < high) {
     const middle = (low + high) >>> 1;
@@ -19,12 +16,10 @@ export function preparedMaterialFrame(mapping, view) {
 export function preparedMaterialState(track, selected, view) {
   const calculatedFrame = preparedMaterialFrame(track.frame, view);
   const frame = selected.frameOverride ?? calculatedFrame + (selected.frameOffset ?? 0);
-  const direction = lightDirection(track.frame, view.sunViewDirection);
-  const reference = lightDirection(track.frame, view.reference?.sunViewDirection ?? view.sunViewDirection);
+  const direction = view.sunViewDirection;
+  const reference = view.reference?.sunViewDirection ?? view.sunViewDirection;
   const useDefault = view.sceneMatrix === view.reference?.sceneMatrix &&
     direction.every((value, i) => Math.abs(value-reference[i]) < 1e-9);
-  // Past the geometry stage the far bank (when the track has one) replaces
-  // the selected bank: the same frame from one small atlas.
   const far = track.farBank !== undefined && (view.levelOfDetail?.stage ?? "geometry") !== "geometry";
   const bank = track.banks.find(bank => bank.id === (far ? track.farBank : selected.bank));
   const mode = selected.mode === "fixed" ? selected.fixedMode : useDefault && bank.default ? "default" : "directional";

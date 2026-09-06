@@ -43,7 +43,7 @@ export async function preparePlutoPresentation() {
   builder.append(materialRoot, material); builder.append(null, materialRoot);
   const { tree, index } = builder.finish({ camera, scene });
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: PREPARED_PLUTO_STARFIELD, sun: PREPARED_PLUTO_SKY_SUN,
-    inputSelector: ".pluto-input-surface", assets: { entries, pools: [preparedResourcePool("mounted", entries)],
+    assets: { entries, pools: [preparedResourcePool("mounted", entries)],
       startup: [...celestial.map(entry => entry.key), "curvature", ...required(lenses.defaultLens)] }, tree,
     variants: lenses.controls.map(lens => ({ when: { lensId: lens.id }, required: required(lens.id), writes: [
       ...surface.map(carrier => ({ kind: "texture", target: index(carrier), name: "--pluto-surface-texture", resource: `surface:${lens.id}`, quoted: true })),

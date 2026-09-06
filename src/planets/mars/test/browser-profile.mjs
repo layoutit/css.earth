@@ -8,7 +8,7 @@ const defaultMaterialOne = materialOne.rows[materialOne.transport.defaultRow];
 const defaultMaterialTwo = materialTwo.rows[materialTwo.transport.defaultRow];
 
 export const browserProfile = createObjectBrowserProfile({
-  id: "mars", inputSelector: ".planet-stage", controls: objectControls,
+  id: "mars", controls: objectControls,
   cameraFields: ["pitch", "controlPitch", "controlYaw", "zoom"],
   audit: Object.freeze({
     preparedAssetPairs: Object.freeze([

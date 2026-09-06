@@ -77,7 +77,7 @@ try {
       assert.equal(await page.evaluate(() => window.__cssEarth), undefined);
       assert.equal(await page.evaluate(() => window.__saturn), undefined);
 
-      const input = page.locator(".saturn-input-surface");
+      const input = page.locator(".planet-input-surface");
       await input.focus();
       await page.keyboard.press("End");
       await page.keyboard.press("Home");

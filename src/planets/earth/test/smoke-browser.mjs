@@ -3,7 +3,7 @@ import { chromium } from "playwright";
 import { checkDirectionalAtmosphere } from "../../../platform/test/illumination-browser.mjs";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_EARTH_LENSES } from "../runtime/preparedLenses.mjs";
-import { PREPARED_EARTH_STARFIELD } from "../runtime/preparedStarfield.mjs";
+import { runtimeDefinition } from "../runtime/definition.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const deviceScaleFactor = Number(process.argv[3] ?? 1);
@@ -53,6 +53,8 @@ try {
     normalPolesImage: getComputedStyle(document.querySelector(
       ".earth-body-polar > s",
     )).backgroundImage,
+    startupDecodedAssets: window.__earth.renderStats.visibleAssetsDecodedBeforeMount,
+    selectionAssets: [...window.__earth.runtime.selection().plan.required, ...window.__earth.runtime.selection().plan.prewarm],
     retainedInteractiveImageCount:
       window.__earth.renderStats.textureStats.retainedInteractiveImageCount,
     stable: window.__earth.assertStableDomIdentity(),
@@ -70,12 +72,10 @@ try {
     '/scenes/earth/earth-surface.webp")'), true);
   assert.equal(initial.normalPolesImage.endsWith(
     '/scenes/earth/earth-surface-poles.webp")'), true);
-  assert.equal(
-    initial.retainedInteractiveImageCount,
-    PREPARED_EARTH_SCENE.body.assets.surface.urls.length + 1 +
-      PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1 +
-      PREPARED_EARTH_SCENE.material.atmosphere.transport.initialWarmRows.length,
-  );
+  assert.equal(initial.startupDecodedAssets, new Set(runtimeDefinition.assets.startup).size);
+  assert.ok(initial.retainedInteractiveImageCount <=
+    new Set([...runtimeDefinition.assets.startup, ...initial.selectionAssets]).size,
+  "Ready image residency must stay within startup and current prepared demand");
   const startupAssets = [...requestedAssets];
   assert.equal(startupAssets.some((pathname) =>
     pathname.includes("earth-interior-")), true);

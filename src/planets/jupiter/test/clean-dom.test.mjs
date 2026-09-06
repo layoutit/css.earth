@@ -8,10 +8,10 @@ import { PREPARED_JUPITER_MOONS } from "../runtime/preparedMoons.mjs";
 import { PREPARED_JUPITER_RINGS } from "../runtime/preparedRings.mjs";
 
 test("keeps the Jupiter scene as one fixed retained PolyCSS tree", async () => {
-  const [client, css, overlay] = await Promise.all([
+  const [client, css, layout] = await Promise.all([
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
-    readFile(new URL("../site/JupiterOverlay.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../../../site/layouts/PlanetLayout.astro", import.meta.url), "utf8"),
   ]);
 
   assert.equal(PREPARED_JUPITER_SCENE.leaves.length, 772);
@@ -58,6 +58,6 @@ test("keeps the Jupiter scene as one fixed retained PolyCSS tree", async () => {
     /matchMedia[^;]*addEventListener|devicePixelRatio.*addEventListener/u);
   assert.doesNotMatch(css,
     /filter\s*:|mask(?:-image)?\s*:|clip-path\s*:|mix-blend-mode\s*:|gradient\(|text-shadow\s*:|box-shadow\s*:/u);
-  assert.doesNotMatch(overlay, /<\w+/u);
+  assert.match(layout, /class="planet-input-surface"/u);
   assert.doesNotMatch(css, /jupiter-input-surface/u);
 });

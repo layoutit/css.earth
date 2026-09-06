@@ -150,6 +150,7 @@ try {
       assert.equal(await page.evaluate(()=>window.__earth.runtime.pages().geographic.retained.length),0);
       await select("Buenos Aires", "3435910"); await noise.click(); await settleNoise();
       await page.locator('[data-geographic-attribution]').filter({visible:true}).scrollIntoViewIfNeeded();
+      if (mobile) assert.ok(await page.locator(".explorer-shell-header").evaluate(header => header.getBoundingClientRect().bottom <= 0), "The mobile header must scroll clear of the card and source text");
       await capture("09-source-and-legend");
       await saveMetrics("history-refresh-recovery");
       record.history = {back:true,forward:true,refresh:true,returnFromPlanet:true,retry:true,noCoverage:true};

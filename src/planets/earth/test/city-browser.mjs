@@ -191,7 +191,7 @@ try {
       await cdp.send('Tracing.start',{categories:'-*,benchmark,cc,devtools.timeline,blink.user_timing,toplevel,disabled-by-default-devtools.timeline.frame',transferMode:'ReturnAsStream'});
       const before = await cdp.send('Performance.getMetrics');
       const inputBefore=await page.evaluate(()=>({stats:window.__earth.camera.stats(),scroll:scrollY}));
-      const input=await page.locator('.earth-input-surface').boundingBox();
+      const input=await page.locator('.planet-input-surface').boundingBox();
       const sidebar=await page.locator('.planet-sidebar').boundingBox();
       const anchor=mobile?{x:input.x+input.width*.6,y:Math.min(input.y+input.height*.5,sidebar.y*.5)}:{x:950,y:550};
       assert.equal(await page.evaluate(({x,y})=>document.elementFromPoint(x,y)?.classList.contains('earth-input-surface'),anchor),true,'Drag must start on the scene input surface');

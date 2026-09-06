@@ -5,8 +5,8 @@ import { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA, requirePr
 import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
 
 export function presentationFixture(definition) {
-  const { camera, sky, sun, inputSelector, assets, controls } = definition;
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, inputSelector, assets,
+  const { camera, sky, sun, assets, controls } = definition;
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, assets,
     tree: { camera: 0, scene: 1, properties: [], nodes: [
       { parent: -1, tag: "div", className: "polycss-camera", style: "perspective:1000000px", properties: [], attributes: {} },
       { parent: 0, tag: "div", className: "polycss-scene", style: "", properties: [], attributes: {} },
@@ -65,7 +65,7 @@ test("preparation rejects malformed phase tables and undeclared neighbors", asyn
     plan => { plan.materials[0].frame.thresholds[1] = plan.materials[0].frame.thresholds[0]; },
     plan => { plan.materials[0].frame.indices.pop(); },
     plan => { plan.materials[0].frame.indices[0] = 999999; },
-    plan => { plan.materials[0].frame.lightBasis[0] = 2; },
+    plan => { plan.materials[0].frame.lightBasis = [1,0,0,0,1,0,0,0,1]; },
     plan => { plan.materials[0].banks[0].frames[0].prewarm = ["undeclared"]; },
     plan => { plan.materials[0].demand = { mode: "neighborhood" }; },
     plan => { plan.materials[0].frame.source = "scene-pitch"; },

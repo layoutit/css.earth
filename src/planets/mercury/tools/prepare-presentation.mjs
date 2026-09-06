@@ -143,8 +143,7 @@ export async function prepareMercuryPresentation() {
         minimumLightViewZ: assets.lighting.minimumLightViewZ, maximumLightViewZ: assets.lighting.maximumLightViewZ,
         baseLightAzimuthDegrees: assets.lighting.baseLightAzimuthDegrees } },
     labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: captionNames } };
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun, inputSelector: ".mercury-input-surface",
-    assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: interiorKeys.length + 1, concurrency: interiorKeys.length + 1 }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
         concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true })],

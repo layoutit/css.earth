@@ -12,15 +12,23 @@ Explore the live version: [css.earth](https://css.earth) 🪐
 
 ## How to Build
 
-Install the dependencies, restore the hash-pinned source inputs, prepare the
-ignored browser assets, build the site, and serve it locally:
+Install dependencies and download the prepared browser assets, then start the site:
 
 ```sh
 pnpm install
-pnpm prepare:checkout
-pnpm build
-pnpm preview
+pnpm setup:assets
+pnpm dev
 ```
+
+For Earth alone, use `pnpm setup:assets --object=earth` and open `/earth/`.
+Setup resumes existing files and verifies them against the checked-in runtime
+inventories. It does not require source imagery, preparation tools, or the
+25.4 GB Earth geometry mirror. Development and preview fetch the visible
+geometry ranges from the published release when no local mirror is present.
+
+To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
+`pnpm preview`. To regenerate assets from source instead, run
+`pnpm prepare:checkout`; that is the full preparation workflow described below.
 
 ## How It Works
 
@@ -50,7 +58,12 @@ banks. At runtime, the browser only loads and displays these prepared assets.
 
 Large source binaries and generated browser assets are intentionally not
 committed. Their URLs, sizes, hashes, provenance, preparation code, and runtime
-inventories are committed. `prepare:checkout` restores the exact source bytes
+inventories are committed. `pnpm setup:assets` downloads the prepared outputs from
+immutable URLs on the project asset CDN. After changing prepared outputs,
+maintainers publish their updated inventories with `pnpm publish:runtime-assets`
+(or `--object=earth`) before pushing the code that references them.
+
+`prepare:checkout` restores the exact source bytes
 and Earth's published geometry release, then generates `public/scenes/` locally.
 The pinned worldwide release contains 19,632 packs (25.4 GB) outside Git and
 `dist`. Acquisition resumes valid local packs and validates every replacement

@@ -29,7 +29,7 @@ test("prepares Jupiter from a complete checked source closure", async () => {
   });
   assert.equal(PREPARED_JUPITER_SCENE.schema, "cssjupiter-prepared-retained-body@1");
   assert.equal(PREPARED_JUPITER_CAMERA.schema, "cssjupiter-prepared-camera@6");
-  assert.equal(PREPARED_JUPITER_LIGHTING.schema, "cssjupiter-prepared-lighting@3");
+  assert.equal(PREPARED_JUPITER_LIGHTING.schema, "cssjupiter-prepared-lighting@4");
   assert.equal(PREPARED_JUPITER_MOONS.schema, "cssjupiter-prepared-low-poly-moons@2");
   assert.equal(PREPARED_JUPITER_RINGS.schema, "cssjupiter-prepared-rings@2");
   assert.equal(PREPARED_JUPITER_LENSES.schema, "cssjupiter-prepared-lenses@1");
