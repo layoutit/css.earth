@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
+import sharp from "sharp";
 import { parseSharedView } from "../../src/platform/view-url.mjs";
 import { wheelWithReceipt } from "./wheel-zoom-distance.mjs";
 
@@ -11,6 +12,9 @@ const baseUrl = process.argv.find(argument => /^https?:/u.test(argument)) ?? "ht
 const output = resolve(process.env.VIEW_URL_DUMP ?? ".local/view-url-browser");
 await mkdir(output, { recursive: true });
 const checks = [], errors = [], warnings = [], snapshots = {};
+// Shared views restore the physical vault. The shell's open information or
+// settings panel is separate UI state; leave its rail and navigation out.
+const vaultClip = { x: 360, y: 80, width: 1080, height: 790 };
 const check = (id, ok, detail = {}) => {
   checks.push({ id, ok: Boolean(ok), ...detail });
   if (!ok) console.error(`FAIL ${id}: ${JSON.stringify(detail)}`);
@@ -55,23 +59,28 @@ try {
   const savedUrlA = page.url(), savedA = decode(savedUrlA);
   const urlA = new URL(savedUrlA);
   check("url-preserves-object-route-hash-and-other-parameters", urlA.pathname === initialUrl.pathname && urlA.hash === "#camera" && urlA.searchParams.get("campaign") === "shared-view");
-  check("url-has-one-bounded-versioned-payload", urlA.searchParams.getAll("v").length === 1 && Buffer.from(urlA.searchParams.get("v"), "base64url").length <= 4096);
-  compare("url-captures-real-camera", savedA.camera, snapshots.saved.camera);
+  const token = urlA.searchParams.get("v"), bytes = Buffer.from(token, "base64url");
+  check("url-has-one-tiny-versioned-payload", urlA.searchParams.getAll("v").length === 1 && bytes.readUInt16BE(0) >>> 12 === 3 && token.length <= 80,
+    { tokenCharacters: token.length, bytes: bytes.length, actualUrlCharacters: savedUrlA.length });
+  check("url-stores-one-physical-pose-and-distance", Object.keys(savedA.camera).sort().join() === "distanceKilometers,pose" &&
+    savedA.camera.pose.schema === "cssearth-camera-pose@2" && Object.keys(savedA.camera.pose).sort().join() === "scene,schema");
+  compareEncodedCamera("url-captures-real-camera", savedA.camera, snapshots.saved.camera);
   check("url-captures-paused-nonzero-native-playback", !savedA.playback.motionRequested && savedA.playback.times.length > 0 && savedA.playback.times.some(time => time > 150) &&
     JSON.stringify(savedA.playback.times) === JSON.stringify(snapshots.saved.playback.times), { times: savedA.playback.times });
   check("astronomical-epoch-is-fixed-separately-from-visual-time", savedA.preparedEpochJdTt === 2461286.5 && savedA.playback.times.some(time => time !== savedA.preparedEpochJdTt));
   check("interaction-retains-scene-dom", snapshots.saved.stable && snapshots.saved.nodeCount === snapshots.initial.nodeCount);
-  await page.screenshot({ path: resolve(output, "saved.png") });
+  const savedPixels = await page.screenshot({ path: resolve(output, "saved.png"), clip: vaultClip });
 
   await page.reload({ waitUntil: "networkidle" });
   await ready(page);
   await settled(page);
   snapshots.reloaded = await read(page);
-  compare("reload-restores-real-camera", snapshots.reloaded.camera, savedA.camera);
+  compareRenderedView("reload-restores-real-camera", snapshots.reloaded, snapshots.saved);
   verifyPlayback("reload-restores-paused-native-playback", snapshots.reloaded, savedA.playback);
   check("reload-preserves-saved-url", page.url() === savedUrlA);
   check("reload-has-one-retained-object", snapshots.reloaded.stable && snapshots.reloaded.mountedObjectCount === 1 && snapshots.reloaded.nodeCount === snapshots.saved.nodeCount);
-  await page.screenshot({ path: resolve(output, "reloaded.png") });
+  const reloadedPixels = await page.screenshot({ path: resolve(output, "reloaded.png"), clip: vaultClip });
+  await comparePixels("reload-restores-rendered-pixels", reloadedPixels, savedPixels);
 
   // The application deliberately uses replaceState. Add one normal history
   // entry so Back/Forward can exercise its popstate restoration listener.
@@ -82,16 +91,17 @@ try {
   await settled(page);
   await savedUrl(page, savedUrlA);
   const savedUrlB = page.url(), savedB = decode(savedUrlB);
+  snapshots.second = await read(page);
   check("second-real-view-is-distinct", savedB.camera.pose.scene !== savedA.camera.pose.scene && savedB.camera.distanceKilometers !== savedA.camera.distanceKilometers);
   await page.goBack();
-  await page.waitForFunction(expected => window.__mercury?.camera.state().controlYaw === expected, savedA.camera.controlYaw);
+  await restored(page, savedA.camera.distanceKilometers);
   snapshots.back = await read(page);
-  compare("history-back-restores-camera", snapshots.back.camera, savedA.camera);
+  compareRenderedView("history-back-restores-camera", snapshots.back, snapshots.saved);
   verifyPlayback("history-back-restores-native-times", snapshots.back, savedA.playback);
   await page.goForward();
-  await page.waitForFunction(expected => window.__mercury?.camera.state().controlYaw === expected, savedB.camera.controlYaw);
+  await restored(page, savedB.camera.distanceKilometers);
   snapshots.forward = await read(page);
-  compare("history-forward-restores-camera", snapshots.forward.camera, savedB.camera);
+  compareRenderedView("history-forward-restores-camera", snapshots.forward, snapshots.second);
   verifyPlayback("history-forward-restores-native-times", snapshots.forward, savedB.playback);
   check("history-restoration-retains-dom", snapshots.back.stable && snapshots.forward.stable && snapshots.forward.nodeCount === snapshots.saved.nodeCount);
 
@@ -107,7 +117,7 @@ try {
   await savedUrl(page, malformed.href);
   const repaired = decode(page.url());
   snapshots.repaired = await read(page);
-  compare("real-input-replaces-malformed-token-with-current-camera", repaired.camera, snapshots.repaired.camera);
+  compareEncodedCamera("real-input-replaces-malformed-token-with-current-camera", repaired.camera, snapshots.repaired.camera);
   check("no-browser-errors", errors.length === 0, { errors });
 } catch (error) {
   errors.push(error.stack ?? error.message);
@@ -147,11 +157,22 @@ async function savedUrl(page, previous = null) {
   await page.waitForFunction(before => new URLSearchParams(location.search).has("v") && (!before || location.href !== before), previous);
 }
 function decode(url) { return parseSharedView(`v=${new URL(url).searchParams.get("v")}`); }
+async function restored(page, distanceKilometers) {
+  await page.waitForFunction(expected => Math.abs(window.__mercury?.camera.state().distanceKilometers - expected) <= Math.max(1e-9, Math.abs(expected) * 1e-12), distanceKilometers);
+  await settled(page);
+}
 async function read(page) {
   return page.evaluate(() => {
     const api = window.__mercury, camera = api.camera.state(), playback = api.runtime.playback();
+    const sky = api.sky.state(), lighting = api.material.state().lighting;
+    const matrix = selector => Array.from(new DOMMatrix(document.querySelector(selector).style.transform).toFloat64Array());
+    const sun = document.querySelector(".mercury-sun"), material = document.querySelector(".mercury-material");
     return { camera: { controlPitch: camera.controlPitch, controlYaw: camera.controlYaw, zoom: camera.zoom,
       distanceKilometers: camera.distanceKilometers, pose: camera.pose },
+    rendered: { scene: matrix(".mercury-scene"), sky: matrix(".mercury-skybox-orientation"),
+      sun: { direction: sky.sunViewDirection, visible: sky.sunVisible, classification: sky.sunClassification,
+        centerNdc: sky.sunCenterNdc, spriteDiameter: sky.sunSpriteDiameter, hidden: sun.hidden, transform: sun.style.transform },
+      lighting: { bank: lighting.bank, frame: lighting.frame, image: material.style.backgroundImage, transform: material.style.transform } },
     playback: { times: playback.animations.filter(animation => animation.mode === "motion").map(animation => animation.currentTime),
       speed: playback.speed, motionRequested: window.__cssEarth.playback.motionRequested,
       running: playback.animations.some(animation => animation.mode === "motion" && animation.running) },
@@ -159,16 +180,47 @@ async function read(page) {
     stable: api.assertStableDomIdentity(), mountedObjectCount: window.__cssEarth.mountedObjectCount };
   });
 }
-function compare(id, actual, expected) {
-  for (const key of ["controlPitch", "controlYaw", "zoom", "distanceKilometers"]) check(`${id}-${key}`, close(actual[key], expected[key]), { actual: actual[key], expected: expected[key] });
-  for (const key of ["scene", "skybox", "sunView"]) {
-    const values = value => value.slice(9, -1).split(",").map(Number);
-    const a = values(actual.pose[key]), b = values(expected.pose[key]);
-    const maximumError = Math.max(...a.map((value, index) => Math.abs(value - b[index])));
-    // Restore must avoid the CSS parser's roughly seven-decimal truncation.
-    // The numeric DOMMatrix constructor preserves this saved matrix precision.
-    check(`${id}-${key}`, maximumError <= 1e-10, { maximumError });
+function compareEncodedCamera(id, actual, expected) {
+  check(`${id}-distanceKilometers`, close(actual.distanceKilometers, expected.distanceKilometers), { actual: actual.distanceKilometers, expected: expected.distanceKilometers });
+  const values = value => value.slice(9, -1).split(",").map(Number);
+  compareNumbers(`${id}-scene`, values(actual.pose.scene), values(expected.pose.scene));
+}
+function compareNumbers(id, actual, expected, tolerance = 1e-10) {
+  const maximumError = Math.max(...actual.map((value, index) => Math.abs(value - expected[index])));
+  check(id, actual.length === expected.length && maximumError <= tolerance, { maximumError });
+}
+function compareRenderedView(id, actual, expected) {
+  compareEncodedCamera(id, actual.camera, expected.camera);
+  check(`${id}-zoom-derived-from-distance`, close(actual.camera.zoom, expected.camera.zoom), { actual: actual.camera.zoom, expected: expected.camera.zoom });
+  // The scene pose owns the sky registration and Sun. Input-control angles
+  // and the unused independent Sun matrix are not the rendered camera.
+  compareNumbers(`${id}-derived-sky`, actual.camera.pose.skybox.slice(9, -1).split(",").map(Number), expected.camera.pose.skybox.slice(9, -1).split(",").map(Number));
+  compareNumbers(`${id}-rendered-scene`, actual.rendered.scene, expected.rendered.scene);
+  compareNumbers(`${id}-rendered-sky`, actual.rendered.sky, expected.rendered.sky);
+  compareNumbers(`${id}-actual-sun-direction`, actual.rendered.sun.direction, expected.rendered.sun.direction);
+  check(`${id}-actual-sun-projection`, samePresentation(actual.rendered.sun, expected.rendered.sun), { actual: actual.rendered.sun, expected: expected.rendered.sun });
+  check(`${id}-actual-lighting`, samePresentation(actual.rendered.lighting, expected.rendered.lighting), { actual: actual.rendered.lighting, expected: expected.rendered.lighting });
+}
+function samePresentation(actual, expected) {
+  if (typeof actual === "number" && typeof expected === "number") return close(actual, expected);
+  if (actual === null || expected === null || typeof actual !== "object" || typeof expected !== "object") return actual === expected;
+  return Object.keys(actual).length === Object.keys(expected).length && Object.keys(actual).every(key => samePresentation(actual[key], expected[key]));
+}
+async function comparePixels(id, actualPng, expectedPng) {
+  const [actual, expected] = await Promise.all([actualPng, expectedPng].map(png => sharp(png).removeAlpha().raw().toBuffer({ resolveWithObject: true })));
+  let absoluteError = 0, changedPixels = 0;
+  for (let index = 0; index < actual.data.length; index += 3) {
+    let maximumChannelError = 0;
+    for (let channel = 0; channel < 3; channel += 1) {
+      const error = Math.abs(actual.data[index + channel] - expected.data[index + channel]);
+      absoluteError += error;
+      maximumChannelError = Math.max(maximumChannelError, error);
+    }
+    if (maximumChannelError > 10) changedPixels += 1;
   }
+  const meanChannelError = absoluteError / actual.data.length, changedFraction = changedPixels / (actual.info.width * actual.info.height);
+  check(id, actual.info.width === expected.info.width && actual.info.height === expected.info.height && meanChannelError <= 0.1 && changedFraction <= 0.001,
+    { meanChannelError, changedFraction, changedPixels });
 }
 function verifyPlayback(id, actual, expected) {
   check(id, !actual.playback.running && actual.playback.motionRequested === expected.motionRequested && actual.playback.speed === expected.speed &&
