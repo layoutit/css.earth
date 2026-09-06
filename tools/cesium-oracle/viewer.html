@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Cesium loading oracle</title>
+<link rel="stylesheet" href="/__oracle/vendor/Widgets/widgets.css">
+<style>html,body,#globe{margin:0;width:100%;height:100%;overflow:hidden;background:#050608}#status{position:absolute;top:12px;left:16px;color:white;font:13px monospace;pointer-events:none}</style>
+<div id="globe"></div><div id="status">Cesium reference · loading</div>
+<script>window.CESIUM_BASE_URL='/__oracle/vendor/';</script><script src="/__oracle/vendor/Cesium.js"></script>
+<script type="module">
+import {observeCesium} from './observe-cesium.mjs';
+import {matchCesiumCamera} from './camera-match.mjs';
+const C=window.Cesium,config=await (await fetch('./config.json')).json();
+C.Ion.defaultAccessToken='';
+const viewer=new C.Viewer('globe',{baseLayer:false,baseLayerPicker:false,geocoder:false,animation:false,timeline:false,
+  homeButton:false,sceneModePicker:false,navigationHelpButton:false,fullscreenButton:false,selectionIndicator:false,infoBox:false,
+  skyBox:false,skyAtmosphere:false,sun:false,moon:false,terrainProvider:new C.EllipsoidTerrainProvider(),
+  contextOptions:{webgl:{preserveDrawingBuffer:true}},useBrowserRecommendedResolution:false});
+viewer.scene.globe.showGroundAtmosphere=false;viewer.scene.globe.enableLighting=false;
+viewer.scene.screenSpaceCameraController.enableInputs=false;
+viewer.scene.screenSpaceCameraController.enableCollisionDetection=false;
+viewer.scene.renderError.addEventListener((_scene,error)=>{window.__loadingOracle.error=error.message;window.__loadingOracle.event('render-error',{message:error.message});});
+viewer.scene.backgroundColor=C.Color.fromCssColorString('#050608');
+const provider=new C.WebMapTileServiceImageryProvider({url:config.provider.template,layer:'esa-worldcover-s2rgbnir-10m-2021-v2_tcc',style:'default',format:'image/png',
+  tileMatrixSetID:'webmercator',tileMatrixLabels:Array.from({length:20},(_,i)=>String(i).padStart(2,'0')),
+  tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:config.provider.maximumLevel,credit:config.provider.credit});
+const layer=viewer.imageryLayers.addImageryProvider(provider),trace=window.__loadingOracle;
+if(!trace)throw new Error('Start with the oracle runner to record state');
+const observer=observeCesium(C,viewer,layer,trace);
+let registration=null,match=null;
+window.__cesiumOracle={viewer,config,match(frame){registration=frame;match=matchCesiumCamera(C,viewer,frame);return match;},sample(){
+  const state=observer.sample();
+  const anchors=(registration?.anchors??[]).map(a=>{
+    const p=C.SceneTransforms.worldToWindowCoordinates(viewer.scene,C.Cartesian3.fromDegrees(a.longitude,a.latitude));
+    const x=p?p.x+match.canvas.left:null,y=p?p.y+match.canvas.top:null;
+    return {...a,cesium:p?[x,y]:null,errorPixels:p?Math.hypot(x-a.screen[0],y-a.screen[1]):null};
+  });return {...state,registration:{...match,anchors}};
+},destroy(){viewer.destroy();}};
+viewer.scene.postRender.addEventListener(()=>{
+  if(trace.stopped)return;
+  trace.frame=viewer.scene.frameState.frameNumber;
+  if(performance.now()-trace.lastSample>=100){trace.lastSample=performance.now();trace.samples.push(window.__cesiumOracle.sample());}
+});
+document.querySelector('#status').textContent='Cesium 1.145 · ESA WorldCover 2021';
+</script></html>

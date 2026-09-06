@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Continuous cssEarth / Cesium capture</title>
+<style>html,body{margin:0;background:#101217;color:#e7eaf0;font:16px system-ui;height:100%;overflow:hidden}header{height:60px;display:flex;align-items:center;justify-content:space-around;font-size:22px}main{height:calc(100% - 60px);display:grid;grid-template-columns:1fr 1fr}iframe{border:0;width:100%;height:100%}#clock{font-variant-numeric:tabular-nums;font-size:17px;color:#b7bfcb}</style>
+<header><span>cssEarth</span><span id="clock">Preparing comparison</span><span>Cesium reference</span></header>
+<main><iframe id="css" src="/earth/"></iframe><iframe id="cesium" src="/__oracle/"></iframe></main>
+<script type="module">
+import {geographicFrame} from './camera-match.mjs';
+const config=await(await fetch('./config.json')).json();
+const css=()=>document.querySelector('#css').contentWindow,cesium=()=>document.querySelector('#cesium').contentWindow;
+const state=window.__liveOracle={phase:'Preparing',following:false,started:0,frames:0,errors:[],matches:[],sampleAt:0};
+function tick(){
+  try {
+    if(state.following&&css().__cssOracleView&&cesium().__cesiumOracle){
+      const at=performance.now(),frame=geographicFrame(css().__cssOracleView(),config.faces,config.camera);
+      cesium().__cesiumOracle.match(frame);state.frames++;
+      if(at-state.sampleAt>=200){state.sampleAt=at;
+        const t=css().__loadingOracle;
+        t.samples.push({at:css().performance.now(),frame:t.frame,camera:css().__earth.camera.state(),...css().__earth.runtime.pages().city});
+        state.matches.push({at:performance.timeOrigin+at,sourceAt:css().performance.timeOrigin+css().performance.now(),center:frame.center});
+      }
+      document.querySelector('#clock').textContent=state.phase;
+    }
+  }catch(error){state.errors.push(error.message);state.following=false;}
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+state.start=()=>{state.started=performance.now();state.following=true;};
+state.stop=()=>{state.following=false;};
+</script></html>
