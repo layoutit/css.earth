@@ -40,6 +40,11 @@ use the same names across bodies; instrument and coverage details stay in
 descriptions. New concepts may keep package-owned names. Regenerate the literal
 controls with `node tools/prepare-object-controls.mjs --object=<id>`.
 
+The shell displays the registry's classification as a tag beside the title.
+Selecting it browses that category in the retained object search results.
+The adjacent AU tag uses the registry distance and lists all objects in solar-distance order.
+Do not repeat classification as a factsheet row.
+
 ## Object package contract
 
 1. Export one mount function from the planet renderer.

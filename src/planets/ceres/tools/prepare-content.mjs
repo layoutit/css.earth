@@ -16,7 +16,6 @@ const title = createPreparedTitle(createPlanetTitleSource("Ceres", font), {
 await writeFile(new URL("../site/preparedTitle.mjs", import.meta.url), serializePreparedTitleModule("PREPARED_CERES_TITLE", title));
 const { BODIES, dwarfPlanetElements, keplerPeriodDays } = await loadAstronomyPackage();
 const facts = [
-  { id: "classification", label: "Classification", value: "Dwarf planet" },
   { id: "radius", label: "Mean radius", value: `${BODIES.ceres.meanRadiusKm} km` },
   { id: "distance-from-sun", label: "Distance from Sun", value: "2.77 AU (mean)" },
   { id: "orbital-period", label: "Orbital period", value: `${(keplerPeriodDays(dwarfPlanetElements("ceres")) / 365.25).toFixed(2)} years` },
