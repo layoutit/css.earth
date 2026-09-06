@@ -11,7 +11,7 @@ const output = resolve(root, '.local/preparation-tests');
 async function discover(directory, suffix) {
   const files = [];
   for (const entry of await readdir(resolve(root, directory), { withFileTypes: true })) {
-    if (['dist', 'node_modules', 'unit', 'browser', 'oracle'].includes(entry.name)) continue;
+    if (['.local', 'dist', 'node_modules', 'unit', 'browser', 'oracle'].includes(entry.name)) continue;
     const path = `${directory}/${entry.name}`;
     if (entry.isDirectory()) files.push(...await discover(path, suffix));
     else if (entry.name.endsWith(suffix)) files.push(path);
@@ -43,4 +43,5 @@ function run(args) {
 const native = [...await discover('tools/objects', '.test.mjs'), ...await discover('tests/objects', '.test.mjs')];
 run(['--test', ...compiled, ...native]);
 run([resolve(dirname(engineRequire.resolve('vitest/package.json')), 'vitest.mjs'),
-  'run', 'src/renderers/css/preparation/presentation/presentation.test.ts']);
+  'run', '--root', resolve(root, 'src/renderers/css/preparation/presentation'),
+  '--exclude', '**/.local/**', 'presentation.test.ts']);
