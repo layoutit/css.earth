@@ -2,7 +2,34 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { preparePerspectiveCamera } from "./prepare-perspective-camera.mjs";
 import { PREPARED_MERCURY_SCENE } from "../planets/mercury/runtime/preparedScene.mjs";
+import { runtimeDefinition as mercury } from "../planets/mercury/runtime/definition.mjs";
+import { runtimeDefinition as ceres } from "../planets/ceres/runtime/definition.mjs";
 
-test("shared perspective recipe preserves Mercury's accepted camera", () => {
+test("Mercury's prepared camera reproduces the shared recipe", () => {
   assert.deepEqual(preparePerspectiveCamera({ sky: PREPARED_MERCURY_SCENE.starfield }), PREPARED_MERCURY_SCENE.camera);
 });
+
+for (const [id, definition] of [["ceres", ceres], ["mercury", mercury]]) {
+  test(`${id} mesh vertices and lighting use the same world radius through perspective zoom`, () => {
+    const { camera, tree, heliocentricView, viewBindings } = definition;
+    const radius = heliocentricView.plan.units.bodyRadiusUnits;
+    const fit = viewBindings.find(binding => binding.kind === "silhouette-fit");
+    const body = tree.nodes.findIndex(node => node.className?.split(" ").includes(`${id}-body`));
+    const surface = tree.nodes.filter(node => node.parent === body && node.tag === "s" && !node.className?.includes("polar"));
+    assert.ok(surface.length > 0);
+    for (const leaf of surface) {
+      const m = leaf.style.match(/matrix3d\(([^)]+)/)[1].split(",").map(Number);
+      // The CSS origin is a prepared surface vertex, in PolyCSS units.
+      const meshRadius = Math.hypot(m[12], m[13], m[14]) / m[15] * camera.sceneScale;
+      // Prepared seam overlap adds under 0.003 world units at these vertices.
+      assert.ok(Math.abs(meshRadius - radius) < 0.01, `${id}: mesh radius ${meshRadius}, world radius ${radius}`);
+      for (const distance of [1.2, 2, 4, 20].map(scale => scale * radius)) {
+        const projectedMesh = 1100 * meshRadius / Math.sqrt(distance ** 2 - meshRadius ** 2);
+        const projectedModel = 1100 * radius / Math.sqrt(distance ** 2 - radius ** 2);
+        const overlayRadius = projectedModel * fit.unitScale * camera.logicalBodyDiameter / 2;
+        assert.ok(Math.abs(projectedMesh - overlayRadius) < 0.1,
+          `${id}: mesh ${projectedMesh}px, overlay ${overlayRadius}px at distance ${distance}`);
+      }
+    }
+  });
+}

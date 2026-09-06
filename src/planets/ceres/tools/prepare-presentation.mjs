@@ -86,7 +86,7 @@ const presentation = { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera
         star.name ? [{ id: `star:${i}`, hip: star.hip, name: star.name, direction: star.direction, magnitude: star.magnitude }] : []) } },
   },
   viewBindings: [
-    { kind: "silhouette-fit", target: index(materialRoot), minimumRadius: 1.5, unitScale: 2 * plan.camera.defaultZoom / plan.camera.logicalBodyDiameter },
+    { kind: "silhouette-fit", target: index(materialRoot), minimumRadius: 1.5, unitScale: 2 / plan.camera.logicalBodyDiameter },
     { kind: "view-attribute", target: -1, property: "data-lod", source: "level-of-detail-stage", precision: null },
     { kind: "view-property", target: index(materialRoot), property: "--ceres-billboard-opacity", source: "billboard-opacity", precision: 6 },
   ],
