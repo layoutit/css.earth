@@ -2,6 +2,17 @@
 
 Shared JSON parsing, validation, object capabilities, and preparation contracts.
 
+The same surface geometry, polar sampling, coverage completion, atmosphere,
+lighting, and interior pixel operators serve every compatible object. Inputs
+are numbers, pixels, and validated recipes; outputs contain no DOM or CSS.
+Node file/image I/O and CSS projection are separate application adapters.
+
+`parseAuthoredObjectDescriptor()` is the authored-data boundary for migrated
+objects. It returns a typed `recipe` composed from pinned source references,
+shape, surfaces and lenses, materials, frame banks, optional layers and motion,
+plus bounded paging or destination plans. Preparation adapters consume those
+capabilities; this package does not choose a renderer or execute object tools.
+
 ```text
 packages/objects/
 ├── src/           Generic TypeScript implementation and tests

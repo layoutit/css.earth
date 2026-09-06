@@ -6,7 +6,7 @@ import { createPreparedMaterialPublisher, preparedMaterialFrame } from "./prepar
 import { selectedPreparedVariant } from "./prepared-presentation.mjs";
 import { initialObjectSelection } from "./object-runtime-contract.mjs";
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
-import { runtimeDefinition as definition } from "../planets/venus/runtime/definition.mjs";
+import definition from "../../objects/preparation/venus/runtime.json" with {type: "json"};
 
 test("Venus preserves roll and shadow boundaries while selecting physical directional phases",()=>{
   const reference=JSON.parse(readFileSync(new URL("./test/fixtures/venus-material-reference.json",import.meta.url)));

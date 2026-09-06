@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { OBJECTS } from "../site/objects.mjs";
@@ -201,17 +202,33 @@ test('descriptor loaders prove the actual JSON transport and typed source build 
   assert.ok(report.sharedClosure.every(file => !file.includes('/dist/')), 'source build entries, never emitted bundles, own the proof');
 });
 
-test('JSON transport rejects a mismatched descriptor, digest, payload or checked source', async () => {
+test('authored descriptors do not inspect deleted private runtime modules', async () => {
+  const mercury = OBJECTS.find(object => object.id === 'mercury');
+  const report = await auditObjectRuntimeOwnership({ objects: [mercury],
+    listRuntimeFiles: async directory => { if (directory.endsWith('/mercury/runtime')) throw new Error('deleted authored runtime was read'); return []; } });
+  assert.equal(report.complete, true);
+});
+
+test('authored JSON transport rejects mismatched bytes, controls, source pins and physical frames', async () => {
   const file = 'src/planets/mercury/object.json', descriptor = JSON.parse(await readFile(file, 'utf8'));
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, id: 'venus' }) }), /descriptor identity/);
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, sha256: '0'.repeat(64) } }) }), /SHA-256/);
-  const presentation = 'src/planets/mercury/runtime/preparedPresentation.mjs';
-  const original = await readFile(presentation, 'utf8');
-  const value = readPreparedJsonModule(original).value;
-  value.camera.defaultZoom += .1;
-  await assert.rejects(descriptorOverlay({ [presentation]: `export const PREPARED_PRESENTATION = ${JSON.stringify(value)};` }), /differ from the checked/);
-  const controls = 'src/planets/mercury/site/control-content.mjs';
-  await assert.rejects(descriptorOverlay({ [controls]: `${await readFile(controls, 'utf8')}\nnew Image();` }), /static prepared content/);
+  const runtimePath = 'objects/preparation/mercury/runtime.json';
+  const runtime = JSON.parse(await readFile(runtimePath, 'utf8'));
+  runtime.camera.defaultZoom += .1;
+  await assert.rejects(descriptorOverlay({ [runtimePath]: JSON.stringify(runtime) }), /differ from the checked authored runtime/);
+  const sourcePath = 'src/planets/mercury/source/content/object.json';
+  await assert.rejects(descriptorOverlay({ [sourcePath]: `${await readFile(sourcePath, 'utf8')} ` }), /source digest drifted/);
+  const payloadPath = 'objects/prepared/mercury.json', payload = JSON.parse(await readFile(payloadPath, 'utf8'));
+  runtime.controls.lenses.controls[0].id = '';
+  payload.data = runtime;
+  const bytes = JSON.stringify(payload);
+  descriptor.prepared.sha256 = createHash('sha256').update(bytes).digest('hex');
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify(descriptor), [payloadPath]: bytes,
+    [runtimePath]: JSON.stringify(runtime) }), /control|lens/i);
+  const scenePath = 'objects/preparation/mercury/scene.json', scene = JSON.parse(await readFile(scenePath, 'utf8'));
+  scene.worldFrame.bodyRadiusM += 1;
+  await assert.rejects(descriptorOverlay({ [scenePath]: JSON.stringify(scene) }), /physical frame/);
 });
 
 test('descriptor binding cannot bypass the shared factory or redirect the prepared inventory', async () => {

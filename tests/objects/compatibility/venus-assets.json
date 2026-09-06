@@ -1,0 +1,285 @@
+{
+  "schema": "cssvenus-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "venus-atmosphere-spectrum.svg",
+      "bytes": 5691,
+      "sha256": "3cb52a3d6aaaf0872cfc8bd13374fbcae7337596a89214d385b73c04a06400ae"
+    },
+    {
+      "filename": "venus-clouds.webp",
+      "bytes": 12928,
+      "sha256": "7b8a6cb754caed6b8f60232b098087620bcaa3a65e2a753e8844635220d20945"
+    },
+    {
+      "filename": "venus-clouds@2x.webp",
+      "bytes": 38640,
+      "sha256": "c1dd0f9b1e9f7dc12bc4074ebcb66845bd6ab97c1fa21edb59c6468a6ba38a6b"
+    },
+    {
+      "filename": "venus-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "filename": "venus-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "filename": "venus-elevation.webp",
+      "bytes": 342682,
+      "sha256": "b55f3ee65a69ef17b0a5b346d2d3fab8369c0aa19b998050ea07b2dc2cb3df78"
+    },
+    {
+      "filename": "venus-elevation@2x.webp",
+      "bytes": 1606002,
+      "sha256": "1d1982d1c830adce2434bea697fd2fb961cd87fa50e402178e299c4f851871e2"
+    },
+    {
+      "filename": "venus-lens-clouds.webp",
+      "bytes": 226,
+      "sha256": "ecea3de3aab9b651c81367ea6555df4c8a3219c3c0aca3951aeb28c835225b9d"
+    },
+    {
+      "filename": "venus-lens-elevation.webp",
+      "bytes": 2140,
+      "sha256": "8057baad5c5ac313504433035423b839b4937687ba0adae19245adf9405c7224"
+    },
+    {
+      "filename": "venus-lens-radar.webp",
+      "bytes": 1844,
+      "sha256": "27afea38c42d0c98f0b75acb78e98d95474a86b0e66e3fc3997b7fdabbec2b63"
+    },
+    {
+      "filename": "venus-lighting.webp",
+      "bytes": 71390,
+      "sha256": "f6839f8f0c2fa6b02ba296a74c1154accc9f584d7d3d136b69b9b8c8959642ca"
+    },
+    {
+      "filename": "venus-lighting@2x.webp",
+      "bytes": 211590,
+      "sha256": "84011d6e6ec85d2e4699ca3b11f70c8577095fa6e3b41f5af0b546752a4be291"
+    },
+    {
+      "filename": "venus-material.webp",
+      "bytes": 470778,
+      "sha256": "283259a1c7265f9d41dda42f7bff17ad3452f091d12844ac50dad690a414d136"
+    },
+    {
+      "filename": "venus-material@2x.webp",
+      "bytes": 1316794,
+      "sha256": "d79bd68b9e8377b99c58da4d37b563cf5d1a4c74313dce1a8e98c1f848ff73b2"
+    },
+    {
+      "filename": "venus-observation-material.webp",
+      "bytes": 184874,
+      "sha256": "41a225f88f14b2df869f7be255d3dd06d2715bf1758bbe96157627940319a6a1"
+    },
+    {
+      "filename": "venus-observation-material@2x.webp",
+      "bytes": 512540,
+      "sha256": "ebe10fb45e26da4eff7848f5b67144b2e22140a915dff38283d2f681f57f23ce"
+    },
+    {
+      "filename": "venus-photometric-phase-curve.svg",
+      "bytes": 4365,
+      "sha256": "365045846150ad6b201bb6c1ced415463e6b1e2dd4828231e0afebb15852e7bc"
+    },
+    {
+      "filename": "venus-poles-clouds.webp",
+      "bytes": 30402,
+      "sha256": "b0b637150e9061b087b5b45cdeff01b37485c6a5668eb112d097752f9a8d9160"
+    },
+    {
+      "filename": "venus-poles-clouds@2x.webp",
+      "bytes": 79626,
+      "sha256": "9559417d1c4b42c9456657bcc1a588294c7f91d15246d8eed51831ae996cc9e6"
+    },
+    {
+      "filename": "venus-poles-elevation.webp",
+      "bytes": 132918,
+      "sha256": "7e15aad4730e9cb1a94b0106d8ed70dfd59546f50d22f003a5dd1e4eddad96a6"
+    },
+    {
+      "filename": "venus-poles-elevation@2x.webp",
+      "bytes": 483058,
+      "sha256": "ee34a96c428f8ecd3f028e6d2e08297ebe591c975c42a9545ce7563152a13b7f"
+    },
+    {
+      "filename": "venus-poles-radar.webp",
+      "bytes": 120320,
+      "sha256": "093b573e7de2bbc5aa711b3d242cb9277424274ce4966a0abe7ca867ca5751bf"
+    },
+    {
+      "filename": "venus-poles-radar@2x.webp",
+      "bytes": 445994,
+      "sha256": "ca4c7703ed677382743e628b10a63bd75391a63981c3771aeb319542dd4c123e"
+    },
+    {
+      "filename": "venus-radar.webp",
+      "bytes": 319602,
+      "sha256": "2f425091df878e19ea940b2933591cd89041a6974b27010b9f97d4cefbc44f9c"
+    },
+    {
+      "filename": "venus-radar@2x.webp",
+      "bytes": 1342124,
+      "sha256": "d8a8ab642684a2934b252f69d4a4e84727388a43c2748b0d0945348b302e4783"
+    },
+    {
+      "filename": "venus-starfield-back-standard.webp",
+      "bytes": 279756,
+      "sha256": "ccc6a1347b35133eb36fb4ef218ade52842083ec938e368018a19ea4aa1f8a3d"
+    },
+    {
+      "filename": "venus-starfield-back-standard@2x.webp",
+      "bytes": 1036488,
+      "sha256": "45d798a3bdd8b15d788e614be6bc8554273e412b0c08f83dfe9b44340860a0d8"
+    },
+    {
+      "filename": "venus-starfield-back.webp",
+      "bytes": 579454,
+      "sha256": "9a026f9cf5c5cc3290ca3708a30c5b66a2e9737fa5b9f73dee864ba830440ad5"
+    },
+    {
+      "filename": "venus-starfield-back@2x.webp",
+      "bytes": 2208660,
+      "sha256": "ec92342c5c18e17cc4bd571a8c60d3a2ccc46581982f913a5c1ece24aa4101c0"
+    },
+    {
+      "filename": "venus-starfield-bottom-standard.webp",
+      "bytes": 321562,
+      "sha256": "f5d6853bb9f3325d48b6da8de5a0f4e98986e8d955889437be5398b8737f7f67"
+    },
+    {
+      "filename": "venus-starfield-bottom-standard@2x.webp",
+      "bytes": 1230592,
+      "sha256": "30902cebccec968addcb046da65f0647181f9c51c4946780503769d9b67557b1"
+    },
+    {
+      "filename": "venus-starfield-bottom.webp",
+      "bytes": 661054,
+      "sha256": "9fe6c827dc2eca3b9ab6e1d3786b5742fd244ab7c99dc9cdbcac8e1e6be0053f"
+    },
+    {
+      "filename": "venus-starfield-bottom@2x.webp",
+      "bytes": 2572616,
+      "sha256": "2ddf63081a13e997d5b5a941d94a48dedcbd3c10fe45ae5a6c90237cc1385e61"
+    },
+    {
+      "filename": "venus-starfield-front-standard.webp",
+      "bytes": 386592,
+      "sha256": "4d7e46f6be6e6bb517fe68811ddc21f676b1c50819aa52e4325ff61e2d921ee0"
+    },
+    {
+      "filename": "venus-starfield-front-standard@2x.webp",
+      "bytes": 1302216,
+      "sha256": "5b18730105e5f27c18a2bc9e0f0a30d9eb732e1db6fd4b61e5932e16172a690e"
+    },
+    {
+      "filename": "venus-starfield-front.webp",
+      "bytes": 710424,
+      "sha256": "20cd6d50dcde27e8151a1e2a9d3b70b1076fb08c1e4a603e1faa69da140cb1f5"
+    },
+    {
+      "filename": "venus-starfield-front@2x.webp",
+      "bytes": 2702038,
+      "sha256": "c9dd83f9983070ef8c33f433975d20347f9e2b810270bc536413e8d109a2646f"
+    },
+    {
+      "filename": "venus-starfield-left-standard.webp",
+      "bytes": 173114,
+      "sha256": "f6769e95311359c0653303b50e4a2d34619b42ea996206df9193bf7e15de285b"
+    },
+    {
+      "filename": "venus-starfield-left-standard@2x.webp",
+      "bytes": 591900,
+      "sha256": "1156db86759bdc9b88fc8b3b5ab14c7c09be2f4d29400f0969e4c401326b3d18"
+    },
+    {
+      "filename": "venus-starfield-left.webp",
+      "bytes": 358732,
+      "sha256": "7c0a4ddb8a015c4868f2fd12fa212819974979c8992a13f91e11471fde438756"
+    },
+    {
+      "filename": "venus-starfield-left@2x.webp",
+      "bytes": 1330470,
+      "sha256": "9dafc9e2d2a5bbefeb921abedc810d41eb37275019bc1e85cc313e4e68817ebb"
+    },
+    {
+      "filename": "venus-starfield-right-standard.webp",
+      "bytes": 128060,
+      "sha256": "75b9c4970a0634f52822ed7e0d574e450aaded3729a536c99307f4ccbcd4b5ae"
+    },
+    {
+      "filename": "venus-starfield-right-standard@2x.webp",
+      "bytes": 422640,
+      "sha256": "6815515974ff85d61a1de50cf8eee256d649cc2aef0ef11ff69ffefb455662ba"
+    },
+    {
+      "filename": "venus-starfield-right.webp",
+      "bytes": 269378,
+      "sha256": "d58f2e0c7785dcaf72fef3119b38824d965127879da26a52caf141831fc8aa0f"
+    },
+    {
+      "filename": "venus-starfield-right@2x.webp",
+      "bytes": 956550,
+      "sha256": "8d36d2876a95b76128a951c1e6edc80a42cf9ecf2544f7708088cddf8816e1b1"
+    },
+    {
+      "filename": "venus-starfield-top-standard.webp",
+      "bytes": 394400,
+      "sha256": "33f177b112fcf9adbdc8a482668df508aad22ab4ef2640972aed48ad797f3b46"
+    },
+    {
+      "filename": "venus-starfield-top-standard@2x.webp",
+      "bytes": 1335396,
+      "sha256": "16b599a336d421d02df2700e399df3d5a62eac2bb05bccb65ad43b48655fae5e"
+    },
+    {
+      "filename": "venus-starfield-top.webp",
+      "bytes": 730256,
+      "sha256": "055bbde25e70b45fb6710d4402b319c84de60ab25eb10bcbcfd3447a5214974c"
+    },
+    {
+      "filename": "venus-starfield-top@2x.webp",
+      "bytes": 2825870,
+      "sha256": "f9edfa6197764de1b34b1e9baade4d72324c84c879a13c79784ae0c32b2e0be2"
+    },
+    {
+      "filename": "venus-system-markers.webp",
+      "bytes": 614,
+      "sha256": "24557f3ad439d92283f120588fa2a877f7433769c91b92252314fcac7f84d6ff"
+    },
+    {
+      "filename": "venus-system-markers@2x.webp",
+      "bytes": 1708,
+      "sha256": "8c3f1e7a46f9a6f5af19d29f7d6de089a6700d012a7a4f9b546544250e4736c1"
+    },
+    {
+      "filename": "venus-temperature-pressure-profile.svg",
+      "bytes": 2927,
+      "sha256": "99761b984a7e4af2752a28a318c3235cb656be498d6f5ae244844be5545fbb09"
+    },
+    {
+      "filename": "venus-venera-10.gif",
+      "bytes": 148505,
+      "sha256": "97260c6e3a4f7ad90a05ff57cb9d5afd00873dad6f6868052bdf59ca96a7ef43"
+    },
+    {
+      "filename": "venus-venera-13.jpg",
+      "bytes": 129960,
+      "sha256": "5ed388cc2265f36eb96a0d6732ea5bb1ac8511dbaf12fa7514afcc3b973e8fa8"
+    },
+    {
+      "filename": "venus-venera-14.jpg",
+      "bytes": 159981,
+      "sha256": "c62d9f21e49122414f9ca71f02c247a58581316e8b85fb7a805b4f186a31d00a"
+    },
+    {
+      "filename": "venus-venera-9.gif",
+      "bytes": 162270,
+      "sha256": "7e7f45f24fd4ad2a7e51a4452973100d57751baf73815bfd852180a1bfa04bbd"
+    }
+  ]
+}

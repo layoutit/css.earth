@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseObjectDescriptor } from '@cssearth/objects';
+import { parseAuthoredObjectDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { runPreparationSteps } from '../src/platform/preparation-runner.mjs';
 
 const defaultProjectRoot = resolve(import.meta.dirname, '..');
@@ -24,6 +24,13 @@ const localSteps = Object.freeze({
 /** JSON selects known capabilities; it cannot supply commands or arguments. */
 export function resolveObjectPreparation(input, { projectRoot = defaultProjectRoot } = {}) {
   const descriptor = parseObjectDescriptor(input), recipe = descriptor.properties.preparation;
+  if (descriptor.properties.recipe) {
+    parseAuthoredObjectDescriptor(descriptor);
+    if (descriptor.type !== 'layered-body') throw new TypeError('Unsupported prepared object type.');
+    return Object.freeze({ objectName: typeof recipe?.label === 'string' ? recipe.label : descriptor.id,
+      projectRoot: resolve(projectRoot), toolDirectory: resolve(projectRoot, 'src/planets', descriptor.id, 'tools'),
+      steps: Object.freeze([Object.freeze(['../../../../tools/objects/dist/prepare-authored.js', descriptor.id, '--write'])]) });
+  }
   if (descriptor.type !== 'layered-body' || !recipe || typeof recipe !== 'object' || Array.isArray(recipe) ||
       recipe.schema !== 'cssearth-object-preparation@1' ||
       Object.keys(recipe).some(key => !['schema', 'label', 'steps'].includes(key)) ||

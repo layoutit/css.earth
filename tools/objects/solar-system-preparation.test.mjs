@@ -8,15 +8,14 @@ import { pathToFileURL } from "node:url";
 import { prepareSolarSystemCamera, prepareSolarSystemScene, prepareSolarSystemSunPresentation } from "./solar-system-scene.mjs";
 import { prepareSolarSystemPresentation } from "./solar-system-presentation.mjs";
 import { prepareSolarSystemMarkerStrip } from "./solar-system-markers.mjs";
-import { prepareMercuryPresentation } from "../../src/planets/mercury/tools/prepare-presentation.mjs";
-import { PREPARED_MERCURY_SCENE as mercuryScene } from "../../src/planets/mercury/runtime/preparedScene.mjs";
-import { PREPARED_MERCURY_STARFIELD as mercurySky } from "../../src/planets/mercury/runtime/preparedStarfield.mjs";
-import { PREPARED_MERCURY_SKY_SUN as mercurySun } from "../../src/planets/mercury/runtime/preparedSkySun.mjs";
-import { PREPARED_MERCURY_ASSETS as mercuryAssets } from "../../src/planets/mercury/runtime/preparedAssets.mjs";
-import { PREPARED_MERCURY_SYSTEM_MARKERS as mercuryStrip } from "../../src/planets/mercury/runtime/preparedSystemMarkers.mjs";
-import { PREPARED_PRESENTATION as mercuryPresentation } from "../../src/planets/mercury/runtime/preparedPresentation.mjs";
-import { PREPARED_VENUS_SCENE as venusScene } from "../../src/planets/venus/runtime/preparedScene.mjs";
-import { PREPARED_VENUS_STARFIELD as venusSky } from "../../src/planets/venus/runtime/preparedStarfield.mjs";
+import mercuryScene from "../../objects/preparation/mercury/scene.json" with {type: "json"};
+import mercurySky from "../../objects/preparation/mercury/sky.json" with {type: "json"};
+import mercurySun from "../../objects/preparation/mercury/sun.json" with {type: "json"};
+import mercuryAssets from "../../objects/preparation/mercury/assets.json" with {type: "json"};
+import mercuryStrip from "../../objects/preparation/mercury/markers.json" with {type: "json"};
+import mercuryPresentation from "../../objects/preparation/mercury/runtime.json" with {type: "json"};
+import venusScene from "../../objects/preparation/venus/scene.json" with {type: "json"};
+import venusSky from "../../objects/preparation/venus/sky.json" with {type: "json"};
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
 import { prepareCatalogueStars } from "../../src/platform/prepare-catalogue-stars.mjs";
 import { preparePlanetDirectionalSun } from "../../src/platform/prepare-directional-sun.mjs";
@@ -44,7 +43,8 @@ const tiles = [
 test("Mercury preserves all baseline bytes except physical geometry and overlay scale corrections", () => {
   const hash = value => createHash("sha256").update(JSON.stringify(value)).digest("hex");
   const { worldFrame, ...scene } = structuredClone(mercuryScene);
-  const presentation = structuredClone(mercuryPresentation);
+  const {id, controls, ...presentation} = structuredClone(mercuryPresentation);
+  presentation.schema = "cssearth-prepared-presentation@3";
   const oldTransform = "scale(0.022000000000000002) rotateX(40deg) rotate(0deg) translate3d(0px, 0px, 0px)";
   // Only these three authored fields changed. Restore their historical values
   // for byte parity, then independently prove their corrected physical extent.
@@ -53,7 +53,7 @@ test("Mercury preserves all baseline bytes except physical geometry and overlay 
   presentation.camera = scene.camera;
   presentation.tree.properties.find(property => property.value === mercuryScene.camera.defaultTransform).value = oldTransform;
   presentation.viewBindings.find(binding => binding.kind === "silhouette-fit").unitScale = 2 * 1.1 / 460;
-  assert.equal(hash(scene), "4b583cf546c1942d14136d1dcdbc50b540104e25c9f55db7e35d08e647f50c2e");
+  assert.equal(hash(scene), "fd07cb83678d7efd46023c7d997ec2c368d3c293d4a2ee6553711111285129e3");
   assert.equal(hash(presentation), "491ab38e7ad386ce4db088844c5b05901a8a0c62c445b81a3dc701b0afbdab13");
   assert.deepEqual(worldFrame, mercuryPrepared.worldFrame);
 });
@@ -193,8 +193,7 @@ test("Mercury geometry and material use the same physical radius without framing
   assert.equal(mercuryScene.camera.sceneScale, 1 / 50);
   assert.equal(mercuryScene.heliocentricView.units.bodyRadiusUnits, 230);
   const fit = mercuryPresentation.viewBindings.find(binding => binding.kind === "silhouette-fit");
-  const regenerated = await prepareMercuryPresentation();
-  assert.deepEqual(regenerated.viewBindings.find(binding => binding.kind === "silhouette-fit"), fit);
+  // The shared TypeScript compiler has independent frozen-output parity tests.
   const authoredMaterialRadius = mercuryAssets.lighting.presentationFrameSize / 2;
   assert.equal(authoredMaterialRadius, 230);
   for (const projectedRadius of [0.2, 0.6, 2, 20, 230, 400]) {

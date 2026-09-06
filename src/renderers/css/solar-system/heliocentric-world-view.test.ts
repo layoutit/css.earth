@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
-import { runtimeDefinition } from '../../../planets/mercury/runtime/definition.mjs';
-import { runtimeDefinition as venusDefinition } from '../../../planets/venus/runtime/definition.mjs';
+import runtimeDefinition from "../../../../objects/preparation/mercury/runtime.json" with {type: "json"};
+import venusDefinition from "../../../../objects/preparation/venus/runtime.json" with {type: "json"};
 import { projectHeliocentricView } from './heliocentric-view.js';
 
 const plan = runtimeDefinition.heliocentricView.plan;

@@ -3,6 +3,7 @@ import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { OBJECTS } from '../site/objects.mjs';
+import { authoredObject } from './authored-object.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const format = 'cssearth-css-object@4';
@@ -43,7 +44,9 @@ export async function prepareObjectJson(ids) {
     if (ids && !ids.includes(object.id)) continue;
     try { await access(resolve(root, 'src/planets', object.id, 'object.json')); }
     catch (error) { if (error.code === 'ENOENT' && !ids) continue; throw error; }
-    const { runtimeDefinition } = await import(pathToFileURL(resolve(root, `src/planets/${object.id}/runtime/definition.mjs`)).href);
+    const runtimeDefinition = await authoredObject(object.id, root)
+      ? JSON.parse(await readFile(resolve(root, 'objects/preparation', object.id, 'runtime.json'), 'utf8'))
+      : (await import(pathToFileURL(resolve(root, `src/planets/${object.id}/runtime/definition.mjs`)).href)).runtimeDefinition;
     results.push(await writeObjectJson(object.id, runtimeDefinition));
   }
   if (ids && results.length !== new Set(ids).size) throw new TypeError('A requested object has no registered JSON descriptor.');

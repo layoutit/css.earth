@@ -7,6 +7,7 @@ import { pathToFileURL } from "node:url";
 import * as fontkit from "fontkit";
 
 import { OBJECTS } from "../site/objects.mjs";
+import { authoredObject } from "./authored-object.mjs";
 import { PLANET_TITLE_RECIPE } from
   "../src/platform/planet-title-recipe.mjs";
 import { sha256 } from "../src/platform/prepared-title.mjs";
@@ -15,13 +16,17 @@ const projectRoot = resolve(import.meta.dirname, "..");
 
 export async function preparePlanetTitleSources({
   fontPath = resolve(projectRoot, PLANET_TITLE_RECIPE.checkedFontPath),
-  writeSource = async (planet, moduleSource) => writeFile(
-    resolve(
+  writeSource = async (planet, moduleSource, source) => {
+    const authored = await authoredObject(planet.id, projectRoot);
+    const extension = authored ? "json" : "mjs";
+    const destination = resolve(
       projectRoot,
-      `src/planets/${planet.id}/source/presentation/title-mark.mjs`,
-    ),
-    moduleSource,
-  ),
+      `src/planets/${planet.id}/source/presentation/title-mark.${extension}`,
+    );
+    await writeFile(destination, authored
+      ? `${JSON.stringify({ schema: "cssearth-title-source@1", ...source }, null, 2)}\n`
+      : moduleSource);
+  },
 } = {}) {
   const fontBytes = await readFile(fontPath);
   if (sha256(fontBytes) !== PLANET_TITLE_RECIPE.sourceSha256) {
@@ -38,7 +43,7 @@ export async function preparePlanetTitleSources({
     const source = createPlanetTitleSource(planet.name, font);
     const exportName = `${planet.id.toUpperCase()}_TITLE_SOURCE`;
     const moduleSource = serializePlanetTitleSource(exportName, source);
-    await writeSource(planet, moduleSource);
+    await writeSource(planet, moduleSource, source);
     prepared[planet.id] = Object.freeze({ source, moduleSource });
   }
   return Object.freeze(prepared);

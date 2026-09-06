@@ -231,14 +231,21 @@ test("shared router cancels a pending adapter before publication", async () => {
 
 test("keeps implemented routes backed by object-owned files", async () => {
   for (const planet of OBJECTS) {
-    const owned = [
-      `../../src/planets/${planet.id}/SOURCE.md`,
-      `../../src/planets/${planet.id}/NOTICE.md`,
-      `../../src/planets/${planet.id}/site`,
-      `../../src/planets/${planet.id}/test`,
-      `../../src/planets/${planet.id}/tools`,
-      `../pages/${planet.id}.astro`,
-    ];
+    const owned = planet.id === "mercury" || planet.id === "venus"
+      ? [
+        `../../src/planets/${planet.id}/SOURCE.md`,
+        `../../src/planets/${planet.id}/NOTICE.md`,
+        `../../src/planets/${planet.id}/object.json`,
+        `../pages/${planet.id}.astro`,
+      ]
+      : [
+        `../../src/planets/${planet.id}/SOURCE.md`,
+        `../../src/planets/${planet.id}/NOTICE.md`,
+        `../../src/planets/${planet.id}/site`,
+        `../../src/planets/${planet.id}/test`,
+        `../../src/planets/${planet.id}/tools`,
+        `../pages/${planet.id}.astro`,
+      ];
     await Promise.all(owned.map((relativePath) =>
       access(new URL(relativePath, import.meta.url))));
   }
@@ -273,6 +280,14 @@ test("renders source-backed charts in one canonical switcher with Reflectance fi
   ];
 
   for (const [id, name, expectedChartIds] of panels) {
+    if (id === "mercury" || id === "venus") {
+      const content = JSON.parse(await readFile(
+        new URL(`../../objects/preparation/${id}/content.json`, import.meta.url),
+        "utf8",
+      ));
+      assert.deepEqual(content.charts.map(({ id: chartId }) => chartId), expectedChartIds, `${name} chart order`);
+      continue;
+    }
     const panel = await readFile(
       new URL(`../../src/planets/${id}/site/${name}Panel.astro`, import.meta.url),
       "utf8",
@@ -297,14 +312,11 @@ test("renders source-backed charts in one canonical switcher with Reflectance fi
   assert.match(shell, /class="planet-chart-switcher"[\s\S]*?data-active-chart=\{defaultChart\.id\}/u);
   assert.doesNotMatch(shell, /class="planet-chart-panel"|open=\{chart\.open\}|open=\{gallery\.open\}/u);
 
-  const mercury = await readFile(
-    new URL("../../src/planets/mercury/site/MercuryPanel.astro", import.meta.url),
+  const mercury = JSON.parse(await readFile(
+    new URL("../../objects/preparation/mercury/content.json", import.meta.url),
     "utf8",
-  );
-  assert.doesNotMatch(
-    mercury,
-    /id:\s*"temperature-pressure"|mercury-no-atmosphere-profile/u,
-  );
+  ));
+  assert.doesNotMatch(JSON.stringify(mercury.charts), /temperature-pressure|mercury-no-atmosphere-profile/u);
 });
 
 test("keeps the shared shell planet-neutral", async () => {

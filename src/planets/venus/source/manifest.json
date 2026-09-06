@@ -20,15 +20,17 @@
     },
     {
       "id": "inter-venus-title-vector",
-      "path": "presentation/title-mark.mjs",
-      "expectedSha256": "aa8bab05c2977fafbe3ec905b3625119a7ec301d6fee3e5a73e08d64b8000b87",
-      "expectedBytes": 2863,
+      "path": "presentation/title-mark.json",
+      "expectedSha256": "c7dcf2d1ffaaca53a2907762e4ae44245440e652dabaf2b2786e527465678e89",
+      "expectedBytes": 2840,
       "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Venus outline",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
-      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
+      "acquisition": "Generated JSON vector from the pinned Inter Variable font with declared variation axes and metrics.",
       "redistribution": "project-authored SVG outline with Inter attribution",
-      "consumers": ["title"]
+      "consumers": [
+        "title"
+      ]
     },
     {
       "id": "nasa-venus-navigation-disc",
@@ -38,10 +40,14 @@
       "origin": "https://science.nasa.gov/wp-content/uploads/2023/05/688-venus-1200-jpg.webp",
       "credit": "NASA/JPL-Caltech",
       "license": "NASA media usage guidelines",
-      "licenseEvidence": ["https://www.nasa.gov/nasa-brand-center/images-and-media/"],
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "checked NASA image with full credit and no endorsement claim",
-      "consumers": ["navigation"]
+      "consumers": [
+        "navigation"
+      ]
     },
     {
       "id": "venus-venera-surface-gallery-metadata",
@@ -51,10 +57,15 @@
       "origin": "NASA PDS Geosciences Node Venera image index and NASA Science Venera 9 caption",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Repository-authored factual metadata",
-      "licenseEvidence": ["https://pds-geosciences.wustl.edu/missions/venera/", "https://science.nasa.gov/resource/first-look-venus/"],
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/missions/venera/",
+        "https://science.nasa.gov/resource/first-look-venus/"
+      ],
       "acquisition": "checked repository-authored metadata bound to the exact archive files",
       "redistribution": "project-authored factual descriptions with institutional attribution",
-      "consumers": ["surface-gallery"]
+      "consumers": [
+        "surface-gallery"
+      ]
     },
     {
       "id": "venus-venera-9-surface-panorama",
@@ -64,10 +75,16 @@
       "origin": "https://pds-geosciences.wustl.edu/venera/GIF/venera9.gif",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Public-domain automatic-camera scientific record; see venera/RIGHTS.md",
-      "licenseEvidence": ["https://pds-geosciences.wustl.edu/missions/venera/", "https://www.wipo.int/wipolex/en/legislation/details/22974", "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"],
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/missions/venera/",
+        "https://www.wipo.int/wipolex/en/legislation/details/22974",
+        "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
-      "consumers": ["surface-gallery"]
+      "consumers": [
+        "surface-gallery"
+      ]
     },
     {
       "id": "venus-venera-10-surface-panorama",
@@ -77,10 +94,16 @@
       "origin": "https://pds-geosciences.wustl.edu/venera/GIF/venera10.gif",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Public-domain automatic-camera scientific record; see venera/RIGHTS.md",
-      "licenseEvidence": ["https://pds-geosciences.wustl.edu/missions/venera/", "https://www.wipo.int/wipolex/en/legislation/details/22974", "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"],
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/missions/venera/",
+        "https://www.wipo.int/wipolex/en/legislation/details/22974",
+        "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
-      "consumers": ["surface-gallery"]
+      "consumers": [
+        "surface-gallery"
+      ]
     },
     {
       "id": "venus-venera-13-surface-panorama",
@@ -90,10 +113,16 @@
       "origin": "https://pds-geosciences.wustl.edu/venera/JPEG/venera13.jpg",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Public-domain automatic-camera scientific record; see venera/RIGHTS.md",
-      "licenseEvidence": ["https://pds-geosciences.wustl.edu/missions/venera/", "https://www.wipo.int/wipolex/en/legislation/details/22974", "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"],
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/missions/venera/",
+        "https://www.wipo.int/wipolex/en/legislation/details/22974",
+        "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
-      "consumers": ["surface-gallery"]
+      "consumers": [
+        "surface-gallery"
+      ]
     },
     {
       "id": "venus-venera-14-surface-panorama",
@@ -103,10 +132,16 @@
       "origin": "https://pds-geosciences.wustl.edu/venera/JPEG/venera14.jpg",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Public-domain automatic-camera scientific record; see venera/RIGHTS.md",
-      "licenseEvidence": ["https://pds-geosciences.wustl.edu/missions/venera/", "https://www.wipo.int/wipolex/en/legislation/details/22974", "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"],
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "licenseEvidence": [
+        "https://pds-geosciences.wustl.edu/missions/venera/",
+        "https://www.wipo.int/wipolex/en/legislation/details/22974",
+        "https://www.copyright.gov/comp3/chap300/ch300-copyrightable-authorship.pdf"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
-      "consumers": ["surface-gallery"]
+      "consumers": [
+        "surface-gallery"
+      ]
     },
     {
       "id": "openspace-venus-clouds",
@@ -116,10 +151,15 @@
       "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/venus/textures/2/venus_clouds.jpg",
       "credit": "OpenSpace Team",
       "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "licenseEvidence": ["https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/clouds_magellan_combo_newyork.asset"],
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "licenseEvidence": [
+        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/clouds_magellan_combo_newyork.asset"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": ["scene", "lenses"]
+      "consumers": [
+        "scene",
+        "lenses"
+      ]
     },
     {
       "id": "usgs-nasa-magellan-synthetic-color-wms",
@@ -129,10 +169,16 @@
       "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
       "credit": "USGS Astrogeology Science Center and NASA",
       "license": "Public domain",
-      "licenseEvidence": ["https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m", "https://www.usgs.gov/media/images/venus-magellan-color-sar"],
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh requests the declared complete USGS WMS extent",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m",
+        "https://www.usgs.gov/media/images/venus-magellan-color-sar"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh requests the declared complete USGS WMS extent",
       "redistribution": "public-domain USGS/NASA prepared scientific product with attribution",
-      "consumers": ["scene", "lenses"]
+      "consumers": [
+        "scene",
+        "lenses"
+      ]
     },
     {
       "id": "usgs-nasa-magellan-colorized-topography-wms",
@@ -142,10 +188,16 @@
       "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
       "credit": "USGS Astrogeology Science Center and NASA",
       "license": "Public domain",
-      "licenseEvidence": ["https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m", "https://www.usgs.gov/media/images/magellan-global-c3-mdir-colorized-topographic-mosaic"],
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh requests the declared complete USGS WMS extent",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m",
+        "https://www.usgs.gov/media/images/magellan-global-c3-mdir-colorized-topographic-mosaic"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh requests the declared complete USGS WMS extent",
       "redistribution": "public-domain USGS/NASA prepared scientific product with attribution",
-      "consumers": ["scene", "lenses"]
+      "consumers": [
+        "scene",
+        "lenses"
+      ]
     },
     {
       "id": "openspace-venus-globe-specification",
@@ -155,9 +207,11 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/globe.asset",
       "credit": "OpenSpace Team",
       "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": ["scene"]
+      "consumers": [
+        "scene"
+      ]
     },
     {
       "id": "openspace-venus-atmosphere-specification",
@@ -167,9 +221,12 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/atmosphere.asset",
       "credit": "OpenSpace Team",
       "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": ["scene", "materials"]
+      "consumers": [
+        "scene",
+        "materials"
+      ]
     },
     {
       "id": "openspace-venus-cloud-layer-specification",
@@ -179,9 +236,12 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/clouds_magellan_combo_newyork.asset",
       "credit": "OpenSpace Team",
       "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": ["scene", "lenses"]
+      "consumers": [
+        "scene",
+        "lenses"
+      ]
     },
     {
       "id": "openspace-venus-radar-tms-specification",
@@ -191,9 +251,12 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/magellan_mosaic_newyork.wms",
       "credit": "OpenSpace Team, USGS, and NASA PDS",
       "license": "OpenSpace MIT configuration describing public-domain USGS/NASA data",
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": ["scene", "lenses"]
+      "consumers": [
+        "scene",
+        "lenses"
+      ]
     },
     {
       "id": "openspace-venus-dem-tms-specification",
@@ -203,9 +266,12 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/heightlayers/magellan_newyork.wms",
       "credit": "OpenSpace Team, USGS, and NASA PDS",
       "license": "OpenSpace MIT configuration describing public-domain USGS/NASA data",
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh",
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "permitted with the OpenSpace MIT notice",
-      "consumers": ["scene", "lenses"]
+      "consumers": [
+        "scene",
+        "lenses"
+      ]
     },
     {
       "id": "nasa-psg-venus-expanded-configuration",
@@ -217,7 +283,10 @@
       "license": "U.S. government scientific model response",
       "acquisition": "checked expanded configuration from the declared seed and generator parameters",
       "redistribution": "checked text configuration with NASA attribution",
-      "consumers": ["spectrum", "temperature-pressure-profile"]
+      "consumers": [
+        "spectrum",
+        "temperature-pressure-profile"
+      ]
     },
     {
       "id": "nasa-psg-venus-r240-rif-response",
@@ -229,7 +298,9 @@
       "license": "U.S. government scientific model response",
       "acquisition": "checked raw ASCII response acquired 2026-08-30; refresh compares all 253 numeric samples",
       "redistribution": "checked model response with NASA attribution",
-      "consumers": ["spectrum"]
+      "consumers": [
+        "spectrum"
+      ]
     },
     {
       "id": "hyg-v41-venus-field",
@@ -239,9 +310,12 @@
       "origin": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
       "credit": "David Nash / Astronexus",
       "license": "CC-BY-SA-4.0, see stars/LICENSE.md",
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh re-identifies the checked deterministic 60,000-star full-sky HYG v4.1 selection for the Venus cubemap",
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh re-identifies the checked deterministic 60,000-star full-sky HYG v4.1 selection for the Venus cubemap",
       "redistribution": "permitted under CC-BY-SA-4.0 with attribution and share-alike",
-      "consumers": ["scene", "starfield"]
+      "consumers": [
+        "scene",
+        "starfield"
+      ]
     },
     {
       "id": "eso-milky-way-panorama",
@@ -251,10 +325,16 @@
       "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
       "credit": "ESO/S. Brunier",
       "license": "CC-BY-4.0, see stars/ESO-IMAGE-LICENSE.md",
-      "licenseEvidence": ["https://www.eso.org/public/images/eso0932a/", "https://www.eso.org/public/copyright/"],
-      "acquisition": "node src/planets/venus/tools/acquire.mjs --refresh-starfield-photo downloads the published 6000 x 3000 photographic full-sky panorama",
+      "licenseEvidence": [
+        "https://www.eso.org/public/images/eso0932a/",
+        "https://www.eso.org/public/copyright/"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh-starfield-photo downloads the published 6000 x 3000 photographic full-sky panorama",
       "redistribution": "permitted under CC-BY-4.0 with the exact visible credit ESO/S. Brunier",
-      "consumers": ["scene", "starfield"]
+      "consumers": [
+        "scene",
+        "starfield"
+      ]
     },
     {
       "id": "google-maps-venus-sun-oracle-asset",
@@ -266,7 +346,10 @@
       "license": "Google proprietary; no redistribution grant verified",
       "acquisition": "exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31",
       "redistribution": "retained for local visual-oracle preparation; redistribution clearance is unverified",
-      "consumers": ["starfield", "sun-oracle"]
+      "consumers": [
+        "starfield",
+        "sun-oracle"
+      ]
     },
     {
       "id": "google-maps-venus-sun-oracle-measurements",
@@ -278,7 +361,135 @@
       "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
       "acquisition": "read-only browser observation of the canonical Venus route on 2026-08-31",
       "redistribution": "measurements plus a local source-derived prepared reconstruction",
-      "consumers": ["scene", "materials", "starfield", "sun-oracle"]
+      "consumers": [
+        "scene",
+        "materials",
+        "starfield",
+        "sun-oracle"
+      ]
+    },
+    {
+      "id": "venus-object-content",
+      "path": "content/object.json",
+      "expectedSha256": "7206fc742e0970a86b782ac355d1e0859fb09fab34eccebcffbba28f6bc59610",
+      "expectedBytes": 13413,
+      "origin": "Repository-authored Venus panel, lens, gallery, chart, and provenance data.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source JSON maintained beside Venus inputs.",
+      "redistribution": "Prepared shell content with source provenance.",
+      "consumers": [
+        "panel",
+        "lenses",
+        "charts",
+        "surface-gallery"
+      ]
+    },
+    {
+      "id": "venus-chart-assets",
+      "path": "content/charts.json",
+      "expectedSha256": "0b6e77d1c02d6d6a5406c934df69decfa81a59374a7aac1273d1d6c03a3f195a",
+      "expectedBytes": 3939,
+      "origin": "Repository-authored Venus chart and gallery asset recipe bound to scientific source records.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked chart recipe maintained beside Venus inputs.",
+      "redistribution": "Prepared source-backed chart SVGs and gallery files.",
+      "consumers": [
+        "charts",
+        "surface-gallery"
+      ]
+    },
+    {
+      "id": "venus-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedSha256": "a3403106cdd08b0e4d2fb249d7ff2f8deba8513347b3caf957776e95022fe65e",
+      "expectedBytes": 7113,
+      "origin": "Repository-authored Venus acquisition and qualification recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
+      "redistribution": "Preparation provenance and reproducibility.",
+      "consumers": [
+        "assets",
+        "charts",
+        "lenses",
+        "surface-gallery"
+      ]
+    },
+    {
+      "id": "venus-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedSha256": "9b2a5130c2d04973ea519c39c40a764c6c6f746e3f684b8791df1f3a8abaffb7",
+      "expectedBytes": 786,
+      "origin": "Repository-authored Venus navigation asset recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
+      "redistribution": "Prepared navigation asset.",
+      "consumers": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "venus-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedSha256": "61c40dc622e8b519b170a2f529f4a0af92cc80d6c60cb02802b4a5f6cf97fd50",
+      "expectedBytes": 1404,
+      "origin": "Repository-authored Venus CSS geometry recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
+      "redistribution": "Prepared retained CSS scene geometry.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "venus-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedSha256": "1742148c83a2749f75c8c01fc9ef505e40ece92267a86d4a2db8b81e1eda738a",
+      "expectedBytes": 230,
+      "origin": "Repository-authored Venus sky, sun, and marker recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
+      "redistribution": "Prepared celestial assets.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ]
+    },
+    {
+      "id": "venus-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedSha256": "a7ed54590c63bdd26dab7fb47fd52d46ad5fc372855fc930b9619fce23399e82",
+      "expectedBytes": 101,
+      "origin": "Repository-authored Venus presentation capability recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
+      "redistribution": "Prepared CSS presentation capabilities.",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "venus-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedSha256": "a8f46765c150f436df7f8c3fd41c924ae67c42b63410e3f39b9979a164ef5919",
+      "expectedBytes": 2170,
+      "origin": "Repository-authored Venus raster preparation recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Venus inputs.",
+      "redistribution": "Prepared raster assets.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
     }
   ],
   "generatedIntermediates": [],

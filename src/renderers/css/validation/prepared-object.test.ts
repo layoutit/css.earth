@@ -1,3 +1,4 @@
+import {readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';
@@ -6,8 +7,8 @@ import { record, array } from './guards.js';
 // These are the real preparation outputs, loaded only by this browser-boundary test.
 const originals: unknown[] = [];
 for (const id of ['mercury', 'venus']) {
-  const source = await import(new URL(`../../../planets/${id}/runtime/definition.mjs`, import.meta.url).href);
-  originals.push(JSON.parse(JSON.stringify(source.runtimeDefinition)));
+  const source = await readFile(new URL(`../../../../objects/preparation/${id}/runtime.json`, import.meta.url), "utf8");
+  originals.push(JSON.parse(source));
 }
 const copy = (index = 1): Record<string, unknown> => record(structuredClone(originals[index]), 'test document');
 const child = (value: unknown, key: string) => record(record(value, 'test parent')[key], key);

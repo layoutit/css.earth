@@ -39,7 +39,7 @@ export const ESO_PANORAMA = Object.freeze({
 // Anchor objects with their catalogue galactic coordinates (NED / SIMBAD,
 // J2000) and the pixel centroid of their blob in the 6000 x 3000 image,
 // measured as the luminance-detail centroid at half resolution (see
-// src/planets/mercury/test/sky-anchors.test.mjs, which re-measures them).
+// tests/objects/unit/mercury/sky-anchors.test.mjs, which re-measures them).
 export const ESO_PANORAMA_ANCHORS = Object.freeze([
   Object.freeze({
     name: "Large Magellanic Cloud",

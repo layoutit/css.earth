@@ -1,3 +1,4 @@
+import {loadObjectTestDefinition} from './object-test-data.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
@@ -14,7 +15,7 @@ for (const object of OBJECTS) {
     const raw = await readFile(new URL(`../objects/${descriptor.prepared.url}`, import.meta.url));
     assert.equal(createHash('sha256').update(raw).digest('hex'), descriptor.prepared.sha256);
     const envelope = readPreparedObject(JSON.parse(raw), descriptor, data => data);
-    const { runtimeDefinition } = await import(`../src/planets/${object.id}/runtime/definition.mjs`);
+    const runtimeDefinition = await loadObjectTestDefinition(object.id);
     assert.deepEqual(envelope.data, JSON.parse(JSON.stringify(runtimeDefinition)));
     assert.equal(envelope.id, object.id);
     assert.equal(envelope.type, descriptor.type);

@@ -5,7 +5,7 @@ import { planetPointPresentation, planetOrbitLabelPriority, validPreparedPlanetP
 import { preparePlanetarySystem } from "./prepare-planetary-system.mjs";
 import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mjs";
 import { projectHeliocentricView } from "./heliocentric-view.mjs";
-import { PREPARED_MERCURY_SCENE } from "../planets/mercury/runtime/preparedScene.mjs";
+import PREPARED_MERCURY_SCENE from "../../objects/preparation/mercury/scene.json" with {type: "json"};
 
 const AU_KILOMETERS = 149597870.7;
 const PHYSICAL_INPUTS = [

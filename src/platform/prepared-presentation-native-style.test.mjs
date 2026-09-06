@@ -1,3 +1,4 @@
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { OBJECTS } from '../../site/objects.mjs';
@@ -6,7 +7,7 @@ import { mountPreparedPresentation } from './prepared-presentation.mjs';
 import { requireObjectRuntimeDefinition } from '../../tools/object-runtime-contract.mjs';
 
 for (const object of OBJECTS) {
-  const { runtimeDefinition } = await import(new URL(`../planets/${object.id}/runtime/definition.mjs`, import.meta.url));
+  const runtimeDefinition = await loadObjectTestDefinition(object.id);
   test(`${object.id}: an empty prepared declaration does not write native cssText`, () => {
     const fixture = retainedPresentationFixture(runtimeDefinition);
     const writes = [], nativeCreate = fixture.document.createElement.bind(fixture.document);

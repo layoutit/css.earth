@@ -1,7 +1,15 @@
 import { isObjectBrowserProfile } from "./object-browser-profile.mjs";
 import assert from "node:assert/strict";
+import { authoredObject } from '../../tools/authored-object.mjs';
 
 export async function loadPlanetBrowserProfile(planet) {
+  if (await authoredObject(planet.id)) {
+    const { browserProfile } = await import(new URL(`../../tests/objects/browser/${planet.id}/browser-profile.mjs`, import.meta.url).href);
+    assert.ok(isObjectBrowserProfile(browserProfile), `${planet.id}: profile must use the common browser-profile factory`);
+    const { default: controls } = await import(new URL(`../../objects/preparation/${planet.id}/controls.json`, import.meta.url).href, {with: {type: 'json'}});
+    assert.deepEqual(browserProfile.objectControls, controls, `${planet.id}: browser profile must use prepared JSON controls`);
+    return validatePlanetBrowserProfile(planet, browserProfile, controls);
+  }
   const { objectControls } = await import(new URL(
     `../../src/planets/${planet.id}/site/control-content.mjs`, import.meta.url,
   ).href);

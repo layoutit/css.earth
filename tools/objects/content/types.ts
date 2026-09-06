@@ -1,0 +1,191 @@
+export interface TitleSource {
+  label: string;
+  viewBox: string;
+  width: number;
+  height: number;
+  path: string;
+  source: string;
+  sourceUrl: string;
+  sourceSha256: string;
+  weight: number;
+  opticalSize: number;
+  fontSize: number;
+  letterSpacing: number;
+  baseline: number;
+  xOrigin: string;
+  sourceGenerator: string;
+}
+
+export interface LensLegendRecipe {
+  kind: "scale" | "categories";
+  title: string;
+  meta?: string;
+  image?: string;
+  width?: number;
+  height?: number;
+  labels?: string[];
+  recipe?: { palette: number[][]; labels: string[] };
+  items?: Array<{ label: string; description: string; color: string | number[] }>;
+  sourceUrl?: string;
+  sourcePath?: string;
+  rasterRecipe?: {
+    crop: { left: number; top: number; width: number; height: number };
+    dividerRows?: { threshold: number; expectedRuns: number; minimumCoverage: number };
+    outputWidth: number;
+    outputHeight: number;
+  };
+}
+
+export interface LensSource {
+  id: string;
+  path?: string;
+  url?: string;
+}
+
+export interface LensRecipe {
+  id: string;
+  label: string;
+  shortLabel?: string;
+  description: string;
+  title: string;
+  filter?: string;
+  qualification?: string;
+  falseColor?: boolean;
+  view?: "exterior" | "interior";
+  thumbnail: string;
+  surface?: string;
+  poles?: string;
+  material?: string;
+  legend?: LensLegendRecipe;
+  source: LensSource;
+}
+
+export interface ChartRecipe {
+  id: string;
+  titleKey: string;
+  open?: boolean;
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  source: LensSource;
+}
+
+export interface GalleryRecipe {
+  id: string;
+  titleKey: string;
+  open?: boolean;
+  qualification?: string;
+  items: Array<{
+    id: string;
+    label: string;
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+    caption: string;
+    sourceUrl: string;
+  }>;
+}
+
+export interface ObjectContentSource {
+  schema: "cssearth-object-content@1";
+  version: 1;
+  id: string;
+  displayName: string;
+  title: TitleSource;
+  panel: {
+    introduction: string;
+    facts: Array<{ id: string; label: string; value: string }>;
+    moreFacts?: Array<{ id: string; label: string; value: string }>;
+  };
+  lenses: {
+    titleKey: "lenses";
+    defaultLens: string;
+    controls: LensRecipe[];
+  };
+  settings: {
+    titleKey: "settings";
+    controls: Array<{
+      kind: "cycle" | "toggle";
+      name: string;
+      label: string;
+      state?: string;
+      checked?: boolean;
+    }>;
+  };
+  charts: ChartRecipe[];
+  galleries?: GalleryRecipe[];
+  resources: Array<{ label: string; role: string; description: string; href: string }>;
+  provenance: Record<string, { id?: string; path?: string; url?: string; credit?: string; license?: string }>;
+}
+
+export interface PreparedObjectContent {
+  objectId: string;
+  title: TitleSource & {
+    renderViewBox: string;
+    renderWidth: number;
+    renderHeight: number;
+    renderPathOffsetY: number;
+  };
+  introduction: string;
+  facts: ObjectContentSource["panel"]["facts"];
+  moreFacts: NonNullable<ObjectContentSource["panel"]["moreFacts"]>;
+  lenses: {
+    title: { label: string; src: string; width: number; height: number };
+    defaultLens: string;
+    controls: Array<Record<string, unknown>>;
+  };
+  settings: {
+    title: { label: string; src: string; width: number; height: number };
+    controls: ObjectContentSource["settings"]["controls"];
+  };
+  charts: Array<ChartRecipe & { title: { label: string } }>;
+  galleries: Array<GalleryRecipe & { title: { label: string; src: string; width: number; height: number } }>;
+  resources: ObjectContentSource["resources"];
+}
+
+export interface PreparedRasterAssets {
+  surfaces?: Record<string, { url?: string; url2x?: string }>;
+  materials?: Record<string, { url?: string; url2x?: string }>;
+  poles?: { url?: string; url2x?: string };
+  atmosphere?: { materialUrl?: string; observationUrl?: string; lightingUrl?: string };
+  interior?: Record<string, unknown>;
+}
+
+export interface ContentPreparationConfig {
+  contentPath?: string;
+  assetsPath?: string;
+  chartsPath?: string;
+}
+
+export interface ContentPreparationContext {
+  sourceDirectory: string;
+  publicDirectory: string;
+  outputDirectory: string;
+  config: ContentPreparationConfig;
+}
+
+export interface PreparedObjectContentAssets {
+  id: string;
+  content: PreparedObjectContentDocument;
+  lenses: PreparedObjectContent["lenses"];
+  controls: {
+    lenses: PreparedObjectContent["lenses"];
+    settings: PreparedObjectContent["settings"];
+  };
+  files: readonly string[];
+}
+
+export interface PreparedObjectContentDocument {
+  schema: "cssearth-prepared-content@1";
+  objectId: string;
+  title: PreparedObjectContent["title"];
+  introduction: string;
+  facts: PreparedObjectContent["facts"];
+  moreFacts: PreparedObjectContent["moreFacts"];
+  charts: PreparedObjectContent["charts"];
+  galleries: PreparedObjectContent["galleries"];
+  resources: PreparedObjectContent["resources"];
+  provenance: ObjectContentSource["provenance"];
+}

@@ -96,6 +96,42 @@ async function readControls(file, source, closure) {
   return scope.get('objectControls');
 }
 
+function authoredRecipe(descriptor) {
+  const recipe = descriptor.properties?.recipe;
+  if (!recipe || typeof recipe !== 'object' || Array.isArray(recipe) || recipe.schema !== 'cssearth-authored-object@1' || !Array.isArray(recipe.sources)) return null;
+  const sources = recipe.sources;
+  if (!sources.length || sources.some(reference => !reference || typeof reference !== 'object' ||
+      !/^[a-z][a-z0-9.-]*$/.test(reference.id) || typeof reference.path !== 'string' ||
+      !/^[a-f0-9]{64}$/.test(reference.sha256))) {
+    throw new TypeError('Authored recipe sources are invalid.');
+  }
+  if (new Set(sources.map(reference => reference.id)).size !== sources.length) throw new TypeError('Authored recipe sources are duplicated.');
+  return recipe;
+}
+
+async function readAuthoredDefinition({ objectId, descriptor, root, source, closure }) {
+  const recipe = authoredRecipe(descriptor);
+  if (!recipe) return null;
+  const directory = resolve(root, `src/planets/${objectId}`);
+  for (const reference of recipe.sources) {
+    const path = resolve(directory, reference.path);
+    if (relative(directory, path).startsWith('../')) throw new TypeError(`Authored source escapes its object package: ${reference.path}.`);
+    const bytes = await source(path);
+    if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError(`Authored source digest drifted: ${reference.path}.`);
+    closure.add(path);
+  }
+  const preparation = resolve(root, `objects/preparation/${objectId}`);
+  const runtimePath = resolve(preparation, 'runtime.json');
+  const scenePath = resolve(preparation, 'scene.json');
+  const runtime = JSON.parse(await source(runtimePath));
+  const scene = JSON.parse(await source(scenePath));
+  closure.add(runtimePath); closure.add(scenePath);
+  if (runtime.id !== objectId || runtime.schema !== PREPARED_OBJECT_RUNTIME_SCHEMA) throw new TypeError('Authored runtime identity is invalid.');
+  if (!isDeepStrictEqual(scene.worldFrame, descriptor.properties.worldFrame)) throw new TypeError('Authored physical frame differs from the descriptor world frame.');
+  requireObjectRuntimeDefinition(runtime, { objectId });
+  return runtime;
+}
+
 export async function readDescriptorDefinition({ objectId, descriptorFile, root, source }) {
   const descriptorPath = resolve(root, descriptorFile), descriptor = JSON.parse(await source(descriptorPath));
   if (descriptor.schema !== 'cssearth-object@1' || descriptor.id !== objectId || descriptor.type !== 'layered-body' ||
@@ -111,11 +147,17 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
   const payload = JSON.parse(bytes);
   if (payload.schema !== 'cssearth-prepared-object@1' || payload.id !== objectId || payload.type !== descriptor.type || payload.format !== reference.format ||
     Object.keys(payload).some(key => !['schema', 'id', 'type', 'format', 'data'].includes(key))) throw new TypeError('Prepared JSON identity or format does not match its descriptor.');
+  const closure = new Set([descriptorPath, payloadPath]);
+  const authored = await readAuthoredDefinition({ objectId, descriptor, root, source, closure });
+  if (authored) {
+    if (!isDeepStrictEqual(payload.data, authored)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
+    return { plan: authored, definition: authored, closure, payloadPath };
+  }
   const directory = resolve(root, `src/planets/${objectId}`);
   const definitionPath = resolve(directory, 'runtime/definition.mjs'), presentationPath = resolve(directory, 'runtime/preparedPresentation.mjs'), controlPath = resolve(directory, 'site/control-content.mjs');
   if (requirePreparedDefinitionSource(await source(definitionPath)) !== objectId) throw new TypeError('Prepared source definition names another object.');
   const plan = readPreparedPresentationModule(await source(presentationPath));
-  const closure = new Set([descriptorPath, payloadPath, definitionPath, presentationPath, controlPath]);
+  closure.add(definitionPath); closure.add(presentationPath); closure.add(controlPath);
   const controls = await readControls(controlPath, source, closure);
   const expected = JSON.parse(JSON.stringify({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: objectId, controls }));
   if (!isDeepStrictEqual(payload.data, expected)) throw new TypeError('Prepared JSON bytes differ from the checked presentation and control definitions.');

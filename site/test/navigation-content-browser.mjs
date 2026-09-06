@@ -14,24 +14,36 @@ try {
     const retained = selectors.map(selector => document.querySelector(selector));
     const sharedStyles = [...document.head.querySelectorAll('style[data-vite-dev-id]')]
       .filter(style => !style.dataset.viteDevId.includes('/src/planets/'));
+    const surfaceStyles = sharedStyles.filter(style => style.dataset.viteDevId.endsWith('/src/renderers/css/styles/planet-surfaces.css'));
     const camera = document.querySelector('.polycss-camera');
+    const leaf = document.querySelector('.mercury-body > s:not(.mercury-polar)');
+    const surfaceBefore = getComputedStyle(leaf).backgroundImage;
     const before = getComputedStyle(camera).cssText + getComputedStyle(camera).perspective + getComputedStyle(camera).width;
     const controller = new AbortController();
     const transport = createNavigationContent({ documentTarget: document, windowTarget: window });
     const content = await transport.load({ id: 'venus', name: 'Venus', route: '/venus/' }, { signal: controller.signal });
     const afterPreparation = getComputedStyle(camera).cssText + getComputedStyle(camera).perspective + getComputedStyle(camera).width;
-    const targetStyleBefore = [...document.head.querySelectorAll('style[data-vite-dev-id]')]
-      .some(style => style.dataset.viteDevId.endsWith('/venus/runtime/styles.css'));
+    const surfaceAfterPreparation = getComputedStyle(leaf).backgroundImage;
     window.dispatchEvent(new Event('pagehide'));
+    // pagehide unmounts the renderer. Keep its measured leaf as a CSS probe;
+    // this content-only test does not mount the destination renderer.
+    const surfaceProbe = document.createElement('div');
+    surfaceProbe.className = 'polycss-scene';
+    surfaceProbe.setAttribute('aria-hidden', 'true');
+    leaf.style.backgroundImage = surfaceBefore;
+    surfaceProbe.append(leaf);
+    document.querySelector('.planet-stage').append(surfaceProbe);
     const shell = mountPlanetShell({ objectId: 'mercury', documentTarget: document, windowTarget: window });
     shell.setObject(content);
     const first = {
       sourceUnchangedDuringPreparation: before === afterPreparation,
-      targetStyleBefore,
+      surfaceBefore,
+      surfaceAfterPreparation,
       identities: selectors.map((selector, index) => document.querySelector(selector) === retained[index]),
       sharedStylesRetained: sharedStyles.every(style => style.isConnected),
-      objectStyles: [...document.head.querySelectorAll('style[data-vite-dev-id]')]
-        .filter(style => /\/src\/planets\/[^/]+\/runtime\/styles.css$/.test(style.dataset.viteDevId)).map(style => style.dataset.viteDevId.split('/').at(-3)),
+      surfaceStyleCount: surfaceStyles.length,
+      surfaceStylesRetained: surfaceStyles.every(style => style.isConnected),
+      selectedSurface: getComputedStyle(leaf).backgroundImage,
       selectedSearch: document.querySelector('.planet-sidebar-search').value,
       activeNavbar: document.querySelector('.scale-planet.active').dataset.planetId,
       activeBrowser: document.querySelector('.planet-object-link.is-active').dataset.objectId,
@@ -43,17 +55,23 @@ try {
     const second = {
       identities: selectors.map((selector, index) => document.querySelector(selector) === retained[index]),
       selectedSearch: document.querySelector('.planet-sidebar-search').value,
-      objectStyles: [...document.head.querySelectorAll('style[data-vite-dev-id]')]
-        .filter(style => /\/src\/planets\/[^/]+\/runtime\/styles.css$/.test(style.dataset.viteDevId)).map(style => style.dataset.viteDevId.split('/').at(-3)),
+      surfaceStylesRetained: surfaceStyles.every(style => style.isConnected),
+      selectedSurface: getComputedStyle(leaf).backgroundImage,
     };
+    surfaceProbe.remove();
     shell.destroy();
     return { first, second };
   });
   assert.equal(proof.first.sourceUnchangedDuringPreparation, true);
-  assert.equal(proof.first.targetStyleBefore, false);
+  assert.match(proof.first.surfaceBefore, /\/scenes\/mercury\//);
+  assert.equal(proof.first.surfaceAfterPreparation, proof.first.surfaceBefore,
+    'Preparing Venus must not apply its scoped surface styling to the retained Mercury scene.');
   assert.ok(proof.first.identities.every(Boolean));
   assert.equal(proof.first.sharedStylesRetained, true);
-  assert.deepEqual(proof.first.objectStyles, ['venus']);
+  assert.equal(proof.first.surfaceStyleCount, 1);
+  assert.equal(proof.first.surfaceStylesRetained, true);
+  assert.match(proof.first.selectedSurface, /\/scenes\/venus\/venus-clouds@2x\.webp/,
+    'Committing Venus content must activate its scoped surface image.');
   assert.equal(proof.first.selectedSearch, 'Venus');
   assert.equal(proof.first.activeNavbar, 'venus');
   assert.equal(proof.first.activeBrowser, 'venus');
@@ -61,6 +79,8 @@ try {
   assert.equal(proof.first.aboutLabelBound, true);
   assert.ok(proof.second.identities.every(Boolean));
   assert.equal(proof.second.selectedSearch, 'Mercury');
-  assert.deepEqual(proof.second.objectStyles, ['mercury']);
-  console.log(JSON.stringify({ status: 'passed', checks: 13, ...proof }));
+  assert.equal(proof.second.surfaceStylesRetained, true);
+  assert.equal(proof.second.selectedSurface, proof.first.surfaceBefore,
+    'Returning to Mercury must restore its image using the retained shared stylesheet.');
+  console.log(JSON.stringify({ status: 'passed', checks: 17, ...proof }));
 } finally { await browser.close(); }

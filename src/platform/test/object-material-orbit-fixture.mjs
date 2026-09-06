@@ -1,3 +1,4 @@
+import {loadObjectTestDefinition} from '../../../tools/object-test-data.mjs';
 import { createObjectRuntime } from '../object-runtime.mjs';
 import { createSceneLifetime } from '../scene-lifetime.mjs';
 import { createPreparedResidency } from '../prepared-residency.mjs';
@@ -6,7 +7,7 @@ import { retainedPresentationFixture } from './object-runtime-package.mjs';
 import { Surface, orbitFixture } from './orbit-fixture.mjs';
 
 const definitions = new Map(await Promise.all(['mercury', 'venus', 'mars'].map(async id =>
-  [id, (await import(`../../planets/${id}/runtime/definition.mjs`)).runtimeDefinition])));
+  [id, await loadObjectTestDefinition(id)])));
 const identity = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)';
 
 // Actual common mount, resources, selection, orbit and package presentation.
