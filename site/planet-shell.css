@@ -47,7 +47,7 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
 }
 
 .prepared-volume-context {
-  opacity: .7;
+  opacity: calc(.15 + .55 * var(--universe-galactic-fade, 0));
 }
 
 .prepared-point-field-stars {
