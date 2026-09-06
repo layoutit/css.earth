@@ -284,11 +284,11 @@ test("publishes the prepared Earth title and retained scene", async () => {
           .metadata();
         return { width, height };
       })),
-    [{ width: 4096, height: 3536 }, { width: 2048, height: 512 }],
+    [PREPARED_EARTH_SCENE.body.assets.surface.pages[0], { width: 2048, height: 512 }],
   );
   const pages = PREPARED_EARTH_SCENE.body.assets.surface.pages;
-  assert.equal(pages.length, 7);
-  assert.ok(pages.every(({ width, height }) => width <= 4096 && height <= 4096));
+  assert.equal(pages.length, 49);
+  assert.ok(pages.every(({ width, height }) => width === 4096 && height <= 1024));
   for (const lens of PREPARED_EARTH_LENSES.controls.filter(lens => lens.surfaceUrls)) {
     assert.equal(lens.surfaceUrls.length, pages.length);
     for (const [index, url] of lens.surfaceUrls.entries()) {

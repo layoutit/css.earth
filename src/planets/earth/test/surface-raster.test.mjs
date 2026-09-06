@@ -129,14 +129,14 @@ test("Earth's production atlas packs 448 unique exterior cells and reuses exactl
   const cells = body.map(preparedCell);
   const { gutter } = EARTH_SURFACE_ATLAS;
   const pages = PREPARED_EARTH_SCENE.body.assets.surface.pages;
-  assert.equal(pages.length, 7);
+  assert.equal(pages.length, 49);
   assert.equal(PREPARED_EARTH_SCENE.body.assets.surface.urls.length, pages.length);
   assert.equal(new Set(PREPARED_EARTH_SCENE.body.assets.surface.urls).size, pages.length);
   assert.deepEqual([...new Set(cells.map(({ page }) => page))], pages.map((_, index) => index));
   for (const [page, dimensions] of pages.entries()) {
     assert.equal(dimensions.width, EARTH_SURFACE_ATLAS.pageSize);
     assert.ok(Number.isInteger(dimensions.height) && dimensions.height > 0 &&
-      dimensions.height <= EARTH_SURFACE_ATLAS.pageSize && dimensions.height % 4 === 0);
+      dimensions.height <= EARTH_SURFACE_ATLAS.maximumDeliveryHeight && dimensions.height % 4 === 0);
     const occupiedBottom = Math.max(...cells.filter((cell) => cell.page === page)
       .map((cell) => cell.y + cell.size + gutter));
     assert.ok(dimensions.height >= occupiedBottom && dimensions.height - occupiedBottom < 4,
@@ -176,8 +176,14 @@ test("Earth's production atlas packs 448 unique exterior cells and reuses exactl
   if (staging) {
     assert.deepEqual(staging.atlas, EARTH_SURFACE_ATLAS);
     assert.deepEqual(staging.pages, pages);
+    assert.equal(staging.encodingPages.length, 7, "the accepted source encoding layout stays fixed");
+    assert.equal(staging.pageSources.length, pages.length);
     assert.equal(staging.cells.length, 448);
     for (const cell of staging.cells) {
+      const address = staging.pageSources[cell.page];
+      assert.equal(address.top % 4, 0, "all canonical densities retain their original texel phase");
+      assert.deepEqual(cell.encoding, { page: address.page, x: cell.x, y: cell.y + address.top });
+      assert.ok(address.top + pages[cell.page].height <= staging.encodingPages[address.page].height);
       const leaf = byIndex.get(cell.index);
       assert.deepEqual(preparedCell(leaf),
         { index: cell.index, page: cell.page, x: cell.x, y: cell.y, size: cell.size });
@@ -233,7 +239,7 @@ test("Earth raster planning rejects malformed geometry, addresses, and inconsist
   assert.equal(plan.cells.length, 1);
 });
 
-test("Earth raster planner starts each page with independent shelves and leaves reuse allocation-free", () => {
+test("Earth raster planner preserves encoding shelves while bounding delivery units and reuse", () => {
   const plan = createEarthSurfaceRasterPlan();
   const pages = plan.pages;
   assert.deepEqual(pages, []);
@@ -249,21 +255,27 @@ test("Earth raster planner starts each page with independent shelves and leaves 
   for (let index = 1; index <= perPage; index++) {
     const cell = plan.prepare(geometry(), presentation(), index);
     const localIndex = index % perPage;
-    assert.deepEqual([cell.page, cell.x, cell.y], [Math.floor(index / perPage),
+    assert.deepEqual([cell.encoding.page, cell.encoding.x, cell.encoding.y], [Math.floor(index / perPage),
       gutter + (localIndex % columns) * stride,
       gutter + Math.floor(localIndex / columns) * stride]);
+    assert.equal(cell.page, Math.floor(index / columns));
+    assert.equal(cell.x, cell.encoding.x);
+    assert.equal(cell.y + plan.pageSources[cell.page].top, cell.encoding.y);
   }
   assert.equal(plan.pages, pages, "consumers retain a live page list while preparing");
-  assert.deepEqual(pages, [
+  assert.deepEqual(plan.encodingPages, [
     { width: pageSize, height: Math.ceil(columns * stride / 4) * 4 },
     { width: pageSize, height: Math.ceil(stride / 4) * 4 },
   ]);
+  assert.equal(pages.length, columns + 1);
+  for (const dimensions of pages) assert.deepEqual(dimensions,
+    { width: pageSize, height: Math.ceil(stride / 4) * 4 });
   const allocation = JSON.stringify({ cells: plan.cells, pages });
   assert.equal(plan.prepare(geometry(), presentation(), 0), first);
   assert.equal(JSON.stringify({ cells: plan.cells, pages }), allocation,
     "reusing a cell from an earlier page must not advance the current shelf");
   const next = plan.prepare(geometry(), presentation(), perPage + 1);
-  assert.deepEqual([next.page, next.x, next.y], [1, gutter + stride, gutter]);
+  assert.deepEqual([next.page, next.x, next.y], [columns, gutter + stride, gutter]);
 });
 
 // Test source pixels have separately observable longitude, latitude, and mixed

@@ -17,14 +17,18 @@ assert.ok([1, 2].includes(dpr) && repetitions >= 1 && repetitions <= 3);
 const output = resolve(option("output", `output/playwright/entity-performance-${mode}-dpr${dpr}-${Date.now()}`));
 await mkdir(output, { recursive: true });
 const capture = option("capture", "trace") === "trace";
+const traceCategories = option("trace-categories", "devtools.timeline,disabled-by-default-devtools.timeline,disabled-by-default-v8.cpu_profiler,disabled-by-default-devtools.screenshot,blink.user_timing");
 const viewport = { width: 1440, height: 1000 };
-const report = { schema: "cssearth-entity-performance@1", base, mode, output, dpr, repetitions, viewport, capture,
+const report = { schema: "cssearth-entity-performance@1", base, mode, output, dpr, repetitions, viewport, capture, traceCategories,
   commit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   workingTree: execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim(),
   harnessSha256: createHash("sha256").update(await readFile(new URL(import.meta.url))).digest("hex"),
   environment: { platform: platform(), osRelease: release(), cpu: cpus()[0].model, cores: cpus().length, memoryBytes: totalmem(),
     cpuThrottle: 1, networkThrottle: "none", servedCwd: process.cwd(), cache: "cold: isolated context; warm: same mounted scene and HTTP cache" }, runs: [] };
 const browser = await chromium.launch({ channel: "chrome", headless: true }); report.browser = browser.version();
+report.preparedModules = Object.fromEntries(await Promise.all([
+  "preparedScene.mjs", "preparedLenses.mjs", "preparedPresentation.mjs", "preparedPlaces.mjs",
+].map(async name => [name, createHash("sha256").update(await readFile(new URL(`../runtime/${name}`, import.meta.url))).digest("hex")])));
 try {
   for (let repetition = 1; repetition <= repetitions; repetition++) {
     const context = await browser.newContext({ viewport, deviceScaleFactor: dpr, ...(capture ? { recordVideo: { dir: output, size: viewport } } : {}) });
@@ -117,7 +121,7 @@ try {
         await page.evaluate(() => { const d = window.__entityPerf; d.phases = []; d.frames = []; d.longTasks = []; d.inputs = []; d.peaks = {}; d.queryPaints = []; });
         const trace = [], collect = ({ value }) => trace.push(...value);
         cdp.on("Tracing.dataCollected", collect);
-        if (capture) await cdp.send("Tracing.start", { categories: "devtools.timeline,disabled-by-default-devtools.timeline,disabled-by-default-v8.cpu_profiler,disabled-by-default-devtools.screenshot,blink.user_timing", transferMode: "ReportEvents" });
+        if (capture) await cdp.send("Tracing.start", { categories: traceCategories, transferMode: "ReportEvents" });
         async function phase(name, action) {
           const start = await page.evaluate(name => window.__entityPerf.begin(name), name);
           await action(); await page.evaluate(({ name, start }) => window.__entityPerf.end(name, start), { name, start });
@@ -162,7 +166,7 @@ try {
         network.clear(); const start = performance.now(), reloadTrace = [];
         const collectReload = ({ value }) => reloadTrace.push(...value);
         cdp.on("Tracing.dataCollected", collectReload);
-        if (capture) await cdp.send("Tracing.start", { categories: "devtools.timeline,disabled-by-default-devtools.timeline,disabled-by-default-v8.cpu_profiler,disabled-by-default-devtools.screenshot,blink.user_timing", transferMode: "ReportEvents" });
+        if (capture) await cdp.send("Tracing.start", { categories: traceCategories, transferMode: "ReportEvents" });
         try {
           await page.reload();
           await page.waitForFunction(() => window.__cssEarth?.ready && window.__earth?.ready && document.querySelector('[data-entity-card]').dataset.entityId === "3435910");

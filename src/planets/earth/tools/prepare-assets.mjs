@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, rm } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
 import { textureTintFactors } from "@layoutit/polycss";
 import { bakeEarthSurfaceRaster, EARTH_SURFACE_ATLAS, earthSurfacePageUrls } from "./surface-raster.mjs";
+import { writeEarthSurfaceDelivery } from "./surface-page-delivery.mjs";
 import {
   EARTH_MATERIAL_FRAMES_PER_SHARD,
   EARTH_MATERIAL_TILE_SIZE,
@@ -17,7 +18,8 @@ import { ensureEarthPreparationDirectories, EARTH_PUBLIC_ROOT, EARTH_STAGING_ROO
 sharp.concurrency(2);
 const surfacesOnly = process.argv.includes("--surfaces-only");
 const materialsOnly = process.argv.includes("--materials-only");
-if (surfacesOnly && materialsOnly) {
+const atlasesOnly = process.argv.includes("--atlases-only");
+if ([surfacesOnly, materialsOnly, atlasesOnly].filter(Boolean).length > 1) {
   throw new TypeError("Earth preparation mode must be singular.");
 }
 const surfaceQuality = numericArgument("--surface-quality=") ?? 84;
@@ -32,7 +34,7 @@ const [EARTH_ATMOSPHERE_MODEL] = await Promise.all([
   readEarthAtmosphereModel(),
   validateEarthSourceGroup("scene"),
   ...(materialsOnly ? [] : [validateEarthSourceGroup("lenses")]),
-  ...(surfacesOnly || materialsOnly ? [] : [
+  ...(surfacesOnly || materialsOnly || atlasesOnly ? [] : [
     validateEarthSourceGroup("stars"),
     validateEarthSourceGroup("interior"),
   ]),
@@ -66,7 +68,8 @@ if (materialsOnly) {
   if (surfaceOutputRoot === EARTH_PUBLIC_ROOT) {
     await removeLegacyExteriorDensityAssets();
   }
-  if (!surfacesOnly) {
+  if (atlasesOnly) await prepareInteriorOuterPoles();
+  else if (!surfacesOnly) {
     await Promise.all([
       prepareEarthMaterialBanks(),
       prepareInteriorAssets(),
@@ -165,14 +168,17 @@ async function writeSphereAssets({ data, width, height, channels, density,
   }
   if (projectiveSurface) {
     const urls = earthSurfacePageUrls(name, surfaceRasterPlan.pages.length, suffix);
-    for (const [page, url] of urls.entries()) {
-      const raster = bakeEarthSurfaceRaster(surfaceData, {
-        width: surfaceWidth, height: surfaceHeight, channels,
-      }, surfaceRasterPlan.cells, surfaceWidth / 1024, page);
-      await sharp(raster.data, { raw: raster })
-        .webp({ ...webp, alphaQuality: 100 })
-        .toFile(resolve(outputRoot, url.split("/").at(-1)));
-    }
+    const encodingCells = surfaceRasterPlan.cells.map(cell => ({ ...cell, ...cell.encoding }));
+    const receipt = await writeEarthSurfaceDelivery({ plan: surfaceRasterPlan, density: surfaceWidth / 1024,
+      encodeSourcePage: async page => {
+        const raster = bakeEarthSurfaceRaster(surfaceData, {
+          width: surfaceWidth, height: surfaceHeight, channels,
+        }, encodingCells, surfaceWidth / 1024, page);
+        return sharp(raster.data, { raw: raster }).webp({ ...webp, alphaQuality: 100 }).toBuffer();
+      },
+      writePage: (page, bytes) => writeFile(resolve(outputRoot, urls[page].split("/").at(-1)), bytes),
+    });
+    await writeFile(resolve(EARTH_STAGING_ROOT, `${name}${suffix}-delivery.json`), JSON.stringify(receipt));
   } else {
     const oriented = orientLatitudeBands(surfaceData,
       { width: surfaceWidth, height: surfaceHeight, channels }, bandCount);

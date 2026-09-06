@@ -1,10 +1,11 @@
 import { prepareProjectiveTextureLayer } from "../../../platform/projective-surface-raster.mjs";
 
-// One canonical 8K-source atlas. These are prepared pixels, not display-DPR
-// choices. The shelf layout avoids allocating a largest-size tile for every
-// latitude. Four transparent pixels separate all covered polygons.
+// The accepted 8K-source encoding layout stays fixed. Deliver each shelf as an
+// independent lossless strip so zooming cannot require a 16 MP image decode.
+// Density, source sampling and the four-pixel gutters remain unchanged.
 export const EARTH_SURFACE_ATLAS = Object.freeze({
   pageSize: 4096, density: 8, gutter: 4,
+  maximumDeliveryHeight: 1024,
   sourceWidth: 2048, sourceHeight: 1024,
 });
 const IDENTITY = "1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1";
@@ -17,11 +18,14 @@ export function earthSurfacePageUrls(name, pageCount, suffix = "") {
 export function createEarthSurfaceRasterPlan() {
   const cells = [];
   const pages = [];
+  const encodingPages = [], pageSources = [], shelves = new Map();
   let shelfX = 0, shelfY = 0, shelfHeight = 0;
   let page = 0;
   return {
     cells,
     pages,
+    encodingPages,
+    pageSources,
     prepare(geometry, presentation, index) {
       const matrix = String(geometry?.matrix).split(",").map(Number);
       if (matrix.length !== 16 || matrix.some(value => !Number.isFinite(value)) ||
@@ -83,7 +87,7 @@ export function createEarthSurfaceRasterPlan() {
         layer: { ...layer, frameMatrix: frameMatrix.join(","), textureMatrix: IDENTITY } };
       const existing = cells[index];
       if (existing) {
-        const { x, y, page, ...previous } = existing;
+        const { x, y, page, encoding, ...previous } = existing;
         if (JSON.stringify(previous) !== JSON.stringify(facts)) {
           throw new Error("Earth cutaway and exterior surface geometry diverged.");
         }
@@ -103,12 +107,25 @@ export function createEarthSurfaceRasterPlan() {
         shelfY = 0;
         shelfHeight = 0;
       }
-      const cell = { ...facts, page, x: shelfX + EARTH_SURFACE_ATLAS.gutter,
+      const encoding = { page, x: shelfX + EARTH_SURFACE_ATLAS.gutter,
         y: shelfY + EARTH_SURFACE_ATLAS.gutter };
+      const shelfKey = `${page}:${shelfY}`;
+      if (!shelves.has(shelfKey)) {
+        shelves.set(shelfKey, pages.length);
+        pages.push({ width: EARTH_SURFACE_ATLAS.pageSize, height: 0 });
+        // Four-pixel alignment preserves the exact texel phase in the source
+        // and canonical cutaway densities as well as the full-density surface.
+        pageSources.push({ page, top: Math.floor(shelfY / 4) * 4 });
+      }
+      const deliveryPage = shelves.get(shelfKey);
+      const cell = { ...facts, page: deliveryPage, x: encoding.x,
+        y: encoding.y - pageSources[deliveryPage].top, encoding };
       shelfX += stride;
       shelfHeight = Math.max(shelfHeight, stride);
-      pages[page] = { width: EARTH_SURFACE_ATLAS.pageSize,
+      encodingPages[page] = { width: EARTH_SURFACE_ATLAS.pageSize,
         height: Math.ceil((shelfY + shelfHeight) / 4) * 4 };
+      pages[deliveryPage].height = Math.max(pages[deliveryPage].height,
+        Math.ceil((cell.y + cell.size + EARTH_SURFACE_ATLAS.gutter) / 4) * 4);
       cells.push(cell);
       return cell;
     },

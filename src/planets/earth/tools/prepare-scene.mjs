@@ -265,7 +265,8 @@ await ensureEarthPreparationDirectories();
 if (surfaceRasterPlan.cells.length !== 448) throw new Error("Earth surface raster coverage is incomplete.");
 await writeFile(resolve(EARTH_STAGING_ROOT, "surface-raster-plan.json"),
   JSON.stringify({ atlas: EARTH_SURFACE_ATLAS, cells: surfaceRasterPlan.cells,
-    pages: surfaceRasterPlan.pages }));
+    pages: surfaceRasterPlan.pages, encodingPages: surfaceRasterPlan.encodingPages,
+    pageSources: surfaceRasterPlan.pageSources }));
 
 function prepareSphereBands(config, visualRotationSeconds) {
   const leaves = [

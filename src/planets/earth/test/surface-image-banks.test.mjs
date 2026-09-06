@@ -3,19 +3,20 @@ import test from "node:test";
 import { runtimeDefinition } from "../runtime/definition.mjs";
 import { earthSurfaceBankInventory } from "../tools/prepared-surface-pages.mjs";
 const banks = earthSurfaceBankInventory();
+const pageCount = banks[0].urls.length;
 import { requireEarthSurfacePages } from "../tools/prepared-surface-pages.mjs";
 import { preparedSelectionFixture } from "../../../platform/test/object-runtime-package.mjs";
 const pages = f => f.residency.stats().pools.find(pool => pool.id === "pages");
 const pendingPages = f => f.jobs.filter(job => !job.done && banks.some(bank => bank.urls.includes(job.url)) && job.image.src);
 const surface = f => f.stage.querySelectorAll("*").find(node => node.classList.contains("earth-body") && !node.classList.contains("earth-body-polar"));
 const cutaway = f => f.stage.querySelectorAll("*").find(node => node.classList.contains("earth-cutaway-body") && !node.classList.contains("earth-cutaway-body-polar"));
-const palette = node => Array.from({ length: 7 }, (_, i) => node.style.getPropertyValue(`--earth-surface-page-${i}`));
+const palette = node => Array.from({ length: pageCount }, (_, i) => node.style.getPropertyValue(`--earth-surface-page-${i}`));
 
-test("Earth's actual prepared inventory has seven complete, exclusive pages per lens", () => {
+test("Earth's actual prepared inventory has complete, exclusive strip pages per lens", () => {
   for (const value of [undefined, [], "/scenes/earth/a.webp", ["/scenes/earth/a.webp", "/scenes/earth/a.webp"]]) {
     assert.throws(() => requireEarthSurfacePages(value), /prepared page URLs/);
   }
-  assert.ok(banks.every(bank => bank.urls.length === 7));
+  assert.ok(banks.every(bank => bank.urls.length === 49));
   const urls = banks.flatMap(bank => bank.urls); assert.equal(new Set(urls).size, urls.length);
 });
 
@@ -23,18 +24,18 @@ test("Earth publishes complete visible palettes with two native decode slots and
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const nodes = f.stage.querySelectorAll("*");
-    assert.deepEqual(palette(cutaway(f)), Array(7).fill("none"));
+    assert.deepEqual(palette(cutaway(f)), Array(pageCount).fill("none"));
     for (const id of ["topography", "night-lights", "cross-section", "normal"]) {
       const previous = palette(surface(f));
       const request = f.selection.dispatch({ kind: "lens", id }); await f.flush();
       assert.equal(pendingPages(f).length, 2); assert.deepEqual(palette(surface(f)), previous);
-      assert.ok(pages(f).resident <= 14);
+      assert.ok(pages(f).resident <= pageCount * 2);
       await f.settle(); assert.equal(await request, true);
       const visible = id === "cross-section" ? cutaway(f) : surface(f);
       const hidden = id === "cross-section" ? surface(f) : cutaway(f);
       assert.deepEqual(palette(visible), banks.find(bank => bank.id === id).urls.map(url => `url("${url}")`));
-      assert.deepEqual(palette(hidden), Array(7).fill("none"));
-      assert.equal(pages(f).resident, 7); assert.equal(pages(f).pending, 0);
+      assert.deepEqual(palette(hidden), Array(pageCount).fill("none"));
+      assert.equal(pages(f).resident, pageCount); assert.equal(pages(f).pending, 0);
       assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
     }
     assert.deepEqual(f.errors, []);
@@ -50,7 +51,7 @@ test("Earth cancelled never-ending pages free both slots before a replacement de
     assert.equal(await old, false); assert.ok(retired.every(job => !job.done && job.image.src === ""));
     assert.equal(pendingPages(f).length, 2); await f.settle(); assert.equal(await next, true);
     retired[0].resolve(); retired[1].reject(new Error("late retired page")); await f.flush();
-    assert.equal(pages(f).resident, 7); assert.equal(pages(f).pending, 0);
+    assert.equal(pages(f).resident, pageCount); assert.equal(pages(f).pending, 0);
     assert.equal(f.selection.state().committed.lensId, "night-lights"); assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });
@@ -62,7 +63,7 @@ test("Earth A/B/A supersession cannot release or publish over the latest page le
     const b = f.selection.dispatch({ kind: "lens", id: "night-lights" }); await f.flush();
     const winner = f.selection.dispatch({ kind: "lens", id: "topography" }); await f.flush();
     await f.settle(); assert.deepEqual(await Promise.all([a, b, winner]), [false, false, true]);
-    assert.equal(f.selection.state().committed.lensId, "topography"); assert.equal(pages(f).resident, 7);
+    assert.equal(f.selection.state().committed.lensId, "topography"); assert.equal(pages(f).resident, pageCount);
     assert.deepEqual(f.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["topography"]);
   } finally { f.restore(); }
 });
@@ -73,7 +74,7 @@ test("Earth returning to the committed bank cancels pending pages without anothe
     const pending = f.selection.dispatch({ kind: "lens", id: "topography" }); await f.flush();
     const count = f.jobs.length;
     assert.equal(await f.selection.dispatch({ kind: "lens", id: "normal" }), true); assert.equal(await pending, false);
-    assert.equal(f.jobs.length, count); assert.equal(pages(f).resident, 7); assert.equal(pages(f).pending, 0);
+    assert.equal(f.jobs.length, count); assert.equal(pages(f).resident, pageCount); assert.equal(pages(f).pending, 0);
   } finally { f.restore(); }
 });
 
@@ -86,11 +87,11 @@ for (const failure of ["page", "pole"]) test(`Earth a ${failure} decode failure 
     const job = failure === "page" ? pendingPages(f)[0] : f.jobs.find(job => !job.done && job.url.includes("topography-poles"));
     assert.ok(job);
     if (failure === "pole") {
-      for (let wave = 0; wave < 7; wave++) { for (const page of pendingPages(f)) { page.done = true; page.resolve(); } await f.flush(); }
+      for (let wave = 0; wave < Math.ceil(pageCount / 2); wave++) { for (const page of pendingPages(f)) { page.done = true; page.resolve(); } await f.flush(); }
       assert.deepEqual(palette(surface(f)), previous);
     }
     job.done = true; job.reject(new Error(`${failure} failed`)); await rejection;
-    assert.deepEqual(palette(surface(f)), previous); assert.equal(pages(f).resident, 7);
+    assert.deepEqual(palette(surface(f)), previous); assert.equal(pages(f).resident, pageCount);
     const retry = f.selection.dispatch({ kind: "lens", id: "topography" }); await f.settle(); assert.equal(await retry, true);
     assert.equal(f.stage.dataset.lens, "topography"); assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
