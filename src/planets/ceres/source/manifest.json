@@ -1,0 +1,86 @@
+{
+  "schema": "cssceres-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "usgs-dawn-fc-global-140m",
+      "path": "ceres-fc-global.png",
+      "expectedBytes": 9750062,
+      "expectedSha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
+      "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public scientific imagery with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Retrieve exact published bytes; pinned 2026-09-05. Source changes require review, not automatic refresh.",
+      "redistribution": "Original binary is reacquired locally and ignored by Git; derived textures retain the source credit.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 4096,
+      "height": 2048,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Preserve the complete published raster, including shadows, mosaic seams, and dark polar gaps. No coverage completion."
+    },
+    {
+      "id": "nasa-dawn-fc-pia19977",
+      "path": "PIA19977.jpg",
+      "expectedBytes": 1033656,
+      "expectedSha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public scientific imagery with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Retrieve exact published bytes; pinned 2026-09-05. Source changes require review, not automatic refresh.",
+      "redistribution": "Original binary is reacquired locally and ignored by Git; derived textures retain the source credit.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 3078,
+      "height": 1537,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Preserve the complete published raster, including shadows, mosaic seams, and dark polar gaps. No coverage completion."
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "wms-capabilities.xml",
+      "expectedBytes": 6483,
+      "expectedSha256": "33c538aca7929dc2bdf589300a34bbc02a696671fd052a9a9c76647a389d499f",
+      "purpose": "USGS WMS 1.1.1 capabilities snapshot: Ceres_FC_global layer, projection, credit, and source resolution. Retrieved 2026-09-05."
+    }
+  ]
+}
