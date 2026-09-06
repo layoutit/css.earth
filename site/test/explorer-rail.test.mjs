@@ -68,11 +68,11 @@ test("Planet information starts the horizontal rail and the legacy Solar System 
   assert.match(railStyles, /\.explorer-about-panel,\s*\.planet-sidebar > \.explorer-settings-panel/u);
   assert.match(
     shellStyles,
-    /:is\([\s\S]*?\.planet-information-panel,[\s\S]*?\.explorer-about-panel,[\s\S]*?\.planet-sidebar > \.explorer-settings-panel[\s\S]*?\)\s*\{[^}]*--explorer-card-padding-inline-start:\s*var\(--explorer-card-padding-left, 20px\);[^}]*--explorer-card-padding-inline-end:\s*14px;[^}]*padding-block:\s*12px 0;[^}]*padding-inline:\s*0;[^}]*border-radius:\s*8px;[^}]*background:\s*var\(--explorer-panel-background\);/u,
+    /:is\([\s\S]*?\.planet-information-panel,[\s\S]*?\.explorer-about-panel,[\s\S]*?\.planet-sidebar > \.explorer-settings-panel[\s\S]*?\)\s*\{[^}]*--explorer-card-padding-inline-start:\s*var\(--explorer-card-padding-left, 20px\);[^}]*--explorer-card-padding-inline-end:\s*16px;[^}]*padding-block:\s*12px 0;[^}]*padding-inline:\s*0;[^}]*border-radius:\s*8px;[^}]*background:\s*var\(--explorer-panel-background\);/u,
   );
   assert.match(
     railStyles,
-    /\.explorer-about-panel h2,[\s\S]*?\.explorer-settings-panel h2\s*\{[^}]*padding:[^}]*11px[^}]*var\(--explorer-card-padding-inline-start\);[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);/u,
+    /\.explorer-about-panel h2,[\s\S]*?\.explorer-settings-panel h2\s*\{[^}]*padding:[^}]*11px[^}]*var\(--explorer-card-padding-inline-start\);[^}]*border-bottom:\s*1\.5px solid rgb\(0 0 0 \/ 50%\);/u,
   );
   assert.match(
     railStyles,
@@ -85,7 +85,7 @@ test("Planet information starts the horizontal rail and the legacy Solar System 
   assert.match(buildConfig, /execSync\("git rev-list --count HEAD"[\s\S]*?return `0\.\$\{commitCount\}`;[\s\S]*?__CSSEARTH_VERSION__:\s*JSON\.stringify\(cssEarthVersion\(\)\)/u);
   assert.match(
     railStyles,
-    /\.explorer-about-introduction\s*\{[^}]*display:\s*grid;[^}]*gap:\s*12px;[^}]*padding:\s*12px[^}]*16px[^}]*var\(--explorer-card-padding-inline-start\);[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);[^}]*font:\s*400 16px\/1\.4 var\(--shell-ui-font\);[\s\S]*?\.explorer-about-introduction p\s*\{[^}]*margin:\s*0;/u,
+    /\.explorer-about-introduction\s*\{[^}]*display:\s*grid;[^}]*gap:\s*12px;[^}]*padding:\s*12px[^}]*16px[^}]*var\(--explorer-card-padding-inline-start\);[^}]*border-bottom:\s*1\.5px solid rgb\(0 0 0 \/ 50%\);[^}]*font:\s*400 16px\/1\.4 var\(--shell-ui-font\);[\s\S]*?\.explorer-about-introduction p\s*\{[^}]*margin:\s*0;/u,
   );
   assert.match(
     railStyles,
@@ -94,11 +94,11 @@ test("Planet information starts the horizontal rail and the legacy Solar System 
   assert.doesNotMatch(railStyles, /\.explorer-about[^}]*color:\s*#(?:b5d8fa|d3e9ff)/u);
   assert.match(
     railStyles,
-    /\.explorer-about-links\s*\{[^}]*display:\s*grid;[\s\S]*?\.explorer-about-row\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*space-between;[^}]*gap:\s*12px;[^}]*min-height:\s*45px;[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);[^}]*font:\s*400 13px\/18px var\(--shell-ui-font\);[^}]*text-transform:\s*uppercase;[\s\S]*?\.explorer-about-link-destination\s*\{[^}]*font:\s*400 13px\/18px var\(--shell-ui-font\);[^}]*text-align:\s*right;[^}]*text-transform:\s*none;/u,
+    /\.explorer-about-links\s*\{[^}]*display:\s*grid;[\s\S]*?\.explorer-about-row\s*\{[^}]*display:\s*flex;[^}]*justify-content:\s*space-between;[^}]*gap:\s*12px;[^}]*min-height:\s*45px;[^}]*border-bottom:\s*1\.5px solid rgb\(0 0 0 \/ 50%\);[^}]*font:\s*400 13px\/18px var\(--shell-ui-font\);[^}]*text-transform:\s*uppercase;[\s\S]*?\.explorer-about-link-destination\s*\{[^}]*font:\s*400 13px\/18px var\(--shell-ui-font\);[^}]*text-align:\s*right;[^}]*text-transform:\s*none;/u,
   );
   assert.match(
     railStyles,
-    /\.explorer-settings-panel \.planet-setting-control\s*\{[^}]*align-items:\s*center;[^}]*min-height:\s*45px;[^}]*padding:[^}]*var\(--explorer-card-padding-inline-start\);[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);[\s\S]*?\.explorer-settings-panel \.planet-setting-text\s*\{[^}]*color:\s*var\(--shell-text\);[^}]*font:\s*400 13px\/18px var\(--shell-ui-font\);[^}]*opacity:\s*1;[^}]*text-transform:\s*uppercase;[\s\S]*?\.explorer-settings-panel \.planet-setting-control::before\s*\{[^}]*content:\s*none;/u,
+    /\.explorer-settings-panel \.planet-setting-control\s*\{[^}]*align-items:\s*center;[^}]*min-height:\s*45px;[^}]*padding:[^}]*var\(--explorer-card-padding-inline-start\);[^}]*border-bottom:\s*1\.5px solid rgb\(0 0 0 \/ 50%\);[\s\S]*?\.explorer-settings-panel \.planet-setting-text\s*\{[^}]*color:\s*var\(--shell-text\);[^}]*font:\s*400 13px\/18px var\(--shell-ui-font\);[^}]*opacity:\s*1;[^}]*text-transform:\s*uppercase;[\s\S]*?\.explorer-settings-panel \.planet-setting-control::before\s*\{[^}]*content:\s*none;/u,
   );
   assert.match(
     railStyles,

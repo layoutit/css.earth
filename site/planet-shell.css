@@ -46,6 +46,10 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   background-image: var(--planet-cubic-sky-high-contrast-image);
 }
 
+body[data-sky-contrast="high"] .prepared-volume-context {
+  opacity: .25;
+}
+
 .planet-cubic-sky-front {
   transform: translateZ(calc(-1 * var(--planet-cubic-sky-half-side)))
     scale(1.002);
@@ -128,13 +132,70 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   pointer-events: auto;
 }
 
+.planet-lens-details-body {
+  user-select: text;
+}
+
+.planet-lens-details-copy {
+  margin: 0;
+  color: var(--shell-text-secondary);
+  font: 400 0.875rem/20px var(--shell-ui-font);
+  overflow-wrap: anywhere;
+}
+
+.planet-lens-texture {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+.planet-surface-minimap {
+  position: relative;
+  margin-inline-end: 4px;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.planet-surface-minimap[data-surface-minimap] {
+  touch-action: none;
+  user-select: none;
+  cursor: crosshair;
+}
+
+.planet-surface-minimap[data-dragging="true"] { cursor: grabbing; }
+.planet-surface-minimap:focus { outline: none; }
+
+.planet-surface-minimap[data-ready="true"] > .planet-lens-texture { opacity: .35; }
+
+.planet-minimap-viewport {
+  display: none;
+  position: absolute;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.planet-surface-minimap[data-ready="true"] .planet-minimap-viewport:not([hidden]) { display: block; }
+
+.planet-minimap-viewport {
+  border: 1px solid rgb(255 255 255 / 50%);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 55%);
+  background-origin: border-box;
+  background-repeat: repeat-x;
+}
+
+.planet-surface-minimap[data-full-view="true"] .planet-minimap-viewport {
+  border-color: transparent;
+  box-shadow: none;
+}
+
 .planet-lens-legend-panel {
   box-sizing: border-box;
   display: block;
   flex: 0 0 auto;
   width: 100%;
-  margin: 0;
-  padding: 2px 0 8px;
+  margin: 4px 0 0;
+  padding: 8px 0 0;
   border: 0;
   border-radius: 0;
   color: var(--shell-text-secondary);
@@ -145,6 +206,15 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
 
 .planet-lens-legend-panel[hidden] {
   display: none;
+}
+
+.planet-lens-legend-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 4px;
+  color: var(--shell-text-muted);
+  font: 400 0.75rem/16px var(--shell-ui-font);
 }
 
 .planet-lens-legend-scale-row {
@@ -279,6 +349,7 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   .planet-gallery-panel,
   .planet-chart-switcher,
   .planet-lenses,
+  .planet-lens-details,
   .planet-resources-panel,
   .planet-settings-panel
 ) {
@@ -287,7 +358,7 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
 }
 
 .planet-information-panel > .planet-selected-panel {
-  padding-bottom: 11px;
+  padding-bottom: 12px;
 }
 
 .planet-information-panel > .planet-factsheet-section {
@@ -300,6 +371,7 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   .planet-gallery-panel,
   .planet-chart-switcher,
   .planet-lenses,
+  .planet-lens-details,
   .planet-resources-panel,
   .planet-settings-panel
 ):has(~ :is(
@@ -307,10 +379,11 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   .planet-gallery-panel,
   .planet-chart-switcher,
   .planet-lenses,
+  .planet-lens-details,
   .planet-resources-panel,
   .planet-settings-panel
 )) {
-  border-bottom: 1px solid rgb(0 0 0 / 50%);
+  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
 }
 
 .planet-factsheet-section > .planet-factsheet-header {
@@ -330,6 +403,7 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   .planet-gallery-panel,
   .planet-chart-switcher,
   .planet-lenses,
+  .planet-lens-details,
   .planet-resources-panel,
   .planet-settings-panel
 ):not([open]) {
@@ -459,6 +533,14 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
   opacity: 0.5;
 }
 
+.planet-panel-icon .material-symbol {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  stroke: none;
+}
+
 .planet-panel-summary:hover .planet-panel-icon,
 .planet-panel-summary:focus-visible .planet-panel-icon {
   opacity: 0.9;
@@ -491,6 +573,7 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
   align-items: center;
   gap: 6px;
   margin-left: auto;
+  transform: translateY(2px);
 }
 
 .planet-title-tag {
@@ -517,7 +600,7 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
 
 .planet-introduction {
   width: 100%;
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   padding: 0 8px 0 0;
   color: inherit;
   font-family: var(--shell-ui-font);
@@ -630,6 +713,10 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
   font-optical-sizing: auto;
   letter-spacing: -0.006em;
   text-wrap: nowrap;
+}
+
+.planet-panel-heading-count {
+  font-weight: 300;
 }
 
 details:not([open]) > .planet-panel-summary .planet-panel-heading {
@@ -800,7 +887,8 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   user-select: none;
 }
 
-.planet-lenses {
+.planet-lenses,
+.planet-lens-details {
   display: block;
   width: 100%;
   margin: 8px 0 0;
@@ -957,10 +1045,10 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 0;
+  gap: 8px;
   max-height: 202px;
-  margin: 2px 0 0;
-  padding: 2px 0 4px;
+  margin: 0;
+  padding: 0 0 4px;
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-color: rgb(255 255 255 / 18%) transparent;
@@ -990,11 +1078,11 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 .planet-observation-control {
   appearance: none;
   display: grid;
-  grid-template-columns: 18px minmax(0, 1fr);
+  grid-template-columns: 16px minmax(0, 1fr);
   align-items: center;
   gap: 8px;
   width: 100%;
-  height: 30px;
+  height: auto;
   min-width: 0;
   margin: 0;
   padding: 0;
@@ -1023,8 +1111,8 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
 .planet-lens-icon {
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 2px;
   object-fit: cover;
   opacity: 1;
@@ -1128,7 +1216,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   }
 
   .planet-introduction {
-    margin-top: 8px;
+    margin-top: 10px;
     padding: 0 29px 0 0;
     font-size: 1rem;
     line-height: 1.4;
@@ -1139,6 +1227,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-gallery-panel,
     .planet-chart-switcher,
     .planet-lenses,
+    .planet-lens-details,
     .planet-resources-panel,
     .planet-settings-panel
   ) {
@@ -1151,6 +1240,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-gallery-panel,
     .planet-chart-switcher,
     .planet-lenses,
+    .planet-lens-details,
     .planet-resources-panel,
     .planet-settings-panel
   ):not([open]) {
@@ -1162,6 +1252,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-gallery-panel,
     .planet-chart-switcher,
     .planet-lenses,
+    .planet-lens-details,
     .planet-resources-panel,
     .planet-settings-panel
   )[open] {
@@ -1170,6 +1261,10 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-lenses[open] {
     padding-bottom: 8px;
+  }
+
+  .planet-lens-details[open] {
+    padding-bottom: 16px;
   }
 
   .planet-panel-summary,
@@ -1181,7 +1276,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-panel-heading {
     overflow: hidden;
-    font: 400 0.8125rem/18px var(--shell-ui-font);
+    font: 400 0.875rem/18px var(--shell-ui-font);
     letter-spacing: 0;
     text-overflow: ellipsis;
     text-transform: uppercase;
@@ -1430,6 +1525,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-gallery-panel,
     .planet-chart-switcher,
     .planet-lenses,
+    .planet-lens-details,
     .planet-resources-panel,
     .planet-settings-panel
   ) {
@@ -1437,7 +1533,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     border: 0;
   }
 
-  :is(.planet-lenses, .planet-resources-panel, .planet-settings-panel) {
+  :is(.planet-lenses, .planet-lens-details, .planet-resources-panel, .planet-settings-panel) {
     color: #aaa;
   }
 
@@ -1445,6 +1541,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-gallery-panel,
     .planet-chart-switcher,
     .planet-lenses,
+    .planet-lens-details,
     .planet-resources-panel,
     .planet-settings-panel
   ) {
@@ -1455,6 +1552,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-gallery-panel,
     .planet-chart-switcher,
     .planet-lenses,
+    .planet-lens-details,
     .planet-resources-panel,
     .planet-settings-panel
   ):not([open]),
@@ -1463,17 +1561,14 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     min-height: 32px;
   }
 
-  .planet-introduction,
   .planet-facts,
   .planet-gallery,
   .planet-chart,
-  .planet-observation-controls,
   .planet-settings {
     margin-top: 8px;
   }
 
   .planet-observation-controls {
-    gap: 8px;
     max-height: none;
     overflow: visible;
   }
@@ -1502,8 +1597,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   }
 
   .planet-information-panel {
-    --explorer-card-padding-inline-start: 14px;
-    --explorer-card-padding-inline-end: 12px;
     display: flex;
     flex: 0 0 auto;
     height: auto;
@@ -1527,7 +1620,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   }
 
   .planet-introduction {
-    margin-top: 8px;
+    margin-top: 10px;
     padding: 0 29px 0 0;
     text-wrap: balance;
   }
@@ -1536,6 +1629,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-gallery-panel,
     .planet-chart-switcher,
     .planet-lenses,
+    .planet-lens-details,
     .planet-resources-panel,
     .planet-settings-panel
   ) {
@@ -1548,6 +1642,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-gallery-panel,
     .planet-chart-switcher,
     .planet-lenses,
+    .planet-lens-details,
     .planet-resources-panel,
     .planet-settings-panel
   ):not([open]) {
@@ -1558,6 +1653,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-gallery-panel,
     .planet-chart-switcher,
     .planet-lenses,
+    .planet-lens-details,
     .planet-resources-panel,
     .planet-settings-panel
   )[open] {
@@ -1577,7 +1673,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-panel-heading {
     overflow: hidden;
-    font: 400 0.8125rem/18px var(--shell-ui-font);
+    font: 400 0.875rem/18px var(--shell-ui-font);
     letter-spacing: 0;
     text-overflow: ellipsis;
     text-transform: uppercase;

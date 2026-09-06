@@ -125,8 +125,23 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git."
+    },
+    {
+      "id": "io-surface-minimap-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 149,
+      "expectedSha256": "2bc17bb8b5b0e11c048f22d0e630fa19596b4c1501c7d72f56bf31cb11d299a4",
+      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation metadata",
+      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
+      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
+      "consumers": [
+        "lenses",
+        "presentation"
+      ]
     }
   ],
   "generatedIntermediates": [],

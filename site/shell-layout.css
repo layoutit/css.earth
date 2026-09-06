@@ -29,7 +29,7 @@ body[data-object-shell] {
   .planet-sidebar > .explorer-settings-panel
 ) {
   --explorer-card-padding-inline-start: var(--explorer-card-padding-left, 20px);
-  --explorer-card-padding-inline-end: 14px;
+  --explorer-card-padding-inline-end: 16px;
   box-sizing: border-box;
   flex: 0 0 auto;
   width: 100%;

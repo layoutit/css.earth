@@ -125,7 +125,22 @@
       ],
       "lensId": "elevation",
       "format": "geotiff",
-      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
+      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60\u00b0 latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
+    },
+    {
+      "id": "ceres-surface-minimap-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "f200fc2fab0d64481e1bfa2338f8716d47f3bb54986e536c0e181bd50e027047",
+      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation metadata",
+      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
+      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
+      "consumers": [
+        "lenses",
+        "presentation"
+      ]
     }
   ],
   "generatedIntermediates": [],

@@ -1,6 +1,7 @@
 import { createDestinationBrowser } from "./destination-browser.mjs";
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
 import { createExplorerRailController } from "./explorer-rail.mjs";
+import { createSurfaceMinimap } from "./surface-minimap.mjs";
 
 export function mountPlanetShell({
   objectId,
@@ -14,7 +15,7 @@ export function mountPlanetShell({
     throw new Error("Planet shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
-  let settingsController, objectBrowser, contentLifetime;
+  let settingsController, objectBrowser, contentLifetime, minimapController;
   function own(controller) {
     lifetime.onDispose(() => controller.destroy());
     return controller;
@@ -43,9 +44,13 @@ export function mountPlanetShell({
       mountContent(content.id, motion, contrast);
     },
     setDestinations(provider) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
+    setCamera(provider) { if (!lifetime.disposed) minimapController.setCamera(provider); },
     setMotionEnabled(enabled) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
     setPlaybackState(state) {
-      if (!lifetime.disposed) settingsController.setPlaybackState(state);
+      if (!lifetime.disposed) {
+        settingsController.setPlaybackState(state);
+        minimapController.setPlaybackState(state);
+      }
     },
     destroy() {
       const errors = lifetime.destroy();
@@ -66,6 +71,9 @@ export function mountPlanetShell({
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
       { motionEnabled, onMotionChange, highContrastSky }, owner));
+    minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget,
+      onInteraction() { settingsController.setMotionEnabled(false); },
+    }));
     retain(createPanelController(drawer, id, windowTarget, owner));
   }
 }
@@ -93,31 +101,25 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
     throw new Error("Planet shell surface lens browser has no valid lenses.");
   }
 
-  const legends = [...root.querySelectorAll("[data-lens-legend]")]
-    .filter((legend) => legend instanceof windowTarget.HTMLElement);
+  const details = [...drawer.querySelectorAll("[data-lens-details]")];
   const lensIds = new Set(buttons.map((button) => button.value));
-  if (legends.some((legend) => !lensIds.has(legend.dataset.lensLegend ?? ""))) {
-    throw new Error("Planet shell surface lens legend has no matching lens.");
+  if (details.some((detail) => !lensIds.has(detail.dataset.lensDetails ?? ""))) {
+    throw new Error("Planet shell surface lens details have no matching lens.");
   }
 
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
-  const renderLegend = () => {
+  const renderSelection = () => {
     const activeLens = buttons.find((button) => button.ariaPressed === "true")
       ?.value;
-    for (let index = 0; index < buttons.length; index += 1) {
-      const button = buttons[index];
-      const legend = options[index].querySelector("[data-lens-legend]");
-      if (!(legend instanceof windowTarget.HTMLElement)) continue;
-      const expanded = button.value === activeLens;
-      legend.hidden = !expanded;
-      button.ariaExpanded = String(expanded);
+    for (const detail of details) {
+      detail.hidden = detail.dataset.lensDetails !== activeLens;
     }
   };
-  const legendObserver = new windowTarget.MutationObserver(renderLegend);
-  lifetime.onDispose(() => legendObserver.disconnect());
+  const selectionObserver = new windowTarget.MutationObserver(renderSelection);
+  lifetime.onDispose(() => selectionObserver.disconnect());
   for (const button of buttons) {
-    legendObserver.observe(button, {
+    selectionObserver.observe(button, {
       attributes: true,
       attributeFilter: ["aria-pressed"],
     });
@@ -147,19 +149,16 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
     filter();
   }, { signal: events.signal });
   filter();
-  renderLegend();
+  renderSelection();
 
   return Object.freeze({
     destroy() {
       events.abort();
-      legendObserver.disconnect();
+      selectionObserver.disconnect();
       search.value = "";
       for (const option of options) option.hidden = false;
       empty.hidden = true;
-      for (const legend of legends) legend.hidden = true;
-      for (const button of buttons) {
-        if (button.hasAttribute("aria-expanded")) button.ariaExpanded = "false";
-      }
+      for (const detail of details) detail.hidden = true;
     },
   });
 }

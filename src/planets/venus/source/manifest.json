@@ -490,6 +490,21 @@
         "assets",
         "lenses"
       ]
+    },
+    {
+      "id": "venus-surface-minimap-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 152,
+      "expectedSha256": "b8bd0e06537a48cf52ff4a3e46498add6e3501fc7a19529e2064cdd069ad4d81",
+      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation metadata",
+      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
+      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
+      "consumers": [
+        "lenses",
+        "presentation"
+      ]
     }
   ],
   "generatedIntermediates": [],
