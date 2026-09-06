@@ -2,77 +2,77 @@ import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
   object("sun", "Sun", "star", "#f5a623", 0,
-    "pinned NASA Science and Solar Dynamics Observatory", async () => {
+    "Explore the Sun in 3D with cssEarth. Discover our nearest star, its glowing atmosphere, and the science behind the center of the solar system.", async () => {
       const { mountSunClient } = await import(
         "../src/planets/sun/runtime/client.mjs"
       );
       return mountSunClient;
     }),
   object("mercury", "Mercury", "planet", "#9d9388", 0.39,
-    "NASA, USGS, OpenSpace, and HYG", async () => {
+    "Explore Mercury in 3D with cssEarth. Inspect the smallest planet, its cratered surface, and the extreme conditions closest to the Sun.", async () => {
       const { mountMercuryClient } = await import(
         "../src/planets/mercury/runtime/client.mjs"
       );
       return mountMercuryClient;
     }),
   object("venus", "Venus", "planet", "#d6aa69", 0.72,
-    "NASA, USGS, OpenSpace, and HYG", async () => {
+    "Explore Venus in 3D with cssEarth. Look beneath its clouds, discover its volcanic surface, and learn about the hottest planet in our solar system.", async () => {
       const { mountVenusClient } = await import(
         "../src/planets/venus/runtime/client.mjs"
       );
       return mountVenusClient;
     }),
   object("earth", "Earth", "planet", "#5b82a7", 1,
-    "NASA, JPL, OpenSpace, and HYG", async () => {
+    "Explore Earth in 3D with cssEarth. Orbit our home planet, discover its surface and atmosphere, and browse scientific facts in your browser.", async () => {
       const { mountEarthClient } = await import(
         "../src/planets/earth/runtime/client.mjs"
       );
       return mountEarthClient;
     }),
   object("moon", "Moon", "satellite", "#aaa7a0", 1,
-    "NASA, JPL, OpenSpace, and HYG", async () => {
+    "Explore the Moon in 3D with cssEarth. Discover impact craters, ancient lava plains, and the history of Earth’s natural satellite.", async () => {
       const { mountMoonClient } = await import(
         "../src/planets/moon/runtime/client.mjs"
       );
       return mountMoonClient;
     }),
   object("mars", "Mars", "planet", "#a95e47", 1.52,
-    "OpenSpace, NASA, USGS, and JPL", async () => {
+    "Explore Mars in 3D with cssEarth. Discover the red planet’s volcanoes, deep canyons, polar ice, and thin atmosphere in an interactive explorer.", async () => {
       const { mountMarsClient } = await import(
         "../src/planets/mars/runtime/client.mjs"
       );
       return mountMarsClient;
     }),
   object("jupiter", "Jupiter", "planet", "#b48b67", 5.2,
-    "NASA, ESA, STScI, JPL, and OpenSpace", async () => {
+    "Explore Jupiter in 3D with cssEarth. Discover the solar system’s largest planet, its colorful cloud bands, giant storms, and orbiting moons.", async () => {
       const { mountJupiterClient } = await import(
         "../src/planets/jupiter/runtime/client.mjs"
       );
       return mountJupiterClient;
     }),
   object("saturn", "Saturn", "planet", "#d2b68c", 9.58,
-    "OpenSpace and NASA", async () => {
+    "Explore Saturn in 3D with cssEarth. Orbit its spectacular rings, discover its moons, and browse scientific facts about this gas giant.", async () => {
       const { mountSaturnClient } = await import(
         "../src/planets/saturn/runtime/client.mjs"
       );
       return mountSaturnClient;
     }),
   object("uranus", "Uranus", "planet", "#8ec7c9", 19.2,
-    "Hubble OPAL, NASA, JPL, PDS, and Voyager", async () => {
+    "Explore Uranus in 3D with cssEarth. Discover the ice giant that spins on its side, its faint rings, and its system of moons.", async () => {
       const { mountUranusClient } = await import(
         "../src/planets/uranus/runtime/client.mjs"
       );
       return mountUranusClient;
     }),
   object("neptune", "Neptune", "planet", "#5279bd", 30.05,
-    "NASA, ESA, STScI, JPL, PDS, and OpenSpace", async () => {
+    "Explore Neptune in 3D with cssEarth. Discover the distant blue ice giant, its turbulent atmosphere, faint rings, and orbiting moons.", async () => {
       const { mountNeptuneClient } = await import(
         "../src/planets/neptune/runtime/client.mjs"
       );
       return mountNeptuneClient;
     }),
   object("pluto", "Pluto", "dwarf-planet", "#bca18a", 39,
-    "NASA New Horizons, USGS, JPL, ESO, and HYG", async () => {
+    "Explore Pluto in 3D with cssEarth. Discover this distant dwarf planet’s icy landscape, its heart-shaped region, and its companion Charon.", async () => {
       const { mountPlutoClient } = await import(
         "../src/planets/pluto/runtime/client.mjs"
       );
@@ -86,7 +86,7 @@ export function requireObject(id) {
   return objectRecord;
 }
 
-function object(id, name, classification, color, distanceAu, authority, loadScene) {
+function object(id, name, classification, color, distanceAu, description, loadScene) {
   return defineObject({
     id,
     name,
@@ -95,7 +95,6 @@ function object(id, name, classification, color, distanceAu, authority, loadScen
     distanceAu,
     route: `/${id}/`,
     loadScene,
-    description:
-      `An interactive retained-DOM ${name} visualization prepared from ${authority} source material.`,
+    description,
   });
 }

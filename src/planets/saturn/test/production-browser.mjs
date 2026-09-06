@@ -65,7 +65,7 @@ try {
         };
       });
       assert.deepEqual(initial, {
-        title: "Saturn - Powered by PolyCSS",
+        title: "Saturn in 3D | cssEarth",
         descendants: 1_918,
         leaves: 939,
         canvas: 0,
