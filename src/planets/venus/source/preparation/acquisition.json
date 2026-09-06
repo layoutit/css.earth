@@ -1,0 +1,209 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "navigation/venus.webp",
+      "url": "https://science.nasa.gov/wp-content/uploads/2023/05/688-venus-1200-jpg.webp"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "venera/venera9.gif",
+      "url": "https://pds-geosciences.wustl.edu/venera/GIF/venera9.gif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "venera/venera10.gif",
+      "url": "https://pds-geosciences.wustl.edu/venera/GIF/venera10.gif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "venera/venera13.jpg",
+      "url": "https://pds-geosciences.wustl.edu/venera/JPEG/venera13.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "venera/venera14.jpg",
+      "url": "https://pds-geosciences.wustl.edu/venera/JPEG/venera14.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "surface/venus-clouds.jpg",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/venus/textures/2/venus_clouds.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/globe.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/globe.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/atmosphere.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/atmosphere.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/clouds.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/clouds_magellan_combo_newyork.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/radar.wms",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/magellan_mosaic_newyork.wms"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/dem.wms",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/heightlayers/magellan_newyork.wms"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "surface/venus-magellan-color-wms.png",
+      "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fvenus%2Fvenus_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=MAGELLAN_color&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "surface/venus-magellan-topography-wms.png",
+      "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=%2Fmaps%2Fvenus%2Fvenus_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=MAGELLAN_topography&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C180%2C90&WIDTH=2048&HEIGHT=1024&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
+    },
+    {
+      "kind": "catalog-field",
+      "groups": [
+        "refresh",
+        "refresh-starfield"
+      ],
+      "path": "stars/hyg-v41-field.json",
+      "url": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
+      "sha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
+      "catalogRows": 119626,
+      "selectedCount": 60000,
+      "template": {
+        "schema": "cssvenus-prepared-star-cubemap-source@1",
+        "source": {
+          "id": "hyg-v4.1",
+          "title": "HYG Stellar Database v4.1",
+          "credit": "David Nash / Astronexus",
+          "license": "CC-BY-SA-4.0",
+          "repositoryUrl": "https://github.com/astronexus/HYG-Database",
+          "sourceUrl": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
+          "commit": "c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
+          "sha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
+          "catalogRows": 119626,
+          "retrieved": "2026-08-28"
+        },
+        "projection": {
+          "model": "prepared-equatorial-cubemap",
+          "coordinateSystem": "ICRS equatorial catalog coordinates",
+          "centerRaDegrees": 40,
+          "centerDecDegrees": 7,
+          "faceOrder": [
+            "front",
+            "right",
+            "back",
+            "left",
+            "top",
+            "bottom"
+          ],
+          "qualification": "catalog-derived static full sky; orientation is illustrative because the Venus scene has no absolute observer epoch or inertial camera orientation"
+        },
+        "presentation": {
+          "faceSize": 1024,
+          "candidateStars": 119625,
+          "selectedStars": 60000,
+          "selection": "brightest apparent magnitude across the complete catalog sphere",
+          "brightestMagnitude": -1.44,
+          "faintestMagnitude": 8.46,
+          "pointOpacity": 0.78,
+          "densityGlow": "prepared broad galactic-plane context derived from selected ICRS positions"
+        },
+        "starColumns": [
+          "catalogId",
+          "rightAscensionDegrees",
+          "declinationDegrees",
+          "apparentMagnitude",
+          "colorIndexBv"
+        ]
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh",
+        "refresh-starfield-photo"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "verify-request",
+      "groups": [
+        "refresh"
+      ],
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "form": {
+        "type": "cfg",
+        "wephm": "y",
+        "watm": "y",
+        "file": "<OBJECT-DATE>2026/08/30 12:00\n<OBJECT-NAME>Venus\n<GEOMETRY-REF>User"
+      },
+      "expectedPath": "atmosphere/psg-venus-20260830.cfg",
+      "selector": "before-marker",
+      "marker": "<GENERATOR-RANGE1>"
+    },
+    {
+      "kind": "verify-request",
+      "groups": [
+        "refresh"
+      ],
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "form": {
+        "type": "rad",
+        "wephm": "n",
+        "watm": "n"
+      },
+      "fileSource": "atmosphere/psg-venus-20260830.cfg",
+      "expectedPath": "atmosphere/psg-venus-r240-rif.txt",
+      "selector": "numeric-lines",
+      "rowCount": 253
+    }
+  ]
+}

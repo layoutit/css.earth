@@ -42,8 +42,17 @@ mounts one retained scene and one camera. Each object package owns its
 scientific sources, textures, geometry, lighting, optional control content, and
 material presentation. One shared runtime owns mounting, readiness, controls,
 selection transactions, image residency, playback, camera binding, and cleanup.
-All eleven clients bind the same factory. The shell owns navigation, information
-panels, playback permission, and responsive behavior.
+Mercury and Venus consume validated JSON through the TypeScript CSS renderer;
+the other clients retain their existing runtime adapter. The shell owns
+navigation, information panels, playback permission, and responsive behavior.
+
+Mercury and Venus share a prepared heliocentric frame. Selecting either in the
+navigation bar or celestial vault flies the same physical camera to it using
+the Galaxio selection curve. The next fixed asset bank loads during flight;
+the current detailed scene is released before the destination mounts. The
+document and shell persist. Back restores the saved camera and playback state;
+camera input interrupts flight at the last drawn view. Existing object routes
+and compact `?v` links remain supported, including translated camera positions.
 The [architecture](docs/shared-runtime-architecture-proposal.md) explains the
 contract and the rendering differences that remain inside each package. The
 [proof](docs/generic-runtime-contract-proof.md) uses the actual registered objects
@@ -55,6 +64,32 @@ cssEarth separates source-backed preparation from browser playback. Node tools
 turn checked OpenSpace, NASA, JPL, USGS, and other planet-owned inputs into
 local images, generated scene modules, scientific charts, and prepared motion
 banks. At runtime, the browser only loads and displays these prepared assets.
+
+Mercury and Venus use the shared TypeScript preparation pipeline. Their authored
+capabilities and parameters are JSON; raster and geometry operations live in
+the renderer-independent objects package. CSS compilation and file/image I/O
+stay in application adapters. Earth and the other objects retain their existing
+preparation implementations.
+
+```text
+src/planets/{mercury,venus}/
+├── object.json                  Pinned capability recipe and transport digest
+├── source/                      Authored JSON, scientific inputs and provenance
+├── prepared/                    Baked JSON, committed for clean checkouts
+│   └── object.json              Rebuilt runtime payload (Git-ignored)
+├── runtime-assets.json          Reproducible asset inventory
+└── SOURCE.md, NOTICE.md, LICENSE.*  Credits and licences
+packages/objects/src/            Generic schema, geometry and pixel operations
+src/preparation/                 Node image/file adapters
+src/renderers/css/preparation/   CSS projection and retained presentation compiler
+tests/objects/                   Object fixtures and browser/scientific regression tests
+```
+
+`pnpm install` builds packages and preparation tools, then assembles the small
+transport JSON beside each object from its committed preparation output. It does not rebake textures.
+To regenerate Mercury or Venus after changing their authored inputs, run
+`pnpm prepare:planets --object=mercury` or `--object=venus`. The same commands
+validate source pins, compile every layer, and replace their generated outputs.
 
 Large source binaries and generated browser assets are intentionally not
 committed. Their URLs, sizes, hashes, provenance, preparation code, and runtime

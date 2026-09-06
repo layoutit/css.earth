@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { resolve } from "node:path";
+import { isDeepStrictEqual } from "node:util";
+import { relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
 import { OBJECTS } from "../site/objects.mjs";
@@ -117,12 +118,67 @@ export function requirePreparedControlSource(source) {
   return imports;
 }
 
+async function readAuthoredRuntime({ root, objectId, descriptor, readText }) {
+  const recipe = descriptor.properties?.recipe, reference = descriptor.prepared;
+  if (!recipe || typeof recipe !== 'object' || recipe.schema !== 'cssearth-authored-object@1' || !Array.isArray(recipe.sources) ||
+      !reference || reference.format !== 'cssearth-css-object@4' || !/^[a-f0-9]{64}$/.test(reference.sha256) || typeof reference.url !== 'string') {
+    throw new TypeError('Authored descriptor identity or source references are invalid.');
+  }
+  const directory = resolve(root, `src/planets/${objectId}`);
+  for (const source of recipe.sources) {
+    if (!source || typeof source.path !== 'string' || !/^[a-f0-9]{64}$/.test(source.sha256)) throw new TypeError('Authored source reference is invalid.');
+    const path = resolve(directory, source.path);
+    if (relative(directory, path).startsWith('../')) throw new TypeError('Authored source escapes its object package.');
+    if (createHash('sha256').update(await readText(path)).digest('hex') !== source.sha256) throw new TypeError(`Authored source digest drifted: ${source.path}.`);
+  }
+  const preparedDirectory = resolve(directory, 'prepared');
+  const payloadPath = resolve(directory, reference.url);
+  if (reference.url !== 'prepared/object.json' || payloadPath !== resolve(preparedDirectory, 'object.json')) {
+    throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
+  }
+  const payloadBytes = await readText(payloadPath);
+  if (createHash('sha256').update(payloadBytes).digest('hex') !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
+  const payload = JSON.parse(payloadBytes);
+  const runtimePath = resolve(preparedDirectory, 'runtime.json');
+  const runtime = JSON.parse(await readText(runtimePath)), scene = JSON.parse(await readText(resolve(preparedDirectory, 'scene.json')));
+  if (payload.id !== objectId || !isDeepStrictEqual(payload.data, runtime)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
+  if (!isDeepStrictEqual(scene.worldFrame, descriptor.properties.worldFrame)) throw new TypeError('Authored physical frame differs from the descriptor world frame.');
+  requireObjectRuntimeDefinition(runtime, { objectId });
+  return { runtime, payloadPath, runtimePath };
+}
+
 export async function auditPreparedPresentations({ root = process.cwd(), objects = OBJECTS, strict = true,
   readText = path => readFile(path, "utf8"), readControls = async path => (await import(pathToFileURL(path))).objectControls } = {}) {
   const entries = [];
   for (const object of objects) {
     try {
       const prefix = resolve(root, `src/planets/${object.id}`);
+      const descriptorPath = `${prefix}/object.json`;
+      let descriptor = null;
+      try { descriptor = JSON.parse(await readText(descriptorPath)); }
+      catch (error) { if (error?.code !== 'ENOENT') throw error; }
+      if (descriptor?.properties?.recipe?.schema === 'cssearth-authored-object@1') {
+        const prepared = await readAuthoredRuntime({ root, objectId: object.id, descriptor, readText });
+        const definition = prepared.runtime, sha256 = value => createHash('sha256').update(value).digest('hex');
+        requireObjectRuntimeDefinition(definition, { objectId: object.id });
+        entries.push({ id: object.id, complete: true, evidence: 'validated-authored-json', observedOwners: null,
+          source: { runtimeSha256: sha256(await readText(prepared.payloadPath)), authoredRuntimeSha256: sha256(await readText(prepared.runtimePath)) },
+          nodes: definition.tree.nodes.length, roots: definition.tree.nodes.filter(node => node.parent === -1).length,
+          variants: definition.variants.length,
+          controls: { lenses: definition.controls.lenses?.controls.map(lens => lens.id) ?? [],
+            settings: definition.controls.settings?.controls.map(({ name, kind }) => ({ name, kind })) ?? [] },
+          materialTracks: definition.materials.map(track => ({ id: track.id, frame: track.frame,
+            phaseFrames: track.frame.indices.length, rotation: track.rotation?.kind ?? null, banks: track.banks.length })),
+          resources: definition.assets.entries.length, pools: definition.assets.pools,
+          cameraNodes: definition.tree.nodes.filter(node => /(?:^|\s)polycss-camera(?:\s|$)/.test(node.className)).length,
+          sceneNodes: definition.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className)).length,
+          camera: definition.camera,
+          viewBindings: definition.viewBindings, animations: definition.animations.map(({ id, mode, target }) => ({ id, mode, target })),
+          pageLayers: (definition.pageLayers ?? []).map(({ lensIds, plan: layer }) => ({ lensIds, schema: layer.schema,
+            roots: layer.roots?.length ?? 0, poolSize: layer.poolSize ?? null })),
+          destinations: definition.destinations ? { defaultLens: definition.destinations.defaultLens, catalog: definition.destinations.catalog } : null });
+        continue;
+      }
       const definitionSource = await readText(`${prefix}/runtime/definition.mjs`);
       const id = requirePreparedDefinitionSource(definitionSource);
       if (id !== object.id) throw new TypeError("Prepared definition names another object.");

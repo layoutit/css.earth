@@ -1,0 +1,196 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/globe.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/globe.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/messenger_bdr_newyork.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_bdr_newyork.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/messenger_bdr_newyork.wms",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_bdr_newyork.wms"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/messenger_mosaic2_newyork.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_mosaic2_newyork.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/messenger_mosaic2_newyork.wms",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_mosaic2_newyork.wms"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/messenger_shade_newyork.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_shade_newyork.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/messenger_shade_newyork.wms",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_shade_newyork.wms"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "navigation/mercury.jpg",
+      "url": "https://science.nasa.gov/wp-content/uploads/2023/11/mercury-messenger-globe-pia15162.jpg"
+    },
+    {
+      "kind": "tile-mosaic",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/mercury-bdr-global.png",
+      "url": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}",
+      "tileSize": 360,
+      "columns": 16,
+      "rows": 8,
+      "dataWidth": 5760,
+      "dataHeight": 2880,
+      "width": 4096,
+      "height": 2048,
+      "forceRgb": false,
+      "concurrency": 10
+    },
+    {
+      "kind": "tile-mosaic",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/mercury-enhanced-global.png",
+      "url": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
+      "tileSize": 256,
+      "columns": 16,
+      "rows": 8,
+      "dataWidth": 4096,
+      "dataHeight": 2048,
+      "width": 4096,
+      "height": 2048,
+      "forceRgb": true,
+      "concurrency": 10
+    },
+    {
+      "kind": "tile-mosaic",
+      "groups": [
+        "refresh"
+      ],
+      "path": "maps/mercury-topography-global.png",
+      "url": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}",
+      "tileSize": 360,
+      "columns": 11,
+      "rows": 6,
+      "dataWidth": 3832,
+      "dataHeight": 1916,
+      "width": 4096,
+      "height": 2048,
+      "forceRgb": false,
+      "concurrency": 10
+    },
+    {
+      "kind": "verify-json",
+      "groups": [
+        "refresh"
+      ],
+      "url": "https://science.nasa.gov/wp-json/wp/v2/topic/107747",
+      "expectedPath": "editorial/mercury-facts.json",
+      "fields": {
+        "id": "sourceId",
+        "modified": "modified"
+      }
+    },
+    {
+      "kind": "verify-download",
+      "groups": [
+        "refresh"
+      ],
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "kind": "verify-download",
+      "groups": [
+        "refresh"
+      ],
+      "url": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
+      "sha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-topography-legend"
+      ],
+      "path": "maps/mercury-topography-legend.png",
+      "url": "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh-starfield-photo"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "verify-request",
+      "groups": [
+        "refresh"
+      ],
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "form": {
+        "type": "cfg",
+        "wephm": "y",
+        "watm": "y",
+        "file": "<OBJECT-DATE>2026/08/30 12:00\n<OBJECT-NAME>Mercury\n<GEOMETRY-REF>User"
+      },
+      "expectedPath": "atmosphere/psg-mercury-20260830.cfg",
+      "selector": "before-marker",
+      "marker": "<GENERATOR-RANGE1>"
+    },
+    {
+      "kind": "verify-request",
+      "groups": [
+        "refresh"
+      ],
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "form": {
+        "type": "rad",
+        "wephm": "n",
+        "watm": "n"
+      },
+      "fileSource": "atmosphere/psg-mercury-20260830.cfg",
+      "expectedPath": "atmosphere/psg-mercury-r240-rif.txt",
+      "selector": "numeric-lines",
+      "rowCount": 253
+    }
+  ]
+}

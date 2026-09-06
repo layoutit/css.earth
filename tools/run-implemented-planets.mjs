@@ -5,6 +5,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 import { OBJECTS } from "../site/objects.mjs";
+import { authoredObject } from './authored-object.mjs';
 
 export function planetTestDirectory(id, projectRoot = process.cwd()) {
   return resolve(projectRoot, "src", "planets", id, "test");
@@ -14,7 +15,8 @@ export async function discoverPlanetTests(
   id,
   { projectRoot = process.cwd(), readDirectory = readdir } = {},
 ) {
-  const directory = planetTestDirectory(id, projectRoot);
+  const directory = await authoredObject(id, projectRoot)
+    ? resolve(projectRoot, 'tests/objects/unit', id) : planetTestDirectory(id, projectRoot);
   let filenames;
   try {
     filenames = await readDirectory(directory);
@@ -51,7 +53,8 @@ export async function resolvePlanetAssembly(
   id,
   { projectRoot = process.cwd(), accessFile = access } = {},
 ) {
-  const script = planetAssembleScript(id, projectRoot);
+  const script = await authoredObject(id, projectRoot)
+    ? resolve(projectRoot, 'tools/objects/dist/operations.js') : planetAssembleScript(id, projectRoot);
   try {
     await accessFile(script);
   } catch (cause) {
@@ -73,7 +76,11 @@ export async function resolvePlanetCommand(
   });
   const resolveScript = resolvers[mode];
   if (!resolveScript) throw new TypeError(`Unknown planet command mode: ${mode}.`);
-  const script = resolveScript(id, projectRoot);
+  const authored = await authoredObject(id, projectRoot);
+  const script = authored
+    ? mode === 'browser' ? resolve(projectRoot, 'tests/objects/browser', id, 'smoke-browser.mjs')
+      : resolve(projectRoot, 'tools/objects/dist', mode === 'prepare' ? 'prepare-authored.js' : 'operations.js')
+    : resolveScript(id, projectRoot);
   try {
     await accessFile(script);
   } catch (cause) {
@@ -132,7 +139,8 @@ export async function runPreparationObjects({
   const commands = await Promise.all(objectIds.map(async id => ({
     id,
     command: process.execPath,
-    argumentsList: [await resolvePlanetCommand(id, "prepare", { projectRoot: cwd }), ...argumentsList],
+    argumentsList: [await resolvePlanetCommand(id, "prepare", { projectRoot: cwd }),
+      ...(await authoredObject(id, cwd) ? [id, '--write'] : []), ...argumentsList],
     cwd,
   })));
   const startedAt = new Date().toISOString(), start = performance.now();
@@ -230,7 +238,7 @@ async function main(mode = process.argv[2]) {
   for (const { id } of OBJECTS) {
     const argumentsList = mode === "test"
       ? ["--test", ...await discoverPlanetTests(id)]
-      : [await resolvePlanetCommand(id, mode), ...process.argv.slice(3)];
+      : [await resolvePlanetCommand(id, mode), ...(await authoredObject(id) && mode !== 'browser' ? [mode, id] : []), ...process.argv.slice(3)];
     await run(process.execPath, argumentsList);
   }
 }

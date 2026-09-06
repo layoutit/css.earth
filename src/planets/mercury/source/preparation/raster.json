@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "sourceWidth": 4096,
+  "sourceHeight": 2048,
+  "width": 2048,
+  "height": 1024,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "densities": [
+    1,
+    2
+  ],
+  "resample": "source-packed",
+  "polarProjection": "angular-nearest",
+  "polesCombined": true,
+  "polesOutput": "mercury-poles{suffix}.webp",
+  "publicBase": "/scenes/mercury/",
+  "surfaceMetadata": {
+    "schema": "cssmercury-prepared-assets@1",
+    "sourcePositionVariable": "--mercury-surface-position"
+  },
+  "thumbnail": {
+    "size": 28,
+    "crop": {
+      "left": 875,
+      "top": 363,
+      "width": 298,
+      "height": 298
+    },
+    "quality": 90
+  },
+  "surfaces": [
+    {
+      "id": "normal",
+      "source": "maps/mercury-bdr-global.png",
+      "falseColor": false,
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-lens-{id}.webp"
+    },
+    {
+      "id": "enhanced",
+      "source": "maps/mercury-enhanced-global.png",
+      "falseColor": true,
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-lens-{id}.webp",
+      "coverage": {
+        "normal": "maps/mercury-bdr-global.png",
+        "topography": "maps/mercury-topography-global.png",
+        "references": [
+          "usgs-messenger-bdr-global-z3",
+          "usgs-messenger-topography-z3"
+        ]
+      }
+    },
+    {
+      "id": "topography",
+      "source": "maps/mercury-topography-global.png",
+      "falseColor": true,
+      "output": "mercury-surface-{id}{suffix}.webp",
+      "thumbnail": "mercury-lens-{id}.webp"
+    }
+  ],
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "mercury-lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "mercury-lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "frameCount": 256,
+    "shadowlessFloodLimbFloor": 0.35,
+    "ambientIntensity": 0.05,
+    "radiusScale": 0.505,
+    "terminator": [
+      0,
+      0.1
+    ],
+    "maximumAlpha": 0.95,
+    "bankSchema": "cssmercury-prepared-lighting-bank@1",
+    "billboardSchema": "cssmercury-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssmercury-prepared-lighting@3",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-openspace-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "rendererSourceSnapshot": "source/renderer/texturetilemapping-lighting.glsl",
+      "worldLightDirection": [
+        -0.6119166247245715,
+        0.41228475010189525,
+        -0.6749661689441224
+      ],
+      "sourceWorldLightDirection": [
+        0.883835,
+        -0.385595,
+        0.264864
+      ],
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "defaultLightViewZ": 0.8030144929060974,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  },
+  "interior": {
+    "source": "interior/mercury-structure.json",
+    "surface": "maps/mercury-bdr-global.png",
+    "worldLightDirection": [
+      0.883835,
+      -0.385595,
+      0.264864
+    ],
+    "ambientIntensity": 0.05,
+    "coreNoiseSeed": 71,
+    "width": 1024,
+    "height": 512,
+    "poleTile": 256,
+    "sectionWidth": 2048,
+    "sectionHeight": 2048,
+    "outerOutput": "mercury-interior-outer{suffix}.webp",
+    "outerPolesOutput": "mercury-interior-outer-poles{suffix}.webp",
+    "coreOutput": "mercury-interior-core{suffix}.webp",
+    "corePolesOutput": "mercury-interior-core-poles{suffix}.webp",
+    "sectionOutput": "mercury-interior-section{suffix}.webp",
+    "thumbnail": "mercury-lens-interior.webp",
+    "metadata": {
+      "schema": "cssmercury-prepared-interior-assets@2"
+    }
+  }
+}
