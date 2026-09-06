@@ -1,5 +1,7 @@
 import { isPreparedCityAssetUrl } from "./city-asset-url.mjs";
 import { isPreparedBlockReference, readPreparedWmtsBlock, preparedReferenceKey } from "./prepared-block-transport.mjs";
+import { requireGeographicDirectory, requireGeographicDirectoryReference } from "./geographic-index-contract.mjs";
+import { bindPreparedWmtsRaster } from "./wmts-raster-source.mjs";
 
 // Only metadata residency and prepared-tree transport. No geographic geometry,
 // source pixels or image processing is derived in the browser.
@@ -67,6 +69,9 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
     requests++;
     try {
       const { ref } = entry;
+      const expectedKeys = plan.imageSource ? new Set([...nodes.values()].filter(node => node.stub &&
+        preparedReferenceKey(node.directory) === preparedReferenceKey(ref)).map(node => node.key)) : null;
+      if (plan.imageSource) requireGeographicDirectoryReference(ref, plan);
       const packed = isPreparedBlockReference(ref, plan.assetPath);
       if (!Number.isSafeInteger(ref.bytes) || ref.bytes < 1 || ref.bytes > limits.maximumDirectoryBytes ||
           (!packed && !isPreparedCityAssetUrl(plan, ref.url, "index", ref.sha256))) {
@@ -88,10 +93,14 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
         if (hash !== ref.sha256) throw new Error("City directory hash mismatch.");
         data = JSON.parse(new TextDecoder().decode(bytes));
       }
-      if (data.schema !== "cssearth-city-index@1" || data.dataset !== plan.dataset ||
+      if (data.schema !== "cssearth-city-index@1" || data.dataset !== (plan.geometryDataset ?? plan.dataset) ||
           !Array.isArray(data.nodes) || data.nodes.length > (packed ? 2133 : 21) ||
           !Array.isArray(data.external) || data.external.length > 64) {
         throw new Error("Invalid prepared city directory.");
+      }
+      if (plan.imageSource) {
+        requireGeographicDirectory(data, ref, plan, expectedKeys);
+        data = { ...data, nodes: data.nodes.map(node => node.rasterSource ? bindPreparedWmtsRaster(node, plan.imageSource) : node) };
       }
       if (destroyed || controller.signal.aborted || entries.get(preparedReferenceKey(ref)) !== entry) return;
       entry.data = data;
@@ -112,6 +121,7 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
       residentDirectories: entries.size, residentNodes: nodes.size,
       reservedEncodedBytes: [...entries.values()].reduce((sum, entry) => sum + entry.ref.bytes, 0),
       reservedDecodedBytes: [...entries.values()].reduce((sum, entry) => sum + (entry.ref.decodedBytes ?? entry.ref.bytes), 0),
+      rootEncodedBytes: plan.rootDirectory?.bytes ?? 0, rootDecodedBytes: plan.rootDirectory?.decodedBytes ?? 0,
       maximumBytes: limits.maximumBytes, maximumDirectories: limits.maximumDirectories,
       errors: [...errors] }),
     destroy() {

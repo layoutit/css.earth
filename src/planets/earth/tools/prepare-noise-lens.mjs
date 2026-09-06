@@ -66,5 +66,5 @@ await writeFile(`${EARTH_PUBLIC_ROOT}/${packageUrl.split("/").at(-1)}`,packageBy
 const descriptor={id:pin.id,label:content.label,thumbnailUrl:"/scenes/earth/earth-lens-noise.webp",
   package:{url:packageUrl,bytes:packageBytes.length,sha256}};
 assets.push(packageUrl);
-await writeFile(new URL("../runtime/preparedNoise.mjs",import.meta.url),`// Generated from pinned Buenos Aires APrA noise estimates.\nexport const PREPARED_EARTH_NOISE=${JSON.stringify(plan)};\nexport const PREPARED_EARTH_NOISE_DESCRIPTOR=${JSON.stringify(descriptor)};\n`);
+await writeFile(new URL("../runtime/preparedNoise.mjs",import.meta.url),`// Generated from pinned Buenos Aires APrA noise estimates.\nexport const PREPARED_EARTH_NOISE=${JSON.stringify(plan)};\nexport const PREPARED_EARTH_NOISE_DESCRIPTOR=${JSON.stringify(descriptor)};\nexport const PREPARED_EARTH_NOISE_ASSETS=${JSON.stringify(assets)};\n`);
 console.log(JSON.stringify({features:data.features.length,bounds,tiles:roots.length,bytes:roots.reduce((s,p)=>s+p.bytes,0),sourceSha256:pin.decodedSha256}));

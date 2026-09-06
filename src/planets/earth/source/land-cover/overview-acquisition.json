@@ -1,0 +1,456 @@
+{
+  "retrievedAt": "2026-09-06T06:52:13.727Z",
+  "tiles": 64,
+  "receivedBytes": 504618,
+  "sourceSha256": "e03a0cfd286f963ca4068989008da3cc3153e5e1a58c2fb20131b36dbff833cf",
+  "responses": [
+    {
+      "x": 0,
+      "y": 0,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "0d10ec19feb1e0ce44951eb1876870ce"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "619d14835cb21414fa5243ab8178f98c"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "cb2977f4ab4d90e1bb720f80f0f2310f"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "197609857391c0da9660977c05251105"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "946cfda287fa7cc3203eebe05de9b432"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "f19d08ac79f2fecd1abdded701a7a1b9"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "b5770dd06885c02287d840aaa4f6a94e"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "8317b940be66757d3f37e2ed945af645"
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "3e3ed9679c3d5694452af5596003e9f9"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "91d575f16c709c18a1867118fb5f6936"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "f980c18ada5f85a29556c45b6a067c89"
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "eb13d601444c0af7c5d74d862c7f8af3"
+    },
+    {
+      "x": 4,
+      "y": 1,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "9ad1944b1fd271f28b13bc4474f882a5"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "16cd8fa739dcd37ef3677361421405b9"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "d756a030a6286eaa27401605ab6fdb79"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "5b78292bb4db843d92b6ac6873ea827d"
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "6077fe269ed0f92487f17870ceb991cd"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "a5c5fd6291e7fa791536ebe8c5f41c4e"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "0ca8faebb172d9be64b3bc405f9aa39a"
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "90b2b10880f7d57d175099cf0f11e465"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "511576fae741f2c29e5ce7c64b360252"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "7c4fc5a98d86e2bf97d2092099bd16f0"
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "c892032cd82fbbb7574b60f04091a2f1"
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "9c0477e624d6b87141dbbd2f4b6456bd"
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "7db275eca9623c47913c1d4d944e116e"
+    },
+    {
+      "x": 1,
+      "y": 3,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "e0c03112c55b54ff4820e69165462284"
+    },
+    {
+      "x": 2,
+      "y": 3,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "cf6c001d192ba072bd5e4c7f55d6dde6"
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "a43491b32f9673bbeabe294061c04412"
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "3e5245d99bd388fcea4b57aed36169b6"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "b246745002ed788f5074851bf93e8c88"
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "cf7bf846e4eb1920331cabcad9b6a0c6"
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "6d1616926354d336be5a95c9b4bdbaba"
+    },
+    {
+      "x": 0,
+      "y": 4,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "56219330cb4942b90fe1408f57f8d08f"
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "9d85c5a11779d82b2373d2dcc4728208"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "4f56792953f0099cbe867b54eb6a6a9c"
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "6002898ea72b54222b0a9686f33cf271"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "2b7b764f50309c9b0e64f59602688d7c"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "d9d3e7ef5d7aa87db4664eed95960182"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "2bfab9f3a6a7d0078fa0f7f05638fd80"
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "1fba3ab69c4ffc7d506b70ab911e6595"
+    },
+    {
+      "x": 0,
+      "y": 5,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "cf9d1ea045261601f8eefe220c3392cc"
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "90eb4fb547a79671827161048d1b3bb7"
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "4cd1d74707d9b86a32b1e048760c39ef"
+    },
+    {
+      "x": 3,
+      "y": 5,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "bf8ce002f232cbe36e8b7e7b92970956"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "0d0d7eda2500d1a9b48f9c763e264d91"
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "a09f2974cb2a93c39900b45d52c5ecb7"
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "3a0bc31eb397e4e8f0a109f8c8f01316"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "32a6bac747662224dc9f684fcf55cdd8"
+    },
+    {
+      "x": 0,
+      "y": 6,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "cfcdcd9853a9381b0a92f17ab9bb2fcd"
+    },
+    {
+      "x": 1,
+      "y": 6,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "b90b406c3132fb9837f6ab443882b3f7"
+    },
+    {
+      "x": 2,
+      "y": 6,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "0f6295d6482c9368ce38e8faaa14fabc"
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "a78a79727a9adc9120b84ad4ff592c04"
+    },
+    {
+      "x": 4,
+      "y": 6,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "76ac74376a589582338188a243e1ee25"
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "b320c0e13e5bf70f4a7bf5938432bad6"
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "39d27ca3c5a13d552cc08c08008492f5"
+    },
+    {
+      "x": 7,
+      "y": 6,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "8b80547761a4645b79de95edeafc19b1"
+    },
+    {
+      "x": 0,
+      "y": 7,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "e8303e4b2b609d4d329f607dab4a6c12"
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "793de48d89bc883f093e1b0e71dffcc3"
+    },
+    {
+      "x": 2,
+      "y": 7,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "908d3a5217cfe0f5791dbb728eade8c8"
+    },
+    {
+      "x": 3,
+      "y": 7,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "a7650f3eeb6d42d8a995d9ec9e989bae"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "4ae6801de2ba28e1ce24320230c6746d"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "d32162bdf53cebffb74add1f0e074276"
+    },
+    {
+      "x": 6,
+      "y": 7,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "4c10dc5ffa0c242b1171eea521c5b8ca"
+    },
+    {
+      "x": 7,
+      "y": 7,
+      "status": 200,
+      "cacheControl": "public, max-age=259200, s-maxage=259200",
+      "etag": "1e26c5468c6be0619658371b1e0c8b1d"
+    }
+  ]
+}

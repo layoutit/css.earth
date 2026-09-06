@@ -216,7 +216,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
           own: context.own, onStatus: layer.geographic ? publishGeographicStatus : undefined, onError: fatal });
         pageLayers.set(layer.id, pages);
         if (layer.geographic) {
-          geographic = createGeographicLensRuntime({ pages, capacity: layer.plan, objectId: definition.id, getEntity: selectedEntity,
+          geographic = createGeographicLensRuntime({ pages, capacity: layer.plan, surface: mounted.observationSurface, objectId: definition.id, getEntity: selectedEntity,
             selectBase: id => id === definition.destinations.defaultLens ? selection.dispatch({kind:"lens",id}) : Promise.resolve(false),
             onChange: () => { controls?.publish(); notifySelection(); } });
           context.own(() => geographic.destroy());
@@ -333,7 +333,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
           retainedSunMarkerCount: heliocentric?.retainedSunMarkerCount ?? 0,
           retainedCaptionCount: heliocentric?.retainedCaptionCount ?? 0,
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
-        runtime: Object.freeze({ destinationStats: () => destinations?.stats() ?? null, geographicLens: () => geographic?.state() ?? null, destinationCatalog: () => definition.destinations?.catalog ?? null, destination: () => destinations?.state() ?? null, lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
+        runtime: Object.freeze({ destinationStats: () => destinations?.stats() ?? null, geographicLens: () => geographic?.state() ?? null, geographicSurface: () => geographic?.stats() ?? null, destinationCatalog: () => definition.destinations?.catalog ?? null, destination: () => destinations?.state() ?? null, lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection.state, controls: controls.stats, view: () => currentView,
           presentation: () => Object.freeze({ ...observe().presentation }),
           pages: () => Object.freeze(Object.fromEntries([...pageLayers].map(([id, layer]) => [id, layer.stats()]))) }),

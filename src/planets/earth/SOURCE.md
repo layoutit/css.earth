@@ -175,7 +175,7 @@ emulation is not physical-device proof. Reports and actual screenshots are in
 
 `source/land-cover/` pins the 2021 v200 product identity, the Terrascope MapProxy
 WMTS capabilities, the official QGIS color legend and the observed empty-image
-sentinel. This admits a source for integration; it does not yet add a new lens.
+sentinel. The global land-cover lens uses this source through the shared observation package and existing card.
 The provider's `esa-worldcover-map-10m-2021-v2_map` is a categorical RGB map, not
 the numerical classification raster. The eleven labels/colors come from the
 symbology linked by the official data-access page, not an authored color scale.
@@ -202,3 +202,11 @@ The test's owned fixture route disables browser HTTP cache, so its repeated tile
 proves matching source bytes, not a cache hit. It never downloads the global
 classification raster. Source, attribution, terms and the integration limits are
 recorded in `source/land-cover/manifest.json`.
+
+### Prepared land-cover overview and indexed detail
+
+`overview-tiles.json.gz` retains 64 original versioned level-3 provider PNGs in a bounded source archive: 504,618 received PNG bytes / 502,298 archive bytes. The acquisition receipt records response cache headers and a dated aggregate hash. `acquire-land-cover-overview.mjs` verifies the pinned archive by default; `--acquire` fetches tiles sequentially, enforces per-response and aggregate limits, and fails without replacing the existing pin if the provider bytes change. No global classification GeoTIFF or geometry copy is required.
+
+`prepare-land-cover-lens.mjs` samples that overview into the accepted Earth's atlas/cap mapping. Sampling preserves source category colors and transparent gaps. Fifty lossless textures total 206,548 encoded bytes / 24,870,912 decoded bytes; all DPRs use this same overview. They occupy existing surface texture slots. Direct detail uses original provider PNGs over unchanged geometry release `fef1519d5f243617`, with prepared levels 5–14 and explicit versioned-provider identity. Its 208,852-byte compressed root directory points to existing immutable geometry ranges; no global geometry packs are regenerated or copied.
+
+The source catalogue and WMTS service extents describe different coverage facts. The overview is a captured source snapshot; detailed provider URLs may change their response bytes, fail, or return no-data. The admitted 67-byte empty sentinel is recognized by its exact hash and never presented as a successful classified image. Unknown image dimensions or corrupt directories remain failures. The original noise images and matrices are unchanged. The surface package and its 11-row legend load only when selected; shared runtime and shell code contain no WorldCover source records or generated geometry.

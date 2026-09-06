@@ -6,10 +6,10 @@ export function prepareOverlayCapacity() {
   return { schema: "cssearth-prepared-map-pages@1", dataset: null,
     assetOrigin: "https://earth-assets.lowpoly.cc", assetPath: "/scenes/earth/",
     roots: [], initialLayer: { frameMatrix: identity, textureMatrix: identity },
-    pageTemplate: "clipped-projective", rasterScale: 32, poolSize: 32,
+    pageTemplate: "clipped-projective", rasterScale: 32, rasterScales: [8, 32], poolSize: 32,
     minimumZoom: 16, maximumDecodedBytes: 128 * 1024 * 1024, decodedPageBytes: 4 * 1024 * 1024,
     targetCssPixels: 2048, maximumConcurrentLoads: 3,
-    index: { maximumDirectories: 1, maximumBytes: 1, maximumDirectoryBytes: 1, maximumConcurrentLoads: 1 } };
+    index: { maximumDirectories: 32, maximumBytes: 8 * 1024 * 1024, maximumDirectoryBytes: 2 * 1024 * 1024, maximumConcurrentLoads: 3 } };
 }
 
 // Split a north-up source tile at accepted face boundaries during preparation.

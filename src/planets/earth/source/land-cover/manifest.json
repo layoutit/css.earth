@@ -88,6 +88,19 @@
       "origin": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/webmercator/06/32/56.png",
       "bytes": 67,
       "sha256": "ebf4f635a17d10d6eb46ba680b70142419aa3220f228001a036d311a22ee9d2a"
+    },
+    {
+      "path": "overview-tiles.json.gz",
+      "origin": "https://mapproxy.terrascope.be/mapproxy/wmts/esa-worldcover-map-10m-2021-v2_map/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png",
+      "bytes": 502298,
+      "sha256": "e03a0cfd286f963ca4068989008da3cc3153e5e1a58c2fb20131b36dbff833cf",
+      "decodedBytes": 688054,
+      "decodedSha256": "b45ca7e8beea6f805aa2755efba9b546633fdb17b8381f7f2c5c2ec8db714dc9"
     }
-  ]
+  ],
+  "overview": {
+    "zoom": 3,
+    "source": "overview-tiles.json.gz",
+    "qualification": "Bounded whole-world overview from 64 provider tiles, nearest-category sampling; finer source tiles remain direct provider requests."
+  }
 }

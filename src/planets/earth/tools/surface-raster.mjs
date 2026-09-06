@@ -135,8 +135,8 @@ export function createEarthSurfaceRasterPlan() {
 // Bake the projective texture into RGBA, as in Pluto, so the browser only
 // positions an affine rectangle. Pixels outside the trapezoid stay transparent
 // instead of relying on Chrome to flatten a perspective-warped child.
-export function bakeEarthSurfaceRaster(data, { width, height, channels }, cells, density = 8, page = 0) {
-  if (channels !== 3 || data.length !== width * height * channels ||
+export function bakeEarthSurfaceRaster(data, { width, height, channels }, cells, density = 8, page = 0, sampling = "bilinear") {
+  if (!(channels === 3 || sampling === "nearest" && channels === 4) || !["bilinear", "nearest"].includes(sampling) || data.length !== width * height * channels ||
       ![2, 4, 8].includes(density) || width !== 1024 * density || height !== 512 * density) {
     throw new Error("Earth surface source dimensions do not match the prepared density.");
   }
@@ -169,6 +169,7 @@ export function bakeEarthSurfaceRaster(data, { width, height, channels }, cells,
     const x0 = Math.floor(x), y0 = Math.floor(y), tx = x - x0, ty = y - y0;
     const at = (sx, sy) => data[(Math.max(0, Math.min(height - 1, sy)) * width +
       ((sx % width) + width) % width) * channels + channel];
+    if (sampling === "nearest") return at(Math.round(x), Math.round(y));
     return (at(x0, y0) * (1 - tx) + at(x0 + 1, y0) * tx) * (1 - ty) +
       (at(x0, y0 + 1) * (1 - tx) + at(x0 + 1, y0 + 1) * tx) * ty;
   };
@@ -178,8 +179,9 @@ export function bakeEarthSurfaceRaster(data, { width, height, channels }, cells,
     const right = Math.ceil((cell.x + cell.size) * atlasScale);
     const bottom = Math.ceil((cell.y + cell.size) * atlasScale);
     for (let y = top; y < bottom; y++) for (let x = left; x < right; x++) {
-      const rgb = [0, 0, 0]; let count = 0;
-      for (const dy of [0.25, 0.75]) for (const dx of [0.25, 0.75]) {
+      const rgb = [0, 0, 0]; let count = 0, alpha = 0;
+      const offsets = sampling === "nearest" ? [0.5] : [0.25, 0.75];
+      for (const dy of offsets) for (const dx of offsets) {
         const py = (y + dy - cell.y * atlasScale) / cellDensity;
         const denominator = 1 - cell.perspectiveY * py;
         let u = (x + dx - cell.x * atlasScale) / cellDensity / denominator;
@@ -191,12 +193,13 @@ export function bakeEarthSurfaceRaster(data, { width, height, channels }, cells,
         // latitudes at boundaries. Do not reverse or clamp individual bands.
         const sy = (cell.source.southY - v / 32 * cell.source.height) * scale - 0.5;
         for (let channel = 0; channel < 3; channel++) rgb[channel] += sample(sx, sy, channel);
+        alpha += channels === 4 ? sample(sx, sy, 3) : 255;
         count++;
       }
       if (!count) continue;
       const target = (y * outputWidth + x) * 4;
       for (let channel = 0; channel < 3; channel++) output[target + channel] = Math.round(rgb[channel] / count);
-      output[target + 3] = Math.round(count / 4 * 255);
+      output[target + 3] = Math.round(alpha / offsets.length ** 2);
     }
   }
   return { data: output, width: outputWidth, height: outputHeight, channels: 4 };

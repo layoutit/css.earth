@@ -575,6 +575,25 @@
       "consumers": [
         "land-cover"
       ]
+    },
+    {
+      "id": "worldcover-land-cover-overview",
+      "path": "land-cover/overview-tiles.json.gz",
+      "expectedSha256": "e03a0cfd286f963ca4068989008da3cc3153e5e1a58c2fb20131b36dbff833cf",
+      "expectedBytes": 502298,
+      "origin": "https://esa-worldcover.org/en/data-access",
+      "credit": "ESA WorldCover consortium / VITO Terrascope",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://esa-worldcover.org/en/data-access",
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html"
+      ],
+      "acquisition": "Bounded sequential acquisition of 64 level-3 PNG tiles with acquire-land-cover-overview.mjs. Preserve the pinned snapshot on provider drift.",
+      "redistribution": "WorldCover visualization and symbology with required attribution; service metadata retains publisher identity.",
+      "consumers": [
+        "land-cover"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -666,8 +685,8 @@
     },
     {
       "path": "land-cover/manifest.json",
-      "expectedSha256": "fddd601adce0431545409bdfb9ebc94581a29a2c9d6febdc2239e6618ab6a3cd",
-      "expectedBytes": 3865,
+      "expectedSha256": "3c16aaa2fff72809a0624d7ed73038eaea297f60866b6e4ae4ef4d4f6a994317",
+      "expectedBytes": 4528,
       "purpose": "WorldCover 2021 source version, direct provider addressing, official legend, no-data identity and service conditions"
     },
     {
@@ -678,9 +697,15 @@
     },
     {
       "path": "observations.json",
-      "expectedSha256": "0829f20e352f258250c4261e9bb798b4cd4e2a0a5b047766807fa135dadecf51",
-      "expectedBytes": 363,
+      "expectedSha256": "beec737a6efc9446290e8b37e1e1ded77561eabc8fe19f5942962fba907e2dbf",
+      "expectedBytes": 734,
       "purpose": "Prepared observation package inventory and source applicability; entity kinds do not define separate lens implementations"
+    },
+    {
+      "path": "land-cover/overview-acquisition.json",
+      "purpose": "Dated 64-tile overview source receipt, cache response headers and exact aggregate identity",
+      "expectedBytes": 11461,
+      "expectedSha256": "d11418c60012636508cfdb89d21f19cf7402cf05ea083823cc1264a88d6aa144"
     }
   ]
 }

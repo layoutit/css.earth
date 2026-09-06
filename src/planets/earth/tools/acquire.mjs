@@ -34,6 +34,7 @@ urls.set("openspace/earth-globe.asset", "https://raw.githubusercontent.com/OpenS
 urls.set("openspace/earth-atmosphere.asset", "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/earth/atmosphere.asset");
 
 if (verifyOnly) {
+  await run("acquire-land-cover-overview.mjs");
   await run("prepare-noise-lens.mjs", ["--verify-only"]);
   await run("prepare-places.mjs", ["--verify-only"]);
   console.log(JSON.stringify(await verifyEarthSourceManifest(), null, 2));
@@ -60,6 +61,11 @@ for (const entry of manifest.inputs) {
   }
   if (entry.path === "places/administrative-records.tsv.gz") {
     await run("acquire-administrative-records.mjs", refresh ? ["--reacquire"] : []);
+    await validateEarthSourcePath(entry.path);
+    continue;
+  }
+  if (entry.path === "land-cover/overview-tiles.json.gz") {
+    await run("acquire-land-cover-overview.mjs", ["--acquire"]);
     await validateEarthSourcePath(entry.path);
     continue;
   }

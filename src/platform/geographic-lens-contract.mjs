@@ -1,7 +1,12 @@
+import { requireWmtsRasterSource } from "./prepared-map/wmts-raster-source.mjs";
+import { requireGeographicRootReference } from "./prepared-map/geographic-index-contract.mjs";
+
 // Finite shell and renderer capacities, independent of the number of datasets.
 export const GEOGRAPHIC_LENS_CAPACITY = 8;
 export const GEOGRAPHIC_LEGEND_CAPACITY = 16;
 export const GEOGRAPHIC_PACKAGE_BYTE_LIMIT = 256 * 1024;
+export const GEOGRAPHIC_OVERVIEW_LIMITS = Object.freeze({ images: 64, decodedBytes: 32 * 1024 * 1024,
+  imageBytes: 8 * 1024 * 1024, concurrentLoads: 3 });
 
 const finiteMatrix = value => typeof value === "string" && value.split(",").length === 16 && value.split(",").every(n => n.trim() && Number.isFinite(Number(n)));
 const hash = value => /^[a-f0-9]{64}$/u.test(value ?? "");
@@ -52,13 +57,18 @@ export function requireGeographicLensPackage(value, descriptor, entityId, capaci
         !/^rgb\((?:\d{1,3},){2}\d{1,3}\)$/u.test(item.color) || item.color.match(/\d+/gu).some(n => +n > 255))) {
     throw new Error("Incompatible geographic lens content or source identity.");
   }
+  if (value.overview !== undefined) requireGeographicOverview(value.overview, p, capacity);
+  if (value.schema === "cssearth-geographic-lens@2" && p?.topology === "wmts-quadtree@1") {
+    requireIndexedGeographicPages(p, capacity);
+    return value;
+  }
   if (p?.schema !== "cssearth-prepared-map-pages@1" || p.assetPath !== capacity.assetPath ||
       p.assetOrigin !== capacity.assetOrigin || p.rasterScale !== capacity.rasterScale ||
       p.poolSize !== capacity.poolSize || !Number.isSafeInteger(p.maximumDecodedBytes) ||
       p.maximumDecodedBytes < capacity.decodedPageBytes * 2 || p.maximumDecodedBytes > capacity.maximumDecodedBytes ||
       p.decodedPageBytes !== capacity.decodedPageBytes || !Number.isSafeInteger(p.maximumConcurrentLoads) ||
       p.maximumConcurrentLoads < 1 || p.maximumConcurrentLoads > capacity.maximumConcurrentLoads ||
-      p.topology !== undefined || !p.index || Object.keys(capacity.index).some(key => p.index[key] !== capacity.index[key]) || p.minimumZoom < 0 ||
+      p.topology !== undefined || !withinIndexCapacity(p.index, capacity.index) || p.minimumZoom < 0 ||
       !Number.isFinite(p.minimumZoom) || !Array.isArray(p.roots) || !p.roots.length || p.roots.length > capacity.poolSize / 2 ||
       new Set(p.roots.map(page => page.key)).size !== p.roots.length || p.roots.some(page =>
         !text(page.key) || page.directory !== undefined || page.coverageParts !== undefined ||
@@ -73,4 +83,41 @@ export function requireGeographicLensPackage(value, descriptor, entityId, capaci
     throw new Error("Geographic lens exceeds its prepared renderer capacity.");
   }
   return value;
+}
+
+export function requireGeographicOverview(overview, plan, capacity) {
+  const limits = GEOGRAPHIC_OVERVIEW_LIMITS;
+  if (overview?.schema !== "cssearth-geographic-overview@1" || !Array.isArray(overview.images) || !overview.images.length ||
+      overview.images.length > limits.images || new Set(overview.images.map(item => item.slot)).size !== overview.images.length ||
+      overview.images.some(({ slot, image }) => !text(slot) || !hash(image?.sha256) || !image.url?.startsWith(capacity.assetPath) ||
+        image.url.includes("..") || !/^\/scenes\/[a-z][a-z0-9-]*\/[a-z0-9-]+-[a-f0-9]{16}\.webp$/u.test(image.url) ||
+        !image.url.endsWith(`-${image.sha256.slice(0,16)}.webp`) || !Number.isSafeInteger(image.bytes) || image.bytes < 1 || image.bytes > limits.imageBytes ||
+        ![image.width, image.height].every(n => Number.isSafeInteger(n) && n > 0 && n <= 4096))) throw new Error("Invalid prepared geographic overview.");
+  const bytes = overview.images.reduce((sum, {image}) => sum + image.width * image.height * 4, 0);
+  if (overview.decodedBytes !== bytes || bytes > limits.decodedBytes || bytes + plan.maximumDecodedBytes > capacity.maximumDecodedBytes) {
+    throw new Error("Geographic overview exceeds the observation memory capacity.");
+  }
+  return overview;
+}
+
+function withinIndexCapacity(index, capacity) {
+  return index && Object.keys(capacity).every(key => Number.isSafeInteger(index[key]) && index[key] > 0 && index[key] <= capacity[key]);
+}
+
+function requireIndexedGeographicPages(p, capacity) {
+  if (p.schema !== "cssearth-prepared-map-pages@1" || p.assetPath !== capacity.assetPath || p.assetOrigin !== capacity.assetOrigin ||
+      p.geometryOrigin !== capacity.assetOrigin || !/^[a-f0-9]{16}$/u.test(p.geometryVersion ?? "") || !text(p.geometryDataset) || !text(p.dataset) ||
+      p.rasterScale !== 8 || !(capacity.rasterScales ?? [capacity.rasterScale]).includes(p.rasterScale) || p.pageTemplate !== "clipped-projective" ||
+      p.poolSize !== capacity.poolSize || p.decodedPageBytes !== 256 * 256 * 4 ||
+      !Number.isSafeInteger(p.maximumDecodedBytes) || p.maximumDecodedBytes < p.decodedPageBytes * 2 || p.maximumDecodedBytes > capacity.maximumDecodedBytes ||
+      !Number.isSafeInteger(p.maximumConcurrentLoads) || p.maximumConcurrentLoads < 1 || p.maximumConcurrentLoads > capacity.maximumConcurrentLoads ||
+      !withinIndexCapacity(p.index, capacity.index) || !Array.isArray(p.roots) || p.roots.length ||
+      !Number.isFinite(p.minimumZoom) || p.minimumZoom < 0 || !Number.isFinite(p.targetCssPixels) || p.targetCssPixels < 1 ||
+      !Number.isInteger(p.levels?.minimum) || !Number.isInteger(p.levels?.maximum) ||
+      p.levels.minimum < 0 || p.levels.maximum < p.levels.minimum || p.levels.maximum > 19) {
+    throw new Error("Indexed geographic lens exceeds its prepared capacity.");
+  }
+  requireGeographicRootReference(p.rootDirectory, p.assetPath);
+  requireWmtsRasterSource(p.imageSource);
+  if (p.levels.maximum >= p.imageSource.levels.length) throw new Error("Geographic geometry exceeds its admitted provider levels.");
 }

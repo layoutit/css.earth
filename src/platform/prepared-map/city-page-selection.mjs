@@ -128,6 +128,7 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
     return next;
   };
   const selected=[],fallbacks=[];
+  let constrained = false;
   // Follow only prepared child references. Each tile's image pieces form one
   // replacement group, so an apron or Mercator strip cannot disappear alone.
   const visit=(key,path=[])=>{
@@ -148,6 +149,7 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
       if(childGroups.every(g=>g!==null)){
         const deeper=childGroups.flat();
         if(deeper.length<=capacity&&deeper.reduce((s,p)=>s+p.node.width*p.node.height*4,0)<=byteCapacity)return deeper;
+        constrained = true;
       }
     }
     if(own.length && entry.node.children.length && refine && fallbacks.length<12)fallbacks.push({key,span:entry.span,own:own.length,children:entry.node.children.map(key=>({key,stub:pages.get(key).stub,pages:pages.get(key).pages?.length}))});
@@ -157,7 +159,7 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
   for(const root of roots){const group=visit(root.node.key);if(group)selected.push(...group);}
   // Refinement can span adjacent root tiles. If their combined detail exceeds
   // the fixed pool, choose a coarser prepared cut for the entire viewport.
-  if(selected.length>capacity||selected.reduce((s,p)=>s+p.node.width*p.node.height*4,0)>byteCapacity){
+  if(constrained||selected.length>capacity||selected.reduce((s,p)=>s+p.node.width*p.node.height*4,0)>byteCapacity){
     // Near globe scale, even the complete coarsest cut can exceed the pool.
     // Reveal the retained base surface for that view, without publishing a
     // partial tile group or expanding the budget. Later views retry normally.

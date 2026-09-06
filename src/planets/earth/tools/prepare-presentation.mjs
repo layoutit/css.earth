@@ -117,6 +117,8 @@ export async function prepareEarthPresentation() {
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
     tree,variants,materials:tracks,viewBindings:[materialCounter,cutawayCounter].map(node=>({kind:"counter-rotation",target:index(node),systemTransform:null})),animations:[],
     motionFrame:[index(system),index(body.surface[0])],
+    observationSurface:{slots:[...Array.from({length:pages},(_,i)=>({id:`surface:${i}`,bindings:body.surface.map(node=>({target:index(node),name:`--earth-surface-page-${i}`}))})),
+      {id:"poles",bindings:body.polar.map(node=>({target:index(node),name:"--earth-poles-texture"}))}]},
     pageLayers:[{id:"city",plan:PREPARED_EARTH_CITY_PAGES,lensIds:["normal"]},{id:"geographic",geographic:true,plan:prepareOverlayCapacity(),lensIds:["normal"]}]
       .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:"/scenes/earth/"},carrier:index(body.surface[0]),system:index(system),className:"earth-city-page",textureClassName:"earth-api-texture"}))};
 }

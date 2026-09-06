@@ -1,6 +1,7 @@
 import { preparedScenePitch } from "./camera-math.mjs";
 import { createPreparedMaterialPublisher } from "./prepared-material.mjs";
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.mjs";
+import { createPreparedTextureOverlay } from "./prepared-texture-overlay.mjs";
 
 const matches = (variant, selection) => Object.entries(variant.when).every(([name, value]) => selection[name] === value);
 export function selectedPreparedVariant(definition, selection) {
@@ -95,7 +96,9 @@ export function mountPreparedPresentation(stage, context, definition) {
   const round = (value, precision) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
   const formatNumber = value => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = index => index === -1 ? stage : nodes[index];
+  const observationSurface = definition.observationSurface ? createPreparedTextureOverlay(definition.observationSurface.slots, nodes) : null;
   return Object.freeze({ cameraElement, sceneElement,
+    ...(observationSurface ? { observationSurface } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
       carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),
@@ -112,7 +115,10 @@ export function mountPreparedPresentation(stage, context, definition) {
         const element = target(binding.target);
         if (binding.kind === "attribute") writeAttribute(element, binding.name, value);
         else if (binding.kind === "class") element.classList.toggle(binding.name, value);
-        else { writeStyle(element, binding.name, value); styleWrites++; }
+        else {
+          if (binding.kind !== "texture" || !observationSurface?.write(binding.target, binding.name, value)) writeStyle(element, binding.name, value);
+          styleWrites++;
+        }
       }
       selectionPublications++;
     },

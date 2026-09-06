@@ -3,7 +3,7 @@ import { requireObjectControls } from "../../site/scene-contract.mjs";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.mjs";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.mjs";
 import { validatePreparedHeliocentricView } from "./heliocentric-view.mjs";
-import { GEOGRAPHIC_LENS_CAPACITY, requireGeographicLensReference } from "./geographic-lens-contract.mjs";
+import { GEOGRAPHIC_LENS_CAPACITY, GEOGRAPHIC_OVERVIEW_LIMITS, requireGeographicLensReference } from "./geographic-lens-contract.mjs";
 
 import { PREPARED_PRESENTATION_SCHEMA } from "./prepared-schema.mjs";
 export { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-schema.mjs";
@@ -40,7 +40,7 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "observationSurface"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -219,6 +219,25 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     }
   }
   const variants = array(plan.variants, "selection variants");
+  if (plan.observationSurface !== undefined) {
+    record(plan.observationSurface, "observation surface", ["slots"]);
+    const slots = array(plan.observationSurface.slots, "observation surface slots"), seen = new Set();
+    if (!slots.length || slots.length > GEOGRAPHIC_OVERVIEW_LIMITS.images || !plan.pageLayers?.some(layer => layer.geographic)) fail("observation surface requires a bounded geographic layer");
+    unique(slots.map(slot => slot.id), "observation surface slots");
+    for (const slot of slots) {
+      record(slot, "observation slot", ["id", "bindings"]); string(slot.id, "observation slot id");
+      if (!array(slot.bindings, "observation slot bindings").length || slot.bindings.length > 16) fail("observation slot bindings exceed capacity");
+      for (const binding of slot.bindings) {
+        record(binding, "observation texture binding", ["target", "name"]); node(binding.target);
+        const key = `${binding.target}:${binding.name}`;
+        if (seen.has(key) || !/^--[a-z][a-z0-9-]*$/u.test(binding.name) ||
+            !variants.some(variant => variant.writes.some(write => write.kind === "texture" && write.target === binding.target && write.name === binding.name))) {
+          fail("observation slot must reuse a unique existing prepared surface texture");
+        }
+        seen.add(key);
+      }
+    }
+  }
   for (const variant of variants) {
     record(variant, "variant", ["when", "required", "writes", "materials", "navigation"]);
     if(variant.navigation!==undefined) {

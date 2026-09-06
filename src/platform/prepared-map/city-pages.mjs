@@ -24,6 +24,8 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   let pendingFrame = null;
   let view = null;
   let activeLoads = 0;
+  const idleWaiters = new Set();
+  const publishIdle = () => { if (activeLoads === 0 || destroyed) { for (const resolve of idleWaiters) resolve(); idleWaiters.clear(); } };
   let requests = 0;
   let aborts = 0;
   let evictions = 0;
@@ -54,7 +56,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       leaf.firstElementChild.appendChild(apiTexture);
     }
     slots.push({ leaf, texture: leaf.firstElementChild, apiTexture, image: new Image(),
-      key: null, blobUrl: null, apiHandle: null, controller: null, generation: 0, ready: false, published: false, decodedBytes: 0 });
+      key: null, blobUrl: null, apiHandle: null, controller: null, generation: 0, ready: false, published: false, empty: false, decodedBytes: 0 });
     carrier.appendChild(leaf);
   }
     index = createCityIndex(plan, schedule);
@@ -82,7 +84,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     if (slot.blobUrl) URL.revokeObjectURL(slot.blobUrl);
     slot.apiHandle?.release();
     delete slot.leaf.dataset.cityPage;
-    Object.assign(slot, { key: null, blobUrl: null, apiHandle: null, controller: null, ready: false, published: false, decodedBytes: 0 });
+    Object.assign(slot, { key: null, blobUrl: null, apiHandle: null, controller: null, ready: false, published: false, empty: false, decodedBytes: 0 });
   }
 
   function refresh() {
@@ -108,7 +110,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
         originY:cameraRect.top+cameraRect.height/2-stageRect.top });
     if(desired.join(",")!==selection.keys.join(",")){
       progressiveInitialView=!slots.some(slot=>slot.published)&&selection.keys.every(key=>
-        ["terrascope-wms@1","terrascope-wmts@1"].includes(index.nodes().get(key)?.rasterSource));
+        ["terrascope-wms@1","terrascope-wmts@1","prepared-wmts-raster@1"].includes(index.nodes().get(key)?.rasterSource));
     }
     selectionDiagnostics={fallbacks:selection.fallbacks,scale:selection.selectionScale,cuts:selection.cuts,baseSurfaceFallback:selection.baseSurfaceFallback};
     desired = selection.keys;
@@ -144,7 +146,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     for (const slot of slots) {
       if (slot.key && !desired.includes(slot.key)) {if(complete)release(slot);}
       else if (slot.key && slot.ready && !slot.published) {
-        slot.leaf.style.visibility = "visible";
+        slot.leaf.style.visibility = slot.empty ? "hidden" : "visible";
         if(slot.apiTexture&&slot.apiTexture.style.backgroundImage!=="none")slot.apiTexture.style.visibility="visible";
         slot.published = true;
         publications += 1;
@@ -162,7 +164,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     activeLoads += 1;
     requests += 1;
     let blobUrl = null;
-    const api = page.rasterSource === "terrascope-wms@1" || page.rasterSource === "terrascope-wmts@1";
+    const api = ["terrascope-wms@1", "terrascope-wmts@1", "prepared-wmts-raster@1"].includes(page.rasterSource);
     try {
       if(page.imageMatrix&&!slot.apiTexture)throw new Error("The prepared page requires a clipping template.");
       if(api){
@@ -187,6 +189,11 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
         slot.blobUrl = blobUrl;
       }
       if (destroyed || controller.signal.aborted || generation !== slot.generation) return;
+      if (api && slot.apiHandle.empty) {
+        slot.empty = true; slot.ready = true; slot.decodedBytes = 0; slot.controller = null;
+        slot.leaf.dataset.cityPage = page.key;
+        publishReadyView(); return;
+      }
       slot.image.src = blobUrl;
       await slot.image.decode();
       if (destroyed || controller.signal.aborted || generation !== slot.generation) return;
@@ -219,21 +226,26 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       activeLoads -= 1;
       if (!api && blobUrl && (destroyed || generation !== slot.generation)) URL.revokeObjectURL(blobUrl);
       pump();
+      publishIdle();
       onStatus();
     }
   }
 
   return Object.freeze({
+    whenIdle: () => activeLoads === 0 || destroyed ? Promise.resolve() : new Promise(resolve => idleWaiters.add(resolve)),
     replacePlan(next) {
       if (destroyed) return;
       if (next && (next.schema !== capacity.schema || next.assetPath !== capacity.assetPath ||
-          next.assetOrigin !== capacity.assetOrigin || next.rasterScale !== capacity.rasterScale ||
+          next.assetOrigin !== capacity.assetOrigin || !(capacity.rasterScales ?? [capacity.rasterScale]).includes(next.rasterScale) ||
           next.poolSize !== slots.length || next.maximumDecodedBytes > capacity.maximumDecodedBytes ||
           next.maximumConcurrentLoads > capacity.maximumConcurrentLoads)) throw new Error("Map package exceeds mounted capacity.");
       desired = []; desiredPages.clear(); errors = []; progressiveInitialView = false;
       for (const slot of slots) if (slot.key) release(slot);
       index.destroy();
       plan = next ?? capacity;
+      // Restore the prepared dataset's pixel box on the same retained leaves.
+      // Both admitted scales are fixed dataset facts, independent of device DPR.
+      for (const slot of slots) slot.leaf.style.width = slot.leaf.style.height = `${32 * plan.rasterScale}px`;
       index = createCityIndex(plan, schedule);
       enabled = Boolean(next);
       schedule();
@@ -253,7 +265,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     stats() {
       return { dataset: plan.dataset, qualification: plan.qualification,
         poolSize: slots.length, desired: [...desired], activeLoads, pendingSelection: pendingFrame !== null,
-        retained: slots.filter((slot) => slot.key).map(({ key, ready, published }) => ({ key, ready, published })),
+        retained: slots.filter((slot) => slot.key).map(({ key, ready, published, empty }) => ({ key, ready, published, ...(empty ? {empty} : {}) })),
         index: index.stats(), apiImages: apiImages.stats(),
         decodedPageByteBound: plan.maximumDecodedBytes,
         reservedDecodedBytes: slots.reduce((sum,slot)=>sum+slot.decodedBytes,0),
@@ -264,6 +276,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   function destroy() {
     if (destroyed) return;
     destroyed = true;
+    publishIdle();
     const failures = [];
     const cleanup = callback => { try { callback(); } catch (error) { failures.push(error); } };
     cleanup(() => observer?.disconnect());

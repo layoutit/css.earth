@@ -17,9 +17,13 @@ async function verify(bytes, expected) {
   const digest = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))].map(n => n.toString(16).padStart(2, "0")).join("");
   if (digest !== expected) throw new Error("Prepared JSON identity drifted.");
 }
-export async function readPreparedJson(response, reference) {
-  let bytes = await readBounded(response.body, reference.bytes);
+export async function readPreparedBytes(response, reference) {
+  const bytes = await readBounded(response.body, reference.bytes);
   await verify(bytes, reference.sha256);
+  return bytes;
+}
+export async function readPreparedJson(response, reference) {
+  let bytes = await readPreparedBytes(response, reference);
   if (reference.encoding === "gzip") {
     if (!Number.isSafeInteger(reference.decodedBytes) || reference.decodedBytes < 1 || reference.decodedBytes > 32 * 1024 * 1024) {
       throw new Error("Prepared JSON decoded capacity is invalid.");

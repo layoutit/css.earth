@@ -21,13 +21,19 @@ export function createApiImageTransport({fetchImage=fetch,wait=delay}={}) {
       let response,retry=false,retryMs=attempt===0?500:1500;
       try{
         requests++;activeRequests++;
-        try{response=await fetchImage(page.url,{signal:AbortSignal.any([entry.controller.signal,AbortSignal.timeout(30000)])});}
+        try{response=await fetchImage(page.url,{credentials:"omit",signal:AbortSignal.any([entry.controller.signal,AbortSignal.timeout(30000)])});}
         finally{activeRequests--;}
         if(response.ok){
           const blob=await readWmsImage(response,page);
           if(entry.controller.signal.aborted)throw entry.controller.signal.reason;
           receivedBytes+=blob.size;
           entry.bytes=blob.size;
+          const empty = page.provider?.emptyImage;
+          if (empty && blob.size === empty.bytes) {
+            const sha256 = [...new Uint8Array(await crypto.subtle.digest("SHA-256", await blob.arrayBuffer()))].map(n => n.toString(16).padStart(2,"0")).join("");
+            if (entry.controller.signal.aborted) throw entry.controller.signal.reason;
+            if (sha256 === empty.sha256) { entry.empty = true; return null; }
+          }
           entry.url=URL.createObjectURL(blob);
           return entry.url;
         }
@@ -66,7 +72,7 @@ export function createApiImageTransport({fetchImage=fetch,wait=delay}={}) {
       }else sharedAcquisitions++;
       entry.refs++;
       let released=false;
-      return {ready:entry.ready,release(){if(released)return;released=true;if(--entry.refs===0)remove(key,entry);}};
+      return {ready:entry.ready,get empty(){return entry.empty === true;},release(){if(released)return;released=true;if(--entry.refs===0)remove(key,entry);}};
     },
     stats:()=>({requests,retries,sharedAcquisitions,activeRequests,receivedBytes,
       residentImages:entries.size,residentEncodedBytes:[...entries.values()].reduce((sum,e)=>sum+e.bytes,0)}),

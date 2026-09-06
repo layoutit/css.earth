@@ -7,7 +7,16 @@
       "scope": { "objectId": "earth", "entityIds": ["3435910"] },
       "prepare": "tools/prepare-noise-lens.mjs",
       "prepared": "runtime/preparedNoise.mjs",
-      "descriptorExport": "PREPARED_EARTH_NOISE_DESCRIPTOR"
+      "descriptorExport": "PREPARED_EARTH_NOISE_DESCRIPTOR",
+      "assetsExport": "PREPARED_EARTH_NOISE_ASSETS"
+    },
+    {
+      "id": "worldcover-land-cover",
+      "scope": { "objectId": "earth" },
+      "prepare": "tools/prepare-land-cover-lens.mjs",
+      "prepared": "runtime/preparedLandCover.mjs",
+      "descriptorExport": "PREPARED_EARTH_LAND_COVER_DESCRIPTOR",
+      "assetsExport": "PREPARED_EARTH_LAND_COVER_ASSETS"
     }
   ]
 }
