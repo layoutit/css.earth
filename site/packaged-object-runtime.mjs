@@ -1,4 +1,4 @@
-import { createObjectRuntime, createNavigableObjectMount,
+import { createObjectRuntime, createNavigableObjectMount, preparedObjectCapabilities,
   createWorldContextObjectRuntime, prepareObjectResources } from '../src/renderers/css/dist/index.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import * as runtimePolicy from './runtime-policy.mjs';
@@ -9,6 +9,7 @@ export function bindPackagedObject(definition, mount = createObjectRuntime(defin
   return (stage, options) => mount(stage, {
     ...options,
     runtimePolicy,
+    capabilities: preparedObjectCapabilities,
     inputSurface: stage.ownerDocument.querySelector('.planet-input-surface'),
     mobilePreviewElement: stage.ownerDocument.querySelector('.planet-sidebar'),
     diagnostics: import.meta.env?.DEV === true,
@@ -40,5 +41,7 @@ export async function loadPackagedObject(descriptorInput) {
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();
     },
-  }, definition => bindContextualObject(definition, applicationContext, descriptorInput.properties.worldFrame));
+  }, definition => descriptorInput.properties.worldFrame
+    ? bindContextualObject(definition, applicationContext, descriptorInput.properties.worldFrame)
+    : bindPackagedObject(definition));
 }

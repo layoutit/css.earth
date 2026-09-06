@@ -1,11 +1,12 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createObjectSelectionRuntime } from "./object-selection-runtime.mjs";
-import { createPreparedResidency } from "./prepared-residency.mjs";
+import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
+import { createPreparedResidency } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture, preparedSelectionFixture } from "./test/object-runtime-package.mjs";
-import { mountPreparedPresentation } from "./prepared-presentation.mjs";
-import { runtimeDefinition as earthDefinition } from "../planets/earth/runtime/definition.mjs";
-import { runtimeDefinition as saturnDefinition } from "../planets/saturn/runtime/definition.mjs";
+import { mountPreparedPresentation } from '../renderers/css/dist/testing.js';
+const earthDefinition = await loadObjectTestDefinition('earth');
+const saturnDefinition = await loadObjectTestDefinition('saturn');
 import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
 import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mjs";
 

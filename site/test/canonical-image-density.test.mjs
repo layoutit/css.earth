@@ -3,6 +3,7 @@ import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 import { auditObjectRuntimeOwnership } from "../../tools/check-object-runtime-ownership.mjs";
+import { loadObjectContent } from "./load-object-content.mjs";
 import { OBJECTS } from "../objects.mjs";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../runtime-policy.mjs";
 
@@ -10,82 +11,38 @@ test("every object mounts one canonical high-density image bank", async () => {
   assert.equal(CANONICAL_PREPARED_IMAGE_DENSITY, 2);
   const ownership = await auditObjectRuntimeOwnership();
   assert.equal(ownership.complete, true);
-  for (const objectRecord of OBJECTS) {
-    const entry = ownership.entries.find(entry => entry.id === objectRecord.id);
-    assert.equal(entry.factoryCalls, 1,
-      `${objectRecord.id}: its actual registered loader must have one runtime factory`);
-    if (entry.migrated && (objectRecord.id === "mercury" || objectRecord.id === "venus")) {
-      const page = await readFile(
-        new URL(`../pages/${objectRecord.id}.astro`, import.meta.url),
-        "utf8",
-      );
-      const prepared = JSON.parse(await readFile(
-        new URL(`../../src/planets/${objectRecord.id}/prepared/object.json`, import.meta.url),
-        "utf8",
-      ));
-      const startupKeys = new Set(prepared.data.assets.startup);
-      const startupUrls = prepared.data.assets.entries
-        .filter(asset => startupKeys.has(asset.key))
-        .map(asset => asset.url)
-        .filter(url => typeof url === "string");
-      const sharedStyles = await readFile(
-        new URL("../../src/renderers/css/styles/planet-surfaces.css", import.meta.url),
-        "utf8",
-      );
-      assert.match(page, /PreparedObjectHead/u,
-        `${objectRecord.id}: migrated page must use the shared prepared head`);
-      assert.ok(startupUrls.some(url => url.includes("@2x")),
-        `${objectRecord.id}: prepared startup assets must include a high-density asset`);
-      assert.doesNotMatch(sharedStyles, /image-set\(/u,
-        `${objectRecord.id}: shared scene CSS must not select assets by device DPR`);
-      continue;
+  const head = await readFile(new URL("../components/PreparedObjectHead.astro", import.meta.url), "utf8");
+  assert.doesNotMatch(head, /imagesrcset|devicePixelRatio/u);
+  assert.match(head, /preparedAssets\.startup/u);
+  for (const { id } of OBJECTS) {
+    const entry = ownership.entries.find(entry => entry.id === id);
+    assert.equal(entry.factoryCalls, 1, id + ": actual loader must have one runtime factory");
+    assert.equal(entry.presentation.format, "json", id + ": runtime consumes prepared data");
+    const { object } = await loadObjectContent(id);
+    const startupKeys = new Set(object.data.assets.startup);
+    const startupUrls = object.data.assets.entries.filter(asset => startupKeys.has(asset.key))
+      .map(asset => asset.url).filter(url => typeof url === "string");
+    assert.ok(startupUrls.some(url => url.includes("@2x")), id + ": high-density startup assets");
+    const availableFiles = new Set(await readdir(new URL("../../public/scenes/" + id + "/", import.meta.url)));
+    for (const { url } of object.data.assets.entries) {
+      if (typeof url !== "string" || !url.startsWith("/scenes/" + id + "/") || url.includes("@2x")) continue;
+      const file = url.split("/").at(-1);
+      assert.equal(availableFiles.has(file.replace(/(\.[^.]+)$/u, "@2x$1")), false,
+        id + ": runtime must not select " + file + " when its high-density bank exists");
     }
-    const objectRoot = new URL(
-      `../../src/planets/${objectRecord.id}/`,
-      import.meta.url,
-    );
-    const [client, head, styles] = await Promise.all([
-      readFile(new URL(`../../${entry.entry.adapter ?? entry.entry.file}`, import.meta.url), "utf8"),
-      readFile(
-        new URL(`site/${objectRecord.name}Head.astro`, objectRoot),
-        "utf8",
-      ),
-      readFile(new URL("runtime/styles.css", objectRoot), "utf8"),
-    ]);
-    assert.doesNotMatch(
-      client,
-      /devicePixelRatio/u,
-      `${objectRecord.id}: device DPR must not select scene assets`,
-    );
-    assert.doesNotMatch(
-      head,
-      /imagesrcset/u,
-      `${objectRecord.id}: preload must not select a low-density asset`,
-    );
-    assert.match(
-      head,
-      /@2x|\["2"\]/u,
-      `${objectRecord.id}: preload must include a high-density asset`,
-    );
-    assert.doesNotMatch(
-      styles,
-      /image-set\(/u,
-      `${objectRecord.id}: scene CSS must not select assets by device DPR`,
-    );
-    const runtimeRoot = new URL("runtime/", objectRoot);
-    const runtimeModules = (await readdir(runtimeRoot))
-      .filter((fileName) => fileName.endsWith(".mjs"));
-    const runtimeSources = await Promise.all(runtimeModules.map(async (fileName) => ({
-      fileName,
-      source: await readFile(new URL(fileName, runtimeRoot), "utf8"),
-    })));
-    for (const { fileName, source } of runtimeSources) {
-      assert.doesNotMatch(
-        source,
-        /image-set\(|devicePixelRatio/u,
-        `${objectRecord.id}/${fileName}: runtime must not select assets by device DPR`,
-      );
-    }
+    const page = await readFile(new URL("../pages/" + id + ".astro", import.meta.url), "utf8");
+    assert.match(page, /PreparedObjectHead/u);
+    assert.match(page, /preparedAssets=\{preparedObject\.data\.assets\}/u);
+    assert.doesNotMatch(JSON.stringify(object.data), /image-set\(|devicePixelRatio/u);
+  }
+  const stylesRoot = new URL("../../src/renderers/css/styles/", import.meta.url);
+  for (const file of await readdir(stylesRoot)) {
+    if (file.endsWith(".css")) assert.doesNotMatch(await readFile(new URL(file, stylesRoot), "utf8"),
+      /image-set\(/u, file + ": CSS must not select assets by device DPR");
+  }
+  for (const file of ownership.sharedClosure.filter(file => file.startsWith("src/renderers/css/") || file === "site/packaged-object-runtime.mjs")) {
+    assert.doesNotMatch(await readFile(new URL("../../" + file, import.meta.url), "utf8"),
+      /image-set\(|devicePixelRatio/u, file + ": renderer must not select assets by device DPR");
   }
 });
 

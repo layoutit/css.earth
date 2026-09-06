@@ -223,10 +223,13 @@ function registryLoaders(source, root) {
       call.arguments.length !== 1 || array?.type !== "ArrayExpression" || !array.elements.length) fail("requires one concrete registry array");
   const helpers = new Map(ast.body.filter(node => node.type === "FunctionDeclaration").map(node => [node.id.name, node]));
   for (const entry of array.elements) {
-    if (entry?.type !== "CallExpression" || ![7, 8].includes(entry.arguments.length) ||
+    if (entry?.type !== "CallExpression" || entry.arguments.length < 7 ||
+        entry.arguments.slice(8).some(value => value.type !== "Literal") ||
         entry.arguments.slice(0, 6).some(value => value.type !== "Literal") || typeof entry.arguments[0].value !== "string") fail("entries must bind prepared metadata and one loader");
     const helper = helpers.get(entry.callee?.name), params = helper?.params ?? [], returned = helper?.body.body[0]?.argument;
-    if (!helper || helper.async || helper.generator || params.length !== 8 || params.slice(0, 7).some(param => param.type !== "Identifier") ||
+    if (!helper || helper.async || helper.generator || params.length < 8 || entry.arguments.length > params.length ||
+        params.slice(8).some(param => param.type !== 'AssignmentPattern' || param.left.type !== 'Identifier' || param.right.type !== 'Literal') ||
+        params.slice(0, 7).some(param => param.type !== "Identifier") ||
         params[7].type !== 'AssignmentPattern' || params[7].left.type !== 'Identifier' || params[7].right.type !== 'Literal' || params[7].right.value !== null || helper.body.body.length !== 1 ||
         helper.body.body[0].type !== "ReturnStatement" || returned?.type !== "CallExpression" ||
         imports.get(returned.callee?.name) !== "defineObject" || returned.arguments.length !== 1 || returned.arguments[0].type !== "ObjectExpression") fail("entry helper must forward its declared loader directly");
@@ -525,11 +528,6 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   try { registry = registryLoaders(await source(resolve(root, registryPath)), root); }
   catch (error) { sharedViolations.push({ file: registryPath, line: 1, reason: error.message }); }
   await sharedVisit(resolve(root, registryPath));
-  if (objects.some(object => object.id === 'sun' && registry.entries.get(object.id)?.kind === 'contextual')) {
-    const applicationContextPath = resolve(root, 'site/application-world-context.mjs');
-    try { requireApplicationWorldContextSource(await source(applicationContextPath)); }
-    catch (error) { sharedViolations.push({ file: 'site/application-world-context.mjs', line: 1, reason: error.message }); }
-  }
   const assemblyRoots = new Set();
   for (const object of objects) {
     const loader = registry.entries.get(object.id);
@@ -543,6 +541,21 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   // Runtime imports are visited first, so a runtime dependency cannot acquire
   // shell-content status by also being imported by a shell component.
   for (const file of shellEntries) await sharedVisit(resolve(root, file), true);
+  // Prepared context now belongs to the application, including when the Sun
+  // enters through its JSON descriptor instead of a private runtime client.
+  const applicationContextPath = resolve(root, 'site/application-world-context.mjs');
+  if (sharedClosure.has(applicationContextPath)) {
+    try {
+      requireApplicationWorldContextSource(await source(applicationContextPath));
+      const context = requireContextFrame(JSON.parse(await source(resolve(root, 'src/planets/sun/prepared/world-context.json'))), 'sun');
+      await requireContextPointField(root, context, source);
+    } catch (error) { sharedViolations.push({ file: 'site/application-world-context.mjs', line: 1, reason: error.message }); }
+  }
+  const contextualBindingPath = resolve(root, 'site/packaged-object-runtime.mjs');
+  if (sharedClosure.has(contextualBindingPath)) {
+    try { requireContextualBindingSource(await source(contextualBindingPath)); }
+    catch (error) { sharedViolations.push({ file: 'site/packaged-object-runtime.mjs', line: 1, reason: error.message }); }
+  }
   const assemblyFiles = new Set();
   for (const assembly of assemblyRoots) {
     const closure = reachable(resolve(root, assembly));
@@ -565,6 +578,10 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       const violations = [], owners = [], orphanExecutors = [];
       const assemblyClosure = reachable(resolve(root, client));
       const factoryCalls = sharedFactoryCalls.get(resolve(root, client)) ?? 0;
+      // The conditional adapter has one ordinary factory and one contextual
+      // delegation to that same renderer. Both are source-bound below; another
+      // factory anywhere in the assembled closure remains a violation.
+      const assemblyFactoryCalls = [...assemblyClosure].reduce((count, file) => count + (sharedFactoryCalls.get(file) ?? 0), 0);
       let prepared = null;
       try {
         requireDescriptorAdapterSource(await source(resolve(root, client)), loader.exported);
@@ -572,6 +589,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
         await verify(object, prepared.definition);
       } catch (error) { violations.push({ file: loader.descriptor, line: 1, reason: error.message }); }
       if (factoryCalls !== 1) violations.push({ file: client, line: 1, reason: `Expected one actual shared factory call; found ${factoryCalls}` });
+      if (assemblyFactoryCalls !== 2) violations.push({ file: client, line: 1,
+        reason: `Expected one actual shared factory call per ordinary/contextual branch; found ${assemblyFactoryCalls} source sites` });
       entries.push({ id: object.id, migrated: violations.length === 0, entry: { file: loader.descriptor, exported: loader.exported, registry: registryPath, adapter: client },
         schema: prepared ? PREPARED_OBJECT_RUNTIME_SCHEMA : null, factoryCalls,
         presentation: prepared ? { file: relative(root, prepared.payloadPath), format: 'json', property: 'data' } : null,

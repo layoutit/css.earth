@@ -1,0 +1,321 @@
+{
+  "schema": "cssearth-spectral-material-variants@1",
+  "namespace": "saturn",
+  "publicPrefix": "/scenes/saturn/",
+  "sourceSubdirectory": "lenses",
+  "sourcePins": [
+    {
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
+      "expectedSha256": "501c88e880a65a009fea9d86b66fe4b824abc0a07a56c0f382abe593cc08f314",
+      "expectedBytes": 6482880
+    },
+    {
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
+      "expectedSha256": "0a1e41e4f4de7bb0a026d29b303dfbcf55f902382c2e621dfd522d95881c75d3",
+      "expectedBytes": 6482880
+    },
+    {
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
+      "expectedSha256": "2913da896d5e33c292d8c7a95a699cee606067b743b0bb2cab06ce51be90af53",
+      "expectedBytes": 6482880
+    },
+    {
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
+      "expectedSha256": "709166ace6d89028ef8ab884323f0d886281054dac2378584f82ce2c5f90e459",
+      "expectedBytes": 6482880
+    }
+  ],
+  "parameters": {
+    "bodyWidth": 2880,
+    "bodyHeight": 1440,
+    "body2xWidth": 4096,
+    "body2xHeight": 2048,
+    "latitudeBandCount": 16,
+    "detailBlurSigma": 3,
+    "detailGain": 3,
+    "minimumDetailScale": 0.88,
+    "maximumDetailScale": 1.12,
+    "ringOuterKm": 140612,
+    "poleTileSize": 512,
+    "poleAtlasWidth": 4096,
+    "poleAtlasHeight": 512,
+    "polarBoundaryLatitude": 1.3744467859455345,
+    "materialModes": [
+      "full",
+      "no-shadows",
+      "ringless",
+      "ringless-no-shadows"
+    ]
+  },
+  "lenses": [
+    {
+      "id": "ultraviolet",
+      "label": "Ultraviolet",
+      "shortLabel": "UV",
+      "filter": "F225W",
+      "wavelength": "225 nm",
+      "sourceFiles": [
+        "hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
+        "hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
+      ],
+      "detailSourceIndex": 0,
+      "sourceKind": "hubble-global-map",
+      "palette": [
+        [
+          9,
+          7,
+          28
+        ],
+        [
+          82,
+          45,
+          142
+        ],
+        [
+          226,
+          207,
+          255
+        ]
+      ],
+      "ringPalette": [
+        [
+          18,
+          14,
+          39
+        ],
+        [
+          101,
+          80,
+          149
+        ],
+        [
+          205,
+          188,
+          235
+        ]
+      ],
+      "ringGain": 0.62,
+      "materialGain": 0.72,
+      "ringBands": {
+        "d": 0.35,
+        "c": 0.47,
+        "b": 0.715,
+        "a": 1,
+        "f": 0.9
+      },
+      "operation": "scalar-map"
+    },
+    {
+      "id": "methane",
+      "label": "Methane",
+      "shortLabel": "CH4",
+      "filter": "FQ889N",
+      "wavelength": "889 nm",
+      "sourceFiles": [
+        "hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
+        "hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
+      ],
+      "detailSourceIndex": 0,
+      "sourceKind": "hubble-global-map",
+      "palette": [
+        [
+          2,
+          13,
+          17
+        ],
+        [
+          16,
+          79,
+          91
+        ],
+        [
+          190,
+          241,
+          235
+        ]
+      ],
+      "ringPalette": [
+        [
+          18,
+          52,
+          58
+        ],
+        [
+          105,
+          173,
+          173
+        ],
+        [
+          235,
+          255,
+          248
+        ]
+      ],
+      "ringGain": 1.2,
+      "materialGain": 0.88,
+      "ringBands": {
+        "d": 0.3,
+        "c": 0.288,
+        "b": 0.917,
+        "a": 0.905,
+        "f": 0.811
+      },
+      "operation": "scalar-map"
+    },
+    {
+      "id": "thermal",
+      "label": "Thermal",
+      "shortLabel": "IR",
+      "filter": "VIMS/CIRS",
+      "wavelength": "1.19-1000 um",
+      "sourceKind": "cassini-informed-thermal-model",
+      "sourceFiles": [],
+      "sourceUrls": [
+        "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/",
+        "https://science.nasa.gov/mission/cassini/spacecraft/cassini-orbiter/composite-infrared-spectrometer/"
+      ],
+      "palette": [
+        [
+          5,
+          4,
+          10
+        ],
+        [
+          121,
+          35,
+          21
+        ],
+        [
+          255,
+          190,
+          74
+        ]
+      ],
+      "ringPalette": [
+        [
+          6,
+          4,
+          10
+        ],
+        [
+          92,
+          35,
+          24
+        ],
+        [
+          232,
+          143,
+          65
+        ]
+      ],
+      "ringGain": 0.9,
+      "materialGain": 0.84,
+      "ringBands": {
+        "d": 0.52,
+        "c": 0.88,
+        "b": 0.66,
+        "a": 0.77,
+        "f": 0.9
+      },
+      "operation": "morphology-response"
+    }
+  ],
+  "descriptor": {
+    "schema": "csssaturn-prepared-lenses@1",
+    "defaultLens": "normal",
+    "runtimeFilters": false,
+    "runtimeRasterization": false,
+    "controls": [
+      {
+        "id": "normal",
+        "materialLens": "normal",
+        "label": "Normal",
+        "shortLabel": "RGB",
+        "thumbnailUrl": "/scenes/saturn/saturn-lens-normal.webp",
+        "surfaceUrl": "/scenes/saturn/saturn-surface-body.jpg",
+        "polesUrl": "/scenes/saturn/saturn-poles.webp",
+        "ringUrl": "/scenes/saturn/saturn-rings.webp",
+        "ring2xUrl": "/scenes/saturn/saturn-rings@2x.webp",
+        "materialUrl": "/scenes/saturn/saturn-orbit-material.webp",
+        "qualification": "visible-color reference"
+      },
+      {
+        "id": "cross-section",
+        "label": "Cross section",
+        "shortLabel": "CUT",
+        "thumbnailUrl": "/scenes/saturn/saturn-view-interior.webp",
+        "view": "interior",
+        "materialLens": "normal",
+        "interiorMaterialUrl": "/scenes/saturn/saturn-interior-atmosphere.webp",
+        "qualification": "schematic source-backed interior using the normal visible-color material"
+      }
+    ],
+    "provenance": {
+      "bodyAuthority": "Hubble OPAL Cycle 32 Saturn global maps",
+      "bodySourceUrl": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32",
+      "bodyDetailAuthority": "OpenSpace synchronized visible-light Saturn surface",
+      "ringAuthority": "Hubble WFC3 program 17843, 2025-08-29",
+      "ringProducts": [
+        "ifcu37ccq",
+        "ifcu37cdq",
+        "ifcu37ceq"
+      ],
+      "ringMethod": "broad source-derived spectral response over unchanged prepared OpenSpace radial morphology",
+      "fineRingQualification": "D, G, E and unresolved ringlets retain the visible-light morphology because the Hubble frames do not resolve a complete replacement profile",
+      "thermalAuthority": "Cassini VIMS PIA17469 infrared response and Cassini CIRS atmospheric and ring thermal measurements",
+      "thermalMethod": "prepared source-informed thermal response over the synchronized visible-light morphology; not a direct global temperature retrieval"
+    }
+  },
+  "controlOrder": [
+    "normal",
+    "ultraviolet",
+    "methane",
+    "thermal",
+    "cross-section"
+  ],
+  "files": {
+    "surface": "saturn-surface.jpg",
+    "poles": "saturn-poles.webp",
+    "rings": "saturn-rings.webp",
+    "rings2x": "saturn-rings@2x.webp",
+    "orbitMaterial": "saturn-orbit-material.webp",
+    "interiorAtmosphere": "saturn-interior-atmosphere.webp",
+    "normalThumbnail": "saturn-lens-normal.webp"
+  },
+  "detailCarrierUrl": "/scenes/saturn/saturn-surface.jpg",
+  "scalar": {
+    "width": 1800,
+    "height": 900,
+    "percentiles": [
+      0.01,
+      0.995
+    ],
+    "minimumValue": 0.001,
+    "maskedRows": [
+      429,
+      449
+    ],
+    "maximumPercentileSamples": 250000
+  },
+  "colorExponent": 0.82,
+  "detailMinimumLuminance": 12,
+  "thermal": {
+    "polarExponent": 5,
+    "fineCenter": 0.5,
+    "fineDenominator": 44,
+    "latitudeFrequency": 34,
+    "longitudeFrequency": 3,
+    "longitudeAmplitude": 0.42,
+    "bandAmplitude": 0.035,
+    "baseline": 0.12,
+    "broadGain": 0.46,
+    "fineGain": 0.3,
+    "polarGain": 0.1,
+    "exponent": 0.84
+  },
+  "qualifications": {
+    "morphology": "Cassini VIMS/CIRS-informed thermal false color over prepared high-resolution morphology; not a direct global temperature retrieval",
+    "morphologyDetail": "prepared Cassini-informed cloud-window and latitude response over lossless DPR morphology",
+    "scalarDetail": "intact rotation A, lossless DPR surfaces, bounded visible-detail pansharpening"
+  }
+}

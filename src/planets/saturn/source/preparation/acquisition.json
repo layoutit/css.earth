@@ -1,0 +1,210 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
+    },
+    {
+      "kind": "json-document",
+      "groups": [
+        "refresh"
+      ],
+      "path": "lenses/manifest.json",
+      "value": {
+        "schema": "csssaturn-observation-lens-sources@1",
+        "sources": [
+          {
+            "id": "opal-2025a-f225w",
+            "filename": "hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
+            "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
+            "sha256": "501c88e880a65a009fea9d86b66fe4b824abc0a07a56c0f382abe593cc08f314"
+          },
+          {
+            "id": "opal-2025b-f225w",
+            "filename": "hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
+            "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
+            "sha256": "0a1e41e4f4de7bb0a026d29b303dfbcf55f902382c2e621dfd522d95881c75d3"
+          },
+          {
+            "id": "opal-2025a-fq889n",
+            "filename": "hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
+            "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
+            "sha256": "2913da896d5e33c292d8c7a95a699cee606067b743b0bb2cab06ce51be90af53"
+          },
+          {
+            "id": "opal-2025b-fq889n",
+            "filename": "hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
+            "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
+            "sha256": "709166ace6d89028ef8ab884323f0d886281054dac2378584f82ce2c5f90e459"
+          }
+        ],
+        "references": [
+          {
+            "id": "cassini-vims-pia17469",
+            "url": "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/",
+            "instrument": "Cassini VIMS",
+            "wavelengthBandsMicrometers": [
+              [
+                1.19,
+                1.5
+              ],
+              [
+                1.9,
+                2.1
+              ],
+              [
+                4.88,
+                5.06
+              ]
+            ],
+            "use": "thermal palette, internal-heat interpretation, and ring response reference"
+          },
+          {
+            "id": "cassini-cirs-thermal-mapping",
+            "url": "https://science.nasa.gov/mission/cassini/spacecraft/cassini-orbiter/composite-infrared-spectrometer/",
+            "instrument": "Cassini CIRS",
+            "wavelengthRangeMicrometers": [
+              7,
+              1000
+            ],
+            "use": "atmospheric and ring temperature interpretation"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/dione.jpg",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/dione/textures/1/dione.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/enceladus.jpg",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/enceladus/textures/1/enceladus.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/iapetus.jpg",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/iapetus/textures/1/iapetus.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/mimas.jpg",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/mimas/textures/1/mimas.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/rhea.jpg",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/rhea/textures/1/rhea.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/tethys.jpg",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/tethys/textures/1/tethys.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/titan.tif",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/titan/textures/2/Titan_ISS_P19658_Mosaic_Global_4km_os.tif"
+    },
+    {
+      "kind": "satellite-catalog",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/saturn-moons.json",
+      "recipePath": "preparation/satellite-catalog.json",
+      "headers": {
+        "user-agent": "css.earth prepared-data importer"
+      }
+    },
+    {
+      "kind": "verify-request",
+      "groups": [
+        "refresh"
+      ],
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "form": {
+        "type": "cfg",
+        "wephm": "y",
+        "watm": "y",
+        "file": "<OBJECT-DATE>2026/08/29 12:00\n<OBJECT-NAME>Saturn\n<GEOMETRY-REF>User"
+      },
+      "headers": {
+        "user-agent": "cssEarth Saturn source preparation"
+      },
+      "expectedPath": "atmosphere/psg-saturn-20260829.cfg",
+      "selector": "before-marker",
+      "marker": "<GENERATOR-RANGE1>"
+    },
+    {
+      "kind": "verify-request",
+      "groups": [
+        "refresh"
+      ],
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "form": {
+        "type": "rad",
+        "wephm": "n",
+        "watm": "n"
+      },
+      "headers": {
+        "user-agent": "cssEarth Saturn source preparation"
+      },
+      "fileSource": "atmosphere/psg-saturn-20260829.cfg",
+      "expectedPath": "atmosphere/psg-saturn-r240-rif.txt",
+      "selector": "numeric-lines",
+      "rowCount": 253
+    }
+  ]
+}

@@ -110,6 +110,10 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
 
 .planet-cubic-sky-star {
   --planet-cubic-sky-star-radius: 1px;
+  /* Background context stays quiet. Apply emphasis to each leaf, never the
+     preserve-3d group, so changing contrast cannot flatten the sky. */
+  --planet-cubic-sky-star-emphasis: 0.35;
+  opacity: calc(var(--planet-cubic-sky-star-luminance, 0) * var(--planet-cubic-sky-star-emphasis));
   position: absolute;
   top: 0;
   left: 0;
@@ -126,9 +130,15 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   margin: calc(-1 * var(--planet-cubic-sky-star-size)) 0 0 calc(-1 * var(--planet-cubic-sky-star-size));
   border-radius: 50%;
   transform-origin: 50% 50%;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+body[data-sky-contrast="high"] .planet-cubic-sky-star,
+.planet-cubic-sky-star[data-object-navigate]:not([aria-disabled="true"]) {
+  --planet-cubic-sky-star-emphasis: 1;
   /* The reference's bloom: 1.25 radii of blur, a quarter radius of spread,
      the star's own colour at twice the halo peak. */
   box-shadow: 0 0 calc(1.25 * var(--planet-cubic-sky-star-size)) calc(0.25 * var(--planet-cubic-sky-star-size))
     var(--planet-cubic-sky-star-halo);
-  pointer-events: none;
 }

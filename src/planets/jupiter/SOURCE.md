@@ -3,8 +3,9 @@
 Jupiter is prepared only from the checked inputs declared in
 `source/manifest.json`. Each entry fixes the expected byte count and SHA-256.
 `pnpm acquire:planets -- --verify-only` verifies those bytes without using the
-network. `node tools/acquire.mjs --refresh` is the explicit networked refresh
-path and rejects any response that does not match the declared snapshot.
+network. Required ignored binaries have pinned restoration routes in
+`source/preparation/acquisition.json`; the shared acquisition operators reject
+any response that does not match the declared snapshot.
 
 ## Body and scene facts
 
@@ -52,23 +53,18 @@ render-root scale fits that reference into smaller containers while preserving
 one scale for the retained camera and prepared photometric plane. Runtime does
 not measure or independently resize Jupiter geometry.
 
-The exact 0.01-degree vertical camera states and their matching moon-billboard
-states are generated before runtime and stored as one content-addressed,
-gzip-compressed local transform bank. Runtime validates, decodes, and directly
-publishes those prepared strings. It does not construct camera or billboard
-matrices, interpolate states, or request an external service.
+The shared camera owns input and transports retained prepared state. Jupiter's
+source-owned JSON supplies its geometry, camera conventions, materials, and
+initial orientation. The obsolete private camera/billboard transform bank is
+not an input to this shared runtime.
 
 ## Background stars
 
-The background is prepared from the checked HYG Stellar Database v4.1 subset
-in `source/stars/hyg-v41-field.json`, credited to David Nash / Astronexus and
-licensed under CC BY-SA 4.0. The file retains the catalog identifiers,
-positions, apparent magnitudes, color indices, pinned source hash, projection,
-and license. Preparation rasterizes the 600 brightest retained entries into
-one deterministic 2,560 by 1,440 lossless WebP. The browser mounts that single
-static image: it creates no star nodes, performs no catalog projection, and
-does not animate the background. Its orientation is illustrative because the
-scene has no observer epoch or inertial camera orientation.
+The shared cubic photographic sky uses the pinned ESO panorama and its HYG
+registration inputs. The historical HYG Stellar Database v4.1 field remains
+preserved under `source/stars/`, credited to David Nash / Astronexus under
+CC BY-SA 4.0. Runtime consumes prepared sky assets, not a star catalog or a
+synthetic fallback field.
 
 ## Surface lenses
 
@@ -92,26 +88,17 @@ measurements. A declared percentile stretch and false-color palette produce
 fixed DPR surface, polar, and thumbnail assets. The browser applies no filters
 or raster processing.
 
-## Moon system
+## Satellite source archive
 
-The checked JPL Solar System Dynamics discovery and mean-elements snapshot has
-115 confirmed Jupiter moons, matching NASA Science's August 2026 count. Every
-catalog object has one prepared retained scene leaf. Io, Europa, Ganymede, and
-Callisto use camera-facing image billboards prepared directly from the
-NASA/JPL/DLR Galileo PIA01299 montage. The remaining 111 moons use the same
-static-epoch prepared marker model as Saturn's minor-moon system. Mean orbital
-distance, inclination, node, phase, eccentricity, period, and source identity
-remain in the prepared data. Display distances use a declared logarithmic
-compression that preserves source orbital order; published eccentricity is
-retained as data but not applied. All 57 catalog objects with IAU names retain
-visible prepared labels; the other 58 use their source provisional designation
-only in the prepared catalog record. Minor-moon nameplate widths and
-collision-free offsets are prepared for all 181 half-degree material-camera
-states from the lower view through the pole, with the four Galilean nameplates
-reserved at the prepared CSS-animation start epoch. The browser mounts the 111
-minor-moon leaves only when that opt-in layer is first enabled and then retains
-them for subsequent visibility changes. Runtime selects one of 181 prepared
-half-degree offset states; it does not measure or lay out labels.
+The checked JPL Solar System Dynamics discovery and mean-elements snapshot
+retains its 115-satellite catalog. The NASA/JPL/DLR Galileo PIA01299 montage
+remains pinned source material. Neither has been replaced or discarded.
+The shared runtime mounts exactly one detailed object scene: Io, Europa,
+Ganymede, and Callisto have their own object packages and navigation entries.
+Dormant Jupiter-owned billboard and orbit-guide derivations are excluded from
+the active asset inventory; their exact retired filenames are recorded in
+`object.json`. No embedded-moon rendering pipeline is required to prepare
+Jupiter's active scene.
 
 ## Ring system
 
@@ -189,12 +176,11 @@ screenshot.
 The prepared photometric overlay retains OpenSpace's neutral-light `0.05`
 ambient floor and `smoothstep(0, 0.1, N dot L)` terminator. Every channel is
 computed in linear light, re-encoded through sRGB, and represented as a single
-source-over color plus alpha. The material bank is rendered at 1,024 pixels and
-presented at 512 CSS pixels, giving exact DPR 2 coverage without changing the
-accepted camera scale. One-frame row shards keep the two-row decoded working
-set bounded to 8,652,800 RGBA bytes. Runtime only selects and addresses one of
-181 prepared half-degree frames. It performs no lighting, gamma, photometry,
-atmosphere, or raster work.
+source-over color plus alpha. The accepted material bank contains 181 half-degree frames at 512 pixels,
+packed four frames per row with an eight-pixel gutter. Its 46 lossless row
+assets and one shadowless asset retain the accepted encoded bytes and immutable
+URLs. The shared bounded residency owner selects prepared rows and addresses;
+runtime performs no lighting, gamma, photometry, atmosphere, or raster work.
 
 The source-over solution is exact for the declared neutral sRGB reference
 channel value of 160. Over the spatially varying Hubble color texels it is a
@@ -205,8 +191,10 @@ volumetric haze model.
 The checked NASA GSFC Planetary Spectrum Generator configuration expands a
 pinned `2026/08/30 12:00` Jupiter ephemeris seed. It contains the 50-layer
 Moses et al. 2005 Jupiter atmosphere from 10 bar to 10 nanobar. The checked
-R=240 I/F response contains 253 samples from 0.35 to 0.998 micrometers. Both
-charts are generated as static SVG assets before runtime.
+R=240 I/F response contains 253 samples from 0.35 to 0.998 micrometers. The
+reflectance and temperature-pressure charts use those snapshots; the third
+chart uses the pinned photometric phase coefficients. All charts are generated
+as static SVG assets before runtime.
 
 ## Presentation sources
 
@@ -214,6 +202,15 @@ The navigation marker is the credited NASA/ESA/STScI/Amy Simon Hubble view from
 5 January 2024. The Jupiter title is an exact outline extracted from the pinned
 Inter Variable 4.001 font at weight 500 and optical size 28. Both sources and
 their preparation recipes are adapter-owned.
+
+## Reproduction
+
+Run `pnpm prepare:planets -- --object=jupiter` to rebuild using the reusable
+capability operators under `tools/objects/`. Object-owned JSON supplies
+observations and polar qualification, oblate geometry, radial layers,
+photometry, celestial state, presentation, content, and charts. Preparation
+regenerates the active encoded assets and prepared JSON from pinned inputs;
+the object package contains no preparation or runtime executable code.
 
 ## Authoritative pages
 

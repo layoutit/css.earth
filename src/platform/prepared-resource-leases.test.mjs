@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPreparedImageStore } from "./prepared-image-store.mjs";
+import { createPreparedImageStore } from '../renderers/css/dist/testing.js';
 
 function harness({ capacity = 3, concurrency = 2, reuse = true } = {}) {
   const images = [], decodes = [];

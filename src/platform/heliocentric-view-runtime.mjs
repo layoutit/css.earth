@@ -16,6 +16,7 @@ import {
 } from "./label-field.mjs";
 import { selectStarLabel } from "./star-labels.mjs";
 import { createExposure } from "./star-photometry.mjs";
+import { bindObjectNavigationTarget, supportsObjectNavigation } from "../renderers/css/dist/navigation.js";
 
 const LABEL_OWNER_STAR = 3;
 
@@ -99,7 +100,6 @@ export function mountRetainedHeliocentricView({
   // camera. Native body pixels occlude celestial points and text together.
   const celestialRoot = document.createElement("div");
   celestialRoot.className = `planet-heliocentric-sky planet-render-root ${objectId}-celestial-vault`;
-  celestialRoot.ariaHidden = "true";
   host.insertBefore(celestialRoot, before);
 
   const overlay = document.createElement("div");
@@ -218,7 +218,7 @@ export function mountRetainedHeliocentricView({
     for (let index = 0; index < policy.poolSize; index += 1) {
       const element = document.createElement("s");
       element.className = `planet-heliocentric-caption ${objectId}-caption`;
-      element.style.opacity = "0";
+      element.style.setProperty("--planet-caption-opacity", "0");
       element.style.visibility = "hidden";
       group.appendChild(element);
       elements.push(element);
@@ -234,11 +234,11 @@ export function mountRetainedHeliocentricView({
       accepted: [],
       candidates: 0,
     };
-    if (labels.stars) {
-      const { policy: starPolicy, records } = labels.stars;
+    const records = labels.stars?.records.filter(star => supportsObjectNavigation(host, star.id)) ?? [];
+    if (labels.stars && records.length) {
+      const starPolicy = { ...policy, poolSize: labels.stars.policy.poolSize };
       const starGroup = document.createElement("div");
       starGroup.className = "planet-heliocentric-star-captions";
-      starGroup.ariaHidden = "true";
       starGroup.style.fontSize = `${labelFontPixels(starPolicy)}px`;
       const measures = new Map();
       for (const star of records) {
@@ -250,10 +250,10 @@ export function mountRetainedHeliocentricView({
       }
       const element = document.createElement("s");
       element.className = `planet-heliocentric-caption planet-cubic-sky-caption ${objectId}-star-caption`;
-      element.style.opacity = "0";
+      element.style.setProperty("--planet-caption-opacity", "0");
       element.style.visibility = "hidden";
       starGroup.appendChild(element);
-      labelField.stars = { group: starGroup, element, measures, widths: new Map(), policy: starPolicy,
+      labelField.stars = { group: starGroup, element, records, navigation: bindObjectNavigationTarget(element, host), measures, widths: new Map(), policy: starPolicy,
         pool: createLabelSlots(starPolicy), candidate: null, accepted: false, measured: false };
     }
   }
@@ -408,6 +408,13 @@ export function mountRetainedHeliocentricView({
       labelField.declutter = createLabelDeclutter({ capacity: next.candidateCapacity, spacingPixels: next.spacingPixels });
       labelField.pool.setMaxAlpha?.(next.maxAlpha);
       labelField.measured = false;
+      if (labelField.stars) {
+        const stars = labelField.stars;
+        stars.policy = { ...next, poolSize: stars.policy.poolSize };
+        stars.group.style.fontSize = `${labelFontPixels(next)}px`;
+        stars.pool.setMaxAlpha(next.maxAlpha);
+        stars.measured = false;
+      }
       return Object.freeze({ ...next, source: options === null ? "prepared" : "session" });
     },
     setSunMarkerOpacity(opacity) {
@@ -487,6 +494,7 @@ export function mountRetainedHeliocentricView({
     destroy() {
       if (destroyed) return;
       destroyed = true;
+      labelField?.stars?.navigation.destroy();
       if (labelFrame !== null) host.ownerDocument.defaultView.cancelAnimationFrame(labelFrame);
       sunRoot.remove();
       overlay.remove();
@@ -662,7 +670,7 @@ export function mountRetainedHeliocentricView({
         stars.measured = true;
       }
       const exposure = createExposure({ ...labels.stars.exposure, ...skyView.exposure });
-      const star = selectStarLabel({ stars: labels.stars.records, rotation: skyView.rotation, exposure,
+      const star = selectStarLabel({ stars: stars.records, rotation: skyView.rotation, exposure,
         focal: projection.focal, principalOffset: projection.principalOffset,
         visibleRect: visibleRect ?? { left: -projection.viewportWidth / 2, top: -projection.viewportHeight / 2,
           right: projection.viewportWidth / 2, bottom: projection.viewportHeight / 2 } });
@@ -672,7 +680,7 @@ export function mountRetainedHeliocentricView({
           markerRadiusPx: star.radiusPx });
         declutter.add({ owner: LABEL_OWNER_STAR, id: star.id, priority: star.priority, anchor: star.anchor, ...box });
         candidates.push({ owner: LABEL_OWNER_STAR, id: star.id, key: `${LABEL_OWNER_STAR}:${star.id}`,
-          priority: star.priority, anchor: star.anchor, alpha: star.alpha, text: star.name,
+          priority: star.priority, anchor: star.anchor, alpha: 1, text: star.name,
           bottomOffsetPx: box.bottomOffsetPx, box });
       }
     }
@@ -687,12 +695,14 @@ export function mountRetainedHeliocentricView({
       const [slot] = stars.pool.assign(accepted, field.settled);
       const element = stars.element;
       const visible = slot.occupant !== null && slot.alpha > 0;
+      const target = visible ? accepted.find(candidate => candidate.key === slot.occupant) : undefined;
+      stars.navigation.update(target?.id ?? null, target?.text);
       if (visible) {
         if (element.textContent !== slot.text) element.textContent = slot.text;
         element.dataset.occupant = slot.occupant;
         element.style.transform = `translate(${formatNumber(slot.anchor[0])}px, ${formatNumber(slot.anchor[1] - slot.bottomOffsetPx)}px) translate(-50%, -100%)`;
       }
-      element.style.opacity = formatNumber(slot.alpha);
+      element.style.setProperty("--planet-caption-opacity", formatNumber(slot.alpha));
       element.style.visibility = visible ? "" : "hidden";
     }
     field.settled = true;
@@ -715,7 +725,7 @@ export function mountRetainedHeliocentricView({
         }
         const opacity = formatNumber(slot.alpha);
         if (published.opacity !== opacity) {
-          element.style.opacity = opacity;
+          element.style.setProperty("--planet-caption-opacity", opacity);
           published.opacity = opacity;
         }
       }

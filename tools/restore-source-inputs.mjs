@@ -14,7 +14,6 @@ import {
 const projectRoot = resolve(import.meta.dirname, "..");
 const binarySource = /\.(?:csv|fits|gif|glb|jpe?g|png|tiff?|ttf|webp)$/iu;
 const directBinaryUrl = /\.(?:csv|fits|gif|glb|jpe?g|png|tiff?|ttf|webp)(?:[?#].*)?$/iu;
-const specialRefreshPlanets = new Set(["mars", "mercury", "venus"]);
 const fetchedBytes = new Map();
 
 for (const { id, name } of OBJECTS) {
@@ -37,14 +36,8 @@ for (const { id, name } of OBJECTS) {
   }
 
   if (missingSpecialInputs.length > 0) {
-    if (!specialRefreshPlanets.has(id)) {
-      throw new Error(
-        `${name} has no acquisition route for: ${missingSpecialInputs.join(", ")}.`,
-      );
-    }
     await run(process.execPath, [
-      resolve(projectRoot, "src", "planets", id, "tools", "acquire.mjs"),
-      "--refresh",
+      resolve(projectRoot, "tools/objects/dist/operations.js"), "acquire", id, "--refresh",
     ]);
   }
 
@@ -54,7 +47,7 @@ for (const { id, name } of OBJECTS) {
 }
 
 await run(process.execPath, [
-  resolve(projectRoot, "src/planets/earth/tools/acquire-pinned-global-wmts.mjs"),
+  resolve(projectRoot, "tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mjs"), "--object=earth",
 ]);
 
 async function fetchPinnedBytes(entry, planetName) {

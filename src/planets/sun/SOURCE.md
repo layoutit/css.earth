@@ -1,5 +1,13 @@
 # Sun source and preparation
 
+Authored Carrington observation recipes, FITS projection and color mappings,
+polar continuation, retained geometry, controls, and source bindings live in
+`source/preparation/` and `source/content/`, pinned by `object.json`. Shared
+`tools/objects/static-surface/` capabilities compile those records into
+`prepared/*.json`. The migration preserves all 60 accepted asset hashes and
+the complete retained runtime description. Unit and browser checks live under
+`tests/objects/{unit,browser}/sun/`.
+
 The Sun adapter uses one uniform planet-adapter contract. Its retained scene is
 prepared from full-surface Carrington maps, not from a repeated Earth-facing
 disc. The checked source manifest binds every input by byte count and SHA-256.

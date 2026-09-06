@@ -1,0 +1,133 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "io",
+  "displayName": "Io",
+  "publicBase": "/scenes/io/",
+  "distanceAu": 5.2,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 32,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 0,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "colorSpace": "srgb",
+          "resolutionMeters": 1000
+        },
+        "projection": {
+          "longitudeDegrees": [
+            0,
+            360
+          ]
+        }
+      },
+      {
+        "id": "enhanced",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 0,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "colorSpace": "srgb",
+          "resolutionMeters": 1000,
+          "withholdLatitudeDegrees": 85
+        },
+        "monochromeBase": "normal",
+        "projection": {
+          "longitudeDegrees": [
+            0,
+            360
+          ]
+        },
+        "metadata": {
+          "withheldColorLatitudeDegrees": 85,
+          "sourceProcessing": "USGS Lunar-Lambert L=0.7, seam matching and color-ratio merge; no additional photometric normalization."
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 1821.49,
+    "camera": {
+      "initialScenePitchDegrees": 40,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/io/io-normal-surface@2x.webp",
+    "polesUrl": "/scenes/io/io-normal-poles@2x.webp"
+  },
+  "celestial": {
+    "sunSource": "JPL parent-relative satellite orbit plus VSOP87 Jupiter position, with IAU/WGCCRE rotation"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      180,
+      180,
+      180
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  },
+  "parentMarker": {
+    "consumer": "parent-marker",
+    "tileSize": 1024,
+    "size": 512,
+    "operations": [
+      {
+        "type": "rotate"
+      },
+      {
+        "type": "extract",
+        "left": 122,
+        "top": 150,
+        "width": 1079,
+        "height": 1019
+      },
+      {
+        "type": "resize",
+        "width": "tile",
+        "height": "tile",
+        "fit": "cover",
+        "position": "centre",
+        "kernel": "lanczos3"
+      },
+      {
+        "type": "ensure-alpha"
+      },
+      {
+        "type": "ellipse-mask",
+        "cx": 0.5,
+        "cy": 0.5,
+        "rx": 0.5,
+        "ry": 0.5
+      },
+      {
+        "type": "png"
+      }
+    ]
+  }
+}

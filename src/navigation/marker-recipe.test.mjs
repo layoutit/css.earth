@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
 
-import marsMarker from "../planets/mars/tools/navigation-marker.mjs";
+import marsMarker from "../planets/mars/source/preparation/navigation.json" with { type: "json" };
 import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mjs";
 import {
   validateMarkerDescriptor,

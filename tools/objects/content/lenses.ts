@@ -8,6 +8,13 @@ const assetUrl = (objectId: string, asset: string | undefined): string | undefin
 
 function prepareLegend(objectId: string, legend: LensRecipe["legend"]) {
   if (!legend) return undefined;
+  if (legend.kind === "ranges") {
+    if (!legend.ranges?.length || legend.ranges.some(range =>
+      !range.label || !range.color || !Number.isFinite(range.low))) {
+      throw new TypeError("A range legend requires labeled finite ranges.");
+    }
+    return legend.ranges;
+  }
   if (legend.kind === "scale" && legend.recipe) {
     const prepared = prepareLensScaleLegend({
       title: legend.title,
@@ -71,10 +78,11 @@ export function prepareLenses(
         description: control.description,
         title: control.title,
         ...(legend ? { legend } : {}),
+        ...(control.legendNote ? { legendNote: control.legendNote } : {}),
         surfaceUrl: surface?.url ?? assetUrl(objectId, control.surface),
         surface2xUrl: surface?.url2x ?? assetUrl(objectId, control.surface?.replace(/\.webp$/u, "@2x.webp")),
-        polesUrl: poles?.url ?? assetUrl(objectId, control.poles),
-        poles2xUrl: poles?.url2x ?? assetUrl(objectId, control.poles?.replace(/\.webp$/u, "@2x.webp")),
+        polesUrl: surface?.polesUrl ?? poles?.url ?? assetUrl(objectId, control.poles),
+        poles2xUrl: surface?.polesUrl2x ?? poles?.url2x ?? assetUrl(objectId, control.poles?.replace(/(?:@2x)?\.webp$/u, "@2x.webp")),
         materialUrl: material?.url ?? assetUrl(objectId, control.material),
         material2xUrl: material?.url2x ?? assetUrl(objectId, control.material?.replace(/\.webp$/u, "@2x.webp")),
         source: control.source,

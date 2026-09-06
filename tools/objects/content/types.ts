@@ -17,7 +17,8 @@ export interface TitleSource {
 }
 
 export interface LensLegendRecipe {
-  kind: "scale" | "categories";
+  kind: "scale" | "categories" | "ranges";
+  ranges?: Array<{ label: string; color: string; low: number }>;
   title: string;
   meta?: string;
   image?: string;
@@ -57,6 +58,7 @@ export interface LensRecipe {
   poles?: string;
   material?: string;
   legend?: LensLegendRecipe;
+  legendNote?: string;
   source: LensSource;
 }
 
@@ -147,7 +149,7 @@ export interface PreparedObjectContent {
 }
 
 export interface PreparedRasterAssets {
-  surfaces?: Record<string, { url?: string; url2x?: string }>;
+  surfaces?: Record<string, { url?: string; url2x?: string; polesUrl?: string; polesUrl2x?: string }>;
   materials?: Record<string, { url?: string; url2x?: string }>;
   poles?: { url?: string; url2x?: string };
   atmosphere?: { materialUrl?: string; observationUrl?: string; lightingUrl?: string };
@@ -189,4 +191,5 @@ export interface PreparedObjectContentDocument {
   galleries: PreparedObjectContent["galleries"];
   resources: PreparedObjectContent["resources"];
   provenance: ObjectContentSource["provenance"];
+  destinations?: { searchLabel: string; description: string };
 }

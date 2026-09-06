@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "sun",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sun",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "0a760fe0c4566b1e8f944849b2282edaab99020f62af6facb95472f83fd8761e"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "2779b13352f8804830f9f437a5334933582672a748330472ba80769d281f4ef2"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "38e2fe700b658e9ca7e739d8bb4de649a1f26ea8c6c68f32211f2d503bfa69b4"
+        },
+        {
+          "id": "content",
+          "path": "source/content/static.json",
+          "sha256": "66ba22b2f1bee3e9f4ceaf01356238645ddb30260f3d230c419364682c44482c"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "e2b9fb1f143565bef981fd1413d824c7ad11e26f95dc0ad948fd748f0cce3e7d"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "52d121bd54a171a4aeaa0de8fbd812d2018bd1089143803c76b1786890bcde6c"
+        },
+        {
+          "id": "physical",
+          "path": "source/preparation/physical.json",
+          "sha256": "84fc8f676449f2090b33495ecf5d093ce3074704b67add334efc8e25f4ab54ce"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "81ecaffa8af09c19ec770bee22053f653459af3593c2093dc8c16388715c40f6"
+        },
+        {
+          "id": "world-context",
+          "path": "source/navigation/universe.json",
+          "sha256": "ccded0198628f91a85dfce7ded82ea9412609e465c01ab20a8d5cbc6e295f660"
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 700000
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "photosphere",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "magnetic",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "chromosphere",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "corona",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "presentationToReference": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 2244193.5483870967,
+      "bodyRadiusM": 695700000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "e8a888aaba1d2c5de99d26bdb895a73367522de1e4426b3f94985217c7f60805"
+  }
+}

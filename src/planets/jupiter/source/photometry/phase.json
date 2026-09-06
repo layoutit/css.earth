@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-photometric-phase-source@1",
+  "authority": {
+    "title": "Computing Apparent Planetary Magnitudes for The Astronomical Almanac",
+    "authors": [
+      "Anthony Mallama",
+      "James L. Hilton"
+    ],
+    "journal": "Astronomy and Computing",
+    "arxiv": "1808.01973",
+    "url": "https://arxiv.org/abs/1808.01973",
+    "sourcePdfSha256": "805e53ab8f921c55e1c5e3dd64bbd567f806cdba56148625afcddfc650b6f9a7",
+    "retrievedAt": "2026-09-01",
+    "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
+  },
+  "maximumAngleDegrees": 130,
+  "segments": [
+    {
+      "maximumAngleDegrees": 12,
+      "kind": "polynomialMagnitude",
+      "coefficients": [
+        -9.395,
+        -0.00037,
+        0.000616
+      ]
+    },
+    {
+      "maximumAngleDegrees": 130,
+      "kind": "albedoPolynomialMagnitude",
+      "constant": -9.428,
+      "coefficients": [
+        1,
+        -1.507,
+        -0.363,
+        -0.062,
+        2.809,
+        -1.876
+      ]
+    }
+  ],
+  "qualification": "The greater-than-12-degree Cassini branch is limited to 130 degrees because the source paper reports no constraining data beyond that angle."
+}

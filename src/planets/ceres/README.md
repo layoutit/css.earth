@@ -19,13 +19,15 @@ their own assets if opened. Ceres does not require Earth's global geometry.
 To reproduce Ceres from its pinned source inputs:
 
 ```sh
-node src/planets/ceres/tools/acquire.mjs
-node src/planets/ceres/tools/prepare.mjs
+pnpm build:preparation
+node tools/objects/dist/operations.js acquire ceres --refresh
+node tools/objects/dist/prepare-authored.js ceres --write
 ```
 
-Acquisition verifies 507.4 MB of source images, elevation data, and font data. Matching local files
-are reused; corrupt sources fail without being overwritten. `--verify-only`
-checks the local source inventory without network access. Raw binaries and
+Acquisition checks the source images, elevation data, and font data against their
+pinned hashes before publication. `node tools/objects/dist/operations.js verify ceres`
+checks the local source inventory without network access or file changes.
+Omit `--write` from preparation to generate an isolated comparison stage. Raw binaries and
 prepared images are excluded from Git; runtime assets use the existing publisher.
 
 The maps retain observed shadows and seams. A **neutral gray cartographic grid**
@@ -55,7 +57,7 @@ installer downloads prepared maps only and does not require that source file.
 Focused checks:
 
 ```sh
-node --test src/planets/ceres/test/*.test.mjs
-node src/planets/ceres/test/smoke-browser.mjs http://127.0.0.1:4210
+node --test tests/objects/unit/ceres/*.test.mjs
+node tests/objects/browser/ceres/smoke-browser.mjs http://127.0.0.1:4210
 node site/test/planet-browser-conformance.mjs http://127.0.0.1:4210 ceres
 ```

@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-photographic-atmosphere@1",
+  "size": 512,
+  "densities": [1, 2],
+  "surfaceRadius": 238,
+  "coverageScale": 1.002,
+  "contentScale": 0.992,
+  "silhouetteSupersampling": 4,
+  "referenceChannel": 160,
+  "ambientIntensity": 0.05,
+  "terminatorSmoothstep": [0, 0.1],
+  "displayTransfer": "sRGB IEC 61966-2-1",
+  "defaultScenePitchDegrees": 18,
+  "integrationSamples": 24,
+  "psg": {
+    "path": "atmosphere/psg-mars-20260829.cfg",
+    "label": "NASA PSG pinned Mars configuration"
+  },
+  "atmosphere": {
+    "path": "openspace/atmosphere.asset",
+    "label": "OpenSpace Mars RenderableAtmosphere"
+  },
+  "reference": {
+    "path": "presentation/navigation-marker.jpg",
+    "label": "NASA, ESA, Hubble Heritage Team, J. Bell, and M. Wolff 12 May 2016 full disc",
+    "thresholdRgb8": 8,
+    "limbAnnulus": [0.96, 0.99],
+    "interiorAnnulus": [0.8, 0.9],
+    "exteriorAnnulus": [1.005, 1.03]
+  }
+}

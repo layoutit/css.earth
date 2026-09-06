@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/globe.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/globe.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/atmosphere.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/atmosphere.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/kernels.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/kernels.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/phobos-globe.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/phobos/globe.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "openspace/deimos-globe.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mars/moons/deimos/globe.asset"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "surface/mars-viking-mdim21-color-1km.jpg",
+      "url": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/phobos.glb",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/mars/phobos/model/1/Phobos_1_1000.glb"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/deimos.glb",
+      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/mars/deimos/model/1/Deimos_1_1000.glb"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/jpl-physical-parameters.html",
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "moons/jpl-mean-elements.html",
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html"
+    },
+    {
+      "kind": "tile-mosaic",
+      "groups": [
+        "refresh"
+      ],
+      "path": "lenses/mola-pseudocolor-z3.png",
+      "url": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/${y}/${x}",
+      "tileSize": 360,
+      "columns": 16,
+      "rows": 8,
+      "dataWidth": 5760,
+      "dataHeight": 2880,
+      "width": 4096,
+      "height": 2048,
+      "forceRgb": false,
+      "concurrency": 1
+    },
+    {
+      "kind": "tile-mosaic",
+      "groups": [
+        "refresh"
+      ],
+      "path": "lenses/themis-ir-day-z3.png",
+      "url": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/${y}/${x}",
+      "tileSize": 256,
+      "columns": 14,
+      "rows": 7,
+      "dataWidth": 3584,
+      "dataHeight": 1792,
+      "width": 4096,
+      "height": 2048,
+      "forceRgb": false,
+      "concurrency": 1
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "atmosphere/psg-mars-20260829.cfg",
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "form": {
+        "type": "cfg",
+        "wephm": "y",
+        "watm": "y",
+        "file": "<OBJECT-DATE>2026/08/29 12:00\n<OBJECT-NAME>Mars\n<GEOMETRY-REF>User"
+      },
+      "trimEnd": true,
+      "appendText": "\n<GENERATOR-RANGE1>0.35\n<GENERATOR-RANGE2>1.0\n<GENERATOR-RANGEUNIT>um\n<GENERATOR-RESOLUTION>240\n<GENERATOR-RESOLUTIONUNIT>RP\n<GENERATOR-RADUNITS>rif\n<GENERATOR-GAS-MODEL>Y\n<GENERATOR-CONT-MODEL>Y\n<GENERATOR-CONT-STELLAR>Y\n<GENERATOR-TRANS-SHOW>N\n<GENERATOR-TRANS-APPLY>N\n<GENERATOR-LOGRAD>N\n<GENERATOR-TELESCOPE>SINGLE\n<GENERATOR-BEAM>1\n<GENERATOR-BEAM-UNIT>diameter\n<GENERATOR-DIAMTELE>1\n"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "atmosphere/psg-mars-r240-rif.txt",
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "form": {
+        "type": "rad",
+        "wephm": "n",
+        "watm": "n"
+      },
+      "fileSource": "atmosphere/psg-mars-20260829.cfg"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 
 import { OBJECTS } from "../objects.mjs";
+import { authoredObjectFixture } from "./authored-object-fixture.mjs";
 import { planetInformationSource, validatePlanetEditorial } from "../../tools/planet-information-sources.mjs";
 import {
   objectPackagePaths,
@@ -20,10 +21,12 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   const projectRoot = await mkdtemp(resolve(tmpdir(), "cssearth-provider-neutral-"));
   context.after(() => rm(projectRoot, { recursive: true, force: true }));
   const object = { id: "local-body", name: "LocalBody" };
-  const paths = objectPackagePaths(object, projectRoot);
+  const paths = objectPackagePaths(object, projectRoot, true);
   for (const file of paths.requiredFiles) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
   const bytes = Buffer.from("owned prepared bytes");
   const hash = createHash("sha256").update(bytes).digest("hex");
+  await writeFile(resolve(paths.root, "object.json"), JSON.stringify(authoredObjectFixture(object.id,
+    { path: "source/local-data.bin", sha256: hash })));
   await mkdir(paths.publicAssets, { recursive: true });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "local-data.bin"), bytes);
@@ -39,29 +42,30 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
 
 test("derives the complete owned file contract from planet identity", () => {
   const planet = implemented[0];
-  const paths = objectPackagePaths(planet, "/project");
+  const paths = objectPackagePaths(planet, "/project", true);
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/site/control-content.mjs`,
+    `/project/src/planets/${planet.id}/prepared/content.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/runtime/client.mjs`,
+    `/project/src/planets/${planet.id}/prepared/runtime.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/site/${planet.name}Page.astro`,
+    `/project/site/pages/${planet.id}.astro`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/test/browser-profile.mjs`,
+    `/project/tests/objects/browser/${planet.id}/browser-profile.mjs`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/test/smoke-browser.mjs`,
+    `/project/tests/objects/browser/${planet.id}/smoke-browser.mjs`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/tools/prepare.mjs`,
+    `/project/src/planets/${planet.id}/object.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/planets/${planet.id}/tools/acquire.mjs`,
+    `/project/src/planets/${planet.id}/source/manifest.json`,
   ));
   assert.ok(paths.requiredFiles.every((file) => !file.includes('/data/planets/')));
+  assert.ok(paths.requiredFiles.every(file => !/src\/planets\/[^/]+\/(?:tools|test|site|runtime)\//u.test(file)));
 });
 
 test("requires every registered object package file", async () => {
@@ -69,18 +73,18 @@ test("requires every registered object package file", async () => {
   await assert.rejects(
     validateObjectPackageFiles(implemented[0], {
       accessFile: async (file) => {
-        if (file.endsWith("runtime/client.mjs")) throw new Error("ENOENT");
+        if (file.endsWith("prepared/runtime.json")) throw new Error("ENOENT");
       },
     }),
-    /is missing .*runtime\/client\.mjs/,
+    /is missing .*prepared\/runtime\.json/,
   );
   await assert.rejects(
     validateObjectPackageFiles(implemented[0], {
       accessFile: async (file) => {
-        if (file.endsWith("site/control-content.mjs")) throw new Error("ENOENT");
+        if (file.endsWith("prepared/content.json")) throw new Error("ENOENT");
       },
     }),
-    /is missing .*site\/control-content\.mjs/,
+    /is missing .*prepared\/content\.json/,
   );
 });
 

@@ -276,8 +276,10 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       const name = item.dataset.objectClassificationName;
       return name && (query === name || query === `${name}s` || query === item.dataset.objectClassification);
     })?.dataset.objectClassification;
+    const systemName = items.find(item =>
+      query === item.dataset.objectSystemName)?.dataset.objectSystemName;
     visibleObjects = 0;
-    void destinations?.search(classification || showAll ? "" : query);
+    void destinations?.search(classification || systemName || showAll ? "" : query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
       empty.hidden = true;
@@ -288,6 +290,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     let visible = 0;
     for (const item of items) {
       const match = showAll || (classification ? item.dataset.objectClassification === classification
+        : systemName ? item.dataset.objectSystemName === systemName
         : (item.dataset.objectName ?? "").includes(query));
       item.hidden = !match;
       if (match) visible += 1;

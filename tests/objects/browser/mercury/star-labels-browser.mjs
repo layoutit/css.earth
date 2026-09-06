@@ -33,9 +33,60 @@ try {
   await page.goto(new URL("/mercury/", baseUrl).href, { waitUntil: "networkidle", timeout: 30000 });
   await page.waitForFunction(() => window.__mercury?.ready === true && document.documentElement.dataset.ready === "true", null, { timeout: 20000 })
     .catch(error => { throw new Error(`Mercury did not become ready: ${errors.join("; ") || error.message}`); });
+  const unavailable = await page.evaluate(() => ({
+    labels: document.querySelectorAll('.planet-heliocentric-star-captions').length,
+    stars: document.querySelectorAll('.planet-cubic-sky-star').length,
+    bodyLabels: document.querySelectorAll('.mercury-caption').length,
+  }));
+  check('catalogue-without-destinations-mounts-no-star-labels', unavailable.labels === 0 && unavailable.stars === 1599 && unavailable.bodyLabels === 8, unavailable);
+
+  // Explicit test-only destinations exercise the preserved galaxy-facing path.
+  // Production has no star destinations yet. Do not add them to the registry.
+  const prepared = JSON.parse(await readFile(resolve('src/planets/mercury/prepared/runtime.json'), 'utf8'));
+  await page.addInitScript(ids => {
+    const destinations = new Set(ids);
+    window.__starSelections = [];
+    document.addEventListener('objectnavigationquery', event => {
+      if (destinations.has(event.detail?.objectId)) event.preventDefault();
+    });
+    document.addEventListener('objectnavigate', event => {
+      if (destinations.has(event.detail?.objectId)) window.__starSelections.push(event.detail.objectId);
+    });
+  }, prepared.heliocentricView.labels.stars.records.map(star => star.id));
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForFunction(() => window.__mercury?.ready === true);
   const initial = await read(page);
-  check("cold-start-adopts-visible-star", initial.stars.accepted && initial.stars.slots[0].alpha === 0.55 && initial.publications === 1,
+  check("cold-start-adopts-visible-star", initial.stars.accepted && initial.stars.slots[0].alpha === initial.policy.maxAlpha && initial.publications === 1,
     { star: initial.stars.candidate?.name, alpha: initial.stars.slots[0].alpha, publications: initial.publications });
+  const interaction = await page.evaluate(() => {
+    const star = document.querySelector('.mercury-star-caption'), body = document.querySelector('.mercury-caption');
+    const css = getComputedStyle(star), bodyCss = getComputedStyle(body);
+    const styles = ['fontSize', 'fontWeight', 'fontFamily', 'lineHeight', 'color', 'webkitTextStrokeWidth'];
+    star.click(); star.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }));
+    return { matches: styles.every(key => css[key] === bodyCss[key]), selections: window.__starSelections,
+      target: star.dataset.objectNavigate, tabIndex: star.tabIndex, role: star.getAttribute('role') };
+  });
+  check('star-label-uses-body-style-and-navigation', interaction.matches && interaction.tabIndex === 0 && interaction.role === 'button' &&
+    interaction.selections.length === 2 && interaction.selections.every(id => id === initial.stars.candidate.id), interaction);
+  const label = page.locator('.mercury-star-caption');
+  const readEmphasis = () => label.evaluate(element => ({
+    opacity: Number(getComputedStyle(element).opacity), cursor: getComputedStyle(element).cursor,
+    focused: element.matches(':focus-visible'),
+  }));
+  const labelBounds = await label.boundingBox();
+  await page.mouse.move(labelBounds.x + labelBounds.width / 2, labelBounds.y + labelBounds.height / 2);
+  const hovered = await readEmphasis();
+  check('clickable-label-brightens-on-hover', hovered.opacity === 1 && hovered.cursor === 'pointer', hovered);
+  await page.mouse.move(0, 0);
+  const unhovered = await readEmphasis();
+  check('label-restores-renderer-opacity-after-hover', close(unhovered.opacity, initial.policy.maxAlpha), unhovered);
+  await page.keyboard.press('Tab');
+  await label.focus();
+  const focused = await readEmphasis();
+  check('clickable-label-brightens-on-keyboard-focus', focused.focused && focused.opacity === 1, focused);
+  await page.keyboard.press('Tab');
+  const blurred = await readEmphasis();
+  check('label-restores-renderer-opacity-after-focus', close(blurred.opacity, initial.policy.maxAlpha), blurred);
   await verifyPixels(page, "default");
   await page.screenshot({ path: resolve(output, "default.png") });
   await page.evaluate(() => {
@@ -132,9 +183,10 @@ process.exitCode = failed.length ? 1 : 0;
 
 async function settle(page) {
   await page.waitForFunction(() => {
-    const stars = window.__mercury.sky.state().captions.stars;
+    const captions = window.__mercury.sky.state().captions, stars = captions.stars;
     const slot = stars.slots[0];
-    return slot.alpha === slot.target && (stars.accepted ? slot.occupant === `3:${stars.candidate.id}` : slot.occupant === null);
+    return captions.slots.every(slot => slot.alpha === slot.target) && slot.alpha === slot.target &&
+      (stars.accepted ? slot.occupant === `3:${stars.candidate.id}` : slot.occupant === null);
   }, null, { timeout: 3000 });
   await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
 }
@@ -208,12 +260,12 @@ function verifyPaint(sample, tag) {
   if (!sample.stars.accepted) return;
   const star = sample.stars.candidate, box = sample.label;
   const expectedX = sample.center[0] + star.anchor[0], expectedY = sample.center[1] + star.anchor[1];
-  check(`painted-name-and-opacity-${tag}`, !box.hidden && box.text === star.name && close(box.opacity, star.alpha, 1e-4),
-    { text: box.text, expected: star.name, opacity: box.opacity, alpha: star.alpha });
+  check(`painted-name-and-opacity-${tag}`, !box.hidden && box.text === star.name && close(box.opacity, sample.policy.maxAlpha, 1e-4),
+    { text: box.text, expected: star.name, opacity: box.opacity, alpha: sample.policy.maxAlpha });
   check(`label-above-rendered-star-${tag}`, sample.point !== null && close(sample.point.x, expectedX, 0.7) && close(sample.point.y, expectedY, 0.7) &&
     close(box.x + box.width / 2, sample.point.x, 0.7) && close(box.y + box.height, expectedY - star.radiusPx - 7, 0.03),
   { point: sample.point, anchor: [expectedX, expectedY], labelBottom: box.y + box.height, expectedBottom: expectedY - star.radiusPx - 7 });
-  check(`cap-and-line-height-${tag}`, close(box.capHeight, 12, 1.5) && close(box.height, 12 / 0.72 * 1.6, 0.05),
+  check(`cap-and-line-height-${tag}`, close(box.capHeight, sample.policy.capPixels, 1.5) && close(box.height, sample.policy.capPixels / sample.policy.capHeightEm * 1.3, 0.05),
     { cap: box.capHeight, height: box.height, lineHeight: box.lineHeight });
 }
 

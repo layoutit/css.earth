@@ -1,0 +1,509 @@
+{
+  "schema": "cssearth-observed-surfaces@1",
+  "sources": [
+    {
+      "id": "hubble-opal-neptune-visible",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+      "expectedBytes": 789926,
+      "expectedSha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms"
+    },
+    {
+      "id": "hubble-opal-neptune-fq619n",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "expectedSha256": "b1ad52870f9fdcf36cde019705209005d07f927ab99ea00305f36ebe36967a1b",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms"
+    },
+    {
+      "id": "hubble-opal-neptune-f845m",
+      "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+      "expectedBytes": 1045440,
+      "expectedSha256": "7373c6c3daf3ace7cf1576596ed0480659cb03c255893b71629d282fe7291b4c",
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+      "credit": "NASA, ESA, OPAL team, and STScI",
+      "license": "MAST public science data terms"
+    },
+    {
+      "id": "ras-oxford-neptune-true-colour-reference",
+      "path": "color/ras-oxford-neptune-true-colors-2024.jpg",
+      "expectedBytes": 338632,
+      "expectedSha256": "2f7d106d547adde83f356a3bd5f97053cd314a199fd6fb2c7d8d9c470df55ec7",
+      "origin": "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg",
+      "credit": "Patrick Irwin, University of Oxford, and NASA",
+      "license": "CC BY 4.0"
+    },
+    {
+      "id": "eso-neptune-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0"
+    }
+  ],
+  "lenses": [
+    {
+      "id": "normal",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+      "decode": {
+        "kind": "raster",
+        "channels": 3,
+        "crop": {
+          "left": 0,
+          "top": 0,
+          "width": 720,
+          "height": 360
+        }
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "neptune-surface-normal.webp",
+          "transforms": [],
+          "packing": {
+            "bandCount": 20,
+            "gutter": 18
+          },
+          "encoding": {
+            "quality": 92,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "neptune-surface-normal@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 5120,
+              "height": 2560
+            }
+          ],
+          "packing": {
+            "bandCount": 20,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 90,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "neptune-poles-normal.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 95,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "neptune-lens-normal.webp",
+          "transforms": [
+            {
+              "kind": "crop",
+              "region": {
+                "left": 1184,
+                "top": 464,
+                "width": 512,
+                "height": 512
+              }
+            },
+            {
+              "kind": "resize",
+              "width": 48,
+              "height": 48
+            }
+          ],
+          "encoding": {
+            "quality": 90,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "boundary-mean",
+        "boundaryFraction": 0.3333333333333333,
+        "exponent": 3,
+        "minimumBoundarySum": 18
+      },
+      "calibration": {
+        "source": "color/ras-oxford-neptune-true-colors-2024.jpg",
+        "sourceSample": {
+          "left": 0,
+          "top": 150,
+          "width": 720,
+          "height": 80
+        },
+        "targetSample": {
+          "left": 1780,
+          "top": 1070,
+          "width": 200,
+          "height": 200
+        },
+        "reference": {
+          "source": "Irwin et al. 2024 true-colour Neptune reconstruction",
+          "credit": "Patrick Irwin, University of Oxford, and NASA",
+          "distribution": "Royal Astronomical Society CC BY 4.0",
+          "sourcePath": "source/color/ras-oxford-neptune-true-colors-2024.jpg"
+        }
+      },
+      "transforms": [
+        {
+          "kind": "resize",
+          "width": 2880,
+          "height": 1440
+        }
+      ],
+      "atmosphereColor": {
+        "share": 0.2,
+        "maximum": 248,
+        "luminance": [
+          0.2126,
+          0.7152,
+          0.0722
+        ]
+      }
+    },
+    {
+      "id": "methane",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+      "decode": {
+        "kind": "fits",
+        "bitpix": -32,
+        "width": 721,
+        "height": 361,
+        "color": {
+          "percentiles": [
+            0.01,
+            0.995
+          ],
+          "minimumCoverage": 0,
+          "positiveValidity": false,
+          "channels": 3,
+          "transfer": "power",
+          "exponent": 0.72,
+          "palette": [
+            [
+              4,
+              17,
+              31
+            ],
+            [
+              26,
+              108,
+              139
+            ],
+            [
+              205,
+              245,
+              246
+            ]
+          ]
+        },
+        "continuation": {
+          "boundaryFraction": 0.3333333333333333,
+          "exponent": 3,
+          "minimumBoundarySum": 0
+        }
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "neptune-surface-methane.webp",
+          "transforms": [],
+          "packing": {
+            "bandCount": 20,
+            "gutter": 18
+          },
+          "encoding": {
+            "quality": 92,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "neptune-surface-methane@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 5120,
+              "height": 2560
+            }
+          ],
+          "packing": {
+            "bandCount": 20,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 90,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "neptune-poles-methane.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 95,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "neptune-lens-methane.webp",
+          "transforms": [
+            {
+              "kind": "crop",
+              "region": {
+                "left": 1184,
+                "top": 464,
+                "width": 512,
+                "height": 512
+              }
+            },
+            {
+              "kind": "resize",
+              "width": 48,
+              "height": 48
+            }
+          ],
+          "encoding": {
+            "quality": 90,
+            "effort": 6
+          }
+        }
+      ],
+      "transforms": [
+        {
+          "kind": "flip"
+        },
+        {
+          "kind": "crop",
+          "region": {
+            "left": 0,
+            "top": 0,
+            "width": 720,
+            "height": 360
+          }
+        },
+        {
+          "kind": "resize",
+          "width": 2880,
+          "height": 1440
+        },
+        {
+          "kind": "sharpen",
+          "options": {
+            "sigma": 0.55
+          }
+        }
+      ],
+      "atmosphereColor": {
+        "share": 0.2,
+        "maximum": 248,
+        "luminance": [
+          0.2126,
+          0.7152,
+          0.0722
+        ]
+      }
+    },
+    {
+      "id": "near-infrared",
+      "source": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+      "decode": {
+        "kind": "fits",
+        "bitpix": -32,
+        "width": 721,
+        "height": 361,
+        "color": {
+          "percentiles": [
+            0.01,
+            0.995
+          ],
+          "minimumCoverage": 0,
+          "positiveValidity": false,
+          "channels": 3,
+          "transfer": "power",
+          "exponent": 0.72,
+          "palette": [
+            [
+              7,
+              8,
+              20
+            ],
+            [
+              49,
+              46,
+              105
+            ],
+            [
+              214,
+              183,
+              244
+            ]
+          ]
+        },
+        "continuation": {
+          "boundaryFraction": 0.3333333333333333,
+          "exponent": 3,
+          "minimumBoundarySum": 0
+        }
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "neptune-surface-near-infrared.webp",
+          "transforms": [],
+          "packing": {
+            "bandCount": 20,
+            "gutter": 18
+          },
+          "encoding": {
+            "quality": 92,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "neptune-surface-near-infrared@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 5120,
+              "height": 2560
+            }
+          ],
+          "packing": {
+            "bandCount": 20,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 90,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "neptune-poles-near-infrared.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 95,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "neptune-lens-near-infrared.webp",
+          "transforms": [
+            {
+              "kind": "crop",
+              "region": {
+                "left": 1184,
+                "top": 464,
+                "width": 512,
+                "height": 512
+              }
+            },
+            {
+              "kind": "resize",
+              "width": 48,
+              "height": 48
+            }
+          ],
+          "encoding": {
+            "quality": 90,
+            "effort": 6
+          }
+        }
+      ],
+      "transforms": [
+        {
+          "kind": "flip"
+        },
+        {
+          "kind": "crop",
+          "region": {
+            "left": 0,
+            "top": 0,
+            "width": 720,
+            "height": 360
+          }
+        },
+        {
+          "kind": "resize",
+          "width": 2880,
+          "height": 1440
+        },
+        {
+          "kind": "sharpen",
+          "options": {
+            "sigma": 0.55
+          }
+        }
+      ],
+      "atmosphereColor": {
+        "share": 0.2,
+        "maximum": 248,
+        "luminance": [
+          0.2126,
+          0.7152,
+          0.0722
+        ]
+      }
+    }
+  ]
+}

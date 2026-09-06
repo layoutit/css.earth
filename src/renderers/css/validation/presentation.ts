@@ -5,6 +5,7 @@ import type { PreparedVariant, PreparedViewBinding, PreparedPresentationDefiniti
 import type { PreparedMaterialTrack } from '../rendering/prepared-material.js';
 import type { ObjectControls } from '../runtime/object-contract.js';
 import type { CameraPlan } from '../navigation/types.js';
+import { parsePreparedPagePlan } from '../paging/capabilities.js';
 
 export function requireVariants(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>, tracks: readonly PreparedMaterialTrack[], controls: ObjectControls, camera: CameraPlan): asserts value is readonly PreparedVariant[] {
   const variants = array(value, 'selection variants'); if (!variants.length) fail('selection variants are empty');
@@ -90,9 +91,9 @@ export function requireOptionalPresentation(plan: Record<string, unknown>, tree:
       for (const key of ['id', 'className', 'textureClassName']) text(layer[key], `page layer ${key}`);
       const carrier = nodeReference(layer.carrier, tree), system = nodeReference(layer.system, tree);
       if (!ancestor(carrier, tree.scene, tree) || !ancestor(system, tree.scene, tree) || !ancestor(carrier, system, tree)) fail('page carrier must belong to scene and system');
-      const lenses = array(layer.lensIds, 'page lenses'); if (!lenses.length || lenses.some(id => !lensIds.includes(text(id, 'page lens')))) fail('page layer requires declared lenses');
-      const page = record(layer.plan, 'map pages');
-      if (page.schema !== 'cssearth-prepared-map-pages@1' || !/^\/scenes\/[a-z][a-z0-9-]*\/$/.test(text(page.assetPath, 'page asset scope'))) fail('page layer requires prepared map plan');
+      const lenses = array(layer.lensIds, 'page lenses').map(id => text(id, 'page lens'));
+      if (!lenses.length || lenses.some(id => !lensIds.includes(id))) fail('page layer requires declared lenses');
+      parsePreparedPagePlan(layer.plan, { lensIds: lenses });
     }
   }
   if (plan.destinations !== undefined) {

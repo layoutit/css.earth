@@ -3,6 +3,7 @@ import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { objectAdapter } from "../object-adapter.mjs";
+import { loadObjectContent } from "./load-object-content.mjs";
 import { OBJECTS } from "../objects.mjs";
 import { requireSceneLifecycle } from "../scene-contract.mjs";
 import { createSceneRouter } from "../scene-router.mjs";
@@ -231,21 +232,16 @@ test("shared router cancels a pending adapter before publication", async () => {
 
 test("keeps implemented routes backed by object-owned files", async () => {
   for (const planet of OBJECTS) {
-    const owned = planet.id === "mercury" || planet.id === "venus"
-      ? [
-        `../../src/planets/${planet.id}/SOURCE.md`,
-        `../../src/planets/${planet.id}/NOTICE.md`,
-        `../../src/planets/${planet.id}/object.json`,
-        `../pages/${planet.id}.astro`,
-      ]
-      : [
-        `../../src/planets/${planet.id}/SOURCE.md`,
-        `../../src/planets/${planet.id}/NOTICE.md`,
-        `../../src/planets/${planet.id}/site`,
-        `../../src/planets/${planet.id}/test`,
-        `../../src/planets/${planet.id}/tools`,
-        `../pages/${planet.id}.astro`,
-      ];
+    const owned = [
+      "../../src/planets/" + planet.id + "/SOURCE.md",
+      "../../src/planets/" + planet.id + "/NOTICE.md",
+      "../../src/planets/" + planet.id + "/object.json",
+      "../../src/planets/" + planet.id + "/source/manifest.json",
+      "../../src/planets/" + planet.id + "/prepared/object.json",
+      "../../src/planets/" + planet.id + "/prepared/content.json",
+      "../../tests/objects/browser/" + planet.id + "/browser-profile.mjs",
+      "../pages/" + planet.id + ".astro",
+    ];
     await Promise.all(owned.map((relativePath) =>
       access(new URL(relativePath, import.meta.url))));
   }
@@ -280,27 +276,9 @@ test("renders source-backed charts in one canonical switcher with Reflectance fi
   ];
 
   for (const [id, name, expectedChartIds] of panels) {
-    if (id === "mercury" || id === "venus") {
-      const content = JSON.parse(await readFile(
-        new URL(`../../src/planets/${id}/prepared/content.json`, import.meta.url),
-        "utf8",
-      ));
-      assert.deepEqual(content.charts.map(({ id: chartId }) => chartId), expectedChartIds, `${name} chart order`);
-      continue;
-    }
-    const panel = await readFile(
-      new URL(`../../src/planets/${id}/site/${name}Panel.astro`, import.meta.url),
-      "utf8",
-    );
-    const chartBlock = panel.match(/const charts = \[([\s\S]*?)\n\];/u)?.[1];
-    assert.ok(chartBlock, `${name} must declare its applicable charts.`);
-    const chartIds = [...chartBlock.matchAll(/id:\s*"([^"]+)"/gu)]
-      .map(([, chartId]) => chartId);
-    assert.deepEqual(
-      chartIds,
-      expectedChartIds,
-      `${name} chart order`,
-    );
+    const { prepared: content } = await loadObjectContent(id);
+    assert.deepEqual(content.charts.map(({ id: chartId }) => chartId),
+      expectedChartIds, name + " chart order");
   }
 
   const shell = await readFile(
@@ -362,11 +340,12 @@ test("renders optional source media through one planet-neutral panel contract", 
 });
 
 test("keeps concise lens descriptions in the object model without secondary row copy", async () => {
-  const [shell, { objectControls: saturnPanel }, { objectControls: saturnSource }] = await Promise.all([
+  const [shell, saturn] = await Promise.all([
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
-    import("../../src/planets/saturn/site/control-content.mjs"),
-    import("../../src/planets/saturn/site/control-content.source.mjs"),
+    loadObjectContent("saturn"),
   ]);
+  const saturnPanel = saturn.object.data.controls;
+  const saturnSource = await saturn.source("content");
   assert.doesNotMatch(shell, /planet-lenses-introduction|Explore this object in new ways/u);
   assert.doesNotMatch(shell, /planet-lens-description|\{lens\.description\}<\/span>/u);
   const descriptions = Object.fromEntries(saturnPanel.lenses.controls.map(({ id, description }) => [id, description]));
@@ -557,7 +536,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.doesNotMatch(shell, /PlanetNavigationMarker|activePlanetIndex/u);
   assert.match(
     shell,
-    /class="planet-title-row">\s*<h1 class="planet-title"[\s\S]*?<\/h1>[\s\S]*?class="planet-classification-tag planet-title-tag"[\s\S]*?class="planet-distance-tag planet-title-tag"[\s\S]*?<\/div>/u,
+    /class="planet-title-row">\s*<h1 class="planet-title"[\s\S]*?<\/h1>[\s\S]*?class="planet-system-tag planet-title-tag"[\s\S]*?>\{activeObject\.systemName\}<\/button>[\s\S]*?class="planet-classification-tag planet-title-tag"[\s\S]*?>\{classificationLabel\}<\/button>[\s\S]*?<\/div>/u,
   );
   assert.match(shell, /import \{ PLANET_SEARCH_OBJECTS, objectClassificationLabel \} from "\.\.\/planet-search-objects\.mjs";/u);
   assert.match(

@@ -1,14 +1,14 @@
 import { parseArgs } from "node:util";
 import { pathToFileURL } from "node:url";
 import { preview } from "vite";
-import { wmtsLocalMirror } from "../src/planets/earth/tools/wmts-local-server.mjs";
+import { wmtsLocalMirror } from "../tools/objects/geographic-pages/operations/wmts-local-server.mjs";
 
 // Astro static preview discards user Vite plugins. Use Vite's static preview
 // directly so the same prepared-pack middleware works in dev and preview.
 export function previewSite({ root = new URL("../", import.meta.url).pathname,
   outDir = "dist", host = "127.0.0.1", port = 4210, geometryDirectory } = {}) {
   return preview({ root, configFile: false, appType: "mpa", publicDir: false,
-    build: { outDir }, plugins: [wmtsLocalMirror({ directory: geometryDirectory })],
+    build: { outDir }, plugins: [wmtsLocalMirror({objectId:"earth", directory: geometryDirectory })],
     preview: { host, port, strictPort: true } });
 }
 

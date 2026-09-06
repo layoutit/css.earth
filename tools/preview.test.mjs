@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { previewSite } from "./preview.mjs";
 import { createServer } from "node:http";
-import { wmtsLocalMirror } from "../src/planets/earth/tools/wmts-local-server.mjs";
+import { wmtsLocalMirror } from "../tools/objects/geographic-pages/operations/wmts-local-server.mjs";
 
 test("standard preview serves built routes and bounded prepared ranges outside dist", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-preview-"));
@@ -40,7 +40,7 @@ test("missing mirrors stream bounded published ranges and reject malformed upstr
   const root = await mkdtemp(join(tmpdir(), "cssearth-remote-geometry-"));
   const requests = [];
   let malformed = false, handler;
-  wmtsLocalMirror({ directory: pathToFileURL(root + "/"), assetOrigin: "https://example.invalid",
+  wmtsLocalMirror({objectId:"earth", directory: pathToFileURL(root + "/"), assetOrigin: "https://example.invalid",
     fetcher: async (url, options) => {
       requests.push({ url: String(url), ...options });
       return new Response(options.method === "HEAD" ? null : "abcdefgh", {
