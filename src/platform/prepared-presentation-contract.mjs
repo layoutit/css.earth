@@ -270,7 +270,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       if (!plan.camera.projection || plan.camera.projection.model !== "css-perspective-shared-with-sky") fail("silhouette fit requires the perspective camera");
     } else if (binding.kind === "view-property") {
       string(binding.property, "view property");
-      if (!binding.property.startsWith("--") ) fail("view property must be a custom property");
+      if (!binding.property.startsWith("--")) fail("view property must be a custom property");
       choice(binding.source, new Set(["billboard-opacity", "marker-opacity"]), "view property source");
       if (binding.precision !== null) { integer(binding.precision, "view property precision"); if (binding.precision > 12) fail("invalid view property precision"); }
     } else if (binding.kind === "view-attribute") {
