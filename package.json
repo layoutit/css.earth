@@ -74,7 +74,8 @@
     "test:preparation": "node tools/test-preparation.mjs",
     "typecheck:preparation": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json",
     "test:seo": "node site/test/seo-browser.mjs",
-    "prepare:social": "node tools/prepare-social-images.mjs"
+    "prepare:social": "node tools/prepare-social-images.mjs",
+    "test:browser:orbit-alignment": "node tests/objects/browser/orbit-alignment.mjs"
   },
   "dependencies": {
     "@layoutit/polycss": "0.2.11"

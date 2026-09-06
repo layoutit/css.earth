@@ -1,12 +1,14 @@
 /* Shared prepared CSS object presentation. Capability selectors remain object-prefixed
    until the renderer capability variables replace their legacy names. */
-.example-stage > :is(
+/* Root dimensions are defaults; the shared shell positions every render root
+   around its dock, including the camera, material and heliocentric overlays. */
+:where(.example-stage > :is(
   .mercury-sun-camera,
   .mercury-camera,
   .mercury-material-root,
   .venus-material-composite,
   .polycss-camera
-) {
+)) {
   position: absolute;
   inset: 0;
   transform-origin: 50% 50%;
