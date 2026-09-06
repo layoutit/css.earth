@@ -20,6 +20,7 @@ import {
   buildManifest,
   isOwnedFile,
   listFiles,
+  locallyMaintainedFile,
   listVendoredFiles,
   manifestProblems,
   readProvenance,
@@ -105,7 +106,7 @@ for (const pkg of PACKAGES) {
 
   test(`${pkg.directory}: the whole package directory is vendored, not just src`, async () => {
     const { files } = await readProvenance(target);
-    for (const path of REQUIRED_FILES[pkg.id]) assert.ok(path in files, `${path} is vendored`);
+    for (const path of REQUIRED_FILES[pkg.id]) assert.ok(path in files || locallyMaintainedFile(target, path), `${path} is mirrored or explicitly maintained locally`);
     const testFiles = Object.keys(files).filter((path) => path.endsWith(".test.ts"));
     assert.ok(testFiles.length >= 1, `upstream tests are carried across (${testFiles.length})`);
   });
@@ -117,8 +118,8 @@ for (const pkg of PACKAGES) {
       assert.ok(!(path in files), `${path} is not in the manifest`);
       assert.ok(!existsSync(join(target.dest, path)), `${path} is not on disk`);
     }
-    assert.ok("CLAUDE.md" in excludedFiles, "the CLAUDE.md symlink is excluded");
-    assert.ok(!existsSync(join(target.dest, "CLAUDE.md")), "no CLAUDE.md, symlink or file");
+    assert.ok(locallyMaintainedFile(target, "CLAUDE.md"));
+    assert.ok(existsSync(join(target.dest, "CLAUDE.md")), "local CLAUDE.md guide exists");
     assert.ok(!Object.values(files).some((entry) => "symlink" in entry), "no symlink is mirrored");
     if (pkg.id === "catalog") {
       assert.ok("scripts/gen_fixture.py" in excludedFiles, "gen_fixture.py is excluded");
@@ -183,7 +184,7 @@ for (const pkg of PACKAGES) {
     const readme = await readFile(join(target.dest, "README.md"), "utf8");
     assert.match(readme, new RegExp(`^# ${pkg.package.replace("/", "\\/")}`));
     const agents = await readFile(join(target.dest, "AGENTS.md"), "utf8");
-    assert.doesNotMatch(agents, /CLAUDE\.md/, "AGENTS.md no longer announces a CLAUDE.md symlink");
+    assert.match(agents, /CLAUDE\.md/, "AGENTS.md documents its local symlink");
   });
 
   test(`${pkg.directory}: nothing in the directory names the other project, except upstream.json's provenance fields`, async () => {
@@ -379,4 +380,18 @@ test("data/catalogs: every catalogue's licence and attribution are spelled out b
     assert.ok(isOwnedFile(catalogs, file));
   }
   assert.doesNotMatch(notice, /MIT/, "no catalogue is presented as MIT");
+});
+
+
+test("catalog is local and astronomy source sections survive sync", () => {
+  assert.ok(!TARGETS.includes("catalog"));
+  assert.throws(() => targetFor("catalog"), /Unknown sync target/);
+  for (const name of ["NOTICE.md", "upstream.json"]) assert.equal(existsSync(new URL(`../packages/catalog/${name}`, import.meta.url)), false);
+  assert.ok(existsSync(new URL("../packages/catalog/LICENSE", import.meta.url)));
+  const astronomy = targetFor("astronomy");
+  for (const file of ["AGENTS.md", "CLAUDE.md", "tools/fetch-fixtures.mjs", "src/data/satelliteElements.data.saturn.ts", "src/__fixtures__/horizons.planetary.ts"]) {
+    assert.ok(locallyMaintainedFile(astronomy, file), file);
+    assert.ok(isOwnedFile(astronomy, file), file);
+  }
+  assert.equal(isOwnedFile(astronomy, "src/frames.ts"), false);
 });

@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "mercury",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mercury",
+      "steps": [
+        "verify-sources",
+        "title",
+        "panel-content",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "lenses",
+        "charts",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/mercury.json",
+    "sha256": "aa891248fa4ea301b26572eeecbbc74214f9acfafd36c07441a711eb50396b62"
+  }
+}

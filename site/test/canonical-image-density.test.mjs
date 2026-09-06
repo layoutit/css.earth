@@ -11,19 +11,21 @@ test("every object mounts one canonical high-density image bank", async () => {
   const ownership = await auditObjectRuntimeOwnership();
   assert.equal(ownership.complete, true);
   for (const objectRecord of OBJECTS) {
+    const entry = ownership.entries.find(entry => entry.id === objectRecord.id);
+    assert.equal(entry.factoryCalls, 1,
+      `${objectRecord.id}: its actual registered loader must have one runtime factory`);
     const objectRoot = new URL(
       `../../src/planets/${objectRecord.id}/`,
       import.meta.url,
     );
     const [client, head, styles] = await Promise.all([
-      readFile(new URL("runtime/client.mjs", objectRoot), "utf8"),
+      readFile(new URL(`../../${entry.entry.adapter ?? entry.entry.file}`, import.meta.url), "utf8"),
       readFile(
         new URL(`site/${objectRecord.name}Head.astro`, objectRoot),
         "utf8",
       ),
       readFile(new URL("runtime/styles.css", objectRoot), "utf8"),
     ]);
-    assert.ok(ownership.entries.find(entry => entry.id === objectRecord.id).closure.includes("src/platform/object-runtime.mjs"));
     assert.doesNotMatch(
       client,
       /devicePixelRatio/u,

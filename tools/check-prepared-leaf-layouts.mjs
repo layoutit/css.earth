@@ -63,7 +63,7 @@ export async function censusPreparedLeafLayouts({
   const closure = await auditObjectRuntimeOwnership({ root, objects, strict: false, readText });
   const reports = [];
   for (const object of closure.entries) {
-    const file = object.closure.find(file => file.endsWith("/runtime/preparedPresentation.mjs"));
+    const file = object.presentation?.file ?? object.closure.find(file => file.endsWith("/runtime/preparedPresentation.mjs"));
     const report = { id: object.id, count: 0, completedByDescriptor: 0, failures: [...object.violations], modules: file ? [file] : [], sourceSha256: null };
     if (!file) {
       report.failures.push({ error: "Reachable normalized presentation data is missing." });
@@ -72,7 +72,7 @@ export async function censusPreparedLeafLayouts({
     const source = await readText(resolve(root, file));
     report.sourceSha256 = createHash("sha256").update(source).digest("hex");
     let tree;
-    try { tree = readPreparedPresentationModule(source).tree; }
+    try { tree = object.presentation?.format === 'json' ? JSON.parse(source).data.tree : readPreparedPresentationModule(source).tree; }
     catch (error) { report.failures.push({ file, error: error.message }); reports.push(report); continue; }
     const children = new Map();
     for (const node of tree.nodes) if (textureClass(node)) children.set(node.parent, (children.get(node.parent) ?? 0) + 1);

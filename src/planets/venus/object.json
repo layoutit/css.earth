@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "venus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Venus",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "charts",
+        "panel-content",
+        "surface-gallery",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/venus.json",
+    "sha256": "6addbd3cfe5e1eed482392076250e049ac855437624dbbe738d2c59aea90c071"
+  }
+}

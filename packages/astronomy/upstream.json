@@ -27,15 +27,6 @@
     "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio … convention/definition' sourceLabel string literals -> 'cssEarth …' (labels only; no behaviour change)"
   },
   "rewrittenFiles": {
-    "AGENTS.md": [
-      "prose-package-name",
-      "prose-claude-symlink"
-    ],
-    "README.md": [
-      "prose-package-name",
-      "prose-project-link",
-      "prose-architecture-doc"
-    ],
     "package.json": [
       "package-name",
       "package-urls"
@@ -45,34 +36,11 @@
       "code-convention-label"
     ]
   },
-  "excludedFiles": {
-    "CLAUDE.md": "A symlink to AGENTS.md upstream. Claude Code loads CLAUDE.md per directory, so mirroring it would silently apply the upstream project's operator instructions to any session working in this package. AGENTS.md itself is mirrored as plain documentation."
-  },
+  "excludedFiles": {},
   "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mjs (tools/prepare-solar-geometry.mjs first). A catalog consumer would be wired the same way.",
-  "fileCount": 49,
-  "byteCount": 673135,
+  "fileCount": 43,
+  "byteCount": 519957,
   "files": {
-    "AGENTS.md": {
-      "sha256": "fe0f33b7a8e94bd3cddeabf26a21e4dc0d86f8514948b27ffe8e5abddb30fa85",
-      "bytes": 10133,
-      "upstreamSha256": "3c10495866e583f6d1fdd3b9f1cc58f033df30ed29e137e5e22471b39aedcbff",
-      "upstreamBytes": 10171,
-      "identityRules": [
-        "prose-package-name",
-        "prose-claude-symlink"
-      ]
-    },
-    "README.md": {
-      "sha256": "796ae5eb3c97d1b1f6644cc1c6a789fdcea41a6894fdcea1997d33cb45a8b3a8",
-      "bytes": 10185,
-      "upstreamSha256": "f59dfe4065a2307b61e8f20bcdce82b5be790cec54a87cd99059b8faaaf904a1",
-      "upstreamBytes": 10167,
-      "identityRules": [
-        "prose-package-name",
-        "prose-project-link",
-        "prose-architecture-doc"
-      ]
-    },
     "package.json": {
       "sha256": "a00c3ed14ee3f66a083a1f07a68bc2d02006f65c301dc467127a2b8cd1d5ea92",
       "bytes": 1231,
@@ -86,10 +54,6 @@
     "src/__fixtures__/compare.ts": {
       "sha256": "931eef57a5bb089623b82cebf29ae8f22723e9f364b3f0b275ab7249d5b45a7a",
       "bytes": 944
-    },
-    "src/__fixtures__/horizons.ts": {
-      "sha256": "82fe18d036a4d0755e7e7d6d90f3bb28ea562a18860b9a1ce022fd584b7fc99a",
-      "bytes": 81623
     },
     "src/__fixtures__/rotation.ts": {
       "sha256": "cf3c5a868d2cc58c39133ee58496e2de3b0810f52e7905563232aa47c0e9f9c8",
@@ -118,10 +82,6 @@
     "src/data/elp2000.data.ts": {
       "sha256": "02b1aa03713b8cfbe112d169ccb6cefa13f6d0aee31ad0029b6567cb9b817bc3",
       "bytes": 54067
-    },
-    "src/data/satelliteElements.data.ts": {
-      "sha256": "81889cb4d24753d4437512971d282ceed70ae4db05a6e4e3bb4496d7ac5cdd5b",
-      "bytes": 21549
     },
     "src/data/vsop87a.data.ts": {
       "sha256": "ffedea6db98b068bde1240b124ef15899526f6b797d243b86b53212f35330443",
@@ -229,10 +189,6 @@
       "sha256": "86ef3df9c349d8c7f0db7bbe0aefecd203ab0a6d9a532d3bcaea6eef19c94172",
       "bytes": 162
     },
-    "tools/fetch-fixtures.mjs": {
-      "sha256": "b68b33ee91aca463549a4f08c8d258b0b3eed8013770f41d646a9f5fd9417074",
-      "bytes": 9313
-    },
     "tools/fetch-rotation-fixtures.mjs": {
       "sha256": "d0c6d852bf20d0a71228d18e5afd7056835e4c74858b327dae093f4be7621d46",
       "bytes": 4911
@@ -240,10 +196,6 @@
     "tools/generate-dwarf-planets.mjs": {
       "sha256": "791eaf7961ef6fa7251550cc42be8801699847bf23ba253f4936602faa58c2db",
       "bytes": 4648
-    },
-    "tools/generate-satellites.mjs": {
-      "sha256": "c68e6153be36577c09c87cd3296dabbe1c876a49343064e9b4c28f1f6ba83ba2",
-      "bytes": 20375
     },
     "tools/generate-series.mjs": {
       "sha256": "a3d6df3b44ab389e08195eb0c190143fc12723706db2c77151d33fa3a6cc715e",
@@ -272,6 +224,63 @@
     "tsup.config.ts": {
       "sha256": "4dce640872f64dfbda07ff9a70f9b044903a7f5c6ec619b05482048864753188",
       "bytes": 171
+    }
+  },
+  "localMaintenance": "Guides and sectioned scientific records are maintained locally and preserved by sync.",
+  "locallyMaintainedFiles": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "README.md",
+    "src/__fixtures__/horizons.moons-and-small-bodies.ts",
+    "src/__fixtures__/horizons.planetary.ts",
+    "src/__fixtures__/horizons.ts",
+    "src/data/satelliteElements.data.jupiter.ts",
+    "src/data/satelliteElements.data.mars.ts",
+    "src/data/satelliteElements.data.neptune.ts",
+    "src/data/satelliteElements.data.saturn.ts",
+    "src/data/satelliteElements.data.ts",
+    "src/data/satelliteElements.data.uranus.ts",
+    "tools/fetch-fixtures.mjs",
+    "tools/generate-satellites.mjs",
+    "tools/lib/write-record-sections.mjs"
+  ],
+  "originalLocalFileHashes": {
+    "AGENTS.md": {
+      "sha256": "fe0f33b7a8e94bd3cddeabf26a21e4dc0d86f8514948b27ffe8e5abddb30fa85",
+      "bytes": 10133,
+      "upstreamSha256": "3c10495866e583f6d1fdd3b9f1cc58f033df30ed29e137e5e22471b39aedcbff",
+      "upstreamBytes": 10171,
+      "identityRules": [
+        "prose-package-name",
+        "prose-claude-symlink"
+      ]
+    },
+    "README.md": {
+      "sha256": "796ae5eb3c97d1b1f6644cc1c6a789fdcea41a6894fdcea1997d33cb45a8b3a8",
+      "bytes": 10185,
+      "upstreamSha256": "f59dfe4065a2307b61e8f20bcdce82b5be790cec54a87cd99059b8faaaf904a1",
+      "upstreamBytes": 10167,
+      "identityRules": [
+        "prose-package-name",
+        "prose-project-link",
+        "prose-architecture-doc"
+      ]
+    },
+    "src/__fixtures__/horizons.ts": {
+      "sha256": "82fe18d036a4d0755e7e7d6d90f3bb28ea562a18860b9a1ce022fd584b7fc99a",
+      "bytes": 81623
+    },
+    "src/data/satelliteElements.data.ts": {
+      "sha256": "81889cb4d24753d4437512971d282ceed70ae4db05a6e4e3bb4496d7ac5cdd5b",
+      "bytes": 21549
+    },
+    "tools/fetch-fixtures.mjs": {
+      "sha256": "b68b33ee91aca463549a4f08c8d258b0b3eed8013770f41d646a9f5fd9417074",
+      "bytes": 9313
+    },
+    "tools/generate-satellites.mjs": {
+      "sha256": "c68e6153be36577c09c87cd3296dabbe1c876a49343064e9b4c28f1f6ba83ba2",
+      "bytes": 20375
     }
   }
 }
