@@ -26,10 +26,17 @@
       "origin": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}",
       "credit": "USGS Astrogeology; MESSENGER MDIS; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
-      "licenseEvidence": ["maps/messenger_bdr_newyork.asset", "maps/messenger_bdr_newyork.wms"],
+      "licenseEvidence": [
+        "maps/messenger_bdr_newyork.asset",
+        "maps/messenger_bdr_newyork.wms"
+      ],
       "acquisition": "Stitch all 16 by 8 level-3 TMS tiles declared by the pinned OpenSpace WMS file, then resize the 5760 by 2880 equirectangular mosaic to 4096 by 2048 with Lanczos3.",
       "redistribution": "Committed scientific source snapshot with credit and product qualification.",
-      "consumers": ["assets", "lenses", "scene"]
+      "consumers": [
+        "assets",
+        "lenses",
+        "scene"
+      ]
     },
     {
       "id": "usgs-messenger-enhanced-global-z3",
@@ -39,10 +46,16 @@
       "origin": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
       "credit": "NASA Solar System Treks; USGS Astrogeology; MESSENGER MDIS; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
-      "licenseEvidence": ["https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"],
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m"
+      ],
       "acquisition": "Stitch the complete 16 by 8 level-3 NASA Solar System Treks WMTS tile matrix for the USGS 665 m enhanced-color global mosaic into its native 4096 by 2048 equirectangular level-3 image.",
       "redistribution": "Committed NASA Trek/USGS enhanced-color product snapshot; natural color is not claimed. Source no-data is completed only in prepared outputs and is explicitly qualified there.",
-      "consumers": ["assets", "lenses", "scene"]
+      "consumers": [
+        "assets",
+        "lenses",
+        "scene"
+      ]
     },
     {
       "id": "usgs-messenger-topography-z3",
@@ -52,10 +65,17 @@
       "origin": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}",
       "credit": "USGS Astrogeology; MESSENGER; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
-      "licenseEvidence": ["maps/messenger_shade_newyork.asset", "maps/messenger_shade_newyork.wms"],
+      "licenseEvidence": [
+        "maps/messenger_shade_newyork.asset",
+        "maps/messenger_shade_newyork.wms"
+      ],
       "acquisition": "Stitch all 11 by 6 level-3 TMS tiles declared by the pinned OpenSpace WMS file, crop to its 3832 by 1916 data window, then resize to 4096 by 2048 with Lanczos3.",
       "redistribution": "Committed scientific source snapshot with credit and false-color qualification.",
-      "consumers": ["assets", "lenses", "scene"]
+      "consumers": [
+        "assets",
+        "lenses",
+        "scene"
+      ]
     },
     {
       "id": "usgs-messenger-topography-legend",
@@ -65,10 +85,14 @@
       "origin": "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png",
       "credit": "USGS Astrogeology; MESSENGER; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
-      "licenseEvidence": ["https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"],
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
+      ],
       "acquisition": "Pinned ancillary legend published with the USGS Mercury MESSENGER MDIS DEM Global Color Shaded Relief 2 km product.",
       "redistribution": "Committed scientific legend snapshot with product credit.",
-      "consumers": ["lenses"]
+      "consumers": [
+        "lenses"
+      ]
     },
     {
       "id": "openspace-mercury-globe",
@@ -78,10 +102,14 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/globe.asset",
       "credit": "OpenSpace Team",
       "license": "MIT",
-      "licenseEvidence": ["../LICENSE.OPENSPACE-MIT"],
+      "licenseEvidence": [
+        "../LICENSE.OPENSPACE-MIT"
+      ],
       "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
       "redistribution": "Permitted by MIT license.",
-      "consumers": ["scene"]
+      "consumers": [
+        "scene"
+      ]
     },
     {
       "id": "openspace-globe-lighting-excerpt",
@@ -92,10 +120,15 @@
       "upstreamFullFileSha256": "c2388a626700e4b4c7c09894e8d15e402c7c53d67cb24c4d8a1cebbacf4745d4",
       "credit": "OpenSpace Team",
       "license": "MIT",
-      "licenseEvidence": ["../LICENSE.OPENSPACE-MIT"],
+      "licenseEvidence": [
+        "../LICENSE.OPENSPACE-MIT"
+      ],
       "acquisition": "Exact Oren-Nayar and shaded-color function excerpts from the pinned OpenSpace renderer; the full upstream-file hash is recorded in the snapshot.",
       "redistribution": "Permitted by MIT license.",
-      "consumers": ["assets", "scene"]
+      "consumers": [
+        "assets",
+        "scene"
+      ]
     },
     {
       "id": "openspace-mercury-bdr-asset",
@@ -105,10 +138,14 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_bdr_newyork.asset",
       "credit": "OpenSpace Team; USGS",
       "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": ["../LICENSE.OPENSPACE-MIT"],
+      "licenseEvidence": [
+        "../LICENSE.OPENSPACE-MIT"
+      ],
       "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
       "redistribution": "Permitted with retained attribution.",
-      "consumers": ["provenance"]
+      "consumers": [
+        "provenance"
+      ]
     },
     {
       "id": "openspace-mercury-bdr-wms",
@@ -118,10 +155,14 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_bdr_newyork.wms",
       "credit": "OpenSpace Team; USGS",
       "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": ["../LICENSE.OPENSPACE-MIT"],
+      "licenseEvidence": [
+        "../LICENSE.OPENSPACE-MIT"
+      ],
       "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
       "redistribution": "Permitted with retained attribution.",
-      "consumers": ["provenance"]
+      "consumers": [
+        "provenance"
+      ]
     },
     {
       "id": "openspace-mercury-enhanced-asset",
@@ -131,10 +172,14 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_mosaic2_newyork.asset",
       "credit": "OpenSpace Team; USGS",
       "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": ["../LICENSE.OPENSPACE-MIT"],
+      "licenseEvidence": [
+        "../LICENSE.OPENSPACE-MIT"
+      ],
       "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
       "redistribution": "Permitted with retained attribution.",
-      "consumers": ["provenance"]
+      "consumers": [
+        "provenance"
+      ]
     },
     {
       "id": "openspace-mercury-enhanced-wms",
@@ -144,10 +189,14 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_mosaic2_newyork.wms",
       "credit": "OpenSpace Team; USGS",
       "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": ["../LICENSE.OPENSPACE-MIT"],
+      "licenseEvidence": [
+        "../LICENSE.OPENSPACE-MIT"
+      ],
       "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
       "redistribution": "Permitted with retained attribution.",
-      "consumers": ["provenance"]
+      "consumers": [
+        "provenance"
+      ]
     },
     {
       "id": "openspace-mercury-topography-asset",
@@ -157,10 +206,14 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_shade_newyork.asset",
       "credit": "OpenSpace Team; USGS",
       "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": ["../LICENSE.OPENSPACE-MIT"],
+      "licenseEvidence": [
+        "../LICENSE.OPENSPACE-MIT"
+      ],
       "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
       "redistribution": "Permitted with retained attribution.",
-      "consumers": ["provenance"]
+      "consumers": [
+        "provenance"
+      ]
     },
     {
       "id": "openspace-mercury-topography-wms",
@@ -170,10 +223,14 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/mercury/layers/colorlayers/messenger_shade_newyork.wms",
       "credit": "OpenSpace Team; USGS",
       "license": "MIT declaration; referenced data NASA/PDS",
-      "licenseEvidence": ["../LICENSE.OPENSPACE-MIT"],
+      "licenseEvidence": [
+        "../LICENSE.OPENSPACE-MIT"
+      ],
       "acquisition": "Pinned raw GitHub file at commit 56e29b54b8592084ff1fef47c2e08de0b22ce516.",
       "redistribution": "Permitted with retained attribution.",
-      "consumers": ["provenance"]
+      "consumers": [
+        "provenance"
+      ]
     },
     {
       "id": "nasa-mercury-pia15162-navigation",
@@ -185,7 +242,9 @@
       "license": "NASA image-use guidelines; United States government work",
       "acquisition": "Pinned direct NASA Science image URL.",
       "redistribution": "Retained with source credit and no endorsement claim.",
-      "consumers": ["navigation"]
+      "consumers": [
+        "navigation"
+      ]
     },
     {
       "id": "nasa-mercury-facts-107747",
@@ -197,7 +256,11 @@
       "license": "United States government work",
       "acquisition": "Prepared from NASA record 107747 and its VIP block API by the repository planet-information preparer on 2026-08-30.",
       "redistribution": "Committed factual/editorial snapshot with source URL and retrieval date.",
-      "consumers": ["panel", "charts", "interior"]
+      "consumers": [
+        "panel",
+        "charts",
+        "interior"
+      ]
     },
     {
       "id": "nasa-psg-mercury-config",
@@ -209,7 +272,10 @@
       "license": "United States government scientific service output",
       "acquisition": "Expanded deterministic Mercury seed for 2026/08/30 12:00 UTC, followed by committed generator settings.",
       "redistribution": "Committed model configuration with explicit qualification.",
-      "consumers": ["spectrum", "charts"]
+      "consumers": [
+        "spectrum",
+        "charts"
+      ]
     },
     {
       "id": "dlr-messenger-mascs-global-area-weighted-mean",
@@ -219,10 +285,15 @@
       "origin": "https://doi.org/10.5281/zenodo.7433033",
       "credit": "M. D'Amore, DLR; NASA MESSENGER MASCS",
       "license": "CC-BY-4.0",
-      "licenseEvidence": ["spectrum/LICENSE.md"],
-      "acquisition": "Run tools/prepare-mascs-spectrum-source.mjs against the Zenodo archive whose exact URL, 197099868-byte length, MD5 ef886101f3f08eba8fe9aa9a5aa48268, and SHA-256 a36df962f0026c541b157256e08ea74e11e3b33aa3000437cb9da3f676047685 are embedded in the snapshot. The tool parses all 64800 grid features and prepares a cosine-latitude-weighted global mean from the 60704 usable cells at each retained 350-1000 nm channel.",
+      "licenseEvidence": [
+        "spectrum/LICENSE.md"
+      ],
+      "acquisition": "Pinned scientific snapshot derived from the Zenodo archive whose exact URL, 197099868-byte length, MD5 ef886101f3f08eba8fe9aa9a5aa48268, and SHA-256 a36df962f0026c541b157256e08ea74e11e3b33aa3000437cb9da3f676047685 are embedded in the snapshot. The original extraction parsed all 64800 grid features and prepared a cosine-latitude-weighted global mean from the 60704 usable cells at each retained 350-1000 nm channel.",
       "redistribution": "Committed 326-point derived spectrum with attribution, license, archive identity, aggregation method, and count discrepancy qualification.",
-      "consumers": ["spectrum", "charts"]
+      "consumers": [
+        "spectrum",
+        "charts"
+      ]
     },
     {
       "id": "nasa-psg-mercury-r240-rif",
@@ -234,7 +305,10 @@
       "license": "United States government scientific service output",
       "acquisition": "Raw 0.35-1.0 um, resolving-power 240, I/F response generated from the pinned configuration.",
       "redistribution": "Committed raw model response; not represented as direct measurement.",
-      "consumers": ["spectrum", "charts"]
+      "consumers": [
+        "spectrum",
+        "charts"
+      ]
     },
     {
       "id": "nasa-mercury-structure",
@@ -246,7 +320,11 @@
       "license": "United States government work",
       "acquisition": "Adapter-owned structured transcription of the cited NASA radius, core, shell, atmosphere, color, and temperature statements.",
       "redistribution": "Committed factual snapshot with explicit schematic qualification.",
-      "consumers": ["interior", "charts", "panel"]
+      "consumers": [
+        "interior",
+        "charts",
+        "panel"
+      ]
     },
     {
       "id": "hyg-v41-mercury-field",
@@ -256,10 +334,15 @@
       "origin": "https://raw.githubusercontent.com/astronexus/HYG-Database/c7f7f883fe678cc7680169a50ccd7dcc49b060ce/hyg/CURRENT/hygdata_v41.csv",
       "credit": "David Nash / Astronexus",
       "license": "CC-BY-SA-4.0",
-      "licenseEvidence": ["stars/LICENSE.md"],
+      "licenseEvidence": [
+        "stars/LICENSE.md"
+      ],
       "acquisition": "Prepared 1100-star deterministic subset from HYG v4.1 commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce.",
       "redistribution": "Share-alike prepared subset with attribution and license evidence.",
-      "consumers": ["stars", "starfield"]
+      "consumers": [
+        "stars",
+        "starfield"
+      ]
     },
     {
       "id": "eso-milky-way-panorama",
@@ -269,10 +352,15 @@
       "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
       "credit": "ESO/S. Brunier",
       "license": "CC-BY-4.0",
-      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
-      "acquisition": "Run node src/planets/mercury/tools/acquire.mjs --refresh-starfield-photo to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Run node tools/objects/dist/operations.js acquire mercury --refresh-starfield-photo to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": ["starfield", "scene"]
+      "consumers": [
+        "starfield",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-cubic-sky-sun-oracle-asset",
@@ -284,7 +372,11 @@
       "license": "Google proprietary; no redistribution grant verified",
       "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the source for the generic cubic-sky presentation standard.",
       "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": ["starfield", "sun-oracle", "scene"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-cubic-sky-sun-oracle-measurements",
@@ -296,19 +388,146 @@
       "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
       "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
       "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": ["starfield", "sun-oracle", "scene", "materials"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene",
+        "materials"
+      ]
     },
     {
       "id": "inter-mercury-title-vector",
-      "path": "presentation/title-mark.mjs",
-      "expectedBytes": 4018,
-      "expectedSha256": "83971893a2197aa7532fe1ae79f08a669711fda6edd2d90bdf39769f483119c3",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3993,
+      "expectedSha256": "359cf37a2f6df3358ecc84cd0c7e5bc8dfc316d4137521eba6215f3a2350caaa",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "The Inter Project Authors",
       "license": "OFL-1.1",
-      "acquisition": "Mercury glyph outlines extracted once from the pinned Inter Variable font with declared variation axes and metrics.",
+      "acquisition": "Generated JSON vector from the pinned Inter Variable font with declared variation axes and metrics.",
       "redistribution": "Committed vector outlines under the Inter SIL Open Font License.",
-      "consumers": ["title"]
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "mercury-object-content",
+      "path": "content/object.json",
+      "expectedSha256": "e6767cf37a7c8547903a277da247142dcbd570cf8bfbea87dac16bd8fdd21ccc",
+      "expectedBytes": 12397,
+      "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source JSON maintained beside Mercury inputs.",
+      "redistribution": "Prepared shell content with source provenance.",
+      "consumers": [
+        "panel",
+        "lenses",
+        "charts"
+      ]
+    },
+    {
+      "id": "mercury-chart-assets",
+      "path": "content/charts.json",
+      "expectedSha256": "390a7527acc15ec81c5a89e79f637c2f6704c2ae9c12b9a24e79f494e49b12c4",
+      "expectedBytes": 3314,
+      "origin": "Repository-authored Mercury chart asset recipe bound to scientific source records.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked chart recipe maintained beside Mercury inputs.",
+      "redistribution": "Prepared source-backed chart SVGs.",
+      "consumers": [
+        "charts"
+      ]
+    },
+    {
+      "id": "mercury-preparation-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedSha256": "6f609298d1203cc6a0d45691ac55003c8a21d13fab15dcef188988a4ca06d582",
+      "expectedBytes": 6292,
+      "origin": "Repository-authored Mercury acquisition and qualification recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mercury inputs.",
+      "redistribution": "Preparation provenance and reproducibility.",
+      "consumers": [
+        "assets",
+        "charts",
+        "lenses"
+      ]
+    },
+    {
+      "id": "mercury-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedSha256": "c986f2e8e412262fb838357f2724842e1878045a8c83ef6b4f43931035c44424",
+      "expectedBytes": 833,
+      "origin": "Repository-authored Mercury navigation asset recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mercury inputs.",
+      "redistribution": "Prepared navigation asset.",
+      "consumers": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "mercury-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedSha256": "8526916afcb8c7f8c875610d0b5b47297045f3677d0b5c78856850c797af84e1",
+      "expectedBytes": 2229,
+      "origin": "Repository-authored Mercury CSS geometry recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mercury inputs.",
+      "redistribution": "Prepared retained CSS scene geometry.",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "mercury-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedSha256": "89a51f7de8228ddce272f4213beea43da4f99b36b63b726a09d5dc2acfd2d9fe",
+      "expectedBytes": 224,
+      "origin": "Repository-authored Mercury sky, sun, and marker recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mercury inputs.",
+      "redistribution": "Prepared celestial assets.",
+      "consumers": [
+        "sky-sun",
+        "starfield",
+        "system-markers"
+      ]
+    },
+    {
+      "id": "mercury-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedSha256": "93f35492fb9aa508c31dc024f67045900139e73d72f186cdaa353e8cf441a42f",
+      "expectedBytes": 110,
+      "origin": "Repository-authored Mercury presentation capability recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mercury inputs.",
+      "redistribution": "Prepared CSS presentation capabilities.",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "mercury-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedSha256": "224e40068158743efcaf05e22502534bf746f3e68603ef16f819102897ecd5d0",
+      "expectedBytes": 4116,
+      "origin": "Repository-authored Mercury raster preparation recipe.",
+      "credit": "cssEarth project",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked preparation recipe maintained beside Mercury inputs.",
+      "redistribution": "Prepared raster assets.",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
     }
   ],
   "generatedIntermediates": [],

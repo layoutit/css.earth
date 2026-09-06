@@ -1,0 +1,30 @@
+---
+import PlanetShell from "./PlanetShell.astro";
+import type {
+  PreparedObjectContent,
+  PreparedObjectContentDocument,
+} from "../../tools/objects/content/types";
+
+interface Props {
+  preparedContent: PreparedObjectContentDocument;
+  preparedControls: {
+    lenses: PreparedObjectContent["lenses"];
+    settings: PreparedObjectContent["settings"];
+  };
+}
+
+const { preparedContent: content, preparedControls: controls } = Astro.props;
+---
+
+<PlanetShell
+  objectId={content.objectId}
+  title={content.title}
+  introduction={content.introduction}
+  facts={content.facts}
+  moreFacts={content.moreFacts}
+  charts={content.charts}
+  galleries={content.galleries}
+  resources={content.resources}
+  lenses={controls.lenses}
+  settings={controls.settings}
+/>

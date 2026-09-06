@@ -11,6 +11,7 @@ import { OBJECTS } from "../site/objects.mjs";
 import { defaultPreparationConcurrency, runObjectCommand, runPreparationObjects } from "./run-implemented-planets.mjs";
 import { fingerprintPreparationFiles, readPreparationReceipt, writePreparationReceipt } from "./preparation-cache.mjs";
 import { readObjectPreparation } from "./object-preparation.mjs";
+import { authoredObject } from './authored-object.mjs';
 
 const sharedSteps = ["prepare-shell-titles.mjs", "prepare-wordmark-rail.mjs",
   "prepare-planet-title-sources.mjs", "prepare-scientific-charts.mjs"];
@@ -67,6 +68,19 @@ export async function preparationFileSets(root, id) {
 export async function objectPreparationFiles(root, id) {
   assert.ok(OBJECTS.some(object => object.id === id), "Preparation object must belong to OBJECTS");
   const base = `src/planets/${id}`;
+  if (await authoredObject(id, root)) {
+    const descriptor = `${base}/object.json`;
+    const directories = ['tools/objects', 'src/preparation', 'src/renderers/css/preparation', 'packages/objects/src'];
+    const compiler = (await Promise.all(directories.map(directory => listPreparationFiles(root, directory)))).flat()
+      .filter(path => !path.includes('/dist/') && !/\.test\.ts$/.test(path));
+    const shared = await preparationDependencies(root, ['tools/prepared-node-tree.mjs', 'tools/prepared-cssom.mjs',
+      'tools/prepare-materials.mjs', 'src/platform/prepare-cubic-sky-source.mjs', 'src/platform/prepare-directional-sun.mjs',
+      'tools/objects/solar-system-scene.mjs', 'tools/objects/solar-system-presentation.mjs', 'tools/objects/solar-system-markers.mjs']);
+    const outputs = [descriptor, `${base}/runtime-assets.json`, `objects/prepared/${id}.json`,
+      ...await listPreparationFiles(root, `objects/preparation/${id}`), ...await listPreparationFiles(root, `public/scenes/${id}`)];
+    return { inputs: [...new Set([descriptor, ...compiler, ...shared, ...await listPreparationFiles(root, `${base}/source`)])].sort(),
+      outputs: [...new Set(outputs)].sort(), inputKinds: {[descriptor]: 'object-descriptor-authored@1'} };
+  }
   const packageFiles = await listPreparationFiles(root, base);
   const source = JSON.parse(await readFile(resolve(root, base, "source/manifest.json"), "utf8"));
   const generatedSources = new Set(source.generatedIntermediates.map(entry => `${base}/source/${entry.path}`));

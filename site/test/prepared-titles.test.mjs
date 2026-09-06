@@ -10,6 +10,7 @@ import { PREPARED_SATURN_TITLE } from "../../src/planets/saturn/site/preparedTit
 import { SATURN_TITLE_SOURCE } from "../../src/planets/saturn/source/presentation/title-mark.mjs";
 import {
   PLANET_TITLE_STANDARD,
+  createPreparedTitleLayout,
   sha256,
 } from "../../src/platform/prepared-title.mjs";
 import { PLANET_TITLE_RECIPE } from
@@ -83,13 +84,22 @@ test("keeps planet title rendering facts object-owned and source-bound", async (
 
 test("normalizes every implemented planet title to the complete Saturn standard", async () => {
   for (const { id } of OBJECTS) {
-    const preparedModule = await import(new URL(
-      `../../src/planets/${id}/site/preparedTitle.mjs`,
-      import.meta.url,
-    ));
-    const prepared = Object.values(preparedModule).find(
-      (value) => value?.label?.toLowerCase() === id,
-    );
+    let prepared;
+    if (id === "mercury" || id === "venus") {
+      const source = JSON.parse(await readFile(
+        new URL(`../../src/planets/${id}/source/content/object.json`, import.meta.url),
+        "utf8",
+      ));
+      prepared = { ...source.title, ...createPreparedTitleLayout(source.title) };
+    } else {
+      const preparedModule = await import(new URL(
+        `../../src/planets/${id}/site/preparedTitle.mjs`,
+        import.meta.url,
+      ));
+      prepared = Object.values(preparedModule).find(
+        (value) => value?.label?.toLowerCase() === id,
+      );
+    }
     assert.ok(prepared, `${id}: prepared title is missing`);
     for (const field of [
       "weight",

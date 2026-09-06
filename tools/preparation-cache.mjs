@@ -42,7 +42,8 @@ export async function fingerprintPreparationFiles(root, paths, inputKinds = {}) 
     assert.equal(after.mtimeMs, before.mtimeMs, `Preparation file changed while hashing: ${path}`);
     if (inputKinds[path] === 'object-descriptor-authored@1') {
       const { schema, id, type, properties } = parseObjectDescriptor(Buffer.concat(chunks).toString('utf8'));
-      const authored = JSON.stringify({ schema, id, type, properties });
+      const { worldFrame, ...authoredProperties } = properties;
+      const authored = JSON.stringify({ schema, id, type, properties: properties.recipe ? authoredProperties : properties });
       bytes = Buffer.byteLength(authored);
       hash.update(authored);
     }

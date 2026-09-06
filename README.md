@@ -65,6 +65,31 @@ turn checked OpenSpace, NASA, JPL, USGS, and other planet-owned inputs into
 local images, generated scene modules, scientific charts, and prepared motion
 banks. At runtime, the browser only loads and displays these prepared assets.
 
+Mercury and Venus use the shared TypeScript preparation pipeline. Their authored
+capabilities and parameters are JSON; raster and geometry operations live in
+the renderer-independent objects package. CSS compilation and file/image I/O
+stay in application adapters. Earth and the other objects retain their existing
+preparation implementations.
+
+```text
+src/planets/{mercury,venus}/
+├── object.json                  Pinned capability recipe and transport digest
+├── source/                      Authored JSON, scientific inputs and provenance
+├── runtime-assets.json          Reproducible asset inventory
+└── SOURCE.md, NOTICE.md, LICENSE.*  Credits and licences
+objects/preparation/{id}/        Generated JSON, committed for clean checkouts
+packages/objects/src/            Generic schema, geometry and pixel operations
+src/preparation/                 Node image/file adapters
+src/renderers/css/preparation/   CSS projection and retained presentation compiler
+tests/objects/                   Object fixtures and browser/scientific regression tests
+```
+
+`pnpm install` builds packages and preparation tools, then assembles the small
+transport JSON from committed preparation output. It does not rebake textures.
+To regenerate Mercury or Venus after changing their authored inputs, run
+`pnpm prepare:planets --object=mercury` or `--object=venus`. The same commands
+validate source pins, compile every layer, and replace their generated outputs.
+
 Large source binaries and generated browser assets are intentionally not
 committed. Their URLs, sizes, hashes, provenance, preparation code, and runtime
 inventories are committed. `pnpm setup:assets` downloads the prepared outputs from

@@ -1,0 +1,87 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "mercury",
+  "surface": {
+    "radius": 230,
+    "polarRadius": 230,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/mercury/mercury-surface-normal.webp",
+      "width": 2048,
+      "height": 1024
+    },
+    "surfaceLatitudeHeight": 1024,
+    "packedBandGutter": 0,
+    "poles": {
+      "url": "/scenes/mercury/mercury-poles.webp",
+      "width": 1536,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "global",
+    "color": "#aaa097",
+    "innerPoles": {
+      "radiusScale": 1.05,
+      "offset": -2.4
+    }
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 0,
+    "interiorSeamBleed": 8,
+    "overlap": 0.005,
+    "fitToSource": true,
+    "rasterScale": 4,
+    "rasterGutter": 16.0,
+    "rasterOverscan": 0,
+    "positionVariables": true,
+    "projectivePoles": true,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 118,
+  "cutaway": {
+    "coreLatitudeSegments": 8,
+    "coreLongitudeSegments": 32,
+    "surfaceWidth": 1024,
+    "surfaceHeight": 512,
+    "polarTileSize": 256,
+    "polarWidth": 512,
+    "polarHeight": 256,
+    "polarRadiusScale": 1.025,
+    "polarOffset": 0.05,
+    "sectionWidth": 2048,
+    "sectionHeight": 2048,
+    "sectionPresentationWidth": 256,
+    "sectionPresentationHeight": 512,
+    "rotationDegrees": -120,
+    "color": "#8f5d3d",
+    "assistStartDegrees": 55,
+    "assistMaximumDegrees": 32,
+    "controlMaximumDegrees": 89,
+    "millisecondsPerDegree": 1000
+  },
+  "output": {
+    "schema": "cssmercury-prepared-retained-scene@3",
+    "materialSchema": "cssmercury-prepared-material-presentation@2",
+    "layout": "retained",
+    "cutawaySchema": "cssmercury-prepared-cutaway@1",
+    "interiorOrbitSchema": "cssmercury-prepared-interior-presentation-orbit@1",
+    "motion": {
+      "visualRotationSeconds": 72,
+      "physicalSiderealRotationEarthDays": 58.646,
+      "speedStates": {
+        "normal": 1,
+        "fast": 2,
+        "fastest": 4,
+        "superfast": 8,
+        "off": 0
+      }
+    },
+    "retainedRootCount": 4
+  }
+}

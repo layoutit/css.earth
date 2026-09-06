@@ -8,22 +8,12 @@ import test from 'node:test';
 import { readObjectPreparation, resolveObjectPreparation, runObjectPreparation } from './object-preparation.mjs';
 
 const projectRoot = resolve(import.meta.dirname, '..');
-// Original producer order, with Venus's physical world preparation added before
-// the scene that consumes its system markers.
-const expectedRecipes = {
-  mercury: ['verify-source-manifest', 'prepare-title', 'prepare-panel-content', 'prepare-assets', 'prepare-starfield',
-    'prepare-sky-sun', 'prepare-lenses', 'prepare-charts', 'prepare-system-markers', 'prepare-scene',
-    '../../../../tools/prepare-object-controls', 'prepare-presentation', 'prepare-runtime-asset-manifest'],
-  venus: ['verify-source-manifest', 'prepare-title', 'prepare-assets', 'prepare-charts', 'prepare-panel-content',
-    'prepare-surface-gallery', 'prepare-lenses', 'prepare-starfield', 'prepare-sky-sun', 'prepare-system-markers', 'prepare-scene',
-    '../../../../tools/prepare-object-controls', 'prepare-presentation', 'prepare-runtime-asset-manifest'],
-};
+const expectedRecipes = {mercury: true, venus: true};
 async function descriptor(id) {
   return JSON.parse(await readFile(resolve(projectRoot, 'src/planets', id, 'object.json'), 'utf8'));
 }
 function expectedSteps(id) {
-  return expectedRecipes[id].map((name, index) => [`${name}.mjs`, ...(index === 0 ? ['--probe'] :
-    name.endsWith('/prepare-object-controls') ? [`--object=${id}`] : [])]);
+  return [['../../../../tools/objects/dist/prepare-authored.js', id, '--write']];
 }
 
 for (const id of Object.keys(expectedRecipes)) {
@@ -80,8 +70,8 @@ test('a failed producer stops before subsequent recipe capabilities', async () =
   await assert.rejects(runObjectPreparation(resolve(projectRoot, 'src/planets/venus/object.json'), {
     async runCommand({ script }) {
       calls.push(script);
-      if (script.endsWith('prepare-title.mjs')) throw new Error('producer failed');
+      if (script.endsWith('prepare-authored.js')) throw new Error('producer failed');
     },
   }), /producer failed/);
-  assert.deepEqual(calls.map(path => path.split('/').at(-1)), ['verify-source-manifest.mjs', 'prepare-title.mjs']);
+  assert.deepEqual(calls.map(path => path.split('/').at(-1)), ['prepare-authored.js']);
 });

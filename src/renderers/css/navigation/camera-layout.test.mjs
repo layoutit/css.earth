@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
-import { runtimeDefinition as mercury } from '../../../planets/mercury/runtime/definition.mjs';
-import { runtimeDefinition as venus } from '../../../planets/venus/runtime/definition.mjs';
+import mercury from '../../../../objects/preparation/mercury/runtime.json' with { type: 'json' };
+import venus from '../../../../objects/preparation/venus/runtime.json' with { type: 'json' };
 import { selectPreparedResponsiveZoom } from './camera-layout.ts';
 
 function responsiveFit(plan, width, height) {

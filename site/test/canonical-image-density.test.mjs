@@ -14,6 +14,32 @@ test("every object mounts one canonical high-density image bank", async () => {
     const entry = ownership.entries.find(entry => entry.id === objectRecord.id);
     assert.equal(entry.factoryCalls, 1,
       `${objectRecord.id}: its actual registered loader must have one runtime factory`);
+    if (entry.migrated && (objectRecord.id === "mercury" || objectRecord.id === "venus")) {
+      const page = await readFile(
+        new URL(`../pages/${objectRecord.id}.astro`, import.meta.url),
+        "utf8",
+      );
+      const prepared = JSON.parse(await readFile(
+        new URL(`../../objects/prepared/${objectRecord.id}.json`, import.meta.url),
+        "utf8",
+      ));
+      const startupKeys = new Set(prepared.data.assets.startup);
+      const startupUrls = prepared.data.assets.entries
+        .filter(asset => startupKeys.has(asset.key))
+        .map(asset => asset.url)
+        .filter(url => typeof url === "string");
+      const sharedStyles = await readFile(
+        new URL("../../src/renderers/css/styles/planet-surfaces.css", import.meta.url),
+        "utf8",
+      );
+      assert.match(page, /PreparedObjectHead/u,
+        `${objectRecord.id}: migrated page must use the shared prepared head`);
+      assert.ok(startupUrls.some(url => url.includes("@2x")),
+        `${objectRecord.id}: prepared startup assets must include a high-density asset`);
+      assert.doesNotMatch(sharedStyles, /image-set\(/u,
+        `${objectRecord.id}: shared scene CSS must not select assets by device DPR`);
+      continue;
+    }
     const objectRoot = new URL(
       `../../src/planets/${objectRecord.id}/`,
       import.meta.url,

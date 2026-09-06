@@ -255,9 +255,13 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   let registry = { entries: new Map(), importOffsets: new Set(), descriptorImports: new Set() };
   const sharedEdges = new Map(), sharedFactoryCalls = new Map();
   const cache = new Map();
-  const verify = verifyDefinition ?? (async (object, plan) => {
+  const verify = verifyDefinition ?? (async (object, definition) => {
+    if (definition?.schema === PREPARED_OBJECT_RUNTIME_SCHEMA) {
+      requireObjectRuntimeDefinition(definition, { objectId: object.id });
+      return;
+    }
     const { objectControls } = await import(pathToFileURL(resolve(root, `src/planets/${object.id}/site/control-content.mjs`)));
-    requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA,
+    requireObjectRuntimeDefinition({ ...definition, schema: PREPARED_OBJECT_RUNTIME_SCHEMA,
       id: object.id, controls: objectControls }, { objectId: object.id, controls: objectControls });
   });
   const sources = new Map();
@@ -338,21 +342,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       try {
         requireDescriptorAdapterSource(await source(resolve(root, client)), loader.exported);
         prepared = await readDescriptorDefinition({ objectId: object.id, descriptorFile: loader.descriptor, root, source });
-        await verify(object, prepared.plan);
-        const directory = resolve(root, `src/planets/${object.id}/runtime`);
-        for (const file of await listRuntimeFiles(directory)) {
-          const path = resolve(directory, file);
-          if (prepared.closure.has(path) || file === 'definition.mjs') continue;
-          if (file === 'client.mjs') {
-            const oldSource = await source(path), ast = parseAst(oldSource);
-            const exportName = ast.body.find(node => node.type === 'ExportNamedDeclaration')?.declaration?.declarations?.[0]?.id?.name;
-            if (thinClient(oldSource, relative(root, path), root, exportName)) continue;
-          }
-          if (!preparedData(await source(path))) {
-            orphanExecutors.push(relative(root, path));
-            violations.push({ file: relative(root, path), line: 1, reason: 'Unreferenced private runtime executor must be removed' });
-          }
-        }
+        await verify(object, prepared.definition);
       } catch (error) { violations.push({ file: loader.descriptor, line: 1, reason: error.message }); }
       if (factoryCalls !== 1) violations.push({ file: client, line: 1, reason: `Expected one actual shared factory call; found ${factoryCalls}` });
       entries.push({ id: object.id, migrated: violations.length === 0, entry: { file: loader.descriptor, exported: loader.exported, registry: registryPath, adapter: client },

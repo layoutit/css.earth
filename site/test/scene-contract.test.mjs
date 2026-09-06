@@ -1,3 +1,4 @@
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 
@@ -9,10 +10,7 @@ test("publishes one off-by-default Shadows control for every planet", async () =
     "jupiter", "saturn", "uranus", "neptune",
   ];
   for (const id of planets) {
-    const { objectControls } = await import(new URL(
-      `../../src/planets/${id}/site/control-content.mjs`,
-      import.meta.url,
-    ));
+    const objectControls = (await loadObjectTestDefinition(id)).controls;
     const controls = objectControls.settings.controls.filter(({ name }) => name === "shadows");
     assert.deepEqual(controls, [{ kind: "toggle", name: "shadows", label: "Shadows", checked: false }],
       `${id} shadow control drifted`);

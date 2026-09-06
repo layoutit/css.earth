@@ -1,5 +1,6 @@
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { authoredObject } from './authored-object.mjs';
 
 import {
   validateRuntimeAssetManifest,
@@ -10,7 +11,7 @@ import {
   verifySourceManifest,
 } from "../src/platform/source-manifest.mjs";
 
-export function objectPackagePaths(objectRecord, projectRoot = process.cwd()) {
+export function objectPackagePaths(objectRecord, projectRoot = process.cwd(), authored = false) {
   const root = resolve(projectRoot, "src", "planets", objectRecord.id);
   return Object.freeze({
     root,
@@ -19,6 +20,10 @@ export function objectPackagePaths(objectRecord, projectRoot = process.cwd()) {
       resolve(root, "NOTICE.md"),
       resolve(root, "source", "manifest.json"),
       resolve(root, "runtime-assets.json"),
+      ...(authored ? [resolve(root, 'object.json'), resolve(projectRoot, 'objects/preparation', objectRecord.id, 'runtime.json'),
+        resolve(projectRoot, 'objects/preparation', objectRecord.id, 'content.json'),
+        resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mjs'),
+        resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'smoke-browser.mjs')] : [
       resolve(root, "runtime", "client.mjs"),
       resolve(root, "site", `${objectRecord.name}Page.astro`),
       resolve(root, "site", "control-content.mjs"),
@@ -29,6 +34,7 @@ export function objectPackagePaths(objectRecord, projectRoot = process.cwd()) {
       resolve(root, "tools", "navigation-marker.mjs"),
       resolve(root, "tools", "verify-source-manifest.mjs"),
       resolve(root, "tools", "compact-production-assets.mjs"),
+      ]),
       resolve(projectRoot, "site", "pages", `${objectRecord.id}.astro`),
     ]),
     runtimeAssets: resolve(root, "runtime-assets.json"),
@@ -42,7 +48,7 @@ export async function validateObjectPackageFiles(
   objectRecord,
   { projectRoot = process.cwd(), accessFile = access } = {},
 ) {
-  const paths = objectPackagePaths(objectRecord, projectRoot);
+  const paths = objectPackagePaths(objectRecord, projectRoot, Boolean(await authoredObject(objectRecord.id, projectRoot)));
   for (const file of paths.requiredFiles) {
     try {
       await accessFile(file);

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseObjectDescriptor, prepareObject, readPreparedObject } from './index.js';
+import { parseAuthoredObjectDescriptor, parseAuthoredRecipe, parseObjectDescriptor, prepareObject, readPreparedObject } from './index.js';
 import type { JsonRecord, ObjectPreparation } from './index.js';
 
 const descriptor = (id = 'example') => ({
@@ -7,7 +7,55 @@ const descriptor = (id = 'example') => ({
   prepared: { format: 'example-artifact@1', url: '/prepared/example.json', sha256: 'a'.repeat(64) },
 });
 
+const hash = (letter: string) => letter.repeat(64);
+const recipe = () => ({
+  schema: 'cssearth-authored-object@1',
+  sources: [
+    { id: 'raster', path: 'source/preparation/raster.json', sha256: hash('a') },
+    { id: 'material', path: 'source/preparation/material.json', sha256: hash('b') },
+    { id: 'frames', path: 'source/preparation/frames.json', sha256: hash('c') },
+    { id: 'layers', path: 'source/preparation/layers.json', sha256: hash('d') },
+    { id: 'world', path: 'source/presentation/world.json', sha256: hash('e') },
+  ],
+  shape: { kind: 'ellipsoid', radiusKm: 6051.8, polarRadiusKm: 6051.8 },
+  frameBanks: [{ id: 'lighting', source: 'frames', frames: 128, rows: 32, residentRows: 3 }],
+  materials: [{ id: 'surface-lit', source: 'material', model: 'lit', frameBank: 'lighting' }],
+  surfaces: [{ id: 'body', source: 'raster', projection: 'equirectangular', lenses: [{ id: 'normal', source: 'raster', material: 'surface-lit' }] }],
+  cutaway: { source: 'layers', surface: 'body', lens: 'normal' },
+  atmosphere: { source: 'layers', frameBank: 'lighting' }, rings: { source: 'layers' }, emission: { source: 'layers' },
+  motion: [{ id: 'spin', source: 'layers', target: 'body', durationMs: 89000 }, { id: 'ring-drift', source: 'layers', target: 'rings', durationMs: 42000 }],
+  paging: { source: 'raster', surface: 'body', maxResidentPages: 512, maxResidentBytes: 134217728, maxConcurrentLoads: 4 },
+  destinations: { source: 'world', maxEntries: 34135 },
+  worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [1, 2, 3], presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1], orbitUpReference: [0, 1, 0], metersPerUnit: 24402.58, bodyRadiusM: 6051800 },
+});
+
 describe('object descriptor boundary', () => {
+  it('parses a composed authored recipe with source-pinned capabilities', () => {
+    const parsed = parseAuthoredRecipe(recipe());
+    expect(parsed.surfaces[0]?.lenses[0]?.material).toBe('surface-lit');
+    expect(parsed.frameBanks?.[0]).toMatchObject({ frames: 128, rows: 32, residentRows: 3 });
+    expect(parsed.paging).toMatchObject({ maxResidentPages: 512, maxResidentBytes: 134217728, maxConcurrentLoads: 4 });
+    expect(parsed.destinations?.maxEntries).toBe(34135);
+    const object = parseAuthoredObjectDescriptor({ ...descriptor(), properties: { recipe: recipe() } });
+    expect(object.recipe.worldFrame?.referenceFrame).toBe('sun-icrf');
+  });
+
+  it.each([
+    ['missing source', (value: ReturnType<typeof recipe>) => { value.surfaces[0]!.source = 'missing'; }],
+    ['unsafe source path', (value: ReturnType<typeof recipe>) => { value.sources[0]!.path = '../raster.json'; }],
+    ['invalid frame budget', (value: ReturnType<typeof recipe>) => { value.frameBanks[0]!.residentRows = 33; }],
+    ['unknown layer motion', (value: ReturnType<typeof recipe>) => { value.motion[1]!.target = 'atmosphere'; value.atmosphere = undefined; }],
+    ['zero page budget', (value: ReturnType<typeof recipe>) => { value.paging.maxResidentPages = 0; }],
+  ])('rejects %s rather than passing malformed capabilities to a baker', (_name, mutate) => {
+    const value = recipe();
+    mutate(value);
+    expect(() => parseAuthoredRecipe(value)).toThrow();
+  });
+
+  it('requires a typed recipe at the authored object boundary', () => {
+    expect(() => parseAuthoredObjectDescriptor(descriptor())).toThrow(/properties.recipe/);
+  });
+
   it('parses JSON into an immutable owned record', () => {
     const source = descriptor();
     const parsed = parseObjectDescriptor(JSON.stringify(source));

@@ -29,13 +29,16 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
     assert.equal(source.xOrigin, "trim-left-bearing");
     assert.equal(source.sourceSha256, PLANET_TITLE_RECIPE.sourceSha256);
     assert.equal(source.sourceGenerator, PLANET_TITLE_RECIPE.sourceGenerator);
-    assert.equal(
-      moduleSource,
-      await readFile(resolve(
-        projectRoot,
-        `src/planets/${planet.id}/source/presentation/title-mark.mjs`,
-      ), "utf8"),
-      `${planet.id}: checked title source must be reproducible`,
-    );
+    const titlePath = planet.id === "mercury" || planet.id === "venus"
+      ? `src/planets/${planet.id}/source/presentation/title-mark.json`
+      : `src/planets/${planet.id}/source/presentation/title-mark.mjs`;
+    const titleBytes = await readFile(resolve(projectRoot, titlePath), "utf8");
+    if (titlePath.endsWith(".json")) {
+      const titleJson = JSON.parse(titleBytes);
+      delete titleJson.schema;
+      assert.deepEqual(titleJson, source, `${planet.id}: checked JSON title source must be reproducible`);
+    } else {
+      assert.equal(moduleSource, titleBytes, `${planet.id}: checked title source must be reproducible`);
+    }
   }
 });

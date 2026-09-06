@@ -83,11 +83,11 @@ test("retained property references preserve last-write order instead of checking
 test('descriptor objects audit the transported JSON tree, including a source-matched invalid layout', async () => {
   const object = OBJECTS.find(object => object.id === 'mercury');
   const descriptorPath = resolve('src/planets/mercury/object.json');
-  const sourcePath = resolve('src/planets/mercury/runtime/preparedPresentation.mjs');
+  const sourcePath = resolve('objects/preparation/mercury/runtime.json');
   const payloadPath = resolve('objects/prepared/mercury.json');
   const descriptor = JSON.parse(await readFile(descriptorPath, 'utf8'));
   const payload = JSON.parse(await readFile(payloadPath, 'utf8'));
-  const plan = readPreparedPresentationModule(await readFile(sourcePath, 'utf8'));
+  const plan = JSON.parse(await readFile(sourcePath, 'utf8'));
   const first = await censusPreparedLeafLayouts({ objects: [object] });
   assert.equal(first.complete, true);
   assert.deepEqual(first.objects[0].modules, ['objects/prepared/mercury.json']);
@@ -98,7 +98,7 @@ test('descriptor objects audit the transported JSON tree, including a source-mat
   const bytes = JSON.stringify(payload);
   descriptor.prepared.sha256 = createHash('sha256').update(bytes).digest('hex');
   const overlays = new Map([[descriptorPath, JSON.stringify(descriptor)], [payloadPath, bytes],
-    [sourcePath, `export const PREPARED_PRESENTATION = ${JSON.stringify(plan)};`]]);
+    [sourcePath, JSON.stringify(plan)]]);
   const changed = await censusPreparedLeafLayouts({ objects: [object], readText: path => overlays.get(path) ?? readFile(path, 'utf8') });
   assert.equal(changed.complete, false);
   assert.deepEqual(changed.objects[0].modules, ['objects/prepared/mercury.json']);

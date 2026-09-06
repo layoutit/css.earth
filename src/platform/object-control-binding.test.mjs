@@ -1,3 +1,4 @@
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
@@ -41,7 +42,7 @@ function harness(controls = moonControls, mutate = () => {}) {
 }
 
 for (const object of OBJECTS) test(`${object.id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
-  const { objectControls: controls } = await import(`../planets/${object.id}/site/control-content.mjs`);
+  const {controls} = await loadObjectTestDefinition(object.id);
   const h = harness(controls);
   assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast"].includes(input.name))].every(input => input.disabled));
   assert.equal(h.motion.disabled, false); assert.equal(h.contrast.disabled, false);
