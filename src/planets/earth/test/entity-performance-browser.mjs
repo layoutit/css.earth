@@ -25,7 +25,7 @@ const report = { schema: "cssearth-entity-performance@1", base, mode, output, dp
   workingTree: execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim(),
   harnessSha256: createHash("sha256").update(await readFile(new URL(import.meta.url))).digest("hex"),
   environment: { platform: platform(), osRelease: release(), cpu: cpus()[0].model, cores: cpus().length, memoryBytes: totalmem(),
-    cpuThrottle: 1, networkThrottle: "none", servedCwd: process.cwd(), cache: "cold: isolated context; warm: same mounted scene and HTTP cache" }, runs: [] };
+    cpuThrottle: 1, networkThrottle: "none", servedCwd: process.cwd(), cache: "cold: isolated context and cleared HTTP cache; warm: reloaded document in the same context, primed resident search and warm HTTP cache" }, runs: [] };
 const browser = await chromium.launch({ channel: "chrome", headless: true }); report.browser = browser.version();
 report.preparedModules = Object.fromEntries(await Promise.all([
   "preparedScene.mjs", "preparedLenses.mjs", "preparedPresentation.mjs", "preparedPlaces.mjs",
