@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-cutaway-materials@1",
+  "namespace": "saturn",
+  "publicPrefix": "/scenes/saturn/",
+  "source": "interior/manifest.json",
+  "sourcePins": [
+    {
+      "path": "interior/manifest.json",
+      "expectedSha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
+      "expectedBytes": 5097
+    }
+  ],
+  "sourceSchema": "csssaturn-interior-sources@1",
+  "outputSchema": "csssaturn-prepared-views@1",
+  "provenanceSource": "source/interior/manifest.json",
+  "outerPoleSources": {
+    "normal": "/scenes/saturn/saturn-poles.webp",
+    "ultraviolet": "/scenes/saturn/saturn-poles-ultraviolet.webp",
+    "methane": "/scenes/saturn/saturn-poles-methane.webp",
+    "thermal": "/scenes/saturn/saturn-poles-thermal.webp"
+  },
+  "thumbnailUrl": "/scenes/saturn/saturn-view-interior.webp",
+  "thumbnail": {
+    "width": 112,
+    "height": 64
+  },
+  "rasters": {
+    "section": [
+      2048,
+      2048
+    ],
+    "shell": [
+      1024,
+      512
+    ],
+    "poles": [
+      512,
+      256
+    ]
+  },
+  "outerPoleAtlas": {
+    "width": 4096,
+    "height": 512,
+    "outputTileSize": 256,
+    "extract": {
+      "left": 0,
+      "top": 0,
+      "width": 1024,
+      "height": 512
+    }
+  },
+  "section": {
+    "edgePixels": 2.5,
+    "faceAmbient": 0.72,
+    "faceExposureGain": 0.22,
+    "envelope": [
+      0.54,
+      0.82
+    ],
+    "coreInnerScale": 0.52,
+    "metallicCoreGain": 0.64,
+    "deepCore": [
+      0.08,
+      0.3
+    ],
+    "depthAmbient": 0.8,
+    "depthGain": 0.2,
+    "depthStart": 0.04,
+    "rimStart": 0.82,
+    "rimGain": 0.06,
+    "contactCoreWidth": 0.035,
+    "contactCoreGain": 0.1,
+    "contactEnvelopeRadius": 0.82,
+    "contactEnvelopeWidth": 0.028,
+    "contactEnvelopeGain": 0.08,
+    "textureGain": [
+      15,
+      11,
+      8
+    ]
+  },
+  "shells": {
+    "core": {
+      "bandFrequency": 7,
+      "seed": 71,
+      "ambient": 0.72,
+      "directional": 0.28,
+      "grainGain": 15
+    },
+    "metallic": {
+      "bandFrequency": 11,
+      "seed": 43,
+      "ambient": 0.66,
+      "directional": 0.34,
+      "grainGain": 9
+    }
+  }
+}

@@ -1,16 +1,17 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { build } from "vite";
-import { createObjectRuntime } from "./object-runtime.mjs";
+import { createObjectRuntime, preparedObjectCapabilities } from "../renderers/css/dist/index.js";
 import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
-import { createPreparedResidency } from "./prepared-residency.mjs";
-import { createPreparedPlayback } from "./prepared-playback.mjs";
+import { createPreparedResidency } from '../renderers/css/dist/testing.js';
+import { createPreparedPlayback } from '../renderers/css/dist/testing.js';
 import { createSceneLifetime } from "./scene-lifetime.mjs";
-import { createObjectSelectionRuntime } from "./object-selection-runtime.mjs";
+import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
-import { runtimeDefinition as moonDefinition } from "../planets/moon/runtime/definition.mjs";
-import { runtimeDefinition as earthDefinition } from "../planets/earth/runtime/definition.mjs";
+const moonDefinition = await loadObjectTestDefinition('moon');
+const earthDefinition = await loadObjectTestDefinition('earth');
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 class CSSAnimation {
@@ -60,7 +61,9 @@ function harness({ definition = moonDefinition, failAtElement = null, stageId = 
       },
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...services,
     });
-    runtime = mount(f.stage, { onError: error => errors.push(error) });
+    runtime = mount(f.stage, { inputSurface: f.stage,
+      capabilities: { ...preparedObjectCapabilities, ...(services.mountPages ? { mountPages: services.mountPages } : {}) },
+      onError: error => errors.push(error) });
   } catch (error) { f.restore(); throw error; }
   async function resolveJobs() {
     for (let wave = 0; wave < 40; wave++) {

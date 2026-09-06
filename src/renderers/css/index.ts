@@ -22,4 +22,5 @@ export { worldCameraFromCenteredPresentation, presentWorldCamera } from './navig
 export { worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './navigation/world-camera-math.js';
 export type { PreparedWorldCameraFrame, WorldCameraPose } from './navigation/world-camera.js';
 export { createWorldSelectionTarget } from './navigation/selection-target.js';
+export { preparedObjectCapabilities } from './paging/capabilities.js';
 export { savedWorldCamera } from './navigation/saved-world-camera.js';

@@ -4,7 +4,7 @@ import {mkdtemp,writeFile,readFile,mkdir,rm,readdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
-import {containedPath,parseSourceManifest,verifySources,publishPinnedSource,collectRuntimeAssetUrls,prepareRuntimeManifest,assembleRuntimeAssets} from '../../tools/objects/operations.js';
+import {containedPath,parseSourceManifest,verifySources,publishPinnedSource,collectRuntimeAssetUrls,prepareRuntimeManifest,assembleRuntimeAssets,restoreMissingSources} from '../../tools/objects/operations.js';
 import type {SourceEntry,SourceManifest} from '../../tools/objects/operations.js';
 import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/operations-acquisition.js';
 const sha=(data:Uint8Array)=>createHash('sha256').update(data).digest('hex');
@@ -30,6 +30,9 @@ test('runtime inventory comes from nested JSON and CSS image addresses with exac
  try{
   const manifest=await prepareRuntimeManifest({id:'open-body',publicRoot:root,manifestPath:output,values});assert.equal(manifest.assets.length,2);
   await assert.rejects(prepareRuntimeManifest({id:'open-body',publicRoot:root,manifestPath:output,values:[values[0].url]}),/closure/);
+  const subset=await prepareRuntimeManifest({id:'open-body',publicRoot:root,manifestPath:output,values:[values[0].url],allowPreparationArtifacts:true});
+  assert.deepEqual(subset.assets.map(asset=>asset.filename),['one.webp']);
+  await assert.rejects(prepareRuntimeManifest({id:'open-body',publicRoot:root,manifestPath:output,values:['/scenes/open-body/missing.webp'],allowPreparationArtifacts:true}),/ENOENT/);
   await writeFile(join(root,'leftover.webp'),'leftover');await assembleRuntimeAssets({id:'open-body',manifest,productionRoot:root});assert.deepEqual(await readdir(root),['one.webp','two.webp']);
   await writeFile(join(root,'one.webp'),'corrupt');await writeFile(join(root,'evidence.txt'),'keep');await assert.rejects(assembleRuntimeAssets({id:'open-body',manifest,productionRoot:root}),/drifted/);assert.equal(await readFile(join(root,'evidence.txt'),'utf8'),'keep');
  }finally{await rm(output,{force:true});}
@@ -46,4 +49,20 @@ test('source manifest validates provenance as well as hashes',()=>{
  const value={schema:'cssopen-body-authoritative-sources@1',inputs:[source],generatedIntermediates:[],documents:[]};assert.equal(parseSourceManifest(value,'open-body').inputs.length,1);
  assert.throws(()=>parseSourceManifest({...value,inputs:[{...source,credit:''}]},'open-body'),/lacks credit/);
  assert.throws(()=>parseSourceManifest({...value,inputs:[source,source]},'open-body'),/Duplicate/);
+});
+test('default acquisition restores only missing declared pins',()=>temporary(async root=>{
+ const existing=Buffer.from('existing'),missing=Buffer.from('missing');await writeFile(join(root,'one.txt'),existing);
+ const manifest:SourceManifest={schema:'cssearth-authoritative-sources@1',inputs:[entry('one.txt',existing),entry('two.txt',missing)],documents:[],generatedIntermediates:[]};
+ const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:['one','two'].map(name=>({kind:'download',path:`${name}.txt`,url:`https://example.org/${name}`,groups:['refresh']}))});
+ const calls:string[]=[];
+ await restoreMissingSources({sourceRoot:root,manifest,plan,missing:['two.txt'],transport:{fetch:async url=>{calls.push(String(url));return new Response(missing);}}});
+ assert.deepEqual(calls,['https://example.org/two']);assert.deepEqual(await readFile(join(root,'one.txt')),existing);
+ await assert.rejects(restoreMissingSources({sourceRoot:root,manifest,plan,missing:['unknown.txt']}),/No authored acquisition restores/);
+}));
+test('image inventory separates valid range-addressed geometry and rejects malformed references',()=>{
+ const reference={encoding:'gzip-cssearth-prepared-columns@1',url:'/scenes/open-body/wmts-0123456789abcdef/5-7-1.pack',offset:0,bytes:128,decodedBytes:256,sha256:'a'.repeat(64),decodedSha256:'b'.repeat(64)};
+ assert.deepEqual(collectRuntimeAssetUrls('open-body',{image:'/scenes/open-body/one.webp',directory:reference}),['/scenes/open-body/one.webp']);
+ for(const mutation of [{sha256:'bad'},{offset:-1},{url:'/scenes/other/wmts-0123456789abcdef/5-7-1.pack'},{url:'/scenes/open-body/../../secret'}])
+  assert.throws(()=>collectRuntimeAssetUrls('open-body',{...reference,...mutation}),/Invalid prepared geometry reference/);
+ assert.throws(()=>collectRuntimeAssetUrls('open-body',reference.url),/Unsafe runtime asset/);
 });

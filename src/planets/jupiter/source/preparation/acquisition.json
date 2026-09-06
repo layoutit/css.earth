@@ -1,0 +1,215 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "path": "presentation/navigation-marker.png",
+      "url": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "openspace/globe.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/globe.asset",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "openspace/kernels.asset",
+      "url": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/kernels.asset",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "surface/hubble-jupiter-global-map-2019.png",
+      "url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "surface/juno-pia24239-north-pole-detail.tif",
+      "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
+      "groups": [
+        "refresh",
+        "refresh-polar"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "surface/juno-pia23808-north-polar-projection.jpg",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
+      "groups": [
+        "refresh",
+        "refresh-polar"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg",
+      "groups": [
+        "refresh",
+        "refresh-polar"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "surface/juno-pia21382-south-pole-visible.jpg",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg",
+      "groups": [
+        "refresh",
+        "refresh-polar"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
+      "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "moons/jpl-physical-parameters.html",
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "moons/jpl-mean-elements.html",
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "moons/galilean-satellites-pia01299.jpg",
+      "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01299/PIA01299.jpg?crop=faces%2Cfocalpoint&fit=clip&h=635&w=1870",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "rings/pds-jupiter-rings-table.html",
+      "url": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
+      "groups": [
+        "refresh",
+        "refresh-rings"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "rings/pds-pia00701.html",
+      "url": "https://pds-rings.seti.org/jupiter/galileo/PIA00701.html",
+      "groups": [
+        "refresh",
+        "refresh-rings"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "rings/pds-pia01623.html",
+      "url": "https://pds-rings.seti.org/jupiter/galileo/PIA01623.html",
+      "groups": [
+        "refresh",
+        "refresh-rings"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "rings/pia00701.jpg",
+      "url": "https://pds-rings.seti.org/jupiter/galileo/PIA00701-med.jpg",
+      "groups": [
+        "refresh",
+        "refresh-rings"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "atmosphere/psg-jupiter-20260830.cfg",
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "atmosphere/psg-jupiter-r240-rif.txt",
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "download",
+      "path": "sun/google-maps-sun.png",
+      "url": "https://mw1.google.com/mw-weather/static/sun.png",
+      "groups": [
+        "refresh"
+      ]
+    },
+    {
+      "kind": "verify-request",
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "groups": [
+        "refresh",
+        "refresh-atmosphere"
+      ],
+      "form": {
+        "type": "cfg",
+        "wephm": "y",
+        "watm": "y",
+        "file": "<OBJECT-DATE>2026/08/30 12:00\n<OBJECT-NAME>Jupiter\n<GEOMETRY-REF>User"
+      },
+      "expectedPath": "atmosphere/psg-jupiter-20260830.cfg",
+      "selector": "before-marker",
+      "marker": "<GENERATOR-RANGE1>"
+    },
+    {
+      "kind": "verify-request",
+      "url": "https://psg.gsfc.nasa.gov/api.php",
+      "groups": [
+        "refresh",
+        "refresh-atmosphere"
+      ],
+      "form": {
+        "type": "rad",
+        "wephm": "n",
+        "watm": "n"
+      },
+      "fileSource": "atmosphere/psg-jupiter-20260830.cfg",
+      "expectedPath": "atmosphere/psg-jupiter-r240-rif.txt",
+      "selector": "numeric-lines",
+      "rowCount": 253
+    }
+  ]
+}

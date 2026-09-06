@@ -1,14 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createObjectRuntime } from "../object-runtime.mjs";
-import { createPreparedPlayback } from "../prepared-playback.mjs";
-import { createPreparedResidency } from "../prepared-residency.mjs";
-import { createObjectControlBinding } from "../object-control-binding.mjs";
-import { createObjectSelectionRuntime } from "../object-selection-runtime.mjs";
+import { createObjectRuntime, preparedObjectCapabilities } from "../../renderers/css/dist/index.js";
+import { createPreparedPlayback, createPreparedResidency, createObjectControlBinding,
+  createObjectSelectionRuntime, mountPreparedPresentation, resolvePreparedPresentation,
+  initialObjectSelection } from "../../renderers/css/dist/testing.js";
 import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coordinate.mjs";
-import { createSceneLifetime } from "../scene-lifetime.mjs";
-import { mountPreparedPresentation, resolvePreparedPresentation } from "../prepared-presentation.mjs";
-import { initialObjectSelection } from "../object-runtime-contract.mjs";
+import { createSceneLifetime } from "@cssearth/engine";
 import { requireObjectRuntimeDefinition } from "../../../tools/object-runtime-contract.mjs";
 
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
@@ -47,7 +44,7 @@ export function objectRuntimePackageTests(definition) {
         return resources;
       },
     });
-    const runtime = mount(stage, { onError: error => errors.push(error) });
+    const runtime = mount(stage, { onError: error => errors.push(error), capabilities: preparedObjectCapabilities });
     return { runtime, stage, images, errors, services, resources: () => resources };
   }
 

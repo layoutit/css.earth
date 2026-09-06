@@ -10,7 +10,7 @@ The visible-color surface is the rotation-A global map from
 observed in October 2025. The checked composite combines F467M, F547M, and
 F657N. FQ727N and F845M FITS maps supply two separately prepared false-color
 observation lenses. Their palettes and percentile stretches are declared in
-`tools/prepare-scene.mjs`; no browser filtering is used.
+`source/preparation/observations.json`; no browser filtering is used.
 
 The OPAL map contains observed northern coverage and an unobserved black
 southern region. Preparation detects the non-black edge, then conservatively
@@ -37,37 +37,22 @@ Ring radii, widths, and normal optical depths come from the
 [PDS Rings Node Uranus table](https://pds-rings.seti.org/uranus/uranus_rings_table.html).
 Preparation verifies the table labels and measurements before baking one
 transparent projective ring texture and one transparent projective
-planet-shadow texture. The physical center radii are kept in the prepared
-module. Extremely narrow rings receive a recorded minimum-pixel presentation
+planet-shadow texture. The physical center radii are kept in the authored
+`source/preparation/rings.json` recipe. Extremely narrow rings receive a recorded minimum-pixel presentation
 width so they remain visible at the accepted Saturn composition; their radii
 and ordering are not moved. NASA's public Uranus facts supply the documented
 gray inner-ring, reddish Nu, and blue Mu color interpretation.
 
-## Moons
+## Satellite source archive
 
-The checked JPL discovery and mean-elements tables are parsed into 29 Uranian
-satellites. The five major moon portraits come from NASA/JPL PIA01361, a
-Voyager 2 montage published at correct relative sizes and brightness. The
-source itself discloses incomplete image coverage of Miranda and Ariel; the
-prepared billboards retain that limitation. JPL mean radii set the five
-prepared portrait diameters. Preparation separates each portrait into a
-source-color base and a black alpha layer derived from the source-observed
-darkening; compositing both layers reconstructs the source brightness while
-the shared Shadows control can suppress the darkening layer. The remaining
-satellites render as prepared retained dots from the JPL catalog.
-
-Each prepared moon position propagates the JPL mean anomaly and period from
-its source epoch to the fixed 2026-08-30 12:00 TDB presentation epoch. Display
-orbit radii use the Saturn adapter's accepted logarithmic presentation rule so
-the large physical distance range remains legible; the ordering and all
-physical semi-major axes remain the checked JPL values. The prepared orbit
-containers retain each JPL inclination and ascending node. Equal-duration
-counter-orbit containers keep portraits, dots, and major-moon labels facing
-the camera without per-frame JavaScript geometry.
-
-NASA's editorial snapshot may carry an older dated moon count. The panel keeps
-that dated value and separately identifies the newer rendered JPL count. It
-does not rewrite NASA's prose.
+The checked JPL discovery and mean-elements snapshots retain the 29-satellite
+catalog. The NASA/JPL PIA01361 Voyager 2 montage remains pinned scientific
+source material, including its disclosed incomplete Miranda and Ariel coverage.
+These sources are preserved; they are not active embedded-moon render inputs.
+The shared runtime mounts exactly one detailed object scene. Historical moon
+billboards and orbit-guide derivations are excluded from its consumer-derived
+asset inventory, with the exact retired filenames recorded in `object.json`.
+The source snapshots and dated editorial facts have not been rewritten.
 
 ## Body, orientation, and charts
 
@@ -79,26 +64,30 @@ physical-parameter page. The body is 1,060 retained projective CSS texture leave
 leaves. Its source-color equirectangular and polar atlases are prepared at DPR
 1 and DPR 2. A separate one-leaf material root carries only prepared directional
 illumination and atmospheric-limb correction; it is not the planet albedo and
-does not replace the retained CSS sphere. Camera-facing material transforms are
-prepared for all 8,901 accepted pitch states. A narrow, horizontally expanded
+does not replace the retained CSS sphere. The source-owned material recipe
+prepares 256 directional samples per lens in 16 row shards. A narrow, horizontally expanded
 and vertically inset resolved-color limb backing covers the projective cells'
 side chord dents at close zoom without extending the top or adding runtime
 geometry. Its opacity resolves from that inset backing boundary, so surface
 vertices cannot show through as bright points. The browser only selects and
 transports these products.
 
-The two panel charts are rendered at preparation time from the checked NASA
+The reflectance and temperature-pressure charts are rendered at preparation time from the checked NASA
 GSFC Planetary Spectrum Generator configuration and raw 253-sample I/F
 response. Acquisition removes only PSG's request timestamp and elapsed-time
 comments so the checked scientific rows are reproducible. The model date is
 2026-08-30 12:00, range 0.35-1.0 micrometers, and
 resolving power 240. The temperature-pressure panel is extracted from the same
-checked expanded atmosphere configuration.
+checked expanded atmosphere configuration. A third chart uses the pinned
+photometric phase coefficients in `source/photometry/phase.json`.
 
 ## Reproduction
 
-Run `node src/planets/uranus/tools/acquire.mjs --verify-only` to prove the
-local source closure. `--refresh` contacts only the declared authorities and
-publishes bytes after the pinned size and SHA-256 checks succeed. Run
-`node src/planets/uranus/tools/prepare.mjs` to rebuild every browser asset,
-prepared module, chart, and runtime manifest.
+Run `pnpm acquire:planets -- --verify-only` to prove the local source closure.
+The pinned acquisition plan is `source/preparation/acquisition.json`; shared
+acquisition operators restore required ignored binaries and reject hash drift.
+Run `pnpm prepare:planets -- --object=uranus` to rebuild through the shared
+capability pipeline. Object-owned JSON supplies geometry, observations,
+materials, rings, celestial state, presentation, content, and charts. Reusable
+operators under `tools/objects/` produce prepared JSON and encoded assets;
+the object directory contains no preparation or runtime executable code.

@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-satellite-catalog-acquisition@1",
+  "outputSchema": "csssaturn-moon-catalog@1",
+  "retrievedAt": "2026-08-29T03:29:50.993Z",
+  "sources": {
+    "discovery": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+    "elements": "https://ssd.jpl.nasa.gov/sats/elem/",
+    "s2009s2": "https://minorplanetcenter.net/mpec/K26/K26M19.html"
+  },
+  "expectedDiscoveryCount": 293,
+  "expectedElementCount": 291,
+  "gravitationalParameterKm3PerS2": 37931207.7,
+  "authority": {
+    "confirmedMoonCount": "JPL Solar System Dynamics discovery table",
+    "meanElements": "JPL Solar System Dynamics satellite mean elements",
+    "meanElementsEpoch": "2000-01-01.5 TDB",
+    "discoveryOnlyOrbitTreatment": "published approximate radius with Kepler-derived period and deterministic phase",
+    "saturnGmKm3PerS2": 37931207.7
+  },
+  "discoverySection": {
+    "start": "Satellites of  Saturn:",
+    "end": "Satellites of  Uranus:"
+  },
+  "elementPrimary": "Saturn",
+  "ringFrame": "Saturn ring plane",
+  "discoveryOnly": [
+    {
+      "identity": "S/2009 S1",
+      "semiMajorAxisKm": 117000,
+      "sourceRecord": "IAUC 9091",
+      "parameterQualification": "published-approximate-ring-moonlet-orbit"
+    },
+    {
+      "identity": "S/2009 S2",
+      "document": "s2009s2",
+      "radiusPattern": "distance of approximately\\s+(\\d+)\\s+km",
+      "sourceRecord": "MPEC 2026-M19",
+      "parameterQualification": "published-approximate-ring-moonlet-orbit"
+    }
+  ]
+}

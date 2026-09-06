@@ -1,0 +1,219 @@
+{
+  "schema": "cssearth-ellipsoid-materials@1",
+  "urlPrefix": "/scenes/neptune/",
+  "raster": {
+    "shape": {
+      "equatorialRadius": 220,
+      "polarRadius": 216.0022613471168,
+      "arithmetic": "reciprocal",
+      "rootSelection": "positive"
+    },
+    "view": {
+      "right": [
+        0,
+        1,
+        0
+      ],
+      "down": [
+        1,
+        0,
+        0
+      ],
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "rotations": [
+        {
+          "kind": "rotate",
+          "axis": "y",
+          "state": "scenePitchDegrees",
+          "factor": 1
+        },
+        {
+          "kind": "rotate",
+          "axis": "z",
+          "degrees": 60
+        },
+        {
+          "kind": "rotate",
+          "axis": "x",
+          "state": "systemObliquityDegrees",
+          "factor": -1
+        },
+        {
+          "kind": "rotate",
+          "axis": "z",
+          "degrees": -128
+        },
+        {
+          "kind": "normalize"
+        }
+      ]
+    },
+    "light": {
+      "direction": [
+        0.42,
+        -0.73,
+        0.54
+      ],
+      "operations": [
+        {
+          "kind": "normalize"
+        },
+        {
+          "kind": "rotate",
+          "axis": "z",
+          "degrees": 60
+        },
+        {
+          "kind": "rotate",
+          "axis": "x",
+          "state": "systemObliquityDegrees",
+          "factor": -1
+        },
+        {
+          "kind": "rotate",
+          "axis": "z",
+          "degrees": -128
+        },
+        {
+          "kind": "normalize"
+        }
+      ]
+    },
+    "grid": {
+      "kind": "projected-ellipsoid",
+      "coverageScale": 1.002,
+      "contentScale": 0.992,
+      "depthBias": 0.5
+    },
+    "lighting": {
+      "ambient": 0.22,
+      "terminator": [
+        0,
+        0.1
+      ],
+      "smoothstepOrder": "amount-first",
+      "alphaOrder": "atmosphere-first"
+    },
+    "atmosphere": {
+      "model": "normalized-night-floor",
+      "maximumAlpha": 0.72,
+      "limbExponent": 1.75,
+      "nightFloor": 0.22
+    }
+  },
+  "fixedState": {
+    "scenePitchDegrees": 40,
+    "systemObliquityDegrees": 28.32
+  },
+  "bank": {
+    "frames": 256,
+    "frameSize": 256,
+    "columns": 16,
+    "gutter": 2,
+    "maximumScenePitchDegrees": 65,
+    "presentationSize": 1024,
+    "presentationAssetUrl": true,
+    "systemObliquity": {
+      "degrees": 28.32,
+      "referencePitch": 40
+    },
+    "optimization": "q75",
+    "encoding": {
+      "lossless": true,
+      "effort": 6
+    }
+  },
+  "lenses": [
+    {
+      "id": "normal",
+      "atmosphereFromMap": true,
+      "rowOutput": "neptune-orbit-material-normal-row-{row}.webp",
+      "fixed": [
+        {
+          "density": 1,
+          "shadowless": false,
+          "size": 1024,
+          "filename": "neptune-material-normal.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        },
+        {
+          "density": 1,
+          "shadowless": true,
+          "size": 1024,
+          "filename": "neptune-material-normal-shadowless.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        }
+      ]
+    },
+    {
+      "id": "methane",
+      "atmosphereFromMap": true,
+      "rowOutput": "neptune-orbit-material-methane-row-{row}.webp",
+      "fixed": [
+        {
+          "density": 1,
+          "shadowless": false,
+          "size": 1024,
+          "filename": "neptune-material-methane.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        },
+        {
+          "density": 1,
+          "shadowless": true,
+          "size": 1024,
+          "filename": "neptune-material-methane-shadowless.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        }
+      ]
+    },
+    {
+      "id": "near-infrared",
+      "atmosphereFromMap": true,
+      "rowOutput": "neptune-orbit-material-near-infrared-row-{row}.webp",
+      "fixed": [
+        {
+          "density": 1,
+          "shadowless": false,
+          "size": 1024,
+          "filename": "neptune-material-near-infrared.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        },
+        {
+          "density": 1,
+          "shadowless": true,
+          "size": 1024,
+          "filename": "neptune-material-near-infrared-shadowless.webp",
+          "encoding": {
+            "lossless": true,
+            "effort": 6
+          },
+          "optimization": "display-lossless"
+        }
+      ]
+    }
+  ]
+}

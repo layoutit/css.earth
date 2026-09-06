@@ -1,4 +1,4 @@
-import { createObjectRuntime, createNavigableObjectMount } from '../src/renderers/css/dist/index.js';
+import { createObjectRuntime, createNavigableObjectMount, preparedObjectCapabilities } from '../src/renderers/css/dist/index.js';
 import * as runtimePolicy from './runtime-policy.mjs';
 
 // The application supplies its shell nodes and authoritative input policy.
@@ -8,6 +8,7 @@ export function bindPackagedObject(definition) {
   return (stage, options) => mount(stage, {
     ...options,
     runtimePolicy,
+    capabilities: preparedObjectCapabilities,
     inputSurface: stage.ownerDocument.querySelector('.planet-input-surface'),
     mobilePreviewElement: stage.ownerDocument.querySelector('.planet-sidebar'),
     diagnostics: import.meta.env?.DEV === true,

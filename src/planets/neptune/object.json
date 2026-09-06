@@ -1,0 +1,187 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "neptune",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Neptune",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "migration": {
+      "status": "authored-source-preparation",
+      "verifiedAuthoredLanes": [
+        "observed-surfaces",
+        "radial-layers",
+        "material-banks",
+        "celestial",
+        "geometry",
+        "content-controls",
+        "charts",
+        "presentation"
+      ],
+      "verification": {
+        "activeAssetCount": 97,
+        "encodedAssets": "byte-identical to the accepted pre-migration assets",
+        "runtime": "complete prepared runtime deep-equal to accepted retained presentation"
+      },
+      "excludedDormantAssets": [
+        {
+          "filename": "neptune-moon-dots.webp",
+          "reason": "Not consumed by the one-object retained runtime or prepared content; scientific source snapshots and canonical public files retained."
+        },
+        {
+          "filename": "neptune-moon-dots@2x.webp",
+          "reason": "Not consumed by the one-object retained runtime or prepared content; scientific source snapshots and canonical public files retained."
+        },
+        {
+          "filename": "neptune-moon-orbit-arcs.svg",
+          "reason": "Not consumed by the one-object retained runtime or prepared content; scientific source snapshots and canonical public files retained."
+        },
+        {
+          "filename": "neptune-moon-orbit-arcs@2x.svg",
+          "reason": "Not consumed by the one-object retained runtime or prepared content; scientific source snapshots and canonical public files retained."
+        },
+        {
+          "filename": "neptune-orbit-bank.f64z",
+          "reason": "Not consumed by the one-object retained runtime or prepared content; scientific source snapshots and canonical public files retained."
+        }
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "60ea460506b51f18cc070e2d79c968e2fe38cced2d00df539144a00801658820"
+        },
+        {
+          "id": "rings",
+          "path": "source/preparation/rings.json",
+          "sha256": "fee3c1d33b6cb97a068942ef53ae26cd15f48e89bf3ae25ed4067315a0d36ea7"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "9fdd021f202113bf1d6a2eca6a05bf52653a2f11a13edb1b04e5ad3b8783647c"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "8ca67cf11677b7892d745970247206232fbb935583fccc7fe5d1898d141ddb5b"
+        },
+        {
+          "id": "observations",
+          "path": "source/preparation/observations.json",
+          "sha256": "67711c6f0e6aa548d94ca2a434a40ab10dea79da9d40965eba74654987e51a6c"
+        },
+        {
+          "id": "materials",
+          "path": "source/preparation/materials.json",
+          "sha256": "7ddf646b781a982b02f66e22a6bad93964c260da8a1e3abf56cd94b820cbfbc8"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "19eb613445e8d64c7f745b29667d43e268ce85116b4891951dae88e881a3e2c1"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "8aa3f35d817d25b0755f8d917ab380fa747706751e8c3d4962b0e5398887f1f8"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json",
+          "sha256": "b924bf227bdced8c394dd79184f903627f2e8ed1293b10cc8b69a0a05dabe42e"
+        },
+        {
+          "id": "photometry",
+          "path": "source/photometry/phase.json",
+          "sha256": "aa2c0a3e4b1d6f7958d930ecc7e4b9bcb2de8797473f35d52399b5039ce3b060"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "d382149e96d1fe9decaf6bbe994cb3489021bb12b08ddd7c4cf89e8f246161c2"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "2533634cfe016f466a29490ba0d394ec723e1bbddc2b4c74bcf18317a27401c3"
+        }
+      ],
+      "shape": {
+        "kind": "ellipsoid",
+        "radiusKm": 24764,
+        "polarRadiusKm": 24314
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "observations",
+              "material": "lighting",
+              "frameBank": "lighting"
+            },
+            {
+              "id": "methane",
+              "source": "observations",
+              "material": "lighting",
+              "frameBank": "lighting"
+            },
+            {
+              "id": "near-infrared",
+              "source": "observations",
+              "material": "lighting",
+              "frameBank": "lighting"
+            }
+          ]
+        }
+      ],
+      "rings": {
+        "source": "rings"
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "materials",
+          "model": "lit",
+          "frameBank": "lighting"
+        }
+      ],
+      "frameBanks": [
+        {
+          "id": "lighting",
+          "source": "materials",
+          "frames": 256,
+          "rows": 16,
+          "residentRows": 3
+        }
+      ],
+      "atmosphere": {
+        "source": "materials",
+        "material": "lighting"
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "31c425db57274acf0126ed5980eb653b37dfbd3c4a0b9381f23cc1de9372f76c"
+  }
+}
