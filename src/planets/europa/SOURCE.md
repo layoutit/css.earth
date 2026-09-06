@@ -61,24 +61,32 @@ and is excluded from Git. Preparation does not require another body's scene.
 The **Enhanced color** lens uses the [USGS controlled Galileo observations](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/)
 (CC0), by Bland, Weller and colleagues. It combines 756 nm infrared, 559 nm
 green, and 404 nm violet as display red, green, and blue. This is not natural
-color. The four sequences are G1ESGLOBAL01 (1996-06-28), 12ESGLOCOL01
-(1997-12-16), 14ESGLOCOL01 (1998-03-29), and 28ESGLOCOL01 (2000-05-22).
+color. The three sequences are G1ESGLOBAL01 (1996-06-28), 12ESGLOCOL01
+(1997-12-16), and 14ESGLOCOL01 (1998-03-29).
 Exact image dates, band identities, coordinates, source URLs and hashes are
 pinned beside the source inputs.
 
 These are calibrated 32-bit I/F images with corrected camera pointing, on an
 east-positive cylindrical grid centred at 180°, radius 1,560,800 m. They have
-not been photometrically corrected. Native grids range from 1.375 to 13.832 km
+not been photometrically corrected. Native grids range from 1.375 to 1.570 km
 per pixel. Higher-density observations take priority. Color appears only where
 all three bands from the same sequence have valid interpolation footprints;
 zero no-data, ISIS special pixels, and incomplete boundaries are withheld.
-About 35% of the sphere has usable three-band coverage. Observed monochrome
+About 19% of the sphere has usable three-band coverage. Observed monochrome
 forms the base elsewhere; grayscale does not imply measured neutral color.
 The gray cartographic grid appears only where both sources lack imagery. The
 fixed display transfer is clamp(I/F, 0, 1)^(1/2.2) for every channel.
 Brightness seams and coarse observations remain visible.
 No monochrome detail is transferred into color. The newer controlled dataset
 and the older monochrome mosaic have different positional accuracy.
+
+The 28ESGLOCOL01 sequence (2000-05-22) was removed from this lens: its
+13.832 km-per-pixel imagery covered sharper monochrome with a visibly blurred
+insert. The lens now uses the monochrome base there, with no invented color.
+The enhanced lens disables both added curvature lighting and directional
+shadows through the existing prepared material contract. Shadows in the
+photographs themselves remain fixed to their acquisition geometry; this lens
+is not an unlit albedo map and cannot be physically relit.
 
 The NASA Trek/Jónsson 2015 color mosaic was rejected: its [author documents
 fictional polar terrain and cloned gaps](https://www.planetary.org/articles/0218-mapping-europa),

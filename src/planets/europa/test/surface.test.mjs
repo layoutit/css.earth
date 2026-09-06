@@ -30,11 +30,13 @@ test("observed terrain survives preparation and explicit polar no-data stays mar
   assert.ok(metadata.surfaces[0].missingPixels < 4096 * 2048 / 10);
   const enhanced = await sharp(new URL("../../../../public/scenes/europa/europa-enhanced-map.webp", import.meta.url).pathname)
     .removeAlpha().raw().toBuffer();
-  for (const [x,y] of [[700,750],[3100,1100],[2048,2047]]) {
+  // The 2500,400 / 2300,500 patches previously used the coarse 28ESGLOCOL01
+  // observation. They must now preserve the sharper monochrome source.
+  for (const [x,y] of [[700,750],[3100,1100],[2048,2047],[2500,400],[2300,500],[1900,750]]) {
     const i = (y * 4096 + x) * 3;
     assert.deepEqual(enhanced.subarray(i,i+3),map.data.subarray(i,i+3), "Monochrome terrain and true gaps remain intact outside color coverage");
   }
-  const color = (750 * 4096 + 1900) * 3;
+  const color = (700 * 4096 + 1500) * 3;
   assert.notDeepEqual(enhanced.subarray(color,color+3),map.data.subarray(color,color+3), "Observed color overlays the base");
   assert.ok(metadata.surfaces[1].monochromePixels > 4096 * 2048 / 2);
 });
