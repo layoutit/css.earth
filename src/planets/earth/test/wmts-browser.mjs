@@ -5,6 +5,7 @@ import { dev } from "astro";
 import { chromium } from "playwright";
 import { PREPARED_EARTH_SCENE as scene } from "../runtime/preparedScene.mjs";
 import { PREPARED_EARTH_CITY_PAGES as existing } from "../runtime/preparedCityPages.mjs";
+import { PREPARED_PRESENTATION as presentation } from "../runtime/preparedPresentation.mjs";
 import { prepareWmtsTile,wmtsAddress,WMTS_RASTER_SCALE } from "../tools/city/wmts-page-geometry.mjs";
 import { prepareLocationPoint,prepareLocationCamera } from "../tools/city/prepare-location.mjs";
 import { prepareWmtsBlocks } from "../tools/city/prepare-wmts-blocks.mjs";
@@ -31,9 +32,11 @@ for(const sample of samples){
   }
   sample.camera=prepareLocationCamera(scene,prepareLocationPoint(scene,sample.longitude,sample.latitude),1024*2**(tileZoom-12));
 }
-const plan={...existing,roots:[...pages.values()],initialLayer:pages.values().next().value,
+// These diagnostic roots are complete image pieces (or flat packed groups),
+// not the production tile quadtree. Use the existing generic page traversal.
+const plan={...existing,topology:undefined,roots:[...pages.values()],initialLayer:pages.values().next().value,
   rasterScale:WMTS_RASTER_SCALE,decodedPageBytes:256*256*4,pageTemplate:"clipped-projective",
-  qualification:"Direct cached WMTS diagnostic windows; global prepared index and polar mapping pending."};
+  qualification:"Bounded prepared WMTS windows: direct imagery, source identity and retained lifetime. This diagnostic does not qualify global coverage."};
 const blocks=packed?prepareWmtsBlocks([...pages.values()],plan.dataset):null;
 if(blocks)plan.roots=blocks.roots;
 const report={capturedAt:new Date().toISOString(),tileZoom,mobile,qualification:plan.qualification,
@@ -44,13 +47,15 @@ await writeFile(new URL("plan.json",output),JSON.stringify(plan));
 // Substitute prepared data in the diagnostic server, not through browser
 // routing: Playwright routing disables HTTP caching and invalidates cache tests.
 const config=new URL("astro.config.mjs",output);
-const moduleBody=`export const PREPARED_EARTH_CITY_PAGES=Object.freeze(${JSON.stringify(plan)});`;
+const diagnosticPresentation={...presentation,pageLayers:presentation.pageLayers.map(layer=>layer.id==='city'
+  ?{...layer,plan:{...layer.plan,...plan,schema:layer.plan.schema,assetPath:layer.plan.assetPath}}:layer)};
+const moduleBody=`export const PREPARED_PRESENTATION=Object.freeze(${JSON.stringify(diagnosticPresentation)});`;
 if(blocks)for(const file of blocks.files)await writeFile(new URL(file.ref.url.split("/").at(-1),output),file.bytes);
 const blockPaths=Object.fromEntries((blocks?.files??[]).map(file=>[file.ref.url,new URL(file.ref.url.split("/").at(-1),output).pathname]));
 await writeFile(config,`import base from ${JSON.stringify(new URL("astro.config.mjs",root).href)};
 import {readFile} from "node:fs/promises";
 export default {...base,vite:{...base.vite,plugins:[{name:"prepared-wmts-diagnostic",enforce:"pre",load(id){
-if(id.endsWith("/src/planets/earth/runtime/preparedCityPages.mjs"))return ${JSON.stringify(moduleBody)};
+if(id.endsWith("/src/planets/earth/runtime/preparedPresentation.mjs"))return ${JSON.stringify(moduleBody)};
 },configureServer(server){const paths=${JSON.stringify(blockPaths)};server.middlewares.use(async(req,res,next)=>{
 const path=paths[req.url];if(!path)return next();const bytes=await readFile(path);
 res.setHeader("Content-Type","application/octet-stream");res.setHeader("Cache-Control","public,max-age=31536000,immutable");res.end(bytes);
@@ -87,7 +92,7 @@ try{
       await page.evaluate(()=>{{ const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }window.__wmtsNodes=[...document.querySelector(".planet-stage").querySelectorAll("*")];});
       for(const sample of [...samples,{...samples[0],id:`${samples[0].id}-warm`}]){
         // Release the previous view even when testing one location, so a warm
-        // result must reacquire actual provider URLs through the HTTP cache.
+        // result must reuse a verified resource or the provider's HTTP cache.
         await page.evaluate(()=>window.__earth.camera.setState({zoom:1.1}));
         await page.waitForFunction(()=>window.__earth.runtime.pages().city.retained.length===0);
         const start=Date.now(),cacheBefore=run.servedFromCache.length;
@@ -95,7 +100,7 @@ try{
         await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
         if(!packed&&await page.evaluate(()=>window.__earth.runtime.pages().city.desired.length===0)){
           const diagnostic=await page.evaluate(async pages=>{
-            const {projectCityPage}=await import('/src/planets/earth/runtime/city-page-selection.mjs');
+            const {projectCityPage}=await import('/src/platform/prepared-map/city-page-selection.mjs');
             const stage=document.querySelector('.planet-stage'),camera=stage.querySelector('.polycss-camera');
             const m=new DOMMatrix(getComputedStyle(stage.querySelector('.polycss-scene')).transform)
               .multiply(new DOMMatrix(getComputedStyle(stage.querySelector('.earth-system')).transform))
@@ -120,7 +125,7 @@ try{
         run.views.push({id:sample.id,firstPaintMs,firstPublished,elapsedMs,complete,cachedResponses:run.servedFromCache.length-cacheBefore,state});
         assert.ok(state.stable&&state.identical);assert.ok(state.paging.reservedDecodedBytes<=state.paging.decodedPageByteBound);
         assert.deepEqual([...state.paging.desired].sort(),await page.evaluate(async records=>{
-          const {selectCityPages}=await import('/src/planets/earth/runtime/city-page-selection.mjs');
+          const {selectCityPages}=await import('/src/platform/prepared-map/city-page-selection.mjs');
           const stage=document.querySelector('.planet-stage'),camera=stage.querySelector('.polycss-camera');
           const matrix=new DOMMatrix(getComputedStyle(stage.querySelector('.polycss-scene')).transform)
             .multiply(new DOMMatrix(getComputedStyle(stage.querySelector('.earth-system')).transform))
@@ -135,11 +140,21 @@ try{
       await page.evaluate(()=>window.__earth.camera.setState({zoom:1.1}));
       await page.waitForFunction(()=>window.__earth.runtime.pages().city.retained.length===0);
       run.released=await page.evaluate(()=>window.__earth.runtime.pages().city);
-      assert.equal(run.released.apiImages.residentImages,0);
+      assert.equal(run.released.apiImages.activeImages,0);
+      assert.ok(run.released.apiImages.idleImages>0,"Released pages remain available for bounded reuse");
+      assert.ok(run.released.apiImages.entries<=run.released.apiImages.maximumEntries);
+      assert.ok(run.released.apiImages.decodedBytes<=run.released.apiImages.maximumDecodedBytes);
       assert.equal(run.network.some(url=>url.includes("earth-assets.lowpoly.cc")),false);
       assert.deepEqual(run.pageErrors,[]);await Promise.all(pending);
       assert.deepEqual(run.released.index.errors,[]);
-      assert.ok(run.views.at(-1).cachedResponses>0,"Warm revisit must exercise the HTTP cache");
+      assert.ok(run.views.at(-1).cachedResponses>0 || run.views.at(-1).state.paging.apiImages.hits>run.views[0].state.paging.apiImages.hits,
+        "Warm revisit must reuse verified image identities or cached HTTP responses");
+      const destroyed=await page.evaluate(()=>{
+        const runtime=window.__earth.runtime;
+        window.dispatchEvent(new PageTransitionEvent("pagehide"));
+        return runtime.pages().city.apiImages;
+      });
+      assert.equal(destroyed.residentImages,0);
     }finally{await context.close();}
   }
   if(!mobile)assert.deepEqual(report.runs[0].views.map(v=>[...v.state.paging.desired].sort()),report.runs[1].views.map(v=>[...v.state.paging.desired].sort()));

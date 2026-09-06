@@ -5,10 +5,10 @@ import { createGeographicSurfaceRuntime } from "./geographic-surface-runtime.mjs
 
 // One active package and one preallocated renderer. Switching invalidates both
 // in-flight transport and old pixels; adding a dataset adds no startup work.
-export function createGeographicLensRuntime({ pages, capacity, surface, objectId, getEntity, selectBase, onChange = () => {}, fetcher = fetch }) {
+export function createGeographicLensRuntime({ pages, capacity, surface, images, objectId, getEntity, selectBase, onChange = () => {}, fetcher = fetch }) {
   let revision = 0, request = null, destroyed = false;
   let selectedDescriptor = null, selectedEntityId = null;
-  const overview = createGeographicSurfaceRuntime({ surface, fetcher });
+  const overview = createGeographicSurfaceRuntime({ surface, fetcher, images });
   let state = { id: null, status: "idle", content: null, error: null };
   const publish = next => { state = next; if (!destroyed) onChange(state); };
   function clear() {

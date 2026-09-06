@@ -7,7 +7,8 @@ import { prepareCityPageGeometry, createCityGeographicSampler } from "../tools/c
 import { prepareGeographicTextureQuad } from "../tools/city/wms-page-geometry.mjs";
 import { prepareWmtsTile, wmtsAddress, wmtsLatitude, wmtsRow, mercatorStripErrorBound, WMTS_PIXEL_ERROR } from "../tools/city/wmts-page-geometry.mjs";
 import { isPreparedWmtsImage } from "../../../platform/prepared-map/wmts-image.mjs";
-import { createApiImageTransport } from "../../../platform/prepared-map/api-image-transport.mjs";
+import { createApiImageTransport as createTransport } from "../../../platform/prepared-map/api-image-transport.mjs";
+const createApiImageTransport = options => createTransport({createImage:page=>({src:"",naturalWidth:page.width,naturalHeight:page.height,async decode(){}}),...options}).createScope({ maximumEntries: 512, maximumDecodedBytes: 128 * 1024 * 1024, idleMilliseconds: 0 });
 import { selectCityPages } from "../../../platform/prepared-map/city-page-selection.mjs";
 
 function point(page,u,v){

@@ -99,6 +99,34 @@ try{
   await faultCase('corrupt-root-directory','**/geographic-roots-*.pack',corrupt);
   await faultCase('corrupt-range','https://earth-assets.lowpoly.cc/**/wmts-*/*.pack',corrupt);
   await faultCase('unavailable-range','https://earth-assets.lowpoly.cc/**/wmts-*/*.pack',route=>route.fulfill({status:503,headers:{'access-control-allow-origin':server.url},body:'Fixture geometry unavailable'}));
+  const rangePattern='https://earth-assets.lowpoly.cc/**/wmts-*/*.pack';
+  const rangeKey=route=>`${route.request().url()}#${route.request().headers().range}`;
+  const shortTransfer=async route=>{
+    const response=await route.fetch(),body=await response.body();
+    assert.equal(response.status(),206);assert.ok(body.length>1);
+    // Keep the declared range while ending the transferred body one byte early.
+    await route.fulfill({response,body:body.subarray(0,-1)});
+  };
+  const shortAttempts=new Map();
+  await faultCase('short-range',rangePattern,async route=>{
+    const key=rangeKey(route);shortAttempts.set(key,(shortAttempts.get(key)??0)+1);
+    await shortTransfer(route);
+  });
+  assert.ok([...shortAttempts.values()].every(count=>count<=2),'A short metadata transfer retries at most once per range');
+  await page.goto(earthView.href);await settle();await activate('normal');
+  let shortKey=null;const transientAttempts=new Map(),transientErrors=[];
+  const transientRoute=async route=>{
+    const key=rangeKey(route);transientAttempts.set(key,(transientAttempts.get(key)??0)+1);
+    if(shortKey===null){shortKey=key;try{await shortTransfer(route);}catch(error){transientErrors.push(error.message);await route.abort();}}
+    else await route.continue();
+  };
+  await page.route(rangePattern,transientRoute);
+  await activate('worldcover-land-cover');
+  const transientRecovered=await checkpoint('short-range-automatic-recovery',{capture:true});
+  await page.unroute(rangePattern,transientRoute);
+  assert.deepEqual(transientErrors,[]);assert.ok(shortKey);
+  assert.equal(transientAttempts.get(shortKey),2);assert.ok(transientRecovered.pages.length);
+  report.faults.push({name:'short-range-automatic-recovery',key:shortKey,attempts:[...transientAttempts],recovered:transientRecovered,passed:true});
   await faultCase('corrupt-tile','https://mapproxy.terrascope.be/**/esa-worldcover-map-10m-2021-v2_map/**',corrupt);
   await faultCase('provider-outage','https://mapproxy.terrascope.be/**/esa-worldcover-map-10m-2021-v2_map/**',route=>route.fulfill({status:503,headers:{'access-control-allow-origin':'*','retry-after':'0'},body:'Fixture unavailable'}));
   assert.ok(report.faults.at(-1).byUrl.every(([,count])=>count<=3),'No provider URL retries more than twice');

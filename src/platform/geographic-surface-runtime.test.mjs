@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
 import { createGeographicSurfaceRuntime } from "./geographic-surface-runtime.mjs";
+import { createApiImageTransport } from "./prepared-map/api-image-transport.mjs";
 
 const bytes = new Uint8Array([1,2,3,4]), sha256 = createHash("sha256").update(bytes).digest("hex");
-const overview = { images: Array.from({length:8},(_,i)=>({slot:String(i),image:{url:`/image-${i}`,bytes:4,sha256,width:2,height:2}})) };
+const overview = { images: Array.from({length:8},(_,i)=>({slot:String(i),image:{url:`/scenes/earth/image-${i}-${sha256.slice(0,16)}.webp`,bytes:4,sha256,width:2,height:2}})) };
 const image = () => ({src:"",naturalWidth:2,naturalHeight:2,async decode(){}});
 const tick = () => new Promise(resolve => setImmediate(resolve));
 
@@ -46,4 +47,28 @@ test("wrong bytes, decoded dimensions and HTTP failures retain the base and perm
     assert.equal(publications,0); assert.equal(runtime.stats().retainedImages,0); assert.equal(runtime.stats().activeLoads,0);
     failed=false; assert.equal(await runtime.prepare(overview,new AbortController().signal),true); runtime.publish(); assert.equal(publications,1); runtime.destroy();
   }
+});
+
+test("overview revisits share page identities and the same bounded allowance", async () => {
+  let requests = 0;
+  const store = createApiImageTransport({ createImage: image, fetchImage: async () => { requests++; return new Response(bytes); } });
+  const images = store.createScope({ maximumEntries: 8, maximumDecodedBytes: 128 });
+  const publications = [];
+  const runtime = createGeographicSurfaceRuntime({ surface: { slots: overview.images.map(i => i.slot), set: urls => publications.push(urls), clear() {} }, images, createImage: image });
+  try {
+    const controller = new AbortController();
+    assert.equal(await runtime.prepare(overview, controller.signal), true); runtime.publish();
+    assert.equal(requests, 8); assert.equal(images.stats().decodedBytes, 128);
+    controller.abort();
+    assert.equal(images.stats().activeImages, 8, "the completed bank survives its load deadline");
+    assert.throws(() => images.acquire({ ...overview.images[0].image, rasterSource: "prepared-raster@1" }), /budget/);
+    runtime.clear(); assert.equal(images.stats().idleImages, 8);
+    const page = images.acquire({ ...overview.images[0].image, rasterSource: "prepared-raster@1" });
+    assert.equal(await page.ready, publications[0].get('0')); page.release();
+    assert.equal(await runtime.prepare(overview, new AbortController().signal), true); runtime.publish();
+    assert.deepEqual(publications[1], publications[0]); assert.equal(requests, 8);
+    runtime.destroy(); assert.equal(images.stats().activeImages, 0);
+    assert.equal(store.stats().residentImages, 8, "the scene owner holds the bounded idle bank");
+  } finally { runtime.destroy(); store.destroy(); }
+  assert.equal(store.stats().residentImages, 0);
 });

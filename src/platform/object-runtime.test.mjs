@@ -202,16 +202,22 @@ test("optional warm decode failure is recoverable while native cleanup failure i
   h.resourceOptions().onWarmError(new Error("late warm")); h.resourceOptions().onCleanupError(new Error("late cleanup"));
   assert.equal(warnings.length, 1); assert.equal(h.errors.length, 1);
 });
-test("Earth's actual prepared page layers join shared publication, playback and cleanup", async t => {
-  const events = [], plans = [];
-  const h = harness({ definition: earthDefinition }, { mountPages({ own, plan }) {
-    plans.push(plan); own(() => events.push("destroy"));
+test("Earth's actual prepared page layers join shared publication, image ownership, playback and cleanup", async t => {
+  const events = [], plans = [], imageScopes = [];
+  const h = harness({ definition: earthDefinition }, { mountPages({ own, plan, images }) {
+    plans.push(plan); imageScopes.push(images); own(() => events.push("destroy"));
     return { replacePlan: () => events.push("replace"), publish: () => events.push("frame"), setLens: lens => events.push(lens.id), setPlaying: value => events.push(value), stats: () => ({}) };
   } }); t.after(h.restore); await h.complete();
   assert.deepEqual(plans, earthDefinition.pageLayers.map(layer => layer.plan));
+  assert.equal(new Set(imageScopes).size, plans.length);
+  for (let i = 0; i < plans.length; i++) {
+    assert.equal(imageScopes[i].stats().maximumDecodedBytes, plans[i].maximumDecodedBytes);
+    assert.equal(imageScopes[i].stats().scopes.length, plans.length, "the layer allowances have one scene image owner");
+  }
   assert.ok(events.includes("frame")); h.runtime.resume(); assert.equal(events.at(-1), true);
   h.runtime.pause(); assert.equal(events.at(-1), false); h.runtime.destroy(); assert.equal(events.at(-1), "destroy");
   h.runtime.resume(); assert.equal(events.at(-1), "destroy"); assert.deepEqual(h.errors, []);
+  for (const images of imageScopes) assert.equal(images.stats().scopes.length, 0);
 });
 test("partial prepared page construction retires the actual tree and all resources", async t => {
   let cleaned = false;

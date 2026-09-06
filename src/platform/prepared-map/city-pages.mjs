@@ -1,11 +1,11 @@
 import { createPreparedProjectiveTextureLeaf } from "../prepared-projective-texture-leaf.mjs";
 import { selectCityPages } from "./city-page-selection.mjs";
 import { createCityIndex } from "./city-index.mjs";
-import { normalizeCityAssetOrigin, isPreparedCityAssetUrl, isPreparedAssetPath } from "./city-asset-url.mjs";
+import { normalizeCityAssetOrigin, isPreparedAssetPath } from "./city-asset-url.mjs";
 import { createApiImageTransport } from "./api-image-transport.mjs";
 import { selectPagePublication } from "./page-publication.mjs";
 
-export function mountPreparedMapPages({ plan, carrier, system, scene, camera, stage, className, textureClassName, lensIds, own, onStatus = () => {}, onError = error => { throw error; } }) {
+export function mountPreparedMapPages({ plan, carrier, system, scene, camera, stage, className, textureClassName, lensIds, own, images = null, onStatus = () => {}, onError = error => { throw error; } }) {
   let validAssetOrigin = false;
   try { validAssetOrigin = normalizeCityAssetOrigin(plan.assetOrigin) === plan.assetOrigin; } catch {}
   if (plan.schema !== "cssearth-prepared-map-pages@1" || !validAssetOrigin || !isPreparedAssetPath(plan.assetPath) ||
@@ -36,7 +36,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   let publications = 0;
   let selectionRuns = 0, selectionDiagnostics = null;
   let errors = [];
-  let index = null, apiImages = null, observer = null, shellObserver = null;
+  let index = null, apiImages = null, imageTransport = null, observer = null, shellObserver = null;
   const schedule = () => {
     if (!destroyed && pendingFrame === null) pendingFrame = requestAnimationFrame(() => { try { refresh(); } catch (error) { onError(error); } });
   };
@@ -59,12 +59,16 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       apiTexture.style.cssText="position:absolute;inset:0 auto auto 0;width:100%;height:100%;display:block;transform-origin:0 0;transform-style:flat;backface-visibility:visible;background-repeat:no-repeat;visibility:hidden;pointer-events:none";
       leaf.firstElementChild.appendChild(apiTexture);
     }
-    slots.push({ leaf, texture: leaf.firstElementChild, apiTexture, image: new Image(),
-      key: null, group: null, blobUrl: null, apiHandle: null, controller: null, generation: 0, ready: false, published: false, empty: false, decodedBytes: 0 });
+    slots.push({ leaf, texture: leaf.firstElementChild, apiTexture,
+      key: null, group: null, apiHandle: null, controller: null, generation: 0, ready: false, published: false, empty: false, decodedBytes: 0 });
     carrier.appendChild(leaf);
   }
     index = createCityIndex(plan, schedule);
-    apiImages = createApiImageTransport();
+    if (images) apiImages = images;
+    else {
+      imageTransport = createApiImageTransport();
+      apiImages = imageTransport.createScope({ maximumEntries: capacity.poolSize, maximumDecodedBytes: capacity.maximumDecodedBytes });
+    }
     observer = new ResizeObserver(schedule);
     observer.observe(stage);
     shellObserver = new MutationObserver(schedule);
@@ -84,11 +88,9 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       slot.apiTexture.style.backgroundImage = "none";
       slot.apiTexture.style.visibility = "hidden";
     }
-    slot.image.src = "";
-    if (slot.blobUrl) URL.revokeObjectURL(slot.blobUrl);
     slot.apiHandle?.release();
     delete slot.leaf.dataset.cityPage;
-    Object.assign(slot, { key: null, group: null, blobUrl: null, apiHandle: null, controller: null, ready: false, published: false, empty: false, decodedBytes: 0 });
+    Object.assign(slot, { key: null, group: null, apiHandle: null, controller: null, ready: false, published: false, empty: false, decodedBytes: 0 });
   }
 
   function clearDesired() {
@@ -186,42 +188,15 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     slot.decodedBytes = page.width*page.height*4;
     activeLoads += 1;
     requests += 1;
-    let blobUrl = null;
-    const api = ["terrascope-wms@1", "terrascope-wmts@1", "prepared-wmts-raster@1"].includes(page.rasterSource);
     try {
       if(page.imageMatrix&&!slot.apiTexture)throw new Error("The prepared page requires a clipping template.");
-      if(api){
-        slot.apiHandle=apiImages.acquire(page);
-        blobUrl=await slot.apiHandle.ready;
-      }else{
-        const localPrepared=page.rasterSource === "prepared-raster@1" &&
-          /^[a-f0-9]{64}$/u.test(page.sha256??"") && /^\/scenes\/[a-z][a-z0-9-]*\/[a-z0-9-]+-[a-f0-9]{16}\.webp$/u.test(page.url) && page.url.endsWith(`-${page.sha256.slice(0,16)}.webp`);
-        if (!localPrepared && !isPreparedCityAssetUrl(plan, page.url, "page", page.sha256)) {
-          throw new Error(`City page ${page.key}: invalid prepared URL`);
-        }
-        const response = await fetch(page.url, { signal: AbortSignal.any([controller.signal, AbortSignal.timeout(30000)]) });
-        if (!response.ok) throw new Error(`City page ${page.key}: HTTP ${response.status}`);
-        const blob = await response.blob();
-        if (blob.size !== page.bytes) throw new Error(`City page ${page.key}: byte size mismatch`);
-        if(localPrepared){
-          const digest=[...new Uint8Array(await crypto.subtle.digest("SHA-256",await blob.arrayBuffer()))].map(n=>n.toString(16).padStart(2,"0")).join("");
-          if(digest!==page.sha256)throw new Error("Prepared image hash mismatch.");
-        }
-        if (destroyed || controller.signal.aborted || generation !== slot.generation) return;
-        blobUrl = URL.createObjectURL(blob);
-        slot.blobUrl = blobUrl;
-      }
+      slot.apiHandle = apiImages.acquire(page, { plan: loadPlan, signal: controller.signal });
+      const blobUrl = await slot.apiHandle.ready;
       if (destroyed || controller.signal.aborted || generation !== slot.generation) return;
-      if (api && slot.apiHandle.empty) {
+      if (slot.apiHandle.empty) {
         slot.empty = true; slot.ready = true; slot.decodedBytes = 0; slot.controller = null;
         slot.leaf.dataset.cityPage = page.key;
         publishReadyView(); return;
-      }
-      slot.image.src = blobUrl;
-      await slot.image.decode();
-      if (destroyed || controller.signal.aborted || generation !== slot.generation) return;
-      if (slot.image.naturalWidth !== page.width || slot.image.naturalHeight !== page.height) {
-        throw new Error(`City page ${page.key}: dimension mismatch`);
       }
       slot.leaf.style.transform = `matrix3d(${page.frameMatrix})`;
       slot.texture.style.transform = `matrix3d(${page.textureMatrix})`;
@@ -241,13 +216,13 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       publishReadyView();
     } catch (error) {
       if (!controller.signal.aborted && !destroyed && generation === slot.generation) {
+        slot.apiHandle?.invalidate();
         errors = [...errors.slice(-7), error.message];
         // Keep the failed key until the view changes; do not retry every frame.
         slot.controller = null;
       }
     } finally {
       activeLoads -= 1;
-      if (!api && blobUrl && (destroyed || generation !== slot.generation)) URL.revokeObjectURL(blobUrl);
       pump();
       publishIdle();
       onStatus();
@@ -316,7 +291,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     clearDesired();
     if (pendingFrame !== null) cleanup(() => cancelAnimationFrame(pendingFrame));
     for (const slot of slots) { cleanup(() => release(slot)); cleanup(() => slot.leaf.remove()); }
-    cleanup(() => apiImages?.destroy());
+    cleanup(() => imageTransport?.destroy());
     if (failures.length) throw new AggregateError(failures, "Prepared page cleanup failed.");
   }
 }

@@ -1,3 +1,5 @@
+import { createApiImageTransport } from "./prepared-map/api-image-transport.mjs";
+import { GEOGRAPHIC_OVERVIEW_LIMITS } from "./geographic-lens-contract.mjs";
 import { createGeographicLensRuntime } from "./geographic-lens-runtime.mjs";
 import { mountPreparedMapPages } from "./prepared-map/city-pages.mjs";
 import { createPreparedDestinations } from "./prepared-destinations.mjs";
@@ -39,7 +41,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
     ready.catch(() => {});
     let mounted = null, orbit = null, currentView = null, reference = null, previousPublication = null, heliocentric = null;
     const pageLayers = new Map();
-    let geographic = null;
+    let geographic = null, geographicImages = null;
     function syncPageUnderlays() {
       if (lifetime.disposed) return;
       // A prepared observation on the shared surface must remain above its
@@ -227,12 +229,21 @@ export function createObjectRuntime(definition, services = nativeServices) {
       startupDecodedAssets = resources.stats().decodes;
       mounted = mountPreparedPresentation(stage, context, definition);
       if (lifetime.disposed) return;
+      if (mounted.pageLayers?.length) {
+        geographicImages = createApiImageTransport();
+        context.own(() => geographicImages.destroy());
+      }
       for (const layer of mounted.pageLayers ?? []) {
+        const images = geographicImages.createScope({
+          maximumEntries: layer.plan.poolSize + (layer.geographic ? GEOGRAPHIC_OVERVIEW_LIMITS.images : 0),
+          maximumDecodedBytes: layer.plan.maximumDecodedBytes,
+        });
+        context.own(() => images.destroy());
         const pages = environment.mountPages({ ...layer, stage, scene: mounted.sceneElement, camera: mounted.cameraElement,
-          own: context.own, onStatus: layer.geographic ? publishGeographicStatus : undefined, onError: fatal });
+          own: context.own, images, onStatus: layer.geographic ? publishGeographicStatus : undefined, onError: fatal });
         pageLayers.set(layer.id, pages);
         if (layer.geographic) {
-          geographic = createGeographicLensRuntime({ pages, capacity: layer.plan, surface: mounted.observationSurface, objectId: definition.id, getEntity: selectedEntity,
+          geographic = createGeographicLensRuntime({ pages, images, capacity: layer.plan, surface: mounted.observationSurface, objectId: definition.id, getEntity: selectedEntity,
             selectBase: id => id === definition.destinations.defaultLens ? selection.dispatch({kind:"lens",id}) : Promise.resolve(false),
             onChange: () => { syncPageUnderlays(); publishControls(); notifySelection(); } });
           context.own(() => geographic.destroy());
@@ -349,7 +360,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
           retainedSunMarkerCount: heliocentric?.retainedSunMarkerCount ?? 0,
           retainedCaptionCount: heliocentric?.retainedCaptionCount ?? 0,
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
-        runtime: Object.freeze({ destinationStats: () => destinations?.stats() ?? null, geographicLens: () => geographic?.state() ?? null, geographicSurface: () => geographic?.stats() ?? null, destinationCatalog: () => definition.destinations?.catalog ?? null, destination: () => destinations?.state() ?? null, lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
+        runtime: Object.freeze({ destinationStats: () => destinations?.stats() ?? null, geographicLens: () => geographic?.state() ?? null, geographicSurface: () => geographic?.stats() ?? null, geographicImages: () => geographicImages?.stats() ?? null, destinationCatalog: () => definition.destinations?.catalog ?? null, destination: () => destinations?.state() ?? null, lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection.state, controls: controls.stats, view: () => currentView,
           presentation: () => Object.freeze({ ...observe().presentation }),
           pages: () => Object.freeze(Object.fromEntries([...pageLayers].map(([id, layer]) => [id, layer.stats()]))) }),

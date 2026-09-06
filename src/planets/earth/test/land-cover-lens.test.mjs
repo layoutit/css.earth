@@ -15,7 +15,8 @@ import { requireGeographicRoots, requireGeographicDirectory } from "../../../pla
 import { readPreparedWmtsBlock } from "../../../platform/prepared-map/prepared-block-transport.mjs";
 import { readPreparedJson } from "../../../platform/prepared-json-transport.mjs";
 import { bindPreparedWmtsRaster, requireWmtsRasterSource, isPreparedProviderWmtsImage } from "../../../platform/prepared-map/wmts-raster-source.mjs";
-import { createApiImageTransport } from "../../../platform/prepared-map/api-image-transport.mjs";
+import { createApiImageTransport as createTransport } from "../../../platform/prepared-map/api-image-transport.mjs";
+const createApiImageTransport = options => createTransport({createImage:page=>({src:"",naturalWidth:page.width,naturalHeight:page.height,async decode(){}}),...options}).createScope({ maximumEntries: 512, maximumDecodedBytes: 128 * 1024 * 1024, idleMilliseconds: 0 });
 
 const publicFile = url => new URL(`../../../../public${url}`, import.meta.url);
 const bytes = await readFile(publicFile(descriptor.package.url)), content = JSON.parse(bytes), plan = content.pages;

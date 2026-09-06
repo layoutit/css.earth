@@ -1,15 +1,17 @@
-import { readPreparedBytes } from "./prepared-json-transport.mjs";
+import { createApiImageTransport } from "./prepared-map/api-image-transport.mjs";
 import { GEOGRAPHIC_OVERVIEW_LIMITS } from "./geographic-lens-contract.mjs";
 
 // A bounded immutable bank on the already-mounted surface. No new scene nodes,
 // geometry generation, canvas or runtime source sampling enter this transport.
-export function createGeographicSurfaceRuntime({ surface, fetcher = fetch, createImage = () => new Image() }) {
+export function createGeographicSurfaceRuntime({ surface, fetcher = fetch, images = null, createImage = () => new Image() }) {
+  const transport = images ? null : createApiImageTransport({ fetchImage: fetcher, createImage });
+  images ??= transport.createScope({ maximumEntries: GEOGRAPHIC_OVERVIEW_LIMITS.images, maximumDecodedBytes: GEOGRAPHIC_OVERVIEW_LIMITS.decodedBytes });
   let revision = 0, controller = null, current = [], destroyed = false, pending = Promise.resolve();
-  let activeLoads = 0, requests = 0, receivedBytes = 0, published = false;
+  let activeLoads = 0, acquisitions = 0, published = false;
   function clear() {
     revision++; controller?.abort(); controller = null; published = false;
     surface?.clear();
-    for (const item of current) { item.image.src = ""; if (item.url) URL.revokeObjectURL(item.url); }
+    for (const item of current) item.handle?.release();
     current = [];
   }
   return Object.freeze({
@@ -29,17 +31,16 @@ export function createGeographicSurfaceRuntime({ surface, fetcher = fetch, creat
       const run = async () => {
         while (cursor < overview.images.length) {
           loadSignal.throwIfAborted();
-          const entry = overview.images[cursor++], item = { ...entry, expected: entry.image, image: createImage(), url: null, ready: false };
-          current.push(item); activeLoads++; requests++;
+          const entry = overview.images[cursor++], item = { ...entry, expected: entry.image, url: null, handle: null, ready: false };
+          current.push(item); activeLoads++; acquisitions++;
           try {
-            const response = await fetcher(entry.image.url, { signal: loadSignal, credentials: "same-origin" });
-            if (!response.ok) throw new Error(`Observation overview: HTTP ${response.status}`);
-            const bytes = await readPreparedBytes(response, entry.image);
-            loadSignal.throwIfAborted(); receivedBytes += bytes.byteLength;
-            item.url = URL.createObjectURL(new Blob([bytes], { type: "image/webp" }));
-            item.image.src = item.url; await item.image.decode(); loadSignal.throwIfAborted();
-            if (item.image.naturalWidth !== entry.image.width || item.image.naturalHeight !== entry.image.height) throw new Error("Observation overview dimensions drifted.");
+            item.handle = images.acquire({ ...entry.image, rasterSource: "prepared-raster@1" }, { signal: loadSignal });
+            item.url = await item.handle.ready;
+            loadSignal.throwIfAborted();
             item.ready = true;
+          } catch (error) {
+            if (!loadSignal.aborted) item.handle?.invalidate();
+            throw error;
           } finally { activeLoads--; }
         }
       };
@@ -58,8 +59,8 @@ export function createGeographicSurfaceRuntime({ surface, fetcher = fetch, creat
       if (current.some(item => !item.ready)) throw new Error("Observation overview is not completely prepared.");
       surface.set(new Map(current.map(item => [item.slot, item.url]))); published = true;
     },
-    stats: () => ({ activeLoads, requests, receivedBytes, retainedImages: current.length, published,
+    stats: () => ({ activeLoads, acquisitions, imageResources: images.stats(), retainedImages: current.length, published,
       reservedDecodedBytes: current.reduce((sum, item) => sum + item.expected.width * item.expected.height * 4, 0) }),
-    destroy() { if (destroyed) return; destroyed = true; clear(); },
+    destroy() { if (destroyed) return; destroyed = true; clear(); transport?.destroy(); },
   });
 }

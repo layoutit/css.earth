@@ -40,6 +40,48 @@ test("range transport rejects a full-file response, shifted range, and corrupt b
   const bytes=Buffer.from(pack.bytes.subarray(ref.offset));bytes[20]^=1;
   await assert.rejects(readPreparedWmtsBlock(new Response(bytes,{status:206,headers:{"Content-Range":`bytes ${ref.offset}-${ref.offset+ref.bytes-1}/${pack.bytes.length}`}}),ref),/hash/);
 });
+test("a short metadata transfer retries once without expanding its reservation or accepting bad bytes",async()=>{
+  const ref=pack.root.directory,range=`bytes=${ref.offset}-${ref.offset+ref.bytes-1}`;
+  const short=()=>new Response(new Uint8Array(0),{status:206,headers:{"Content-Range":`bytes ${ref.offset}-${ref.offset+ref.bytes-1}/${pack.bytes.length}`,"Content-Length":String(ref.bytes)}});
+  const wait=async index=>{for(let i=0;i<100&&index.stats().activeLoads;i++)await new Promise(resolve=>setTimeout(resolve,10));assert.equal(index.stats().activeLoads,0);};
+  for(const alwaysShort of [false,true]){
+    const calls=[];let changes=0;
+    const index=createCityIndex(plan,()=>changes++,async(url,options)=>{
+      calls.push(options);assert.equal(url,ref.url);assert.equal(options.headers.Range,range);
+      assert.equal(index.stats().activeLoads,1);assert.equal(index.stats().reservedDecodedBytes,ref.decodedBytes);
+      return alwaysShort||calls.length===1?short():response(ref);
+    });
+    try{
+      index.update([ref]);await wait(index);
+      assert.equal(calls.length,2);assert.equal(calls[0].cache,undefined);assert.equal(calls[1].cache,"reload");
+      assert.equal(index.stats().requests,2);assert.equal(changes,1);
+      if(alwaysShort){assert.match(index.stats().errors[0],/byte length mismatch/);assert.equal(index.nodes().get(pack.root.key).stub,true);}
+      else{assert.deepEqual(index.stats().errors,[]);assert.equal(index.nodes().get(pack.root.key).stub,undefined);}
+    }finally{index.destroy();}
+  }
+  let requests=0;
+  const corrupt=createCityIndex(plan,()=>{},async()=>{requests++;const bytes=Buffer.from(pack.bytes.subarray(ref.offset,ref.offset+ref.bytes));bytes[20]^=1;return new Response(bytes,{status:206,headers:response(ref).headers});});
+  try{corrupt.update([ref]);await wait(corrupt);assert.equal(requests,1);assert.match(corrupt.stats().errors[0],/hash/);}finally{corrupt.destroy();}
+  requests=0;
+  const expanded=createCityIndex(plan,()=>{},async()=>{requests++;return response(ref);});
+  try{expanded.update([{...ref,decodedBytes:ref.decodedBytes+1}]);await wait(expanded);assert.equal(requests,1);assert.match(expanded.stats().errors[0],/byte length/);}finally{expanded.destroy();}
+});
+test("cancellation while a metadata body is pending never becomes a short-transfer retry",async()=>{
+  const ref=pack.root.directory;let started,body,requests=0;
+  const reading=new Promise(resolve=>started=resolve);
+  const index=createCityIndex(plan,()=>{},async(_url,{signal})=>{
+    requests++;
+    const stream=new ReadableStream({pull(controller){body=controller;started();}});
+    signal.addEventListener("abort",()=>body.close(),{once:true});
+    return new Response(stream,{status:206,headers:response(ref).headers});
+  });
+  try{
+    index.update([ref]);await reading;index.update([]);
+    for(let i=0;i<100&&index.stats().activeLoads;i++)await new Promise(resolve=>setTimeout(resolve,2));
+    assert.equal(index.stats().activeLoads,0);assert.equal(requests,1);
+    assert.deepEqual(index.stats().errors,[]);assert.equal(index.stats().residentDirectories,0);
+  }finally{index.destroy();}
+});
 test("a tile group retains every parent piece until all visible children are available",()=>{
   const corners=[[-100,-100,0],[100,-100,0],[100,100,0],[-100,100,0]],normal=[0,0,1];
   const parent={key:"root",level:5,corners,normal,pages:["apron","strip"],children:["child"],maximumCssSpan:1};

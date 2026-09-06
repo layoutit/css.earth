@@ -1,8 +1,8 @@
 # Geographic streaming
 
-The shared application shell owns the selected entity and its explicit lenses. The existing prepared-map pager owns geographic detail and drawable coverage. One geographic image owner should manage transport and bounded reuse, and the retained CSS renderer applies prepared image handles and transforms.
+The shared application shell owns the selected entity and its explicit lenses. The existing prepared-map pager owns geographic detail and drawable coverage. One geographic image owner manages transport, decoding and bounded reuse, and the retained CSS renderer applies prepared image handles and transforms.
 
-The current implementation is being completed in this order: local publication/loading, shared image reuse, a bounded coarse-to-fine representation, and continuous browser qualification. This is the implementation direction; the coarse representation and native memory outcome still require proof.
+Local publication/loading and shared image reuse are implemented. The remaining work is a bounded coarse-to-fine representation and continuous browser qualification. Controlled native-memory results and the remaining browser-owned residency are reported below.
 
 ## Ownership
 
@@ -35,15 +35,34 @@ Keep coverage nodes, image resources and CSS pieces distinct. Multiple pieces ca
 5. Reserve old plus incoming resources before work begins. Publish the new complete cut and retire replaced leases in one synchronous transaction. A late result cannot publish into a newer slot generation or dataset revision.
 6. Under reversal, prioritize current coverage and visible detail. Useful ancestors and previously displayed descendants may remain while needed; avoid an unconditional ladder of all ancestor loads or unbounded prefetch.
 
+A packed metadata response that ends short despite correct range headers gets one retry, bypassing the HTTP cache with `cache: reload`. Both attempts share the same metadata reservation, load slot and 30-second deadline. Aborted requests do not retry. Repeated short transfers, invalid ranges, hash failures and invalid expanded data remain visible failures with explicit user retry; no unverified metadata is published.
+
 ## Resource limits
 
 Preserve the mounted ceilings and their explicit meanings. Base paging has 512 retained slots, at most 256 displayed pieces, a conservative 128 MiB decoded reservation, and a separate 96-directory / 12 MiB metadata allowance. Observation paging has 32 slots and its existing byte allowance including overview costs. Additional backing must be included in the combined accounting; it cannot obtain invisible capacity by becoming another layer.
 
 Keep separate accounting for conservative per-piece/raster cost, unique image resources, encoded blobs and in-flight payloads. Existing per-piece reservation is deliberately conservative. Sharing an image does not authorize a larger DOM/compositor load. Adding new byte categories under an unchanged number changes admission semantics and must be evaluated explicitly.
 
-The shared resource owner should preserve image identities across revisits only within bounded idle residency and expiry rules. Eviction or scene destruction revokes retained blobs and releases decode owners. Existing loader reservations span complete fetch/decode work; transport telemetry that stops at HTTP headers is not an equivalent concurrency measure. Choose any shared scheduling limit from measured contention rather than introducing an arbitrary global cap.
+The existing image transport now owns one native decoded image and blob URL per verified resource. Base pages, observation pages and observation overviews acquire leases from this owner. A page releases its lease after clearing its CSS binding. Successful load deadlines cannot release a displayed image; cancellation of one pending consumer does not cancel another consumer of the same image. Corruption or a failed decode invalidates the resource for future reuse.
+
+Layer scopes preserve their existing decoded ceilings. Active references are charged per CSS piece; idle resources once per unique image. Base residency admits at most 512 image identities; the observation scope admits its 32 page identities plus the existing 64 overview identities within the same 128 MiB decoded allowance. Idle entries yield in least-recently-used order to visible demand. They expire after two minutes, or earlier when provider freshness expires; `no-store` and `no-cache` responses do not enter idle reuse. Immutable prepared files still require the declared length and SHA-256. An encoded envelope of the decoded limit plus 64 KiB per admitted image bounds pending payload reservations, following the existing PNG transfer ceiling.
+
+Eviction or scene destruction revokes retained blobs and clears native decode owners. Loader reservations and transport counters span complete fetch, body verification and decode work. Existing per-layer loading concurrency remains unchanged; there is no additional global scheduler.
+
+Earth's prepared atmosphere material has a maximum camera zoom of 4. Above that scale, the shared material publisher clears its image and material demand requests no atmosphere rows. Returning to globe scale restores the current row if the user's atmosphere setting remains enabled. The retained element and checkbox preference remain unchanged; other object packages retain their own material behavior.
 
 Application ledgers do not bound Chrome's internal caches. Repeated lens-switch and teardown traces must establish whether reuse produces a native memory plateau. Blob identity reuse alone is not completion evidence.
+
+The 6 September 2026 comparison used real Chrome 152 on an Apple M3 Max, a 1440 × 1000 viewport and nine repeated Earth/land-cover → Buenos Aires/noise round trips. Both control runs disabled atmosphere through its checkbox to isolate geographic images. Retaining blob URLs alone did not stop native cache growth; retaining the decoded native image identity did. During cycles 2–9, sampled `cc/image_memory` allocator accounting was:
+
+| Transport | DPR 1 | DPR 2 |
+| --- | ---: | ---: |
+| Original release-on-exit transport | 761–972 MB | 766–985 MB |
+| Shared decoded image ownership | 575.130–575.139 MB | 575.657–575.926 MB |
+
+At the ninth return, the original transport had created 1,245 / 1,317 blob identities; shared ownership had created 118 / 121. The shared images retained approximately 9.6 / 9.9 MB of encoded bytes within the existing layer scopes. Final visible page keys and imagery hashes matched at both DPRs. City/noise map pixels matched in the saved-view comparison; globe differences were zero pixels at DPR 1 and six at DPR 2, with no source-image change.
+
+These controls do not represent the default atmosphere-enabled application's total residency. With shared image ownership and the zoom cutoff, that application's sampled image-cache peaks were 2.56 / 2.49 GB and still fluctuated during globe travel. Earth-to-Mars teardown returned allocator accounting to approximately 236 MB for the remaining Mars scene. These are Chrome allocator measurements, not physical RAM or a hard application-controlled GPU limit. Uninterrupted travel and its worst presentation intervals remain a separate qualification.
 
 ## Coarse-to-fine representation
 

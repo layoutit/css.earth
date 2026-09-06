@@ -1,5 +1,5 @@
 import { isPreparedCityAssetUrl } from "./city-asset-url.mjs";
-import { isPreparedBlockReference, readPreparedWmtsBlock, preparedReferenceKey } from "./prepared-block-transport.mjs";
+import { isPreparedBlockReference, readPreparedWmtsBlock, preparedReferenceKey, PreparedBlockTransferError } from "./prepared-block-transport.mjs";
 import { requireGeographicDirectory, requireGeographicDirectoryReference } from "./geographic-index-contract.mjs";
 import { bindPreparedWmtsRaster } from "./wmts-raster-source.mjs";
 
@@ -66,7 +66,6 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
     const controller = new AbortController();
     entry.controller = controller;
     activeLoads++;
-    requests++;
     try {
       const { ref } = entry;
       const expectedKeys = plan.imageSource ? new Set([...nodes.values()].filter(node => node.stub &&
@@ -81,17 +80,30 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
       if (ref.offset !== undefined && !ref.url.startsWith(`${plan.assetPath}wmts-${plan.geometryVersion}/`)) throw new Error("Unexpected prepared geometry version.");
       const localMirror=["localhost","127.0.0.1","[::1]"].includes(globalThis.location?.hostname);
       const url=plan.geometryOrigin && packed && !localMirror ? new URL(ref.url,plan.geometryOrigin).href : ref.url;
-      const response = await fetchIndex(url, { signal, ...(ref.offset===undefined?{}:{headers:{Range:`bytes=${ref.offset}-${ref.offset+ref.bytes-1}`}}) });
-      if (!response.ok) throw new Error(`City directory: HTTP ${response.status}`);
       let data;
-      if (packed) data = await readPreparedWmtsBlock(response, ref, signal);
-      else {
-        const bytes = await response.arrayBuffer();
-        if (bytes.byteLength !== ref.bytes) throw new Error("City directory byte size mismatch.");
-        const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
-          .map(byte => byte.toString(16).padStart(2, "0")).join("");
-        if (hash !== ref.sha256) throw new Error("City directory hash mismatch.");
-        data = JSON.parse(new TextDecoder().decode(bytes));
+      for (let attempt = 0; ; attempt++) {
+        requests++;
+        try {
+          const response = await fetchIndex(url, { signal, ...(attempt ? { cache: "reload" } : {}),
+            ...(ref.offset===undefined?{}:{headers:{Range:`bytes=${ref.offset}-${ref.offset+ref.bytes-1}`}}) });
+          if (!response.ok) throw new Error(`City directory: HTTP ${response.status}`);
+          if (packed) data = await readPreparedWmtsBlock(response, ref, signal);
+          else {
+            const bytes = await response.arrayBuffer();
+            if (bytes.byteLength !== ref.bytes) throw new Error("City directory byte size mismatch.");
+            const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
+              .map(byte => byte.toString(16).padStart(2, "0")).join("");
+            if (hash !== ref.sha256) throw new Error("City directory hash mismatch.");
+            data = JSON.parse(new TextDecoder().decode(bytes));
+          }
+          break;
+        } catch (error) {
+          signal.throwIfAborted();
+          // A response can end early despite valid range headers. Retry that
+          // transfer once under the same reservation and deadline; integrity
+          // failures and invalid expanded data still require explicit retry.
+          if (attempt || !(error instanceof PreparedBlockTransferError)) throw error;
+        }
       }
       if (data.schema !== "cssearth-city-index@1" || data.dataset !== (plan.geometryDataset ?? plan.dataset) ||
           !Array.isArray(data.nodes) || data.nodes.length > (packed ? 2133 : 21) ||

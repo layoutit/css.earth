@@ -15,19 +15,29 @@ export function isPreparedBlockReference(ref, assetPath = /^\/scenes\/[a-z][a-z0
       /^wmts-[a-f0-9]{16}\/\d+-\d+-\d+\.pack$/u.test(ref.url.slice(assetPath.length)));
 }
 
-async function readBounded(stream, expected, signal) {
-  if (!stream) throw new Error("Missing prepared block body.");
+export class PreparedBlockTransferError extends Error {
+  constructor(expectedBytes, receivedBytes) {
+    super("Prepared block byte length mismatch.");
+    this.name = "PreparedBlockTransferError";
+    this.expectedBytes = expectedBytes; this.receivedBytes = receivedBytes;
+  }
+}
+
+async function readBounded(stream, expected, signal, transfer = false) {
+  signal?.throwIfAborted();
+  if (!stream) { if (transfer) throw new PreparedBlockTransferError(expected, 0); throw new Error("Missing prepared block body."); }
   const reader = stream.getReader(), parts = []; let size = 0;
   try {
     for (;;) {
       signal?.throwIfAborted();
       const { done, value } = await reader.read();
+      signal?.throwIfAborted();
       if (done) break;
       size += value.byteLength;
       if (size > expected) throw new Error("Prepared block exceeds its declared byte length.");
       parts.push(value);
     }
-    if (size !== expected) throw new Error("Prepared block byte length mismatch.");
+    if (size !== expected) { if (transfer) throw new PreparedBlockTransferError(expected, size); throw new Error("Prepared block byte length mismatch."); }
     const bytes = new Uint8Array(size); let offset = 0;
     for (const part of parts) { bytes.set(part, offset); offset += part.byteLength; }
     return bytes;
@@ -50,7 +60,7 @@ export async function readPreparedWmtsBlock(response, ref, signal) {
       throw new Error("Prepared pack server did not honor the exact byte range.");
     }
   }
-  const encoded = await readBounded(response.body, ref.bytes, signal);
+  const encoded = await readBounded(response.body, ref.bytes, signal, true);
   await verifyHash(encoded, ref.sha256);
   const decoded = await readBounded(new Blob([encoded]).stream().pipeThrough(new DecompressionStream("gzip")), ref.decodedBytes, signal);
   await verifyHash(decoded, ref.decodedSha256);
