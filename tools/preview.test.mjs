@@ -5,6 +5,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { previewSite } from "./preview.mjs";
+import { createServer } from "node:http";
+import { wmtsLocalMirror } from "../src/planets/earth/tools/wmts-local-server.mjs";
 
 test("standard preview serves built routes and bounded prepared ranges outside dist", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-preview-"));
@@ -32,4 +34,38 @@ test("standard preview serves built routes and bounded prepared ranges outside d
     const head = await fetch(url, { method: "HEAD", headers: { Range: "bytes=3-10" } });
     assert.equal(head.status, 206); assert.equal(await head.text(), "");
   } finally { await server?.close(); await rm(root, { recursive: true, force: true }); }
+});
+
+test("missing mirrors stream bounded published ranges and reject malformed upstream responses", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cssearth-remote-geometry-"));
+  const requests = [];
+  let malformed = false, handler;
+  wmtsLocalMirror({ directory: pathToFileURL(root + "/"), assetOrigin: "https://example.invalid",
+    fetcher: async (url, options) => {
+      requests.push({ url: String(url), ...options });
+      return new Response(options.method === "HEAD" ? null : "abcdefgh", {
+        status: 206, headers: { "Content-Range": malformed ? "bytes 0-7/20" : "bytes 3-10/20" },
+      });
+    } }).configureServer({ middlewares: { use: fn => { handler = fn; } } });
+  const server = createServer((req, res) => handler(req, res, () => { res.statusCode = 404; res.end(); }));
+  try {
+    await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
+    const url = `http://127.0.0.1:${server.address().port}/scenes/earth/wmts-1111111111111111/8-86-154.pack`;
+    assert.equal((await fetch(url)).status, 416);
+    assert.equal(requests.length, 0);
+    const response = await fetch(url, { headers: { Range: "bytes=3-10" } });
+    assert.equal(response.status, 206);
+    assert.equal(response.headers.get("content-range"), "bytes 3-10/20");
+    assert.equal(await response.text(), "abcdefgh");
+    assert.equal(requests[0].headers.Range, "bytes=3-10");
+    assert.equal(new URL(requests[0].url).origin, "https://example.invalid");
+    const head = await fetch(url, { method: "HEAD", headers: { Range: "bytes=3-10" } });
+    assert.equal(head.status, 206);
+    assert.equal(await head.text(), "");
+    malformed = true;
+    assert.equal((await fetch(url, { headers: { Range: "bytes=3-10" } })).status, 502);
+  } finally {
+    await new Promise(resolve => server.close(resolve));
+    await rm(root, { recursive: true, force: true });
+  }
 });

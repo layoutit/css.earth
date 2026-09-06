@@ -8,6 +8,8 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "setup": "node tools/setup.mjs",
+    "publish:runtime-assets": "node tools/publish-runtime-assets.mjs",
     "dev": "astro dev --host 127.0.0.1 --port 4210",
     "postinstall": "pnpm build:astronomy && pnpm build:catalog",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
