@@ -267,10 +267,16 @@ function parseSceneRegistration(registration) {
 }
 
 function parseCameraPoseMatrix(value, label) {
-  if (typeof value !== "string" || !value.startsWith("matrix3d(")) {
+  if (typeof value !== "string" || !/^matrix3d\([^()]+\)$/u.test(value)) {
     throw new TypeError(`Cubic-sky camera ${label} matrix is invalid.`);
   }
-  const matrix = new DOMMatrix(value);
+  // CSS-string parsing in browsers rounds to float32. Numeric construction
+  // preserves the saved float64 pose across repeated URL restore cycles.
+  const components = value.slice(9, -1).split(",").map(Number);
+  if (components.length !== 16 || components.some(component => !Number.isFinite(component))) {
+    throw new TypeError(`Cubic-sky camera ${label} matrix is invalid.`);
+  }
+  const matrix = new DOMMatrix(components);
   const values = [
     matrix.m11, matrix.m12, matrix.m13, matrix.m14,
     matrix.m21, matrix.m22, matrix.m23, matrix.m24,

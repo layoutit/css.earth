@@ -12,6 +12,93 @@ import {
   googleEarthInteractionTrackball,
 } from "./google-earth-drag-inertia.mjs";
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "./sphere-drag.mjs";
+import { mountRetainedCubicSky } from "./cubic-sky-runtime.mjs";
+import { PREPARED_MERCURY_STARFIELD } from "../planets/mercury/runtime/preparedStarfield.mjs";
+
+function mountStarFixture(t, { width = 1440, height = 900 } = {}) {
+  const globals = new Map(["document", "HTMLElement", "ResizeObserver"].map(name =>
+    [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
+  let resize, disconnected = false;
+  const viewport = { width, height };
+  class Element {
+    children = [];
+    style = { setProperty(name, value) { this[name] = value; } };
+    dataset = {};
+    className = "";
+    ownerDocument = document;
+    get clientWidth() { return viewport.width; }
+    get clientHeight() { return viewport.height; }
+    get childElementCount() { return this.children.length; }
+    appendChild(child) { this.children.push(child); }
+    prepend(child) { this.children.unshift(child); }
+    remove() {}
+    querySelectorAll(selector) {
+      return this.children.flatMap(child => [
+        ...(child.className.split(" ").includes(selector.slice(1)) ? [child] : []),
+        ...child.querySelectorAll(selector),
+      ]);
+    }
+  }
+  const document = { createElement: () => new Element(),
+    defaultView: { getComputedStyle: () => ({ perspective: "1000px" }) } };
+  Object.assign(globalThis, { document, HTMLElement: Element, ResizeObserver: class {
+    constructor(callback) { resize = callback; }
+    observe() {}
+    disconnect() { disconnected = true; }
+  } });
+  t.after(() => {
+    for (const [name, descriptor] of globals) {
+      if (descriptor) Object.defineProperty(globalThis, name, descriptor);
+      else delete globalThis[name];
+    }
+  });
+  const sky = mountRetainedCubicSky({ host: new Element(), plan: PREPARED_MERCURY_STARFIELD,
+    imageDensity: 1, objectId: "mercury" });
+  t.after(() => sky.destroy());
+  const elements = sky.starGroup.children;
+  // CSS multiplies the stored radius by this shared viewport factor; cube
+  // perspective transport cancels its own scale at the optical axis.
+  const radius = element => parseFloat(element.style["--planet-cubic-sky-star-radius"]) *
+    Number(sky.starGroup.style["--planet-cubic-sky-star-screen-factor"]);
+  return { sky, elements, radius, disconnected: () => disconnected,
+    resize(width, height) { Object.assign(viewport, { width, height }); resize(); } };
+}
+
+test("prepared star radii keep Galaxio's pixel ceiling on mount and resize", t => {
+  const f = mountStarFixture(t);
+  const originalElements = [...f.elements];
+  const originalOpacities = f.elements.map(element => element.style.opacity);
+  const bright = f.elements.find(element => element.dataset.name === "Sirius");
+  const faint = f.elements.find(element => Number(element.dataset.magnitude) === 5);
+  assert.ok(bright && faint, "the real retained catalogue exercises bright and faint points");
+  for (const [width, height, faintRadius] of [[1440, 900, 1.224], [800, 600, .816],
+    [390, 844, .6], [1920, 1080, 1.224]]) {
+    if (width !== 1440) f.resize(width, height);
+    assert.ok(Math.abs(f.radius(bright) - 1.25) < .0001, "a saturated star stays at the 1.25px cap");
+    assert.ok(Math.abs(f.radius(faint) - faintRadius) < .002, "the raw faint radius scales before its pixel floor");
+    assert.ok(f.elements.every(element => f.radius(element) <= 1.2501), "no retained disc exceeds the ceiling");
+  }
+  assert.deepEqual(f.elements, originalElements, "resizing retains the mounted stars");
+  assert.deepEqual(f.elements.map(element => element.style.opacity), originalOpacities,
+    "radius correction preserves the prepared exposure");
+  f.sky.destroy();
+  assert.equal(f.disconnected(), true);
+});
+
+test("session star radius limits survive resize and reset to the prepared ceiling", t => {
+  const f = mountStarFixture(t, { width: 800, height: 600 });
+  const bright = f.elements.find(element => element.dataset.name === "Sirius");
+  f.sky.setStarExposure({ maxRadiusPx: 2, intensityMax: .7 });
+  for (const [width, height] of [[800, 600], [1440, 900], [390, 844]]) {
+    f.resize(width, height);
+    assert.ok(Math.abs(f.radius(bright) - 2) < .0001, "viewport factor cannot enlarge or shrink the session ceiling");
+    assert.equal(bright.style.opacity, "0.7");
+  }
+  f.sky.setStarExposure(null);
+  assert.ok(Math.abs(f.radius(bright) - 1.25) < .0001, "reset applies the prepared ceiling at the current viewport");
+  assert.equal(bright.style.opacity, "0.95");
+  assert.equal(f.sky.starExposure().source, "prepared");
+});
 
 test("release publishes both launch steps once and leaves no idle clock", (t) => {
   const original = globalThis.HTMLElement;
