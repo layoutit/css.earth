@@ -115,9 +115,12 @@ export function parseViewParameters(search) {
   return result;
 }
 
-const SHARED_VERSION = 1;
+const SHARED_VERSION = 2;
+const LEGACY_SHARED_VERSION = 1;
 const MAX_SHARED_BYTES = 4096;
 const SHARED_POSE_SCHEMA = "cssearth-camera-pose@1";
+const POSE_FIELDS = ["scene", "skybox", "sunView"];
+const MATRIX_INDICES = [0, 1, 2, 4, 5, 6, 8, 9, 10];
 
 function record(value, keys, label) {
   if (value === null || typeof value !== "object" || Array.isArray(value) ||
@@ -142,6 +145,7 @@ function poseMatrix(value) {
     matrix[4] * (matrix[1] * matrix[10] - matrix[2] * matrix[9]) +
     matrix[8] * (matrix[1] * matrix[6] - matrix[2] * matrix[5]);
   if (Math.abs(determinant - 1) > 1e-4) invalid("pose");
+  return matrix;
 }
 
 function validateShared(view) {
@@ -152,7 +156,7 @@ function validateShared(view) {
       (camera.distanceKilometers !== undefined && (!Number.isFinite(camera.distanceKilometers) || !(camera.distanceKilometers > 0)))) invalid("camera");
   record(camera.pose, ["schema", "scene", "skybox", "sunView"], "pose");
   if (camera.pose.schema !== SHARED_POSE_SCHEMA) invalid("pose");
-  for (const field of ["scene", "skybox", "sunView"]) poseMatrix(camera.pose[field]);
+  for (const field of POSE_FIELDS) poseMatrix(camera.pose[field]);
   if (view.preparedEpochJdTt !== undefined && view.preparedEpochJdTt !== null && !Number.isFinite(view.preparedEpochJdTt)) invalid("preparedEpochJdTt");
   record(playback, ["times", "speed", "motionRequested"], "playback");
   if (!Array.isArray(playback.times) || !Number.isFinite(playback.speed) || playback.speed < 0 || typeof playback.motionRequested !== "boolean") invalid("playback");
@@ -164,12 +168,33 @@ export function formatSharedView(view) {
   const camera = view.camera, pose = camera.pose, playback = view.playback;
   // Pick the pose explicitly: camera.state() deliberately makes it
   // nonenumerable. Astronomical TT metadata stays separate from WAAPI time.
-  const payload = { v: SHARED_VERSION,
-    c: [camera.controlPitch, camera.controlYaw, camera.zoom, camera.distanceKilometers ?? null, pose.scene, pose.skybox, pose.sunView],
-    p: [playback.times, playback.speed, playback.motionRequested],
-    ...(view.preparedEpochJdTt === undefined ? {} : { e: view.preparedEpochJdTt }) };
-  const bytes = new TextEncoder().encode(JSON.stringify(payload));
-  if (bytes.length > MAX_SHARED_BYTES) invalid();
+  let flags = SHARED_VERSION << 12;
+  const values = [camera.controlPitch, camera.controlYaw, camera.zoom];
+  if (camera.distanceKilometers !== undefined) { flags |= 1; values.push(camera.distanceKilometers); }
+  if (view.preparedEpochJdTt !== undefined) {
+    flags |= 2;
+    if (view.preparedEpochJdTt !== null) { flags |= 4; values.push(view.preparedEpochJdTt); }
+  }
+  if (playback.speed !== 1) { flags |= 8; values.push(playback.speed); }
+  if (playback.motionRequested) flags |= 16;
+  for (const [index, field] of POSE_FIELDS.entries()) {
+    const matrix = poseMatrix(pose[field]), quaternion = matrixQuaternion(matrix);
+    const reconstructed = quaternionMatrix(quaternion);
+    // Prepared registrations can contain rounded, slightly nonorthogonal
+    // values. Keep those nine components exactly instead of normalizing them.
+    if (MATRIX_INDICES.some(i => Math.abs(matrix[i] - reconstructed[i]) > 1e-12)) {
+      flags |= 1 << (5 + index);
+      values.push(...MATRIX_INDICES.map(i => matrix[i]));
+    } else values.push(...quaternion);
+  }
+  const length = 4 + 8 * (values.length + playback.times.length);
+  if (length > MAX_SHARED_BYTES) invalid();
+  const bytes = new Uint8Array(length), data = new DataView(bytes.buffer);
+  data.setUint16(0, flags);
+  let offset = 2;
+  for (const value of values) { data.setFloat64(offset, value); offset += 8; }
+  data.setUint16(offset, playback.times.length); offset += 2;
+  for (const time of playback.times) { data.setFloat64(offset, time); offset += 8; }
   return `v=${base64url(bytes)}`;
 }
 
@@ -179,14 +204,19 @@ export function parseSharedView(search) {
   if (query.size !== 1 || !query.has("v")) invalid();
   const token = query.get("v");
   if (!/^[A-Za-z0-9_-]+$/u.test(token) || token.length < 3 || token.length > Math.ceil(MAX_SHARED_BYTES * 4 / 3) || token.length % 4 === 1) invalid();
-  let bytes, payload;
+  let bytes;
   try {
     bytes = Uint8Array.from(atob(token.replaceAll("-", "+").replaceAll("_", "/")), char => char.charCodeAt(0));
     if (bytes.length > MAX_SHARED_BYTES || base64url(bytes) !== token) invalid();
-    payload = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
   } catch { invalid(); }
+  return bytes[0] === 0x7b ? parseLegacyShared(bytes) : parseBinaryShared(bytes);
+}
+
+function parseLegacyShared(bytes) {
+  let payload;
+  try { payload = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)); } catch { invalid(); }
   record(payload, ["v", "c", "p", "e"], "view");
-  if (payload.v !== SHARED_VERSION) throw new Error("This shared view link uses an unsupported version.");
+  if (payload.v !== LEGACY_SHARED_VERSION) throw new Error("This shared view link uses an unsupported version.");
   if (!Array.isArray(payload.c) || payload.c.length !== 7 || !Array.isArray(payload.p) || payload.p.length !== 3) invalid();
   const [controlPitch, controlYaw, zoom, distanceKilometers, scene, skybox, sunView] = payload.c;
   const [times, speed, motionRequested] = payload.p;
@@ -197,4 +227,73 @@ export function parseSharedView(search) {
     ...(Object.hasOwn(payload, "e") ? { preparedEpochJdTt: payload.e } : {}) };
   validateShared(view);
   return view;
+}
+
+function parseBinaryShared(bytes) {
+  if (bytes.length < 2) invalid();
+  const data = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), flags = data.getUint16(0);
+  if (flags >>> 12 !== SHARED_VERSION) throw new Error("This shared view link uses an unsupported version.");
+  if (flags & 0x0f00 || (flags & 6) === 4) invalid();
+  let offset = 2;
+  const read = () => {
+    if (offset + 8 > bytes.length) invalid();
+    const value = data.getFloat64(offset); offset += 8;
+    if (!Number.isFinite(value)) invalid();
+    return value;
+  };
+  const camera = { controlPitch: read(), controlYaw: read(), zoom: read() };
+  if (flags & 1) camera.distanceKilometers = read();
+  const view = { camera };
+  if (flags & 2) view.preparedEpochJdTt = flags & 4 ? read() : null;
+  const speed = flags & 8 ? read() : 1;
+  camera.pose = { schema: SHARED_POSE_SCHEMA };
+  for (const [index, field] of POSE_FIELDS.entries()) {
+    let matrix;
+    if (flags & (1 << (5 + index))) {
+      matrix = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+      for (const component of MATRIX_INDICES) matrix[component] = read();
+    } else {
+      const quaternion = [read(), read(), read(), read()];
+      if (quaternion.some(value => Math.abs(value) > 1) || Math.abs(Math.hypot(...quaternion) - 1) > 1e-12) invalid("pose");
+      matrix = quaternionMatrix(quaternion);
+    }
+    camera.pose[field] = serializeMatrix(matrix);
+  }
+  if (offset + 2 > bytes.length) invalid();
+  const count = data.getUint16(offset); offset += 2;
+  if (offset + count * 8 !== bytes.length) invalid();
+  view.playback = { times: Array.from({ length: count }, read), speed, motionRequested: Boolean(flags & 16) };
+  validateShared(view);
+  return view;
+}
+
+function serializeMatrix(matrix) {
+  return `matrix3d(${matrix.map(value => Math.abs(value) < 1e-12 ? 0 : Number(value.toFixed(12))).join(",")})`;
+}
+
+function quaternionMatrix([x, y, z, w]) {
+  return [1 - 2 * (y * y + z * z), 2 * (x * y + z * w), 2 * (x * z - y * w), 0,
+    2 * (x * y - z * w), 1 - 2 * (x * x + z * z), 2 * (y * z + x * w), 0,
+    2 * (x * z + y * w), 2 * (y * z - x * w), 1 - 2 * (x * x + y * y), 0,
+    0, 0, 0, 1];
+}
+
+function matrixQuaternion(m) {
+  const trace = m[0] + m[5] + m[10];
+  let x, y, z, w;
+  if (trace > 0) {
+    const s = Math.sqrt(trace + 1) * 2;
+    w = s / 4; x = (m[6] - m[9]) / s; y = (m[8] - m[2]) / s; z = (m[1] - m[4]) / s;
+  } else if (m[0] > m[5] && m[0] > m[10]) {
+    const s = Math.sqrt(1 + m[0] - m[5] - m[10]) * 2;
+    w = (m[6] - m[9]) / s; x = s / 4; y = (m[4] + m[1]) / s; z = (m[8] + m[2]) / s;
+  } else if (m[5] > m[10]) {
+    const s = Math.sqrt(1 + m[5] - m[0] - m[10]) * 2;
+    w = (m[8] - m[2]) / s; x = (m[4] + m[1]) / s; y = s / 4; z = (m[9] + m[6]) / s;
+  } else {
+    const s = Math.sqrt(1 + m[10] - m[0] - m[5]) * 2;
+    w = (m[1] - m[4]) / s; x = (m[8] + m[2]) / s; y = (m[9] + m[6]) / s; z = s / 4;
+  }
+  const norm = Math.hypot(x, y, z, w);
+  return [x / norm, y / norm, z / norm, w / norm];
 }

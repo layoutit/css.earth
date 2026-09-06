@@ -111,12 +111,18 @@ const shared = () => ({
   playback: { times: [12345.6789, 534.125, 98231.15], speed: 4, motionRequested: true },
 });
 const sharedQuery = payload => queryFor(Buffer.from(JSON.stringify(payload)));
+const legacyPayload = input => ({ v: 1,
+  c: [input.camera.controlPitch, input.camera.controlYaw, input.camera.zoom, input.camera.distanceKilometers ?? null,
+    input.camera.pose.scene, input.camera.pose.skybox, input.camera.pose.sunView],
+  p: [input.playback.times, input.playback.speed, input.playback.motionRequested],
+  ...(input.preparedEpochJdTt === undefined ? {} : { e: input.preparedEpochJdTt }) });
 
 test("shared camera roundtrip preserves all independent tumble matrices, visual times and fixed TT epoch", () => {
   const input = shared();
   const query = formatSharedView(input);
   assert.deepEqual(parseSharedView(`?${query}`), input);
-  assert.ok(unpack(query).length < 1024);
+  assert.equal(unpack(query).readUInt16BE(0) >>> 12, 2);
+  assert.ok(query.length < 350, `compact query has ${query.length} characters`);
   assert.notEqual(input.camera.pose.scene, input.camera.pose.skybox);
   assert.notEqual(input.camera.pose.scene, input.camera.pose.sunView);
   assert.equal(parseSharedView("") , null);
@@ -153,7 +159,7 @@ test("shared payload validates shape, values and pure rotation matrices before e
     value => { value.camera.extra = 3; }, value => { value.playback.extra = true; },
   ];
   for (const mutate of malformed) { const input = shared(); mutate(input); assert.throws(() => formatSharedView(input)); }
-  const payload = JSON.parse(unpack(formatSharedView(shared())).toString());
+  const payload = legacyPayload(shared());
   for (const change of [value => { value.v = 2; }, value => { value.c.pop(); }, value => { value.p.push(0); },
     value => { value.c[2] = null; }, value => { value.p[0] = [null]; }, value => { value.p[0] = [-1]; }, value => { value.e = "2026-09-04"; },
     value => { value.x = 0; }, value => { value.c[6] = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,5,0,0,1)"; }]) {
@@ -183,4 +189,117 @@ test("shared links reject malformed base64, noncanonical padding, truncation and
   const alternate = canonical.slice(0, -1) + alphabet[alphabet.indexOf(canonical.at(-1)) | 1];
   assert.deepEqual(Buffer.from(alternate, "base64url"), Buffer.from(canonical, "base64url"));
   assert.throws(() => parseSharedView(`v=${alternate}`));
+});
+
+// Captured from actual off-center pointer drags and wheel input, including
+// the prepared sky registration's small nonorthogonal rounding residual.
+const browserView = () => ({
+  camera: { controlPitch: -8.344334516874545, controlYaw: 15.28337057607725,
+    zoom: 0.3768049762789915, distanceKilometers: 39051.89269356484,
+    pose: { schema: "cssearth-camera-pose@1",
+      scene: "matrix3d(0.951326031283,0.251717501181,-0.177811928175,0,0.137478049482,0.169758540011,0.975849283447,0,0.275823436483,-0.952796063013,0.126890087063,0,0,0,0,1)",
+      skybox: "matrix3d(-0.943384469895,-0.277813597555,0.181232789273,0,-0.222274708501,0.935020521597,0.276279625676,0,-0.246210605565,0.220354464937,-0.943834784798,0,0,0,0,1)",
+      sunView: "matrix3d(0.951326031283,0.251717501181,0.177811928175,0,-0.071981591576,0.74248809011,-0.66598054515,0,-0.29966219761,0.620765443339,0.724467274402,0,0,0,0,1)" } },
+  preparedEpochJdTt: 2461286.5,
+  playback: { times: [216.72099993674453], speed: 1, motionRequested: false },
+});
+const matrixValues = matrix => matrix.slice(9, -1).split(",").map(Number);
+function assertSharedPrecision(actual, expected) {
+  assert.deepEqual(actual.playback, expected.playback);
+  assert.equal(actual.preparedEpochJdTt, expected.preparedEpochJdTt);
+  for (const key of ["controlPitch", "controlYaw", "zoom", "distanceKilometers"]) assert.equal(actual.camera[key], expected.camera[key]);
+  for (const key of ["scene", "skybox", "sunView"]) {
+    const a = matrixValues(actual.camera.pose[key]), b = matrixValues(expected.camera.pose[key]);
+    assert.ok(Math.max(...a.map((value, index) => Math.abs(value - b[index]))) <= 1e-10, `${key} changed orientation`);
+  }
+}
+
+test("actual legacy Mercury link shrinks from835 to251token characters with no drift over100roundtrips", () => {
+  const original = browserView(), legacy = sharedQuery(legacyPayload(original));
+  assert.equal(legacy.slice(2).length, 835);
+  assert.deepEqual(parseSharedView(legacy), original, "previous JSON links must retain their original meaning");
+  const compact = formatSharedView(parseSharedView(legacy));
+  assert.equal(compact.slice(2).length, 251);
+  assert.ok(compact.length < 350);
+  assert.equal(unpack(compact).readUInt16BE(0) & 0xe0, 0x40, "only the rounded sky registration needs the nine-component escape");
+  let next = original;
+  for (let index = 0; index < 100; index += 1) {
+    next = parseSharedView(formatSharedView(next));
+    assertSharedPrecision(next, original);
+  }
+});
+
+test("binary defaults, field ordering, Float64 precision and all three quaternion slots are explicit", () => {
+  const input = shared();
+  delete input.camera.distanceKilometers;
+  delete input.preparedEpochJdTt;
+  input.playback = { times: [], speed: 1, motionRequested: false };
+  for (const field of ["scene", "skybox", "sunView"]) input.camera.pose[field] = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
+  const bytes = unpack(formatSharedView(input));
+  assert.equal(bytes.length, 124);
+  assert.equal(bytes.readUInt16BE(0), 0x2000);
+  assert.equal(bytes.readDoubleBE(2), input.camera.controlPitch);
+  assert.equal(bytes.readDoubleBE(10), input.camera.controlYaw);
+  assert.equal(bytes.readDoubleBE(18), input.camera.zoom);
+  for (const offset of [26, 58, 90]) {
+    assert.deepEqual([0, 8, 16, 24].map(delta => bytes.readDoubleBE(offset + delta)), [0, 0, 0, 1]);
+  }
+  assert.equal(bytes.readUInt16BE(122), 0);
+  assert.deepEqual(parseSharedView(queryFor(bytes)), input);
+});
+
+test("quaternion branches retain independent axis-angle rotations including every180degree axis", () => {
+  // Independent Rodrigues formula: column-major CSS matrices from axis-angle,
+  // without importing or copying the codec's quaternion conversion.
+  const rotation = (axis, radians) => {
+    const length = Math.hypot(...axis), [x, y, z] = axis.map(value => value / length);
+    const c = Math.cos(radians), s = Math.sin(radians), t = 1 - c;
+    return `matrix3d(${[t*x*x+c, t*x*y+s*z, t*x*z-s*y, 0,
+      t*x*y-s*z, t*y*y+c, t*y*z+s*x, 0, t*x*z+s*y, t*y*z-s*x, t*z*z+c, 0,
+      0, 0, 0, 1].map(value => Math.abs(value) < 1e-15 ? 0 : value).join(",")})`;
+  };
+  for (let index = 0; index < 120; index += 1) {
+    const input = shared(), axes = index < 3 ? [[1, 0, 0], [0, 1, 0], [0, 0, 1]] :
+      [[Math.sin(index), Math.cos(index * 3), Math.sin(index * 7)], [1, index / 7, -3], [-2, 3, index / 9]];
+    for (const [slot, field] of ["scene", "skybox", "sunView"].entries()) input.camera.pose[field] = rotation(axes[slot], index < 3 ? Math.PI : index / 13 + slot / 7);
+    const query = formatSharedView(input);
+    assert.equal(unpack(query).readUInt16BE(0) & 0xe0, 0, "proper rotations use quaternion storage");
+    assertSharedPrecision(parseSharedView(query), input);
+  }
+});
+
+test("rounded nonorthogonal rotations retain all nine values and still fit under500characters", () => {
+  const input = shared();
+  input.camera.pose.skybox = input.camera.pose.scene;
+  input.camera.pose.sunView = input.camera.pose.scene;
+  const query = formatSharedView(input);
+  assert.equal(unpack(query).readUInt16BE(0) & 0xe0, 0xe0);
+  assert.ok(query.length < 500);
+  assert.deepEqual(parseSharedView(query), input);
+});
+
+test("binary decoder rejects reserved bits, unknown versions, invalid quaternions and everytruncation", () => {
+  const bytes = unpack(formatSharedView(browserView()));
+  for (let length = 0; length < bytes.length; length += 1) assert.throws(() => parseSharedView(queryFor(bytes.subarray(0, length))), undefined, `truncation at ${length}`);
+  for (const bit of [0x100, 0x200, 0x400, 0x800]) {
+    const bad = Buffer.from(bytes); bad.writeUInt16BE(bad.readUInt16BE(0) | bit, 0);
+    assert.throws(() => parseSharedView(queryFor(bad)));
+  }
+  for (const flags of [0x3047, 0x2045]) {
+    const bad = Buffer.from(bytes); bad.writeUInt16BE(flags, 0);
+    assert.throws(() => parseSharedView(queryFor(bad)));
+  }
+  // Real fixture: header, three controls, distance and epoch precede scene q.
+  for (const value of [NaN, Infinity, -Infinity, 2, 0.5]) {
+    const bad = Buffer.from(bytes); bad.writeDoubleBE(value, 42);
+    assert.throws(() => parseSharedView(queryFor(bad)), undefined, `invalid quaternion component ${value}`);
+  }
+  const zero = Buffer.from(bytes); zero.fill(0, 42, 74);
+  assert.throws(() => parseSharedView(queryFor(zero)));
+  const invalidMatrix = Buffer.from(bytes); invalidMatrix.writeDoubleBE(2, 74);
+  assert.throws(() => parseSharedView(queryFor(invalidMatrix)));
+  const count = Buffer.from(bytes); count.writeUInt16BE(65535, bytes.length - 10);
+  assert.throws(() => parseSharedView(queryFor(count)));
+  const negativeTime = Buffer.from(bytes); negativeTime.writeDoubleBE(-1, bytes.length - 8);
+  assert.throws(() => parseSharedView(queryFor(negativeTime)));
 });
