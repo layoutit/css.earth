@@ -46,11 +46,13 @@ try {
     stageCount: 1,
     cameraCount: 1,
     stageChildCount: 6,
-    stageElementCount: 4992,
+    // Removed passive star labels: 450 <s> measures + one <s> label + its <div>.
+    // None of the 450 catalogue stars is a supported navigation destination.
+    stageElementCount: 4540,
     skyboxCount: 1,
     skyboxFaceCount: 6,
     sunBillboardCount: 1,
-    retainedLeafCount: 4522, // Body/material plus fixed sky, marker and orbit pools.
+    retainedLeafCount: 4071, // Same rendered pools, minus the 451 passive-label <s> leaves.
     stableDomIdentity: true,
     animationCount: 1,
     canvasCount: 0,
@@ -79,7 +81,12 @@ try {
   assert.ok(Math.abs(defaultLight.sunViewDirection[2]) < 0.05);
   assert.ok(defaultLight.sunViewDirection[0] < -0.99);
 
-  assert.equal(await page.locator("#venus-surface-photographs").count(), 0);
+  // The shared shell retains the source-authored Venera gallery, initially closed.
+  // Its photographs must not be visible before the gallery is opened.
+  const surfacePhotographs = page.locator("#venus-surface-photographs");
+  assert.equal(await surfacePhotographs.getAttribute("open"), null);
+  assert.equal(await surfacePhotographs.locator(".planet-gallery").isVisible(), false);
+  assert.equal(await surfacePhotographs.locator(".planet-gallery-image:visible").count(), 0);
   assert.equal(await page.evaluate(() => window.__venus.assertStableDomIdentity()), true);
   assert.equal((await runtimeState(page)).stageElementCount,
     baseline.stageElementCount);

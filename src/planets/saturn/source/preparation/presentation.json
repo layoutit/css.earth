@@ -39,8 +39,8 @@
   },
   "stylesheet": {
     "path": "src/renderers/css/styles/saturn-surfaces.css",
-    "sha256": "d147bebb156e40780984ed2c1e47eccc1131b48ac9ec94576f4b42ea919f8f40",
-    "bytes": 8584,
+    "sha256": "348e75eca14d710ac7fcf14d96b15e9107cfadf13b0c8fdd80cd6e9824308db5",
+    "bytes": 8576,
     "scope": ":where(.planet-stage[data-object-id=\"saturn\"]) "
   }
 }

@@ -1,58 +1,32 @@
-import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import test from "node:test";
-import { PREPARED_PRESENTATION } from "../runtime/preparedPresentation.mjs";
-import { PREPARED_SATURN_SCENE } from "../runtime/preparedScene.mjs";
-import { PREPARED_SATURN_RUNTIME_SCENE } from
-  "../runtime/preparedSceneRuntime.mjs";
-
-test("mounts prepared PolyCSS texture leaves under retained planet groups", async () => {
-  const [client, css, scenePreparer, moonPreparer, preparedSceneSource,
-    preparedRuntimeSceneSource, preparedMoonSource] = await Promise.all([
-    readFile(new URL("../runtime/definition.mjs", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
-    readFile(new URL("../tools/prepare-scene.mjs", import.meta.url), "utf8"),
-    readFile(new URL("../tools/prepare-moons.mjs", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/preparedScene.mjs", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/preparedSceneRuntime.mjs", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/preparedMoons.mjs", import.meta.url), "utf8"),
-  ]);
-
-  assert.equal(PREPARED_SATURN_RUNTIME_SCENE.schema,
-    "csssaturn-prepared-runtime-scene@1");
-  assert.equal(PREPARED_SATURN_RUNTIME_SCENE.transport.sourceSchema,
-    PREPARED_SATURN_SCENE.schema);
-  assert.ok(preparedRuntimeSceneSource.length < preparedSceneSource.length * 0.75);
-  assert.deepEqual(
-    Object.keys(PREPARED_SATURN_RUNTIME_SCENE.bodyBands[0].leaves[0]).sort(),
-    ["className", "projectiveTextureLayer", "style", "tag"],
-  );
-
-  assert.match(client, /preparedPresentation\.mjs/u);
-  const nodes = PREPARED_PRESENTATION.tree.nodes;
-  assert.equal(nodes.filter(node => node.className?.split(/\s+/).includes("polycss-camera")).length, 1);
-  assert.equal(nodes.filter(node => node.className?.split(/\s+/).includes("saturn-cutaway")).length, 1);
-  assert.ok(nodes.some(node => node.className === "polycss-projective-texture"));
-  assert.doesNotMatch(client, /createPresentation|publishFrame|resolvePresentation|document|createElement/);
-  assert.doesNotMatch(client,
-    /bodyVisibility|createPreparedBodyVisibility/u);
-  assert.doesNotMatch(client,
-    /canvas|getContext\(|new DOMMatrix|loadPreparedOrbitBank|DecompressionStream/u);
-  assert.doesNotMatch(client, /PREPARED_SATURN_MOON|saturn-moon/u);
-  assert.equal((client.match(/devicePixelRatio/gu) ?? []).length, 0);
-
-  assert.match(css, /\.saturn-ring-plane > s/u);
-  assert.match(css, /\.saturn-body\s*\{/u);
-  assert.match(css, /\.planet-stage\.saturn-hide-rings/u);
-  assert.match(css, /\.planet-stage\.saturn-hide-shadows/u);
-  assert.doesNotMatch(css, /saturn-moon/u);
-  assert.doesNotMatch(css,
-    /filter\s*:|mask(?:-image)?\s*:|clip-path\s*:|mix-blend-mode\s*:|gradient\(/u);
-
-  assert.match(scenePreparer, /function preparedAtlasDimensions\(/u);
-  assert.match(moonPreparer, /function preparedAtlasDimensions\(/u);
-  assert.doesNotMatch(
-    preparedSceneSource + preparedMoonSource,
-    /--polycss-atlas-(?:width|height):64px|--saturn-surface-size/u,
-  );
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import test from 'node:test';
+import {readPreparedFixture} from '../../fixtures.mjs';
+const [presentation,scene]=await Promise.all(['runtime','scene'].map(name=>readPreparedFixture('saturn',name)));
+test('mounts prepared PolyCSS texture leaves under retained planet groups',async()=>{
+ const [css,preparer]=await Promise.all([
+  readFile(new URL('../../../../src/renderers/css/styles/saturn-surfaces.css',import.meta.url),'utf8'),
+  readFile(new URL('../../../../tools/objects/material-composition/layered-oblate.mjs',import.meta.url),'utf8'),
+ ]);
+ assert.equal(scene.schema,'csssaturn-prepared-runtime-scene@1');
+ assert.equal(scene.transport.sourceSchema,'csssaturn-prepared-retained-scene@30');
+ assert.equal(scene.transport.runtimeSourceParsing,false);
+ assert.deepEqual(Object.keys(scene.bodyBands[0].leaves[0]).sort(),['className','projectiveTextureLayer','style','tag']);
+ const nodes=presentation.tree.nodes;
+ assert.equal(nodes.filter(node=>node.className?.split(/\s+/).includes('polycss-camera')).length,1);
+ assert.equal(nodes.filter(node=>node.className?.split(/\s+/).includes('saturn-cutaway')).length,1);
+ assert.ok(nodes.some(node=>node.className==='polycss-projective-texture'));
+ const data=JSON.stringify(presentation);
+ assert.doesNotMatch(data,/bodyVisibility|createPreparedBodyVisibility|PREPARED_SATURN_MOON|saturn-moon|devicePixelRatio/);
+ assert.doesNotMatch(data,/canvas|getContext\(|new DOMMatrix|loadPreparedOrbitBank|DecompressionStream/);
+ assert.match(css,/\.saturn-ring-plane > s/);
+ assert.match(css,/\.saturn-body\s*\{/);
+ assert.match(css,/\.planet-stage:where\(\[data-object-id="saturn"\]\)\.saturn-hide-rings/);
+ assert.match(css,/\.planet-stage:where\(\[data-object-id="saturn"\]\)\.saturn-hide-shadows/);
+ assert.doesNotMatch(css,/saturn-moon|filter\s*:|mask(?:-image)?\s*:|clip-path\s*:|mix-blend-mode\s*:|gradient\(/);
+ assert.match(preparer,/function preparedAtlasDimensions\(/);
+ assert.doesNotMatch(JSON.stringify(scene),/--polycss-atlas-(?:width|height):64px|--saturn-surface-size/);
+ // Dormant moon and face-visibility preparation no longer belongs to consumer JSON.
+ assert.equal('planetFaceRetention' in scene,false);
+ assert.equal('moons' in scene,false);
 });

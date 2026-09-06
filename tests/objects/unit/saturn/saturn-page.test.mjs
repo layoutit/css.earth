@@ -2,8 +2,10 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { PREPARED_SATURN_PANEL } from "../site/preparedPanel.mjs";
-import { PREPARED_SATURN_TITLE } from "../site/preparedTitle.mjs";
+import {readPreparedFixture} from '../../fixtures.mjs';
+const PREPARED_SATURN_PANEL=await readPreparedFixture('saturn','content');
+const PREPARED_SATURN_TITLE=PREPARED_SATURN_PANEL.title;
+const moonCatalog=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/source/moons/saturn-moons.json',import.meta.url),'utf8'));
 
 test("publishes the prepared Saturn shell content", () => {
   assert.equal(PREPARED_SATURN_TITLE.label, "Saturn");
@@ -21,8 +23,8 @@ test("publishes the prepared Saturn shell content", () => {
     { id: "ring-span", label: "Ring span", value: "282,000 km" },
     { id: "ring-thickness", label: "Ring thickness", value: "10 m" },
   ]);
-  assert.equal(PREPARED_SATURN_PANEL.moonCountPolicy.editorial, 274);
-  assert.equal(PREPARED_SATURN_PANEL.moonCountPolicy.rendered, 293);
+  assert.equal(PREPARED_SATURN_PANEL.facts.find(fact=>fact.id==='moon-count').value,'274');
+  assert.equal(moonCatalog.counts.confirmed,293);
 });
 
 test("publishes source-bound Saturn atmosphere chart artifacts", async () => {
