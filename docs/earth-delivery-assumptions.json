@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-09-06",
+  "currency": "USD",
+  "daysPerMonth": 30,
+  "dailySessions": [100, 1000, 10000],
+  "edgeHitFractions": [0, 0.9],
+  "coldSessionFraction": 1,
+  "additionalRetainedStorageGB": 0,
+  "freeTierAvailable": true,
+  "monthlyDollarCeiling": null,
+  "r2Standard": {
+    "gbMonth": 0.015,
+    "millionWrites": 4.5,
+    "millionReads": 0.36,
+    "egressPerGB": 0,
+    "freeGBMonth": 10,
+    "freeWrites": 1000000,
+    "freeReads": 10000000
+  },
+  "sources": {
+    "r2": "https://developers.cloudflare.com/r2/pricing/",
+    "pages": "https://developers.cloudflare.com/pages/functions/pricing/",
+    "providerService": "https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html",
+    "providerTerms": "https://terrascope.be/en/terms-use"
+  }
+}
