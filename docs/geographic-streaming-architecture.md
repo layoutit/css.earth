@@ -121,7 +121,7 @@ and raw differences are preserved. This is calibrated screenshot agreement, not
 universal pixel parity. Existing PolyCSS seam bleed remains unchanged.
 
 The normal release does not yet include this backing. Global preparation,
-source-boundary crossings and the complete built entity/lens/history journey
+and the complete built entity/lens/history journey
 remain required before enabling it.
 
 Continuous fixture runs cover regular and antimeridian regions,
@@ -142,8 +142,67 @@ Both southern interior runs instead carry prepared empty-source records and
 retain the base map; they cancel the delayed directory when it becomes obsolete.
 That is source-empty behavior, not proof of useful fine imagery in Antarctica.
 The fixture's base-only cold/warm transition observations last approximately one
-sample in the other regions. The source-boundary crossing and global release
-still need qualification, as does the complete built entity/lens/history journey.
+sample in the other regions. Additional real pointer crossings of the provider's
+85.0511287798066-degree boundary pass in both hemispheres at DPR 1/2. Eight
+initial/settled checkpoints preserve the fine selection and actual published
+fine keys. Northern views can still include covered pixels below that latitude;
+the southern fixture remains source-empty. Global release and the complete built
+entity/lens/history journey still need qualification.
+
+### Reproducible global coarse preparation
+
+The preparation command uses the existing pinned source inventory and accepted
+face geometry. It prunes only conclusive geometric or inventory absence; a
+downsampled transparent image cannot prove that finer source islands are absent.
+Source mip selection measures the prepared texel footprints, and acquisition
+uses the provider's low-resolution WMTS levels. It does not rebuild the fine
+geometry or download the full raw COG dataset.
+
+Run these phases from the repository root:
+
+```sh
+pnpm prepare:earth-coarse --phase=plan
+pnpm prepare:earth-coarse --phase=acquire
+pnpm prepare:earth-coarse --phase=prepare
+```
+
+Planning writes `.local/coarse-global/<plan-version>/plan.json` and checkpoints
+after every 64 pages. Acquisition retains per-tile receipts, hashes and source
+headers. `--seed-manifest=<pinned-wmts-manifest.json>` reuses verified files by
+hardlink when possible; `--offline` verifies the complete input closure without
+network access. It uses at most four simultaneous transfers, 2 GiB of pinned
+input bytes, 320 KiB per response and an 8 GiB free-space reserve. Provider errors
+and corrupt cached bytes remain explicit failures. Partial completion resumes
+from completed receipts.
+
+The current complete plan contains 450 roots, 6,914 pages, and 12,034 source tile
+addresses at WMTS levels 2–8. The largest planned page uses 32 source tiles
+(8 MiB decoded). These are preparation counts, not runtime requests per session,
+storage measurements, or a claim of useful imagery at every coordinate.
+
+Preparation preserves source row orientation and checks every nontransparent
+pixel through lossless encoding. It writes aligned crops and retirement
+certificates into the existing page/index format. Images and directories are
+content addressed; a resumed preparation preserves the same canonical manifest.
+The source decode cache stays within 48 MiB, output assets within 1 GiB. The
+completed release is under `releases/<release-version>/` beneath the plan
+directory; `prepared.json` identifies that local directory.
+
+Publish only the new release's files through the existing Earth bucket workflow,
+then integrate its verified manifest:
+
+```sh
+pnpm publish:earth-coarse <prepared-release-directory> --dry-run
+pnpm publish:earth-coarse <prepared-release-directory>
+pnpm integrate:earth-coarse <prepared-release-directory>
+```
+
+`--verify-only` can finish verification after an interrupted upload. Integration
+requires the public delivery receipt, exact fine root closure and geometry
+version. Regenerating the same fine release preserves its backing; changing that
+release requires new backing certificates. The existing image owner, metadata
+queue, retained slots and runtime budgets remain shared. Publishing data does
+not deploy the site or qualify the complete browser journey.
 
 ## Traversal dependency
 
