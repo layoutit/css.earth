@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-static-celestial@1",
+  "id": "pluto",
+  "includeSun": false,
+  "sourceSchema": "cssearth-prepared-star-source@1",
+  "directionalSun": {
+    "meanHeliocentricDistanceAu": 39
+  }
+}

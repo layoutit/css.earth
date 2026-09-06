@@ -3,10 +3,9 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
-import { PREPARED_NEPTUNE_LENSES } from "../../src/planets/neptune/runtime/preparedLenses.mjs";
-import { runtimeDefinition as SATURN } from "../../src/planets/saturn/runtime/definition.mjs";
-import { selectedPreparedVariant } from "../../src/platform/prepared-presentation.mjs";
-import { preparedMaterialState } from "../../src/platform/prepared-material.mjs";
+import NEPTUNE from "../../src/planets/neptune/prepared/runtime.json" with { type: "json" };
+import SATURN from "../../src/planets/saturn/prepared/runtime.json" with { type: "json" };
+import { selectedPreparedVariant, preparedMaterialState } from "../../src/renderers/css/dist/testing.js";
 import { waitForAuditPreparedReadiness } from "../../tools/audit-prepared-readiness.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
@@ -15,11 +14,12 @@ assert.ok(["all", "saturn", "neptune"].includes(selected));
 const output = resolve(process.argv[4] ?? `output/playwright/runtime-complex-${Date.now()}`);
 await mkdir(output, { recursive: true });
 const report = { capturedAt: new Date().toISOString(), baseUrl, source: {}, cases: [] };
-for (const file of ["site/scene-router.mjs", "src/platform/object-selection-runtime.mjs",
-  "src/planets/saturn/runtime/client.mjs", "src/planets/neptune/runtime/client.mjs",
-  "src/planets/saturn/runtime/definition.mjs", "src/planets/saturn/runtime/preparedPresentation.mjs",
-  "src/platform/prepared-presentation.mjs", "src/platform/prepared-material.mjs",
-  "src/planets/neptune/runtime/preparedLenses.mjs"]) {
+for (const file of ["site/scene-router.mjs", "site/packaged-object-runtime.mjs",
+  "src/renderers/css/dist/index.js", "src/renderers/css/dist/testing.js",
+  "src/renderers/css/runtime/object-runtime.ts", "src/renderers/css/rendering/object-selection-runtime.ts",
+  "src/renderers/css/rendering/prepared-presentation.ts", "src/renderers/css/rendering/prepared-material.ts",
+  ...["saturn", "neptune"].flatMap(id => [`src/planets/${id}/object.json`,
+    `src/planets/${id}/prepared/object.json`, `src/planets/${id}/prepared/runtime.json`])]) {
   report.source[file] = createHash("sha256").update(await readFile(file)).digest("hex");
 }
 const browser = await chromium.launch({ channel: "chrome", headless: true });
@@ -135,8 +135,9 @@ async function snapshot(page, id) {
       selection: selection ? { desired: selection.desired, committed: selection.committed,
         pending: selection.pending, error: selection.error } : null,
       materialView: view ? { controlPitch: view.controlPitch, controlYaw: view.controlYaw,
+        sceneMatrix: view.sceneMatrix, levelOfDetail: view.levelOfDetail,
         sunViewDirection: view.sunViewDirection, skySunViewDirection: view.skySunViewDirection,
-        reference: { sunViewDirection: view.reference.sunViewDirection,
+        reference: { sceneMatrix: view.reference.sceneMatrix, sunViewDirection: view.reference.sunViewDirection,
           skySunViewDirection: view.reference.skySunViewDirection } } : null,
       features: runtime?.features.state() ?? null,
       camera: runtime?.camera.state() ?? null,
@@ -180,8 +181,7 @@ async function neptuneRace(page, record) {
   await clickLens(page, "near-infrared");
   await settled(page, "neptune", "near-infrared");
   const winner = await snapshot(page, "neptune");
-  const plan = PREPARED_NEPTUNE_LENSES.controls.find(({ id }) => id === "near-infrared");
-  assertAddress(winner.exterior, plan.orbitMaterial.presentations[winner.materials.lighting.frame]);
+  assertAddress(winner.exterior, materialAddresses(NEPTUNE, winner).lighting);
   await page.evaluate(() => window.__runtimeComplexProbe.release());
   await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))));
   const after = await snapshot(page, "neptune");
@@ -292,12 +292,17 @@ async function saturnCompound(page, record) {
 }
 
 function saturnAddresses(observation, selection = observation.selection.committed) {
-  const variant = selectedPreparedVariant(SATURN, selection);
+  return materialAddresses(SATURN, observation, selection);
+}
+
+function materialAddresses(definition, observation, selection = observation.selection.committed) {
+  const variant = selectedPreparedVariant(definition, selection);
   return Object.fromEntries(variant.materials.map(selected => {
-    const track = SATURN.materials.find(track => track.id === selected.track);
+    const track = definition.materials.find(track => track.id === selected.track);
     if (!selected.enabled && selected.clearWhenHidden) return [track.id, null];
-    const { address } = preparedMaterialState(track, selected, observation.materialView, SATURN.camera);
-    const resource = SATURN.assets.entries.find(entry => entry.key === address.resource);
+    const { address } = preparedMaterialState(track, selected, observation.materialView);
+    assert.ok(address, "Expected material address exists in the actual prepared bank");
+    const resource = definition.assets.entries.find(entry => entry.key === address.resource);
     assert.ok(resource, "Expected material address belongs to the actual normalized definition");
     return [track.id, { ...address, assetUrl: resource.url }];
   }));

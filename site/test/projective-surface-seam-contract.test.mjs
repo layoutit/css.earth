@@ -1,31 +1,33 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { PREPARED_EARTH_SCENE } from
-  "../../src/planets/earth/runtime/preparedScene.mjs";
-import { PREPARED_JUPITER_SCENE } from
-  "../../src/planets/jupiter/runtime/preparedScene.mjs";
-import { PREPARED_MARS_SCENE } from
-  "../../src/planets/mars/runtime/preparedScene.mjs";
-import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
-import { PREPARED_NEPTUNE_SCENE } from
-  "../../src/planets/neptune/runtime/preparedScene.mjs";
-import { PREPARED_SATURN_SCENE } from
-  "../../src/planets/saturn/runtime/preparedScene.mjs";
-import { PREPARED_URANUS_SCENE } from
-  "../../src/planets/uranus/runtime/preparedScene.mjs";
-import PREPARED_VENUS_SCENE from "../../src/planets/venus/prepared/scene.json" with {type: "json"};
+import { readFile } from "node:fs/promises";
+import { loadObjectContent } from "./load-object-content.mjs";
+import { prepareBandedEllipsoid } from "../../tools/objects/giant-layers/geometry.mjs";
 
-const PLANET_SURFACE_SEAMS = Object.freeze({
-  mercury: PREPARED_MERCURY_SCENE.preparedSurface.seamRepair,
-  venus: PREPARED_VENUS_SCENE.body.seamRepair,
-  earth: PREPARED_EARTH_SCENE.body.seamRepair,
-  mars: PREPARED_MARS_SCENE.surface.seamRepair,
-  jupiter: PREPARED_JUPITER_SCENE.surface.seamRepair,
-  saturn: PREPARED_SATURN_SCENE.preparedSurface.seamRepair,
-  uranus: PREPARED_URANUS_SCENE.preparedSurface.seamRepair,
-  neptune: PREPARED_NEPTUNE_SCENE.surfacePreparation.seamRepair,
-});
+const PLANET_SURFACE_SEAMS = {};
+for (const id of ["mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune"]) {
+  const scene = JSON.parse(await readFile(new URL("../../src/planets/" + id + "/prepared/scene.json", import.meta.url), "utf8"));
+  const loaded = await loadObjectContent(id);
+  const geometry = loaded.descriptor.properties.recipe.sources.some(source => source.id === "geometry")
+    ? await loaded.source("geometry") : null;
+  if (geometry?.schema === "cssearth-banded-ellipsoid@1") {
+    // The source parameters must generate the accepted retained geometry, not
+    // merely declare a seam-policy label beside unrelated prepared transforms.
+    const actual = prepareBandedEllipsoid(geometry);
+    const { schema, ...prepared } = scene;
+    assert.deepEqual(actual, prepared, id + ": seam parameters must generate the actual leaves");
+    const { seamBleed, overlap, gutter, overscan } = geometry.surface;
+    PLANET_SURFACE_SEAMS[id] = {
+      model: overscan > 0 ? "prepared-zero-seam-bleed-with-matched-raster-and-compositor-overlap"
+        : "prepared-zero-seam-bleed-with-compositor-overlap",
+      seamBleed, presentationOverlap: overlap, rasterGutter: gutter, rasterOverscan: overscan,
+      runtimeEdgeDiscovery: false,
+    };
+  } else {
+    PLANET_SURFACE_SEAMS[id] = (scene.preparedSurface ?? scene.body ?? scene.surface).seamRepair;
+  }
+}
 
 test("all prepared planet surfaces use the measured Chrome seam contract", () => {
   assert.deepEqual(Object.keys(PLANET_SURFACE_SEAMS), [

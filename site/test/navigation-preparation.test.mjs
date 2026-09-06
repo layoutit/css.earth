@@ -6,6 +6,7 @@ import test from "node:test";
 import sharp from "sharp";
 
 import { OBJECTS } from "../objects.mjs";
+import { authoredObjectFixture } from "./authored-object-fixture.mjs";
 import {
   loadMarkerDescriptors,
   moveNavigationFile,
@@ -66,12 +67,13 @@ for (const failure of ["object source", "late utility source", "publication", "r
   test(`failed ${failure} preserves accepted files or recoverable backups outside public`, async (context) => {
     const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-failure-"));
     context.after(() => rm(root, { recursive: true, force: true }));
-    for (const path of ["src/planets/new-body/tools", "src/planets/new-body/source", "src/navigation/source", "site", "public/navigation"]) {
+    for (const path of ["src/planets/new-body/source/preparation", "src/navigation/source", "site", "public/navigation"]) {
       await mkdir(resolve(root, path), { recursive: true });
     }
     const original = (await loadMarkerDescriptors())[0];
     const descriptor = { ...original, planetId: "new-body", source: { ...original.source, path: "source.jpg" } };
-    await writeFile(resolve(root, "src/planets/new-body/tools/navigation-marker.mjs"), `export default ${JSON.stringify(descriptor)};\n`);
+    await writeFile(resolve(root, "src/planets/new-body/source/preparation/navigation.json"), JSON.stringify(descriptor));
+    await writeFile(resolve(root, "src/planets/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
     const sourcePath = resolve(root, "src/planets/new-body/source/source.jpg");
     await copyFile(resolve(projectRoot, "src/planets", original.planetId, "source", original.source.path), sourcePath);
     if (failure === "object source") await writeFile(sourcePath, "corrupt object source");

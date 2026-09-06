@@ -1,10 +1,11 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import { prepareFrameLookup } from "../../tools/prepare-materials.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { createPreparedMaterialPublisher, preparedMaterialFrame } from "./prepared-material.mjs";
-import { selectedPreparedVariant } from "./prepared-presentation.mjs";
-import { initialObjectSelection } from "./object-runtime-contract.mjs";
+import { createPreparedMaterialPublisher, preparedMaterialFrame } from '../renderers/css/dist/testing.js';
+import { selectedPreparedVariant } from '../renderers/css/dist/testing.js';
+import { initialObjectSelection } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
 import definition from "../../src/planets/venus/prepared/runtime.json" with {type: "json"};
 
@@ -58,7 +59,7 @@ test("metadata observation and unchanged publication have no extra material writ
 });
 
 test("prepared address caching survives native URL serialization and still publishes a changed decoded URL", async () => {
-  const { runtimeDefinition: definition } = await import("../planets/uranus/runtime/definition.mjs");
+  const definition = await loadObjectTestDefinition('uranus');
   const f = retainedPresentationFixture(definition);
   f.resources.has = () => true;
   try {

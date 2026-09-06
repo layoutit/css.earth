@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-physical-facts@1",
+  "inputs": [
+    {
+      "id": "jpl",
+      "path": "orbit/jpl-physical.html",
+      "format": "text",
+      "tableRow": "Pluto",
+      "expectedColumns": [
+        1188.3,
+        1188.3,
+        13024.6,
+        1.853,
+        -6.3872,
+        247.92065
+      ]
+    },
+    {
+      "id": "nasa",
+      "path": "editorial/nasa-pluto.json",
+      "format": "json",
+      "identity": {
+        "id": 107487,
+        "title.rendered": "Pluto: Facts",
+        "link": "https://science.nasa.gov/dwarf-planets/pluto/facts/"
+      },
+      "textPath": "content.rendered",
+      "anchors": [
+        "or 39 AU",
+        "tilted 57 degrees",
+        "retrograde rotation",
+        "five known moons",
+        "There are no known rings around Pluto"
+      ]
+    }
+  ],
+  "constants": {
+    "meanHeliocentricDistanceAu": 39,
+    "displayAxisTiltDegrees": 57,
+    "moonCount": 5,
+    "ringCount": 0
+  },
+  "fields": {
+    "meanRadiusKm": {
+      "source": "jpl",
+      "path": "1"
+    },
+    "meanDensityGPerCm3": {
+      "source": "jpl",
+      "path": "3"
+    },
+    "rotationDays": {
+      "source": "jpl",
+      "path": "4"
+    },
+    "orbitalPeriodYears": {
+      "source": "jpl",
+      "path": "5"
+    },
+    "sourceUrl": {
+      "source": "nasa",
+      "path": "link"
+    },
+    "modified": {
+      "source": "nasa",
+      "path": "modified"
+    }
+  }
+}

@@ -1,10 +1,19 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { prepareAtmosphereFrame, compositePreparedAtmosphere } from "./prepared-atmosphere.mjs";
-import { MARS_ATMOSPHERE_PROFILE, prepareMarsAtmosphereFrame, prepareMarsMaterialFrame } from "../src/planets/mars/tools/prepare-atmosphere.mjs";
-import { earthAtmosphereProfile, readEarthAtmosphereModel } from "../src/planets/earth/tools/atmosphere-model.mjs";
+import { readFile } from "node:fs/promises";
+import { MARS_ATMOSPHERE_PROFILE, prepareMarsAtmosphereFrame, prepareMarsMaterialFrame } from "../tests/objects/unit/mars/prepared-fixture.mjs";
+import { createAtmospherePreparation } from "./objects/paged-ellipsoid/atmosphere.mjs";
+import { resolve } from "node:path";
 
-const earth = earthAtmosphereProfile(await readEarthAtmosphereModel());
+const json = async path => JSON.parse(await readFile(path, 'utf8'));
+const earthPreparation = createAtmospherePreparation({
+  config: await json('src/planets/earth/source/preparation/paged-ellipsoid.json'),
+  sourceDirectory: resolve('src/planets/earth/source'),
+  sourceManifest: await json('src/planets/earth/source/manifest.json'),
+  sun: (await json('src/planets/earth/prepared/runtime.json')).sun,
+});
+const earth = earthPreparation.atmosphereProfile(await earthPreparation.readAtmosphereModel());
 const view = { width: 96, disc: { centerX: 48, centerY: 48, radiusX: 43, radiusY: 43 } };
 function alpha(data, side) {
   let sum = 0;

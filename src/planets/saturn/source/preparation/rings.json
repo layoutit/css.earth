@@ -1,0 +1,518 @@
+{
+  "schema": "cssearth-radial-layer-recipe@1",
+  "units": "kilometers",
+  "sources": [
+    {
+      "id": "openspace-saturn-ring-color",
+      "path": "color_original_single.png",
+      "expectedBytes": 2059,
+      "expectedSha256": "952b8de4343127e2188a6fb293d499e3e8b7c19147f5a2d727c525f8e9bcebda",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT"
+    },
+    {
+      "id": "openspace-saturn-ring-transparency",
+      "path": "trans_original_single.png",
+      "expectedBytes": 2303,
+      "expectedSha256": "37a40a8217961cda634a3fe48775072f5097b40d8945cfaf82bdfb58b98caf2a",
+      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png",
+      "credit": "OpenSpace Team",
+      "license": "MIT, see ../LICENSE.OPENSPACE-MIT"
+    },
+    {
+      "id": "hyg-v41-saturn-field",
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 144992,
+      "expectedSha256": "0aec282e4c6362d498fd85452a1bb4ac11a76a67409b752c30b99f00c57fb70e",
+      "origin": "https://github.com/astronexus/HYG-Database/tree/c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
+      "credit": "David Nash / Astronexus",
+      "license": "CC-BY-SA-4.0, see stars/LICENSE.md"
+    },
+    {
+      "id": "ring-spectral-response",
+      "path": "lenses/manifest.json",
+      "expectedBytes": 2316,
+      "expectedSha256": "4fe757b1e66df8328b15951f8488accac0717f0208da155a2b05cbc2365a3403",
+      "origin": "Pinned Hubble program 17843 and Cassini VIMS/CIRS interpretation",
+      "credit": "NASA, ESA, STScI, and NASA/JPL-Caltech",
+      "license": "project-authored source specification with institutional credits"
+    }
+  ],
+  "layers": [
+    {
+      "kind": "observed-radial-profile",
+      "size": 2048,
+      "densities": [
+        1,
+        2
+      ],
+      "densityMode": "independent",
+      "encoding": {
+        "lossless": true,
+        "effort": 6
+      },
+      "output": "saturn-rings{suffix}.webp",
+      "bounds": [
+        66900,
+        140612
+      ],
+      "sourceBounds": [
+        74500,
+        140612
+      ],
+      "channelFactors": [
+        1,
+        0.8796223968878317,
+        0.8227857543962834
+      ],
+      "colorSource": "color_original_single.png",
+      "transparencySource": "trans_original_single.png",
+      "interior": {
+        "centers": [
+          67580,
+          71710
+        ],
+        "sigma": 105,
+        "baseAlpha": 0.025,
+        "peakAlpha": 0.22,
+        "color": [
+          184,
+          172,
+          151
+        ]
+      },
+      "operations": [
+        {
+          "kind": "alpha-cap",
+          "bounds": [
+            117500,
+            122050
+          ],
+          "maximum": 46
+        },
+        {
+          "kind": "clear",
+          "bounds": [
+            133423,
+            133745
+          ]
+        },
+        {
+          "kind": "clear",
+          "bounds": [
+            136487,
+            136522
+          ]
+        },
+        {
+          "kind": "clear",
+          "bounds": [
+            136770,
+            139826
+          ],
+          "inclusive": [
+            true,
+            false
+          ]
+        },
+        {
+          "kind": "edge-core",
+          "bounds": [
+            139826,
+            140612
+          ],
+          "center": 140224,
+          "sigma": 70,
+          "baseDepth": 0.01,
+          "peakDepth": 0.19
+        },
+        {
+          "kind": "alpha-gain",
+          "bounds": [
+            74500,
+            91975
+          ],
+          "gain": 2.25
+        }
+      ],
+      "readability": {
+        "minimumPixels": {
+          "1": 4,
+          "2": 6
+        },
+        "alphaGain": 1.8,
+        "features": [
+          {
+            "id": "d-ring-ringlet-1",
+            "kind": "bright-hairline",
+            "radius": 67580
+          },
+          {
+            "id": "d-ring-ringlet-2",
+            "kind": "bright-hairline",
+            "radius": 71710
+          },
+          {
+            "id": "encke-gap",
+            "kind": "dark-gap",
+            "radius": 133584
+          },
+          {
+            "id": "keeler-gap",
+            "kind": "dark-gap",
+            "radius": 136504.5
+          },
+          {
+            "id": "f-ring-core",
+            "kind": "bright-hairline",
+            "radius": 140224,
+            "additionalPixels": 2
+          },
+          {
+            "id": "profile-76220",
+            "kind": "bright-hairline",
+            "radius": 76220,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-77852",
+            "kind": "bright-hairline",
+            "radius": 77852,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-79219",
+            "kind": "bright-hairline",
+            "radius": 79219,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-84909",
+            "kind": "bright-hairline",
+            "radius": 84909,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-85702",
+            "kind": "bright-hairline",
+            "radius": 85702,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-85967",
+            "kind": "bright-hairline",
+            "radius": 85967,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-86408",
+            "kind": "bright-hairline",
+            "radius": 86408,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-87334",
+            "kind": "bright-hairline",
+            "radius": 87334,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-87555",
+            "kind": "bright-hairline",
+            "radius": 87555,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-88746",
+            "kind": "bright-hairline",
+            "radius": 88746,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-89275",
+            "kind": "bright-hairline",
+            "radius": 89275,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-89936",
+            "kind": "bright-hairline",
+            "radius": 89936,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-90201",
+            "kind": "bright-hairline",
+            "radius": 90201,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-90598",
+            "kind": "bright-hairline",
+            "radius": 90598,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-117678",
+            "kind": "dark-gap",
+            "radius": 117678
+          },
+          {
+            "id": "profile-117943",
+            "kind": "bright-hairline",
+            "radius": 117943,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-120236",
+            "kind": "bright-hairline",
+            "radius": 120236,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-120545",
+            "kind": "dark-gap",
+            "radius": 120545
+          },
+          {
+            "id": "profile-120942",
+            "kind": "bright-hairline",
+            "radius": 120942,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-123411",
+            "kind": "dark-gap",
+            "radius": 123411
+          },
+          {
+            "id": "profile-130997",
+            "kind": "bright-hairline",
+            "radius": 130997,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-132012",
+            "kind": "bright-hairline",
+            "radius": 132012,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-132585",
+            "kind": "bright-hairline",
+            "radius": 132585,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          },
+          {
+            "id": "profile-134526",
+            "kind": "bright-hairline",
+            "radius": 134526,
+            "alphaGain": 1.35,
+            "alphaScale": 0.5
+          }
+        ]
+      },
+      "qualification": "Pinned OpenSpace radial color/transparency profiles; authored D/F-ring optical models, named gap constraints, source-profile readability and prepared solar tint. The accepted field is preserved including transparent RGB.",
+      "variants": [
+        {
+          "id": "ultraviolet",
+          "palette": [
+            [
+              18,
+              14,
+              39
+            ],
+            [
+              101,
+              80,
+              149
+            ],
+            [
+              205,
+              188,
+              235
+            ]
+          ],
+          "gain": 0.62,
+          "outerRadius": 140612,
+          "exponent": 0.82,
+          "luminance": [
+            0.2126,
+            0.7152,
+            0.0722
+          ],
+          "radialGains": [
+            {
+              "upperBound": 74500,
+              "gain": 0.35
+            },
+            {
+              "upperBound": 91975,
+              "gain": 0.47
+            },
+            {
+              "upperBound": 117500,
+              "gain": 0.715
+            },
+            {
+              "upperBound": 122050,
+              "gain": 0.8574999999999999
+            },
+            {
+              "upperBound": 136770,
+              "gain": 1
+            }
+          ],
+          "outerGain": 0.9,
+          "output": "saturn-rings-ultraviolet{suffix}.webp",
+          "encoding": {
+            "quality": 96,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          },
+          "qualification": "Hubble source-qualified radial response over visible morphology; unresolved ringlets retain visible morphology."
+        },
+        {
+          "id": "methane",
+          "palette": [
+            [
+              18,
+              52,
+              58
+            ],
+            [
+              105,
+              173,
+              173
+            ],
+            [
+              235,
+              255,
+              248
+            ]
+          ],
+          "gain": 1.2,
+          "outerRadius": 140612,
+          "exponent": 0.82,
+          "luminance": [
+            0.2126,
+            0.7152,
+            0.0722
+          ],
+          "radialGains": [
+            {
+              "upperBound": 74500,
+              "gain": 0.3
+            },
+            {
+              "upperBound": 91975,
+              "gain": 0.288
+            },
+            {
+              "upperBound": 117500,
+              "gain": 0.917
+            },
+            {
+              "upperBound": 122050,
+              "gain": 0.911
+            },
+            {
+              "upperBound": 136770,
+              "gain": 0.905
+            }
+          ],
+          "outerGain": 0.811,
+          "output": "saturn-rings-methane{suffix}.webp",
+          "encoding": {
+            "quality": 96,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          },
+          "qualification": "Hubble source-qualified radial response over visible morphology; unresolved ringlets retain visible morphology."
+        },
+        {
+          "id": "thermal",
+          "palette": [
+            [
+              6,
+              4,
+              10
+            ],
+            [
+              92,
+              35,
+              24
+            ],
+            [
+              232,
+              143,
+              65
+            ]
+          ],
+          "gain": 0.9,
+          "outerRadius": 140612,
+          "exponent": 0.82,
+          "luminance": [
+            0.2126,
+            0.7152,
+            0.0722
+          ],
+          "radialGains": [
+            {
+              "upperBound": 74500,
+              "gain": 0.52
+            },
+            {
+              "upperBound": 91975,
+              "gain": 0.88
+            },
+            {
+              "upperBound": 117500,
+              "gain": 0.66
+            },
+            {
+              "upperBound": 122050,
+              "gain": 0.7150000000000001
+            },
+            {
+              "upperBound": 136770,
+              "gain": 0.77
+            }
+          ],
+          "outerGain": 0.9,
+          "output": "saturn-rings-thermal{suffix}.webp",
+          "encoding": {
+            "quality": 96,
+            "alphaQuality": 100,
+            "smartSubsample": true,
+            "effort": 6
+          },
+          "qualification": "Cassini VIMS/CIRS-informed thermal false color over visible morphology; not a direct temperature retrieval."
+        }
+      ]
+    }
+  ]
+}

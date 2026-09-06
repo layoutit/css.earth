@@ -23,4 +23,7 @@ Enhanced color: NASA/JPL/USGS, Michael T. Bland, Lynn A. Weller and colleagues
 The [USGS collection](https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations)
 licenses these products under CC0-1.0; its captured record is
 `source/color/collection.json`. Infrared/green/violet mapping, the fixed display
-transfer and coverage indicator are prepared here; they are not natural color.
+transfer, observation-specific Lunar–Lambert disk normalization, level matching and coverage indicator are
+prepared here; they are not natural color or a calibrated albedo product.
+Capture geometry uses NASA/JPL Horizons and the USGS controlled ISIS labels;
+see `SOURCE.md` for the model and its limits.

@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-photometric-phase-source@1",
+  "authority": {
+    "title": "Computing Apparent Planetary Magnitudes for The Astronomical Almanac",
+    "authors": [
+      "Anthony Mallama",
+      "James L. Hilton"
+    ],
+    "journal": "Astronomy and Computing",
+    "arxiv": "1808.01973",
+    "url": "https://arxiv.org/abs/1808.01973",
+    "sourcePdfSha256": "805e53ab8f921c55e1c5e3dd64bbd567f806cdba56148625afcddfc650b6f9a7",
+    "retrievedAt": "2026-09-01",
+    "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
+  },
+  "maximumAngleDegrees": 133,
+  "segments": [
+    {
+      "maximumAngleDegrees": 133,
+      "kind": "polynomialMagnitude",
+      "coefficients": [
+        -7,
+        0.007944,
+        0.00009617
+      ]
+    }
+  ],
+  "qualification": "The post-2000 brightness constant is held fixed so the curve isolates phase-angle dependence."
+}

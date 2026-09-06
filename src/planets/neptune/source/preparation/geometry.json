@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-banded-ellipsoid@1",
+  "coordinateArithmetic": "fraction",
+  "leafRecord": "compact",
+  "verifyWrapSeams": false,
+  "shape": {
+    "equatorialRadius": 220,
+    "polarRadius": 216.0022613471168
+  },
+  "latitudeSegments": 20,
+  "longitudeSegments": 40,
+  "surface": {
+    "url": "/scenes/neptune/neptune-surface-normal.webp",
+    "width": 2880,
+    "height": 1440,
+    "gutter": 18,
+    "overscan": 0,
+    "overlap": 0.05,
+    "seamBleed": 0,
+    "leafSize": 64,
+    "rasterScale": 4,
+    "color": "#4777b8"
+  },
+  "polar": {
+    "url": "/scenes/neptune/neptune-poles-normal.webp",
+    "tileSize": 128,
+    "separateInnerTiles": true,
+    "fitToTile": false,
+    "surfaceOverlap": 1.035,
+    "innerOverlap": 1.05,
+    "surfaceOffset": 0.1,
+    "innerInset": 2.4,
+    "innerOffsetBeforeSubtract": true
+  },
+  "classes": {
+    "surface": "neptune-surface-face",
+    "polarInner": "neptune-polar-inner neptune-polar-{pole}",
+    "polarSurface": "neptune-polar-surface neptune-polar-{pole}"
+  },
+  "planOptions": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "textureLighting": "baked",
+    "seamBleed": 0,
+    "directionalLight": {
+      "direction": [
+        0.42,
+        -0.73,
+        0.54
+      ],
+      "color": "#dce9ff",
+      "intensity": 3.141592653589793
+    },
+    "ambientLight": {
+      "color": "#9bbcf0",
+      "intensity": 0.6911503837897545
+    }
+  },
+  "planes": [
+    {
+      "id": "rings",
+      "radius": 559.0881925375545,
+      "z": 0,
+      "url": "/scenes/neptune/neptune-rings.webp",
+      "size": 1024,
+      "fitToSize": false,
+      "color": "#8caeca"
+    }
+  ]
+}

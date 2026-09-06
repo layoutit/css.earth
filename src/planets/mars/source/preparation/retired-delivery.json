@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-retired-delivery@1",
+  "reason": "Legacy parent runtime has no resource entry or retained node for these satellite billboards. Physical source records remain; no satellite rendering is implemented by the parent.",
+  "assets": [
+    {
+      "filename": "mars-moon-billboards.webp",
+      "bytes": 7288,
+      "sha256": "ebf4119d9c2effee01adb8e5f4fd368c53671479cd1af2efe1d03da66f7860eb"
+    },
+    {
+      "filename": "mars-moon-billboards@2x.webp",
+      "bytes": 16498,
+      "sha256": "a74160a082397f06218a1ed415d19c13136895002da0387adcfb41f90a824d53"
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { OBJECTS } from '../../site/objects.mjs';
 import { retainedPresentationFixture } from './test/object-runtime-package.mjs';
-import { mountPreparedPresentation } from './prepared-presentation.mjs';
+import { mountPreparedPresentation } from '../renderers/css/dist/testing.js';
 import { requireObjectRuntimeDefinition } from '../../tools/object-runtime-contract.mjs';
 
 for (const object of OBJECTS) {
@@ -28,7 +28,7 @@ for (const object of OBJECTS) {
 }
 
 test('explicit prepared empty style attributes are preserved', async () => {
-  const { runtimeDefinition } = await import(new URL('../planets/moon/runtime/definition.mjs', import.meta.url));
+  const runtimeDefinition = await loadObjectTestDefinition('moon');
   const definition = structuredClone(runtimeDefinition);
   const node = definition.tree.nodes.at(-1);
   node.style = ''; node.properties = []; node.attributes.style = '';
@@ -41,7 +41,7 @@ test('explicit prepared empty style attributes are preserved', async () => {
 });
 
 test('empty attribute preservation cannot bypass prepared CSS validation', async () => {
-  const { runtimeDefinition } = await import(new URL('../planets/moon/runtime/definition.mjs', import.meta.url));
+  const runtimeDefinition = await loadObjectTestDefinition('moon');
   for (const style of ['filter:blur(1px)', 'background:red', ' ']) {
     const definition = structuredClone(runtimeDefinition);
     const node = definition.tree.nodes.at(-1);

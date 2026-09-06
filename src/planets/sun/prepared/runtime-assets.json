@@ -1,0 +1,305 @@
+{
+  "schema": "csssun-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "sun-corona-chromosphere.webp",
+      "bytes": 38960,
+      "sha256": "08d5949e1df3eca2bb1d902edcbdd5036b19f3faf15b6667996da30b567e000a"
+    },
+    {
+      "filename": "sun-corona-chromosphere@2x.webp",
+      "bytes": 119046,
+      "sha256": "65addc3c000317f4987237a1164b54198be49235c0c251180bbb0d421c9a1f69"
+    },
+    {
+      "filename": "sun-corona-corona.webp",
+      "bytes": 56282,
+      "sha256": "26252495041bebff43786f6e4386cdd062b397a1bd80ac6fa5c8e994d52b43e8"
+    },
+    {
+      "filename": "sun-corona-corona@2x.webp",
+      "bytes": 160858,
+      "sha256": "33aae3690573b31b09b486780e2a3065e91edaec425ae8ba1015ac6e3cdd9d89"
+    },
+    {
+      "filename": "sun-corona-magnetic.webp",
+      "bytes": 66,
+      "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46"
+    },
+    {
+      "filename": "sun-corona-magnetic@2x.webp",
+      "bytes": 140,
+      "sha256": "1e1f80c2dd16bc84e808ee2779d31f78cfdf7d6b099458708a21faeaed8da5dc"
+    },
+    {
+      "filename": "sun-corona-photosphere.webp",
+      "bytes": 66,
+      "sha256": "94715bb9a573a9dd6e323802010b09cfe8521bf06b17e00a7fe93a8e2a9a1a46"
+    },
+    {
+      "filename": "sun-corona-photosphere@2x.webp",
+      "bytes": 140,
+      "sha256": "1e1f80c2dd16bc84e808ee2779d31f78cfdf7d6b099458708a21faeaed8da5dc"
+    },
+    {
+      "filename": "sun-lens-chromosphere.webp",
+      "bytes": 1364,
+      "sha256": "ec1f6e2d6ec755f82be128d425062c45751cf656b71271dfaa4404e2d98f9280"
+    },
+    {
+      "filename": "sun-lens-corona.webp",
+      "bytes": 1830,
+      "sha256": "a60ae1c4244a9973b007058b9b0e1e4bdeae227b679551838f11932168cae66e"
+    },
+    {
+      "filename": "sun-lens-magnetic.webp",
+      "bytes": 1230,
+      "sha256": "17e31ba821335b7420ee901d30f2acceeed1e33e90b3c075550d1ea0d56f7e71"
+    },
+    {
+      "filename": "sun-lens-photosphere.webp",
+      "bytes": 214,
+      "sha256": "87ab84f9a3b374c703f0ae5b935ebd50e82c14e785adf2b86f5079525aa011de"
+    },
+    {
+      "filename": "sun-limb-chromosphere.webp",
+      "bytes": 7238,
+      "sha256": "f217d13612f00b58a420472eeefdb142f8245d5db5a0c7b8b58be41143897637"
+    },
+    {
+      "filename": "sun-limb-chromosphere@2x.webp",
+      "bytes": 20528,
+      "sha256": "6518de58c3e7cd37d2acc764a195d44391c73abe0f019f0274cdad8e193d3b0b"
+    },
+    {
+      "filename": "sun-limb-corona.webp",
+      "bytes": 7238,
+      "sha256": "ddec547890fe63035b390cb31a0cfa0daa7f25ef925f2b5f72f543739cceb992"
+    },
+    {
+      "filename": "sun-limb-corona@2x.webp",
+      "bytes": 20528,
+      "sha256": "68e4589cdef690afe06366efc72e6d757729ff14d364ba48f2b2cb2d3d3eb745"
+    },
+    {
+      "filename": "sun-limb-magnetic.webp",
+      "bytes": 7238,
+      "sha256": "12a176da30d1c561fb9089b5699c669ca8de47a28ffd8b76da85e729ca80d92d"
+    },
+    {
+      "filename": "sun-limb-magnetic@2x.webp",
+      "bytes": 20528,
+      "sha256": "901f234c4755fb5cf55519172f54a80f3a3e471c4d323a69280cf8b291b55899"
+    },
+    {
+      "filename": "sun-limb-photosphere.webp",
+      "bytes": 12700,
+      "sha256": "76b64002caf9a33df498c4501f5432085c505c73c326551d6e40e01b6ec109af"
+    },
+    {
+      "filename": "sun-limb-photosphere@2x.webp",
+      "bytes": 34132,
+      "sha256": "3615e02c33919acf10bb7a1a6094db55c6dcc589ad3253b59c0815a00dd592bb"
+    },
+    {
+      "filename": "sun-poles-chromosphere.webp",
+      "bytes": 8736,
+      "sha256": "7393c878d34458c8bb74d9d401eccb7bff5d434f07844eb8c3f947042f284f31"
+    },
+    {
+      "filename": "sun-poles-chromosphere@2x.webp",
+      "bytes": 22262,
+      "sha256": "469016642ea34f459154401493b0020d5e2a6cf5d59baadefb7134f4a19fbab9"
+    },
+    {
+      "filename": "sun-poles-corona.webp",
+      "bytes": 8174,
+      "sha256": "6985787b189ecef372de59fd0fe2b4277b2db60f8f9fae47014eaf2a255a797f"
+    },
+    {
+      "filename": "sun-poles-corona@2x.webp",
+      "bytes": 21166,
+      "sha256": "d09e159e04e703737152b79e533571f3211efdc00818576762946f7e29fe867c"
+    },
+    {
+      "filename": "sun-poles-magnetic.webp",
+      "bytes": 13812,
+      "sha256": "d46fad54ba274a024e5f61634851b3ef2ec6a27889d943ae5bed67654a023028"
+    },
+    {
+      "filename": "sun-poles-magnetic@2x.webp",
+      "bytes": 32648,
+      "sha256": "ecee0631ae705ba8b71916527b84456e142439c72ef8e5e247bf341836cdf37f"
+    },
+    {
+      "filename": "sun-poles-photosphere.webp",
+      "bytes": 7364,
+      "sha256": "d17d0732385ca32484e1d477e795501703568e0d5d2d1dd3e879897aa13ba1f9"
+    },
+    {
+      "filename": "sun-poles-photosphere@2x.webp",
+      "bytes": 19564,
+      "sha256": "cb4a92b8e2b01c203585a557c819904de235e16b57fb2b8422ebe5e4c9038ef7"
+    },
+    {
+      "filename": "sun-starfield-back-standard.webp",
+      "bytes": 294528,
+      "sha256": "9b58c375386b2728d419fd0512d3154c4a59351a1fde5b03969c11509aa0c6a4"
+    },
+    {
+      "filename": "sun-starfield-back-standard@2x.webp",
+      "bytes": 1073274,
+      "sha256": "1f850dc6daca82790f20345f652746e5464b38d04ea0d7b1a3a6644e4d756b77"
+    },
+    {
+      "filename": "sun-starfield-back.webp",
+      "bytes": 604224,
+      "sha256": "05ca17562e0835098effd060ab9c754701bc000c9307fbf164834ae1c28a762e"
+    },
+    {
+      "filename": "sun-starfield-back@2x.webp",
+      "bytes": 2367208,
+      "sha256": "2f365f0dd50f454ed963778dd2777172006dd873d49bf25e258bed71ee4f2aa2"
+    },
+    {
+      "filename": "sun-starfield-bottom-standard.webp",
+      "bytes": 172048,
+      "sha256": "5c9d92aea731a0b0998c9cdcfb049bb34388eac3f1075631241dd2a2106f3701"
+    },
+    {
+      "filename": "sun-starfield-bottom-standard@2x.webp",
+      "bytes": 589596,
+      "sha256": "d0e08cc4cefc2e59cb44016887b6868a6d89065525ed9792e204a94549642667"
+    },
+    {
+      "filename": "sun-starfield-bottom.webp",
+      "bytes": 351892,
+      "sha256": "74f3f5153d74de2f693a5dd7e3939933bed3048e9118b8ee36a44db4ca072db2"
+    },
+    {
+      "filename": "sun-starfield-bottom@2x.webp",
+      "bytes": 1309698,
+      "sha256": "fc94446b76a45a91979ce7814ec11f2d3c069153e2cc8035b34c73c45a36cc03"
+    },
+    {
+      "filename": "sun-starfield-front-standard.webp",
+      "bytes": 410722,
+      "sha256": "8c5b4ed8480b07a30f61aab5254c8601e23eff0f06dcd28fa45cc50dad657013"
+    },
+    {
+      "filename": "sun-starfield-front-standard@2x.webp",
+      "bytes": 1402212,
+      "sha256": "4694fe3878fc9781ee87866a1f4848befcd91b43bb7f85d13cb542ce8a5457c5"
+    },
+    {
+      "filename": "sun-starfield-front.webp",
+      "bytes": 768032,
+      "sha256": "97be168b3b1ca164c9d6ce1ccf0cd2373baac3b9501a808d9aa3a21b9483ef22"
+    },
+    {
+      "filename": "sun-starfield-front@2x.webp",
+      "bytes": 2832202,
+      "sha256": "a28a808a08b3e365d923c1553c461815b6a878bdf0f35e162fb04751b5518e91"
+    },
+    {
+      "filename": "sun-starfield-left-standard.webp",
+      "bytes": 306818,
+      "sha256": "99fa8178d58a5ae649d21137e915207523a5a5ec469feba6321ba0b7db6f6e60"
+    },
+    {
+      "filename": "sun-starfield-left-standard@2x.webp",
+      "bytes": 1153544,
+      "sha256": "cbdbd655c85daf987b025fe1136a86113e81a148bc29ec6688f77714ca04ad47"
+    },
+    {
+      "filename": "sun-starfield-left.webp",
+      "bytes": 628102,
+      "sha256": "0cd4c110978a6d88e89fa76b70db815facd168b3b7d9c1dffc71acf9e41e2759"
+    },
+    {
+      "filename": "sun-starfield-left@2x.webp",
+      "bytes": 2357886,
+      "sha256": "7be2b4e542ab9833fbb8d2348a27097e7c1d02f51de68d892f841f681fe8c8dd"
+    },
+    {
+      "filename": "sun-starfield-right-standard.webp",
+      "bytes": 347120,
+      "sha256": "808f4ebeb68246cfe23f64ab2373686dbf187b6baf99d2ed904dfd18dc6e5e77"
+    },
+    {
+      "filename": "sun-starfield-right-standard@2x.webp",
+      "bytes": 1276530,
+      "sha256": "213d9fdbd6a835e6d1e3a2f162691674b36ea1f59234941afc021770455a3eb3"
+    },
+    {
+      "filename": "sun-starfield-right.webp",
+      "bytes": 685496,
+      "sha256": "9fa7ae676490e9be9f187c9f47559192abd642c8272555e915cf5382f2ae9b11"
+    },
+    {
+      "filename": "sun-starfield-right@2x.webp",
+      "bytes": 2557186,
+      "sha256": "367a8efd49f1b8ee62e1e42c5dfbfc994e2b00a2989d926526a187e71b5fc04e"
+    },
+    {
+      "filename": "sun-starfield-top-standard.webp",
+      "bytes": 135394,
+      "sha256": "a6669e1a6d002a0fc42908f6d7da3a23ba5886b5d400d3b603a97dbccb5b684e"
+    },
+    {
+      "filename": "sun-starfield-top-standard@2x.webp",
+      "bytes": 441990,
+      "sha256": "663f66e2bab44098d34617a204533df743e7c44cd39c23a48ee6fc227ddf71a8"
+    },
+    {
+      "filename": "sun-starfield-top.webp",
+      "bytes": 277824,
+      "sha256": "93d287016aab6740b83bcfee54d436bf821cd863e5a392a65146a3822e356d45"
+    },
+    {
+      "filename": "sun-starfield-top@2x.webp",
+      "bytes": 994212,
+      "sha256": "b46b579a9188c11efdeb4c5584345f04a741c4a04322d8daa4d46ac7c07c3456"
+    },
+    {
+      "filename": "sun-surface-chromosphere.webp",
+      "bytes": 184638,
+      "sha256": "ce3d0039caed3048ef33001bfb36928f2ae9b5642970884bf5451365c625c7f1"
+    },
+    {
+      "filename": "sun-surface-chromosphere@2x.webp",
+      "bytes": 546536,
+      "sha256": "c12e763736af75e25bf25dc36366bd3e8000c22124e94da6660fecbc4c825918"
+    },
+    {
+      "filename": "sun-surface-corona.webp",
+      "bytes": 158862,
+      "sha256": "031a9fad75df29b5bc8d34e7560416e6a1f5aa388b13093d4ee342124d88defe"
+    },
+    {
+      "filename": "sun-surface-corona@2x.webp",
+      "bytes": 432320,
+      "sha256": "d5b127d8ae7068471c9a5691e691d43da5a735a830f6113b0fd189e61a4143db"
+    },
+    {
+      "filename": "sun-surface-magnetic.webp",
+      "bytes": 222798,
+      "sha256": "14f798741b4564d8691f50f02381399bd53d82b956cb55f0e0e945824bfc02b1"
+    },
+    {
+      "filename": "sun-surface-magnetic@2x.webp",
+      "bytes": 625976,
+      "sha256": "285d15375fbefb40ca7358f31ee9ff134732c3df5fbb4435da236eff95e22d65"
+    },
+    {
+      "filename": "sun-surface-photosphere.webp",
+      "bytes": 71038,
+      "sha256": "b90f9e8ff1c7d7076980297dcb3f3f9ab8d0de394db2b3a5d0f6cb9bd86232c2"
+    },
+    {
+      "filename": "sun-surface-photosphere@2x.webp",
+      "bytes": 275162,
+      "sha256": "667232b5e19e3778dd83ec214fd3b30233f9c082c0e2d503ab983c783503ecfc"
+    }
+  ]
+}

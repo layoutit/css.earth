@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-shared-celestial@1",
+  "namespace": "neptune",
+  "meanHeliocentricDistanceAu": 30.05,
+  "sourceDistanceConvention": {
+    "source": "cssEarth accepted mean-heliocentric-distance catalogue",
+    "qualification": "Retains the accepted body catalogue distance; this is not an observer-epoch ephemeris."
+  }
+}

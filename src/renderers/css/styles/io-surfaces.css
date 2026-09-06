@@ -1,0 +1,24 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="io"]) > :is(.io-sun-camera, .io-camera, .io-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="io"]) .io-sun-camera, :where(.planet-stage[data-object-id="io"]) .io-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="io"]) .io-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="io"]) .io-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="io"]) .io-body > s {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; transform-origin: 0 0; backface-visibility: hidden;
+  background-image: var(--io-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="io"]) .io-body > .io-polar { background-image: var(--io-poles-image); }
+:where(.planet-stage[data-object-id="io"]) .io-material-root { z-index: 3; --io-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="io"]) .io-material, :where(.planet-stage[data-object-id="io"]) .io-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="io"]) .io-material { background-repeat: no-repeat; transform: rotate(var(--io-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="io"]) .io-billboard { border-radius: 50%; background-color: var(--io-billboard-color); opacity: var(--io-billboard-opacity); }
+.planet-stage:where([data-object-id="io"])[data-lod="billboard"] .io-scene, .planet-stage:where([data-object-id="io"])[data-lod="marker"] .io-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="io"])[data-lod="marker"] .io-billboard { opacity: 0; }
+
+.planet-stage:where([data-object-id="io"]).io-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

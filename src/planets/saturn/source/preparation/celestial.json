@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-object-celestial-preparation@1",
+  "id": "saturn",
+  "includeSun": false,
+  "directionalSun": {
+    "meanHeliocentricDistanceAu": 9.58
+  },
+  "provenance": {
+    "distance": "Retained catalog mean heliocentric distance; not an epoch-specific ephemeris.",
+    "sky": "Pinned HYG catalog field and common clean-room directional-Sun standard."
+  }
+}
