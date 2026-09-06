@@ -6,7 +6,7 @@
 // the exact Horizons URL that produced it, so any row can be re-fetched with
 // curl and nothing else. `VEC_CORR='NONE'` matters: the Horizons default is
 // light-time corrected, and an ephemeris is a geometric statement.
-import { writeFileSync } from 'node:fs'
+import { writeRecordSections } from './lib/write-record-sections.mjs'
 import { horizons, parseVectors, vectorsUrl } from './lib/horizons.mjs'
 import { HEADER } from './lib/sources.mjs'
 
@@ -190,5 +190,5 @@ export const PLAN_MARS_ECLIPTIC = {
   ],
 } as const
 `
-writeFileSync(new URL('../src/__fixtures__/horizons.ts', import.meta.url), out)
+writeRecordSections(new URL('../src/__fixtures__/horizons.ts', import.meta.url), out, 'horizons')
 process.stdout.write(`wrote ${blocks.length} fixtures\n`)

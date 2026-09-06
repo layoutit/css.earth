@@ -71,7 +71,7 @@ export function preparePerspectiveCamera({ sky, radius = 230, initialScenePitchD
       target: [0, 0, 0],
       rotX: initialScenePitchDegrees,
       rotY: defaultControlYawDegrees,
-      zoom: 1.1,
+      zoom: 1,
       distance: 0,
     }),
     projection: Object.freeze({

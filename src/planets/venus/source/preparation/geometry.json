@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "venus",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/venus/venus-clouds.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/venus/venus-poles-clouds.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#d6aa69"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 0,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8.0,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#fff1df",
+    "ambientIntensity": 0.16
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "cssvenus-prepared-runtime-scene@1",
+    "materialSchema": "cssvenus-prepared-view-material@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 3,
+      "rotationDirection": "retrograde",
+      "rotationPeriodEarthDays": 243
+    },
+    "animation": {
+      "cloudsVisualSeconds": 36,
+      "surfaceVisualSeconds": 96,
+      "direction": "retrograde"
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
@@ -12,7 +13,7 @@ function definition(overrides = {}) {
 
 test("validates actions against real controls for every existing object", async () => {
   for (const object of OBJECTS) {
-    const { objectControls: controls } = await import(`../planets/${object.id}/site/control-content.mjs`);
+    const {controls} = await loadObjectTestDefinition(object.id);
     for (const lens of controls.lenses?.controls ?? []) {
       assert.equal(requireObjectAction(controls, { kind: "lens", id: lens.id }).id, lens.id);
     }
