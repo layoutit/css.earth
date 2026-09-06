@@ -19,6 +19,14 @@ The shared preparation helper marks those gaps with a neutral gray grid; it
 does not infer terrain. Enclosed black terrain and nonzero JPEG edge pixels
 remain untouched, so a dark edge fringe can remain.
 
+Coverage decision: both pinned rasters have three color channels and no alpha
+or accompanying validity mask. Southern-edge-connected exact black is used as
+a conservative indication of fill in each of these map images. This is a
+heuristic, not a surveyed coverage boundary. In particular, JPEG compression can
+make fill pixels nonzero. We preserve those uncertain pixels instead of raising
+a brightness threshold that could erase observed dark terrain. The shared grid
+defines the presentation, not scientific validity for every dataset.
+
 Preparation creates 452 retained surface leaves, polar textures, a lighting
 atlas, sky faces, and the shared heliocentric presentation. The mesh uses a
 spherical mean radius; no resolved Ceres shape or elevation model is claimed.
@@ -33,3 +41,10 @@ The shared perspective camera converts PolyCSS geometry to world units without
 an extra zoom multiplier. Lighting fits that same projected radius, and its
 prepared disc stays within the atlas frame. The low-polygon surface still has
 small geometric facets; the overlay does not represent an atmosphere.
+
+Lighting decision: retain the published Dawn observations, including their
+original crater shadows. The optional Shadows setting adds approximate
+directional illumination of the spherical model. With Shadows off, a fixed
+curvature overlay gives the globe depth. Neither mode reconstructs unlit albedo
+or physically relights the photographed crater shadows. This limitation is
+explained in both lens descriptions.
