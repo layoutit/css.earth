@@ -982,9 +982,9 @@
       "sha256": "f2c02091dcfe4343299fff3bd96b6fd8d542fc2ef4d6aeb1fbe7acef77ff2b98"
     },
     {
-      "filename": "earth-places.json",
-      "bytes": 14817233,
-      "sha256": "0fe21dbc9296f84883a67c4243e5cbc8c545f7de16542277c2c3e0308b414ce4"
+      "filename": "earth-places.pack",
+      "bytes": 6161607,
+      "sha256": "de235d034088427685ff03ab5c8a96d046728d5795a6f2ce27780ddfd5e06180"
     },
     {
       "filename": "earth-starfield-back-standard.webp",
@@ -1195,6 +1195,11 @@
       "filename": "earth-view-interior.webp",
       "bytes": 1302,
       "sha256": "4e8ee2c852e0799d4dd36fdfdf0c29eaa52e89e7c5033a5777d5147ba39db8a4"
+    },
+    {
+      "filename": "geographic-lens-buenos-aires-noise-4cada2b3e2421208.json",
+      "bytes": 23022,
+      "sha256": "4cada2b3e242120820682204187271831284c6382e2e79c94657f4dbc3e9fd7e"
     }
   ]
 }

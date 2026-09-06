@@ -1,3 +1,4 @@
+import { geographicControlSlots } from "./test/geographic-controls.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
@@ -11,9 +12,9 @@ class Input extends EventTarget {
   setAttribute(key, value) { this.attributes[key] = value; }
   emit(type) { this.dispatchEvent(new Event(type)); }
 }
-function root(inputs) {
+function root(inputs, slots = []) {
   const classes = new Set();
-  return { querySelectorAll: () => inputs, attributes: {}, setAttribute(key, value) { this.attributes[key] = value; },
+  return { querySelectorAll: selector => selector === "[data-geographic-option]" ? slots : selector === "[data-lens-legend]" ? [] : inputs, attributes: {}, setAttribute(key, value) { this.attributes[key] = value; },
     classList: { toggle(key, on) { if (on) classes.add(key); else classes.delete(key); }, remove: key => classes.delete(key), contains: key => classes.has(key) } };
 }
 function harness(controls = moonControls, mutate = () => {}) {
@@ -23,7 +24,7 @@ function harness(controls = moonControls, mutate = () => {}) {
     type: control.kind === "toggle" ? "checkbox" : "range", checked: control.checked, value: String(initial[control.name]) }));
   const motion = new Input({ name: "motion" }), contrast = new Input({ name: "skyContrast" });
   settingInputs.push(motion, contrast);
-  const lensRoot = root(lensInputs), settingsRoot = root(settingInputs);
+  const lensRoot = root(lensInputs, geographicControlSlots(controls.lenses.geographicCapacity ?? 0)), settingsRoot = root(settingInputs);
   const stage = { ownerDocument: { querySelector: selector => selector === ".planet-lenses" ? lensRoot : settingsRoot } };
   const errors = [], actions = []; let state = { committed: null, desired: initial, plan: null, pending: true };
   let actionImplementation = action => {
@@ -61,7 +62,7 @@ for (const object of OBJECTS) test(`${object.id}: one binder consumes every actu
   const count = h.actions.length;
   h.motion.emit("change"); h.contrast.emit("change"); assert.equal(h.actions.length, count);
   assert.deepEqual(h.errors, []);
-  assert.equal(h.binding.stats().listenerCount, controls.lenses.controls.length + controls.settings.controls.length);
+  assert.equal(h.binding.stats().listenerCount, controls.lenses.controls.length + (controls.lenses.geographicCapacity ?? 0) + controls.settings.controls.length);
   h.binding.destroy(); h.binding.destroy(); h.lensInputs[0].emit("click");
   assert.equal(h.actions.length, count); assert.equal(h.binding.stats().listenerCount, 0);
   assert.equal(h.lensRoot.classList.contains("is-loading"), false);
@@ -134,7 +135,7 @@ test("prepared lens legends follow committed selection through pending work", ()
   const ids = moonControls.lenses.controls.slice(0, 2).map(lens => lens.id);
   const legends = ids.map(id => ({ dataset: { lensLegend: id }, hidden: true }));
   const h = harness(moonControls, ({ lensRoot, lensInputs }) => {
-    lensRoot.querySelectorAll = selector => selector === "[data-lens-legend]" ? legends : lensInputs;
+    lensRoot.querySelectorAll = selector => selector === "[data-geographic-option]" ? [] : selector === "[data-lens-legend]" ? legends : lensInputs;
   });
   h.ready(); assert.deepEqual(legends.map(legend => legend.hidden), [false, true]);
   const desired = { ...h.initial, lensId: ids[1] };

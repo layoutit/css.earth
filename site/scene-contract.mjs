@@ -92,12 +92,20 @@ export function requireObjectControls(content, objectId = "unknown") {
       throw new TypeError(`Object ${objectId} ${name} controls must be an array.`);
     }
   }
+  if(content.lenses?.geographicCapacity !== undefined && (!Number.isSafeInteger(content.lenses.geographicCapacity) || content.lenses.geographicCapacity < 1 || content.lenses.geographicCapacity > 8)) throw new TypeError("Geographic lens capacity must be bounded.");
   const lenses = content.lenses?.controls ?? [];
   const lensIds = lenses.map((lens) => lens?.id);
   if (lensIds.some((id) => typeof id !== "string" || !id) ||
       new Set(lensIds).size !== lensIds.length ||
       (lenses.length && !lensIds.includes(content.lenses.defaultLens))) {
     throw new TypeError(`Object ${objectId} lens IDs/default are invalid.`);
+  }
+  for (const lens of lenses) {
+    if (lens.entityIds !== undefined && (!Array.isArray(lens.entityIds) || !lens.entityIds.length ||
+        lens.entityIds.some(id => typeof id !== "string" || !id) || new Set(lens.entityIds).size !== lens.entityIds.length ||
+        lens.id === content.lenses.defaultLens)) {
+      throw new TypeError(`Object ${objectId} destination lens scope is invalid.`);
+    }
   }
   const settings = content.settings?.controls ?? [];
   const names = settings.map((setting) => setting?.name);

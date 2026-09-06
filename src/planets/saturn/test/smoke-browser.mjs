@@ -93,6 +93,8 @@ async function enableMotion(page) {
     document.documentElement.dataset.playing === "true" &&
     window.__saturn.runtime.playback().animations.some(animation => animation.running));
   await action.click();
+  await page.locator(".explorer-rail-explore").click();
+  assert.equal(await page.locator(".planet-drawer-content").isVisible(), true);
 }
 
 async function runtimeState(page) {

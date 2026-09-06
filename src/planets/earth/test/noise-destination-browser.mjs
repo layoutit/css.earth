@@ -26,13 +26,13 @@ try {
       }));
       assert.equal(prior.motion, playing);
       assert.ok(prior.times.every(time => time > 1000), "Exercise a rotated globe, not the initial pose");
-      if (!await page.locator(".planet-lenses").evaluate(panel => panel.open)) {
-        await page.locator(".planet-lenses > summary").click();
-      }
+      await page.locator(".planet-sidebar-search").fill("Buenos Aires");
+      await page.getByRole("button", { name: "Buenos Aires, Buenos Aires F.D., Argentina", exact: true }).click();
+      await page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
       await page.locator('button[name="lens"][value="buenos-aires-noise"]').click();
       await page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
       await page.waitForFunction(() => {
-        const state = window.__earth.runtime.pages().noise;
+        const state = window.__earth.runtime.pages().geographic;
         return state.desired.length === 16 && !state.activeLoads &&
           state.desired.every(key => state.retained.some(page => page.key === key && page.published));
       }, null, { timeout: 30000 });
@@ -41,7 +41,7 @@ try {
         times: document.getAnimations().map(animation => animation.currentTime),
         animationStates: document.getAnimations().map(animation => animation.playState),
         camera: window.__earth.camera.state(), stable: window.__earth.assertStableDomIdentity(),
-        noise: window.__earth.runtime.pages().noise,
+        noise: window.__earth.runtime.pages().geographic,
       }));
       assert.equal(after.motion, false, "The object request updates shared playback intent and its control");
       assert.ok(after.times.every(time => time === 0));

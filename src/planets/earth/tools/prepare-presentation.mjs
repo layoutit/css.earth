@@ -11,7 +11,7 @@ import { PREPARED_EARTH_STARFIELD as sky } from "../runtime/preparedStarfield.mj
 import { PREPARED_EARTH_SKY_SUN as sun } from "../runtime/preparedSkySun.mjs";
 import { PREPARED_EARTH_PLACES as catalog } from "../runtime/preparedPlaces.mjs";
 import { PREPARED_EARTH_CITY_PAGES } from "../runtime/preparedCityPages.mjs";
-import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
+import { prepareOverlayCapacity } from "./city/geographic-overlay.mjs";
 import { cameraPlan } from "./prepared-camera.mjs";
 import { earthSurfaceBankInventory } from "./prepared-surface-pages.mjs";
 
@@ -116,7 +116,7 @@ export async function prepareEarthPresentation() {
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
     tree,variants,materials:tracks,viewBindings:[materialCounter,cutawayCounter].map(node=>({kind:"counter-rotation",target:index(node),systemTransform:null})),animations:[],
     motionFrame:[index(system),index(body.surface[0])],
-    pageLayers:[{id:"city",plan:PREPARED_EARTH_CITY_PAGES,lensIds:["normal","buenos-aires-noise"]},{id:"noise",plan:PREPARED_EARTH_NOISE,lensIds:["buenos-aires-noise"]}]
+    pageLayers:[{id:"city",plan:PREPARED_EARTH_CITY_PAGES,lensIds:["normal"]},{id:"geographic",geographic:true,plan:prepareOverlayCapacity(),lensIds:["normal"]}]
       .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:"/scenes/earth/"},carrier:index(body.surface[0]),system:index(system),className:"earth-city-page",textureClassName:"earth-api-texture"})),
     observations:{constants:{dom:{interiorMounted:true}},counts:[{category:"dom",name:"interiorLeafCount",target:index(cutaway),kind:"leaves",includeRoot:false}],
       materials:[{category:"material",name:"materialFrame",track:"lighting",field:"frame"},

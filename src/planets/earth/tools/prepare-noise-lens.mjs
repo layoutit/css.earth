@@ -3,8 +3,7 @@ import { createHash } from "node:crypto";
 import { gunzipSync } from "node:zlib";
 import sharp from "sharp";
 import { PREPARED_EARTH_SCENE as scene } from "../runtime/preparedScene.mjs";
-import { prepareCityPageGeometry } from "./city/page-geometry.mjs";
-import { prepareGeographicTextureQuad } from "./city/wms-page-geometry.mjs";
+import { prepareGeographicOverlayTile, prepareOverlayCapacity } from "./city/geographic-overlay.mjs";
 import { prepareLocationPoint,prepareLocationCamera } from "./city/prepare-location.mjs";
 import { ensureEarthPreparationDirectories,EARTH_PUBLIC_ROOT } from "./preparation-paths.mjs";
 const source=new URL("../source/noise/",import.meta.url),pin=JSON.parse(await readFile(new URL("manifest.json",source),"utf8"));
@@ -37,25 +36,37 @@ const svg=Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" h
 const raster=await sharp(svg,{limitInputPixels:size*size}).ensureAlpha().raw().toBuffer();
 await ensureEarthPreparationDirectories();
 const roots=[],assets=[];
-const coarse=prepareCityPageGeometry({level:0,x:26,y:4},scene);
+
 for(let y=0;y<cols;y++)for(let x=0;x<cols;x++){
   const b={west:bounds.west+(bounds.east-bounds.west)*x/cols,east:bounds.west+(bounds.east-bounds.west)*(x+1)/cols,
     north:bounds.north+(bounds.south-bounds.north)*y/cols,south:bounds.north+(bounds.south-bounds.north)*(y+1)/cols};
   const image=await sharp(raster,{raw:{width:size,height:size,channels:4}}).extract({left:x*side,top:y*side,width:side,height:side}).webp({lossless:true,effort:6}).toBuffer();
   const sha256=hash(image),url=`/scenes/earth/earth-noise-day-${x}-${y}-${sha256.slice(0,16)}.webp`;
   await writeFile(`${EARTH_PUBLIC_ROOT}/${url.split("/").at(-1)}`,image);assets.push(url);
-  const mapping=prepareGeographicTextureQuad(coarse,{...b,west:b.west+360,east:b.east+360},32);
-  const m=mapping.frameMatrix.split(",").map(Number);for(let i=0;i<3;i++)m[12+i]+=coarse.normal[i]*.003;
-  roots.push({key:`noise-day-${x}-${y}`,level:0,x,y,normal:coarse.normal,...mapping,frameMatrix:m.join(","),
-    width:side,height:side,children:[],url,bytes:image.length,sha256,rasterSource:"prepared-noise@1"});
+  roots.push(...prepareGeographicOverlayTile(scene,b,{key:`noise-day-${x}-${y}`,
+    width:side,height:side,url,bytes:image.length,sha256}));
 }
 const thumbnail=await sharp(raster,{raw:{width:size,height:size,channels:4}}).resize(96,96).flatten({background:"#171719"}).webp({lossless:true}).toBuffer();
 await writeFile(`${EARTH_PUBLIC_ROOT}/earth-lens-noise.webp`,thumbnail);assets.push("/scenes/earth/earth-lens-noise.webp");
 const legend=[...new Map(data.features.map(f=>[f.properties.rango,{label:f.properties.rango,color:`rgb(${f.properties.color.split(" ").join(",")})`,low:Number(f.properties.dba_low)}])).values()].sort((a,b)=>a.low-b.low);
-const plan={schema:"cssearth-earth-city-pages@1",dataset:"buenos-aires-noise-2025",assetOrigin:"https://earth-assets.lowpoly.cc",qualification:pin.qualification,
-  credit:`Buenos Aires APrA, ${pin.year}, ${pin.license}`,sourcePage:pin.sourcePage,sourceSha256:pin.decodedSha256,
-  roots,initialLayer:roots[0],rasterScale:32,poolSize:32,minimumZoom:16,maximumDecodedBytes:32*side*side*4,decodedPageBytes:side*side*4,
-  targetCssPixels:2048,maximumConcurrentLoads:3,lensIds:[pin.id],index:{maximumDirectories:1,maximumBytes:1,maximumDirectoryBytes:1,maximumConcurrentLoads:1},
-  bounds,legend,assets,camera:prepareLocationCamera(scene,prepareLocationPoint(scene,-58.44,-34.61),1024)};
+const plan={...prepareOverlayCapacity(),dataset:`${pin.id}-${pin.year}`,qualification:pin.qualification,
+  credit:`${pin.publisher}, ${pin.year}, ${pin.license}`,sourcePage:pin.sourcePage,sourceSha256:pin.decodedSha256,
+  roots,initialLayer:roots[0],bounds,legend,assets,
+  camera:prepareLocationCamera(scene,prepareLocationPoint(scene,-58.44,-34.61),1024)};
+const content={schema:"cssearth-geographic-lens@1",id:pin.id,entityIds:["3435910"],baseLensId:"normal",
+  label:"Daytime noise",qualification:pin.qualification,coverage:{bounds},
+  source:{publisher:pin.publisher,year:pin.year,units:pin.units,url:pin.sourcePage,
+    license:pin.license,licenseUrl:pin.licenseUrl,sha256:pin.decodedSha256},
+  legend:{kind:"categories",title:"Daytime noise",meta:pin.units,
+    items:legend.map(({label,color})=>({label,color,description:""}))},
+  pages:Object.fromEntries(Object.entries(plan).filter(([key])=>!["assets","camera","legend"].includes(key)))};
+const packageBytes=Buffer.from(JSON.stringify(content)),sha256=hash(packageBytes);
+const packageUrl=`/scenes/earth/geographic-lens-${pin.id}-${sha256.slice(0,16)}.json`;
+await writeFile(`${EARTH_PUBLIC_ROOT}/${packageUrl.split("/").at(-1)}`,packageBytes);
+const descriptor={id:pin.id,label:content.label,thumbnailUrl:"/scenes/earth/earth-lens-noise.webp",
+  package:{url:packageUrl,bytes:packageBytes.length,sha256}};
+await writeFile(new URL("../runtime/preparedGeographicLenses.mjs",import.meta.url),
+  `// Preparation-only package inventory. Loaded entity descriptors travel in the place catalogue.\nexport const PREPARED_GEOGRAPHIC_LENSES=${JSON.stringify([{entityIds:content.entityIds,lens:descriptor}])};\n`);
+assets.push(packageUrl);
 await writeFile(new URL("../runtime/preparedNoise.mjs",import.meta.url),`// Generated from pinned Buenos Aires APrA noise estimates.\nexport const PREPARED_EARTH_NOISE=${JSON.stringify(plan)};\n`);
 console.log(JSON.stringify({features:data.features.length,bounds,tiles:roots.length,bytes:roots.reduce((s,p)=>s+p.bytes,0),sourceSha256:pin.decodedSha256}));

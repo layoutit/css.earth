@@ -7,6 +7,7 @@ import { orderFacts } from "../fact-order.mjs";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
 import { requireObjectControls } from "../scene-contract.mjs";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
+import LensBrowser from "./LensBrowser.astro";
 import SearchIcon from "./SearchIcon.astro";
 
 interface PreparedTitle {
@@ -67,6 +68,8 @@ interface Lens {
   thumbnailUrl: string;
   description: string;
   title: string;
+  entityIds?: string[];
+  legendNote?: string;
   legend?: {
     kind: "scale" | "categories";
     title: string;
@@ -165,6 +168,13 @@ const hasResources = resources.length > 0;
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ??
   orderedCharts[0];
+const initialEntity = {
+  id: objectId, name: title.label, kind: activeObject?.kind, parentId: null,
+  title, introduction, facts: allFacts, resources,
+  lensIds: lenses?.controls.filter(lens => !lens.entityIds).map(lens => lens.id) ?? [],
+  sections: ["search", "charts", ...galleries.map(gallery => `gallery:${gallery.id}`)],
+};
+const serializedEntity = JSON.stringify(initialEntity).replaceAll("<", "\\u003c");
 ---
 
 <aside id={`${objectId}-sidebar`} class="planet-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Planet information">
@@ -213,7 +223,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       hidden
     >
       <PlanetObjectResults activeObjectId={objectId} />
-      {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
+      {destinations && <section class="planet-destination-results" aria-label="Places" hidden>
         <p class="planet-destination-hint" role="status"></p>
         <ul class="planet-destination-list">
           {Array.from({ length: 8 }, () => <li hidden>
@@ -226,20 +236,20 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       </section>}
       <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
     </nav>
-    {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
-      <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>
-      <h2 class="planet-destination-name"></h2>
-      <p class="planet-destination-context"></p>
-      <p class="planet-destination-status" role="status"></p>
-    </section>}
-    <div class="planet-information-panel">
-      {destinations && <section class="planet-destination-intro">
-        <button class="planet-find-destination" type="button">Find a city</button>
+    <div class="planet-information-panel" data-entity-card data-entity-id={objectId} data-entity-kind={activeObject?.kind}>
+      <script type="application/json" data-initial-entity set:html={serializedEntity}></script>
+
+      {destinations && <section class="planet-destination-intro" data-card-section="search">
+        <button class="planet-find-destination" type="button">Find a place</button>
         <p>{destinations.description}</p>
       </section>}
       <section class="planet-selected-panel">
+      <nav class="entity-path" aria-label="Place hierarchy" hidden>
+        {Array.from({ length: 8 }, () => <span hidden><button type="button" data-entity-parent></button><span class="entity-path-separator" aria-hidden="true">›</span></span>)}
+      </nav>
         <div class="planet-title-row">
           <h1 class="planet-title" aria-label={title.label}>
+            <span class="planet-title-text" hidden></span>
             <svg
               class="planet-title-svg"
               viewBox={title.renderViewBox}
@@ -258,6 +268,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
           </h1>
         </div>
         {introduction && <p class="planet-introduction">{introduction}</p>}
+        <p class="planet-destination-status" role="status" hidden></p>
       </section>
       <details
         id={`${objectId}-factsheet-panel`}
@@ -304,7 +315,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       </details>
       {defaultChart && <details
         id={`${objectId}-charts`}
-        class="planet-chart-switcher"
+        class="planet-chart-switcher" data-card-section="charts"
         data-active-chart={defaultChart.id}
         aria-labelledby={`${objectId}-charts-title`}
         open
@@ -363,102 +374,9 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
           ))}
         </div>
       </details>}
-      {hasLenses && lenses && <details id={`${objectId}-lenses`} class="planet-lenses" open>
-        <summary class="planet-panel-summary planet-lens-browser-header">
-          <h2 class="planet-panel-heading">{lenses.title.label}</h2>
-          <label class="planet-lens-search-field">
-            <input
-              class="planet-lens-search"
-              type="search"
-              aria-label="Search surface lenses"
-              autocomplete="off"
-            />
-            <span class="planet-lens-search-icon"><SearchIcon /></span>
-          </label>
-        </summary>
-        <div id={`${objectId}-layers-menu`} class="planet-layers-menu">
-          <nav class="planet-observation-controls" aria-label="Surface lenses">
-            {lenses.controls.map((lens) => (
-              <div class="planet-observation-option" data-lens-option>
-                <button
-                  class="planet-observation-control"
-                  type="button"
-                  name="lens"
-                  value={lens.id}
-                  aria-pressed={lens.id === lenses.defaultLens ? "true" : "false"}
-                  aria-expanded={lens.legend
-                    ? (lens.id === lenses.defaultLens ? "true" : "false")
-                    : undefined}
-                  aria-controls={lens.legend ? `${objectId}-${lens.id}-legend` : undefined}
-                  title={lens.title}
-                >
-                  <img class="planet-lens-icon" src={lens.thumbnailUrl} width="18" height="18" alt="" />
-                  <span class="planet-lens-label">{lens.label}</span>
-                </button>
-                {lens.legend && <section
-                  id={`${objectId}-${lens.id}-legend`}
-                  class="planet-lens-legend-panel"
-                  data-lens-legend={lens.id}
-                  aria-label={`${lens.label} legend`}
-                  hidden={lens.id !== lenses.defaultLens}
-                >
-                  {lens.legend.kind === "scale" && lens.legend.labels &&
-                    (lens.legend.src || lens.legend.colors) && <>
-                    <div class="planet-lens-legend-scale-row">
-                      {lens.legend.src
-                        ? <img
-                            class="planet-lens-legend-scale"
-                            src={lens.legend.src}
-                            width={lens.legend.width}
-                            height={lens.legend.height}
-                            alt={`${lens.legend.title} color scale from ${lens.legend.labels[0]} to ${lens.legend.labels.at(-1)} ${lens.legend.meta ?? ""}`}
-                          />
-                        : <span
-                            class="planet-lens-legend-scale planet-lens-legend-segments"
-                            role="img"
-                            aria-label={`${lens.legend.title} color scale from ${lens.legend.labels[0]} to ${lens.legend.labels.at(-1)} ${lens.legend.meta ?? ""}`}
-                          >
-                            {lens.legend.colors?.map((color) => (
-                              <span
-                                class="planet-lens-legend-segment"
-                                style={`--planet-lens-legend-color: ${color}`}
-                                aria-hidden="true"
-                              ></span>
-                            ))}
-                          </span>}
-                    </div>
-                    <div class="planet-lens-legend-labels" aria-hidden="true">
-                      {lens.legend.labels.map((label, index) => (
-                        <span>{label}{index === lens.legend.labels.length - 1 && lens.legend.meta
-                          ? ` ${lens.legend.meta}`
-                          : ""}</span>
-                      ))}
-                    </div>
-                  </>}
-                  {lens.legend.kind === "categories" && lens.legend.items && (
-                    <ul class="planet-lens-legend-categories">
-                      {lens.legend.items.map((item) => (
-                        <li>
-                          <span
-                            class="planet-lens-legend-swatch"
-                            style={`--planet-lens-legend-color: ${item.color}`}
-                            aria-hidden="true"
-                          ></span>
-                          <span class="planet-lens-legend-category-label">{item.label}</span>
-                          <span class="planet-lens-legend-category-description">{item.description}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </section>}
-              </div>
-            ))}
-          </nav>
-          <p class="planet-lens-empty" aria-live="polite" hidden>No matching lenses</p>
-        </div>
-      </details>}
+      {hasLenses && lenses && <LensBrowser objectId={objectId} lenses={lenses} />}
       {galleries.map((gallery) => (
-      <details id={`${objectId}-${gallery.id}`} class="planet-gallery-panel">
+      <details id={`${objectId}-${gallery.id}`} class="planet-gallery-panel" data-card-section={`gallery:${gallery.id}`}>
         <summary class="planet-panel-summary">
           <h2 class="planet-panel-heading">{gallery.title.label}</h2>
           <span class="planet-panel-toggle" aria-hidden="true"></span>

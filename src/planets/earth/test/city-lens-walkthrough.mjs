@@ -19,7 +19,7 @@ try{
   const settle=async noise=>{
     await page.waitForFunction(()=>!window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
     await page.waitForFunction(noise=>{
-      const s=window.__earth.runtime.pages()[noise ? "noise" : "city"];
+      const s=window.__earth.runtime.pages()[noise ? "geographic" : "city"];
       return s.desired.length>0&&!s.pendingSelection&&!s.activeLoads&&!s.index.activeLoads&&
         s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));
     },noise,{timeout:120000});
@@ -39,7 +39,7 @@ try{
   await checkpoint("04-noise");await page.waitForTimeout(2200);
   await page.mouse.move(1020,530);await page.mouse.wheel(0,-100);await settle(false);await settle(true);
   await checkpoint("05-noise-detail");await page.waitForTimeout(2000);
-  report.final=await page.evaluate(()=>({city:window.__earth.runtime.pages().city,noise:window.__earth.runtime.pages().noise,
+  report.final=await page.evaluate(()=>({city:window.__earth.runtime.pages().city,noise:window.__earth.runtime.pages().geographic,
     stable:window.__earth.assertStableDomIdentity(),sameNodes:[...document.querySelector(".planet-stage").querySelectorAll("*")].every((n,i)=>n===window.__walkthroughNodes[i])}));
   assert.ok(report.final.stable&&report.final.sameNodes);
   assert.deepEqual(report.final.city.errors,[]);assert.deepEqual(report.final.city.index.errors,[]);assert.deepEqual(report.final.noise.errors,[]);

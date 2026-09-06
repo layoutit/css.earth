@@ -38,7 +38,6 @@ const charts = [
   },
 ];
 const resources = [
-  { label: "Buenos Aires APrA", role: "noise", description: "2025 daytime noise estimates, CC-BY-2.5-AR", href: "https://data.buenosaires.gob.ar/dataset/mapa-ruido" },
   { label: "GeoNames", role: "places", description: "City names and locations, CC-BY-4.0", href: "https://www.geonames.org/export/" },
   { label: "NASA", role: "imagery", description: "Surface & clouds", href: "https://science.nasa.gov/earth/" },
   { label: "ESA WorldCover", role: "imagery", description: "2021 WorldCover satellite composite via Terrascope, CC-BY-4.0", href: "https://esa-worldcover.org/en/data-access" },
@@ -59,5 +58,5 @@ const resources = [
   resources={resources}
   lenses={lenses}
   settings={settings}
-  destinations={{ searchLabel: "Search planets and cities", description: `${PREPARED_EARTH_PLACES.count.toLocaleString("en")} cities worldwide.` }}
+  destinations={{ searchLabel: "Search planets, countries and cities", description: `${PREPARED_EARTH_PLACES.count.toLocaleString("en")} places worldwide.` }}
 />

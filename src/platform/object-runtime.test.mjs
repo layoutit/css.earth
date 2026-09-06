@@ -167,7 +167,7 @@ test("Earth's actual prepared page layers join shared publication, playback and 
   const events = [], plans = [];
   const h = harness({ definition: earthDefinition }, { mountPages({ own, plan }) {
     plans.push(plan); own(() => events.push("destroy"));
-    return { publish: () => events.push("frame"), setLens: lens => events.push(lens.id), setPlaying: value => events.push(value), stats: () => ({}) };
+    return { replacePlan: () => events.push("replace"), publish: () => events.push("frame"), setLens: lens => events.push(lens.id), setPlaying: value => events.push(value), stats: () => ({}) };
   } }); t.after(h.restore); await h.complete();
   assert.deepEqual(plans, earthDefinition.pageLayers.map(layer => layer.plan));
   assert.ok(events.includes("frame")); h.runtime.resume(); assert.equal(events.at(-1), true);

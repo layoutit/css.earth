@@ -6,7 +6,6 @@ import earthInterior from "../source/interior/earth-interior.json" with { type: 
 
 const lensDescriptions = {
   normal: "Blue Marble + WorldCover 2021",
-  "buenos-aires-noise": "2025 daytime estimates · dBA",
   topography: "Land and seafloor relief",
   "night-lights": "Black Marble night lights",
   "cross-section": "Interior structure",
@@ -28,14 +27,15 @@ const lensLegends = {
 const lenses = {
   title: PREPARED_SHELL_TITLES.lenses,
   defaultLens: PREPARED_EARTH_LENSES.defaultLens,
+  geographicCapacity: 8,
   controls: PREPARED_EARTH_LENSES.controls.map((lens) => ({
     id: lens.id,
+    ...(lens.entityIds ? { entityIds: lens.entityIds } : {}),
     label: lens.label,
     thumbnailUrl: lens.thumbnailUrl,
     description: lensDescriptions[lens.id],
     title: `${lens.label}: ${lens.qualification}`,
     legend: lens.legend ?? lensLegends[lens.id],
-    legendNote: lens.id === "buenos-aires-noise" ? "APrA · 2025 daytime estimates. Uncolored areas have no estimate." : undefined,
   })),
 };
 const settings = {

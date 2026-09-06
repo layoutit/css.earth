@@ -123,13 +123,13 @@ test("Earth disposal retires all pages after one native cleanup failure and prev
 });
 
 
-test("Buenos Aires noise reuses the normal surface without decoding or retiring its pages", async () => {
+test("A geographic lens base reuses the normal surface without decoding or retiring its pages", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const before = pages(f).resident, paletteBefore = palette(surface(f));
     const requestedPages = () => f.jobs.filter(job => banks.some(bank => bank.urls.includes(job.url))).length;
     const requests = requestedPages();
-    const selected = f.selection.dispatch({ kind: "lens", id: "buenos-aires-noise" });
+    const selected = f.selection.dispatch({ kind: "lens", id: "normal" });
     await f.settle(); assert.equal(await selected, true);
     assert.deepEqual(palette(surface(f)), paletteBefore);
     assert.equal(requestedPages(), requests); assert.equal(pages(f).resident, before);

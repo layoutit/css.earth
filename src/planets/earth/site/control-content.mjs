@@ -14,6 +14,7 @@ export const objectControls = Object.freeze({
       "generator": "tools/prepare-shell-titles.mjs"
     }),
     "defaultLens": "normal",
+    "geographicCapacity": 8,
     "controls": [
       {
         "id": "normal",
@@ -21,83 +22,7 @@ export const objectControls = Object.freeze({
         "thumbnailUrl": "/scenes/earth/earth-lens-normal.webp",
         "description": "Blue Marble + WorldCover 2021",
         "title": "Normal: NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
-        "legend": undefined,
-        "legendNote": undefined
-      },
-      {
-        "id": "buenos-aires-noise",
-        "label": "Buenos Aires noise",
-        "thumbnailUrl": "/scenes/earth/earth-lens-noise.webp",
-        "description": "2025 daytime estimates · dBA",
-        "title": "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate.",
-        "legend": [
-          {
-            "label": "30-35 dBA",
-            "color": "rgb(169,255,115)",
-            "low": 30
-          },
-          {
-            "label": "35-40 dBA",
-            "color": "rgb(76,230,0)",
-            "low": 35
-          },
-          {
-            "label": "40-45 dBA",
-            "color": "rgb(38,115,0)",
-            "low": 40
-          },
-          {
-            "label": "45-50 dBA",
-            "color": "rgb(255,255,0)",
-            "low": 45
-          },
-          {
-            "label": "50-55 dBA",
-            "color": "rgb(254,204,92)",
-            "low": 50
-          },
-          {
-            "label": "55-60 dBA",
-            "color": "rgb(230,152,0)",
-            "low": 55
-          },
-          {
-            "label": "60-65 dBA",
-            "color": "rgb(255,0,0)",
-            "low": 60
-          },
-          {
-            "label": "65-70 dBA",
-            "color": "rgb(115,0,0)",
-            "low": 65
-          },
-          {
-            "label": "70-75 dBA",
-            "color": "rgb(132,0,168)",
-            "low": 70
-          },
-          {
-            "label": "75-80 dBA",
-            "color": "rgb(0,38,255)",
-            "low": 75
-          },
-          {
-            "label": "80-85 dBA",
-            "color": "rgb(0,38,115)",
-            "low": 80
-          },
-          {
-            "label": "85-90 dBA",
-            "color": "rgb(0,38,115)",
-            "low": 85
-          },
-          {
-            "label": "90-95 dBA",
-            "color": "rgb(0,38,115)",
-            "low": 90
-          }
-        ],
-        "legendNote": "APrA · 2025 daytime estimates. Uncolored areas have no estimate."
+        "legend": undefined
       },
       {
         "id": "topography",
@@ -105,8 +30,7 @@ export const objectControls = Object.freeze({
         "thumbnailUrl": "/scenes/earth/earth-lens-topography.webp",
         "description": "Land and seafloor relief",
         "title": "Topography: NASA Blue Marble topography and bathymetry",
-        "legend": undefined,
-        "legendNote": undefined
+        "legend": undefined
       },
       {
         "id": "night-lights",
@@ -114,8 +38,7 @@ export const objectControls = Object.freeze({
         "thumbnailUrl": "/scenes/earth/earth-lens-night-lights.webp",
         "description": "Black Marble night lights",
         "title": "Night lights: NASA Black Marble 2016 global composite",
-        "legend": undefined,
-        "legendNote": undefined
+        "legend": undefined
       },
       {
         "id": "cross-section",
@@ -150,8 +73,7 @@ export const objectControls = Object.freeze({
           ]),
           "meta": "Schematic",
           "sourceUrl": "https://science.nasa.gov/earth/facts/"
-        }),
-        "legendNote": undefined
+        })
       }
     ]
   },

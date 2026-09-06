@@ -450,6 +450,23 @@
       "consumers": [
         "city-wmts"
       ]
+    },
+    {
+      "id": "natural-earth-country-navigation",
+      "path": "places/ne_110m_admin_0_countries.geojson",
+      "expectedSha256": "6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f",
+      "expectedBytes": 838726,
+      "origin": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/9380cca83db5f9aef52d5e762765100745f84b27/geojson/ne_110m_admin_0_countries.geojson",
+      "credit": "Natural Earth",
+      "license": "Public domain",
+      "licenseEvidence": [
+        "https://www.naturalearthdata.com/about/terms-of-use/"
+      ],
+      "acquisition": "Pinned Natural Earth 1:110m administrative country snapshot for prepared navigation views.",
+      "redistribution": "Public domain; Natural Earth attribution retained.",
+      "consumers": [
+        "places"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -469,8 +486,8 @@
   "documents": [
     {
       "path": "places/manifest.json",
-      "expectedSha256": "1dc6c7bc7c74a497c9de76245d6f1b10f979507cee0b940a4722001ab3d97099",
-      "expectedBytes": 1359,
+      "expectedSha256": "6fa9383da6b810c9a6c3eb0690ed76696442dbd8120e6fdf6068443fd1a04491",
+      "expectedBytes": 1916,
       "purpose": "Pinned GeoNames place catalogue snapshot, license and source hashes; not imagery coverage"
     },
     {

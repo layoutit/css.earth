@@ -165,19 +165,16 @@
 .planet-destination-result-context,
 .planet-destination-hint { color: var(--shell-text-muted); font: 400 12px/1.4 var(--shell-ui-font); }
 .planet-destination-hint { margin: 12px 8px 4px; }
-.planet-destination-panel {
-  box-sizing: border-box;
-  padding: 18px;
-  border-radius: 4px;
-  background: #151515;
-  color: var(--shell-text);
-  font: 400 14px/1.5 var(--shell-ui-font);
-  pointer-events: auto;
-}
-.planet-destination-name { margin: 20px 0 3px; font: 500 26px/1.15 var(--shell-ui-font); }
-.planet-destination-context { margin: 0 0 18px; color: var(--shell-text-muted); }
-.planet-destination-status { margin: 0; color: #bcbcbc; }
-.planet-destination-panel:not([hidden]) + .planet-information-panel > :not(.planet-lenses) { display: none; }
+/* Hierarchy is a compact navigation line inside the existing card header. */
+.entity-path { display: flex; align-items: center; gap: 6px; height: 24px; max-width: calc(100% - 30px); margin: 0 0 8px; overflow: hidden; color: inherit; font: 400 1rem/1.4 var(--shell-ui-font); }
+.entity-path > span { display: flex; align-items: center; gap: 6px; min-width: 0; }
+[data-entity-parent] { display: block; min-width: 0; padding: 0; border: 0; color: inherit; background: transparent; font: inherit; text-align: left; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; cursor: pointer; }
+[data-entity-parent]:hover, [data-entity-parent]:focus-visible { color: var(--shell-text); }
+[data-entity-parent]:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+.entity-path-separator { color: var(--shell-text-muted); opacity: .55; }
+.entity-path > span[data-last-parent] .entity-path-separator { display: none; }
+.entity-path[hidden], .entity-path > span[hidden], .planet-primary-facts > li[hidden], .planet-additional-facts > li[hidden], .planet-observation-option[hidden], .planet-resource-row[hidden] { display: none; }
+.planet-place-lens-note { color: var(--shell-text-muted); font: 400 12px/1.4 var(--shell-ui-font); }
 .planet-destination-back,
 .planet-find-destination {
   padding: 7px 0;

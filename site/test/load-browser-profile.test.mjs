@@ -37,7 +37,7 @@ function snapshot(controls = emptyControls) {
   const remaining = objectSettings.filter((setting) =>
     setting !== speed && setting !== shadows);
   return {
-    lensPanelCount: controls.lenses?.controls.length ? 1 : 0,
+    geographicSlots: 0, lensPanelCount: controls.lenses?.controls.length ? 1 : 0,
     settingsPanelCount: 1,
     lenses: controls.lenses?.controls.map(({ id }) => id) ?? [],
     settings: [sharedSettings[0],
@@ -75,7 +75,7 @@ test("optional controls never excuse a missing shared panel or Motion", async ()
   const validated = validatePlanetBrowserProfile(object, profile(), emptyControls);
   await assert.rejects(assertRenderedObjectControls(page({ ...snapshot(), settingsPanelCount: 0 }), validated), /shared settings/u);
   await assert.rejects(assertRenderedObjectControls(page({ ...snapshot(), settings: sharedSettings.slice(1) }), validated), /exact declared settings/u);
-  await assert.rejects(assertRenderedObjectControls(page({ ...snapshot(), lensPanelCount: 1 }), validated), /lens panel presence/u);
+  await assert.rejects(assertRenderedObjectControls(page({ ...snapshot(), geographicSlots: 0, lensPanelCount: 1 }), validated), /lens panel presence/u);
 });
 
 test("declared lenses require their methods, matching race IDs, and complete retained coverage", () => {

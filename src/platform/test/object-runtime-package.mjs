@@ -1,3 +1,4 @@
+import { geographicControlSlots } from "./geographic-controls.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createObjectRuntime } from "../object-runtime.mjs";
@@ -203,7 +204,8 @@ export async function preparedSelectionFixture(definition) {
   for (const control of definition.controls.settings.controls) inputs.set(control.name, input({ name: control.name,
     tagName: "INPUT", type: control.kind === "toggle" ? "checkbox" : "range", min: "0", max: "4", step: "1" }));
   const lensRoot = f.document.createElement("div"), settingsRoot = f.document.createElement("div");
-  lensRoot.querySelectorAll = () => buttons; settingsRoot.querySelectorAll = () => [...inputs.values()];
+  const geographicSlots = geographicControlSlots(definition.controls.lenses.geographicCapacity ?? 0);
+  lensRoot.querySelectorAll = selector => selector === "[data-geographic-option]" ? geographicSlots : selector === "[data-lens-legend]" ? [] : buttons; settingsRoot.querySelectorAll = () => [...inputs.values()];
   f.document.querySelector = selector => selector === ".planet-lenses" ? lensRoot : settingsRoot;
   let binding;
   const selection = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime,

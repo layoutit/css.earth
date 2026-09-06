@@ -519,8 +519,10 @@ async function proveResponsiveZoomProfiles(browser) {
       const sidebarRight = sidePanel ? sidebarBounds?.right ?? 0 : 0;
       const unobstructedSceneWidth = viewportWidth - sidebarRight;
       const sceneCenter = rootBounds.left + rootBounds.width / 2;
-      // The shared shell now lets the stage fill the viewport behind its dock.
-      const availableCenter = stageBounds.left + stageBounds.width / 2;
+      // The sky fills the viewport; the retained scene follows the shared dock offset.
+      const dockOffset = viewportWidth > 820 && viewportWidth > viewportHeight
+        ? parseFloat(getComputedStyle(document.body).getPropertyValue("--explorer-scene-offset")) : 0;
+      const availableCenter = stageBounds.left + stageBounds.width / 2 + dockOffset;
       return {
         width: viewportWidth,
         height: viewportHeight,

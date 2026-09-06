@@ -485,7 +485,8 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
   fill: currentColor;
 }
 
-.planet-introduction {
+.planet-introduction,
+.planet-destination-status {
   width: 100%;
   margin: 8px 0 0;
   padding: 0 8px 0 0;
@@ -1637,3 +1638,10 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     display: none;
   }
 }
+
+/* Dynamic place labels use the planetary title's pinned Inter face and scale. */
+@font-face { font-family: "Planet title"; src: url("/shell/title-font.ttf") format("truetype"); font-weight: 100 900; font-display: swap; }
+.planet-title[data-dynamic-title] { width: auto; height: auto; max-width: 100%; line-height: 30.13px; }
+.planet-title-text { font: 500 24.1px/30.13px "Planet title", var(--shell-ui-font); font-optical-sizing: none; font-variation-settings: "opsz" 28; letter-spacing: -0.086px; }
+
+.planet-title-svg[hidden] { display: none; }

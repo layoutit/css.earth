@@ -1,7 +1,8 @@
+import { createGeographicLensBinding } from "./geographic-lens-binding.mjs";
 import { requireObjectControls } from "../../site/scene-contract.mjs";
-import { objectCycleStates, requireObjectAction } from "./object-runtime-contract.mjs";
+import { objectCycleStates, requireObjectAction, objectLensAvailable } from "./object-runtime-contract.mjs";
 
-export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError }) {
+export function createObjectControlBinding({ stage, controls, initialSelection, getState, onAction, onError, getEntity = () => null, getGeographicState = () => null }) {
   requireObjectControls(controls);
   if (!stage?.ownerDocument || [getState, onAction, onError].some(callback => typeof callback !== "function")) {
     throw new TypeError("Object controls require the mounted document and shared selection endpoint.");
@@ -9,11 +10,12 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const document = stage.ownerDocument;
   const lensRoot = document.querySelector(".planet-lenses");
   const settingsRoot = document.querySelector(".planet-settings");
-  const lensInputs = [...(lensRoot?.querySelectorAll('button[name="lens"]') ?? [])];
+  const lensInputs = [...(lensRoot?.querySelectorAll('button[name="lens"]') ?? [])].filter(input => !input.hasAttribute?.('data-geographic-lens'));
+  const geographic = createGeographicLensBinding(lensRoot, controls.lenses?.geographicCapacity ?? 0);
   const settingsInputs = [...(settingsRoot?.querySelectorAll("input[name], button[name]") ?? [])]
     .filter(input => !["motion", "skyContrast"].includes(input.name));
   const legends = [...(lensRoot?.querySelectorAll("[data-lens-legend]") ?? [])]
-    .filter(legend => legend.dataset?.lensLegend !== undefined);
+    .filter(legend => legend.dataset?.lensLegend !== undefined && !legend.closest?.("[data-geographic-option]"));
   const lenses = new Map(lensInputs.map(input => [input.value, input]));
   const settings = new Map(settingsInputs.map(input => [input.name, input]));
   const lensPlans = controls.lenses?.controls ?? [], settingPlans = controls.settings?.controls ?? [];
@@ -49,13 +51,18 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     lastState = next;
     const committed = next.committed ?? initialSelection;
     const shown = next.pending ? next.desired : committed;
-    const pressed = new Set(next.plan?.pressedLenses ?? [committed.lensId]);
+    const overlay = getGeographicState();
+    const pressed = new Set(overlay?.id ? [overlay.id] : next.plan?.pressedLenses ?? [committed.lensId]);
+    geographic.publish(getEntity(), overlay, ready);
     for (const root of [lensRoot, settingsRoot]) {
-      root?.classList.toggle("is-loading", !ready || next.pending === true);
-      root?.setAttribute("aria-busy", String(!ready || next.pending === true));
+      root?.classList.toggle("is-loading", !ready || next.pending === true || overlay?.status === "loading");
+      root?.setAttribute("aria-busy", String(!ready || next.pending === true || overlay?.status === "loading"));
     }
     for (const [id, input] of lenses) {
-      input.disabled = !ready;
+      const available = objectLensAvailable(controls, getEntity(), id);
+      input.disabled = !ready || !available;
+      const option = input.closest?.("[data-lens-option]");
+      if (option) option.dataset.entityAvailable = String(available);
       input.setAttribute("aria-pressed", String(pressed.has(id)));
     }
     for (const legend of legends) legend.hidden = !pressed.has(legend.dataset.lensLegend);
@@ -81,7 +88,8 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     if (destroyed) return;
     if (!ready) { publish(); return; }
     try {
-      const validated = requireObjectAction(controls, action);
+      const external = action.kind === "lens" && getEntity()?.lenses?.some(lens => lens.id === action.id);
+      const validated = external ? action : requireObjectAction(controls, action);
       actions++;
       Promise.resolve(onAction(validated)).catch(error => {
         if (destroyed) return;
@@ -92,7 +100,8 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   try {
     publish();
-    for (const [id, input] of lenses) listen(input, "click", () => act({ kind: "lens", id }));
+    for (const input of geographic.inputs) listen(input, "click", () => { if (!input.disabled) act({ kind: "lens", id: input.value }); });
+    for (const [id, input] of lenses) listen(input, "click", () => { if (!input.disabled) act({ kind: "lens", id }); });
     for (const control of settingPlans) {
       const input = settings.get(control.name);
       const event = control.kind === "toggle" ? "change" : input.type === "range" ? "input" : "click";
@@ -112,7 +121,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     destroyed = true; ready = false;
     const errors = [];
     for (const remove of listeners.splice(0)) { try { remove(); } catch (error) { errors.push(error); } }
-    for (const input of [...lensInputs, ...settingsInputs]) {
+    for (const input of [...lensInputs, ...geographic.inputs, ...settingsInputs]) {
       try { input.disabled = true; if (input.name === "speed") input.dataset.runtimeReady = "false"; }
       catch (error) { errors.push(error); }
     }

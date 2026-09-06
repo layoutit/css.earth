@@ -67,6 +67,7 @@ try {
           inset: parseFloat(bodyStyle.getPropertyValue("--explorer-content-inset")),
           titleInset: box(".planet-title").left - sidebar.left,
           mountedLayers: document.querySelectorAll(".planet-stage > .planet-render-root").length,
+          renderRoots: [...document.querySelectorAll(".planet-stage > .planet-render-root")].map(node => ({ left: node.offsetLeft, width: node.offsetWidth })),
           overflow: document.documentElement.scrollWidth > innerWidth,
         };
       });
@@ -80,8 +81,12 @@ try {
         near(result.rail.y, result.header.y, "rail and wordmark share one row");
         near(result.rail.height, result.header.height, "rail and header share one height");
         assert.ok(result.rail.bottom < config.height, `${config.name}: rail ends before the viewport bottom`);
-        near(result.stage.left, mobile ? 0 : 170, "scene offset follows the responsive panel layout");
+        near(result.stage.left, 0, "stage and sky retain the full viewport");
         near(result.stage.width, config.width, "scene retains its full viewport width");
+        for (const root of result.renderRoots) {
+          near(root.left, mobile ? 0 : 170, "rendered scene offset follows the responsive panel layout");
+          near(root.width, config.width, "rendered scene retains its full viewport width");
+        }
         near(result.wordmarkSlot.x, 16, "wordmark left inset");
         near(result.wordmarkSlot.y, 8, "wordmark top inset");
         near(result.wordmarkSlot.height, 48, "wordmark row height");

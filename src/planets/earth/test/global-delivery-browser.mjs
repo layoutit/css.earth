@@ -55,7 +55,7 @@ try{
       for(const [name,label] of [["Buenos Aires","Buenos Aires, Buenos Aires F.D., Argentina"],["Tokyo","Tokyo, Tokyo, Japan"]]){
         await page.locator(".planet-sidebar-search").fill(name);
         const start=Date.now();await page.getByRole("button",{name:label,exact:true}).click();
-        await page.waitForFunction(()=>document.querySelector(".planet-destination-panel")?.ariaBusy==="false");
+        await page.waitForFunction(()=>document.querySelector("[data-entity-card]")?.ariaBusy==="false");
         const keys=await settled("wmts-");
         run.views.push({name,keys,elapsedMs:Date.now()-start});
         await page.screenshot({path:resolve(output,`${name.toLowerCase().replaceAll(" ","-")}-dpr${dpr}.png`)});

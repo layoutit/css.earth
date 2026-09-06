@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { gunzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { searchDestinations } from "../../../../site/destination-search.mjs";
 import { PREPARED_EARTH_PLACES } from "../runtime/preparedPlaces.mjs";
@@ -8,12 +9,15 @@ import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { prepareCityPageGeometry, createCityGeographicSampler } from "../tools/city/page-geometry.mjs";
 import { pageCoordinates, prepareLocationPoint } from "../tools/city/prepare-location.mjs";
 
-const bytes = await readFile(new URL("../../../../public/scenes/earth/earth-places.json", import.meta.url));
+const packed = await readFile(new URL(`../../../../public${PREPARED_EARTH_PLACES.url}`, import.meta.url));
+const bytes = gunzipSync(packed);
 const { places } = JSON.parse(bytes);
 
 test("prepared city catalogue is pinned, distinct and globally distributed", () => {
-  assert.equal(bytes.length, PREPARED_EARTH_PLACES.bytes);
-  assert.equal(createHash("sha256").update(bytes).digest("hex"), PREPARED_EARTH_PLACES.sha256);
+  assert.equal(packed.length, PREPARED_EARTH_PLACES.bytes);
+  assert.equal(createHash("sha256").update(packed).digest("hex"), PREPARED_EARTH_PLACES.sha256);
+  assert.equal(bytes.length, PREPARED_EARTH_PLACES.decodedBytes);
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), PREPARED_EARTH_PLACES.decodedSha256);
   assert.equal(places.length, PREPARED_EARTH_PLACES.count);
   assert.equal(new Set(places.map(place => place.id)).size, places.length);
   for (const name of ["Buenos Aires", "Tokyo", "Nairobi", "Lagos", "Paris", "Sydney", "New York City"]) {

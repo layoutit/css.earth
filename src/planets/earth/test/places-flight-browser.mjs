@@ -11,10 +11,10 @@ const city = (page, name) => page.getByRole("button", { name, exact: true });
 async function select(page, query, label) {
   await page.locator(".planet-sidebar-search").fill(query);
   await city(page, label).click();
-  await page.locator(".planet-destination-panel").waitFor();
+  await page.locator("[data-entity-card]").waitFor();
 }
 async function arrived(page) {
-  await page.waitForFunction(() => document.querySelector(".planet-destination-panel").ariaBusy === "false");
+  await page.waitForFunction(() => document.querySelector("[data-entity-card]").ariaBusy === "false");
 }
 async function frame(page) {
   return page.evaluate(() => {
@@ -44,12 +44,12 @@ try {
       assert.notDeepEqual(mid.scene, start.scene, "Camera orientation must animate");
       await page.screenshot({ path: new URL(`${label}-in-flight.png`, output).pathname });
       await arrived(page);
-      assert.match(await page.locator('.planet-destination-status').innerText(), /WorldCover imagery/u);
+      assert.equal(await page.locator('.planet-destination-status').isVisible(), false);
       await page.waitForFunction(() => [...document.querySelectorAll('.earth-city-page')].some(e => e.style.visibility === 'visible' && e.style.backgroundImage.includes('blob:')));
       const end = await frame(page);
       assert.ok(end.scale / start.scale > 100);
       await page.screenshot({ path: new URL(`${label}-arrived.png`, output).pathname });
-      await page.getByRole('button', { name: '← Back to Earth', exact: true }).click();
+      await page.locator('[data-entity-parent="earth"]').click();
       assert.ok((await frame(page)).scale > start.scale * 50, "Return must animate too");
       await page.waitForTimeout(4800);
       assert.ok(Math.abs((await frame(page)).scale - start.scale) < .01);
@@ -77,30 +77,30 @@ try {
     await page.mouse.move(1000,550);
     await page.mouse.down();
     await page.mouse.up();
-    await page.getByText("Flight stopped. Select the city again to continue.", { exact:true }).waitFor();
+    await page.getByText("Flight stopped. Select the place again to continue.", { exact:true }).waitFor();
     const stopped = await frame(page);
     await page.waitForTimeout(700);
     assert.deepEqual(await frame(page), stopped, "Pointer-down must cancel without later camera writes");
     await select(page, "Buenos Aires", "Buenos Aires, Buenos Aires F.D., Argentina");
     await page.waitForTimeout(450);
     await page.keyboard.press("Escape");
-    await page.getByText("Flight stopped. Select the city again to continue.", { exact:true }).waitFor();
+    await page.getByText("Flight stopped. Select the place again to continue.", { exact:true }).waitFor();
     await select(page, "Buenos Aires", "Buenos Aires, Buenos Aires F.D., Argentina");
     await page.waitForTimeout(450);
     await page.mouse.move(1000,550);
     await page.mouse.wheel(0, -80);
-    await page.getByText("Flight stopped. Select the city again to continue.", { exact:true }).waitFor();
+    await page.getByText("Flight stopped. Select the place again to continue.", { exact:true }).waitFor();
     // A new destination replaces the old flight; only its arrival may publish.
     await select(page, "Buenos Aires", "Buenos Aires, Buenos Aires F.D., Argentina");
     await page.waitForTimeout(350);
     await select(page, "Tokyo", "Tokyo, Tokyo, Japan");
     await arrived(page);
-    assert.equal(await page.locator('.planet-destination-name').innerText(), "Tokyo");
-    assert.match(await page.locator('.planet-destination-status').innerText(), /WorldCover imagery/u);
+    assert.equal(await page.locator('.planet-title-text').innerText(), "Tokyo");
+    assert.equal(await page.locator('.planet-destination-status').isVisible(), false);
     await page.emulateMedia({ reducedMotion:"reduce" });
     await select(page, "Buenos Aires", "Buenos Aires, Buenos Aires F.D., Argentina");
     await arrived(page);
-    assert.match(await page.locator('.planet-destination-status').innerText(), /WorldCover imagery/u);
+    assert.equal(await page.locator('.planet-destination-status').isVisible(), false);
     await page.emulateMedia({ reducedMotion:"no-preference" });
     await select(page, "Tokyo", "Tokyo, Tokyo, Japan");
     await page.waitForTimeout(350);

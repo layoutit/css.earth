@@ -162,11 +162,11 @@ test("the actual Moon registry import must point to the audited client and retur
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding.replace("mountMoonClient", "differentExport") })), /one bound shared factory export/);
 });
 test("an actual generated Uranus site module cannot execute preparation through a literal-looking export", async () => {
-  const file = resolve("src/planets/uranus/site/preparedLensControls.mjs");
-  const { name, value } = readPreparedJsonModule(await readFile(file, "utf8"));
-  const executable = `export const ${name} = (() => (${JSON.stringify(value)}))();`;
+  const file = resolve("src/planets/uranus/site/control-content.mjs");
+  const { objectControls } = await import("../src/planets/uranus/site/control-content.mjs");
+  const executable = `export const objectControls = (() => (${JSON.stringify(objectControls)}))();`;
   await assert.rejects(auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "uranus"),
-    readText: path => path === file ? executable : readFile(path, "utf8") }), /preparedLensControls.mjs.*non-shared reachable module must be serialized data/);
+    readText: path => path === file ? executable : readFile(path, "utf8") }), /control-content.mjs.*Object controls must only project static prepared content/);
 });
 
 test("the actual OBJECTS registry has only normalized packages and one shared source closure", async () => {

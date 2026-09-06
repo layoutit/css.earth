@@ -1,3 +1,4 @@
+import { createEntityCard } from "./entity-card.mjs";
 import { createDestinationBrowser } from "./destination-browser.mjs";
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
 import { createExplorerRailController } from "./explorer-rail.mjs";
@@ -24,7 +25,9 @@ export function mountPlanetShell({
     own(createSheetController(drawer, windowTarget, lifetime));
     own(createChartSwitcherController(drawer, windowTarget, lifetime));
     own(createChartPixelAlignmentController(drawer, windowTarget, lifetime));
-    own(createLensBrowserController(drawer, windowTarget, lifetime));
+    for (const root of drawer.querySelectorAll("[data-lens-browser]")) {
+      own(createLensBrowserController(root, windowTarget, lifetime));
+    }
     settingsController = own(createSettingsController(
       documentTarget, windowTarget, { motionEnabled, onMotionChange }, lifetime,
     ));
@@ -50,8 +53,7 @@ export function mountPlanetShell({
   });
 }
 
-function createLensBrowserController(drawer, windowTarget, lifetime) {
-  const root = drawer.querySelector(".planet-lenses");
+function createLensBrowserController(root, windowTarget, lifetime) {
   if (!root) {
     return Object.freeze({ destroy() {} });
   }
@@ -68,7 +70,7 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
     .filter((option) => option instanceof windowTarget.HTMLElement);
   const buttons = options.map((option) =>
     option.querySelector('button[name="lens"]'));
-  if (options.length === 0 || buttons.some((button) =>
+  if (buttons.some((button) =>
     !(button instanceof windowTarget.HTMLButtonElement))) {
     throw new Error("Planet shell surface lens browser has no valid lenses.");
   }
@@ -109,12 +111,17 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
     for (let index = 0; index < options.length; index += 1) {
       const option = options[index];
       const button = buttons[index];
-      const matches = button.textContent.toLocaleLowerCase("en").includes(query);
+      const matches = option.dataset.entityAvailable !== "false" &&
+        button.textContent.toLocaleLowerCase("en").includes(query);
       option.hidden = !matches;
       if (matches) visible += 1;
     }
-    empty.hidden = visible !== 0;
+    empty.hidden = visible !== 0 || !query;
   };
+
+  const scopeObserver = new windowTarget.MutationObserver(filter);
+  lifetime.onDispose(() => scopeObserver.disconnect());
+  for (const option of options) scopeObserver.observe(option, { attributes: true, attributeFilter: ["data-entity-available"] });
 
   search.addEventListener("input", filter, { signal: events.signal });
   search.addEventListener("click", (event) => {
@@ -133,6 +140,7 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
     destroy() {
       events.abort();
       legendObserver.disconnect();
+      scopeObserver.disconnect();
       search.value = "";
       for (const option of options) option.hidden = false;
       empty.hidden = true;
@@ -242,8 +250,10 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   const selectedSearchValue = search.value;
   let currentSearchValue = selectedSearchValue;
   let visibleObjects = 0;
+  const card = createEntityCard({ documentTarget, onNavigate: id => destinations?.selectById(id) });
+  lifetime.onDispose(() => card.destroy());
   const destinations = createDestinationBrowser({
-    documentTarget, windowTarget,
+    documentTarget, windowTarget, card,
     onResults(count) { empty.hidden = visibleObjects + count > 0; },
     onSelected(place) { currentSearchValue = place.name; render(false); search.blur(); },
     onReset() { currentSearchValue = selectedSearchValue; render(false); },
@@ -274,7 +284,6 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     open = next;
     if (next && resetQuery) search.value = "";
     if (!next) search.value = currentSearchValue;
-    destinations?.setOpen(next);
     information.hidden = next;
     browser.hidden = !next;
     trigger.ariaPressed = String(next);

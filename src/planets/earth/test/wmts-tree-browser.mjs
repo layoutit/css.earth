@@ -71,8 +71,8 @@ try{
         try{
           await page.waitForFunction(()=>{const s=window.__earth.runtime.pages().city;return s.desired.length>0&&!s.pendingSelection&&!s.activeLoads&&!s.index.activeLoads&&s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));},null,{timeout:120000});
         }catch(error){run.failure=await page.evaluate(()=>window.__earth.runtime.pages().city);throw error;}
-        if(noise)await page.waitForFunction(()=>{const s=window.__earth.runtime.pages().noise;return s.desired.length>0&&!s.activeLoads&&s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));});
-        const state=await page.evaluate(()=>({paging:window.__earth.runtime.pages().city,noise:window.__earth.runtime.pages().noise,stable:window.__earth.assertStableDomIdentity(),identical:[...document.querySelector(".planet-stage").querySelectorAll("*")].every((n,i)=>n===window.__savedNodes[i]),nodes:window.__savedNodes.length}));
+        if(noise)await page.waitForFunction(()=>{const s=window.__earth.runtime.pages().geographic;return s.desired.length>0&&!s.activeLoads&&s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));});
+        const state=await page.evaluate(()=>({paging:window.__earth.runtime.pages().city,noise:window.__earth.runtime.pages().geographic,stable:window.__earth.assertStableDomIdentity(),identical:[...document.querySelector(".planet-stage").querySelectorAll("*")].every((n,i)=>n===window.__savedNodes[i]),nodes:window.__savedNodes.length}));
         assert.ok(state.stable&&state.identical);assert.deepEqual(state.paging.index.errors,[]);assert.deepEqual(state.paging.errors,[]);
         assert.ok(state.paging.reservedDecodedBytes<=plan.maximumDecodedBytes);assert.ok(state.paging.index.reservedDecodedBytes<=plan.index.maximumBytes);
         run.views.push({id:sample.id,elapsedMs:Date.now()-start,state});

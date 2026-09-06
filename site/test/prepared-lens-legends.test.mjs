@@ -69,7 +69,7 @@ test("every object forwards its object-owned legend through the shared shell", a
   ];
   const controls = await Promise.all(objectIds.map((objectId) => readFile(
     new URL(
-      `../../src/planets/${objectId}/site/control-content.mjs`,
+      `../../src/planets/${objectId}/site/control-content.source.mjs`,
       import.meta.url,
     ),
     "utf8",

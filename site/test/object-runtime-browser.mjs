@@ -143,6 +143,7 @@ try {
         record.actions.push(await page.evaluate(() => window.__objectRuntimeProbe.inspect().find(owner => owner.kind === "selection").state));
       }
       for (const lens of profile.objectControls.lenses?.controls ?? []) {
+        await profile.enterLensContext(page, lens.id);
         await action(page.locator(`button[name="lens"][value="${lens.id}"]`));
         assert.deepEqual(await page.locator('button[name="lens"][aria-pressed="true"]').evaluateAll(nodes=>nodes.map(node=>node.value)),[lens.id]);
         await waitForAuditPreparedReadiness(page,object.id);
@@ -160,6 +161,7 @@ try {
           !record.native.writes.some(write=>write.target===`material:${definition.materials.findIndex(track=>track.id===material.track)}`)))continue;
         if(variant.when.lensId!==undefined){
           await page.locator(".explorer-rail-explore").click();
+          await profile.enterLensContext(page, variant.when.lensId);
           await action(page.locator(`button[name="lens"][value="${variant.when.lensId}"]`));
         }
         for(const [name,value] of Object.entries(variant.when)){

@@ -16,7 +16,7 @@ test("publishes evidence-backed Earth shell content", async () => {
     { id: "ring-system", label: "Rings", value: "None" },
   ]);
   assert.deepEqual(PREPARED_EARTH_LENSES.controls.map(({ id }) => id), [
-    "normal", "buenos-aires-noise", "topography", "night-lights", "cross-section",
+    "normal", "topography", "night-lights", "cross-section",
   ]);
   const snapshot = JSON.parse(await readFile(new URL("../../../../data/planets/earth.json", import.meta.url), "utf8"));
   assert.equal(snapshot.sourceId, 48583);

@@ -30,7 +30,7 @@ const interiorAssets = ["mantle", "outer-core", "inner-core"].flatMap(
 
 export const EARTH_RUNTIME_ASSET_URLS = Object.freeze([
   ...PREPARED_EARTH_NOISE.assets,
-  "earth-places.json",
+  "earth-places.pack",
   "earth-atmosphere-spectrum.svg",
   "earth-photometric-phase-curve.svg",
   "earth-interior-outer-poles.webp",

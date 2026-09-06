@@ -110,12 +110,12 @@ The earlier resampled-COG experiments remain reproducible from `source/city/mani
 
 The optional lens uses [Buenos Aires APrA's 2025 daytime noise estimates](https://data.buenosaires.gob.ar/dataset/mapa-ruido), licensed under [CC BY 2.5 Argentina](https://creativecommons.org/licenses/by/2.5/ar/). This is an annual estimated noise map, not live sensor readings. The original CRS84 GeoJSON is pinned as `source/noise/buenos-aires-day-2025.geojson.gz`; its source URL, compressed and decoded SHA-256 hashes, year, units and license are recorded beside it.
 
-`tools/prepare-noise-lens.mjs` rasterizes the 181 source features offline, preserving the official 30–95 dBA color bins. Sixteen lossless transparent WebP tiles total 3,659,288 bytes. Their prepared CSS transforms align them with the same accepted Earth face as the base imagery. Uncolored locations have no estimate. The lens has a fixed 32-slot retained pool, 16 tiles at most, a prepared Buenos Aires camera destination and a visible source legend. Independent point-in-polygon tests compare geographic source samples with the prepared raster colors.
+`tools/prepare-noise-lens.mjs` rasterizes the 181 source features offline, preserving the official 30–95 dBA color bins. Sixteen lossless transparent WebP tiles total 3,659,288 bytes. Their prepared CSS transforms align them with the same accepted Earth face as the base imagery. Uncolored locations have no estimate. The selected entity supplies the camera destination. Activating its lens fetches a hash-pinned package containing source, coverage, legend and prepared tile records. One shared 32-slot overlay pool displays the active package, with at most three image loads and 128 MiB of reserved decoded pixels. Switching away aborts transport and releases the overlay. Independent point-in-polygon tests compare geographic source samples with the prepared raster colors.
 
 ## City selection
 
 Earth supplies an optional destination capability to the shared shell. The shell
-owns the search input, eight retained result buttons, selected-place panel,
+owns the search input, eight retained result buttons, one shared entity card,
 keyboard controls and return action. Selecting a place keeps the same Earth
 scene mounted and switches to its normal lens with motion paused.
 
@@ -127,8 +127,8 @@ visible attribution in the shell.
 
 `tools/prepare-places.mjs` verifies source hashes, normalizes names and aliases,
 and prepares camera controls against the accepted Earth face projection. It
-writes `earth-places.json` and a hash/size descriptor. Runtime fetches this local
-catalogue only when city search is used, verifies its identity, searches prepared
+writes the compressed `earth-places.pack` and hashes/sizes for its encoded and decoded bytes. Runtime fetches this local
+catalogue only for search or restoring a selected place, verifies its identity, searches prepared
 labels, and transports the selected camera controls. No geocoder or geometry
 derivation runs in the browser. The existing camera rounds control angles to
 hundredths of a degree; this is city navigation, not a precision survey marker.

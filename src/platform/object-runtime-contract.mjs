@@ -209,3 +209,12 @@ export function requireObjectPresentation(presentation, { stage } = {}) {
   Object.freeze(presentation.bodyLayers);
   return Object.freeze(presentation);
 }
+
+// Availability belongs to the selected entity's prepared card and the actual
+// lens inventory. Entity kinds do not introduce additional runtime branches.
+export function objectLensAvailable(controls, entity, id) {
+  const lens = controls.lenses?.controls.find(lens => lens.id === id);
+  if (!lens) return Boolean(controls.lenses?.geographicCapacity && entity?.lenses?.some(lens => lens.id === id));
+  if (!entity) return !lens.entityIds;
+  return entity.lensIds.includes(id) && (!lens.entityIds || lens.entityIds.includes(entity.id));
+}

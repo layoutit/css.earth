@@ -716,6 +716,7 @@ async function exerciseRetainedInteractions(page, planet, profile) {
   await assertRenderedObjectControls(page, profile);
   const lensIds = profile.objectControls.lenses?.controls.length ? retained.lensIds : [];
   for (const id of lensIds) {
+    await profile.enterLensContext(page, id);
     await page.locator(`button[name="lens"][value="${id}"]`).evaluate((button) => button.click());
     await page.waitForFunction(() => {
       const root = document.querySelector(".planet-lenses");
@@ -1456,8 +1457,8 @@ async function proveBreakpointCrossings(page, planet, profile, bounds, baseline)
       "desktop",
       `${planet.id}: 821x720 landscape`,
     );
-    assert.equal(compactDesktopShell.navigation, false,
-      `${planet.id}: compact desktop must hide the whole planet navigation`);
+    assert.equal(compactDesktopShell.navigation, true,
+      `${planet.id}: compact desktop keeps planet navigation available for mouse input`);
     await wheel(page, profile.inputSelector, -240);
     assert.ok((await profile.camera(page)).zoom > expected.zoom,
       `${planet.id}: 821px landscape desktop mode must restore wheel zoom`);
@@ -1703,6 +1704,16 @@ function observePage(page, localBaseUrl) {
   page.on("request", (request) => {
     const requestUrl = new URL(request.url());
     const localUrl = new URL(localBaseUrl);
+    // The selected card may request publisher-prepared editorial text. Scene
+    // resources still have no general external network allowance.
+    const p = requestUrl.searchParams;
+    const editorial = requestUrl.pathname === "/w/api.php" && p.get("origin") === "*" && (
+      requestUrl.origin === "https://www.wikidata.org" && (
+        p.get("action") === "query" && p.get("list") === "search" && /^haswbstatement:P1566=\d+$/u.test(p.get("srsearch") ?? "") ||
+        p.get("action") === "wbgetentities" && /^Q[1-9]\d*$/u.test(p.get("ids") ?? "") && p.get("props") === "claims|sitelinks" && p.get("sitefilter") === "enwiki") ||
+      requestUrl.origin === "https://en.wikipedia.org" && p.get("action") === "query" &&
+        p.get("prop") === "extracts|info|pageprops" && p.get("exsentences") === "2" && p.get("explaintext") === "1");
+    if (editorial) return;
     if (requestUrl.origin !== localUrl.origin) externalRequests.push(request.url());
   });
   return { problems, externalRequests };

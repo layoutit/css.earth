@@ -221,6 +221,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     if (!catalog?.url?.startsWith("/scenes/") || !Number.isSafeInteger(catalog.bytes) || catalog.bytes < 1 ||
         !Number.isSafeInteger(catalog.count) || catalog.count < 1 || !/^[a-f0-9]{64}$/.test(catalog.sha256??"") ||
         !lensIds.includes(defaultLens)) fail("destinations require a pinned catalogue and declared lens");
+    if(catalog.encoding!==undefined && (catalog.encoding!=="gzip" || !Number.isSafeInteger(catalog.decodedBytes) || catalog.decodedBytes<1 || catalog.decodedBytes>32*1024*1024 || !/^[a-f0-9]{64}$/.test(catalog.decodedSha256??"")))fail("destination compression requires a bounded pinned decoded catalogue");
     record(statuses,"destination statuses",["detail","overview"]); string(statuses.detail,"detail status");string(statuses.overview,"overview status");
   }
   if (plan.motionFrame !== undefined) {
@@ -230,8 +231,10 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   }
   if (plan.pageLayers !== undefined) {
     const layers=array(plan.pageLayers,"page layers");unique(layers.map(layer=>layer.id),"page layers");
+    if(layers.filter(layer=>layer.geographic).length>1)fail("only one geographic overlay pool may mount");
     for(const layer of layers) {
-      record(layer,"page layer",["id","plan","carrier","system","className","textureClassName","lensIds"]);
+      record(layer,"page layer",["id","plan","carrier","system","className","textureClassName","lensIds","geographic"]);
+      if(layer.geographic!==undefined && (layer.geographic!==true || !plan.destinations || layer.plan?.roots?.length!==0 || !controls.lenses?.geographicCapacity))fail("geographic pool requires destinations and empty startup data");
       for(const key of ["id","className","textureClassName"])string(layer[key],`page layer ${key}`);
       for(const key of ["carrier","system"]){node(layer[key]);if(!ancestor(layer[key],tree.scene))fail("page layer must belong to scene");}
       if(!ancestor(layer.carrier,layer.system))fail("page carrier must belong to its system");

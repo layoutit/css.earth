@@ -105,7 +105,8 @@ export async function assertRenderedObjectControls(page, profile) {
   const actual = await page.evaluate(() => ({
     lensPanelCount: document.querySelectorAll(".planet-lenses").length,
     settingsPanelCount: document.querySelectorAll(".planet-settings").length,
-    lenses: [...document.querySelectorAll('.planet-lenses button[name="lens"]')].map((button) => button.value),
+    lenses: [...document.querySelectorAll('.planet-lenses button[name="lens"]:not([data-geographic-lens])')].map((button) => button.value),
+    geographicSlots: document.querySelectorAll("[data-geographic-option]").length,
     settings: [...document.querySelectorAll(".planet-settings input, .planet-settings button")]
       .map((input) => ({ name: input.name, kind: (input.tagName === "BUTTON" && input.type === "button") ||
         (input.tagName === "INPUT" && input.type === "range")
@@ -115,6 +116,7 @@ export async function assertRenderedObjectControls(page, profile) {
     `${profile.id}: lens panel presence must match supplied content`);
   assert.equal(actual.settingsPanelCount, 1,
     `${profile.id}: shared settings must exist without extra object controls`);
+  assert.equal(actual.geographicSlots, profile.objectControls.lenses?.geographicCapacity ?? 0);
   assert.deepEqual(actual.lenses, expectedLenses, `${profile.id}: exact declared lens controls`);
   assert.deepEqual(actual.settings, expectedSettings, `${profile.id}: exact declared settings controls`);
   return actual;

@@ -84,3 +84,16 @@ test("reducers produce immutable scalar selections without mutating the committe
   assert.throws(() => requireObjectSelection({ ...next, hiddenController: {} }, objectControls), /scalar/);
   assert.throws(() => requireObjectAction(objectControls, { kind: "cycle", name: "speed", value: 9 }), /Unknown/);
 });
+
+
+test("entity lens availability comes from its prepared content and identity, independent of kind", async () => {
+  const { objectLensAvailable } = await import("./object-runtime-contract.mjs");
+  const controls = { lenses: { controls: [{id:"normal"}, {id:"relief"}, {id:"local",entityIds:["target"]}] } };
+  assert.equal(objectLensAvailable(controls, null, "local"), false);
+  for (const kind of ["planet", "city", "province", "region", "country", "crater"]) {
+    const entity = {id:"target",kind,lensIds:["normal","local"]};
+    assert.equal(objectLensAvailable(controls, entity, "local"), true);
+    assert.equal(objectLensAvailable(controls, entity, "relief"), false);
+  }
+  assert.equal(objectLensAvailable(controls, {id:"elsewhere",lensIds:["normal","local"]}, "local"), false);
+});

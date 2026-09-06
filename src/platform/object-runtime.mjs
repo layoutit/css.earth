@@ -1,3 +1,4 @@
+import { createGeographicLensRuntime } from "./geographic-lens-runtime.mjs";
 import { mountPreparedMapPages } from "./prepared-map/city-pages.mjs";
 import { createPreparedDestinations } from "./prepared-destinations.mjs";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../site/runtime-policy.mjs";
@@ -9,7 +10,7 @@ import { createPreparedPlayback } from "./prepared-playback.mjs";
 import { createRetainedCubicSkyOrbit, mountRetainedCubicSky } from "./cubic-sky-runtime.mjs";
 import { mountRetainedDirectionalSun } from "./directional-sun-runtime.mjs";
 import { mountPreparedPresentation } from "./prepared-presentation.mjs";
-import { initialObjectSelection, invokeRuntimeHook, requireObjectPresentation, requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
+import { initialObjectSelection, objectLensAvailable, invokeRuntimeHook, requireObjectPresentation, requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
@@ -36,6 +37,22 @@ export function createObjectRuntime(definition, services = nativeServices) {
     ready.catch(() => {});
     let mounted = null, orbit = null, currentView = null, reference = null, previousPublication = null;
     const pageLayers = new Map();
+    let geographic = null;
+    const selectionListeners = new Set();
+    lifetime.onDispose(() => selectionListeners.clear());
+    let lastGeographicStatus = null;
+    function publishGeographicStatus() {
+      if (lifetime.disposed) return;
+      const state = geographic?.state();
+      const key = state ? `${state.id}:${state.status}` : "idle";
+      if (lastGeographicStatus !== key) { lastGeographicStatus = key; controls?.publish(); }
+    }
+    const notifySelection = () => { for(const listener of selectionListeners) listener(); };
+    const lensState = () => {
+      const overlay = geographic?.state();
+      return { id: overlay?.id ?? selection?.state().committed?.lensId ?? initialSelection.lensId,
+        ready: Boolean(selection?.state().ready && (!overlay?.id || ["ready", "no-coverage"].includes(overlay.status))) };
+    };
     let allowed = false, navigatedLens = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
@@ -65,12 +82,14 @@ export function createObjectRuntime(definition, services = nativeServices) {
       seekAnimation: playback.seek,
     });
     const destinations = definition.destinations ? createPreparedDestinations({ plan: definition.destinations,
-      ready, lifetime, selectLens: id => selection.dispatch({ kind: "lens", id }),
+      ready, lifetime, selectLens: id => dispatchAction({ kind: "lens", id }),
       navigate: camera => { stopMotion(); alignMotionFrame(); return orbit.flyToState(camera); },
+      onChange: () => { controls?.publish(); notifySelection(); },
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: orbit.initialResponsiveZoom() }),
     }) : null;
-    const controller = Object.freeze({ ready, ...(destinations ? { destinations } : {}),
+    const controller = Object.freeze({ ready, ...(destinations ? { destinations: Object.freeze({ ...destinations, ready, lens: lensState, selectLens: id => dispatchAction({kind:"lens",id}),
+        subscribe(listener) { selectionListeners.add(listener); return () => selectionListeners.delete(listener); } }) } : {}),
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
       destroy() {
@@ -82,6 +101,14 @@ export function createObjectRuntime(definition, services = nativeServices) {
     start().catch(fatal);
     return controller;
 
+    function dispatchAction(action) {
+      if (action.kind === "lens") {
+        if (!objectLensAvailable(definition.controls, destinations?.state(), action.id)) return Promise.resolve(false);
+        if (destinations?.state()?.lenses?.some(lens => lens.id === action.id)) return geographic?.select(action.id) ?? Promise.resolve(false);
+        geographic?.clear();
+      }
+      return selection?.dispatch(action) ?? Promise.resolve(false);
+    }
     function syncPagePlayback() {
       const running = allowed && (selection?.state().committed?.speed ?? initialSelection.speed ?? 1) !== 0;
       for (const layer of pageLayers.values()) layer.setPlaying(running);
@@ -99,6 +126,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
     }
     function publishSelection(state) {
       controls.publish(state);
+      if (!state.pending && state.committed) notifySelection();
       if (!state.committed || state.pending || !orbit || state.committed.lensId === navigatedLens) return;
       navigatedLens = state.committed.lensId;
       const navigation = state.plan?.navigation;
@@ -133,7 +161,9 @@ export function createObjectRuntime(definition, services = nativeServices) {
       if (lifetime.disposed) return;
       controls = environment.createControls({ stage, controls: definition.controls, initialSelection,
         getState: () => selection?.state() ?? { desired: initialSelection, committed: null, pending: true, plan: null },
-        onAction: action => selection?.dispatch(action) ?? false, onError: error => console.error(error) });
+        getEntity: () => destinations?.state() ?? null,
+        getGeographicState: () => geographic?.state() ?? null,
+        onAction: dispatchAction, onError: error => console.error(error) });
       context.own(() => controls.destroy());
       const startup = await lifetime.wait(resources.prepareStartup());
       if (lifetime.disposed || startup.cancelled) return;
@@ -142,9 +172,15 @@ export function createObjectRuntime(definition, services = nativeServices) {
       if (lifetime.disposed) return;
       for (const layer of mounted.pageLayers ?? []) {
         const pages = environment.mountPages({ ...layer, stage, scene: mounted.sceneElement, camera: mounted.cameraElement,
-          own: context.own, onError: fatal });
+          own: context.own, onStatus: layer.geographic ? publishGeographicStatus : undefined, onError: fatal });
         pageLayers.set(layer.id, pages);
-        pages.setLens({ id: initialSelection.lensId });
+        if (layer.geographic) {
+          geographic = createGeographicLensRuntime({ pages, capacity: layer.plan, getEntity: () => destinations.state(),
+            selectBase: id => id === definition.destinations.defaultLens ? selection.dispatch({kind:"lens",id}) : Promise.resolve(false),
+            onChange: () => { controls?.publish(); notifySelection(); } });
+          context.own(() => geographic.destroy());
+          pages.replacePlan(null);
+        } else pages.setLens({ id: initialSelection.lensId });
       }
       syncPagePlayback();
       // Presentation owns its roots immediately during construction, including
@@ -168,7 +204,10 @@ export function createObjectRuntime(definition, services = nativeServices) {
       selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime,
         onCommit: next => {
           playback.setSelection(next);
-          for (const layer of pageLayers.values()) { layer.setLens({ id: next.lensId }); layer.setPlaying(allowed && (next.speed ?? 1) !== 0); }
+          for (const [id, layer] of pageLayers) {
+            if (!definition.pageLayers.find(plan => plan.id === id).geographic) layer.setLens({ id: next.lensId });
+            layer.setPlaying(allowed && (next.speed ?? 1) !== 0);
+          }
         }, onFatalError: fatal,
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });
@@ -205,9 +244,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       const options = Object.freeze({ state: settings("cycle") });
       const features = Object.freeze({ state: settings("toggle") });
       const parents = Object.freeze(nodes.map(node => node.parentNode));
-      const lensState = () => Object.freeze({ id: selection.state().committed?.lensId ?? initialSelection.lensId,
-        ready: selection.state().ready });
-      const selectLens = id => selection.dispatch({ kind: "lens", id });
+      const selectLens = id => dispatchAction({ kind: "lens", id });
       diagnostics = Object.freeze({ ready: true,
         view: () => orbit.state(), setView: state => orbit.setState(state), lens: lensState, selectLens,
         camera: Object.freeze({ state: orbit.state, setState: orbit.setState, flyToState: orbit.flyToState, stats: () => Object.freeze({ ...observe().camera, ...orbit.stats() }) }),
@@ -228,7 +265,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
           retainedLeafCount: stage.querySelectorAll("b, s, u").length,
           retainedSkyboxFaceCount: stage.querySelectorAll(".planet-cubic-sky-face").length,
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
-        runtime: Object.freeze({ lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
+        runtime: Object.freeze({ geographicLens: () => geographic?.state() ?? null, destinationCatalog: () => definition.destinations?.catalog ?? null, destination: () => destinations?.state() ?? null, lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection.state, controls: controls.stats, view: () => currentView,
           presentation: () => Object.freeze({ ...observe().presentation }),
           pages: () => Object.freeze(Object.fromEntries([...pageLayers].map(([id, layer]) => [id, layer.stats()]))) }),

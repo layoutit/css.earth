@@ -10,6 +10,7 @@ class Element extends EventTarget {
   querySelector(selector) { return this.selectors.get(selector) ?? null; }
   querySelectorAll(selector) { return this.selectors.get(selector) ?? []; }
   setAttribute(key, value) { this.attributes.set(key, value); }
+  toggleAttribute(key, on) { if (on) this.attributes.set(key, ""); else this.attributes.delete(key); }
   removeAttribute(key) { this.attributes.delete(key); }
   addEventListener(type, listener, options) {
     super.addEventListener(type, listener, options);
@@ -29,6 +30,12 @@ function fixture() {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
+  const card = selectors.get(".planet-information-panel");
+  selectors.set("[data-entity-card]", card);
+  for (const selector of ["[data-initial-entity]", ".planet-title", ".planet-introduction", ".planet-factsheet-section", ".entity-path"]) card.selectors.set(selector, new Element());
+  card.querySelector("[data-initial-entity]").textContent = JSON.stringify({id:"fixture",name:"Fixture",kind:"example",parentId:null,facts:[],resources:[]});
+  card.querySelector(".planet-title").selectors.set("svg", new Element());
+  card.querySelector(".planet-title").selectors.set(".planet-title-text", new Element());
   const drawer = selectors.get(".planet-drawer-content");
   drawer.selectors.set(".planet-sheet-handle", selectors.get(".planet-sheet-handle"));
   drawer.selectors.set(".planet-information-panel", selectors.get(".planet-information-panel"));

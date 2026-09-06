@@ -4,7 +4,7 @@ import { createCityIndex } from "./city-index.mjs";
 import { normalizeCityAssetOrigin, isPreparedCityAssetUrl, isPreparedAssetPath } from "./city-asset-url.mjs";
 import { createApiImageTransport } from "./api-image-transport.mjs";
 
-export function mountPreparedMapPages({ plan, carrier, system, scene, camera, stage, className, textureClassName, lensIds, own, onError = error => { throw error; } }) {
+export function mountPreparedMapPages({ plan, carrier, system, scene, camera, stage, className, textureClassName, lensIds, own, onStatus = () => {}, onError = error => { throw error; } }) {
   let validAssetOrigin = false;
   try { validAssetOrigin = normalizeCityAssetOrigin(plan.assetOrigin) === plan.assetOrigin; } catch {}
   if (plan.schema !== "cssearth-prepared-map-pages@1" || !validAssetOrigin || !isPreparedAssetPath(plan.assetPath) ||
@@ -13,6 +13,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       !Number.isSafeInteger(plan.maximumDecodedBytes) || plan.maximumDecodedBytes < plan.decodedPageBytes*2) {
     throw new Error("Invalid prepared map-page plan.");
   }
+  const capacity = plan;
   const slots = [];
   let desired = [];
   let progressiveInitialView = false;
@@ -92,6 +93,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       desiredPages.clear();
       index.update([]);
       for (const slot of slots) if (slot.key) release(slot);
+      onStatus();
       return;
     }
     // Dynamic view selection only. Geometry, UVs and page pixels are prepared.
@@ -119,6 +121,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     for (const slot of slots) if (slot.key && !slot.published && !desired.includes(slot.key)) release(slot);
     publishReadyView();
     pump();
+    onStatus();
     if (playing) schedule();
   }
 
@@ -150,6 +153,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   }
 
   async function load(slot, page) {
+    const loadPlan = plan;
     const generation = ++slot.generation;
     const controller = new AbortController();
     slot.key = page.key;
@@ -165,7 +169,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
         slot.apiHandle=apiImages.acquire(page);
         blobUrl=await slot.apiHandle.ready;
       }else{
-        const localPrepared=page.rasterSource === "prepared-noise@1" &&
+        const localPrepared=page.rasterSource === "prepared-raster@1" &&
           /^[a-f0-9]{64}$/u.test(page.sha256??"") && /^\/scenes\/[a-z][a-z0-9-]*\/[a-z0-9-]+-[a-f0-9]{16}\.webp$/u.test(page.url) && page.url.endsWith(`-${page.sha256.slice(0,16)}.webp`);
         if (!localPrepared && !isPreparedCityAssetUrl(plan, page.url, "page", page.sha256)) {
           throw new Error(`City page ${page.key}: invalid prepared URL`);
@@ -194,7 +198,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       slot.texture.style.overflow=page.imageMatrix?"hidden":"visible";
       slot.texture.style.backgroundImage=page.imageMatrix?"none":"inherit";
       const imageTexture=page.imageMatrix?slot.apiTexture:slot.texture;
-      imageTexture.style.backgroundSize = page.textureBackgroundSize ?? `${32*plan.rasterScale}px ${32*plan.rasterScale}px`;
+      imageTexture.style.backgroundSize = page.textureBackgroundSize ?? `${32*loadPlan.rasterScale}px ${32*loadPlan.rasterScale}px`;
       imageTexture.style.backgroundPosition = page.textureBackgroundPosition ?? "0px 0px";
       if(page.imageMatrix){
         slot.apiTexture.style.transform=`matrix3d(${page.imageMatrix})`;
@@ -215,10 +219,25 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       activeLoads -= 1;
       if (!api && blobUrl && (destroyed || generation !== slot.generation)) URL.revokeObjectURL(blobUrl);
       pump();
+      onStatus();
     }
   }
 
   return Object.freeze({
+    replacePlan(next) {
+      if (destroyed) return;
+      if (next && (next.schema !== capacity.schema || next.assetPath !== capacity.assetPath ||
+          next.assetOrigin !== capacity.assetOrigin || next.rasterScale !== capacity.rasterScale ||
+          next.poolSize !== slots.length || next.maximumDecodedBytes > capacity.maximumDecodedBytes ||
+          next.maximumConcurrentLoads > capacity.maximumConcurrentLoads)) throw new Error("Map package exceeds mounted capacity.");
+      desired = []; desiredPages.clear(); errors = []; progressiveInitialView = false;
+      for (const slot of slots) if (slot.key) release(slot);
+      index.destroy();
+      plan = next ?? capacity;
+      index = createCityIndex(plan, schedule);
+      enabled = Boolean(next);
+      schedule();
+    },
     publish(nextView) { view = nextView; schedule(); },
     setLens(lens) {
       enabled = (plan.lensIds ?? lensIds).includes(lens.id);

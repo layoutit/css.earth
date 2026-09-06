@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
+import { PLANET_TITLE_RECIPE } from "../src/platform/planet-title-recipe.mjs";
 import { sha256 } from "../src/platform/prepared-title.mjs";
 import { SHELL_TITLE_SOURCES } from "../site/source/titles/manifest.mjs";
 
@@ -19,6 +20,9 @@ export async function prepareShellTitles({
 } = {}) {
   validateManifest();
   await mkdir(publicRoot, { recursive: true });
+  const titleFont = await readFile(resolve(import.meta.dirname, "..", PLANET_TITLE_RECIPE.checkedFontPath));
+  if (sha256(titleFont) !== PLANET_TITLE_RECIPE.sourceSha256) throw new Error("Shared title font identity drifted.");
+  await writeFile(resolve(publicRoot, "title-font.ttf"), titleFont);
   const prepared = {};
   for (const descriptor of SHELL_TITLE_SOURCES.titles) {
     const sourcePath = resolve(sourceRoot, descriptor.file);

@@ -17,6 +17,7 @@ for (const args of [
   ["site/test/runtime-complex-browser.mjs", baseUrl],
   ["site/test/runtime-bfcache-browser.mjs", baseUrl],
   ["tools/run-implemented-planets.mjs", "browser", baseUrl],
+  ["src/planets/earth/test/selection-cards-browser.mjs", baseUrl],
 ]) {
   await new Promise((resolve, reject) => {
     const child = spawn(process.execPath, args, { stdio: "inherit" });
