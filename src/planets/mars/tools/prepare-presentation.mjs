@@ -1,7 +1,7 @@
 import { pathToFileURL } from "node:url";
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../../site/runtime-policy.mjs";
+import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../platform/prepared-object-assets.mjs";
 import { prepareCssomDeclarationReads } from "../../../../tools/prepared-cssom.mjs";
 import { createPreparedNodeTree } from "../../../../tools/prepared-node-tree.mjs";
 import { writePreparedPresentation } from "../../../../tools/prepare-presentation.mjs";
@@ -36,15 +36,13 @@ export async function prepareMarsPresentation() {
   const track = { id: "lighting", target: index(leaf),
     frame: { source: "prepared-light-z", minimum: lighting.minimumLightViewZ, maximum: lighting.maximumLightViewZ,
       count: bank.presentations.length, span: lighting.frameCount - 1, maximumFrame: lighting.frameCount - 1,
-      baseFrame: 0, remap: null }, defaultPose: [],
+      baseFrame: 0, remap: null },
     banks: [{ id: "lighting", frames: bank.presentations.map(p => ({ resource: `lighting:${p.rowIndex}`,
       frame: p.frameIndex, row: p.rowIndex, backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize })),
       rows: bank.rows.map((row, index) => ({ row: index, resource: `lighting:${index}`,
         firstFrame: index * bank.transport.framesPerRow,
         lastFrame: Math.min(bank.presentations.length - 1, (index + 1) * bank.transport.framesPerRow - 1) })), default: null, fixed: null }],
-    demand: { mode: "current", prewarm: "none", capacity: bank.transport.maximumRetainedRowCount,
-      framesPerRow: bank.transport.framesPerRow, defaultFrame: lighting.defaultFrame,
-      initialRows: bank.transport.initialWarmRows, holdHiddenNeighborhood: false, fallback: "same-column" },
+    demand: { capacity: bank.transport.maximumRetainedRowCount, defaultFrame: lighting.defaultFrame },
     rotation: { kind: "angle", source: "prepared-light", reference: "prepared", baseDegrees: lighting.baseLightAzimuthDegrees,
       zeroAtPole: true, property: "rotate", publishWithAddress: true }, frameAttribute: null, modeAttribute: null, quoted: true };
   const variants = lenses.controls.flatMap(lens => [false, true].map(shadows => ({

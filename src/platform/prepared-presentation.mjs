@@ -1,4 +1,4 @@
-import { preparedScenePitch } from "./cubic-sky-runtime.mjs";
+import { preparedScenePitch } from "./camera-math.mjs";
 import { createPreparedMaterialPublisher } from "./prepared-material.mjs";
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.mjs";
 

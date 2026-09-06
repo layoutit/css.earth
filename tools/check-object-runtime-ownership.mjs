@@ -5,7 +5,7 @@ import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
 import { OBJECTS } from "../site/objects.mjs";
-import { requireObjectRuntimeDefinition } from "../src/platform/object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "../src/platform/prepared-presentation-contract.mjs";
 import { readPreparedJsonExports, readPreparedPresentationModule, requirePreparedDefinitionSource,
   requirePreparedControlSource } from "./check-prepared-presentation.mjs";
@@ -16,7 +16,7 @@ const registryPath = "site/objects.mjs";
 // discovered from the real Astro AST, including template expressions and scripts.
 const shellEntries = ["site/layouts/PlanetLayout.astro", "site/components/PlanetShell.astro"];
 const { parse: parseAstro } = createRequire(import.meta.resolve("astro/package.json"))("@astrojs/compiler-rs");
-const privateFactories = new Set(["createSceneLifetime", "createLatestSelection",
+const privateFactories = new Set(["createSceneLifetime",
   "createPreparedImageStore", "decodePreparedImage", "releasePreparedImage",
   "createRetainedCubicSkyOrbit", "createPolyOrbitControls", "bindResponsiveOrbitPolicy",
   "mountRetainedCubicSky", "mountRetainedDirectionalSun", "bindSpeedControl",

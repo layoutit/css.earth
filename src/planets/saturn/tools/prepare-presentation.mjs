@@ -119,9 +119,7 @@ export async function prepareSaturnPresentation() {
   const defaultFrame = Math.round(Math.max(0, Math.min(orbit.frameCount - 1,
     (orbit.maximumScenePitchDegrees - camera.initialScenePitchDegrees) / (orbit.maximumScenePitchDegrees - orbit.minimumScenePitchDegrees) * (orbit.frameCount - 1))));
   const frame = { source: "reference-sun-z", minimum: 0, maximum: 2, count: orbit.frameCount, baseFrame: defaultFrame, remap: null };
-  const defaultPose = [{ source: "control-pitch", scale: 1, offset: 0, value: camera.defaultControlPitchDegrees, epsilon: 0.01 },
-    { source: "control-yaw", scale: 1, offset: 0, value: camera.defaultControlYawDegrees, epsilon: 0.01 }];
-  const track = (id, target, atlas, interior) => ({ id, target: index(target), frame, defaultPose,
+  const track = (id, target, atlas, interior) => ({ id, target: index(target), frame,
     banks: Object.entries(atlas.variants).filter(([name]) => !interior || name === "normal" || name.startsWith("normal-")).map(([name, variant]) => {
       const resource = `${interior ? "interior-material" : "exterior"}:${name}`;
       const address = (p, frame) => ({ resource, frame, row: null, backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize });
@@ -129,8 +127,7 @@ export async function prepareSaturnPresentation() {
         ? Math.round(index / (frame.count - 1) * (plan.interior.atmosphere.frameCount - 1)) : index], index)),
         default: address(variant.defaultPresentation, null), fixed: null };
     }),
-    demand: { mode: interior ? "visible" : "current", prewarm: "none", capacity: 2, framesPerRow: frame.count,
-      defaultFrame, initialRows: [], holdHiddenNeighborhood: false, fallback: "hold" },
+    demand: { capacity: 2, defaultFrame },
     rotation: { kind: "ellipsoid", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false, polePolicy: "azimuth",
       width, height, projection, systemTransform: materialSystem.style.transform, onlyWhenEnabled: true },
     frameAttribute: null, modeAttribute: null, quoted: true });

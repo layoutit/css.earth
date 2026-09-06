@@ -1,5 +1,5 @@
 import { pathToFileURL } from "node:url";
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../../site/runtime-policy.mjs";
+import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../platform/prepared-object-assets.mjs";
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
 import { prepareCssomDeclarationReads } from "../../../../tools/prepared-cssom.mjs";
@@ -49,12 +49,11 @@ export async function prepareMercuryPresentation() {
   const address = (p, resource = `lighting:${p.rowIndex}`) => ({ resource, frame: p.frameIndex, row: p.rowIndex,
     backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize });
   const track = { id: "lighting", target: index(materialLeaf), frame: { source: "sun-z", minimum: assets.lighting.minimumLightViewZ,
-      maximum: assets.lighting.maximumLightViewZ, count: assets.lighting.frameCount, baseFrame: 0, remap: null }, defaultPose: [],
+      maximum: assets.lighting.maximumLightViewZ, count: assets.lighting.frameCount, baseFrame: 0, remap: null },
     banks: [{ id: "lighting", frames: bank.presentations.map(p => address(p)), default: null, fixed: address(bank.presentations.at(-1), "shadowless"),
       rows: bank.rows.map((_, row) => ({ row, resource: `lighting:${row}`, firstFrame: row * bank.transport.framesPerRow,
         lastFrame: Math.min(bank.presentations.length - 1, (row + 1) * bank.transport.framesPerRow - 1) })) }],
-    demand: { mode: "current", prewarm: "symmetric", capacity: bank.transport.maximumRetainedRowCount, framesPerRow: bank.transport.framesPerRow,
-      defaultFrame: bank.transport.defaultFrame, initialRows: bank.transport.initialWarmRows, holdHiddenNeighborhood: false, fallback: "hold" },
+    demand: { capacity: bank.transport.maximumRetainedRowCount, defaultFrame: bank.transport.defaultFrame },
     rotation: { kind: "angle", source: "view-sun", reference: "prepared", baseDegrees: assets.lighting.baseLightAzimuthDegrees,
       zeroAtPole: false, property: "--mercury-light-roll" }, frameAttribute: null, modeAttribute: null, quoted: true };
   const variants = lenses.controls.flatMap(lens => [false, true].map(shadows => {
