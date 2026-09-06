@@ -133,7 +133,7 @@ async function runtimeState(page) {
 }
 
 function assertRuntimeState(state) {
-  assert.equal(state.title, "Saturn in 3D | cssEarth");
+  assert.equal(state.title, "Saturn | cssEarth");
   assert.equal(state.mountedObjectCount, 1);
   assert.equal(state.activeObjectId, "saturn");
   assert.equal(state.stageCount, 1);
