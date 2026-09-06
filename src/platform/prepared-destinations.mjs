@@ -1,24 +1,16 @@
-import { readPreparedJson } from "./prepared-json-transport.mjs";
+import { createDestinationStore } from "./prepared-destination-store.mjs";
 // The runtime owns catalogue transport and lifetime; packages provide pinned data.
 export function createPreparedDestinations({ plan, ready, lifetime, selectLens, navigate, reset, onChange = () => {} }) {
   const controller = new AbortController();
   lifetime.onDispose(() => controller.abort());
   const assertLive = () => { if (lifetime.disposed) throw new Error("Object was unmounted."); };
+  const store = createDestinationStore({ catalog: plan.catalog, signal: controller.signal });
   let selected = null, revision = 0;
   return Object.freeze({
     state: () => selected,
-    async load(signal) {
-      assertLive();
-      const response = await fetch(plan.catalog.url, { signal: signal
-        ? AbortSignal.any([signal, controller.signal]) : controller.signal });
-      if (!response.ok) throw new Error("Place catalogue request failed.");
-      const catalog = await readPreparedJson(response, plan.catalog);
-      assertLive();
-      if (catalog.schema !== "cssearth-prepared-destinations@1" || catalog.places?.length !== plan.catalog.count) {
-        throw new Error("Place catalogue is incompatible.");
-      }
-      return catalog;
-    },
+    resolve: store.resolve,
+    search: store.search,
+    stats: store.stats,
     async select(place, { navigate: fly = true } = {}) {
       const request = ++revision;
       await ready; assertLive();

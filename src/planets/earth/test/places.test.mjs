@@ -5,13 +5,19 @@ import { gunzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { searchDestinations } from "../../../../site/destination-search.mjs";
 import { PREPARED_EARTH_PLACES } from "../runtime/preparedPlaces.mjs";
+import { preparePlaceCatalog } from "../tools/prepare-places.mjs";
+import { prepareDestinationPacks } from "../../../../tools/prepare-destination-packs.mjs";
+import { searchDestinationIndex } from "../../../platform/prepared-destination-index.mjs";
+import { createDestinationStore } from "../../../platform/prepared-destination-store.mjs";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { prepareCityPageGeometry, createCityGeographicSampler } from "../tools/city/page-geometry.mjs";
 import { pageCoordinates, prepareLocationPoint } from "../tools/city/prepare-location.mjs";
 
 const packed = await readFile(new URL(`../../../../public${PREPARED_EARTH_PLACES.url}`, import.meta.url));
 const bytes = gunzipSync(packed);
-const { places } = JSON.parse(bytes);
+const directory = JSON.parse(bytes);
+const catalog = await preparePlaceCatalog(), { places } = catalog;
+const search = JSON.parse(gunzipSync(await readFile(new URL(`../../../../public${directory.search.url}`, import.meta.url))));
 
 test("prepared city catalogue is pinned, distinct and globally distributed", () => {
   assert.equal(packed.length, PREPARED_EARTH_PLACES.bytes);
@@ -75,5 +81,40 @@ test("polar destinations land on the accepted visible cap, including its apron",
     const longitudeError=((actual[0]-longitude+540)%360)-180;
     assert.ok(Math.abs(longitudeError)<1e-7);
     assert.ok(Math.abs(actual[1]-latitude)<1e-7);
+  }
+});
+
+
+test("indexed search preserves source ranking including partial tokens, aliases and context", () => {
+  const queries = ["buenos aires argentina", "sao paulo", "São Paulo", "東京", "Tokyo", "Paris", "Paris Texas", "", "qqqzzzimpossiblecity", "san", "Argentina", "London", "ond", "london uk", "santa cruz bolivia", "Cordoba", "Κόρινθος", "Москва", "Nairobi", "Sydney", "USA"];
+  // Deterministic source samples cover less prominent labels as well as common names.
+  for (let i = 0; i < places.length; i += 701) queries.push(places[i].name, places[i].names[0].slice(1));
+  for (const query of queries) assert.deepEqual(searchDestinationIndex(search, query).map(p => p.id), searchDestinations(places, query).map(p => p.id), query);
+});
+
+test("all entity IDs resolve with source-identical details inside the bounded cache", async () => {
+  const store = createDestinationStore({ catalog: PREPARED_EARTH_PLACES,
+    fetcher: async url => new Response(await readFile(new URL(`../../../../public${url}`, import.meta.url))) });
+  const expected = new Map(places.map(({ names, searchContext, ...place }) => [place.id, place]));
+  for (const [id] of directory.entries) {
+    const result = await store.resolve(id);
+    assert.deepEqual(result.entity, expected.get(id), id);
+    assert.ok(result.ancestors.length <= 1);
+  }
+  assert.equal(await store.resolve("unknown"), null);
+  assert.equal(store.stats().searchDecodedBytes, 0, "Direct lookup never loads search");
+  assert.ok(store.stats().peakDetailPacks <= store.stats().limits.detailCachePacks);
+  assert.ok(store.stats().peakDetailBytes <= store.stats().limits.detailCacheBytes);
+  store.dispose(); assert.equal(store.stats().detailDecodedBytes, 0);
+});
+
+test("destination preparation reproduces every installed pack byte for byte", async () => {
+  const first = prepareDestinationPacks(catalog, "/scenes/earth/");
+  const second = prepareDestinationPacks(await preparePlaceCatalog(), "/scenes/earth/");
+  assert.deepEqual(first.reference, PREPARED_EARTH_PLACES);
+  assert.deepEqual(second.reference, first.reference);
+  for (const [url, payload] of first.outputs) {
+    assert.deepEqual(payload, second.outputs.get(url), url);
+    assert.deepEqual(payload, await readFile(new URL(`../../../../public${url}`, import.meta.url)), url);
   }
 });

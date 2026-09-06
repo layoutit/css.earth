@@ -9,7 +9,9 @@ import { prepareLocationPoint } from "../tools/city/prepare-location.mjs";
 const base = process.argv[2] ?? "http://127.0.0.1:4228";
 const output = new URL(`../../../../output/playwright/city-selection-${Date.now()}/`, import.meta.url);
 await mkdir(output, { recursive: true });
-const { places } = JSON.parse(gunzipSync(await readFile(new URL(`../../../../public${PREPARED_EARTH_PLACES.url}`, import.meta.url))));
+const directory = JSON.parse(gunzipSync(await readFile(new URL(`../../../../public${PREPARED_EARTH_PLACES.url}`, import.meta.url))));
+const { createDestinationStore } = await import("../../../platform/prepared-destination-store.mjs");
+const records = createDestinationStore({ catalog: PREPARED_EARTH_PLACES, fetcher: async url => new Response(await readFile(new URL(`../../../../public${url}`, import.meta.url))) });
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const reports = [];
 const imagerySettled = page => page.waitForFunction(() => {
@@ -28,7 +30,7 @@ try {
     const errors = [], catalogRequests = [], cityUrls = new Set();
     page.on("pageerror", error => errors.push(error.message));
     page.on("request", request => {
-      if (request.url().endsWith("earth-places.pack")) catalogRequests.push(request.url());
+      if (request.url().endsWith(directory.search.url)) catalogRequests.push(request.url());
       if (request.url().includes("mapproxy/wmts/")) cityUrls.add(request.url());
       assert.ok(!request.url().includes("geonames.org"), "Place sources must not be requested at runtime");
     });
@@ -45,7 +47,7 @@ try {
       await page.locator("[data-entity-card]").waitFor();
       await page.waitForFunction(() => document.querySelector('[data-entity-card]').ariaBusy === 'false');
       await imagerySettled(page);
-      const buenosAires = places.find(place => place.id === "3435910");
+      const buenosAires = (await records.resolve("3435910")).entity;
       const point = prepareLocationPoint(PREPARED_EARTH_SCENE, buenosAires.longitude, buenosAires.latitude);
       const centered = await page.evaluate(point => {
         const style = selector => getComputedStyle(document.querySelector(selector));
@@ -103,7 +105,7 @@ try {
   try {
     const page = await fault.newPage();
     let attempts = 0;
-    await page.route("**/earth-places.pack", route => {
+    await page.route(`**${directory.search.url}`, route => {
       if (++attempts === 1) return route.fulfill({ status: 503, body: "Temporarily unavailable" });
       return route.continue();
     });

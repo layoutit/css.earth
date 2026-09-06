@@ -1,5 +1,4 @@
 import { createEntityRoute } from "./entity-route.mjs";
-import { searchDestinations } from "./destination-search.mjs";
 import { createEntityIntroductionSource } from "./entity-introduction.mjs";
 
 export function createDestinationBrowser({ documentTarget, card, onSelected, onReset, onResults }) {
@@ -11,13 +10,10 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
   const status = panel.querySelector(".planet-destination-status");
   const buttons = [...list.querySelectorAll("button")];
   const events = new AbortController();
-  let provider = null, catalog = null, pending = null, matches = [], selection = null;
+  let provider = null, matches = [], selection = null;
+  let searchRequest = null, detailRequest = null;
   let query = "", revision = 0, destroyed = false, selecting = false;
   let selectionRevision = 0, route = null, unsubscribe = null;
-  async function loadCatalog() {
-    pending ??= provider.load(events.signal).catch(error => { pending = null; throw error; });
-    return catalog ??= await pending;
-  }
   const introductions = createEntityIntroductionSource();
   let introductionRequest = null;
   function loadIntroduction(place, request) {
@@ -38,6 +34,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
     if (destroyed) return;
     query = value;
     const request = ++revision;
+    searchRequest?.abort(); searchRequest = new AbortController();
     clearRows();
     root.hidden = !value.trim();
     if (root.hidden) { onResults(0); return; }
@@ -45,9 +42,9 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
     hint.textContent = "Loading places…";
     onResults(1);
     try {
-      await loadCatalog();
+      const results = await provider.search(value, buttons.length, AbortSignal.any([events.signal, searchRequest.signal]));
       if (destroyed || request !== revision) return;
-      matches = searchDestinations(catalog.places, value, buttons.length);
+      matches = results;
       for (const [index, button] of buttons.entries()) {
         const place = matches[index];
         button.parentElement.hidden = !place;
@@ -69,14 +66,20 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
   async function select(place, options) {
     if (destroyed || !provider || !place) return;
     const request = ++selectionRevision;
+    detailRequest?.abort(); detailRequest = new AbortController();
     selecting = true;
     for (const button of buttons) button.disabled = true;
     hint.textContent = `Opening ${place.name}…`;
+    panel.ariaBusy = "true";
     try {
+      const resolved = await provider.resolve(place.id, AbortSignal.any([events.signal, detailRequest.signal]));
+      if (destroyed || request !== selectionRevision) return;
+      if (!resolved) throw new Error("Unknown destination.");
+      place = resolved.entity;
       const result = await provider.select(place, options);
       if (destroyed || request !== selectionRevision) return;
       selection = place;
-      card.show(place, id => catalog?.places.find(entity => entity.id === id));
+      card.show(place, id => resolved.ancestors.find(entity => entity.id === id));
       status.hidden = !result.arrival;
       status.textContent = result.arrival ? `Flying to ${place.name}…` : "";
       panel.ariaBusy = String(Boolean(result.arrival));
@@ -92,7 +95,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
         status.textContent = completed ? "" : "Flight stopped. Select the place again to continue.";
       });
     } catch (error) {
-      if (!destroyed && request === selectionRevision) hint.textContent = "This place could not open. Select it to retry.";
+      if (!destroyed && request === selectionRevision) { panel.ariaBusy = "false"; hint.textContent = "This place could not open. Select it to retry."; }
     } finally {
       if (request === selectionRevision) {
         selecting = false;
@@ -104,6 +107,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
   async function selectRoot(options) {
     if (!provider) return;
     const request = ++selectionRevision;
+    detailRequest?.abort();
     selecting = true;
     try {
       const result = await provider.reset(options);
@@ -126,13 +130,11 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
           defaultLens: card.initial.lensIds[0] }),
         async apply(id, lensId, live, options) {
           try {
-            if (id !== card.initial.id) await loadCatalog();
             if (!live()) return;
-            const place = catalog?.places.find(entity => entity.id === id);
             if (id === card.initial.id) { if (selection) await selectRoot(options); }
-            else if (place) { if (selection?.id !== id) await select(place, options); }
-            else {
-              status.hidden = false; status.textContent = "This place is unavailable in the current catalogue."; return;
+            else if (selection?.id !== id) {
+              await select({ id, name: "place" }, options);
+              if (selection?.id !== id) { status.hidden = false; status.textContent = "This place is unavailable in the current catalogue."; return; }
             }
             if (!live()) return;
             await provider.selectLens(lensId ?? card.initial.lensIds[0]);
@@ -146,7 +148,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
       return route.restore();
     },
     search,
-    async selectById(id) { if (id !== card.initial.id) await loadCatalog(); return id === card.initial.id ? selectRoot() : select(catalog?.places.find(entity => entity.id === id)); },
+    async selectById(id) { return id === card.initial.id ? selectRoot() : select({ id, name: "place" }); },
     destroy() { if (destroyed) return; destroyed = true; revision++; selectionRevision++; selection = null; route?.destroy(); unsubscribe?.(); events.abort(); clearRows(); },
   });
 }

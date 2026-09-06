@@ -1,3 +1,4 @@
+import { PREPARED_EARTH_PLACE_ASSETS } from "../runtime/preparedPlaces.mjs";
 import { PREPARED_EARTH_NOISE } from "../runtime/preparedNoise.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../runtime/preparedStarfield.mjs";
 import { PREPARED_EARTH_SKY_SUN } from "../runtime/preparedSkySun.mjs";
@@ -30,7 +31,7 @@ const interiorAssets = ["mantle", "outer-core", "inner-core"].flatMap(
 
 export const EARTH_RUNTIME_ASSET_URLS = Object.freeze([
   ...PREPARED_EARTH_NOISE.assets,
-  "earth-places.pack",
+  ...PREPARED_EARTH_PLACE_ASSETS,
   "earth-atmosphere-spectrum.svg",
   "earth-photometric-phase-curve.svg",
   "earth-interior-outer-poles.webp",

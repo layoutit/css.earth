@@ -68,7 +68,7 @@ try {
         cached: Boolean(event.response.fromDiskCache || event.response.fromPrefetchCache), response: event.timestamp });
     });
     cdp.on("Network.loadingFinished", event => { const row = network.get(event.requestId); if (row) Object.assign(row, { end: event.timestamp, transferBytes: event.encodedDataLength }); });
-    const flight = () => page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
+    const flight = () => page.waitForFunction(() => document.querySelector("[data-entity-card]").ariaBusy !== "true" && !window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
     const settle = layer => page.waitForFunction(layer => {
       const s = window.__earth.runtime.pages()[layer];
       return s.desired.length > 0 && !s.pendingSelection && !s.activeLoads && !s.index.activeLoads && s.desired.every(key => s.retained.some(slot => slot.key === key && slot.published));

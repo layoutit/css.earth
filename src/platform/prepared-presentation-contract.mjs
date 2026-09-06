@@ -1,3 +1,4 @@
+import { DESTINATION_LIMITS, validateDestinationReference } from "./prepared-destination-contract.mjs";
 import { requireObjectControls } from "../../site/scene-contract.mjs";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.mjs";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.mjs";
@@ -184,10 +185,9 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   if (plan.destinations !== undefined) {
     record(plan.destinations, "destinations", ["catalog", "defaultLens", "statuses"]);
     const {catalog,defaultLens,statuses}=plan.destinations;
-    if (!catalog?.url?.startsWith("/scenes/") || !Number.isSafeInteger(catalog.bytes) || catalog.bytes < 1 ||
-        !Number.isSafeInteger(catalog.count) || catalog.count < 1 || !/^[a-f0-9]{64}$/.test(catalog.sha256??"") ||
-        !lensIds.includes(defaultLens)) fail("destinations require a pinned catalogue and declared lens");
-    if(catalog.encoding!==undefined && (catalog.encoding!=="gzip" || !Number.isSafeInteger(catalog.decodedBytes) || catalog.decodedBytes<1 || catalog.decodedBytes>32*1024*1024 || !/^[a-f0-9]{64}$/.test(catalog.decodedSha256??"")))fail("destination compression requires a bounded pinned decoded catalogue");
+    validateDestinationReference(catalog, DESTINATION_LIMITS.directoryBytes);
+    if (catalog.format !== "indexed" || !Number.isSafeInteger(catalog.count) || catalog.count < 1 ||
+        catalog.count > DESTINATION_LIMITS.entities || !lensIds.includes(defaultLens)) fail("destinations require an indexed directory and declared lens");
     record(statuses,"destination statuses",["detail","overview"]); string(statuses.detail,"detail status");string(statuses.overview,"overview status");
   }
   if (plan.motionFrame !== undefined) {

@@ -127,9 +127,10 @@ visible attribution in the shell.
 
 `tools/prepare-places.mjs` verifies source hashes, normalizes names and aliases,
 and prepares camera controls against the accepted Earth face projection. It
-writes the compressed `earth-places.pack` and hashes/sizes for its encoded and decoded bytes. Runtime fetches this local
-catalogue only for search or restoring a selected place, verifies its identity, searches prepared
-labels, and transports the selected camera controls. No geocoder or geometry
+writes content-addressed directory, search and detail packs with encoded/decoded
+hashes and sizes. Direct links fetch the directory, selected detail shard and
+ancestors; they never fetch search aliases or the complete card catalogue. Search
+queries prepared lexical postings and preserves source ranking and aliases. No geocoder or geometry
 derivation runs in the browser. The existing camera rounds control angles to
 hundredths of a degree; this is city navigation, not a precision survey marker.
 
