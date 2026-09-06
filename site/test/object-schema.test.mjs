@@ -19,6 +19,7 @@ const loadScene = async () => () => {};
 const fixture = Object.freeze({
   id: "fixture",
   name: "Fixture",
+  systemName: "Test System",
   classification: "dwarf-planet",
   color: "#abcdef",
   distanceAu: 1,
@@ -32,6 +33,7 @@ test("defines one generic renderable-object contract", () => {
   assert.deepEqual(Object.keys(objectRecord), [
     "id",
     "name",
+    "systemName",
     "classification",
     "color",
     "distanceAu",
@@ -84,6 +86,8 @@ test("rejects invalid object definitions and renderer-specific fields", () => {
   assert.throws(() => defineObject({ ...fixture, route: "/wrong/" }),
     /Invalid object definition/);
   assert.throws(() => defineObject({ ...fixture, loadScene: true }),
+    /Invalid object definition/);
+  assert.throws(() => defineObject({ ...fixture, systemName: "" }),
     /Invalid object definition/);
   for (const field of ["scene", "camera", "material", "moons", "lenses"]) {
     assert.throws(

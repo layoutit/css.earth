@@ -1,6 +1,7 @@
 const OBJECT_INPUT_KEYS = new Set([
   "id",
   "name",
+  "systemName",
   "classification",
   "color",
   "distanceAu",
@@ -26,8 +27,8 @@ export function defineObject(input) {
     throw new TypeError(`Unsupported object field: ${unsupported.join(", ")}.`);
   }
 
-  const { id, name, classification, color, distanceAu, route, loadScene, description, worldFrame = null } = input;
-  if (!safeId(id) || !nonEmpty(name) || !OBJECT_CLASSIFICATIONS.includes(classification) ||
+  const { id, name, systemName, classification, color, distanceAu, route, loadScene, description, worldFrame = null } = input;
+  if (!safeId(id) || !nonEmpty(name) || !nonEmpty(systemName) || !OBJECT_CLASSIFICATIONS.includes(classification) ||
       !/^#[0-9a-f]{6}$/u.test(color ?? "") ||
       !Number.isFinite(distanceAu) || distanceAu < 0 ||
       route !== `/${id}/` || typeof loadScene !== "function" ||
@@ -38,6 +39,7 @@ export function defineObject(input) {
   return Object.freeze({
     id,
     name,
+    systemName,
     classification,
     color,
     distanceAu,

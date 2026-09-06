@@ -178,10 +178,13 @@ function registryLoaders(source, root) {
       call.arguments.length !== 1 || array?.type !== "ArrayExpression" || !array.elements.length) fail("requires one concrete registry array");
   const helpers = new Map(ast.body.filter(node => node.type === "FunctionDeclaration").map(node => [node.id.name, node]));
   for (const entry of array.elements) {
-    if (entry?.type !== "CallExpression" || ![7, 8].includes(entry.arguments.length) ||
+    if (entry?.type !== "CallExpression" || entry.arguments.length < 7 ||
+        entry.arguments.slice(8).some(value => value.type !== "Literal") ||
         entry.arguments.slice(0, 6).some(value => value.type !== "Literal") || typeof entry.arguments[0].value !== "string") fail("entries must bind prepared metadata and one loader");
     const helper = helpers.get(entry.callee?.name), params = helper?.params ?? [], returned = helper?.body.body[0]?.argument;
-    if (!helper || helper.async || helper.generator || params.length !== 8 || params.slice(0, 7).some(param => param.type !== "Identifier") ||
+    if (!helper || helper.async || helper.generator || params.length < 8 || entry.arguments.length > params.length ||
+        params.slice(8).some(param => param.type !== 'AssignmentPattern' || param.left.type !== 'Identifier' || param.right.type !== 'Literal') ||
+        params.slice(0, 7).some(param => param.type !== "Identifier") ||
         params[7].type !== 'AssignmentPattern' || params[7].left.type !== 'Identifier' || params[7].right.type !== 'Literal' || params[7].right.value !== null || helper.body.body.length !== 1 ||
         helper.body.body[0].type !== "ReturnStatement" || returned?.type !== "CallExpression" ||
         imports.get(returned.callee?.name) !== "defineObject" || returned.arguments.length !== 1 || returned.arguments[0].type !== "ObjectExpression") fail("entry helper must forward its declared loader directly");

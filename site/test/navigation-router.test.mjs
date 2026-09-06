@@ -233,6 +233,13 @@ test('input after the detailed handoff keeps the incoming scene and its painted 
 
 test('navbar/search anchors and vault events share one route; modifier and unsupported links stay native', async () => {
   const h = harness(); await h.router.settled;
+  const supportsLabel = objectId => {
+    const event = new Event('objectnavigationquery', { cancelable: true }); event.detail = { objectId };
+    h.documentTarget.dispatchEvent(event); return event.defaultPrevented;
+  };
+  assert.equal(supportsLabel('venus'), true);
+  assert.equal(supportsLabel('earth'), false, 'A registered object also needs a supported navigation path');
+  assert.equal(supportsLabel('star:123'), false, 'A catalogue name is not a registered destination');
   function click(id, extra = {}) {
     const anchor = { href: `https://example.test/${id}/`, target: '', hasAttribute: () => false, ...extra };
     const event = new Event('click', { cancelable: true });
@@ -249,4 +256,5 @@ test('navbar/search anchors and vault events share one route; modifier and unsup
   assert.equal(event.defaultPrevented, true);
   assert.equal(h.router.state().activeObjectId, 'mercury'); assert.equal(h.preparations.length, 2);
   h.router.destroy();
+  assert.equal(supportsLabel('venus'), false, 'Teardown removes availability handling');
 });

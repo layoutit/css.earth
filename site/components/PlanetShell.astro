@@ -267,6 +267,14 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
           </h1>
           {activeObject && classificationLabel && <div class="planet-title-tags">
             <button
+              class="planet-system-tag planet-title-tag"
+              type="button"
+              data-object-query={activeObject.systemName}
+              aria-controls={`${objectId}-object-browser`}
+              aria-label={`Browse ${activeObject.systemName} objects`}
+              title={`Browse ${activeObject.systemName} objects`}
+            >{activeObject.systemName}</button>
+            <button
               class="planet-classification-tag planet-title-tag"
               type="button"
               data-object-query={`${classificationLabel}s`}
@@ -274,14 +282,6 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
               aria-label={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
               title={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
             >{classificationLabel}</button>
-            <button
-              class="planet-distance-tag planet-title-tag"
-              type="button"
-              data-object-query="All objects"
-              aria-controls={`${objectId}-object-browser`}
-              aria-label={`${activeObject.distanceAu} AU from the Sun; browse all objects`}
-              title="Mean distance from the Sun; browse all objects"
-            >{activeObject.distanceAu} AU</button>
           </div>}
         </div>
         {introduction && <p class="planet-introduction">{introduction}</p>}

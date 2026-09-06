@@ -178,6 +178,12 @@ test("the actual OBJECTS registry has only normalized packages and one shared so
   assert.ok(!report.sharedClosure.includes("src/planets/uranus/site/preparedLensControls.mjs"));
 });
 
+test('literal metadata defaults do not hide loader ownership, executable defaults are rejected', async () => {
+  const changed = registrySource.replace('systemName = "Solar System"', 'systemName = resolveSystem()');
+  assert.notEqual(changed, registrySource);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ 'site/objects.mjs': changed })), /Actual OBJECTS registry/);
+});
+
 const descriptorObjects = OBJECTS.filter(object => ['mercury', 'venus'].includes(object.id));
 async function descriptorOverlay(changes = {}) {
   return auditObjectRuntimeOwnership({ objects: descriptorObjects,

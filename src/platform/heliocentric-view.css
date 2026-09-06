@@ -108,7 +108,8 @@
    the size that lands capitals at the policy's cap height, a fixed pool
    positioned by the runtime with their bottom-centre a gap above the
    marker; the measuring elements are never painted. */
-.planet-heliocentric-captions {
+.planet-heliocentric-captions,
+.planet-heliocentric-star-captions {
   position: absolute;
   inset: 0;
   /* The shell's navigation typography (its UI stack, weight and secondary
@@ -135,23 +136,16 @@
   visibility: hidden;
 }
 
-/* Ordinary star names use the reference's cap height, padded raster-box
-   proportions and outline, drawn as retained native text. */
-.planet-heliocentric-star-captions {
-  position: absolute;
-  inset: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-weight: 500;
-  color: #f4f6fb;
-  pointer-events: none;
+.planet-heliocentric-caption {
+  opacity: var(--planet-caption-opacity, 0);
 }
 
-.planet-cubic-sky-caption {
-  box-sizing: content-box;
-  line-height: 1.6;
-  padding-inline: 0.2em;
-  -webkit-text-stroke: 0.166667em rgba(4, 7, 14, 0.85);
-  paint-order: stroke fill;
+.planet-heliocentric-caption[data-object-navigate][aria-disabled="false"] {
+  cursor: pointer;
+}
+
+.planet-heliocentric-caption[data-object-navigate][aria-disabled="false"]:is(:hover, :focus-visible, [data-object-hovered="true"]) {
+  opacity: 1;
 }
 
 /* The Sun's own perspective root: it shares the body camera's box and eye

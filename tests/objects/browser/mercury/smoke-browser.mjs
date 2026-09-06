@@ -94,12 +94,13 @@ try {
     // interior, the billboard disc and the material overlay, and the orbit
     // overlay's piece pool and body marker (2242), plus the planetary
     // system's group, its 1536 orbit pieces (twelve rings), twelve markers
-    // with their phase overlays, the Sun marker (1562), and the captions:
+    // with their phase overlays, the Sun marker (1562), twelve retained
+    // navigation hit targets (12), and the captions:
     // their group, eight retained slots and fourteen measuring elements (23),
     // and the catalogue stars: their group and 1,599 retained points (1600),
-    // plus one label, its group and 450 prepared proper-name measures (452),
+    // no star labels until their catalogue IDs have navigation destinations,
     // and the celestial root and its separate planetary point group (2).
-    stageElements: 5881,
+    stageElements: 5441,
     cameraCount: 1,
     skyboxFaceCount: 6,
     sunCount: 1,
@@ -120,8 +121,8 @@ try {
     systemMarkerGroupCount: 1,
     captionCount: 8,
     captionMeasureCount: 14,
-    starCaptionCount: 1,
-    starCaptionMeasureCount: 450,
+    starCaptionCount: 0,
+    starCaptionMeasureCount: 0,
     retainedCaptionCount: 8,
     retainedStarCount: 1599,
   });
