@@ -59,8 +59,8 @@ const variants = surfaces.flatMap(s => [false, true].flatMap(shadows => [false, 
     { kind: "attribute", target: -1, name: "data-lens", value: s.id },
     { kind: "class", target: -1, name: "ceres-hide-orbit", value: !orbit },
   ],
-  materials: [{ track: "lighting", bank: "atlas", mode: shadows ? "frames" : "fixed", enabled: true,
-    rotationEnabled: shadows, frameOverride: null, clearWhenHidden: false, fixedMode: "full-phase-curvature" }],
+  materials: [{ track: "lighting", bank: "atlas", mode: shadows ? "frames" : "fixed", enabled: !s.scientific,
+    rotationEnabled: shadows && !s.scientific, frameOverride: null, clearWhenHidden: true, fixedMode: "full-phase-curvature" }],
 }))));
 const atlasUrl = "/navigation/planet-markers@2x.webp";
 const sprite = id => {
@@ -72,7 +72,8 @@ const { BODIES } = await loadAstronomyPackage();
 const catalogue = await prepareCatalogueStars({ fovDegrees: plan.sky.catalogueStars.exposure.fovDegrees });
 const presentation = { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.sky, sun: plan.sun,
   assets: { entries, pools: [preparedResourcePool("mounted", entries),
-    preparedResourcePool("lenses", entries, { retention: "selection", capacity: 2, concurrency: 2 })],
+    // Keep the committed surface/poles while decoding the next lens's pair.
+    preparedResourcePool("lenses", entries, { retention: "selection", capacity: 4, concurrency: 2 })],
     startup: entries.filter(entry => entry.pool === "mounted").map(entry => entry.key) },
   tree, variants, materials: [track], animations: [],
   heliocentricView: { plan: plan.heliocentricView,
@@ -92,7 +93,7 @@ const presentation = { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera
   ],
 };
 await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), presentation, objectControls);
-const urls = [...entries.map(e => e.url), ...surfaces.flatMap(s => [s.thumbnail.url, s.map.url]),
+const urls = [...entries.map(e => e.url), ...surfaces.flatMap(s => [s.thumbnail.url, s.map.url, ...(s.legend ? [s.legend.url] : [])]),
   ...plan.sky.faces.flatMap(f => [f.url, f.url2x, f.highContrastUrl, f.highContrastUrl2x]),
   plan.sun.asset.url, plan.sun.asset.url2x];
 await prepareRuntimeAssetManifest({ planetId: "ceres", urls: [...new Set(urls)], publicRoot: CERES_PUBLIC_ROOT,

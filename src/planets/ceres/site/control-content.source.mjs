@@ -1,4 +1,5 @@
 import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
+import { SCIENCE_LENSES } from "../science-lenses.mjs";
 
 export const objectControls = Object.freeze({
   lenses: { title: PREPARED_SHELL_TITLES.lenses, defaultLens: "normal", controls: [
@@ -8,6 +9,13 @@ export const objectControls = Object.freeze({
     { id: "enhanced", label: "Enhanced color", description: "False color · gray grid marks gaps",
       title: "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
       thumbnailUrl: "/scenes/ceres/ceres-enhanced-thumbnail.webp" },
+    ...SCIENCE_LENSES.map(lens => ({
+      id: lens.id, label: lens.label, description: lens.description, title: lens.title,
+      thumbnailUrl: `/scenes/ceres/ceres-${lens.id}-thumbnail.webp`,
+      legend: { kind: "scale", title: lens.label,
+        src: `/scenes/ceres/ceres-${lens.id}-legend.webp`, width: 256, height: 16,
+        labels: lens.labels, meta: lens.units, sourceUrl: lens.sourceUrl },
+    })),
   ] },
   settings: { title: PREPARED_SHELL_TITLES.settings, controls: [
     { kind: "cycle", name: "speed", label: "Speed", state: "normal" },

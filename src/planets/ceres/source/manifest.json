@@ -106,6 +106,26 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "dawn-elevation",
+      "path": "science/ceres-hamo-dtm.tif",
+      "expectedBytes": 466647217,
+      "expectedSha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
+      "origin": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif",
+      "credit": "DLR / Dawn Team / USGS",
+      "license": "Public NASA PDS / USGS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m"
+      ],
+      "acquisition": "Retrieve the pinned original product, 2026-09-06. No source substitution or automatic hash refresh.",
+      "redistribution": "Original binary is reacquired locally and excluded from Git; derived maps retain attribution.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "format": "geotiff",
+      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60\u00b0 latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
     }
   ],
   "generatedIntermediates": [],

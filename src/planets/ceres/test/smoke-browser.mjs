@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { chromium } from "playwright";
 import { PNG } from "pngjs";
+import { objectControls } from "../site/control-content.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const output = "output/playwright/ceres";
@@ -26,19 +27,29 @@ try {
   })), { id: "ceres", mounted: 1, leaves: 452, forbidden: 0, addressed: true });
   const paint = () => page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   await paint();
-  const normal = PNG.sync.read(await page.screenshot({ path: `${output}/normal.png` }));
-  await page.locator('button[name="lens"][value="enhanced"]').click();
-  await page.waitForFunction(() => window.__ceres.lenses.state().id === "enhanced");
-  await paint();
-  const enhanced = PNG.sync.read(await page.screenshot({ path: `${output}/enhanced.png` }));
-  let changed = 0;
-  // Count the body region, excluding the sidebar and navigation labels.
-  for (let y = 300; y < 1450; y++) for (let x = 1100; x < 2100; x++) {
-    const i = (y * normal.width + x) * 4;
-    if (Math.abs(normal.data[i] - enhanced.data[i]) + Math.abs(normal.data[i + 1] - enhanced.data[i + 1]) +
-        Math.abs(normal.data[i + 2] - enhanced.data[i + 2]) > 30) changed++;
+  let previous = PNG.sync.read(await page.screenshot({ path: `${output}/normal.png` }));
+  const changes = {};
+  // Visit every declared lens, then restore the initial photographic material.
+  for (const lens of [...objectControls.lenses.controls.slice(1), objectControls.lenses.controls[0]]) {
+    await page.locator(`button[name="lens"][value="${lens.id}"]`).click();
+    await page.waitForFunction(id => window.__ceres.lenses.state().id === id, lens.id);
+    await paint();
+    if (lens.legend) await page.locator(`[data-lens-legend="${lens.id}"]`).waitFor({ state: "visible" });
+    const overlay = await page.locator('.ceres-material').evaluate(element => element.style.backgroundImage);
+    assert.equal(overlay === "none", Boolean(lens.legend), `${lens.id}: scientific maps preserve legend colors; photographs restore lighting`);
+    assert.equal(await page.evaluate(() => window.__ceres.assertStableDomIdentity()), true);
+    const current = PNG.sync.read(await page.screenshot({ path: `${output}/${lens.id}.png` }));
+    let changed = 0;
+    // Count the body region, excluding the sidebar and navigation labels.
+    for (let y = 300; y < 1450; y++) for (let x = 1100; x < 2100; x++) {
+      const i = (y * previous.width + x) * 4;
+      if (Math.abs(previous.data[i] - current.data[i]) + Math.abs(previous.data[i + 1] - current.data[i + 1]) +
+          Math.abs(previous.data[i + 2] - current.data[i + 2]) > 30) changed++;
+    }
+    assert.ok(changed > 50_000, `${lens.id} must change the painted body: ${changed} pixels`);
+    changes[lens.id] = changed;
+    previous = current;
   }
-  assert.ok(changed > 50_000, `Lens must change the painted body: ${changed} pixels`);
   await page.evaluate(() => window.__ceres.camera.setState({ zoom: window.__ceres.camera.stats().minimumZoom }));
   await paint();
   const wide = await page.evaluate(() => ({ stage: window.__ceres.camera.state().levelOfDetail.stage,
@@ -51,5 +62,5 @@ try {
   assert.equal(wide.stable, true);
   await page.screenshot({ path: `${output}/system.png` });
   assert.deepEqual(problems, []);
-  console.log(JSON.stringify({ ok: true, changedBodyPixels: changed, wide, screenshots: output }));
+  console.log(JSON.stringify({ ok: true, changedBodyPixels: changes, wide, screenshots: output }));
 } finally { await browser.close(); }
