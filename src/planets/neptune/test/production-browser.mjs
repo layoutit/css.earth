@@ -113,8 +113,8 @@ try {
         ).getAttribute("aria-pressed"), "true");
       }
 
-      await drag(page, ".neptune-input-surface", 0, 150);
-      await wheel(page, ".neptune-input-surface", -240);
+      await drag(page, ".planet-input-surface", 0, 150);
+      await wheel(page, ".planet-input-surface", -240);
       await page.locator("#neptune-settings").evaluate((panel) => {
         panel.open = true;
       });

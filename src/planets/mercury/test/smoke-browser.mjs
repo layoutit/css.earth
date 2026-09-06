@@ -348,7 +348,7 @@ try {
     controlYaw: window.__mercury.camera.stats().defaultControlYawDegrees,
     zoom: 1.1,
   }));
-  await drag(page, ".mercury-input-surface", 90, 40);
+  await drag(page, ".planet-input-surface", 90, 40);
   const draggedSkyLock = await page.evaluate(() => {
     window.__mercury.camera.setState({ zoom: 1.1 });
     const registration = new DOMMatrix(
@@ -579,19 +579,19 @@ try {
   }));
 
   const originalCamera = await page.evaluate(() => window.__mercury.camera.state());
-  await drag(page, ".mercury-input-surface", 0, 150);
+  await drag(page, ".planet-input-surface", 0, 150);
   const draggedCamera = await page.evaluate(() => window.__mercury.camera.state());
   assert.ok(draggedCamera.controlPitch > originalCamera.controlPitch);
   await page.evaluate((state) => window.__mercury.camera.setState(state),
     originalCamera);
-  await drag(page, ".mercury-input-surface", 220, -80);
+  await drag(page, ".planet-input-surface", 220, -80);
   const diagonalCamera = await page.evaluate(() =>
     window.__mercury.camera.state());
   assert.notEqual(diagonalCamera.controlPitch, originalCamera.controlPitch);
   assert.notEqual(diagonalCamera.controlYaw, originalCamera.controlYaw);
   await page.evaluate((state) => window.__mercury.camera.setState(state),
     originalCamera);
-  await wheel(page, ".mercury-input-surface", -240);
+  await wheel(page, ".planet-input-surface", -240);
   assert.ok((await page.evaluate(() => window.__mercury.camera.state())).zoom >
     originalCamera.zoom);
 
