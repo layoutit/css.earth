@@ -5,6 +5,7 @@ import { chromium } from "playwright";
 import sharp from "sharp";
 import { OBJECTS } from "../objects.mjs";
 import { previewSite } from "../../tools/preview.mjs";
+import { assertHomepageReachability } from "./seo-discovery.mjs";
 
 // Inspect the built response as a crawler without JavaScript, then verify the
 // same metadata and retained heading in real Chrome at both supported DPRs.
@@ -41,7 +42,7 @@ try {
     { route: "/", object: OBJECTS.find(({ id }) => id === "earth") },
     { route: "/earth/?utm_source=seo-check#view", object: OBJECTS.find(({ id }) => id === "earth") },
   ];
-  const incoming = new Set();
+  const discoveryPages = [];
   const descriptions = new Set();
   for (const { route, object } of [...OBJECTS.map((object) => ({ route: object.route, object })), ...aliases]) {
     const response = await page.goto(base + route, { waitUntil: "domcontentloaded" });
@@ -54,17 +55,15 @@ try {
     assert.equal(seo.h1, object.name);
     assert.ok(seo.introduction.length > 30, `${route}: introduction must be in initial HTML`);
     assert.doesNotMatch(seo.robots, /noindex|nofollow/i);
-    for (const link of seo.links) {
-      const target = new URL(link, base);
-      if (target.origin === base) incoming.add(target.pathname);
+    // Query aliases verify metadata but must not supply links for the clean URL.
+    if (!new URL(page.url()).search) {
+      discoveryPages.push({ url: page.url(), links: seo.links });
     }
     descriptions.add(seo.description);
     report.push({ mode: "no-javascript", route, canonical: seo.canonical, title: seo.title });
   }
   assert.equal(descriptions.size, OBJECTS.length, "Each object needs its own description");
-  for (const object of OBJECTS) {
-    assert.ok(incoming.has(object.route), `${object.id} must have an incoming crawlable link`);
-  }
+  assertHomepageReachability(discoveryPages, OBJECTS.map(({ route }) => route), base + "/");
   assert.equal(socialImages.size, OBJECTS.length, "Each object has its own plain scene capture");
   for (const imageUrl of socialImages) {
     const response = await fetch(base + new URL(imageUrl).pathname);
