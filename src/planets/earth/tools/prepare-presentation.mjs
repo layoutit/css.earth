@@ -77,7 +77,7 @@ export async function prepareEarthPresentation() {
     node.style.backgroundPosition=frame.backgroundPosition;node.style.backgroundSize=frame.backgroundSize;
     node.attributes["data-material-frame"]="default";b.append(materialMesh,node);return[id,node];
   }));
-  const {tree,index}=b.finish({camera,scene,registrations:[{bodySystem:system,lightingOverlays:[materialCounter]}]});
+  const {tree,index}=b.finish({camera,scene});
   const tracks=["lighting","atmosphere"].map(id=>{
     const material=plan.material[id],address=(frame,resource,frameIndex=null,row=null)=>({resource,frame:frameIndex,row,backgroundPosition:frame.backgroundPosition,backgroundSize:frame.backgroundSize});
     const illumination=material.illumination;
@@ -117,11 +117,6 @@ export async function prepareEarthPresentation() {
     tree,variants,materials:tracks,viewBindings:[materialCounter,cutawayCounter].map(node=>({kind:"counter-rotation",target:index(node),systemTransform:null})),animations:[],
     motionFrame:[index(system),index(body.surface[0])],
     pageLayers:[{id:"city",plan:PREPARED_EARTH_CITY_PAGES,lensIds:["normal","buenos-aires-noise"]},{id:"noise",plan:PREPARED_EARTH_NOISE,lensIds:["buenos-aires-noise"]}]
-      .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:"/scenes/earth/"},carrier:index(body.surface[0]),system:index(system),className:"earth-city-page",textureClassName:"earth-api-texture"})),
-    observations:{constants:{dom:{interiorMounted:true}},counts:[{category:"dom",name:"interiorLeafCount",target:index(cutaway),kind:"leaves",includeRoot:false}],
-      materials:[{category:"material",name:"materialFrame",track:"lighting",field:"frame"},
-        {category:"material",name:"atmosphereLightRollDegrees",track:"atmosphere",field:"lightRollDegrees"}],
-      attributes:tracks.map(track=>({category:"material",name:track.id,target:track.target,attribute:"data-material-frame",default:null})),
-      sums:["material","camera"].map(category=>({category,name:"materialAddressWrites",tracks:tracks.map(track=>track.id),field:"addressWrites",includePresentation:false}))}};
+      .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:"/scenes/earth/"},carrier:index(body.surface[0]),system:index(system),className:"earth-city-page",textureClassName:"earth-api-texture"}))};
 }
 if(import.meta.url===pathToFileURL(process.argv[1]??"").href)await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs",import.meta.url),await prepareEarthPresentation(),objectControls);

@@ -35,7 +35,7 @@ export async function prepareJupiterPresentation() {
   const material = b.mesh("jupiter-material", cameraPlan.materialDepthPresentation.materialMeshTransform);
   const leaf = b.element("s"); leaf.style.transform = cameraPlan.materialDepthPresentation.leafTransform;
   b.append(scene, materialSystem, system); b.append(materialSystem, counter); b.append(counter, material); b.append(material, leaf);
-  const { tree, index } = b.finish({ camera, scene, registrations: [{ bodySystem: system, lightingOverlays: [materialSystem] }], stageClasses: ["jupiter-stage"] });
+  const { tree, index } = b.finish({ camera, scene,  stageClasses: ["jupiter-stage"] });
   const track = { id: "lighting", target: index(leaf),
     frame: { source: "scene-pitch", minimum: lighting.minimumPitchDegrees, maximum: lighting.maximumPitchDegrees,
       count: lighting.frameCount, baseFrame: 0, step: lighting.pitchStepDegrees, remap: null }, defaultPose: [],
@@ -67,10 +67,7 @@ export async function prepareJupiterPresentation() {
       startup: [...warm.map(entry => entry.key), ...lensKeys(lenses.defaultLens), ...lighting.transport.initialWarmRows.map(row => `lighting:${row}`)] },
     tree, variants, materials: [track], viewBindings: [{ kind: "counter-rotation", target: index(counter),
       systemTransform: cameraPlan.materialDepthPresentation.materialSystemTransform.replace(/^transform:/, "") }],
-    animations: [], observations: { constants: { renderStats: { idleJavaScriptLoops: 0 } }, counts: [], materials: [
-      ...["material", "camera"].map(category => ({ category, name: "materialFrame", track: "lighting", field: "frame" })),
-      { category: "material", name: "appliedFrame", track: "lighting", field: "appliedFrame" },
-    ] } };
+    animations: [] };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), await prepareJupiterPresentation(), objectControls);

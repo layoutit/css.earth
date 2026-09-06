@@ -39,8 +39,7 @@ The shared resource owners protect the committed working set while a replacement
 decodes. Pools declare capacity, concurrency, stability delay, retention and native
 slot reuse. Cancellation, retry, URL coalescing, lease release and eviction stay in
 the common implementation. A selection resolves all required texture writes before
-publishing any of them. Native body-layer registrations verify the retained scene
-relationship at the publication boundary.
+publishing any of them.
 
 Earth's optional destination catalog, page layers, motion-frame indices and
 navigation bounds use the same shared navigation and prepared-map owners. These

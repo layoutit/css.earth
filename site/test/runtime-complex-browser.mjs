@@ -141,6 +141,7 @@ async function snapshot(page, id) {
       features: runtime?.features.state() ?? null,
       camera: runtime?.camera.state() ?? null,
       cameraStats: runtime?.camera.stats() ?? null,
+      materials: runtime?.material.state() ?? null,
       stable: runtime?.assertStableDomIdentity() ?? null,
       exterior: material("exterior"), interior: material("interior"),
       classes: stage.className, view: stage.dataset.view ?? null,
@@ -180,7 +181,7 @@ async function neptuneRace(page, record) {
   await settled(page, "neptune", "near-infrared");
   const winner = await snapshot(page, "neptune");
   const plan = PREPARED_NEPTUNE_LENSES.controls.find(({ id }) => id === "near-infrared");
-  assertAddress(winner.exterior, plan.orbitMaterial.presentations[winner.cameraStats.materialFrame]);
+  assertAddress(winner.exterior, plan.orbitMaterial.presentations[winner.materials.lighting.frame]);
   await page.evaluate(() => window.__runtimeComplexProbe.release());
   await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))));
   const after = await snapshot(page, "neptune");

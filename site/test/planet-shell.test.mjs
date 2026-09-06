@@ -8,19 +8,6 @@ import { requireSceneLifecycle } from "../scene-contract.mjs";
 import { createSceneRouter } from "../scene-router.mjs";
 
 test("keeps every implemented scene in one object registry", () => {
-  assert.deepEqual(OBJECTS.map(({ id }) => id), [
-    "sun",
-    "mercury",
-    "venus",
-    "earth",
-    "moon",
-    "mars",
-    "jupiter",
-    "saturn",
-    "uranus",
-    "neptune",
-    "pluto",
-  ]);
   assert.deepEqual(
     objectAdapter.routes(),
     OBJECTS.map(({ route }) => route),

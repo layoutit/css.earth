@@ -99,10 +99,6 @@ The importer validates NASA's record identity and structured content schema.
 It does not fall back to scraping rendered webpages. Pluto uses checked,
 object-owned NASA and JPL sources, without adding another registry entry here.
 
-Search includes the Sun, planets, Moon, and Pluto. The planet distance scale
-remains a planet-only view derived from classification. To run every browser
-gate against an isolated server, use `pnpm test:browser http://127.0.0.1:4211`.
-
 ## License and Data
 
 cssEarth source code is [MIT licensed](LICENSE). Scientific data, imagery, and

@@ -1,6 +1,6 @@
 import { createLatestSelection } from "./latest-selection.mjs";
 import { resolvePreparedPresentation } from "./prepared-presentation.mjs";
-import { initialObjectSelection, reduceObjectSelection, invokeRuntimeHook, requireObjectAction, requireObjectSelection, requireResolvedPresentation } from "./object-runtime-contract.mjs";
+import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from "./object-runtime-contract.mjs";
 
 const sameKeys = (a, b) => a.length === b.length && a.every((key, index) => key === b[index]);
 
@@ -22,14 +22,14 @@ export function createObjectSelectionRuntime({
 
   function resolve(selection) {
     try {
-      return requireResolvedPresentation(resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan }), definition);
+      return resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan });
     } catch (failure) { if (live()) onFatalError(failure); throw failure; }
   }
   function frame(nextSelection = committed, nextPlan = committedPlan) {
     if (!live() || !nextSelection || !view) return;
     residency.beginFrame();
     try {
-      invokeRuntimeHook(presentation, "publishFrame", [{ selection: nextSelection, view, plan: nextPlan, resources: residency.resources }]);
+      presentation.publishFrame({ selection: nextSelection, view, plan: nextPlan, resources: residency.resources });
       framePublications++;
     } finally { residency.endFrame(); }
   }
@@ -94,7 +94,7 @@ export function createObjectSelectionRuntime({
         // is no asynchronous gap between the final lookup and material writes.
         const plan = request.plan;
         residency.beginFrame();
-        try { invokeRuntimeHook(presentation, "commitSelection", [{ selection, plan, view, resources: residency.resources }]); }
+        try { presentation.commitSelection({ selection, plan, view, resources: residency.resources }); }
         finally { residency.endFrame(); }
         if (!live() || active !== request) return;
         residency.commit(prepared.ticket);
@@ -137,9 +137,7 @@ export function createObjectSelectionRuntime({
     dispatch(action) {
       if (!live() || !committed) return Promise.resolve(false);
       const valid = requireObjectAction(definition.controls, action);
-      let next;
-      try { next = requireObjectSelection(reduceObjectSelection(desired, valid), definition.controls); }
-      catch (failure) { onFatalError(failure); throw failure; }
+      const next = reduceObjectSelection(desired, valid);
       return run(next, "selection");
     },
     setView(next) {

@@ -44,6 +44,3 @@ The aggregate suite exposed an existing Venus test-input defect, reproduced on
 the untouched base commit: an inward wheel cannot rebase a target already
 clamped at maximum zoom. The scenario now wheels outward and still asserts
 exactly one rebase; runtime behavior and assertions are unchanged.
-
-Final commands and fresh evidence are recorded in
-`docs/objects-contract-implementation.md` at the repository root.

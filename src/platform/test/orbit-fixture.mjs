@@ -64,7 +64,7 @@ export function orbitFixture(failure, cleanupFailure = false, dependencies = {})
     createPolyCamera(state) { return { state, update(value) { Object.assign(state, value); } }; },
     createCubicSkyCameraOrientation() {
       return { scene: () => "matrix3d(1)", skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: [0, 0, 1] }),
-        counterRotation() { return "matrix3d(1)"; }, billboardCounterRotation() {}, reset() {}, rotate() {}, snapshot() { return {}; },
+        counterRotation() { return "matrix3d(1)"; },  reset() {}, rotate() {}, snapshot() { return {}; },
       };
     },
     matchMedia: () => ({ matches: false }), MOBILE_VIEWPORT_QUERY: "mobile",

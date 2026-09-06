@@ -13,7 +13,7 @@ Final integrated visual and performance qualification remains unproven. See [the
 | --- | --- | --- |
 | Registry, navigation, application shell | `OBJECTS`, object adapter, router, shared shell | Identity, route, classification, source attribution, control content |
 | Mount, readiness, disposal, fatal cleanup | `object-runtime.mjs`, `scene-lifetime.mjs` | Validated v2 definition |
-| Retained scene construction | `prepared-presentation.mjs` | Ordered nodes, final CSS, attributes, body-layer registrations |
+| Retained scene construction | `prepared-presentation.mjs` | Ordered nodes, final CSS and attributes |
 | Lens and setting transactions | `object-control-binding.mjs`, `object-selection-runtime.mjs` | Defaults and exhaustive selection variants |
 | Material demand and publication | `prepared-material-demand.mjs`, `prepared-material.mjs` | Address banks, frame mappings, bounded demand and rotation policies |
 | Camera, orbit, sky, directional Sun | Shared cubic-sky, prepared-camera and Sun modules | Prepared projection and celestial records |
@@ -66,9 +66,8 @@ selection variants. The plan contains:
   address range without introducing another publisher. `publishWithAddress`
   prevents rotation from advancing without an available material address;
   `onlyWhenEnabled` controls hidden-track rotation.
-- `viewBindings`, `animations` and `observations`: bounded camera bindings,
-  prepared native pose animation and read-only mappings to actual shared counters
-  or published attributes. Optional `motionFrame`, `pageLayers` and `destinations`
+- `viewBindings` and `animations`: bounded camera bindings and prepared native
+  pose animation. Optional `motionFrame`, `pageLayers` and `destinations`
   bind the same shared navigation and page machinery.
 
 The common selection owner keeps desired state separate from committed state.

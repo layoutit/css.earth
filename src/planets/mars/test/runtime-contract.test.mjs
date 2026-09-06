@@ -20,19 +20,19 @@ test("Mars retains a visible fallback through a row miss, recoverable decode fai
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     assert.equal(f.residency.stats().pools.find(pool => pool.id === "lighting").nativeSlots, 3);
-    assert.equal(f.presentation.observe().material.appliedFrame,
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame,
       PREPARED_MARS_LIGHTING.shadowlessFrameOffset + PREPARED_MARS_LIGHTING.defaultFrame);
     const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); assert.equal(await request, true);
-    const previous = f.presentation.observe().material.appliedFrame;
+    const previous = f.presentation.observe().materials.lighting.appliedFrame;
     const view = { ...f.view, skySunViewDirection: [0, 0, 1], revision: 2 };
     f.selection.setView(view); await f.flush();
     assert.equal(f.selection.state().loadingMaterial, true);
-    assert.equal(f.presentation.observe().material.appliedFrame, previous);
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, previous);
     const failed = f.jobs.at(-1); failed.done = true; failed.reject(new Error("row decode failed")); await f.flush();
     assert.equal(f.lifetime.disposed, false); assert.equal(f.materialErrors.length, 1);
-    assert.equal(f.presentation.observe().material.appliedFrame, previous);
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, previous);
     f.selection.setView({ ...view, revision: 3 }); await f.settle();
-    assert.equal(f.presentation.observe().material.appliedFrame, 0);
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 0);
     const pool = f.residency.stats().pools.find(pool => pool.id === "lighting");
     assert.ok(pool.resident <= 3); assert.equal(pool.nativeSlots, 3);
     assert.deepEqual(f.errors, []);
@@ -85,14 +85,13 @@ test("Mars atmosphere follows every Sun phase in both ground-shadow modes throug
         f.selection.setView({ ...f.view, skySunViewDirection: direction, revision: revision++ });
         await f.settle();
         const observed = f.presentation.observe();
-        assert.equal(observed.material.materialFrame, phase);
-        assert.equal(observed.material.appliedFrame, phase + (shadows ? 0 : 256));
-        assert.equal(observed.material.appliedRow, observed.material.appliedFrame);
-        assert.equal(observed.material.shadowsEnabled, shadows);
-        assert.equal(observed.sky.shadowsEnabled, shadows);
-        assert.equal(observed.material.materialMode, shadows
+        assert.equal(observed.materials.lighting.calculatedFrame, phase);
+        assert.equal(observed.materials.lighting.appliedFrame, phase + (shadows ? 0 : 256));
+        assert.equal(observed.materials.lighting.appliedRow, observed.materials.lighting.appliedFrame);
+        assert.equal(f.selection.state().committed.shadows, shadows);
+        assert.equal(observed.materials.lighting.mode, shadows
           ? "directional-terminator-and-atmosphere" : "directional-atmosphere-without-ground-shadow");
-        if (direction[0] === 1) assert.ok(Math.abs(observed.material.materialLightRollDegrees +
+        if (direction[0] === 1) assert.ok(Math.abs(observed.materials.lighting.lightRollDegrees +
           PREPARED_MARS_LIGHTING.baseLightAzimuthDegrees) < 1e-9,
         "disabling ground shadows preserves the directional atmosphere rotation");
         assert.deepEqual(f.stage.querySelectorAll("*"), retained);
@@ -112,16 +111,15 @@ test("Mars ground-mode changes keep the published image and rotation until the r
     const leaf = f.stage.querySelectorAll("*").find(node => node.tagName === "S" &&
       node.parentNode?.className === "polycss-mesh mars-material-plane");
     const original = { image: leaf.style.backgroundImage, rotate: leaf.style.rotate };
-    assert.equal(f.presentation.observe().material.appliedFrame, 384);
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 384);
     const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true });
     await f.flush();
     assert.equal(f.selection.state().committed.shadows, false);
-    assert.equal(f.presentation.observe().material.shadowsEnabled, false);
     assert.deepEqual({ image: leaf.style.backgroundImage, rotate: leaf.style.rotate }, original);
     assert.ok(f.jobs.some(job => !job.done), "the opposite ground-mode row must be awaiting decode");
     await f.settle(); assert.equal(await request, true);
-    assert.equal(f.presentation.observe().material.shadowsEnabled, true);
-    assert.equal(f.presentation.observe().material.appliedFrame, 128);
+    assert.equal(f.selection.state().committed.shadows, true);
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 128);
     assert.notEqual(leaf.style.backgroundImage, original.image);
     assert.equal(leaf.style.rotate, original.rotate);
     assert.deepEqual(f.errors, []);

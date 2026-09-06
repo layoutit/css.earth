@@ -80,7 +80,7 @@ export async function prepareUranusPresentation() {
   const material = mesh("uranus-fixed-material", plan.fixedMaterialPlane.transform), counter = mesh("uranus-fixed-material-counter");
   const leaf = texture("uranus-fixed-material-leaf", plan.fixedMaterialPlane.leaf, normal.default);
   b.append(scene, counter); b.append(counter, material); b.append(material, leaf);
-  const { tree, index } = b.finish({ camera, scene, registrations: [{ bodySystem: system, lightingOverlays: [counter] }] });
+  const { tree, index } = b.finish({ camera, scene });
   const defaultFrame = Math.round(cameraPlan.defaultControlPitchDegrees / cameraPlan.maximumControlPitchDegrees * (lighting.frameCount - 1));
   const banks = lenses.controls.map(({ id }) => ({ id, frames: lighting.presentations.map(p => ({
     resource: `row:${id}:${p.rowIndex}`, frame: p.frameIndex, row: p.rowIndex, backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize })),
@@ -112,13 +112,7 @@ export async function prepareUranusPresentation() {
     assets: { entries, pools: [preparedResourcePool("mounted", entries), preparedResourcePool("rows", entries,
       { retention: "selection", capacity: 6, concurrency: 6 })], startup: [...celestial.map(e => e.key), ...staticKeys(lenses.defaultLens),
         ...initialRows.map(row => `row:${lenses.defaultLens}:${row}`)] }, tree, variants, materials: [track],
-    viewBindings: [{ kind: "counter-rotation", target: index(counter), systemTransform: null }], animations: [],
-    observations: { constants: { dom: { mode: "semantic-transform-groups-with-bare-leaves", retainedCameraRootCount: 1,
-      retainedMaterialCompositeRootCount: 0, retainedSceneRootCount: 1, retainedCubicSkyFaceCount: 6 } }, counts: [],
-      materials: [...["material", "camera"].map(category => ({ category, name: "activeMaterialRow", track: "lighting", field: "row" })),
-        { category: "camera", name: "materialAddressWrites", track: "lighting", field: "addressWrites" }],
-      publications: [{ category: "camera", name: "transformWrites", field: "transformWrites" }],
-    } };
+    viewBindings: [{ kind: "counter-rotation", target: index(counter), systemTransform: null }], animations: [] };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), await prepareUranusPresentation(), objectControls);

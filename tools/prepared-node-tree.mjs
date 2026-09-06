@@ -63,7 +63,7 @@ export function createPreparedNodeTree({ cssomReads = new Map() } = {}) {
     Object.assign(node.style, { backgroundPosition: "0px 0px", backgroundSize: "0px 0px", backgroundRepeat: "no-repeat" });
     append(node, texture); return node;
   }
-  function finish({ camera, scene, registrations, stageClasses = [] }) {
+  function finish({ camera, scene, stageClasses = [] }) {
     const nodes = [], indices = new Map(), visiting = new Set(), properties = [], propertyIds = new Map();
     const intern = property => {
       const key=JSON.stringify(property);
@@ -82,8 +82,7 @@ export function createPreparedNodeTree({ cssomReads = new Map() } = {}) {
     for (const root of roots) visit(root, -1);
     if (nodes.length !== created.size) throw new TypeError("Prepared tree contains unattached nodes.");
     const index = node => { if (!indices.has(node)) throw new TypeError("Undeclared prepared node reference."); return indices.get(node); };
-    return { index, tree: { nodes, properties, camera: index(camera), scene: index(scene), stageClasses,
-      registrations: registrations.map(registration => ({ bodySystem: index(registration.bodySystem), lightingOverlays: registration.lightingOverlays.map(index) })) } };
+    return { index, tree: { nodes, properties, camera: index(camera), scene: index(scene), stageClasses } };
   }
   return { element, mesh: (className, style = "", attributes = {}) => element("div", `polycss-mesh ${className}`, style, attributes), append, leaf, finish };
 }

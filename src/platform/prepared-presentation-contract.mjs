@@ -7,7 +7,6 @@ export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@2";
 const tags = new Set(["div", "span", "s", "b", "u"]);
 const frameSources = new Set(["sun-z", "prepared-light-z", "scene-pitch", "reference-sun-z"]);
 const demandModes = new Set(["current", "visible", "visible-directional", "away-enabled-or-lens-change", "neighborhood"]);
-const materialFields = new Set(["frame", "calculatedFrame", "appliedFrame", "appliedRow", "row", "mode", "lightRollDegrees", "addressWrites", "transformWrites", "enabled", "rotationEnabled", "sunViewDirection"]);
 const fail = message => { throw new TypeError(`Prepared presentation: ${message}.`); };
 const scalar = value => value === null || ["string", "boolean"].includes(typeof value) || typeof value === "number" && Number.isFinite(value);
 const string = (value, label) => { if (typeof value !== "string" || !value.length) fail(`${label} must be a nonempty string`); };
@@ -40,7 +39,7 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "inputSelector", "assets", "tree", "variants", "materials", "viewBindings", "animations", "observations", "resourceOrder", "destinations", "motionFrame", "pageLayers"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "inputSelector", "assets", "tree", "variants", "materials", "viewBindings", "animations", "resourceOrder", "destinations", "motionFrame", "pageLayers"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -53,7 +52,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   const resource = (key, nullable = false) => { if (!(nullable && key === null) && !resources.has(key)) fail(`undeclared resource ${key}`); };
   const resourceList = (list, label) => { array(list, label).forEach(key => resource(key)); unique(list, label); };
   const tree = plan.tree;
-  record(tree, "tree", ["nodes", "properties", "camera", "scene", "registrations", "stageClasses"]);
+  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses"]);
   for (const property of array(tree.properties,"prepared style properties")) {
     record(property,"prepared style property",["name","value","custom"]);string(property.name,"prepared property name");
     if(typeof property.value!=="string"||typeof property.custom!=="boolean")fail("prepared property assignment is invalid");
@@ -87,13 +86,6 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       !/(?:^|\s)polycss-camera(?:\s|$)/.test(tree.nodes[tree.camera].className)) fail("tree requires exactly one camera");
   if (tree.nodes.filter(entry => /(?:^|\s)polycss-scene(?:\s|$)/.test(entry.className)).length !== 1) fail("tree requires exactly one scene");
   array(tree.stageClasses, "stage classes").forEach(value => string(value, "stage class"));
-  if (!array(tree.registrations, "registrations").length) fail("body-layer registration is required");
-  for (const registration of tree.registrations) {
-    record(registration, "registration", ["bodySystem", "lightingOverlays"]); node(registration.bodySystem);
-    if (!ancestor(registration.bodySystem, tree.scene)) fail("body system must belong to the scene");
-    if (!array(registration.lightingOverlays, "lighting overlays").length) fail("lighting overlays are missing");
-    registration.lightingOverlays.forEach(id => node(id)); unique(registration.lightingOverlays, "lighting overlays");
-  }
   function ancestor(child, parent) { for (let id = tree.nodes[child]?.parent; id >= 0; id = tree.nodes[id].parent) if (id === parent) return true; return false; }
   function attribute(name) { if (!/^(?:data-[a-z0-9-]+|aria-[a-z0-9-]+)$/.test(name)) fail(`unsupported attribute ${name}`); }
   const forbiddenProperty = /^(?:transform|scale|rotate|perspective)$/;
@@ -310,39 +302,6 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     finite(animation.sourceMinimum, "animation minimum"); finite(animation.millisecondsPerDegree, "animation time mapping");
     if (!array(animation.keyframes, "keyframes").length) fail("prepared animation has no keyframes");
     for (const frame of animation.keyframes) { record(frame, "keyframe", ["offset", "transform"]); finite(frame.offset, "keyframe offset"); string(frame.transform, "keyframe transform"); }
-  }
-  record(plan.observations, "observations", ["constants", "materials", "counts", "publications", "attributes", "selection", "sums"]);
-  for(const binding of array(plan.observations.attributes??[],"attribute observations")) {
-    record(binding,"attribute observation",["category","name","target","attribute","default"]);
-    choice(binding.category,new Set(["camera","material","sky"]),"observation category");string(binding.name,"observation name");node(binding.target);attribute(binding.attribute);
-    if(binding.default!==null&&typeof binding.default!=="string")fail("attribute observation default must be string or null");
-  }
-  for(const binding of array(plan.observations.selection??[],"selection observations")) {
-    record(binding,"selection observation",["category","name","key"]);
-    choice(binding.category,new Set(["camera","material","sky"]),"observation category");string(binding.name,"observation name");
-    if(binding.key!=="lensId"&&!settings.has(binding.key))fail("observation must name a declared selection");
-  }
-  for(const binding of array(plan.observations.sums??[],"summed observations")) {
-    record(binding,"summed observation",["category","name","tracks","field","includePresentation"]);
-    choice(binding.category,new Set(["camera","material","sky"]),"observation category");string(binding.name,"observation name");
-    choice(binding.field,new Set(["addressWrites","transformWrites"]),"summed field");
-    if(typeof binding.includePresentation!=="boolean"||binding.includePresentation&&binding.field!=="transformWrites")fail("invalid presentation sum");
-    unique(array(binding.tracks,"summed tracks"),"summed tracks");if(!binding.tracks.length||binding.tracks.some(id=>!trackMap.has(id)))fail("undeclared summed track");
-  }
-  for (const binding of array(plan.observations.publications ?? [], "publication observations")) {
-    record(binding, "publication observation", ["category", "name", "field"]);
-    choice(binding.category, new Set(["camera", "material", "sky"]), "observation category"); string(binding.name, "observation name");
-    choice(binding.field, new Set(["selectionPublications", "framePublications", "styleWrites", "transformWrites"]), "publication field");
-  }
-  for (const binding of array(plan.observations.materials, "material observations")) {
-    record(binding, "material observation", ["category", "name", "track", "field"]);
-    choice(binding.category, new Set(["camera", "material", "sky"]), "observation category"); string(binding.name, "observation name");
-    if (!trackMap.has(binding.track)) fail("undeclared observation track"); choice(binding.field, materialFields, "observation field");
-  }
-  for (const count of array(plan.observations.counts, "count observations")) {
-    record(count, "count observation", ["category", "name", "target", "kind", "includeRoot"]);
-    choice(count.category, new Set(["dom", "renderStats"]), "count category"); string(count.name, "count name"); node(count.target);
-    choice(count.kind, new Set(["nodes", "leaves"]), "count kind"); if (typeof count.includeRoot !== "boolean") fail("count root policy is required");
   }
   return plan;
 }

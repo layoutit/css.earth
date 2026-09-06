@@ -15,7 +15,7 @@ test("Venus publishes every declared toggle through the shared controls and sele
       input.checked = !input.checked; input.listeners.get("change")(); await f.settle();
       assert.equal(f.selection.state().committed[name], input.checked);
       if (name !== "shadows") assert.equal(f.stage.classList.contains(`venus-hide-${name}`), !input.checked);
-      else assert.equal(f.presentation.observe().material.shadowsEnabled, input.checked);
+      else assert.equal(f.presentation.observe().materials.lighting.rotationEnabled, input.checked);
     }
     assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
     assert.deepEqual(f.errors, []); f.lifetime.destroy(); assert.equal(f.listenerCount(), 0);

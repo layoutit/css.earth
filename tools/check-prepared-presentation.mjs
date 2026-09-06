@@ -145,7 +145,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
         resources: plan.assets.entries.length, pools: plan.assets.pools,
         cameraNodes: plan.tree.nodes.filter(node => /(?:^|\s)polycss-camera(?:\s|$)/.test(node.className)).length,
         sceneNodes: plan.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className)).length,
-        camera: plan.camera, registrations: plan.tree.registrations,
+        camera: plan.camera,
         viewBindings: plan.viewBindings, animations: plan.animations.map(({ id, mode, target }) => ({ id, mode, target })),
         pageLayers: (plan.pageLayers ?? []).map(({ lensIds, plan: layer }) => ({ lensIds, schema: layer.schema,
           roots: layer.roots?.length ?? 0, poolSize: layer.poolSize ?? null })),

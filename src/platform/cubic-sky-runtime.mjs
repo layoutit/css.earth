@@ -162,16 +162,12 @@ export function createCubicSkyCameraOrientation({
   let scenePresentation = null;
   let skyboxPresentation = null;
   let counterMatrix = null;
-  let billboardCounterMatrix = null;
   const counterPresentations = new Map();
-  const billboardCounterPresentations = new Map();
   const invalidatePresentations = () => {
     scenePresentation = null;
     skyboxPresentation = null;
     counterMatrix = null;
-    billboardCounterMatrix = null;
     counterPresentations.clear();
-    billboardCounterPresentations.clear();
   };
   const reset = ({ controlPitch: nextPitch, controlYaw: nextYaw }) => {
     const renderedPitch = preparedScenePitch(nextPitch, cameraPlan);
@@ -314,31 +310,7 @@ export function createCubicSkyCameraOrientation({
       counterPresentations.set(localMatrix, presentation);
       return presentation;
     },
-    billboardCounterRotation(localMatrix = null) {
-      if (billboardCounterPresentations.has(localMatrix)) {
-        return billboardCounterPresentations.get(localMatrix);
-      }
-      scenePresentation ??= formatMatrix3d(sceneMatrix);
-      billboardCounterMatrix ??= new DOMMatrix(
-        `scale(${cameraPlan.sceneScale}) ${scenePresentation}`,
-      ).inverse();
-      if (localMatrix === null) {
-        const presentation = formatMatrix3d(billboardCounterMatrix);
-        billboardCounterPresentations.set(null, presentation);
-        return presentation;
-      }
-      const local = typeof localMatrix === "string"
-        ? new DOMMatrix(localMatrix)
-        : localMatrix;
-      if (!(local instanceof DOMMatrix)) {
-        throw new TypeError("Cubic-sky billboard counter basis is invalid.");
-      }
-      const presentation = formatMatrix3d(
-        local.inverse().multiply(billboardCounterMatrix),
-      );
-      billboardCounterPresentations.set(localMatrix, presentation);
-      return presentation;
-    },
+
     skybox() {
       if (skyboxPresentation !== null) return skyboxPresentation;
       const sunViewDirection = sunReferenceViewDirection
@@ -1272,10 +1244,7 @@ export function createRetainedCubicSkyOrbit({
       counterRotationFor(localMatrix) {
         return orientation.counterRotation(localMatrix);
       },
-      billboardCounterRotation: orientation.billboardCounterRotation(),
-      billboardCounterRotationFor(localMatrix) {
-        return orientation.billboardCounterRotation(localMatrix);
-      },
+
       controlPitch: safeCamera.state.rotX,
       controlYaw: safeCamera.state.rotY,
       zoom,

@@ -104,7 +104,7 @@ export async function prepareSaturnPresentation() {
   interiorLeaf.className = [...new Set([...(interiorLeaf.className ?? "").split(/\s+/).filter(Boolean), "saturn-interior-material"])].join(" ");
   interiorLeaf.style.backgroundImage = "none";
   b.append(scene, materialSystem); b.append(materialSystem, materialCounter); b.append(materialCounter, materialMesh); b.append(materialMesh, exteriorLeaf, interiorLeaf);
-  const { tree, index } = b.finish({ camera: cameraNode, scene, registrations: [{ bodySystem: system, lightingOverlays: [materialSystem] }] });
+  const { tree, index } = b.finish({ camera: cameraNode, scene });
   const shape = plan.fixedMaterialPlane.interactionProjection, width = shape.textureSize, height = width;
   const projection = { equatorialRadius: shape.equatorialRadius * shape.tileSize, polarRadius: shape.polarRadius * shape.tileSize,
     // Preserve the original native CSSOM read without a per-frame DOM parse.
@@ -153,13 +153,7 @@ export async function prepareSaturnPresentation() {
       ...["exterior-material", "interior-material"].map(id => preparedResourcePool(id, entries, { retention: "selection", decoding: "sync", capacity: 2, concurrency: 2 }))],
       startup: [...entries.filter(entry => entry.pool === "warm").map(entry => entry.key), `exterior:${exteriorAtlas.defaultVariant}`] },
     tree, variants, materials: [track("exterior", exteriorLeaf, exteriorAtlas, false), track("interior", interiorLeaf, interiorAtlas, true)],
-    viewBindings: [{ kind: "counter-rotation", target: index(materialCounter), systemTransform: materialSystem.style.transform }], animations: [],
-    observations: { constants: { dom: { interiorMounted: true } },
-      counts: [{ category: "dom", name: "interiorLeafCount", target: index(cutaway), kind: "leaves", includeRoot: false }],
-      materials: ["camera", "material"].flatMap(category => [{ category, name: "materialFrame", track: "exterior", field: "frame" },
-        { category, name: "materialAddressWrites", track: "exterior", field: "addressWrites" },
-        { category, name: "interiorAddressWrites", track: "interior", field: "addressWrites" }]),
-      sums: [{ category: "camera", name: "transformWrites", tracks: ["exterior", "interior"], field: "transformWrites", includePresentation: true }] } };
+    viewBindings: [{ kind: "counter-rotation", target: index(materialCounter), systemTransform: materialSystem.style.transform }], animations: [] };
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
