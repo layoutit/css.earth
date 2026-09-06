@@ -35,7 +35,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
     let readyPublished = false, settled = false, resolveReady, rejectReady;
     const ready = new Promise((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
     ready.catch(() => {});
-    let mounted = null, orbit = null, currentView = null, reference = null, previousPublication = null, heliocentric = null;
+    let mounted = null, orbit = null, currentView = null, reference = null, previousPublication = null, heliocentric = null, cubicSky = null;
     const pageLayers = new Map();
     let allowed = false, navigatedLens = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
@@ -150,7 +150,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       syncPagePlayback();
       // Presentation owns its roots immediately during construction, including
       // partial construction failures. Shared celestial layers join afterwards.
-      const cubicSky = environment.mountSky({ host: stage, plan: definition.sky,
+      cubicSky = environment.mountSky({ host: stage, plan: definition.sky,
         imageDensity: context.density, objectId: definition.id, requireSun: false });
       context.own(() => cubicSky.destroy());
       // A heliocentric view renders the Sun as real geometry beneath the body
@@ -228,7 +228,14 @@ export function createObjectRuntime(definition, services = nativeServices) {
           const applied = heliocentric.setTrailSpans(spans);
           orbit.refresh();
           return Object.freeze({ spans: heliocentric.state().trailSpans, source: heliocentric.state().trailSpansSource, applied });
-        } }),
+        },
+        // Session knob for the caption policy (cap height and spacing).
+        labelPolicy: options => { const applied = heliocentric.setLabelPolicy(options); orbit.refresh(); return applied; } }),
+        // Session knob for the catalogue stars' exposure (see
+        // star-photometry.mjs): moves the retained points only; the
+        // photograph keeps its prepared exposure.
+        ...(typeof cubicSky.setStarExposure !== "function" || cubicSky.starGroup == null ? {}
+          : { starExposure: options => cubicSky.setStarExposure(options) }),
         sky: Object.freeze({ state: () => Object.freeze({ ...observe().sky, ...orbit.skyState(),
           sunViewDirection: currentView?.sunViewDirection ?? null, skySunViewDirection: currentView?.skySunViewDirection ?? null,
           sunPresentation: currentView?.sunPresentation }),

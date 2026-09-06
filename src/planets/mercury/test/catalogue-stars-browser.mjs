@@ -25,16 +25,20 @@ const projectRoot = resolve(import.meta.dirname, "../../../..");
 export const TOLERANCES = Object.freeze({
   // A named star's painted point against the oracle's projection, pixels.
   positionPixels: 3,
-  // The brightest brilliant star's painted diameter against the lower
-  // quartile of the bright-band diameters in the same view (at least 2.5
-  // magnitudes apart); the quartile shrugs off a neighbour inside the
-  // measuring window, which inflates a crowded star's extent.
-  sizeOrderRatio: 1.4,
+  // The reference caps every disc at 1.25 px, so magnitude reaches the eye
+  // as luminance: the brightest brilliant star's painted light (integrated
+  // over its disc and bloom, above the local sky, per unit of its own
+  // colour's luminance) against the median of the faintest retained band's
+  // (m 4.5..5, tone-mapped to about 0.8 of the ceiling) in the same view.
+  intensityOrderRatio: 1.08,
+  // The painted diameter of any retained star, in CSS pixels: the capped
+  // disc (1.25 px at factor 1, 1.5 at this viewport) with its bloom.
+  maximumInkDiameterPx: 9,
   // Faint stamped stars in a 240 px window away from retained ones.
   faintStarsInWindow: 5,
-  // Retained stars (m <= 3.5, 290 over the sky) visible in one view once the
-  // chrome and the disc are excluded: a few.
-  retainedInView: 2,
+  // Retained stars (m <= 5, 1,599 over the sky) visible in one view once the
+  // chrome and the disc are excluded: a good few.
+  retainedInView: 12,
   // Peak luminance the photograph may keep at a retained star's position
   // once the points are hidden: its image is removed, its diffuse light
   // (the sigma-nine smear) stays, measured at 2-56 against 150-plus for the
@@ -115,7 +119,7 @@ try {
     return true;
   };
   report.geometry = geometry;
-  check("retained-stars-mounted", geometry.retained > 100 && geometry.retained < 1000, { retained: geometry.retained });
+  check("retained-stars-mounted", geometry.retained > 1000 && geometry.retained < 2000, { retained: geometry.retained });
 
   const calibration = await calibrateControlPitch(page);
   const sweep = [];
@@ -135,7 +139,8 @@ try {
       const painted = (await page.evaluate(() => [...document.querySelectorAll(".mercury-skybox-stars .planet-cubic-sky-star")]
         .map((element) => { const box = element.getBoundingClientRect(); return { name: element.dataset.name ?? null,
           direction: element.dataset.direction.split(",").map(Number),
-          magnitude: Number(element.dataset.magnitude), x: box.x + box.width / 2, y: box.y + box.height / 2, width: box.width }; })))
+          magnitude: Number(element.dataset.magnitude), x: box.x + box.width / 2, y: box.y + box.height / 2, width: box.width,
+          color: (element.style.backgroundColor.match(/\d+/gu) ?? ["255", "255", "255"]).map(Number) }; })))
         .filter((star) => sky.view(pose, sky.icrfToPresentation(star.direction))[2] < -0.2)
         .filter((star) => visible([star.x, star.y], 12));
       const cell = { scenePitch, heading, painted: painted.length, named: [] };
@@ -159,18 +164,21 @@ try {
           blobGap !== null && blobGap <= TOLERANCES.positionPixels && blob.peak > 120,
           { name, scenePitch, heading, pixel, domGap, blobGap, peak: blob?.peak ?? null });
       }
-      // Size: in a cell with both a brilliant (m < 1.5) and a bright-band
-      // (2.5 < m < 3.5) star in view, the brilliant one's painted disc is
-      // wider.
+      // Intensity: in a cell with a brilliant (m < 1.5) star and a few of
+      // the faintest retained band (4.5 < m < 5) in view, the brilliant
+      // one's painted peak is higher (the discs are the same, capped
+      // size; a stray neighbour inside a window cannot raise a median).
       const brilliant = painted.filter((star) => star.magnitude < 1.5).sort((a, b) => a.magnitude - b.magnitude);
-      const bright = painted.filter((star) => star.magnitude > 2.5 && star.magnitude < 3.5);
-      if (image && brilliant.length && bright.length >= 2 && bright[0].magnitude - brilliant[0].magnitude >= 2.5) {
-        const a = inkDiameter(image, [brilliant[0].x, brilliant[0].y], 2);
-        const diameters = bright.map((star) => inkDiameter(image, [star.x, star.y], 2)).filter((value) => value !== null).sort((p, q) => p - q);
-        const b = diameters.length ? diameters[Math.floor((diameters.length - 1) / 4)] : null;
-        cell.size = { brilliant: brilliant[0].magnitude, brilliantDiameter: a, brightQuartileDiameter: b, brightDiameters: diameters };
+      const faintest = painted.filter((star) => star.magnitude > 4.5 && star.magnitude < 5);
+      if (image && brilliant.length && faintest.length >= 3) {
+        const a = integratedLight(image, brilliant[0], 2);
+        const lights = faintest.map((star) => integratedLight(image, star, 2)).filter((value) => value !== null).sort((p, q) => p - q);
+        const b = lights.length ? lights[Math.floor(lights.length / 2)] : null;
+        const diameter = inkDiameter(image, [brilliant[0].x, brilliant[0].y], 2);
+        cell.size = { brilliant: brilliant[0].magnitude, brilliantLight: a, faintestMedianLight: b, faintestLights: lights, brilliantDiameter: diameter };
         sizePairs += 1;
-        check(`star-size-follows-magnitude-p${scenePitch}-h${heading}`, a !== null && b !== null && a >= TOLERANCES.sizeOrderRatio * b, cell.size);
+        check(`star-intensity-follows-magnitude-p${scenePitch}-h${heading}`, a !== null && b !== null && a >= TOLERANCES.intensityOrderRatio * b, cell.size);
+        check(`star-disc-capped-p${scenePitch}-h${heading}`, diameter !== null && diameter <= TOLERANCES.maximumInkDiameterPx, cell.size);
       }
       // Faint stars: a 240 px window of sky clear of retained stars must
       // still show compact points (the photograph's own).
@@ -258,6 +266,29 @@ function blobCentroid(image, centre, radius, dpr) {
     }
   }
   return { peak: peak.peak, x: sumX / weight / dpr, y: sumY / weight / dpr };
+}
+
+// A star's painted light: the luminance above the local sky (the median of
+// a 9 px window's border) summed over the window, per unit of the star's
+// own colour's luminance, so a blue star and an orange one compare on
+// their display luminance alone; null where nothing rises above the sky.
+function integratedLight(image, star, dpr) {
+  const radius = 4;
+  const border = [], inside = [];
+  for (let y = Math.floor((star.y - radius) * dpr); y <= Math.ceil((star.y + radius) * dpr); y += 1) {
+    for (let x = Math.floor((star.x - radius) * dpr); x <= Math.ceil((star.x + radius) * dpr); x += 1) {
+      if (x < 0 || y < 0 || x >= image.width || y >= image.height) continue;
+      const value = image.luminance[y * image.width + x];
+      const edge = y <= Math.floor((star.y - radius) * dpr) || y >= Math.ceil((star.y + radius) * dpr) ||
+        x <= Math.floor((star.x - radius) * dpr) || x >= Math.ceil((star.x + radius) * dpr);
+      (edge ? border : inside).push(value);
+    }
+  }
+  if (!inside.length || !border.length) return null;
+  const sky = border.sort((p, q) => p - q)[Math.floor(border.length / 2)];
+  const total = inside.reduce((sum, value) => sum + Math.max(0, value - sky), 0);
+  const colourLuminance = (0.2126 * star.color[0] + 0.7152 * star.color[1] + 0.0722 * star.color[2]) / 255;
+  return total > 20 && colourLuminance > 0 ? total / colourLuminance : null;
 }
 
 // The brightest pixel within `radius` CSS px of a CSS-pixel position, in

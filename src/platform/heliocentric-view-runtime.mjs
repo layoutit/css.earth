@@ -338,6 +338,35 @@ export function mountRetainedHeliocentricView({
       trailWeights = Object.freeze(weights);
       return trailSpans;
     },
+    // Session knob for the caption policy (see label-field.mjs): the cap
+    // height, gap, spacing and alpha ceiling may be retuned by eye; null
+    // restores the prepared policy. Widths are re-measured on the next
+    // publication at the new cap height; the retained pool is unchanged.
+    setLabelPolicy(options = null) {
+      if (labelField === null) return null;
+      if (options !== null && (typeof options !== "object" || Array.isArray(options))) {
+        throw new TypeError("Label policy options must be a record or null.");
+      }
+      const prepared = labels.policy;
+      const next = { ...prepared };
+      if (options !== null) {
+        for (const [name, value] of Object.entries(options)) {
+          if (!["capPixels", "gapPixels", "spacingPixels", "maxAlpha", "maxAlphaStep", "boxHeightCaps"].includes(name)) {
+            throw new TypeError(`Unknown label policy knob: ${name}.`);
+          }
+          next[name] = value;
+        }
+        next.poolSize = prepared.poolSize;
+        next.candidateCapacity = prepared.candidateCapacity;
+      }
+      validateLabelPolicy(next);
+      labelField.policy = Object.freeze(next);
+      labelField.group.style.fontSize = `${labelFontPixels(next)}px`;
+      labelField.declutter = createLabelDeclutter({ capacity: next.candidateCapacity, spacingPixels: next.spacingPixels });
+      labelField.pool.setMaxAlpha?.(next.maxAlpha);
+      labelField.measured = false;
+      return Object.freeze({ ...next, source: options === null ? "prepared" : "session" });
+    },
     setSunMarkerOpacity(opacity) {
       if (sunMarker === null) throw new Error("The plan carries no Sun marker.");
       sunMarkerOpacity = clamp(opacity, 0, 1);

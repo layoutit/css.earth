@@ -28,8 +28,10 @@ export const LABEL_OWNER_BODY = 2;
 
 export const DEFAULT_LABEL_POLICY = Object.freeze({
   model: "priority-declutter-cap-height-captions",
-  // Height of a capital letter on screen (the reference's labelCapPixels).
-  capPixels: 12,
+  // Height of a capital letter on screen: the shell's navigation labels
+  // (14 px in the UI stack, cap height 0.72 em); the reference's own 12 px
+  // is a session knob away (the runtime's label policy setter).
+  capPixels: 10.08,
   // Gap between the marker's edge and the bottom of the caption.
   gapPixels: 7,
   // Clearance two captions must keep (the reference's LABEL_SPACING_PIXELS).
@@ -41,7 +43,7 @@ export const DEFAULT_LABEL_POLICY = Object.freeze({
   // Candidate capacity of the one pass.
   candidateCapacity: 64,
   // Alpha ceiling and the largest alpha change per publication.
-  maxAlpha: 0.85,
+  maxAlpha: 0.72,
   maxAlphaStep: 0.1,
   // Cap height of the shell's UI font stack as a share of the em: the
   // reference's own fallback for fonts without ink metrics (system-ui
@@ -117,12 +119,19 @@ export function createLabelDeclutter({ capacity, spacingPixels }) {
 // The retained slots. `assign(accepted)` keeps every slot whose occupant is
 // still accepted, frees the others (their alpha ramps to zero before the
 // slot is reused), and gives free slots to the highest-priority newcomers.
-export function createLabelSlots({ poolSize, maxAlpha, maxAlphaStep }) {
+export function createLabelSlots({ poolSize, maxAlpha: initialMaxAlpha, maxAlphaStep }) {
+  let maxAlpha = initialMaxAlpha;
   const slots = Array.from({ length: poolSize }, () => ({
     occupant: null, text: "", anchor: [0, 0], bottomOffsetPx: 0, alpha: 0, target: 0, changed: false,
   }));
   return Object.freeze({
     slots,
+    // A session's alpha ceiling: applies from the next assignment on, so
+    // occupants glide to it by the usual step.
+    setMaxAlpha(value) {
+      if (!(value > 0) || value > 1) throw new TypeError("Label alpha ceiling must be in (0, 1].");
+      maxAlpha = value;
+    },
     assign(accepted, settled = true) {
       const byKey = new Map(accepted.map((entry) => [entry.key, entry]));
       const held = new Set();

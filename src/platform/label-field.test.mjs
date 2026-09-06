@@ -98,11 +98,13 @@ test("slots keep their occupant while it stays accepted and ramp alpha by at mos
 });
 
 test("cap-height sizing: font size from the em ratio, box width from the measured width per cap", () => {
-  assert.ok(Math.abs(labelFontPixels(policy) - 12 / 0.72) < 1e-9);
+  // The shell's navigation label: 14 px in the UI stack lands capitals at
+  // 10.08 px (0.72 em), the policy's cap.
+  assert.ok(Math.abs(labelFontPixels(policy) - 14) < 1e-9);
   const b = labelBox(policy, { widthPerCapHeight: 4.5, markerRadiusPx: 3 });
-  assert.equal(b.widthPx, 54);
+  assert.ok(Math.abs(b.widthPx - 45.36) < 1e-9);
   assert.equal(b.bottomOffsetPx, 10);
-  assert.ok(Math.abs(b.topOffsetPx - (10 + 26.4)) < 1e-9);
+  assert.ok(Math.abs(b.topOffsetPx - (10 + 10.08 * 2.2)) < 1e-9);
   assert.equal(validateLabelPolicy(policy), policy);
   assert.throws(() => validateLabelPolicy({ ...policy, poolSize: 0 }), TypeError);
   assert.throws(() => validateLabelPolicy({ ...policy, capHeightEm: 1.2 }), TypeError);
