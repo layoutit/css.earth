@@ -17,6 +17,7 @@ import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFro
 import type { PreparedWorldCameraFrame, WorldCameraPose } from './world-camera.js';
 import type { PositionM } from '@cssearth/engine';
 import { bindWorldCameraPicking } from './world-camera-picking.js';
+import { hitsProjectedBody } from './world-camera-hit.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & Partial<ReturnType<PerspectiveDolly['state']>>;
 export interface OrbitPublication extends CameraAngles { sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; sunPresentation: SunProjection | ReturnType<RetainedDirectionalSun['state']> | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
@@ -303,6 +304,12 @@ export function createRetainedCubicSkyOrbit({
     rotate: publishCameraDelta,
     minimumZoom: minimumZoom(),
     maximumZoom: maximumZoom(),
+    surfaceFlyToHitTest: perspective ? (clientX, clientY) => {
+      if (projected === null) return false;
+      const marker = heliocentric!.marker;
+      const markerBounds = !marker.hidden && Number(marker.style.opacity) > 0 ? marker.getBoundingClientRect() : null;
+      return hitsProjectedBody(clientX, clientY, projected.body, cameraElement.getBoundingClientRect(), markerBounds);
+    } : null,
     // The prepared wheel dolly: the eye moves along its axis, with no
     // surface anchor to hold.
     dolly: perspective

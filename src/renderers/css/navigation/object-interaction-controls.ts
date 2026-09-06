@@ -5,7 +5,7 @@ import { googleEarthInteractionTrackball, googleEarthDirectAngularDegreesPerTrac
 import { errorMessage } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
 import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate, DestinationMotion } from './types.js';
-export interface ObjectInteractionOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; sceneMatrix(): string; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; dolly?: { stepPerDelta: number } | null; onStart(): void; onEnd(): void; onError?: ((error: unknown) => void) | null; }
+export interface ObjectInteractionOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; trackballMetrics(): TrackballMetrics; sceneMatrix(): string; rotate(delta: CameraDelta): void; minimumZoom: number; maximumZoom: number; dolly?: { stepPerDelta: number } | null; surfaceFlyToHitTest?: ((clientX: number, clientY: number) => boolean) | null; onStart(): void; onEnd(): void; onError?: ((error: unknown) => void) | null; }
 export interface InteractionServices { createUnboundedMatrixDragControls?: typeof createMatrixDragControls; createPreparedWheelZoomControls?: typeof createWheelZoomControls; }
 export function createObjectInteractionControls({
   inputSurface,
@@ -17,6 +17,7 @@ export function createObjectInteractionControls({
   minimumZoom,
   maximumZoom,
   dolly = null,
+  surfaceFlyToHitTest = null,
   onStart,
   onEnd,
   onError = null,
@@ -54,6 +55,7 @@ export function createObjectInteractionControls({
       minimumZoom,
       maximumZoom,
     }),
+    surfaceFlyToHitTest,
     onPointerStart: () => wheelControls.stop(),
     onStart,
     onEnd,

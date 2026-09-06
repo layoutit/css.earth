@@ -15,19 +15,18 @@ import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } f
 import { advanceGoogleEarthDragThrow, createGoogleEarthDragHistory, estimateGoogleEarthDragThrow, GOOGLE_EARTH_DRAG_INERTIA, projectGoogleEarthTrackballDelta, recordGoogleEarthDragSample, resetGoogleEarthDragHistory } from "@cssearth/engine";
 import { GOOGLE_EARTH_SURFACE_FLY_TO, planGoogleEarthSurfaceFlyTo, sampleGoogleEarthSurfaceFlyTo } from "./google-earth-surface-fly-to.js";
 import { conjugateRotation, isTrackballMetrics } from "@cssearth/engine";
-
 const POINTER_POSITION_EPSILON = 1e-6;
-
 export function createUnboundedMatrixDragControls({
   inputSurface, runtimePolicy, trackballMetrics,
   flyToTrackballMetrics = trackballMetrics,
   rotate,
   surfaceFlyToState = null,
+  surfaceFlyToHitTest = null,
   onPointerStart = () => {}, onStart = () => {}, onEnd = () => {},
   onError = null,
 }: MatrixDragControlsOptions) {
   validateDragControlsOptions({ inputSurface, runtimePolicy, trackballMetrics, flyToTrackballMetrics,
-    rotate, surfaceFlyToState, onPointerStart, onStart, onEnd, onError });
+    rotate, surfaceFlyToState, surfaceFlyToHitTest, onPointerStart, onStart, onEnd, onError });
   const lifetime = createSceneLifetime();
   const guardNative = <Args extends unknown[], Result>(callback: (...args: Args) => Result) => (...args: Args) => {
     if (lifetime.disposed) return;
@@ -235,6 +234,7 @@ export function createUnboundedMatrixDragControls({
   let completedDoublePress: { x: number; y: number; timestamp: number } | null = null;
   const beginSurfaceFlyTo = (event: MouseEvent) => {
     if (!drag || surfaceFlyToState === null || event.button !== 0) return;
+    if (surfaceFlyToHitTest !== null && !surfaceFlyToHitTest(event.clientX, event.clientY)) return false;
     const measuredTrackball = flyToTrackballMetrics();
     if (!isTrackballMetrics(measuredTrackball)) {
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
