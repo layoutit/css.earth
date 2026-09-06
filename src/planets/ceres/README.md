@@ -13,7 +13,7 @@ pnpm dev
 # Open http://127.0.0.1:4210/ceres/
 ```
 
-The Ceres runtime inventory contains 36 files, about 62.5 MB. Other objects need
+The Ceres runtime inventory contains 36 files, about 61.7 MB. Other objects need
 their own assets if opened. Ceres does not require Earth's global geometry.
 
 To reproduce Ceres from its pinned source inputs:
@@ -28,10 +28,12 @@ are reused; corrupt sources fail without being overwritten. `--verify-only`
 checks the local source inventory without network access. Raw binaries and
 prepared images are excluded from Git; runtime assets use the existing publisher.
 
-The two surface maps retain published shadows, seams, and polar gaps. The
-**enhanced-color south pole has black areas without image coverage**. This is a
-spherical mean-radius PoC, not a resolved shape or terrain model. Enhanced color
-is explicitly false color, not the visible appearance of Ceres.
+The maps retain observed shadows and seams. A **neutral gray cartographic grid**
+marks missing imagery, using the same preparation code as Pluto. The grid is
+an explicit absence of data, not inferred terrain. Only exactly black source
+pixels connected to the southern border are marked; dark observed terrain and
+nonzero JPEG edge pixels remain untouched. This is a spherical mean-radius PoC,
+not a resolved shape or terrain model. Enhanced color is false color.
 
 Source details and attribution are in [SOURCE.md](SOURCE.md) and [NOTICE.md](NOTICE.md).
 

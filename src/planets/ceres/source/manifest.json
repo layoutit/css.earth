@@ -35,7 +35,7 @@
         ],
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Preserve the complete published raster, including shadows, mosaic seams, and dark polar gaps. No coverage completion."
+      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting."
     },
     {
       "id": "nasa-dawn-fc-pia19977",
@@ -71,7 +71,7 @@
         ],
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Preserve the complete published raster, including shadows, mosaic seams, and dark polar gaps. No coverage completion."
+      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting."
     },
     {
       "id": "eso-milky-way-panorama",

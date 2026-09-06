@@ -5,6 +5,8 @@ import { resolve } from "node:path";
 import sharp from "sharp";
 import { createSourceManifest } from "../../../platform/source-manifest.mjs";
 import { packProjectiveSurfaceRaster } from "../../../platform/projective-surface-raster.mjs";
+import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from "../../../platform/prepare-missing-coverage.mjs";
+import { reprojectSolidBodySurfaceRaster } from "../../../platform/prepare-solid-body-surface.mjs";
 
 // The same 16-band, 32-pixel-gutter layout as Mercury's canonical 4K surface.
 // This prepares textures only; it does not create a runtime or register Ceres.
@@ -23,11 +25,17 @@ for (const entry of source.manifest.inputs.filter(input => input.consumers.inclu
   if (metadata.width !== entry.width || metadata.height !== entry.height) {
     throw new Error(`Ceres source dimensions changed: ${entry.path}`);
   }
-  // Keep the full published raster, including shadowed and unobserved regions.
-  // Normalization changes resolution only: no tint, fill, crop, or sharpening.
-  const rgba = await sharp(input).resize(width, height, { fit: "fill", kernel: "lanczos3" })
-    .ensureAlpha().raw().toBuffer();
-  const packed = packProjectiveSurfaceRaster(rgba, { width, height, bandCount, gutter });
+  // Read validity before interpolation. Exactly black pixels connected to the
+  // southern image edge use the same gray cartographic grid as Pluto.
+  const sourceRaster = await sharp(input).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const sourceMissing = blackFillCoverage(sourceRaster.data, sourceRaster.info, { southConnected: true });
+  const rgb = await sharp(input).resize(width, height, { fit: "fill", kernel: "lanczos3" })
+    .removeAlpha().raw().toBuffer();
+  const missing = sampleCoverage(sourceMissing, sourceRaster.info, width, height);
+  const display = paintMissingCoverage(rgb, { width, height, channels: 3 }, missing);
+  const rgba = await sharp(display, { raw: { width, height, channels: 3 } }).ensureAlpha().raw().toBuffer();
+  const projected = reprojectSolidBodySurfaceRaster(rgba, { width, height, latitudeSegments: bandCount });
+  const packed = packProjectiveSurfaceRaster(projected, { width, height, bandCount, gutter });
   const { data, ...layout } = packed;
   const normalized = sharp(rgba, { raw: { width, height, channels: 4 } });
   const stem = `ceres-${entry.lensId}`;
@@ -49,7 +57,7 @@ await writeFile(resolve(preparedRoot, "surfaces.json"), JSON.stringify({
 console.log(`Prepared ${surfaces.length} Ceres surfaces: public/scenes/ceres; metadata: src/planets/ceres/.prepared/surfaces.json`);
 
 async function emit(filename, pipeline) {
-  // Lossless encoding keeps the prepared map and packed band's pixels identical.
+  // Lossless encoding preserves the resampled pixels through packing and delivery.
   const bytes = await pipeline.webp({ lossless: true, effort: 4 }).toBuffer();
   await writeFile(resolve(publicRoot, filename), bytes);
   const { width, height } = await sharp(bytes).metadata();

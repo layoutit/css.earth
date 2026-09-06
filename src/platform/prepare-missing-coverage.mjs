@@ -39,7 +39,7 @@ export function sampleCoverage(missing, source, width, height) {
 
 export function paintMissingCoverage(data, { width, height, channels }, missing) {
   if (missing.length !== width * height || data.length !== width * height * channels || channels !== 3) {
-    throw new Error("Pluto coverage and RGB raster dimensions must match.");
+    throw new Error("Coverage and RGB raster dimensions must match.");
   }
   const output = Buffer.from(data);
   const base = [82, 84, 82], line = [112, 115, 111];

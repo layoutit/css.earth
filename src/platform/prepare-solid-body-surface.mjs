@@ -1,6 +1,67 @@
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from "@layoutit/polycss";
 import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, prepareProjectiveTextureLayer } from "./projective-surface-raster.mjs";
 
+// A latitude trapezoid uses projective UVs: tan(latitude), rather than latitude,
+// varies linearly down its texture. Bake the inverse mapping into each band so
+// the published equirectangular image lands at the correct surface coordinates.
+export function reprojectSolidBodySurfaceRaster(source, { width, height,
+  latitudeSegments = 16, longitudeSegments = 32 }) {
+  const output = Buffer.from(source);
+  const cellWidth = width / longitudeSegments, cellHeight = height / latitudeSegments;
+  const latitudeStep = Math.PI / latitudeSegments, longitudeStep = 2 * Math.PI / longitudeSegments;
+  const columns = Array.from({ length: width }, (_, x) => {
+    const cell = Math.floor(x / cellWidth), u = (x % cellWidth + 0.5) / cellWidth;
+    const left = (cell - 0.005) * longitudeStep, right = (cell + 1.005) * longitudeStep;
+    const px = (1 - u) * Math.cos(left) + u * Math.cos(right);
+    const py = (1 - u) * Math.sin(left) + u * Math.sin(right);
+    return { longitude: Math.atan2(py, px), radius: Math.hypot(px, py) };
+  });
+  for (let band = 1; band < latitudeSegments - 1; band++) {
+    const north = Math.PI / 2 - (band - 0.005) * latitudeStep;
+    const south = Math.PI / 2 - (band + 1.005) * latitudeStep;
+    for (let row = 0; row < cellHeight; row++) {
+      const t = 1 - (row + 0.5) / cellHeight;
+      const z = (1 - t) * Math.tan(south) + t * Math.tan(north);
+      for (let x = 0; x < width; x++) {
+        const column = columns[x];
+        sampleMap(source, width, height, column.longitude, Math.atan2(z, column.radius),
+          output, ((band * cellHeight + row) * width + x) * 4);
+      }
+    }
+  }
+  return output;
+}
+
+export function prepareSolidBodyPoleRaster(source, { width, height, tileSize = 512,
+  radius = 230, polarRadius = radius, latitudeSegments = 16 }) {
+  const output = Buffer.alloc(tileSize * tileSize * 2 * 4);
+  const boundary = Math.PI / 2 - Math.PI / latitudeSegments;
+  const capRadius = radius * Math.cos(boundary) * 1.035;
+  const capHeight = polarRadius * Math.sin(boundary) + 0.1;
+  for (let pole = 0; pole < 2; pole++) for (let y = 0; y < tileSize; y++) for (let x = 0; x < tileSize; x++) {
+    const dx = (x + 0.5) / tileSize * 2 - 1, dy = (y + 0.5) / tileSize * 2 - 1;
+    const r = Math.hypot(dx, dy);
+    if (r > 1) continue;
+    sampleMap(source, width, height, Math.atan2(pole === 0 ? dy : -dy, dx),
+      (pole === 0 ? 1 : -1) * Math.atan2(capHeight / polarRadius, r * capRadius / radius),
+      output, (y * tileSize * 2 + pole * tileSize + x) * 4);
+  }
+  return output;
+}
+
+function sampleMap(source, width, height, longitude, latitude, output, offset) {
+  const sx = ((longitude / (2 * Math.PI) + 1) % 1) * width - 0.5;
+  const sy = Math.max(0, Math.min(height - 1, (0.5 - latitude / Math.PI) * height - 0.5));
+  const x0 = (Math.floor(sx) + width) % width, x1 = (x0 + 1) % width;
+  const y0 = Math.floor(sy), y1 = Math.min(height - 1, y0 + 1);
+  const u = sx - Math.floor(sx), v = sy - y0;
+  for (let channel = 0; channel < 4; channel++) {
+    const top = source[(y0 * width + x0) * 4 + channel] * (1 - u) + source[(y0 * width + x1) * 4 + channel] * u;
+    const bottom = source[(y1 * width + x0) * 4 + channel] * (1 - u) + source[(y1 * width + x1) * 4 + channel] * u;
+    output[offset + channel] = Math.round(top * (1 - v) + bottom * v);
+  }
+}
+
 // Mercury's projective latitude-band geometry, parameterized for solid bodies.
 // All mesh construction runs during preparation; the runtime receives leaves.
 export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius,
