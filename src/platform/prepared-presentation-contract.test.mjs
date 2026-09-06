@@ -1,3 +1,4 @@
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
@@ -21,7 +22,7 @@ const fixture = () => structuredClone(presentationFixture(moon));
 
 test("v2 binds the actual eleven control, camera, sky and resource contracts", async () => {
   for (const object of OBJECTS) {
-    const { runtimeDefinition } = await import(`../planets/${object.id}/runtime/definition.mjs`);
+    const runtimeDefinition = await loadObjectTestDefinition(object.id);
     const plan = presentationFixture(runtimeDefinition);
     requirePreparedPresentation(plan, { controls: runtimeDefinition.controls });
     requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: object.id, controls: runtimeDefinition.controls });
@@ -76,7 +77,7 @@ test("preparation rejects malformed phase tables and undeclared neighbors", asyn
 });
 
 for (const target of ["camera", "scene"]) test(`an existing prepared native animation cannot target the ${target}`, async () => {
-  const { runtimeDefinition: mercury } = await import("../planets/mercury/runtime/definition.mjs");
+  const { default: mercury } = await import("../../src/planets/mercury/prepared/runtime.json", {with: {type: "json"}});
   const definition = structuredClone(mercury);
   requireObjectRuntimeDefinition(definition);
   const animation = definition.animations.find(entry => entry.id === "mercury-interior-presentation-orbit");

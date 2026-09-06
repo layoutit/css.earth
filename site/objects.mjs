@@ -1,3 +1,5 @@
+import mercuryDescriptor from "../src/planets/mercury/object.json" with { type: "json" };
+import venusDescriptor from "../src/planets/venus/object.json" with { type: "json" };
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
@@ -10,18 +12,14 @@ export const OBJECTS = defineObjects([
     }),
   object("mercury", "Mercury", "planet", "#9d9388", 0.39,
     "Explore Mercury in 3D with cssEarth. Inspect the smallest planet, its cratered surface, and the extreme conditions closest to the Sun.", async () => {
-      const { mountMercuryClient } = await import(
-        "../src/planets/mercury/runtime/client.mjs"
-      );
-      return mountMercuryClient;
-    }),
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mercuryDescriptor);
+    }, mercuryDescriptor.properties.worldFrame),
   object("venus", "Venus", "planet", "#d6aa69", 0.72,
     "Explore Venus in 3D with cssEarth. Look beneath its clouds, discover its volcanic surface, and learn about the hottest planet in our solar system.", async () => {
-      const { mountVenusClient } = await import(
-        "../src/planets/venus/runtime/client.mjs"
-      );
-      return mountVenusClient;
-    }),
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(venusDescriptor);
+    }, venusDescriptor.properties.worldFrame),
   object("earth", "Earth", "planet", "#5b82a7", 1,
     "Explore Earth in 3D with cssEarth. Orbit our home planet, discover its surface and atmosphere, and browse scientific facts in your browser.", async () => {
       const { mountEarthClient } = await import(
@@ -96,7 +94,7 @@ export function requireObject(id) {
   return objectRecord;
 }
 
-function object(id, name, classification, color, distanceAu, description, loadScene) {
+function object(id, name, classification, color, distanceAu, description, loadScene, worldFrame = null) {
   return defineObject({
     id,
     name,
@@ -105,6 +103,7 @@ function object(id, name, classification, color, distanceAu, description, loadSc
     distanceAu,
     route: `/${id}/`,
     loadScene,
+    worldFrame,
     description,
   });
 }

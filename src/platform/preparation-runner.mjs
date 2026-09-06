@@ -19,7 +19,7 @@ export async function runPreparationSteps({
     if (!Array.isArray(step) || step.length === 0 ||
         step.some((value) => typeof value !== "string") ||
         isAbsolute(step[0]) ||
-        !/^[a-z0-9][a-z0-9._-]*\.mjs$/u.test(step[0].split("/").at(-1)) ||
+        !/^[a-z0-9][a-z0-9._-]*\.m?js$/u.test(step[0].split("/").at(-1)) ||
         step[0].split("/").slice(0, -1).some(part => !/^(?:\.{1,2}|[a-z0-9][a-z0-9._-]*)$/u.test(part))) {
       throw new TypeError(`${objectName} has an invalid preparation step.`);
     }

@@ -92,7 +92,7 @@ const report = Object.freeze({
     moonClient: "src/planets/moon/runtime/client.mjs",
     moonStyles: "src/planets/moon/runtime/styles.css",
     moonManifest: "src/planets/moon/source/manifest.json",
-    mercuryScene: "src/planets/mercury/runtime/preparedScene.mjs",
+    mercuryScene: "src/planets/mercury/prepared/scene.json",
     saturnScene: "src/planets/saturn/runtime/preparedScene.mjs",
   }),
 });

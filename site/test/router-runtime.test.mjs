@@ -65,12 +65,14 @@ test("loading remembers latest intent but cannot resume; media events never rewr
   const gate = deferred();
   const h = harness(() => ({ ready: gate.promise }));
   await flush();
+  assert.equal(h.documentTarget.documentElement.dataset.scenePresented, "false");
   h.shells[0].onMotionChange(true);
   assert.deepEqual(h.mounts[0].calls, ["pause"]);
   h.media.matches = true;
   h.media.dispatchEvent(new Event("change"));
   gate.resolve();
   await h.router.settled;
+  assert.equal(h.documentTarget.documentElement.dataset.scenePresented, "true");
   assert.deepEqual(h.router.playback(), { motionRequested: true, allowed: false, reason: "reduced-motion" });
   h.media.matches = false;
   h.media.dispatchEvent(new Event("change"));
@@ -84,6 +86,7 @@ test("loading remembers latest intent but cannot resume; media events never rewr
   h.media.dispatchEvent(new Event("change"));
   assert.deepEqual(h.mounts[0].calls, ["pause", "resume", "pause"]);
   h.router.destroy();
+  assert.equal(h.documentTarget.documentElement.dataset.scenePresented, "false");
 });
 
 test("playback reads cannot consume a pending media notification", async () => {

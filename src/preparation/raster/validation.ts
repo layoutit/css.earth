@@ -1,0 +1,104 @@
+import type { RasterRecipe } from './config.js';
+type RecordValue = Record<string, unknown>;
+function record(value: unknown, path: string): RecordValue { if (typeof value !== 'object' || value === null || Array.isArray(value))
+    throw new TypeError(`${path} must be an object.`); return value as RecordValue; }
+function finite(value: unknown, path: string, positive = false): asserts value is number { if (typeof value !== 'number' || !Number.isFinite(value) || (positive && value <= 0))
+    throw new TypeError(`${path} must be ${positive ? 'positive and ' : ''}finite.`); }
+function text(value: unknown, path: string): asserts value is string { if (typeof value !== 'string' || !value.length)
+    throw new TypeError(`${path} must be nonempty text.`); }
+function numbers(value: unknown, path: string, length?: number): asserts value is number[] { if (!Array.isArray(value) || !value.length || (length !== undefined && value.length !== length))
+    throw new TypeError(`${path} has invalid dimensions.`); value.forEach((item, index) => finite(item, `${path}[${index}]`)); }
+function path(value: unknown, label: string): void { text(value, label); if (value.startsWith('/') || value.split('/').includes('..') || value.includes('\\'))
+    throw new TypeError(`${label} must be a contained relative path.`); }
+function fields(value: RecordValue, keys: string[], label: string, positive = false): void { for (const key of keys)
+    finite(value[key], `${label}.${key}`, positive); }
+export function parseRasterRecipe(value: unknown): RasterRecipe {
+    const recipe = record(value, 'raster');
+    if (recipe.schema !== 'cssearth-raster-recipe@1')
+        throw new TypeError('Unsupported raster recipe schema.');
+    fields(recipe, ['sourceWidth', 'sourceHeight', 'width', 'height', 'latitudeBands', 'polarTile'], 'raster', true);
+    for (const key of ['sourceWidth', 'sourceHeight', 'width', 'height', 'latitudeBands', 'polarTile'])
+        if (!Number.isInteger(recipe[key]))
+            throw new TypeError(`raster.${key} must be an integer.`);
+    if (recipe.resample !== 'source-packed' && recipe.resample !== 'density-before-pack')
+        throw new TypeError('Unknown raster resampling operator.');
+    if (recipe.polarProjection !== 'angular-nearest' && recipe.polarProjection !== 'orthographic-bilinear')
+        throw new TypeError('Unknown polar projection operator.');
+    if (typeof recipe.polesCombined !== 'boolean')
+        throw new TypeError('polesCombined must be boolean.');
+    if (recipe.polesCombined !== (recipe.polarProjection === 'angular-nearest'))
+        throw new TypeError('The authored pole storage and projection combination is unsupported.');
+    numbers(recipe.densities, 'densities');
+    if (JSON.stringify(recipe.densities) !== '[1,2]')
+        throw new TypeError('The prepared responsive raster operator requires densities 1 and 2.');
+    text(recipe.publicBase, 'publicBase');
+    if (!recipe.publicBase.startsWith('/') || !recipe.publicBase.endsWith('/') || recipe.publicBase.includes('..'))
+        throw new TypeError('publicBase must be an absolute asset URL prefix.');
+    path(recipe.polesOutput, 'polesOutput');
+    const metadata = record(recipe.surfaceMetadata, 'surfaceMetadata');
+    text(metadata.schema, 'surfaceMetadata.schema');
+    if (metadata.sourcePositionVariable !== undefined)
+        text(metadata.sourcePositionVariable, 'sourcePositionVariable');
+    const thumbnail = record(recipe.thumbnail, 'thumbnail');
+    fields(thumbnail, ['size', 'quality'], 'thumbnail', true);
+    if (thumbnail.crop !== undefined) {
+        const crop = record(thumbnail.crop, 'thumbnail.crop');
+        fields(crop, ['left', 'top', 'width', 'height'], 'thumbnail.crop');
+    }
+    if (!Array.isArray(recipe.surfaces) || !recipe.surfaces.length)
+        throw new TypeError('At least one source surface is required.');
+    const ids = new Set<string>();
+    for (const entry of recipe.surfaces) {
+        const surface = record(entry, 'surface');
+        text(surface.id, 'surface.id');
+        if (ids.has(surface.id))
+            throw new TypeError('Duplicate surface id.');
+        ids.add(surface.id);
+        for (const key of ['source', 'output', 'thumbnail'])
+            path(surface[key], `surface.${key}`);
+        if (typeof surface.falseColor !== 'boolean')
+            throw new TypeError('falseColor must be boolean.');
+        if (surface.exposure !== undefined)
+            numbers(surface.exposure, 'surface.exposure', 3);
+        if (surface.sharpen !== undefined)
+            numbers(surface.sharpen, 'surface.sharpen', 2);
+        if (surface.coverage !== undefined) {
+            const coverage = record(surface.coverage, 'coverage');
+            path(coverage.normal, 'coverage.normal');
+            path(coverage.topography, 'coverage.topography');
+            if (!Array.isArray(coverage.references) || !coverage.references.length)
+                throw new TypeError('Coverage source references missing.');
+            coverage.references.forEach(item => text(item, 'coverage.reference'));
+        }
+    }
+    if (recipe.lighting !== undefined) {
+        const lighting = record(recipe.lighting, 'lighting');
+        fields(lighting, ['frameSize', 'columns', 'presentationSize', 'billboardFrameSize', 'billboardColumns', 'frameCount', 'radiusScale', 'maximumAlpha'], 'lighting', true);
+        fields(lighting, ['defaultFrame', 'minimumLightViewZ', 'maximumLightViewZ', 'shadowlessFloodLimbFloor', 'ambientIntensity'], 'lighting');
+        numbers(lighting.terminator, 'lighting.terminator', 2);
+        for (const key of ['rowOutput', 'billboardOutput'])
+            path(lighting[key], `lighting.${key}`);
+        for (const key of ['bankSchema', 'billboardSchema'])
+            text(lighting[key], `lighting.${key}`);
+        record(lighting.metadata, 'lighting.metadata');
+    }
+    if (recipe.atmosphere !== undefined) {
+        const atmosphere = record(recipe.atmosphere, 'atmosphere');
+        for (const key of ['source', 'materialOutput', 'observationOutput', 'lightingOutput'])
+            path(atmosphere[key], `atmosphere.${key}`);
+        fields(atmosphere, ['tileSize', 'logicalSize', 'bodyRadius', 'supersampling', 'coverageScale', 'contentScale', 'frameCount', 'directionalFrameCount', 'columns', 'rows'], 'atmosphere', true);
+        fields(atmosphere, ['minimumLightViewZ', 'maximumLightViewZ', 'directionalShadowRelease', 'floodShadowRelease'], 'atmosphere');
+        numbers(atmosphere.sunwardShadowRelease, 'atmosphere.sunwardShadowRelease', 2);
+        numbers(atmosphere.terminator, 'atmosphere.terminator', 2);
+    }
+    if (recipe.interior !== undefined) {
+        const interior = record(recipe.interior, 'interior');
+        for (const key of ['source', 'surface', 'outerOutput', 'outerPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput', 'thumbnail'])
+            path(interior[key], `interior.${key}`);
+        fields(interior, ['width', 'height', 'poleTile', 'sectionWidth', 'sectionHeight'], 'interior', true);
+        fields(interior, ['ambientIntensity', 'coreNoiseSeed'], 'interior');
+        numbers(interior.worldLightDirection, 'interior.worldLightDirection', 3);
+        record(interior.metadata, 'interior.metadata');
+    }
+    return recipe as unknown as RasterRecipe;
+}

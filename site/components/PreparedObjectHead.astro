@@ -1,0 +1,25 @@
+---
+interface PreparedAsset {
+  key: string;
+  url?: string;
+}
+
+interface PreparedAssets {
+  entries: PreparedAsset[];
+  startup: string[];
+}
+
+interface Props {
+  preparedAssets: PreparedAssets;
+}
+
+const { preparedAssets } = Astro.props;
+const startupKeys = new Set(preparedAssets.startup);
+const urls = [...new Set(preparedAssets.entries.filter((asset) => startupKeys.has(asset.key)).map((asset) => asset.url).filter(
+  (url): url is string => typeof url === "string" && url.length > 0,
+))];
+---
+
+{urls.map((url) => (
+  <link rel="preload" href={url} as="image" type={url.endsWith(".webp") ? "image/webp" : undefined} />
+))}

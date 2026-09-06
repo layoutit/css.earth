@@ -1,22 +1,35 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { PREPARED_EARTH_PANEL } from "../../src/planets/earth/site/preparedPanel.mjs";
 import { PREPARED_CERES_PANEL } from "../../src/planets/ceres/site/preparedPanel.mjs";
 import { PREPARED_JUPITER_PANEL } from "../../src/planets/jupiter/site/preparedPanel.mjs";
 import { PREPARED_MARS_PANEL } from "../../src/planets/mars/site/preparedPanel.mjs";
-import { PREPARED_MERCURY_PANEL } from "../../src/planets/mercury/site/preparedPanel.mjs";
 import { PREPARED_MOON_PANEL } from "../../src/planets/moon/site/preparedPanel.mjs";
 import { PREPARED_NEPTUNE_PANEL } from "../../src/planets/neptune/site/preparedPanel.mjs";
 import { PREPARED_PLUTO_PANEL } from "../../src/planets/pluto/site/preparedPanel.mjs";
 import { PREPARED_SATURN_PANEL } from "../../src/planets/saturn/site/preparedPanel.mjs";
 import { PREPARED_SUN_PANEL } from "../../src/planets/sun/site/preparedPanel.mjs";
 import { PREPARED_URANUS_PANEL } from "../../src/planets/uranus/site/preparedPanel.mjs";
-import { PREPARED_VENUS_PANEL } from "../../src/planets/venus/site/preparedPanel.mjs";
+
+const mercurySource = JSON.parse(await readFile(
+  new URL("../../src/planets/mercury/source/content/object.json", import.meta.url),
+  "utf8",
+));
+const venusSource = JSON.parse(await readFile(
+  new URL("../../src/planets/venus/source/content/object.json", import.meta.url),
+  "utf8",
+));
+const migratedPanel = (source) => ({
+  planetId: source.id,
+  facts: source.panel.facts,
+  moreFacts: source.panel.moreFacts ?? [],
+});
 
 const PLANET_PANELS = Object.freeze([
-  PREPARED_MERCURY_PANEL,
-  PREPARED_VENUS_PANEL,
+  migratedPanel(mercurySource),
+  migratedPanel(venusSource),
   PREPARED_EARTH_PANEL,
   PREPARED_MARS_PANEL,
   PREPARED_JUPITER_PANEL,

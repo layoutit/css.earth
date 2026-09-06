@@ -231,14 +231,21 @@ test("shared router cancels a pending adapter before publication", async () => {
 
 test("keeps implemented routes backed by object-owned files", async () => {
   for (const planet of OBJECTS) {
-    const owned = [
-      `../../src/planets/${planet.id}/SOURCE.md`,
-      `../../src/planets/${planet.id}/NOTICE.md`,
-      `../../src/planets/${planet.id}/site`,
-      `../../src/planets/${planet.id}/test`,
-      `../../src/planets/${planet.id}/tools`,
-      `../pages/${planet.id}.astro`,
-    ];
+    const owned = planet.id === "mercury" || planet.id === "venus"
+      ? [
+        `../../src/planets/${planet.id}/SOURCE.md`,
+        `../../src/planets/${planet.id}/NOTICE.md`,
+        `../../src/planets/${planet.id}/object.json`,
+        `../pages/${planet.id}.astro`,
+      ]
+      : [
+        `../../src/planets/${planet.id}/SOURCE.md`,
+        `../../src/planets/${planet.id}/NOTICE.md`,
+        `../../src/planets/${planet.id}/site`,
+        `../../src/planets/${planet.id}/test`,
+        `../../src/planets/${planet.id}/tools`,
+        `../pages/${planet.id}.astro`,
+      ];
     await Promise.all(owned.map((relativePath) =>
       access(new URL(relativePath, import.meta.url))));
   }
@@ -273,6 +280,14 @@ test("renders source-backed charts in one canonical switcher with Reflectance fi
   ];
 
   for (const [id, name, expectedChartIds] of panels) {
+    if (id === "mercury" || id === "venus") {
+      const content = JSON.parse(await readFile(
+        new URL(`../../src/planets/${id}/prepared/content.json`, import.meta.url),
+        "utf8",
+      ));
+      assert.deepEqual(content.charts.map(({ id: chartId }) => chartId), expectedChartIds, `${name} chart order`);
+      continue;
+    }
     const panel = await readFile(
       new URL(`../../src/planets/${id}/site/${name}Panel.astro`, import.meta.url),
       "utf8",
@@ -297,14 +312,11 @@ test("renders source-backed charts in one canonical switcher with Reflectance fi
   assert.match(shell, /class="planet-chart-switcher"[\s\S]*?data-active-chart=\{defaultChart\.id\}/u);
   assert.doesNotMatch(shell, /class="planet-chart-panel"|open=\{chart\.open\}|open=\{gallery\.open\}/u);
 
-  const mercury = await readFile(
-    new URL("../../src/planets/mercury/site/MercuryPanel.astro", import.meta.url),
+  const mercury = JSON.parse(await readFile(
+    new URL("../../src/planets/mercury/prepared/content.json", import.meta.url),
     "utf8",
-  );
-  assert.doesNotMatch(
-    mercury,
-    /id:\s*"temperature-pressure"|mercury-no-atmosphere-profile/u,
-  );
+  ));
+  assert.doesNotMatch(JSON.stringify(mercury.charts), /temperature-pressure|mercury-no-atmosphere-profile/u);
 });
 
 test("keeps the shared shell planet-neutral", async () => {
@@ -699,7 +711,7 @@ test("switches the desktop sidebar to the one shared planet list", async () => {
   assert.doesNotMatch(shell, /OBJECTS\.map|planet-object-marker|planet-object-browser-title/u);
   assert.match(
     client,
-    /createObjectBrowserController\([\s\S]*?\.planet-sidebar-search-card[\s\S]*?\.planet-sidebar-view-all[\s\S]*?\.planet-object-browser[\s\S]*?const selectedSearchValue = search\.value;[\s\S]*?if \(query\.length === 0\)[\s\S]*?item\.hidden = true;[\s\S]*?empty\.hidden = true;[\s\S]*?browser\.hidden = true;[\s\S]*?return;[\s\S]*?browser\.hidden = false;[\s\S]*?item\.dataset\.objectName[\s\S]*?if \(next && resetQuery\) search\.value = "";[\s\S]*?if \(!next\) search\.value = currentSearchValue;[\s\S]*?trigger\.ariaLabel = next[\s\S]*?`Show \$\{selectedSearchValue\} information`[\s\S]*?trigger\.textContent = "×";[\s\S]*?trigger\.addEventListener\("click"[\s\S]*?render\(true, \{ resetQuery: true \}\)[\s\S]*?search\.addEventListener\("input"[\s\S]*?search\.addEventListener\("focus", \(\) => search\.select\(\)[\s\S]*?search\.addEventListener\("keydown"[\s\S]*?event\.key !== "Escape"[\s\S]*?documentTarget\.addEventListener\("pointerdown"[\s\S]*?searchCard\.contains\(event\.target\)[\s\S]*?search\.blur\(\)/u,
+    /createObjectBrowserController\([\s\S]*?\.planet-sidebar-search-card[\s\S]*?\.planet-sidebar-view-all[\s\S]*?\.planet-object-browser[\s\S]*?let selectedSearchValue = search\.value;[\s\S]*?if \(query\.length === 0\)[\s\S]*?item\.hidden = true;[\s\S]*?empty\.hidden = true;[\s\S]*?browser\.hidden = true;[\s\S]*?return;[\s\S]*?browser\.hidden = false;[\s\S]*?item\.dataset\.objectName[\s\S]*?if \(next && resetQuery\) search\.value = "";[\s\S]*?if \(!next\) search\.value = currentSearchValue;[\s\S]*?trigger\.ariaLabel = next[\s\S]*?`Show \$\{selectedSearchValue\} information`[\s\S]*?trigger\.textContent = "×";[\s\S]*?trigger\.addEventListener\("click"[\s\S]*?render\(true, \{ resetQuery: true \}\)[\s\S]*?search\.addEventListener\("input"[\s\S]*?search\.addEventListener\("focus", \(\) => search\.select\(\)[\s\S]*?search\.addEventListener\("keydown"[\s\S]*?event\.key !== "Escape"[\s\S]*?documentTarget\.addEventListener\("pointerdown"[\s\S]*?searchCard\.contains\(event\.target\)[\s\S]*?search\.blur\(\)/u,
   );
   assert.match(mapsStyles, /\.planet-sidebar-view-all\s*\{[^}]*width:\s*44px;[^}]*height:\s*44px;/u);
   assert.doesNotMatch(mapsStyles, /planet-sidebar-search-submit/u);
