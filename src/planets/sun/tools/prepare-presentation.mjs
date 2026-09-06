@@ -29,10 +29,10 @@ export async function prepareSunPresentation() {
   limb.style.setProperty("--sun-limb-image",`url(${JSON.stringify(canonicalPreparedAsset(plan.limbMaterial.defaultUrl,plan.limbMaterial.defaultUrl2x))})`);
   limb.style.setProperty("--sun-camera-zoom",String(plan.camera.defaultZoom));
   b.append(null,corona,limb);
-  const {tree,index}=b.finish({camera,scene,registrations:[{bodySystem:body,lightingOverlays:[corona,limb]}]});
+  const {tree,index}=b.finish({camera,scene});
   const layerTargets=[body,body,corona,limb];
   return {schema:PREPARED_PRESENTATION_SCHEMA,camera:plan.camera,sky:plan.starfield,sun:null,
-    inputSelector:".sun-input-surface",assets:{entries,pools:[
+    assets:{entries,pools:[
       preparedResourcePool("warm",entries,{retention:"warm"}),
       preparedResourcePool("material",entries,{retention:"selection",capacity:8,concurrency:8}),
     ],startup:[...celestial.map(entry=>entry.key),...required(lenses.defaultLens)]},tree,
@@ -41,9 +41,7 @@ export async function prepareSunPresentation() {
       {kind:"attribute",target:-1,name:"data-lens",value:lens.id},
     ],materials:[]})),materials:[],
     viewBindings:[corona,limb].map(node=>({kind:"zoom-property",target:index(node),property:"--sun-camera-zoom"})),
-    animations:[],observations:{constants:{dom:{mode:"source-backed-global-material-on-visible-retained-projective-solar-leaves",
-      retainedCameraRootCount:1,retainedOffLimbContextRootCount:1,retainedLimbMaterialRootCount:1,
-      retainedSkyboxRootCount:1,retainedSunCubemapBakeCount:0}},materials:[],counts:[]},
+    animations:[],
   };
 }
 if(import.meta.url===pathToFileURL(process.argv[1]??"").href){

@@ -17,8 +17,8 @@ test("Earth shared row demand coalesces transient camera views and keeps both ma
       "ground-lighting rows still wait for the common stability timer");
     for (const id of ["lighting", "atmosphere"]) assert.ok(pool(f, id).nativeSlots <= 3);
     await f.settle();
-    assert.equal(f.presentation.observe().material.lighting, "64");
-    assert.equal(f.presentation.observe().material.atmosphere, "64");
+    assert.equal(f.presentation.observe().materials.lighting.frame, 64);
+    assert.equal(f.presentation.observe().materials.atmosphere.frame, 64);
     for (const id of ["lighting", "atmosphere"]) { assert.ok(pool(f, id).nativeSlots <= 3); assert.equal(pool(f, id).pending, 0); }
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
@@ -33,7 +33,7 @@ test("Earth superseded material decode cannot suppress a newer camera target", a
     f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], skySunViewDirection: [1, 0, 0], revision: 3 }); await f.flush();
     for (const job of old) { job.done = true; job.reject(new Error("stale row")); }
     await f.settle();
-    assert.equal(f.presentation.observe().material.lighting, "64"); assert.equal(f.presentation.observe().material.atmosphere, "64");
+    assert.equal(f.presentation.observe().materials.lighting.frame, 64); assert.equal(f.presentation.observe().materials.atmosphere.frame, 64);
     assert.deepEqual(f.errors, []); assert.deepEqual(f.materialErrors, []);
   } finally { f.restore(); }
 });

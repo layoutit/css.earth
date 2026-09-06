@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 import { PREPARED_JUPITER_SCENE } from "../runtime/preparedScene.mjs";
+import { PREPARED_JUPITER_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import { PREPARED_JUPITER_CAMERA } from "../runtime/preparedCamera.mjs";
 
 export const JUPITER_MATERIAL_PRESENTATION_SIZE = 512;
@@ -86,12 +87,9 @@ export const JUPITER_OBSERVATION_LIGHT_DIRECTION = Object.freeze(normalize([
   dot(sun, screenDown),
   dot(sun, observer),
 ]).map((component) => Number(component.toFixed(6))));
-export const JUPITER_WORLD_LIGHT_DIRECTION = Object.freeze([
-  0.883835,
-  -0.385595,
-  0.264864,
-]);
-const normalizedPresentationLight = normalize(JUPITER_WORLD_LIGHT_DIRECTION);
+export const JUPITER_REFERENCE_LIGHT_DIRECTION = Object.freeze(
+  PREPARED_JUPITER_SKY_SUN.referenceViewDirection.map((value, axis) => axis ? -value : value));
+const normalizedPresentationLight = normalize(JUPITER_REFERENCE_LIGHT_DIRECTION);
 export const JUPITER_LIGHT_SOURCE_GEOMETRY = Object.freeze({
   source: "NASA PSG pinned Jupiter configuration",
   sourcePath: "source/atmosphere/psg-jupiter-20260830.cfg",
@@ -104,12 +102,12 @@ export const JUPITER_LIGHT_SOURCE_GEOMETRY = Object.freeze({
   ).toFixed(6)),
   observationLightDirection: JUPITER_OBSERVATION_LIGHT_DIRECTION,
   presentation: Object.freeze({
-    authority: "OpenSpace default scene-graph Sun direction",
+    authority: "Shared prepared sky Sun reference",
     qualityReference: "Saturn",
-    referencePath: "src/planets/saturn/runtime/preparedRingPoints.mjs",
+    referencePath: "runtime/preparedSkySun.mjs",
     sourceRenderer:
       "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
-    worldLightDirection: JUPITER_WORLD_LIGHT_DIRECTION,
+    referenceLightDirection: JUPITER_REFERENCE_LIGHT_DIRECTION,
     cameraAngleDegrees: Number((
       Math.acos(Math.max(-1, Math.min(1, normalizedPresentationLight[2]))) *
         180 / Math.PI
@@ -123,16 +121,17 @@ export const JUPITER_LIGHT_SOURCE_GEOMETRY = Object.freeze({
 });
 
 export function prepareJupiterMaterialFrame(
-  pitchDegrees,
+  lightViewZ,
   { shadowless = false } = {},
 ) {
+  if (!Number.isFinite(lightViewZ) || lightViewZ < -1 || lightViewZ > 1) throw new TypeError("Jupiter light phase must be within [-1, 1].");
   const size = JUPITER_MATERIAL_SIZE;
   const center = size / 2;
   const data = Buffer.alloc(size * size * 4);
   const light = shadowless
     ? Object.freeze([0, 0, 1])
-    : cameraLightDirection(pitchDegrees);
-  const projection = prepareJupiterMaterialProjection(pitchDegrees);
+    : cameraLightDirection(lightViewZ);
+  const projection = prepareJupiterMaterialProjection(DEFAULT_SCENE_PITCH_DEGREES);
   for (let y = 0; y < size; y += 1) {
     const localY = y + 0.5 - center;
     for (let x = 0; x < size; x += 1) {
@@ -140,16 +139,13 @@ export function prepareJupiterMaterialFrame(
       const radius = Math.hypot(localX, localY);
       const directionX = radius === 0 ? 1 : localX / radius;
       const directionY = radius === 0 ? 0 : localY / radius;
-      const surfaceBoundary = ellipseBoundary(
-        projection.rasterCoverageRadiusX,
-        projection.rasterCoverageRadiusY,
-        directionX,
-        directionY,
-      );
+      // Store a circular reference disc. The common ellipsoid projection fits
+      // it to the current camera, independently of this illumination phase.
+      const surfaceBoundary = projection.rasterCoverageRadiusX;
       if (radius > surfaceBoundary + 0.5) continue;
       const normal = projectedSurfaceNormal(
         localX,
-        localY,
+        localY * projection.rasterRadiusY / projection.rasterRadiusX,
         projection,
       );
       const incidence = Math.max(
@@ -170,7 +166,7 @@ export function prepareJupiterMaterialFrame(
     data,
     width: size,
     height: size,
-    pitchDegrees,
+    lightViewZ,
     cameraLightDirection: light.map((component) =>
       Number(component.toFixed(6))),
     projection,
@@ -493,14 +489,10 @@ function ellipseBoundary(radiusX, radiusY, directionX, directionY) {
   return 1 / Math.hypot(directionX / radiusX, directionY / radiusY);
 }
 
-function cameraLightDirection(pitchDegrees) {
-  const radians = (
-    pitchDegrees - DEFAULT_SCENE_PITCH_DEGREES
-  ) * Math.PI / 180;
-  const cosine = Math.cos(radians);
-  const sine = Math.sin(radians);
-  const [x, y, z] = JUPITER_WORLD_LIGHT_DIRECTION;
-  return normalize([x, y * cosine - z * sine, y * sine + z * cosine]);
+function cameraLightDirection(z) {
+  const [x, y] = JUPITER_REFERENCE_LIGHT_DIRECTION;
+  const scale = Math.sqrt(Math.max(0, 1-z*z)) / Math.hypot(x, y);
+  return [x*scale, y*scale, z];
 }
 
 function psgNumber(name) {

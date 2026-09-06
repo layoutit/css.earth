@@ -77,17 +77,16 @@ export async function prepareEarthPresentation() {
     node.style.backgroundPosition=frame.backgroundPosition;node.style.backgroundSize=frame.backgroundSize;
     node.attributes["data-material-frame"]="default";b.append(materialMesh,node);return[id,node];
   }));
-  const {tree,index}=b.finish({camera,scene,registrations:[{bodySystem:system,lightingOverlays:[materialCounter]}]});
+  const {tree,index}=b.finish({camera,scene});
   const tracks=["lighting","atmosphere"].map(id=>{
     const material=plan.material[id],address=(frame,resource,frameIndex=null,row=null)=>({resource,frame:frameIndex,row,backgroundPosition:frame.backgroundPosition,backgroundSize:frame.backgroundSize});
     const illumination=material.illumination;
     return {id,target:index(materialNodes[id]),frame:{source:illumination?"prepared-light-z":"sun-z",minimum:illumination?.minimumLightViewZ??-1,maximum:illumination?.maximumLightViewZ??1,count:material.frameCount,baseFrame:0,remap:null},
-      defaultPose:illumination?[]:[{source:"frame",scale:-65/(material.frameCount-1),offset:65,value:material.defaultScenePitchDegrees,epsilon:0.01}],
+
       banks:[{id,frames:material.frames.map(frame=>address(frame,`${id}:${frame.rowIndex}`,frame.frameIndex,frame.rowIndex)),
-        default:address(material.defaultPresentation,`default:${id}`),fixed:id==="lighting"?address(material.shadowlessPresentation,"shadowless:lighting"):null,
+        default:null,fixed:id==="lighting"?address(material.shadowlessPresentation,"shadowless:lighting"):null,
         rows:material.preparedRows.map((_,row)=>({row,resource:`${id}:${row}`,firstFrame:row*material.framesPerShard,lastFrame:Math.min(material.frameCount-1,(row+1)*material.framesPerShard-1)}))}],
-      demand:{mode:"visible-directional",prewarm:"symmetric",capacity:material.transport.maximumRetainedRowCount,framesPerRow:material.framesPerShard,
-        defaultFrame:material.defaultFrame,defaultRow:material.transport.defaultRow,initialRows:material.transport.initialWarmRows,holdHiddenNeighborhood:false,fallback:"hold"},
+      demand:{ capacity:material.transport.maximumRetainedRowCount, defaultFrame:material.defaultFrame },
       rotation:{kind:"planar",source:illumination?"prepared-light":"view-sun",reference:illumination?"prepared":"initial",baseDegrees:illumination?.baseLightAzimuthDegrees??0,
         zeroAtPole:!!illumination,publishWithAddress:true,...(!illumination?{polePolicy:"azimuth"}:{}),width:material.presentationTileSize,height:material.presentationTileSize},
       frameAttribute:null,modeAttribute:null,quoted:true};
@@ -107,8 +106,7 @@ export async function prepareEarthPresentation() {
         frameOverride:null,clearWhenHidden:false,fixedMode:"shadowless",publishWhenHidden:"static",
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
   })));
-  return {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,inputSelector:".earth-input-surface",
-    destinations:{catalog,defaultLens:"normal",statuses:{detail:"WorldCover imagery · 2021. Source gaps retain the Earth base map.",overview:"Earth overview. WorldCover detail is unavailable at this location."}},
+  return {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,destinations:{catalog,defaultLens:"normal",statuses:{detail:"WorldCover imagery · 2021. Source gaps retain the Earth base map.",overview:"Earth overview. WorldCover detail is unavailable at this location."}},
     assets:{entries,pools:[preparedResourcePool("mounted",entries,{concurrency:2}),preparedResourcePool("default-materials",entries,{retention:"warm"}),
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2}),
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
@@ -117,11 +115,6 @@ export async function prepareEarthPresentation() {
     tree,variants,materials:tracks,viewBindings:[materialCounter,cutawayCounter].map(node=>({kind:"counter-rotation",target:index(node),systemTransform:null})),animations:[],
     motionFrame:[index(system),index(body.surface[0])],
     pageLayers:[{id:"city",plan:PREPARED_EARTH_CITY_PAGES,lensIds:["normal","buenos-aires-noise"]},{id:"noise",plan:PREPARED_EARTH_NOISE,lensIds:["buenos-aires-noise"]}]
-      .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:"/scenes/earth/"},carrier:index(body.surface[0]),system:index(system),className:"earth-city-page",textureClassName:"earth-api-texture"})),
-    observations:{constants:{dom:{interiorMounted:true}},counts:[{category:"dom",name:"interiorLeafCount",target:index(cutaway),kind:"leaves",includeRoot:false}],
-      materials:[{category:"material",name:"materialFrame",track:"lighting",field:"frame"},
-        {category:"material",name:"atmosphereLightRollDegrees",track:"atmosphere",field:"lightRollDegrees"}],
-      attributes:tracks.map(track=>({category:"material",name:track.id,target:track.target,attribute:"data-material-frame",default:null})),
-      sums:["material","camera"].map(category=>({category,name:"materialAddressWrites",tracks:tracks.map(track=>track.id),field:"addressWrites",includePresentation:false}))}};
+      .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:"/scenes/earth/"},carrier:index(body.surface[0]),system:index(system),className:"earth-city-page",textureClassName:"earth-api-texture"}))};
 }
 if(import.meta.url===pathToFileURL(process.argv[1]??"").href)await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs",import.meta.url),await prepareEarthPresentation(),objectControls);

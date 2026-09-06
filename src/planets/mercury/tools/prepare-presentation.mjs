@@ -1,5 +1,5 @@
 import { pathToFileURL } from "node:url";
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../../site/runtime-policy.mjs";
+import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_NAVIGATION_MARKERS } from "../../../../site/prepared-navigation-markers.mjs";
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
@@ -74,22 +74,21 @@ export async function prepareMercuryPresentation() {
   materialRoot.style.setProperty("--mercury-billboard-color", normal.billboardColor);
   const billboardDisc = b.element("s", "mercury-billboard"), materialLeaf = b.element("s", "mercury-material");
   b.append(null, materialRoot); b.append(materialRoot, billboardDisc); b.append(materialRoot, materialLeaf);
-  const { tree, index } = b.finish({ camera, scene, registrations: [{ bodySystem: system, lightingOverlays: [materialRoot] }] });
+  const { tree, index } = b.finish({ camera, scene });
   const address = (p, resource = `lighting:${p.rowIndex}`, row = p.rowIndex) => ({ resource, frame: p.frameIndex, row,
     backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize });
   // The near bank streams row shards; past the geometry stage the far bank
   // draws the same frame from the billboard atlas (one row).
   const billboardAddress = p => address(p, BILLBOARD_LIGHTING_KEY, 0);
   const track = { id: "lighting", target: index(materialLeaf), frame: { source: "sun-z", minimum: assets.lighting.minimumLightViewZ,
-      maximum: assets.lighting.maximumLightViewZ, count: assets.lighting.frameCount, baseFrame: 0, remap: null }, defaultPose: [],
+      maximum: assets.lighting.maximumLightViewZ, count: assets.lighting.frameCount, baseFrame: 0, remap: null },
     banks: [{ id: "rows", frames: bank.presentations.map(p => address(p)), default: null, fixed: address(bank.presentations.at(-1), "shadowless"),
       rows: bank.rows.map((_, row) => ({ row, resource: `lighting:${row}`, firstFrame: row * bank.transport.framesPerRow,
         lastFrame: Math.min(bank.presentations.length - 1, (row + 1) * bank.transport.framesPerRow - 1) })) },
     { id: "billboard", frames: billboard.presentations.map(billboardAddress), default: null, fixed: billboardAddress(billboard.presentations.at(-1)),
       rows: [{ row: 0, resource: BILLBOARD_LIGHTING_KEY, firstFrame: 0, lastFrame: billboard.presentations.length - 1 }] }],
     farBank: "billboard",
-    demand: { mode: "current", prewarm: "symmetric", capacity: bank.transport.maximumRetainedRowCount, framesPerRow: bank.transport.framesPerRow,
-      defaultFrame: bank.transport.defaultFrame, initialRows: bank.transport.initialWarmRows, holdHiddenNeighborhood: false, fallback: "hold" },
+    demand: { capacity: bank.transport.maximumRetainedRowCount, defaultFrame: bank.transport.defaultFrame },
     rotation: { kind: "angle", source: "view-sun", reference: "prepared", baseDegrees: assets.lighting.baseLightAzimuthDegrees,
       zeroAtPole: false, property: "--mercury-light-roll" }, frameAttribute: null, modeAttribute: null, quoted: true };
   const variants = lenses.controls.flatMap(lens => [false, true].flatMap(shadows => [false, true].map(orbit => {
@@ -144,8 +143,7 @@ export async function prepareMercuryPresentation() {
         minimumLightViewZ: assets.lighting.minimumLightViewZ, maximumLightViewZ: assets.lighting.maximumLightViewZ,
         baseLightAzimuthDegrees: assets.lighting.baseLightAzimuthDegrees } },
     labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: captionNames } };
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun, inputSelector: ".mercury-input-surface",
-    assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: interiorKeys.length + 1, concurrency: interiorKeys.length + 1 }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
         concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true })],
@@ -162,20 +160,7 @@ export async function prepareMercuryPresentation() {
       { kind: "view-property", target: index(materialRoot), property: "--mercury-billboard-opacity", source: "billboard-opacity", precision: 6 },
     ],
     animations: [{ target: index(cutaway), id: "mercury-interior-presentation-orbit", mode: "pose", duration: pose.durationMilliseconds,
-      sourceMinimum: plan.camera.minimumControlPitchDegrees, millisecondsPerDegree: pose.millisecondsPerControlDegree, keyframes: pose.keyframes }],
-    observations: { constants: { dom: { interiorMounted: true, retainedBillboardCount: 1 } },
-      counts: [{ category: "dom", name: "retainedInteriorNodeCount", target: index(cutaway), kind: "nodes", includeRoot: true }],
-      materials: [...["material", "sky"].flatMap(category => [{ category, name: "materialFrame", track: "lighting", field: "frame" },
-        { category, name: "materialLightRollDegrees", track: "lighting", field: "lightRollDegrees" }]),
-        { category: "material", name: "appliedFrame", track: "lighting", field: "appliedFrame" },
-        { category: "material", name: "appliedRow", track: "lighting", field: "appliedRow" },
-        { category: "material", name: "materialSource", track: "lighting", field: "bank" },
-        { category: "sky", name: "shadowsEnabled", track: "lighting", field: "rotationEnabled" },
-      ],
-      attributes: [{ category: "sky", name: "materialMode", target: index(materialLeaf), attribute: "data-material-mode", default: "directional-terminator" }],
-      selection: [{ category: "sky", name: "orbitEnabled", key: "orbit" }],
-      levelOfDetail: [{ category: "sky", name: "lod", track: "lighting" }],
-    } };
+      sourceMinimum: plan.camera.minimumControlPitchDegrees, millisecondsPerDegree: pose.millisecondsPerControlDegree, keyframes: pose.keyframes }] };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), await prepareMercuryPresentation(), objectControls);

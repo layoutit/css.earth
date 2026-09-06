@@ -8,7 +8,7 @@ test("keeps Neptune on retained DOM and prepared runtime transport", async () =>
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../runtime/preparedPresentation.mjs", import.meta.url), "utf8"),
   ]);
-  assert.match(presentation, /cssearth-prepared-presentation@1/u);
+  assert.match(presentation, /cssearth-prepared-presentation@2/u);
   assert.match(presentation, /neptune-fixed-material/u);
   assert.doesNotMatch(client, /neptune-material-composite/u);
   assert.doesNotMatch(client, /mountPreparedOrbitGuide/u);

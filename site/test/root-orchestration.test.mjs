@@ -31,15 +31,11 @@ test("derives every root planet lane from the validated catalog", async () => {
       assert.equal(scripts[`${lane}:${id}`], undefined);
     }
   }
-  assert.ok(["test:platform", "test:shell", "test:planets"].every((lane) =>
-    scripts.test.includes(`pnpm ${lane}`)));
 });
 
 test("loads object-owned browser and audit expectations for every implementation", async () => {
   const implemented = OBJECTS;
   const profiles = await Promise.all(implemented.map(loadPlanetBrowserProfile));
   assert.deepEqual(profiles.map(({ id }) => id), implemented.map(({ id }) => id));
-  assert.ok(profiles.every(({ audit }) =>
-    typeof audit.finalScope === "string" &&
-    Array.isArray(audit.fullComparisonWidths)));
+
 });

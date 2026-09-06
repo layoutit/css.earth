@@ -1,3 +1,5 @@
+export const CANONICAL_PREPARED_IMAGE_DENSITY = 2;
+
 // Addresses are selected from prepared data once when a definition is bound.
 // No device-density input, asset generation, image owner, or eviction lives here.
 export function canonicalPreparedAsset(pair, high) {

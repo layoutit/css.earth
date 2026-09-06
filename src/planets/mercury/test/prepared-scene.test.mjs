@@ -178,13 +178,17 @@ test("carries the planetary system around Mercury", () => {
 test("uses the common object orbit without a decoded transform bank", async () => {
   const client = await readFile(new URL("../runtime/client.mjs", import.meta.url),
     "utf8");
-  const cubicSkyRuntime = await readFile(new URL(
-    "../../../platform/cubic-sky-runtime.mjs",
+  const orientation = await readFile(new URL(
+    "../../../platform/camera-orientation.mjs",
+    import.meta.url,
+  ), "utf8");
+  const orbit = await readFile(new URL(
+    "../../../platform/object-orbit.mjs",
     import.meta.url,
   ), "utf8");
   assert.match(client, /createObjectRuntime/u);
-  assert.match(cubicSkyRuntime, /new DOMMatrix\(\)/u);
-  assert.match(cubicSkyRuntime, /controlYawDelta/u);
+  assert.match(orientation, /new DOMMatrix\(\)/u);
+  assert.match(orbit, /controlYawDelta/u);
   assert.doesNotMatch(
     client,
     /preparedOrbitBank|DecompressionStream|TextDecoder|encodedBase64/u,

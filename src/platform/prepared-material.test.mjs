@@ -1,7 +1,8 @@
+import { prepareFrameLookup } from "../../tools/prepare-materials.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { createPreparedMaterialPublisher, preparedMaterialFrame, remapPreparedScalar } from "./prepared-material.mjs";
+import { createPreparedMaterialPublisher, preparedMaterialFrame } from "./prepared-material.mjs";
 import { selectedPreparedVariant } from "./prepared-presentation.mjs";
 import { initialObjectSelection } from "./object-runtime-contract.mjs";
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
@@ -13,7 +14,7 @@ test("shared scalar, atlas and roll publication matches the preserved Venus boun
   const f=retainedPresentationFixture(definition);
   try{
     const track=definition.materials[0],element=f.document.createElement("s");
-    const first=track.banks[0].frames[track.demand.defaultFrame];
+    const first=track.banks[0].frames[track.defaultFrame];
     element.style.backgroundSize=first.backgroundSize;element.style.backgroundPosition=first.backgroundPosition;
     const publisher=createPreparedMaterialPublisher(track,element,definition.camera);
     for(const record of reference.records){
@@ -34,11 +35,9 @@ test("shared scalar, atlas and roll publication matches the preserved Venus boun
 });
 
 test("frame mapping consumes numeric bounds independently of the presentation identity",()=>{
-  const source=definition.materials[0].frame;
-  const mapping={...source,minimum:-1,maximum:1,count:41,span:40,maximumFrame:40,baseFrame:0,remap:null};
+  const mapping=prepareFrameLookup(41,z=>Math.round(Math.max(0,Math.min(40,(z+1)*20))));
   for(const [z,expected] of [[-2,0],[-1,0],[-.5,10],[0,20],[.5,30],[1,40],[2,40]])
     assert.equal(preparedMaterialFrame(mapping,{sunViewDirection:[0,0,z]},definition.camera),expected);
-  assert.equal(remapPreparedScalar(.25,null),.25);
 });
 
 test("metadata observation and unchanged publication have no extra material writes",()=>{
@@ -70,4 +69,12 @@ test("prepared address caching survives native URL serialization and still publi
     publisher.publish(selected, { ...view, sunViewDirection: [0, 0, -1] }, f.resources); assert.equal(writes, 1);
     publisher.publish(selected, view, { ...f.resources, url: key => f.resources.url(key) + '?decoded=2' }); assert.equal(writes, 2);
   } finally { f.restore(); }
+});
+
+test("invalid material mappings fail before lookup expansion", () => {
+  for (const value of [NaN, Infinity, -1, .5, 4]) {
+    assert.throws(() => prepareFrameLookup(4, () => value), /inside its prepared bank/);
+  }
+  assert.throws(() => prepareFrameLookup(0, () => 0), /positive frame count/);
+  assert.throws(() => prepareFrameLookup(4, z => z === -1 ? 0 : z === 1 ? 3 : NaN), /inside its prepared bank/);
 });

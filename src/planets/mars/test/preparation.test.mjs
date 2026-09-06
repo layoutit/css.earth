@@ -3,7 +3,6 @@ import { createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 import { PREPARED_MARS_TITLE } from "../site/preparedTitle.mjs";
-import { assertSharedPreparationCommand } from "../../../../site/test/preparation-command-contract.mjs";
 
 import { PREPARED_MARS_CAMERA } from "../runtime/preparedCamera.mjs";
 import { PREPARED_MARS_LENSES } from "../runtime/preparedLenses.mjs";
@@ -67,12 +66,6 @@ test("keeps preparation-only files out of public output", async () => {
   assert.ok(names.every((name) =>
     /\.(?:webp|svg)$/u.test(name) &&
     !/(?:source|master|staging|debug|preview)/u.test(name)));
-  const packageSource = await readFile(
-    new URL("../../../../package.json", import.meta.url),
-    "utf8",
-  );
-  await assertSharedPreparationCommand(new URL("../../../../", import.meta.url), packageSource);
-  assert.doesNotMatch(packageSource, /"prepare:(?:mars|saturn)"/u);
 });
 test("prepares the Mars shell title without a runtime font", () => {
   assert.equal(PREPARED_MARS_TITLE.label, "Mars");

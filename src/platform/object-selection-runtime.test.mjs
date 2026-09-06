@@ -6,7 +6,7 @@ import { retainedPresentationFixture, preparedSelectionFixture } from "./test/ob
 import { mountPreparedPresentation } from "./prepared-presentation.mjs";
 import { runtimeDefinition as earthDefinition } from "../planets/earth/runtime/definition.mjs";
 import { runtimeDefinition as saturnDefinition } from "../planets/saturn/runtime/definition.mjs";
-import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
 import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mjs";
 
 const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve(); };

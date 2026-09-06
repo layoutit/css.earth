@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { preparationFileSets, runCachedPreparationObjects, sharedPreparationFiles } from "./prepare-planets.mjs";
+import { preparationFileSets, runCachedPreparationObjects, sharedPreparationFiles, objectPreparationFiles } from "./prepare-planets.mjs";
 
 async function fixture(run) {
   const root = await mkdtemp(join(tmpdir(), "cssearth-prepare-planets-"));
@@ -59,32 +59,32 @@ test("shared generator or actual toolchain changes invalidate every affected cac
   await runCachedPreparationObjects({ ...options, environment: async () => ({ version: "changed" }) });
   assert.deepEqual(started, ["moon", "pluto"]);
 }));
-test("actual shared site preparation dependencies invalidate a verified warm cache", async () => fixture(async ({ root, options, started }) => {
-  const dependencies = ["site/runtime-policy.mjs", "site/scene-contract.mjs",
-    "site/destination-search.mjs", "site/prepared-shell-titles.mjs"];
-  await mkdir(join(root, "site/test"), { recursive: true });
+test("runtime and shell edits do not prepare objects; imported generators and source edits do", async () => fixture(async ({ root, options, started }) => {
+  for (const directory of ["site", "src/platform", "tools"]) await mkdir(join(root, directory), { recursive: true });
   await writeFile(join(root, "package.json"), "{}");
-  await writeFile(join(root, "pnpm-lock.yaml"), "lockfileVersion: '9.0'\n");
-  for (const path of dependencies) await writeFile(join(root, path),
-    await readFile(new URL(`../${path}`, import.meta.url)));
-  const actualOptions = { ...options, sharedFiles: sharedPreparationFiles };
-  await runCachedPreparationObjects(actualOptions);
-  started.length = 0;
-  assert.deepEqual((await runCachedPreparationObjects(actualOptions)).cached, ["moon", "pluto"]);
-  for (const path of dependencies) {
-    await writeFile(join(root, path), `${await readFile(join(root, path), "utf8")}\n// Changed preparation dependency.\n`);
-    await runCachedPreparationObjects(actualOptions);
-    assert.deepEqual(started, ["moon", "pluto"], `${path} must invalidate existing receipts`);
-    started.length = 0;
-    assert.deepEqual((await runCachedPreparationObjects(actualOptions)).cached, ["moon", "pluto"]);
+  await writeFile(join(root, "pnpm-lock.yaml"), "lock");
+  await writeFile(join(root, "tools/generator.mjs"), "export const value = 1;");
+  for (const id of ["moon", "pluto"]) {
+    const base = `src/planets/${id}`;
+    for (const directory of ["tools", "site", "source", "runtime"]) await mkdir(join(root, base, directory), { recursive: true });
+    await writeFile(join(root, base, "source/manifest.json"), JSON.stringify({ generatedIntermediates: [] }));
+    await writeFile(join(root, base, "site/control-content.source.mjs"), "export const objectControls = {};");
+    await writeFile(join(root, base, "tools/prepare.mjs"), 'const steps = [["generate.mjs"]];');
+    await writeFile(join(root, base, "runtime/preparedOutput.mjs"), "export const VALUE = 1;");
+    await writeFile(join(root, base, "tools/generate.mjs"), "import { value } from '../../../../tools/generator.mjs';");
+    await writeFile(join(root, base, "runtime/client.mjs"), "// runtime");
   }
-  await writeFile(join(root, "site/new-shared-policy.mjs"), "export const setting = 1;\n");
-  await runCachedPreparationObjects(actualOptions);
-  assert.deepEqual(started, ["moon", "pluto"], "New shared dependencies change the bound input set");
-  started.length = 0;
-  await writeFile(join(root, "site/test/source.test.mjs"), "// Browser-only test change.\n");
-  assert.deepEqual((await runCachedPreparationObjects(actualOptions)).cached, ["moon", "pluto"]);
-  assert.deepEqual(started, [], "Test-only edits cannot force production preparation");
+  const actual = { ...options, sharedFiles: sharedPreparationFiles, packageFiles: objectPreparationFiles };
+  await runCachedPreparationObjects(actual); started.length = 0;
+  for (const path of ["site/runtime-policy.mjs", "site/shell.mjs", "src/platform/camera-input.mjs", "tools/audit.mjs", "src/planets/moon/runtime/client.mjs"]) {
+    await writeFile(join(root, path), "// changed runtime or audit code");
+  }
+  assert.deepEqual((await runCachedPreparationObjects(actual)).cached, ["moon", "pluto"]);
+  assert.deepEqual(started, []);
+  await writeFile(join(root, "tools/generator.mjs"), "export const value = 2;");
+  await runCachedPreparationObjects(actual); assert.deepEqual(started, ["moon", "pluto"]); started.length = 0;
+  await writeFile(join(root, "src/planets/moon/source/texture.bin"), "changed source");
+  await runCachedPreparationObjects(actual); assert.deepEqual(started, ["moon"]);
 }));
 test("full rebuild bypasses a valid cache and failed producers cannot seal outputs", async () => fixture(async ({ options, root, started }) => {
   await runCachedPreparationObjects(options); started.length = 0;

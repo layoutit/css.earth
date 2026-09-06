@@ -41,7 +41,7 @@ try {
   await page.waitForTimeout(500);
   const startup = await page.evaluate(() => ({
     longTasks: [...window.__marsLongTasks],
-    cache: ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") }),
+    cache: ({ ...window.__mars.material.state().lighting, pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") }),
     resources: performance.getEntriesByType("resource")
       .filter(({ name }) => name.includes("/scenes/mars/"))
       .map(({ name, transferSize, decodedBodySize }) => ({
@@ -58,8 +58,8 @@ try {
     window.__mars.setView({ controlPitch: 0, zoom: 0.8 });
   });
   await page.waitForFunction(() => {
-    const cache = ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") });
-    return window.__mars.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.materialFrame;
+    const cache = ({ ...window.__mars.material.state().lighting, pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") });
+    return window.__mars.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.calculatedFrame;
   });
   const motion = await page.evaluate(() => new Promise((resolve) => {
     const samples = [];
@@ -72,13 +72,13 @@ try {
         : (1 - progress) / 0.25 * 65;
       const zoom = 0.8 + Math.sin(progress * Math.PI) * 0.3;
       window.__mars.setView({ controlPitch: pitch, zoom });
-      const cache = ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") });
+      const cache = ({ ...window.__mars.material.state().lighting, pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") });
       samples.push({
         interval: now - previous,
         pitch: window.__mars.view().controlPitch,
         zoom: window.__mars.view().zoom,
         appliedFrame: cache.appliedFrame,
-        desiredFrame: cache.materialFrame,
+        desiredFrame: cache.calculatedFrame,
         pendingRowCount: cache.pool.pending,
         readyRows: cache.pool.keys,
       });
@@ -89,12 +89,12 @@ try {
     requestAnimationFrame(tick);
   }));
   await page.waitForFunction(() => {
-    const cache = ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") });
-    return window.__mars.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.materialFrame;
+    const cache = ({ ...window.__mars.material.state().lighting, pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") });
+    return window.__mars.runtime.selection().committed.shadows === true && cache.pool.pending === 0 && cache.appliedFrame === cache.calculatedFrame;
   }, null, { timeout: 10_000 });
   const runtime = await page.evaluate(() => ({
     longTasks: [...window.__marsLongTasks],
-    cache: ({ ...window.__mars.material.state(), pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") }),
+    cache: ({ ...window.__mars.material.state().lighting, pool: window.__mars.runtime.resources().pools.find(pool => pool.id === "lighting") }),
     stableDomIdentity: window.__mars.assertStableDomIdentity(),
     retainedLeafCount: window.__mars.dom.retainedLeafCount,
     stageElementCount: document.querySelector(".planet-stage")
@@ -161,7 +161,7 @@ try {
   assert.equal(report.runtime.runningAnimationCount, 0);
   assert.equal(report.runtime.cache.pool.capacity, 3);
   assert.ok(report.runtime.cache.pool.ready <= 3);
-  assert.equal(report.runtime.cache.appliedFrame, report.runtime.cache.materialFrame);
+  assert.equal(report.runtime.cache.appliedFrame, report.runtime.cache.calculatedFrame);
   assert.ok(report.runtime.cache.pool.nativeSlots <= 3);
   assert.deepEqual(report.externalRequests, []);
   assert.ok(report.startup.longTasks.every((duration) => duration <= 200),
