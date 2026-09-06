@@ -34,6 +34,9 @@ an explicit absence of data, not inferred terrain. Only exactly black source
 pixels connected to the southern border are marked; dark observed terrain and
 nonzero JPEG edge pixels remain untouched. This is a spherical mean-radius PoC,
 not a resolved shape or terrain model. Enhanced color is false color.
+Added globe lighting is approximate: neither the Shadows setting nor the fixed
+curvature shading changes the shadows already recorded in the Dawn images.
+The lens descriptions and source documentation explain these limitations.
 
 Source details and attribution are in [SOURCE.md](SOURCE.md) and [NOTICE.md](NOTICE.md).
 

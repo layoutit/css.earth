@@ -19,14 +19,14 @@ export const objectControls = Object.freeze({
         "id": "normal",
         "label": "Monochrome",
         "description": "Dawn visible-light mosaic",
-        "title": "Dawn Framing Camera visible-light monochrome mosaic. Gray grid marks missing imagery.",
+        "title": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
         "thumbnailUrl": "/scenes/ceres/ceres-normal-thumbnail.webp"
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "False color · gray grid marks gaps",
-        "title": "Dawn PIA19977, 920 / 750 / 440 nm false color. Gray grid marks missing south-polar imagery; it is not inferred terrain.",
+        "title": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
         "thumbnailUrl": "/scenes/ceres/ceres-enhanced-thumbnail.webp"
       }
     ]
