@@ -39,7 +39,7 @@ try {
 
   const baseline = await runtimeState(page);
   assert.deepEqual(baseline, {
-    title: "Venus - Powered by PolyCSS",
+    title: "Venus in 3D | cssEarth",
     activeObjectId: "venus",
     mountedObjectCount: 1,
     stageCount: 1,

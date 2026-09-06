@@ -85,7 +85,7 @@ try {
         }).length,
       }));
       assert.deepEqual(state, {
-        title: "Neptune - Powered by PolyCSS",
+        title: "Neptune in 3D | cssEarth",
         mountedObjectCount: 1,
         activeObjectId: "neptune",
         stageCount: 1,
