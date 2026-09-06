@@ -12,7 +12,7 @@ test("Europa mounts through the shared prepared object contract", () => {
   requirePreparedPresentation(PREPARED_PRESENTATION, { controls: runtimeDefinition.controls });
   assert.equal(runtimeDefinition.id, "europa");
   assert.equal(runtimeDefinition.tree.nodes.filter(node => node.className?.includes("polycss-camera")).length, 1);
-  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id), ["normal"]);
+  assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id), ["normal", "enhanced"]);
 });
 
 // Two different parent systems exercise the same preparation path. Distances

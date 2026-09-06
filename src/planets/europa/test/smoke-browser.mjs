@@ -29,6 +29,12 @@ try {
     assert.equal(await page.evaluate(() => window.__europa.assertStableDomIdentity()), true);
     await page.screenshot({path:`${output}/${name}.png`});
   }
+  await page.evaluate(() => window.__europa.lenses.select("enhanced"));
+  await paint();
+  assert.equal(await page.locator('.planet-stage').getAttribute('data-lens'), "enhanced");
+  assert.equal(await page.evaluate(() => window.__europa.assertStableDomIdentity()), true);
+  await page.screenshot({path:`${output}/enhanced.png`});
+  await page.evaluate(() => window.__europa.lenses.select("normal"));
   await page.evaluate(() => document.querySelector('input[name="shadows"]').click());
   await paint();
   await page.screenshot({path:`${output}/shadows.png`});

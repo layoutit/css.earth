@@ -57,3 +57,30 @@ the existing solid bodies. Source hashes, origins, and licenses are pinned in
 Reproduce with `node src/planets/europa/tools/acquire.mjs`, followed by
 `node src/planets/europa/tools/prepare.mjs`. Original imagery remains unchanged
 and is excluded from Git. Preparation does not require another body's scene.
+
+The **Enhanced color** lens uses the [USGS controlled Galileo observations](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/)
+(CC0), by Bland, Weller and colleagues. It combines 756 nm infrared, 559 nm
+green, and 404 nm violet as display red, green, and blue. This is not natural
+color. The four sequences are G1ESGLOBAL01 (1996-06-28), 12ESGLOCOL01
+(1997-12-16), 14ESGLOCOL01 (1998-03-29), and 28ESGLOCOL01 (2000-05-22).
+Exact image dates, band identities, coordinates, source URLs and hashes are
+pinned beside the source inputs.
+
+These are calibrated 32-bit I/F images with corrected camera pointing, on an
+east-positive cylindrical grid centred at 180°, radius 1,560,800 m. They have
+not been photometrically corrected. Native grids range from 1.375 to 13.832 km
+per pixel. Higher-density observations take priority. Color appears only where
+all three bands from the same sequence have valid interpolation footprints;
+zero no-data, ISIS special pixels, and incomplete boundaries are withheld.
+About 35% of the sphere has usable three-band coverage. Observed monochrome
+forms the base elsewhere; grayscale does not imply measured neutral color.
+The gray cartographic grid appears only where both sources lack imagery. The
+fixed display transfer is clamp(I/F, 0, 1)^(1/2.2) for every channel.
+Brightness seams and coarse observations remain visible.
+No monochrome detail is transferred into color. The newer controlled dataset
+and the older monochrome mosaic have different positional accuracy.
+
+The NASA Trek/Jónsson 2015 color mosaic was rejected: its [author documents
+fictional polar terrain and cloned gaps](https://www.planetary.org/articles/0218-mapping-europa),
+and its [publication license restricts derivatives](https://www.planetary.org/space-images/color-global-map-of-europa).
+None of its pixels enter the prepared package.

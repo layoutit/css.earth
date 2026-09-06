@@ -28,4 +28,24 @@ test("observed terrain survives preparation and explicit polar no-data stays mar
   const metadata = JSON.parse(await readFile(new URL("../.prepared/surfaces.json", import.meta.url)));
   assert.ok(metadata.surfaces[0].missingPixels > 0);
   assert.ok(metadata.surfaces[0].missingPixels < 4096 * 2048 / 10);
+  const enhanced = await sharp(new URL("../../../../public/scenes/europa/europa-enhanced-map.webp", import.meta.url).pathname)
+    .removeAlpha().raw().toBuffer();
+  for (const [x,y] of [[700,750],[3100,1100],[2048,2047]]) {
+    const i = (y * 4096 + x) * 3;
+    assert.deepEqual(enhanced.subarray(i,i+3),map.data.subarray(i,i+3), "Monochrome terrain and true gaps remain intact outside color coverage");
+  }
+  const color = (750 * 4096 + 1900) * 3;
+  assert.notDeepEqual(enhanced.subarray(color,color+3),map.data.subarray(color,color+3), "Observed color overlays the base");
+  assert.ok(metadata.surfaces[1].monochromePixels > 4096 * 2048 / 2);
+});
+
+test("color sampling withholds incomplete footprints without erasing observed dark terrain", async () => {
+  const { sampleColorBand } = await import("../tools/prepare-color.mjs");
+  const band = { width:2,height:2,origin:[0,2],resolution:[1,-1],data:new Float32Array([.001,.001,.001,.001]) };
+  assert.ok(sampleColorBand(band,1,1) > 0);
+  band.data[3] = 0;
+  assert.equal(sampleColorBand(band,1,1), null, "A missing contributor cannot be interpolated into color");
+  band.data[3] = -3.4028234663852886e38;
+  assert.equal(sampleColorBand(band,1,1), null, "ISIS special pixels cannot become terrain");
+  assert.equal(sampleColorBand(band,0,0), null, "The image footprint cannot be extrapolated");
 });
