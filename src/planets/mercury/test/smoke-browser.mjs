@@ -638,6 +638,8 @@ try {
         markerOpacity: Number(getComputedStyle(marker).opacity),
         markerImage: getComputedStyle(marker).backgroundImage,
         markerSize: marker.getBoundingClientRect().width,
+        markerLayoutSize: parseFloat(getComputedStyle(marker).width),
+        silhouetteDiameter: sky.lod.silhouetteDiameter,
         sceneVisibility: getComputedStyle(
           document.querySelector(".mercury-scene"),
         ).visibility,
@@ -681,7 +683,11 @@ try {
       ? /mercury-lighting-2x-row-\d+\.webp/u
       : /mercury-lighting-2x-billboard\.webp/u);
     assert.match(sample.markerImage, /\/navigation\/planet-markers@2x\.webp/u);
-    assert.equal(sample.markerSize, 5);
+    // Chrome lays out the 1.2px source tile on a 1/64px grid before scaling;
+    // remove that local-layout quantization when checking the projected size.
+    assert.ok(Math.abs(sample.markerSize * 1.2 / sample.markerLayoutSize -
+      Math.max(1.2, sample.silhouetteDiameter)) < .001,
+    "the focus marker preserves the physical disc footprint above its 1.2-pixel floor");
   }
   assert.deepEqual(lodLadder.map(({ billboardOpacity }) => billboardOpacity > 0),
     [false, false, true, true, true, true, true, true, true]);
