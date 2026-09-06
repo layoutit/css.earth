@@ -49,6 +49,21 @@ test("incoming links restore before motion resumes without rewriting their saved
   assert.equal([...h.timers.values()][0].delay, 1000);
   h.owner.destroy(); assert.equal(h.timers.size, 0);
 });
+test("existing JSON links shrink on restore while preserving their exact saved time and route", async () => {
+  const value = saved(), { camera: c, playback: p } = value;
+  const payload = { v: 1, c: [c.controlPitch, c.controlYaw, c.zoom, c.distanceKilometers,
+    c.pose.scene, c.pose.skybox, c.pose.sunView], p: [p.times, p.speed, p.motionRequested], e: value.preparedEpochJdTt };
+  const legacy = Buffer.from(JSON.stringify(payload)).toString("base64url");
+  const h = fixture(`http://localhost:4210/mercury?keep=value&v=${legacy}#details`);
+  await h.owner.restore();
+  assert.deepEqual(h.restored, [value]);
+  assert.equal(h.writes.length, 1);
+  const url = h.windowTarget.location;
+  assert.equal(url.pathname, "/mercury"); assert.equal(url.searchParams.get("keep"), "value"); assert.equal(url.hash, "#details");
+  assert.ok(url.searchParams.get("v").length < legacy.length);
+  assert.deepEqual(parseSharedView(`v=${url.searchParams.get("v")}`), value);
+  h.owner.destroy();
+});
 
 test("invalid links leave the current scene usable and are replaced only after a camera change", async () => {
   for (const query of ["v=invalid!", "v=abc&v=def"]) {
