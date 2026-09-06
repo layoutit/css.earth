@@ -178,18 +178,20 @@ function registryLoaders(source, root) {
       call.arguments.length !== 1 || array?.type !== "ArrayExpression" || !array.elements.length) fail("requires one concrete registry array");
   const helpers = new Map(ast.body.filter(node => node.type === "FunctionDeclaration").map(node => [node.id.name, node]));
   for (const entry of array.elements) {
-    if (entry?.type !== "CallExpression" || entry.arguments.length !== 7 ||
+    if (entry?.type !== "CallExpression" || ![7, 8].includes(entry.arguments.length) ||
         entry.arguments.slice(0, 6).some(value => value.type !== "Literal") || typeof entry.arguments[0].value !== "string") fail("entries must bind prepared metadata and one loader");
     const helper = helpers.get(entry.callee?.name), params = helper?.params ?? [], returned = helper?.body.body[0]?.argument;
-    if (!helper || helper.async || helper.generator || params.length !== 7 || params.some(param => param.type !== "Identifier") || helper.body.body.length !== 1 ||
+    if (!helper || helper.async || helper.generator || params.length !== 8 || params.slice(0, 7).some(param => param.type !== "Identifier") ||
+        params[7].type !== 'AssignmentPattern' || params[7].left.type !== 'Identifier' || params[7].right.type !== 'Literal' || params[7].right.value !== null || helper.body.body.length !== 1 ||
         helper.body.body[0].type !== "ReturnStatement" || returned?.type !== "CallExpression" ||
         imports.get(returned.callee?.name) !== "defineObject" || returned.arguments.length !== 1 || returned.arguments[0].type !== "ObjectExpression") fail("entry helper must forward its declared loader directly");
     const properties = returned.arguments[0].properties;
-    const preparedValue = value => value.type === "Literal" || value.type === "Identifier" && params.some(param => param.name === value.name) ||
+    const preparedValue = value => value.type === "Literal" || value.type === "Identifier" && params.some(param => (param.type === 'AssignmentPattern' ? param.left.name : param.name) === value.name) ||
       value.type === "TemplateLiteral" && value.expressions.every(preparedValue);
     if (properties.some(property => property.type !== "Property" || property.computed || property.kind !== "init" || property.method || !preparedValue(property.value)) ||
         properties.find(property => property.key.name === "id")?.value.name !== params[0].name ||
-        properties.find(property => property.key.name === "loadScene")?.value.name !== params[6].name) fail("entry helper cannot replace the object id or loader");
+        properties.find(property => property.key.name === "loadScene")?.value.name !== params[6].name ||
+        properties.find(property => property.key.name === 'worldFrame')?.value.name !== params[7].left.name) fail("entry helper cannot replace the object id, loader or world frame");
     const id = entry.arguments[0].value, loader = entry.arguments[6], statements = loader.body?.body;
     if (!["ArrowFunctionExpression", "FunctionExpression"].includes(loader.type) || !loader.async || loader.generator || loader.params.length ||
         statements?.length !== 2 || statements[0].type !== "VariableDeclaration" || statements[0].kind !== "const" ||
@@ -207,9 +209,14 @@ function registryLoaders(source, root) {
       const descriptorImport = descriptors.get(returnedBinding.arguments[0].name);
       const descriptor = relative(root, resolve(root, dirname(registryPath), descriptorImport));
       if (descriptor !== `src/planets/${id}/object.json`) fail(`${id} loader must bind its own actual JSON descriptor`);
+      const frame = entry.arguments[7];
+      if (frame?.type !== 'MemberExpression' || frame.computed || frame.property.name !== 'worldFrame' ||
+          frame.object.type !== 'MemberExpression' || frame.object.computed || frame.object.property.name !== 'properties' ||
+          frame.object.object.name !== returnedBinding.arguments[0].name) fail(`${id} world frame must come from its own actual JSON descriptor`);
       entries.set(id, { kind: 'descriptor', client, descriptor, exported: binding.key.name });
       descriptorImports.add(descriptorImport);
     } else {
+      if (entry.arguments.length !== 7) fail(`${id} legacy loader cannot declare an unbound world frame`);
       if (returnedBinding?.type !== 'Identifier' || returnedBinding.name !== binding.value.name) fail(`${id} loader must return its actual imported export`);
       if (client !== `src/planets/${id}/runtime/client.mjs`) fail(`${id} loader must name its actual runtime client, received ${client}`);
       entries.set(id, { kind: 'legacy', client, exported: binding.key.name });

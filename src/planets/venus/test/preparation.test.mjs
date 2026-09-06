@@ -31,7 +31,7 @@ const sourceRoot = resolve("src/planets/venus/source");
 
 test("prepares Venus from the complete checked source closure", async () => {
   assert.deepEqual(await verifyVenusSourceManifest(), {
-    inputCount: 21,
+    inputCount: 22,
     generatedIntermediateCount: 0,
     documentCount: 3,
   });
@@ -78,14 +78,14 @@ test("publishes the prepared Venus scene and shell content", () => {
   assert.deepEqual(PREPARED_VENUS_SCENE.body.sourceMapSize, [1024, 768]);
   assert.equal(PREPARED_VENUS_SCENE.body.polarRadius,
     PREPARED_VENUS_SCENE.body.equatorialRadius);
-  assert.equal(PREPARED_VENUS_SCENE.camera.state.rotX, 40);
-  assert.equal(PREPARED_VENUS_SCENE.camera.state.rotY, -105);
+  assert.equal(PREPARED_VENUS_SCENE.camera.state.rotX, 34.230769230769226);
+  assert.equal(PREPARED_VENUS_SCENE.camera.state.rotY, 0);
   assert.equal(PREPARED_VENUS_SCENE.camera.state.zoom, 1.9);
   assert.equal(PREPARED_VENUS_SCENE.camera.initialScenePitchDegrees, 40);
   assert.equal(PREPARED_VENUS_SCENE.camera.maximumScenePitchDegrees, 65);
   assert.equal(PREPARED_VENUS_SCENE.camera.defaultControlPitchDegrees,
     34.230769230769226);
-  assert.equal(PREPARED_VENUS_SCENE.camera.defaultControlYawDegrees, -105);
+  assert.equal(PREPARED_VENUS_SCENE.camera.defaultControlYawDegrees, 0);
   assert.equal(PREPARED_VENUS_SCENE.camera.logicalBodyDiameter, 496);
   assert.deepEqual(PREPARED_VENUS_SCENE.camera.responsiveFit, {
     model: "continuous-aspect-smoothstep",
@@ -104,8 +104,8 @@ test("publishes the prepared Venus scene and shell content", () => {
   assert.equal(PREPARED_VENUS_SCENE.camera.yawBounded, false);
   assert.equal(PREPARED_VENUS_SCENE.camera.cameraModel,
     "accumulated-matrix3d");
-  assert.match(PREPARED_VENUS_SCENE.camera.sceneStyle, /rotateX\(40deg\)/u);
-  assert.match(PREPARED_VENUS_SCENE.camera.sceneStyle, /rotate\(-105deg\)/u);
+  assert.match(PREPARED_VENUS_SCENE.camera.defaultTransform, /rotateX\(40deg\)/u);
+  assert.match(PREPARED_VENUS_SCENE.camera.defaultTransform, /rotate\(0deg\)/u);
   assert.ok(Math.abs(Math.hypot(
     ...PREPARED_VENUS_SKY_SUN.referenceViewDirection,
   ) - 1) < 1e-12);
@@ -135,10 +135,12 @@ test("publishes the prepared Venus scene and shell content", () => {
     standardDiffuseGain: 0.68,
     standardDetailGain: 0.4,
   });
-  assert.deepEqual(
-    PREPARED_VENUS_SCENE.starfield.photographicRegistration.rotationDegrees,
-    ESO_CUBEMAP_REGISTRATION_ROTATION_DEGREES,
-  );
+  assert.equal(PREPARED_VENUS_SCENE.starfield.astrometricRegistration.cubeFrame,
+    "icrf-j2000-as-cube-local-axes");
+  assert.equal(PREPARED_VENUS_SCENE.starfield.cameraContract,
+    "scene-locked-unbounded-accumulated-matrix3d");
+  assert.equal(PREPARED_VENUS_SCENE.heliocentricView.units.bodyRadiusKilometers, 6051.84);
+  assert.equal(PREPARED_VENUS_SCENE.worldFrame.bodyRadiusM, 6051840);
   assert.equal(PREPARED_VENUS_SCENE.starfield.pointSourcePresentation.selectedCount,
     5000);
   assert.equal(
@@ -384,14 +386,7 @@ test("binds the prepared Venus material to the checked OpenSpace parameters",
       shadowlessFloodShadowRelease: 0.3,
       shadowReleaseSmoothstep: [0.45, 0.92],
     });
-    assert.deepEqual(PREPARED_VENUS_SCENE.material.lightingModel
-      .presentationPhaseRemap, {
-      model: "continuous-crescent-rotation-plateau",
-      lowerTransition: [-0.92, -0.85],
-      plateau: [-0.85, -0.65],
-      plateauViewZ: -0.79,
-      upperTransition: [-0.65, -0.5],
-    });
+    assert.equal(PREPARED_VENUS_SCENE.material.lightingModel.presentationPhaseRemap, null);
   });
 
 test("keeps the prepared Venus limb inside the sourced 70 km extent", async () => {
@@ -519,7 +514,9 @@ test("keeps Venus runtime code on prepared retained-DOM paths", async () => {
   assert.equal(audit.complete, true);
   assert.ok(audit.sharedClosure.includes("src/renderers/css/solar-system/cubic-sky-runtime.ts"));
   assert.doesNotMatch(presentation, /createPolyCamera|createPolyScene|camera\.update/u);
-  assert.equal(PREPARED_VENUS_SCENE.camera.style, "perspective:1000000px");
+  assert.equal(PREPARED_VENUS_SCENE.camera.projection.model, "css-perspective-shared-with-sky");
+  assert.equal(PREPARED_VENUS_SCENE.camera.projection.focalLengthOverViewportWidth,
+    PREPARED_VENUS_SCENE.starfield.projection.focalLengthOverViewportWidth);
   assert.doesNotMatch(client,
     /fetch\(|XMLHttpRequest|canvas|getContext\(|style\.filter/u);
   assert.doesNotMatch(styles,

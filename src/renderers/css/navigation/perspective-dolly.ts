@@ -1,6 +1,9 @@
 import type { CameraPlan, PerspectiveCameraPlan, CameraUpdate, LevelOfDetailPlan, OrbitLineFade, PlanetarySystemFade, SunMarkerFade } from './types.js';
 import type { HeliocentricProjection } from '../solar-system/heliocentric-view.js';
 import type { VisibleRect } from '../solar-system/types.js';
+import type { PositionM } from '@cssearth/engine';
+import type { WorldCameraViewport } from './world-camera.js';
+import { scaleWorldPosition, validateWorldPosition } from './world-camera-math.js';
 import type { mountRetainedHeliocentricView } from '../solar-system/heliocentric-view-runtime.js';
 export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: ReturnType<typeof mountRetainedHeliocentricView>; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; }
 export type PerspectiveDolly = ReturnType<typeof createPerspectiveDolly>;
@@ -200,6 +203,9 @@ export function createPerspectiveDolly({
     rotY: cameraPlan.defaultControlYawDegrees,
     distance: 0,
   };
+  // Null is the original centred dolly. A world publication adopts a full
+  // eye-space centre, retained across drag, wheel and viewport changes.
+  let bodyCenter: PositionM | null = null;
   // The zoom alias last set, while the distance still corresponds to it: the
   // alias round trip through the focal length is exact only to floating
   // point, and a camera state set by zoom reads back the same number.
@@ -264,6 +270,10 @@ export function createPerspectiveDolly({
   // The round trip through the distance is exact only to floating point;
   // the alias reports the prepared bound itself at the bound.
   const distanceToZoom = (distance: number) => {
+    // The world observer may legally sit closer than the authored input
+    // range. Saturate input calibration there without moving that observer
+    // or asking a centred tangent cone that crosses the eye to define zoom.
+    if (bodyCenter !== null && distance < minimumDistance()) return distanceToZoom(minimumDistance());
     const zoom = silhouetteRadiusAtDistance(bodyRadius, focal, distance, principalOffset) *
       2 / cameraPlan.logicalBodyDiameter * cameraPlan.defaultZoom;
     return Math.abs(zoom - cameraPlan.maximumZoom) < 1e-9 ? cameraPlan.maximumZoom : zoom;
@@ -291,17 +301,23 @@ export function createPerspectiveDolly({
       });
     },
     update(partial: CameraUpdate) {
+      const previousDistance = cameraState.distance;
+      const constrain = bodyCenter === null ? clampDistance : (distance: number) => clamp(distance,
+        Math.min(minimumDistance(), previousDistance), Math.max(maximumDistance, previousDistance));
       if (partial.rotX !== undefined) cameraState.rotX = partial.rotX;
       if (partial.rotY !== undefined) cameraState.rotY = partial.rotY;
       if (partial.distanceKilometers !== undefined) {
-        cameraState.distance = clampDistance(partial.distanceKilometers / kilometersPerUnit);
+        cameraState.distance = constrain(partial.distanceKilometers / kilometersPerUnit);
       } else if (partial.distance !== undefined) {
-        cameraState.distance = clampDistance(partial.distance);
+        cameraState.distance = constrain(partial.distance);
       } else if (partial.zoom !== undefined) {
         const requested = zoomToDistance(partial.zoom);
-        cameraState.distance = clampDistance(requested);
+        cameraState.distance = constrain(requested);
         aliasZoom = cameraState.distance === requested ? partial.zoom : null;
         aliasDistance = cameraState.distance;
+      }
+      if (bodyCenter !== null && cameraState.distance !== previousDistance) {
+        bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
       }
     },
   });
@@ -309,6 +325,19 @@ export function createPerspectiveDolly({
   return Object.freeze({
     camera,
     measure,
+    viewport(): WorldCameraViewport {
+      return { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] };
+    },
+    bodyCenter: () => bodyCenter,
+    setBodyCenter(next: PositionM) {
+      validateWorldPosition(next);
+      const distance = Math.hypot(...next);
+      if (distance <= bodyRadius) throw new RangeError('The world camera is inside the focused body.');
+      bodyCenter = [next[0], next[1], next[2]];
+      cameraState.distance = distance;
+      aliasZoom = null;
+    },
+    centerBody() { bodyCenter = null; },
     // The alias bounds: the prepared close framing and the whole-orbit dolly
     // distance seen through the same alias.
     minimumZoom: () => distanceToZoom(maximumDistance),
@@ -325,7 +354,7 @@ export function createPerspectiveDolly({
     remeasure() {
       const zoom = camera.state.zoom;
       measure();
-      camera.update({ zoom });
+      if (bodyCenter === null) camera.update({ zoom });
     },
     // Projects the Sun, the orbit and the body for the accumulated scene
     // rotation and places the body: its centre `distance` from the eye on the
@@ -345,6 +374,7 @@ export function createPerspectiveDolly({
       projection = heliocentric.publish({
         rotation: rotationFromMatrix3d(sceneMatrix),
         distance,
+        ...(bodyCenter === null ? {} : { bodyCenter }),
         focal,
         viewportWidth,
         viewportHeight,
@@ -362,6 +392,7 @@ export function createPerspectiveDolly({
         publishedSceneTransform = transform;
         transformWrites += 1;
       }
+      sceneElement.hidden = !projection.body.visible;
       heliocentric.setOrbitOpacity(orbitLineOpacity(
         cameraPlan.orbitLineFade,
         projection.body.silhouetteDiameter / viewportHeight,
@@ -421,6 +452,8 @@ export function createPerspectiveDolly({
       });
     },
     state() {
+      const bodyCenterKilometers: PositionM | undefined = bodyCenter === null ? undefined
+        : scaleWorldPosition(bodyCenter, kilometersPerUnit);
       return Object.freeze({
         distance: cameraState.distance,
         distanceKilometers: cameraState.distance * kilometersPerUnit,
@@ -431,6 +464,7 @@ export function createPerspectiveDolly({
         visibleRect,
         offAxisDegrees: projection?.body.offAxisDegrees ?? null,
         silhouetteRadius: projection?.body.silhouetteRadius ?? null,
+        ...(bodyCenterKilometers === undefined ? {} : { bodyCenterKilometers }),
       });
     },
     levelOfDetail: () => lod,

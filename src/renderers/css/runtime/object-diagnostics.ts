@@ -36,7 +36,8 @@ export function publishObjectDiagnostics({ stage, definition, mounted, orbit, cu
       const selectLens = (id: string) => selection.dispatch({ kind: "lens", id });
       const diagnostics = Object.freeze({ ready: true,
         view: () => orbit.state(), setView: (state: OrbitStateUpdate) => orbit.setState(state), lens: lensState, selectLens,
-        camera: Object.freeze({ state: orbit.state, setState: orbit.setState, flyToState: orbit.flyToState, stats: orbit.stats }),
+        camera: Object.freeze({ state: orbit.state, setState: orbit.setState, flyToState: orbit.flyToState, stats: orbit.stats,
+          captureWorldCamera: orbit.captureWorldCamera, applyWorldCamera: orbit.applyWorldCamera }),
         // Session knobs (development diagnostics): the orbit trails' spans,
         // the caption policy and the catalogue stars' exposure; null restores
         // the prepared values, which stay what ships.

@@ -4,6 +4,8 @@ import {
   CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,
   CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD,
 } from "../../../platform/cubic-sky-contract.mjs";
+import { prepareAstrometricCubeSampling } from "../../../platform/astrometric-sky-registration.mjs";
+import { prepareCatalogueStars } from "../../../platform/prepare-catalogue-stars.mjs";
 import { preparePlanetCubicSky } from
   "../../../platform/prepare-cubic-sky-source.mjs";
 import {
@@ -26,5 +28,7 @@ await preparePlanetCubicSky({
   includeSun: false,
   cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,
   pointSourceContract: CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD,
+  astrometricSampling: prepareAstrometricCubeSampling(),
+  catalogueStars: await prepareCatalogueStars({ fovDegrees: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD.horizontalFovDegrees }),
   sourceSchema: "cssvenus-prepared-star-cubemap-source@1",
 });

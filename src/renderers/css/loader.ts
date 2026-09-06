@@ -1,6 +1,7 @@
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import { parsePreparedObjectRuntime } from './validation/index.js';
 import type { ObjectRuntimeDefinition } from './runtime/object-runtime-types.js';
+import { record } from './validation/guards.js';
 
 export const PREPARED_CSS_OBJECT_FORMAT = 'cssearth-css-object@4';
 export interface PreparedCssTransport {
@@ -26,7 +27,9 @@ export async function loadPreparedCssObject(
   let value: unknown;
   try { value = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)); }
   catch (cause) { throw new TypeError(`Prepared object ${descriptor.id} is not valid UTF-8 JSON.`, { cause }); }
-  const prepared = readPreparedObject(value, descriptor, parsePreparedObjectRuntime);
-  if (prepared.data.id !== descriptor.id) throw new TypeError(`Prepared CSS definition does not match object ${descriptor.id}.`);
+  const prepared = readPreparedObject(value, descriptor, input => {
+    if (record(input, 'runtime plan').id !== descriptor.id) throw new TypeError(`Prepared CSS definition does not match object ${descriptor.id}.`);
+    return parsePreparedObjectRuntime(input);
+  });
   return prepared.data;
 }

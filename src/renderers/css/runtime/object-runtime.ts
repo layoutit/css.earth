@@ -3,6 +3,7 @@ import type { ObjectSelectionState } from "../rendering/object-selection-runtime
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { SharedView } from "../navigation/view-url.js";
 import type { RetainedHeliocentricView } from "../solar-system/heliocentric-view-runtime.js";
+import type { ObjectWorldNavigation } from './world-navigation-types.js';
 import { errorMessage } from "../navigation/types.js";
 import { publishObjectDiagnostics } from "./object-diagnostics.js";
 export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
@@ -34,7 +35,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   requireObjectRuntimeDefinition(definition);
   const initialSelection = initialObjectSelection(definition.controls);
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {} }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, preparedResources, initialWorldCamera }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
@@ -61,11 +62,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     lifetime.onDispose(() => playback.destroy());
     let resources: ReturnType<typeof createPreparedResidency>;
     try {
-      resources = environment.createResources({ assets: definition.assets,
+      const resourceOptions = { assets: definition.assets,
         onReady() { guarded(() => orbit?.invalidate()); },
-        onWarmError(error) { if (!lifetime.disposed) console.error(error); },
+        onWarmError(error: unknown) { if (!lifetime.disposed) console.error(error); },
         onCleanupError: fatal,
-      });
+      };
+      resources = preparedResources ? preparedResources.claim(definition.assets, resourceOptions) : environment.createResources(resourceOptions);
     } catch (error) {
       const errors = lifetime.destroy();
       throw errors.length ? new AggregateError([error, ...errors], errorMessage(error), { cause: error }) : error;
@@ -123,7 +125,17 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       },
       subscribe(listener: () => void) { viewListeners.add(listener); return () => viewListeners.delete(listener); },
     });
-    const controller = Object.freeze({ ready, sharedView, ...(destinations ? { destinations } : {}),
+    const navigation: ObjectWorldNavigation | undefined = worldFrame ? Object.freeze({ frame: worldFrame,
+      capture() { return getOrbit().captureWorldCamera(worldFrame); },
+      apply(pose: Parameters<ObjectWorldNavigation['apply']>[0]) { if (!lifetime.disposed) { setAllowed(false); getOrbit().applyWorldCamera(pose, worldFrame); } },
+      optics() {
+        const state = getOrbit().state();
+        if (state.focal === undefined || !state.principalOffset) throw new TypeError('World navigation requires a physical camera.');
+        return { focalPixels: state.focal, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,
+          framingRadiusPixels: getOrbit().currentResponsiveZoom() / definition.camera.defaultZoom * definition.camera.logicalBodyDiameter / 2 };
+      },
+    }) : undefined;
+    const controller = Object.freeze({ ready, sharedView, ...(destinations ? { destinations } : {}), ...(navigation ? { navigation } : {}),
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
       destroy() {
@@ -254,6 +266,10 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       const initialized = await lifetime.wait(selection.start());
       if (lifetime.disposed || initialized.cancelled) return;
       if (!initialized.value) throw new Error("Initial object selection did not commit.");
+      if (initialWorldCamera) {
+        if (!worldFrame) throw new TypeError('An initial world camera needs a prepared frame.');
+        orbit.applyWorldCamera(initialWorldCamera, worldFrame);
+      }
       playback.setReady();
       await lifetime.wait(environment.waitPaint(lifetime, stage.ownerDocument.defaultView ?? window));
       if (lifetime.disposed) return;

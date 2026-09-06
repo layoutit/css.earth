@@ -8,6 +8,8 @@ import type { PreparedPresentationDefinition, mountPreparedPresentation } from "
 import type { CubicSkyPlan } from "../solar-system/cubic-sky-runtime.js";
 import type { DirectionalSunPlan } from "../solar-system/directional-sun-runtime.js";
 import type { HeliocentricMountOptions } from "../solar-system/heliocentric-view-runtime.js";
+import type { PreparedWorldCameraFrame, WorldCameraPose } from '../navigation/world-camera.js';
+import type { PreparedResourceLease } from './prepared-resource-lease.js';
 
 export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition {
   readonly schema: string; readonly id: string; readonly controls: ObjectControls;
@@ -39,6 +41,8 @@ export interface ObjectMountOptions {
   onError(error: unknown): void; onMotionRequest?(requested: boolean): void;
   inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; mobilePreviewElement?: HTMLElement | null;
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
+  worldFrame?: PreparedWorldCameraFrame; preparedResources?: PreparedResourceLease;
+  initialWorldCamera?: WorldCameraPose;
 }
 export interface PreparedNavigation { maximumZoom: number; camera?: OrbitStateUpdate; }
 export type SelectionSnapshot = ObjectSelection;

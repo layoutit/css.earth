@@ -36,7 +36,7 @@
     "test:earth-delivery": "node src/planets/earth/test/global-delivery-browser.mjs",
     "publish:earth-city-face": "node src/planets/earth/tools/publish-global-city-face.mjs",
     "status:earth-city-global": "node src/planets/earth/tools/status-global-city.mjs",
-    "test:platform": "node --test src/platform/*.test.mjs src/navigation/*.test.mjs tools/*.test.mjs",
+    "test:platform": "node --test src/platform/*.test.mjs src/navigation/*.test.mjs tools/*.test.mjs tools/objects/*.test.mjs",
     "test:planets": "node tools/run-implemented-planets.mjs test",
     "test:shell": "node --test site/test/*.test.mjs",
     "test:browser:conformance": "node site/test/planet-browser-conformance.mjs",

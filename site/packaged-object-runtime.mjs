@@ -1,4 +1,4 @@
-import { createObjectRuntime, createDeferredObjectMount, loadPreparedCssObject } from '../src/renderers/css/dist/index.js';
+import { createObjectRuntime, createNavigableObjectMount } from '../src/renderers/css/dist/index.js';
 import * as runtimePolicy from './runtime-policy.mjs';
 
 // The application supplies its shell nodes and authoritative input policy.
@@ -15,7 +15,7 @@ export function bindPackagedObject(definition) {
 }
 
 export async function loadPackagedObject(descriptorInput) {
-  return createDeferredObjectMount(() => loadPreparedCssObject(descriptorInput, {
+  return createNavigableObjectMount(descriptorInput, {
     async read(reference) {
       // Vite emits the prepared bytes as assets. The inventory is used only
       // during mount; loading the registry never requests renderer content.
@@ -28,5 +28,5 @@ export async function loadPackagedObject(descriptorInput) {
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();
     },
-  }), bindPackagedObject);
+  }, bindPackagedObject);
 }

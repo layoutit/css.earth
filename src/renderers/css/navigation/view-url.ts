@@ -3,7 +3,7 @@ type ScalarKey = 'altitudeM' | 'distanceM' | 'azimuthRad' | 'polarRad' | 'orbitR
 export interface ViewParameters extends Partial<Record<ScalarKey, number>> { lookMode?: 'orbit' | 'freeLook'; lookQuaternionXyzw?: readonly number[]; panM?: readonly number[]; hiddenLayers?: readonly string[]; }
 export interface SharedPlayback { times: readonly number[]; speed: number; motionRequested: boolean; }
 export interface LegacySharedCamera { controlPitch: number; controlYaw: number; zoom: number; distanceKilometers?: number; pose: LegacyCameraPose; }
-export interface PhysicalSharedCamera { distanceKilometers: number; pose: PhysicalCameraPose; }
+export interface PhysicalSharedCamera { distanceKilometers: number; pose: PhysicalCameraPose; bodyCenterKilometers?: readonly [number, number, number]; }
 export interface SharedView { camera: LegacySharedCamera | PhysicalSharedCamera; playback: SharedPlayback; preparedEpochJdTt?: number | null; }
 function isPhysicalCamera(camera: SharedView['camera']): camera is PhysicalSharedCamera { return camera.pose.schema === 'cssearth-camera-pose@2'; }
 // Galaxio view URL version 1: the field order, defaults and big-endian
@@ -161,15 +161,21 @@ function poseMatrix(value: unknown) {
 function validateShared(view: unknown): asserts view is SharedView {
   record(view, ["camera", "preparedEpochJdTt", "playback"], "view");
   const camera = view.camera, playback = view.playback;
-  record(camera, ["controlPitch", "controlYaw", "zoom", "distanceKilometers", "pose"], "camera");
+  record(camera, ["controlPitch", "controlYaw", "zoom", "distanceKilometers", "pose", "bodyCenterKilometers"], "camera");
   const pose = camera.pose;
   record(pose, ["schema", "scene", "skybox", "sunView"], "pose");
   const minimal = pose.schema === MINIMAL_POSE_SCHEMA;
   if (minimal) {
-    record(camera, ["distanceKilometers", "pose"], "camera");
+    record(camera, ["distanceKilometers", "pose", "bodyCenterKilometers"], "camera");
     if (typeof camera.distanceKilometers !== "number" || !Number.isFinite(camera.distanceKilometers) || camera.distanceKilometers <= 0) invalid("camera");
+    if (camera.bodyCenterKilometers !== undefined) {
+      const centre = camera.bodyCenterKilometers;
+      if (!Array.isArray(centre) || centre.length !== 3 || ![0, 1, 2].every(index => typeof centre[index] === 'number' && Number.isFinite(centre[index])) ||
+          Math.abs(Math.hypot(...centre) - camera.distanceKilometers) > camera.distanceKilometers * 1e-12) invalid('camera');
+    }
     record(pose, ["schema", "scene"], "pose");
   } else {
+    if (camera.bodyCenterKilometers !== undefined) invalid('camera');
     if (typeof camera.controlPitch !== "number" || typeof camera.controlYaw !== "number" || typeof camera.zoom !== "number" ||
       ![camera.controlPitch, camera.controlYaw, camera.zoom].every(Number.isFinite) || camera.zoom <= 0 ||
       (camera.distanceKilometers !== undefined && (typeof camera.distanceKilometers !== "number" || !Number.isFinite(camera.distanceKilometers) || camera.distanceKilometers <= 0))) invalid("camera");
@@ -255,7 +261,7 @@ function parseLegacyShared(bytes: Uint8Array): SharedView {
 function parseBinaryShared(bytes: Uint8Array): SharedView {
   if (bytes.length < 2) invalid();
   const data = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), flags = data.getUint16(0);
-  if (flags >>> 12 === 3) return parseMinimalShared(bytes);
+  if (flags >>> 12 === 3 || flags >>> 12 === 4) return parseMinimalShared(bytes);
   if (flags >>> 12 !== SHARED_VERSION) throw new Error("This shared view link uses an unsupported version.");
   if (flags & 0x0f00 || (flags & 6) === 4) invalid();
   let offset = 2;
@@ -292,8 +298,8 @@ function parseBinaryShared(bytes: Uint8Array): SharedView {
 }
 
 function formatMinimalShared(view: SharedView, camera: PhysicalSharedCamera) {
-  let flags = 3 << 12;
-  const values = [camera.distanceKilometers], playback = view.playback;
+  let flags = (camera.bodyCenterKilometers ? 4 : 3) << 12;
+  const values = camera.bodyCenterKilometers ? [...camera.bodyCenterKilometers] : [camera.distanceKilometers], playback = view.playback;
   if (view.preparedEpochJdTt !== undefined) {
     flags |= 2;
     if (view.preparedEpochJdTt !== null) { flags |= 4; values.push(view.preparedEpochJdTt); }
@@ -331,7 +337,10 @@ function parseMinimalShared(bytes: Uint8Array): SharedView {
     if (!Number.isFinite(value)) invalid();
     return value;
   };
-  const view: { camera: Partial<PhysicalSharedCamera>; preparedEpochJdTt?: number | null; playback?: SharedPlayback } = { camera: { distanceKilometers: read() } };
+  const bodyCenterKilometers: readonly [number, number, number] | undefined = flags >>> 12 === 4 ? [read(), read(), read()] : undefined;
+  const view: { camera: Partial<PhysicalSharedCamera>; preparedEpochJdTt?: number | null; playback?: SharedPlayback } = {
+    camera: bodyCenterKilometers ? { distanceKilometers: Math.hypot(...bodyCenterKilometers), bodyCenterKilometers } : { distanceKilometers: read() },
+  };
   if (flags & 2) view.preparedEpochJdTt = flags & 4 ? read() : null;
   const speed = flags & 8 ? read() : 1;
   let matrix;

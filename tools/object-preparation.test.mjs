@@ -8,25 +8,26 @@ import test from 'node:test';
 import { readObjectPreparation, resolveObjectPreparation, runObjectPreparation } from './object-preparation.mjs';
 
 const projectRoot = resolve(import.meta.dirname, '..');
-// Captured from the previous two executable recipes, including their ordering.
-const original = {
+// Original producer order, with Venus's physical world preparation added before
+// the scene that consumes its system markers.
+const expectedRecipes = {
   mercury: ['verify-source-manifest', 'prepare-title', 'prepare-panel-content', 'prepare-assets', 'prepare-starfield',
     'prepare-sky-sun', 'prepare-lenses', 'prepare-charts', 'prepare-system-markers', 'prepare-scene',
     '../../../../tools/prepare-object-controls', 'prepare-presentation', 'prepare-runtime-asset-manifest'],
   venus: ['verify-source-manifest', 'prepare-title', 'prepare-assets', 'prepare-charts', 'prepare-panel-content',
-    'prepare-surface-gallery', 'prepare-lenses', 'prepare-starfield', 'prepare-sky-sun', 'prepare-scene',
+    'prepare-surface-gallery', 'prepare-lenses', 'prepare-starfield', 'prepare-sky-sun', 'prepare-system-markers', 'prepare-scene',
     '../../../../tools/prepare-object-controls', 'prepare-presentation', 'prepare-runtime-asset-manifest'],
 };
 async function descriptor(id) {
   return JSON.parse(await readFile(resolve(projectRoot, 'src/planets', id, 'object.json'), 'utf8'));
 }
 function expectedSteps(id) {
-  return original[id].map((name, index) => [`${name}.mjs`, ...(index === 0 ? ['--probe'] :
+  return expectedRecipes[id].map((name, index) => [`${name}.mjs`, ...(index === 0 ? ['--probe'] :
     name.endsWith('/prepare-object-controls') ? [`--object=${id}`] : [])]);
 }
 
-for (const id of Object.keys(original)) {
-  test(`${id} retains every original producer, argument and ordering`, async () => {
+for (const id of Object.keys(expectedRecipes)) {
+  test(`${id} executes the approved producers, arguments and ordering`, async () => {
     const plan = await readObjectPreparation(resolve(projectRoot, 'src/planets', id, 'object.json'));
     assert.deepEqual(plan.steps, expectedSteps(id));
     assert.equal(plan.objectName, id[0].toUpperCase() + id.slice(1));

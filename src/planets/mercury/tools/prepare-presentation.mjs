@@ -3,8 +3,8 @@ import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../platform/prepared-obj
 import { PREPARED_NAVIGATION_MARKERS } from "../../../../site/prepared-navigation-markers.mjs";
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
-import { DEFAULT_LABEL_POLICY } from "../../../platform/label-field.mjs";
-import { STAR_LABEL_POLICY } from "../../../platform/star-labels.mjs";
+import { prepareSolarSystemPresentation } from "../../../../tools/objects/solar-system-presentation.mjs";
+import solarSystemSource from "../source/presentation/solar-system.json" with { type: "json" };
 import { prepareCatalogueStars } from "../../../platform/prepare-catalogue-stars.mjs";
 import { POINT_MIN_RADIUS_PX } from "../../../platform/star-photometry.mjs";
 import { prepareCssomDeclarationReads } from "../../../../tools/prepared-cssom.mjs";
@@ -19,7 +19,6 @@ import { PREPARED_MERCURY_SYSTEM_MARKERS as systemMarkerStrip } from "../runtime
 
 // The shell's navigation atlas (see site/planet-navigation-marker.css): the
 // far-view marker is the header's Mercury sprite, from the same file.
-const NAVIGATION_MARKER_ATLAS_URL = "/navigation/planet-markers@2x.webp";
 const BILLBOARD_LIGHTING_KEY = "lighting-billboard";
 
 export async function prepareMercuryPresentation() {
@@ -115,41 +114,14 @@ export async function prepareMercuryPresentation() {
       }] };
   })));
   const pose = plan.interior.presentationOrbit;
-  // The Sun at its true distance as real geometry, the orbit as a true
-  // ellipse, and the shell's own Mercury marker (tile and size from the
-  // shared atlas) once the disc is too small to read.
-  const navigationMarker = PREPARED_NAVIGATION_MARKERS.mercury;
-  if (!navigationMarker || !(navigationMarker.presentation?.size > 0)) throw new Error("Mercury has no prepared navigation marker.");
-  // The other planets and the Sun as the same atlas tiles at the shell's own
-  // sizes: the planetary system's markers are billboards at a fixed screen
-  // size, never geometry. Dwarf planets without a navigation tile draw from
-  // Mercury's prepared system-marker strip (see prepare-system-markers.mjs).
-  const atlasSprite = id => {
-    const marker = PREPARED_NAVIGATION_MARKERS[id];
-    if (marker && marker.presentation?.size > 0) return { index: marker.index, count: marker.count, size: marker.presentation.size };
-    const tile = systemMarkerStrip.tiles[id];
-    if (!tile) throw new Error(`No prepared marker for ${id}.`);
-    return { url: canonicalPreparedAsset(systemMarkerStrip.density1.url, systemMarkerStrip.density2.url), index: tile.index, count: tile.count, size: tile.size };
-  };
-  // Captions above the far-view markers, under the shared label policy. The
-  // names are the shell's display names (site/objects.mjs), spelled here as
-  // this object's own data; the dwarf planets have no shell entry.
-  const captionNames = { sun: "Sun", mercury: "Mercury", venus: "Venus", earth: "Earth", mars: "Mars", jupiter: "Jupiter",
-    saturn: "Saturn", uranus: "Uranus", neptune: "Neptune", pluto: "Pluto", ceres: "Ceres", eris: "Eris", haumea: "Haumea", makemake: "Makemake" };
   const catalogue = await prepareCatalogueStars({ fovDegrees: plan.starfield.catalogueStars.exposure.fovDegrees });
-  const namedStars = catalogue.stars.flatMap((star, index) => star.name ? [{ id: `star:${index}`,
-    hip: star.hip, name: star.name, direction: star.direction, magnitude: star.magnitude }] : []);
-  const heliocentricView = { plan: plan.heliocentricView,
-    bodyMarker: { url: NAVIGATION_MARKER_ATLAS_URL, index: navigationMarker.index, count: navigationMarker.count, size: 2 * POINT_MIN_RADIUS_PX },
-    systemMarkers: { url: NAVIGATION_MARKER_ATLAS_URL, sun: atlasSprite("sun"),
-      bodies: Object.fromEntries(plan.heliocentricView.system.bodies.map(body => [body.id, atlasSprite(body.id)])),
-      // Each marker carries its phase from Mercury's own billboard lighting
-      // atlas (the same frames the far-view overlay draws), scaled down.
-      phase: { url: billboard.url, columns: billboard.columns, rowCount: billboard.rowCount, frameCount: billboard.frameCount,
-        minimumLightViewZ: assets.lighting.minimumLightViewZ, maximumLightViewZ: assets.lighting.maximumLightViewZ,
-        baseLightAzimuthDegrees: assets.lighting.baseLightAzimuthDegrees } },
-    labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: captionNames,
-      stars: { policy: { ...STAR_LABEL_POLICY }, exposure: { ...catalogue.exposure }, records: namedStars } } };
+  const heliocentricView = prepareSolarSystemPresentation({
+    bodyId: solarSystemSource.bodyId, plan: plan.heliocentricView,
+    navigationMarkers: PREPARED_NAVIGATION_MARKERS, markerAtlasUrl: solarSystemSource.markerAtlasUrl,
+    systemMarkerStrip, captionNames: solarSystemSource.captionNames, catalogue,
+    phaseAtlas: { ...billboard, minimumLightViewZ: assets.lighting.minimumLightViewZ,
+      maximumLightViewZ: assets.lighting.maximumLightViewZ, baseLightAzimuthDegrees: assets.lighting.baseLightAzimuthDegrees },
+  });
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun,
     assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: interiorKeys.length + 1, concurrency: interiorKeys.length + 1 }),
@@ -162,7 +134,7 @@ export async function prepareMercuryPresentation() {
       // The terminator overlay fitted to the projected silhouette; it never
       // shrinks below the marker it lights at the far stage.
       { kind: "silhouette-fit", target: index(materialRoot), minimumRadius: POINT_MIN_RADIUS_PX,
-        unitScale: 2 * plan.camera.defaultZoom / plan.camera.logicalBodyDiameter },
+        unitScale: 2 / plan.camera.logicalBodyDiameter },
       // Level of detail from the camera's published stage (see styles.css).
       { kind: "view-attribute", target: -1, property: "data-lod", source: "level-of-detail-stage", precision: null },
       { kind: "view-property", target: index(materialRoot), property: "--mercury-billboard-opacity", source: "billboard-opacity", precision: 6 },

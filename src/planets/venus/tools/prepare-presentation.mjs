@@ -1,5 +1,11 @@
 import { pathToFileURL } from "node:url";
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
+import { prepareSolarSystemPresentation } from "../../../../tools/objects/solar-system-presentation.mjs";
+import { PREPARED_NAVIGATION_MARKERS } from "../../../../site/prepared-navigation-markers.mjs";
+import { prepareCatalogueStars } from "../../../platform/prepare-catalogue-stars.mjs";
+import { POINT_MIN_RADIUS_PX } from "../../../platform/star-photometry.mjs";
+import solarSystemSource from "../source/presentation/solar-system.json" with { type: "json" };
+import { PREPARED_VENUS_SYSTEM_MARKERS } from "../runtime/preparedSystemMarkers.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
 import { prepareCssomDeclarationReads } from "../../../../tools/prepared-cssom.mjs";
 import { createPreparedNodeTree } from "../../../../tools/prepared-node-tree.mjs";
@@ -18,23 +24,20 @@ export async function prepareVenusPresentation() {
     url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"})))];
   const required=id=>layers.map(layer=>`${layer}:${id}`);
   const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.body.leaves.map(leaf => leaf.style)) });
-  const camera=b.element("div","polycss-camera planet-render-root",plan.camera.style);
-  const scene=b.element("div","polycss-scene",plan.camera.sceneStyle,{"aria-hidden":"true","data-polycss-lighting":"baked"});
-  const system=b.mesh("venus-system",`transform:rotateY(${-plan.body.axialTiltDegrees}deg)`),body=b.mesh("venus-body","",{style:""});
+  const camera=b.element("div","polycss-camera planet-render-root");
+  const scene=b.element("div","polycss-scene",`transform:${plan.camera.defaultTransform}`,{"aria-hidden":"true","data-polycss-lighting":"baked"});
+  const system=b.mesh("venus-system",`transform:${plan.systemTransform}`),body=b.mesh("venus-body","",{style:""});
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);b.append(system,body);
   for(const leaf of plan.body.leaves)b.append(body,b.leaf(leaf));
   const composite=b.element("div","venus-material-composite planet-render-root","",{"aria-hidden":"true"});
-  composite.style.setProperty("--venus-camera-zoom",String(plan.camera.defaultZoom));
   const plane=b.element("s","venus-fixed-material");
   plane.style.backgroundSize=material.backgroundSize;
   plane.style.backgroundPosition=material.backgroundPositions[material.defaultFrame];
   b.append(null,composite);b.append(composite,plane);
   const {tree,index}=b.finish({camera,scene});
-  const sourceRemap=material.lightingModel.presentationPhaseRemap;
   const track={id:"lighting",target:index(plane),frame:{source:"sun-z",minimum:material.minimumLightViewZ,
     maximum:material.maximumLightViewZ,count:material.frameCount,baseFrame:0,span:material.directionalFrameCount-1,
-    maximumFrame:material.directionalFrameCount-1,remap:{kind:"phase-plateau",lowerTransition:sourceRemap.lowerTransition,
-      plateau:sourceRemap.plateau,upperTransition:sourceRemap.upperTransition,plateauViewZ:sourceRemap.plateauViewZ}},
+    maximumFrame:material.directionalFrameCount-1,remap:null},
     banks:[{id:"lighting",frames:material.backgroundPositions.map((backgroundPosition,frame)=>({
       resource:null,frame,row:null,backgroundPosition,backgroundSize:material.backgroundSize})),default:null,fixed:null}],
     demand:{ capacity:1, defaultFrame:material.defaultFrame },
@@ -49,11 +52,24 @@ export async function prepareVenusPresentation() {
     ],materials:[{track:"lighting",bank:"lighting",mode:"frames",enabled:true,rotationEnabled:shadows,
       frameOverride:shadows?null:material.frameCount-1,clearWhenHidden:false,fixedMode:"shadowless"}]});
   }
+  const catalogue = await prepareCatalogueStars({ fovDegrees: plan.starfield.catalogueStars.exposure.fovDegrees });
+  const heliocentricView = prepareSolarSystemPresentation({
+    bodyId: solarSystemSource.bodyId, plan: plan.heliocentricView,
+    navigationMarkers: PREPARED_NAVIGATION_MARKERS, markerAtlasUrl: solarSystemSource.markerAtlasUrl,
+    systemMarkerStrip: PREPARED_VENUS_SYSTEM_MARKERS, captionNames: solarSystemSource.captionNames, catalogue,
+    phaseAtlas: { url: canonicalPreparedAsset(material.lightingUrl, material.lighting2xUrl),
+      columns: material.frameColumns, rowCount: material.frameRows, frameCount: material.directionalFrameCount,
+      minimumLightViewZ: material.minimumLightViewZ, maximumLightViewZ: material.maximumLightViewZ,
+      baseLightAzimuthDegrees: material.baseLightAzimuthDegrees },
+  });
   return {schema:PREPARED_PRESENTATION_SCHEMA,camera:plan.camera,sky:plan.starfield,sun:PREPARED_VENUS_SKY_SUN,
     assets:{entries,pools:[preparedResourcePool("warm",entries,{retention:"warm"}),
       preparedResourcePool("material",entries,{retention:"selection",capacity:6,concurrency:6})],
       startup:[...warm.map(entry=>entry.key),...required(lenses.defaultLens)]},tree,variants,materials:[track],
-    viewBindings:[{kind:"zoom-property",target:index(composite),property:"--venus-camera-zoom"},
+    heliocentricView,
+    viewBindings:[{kind:"silhouette-fit",target:index(composite),minimumRadius:POINT_MIN_RADIUS_PX,
+      unitScale:2/plan.camera.logicalBodyDiameter},
+      {kind:"view-attribute",target:-1,property:"data-lod",source:"level-of-detail-stage",precision:null},
       ...[["data-polycss-camera-rot-x","scene-pitch",2],["data-polycss-camera-rot-y","control-yaw",null],
         ["data-polycss-camera-zoom","zoom",null],["data-venus-camera-matrix","scene-matrix",null]]
         .map(([property,source,precision])=>({kind:"view-attribute",target:index(camera),property,source,precision}))],

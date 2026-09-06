@@ -1,6 +1,7 @@
 import { createSceneLifetime } from '@cssearth/engine';
 import type { SharedView } from '../navigation/view-url.js';
 import type { PreparedDestinationRuntime } from './object-runtime-types.js';
+import type { ObjectWorldNavigation } from './world-navigation-types.js';
 
 export interface ObjectSharedView {
   capture(motionRequested?: boolean): SharedView | null;
@@ -11,6 +12,7 @@ export interface ObjectSceneLifecycle {
   readonly ready: Promise<void>;
   readonly sharedView: ObjectSharedView;
   readonly destinations?: PreparedDestinationRuntime;
+  readonly navigation?: ObjectWorldNavigation;
   pause(): void;
   resume(): void;
   destroy(): void;
@@ -46,6 +48,7 @@ export function createDeferredObjectMount<T, Stage, Options extends DeferredMoun
     const controller: ObjectSceneLifecycle = Object.freeze({
       ready, sharedView,
       get destinations() { return lifetime.disposed ? undefined : mounted?.destinations; },
+      get navigation() { return published && !lifetime.disposed ? mounted?.navigation : undefined; },
       pause() { allowed = false; forward(() => mounted?.pause()); },
       resume() { allowed = true; forward(() => mounted?.resume()); },
       destroy() {

@@ -17,19 +17,18 @@ export function requireDescriptorAdapterSource(text, exported) {
   }
   const loader = functions.get(exported), returned = loader?.body.body[0]?.argument;
   if (loader?.params.length !== 1 || loader.params[0].type !== 'Identifier' || loader.body.body.length !== 1 ||
-    returned?.type !== 'CallExpression' || returned.arguments.length !== 2 || bindings.get(returned.callee.name)?.name !== 'createDeferredObjectMount') fail();
-  const read = returned.arguments[0], decode = read.body, bind = functions.get(returned.arguments[1]?.name);
-  if (read.type !== 'ArrowFunctionExpression' || read.params.length || decode?.type !== 'CallExpression' || decode.arguments.length !== 2 ||
-    bindings.get(decode.callee.name)?.name !== 'loadPreparedCssObject' || decode.arguments[0].name !== loader.params[0].name ||
-    decode.arguments[1].type !== 'ObjectExpression' || !bind || bind.params.length !== 1 || bind.params[0].type !== 'Identifier' || bind.body.body.length !== 2) fail();
+    returned?.type !== 'CallExpression' || returned.arguments.length !== 3 || bindings.get(returned.callee.name)?.name !== 'createNavigableObjectMount') fail();
+  const bind = functions.get(returned.arguments[2]?.name);
+  if (returned.arguments[0]?.type !== 'Identifier' || returned.arguments[0].name !== loader.params[0].name ||
+    returned.arguments[1].type !== 'ObjectExpression' || !bind || bind.params.length !== 1 || bind.params[0].type !== 'Identifier' || bind.body.body.length !== 2) fail();
   const declaration = bind.body.body[0]?.declarations?.[0], factory = declaration?.init, mount = bind.body.body[1]?.argument;
   if (declaration?.id.type !== 'Identifier' || factory?.type !== 'CallExpression' || factory.arguments.length !== 1 ||
     bindings.get(factory.callee.name)?.name !== 'createObjectRuntime' || factory.arguments[0].name !== bind.params[0].name ||
     mount?.type !== 'ArrowFunctionExpression' || mount.params.length !== 2 || mount.body?.type !== 'CallExpression' || mount.body.callee.name !== declaration.id.name ||
     mount.body.arguments[0]?.name !== mount.params[0]?.name || mount.body.arguments[1]?.type !== 'ObjectExpression') fail();
   const renderer = bindings.get(factory.callee.name).source;
-  if ([returned.callee.name, decode.callee.name].some(name => bindings.get(name)?.source !== renderer)) fail();
-  const transport = decode.arguments[1].properties;
+  if (bindings.get(returned.callee.name)?.source !== renderer) fail();
+  const transport = returned.arguments[1].properties;
   if (transport.length !== 1 || (transport[0].key.name ?? transport[0].key.value) !== 'read' || !transport[0].method || !transport[0].value.async || transport[0].value.params.length !== 1) fail();
   const method = transport[0].value, reference = method.params[0]?.name, nodes = [];
   const walk = node => { if (!node || typeof node !== 'object') return; if (node.type) nodes.push(node); for (const value of Object.values(node)) if (Array.isArray(value)) value.forEach(walk); else if (value && typeof value === 'object') walk(value); };

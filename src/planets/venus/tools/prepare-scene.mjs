@@ -3,10 +3,8 @@
 import { writeFile } from "node:fs/promises";
 
 import {
-  buildPolyCameraSceneTransform,
   buildSeamBleedPolygonEdges,
   computeTextureAtlasPlanPublic,
-  createPolyCamera,
   formatCssLength,
   resolvePolyTextureLeafGeometry,
 } from "@layoutit/polycss";
@@ -23,10 +21,12 @@ import {
   readVenusAtmosphereSource,
 } from "./atmosphere-source.mjs";
 import { validateVenusSourceGroup } from "./source-manifest.mjs";
-import {
-  SUN_INITIAL_VIEW_DIRECTION,
-  VENUS_DEFAULT_CONTROL_YAW_DEGREES,
-} from "./sun-presentation.mjs";
+import { prepareSolarSystemScene, prepareSolarSystemSunPresentation } from "../../../../tools/objects/solar-system-scene.mjs";
+import { publishSolarSystemWorldFrame } from "../../../../tools/objects/solar-system-source.mjs";
+import solarSystemSource from "../source/presentation/solar-system.json" with { type: "json" };
+import { PREPARED_VENUS_SKY_SUN } from "../runtime/preparedSkySun.mjs";
+import { requireBodyFixedSunDirection } from "../../../platform/solar-geometry.mjs";
+
 
 await validateVenusSourceGroup("scene");
 const atmosphereSource = await readVenusAtmosphereSource();
@@ -34,7 +34,7 @@ const materialModel = deriveVenusPreparedMaterial(atmosphereSource);
 
 const LATITUDE_SEGMENTS = 16;
 const LONGITUDE_SEGMENTS = 32;
-const RADIUS = 248;
+const RADIUS = solarSystemSource.bodyRadiusUnits;
 const POLAR_RADIUS = RADIUS;
 const SOURCE_WIDTH = 1024;
 const SOURCE_LATITUDE_HEIGHT = 512;
@@ -66,7 +66,7 @@ const PLAN_OPTIONS = Object.freeze({
   textureLighting: "baked",
   seamBleed: 0.15,
   directionalLight: Object.freeze({
-    direction: SUN_INITIAL_VIEW_DIRECTION,
+    direction: requireBodyFixedSunDirection(solarSystemSource.bodyId),
     color: "#fff1df",
     intensity: Math.PI,
   }),
@@ -141,25 +141,6 @@ const leaves = polygons.map((polygon, index) => {
   });
 });
 
-const initialScenePitchDegrees = 40;
-const maximumScenePitchDegrees = 65;
-const maximumControlPitchDegrees = 89;
-const defaultControlPitchDegrees = maximumControlPitchDegrees *
-  (1 - initialScenePitchDegrees / maximumScenePitchDegrees);
-const defaultZoom = 1.9;
-const responsiveFit = Object.freeze({
-  model: "continuous-aspect-smoothstep",
-  portraitBaseWidthShare: 0.34,
-  narrowPortraitWidthShareGain: 0.08,
-  landscapeWidthShareGain: 0.02,
-  narrowPortraitAspectRatio: 0.46,
-  portraitAspectRatio: 0.75,
-  squareAspectRatio: 1,
-  maximumHeightShare: 0.61,
-  maximumMobilePreviewShare: 0.925,
-  minimumZoom: 0.42,
-  maximumZoom: 2,
-});
 const materialFramePositions = Object.freeze(Array.from(
   { length: MATERIAL_FRAME_COUNT },
   (_, frame) => {
@@ -169,38 +150,18 @@ const materialFramePositions = Object.freeze(Array.from(
   },
 ));
 const defaultMaterialFrame = MATERIAL_FRAME_COUNT - 1;
-const camera = createPolyCamera({
-  target: [0, 0, 0],
-  rotX: initialScenePitchDegrees,
-  rotY: VENUS_DEFAULT_CONTROL_YAW_DEGREES,
-  zoom: defaultZoom,
-  distance: 0,
-});
+const physical = await prepareSolarSystemScene({ ...solarSystemSource,
+  starfield: PREPARED_VENUS_STARFIELD, sun: PREPARED_VENUS_SKY_SUN });
+const sunPresentation = prepareSolarSystemSunPresentation(solarSystemSource);
 const prepared = Object.freeze({
   schema: "cssvenus-prepared-runtime-scene@1",
   runtimeGeometry: false,
   runtimeRasterization: false,
-  camera: Object.freeze({
-    state: Object.freeze({ ...camera.state }),
-    style: "perspective:1000000px",
-    sceneStyle: `transform:${buildPolyCameraSceneTransform(camera.state)}`,
-    minimumControlPitchDegrees: 0,
-    maximumControlPitchDegrees,
-    defaultControlPitchDegrees,
-    defaultControlYawDegrees: VENUS_DEFAULT_CONTROL_YAW_DEGREES,
-    initialScenePitchDegrees,
-    maximumScenePitchDegrees,
-    minimumZoom: 0.42,
-    maximumZoom: 4,
-    defaultZoom,
-    sceneScale: defaultZoom / TILE_SIZE,
-    logicalBodyDiameter: RADIUS * 2,
-    responsiveFit,
-    horizontalOrbit: true,
-    pitchBounded: false,
-    yawBounded: false,
-    cameraModel: "accumulated-matrix3d",
-  }),
+  camera: physical.camera,
+  systemTransform: physical.systemTransform,
+  presentationFrame: physical.presentationFrame,
+  heliocentricView: physical.heliocentricView,
+  worldFrame: physical.worldFrame,
   body: Object.freeze({
     leaves: Object.freeze(leaves),
     equatorialRadius: RADIUS,
@@ -271,7 +232,7 @@ const prepared = Object.freeze({
     lightingModel: Object.freeze({
       directionalLight: Object.freeze({
         ...PLAN_OPTIONS.directionalLight,
-        direction: SUN_INITIAL_VIEW_DIRECTION,
+        direction: sunPresentation.referenceViewDirection,
       }),
       ambientFromGroundReflectance: Math.sqrt(
         atmosphereSource.averageGroundReflectance,
@@ -285,19 +246,13 @@ const prepared = Object.freeze({
         shadowlessFloodShadowRelease: 0.3,
         shadowReleaseSmoothstep: Object.freeze([0.45, 0.92]),
       }),
-      presentationPhaseRemap: Object.freeze({
-        model: "continuous-crescent-rotation-plateau",
-        lowerTransition: Object.freeze([-0.92, -0.85]),
-        plateau: Object.freeze([-0.85, -0.65]),
-        plateauViewZ: -0.79,
-        upperTransition: Object.freeze([-0.65, -0.5]),
-      }),
+      presentationPhaseRemap: null,
       interpolation: "nearest-prepared-phase-with-runtime-css-roll",
     }),
     runtimeLightingMath: false,
     runtimeRasterization: false,
   }),
-  starfield: PREPARED_VENUS_STARFIELD,
+  starfield: physical.starfield,
   animation: Object.freeze({
     cloudsVisualSeconds: 36,
     surfaceVisualSeconds: 96,
@@ -317,6 +272,8 @@ await writeFile(
   "// Generated by tools/prepare-scene.mjs.\n" +
     `export const PREPARED_VENUS_SCENE = Object.freeze(${JSON.stringify(prepared)});\n`,
 );
+
+await publishSolarSystemWorldFrame(new URL("../object.json", import.meta.url), physical.worldFrame);
 
 function createSpherePolygons(overlap) {
   const polygons = [];

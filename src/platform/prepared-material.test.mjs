@@ -8,7 +8,7 @@ import { initialObjectSelection } from "./object-runtime-contract.mjs";
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
 import { runtimeDefinition as definition } from "../planets/venus/runtime/definition.mjs";
 
-test("shared scalar, atlas and roll publication matches the preserved Venus boundary sequence",()=>{
+test("Venus preserves roll and shadow boundaries while selecting physical directional phases",()=>{
   const reference=JSON.parse(readFileSync(new URL("./test/fixtures/venus-material-reference.json",import.meta.url)));
   assert.ok(reference.records.length>400);assert.match(reference.source.sha256,/^[a-f0-9]{64}$/);
   const f=retainedPresentationFixture(definition);
@@ -23,9 +23,14 @@ test("shared scalar, atlas and roll publication matches the preserved Venus boun
         controlPitch:definition.camera.defaultControlPitchDegrees,controlYaw:definition.camera.defaultControlYawDegrees};view.reference=view;
       publisher.publish(selectedPreparedVariant(definition,selection).materials[0],view,f.resources);
       const actual=publisher.observe();
+      // The physical camera now supplies the real Sun depth. The original
+      // raster contains 31 directional samples across [-.98,.98], followed
+      // by its fixed shadowless sample; the former artistic phase warp is gone.
+      const frame = record.shadows
+        ? Math.max(0, Math.min(30, Math.round((record.direction[2] + .98) / 1.96 * 30))) : 31;
       assert.deepEqual({frame:actual.frame,lightRollDegrees:actual.lightRollDegrees,sunViewDirection:actual.sunViewDirection,
-        shadowsEnabled:actual.rotationEnabled},record.expected);
-      assert.equal(element.style.backgroundPosition,record.backgroundPosition);
+        shadowsEnabled:actual.rotationEnabled},{...record.expected,frame});
+      assert.equal(element.style.backgroundPosition,`${-(frame % 8) * 512}px ${-Math.floor(frame / 8) * 512}px`);
       assert.equal(element.style.backgroundSize,record.backgroundSize);
       assert.equal(element.style.getPropertyValue("--venus-light-roll"),record.rotation);
     }

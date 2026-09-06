@@ -4,7 +4,6 @@ import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import {
-  buildPolyCameraSceneTransform,
   buildPolyMeshTransform,
   buildSeamBleedPolygonEdges,
   computeTextureAtlasPlanPublic,
@@ -12,18 +11,10 @@ import {
   resolvePolyTextureLeafGeometry,
 } from "@layoutit/polycss";
 
-import { prepareAstrometricSkySceneRegistration } from
-  "../../../platform/astrometric-sky-registration.mjs";
-import {
-  MERCURY_CAMERA_POSE,
-  MERCURY_PRESENTATION_FRAME,
-} from "./scene-camera-pose.mjs";
-import { requireBodyFixedSunDirection } from
-  "../../../platform/solar-geometry.mjs";
-import { prepareHeliocentricView } from
-  "../../../platform/prepare-heliocentric-view.mjs";
-import { preparePlanetarySystem } from
-  "../../../platform/prepare-planetary-system.mjs";
+import { prepareSolarSystemScene } from "../../../../tools/objects/solar-system-scene.mjs";
+import { publishSolarSystemWorldFrame } from "../../../../tools/objects/solar-system-source.mjs";
+import solarSystemSource from "../source/presentation/solar-system.json" with { type: "json" };
+import { requireBodyFixedSunDirection } from "../../../platform/solar-geometry.mjs";
 import { PREPARED_MERCURY_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import {
   createProjectiveSurfaceRasterPresentation,
@@ -36,62 +27,7 @@ import { validateMercurySourceGroup } from "./source-manifest.mjs";
 
 const LATITUDE_SEGMENTS = 16;
 const LONGITUDE_SEGMENTS = 32;
-const RADIUS = 230;
-// IAU/NASA mean radius of Mercury; fixes the kilometre value of one scene unit.
-const MERCURY_MEAN_RADIUS_KILOMETERS = 2439.7;
-// Wheel dolly: the camera distance scales by exp(delta * step) per wheel
-// delta unit. The full range (ln of the maximum over the minimum distance,
-// about 15.4 now that the dolly reaches the whole planetary system) takes
-// some 26 mouse notches of 100, or about 2600 trackpad pixels; the step is
-// multiplicative, so fine control near the body is kept and the outer
-// system goes by in a few notches.
-const DOLLY_WHEEL_STEP_PER_DELTA = 0.006;
-// The camera never comes closer to the body's centre than this many radii.
-const MINIMUM_DISTANCE_RADII = 1.2;
-// The dolly's far bound over the planetary system's extent from Mercury
-// (Neptune's orbit, about 30.4 AU): far enough that the whole system fits
-// the vertical field of view in landscape with a little to spare, the same
-// rule as the body-orbit bound below.
-const MAXIMUM_DISTANCE_OVER_SYSTEM_EXTENT = 3;
-// The other planets' orbits and markers fade in with the camera's distance
-// over Mercury's own orbit extent: hidden while Mercury's orbit still fills
-// the view (at 1.5 times the extent the orbit spans about half the height),
-// opaque once the camera stands well outside it.
-const PLANETARY_SYSTEM_FADE = Object.freeze({
-  model: "distance-over-orbit-extent-fade",
-  hiddenBelowDistanceOverOrbitExtent: 1.5,
-  visibleAboveDistanceOverOrbitExtent: 2.5,
-});
-// The Sun's marker floor: the shell's 16-pixel Sun tile fades in as the Sun
-// sprite's projected diameter (glow included) falls below it, and holds
-// once the sprite is the size of the tile's core. At the whole-system dolly
-// the true sprite is under half a pixel; this is a deliberate departure
-// from the Sun's true angular size, as for the planet markers.
-const SUN_MARKER = Object.freeze({
-  model: "sprite-diameter-crossfade",
-  fadeStartSpritePixels: 16,
-  fullSpritePixels: 8,
-});
-// The orbit line fades out as the true disc grows past these shares of the
-// viewport height, so the close portrait keeps its clean disc.
-const ORBIT_LINE_FADE = Object.freeze({
-  visibleBelowDiscHeightShare: 0.12,
-  hiddenAboveDiscHeightShare: 0.3,
-});
-// Level of detail as the camera dollies out, keyed on the projected silhouette
-// diameter in CSS pixels. Three retained stages cross-fade, the finer one
-// staying painted beneath the coarser one until that is opaque, so nothing
-// pops: the full geometry; a flat albedo disc under the same lighting overlay
-// (drawn from the billboard lighting atlas, so the row shards stop
-// streaming); and the shared 5-pixel navigation sprite once a crescent can
-// no longer be read.
-const LEVEL_OF_DETAIL = Object.freeze({
-  model: "silhouette-diameter-crossfade",
-  billboardFadeStartDiscPixels: 20,
-  billboardFullDiscPixels: 14,
-  markerFadeStartDiscPixels: 8,
-  markerFullDiscPixels: 4.5,
-});
+const RADIUS = solarSystemSource.bodyRadiusUnits;
 const SOURCE_WIDTH = 2048;
 const SOURCE_HEIGHT = 1024;
 const SOURCE_CELL_WIDTH = SOURCE_WIDTH / LONGITUDE_SEGMENTS;
@@ -104,28 +40,8 @@ const TILE_SIZE = 50;
 const LAYER_ELEVATION = 50;
 const SEAM_BLEED = 0;
 const PROJECTIVE_TEXTURE_RASTER_SCALE = 4;
-const CAMERA_ZOOM = 1.1;
-const TARGET_CAMERA_SCENE_PITCH = MERCURY_CAMERA_POSE.initialScenePitchDegrees;
 const MINIMUM_CONTROL_PITCH = 0;
 const MAXIMUM_CONTROL_PITCH = 89;
-const MAXIMUM_SCENE_PITCH = 65;
-const DEFAULT_CONTROL_PITCH = MAXIMUM_CONTROL_PITCH *
-  (1 - TARGET_CAMERA_SCENE_PITCH / MAXIMUM_SCENE_PITCH);
-const DEFAULT_CAMERA_SCENE_PITCH = TARGET_CAMERA_SCENE_PITCH;
-const DEFAULT_CONTROL_YAW = MERCURY_CAMERA_POSE.defaultControlYawDegrees;
-const RESPONSIVE_FIT = Object.freeze({
-  model: "continuous-aspect-smoothstep",
-  portraitBaseWidthShare: 0.34,
-  narrowPortraitWidthShareGain: 0.08,
-  landscapeWidthShareGain: 0.02,
-  narrowPortraitAspectRatio: 0.46,
-  portraitAspectRatio: 0.75,
-  squareAspectRatio: 1,
-  maximumHeightShare: 0.61,
-  maximumMobilePreviewShare: 0.925,
-  minimumZoom: 0.42,
-  maximumZoom: 2,
-});
 const CAMERA_MILLISECONDS_PER_CONTROL_DEGREE = 1_000;
 const CAMERA_DURATION_MILLISECONDS =
   (MAXIMUM_CONTROL_PITCH - MINIMUM_CONTROL_PITCH) *
@@ -235,103 +151,13 @@ const sectionLeaves = Object.freeze([
   index,
 )));
 const defaultFrame = PREPARED_MERCURY_ASSETS.lighting.defaultFrame;
-// The sky is astrometric: the cube was sampled in ICRF, and this registration
-// (ICRF -> Mercury body-fixed -> ecliptic presentation frame) is the only
-// orientation applied to it. It must match the frame the cube was sampled in.
-const skySceneRegistration = prepareAstrometricSkySceneRegistration("mercury");
-if (PREPARED_MERCURY_STARFIELD.astrometricRegistration?.cubeFrame !==
-      skySceneRegistration.cubeFrame) {
-  throw new Error(
-    "Mercury starfield was not prepared in the astrometric cube frame; " +
-      "run prepare-starfield.mjs first.",
-  );
-}
+const physical = await prepareSolarSystemScene({ ...solarSystemSource,
+  starfield: PREPARED_MERCURY_STARFIELD, sun: PREPARED_MERCURY_SKY_SUN });
 const scene = Object.freeze({
   schema: "cssmercury-prepared-retained-scene@3",
-  camera: Object.freeze({
-    state: Object.freeze({
-      target: Object.freeze([0, 0, 0]),
-      rotX: DEFAULT_CONTROL_PITCH,
-      rotY: DEFAULT_CONTROL_YAW,
-      zoom: CAMERA_ZOOM,
-      distance: 0,
-    }),
-    minimumControlPitchDegrees: MINIMUM_CONTROL_PITCH,
-    maximumControlPitchDegrees: MAXIMUM_CONTROL_PITCH,
-    defaultControlPitchDegrees: DEFAULT_CONTROL_PITCH,
-    defaultControlYawDegrees: DEFAULT_CONTROL_YAW,
-    initialScenePitchDegrees: TARGET_CAMERA_SCENE_PITCH,
-    maximumScenePitchDegrees: MAXIMUM_SCENE_PITCH,
-    minimumZoom: 0.42,
-    maximumZoom: 4,
-    defaultZoom: CAMERA_ZOOM,
-    logicalBodyDiameter: RADIUS * 2,
-    responsiveFit: RESPONSIVE_FIT,
-    sceneScale: CAMERA_ZOOM / TILE_SIZE,
-    horizontalOrbit: true,
-    pitchBounded: false,
-    yawBounded: false,
-    cameraModel: "accumulated-matrix3d",
-    defaultTransform: buildPolyCameraSceneTransform({
-      target: [0, 0, 0],
-      rotX: DEFAULT_CAMERA_SCENE_PITCH,
-      rotY: DEFAULT_CONTROL_YAW,
-      zoom: CAMERA_ZOOM,
-      distance: 0,
-    }),
-    // A true perspective camera. The projection is the one the retained sky
-    // cube and the Sun sprite were prepared for (60 degrees horizontal), so
-    // the body, the Sun, the orbit and the stars share a single camera. The
-    // eye sits on the camera root's axis, `focal` in front of it; framing is
-    // a dolly along that axis, not an image scale.
-    projection: Object.freeze({
-      model: "css-perspective-shared-with-sky",
-      horizontalFovDegrees:
-        PREPARED_MERCURY_STARFIELD.projection.horizontalFovDegrees,
-      focalLengthOverViewportWidth:
-        PREPARED_MERCURY_STARFIELD.projection.focalLengthOverViewportWidth,
-      cssPerspective: PREPARED_MERCURY_STARFIELD.projection.cssPerspective,
-      eyeOnCameraRootAxis: true,
-      nearPlaneClipping: "javascript-before-publication",
-    }),
-    dolly: Object.freeze({
-      model: "multiplicative-wheel-distance",
-      wheelStepPerDelta: DOLLY_WHEEL_STEP_PER_DELTA,
-      minimumDistanceRadii: MINIMUM_DISTANCE_RADII,
-      // Far enough that the whole orbit fits the vertical field of view with
-      // the body at the centre, and a little more. Superseded by the system
-      // bound below while the heliocentric view carries the system.
-      maximumDistanceOverOrbitExtent: 4,
-      maximumDistanceOverSystemExtent: MAXIMUM_DISTANCE_OVER_SYSTEM_EXTENT,
-      // Zoom is a framing alias: the silhouette diameter over the logical
-      // body diameter, times the default zoom, so the material overlay and
-      // the responsive fit keep their prepared meaning.
-      zoomIsSilhouetteFraming: true,
-    }),
-    orbitLineFade: ORBIT_LINE_FADE,
-    levelOfDetail: LEVEL_OF_DETAIL,
-    // Free orbit in every direction: a drag anywhere on screen tumbles the
-    // scene about the screen axes (no twist outside the trackball's disc),
-    // and nothing clamps pitch or yaw. The control pitch anchors above
-    // (minimum, maximum, default) only calibrate the affine control-to-scene
-    // pitch map; `pitchBounded: false` is the measured truth.
-    drag: Object.freeze({ model: "screen-axis-tumble" }),
-    planetarySystem: PLANETARY_SYSTEM_FADE,
-    sunMarker: SUN_MARKER,
-    runtimeGeometryDerivation: false,
-  }),
-  // The body system is placed in the ecliptic presentation frame: ecliptic
-  // north up, the Sun to the left at zero yaw. Body polygons stay in the
-  // body-fixed frame and the spin animation turns them about their own pole.
-  systemTransform: MERCURY_PRESENTATION_FRAME.cssTransform,
-  presentationFrame: Object.freeze({
-    model: MERCURY_PRESENTATION_FRAME.model,
-    sunDirection: MERCURY_PRESENTATION_FRAME.sunDirection,
-    poleDirection: MERCURY_PRESENTATION_FRAME.poleDirection,
-    sunEclipticLatitudeDegrees:
-      MERCURY_PRESENTATION_FRAME.sunEclipticLatitudeDegrees,
-    poleTiltDegrees: MERCURY_PRESENTATION_FRAME.poleTiltDegrees,
-  }),
+  camera: physical.camera,
+  systemTransform: physical.systemTransform,
+  presentationFrame: physical.presentationFrame,
   meshRotationDegrees: MESH_ROTATION_Z,
   bodyTransform: buildPolyMeshTransform({ rotation: [0, 0, MESH_ROTATION_Z] }),
   bodyLeaves: Object.freeze([...leaves, ...innerPolarLeaves]),
@@ -357,22 +183,7 @@ const scene = Object.freeze({
   // the body in the same presentation frame as the body system, with the
   // rest of the planetary system (epoch positions through the frame tree,
   // orbits as true ellipses) in the same frame and units.
-  heliocentricView: prepareHeliocentricView({
-    bodyId: "mercury",
-    presentationFrame: MERCURY_PRESENTATION_FRAME,
-    bodyRadiusUnits: RADIUS,
-    bodyRadiusKilometers: MERCURY_MEAN_RADIUS_KILOMETERS,
-    sunSprite: Object.freeze({
-      imagePixels: PREPARED_MERCURY_SKY_SUN.asset.density1.width,
-      opaqueCoreDiameterShare:
-        PREPARED_MERCURY_SKY_SUN.distanceScaling.spriteOpaqueCoreDiameterShare,
-    }),
-    system: await preparePlanetarySystem({
-      bodyId: "mercury",
-      presentationFrame: MERCURY_PRESENTATION_FRAME,
-      kilometersPerUnit: MERCURY_MEAN_RADIUS_KILOMETERS / RADIUS,
-    }),
-  }),
+  heliocentricView: physical.heliocentricView,
   material: Object.freeze({
     schema: "cssmercury-prepared-material-presentation@2",
     frameCount: PREPARED_MERCURY_ASSETS.lighting.frameCount,
@@ -380,17 +191,7 @@ const scene = Object.freeze({
     defaultFrame,
     runtimeLighting: false,
   }),
-  starfield: Object.freeze({
-    ...PREPARED_MERCURY_STARFIELD,
-    // The sky rides the scene matrix so it crosses the screen exactly like
-    // the Sun; the registration is the ICRF cube's orientation in the scene
-    // (ecliptic presentation) frame, derived from Mercury's pole and epoch.
-    cameraContract: "scene-locked-unbounded-accumulated-matrix3d",
-    sceneRegistration: skySceneRegistration.cssTransform,
-    sceneRegistrationModel: skySceneRegistration.model,
-    sceneRegistrationChain: skySceneRegistration.chain,
-    sceneRegistrationEpoch: skySceneRegistration.epoch,
-  }),
+  starfield: physical.starfield,
   interior: Object.freeze({
     ...PREPARED_MERCURY_ASSETS.interior,
     schema: "cssmercury-prepared-cutaway@1",
@@ -463,6 +264,7 @@ const scene = Object.freeze({
     sunBillboardCount: 1,
     sunCubemapBakeCount: 0,
   }),
+  worldFrame: physical.worldFrame,
 });
 
 await writeFile(
@@ -470,6 +272,7 @@ await writeFile(
   "// Generated by tools/prepare-scene.mjs. Do not edit by hand.\n" +
     `export const PREPARED_MERCURY_SCENE = Object.freeze(${JSON.stringify(scene)});\n`,
 );
+await publishSolarSystemWorldFrame(new URL("../object.json", import.meta.url), physical.worldFrame);
 console.log(`Prepared Mercury retained scene with ${scene.counts.bodyLeafCount} body leaves.`);
 
 function spherePoint(latitude, longitude) {

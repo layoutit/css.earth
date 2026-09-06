@@ -11,6 +11,7 @@ import {writePieces,validPhaseAtlas,phaseFrameFor,validSprite,applySprite,format
 import type {SpriteWithUrl,SystemMarkers,PhaseAtlas} from './heliocentric-sprites.js';
 import type {HeliocentricViewPlan,HeliocentricProjection,HeliocentricProjectionInput,TrailSpans,OrbitSegment} from './heliocentric-view.js';
 import type {ExposureOptions} from "@cssearth/engine";
+import { bindObjectNavigationTarget } from './heliocentric-navigation.js';
 export interface HeliocentricMountOptions {host:HTMLElement;before?:HTMLElement|null;plan:HeliocentricViewPlan;objectId:string;sunImageUrl:string;markerSprite:SpriteWithUrl;systemMarkers?:SystemMarkers|null;labels?:CaptionPlan|null;orbitPoolSpare?:number;systemPoolSpare?:number;}
 export type RetainedHeliocentricView = ReturnType<typeof mountRetainedHeliocentricView>;
 
@@ -94,7 +95,6 @@ export function mountRetainedHeliocentricView({
   // camera. Native body pixels occlude celestial points and text together.
   const celestialRoot = document.createElement("div");
   celestialRoot.className = `planet-heliocentric-sky planet-render-root ${objectId}-celestial-vault`;
-  celestialRoot.ariaHidden = "true";
   host.insertBefore(celestialRoot, before);
 
   const overlay = document.createElement("div");
@@ -126,6 +126,7 @@ export function mountRetainedHeliocentricView({
   systemMarkerGroup.className = "planet-heliocentric-system-markers";
   const systemPieces: HTMLElement[] = [];
   const systemMarkerElements = new Map<string,HTMLElement>();
+  const systemHitTargets = new Map<string, { element: HTMLElement; navigation: ReturnType<typeof bindObjectNavigationTarget> }>();
   const systemPhaseElements = new Map<string,{element:HTMLElement;frame:number}>();
   const publishedPhaseRolls = new Map<string,number>();
   let systemPoolSize = 0;
@@ -168,6 +169,16 @@ export function mountRetainedHeliocentricView({
       element.appendChild(phase);
       systemMarkerGroup.appendChild(element);
       systemMarkerElements.set(body.id, element);
+      // A fixed screen-space target keeps tiny physical discs selectable;
+      // it neither enlarges their painted diameter nor grows during flight.
+      const hit = document.createElement('s');
+      hit.className = 'planet-heliocentric-body-target';
+      hit.dataset.body = body.id;
+      Object.assign(hit.style, { position: 'absolute', top: '50%', left: '50%',
+        display: 'block', width: '20px', height: '20px', margin: '-10px 0 0 -10px',
+        background: 'none', border: '0', borderRadius: '50%', padding: '0', visibility: 'hidden' });
+      systemMarkerGroup.appendChild(hit);
+      systemHitTargets.set(body.id, { element: hit, navigation: bindObjectNavigationTarget(hit, host) });
       systemPhaseElements.set(body.id, { element: phase, frame });
     }
     systemGroup.style.opacity = "0";
@@ -238,6 +249,7 @@ export function mountRetainedHeliocentricView({
     publish({
       rotation,
       distance,
+      bodyCenter,
       focal,
       viewportWidth,
       viewportHeight,
@@ -248,6 +260,7 @@ export function mountRetainedHeliocentricView({
       const projection = projectHeliocentricView(plan, {
         rotation,
         distance,
+        bodyCenter,
         focal,
         viewportWidth,
         viewportHeight,
@@ -371,6 +384,7 @@ export function mountRetainedHeliocentricView({
       if (destroyed) return;
       destroyed = true;
       captions?.destroy();
+      for (const { navigation } of systemHitTargets.values()) navigation.destroy();
       sunRoot.remove();
       overlay.remove();
       celestialRoot.remove();
@@ -420,7 +434,10 @@ export function mountRetainedHeliocentricView({
     const result = writePieces(pieces, projection.orbitSegments, activePieceCount);
     activePieceCount = result.count;
     if (result.overflowed) overflowCount += 1;
-    marker.style.transform = `scale(${formatNumber(Math.max(markerSprite.size,
+    marker.hidden = !projection.body.visible;
+    const [x, y] = projection.body.screen ?? [0, 0];
+    const translation = x === 0 && y === 0 ? '' : `translate(${formatNumber(x)}px, ${formatNumber(y)}px) `;
+    marker.style.transform = `${translation}scale(${formatNumber(Math.max(markerSprite.size,
       2 * projection.body.silhouetteRadius) / markerSprite.size)})`;
   }
 
@@ -439,6 +456,21 @@ export function mountRetainedHeliocentricView({
       for (const segment of body.orbitSegments) segments.push(segment);
       const element = systemMarkerElements.get(body.id)!;
       const state = body.marker;
+      const target = systemHitTargets.get(body.id)!;
+      const selectable = state.visible && state.screen !== null && state.alpha > 0;
+      target.navigation.update(selectable ? body.id : null, labels?.names[body.id]);
+      target.element.style.visibility = selectable ? '' : 'hidden';
+      if (selectable && state.screen) {
+        const hitSize = Math.max(20, state.diameterPx);
+        const size = `${formatNumber(hitSize)}px`;
+        if (target.element.style.width !== size) {
+          target.element.style.width = size;
+          target.element.style.height = size;
+          target.element.style.margin = `${formatNumber(-hitSize / 2)}px 0 0 ${formatNumber(-hitSize / 2)}px`;
+        }
+        target.element.style.transform =
+          `translate(${formatNumber(state.screen[0])}px, ${formatNumber(state.screen[1])}px)`;
+      }
       if (state.visible && state.screen !== null) {
         const scale = state.diameterPx / systemMarkers.bodies[body.id].size;
         const transform = `translate(${formatNumber(state.screen[0])}px, ` +
@@ -496,6 +528,11 @@ export function mountRetainedHeliocentricView({
   // (by brightness, once the system is visible). The pass, the slots and
   // the writes are all bounded by the policy's pool.
   function setMarkerHidden(id:string, element:HTMLElement, hidden:boolean) {
+    if (hidden) {
+      const target = systemHitTargets.get(id);
+      target?.navigation.update(null);
+      if (target) target.element.style.visibility = 'hidden';
+    }
     if (systemMarkerHidden.get(id) === hidden) return;
     element.style.visibility = hidden ? "hidden" : "";
     systemMarkerHidden.set(id, hidden);

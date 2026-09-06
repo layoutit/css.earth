@@ -7,11 +7,11 @@ export interface PreparedIllumination {phaseAngleDegrees:number;illuminatedFract
 export interface PreparedSystemBody {id:string;position:Vector3;semiMajorAxisUnits:number;radiusUnits:number;pointPresentation:PreparedPlanetPoint;orbit:Omit<PreparedOrbit,"semiMajorAxisUnits"|"maximumExtentUnits"> & {labelPresentation:PlanetOrbitLabelPolicy};illumination:PreparedIllumination;}
 export interface PreparedPlanetarySystem {schema:string;observer:string;sun:{position:Vector3};maximumExtentUnits:number;bodies:readonly PreparedSystemBody[];runtimeGeometryDerivation:boolean;epochJdTt?:number;}
 export interface HeliocentricViewPlan {schema:string;bodyId:string;units:{kilometersPerUnit:number;bodyRadiusUnits:number};sun:{direction:Vector3;position:Vector3;distanceUnits:number;radiusUnits:number;sprite:{worldDiameterUnits:number;imagePixels:number}};orbit:PreparedOrbit;system?:PreparedPlanetarySystem;runtimeGeometryDerivation:boolean;}
-export interface HeliocentricProjectionInput {rotation:Matrix3;distance:number;focal:number;viewportWidth:number;viewportHeight:number;principalOffset?:Vector2;visibleRect?:VisibleRect|null;frustumPadding?:number;nearShare?:number;system?:boolean;systemOrbits?:boolean;trailWeights?:Readonly<Record<string,readonly number[]>>|null;}
+export interface HeliocentricProjectionInput {rotation:Matrix3;distance:number;bodyCenter?:Vector3;focal:number;viewportWidth:number;viewportHeight:number;principalOffset?:Vector2;visibleRect?:VisibleRect|null;frustumPadding?:number;nearShare?:number;system?:boolean;systemOrbits?:boolean;trailWeights?:Readonly<Record<string,readonly number[]>>|null;}
 export interface SilhouetteEllipse {radialSemiAxis:number;tangentialSemiAxis:number;radial:Vector2;centre:Vector2;}
-export interface BodyProjection {distance:number;depth:number;offAxisDegrees:number;silhouetteRadius:number;silhouetteDiameter:number;silhouette:SilhouetteEllipse;orthographicRadius:number;translate:Vector3;}
+export interface BodyProjection {distance:number;depth:number;visible:boolean;screen:Vector2|null;offAxisDegrees:number;silhouetteRadius:number;silhouetteDiameter:number;silhouette:SilhouetteEllipse|null;orthographicRadius:number;translate:Vector3;}
 export interface SunProjection {visible:boolean;classification:'behind-camera'|'outside-viewport'|'behind-body'|'fully-visible'|'partially-visible';depth:number;centerNdc:Vector2|null;eye?:Vector3;screen?:Vector2;spriteDiameter?:number;discDiameter?:number;spriteScale?:number;}
-export interface PointProjection {visible:boolean;classification:'behind-camera'|'outside-viewport'|'behind-body'|'visible';depth:number;screen:Vector2|null;}
+export interface PointProjection {visible:boolean;classification:'behind-camera'|'outside-viewport'|'behind-body'|'visible'|'intersects-camera-plane';depth:number;screen:Vector2|null;}
 export interface SystemBodyProjection {id:string;marker:PointProjection & {diameterPx:number;alpha:number;magnitude:number;labelPriority:number;physicalDiameterPx:number;photometricRadiusPx:number};orbitSegments:readonly OrbitSegment[];}
 export type OrbitSegment = readonly number[];
 export interface HeliocentricProjection {focal:number;distance:number;near:number;viewportWidth:number;viewportHeight:number;principalOffset:Vector2;body:BodyProjection;sun:SunProjection;orbitSegments:readonly OrbitSegment[];system:{sun:PointProjection;bodies:readonly SystemBodyProjection[]}|null;}
@@ -159,6 +159,7 @@ export function validatePreparedPlanetarySystem(system: PreparedPlanetarySystem,
 export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   rotation,
   distance,
+  bodyCenter: explicitBodyCenter,
   focal,
   viewportWidth,
   viewportHeight,
@@ -183,7 +184,9 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
       !positive(viewportWidth) || !positive(viewportHeight) ||
       !Array.isArray(principalOffset) || principalOffset.length !== 2 ||
       principalOffset.some((value) => !Number.isFinite(value)) ||
-      (visibleRect !== null && !validVisibleRect(visibleRect))) {
+      (visibleRect !== null && !validVisibleRect(visibleRect)) ||
+      (explicitBodyCenter !== undefined && (!vector(explicitBodyCenter) ||
+        Math.abs(magnitude(explicitBodyCenter) - distance) > 1e-9 * distance))) {
     throw new TypeError("Heliocentric projection arguments are invalid.");
   }
   const bodyRadius = plan.units.bodyRadiusUnits;
@@ -200,7 +203,7 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   const axis = offAxisFrame(focal, principalOffset);
   // The body's centre in eye space: `distance` along the off-axis direction
   // that projects to the root's centre.
-  const bodyCenter = [
+  const bodyCenter = explicitBodyCenter ?? [
     distance * axis.sinTheta * axis.radial[0],
     distance * axis.sinTheta * axis.radial[1],
     -distance * axis.cosTheta,
@@ -223,13 +226,30 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   // ellipse a little wider than the orthographic disc and, off-axis, pushed
   // outward from where the centre projects. The material overlay and the drag
   // trackball follow it.
-  const silhouette = silhouetteEllipse(bodyRadius, focal, distance, axis);
+  const bodyDepth = explicitBodyCenter === undefined ? distance * axis.cosTheta : -bodyCenter[2];
+  const bodyScreen = explicitBodyCenter === undefined ? [0, 0]
+    : bodyDepth > 0 ? project(bodyCenter).slice(0, 2) : null;
+  let silhouette: SilhouetteEllipse | null = null;
+  if (explicitBodyCenter === undefined) silhouette = silhouetteEllipse(bodyRadius, focal, distance, axis);
+  else if (bodyDepth > bodyRadius && bodyScreen !== null) {
+    const radialLength = Math.hypot(bodyCenter[0], bodyCenter[1]);
+    const ellipse = silhouetteEllipse(bodyRadius, focal, distance, {
+      radial: radialLength > 0 ? [bodyCenter[0] / radialLength, bodyCenter[1] / radialLength] : [0, 0],
+      sinTheta: radialLength / distance, cosTheta: bodyDepth / distance, tanTheta: radialLength / bodyDepth,
+    });
+    silhouette = Object.freeze({ ...ellipse,
+      centre: [bodyScreen[0] + ellipse.centre[0], bodyScreen[1] + ellipse.centre[1]],
+    });
+  }
   const body = Object.freeze({
     distance,
-    depth: distance * axis.cosTheta,
-    offAxisDegrees: Math.asin(axis.sinTheta) * 180 / Math.PI,
-    silhouetteRadius: silhouette.tangentialSemiAxis,
-    silhouetteDiameter: 2 * silhouette.tangentialSemiAxis,
+    depth: bodyDepth,
+    visible: silhouette !== null,
+    screen: bodyScreen,
+    offAxisDegrees: explicitBodyCenter === undefined ? Math.asin(axis.sinTheta) * 180 / Math.PI
+      : Math.acos(Math.max(-1, Math.min(1, bodyDepth / distance))) * 180 / Math.PI,
+    silhouetteRadius: silhouette?.tangentialSemiAxis ?? 0,
+    silhouetteDiameter: 2 * (silhouette?.tangentialSemiAxis ?? 0),
     silhouette,
     orthographicRadius: focal * bodyRadius / distance,
     // Camera-root coordinates of the body's centre: the eye sits at the
@@ -363,7 +383,6 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   let systemProjection: HeliocentricProjection["system"] = null;
   if (system && plan.system) {
     const factor = screenFactor(viewportWidth, viewportHeight);
-    const radiansPerPixel = 2 * Math.atan(viewportHeight / (2 * focal)) / viewportHeight;
     const projectBody = (body:PreparedSystemBody) => {
       const marker = projectPoint(body.position);
       const eye = toEye(body.position);
@@ -372,10 +391,14 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
       const cosinePhase = -dot(light, eye) / (magnitude(light) * centreDistance);
       const appearance = planetPointPresentation(body.pointPresentation, centreDistance,
         Math.acos(Math.max(-1, Math.min(1, cosinePhase))), factor);
-      const trueAngle = centreDistance > body.radiusUnits ? 2 * Math.asin(body.radiusUnits / centreDistance) : Math.PI;
-      const physicalDiameterPx = trueAngle / radiansPerPixel;
+      // The same sphere tangent cone as focused geometry: a uniform angular
+      // pixels-per-radian approximation changes size when focus transfers.
+      const discInFront = marker.depth > body.radiusUnits;
+      const physicalDiameterPx = discInFront
+        ? 2 * focal * body.radiusUnits / Math.sqrt(marker.depth ** 2 - body.radiusUnits ** 2) : 0;
       return Object.freeze({
         ...marker,
+        ...(!discInFront && marker.visible ? { visible: false, classification: 'intersects-camera-plane' as const } : {}),
         // A planet's disc follows its physical angular diameter. Brightness
         // changes opacity, never the body's size; only unresolved discs get
         // the common 1.2px visibility floor.

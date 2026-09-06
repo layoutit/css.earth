@@ -16,16 +16,44 @@
         "lenses",
         "starfield",
         "sky-sun",
+        "system-markers",
         "scene",
         "controls",
         "presentation",
         "runtime-assets"
       ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        68657884424.088135,
+        -75424036034.70352,
+        -38282374717.529724
+      ],
+      "presentationToReference": [
+        0.6309251832297718,
+        -6.591949208711867e-17,
+        0.7758436783054167,
+        -0.7118226578149928,
+        0.39777715593191376,
+        0.5788625381210273,
+        -0.30861289180408336,
+        -0.9174820620691817,
+        0.25096762499096015
+      ],
+      "orbitUpReference": [
+        6.591949208711867e-17,
+        -0.39777715593191376,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 24402.58064516129,
+      "bodyRadiusM": 6051840
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/venus.json",
-    "sha256": "6addbd3cfe5e1eed482392076250e049ac855437624dbbe738d2c59aea90c071"
+    "sha256": "e2edec0f1caeeccfadc90702797545148bf810085149d3937793f780b97e3274"
   }
 }

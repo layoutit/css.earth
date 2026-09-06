@@ -14,12 +14,12 @@ export const OBJECTS = defineObjects([
     "NASA, USGS, OpenSpace, and HYG", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(mercuryDescriptor);
-    }),
+    }, mercuryDescriptor.properties.worldFrame),
   object("venus", "Venus", "planet", "#d6aa69", 0.72,
     "NASA, USGS, OpenSpace, and HYG", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(venusDescriptor);
-    }),
+    }, venusDescriptor.properties.worldFrame),
   object("earth", "Earth", "planet", "#5b82a7", 1,
     "NASA, JPL, OpenSpace, and HYG", async () => {
       const { mountEarthClient } = await import(
@@ -84,7 +84,7 @@ export function requireObject(id) {
   return objectRecord;
 }
 
-function object(id, name, classification, color, distanceAu, authority, loadScene) {
+function object(id, name, classification, color, distanceAu, authority, loadScene, worldFrame = null) {
   return defineObject({
     id,
     name,
@@ -93,6 +93,7 @@ function object(id, name, classification, color, distanceAu, authority, loadScen
     distanceAu,
     route: `/${id}/`,
     loadScene,
+    worldFrame,
     description:
       `An interactive retained-DOM ${name} visualization prepared from ${authority} source material.`,
   });

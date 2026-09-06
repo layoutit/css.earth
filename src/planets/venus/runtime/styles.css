@@ -12,7 +12,6 @@
   );
   position: absolute;
   inset: 0;
-  scale: calc(var(--venus-shell-scale) / var(--planet-viewport-zoom-divisor));
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   pointer-events: none;
@@ -100,8 +99,7 @@
   height: 512px;
   background-image: url("/scenes/venus/venus-material@2x.webp");
   background-size: 4096px 2048px;
-  transform: translate(-50%, -50%) rotate(var(--venus-light-roll, 0deg))
-    scale(var(--venus-camera-zoom, 1));
+  transform: translate(-50%, -50%) rotate(var(--venus-light-roll, 0deg));
   transform-origin: 50% 50%;
 }
 
