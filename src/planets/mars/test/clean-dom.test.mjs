@@ -7,10 +7,10 @@ import { PREPARED_MARS_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_MARS_MOONS } from "../runtime/preparedMoons.mjs";
 
 test("keeps the Mars scene as one fixed retained PolyCSS tree", async () => {
-  const [client, css, overlay] = await Promise.all([
+  const [client, css, layout] = await Promise.all([
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
-    readFile(new URL("../site/MarsOverlay.astro", import.meta.url), "utf8"),
+    readFile(new URL("../../../../site/layouts/PlanetLayout.astro", import.meta.url), "utf8"),
   ]);
 
   assert.equal(PREPARED_MARS_SCENE.leaves.length, 516);
@@ -51,6 +51,6 @@ test("keeps the Mars scene as one fixed retained PolyCSS tree", async () => {
   assert.doesNotMatch(css,
     /filter\s*:|mask(?:-image)?\s*:|clip-path\s*:|mix-blend-mode\s*:|gradient\(/u);
   assert.doesNotMatch(css, /text-shadow\s*:/u);
-  assert.doesNotMatch(overlay, /<\w+/u);
+  assert.match(layout, /class="planet-input-surface"/u);
   assert.doesNotMatch(css, /mars-input-surface/u);
 });
