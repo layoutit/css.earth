@@ -138,6 +138,7 @@ export async function preparePlanetarySystem({
     ZERO,
     M_PER_AU,
     M_PER_KM,
+    FRAME_EXIT_BALL_UNITS,
     BODIES,
     DWARF_PLANET_IDS,
     dwarfPlanetElements,
@@ -157,7 +158,20 @@ export async function preparePlanetarySystem({
     return scale(toSun, -BODY_ORBITS[id].heliocentricDistanceAu);
   };
 
-  // The frame tree: the Sun in au, every planet in km inside it. The tree's
+  const satelliteObserver = ![...bodies, ...dwarfPlanets].includes(bodyId);
+  const observerUnitMeters = satelliteObserver ? M_PER_KM / 10 : M_PER_KM;
+  const parent = satelliteObserver ? BODY_ORBITS[bodyId].centerBodyId : null;
+  if (satelliteObserver && !bodies.includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
+  const observerPositionKm = satelliteObserver ? scale(
+    applyMatrix(BODY_FIXED_TO_ICRF_MATRICES[bodyId], BODY_ORBITS[bodyId].centerPositionAu),
+    -ASTRONOMICAL_UNIT_KILOMETERS) : null;
+  // Enclose the moon's fixed position AND its exit ball. Keep kilometre units
+  // where they fit; wider satellite orbits require a coarser parent frame.
+  // Rounding up to whole kilometres avoids a floating-point boundary equality.
+  const parentUnitMeters = satelliteObserver ? M_PER_KM * Math.max(1, Math.ceil(
+    (magnitude(observerPositionKm) + FRAME_EXIT_BALL_UNITS * observerUnitMeters / M_PER_KM) / FRAME_EXIT_BALL_UNITS)) : M_PER_KM;
+
+  // The frame tree: the Sun in au, planets in their prepared local units. The tree's
   // own invariants (a child's exit ball inside its parent's, a body's capture
   // ball inside its own exit ball) are checked on `add`.
   const tree = new FrameTree();
@@ -166,7 +180,7 @@ export async function preparePlanetarySystem({
     tree.add(fixedFrame(
       id,
       "sun",
-      M_PER_KM,
+      id === parent ? parentUnitMeters : M_PER_KM,
       heliocentricIcrfAu(id),
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));
@@ -182,16 +196,11 @@ export async function preparePlanetarySystem({
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));
   }
-  const satelliteObserver = ![...bodies, ...dwarfPlanets].includes(bodyId);
-  const observerUnitMeters = satelliteObserver ? M_PER_KM / 10 : M_PER_KM;
   if (satelliteObserver) {
-    const parent = BODY_ORBITS[bodyId].centerBodyId;
-    if (!bodies.includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
-    const toParent = applyMatrix(BODY_FIXED_TO_ICRF_MATRICES[bodyId], BODY_ORBITS[bodyId].centerPositionAu);
-    // A moon uses 100 m units under its parent's kilometre frame, with
+    // A moon uses 100 m units under its parent's prepared frame, with
     // enough capture radius for a resolved satellite.
     tree.add(fixedFrame(bodyId, parent, observerUnitMeters,
-      scale(toParent, -ASTRONOMICAL_UNIT_KILOMETERS), BODIES[bodyId].meanRadiusKm * M_PER_KM));
+      scale(observerPositionKm, M_PER_KM / parentUnitMeters), BODIES[bodyId].meanRadiusKm * M_PER_KM));
   }
   const epoch = SOLAR_GEOMETRY_EPOCH_JD_TT;
   // ICRF offset from the observer in km, resolved through the tree: the two

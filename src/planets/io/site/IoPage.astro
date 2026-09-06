@@ -1,0 +1,12 @@
+---
+import "../runtime/styles.css";
+import "../../../../site/planet-shell.css";
+import PlanetLayout from "../../../../site/layouts/PlanetLayout.astro";
+import IoHead from "./IoHead.astro";
+import IoPanel from "./IoPanel.astro";
+---
+
+<PlanetLayout objectId="io">
+  <IoHead slot="planet-head" />
+  <IoPanel slot="planet-ui" />
+</PlanetLayout>

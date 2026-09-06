@@ -1,0 +1,160 @@
+{
+  "schema": "cssio-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "usgs-enhanced-global-1km",
+      "path": "io-color-1km.tif",
+      "expectedBytes": 196637696,
+      "expectedSha256": "337778617ffa6a3cdb5d36375265222ef37410db9495ca5ddbe7bc6786276d14",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif",
+      "credit": "NASA/JPL/USGS",
+      "license": "Public domain USGS imagery",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Download the published GeoTIFF and verify pinned bytes before preparation.",
+      "redistribution": "Reacquirable source binary excluded from Git; prepared textures retain credits.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 11445,
+      "height": 5723,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1821460,
+        "centerLongitudeDegrees": 0
+      },
+      "coverage": "GDAL_NODATA=0; additionally withhold |latitude| >= 85 degrees because USGS documents interpolated polar color within approximately 5 degrees of either pole. Retain observed monochrome there."
+    },
+    {
+      "id": "usgs-normal-global-1km",
+      "path": "io-global-1km.tif",
+      "expectedBytes": 65546342,
+      "expectedSha256": "cf65a0323aac9c4c9eb582aa7b7ce0d36be8e445316fa6dba49ab5647b63584c",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif",
+      "credit": "NASA/JPL/USGS",
+      "license": "Public domain USGS imagery",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Download the published GeoTIFF and verify pinned bytes before preparation.",
+      "redistribution": "Reacquirable source binary excluded from Git; prepared textures retain credits.",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 11445,
+      "height": 5723,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1821460,
+        "centerLongitudeDegrees": 0
+      },
+      "coverage": "GeoTIFF GDAL_NODATA=0. Preserve valid dark pixels; withhold resampled no-data boundaries."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Run node src/planets/io/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Pinned shared shell title font.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "path": "system/jupiter-hubble.png",
+      "expectedBytes": 1166501,
+      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
+      "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
+      "credit": "NASA, ESA, STScI, and Amy Simon",
+      "license": "NASA media usage guidelines and credited partner rights",
+      "id": "jupiter-hubble-parent",
+      "bodyId": "jupiter",
+      "consumers": [
+        "parent-marker"
+      ],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
+      "redistribution": "Credited prepared observational image; source binary excluded from Git."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "path": "presentation/title-mark.mjs",
+      "expectedBytes": 1209,
+      "expectedSha256": "06efee359f701ed00793979ff4812c25dec62e210b3b186d65e077691efde492",
+      "generator": "src/planets/io/tools/prepare-content.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 845,
+      "expectedSha256": "69c384abcd20037adbb5ef192c070836650f36c400b61a0d0ea87976cccad11e",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2162,
+      "expectedSha256": "10739160798e9b6be2756a2320ffa2102b0cf3557518866c61e58fab27fcc239",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 592,
+      "expectedSha256": "0c4fb5173f68c690a47956dfff9674c1eb85a4ed39e1ad0766bfd22c498437e4",
+      "purpose": "Shared astrometric sky source and licensing."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 67008
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 16539
+      Lines   = 8270
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = UnsignedByte
+      ByteOrder  = Lsb
+      Base       = -0.0029527570999999999
+      Multiplier = 0.0059055141000000002
+    End_Group
+    ^Core     = Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif
+  End_Object
+
+  Group = Instrument
+    TargetName = Ganymede
+  End_Group
+
+  Group = BandBin
+    FilterName   = N/A
+    Center       = 1
+    Width        = 1
+    OriginalBand = 1
+  End_Group
+
+  Group = Mapping
+    ProjectionName     = SimpleCylindrical
+    CenterLongitude    = 180.0
+    TargetName         = Ganymede
+    EquatorialRadius   = 2632344.97069999995 <meters>
+    PolarRadius        = 2632344.97069999995 <meters>
+    LatitudeType       = Planetocentric
+    LongitudeDirection = PositiveWest
+    LongitudeDomain    = 360
+    MinimumLatitude    = -90.0
+    MaximumLatitude    = 90.0
+    MinimumLongitude   = 0.0
+    MaximumLongitude   = 360.0
+    UpperLeftCornerX   = -8270555.67541799974 <meters>
+    UpperLeftCornerY   = 4135277.83770899987 <meters>
+    PixelResolution    = 1000.06719199999998 <meters/pixel>
+    Scale              = 45.9399999999999977 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1770             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 1033
+  ^History  = Ganymede_Voyager_GalileoSSI_global_mosaic_1km.History.IsisCube
+End_Object
+
+Object = OriginalLabel
+  Name           = IsisCube
+  StartByte      = 1
+  Bytes          = 3018
+  ^OriginalLabel = Ganymede_Voyager_GalileoSSI_global_mosaic_1km.OriginalLabel-
+                   .IsisCube
+End_Object
+End

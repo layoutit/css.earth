@@ -1,0 +1,23 @@
+.example-stage > :is(.callisto-sun-camera, .callisto-camera, .callisto-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+.callisto-sun-camera, .callisto-camera { z-index: 1; transform-style: preserve-3d; }
+.callisto-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.callisto-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+.callisto-body > s {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; transform-origin: 0 0; backface-visibility: hidden;
+  background-image: var(--callisto-surface-image); background-repeat: no-repeat;
+}
+.callisto-body > .callisto-polar { background-image: var(--callisto-poles-image); }
+.callisto-material-root { z-index: 3; --callisto-billboard-opacity: 0; }
+.callisto-material, .callisto-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+.callisto-material { background-repeat: no-repeat; transform: rotate(var(--callisto-light-roll, 0deg)); }
+.callisto-billboard { border-radius: 50%; background-color: var(--callisto-billboard-color); opacity: var(--callisto-billboard-opacity); }
+.planet-stage[data-lod="billboard"] .callisto-scene, .planet-stage[data-lod="marker"] .callisto-scene { visibility: hidden; }
+.planet-stage[data-lod="marker"] .callisto-billboard { opacity: 0; }
+
+.planet-stage.callisto-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }
