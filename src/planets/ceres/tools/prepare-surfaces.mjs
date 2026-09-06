@@ -7,9 +7,11 @@ import { createSourceManifest } from "../../../platform/source-manifest.mjs";
 import { packProjectiveSurfaceRaster } from "../../../platform/projective-surface-raster.mjs";
 import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from "../../../platform/prepare-missing-coverage.mjs";
 import { reprojectSolidBodySurfaceRaster } from "../../../platform/prepare-solid-body-surface.mjs";
+import { SCIENCE_LENSES } from "../science-lenses.mjs";
+import { colorForValue, loadScienceSurface, paintScienceSurface } from "./science-surfaces.mjs";
 
 // The same 16-band, 32-pixel-gutter layout as Mercury's canonical 4K surface.
-// This prepares textures only; it does not create a runtime or register Ceres.
+// Both photographed and scientific rasters use the same prepared geometry.
 const width = 4096, height = 2048, bandCount = 16, gutter = 32;
 const sourceRoot = resolve(import.meta.dirname, "../source");
 const publicRoot = resolve(import.meta.dirname, "../../../../public/scenes/ceres");
@@ -33,6 +35,24 @@ for (const entry of source.manifest.inputs.filter(input => input.consumers.inclu
     .removeAlpha().raw().toBuffer();
   const missing = sampleCoverage(sourceMissing, sourceRaster.info, width, height);
   const display = paintMissingCoverage(rgb, { width, height, channels: 3 }, missing);
+  await prepareSurface(entry, display);
+}
+for (const lens of SCIENCE_LENSES) {
+  const entry = source.manifest.inputs.find(input => input.lensId === lens.id);
+  const raster = await loadScienceSurface(sourceRoot, lens);
+  const { rgb, missing } = paintScienceSurface(raster, lens, width, height);
+  const scale = Buffer.alloc(256 * 3);
+  for (let x = 0; x < 256; x++) scale.set(colorForValue(lens.minimum + x / 255 * (lens.maximum - lens.minimum), lens), x * 3);
+  const legend = await emit(`ceres-${lens.id}-legend.webp`, sharp(scale, { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: "fill" }));
+  await prepareSurface({ ...entry, label: lens.label, falseColor: true }, rgb,
+    { scientific: true, legend, missingPixels: missing.reduce((sum, value) => sum + value, 0) });
+}
+await writeFile(resolve(preparedRoot, "surfaces.json"), JSON.stringify({
+  objectId: "ceres", surfaces,
+}, null, 2) + "\n");
+console.log(`Prepared ${surfaces.length} Ceres surfaces: public/scenes/ceres; metadata: src/planets/ceres/.prepared/surfaces.json`);
+
+async function prepareSurface(entry, display, extra = {}) {
   const rgba = await sharp(display, { raw: { width, height, channels: 3 } }).ensureAlpha().raw().toBuffer();
   const projected = reprojectSolidBodySurfaceRaster(rgba, { width, height, latitudeSegments: bandCount });
   const packed = packProjectiveSurfaceRaster(projected, { width, height, bandCount, gutter });
@@ -48,13 +68,9 @@ for (const entry of source.manifest.inputs.filter(input => input.consumers.inclu
     id: entry.lensId, label: entry.label, falseColor: entry.falseColor,
     source: { id: entry.id, sha256: entry.expectedSha256, width: entry.width, height: entry.height },
     projection: entry.projection, coverage: entry.coverage,
-    map, surface, thumbnail, layout,
+    map, surface, thumbnail, layout, ...extra,
   });
 }
-await writeFile(resolve(preparedRoot, "surfaces.json"), JSON.stringify({
-  objectId: "ceres", surfaces,
-}, null, 2) + "\n");
-console.log(`Prepared ${surfaces.length} Ceres surfaces: public/scenes/ceres; metadata: src/planets/ceres/.prepared/surfaces.json`);
 
 async function emit(filename, pipeline) {
   // Lossless encoding preserves the resampled pixels through packing and delivery.

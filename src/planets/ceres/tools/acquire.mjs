@@ -19,7 +19,7 @@ if (!process.argv.includes("--verify-only")) {
       if (error.code !== "ENOENT") throw error;
     }
     console.log(`Downloading ${entry.path} (${entry.expectedBytes} bytes)`);
-    const response = await fetch(entry.origin, { signal: AbortSignal.timeout(60_000) });
+    const response = await fetch(entry.origin, { signal: AbortSignal.timeout(180_000) });
     if (!response.ok || !response.body) throw new Error(`Ceres source HTTP ${response.status}: ${entry.origin}`);
     const chunks = [];
     let size = 0;

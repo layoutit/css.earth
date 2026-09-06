@@ -48,3 +48,25 @@ directional illumination of the spherical model. With Shadows off, a fixed
 curvature overlay gives the globe depth. Neither mode reconstructs unlit albedo
 or physically relights the photographed crater shadows. This limitation is
 explained in both lens descriptions.
+
+## Elevation lens
+
+The [DLR/USGS Dawn HAMO DTM](https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m)
+contains 21,600 × 10,800 signed 16-bit samples at 60 pixels/degree. Values are
+meters above a 470 km sphere, including the body's overall shape; they are not
+heights above a fitted ellipsoid. The GeoTIFF is centered on 180°E and its left
+edge is 0°E. No-data is −32768. Preparation samples the published model without
+filling missing values and maps heights to a fixed −30 to +20 km color scale.
+
+The publisher describes approximately 98% surface coverage and interpolation
+in permanently shadowed polar areas, but supplies no validity mask separating
+interpolation from stereo samples. To avoid showing that fill as observed
+terrain, the lens withholds both caps at |latitude| ≥60°. This is our conservative
+display boundary, not the source's observation boundary. The shared gray grid
+marks withheld or missing samples; no terrain is invented.
+
+The map and its matching numeric legend are prepared together. The surface uses
+the existing Ceres band/pole projection. Generic prepared material selection
+disables lighting for Elevation, even when Shadows is on, and restores lighting
+when returning to a photographic lens. No runtime controller or runtime
+scientific-data parser is added.

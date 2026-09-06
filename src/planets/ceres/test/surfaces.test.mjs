@@ -39,8 +39,8 @@ test("downloaded Dawn rasters match their pinned sources and reject corruption",
 });
 
 test("observed map pixels remain intact, gaps use the shared grid, and bands retain seam gutters", async () => {
-  assert.deepEqual(prepared.surfaces.map(s => s.id), source.manifest.inputs.filter(input => input.consumers.includes("surfaces")).map(s => s.lensId));
-  for (const lens of prepared.surfaces) {
+  assert.deepEqual(prepared.surfaces.map(s => s.id), source.manifest.inputs.filter(input => input.lensId).map(s => s.lensId));
+  for (const lens of prepared.surfaces.filter(lens => !lens.scientific)) {
     const entry = source.manifest.inputs.find(input => input.lensId === lens.id);
     const decoded = {};
     for (const kind of ["map", "surface", "thumbnail"]) {

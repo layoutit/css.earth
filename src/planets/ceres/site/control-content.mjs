@@ -28,6 +28,27 @@ export const objectControls = Object.freeze({
         "description": "False color · gray grid marks gaps",
         "title": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
         "thumbnailUrl": "/scenes/ceres/ceres-enhanced-thumbnail.webp"
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Dawn stereo model · polar caps withheld",
+        "title": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+        "thumbnailUrl": "/scenes/ceres/ceres-elevation-thumbnail.webp",
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "src": "/scenes/ceres/ceres-elevation-legend.webp",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−30",
+            "−5",
+            "20"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m"
+        }
       }
     ]
   },
