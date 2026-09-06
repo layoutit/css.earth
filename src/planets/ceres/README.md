@@ -13,7 +13,7 @@ pnpm dev
 # Open http://127.0.0.1:4210/ceres/
 ```
 
-The Ceres runtime inventory contains 41 files, about 67.6 MB. Other objects need
+The Ceres runtime inventory contains 41 files, about 75.8 MB. Other objects need
 their own assets if opened. Ceres does not require Earth's global geometry.
 
 To reproduce Ceres from its pinned source inputs:
@@ -40,9 +40,10 @@ The lens descriptions and source documentation explain these limitations.
 
 Source details and attribution are in [SOURCE.md](SOURCE.md) and [NOTICE.md](NOTICE.md).
 
-The **Elevation** lens adds terrain height from Dawn's stereo model, with a
-numeric color scale. It disables globe lighting so map colors remain comparable
-to the legend. The photographic lenses keep their existing lighting behavior.
+The **Elevation** lens shows terrain height from Dawn's stereo model. Color
+encodes height; prepared northwest shading reveals crater walls and ridges.
+The numeric legend shows the unshaded color scale. The lens disables the separate
+globe lighting; photographic lenses keep their existing lighting behavior.
 
 Elevation is restricted to 60°S–60°N as a conservative display policy: its
 publisher interpolated polar gaps without supplying a fill mask. Gray grids

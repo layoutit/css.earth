@@ -65,7 +65,15 @@ terrain, the lens withholds both caps at |latitude| ≥60°. This is our conserv
 display boundary, not the source's observation boundary. The shared gray grid
 marks withheld or missing samples; no terrain is invented.
 
-The map and its matching numeric legend are prepared together. The surface uses
+Preparation also derives terrain shading from neighboring model heights at the
+delivered 4096 × 2048 grid spacing. Central differences account for Ceres's
+470 km radius and longitude spacing at each latitude. Fixed northwest light at
+45° altitude and 25% ambient light reveal slopes without height exaggeration.
+Level terrain retains its base color; shading changes brightness, so the legend
+shows the unshaded height scale. Samples beside missing or withheld neighbors
+keep their base color; neither heights nor coverage are interpolated to shade gaps.
+
+The map and its numeric legend are prepared together. The surface uses
 the existing Ceres band/pole projection. Generic prepared material selection
 disables lighting for Elevation, even when Shadows is on, and restores lighting
 when returning to a photographic lens. No runtime controller or runtime

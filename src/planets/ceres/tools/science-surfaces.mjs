@@ -10,6 +10,25 @@ export function colorForValue(value, { minimum, maximum, colors }) {
   return a.map((v, c) => Math.round(v + (b[c] - v) * fraction));
 }
 
+// Cartographic light: northwest, 45° above the local horizon, no height
+// exaggeration. Slopes use Ceres's 470 km reference sphere, not Earth units.
+export function terrainBrightness(source, longitude, latitude, step) {
+  const west = source.sample((longitude - step + 360) % 360, latitude);
+  const east = source.sample((longitude + step) % 360, latitude);
+  const north = source.sample(longitude, latitude + step);
+  const south = source.sample(longitude, latitude - step);
+  // Keep the original height color at a coverage edge; never estimate a
+  // missing neighbor or shade the gray coverage indicator.
+  if ([west, east, north, south].some(value => value === null)) return 1;
+  const distance = 470000 * step * Math.PI / 180;
+  const eastSlope = (east - west) / (2 * distance * Math.cos(latitude * Math.PI / 180));
+  const northSlope = (north - south) / (2 * distance);
+  const illumination = Math.max(0, (0.5 * eastSlope - 0.5 * northSlope + Math.SQRT1_2)
+    / Math.hypot(eastSlope, northSlope, 1));
+  // Ambient light keeps steep slopes readable; level terrain keeps its color.
+  return (0.25 + 0.75 * illumination) / (0.25 + 0.75 * Math.SQRT1_2);
+}
+
 // Read the pinned DLR elevation product at preparation time.
 export async function loadScienceSurface(root, lens) {
   const path = resolve(root, lens.path);
@@ -43,10 +62,12 @@ export function paintScienceSurface(source, lens, width, height) {
   // One finite color lookup; no per-pixel hex parsing or runtime source work.
   const palette = Array.from({ length: 1024 }, (_, i) => colorForValue(lens.minimum + i / 1023 * (lens.maximum - lens.minimum), lens));
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-    const i = y * width + x, value = source.sample((x + 0.5) / width * 360, 90 - (y + 0.5) / height * 180);
+    const longitude = (x + 0.5) / width * 360, latitude = 90 - (y + 0.5) / height * 180;
+    const i = y * width + x, value = source.sample(longitude, latitude);
     if (value === null) { missing[i] = 1; continue; }
     const color = palette[Math.round(Math.max(0, Math.min(1, (value - lens.minimum) / (lens.maximum - lens.minimum))) * 1023)];
-    rgb.set(color, i * 3);
+    const brightness = terrainBrightness(source, longitude, latitude, 360 / width);
+    for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.min(255, Math.round(color[c] * brightness));
   }
   return { rgb: paintMissingCoverage(rgb, { width, height, channels: 3 }, missing), missing };
 }
