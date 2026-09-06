@@ -11,7 +11,7 @@ import {
   validatePerspectiveCameraPlan,
 } from "./perspective-dolly.mjs";
 import { projectHeliocentricView } from "./heliocentric-view.mjs";
-import PREPARED_MERCURY_SCENE from "../../objects/preparation/mercury/scene.json" with {type: "json"};
+import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
 
 const levelOfDetail = Object.freeze({
   model: "silhouette-diameter-crossfade",

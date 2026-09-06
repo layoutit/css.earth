@@ -19,10 +19,10 @@ export async function loadPackagedObject(descriptorInput) {
     async read(reference) {
       // Vite emits the prepared bytes as assets. The inventory is used only
       // during mount; loading the registry never requests renderer content.
-      const preparedAssets = import.meta.glob('../objects/prepared/*.json', {
+      const preparedAssets = import.meta.glob('../src/planets/*/prepared/object.json', {
         query: '?url', import: 'default', eager: true,
       });
-      const url = preparedAssets[`../objects/${reference}`];
+      const url = preparedAssets[`../src/planets/${descriptorInput.id}/${reference}`];
       if (typeof url !== 'string') throw new Error(`Prepared object asset is not available: ${reference}.`);
       const response = await fetch(url);
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);

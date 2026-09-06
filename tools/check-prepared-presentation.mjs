@@ -131,10 +131,16 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }) {
     if (relative(directory, path).startsWith('../')) throw new TypeError('Authored source escapes its object package.');
     if (createHash('sha256').update(await readText(path)).digest('hex') !== source.sha256) throw new TypeError(`Authored source digest drifted: ${source.path}.`);
   }
-  const payloadPath = resolve(root, 'objects', reference.url), payloadBytes = await readText(payloadPath);
+  const preparedDirectory = resolve(directory, 'prepared');
+  const payloadPath = resolve(directory, reference.url);
+  if (reference.url !== 'prepared/object.json' || payloadPath !== resolve(preparedDirectory, 'object.json')) {
+    throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
+  }
+  const payloadBytes = await readText(payloadPath);
   if (createHash('sha256').update(payloadBytes).digest('hex') !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
-  const payload = JSON.parse(payloadBytes), runtimePath = resolve(root, `objects/preparation/${objectId}/runtime.json`);
-  const runtime = JSON.parse(await readText(runtimePath)), scene = JSON.parse(await readText(resolve(root, `objects/preparation/${objectId}/scene.json`)));
+  const payload = JSON.parse(payloadBytes);
+  const runtimePath = resolve(preparedDirectory, 'runtime.json');
+  const runtime = JSON.parse(await readText(runtimePath)), scene = JSON.parse(await readText(resolve(preparedDirectory, 'scene.json')));
   if (payload.id !== objectId || !isDeepStrictEqual(payload.data, runtime)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
   if (!isDeepStrictEqual(scene.worldFrame, descriptor.properties.worldFrame)) throw new TypeError('Authored physical frame differs from the descriptor world frame.');
   requireObjectRuntimeDefinition(runtime, { objectId });

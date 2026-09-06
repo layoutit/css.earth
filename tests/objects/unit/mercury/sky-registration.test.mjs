@@ -15,9 +15,9 @@ import {
   requireBodyFixedSunDirection,
   requireBodyFixedToIcrf,
 } from "../../../../src/platform/solar-geometry.mjs";
-import PREPARED_MERCURY_SCENE from "../../../../objects/preparation/mercury/scene.json" with {type: "json"};
-import PREPARED_MERCURY_SKY_SUN from "../../../../objects/preparation/mercury/sun.json" with {type: "json"};
-import PREPARED_MERCURY_STARFIELD from "../../../../objects/preparation/mercury/sky.json" with {type: "json"};
+import PREPARED_MERCURY_SCENE from "../../../../src/planets/mercury/prepared/scene.json" with {type: "json"};
+import PREPARED_MERCURY_SKY_SUN from "../../../../src/planets/mercury/prepared/sun.json" with {type: "json"};
+import PREPARED_MERCURY_STARFIELD from "../../../../src/planets/mercury/prepared/sky.json" with {type: "json"};
 
 // The published registration, parsed the way the runtime parses it
 // (DOMMatrix column order), as a row-major 3x3.

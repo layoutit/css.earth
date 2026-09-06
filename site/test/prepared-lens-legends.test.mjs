@@ -62,7 +62,7 @@ test("every object forwards its object-owned legend through the shared shell", a
         new URL(`../../src/planets/${id}/source/content/object.json`, import.meta.url),
         "utf8",
       ));
-      const prepared = (await import(`../../objects/prepared/${id}.json`, {
+      const prepared = (await import(`../../src/planets/${id}/prepared/object.json`, {
         with: { type: "json" },
       })).default;
       const preparedLegends = prepared.data.controls.lenses.controls

@@ -282,7 +282,7 @@ test("renders source-backed charts in one canonical switcher with Reflectance fi
   for (const [id, name, expectedChartIds] of panels) {
     if (id === "mercury" || id === "venus") {
       const content = JSON.parse(await readFile(
-        new URL(`../../objects/preparation/${id}/content.json`, import.meta.url),
+        new URL(`../../src/planets/${id}/prepared/content.json`, import.meta.url),
         "utf8",
       ));
       assert.deepEqual(content.charts.map(({ id: chartId }) => chartId), expectedChartIds, `${name} chart order`);
@@ -313,7 +313,7 @@ test("renders source-backed charts in one canonical switcher with Reflectance fi
   assert.doesNotMatch(shell, /class="planet-chart-panel"|open=\{chart\.open\}|open=\{gallery\.open\}/u);
 
   const mercury = JSON.parse(await readFile(
-    new URL("../../objects/preparation/mercury/content.json", import.meta.url),
+    new URL("../../src/planets/mercury/prepared/content.json", import.meta.url),
     "utf8",
   ));
   assert.doesNotMatch(JSON.stringify(mercury.charts), /temperature-pressure|mercury-no-atmosphere-profile/u);

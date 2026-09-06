@@ -75,9 +75,10 @@ preparation implementations.
 src/planets/{mercury,venus}/
 ├── object.json                  Pinned capability recipe and transport digest
 ├── source/                      Authored JSON, scientific inputs and provenance
+├── prepared/                    Baked JSON, committed for clean checkouts
+│   └── object.json              Rebuilt runtime payload (Git-ignored)
 ├── runtime-assets.json          Reproducible asset inventory
 └── SOURCE.md, NOTICE.md, LICENSE.*  Credits and licences
-objects/preparation/{id}/        Generated JSON, committed for clean checkouts
 packages/objects/src/            Generic schema, geometry and pixel operations
 src/preparation/                 Node image/file adapters
 src/renderers/css/preparation/   CSS projection and retained presentation compiler
@@ -85,7 +86,7 @@ tests/objects/                   Object fixtures and browser/scientific regressi
 ```
 
 `pnpm install` builds packages and preparation tools, then assembles the small
-transport JSON from committed preparation output. It does not rebake textures.
+transport JSON beside each object from its committed preparation output. It does not rebake textures.
 To regenerate Mercury or Venus after changing their authored inputs, run
 `pnpm prepare:planets --object=mercury` or `--object=venus`. The same commands
 validate source pins, compile every layer, and replace their generated outputs.

@@ -192,7 +192,7 @@ test('descriptor loaders prove the actual JSON transport and typed source build 
   for (const entry of report.entries) {
     assert.equal(entry.entry.file, `src/planets/${entry.id}/object.json`);
     assert.equal(entry.factoryCalls, 1);
-    assert.equal(entry.presentation.file, `objects/prepared/${entry.id}.json`);
+    assert.equal(entry.presentation.file, `src/planets/${entry.id}/prepared/object.json`);
     assert.ok(entry.closure.includes(entry.presentation.file));
   }
   for (const file of ['src/renderers/css/index.ts', 'src/renderers/css/runtime/object-runtime.ts',
@@ -213,21 +213,23 @@ test('authored descriptors do not inspect deleted private runtime modules', asyn
 test('authored JSON transport rejects mismatched bytes, controls, source pins and physical frames', async () => {
   const file = 'src/planets/mercury/object.json', descriptor = JSON.parse(await readFile(file, 'utf8'));
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, id: 'venus' }) }), /descriptor identity/);
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url: '../venus/prepared/object.json' } }) }), /owning object prepared directory/);
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url: 'prepared/../prepared/object.json' } }) }), /owning object prepared directory/);
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, sha256: '0'.repeat(64) } }) }), /SHA-256/);
-  const runtimePath = 'objects/preparation/mercury/runtime.json';
+  const runtimePath = 'src/planets/mercury/prepared/runtime.json';
   const runtime = JSON.parse(await readFile(runtimePath, 'utf8'));
   runtime.camera.defaultZoom += .1;
   await assert.rejects(descriptorOverlay({ [runtimePath]: JSON.stringify(runtime) }), /differ from the checked authored runtime/);
   const sourcePath = 'src/planets/mercury/source/content/object.json';
   await assert.rejects(descriptorOverlay({ [sourcePath]: `${await readFile(sourcePath, 'utf8')} ` }), /source digest drifted/);
-  const payloadPath = 'objects/prepared/mercury.json', payload = JSON.parse(await readFile(payloadPath, 'utf8'));
+  const payloadPath = 'src/planets/mercury/prepared/object.json', payload = JSON.parse(await readFile(payloadPath, 'utf8'));
   runtime.controls.lenses.controls[0].id = '';
   payload.data = runtime;
   const bytes = JSON.stringify(payload);
   descriptor.prepared.sha256 = createHash('sha256').update(bytes).digest('hex');
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify(descriptor), [payloadPath]: bytes,
     [runtimePath]: JSON.stringify(runtime) }), /control|lens/i);
-  const scenePath = 'objects/preparation/mercury/scene.json', scene = JSON.parse(await readFile(scenePath, 'utf8'));
+  const scenePath = 'src/planets/mercury/prepared/scene.json', scene = JSON.parse(await readFile(scenePath, 'utf8'));
   scene.worldFrame.bodyRadiusM += 1;
   await assert.rejects(descriptorOverlay({ [scenePath]: JSON.stringify(scene) }), /physical frame/);
 });
@@ -235,7 +237,8 @@ test('authored JSON transport rejects mismatched bytes, controls, source pins an
 test('descriptor binding cannot bypass the shared factory or redirect the prepared inventory', async () => {
   const file = 'site/packaged-object-runtime.mjs', source = await readFile(file, 'utf8');
   for (const changed of [source.replace('return createNavigableObjectMount(', 'return differentFactory('),
-    source.replace('../objects/prepared/*.json', '../objects/other/*.json'),
+    source.replace('../src/planets/*/prepared/object.json', '../src/planets/other/*.json'),
+    source.replace('`../src/planets/${descriptorInput.id}/${reference}`', '`../src/planets/${otherDescriptor.id}/${reference}`'),
     source.replace('createNavigableObjectMount(descriptorInput,', 'createNavigableObjectMount(otherDescriptor,'),
     source.replace('}, bindPackagedObject)', '}, differentBinding)')]) {
     assert.notEqual(changed, source, 'Mutation must change the actual loader');

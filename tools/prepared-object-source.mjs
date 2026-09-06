@@ -37,12 +37,14 @@ export function requireDescriptorAdapterSource(text, exported) {
   if (glob.length !== 1 || glob[0].id.type !== 'Identifier') fail();
   const call = glob[0].init, meta = call.callee.object;
   const options = new Map(call.arguments[1]?.properties?.map(property => [property.key.name ?? property.key.value, property.value.value]));
-  if (meta?.type !== 'MetaProperty' || meta.meta.name !== 'import' || meta.property.name !== 'meta' || call.arguments[0]?.value !== '../objects/prepared/*.json' ||
+  if (meta?.type !== 'MetaProperty' || meta.meta.name !== 'import' || meta.property.name !== 'meta' || call.arguments[0]?.value !== '../src/planets/*/prepared/object.json' ||
     options.size !== 3 || options.get('query') !== '?url' || options.get('import') !== 'default' || options.get('eager') !== true) fail();
   const address = nodes.find(node => node.type === 'VariableDeclarator' && node.init?.type === 'MemberExpression' && node.init.object.name === glob[0].id.name);
-  const template = address?.init.property;
-  if (!address?.init.computed || template?.type !== 'TemplateLiteral' || template.expressions.length !== 1 || template.expressions[0].name !== reference ||
-    template.quasis[0].value.cooked !== '../objects/' || template.quasis[1].value.cooked !== '') fail();
+  const template = address?.init.property, objectId = template?.expressions?.[0];
+  if (!address?.init.computed || template?.type !== 'TemplateLiteral' || template.expressions.length !== 2 ||
+    objectId?.type !== 'MemberExpression' || objectId.computed || objectId.object?.name !== loader.params[0].name || objectId.property?.name !== 'id' ||
+    template.expressions[1]?.name !== reference || template.quasis[0].value.cooked !== '../src/planets/' ||
+    template.quasis[1].value.cooked !== '/' || template.quasis[2].value.cooked !== '') fail();
   const fetched = nodes.find(node => node.type === 'VariableDeclarator' && node.init?.type === 'AwaitExpression' && node.init.argument?.callee?.name === 'fetch');
   if (fetched?.init.argument.arguments.length !== 1 || fetched.init.argument.arguments[0].name !== address.id.name ||
     !nodes.some(node => node.type === 'ReturnStatement' && node.argument?.type === 'CallExpression' && node.argument.callee.object?.name === fetched.id.name && node.argument.callee.property?.name === 'arrayBuffer')) fail();
@@ -120,7 +122,7 @@ async function readAuthoredDefinition({ objectId, descriptor, root, source, clos
     if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError(`Authored source digest drifted: ${reference.path}.`);
     closure.add(path);
   }
-  const preparation = resolve(root, `objects/preparation/${objectId}`);
+  const preparation = resolve(directory, 'prepared');
   const runtimePath = resolve(preparation, 'runtime.json');
   const scenePath = resolve(preparation, 'scene.json');
   const runtime = JSON.parse(await source(runtimePath));
@@ -140,8 +142,11 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
   const reference = descriptor.prepared;
   if (reference?.format !== 'cssearth-css-object@4' || !/^[a-f0-9]{64}$/.test(reference.sha256 ?? '') ||
     typeof reference.url !== 'string' || Object.keys(reference).some(key => !['format', 'url', 'sha256'].includes(key))) throw new TypeError('JSON descriptor requires its pinned prepared CSS artifact.');
-  const payloadPath = resolve(root, 'objects', reference.url);
-  if (relative(resolve(root, 'objects/prepared'), payloadPath).startsWith('../') || !payloadPath.endsWith('.json')) throw new TypeError('Prepared JSON transport escapes its checked asset inventory.');
+  const descriptorDirectory = dirname(descriptorPath);
+  const payloadPath = resolve(descriptorDirectory, reference.url);
+  if (reference.url !== 'prepared/object.json' || payloadPath !== resolve(descriptorDirectory, 'prepared/object.json')) {
+    throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
+  }
   const bytes = await source(payloadPath);
   if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
   const payload = JSON.parse(bytes);

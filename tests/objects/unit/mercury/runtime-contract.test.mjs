@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../objects/preparation/mercury/runtime.json" with {type: "json"};
+import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
 import { OBJECTS } from "../../../../site/objects.mjs";
 import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mjs";

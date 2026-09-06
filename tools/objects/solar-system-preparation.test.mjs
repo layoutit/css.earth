@@ -8,14 +8,14 @@ import { pathToFileURL } from "node:url";
 import { prepareSolarSystemCamera, prepareSolarSystemScene, prepareSolarSystemSunPresentation } from "./solar-system-scene.mjs";
 import { prepareSolarSystemPresentation } from "./solar-system-presentation.mjs";
 import { prepareSolarSystemMarkerStrip } from "./solar-system-markers.mjs";
-import mercuryScene from "../../objects/preparation/mercury/scene.json" with {type: "json"};
-import mercurySky from "../../objects/preparation/mercury/sky.json" with {type: "json"};
-import mercurySun from "../../objects/preparation/mercury/sun.json" with {type: "json"};
-import mercuryAssets from "../../objects/preparation/mercury/assets.json" with {type: "json"};
-import mercuryStrip from "../../objects/preparation/mercury/markers.json" with {type: "json"};
-import mercuryPresentation from "../../objects/preparation/mercury/runtime.json" with {type: "json"};
-import venusScene from "../../objects/preparation/venus/scene.json" with {type: "json"};
-import venusSky from "../../objects/preparation/venus/sky.json" with {type: "json"};
+import mercuryScene from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
+import mercurySky from "../../src/planets/mercury/prepared/sky.json" with {type: "json"};
+import mercurySun from "../../src/planets/mercury/prepared/sun.json" with {type: "json"};
+import mercuryAssets from "../../src/planets/mercury/prepared/assets.json" with {type: "json"};
+import mercuryStrip from "../../src/planets/mercury/prepared/markers.json" with {type: "json"};
+import mercuryPresentation from "../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
+import venusScene from "../../src/planets/venus/prepared/scene.json" with {type: "json"};
+import venusSky from "../../src/planets/venus/prepared/sky.json" with {type: "json"};
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
 import { prepareCatalogueStars } from "../../src/platform/prepare-catalogue-stars.mjs";
 import { preparePlanetDirectionalSun } from "../../src/platform/prepare-directional-sun.mjs";
@@ -62,7 +62,7 @@ test("registered descriptors publish the generated physical frames and exact pay
   for (const [id, scene] of [["mercury", mercuryScene], ["venus", venusScene]]) {
     const descriptor = JSON.parse(await readFile(new URL(`../../src/planets/${id}/object.json`, import.meta.url), "utf8"));
     assert.deepEqual(descriptor.properties.worldFrame, scene.worldFrame);
-    const payload = await readFile(new URL(`../../objects/${descriptor.prepared.url}`, import.meta.url));
+    const payload = await readFile(new URL(`../../src/planets/${id}/${descriptor.prepared.url}`, import.meta.url));
     assert.equal(createHash("sha256").update(payload).digest("hex"), descriptor.prepared.sha256);
   }
 });

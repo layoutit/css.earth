@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
-import PREPARED_MERCURY_SCENE from '../../../../objects/preparation/mercury/scene.json' with { type: 'json' };
+import PREPARED_MERCURY_SCENE from '../../../../src/planets/mercury/prepared/scene.json' with { type: 'json' };
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4211';
 const directory = resolve('.local/world-camera-owner');

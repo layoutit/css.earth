@@ -7,7 +7,7 @@ import { record, array } from './guards.js';
 // These are the real preparation outputs, loaded only by this browser-boundary test.
 const originals: unknown[] = [];
 for (const id of ['mercury', 'venus']) {
-  const source = await readFile(new URL(`../../../../objects/preparation/${id}/runtime.json`, import.meta.url), "utf8");
+  const source = await readFile(new URL(`../../../../src/planets/${id}/prepared/runtime.json`, import.meta.url), "utf8");
   originals.push(JSON.parse(source));
 }
 const copy = (index = 1): Record<string, unknown> => record(structuredClone(originals[index]), 'test document');

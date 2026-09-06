@@ -7,7 +7,7 @@ const lateDetail = process.env.CSSEARTH_TEST_LATE_DETAIL === '1';
 const directory = `.local/navigation-quality${lateDetail ? '-late-detail' : ''}`;
 await mkdir(directory, { recursive: true });
 const definitions = Object.fromEntries(await Promise.all(['mercury', 'venus'].map(async id =>
-  [id, JSON.parse(await readFile(`objects/prepared/${id}.json`, 'utf8')).data])));
+  [id, JSON.parse(await readFile(`src/planets/${id}/prepared/object.json`, 'utf8')).data])));
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports = [];
 let interruption;

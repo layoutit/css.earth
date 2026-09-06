@@ -20,8 +20,8 @@ export function objectPackagePaths(objectRecord, projectRoot = process.cwd(), au
       resolve(root, "NOTICE.md"),
       resolve(root, "source", "manifest.json"),
       resolve(root, "runtime-assets.json"),
-      ...(authored ? [resolve(root, 'object.json'), resolve(projectRoot, 'objects/preparation', objectRecord.id, 'runtime.json'),
-        resolve(projectRoot, 'objects/preparation', objectRecord.id, 'content.json'),
+      ...(authored ? [resolve(root, 'object.json'), resolve(root, 'prepared/runtime.json'),
+        resolve(root, 'prepared/content.json'),
         resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mjs'),
         resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'smoke-browser.mjs')] : [
       resolve(root, "runtime", "client.mjs"),
