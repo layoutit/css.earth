@@ -42,3 +42,6 @@ src/planets/*/source/**/*.webp
 !src/planets/saturn/source/saturn-weather-static.webp
 
 src/planets/*/.prepared/
+
+# Prepared JSON transport rebuilt from checked-in object preparation output.
+/objects/prepared/

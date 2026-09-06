@@ -1,0 +1,125 @@
+import { createHash } from 'node:crypto';
+import { isDeepStrictEqual } from 'node:util';
+import { dirname, relative, resolve } from 'node:path';
+import { parseAst } from 'vite';
+import { requirePreparedControlSource, requirePreparedDefinitionSource, readPreparedJsonExports, readPreparedPresentationModule } from './check-prepared-presentation.mjs';
+import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../src/platform/prepared-schema.mjs';
+import { requireObjectRuntimeDefinition } from './object-runtime-contract.mjs';
+
+export function requireDescriptorAdapterSource(text, exported) {
+  const ast = parseAst(text), bindings = new Map(), functions = new Map();
+  const fail = () => { throw new TypeError('Registered descriptor loader must forward its prepared transport into the actual shared factory.'); };
+  for (const statement of ast.body) {
+    if (statement.type === 'ImportDeclaration') for (const specifier of statement.specifiers) {
+      if (specifier.type === 'ImportSpecifier') bindings.set(specifier.local.name, { name: specifier.imported.name, source: statement.source.value });
+    }
+    if (statement.type === 'ExportNamedDeclaration' && statement.declaration?.type === 'FunctionDeclaration') functions.set(statement.declaration.id.name, statement.declaration);
+  }
+  const loader = functions.get(exported), returned = loader?.body.body[0]?.argument;
+  if (loader?.params.length !== 1 || loader.params[0].type !== 'Identifier' || loader.body.body.length !== 1 ||
+    returned?.type !== 'CallExpression' || returned.arguments.length !== 2 || bindings.get(returned.callee.name)?.name !== 'createDeferredObjectMount') fail();
+  const read = returned.arguments[0], decode = read.body, bind = functions.get(returned.arguments[1]?.name);
+  if (read.type !== 'ArrowFunctionExpression' || read.params.length || decode?.type !== 'CallExpression' || decode.arguments.length !== 2 ||
+    bindings.get(decode.callee.name)?.name !== 'loadPreparedCssObject' || decode.arguments[0].name !== loader.params[0].name ||
+    decode.arguments[1].type !== 'ObjectExpression' || !bind || bind.params.length !== 1 || bind.params[0].type !== 'Identifier' || bind.body.body.length !== 2) fail();
+  const declaration = bind.body.body[0]?.declarations?.[0], factory = declaration?.init, mount = bind.body.body[1]?.argument;
+  if (declaration?.id.type !== 'Identifier' || factory?.type !== 'CallExpression' || factory.arguments.length !== 1 ||
+    bindings.get(factory.callee.name)?.name !== 'createObjectRuntime' || factory.arguments[0].name !== bind.params[0].name ||
+    mount?.type !== 'ArrowFunctionExpression' || mount.params.length !== 2 || mount.body?.type !== 'CallExpression' || mount.body.callee.name !== declaration.id.name ||
+    mount.body.arguments[0]?.name !== mount.params[0]?.name || mount.body.arguments[1]?.type !== 'ObjectExpression') fail();
+  const renderer = bindings.get(factory.callee.name).source;
+  if ([returned.callee.name, decode.callee.name].some(name => bindings.get(name)?.source !== renderer)) fail();
+  const transport = decode.arguments[1].properties;
+  if (transport.length !== 1 || (transport[0].key.name ?? transport[0].key.value) !== 'read' || !transport[0].method || !transport[0].value.async || transport[0].value.params.length !== 1) fail();
+  const method = transport[0].value, reference = method.params[0]?.name, nodes = [];
+  const walk = node => { if (!node || typeof node !== 'object') return; if (node.type) nodes.push(node); for (const value of Object.values(node)) if (Array.isArray(value)) value.forEach(walk); else if (value && typeof value === 'object') walk(value); };
+  walk(method.body);
+  const glob = nodes.filter(node => node.type === 'VariableDeclarator' && node.init?.type === 'CallExpression' && node.init.callee?.property?.name === 'glob');
+  if (glob.length !== 1 || glob[0].id.type !== 'Identifier') fail();
+  const call = glob[0].init, meta = call.callee.object;
+  const options = new Map(call.arguments[1]?.properties?.map(property => [property.key.name ?? property.key.value, property.value.value]));
+  if (meta?.type !== 'MetaProperty' || meta.meta.name !== 'import' || meta.property.name !== 'meta' || call.arguments[0]?.value !== '../objects/prepared/*.json' ||
+    options.size !== 3 || options.get('query') !== '?url' || options.get('import') !== 'default' || options.get('eager') !== true) fail();
+  const address = nodes.find(node => node.type === 'VariableDeclarator' && node.init?.type === 'MemberExpression' && node.init.object.name === glob[0].id.name);
+  const template = address?.init.property;
+  if (!address?.init.computed || template?.type !== 'TemplateLiteral' || template.expressions.length !== 1 || template.expressions[0].name !== reference ||
+    template.quasis[0].value.cooked !== '../objects/' || template.quasis[1].value.cooked !== '') fail();
+  const fetched = nodes.find(node => node.type === 'VariableDeclarator' && node.init?.type === 'AwaitExpression' && node.init.argument?.callee?.name === 'fetch');
+  if (fetched?.init.argument.arguments.length !== 1 || fetched.init.argument.arguments[0].name !== address.id.name ||
+    !nodes.some(node => node.type === 'ReturnStatement' && node.argument?.type === 'CallExpression' && node.argument.callee.object?.name === fetched.id.name && node.argument.callee.property?.name === 'arrayBuffer')) fail();
+  return renderer;
+}
+
+/** Interpret the already-validated data expression language; never execute source. */
+async function readControls(file, source, closure) {
+  const text = await source(file);
+  requirePreparedControlSource(text);
+  const ast = parseAst(text), scope = new Map([['undefined', undefined]]);
+  function value(node, bindings = scope) {
+    switch (node.type) {
+      case 'Literal': return node.value;
+      case 'Identifier': return bindings.get(node.name);
+      case 'ObjectExpression': return Object.fromEntries(node.properties.map(property => [property.key.name ?? property.key.value, value(property.value, bindings)]));
+      case 'ArrayExpression': return node.elements.map(item => value(item, bindings));
+      case 'MemberExpression': return value(node.object, bindings)[node.computed ? value(node.property, bindings) : node.property.name];
+      case 'TemplateLiteral': return node.quasis.map((part, index) => part.value.cooked + (index < node.expressions.length ? value(node.expressions[index], bindings) : '')).join('');
+      case 'ConditionalExpression': return value(value(node.test, bindings) ? node.consequent : node.alternate, bindings);
+      case 'UnaryExpression': { const input = value(node.argument, bindings); return node.operator === '!' ? !input : node.operator === '-' ? -input : +input; }
+      case 'LogicalExpression': { const left = value(node.left, bindings); return node.operator === '&&' ? left && value(node.right, bindings) : node.operator === '??' ? left ?? value(node.right, bindings) : left || value(node.right, bindings); }
+      case 'BinaryExpression': {
+        const a = value(node.left, bindings), b = value(node.right, bindings);
+        switch (node.operator) {
+          case '+': return a + b; case '-': return a - b; case '*': return a * b; case '/': return a / b;
+          case '===': return a === b; case '!==': return a !== b; case '<': return a < b; case '>': return a > b;
+          case '<=': return a <= b; case '>=': return a >= b;
+          default: throw new Error(`Unsupported prepared content operator ${node.operator}`);
+        }
+      }
+      case 'CallExpression': {
+        if (node.callee.object.name === 'Object') return value(node.arguments[0], bindings);
+        const callback = node.arguments[0];
+        return value(node.callee.object, bindings).map(item => value(callback.body, new Map([...bindings, [callback.params[0].name, item]])));
+      }
+      default: throw new Error(`Unsupported prepared content node ${node.type}`);
+    }
+  }
+  for (const statement of ast.body) {
+    if (statement.type === 'ImportDeclaration') {
+      const imported = resolve(dirname(file), statement.source.value);
+      closure.add(imported);
+      const records = new Map(readPreparedJsonExports(await source(imported)).map(record => [record.name, record.value]));
+      for (const binding of statement.specifiers) {
+        if (!records.has(binding.imported.name)) throw new Error(`Missing prepared content export ${binding.imported.name}`);
+        scope.set(binding.local.name, records.get(binding.imported.name));
+      }
+    } else for (const declaration of (statement.declaration ?? statement).declarations) scope.set(declaration.id.name, value(declaration.init));
+  }
+  return scope.get('objectControls');
+}
+
+export async function readDescriptorDefinition({ objectId, descriptorFile, root, source }) {
+  const descriptorPath = resolve(root, descriptorFile), descriptor = JSON.parse(await source(descriptorPath));
+  if (descriptor.schema !== 'cssearth-object@1' || descriptor.id !== objectId || descriptor.type !== 'layered-body' ||
+    !descriptor.properties || Array.isArray(descriptor.properties) || typeof descriptor.properties !== 'object' ||
+    Object.keys(descriptor).some(key => !['schema', 'id', 'type', 'properties', 'prepared'].includes(key))) throw new TypeError('Registered JSON descriptor identity or shape is invalid.');
+  const reference = descriptor.prepared;
+  if (reference?.format !== 'cssearth-css-object@4' || !/^[a-f0-9]{64}$/.test(reference.sha256 ?? '') ||
+    typeof reference.url !== 'string' || Object.keys(reference).some(key => !['format', 'url', 'sha256'].includes(key))) throw new TypeError('JSON descriptor requires its pinned prepared CSS artifact.');
+  const payloadPath = resolve(root, 'objects', reference.url);
+  if (relative(resolve(root, 'objects/prepared'), payloadPath).startsWith('../') || !payloadPath.endsWith('.json')) throw new TypeError('Prepared JSON transport escapes its checked asset inventory.');
+  const bytes = await source(payloadPath);
+  if (createHash('sha256').update(bytes).digest('hex') !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
+  const payload = JSON.parse(bytes);
+  if (payload.schema !== 'cssearth-prepared-object@1' || payload.id !== objectId || payload.type !== descriptor.type || payload.format !== reference.format ||
+    Object.keys(payload).some(key => !['schema', 'id', 'type', 'format', 'data'].includes(key))) throw new TypeError('Prepared JSON identity or format does not match its descriptor.');
+  const directory = resolve(root, `src/planets/${objectId}`);
+  const definitionPath = resolve(directory, 'runtime/definition.mjs'), presentationPath = resolve(directory, 'runtime/preparedPresentation.mjs'), controlPath = resolve(directory, 'site/control-content.mjs');
+  if (requirePreparedDefinitionSource(await source(definitionPath)) !== objectId) throw new TypeError('Prepared source definition names another object.');
+  const plan = readPreparedPresentationModule(await source(presentationPath));
+  const closure = new Set([descriptorPath, payloadPath, definitionPath, presentationPath, controlPath]);
+  const controls = await readControls(controlPath, source, closure);
+  const expected = JSON.parse(JSON.stringify({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: objectId, controls }));
+  if (!isDeepStrictEqual(payload.data, expected)) throw new TypeError('Prepared JSON bytes differ from the checked presentation and control definitions.');
+  requireObjectRuntimeDefinition(payload.data, { objectId });
+  return { plan, definition: payload.data, closure, payloadPath };
+}

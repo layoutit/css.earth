@@ -1,0 +1,24 @@
+import type { SurfaceFlyToPlan } from './google-earth-surface-fly-to.js';
+import type { Quaternion } from './types.js';
+import type { RuntimePolicy } from './runtime-policy.js';
+import type { TrackballMetrics, CameraDelta } from './types.js';
+export interface MatrixDragControlsOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; trackballMetrics(): TrackballMetrics; flyToTrackballMetrics?: () => TrackballMetrics; rotate(delta: CameraDelta): void; surfaceFlyToState?: (() => { zoom: number; minimumZoom: number; maximumZoom: number }) | null; onPointerStart?: () => void; onStart?: () => void; onEnd?: () => void; onError?: ((error: unknown) => void) | null; }
+export function validateDragControlsOptions({ inputSurface, trackballMetrics, flyToTrackballMetrics,
+  rotate, surfaceFlyToState, onPointerStart, onStart, onEnd, onError }: MatrixDragControlsOptions): void {
+  if (!(inputSurface instanceof HTMLElement) ||
+      typeof trackballMetrics !== "function" ||
+      typeof flyToTrackballMetrics !== "function" ||
+      typeof rotate !== "function" ||
+      (surfaceFlyToState !== null &&
+        typeof surfaceFlyToState !== "function") ||
+      typeof onPointerStart !== "function" ||
+      typeof onStart !== "function" || typeof onEnd !== "function" ||
+      (onError !== null && typeof onError !== "function")) {
+    throw new TypeError("Unbounded matrix drag controls are invalid.");
+  }
+}
+
+export type FlyToMotion = { startedAt: number | null } & (
+  { sample: (progress: number) => void; durationMilliseconds: number; finish(completed: boolean): void } |
+  { sample?: undefined; finish?: undefined; plan: SurfaceFlyToPlan; previousPitchDelta: number; previousYawDelta: number; previousRotation: Quaternion }
+);

@@ -11,7 +11,7 @@
     "setup:assets": "node tools/setup.mjs",
     "publish:runtime-assets": "node tools/publish-runtime-assets.mjs",
     "dev": "astro dev --host 127.0.0.1 --port 4210",
-    "postinstall": "pnpm build:astronomy && pnpm build:catalog",
+    "postinstall": "pnpm build:packages && pnpm build:renderer && pnpm prepare:object-json",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
     "build": "astro build && pnpm assemble:planets",
@@ -57,7 +57,19 @@
     "trace:saturn": "node src/planets/saturn/tools/audit/trace.mjs",
     "prepare:earth-global": "node src/planets/earth/tools/prepare-global-wmts.mjs && node src/planets/earth/tools/integrate-global-wmts.mjs --latest",
     "test:earth-global": "node src/planets/earth/test/wmts-tree-browser.mjs --global",
-    "oracle:interactions": "node src/planets/mars/tools/oracle/google-earth-pro/run-interaction-suite.mjs"
+    "oracle:interactions": "node src/planets/mars/tools/oracle/google-earth-pro/run-interaction-suite.mjs",
+    "lint:packages": "eslint packages --max-warnings 0",
+    "build:engine": "pnpm --filter @cssearth/engine build",
+    "build:objects": "pnpm --filter @cssearth/objects build",
+    "build:packages": "pnpm -r --filter \"./packages/**\" build",
+    "test:packages": "pnpm -r --filter \"./packages/**\" test",
+    "typecheck:packages": "pnpm -r --filter \"./packages/**\" typecheck",
+    "typecheck:renderer": "pnpm --filter @cssearth/engine exec tsc -p ../../src/renderers/css/tsconfig.json",
+    "test:renderer": "pnpm --filter @cssearth/engine exec vitest run --root ../../src/renderers/css",
+    "prepare:object-json": "node tools/prepare-object-json.mjs",
+    "predev": "pnpm build:packages && pnpm build:renderer && pnpm prepare:object-json",
+    "prebuild": "pnpm build:packages && pnpm build:renderer && pnpm prepare:object-json",
+    "build:renderer": "pnpm --filter @cssearth/engine exec tsup --config ../../src/renderers/css/tsup.config.ts"
   },
   "dependencies": {
     "@layoutit/polycss": "0.2.11"
@@ -65,15 +77,19 @@
   "devDependencies": {
     "@cssearth/astronomy": "workspace:*",
     "@cssearth/catalog": "workspace:*",
+    "@typescript-eslint/parser": "^8.69.0",
     "astro": "^7.2.4",
     "classic-level": "3.0.0",
     "cwebp-bin": "8.0.0",
+    "eslint": "^10.10.0",
     "fontkit": "2.0.4",
     "geotiff": "3.0.5",
     "pixelmatch": "7.2.0",
     "playwright": "1.60.0",
     "pngjs": "7.0.0",
     "sharp": "0.35.3",
-    "vite": "7.3.1"
+    "vite": "7.3.1",
+    "@cssearth/engine": "workspace:*",
+    "@cssearth/objects": "workspace:*"
   }
 }

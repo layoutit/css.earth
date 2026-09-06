@@ -172,3 +172,73 @@ test("the actual OBJECTS registry has only normalized packages and one shared so
   assert.ok(report.sharedClosure.includes("site/prepared-shell-titles.mjs"));
   assert.ok(!report.sharedClosure.includes("src/planets/uranus/site/preparedLensControls.mjs"));
 });
+
+const descriptorObjects = OBJECTS.filter(object => ['mercury', 'venus'].includes(object.id));
+async function descriptorOverlay(changes = {}) {
+  return auditObjectRuntimeOwnership({ objects: descriptorObjects,
+    readText: path => Object.hasOwn(changes, relativeFile(path)) ? changes[relativeFile(path)] : readFile(path, 'utf8') });
+}
+const relativeFile = path => path.slice(process.cwd().length + 1);
+
+test('descriptor loaders prove the actual JSON transport and typed source build closure', async () => {
+  const report = await descriptorOverlay();
+  assert.equal(report.complete, true);
+  assert.equal(report.cameraFactorySites.length, 1, 'one native camera factory in the selected renderer assembly');
+  for (const entry of report.entries) {
+    assert.equal(entry.entry.file, `src/planets/${entry.id}/object.json`);
+    assert.equal(entry.factoryCalls, 1);
+    assert.equal(entry.presentation.file, `objects/prepared/${entry.id}.json`);
+    assert.ok(entry.closure.includes(entry.presentation.file));
+  }
+  for (const file of ['src/renderers/css/index.ts', 'src/renderers/css/runtime/object-runtime.ts',
+    'src/renderers/css/runtime/deferred-object-mount.ts', 'packages/engine/src/runtime/scene-lifetime.ts',
+    'packages/objects/src/parse.ts']) assert.ok(report.sharedClosure.includes(file), file);
+  for (const file of ['src/renderers/css/tsup.config.ts', 'packages/engine/tsup.config.ts', 'packages/objects/package.json'])
+    assert.match(report.sourceHashes[file], /^[a-f0-9]{64}$/, file);
+  assert.ok(report.sharedClosure.every(file => !file.includes('/dist/')), 'source build entries, never emitted bundles, own the proof');
+});
+
+test('JSON transport rejects a mismatched descriptor, digest, payload or checked source', async () => {
+  const file = 'src/planets/mercury/object.json', descriptor = JSON.parse(await readFile(file, 'utf8'));
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, id: 'venus' }) }), /descriptor identity/);
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, sha256: '0'.repeat(64) } }) }), /SHA-256/);
+  const presentation = 'src/planets/mercury/runtime/preparedPresentation.mjs';
+  const original = await readFile(presentation, 'utf8');
+  const value = readPreparedJsonModule(original).value;
+  value.camera.defaultZoom += .1;
+  await assert.rejects(descriptorOverlay({ [presentation]: `export const PREPARED_PRESENTATION = ${JSON.stringify(value)};` }), /differ from the checked/);
+  const controls = 'src/planets/mercury/site/control-content.mjs';
+  await assert.rejects(descriptorOverlay({ [controls]: `${await readFile(controls, 'utf8')}\nnew Image();` }), /static prepared content/);
+});
+
+test('descriptor binding cannot bypass the shared factory or redirect the prepared inventory', async () => {
+  const file = 'site/packaged-object-runtime.mjs', source = await readFile(file, 'utf8');
+  for (const changed of [source.replace('return createDeferredObjectMount(', 'return differentFactory('),
+    source.replace('../objects/prepared/*.json', '../objects/other/*.json'),
+    source.replace('loadPreparedCssObject(descriptorInput,', 'loadPreparedCssObject(otherDescriptor,')]) {
+    await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport/);
+  }
+  const registry = await readFile('site/objects.mjs', 'utf8');
+  await assert.rejects(descriptorOverlay({ 'site/objects.mjs': registry.replace('loadPackagedObject(mercuryDescriptor)', 'loadPackagedObject(venusDescriptor)') }), /own actual JSON descriptor/);
+});
+
+test('typed renderer closure rejects forbidden scene APIs, styles, hidden imports and extra cameras', async () => {
+  const file = 'src/renderers/css/runtime/object-runtime.ts', source = await readFile(file, 'utf8');
+  for (const [injected, expected] of [
+    ["document.createElement(('canvas' as const));", /Forbidden runtime canvas/],
+    ["document.createElementNS('http://www.w3.org/2000/svg', 'svg');", /Forbidden runtime canvas/],
+    ["function hidden(node: HTMLElement) { node.style.filter = 'blur(2px)'; }", /Forbidden runtime CSS/],
+    ["function hidden(node: HTMLElement) { node.style.background = 'linear-gradient(red, blue)'; }", /Forbidden runtime CSS/],
+    ["function hidden(node: HTMLElement) { node.style.setProperty('mask-image', 'url(mask.png)'); }", /Forbidden runtime CSS/],
+    ["import('./hidden.js');", /Dynamic runtime imports/],
+    ["import { createPolyCamera } from '@layoutit/polycss'; (createPolyCamera as typeof createPolyCamera)({});", /native camera factory site; found 2/],
+  ]) await assert.rejects(descriptorOverlay({ [file]: `${source}\n${injected}` }), expected);
+});
+
+test('workspace runtime exports and renderer build entries remain source-bound', async () => {
+  const file = 'src/renderers/css/tsup.config.ts', config = await readFile(file, 'utf8');
+  await assert.rejects(descriptorOverlay({ [file]: config.replace("'./index.ts'", "'./other.ts'") }), /does not match its build entry/);
+  const manifestFile = 'packages/engine/package.json', manifest = JSON.parse(await readFile(manifestFile, 'utf8'));
+  manifest.exports['.'].import = './dist/other.js';
+  await assert.rejects(descriptorOverlay({ [manifestFile]: JSON.stringify(manifest) }), /does not match its build entry/);
+});

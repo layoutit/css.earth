@@ -20,3 +20,9 @@ stars.strings('name')[42]   // decoded lazily
 ```
 
 The byte-level spec is in [FORMAT.md](./FORMAT.md). The Python writer lives in the external catalogue pipeline (not part of this repository); `pnpm check:parity` proves the two implementations agree.
+
+## Source size
+
+All source files, tests, tools, and generated code are limited to 600 physical
+lines. Run `pnpm lint:packages` from the repository root. Package instructions
+live in AGENTS.md; CLAUDE.md links to the same file.

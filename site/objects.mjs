@@ -1,3 +1,5 @@
+import mercuryDescriptor from "../src/planets/mercury/object.json" with { type: "json" };
+import venusDescriptor from "../src/planets/venus/object.json" with { type: "json" };
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
@@ -10,17 +12,13 @@ export const OBJECTS = defineObjects([
     }),
   object("mercury", "Mercury", "planet", "#9d9388", 0.39,
     "NASA, USGS, OpenSpace, and HYG", async () => {
-      const { mountMercuryClient } = await import(
-        "../src/planets/mercury/runtime/client.mjs"
-      );
-      return mountMercuryClient;
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mercuryDescriptor);
     }),
   object("venus", "Venus", "planet", "#d6aa69", 0.72,
     "NASA, USGS, OpenSpace, and HYG", async () => {
-      const { mountVenusClient } = await import(
-        "../src/planets/venus/runtime/client.mjs"
-      );
-      return mountVenusClient;
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(venusDescriptor);
     }),
   object("earth", "Earth", "planet", "#5b82a7", 1,
     "NASA, JPL, OpenSpace, and HYG", async () => {
