@@ -14,6 +14,21 @@ const root = resolve(import.meta.dirname, "../../../..");
 const source = await createSourceManifest({ planetId: "ceres", planetName: "Ceres", sourceRoot });
 const prepared = JSON.parse(await readFile(resolve(import.meta.dirname, "../.prepared/surfaces.json")));
 
+test("lighting opacity stays inside its fitted disc, without clipped square edges", async () => {
+  const { lighting } = JSON.parse(await readFile(resolve(import.meta.dirname, "../.prepared/material.json")));
+  const { data, info } = await sharp(resolve(root, "public", lighting.url.slice(1)))
+    .ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const size = info.width / lighting.columns;
+  for (const frame of [0, Math.floor(lighting.frameCount / 2), lighting.frameCount - 1]) {
+    const x0 = frame % lighting.columns * size, y0 = Math.floor(frame / lighting.columns) * size;
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      if (Math.hypot(x + 0.5 - size / 2, y + 0.5 - size / 2) <= size / 2) continue;
+      assert.equal(data[((y0 + y) * info.width + x0 + x) * 4 + 3], 0,
+        `frame ${frame}: opacity outside the fitted silhouette at ${x},${y}`);
+    }
+  }
+});
+
 test("downloaded Dawn rasters match their pinned sources and reject corruption", async () => {
   await source.verify();
   for (const entry of source.manifest.inputs.filter(input => input.consumers.includes("surfaces"))) {

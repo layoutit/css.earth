@@ -29,3 +29,7 @@ linear image latitude cannot be stretched directly over projective UVs. Polar
 textures use the cap geometry and hemisphere-specific longitude direction.
 Both use bilinear source sampling and lossless encoding. Original source files remain unchanged. Prepared maps mark only the identified
 gaps; the runtime lighting is a separate prepared overlay.
+The shared perspective camera converts PolyCSS geometry to world units without
+an extra zoom multiplier. Lighting fits that same projected radius, and its
+prepared disc stays within the atlas frame. The low-polygon surface still has
+small geometric facets; the overlay does not represent an atmosphere.

@@ -59,7 +59,10 @@ export function preparePerspectiveCamera({ sky, radius = 230, initialScenePitchD
     defaultZoom: 1.1,
     logicalBodyDiameter: radius * 2,
     responsiveFit: responsiveFit,
-    sceneScale: 1.1 / 50,
+    // PolyCSS leaves use 50 CSS units per world unit. Framing is already
+    // owned by the dolly distance; scaling the mesh by defaultZoom here makes
+    // its perspective silhouette disagree with lighting and occlusion.
+    sceneScale: 1 / 50,
     horizontalOrbit: true,
     pitchBounded: false,
     yawBounded: false,
