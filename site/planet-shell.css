@@ -1038,7 +1038,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   padding: 0;
   overflow: hidden;
   color: inherit;
-  font: 400 1rem/1.4 var(--shell-ui-font);
+  font: 400 0.9375rem/20px var(--shell-ui-font);
   opacity: 1;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -397,7 +397,7 @@ test("places a scalable Surface Lens browser after the retained chart switcher",
   assert.doesNotMatch(styles, /rgb\(255 255 255 \/ 75%\)/u);
   assert.doesNotMatch(styles, /rgb\(255 255 255 \/ 45%\)/u);
   assert.match(styles, /\.planet-lens-icon\s*\{[\s\S]*?width:\s*18px;[\s\S]*?height:\s*18px;/u);
-  assert.match(styles, /\.planet-lens-label\s*\{[\s\S]*?grid-column:\s*2;[\s\S]*?font:\s*400 1rem\/1\.4 var\(--shell-ui-font\);/u);
+  assert.match(styles, /\.planet-lens-label\s*\{[\s\S]*?grid-column:\s*2;[\s\S]*?font:\s*400 0\.9375rem\/20px var\(--shell-ui-font\);/u);
   assert.match(shell, /class="planet-lens-icon"[^>]*width="18" height="18"/u);
   assert.doesNotMatch(styles, /planet-lens-copy|planet-lens-description/u);
   assert.match(styles, /\.planet-lens-search\s*\{[\s\S]*?border:\s*0;[\s\S]*?background:\s*transparent;[\s\S]*?text-align:\s*right;/u);
