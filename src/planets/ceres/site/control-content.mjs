@@ -32,8 +32,8 @@ export const objectControls = Object.freeze({
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Dawn stereo model · polar caps withheld",
-        "title": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+        "description": "Dawn stereo model · shaded relief",
+        "title": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
         "thumbnailUrl": "/scenes/ceres/ceres-elevation-thumbnail.webp",
         "legend": {
           "kind": "scale",

@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { test } from "node:test";
 import sharp from "sharp";
 import { SCIENCE_LENSES } from "../science-lenses.mjs";
-import { colorForValue, loadScienceSurface } from "../tools/science-surfaces.mjs";
+import { colorForValue, loadScienceSurface, terrainBrightness } from "../tools/science-surfaces.mjs";
 
 const root = resolve(import.meta.dirname, "../../../.."), sourceRoot = resolve(root, "src/planets/ceres/source");
 const anchors = {
@@ -11,7 +11,21 @@ const anchors = {
 
 };
 
-for (const lens of SCIENCE_LENSES) test(`${lens.id}: source coordinates, gaps, and delivered map retain the scientific values`, async () => {
+test("terrain shading respects slope direction, latitude spacing, the longitude seam, and missing neighbors", () => {
+  const metersPerDegree = 470000 * Math.PI / 180;
+  assert.equal(terrainBrightness({ sample: () => 123 }, 180, 0, 0.1), 1);
+  const slope = sign => ({ sample: (lon, lat) => sign * metersPerDegree * lon * Math.cos(lat * Math.PI / 180) });
+  assert.ok(terrainBrightness(slope(1), 180, 0, 0.1) > 1, "west-facing slope catches northwest light");
+  assert.ok(terrainBrightness(slope(-1), 180, 0, 0.1) < 1, "east-facing slope faces away");
+  const planeAt = lat => ({ sample: lon => metersPerDegree * lon * Math.cos(lat * Math.PI / 180) });
+  assert.ok(Math.abs(terrainBrightness(planeAt(0), 180, 0, 0.1)
+    - terrainBrightness(planeAt(50), 180, 50, 0.1)) < 1e-10, "equal physical slopes have equal shade at different latitudes");
+  const globe = { sample: lon => 1000 * Math.sin(lon * Math.PI / 180) };
+  assert.ok(Math.abs(terrainBrightness(globe, 0, 0, 0.1) - terrainBrightness(globe, 360, 0, 0.1)) < 1e-10);
+  assert.equal(terrainBrightness({ sample: lon => lon < 180 ? null : 123 }, 180, 0, 0.1), 1);
+});
+
+for (const lens of SCIENCE_LENSES) test(`${lens.id}: source coordinates, gaps, shaded colors, and numeric legend agree`, async () => {
   const source = await loadScienceSurface(sourceRoot, lens);
   for (const [lon, lat, value] of anchors[lens.id]) assert.equal(source.sample(lon, lat), value, `${lon}E, ${lat}N`);
   const { data, info } = await sharp(resolve(root, `public/scenes/ceres/ceres-${lens.id}-map.webp`))
@@ -23,8 +37,9 @@ for (const lens of SCIENCE_LENSES) test(`${lens.id}: source coordinates, gaps, a
     if (value === null) {
       assert.ok(Math.max(...actual) - Math.min(...actual) <= 4, "gap remains neutral gray");
     } else {
-      const expected = colorForValue(value, lens);
-      assert.ok(actual.every((channel, c) => Math.abs(channel - expected[c]) <= 1), `${lon},${lat}: source value uses the published color scale`);
+      const brightness = terrainBrightness(source, (x + 0.5) * 360 / info.width, 90 - (y + 0.5) * 180 / info.height, 360 / info.width);
+      const expected = colorForValue(value, lens).map(channel => Math.min(255, Math.round(channel * brightness)));
+      assert.ok(actual.every((channel, c) => Math.abs(channel - expected[c]) <= 2), `${lon},${lat}: shaded source value uses the published color scale`);
     }
   }
   const legend = await sharp(resolve(root, `public/scenes/ceres/ceres-${lens.id}-legend.webp`))
