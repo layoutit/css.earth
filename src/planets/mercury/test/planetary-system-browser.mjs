@@ -169,14 +169,13 @@ try {
     });
 
   // ---------------------------------------------------------------------
-  // Near: at the default framing the system is hidden.
+  // Near: system orbit lines are hidden; celestial points belong to the sky.
   // ---------------------------------------------------------------------
   await resetToDefault(page);
   const near = await readSystemState(page);
   report.views.default = near;
-  check("system-hidden-at-default-framing",
-    near.opacity === 0 && near.groupOpacity === 0 && near.orbitPieceCount === 0 &&
-    near.markerVisibleCount === 0, near);
+  check("system-orbits-hidden-at-default-framing",
+    near.opacity === 0 && near.groupOpacity === 0 && near.orbitPieceCount === 0, near);
 
   // The fade: hidden while Mercury's orbit fills the view, opaque well
   // outside it, and never decreasing on the way out.
@@ -664,6 +663,7 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
   const opacities = [];
   for (const body of runtime.bodies) {
     const expected = system.illumination[body.id];
+    const photometry = cameraPointOracle(body.id, camera.eyeScene, rootBox);
     const marker = runtime.markers[body.id];
     result.bodies[body.id] = { ...body.illumination, markerOpacity: marker.opacity,
       oracle: expected, phaseImage: marker.phaseImage, phaseTransform: marker.phaseTransform };
@@ -671,9 +671,9 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
       Math.abs(body.illumination.illuminatedFraction - expected.illuminatedFraction) <= TOLERANCES.illuminatedFraction &&
       Math.abs(body.illumination.phaseAngleDegrees - expected.phaseAngleDegrees) <= 0.5,
       { id: body.id, runtime: body.illumination, oracle: expected });
-    check(`marker-opacity-is-prepared-brightness-${body.id}`, body.illumination !== undefined &&
-      Math.abs(marker.opacity - body.illumination.markerOpacity) < 1e-3 &&
-      /billboard/u.test(marker.phaseImage ?? ""), { id: body.id, marker, runtime: body.illumination });
+    check(`marker-opacity-matches-camera-photometry-${body.id}`,
+      Math.abs(marker.opacity - photometry.alpha) < 0.03 &&
+      /billboard/u.test(marker.phaseImage ?? ""), { id: body.id, marker, oracle: photometry });
     // The overlay is rolled so its lit side (screen right at zero roll, the
     // atlas's convention verified by the lighting suite on the body itself)
     // faces the Sun: the painted rotation equals the y-up angle of the
@@ -689,7 +689,7 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
       { id: body.id, ...result.bodies[body.id].roll });
     check(`phase-frame-matches-oracle-${body.id}`, marker.phaseFrame !== null &&
       Math.abs(marker.phaseFrame - expectedFrame) <= TOLERANCES.phaseFrames, { id: body.id, ...result.bodies[body.id].roll });
-    opacities.push({ id: body.id, opacity: marker.opacity, magnitudes: expected.magnitudesBelowBrightest });
+    opacities.push({ id: body.id, opacity: marker.opacity, magnitudes: photometry.magnitude, oracleAlpha: photometry.alpha });
   }
   // Geometry: from Mercury only Venus can pass between the observer and the
   // Sun; everything beyond stays near full. A crescent on Jupiter would mean
@@ -702,13 +702,14 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
     Object.entries(system.illumination).filter(([id]) => id !== "venus")
       .every(([, value]) => value.illuminatedFraction >= 0.9),
     { runtime: Object.fromEntries(beyondVenus.map((body) => [body.id, body.illumination?.illuminatedFraction])) });
-  // Brightness: opacity falls with magnitudes below the brightest, the
-  // brightest is opaque, the faintest sits on the floor, and they differ.
+  // Absolute apparent magnitude is camera-relative. At this distance the
+  // brightest need not saturate, and a planet's visibility floor is 0.25.
   const ordered = [...opacities].sort((a, b) => a.magnitudes - b.magnitudes);
   check("marker-brightness-follows-flux", ordered.every((entry, index) =>
     index === 0 || entry.opacity <= ordered[index - 1].opacity + 1e-9) &&
-    ordered[0].opacity > 0.99 && ordered.at(-1).opacity < 0.45 && ordered.at(-1).opacity >= 0.25 &&
-    ordered[0].id === "venus" && oracle.DWARF_PLANETS.includes(ordered.at(-1).id) &&
+    ordered[0].opacity > ordered.at(-1).opacity + 0.1 &&
+    ordered.at(-1).opacity >= 0.25 && Math.abs(ordered.at(-1).opacity - ordered.at(-1).oracleAlpha) < 0.03 &&
+    oracle.DWARF_PLANETS.includes(ordered.at(-1).id) &&
     ordered.filter((entry) => !oracle.DWARF_PLANETS.includes(entry.id)).at(-1).id === "neptune", { ordered });
   result.ordered = ordered;
 
@@ -725,11 +726,30 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
       const motion = document.querySelector('input[name="motion"]');
       if (motion.checked) motion.click();
     });
-    await setPose(page2, { controlPitch: poleOnControlPitch, controlYaw: 0, distanceKilometers: distanceKm });
+    // Place the real camera just beyond Venus along its direction from
+    // Mercury. A 1.2% clearance keeps it ahead of the projection's 1% near
+    // plane and resolves the true disc; no CSS enlargement is involved.
+    const probeCalibration = await calibrateControlPitch(page2);
+    const probeRoot = await page2.locator(".mercury-camera").boundingBox();
+    const baseEye = [geometry.stageCentre[0] - (probeRoot.x + probeRoot.width / 2),
+      geometry.stageCentre[1] - (probeRoot.y + probeRoot.height / 2), geometry.skyFocalPixels];
+    const baseLength = Math.hypot(...baseEye);
+    for (let index = 0; index < 3; index += 1) baseEye[index] /= baseLength;
+    const venusPosition = system.bodies.venus.position;
+    const venusDistance = Math.hypot(...venusPosition);
+    const pitch = Math.asin(venusPosition[1] / venusDistance / Math.hypot(baseEye[1], baseEye[2])) - Math.atan2(baseEye[1], baseEye[2]);
+    const yaw = Math.atan2(baseEye[0], -Math.sin(pitch) * baseEye[1] + Math.cos(pitch) * baseEye[2]) -
+      Math.atan2(venusPosition[0], venusPosition[2]);
+    await setPose(page2, { controlPitch: probeCalibration.controlForScenePitch(pitch * 180 / Math.PI),
+      controlYaw: yaw * 180 / Math.PI, distanceKilometers: venusDistance * 1.012 });
     await page2.waitForTimeout(150);
     await nextPaint(page2);
     const positions = await page2.evaluate(() => {
-      const read = (element) => { const box = element.getBoundingClientRect(); return [box.x + box.width / 2, box.y + box.height / 2, box.width]; };
+      const read = (element) => {
+        const box = element.getBoundingClientRect(), style = getComputedStyle(element);
+        return [box.x + box.width / 2, box.y + box.height / 2, box.width, Number(style.opacity),
+          style.visibility !== "hidden" && box.x >= 0 && box.y >= 0 && box.right <= innerWidth && box.bottom <= innerHeight];
+      };
       const out = { sun: read(document.querySelector(".mercury-sun-marker")) };
       for (const element of document.querySelectorAll(".mercury-system-marker")) out[element.dataset.body] = read(element);
       return out;
@@ -746,9 +766,9 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
       for (const element of document.querySelectorAll(".planet-heliocentric-marker-phase")) element.style.visibility = "";
     });
     result.darkening = {};
-    for (const [id, [cx, cy, size]] of Object.entries(positions)) {
-      if (id === "sun") continue;
-      const opacity = runtime.markers[id]?.opacity ?? 1;
+    let resolvedPhaseChecks = 0;
+    for (const [id, [cx, cy, size, opacity, visible]] of Object.entries(positions)) {
+      if (id === "sun" || !visible || size < 4) continue;
       const centroid = darkeningCentroid(hidden, shown, [cx * 2, cy * 2], size, 4 * opacity);
       const toSun = [positions.sun[0] - cx, positions.sun[1] - cy];
       const angle = centroid.offset === null ? null
@@ -765,13 +785,40 @@ async function measurePhases(page, geometry, poleOnControlPitch, distanceKm) {
       // unit and cannot be read off pixels (its frame and roll are checked
       // on the DOM above).
       if (opacity >= 0.5) {
+        resolvedPhaseChecks += 1;
         check(`phase-overlay-darkens-${id}`, centroid.darkenedShare > 0.2 && centroid.darkenedShare < 0.98, { id, ...centroid });
       }
     }
+    check("phase-pixels-cover-physically-resolved-venus", resolvedPhaseChecks >= 1 && result.darkening.venus !== undefined,
+      { resolvedPhaseChecks, venusPixels: positions.venus[2] });
   } finally {
     await dpr2.close();
   }
   return result;
+}
+
+// Independent Galaxio bodies/photometry.ts + pointPhotometry.ts reference,
+// evaluated from this suite's ephemeris oracle and the camera read off CSS.
+// The app's prepared vault fixes FOV=60 degrees and adaptation=.052 cd/m²;
+// planets retain Galaxio's intentional 0.25 + 0.75 * photometric-alpha lift.
+function cameraPointOracle(id, eye, viewport) {
+  const position = system.bodies[id].position;
+  const toSun = system.sun.map((component, index) => component - position[index]);
+  const toEye = eye.map((component, index) => component - position[index]);
+  const sunDistanceKm = Math.hypot(...toSun), eyeDistanceKm = Math.hypot(...toEye);
+  const cosine = toSun.reduce((sum, component, index) => sum + component * toEye[index], 0) / (sunDistanceKm * eyeDistanceKm);
+  const phase = Math.acos(Math.max(-1, Math.min(1, cosine)));
+  const phaseFunction = Math.max(1e-3, (Math.sin(phase) + (Math.PI - phase) * Math.cos(phase)) / Math.PI);
+  const magnitude = -26.74 - 2.5 * Math.log10(oracle.GEOMETRIC_ALBEDO[id] * phaseFunction) -
+    5 * Math.log10(oracle.MEAN_RADIUS_KILOMETERS[id] / oracle.AU_KILOMETERS) +
+    5 * Math.log10(sunDistanceKm * eyeDistanceKm / oracle.AU_KILOMETERS ** 2);
+  const luminance = 2.53016e-6 * 10 ** (-0.4 * magnitude) / 1.66138e-6;
+  const display = 2 * Math.log(1 + 2.2 * luminance) / Math.log(1 + 2.2 * 0.052);
+  const screenFactor = Math.min(1.5, Math.max(0.7, Math.min(viewport.width, viewport.height) / 600));
+  const rawRadiusPx = 1.0727 * screenFactor * display ** 0.55;
+  const fade = Math.min(1, Math.max(0, (rawRadiusPx - 0.25) / 0.35)) ** 2;
+  const alpha = 0.25 + 0.75 * Math.min(1, Math.max(0, display)) ** (1 / 2.2) * fade;
+  return { magnitude, rawRadiusPx, alpha };
 }
 
 // Mercury's own marker: the lighting overlay stays alive over the sprite, so
@@ -827,10 +874,14 @@ async function measureMercuryMarkerStep(context, geometry) {
     // The overlay darkens the marker on the side away from the Sun (the Sun
     // stands to the left at the default yaw): the darkening's centroid sits
     // right of the centre, at both stages.
-    for (const stage of ["billboard", "marker"]) {
+    // Direction is measurable on the resolved billboard. A 1.2px point has
+    // no reliable subpixel centroid; it must still carry actual darkening.
+    for (const stage of ["billboard"]) {
       check(`mercury-${stage}-stage-darkened-away-from-sun`, samples[stage].darkening.darkenedShare > 0.1 &&
         samples[stage].darkening.offset !== null && samples[stage].darkening.offset[0] > 0.3, samples[stage]);
     }
+    check("mercury-marker-stage-retains-painted-shading", samples.marker.darkening.darkenedShare > 0 &&
+      samples.marker.darkening.offset !== null, samples.marker);
     return { ratio, samples };
   } finally {
     await dpr2.close();

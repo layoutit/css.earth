@@ -73,8 +73,12 @@ try {
     systemMarkerCount: document.querySelectorAll(".mercury-system-marker").length,
     sunMarkerCount: document.querySelectorAll(".mercury-sun-marker").length,
     systemGroupCount: document.querySelectorAll(".planet-heliocentric-system").length,
+    celestialRootCount: document.querySelectorAll(".mercury-celestial-vault").length,
+    systemMarkerGroupCount: document.querySelectorAll(".planet-heliocentric-system-markers").length,
     captionCount: document.querySelectorAll(".mercury-caption").length,
-    captionMeasureCount: document.querySelectorAll(".planet-heliocentric-caption-measure").length,
+    captionMeasureCount: document.querySelectorAll(".mercury-captions .planet-heliocentric-caption-measure").length,
+    starCaptionCount: document.querySelectorAll(".mercury-star-caption").length,
+    starCaptionMeasureCount: document.querySelectorAll(".planet-heliocentric-star-captions .planet-heliocentric-caption-measure").length,
     retainedCaptionCount: window.__mercury.dom.retainedCaptionCount,
     retainedStarCount: document.querySelectorAll(".mercury-skybox-stars .planet-cubic-sky-star").length,
   }));
@@ -83,16 +87,18 @@ try {
     mountedObjectCount: 1,
     activeObjectId: "mercury",
     stageCount: 1,
-    // Sky, Sun root, body camera, material overlay, orbit overlay.
-    stageChildren: 5,
+    // Sky, Sun root, celestial vault, body camera, material and orbit overlays.
+    stageChildren: 6,
     // Sky faces, the Sun billboard, the perspective camera with its body and
     // interior, the billboard disc and the material overlay, and the orbit
     // overlay's piece pool and body marker (2242), plus the planetary
     // system's group, its 1536 orbit pieces (twelve rings), twelve markers
     // with their phase overlays, the Sun marker (1562), and the captions:
     // their group, eight retained slots and fourteen measuring elements (23),
-    // and the catalogue stars: their group and 1,599 retained points (1600).
-    stageElements: 5427,
+    // and the catalogue stars: their group and 1,599 retained points (1600),
+    // plus one label, its group and 450 prepared proper-name measures (452),
+    // and the celestial root and its separate planetary point group (2).
+    stageElements: 5881,
     cameraCount: 1,
     skyboxFaceCount: 6,
     sunCount: 1,
@@ -109,8 +115,12 @@ try {
     systemMarkerCount: 12,
     sunMarkerCount: 1,
     systemGroupCount: 1,
+    celestialRootCount: 1,
+    systemMarkerGroupCount: 1,
     captionCount: 8,
     captionMeasureCount: 14,
+    starCaptionCount: 1,
+    starCaptionMeasureCount: 450,
     retainedCaptionCount: 8,
     retainedStarCount: 1599,
   });
@@ -143,7 +153,7 @@ try {
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
     viewBank: { interiorMounted: Boolean(document.querySelector(".polycss-mesh.mercury-cutaway")), retainedInteriorNodeCount: (document.querySelector(".polycss-mesh.mercury-cutaway").querySelectorAll("*").length + 1) },
   })), {
-    elements: 5427,
+    elements: baseline.stageElements,
     interiorLeaves: 446,
     viewBank: {
       interiorMounted: true,
@@ -655,7 +665,7 @@ try {
   for (const sample of lodLadder) {
     assert.equal(sample.datasetLod, sample.stage);
     assert.equal(sample.stable, true);
-    assert.equal(sample.elements, 5427);
+    assert.equal(sample.elements, baseline.stageElements);
     assert.equal(sample.materialFrame, lodLadder[0].materialFrame);
     assert.ok(Math.abs(sample.billboardStyleOpacity - sample.billboardOpacity) <
       1e-6);
@@ -679,8 +689,8 @@ try {
     [0, 0, 0, 0, 0, 0.29, 0.71, 1, 1]);
   assert.ok(lodLadder[2].billboardOpacity > 0.4 &&
     lodLadder[2].billboardOpacity < 0.6);
-  // The planetary system: hidden at the close framings above, opaque at the
-  // dolly's far bound with every planet and the Sun marker on screen when
+  // The planetary orbits: hidden at close framing, opaque at the dolly's
+  // far bound with every planet and the Sun marker on screen when
   // looking down on the ecliptic, and nothing mounts or unmounts on the way.
   const farSystem = await page.evaluate(() => {
     const stats = window.__mercury.camera.stats();
@@ -723,7 +733,7 @@ try {
     `far bound ${farSystem.maximumDistanceAu} au`);
   assert.ok(farSystem.wheelNotches > 20 && farSystem.wheelNotches < 40);
   assert.equal(farSystem.stable, true);
-  assert.equal(farSystem.elements, 5427);
+  assert.equal(farSystem.elements, baseline.stageElements);
 
   // Back in close: the row cache resumes on the retained rows.
   assert.equal(await page.evaluate(() => {
@@ -739,7 +749,7 @@ try {
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.childElementCount), baseline.stageChildren);
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-    stage.querySelectorAll("*").length), 5427);
+    stage.querySelectorAll("*").length), baseline.stageElements);
   assert.equal(await page.evaluate(() =>
     window.__mercury.assertStableDomIdentity()), true);
   assert.deepEqual(externalRequests, []);

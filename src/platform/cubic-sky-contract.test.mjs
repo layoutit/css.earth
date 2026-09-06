@@ -144,6 +144,17 @@ test("all object packages use the compact Mars-derived cubic-sky standard", () =
   }
 });
 
+test("catalogue star transport rejects missing or invalid prepared raw radii", () => {
+  const plan = PREPARED_MERCURY_STARFIELD;
+  assert.equal(validatePreparedCubicSky(plan, { requireSun: false }), plan);
+  for (const rawRadiusPx of [undefined, Number.NaN, Infinity, -1]) {
+    const retained = plan.catalogueStars.retained.map((star, index) =>
+      index === 0 ? { ...star, rawRadiusPx } : star);
+    assert.throws(() => validatePreparedCubicSky({ ...plan,
+      catalogueStars: { ...plan.catalogueStars, retained } }, { requireSun: false }), /incompatible/u);
+  }
+});
+
 test("keeps the retained cube and directional Sun in one generic stylesheet", async () => {
   const css = await readFile(new URL("./cubic-sky.css", import.meta.url),
     "utf8");

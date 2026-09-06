@@ -272,7 +272,10 @@ export function createRetainedCubicSkyOrbit({
     const zoomChanged = zoom !== publishedZoom;
     // The Sun and the orbit, resolved relative to the camera in float64; the
     // same projection places the body.
-    if (perspective) projected = perspective.publish(orientation.sceneMatrix(), sceneMatrix);
+    if (perspective) {
+      heliocentric.setSkyView?.({ matrix: sky.matrix, exposure: cubicSky.starExposure?.() ?? null });
+      projected = perspective.publish(orientation.sceneMatrix(), sceneMatrix);
+    }
     else publishCamera({ sceneMatrix, zoom });
     if (skyboxChanged || zoomChanged) {
       cubicSky.setOrientation({

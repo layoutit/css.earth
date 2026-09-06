@@ -78,9 +78,9 @@ test("the overlay is fitted to the published silhouette, floored to the marker",
     const silhouette = (radius) => ({ centre: [12, -8], radial: [1, 0], radialSemiAxis: radius, tangentialSemiAxis: radius * 0.5 });
     f.selection.setView({ ...f.view, ...geometryView, body: { silhouette: silhouette(100) }, revision: 2 }); await f.settle();
     assert.equal(root.style.transform, `translate(12px, -8px) rotate(0deg) scale(${px(100 * fit.unitScale)}, ${px(50 * fit.unitScale)}) rotate(0deg)`);
-    f.selection.setView({ ...f.view, ...farView("marker"), body: { silhouette: silhouette(1) }, revision: 3 }); await f.settle();
+    f.selection.setView({ ...f.view, ...farView("marker"), body: { silhouette: silhouette(fit.minimumRadius / 2) }, revision: 3 }); await f.settle();
     assert.equal(root.style.transform, `translate(12px, -8px) rotate(0deg) scale(${px(fit.minimumRadius * fit.unitScale)}, ${px(fit.minimumRadius * fit.unitScale)}) rotate(0deg)`);
-    assert.ok(fit.minimumRadius > 1);
+    assert.equal(fit.minimumRadius, 0.6);
   } finally { f.restore(); }
 });
 

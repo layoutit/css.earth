@@ -27,6 +27,9 @@
 // (`Rx(pitch) Ry(yaw)`); the camera looks down -z from `(0, 0, distance)`
 // world units in front of the body's centre after that rotation.
 
+import { planetPointPresentation, planetOrbitLabelPriority, validPreparedPlanetPoint } from "./planet-point-presentation.mjs";
+import { screenFactor } from "./star-photometry.mjs";
+
 export const PREPARED_HELIOCENTRIC_VIEW_SCHEMA =
   "cssearth-prepared-heliocentric-view@1";
 
@@ -102,6 +105,13 @@ export function validatePreparedPlanetarySystem(system, plan) {
       system.bodies.some((body) =>
         !/^[a-z][a-z0-9-]*$/u.test(body?.id ?? "") || body.id === plan.bodyId ||
         !vector(body.position) || !positive(body.semiMajorAxisUnits) ||
+        !positive(body.radiusUnits) || !validPreparedPlanetPoint(body.pointPresentation) ||
+        !positive(body.orbit?.labelPresentation?.radiusUnits) ||
+        !positive(body.orbit.labelPresentation.angularFadeInRadians) ||
+        !(body.orbit.labelPresentation.angularFullRadians > body.orbit.labelPresentation.angularFadeInRadians) ||
+        !positive(body.orbit.labelPresentation.nearDistanceUnits) ||
+        !(body.orbit.labelPresentation.farDistanceUnits > body.orbit.labelPresentation.nearDistanceUnits) ||
+        !positive(body.orbit.labelPresentation.minimumEligibility) ||
         !unit(body.orbit?.normal) || !unit(body.orbit?.perihelionDirection) ||
         !Array.isArray(body.orbit.vertices) || body.orbit.vertices.length < 8 ||
         body.orbit.vertexCount !== body.orbit.vertices.length ||
@@ -143,6 +153,9 @@ export function projectHeliocentricView(plan, {
   frustumPadding = 1.25,
   nearShare = 0.01,
   system = false,
+  // Celestial points remain visible in a near-body sky; their rings only
+  // need projection once the orbit presentation actually draws them.
+  systemOrbits = true,
   // Per-ring chord weights overriding the prepared trails (a session's
   // spans); keyed "own" and by body id.
   trailWeights = null,
@@ -332,12 +345,37 @@ export function projectHeliocentricView(plan, {
   // distance nothing is projected, so a near view costs what it did.
   let systemProjection = null;
   if (system && plan.system) {
+    const factor = screenFactor(viewportWidth, viewportHeight);
+    const radiansPerPixel = 2 * Math.atan(viewportHeight / (2 * focal)) / viewportHeight;
+    const projectBody = (body) => {
+      const marker = projectPoint(body.position);
+      const eye = toEye(body.position);
+      const centreDistance = magnitude(eye);
+      const light = sunEye.map((component, index) => component - eye[index]);
+      const cosinePhase = -dot(light, eye) / (magnitude(light) * centreDistance);
+      const appearance = planetPointPresentation(body.pointPresentation, centreDistance,
+        Math.acos(Math.max(-1, Math.min(1, cosinePhase))), factor);
+      const trueAngle = centreDistance > body.radiusUnits ? 2 * Math.asin(body.radiusUnits / centreDistance) : Math.PI;
+      const physicalDiameterPx = trueAngle / radiansPerPixel;
+      return Object.freeze({
+        ...marker,
+        // A planet's disc follows its physical angular diameter. Brightness
+        // changes opacity, never the body's size; only unresolved discs get
+        // the common 1.2px visibility floor.
+        diameterPx: Math.max(physicalDiameterPx, 2 * body.pointPresentation.policy.minimumRadiusPx),
+        alpha: appearance.alpha,
+        magnitude: appearance.magnitude,
+        labelPriority: planetOrbitLabelPriority(body.orbit.labelPresentation, magnitude(sunEye), centreDistance, appearance.magnitude),
+        physicalDiameterPx,
+        photometricRadiusPx: appearance.radiusPx,
+      });
+    };
     systemProjection = Object.freeze({
       sun: projectPoint(plan.system.sun.position),
       bodies: Object.freeze(plan.system.bodies.map((body) => Object.freeze({
         id: body.id,
-        marker: projectPoint(body.position),
-        orbitSegments: projectRing(body.orbit.vertices, trailWeights?.[body.id] ?? body.orbit.trail),
+        marker: projectBody(body),
+        orbitSegments: systemOrbits ? projectRing(body.orbit.vertices, trailWeights?.[body.id] ?? body.orbit.trail) : Object.freeze([]),
       }))),
     });
   }
