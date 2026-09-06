@@ -83,7 +83,9 @@ export async function prepareEarthPresentation() {
     const material=plan.material[id],address=(frame,resource,frameIndex=null,row=null)=>({resource,frame:frameIndex,row,backgroundPosition:frame.backgroundPosition,backgroundSize:frame.backgroundSize});
     const illumination=material.illumination;
     return {id,target:index(materialNodes[id]),frame:{source:illumination?"prepared-light-z":"sun-z",minimum:illumination?.minimumLightViewZ??-1,maximum:illumination?.maximumLightViewZ??1,count:material.frameCount,baseFrame:0,remap:null},
-
+      // Keep the globe's limb at overview scale; regional and city views do
+      // not need its full atmosphere atlas or its directional row updates.
+      ...(id === "atmosphere" ? { maximumZoom: 4 } : {}),
       banks:[{id,frames:material.frames.map(frame=>address(frame,`${id}:${frame.rowIndex}`,frame.frameIndex,frame.rowIndex)),
         default:null,fixed:id==="lighting"?address(material.shadowlessPresentation,"shadowless:lighting"):null,
         rows:material.preparedRows.map((_,row)=>({row,resource:`${id}:${row}`,firstFrame:row*material.framesPerShard,lastFrame:Math.min(material.frameCount-1,(row+1)*material.framesPerShard-1)}))}],

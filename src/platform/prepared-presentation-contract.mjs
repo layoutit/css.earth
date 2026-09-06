@@ -103,7 +103,8 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   const tracks = array(plan.materials, "materials"); unique(tracks.map(track => track.id), "material tracks");
   const trackMap = new Map(tracks.map(track => [track.id, track]));
   for (const track of tracks) {
-    record(track, "material", ["id", "target", "frame", "defaultFrame", "banks", "rotation", "frameAttribute", "modeAttribute", "quoted", "farBank"]);
+    record(track, "material", ["id", "target", "frame", "defaultFrame", "banks", "rotation", "frameAttribute", "modeAttribute", "quoted", "farBank", "maximumZoom"]);
+    if (track.maximumZoom !== undefined && (!Number.isFinite(track.maximumZoom) || track.maximumZoom <= 0)) fail("material maximum zoom must be positive and finite");
     string(track.id, "track id"); node(track.target);
     if ([tree.camera, tree.scene].includes(track.target)) fail("material target cannot own camera transforms");
     frameMapping(track.frame);

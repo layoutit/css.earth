@@ -99,6 +99,28 @@ try {
     initialPoleAxis.south.y - initialPoleAxis.north.y,
     "Earth's starting polar axis must be closer to vertical than horizontal");
   await checkDirectionalAtmosphere(page, { id: "earth", track: "atmosphere", phaseKey: "frame" });
+  // Regional zoom clears the retained atmosphere image and its directional
+  // demand without changing the user's checkbox or another object's policy.
+  const materialSettled = () => page.waitForFunction(() => {
+    const selection = window.__earth.runtime.selection();
+    return !selection.pending && !selection.loadingMaterial &&
+      window.__earth.runtime.resources().pools.find(pool => pool.id === "atmosphere").pending === 0;
+  });
+  await page.evaluate(() => window.__earth.setView({ zoom: 4 })); await materialSettled();
+  assert.notEqual(await page.locator(".earth-atmosphere-material").evaluate(node => node.style.backgroundImage), "none");
+  await page.evaluate(() => window.__earth.setView({ zoom: 4.001 })); await materialSettled();
+  const atmosphereRequests = () => requestedAssets.filter(path => path.includes("earth-atmosphere-")).length;
+  const beforeZoomedMotion = atmosphereRequests();
+  for (const controlPitch of [-80, 0, 80]) {
+    await page.evaluate(controlPitch => window.__earth.setView({ controlPitch }), controlPitch); await materialSettled();
+    assert.equal(await page.locator(".earth-atmosphere-material").evaluate(node => node.style.backgroundImage), "none");
+    assert.equal(await page.evaluate(() => window.__earth.material.state().atmosphere.enabled), false);
+  }
+  assert.equal(atmosphereRequests(), beforeZoomedMotion);
+  assert.equal(await page.locator('input[name="atmosphere"]').isChecked(), true);
+  await page.evaluate(camera => window.__earth.setView(camera), initialCamera); await materialSettled();
+  assert.equal(await page.evaluate(() => window.__earth.material.state().atmosphere.enabled), true);
+  assert.notEqual(await page.locator(".earth-atmosphere-material").evaluate(node => node.style.backgroundImage), "none");
   const cameraTransforms = await page.evaluate(async ({ initialCamera }) => {
     const scene = document.querySelector(".planet-stage .polycss-scene");
     const sky = document.querySelector(".earth-skybox-orientation");

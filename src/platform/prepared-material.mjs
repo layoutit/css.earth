@@ -24,8 +24,9 @@ export function preparedMaterialState(track, selected, view) {
   const bank = track.banks.find(bank => bank.id === (far ? track.farBank : selected.bank));
   const mode = selected.mode === "fixed" ? selected.fixedMode : useDefault && bank.default ? "default" : "directional";
   const address = selected.mode === "fixed" ? bank.fixed : useDefault && bank.default ? bank.default : bank.frames[frame];
+  const zoomHidden = track.maximumZoom !== undefined && view.zoom > track.maximumZoom;
   return { frame, calculatedFrame, useDefault, bank, address, row: address?.row ?? null, mode,
-    enabled: selected.enabled, rotationEnabled: selected.rotationEnabled,
+    enabled: selected.enabled && !zoomHidden, zoomHidden, rotationEnabled: selected.rotationEnabled,
     sunViewDirection: direction, referenceDirection: reference };
 }
 
@@ -55,7 +56,7 @@ export function createPreparedMaterialPublisher(track,element,camera) {
       const publishHidden=selected.publishWhenHidden??"always";
       const publishAddress=next.enabled||publishHidden==="always"||publishHidden==="static"&&next.mode!=="directional";
       let addressPublished=false;
-      if(!next.enabled&&selected.clearWhenHidden){if(write("backgroundImage","none"))state.addressWrites++;lastAddress=null;}
+      if(next.zoomHidden||!next.enabled&&selected.clearWhenHidden){if(write("backgroundImage","none"))state.addressWrites++;lastAddress=null;}
       else if(address&&publishAddress){
         const url=address.resource===null?null:resources.url(address.resource);
         if(address.resource!==null&&!url)throw new Error("A ready prepared material has no decoded URL.");
