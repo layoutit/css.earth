@@ -343,7 +343,8 @@ const prepared = Object.freeze({
       retainedRadiusShareOfHalfSide: RETAINED_STAR_RADIUS_SHARE_OF_HALF_SIDE,
       retained: Object.freeze(catalogueStars.stars.filter((star) => star.presentation === "retained").map((star) => Object.freeze({
         hip: star.hip, name: star.name, magnitude: star.magnitude, band: star.band,
-        direction: star.direction, radiusPx: star.radiusPx, luminance: star.luminance, haloAlpha: star.haloAlpha, color: star.color,
+        direction: star.direction, radiusPx: star.radiusPx, rawRadiusPx: star.rawRadiusPx,
+        luminance: star.luminance, haloAlpha: star.haloAlpha, color: star.color,
         transform: retainedStarTransform(star.direction),
       }))),
       // Named stars beyond the retained band are not carried: checks read
