@@ -20,6 +20,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   let desiredPages = new Map();
   let destroyed = false;
   let enabled = true;
+  let suspended = false;
   let playing = false;
   let pendingFrame = null;
   let view = null;
@@ -90,7 +91,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   function refresh() {
     pendingFrame = null;
     if (destroyed || !view) return;
-    if (!enabled || view.zoom <= plan.minimumZoom) {
+    if (!enabled || suspended || view.zoom <= plan.minimumZoom) {
       desired = [];
       desiredPages.clear();
       index.update([]);
@@ -128,7 +129,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   }
 
   function pump() {
-    if (destroyed || !enabled || plan.topology === "wmts-quadtree@1" && index.stats().activeLoads) return;
+    if (destroyed || !enabled || suspended || plan.topology === "wmts-quadtree@1" && index.stats().activeLoads) return;
     for (const key of desired) {
       if (activeLoads >= plan.maximumConcurrentLoads) break;
       if (slots.some((slot) => slot.key === key)) continue;
@@ -251,6 +252,15 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       schedule();
     },
     publish(nextView) { view = nextView; schedule(); },
+    setSuspended(value) {
+      if (suspended === Boolean(value)) return;
+      suspended = Boolean(value);
+      if (suspended) {
+        desired = []; desiredPages.clear(); index.update([]);
+        for (const slot of slots) if (slot.key) release(slot);
+      }
+      schedule();
+    },
     setLens(lens) {
       enabled = (plan.lensIds ?? lensIds).includes(lens.id);
       if (!enabled) {
@@ -263,7 +273,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     },
     setPlaying(value) { playing = Boolean(value); schedule(); },
     stats() {
-      return { dataset: plan.dataset, qualification: plan.qualification,
+      return { dataset: plan.dataset, qualification: plan.qualification, suspended,
         poolSize: slots.length, desired: [...desired], activeLoads, pendingSelection: pendingFrame !== null,
         retained: slots.filter((slot) => slot.key).map(({ key, ready, published, empty }) => ({ key, ready, published, ...(empty ? {empty} : {}) })),
         index: index.stats(), apiImages: apiImages.stats(),

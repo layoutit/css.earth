@@ -142,7 +142,7 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
     }
     const next=request(entry,path);
     if(entry.node.stub)return null;
-    const own=(entry.node.pages??[]).map(inspect).filter(p=>p.visible&&p.span>=1).map(p=>({...p,path:next}));
+    const own=(entry.node.pages??[]).map(inspect).filter(p=>p.visible&&p.span>=1).map(p=>({...p,path:next,tile:entry.node}));
     const refine=!plan.coarsestCut && entry.span>entry.node.maximumCssSpan*(plan.selectionScale??1);
     if(entry.node.children.length && refine){
       const childGroups=entry.node.children.map(key=>visit(key,next));
@@ -173,6 +173,38 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
     const retained=new Map(result.directories.map(ref=>[preparedReferenceKey(ref),ref]));
     for(const [key,ref] of directories)if(!retained.has(key))retained.set(key,ref);
     return {...result,directories:[...retained.values()],cuts:[{scale:plan.selectionScale??1,count:selected.length,faces},...(result.cuts??[])]};
+  }
+  if ((plan.selectionScale ?? 1) > 1 && !plan.coarsestCut) {
+    // A uniform coarser cut can leave capacity unused. Refine its largest
+    // visible groups one prepared level at a time, keeping every replacement
+    // group complete. This avoids falling several levels back when just one
+    // extra child would exceed the small observation pool.
+    const attempted = new Set();
+    for (let pass = 0; pass < capacity * 20; pass++) {
+      const groups = new Map();
+      for (const entry of selected) {
+        const group = groups.get(entry.tile.key) ?? { tile: entry.tile, entries: [], path: entry.path, projection: inspect(entry.tile.key) };
+        group.entries.push(entry); groups.set(entry.tile.key, group);
+      }
+      const next = [...groups.values()].filter(group => !attempted.has(group.tile.key) && group.tile.children.length &&
+        group.projection.span > group.tile.maximumCssSpan).sort((a,b) => b.projection.span - a.projection.span ||
+          Math.hypot(...a.projection.center) - Math.hypot(...b.projection.center))[0];
+      if (!next) break;
+      attempted.add(next.tile.key);
+      const children = next.tile.children.map(inspect).filter(entry => entry.visible && entry.span >= 1);
+      const replacements = [];
+      for (const child of children) {
+        const path = request(child, next.path);
+        for (const key of child.node.pages ?? []) {
+          const piece = inspect(key);
+          if (piece.visible && piece.span >= 1) replacements.push({...piece, path, tile: child.node});
+        }
+      }
+      if (!replacements.length || children.some(child => child.node.stub || !child.node.pages?.length && child.node.children?.length)) continue;
+      const rest = selected.filter(entry => entry.tile !== next.tile);
+      if (rest.length + replacements.length > capacity || [...rest, ...replacements].reduce((sum,entry) => sum + entry.node.width * entry.node.height * 4, 0) > byteCapacity) continue;
+      selected.splice(0, selected.length, ...rest, ...replacements);
+    }
   }
   const ordered=new Map(selected.flatMap(entry=>entry.path.map(ref=>[preparedReferenceKey(ref),ref])));
   for(const [key,ref] of directories)if(!ordered.has(key))ordered.set(key,ref);

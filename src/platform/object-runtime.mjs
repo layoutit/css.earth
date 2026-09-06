@@ -40,6 +40,16 @@ export function createObjectRuntime(definition, services = nativeServices) {
     let mounted = null, orbit = null, currentView = null, reference = null, previousPublication = null, heliocentric = null;
     const pageLayers = new Map();
     let geographic = null;
+    function syncPageUnderlays() {
+      if (lifetime.disposed) return;
+      // A prepared observation on the shared surface must remain above its
+      // base. Ordinary detail pages would otherwise occlude that overview.
+      // Reuse their retained pool when the observation is cleared.
+      const suspended = geographic?.stats().published ?? false;
+      for (const [id, layer] of pageLayers) {
+        if (!definition.pageLayers.find(plan => plan.id === id).geographic) layer.setSuspended?.(suspended);
+      }
+    }
     const selectionListeners = new Set();
     lifetime.onDispose(() => selectionListeners.clear());
     let lastGeographicStatus = null;
@@ -218,7 +228,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
         if (layer.geographic) {
           geographic = createGeographicLensRuntime({ pages, capacity: layer.plan, surface: mounted.observationSurface, objectId: definition.id, getEntity: selectedEntity,
             selectBase: id => id === definition.destinations.defaultLens ? selection.dispatch({kind:"lens",id}) : Promise.resolve(false),
-            onChange: () => { controls?.publish(); notifySelection(); } });
+            onChange: () => { syncPageUnderlays(); controls?.publish(); notifySelection(); } });
           context.own(() => geographic.destroy());
           pages.replacePlan(null);
         } else pages.setLens({ id: initialSelection.lensId });

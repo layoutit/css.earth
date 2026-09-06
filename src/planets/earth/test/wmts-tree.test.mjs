@@ -99,3 +99,22 @@ test("wide views reveal the base surface when complete root groups exceed either
     assert.equal(close.baseSurfaceFallback,undefined);
   }
 });
+
+test("a constrained viewport spends remaining slots on complete child groups instead of a distant parent fallback",()=>{
+  const nodes=new Map(), normal=[0,0,1];
+  const build=(key,level,x,y,size)=>{
+    const corners=[[x,y,0],[x+size,y,0],[x+size,y+size,0],[x,y+size,0]];
+    const tile={key,level,corners,normal,pages:[`${key}-image`],children:[],maximumCssSpan:120};
+    const image={key:tile.pages[0],level,corners,normal,width:256,height:256,children:[]};
+    nodes.set(key,tile);nodes.set(image.key,image);
+    if(level<7)for(const [i,[dx,dy]]of [[0,0],[1,0],[0,1],[1,1]].entries())tile.children.push(build(`${key}-${i}`,level+1,x+dx*size/2,y+dy*size/2,size/2).key);
+    return tile;
+  };
+  const root=build("root",5,-400,-400,800);
+  const selection=selectCityPages({topology:"wmts-quadtree@1",roots:[root],poolSize:14,maximumDecodedBytes:14*256*256*4},
+    nodes,[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],1,{width:1000,height:1000});
+  assert.equal(selection.keys.length,7);
+  assert.equal(selection.keys.filter(key=>nodes.get(key).level===7).length,4);
+  assert.equal(selection.keys.filter(key=>nodes.get(key).level===6).length,3);
+  assert.ok(!selection.keys.includes(root.pages[0]));
+});
