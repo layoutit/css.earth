@@ -34,6 +34,8 @@ body {
   z-index: 0;
   inset: 0;
   container-type: size;
+  isolation: isolate;
+  pointer-events: none;
   min-width: 0;
   min-height: 0;
   margin: 0;
@@ -63,4 +65,19 @@ body.priming::after {
 
 @keyframes shell-loading {
   to { transform: rotate(1turn); }
+}
+
+html:not([data-ready="true"]) .planet-stage { opacity: 0.001; }
+
+.planet-input-surface {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+  touch-action: none;
+}
+html[data-ready="true"] .planet-input-surface { pointer-events: auto; }
+.planet-input-surface:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 72%);
+  outline-offset: -4px;
 }

@@ -106,8 +106,7 @@ export async function prepareEarthPresentation() {
         frameOverride:null,clearWhenHidden:false,fixedMode:"shadowless",publishWhenHidden:"static",
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
   })));
-  return {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,inputSelector:".earth-input-surface",
-    destinations:{catalog,defaultLens:"normal",statuses:{detail:"WorldCover imagery · 2021. Source gaps retain the Earth base map.",overview:"Earth overview. WorldCover detail is unavailable at this location."}},
+  return {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,destinations:{catalog,defaultLens:"normal",statuses:{detail:"WorldCover imagery · 2021. Source gaps retain the Earth base map.",overview:"Earth overview. WorldCover detail is unavailable at this location."}},
     assets:{entries,pools:[preparedResourcePool("mounted",entries,{concurrency:2}),preparedResourcePool("default-materials",entries,{retention:"warm"}),
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2}),
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],

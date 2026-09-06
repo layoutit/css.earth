@@ -23,7 +23,7 @@ import {
   JUPITER_MATERIAL_SURFACE_RADIUS,
   JUPITER_OPENSPACE_AMBIENT_INTENSITY,
   JUPITER_OPENSPACE_TERMINATOR_SMOOTHSTEP,
-  JUPITER_WORLD_LIGHT_DIRECTION,
+  JUPITER_REFERENCE_LIGHT_DIRECTION,
   measurePublishedJupiterAtmosphereReference,
   prepareJupiterMaterialFrame,
 } from "./prepare-atmosphere.mjs";
@@ -47,7 +47,7 @@ const bankFingerprintSources = Object.freeze([
   "source/atmosphere/psg-jupiter-20260830.cfg",
   "source/atmosphere/hubble-opal-minnaert.json",
   "source/presentation/navigation-marker.png",
-  "Saturn accepted OpenSpace default scene-graph Sun direction",
+  "runtime/preparedSkySun.mjs",
   "sharp runtime versions",
 ]);
 const bankFingerprintHash = createHash("sha256");
@@ -55,6 +55,7 @@ for (const path of [
   "./prepare-atmosphere.mjs",
   "./prepare-lighting.mjs",
   "../runtime/preparedCamera.mjs",
+  "../runtime/preparedSkySun.mjs",
   "../source/atmosphere/psg-jupiter-20260830.cfg",
   "../source/atmosphere/hubble-opal-minnaert.json",
   "../source/presentation/navigation-marker.png",
@@ -72,22 +73,15 @@ const bankFingerprint = bankFingerprintHash
   .digest("hex")
   .slice(0, 12);
 
-const MINIMUM_PITCH_DEGREES = -3.13;
-const MAXIMUM_PITCH_DEGREES = 86.87;
-const DEFAULT_PITCH_DEGREES = PREPARED_JUPITER_CAMERA.initialScenePitchDegrees;
-const PITCH_STEP_DEGREES = 0.5;
-const FRAME_COUNT = Math.round(
-  (MAXIMUM_PITCH_DEGREES - MINIMUM_PITCH_DEGREES) / PITCH_STEP_DEGREES,
-) + 1;
+const FRAME_COUNT = 181;
+const lightPhase = frame => -1 + 2*frame/(FRAME_COUNT-1);
 const FRAMES_PER_ROW = 4;
 const ROW_COLUMNS = 4;
 const FRAME_GUTTER = 8;
 const FRAME_STRIDE = JUPITER_MATERIAL_SIZE + FRAME_GUTTER * 2;
 const ROW_COUNT = Math.ceil(FRAME_COUNT / FRAMES_PER_ROW);
 const MAXIMUM_RETAINED_ROW_COUNT = 3;
-const DEFAULT_FRAME = Math.round(
-  (DEFAULT_PITCH_DEGREES - MINIMUM_PITCH_DEGREES) / PITCH_STEP_DEGREES,
-);
+const DEFAULT_FRAME = Math.round((JUPITER_REFERENCE_LIGHT_DIRECTION[2]+1)/2*(FRAME_COUNT-1));
 const DEFAULT_ROW = Math.floor(DEFAULT_FRAME / FRAMES_PER_ROW);
 const rows = [];
 const presentations = [];
@@ -102,9 +96,8 @@ for (let rowIndex = 0; rowIndex < ROW_COUNT; rowIndex += 1) {
   const composites = [];
   for (let column = 0; column < rowFrameCount; column += 1) {
     const frameIndex = firstFrame + column;
-    const pitchDegrees = MINIMUM_PITCH_DEGREES +
-      frameIndex * PITCH_STEP_DEGREES;
-    const prepared = prepareJupiterMaterialFrame(pitchDegrees);
+    const lightViewZ = lightPhase(frameIndex);
+    const prepared = prepareJupiterMaterialFrame(lightViewZ);
     const frameColumn = column % ROW_COLUMNS;
     const frameLine = Math.floor(column / ROW_COLUMNS);
     composites.push(Object.freeze({
@@ -119,7 +112,7 @@ for (let rowIndex = 0; rowIndex < ROW_COUNT; rowIndex += 1) {
     }));
     presentations.push(Object.freeze({
       frameIndex,
-      pitchDegrees,
+      lightViewZ,
       rowIndex,
       url: `/scenes/jupiter/jupiter-material-${bankFingerprint}-row-${String(rowIndex).padStart(2, "0")}.webp`,
       backgroundPosition:
@@ -161,7 +154,7 @@ for (let rowIndex = 0; rowIndex < ROW_COUNT; rowIndex += 1) {
 }
 
 const shadowlessFrame = prepareJupiterMaterialFrame(
-  DEFAULT_PITCH_DEGREES,
+  1,
   { shadowless: true },
 );
 const shadowlessFilename =
@@ -203,14 +196,12 @@ const maximumDecodedWorkingSetBytes = [...rows]
   .slice(0, MAXIMUM_RETAINED_ROW_COUNT)
   .reduce((total, row) => total + row.decodedRgbaBytes, 0);
 const output = Object.freeze({
-  schema: "cssjupiter-prepared-lighting@3",
-  model: "fixed-world-light-prepared-row-shard-presentations",
+  schema: "cssjupiter-prepared-lighting@4",
+  model: "prepared-view-light-phase-row-shards",
   bankFingerprint,
   bankFingerprintSources,
-  minimumPitchDegrees: MINIMUM_PITCH_DEGREES,
-  maximumPitchDegrees: MAXIMUM_PITCH_DEGREES,
-  defaultPitchDegrees: DEFAULT_PITCH_DEGREES,
-  pitchStepDegrees: PITCH_STEP_DEGREES,
+  minimumLightViewZ: -1,
+  maximumLightViewZ: 1,
   frameCount: FRAME_COUNT,
   frameSize: JUPITER_MATERIAL_SIZE,
   presentationFrameSize: JUPITER_MATERIAL_PRESENTATION_SIZE,
@@ -226,12 +217,13 @@ const output = Object.freeze({
     materialScale: JUPITER_MATERIAL_CONTENT_SCALE,
     rimFill: "prepared-subpixel-analytic-ellipse-edge-coverage",
     sourcePixelBleed: 0,
-    perPitch: true,
+    perPitch: false,
+    normalizedDisc: true,
     supersampling: 1,
     screenshotDerived: false,
     runtime: false,
   }),
-  worldLightDirection: JUPITER_WORLD_LIGHT_DIRECTION,
+  referenceLightDirection: JUPITER_REFERENCE_LIGHT_DIRECTION,
   illuminationGeometry: JUPITER_LIGHT_SOURCE_GEOMETRY,
   atmosphere: Object.freeze({
     model: "prepared-hubble-opal-minnaert-visible-cloud-atmosphere",
@@ -259,7 +251,7 @@ const output = Object.freeze({
     model: "row-shard-cache",
     preloadBeforeMount: true,
     retainedLeafCount: 1,
-    interpolation: "nearest-prepared-half-degree-frame",
+    interpolation: "nearest-prepared-light-phase",
     frameGutter: FRAME_GUTTER / JUPITER_MATERIAL_PIXEL_DENSITY,
     rasterFrameGutter: FRAME_GUTTER,
     framesPerRow: FRAMES_PER_ROW,

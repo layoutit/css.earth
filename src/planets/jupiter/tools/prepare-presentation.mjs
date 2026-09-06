@@ -1,3 +1,5 @@
+import { BASE_TILE } from "@layoutit/polycss";
+import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from "../../../platform/prepared-ellipsoid-projection.mjs";
 import { pathToFileURL } from "node:url";
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
@@ -35,7 +37,22 @@ export async function prepareJupiterPresentation() {
   const material = b.mesh("jupiter-material", cameraPlan.materialDepthPresentation.materialMeshTransform);
   const leaf = b.element("s"); leaf.style.transform = cameraPlan.materialDepthPresentation.leafTransform;
   b.append(scene, materialSystem, system); b.append(materialSystem, counter); b.append(counter, material); b.append(material, leaf);
-  const { tree, index } = b.finish({ camera, scene,  stageClasses: ["jupiter-stage"] });
+  const width = lighting.presentationFrameSize, half = width/2;
+  const centerTranslation = [1,0,0,0,0,1,0,0,0,0,1,0,half,half,0,1];
+  const inverseCenterTranslation = [1,0,0,0,0,1,0,0,0,0,1,0,-half,-half,0,1];
+  const shape = lighting.presentations[lighting.transport.defaultFrame].projection;
+  const fit = [1,0,0,0,0,shape.radiusY/shape.radiusX,0,0,0,0,1,0,0,0,0,1];
+  const baseProjection = multiplyPreparedMatrix4(readPreparedMatrix4(leaf.style.transform),
+    multiplyPreparedMatrix4(centerTranslation, multiplyPreparedMatrix4(fit, inverseCenterTranslation)));
+  leaf.style.transform = serializePreparedMatrix4(baseProjection);
+  const bodySystemMatrix = preparedRotationMatrix4("x", scenePlan.materialProjection.cssSystemRotationXDegrees);
+  const bodyMeshMatrix = preparedRotationMatrix4("z", scenePlan.materialProjection.bodyInitialRotationZDegrees);
+  const projection = { equatorialRadius: scenePlan.geometry.equatorialRadius * BASE_TILE,
+    polarRadius: scenePlan.geometry.polarRadius * BASE_TILE,
+    coverageScale: half / lighting.rasterSurfaceRadius,
+    bodySystemMatrix, bodyMeshMatrix, materialSystemMatrix: bodySystemMatrix, materialMeshMatrix: bodyMeshMatrix,
+    baseProjection, centerTranslation, inverseCenterTranslation };
+  const { tree, index } = b.finish({ camera, scene, stageClasses: ["jupiter-stage"] });
   const track = { id: "lighting", target: index(leaf),
     frame: { count: lighting.frameCount, samples: lighting.presentations.map(p => p.cameraLightDirection) },
     banks: [{ id: "lighting", frames: lighting.presentations.map(p => ({ resource: `lighting:${p.rowIndex}`,
@@ -46,8 +63,8 @@ export async function prepareJupiterPresentation() {
       fixed: { resource: "shadowless", frame: null, row: null,
         backgroundPosition: lighting.shadowless.backgroundPosition, backgroundSize: lighting.shadowless.backgroundSize } }],
     demand: { capacity: lighting.transport.maximumRetainedRowCount, defaultFrame: lighting.transport.defaultFrame },
-    rotation: { kind: "planar", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false,
-      width: lighting.presentationFrameSize, height: lighting.presentationFrameSize, polePolicy: "azimuth" },
+    rotation: { kind: "ellipsoid", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false,
+      width, height: width, projection, systemTransform: materialSystem.style.transform, polePolicy: "azimuth" },
     frameAttribute: null, modeAttribute: null, quoted: true };
   const variants = lenses.controls.flatMap(lens => [false, true].flatMap(shadows => [false, true].map(rings => ({
     when: { lensId: lens.id, shadows, rings }, required: lensKeys(lens.id),
@@ -57,8 +74,7 @@ export async function prepareJupiterPresentation() {
     materials: [{ track: "lighting", bank: "lighting", mode: shadows ? "frames" : "fixed", enabled: true, rotationEnabled: shadows,
       frameOverride: null, clearWhenHidden: false, fixedMode: "shadowless" }],
   }))));
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: cameraPlan, sky, sun, inputSelector: null,
-    assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: cameraPlan, sky, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: lighting.transport.maximumRetainedRowCount,
         concurrency: lighting.transport.maximumRetainedRowCount, reuse: true, eviction: "capacity" })],
       startup: [...warm.map(entry => entry.key), ...lensKeys(lenses.defaultLens), ...lighting.transport.initialWarmRows.map(row => `lighting:${row}`)] },

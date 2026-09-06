@@ -50,7 +50,7 @@ export async function prepareVenusPresentation() {
       frameOverride:shadows?null:material.frameCount-1,clearWhenHidden:false,fixedMode:"shadowless"}]});
   }
   return {schema:PREPARED_PRESENTATION_SCHEMA,camera:plan.camera,sky:plan.starfield,sun:PREPARED_VENUS_SKY_SUN,
-    inputSelector:".venus-input-surface",assets:{entries,pools:[preparedResourcePool("warm",entries,{retention:"warm"}),
+    assets:{entries,pools:[preparedResourcePool("warm",entries,{retention:"warm"}),
       preparedResourcePool("material",entries,{retention:"selection",capacity:6,concurrency:6})],
       startup:[...warm.map(entry=>entry.key),...required(lenses.defaultLens)]},tree,variants,materials:[track],
     viewBindings:[{kind:"zoom-property",target:index(composite),property:"--venus-camera-zoom"},

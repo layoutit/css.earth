@@ -208,8 +208,8 @@ export function createObjectRuntime(definition, services = nativeServices) {
         const initialTime = animation.constructor?.name === "CSSAnimation" ? 0 : undefined;
         playback.register(animation, { initialTime });
       }
-      const inputSurface = definition.inputSelector == null ? stage : stage.ownerDocument.querySelector(definition.inputSelector);
-      if (inputSurface?.nodeType !== 1) throw new Error("Declared object input surface is missing.");
+      const inputSurface = stage.ownerDocument.querySelector(".planet-input-surface");
+      if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
       selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime,
         onCommit: next => {
           playback.setSelection(next);

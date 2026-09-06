@@ -5,7 +5,7 @@ export const isObjectBrowserProfile = profile => profiles.has(profile);
 
 // The profile supplies observations and user actions for the actual common
 // runtime. Object files supply audit/source facts and declarative view mappings.
-export function createObjectBrowserProfile({ id, inputSelector, audit, controls,
+export function createObjectBrowserProfile({ id, audit, controls,
   visibleViews = [], cameraFields = ['pitch', 'zoom'] }) {
   requireObjectControls(controls, id);
   // Preserve the fields in an object's recorded audit without supplying a
@@ -21,7 +21,7 @@ export function createObjectBrowserProfile({ id, inputSelector, audit, controls,
     if (!lensIds.includes(view.lensId) || typeof view.attribute !== 'string' || !view.attribute.startsWith('data-') || typeof view.value !== 'string') throw new TypeError('Visible view mapping must name a retained stage attribute and actual lens.');
   }
   const key = `__${id}`, defaultLens = controls.lenses?.defaultLens ?? null;
-  const profile = Object.freeze({ id, inputSelector, audit, objectControls: controls,
+  const profile = Object.freeze({ id, inputSelector: ".planet-input-surface", audit, objectControls: controls,
     async waitForRuntime(page) {
       // Readiness is state, independent of whether a paused scene is painting.
       // Do not start a second browser waiter after that state is already true.

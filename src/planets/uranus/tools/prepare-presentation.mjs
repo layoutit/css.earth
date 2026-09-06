@@ -107,8 +107,7 @@ export async function prepareUranusPresentation() {
     ], materials: [{ track: "lighting", bank: id, mode: shadows ? "default-pose" : "fixed", enabled: true,
       rotationEnabled: shadows, frameOverride: null, clearWhenHidden: false, fixedMode: "shadowless" }],
   }))));
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: cameraPlan, sky, sun, inputSelector: ".uranus-input-surface",
-    assets: { entries, pools: [preparedResourcePool("mounted", entries), preparedResourcePool("rows", entries,
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: cameraPlan, sky, sun, assets: { entries, pools: [preparedResourcePool("mounted", entries), preparedResourcePool("rows", entries,
       { retention: "selection", capacity: 6, concurrency: 6 })], startup: [...celestial.map(e => e.key), ...staticKeys(lenses.defaultLens),
         ...initialRows.map(row => `row:${lenses.defaultLens}:${row}`)] }, tree, variants, materials: [track],
     viewBindings: [{ kind: "counter-rotation", target: index(counter), systemTransform: null }], animations: [] };

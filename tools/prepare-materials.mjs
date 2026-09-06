@@ -1,33 +1,29 @@
-// Asset-specific coordinates end here. Runtime receives one ordered phase
-// lookup, a numeric light basis, and already prepared neighboring resources.
-const identity = [1, 0, 0, 0, 1, 0, 0, 0, 1];
-const normalize = v => v.map(x => x / Math.hypot(...v));
-const dot = (a, b) => a.reduce((sum, x, i) => sum + x * b[i], 0);
-
-export function prepareLightBasis(from, to) {
-  from = normalize(from); to = normalize(to);
-  const v = [from[1]*to[2]-from[2]*to[1], from[2]*to[0]-from[0]*to[2], from[0]*to[1]-from[1]*to[0]];
-  const c = dot(from, to);
-  if (c < -1 + 1e-10) throw new TypeError("Opposite light references need an explicit prepared basis.");
-  const k = [0,-v[2],v[1],v[2],0,-v[0],-v[1],v[0],0];
-  return identity.map((x, i) => x + k[i] + [0,1,2].reduce((sum, j) => sum + k[Math.floor(i/3)*3+j]*k[j*3+i%3], 0)/(1+c));
-}
-
+// Source lighting is normalized during preparation. Runtime selects by view Z.
 export function prepareFrameLookup(count, frameAtPhase) {
-  const ascending = frameAtPhase(1) >= frameAtPhase(-1);
-  const first = frameAtPhase(-1), last = frameAtPhase(1);
+  if (!Number.isSafeInteger(count) || count < 1 || typeof frameAtPhase !== "function") {
+    throw new TypeError("Material lookup requires a positive frame count and phase mapping.");
+  }
+  const frameFor = phase => {
+    const frame = frameAtPhase(phase);
+    if (!Number.isSafeInteger(frame) || frame < 0 || frame >= count) {
+      throw new TypeError("Material phase must select a finite integer inside its prepared bank.");
+    }
+    return frame;
+  };
+  const first = frameFor(-1), last = frameFor(1), ascending = last >= first;
   const indices = [first], thresholds = [];
-  for (let frame = first; frame !== last;) {
+  for (let step = 0; step < Math.abs(last - first); step++) {
+    const frame = first + step * (ascending ? 1 : -1);
     const next = frame + (ascending ? 1 : -1);
     let low = -1, high = 1;
     for (let i = 0; i < 55; i++) {
       const middle = (low + high)/2;
-      if (ascending ? frameAtPhase(middle) >= next : frameAtPhase(middle) <= next) high = middle;
+      if (ascending ? frameFor(middle) >= next : frameFor(middle) <= next) high = middle;
       else low = middle;
     }
-    thresholds.push(high); indices.push(next); frame = next;
+    thresholds.push(high); indices.push(next);
   }
-  return { count, thresholds, indices, lightBasis: [...identity] };
+  return { count, thresholds, indices };
 }
 
 function remap(value, mapping) {
@@ -45,10 +41,13 @@ export function prepareMaterialTracks(plan) {
     const source = track.frame;
     let frame;
     if (source.samples) {
+      if (!Array.isArray(source.samples) || source.samples.length !== source.count || source.samples.some(direction =>
+        !Array.isArray(direction) || direction.length !== 3 || !direction.every(Number.isFinite) || Math.abs(Math.hypot(...direction)-1) > 1e-5)) {
+        throw new TypeError("Material samples must contain one unit light direction per frame.");
+      }
       const samples = source.samples.map((direction, index) => ({ phase: direction[2], index })).sort((a,b) => a.phase-b.phase);
       frame = { count: source.count, indices: samples.map(sample => sample.index),
-        thresholds: samples.slice(1).map((sample, i) => (sample.phase+samples[i].phase)/2),
-        lightBasis: prepareLightBasis(reference, source.samples[track.demand.defaultFrame]) };
+        thresholds: samples.slice(1).map((sample, i) => (sample.phase+samples[i].phase)/2) };
     } else {
       if (!["sun-z", "prepared-light-z", "reference-sun-z"].includes(source.source)) throw new TypeError("Prepare material phase samples from the source lighting.");
       frame = prepareFrameLookup(source.count, phase => {

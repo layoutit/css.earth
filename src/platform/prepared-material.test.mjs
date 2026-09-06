@@ -70,3 +70,11 @@ test("prepared address caching survives native URL serialization and still publi
     publisher.publish(selected, view, { ...f.resources, url: key => f.resources.url(key) + '?decoded=2' }); assert.equal(writes, 2);
   } finally { f.restore(); }
 });
+
+test("invalid material mappings fail before lookup expansion", () => {
+  for (const value of [NaN, Infinity, -1, .5, 4]) {
+    assert.throws(() => prepareFrameLookup(4, () => value), /inside its prepared bank/);
+  }
+  assert.throws(() => prepareFrameLookup(0, () => 0), /positive frame count/);
+  assert.throws(() => prepareFrameLookup(4, z => z === -1 ? 0 : z === 1 ? 3 : NaN), /inside its prepared bank/);
+});

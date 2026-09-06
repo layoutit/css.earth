@@ -52,8 +52,7 @@ export async function prepareMarsPresentation() {
       frameOverride: null, frameOffset: shadows ? 0 : lighting.shadowlessFrameOffset, clearWhenHidden: false, fixedMode: "shadowless",
       modeLabel: shadows ? "directional-terminator-and-atmosphere" : "directional-atmosphere-without-ground-shadow" }],
   })));
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: cameraPlan, sky: scenePlan.starfield, sun, inputSelector: null,
-    assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: cameraPlan, sky: scenePlan.starfield, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
         concurrency: bank.transport.maximumRetainedRowCount, reuse: true, eviction: "capacity" })],
       startup: [...celestial.map(entry => entry.key), ...lensKeys(lenses.defaultLens), ...bank.transport.initialWarmRows.map(row => `lighting:${row}`)] },

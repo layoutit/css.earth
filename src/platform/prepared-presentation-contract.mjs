@@ -38,14 +38,13 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "inputSelector", "assets", "tree", "variants", "materials", "viewBindings", "animations", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
   validatePreparedCubicSky(plan.sky, { requireSun: false });
   if (plan.sun !== null) validateDirectionalSunPlan(plan.sun);
   if (!(plan.camera?.sceneScale > 0) || !(plan.camera.minimumZoom > 0) || !(plan.camera.maximumZoom >= plan.camera.minimumZoom)) fail("camera plan is incomplete");
-  if (plan.inputSelector !== null) string(plan.inputSelector, "input selector");
   if (plan.heliocentricView !== undefined) heliocentricView(plan.heliocentricView, plan);
   if (!Array.isArray(assets?.entries)) fail("resource catalog is missing");
   const resources = new Set(assets.entries.map(entry => entry.key));
@@ -164,16 +163,12 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     string(value.backgroundPosition, "background position"); string(value.backgroundSize, "background size");
   }
   function frameMapping(value) {
-    record(value, "frame mapping", ["count", "thresholds", "indices", "lightBasis"]);
+    record(value, "frame mapping", ["count", "thresholds", "indices"]);
     integer(value.count, "frame count", 1);
     const thresholds = array(value.thresholds, "phase thresholds");
     if (thresholds.some((phase, i) => !Number.isFinite(phase) || phase < -1 || phase > 1 || i > 0 && phase <= thresholds[i-1])) fail("phase thresholds must increase within the light domain");
     if (array(value.indices, "phase frames").length !== thresholds.length+1 || value.indices.some(frame => !Number.isSafeInteger(frame) || frame < 0 || frame >= value.count)) fail("phase frames must address the prepared bank");
-    if (!Array.isArray(value.lightBasis) || value.lightBasis.length !== 9 || !value.lightBasis.every(Number.isFinite)) fail("light basis must be a prepared rotation");
-    for (let row = 0; row < 3; row++) for (let other = 0; other < 3; other++) {
-      const product = [0,1,2].reduce((sum, i) => sum+value.lightBasis[row*3+i]*value.lightBasis[other*3+i], 0);
-      if (Math.abs(product-(row === other ? 1 : 0)) > 1e-8) fail("light basis must preserve directions");
-    }
+
   }
   function matrix(values, label) { if (!Array.isArray(values) || values.length !== 16 || !values.every(Number.isFinite)) fail(`${label} must be a finite prepared matrix`); }
   function projection(value) {

@@ -2,7 +2,7 @@ import { createObjectBrowserProfile } from "../../../../site/test/object-browser
 import { objectControls } from "../site/control-content.mjs";
 
 export const browserProfile = createObjectBrowserProfile({
-  id: "pluto", inputSelector: ".pluto-input-surface", controls: objectControls,
+  id: "pluto", controls: objectControls,
   audit: Object.freeze({
     preparedAssetPairs: Object.freeze([
       Object.freeze({
