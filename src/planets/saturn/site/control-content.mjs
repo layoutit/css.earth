@@ -17,11 +17,11 @@ export const objectControls = Object.freeze({
     "controls": [
       {
         "id": "normal",
-        "label": "Normal",
+        "label": "Visible color",
         "thumbnailUrl": "/scenes/saturn/saturn-lens-normal.webp",
         "description": "Visible color",
         "legend": undefined,
-        "title": "Normal"
+        "title": "Visible color"
       },
       {
         "id": "ultraviolet",
@@ -191,7 +191,7 @@ export const objectControls = Object.freeze({
       },
       {
         "id": "thermal",
-        "label": "Thermal",
+        "label": "Thermal infrared",
         "thumbnailUrl": "/scenes/saturn/saturn-lens-thermal.webp",
         "description": "Cassini infrared",
         "legend": Object.freeze({
@@ -270,7 +270,7 @@ export const objectControls = Object.freeze({
           "meta": "VIMS/CIRS",
           "sourceUrl": "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/"
         }),
-        "title": "Thermal, VIMS/CIRS false color"
+        "title": "Thermal infrared, VIMS/CIRS false color"
       },
       {
         "id": "cross-section",

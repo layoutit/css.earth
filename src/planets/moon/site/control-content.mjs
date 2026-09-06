@@ -17,15 +17,15 @@ export const objectControls = Object.freeze({
     "controls": [
       {
         "id": "surface",
-        "label": "Surface",
+        "label": "Visible color",
         "thumbnailUrl": "/scenes/moon/moon-surface-thumbnail.webp",
         "description": "LRO visible-colour surface",
         "legend": undefined,
-        "title": "Surface: NASA LRO/LROC visible-colour global surface mosaic"
+        "title": "Visible color: NASA LRO/LROC visible-colour global surface mosaic"
       },
       {
         "id": "topography",
-        "label": "Topography",
+        "label": "Elevation",
         "thumbnailUrl": "/scenes/moon/moon-topography-thumbnail.webp",
         "description": "LOLA elevation",
         "legend": Object.freeze({
@@ -103,7 +103,7 @@ export const objectControls = Object.freeze({
           ]),
           "sourceUrl": "https://svs.gsfc.nasa.gov/4014/"
         }),
-        "title": "Topography: NASA LRO/LOLA elevation map with shaded relief"
+        "title": "Elevation: NASA LRO/LOLA elevation map with shaded relief"
       },
       {
         "id": "crust",

@@ -17,7 +17,7 @@ export const objectControls = Object.freeze({
     "controls": [
       {
         "id": "normal",
-        "label": "750 nm",
+        "label": "Monochrome",
         "thumbnailUrl": "/scenes/mercury/mercury-lens-normal.webp",
         "description": "MESSENGER at 750 nm",
         "legend": undefined,
@@ -25,15 +25,15 @@ export const objectControls = Object.freeze({
       },
       {
         "id": "enhanced",
-        "label": "Enhanced",
+        "label": "Enhanced color",
         "thumbnailUrl": "/scenes/mercury/mercury-lens-enhanced.webp",
         "description": "USGS enhanced color + BDR coverage",
         "legend": undefined,
-        "title": "Enhanced, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color"
+        "title": "Enhanced color, NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion false color"
       },
       {
         "id": "topography",
-        "label": "Topography",
+        "label": "Elevation",
         "thumbnailUrl": "/scenes/mercury/mercury-lens-topography.webp",
         "description": "MESSENGER shaded relief",
         "legend": {
@@ -50,11 +50,11 @@ export const objectControls = Object.freeze({
           ],
           "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
         },
-        "title": "Topography, USGS MESSENGER global color shaded relief false color"
+        "title": "Elevation, USGS MESSENGER global color shaded relief false color"
       },
       {
         "id": "interior",
-        "label": "Interior",
+        "label": "Cross section",
         "thumbnailUrl": "/scenes/mercury/mercury-lens-interior.webp",
         "description": "Interior structure",
         "legend": {

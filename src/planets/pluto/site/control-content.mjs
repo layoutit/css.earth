@@ -17,17 +17,17 @@ export const objectControls = Object.freeze({
     "controls": [
       {
         "id": "surface",
-        "label": "Surface",
+        "label": "Visible color",
         "thumbnailUrl": "/scenes/pluto/pluto-surface-thumbnail.webp",
         "description": "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-        "title": "Surface: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
+        "title": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
       },
       {
         "id": "topography",
-        "label": "Topography",
+        "label": "Elevation",
         "thumbnailUrl": "/scenes/pluto/pluto-topography-thumbnail.webp",
         "description": "USGS stereo elevation; authored blue/tan/red scale −8/0/+8 km; gray grid: no elevation data",
-        "title": "Topography: USGS stereo elevation; authored blue/tan/red scale −8/0/+8 km; gray grid: no elevation data"
+        "title": "Elevation: USGS stereo elevation; authored blue/tan/red scale −8/0/+8 km; gray grid: no elevation data"
       },
       {
         "id": "monochrome",

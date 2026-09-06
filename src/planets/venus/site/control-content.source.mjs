@@ -1,3 +1,4 @@
+import { LENS_LABELS, prepareLensLabels } from "../../../../site/prepare-lens-labels.mjs";
 import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
 import { prepareLensScaleLegend } from
   "../../../../site/prepared-lens-legends.mjs";
@@ -46,4 +47,9 @@ const settings = {
   ],
 };
 
-export const objectControls = Object.freeze({ lenses, settings });
+export const objectControls = Object.freeze({
+  lenses: prepareLensLabels(lenses, {
+    "elevation": LENS_LABELS.elevation,
+  }),
+  settings,
+});
