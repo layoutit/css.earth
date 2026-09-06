@@ -19,10 +19,10 @@ export async function writeObjectJson(id, definition) {
   }
   const payload = JSON.stringify({ schema: 'cssearth-prepared-object@1', id,
     type: descriptor.type, format, data: definition });
-  const asset = resolve(root, 'objects/prepared', `${id}.json`);
-  await mkdir(resolve(root, 'objects/prepared'), { recursive: true });
+  const asset = resolve(root, 'src/planets', id, 'prepared/object.json');
+  await mkdir(resolve(root, 'src/planets', id, 'prepared'), { recursive: true });
   await writeFile(asset, payload);
-  const prepared = { format, url: `prepared/${id}.json`, sha256: createHash('sha256').update(payload).digest('hex') };
+  const prepared = { format, url: 'prepared/object.json', sha256: createHash('sha256').update(payload).digest('hex') };
   await writeFile(descriptorPath, `${JSON.stringify({ ...descriptor, prepared }, null, 2)}\n`);
   return { id, bytes: Buffer.byteLength(payload), ...prepared };
 }
@@ -45,7 +45,7 @@ export async function prepareObjectJson(ids) {
     try { await access(resolve(root, 'src/planets', object.id, 'object.json')); }
     catch (error) { if (error.code === 'ENOENT' && !ids) continue; throw error; }
     const runtimeDefinition = await authoredObject(object.id, root)
-      ? JSON.parse(await readFile(resolve(root, 'objects/preparation', object.id, 'runtime.json'), 'utf8'))
+      ? JSON.parse(await readFile(resolve(root, 'src/planets', object.id, 'prepared/runtime.json'), 'utf8'))
       : (await import(pathToFileURL(resolve(root, `src/planets/${object.id}/runtime/definition.mjs`)).href)).runtimeDefinition;
     results.push(await writeObjectJson(object.id, runtimeDefinition));
   }

@@ -76,8 +76,8 @@ export async function objectPreparationFiles(root, id) {
     const shared = await preparationDependencies(root, ['tools/prepared-node-tree.mjs', 'tools/prepared-cssom.mjs',
       'tools/prepare-materials.mjs', 'src/platform/prepare-cubic-sky-source.mjs', 'src/platform/prepare-directional-sun.mjs',
       'tools/objects/solar-system-scene.mjs', 'tools/objects/solar-system-presentation.mjs', 'tools/objects/solar-system-markers.mjs']);
-    const outputs = [descriptor, `${base}/runtime-assets.json`, `objects/prepared/${id}.json`,
-      ...await listPreparationFiles(root, `objects/preparation/${id}`), ...await listPreparationFiles(root, `public/scenes/${id}`)];
+    const outputs = [descriptor, `${base}/runtime-assets.json`, `${base}/prepared/object.json`,
+      ...await listPreparationFiles(root, `${base}/prepared`), ...await listPreparationFiles(root, `public/scenes/${id}`)];
     return { inputs: [...new Set([descriptor, ...compiler, ...shared, ...await listPreparationFiles(root, `${base}/source`)])].sort(),
       outputs: [...new Set(outputs)].sort(), inputKinds: {[descriptor]: 'object-descriptor-authored@1'} };
   }
@@ -93,7 +93,7 @@ export async function objectPreparationFiles(root, id) {
   const dependencies = await preparationDependencies(root, [...generators, content]);
   const descriptorPath = `${base}/object.json`;
   const inputKinds = dependencies.includes(descriptorPath) ? { [descriptorPath]: 'object-descriptor-authored@1' } : {};
-  if (Object.hasOwn(inputKinds, descriptorPath)) outputs.push(descriptorPath, `objects/prepared/${id}.json`);
+  if (Object.hasOwn(inputKinds, descriptorPath)) outputs.push(descriptorPath, `${base}/prepared/object.json`);
   const inputs = [...dependencies.filter(path => !output(path)),
     ...packageFiles.filter(path => path.startsWith(`${base}/source/`) && !output(path)),
     ...await preparationFileSets(root, id)];

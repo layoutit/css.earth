@@ -12,7 +12,7 @@ for (const object of OBJECTS) {
   catch (error) { if (error.code === 'ENOENT') continue; throw error; }
   test(`${object.id}: generic JSON transport preserves the complete prepared definition`, async () => {
     const descriptor = parseObjectDescriptor(text);
-    const raw = await readFile(new URL(`../objects/${descriptor.prepared.url}`, import.meta.url));
+    const raw = await readFile(new URL(`../src/planets/${descriptor.id}/${descriptor.prepared.url}`, import.meta.url));
     assert.equal(createHash('sha256').update(raw).digest('hex'), descriptor.prepared.sha256);
     const envelope = readPreparedObject(JSON.parse(raw), descriptor, data => data);
     const runtimeDefinition = await loadObjectTestDefinition(object.id);

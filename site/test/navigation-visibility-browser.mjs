@@ -11,7 +11,7 @@ try {
     const errors = []; page.on('pageerror', error => errors.push(error.message));
     let releaseStartup, startupHeld = false;
     const startupGate = new Promise(resolve => { releaseStartup = resolve; });
-    await page.route('**/objects/prepared/*.json*', async route => {
+    await page.route('**/src/planets/*/prepared/object.json*', async route => {
       if (!startupHeld) { startupHeld = true; await startupGate; }
       await route.continue();
     });

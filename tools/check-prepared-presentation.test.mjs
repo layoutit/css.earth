@@ -73,3 +73,13 @@ test("adapter differences report actual data counts and source hashes without fa
   assert.equal(entry.observedOwners, null); assert.equal(entry.evidence, "validated-source-data");
   assert.match(entry.source.presentationSha256, /^[a-f0-9]{64}$/);
 });
+
+test('authored JSON transport cannot escape its descriptor package', async () => {
+  const descriptorPath = `${root}/src/planets/mercury/object.json`;
+  const descriptor = JSON.parse(await readFile(descriptorPath, 'utf8'));
+  for (const url of ['../venus/prepared/object.json', 'prepared/../prepared/object.json']) {
+    const changed = JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url } });
+    await assert.rejects(auditPreparedPresentations({ root, objects: [{ id: 'mercury' }],
+      readText: path => path === descriptorPath ? changed : readFile(path, 'utf8') }), /owning object prepared directory/);
+  }
+});

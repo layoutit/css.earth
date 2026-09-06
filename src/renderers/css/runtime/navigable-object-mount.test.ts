@@ -4,7 +4,7 @@ import { createNavigableObjectMount } from './navigable-object-mount.js';
 
 test('preflight and native mount share one authenticated definition and transfer its resource ownership once', async () => {
   const descriptor = JSON.parse(await readFile(new URL('../../../planets/venus/object.json', import.meta.url), 'utf8'));
-  const payload = JSON.parse(await readFile(new URL('../../../../objects/prepared/venus.json', import.meta.url), 'utf8'));
+  const payload = JSON.parse(await readFile(new URL('../../../../src/planets/venus/prepared/object.json', import.meta.url), 'utf8'));
   // This test exercises transport/ownership; native image decoding has its own real-browser gate.
   payload.data.assets.startup = [];
   const bytes = new TextEncoder().encode(JSON.stringify(payload)).buffer;

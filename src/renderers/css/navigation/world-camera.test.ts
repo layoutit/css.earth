@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
-import mercuryDefinition from "../../../../objects/preparation/mercury/runtime.json" with {type: "json"};
-import venusDefinition from "../../../../objects/preparation/venus/runtime.json" with {type: "json"};
+import mercuryDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
+import venusDefinition from "../../../../src/planets/venus/prepared/runtime.json" with {type: "json"};
 import { prepareEclipticPresentationFrame } from '../../../platform/solar-presentation-frame.mjs';
 import { ASTRONOMICAL_UNIT_KILOMETERS, BODY_FIXED_SUN_DIRECTIONS, BODY_FIXED_TO_ICRF_MATRICES,
   HELIOCENTRIC_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../platform/solar-geometry.mjs';

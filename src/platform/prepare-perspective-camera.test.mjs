@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { preparePerspectiveCamera } from "./prepare-perspective-camera.mjs";
-import PREPARED_MERCURY_SCENE from "../../objects/preparation/mercury/scene.json" with { type: "json" };
-import mercury from "../../objects/preparation/mercury/runtime.json" with { type: "json" };
+import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with { type: "json" };
+import mercury from "../../src/planets/mercury/prepared/runtime.json" with { type: "json" };
 import { runtimeDefinition as ceres } from "../planets/ceres/runtime/definition.mjs";
 
 test("Mercury's prepared camera reproduces the shared recipe", () => {

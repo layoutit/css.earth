@@ -1,7 +1,7 @@
 import { mountPreparedPresentation } from "../../../../src/platform/prepared-presentation.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../objects/preparation/mercury/runtime.json" with {type: "json"};
+import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
 import { preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
 const pool = f => f.residency.stats().pools.find(pool => pool.id === "lenses");
 

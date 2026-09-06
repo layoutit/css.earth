@@ -7,7 +7,7 @@ import { objectPreparationFiles, runCachedPreparationObjects } from './prepare-p
 import { fingerprintPreparationFiles } from './preparation-cache.mjs';
 
 const repository = resolve(import.meta.dirname, '..'), descriptorPath = 'src/planets/mercury/object.json';
-const payloadPath = 'objects/prepared/mercury.json';
+const payloadPath = 'src/planets/mercury/prepared/object.json';
 async function fixture(run) {
   const root = await mkdtemp(join(tmpdir(), 'object-preparation-cache-'));
   const write = async (path, value) => {
@@ -19,14 +19,14 @@ async function fixture(run) {
     await write(descriptorPath, descriptor);
     await write(payloadPath, { prepared: 'fixture' });
     await write('tools/objects/compiler.ts', '// shared compiler\n');
-    await write('objects/preparation/mercury/runtime.json', {prepared:'fixture'});
+    await write('src/planets/mercury/prepared/runtime.json', {prepared:'fixture'});
     await run({ root, write, descriptor });
   } finally { await rm(root, { recursive: true, force: true }); }
 }
 
 const packageFiles = async () => ({
   inputs: [descriptorPath, 'tools/objects/compiler.ts'].sort(),
-  outputs: [descriptorPath, payloadPath, 'objects/preparation/mercury/runtime.json'].sort(),
+  outputs: [descriptorPath, payloadPath, 'src/planets/mercury/prepared/runtime.json'].sort(),
   inputKinds: {[descriptorPath]: 'object-descriptor-authored@1'},
 });
 test('authored closure binds source JSON and shared TypeScript compilers without object executables', async () => {

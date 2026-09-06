@@ -7,14 +7,14 @@ import { PREPARED_JUPITER_SCENE } from
   "../../src/planets/jupiter/runtime/preparedScene.mjs";
 import { PREPARED_MARS_SCENE } from
   "../../src/planets/mars/runtime/preparedScene.mjs";
-import PREPARED_MERCURY_SCENE from "../../objects/preparation/mercury/scene.json" with {type: "json"};
+import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
 import { PREPARED_NEPTUNE_SCENE } from
   "../../src/planets/neptune/runtime/preparedScene.mjs";
 import { PREPARED_SATURN_SCENE } from
   "../../src/planets/saturn/runtime/preparedScene.mjs";
 import { PREPARED_URANUS_SCENE } from
   "../../src/planets/uranus/runtime/preparedScene.mjs";
-import PREPARED_VENUS_SCENE from "../../objects/preparation/venus/scene.json" with {type: "json"};
+import PREPARED_VENUS_SCENE from "../../src/planets/venus/prepared/scene.json" with {type: "json"};
 
 const PLANET_SURFACE_SEAMS = Object.freeze({
   mercury: PREPARED_MERCURY_SCENE.preparedSurface.seamRepair,

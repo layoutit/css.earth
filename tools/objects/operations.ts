@@ -106,7 +106,7 @@ export async function assembleRuntimeAssets({id,manifest,productionRoot}:{id:str
 
 export async function runOperations(mode:string,id:string,argumentsList:string[]=[]) {
  if(!/^[a-z][a-z0-9-]*$/.test(id))throw new TypeError('Operation needs an object id.');
- const root=process.cwd(),objectRoot=resolve(root,'src/planets',id),sourceRoot=resolve(objectRoot,'source'),preparationRoot=resolve(root,'objects/preparation',id);
+ const root=process.cwd(),objectRoot=resolve(root,'src/planets',id),sourceRoot=resolve(objectRoot,'source'),preparationRoot=resolve(objectRoot,'prepared');
  const descriptor=object(JSON.parse(await readFile(resolve(objectRoot,'object.json'),'utf8')) as unknown);if(descriptor.id!==id)throw new TypeError('Object descriptor identity differs.');
  if(mode==='acquire'||mode==='verify'){
   const manifest=parseSourceManifest(JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')) as unknown,id);
@@ -117,7 +117,7 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
  }
  const manifestPath=resolve(objectRoot,'runtime-assets.json');
  if(mode==='manifest'){
-  const entries=(await readdir(preparationRoot)).filter(file=>file.endsWith('.json')&&file!=='runtime-assets.json');
+  const entries=(await readdir(preparationRoot)).filter(file=>file.endsWith('.json')&&file!=='runtime-assets.json'&&file!=='object.json');
   const values=await Promise.all(entries.map(async file=>JSON.parse(await readFile(resolve(preparationRoot,file),'utf8')) as unknown));
   return prepareRuntimeManifest({id,publicRoot:resolve(root,'public/scenes',id),manifestPath,values});
  }

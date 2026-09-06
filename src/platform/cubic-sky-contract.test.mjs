@@ -8,7 +8,7 @@ import { PREPARED_JUPITER_STARFIELD } from
   "../planets/jupiter/runtime/preparedStarfield.mjs";
 import { PREPARED_MARS_STARFIELD } from
   "../planets/mars/runtime/preparedStarfield.mjs";
-import PREPARED_MERCURY_STARFIELD from "../../objects/preparation/mercury/sky.json" with {type: "json"};
+import PREPARED_MERCURY_STARFIELD from "../../src/planets/mercury/prepared/sky.json" with {type: "json"};
 import { PREPARED_NEPTUNE_STARFIELD } from
   "../planets/neptune/runtime/preparedStarfield.mjs";
 import { PREPARED_SATURN_STARFIELD } from
@@ -17,7 +17,7 @@ import { PREPARED_SUN_STARFIELD } from
   "../planets/sun/runtime/preparedStarfield.mjs";
 import { PREPARED_URANUS_STARFIELD } from
   "../planets/uranus/runtime/preparedStarfield.mjs";
-import PREPARED_VENUS_STARFIELD from "../../objects/preparation/venus/sky.json" with {type: "json"};
+import PREPARED_VENUS_STARFIELD from "../../src/planets/venus/prepared/sky.json" with {type: "json"};
 import {
   CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,
   CUBIC_SKY_FACE_IDS,

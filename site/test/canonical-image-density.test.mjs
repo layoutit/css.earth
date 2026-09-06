@@ -20,7 +20,7 @@ test("every object mounts one canonical high-density image bank", async () => {
         "utf8",
       );
       const prepared = JSON.parse(await readFile(
-        new URL(`../../objects/prepared/${objectRecord.id}.json`, import.meta.url),
+        new URL(`../../src/planets/${objectRecord.id}/prepared/object.json`, import.meta.url),
         "utf8",
       ));
       const startupKeys = new Set(prepared.data.assets.startup);

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../objects/preparation/mercury/runtime.json" with {type: "json"};
+import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
 import { preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
 const rows = f => f.residency.stats().pools.find(pool => pool.id === "lighting");
 

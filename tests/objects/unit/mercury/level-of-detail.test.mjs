@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import runtimeDefinition from "../../../../objects/preparation/mercury/runtime.json" with {type: "json"};
+import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
 import { resolvePreparedPresentation } from "../../../../src/platform/prepared-presentation.mjs";
 import { preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
 

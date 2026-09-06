@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createPreparedResidency } from "./prepared-residency.mjs";
-import PREPARED_MERCURY_ASSETS from "../../objects/preparation/mercury/assets.json" with {type: "json"};
+import PREPARED_MERCURY_ASSETS from "../../src/planets/mercury/prepared/assets.json" with {type: "json"};
 import { PREPARED_MARS_LIGHTING } from "../planets/mars/runtime/preparedLighting.mjs";
 import { PREPARED_JUPITER_LIGHTING } from "../planets/jupiter/runtime/preparedLighting.mjs";
 import { PREPARED_EARTH_SCENE } from "../planets/earth/runtime/preparedScene.mjs";

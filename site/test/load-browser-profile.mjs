@@ -6,7 +6,7 @@ export async function loadPlanetBrowserProfile(planet) {
   if (await authoredObject(planet.id)) {
     const { browserProfile } = await import(new URL(`../../tests/objects/browser/${planet.id}/browser-profile.mjs`, import.meta.url).href);
     assert.ok(isObjectBrowserProfile(browserProfile), `${planet.id}: profile must use the common browser-profile factory`);
-    const { default: controls } = await import(new URL(`../../objects/preparation/${planet.id}/controls.json`, import.meta.url).href, {with: {type: 'json'}});
+    const { default: controls } = await import(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url).href, {with: {type: 'json'}});
     assert.deepEqual(browserProfile.objectControls, controls, `${planet.id}: browser profile must use prepared JSON controls`);
     return validatePlanetBrowserProfile(planet, browserProfile, controls);
   }

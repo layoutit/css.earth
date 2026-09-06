@@ -10,7 +10,7 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports = [];
 try {
   for (const [from, to] of [['mercury', 'venus'], ['venus', 'mercury']]) {
-    const definition = JSON.parse(await readFile(`objects/prepared/${from}.json`, 'utf8')).data;
+    const definition = JSON.parse(await readFile(`src/planets/${from}/prepared/object.json`, 'utf8')).data;
     const lod = definition.camera.levelOfDetail;
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
     const errors = []; page.on('pageerror', error => errors.push(error.message));

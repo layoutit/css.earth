@@ -14,7 +14,7 @@ function canonical(value: unknown): unknown {
 }
 describe('retained presentation compiler compatibility', () => {
   for (const id of ['mercury', 'venus']) it(`${id} preserves its prepared tree, resources, settings and navigation`, async () => {
-    const base = `objects/preparation/${id}`;
+    const base = `src/planets/${id}/prepared`;
     const profile = parsePresentationProfile(await read(`src/planets/${id}/source/preparation/presentation.json`));
     const [scene, assets, lenses, sun, markers, controls, expected, solarSource] = await Promise.all([
       ...['scene', 'assets', 'lenses', 'sun', 'markers', 'controls', 'runtime'].map(file => read(`${base}/${file}.json`)),

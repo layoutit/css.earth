@@ -77,7 +77,7 @@ test("preparation rejects malformed phase tables and undeclared neighbors", asyn
 });
 
 for (const target of ["camera", "scene"]) test(`an existing prepared native animation cannot target the ${target}`, async () => {
-  const { default: mercury } = await import("../../objects/preparation/mercury/runtime.json", {with: {type: "json"}});
+  const { default: mercury } = await import("../../src/planets/mercury/prepared/runtime.json", {with: {type: "json"}});
   const definition = structuredClone(mercury);
   requireObjectRuntimeDefinition(definition);
   const animation = definition.animations.find(entry => entry.id === "mercury-interior-presentation-orbit");

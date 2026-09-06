@@ -7,14 +7,14 @@ import { PREPARED_JUPITER_SKY_SUN } from
   "../planets/jupiter/runtime/preparedSkySun.mjs";
 import { PREPARED_MARS_SKY_SUN } from
   "../planets/mars/runtime/preparedSkySun.mjs";
-import PREPARED_MERCURY_SKY_SUN from "../../objects/preparation/mercury/sun.json" with {type: "json"};
+import PREPARED_MERCURY_SKY_SUN from "../../src/planets/mercury/prepared/sun.json" with {type: "json"};
 import { PREPARED_NEPTUNE_SKY_SUN } from
   "../planets/neptune/runtime/preparedSkySun.mjs";
 import { PREPARED_SATURN_SKY_SUN } from
   "../planets/saturn/runtime/preparedSkySun.mjs";
 import { PREPARED_URANUS_SKY_SUN } from
   "../planets/uranus/runtime/preparedSkySun.mjs";
-import PREPARED_VENUS_SKY_SUN from "../../objects/preparation/venus/sun.json" with {type: "json"};
+import PREPARED_VENUS_SKY_SUN from "../../src/planets/venus/prepared/sun.json" with {type: "json"};
 import {
   DIRECTIONAL_SUN_DISTANCE_STANDARD,
   DIRECTIONAL_SUN_PRESENTATION_STANDARD,
