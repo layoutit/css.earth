@@ -4,6 +4,7 @@ import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/obje
 import type { SharedView } from "../navigation/view-url.js";
 import type { RetainedHeliocentricView } from "../solar-system/heliocentric-view-runtime.js";
 import type { ObjectWorldNavigation } from './world-navigation-types.js';
+import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { errorMessage } from "../navigation/types.js";
 import { publishObjectDiagnostics } from "./object-diagnostics.js";
 export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
@@ -35,7 +36,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   requireObjectRuntimeDefinition(definition);
   const initialSelection = initialObjectSelection(definition.controls);
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, preparedResources, initialWorldCamera }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, preparedResources, initialWorldCamera }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
@@ -48,6 +49,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     const ready = new Promise<void>((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
     ready.catch(() => {});
     let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null;
+    let worldLayer: import('./object-runtime-types.js').WorldContextLayer | null = null;
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
     let heliocentric: RetainedHeliocentricView | null = null;
     const pageLayers = new Map<string, PageLayerRuntime>();
@@ -231,6 +233,17 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       const cubicSky = environment.mountSky({ host: stage, plan: definition.sky,
         imageDensity: context.density, objectId: definition.id, requireSun: false });
       context.own(() => cubicSky.destroy());
+      if (worldContext && capabilities.mountWorldContext) {
+        worldLayer = capabilities.mountWorldContext({ stage, before: mounted.cameraElement, skyElement: cubicSky.root,
+          worldContext, own: context.own, onError: fatal });
+        context.own(() => worldLayer?.destroy());
+      }
+      const orbitWorldContext = worldContext && worldLayer
+        ? Object.freeze({ ...worldContext, onWorldPublish: (world: WorldCameraPose, viewport: WorldCameraViewport) => {
+            worldContext.onWorldPublish?.(world, viewport);
+            worldLayer?.publish(world, viewport);
+          } })
+        : worldContext;
       // A heliocentric view renders the Sun as real geometry beneath the body
       // (its own perspective root before the camera root) with the orbit and
       // marker overlay; otherwise the Sun is the directional billboard.
@@ -258,7 +271,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onMaterialError: error => console.error(error) });
       context.own(() => selection?.destroy());
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
-        cubicSky, skyPlan: definition.sky, directionalSun, directionalSunPlan: definition.sun ?? null, heliocentric,
+        cubicSky, skyPlan: definition.sky, directionalSun, directionalSunPlan: definition.sun ?? null, heliocentric, worldContext: orbitWorldContext,
         cameraPlan, objectId: definition.id, requireSun: false,
         mobilePreviewElement, onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit?.destroy());

@@ -1,0 +1,88 @@
+import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { expect, test } from 'vitest';
+import { mountPreparedWorldContext, parsePreparedWorldContext } from './prepared-world-context.js';
+
+class FakeElement {
+  readonly children: FakeElement[] = [];
+  readonly style: Record<string, string> = {};
+  readonly dataset: Record<string, string> = {};
+  parentNode: FakeElement | null = null;
+  className = ''; textContent = ''; hidden = false; clientWidth = 0; clientHeight = 0;
+  constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) {}
+  append(...entries: FakeElement[]): void { for (const entry of entries) this.insertBefore(entry, null); }
+  appendChild(entry: FakeElement): FakeElement { this.append(entry); return entry; }
+  insertBefore(entry: FakeElement, before: FakeElement | null): void {
+    entry.remove(); entry.parentNode = this;
+    const index = before === null ? this.children.length : this.children.indexOf(before);
+    this.children.splice(index < 0 ? this.children.length : index, 0, entry);
+  }
+  remove(): void { if (this.parentNode) { const index = this.parentNode.children.indexOf(this); if (index >= 0) this.parentNode.children.splice(index, 1); this.parentNode = null; } }
+}
+class FakeDocument { createElement(tagName: string): FakeElement { return new FakeElement(this, tagName); } }
+
+const sprite = { url: '/marker.png', index: 0, count: 1, size: 16 };
+const presentation = {
+  projection: { model: 'css-perspective-shared-with-sky', cssPerspective: '86.60254037844386cqw' },
+  dolly: { model: 'multiplicative-wheel-distance', wheelStepPerDelta: .006, minimumDistanceRadii: 1.2, maximumDistanceOverOrbitExtent: 1 },
+  levelOfDetail: { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20, billboardFullDiscPixels: 14, markerFadeStartDiscPixels: 8, markerFullDiscPixels: 4.5 },
+  orbitLineFade: { visibleBelowDiscHeightShare: .12, hiddenAboveDiscHeightShare: .3 }, drag: { model: 'screen-axis-tumble' },
+};
+const orbit = (position: readonly [number, number, number], scale: number) => ({
+  verticesM: [[position[0], position[1], position[2]], [0, 100, 0], [-100, 0, 0], [0, -100, 0], [100, 0, 0], [0, 100, 0], [-100, 0, 0], [0, -100, 0]].map(v => v.map(n => n * scale)),
+  trail: [1, 1, 1, 1, 1, 1, 1, 1],
+});
+function plan(scale: number) {
+  const point = (id: string, name: string, color: string, position: readonly [number, number, number], radius: number) => ({ id, name, color, positionM: position.map(value => value * scale), radiusM: radius * scale });
+  const focus = point('sun', 'Sun', '#f5a623', [0, 0, 0], 10);
+  const front = point('mercury', 'Mercury', '#9d9388', [100, 0, 0], 1);
+  const hidden = point('venus', 'Venus', '#d6aa69', [0, 0, -20], 1);
+  return parsePreparedWorldContext({ schema: 'cssearth-world-context@1',
+    frame: { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1], metersPerUnit: scale, bodyRadiusM: 10 * scale },
+    focus, bodies: [{ ...front, orbit: orbit([100, 0, 0], scale) }, { ...hidden, orbit: orbit([0, 0, -20], scale) }],
+    camera: { minimumDistanceM: 12 * scale, maximumDistanceM: 10_000 * scale, framingReferenceZoom: 1, presentation },
+    volume: { objectId: 'milky-way', fadeStartDistanceM: 100 * scale, fullDistanceM: 1_000 * scale }, system: { fadeOutStartDistanceM: 1, hiddenDistanceM: 1e30 },
+    stars: { objectId: 'stellar-neighbourhood', fadeStartDistanceM: 10 * scale, fullDistanceM: 50 * scale },
+    sky: { sceneRegistration: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' },
+  });
+}
+function find(root: FakeElement, key: string, value: string): FakeElement {
+  const found = [root, ...all(root)].find(element => element.dataset[key] === value);
+  if (!found) throw new Error(`Missing ${key}=${value}`); return found;
+}
+function all(root: FakeElement): FakeElement[] { return root.children.flatMap(child => [child, ...all(child)]); }
+function mount(scale: number) {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(scale), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 2_000].map(value => value * scale), orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
+  return layer.root as unknown as FakeElement;
+}
+
+test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
+  const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
+  expect(parsePreparedWorldContext(source).bodies).toHaveLength(8);
+  expect(() => parsePreparedWorldContext({ ...source, focus: { ...(source.focus as Record<string, unknown>), positionM: [1, 0, 0] } })).toThrow('frame origin');
+  const camera = source.camera as Record<string, unknown>, presentation = camera.presentation as Record<string, unknown>;
+  expect(() => parsePreparedWorldContext({ ...source, camera: { ...camera, presentation: { ...presentation, dolly: { ...(presentation.dolly as Record<string, unknown>), minimumDistanceRadii: 1 } } } })).toThrow('outside the focus');
+  const body = (source.bodies as Record<string, unknown>[])[0]!;
+  expect(() => parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit: { ...(body.orbit as Record<string, unknown>), verticesM: [[0, 0, 0], ...((body.orbit as { verticesM: unknown[] }).verticesM.slice(1))] } }, ...(source.bodies as unknown[]).slice(1)] })).toThrow('align');
+  expect(() => parsePreparedWorldContext({ ...source, sky: { sceneRegistration: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,1,0,0,1)' } })).toThrow('pure matrix3d rotation');
+});
+
+test('projects retained markers, culls focus-occluded bodies, and keeps physical scale invariant', () => {
+  const near = mount(1), far = mount(1e12);
+  const nearSun = find(near, 'contextBody', 'sun'), nearMercury = find(near, 'contextBody', 'mercury'), nearVenus = find(near, 'contextBody', 'venus');
+  expect(nearSun.style.transform).toContain('translate(30px,-20px)');
+  expect(nearMercury.style.visibility).toBe('');
+  expect(nearVenus.style.visibility).toBe('hidden');
+  const nearOrbit = all(near).filter(element => element.dataset.contextOrbit === 'mercury' && element.style.visibility === '');
+  expect(nearOrbit.length).toBeGreaterThan(0);
+  for (const piece of nearOrbit) {
+    const values = piece.style.transform.match(/-?[0-9.]+/g)!.map(Number);
+    expect(Math.abs(values[4]!)).toBeLessThanOrEqual(400);
+    expect(Math.abs(values[5]!)).toBeLessThanOrEqual(300);
+  }
+  expect(nearMercury.style.transform).toBe(find(far, 'contextBody', 'mercury').style.transform);
+  expect(nearOrbit.length).toBe(all(far).filter(element => element.dataset.contextOrbit === 'mercury' && element.style.visibility === '').length);
+});

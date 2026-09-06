@@ -7,3 +7,4 @@ export { worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPo
 export type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 export { createWorldSelectionTarget } from './selection-target.js';
 export { savedWorldCamera } from './saved-world-camera.js';
+export type { PerspectiveWorldContext } from './perspective-dolly.js';

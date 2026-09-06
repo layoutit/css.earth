@@ -8,8 +8,9 @@ import type { PreparedPresentationDefinition, mountPreparedPresentation } from "
 import type { CubicSkyPlan } from "../solar-system/cubic-sky-runtime.js";
 import type { DirectionalSunPlan } from "../solar-system/directional-sun-runtime.js";
 import type { HeliocentricMountOptions } from "../solar-system/heliocentric-view-runtime.js";
-import type { PreparedWorldCameraFrame, WorldCameraPose } from '../navigation/world-camera.js';
+import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
+import type { PerspectiveWorldContext } from '../navigation/perspective-dolly.js';
 
 export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition {
   readonly schema: string; readonly id: string; readonly controls: ObjectControls;
@@ -36,12 +37,15 @@ export interface ObjectRuntimeCapabilities {
     selectLens(id: string): Promise<boolean>; navigate(camera: Parameters<RetainedCubicSkyOrbit["flyToState"]>[0]): ReturnType<RetainedCubicSkyOrbit["flyToState"]>;
     reset(): ReturnType<RetainedCubicSkyOrbit["flyToState"]> | undefined;
   }): PreparedDestinationRuntime;
+  mountWorldContext?(options: { stage: HTMLElement; before: HTMLElement; skyElement: HTMLElement; worldContext: PerspectiveWorldContext; own(cleanup: () => void): void; onError(error: unknown): void }): WorldContextLayer;
 }
+export interface WorldContextLayer { publish(world: WorldCameraPose, viewport: WorldCameraViewport): void; destroy(): void; }
 export interface ObjectMountOptions {
   onError(error: unknown): void; onMotionRequest?(requested: boolean): void;
   inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; mobilePreviewElement?: HTMLElement | null;
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
   worldFrame?: PreparedWorldCameraFrame; preparedResources?: PreparedResourceLease;
+  worldContext?: PerspectiveWorldContext;
   initialWorldCamera?: WorldCameraPose;
 }
 export interface PreparedNavigation { maximumZoom: number; camera?: OrbitStateUpdate; }

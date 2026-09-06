@@ -1,10 +1,11 @@
-import { createObjectRuntime, createNavigableObjectMount } from '../src/renderers/css/dist/index.js';
+import { createObjectRuntime, createNavigableObjectMount, createDeferredObjectMount,
+  createWorldContextObjectRuntime, loadPreparedCssVolume, loadPreparedCssPointField } from '../src/renderers/css/dist/index.js';
 import * as runtimePolicy from './runtime-policy.mjs';
+import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 
 // The application supplies its shell nodes and authoritative input policy.
 // The CSS renderer consumes prepared content; the engine supplies numeric behavior.
-export function bindPackagedObject(definition) {
-  const mount = createObjectRuntime(definition);
+export function bindPackagedObject(definition, mount = createObjectRuntime(definition)) {
   return (stage, options) => mount(stage, {
     ...options,
     runtimePolicy,
@@ -12,6 +13,42 @@ export function bindPackagedObject(definition) {
     mobilePreviewElement: stage.ownerDocument.querySelector('.planet-sidebar'),
     diagnostics: import.meta.env?.DEV === true,
   });
+}
+
+// Inventory of prepared resources, not navigation entries or runtime generators.
+export function bindContextualObject(definition, context) {
+  return createDeferredObjectMount(async () => {
+    const descriptors = import.meta.glob('../src/objects/*/object.json', { import: 'default', eager: true });
+    const assets = import.meta.glob('../src/objects/*/prepared/**/*.{json,png,webp}', {
+      query: '?url', import: 'default', eager: true,
+    });
+    const resourceSet = objectId => {
+      const base = `../src/objects/${objectId}/`;
+      const resolve = path => {
+        const url = assets[`${base}${path}`];
+        if (typeof url !== 'string') throw new Error(`Prepared context resource unavailable: ${path}.`);
+        return url;
+      };
+      return { descriptor: descriptors[`${base}object.json`], resolve,
+        transport: { async read(path) {
+          const response = await fetch(resolve(path));
+          if (!response.ok) throw new Error(`Prepared context request failed: ${response.status}.`);
+          return response.arrayBuffer();
+        } } };
+    };
+    const volumeSet = resourceSet(context.volume.objectId), starSet = resourceSet(context.stars.objectId);
+    const [volume, stars] = await Promise.all([
+      loadPreparedCssVolume(volumeSet.descriptor, volumeSet.transport),
+      loadPreparedCssPointField(starSet.descriptor, starSet.transport),
+    ]);
+    const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS).map(([id, sprite]) => [id, {
+      url: '/navigation/planet-markers@2x.webp', index: sprite.index, count: sprite.count,
+      size: sprite.presentation.size,
+    }]));
+    return createWorldContextObjectRuntime({ definition, context, volume, stars, sprites,
+      resolveResource: path => volumeSet.resolve(`prepared/${path}`),
+      resolveStarResource: path => starSet.resolve(`prepared/${path}`) });
+  }, mount => bindPackagedObject(definition, mount));
 }
 
 export async function loadPackagedObject(descriptorInput) {

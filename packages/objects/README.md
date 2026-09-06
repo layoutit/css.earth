@@ -13,6 +13,10 @@ shape, surfaces and lenses, materials, frame banks, optional layers and motion,
 plus bounded paging or destination plans. Preparation adapters consume those
 capabilities; this package does not choose a renderer or execute object tools.
 
+`parseDensityVolumeObjectDescriptor()` validates density-volume objects with a
+physical frame, bounds, and pinned preparation source. Volume images, concrete
+sampling, and renderer-specific slice geometry remain outside this package.
+
 ```text
 packages/objects/
 ├── src/           Generic TypeScript implementation and tests

@@ -52,6 +52,43 @@ function preparedData(source) {
   try { readPreparedJsonExports(source); return true; } catch { return false; }
 }
 
+function staticPreparedValue(node) {
+  if (node?.type === 'Literal') return !node.regex && node.bigint === undefined;
+  if (node?.type === 'UnaryExpression') return ['+', '-'].includes(node.operator) && node.argument?.type === 'Literal' && typeof node.argument.value === 'number';
+  if (node?.type === 'ArrayExpression') return node.elements.every(staticPreparedValue);
+  return node?.type === 'ObjectExpression' && node.properties.every(property => property.type === 'Property' &&
+    property.kind === 'init' && !property.method && !property.computed && staticPreparedValue(property.value));
+}
+
+function frozenStaticObject(node) {
+  if (node?.type !== 'CallExpression' || node.optional || node.callee?.type !== 'MemberExpression' || node.callee.computed ||
+      node.callee.object?.name !== 'Object' || node.callee.property?.name !== 'freeze' || node.arguments.length !== 1) return null;
+  return node.arguments[0]?.type === 'ObjectExpression' && staticPreparedValue(node.arguments[0]) ? node.arguments[0] : null;
+}
+
+function identityKeys(value, objectIds) {
+  if (!value || value.properties.length !== objectIds.length) return false;
+  const keys = value.properties.map(property => property.key?.name ?? property.key?.value);
+  return new Set(keys).size === keys.length && keys.every(key => objectIds.includes(key));
+}
+
+function approvedNavigationMarkerInventory(ast, file, objectIds) {
+  if (file !== 'site/prepared-navigation-markers.mjs' || ast.body.length !== 1) return false;
+  const statement = ast.body[0], declaration = statement?.type === 'ExportNamedDeclaration' ? statement.declaration : null;
+  const variable = declaration?.type === 'VariableDeclaration' && declaration.kind === 'const' && declaration.declarations.length === 1
+    ? declaration.declarations[0] : null;
+  if (variable?.id?.type !== 'Identifier' || variable.id.name !== 'PREPARED_NAVIGATION_MARKERS') return false;
+  return identityKeys(frozenStaticObject(variable.init), objectIds);
+}
+
+function staticShellNavigationContent(ast, objectIds) {
+  const declarations = ast.body.flatMap(statement => statement?.type === 'ExportNamedDeclaration' &&
+    statement.declaration?.type === 'VariableDeclaration' && statement.declaration.kind === 'const' ? statement.declaration.declarations : []);
+  if (!declarations.length || declarations.length !== ast.body.length) return false;
+  return declarations.some(variable => identityKeys(frozenStaticObject(variable.init), objectIds)) &&
+    declarations.every(variable => variable.id?.type === 'Identifier' && staticPreparedValue(frozenStaticObject(variable.init) ?? variable.init));
+}
+
 export function inspectObjectRuntimeModule(source, file, { shared = false, shellContent = false,
   objectIds = OBJECTS.map(o => o.id), registryImportOffsets = new Set(), registryDescriptors = new Set() } = {}) {
   if ((!shared || shellContent) && preparedData(source)) return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
@@ -70,6 +107,8 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
   }
   const imports = [], violations = [], aliases = new Map();
   const ids = new Set(objectIds);
+  const markerInventory = approvedNavigationMarkerInventory(ast, file, objectIds);
+  const staticShellContent = shellContent && staticShellNavigationContent(ast, objectIds);
   const constants = new Map();
   const note = (node, reason) => violations.push({ file, line: source.slice(0, node.start).split("\n").length, reason });
   let factoryCalls = 0;
@@ -126,7 +165,8 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
           node.type === "ArrayExpression" && node.elements.length > 0 && node.elements.every(hasId) ||
           node.type === "MemberExpression" && node.computed && hasId(node.property) ||
           node.type === "CallExpression" && ["includes", "has", "get"].includes(propertyName(node.callee)) && hasId(node.callee.object) ||
-          node.type === "ObjectExpression" && node.properties.length > 0 && node.properties.every(value => ids.has(value.key?.name ?? value.key?.value))) {
+          !markerInventory && !staticShellContent && node.type === "ObjectExpression" && node.properties.length > 0 &&
+            node.properties.every(value => ids.has(value.key?.name ?? value.key?.value))) {
         note(node, "Shared execution contains object-ID dispatch data");
       }
       const literal = node.type === "Literal" ? node.regex?.pattern?.replaceAll("\\/", "/") ?? node.value : node.type === "TemplateElement" ? node.value.cooked : null;
@@ -226,6 +266,117 @@ function registryLoaders(source, root) {
   return { entries, importOffsets, descriptorImports };
 }
 
+function contextualClient(source, file, root, expectedExport) {
+  const ast = parseAst(source), bindings = new Map(), imports = ast.body.filter(node => node.type === 'ImportDeclaration');
+  if (imports.length !== 3 || ast.body.some(node => !['ImportDeclaration', 'ExportNamedDeclaration'].includes(node.type))) return null;
+  let context = null;
+  for (const node of imports) {
+    if (node.specifiers.length !== 1) return null;
+    const specifier = node.specifiers[0];
+    if (specifier.type === 'ImportSpecifier') bindings.set(specifier.local.name, { name: specifier.imported.name, path: relative(root, resolve(dirname(resolve(root, file)), node.source.value)) });
+    else if (specifier.type === 'ImportDefaultSpecifier' && node.source.value === '../prepared/world-context.json' &&
+      node.attributes?.length === 1 && (node.attributes[0].key.name ?? node.attributes[0].key.value) === 'type' && node.attributes[0].value.value === 'json') {
+      context = { local: specifier.local.name, path: relative(root, resolve(dirname(resolve(root, file)), node.source.value)) };
+    } else return null;
+  }
+  const exported = ast.body.filter(node => node.type === 'ExportNamedDeclaration');
+  const declaration = exported[0]?.declaration?.declarations?.[0], call = declaration?.init;
+  const factory = bindings.get(call?.callee?.name), definition = bindings.get(call?.arguments?.[0]?.name);
+  if (exported.length !== 1 || exported[0].declaration?.kind !== 'const' || exported[0].declaration.declarations.length !== 1 ||
+    declaration.id?.name !== expectedExport || !context || call?.type !== 'CallExpression' || call.arguments.length !== 2 ||
+    call.arguments[1]?.name !== context.local || factory?.name !== 'bindContextualObject' ||
+    factory.path !== 'site/packaged-object-runtime.mjs' || definition?.name !== 'runtimeDefinition' ||
+    definition.path !== file.replace(/client\.mjs$/, 'definition.mjs')) return null;
+  return context;
+}
+function memberPath(node) {
+  if (node?.type !== 'MemberExpression' || node.computed) return null;
+  const parent = memberPath(node.object);
+  if (parent === null) return node.object?.type === 'Identifier' ? [node.object.name, node.property?.name] : null;
+  return [...parent, node.property?.name];
+}
+function property(object, name) { return object?.properties?.find(item => item.type === 'Property' && item.key?.name === name); }
+function requireContextualBindingSource(source) {
+  const ast = parseAst(source), bindings = new Map();
+  for (const node of ast.body) if (node.type === 'ImportDeclaration') for (const specifier of node.specifiers) {
+    if (specifier.type === 'ImportSpecifier') bindings.set(specifier.local.name, { name: specifier.imported.name, source: node.source.value });
+  }
+  const binding = ast.body.find(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration' && node.declaration.id.name === 'bindContextualObject')?.declaration;
+  const fail = () => { throw new TypeError('Contextual binding must use the shared deferred world-context factories and pinned object inventories.'); };
+  if (!binding || binding.params.length !== 2 || binding.params.some(param => param.type !== 'Identifier') || binding.body.body.length !== 1) fail();
+  const [definition, context] = binding.params, returned = binding.body.body[0]?.argument;
+  if (returned?.type !== 'CallExpression' || returned.arguments.length !== 2 || bindings.get(returned.callee.name)?.name !== 'createDeferredObjectMount') fail();
+  const prepare = returned.arguments[0], bind = returned.arguments[1];
+  if (prepare?.type !== 'ArrowFunctionExpression' || !prepare.async || prepare.params.length || prepare.body?.type !== 'BlockStatement' ||
+    bind?.type !== 'ArrowFunctionExpression' || bind.params.length !== 1 || bind.body?.type !== 'CallExpression' ||
+    bind.body.callee.name !== 'bindPackagedObject' || bind.body.arguments.length !== 2 || bind.body.arguments[0]?.name !== definition.name || bind.body.arguments[1]?.name !== bind.params[0]?.name) fail();
+  const nodes = []; walkRuntimeAst(prepare.body, node => nodes.push(node));
+  const calls = name => nodes.filter(node => node.type === 'CallExpression' && bindings.get(node.callee?.name)?.name === name);
+  const factory = calls('createWorldContextObjectRuntime').find(node => node.arguments.length === 1 && node.arguments[0].type === 'ObjectExpression');
+  const volume = calls('loadPreparedCssVolume'), stars = calls('loadPreparedCssPointField');
+  if (!factory || volume.length !== 1 || stars.length !== 1) fail();
+  const globs = nodes.filter(node => node.type === 'CallExpression' && node.callee?.property?.name === 'glob' && node.callee.object?.type === 'MetaProperty');
+  const patterns = globs.map(node => node.arguments[0]?.value);
+  if (!patterns.includes('../src/objects/*/object.json') || !patterns.includes('../src/objects/*/prepared/**/*.{json,png,webp}')) fail();
+  const sets = [...nodes].filter(node => node.type === 'VariableDeclarator' && node.id?.type === 'Identifier' && node.init?.type === 'CallExpression');
+  const volumeSet = sets.find(node => memberPath(node.init.arguments[0])?.join('.') === `${context.name}.volume.objectId`);
+  const starSet = sets.find(node => memberPath(node.init.arguments[0])?.join('.') === `${context.name}.stars.objectId`);
+  if (!volumeSet || !starSet || volumeSet.init.callee?.name !== starSet.init.callee?.name) fail();
+  const setFactory = nodes.find(node => node.type === 'VariableDeclarator' && node.id?.name === volumeSet.init.callee.name && node.init?.type === 'ArrowFunctionExpression');
+  if (!setFactory || setFactory.init.params.length !== 1 || setFactory.init.params[0]?.type !== 'Identifier' || setFactory.init.body?.type !== 'BlockStatement') fail();
+  const parameter = setFactory.init.params[0].name;
+  const base = nodes.find(node => node.type === 'TemplateLiteral' && node.quasis.length === 2 && node.quasis[0].value.cooked === '../src/objects/' && node.quasis[1].value.cooked === '/' && node.expressions[0]?.name === parameter);
+  const resourceSet = setFactory.init.body.body.find(node => node.type === 'ReturnStatement')?.argument;
+  const descriptor = property(resourceSet, 'descriptor'), resolveResource = property(resourceSet, 'resolve'), transport = property(resourceSet, 'transport');
+  if (resourceSet?.type !== 'ObjectExpression' || descriptor?.value?.type !== 'MemberExpression' || descriptor.value.object?.name !== 'descriptors' ||
+    resolveResource?.value?.type !== 'Identifier' || transport?.value?.type !== 'ObjectExpression' ||
+    property(transport.value, 'read')?.value?.type !== 'FunctionExpression') fail();
+  const volumeCall = volume[0], starCall = stars[0];
+  if (!base || volumeCall.arguments.length !== 2 || starCall.arguments.length !== 2 ||
+    memberPath(volumeCall.arguments[0])?.join('.') !== `${volumeSet.id.name}.descriptor` || memberPath(volumeCall.arguments[1])?.join('.') !== `${volumeSet.id.name}.transport` ||
+    memberPath(starCall.arguments[0])?.join('.') !== `${starSet.id.name}.descriptor` || memberPath(starCall.arguments[1])?.join('.') !== `${starSet.id.name}.transport`) fail();
+  const fields = factory.arguments[0].properties;
+  if (!['definition', 'context', 'volume', 'stars', 'sprites'].every(name => property({ properties: fields }, name)?.value?.name === name) ||
+    !['resolveResource', 'resolveStarResource'].every(name => property({ properties: fields }, name)?.value?.type === 'ArrowFunctionExpression') ||
+    memberPath(property({ properties: fields }, 'resolveResource')?.value?.body?.callee)?.join('.') !== `${volumeSet.id.name}.${resolveResource.value.name}` ||
+    memberPath(property({ properties: fields }, 'resolveStarResource')?.value?.body?.callee)?.join('.') !== `${starSet.id.name}.${resolveResource.value.name}`) fail();
+}
+
+function requireContextFrame(value, objectId) {
+  const fail = message => { throw new TypeError(`Prepared context frame is invalid: ${message}.`); };
+  if (!value || typeof value !== 'object' || Array.isArray(value)) fail('context is not an object');
+  const context = value, frame = context.frame, focus = context.focus, camera = context.camera, stars = context.stars;
+  if (context.schema !== 'cssearth-world-context@1' || !frame || !focus || !camera || !stars || focus.id !== objectId ||
+    !Array.isArray(frame.originM) || !Array.isArray(focus.positionM) || frame.originM.length !== 3 || focus.positionM.length !== 3 ||
+    !frame.originM.every(Number.isFinite) || !focus.positionM.every(Number.isFinite) || !frame.originM.every((value, index) => value === focus.positionM[index]) ||
+    !(frame.bodyRadiusM > 0) || focus.radiusM !== frame.bodyRadiusM || !(frame.metersPerUnit > 0) ||
+    !(camera.minimumDistanceM > 0) || !(camera.maximumDistanceM > camera.minimumDistanceM)) fail('focus, physical frame, or camera range disagree');
+  if (!context.volume || !/^[a-z][a-z0-9-]*$/.test(context.volume.objectId ?? '')) fail('volume identity is not pinned');
+  if (!/^[a-z][a-z0-9-]*$/.test(stars.objectId ?? '') || !(stars.fadeStartDistanceM > 0) ||
+    !(stars.fullDistanceM > stars.fadeStartDistanceM) || !(context.volume.fadeStartDistanceM > stars.fullDistanceM)) fail('star field identity or handoff range is not pinned');
+  return { frame, stars };
+}
+async function requireContextPointField(root, context, source) {
+  const fail = message => { throw new TypeError(`Prepared context point field is invalid: ${message}.`); };
+  const id = context.stars.objectId, directory = resolve(root, `src/objects/${id}`), descriptorPath = resolve(directory, 'object.json');
+  let descriptor;
+  try { descriptor = JSON.parse(await source(descriptorPath)); } catch { fail('descriptor cannot be read'); }
+  if (!descriptor || descriptor.schema !== 'cssearth-object@1' || descriptor.id !== id || descriptor.type !== 'point-field' ||
+    !descriptor.properties || Object.keys(descriptor.properties).length !== 2 || !descriptor.properties.frame ||
+    descriptor.properties.frame.referenceFrame !== context.frame.referenceFrame || descriptor.properties.frame.epochJdTt !== context.frame.epochJdTt || !descriptor.prepared ||
+    descriptor.prepared.format !== 'cssearth-css-point-field@1' || typeof descriptor.prepared.url !== 'string' ||
+    !descriptor.prepared.url.startsWith('prepared/') || descriptor.prepared.url.split('/').includes('..') ||
+    !/^[a-f0-9]{64}$/.test(descriptor.prepared.sha256 ?? '')) fail('descriptor identity, frame, or pin drifted');
+  const payloadPath = resolve(directory, descriptor.prepared.url);
+  if (relative(directory, payloadPath).startsWith('../')) fail('prepared payload escapes its object package');
+  let bytes, payload;
+  try { bytes = await source(payloadPath); payload = JSON.parse(bytes); } catch { fail('prepared payload cannot be read'); }
+  if (createHash('sha256').update(bytes).digest('hex') !== descriptor.prepared.sha256 || !payload ||
+    payload.schema !== 'cssearth-prepared-object@1' || payload.id !== id || payload.type !== 'point-field' ||
+    payload.format !== descriptor.prepared.format || !payload.data) fail('prepared payload identity or hash drifted');
+}
+
+
 function thinClient(source, file, root, expectedExport) {
   const ast = parseAst(source), bindings = new Map();
   const imports = ast.body.filter(node => node.type === "ImportDeclaration");
@@ -309,8 +460,14 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   try { registry = registryLoaders(await source(resolve(root, registryPath)), root); }
   catch (error) { sharedViolations.push({ file: registryPath, line: 1, reason: error.message }); }
   await sharedVisit(resolve(root, registryPath));
-  const assemblyRoots = new Set(objects.map(object => registry.entries.get(object.id))
-    .filter(Boolean).map(loader => loader.kind === 'descriptor' ? loader.client : runtimePath));
+  const assemblyRoots = new Set();
+  for (const object of objects) {
+    const loader = registry.entries.get(object.id);
+    if (!loader) continue;
+    if (loader.kind === 'descriptor') assemblyRoots.add(loader.client);
+    else if (contextualClient(await source(resolve(root, loader.client)), loader.client, root, loader.exported)) assemblyRoots.add('site/packaged-object-runtime.mjs');
+    else assemblyRoots.add(runtimePath);
+  }
   if (!assemblyRoots.size) assemblyRoots.add(runtimePath);
   for (const file of assemblyRoots) await sharedVisit(resolve(root, file));
   // Runtime imports are visited first, so a runtime dependency cannot acquire
@@ -337,7 +494,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     if (loader.kind === 'descriptor') {
       const violations = [], owners = [], orphanExecutors = [];
       const assemblyClosure = reachable(resolve(root, client));
-      const factoryCalls = [...assemblyClosure].reduce((count, file) => count + (sharedFactoryCalls.get(file) ?? 0), 0);
+      const factoryCalls = sharedFactoryCalls.get(resolve(root, client)) ?? 0;
       let prepared = null;
       try {
         requireDescriptorAdapterSource(await source(resolve(root, client)), loader.exported);
@@ -352,8 +509,17 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       continue;
     }
     const runtimeDirectory = dirname(resolve(root, client));
-    const thin = thinClient(await source(resolve(root, client)), client, root, loader.exported);
+    const clientSource = await source(resolve(root, client));
+    const contextual = contextualClient(clientSource, client, root, loader.exported);
+    const thin = contextual ? true : thinClient(clientSource, client, root, loader.exported);
     const visited = new Set(), violations = [], owners = [];
+    if (contextual) try {
+      await sharedVisit(resolve(root, 'site/packaged-object-runtime.mjs'));
+      requireContextualBindingSource(await source(resolve(root, 'site/packaged-object-runtime.mjs')));
+      const context = requireContextFrame(JSON.parse(await source(resolve(root, contextual.path))), object.id);
+      await requireContextPointField(root, context, source);
+      visited.add(resolve(root, contextual.path));
+    } catch (error) { violations.push({ file: client, line: 1, reason: error.message }); }
     let plan = null;
     try {
       const id = requirePreparedDefinitionSource(await source(resolve(runtimeDirectory, "definition.mjs")));
@@ -361,7 +527,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       plan = readPreparedPresentationModule(await source(resolve(runtimeDirectory, "preparedPresentation.mjs")));
       if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) throw new TypeError("Prepared presentation schema is incompatible.");
     } catch (error) { violations.push({ file: `${relative(root, runtimeDirectory)}/definition.mjs`, line: 1, reason: error.message }); }
-    let factoryCalls = 0;
+    let factoryCalls = contextual ? 1 : 0;
     async function visit(path) {
       if (visited.has(path)) return;
       visited.add(path);
@@ -383,6 +549,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       if (facts.violations.length) owners.push(file);
       factoryCalls += facts.factoryCalls;
       for (const imported of facts.imports) {
+        if (contextual && path === resolve(root, client) && imported === '../prepared/world-context.json') continue;
         if (imported.startsWith(".") && imported.endsWith(".mjs")) await visit(resolve(dirname(path), imported));
         else violations.push({ file, line: 1, reason: `Unclosed object runtime import ${imported}` });
       }
