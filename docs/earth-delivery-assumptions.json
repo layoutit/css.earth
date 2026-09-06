@@ -5,6 +5,7 @@
   "dailySessions": [100, 1000, 10000],
   "edgeHitFractions": [0, 0.9],
   "coldSessionFraction": 1,
+  "requestCountBasis": "maximum-observed",
   "additionalRetainedStorageGB": 0,
   "freeTierAvailable": true,
   "monthlyDollarCeiling": null,

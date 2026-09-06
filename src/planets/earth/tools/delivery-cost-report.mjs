@@ -8,6 +8,7 @@ import { runtimeAssets } from "../../../../tools/runtime-assets.mjs";
 const root = resolve(import.meta.dirname, "../../../.."), path = resolve(process.argv[2]);
 const input = JSON.parse(await readFile(path)), assumptions = JSON.parse(await readFile(resolve(root, "docs/earth-delivery-assumptions.json")));
 assert.equal(input.complete, true, "Costs require a completed delivery measurement.");
+assert.ok(["maximum-observed", "cache-mix"].includes(assumptions.requestCountBasis), "Choose the request-count basis explicitly.");
 const cold = input.runs.filter(run => run.cache === "cold"), warm = input.runs.filter(run => run.cache === "warm");
 const groupOf = url => url.includes("earth-assets.lowpoly.cc") ? "r2" : url.includes("mapproxy.terrascope.be") ? "provider" : url.startsWith(input.base) ? "application" : "editorial";
 const max = (runs, group, field) => Math.max(...runs.map(run => field === "requests" ?
@@ -29,7 +30,9 @@ const storageUSD = Math.ceil(Math.max(0,storage.modeledGB-(free?prices.freeGBMon
 const scenarios = [];
 for (const dailySessions of assumptions.dailySessions) for (const edgeHitFraction of assumptions.edgeHitFractions) {
   const sessions = dailySessions * assumptions.daysPerMonth, mix = assumptions.coldSessionFraction;
-  const requests = group => measured[group].cold.requests * mix + measured[group].warm.requests * (1-mix);
+  const requests = group => assumptions.requestCountBasis === "maximum-observed"
+    ? Math.max(measured[group].cold.requests, measured[group].warm.requests)
+    : measured[group].cold.requests * mix + measured[group].warm.requests * (1-mix);
   const reads = Math.ceil(sessions * requests("r2") * (1-edgeHitFraction));
   const readsUSD = Math.ceil(Math.max(0,reads-(free?prices.freeReads:0))/1e6) * prices.millionReads;
   scenarios.push({ dailySessions, sessions, edgeHitFraction, r2Reads: reads, storageUSD, readsUSD,
@@ -37,7 +40,7 @@ for (const dailySessions of assumptions.dailySessions) for (const edgeHitFractio
     clientResponseGB: sessions * Object.values(measured).reduce((s,m)=>s+m.cold.responseBodyBytes*mix+m.warm.responseBodyBytes*(1-mix),0)/1e9 });
 }
 const report = { measuredAt: new Date().toISOString(), measurement: path, commit: input.commit, assumptions, storage, measured, scenarios,
-  qualification: "Per-session request counts include browser-cache requests and aborted attempts, so origin-read scenarios are conservative. Response bytes exclude unavailable aborted-body lengths. The cache percentages are assumptions, not forecasts or guarantees. Pages static requests do not invoke a Worker. Provider/editorial requests are external and excluded from Cloudflare charges. Pricing excludes taxes, domain fees, other services and account-wide usage. No numeric upstream quota or monthly dollar ceiling has been established.",
+  qualification: "Per-session request counts include browser-cache requests and aborted attempts. The default maximum-observed basis uses the larger cold or warm count independently for each service: warm page replacement can initiate more requests. The cache-mix basis is an editable alternative; coldSessionFraction always controls the separate client-byte estimate. Response bytes exclude unavailable aborted-body lengths. Cache percentages are assumptions, not forecasts or guarantees. Pages static requests do not invoke a Worker. Provider/editorial requests are external and excluded from Cloudflare charges. Pricing excludes taxes, domain fees, other services and account-wide usage. No numeric upstream quota or monthly dollar ceiling has been established.",
   publication: { uploadedFiles: 600, uploadedBytes: 110897456, reusedFiles: 203, unchangedGeometryUploads: 0,
     marginalStorageUSDPerMonthBeforeRounding: 110897456 / 1e9 * prices.gbMonth,
     normalAtlasBeforeBytes: 6476100, normalAtlasAfterBytes: 45956184,
