@@ -14,7 +14,7 @@ async function changedObject(id, mutate) {
     readText });
   return { result, changed };
 }
-const firstTexture = plan => plan.tree.nodes.findIndex(node => node.className?.split(/\s+/).includes("polycss-projective-texture"));
+const firstTexture = plan => plan.tree.nodes.findIndex(node => node.attributes?.["data-prepared-projection"] === "single-leaf");
 const omitProperties = (plan, node, names) => { node.properties = node.properties.filter(id => !names.includes(plan.tree.properties[id].name)); };
 
 test("all existing objects supply complete reachable normalized projective layouts", async () => {
@@ -29,8 +29,8 @@ test("removing Saturn's actual normalized layout assignments exposes all 162 ori
   const { result, changed } = await changedObject("saturn", plan => {
     let count = 0;
     for (const node of plan.tree.nodes) {
-      if (!node.className?.split(/\s+/).includes("polycss-projective-texture")) continue;
-      const parent = plan.tree.nodes[node.parent];
+      if (node.attributes?.["data-prepared-projection"] !== "single-leaf") continue;
+      const parent = node;
       if (/(?:^|;)(?:width|--polycss-atlas-width):/.test(parent.style)) continue;
       omitProperties(plan, parent, ["width", "height"]);
       omitProperties(plan, node, ["backgroundSize"]);
@@ -46,7 +46,7 @@ test("removing Saturn's actual normalized layout assignments exposes all 162 ori
 test("normalized leaf audit rejects missing atlas extent, missing texture address and flattened carrier", async () => {
   for (const [property, error] of [["--polycss-atlas-width", /explicit positive width/], ["backgroundSize", /explicit backgroundSize/], ["transformStyle", /flattening/]]) {
     const { result } = await changedObject("moon", plan => {
-      const texture = plan.tree.nodes[firstTexture(plan)], parent = plan.tree.nodes[texture.parent];
+      const texture = plan.tree.nodes[firstTexture(plan)], parent = texture;
       const node = property === "backgroundSize" ? texture : parent;
       const css = property === "backgroundSize" ? "background-size" : property === "transformStyle" ? "transform-style" : property;
       node.style = node.style.split(";").filter(declaration => !declaration.trim().startsWith(`${css}:`)).join(";");
@@ -58,8 +58,9 @@ test("normalized leaf audit rejects missing atlas extent, missing texture addres
 });
 test("normalized leaf audit rejects empty projective coverage and undeclared dictionary references", async () => {
   for (const mutate of [
-    plan => { for (const node of plan.tree.nodes) if (node.className === "polycss-projective-texture") node.className = null; },
+    plan => { for (const node of plan.tree.nodes) if (node.attributes["data-prepared-projection"] === "single-leaf") delete node.attributes["data-prepared-projection"]; },
     plan => { plan.tree.nodes[firstTexture(plan)].properties.push(plan.tree.properties.length); },
+    plan => { plan.tree.nodes.push({ parent: firstTexture(plan), tag: 'span', className: 'polycss-projective-texture', style: '', properties: [], attributes: {} }); },
   ]) {
     const { result } = await changedObject("moon", mutate);
     assert.equal(result.complete, false);
@@ -70,7 +71,7 @@ test("retained property references preserve last-write order instead of checking
   assert.equal(preparedStyleRecord("width:64px", [{ name: "width", value: "128px", custom: false },
     { name: "width", value: "", custom: false }]).width, "");
   const { result } = await changedObject("mars", plan => {
-    const parent = plan.tree.nodes[plan.tree.nodes[firstTexture(plan)].parent];
+    const parent = plan.tree.nodes[firstTexture(plan)];
     parent.properties.push(plan.tree.properties.length);
     plan.tree.properties.push({ name: "width", value: "auto", custom: false });
   });
@@ -89,7 +90,7 @@ test('descriptor objects audit the transported JSON tree, including a source-mat
   const first = await censusPreparedLeafLayouts({ objects: [object] });
   assert.equal(first.complete, true);
   assert.deepEqual(first.objects[0].modules, ['src/planets/mercury/prepared/object.json']);
-  const parent = plan.tree.nodes[plan.tree.nodes[firstTexture(plan)].parent];
+  const parent = plan.tree.nodes[firstTexture(plan)];
   parent.properties.push(plan.tree.properties.length);
   plan.tree.properties.push({ name: 'width', value: 'auto', custom: false });
   payload.data.tree = plan.tree;

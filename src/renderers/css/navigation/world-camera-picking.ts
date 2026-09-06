@@ -88,6 +88,10 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     pointer = null;
     const target = pick(event);
     if (!(target instanceof HTMLElement)) return;
+    if (target.dataset.objectNavigateActivation === 'dblclick') {
+      consume(event);
+      return;
+    }
     gesture.selected = { x: event.clientX, y: event.clientY, timestamp: event.timeStamp,
       objectId: target.dataset.objectNavigate! };
     event.preventDefault();
@@ -95,9 +99,16 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     target.click();
   };
   const doubleClick = (event: MouseEvent) => {
-    if (event.target !== inputSurface || !gesture.consumeRelease || !matchesSelection(event)) return;
-    gesture.selected = null; gesture.second = null; gesture.consumeRelease = false;
+    if (event.target !== inputSurface) return;
+    if (gesture.consumeRelease && matchesSelection(event)) {
+      gesture.selected = null; gesture.second = null; gesture.consumeRelease = false;
+      consume(event);
+      return;
+    }
+    const target = pick(event);
+    if (event.button !== 0 || target?.dataset.objectNavigateActivation !== 'dblclick') return;
     consume(event);
+    target.dispatchEvent(new MouseEvent('dblclick', { bubbles: true, cancelable: true, button: 0 }));
   };
   const cancel = () => { clearHover(); pointer = null; gesture.second = null; gesture.consumeRelease = false; };
   // Window capture precedes document flight interruption even after an owner

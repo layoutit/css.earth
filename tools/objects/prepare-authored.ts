@@ -10,6 +10,7 @@ import { prepareCelestialAssets } from './celestial/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters } from './geometry-adapters.js';
 import { prepareRuntimeManifest } from './operations.js';
+import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean; }
 export interface VerifiedSource { readonly reference: SourceReference; readonly path: string; readonly value: unknown; }
@@ -53,6 +54,14 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 
 /** Verify authored source pins, then prepare each available generic capability lane. */
 export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
+  const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write });
+  if (write || !result.definition) return result;
+  const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
+  const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
+  return Object.freeze({ ...result, definition: prepared.definition, scene });
+}
+
+async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   if (write) {
     const id = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'descriptor').id;
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid preparation identity.');

@@ -126,9 +126,13 @@ test("keeps Sun projection on retained transform and visibility updates", async 
   assert.match(runtime, /root\.style\.top/u);
   assert.match(runtime, /root\.hidden/u);
   const { runtimeDefinition } = await import("../../unit/mars/prepared-fixture.mjs");
-  assert.deepEqual(runtimeDefinition.sun, PREPARED_MARS_SKY_SUN);
   const { PREPARED_MARS_SCENE } = await import("../../unit/mars/prepared-fixture.mjs");
-  assert.deepEqual(runtimeDefinition.sky, PREPARED_MARS_SCENE.starfield);
+  const { prepareWorldNavigationDefinition } = await import("../../../../tools/objects/dist/prepare-world-navigation.js");
+  const { fileURLToPath } = await import('node:url');
+  const finalized = await prepareWorldNavigationDefinition({ objectDirectory: fileURLToPath(new URL("../../../../src/planets/mars/", import.meta.url)),
+    definition: { ...runtimeDefinition, sun: PREPARED_MARS_SKY_SUN, sky: PREPARED_MARS_SCENE.starfield } });
+  assert.deepEqual(runtimeDefinition.sun, finalized.definition.sun);
+  assert.deepEqual(runtimeDefinition.sky, finalized.definition.sky);
   assert.doesNotMatch(client, /google-maps-sun\.png|mw1\.google\.com/u);
   assert.doesNotMatch(css,
     /filter\s*:|mask(?:-image)?\s*:|clip-path\s*:|mix-blend-mode\s*:|gradient\(/u);

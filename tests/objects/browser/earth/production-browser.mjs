@@ -70,7 +70,7 @@ try {
             stage.querySelector(".polycss-scene"),
           ).transform,
           normalSurfaceImage: getComputedStyle(
-            stage.querySelector(".earth-body:not(.earth-body-polar) > s > .polycss-projective-texture"),
+            stage.querySelector(".earth-body:not(.earth-body-polar) > s"),
           ).backgroundImage,
           normalPolesImage: getComputedStyle(
             stage.querySelector(".earth-body-polar > s"),

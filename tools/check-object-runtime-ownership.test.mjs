@@ -31,6 +31,7 @@ const registrySource = (await readFile(new URL("../site/objects.mjs", import.met
     return mountMoonClient;
   }),
 ]);`).replace(/^import \w+Descriptor from[^\n]+\n/gm, '');
+const sunContext = await readFile(new URL("../src/planets/sun/prepared/world-context.json", import.meta.url), "utf8");
 const objectSchema = await readFile(new URL("../site/object-schema.mjs", import.meta.url), "utf8");
 const shared = `import { createPolyCamera } from '@layoutit/polycss';
 export function createObjectRuntime(definition) { return createPolyCamera(definition); }`;
@@ -39,6 +40,7 @@ function fixture(extra = {}, definitionTail = "") {
     "site/objects.mjs": registrySource, "site/object-schema.mjs": objectSchema,
     "site/layouts/PlanetLayout.astro": "<main><slot /></main>",
     "site/components/PlanetShell.astro": "<aside><slot /></aside>",
+    "src/planets/sun/prepared/world-context.json": sunContext,
     [prefix + "preparedPresentation.mjs"]: prepared,
     "src/planets/moon/site/control-content.mjs": `export const objectControls = ${JSON.stringify(objectControls)};`,
     "src/platform/prepared-schema.mjs": `export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@3";`,
@@ -100,6 +102,15 @@ for (const dispatch of [
   "switch (definition.id) {case 'moon': return;}", "const table={moon:1,saturn:2}; return table[definition.id];",
 ]) test(`shared owners reject object-ID dispatch: ${dispatch.slice(0, 50)}`, async () => {
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mjs": shared + `\nfunction hidden(definition) { ${dispatch} }` })), /object-ID dispatch/);
+});
+test('nullable physical lighting projection is data while adjacent identity tables remain forbidden', () => {
+  const file = 'src/renderers/css/navigation/perspective-dolly.ts';
+  const inspect = (source, path = file) => inspectObjectRuntimeModule(source, path, { shared: true, objectIds: ['sun', 'moon'] }).violations;
+  assert.deepEqual(inspect('const frame = { ...(projection === null ? {} : { sun: projection.sun }) };'), []);
+  for (const expression of ['{ sun: renderSun }', '{ sun: projection.moon }', '{ moon: projection.moon }', '{ sun: projection.sun, moon: renderMoon }']) {
+    assert.ok(inspect(`const table = ${expression};`).some(issue => /object-ID dispatch/.test(issue.reason)));
+  }
+  assert.ok(inspect('const table = { sun: projection.sun };', 'src/platform/object-runtime.mjs').some(issue => /object-ID dispatch/.test(issue.reason)));
 });
 test("shared owners reject private packages, fixed asset namespaces, v1 hooks and an extra native camera", async () => {
   for (const [source, expected] of [
@@ -259,9 +270,15 @@ test('descriptor binding cannot bypass the shared factory or redirect the prepar
     source.replace('../src/planets/*/prepared/object.json', '../src/planets/other/*.json'),
     source.replace('`../src/planets/${descriptorInput.id}/${reference}`', '`../src/planets/${otherDescriptor.id}/${reference}`'),
     source.replace('createNavigableObjectMount(descriptorInput,', 'createNavigableObjectMount(otherDescriptor,'),
-    source.replace('}, bindPackagedObject)', '}, differentBinding)')]) {
+    source.replace('bindContextualObject(definition, applicationContext,', 'bindContextualObject(definition, otherContext,'),
+    source.replace('definition => descriptorInput.properties.worldFrame', 'definition => true'),
+    source.replace('bindContextualObject(definition, applicationContext, descriptorInput.properties.worldFrame)',
+      'bindContextualObject(definition, applicationContext, applicationContext.frame)'),
+    source.replace(': bindPackagedObject(definition)', ': bindPackagedObject(otherDefinition)'),
+    source.replace('mount = createObjectRuntime(definition)', 'mount = createObjectRuntime(otherDefinition)'),
+    source.replace('=> mount(stage,', '=> differentMount(stage,')]) {
     assert.notEqual(changed, source, 'Mutation must change the actual loader');
-    await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport/);
+    await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport|Contextual binding/);
   }
   const registry = await readFile('site/objects.mjs', 'utf8');
   await assert.rejects(descriptorOverlay({ 'site/objects.mjs': registry.replace('loadPackagedObject(mercuryDescriptor)', 'loadPackagedObject(venusDescriptor)') }), /own actual JSON descriptor/);
@@ -283,6 +300,7 @@ test('typed renderer closure rejects forbidden scene APIs, styles, hidden import
     ["function hidden(node: HTMLElement) { node.style.setProperty('mask-image', 'url(mask.png)'); }", /Forbidden runtime CSS/],
     ["import('./hidden.js');", /Dynamic runtime imports/],
     ["import { createPolyCamera } from '@layoutit/polycss'; (createPolyCamera as typeof createPolyCamera)({});", /native camera factory site; found 2/],
+    ["function hidden() { createObjectRuntime({}); }", /actual shared factory call/],
   ]) await assert.rejects(descriptorOverlay({ [file]: `${source}\n${injected}` }), expected);
 });
 
@@ -302,8 +320,11 @@ test('the actual Sun-only shell and navigation share exactly one typed camera ow
   const report = await audit({});
   assert.equal(report.complete, true);
   assert.equal(report.cameraFactorySites.length, 1);
-  assert.ok(report.sharedClosure.includes('src/renderers/css/navigation/index.ts'));
   assert.ok(report.sharedClosure.includes('src/renderers/css/index.ts'));
+  assert.ok(report.sharedClosure.includes('src/renderers/css/universe/world-context-runtime.ts'));
+  assert.ok(report.sharedClosure.includes('src/renderers/css/universe/prepared-world-context.ts'));
+  assert.ok(!report.sharedClosure.includes('src/platform/object-runtime.mjs'));
+  assert.ok(report.sharedClosure.includes('src/renderers/css/navigation/index.ts'));
   assert.ok(report.sharedClosure.includes('src/renderers/css/runtime/object-runtime.ts'));
   assert.ok(!report.sharedClosure.some(file => /^src\/planets\/[^/]+\/runtime\//u.test(file)));
   for (const file of ['site/scene-router.mjs', 'site/view-url-runtime.mjs', 'site/prepared-world-navigation.mjs']) {
@@ -318,6 +339,7 @@ test('the actual Sun-only shell and navigation share exactly one typed camera ow
   assert.notEqual(changed, config, 'Mutation must redirect the actual navigation build entry');
   const shared = await audit({ [configFile]: changed });
   assert.equal(shared.cameraFactorySites.length, 1);
+
 });
 
 test('every independently selected registry object closes over exactly its own native camera assembly', async () => {
@@ -326,4 +348,54 @@ test('every independently selected registry object closes over exactly its own n
     assert.equal(report.complete, true, object.id);
     assert.equal(report.cameraFactorySites.length, 1, object.id);
   }
+});
+
+test('descriptor context binding pins both prepared contexts to the shared factories and physical references', async () => {
+  const contextFile = 'src/planets/sun/prepared/world-context.json';
+  const packagedFile = 'site/packaged-object-runtime.mjs', applicationFile = 'site/application-world-context.mjs', starsDescriptorFile = 'src/objects/stellar-neighbourhood/object.json';
+  const starsPayloadFile = 'src/objects/stellar-neighbourhood/prepared/stars.json';
+  const [contextText, packaged, application, starDescriptorText, starsPayloadText] = await Promise.all([
+    readFile(contextFile, 'utf8'), readFile(packagedFile, 'utf8'), readFile(applicationFile, 'utf8'),
+    readFile(starsDescriptorFile, 'utf8'), readFile(starsPayloadFile, 'utf8'),
+  ]);
+  const context = JSON.parse(contextText), starDescriptor = JSON.parse(starDescriptorText);
+  const audit = changes => auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === 'sun'),
+    readText: path => Object.hasOwn(changes, relativeFile(path)) ? changes[relativeFile(path)] : readFile(path, 'utf8') });
+  const report = await audit({});
+  assert.equal(report.complete, true);
+  assert.ok(report.sharedClosure.includes(contextFile));
+  const orbitless = { ...context, bodies: context.bodies.map((body, index) => {
+    if (index) return body;
+    const { orbit, ...point } = body;
+    return point;
+  }) };
+  assert.equal((await audit({ [contextFile]: JSON.stringify(orbitless) })).complete, true,
+    'An orbitless physical point does not require fabricated orbital geometry');
+  for (const [changes, expected] of [
+    [{ [packagedFile]: packaged.replace("with { type: 'json' }", '') }, /forward its prepared transport/],
+    [{ [contextFile]: JSON.stringify({ ...context, volume: { ...context.volume, objectId: '../milky-way' } }) }, /volume identity is not pinned/],
+    [{ [contextFile]: JSON.stringify({ ...context, frame: { ...context.frame, originM: [1, 0, 0] } }) }, /physical frame/],
+    [{ [contextFile]: JSON.stringify({ ...context, bodies: [] }) }, /body inventory/],
+    [{ [contextFile]: JSON.stringify({ ...orbitless, bodies: orbitless.bodies.map((body, index) => index ? body : { ...body, radiusM: undefined }) }) }, /physical point/],
+    [{ [contextFile]: JSON.stringify({ ...orbitless, bodies: orbitless.bodies.map((body, index) => index ? body : { ...body, orbit: null }) }) }, /body orbit parent/],
+    [{ [contextFile]: JSON.stringify({ ...context, bodies: context.bodies.map((body, index) => index ? body : { ...body,
+      orbit: { ...body.orbit, centerBodyId: 'missing-parent' } }) }) }, /body orbit parent/],
+    [{ [contextFile]: JSON.stringify({ ...context, bodies: context.bodies.map((body, index) => index ? body : { ...body,
+      orbit: { ...body.orbit, centerPositionM: [1, 0, 0] } }) }) }, /body orbit parent/],
+    [{ [contextFile]: JSON.stringify({ ...context, stars: { ...context.stars, objectId: '../stellar-neighbourhood' } }) }, /star field identity/],
+    [{ [contextFile]: JSON.stringify({ ...context, stars: { ...context.stars, fullDistanceM: context.volume.fadeStartDistanceM } }) }, /star field identity/],
+    [{ [packagedFile]: packaged.replace('createWorldContextObjectRuntime', 'createObjectRuntime') }, /Contextual binding/],
+    [{ [packagedFile]: packaged.replace('world-context.json', 'other-context.json') }, /Contextual binding/],
+    [{ [applicationFile]: application.replace('createPreparedUniverse', 'createObjectRuntime') }, /Application world context/],
+    [{ [applicationFile]: application.replace('../src/objects/*/prepared/**/*.{json,png,webp}', '../src/objects/*/prepared/**/*.{json,png}') }, /Application world context/],
+    [{ [applicationFile]: application.replace('loadPreparedCssPointField', 'loadPreparedCssVolume') }, /Application world context/],
+    [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, prepared: { ...starDescriptor.prepared, sha256: '0'.repeat(64) } }) }, /point field.*(?:identity|hash).*drifted/],
+    [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, properties: { ...starDescriptor.properties, frame: { ...starDescriptor.properties.frame, epochJdTt: 0 } } }) }, /point field.*frame/],
+    (() => {
+      const payload = JSON.parse(starsPayloadText); payload.data.id = 'wrong-field';
+      const bytes = JSON.stringify(payload), descriptor = { ...starDescriptor, prepared: { ...starDescriptor.prepared,
+        sha256: createHash('sha256').update(bytes).digest('hex') } };
+      return [{ [starsDescriptorFile]: JSON.stringify(descriptor), [starsPayloadFile]: bytes }, /point field.*identity/];
+    })(),
+  ]) await assert.rejects(audit(changes), expected);
 });

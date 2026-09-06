@@ -5,6 +5,7 @@ import { parseAst } from 'vite';
 import { requirePreparedControlSource, requirePreparedDefinitionSource, readPreparedJsonExports, readPreparedPresentationModule } from './check-prepared-presentation.mjs';
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../src/platform/prepared-schema.mjs';
 import { requireObjectRuntimeDefinition } from './object-runtime-contract.mjs';
+import { requireAuthoredWorldFrame } from './authored-world-frame.mjs';
 
 export function requireDescriptorAdapterSource(text, exported) {
   const ast = parseAst(text), bindings = new Map(), functions = new Map();
@@ -18,16 +19,59 @@ export function requireDescriptorAdapterSource(text, exported) {
   const loader = functions.get(exported), returned = loader?.body.body[0]?.argument;
   if (loader?.params.length !== 1 || loader.params[0].type !== 'Identifier' || loader.body.body.length !== 1 ||
     returned?.type !== 'CallExpression' || returned.arguments.length !== 3 || bindings.get(returned.callee.name)?.name !== 'createNavigableObjectMount') fail();
-  const bind = functions.get(returned.arguments[2]?.name);
   if (returned.arguments[0]?.type !== 'Identifier' || returned.arguments[0].name !== loader.params[0].name ||
-    returned.arguments[1].type !== 'ObjectExpression' || !bind || bind.params.length !== 1 || bind.params[0].type !== 'Identifier' || bind.body.body.length !== 2) fail();
-  const declaration = bind.body.body[0]?.declarations?.[0], factory = declaration?.init, mount = bind.body.body[1]?.argument;
-  if (declaration?.id.type !== 'Identifier' || factory?.type !== 'CallExpression' || factory.arguments.length !== 1 ||
-    bindings.get(factory.callee.name)?.name !== 'createObjectRuntime' || factory.arguments[0].name !== bind.params[0].name ||
-    mount?.type !== 'ArrowFunctionExpression' || mount.params.length !== 2 || mount.body?.type !== 'CallExpression' || mount.body.callee.name !== declaration.id.name ||
-    mount.body.arguments[0]?.name !== mount.params[0]?.name || mount.body.arguments[1]?.type !== 'ObjectExpression') fail();
-  const renderer = bindings.get(factory.callee.name).source;
-  if (bindings.get(returned.callee.name)?.source !== renderer) fail();
+    returned.arguments[1].type !== 'ObjectExpression') fail();
+  const adapter = returned.arguments[2];
+  if (adapter?.type !== 'ArrowFunctionExpression' || adapter.params.length !== 1 || adapter.params[0]?.type !== 'Identifier' ||
+    adapter.body?.type !== 'ConditionalExpression') fail();
+  const descriptorInput = loader.params[0].name;
+  const ownWorldFrame = node => node?.type === 'MemberExpression' && !node.computed && node.property.name === 'worldFrame' &&
+    node.object?.type === 'MemberExpression' && !node.object.computed && node.object.property.name === 'properties' &&
+    node.object.object?.type === 'Identifier' && node.object.object.name === descriptorInput;
+  const contextual = adapter.body.consequent, plain = adapter.body.alternate;
+  if (!ownWorldFrame(adapter.body.test) || contextual?.type !== 'CallExpression' || contextual.callee?.name !== 'bindContextualObject' ||
+    contextual.arguments.length !== 3 || contextual.arguments[0]?.name !== adapter.params[0].name ||
+    !ownWorldFrame(contextual.arguments[2]) || plain?.type !== 'CallExpression' || plain.callee?.name !== 'bindPackagedObject' ||
+    plain.arguments.length !== 1 || plain.arguments[0]?.name !== adapter.params[0].name) fail();
+  const contextImport = ast.body.find(statement => statement.type === 'ImportDeclaration' && statement.specifiers.length === 1 &&
+    statement.specifiers[0].type === 'ImportDefaultSpecifier' && statement.source.value === '../src/planets/sun/prepared/world-context.json' &&
+    statement.attributes?.length === 1 && (statement.attributes[0].key.name ?? statement.attributes[0].key.value) === 'type' &&
+    statement.attributes[0].value.value === 'json');
+  if (!contextImport || contextual.arguments[1]?.type !== 'Identifier' ||
+    contextual.arguments[1].name !== contextImport.specifiers[0].local.name) fail();
+  const plainBinding = functions.get('bindPackagedObject'), defaultMount = plainBinding?.params[1];
+  if (plainBinding?.params.length !== 2 || plainBinding.params[0]?.type !== 'Identifier' ||
+    defaultMount?.type !== 'AssignmentPattern' || defaultMount.left?.type !== 'Identifier' ||
+    defaultMount.right?.type !== 'CallExpression' || bindings.get(defaultMount.right.callee?.name)?.name !== 'createObjectRuntime' ||
+    defaultMount.right.arguments.length !== 1 || defaultMount.right.arguments[0]?.name !== plainBinding.params[0].name) fail();
+  const plainMount = plainBinding.body.body[0]?.argument;
+  if (plainBinding.body.body.length !== 1 || plainMount?.type !== 'ArrowFunctionExpression' || plainMount.params.length !== 2 ||
+    plainMount.body?.type !== 'CallExpression' || plainMount.body.callee?.name !== defaultMount.left.name ||
+    plainMount.body.arguments[0]?.name !== plainMount.params[0]?.name || plainMount.body.arguments[1]?.type !== 'ObjectExpression') fail();
+  const bind = functions.get('bindContextualObject');
+  if (!bind || bind.params.length !== 3 || bind.params[0]?.type !== 'Identifier' || bind.params[1]?.type !== 'Identifier' ||
+    bind.params[2]?.type !== 'AssignmentPattern' || bind.params[2].left?.type !== 'Identifier' ||
+    bind.params[2].right?.type !== 'MemberExpression' || bind.params[2].right.computed || bind.params[2].right.property.name !== 'frame' ||
+    bind.params[2].right.object?.type !== 'Identifier' || bind.params[2].right.object.name !== bind.params[1].name ||
+    bind.body.body.length !== 2) fail();
+  const definition = bind.params[0], context = bind.params[1], mountStatement = bind.body.body[0], returnStatement = bind.body.body[1];
+  const mount = mountStatement?.declarations?.[0], mountInit = mount?.init;
+  if (mountStatement?.type !== 'VariableDeclaration' || mountStatement.kind !== 'const' || mountStatement.declarations.length !== 1 ||
+    mount.id?.type !== 'Identifier' || mountInit?.type !== 'CallExpression' || mountInit.callee?.name !== 'bindPackagedObject' ||
+    mountInit.arguments.length !== 2 || mountInit.arguments[0]?.name !== definition.name) fail();
+  const factory = mountInit.arguments[1];
+  if (factory?.type !== 'CallExpression' || factory.callee?.name !== 'createWorldContextObjectRuntime' || factory.arguments.length !== 1 ||
+    factory.arguments[0]?.type !== 'ObjectExpression') fail();
+  const fields = new Map(factory.arguments[0].properties.map(property => [property.key.name ?? property.key.value, property.value]));
+  if (fields.get('definition')?.name !== definition.name || fields.get('context')?.name !== context.name || fields.get('frame')?.name !== bind.params[2].left.name) fail();
+  if (returnStatement?.type !== 'ReturnStatement' || returnStatement.argument?.type !== 'CallExpression' ||
+    returnStatement.argument.callee?.type !== 'MemberExpression' || returnStatement.argument.callee.object?.name !== 'Object' ||
+    returnStatement.argument.callee.property?.name !== 'assign' || returnStatement.argument.arguments[0]?.name !== mount.id.name) fail();
+  const rendererBinding = bindings.get('createWorldContextObjectRuntime');
+  if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' ||
+    bindings.get('createNavigableObjectMount')?.source !== rendererBinding.source ||
+    bindings.get(defaultMount.right.callee.name)?.source !== rendererBinding.source) fail();
+  const renderer = rendererBinding.source;
   const transport = returned.arguments[1].properties;
   if (transport.length !== 1 || (transport[0].key.name ?? transport[0].key.value) !== 'read' || !transport[0].method || !transport[0].value.async || transport[0].value.params.length !== 1) fail();
   const method = transport[0].value, reference = method.params[0]?.name, nodes = [];
@@ -129,7 +173,7 @@ async function readAuthoredDefinition({ objectId, descriptor, root, source, clos
   const scene = JSON.parse(await source(scenePath));
   closure.add(runtimePath); closure.add(scenePath);
   if (runtime.id !== objectId || runtime.schema !== PREPARED_OBJECT_RUNTIME_SCHEMA) throw new TypeError('Authored runtime identity is invalid.');
-  if (!isDeepStrictEqual(scene.worldFrame, descriptor.properties.worldFrame)) throw new TypeError('Authored physical frame differs from the descriptor world frame.');
+  await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText: source, closure });
   requireObjectRuntimeDefinition(runtime, { objectId });
   return runtime;
 }

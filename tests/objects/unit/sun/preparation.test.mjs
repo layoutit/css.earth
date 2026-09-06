@@ -19,7 +19,7 @@ import { verifySunRasterReproduction } from "./preparation-fixture.mjs";
 
 test("binds the exact Sun source and runtime closures", async () => {
   assert.deepEqual(await verifySunSourceManifest(), {
-    inputCount: 37,
+    inputCount: 38,
     generatedIntermediateCount: 0,
     documentCount: 8,
   });
@@ -31,7 +31,7 @@ test("binds the exact Sun source and runtime closures", async () => {
   assert.equal(runtime.assets.length, 60);
 });
 
-test("publishes prepared Sun content, lenses, and scene", () => {
+test("publishes prepared Sun content, lenses, and scene", async () => {
   assert.equal(PREPARED_SUN_PANEL.sourceId, 108082);
   assert.equal(PREPARED_SUN_TITLE.label, "Sun");
   assert.equal(PREPARED_SUN_TITLE.source, "Inter Variable 4.001 git-9221beed3");
@@ -66,6 +66,18 @@ test("publishes prepared Sun content, lenses, and scene", () => {
   assert.equal(PREPARED_SUN_SCENE.camera.cameraModel, "accumulated-matrix3d");
   assert.equal(PREPARED_SUN_SCENE.camera.pitchBounded, false);
   assert.equal(PREPARED_SUN_SCENE.camera.yawBounded, false);
+  const context = JSON.parse(await readFile(new URL("../../../../src/planets/sun/prepared/world-context.json", import.meta.url), "utf8"));
+  assert.equal(context.schema, "cssearth-world-context@1");
+  assert.equal(context.focus.id, "sun");
+  assert.deepEqual(context.focus.positionM, context.frame.originM);
+  assert.equal(context.focus.radiusM, context.frame.bodyRadiusM);
+  const sourceContext = JSON.parse(await readFile(new URL("../../../../src/planets/sun/source/navigation/universe.json", import.meta.url), "utf8"));
+  assert.deepEqual(context.bodies.map(body => body.id), sourceContext.bodies.map(body => body.id));
+  assert.equal(context.camera.presentation.projection.model, "css-perspective-shared-with-sky");
+  const descriptor = JSON.parse(await readFile(new URL("../../../../src/planets/sun/object.json", import.meta.url), "utf8"));
+  assert.deepEqual(descriptor.properties.worldFrame, context.frame);
+  assert.deepEqual(PREPARED_SUN_SCENE.worldFrame, context.frame);
+  assert.deepEqual(PREPARED_SUN_SCENE.camera.projection, context.camera.presentation.projection);
 });
 
 test("preserves both HMI magnetic polarities in the prepared magnetic lens", async () => {
@@ -110,7 +122,7 @@ test("keeps the runtime free of forbidden render paths", async () => {
   const { OBJECTS } = await import("../../../../site/objects.mjs");
   const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "sun") });
   assert.equal(audit.complete, true);
-  assert.ok(audit.sharedClosure.includes("src/renderers/css/solar-system/cubic-sky-runtime.ts"));
+  assert.ok(audit.sharedClosure.includes("src/renderers/css/universe/world-context-runtime.ts"));
   const runtimeDefinition = await readPreparedFixture('sun', 'runtime');
   assert.equal(runtimeDefinition.sun, null);
   assert.equal(runtimeDefinition.sky.sun, undefined);

@@ -3,10 +3,12 @@ import { selectCityPages } from "./city-page-selection.js";
 import { createCityIndex } from "./city-index.js";
 import { normalizeCityAssetOrigin, isPreparedCityAssetUrl, isPreparedAssetPath } from "./city-asset-url.js";
 import { createApiImageTransport } from "./api-image-transport.js";
+import { requirePhysicalProjection } from '../rendering/physical-projection.js';
+import { publishPreparedPageTexture } from './page-texture.js';
 
 import type { PreparedPage, PageMountOptions, PageSelection } from "./types.js";
 import type { ObjectRuntimeView } from "../runtime/object-runtime-types.js";
-interface PageSlot { leaf: HTMLElement; texture: HTMLElement; apiTexture: HTMLElement | null; image: HTMLImageElement; key: string | null; blobUrl: string | null; apiHandle: ReturnType<ReturnType<typeof createApiImageTransport>["acquire"]> | null; controller: AbortController | null; generation: number; ready: boolean; published: boolean; decodedBytes: number; }
+interface PageSlot { leaf: HTMLElement; apiTexture: HTMLElement | null; image: HTMLImageElement; key: string | null; blobUrl: string | null; apiHandle: ReturnType<ReturnType<typeof createApiImageTransport>["acquire"]> | null; controller: AbortController | null; generation: number; ready: boolean; published: boolean; decodedBytes: number; }
 export function mountPreparedMapPages({ plan, carrier, system, scene, camera, stage, className, textureClassName, lensIds, own, onError = error => { throw error; } }: PageMountOptions) {
   let validAssetOrigin = false;
   try { validAssetOrigin = normalizeCityAssetOrigin(plan.assetOrigin) === plan.assetOrigin; } catch {}
@@ -53,9 +55,9 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       apiTexture=document.createElement("span");
       apiTexture.className=textureClassName;
       apiTexture.style.cssText="position:absolute;inset:0 auto auto 0;width:100%;height:100%;display:block;transform-origin:0 0;transform-style:flat;backface-visibility:visible;background-repeat:no-repeat;visibility:hidden;pointer-events:none";
-      leaf.firstElementChild!.appendChild(apiTexture);
+      leaf.appendChild(apiTexture);
     }
-    slots.push({ leaf, texture: leaf.firstElementChild as HTMLElement, apiTexture, image: new Image(),
+    slots.push({ leaf, apiTexture, image: new Image(),
       key: null, blobUrl: null, apiHandle: null, controller: null, generation: 0, ready: false, published: false, decodedBytes: 0 });
     carrier.appendChild(leaf);
   }
@@ -98,15 +100,17 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       return;
     }
     // Dynamic view selection only. Geometry, UVs and page pixels are prepared.
-    const matrix = new DOMMatrix(getComputedStyle(scene).transform)
+    const projection = view.projection && requirePhysicalProjection(view.projection);
+    const matrix = (projection ? new DOMMatrix(Array.from(projection.eyeFromScene)) : new DOMMatrix(getComputedStyle(scene).transform))
       .multiply(new DOMMatrix(getComputedStyle(system).transform))
       .multiply(new DOMMatrix(getComputedStyle(carrier).transform));
-    const scale = Number.parseFloat(getComputedStyle(camera).scale);
+    const scale = projection ? 1 : Number.parseFloat(getComputedStyle(camera).scale);
     const cameraRect=camera.getBoundingClientRect(),stageRect=stage.getBoundingClientRect();
     const selection = selectCityPages(plan, index.nodes(), Array.from(matrix.toFloat64Array()), scale,
       { width: stage.clientWidth, height: stage.clientHeight,
         originX:cameraRect.left+cameraRect.width/2-stageRect.left,
-        originY:cameraRect.top+cameraRect.height/2-stageRect.top });
+        originY:cameraRect.top+cameraRect.height/2-stageRect.top,
+        ...(projection ? { projection } : {}) });
     if(desired.join(",")!==selection.keys.join(",")){
       progressiveInitialView=!slots.some(slot=>slot.published)&&selection.keys.every(key=>
         ["terrascope-wms@1","terrascope-wmts@1"].includes(index.nodes().get(key)?.rasterSource ?? ""));
@@ -192,18 +196,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       if (slot.image.naturalWidth !== page.width || slot.image.naturalHeight !== page.height) {
         throw new Error(`City page ${page.key}: dimension mismatch`);
       }
-      slot.leaf.style.transform = `matrix3d(${page.frameMatrix})`;
-      slot.texture.style.transform = `matrix3d(${page.textureMatrix})`;
-      slot.texture.style.overflow=page.imageMatrix?"hidden":"visible";
-      slot.texture.style.backgroundImage=page.imageMatrix?"none":"inherit";
-      const imageTexture=(page.imageMatrix?slot.apiTexture:slot.texture)!;
-      imageTexture.style.backgroundSize = page.textureBackgroundSize ?? `${32*plan.rasterScale}px ${32*plan.rasterScale}px`;
-      imageTexture.style.backgroundPosition = page.textureBackgroundPosition ?? "0px 0px";
-      if(page.imageMatrix){
-        slot.apiTexture!.style.transform=`matrix3d(${page.imageMatrix})`;
-        slot.apiTexture!.style.backgroundImage=`url("${blobUrl}")`;
-      }
-      slot.leaf.style.backgroundImage = `url("${blobUrl}")`;
+      publishPreparedPageTexture(slot.leaf, slot.apiTexture, page, blobUrl, plan.rasterScale);
       slot.leaf.dataset.cityPage = page.key;
       slot.ready = true;
       slot.controller = null;

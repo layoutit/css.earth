@@ -10,6 +10,8 @@ import { prepareSegmentedSurfaceScene } from '../../../../tools/objects/static-s
 import { prepareBandSurfacePresentation, prepareEmissiveSurfacePresentation } from '../../../../tools/objects/static-surface/presentation.mjs';
 import { scientificFalseColor, prepareFitsMap, readFitsPrimary } from '../../../../tools/objects/static-surface/fits-map.mjs';
 import { readPhysicalFacts } from '../../../../tools/objects/static-surface/physical.mjs';
+import { contextualizeStaticSurfaceScene } from '../../../../tools/objects/static-surface/index.mjs';
+import { prepareWorldNavigationDefinition } from '../../../../tools/objects/dist/prepare-world-navigation.js';
 
 const read = async path => JSON.parse(await readFile(resolve(projectRoot, path), 'utf8'));
 for (const id of ['moon', 'pluto', 'sun']) {
@@ -24,12 +26,16 @@ for (const id of ['moon', 'pluto', 'sun']) {
     assert.equal(Object.hasOwn(profile.metadata.body, 'bands'), false);
     const expected = await readPreparedFixture(id, 'runtime');
     const lenses = await readPreparedFixture(id, 'lenses'), sky = expected.sky, sun = expected.sun;
-    const scene = profile.kind === 'disc-poles' ? prepareBandSurfaceScene(profile).scene : prepareSegmentedSurfaceScene(profile, sky);
+    const contextReference = descriptor.recipe.sources.find(source => source.id === 'world-context');
+    const context = contextReference ? await readPreparedFixture(id, 'world-context') : undefined;
+    const scene = contextualizeStaticSurfaceScene(profile.kind === 'disc-poles' ? prepareBandSurfaceScene(profile).scene : prepareSegmentedSurfaceScene(profile, sky), context, id);
     assert.deepEqual(scene, await readPreparedFixture(id, 'scene'));
     const presentation = profile.kind === 'disc-poles'
       ? await prepareBandSurfacePresentation({ namespace: id, plan: scene, lenses, sky, sun })
       : await prepareEmissiveSurfacePresentation({ namespace: id, plan: scene, lenses });
-    assert.deepEqual({ ...presentation, schema: expected.schema, id, controls: expected.controls }, expected);
+    const finalized = await prepareWorldNavigationDefinition({ objectDirectory: resolve(projectRoot, 'src/planets', id),
+      definition: { ...presentation, schema: expected.schema, id, controls: expected.controls }, projectRoot });
+    assert.deepEqual(finalized.definition, expected);
     const physical = await readPhysicalFacts({ sourceDirectory: resolve(projectRoot, 'src/planets', id, 'source'), config: await read(`src/planets/${id}/source/preparation/physical.json`) });
     assert.equal(physical.meanRadiusKm, descriptor.recipe.shape.radiusKm);
   });

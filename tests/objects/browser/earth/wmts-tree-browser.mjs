@@ -8,6 +8,7 @@ import { PREPARED_EARTH_CITY_PAGES as existing } from "../../unit/earth/prepared
 import { prepareRegionPack } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mjs";
 import { prepareWmtsTile,wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mjs";
 import { prepareLocationPoint,prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
+import sourceConfig from '../../../../src/planets/earth/source/preparation/paged-ellipsoid.json' with { type: 'json' };
 const root=new URL("../../../../",import.meta.url),output=new URL(`output/playwright/wmts-tree-${Date.now()}/`,root);
 await mkdir(output,{recursive:true});
 const requested=process.argv.find(a=>a.startsWith("--sample="))?.slice(9),mobile=process.argv.includes("--mobile");
@@ -67,13 +68,26 @@ try{
       await page.goto(`http://127.0.0.1:${server.address.port}/earth/`);await page.waitForFunction(()=>window.__earth?.ready);
       await page.evaluate(()=>{{ const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }window.__savedNodes=[...document.querySelector(".planet-stage").querySelectorAll("*")];});
       for(const sample of [...samples,{...samples[0],id:samples[0].id+"-revisit"}]){
-        const camera=noise?noisePlan.camera:prepareLocationCamera(scene,prepareLocationPoint(scene,sample.lon,sample.lat),noise?512:2048);
+        const camera=noise?noisePlan.camera:prepareLocationCamera(scene,prepareLocationPoint(scene,sample.lon,sample.lat),2048,
+          {body:scene[sourceConfig.sceneBodyKey],camera:sourceConfig.camera});
         const start=Date.now();
         if(noise)await page.evaluate(()=>window.__earth.lenses.select("buenos-aires-noise"));
-        await page.evaluate(camera=>window.__earth.camera.setState(camera),camera);
+        await page.evaluate(camera=>window.__earth.camera.flyToState(camera,{surfaceTarget:true}),camera);
+        const progress=setInterval(()=>void page.evaluate(()=>{
+          const owner=window.__cssEarth,earth=window.__earth;
+          if(!earth)return {ready:owner?.ready,error:owner?.error};
+          const s=earth.runtime.pages().city,camera=earth.camera.state();
+          return {desired:s.desired.length,levels:[...new Set(s.desired.map(key=>key.split('-')[1]))],
+            retained:s.retained.length,published:s.retained.filter(page=>page.published).length,
+            pendingSelection:s.pendingSelection,imageLoads:s.activeLoads,imageRequests:s.requests,
+            indexLoads:s.index.activeLoads,indexRequests:s.index.requests,indexErrors:s.index.errors,
+            imageErrors:s.errors,zoom:camera.zoom,distanceKilometers:camera.distanceKilometers};
+        }).then(state=>console.log(JSON.stringify({progress:sample.id,dpr,elapsedMs:Date.now()-start,state})))
+          .catch(()=>{}),10000);
         try{
           await page.waitForFunction(()=>{const s=window.__earth.runtime.pages().city;return s.desired.length>0&&!s.pendingSelection&&!s.activeLoads&&!s.index.activeLoads&&s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));},null,{timeout:120000});
         }catch(error){run.failure=await page.evaluate(()=>window.__earth.runtime.pages().city);throw error;}
+        finally{clearInterval(progress);}
         if(noise)await page.waitForFunction(()=>{const s=window.__earth.runtime.pages().noise;return s.desired.length>0&&!s.activeLoads&&s.desired.every(key=>s.retained.some(p=>p.key===key&&p.published));});
         const state=await page.evaluate(()=>({paging:window.__earth.runtime.pages().city,noise:window.__earth.runtime.pages().noise,stable:window.__earth.assertStableDomIdentity(),identical:[...document.querySelector(".planet-stage").querySelectorAll("*")].every((n,i)=>n===window.__savedNodes[i]),nodes:window.__savedNodes.length}));
         assert.ok(state.stable&&state.identical);assert.deepEqual(state.paging.index.errors,[]);assert.deepEqual(state.paging.errors,[]);
@@ -83,7 +97,7 @@ try{
         if(process.argv.includes("--diagnose-polar")){
           run.diagnostic=await page.evaluate(()=>({
             camera:window.__earth.camera.state(),carriers:[...document.querySelectorAll(".earth-body")].map(n=>({class:n.className,transform:getComputedStyle(n).transform,style:getComputedStyle(n).transformStyle})),
-            pages:[...document.querySelectorAll("[data-city-page]")].map(n=>({key:n.dataset.cityPage,transform:getComputedStyle(n).transform,childTransform:getComputedStyle(n.firstElementChild).transform,visibility:getComputedStyle(n).visibility}))}));
+            pages:[...document.querySelectorAll("[data-city-page]")].map(n=>({key:n.dataset.cityPage,transform:getComputedStyle(n).transform,childTransform:n.firstElementChild ? getComputedStyle(n.firstElementChild).transform : null,visibility:getComputedStyle(n).visibility}))}));
           await page.evaluate(()=>document.querySelectorAll(".earth-body-polar > s").forEach(n=>n.style.visibility="hidden"));
           await page.screenshot({path:new URL(`diagnostic-hidden-base-${dpr}.png`,output).pathname});
           await page.evaluate(()=>document.querySelectorAll(".earth-body-polar > s").forEach(n=>n.style.visibility=""));

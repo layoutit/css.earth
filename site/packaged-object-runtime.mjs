@@ -1,10 +1,11 @@
-import { createObjectRuntime, createNavigableObjectMount, preparedObjectCapabilities } from '../src/renderers/css/dist/index.js';
+import { createObjectRuntime, createNavigableObjectMount, preparedObjectCapabilities,
+  createWorldContextObjectRuntime, prepareObjectResources } from '../src/renderers/css/dist/index.js';
+import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import * as runtimePolicy from './runtime-policy.mjs';
 
 // The application supplies its shell nodes and authoritative input policy.
 // The CSS renderer consumes prepared content; the engine supplies numeric behavior.
-export function bindPackagedObject(definition) {
-  const mount = createObjectRuntime(definition);
+export function bindPackagedObject(definition, mount = createObjectRuntime(definition)) {
   return (stage, options) => mount(stage, {
     ...options,
     runtimePolicy,
@@ -13,6 +14,17 @@ export function bindPackagedObject(definition) {
     mobilePreviewElement: stage.ownerDocument.querySelector('.planet-sidebar'),
     diagnostics: import.meta.env?.DEV === true,
   });
+}
+
+export function bindContextualObject(definition, context, frame = context.frame) {
+  const mount = bindPackagedObject(definition, createWorldContextObjectRuntime({ definition, context, frame }));
+  return Object.assign(mount, { navigation: Object.freeze({ frame,
+    async prepare({ signal } = {}) {
+      const resources = prepareObjectResources(definition.assets, { signal });
+      await resources.ready;
+      return { frame, definition, resources };
+    },
+  }) });
 }
 
 export async function loadPackagedObject(descriptorInput) {
@@ -29,5 +41,7 @@ export async function loadPackagedObject(descriptorInput) {
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();
     },
-  }, bindPackagedObject);
+  }, definition => descriptorInput.properties.worldFrame
+    ? bindContextualObject(definition, applicationContext, descriptorInput.properties.worldFrame)
+    : bindPackagedObject(definition));
 }

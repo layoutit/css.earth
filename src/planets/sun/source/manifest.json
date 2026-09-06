@@ -711,6 +711,20 @@
       "consumers": [
         "acquisition"
       ]
+    },
+    {
+      "id": "sun-world-context-navigation",
+      "path": "navigation/universe.json",
+      "origin": "Project-authored physical navigation context at the pinned solar-geometry epoch",
+      "credit": "cssEarth project authors",
+      "license": "Project-authored data",
+      "acquisition": "Authored numerical source validated against the checked-in solar geometry adapter",
+      "redistribution": "Project-authored source data",
+      "consumers": [
+        "world-context"
+      ],
+      "expectedBytes": 4126,
+      "expectedSha256": "1a48fb4e7f7cfa0479ae7bd3bc322643d8566c9bd5c7d61711883a451b931b8b"
     }
   ],
   "generatedIntermediates": [],
