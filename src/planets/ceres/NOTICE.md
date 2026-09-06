@@ -14,7 +14,8 @@ license does not replace these image-use terms.
 Original images are downloaded from their public sources, verified against the
 local manifest, and excluded from Git. Prepared imagery is published in the Ceres runtime asset inventory. Enhanced
 color remains labeled as false color; monochrome is not described as true color.
-Black south-polar gaps in the enhanced map are retained.
+Identified south-polar gaps are displayed as a neutral gray cartographic grid,
+using Pluto's shared missing-coverage treatment. The grid is not inferred terrain.
 
 Sky panorama: ESO/S. Brunier, CC BY 4.0. HYG catalogue attribution and the ESO
 license are retained in `source/stars/`. Title outlines derive from Inter by
