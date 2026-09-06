@@ -166,7 +166,14 @@
   "volume": {
     "objectId": "milky-way",
     "fadeStartDistanceM": 413483800000000000000,
-    "fullDistanceM": 826967600000000000000
+    "fullDistanceM": 826967600000000000000,
+    "opacityProfile": {
+      "model": "logarithmic-distance",
+      "nearOpacity": 0.12,
+      "fullOpacity": 1,
+      "fadeStartDistanceM": 30856775814913670,
+      "fullDistanceM": 30856775814913670000
+    }
   },
   "sky": {
     "scenePitchDegrees": 40,

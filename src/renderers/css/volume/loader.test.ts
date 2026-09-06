@@ -5,17 +5,19 @@ import { loadPreparedCssVolume } from './loader.js';
 async function fixture() {
   const base = new URL('../../../objects/milky-way/', import.meta.url);
   const descriptor = JSON.parse(await readFile(new URL('object.json', base), 'utf8'));
+  const recipe = JSON.parse(await readFile(new URL('source/volume.json', base), 'utf8'));
   const bytes = new Uint8Array(await readFile(new URL(descriptor.prepared.url, base))).buffer;
-  return { descriptor, bytes };
+  return { descriptor, bytes, recipe };
 }
 
 test('loads the checked-in density artifact with its complete fixed asset bank', async () => {
-  const { descriptor, bytes } = await fixture();
+  const { descriptor, bytes, recipe } = await fixture();
   const read = vi.fn(async () => bytes);
   const payload = await loadPreparedCssVolume(descriptor, { read });
   expect(read).toHaveBeenCalledExactlyOnceWith(descriptor.prepared.url);
-  expect(payload.resources).toHaveLength(288);
-  expect(payload.stacks.flatMap(stack => stack.leaves)).toHaveLength(288);
+  const count = Object.values(recipe.bake.sliceCounts).reduce<number>((sum, count) => sum + Number(count), 0);
+  expect(payload.resources).toHaveLength(count);
+  expect(payload.stacks.flatMap(stack => stack.leaves)).toHaveLength(count);
   expect(payload.frame).toEqual(descriptor.properties.volume);
 });
 

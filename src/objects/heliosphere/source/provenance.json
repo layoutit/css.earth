@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-source-provenance@1",
+  "description": "Illustrative Galaxium heliosphere model recovered by Galaxio from its shipped constructor; this is not a measured heliopause boundary.",
+  "sources": [
+    {
+      "path": "galaxio-heliosphereModel.ts.txt",
+      "sha256": "342353fb3b3b9ff4c1f155b55f17b5ba943076cbe18d2929c13fd78f37be24b4",
+      "origin": "galaxio/packages/engine/src/scene/heliosphereModel.ts"
+    },
+    {
+      "path": "galaxio-heliosphereRenderer.ts.txt",
+      "sha256": "b2af28ae40714152e608e0cbd2952f6c95fd47ddcfda1bd03f18e3b0e691613d",
+      "origin": "galaxio/packages/engine/src/scene/heliosphereRenderer.ts"
+    },
+    {
+      "path": "LICENSE.GALAXIO-MIT.txt",
+      "sha256": "cb2e341b0397f15586815e1f4c6ccf5395ed14cfe6abc8633677fedfd69516a3",
+      "origin": "galaxio/LICENSE"
+    }
+  ],
+  "sourceReference": {
+    "latitudeSegments": 64,
+    "longitudeSegments": 128,
+    "triangles": 16128,
+    "referenceRadiusAu": 120,
+    "boundingRadiusAu": 210,
+    "approachDistanceAu": 456,
+    "nearDistanceWeight": "smoothstep(-5, 5, distanceAu)",
+    "farDistanceWeight": "1 - smoothstep(5000, 6000, distanceAu)",
+    "rendering": "Unlit FrontSide with normal alpha blending; depth test enabled and depth write disabled."
+  },
+  "approximation": {
+    "latitudeSegments": 32,
+    "longitudeSegments": 64,
+    "triangles": 3968,
+    "geometry": "Same Float32-rounded analytic deformation at half the angular sampling on each axis.",
+    "normal": "Original per-vertex radial normals remain in the numeric mesh. Rendering samples one unit radial normal at each face center, separately from its geometric culling normal.",
+    "material": "128 uniformly spaced facing samples in [0,1], nearest sample selected per face. Both linear RGB times rim and opacity times rim are baked; distance fade remains a shared scalar.",
+    "coverage": "Each actual a,b,c triangle uses a prepared PolyCSS projective parallelogram a,b,b+c-a,c with transparent PNG coverage outside u+v<=1; no runtime clipping or mesh construction."
+  },
+  "attribution": "Galaxio code: Copyright (c) 2026 Juan Cruz Fortunatti, MIT License. Model recovered by Galaxio from Galaxium, as recorded in the copied source."
+}
