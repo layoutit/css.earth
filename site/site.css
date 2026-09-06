@@ -67,7 +67,9 @@ body.priming::after {
   to { transform: rotate(1turn); }
 }
 
-html:not([data-ready="true"]) .planet-stage { opacity: 0.001; }
+/* Initial loading hides unprepared content. A prepared scene handoff keeps the
+   celestial view visible while incoming controls and materials settle. */
+html:not([data-scene-presented="true"]) .planet-stage { opacity: 0.001; }
 
 .planet-input-surface {
   position: fixed;

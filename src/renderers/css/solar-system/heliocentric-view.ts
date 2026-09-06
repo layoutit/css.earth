@@ -193,7 +193,11 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   if (distance <= bodyRadius) {
     throw new RangeError("The camera is inside the body.");
   }
-  const near = Math.max(1e-6, distance * nearShare);
+  const cameraPlaneEpsilon = 1e-6;
+  // Orbit chords need a depth bound before their perspective clipping. A
+  // celestial body has its own finite disc; the distance to the mounted
+  // object must never move that body's visibility plane towards the eye.
+  const near = Math.max(cameraPlaneEpsilon, distance * nearShare);
   const halfWidth = viewportWidth / 2;
   const halfHeight = viewportHeight / 2;
   const visible = visibleRect ?? { left: -halfWidth, top: -halfHeight, right: halfWidth, bottom: halfHeight };
@@ -265,7 +269,7 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   const sunEye = toEye(plan.sun.position);
   const sunDepth = depthOf(sunEye);
   let sun: SunProjection;
-  if (sunDepth <= near) {
+  if (sunDepth <= cameraPlaneEpsilon) {
     sun = Object.freeze({
       visible: false,
       classification: "behind-camera",
@@ -364,7 +368,7 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   const projectPoint = (point:Vector3): PointProjection => {
     const eye = toEye(point);
     const depth = depthOf(eye);
-    if (depth <= near) {
+    if (depth <= cameraPlaneEpsilon) {
       return Object.freeze({ visible: false, classification: "behind-camera", depth, screen: null });
     }
     const [x, y] = project(eye);

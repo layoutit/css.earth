@@ -262,14 +262,16 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         mobilePreviewElement, onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit?.destroy());
       if (lifetime.disposed) return;
-      resources.finishStartup();
-      const initialized = await lifetime.wait(selection.start());
-      if (lifetime.disposed || initialized.cancelled) return;
-      if (!initialized.value) throw new Error("Initial object selection did not commit.");
+      // Seed the incoming view before an asynchronous material selection can
+      // paint. The shared world remains visible throughout a scene handoff.
       if (initialWorldCamera) {
         if (!worldFrame) throw new TypeError('An initial world camera needs a prepared frame.');
         orbit.applyWorldCamera(initialWorldCamera, worldFrame);
       }
+      resources.finishStartup();
+      const initialized = await lifetime.wait(selection.start());
+      if (lifetime.disposed || initialized.cancelled) return;
+      if (!initialized.value) throw new Error("Initial object selection did not commit.");
       playback.setReady();
       await lifetime.wait(environment.waitPaint(lifetime, stage.ownerDocument.defaultView ?? window));
       if (lifetime.disposed) return;

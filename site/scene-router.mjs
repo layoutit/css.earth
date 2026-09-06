@@ -30,6 +30,7 @@ export function createSceneRouter({
   let scenePaused = true;
   let sceneError = null;
   let sceneState = "loading";
+  let hasPresented = false;
   let destroyed = false;
   let nextGeneration = 0;
   let shellOwner = null, pending = null, historyOwner = null, unbindLinks = null;
@@ -149,6 +150,7 @@ export function createSceneRouter({
         },
       });
       sceneState = "ready";
+      hasPresented = true;
       if (pending === request) pending = null;
       syncPlayback();
       if (request && request.options.history !== 'pop') session.viewUrl?.flush();
@@ -305,6 +307,7 @@ export function createSceneRouter({
     const state = readSceneState();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;
+    root.dataset.scenePresented = String(hasPresented);
     body.classList.remove("loading", "ready", "paused", "error");
     if (sceneState === "loading") {
       root.dataset.ready = "loading";
@@ -349,6 +352,7 @@ export function createSceneRouter({
     sceneState = error ? "error" : "destroyed";
     const cleanupErrors = session.lifetime.destroy();
     if (!preserveShell) {
+      hasPresented = false;
       const owner = shellOwner; shellOwner = null;
       try { owner?.shell?.destroy(); } catch (error) { cleanupErrors.push(error); }
     }
@@ -366,6 +370,7 @@ export function createSceneRouter({
     report(error);
   }
   function destroyActiveScene() {
+    hasPresented = false;
     if (pending) { const request = pending; pending = null; request.controller.abort(); request.lifetime.destroy(); }
     if (active) {
       try { retire(active); } catch (error) { report(error); }

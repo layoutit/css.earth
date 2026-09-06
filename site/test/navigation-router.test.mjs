@@ -86,6 +86,7 @@ test('flight retains the source and one shell; target readiness and handoff prec
   assert.equal(h.mounts[1].options.proof, 'handoff');
   assert.equal(h.mounts[0].calls.at(-1), 'destroy');
   assert.equal(h.router.state().ready, false); assert.equal(h.writes.includes('push'), false);
+  assert.equal(h.documentTarget.documentElement.dataset.scenePresented, 'true', 'Incoming readiness cannot hide an already presented world');
   attached.resolve(); assert.equal(await selected, true);
   assert.equal(h.preparations[0].signal.aborted, false, 'Successful handoff is not cancellation');
   assert.equal(h.router.state().activeObjectId, 'venus');
