@@ -55,7 +55,10 @@ export interface PreparedWorldContext {
   readonly bodies: readonly PreparedContextBody[];
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
-  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number; readonly opacityProfile?: PreparedVolumeOpacityProfile };
+  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
+    readonly opacityProfile?: PreparedVolumeOpacityProfile;
+    /** Display attenuation of the completed volume image over black; not physical exposure. */
+    readonly brightnessProfile?: PreparedVolumeOpacityProfile };
   readonly stars: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
   readonly sky: { readonly sceneRegistration: string };
@@ -165,7 +168,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     }
   }
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
-  const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile']);
+  const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
   const starId = text(stars.objectId, 'star field identity');
   const starStart = positive(stars.fadeStartDistanceM, 'star field fade start');
@@ -191,7 +194,8 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   return Object.freeze({ schema: 'cssearth-world-context@1', frame, focus, bodies: Object.freeze(bodies),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
     volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM,
-      ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }) }),
+      ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
+      ...(volume.brightnessProfile === undefined ? {} : { brightnessProfile: parseVolumeOpacityProfile(volume.brightnessProfile) }) }),
     stars: Object.freeze({ objectId: starId, fadeStartDistanceM: starStart, fullDistanceM: starFull }),
     system: Object.freeze({ fadeOutStartDistanceM, hiddenDistanceM }), sky });
 }

@@ -10,6 +10,9 @@ import { prepareSurfaceShellObject } from './prepare.js';
 import { sha256, verifiedBytes } from '../volume/source.js';
 import type { PreparedCssSurfaceShell } from '../../renderers/css/shell/types.js';
 import { compileCssSurfaceShell } from '../../renderers/css/preparation/shell.js';
+import { SHELL_CORNER_PERMUTATIONS, nearestFacingIndex, shellMaterialAddress } from '../../renderers/css/shell/material-address.js';
+import { shellRim } from './atlas.js';
+import { validatePreparedCssSurfaceShell } from '../../renderers/css/shell/validation.js';
 
 const objectDirectory = resolve('src/objects/heliosphere');
 const recipe = async () => parseShellRecipe(JSON.parse(await readFile(join(objectDirectory, 'source/shell.json'), 'utf8')) as unknown);
@@ -23,15 +26,15 @@ test('illustrative source shape preserves nose, tail, nonlinear landmark and ind
   const r = await recipe(); assert.equal(r.shape.kind, 'asymmetric-radial-shell');
   if (r.shape.kind !== 'asymmetric-radial-shell') throw new Error('Expected the current illustrative fixture.');
   const mesh = prepareShellMesh(r), columns = r.shape.longitudeSegments + 1;
-  assert.equal(mesh.positionsUnits.length, 2145); assert.equal(mesh.triangles.length, 3968);
-  close(mesh.positionsUnits[16 * columns + 32]!, [120, 0, 0]);
-  close(mesh.positionsUnits[16 * columns]!, [-210, 0, 0]);
-  close(mesh.positionsUnits[16 * columns + 16]!, [0, 0, 110.4]);
+  assert.equal(mesh.positionsUnits.length, 561); assert.equal(mesh.triangles.length, 960);
+  close(mesh.positionsUnits[8 * columns + 16]!, [120, 0, 0]);
+  close(mesh.positionsUnits[8 * columns]!, [-210, 0, 0]);
+  close(mesh.positionsUnits[8 * columns + 8]!, [0, 0, 110.4]);
   close(mesh.positionsUnits[0]!, [0, 110.4, 0]);
-  close(mesh.positionsUnits[32 * columns]!, [0, -110.4, 0]);
-  close(mesh.positionsUnits[12 * columns + 8]!, [-0.86238533 * 120, 0.31613827 * 120, 0.70012331 * 120], 2e-5);
+  close(mesh.positionsUnits[16 * columns]!, [0, -110.4, 0]);
+  close(mesh.positionsUnits[6 * columns + 4]!, [-0.86238533 * 120, 0.31613827 * 120, 0.70012331 * 120], 2e-5);
   const missingLobes = prepareShellMesh({ ...r, shape: { ...r.shape, lobeAmplitude: 0 } });
-  assert(Math.abs(missingLobes.positionsUnits[12 * columns + 8]![2] - mesh.positionsUnits[12 * columns + 8]![2]) > 18,
+  assert(Math.abs(missingLobes.positionsUnits[6 * columns + 4]![2] - mesh.positionsUnits[6 * columns + 4]![2]) > 18,
     'Removing the nonlinear tail term must fail the independent landmark');
   const [qx, qy, qz, qw] = r.frame.localToReferenceXyzw;
   const rotatedNose = [120 * (1 - 2 * (qy * qy + qz * qz)), 240 * (qx * qy + qw * qz), 240 * (qx * qz - qw * qy)];
@@ -50,18 +53,23 @@ test('actual PolyCSS matrices map triangular PNG coverage onto each source trian
   let maximumError = 0, reflectionMutationError = 0, maximumNormalDifference = 0;
   for (let index = 0; index < data.faces.length; index++) {
     const face = data.faces[index]!, triangle = mesh.triangles[index]!;
-    const matrix = face.style.transform.slice('matrix3d('.length, -1).split(',').map(Number);
+    assert.deepEqual(face.atlasStepPixels, [32, 32]); assert.deepEqual(face.atlasOriginPixels, [0, 0]);
+    assert.equal(face.style.backgroundSize, '1472px 1408px');
+    assert.equal(face.materialTransforms?.length, 6);
+    assert.deepEqual(face.vertexIndices, triangle);
+    for (let order = 0; order < 6; order++) {
+    const matrix = face.materialTransforms![order]!.slice('matrix3d('.length, -1).split(',').map(Number);
     assert.equal(matrix.length, 16); assert(matrix.every(Number.isFinite));
-    assert.deepEqual(face.atlasStepPixels, [64, 64]); assert.deepEqual(face.atlasOriginPixels, [0, 0]);
-    assert.equal(face.style.backgroundSize, '1024px 512px');
     for (const [corner, u, v] of [[0, 0, 0], [1, 1, 0], [2, 0, 1]] as const) {
-      const x = u * parseFloat(face.style.width), y = v * parseFloat(face.style.height);
+      const inset = data.atlas.triangleInsetPixels ?? 0;
+      const x = inset + u * (parseFloat(face.style.width) - 2 * inset), y = inset + v * (parseFloat(face.style.height) - 2 * inset);
       const denominator = matrix[3]! * x + matrix[7]! * y + matrix[15]!;
       // Shared camera interprets PolyCSS pixel axes as Y, X, Z in physical space.
       const actual = [1, 0, 2].map(axis => (matrix[axis]! * x + matrix[axis + 4]! * y + matrix[axis + 12]!) / denominator / data.unitScale);
-      const expected = mesh.positionsUnits[triangle[corner]]!;
+      const expected = mesh.positionsUnits[triangle[SHELL_CORNER_PERMUTATIONS[order]![corner]]] !;
       maximumError = Math.max(maximumError, Math.hypot(...actual.map((value, axis) => value - expected[axis]!)));
       reflectionMutationError = Math.max(reflectionMutationError, Math.hypot(actual[1]! - expected[0], actual[0]! - expected[1], actual[2]! - expected[2]));
+    }
     }
     close([Math.hypot(...face.faceNormal), Math.hypot(...face.radialNormal)], [1, 1], 1e-12);
     assert(face.faceNormal.reduce((sum, n, axis) => sum + n * face.centerUnits[axis]!, 0) > 0);
@@ -82,11 +90,12 @@ test('generic pinned indexed reader preserves an open non-axis-aligned triangle 
     const mesh = await loadShellMesh(temporary, r);
     assert.deepEqual(mesh.positionsUnits, source.positionsUnits); assert.deepEqual(mesh.triangles, source.triangles);
     const data = compileCssSurfaceShell({ id: 'test-open-surface', recipe: r, mesh,
-      atlasResource: { path: 'atlas.png', sha256: '0'.repeat(64), bytes: 1, width: 1024, height: 512 }, provenance: {} });
+      atlasResource: { path: 'atlas.png', sha256: '0'.repeat(64), bytes: 1, width: 1472, height: 1408 }, provenance: {} });
     assert.equal(data.faces.length, 1, 'An open source must not acquire fabricated closing triangles');
     const face = data.faces[0]!, matrix = face.style.transform.slice('matrix3d('.length, -1).split(',').map(Number);
     for (const [index, u, v] of [[0, 0, 0], [1, 1, 0], [2, 0, 1]] as const) {
-      const x = u * parseFloat(face.style.width), y = v * parseFloat(face.style.height);
+      const inset = data.atlas.triangleInsetPixels ?? 0;
+      const x = inset + u * (parseFloat(face.style.width) - 2 * inset), y = inset + v * (parseFloat(face.style.height) - 2 * inset);
       const denominator = matrix[3]! * x + matrix[7]! * y + matrix[15]!;
       const physical = [1, 0, 2].map(axis => (matrix[axis]! * x + matrix[axis + 4]! * y + matrix[axis + 12]!) / denominator / r.unitScale);
       close(physical, source.positionsUnits[index]!, 2e-6);
@@ -98,24 +107,91 @@ test('generic pinned indexed reader preserves an open non-axis-aligned triangle 
   } finally { await rm(temporary, { recursive: true, force: true }); }
 });
 
-test('real atlas pixels bake linear RGB and alpha rim together with transparent triangle coverage', async () => {
-  const shell = await prepared(), resource = shell.resources[0]!;
+test('sorted atlas pixels bake a spatial rim in linear RGB and alpha with transparent triangular coverage', async () => {
+  const shell = validatePreparedCssSurfaceShell(await prepared()), resource = shell.resources[0]!;
   const { data, info } = await sharp(join(objectDirectory, 'prepared', resource.path)).raw().toBuffer({ resolveWithObject: true });
-  assert.deepEqual([info.width, info.height, info.channels], [1024, 512, 4]);
+  assert.deepEqual([info.width, info.height, info.channels], [1472, 1408, 4]);
+  assert(info.width * info.height * 4 < 10 * 1024 * 1024);
+  const levels = shell.atlas.facingLevels!;
+  const frameFor = (wanted: readonly number[]) => {
+    let frame = 0;
+    for (let a = 0; a < levels.length; a++) for (let b = a; b < levels.length; b++) for (let c = b; c < levels.length; c++, frame++) {
+      if (a === wanted[0] && b === wanted[1] && c === wanted[2]) return frame;
+    }
+    throw new Error('Missing frame');
+  };
   const pixel = (frame: number, x: number, y: number) => {
-    const at = ((Math.floor(frame / 16) * 64 + y) * info.width + frame % 16 * 64 + x) * 4;
+    const at = ((Math.floor(frame / 46) * 32 + y) * info.width + frame % 46 * 32 + x) * 4;
     return [...data.subarray(at, at + 4)];
   };
   const toSrgb = (v: number) => Math.round(255 * (v <= 0.0031308 ? v * 12.92 : 1.055 * Math.pow(v, 1 / 2.4) - 0.055));
-  for (const frame of [1, 8, 12, 32, 64, 110]) {
-    const f = frame / 127, t = Math.min(1, f / 0.1), rim = (1 - f) * t * t * (3 - 2 * t);
-    assert.deepEqual(pixel(frame, 10, 10), [toSrgb(0.5 * rim), toSrgb(0.9 * rim), toSrgb(0.8 * rim), Math.round(255 * 0.2 * rim)]);
-    assert.equal(pixel(frame, 50, 50)[3], 0, 'Outside-triangle texels must remain transparent');
+  for (const indices of [[4, 8, 12], [1, 12, 21], [12, 12, 12], [15, 17, 20]]) {
+    const frame = frameFor(indices), [a, b, c] = indices.map(i => levels[i]!);
+    for (const [x, y] of [[2, 2], [24, 2], [12, 19]]) {
+      const u = (x! - 1) / 29, v = (y! - 1) / 29, f = a! * (1 - u - v) + b! * u + c! * v;
+      const t = Math.max(0, Math.min(1, f / .1)), rim = (1 - Math.max(0, Math.min(1, f))) * t * t * (3 - 2 * t);
+      const coverage = x! + y! < 31 ? 1 : .5;
+      assert.deepEqual(pixel(frame, x!, y!), [toSrgb(.5 * rim), toSrgb(.9 * rim), toSrgb(.8 * rim), Math.round(255 * (1 - (1 - .2 * rim) ** coverage))]);
+    }
+    assert.equal(pixel(frame, 25, 25)[3], 0);
   }
-  assert.equal(pixel(0, 10, 10)[3], 0); assert.equal(pixel(127, 10, 10)[3], 0);
-  assert(pixel(12, 10, 10)[3]! > pixel(64, 10, 10)[3]!);
-  assert.notDeepEqual(pixel(12, 10, 10).slice(0, 3), pixel(64, 10, 10).slice(0, 3), 'Opacity-only material mutation must fail');
-  assert.equal(pixel(12, 31, 32)[3], Math.round(pixel(12, 10, 10)[3]! / 2));
+  const uniform = frameFor([12, 12, 12]);
+  const halfCoverage = Math.round(255 * (1 - Math.sqrt(1 - .2 * .9)));
+  for (const [x, y] of [[1, 12], [12, 1], [15, 16]]) {
+    assert.equal(pixel(uniform, x!, y!)[3], halfCoverage, 'All three edges must carry the same optical half-coverage');
+  }
+  for (let i = 0; i < 32; i++) for (const [x, y] of [[0, i], [31, i], [i, 0], [i, 31]]) {
+    assert.equal(pixel(uniform, x!, y!)[3], 0, 'Image rectangle edges must remain transparent');
+  }
+  const gradient = frameFor([4, 12, 12]);
+  assert(pixel(gradient, 24, 2)[3]! - pixel(gradient, 2, 2)[3]! > 20, 'Replacing the spatial rim with a flat face sample must fail');
+});
+
+test('every sorted triple and corner order selects its correct prepared tile without changing edge values', async () => {
+  const levels = (await recipe()).atlas.facingLevels!; let frame = 0;
+  for (let a = 0; a < levels.length; a++) for (let b = a; b < levels.length; b++) for (let c = b; c < levels.length; c++, frame++) {
+    for (const order of SHELL_CORNER_PERMUTATIONS) {
+      const input = [a, b, c].map((_, i) => [a, b, c][order[i]!]!);
+      const address = shellMaterialAddress(input[0]!, input[1]!, input[2]!, levels.length);
+      assert.equal(Math.floor(address / 6), frame);
+      const sorted = SHELL_CORNER_PERMUTATIONS[address % 6]!.map(i => input[i]!);
+      assert.deepEqual(sorted, [a, b, c]);
+    }
+  }
+  assert.equal(frame, 2024);
+  for (let i = 0; i < levels.length; i++) assert.equal(nearestFacingIndex(levels[i]!, levels), i);
+});
+
+test('interpolated corner material reduces source shader error at outside and near-surface viewpoints', async () => {
+  const r = await recipe(), mesh = prepareShellMesh(r), shell = await prepared(), levels = r.atlas.facingLevels!;
+  const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i]!, 0);
+  const direction = (a: readonly number[], b: readonly number[]) => {
+    const delta = a.map((v, i) => v - b[i]!), length = Math.hypot(...delta);
+    return delta.map(v => v / length);
+  };
+  const mix = (vectors: readonly (readonly number[])[], weights: readonly number[]) => [0, 1, 2].map(axis =>
+    vectors.reduce((sum, v, corner) => sum + v[axis]! * weights[corner]!, 0));
+  for (const camera of [[456, 0, 0], [0, 0, 150]]) {
+    let flatError = 0, interpolatedError = 0, samples = 0;
+    for (let faceIndex = 0; faceIndex < mesh.triangles.length; faceIndex++) {
+      const face = shell.faces[faceIndex]!;
+      if (dot(camera.map((v, i) => v - face.centerUnits[i]!), face.faceNormal) <= 0) continue;
+      const vertices = mesh.triangles[faceIndex]!.map(i => shell.vertices![i]!);
+      const positions = vertices.map(v => v.positionUnits), normals = vertices.map(v => v.radialNormal);
+      const quantized = positions.map((p, i) => levels[nearestFacingIndex(dot(direction(camera, p), normals[i]!), levels)]!);
+      const flat = shellRim(dot(direction(camera, face.centerUnits), face.radialNormal), .1);
+      for (let a = 1; a < 8; a++) for (let b = 1; b < 8 - a; b++) {
+        const weights = [a / 8, b / 8, 1 - (a + b) / 8];
+        // Reference shader: camera-to-fragment direction dotted with interpolated original vertex normals.
+        const reference = shellRim(dot(direction(camera, mix(positions, weights)), mix(normals, weights)), .1);
+        const actual = shellRim(dot(quantized, weights), .1);
+        flatError += (flat - reference) ** 2; interpolatedError += (actual - reference) ** 2; samples++;
+      }
+    }
+    const flatRms = Math.sqrt(flatError / samples), interpolatedRms = Math.sqrt(interpolatedError / samples);
+    assert(interpolatedRms < flatRms * .5, 'Flattening the corner material must fail the source shader comparison');
+    console.log(`PASS camera ${camera} AU: material rim RMS ${interpolatedRms.toFixed(5)} versus coarse flat ${flatRms.toFixed(5)}`);
+  }
 });
 
 test('pinned preparation deterministically regenerates actual geometry, images and envelope without sibling access', async () => {
@@ -123,7 +199,7 @@ test('pinned preparation deterministically regenerates actual geometry, images a
   try {
     const envelope = await prepareSurfaceShellObject({ objectDirectory, outputDirectory: temporary });
     assert.equal(envelope.type, 'surface-shell'); assert.equal(envelope.format, 'cssearth-surface-shell@1');
-    assert.equal(envelope.data.faces.length, 3968);
+    assert.equal(envelope.data.faces.length, 960);
     for (const name of ['shell.json', 'surface-mesh.json', 'rim-atlas.png']) {
       assert.deepEqual(await readFile(join(temporary, name)), await readFile(join(objectDirectory, 'prepared', name)), `${name} must reproduce byte for byte`);
     }

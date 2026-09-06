@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
+import { zstdCompressSync } from 'node:zlib';
 import { encodeDensityKtx2 } from './acquisition.js';
 import { sha256 } from './source.js';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.js';
@@ -17,12 +18,15 @@ test('successful format/count changes retire previous manifest-owned textures an
     const previous = ['slices/z/00.png', 'slices/z/01.png', 'slices/z/02.webp'];
     const current = ['slices/z/00.webp', 'slices/z/02.webp'];
     for (const path of [...new Set([...previous, ...current, 'slices/z/unrelated.png', 'notes.txt'])]) await writeFile(join(root, path), path);
-    await writeFile(join(root, 'volume.json'), JSON.stringify({ data: { resources: previous.map(path => ({ path })) } }));
+    await mkdir(join(root, 'sky'), { recursive: true });
+    await writeFile(join(root, 'sky/px.webp'), 'sky');
+    await writeFile(join(root, 'volume.json'), JSON.stringify({ data: { resources: [...previous, 'sky/px.webp', 'notes.txt'].map(path => ({ path })) } }));
     const owned = await readPreviousVolumeTextures(root);
     assert.deepEqual(owned, previous);
     await retireVolumeTextures(root, owned, current);
     for (const path of previous.slice(0, 2)) await assert.rejects(readFile(join(root, path)), { code: 'ENOENT' });
     for (const path of [...current, 'slices/z/unrelated.png', 'notes.txt']) assert.equal(await readFile(join(root, path), 'utf8'), path);
+    assert.equal(await readFile(join(root, 'sky/px.webp'), 'utf8'), 'sky', 'slice retirement must preserve other prepared capabilities');
     // Reject a manifest escape before even its first otherwise valid retirement.
     await assert.rejects(retireVolumeTextures(root, [current[0], 'slices/../notes.txt'], []), /escapes/);
     assert.equal(await readFile(join(root, current[0]), 'utf8'), current[0]);
@@ -43,12 +47,22 @@ test('normal preparation CLI removes obsolete PNG/count outputs after publishing
     const grid = encodeDensityKtx2({ width: 2, height: 2, depth: 2, encodedRgba: raw }, 9);
     const provenance = Buffer.from('{"source":"test fixture"}\n');
     await writeFile(join(object, 'source/grid.ktx2'), grid); await writeFile(join(object, 'source/provenance.json'), provenance);
+    const skyRaw = Buffer.alloc(4 * 2 * 6); for (let i = 0; i < skyRaw.length; i += 2) skyRaw.writeUInt16LE(0x3000, i);
+    const skyChunk = zstdCompressSync(skyRaw); await writeFile(join(object, 'source/sky.zst'), skyChunk);
+    const skyRecipe = Buffer.from(JSON.stringify({ schema: 'cssearth-sky-recipe@1', source: { format: 'rgb16f-le-zstd-rows', width: 4, height: 2,
+      decodedSha256: sha256(skyRaw), chunks: [{ path: 'sky.zst', sha256: sha256(skyChunk), firstRow: 0, rows: 2 }],
+      acquisition: { path: 'unused-acquisition.json', sha256: '0'.repeat(64) } },
+      projection: { frame: 'icrf-j2000', mapping: 'equirectangular-ra-left', centerRaDegrees: 0 },
+      bake: { faceSize: 8, exposure: 1, transfer: 'linear-to-srgb', webpQuality: 90 },
+      provenance: { path: 'provenance.json', sha256: sha256(provenance) } }));
+    await writeFile(join(object, 'source/sky.json'), skyRecipe);
     const bounds = { min: [-1, -1, -.125], max: [1, 1, .125] };
     const recipe = { schema: 'cssearth-volume-recipe@1',
       grid: { path: 'grid.ktx2', sha256: sha256(grid), decodedSha256: sha256(raw), dimensions: [2, 2, 2], encoding: 'sqrt-density-unorm8', bounds },
       material: { emission: [{ channel: 0, color: [1, 1, 1], strength: 1 }], absorption: [], intensityScale: 1, stepScale: 1, exposureGain: 1 },
       bake: { sliceCounts: { x: 1, y: 1, z: 2 }, unitsPerSourceUnit: 1, imageWidth: 8, samplesPerSlab: 1, cropTransparent: true, opticalWeight: 1,
-        imageEncoding: { format: 'png' as 'png' | 'webp' } }, anchors: [], provenance: { path: 'provenance.json', sha256: sha256(provenance) } };
+        imageEncoding: { format: 'png' as 'png' | 'webp' } }, anchors: [], provenance: { path: 'provenance.json', sha256: sha256(provenance) },
+      sky: { path: 'sky.json', sha256: sha256(skyRecipe) } };
     const descriptor = { schema: 'cssearth-object@1', id: 'test-cloud', type: 'density-volume', properties: {
       volume: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: bounds },
       preparation: { source: 'source/volume.json', sha256: '' } } };
@@ -74,7 +88,7 @@ test('normal preparation CLI removes obsolete PNG/count outputs after publishing
       await assert.rejects(readFile(join(prepared, path)), { code: 'ENOENT' });
     assert.equal(await readFile(join(prepared, 'slices/z/unrelated.png'), 'utf8'), 'keep');
     const envelope = JSON.parse(await readFile(join(prepared, 'volume.json'), 'utf8')) as { data: { resources: { path: string; sha256: string }[] } };
-    assert.equal(envelope.data.resources.length, 3);
+    assert.equal(envelope.data.resources.length, 9, 'normal CLI publishes three volume slabs plus six prepared sky faces');
     for (const resource of envelope.data.resources) { assert(resource.path.endsWith('.webp')); assert.equal(sha256(await readFile(join(prepared, resource.path))), resource.sha256); }
   } finally { await rm(root, { recursive: true, force: true }); }
 });

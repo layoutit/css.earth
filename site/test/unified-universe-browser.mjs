@@ -289,7 +289,7 @@ async function scrollTo(page, target) {
 }
 async function backgroundRequests(page) {
   return page.evaluate(() => performance.getEntriesByType('resource').map(entry => entry.name)
-    .filter(name => name.includes('/milky-way/prepared/slices/') || name.includes('/stellar-neighbourhood/prepared/')).sort());
+    .filter(name => name.includes('/milky-way/prepared/') || name.includes('/stellar-neighbourhood/prepared/')).sort());
 }
 async function backgroundProjection(page) {
   return page.evaluate(() => ({
@@ -298,12 +298,14 @@ async function backgroundProjection(page) {
       // Translation depends on the observer; compare it too at this fixed world pose.
       return Array.from(matrix.toFloat64Array());
     }),
+    sky: Array.from(new DOMMatrix(getComputedStyle(document.querySelector('.prepared-celestial-sky-scene')).transform).toFloat64Array()),
     stars: Object.fromEntries([...document.querySelectorAll('[data-star-reference]')]
       .filter(node => node.style.visibility !== 'hidden' && Number(node.style.opacity) > 0)
       .map(node => [node.dataset.starReference, node.style.transform])),
   }));
 }
 function sameProjection(actual, expected, id) {
+  actual.sky.forEach((value, i) => assert.ok(Math.abs(value - expected.sky[i]) < .001, `${id}: same world observer gives the same celestial sky matrix`));
   assert.equal(actual.volume.length, expected.volume.length);
   actual.volume.forEach((matrix, axis) => matrix.forEach((value, i) => {
     assert.ok(Math.abs(value - expected.volume[axis][i]) < 0.001, `${id}: same world observer gives the same galaxy matrix`);

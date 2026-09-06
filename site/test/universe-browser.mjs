@@ -51,7 +51,7 @@ try {
   check('the complete catalogue feeds bounded exact-position star slots', snapshots.stars.starField.catalogueCount === '109389' &&
     snapshots.stars.starField.consideredCount === '109389' && snapshots.stars.starSlots === 4096 && Number(snapshots.stars.starField.visiblePoints) > 50 &&
     snapshots.stars.starField.individualPoints === snapshots.stars.starField.visiblePoints);
-  check('the same galaxy volume remains visible inside the stellar neighbourhood', snapshots.stars.volumeOpacity === 1 && snapshots.initial.volumeOpacity === 1);
+  check('the prepared NASA sky replaces local volume haze', snapshots.initial.volumeOpacity === 0 && snapshots.initial.skyVisible && snapshots.stars.volumeOpacity === 0 && snapshots.stars.skyVisible);
   check('named stars receive visible labels', await page.locator('.prepared-star-label').evaluateAll(nodes => nodes.some(node =>
     node.textContent && Number(getComputedStyle(node).opacity) > 0)));
   check('the incompatible photographic background is retired at solar scale', await page.locator('.prepared-context-sky-fade').evaluate(node => getComputedStyle(node).visibility === 'hidden'));
@@ -104,7 +104,7 @@ try {
   await scrollTo(page, initialDistance);
   snapshots.returned = await read(page);
   await page.screenshot({ path: resolve(output, 'sun-returned.png') });
-  check('scroll returns to the detailed Sun and the same galactic background', close(snapshots.returned.camera.distanceKilometers, initialDistance) && snapshots.returned.volumeOpacity === 1 && snapshots.returned.roots === 1 && snapshots.returned.stable);
+  check('scroll returns to the detailed Sun and the NASA background', close(snapshots.returned.camera.distanceKilometers, initialDistance) && snapshots.returned.volumeOpacity === 0 && snapshots.returned.skyVisible && snapshots.returned.roots === 1 && snapshots.returned.stable);
   check('no browser errors throughout the journey', errors.length === 0);
   console.log(`UNIVERSE_BROWSER_PASSED ${checks.length} checks; Sun → solar system → Milky Way → Sun.`);
 } finally {
@@ -154,6 +154,7 @@ async function read(page) {
     starField: { ...document.querySelector('.prepared-point-field').dataset },
     starSlots: document.querySelectorAll('[data-star-slot]').length,
     volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
+    skyVisible: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility === 'visible',
     volumeTransforms: [...document.querySelectorAll('.css-volume-scene')].map(node => getComputedStyle(node).transform),
     visibleOrbits: [...document.querySelectorAll('[data-context-orbit]')].filter(node => getComputedStyle(node).visibility !== 'hidden').length,
   }));

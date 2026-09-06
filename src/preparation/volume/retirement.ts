@@ -20,8 +20,11 @@ export async function readPreviousVolumeTextures(outputDirectory: string): Promi
   if (!Array.isArray(data.resources)) throw new TypeError('Published volume must contain resources.');
   return data.resources.map((entry: unknown) => {
     const path = text(record(entry, 'published volume resource').path, 'prepared texture path');
-    texturePath(outputDirectory, path); return path;
-  });
+    // Other prepared capabilities share the resource bank but own their files.
+    containedPath(outputDirectory, path);
+    if (path.startsWith('slices/')) texturePath(outputDirectory, path);
+    return path;
+  }).filter(path => path.startsWith('slices/'));
 }
 export async function retireVolumeTextures(outputDirectory: string, previous: string[], current: string[]): Promise<void> {
   // Validate the entire operation before deleting its first file.

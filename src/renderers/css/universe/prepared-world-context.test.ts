@@ -80,20 +80,20 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   }
 });
 
-test('nearby volume grading has a constant plateau, a logarithmic smooth ramp and legacy opacity one', () => {
+test.each(['opacityProfile', 'brightnessProfile'] as const)('%s has a constant plateau, a logarithmic smooth ramp and legacy opacity one', key => {
   const base = plan(1), profile = { model: 'logarithmic-distance' as const, nearOpacity: .12, fullOpacity: 1, fadeStartDistanceM: 100, fullDistanceM: 100_000 };
-  const parsed = parsePreparedWorldContext({ ...base, volume: { ...base.volume, opacityProfile: profile } });
-  expect(parsed.volume.opacityProfile).toEqual(profile);
-  for (const distance of [0, 1, 47, 100]) expect(preparedVolumeOpacity(distance, parsed.volume.opacityProfile)).toBe(.12);
+  const parsed = parsePreparedWorldContext({ ...base, volume: { ...base.volume, [key]: profile } });
+  expect(parsed.volume[key]).toEqual(profile);
+  for (const distance of [0, 1, 47, 100]) expect(preparedVolumeOpacity(distance, parsed.volume[key])).toBe(.12);
   expect(preparedVolumeOpacity(Math.sqrt(100 * 100_000), profile)).toBeCloseTo(.56, 12);
   for (const distance of [100_000, 1e20]) expect(preparedVolumeOpacity(distance, profile)).toBe(1);
-  expect(preparedVolumeOpacity(47, base.volume.opacityProfile)).toBe(1);
+  expect(preparedVolumeOpacity(47, base.volume[key])).toBe(1);
   const samples = Array.from({ length: 101 }, (_, index) => preparedVolumeOpacity(100 * 1000 ** (index / 100), profile));
   expect(samples.every((value, index) => index === 0 || value >= samples[index - 1]!)).toBe(true);
   for (const invalid of [{ ...profile, model: 'linear' }, { ...profile, nearOpacity: -.01 }, { ...profile, fullOpacity: 1.01 },
     { ...profile, fullOpacity: Infinity }, { ...profile, nearOpacity: undefined }, { ...profile, fadeStartDistanceM: 0 },
     { ...profile, fullDistanceM: profile.fadeStartDistanceM }, { ...profile, runtimeExposure: true }]) {
-    expect(() => parsePreparedWorldContext({ ...base, volume: { ...base.volume, opacityProfile: invalid } })).toThrow(/opacity/i);
+    expect(() => parsePreparedWorldContext({ ...base, volume: { ...base.volume, [key]: invalid } })).toThrow(/opacity/i);
   }
 });
 
