@@ -549,6 +549,240 @@
       "observedAt": "1998-03-29T19:26:16.230000Z",
       "width": 3316,
       "height": 1322
+    },
+    {
+      "id": "usgs-s0440984852.equi-geometry",
+      "path": "photometry/s0440984852.equi.isis.lbl",
+      "expectedBytes": 33561,
+      "expectedSha256": "53b037db8cc16233d30c7d01fb6c2c5217707f07025bf594654320111049fd1b",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984852/s0440984852.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984852.equi"
+    },
+    {
+      "id": "usgs-s0440984865.equi-geometry",
+      "path": "photometry/s0440984865.equi.isis.lbl",
+      "expectedBytes": 33513,
+      "expectedSha256": "203b352feb3d45c0fd5de0d15311f4ac64f46e414397eb811399e5c86036dc12",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984865.equi"
+    },
+    {
+      "id": "usgs-s0440984878.equi-geometry",
+      "path": "photometry/s0440984878.equi.isis.lbl",
+      "expectedBytes": 33552,
+      "expectedSha256": "b487f4654762ecb00ff76e7094f88ff94d578ae7cc94604d3460b832b321bace",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984878/s0440984878.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984878.equi"
+    },
+    {
+      "id": "usgs-s0440984901_00.equi-geometry",
+      "path": "photometry/s0440984901_00.equi.isis.lbl",
+      "expectedBytes": 33525,
+      "expectedSha256": "541e1078a8b92d9a39005d7f2337ab5ef96d41a82b4b40b43e744e5e928f222c",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984901_00.equi"
+    },
+    {
+      "id": "usgs-s0440984914_13.equi-geometry",
+      "path": "photometry/s0440984914_13.equi.isis.lbl",
+      "expectedBytes": 33525,
+      "expectedSha256": "36dc5ec8a9d998524fb2b3f3fa924530b02d207c67d277d0bb09e9dcee2a08de",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984914_13/s0440984914_13.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984914_13.equi"
+    },
+    {
+      "id": "usgs-s0440984926.equi-geometry",
+      "path": "photometry/s0440984926.equi.isis.lbl",
+      "expectedBytes": 33573,
+      "expectedSha256": "ce0e68b928ec943dea8f5b46ed9fb4461abbdeb9dc06074741bdd089b05bb53a",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984926.equi"
+    },
+    {
+      "id": "usgs-s0440984939.equi-geometry",
+      "path": "photometry/s0440984939.equi.isis.lbl",
+      "expectedBytes": 33531,
+      "expectedSha256": "988eecd538241d1074e1992b4a70653acb9f19b41e7f39340c96a145478b4f2e",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984939/s0440984939.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984939.equi"
+    },
+    {
+      "id": "usgs-s0440984952.equi-geometry",
+      "path": "photometry/s0440984952.equi.isis.lbl",
+      "expectedBytes": 33564,
+      "expectedSha256": "470eb5f6814bbd3d266fc89bce233e35d95ca52d4f5a0435ba86a25ebd6f86ba",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984952.equi"
+    },
+    {
+      "id": "usgs-s0440984965.equi-geometry",
+      "path": "photometry/s0440984965.equi.isis.lbl",
+      "expectedBytes": 33549,
+      "expectedSha256": "5161d3e2616cf0933280697b64ac0e75c9150ece81550fff14b9f61e5b16cab6",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984965/s0440984965.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984965.equi"
+    },
+    {
+      "id": "usgs-s0440984978.equi-geometry",
+      "path": "photometry/s0440984978.equi.isis.lbl",
+      "expectedBytes": 33537,
+      "expectedSha256": "7e315e0a355e11a6741f1633f2198361000d3d4304885e6d6d62550a9a97af2c",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440984978.equi"
+    },
+    {
+      "id": "usgs-s0440985113.equi-geometry",
+      "path": "photometry/s0440985113.equi.isis.lbl",
+      "expectedBytes": 33549,
+      "expectedSha256": "9c04bb79e943859c030ba19840d5be5f8faae364e4d7eba3591c0cc96d4dffab",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985113/s0440985113.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440985113.equi"
+    },
+    {
+      "id": "usgs-s0440985126.equi-geometry",
+      "path": "photometry/s0440985126.equi.isis.lbl",
+      "expectedBytes": 33522,
+      "expectedSha256": "445a05b1ce4ab34ba26408a93be151a7df2c25fdbd7c17d16de33d65590f71ef",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440985126.equi"
+    },
+    {
+      "id": "usgs-s0440985139.equi-geometry",
+      "path": "photometry/s0440985139.equi.isis.lbl",
+      "expectedBytes": 11188,
+      "expectedSha256": "7c13899c79b9e615808bd3e08ac3b61d21f0f1f761e9e638811e02e59e2c11af",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985139/s0440985139.equi.isis.lbl",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the controlled image ISIS label; it binds capture ET and the adjusted Europa body frame.",
+      "redistribution": "CC0 mission metadata; reacquirable original excluded from Git.",
+      "consumers": [
+        "photometry"
+      ],
+      "imageId": "usgs-s0440985139.equi"
     }
   ],
   "generatedIntermediates": [
@@ -589,6 +823,18 @@
       "expectedBytes": 3087,
       "expectedSha256": "a281b3c60701b472dd24f49c2d6380a2270a2c74c50cd7ffcd73d3cb9912cd70",
       "purpose": "USGS STAC collection metadata, CC0 license, and provenance captured 2026-09-06."
+    },
+    {
+      "path": "photometry/horizons-sun.json",
+      "expectedBytes": 8148,
+      "expectedSha256": "de9525556509baec66ca8a8b233c6c2c6f24b1f445cb0de53acbe16156d2aace",
+      "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB."
+    },
+    {
+      "path": "photometry/horizons-galileo.json",
+      "expectedBytes": 8711,
+      "expectedSha256": "5ce39f52312e66647389b827333f15aad1dd260d766b68392498fc0cbe8eae40",
+      "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB."
     }
   ]
 }

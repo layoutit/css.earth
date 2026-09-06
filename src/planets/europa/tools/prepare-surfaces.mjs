@@ -64,6 +64,7 @@ const enhanced = await prepareSurface("enhanced", color.rgb, color.missing, {
   coverage:"Valid infrared/green/violet observations over the observed monochrome base. Gray grid only where neither source has imagery.",
   monochromePixels,
   observationCoverage:color.coverage,
+  photometry:color.photometry,
 });
 await writeFile(resolve(EUROPA_PREPARED_ROOT,"surfaces.json"),JSON.stringify({objectId:"europa",surfaces:[normal,enhanced]}));
 console.log("Prepared Europa monochrome and observed enhanced color, with coverage gaps marked.");

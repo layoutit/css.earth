@@ -68,27 +68,50 @@ pinned beside the source inputs.
 
 These are calibrated 32-bit I/F images with corrected camera pointing, on an
 east-positive cylindrical grid centred at 180°, radius 1,560,800 m. They have
-not been photometrically corrected. Native grids range from 1.375 to 1.570 km
+not been photometrically corrected by USGS. Native grids range from 1.375 to 1.570 km
 per pixel. Higher-density observations take priority. Color appears only where
 all three bands from the same sequence have valid interpolation footprints;
 zero no-data, ISIS special pixels, and incomplete boundaries are withheld.
-About 19% of the sphere has usable three-band coverage. Observed monochrome
+After the geometric normalization and angle limits below, about 16% of the
+sphere has usable three-band coverage. Observed monochrome
 forms the base elsewhere; grayscale does not imply measured neutral color.
 The gray cartographic grid appears only where both sources lack imagery. The
-fixed display transfer is clamp(I/F, 0, 1)^(1/2.2) for every channel.
-Brightness seams and coarse observations remain visible.
+fixed display transfer is clamp(I/F, 0, 1)^(1/2.2) for every channel, after any
+linear I/F normalization. Brightness seams remain visible.
 No monochrome detail is transferred into color. The newer controlled dataset
 and the older monochrome mosaic have different positional accuracy.
 
 The 28ESGLOCOL01 sequence (2000-05-22) was removed from this lens: its
 13.832 km-per-pixel imagery covered sharper monochrome with a visibly blurred
 insert. The lens now uses the monochrome base there, with no invented color.
-Both lenses use the shared Shadows control and prepared globe lighting.
-Shading in the photographs remains fixed to its acquisition geometry, so added
-lighting is approximate: these images are not unlit albedo maps. Source-aware
-[photometric normalization](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html)
-could reduce broad illumination differences, but
-unobserved terrain inside cast shadows cannot be recovered by brightening it.
+Preparation applies a spherical
+[Lommel–Seeliger disk normalization](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html)
+to **14ESGLOCOL01 only**, the March 1998 sequence whose broad shading was
+visually compared. For each band's surface point, `mu0` and `mu` are the cosines
+of incidence and emission. Linear I/F is multiplied by
+`[cos(30°)/(cos(30°)+1)] / [mu0/(mu0+mu)]`, then the fixed display transfer is
+applied. The reference is incidence 30°, emission 0°. All three bands must have
+incidence and emission at most 75°; otherwise the observed monochrome base is
+used. There is no inferred color or recovery of unobserved terrain.
+
+`source/photometry/` binds each controlled ISIS label, including its exact
+capture ET and body-orientation coefficients, to pinned
+[JPL Horizons](https://ssd-api.jpl.nasa.gov/doc/horizons.html) geometric Sun and
+Galileo vectors relative to Europa (ICRF, km, JDTDB). The raw API responses
+and request URLs are checked in; labels are restored by the existing source
+acquisition command. Preparation transforms the vectors using the label's
+adjusted prime meridian (W0 = 36.054°) and
+[NAIF PCK orientation equations](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html),
+including nutation/precession. It does not use the older PDS label's west
+longitudes. Horizons uses its archived Galileo trajectory and current planetary
+ephemerides, rather than reproducing the original USGS SPICE kernel set exactly.
+Preparation is offline and reproducible from these pinned inputs.
+
+Both lenses retain the shared Shadows control and prepared globe lighting.
+This is an approximate disk correction, not calibrated unlit albedo: there is
+no phase-angle normalization, fitted Europa scattering model, terrain model,
+or removal of cast shadows. The two other sequences are unchanged. Residual
+photographed shadows and seams can remain; added globe lighting is approximate.
 
 The NASA Trek/Jónsson 2015 color mosaic was rejected: its [author documents
 fictional polar terrain and cloned gaps](https://www.planetary.org/articles/0218-mapping-europa),
