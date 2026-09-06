@@ -675,6 +675,12 @@
       "expectedSha256": "199f181c48d78b2282b867bdf90563e2bcbed9edb3821e34a8d5fe687112174a",
       "expectedBytes": 26875,
       "purpose": "Real-Chrome CORS/status/cache/dimension/palette sample receipt; not global valid-pixel or availability proof"
+    },
+    {
+      "path": "observations.json",
+      "expectedSha256": "0829f20e352f258250c4261e9bb798b4cd4e2a0a5b047766807fa135dadecf51",
+      "expectedBytes": 363,
+      "purpose": "Prepared observation package inventory and source applicability; entity kinds do not define separate lens implementations"
     }
   ]
 }

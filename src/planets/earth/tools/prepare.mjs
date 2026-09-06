@@ -11,6 +11,7 @@ const steps = Object.freeze([
   ["prepare-atmosphere-charts.mjs"],
   ["prepare-panel-content.mjs"],
   ["prepare-noise-lens.mjs"],
+  ["prepare-geographic-lenses.mjs"],
   ["prepare-lenses.mjs"],
   ["prepare-pinned-global-wmts.mjs"],
   ["prepare-places.mjs"],

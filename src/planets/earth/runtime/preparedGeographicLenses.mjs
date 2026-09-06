@@ -1,2 +1,3 @@
-// Preparation-only package inventory. Loaded entity descriptors travel in the place catalogue.
-export const PREPARED_GEOGRAPHIC_LENSES=[{"entityIds":["3435910"],"lens":{"id":"buenos-aires-noise","label":"Daytime noise","thumbnailUrl":"/scenes/earth/earth-lens-noise.webp","package":{"url":"/scenes/earth/geographic-lens-buenos-aires-noise-4cada2b3e2421208.json","bytes":23022,"sha256":"4cada2b3e242120820682204187271831284c6382e2e79c94657f4dbc3e9fd7e"}}}];
+// Generated observation references. Source payloads remain lazy packages.
+export const PREPARED_GEOGRAPHIC_LENSES=[{"scope":{"objectId":"earth","entityIds":["3435910"]},"lens":{"id":"buenos-aires-noise","label":"Daytime noise","thumbnailUrl":"/scenes/earth/earth-lens-noise.webp","package":{"url":"/scenes/earth/geographic-lens-buenos-aires-noise-4cada2b3e2421208.json","bytes":23022,"sha256":"4cada2b3e242120820682204187271831284c6382e2e79c94657f4dbc3e9fd7e"}}}];
+export const PREPARED_ROOT_GEOGRAPHIC_LENSES=[];

@@ -19,10 +19,32 @@ export function requireGeographicLensReference(value, assetPath) {
   return value;
 }
 
-export function requireGeographicLensPackage(value, descriptor, entityId, capacity) {
+export function requireGeographicScope(scope) {
+  if (!scope || !/^[a-z][a-z0-9-]*$/u.test(scope.objectId ?? "") ||
+      Object.keys(scope).some(key => !["objectId", "entityIds"].includes(key)) ||
+      scope.entityIds !== undefined && (!Array.isArray(scope.entityIds) || !scope.entityIds.length ||
+        scope.entityIds.length > 65536 || new Set(scope.entityIds).size !== scope.entityIds.length ||
+        scope.entityIds.some(id => typeof id !== "string" || !id.length || id.length > 128))) {
+    throw new Error("Invalid prepared geographic scope.");
+  }
+  return scope;
+}
+
+export function geographicScopeIncludes(scope, objectId, entityId) {
+  return scope.objectId === objectId && (scope.entityIds === undefined || scope.entityIds.includes(entityId));
+}
+
+export function geographicPackageIncludes(value, objectId, entityId) {
+  return value?.schema === "cssearth-geographic-lens@1" ? value.entityIds?.includes(entityId) === true :
+    value?.schema === "cssearth-geographic-lens@2" && value.scope?.objectId === objectId &&
+      (value.scope.entityIds === undefined || Array.isArray(value.scope.entityIds) && value.scope.entityIds.includes(entityId));
+}
+
+export function requireGeographicLensPackage(value, descriptor, entityId, capacity, objectId) {
   const p = value?.pages, source = value?.source, legend = value?.legend;
-  if (value?.schema !== "cssearth-geographic-lens@1" || value.id !== descriptor.id ||
-      !value.entityIds?.includes(entityId) || !text(value.baseLensId) || !text(value.qualification) ||
+  if (value?.schema === "cssearth-geographic-lens@2") requireGeographicScope(value.scope);
+  if (!geographicPackageIncludes(value, objectId, entityId) || value.id !== descriptor.id ||
+      !text(value.baseLensId) || !text(value.qualification) ||
       !source || !text(source.publisher) || !Number.isInteger(source.year) || !text(source.units) ||
       !https(source.url) || !https(source.licenseUrl) || !text(source.license) || !hash(source.sha256) ||
       legend?.kind !== "categories" || !Array.isArray(legend.items) || !legend.items.length ||

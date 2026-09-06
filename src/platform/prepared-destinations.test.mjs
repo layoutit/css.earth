@@ -86,3 +86,12 @@ test("late entity preparation cannot publish a card or flight after a newer pare
   assert.equal(f.destinations.state(), null); assert.deepEqual(changes, [null]);
   assert.deepEqual(f.calls, []); f.lifetime.destroy();
 });
+
+test("compatible observation navigation retains its selection and the root keeps its existing null history identity", async () => {
+  const changes = [], f = fixture({ retainLens: () => true, onChange: entity => changes.push(entity?.id ?? null) });
+  const country = {id:"country",camera:{zoom:10}}, city = {id:"city",camera:{zoom:1000}};
+  await f.destinations.select(country); await f.destinations.select(city); await f.destinations.reset();
+  assert.deepEqual(f.calls, [country.camera, city.camera]);
+  assert.deepEqual(changes, ["country", "city", null]); assert.equal(f.destinations.state(), null);
+  f.lifetime.destroy();
+});

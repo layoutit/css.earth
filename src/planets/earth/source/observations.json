@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-observation-inventory@1",
+  "objectId": "earth",
+  "datasets": [
+    {
+      "id": "buenos-aires-noise",
+      "scope": { "objectId": "earth", "entityIds": ["3435910"] },
+      "prepare": "tools/prepare-noise-lens.mjs",
+      "prepared": "runtime/preparedNoise.mjs",
+      "descriptorExport": "PREPARED_EARTH_NOISE_DESCRIPTOR"
+    }
+  ]
+}

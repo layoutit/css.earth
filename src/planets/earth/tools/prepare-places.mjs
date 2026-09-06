@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import { prepareDestinationPacks } from "../../../../tools/prepare-destination-packs.mjs";
 import { normalizeDestinationQuery } from "../../../../site/destination-search.mjs";
 import { PREPARED_GEOGRAPHIC_LENSES } from "../runtime/preparedGeographicLenses.mjs";
+import { preparedEntityLenses } from "../../../platform/geographic-lens-applicability.mjs";
 import { objectControls } from "../site/control-content.mjs";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { prepareLocationPoint, prepareLocationCamera } from "./city/prepare-location.mjs";
@@ -60,7 +61,7 @@ if (new Set(places.map(place => place.id)).size !== places.length || places.leng
 receipt.cities = places.length;
 places.push(...administrative.places);
 for (const entity of places) {
-  entity.lenses = PREPARED_GEOGRAPHIC_LENSES.filter(entry => entry.entityIds.includes(entity.id)).map(entry => entry.lens);
+  entity.lenses = preparedEntityLenses(PREPARED_GEOGRAPHIC_LENSES, "earth", entity.id);
   entity.lensIds = [objectControls.lenses.defaultLens, ...entity.lenses.map(lens => lens.id)];
   entity.resources = [{label:"GeoNames",description:"Names and recorded facts · September 2026 snapshot",href:manifest.sourcePage}];
   if (entity.navigation?.source.startsWith("Natural Earth")) entity.resources.push({label:"Natural Earth",description:`${entity.kind === "admin1" ? "Region" : "Country"} navigation geometry · public domain`,href:entity.kind === "admin1" ? "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/" : "https://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/"});

@@ -3,6 +3,7 @@ import { requireObjectControls } from "../../site/scene-contract.mjs";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.mjs";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.mjs";
 import { validatePreparedHeliocentricView } from "./heliocentric-view.mjs";
+import { GEOGRAPHIC_LENS_CAPACITY, requireGeographicLensReference } from "./geographic-lens-contract.mjs";
 
 import { PREPARED_PRESENTATION_SCHEMA } from "./prepared-schema.mjs";
 export { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-schema.mjs";
@@ -183,12 +184,21 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   const lensIds = (controls.lenses?.controls ?? []).map(lens => lens.id);
   const settings = new Map((controls.settings?.controls ?? []).map(control => [control.name, control]));
   if (plan.destinations !== undefined) {
-    record(plan.destinations, "destinations", ["catalog", "defaultLens", "statuses"]);
+    record(plan.destinations, "destinations", ["catalog", "defaultLens", "statuses", "rootEntity"]);
     const {catalog,defaultLens,statuses}=plan.destinations;
     validateDestinationReference(catalog, DESTINATION_LIMITS.directoryBytes);
     if (catalog.format !== "indexed" || !Number.isSafeInteger(catalog.count) || catalog.count < 1 ||
         catalog.count > DESTINATION_LIMITS.entities || !lensIds.includes(defaultLens)) fail("destinations require an indexed directory and declared lens");
     record(statuses,"destination statuses",["detail","overview"]); string(statuses.detail,"detail status");string(statuses.overview,"overview status");
+    if (plan.destinations.rootEntity !== undefined) {
+      const root = plan.destinations.rootEntity;
+      record(root, "root entity observations", ["id", "lensIds", "lenses"]); string(root.id, "root entity id");
+      array(root.lensIds, "root lens ids"); array(root.lenses, "root observations");
+      unique(root.lensIds, "root lens ids"); unique(root.lenses.map(lens => lens.id), "root observations");
+      if (root.lenses.length > GEOGRAPHIC_LENS_CAPACITY || root.lensIds.some(id => !lensIds.includes(id) && !root.lenses.some(lens => lens.id === id)) ||
+          root.lenses.some(lens => !root.lensIds.includes(lens.id))) fail("root observation references disagree");
+      for (const lens of root.lenses) requireGeographicLensReference(lens, /^\/scenes\/[a-z][a-z0-9-]*\//u.exec(catalog.url)[0]);
+    }
   }
   if (plan.motionFrame !== undefined) {
     if (!array(plan.motionFrame,"motion frame").length) fail("motion frame is empty");

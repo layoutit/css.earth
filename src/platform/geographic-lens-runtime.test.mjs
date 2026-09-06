@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { createGeographicLensRuntime } from "./geographic-lens-runtime.mjs";
 import { requireGeographicLensPackage } from "./geographic-lens-contract.mjs";
+import { preparedEntityLenses, requireGeographicScope } from "./geographic-lens-applicability.mjs";
 import { PREPARED_GEOGRAPHIC_LENSES } from "../planets/earth/runtime/preparedGeographicLenses.mjs";
 import { runtimeDefinition } from "../planets/earth/runtime/definition.mjs";
 
@@ -15,7 +16,7 @@ const hash = value => createHash("sha256").update(value).digest("hex");
 function harness(fetcher = async () => new Response(bytes)) {
   let entity = { id: "3435910", lenses: [descriptor] }, mounted = null;
   const replacements = [], bases = [], changes = [], requests = [];
-  const runtime = createGeographicLensRuntime({ capacity, getEntity: () => entity,
+  const runtime = createGeographicLensRuntime({ capacity, objectId: "earth", getEntity: () => entity,
     pages: { replacePlan(plan) { mounted = plan; replacements.push(plan); },
       stats: () => ({ errors: [], pendingSelection: false, desired: mounted?.roots.map(page => page.key) ?? [],
         retained: mounted?.roots.map(page => ({ key: page.key, published: true })) ?? [] }) },
@@ -72,4 +73,40 @@ test("package identity, retained capacity and prepared geometry are validated be
     const value = structuredClone(content); mutate(value);
     assert.throws(() => requireGeographicLensPackage(value, descriptor, "3435910", capacity));
   }
+});
+
+test("one object-scoped observation applies to any prepared entity, while local source scope stays exact", () => {
+  const global = { scope: { objectId: "earth" }, lens: { ...descriptor, id: "global-fixture" } };
+  const inventory = [...PREPARED_GEOGRAPHIC_LENSES, global];
+  for (const id of ["earth", "country:AR", "admin1:3433955", "3435910", "1850147", "future-geographic-entity"]) {
+    const refs = preparedEntityLenses(inventory, "earth", id);
+    assert.equal(refs.at(-1), global.lens);
+    assert.equal(refs.some(lens => lens.id === descriptor.id), id === "3435910");
+  }
+  assert.deepEqual(preparedEntityLenses(inventory, "mars", "earth"), []);
+  for (const value of [null, {}, {objectId:"earth",entityIds:[]}, {objectId:"earth",entityIds:["x","x"]}, {objectId:"earth",kinds:["city"]}]) {
+    assert.throws(() => requireGeographicScope(value), /scope/);
+  }
+});
+
+test("the same loaded observation survives compatible entity changes without another package or page plan", async () => {
+  const value = { ...content, schema: "cssearth-geographic-lens@2", id: "global-fixture", scope: { objectId: "earth" } };
+  delete value.entityIds;
+  const fixtureBytes = Buffer.from(JSON.stringify(value)), sha256 = hash(fixtureBytes);
+  const lens = { ...descriptor, id: value.id, package: { url: `/scenes/earth/fixture-${sha256.slice(0,16)}.json`, bytes: fixtureBytes.length, sha256 } };
+  const h = harness(() => new Response(fixtureBytes));
+  h.setEntity({ id: "earth", lenses: [lens] });
+  assert.equal(await h.runtime.select(lens.id), true);
+  for (const id of ["country:AR", "admin1:3433955", "3435910", "earth"]) {
+    const entity = { id, lenses: [lens] };
+    assert.equal(h.runtime.canRetain(entity), true);
+    h.setEntity(entity); h.runtime.reconcileEntity();
+    assert.equal(h.runtime.state().id, lens.id);
+    assert.equal(h.runtime.state().status, "ready");
+  }
+  assert.equal(h.requests.length, 1); assert.equal(h.replacements.filter(Boolean).length, 1);
+  assert.equal(h.runtime.canRetain({id:"x",lenses:[{...lens,package:{...lens.package,sha256:"different"}}]}), false);
+  assert.throws(() => requireGeographicLensPackage(value, lens, "earth", capacity, "mars"), /identity/);
+  h.setEntity({ id: "unavailable", lenses: [] }); h.runtime.reconcileEntity();
+  assert.equal(h.runtime.state().id, null); assert.equal(h.mounted(), null); h.runtime.destroy();
 });

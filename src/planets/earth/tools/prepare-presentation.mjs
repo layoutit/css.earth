@@ -10,6 +10,7 @@ import { PREPARED_EARTH_LENSES as lenses } from "../runtime/preparedLenses.mjs";
 import { PREPARED_EARTH_STARFIELD as sky } from "../runtime/preparedStarfield.mjs";
 import { PREPARED_EARTH_SKY_SUN as sun } from "../runtime/preparedSkySun.mjs";
 import { PREPARED_EARTH_PLACES as catalog } from "../runtime/preparedPlaces.mjs";
+import { PREPARED_ROOT_GEOGRAPHIC_LENSES } from "../runtime/preparedGeographicLenses.mjs";
 import { PREPARED_EARTH_CITY_PAGES } from "../runtime/preparedCityPages.mjs";
 import { prepareOverlayCapacity } from "./city/geographic-overlay.mjs";
 import { cameraPlan } from "./prepared-camera.mjs";
@@ -106,7 +107,9 @@ export async function prepareEarthPresentation() {
         frameOverride:null,clearWhenHidden:false,fixedMode:"shadowless",publishWhenHidden:"static",
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
   })));
-  return {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,destinations:{catalog,defaultLens:"normal",statuses:{detail:"WorldCover imagery · 2021. Source gaps retain the Earth base map.",overview:"Earth overview. WorldCover detail is unavailable at this location."}},
+  return {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,destinations:{catalog,defaultLens:"normal",
+    rootEntity:{id:"earth",lensIds:[...objectControls.lenses.controls.filter(lens=>!lens.entityIds).map(lens=>lens.id),...PREPARED_ROOT_GEOGRAPHIC_LENSES.map(lens=>lens.id)],lenses:PREPARED_ROOT_GEOGRAPHIC_LENSES},
+    statuses:{detail:"WorldCover imagery · 2021. Source gaps retain the Earth base map.",overview:"Earth overview. WorldCover detail is unavailable at this location."}},
     assets:{entries,pools:[preparedResourcePool("mounted",entries,{concurrency:2}),preparedResourcePool("default-materials",entries,{retention:"warm"}),
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2}),
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],

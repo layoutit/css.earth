@@ -105,7 +105,7 @@ interface Resource {
 
 interface Props {
   objectId: string;
-  destinations?: { searchLabel: string; description: string; };
+  destinations?: { searchLabel: string; description: string; lenses?: Array<{ id: string; label: string; thumbnailUrl: string; package: { url: string; bytes: number; sha256: string } }>; };
   title: PlanetTitle;
   introduction?: string;
   facts?: Fact[];
@@ -171,7 +171,8 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
 const initialEntity = {
   id: objectId, name: title.label, kind: activeObject?.kind, parentId: null,
   title, introduction, facts: allFacts, resources,
-  lensIds: lenses?.controls.filter(lens => !lens.entityIds).map(lens => lens.id) ?? [],
+  lensIds: [...(lenses?.controls.filter(lens => !lens.entityIds).map(lens => lens.id) ?? []), ...(destinations?.lenses ?? []).map(lens => lens.id)],
+  ...(destinations?.lenses?.length ? { lenses: destinations.lenses } : {}),
   sections: ["search", "charts", ...galleries.map(gallery => `gallery:${gallery.id}`)],
 };
 const serializedEntity = JSON.stringify(initialEntity).replaceAll("<", "\\u003c");

@@ -88,11 +88,13 @@ export function createObjectRuntime(definition, services = nativeServices) {
     });
     const destinations = definition.destinations ? createPreparedDestinations({ plan: definition.destinations,
       ready, lifetime, selectLens: id => dispatchAction({ kind: "lens", id }),
+      retainLens: entity => geographic?.canRetain(entity) ?? false,
       navigate: camera => { stopMotion(); alignMotionFrame(); return orbit.flyToState(camera); },
-      onChange: () => { controls?.publish(); notifySelection(); },
+      onChange: () => { geographic?.reconcileEntity(); controls?.publish(); notifySelection(); },
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: orbit.initialResponsiveZoom() }),
     }) : null;
+    const selectedEntity = () => destinations?.state() ?? definition.destinations?.rootEntity ?? null;
     const preparedEpochJdTt = definition.heliocentricView?.plan.system?.epochJdTt ?? null;
     let restoreVersion = 0;
     const sharedView = Object.freeze({
@@ -141,8 +143,8 @@ export function createObjectRuntime(definition, services = nativeServices) {
 
     function dispatchAction(action) {
       if (action.kind === "lens") {
-        if (!objectLensAvailable(definition.controls, destinations?.state(), action.id)) return Promise.resolve(false);
-        if (destinations?.state()?.lenses?.some(lens => lens.id === action.id)) return geographic?.select(action.id) ?? Promise.resolve(false);
+        if (!objectLensAvailable(definition.controls, selectedEntity(), action.id)) return Promise.resolve(false);
+        if (selectedEntity()?.lenses?.some(lens => lens.id === action.id)) return geographic?.select(action.id) ?? Promise.resolve(false);
         geographic?.clear();
       }
       return selection?.dispatch(action) ?? Promise.resolve(false);
@@ -200,7 +202,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       if (lifetime.disposed) return;
       controls = environment.createControls({ stage, controls: definition.controls, initialSelection,
         getState: () => selection?.state() ?? { desired: initialSelection, committed: null, pending: true, plan: null },
-        getEntity: () => destinations?.state() ?? null,
+        getEntity: selectedEntity,
         getGeographicState: () => geographic?.state() ?? null,
         onAction: dispatchAction, onError: error => console.error(error) });
       context.own(() => controls.destroy());
@@ -214,7 +216,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
           own: context.own, onStatus: layer.geographic ? publishGeographicStatus : undefined, onError: fatal });
         pageLayers.set(layer.id, pages);
         if (layer.geographic) {
-          geographic = createGeographicLensRuntime({ pages, capacity: layer.plan, getEntity: () => destinations.state(),
+          geographic = createGeographicLensRuntime({ pages, capacity: layer.plan, objectId: definition.id, getEntity: selectedEntity,
             selectBase: id => id === definition.destinations.defaultLens ? selection.dispatch({kind:"lens",id}) : Promise.resolve(false),
             onChange: () => { controls?.publish(); notifySelection(); } });
           context.own(() => geographic.destroy());

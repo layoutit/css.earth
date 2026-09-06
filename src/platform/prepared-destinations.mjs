@@ -1,6 +1,6 @@
 import { createDestinationClient } from "./prepared-destination-client.mjs";
 // The runtime owns catalogue transport and lifetime; packages provide pinned data.
-export function createPreparedDestinations({ plan, ready, lifetime, selectLens, navigate, reset, onChange = () => {}, createStore = createDestinationClient }) {
+export function createPreparedDestinations({ plan, ready, lifetime, selectLens, navigate, reset, retainLens = () => false, onChange = () => {}, createStore = createDestinationClient }) {
   const controller = new AbortController();
   lifetime.onDispose(() => controller.abort());
   const assertLive = () => { if (lifetime.disposed) throw new Error("Object was unmounted."); };
@@ -14,7 +14,7 @@ export function createPreparedDestinations({ plan, ready, lifetime, selectLens, 
     async select(place, { navigate: fly = true } = {}) {
       const request = ++revision;
       await ready; assertLive();
-      if (!await selectLens(plan.defaultLens)) throw new Error("Destination selection was superseded.");
+      if (!retainLens(place) && !await selectLens(plan.defaultLens)) throw new Error("Destination selection was superseded.");
       assertLive();
       if (request !== revision) throw new Error("Destination selection was superseded.");
       selected = place; onChange(place);
@@ -24,7 +24,7 @@ export function createPreparedDestinations({ plan, ready, lifetime, selectLens, 
     async reset({ navigate: fly = true } = {}) {
       const request = ++revision;
       await ready; assertLive();
-      if (!await selectLens(plan.defaultLens) || request !== revision) return false;
+      if (!retainLens(plan.rootEntity) && !await selectLens(plan.defaultLens) || request !== revision) return false;
       assertLive(); selected = null; onChange(null);
       return { arrival: fly ? reset() : null };
     },
