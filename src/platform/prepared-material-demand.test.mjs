@@ -29,18 +29,24 @@ test("every object's visible, hidden and fixed materials use the same resource r
   }
 });
 
-test("Jupiter's prepared source light directions select their actual images through the common phase lookup", () => {
-  const track = definitions.find(d => d.id === "jupiter").materials[0];
-  const basis = track.frame.lightBasis;
-  for (const sample of lighting.presentations) {
-    // Inverse of the prepared orthonormal basis is its transpose.
-    const direction = sample.cameraLightDirection;
-    const sunViewDirection = [0,1,2].map(column => direction.reduce((sum, value, row) => sum+basis[row*3+column]*value, 0));
-    assert.equal(preparedMaterialFrame(track.frame, { sunViewDirection, controlPitch: -1234 }), sample.frameIndex);
+test("camera roll preserves phase for every material in every object", () => {
+  for (const definition of definitions) for (const track of definition.materials) {
+    for (const z of [-1, -.8, -.2, 0, .3, .8, 1]) {
+      const r = Math.sqrt(1-z*z), expected = preparedMaterialFrame(track.frame, { sunViewDirection: [r, 0, z] });
+      for (const degrees of [45, 90, 180, 270]) {
+        const a = degrees*Math.PI/180;
+        assert.equal(preparedMaterialFrame(track.frame, { sunViewDirection: [r*Math.cos(a), r*Math.sin(a), z] }), expected, definition.id);
+      }
+    }
   }
-  const definition = definitions.find(d => d.id === "jupiter");
-  const reference = definition.sun.referenceViewDirection.map((value, i) => i ? -value : value);
-  assert.equal(preparedMaterialFrame(track.frame, { sunViewDirection: reference }), lighting.transport.defaultFrame);
+});
+test("Jupiter source samples cover the entire phase domain without a runtime calibration", () => {
+  const track = definitions.find(d => d.id === "jupiter").materials[0];
+  assert.equal(lighting.presentations[0].cameraLightDirection[2], -1);
+  assert.equal(lighting.presentations.at(-1).cameraLightDirection[2], 1);
+  for (const sample of lighting.presentations) {
+    assert.equal(preparedMaterialFrame(track.frame, {sunViewDirection: sample.cameraLightDirection}), sample.frameIndex);
+  }
 });
 
 test("Mars keeps atmosphere phase and ground shadow mode independent across the full bank", () => {

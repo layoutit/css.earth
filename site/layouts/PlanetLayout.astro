@@ -46,7 +46,7 @@ const objectRecord = requireObject(objectId);
       aria-label={`Interactive 3D CSS visualization of ${objectRecord.name}`}
       aria-busy="true"
     ></main>
-    <slot name="planet-overlay" />
+    <div class="planet-input-surface" tabindex="0" role="group" aria-label={`Explore ${objectRecord.name}`} />
     <script>
       import "../scene-router.mjs";
     </script>

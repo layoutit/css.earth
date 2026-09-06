@@ -411,6 +411,7 @@ export function createPerspectiveDolly({
         distance: cameraState.distance,
         distanceKilometers: cameraState.distance * kilometersPerUnit,
         distanceRadii: cameraState.distance / bodyRadius,
+        levelOfDetail: lod,
         focal,
         principalOffset,
         visibleRect,

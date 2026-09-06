@@ -100,8 +100,7 @@ export async function prepareNeptunePresentation() {
     ], materials: [{ track: "lighting", bank: id, mode: shadows ? "default-pose" : "fixed", enabled: true, rotationEnabled: shadows,
       frameOverride: null, clearWhenHidden: false, fixedMode: "shadowlessMaterial" }],
   }))));
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: cameraPlan, sky, sun, inputSelector: ".neptune-input-surface",
-    assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm" }),
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: cameraPlan, sky, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm" }),
       preparedResourcePool("variant", entries, { retention: "selection", capacity: 8, concurrency: 8 }),
       preparedResourcePool("lighting", entries, { retention: "selection", capacity: 3, concurrency: 3, eviction: "capacity" })],
       startup: [...warm.map(e => e.key), ...staticKeys(lenses.defaultLens), ...initialRows.map(row => `lighting:${lenses.defaultLens}:${row}`)] },

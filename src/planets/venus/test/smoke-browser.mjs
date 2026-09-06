@@ -357,7 +357,7 @@ try {
 
   await page.setViewportSize({ width: 390, height: 844 });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390);
-  assert.equal(await page.locator(".venus-input-surface").evaluate((node) =>
+  assert.equal(await page.locator(".planet-input-surface").evaluate((node) =>
     getComputedStyle(node).touchAction), "pan-y");
   await page.setViewportSize({ width: 1440, height: 900 });
   assert.equal(await page.evaluate(() => window.__venus.assertStableDomIdentity()), true);
@@ -556,7 +556,7 @@ async function proveResponsiveFitContinuity(browser) {
       const root = document.querySelector(".polycss-camera");
       const stage = document.querySelector(".planet-stage");
       const sidebar = document.querySelector(".planet-sidebar");
-      const input = document.querySelector(".venus-input-surface");
+      const input = document.querySelector(".planet-input-surface");
       const rootScale = root.getBoundingClientRect().width /
         stage.getBoundingClientRect().width;
       return {
@@ -701,7 +701,7 @@ function runtimeState(page) {
 }
 
 async function drag(page, deltaX, deltaY) {
-  const box = await page.locator(".venus-input-surface").boundingBox();
+  const box = await page.locator(".planet-input-surface").boundingBox();
   assert.ok(box);
   const x = box.x + box.width * 0.72;
   const y = box.y + box.height * 0.5;

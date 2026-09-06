@@ -143,8 +143,7 @@ export async function prepareSaturnPresentation() {
       materials: [{ track: "exterior", bank: material, mode: "default-pose", enabled: true, rotationEnabled: true, frameOverride: null, clearWhenHidden: false, fixedMode: "fixed" },
         { track: "interior", bank: interiorView ? material : "normal", mode: "default-pose", enabled: interiorView, rotationEnabled: true, frameOverride: null, clearWhenHidden: true, fixedMode: "fixed" }] };
   })));
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, inputSelector: ".saturn-input-surface",
-    assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: 8, concurrency: 8 }),
       preparedResourcePool("interior", entries, { retention: "selection", decoding: "sync" }),
       ...["exterior-material", "interior-material"].map(id => preparedResourcePool(id, entries, { retention: "selection", decoding: "sync", capacity: 2, concurrency: 2 }))],

@@ -36,7 +36,11 @@ The regular globe now uses PR #2's seven bounded surface pages. Topography and n
 
 ## Reproduction and checks
 
-A fresh checkout uses `pnpm prepare:checkout`: it restores pinned source bytes
+A fresh checkout can run Earth with `pnpm install`, `pnpm setup:assets --object=earth`,
+and `pnpm dev`. This downloads prepared browser assets and reads visible geometry
+ranges from the published release; the full local geometry mirror is optional.
+
+To reproduce the outputs from source, use `pnpm prepare:checkout`: it restores pinned source bytes
 and the published worldwide geometry release, then runs ordinary preparation.
 Existing valid packs are reused. Missing or corrupt packs are downloaded from
 the origin, version and filenames bound by the checked-in release inventory;
@@ -77,7 +81,7 @@ The shared browser suite needs a development server from this checkout at the su
 
 ## Deployment boundary
 
-The global packs live outside `public` and `dist`. Development and preview read exact ranges from `.local/wmts-global/<version>/`. Production points to `https://earth-assets.lowpoly.cc/scenes/earth/wmts-<version>/`.
+The global packs live outside `public` and `dist`. Development and preview read exact ranges from `.local/wmts-global/<version>/` when present and otherwise retrieve the same ranges from `https://earth-assets.lowpoly.cc/scenes/earth/wmts-<version>/`. Production reads that published release directly.
 
 Version `fef1519d5f243617` was published on 2026-09-05: all 19,632 objects and 25,344,236,995 bytes match the pinned inventory. Every remote object was checked for size, checksum, content type and immutable cache headers. Real Chrome verified the built application with public geometry and direct provider imagery at DPR 1/2. The feature branch still needs its normal review and application deployment.
 

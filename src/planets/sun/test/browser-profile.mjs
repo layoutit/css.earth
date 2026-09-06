@@ -2,7 +2,7 @@ import { createObjectBrowserProfile } from "../../../../site/test/object-browser
 import { objectControls } from "../site/control-content.mjs";
 
 export const browserProfile = createObjectBrowserProfile({
-  id: "sun", inputSelector: ".sun-input-surface", controls: objectControls,
+  id: "sun", controls: objectControls,
   audit: Object.freeze({
     preparedAssetPairs: Object.freeze([
       Object.freeze({
