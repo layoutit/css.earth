@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { OBJECTS } from "../objects.mjs";
 
 import {
   prepareLensCategoryLegend,
@@ -55,31 +55,15 @@ test("rejects invalid scale palettes", () => {
 });
 
 test("every object forwards its object-owned legend through the shared shell", async () => {
-  const objectIds = [
-    "earth",
-    "jupiter",
-    "mars",
-    "mercury",
-    "moon",
-    "neptune",
-    "saturn",
-    "sun",
-    "uranus",
-    "venus",
-  ];
-  const controls = await Promise.all(objectIds.map((objectId) => readFile(
-    new URL(
-      `../../src/planets/${objectId}/site/control-content.mjs`,
-      import.meta.url,
-    ),
-    "utf8",
-  )));
-
-  controls.forEach((controlContent, index) => {
-    assert.match(
-      controlContent,
-      /legend:\s*(?:lens\.legend(?:\s*\?\?\s*lensLegends\[lens\.id\])?|lensLegends\[lens\.id\])/u,
-      `${objectIds[index]} must forward its prepared legend`,
+  await Promise.all(OBJECTS.map(async ({ id }) => {
+    const [{ objectControls: controls }, { objectControls: source }] = await Promise.all([
+      import(`../../src/planets/${id}/site/control-content.mjs`),
+      import(`../../src/planets/${id}/site/control-content.source.mjs`),
+    ]);
+    assert.deepEqual(
+      controls.lenses.controls.map(({ id, legend }) => ({ id, legend })),
+      source.lenses.controls.map(({ id, legend }) => ({ id, legend })),
+      `${id} must forward every object-owned prepared legend`,
     );
-  });
+  }));
 });

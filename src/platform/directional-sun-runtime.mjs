@@ -1,6 +1,3 @@
-import { validateDirectionalSunPlan } from
-  "./directional-sun-contract.mjs";
-
 export function mountRetainedDirectionalSun({
   host,
   plan,
@@ -8,7 +5,6 @@ export function mountRetainedDirectionalSun({
   objectId,
   before = null,
 }) {
-  validateDirectionalSunPlan(plan);
   if (!(host instanceof HTMLElement) || ![1, 2].includes(imageDensity) ||
       !/^[a-z][a-z0-9-]*$/u.test(objectId) ||
       (before !== null && !(before instanceof HTMLElement))) {

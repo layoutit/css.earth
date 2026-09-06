@@ -19,18 +19,18 @@ test("Jupiter retains a visible fallback through a row miss, recoverable decode 
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     assert.equal(f.residency.stats().pools.find(pool => pool.id === "lighting").nativeSlots, 3);
-    assert.equal(f.presentation.observe().material.appliedFrame, null);
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, null);
     const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); assert.equal(await request, true);
-    const previous = f.presentation.observe().material.appliedFrame;
+    const previous = f.presentation.observe().materials.lighting.appliedFrame;
     const view = { ...f.view, controlPitch: 0, revision: 2 };
     f.selection.setView(view); await f.flush();
     assert.equal(f.selection.state().loadingMaterial, true);
-    assert.ok(Number.isInteger(f.presentation.observe().material.appliedFrame));
+    assert.ok(Number.isInteger(f.presentation.observe().materials.lighting.appliedFrame));
     const failed = f.jobs.at(-1); failed.done = true; failed.reject(new Error("row decode failed")); await f.flush();
     assert.equal(f.lifetime.disposed, false); assert.equal(f.materialErrors.length, 1);
-    assert.ok(Number.isInteger(f.presentation.observe().material.appliedFrame));
+    assert.ok(Number.isInteger(f.presentation.observe().materials.lighting.appliedFrame));
     f.selection.setView({ ...view, revision: 3 }); await f.settle();
-    assert.equal(f.presentation.observe().material.appliedFrame, 136);
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 136);
     const pool = f.residency.stats().pools.find(pool => pool.id === "lighting");
     assert.ok(pool.resident <= 3); assert.equal(pool.nativeSlots, 3);
     assert.deepEqual(f.errors, []);

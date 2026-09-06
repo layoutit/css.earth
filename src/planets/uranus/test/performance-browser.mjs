@@ -79,7 +79,7 @@ try {
         interval: now - previous,
         pitch: window.__uranus.camera.state().controlPitch,
         zoom: window.__uranus.camera.state().zoom,
-        materialRow: window.__uranus.camera.stats().activeMaterialRow,
+        materialRow: window.__uranus.material.state().lighting.row,
         retainedImages: window.__uranus.renderStats.textureStats
           .retainedInteractiveImageCount,
       });

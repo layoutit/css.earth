@@ -41,7 +41,7 @@ export async function preparePlutoPresentation() {
   const material = builder.element("s", "pluto-material");
   material.style.backgroundImage = `url("${entries.find(entry => entry.key === "curvature").url}")`;
   builder.append(materialRoot, material); builder.append(null, materialRoot);
-  const { tree, index } = builder.finish({ camera, scene, registrations: [{ bodySystem: system, lightingOverlays: [materialRoot] }] });
+  const { tree, index } = builder.finish({ camera, scene });
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: PREPARED_PLUTO_STARFIELD, sun: PREPARED_PLUTO_SKY_SUN,
     inputSelector: ".pluto-input-surface", assets: { entries, pools: [preparedResourcePool("mounted", entries)],
       startup: [...celestial.map(entry => entry.key), "curvature", ...required(lenses.defaultLens)] }, tree,
@@ -51,7 +51,7 @@ export async function preparePlutoPresentation() {
       { kind: "attribute", target: -1, name: "data-lens", value: lens.id },
     ], materials: [] })),
     materials: [], viewBindings: [{ kind: "shell-scale", target: index(materialRoot), variable: "--pluto-shell-scale", defaultZoom: plan.camera.defaultZoom }],
-    animations: [], observations: { constants: { dom: { mode: "prepared-projective-sphere-with-retained-cubic-sky", maximumRetainedLeafCount: plan.counts.retainedLeafCount } }, materials: [], counts: [] },
+    animations: [],
   };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {

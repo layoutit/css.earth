@@ -3,12 +3,9 @@ import { validatePreparedCubicSky } from "./cubic-sky-contract.mjs";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.mjs";
 import { validatePreparedHeliocentricView } from "./heliocentric-view.mjs";
 
-export const PREPARED_PRESENTATION_SCHEMA = "cssearth-prepared-presentation@1";
-export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@2";
+import { PREPARED_PRESENTATION_SCHEMA } from "./prepared-schema.mjs";
+export { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-schema.mjs";
 const tags = new Set(["div", "span", "s", "b", "u"]);
-const frameSources = new Set(["sun-z", "prepared-light-z", "scene-pitch", "reference-sun-z"]);
-const demandModes = new Set(["current", "visible", "visible-directional", "away-enabled-or-lens-change", "neighborhood"]);
-const materialFields = new Set(["bank", "frame", "calculatedFrame", "appliedFrame", "appliedRow", "row", "mode", "lightRollDegrees", "addressWrites", "transformWrites", "enabled", "rotationEnabled", "sunViewDirection"]);
 const fail = message => { throw new TypeError(`Prepared presentation: ${message}.`); };
 const scalar = value => value === null || ["string", "boolean"].includes(typeof value) || typeof value === "number" && Number.isFinite(value);
 const string = (value, label) => { if (typeof value !== "string" || !value.length) fail(`${label} must be a nonempty string`); };
@@ -41,7 +38,7 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "inputSelector", "assets", "tree", "variants", "materials", "viewBindings", "animations", "observations", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "inputSelector", "assets", "tree", "variants", "materials", "viewBindings", "animations", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -55,7 +52,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   const resource = (key, nullable = false) => { if (!(nullable && key === null) && !resources.has(key)) fail(`undeclared resource ${key}`); };
   const resourceList = (list, label) => { array(list, label).forEach(key => resource(key)); unique(list, label); };
   const tree = plan.tree;
-  record(tree, "tree", ["nodes", "properties", "camera", "scene", "registrations", "stageClasses"]);
+  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses"]);
   for (const property of array(tree.properties,"prepared style properties")) {
     record(property,"prepared style property",["name","value","custom"]);string(property.name,"prepared property name");
     if(typeof property.value!=="string"||typeof property.custom!=="boolean")fail("prepared property assignment is invalid");
@@ -89,13 +86,6 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       !/(?:^|\s)polycss-camera(?:\s|$)/.test(tree.nodes[tree.camera].className)) fail("tree requires exactly one camera");
   if (tree.nodes.filter(entry => /(?:^|\s)polycss-scene(?:\s|$)/.test(entry.className)).length !== 1) fail("tree requires exactly one scene");
   array(tree.stageClasses, "stage classes").forEach(value => string(value, "stage class"));
-  if (!array(tree.registrations, "registrations").length) fail("body-layer registration is required");
-  for (const registration of tree.registrations) {
-    record(registration, "registration", ["bodySystem", "lightingOverlays"]); node(registration.bodySystem);
-    if (!ancestor(registration.bodySystem, tree.scene)) fail("body system must belong to the scene");
-    if (!array(registration.lightingOverlays, "lighting overlays").length) fail("lighting overlays are missing");
-    registration.lightingOverlays.forEach(id => node(id)); unique(registration.lightingOverlays, "lighting overlays");
-  }
   function ancestor(child, parent) { for (let id = tree.nodes[child]?.parent; id >= 0; id = tree.nodes[id].parent) if (id === parent) return true; return false; }
   function attribute(name) { if (!/^(?:data-[a-z0-9-]+|aria-[a-z0-9-]+)$/.test(name)) fail(`unsupported attribute ${name}`); }
   const forbiddenProperty = /^(?:transform|scale|rotate|perspective)$/;
@@ -112,16 +102,12 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   const tracks = array(plan.materials, "materials"); unique(tracks.map(track => track.id), "material tracks");
   const trackMap = new Map(tracks.map(track => [track.id, track]));
   for (const track of tracks) {
-    record(track, "material", ["id", "target", "frame", "defaultPose", "banks", "demand", "rotation", "frameAttribute", "modeAttribute", "quoted", "farBank"]);
+    record(track, "material", ["id", "target", "frame", "defaultFrame", "banks", "rotation", "frameAttribute", "modeAttribute", "quoted", "farBank"]);
     string(track.id, "track id"); node(track.target);
     if ([tree.camera, tree.scene].includes(track.target)) fail("material target cannot own camera transforms");
     frameMapping(track.frame);
-    array(track.defaultPose, "default pose").forEach(test => {
-      record(test, "pose test", ["source", "scale", "offset", "value", "epsilon"]);
-      choice(test.source, new Set(["control-pitch", "control-yaw", "frame"]), "pose source");
-      for (const key of ["scale", "offset", "value", "epsilon"]) finite(test[key], `pose ${key}`);
-      if (test.epsilon <= 0) fail("pose epsilon must be positive");
-    });
+    integer(track.defaultFrame, "default frame");
+    if (track.defaultFrame >= track.frame.count) fail("default frame is outside prepared addresses");
     array(track.banks, "material banks"); unique(track.banks.map(bank => bank.id), "material banks");
     if (!track.banks.length) fail("material banks are empty");
     // A far bank (optional) replaces the selected bank while the camera's
@@ -152,31 +138,9 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
         });
       }
     }
-    record(track.demand, "demand", ["mode", "prewarm", "capacity", "framesPerRow", "defaultFrame", "defaultRow", "initialRows", "holdHiddenNeighborhood", "fallback", "preserveFrameWhenFixed", "neighborhoodOffsets"]);
-    choice(track.demand.mode, demandModes, "demand mode");
-    choice(track.demand.prewarm, new Set(["none", "symmetric", "directional"]), "prewarm mode");
-    choice(track.demand.fallback, new Set(["hold", "same-column", "nearest-frame"]), "missing-row policy");
-    if (track.demand.fallback !== "hold" && track.banks.some(bank => !bank.rows?.length)) fail("row fallback requires prepared row extents");
-    integer(track.demand.capacity, "demand capacity", 1); integer(track.demand.framesPerRow, "frames per row", 1);
-    integer(track.demand.defaultFrame, "default frame");
-    if (track.demand.defaultFrame >= track.frame.count) fail("default frame is outside prepared addresses");
-    array(track.demand.initialRows, "initial rows").forEach(row => integer(row, "initial row"));
-    if(track.demand.defaultRow!==undefined){integer(track.demand.defaultRow,"default row");if(track.banks.some(bank=>track.demand.defaultRow>=bank.rows?.length))fail("default row is outside prepared rows");}
-    if (typeof track.demand.holdHiddenNeighborhood !== "boolean") fail("hidden-neighborhood policy is required");
-    if (track.demand.preserveFrameWhenFixed !== undefined && typeof track.demand.preserveFrameWhenFixed !== "boolean") fail("fixed frame history policy must be boolean");
-    if (track.demand.prewarm !== "none" && track.banks.some(bank => !bank.rows?.length)) fail("prewarming requires prepared rows");
-    if (track.demand.mode === "away-enabled-or-lens-change" && track.banks.some(bank => !bank.rows?.length)) fail("transition demand requires prepared rows");
-    if (track.demand.mode === "neighborhood") {
-      const offsets = array(track.demand.neighborhoodOffsets, "neighborhood offsets");
-      unique(offsets, "neighborhood offsets");
-      if (!offsets.includes(0) || offsets.length * 2 > track.demand.capacity) fail("neighborhood requires committed and replacement capacity");
-      if (track.demand.prewarm !== "none" || track.banks.some(bank => !bank.rows?.length)) fail("neighborhood requires prepared rows and no extra prewarming");
-      for (const offset of offsets) if (!Number.isSafeInteger(offset) || Math.abs(offset) >= Math.max(...track.banks.map(bank => bank.rows.length))) fail("invalid neighborhood offset");
-    } else if (track.demand.neighborhoodOffsets !== undefined) fail("neighborhood offsets require neighborhood demand");
     if (track.rotation !== null) {
-      record(track.rotation, "rotation", ["kind", "source", "reference", "baseDegrees", "zeroAtPole", "property", "width", "height", "projection", "polePolicy", "systemTransform", "onlyWhenEnabled", "publishWithAddress"]);
+      record(track.rotation, "rotation", ["kind", "reference", "baseDegrees", "zeroAtPole", "property", "width", "height", "projection", "polePolicy", "systemTransform", "onlyWhenEnabled", "publishWithAddress"]);
       choice(track.rotation.kind, new Set(["angle", "planar", "ellipsoid"]), "rotation kind");
-      choice(track.rotation.source, new Set(["view-sun", "prepared-light"]), "rotation source");
       choice(track.rotation.reference, new Set(["prepared", "initial"]), "rotation reference");
       finite(track.rotation.baseDegrees, "rotation base");
       if (typeof track.rotation.zeroAtPole !== "boolean") fail("pole rotation policy is required");
@@ -192,28 +156,23 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     if (typeof track.quoted !== "boolean") fail("material quote mode is required");
   }
   function address(value) {
-    record(value, "address", ["resource", "frame", "row", "backgroundPosition", "backgroundSize"]);
+    record(value, "address", ["resource", "frame", "row", "backgroundPosition", "backgroundSize", "prewarm"]);
     resource(value.resource, true);
+    if (value.prewarm !== undefined) resourceList(value.prewarm, "prepared neighboring rows");
     if (value.frame !== null) integer(value.frame, "address frame");
     if (value.row !== null) integer(value.row, "address row");
     string(value.backgroundPosition, "background position"); string(value.backgroundSize, "background size");
   }
   function frameMapping(value) {
-    record(value, "frame mapping", ["source", "minimum", "maximum", "count", "baseFrame", "remap", "span", "maximumFrame", "step"]);
-    choice(value.source, frameSources, "frame source"); finite(value.minimum, "frame minimum"); finite(value.maximum, "frame maximum");
-    if (value.maximum <= value.minimum) fail("frame range must increase");
-    integer(value.count, "frame count", 1); finite(value.baseFrame, "base frame");
-    if (value.step !== undefined && (!Number.isFinite(value.step) || value.step <= 0 || value.span !== undefined)) fail("frame step must be positive and cannot duplicate a span");
-    if (value.span !== undefined) { finite(value.span, "frame span"); if (value.span <= 0) fail("frame span must be positive"); }
-    if (value.maximumFrame !== undefined) { integer(value.maximumFrame, "maximum frame"); if (value.maximumFrame >= value.count) fail("maximum frame exceeds prepared addresses"); }
-    if (value.remap !== null) {
-      record(value.remap, "phase remap", ["kind", "lowerTransition", "plateau", "upperTransition", "plateauViewZ"]);
-      if (value.remap.kind !== "phase-plateau") fail("unsupported phase remap");
-      for (const key of ["lowerTransition", "plateau", "upperTransition"]) {
-        const pair = array(value.remap[key], key); if (pair.length !== 2 || !pair.every(Number.isFinite) || pair[1] <= pair[0]) fail("phase intervals must increase");
-      }
-      finite(value.remap.plateauViewZ, "plateau value");
-      if (value.remap.lowerTransition[1] !== value.remap.plateau[0] || value.remap.plateau[1] !== value.remap.upperTransition[0]) fail("phase remap intervals must meet");
+    record(value, "frame mapping", ["count", "thresholds", "indices", "lightBasis"]);
+    integer(value.count, "frame count", 1);
+    const thresholds = array(value.thresholds, "phase thresholds");
+    if (thresholds.some((phase, i) => !Number.isFinite(phase) || phase < -1 || phase > 1 || i > 0 && phase <= thresholds[i-1])) fail("phase thresholds must increase within the light domain");
+    if (array(value.indices, "phase frames").length !== thresholds.length+1 || value.indices.some(frame => !Number.isSafeInteger(frame) || frame < 0 || frame >= value.count)) fail("phase frames must address the prepared bank");
+    if (!Array.isArray(value.lightBasis) || value.lightBasis.length !== 9 || !value.lightBasis.every(Number.isFinite)) fail("light basis must be a prepared rotation");
+    for (let row = 0; row < 3; row++) for (let other = 0; other < 3; other++) {
+      const product = [0,1,2].reduce((sum, i) => sum+value.lightBasis[row*3+i]*value.lightBasis[other*3+i], 0);
+      if (Math.abs(product-(row === other ? 1 : 0)) > 1e-8) fail("light basis must preserve directions");
     }
   }
   function matrix(values, label) { if (!Array.isArray(values) || values.length !== 16 || !values.every(Number.isFinite)) fail(`${label} must be a finite prepared matrix`); }
@@ -278,12 +237,12 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       record(selected, "selected material", ["track", "bank", "mode", "enabled", "rotationEnabled", "frameOverride", "frameOffset", "clearWhenHidden", "fixedMode", "modeLabel", "addressAttributes", "publishWhenHidden"]);
       const track = trackMap.get(selected.track);
       if (!track || !track.banks.some(bank => bank.id === selected.bank)) fail("undeclared selected material bank");
-      choice(selected.mode, new Set(["frames", "default-pose", "fixed"]), "selected material mode");
+      choice(selected.mode, new Set(["frames", "fixed"]), "selected material mode");
       for (const key of ["enabled", "rotationEnabled", "clearWhenHidden"]) if (typeof selected[key] !== "boolean") fail(`selected ${key} must be boolean`);
       if (selected.frameOverride !== null && (!Number.isSafeInteger(selected.frameOverride) || selected.frameOverride < 0 || selected.frameOverride >= track.frame.count)) fail("frame override is outside prepared addresses");
       if (selected.frameOffset !== undefined && (!Number.isSafeInteger(selected.frameOffset) || selected.frameOffset < 0 ||
-          selected.frameOffset > 0 && selected.frameOffset <= (track.frame.maximumFrame??track.frame.count-1) ||
-          selected.frameOffset+(track.frame.maximumFrame??track.frame.count-1)>=track.frame.count)) fail("frame offset is outside prepared addresses");
+          selected.frameOffset > 0 && selected.frameOffset <= Math.max(...track.frame.indices) ||
+          selected.frameOffset+Math.max(...track.frame.indices)>=track.frame.count)) fail("frame offset is outside prepared addresses");
       if(selected.publishWhenHidden!==undefined)choice(selected.publishWhenHidden,new Set(["always","static","never"]),"hidden address publication");
       string(selected.fixedMode, "fixed mode");
       if (selected.modeLabel !== undefined) string(selected.modeLabel, "material observation mode");
@@ -316,7 +275,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       if (!plan.camera.projection || plan.camera.projection.model !== "css-perspective-shared-with-sky") fail("silhouette fit requires the perspective camera");
     } else if (binding.kind === "view-property") {
       string(binding.property, "view property");
-      if (!binding.property.startsWith("--") ) fail("view property must be a custom property");
+      if (!binding.property.startsWith("--")) fail("view property must be a custom property");
       choice(binding.source, new Set(["billboard-opacity", "marker-opacity"]), "view property source");
       if (binding.precision !== null) { integer(binding.precision, "view property precision"); if (binding.precision > 12) fail("invalid view property precision"); }
     } else if (binding.kind === "view-attribute") {
@@ -336,44 +295,6 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     finite(animation.sourceMinimum, "animation minimum"); finite(animation.millisecondsPerDegree, "animation time mapping");
     if (!array(animation.keyframes, "keyframes").length) fail("prepared animation has no keyframes");
     for (const frame of animation.keyframes) { record(frame, "keyframe", ["offset", "transform"]); finite(frame.offset, "keyframe offset"); string(frame.transform, "keyframe transform"); }
-  }
-  record(plan.observations, "observations", ["constants", "materials", "counts", "publications", "attributes", "selection", "sums", "levelOfDetail"]);
-  for(const binding of array(plan.observations.levelOfDetail??[],"level-of-detail observations")) {
-    record(binding,"level-of-detail observation",["category","name","track"]);
-    choice(binding.category,new Set(["camera","material","sky"]),"observation category");string(binding.name,"observation name");
-    if(!trackMap.has(binding.track))fail("undeclared level-of-detail track");
-  }
-  for(const binding of array(plan.observations.attributes??[],"attribute observations")) {
-    record(binding,"attribute observation",["category","name","target","attribute","default"]);
-    choice(binding.category,new Set(["camera","material","sky"]),"observation category");string(binding.name,"observation name");node(binding.target);attribute(binding.attribute);
-    if(binding.default!==null&&typeof binding.default!=="string")fail("attribute observation default must be string or null");
-  }
-  for(const binding of array(plan.observations.selection??[],"selection observations")) {
-    record(binding,"selection observation",["category","name","key"]);
-    choice(binding.category,new Set(["camera","material","sky"]),"observation category");string(binding.name,"observation name");
-    if(binding.key!=="lensId"&&!settings.has(binding.key))fail("observation must name a declared selection");
-  }
-  for(const binding of array(plan.observations.sums??[],"summed observations")) {
-    record(binding,"summed observation",["category","name","tracks","field","includePresentation"]);
-    choice(binding.category,new Set(["camera","material","sky"]),"observation category");string(binding.name,"observation name");
-    choice(binding.field,new Set(["addressWrites","transformWrites"]),"summed field");
-    if(typeof binding.includePresentation!=="boolean"||binding.includePresentation&&binding.field!=="transformWrites")fail("invalid presentation sum");
-    unique(array(binding.tracks,"summed tracks"),"summed tracks");if(!binding.tracks.length||binding.tracks.some(id=>!trackMap.has(id)))fail("undeclared summed track");
-  }
-  for (const binding of array(plan.observations.publications ?? [], "publication observations")) {
-    record(binding, "publication observation", ["category", "name", "field"]);
-    choice(binding.category, new Set(["camera", "material", "sky"]), "observation category"); string(binding.name, "observation name");
-    choice(binding.field, new Set(["selectionPublications", "framePublications", "styleWrites", "transformWrites"]), "publication field");
-  }
-  for (const binding of array(plan.observations.materials, "material observations")) {
-    record(binding, "material observation", ["category", "name", "track", "field"]);
-    choice(binding.category, new Set(["camera", "material", "sky"]), "observation category"); string(binding.name, "observation name");
-    if (!trackMap.has(binding.track)) fail("undeclared observation track"); choice(binding.field, materialFields, "observation field");
-  }
-  for (const count of array(plan.observations.counts, "count observations")) {
-    record(count, "count observation", ["category", "name", "target", "kind", "includeRoot"]);
-    choice(count.category, new Set(["dom", "renderStats"]), "count category"); string(count.name, "count name"); node(count.target);
-    choice(count.kind, new Set(["nodes", "leaves"]), "count kind"); if (typeof count.includeRoot !== "boolean") fail("count root policy is required");
   }
   return plan;
 }

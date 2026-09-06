@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
+import { build } from "vite";
 import { createObjectRuntime } from "./object-runtime.mjs";
+import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
 import { createPreparedResidency } from "./prepared-residency.mjs";
 import { createPreparedPlayback } from "./prepared-playback.mjs";
 import { createSceneLifetime } from "./scene-lifetime.mjs";
@@ -15,7 +18,7 @@ class CSSAnimation {
   play() { this.playState = "running"; } pause() { this.playState = "paused"; }
   cancel() { this.playState = "idle"; this.cancels++; }
 }
-function harness({ definition = moonDefinition, failAtElement = null, stageId = definition.id } = {}, services = {}) {
+function harness({ definition = moonDefinition, failAtElement = null, stageId = definition.id, runtimeFactory = createObjectRuntime } = {}, services = {}) {
   const f = retainedPresentationFixture(definition, { failAtElement });
   const errors = [], jobs = [], events = [], native = new CSSAnimation(), created = [];
   f.document.readyState = "complete"; f.document.defaultView = {};
@@ -34,7 +37,7 @@ function harness({ definition = moonDefinition, failAtElement = null, stageId = 
     skySunViewDirection: definition.sun?.referenceViewDirection ?? [1, 0, 0], sunViewDirection: [1, 0, 0] };
   let runtime;
   try {
-    const mount = createObjectRuntime(definition, {
+    const mount = runtimeFactory(definition, {
       createLifetime() { lifetime = createSceneLifetime(); return lifetime; },
       createPlayback() { playback = createPreparedPlayback(); return playback; },
       createControls() { return { publish(state) { if (state.committed) events.push("controls"); }, setReady() { events.push("ready"); }, destroy() {} }; },
@@ -87,6 +90,27 @@ test("one mount owns the actual prepared tree, startup, celestial layers, readin
   assert.deepEqual(h.events.slice(-4).filter(value => value.startsWith("remove:")), ["remove:orbit", "remove:sun", "remove:sky", "remove:camera"]);
   assert.deepEqual(h.errors, []);
 });
+test("development diagnostics start with the mounted sky and expose its star controls", async t => {
+  const bundle = await build({ configFile: false, logLevel: "silent",
+    define: { "import.meta.env.DEV": "true" },
+    build: { write: false, minify: false,
+      lib: { entry: fileURLToPath(new URL("./object-runtime.mjs", import.meta.url)), formats: ["es"] } } });
+  const chunks = (Array.isArray(bundle) ? bundle : [bundle]).flatMap(output => output.output).filter(item => item.type === "chunk");
+  assert.equal(chunks.length, 1);
+  const { createObjectRuntime: developmentRuntime } = await import(`data:text/javascript;base64,${Buffer.from(chunks[0].code).toString("base64")}`);
+  const calls = [], sky = { starGroup: {}, setStarExposure(options) { calls.push(options); return options; }, destroy() {} };
+  const h = harness({ runtimeFactory: developmentRuntime }, { mountSky: () => sky }); t.after(h.restore);
+  await h.complete();
+  const diagnostics = h.document.defaultView.__moon;
+  assert.equal(diagnostics?.ready, true);
+  const exposure = { exposure: 2 };
+  assert.equal(diagnostics.starExposure(exposure), exposure);
+  assert.deepEqual(calls, [exposure]);
+  assert.equal(h.orbitArguments().cubicSky, sky);
+  assert.deepEqual(h.errors, []);
+  h.runtime.destroy();
+  assert.equal(h.document.defaultView.__moon, undefined);
+});
 test("destroy settles never-ending real startup and native rejection stays retired", async t => {
   const h = harness(); t.after(h.restore); await flush(); assert.ok(h.jobs.length > 0);
   h.runtime.destroy(); await h.runtime.ready;
@@ -111,9 +135,9 @@ test("partial actual tree construction registers root cleanup before failure", a
   assert.ok(h.events.includes("remove:camera")); assert.equal(h.stage.children.length, 0);
   assert.equal(h.resources().stats().images.entries.length, 0);
 });
-for (const name of ["createPresentation", "resolvePresentation", "reduceSelection"]) test(`a package cannot inject ${name} into a mount`, () => {
+for (const name of ["createPresentation", "resolvePresentation", "reduceSelection"]) test(`preparation rejects a package's executable ${name}`, () => {
   let invoked = false;
-  assert.throws(() => createObjectRuntime({ ...moonDefinition, [name]() { invoked = true; return Promise.resolve(); } }), /acyclic JSON|unsupported/);
+  assert.throws(() => requireObjectRuntimeDefinition({ ...moonDefinition, [name]() { invoked = true; return Promise.resolve(); } }), /acyclic JSON|unsupported/);
   assert.equal(invoked, false);
 });
 test("late native animation registration inherits permission and retires after disposal", async t => {

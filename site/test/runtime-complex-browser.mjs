@@ -15,7 +15,7 @@ assert.ok(["all", "saturn", "neptune"].includes(selected));
 const output = resolve(process.argv[4] ?? `output/playwright/runtime-complex-${Date.now()}`);
 await mkdir(output, { recursive: true });
 const report = { capturedAt: new Date().toISOString(), baseUrl, source: {}, cases: [] };
-for (const file of ["site/scene-router.mjs", "src/platform/latest-selection.mjs",
+for (const file of ["site/scene-router.mjs", "src/platform/object-selection-runtime.mjs",
   "src/planets/saturn/runtime/client.mjs", "src/planets/neptune/runtime/client.mjs",
   "src/planets/saturn/runtime/definition.mjs", "src/planets/saturn/runtime/preparedPresentation.mjs",
   "src/platform/prepared-presentation.mjs", "src/platform/prepared-material.mjs",
@@ -141,6 +141,7 @@ async function snapshot(page, id) {
       features: runtime?.features.state() ?? null,
       camera: runtime?.camera.state() ?? null,
       cameraStats: runtime?.camera.stats() ?? null,
+      materials: runtime?.material.state() ?? null,
       stable: runtime?.assertStableDomIdentity() ?? null,
       exterior: material("exterior"), interior: material("interior"),
       classes: stage.className, view: stage.dataset.view ?? null,
@@ -180,7 +181,7 @@ async function neptuneRace(page, record) {
   await settled(page, "neptune", "near-infrared");
   const winner = await snapshot(page, "neptune");
   const plan = PREPARED_NEPTUNE_LENSES.controls.find(({ id }) => id === "near-infrared");
-  assertAddress(winner.exterior, plan.orbitMaterial.presentations[winner.cameraStats.materialFrame]);
+  assertAddress(winner.exterior, plan.orbitMaterial.presentations[winner.materials.lighting.frame]);
   await page.evaluate(() => window.__runtimeComplexProbe.release());
   await page.evaluate(() => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))));
   const after = await snapshot(page, "neptune");

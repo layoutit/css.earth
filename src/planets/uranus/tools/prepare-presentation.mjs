@@ -1,5 +1,5 @@
 import { pathToFileURL } from "node:url";
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../../site/runtime-policy.mjs";
+import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../platform/prepared-object-assets.mjs";
 import { preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
 import { prepareCssomDeclarationReads } from "../../../../tools/prepared-cssom.mjs";
@@ -80,7 +80,7 @@ export async function prepareUranusPresentation() {
   const material = mesh("uranus-fixed-material", plan.fixedMaterialPlane.transform), counter = mesh("uranus-fixed-material-counter");
   const leaf = texture("uranus-fixed-material-leaf", plan.fixedMaterialPlane.leaf, normal.default);
   b.append(scene, counter); b.append(counter, material); b.append(material, leaf);
-  const { tree, index } = b.finish({ camera, scene, registrations: [{ bodySystem: system, lightingOverlays: [counter] }] });
+  const { tree, index } = b.finish({ camera, scene });
   const defaultFrame = Math.round(cameraPlan.defaultControlPitchDegrees / cameraPlan.maximumControlPitchDegrees * (lighting.frameCount - 1));
   const banks = lenses.controls.map(({ id }) => ({ id, frames: lighting.presentations.map(p => ({
     resource: `row:${id}:${p.rowIndex}`, frame: p.frameIndex, row: p.rowIndex, backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize })),
@@ -93,9 +93,8 @@ export async function prepareUranusPresentation() {
   const initialRows = [...new Set([-1, 0, 1].map(offset => Math.max(0, Math.min(lighting.rowCount - 1, initialRow + offset))))];
   const track = { id: "lighting", target: index(leaf), frame: { source: "reference-sun-z", minimum: 0, maximum: 2,
     count: lighting.frameCount, baseFrame: defaultFrame, remap: null },
-    defaultPose: [{ source: "control-pitch", scale: 1, offset: 0, value: cameraPlan.defaultControlPitchDegrees, epsilon: .01 }], banks,
-    demand: { mode: "neighborhood", prewarm: "none", capacity: 6, framesPerRow: lighting.rowColumns,
-      defaultFrame, initialRows, holdHiddenNeighborhood: true, neighborhoodOffsets: [-1, 0, 1], fallback: "hold" },
+     banks,
+    demand: { capacity: 6, defaultFrame },
     rotation: { kind: "planar", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false,
       width: lighting.frameSize, height: lighting.frameSize, polePolicy: "azimuth" }, frameAttribute: null, modeAttribute: null, quoted: false };
   const variants = lenses.controls.flatMap(({ id }) => [false, true].flatMap(shadows => [false, true].map(rings => ({
@@ -112,13 +111,7 @@ export async function prepareUranusPresentation() {
     assets: { entries, pools: [preparedResourcePool("mounted", entries), preparedResourcePool("rows", entries,
       { retention: "selection", capacity: 6, concurrency: 6 })], startup: [...celestial.map(e => e.key), ...staticKeys(lenses.defaultLens),
         ...initialRows.map(row => `row:${lenses.defaultLens}:${row}`)] }, tree, variants, materials: [track],
-    viewBindings: [{ kind: "counter-rotation", target: index(counter), systemTransform: null }], animations: [],
-    observations: { constants: { dom: { mode: "semantic-transform-groups-with-bare-leaves", retainedCameraRootCount: 1,
-      retainedMaterialCompositeRootCount: 0, retainedSceneRootCount: 1, retainedCubicSkyFaceCount: 6 } }, counts: [],
-      materials: [...["material", "camera"].map(category => ({ category, name: "activeMaterialRow", track: "lighting", field: "row" })),
-        { category: "camera", name: "materialAddressWrites", track: "lighting", field: "addressWrites" }],
-      publications: [{ category: "camera", name: "transformWrites", field: "transformWrites" }],
-    } };
+    viewBindings: [{ kind: "counter-rotation", target: index(counter), systemTransform: null }], animations: [] };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), await prepareUranusPresentation(), objectControls);

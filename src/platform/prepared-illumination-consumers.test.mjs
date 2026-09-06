@@ -8,13 +8,13 @@ import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coor
 test("Earth starts directional atmosphere decoding without a stability wait", async () => {
   const f = await preparedSelectionFixture(earth);
   try {
-    f.selection.setView({ ...f.view, skySunViewDirection: [1, 0, 0], revision: 2 });
+    f.selection.setView({ ...f.view, skySunViewDirection: [1, 0, 0], sunViewDirection: viewSunDirectionToPreparedLightDirection([1, 0, 0]), revision: 2 });
     await f.flush();
     // Do not advance the fixture clock: short-lived phase rows must already be
     // decoding while the camera is moving, not only once its direction settles.
     assert.ok(f.jobs.some(job => !job.done && job.url.includes("earth-atmosphere-row-16")));
     await f.settle();
-    assert.equal(f.presentation.observe().material.atmosphere, "64");
+    assert.equal(f.presentation.observe().materials.atmosphere.frame, 64);
     assert.deepEqual(f.errors, []);
     assert.deepEqual(f.materialErrors, []);
   } finally { f.restore(); }
@@ -35,9 +35,9 @@ for (const definition of [mars, earth]) {
         for (const value of [true, false]) {
           const action = f.selection.dispatch({ kind: "toggle", name: "shadows", value });
           await f.settle(); assert.equal(await action, true);
-          const material = f.presentation.observe().material;
-          const phase = definition === mars ? material.materialFrame : Number(material.atmosphere);
-          const roll = definition === mars ? material.materialLightRollDegrees : material.atmosphereLightRollDegrees;
+          const material = f.presentation.observe().materials;
+          const phase = definition === mars ? material.lighting.calculatedFrame : material.atmosphere.frame;
+          const roll = definition === mars ? material.lighting.lightRollDegrees : material.atmosphere.lightRollDegrees;
           phases.add(phase); rolls.add(roll); states.push({ phase, roll });
           assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
           for (const pool of f.residency.stats().pools.filter(pool => ["lighting", "atmosphere"].includes(pool.id))) {

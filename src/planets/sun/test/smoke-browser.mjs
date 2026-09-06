@@ -52,7 +52,6 @@ try {
     bodyOpacity: getComputedStyle(document.querySelector(".sun-body")).opacity,
     materialCompositeCount: document.querySelectorAll(".sun-material-composite").length,
     limbCount: document.querySelectorAll(".sun-limb-layer").length,
-    sunCubemapBakeCount: window.__sun.dom.retainedSunCubemapBakeCount,
   }));
   assert.deepEqual(baseline, {
     title: "Sun - Powered by PolyCSS",
@@ -69,7 +68,6 @@ try {
     bodyOpacity: "1",
     materialCompositeCount: 0,
     limbCount: 1,
-    sunCubemapBakeCount: 0,
   });
 
   const cameraContract = await page.evaluate(() => ({

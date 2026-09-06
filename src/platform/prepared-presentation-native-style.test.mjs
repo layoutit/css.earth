@@ -3,7 +3,7 @@ import test from 'node:test';
 import { OBJECTS } from '../../site/objects.mjs';
 import { retainedPresentationFixture } from './test/object-runtime-package.mjs';
 import { mountPreparedPresentation } from './prepared-presentation.mjs';
-import { requireObjectRuntimeDefinition } from './object-runtime-contract.mjs';
+import { requireObjectRuntimeDefinition } from '../../tools/object-runtime-contract.mjs';
 
 for (const object of OBJECTS) {
   const { runtimeDefinition } = await import(new URL(`../planets/${object.id}/runtime/definition.mjs`, import.meta.url));

@@ -1,12 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import {
-  measureRetainedPlanetTrackball,
-  measureRetainedPlanetFlyToDisc,
-  retainedPlanetUniformScale,
-  createUnboundedMatrixDragControls,
-} from "./cubic-sky-runtime.mjs";
+import { measureRetainedPlanetTrackball, measureRetainedPlanetFlyToDisc, retainedPlanetUniformScale } from "./camera-layout.mjs";
+import { createUnboundedMatrixDragControls } from "./camera-input.mjs";
 import {
   createGoogleEarthDragHistory,
   recordGoogleEarthDragSample,
