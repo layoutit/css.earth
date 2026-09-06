@@ -11,6 +11,7 @@ import { prepareBandSurfacePresentation, prepareEmissiveSurfacePresentation } fr
 import { scientificFalseColor, prepareFitsMap, readFitsPrimary } from '../../../../tools/objects/static-surface/fits-map.mjs';
 import { readPhysicalFacts } from '../../../../tools/objects/static-surface/physical.mjs';
 import { contextualizeStaticSurfaceScene } from '../../../../tools/objects/static-surface/index.mjs';
+import { prepareWorldNavigationDefinition } from '../../../../tools/objects/dist/prepare-world-navigation.js';
 
 const read = async path => JSON.parse(await readFile(resolve(projectRoot, path), 'utf8'));
 for (const id of ['moon', 'pluto', 'sun']) {
@@ -32,7 +33,9 @@ for (const id of ['moon', 'pluto', 'sun']) {
     const presentation = profile.kind === 'disc-poles'
       ? await prepareBandSurfacePresentation({ namespace: id, plan: scene, lenses, sky, sun })
       : await prepareEmissiveSurfacePresentation({ namespace: id, plan: scene, lenses });
-    assert.deepEqual({ ...presentation, schema: expected.schema, id, controls: expected.controls }, expected);
+    const finalized = await prepareWorldNavigationDefinition({ objectDirectory: resolve(projectRoot, 'src/planets', id),
+      definition: { ...presentation, schema: expected.schema, id, controls: expected.controls }, projectRoot });
+    assert.deepEqual(finalized.definition, expected);
     const physical = await readPhysicalFacts({ sourceDirectory: resolve(projectRoot, 'src/planets', id, 'source'), config: await read(`src/planets/${id}/source/preparation/physical.json`) });
     assert.equal(physical.meanRadiusKm, descriptor.recipe.shape.radiusKm);
   });

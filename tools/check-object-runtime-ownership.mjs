@@ -90,6 +90,16 @@ function staticShellNavigationContent(ast, objectIds) {
     declarations.every(variable => variable.id?.type === 'Identifier' && staticPreparedValue(frozenStaticObject(variable.init) ?? variable.init));
 }
 
+function preparedLightingProjectionRecord(node, file) {
+  // The physical camera publishes this existing typed lighting field. It is
+  // a forwarded projection value, not an object-id keyed execution table.
+  if (file !== 'src/renderers/css/navigation/perspective-dolly.ts' || node.type !== 'ObjectExpression' || node.properties.length !== 1) return false;
+  const field = node.properties[0];
+  return field.type === 'Property' && !field.computed && !field.method && field.kind === 'init' &&
+    (field.key?.name ?? field.key?.value) === 'sun' && field.value?.type === 'MemberExpression' && !field.value.computed &&
+    field.value.object?.type === 'Identifier' && field.value.object.name === 'projection' && field.value.property?.name === 'sun';
+}
+
 export function inspectObjectRuntimeModule(source, file, { shared = false, shellContent = false,
   objectIds = OBJECTS.map(o => o.id), registryImportOffsets = new Set(), registryDescriptors = new Set() } = {}) {
   if ((!shared || shellContent) && preparedData(source)) return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
@@ -166,7 +176,7 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
           node.type === "ArrayExpression" && node.elements.length > 0 && node.elements.every(hasId) ||
           node.type === "MemberExpression" && node.computed && hasId(node.property) ||
           node.type === "CallExpression" && ["includes", "has", "get"].includes(propertyName(node.callee)) && hasId(node.callee.object) ||
-          !markerInventory && !staticShellContent && node.type === "ObjectExpression" && node.properties.length > 0 &&
+          !markerInventory && !staticShellContent && !preparedLightingProjectionRecord(node, file) && node.type === "ObjectExpression" && node.properties.length > 0 &&
             node.properties.every(value => ids.has(value.key?.name ?? value.key?.value))) {
         note(node, "Shared execution contains object-ID dispatch data");
       }
@@ -405,6 +415,28 @@ function requireContextFrame(value, objectId) {
   if (!context.volume || !/^[a-z][a-z0-9-]*$/.test(context.volume.objectId ?? '')) fail('volume identity is not pinned');
   if (!/^[a-z][a-z0-9-]*$/.test(stars.objectId ?? '') || !(stars.fadeStartDistanceM > 0) ||
     !(stars.fullDistanceM > stars.fadeStartDistanceM) || !(context.volume.fadeStartDistanceM > stars.fullDistanceM)) fail('star field identity or handoff range is not pinned');
+  if (!Array.isArray(context.bodies) || !context.bodies.length) fail('body inventory is missing');
+  const points = new Map([[focus.id, focus]]), vector = value => Array.isArray(value) && value.length === 3 && value.every(Number.isFinite);
+  for (const body of context.bodies) {
+    if (!body || !/^[a-z][a-z0-9-]*$/.test(body.id ?? '') || points.has(body.id) ||
+      !vector(body.positionM) || !Number.isFinite(body.radiusM) || !(body.radiusM > 0)) fail('body inventory identity or physical point is invalid');
+    points.set(body.id, body);
+  }
+  for (const body of context.bodies) {
+    if (body.orbit === undefined) continue;
+    const orbit = body.orbit, parent = points.get(orbit?.centerBodyId);
+    if (!parent || parent.id === body.id || !vector(orbit.centerPositionM) ||
+      !orbit.centerPositionM.every((value, axis) => value === parent.positionM[axis]) ||
+      !Array.isArray(orbit.verticesM) || orbit.verticesM.length < 8 || !orbit.verticesM.every(vector) ||
+      !orbit.verticesM[0].every((value, axis) => value === body.positionM[axis]) ||
+      !Array.isArray(orbit.trail) || orbit.trail.length !== orbit.verticesM.length ||
+      orbit.trail.some(weight => !Number.isFinite(weight) || weight < 0 || weight > 1)) fail('body orbit parent or prepared vertices are invalid');
+    const ancestors = new Set([body.id]);
+    for (let id = orbit.centerBodyId; id !== undefined && id !== focus.id; id = points.get(id).orbit?.centerBodyId) {
+      if (ancestors.has(id) || !points.has(id)) fail('body orbit parent hierarchy is invalid');
+      ancestors.add(id);
+    }
+  }
   return { frame, stars };
 }
 async function requireContextPointField(root, context, source) {

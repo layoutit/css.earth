@@ -71,7 +71,8 @@ test("publishes prepared Sun content, lenses, and scene", async () => {
   assert.equal(context.focus.id, "sun");
   assert.deepEqual(context.focus.positionM, context.frame.originM);
   assert.equal(context.focus.radiusM, context.frame.bodyRadiusM);
-  assert.equal(context.bodies.length, 8);
+  const sourceContext = JSON.parse(await readFile(new URL("../../../../src/planets/sun/source/navigation/universe.json", import.meta.url), "utf8"));
+  assert.deepEqual(context.bodies.map(body => body.id), sourceContext.bodies.map(body => body.id));
   assert.equal(context.camera.presentation.projection.model, "css-perspective-shared-with-sky");
   const descriptor = JSON.parse(await readFile(new URL("../../../../src/planets/sun/object.json", import.meta.url), "utf8"));
   assert.deepEqual(descriptor.properties.worldFrame, context.frame);

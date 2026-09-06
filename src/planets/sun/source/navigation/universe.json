@@ -61,14 +61,44 @@
       "color": "#5b82a7"
     },
     {
+      "id": "moon",
+      "name": "Moon",
+      "color": "#a9a6a0"
+    },
+    {
       "id": "mars",
       "name": "Mars",
       "color": "#a95e47"
     },
     {
+      "id": "ceres",
+      "name": "Ceres",
+      "color": "#9c9991"
+    },
+    {
       "id": "jupiter",
       "name": "Jupiter",
       "color": "#b48b67"
+    },
+    {
+      "id": "io",
+      "name": "Io",
+      "color": "#ddc584"
+    },
+    {
+      "id": "europa",
+      "name": "Europa",
+      "color": "#c6b49c"
+    },
+    {
+      "id": "ganymede",
+      "name": "Ganymede",
+      "color": "#a79b89"
+    },
+    {
+      "id": "callisto",
+      "name": "Callisto",
+      "color": "#918a7c"
     },
     {
       "id": "saturn",
@@ -84,6 +114,11 @@
       "id": "neptune",
       "name": "Neptune",
       "color": "#5279bd"
+    },
+    {
+      "id": "pluto",
+      "name": "Pluto",
+      "color": "#c3b299"
     }
   ],
   "orbit": {

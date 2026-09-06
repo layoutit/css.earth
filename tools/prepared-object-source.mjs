@@ -5,6 +5,7 @@ import { parseAst } from 'vite';
 import { requirePreparedControlSource, requirePreparedDefinitionSource, readPreparedJsonExports, readPreparedPresentationModule } from './check-prepared-presentation.mjs';
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../src/platform/prepared-schema.mjs';
 import { requireObjectRuntimeDefinition } from './object-runtime-contract.mjs';
+import { requireAuthoredWorldFrame } from './authored-world-frame.mjs';
 
 export function requireDescriptorAdapterSource(text, exported) {
   const ast = parseAst(text), bindings = new Map(), functions = new Map();
@@ -172,7 +173,7 @@ async function readAuthoredDefinition({ objectId, descriptor, root, source, clos
   const scene = JSON.parse(await source(scenePath));
   closure.add(runtimePath); closure.add(scenePath);
   if (runtime.id !== objectId || runtime.schema !== PREPARED_OBJECT_RUNTIME_SCHEMA) throw new TypeError('Authored runtime identity is invalid.');
-  if (!isDeepStrictEqual(scene.worldFrame, descriptor.properties.worldFrame)) throw new TypeError('Authored physical frame differs from the descriptor world frame.');
+  await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText: source, closure });
   requireObjectRuntimeDefinition(runtime, { objectId });
   return runtime;
 }

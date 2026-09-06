@@ -430,41 +430,23 @@ async function proveDesktop(browser, planet, profile) {
     }
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
-        const directProjectiveLeaves = [...stage.querySelectorAll("s")]
-          .filter((leaf) => {
-            // A leaf whose transform is not a matrix (a prepared calc() on a
-            // custom property, as retained sky points use) is no texture
-            // frame; only parsed matrices can carry a projective row.
-            let matrix;
-            try { matrix = new DOMMatrix(leaf.style.transform || "none"); } catch { return false; }
-            return !leaf.querySelector(":scope > .polycss-projective-texture") &&
-              (Math.abs(matrix.m14) > 1e-10 || Math.abs(matrix.m24) > 1e-10);
-          });
-        const textures = [...stage.querySelectorAll(
-          ".polycss-projective-texture",
-        )];
+        const leaves = [...stage.querySelectorAll(".polycss-scene s")]
+          .filter(leaf => getComputedStyle(leaf).backgroundImage !== "none");
         return {
-          directProjectiveLeafCount: directProjectiveLeaves.length,
-          flattenedTextureCount: textures.length,
-          allTexturesFlat: textures.every((texture) =>
-            texture.style.transformStyle === "flat"),
-          allFramesAffine: textures.every((texture) => {
-            const matrix = new DOMMatrix(
-              texture.parentElement.style.transform || "none",
-            );
-            return Math.abs(matrix.m14) <= 1e-10 &&
-              Math.abs(matrix.m24) <= 1e-10;
+          texturedLeafCount: leaves.length,
+          nestedProjectiveTextureCount: stage.querySelectorAll(".polycss-projective-texture").length,
+          finiteTextureBounds: leaves.every(leaf => {
+            const bounds = leaf.getBoundingClientRect();
+            return [bounds.x, bounds.y, bounds.width, bounds.height].every(Number.isFinite);
           }),
         };
       });
-    assert.equal(projectiveTextureReport.directProjectiveLeafCount, 0,
-      `${planet.id}: no texture leaf may retain the exploding projective frame`);
-    assert.ok(projectiveTextureReport.flattenedTextureCount > 0,
-      `${planet.id}: prepared projective textures must be mounted`);
-    assert.equal(projectiveTextureReport.allTexturesFlat, true,
-      `${planet.id}: prepared projective textures must rasterize flat`);
-    assert.equal(projectiveTextureReport.allFramesAffine, true,
-      `${planet.id}: prepared texture frames must remain affine`);
+    assert.ok(projectiveTextureReport.texturedLeafCount > 0,
+      `${planet.id}: actual prepared surface pixels must be mounted`);
+    assert.equal(projectiveTextureReport.nestedProjectiveTextureCount, 0,
+      `${planet.id}: surface pixels must use a single prepared projection plane`);
+    assert.equal(projectiveTextureReport.finiteTextureBounds, true,
+      `${planet.id}: prepared texture bounds must remain finite`);
     const baseline = await sceneState(page, profile);
     assertSceneStructure(baseline, planet.id);
     const retainedReport = await profile.retainedReport(page);

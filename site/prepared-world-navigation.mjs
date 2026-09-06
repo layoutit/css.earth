@@ -10,6 +10,17 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
     return Boolean(a && b && a.referenceFrame === b.referenceFrame && a.epochJdTt === b.epochJdTt);
   };
   return Object.freeze({ supports,
+    async focus({ objectId, mount, signal, reducedMotion = false }) {
+      const owner = mount?.navigation, frame = frames.get(objectId);
+      if (!owner || !frame) throw new TypeError('Object focus requires its mounted prepared camera.');
+      const from = owner.capture(), optics = owner.optics();
+      const target = createWorldSelectionTarget(from, frame, optics);
+      const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM: frame.originM });
+      await animateWorldFlight({ owner, from, flight,
+        anchors: [{ positionM: frame.originM, radiusM: frame.bodyRadiusM }], signal, reducedMotion,
+        windowTarget, documentTarget, onPaint(world) { lastCamera = world; } });
+      lastCamera = owner.capture(); lastOptics = owner.optics();
+    },
     async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url }) {
       if (!supports(fromId, toId) || !toFactory.navigation) throw new TypeError('Objects do not share a prepared world frame.');
       const source = fromMount?.navigation;

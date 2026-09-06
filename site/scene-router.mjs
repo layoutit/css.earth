@@ -196,6 +196,7 @@ export function createSceneRouter({
     if (destroyed || !navigation || !navigation.supports(objectId, id)) return Promise.resolve(false);
     const object = objects.find(object => object.id === id);
     if (!object) return Promise.resolve(false);
+    const cancelledFlight = pending !== null;
     if (pending) {
       const previous = pending;
       pending = null; previous.controller.abort(); previous.lifetime.destroy();
@@ -208,7 +209,7 @@ export function createSceneRouter({
     if (active) active.viewUrl = null;
     const url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
     if (!options.url) { url.pathname = object.route; url.searchParams.delete('v'); }
-    const request = { id, controller: new AbortController(), lifetime: createSceneLifetime(),
+    const request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
       url: url.href, options: { ...options, history: mode } };
     pending = request;
     mountTask = transition(request, object);
@@ -219,10 +220,16 @@ export function createSceneRouter({
     const source = active;
     try {
       if (source && objectId === object.id && sceneState === 'ready') {
-        const restore = request.options.history === 'pop' || Boolean(request.options.url);
+        const restore = request.options.history === 'pop' ||
+          (Boolean(request.options.url) && new URL(request.url).searchParams.has('v'));
         if (restore) {
           if (request.options.history === 'pop' || request.url !== windowTarget.location.href) historyOwner?.commit(request.url, request.options);
           source.url = request.url;
+        } else if (!request.cancelledFlight && navigation.focus) {
+          syncPlayback();
+          const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
+            mount: source.mount, signal: request.controller.signal, reducedMotion: reducedMotionActive }));
+          if (focused.cancelled || pending !== request) return false;
         }
         await bindSessionView(source, { restore });
         if (pending !== request) return false;

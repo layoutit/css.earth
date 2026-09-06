@@ -7,6 +7,7 @@ import { parseAst } from "vite";
 import { OBJECTS } from "../site/objects.mjs";
 import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mjs";
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
+import { requireAuthoredWorldFrame } from './authored-world-frame.mjs';
 
 export function readPreparedJsonModule(source, expectedExport) {
   const match = source.match(/^\s*(?:\/\/[^\n]*\n\s*)*export const ([A-Z][A-Z0-9_]*)\s*=\s*([\s\S]*);\s*$/);
@@ -142,7 +143,7 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }) {
   const runtimePath = resolve(preparedDirectory, 'runtime.json');
   const runtime = JSON.parse(await readText(runtimePath)), scene = JSON.parse(await readText(resolve(preparedDirectory, 'scene.json')));
   if (payload.id !== objectId || !isDeepStrictEqual(payload.data, runtime)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
-  if (!isDeepStrictEqual(scene.worldFrame, descriptor.properties.worldFrame)) throw new TypeError('Authored physical frame differs from the descriptor world frame.');
+  await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText });
   requireObjectRuntimeDefinition(runtime, { objectId });
   return { runtime, payloadPath, runtimePath };
 }

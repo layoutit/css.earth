@@ -21,8 +21,13 @@ test("Mars retains a visible fallback through a row miss, recoverable decode fai
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     assert.equal(f.residency.stats().pools.find(pool => pool.id === "lighting").nativeSlots, 3);
+    // The world-bound reference Sun is independent of the historical standalone
+    // default frame; select its phase from the actual prepared bank's domain.
+    const referencePhase = Math.round((f.view.sunViewDirection[2] - PREPARED_MARS_LIGHTING.minimumLightViewZ) /
+      (PREPARED_MARS_LIGHTING.maximumLightViewZ - PREPARED_MARS_LIGHTING.minimumLightViewZ) *
+      (PREPARED_MARS_LIGHTING.frameCount - 1));
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame,
-      PREPARED_MARS_LIGHTING.shadowlessFrameOffset + PREPARED_MARS_LIGHTING.defaultFrame);
+      PREPARED_MARS_LIGHTING.shadowlessFrameOffset + referencePhase);
     const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); assert.equal(await request, true);
     const previous = f.presentation.observe().materials.lighting.appliedFrame;
     const view = { ...f.view, sunViewDirection: viewSunDirectionToPreparedLightDirection([0, 0, 1]), revision: 2 };

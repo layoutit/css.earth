@@ -90,7 +90,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     });
     const destinations = definition.destinations && capabilities.createDestinations ? capabilities.createDestinations({ plan: definition.destinations,
       ready, lifetime, selectLens: id => getSelection().dispatch({ kind: "lens", id }),
-      navigate: camera => { stopMotion(); alignMotionFrame(); return getOrbit().flyToState(camera); },
+      navigate: camera => { stopMotion(); alignMotionFrame(); return getOrbit().flyToState(camera, { surfaceTarget: true }); },
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: getOrbit().initialResponsiveZoom() }),
     }) : null;
@@ -191,7 +191,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       maximumZoom = navigation.maximumZoom;
       if (navigation.camera) { stopMotion(); alignMotionFrame(); }
       orbit.setState({ zoom: Math.min(orbit.state().zoom, maximumZoom) });
-      if (navigation.camera) orbit.flyToState(navigation.camera);
+      if (navigation.camera) orbit.flyToState(navigation.camera, { surfaceTarget: true });
     }
     function fatal(error: unknown) {
       if (lifetime.disposed) return;
