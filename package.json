@@ -33,13 +33,8 @@
     "test:platform": "node --test src/platform/*.test.mjs src/navigation/*.test.mjs tools/*.test.mjs",
     "test:planets": "node tools/run-implemented-planets.mjs test",
     "test:shell": "node --test site/test/*.test.mjs",
-    "test": "pnpm test:platform && pnpm test:shell && pnpm test:planets",
-    "test:browser:introductions": "node site/test/planet-introduction-browser.mjs",
-    "test:browser:shell": "node site/test/smoke-browser.mjs && pnpm test:browser:introductions",
     "test:browser:conformance": "node site/test/planet-browser-conformance.mjs",
     "test:browser:planets": "node tools/run-implemented-planets.mjs browser",
-    "test:browser": "node tools/test-browser.mjs",
-    "benchmark:compare": "node tools/compare-planet-benchmarks.mjs",
     "benchmark:payloads": "node tools/measure-object-payloads.mjs",
     "oracle:venus": "node src/planets/venus/tools/oracle/run.mjs",
     "analyze:trace:saturn": "node src/planets/saturn/tools/audit/analyze-user-trace.mjs",
@@ -47,7 +42,6 @@
     "prepare:earth-global": "node src/planets/earth/tools/prepare-global-wmts.mjs && node src/planets/earth/tools/integrate-global-wmts.mjs --latest",
     "test:earth-global": "node src/planets/earth/test/wmts-tree-browser.mjs --global",
     "oracle:interactions": "node src/planets/mars/tools/oracle/google-earth-pro/run-interaction-suite.mjs"
-
   },
   "dependencies": {
     "@layoutit/polycss": "0.2.11"

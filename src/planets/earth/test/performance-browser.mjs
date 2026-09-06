@@ -102,6 +102,7 @@ try {
       ),
       resourceCount: resources.length,
       cameraStats: window.__earth.camera.stats(),
+      materials: window.__earth.material.state(),
       materialCaches: Object.fromEntries(window.__earth.runtime.resources().pools
         .filter(pool => ["lighting", "atmosphere"].includes(pool.id)).map(pool => [pool.id, pool])),
       selection: window.__earth.runtime.selection(),
@@ -212,8 +213,8 @@ try {
   assert.equal(report.cameraStats.runtimeGeometryPreparation, false);
   assert.ok(report.cameraStats.publications >= 100,
     JSON.stringify(report.cameraStats));
-  assert.ok(report.cameraStats.materialAddressWrites > 0,
-    JSON.stringify(report.cameraStats));
+  assert.ok(report.materials.lighting.addressWrites + report.materials.atmosphere.addressWrites > 0,
+    JSON.stringify(report.materials));
   for (const cache of Object.values(report.materialCaches)) {
     assert.equal(cache.capacity, 3);
     assert.ok(cache.nativeSlots <= 3, JSON.stringify(cache));

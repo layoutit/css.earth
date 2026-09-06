@@ -4,10 +4,8 @@ import { readFileSync } from "node:fs";
 import { runtimeDefinition as definition } from "../planets/mars/runtime/definition.mjs";
 import { initialObjectSelection } from "./object-runtime-contract.mjs";
 import { resolvePreparedPresentation, selectedPreparedVariant } from "./prepared-presentation.mjs";
-import { preparedMaterialAddress, preparedMaterialState } from "./prepared-material.mjs";
+import { preparedMaterialAddress } from "./prepared-material.mjs";
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.mjs";
-import { preparedRowPresentation } from "./prepared-row-presentation.mjs";
-import { PREPARED_MARS_LIGHTING } from "../planets/mars/runtime/preparedLighting.mjs";
 
 const track = definition.materials[0];
 const initial = initialObjectSelection(definition.controls);
@@ -37,21 +35,6 @@ test("current-row demand follows every atmosphere phase in both ground modes wit
     assert.deepEqual(shadowless.required, [`lighting:${frame + 256}`]);
     const plan = resolvePreparedPresentation(definition, { selection: { ...initial, shadows: true }, view: view(frame) });
     assert.deepEqual(plan.required, ["surface:normal", "poles:normal", `lighting:${frame}`]);
-  }
-});
-
-test("normalized row fallback matches the preserved receipt-order lookup for every real Mars frame", () => {
-  const original = PREPARED_MARS_LIGHTING.banks[2];
-  for (const rows of [[], [2, 6], [6, 2], [251, 250, 252]]) {
-    const keys = rows.map(row => `lighting:${row}`), resources = { has: key => keys.includes(key), readyKeys: () => keys, url: key => key };
-    for (let frame = 0; frame < 256; frame++) {
-      const state = preparedMaterialState(track, selected(true), view(frame), definition.camera);
-      const actual = preparedMaterialAddress(track, state, resources);
-      const expected = preparedRowPresentation(original, frame, resources, "lighting:");
-      assert.equal(actual?.frame, expected?.frameIndex); assert.equal(actual?.row, expected?.rowIndex);
-      assert.equal(actual?.backgroundPosition, expected?.backgroundPosition);
-      assert.equal(actual?.backgroundSize, expected?.backgroundSize);
-    }
   }
 });
 

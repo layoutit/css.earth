@@ -28,19 +28,15 @@ export function materialOrbitFixture(id) {
     },
     createCubicSkyCameraOrientation: () => ({ scene: () => identity,
       skybox: () => ({ matrix: identity, sunViewDirection: [0, 0, 1] }),
-      counterRotation: () => identity, billboardCounterRotation: () => identity,
+      counterRotation: () => identity,
       reset() {}, rotate() {}, snapshot: () => ({}) }) });
   const f = { ...shared, stage, errors: [], writes: 0, fail: false };
   const publish = () => { f.writes++; if (f.fail) throw new Error('material publication failed'); };
   const mount = createObjectRuntime(definition, {
     createSelection(options) {
-    const { presentation } = options, host = stage;
-    const checked = new Set();
-    for (const layer of presentation.bodyLayers) for (const overlay of layer.lightingOverlays) {
-      for (const node of [overlay, ...overlay.querySelectorAll('*')]) checked.add(node);
-      for (let parent = overlay.parentNode; parent && parent !== host && parent !== presentation.sceneElement && parent !== presentation.cameraElement; parent = parent.parentNode) checked.add(parent);
-    }
-    for (const node of checked) {
+    const { presentation } = options;
+    for (const node of stage.querySelectorAll('*').filter(node =>
+      node !== presentation.cameraElement && node !== presentation.sceneElement)) {
       const original = node.style;
       node.style = new Proxy(original, { set(target, key, value) { publish(); target[key] = value; return true; },
         get(target, key) {

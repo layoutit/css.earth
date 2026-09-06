@@ -12,9 +12,9 @@ export function presentationFixture(definition) {
       { parent: 0, tag: "div", className: "polycss-scene", style: "", properties: [], attributes: {} },
       { parent: 1, tag: "div", className: "polycss-mesh", style: "", properties: [], attributes: {} },
       { parent: 1, tag: "s", className: "", style: "", properties: [], attributes: {} },
-    ], registrations: [{ bodySystem: 2, lightingOverlays: [3] }], stageClasses: [] },
+    ],  stageClasses: [] },
     variants: controls.lenses.controls.map(lens => ({ when: { lensId: lens.id }, required: [], writes: [], materials: [] })),
-    materials: [], viewBindings: [], animations: [], observations: { constants: {}, materials: [], counts: [] } };
+    materials: [], viewBindings: [], animations: [] };
 }
 const { runtimeDefinition: moon } = await import("../planets/moon/runtime/definition.mjs");
 const fixture = () => structuredClone(presentationFixture(moon));
@@ -46,7 +46,6 @@ test("unknown nodes, resources, camera writers and unsupported tree styles fail"
   const mutations = [
     plan => { plan.tree.nodes[2].parent = 3; },
     plan => { plan.tree.nodes[3].className = "polycss-camera"; },
-    plan => { plan.tree.registrations[0].lightingOverlays = [99]; },
     plan => { plan.variants[0].required = ["missing"]; },
     plan => { plan.variants[0].writes = [{ kind: "style", target: 0, name: "transform", value: "none" }]; },
     plan => { plan.viewBindings = [{ kind: "counter-rotation", target: 1, systemTransform: null }]; },
@@ -85,7 +84,7 @@ test("finite material tables cover frame sources, row policies, remaps and bindi
   assert.throws(() => requirePreparedPresentation(plan, { controls: moon.controls }), /every material frame/);
 });
 
-test("neighborhood data cannot exceed replacement capacity or introduce executable observations", async () => {
+test("neighborhood data cannot exceed replacement capacity", async () => {
   const { PREPARED_PRESENTATION } = await import("../planets/uranus/runtime/preparedPresentation.mjs");
   const { objectControls } = await import("../planets/uranus/site/control-content.mjs");
   for (const change of [
@@ -95,7 +94,6 @@ test("neighborhood data cannot exceed replacement capacity or introduce executab
     plan => { plan.materials[0].demand.neighborhoodOffsets = [-1, 0, .5]; },
     plan => { plan.materials[0].demand.neighborhoodOffsets = [-1, 0, 100]; },
     plan => { plan.materials[0].demand.prewarm = "directional"; },
-    plan => { plan.observations.publications[0].field = "evaluate"; },
   ]) {
     const plan = structuredClone(PREPARED_PRESENTATION); change(plan);
     assert.throws(() => requirePreparedPresentation(plan, { controls: objectControls }));

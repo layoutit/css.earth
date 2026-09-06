@@ -8,13 +8,13 @@ test("Mercury keeps its visible row while shared residency replaces pending dema
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
-    const initial = f.presentation.observe().material.appliedRow;
+    const initial = f.presentation.observe().materials.lighting.appliedRow;
     f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], revision: 2 }); await f.flush();
     const first = f.jobs.filter(job => !job.done);
-    assert.equal(f.presentation.observe().material.appliedRow, initial);
+    assert.equal(f.presentation.observe().materials.lighting.appliedRow, initial);
     f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], revision: 3 }); await f.flush();
     for (const job of first) { job.done = true; job.resolve(); }
-    await f.settle(); assert.equal(f.presentation.observe().material.appliedRow, 16);
+    await f.settle(); assert.equal(f.presentation.observe().materials.lighting.appliedRow, 16);
     assert.ok(rows(f).nativeSlots <= 3); assert.equal(rows(f).pending, 0);
     f.selection.setView({ ...f.view, sunViewDirection: [1, 0, -1], revision: 4 }); await f.flush();
     f.lifetime.destroy();

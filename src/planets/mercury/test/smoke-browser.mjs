@@ -56,7 +56,7 @@ try {
     sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
     stable: window.__mercury.assertStableDomIdentity(),
     density: window.__mercury.renderStats.textureStats.selectedPreparedDensity,
-    interiorMounted: window.__mercury.dom.interiorMounted,
+    interiorMounted: Boolean(document.querySelector(".polycss-mesh.mercury-cutaway")),
     sunBillboardCount: document.querySelectorAll(".planet-directional-sun").length,
     sunCubemapBakeCount: Number(document.querySelectorAll(".planet-cubic-sky-face .planet-directional-sun").length),
   }));
@@ -107,7 +107,7 @@ try {
   assert.deepEqual(await page.evaluate(() => ({
     elements: document.querySelector(".planet-stage").querySelectorAll("*").length,
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
-    viewBank: { interiorMounted: window.__mercury.dom.interiorMounted, retainedInteriorNodeCount: window.__mercury.dom.retainedInteriorNodeCount },
+    viewBank: { interiorMounted: Boolean(document.querySelector(".polycss-mesh.mercury-cutaway")), retainedInteriorNodeCount: (document.querySelector(".polycss-mesh.mercury-cutaway").querySelectorAll("*").length + 1) },
   })), {
     elements: 1814,
     interiorLeaves: 446,
@@ -217,12 +217,12 @@ try {
     overlayVisibility: getComputedStyle(
       document.querySelector(".mercury-material-root"),
     ).visibility,
-    ...window.__mercury.sky.state(),
+    ...window.__mercury.sky.state(), ...window.__mercury.material.state().lighting,
   }));
   assert.equal(shadowlessState.checked, false);
   assert.equal(shadowlessState.overlayVisibility, "visible");
-  assert.equal(shadowlessState.materialMode, "full-phase-curvature");
-  assert.equal(shadowlessState.materialFrame, 255);
+  assert.equal(shadowlessState.mode, "full-phase-curvature");
+  assert.equal(shadowlessState.frame, 255);
 
   await page.locator('input[name="shadows"]').evaluate((control) => {
     control.checked = true;
@@ -234,7 +234,7 @@ try {
     const samples = [];
     for (let yaw = -105; yaw <= 255; yaw += 15) {
       window.__mercury.camera.setState({ controlPitch: pitch, controlYaw: yaw });
-      samples.push({ yaw, ...window.__mercury.sky.state(),
+      samples.push({ yaw, ...window.__mercury.sky.state(), ...window.__mercury.material.state().lighting,
         sunViewDirection: window.__mercury.runtime.view().sunViewDirection });
     }
     return samples;
@@ -246,14 +246,14 @@ try {
     sunViewDirection[2])) > 0.75);
   assert.ok(sunSweep.some(({ sunVisible }) => sunVisible));
   assert.ok(sunSweep.some(({ sunVisible }) => !sunVisible));
-  assert.ok(Math.min(...sunSweep.map(({ materialFrame }) => materialFrame)) < 40);
-  assert.ok(Math.max(...sunSweep.map(({ materialFrame }) => materialFrame)) > 215);
+  assert.ok(Math.min(...sunSweep.map(({ frame }) => frame)) < 40);
+  assert.ok(Math.max(...sunSweep.map(({ frame }) => frame)) > 215);
   for (const sample of sunSweep) {
     const expectedFrame = Math.round(
       (sample.sunViewDirection[2] + 1) / 2 * 255,
     );
-    assert.equal(sample.materialFrame, expectedFrame);
-    assert.ok(Number.isFinite(sample.materialLightRollDegrees));
+    assert.equal(sample.frame, expectedFrame);
+    assert.ok(Number.isFinite(sample.lightRollDegrees));
   }
   await page.locator('input[name="shadows"]').evaluate((control) => {
     control.checked = false;

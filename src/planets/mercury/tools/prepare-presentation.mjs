@@ -45,7 +45,7 @@ export async function prepareMercuryPresentation() {
   for (const leaf of plan.interior.sectionLeaves) b.append(sections, b.leaf(leaf));
   const materialRoot = b.element("div", "mercury-material-root planet-render-root"), materialLeaf = b.element("s", "mercury-material");
   b.append(null, materialRoot); b.append(materialRoot, materialLeaf);
-  const { tree, index } = b.finish({ camera, scene, registrations: [{ bodySystem: system, lightingOverlays: [materialRoot] }] });
+  const { tree, index } = b.finish({ camera, scene });
   const address = (p, resource = `lighting:${p.rowIndex}`) => ({ resource, frame: p.frameIndex, row: p.rowIndex,
     backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize });
   const track = { id: "lighting", target: index(materialLeaf), frame: { source: "sun-z", minimum: assets.lighting.minimumLightViewZ,
@@ -83,16 +83,7 @@ export async function prepareMercuryPresentation() {
       startup: [...entries.filter(entry => entry.pool === "warm").map(entry => entry.key), ...bank.transport.initialWarmRows.map(row => `lighting:${row}`)] },
     tree, variants, resourceOrder: "materials-first", materials: [track], viewBindings: [{ kind: "shell-scale", target: index(materialRoot), variable: "--mercury-shell-scale", defaultZoom: 1 }],
     animations: [{ target: index(cutaway), id: "mercury-interior-presentation-orbit", mode: "pose", duration: pose.durationMilliseconds,
-      sourceMinimum: plan.camera.minimumControlPitchDegrees, millisecondsPerDegree: pose.millisecondsPerControlDegree, keyframes: pose.keyframes }],
-    observations: { constants: { dom: { interiorMounted: true } }, counts: [{ category: "dom", name: "retainedInteriorNodeCount", target: index(cutaway), kind: "nodes", includeRoot: true }],
-      materials: [...["material", "sky"].flatMap(category => [{ category, name: "materialFrame", track: "lighting", field: "frame" },
-        { category, name: "materialLightRollDegrees", track: "lighting", field: "lightRollDegrees" }]),
-        { category: "material", name: "appliedFrame", track: "lighting", field: "appliedFrame" },
-        { category: "material", name: "appliedRow", track: "lighting", field: "appliedRow" },
-        { category: "sky", name: "shadowsEnabled", track: "lighting", field: "rotationEnabled" },
-      ],
-      attributes: [{ category: "sky", name: "materialMode", target: index(materialLeaf), attribute: "data-material-mode", default: "directional-terminator" }],
-    } };
+      sourceMinimum: plan.camera.minimumControlPitchDegrees, millisecondsPerDegree: pose.millisecondsPerControlDegree, keyframes: pose.keyframes }] };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), await prepareMercuryPresentation(), objectControls);

@@ -85,12 +85,9 @@ export async function sharedPreparationFiles(root) {
   return [...new Set([
     "package.json", "pnpm-lock.yaml",
     ...await listPreparationFiles(root, "src/platform"),
-    // Preparation imports shared control contracts, runtime policy, destination
-    // normalization, and the generated shell title module. Bind the complete
-    // non-test site inventory so a new transitive import cannot evade the cache.
-    // Shared prerequisites have already completed before this list is hashed.
-    ...await listPreparationFiles(root, "site"),
-    ...await listPreparationFiles(root, "tools"),
+    ...(await listPreparationFiles(root, "site")).filter(path => !/\.(?:astro|css)$/.test(path)),
+    ...(await listPreparationFiles(root, "tools")).filter(path =>
+      !/^tools\/(?:audit-|benchmark-|compare-|measure-|preview|serve-)/.test(path)),
   ])].sort();
 }
 

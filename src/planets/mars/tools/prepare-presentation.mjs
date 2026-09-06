@@ -32,7 +32,7 @@ export async function prepareMarsPresentation() {
   const leaf = b.element("s");
   b.append(scene, counter); b.append(counter, materialSystem); b.append(materialSystem, material);
   b.append(material, plane); b.append(plane, leaf);
-  const { tree, index } = b.finish({ camera, scene, registrations: [{ bodySystem: system, lightingOverlays: [counter] }], stageClasses: ["mars-stage"] });
+  const { tree, index } = b.finish({ camera, scene,  stageClasses: ["mars-stage"] });
   const track = { id: "lighting", target: index(leaf),
     frame: { source: "prepared-light-z", minimum: lighting.minimumLightViewZ, maximum: lighting.maximumLightViewZ,
       count: bank.presentations.length, span: lighting.frameCount - 1, maximumFrame: lighting.frameCount - 1,
@@ -54,20 +54,13 @@ export async function prepareMarsPresentation() {
       frameOverride: null, frameOffset: shadows ? 0 : lighting.shadowlessFrameOffset, clearWhenHidden: false, fixedMode: "shadowless",
       modeLabel: shadows ? "directional-terminator-and-atmosphere" : "directional-atmosphere-without-ground-shadow" }],
   })));
-  const observed = [["materialFrame", "calculatedFrame"], ["materialLightRollDegrees", "lightRollDegrees"],
-    ["sunViewDirection", "sunViewDirection"], ["materialMode", "mode"]];
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: cameraPlan, sky: scenePlan.starfield, sun, inputSelector: null,
     assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
         concurrency: bank.transport.maximumRetainedRowCount, reuse: true, eviction: "capacity" })],
       startup: [...celestial.map(entry => entry.key), ...lensKeys(lenses.defaultLens), ...bank.transport.initialWarmRows.map(row => `lighting:${row}`)] },
     tree, variants, materials: [track], viewBindings: [{ kind: "counter-rotation", target: index(counter), systemTransform: null }],
-    animations: [], observations: { constants: { dom: { retainedSunBillboardCount: 1, retainedSunCubemapBakeCount: 0 },
-      renderStats: { idleJavaScriptLoops: 0 } }, counts: [],
-      selection: ["material", "sky"].map(category => ({ category, name: "shadowsEnabled", key: "shadows" })), materials: [
-        ...["material", "sky"].flatMap(category => observed.map(([name, field]) => ({ category, name, track: "lighting", field }))),
-        ...["appliedFrame", "appliedRow"].map(name => ({ category: "material", name, track: "lighting", field: name })),
-      ] } };
+    animations: [] };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), await prepareMarsPresentation(), objectControls);

@@ -25,7 +25,6 @@ test("all four sourced solar layers wait for the complete replacement group", as
     f.presentation.publishFrame({view:{...f.view,zoom:2.25}});
     for(const node of nodes.filter(n=>n.className.includes("sun-corona-layer")||n.className.includes("sun-limb-layer")))
       assert.equal(node.style.getPropertyValue("--sun-camera-zoom"),"2.25");
-    assert.equal(f.presentation.bodyLayers.length,1);
     assert.deepEqual(f.errors,[]);
   }finally{f.restore();}
 });

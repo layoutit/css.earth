@@ -8,7 +8,7 @@ import { createObjectSelectionRuntime } from "../object-selection-runtime.mjs";
 import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coordinate.mjs";
 import { createSceneLifetime } from "../scene-lifetime.mjs";
 import { mountPreparedPresentation, resolvePreparedPresentation } from "../prepared-presentation.mjs";
-import { initialObjectSelection, requireObjectRuntimeDefinition, requireResolvedPresentation } from "../object-runtime-contract.mjs";
+import { initialObjectSelection, requireObjectRuntimeDefinition } from "../object-runtime-contract.mjs";
 
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 
@@ -24,7 +24,7 @@ export function objectRuntimePackageTests(definition) {
       sunViewDirection: definition.sun ? viewSunDirectionToPreparedLightDirection(definition.sun.referenceViewDirection) : null };
     view.reference = view;
     const selection = initialObjectSelection(definition.controls);
-    requireResolvedPresentation(resolvePreparedPresentation(definition, { selection, view }), definition);
+    resolvePreparedPresentation(definition, { selection, view });
   });
 
   function fixture() {

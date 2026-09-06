@@ -1,4 +1,3 @@
-import { registerBodyDependentLayers } from "./body-layer-registration.mjs";
 import { preparedScenePitch } from "./cubic-sky-runtime.mjs";
 import { createPreparedMaterialPublisher } from "./prepared-material.mjs";
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.mjs";
@@ -83,9 +82,6 @@ export function mountPreparedPresentation(stage, context, definition) {
   }
   stage.replaceChildren(...roots);
   for (const name of definition.tree.stageClasses) stage.classList.add(name);
-  const bodyLayers = Object.freeze(definition.tree.registrations.map(record => registerBodyDependentLayers({
-    objectId: definition.id, sceneElement, bodySystem: nodes[record.bodySystem], lightingOverlays: record.lightingOverlays.map(index => nodes[index]),
-  })));
   const animations = definition.animations.map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, easing: "linear", fill: "both" });
     animation.id = plan.id; context.registerAnimation(animation, { mode: plan.mode });
@@ -93,9 +89,9 @@ export function mountPreparedPresentation(stage, context, definition) {
   });
   const materials = new Map(definition.materials.map(track => [track.id,
     createPreparedMaterialPublisher(track, nodes[track.target], definition.camera)]));
-  let selectionPublications = 0, framePublications = 0, styleWrites = 0, transformWrites = 0, publishedSelection = null;
+  let selectionPublications = 0, framePublications = 0, styleWrites = 0, transformWrites = 0;
   const target = index => index === -1 ? stage : nodes[index];
-  return Object.freeze({ cameraElement, sceneElement, bodyLayers,
+  return Object.freeze({ cameraElement, sceneElement,
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
       carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),
@@ -115,7 +111,6 @@ export function mountPreparedPresentation(stage, context, definition) {
         else { writeStyle(element, binding.name, value); styleWrites++; }
       }
       selectionPublications++;
-      publishedSelection = selection;
     },
     publishFrame({ selection, view, resources, plan }) {
       for (const binding of definition.viewBindings) {
@@ -141,34 +136,10 @@ export function mountPreparedPresentation(stage, context, definition) {
       framePublications++;
     },
     observe() {
-      for (const registration of bodyLayers) registration.assertRegistered();
-      const result = { ...definition.observations.constants };
-      for (const observation of definition.observations.materials) {
-        result[observation.category] = { ...result[observation.category],
-          [observation.name]: materials.get(observation.track).observe()[observation.field] };
-      }
-      for (const count of definition.observations.counts) {
-        const element = nodes[count.target], descendants = element.querySelectorAll(count.kind === "leaves" ? "b, s, u" : "*");
-        result[count.category] = { ...result[count.category], [count.name]: descendants.length + Number(count.includeRoot) };
-      }
-      result.presentation = { nodes: nodes.length, roots: roots.length, selectionPublications, framePublications, styleWrites, transformWrites };
-      for (const observation of definition.observations.publications ?? []) {
-        result[observation.category] = { ...result[observation.category],
-          [observation.name]: result.presentation[observation.field] };
-      }
-      for (const observation of definition.observations.attributes ?? []) {
-        result[observation.category] = { ...result[observation.category],
-          [observation.name]: readAttribute(nodes[observation.target], observation.attribute) ?? observation.default };
-      }
-      for (const observation of definition.observations.selection ?? []) {
-        result[observation.category] = { ...result[observation.category], [observation.name]: publishedSelection?.[observation.key] ?? null };
-      }
-      for (const observation of definition.observations.sums ?? []) {
-        const value = observation.tracks.reduce((sum, id) => sum + materials.get(id).observe()[observation.field],
-          observation.includePresentation ? result.presentation[observation.field] : 0);
-        result[observation.category] = { ...result[observation.category], [observation.name]: value };
-      }
-      return result;
+      return {
+        presentation: { nodes: nodes.length, roots: roots.length, selectionPublications, framePublications, styleWrites, transformWrites },
+        materials: Object.fromEntries([...materials].map(([id, material]) => [id, material.observe()])),
+      };
     },
   });
 }
