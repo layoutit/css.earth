@@ -17,7 +17,7 @@ export const objectControls = Object.freeze({
     "controls": [
       {
         "id": "normal",
-        "label": "Normal",
+        "label": "Visible color",
         "thumbnailUrl": "/scenes/mars/mars-lens-normal.webp",
         "description": "Viking visible color",
         "legend": undefined,
@@ -107,7 +107,7 @@ export const objectControls = Object.freeze({
       },
       {
         "id": "thermal",
-        "label": "Thermal IR",
+        "label": "Thermal infrared",
         "thumbnailUrl": "/scenes/mars/mars-lens-thermal-thumbnail.webp",
         "description": "THEMIS infrared",
         "legend": undefined,

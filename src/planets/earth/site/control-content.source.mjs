@@ -1,3 +1,4 @@
+import { LENS_LABELS, prepareLensLabels } from "../../../../site/prepare-lens-labels.mjs";
 import { PREPARED_SHELL_TITLES } from "../../../../site/prepared-shell-titles.mjs";
 import { prepareLensCategoryLegend } from
   "../../../../site/prepared-lens-legends.mjs";
@@ -47,4 +48,11 @@ const settings = {
   ],
 };
 
-export const objectControls = Object.freeze({ lenses, settings });
+export const objectControls = Object.freeze({
+  lenses: prepareLensLabels(lenses, {
+    "normal": LENS_LABELS.visibleColor,
+    "topography": LENS_LABELS.elevation,
+    "cross-section": LENS_LABELS.crossSection,
+  }),
+  settings,
+});

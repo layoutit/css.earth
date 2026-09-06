@@ -1,0 +1,158 @@
+{
+  "schema": "cssceres-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "usgs-dawn-fc-global-140m",
+      "path": "ceres-fc-global.png",
+      "expectedBytes": 9750062,
+      "expectedSha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
+      "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public scientific imagery with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Retrieve exact published bytes; pinned 2026-09-05. Source changes require review, not automatic refresh.",
+      "redistribution": "Original binary is reacquired locally and ignored by Git; derived textures retain the source credit.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 4096,
+      "height": 2048,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting."
+    },
+    {
+      "id": "nasa-dawn-fc-pia19977",
+      "path": "PIA19977.jpg",
+      "expectedBytes": 1033656,
+      "expectedSha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public scientific imagery with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Retrieve exact published bytes; pinned 2026-09-05. Source changes require review, not automatic refresh.",
+      "redistribution": "Original binary is reacquired locally and ignored by Git; derived textures retain the source credit.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 3078,
+      "height": 1537,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Run node src/planets/ceres/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Pinned shared shell title font.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "dawn-elevation",
+      "path": "science/ceres-hamo-dtm.tif",
+      "expectedBytes": 466647217,
+      "expectedSha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
+      "origin": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif",
+      "credit": "DLR / Dawn Team / USGS",
+      "license": "Public NASA PDS / USGS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m"
+      ],
+      "acquisition": "Retrieve the pinned original product, 2026-09-06. No source substitution or automatic hash refresh.",
+      "redistribution": "Original binary is reacquired locally and excluded from Git; derived maps retain attribution.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "format": "geotiff",
+      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60\u00b0 latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "wms-capabilities.xml",
+      "expectedBytes": 6483,
+      "expectedSha256": "33c538aca7929dc2bdf589300a34bbc02a696671fd052a9a9c76647a389d499f",
+      "purpose": "USGS WMS 1.1.1 capabilities snapshot: Ceres_FC_global layer, projection, credit, and source resolution. Retrieved 2026-09-05."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 100844,
+      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2",
+      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96",
+      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
+      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
+    }
+  ]
+}

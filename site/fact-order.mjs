@@ -1,5 +1,4 @@
 const FACT_IDS = Object.freeze([
-  "classification",
   "distance-from-sun",
   "distance-from-earth",
   "diameter",
