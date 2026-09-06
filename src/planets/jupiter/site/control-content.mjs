@@ -17,7 +17,7 @@ export const objectControls = Object.freeze({
     "controls": [
       {
         "id": "normal",
-        "label": "Normal",
+        "label": "Visible color",
         "thumbnailUrl": "/scenes/jupiter/jupiter-lens-normal.webp",
         "description": "Hubble visible color",
         "legend": undefined,

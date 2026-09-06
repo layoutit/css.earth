@@ -320,7 +320,7 @@ function assertMaterialPresentation(presentation) {
 }
 
 function assertRuntimeState(state) {
-  assert.equal(state.title, "Jupiter - Powered by PolyCSS");
+  assert.equal(state.title, "Jupiter in 3D | cssEarth");
   assert.equal(state.activeObjectId, "jupiter");
   assert.equal(state.mountedObjectCount, 1);
   assert.equal(state.stageCount, 1);

@@ -17,10 +17,10 @@ export const objectControls = Object.freeze({
     "controls": [
       {
         "id": "normal",
-        "label": "Normal",
+        "label": "Visible color",
         "thumbnailUrl": "/scenes/neptune/neptune-lens-normal.webp",
         "description": "True color + Hubble detail",
-        "title": "Normal",
+        "title": "Visible color",
         "legend": undefined
       },
       {

@@ -57,7 +57,7 @@ try {
       window.__earth.renderStats.textureStats.retainedInteractiveImageCount,
     stable: window.__earth.assertStableDomIdentity(),
   }));
-  assert.equal(initial.title, "Earth - Powered by PolyCSS");
+  assert.equal(initial.title, "Earth in 3D | cssEarth");
   assert.equal(initial.active, "earth");
   assert.equal(initial.mounted, 1);
   assert.equal(initial.cameraCount, 1);

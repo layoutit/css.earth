@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { PREPARED_EARTH_PANEL } from "../../src/planets/earth/site/preparedPanel.mjs";
+import { PREPARED_CERES_PANEL } from "../../src/planets/ceres/site/preparedPanel.mjs";
 import { PREPARED_JUPITER_PANEL } from "../../src/planets/jupiter/site/preparedPanel.mjs";
 import { PREPARED_MARS_PANEL } from "../../src/planets/mars/site/preparedPanel.mjs";
 import { PREPARED_MOON_PANEL } from "../../src/planets/moon/site/preparedPanel.mjs";
@@ -58,10 +59,11 @@ test("keeps every planet factsheet comparable and concise", () => {
 });
 
 test("uses unique semantic ids without hidden title-only content", () => {
-  for (const panel of [...PLANET_PANELS, PREPARED_MOON_PANEL, PREPARED_PLUTO_PANEL, PREPARED_SUN_PANEL]) {
+  for (const panel of [...PLANET_PANELS, PREPARED_MOON_PANEL, PREPARED_PLUTO_PANEL, PREPARED_SUN_PANEL, PREPARED_CERES_PANEL]) {
     const facts = [...panel.facts, ...panel.moreFacts];
     const ids = facts.map(({ id }) => id);
     assert.equal(new Set(ids).size, ids.length);
+    assert.ok(!ids.includes("classification"), "classification belongs to the registry-backed title tag");
     for (const fact of facts) {
       assert.match(fact.id, /^[a-z]+(?:-[a-z]+)*$/u);
       assert.equal("title" in fact, false);
@@ -71,8 +73,8 @@ test("uses unique semantic ids without hidden title-only content", () => {
 
 test("keeps Pluto concise and removes lens-presentation rows", () => {
   const facts = [...PREPARED_PLUTO_PANEL.facts, ...PREPARED_PLUTO_PANEL.moreFacts];
-  assert.equal(facts.length, 8);
-  assert.equal(facts[0].id, "classification");
+  assert.equal(facts.length, 7);
+  assert.equal(facts[0].id, "distance-from-sun");
   assert.doesNotMatch(
     facts.map(({ label }) => label).join(" "),
     /grid|elevation colors/iu,

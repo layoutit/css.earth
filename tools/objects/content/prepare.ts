@@ -3,6 +3,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../../site/prepared-shell-titles.mjs";
+import { prepareLensLabels } from "../../../site/prepare-lens-labels.mjs";
 import { SCIENTIFIC_CHART_TITLES } from "../../../site/scientific-chart-titles.mjs";
 import { createPreparedTitleLayout } from "../../../src/platform/prepared-title.mjs";
 import { prepareLenses } from "./lenses";
@@ -54,6 +55,9 @@ export function prepareObjectContent(
     ...source.title,
     ...createPreparedTitleLayout(source.title),
   } as PreparedObjectContent["title"];
+  const lensControls = source.lenses.labels
+    ? prepareLensLabels({ controls: source.lenses.controls }, source.lenses.labels).controls
+    : source.lenses.controls;
   return {
     objectId: source.id,
     title,
@@ -63,7 +67,7 @@ export function prepareObjectContent(
     lenses: prepareLenses(source.id, {
       title: requiredShellTitle(source.lenses.titleKey),
       defaultLens: source.lenses.defaultLens,
-      controls: source.lenses.controls,
+      controls: lensControls,
     }, assets),
     settings: {
       title: requiredShellTitle(source.settings.titleKey),

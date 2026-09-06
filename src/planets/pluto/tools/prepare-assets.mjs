@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 
 import sharp from "sharp";
 import { decodeElevationGrid, elevationRaster } from "./elevation-raster.mjs";
-import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from "./missing-coverage.mjs";
+import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from "../../../platform/prepare-missing-coverage.mjs";
 import { bakeSurfaceRaster } from "./surface-raster.mjs";
 
 import {

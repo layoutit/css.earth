@@ -170,7 +170,10 @@
         "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
         "falseColor": true
       }
-    ]
+    ],
+    "labels": {
+      "elevation": "Elevation"
+    }
   },
   "settings": {
     "titleKey": "settings",
