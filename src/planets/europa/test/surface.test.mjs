@@ -3,7 +3,7 @@ import { test } from "node:test";
 import { readFile } from "node:fs/promises";
 import sharp from "sharp";
 import { fromFile } from "geotiff";
-import { verifyEuropaSourceManifest } from "../tools/source-manifest.mjs";
+import { verifyEuropaSourceManifest, europaSourceInputsFor } from "../tools/source-manifest.mjs";
 import { COLOR_PHOTOMETRY, colorPhotometricGain, loadColorGeometry } from "../tools/color-photometry.mjs";
 import { matchEuropaColorLevels } from "../tools/prepare-color.mjs";
 
@@ -41,27 +41,39 @@ test("observed terrain survives preparation and explicit polar no-data stays mar
   const color = (700 * 4096 + 1500) * 3;
   assert.notDeepEqual(enhanced.subarray(color,color+3),map.data.subarray(color,color+3), "Observed color overlays the base");
   assert.ok(metadata.surfaces[1].monochromePixels > 4096 * 2048 / 2);
-  assert.ok(metadata.surfaces[1].photometry.correctedPixels > 400000);
-  assert.ok(metadata.surfaces[1].photometry.withheldPixels > 200000);
-  assert.equal(metadata.surfaces[1].photometry.clippedChannels, 0, "Correction must not erase highlights");
+  const photometry = metadata.surfaces[1].photometry;
+  const observations = new Set(europaSourceInputsFor("color").map(image => image.observation));
+  assert.deepEqual(new Set(Object.keys(photometry.observations)), observations);
+  for (const observation of observations) {
+    assert.ok(photometry.observations[observation].correctedPixels > 0, `${observation} receives correction`);
+    assert.ok(photometry.observations[observation].withheldPixels > 0, `${observation} withholds unstable angles`);
+    assert.equal(photometry.observations[observation].correctedPixels, metadata.surfaces[1].observationCoverage[observation].pixels);
+  }
 });
 
 test("disk normalization preserves its reference and withholds oblique or unlit observations", () => {
   const normal = [1, 0, 0], radius = COLOR_PHOTOMETRY.radiusKm;
   const position = degrees => [radius + 10000 * Math.cos(degrees * Math.PI / 180), 10000 * Math.sin(degrees * Math.PI / 180), 0];
-  assert.ok(Math.abs(colorPhotometricGain(normal, { sun:position(30), observer:position(0) }) - 1) < 1e-12);
-  const gain = colorPhotometricGain(normal, { sun:position(60), observer:position(0) });
-  assert.ok(gain > 1 && gain < 1.5);
-  assert.ok(.001 * gain > 0, "Observed dark terrain is scaled, never classified as absent");
-  for (const angle of [76, 90, 120, 180]) {
-    assert.equal(colorPhotometricGain(normal, { sun:position(angle), observer:position(0) }), null);
-    assert.equal(colorPhotometricGain(normal, { sun:position(30), observer:position(angle) }), null);
+  for (const weight of [0, 0.5, 1]) {
+    assert.ok(Math.abs(colorPhotometricGain(normal, { sun:position(30), observer:position(0) }, weight) - 1) < 1e-12);
+    for (const angle of [76, 90, 120, 180]) {
+      assert.equal(colorPhotometricGain(normal, { sun:position(angle), observer:position(0) }, weight), null);
+      assert.equal(colorPhotometricGain(normal, { sun:position(30), observer:position(angle) }, weight), null);
+    }
   }
+  const geometry = { sun:position(60), observer:position(0) };
+  const lambert = colorPhotometricGain(normal, geometry, 0), mixed = colorPhotometricGain(normal, geometry, .5);
+  const lommel = colorPhotometricGain(normal, geometry, 1);
+  assert.ok(Math.abs(lambert - Math.sqrt(3)) < 1e-12);
+  assert.ok(lommel > 1 && lommel < mixed && mixed < lambert);
+  assert.ok(.001 * mixed > 0, "Observed dark terrain is scaled, never classified as absent");
+  assert.throws(() => colorPhotometricGain(normal, geometry), /weight/);
 });
 
 test("capture vectors match the source geometry in the controlled east-positive frame", async () => {
   const geometry = await loadColorGeometry();
-  assert.equal(geometry.size, 13);
+  assert.deepEqual(new Set(geometry.keys()), new Set(europaSourceInputsFor("color").map(image => image.id)),
+    "Every color image has source-bound capture geometry");
   const [, first] = [...geometry].find(([id]) => id.includes("s0440984926"));
   const coordinates = v => ({ latitude:Math.asin(v[2] / Math.hypot(...v)) * 180 / Math.PI,
     longitude:(Math.atan2(v[1], v[0]) * 180 / Math.PI + 360) % 360, distance:Math.hypot(...v) });
@@ -90,7 +102,7 @@ test("color sampling withholds incomplete footprints without erasing observed da
 test("level matching preserves color ratios, dark detail and gaps without clipping", () => {
   const width = 24, height = 24;
   const makeColor = () => {
-    const rgb = Buffer.alloc(width * height * 3), owners = new Uint8Array(width * height);
+    const rgb = new Float32Array(width * height * 3), owners = new Uint8Array(width * height);
     for (let y = 6; y < 18; y++) for (let x = 6; x < 18; x++) {
       const i = y * width + x;
       rgb.set([40, 60, 80], i * 3);
@@ -111,7 +123,15 @@ test("level matching preserves color ratios, dark detail and gaps without clippi
   assert.equal(capped.gain, 255 / 80, "One gain is capped by the brightest observed channel");
   assert.deepEqual([...bright.rgb.subarray((6 * width + 6) * 3, (6 * width + 6) * 3 + 3)], [128,191,255]);
   monochrome.missing.fill(1);
-  const unsupported = makeColor(), before = Buffer.from(unsupported.rgb);
+  const high = makeColor();
+  high.rgb.set([200,300,400], (12 * width + 12) * 3);
+  const [compressed] = matchEuropaColorLevels(high, monochrome, {width,height});
+  assert.equal(compressed.gain, 255 / 400);
+  for (const [c, expected] of [127.5,191.25,255].entries()) {
+    assert.ok(Math.abs(high.rgb[(12 * width + 12) * 3 + c] - expected) <= .5,
+      "Highlights above display white preserve channel ratios within 8-bit rounding");
+  }
+  const unsupported = makeColor(), before = unsupported.rgb.slice();
   const [unmatched] = matchEuropaColorLevels(unsupported, monochrome, {width,height});
   assert.equal(unmatched.boundarySamples, 0);
   assert.deepEqual(unsupported.rgb, before, "Absent monochrome cannot determine an adjustment");

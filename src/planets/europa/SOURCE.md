@@ -72,29 +72,47 @@ not been photometrically corrected by USGS. Native grids range from 1.375 to 1.5
 per pixel. Higher-density observations take priority. Color appears only where
 all three bands from the same sequence have valid interpolation footprints;
 zero no-data, ISIS special pixels, and incomplete boundaries are withheld.
-After the geometric normalization and angle limits below, about 16% of the
-sphere has usable three-band coverage. Observed monochrome
+After geometric normalization and the angle limits below, about 14.3% of the
+sphere has usable three-band coverage. Preparation records its surface percentage
+per observation. Observed monochrome
 forms the base elsewhere; grayscale does not imply measured neutral color.
 The gray cartographic grid appears only where both sources lack imagery. The
-initial display transfer is clamp(I/F, 0, 1)^(1/2.2) for every channel, after any
-linear I/F normalization. The presentation levels are then matched as below.
+initial display transfer is max(I/F, 0)^(1/2.2) for every channel, after
+linear I/F normalization. Values remain floating point through presentation
+level matching, and are only then rounded to 8-bit. Bright corrected values
+are not clipped before matching.
 No monochrome detail is transferred into color. The newer controlled dataset
 and the older monochrome mosaic have different positional accuracy.
 
 The 28ESGLOCOL01 sequence (2000-05-22) was removed from this lens: its
 13.832 km-per-pixel imagery covered sharper monochrome with a visibly blurred
 insert. The lens now uses the monochrome base there, with no invented color.
-Preparation applies a spherical
-[Lommel–Seeliger disk normalization](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html)
-to **14ESGLOCOL01 only**, the March 1998 sequence whose broad shading was
-visually compared. For each band's surface point, `mu0` and `mu` are the cosines
-of incidence and emission. Linear I/F is multiplied by
-`[cos(30°)/(cos(30°)+1)] / [mu0/(mu0+mu)]`, then the fixed display transfer is
-applied. The reference is incidence 30°, emission 0°. All three bands must have
-incidence and emission at most 75°; otherwise the observed monochrome base is
-used. There is no inferred color or recovery of unobserved terrain.
+Preparation applies one spherical
+[Lunar–Lambert disk normalization](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html)
+to every color image, with weights selected by observation:
 
-`source/photometry/` binds each controlled ISIS label, including its exact
+| Observation | Disk weight L |
+| --- | --- |
+| 14ESGLOCOL01, March 1998 | 1 (accepted Lommel–Seeliger correction) |
+| 12ESGLOCOL01, December 1997 | 0.5 |
+| G1ESGLOBAL01, June 1996 | 0.5 |
+
+For each band's surface point, `mu0` and `mu` are the cosines of incidence and
+emission. The disk function is `D = (1-L)*mu0 + 2*L*mu0/(mu0+mu)`.
+Linear I/F is multiplied by `D(reference)/D(observation)`, with reference
+incidence 30° and emission 0°, before the fixed display transfer. The two mixed
+weights reduce the remaining gradients without the stronger brightening of
+pure Lambert in the compared patches. They are visual presentation choices,
+not fitted physical scattering parameters. The [USGS Europa photometry study](https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf)
+motivated comparing Lambert; we do not apply its per-band albedo normalization.
+
+All three bands must have incidence and emission at most 75°; otherwise the
+observed monochrome base is used. This removes about 43% of the previously
+displayed December color pixels and 25% of the June color pixels on the prepared
+map. Those difficult edges are withheld, not recovered. There is no inferred
+color or recovery of unobserved terrain.
+
+`source/photometry/` binds all 20 controlled ISIS labels, including each exact
 capture ET and body-orientation coefficients, to pinned
 [JPL Horizons](https://ssd-api.jpl.nasa.gov/doc/horizons.html) geometric Sun and
 Galileo vectors relative to Europa (ICRF, km, JDTDB). The raw API responses
@@ -110,9 +128,8 @@ Preparation is offline and reproducible from these pinned inputs.
 Both lenses retain the shared Shadows control and prepared globe lighting.
 This is an approximate disk correction, not calibrated unlit albedo: there is
 no phase-angle normalization, fitted Europa scattering model, terrain model,
-or removal of cast shadows. The two other sequences retain their acquisition
-lighting. Residual
-photographed shadows and seams can remain; added globe lighting is approximate.
+or removal of cast shadows. Residual photographed shadows and seams can remain;
+added globe lighting is approximate.
 
 To soften brightness steps against monochrome, preparation fits one display
 brightness multiplier per color sequence. The fit is the median ratio of

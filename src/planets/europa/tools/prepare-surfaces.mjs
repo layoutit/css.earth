@@ -49,6 +49,10 @@ const normal = await prepareSurface("normal", rgb, missing, {
 });
 const color = await prepareEuropaColor({width,height});
 const levels = matchEuropaColorLevels(color, {rgb,missing}, {width,height});
+if (!color.rgb.every(value => Number.isFinite(value) && value >= 0 && value <= 255)) {
+  throw new Error("Europa color levels must fit the display range without clipping");
+}
+color.rgb = Buffer.from(color.rgb);
 // Keep observed monochrome wherever the independent color coverage is absent.
 // The grid is needed only if neither source has a valid observation.
 let monochromePixels = 0;
