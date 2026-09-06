@@ -32,7 +32,23 @@ try {
     await cdp.send("Network.enable");
     await page.addInitScript(() => {
       const data = window.__entityPerf = { phases: [], frames: [], longTasks: [], inputs: [], peaks: {}, queryPaints: [] };
-      let previous, active = null;
+      let previous, active = null, pendingQuery = null;
+      document.addEventListener("input", event => {
+        if (event.target.matches?.(".planet-sidebar-search")) pendingQuery = { query: event.target.value, inputAt: performance.now() };
+      }, true);
+      document.addEventListener("DOMContentLoaded", () => {
+        const root = document.querySelector(".planet-destination-results");
+        if (!root) return;
+        new MutationObserver(() => {
+          const query = pendingQuery;
+          if (!query?.query || query.scheduled || root.hidden || ![...root.querySelectorAll("li")].some(row => !row.hidden)) return;
+          query.scheduled = true; query.readyAt = performance.now();
+          requestAnimationFrame(now => {
+            if (pendingQuery !== query || root.hidden) return;
+            data.queryPaints.push({ ...query, frameAt: now, inputToFrameMs: Math.max(0, now - query.inputAt) });
+          });
+        }).observe(root, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["hidden"] });
+      }, { once: true });
       function frame(now) {
         if (previous !== undefined) data.frames.push({ at: now, duration: now - previous, phase: active });
         previous = now; requestAnimationFrame(frame);
@@ -98,7 +114,7 @@ try {
             await page.locator(".planet-sidebar-search").fill("");
           }
         }
-        await page.evaluate(() => { const d = window.__entityPerf; d.phases = []; d.frames = []; d.longTasks = []; d.inputs = []; d.peaks = {}; });
+        await page.evaluate(() => { const d = window.__entityPerf; d.phases = []; d.frames = []; d.longTasks = []; d.inputs = []; d.peaks = {}; d.queryPaints = []; });
         const trace = [], collect = ({ value }) => trace.push(...value);
         cdp.on("Tracing.dataCollected", collect);
         if (capture) await cdp.send("Tracing.start", { categories: "devtools.timeline,disabled-by-default-devtools.timeline,disabled-by-default-v8.cpu_profiler,disabled-by-default-devtools.screenshot,blink.user_timing", transferMode: "ReportEvents" });
@@ -127,7 +143,7 @@ try {
           await page.waitForTimeout(200);
           run.metrics = await page.evaluate(() => {
             const d = window.__entityPerf;
-            return { phases: d.phases, frames: d.frames, longTasks: d.longTasks, inputs: d.inputs, peaks: d.peaks,
+            return { phases: d.phases, frames: d.frames, longTasks: d.longTasks, inputs: d.inputs, queryPaints: d.queryPaints, peaks: d.peaks,
               catalog: window.__earth.runtime.destinationCatalog(), destinationStats: window.__earth.runtime.destinationStats?.() ?? null, camera: window.__earth.camera.state(), stable: window.__earth.assertStableDomIdentity(),
               resources: performance.getEntriesByType("resource").map(({ name, startTime, duration, transferSize, encodedBodySize, decodedBodySize }) => ({ name, startTime, duration, transferSize, encodedBodySize, decodedBodySize })) };
           });
