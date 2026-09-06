@@ -388,7 +388,7 @@ test("places a scalable Surface Lens browser after the retained chart switcher",
     /\.planet-information-panel > :is\([\s\S]*?\.planet-lenses,[\s\S]*?\):has\(~ :is\([\s\S]*?\.planet-lenses,[\s\S]*?\)\)\s*\{[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);/u,
   );
   assert.match(styles, /\.planet-observation-controls\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?gap:\s*0;[\s\S]*?max-height:\s*202px;[\s\S]*?overflow-y:\s*auto;[\s\S]*?scrollbar-width:\s*thin;/u);
-  assert.match(styles, /\.planet-observation-control\s*\{[\s\S]*?grid-template-columns:\s*18px minmax\(0, 1fr\);[\s\S]*?width:\s*100%;[\s\S]*?height:\s*32px;/u);
+  assert.match(styles, /\.planet-observation-control\s*\{[\s\S]*?grid-template-columns:\s*18px minmax\(0, 1fr\);[\s\S]*?width:\s*100%;[\s\S]*?height:\s*30px;/u);
   assert.match(siteStyles, /--shell-text:\s*#dfdfdf;[\s\S]*?--shell-text-secondary:\s*#b8bbc4;[\s\S]*?--shell-text-muted:\s*#7f8187;/u);
   const layoutStyles = await readFile(new URL("../shell-layout.css", import.meta.url), "utf8");
   assert.match(layoutStyles, /\.planet-sidebar\s*\{[^}]*--shell-text-secondary:\s*#a9acb5;/u);
