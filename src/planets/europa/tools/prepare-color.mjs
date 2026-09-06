@@ -2,11 +2,14 @@ import { fromFile } from "geotiff";
 import { resolve } from "node:path";
 import { validateEuropaSourceGroup } from "./source-manifest.mjs";
 import { EUROPA_SOURCE_ROOT } from "./preparation-paths.mjs";
+import { COLOR_PHOTOMETRY, colorPhotometricGain, loadColorGeometry } from "./color-photometry.mjs";
 
 // Calibrated I/F observations, never the aesthetically filled Trek mosaic.
 // Bands from one observation must all be present at each published location.
 export async function prepareEuropaColor({ width, height }) {
   const entries = await validateEuropaSourceGroup("color");
+  const geometry = await loadColorGeometry();
+  const photometry = { ...COLOR_PHOTOMETRY, correctedPixels: 0, withheldPixels: 0, clippedChannels: 0 };
   const groups = new Map();
   for (const entry of entries) {
     const file = await fromFile(resolve(EUROPA_SOURCE_ROOT, entry.path));
@@ -23,12 +26,14 @@ export async function prepareEuropaColor({ width, height }) {
       }
       const [data] = await image.readRasters();
       if (!groups.has(entry.observation)) groups.set(entry.observation, []);
-      groups.get(entry.observation).push({ ...entry, data, origin, resolution });
+      const capture = geometry.get(entry.id);
+      if (entry.observation === COLOR_PHOTOMETRY.observation && !capture) throw new Error(`Missing photometry: ${entry.id}`);
+      groups.get(entry.observation).push({ ...entry, data, origin, resolution, capture });
     } finally { await file.close(); }
   }
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height).fill(1);
   const coverage = {};
-  // Highest native density wins. Keep illumination seams between observations;
+  // Highest native density wins. Keep boundaries between observations;
   // do not blend across dates, transfer monochrome detail, or synthesize color.
   const ordered = [...groups].sort((a, b) => a[1][0].resolution[0] - b[1][0].resolution[0]);
   for (const [observation, bands] of ordered) {
@@ -40,27 +45,46 @@ export async function prepareEuropaColor({ width, height }) {
       const northing = latitude * 1560800;
       for (let x = 0; x < width; x++) {
         const index = y * width + x;
-        if (!missing[index]) continue;
+        if (missing[index] !== 1) continue;
         const easting = ((x + 0.5) * 360 / width - 180) * Math.PI / 180 * 1560800;
-        const values = channels.map(channel => {
+        const samples = channels.map(channel => {
           for (const band of channel) {
             const value = sampleColorBand(band, easting, northing);
-            if (value !== null) return value;
+            if (value !== null) return { value, band };
           }
           return null;
         });
-        if (values.some(value => value === null)) continue;
+        if (samples.some(sample => sample === null)) continue;
+        let gains = [1, 1, 1];
+        if (observation === COLOR_PHOTOMETRY.observation) {
+          const longitude = (x + 0.5) * 2 * Math.PI / width;
+          const normal = [Math.cos(latitude) * Math.cos(longitude), Math.cos(latitude) * Math.sin(longitude), Math.sin(latitude)];
+          gains = samples.map(({ band }) => colorPhotometricGain(normal, band.capture));
+          if (gains.some(gain => gain === null)) {
+            // Reserve this footprint until all color sequences finish, then use
+            // monochrome rather than substituting another date's color.
+            missing[index] = 2;
+            photometry.withheldPixels++;
+            continue;
+          }
+          photometry.correctedPixels++;
+        }
         missing[index] = 0;
         pixels++;
         solidAngle += Math.cos(latitude);
         // One fixed display transfer for every band/date. I/F=1 maps to white.
         // Infrared/red, green/green, violet/blue is enhanced, not natural color.
-        for (let c = 0; c < 3; c++) rgb[index * 3 + c] = Math.round(255 * Math.min(1, Math.max(0, values[c])) ** (1 / 2.2));
+        for (let c = 0; c < 3; c++) {
+          const value = samples[c].value * gains[c];
+          if (observation === COLOR_PHOTOMETRY.observation && value > 1) photometry.clippedChannels++;
+          rgb[index * 3 + c] = Math.round(255 * Math.min(1, Math.max(0, value)) ** (1 / 2.2));
+        }
       }
     }
     coverage[observation] = { pixels, surfacePercent: solidAngle / (width * height * 2 / Math.PI) * 100 };
   }
-  return { rgb, missing, coverage, sourceIds: entries.map(entry => entry.id) };
+  for (let i = 0; i < missing.length; i++) if (missing[i] === 2) missing[i] = 1;
+  return { rgb, missing, coverage, photometry, sourceIds: entries.map(entry => entry.id) };
 }
 
 export function sampleColorBand(band, easting, northing) {

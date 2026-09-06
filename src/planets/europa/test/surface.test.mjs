@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import sharp from "sharp";
 import { fromFile } from "geotiff";
 import { verifyEuropaSourceManifest } from "../tools/source-manifest.mjs";
+import { COLOR_PHOTOMETRY, colorPhotometricGain, loadColorGeometry } from "../tools/color-photometry.mjs";
 
 test("observed terrain survives preparation and explicit polar no-data stays marked", async () => {
   await verifyEuropaSourceManifest();
@@ -39,6 +40,39 @@ test("observed terrain survives preparation and explicit polar no-data stays mar
   const color = (700 * 4096 + 1500) * 3;
   assert.notDeepEqual(enhanced.subarray(color,color+3),map.data.subarray(color,color+3), "Observed color overlays the base");
   assert.ok(metadata.surfaces[1].monochromePixels > 4096 * 2048 / 2);
+  assert.ok(metadata.surfaces[1].photometry.correctedPixels > 400000);
+  assert.ok(metadata.surfaces[1].photometry.withheldPixels > 200000);
+  assert.equal(metadata.surfaces[1].photometry.clippedChannels, 0, "Correction must not erase highlights");
+});
+
+test("disk normalization preserves its reference and withholds oblique or unlit observations", () => {
+  const normal = [1, 0, 0], radius = COLOR_PHOTOMETRY.radiusKm;
+  const position = degrees => [radius + 10000 * Math.cos(degrees * Math.PI / 180), 10000 * Math.sin(degrees * Math.PI / 180), 0];
+  assert.ok(Math.abs(colorPhotometricGain(normal, { sun:position(30), observer:position(0) }) - 1) < 1e-12);
+  const gain = colorPhotometricGain(normal, { sun:position(60), observer:position(0) });
+  assert.ok(gain > 1 && gain < 1.5);
+  assert.ok(.001 * gain > 0, "Observed dark terrain is scaled, never classified as absent");
+  for (const angle of [76, 90, 120, 180]) {
+    assert.equal(colorPhotometricGain(normal, { sun:position(angle), observer:position(0) }), null);
+    assert.equal(colorPhotometricGain(normal, { sun:position(30), observer:position(angle) }), null);
+  }
+});
+
+test("capture vectors match the source geometry in the controlled east-positive frame", async () => {
+  const geometry = await loadColorGeometry();
+  assert.equal(geometry.size, 13);
+  const [, first] = [...geometry].find(([id]) => id.includes("s0440984926"));
+  const coordinates = v => ({ latitude:Math.asin(v[2] / Math.hypot(...v)) * 180 / Math.PI,
+    longitude:(Math.atan2(v[1], v[0]) * 180 / Math.PI + 360) % 360, distance:Math.hypot(...v) });
+  const sun = coordinates(first.sun), observer = coordinates(first.observer);
+  // Original Galileo PDS label: Sun 1.399 N / 243.734 W, spacecraft
+  // 0.047 N / 166.336 W. W0 changes from 35.67 to the controlled 36.054.
+  // Small remaining differences come from the reconstructed ephemerides.
+  assert.ok(Math.abs(sun.latitude - 1.399) < .001);
+  assert.ok(Math.abs(observer.latitude - .047) < .001);
+  assert.ok(Math.abs(sun.longitude - (360 - 243.734 - .384)) < .005);
+  assert.ok(Math.abs(observer.longitude - (360 - 166.336 - .384)) < .005);
+  assert.ok(Math.abs(observer.distance - 143510.7) < 10);
 });
 
 test("color sampling withholds incomplete footprints without erasing observed dark terrain", async () => {
