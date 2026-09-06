@@ -147,24 +147,12 @@ try {
         "the floating shell does not reserve scene space");
     }
     assert.equal(await page.locator(".planet-sidebar-toggle, .planetary-navigation-toggle, .explorer-rail-menu").count(), 0);
-    const factsheetPanel = page.locator(".planet-factsheet-section");
-    const factsheetSummary = factsheetPanel.locator(":scope > .planet-factsheet-header");
-    const factsheetIcon = factsheetSummary.locator('.planet-panel-icon[data-panel-icon="facts"]');
-    assert.equal(await factsheetIcon.evaluate((node) => node.tagName), "IMG");
-    assert.match(await factsheetIcon.getAttribute("src"), /\/shell\/icon-facts\.svg$/u);
-    const factsheetInitiallyOpen = await factsheetPanel.evaluate((node) => node.open);
-    assert.equal(factsheetInitiallyOpen, false,
-      `${config.label}: Factsheet starts collapsed`);
-    assert.equal(await factsheetPanel.evaluate((node) => getComputedStyle(node).paddingBottom), "0px",
-      `${config.label}: collapsed Factsheet leaves no empty bottom gap`);
-    await factsheetSummary.click();
-    assert.equal(await factsheetPanel.evaluate((node) => node.open), !factsheetInitiallyOpen,
-      `${config.label}: Factsheet header toggles the whole panel`);
-    assert.equal(await factsheetPanel.evaluate((node) => getComputedStyle(node).paddingBottom), "16px",
-      `${config.label}: expanded Factsheet restores its content spacing`);
-    assert.equal(await factsheetPanel.locator(".planet-primary-facts > li").count(), 4,
-      `${config.label}: Factsheet previews four facts`);
-    const factsOverflow = factsheetPanel.locator(".planet-facts-overflow");
+    assert.equal(await page.locator(".planet-factsheet-section, .planet-factsheet-header").count(), 0);
+    const facts = page.locator(".planet-selected-panel > .planet-facts");
+    assert.equal(await facts.isVisible(), true, `${config.label}: facts are visible after the intro`);
+    assert.equal(await facts.locator(".planet-primary-facts > li:visible").count(), 4,
+      `${config.label}: card previews four facts`);
+    const factsOverflow = facts.locator(".planet-facts-overflow");
     const factsToggle = factsOverflow.locator(":scope > .planet-facts-toggle");
     assert.equal(await factsOverflow.evaluate((node) => node.open), false,
       `${config.label}: remaining facts start hidden`);
@@ -173,9 +161,9 @@ try {
     assert.equal(await factsOverflow.evaluate((node) => node.open), true,
       `${config.label}: View more reveals remaining facts`);
     assert.equal(await factsToggle.innerText(), "View less");
-    await factsheetSummary.click();
-    assert.equal(await factsheetPanel.evaluate((node) => node.open), factsheetInitiallyOpen,
-      `${config.label}: Factsheet returns to its initial state`);
+    await factsToggle.click();
+    assert.equal(await factsOverflow.evaluate((node) => node.open), false,
+      `${config.label}: View less restores the four-fact preview`);
     const chartSwitcher = page.locator(".planet-chart-switcher");
     if (await chartSwitcher.count() > 0) {
       const chartSummary = chartSwitcher.locator(":scope > .planet-chart-switcher-header");

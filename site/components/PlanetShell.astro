@@ -284,50 +284,31 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
           </div>}
         </div>
         {introduction && <p class="planet-introduction">{introduction}</p>}
-      </section>
-      <details
-        id={`${objectId}-factsheet-panel`}
-        class="planet-factsheet-section"
-        aria-labelledby={`${objectId}-factsheet-title`}
-      >
-        <summary class="planet-factsheet-header planet-panel-summary">
-          <h2 id={`${objectId}-factsheet-title`} class="planet-panel-heading">Factsheet</h2>
-          <img
-            class="planet-panel-icon"
-            data-panel-icon="facts"
-            src={PREPARED_SHELL_ICONS.facts.src}
-            width={PREPARED_SHELL_ICONS.facts.width}
-            height={PREPARED_SHELL_ICONS.facts.height}
-            alt=""
-          />
-        </summary>
-        {hasFacts && <div class="planet-factsheet-body">
-          <div class="planet-facts">
-            <ul class="planet-primary-facts">
-              {initialFacts.map((fact) => (
+        {hasFacts && <div class="planet-facts">
+          <ul class="planet-primary-facts">
+            {initialFacts.map((fact) => (
+              <li data-fact-id={fact.id}>
+                <span class="planet-fact-label">{fact.label}</span>
+                <span class="planet-fact-value">{fact.value}</span>
+              </li>
+            ))}
+          </ul>
+          {hasRemainingFacts && <details class="planet-facts-overflow">
+            <summary class="planet-facts-toggle">
+              <span class="planet-facts-more">View more</span>
+              <span class="planet-facts-less">View less</span>
+            </summary>
+            <ul class="planet-additional-facts">
+              {remainingFacts.map((fact) => (
                 <li data-fact-id={fact.id}>
                   <span class="planet-fact-label">{fact.label}</span>
                   <span class="planet-fact-value">{fact.value}</span>
                 </li>
               ))}
             </ul>
-            {hasRemainingFacts && <details class="planet-facts-overflow">
-              <summary class="planet-facts-toggle">
-                <span class="planet-facts-more">View more</span>
-                <span class="planet-facts-less">View less</span>
-              </summary>
-              <ul class="planet-additional-facts">
-                {remainingFacts.map((fact) => (
-                  <li data-fact-id={fact.id}>
-                    <span class="planet-fact-label">{fact.label}</span>
-                    <span class="planet-fact-value">{fact.value}</span>
-                  </li>
-                ))}
-              </ul>
-            </details>}
-          </div>
+          </details>}
         </div>}
-      </details>
+      </section>
       {defaultChart && <details
         id={`${objectId}-charts`}
         class="planet-chart-switcher"
