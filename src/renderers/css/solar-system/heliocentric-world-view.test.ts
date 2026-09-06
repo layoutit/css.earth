@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { runtimeDefinition } from '../../../planets/mercury/runtime/definition.mjs';
+import { runtimeDefinition as venusDefinition } from '../../../planets/venus/runtime/definition.mjs';
 import { projectHeliocentricView } from './heliocentric-view.js';
 
 const plan = runtimeDefinition.heliocentricView.plan;
@@ -40,4 +41,53 @@ test('a selected body behind the observer or intersecting the image plane has no
     assert.equal(projected.body.silhouetteDiameter, 0);
   }
   assert.throws(() => projectHeliocentricView(plan, { ...input, bodyCenter: [0, 0, -1400], distance: 2000 }), TypeError);
+});
+
+test('approaching another prepared body keeps its marker visible inside the distant source orbit clipping plane', () => {
+  for (const [definition, destination] of [[runtimeDefinition, 'venus'], [venusDefinition, 'mercury']] as const) {
+    const source = definition.heliocentricView.plan;
+    const target = source.system.bodies.find(body => body.id === destination);
+    let previousDiameter = 0;
+    for (const radiusMultiple of [100, 30, 10, 5]) {
+      const depth = target.radiusUnits * radiusMultiple;
+      const eye = [-input.principalOffset[0] * depth / input.focal, 0, -depth];
+      const bodyCenter = eye.map((value, axis) => value - target.position[axis]);
+      const projected = projectHeliocentricView(source, { ...input, bodyCenter,
+        distance: Math.hypot(...bodyCenter), system: true, systemOrbits: false });
+      const marker = projected.system!.bodies.find(body => body.id === destination)!.marker;
+      assert.ok(marker.depth < projected.near, 'The case must cross the source-distance orbit clipping plane.');
+      assert.equal(marker.visible, true, `${definition.id} → ${destination}, radius multiple ${radiusMultiple}`);
+      assert.equal(marker.classification, 'visible');
+      assert.ok(marker.alpha > 0);
+      assert.ok(marker.screen!.every(value => Math.abs(value) < 1e-6));
+      assert.ok(marker.physicalDiameterPx > previousDiameter);
+      previousDiameter = marker.physicalDiameterPx;
+    }
+  }
+});
+
+test('celestial visibility still rejects bodies behind or intersecting the camera plane', () => {
+  const target = plan.system.bodies.find(body => body.id === 'venus');
+  for (const [depth, classification] of [[-target.radiusUnits, 'behind-camera'],
+    [target.radiusUnits / 2, 'intersects-camera-plane']] as const) {
+    const eye = [-input.principalOffset[0] * depth / input.focal, 0, -depth];
+    const bodyCenter = eye.map((value, axis) => value - target.position[axis]);
+    const projected = projectHeliocentricView(plan, { ...input, bodyCenter,
+      distance: Math.hypot(...bodyCenter), system: true, systemOrbits: false });
+    const marker = projected.system!.bodies.find(body => body.id === 'venus')!.marker;
+    assert.equal(marker.visible, false);
+    assert.equal(marker.classification, classification);
+  }
+});
+
+test('the prepared Sun uses the observer plane rather than the mounted object orbit clipping distance', () => {
+  const source = venusDefinition.heliocentricView.plan;
+  const depth = source.sun.radiusUnits * 1.1;
+  const eye = [-input.principalOffset[0] * depth / input.focal, 0, -depth];
+  const bodyCenter = eye.map((value, axis) => value - source.sun.position[axis]);
+  const projected = projectHeliocentricView(source, { ...input, bodyCenter,
+    distance: Math.hypot(...bodyCenter), system: true, systemOrbits: false });
+  assert.ok(depth < projected.near, 'The Sun must exercise the source-distance orbit clipping plane.');
+  assert.equal(projected.sun.visible, true);
+  assert.equal(projected.system!.sun.visible, true);
 });
