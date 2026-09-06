@@ -3,16 +3,17 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
 
 const base = process.argv[2] ?? "http://127.0.0.1:4228";
+const selectedCase = process.argv.find(arg => arg.startsWith("--case="))?.slice(7);
 const output = new URL(`../../../../output/playwright/selection-cards-${Date.now()}/`, import.meta.url);
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: "chrome", headless: true });
-const report = { base, browser: browser.version(), cases: [] };
+const report = { base, browser: browser.version(), selectedCase: selectedCase ?? null, cases: [] };
 try {
   for (const [label, viewport, dpr, mobile] of [
     ["desktop-1", { width: 1440, height: 1000 }, 1, false],
     ["desktop-2", { width: 1440, height: 1000 }, 2, false],
     ["mobile-2", { width: 390, height: 844 }, 2, true],
-  ]) {
+  ].filter(([label]) => !selectedCase || label === selectedCase)) {
     const context = await browser.newContext({ viewport, deviceScaleFactor: dpr, isMobile: mobile, hasTouch: mobile,
       recordVideo: { dir: output.pathname, size: viewport } });
     const page = await context.newPage(), errors = [], record = { label, dpr, screenshots: [], errors };
@@ -35,7 +36,10 @@ try {
     const settlePages = layer => page.waitForFunction(layer => {
       const s=window.__earth.runtime.pages()[layer];
       return !s.pendingSelection && !s.activeLoads && !s.index.activeLoads && s.desired.length > 0 && s.desired.every(key=>s.retained.some(slot=>slot.key===key&&slot.published));
-    },layer,{timeout:120000});
+    },layer,{timeout:120000}).catch(async error => {
+      record.unsettled = { layer, pages: await page.evaluate(() => window.__earth.runtime.pages()) };
+      console.error(JSON.stringify({ label, unsettled: record.unsettled })); throw error;
+    });
     const settleNoise = async () => { await settlePages("geographic"); await settlePages("city"); };
     const saveMetrics = async name => {
       const metrics = await page.evaluate(() => window.__journeyMetrics);
@@ -179,7 +183,7 @@ try {
       await context.close(); record.video = await page.video().path();
     }
   }
-  report.passed = true;
+  report.passed = report.cases.length > 0 && report.cases.every(record => record.passed);
 } finally {
   await browser.close(); await writeFile(new URL("report.json", output), JSON.stringify(report, null, 2));
   console.log(JSON.stringify({ output: output.pathname, passed: report.passed ?? false, cases: report.cases.map(({label, passed}) => ({label, passed})) }));
