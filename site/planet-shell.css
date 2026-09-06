@@ -46,8 +46,16 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   background-image: var(--planet-cubic-sky-high-contrast-image);
 }
 
-body[data-sky-contrast="high"] .prepared-volume-context {
-  opacity: .25;
+.prepared-volume-context {
+  opacity: .7;
+}
+
+.prepared-point-field-stars {
+  opacity: .35;
+}
+
+body[data-sky-contrast="high"] :is(.prepared-volume-context, .prepared-point-field-stars) {
+  opacity: 1;
 }
 
 .planet-cubic-sky-front {

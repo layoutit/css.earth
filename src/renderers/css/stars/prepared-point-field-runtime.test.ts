@@ -54,8 +54,11 @@ function mount(payload=fixture()) {
   const layer=mountPreparedCssPointField({host:host as unknown as HTMLElement,before:before as unknown as Element,payload,resolveResource});
   return {document,host,before,layer,root:layer.root as unknown as FakeElement,resolveResource};
 }
+function leaves(root: FakeElement): FakeElement[] {
+  return root.children.flatMap(child => child.className === 'prepared-point-field-stars' ? child.children : [child]);
+}
 function find(root:FakeElement,reference:string):FakeElement {
-  const element=root.children.find(child=>child.dataset.starReference===reference && child.style.visibility!=='hidden');
+  const element=leaves(root).find(child=>child.dataset.starReference===reference && child.style.visibility!=='hidden');
   if(!element)throw new Error(`No visible slot for ${reference}`);return element;
 }
 function center(element:FakeElement):readonly [number,number] {
@@ -91,7 +94,7 @@ test('distance modulus selects/interpolates the prepared photometry and clamps i
 test('mounted slots follow the physical observer while surviving identities stay on the same nodes',()=>{
   vi.useFakeTimers();const {document,layer,root,resolveResource}=mount();
   layer.publish(world(),viewport,1);
-  const survivor=find(root,'star:2'),slots=[...root.children];
+  const survivor=find(root,'star:2'),slots=[...leaves(root)];
   expect(center(survivor)[0]).toBeCloseTo(70,12);
   layer.publish(world(-10),viewport,1);
   expect(find(root,'star:2')).toBe(survivor);expect(Number(survivor.style.opacity)).toBeGreaterThan(0);
@@ -101,7 +104,7 @@ test('mounted slots follow the physical observer while surviving identities stay
   expect(center(survivor)[0]).toBeCloseTo(50,12);
   layer.publish(world(5,0,[0,0,Math.SQRT1_2,Math.SQRT1_2]),viewport,1);
   expect(center(survivor)[0]).toBeCloseTo(30,12);expect(center(survivor)[1]).toBeCloseTo(-40,12);
-  expect(root.children).toEqual(slots);expect(root.dataset.catalogueCount).toBe('3');expect(root.dataset.coveredCount).toBe('3');
+  expect(leaves(root)).toEqual(slots);expect(root.dataset.catalogueCount).toBe('3');expect(root.dataset.coveredCount).toBe('3');
   expect(resolveResource).toHaveBeenCalledTimes(1);
   vi.advanceTimersByTime(180);expect(vi.getTimerCount()).toBe(1); // Reconcile the rotation queued during admission.
   document.frame();vi.advanceTimersByTime(180);expect(vi.getTimerCount()).toBe(0);
@@ -136,7 +139,7 @@ test('reused outgoing slots start a fresh fade without retaining the previous op
   document.frame();vi.advanceTimersByTime(180);
   layer.publish(world(-10),viewport,1);document.frame();vi.advanceTimersByTime(180);
   layer.publish(world(),viewport,1);
-  const reused=root.children[0]!;
+  const reused=leaves(root)[0]!;
   // The departed star is just beyond the frustum; bring it back during this fixed transition so its image is projectable.
   layer.publish(world(-10),viewport,1);
   expect(reused.style.visibility).not.toBe('hidden');
@@ -147,16 +150,16 @@ test('reused outgoing slots start a fresh fade without retaining the previous op
 
 test('canonical catalogue mounts only its fixed pool and preserves its full coverage during navigation',async()=>{
   const envelope=JSON.parse(await readFile(fileURLToPath(new URL('../../../objects/stellar-neighbourhood/prepared/stars.json',import.meta.url)),'utf8')) as {data:unknown};
-  const payload=parsePreparedCssPointField(envelope.data),{layer,root}=mount(payload),slots=[...root.children];
+  const payload=parsePreparedCssPointField(envelope.data),{layer,root}=mount(payload),slots=[...leaves(root)];
   expect(payload.stars.length).toBe(109389);expect(slots.length).toBe(4098);
   expect(slots.filter(slot=>'starSlot' in slot.dataset)).toHaveLength(4096);
-  layer.publish(world(),viewport,1);expect(root.dataset.coveredCount).toBe('109389');expect(Number(root.dataset.drawnCount)).toBeGreaterThan(0);expect(root.children.filter(slot=>slot.style.visibility!=='hidden' && slot.dataset.starReference).every(slot=>slot.dataset.starReference!.startsWith('star:'))).toBe(true);
-  layer.publish(world(10),viewport,1);expect(root.children).toEqual(slots);expect(root.dataset.coveredCount).toBe('109389');expect(Number(root.dataset.drawnCount)).toBeGreaterThan(0);expect(root.children.filter(slot=>slot.style.visibility!=='hidden' && slot.dataset.starReference).every(slot=>slot.dataset.starReference!.startsWith('star:'))).toBe(true);
+  layer.publish(world(),viewport,1);expect(root.dataset.coveredCount).toBe('109389');expect(Number(root.dataset.drawnCount)).toBeGreaterThan(0);expect(leaves(root).filter(slot=>slot.style.visibility!=='hidden' && slot.dataset.starReference).every(slot=>slot.dataset.starReference!.startsWith('star:'))).toBe(true);
+  layer.publish(world(10),viewport,1);expect(leaves(root)).toEqual(slots);expect(root.dataset.coveredCount).toBe('109389');expect(Number(root.dataset.drawnCount)).toBeGreaterThan(0);expect(leaves(root).filter(slot=>slot.style.visibility!=='hidden' && slot.dataset.starReference).every(slot=>slot.dataset.starReference!.startsWith('star:'))).toBe(true);
   layer.destroy();
 });
 
 test('changing the detailed object updates star occlusion without replacing the catalogue slots', () => {
-  const { layer, root } = mount(), slots = [...root.children];
+  const { layer, root } = mount(), slots = [...leaves(root)];
   layer.publish(world(), viewport, 1);
   const visible = find(root, 'star:2');
   layer.setOccluder({ positionM: [5 * parsec, 0, -50 * parsec], radiusM: 2 * parsec });
@@ -165,6 +168,6 @@ test('changing the detailed object updates star occlusion without replacing the 
   layer.setOccluder({ positionM: [50 * parsec, 0, -50 * parsec], radiusM: parsec });
   layer.publish(world(), viewport, 1);
   expect(find(root, 'star:2')).toBe(visible);
-  expect(root.children).toEqual(slots);
+  expect(leaves(root)).toEqual(slots);
   layer.destroy();
 });
