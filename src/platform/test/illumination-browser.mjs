@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 
 // Exercise real package controls and the shared decode/publication boundary.
-export async function checkDirectionalAtmosphere(page, { id, phaseKey, rollKey }) {
+export async function checkDirectionalAtmosphere(page, { id, track, phaseKey }) {
   const original = await page.evaluate(id => {
     const api = window[`__${id}`], view = api.view();
     return { view: { controlPitch: view.controlPitch, controlYaw: view.controlYaw, zoom: view.zoom },
@@ -27,7 +27,7 @@ export async function checkDirectionalAtmosphere(page, { id, phaseKey, rollKey }
       }, id);
       assert.equal(state.stable, true);
       for (const pool of state.pools) assert.ok(pool.nativeSlots <= 3);
-      pair.push({ phase: Number(state.material[phaseKey]), roll: state.material[rollKey] });
+      pair.push({ phase: Number(state.material[track][phaseKey]), roll: state.material[track].lightRollDegrees });
     }
     assert.ok(Number.isFinite(pair[0].phase) && Number.isFinite(pair[0].roll));
     assert.deepEqual(pair[0], pair[1], `${id}: ground shadows must not freeze or rotate the atmosphere`);

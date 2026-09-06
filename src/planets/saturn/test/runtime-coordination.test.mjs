@@ -137,10 +137,10 @@ test("Saturn delayed compound preparation uses the current camera frame at publi
     const pending = f.selection.dispatch(lens("cross-section")); await f.flush();
     const view = { ...f.view, controlPitch: 72, controlYaw: 31, sunViewDirection: [0, 0, -1], revision: 2 };
     f.selection.setView(view); await f.settle(); assert.equal(await pending, true);
-    const frame = f.presentation.observe().material.materialFrame;
-    assert.notEqual(frame, runtimeDefinition.materials[0].demand.defaultFrame);
+    const frame = f.presentation.observe().materials.exterior.frame;
+    assert.notEqual(frame, runtimeDefinition.materials[0].defaultFrame);
     await select(f, lens("normal"));
-    assert.equal(f.presentation.observe().material.materialFrame, frame);
+    assert.equal(f.presentation.observe().materials.exterior.frame, frame);
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });

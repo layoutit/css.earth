@@ -3,7 +3,7 @@ export const DESKTOP_VIEWPORT_MIN = MOBILE_VIEWPORT_MAX + 1;
 export const MOBILE_VIEWPORT_QUERY =
   `(max-width: ${MOBILE_VIEWPORT_MAX}px), (orientation: portrait)`;
 export const MOBILE_TOUCH_ACTION = "pan-y";
-export const CANONICAL_PREPARED_IMAGE_DENSITY = 2;
+export { CANONICAL_PREPARED_IMAGE_DENSITY } from "../src/platform/prepared-object-assets.mjs";
 export const SKYBOX_DRAG_ENABLED = true;
 export const WHEEL_ZOOM_SPEED_MULTIPLIER = 4;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;

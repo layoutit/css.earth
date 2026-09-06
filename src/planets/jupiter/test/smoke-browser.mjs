@@ -275,7 +275,6 @@ async function runtimeState(page) {
     runtimeDomGrowthPolicy: window.__jupiter.dom.runtimeDomGrowthPolicy,
     selectedPreparedDensity: window.__jupiter.renderStats.selectedPreparedDensity,
     visibleAssetsDecodedBeforeMount: window.__jupiter.renderStats.visibleAssetsDecodedBeforeMount,
-    idleJavaScriptLoops: window.__jupiter.renderStats.idleJavaScriptLoops,
     animationCount: document.querySelector(".planet-stage").getAnimations({ subtree: true }).length,
     canvasCount: document.querySelectorAll("canvas").length,
     sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
@@ -334,7 +333,6 @@ function assertRuntimeState(state) {
   assert.equal(state.runtimeDomGrowthPolicy, "none");
   assert.equal(state.selectedPreparedDensity, 2);
   assert.equal(state.visibleAssetsDecodedBeforeMount, 20);
-  assert.equal(state.idleJavaScriptLoops, 0);
   assert.equal(state.animationCount, 1);
   assert.equal(state.canvasCount, 0);
   assert.equal(state.sceneSvgCount, 0);

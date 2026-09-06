@@ -143,6 +143,20 @@ export function validatePreparedCubicSky(plan, { requireSun = true } = {}) {
       !Number.isFinite(plan.cameraZoomResponse) ||
       !Number.isFinite(plan.presentationPitchOffsetDegrees) ||
       !Number.isFinite(plan.presentationYawOffsetDegrees) ||
+      (plan.catalogueStars !== undefined && (
+        plan.catalogueStars?.schema !== "cssearth-prepared-catalogue-stars@1" ||
+        plan.catalogueStars.coexistence !== "photograph-kept-retained-band-holes-catalogue-points-for-bright-stars" ||
+        !(plan.catalogueStars.photographDetailGain > 0) ||
+        !(plan.catalogueStars.photographHoleRadiusFacePixels > 0) ||
+        !Number.isFinite(plan.catalogueStars.limitingMagnitude) ||
+        !Array.isArray(plan.catalogueStars.retained) || plan.catalogueStars.retained.length === 0 ||
+        !Array.isArray(plan.catalogueStars.bands) ||
+        plan.catalogueStars.retained.some((star) =>
+          typeof star.transform !== "string" || !(star.radiusPx > 0) ||
+          !(star.luminance > 0) || star.luminance > 1 ||
+          !Array.isArray(star.color) || star.color.length !== 3 ||
+          !Array.isArray(star.direction) || star.direction.length !== 3 ||
+          Math.abs(Math.hypot(...star.direction) - 1) > 1e-5))) ||
       (plan.projection !== undefined && (
         plan.projection.axis !== "horizontal" ||
         !Number.isFinite(plan.projection.horizontalFovDegrees) ||

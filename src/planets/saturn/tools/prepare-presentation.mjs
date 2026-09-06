@@ -104,7 +104,7 @@ export async function prepareSaturnPresentation() {
   interiorLeaf.className = [...new Set([...(interiorLeaf.className ?? "").split(/\s+/).filter(Boolean), "saturn-interior-material"])].join(" ");
   interiorLeaf.style.backgroundImage = "none";
   b.append(scene, materialSystem); b.append(materialSystem, materialCounter); b.append(materialCounter, materialMesh); b.append(materialMesh, exteriorLeaf, interiorLeaf);
-  const { tree, index } = b.finish({ camera: cameraNode, scene, registrations: [{ bodySystem: system, lightingOverlays: [materialSystem] }] });
+  const { tree, index } = b.finish({ camera: cameraNode, scene });
   const shape = plan.fixedMaterialPlane.interactionProjection, width = shape.textureSize, height = width;
   const projection = { equatorialRadius: shape.equatorialRadius * shape.tileSize, polarRadius: shape.polarRadius * shape.tileSize,
     // Preserve the original native CSSOM read without a per-frame DOM parse.
@@ -119,9 +119,7 @@ export async function prepareSaturnPresentation() {
   const defaultFrame = Math.round(Math.max(0, Math.min(orbit.frameCount - 1,
     (orbit.maximumScenePitchDegrees - camera.initialScenePitchDegrees) / (orbit.maximumScenePitchDegrees - orbit.minimumScenePitchDegrees) * (orbit.frameCount - 1))));
   const frame = { source: "reference-sun-z", minimum: 0, maximum: 2, count: orbit.frameCount, baseFrame: defaultFrame, remap: null };
-  const defaultPose = [{ source: "control-pitch", scale: 1, offset: 0, value: camera.defaultControlPitchDegrees, epsilon: 0.01 },
-    { source: "control-yaw", scale: 1, offset: 0, value: camera.defaultControlYawDegrees, epsilon: 0.01 }];
-  const track = (id, target, atlas, interior) => ({ id, target: index(target), frame, defaultPose,
+  const track = (id, target, atlas, interior) => ({ id, target: index(target), frame,
     banks: Object.entries(atlas.variants).filter(([name]) => !interior || name === "normal" || name.startsWith("normal-")).map(([name, variant]) => {
       const resource = `${interior ? "interior-material" : "exterior"}:${name}`;
       const address = (p, frame) => ({ resource, frame, row: null, backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize });
@@ -129,8 +127,7 @@ export async function prepareSaturnPresentation() {
         ? Math.round(index / (frame.count - 1) * (plan.interior.atmosphere.frameCount - 1)) : index], index)),
         default: address(variant.defaultPresentation, null), fixed: null };
     }),
-    demand: { mode: interior ? "visible" : "current", prewarm: "none", capacity: 2, framesPerRow: frame.count,
-      defaultFrame, initialRows: [], holdHiddenNeighborhood: false, fallback: "hold" },
+    demand: { capacity: 2, defaultFrame },
     rotation: { kind: "ellipsoid", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false, polePolicy: "azimuth",
       width, height, projection, systemTransform: materialSystem.style.transform, onlyWhenEnabled: true },
     frameAttribute: null, modeAttribute: null, quoted: true });
@@ -153,13 +150,7 @@ export async function prepareSaturnPresentation() {
       ...["exterior-material", "interior-material"].map(id => preparedResourcePool(id, entries, { retention: "selection", decoding: "sync", capacity: 2, concurrency: 2 }))],
       startup: [...entries.filter(entry => entry.pool === "warm").map(entry => entry.key), `exterior:${exteriorAtlas.defaultVariant}`] },
     tree, variants, materials: [track("exterior", exteriorLeaf, exteriorAtlas, false), track("interior", interiorLeaf, interiorAtlas, true)],
-    viewBindings: [{ kind: "counter-rotation", target: index(materialCounter), systemTransform: materialSystem.style.transform }], animations: [],
-    observations: { constants: { dom: { interiorMounted: true } },
-      counts: [{ category: "dom", name: "interiorLeafCount", target: index(cutaway), kind: "leaves", includeRoot: false }],
-      materials: ["camera", "material"].flatMap(category => [{ category, name: "materialFrame", track: "exterior", field: "frame" },
-        { category, name: "materialAddressWrites", track: "exterior", field: "addressWrites" },
-        { category, name: "interiorAddressWrites", track: "interior", field: "addressWrites" }]),
-      sums: [{ category: "camera", name: "transformWrites", tracks: ["exterior", "interior"], field: "transformWrites", includePresentation: true }] } };
+    viewBindings: [{ kind: "counter-rotation", target: index(materialCounter), systemTransform: materialSystem.style.transform }], animations: [] };
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {

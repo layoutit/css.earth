@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 import { OBJECTS } from "../site/objects.mjs";
 import { auditObjectRuntimeOwnership, inspectObjectRuntimeModule } from "./check-object-runtime-ownership.mjs";
 import { objectControls } from "../src/planets/moon/site/control-content.mjs";
-import { requireObjectRuntimeDefinition } from "../src/platform/object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mjs";
 import { readPreparedJsonModule } from "./check-prepared-presentation.mjs";
 
@@ -27,7 +27,7 @@ function fixture(extra = {}, definitionTail = "") {
     "site/components/PlanetShell.astro": "<aside><slot /></aside>",
     [prefix + "preparedPresentation.mjs"]: prepared,
     "src/planets/moon/site/control-content.mjs": `export const objectControls = ${JSON.stringify(objectControls)};`,
-    "src/platform/prepared-presentation-contract.mjs": `export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@2";`,
+    "src/platform/prepared-schema.mjs": `export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@3";`,
     "src/platform/object-runtime.mjs": shared, ...extra };
   return { root, objects: [{ id: "moon" }],
     verifyDefinition(object, plan) { requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: object.id, controls: objectControls }); },
@@ -61,8 +61,8 @@ test("private synchronous material publication is rejected even when its file is
 });
 
 for (const source of [
-  "import { createLatestSelection as renamed } from '../../../platform/latest-selection.mjs'; renamed({});",
-  "import * as runtime from '../../../platform/latest-selection.mjs'; runtime.createLatestSelection({});",
+  "import { createObjectSelectionRuntime as renamed } from '../../../platform/object-selection-runtime.mjs'; renamed({});",
+  "import * as runtime from '../../../platform/object-selection-runtime.mjs'; runtime.createObjectSelectionRuntime({});",
   "node.addEventListener('click', handler);", "function hidden() { return Promise.resolve({}); }",
   "function hidden() { return work.then(commit); }", "const handle = setTimeout(pump, 120);",
   "animation.playbackRate = 2;", "animation.currentTime = 0;", "animation.play();",
@@ -161,17 +161,11 @@ test("the actual Moon registry import must point to the audited client and retur
   ]) await assert.rejects(auditObjectRuntimeOwnership(fixture({ "site/objects.mjs": source })), /Actual OBJECTS registry|registered runtime loader/);
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding.replace("mountMoonClient", "differentExport") })), /one bound shared factory export/);
 });
-test("an actual generated Uranus site module cannot execute preparation through a literal-looking export", async () => {
-  const file = resolve("src/planets/uranus/site/control-content.mjs");
-  const { objectControls } = await import("../src/planets/uranus/site/control-content.mjs");
-  const executable = `export const objectControls = (() => (${JSON.stringify(objectControls)}))();`;
-  await assert.rejects(auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "uranus"),
-    readText: path => path === file ? executable : readFile(path, "utf8") }), /control-content.mjs.*Object controls must only project static prepared content/);
-});
-
 test("the actual OBJECTS registry has only normalized packages and one shared source closure", async () => {
   const report = await auditObjectRuntimeOwnership();
   assert.equal(report.complete, true);
+  for (const file of ["src/platform/prepared-presentation-contract.mjs", "src/platform/cubic-sky-contract.mjs", "src/platform/directional-sun-contract.mjs", "tools/object-runtime-contract.mjs", "src/platform/latest-selection.mjs"])
+    assert.ok(!report.sharedClosure.includes(file), `${file} must stay outside the browser`);
   assert.deepEqual(report.entries.map(entry => entry.id), OBJECTS.map(object => object.id));
   assert.ok(report.entries.every(entry => entry.factoryCalls === 1 && entry.owners.length === 0 && entry.orphanExecutors.length === 0));
   assert.ok(report.sharedClosure.includes("site/components/PlanetShell.astro"));

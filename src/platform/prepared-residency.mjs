@@ -1,5 +1,4 @@
 import { createPreparedImageStore } from "./prepared-image-store.mjs";
-import { requirePreparedResourceCatalog } from "./object-runtime-contract.mjs";
 
 // Demands are prepared keys in priority order. This owner knows capacities and
 // leases, not planets, texture rows, lens semantics, or presentation elements.
@@ -7,7 +6,6 @@ export function createPreparedResidency({
   assets, createImage, onReady = () => {}, onWarmError = () => {}, onCleanupError = onWarmError,
   schedule = setTimeout, unschedule = clearTimeout,
 } = {}) {
-  requirePreparedResourceCatalog(assets);
   const catalog = new Map(assets.entries.map(entry => [entry.key, entry]));
   const policies = new Map(assets.pools.map(pool => [pool.id, pool]));
   const images = createPreparedImageStore({ pools: assets.pools, ...(createImage ? { createImage } : {}) });

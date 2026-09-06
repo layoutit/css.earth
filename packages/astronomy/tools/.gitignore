@@ -1,0 +1,4 @@
+# Downloaded source series and Horizons responses. Large, reproducible, and
+# owned by their upstreams; the generators re-fetch them on demand.
+.cache/
+.scratch/

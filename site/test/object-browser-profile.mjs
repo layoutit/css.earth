@@ -49,29 +49,7 @@ export function createObjectBrowserProfile({ id, inputSelector, audit, controls,
     runtimePresent: page => page.evaluate(key => typeof window[key] !== 'undefined', key),
     retainedImages: page => page.evaluate(key => window[key].runtime.resources().images.entries.filter(entry => entry.ready).length, key),
     selectedDensity: page => page.evaluate(key => window[key].renderStats.selectedPreparedDensity, key),
-    async enterLensContext(page, lensId) {
-      const lens = controls.lenses?.controls.find(lens => lens.id === lensId);
-      const panel = page.locator("[data-entity-card]");
-      if (!await panel.count()) return;
-      if (lens?.entityIds) {
-        const targetId = lens.entityIds[0];
-        if (await panel.getAttribute("data-entity-id") === targetId && await panel.isVisible()) return;
-        const place = await page.evaluate(async targetId => {
-          const url = window[`__${document.querySelector(".planet-stage").dataset.objectId}`].runtime.destinationCatalog().url;
-          return (await fetch(url).then(response => response.json())).places.find(place => place.id === targetId);
-        }, targetId);
-        await page.locator(".planet-sidebar-search").fill(place.name);
-        await page.locator(`[data-destination-id="${targetId}"]`).click();
-        await page.waitForFunction(id => document.querySelector("[data-entity-card]").dataset.entityId === id, targetId);
-      } else if (await panel.getAttribute("data-entity-id") !== id) {
-        await page.locator(`[data-entity-parent="${id}"]`).click();
-        await page.waitForFunction(id => document.querySelector("[data-entity-card]").dataset.entityId === id, id);
-      }
-    },
-    async selectLens(page, lensId) {
-      if (controls.lenses?.controls.some(lens => lens.entityIds)) await profile.enterLensContext(page, lensId);
-      return page.evaluate(({ key, lensId }) => window[key].lenses.select(lensId), { key, lensId });
-    },
+    selectLens: (page, lensId) => page.evaluate(({ key, lensId }) => window[key].lenses.select(lensId), { key, lensId }),
     lens: page => page.evaluate(key => {
       const runtime = window[key], selection = runtime.runtime.selection().committed;
       return { ...runtime.lenses.state(), id: selection.lensId };

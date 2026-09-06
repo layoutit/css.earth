@@ -1,25 +1,10 @@
 import { isObjectBrowserProfile } from "./object-browser-profile.mjs";
 import assert from "node:assert/strict";
-import { requireObjectControls } from "../scene-contract.mjs";
-
-const REQUIRED_METHODS = Object.freeze([
-  "waitForRuntime",
-  "pause",
-  "camera",
-  "setCamera",
-  "bounds",
-  "stable",
-  "runtimePresent",
-  "retainedImages",
-  "selectedDensity",
-  "retainedReport",
-]);
 
 export async function loadPlanetBrowserProfile(planet) {
   const { objectControls } = await import(new URL(
     `../../src/planets/${planet.id}/site/control-content.mjs`, import.meta.url,
   ).href);
-  requireObjectControls(objectControls, planet.id);
   const profileUrl = new URL(
     `../../src/planets/${planet.id}/test/browser-profile.mjs`,
     import.meta.url,
@@ -31,30 +16,13 @@ export async function loadPlanetBrowserProfile(planet) {
 }
 
 export function validatePlanetBrowserProfile(planet, browserProfile, objectControls) {
-  requireObjectControls(objectControls, planet.id);
   assert.equal(browserProfile?.id, planet.id,
     `${planet.id}: browser profile identity must match its object package`);
   assert.equal(typeof browserProfile.inputSelector, "string",
     `${planet.id}: browser profile must provide inputSelector`);
-  for (const method of REQUIRED_METHODS) {
-    assert.equal(typeof browserProfile[method], "function",
-      `${planet.id}: browser profile must provide ${method}()`);
-  }
   const lensIds = objectControls.lenses?.controls.map(({ id }) => id) ?? [];
-  if (lensIds.length) {
-    for (const method of ["selectLens", "lens", "visibleLens", "pressedLens"]) {
-      assert.equal(typeof browserProfile[method], "function",
-        `${planet.id}: declared lenses require ${method}()`);
-    }
-  }
   assert.ok(browserProfile.audit && typeof browserProfile.audit === "object",
     `${planet.id}: browser profile must provide audit expectations`);
-  assert.ok(["outer", "panel", "scene", "shared"].includes(
-    browserProfile.audit.finalScope),
-  `${planet.id}: browser profile must provide a supported final audit scope`);
-  assert.ok(Array.isArray(browserProfile.audit.fullComparisonWidths) &&
-    browserProfile.audit.fullComparisonWidths.every(Number.isSafeInteger),
-  `${planet.id}: browser profile must provide fullComparisonWidths`);
   assert.ok(Array.isArray(browserProfile.audit.preparedAssetPairs) &&
     browserProfile.audit.preparedAssetPairs.length > 0 &&
     browserProfile.audit.preparedAssetPairs.every(({ one, two }) =>

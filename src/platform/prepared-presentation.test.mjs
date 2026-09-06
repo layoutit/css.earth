@@ -45,7 +45,7 @@ test("a missing member cannot publish a partial texture group", () => {
     assert.deepEqual(nodes.map(node => [node.style.getPropertyValue("--moon-surface-texture"), node.style.getPropertyValue("--moon-poles-texture")]), before);
   } finally { f.restore(); }
 });
-test("the data presentation uses common latest-selection cancellation and repeated exclusive selection", async () => {
+test("the data presentation uses common selection cancellation and repeated exclusive selection", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const [normal, slow, winner] = runtimeDefinition.controls.lenses.controls;

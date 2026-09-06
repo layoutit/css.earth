@@ -1,6 +1,4 @@
-import { readFile } from "node:fs/promises";
-import { createPreparedCameraPublisher } from "../prepared-camera-runtime.mjs";
-import { createSceneLifetime } from "../scene-lifetime.mjs";
+import { createRetainedCubicSkyOrbit } from "../object-orbit.mjs";
 
 export class Surface {
   constructor() {
@@ -31,17 +29,6 @@ export class Surface {
   releasePointerCapture(id) { this.captured.delete(id); }
 }
 
-const source = await readFile(new URL("../cubic-sky-runtime.mjs", import.meta.url), "utf8");
-const start = source.indexOf("export function createObjectInteractionControls(");
-const end = source.indexOf("\nexport function preparedScenePitch", start);
-const factory = new Function("dependencies", `const { createSceneLifetime, createPreparedCameraPublisher, HTMLElement,
-  validatePreparedCubicSky, validateDirectionalSunPlan, createPolyCamera,
-  createCubicSkyCameraOrientation, matchMedia, MOBILE_VIEWPORT_QUERY,
-  createUnboundedMatrixDragControls, createPreparedWheelZoomControls, bindResponsiveOrbitPolicy,
-  selectPreparedResponsiveZoom, viewSunDirectionToPreparedLightDirection, preparedScenePitch, clamp } = dependencies;
-  ${source.slice(start, end).replaceAll("export ", "")}
-  return createRetainedCubicSkyOrbit;`);
-
 export function orbitFixture(failure, cleanupFailure = false, dependencies = {}) {
   const owners = new Set();
   const callbacks = {};
@@ -56,18 +43,15 @@ export function orbitFixture(failure, cleanupFailure = false, dependencies = {})
       },
     };
   };
-  const create = factory({
-    createSceneLifetime, createPreparedCameraPublisher, HTMLElement: Surface,
-    viewSunDirectionToPreparedLightDirection: (value) => value,
-    preparedScenePitch: (value) => value,
-    validatePreparedCubicSky() {}, validateDirectionalSunPlan() {},
+  const services = {
+    HTMLElement: Surface,
     createPolyCamera(state) { return { state, update(value) { Object.assign(state, value); } }; },
     createCubicSkyCameraOrientation() {
-      return { scene: () => "matrix3d(1)", skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: [0, 0, 1] }),
-        counterRotation() { return "matrix3d(1)"; }, billboardCounterRotation() {}, reset() {}, rotate() {}, snapshot() { return {}; },
+      return { scene: () => "matrix3d(1)", sceneMatrix: () => "matrix3d(1)", skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: [0, 0, 1] }),
+        counterRotation() { return "matrix3d(1)"; },  reset() {}, rotate() {}, snapshot() { return {}; },
       };
     },
-    matchMedia: () => ({ matches: false }), MOBILE_VIEWPORT_QUERY: "mobile",
+    matchMedia: () => ({ matches: false }),
     createUnboundedMatrixDragControls: (options) => { callbacks.drag = options; return acquire("drag"); },
     createPreparedWheelZoomControls: (options) => { callbacks.wheel = options; return acquire("wheel"); },
     bindResponsiveOrbitPolicy: (options) => { callbacks.policy = options; return acquire("policy"); },
@@ -75,9 +59,9 @@ export function orbitFixture(failure, cleanupFailure = false, dependencies = {})
       if (failure === "fit") throw new Error("fit failure");
       return { zoom: 1, model: "unit", widthShare: 0.5 };
     },
-    clamp: (value, minimum, maximum) => Math.max(minimum, Math.min(maximum, value)),
     ...dependencies,
-  });
+  };
+  const create = options => createRetainedCubicSkyOrbit(options, services);
   const cameraPlan = Object.fromEntries([
     "minimumControlPitchDegrees", "maximumControlPitchDegrees", "defaultControlPitchDegrees",
     "defaultControlYawDegrees", "initialScenePitchDegrees", "maximumScenePitchDegrees",

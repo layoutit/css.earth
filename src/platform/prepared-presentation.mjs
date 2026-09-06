@@ -1,5 +1,4 @@
-import { registerBodyDependentLayers } from "./body-layer-registration.mjs";
-import { preparedScenePitch } from "./cubic-sky-runtime.mjs";
+import { preparedScenePitch } from "./camera-math.mjs";
 import { createPreparedMaterialPublisher } from "./prepared-material.mjs";
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.mjs";
 
@@ -82,10 +81,8 @@ export function mountPreparedPresentation(stage, context, definition) {
     context.own(() => { if (owned()) stage.classList.toggle(name, previous); });
   }
   stage.replaceChildren(...roots);
+  if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
   for (const name of definition.tree.stageClasses) stage.classList.add(name);
-  const bodyLayers = Object.freeze(definition.tree.registrations.map(record => registerBodyDependentLayers({
-    objectId: definition.id, sceneElement, bodySystem: nodes[record.bodySystem], lightingOverlays: record.lightingOverlays.map(index => nodes[index]),
-  })));
   const animations = definition.animations.map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, easing: "linear", fill: "both" });
     animation.id = plan.id; context.registerAnimation(animation, { mode: plan.mode });
@@ -93,9 +90,12 @@ export function mountPreparedPresentation(stage, context, definition) {
   });
   const materials = new Map(definition.materials.map(track => [track.id,
     createPreparedMaterialPublisher(track, nodes[track.target], definition.camera)]));
-  let selectionPublications = 0, framePublications = 0, styleWrites = 0, transformWrites = 0, publishedSelection = null;
+  let selectionPublications = 0, framePublications = 0, styleWrites = 0, transformWrites = 0;
+  const GEOMETRY_LEVEL_OF_DETAIL = Object.freeze({ stage: "geometry", silhouetteDiameter: null, billboardOpacity: 0, markerOpacity: 0 });
+  const round = (value, precision) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
+  const formatNumber = value => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = index => index === -1 ? stage : nodes[index];
-  return Object.freeze({ cameraElement, sceneElement, bodyLayers,
+  return Object.freeze({ cameraElement, sceneElement,
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
       carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),
@@ -115,16 +115,39 @@ export function mountPreparedPresentation(stage, context, definition) {
         else { writeStyle(element, binding.name, value); styleWrites++; }
       }
       selectionPublications++;
-      publishedSelection = selection;
     },
     publishFrame({ selection, view, resources, plan }) {
+      // The camera's published level of detail (a perspective dolly, see
+      // perspective-dolly.mjs); before its first publication the geometry
+      // stage applies.
+      const levelOfDetail = view.levelOfDetail ?? GEOMETRY_LEVEL_OF_DETAIL;
       for (const binding of definition.viewBindings) {
         const element = target(binding.target);
         if (binding.kind === "view-attribute") {
           let value = binding.source === "scene-pitch" ? preparedScenePitch(view.controlPitch, definition.camera)
-            : binding.source === "control-yaw" ? view.controlYaw : binding.source === "zoom" ? view.zoom : view.sceneMatrix;
+            : binding.source === "control-yaw" ? view.controlYaw : binding.source === "zoom" ? view.zoom
+              : binding.source === "level-of-detail-stage" ? levelOfDetail.stage : view.sceneMatrix;
           if (binding.precision !== null) { const scale = 10 ** binding.precision; value = Math.round(value * scale) / scale; }
-          writeAttribute(element, binding.property, String(value));
+          if (readAttribute(element, binding.property) !== String(value)) writeAttribute(element, binding.property, String(value));
+        } else if (binding.kind === "view-property") {
+          const value = formatNumber(round(binding.source === "billboard-opacity" ? levelOfDetail.billboardOpacity : levelOfDetail.markerOpacity, binding.precision));
+          if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
+        } else if (binding.kind === "silhouette-fit") {
+          // The overlay fitted to the projected silhouette: an ellipse,
+          // slightly elongated and shifted outward when off-axis, exactly the
+          // mathematical silhouette the prepared frames are registered to,
+          // never smaller than the prepared floor (the marker it lights).
+          const silhouette = view.body?.silhouette;
+          if (silhouette) {
+            const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
+            const radial = Math.max(silhouette.radialSemiAxis, binding.minimumRadius);
+            const tangential = Math.max(silhouette.tangentialSemiAxis, binding.minimumRadius);
+            const transform = `translate(${formatNumber(silhouette.centre[0])}px, ${formatNumber(silhouette.centre[1])}px) ` +
+              `rotate(${formatNumber(radialAngle)}deg) ` +
+              `scale(${formatNumber(radial * binding.unitScale)}, ${formatNumber(tangential * binding.unitScale)}) ` +
+              `rotate(${formatNumber(-radialAngle)}deg)`;
+            if (element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
+          }
         } else if (binding.kind === "zoom-property") { writeStyle(element, binding.property, String(view.zoom)); styleWrites++; }
         else if (binding.kind === "shell-scale") {
           element.style.scale = `calc(var(${binding.variable}) / (var(--planet-viewport-zoom-divisor) / ${view.zoom / binding.defaultZoom}))`;
@@ -141,34 +164,10 @@ export function mountPreparedPresentation(stage, context, definition) {
       framePublications++;
     },
     observe() {
-      for (const registration of bodyLayers) registration.assertRegistered();
-      const result = { ...definition.observations.constants };
-      for (const observation of definition.observations.materials) {
-        result[observation.category] = { ...result[observation.category],
-          [observation.name]: materials.get(observation.track).observe()[observation.field] };
-      }
-      for (const count of definition.observations.counts) {
-        const element = nodes[count.target], descendants = element.querySelectorAll(count.kind === "leaves" ? "b, s, u" : "*");
-        result[count.category] = { ...result[count.category], [count.name]: descendants.length + Number(count.includeRoot) };
-      }
-      result.presentation = { nodes: nodes.length, roots: roots.length, selectionPublications, framePublications, styleWrites, transformWrites };
-      for (const observation of definition.observations.publications ?? []) {
-        result[observation.category] = { ...result[observation.category],
-          [observation.name]: result.presentation[observation.field] };
-      }
-      for (const observation of definition.observations.attributes ?? []) {
-        result[observation.category] = { ...result[observation.category],
-          [observation.name]: readAttribute(nodes[observation.target], observation.attribute) ?? observation.default };
-      }
-      for (const observation of definition.observations.selection ?? []) {
-        result[observation.category] = { ...result[observation.category], [observation.name]: publishedSelection?.[observation.key] ?? null };
-      }
-      for (const observation of definition.observations.sums ?? []) {
-        const value = observation.tracks.reduce((sum, id) => sum + materials.get(id).observe()[observation.field],
-          observation.includePresentation ? result.presentation[observation.field] : 0);
-        result[observation.category] = { ...result[observation.category], [observation.name]: value };
-      }
-      return result;
+      return {
+        presentation: { nodes: nodes.length, roots: roots.length, selectionPublications, framePublications, styleWrites, transformWrites },
+        materials: Object.fromEntries([...materials].map(([id, material]) => [id, material.observe()])),
+      };
     },
   });
 }

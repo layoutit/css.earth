@@ -30,6 +30,14 @@ const LIGHT_PRESENTATION_SIZE = 460;
 const LIGHT_FRAME = 512;
 const LIGHT_COLUMNS = 8;
 const LIGHT_FRAME_COUNT = 256;
+// The billboard lighting atlas: every frame again, at the size the far view
+// needs. Below a few tens of pixels the body is a flat albedo disc under the
+// same phase overlay, and this one small image replaces the row shards there,
+// so the row cache stops streaming 8192-pixel rows for a body a dozen pixels
+// across. 24 CSS pixels a frame covers the widest disc the billboard draws
+// (about 20 pixels) at the prepared density.
+const LIGHT_BILLBOARD_FRAME = 24;
+const LIGHT_BILLBOARD_COLUMNS = 16;
 const INTERIOR_WIDTH = 1024;
 const INTERIOR_HEIGHT = 512;
 const INTERIOR_POLE_TILE = 256;
@@ -725,6 +733,7 @@ async function writeLightingBank(pixelDensity) {
   const rowCount = Math.ceil(LIGHT_FRAME_COUNT / LIGHT_COLUMNS);
   const rows = [];
   const presentations = [];
+  const billboard = createBillboardAtlas(pixelDensity);
   for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
     const firstFrame = rowIndex * LIGHT_COLUMNS;
     const frameCount = Math.min(
@@ -744,6 +753,7 @@ async function writeLightingBank(pixelDensity) {
           (y + 1) * frameSize * 4,
         );
       }
+      await placeBillboardFrame(billboard, frame, frameSize, frameIndex);
       presentations.push(Object.freeze({
         frameIndex,
         rowIndex,
@@ -793,6 +803,7 @@ async function writeLightingBank(pixelDensity) {
     preparedPixelDensity: pixelDensity,
     frameSize,
     presentationFrameSize: LIGHT_PRESENTATION_SIZE,
+    billboard: await writeBillboardAtlas(billboard),
     transport: Object.freeze({
       model: "row-shard-cache",
       encoding: "lossless-webp",
@@ -825,10 +836,85 @@ async function removeObsoleteLightingAssets() {
   const files = await readdir(MERCURY_PUBLIC_ROOT);
   await Promise.all(files.filter((fileName) =>
     /^mercury-lighting(?:-default)?(?:@2x)?\.webp$/u.test(fileName) ||
-    /^mercury-lighting-[12]x-row-\d+\.webp$/u.test(fileName))
+    /^mercury-lighting-[12]x-row-\d+\.webp$/u.test(fileName) ||
+    /^mercury-lighting-[12]x-billboard\.webp$/u.test(fileName))
     .map((fileName) => rm(resolve(MERCURY_PUBLIC_ROOT, fileName), {
       force: true,
     })));
+}
+
+// The billboard atlas is a grid of every lighting frame, each the full-size
+// frame resampled: the same overlay, registered the same way, so the billboard
+// inherits the terminator the geometry shows at the moment it takes over.
+function createBillboardAtlas(pixelDensity) {
+  const frameSize = LIGHT_BILLBOARD_FRAME * pixelDensity;
+  const rowCount = Math.ceil(LIGHT_FRAME_COUNT / LIGHT_BILLBOARD_COLUMNS);
+  const width = frameSize * LIGHT_BILLBOARD_COLUMNS;
+  const height = frameSize * rowCount;
+  return {
+    pixelDensity,
+    frameSize,
+    columns: LIGHT_BILLBOARD_COLUMNS,
+    rowCount,
+    width,
+    height,
+    pixels: Buffer.alloc(width * height * 4),
+    fileName: `mercury-lighting-${pixelDensity}x-billboard.webp`,
+  };
+}
+
+async function placeBillboardFrame(atlas, frame, sourceSize, frameIndex) {
+  const { data } = await sharp(frame, {
+    raw: { width: sourceSize, height: sourceSize, channels: 4 },
+  }).resize(atlas.frameSize, atlas.frameSize, { kernel: "lanczos3" })
+    .raw().toBuffer({ resolveWithObject: true });
+  const column = frameIndex % atlas.columns;
+  const row = Math.floor(frameIndex / atlas.columns);
+  for (let y = 0; y < atlas.frameSize; y += 1) {
+    data.copy(
+      atlas.pixels,
+      ((row * atlas.frameSize + y) * atlas.width + column * atlas.frameSize) * 4,
+      y * atlas.frameSize * 4,
+      (y + 1) * atlas.frameSize * 4,
+    );
+  }
+}
+
+async function writeBillboardAtlas(atlas) {
+  const path = resolve(MERCURY_PUBLIC_ROOT, atlas.fileName);
+  await sharp(atlas.pixels, {
+    raw: { width: atlas.width, height: atlas.height, channels: 4 },
+  }).webp({ lossless: true, alphaQuality: 100 }).toFile(path);
+  const bytes = await readFile(path);
+  const url = `/scenes/mercury/${atlas.fileName}`;
+  // Presented like the row frames: each frame fills the 460-pixel disc box.
+  const presentations = Array.from({ length: LIGHT_FRAME_COUNT }, (_, frameIndex) =>
+    Object.freeze({
+      frameIndex,
+      url,
+      backgroundPosition:
+        `${-(frameIndex % atlas.columns) * LIGHT_PRESENTATION_SIZE}px ` +
+        `${-Math.floor(frameIndex / atlas.columns) * LIGHT_PRESENTATION_SIZE}px`,
+      backgroundSize:
+        `${atlas.columns * LIGHT_PRESENTATION_SIZE}px ` +
+        `${atlas.rowCount * LIGHT_PRESENTATION_SIZE}px`,
+    }));
+  return Object.freeze({
+    schema: "cssmercury-prepared-lighting-billboard@1",
+    url,
+    encoding: "lossless-webp",
+    bytes: bytes.byteLength,
+    sha256: createHash("sha256").update(bytes).digest("hex"),
+    width: atlas.width,
+    height: atlas.height,
+    frameSize: atlas.frameSize,
+    columns: atlas.columns,
+    rowCount: atlas.rowCount,
+    frameCount: LIGHT_FRAME_COUNT,
+    presentationFrameSize: LIGHT_PRESENTATION_SIZE,
+    decodedRgbaBytes: atlas.width * atlas.height * 4,
+    presentations: Object.freeze(presentations),
+  });
 }
 
 function lightingFrame(size, frameIndex) {

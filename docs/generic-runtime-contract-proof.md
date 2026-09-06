@@ -25,8 +25,6 @@ session and the common publisher for every declared material target. Static
 closure checks separately followed the real registry loaders and rejected private
 owners, executable prepared records, extra cameras and shared object-ID dispatch.
 
-The [machine-readable record](prepared-presentation-evidence.json) identifies the
-source, report hashes, preparation timings, comparison counts and delivery limits.
 Raw captures and failed runs remain in the local evidence directory
 `output/presentation-generalization/260905-001/`. A later successful diagnostic
 never overwrites an earlier failed result.

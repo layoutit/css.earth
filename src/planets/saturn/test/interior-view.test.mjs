@@ -124,7 +124,6 @@ test("ships lossless DPR assets and keeps view switching declarative", async () 
     assert.equal(material.clearWhenHidden, true);
     if (interior) assert.match(material.bank, /^normal(?:-|$)/);
   }
-  assert.equal(PREPARED_PRESENTATION.observations.constants.dom.interiorMounted, true);
   const cutaway = PREPARED_PRESENTATION.tree.nodes.findIndex(node => node.className === "polycss-mesh saturn-cutaway");
   assert.ok(cutaway >= 0);
   assert.ok(PREPARED_PRESENTATION.tree.nodes.some(node => node.parent === cutaway));

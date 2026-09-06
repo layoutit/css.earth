@@ -244,8 +244,8 @@ try {
           }
         },{shadows,atmosphere});
         await page.waitForFunction(()=>{
-          const caches=window.__earth.renderStats.textureStats.materialCaches;
-          return !caches.lighting().pendingRowCount && !caches.atmosphere().pendingRowCount;
+          return window.__earth.runtime.resources().pools
+            .filter(pool=>["lighting","atmosphere"].includes(pool.id)).every(pool=>pool.pending===0);
         });
         await settle(page);
         assert.deepEqual(await page.evaluate(()=>window.__earth.features.state()),{shadows,atmosphere});

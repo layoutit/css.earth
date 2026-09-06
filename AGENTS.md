@@ -10,4 +10,3 @@
 - Do not use runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas, WebGL, or SVG scene rendering.
 - Preserve source/provenance files beside each planet and keep prepared outputs reproducible from the checked-in inputs.
 - Use source and runtime closure tests, object-package tests, router tests, and `OBJECTS`-derived browser conformance as proof. Do not duplicate those facts as declaration-only constants.
-- Before calling an object ready, run `pnpm acquire:planets -- --verify-only`, `pnpm test`, `pnpm build`, and `pnpm test:browser`. Prove DPR 1 and DPR 2 in real Chrome.

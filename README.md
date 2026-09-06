@@ -58,6 +58,13 @@ before publishing it atomically to `.local/wmts-global/<version>/`.
 See [Earth reproduction](docs/global-earth-coverage.md#reproduction-and-checks)
 for acquisition and explicit geometry-authoring commands.
 
+The vendored astronomy package (`packages/astronomy`, see its `SOURCE.md`) is
+a preparation dependency only. It is consumed through its own build, which
+`pnpm install` runs as `postinstall` (`pnpm build:astronomy` repeats it);
+`pnpm prepare:planets` builds it first, and `pnpm prepare:solar-geometry`
+regenerates the checked-in `src/platform/solar-geometry.mjs` from it
+bit-for-bit. The browser runtime never loads it.
+
 After preparation, verify the local source closure or regenerate the browser
 assets with:
 
@@ -98,10 +105,6 @@ pnpm prepare:planet-info
 The importer validates NASA's record identity and structured content schema.
 It does not fall back to scraping rendered webpages. Pluto uses checked,
 object-owned NASA and JPL sources, without adding another registry entry here.
-
-Search includes the Sun, planets, Moon, and Pluto. The planet distance scale
-remains a planet-only view derived from classification. To run every browser
-gate against an isolated server, use `pnpm test:browser http://127.0.0.1:4211`.
 
 ## License and Data
 

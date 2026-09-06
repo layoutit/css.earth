@@ -49,9 +49,6 @@ try {
     skyboxCount: 1,
     skyboxFaceCount: 6,
     sunBillboardCount: 1,
-    sunCubemapBakeCount: 0,
-    materialCompositeRootCount: 1,
-    cameraMaterialCount: 0,
     retainedLeafCount: 452, // 450 body leaves, one material plane, one Sun billboard.
     stableDomIdentity: true,
     animationCount: 1,
@@ -72,9 +69,9 @@ try {
     zoom: 1.6196,
     renderedPitch: 40,
   });
-  const defaultLight = await page.evaluate(() => window.__venus.material.state());
+  const defaultLight = await page.evaluate(() => window.__venus.material.state().lighting);
   assert.equal(defaultLight.frame, 31);
-  assert.equal(defaultLight.shadowsEnabled, false);
+  assert.equal(defaultLight.rotationEnabled, false);
   assert.ok((defaultLight.sunViewDirection[2] + 1) / 2 > 0.9);
 
   assert.equal(await page.locator("#venus-surface-photographs").count(), 0);
@@ -184,7 +181,7 @@ try {
       zoom: 1.1,
     });
     return {
-      material: window.__venus.material.state(),
+      material: window.__venus.material.state().lighting,
     };
   });
   const materialPlan = PREPARED_VENUS_SCENE.material;
@@ -200,7 +197,7 @@ try {
     const samples = [];
     for (let controlPitch = -360; controlPitch <= 360; controlPitch += 2) {
       window.__venus.camera.setState({ controlPitch, controlYaw: 0 });
-      samples.push(window.__venus.material.state());
+      samples.push(window.__venus.material.state().lighting);
     }
     let maximumDirectionDelta = 0;
     let maximumRollDelta = 0;
@@ -225,9 +222,9 @@ try {
       controlPitch: 34.230769230769226,
       controlYaw: 0,
     });
-    const initial = window.__venus.material.state();
+    const initial = window.__venus.material.state().lighting;
     window.__venus.camera.setState({ controlYaw: 30 });
-    return { initial, moved: window.__venus.material.state() };
+    return { initial, moved: window.__venus.material.state().lighting };
   });
   assert.ok(horizontalShadowMotion.moved.frame <
     horizontalShadowMotion.initial.frame);
@@ -305,7 +302,7 @@ try {
   assert.equal(await page.evaluate(() => window.__venus.features.state().shadows),
     true);
   const initialMaterialState = await page.evaluate(() =>
-    window.__venus.material.state());
+    window.__venus.material.state().lighting);
   assert.equal(initialMaterialState.frame, Math.round(
     (initialMaterialState.sunViewDirection[2] -
       materialPlan.minimumLightViewZ) /
@@ -321,7 +318,7 @@ try {
   assert.ok((await page.evaluate(() => window.__venus.camera.state().controlPitch)) >
     34.230769230769226);
   const materialAfterShortPitch = await page.evaluate(() =>
-    window.__venus.material.state());
+    window.__venus.material.state().lighting);
   assert.ok(Math.abs(
     materialAfterShortPitch.frame - initialMaterialState.frame,
   ) <= 1);
@@ -334,7 +331,7 @@ try {
   const pointerPitchAboveReference = await page.evaluate(() =>
     window.__venus.camera.state().controlPitch);
   assert.ok(pointerPitchAboveReference > 89);
-  assert.notEqual(await page.evaluate(() => window.__venus.material.state().frame),
+  assert.notEqual(await page.evaluate(() => window.__venus.material.state().lighting.frame),
     initialMaterialState.frame);
   await page.evaluate(() => window.__venus.camera.setState({
     controlPitch: 34.230769230769226,
@@ -351,7 +348,7 @@ try {
       visibility: getComputedStyle(element).visibility,
       display: getComputedStyle(element).display,
     })), { visibility: "visible", display: "block" });
-  assert.equal(await page.evaluate(() => window.__venus.material.state().frame), 31);
+  assert.equal(await page.evaluate(() => window.__venus.material.state().lighting.frame), 31);
 
   await page.evaluate(() => (document.querySelector('input[name="motion"]').checked && document.querySelector('input[name="motion"]').click()));
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
@@ -699,10 +696,6 @@ function runtimeState(page) {
     skyboxCount: document.querySelectorAll(".venus-skybox").length,
     skyboxFaceCount: document.querySelectorAll(".venus-skybox-face").length,
     sunBillboardCount: document.querySelectorAll(".venus-directional-sun").length,
-    sunCubemapBakeCount: window.__venus.dom.retainedSunCubemapBakeCount,
-    materialCompositeRootCount:
-      window.__venus.dom.retainedMaterialCompositeRootCount,
-    cameraMaterialCount: window.__venus.dom.retainedCameraMaterialCount,
     lens: window.__venus.lenses.state(),
     features: window.__venus.features.state(),
     options: window.__venus.options.state(),

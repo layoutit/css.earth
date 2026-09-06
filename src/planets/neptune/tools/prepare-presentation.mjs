@@ -71,7 +71,7 @@ export async function prepareNeptunePresentation() {
   leaf.className = [leaf.className, "neptune-exterior-material"].filter(Boolean).join(" ");
   b.append(system, counter); b.append(counter, material); b.append(material, leaf);
   ringLeaf.style.backgroundImage = 'url("/scenes/neptune/neptune-rings@2x.webp")';
-  const { tree, index } = b.finish({ camera, scene, registrations: [{ bodySystem: system, lightingOverlays: [counter] }] });
+  const { tree, index } = b.finish({ camera, scene });
   const initialOrbit = lenses.controls.find(lens => lens.id === lenses.defaultLens).orbitMaterial;
   const defaultFrame = Math.round((initialOrbit.maximumScenePitchDegrees - cameraPlan.initialScenePitchDegrees) /
     (initialOrbit.maximumScenePitchDegrees - initialOrbit.minimumScenePitchDegrees) * (initialOrbit.frameCount - 1));
@@ -87,9 +87,8 @@ export async function prepareNeptunePresentation() {
   }));
   const track = { id: "lighting", target: index(leaf), frame: { source: "reference-sun-z", minimum: 0, maximum: 2,
       count: initialOrbit.frameCount, baseFrame: defaultFrame, remap: null },
-    defaultPose: [{ source: "control-pitch", scale: 1, offset: 0, value: cameraPlan.defaultControlPitchDegrees, epsilon: .01 }], banks,
-    demand: { mode: "away-enabled-or-lens-change", prewarm: "none", capacity: 3, framesPerRow: initialOrbit.frameColumns,
-      defaultFrame, initialRows, holdHiddenNeighborhood: false, fallback: "hold" },
+     banks,
+    demand: { capacity: 3, defaultFrame },
     rotation: { kind: "planar", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false,
       width: 1024, height: 1024, polePolicy: "azimuth" }, frameAttribute: null, modeAttribute: null, quoted: true };
   const variants = lenses.controls.flatMap(({ id }) => [false, true].flatMap(shadows => [false, true].map(rings => ({
@@ -106,14 +105,7 @@ export async function prepareNeptunePresentation() {
       preparedResourcePool("variant", entries, { retention: "selection", capacity: 8, concurrency: 8 }),
       preparedResourcePool("lighting", entries, { retention: "selection", capacity: 3, concurrency: 3, eviction: "capacity" })],
       startup: [...warm.map(e => e.key), ...staticKeys(lenses.defaultLens), ...initialRows.map(row => `lighting:${lenses.defaultLens}:${row}`)] },
-    tree, variants, materials: [track], viewBindings: [{ kind: "counter-rotation", target: index(counter), systemTransform: system.style.transform }], animations: [],
-    observations: { constants: { dom: { mode: "semantic-transform-groups-with-bare-leaves", retainedCameraRootCount: 1,
-      retainedMaterialCompositeRootCount: 0, retainedSceneRootCount: 1, retainedCubicSkyFaceCount: 6 } }, counts: [],
-      materials: [...["material", "camera"].map(category => ({ category, name: "materialFrame", track: "lighting", field: "frame" })),
-        { category: "material", name: "appliedRow", track: "lighting", field: "appliedRow" },
-        { category: "camera", name: "materialAddressWrites", track: "lighting", field: "addressWrites" }],
-      publications: [{ category: "camera", name: "transformWrites", field: "transformWrites" }],
-    } };
+    tree, variants, materials: [track], viewBindings: [{ kind: "counter-rotation", target: index(counter), systemTransform: system.style.transform }], animations: [] };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   await writePreparedPresentation(new URL("../runtime/preparedPresentation.mjs", import.meta.url), await prepareNeptunePresentation(), objectControls);
