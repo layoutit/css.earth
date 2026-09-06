@@ -20,6 +20,7 @@
 // runtime only transports the result.
 
 import { loadAstronomyPackage } from "./astronomy-package.mjs";
+import { preparePlanetPoint } from "./prepare-planet-points.mjs";
 import {
   ASTRONOMICAL_UNIT_KILOMETERS,
   BODY_FIXED_ORBIT_NORMAL_DIRECTIONS,
@@ -332,6 +333,13 @@ export async function preparePlanetarySystem({
       kind: orbit.kind,
       orbitSource: orbit.source,
       radiusKilometers: BODIES[id].meanRadiusKm,
+      radiusUnits: BODIES[id].meanRadiusKm / kilometersPerUnit,
+      pointPresentation: preparePlanetPoint({
+        radiusKilometers: BODIES[id].meanRadiusKm,
+        geometricAlbedo: GEOMETRIC_ALBEDO[id],
+        heliocentricDistanceAu: magnitude(toSun) / unitsPerAu,
+        kilometersPerUnit,
+      }),
       illumination: {
         model: MARKER_BRIGHTNESS.model,
         phaseAngleDegrees: phaseAngle * 180 / Math.PI,
@@ -354,6 +362,14 @@ export async function preparePlanetarySystem({
       aphelionAu: orbit.semiMajorAxisAu * (1 + eccentricity),
       trueAnomalyDegrees,
       orbit: Object.freeze({
+        labelPresentation: Object.freeze({
+          radiusUnits: Math.max(...vertices.map((vertex) => magnitude(subtract(vertex, sunPosition)))),
+          angularFadeInRadians: Math.PI / 180,
+          angularFullRadians: 4 * Math.PI / 180,
+          nearDistanceUnits: Math.max(20 * BODIES[id].meanRadiusKm, 50) / kilometersPerUnit,
+          farDistanceUnits: Math.max(200 * BODIES[id].meanRadiusKm, 500) / kilometersPerUnit,
+          minimumEligibility: 0.12,
+        }),
         normal,
         perihelionDirection,
         center: Object.freeze(center.map(Math.round)),

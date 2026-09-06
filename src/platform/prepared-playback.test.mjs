@@ -46,6 +46,19 @@ test("duplicate registration and unchanged permission do not restart native anim
   assert.equal(a.currentTime, 100); assert.deepEqual(a.calls, ["pause", "play"]);
   owner.destroy(); owner.destroy(); assert.deepEqual(a.calls, ["pause", "play", "cancel"]);
 });
+test("saved motion restores actual visual times without replacing camera-addressed poses", () => {
+  const owner = createPreparedPlayback(), first = animation(1234), second = animation(5678), pose = animation(99);
+  owner.register(first); owner.register(pose, { mode: "pose" }); owner.register(second);
+  const saved = owner.captureMotion();
+  assert.deepEqual(saved, [1234, 5678]);
+  owner.resetMotion();
+  owner.restoreMotion(saved);
+  assert.equal(first.currentTime, 1234); assert.equal(second.currentTime, 5678); assert.equal(pose.currentTime, 99);
+  assert.throws(() => owner.restoreMotion([1]), /prepared scene/);
+  assert.throws(() => owner.restoreMotion([1, NaN]), /prepared scene/);
+  assert.deepEqual(owner.captureMotion(), saved, "invalid links cannot partially seek native animations");
+  owner.destroy();
+});
 test("cleanup and publication failures process every native handle before reporting", () => {
   const owner = createPreparedPlayback(), a = animation(), b = animation();
   owner.register(a); owner.register(b); owner.setReady();

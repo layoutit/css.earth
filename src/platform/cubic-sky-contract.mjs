@@ -153,6 +153,7 @@ export function validatePreparedCubicSky(plan, { requireSun = true } = {}) {
         !Array.isArray(plan.catalogueStars.bands) ||
         plan.catalogueStars.retained.some((star) =>
           typeof star.transform !== "string" || !(star.radiusPx > 0) ||
+          !Number.isFinite(star.rawRadiusPx) || star.rawRadiusPx < 0 ||
           !(star.luminance > 0) || star.luminance > 1 ||
           !Array.isArray(star.color) || star.color.length !== 3 ||
           !Array.isArray(star.direction) || star.direction.length !== 3 ||

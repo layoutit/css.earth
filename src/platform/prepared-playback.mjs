@@ -54,6 +54,22 @@ export function createPreparedPlayback() {
       if (destroyed) return;
       for (const { animation, mode } of handles.values()) if (mode === "motion") animation.currentTime = 0;
     },
+    captureMotion() {
+      return [...handles.values()].filter(entry => entry.mode === "motion")
+        .map(({ animation }) => Number(animation.currentTime ?? 0));
+    },
+    validateMotion(times) {
+      if (!Array.isArray(times) || times.length !== [...handles.values()].filter(entry => entry.mode === "motion").length ||
+          times.some(time => !Number.isFinite(time) || time < 0)) {
+        throw new TypeError("Saved playback does not match this prepared scene.");
+      }
+    },
+    restoreMotion(times) {
+      if (destroyed) return;
+      this.validateMotion(times);
+      let index = 0;
+      for (const { animation, mode } of handles.values()) if (mode === "motion") animation.currentTime = times[index++];
+    },
     setAllowed(value) { if (destroyed) return; allowed = value === true; applyAll(); },
     setReady(value = true) { if (destroyed) return; ready = value === true; applyAll(); },
     setSelection(next) {

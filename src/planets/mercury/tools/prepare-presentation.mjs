@@ -4,6 +4,9 @@ import { PREPARED_NAVIGATION_MARKERS } from "../../../../site/prepared-navigatio
 import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
 import { DEFAULT_LABEL_POLICY } from "../../../platform/label-field.mjs";
+import { STAR_LABEL_POLICY } from "../../../platform/star-labels.mjs";
+import { prepareCatalogueStars } from "../../../platform/prepare-catalogue-stars.mjs";
+import { POINT_MIN_RADIUS_PX } from "../../../platform/star-photometry.mjs";
 import { prepareCssomDeclarationReads } from "../../../../tools/prepared-cssom.mjs";
 import { createPreparedNodeTree } from "../../../../tools/prepared-node-tree.mjs";
 import { writePreparedPresentation } from "../../../../tools/prepare-presentation.mjs";
@@ -133,8 +136,11 @@ export async function prepareMercuryPresentation() {
   // this object's own data; the dwarf planets have no shell entry.
   const captionNames = { sun: "Sun", mercury: "Mercury", venus: "Venus", earth: "Earth", mars: "Mars", jupiter: "Jupiter",
     saturn: "Saturn", uranus: "Uranus", neptune: "Neptune", pluto: "Pluto", ceres: "Ceres", eris: "Eris", haumea: "Haumea", makemake: "Makemake" };
+  const catalogue = await prepareCatalogueStars({ fovDegrees: plan.starfield.catalogueStars.exposure.fovDegrees });
+  const namedStars = catalogue.stars.flatMap((star, index) => star.name ? [{ id: `star:${index}`,
+    hip: star.hip, name: star.name, direction: star.direction, magnitude: star.magnitude }] : []);
   const heliocentricView = { plan: plan.heliocentricView,
-    bodyMarker: { url: NAVIGATION_MARKER_ATLAS_URL, index: navigationMarker.index, count: navigationMarker.count, size: navigationMarker.presentation.size },
+    bodyMarker: { url: NAVIGATION_MARKER_ATLAS_URL, index: navigationMarker.index, count: navigationMarker.count, size: 2 * POINT_MIN_RADIUS_PX },
     systemMarkers: { url: NAVIGATION_MARKER_ATLAS_URL, sun: atlasSprite("sun"),
       bodies: Object.fromEntries(plan.heliocentricView.system.bodies.map(body => [body.id, atlasSprite(body.id)])),
       // Each marker carries its phase from Mercury's own billboard lighting
@@ -142,8 +148,10 @@ export async function prepareMercuryPresentation() {
       phase: { url: billboard.url, columns: billboard.columns, rowCount: billboard.rowCount, frameCount: billboard.frameCount,
         minimumLightViewZ: assets.lighting.minimumLightViewZ, maximumLightViewZ: assets.lighting.maximumLightViewZ,
         baseLightAzimuthDegrees: assets.lighting.baseLightAzimuthDegrees } },
-    labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: captionNames } };
-  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
+    labels: { policy: { ...DEFAULT_LABEL_POLICY }, names: captionNames,
+      stars: { policy: { ...STAR_LABEL_POLICY }, exposure: { ...catalogue.exposure }, records: namedStars } } };
+  return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun,
+    assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: interiorKeys.length + 1, concurrency: interiorKeys.length + 1 }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
         concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true })],
@@ -153,7 +161,7 @@ export async function prepareMercuryPresentation() {
     viewBindings: [
       // The terminator overlay fitted to the projected silhouette; it never
       // shrinks below the marker it lights at the far stage.
-      { kind: "silhouette-fit", target: index(materialRoot), minimumRadius: navigationMarker.presentation.size / 2,
+      { kind: "silhouette-fit", target: index(materialRoot), minimumRadius: POINT_MIN_RADIUS_PX,
         unitScale: 2 * plan.camera.defaultZoom / plan.camera.logicalBodyDiameter },
       // Level of detail from the camera's published stage (see styles.css).
       { kind: "view-attribute", target: -1, property: "data-lod", source: "level-of-detail-stage", precision: null },
