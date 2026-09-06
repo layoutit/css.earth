@@ -64,7 +64,7 @@ try {
     sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
     stable: window.__mercury.assertStableDomIdentity(),
     density: window.__mercury.renderStats.textureStats.selectedPreparedDensity,
-    interiorMounted: window.__mercury.dom.interiorMounted,
+    interiorMounted: Boolean(document.querySelector(".polycss-mesh.mercury-cutaway")),
     sunBillboardCount: document.querySelectorAll(".mercury-directional-sun").length,
     sunCubemapBakeCount: Number(document.querySelectorAll(".planet-cubic-sky-face .mercury-directional-sun").length),
     // The planetary system: a retained piece pool for the seven other
@@ -141,7 +141,7 @@ try {
   assert.deepEqual(await page.evaluate(() => ({
     elements: document.querySelector(".planet-stage").querySelectorAll("*").length,
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
-    viewBank: { interiorMounted: window.__mercury.dom.interiorMounted, retainedInteriorNodeCount: window.__mercury.dom.retainedInteriorNodeCount },
+    viewBank: { interiorMounted: Boolean(document.querySelector(".polycss-mesh.mercury-cutaway")), retainedInteriorNodeCount: (document.querySelector(".polycss-mesh.mercury-cutaway").querySelectorAll("*").length + 1) },
   })), {
     elements: 5427,
     interiorLeaves: 446,
@@ -256,12 +256,12 @@ try {
     overlayVisibility: getComputedStyle(
       document.querySelector(".mercury-material-root"),
     ).visibility,
-    ...window.__mercury.sky.state(),
+    ...window.__mercury.sky.state(), ...window.__mercury.material.state().lighting,
   }));
   assert.equal(shadowlessState.checked, false);
   assert.equal(shadowlessState.overlayVisibility, "visible");
-  assert.equal(shadowlessState.materialMode, "full-phase-curvature");
-  assert.equal(shadowlessState.materialFrame, 255);
+  assert.equal(shadowlessState.mode, "full-phase-curvature");
+  assert.equal(shadowlessState.frame, 255);
 
   await page.locator('input[name="shadows"]').evaluate((control) => {
     control.checked = true;
@@ -277,13 +277,13 @@ try {
   }));
   await nextPaint(page);
   const defaultFraming = await page.evaluate(() => ({
-    ...window.__mercury.sky.state(),
+    ...window.__mercury.sky.state(), ...window.__mercury.material.state().lighting,
     sunHidden: document.querySelector(".mercury-directional-sun").hidden,
   }));
   assert.ok(defaultFraming.skySunViewDirection[0] < -0.98);
   assert.ok(Math.abs(defaultFraming.skySunViewDirection[1]) < 0.1);
   assert.ok(Math.abs(defaultFraming.skySunViewDirection[2]) < 0.1);
-  assert.ok(Math.abs(defaultFraming.materialFrame - 128) < 16);
+  assert.ok(Math.abs(defaultFraming.frame - 128) < 16);
   assert.equal(defaultFraming.sunHidden, true);
   await page.evaluate(() => {
     document.querySelector(".mercury-skybox").style.visibility = "hidden";
@@ -506,7 +506,7 @@ try {
           controlPitch: pitch,
           controlYaw: yaw,
         });
-        samples.push({ pitch, yaw, ...window.__mercury.sky.state(),
+        samples.push({ pitch, yaw, ...window.__mercury.sky.state(), ...window.__mercury.material.state().lighting,
           sunViewDirection: window.__mercury.runtime.view().sunViewDirection });
       }
     }
@@ -519,14 +519,14 @@ try {
     sunViewDirection[2])) > 0.75);
   assert.ok(sunSweep.some(({ sunVisible }) => sunVisible));
   assert.ok(sunSweep.some(({ sunVisible }) => !sunVisible));
-  assert.ok(Math.min(...sunSweep.map(({ materialFrame }) => materialFrame)) < 40);
-  assert.ok(Math.max(...sunSweep.map(({ materialFrame }) => materialFrame)) > 215);
+  assert.ok(Math.min(...sunSweep.map(({ frame }) => frame)) < 40);
+  assert.ok(Math.max(...sunSweep.map(({ frame }) => frame)) > 215);
   for (const sample of sunSweep) {
     const expectedFrame = Math.round(
       (sample.sunViewDirection[2] + 1) / 2 * 255,
     );
-    assert.equal(sample.materialFrame, expectedFrame);
-    assert.ok(Number.isFinite(sample.materialLightRollDegrees));
+    assert.equal(sample.frame, expectedFrame);
+    assert.ok(Number.isFinite(sample.lightRollDegrees));
   }
   await page.locator('input[name="shadows"]').evaluate((control) => {
     control.checked = false;
@@ -639,8 +639,8 @@ try {
         ).visibility,
         materialImage: document.querySelector(".mercury-material")
           .style.backgroundImage,
-        materialFrame: sky.materialFrame,
-        rowStreaming: sky.lod.rowStreaming,
+        materialFrame: window.__mercury.material.state().lighting.frame,
+        rowStreaming: window.__mercury.material.state().lighting.bank === "rows",
         stable: window.__mercury.assertStableDomIdentity(),
         elements: stage.querySelectorAll("*").length,
       });
@@ -727,8 +727,8 @@ try {
 
   // Back in close: the row cache resumes on the retained rows.
   assert.equal(await page.evaluate(() => {
-    const { stage, rowStreaming } = window.__mercury.sky.state().lod;
-    return `${stage}/${rowStreaming}`;
+    const { stage } = window.__mercury.sky.state().lod;
+    return `${stage}/${window.__mercury.material.state().lighting.bank === "rows"}`;
   }), "geometry/true");
   await page.locator('input[name="shadows"]').evaluate((control) => {
     control.checked = false;

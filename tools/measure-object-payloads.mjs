@@ -1,16 +1,14 @@
 import assert from "node:assert/strict";
-import { mkdir, readFile, realpath, stat, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { dirname, isAbsolute, resolve } from "node:path";
+import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { brotliCompressSync, constants, gzipSync } from "node:zlib";
 import { OBJECTS } from "../site/objects.mjs";
 
 const CHROME_EXECUTABLE = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const VIEWPORT = Object.freeze({ width: 1280, height: 900 });
-const RECEIPT_NAME = "SOURCE_BOUND_BUILD_RECEIPT.json";
 const sha = bytes => createHash("sha256").update(bytes).digest("hex");
-const validSha = value => typeof value === "string" && /^[a-f0-9]{64}$/.test(value);
 const compressionCache = new Map();
 export const COMPRESSION_ESTIMATES = Object.freeze({
   evidence: "deterministic compression estimates of decoded response bodies; not measured wire transfer",
@@ -19,28 +17,6 @@ export const COMPRESSION_ESTIMATES = Object.freeze({
 
 export function payloadCases(objects = OBJECTS) {
   return objects.flatMap(object => [1, 2].map(dpr => ({ id: object.id, route: object.route, dpr })));
-}
-function requireRelativeFile(file) {
-  assert.ok(typeof file === "string" && file && !isAbsolute(file) && !/[\\\0?#]/.test(file) &&
-    file.split("/").every(part => part && part !== "." && part !== ".."), `Invalid build receipt file: ${file}`);
-}
-export async function loadBuildReceipt(input) {
-  if (!input) return null;
-  const path = resolve(input);
-  const receiptPath = (await stat(path)).isDirectory() ? resolve(path, RECEIPT_NAME) : path;
-  const receipt = JSON.parse(await readFile(receiptPath, "utf8"));
-  assert.equal(receipt.schema, "cssearth-source-bound-build@1", "Incompatible source-bound build receipt");
-  assert.equal(receipt.complete, true, "Build receipt must describe a completed build");
-  assert.equal(receipt.exitCode, 0, "Build receipt must record a successful actual build exit");
-  const source = receipt.sourceIdentity;
-  assert.equal(source?.schema, "cssearth-audit-source@1", "Build receipt requires a snapshotAuditSources identity");
-  assert.ok(isAbsolute(source.sourceRoot ?? "") && source.files?.["astro.config.mjs"] && source.files?.["site/scene-router.mjs"], "Build receipt source identity is incomplete");
-  for (const [file, hash] of Object.entries(source.files)) { requireRelativeFile(file); assert.ok(validSha(hash), `Invalid source hash: ${file}`); }
-  assert.equal(sha(JSON.stringify(source.files)), source.sha256, "Build receipt source fingerprint differs");
-  assert.ok(receipt.files && Object.getPrototypeOf(receipt.files) === Object.prototype && Object.keys(receipt.files).length, "Build receipt has no built files");
-  for (const [file, hash] of Object.entries(receipt.files)) { requireRelativeFile(file); assert.ok(validSha(hash), `Invalid build hash: ${file}`); }
-  const distRoot = await realpath(receipt.distRoot ? resolve(dirname(receiptPath), receipt.distRoot) : dirname(receiptPath));
-  return { receiptPath, distRoot, receipt, verifiedFiles: new Map() };
 }
 export function decodedBodyMetrics(body) {
   const hash = sha(body);
@@ -61,28 +37,9 @@ function requireLocalResponse(resource, baseUrl) {
     !/[?&](?:t|import|astro)(?:=|&|$)/.test(url.search), `Development response cannot measure a production build: ${resource.url}`);
   return url;
 }
-export async function verifyBuildResponse(resource, body, baseUrl, build) {
-  const url = requireLocalResponse(resource, baseUrl);
-  if (!build) return { status: "UNBOUND_NO_BUILD_RECEIPT", file: null };
-  let file = decodeURIComponent(url.pathname).slice(1);
-  if (!file || file.endsWith("/")) file += "index.html";
-  requireRelativeFile(file);
-  const expected = build.receipt.files[file];
-  assert.ok(expected, `Loaded response is absent from the build receipt: ${file}`);
-  if (!build.verifiedFiles.has(file)) {
-    const actual = sha(await readFile(resolve(build.distRoot, file)));
-    assert.equal(actual, expected, `Built file differs from its receipt: ${file}`);
-    build.verifiedFiles.set(file, actual);
-  }
-  assert.equal(sha(body), expected, `Loaded response differs from its built file: ${file}`);
-  return { status: "MATCHED_BUILD_FILE", file, sha256: expected };
-}
-
-export async function measureRoute(browser, baseUrl, { id, route, dpr }, build = null) {
+export async function measureRoute(browser, baseUrl, { id, route, dpr }) {
   const result = { id, route, dpr, complete: false, bodyBytes: 0, gzipEstimateBytes: 0, brotliEstimateBytes: 0,
-    responseCount: 0, bytesByType: {}, resources: [], errors: [], dom: null, layers: { available: false },
-    sourceBinding: build ? { status: "INCOMPLETE", sourceSha256: build.receipt.sourceIdentity.sha256, receiptPath: build.receiptPath }
-      : { status: "UNBOUND_NO_BUILD_RECEIPT" } };
+    responseCount: 0, bytesByType: {}, resources: [], errors: [], dom: null, layers: { available: false } };
   const context = await browser.newContext({ viewport: VIEWPORT, deviceScaleFactor: dpr, reducedMotion: "no-preference", serviceWorkers: "block" });
   const pending = [];
   let page, cdp, lastLayers = null;
@@ -96,7 +53,6 @@ export async function measureRoute(browser, baseUrl, { id, route, dpr }, build =
         requireLocalResponse(resource, baseUrl);
         const body = await response.body();
         Object.assign(resource, decodedBodyMetrics(body));
-        resource.build = await verifyBuildResponse(resource, body, baseUrl, build);
       } catch (error) { resource.error = error.message; result.errors.push({ phase: "response", url: resource.url, error: error.message }); }
     })());
   };
@@ -144,7 +100,6 @@ export async function measureRoute(browser, baseUrl, { id, route, dpr }, build =
   }
   if (!result.responseCount) result.errors.push({ phase: "response", error: "No response bodies were observed" });
   result.complete = result.errors.length === 0;
-  if (build) result.sourceBinding.status = result.complete ? "MATCHED_BUILD_RECEIPT" : "INVALID";
   return result;
 }
 function comparison(baseline, candidate) {
@@ -152,14 +107,11 @@ function comparison(baseline, candidate) {
   const difference = candidate - baseline;
   return { baseline, candidate, difference, percent: baseline === 0 ? null : Number(((difference / baseline) * 100).toFixed(4)) };
 }
-export async function runPayloadComparison({ browser, baselineUrl, candidateUrl, outputRoot, baselineBuild = null, candidateBuild = null,
+export async function runPayloadComparison({ browser, baselineUrl, candidateUrl, outputRoot,
   objects = OBJECTS, measure = measureRoute }) {
   const report = { schema: "cssearth-object-payload@2", capturedAt: new Date().toISOString(),
     baselineUrl, candidateUrl, viewport: VIEWPORT, dprs: [1, 2], objects: objects.map(object => object.id),
     compression: COMPRESSION_ESTIMATES, browserLifecycle: { launches: 1, maxConcurrentContexts: 1 },
-    sourceBinding: { status: baselineBuild && candidateBuild ? "INCOMPLETE" : "UNBOUND_NO_BUILD_RECEIPT",
-      baseline: baselineBuild ? { receiptPath: baselineBuild.receiptPath, sourceIdentity: baselineBuild.receipt.sourceIdentity } : null,
-      candidate: candidateBuild ? { receiptPath: candidateBuild.receiptPath, sourceIdentity: candidateBuild.receipt.sourceIdentity } : null },
     complete: false, cases: [], errors: [] };
   const save = async () => {
     if (!outputRoot) return;
@@ -169,8 +121,8 @@ export async function runPayloadComparison({ browser, baselineUrl, candidateUrl,
   await save();
   for (const entry of payloadCases(objects)) {
     const row = { ...entry };
-    for (const [name, url, build] of [["baseline", baselineUrl, baselineBuild], ["candidate", candidateUrl, candidateBuild]]) {
-      try { row[name] = await measure(browser, url, entry, build); }
+    for (const [name, url] of [["baseline", baselineUrl], ["candidate", candidateUrl]]) {
+      try { row[name] = await measure(browser, url, entry); }
       catch (error) { row[name] = { complete: false, errors: [{ phase: "setup", error: error.message }] }; }
       if (!row[name].complete) report.errors.push({ id: entry.id, dpr: entry.dpr, side: name, errors: row[name].errors });
     }
@@ -180,52 +132,38 @@ export async function runPayloadComparison({ browser, baselineUrl, candidateUrl,
     report.cases.push(row);
     await save();
   }
-  if (baselineBuild && candidateBuild && report.cases.some(row =>
-    [row.baseline, row.candidate].some(side => side.sourceBinding?.status !== "MATCHED_BUILD_RECEIPT"))) {
-    report.errors.push({ phase: "binding", error: "Every measured side must match its supplied build receipt" });
-  }
   report.complete = report.errors.length === 0 && report.cases.length === objects.length * 2 && objects.length > 0;
-  if (baselineBuild && candidateBuild) report.sourceBinding.status = report.complete ? "MATCHED_BUILD_RECEIPTS" : "INVALID";
   report.finishedAt = new Date().toISOString();
   await save();
   return report;
 }
 export function localBaseUrl(value, label) {
-  if (!value) throw new Error("Usage: node tools/measure-object-payloads.mjs <baseline-url> <candidate-url> [output-dir] [--baseline-build <receipt-or-dist>] [--candidate-build <receipt-or-dist>]");
+  if (!value) throw new Error("Usage: node tools/measure-object-payloads.mjs <baseline-url> <candidate-url> [output-dir]");
   const url = new URL(value);
   assert.ok(["http:", "https:"].includes(url.protocol) && ["127.0.0.1", "localhost", "[::1]"].includes(url.hostname) &&
     !url.username && !url.password && url.pathname === "/" && !url.search && !url.hash, `${label} must be a local origin URL`);
   return `${url.origin}/`;
 }
-function argumentsForCli(args) {
-  const positional = [], flags = {};
-  for (let index = 0; index < args.length; index++) {
-    const arg = args[index];
-    if (arg.startsWith("--")) {
-      assert.ok(["--baseline-build", "--candidate-build"].includes(arg) && args[index + 1] && !args[index + 1].startsWith("--") && !flags[arg], `Invalid payload argument: ${arg}`);
-      flags[arg] = args[++index];
-    } else positional.push(arg);
-  }
+function argumentsForCli(positional) {
   assert.ok(positional.length <= 3, "Too many payload arguments");
   return { baselineUrl: localBaseUrl(positional[0], "baseline URL"), candidateUrl: localBaseUrl(positional[1], "candidate URL"),
-    outputRoot: resolve(positional[2] ?? "output/playwright/object-payloads"), baselineReceipt: flags["--baseline-build"], candidateReceipt: flags["--candidate-build"] };
+    outputRoot: resolve(positional[2] ?? "output/playwright/object-payloads") };
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const options = argumentsForCli(process.argv.slice(2));
   let browser, runStarted = false;
   try {
-    const baselineBuild = await loadBuildReceipt(options.baselineReceipt), candidateBuild = await loadBuildReceipt(options.candidateReceipt);
     const { chromium } = await import("playwright");
     browser = await chromium.launch({ headless: true, executablePath: CHROME_EXECUTABLE,
       args: ["--use-angle=metal", "--enable-gpu", "--disable-software-rasterizer"] });
     runStarted = true;
-    const report = await runPayloadComparison({ ...options, browser, baselineBuild, candidateBuild });
-    console.log(JSON.stringify({ outputRoot: options.outputRoot, complete: report.complete, sourceBinding: report.sourceBinding.status,
+    const report = await runPayloadComparison({ ...options, browser });
+    console.log(JSON.stringify({ outputRoot: options.outputRoot, complete: report.complete,
       cases: report.cases.map(({ id, dpr, bodyBytes, responseCount }) => ({ id, dpr, bodyBytes, responseCount })), errors: report.errors }, null, 2));
     if (!report.complete) process.exitCode = 1;
   } catch (error) {
     await mkdir(options.outputRoot, { recursive: true });
-    const failure = { schema: "cssearth-object-payload@2", complete: false, sourceBinding: { status: "INVALID" },
+    const failure = { schema: "cssearth-object-payload@2", complete: false,
       cases: [], errors: [{ phase: "setup", error: error.message }], capturedAt: new Date().toISOString() };
     await writeFile(resolve(options.outputRoot, "failure.json"), JSON.stringify(failure, null, 2) + "\n");
     if (!runStarted) await writeFile(resolve(options.outputRoot, "report.json"), JSON.stringify(failure, null, 2) + "\n");

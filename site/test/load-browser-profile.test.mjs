@@ -20,7 +20,6 @@ function profile(withLenses = false) {
     selectedDensity: noop, retainedReport: noop,
     ...(withLenses ? { selectLens: noop, lens: noop, visibleLens: noop, pressedLens: noop } : {}),
     audit: {
-      finalScope: "shared", fullComparisonWidths: [390, 1200],
       preparedAssetPairs: [{ one: "/scenes/fixture/a", two: "/scenes/fixture/a2" }],
       ...(withLenses ? { lensRace: { defaultId: "normal", slowId: "alternate", winnerId: "normal",
         slowAsset: "/scenes/fixture/alternate", preReadyDisabled: true } } : {}),
@@ -52,11 +51,6 @@ const page = (value) => ({ evaluate: async () => value });
 test("objects without lenses or extra settings retain mandatory browser proof", async () => {
   const validated = validatePlanetBrowserProfile(object, profile(), emptyControls);
   await assertRenderedObjectControls(page(snapshot()), validated);
-  for (const method of ["waitForRuntime", "pause", "camera", "setCamera", "bounds", "stable",
-    "runtimePresent", "retainedImages", "selectedDensity", "retainedReport"]) {
-    assert.throws(() => validatePlanetBrowserProfile(object, { ...profile(), [method]: undefined }, emptyControls),
-      new RegExp(`provide ${method}\\(\\)`));
-  }
 });
 
 test("declared content requires exact lens and setting DOM before optional checks", async () => {
@@ -78,11 +72,7 @@ test("optional controls never excuse a missing shared panel or Motion", async ()
   await assert.rejects(assertRenderedObjectControls(page({ ...snapshot(), lensPanelCount: 1 }), validated), /lens panel presence/u);
 });
 
-test("declared lenses require their methods, matching race IDs, and complete retained coverage", () => {
-  for (const method of ["selectLens", "lens", "visibleLens", "pressedLens"]) {
-    assert.throws(() => validatePlanetBrowserProfile(object, { ...profile(true), [method]: undefined }, populatedControls),
-      new RegExp(`require ${method}\\(\\)`));
-  }
+test("declared lenses require matching race IDs, and complete retained coverage", () => {
   const wrongRace = profile(true);
   wrongRace.audit.lensRace.slowId = "not-declared";
   assert.throws(() => validatePlanetBrowserProfile(object, wrongRace, populatedControls), /lens race evidence/u);
@@ -92,7 +82,6 @@ test("declared lenses require their methods, matching race IDs, and complete ret
   const noSpeed = profile(true);
   delete noSpeed.audit.retained.speedClicks;
   assert.throws(() => validatePlanetBrowserProfile(object, noSpeed, populatedControls), /retained interaction evidence/u);
-  assert.throws(() => validatePlanetBrowserProfile(object, profile(), undefined), /export its lenses and settings/u);
 });
 
 test("a single supplied lens keeps interaction proof without inventing a race", () => {

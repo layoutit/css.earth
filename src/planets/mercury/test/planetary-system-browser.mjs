@@ -243,7 +243,8 @@ try {
 
   // Far views draw the marker stage from the billboard atlas: no lighting
   // rows stream while the system is on screen.
-  const farState = await page.evaluate(() => window.__mercury.sky.state().lod);
+  const farState = await page.evaluate(() => ({ ...window.__mercury.sky.state().lod,
+    rowStreaming: window.__mercury.material.state().lighting.bank === "rows" }));
   report.network = {
     lightingRowRequestsDuringFarViews: lightingRowRequests.length - rowRequestsBeforeFar,
     farStage: farState.stage,

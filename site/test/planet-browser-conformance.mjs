@@ -1119,7 +1119,7 @@ async function proveInteractionInterruptions(page, planet, profile) {
     // A perspective dolly: the prepared step per wheel delta moves the eye
     // along its axis, and there is no surface anchor to hold.
     const distanceRatio = (await cameraDistance(page, planet.id)) / distanceBefore;
-    assert.ok(Math.abs(distanceRatio - Math.exp(-40 * dolly.wheelStepPerDelta)) < 1e-6,
+    assert.ok(Math.abs(distanceRatio - Math.exp(anchorScrollPixels * dolly.wheelStepPerDelta)) < 1e-6,
       `${planet.id}: prepared wheel dolly step drifted (ratio ${distanceRatio})`);
     assert.equal(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
       `${planet.id}: a wheel dolly must not turn the scene`);
@@ -1495,8 +1495,11 @@ async function proveBreakpointCrossings(page, planet, profile, bounds, baseline)
       "desktop",
       `${planet.id}: 821x720 landscape`,
     );
-    assert.equal(compactDesktopShell.navigation, false,
-      `${planet.id}: compact desktop must hide the whole planet navigation`);
+    assert.equal(compactDesktopShell.navigation, true,
+      `${planet.id}: compact desktop must retain planet navigation`);
+    assert.equal(await page.locator('.scale-stop:not([aria-current="page"]) .scale-label')
+      .evaluateAll((labels) => labels.every((label) => getComputedStyle(label).display === "none")), true,
+    `${planet.id}: compact desktop must hide inactive planet labels`);
     await wheel(page, profile.inputSelector, -240);
     assert.ok((await profile.camera(page)).zoom > expected.zoom,
       `${planet.id}: 821px landscape desktop mode must restore wheel zoom`);

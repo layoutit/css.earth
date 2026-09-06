@@ -1,6 +1,5 @@
-import { createLatestSelection } from "./latest-selection.mjs";
 import { resolvePreparedPresentation } from "./prepared-presentation.mjs";
-import { initialObjectSelection, reduceObjectSelection, invokeRuntimeHook, requireObjectAction, requireObjectSelection, requireResolvedPresentation } from "./object-runtime-contract.mjs";
+import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from "./object-runtime-contract.mjs";
 
 const sameKeys = (a, b) => a.length === b.length && a.every((key, index) => key === b[index]);
 
@@ -17,19 +16,17 @@ export function createObjectSelectionRuntime({
     pending: busy && active?.kind !== "frame", loadingMaterial: active?.kind === "frame",
     ready: committed !== null && live(), error, viewRevision: view?.revision ?? null });
   const notify = () => { if (live()) onChange(state()); };
-  const latest = createLatestSelection({ lifetime, onFatalError,
-    onBusyChange(value) { if (!live()) return; busy = value; notify(); } });
 
   function resolve(selection) {
     try {
-      return requireResolvedPresentation(resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan }), definition);
+      return resolvePreparedPresentation(definition, { selection, view, previousPlan: committedPlan });
     } catch (failure) { if (live()) onFatalError(failure); throw failure; }
   }
   function frame(nextSelection = committed, nextPlan = committedPlan) {
     if (!live() || !nextSelection || !view) return;
     residency.beginFrame();
     try {
-      invokeRuntimeHook(presentation, "publishFrame", [{ selection: nextSelection, view, plan: nextPlan, resources: residency.resources }]);
+      presentation.publishFrame({ selection: nextSelection, view, plan: nextPlan, resources: residency.resources });
       framePublications++;
     } finally { residency.endFrame(); }
   }
@@ -57,70 +54,67 @@ export function createObjectSelectionRuntime({
     desired = selection;
     error = null;
     requests++;
-    const work = latest.run({
-      async prepare({ isCurrent }) {
-        while (live() && isCurrent()) {
+    const current = () => live() && active === request;
+    const work = (async () => {
+      try { busy = true; notify(); }
+      catch (failure) { if (current()) onFatalError(failure); throw failure; }
+      // Give rapid input one turn to replace demand before starting a decode.
+      await Promise.resolve();
+      while (current()) {
+        let ticket;
+        try {
           const plan = resolve(selection);
-          const ticket = request.ticket && sameKeys(plan.required, request.plan.required) && sameKeys(plan.prewarm, request.plan.prewarm)
+          ticket = request.ticket && sameKeys(plan.required, request.plan.required) && sameKeys(plan.prewarm, request.plan.prewarm)
             ? request.ticket : preparePass(request, plan);
-          const ready = await ticket.ready;
-          if (!live() || !isCurrent()) { discard(request); return null; }
-          // Camera input retires the old resource pass, not the user's action.
-          if (!ready || request.ticket !== ticket) continue;
-          const currentPlan = resolve(selection);
-          if (!sameKeys(currentPlan.required, plan.required) || !sameKeys(currentPlan.prewarm, plan.prewarm)) {
-            preparePass(request, currentPlan);
+          const result = await lifetime.wait(ticket.ready);
+          if (!current() || result.cancelled) { discard(request); return false; }
+          if (!result.value || request.ticket !== ticket) continue;
+        } catch (failure) {
+          if (!current()) { discard(request); return false; }
+          discard(request);
+          discard(request.previous);
+          desired = committed ?? initialSelection;
+          active = null;
+          error = failure.message;
+          busy = false;
+          try { notify(); } catch (publicationFailure) { onFatalError(publicationFailure); throw publicationFailure; }
+          throw failure;
+        }
+        try {
+          // Re-resolve after decode. No asynchronous gap separates this lookup
+          // from publication, so a camera move cannot commit an old row.
+          const plan = resolve(selection);
+          if (!sameKeys(plan.required, request.plan.required) || !sameKeys(plan.prewarm, request.plan.prewarm) ||
+              plan.required.some(key => !residency.resources.has(key))) {
+            preparePass(request, plan);
             continue;
           }
-          request.plan = currentPlan;
-          return { ticket, plan: currentPlan };
+          request.plan = plan;
+          residency.beginFrame();
+          try { presentation.commitSelection({ selection, plan, view, resources: residency.resources }); }
+          finally { residency.endFrame(); }
+          if (!current()) { discard(request); return false; }
+          residency.commit(ticket);
+          request.ticket = null;
+          frame(selection, plan);
+          if (!current()) return false;
+          onCommit(selection, plan);
+          if (!current()) return false;
+          committed = selection;
+          committedPlan = plan;
+          commits++;
+          active = null;
+          busy = false;
+          notify();
+          return live() && active === null;
+        } catch (failure) {
+          if (current()) onFatalError(failure);
+          throw failure;
         }
-        return null;
-      },
-      revalidate(prepared) {
-        if (!live() || active !== request || !prepared) return true;
-        const plan = resolve(selection);
-        if (request.ticket !== prepared.ticket || !sameKeys(plan.required, prepared.plan.required) ||
-            !sameKeys(plan.prewarm, prepared.plan.prewarm) || plan.required.some(key => !residency.resources.has(key))) {
-          if (request.ticket === prepared.ticket) preparePass(request, plan);
-          return false;
-        }
-        request.plan = plan;
-        return true;
-      },
-      commit(prepared) {
-        if (!live() || active !== request || !prepared) return;
-        // Revalidation immediately precedes the synchronous publication. There
-        // is no asynchronous gap between the final lookup and material writes.
-        const plan = request.plan;
-        residency.beginFrame();
-        try { invokeRuntimeHook(presentation, "commitSelection", [{ selection, plan, view, resources: residency.resources }]); }
-        finally { residency.endFrame(); }
-        if (!live() || active !== request) return;
-        residency.commit(prepared.ticket);
-        frame(selection, plan);
-        if (!live() || active !== request) return;
-        onCommit(selection, plan);
-        if (!live() || active !== request) return;
-        committed = selection;
-        committedPlan = plan;
-        commits++;
-        request.ticket = null;
-        active = null;
-      },
-      discard(prepared) {
-        if (!prepared || request.ticket === prepared.ticket) discard(request);
-        else residency.discard(prepared.ticket);
-      },
-      onCurrentFailure(failure) {
-        if (!live() || active !== request) return;
-        discard(request);
-        discard(request.previous);
-        desired = committed ?? initialSelection;
-        active = null;
-        error = failure.message;
-      },
-    });
+      }
+      discard(request);
+      return false;
+    })();
     // The binder observes user errors; frame-only failures retain the current
     // material and are reported separately from fatal partial DOM publication.
     work.catch(() => {});
@@ -137,9 +131,7 @@ export function createObjectSelectionRuntime({
     dispatch(action) {
       if (!live() || !committed) return Promise.resolve(false);
       const valid = requireObjectAction(definition.controls, action);
-      let next;
-      try { next = requireObjectSelection(reduceObjectSelection(desired, valid), definition.controls); }
-      catch (failure) { onFatalError(failure); throw failure; }
+      const next = reduceObjectSelection(desired, valid);
       return run(next, "selection");
     },
     setView(next) {

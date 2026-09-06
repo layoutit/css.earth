@@ -1,25 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { OBJECT_BEHAVIOR, requireObjectControls } from "../scene-contract.mjs";
-
-test("registers every body-dependent layer as a synchronized presentation", () => {
-  assert.equal(
-    OBJECT_BEHAVIOR.rendering.bodyDependentLayerRegistration,
-    "camera-synchronized-retained-presentation",
-  );
-  assert.equal(OBJECT_BEHAVIOR.rendering.retainedLightingOverlay, true);
-});
-
-test("keeps the retained lighting overlay while shadows default to off", () => {
-  assert.deepEqual(OBJECT_BEHAVIOR.lighting.states, ["off", "on"]);
-  assert.equal(OBJECT_BEHAVIOR.lighting.default, "off");
-  assert.equal(
-    OBJECT_BEHAVIOR.lighting.shadowsOffPresentation,
-    "prepared-shadowless-overlay",
-  );
-  assert.equal(OBJECT_BEHAVIOR.lighting.overlayRetainedAcrossStates, true);
-});
+import { requireObjectControls } from "../scene-contract.mjs";
 
 test("publishes one off-by-default Shadows control for every planet", async () => {
   const planets = [

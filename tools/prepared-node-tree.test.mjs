@@ -8,7 +8,7 @@ test("preparation expands every actual Moon leaf into a stable ordered tree", ()
   const body = tree.mesh("body"), material = tree.element("s"); tree.append(scene, body, material);
   const leaves = PREPARED_MOON_SCENE.body.bands.flatMap(band => band.leaves);
   for (const leaf of leaves) tree.append(body, tree.leaf(leaf));
-  const result = tree.finish({ camera, scene, registrations: [{ bodySystem: body, lightingOverlays: [material] }] });
+  const result = tree.finish({ camera, scene });
   assert.equal(result.tree.nodes.length, 4 + leaves.length + leaves.filter(leaf => leaf.projectiveTextureLayer).length);
   assert.equal(result.tree.nodes[result.index(material)].tag, "s");
   for (const [index, node] of result.tree.nodes.entries()) assert.ok(node.parent < index);
@@ -22,5 +22,5 @@ test("preparation expands every actual Moon leaf into a stable ordered tree", ()
 test("preparer rejects unattached and doubly owned nodes", () => {
   const tree = createPreparedNodeTree(), camera = tree.element(), scene = tree.element(); tree.append(null, camera); tree.append(camera, scene);
   assert.throws(() => tree.append(camera, scene), /one owner/);
-  tree.element(); assert.throws(() => tree.finish({ camera, scene, registrations: [] }), /unattached/);
+  tree.element(); assert.throws(() => tree.finish({ camera, scene }), /unattached/);
 });

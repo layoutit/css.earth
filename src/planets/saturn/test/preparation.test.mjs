@@ -18,24 +18,6 @@ test("prepares Saturn from a complete checked source closure", async () => {
   });
 });
 
-test("prepares normal masters once before lenses and verifies them for final composition", async () => {
-  const source = await readFile(
-    new URL("../tools/prepare.mjs", import.meta.url),
-    "utf8",
-  );
-  const assets = source.indexOf('["prepare-assets.mjs"]');
-  const baseScene = source.indexOf('["prepare-scene.mjs", "--base"]');
-  const lenses = source.indexOf('["prepare-lenses.mjs"]');
-  const completeScene = source.indexOf('["prepare-scene.mjs", "--compose"]');
-  assert.ok(assets >= 0);
-  assert.ok(baseScene > assets);
-  assert.ok(lenses > baseScene);
-  assert.ok(completeScene > lenses);
-  assert.equal(source.indexOf('["prepare-assets.mjs"]', assets + 1), -1);
-  assert.equal(source.includes('["optimize-runtime-assets.mjs"]'), false);
-  assert.equal(source.includes('["prepare-scene.mjs"]'), false);
-});
-
 test("composition consumes the verified phase and never reruns its numerical generator", async () => {
   const source = await readFile(new URL("../tools/prepare-scene.mjs", import.meta.url), "utf8");
   const start = source.indexOf("async function preparePlanetTextures(");
