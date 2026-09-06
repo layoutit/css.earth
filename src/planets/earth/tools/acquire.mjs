@@ -58,12 +58,18 @@ for (const entry of manifest.inputs) {
     await validateEarthSourcePath(entry.path);
     continue;
   }
+  if (entry.path === "places/administrative-records.tsv.gz") {
+    await run("acquire-administrative-records.mjs", refresh ? ["--reacquire"] : []);
+    await validateEarthSourcePath(entry.path);
+    continue;
+  }
   const response = await fetch(urls.get(entry.path), {
     headers: { accept: entry.path.endsWith(".json") ? "application/json" : "*/*", "user-agent": "cssEarth Earth source acquisition" },
   });
   if (!response.ok) throw new Error(`Earth source request failed for ${entry.path}: ${response.status}.`);
   let bytes = Buffer.from(await response.arrayBuffer());
   if (entry.path === "noise/buenos-aires-day-2025.geojson.gz") bytes = gzipSync(bytes,{level:9});
+  if (entry.path === "places/ne_10m_admin_1_states_provinces.geojson.gz") bytes = gzipSync(bytes, { level: 9 });
   if (entry.path === "editorial/nasa-earth-record.json") {
     const record = JSON.parse(bytes);
     if (record.id !== 48583 || record.title?.rendered !== "Facts About Earth" || record.link !== "https://science.nasa.gov/earth/facts/") {

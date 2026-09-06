@@ -467,6 +467,57 @@
       "consumers": [
         "places"
       ]
+    },
+    {
+      "id": "geonames-administrative-location-subset",
+      "path": "places/administrative-records.tsv.gz",
+      "expectedSha256": "690b92cc9deee95872c5530dcb1da0b222db5f027a9320affa1cb7b3445b1df9",
+      "expectedBytes": 1931598,
+      "origin": "https://download.geonames.org/export/dump/allCountries.zip",
+      "credit": "GeoNames",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Bounded streaming allCountries ZIP extraction by acquire-administrative-records.mjs; exact pinned code-table IDs only. Full archive is not retained.",
+      "redistribution": "CC-BY-4.0 with GeoNames attribution.",
+      "consumers": [
+        "places"
+      ]
+    },
+    {
+      "id": "natural-earth-administrative-navigation",
+      "path": "places/ne_10m_admin_1_states_provinces.geojson.gz",
+      "expectedSha256": "94365c800296d7860939889ae20bce1f0daeb6af605ea69264bf5c24f9194da3",
+      "expectedBytes": 12069003,
+      "origin": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/9380cca83db5f9aef52d5e762765100745f84b27/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "credit": "Natural Earth",
+      "license": "Public domain",
+      "licenseEvidence": [
+        "https://www.naturalearthdata.com/about/terms-of-use/"
+      ],
+      "acquisition": "Pinned 1:10m administrative geometry; gzip level 9. Exact GeoNames/country/ADM1 joins supply optional navigation views.",
+      "redistribution": "Public domain with source attribution.",
+      "consumers": [
+        "places"
+      ]
+    },
+    {
+      "id": "geonames-country-navigation",
+      "path": "places/shapes_simplified_low.json.zip",
+      "expectedSha256": "37bdc310eedb1b553671482f35403e405d038e226812e807eeb07754c81350e5",
+      "expectedBytes": 1302556,
+      "origin": "https://download.geonames.org/export/dump/shapes_simplified_low.json.zip",
+      "credit": "GeoNames",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Pinned simplified country shapes archive acquired 2026-09-06; changing daily upstream requires a reviewed pin update.",
+      "redistribution": "CC-BY-4.0 with GeoNames attribution.",
+      "consumers": [
+        "places"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -486,9 +537,9 @@
   "documents": [
     {
       "path": "places/manifest.json",
-      "expectedSha256": "6fa9383da6b810c9a6c3eb0690ed76696442dbd8120e6fdf6068443fd1a04491",
-      "expectedBytes": 1916,
-      "purpose": "Pinned GeoNames place catalogue snapshot, license and source hashes; not imagery coverage"
+      "expectedSha256": "e79237e5671203782435edee8662e54f07d248d3c0363a1f7b8cbe7cf2f6f91d",
+      "expectedBytes": 5161,
+      "purpose": "Pinned GeoNames city/country/ADM1 snapshots, code joins, bounded acquisition and optional navigation geometry; not imagery or political-boundary completeness"
     },
     {
       "path": "city/catalog-pin.json",
