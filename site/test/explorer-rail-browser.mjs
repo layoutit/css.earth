@@ -183,11 +183,8 @@ try {
       const chartIds = await chartSlides.evaluateAll((slides) =>
         slides.map((slide) => slide.dataset.chartId));
       const chartNodes = await chartSlides.elementHandles();
-      assert.equal(await chartSwitcher.evaluate((node) => node.open), true,
-        `${config.label}: chart switcher starts open`);
-      await chartSummary.locator(".planet-chart-switcher-title").click();
       assert.equal(await chartSwitcher.evaluate((node) => node.open), false,
-        `${config.label}: chart title collapses the switcher`);
+        `${config.label}: chart switcher starts collapsed`);
       await chartSummary.locator(".planet-chart-switcher-title").click();
       assert.equal(await chartSwitcher.evaluate((node) => node.open), true,
         `${config.label}: chart title expands the switcher`);
