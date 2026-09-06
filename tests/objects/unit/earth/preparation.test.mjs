@@ -25,7 +25,7 @@ const publicRoot = resolve("public/scenes/earth");
 test("prepares Earth from a complete checked source closure", async () => {
   assert.deepEqual(await verifyEarthSourceManifest(), {
     inputCount: earthSourceManifest().inputs.length,
-    generatedIntermediateCount: 2,
+    generatedIntermediateCount: 1,
     documentCount: earthSourceManifest().documents.length,
   });
 });
