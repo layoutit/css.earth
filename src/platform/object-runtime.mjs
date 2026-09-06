@@ -81,7 +81,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       capture(motionRequested = false) {
         if (!readyPublished) return null;
         const camera = orbit.state();
-        return { camera: { controlPitch: camera.controlPitch, controlYaw: camera.controlYaw,
+        return { camera: orbit.sharedState?.() ?? { controlPitch: camera.controlPitch, controlYaw: camera.controlYaw,
           zoom: camera.zoom, pose: camera.pose,
           ...(camera.distanceKilometers === undefined ? {} : { distanceKilometers: camera.distanceKilometers }) }, preparedEpochJdTt,
           playback: { times: playback.captureMotion(), speed: playback.stats().speed, motionRequested } };

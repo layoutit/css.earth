@@ -8,7 +8,7 @@ const saved = () => ({ camera: { controlPitch: 37, controlYaw: 92, zoom: 0.8, di
   pose: { schema: "cssearth-camera-pose@1", scene: matrix, skybox: matrix, sunView: matrix } },
   preparedEpochJdTt: 2461286.5, playback: { times: [1234.5], speed: 1, motionRequested: false } });
 
-function fixture(href = "http://localhost:4210/mercury?keep=value#details") {
+function fixture(href = "http://localhost:4210/mercury?keep=value#details", captured = saved) {
   const windowTarget = new EventTarget(), timers = new Map(), writes = [], errors = [], restored = [];
   let sequence = 0, motion = false, listener = null;
   windowTarget.location = new URL(href);
@@ -18,7 +18,7 @@ function fixture(href = "http://localhost:4210/mercury?keep=value#details") {
   } };
   windowTarget.setTimeout = (callback, delay) => { const id = ++sequence; timers.set(id, { callback, delay }); return id; };
   windowTarget.clearTimeout = id => timers.delete(id);
-  const view = { capture: requested => ({ ...saved(), playback: { ...saved().playback, motionRequested: requested } }),
+  const view = { capture: requested => ({ ...captured(), playback: { ...captured().playback, motionRequested: requested } }),
     async restore(value) { restored.push(value); listener?.(); return true; },
     subscribe(next) { listener = next; return () => { listener = null; }; } };
   const owner = bindViewUrl({ windowTarget, view, getMotion: () => motion, setMotion: value => { motion = value; },
@@ -62,6 +62,22 @@ test("existing JSON links shrink on restore while preserving their exact saved t
   assert.equal(url.pathname, "/mercury"); assert.equal(url.searchParams.get("keep"), "value"); assert.equal(url.hash, "#details");
   assert.ok(url.searchParams.get("v").length < legacy.length);
   assert.deepEqual(parseSharedView(`v=${url.searchParams.get("v")}`), value);
+  h.owner.destroy();
+});
+
+test("old physical camera links migrate to one pose without resampling saved motion time", async () => {
+  const value = saved(); value.playback.motionRequested = true;
+  const camera = { distanceKilometers: value.camera.distanceKilometers,
+    pose: { schema: "cssearth-camera-pose@2", scene: value.camera.pose.scene } };
+  const h = fixture(`http://localhost:4210/mercury?${formatSharedView(value)}`, () => ({
+    ...value, camera, playback: { ...value.playback, times: [9876] },
+  }));
+  await h.owner.restore();
+  assert.equal(h.errors.length, 0);
+  assert.equal(h.writes.length, 1);
+  assert.equal(h.windowTarget.location.searchParams.get("v").length, 70);
+  assert.deepEqual(parseSharedView(h.windowTarget.location.search), { ...value, camera });
+  assert.equal(h.motion(), true);
   h.owner.destroy();
 });
 

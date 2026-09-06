@@ -127,7 +127,11 @@ export function createCubicSkyCameraOrientation({
         },
       });
     },
-    snapshot() {
+    snapshot({ sceneOnly = false } = {}) {
+      if (sceneOnly) {
+        if (!skyRegistration || !sunTracksScene) throw new TypeError("This camera needs its independent sky orientation.");
+        return Object.freeze({ schema: "cssearth-camera-pose@2", scene: formatMatrix3d(sceneMatrix) });
+      }
       return Object.freeze({
         schema: "cssearth-camera-pose@1",
         scene: formatMatrix3d(sceneMatrix),
@@ -136,6 +140,12 @@ export function createCubicSkyCameraOrientation({
       });
     },
     restore(snapshot) {
+      if (snapshot?.schema === "cssearth-camera-pose@2") {
+        if (!skyRegistration || !sunTracksScene) throw new TypeError("This camera needs its independent sky orientation.");
+        sceneMatrix = parseCameraPoseMatrix(snapshot.scene, "scene");
+        invalidatePresentations();
+        return;
+      }
       if (snapshot?.schema !== "cssearth-camera-pose@1") {
         throw new TypeError("Cubic-sky camera pose is invalid.");
       }
