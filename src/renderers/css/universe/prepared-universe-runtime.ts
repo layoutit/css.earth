@@ -77,6 +77,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
             const stellarFade = logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
+            root.style.setProperty('--universe-galactic-fade', String(fade));
             volumeHost.style.visibility = '';
             volumeHost.dataset.volumeOpacity = '1';
             volumeLayer!.publish({ world, viewport });
