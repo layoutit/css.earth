@@ -2,16 +2,20 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import test from "node:test";
-import { PREPARED_PRESENTATION } from "../runtime/preparedPresentation.mjs";
-import { PREPARED_SATURN_RUNTIME_SCENE } from "../runtime/preparedSceneRuntime.mjs";
-import { createPreparedEllipsoidProjection, readPreparedCounterMatrix, readPreparedMatrix4 } from "../../../platform/prepared-ellipsoid-projection.mjs";
+import { readPreparedFixture } from "../../fixtures.mjs";
+import { createPreparedEllipsoidProjection, readPreparedCounterMatrix, readPreparedMatrix4 } from "../../../../src/renderers/css/dist/testing.js";
+const PREPARED_PRESENTATION = await readPreparedFixture('saturn', 'runtime');
+const PREPARED_SATURN_RUNTIME_SCENE = await readPreparedFixture('saturn', 'scene');
 
 test("generic ellipsoid projection exactly preserves the independently captured native Saturn poses", async () => {
-  const reference = JSON.parse(await readFile(new URL("./fixtures/ellipsoid-projection-reference.json", import.meta.url), "utf8"));
+  const referenceBytes = await readFile(new URL("./fixtures/ellipsoid-projection-reference.json", import.meta.url));
+  const reference = JSON.parse(referenceBytes);
   assert.equal(reference.referenceCommit, "3cc7bbe1a4b4cc88b9b974704c03afd3dd49b164");
   assert.equal(reference.samples.length, 96);
-  const originalScene = reference.sources.find(source => source.path.endsWith("preparedSceneRuntime.mjs"));
-  assert.equal(createHash("sha256").update(await readFile(new URL("../runtime/preparedSceneRuntime.mjs", import.meta.url))).digest("hex"), originalScene.sha256);
+  // The retired executable wrapper is no longer a runtime input. Pin the
+  // independent capture itself, then test its 96 poses against the actual JSON
+  // projection and shared TS implementation below.
+  assert.equal(createHash("sha256").update(referenceBytes).digest("hex"), "1f8e7e194076ab959108293a8bd8a83df4024f56ab3bef0bb8236fca0d93b8b9");
   for (const module of reference.modules) {
     assert.equal(module.status, 200);
     assert.equal(module.headers["x-cssearth-audit-source"], reference.sourceIdentity);

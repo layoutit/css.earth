@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { runtimeDefinition } from "../runtime/definition.mjs";
-import { mountPreparedPresentation, selectedPreparedVariant } from "../../../platform/prepared-presentation.mjs";
-import { preparedSelectionFixture, retainedPresentationFixture } from "../../../platform/test/object-runtime-package.mjs";
+import { readPreparedFixture } from "../../fixtures.mjs";
+import { mountPreparedPresentation, selectedPreparedVariant } from "../../../../src/renderers/css/dist/testing.js";
+import { preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
+const runtimeDefinition = await readPreparedFixture('saturn', 'runtime');
 const pool = (f, id) => f.residency.stats().pools.find(pool => pool.id === id);
 const lens = id => ({ kind: "lens", id });
 const toggle = (name, value) => ({ kind: "toggle", name, value });

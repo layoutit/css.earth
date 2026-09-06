@@ -17,3 +17,4 @@ export * from './paging/api-image-transport.js';
 export * from './paging/wms-image.js';
 export * from './paging/wmts-image.js';
 export * from './paging/city-asset-url.js';
+export * from './solar-system/prepared-ellipsoid-projection.js';

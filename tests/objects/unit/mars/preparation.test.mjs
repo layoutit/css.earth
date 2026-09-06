@@ -30,7 +30,7 @@ test("prepares Mars from a complete checked source closure", async () => {
   assert.equal(PREPARED_MARS_LENSES.schema, "cssmars-prepared-lenses@1");
 });
 
-test("declares the exact runtime closure and separately identifies retained historical delivery", async () => {
+test("declares the exact runtime closure and excludes historical delivery", async () => {
   assert.equal(manifest.schema, "cssmars-runtime-assets@1");
   assert.equal(
     manifest.assets.length,
@@ -48,8 +48,8 @@ test("declares the exact runtime closure and separately identifies retained hist
   const retired=JSON.parse(await readFile(new URL('source/preparation/retired-delivery.json',objectRoot)));
   assert.equal(retired.schema,'cssearth-retired-delivery@1');
   assert.deepEqual(retired.assets.map(e=>e.filename).sort(),['mars-moon-billboards.webp','mars-moon-billboards@2x.webp']);
-  assert.deepEqual(actual,[...declared,...retired.assets.map(e=>e.filename)].sort((a,b)=>a.localeCompare(b)));
-  for(const asset of retired.assets){const bytes=await readFile(new URL(asset.filename,publicRoot));assert.equal(bytes.length,asset.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256);}
+  assert.deepEqual(actual,declared);
+  for(const asset of retired.assets) assert.equal(actual.includes(asset.filename),false);
 });
 
 test("matches every prepared runtime byte to its manifest hash", async () => {

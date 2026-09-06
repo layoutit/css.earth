@@ -1,19 +1,22 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
-import { prepareSaturnLeafLayouts, serializeSaturnLeafLayouts } from "../tools/prepare-leaf-layouts.mjs";
-import { PREPARED_SATURN_LEAF_LAYOUTS } from "../runtime/leaf-layouts.mjs";
-const scene = await readFile(new URL("../runtime/preparedSceneRuntime.mjs", import.meta.url), "utf8");
-const stylesheet = await readFile(new URL("../runtime/styles.css", import.meta.url), "utf8");
+import {createHash} from 'node:crypto';
+import {prepareLayeredLeafLayouts} from '../../../../tools/objects/material-composition/leaf-layouts.mjs';
+import {readPreparedFixture} from '../../fixtures.mjs';
+const [scene, PREPARED_SATURN_LEAF_LAYOUTS] = await Promise.all(['scene','layouts'].map(name=>readPreparedFixture('saturn',name)));
+const stylesheet = await readFile(new URL('../../../../src/renderers/css/styles/saturn-surfaces.css',import.meta.url),'utf8');
+const config=JSON.parse(await readFile(new URL('../../../../src/planets/saturn/source/preparation/presentation.json',import.meta.url),'utf8'));
 test("missing interior leaf layouts reproduce from checked scene and stylesheet bytes", async () => {
-  const generated = prepareSaturnLeafLayouts(scene, stylesheet);
+  const generated = prepareLayeredLeafLayouts({scene,stylesheet,config});
   assert.deepEqual(generated, PREPARED_SATURN_LEAF_LAYOUTS);
-  assert.equal(serializeSaturnLeafLayouts(generated), await readFile(new URL("../runtime/leaf-layouts.mjs", import.meta.url), "utf8"));
-  assert.equal(Object.values(generated.classes).reduce((sum, layout) => sum + layout.completedLeafCount, 0), 162);
+  assert.equal(JSON.stringify(generated),JSON.stringify(PREPARED_SATURN_LEAF_LAYOUTS));
+  assert.equal(scene.interior.shells.flatMap(shell=>shell.leaves).filter(leaf=>!leaf.className?.includes('saturn-interior-pole')).length,162);
 });
 test("changing checked defaults changes the descriptor; no runtime stylesheet inspection supplies missing values", () => {
   const modified = stylesheet.replace("--polycss-atlas-width, 64px", "--polycss-atlas-width, 80px");
-  const generated = prepareSaturnLeafLayouts(scene, modified);
+  assert.throws(()=>prepareLayeredLeafLayouts({scene,stylesheet:modified,config}),/pin changed/);
+  const generated = prepareLayeredLeafLayouts({scene,stylesheet:modified,config:{...config,stylesheet:{...config.stylesheet,bytes:Buffer.byteLength(modified),sha256:createHash('sha256').update(modified).digest('hex')}}});
   assert.ok(Object.values(generated.classes).every(layout => layout.width === "80px"));
-  assert.notEqual(generated.sources["runtime/styles.css"], PREPARED_SATURN_LEAF_LAYOUTS.sources["runtime/styles.css"]);
+  assert.notEqual(generated.sources[config.stylesheet.path], PREPARED_SATURN_LEAF_LAYOUTS.sources[config.stylesheet.path]);
 });

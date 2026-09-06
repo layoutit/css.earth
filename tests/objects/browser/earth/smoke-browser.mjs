@@ -4,6 +4,7 @@ import { checkDirectionalAtmosphere } from "../../../../src/platform/test/illumi
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_LENSES } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../../unit/earth/prepared-fixture.mjs";
+import { runtimeDefinition } from "../../unit/earth/prepared-fixture.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const deviceScaleFactor = Number(process.argv[3] ?? 1);
@@ -70,12 +71,16 @@ try {
     '/scenes/earth/earth-surface.webp")'), true);
   assert.equal(initial.normalPolesImage.endsWith(
     '/scenes/earth/earth-surface-poles.webp")'), true);
-  assert.equal(
-    initial.retainedInteractiveImageCount,
-    PREPARED_EARTH_SCENE.body.assets.surface.urls.length + 1 +
-      PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1 +
-      PREPARED_EARTH_SCENE.material.atmosphere.transport.initialWarmRows.length,
-  );
+  const mountedImageCount = PREPARED_EARTH_SCENE.body.assets.surface.urls.length + 1 +
+    PREPARED_EARTH_STARFIELD.faces.length * 2 + 1 + 1;
+  // Readiness guarantees the initial row, while adjacent rows warm asynchronously.
+  // Bound that work by the prepared pool instead of racing its decode completion.
+  const atmosphereCapacity = runtimeDefinition.assets.pools.find(
+    (pool) => pool.id === "atmosphere",
+  ).capacity;
+  assert.ok(initial.retainedInteractiveImageCount >= mountedImageCount +
+    PREPARED_EARTH_SCENE.material.atmosphere.transport.initialWarmRows.length);
+  assert.ok(initial.retainedInteractiveImageCount <= mountedImageCount + atmosphereCapacity);
   const startupAssets = [...requestedAssets];
   assert.equal(startupAssets.some((pathname) =>
     pathname.includes("earth-interior-")), true);
