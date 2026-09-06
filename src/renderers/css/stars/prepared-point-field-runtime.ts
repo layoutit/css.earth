@@ -23,13 +23,17 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;visibility:hidden';
   root.ariaHidden = 'true';
   root.dataset.catalogueCount = String(payload.stars.length);
+  const starLayer = host.ownerDocument.createElement('div');
+  starLayer.className = 'prepared-point-field-stars';
+  starLayer.style.cssText = 'position:absolute;inset:0';
+  root.appendChild(starLayer);
   const atlasUrl = resolveResource(payload.atlas.path);
   const makeSlots = (count: number): Slot[] => Array.from({ length: count }, () => {
     const element = host.ownerDocument.createElement('s');
     element.dataset.starSlot = '';
     element.style.cssText = `position:absolute;left:50%;top:50%;width:${payload.atlas.tileSize}px;height:${payload.atlas.tileSize}px;background-repeat:no-repeat;text-decoration:none;transform-origin:0 0;visibility:hidden`;
     element.style.backgroundImage = `url(${JSON.stringify(atlasUrl)})`;
-    root.appendChild(element);
+    starLayer.appendChild(element);
     return { element, reference: null, entering: false };
   });
   const outgoing = makeSlots(payload.policy.transitionSlots);
