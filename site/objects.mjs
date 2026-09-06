@@ -1,5 +1,6 @@
 import mercuryDescriptor from "../src/planets/mercury/object.json" with { type: "json" };
 import venusDescriptor from "../src/planets/venus/object.json" with { type: "json" };
+import sunWorldContext from "../src/planets/sun/prepared/world-context.json" with { type: "json" };
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
@@ -9,7 +10,7 @@ export const OBJECTS = defineObjects([
         "../src/planets/sun/runtime/client.mjs"
       );
       return mountSunClient;
-    }),
+    }, sunWorldContext.frame),
   object("mercury", "Mercury", "planet", "#9d9388", 0.39,
     "Explore Mercury in 3D with cssEarth. Inspect the smallest planet, its cratered surface, and the extreme conditions closest to the Sun.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

@@ -1,6 +1,25 @@
 import { expect, test } from "vitest";
 import { createPreparedImageStore, type PreparedImage } from "./prepared-image-store.js";
 import { createPreparedResidency, type PreparedAssets } from "./prepared-residency.js";
+import { mountPreparedPresentation } from "./prepared-presentation.js";
+
+class PresentationElement {
+  parentNode: PresentationElement | null = null;
+  children: PresentationElement[] = [];
+  className = '';
+  classList = { contains: (_name: string) => false, add: (..._names: string[]) => {}, toggle: (_name: string, _force?: boolean) => {} };
+  dataset: Record<string, string> = {};
+  style = { cssText: '', transform: '', visibility: '', setProperty: (_name: string, _value: string) => {}, getPropertyValue: (_name: string) => '' };
+  constructor(readonly ownerDocument: PresentationDocument) {}
+  appendChild(child: PresentationElement) { child.parentNode?.removeChild(child); child.parentNode = this; this.children.push(child); return child; }
+  removeChild(child: PresentationElement) { const index = this.children.indexOf(child); if (index >= 0) this.children.splice(index, 1); child.parentNode = null; return child; }
+  remove() { this.parentNode?.removeChild(this); }
+  setAttribute(_name: string, _value: string) {}
+  getAttribute(_name: string) { return null; }
+  removeAttribute(_name: string) {}
+  animate() { return { id: '', play() {}, pause() {}, cancel() {} } as unknown as Animation; }
+}
+class PresentationDocument { createElement() { return new PresentationElement(this); } }
 
 class ControlledImage implements PreparedImage {
   src = "";
@@ -34,6 +53,26 @@ test("shared URLs decode once while independent leases retain ownership", async 
   expect(store.read("/shared.webp")).toBe(h.images[0]);
   store.destroy();
   expect(h.images[0].src).toBe("");
+});
+
+test('prepared presentation appends only its own roots and leaves the application context sibling intact', () => {
+  const document = new PresentationDocument();
+  const stage = new PresentationElement(document), universe = new PresentationElement(document);
+  stage.appendChild(universe);
+  const cleanups: (() => void)[] = [];
+  const mounted = mountPreparedPresentation(stage as unknown as HTMLElement, {
+    own(cleanup) { cleanups.push(cleanup); }, registerAnimation() {}, seekAnimation() {},
+  }, {
+    camera: {} as never, tree: { nodes: [
+      { tag: 'div', parent: -1, className: null, style: '', properties: [], attributes: {} },
+      { tag: 'div', parent: -1, className: null, style: '', properties: [], attributes: {} },
+    ], properties: [], camera: 0, scene: 1, stageClasses: [] },
+    variants: [], materials: [], viewBindings: [], animations: [],
+  });
+  expect(stage.children).toContain(universe);
+  expect(stage.children).toContain(mounted.cameraElement);
+  for (const cleanup of cleanups) cleanup();
+  expect(stage.children).toEqual([universe]);
 });
 
 for (const rejectOld of [false, true]) test(`retired native work cannot clear a reused replacement slot (${rejectOld})`, async () => {

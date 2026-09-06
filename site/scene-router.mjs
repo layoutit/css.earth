@@ -9,6 +9,7 @@ import { createNavigationContent } from './navigation-content.mjs';
 import { createNavigationHistory, bindNavigationLinks } from './navigation-history.mjs';
 import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mjs';
+import * as applicationWorldContext from './application-world-context.mjs';
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
@@ -23,6 +24,7 @@ export function createSceneRouter({
   navigation = null,
   objects = OBJECTS,
   loadContent = null,
+  persistentWorldContext = null,
 }) {
   let active = null;
   let mountTask = null;
@@ -34,6 +36,10 @@ export function createSceneRouter({
   let destroyed = false;
   let nextGeneration = 0;
   let shellOwner = null, pending = null, historyOwner = null, unbindLinks = null;
+  const worldContextOwner = persistentWorldContext;
+  let worldContextMount = null;
+  let worldContextMountTask = null;
+  let worldContextAbort = null;
   const contentTransport = navigation && !loadContent ? createNavigationContent({ documentTarget, windowTarget }) : null;
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
   let reducedMotionActive = false;
@@ -57,6 +63,7 @@ export function createSceneRouter({
       if (destroyed) return;
       destroyed = true;
       destroyActiveScene();
+      destroyWorldContext();
       windowTarget.removeEventListener("pagehide", destroyActiveScene);
       windowTarget.removeEventListener("pageshow", restoreCachedScene);
       historyOwner?.destroy(); unbindLinks?.();
@@ -103,12 +110,17 @@ export function createSceneRouter({
       if (content) shell.setObject(content);
       if (active !== session) return;
       publishSceneState();
+      if (worldContextOwner) {
+        const contextual = await session.lifetime.wait(ensureWorldContext());
+        if (contextual.cancelled || active !== session) return;
+      }
       const loaded = await session.lifetime.wait(factory ?? loadObject(objectId));
       if (loaded.cancelled || active !== session) return;
       // Keep the raw handle even if validation fails.
       let mount;
       mount = loaded.value(stage, {
         ...handoff?.mountOptions,
+        ...(worldContextMount ? { externalWorldContext: true } : {}),
         onMotionRequest: requestMotion,
         onError(error) {
           if (active === session && session.mount === mount) fail(session, error);
@@ -125,6 +137,7 @@ export function createSceneRouter({
       syncPlayback();
       const result = await session.lifetime.wait(ready);
       if (result.cancelled || active !== session) return;
+      connectWorldContext(session, mount, objectId);
       let interrupted = false;
       if (handoff?.afterMount) {
         try {
@@ -374,6 +387,54 @@ export function createSceneRouter({
   function report(error) {
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }
   }
+  function ensureWorldContext() {
+    if (!worldContextOwner) return Promise.resolve(null);
+    if (worldContextMount) return Promise.resolve(worldContextMount);
+    if (!worldContextMountTask) {
+      const controller = new AbortController();
+      worldContextAbort = controller;
+      worldContextMountTask = Promise.resolve(worldContextOwner.mount({
+        stage, objectId, objects, documentTarget, windowTarget, signal: controller.signal,
+      })).then(value => {
+        if (controller.signal.aborted) {
+          value?.destroy?.();
+          throw controller.signal.reason ?? new DOMException('World context mount was cancelled.', 'AbortError');
+        }
+        if (!value || typeof value.publish !== 'function' || typeof value.destroy !== 'function') {
+          throw new TypeError('Persistent world context mount must publish and destroy.');
+        }
+        worldContextMount = value;
+        return value;
+      }).catch(error => {
+        if (worldContextAbort === controller) worldContextMountTask = null;
+        throw error;
+      }).finally(() => {
+        if (worldContextAbort === controller) worldContextAbort = null;
+      });
+      worldContextMountTask.catch(() => {});
+    }
+    return worldContextMountTask;
+  }
+  function connectWorldContext(session, mount, mountedObjectId) {
+    const owner = worldContextMount;
+    const navigation = mount?.navigation;
+    if (!owner || !navigation || typeof navigation.subscribe !== 'function') return;
+    owner.selectObject?.(mountedObjectId, navigation.frame);
+    const unsubscribe = navigation.subscribe((world, viewport) => {
+      if (active === session && worldContextMount === owner) owner.publish(world, viewport);
+    });
+    session.lifetime.onDispose(unsubscribe);
+  }
+  function destroyWorldContext() {
+    worldContextAbort?.abort(new DOMException('World context router was destroyed.', 'AbortError'));
+    worldContextAbort = null;
+    const owner = worldContextMount;
+    worldContextMount = null;
+    worldContextMountTask = null;
+    if (owner) {
+      try { owner.destroy(); } catch (error) { report(error); }
+    }
+  }
   function fail(session, error) {
     if (active !== session) return;
     try { retire(session, error instanceof Error ? error : new Error(String(error))); }
@@ -381,6 +442,7 @@ export function createSceneRouter({
     report(error);
   }
   function destroyActiveScene() {
+    destroyWorldContext();
     hasPresented = false;
     if (pending) { const request = pending; pending = null; request.controller.abort(); request.lifetime.destroy(); }
     if (active) {
@@ -396,11 +458,19 @@ export function createSceneRouter({
   }
 }
 
+function createWorldContextOwner({ objects, objectId, navigation, stage }) {
+  if (!navigation || !objects.some(object => object.id === objectId && object.worldFrame)) return null;
+  const create = applicationWorldContext.createApplicationWorldContext;
+  if (typeof create !== 'function') return null;
+  return create({ objects, objectId, stage });
+}
+
 if (typeof document !== "undefined") {
   const stage = document.querySelector(".planet-stage");
   if (!(stage instanceof HTMLElement)) throw new Error("Missing cssEarth planet stage.");
   const objectId = stage.dataset.objectId;
   const navigation = OBJECTS.find(object => object.id === objectId)?.worldFrame
     ? createPreparedWorldNavigation({ objects: OBJECTS }) : null;
-  createSceneRouter({ stage, objectId, navigation });
+  const persistentWorldContext = createWorldContextOwner({ objects: OBJECTS, objectId, navigation, stage });
+  createSceneRouter({ stage, objectId, navigation, persistentWorldContext });
 }

@@ -24,8 +24,16 @@ test('Sun context source derives its physical scale from the prepared visible ra
   assert.equal(source.system.hiddenDistanceM, 1e15);
   assert(source.system.hiddenDistanceM < source.stars.fullDistanceM);
   assert.equal(source.camera.framingReferenceZoom, 1);
+  assert.deepEqual(source.focus.pointSource,{absoluteMagnitude:4.832125665882298,color:'#fff5e0',
+    proximityEnhancement:{fullDistanceM:1e12,fadeOutDistanceM:1e14,radiusMultiplier:1.6,brightnessMultiplier:1.5}});
+  const prepared = prepareWorldContext({ ...source, bodies: [] }, {}, {});
+  assert.deepEqual(prepared.focus.pointSource,source.focus.pointSource,'prepared focus must preserve authored far-point photometry');
   assert.equal(source.camera.presentation.dolly.maximumDistanceOverOrbitExtent, 1);
   assert.throws(() => parseWorldContextSource({ ...raw, frame: { ...(raw.frame as Record<string, unknown>), metersPerUnit: 1 } }), /metres per unit/);
+  assert.throws(() => parseWorldContextSource({ ...raw, focus: { ...(raw.focus as Record<string, unknown>), pointSource: { absoluteMagnitude: Number.NaN, color: '#fff5e0' } } }), /point/i);
+  assert.throws(() => parseWorldContextSource({ ...raw, focus: { ...(raw.focus as Record<string, unknown>), pointSource: { absoluteMagnitude: 4.83, color: 'yellow' } } }), /color/i);
+  assert.throws(() => parseWorldContextSource({ ...raw, focus: { ...(raw.focus as Record<string, unknown>), pointSource: { ...(raw.focus as { pointSource: Record<string, unknown> }).pointSource,
+    proximityEnhancement: { fullDistanceM: 1e14, fadeOutDistanceM: 1e12, radiusMultiplier: .9, brightnessMultiplier: 1.5 } } } }), /proximity/i);
   assert.throws(() => parseWorldContextSource({ ...raw, focus: raw.bodies![0] }), /exclude the focus/);
   const camera = raw.camera as Record<string, unknown>;
   const presentation = camera.presentation as Record<string, unknown>;

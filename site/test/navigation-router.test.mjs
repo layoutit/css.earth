@@ -12,7 +12,7 @@ function deferred() {
 const saved = distance => ({ camera: { distanceKilometers: distance,
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [1234], speed: 1, motionRequested: false } });
-function harness({ prepare = async () => ({}), factoryGate = null, contentGate = null } = {}) {
+function harness({ prepare = async () => ({}), factoryGate = null, contentGate = null, persistentWorldContext = null } = {}) {
   const documentTarget = new EventTarget(), windowTarget = new EventTarget(), media = new EventTarget();
   documentTarget.hidden = false; documentTarget.documentElement = { dataset: {} };
   documentTarget.body = { classList: { add() {}, remove() {} } };
@@ -42,6 +42,20 @@ function harness({ prepare = async () => ({}), factoryGate = null, contentGate =
       async restore(value) { mount.restores++; mount.value = value; return true; },
       subscribe(listener) { listeners.add(listener); return () => listeners.delete(listener); },
     };
+    if (persistentWorldContext) {
+      mount.navigation = {
+        frame: { id },
+        capture: () => ({ id }),
+        apply() {},
+        optics: () => ({ focalPixels: 1, principalOffsetPixels: [0, 0], framingRadiusPixels: 1, detailHandoffDiameterPixels: 1 }),
+        subscribe(listener) {
+          const world = { referenceFrame: 'test', epochJdTt: 1, pose: { id } };
+          const viewport = { focalPixels: 10, principalOffsetPixels: [id === 'mercury' ? 1 : 2, 0] };
+          listeners.add(listener); listener(world, viewport);
+          return () => listeners.delete(listener);
+        },
+      };
+    }
     mounts.push(mount); renders.add(mount); maxRendered = Math.max(maxRendered, renders.size);
     assert.equal(renders.size, 1, 'At most one detailed scene may render');
     return mount;
@@ -66,10 +80,34 @@ function harness({ prepare = async () => ({}), factoryGate = null, contentGate =
       supports: (from, to) => from !== 'earth' && to !== 'earth',
       prepare(options) { preparations.push(options); return prepare(options); },
     },
+    persistentWorldContext,
   });
   return { router, windowTarget, documentTarget, media, mounts, shells, renders, errors, writes, entries, preparations,
     maxRendered: () => maxRendered };
 }
+
+test('persistent world context is mounted once and follows the active physical navigation', async () => {
+  const events = [], owner = {
+    async mount() {
+      events.push(['mount']);
+      return {
+        selectObject(id, frame) { events.push(['select', id, frame.id]); },
+        publish(world, viewport) { events.push(['publish', world.pose.id, viewport.principalOffsetPixels[0]]); },
+        destroy() { events.push(['destroy']); },
+      };
+    },
+  };
+  const h = harness({ persistentWorldContext: owner });
+  await h.router.settled;
+  assert.deepEqual(events, [['mount'], ['select', 'mercury', 'mercury'], ['publish', 'mercury', 1]]);
+  await h.router.navigate('venus');
+  assert.deepEqual(events, [
+    ['mount'], ['select', 'mercury', 'mercury'], ['publish', 'mercury', 1],
+    ['select', 'venus', 'venus'], ['publish', 'venus', 2],
+  ]);
+  h.router.destroy();
+  assert.deepEqual(events.at(-1), ['destroy']);
+});
 
 test('flight retains the source and one shell; target readiness and handoff precede history commit', async () => {
   const flight = deferred(), attached = deferred();
@@ -249,4 +287,36 @@ test('navbar/search anchors and vault events share one route; modifier and unsup
   assert.equal(event.defaultPrevented, true);
   assert.equal(h.router.state().activeObjectId, 'mercury'); assert.equal(h.preparations.length, 2);
   h.router.destroy();
+});
+
+test('a failed persistent context mount can retry when the document restores', async () => {
+  let attempts = 0, disposed = 0;
+  const h = harness({ persistentWorldContext: { async mount() {
+    if (++attempts === 1) throw new Error('Temporary context transport failure');
+    return { publish() {}, destroy() { disposed++; } };
+  } } });
+  await h.router.settled;
+  assert.equal(h.router.state().ready, false);
+  assert.equal(h.errors.length, 1);
+  h.windowTarget.dispatchEvent(new Event('pagehide'));
+  const restored = new Event('pageshow'); restored.persisted = true;
+  h.windowTarget.dispatchEvent(restored);
+  await h.router.settled;
+  assert.equal(attempts, 2);
+  assert.equal(h.router.state().ready, true);
+  h.router.destroy(); assert.equal(disposed, 1);
+});
+
+test('leaving the document releases its universe and a cached-page restore mounts one fresh owner', async () => {
+  let mounted = 0, disposed = 0;
+  const h = harness({ persistentWorldContext: { async mount() {
+    mounted++; return { publish() {}, destroy() { disposed++; } };
+  } } });
+  await h.router.settled;
+  h.windowTarget.dispatchEvent(new Event('pagehide'));
+  assert.equal(disposed, 1);
+  const restored = new Event('pageshow'); restored.persisted = true;
+  h.windowTarget.dispatchEvent(restored); await h.router.settled;
+  assert.equal(mounted, 2); assert.equal(h.router.state().ready, true);
+  h.router.destroy(); assert.equal(disposed, 2);
 });

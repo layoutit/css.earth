@@ -20,11 +20,22 @@ export interface SkyBaseline {
   readonly skyPitchDegrees: number; readonly skyYawDegrees: number; readonly skyRollDegrees: number;
   readonly source: string;
 }
+export interface WorldContextPointSource {
+  readonly absoluteMagnitude: number;
+  readonly color: string;
+  readonly proximityEnhancement?: {
+    readonly fullDistanceM: number;
+    readonly fadeOutDistanceM: number;
+    readonly radiusMultiplier: number;
+    readonly brightnessMultiplier: number;
+  };
+}
+type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource };
 export interface WorldContextSource {
   readonly schema: 'cssearth-world-context-source@1';
   readonly sky: SkyBaseline;
   readonly frame: PreparedWorldCameraFrame;
-  readonly focus: { readonly id: string; readonly name: string; readonly color: string };
+  readonly focus: WorldContextFocus;
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string }[];
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number; readonly presentation: WorldContextCameraPresentation };
@@ -45,7 +56,7 @@ export interface PreparedWorldContext {
   readonly schema: 'cssearth-world-context@1';
   readonly sky: { readonly sceneRegistration: string };
   readonly frame: PreparedWorldCameraFrame;
-  readonly focus: { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number };
+  readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number };
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
     readonly orbit: { readonly verticesM: readonly Vector3[]; readonly trail: readonly number[] } }[];
   readonly camera: WorldContextSource['camera'];
@@ -59,8 +70,9 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const input = record(value, 'world context'); keys(input, ['schema', 'frame', 'focus', 'bodies', 'orbit', 'camera', 'system', 'volume', 'sky', 'stars'], 'world context');
   if (input.schema !== 'cssearth-world-context-source@1') throw new TypeError('Unsupported world context source schema.');
   const frame = parseFrame(input.frame);
-  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color'], 'world context focus');
-  const focus = freeze({ id: identifier(focusInput.id, 'World context focus id'), name: text(focusInput.name, 'World context focus name'), color: color(focusInput.color) });
+  const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource'], 'world context focus');
+  const focus = freeze({ id: identifier(focusInput.id, 'World context focus id'), name: text(focusInput.name, 'World context focus name'), color: color(focusInput.color),
+    ...(focusInput.pointSource === undefined ? {} : { pointSource: parsePointSource(focusInput.pointSource) }) });
   if (!Array.isArray(input.bodies) || input.bodies.length === 0) throw new TypeError('World context bodies must be nonempty.');
   const bodies = input.bodies.map((value, index) => {
     const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color'], `world context body ${index}`);
@@ -106,6 +118,20 @@ function parseStars(value: unknown, volumeFadeStartDistanceM: number): WorldCont
   const fadeStartDistanceM = positive(input.fadeStartDistanceM, 'Stars fade start'), fullDistanceM = positive(input.fullDistanceM, 'Stars full distance');
   if (!(fadeStartDistanceM < fullDistanceM && fullDistanceM <= volumeFadeStartDistanceM)) throw new TypeError('Stars distance range is invalid.');
   return freeze({ objectId:identifier(input.objectId,'Stars object id'),fadeStartDistanceM,fullDistanceM });
+}
+
+function parsePointSource(value: unknown): WorldContextPointSource {
+  const input = record(value, 'World context focus point source'); keys(input, ['absoluteMagnitude', 'color', 'proximityEnhancement'], 'World context focus point source');
+  const absoluteMagnitude = finite(input.absoluteMagnitude, 'Focus point absolute magnitude'), sourceColor = color(input.color);
+  if (input.proximityEnhancement === undefined) return freeze({ absoluteMagnitude, color: sourceColor });
+  const enhancement = record(input.proximityEnhancement, 'World context focus proximity enhancement');
+  keys(enhancement, ['fullDistanceM', 'fadeOutDistanceM', 'radiusMultiplier', 'brightnessMultiplier'], 'World context focus proximity enhancement');
+  const fullDistanceM = positive(enhancement.fullDistanceM, 'Focus proximity full distance');
+  const fadeOutDistanceM = positive(enhancement.fadeOutDistanceM, 'Focus proximity fade-out distance');
+  const radiusMultiplier = positive(enhancement.radiusMultiplier, 'Focus proximity radius multiplier');
+  const brightnessMultiplier = positive(enhancement.brightnessMultiplier, 'Focus proximity brightness multiplier');
+  if (!(fadeOutDistanceM > fullDistanceM && radiusMultiplier >= 1 && brightnessMultiplier >= 1)) throw new TypeError('Focus proximity enhancement is invalid.');
+  return freeze({ absoluteMagnitude, color: sourceColor, proximityEnhancement: freeze({ fullDistanceM, fadeOutDistanceM, radiusMultiplier, brightnessMultiplier }) });
 }
 
 function parseFrame(value: unknown): PreparedWorldCameraFrame {

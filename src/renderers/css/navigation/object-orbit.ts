@@ -119,7 +119,7 @@ export function createRetainedCubicSkyOrbit({
     throw new TypeError("Shared retained cubic-sky orbit is invalid.");
   }
   const lifetime = createSceneLifetime();
-  if (heliocentric !== null) lifetime.onDispose(bindWorldCameraPicking(inputSurface, stage));
+  if (perspectiveCamera) lifetime.onDispose(bindWorldCameraPicking(inputSurface, stage));
   let constructing = true;
   const retireFailure = (error: unknown) => {
     if (constructing) throw error;
@@ -171,7 +171,8 @@ export function createRetainedCubicSkyOrbit({
     // following the presentation sky, and the material below uses the
     // physical light map: a Sun on screen means the camera sees the night
     // side.
-    sunTracksScene: heliocentric !== null,
+    sunTracksScene: heliocentric !== null ||
+      (worldContext !== undefined && directionalSunPlan?.localDirection !== undefined),
     skyTracksScene,
   });
   const safeCamera = perspective ? camera : Object.freeze({
@@ -317,11 +318,12 @@ export function createRetainedCubicSkyOrbit({
     rotate: publishCameraDelta,
     minimumZoom: minimumZoom(),
     maximumZoom: maximumZoom(),
-    surfaceFlyToHitTest: perspective && heliocentric ? (clientX, clientY) => {
+    surfaceFlyToHitTest: perspective ? (clientX, clientY) => {
       const body = projected?.body;
       if (!body) return false;
-      const marker = heliocentric!.marker;
-      const markerBounds = !marker.hidden && Number(marker.style.opacity) > 0 ? marker.getBoundingClientRect() : null;
+      const marker = heliocentric?.marker ?? null;
+      const markerBounds = marker !== null && !marker.hidden && Number(marker.style.opacity) > 0
+        ? marker.getBoundingClientRect() : null;
       return hitsProjectedBody(clientX, clientY, body, cameraElement.getBoundingClientRect(), markerBounds);
     } : null,
     // The prepared wheel dolly: the eye moves along its axis, with no

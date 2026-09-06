@@ -14,6 +14,7 @@ const universeEntries = [
   'src/preparation/volume/volume.test.ts',
   'src/renderers/css/preparation/volume.test.ts',
   'src/preparation/spatial-context.test.ts',
+  'tools/objects/prepare-spatial-context.test.ts',
   'src/preparation/stars/stars.test.ts',
 ];
 const entries = universeOnly ? universeEntries : [
