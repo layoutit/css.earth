@@ -16,17 +16,17 @@ Install dependencies and download the prepared browser assets, then start the si
 
 ```sh
 pnpm install
-pnpm setup
+pnpm setup:assets
 pnpm dev
 ```
 
-For Earth alone, use `pnpm setup --object=earth` and open `/earth/`.
+For Earth alone, use `pnpm setup:assets --object=earth` and open `/earth/`.
 Setup resumes existing files and verifies them against the checked-in runtime
 inventories. It does not require source imagery, preparation tools, or the
 25.4 GB Earth geometry mirror. Development and preview fetch the visible
 geometry ranges from the published release when no local mirror is present.
 
-To build all routes for production, run `pnpm setup`, `pnpm build`, then
+To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 `pnpm preview`. To regenerate assets from source instead, run
 `pnpm prepare:checkout`; that is the full preparation workflow described below.
 
@@ -58,7 +58,7 @@ banks. At runtime, the browser only loads and displays these prepared assets.
 
 Large source binaries and generated browser assets are intentionally not
 committed. Their URLs, sizes, hashes, provenance, preparation code, and runtime
-inventories are committed. `pnpm setup` downloads the prepared outputs from
+inventories are committed. `pnpm setup:assets` downloads the prepared outputs from
 immutable URLs on the project asset CDN. After changing prepared outputs,
 maintainers publish their updated inventories with `pnpm publish:runtime-assets`
 (or `--object=earth`) before pushing the code that references them.
