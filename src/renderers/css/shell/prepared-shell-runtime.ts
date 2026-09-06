@@ -1,10 +1,10 @@
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import type { PositionM } from '@cssearth/engine';
 import { worldRotationCss } from '../navigation/world-camera-math.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
 import type { PreparedCssSurfaceShell } from './types.js';
 import { validatePreparedCssSurfaceShell } from './validation.js';
+import { nearestFacingIndex, shellMaterialAddress } from './material-address.js';
 
 export interface PreparedSurfaceShellStats {
   readonly visible: boolean;
@@ -41,8 +41,10 @@ export function mountPreparedCssSurfaceShell({ host, before, payload: input, res
       transformStyle: 'preserve-3d', backfaceVisibility: 'visible', backgroundRepeat: 'no-repeat', pointerEvents: 'none',
       textDecoration: 'none', visibility: 'hidden', ...face.style, backgroundImage: `url("${escapeUrl(atlasUrl)}")` });
     scene.appendChild(element);
-    return { face, element, frame: -1, visible: false };
+    return { face, element, frame: -1, permutation: 0, visible: false };
   });
+  const facingLevels = payload.atlas.facingLevels;
+  const vertexFrames = new Uint16Array(payload.vertices?.length ?? 0);
   camera.appendChild(scene); root.appendChild(camera); host.insertBefore(root, before);
   let destroyed = false;
   let state: PreparedSurfaceShellStats = Object.freeze({ visible: false, visibleFaces: 0, totalFaces: slots.length, atlasFrames: payload.atlas.frames, distanceM: 0, opacity: 0 });
@@ -71,16 +73,34 @@ export function mountPreparedCssSurfaceShell({ host, before, payload: input, res
     write(camera, 'perspective', `${format(transform.focalPixels)}px`);
     write(camera, 'perspectiveOrigin', `calc(50% + ${format(viewport.principalOffsetPixels[0])}px) calc(50% + ${format(viewport.principalOffsetPixels[1])}px)`);
     write(scene, 'transform', `translate3d(${transform.translationCssPixels.map(value => `${format(value)}px`).join(',')}) ${worldRotationCss(transform.rotation)}`);
+    if (facingLevels) for (let i = 0; i < vertexFrames.length; i++) {
+      const vertex = payload.vertices![i]!, p = vertex.positionUnits, n = vertex.radialNormal;
+      const x = local.positionUnits[0] - p[0], y = local.positionUnits[1] - p[1], z = local.positionUnits[2] - p[2];
+      const length = Math.hypot(x, y, z);
+      vertexFrames[i] = nearestFacingIndex(length > 0 ? (x * n[0] + y * n[1] + z * n[2]) / length : 0, facingLevels);
+    }
     let visibleFaces = 0;
     for (const slot of slots) {
       const { face, element } = slot;
-      const delta: PositionM = [local.positionUnits[0] - face.centerUnits[0], local.positionUnits[1] - face.centerUnits[1], local.positionUnits[2] - face.centerUnits[2]];
-      const faceVisible = dot(delta, face.faceNormal) > 0;
+      const x = local.positionUnits[0] - face.centerUnits[0], y = local.positionUnits[1] - face.centerUnits[1], z = local.positionUnits[2] - face.centerUnits[2];
+      const faceVisible = x * face.faceNormal[0] + y * face.faceNormal[1] + z * face.faceNormal[2] > 0;
       if (faceVisible !== slot.visible) { element.style.visibility = faceVisible ? 'visible' : 'hidden'; slot.visible = faceVisible; }
       if (!faceVisible) continue;
       visibleFaces++;
-      const facing = dot(delta, face.radialNormal) / Math.hypot(...delta);
-      const frame = Math.round(Math.max(0, Math.min(1, facing)) * (payload.atlas.frames - 1));
+      let frame: number;
+      if (facingLevels) {
+        const indices = face.vertexIndices!;
+        const address = shellMaterialAddress(vertexFrames[indices[0]]!, vertexFrames[indices[1]]!, vertexFrames[indices[2]]!, facingLevels.length);
+        frame = Math.floor(address / 6);
+        const permutation = address % 6;
+        if (slot.permutation !== permutation) {
+          element.style.transform = face.materialTransforms![permutation]!;
+          slot.permutation = permutation;
+        }
+      } else {
+        const facing = (x * face.radialNormal[0] + y * face.radialNormal[1] + z * face.radialNormal[2]) / Math.hypot(x, y, z);
+        frame = Math.round(Math.max(0, Math.min(1, facing)) * (payload.atlas.frames - 1));
+      }
       if (frame === slot.frame) continue;
       const column = frame % payload.atlas.columns, row = Math.floor(frame / payload.atlas.columns);
       element.style.backgroundPosition = `${format(face.atlasOriginPixels[0] - column * face.atlasStepPixels[0])}px ${format(face.atlasOriginPixels[1] - row * face.atlasStepPixels[1])}px`;
@@ -102,7 +122,6 @@ function distanceOpacity(distanceM: number, visibility: PreparedCssSurfaceShell[
   const t = (distanceM - visibility.fullUntilM) / (visibility.hiddenBeyondM - visibility.fullUntilM);
   return 1 - t * t * (3 - 2 * t);
 }
-function dot(a: PositionM, b: PositionM): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
 function write(element: HTMLElement, property: 'perspective' | 'perspectiveOrigin' | 'transform' | 'opacity' | 'visibility', value: string): void {
   if (element.style[property] !== value) element.style[property] = value;
 }

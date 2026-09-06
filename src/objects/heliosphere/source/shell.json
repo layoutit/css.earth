@@ -31,8 +31,8 @@
   "shape": {
     "kind": "asymmetric-radial-shell",
     "radiusUnits": 120,
-    "latitudeSegments": 32,
-    "longitudeSegments": 64,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
     "tailExponent": 2,
     "tailExtension": 0.75,
     "transverseScale": 0.92,
@@ -50,9 +50,34 @@
     "rimFadeFacing": 0.1
   },
   "atlas": {
-    "tileSize": 64,
-    "columns": 16,
-    "frames": 128
+    "tileSize": 32,
+    "columns": 46,
+    "frames": 2024,
+    "facingLevels": [
+      -1,
+      -0.5,
+      -0.2,
+      -0.07,
+      0,
+      0.0125,
+      0.025,
+      0.0375,
+      0.05,
+      0.0625,
+      0.075,
+      0.0875,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.625,
+      0.75,
+      0.875,
+      1
+    ],
+    "triangleInsetPixels": 1.5
   },
   "visibility": {
     "hiddenInsideUnits": 100,
@@ -62,6 +87,6 @@
   "unitScale": 50,
   "provenance": {
     "path": "provenance.json",
-    "sha256": "e5ec9e2160a24d0207fcf3e86a76d4cfb46f618ae25912e43313ae82efa11ec2"
+    "sha256": "7f99f40637811d00603ff45b3d6077bd9c6f8f5c62120f07beef3ff717bc4441"
   }
 }

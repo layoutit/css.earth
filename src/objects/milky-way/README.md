@@ -8,11 +8,13 @@ milky-way/
 │   ├── acquisition.json        Original raw URL/hash and exact reduction recipe
 │   ├── volume.json             Channels, material, sampling and crop recipe
 │   ├── provenance.json         Authors, transfer equations, frame and source pins
-│   └── openspace/              Original MIT notice, asset, shader and sync listing
+│   ├── openspace/              Original MIT notice, asset, shader and sync listing
+│   └── sky/                    NASA source, lossless HDR row chunks and cube recipe
 └── prepared/
     ├── volume.json             Prepared object envelope with PolyCSS leaves
     ├── volume-slices.json      Physical quad and texture intermediates
-    └── slices/{x,y,z}/*.webp   Fixed 256 / 256 / 32 external texture bank
+    ├── slices/{x,y,z}/*.webp    Fixed 256 / 256 / 32 external texture bank
+    └── sky/{px,nx,py,ny,pz,nz}.webp  Six opaque celestial cube faces
 ```
 
 From the repository root, with Node 22.15+ and pnpm 10.33.0:
@@ -30,7 +32,7 @@ orbit alignment, and PolyCSS pixel-to-world mapping. The normal
 `pnpm test:preparation` also includes these tests. To prepare another compatible
 volume after building tools, use `pnpm prepare:volume <object-directory>`.
 Preparation reads the local pinned inputs; no sibling checkout or network
-source is required. The checked source is 41.77 MiB. The 1024px WebP bank is
+source is required. The checked volume source is 41.77 MiB. The 1024px WebP volume bank is
 14.65 MiB compressed and decodes to 131.05 MiB across 544 retained leaves.
 WebP uses quality 90 for RGB and preserves alpha exactly. Each axis has the
 same physical slice pitch; four samples per Z slab integrate all 128 original
@@ -60,7 +62,7 @@ pnpm build:preparation
 pnpm prepare:volume src/objects/milky-way --acquire-source .local/volume-source-cache
 ```
 
-This needs about 750 MiB temporary space. The pinned HTTPS source, raw SHA256,
+This reacquires both original sources and needs about 1.3 GiB temporary space. The pinned HTTPS source, raw SHA256,
 X-fastest RGBA order, factor-one lossless import and Zstd level are
 recorded in `source/acquisition.json`; the exact Node/Zstd versions are in
 `source/provenance.json`. The import rejects any raw or derivative mismatch.
@@ -80,9 +82,47 @@ additive HDR raymarching, stochastic sampling or camera-dependent fade.
 The renderer transports the prepared images and geometry; stars use the
 application's independently prepared star catalog.
 
+The shared display attenuates the completed volume image to 0.25 over opaque
+black through 1 kpc from the common focus, then ramps smoothly in logarithmic
+distance to full brightness at 25 kpc. This provisional display attenuation
+is independent of camera angle and of the NASA-to-volume crossfade. It is
+not HDR exposure or physical photometric calibration; slab transfer, optical
+correction, stars and labels retain their separate behavior.
+
 Each retained slab has three coincident CSS image elements sharing one texture.
 Their optical contribution compensates for oblique viewing before isolated axis
 images are mixed. Integer optical gains are exact; fractional gains approximate
 the continuous transfer without extra image resources. The 544 prepared slabs
 therefore use 1,632 image elements. Keeping the axis scenes separate avoids
 browser cracks and expensive sorting at intersections between planes.
+
+The near-Solar-System sky uses NASA's [Deep Star Maps 2020 Milky Way-only
+celestial map](https://svs.gsfc.nasa.gov/4851/). Its linear RGB HALF source is
+8192 × 4096 in ICRF/J2000: RA increases left, the image centre is RA 0h and
+north is at the top. The full HDR source is preserved bit for bit in two
+Zstd row chunks, 117.15 MiB total; neither Git blob exceeds 100 MiB. The
+original 130.95 MiB EXR stays in the acquisition cache. Source acquisition,
+original and decoded SHA256, exact Node/Zstd versions, NASA/Gaia credits and
+usage notice live together under `source/sky/`.
+
+Six opaque 1536 × 1536 WebP faces add **5.63 MiB download and 54 MiB decoded**.
+The complete volume + sky bank is therefore **20.28 MiB download and
+185.05 MiB decoded**, across 550 unique images. Sky faces use quality 90;
+the modest transfer-target overrun preserves visible detail. Original source
+chunks are offline inputs and are never sent to the browser.
+
+The offline baker samples linear RGB before applying a fixed exposure of 4.5
+and the standard sRGB display curve. Source RGB colours are unchanged. At
+1024 × 512 this matches NASA's preview mean RGB within 0.001 and has RGB RMSE
+0.01387 on the [0,1] scale; it is a display fit, not calibrated photometry.
+The NASA Milky Way-only image omits bright Hipparcos/Tycho stars, so the
+application's separately prepared bright stars and labels coexist with it.
+Faint Gaia stars remain in the image; it is not literally star-free.
+
+The cube's authored bases are ICRF directions, independent of the volume's
+Galactic local frame. Each face is a real prepared PolyCSS plane; camera
+translation leaves distant sky directions unchanged. Runtime transports the
+six prepared planes and crossfades toward the OpenSpace volume as the same
+camera travels outward. Neither cube geometry nor imagery is generated in
+the browser. The NASA source epoch is recorded in provenance; shared camera
+frame metadata uses the volume's Sun-centred ICRF frame and epoch.

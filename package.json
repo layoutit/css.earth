@@ -51,6 +51,7 @@
     "test:browser:mercury-planet-sizes": "node tests/objects/browser/mercury/planet-sizes-browser.mjs",
     "test:browser:mercury-vault": "node tests/objects/browser/mercury/celestial-vault-browser.mjs",
     "test:browser:view-url": "node site/test/view-url-browser.mjs",
+    "test:browser:universe": "node site/test/universe-environments-browser.mjs",
     "test:browser:mercury-rotation": "node tests/objects/browser/mercury/rotation-limits-browser.mjs",
     "test:browser:mercury-geometry-mutations": "node tests/objects/browser/mercury/lighting-geometry-mutation-gate.mjs",
     "benchmark:payloads": "node tools/measure-object-payloads.mjs",

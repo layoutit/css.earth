@@ -20,6 +20,7 @@ export interface VolumeRecipe {
     samplesPerSlab: number; cropTransparent: boolean; opticalWeight: number; imageEncoding?: VolumeImageEncoding; };
   anchors: { id: string; referencePositionM: Vector3 }[];
   provenance: { path: string; sha256: string };
+  sky?: { path: string; sha256: string };
 }
 export function record(value: unknown, at: string): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`);
@@ -80,6 +81,7 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
   const counts = record(b.sliceCounts, 'sliceCounts');
   if (typeof b.cropTransparent !== 'boolean') throw new TypeError('cropTransparent must be boolean.');
   const p = record(r.provenance, 'provenance');
+  const sky = r.sky === undefined ? undefined : record(r.sky, 'sky recipe');
   if (!Array.isArray(r.anchors)) throw new TypeError('anchors must be an array.');
   const anchors = r.anchors.map((entry: unknown) => {
     const anchor = record(entry, 'anchor'); return { id: text(anchor.id, 'anchor id'), referencePositionM: triple(anchor.referencePositionM, 'anchor position') };
@@ -121,5 +123,6 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
       unitsPerSourceUnit: positive(b.unitsPerSourceUnit, 'unitsPerSourceUnit'), imageWidth: positive(b.imageWidth, 'imageWidth', true),
       samplesPerSlab: positive(b.samplesPerSlab, 'samplesPerSlab', true), cropTransparent: b.cropTransparent,
       opticalWeight: positive(b.opticalWeight, 'opticalWeight'), ...(imageEncoding ? { imageEncoding } : {}) }, anchors,
-    provenance: { path: sourcePath(p.path), sha256: digest(p.sha256, 'provenance digest') } };
+    provenance: { path: sourcePath(p.path), sha256: digest(p.sha256, 'provenance digest') },
+    ...(sky ? { sky: { path: sourcePath(sky.path), sha256: digest(sky.sha256, 'sky recipe digest') } } : {}) };
 }

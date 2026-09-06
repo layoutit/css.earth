@@ -30,13 +30,15 @@
     "rendering": "Unlit FrontSide with normal alpha blending; depth test enabled and depth write disabled."
   },
   "approximation": {
-    "latitudeSegments": 32,
-    "longitudeSegments": 64,
-    "triangles": 3968,
-    "geometry": "Same Float32-rounded analytic deformation at half the angular sampling on each axis.",
-    "normal": "Original per-vertex radial normals remain in the numeric mesh. Rendering samples one unit radial normal at each face center, separately from its geometric culling normal.",
-    "material": "128 uniformly spaced facing samples in [0,1], nearest sample selected per face. Both linear RGB times rim and opacity times rim are baked; distance fade remains a shared scalar.",
-    "coverage": "Each actual a,b,c triangle uses a prepared PolyCSS projective parallelogram a,b,b+c-a,c with transparent PNG coverage outside u+v<=1; no runtime clipping or mesh construction."
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "triangles": 960,
+    "geometry": "Same Float32-rounded analytic deformation at one quarter the source angular sampling on each axis. Every prepared corner permutation covers the identical physical triangle.",
+    "normal": "Original source radial normals are prepared per vertex, normalized once offline. Runtime evaluates each vertex-facing scalar once, separately from geometric face culling.",
+    "material": "22 nonuniform facing levels in [-1,1]; 2024 sorted corner triples. Every 32px tile evaluates the original rim equation on barycentrically interpolated corner facing values, baking linear-to-sRGB color and alpha. Six prepared corner permutations address the shared sorted bank. Quantization, raster sampling, coarse silhouettes and the interpolation of vertex-facing scalars approximate the original per-pixel shader, particularly near the boundary.",
+    "coverage": "All three triangle edges use exact pixel-area coverage inside a 1.5px transparent atlas inset. Prepared expanded parallelograms map the inset triangle corners to the unchanged physical source vertices. Fractional alpha is 1-(1-opacity)^coverage, so neighboring optical depths combine correctly under ordinary source-over. No runtime clipping, mask, filter or mesh construction.",
+    "atlasDecodedBytes": 8290304,
+    "runtime": "960 retained triangle leaves plus three wrappers; 561 prepared vertex-facing samples and 960 face culling checks per visible camera publication. No per-face vector allocation."
   },
   "attribution": "Galaxio code: Copyright (c) 2026 Juan Cruz Fortunatti, MIT License. Model recovered by Galaxio from Galaxium, as recorded in the copied source."
 }

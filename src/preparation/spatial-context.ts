@@ -47,7 +47,10 @@ export interface WorldContextSource {
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number; readonly presentation: WorldContextCameraPresentation };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
-  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number; readonly opacityProfile?: VolumeOpacityProfile };
+  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
+    readonly opacityProfile?: VolumeOpacityProfile;
+    /** Display attenuation of the completed volume image over black; not physical exposure. */
+    readonly brightnessProfile?: VolumeOpacityProfile };
   readonly stars: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
 }
 export interface OrbitalState {
@@ -95,13 +98,14 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   if (segments < 8 || solidTurns + fadeTurns >= 1) throw new TypeError('World context orbit trail is invalid.');
   const camera = parseCamera(input.camera), volume = record(input.volume, 'World context volume');
   const system = parseSystem(input.system);
-  keys(volume, ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile'], 'World context volume');
+  keys(volume, ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile'], 'World context volume');
   const fadeStartDistanceM = positive(volume.fadeStartDistanceM, 'Volume fade start'), fullDistanceM = positive(volume.fullDistanceM, 'Volume full distance');
   if (!(fadeStartDistanceM < fullDistanceM && fullDistanceM <= camera.maximumDistanceM)) throw new TypeError('Volume distance range is invalid.');
   const stars = parseStars(input.stars, fadeStartDistanceM);
   return freeze({ schema: input.schema, sky: parseSkyBaseline(input.sky), frame, focus, bodies: freeze(bodies), orbit: freeze({ segments, trail: freeze({ solidTurns, fadeTurns }) }), camera, system, stars,
     volume: freeze({ objectId: identifier(volume.objectId, 'Volume object id'), fadeStartDistanceM, fullDistanceM,
-      ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }) }) });
+      ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
+      ...(volume.brightnessProfile === undefined ? {} : { brightnessProfile: parseVolumeOpacityProfile(volume.brightnessProfile) }) }) });
 }
 
 function parseVolumeOpacityProfile(value: unknown): VolumeOpacityProfile {

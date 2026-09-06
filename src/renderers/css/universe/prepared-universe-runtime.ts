@@ -10,6 +10,7 @@ import { mountWorldContextPointSource } from './world-context-point-source.js';
 import type { PreparedAssets } from '../rendering/prepared-residency.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
+import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [] }: {
@@ -53,9 +54,17 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       const volumeHost = document.createElement('div');
       volumeHost.className = 'prepared-volume-context';
       volumeHost.style.cssText = 'position:absolute;inset:0;pointer-events:none;visibility:hidden';
+      volumeHost.style.background = '#000';
+      volumeHost.style.transformStyle = 'flat';
       root.insertBefore(volumeHost, end);
-      const volumeEnd = document.createElement('span'); volumeEnd.hidden = true; volumeHost.appendChild(volumeEnd);
+      const volumeImage = document.createElement('div');
+      volumeImage.className = 'prepared-volume-image';
+      volumeImage.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+      volumeImage.style.transformStyle = 'flat';
+      volumeHost.appendChild(volumeImage);
+      const volumeEnd = document.createElement('span'); volumeEnd.hidden = true; volumeImage.appendChild(volumeEnd);
       let volumeLayer: ReturnType<typeof mountPreparedCssVolume> | null = null;
+      let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
       let pointField: ReturnType<typeof mountPreparedCssPointField> | null = null;
       let focusPoint: ReturnType<typeof mountWorldContextPointSource> = null;
@@ -65,13 +74,14 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       const destroy = () => {
         if (destroyed) return;
         destroyed = true;
-        volumeLayer?.destroy(); spatial?.destroy(); pointField?.destroy(); focusPoint?.destroy();
+        volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); pointField?.destroy(); focusPoint?.destroy();
         for (const shell of shellLayers) shell.destroy();
         root.remove();
         delete stage.dataset.contextScale;
       };
       try {
-        volumeLayer = mountPreparedCssVolume({ host: volumeHost, before: volumeEnd, payload, resolveResource });
+        if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
+        volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         spatial = mountPreparedWorldContext({ host: root, before: end, plan, sprites });
@@ -94,10 +104,19 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
             const stellarFade = logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
             const volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
-            volumeHost.style.visibility = '';
+            const volumeBrightness = preparedVolumeOpacity(distanceM, plan.volume.brightnessProfile);
+            volumeHost.style.visibility = volumeOpacity > 0 ? '' : 'hidden';
             volumeHost.style.opacity = String(volumeOpacity);
             volumeHost.dataset.volumeOpacity = String(volumeOpacity);
-            volumeLayer!.publish({ world, viewport });
+            // Attenuate the completed image against opaque black, outside every
+            // camera's 3D context. This does not change slab optical coefficients.
+            volumeImage.style.opacity = String(volumeBrightness);
+            volumeImage.dataset.volumeBrightness = String(volumeBrightness);
+            // Both backgrounds are opaque completed images. Keep the sky underlay
+            // opaque: the two levels give (1-t)*sky+t*brightness*volume.
+            skyLayer?.publish(world, viewport, volumeOpacity < 1);
+            if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - volumeOpacity);
+            if (volumeOpacity > 0) volumeLayer!.publish({ world, viewport });
             pointField!.publish(world, viewport, 1 - fade);
             for (const shell of shellLayers) shell.publish(world, viewport);
             spatial!.publish(world, viewport);

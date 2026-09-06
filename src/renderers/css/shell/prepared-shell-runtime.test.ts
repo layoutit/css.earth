@@ -60,6 +60,45 @@ function mount(payload = fixture()) {
   return { payload, document, host, before, runtime, root, camera, scene, leaves: scene.children, resolveResource };
 }
 
+function vertexFixture(): PreparedCssSurfaceShell {
+  const base = fixture(), triangle = face('triangle', [0, -1 / 3, 1], [0, 0, 1], [0, 0, 1]);
+  return { ...base, atlas: { path: 'materials/rim.png', tileSize: 16, columns: 5, frames: 20, facingLevels: [-1, 0, .5, 1] },
+    vertices: [{ positionUnits: [-1, -1, 1], radialNormal: [1, 0, 0] },
+      { positionUnits: [1, -1, 1], radialNormal: [0, 1, 0] }, { positionUnits: [0, 1, 1], radialNormal: [0, 0, 1] }],
+    faces: [{ ...triangle, vertexIndices: [0, 1, 2], materialTransforms: [triangle.style.transform,
+      ...[1, 2, 3, 4, 5].map(i => `matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,${i},0,0,1)`)] }],
+    resources: [{ ...base.resources[0]!, width: 80, height: 64 }] };
+}
+
+test('retains one leaf while addressing sorted vertex gradients and all-prepared corner transforms', () => {
+  const payload = vertexFixture(), { runtime, leaves, document } = mount(payload), created = document.created;
+  expect(validatePreparedCssSurfaceShell(payload)).toEqual(payload);
+  runtime.publish(world(payload, [6, 2, 4]), viewport);
+  expect(leaves[0]!.dataset.shellFrame).toBe('17');
+  expect(leaves[0]!.style.transform).toBe(payload.faces[0]!.materialTransforms![3]);
+  const writes = { ...leaves[0]!.writes };
+  runtime.publish(world(payload, [6, 2, 4]), viewport);
+  expect(leaves[0]!.writes).toEqual(writes);
+  runtime.publish(world(payload, [-6, 2, 4]), viewport);
+  expect(leaves[0]!.dataset.shellFrame).toBe('7');
+  expect(leaves[0]!.style.transform).toBe(payload.faces[0]!.materialTransforms![0]);
+  expect(document.created).toBe(created); expect(leaves).toHaveLength(1);
+});
+
+test.each([
+  ['missing prepared vertices', (data: any) => { delete data.vertices; }],
+  ['unsorted facing levels', (data: any) => { data.atlas.facingLevels = [-1, .5, 0, 1]; }],
+  ['incomplete triple bank', (data: any) => { data.atlas.frames = 19; }],
+  ['out-of-range vertex', (data: any) => { data.faces[0].vertexIndices[2] = 3; }],
+  ['missing corner permutation', (data: any) => { data.faces[0].materialTransforms.pop(); }],
+  ['runtime transform expression', (data: any) => { data.faces[0].materialTransforms[1] = 'rotate(20deg)'; }],
+  ['wrong initial permutation', (data: any) => { data.faces[0].materialTransforms[0] = data.faces[0].materialTransforms[1]; }],
+  ['nonunit vertex normal', (data: any) => { data.vertices[0].radialNormal = [2, 0, 0]; }],
+] as const)('rejects vertex material %s', (_name, mutate) => {
+  const payload = structuredClone(vertexFixture()); mutate(payload);
+  expect(() => validatePreparedCssSurfaceShell(payload)).toThrow(TypeError);
+});
+
 test('validates the complete shell with strict compiled material and geometry fields', () => {
   const payload = fixture();
   expect(validatePreparedCssSurfaceShell(payload)).toEqual(payload);

@@ -9,6 +9,10 @@ import { prepareVolumeSlices } from '../../src/preparation/volume/slices.js';
 import { compileCssVolume } from '../../src/renderers/css/preparation/volume.js';
 import { acquireVolumeSource } from '../../src/preparation/volume/acquisition.js';
 import { readPreviousVolumeTextures, retireVolumeTextures } from '../../src/preparation/volume/retirement.js';
+import { parseSkyRecipe } from '../../src/preparation/sky/config.js';
+import { acquireSkySource } from '../../src/preparation/sky/source.js';
+import { prepareSkyFaces } from '../../src/preparation/sky/bake.js';
+import { compileCssSky } from '../../src/renderers/css/preparation/sky.js';
 
 export async function prepareDensityVolumeObject(options: { objectDirectory: string; outputDirectory?: string; acquisitionCache?: string }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared'));
@@ -22,7 +26,14 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   const previousTextures = await readPreviousVolumeTextures(outputDirectory);
   await mkdir(outputDirectory, { recursive: true });
   const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory, recipe });
-  const data = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, slices, recipe });
+  let data = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, slices, recipe });
+  if (recipe.sky) {
+    const skyRecipe = parseSkyRecipe(JSON.parse((await verifiedBytes(sourceDirectory, recipe.sky)).toString('utf8')));
+    const skyDirectory = dirname(containedPath(sourceDirectory, recipe.sky.path));
+    if (options.acquisitionCache) await acquireSkySource(skyDirectory, skyRecipe, resolve(options.acquisitionCache));
+    const compiled = compileCssSky(await prepareSkyFaces({ sourceDirectory: skyDirectory, outputDirectory, recipe: skyRecipe }), descriptor.volume);
+    data = { ...data, sky: compiled.sky, resources: [...data.resources, ...compiled.resources] };
+  }
   const envelope = { schema: 'cssearth-prepared-object@1' as const, id: descriptor.id, type: 'density-volume' as const,
     format: 'cssearth-density-volume@1' as const, data };
   const bytes = Buffer.from(JSON.stringify(envelope) + '\n'), outputPath = resolve(outputDirectory, 'volume.json');
