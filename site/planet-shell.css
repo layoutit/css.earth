@@ -1100,7 +1100,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   }
 
   .planet-introduction {
-    margin-top: 4px;
+    margin-top: 6px;
     padding: 0 29px 0 0;
     font-size: 1rem;
     line-height: 1.4;
@@ -1499,7 +1499,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
   }
 
   .planet-introduction {
-    margin-top: 4px;
+    margin-top: 6px;
     padding: 0 29px 0 0;
     text-wrap: balance;
   }
