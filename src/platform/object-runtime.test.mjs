@@ -53,8 +53,9 @@ function harness({ definition = moonDefinition, failAtElement = null, stageId = 
       mountSun() { events.push("sun"); return { destroy() { events.push("remove:sun"); } }; },
       createOrbit(options) {
         orbitArguments = options; options.onPublish(publication);
-        return { state: () => publication, setState: value => Object.assign(publication, value),
+        return { state: () => ({ ...publication, pose: { schema: "cssearth-camera-pose@1", scene: matrix, skybox: matrix, sunView: matrix } }), setState: value => Object.assign(publication, value),
           flyToState: async () => {}, initialResponsiveZoom: () => definition.camera.defaultZoom,
+          refresh: () => options.onPublish(publication),
           invalidate: () => options.onPublish(publication), destroy() { events.push("remove:orbit"); } };
       },
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...services,
@@ -110,6 +111,20 @@ test("development diagnostics start with the mounted sky and expose its star con
   assert.deepEqual(h.errors, []);
   h.runtime.destroy();
   assert.equal(h.document.defaultView.__moon, undefined);
+});
+test("production mount restores camera and native playback through its shared view contract", async t => {
+  const h = harness(); t.after(h.restore); await h.complete();
+  h.native.currentTime = 2345;
+  const saved = h.runtime.sharedView.capture(false);
+  assert.equal(saved.camera.pose.scene, matrix);
+  assert.equal(saved.playback.times.includes(2345), true);
+  assert.equal(saved.preparedEpochJdTt, null);
+  h.native.currentTime = 0;
+  await h.runtime.sharedView.restore(saved);
+  assert.equal(h.native.currentTime, 2345);
+  await assert.rejects(h.runtime.sharedView.restore({ ...saved, preparedEpochJdTt: 2461286.5 }), /astronomical date/);
+  await assert.rejects(h.runtime.sharedView.restore({ ...saved, playback: { ...saved.playback, times: [] } }), /prepared scene/);
+  assert.equal(h.native.currentTime, 2345);
 });
 test("destroy settles never-ending real startup and native rejection stays retired", async t => {
   const h = harness(); t.after(h.restore); await flush(); assert.ok(h.jobs.length > 0);

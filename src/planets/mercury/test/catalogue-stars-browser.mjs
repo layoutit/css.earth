@@ -28,12 +28,14 @@ export const TOLERANCES = Object.freeze({
   // The reference caps every disc at 1.25 px, so magnitude reaches the eye
   // as luminance: the brightest brilliant star's painted light (integrated
   // over its disc and bloom, above the local sky, per unit of its own
-  // colour's luminance) against the median of the faintest retained band's
-  // (m 4.5..5, tone-mapped to about 0.8 of the ceiling) in the same view.
-  intensityOrderRatio: 1.08,
-  // The painted diameter of any retained star, in CSS pixels: the capped
-  // disc (1.25 px at factor 1, 1.5 at this viewport) with its bloom.
-  maximumInkDiameterPx: 9,
+  // colour's luminance) against the median of the faintest retained band's.
+  // At m4.5 the unchanged exposure still saturates at .95, and m4.75 gives
+  // only a 1.074 ratio: the correct common cap guarantees ordering, not an
+  // 8% gap. The former gap was supplied by oversized bright cores.
+  intensityOrderRatio: 1,
+  // The 2.5px core stays capped after viewport scaling; allow its compact
+  // bloom, perspective stretch and raster coverage in the painted diameter.
+  maximumInkDiameterPx: 6,
   // Faint stamped stars in a 240 px window away from retained ones.
   faintStarsInWindow: 5,
   // Retained stars (m <= 5, 1,599 over the sky) visible in one view once the
@@ -91,6 +93,29 @@ try {
   await page.waitForFunction(() => window.__cssEarth?.ready === true && window.__mercury?.ready === true &&
     document.documentElement.dataset.ready === "true");
   await page.evaluate(() => { const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); });
+  const radiusChecks = [];
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }, { width: 1440, height: 900 }]) {
+    await page.setViewportSize(viewport);
+    await nextPaint(page);
+    const radii = await page.evaluate(() => {
+      const group = document.querySelector(".mercury-skybox-stars");
+      const scale = Number(getComputedStyle(group).getPropertyValue("--planet-cubic-sky-star-scale"));
+      const points = [...group.querySelectorAll(".planet-cubic-sky-star")].map(element => ({
+        name: element.dataset.name, radius: parseFloat(getComputedStyle(element).width) * scale / 2,
+      }));
+      // Chrome's local layout widths have 1/64px precision before the
+      // perspective scale converts them back to optical-axis pixels.
+      return { tolerance: scale / 128 + .0001,
+        min: Math.min(...points.map(point => point.radius)), max: Math.max(...points.map(point => point.radius)),
+        sirius: points.find(point => point.name === "Sirius")?.radius };
+    });
+    radiusChecks.push({ viewport, ...radii });
+    check(`star-radius-capped-after-viewport-scaling-${radiusChecks.length}`,
+      radii.min >= .6 - radii.tolerance && radii.max <= 1.25 + radii.tolerance &&
+        Math.abs(radii.sirius - 1.25) < radii.tolerance,
+      { viewport, ...radii });
+  }
+  report.radiusChecks = radiusChecks;
   const geometry = await page.evaluate(() => {
     const skybox = document.querySelector(".mercury-skybox");
     const [x, y] = getComputedStyle(skybox).perspectiveOrigin.split(" ").map(parseFloat);
@@ -141,7 +166,8 @@ try {
           direction: element.dataset.direction.split(",").map(Number),
           magnitude: Number(element.dataset.magnitude), x: box.x + box.width / 2, y: box.y + box.height / 2, width: box.width,
           color: (element.style.backgroundColor.match(/\d+/gu) ?? ["255", "255", "255"]).map(Number) }; })))
-        .filter((star) => sky.view(pose, sky.icrfToPresentation(star.direction))[2] < -0.2)
+        .map(star => ({ ...star, viewDepth: -sky.view(pose, sky.icrfToPresentation(star.direction))[2] }))
+        .filter(star => star.viewDepth > .2)
         .filter((star) => visible([star.x, star.y], 12));
       const cell = { scenePitch, heading, painted: painted.length, named: [] };
       // Named stars in view: the oracle's projection against the painted
@@ -166,8 +192,8 @@ try {
       }
       // Intensity: in a cell with a brilliant (m < 1.5) star and a few of
       // the faintest retained band (4.5 < m < 5) in view, the brilliant
-      // one's painted peak is higher (the discs are the same, capped
-      // size; a stray neighbour inside a window cannot raise a median).
+      // one's integrated light is higher (the faintest points can remain
+      // below the shared cap; a stray neighbour cannot raise a median).
       const brilliant = painted.filter((star) => star.magnitude < 1.5).sort((a, b) => a.magnitude - b.magnitude);
       const faintest = painted.filter((star) => star.magnitude > 4.5 && star.magnitude < 5);
       if (image && brilliant.length && faintest.length >= 3) {
@@ -288,7 +314,10 @@ function integratedLight(image, star, dpr) {
   const sky = border.sort((p, q) => p - q)[Math.floor(border.length / 2)];
   const total = inside.reduce((sum, value) => sum + Math.max(0, value - sky), 0);
   const colourLuminance = (0.2126 * star.color[0] + 0.7152 * star.color[1] + 0.0722 * star.color[2]) / 255;
-  return total > 20 && colourLuminance > 0 ? total / colourLuminance : null;
+  // A tangent-plane point on the spherical sky has projected area gain
+  // 1/cos(theta)^3. Compare source prominence independently of its location
+  // in the viewport, or a faint star near a corner can outshine a centred one.
+  return total > 20 && colourLuminance > 0 ? total * star.viewDepth ** 3 / colourLuminance : null;
 }
 
 // The brightest pixel within `radius` CSS px of a CSS-pixel position, in

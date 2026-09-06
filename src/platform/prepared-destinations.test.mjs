@@ -49,6 +49,18 @@ test("a superseded selection cannot start a stale destination flight", async () 
   assert.deepEqual(f.calls, []); f.lifetime.destroy();
 });
 
+test("saved-view restoration selects the entity and base lens without replacing its camera", async () => {
+  let resets = 0;
+  const f = fixture({ reset: () => { resets++; } });
+  const city = { id: "city", camera: { zoom: 8 }, coverage: "detail" };
+  assert.equal((await f.destinations.select(city, { navigate: false })).arrival, null);
+  assert.equal(f.destinations.state(), city);
+  assert.equal((await f.destinations.reset({ navigate: false })).arrival, null);
+  assert.equal(f.destinations.state(), null);
+  assert.deepEqual(f.calls, ["normal", "normal"]); assert.equal(resets, 0);
+  f.lifetime.destroy();
+});
+
 
 test("changing entity or returning to its scene clears the previous lens before publishing a new card", async () => {
   const changes = [], f = fixture({ onChange: entity => changes.push(entity?.id ?? null) });

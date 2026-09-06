@@ -19,7 +19,7 @@ export function createPreparedDestinations({ plan, ready, lifetime, selectLens, 
       }
       return catalog;
     },
-    async select(place) {
+    async select(place, { navigate: fly = true } = {}) {
       const request = ++revision;
       await ready; assertLive();
       if (!await selectLens(plan.defaultLens)) throw new Error("Destination selection was superseded.");
@@ -27,14 +27,14 @@ export function createPreparedDestinations({ plan, ready, lifetime, selectLens, 
       if (request !== revision) throw new Error("Destination selection was superseded.");
       selected = place; onChange(place);
       return { status: place.status ?? (place.coverage === "detail" ? plan.statuses.detail : plan.statuses.overview),
-        arrival: navigate(place.camera) };
+        arrival: fly ? navigate(place.camera) : null };
     },
-    async reset() {
+    async reset({ navigate: fly = true } = {}) {
       const request = ++revision;
       await ready; assertLive();
       if (!await selectLens(plan.defaultLens) || request !== revision) return false;
       assertLive(); selected = null; onChange(null);
-      return { arrival: reset() };
+      return { arrival: fly ? reset() : null };
     },
   });
 }

@@ -28,6 +28,15 @@
   pointer-events: none;
 }
 
+/* Same native plane as the focused camera, inserted before it: celestial
+   points and captions remain above the sky and are covered by body pixels. */
+.planet-heliocentric-sky {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
 .planet-heliocentric-orbit-piece {
   position: absolute;
   top: 50%;
@@ -54,13 +63,17 @@
   pointer-events: none;
 }
 
-/* The planetary system group: the other planets' orbit pieces and markers,
-   with the group's opacity written by the dolly (it fades in as the camera
-   dollies out). Its lines are thinner and fainter than the body's own orbit
-   so that one stays the reference. */
+/* Only the other planets' orbit pieces fade as the camera dollies out.
+   Planetary points and captions remain in the celestial layer. */
 .planet-heliocentric-system {
   --planet-orbit-line-thickness: 1px;
   --planet-orbit-line-color: rgba(255, 243, 224, 0.42);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.planet-heliocentric-system-markers {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -120,6 +133,25 @@
 
 .planet-heliocentric-caption-measure {
   visibility: hidden;
+}
+
+/* Ordinary star names use the reference's cap height, padded raster-box
+   proportions and outline, drawn as retained native text. */
+.planet-heliocentric-star-captions {
+  position: absolute;
+  inset: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 500;
+  color: #f4f6fb;
+  pointer-events: none;
+}
+
+.planet-cubic-sky-caption {
+  box-sizing: content-box;
+  line-height: 1.6;
+  padding-inline: 0.2em;
+  -webkit-text-stroke: 0.166667em rgba(4, 7, 14, 0.85);
+  paint-order: stroke fill;
 }
 
 /* The Sun's own perspective root: it shares the body camera's box and eye

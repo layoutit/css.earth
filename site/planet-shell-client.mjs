@@ -41,7 +41,7 @@ export function mountPlanetShell({
     throw error;
   }
   return Object.freeze({
-    setDestinations(provider) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
+    setDestinations(provider) { if (!lifetime.disposed) return objectBrowser.setDestinations(provider); },
     setMotionEnabled(enabled) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
     setPlaybackState(state) {
       if (!lifetime.disposed) settingsController.setPlaybackState(state);
@@ -345,7 +345,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   render(false);
 
   return Object.freeze({
-    setDestinations(provider) { destinations?.bind(provider); },
+    setDestinations(provider) { return destinations?.bind(provider); },
     destroy() {
       events.abort();
       destinations?.destroy();

@@ -14,6 +14,10 @@ import {
   labelFontPixels,
   validateLabelPolicy,
 } from "./label-field.mjs";
+import { selectStarLabel } from "./star-labels.mjs";
+import { createExposure } from "./star-photometry.mjs";
+
+const LABEL_OWNER_STAR = 3;
 
 // Mounts the retained DOM of a body's heliocentric neighbourhood and moves it
 // with the camera:
@@ -28,10 +32,9 @@ import {
 //     navigation atlas, the same few pixels the shell's header draws, whose
 //     opacity the object's level-of-detail policy sets so the body stays
 //     findable on its orbit once its true disc is too small to read;
-//   - when the plan carries the planetary system, a system group in the same
-//     overlay: one fixed pool of line pieces for the other planets' orbits and
-//     one marker per planet from the same atlas, the group's opacity set by
-//     the camera's distance so the system appears as the camera dollies out;
+//   - when the plan carries the planetary system, its points and captions
+//     live in a celestial layer before the focused body's camera, so the
+//     body naturally occludes them. Its orbit lines retain their distance fade;
 //     and a Sun marker from the atlas that floors the Sun once its sprite is
 //     too small to read, exactly as the body marker floors the body.
 // Everything is created once; publication only rewrites transforms and
@@ -92,6 +95,13 @@ export function mountRetainedHeliocentricView({
   sun.hidden = true;
   sunRoot.appendChild(sun);
 
+  // Like the Sun, this sibling paints after the sky and before the body's
+  // camera. Native body pixels occlude celestial points and text together.
+  const celestialRoot = document.createElement("div");
+  celestialRoot.className = `planet-heliocentric-sky planet-render-root ${objectId}-celestial-vault`;
+  celestialRoot.ariaHidden = "true";
+  host.insertBefore(celestialRoot, before);
+
   const overlay = document.createElement("div");
   overlay.className =
     `planet-heliocentric-orbit planet-render-root ${objectId}-orbit`;
@@ -107,21 +117,18 @@ export function mountRetainedHeliocentricView({
   }
   const marker = document.createElement("s");
   marker.className = `planet-heliocentric-body-marker ${objectId}-body-marker`;
-  // Exactly the shell's marker: the tile at `index` of the atlas strip, the
-  // whole tile scaled to `size` pixels, never larger.
+  // The prepared atlas supplies the tile; projection sets its apparent size.
   applySprite(marker, markerSprite);
   marker.style.opacity = "0";
   overlay.appendChild(marker);
 
-  // The planetary system: a group whose opacity the dolly writes, holding a
-  // shared piece pool for every other orbit and one marker per body. Markers
-  // are screen-space billboards at the shell's own presentation size for the
-  // body, and that size is a deliberate floor: from this body every other
-  // planet's true disc is far below one pixel (Venus at closest approach is
-  // under half a pixel), so a true angular size would render the system as
-  // empty space and ellipses. Planetarium software floors the same way.
+  // The atlas supplies the retained image; its navigation size is only the
+  // source scale. Publication fits each marker to its apparent physical or
+  // photometric diameter at the camera's distance.
   const systemGroup = document.createElement("div");
   systemGroup.className = `planet-heliocentric-system ${objectId}-planetary-system`;
+  const systemMarkerGroup = document.createElement("div");
+  systemMarkerGroup.className = "planet-heliocentric-system-markers";
   const systemPieces = [];
   const systemMarkerElements = new Map();
   const systemPhaseElements = new Map();
@@ -148,8 +155,7 @@ export function mountRetainedHeliocentricView({
       // A body's sprite may come from its own strip (the dwarf planets have
       // no navigation tile); otherwise from the shared atlas.
       applySprite(element, { url: systemMarkers.url, ...systemMarkers.bodies[body.id] });
-      // Brightness: the prepared flux as opacity, so Venus is brilliant and
-      // Neptune sits on the floor; the group's opacity fades them together.
+      // Brightness belongs to the point, independent of orbit visibility.
       element.style.opacity = String(body.illumination.markerOpacity);
       element.style.visibility = "hidden";
       // Phase: the object's own billboard lighting atlas, the frame chosen
@@ -165,12 +171,13 @@ export function mountRetainedHeliocentricView({
         `${-Math.floor(frame / phaseAtlas.columns) * size}px`;
       phase.dataset.frame = String(frame);
       element.appendChild(phase);
-      systemGroup.appendChild(element);
+      systemMarkerGroup.appendChild(element);
       systemMarkerElements.set(body.id, element);
       systemPhaseElements.set(body.id, { element: phase, frame });
     }
     systemGroup.style.opacity = "0";
     overlay.appendChild(systemGroup);
+    celestialRoot.appendChild(systemMarkerGroup);
   }
   // The Sun's floor: the atlas Sun tile over the sprite's position, faded in
   // by the dolly as the sprite falls below the tile's size.
@@ -181,7 +188,7 @@ export function mountRetainedHeliocentricView({
     applySprite(sunMarker, { ...systemMarkers.sun, url: systemMarkers.url });
     sunMarker.style.opacity = "0";
     sunMarker.style.visibility = "hidden";
-    overlay.appendChild(sunMarker);
+    celestialRoot.appendChild(sunMarker);
   }
   // Captions: a fixed pool of retained caption elements in the overlay,
   // laid out above their markers by the one declutter pass, and one hidden
@@ -190,6 +197,8 @@ export function mountRetainedHeliocentricView({
   // measurement). Their font is the shell's UI stack at the size that lands
   // capitals at the policy's cap height.
   let labelField = null;
+  let skyView = null;
+  let labelFrame = null;
   if (labels !== null) {
     const policy = labels.policy;
     const fontPixels = labelFontPixels(policy);
@@ -214,7 +223,7 @@ export function mountRetainedHeliocentricView({
       group.appendChild(element);
       elements.push(element);
     }
-    overlay.appendChild(group);
+    celestialRoot.appendChild(group);
     labelField = {
       policy, group, elements, measures, widthPerCapHeight,
       declutter: createLabelDeclutter({ capacity: policy.candidateCapacity, spacingPixels: policy.spacingPixels }),
@@ -225,8 +234,31 @@ export function mountRetainedHeliocentricView({
       accepted: [],
       candidates: 0,
     };
+    if (labels.stars) {
+      const { policy: starPolicy, records } = labels.stars;
+      const starGroup = document.createElement("div");
+      starGroup.className = "planet-heliocentric-star-captions";
+      starGroup.ariaHidden = "true";
+      starGroup.style.fontSize = `${labelFontPixels(starPolicy)}px`;
+      const measures = new Map();
+      for (const star of records) {
+        const measure = document.createElement("s");
+        measure.className = "planet-heliocentric-caption-measure planet-cubic-sky-caption";
+        measure.textContent = star.name;
+        starGroup.appendChild(measure);
+        measures.set(star.id, measure);
+      }
+      const element = document.createElement("s");
+      element.className = `planet-heliocentric-caption planet-cubic-sky-caption ${objectId}-star-caption`;
+      element.style.opacity = "0";
+      element.style.visibility = "hidden";
+      starGroup.appendChild(element);
+      labelField.stars = { group: starGroup, element, measures, widths: new Map(), policy: starPolicy,
+        pool: createLabelSlots(starPolicy), candidate: null, accepted: false, measured: false };
+    }
   }
   host.appendChild(overlay);
+  if (labelField?.stars) celestialRoot.appendChild(labelField.stars.group);
 
   let lastProjection = null;
   let publishedSunTransform = null;
@@ -257,14 +289,23 @@ export function mountRetainedHeliocentricView({
     sunRoot,
     sun,
     overlay,
+    celestialRoot,
     marker,
     systemGroup,
+    systemMarkerGroup,
     sunMarker,
     retainedOrbitPieceCount: poolSize,
     retainedSystemOrbitPieceCount: systemPoolSize,
     retainedSystemMarkerCount: systemMarkerElements.size,
     retainedSunMarkerCount: sunMarker === null ? 0 : 1,
     retainedCaptionCount: labelField === null ? 0 : labelField.elements.length,
+    setSkyView({ matrix, exposure }) {
+      if (!labelField?.stars) return;
+      if (skyView?.matrix !== matrix) {
+        const m = new DOMMatrix(matrix);
+        skyView = { matrix, rotation: [m.m11, m.m21, m.m31, m.m12, m.m22, m.m32, m.m13, m.m23, m.m33], exposure };
+      } else skyView.exposure = exposure;
+    },
     publish({
       rotation,
       distance,
@@ -283,8 +324,10 @@ export function mountRetainedHeliocentricView({
         viewportHeight,
         principalOffset,
         visibleRect,
-        // Nothing of the system is projected while it is invisible.
-        system: system !== null && systemOpacity > 0,
+        // Nearby viewpoints still see planets in the vault; only the
+        // prepared orbit line work follows the distance-dependent fade.
+        system: system !== null,
+        systemOrbits: systemOpacity > 0,
         trailWeights,
       });
       lastProjection = projection;
@@ -294,7 +337,7 @@ export function mountRetainedHeliocentricView({
         publishSystem(projection);
         publishSunMarker(projection);
       }
-      if (labelField !== null) publishCaptions(projection);
+      if (labelField !== null) publishCaptions(projection, visibleRect);
       return projection;
     },
     setOrbitOpacity(opacity) {
@@ -309,8 +352,8 @@ export function mountRetainedHeliocentricView({
       marker.style.opacity = value;
       publishedMarkerOpacity = value;
     },
-    // The system's visibility, set by the dolly before each publication so
-    // the projection knows whether to work on it at all.
+    // The system orbit visibility, set before publication to skip hidden
+    // ring work while retaining visible planetary points.
     setSystemOpacity(opacity) {
       if (system === null) throw new Error("The plan carries no planetary system.");
       systemOpacity = clamp(opacity, 0, 1);
@@ -408,6 +451,9 @@ export function mountRetainedHeliocentricView({
               occupant: slot.occupant, text: slot.text, alpha: slot.alpha, target: slot.target,
               anchor: slot.anchor, bottomOffsetPx: slot.bottomOffsetPx,
             }))),
+            stars: labelField.stars ? Object.freeze({ policy: labelField.stars.policy,
+              candidate: labelField.stars.candidate, accepted: labelField.stars.accepted,
+              slots: labelField.stars.pool.slots.map(slot => ({ ...slot, anchor: [...slot.anchor] })) }) : null,
           }),
         }),
         ...(system === null ? {} : {
@@ -423,6 +469,9 @@ export function mountRetainedHeliocentricView({
               visible: body.marker.visible,
               classification: body.marker.classification,
               screen: body.marker.screen,
+              diameterPx: body.marker.diameterPx,
+              alpha: body.marker.alpha,
+              physicalDiameterPx: body.marker.physicalDiameterPx,
               orbitPieceCount: body.orbitSegments.length,
               illumination: Object.freeze({
                 ...system.bodies.find(({ id }) => id === body.id).illumination,
@@ -438,8 +487,10 @@ export function mountRetainedHeliocentricView({
     destroy() {
       if (destroyed) return;
       destroyed = true;
+      if (labelFrame !== null) host.ownerDocument.defaultView.cancelAnimationFrame(labelFrame);
       sunRoot.remove();
       overlay.remove();
+      celestialRoot.remove();
     },
   });
 
@@ -486,6 +537,8 @@ export function mountRetainedHeliocentricView({
     const result = writePieces(pieces, projection.orbitSegments, activePieceCount);
     activePieceCount = result.count;
     if (result.overflowed) overflowCount += 1;
+    marker.style.transform = `scale(${formatNumber(Math.max(markerSprite.size,
+      2 * projection.body.silhouetteRadius) / markerSprite.size)})`;
   }
 
   function publishSystem(projection) {
@@ -503,12 +556,14 @@ export function mountRetainedHeliocentricView({
       const element = systemMarkerElements.get(body.id);
       const state = body.marker;
       if (state.visible) {
+        const scale = state.diameterPx / systemMarkers.bodies[body.id].size;
         const transform = `translate(${formatNumber(state.screen[0])}px, ` +
-          `${formatNumber(state.screen[1])}px)`;
+          `${formatNumber(state.screen[1])}px) scale(${formatNumber(scale)})`;
         if (publishedSystemMarkerTransforms.get(body.id) !== transform) {
           element.style.transform = transform;
           publishedSystemMarkerTransforms.set(body.id, transform);
         }
+        element.style.opacity = formatNumber(state.alpha);
         // The lit side faces the Sun: the atlas lights from screen right
         // at zero roll, so the roll is the Sun's on-screen direction from
         // the marker (y up, as the object's own overlay measures it).
@@ -555,8 +610,9 @@ export function mountRetainedHeliocentricView({
   // its marker's opacity), the Sun (by its marker), and each system body
   // (by brightness, once the system is visible). The pass, the slots and
   // the writes are all bounded by the policy's pool.
-  function publishCaptions(projection) {
+  function publishCaptions(projection, visibleRect = null) {
     const field = labelField;
+    field.visibleRect = visibleRect;
     if (!field.measured) {
       // Once: the retained measuring elements' widths, per cap height.
       const capPixels = field.policy.capPixels;
@@ -582,7 +638,8 @@ export function mountRetainedHeliocentricView({
     // places the body there); admitted above everything once the marker
     // shows, exactly as the reference labels its focused body.
     const ownMarkerOpacity = publishedMarkerOpacity === null ? 0 : Number(publishedMarkerOpacity);
-    consider(LABEL_OWNER_FOCUS, objectId, Number.MAX_SAFE_INTEGER, [0, 0], markerSprite.size / 2, ownMarkerOpacity);
+    consider(LABEL_OWNER_FOCUS, objectId, 1000, [0, 0],
+      Math.max(markerSprite.size / 2, projection.body.silhouetteRadius), ownMarkerOpacity);
     if (system !== null) {
       // The Sun: brightest of all (the reference ranks by -magnitude; the
       // Sun's -27 puts it above every planet), once its marker floors in.
@@ -591,18 +648,53 @@ export function mountRetainedHeliocentricView({
         systemMarkers.sun.size / 2, sunMarkerOpacity);
       if (projection.system !== null) {
         for (const body of projection.system.bodies) {
-          const prepared = system.bodies.find(({ id }) => id === body.id);
-          // Brightness ranks: magnitudes below the brightest, negated.
-          consider(LABEL_OWNER_BODY, body.id, -prepared.illumination.magnitudesBelowBrightest,
-            body.marker.visible ? body.marker.screen : null, systemMarkers.bodies[body.id].size / 2, systemOpacity);
+          // Priority follows apparent magnitude; text keeps the caption
+          // policy's brightness independently of the point's faint flux.
+          consider(LABEL_OWNER_BODY, body.id, body.marker.labelPriority,
+            body.marker.visible ? body.marker.screen : null, body.marker.diameterPx / 2, 1);
         }
+      }
+    }
+    const stars = field.stars;
+    if (stars && skyView) {
+      if (!stars.measured) {
+        for (const [id, measure] of stars.measures) stars.widths.set(id, measure.getBoundingClientRect().width);
+        stars.measured = true;
+      }
+      const exposure = createExposure({ ...labels.stars.exposure, ...skyView.exposure });
+      const star = selectStarLabel({ stars: labels.stars.records, rotation: skyView.rotation, exposure,
+        focal: projection.focal, principalOffset: projection.principalOffset,
+        visibleRect: visibleRect ?? { left: -projection.viewportWidth / 2, top: -projection.viewportHeight / 2,
+          right: projection.viewportWidth / 2, bottom: projection.viewportHeight / 2 } });
+      stars.candidate = star;
+      if (star) {
+        const box = labelBox(stars.policy, { widthPerCapHeight: stars.widths.get(star.id) / stars.policy.capPixels,
+          markerRadiusPx: star.radiusPx });
+        declutter.add({ owner: LABEL_OWNER_STAR, id: star.id, priority: star.priority, anchor: star.anchor, ...box });
+        candidates.push({ owner: LABEL_OWNER_STAR, id: star.id, key: `${LABEL_OWNER_STAR}:${star.id}`,
+          priority: star.priority, anchor: star.anchor, alpha: star.alpha, text: star.name,
+          bottomOffsetPx: box.bottomOffsetPx, box });
       }
     }
     field.candidates = candidates.length;
     field.candidateList = candidates;
     const acceptedKeys = new Set(declutter.resolve().map((entry) => `${entry.owner}:${entry.id}`));
     field.accepted = candidates.filter((candidate) => acceptedKeys.has(candidate.key));
-    const slots = field.pool.assign(field.accepted, field.settled);
+    const slots = field.pool.assign(field.accepted.filter(candidate => candidate.owner !== LABEL_OWNER_STAR), field.settled);
+    if (stars) {
+      const accepted = field.accepted.filter(candidate => candidate.owner === LABEL_OWNER_STAR);
+      stars.accepted = accepted.length > 0;
+      const [slot] = stars.pool.assign(accepted, field.settled);
+      const element = stars.element;
+      const visible = slot.occupant !== null && slot.alpha > 0;
+      if (visible) {
+        if (element.textContent !== slot.text) element.textContent = slot.text;
+        element.dataset.occupant = slot.occupant;
+        element.style.transform = `translate(${formatNumber(slot.anchor[0])}px, ${formatNumber(slot.anchor[1] - slot.bottomOffsetPx)}px) translate(-50%, -100%)`;
+      }
+      element.style.opacity = formatNumber(slot.alpha);
+      element.style.visibility = visible ? "" : "hidden";
+    }
     field.settled = true;
     for (let index = 0; index < slots.length; index += 1) {
       const slot = slots[index];
@@ -631,6 +723,15 @@ export function mountRetainedHeliocentricView({
         element.style.visibility = hidden ? "hidden" : "";
         published.hidden = hidden;
       }
+    }
+    // Both caption populations finish their bounded fades after camera input
+    // stops, including frames with no eligible star caption at all.
+    if (labelFrame === null && (field.pool.slots.some(slot => slot.alpha !== slot.target) ||
+        stars?.pool.slots.some(slot => slot.alpha !== slot.target))) {
+      labelFrame = host.ownerDocument.defaultView.requestAnimationFrame(() => {
+        labelFrame = null;
+        if (!destroyed && lastProjection) publishCaptions(lastProjection, field.visibleRect);
+      });
     }
   }
 

@@ -66,14 +66,14 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
     }
   }
 
-  async function select(place) {
+  async function select(place, options) {
     if (destroyed || !provider || !place) return;
     const request = ++selectionRevision;
     selecting = true;
     for (const button of buttons) button.disabled = true;
     hint.textContent = `Opening ${place.name}…`;
     try {
-      const result = await provider.select(place);
+      const result = await provider.select(place, options);
       if (destroyed || request !== selectionRevision) return;
       selection = place;
       card.show(place, id => catalog?.places.find(entity => entity.id === id));
@@ -101,12 +101,12 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
     }
   }
   buttons.forEach((button, index) => button.addEventListener("click", () => void select(matches[index]), { signal: events.signal }));
-  async function selectRoot() {
+  async function selectRoot(options) {
     if (!provider) return;
     const request = ++selectionRevision;
     selecting = true;
     try {
-      const result = await provider.reset();
+      const result = await provider.reset(options);
       if (destroyed || request !== selectionRevision || result === false) return;
       selection = null;
       introductionRequest?.abort();
@@ -121,15 +121,16 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
       provider = next;
       route?.destroy(); unsubscribe?.();
       route = createEntityRoute({ windowTarget: documentTarget.defaultView, rootId: card.initial.id,
+        restoreView: provider.restoreView,
         read: () => ({ entityId: selection?.id ?? card.initial.id, lensId: provider.lens().id,
           defaultLens: card.initial.lensIds[0] }),
-        async apply(id, lensId, live) {
+        async apply(id, lensId, live, options) {
           try {
             if (id !== card.initial.id) await loadCatalog();
             if (!live()) return;
             const place = catalog?.places.find(entity => entity.id === id);
-            if (id === card.initial.id) { if (selection) await selectRoot(); }
-            else if (place) { if (selection?.id !== id) await select(place); }
+            if (id === card.initial.id) { if (selection) await selectRoot(options); }
+            else if (place) { if (selection?.id !== id) await select(place, options); }
             else {
               status.hidden = false; status.textContent = "This place is unavailable in the current catalogue."; return;
             }
@@ -142,7 +143,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
       });
       unsubscribe = provider.subscribe(() => { if (!selecting && provider.state()?.id === selection?.id) route.write(); });
       if (query) void search(query);
-      void route.restore();
+      return route.restore();
     },
     search,
     async selectById(id) { if (id !== card.initial.id) await loadCatalog(); return id === card.initial.id ? selectRoot() : select(catalog?.places.find(entity => entity.id === id)); },

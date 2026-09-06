@@ -1,4 +1,4 @@
-import { createExposure, exposureLimits, screenFactor, starPresentation, EXPOSURE_KNOBS } from "./star-photometry.mjs";
+import { createExposure, exposureLimits, screenFactor, starPresentation, EXPOSURE_KNOBS, POINT_MIN_RADIUS_PX } from "./star-photometry.mjs";
 
 export function mountRetainedCubicSky({
   host,
@@ -54,11 +54,16 @@ export function mountRetainedCubicSky({
   let starResizeObserver = null;
   const stars = plan.catalogueStars ?? null;
   const starElements = [];
-  // A star's three per-point writes: its radius (at screen factor 1), its
-  // display luminance and its halo colour (its own colour at the bloom's
-  // alpha). The prepared values first; a session exposure recomputes them.
-  const writeStar = (element, star, presentation) => {
-    element.style.setProperty("--planet-cubic-sky-star-radius", `${Number(presentation.radiusPx.toFixed(3))}px`);
+  let starScreenFactor = 1;
+  const writeStarRadius = (element, presentation, maxRadiusPx) => {
+    // The reference applies its pixel floor and ceiling AFTER viewport
+    // scaling. Compensate the existing CSS factor so it cannot enlarge the cap.
+    const rawRadiusPx = presentation.rawRadiusPx * starScreenFactor;
+    const radiusPx = Math.min(maxRadiusPx, Math.max(POINT_MIN_RADIUS_PX, rawRadiusPx));
+    element.style.setProperty("--planet-cubic-sky-star-radius", `${Number((radiusPx / starScreenFactor).toFixed(5))}px`);
+  };
+  const writeStar = (element, star, presentation, maxRadiusPx = stars.exposure.maxRadiusPx) => {
+    writeStarRadius(element, presentation, maxRadiusPx);
     element.style.setProperty("--planet-cubic-sky-star-halo",
       `rgb(${star.color[0]} ${star.color[1]} ${star.color[2]} / ${Number(presentation.haloAlpha.toFixed(3))})`);
     element.style.opacity = String(Number(presentation.luminance.toFixed(4)));
@@ -76,7 +81,7 @@ export function mountRetainedCubicSky({
       element.dataset.magnitude = String(star.magnitude);
       element.dataset.direction = star.direction.join(",");
       starGroup.appendChild(element);
-      starElements.push({ element, star });
+      starElements.push({ element, star, presentation: star });
     }
     orientation.appendChild(starGroup);
   }
@@ -90,6 +95,7 @@ export function mountRetainedCubicSky({
     const limits = exposureLimits(exposure);
     return Object.freeze({
       source,
+      fovDegrees: exposure.fovDegrees, screenFactor: screenFactor(root.clientWidth, root.clientHeight),
       adaptationLuminanceCdM2: exposure.adaptationLuminanceCdM2, exposureScale: exposure.exposureScale,
       intensityMax: exposure.intensityMax, maxRadiusPx: exposure.maxRadiusPx, haloPeak: exposure.haloPeak,
       linearScale: exposure.linearScale,
@@ -112,9 +118,16 @@ export function mountRetainedCubicSky({
     if (!(perspective > 0) || !(halfSide > 0)) return;
     const scale = perspective / (stars.retainedRadiusShareOfHalfSide * halfSide);
     starGroup.style.setProperty("--planet-cubic-sky-star-scale", scale.toFixed(5));
-    // The reference's live screen factor: the prepared sizes are at 1.
+    const nextScreenFactor = screenFactor(root.clientWidth, root.clientHeight);
     starGroup.style.setProperty("--planet-cubic-sky-star-screen-factor",
-      screenFactor(root.clientWidth, root.clientHeight).toFixed(4));
+      nextScreenFactor.toFixed(4));
+    if (nextScreenFactor !== starScreenFactor) {
+      starScreenFactor = nextScreenFactor;
+      const exposure = sessionExposure ?? stars.exposure;
+      for (const { element, presentation } of starElements) {
+        if (presentation !== null) writeStarRadius(element, presentation, exposure.maxRadiusPx);
+      }
+    }
   };
   measureStarScale();
   if (starGroup !== null && typeof ResizeObserver === "function") {
@@ -159,11 +172,13 @@ export function mountRetainedCubicSky({
         sessionExposure = createExposure(next);
       }
       const exposure = sessionExposure ?? createExposure(stars.exposure);
-      for (const { element, star } of starElements) {
+      for (const entry of starElements) {
+        const { element, star } = entry;
         const presentation = sessionExposure === null ? star : starPresentation(exposure, star.magnitude);
+        entry.presentation = presentation;
         if (presentation === null) {
           element.style.opacity = "0";
-        } else writeStar(element, star, presentation);
+        } else writeStar(element, star, presentation, exposure.maxRadiusPx);
         starExposureWrites += 1;
       }
       return exposureState();

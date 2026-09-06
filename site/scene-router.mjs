@@ -3,6 +3,7 @@ import { objectAdapter } from "./object-adapter.mjs";
 import { mountPlanetShell } from "./planet-shell-client.mjs";
 import { automaticPlaybackPolicy } from "./runtime-policy.mjs";
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
+import { bindViewUrl } from "./view-url-runtime.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
@@ -48,7 +49,7 @@ export function createSceneRouter({
     if (destroyed || active) return;
     const session = {
       generation: ++nextGeneration, lifetime: createSceneLifetime(),
-      mount: null, shell: null, lastCommand: null,
+      mount: null, shell: null, lastCommand: null, viewUrl: null,
     };
     active = session;
     sceneError = null;
@@ -67,6 +68,7 @@ export function createSceneRouter({
         if (active !== session || session.lifetime.disposed) return;
         motionEnabled = next === true;
         syncPlayback();
+        session.viewUrl?.schedule();
       };
       const shell = mountShell({
         objectId, documentTarget, windowTarget, motionEnabled,
@@ -97,13 +99,26 @@ export function createSceneRouter({
       syncPlayback();
       const result = await session.lifetime.wait(ready);
       if (result.cancelled || active !== session) return;
-      if (mount.destinations) shell.setDestinations?.({
+      if (mount.sharedView && windowTarget.location?.href) {
+        session.viewUrl = bindViewUrl({ windowTarget, view: mount.sharedView,
+          listenHistory: !mount.destinations,
+          getMotion: () => motionEnabled,
+          setMotion(next) { shell.setMotionEnabled?.(next); requestMotion(next); },
+          onError(error) { console.warn(error.message); },
+        });
+        session.lifetime.onDispose(() => session.viewUrl.destroy());
+        if (!mount.destinations) await session.lifetime.wait(session.viewUrl.restore());
+        if (active !== session || session.lifetime.disposed) return;
+      }
+      if (mount.destinations) await session.lifetime.wait(shell.setDestinations?.({
         ...mount.destinations,
-        async select(place) {
+        restoreView: apply => session.viewUrl ? session.viewUrl.restore(apply) : apply({ hasSavedView: false }),
+        async select(place, options) {
           shell.setMotionEnabled?.(false);
-          return mount.destinations.select(place);
+          return mount.destinations.select(place, options);
         },
-      });
+      }));
+      if (active !== session || session.lifetime.disposed) return;
       sceneState = "ready";
       syncPlayback();
     } catch (error) {
@@ -195,6 +210,7 @@ export function createSceneRouter({
 
   function retire(session, error = null) {
     if (active !== session) return;
+    session.viewUrl?.flush();
     // Detach and invalidate before any user cleanup or native wait can finish.
     active = null;
     scenePaused = true;

@@ -13,6 +13,7 @@ import { mountRetainedDirectionalSun } from "./directional-sun-runtime.mjs";
 import { mountRetainedHeliocentricView } from "./heliocentric-view-runtime.mjs";
 import { mountPreparedPresentation } from "./prepared-presentation.mjs";
 import { initialObjectSelection, objectLensAvailable, requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
+import { formatSharedView, parseSharedView } from "./view-url.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
@@ -58,6 +59,9 @@ export function createObjectRuntime(definition, services = nativeServices) {
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
     let revision = 0, selection = null, controls = null, diagnostics = null;
+    const viewListeners = new Set();
+    const notifyView = () => { if (readyPublished) for (const listener of viewListeners) listener(); };
+    lifetime.onDispose(() => viewListeners.clear());
     const playback = environment.createPlayback();
     lifetime.onDispose(() => playback.destroy());
     let resources;
@@ -89,7 +93,40 @@ export function createObjectRuntime(definition, services = nativeServices) {
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: orbit.initialResponsiveZoom() }),
     }) : null;
-    const controller = Object.freeze({ ready, ...(destinations ? { destinations: Object.freeze({ ...destinations, ready, lens: lensState, selectLens: id => dispatchAction({kind:"lens",id}),
+    const preparedEpochJdTt = definition.heliocentricView?.plan.system?.epochJdTt ?? null;
+    let restoreVersion = 0;
+    const sharedView = Object.freeze({
+      capture(motionRequested = false) {
+        if (!readyPublished) return null;
+        const camera = orbit.state();
+        return { camera: orbit.sharedState?.() ?? { controlPitch: camera.controlPitch, controlYaw: camera.controlYaw,
+          zoom: camera.zoom, pose: camera.pose,
+          ...(camera.distanceKilometers === undefined ? {} : { distanceKilometers: camera.distanceKilometers }) }, preparedEpochJdTt,
+          playback: { times: playback.captureMotion(), speed: playback.stats().speed, motionRequested } };
+      },
+      async restore(saved) {
+        // Validate the whole payload before any native animation or camera write.
+        const view = parseSharedView(formatSharedView(saved));
+        const version = ++restoreVersion;
+        if (!readyPublished || lifetime.disposed) return false;
+        if ((view.preparedEpochJdTt ?? null) !== preparedEpochJdTt) {
+          throw new TypeError("This view uses a different prepared astronomical date.");
+        }
+        playback.validateMotion(view.playback.times);
+        const speed = definition.controls.settings?.controls.find(control => control.name === "speed");
+        if (view.playback.speed !== playback.stats().speed) {
+          if (!speed || !(await selection.dispatch({ kind: "cycle", name: "speed", value: view.playback.speed }))) {
+            throw new TypeError("This view uses an unsupported playback speed.");
+          }
+        }
+        if (lifetime.disposed || version !== restoreVersion) return false;
+        playback.restoreMotion(view.playback.times);
+        orbit.setState(view.camera);
+        return true;
+      },
+      subscribe(listener) { viewListeners.add(listener); return () => viewListeners.delete(listener); },
+    });
+    const controller = Object.freeze({ ready, sharedView, ...(destinations ? { destinations: Object.freeze({ ...destinations, ready, lens: lensState, selectLens: id => dispatchAction({kind:"lens",id}),
         subscribe(listener) { selectionListeners.add(listener); return () => selectionListeners.delete(listener); } }) } : {}),
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
@@ -127,7 +164,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
     }
     function publishSelection(state) {
       controls.publish(state);
-      if (!state.pending && state.committed) notifySelection();
+      if (!state.pending && state.committed) { notifySelection(); notifyView(); }
       if (!state.committed || state.pending || !orbit || state.committed.lensId === navigatedLens) return;
       navigatedLens = state.committed.lensId;
       const navigation = state.plan?.navigation;
@@ -156,6 +193,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       previousPublication = publication;
       selection?.setView(currentView);
       for (const layer of pageLayers.values()) layer.publish(currentView);
+      notifyView();
     }
     async function start() {
       await lifetime.wait(environment.waitDocument(lifetime, stage.ownerDocument));
@@ -263,7 +301,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
         },
         labelPolicy: options => { const applied = heliocentric.setLabelPolicy(options); orbit.refresh(); return applied; } }),
         ...(typeof cubicSky.setStarExposure !== "function" || cubicSky.starGroup == null ? {}
-          : { starExposure: options => cubicSky.setStarExposure(options) }),
+          : { starExposure: options => { const applied = cubicSky.setStarExposure(options); orbit.refresh(); return applied; } }),
         sky: Object.freeze({ state: () => Object.freeze({ ...orbit.skyState(),
           sunViewDirection: currentView?.sunViewDirection ?? null, skySunViewDirection: currentView?.skySunViewDirection ?? null,
           sunPresentation: currentView?.sunPresentation }),

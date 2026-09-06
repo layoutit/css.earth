@@ -47,6 +47,15 @@ try {
       await page.screenshot({ path }); record.screenshots.push({ name, path });
     };
     const flight = () => page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
+    const savedCamera = () => page.evaluate(() => {
+      const { zoom, pose } = window.__earth.camera.state();
+      return { zoom, matrix: pose.scene.slice(9, -1).split(",").map(Number) };
+    });
+    const verifyCamera = async expected => {
+      const actual = await savedCamera();
+      assert.ok(Math.abs(actual.zoom - expected.zoom) < 1e-6, "History restores the saved zoom");
+      actual.matrix.forEach((value, index) => assert.ok(Math.abs(value - expected.matrix[index]) < 1e-6, "History restores the saved camera pose"));
+    };
     const select = async (name, id) => {
       await page.locator(".planet-sidebar-search").fill(name);
       await page.locator(`[data-destination-id="${id}"]`).click();
@@ -120,14 +129,24 @@ try {
       assert.equal(record.retained, true);
       await saveMetrics("retained-city-journey");
       await select("Buenos Aires", "3435910"); await noise.click(); await settleNoise();
+      const surface = await page.locator(".planet-input-surface").boundingBox();
+      const pointer = { x: surface.x + surface.width * 0.7, y: surface.y + surface.height * 0.4 };
+      await page.mouse.move(pointer.x, pointer.y); await page.mouse.down();
+      await page.mouse.move(pointer.x + 12, pointer.y + 8, { steps: 10 }); await page.mouse.up();
+      await page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.active);
+      await page.waitForTimeout(250);
+      const retainedCamera = await savedCamera();
+      assert.ok(new URL(page.url()).searchParams.has("v"), "City selection shares the camera URL");
       assert.ok(page.url().includes("place=3435910&lens=buenos-aires-noise"));
       await page.goBack(); await page.waitForFunction(()=>window.__earth.lens().id==="normal");
       assert.equal(await page.locator("[data-entity-card]").getAttribute("data-entity-id"),"3435910");
       await page.goForward(); await settleNoise();
+      await verifyCamera(retainedCamera);
       assert.equal(await page.evaluate(()=>window.__earth.assertStableDomIdentity()),true);
       await page.reload();
       await page.waitForFunction(()=>window.__earth?.ready && document.querySelector("[data-entity-card]").dataset.entityId==="3435910");
       await flight(); await settleNoise();
+      await verifyCamera(retainedCamera);
       await capture("06-restored-after-refresh");
       await page.locator(".planet-sidebar-search").fill("Mars");
       await page.locator('.planet-object-browser a[href="/mars/"]').click();
@@ -136,6 +155,7 @@ try {
       await page.goBack();
       await page.waitForFunction(()=>window.__earth?.ready && document.querySelector("[data-entity-card]").dataset.entityId==="3435910");
       await flight(); await settleNoise();
+      await verifyCamera(retainedCamera);
       await capture("07-returned-from-mars");
       const normal=page.locator('button[name="lens"][value="normal"]');
       await normal.click();
