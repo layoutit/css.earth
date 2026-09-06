@@ -29,16 +29,15 @@ export async function prepareVenusPresentation() {
   plane.style.backgroundSize=material.backgroundSize;
   plane.style.backgroundPosition=material.backgroundPositions[material.defaultFrame];
   b.append(null,composite);b.append(composite,plane);
-  const {tree,index}=b.finish({camera,scene,registrations:[{bodySystem:system,lightingOverlays:[plane]}]});
+  const {tree,index}=b.finish({camera,scene});
   const sourceRemap=material.lightingModel.presentationPhaseRemap;
   const track={id:"lighting",target:index(plane),frame:{source:"sun-z",minimum:material.minimumLightViewZ,
     maximum:material.maximumLightViewZ,count:material.frameCount,baseFrame:0,span:material.directionalFrameCount-1,
     maximumFrame:material.directionalFrameCount-1,remap:{kind:"phase-plateau",lowerTransition:sourceRemap.lowerTransition,
       plateau:sourceRemap.plateau,upperTransition:sourceRemap.upperTransition,plateauViewZ:sourceRemap.plateauViewZ}},
-    defaultPose:[],banks:[{id:"lighting",frames:material.backgroundPositions.map((backgroundPosition,frame)=>({
+    banks:[{id:"lighting",frames:material.backgroundPositions.map((backgroundPosition,frame)=>({
       resource:null,frame,row:null,backgroundPosition,backgroundSize:material.backgroundSize})),default:null,fixed:null}],
-    demand:{mode:"current",prewarm:"none",capacity:1,framesPerRow:material.frameCount,defaultFrame:material.defaultFrame,
-      initialRows:[],holdHiddenNeighborhood:false,fallback:"hold"},
+    demand:{ capacity:1, defaultFrame:material.defaultFrame },
     rotation:{kind:"angle",source:"view-sun",reference:"prepared",baseDegrees:material.baseLightAzimuthDegrees,
       zeroAtPole:false,property:"--venus-light-roll"},frameAttribute:null,modeAttribute:null,quoted:true};
   const variants=[];
@@ -51,18 +50,14 @@ export async function prepareVenusPresentation() {
       frameOverride:shadows?null:material.frameCount-1,clearWhenHidden:false,fixedMode:"shadowless"}]});
   }
   return {schema:PREPARED_PRESENTATION_SCHEMA,camera:plan.camera,sky:plan.starfield,sun:PREPARED_VENUS_SKY_SUN,
-    inputSelector:".venus-input-surface",assets:{entries,pools:[preparedResourcePool("warm",entries,{retention:"warm"}),
+    assets:{entries,pools:[preparedResourcePool("warm",entries,{retention:"warm"}),
       preparedResourcePool("material",entries,{retention:"selection",capacity:6,concurrency:6})],
       startup:[...warm.map(entry=>entry.key),...required(lenses.defaultLens)]},tree,variants,materials:[track],
     viewBindings:[{kind:"zoom-property",target:index(composite),property:"--venus-camera-zoom"},
       ...[["data-polycss-camera-rot-x","scene-pitch",2],["data-polycss-camera-rot-y","control-yaw",null],
         ["data-polycss-camera-zoom","zoom",null],["data-venus-camera-matrix","scene-matrix",null]]
         .map(([property,source,precision])=>({kind:"view-attribute",target:index(camera),property,source,precision}))],
-    animations:[],observations:{constants:{dom:{mode:"prepared-retained-texture-leaves-with-fixed-material-and-sky-cube",
-      retainedCameraRootCount:1,retainedMaterialCompositeRootCount:1,retainedCameraMaterialCount:0,retainedSkyboxRootCount:1,
-      retainedSunBillboardCount:1,retainedSunLayerCount:1,retainedSunCubemapBakeCount:0,retainedSceneRootCount:1}},
-      materials:[["frame","frame"],["lightRollDegrees","lightRollDegrees"],["sunViewDirection","sunViewDirection"],["shadowsEnabled","rotationEnabled"]]
-        .map(([name,field])=>({category:"material",name,track:"lighting",field})),counts:[]},
+    animations:[],
   };
 }
 if(import.meta.url===pathToFileURL(process.argv[1]??"").href){

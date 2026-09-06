@@ -41,9 +41,9 @@ export async function prepareMoonPresentation() {
   const material = builder.element("s", "moon-material");
   material.style.backgroundImage = `url("${entries.find(entry => entry.key === "curvature").url}")`;
   builder.append(materialRoot, material); builder.append(null, materialRoot);
-  const { tree, index } = builder.finish({ camera, scene, registrations: [{ bodySystem: system, lightingOverlays: [materialRoot] }] });
+  const { tree, index } = builder.finish({ camera, scene });
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: PREPARED_MOON_STARFIELD, sun: PREPARED_MOON_SKY_SUN,
-    inputSelector: ".moon-input-surface", assets: { entries, pools: [preparedResourcePool("mounted", entries)],
+    assets: { entries, pools: [preparedResourcePool("mounted", entries)],
       startup: [...celestial.map(entry => entry.key), "curvature", ...required(lenses.defaultLens)] }, tree,
     variants: lenses.controls.map(lens => ({ when: { lensId: lens.id }, required: required(lens.id), writes: [
       ...surface.map(carrier => ({ kind: "texture", target: index(carrier), name: "--moon-surface-texture", resource: `surface:${lens.id}`, quoted: true })),
@@ -51,7 +51,7 @@ export async function prepareMoonPresentation() {
       { kind: "attribute", target: -1, name: "data-lens", value: lens.id },
     ], materials: [] })),
     materials: [], viewBindings: [{ kind: "shell-scale", target: index(materialRoot), variable: "--moon-shell-scale", defaultZoom: plan.camera.defaultZoom }],
-    animations: [], observations: { constants: { dom: { mode: "prepared-projective-sphere-with-retained-cubic-sky", maximumRetainedLeafCount: plan.counts.retainedLeafCount } }, materials: [], counts: [] },
+    animations: [],
   };
 }
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {

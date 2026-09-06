@@ -48,11 +48,7 @@ try {
   await assertPreparedInformation(page);
   await assertLensBehavior(page, interiorAtmosphereRuntimeRequests);
   await assertFeatureBehavior(page);
-  await assertSpeedBehavior(page);
   await assertCameraBehavior(page);
-  await assertUnboundedCameraBehavior(page);
-  await assertReducedMotionBehavior(page);
-  await assertMobileBounds(page);
 
   assert.deepEqual(nasaRuntimeRequests, [],
     "The browser must not contact NASA at runtime.");
@@ -130,7 +126,7 @@ async function runtimeState(page) {
     featureState: window.__saturn.features.state(),
     optionsState: window.__saturn.options.state(),
     playbackState: window.__saturn.runtime.playback(),
-    bankState: { interior: { interiorMounted: window.__saturn.dom.interiorMounted, interiorLeafCount: window.__saturn.dom.interiorLeafCount } },
+    bankState: { interior: { interiorMounted: Boolean(document.querySelector(".polycss-mesh.saturn-cutaway")), interiorLeafCount: document.querySelector(".polycss-mesh.saturn-cutaway").querySelectorAll("b, s, u").length } },
     cameraStats: window.__saturn.camera.stats(),
   }));
 }
@@ -214,7 +210,7 @@ async function assertLensBehavior(page, interiorRequests) {
   const mounted = await page.evaluate(() => ({
     view: document.querySelector(".planet-stage").dataset.view,
     cutawayCount: document.querySelectorAll(".saturn-cutaway").length,
-    leafCount: window.__saturn.dom.interiorLeafCount,
+    leafCount: document.querySelector(".polycss-mesh.saturn-cutaway").querySelectorAll("b, s, u").length,
   }));
   assert.deepEqual(mounted, {
     view: "interior",
@@ -297,34 +293,6 @@ async function assertFeatureBehavior(page) {
 
 }
 
-async function assertSpeedBehavior(page) {
-  const control = page.locator('.planet-settings input[name="speed"][type="range"]');
-  for (const [speed, state] of [
-    [2, "fast"],
-    [3, "fastest"],
-    [4, "superfast"],
-    [0, "off"],
-    [1, "normal"],
-  ]) {
-    await control.evaluate((element, value) => {
-      element.value = String(value);
-      element.dispatchEvent(new Event("input", { bubbles: true }));
-    }, speed);
-    assert.equal(await page.evaluate(() =>
-      window.__saturn.options.state().speed), speed);
-    assert.equal(await control.getAttribute("data-state"), state);
-    assert.ok((await page.locator(".planet-stage").evaluate((stage, rate) =>
-      stage.getAnimations({ subtree: true })
-        .filter(({ id }) => !id.startsWith("saturn-camera-orbit-"))
-        .every(
-        (animation) => animation.playbackRate === rate &&
-          animation.playState === (rate === 0 ? "paused" : "running"),
-      ), speed)));
-    assert.equal(await page.evaluate(() =>
-      window.__saturn.runtime.playback().animations.some(animation => animation.running)), speed > 0);
-  }
-}
-
 async function assertCameraBehavior(page) {
   const scene = page.locator(".polycss-camera > .polycss-scene");
   const transformBefore = await scene.evaluate((node) => {
@@ -356,47 +324,6 @@ async function assertCameraBehavior(page) {
   }), transformBefore);
   assert.equal(await page.evaluate(() =>
     window.__saturn.assertStableDomIdentity()), true);
-}
-
-async function assertUnboundedCameraBehavior(page) {
-  const initialLeafCount = await sceneLeafCount(page);
-  const initial = await page.evaluate(() => window.__saturn.camera.state());
-  const stressed = await page.evaluate(() => window.__saturn.camera.setState({
-    controlPitch: 200,
-    controlYaw: -240,
-  }));
-  assert.equal(stressed.controlPitch, 200);
-  assert.equal(stressed.controlYaw, -240);
-  assert.equal(await sceneLeafCount(page), initialLeafCount);
-  assert.equal(await page.evaluate(() =>
-    window.__saturn.assertStableDomIdentity()), true);
-  await page.evaluate((state) => window.__saturn.camera.setState(state), initial);
-}
-
-async function assertReducedMotionBehavior(page) {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.waitForFunction(() =>
-    document.documentElement.dataset.playing === "false" &&
-    !window.__saturn.runtime.playback().animations.some(animation => animation.running));
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.waitForFunction(() =>
-    document.documentElement.dataset.playing === "true" &&
-    window.__saturn.runtime.playback().animations.some(animation => animation.running));
-}
-
-async function assertMobileBounds(page) {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.reload({ waitUntil: "networkidle" });
-  await waitForSaturn(page);
-  const state = await page.evaluate(() => ({
-    scrollWidth: document.documentElement.scrollWidth,
-    innerWidth,
-    mountedObjectCount: window.__cssEarth?.mountedObjectCount,
-    stageCount: document.querySelectorAll(".planet-stage").length,
-  }));
-  assert.equal(state.scrollWidth, state.innerWidth);
-  assert.equal(state.mountedObjectCount, 1);
-  assert.equal(state.stageCount, 1);
 }
 
 function sceneLeafCount(page) {

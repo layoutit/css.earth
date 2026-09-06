@@ -3,10 +3,8 @@ import { createObjectBrowserProfile } from "../../../../site/test/object-browser
 import { objectControls } from "../site/control-content.mjs";
 
 export const browserProfile = createObjectBrowserProfile({
-  id: "earth", inputSelector: ".earth-input-surface", controls: objectControls,
+  id: "earth", controls: objectControls,
   audit: Object.freeze({
-    finalScope: "outer",
-    fullComparisonWidths: Object.freeze([390, 820, 1200]),
     canonicalPreparedAssets: Object.freeze([
       ...PREPARED_EARTH_SCENE.body.assets.surface.urls,
       "/scenes/earth/earth-surface-poles.webp",

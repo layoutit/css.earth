@@ -26,37 +26,31 @@ export function materialOrbitFixture(id) {
   const levelOfDetail = { stage: 'geometry', silhouetteDiameter: 400, billboardOpacity: 0, markerOpacity: 0 };
   const dolly = { rotX: definition.camera.defaultControlPitchDegrees, rotY: definition.camera.defaultControlYawDegrees, zoom: definition.camera.defaultZoom };
   const shared = orbitFixture(null, false, { HTMLElement: globalThis.HTMLElement,
+    createPerspectiveDolly: () => ({
+      camera: { get state() { return { ...dolly, distance: 1 / dolly.zoom }; },
+        update(partial) { Object.assign(dolly, partial); if (partial.distance !== undefined) dolly.zoom = 1 / partial.distance; } },
+      measure() {}, reclamp() {}, remeasure() {}, minimumZoom: () => 0.01, maximumZoom: () => definition.camera.maximumZoom,
+      publish: () => ({ distance: 1 / dolly.zoom, focal: 1000, viewportWidth: 1000, viewportHeight: 800, principalOffset: [0, 0],
+        body: null, sun: null, levelOfDetail }),
+      trackball: () => ({ centerX: 500, centerY: 400, radius: 200, surfaceRadius: 200, focalLength: 1000, viewportWidth: 1000,
+        viewportCenterX: 500, viewportCenterY: 400 }),
+      state: () => ({ distance: 1 / dolly.zoom }), levelOfDetail: () => levelOfDetail, stats: () => ({}),
+    }),
     createUnboundedMatrixDragControls(options) {
       shared.callbacks.drag = options; shared.owners.add('drag');
       return { update() {}, stop() {}, invalidateTrackball() {}, stats() { return {}; }, destroy() { shared.owners.delete('drag'); } };
     },
     createCubicSkyCameraOrientation: () => ({ scene: () => identity, sceneMatrix: () => identity,
       skybox: () => ({ matrix: identity, sunViewDirection: [0, 0, 1] }),
-      counterRotation: () => identity, billboardCounterRotation: () => identity,
-      reset() {}, rotate() {}, snapshot: () => ({}) }),
-    viewSunDirectionToPhysicalLightDirection: value => value,
-    MutationObserver: class { observe() {} disconnect() {} },
-    createPerspectiveDolly: () => ({
-      camera: { get state() { return { ...dolly, distance: 1 / dolly.zoom }; },
-        update(partial) { Object.assign(dolly, partial); if (partial.distance !== undefined) dolly.zoom = 1 / partial.distance; } },
-      measure() {}, reclamp() {}, minimumZoom: () => 0.01, maximumZoom: () => definition.camera.maximumZoom,
-      publish: () => ({ distance: 1 / dolly.zoom, focal: 1000, viewportWidth: 1000, viewportHeight: 800, principalOffset: [0, 0],
-        body: null, sun: null, levelOfDetail }),
-      trackball: () => ({ centerX: 500, centerY: 400, radius: 200, surfaceRadius: 200, focalLength: 1000, viewportWidth: 1000,
-        viewportCenterX: 500, viewportCenterY: 400 }),
-      state: () => ({ distance: 1 / dolly.zoom }), levelOfDetail: () => levelOfDetail, stats: () => ({}),
-    }) });
+      counterRotation: () => identity,
+      reset() {}, rotate() {}, snapshot: () => ({}) }) });
   const f = { ...shared, stage, errors: [], writes: 0, fail: false };
   const publish = () => { f.writes++; if (f.fail) throw new Error('material publication failed'); };
   const mount = createObjectRuntime(definition, {
     createSelection(options) {
-    const { presentation } = options, host = stage;
-    const checked = new Set();
-    for (const layer of presentation.bodyLayers) for (const overlay of layer.lightingOverlays) {
-      for (const node of [overlay, ...overlay.querySelectorAll('*')]) checked.add(node);
-      for (let parent = overlay.parentNode; parent && parent !== host && parent !== presentation.sceneElement && parent !== presentation.cameraElement; parent = parent.parentNode) checked.add(parent);
-    }
-    for (const node of checked) {
+    const { presentation } = options;
+    for (const node of stage.querySelectorAll('*').filter(node =>
+      node !== presentation.cameraElement && node !== presentation.sceneElement)) {
       const original = node.style;
       node.style = new Proxy(original, { set(target, key, value) { publish(); target[key] = value; return true; },
         get(target, key) {
@@ -77,11 +71,13 @@ export function materialOrbitFixture(id) {
       return f.resources;
     },
     mountSky: () => ({ root: { isConnected: true }, setOrientation() {}, destroy() {} }),
+    mountHeliocentric: () => {
+      shared.owners.add('heliocentric');
+      return { sunRoot: { isConnected: true }, overlay: { isConnected: true },
+        state: () => ({ orbitPieceCount: 0, orbitPoolOverflows: 0 }),
+        destroy() { shared.owners.delete('heliocentric'); } };
+    },
     mountSun: () => ({ root: { isConnected: true }, state: () => ({ visible: true }), setViewDirection: () => ({ visible: true }), destroy() {} }),
-    mountHeliocentric: () => ({ root: { isConnected: true }, sunRoot: { isConnected: true, style: {} }, overlay: { isConnected: true },
-      plan: definition.heliocentricView?.plan, retainedOrbitPieceCount: 0, publish: () => ({}), setOrbitOpacity() {}, setMarkerOpacity() {},
-      setSystemOpacity() {}, setSunMarkerOpacity() {}, setTrailSpans() { return null; },
-      state: () => ({ sun: null, orbitPieceCount: 0, orbitOpacity: 1, markerOpacity: 0, orbitPoolOverflows: 0 }), destroy() {} }),
     createOrbit(options) { f.orbit = shared.create(options); return f.orbit; },
   });
   f.create = async () => { f.runtime = mount(stage, { onError: error => f.errors.push(error) }); await f.runtime.ready; return f.orbit; };

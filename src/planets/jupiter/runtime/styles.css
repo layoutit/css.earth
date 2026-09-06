@@ -1,30 +1,9 @@
-html,
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  background: #000;
-}
-
 .jupiter-stage {
   --planet-render-reference-width: 1280px;
   --planet-render-reference-height: 720px;
   --planet-render-side-padding: 16px;
-  container-type: size;
-  isolation: isolate;
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  background-color: #000;
-  cursor: grab;
-  touch-action: none;
-}
 
-.jupiter-stage:active {
-  cursor: grabbing;
 }
-
 .jupiter-stage > .planet-render-root {
   --jupiter-shell-scale: min(
     1,

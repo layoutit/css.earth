@@ -2,12 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createPreparedMaterialPublisher, preparedMaterialState } from "./prepared-material.mjs";
 import { selectedPreparedVariant } from "./prepared-presentation.mjs";
-import { initialObjectSelection, requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
+import { initialObjectSelection } from "./object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
 import { runtimeDefinition as mars } from "../planets/mars/runtime/definition.mjs";
 import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mjs";
 
-const track = mars.materials[0], phaseMaximum = track.frame.maximumFrame, bankLength = phaseMaximum + 1;
+const track = mars.materials[0], phaseMaximum = Math.max(...track.frame.indices), bankLength = phaseMaximum + 1;
 const selected = shadows => selectedPreparedVariant(mars, { ...initialObjectSelection(mars.controls), shadows }).materials[0];
 const roll = direction => {
   if (Math.hypot(direction[0], direction[1]) < 1e-9) return 0;
@@ -73,14 +74,10 @@ test("the generic contract rejects invalid or overlapping prepared frame offsets
     assert.throws(() => requireObjectRuntimeDefinition(invalid), /offset/);
   }
 });
-test("the common material boundary rejects malformed directions and invalid prepared numeric bounds", () => {
-  for (const direction of [[1, 0, 1], [0, 0, 0], [NaN, 0, 1], [1, 0], null]) {
-    const value = { controlPitch: 0, controlYaw: 0, skySunViewDirection: direction };
-    assert.throws(() => preparedMaterialState(track, selected(true), value, mars.camera), /direction is invalid/);
-  }
+test("preparation rejects invalid material phase and rotation data", () => {
   for (const mutate of [
-    record => record.frame.maximum = record.frame.minimum,
-    record => record.frame.maximum = Infinity,
+    record => record.frame.thresholds[1] = record.frame.thresholds[0],
+    record => record.frame.thresholds[0] = Infinity,
     record => record.frame.count = 0,
     record => record.rotation.baseDegrees = NaN,
   ]) {

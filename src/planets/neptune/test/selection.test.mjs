@@ -43,7 +43,7 @@ test("Neptune waits for the current camera row before committing a delayed lens"
     assert.equal(f.stage.dataset.lens, "normal");
     await f.settle(); assert.equal(await request, true);
     const facts = resolvePreparedPresentation(runtimeDefinition, { selection: f.selection.state().committed, view }).materials.lighting;
-    assert.equal(f.presentation.observe().material.appliedRow, facts.row);
+    assert.equal(f.presentation.observe().materials.lighting.appliedRow, facts.row);
     assert.ok(f.residency.resources.has(`lighting:methane:${facts.row}`));
     assert.ok(pool(f, "lighting").nativeSlots <= 3);
     assert.deepEqual(f.errors, []);

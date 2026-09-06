@@ -2,11 +2,9 @@ import { createObjectBrowserProfile } from "../../../../site/test/object-browser
 import { objectControls } from "../site/control-content.mjs";
 
 export const browserProfile = createObjectBrowserProfile({
-  id: "jupiter", inputSelector: ".planet-stage", controls: objectControls,
+  id: "jupiter", controls: objectControls,
   cameraFields: ["pitch", "controlPitch", "controlYaw", "zoom"],
   audit: Object.freeze({
-    finalScope: "outer",
-    fullComparisonWidths: Object.freeze([390, 820, 1200]),
     preparedAssetPairs: Object.freeze([
       Object.freeze({
         one: "/scenes/jupiter/jupiter-surface.webp",

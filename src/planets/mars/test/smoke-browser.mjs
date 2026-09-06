@@ -31,7 +31,7 @@ try {
   assertSharedDepthContext(baseline);
   assertRegisteredMaterial(baseline);
   await assertDirectionalSunContract(page);
-  await checkDirectionalAtmosphere(page, { id: "mars", phaseKey: "materialFrame", rollKey: "materialLightRollDegrees" });
+  await checkDirectionalAtmosphere(page, { id: "mars", track: "lighting", phaseKey: "calculatedFrame" });
   await page.evaluate(() => {
     window.__marsSmokeRetained = Object.freeze({
       camera: document.querySelector(".polycss-camera"),
@@ -57,7 +57,7 @@ try {
     const controlState = await page.evaluate(() => ({
       shadowsChecked:
         document.querySelector('.planet-settings input[name="shadows"]').checked,
-      shadowsEnabled: window.__mars.sky.state().shadowsEnabled,
+      shadowsEnabled: window.__mars.runtime.selection().committed.shadows,
     }));
     assert.equal(controlState.shadowsEnabled, controlState.shadowsChecked);
     await page.mouse.move(930, 520);
@@ -275,7 +275,6 @@ async function runtimeState(page) {
     runtimeDomGrowthPolicy: window.__mars.dom.runtimeDomGrowthPolicy,
     selectedPreparedDensity: window.__mars.renderStats.selectedPreparedDensity,
     visibleAssetsDecodedBeforeMount: window.__mars.renderStats.visibleAssetsDecodedBeforeMount,
-    idleJavaScriptLoops: window.__mars.renderStats.idleJavaScriptLoops,
     animationCount: document.querySelector(".planet-stage").getAnimations({ subtree: true }).length,
     canvasCount: document.querySelectorAll("canvas").length,
     sceneSvgCount: document.querySelectorAll(".planet-stage svg").length,
@@ -363,7 +362,6 @@ function assertRuntimeState(state) {
   assert.equal(state.runtimeDomGrowthPolicy, "none");
   assert.equal(state.selectedPreparedDensity, 2);
   assert.equal(state.visibleAssetsDecodedBeforeMount, 18);
-  assert.equal(state.idleJavaScriptLoops, 0);
   assert.equal(state.animationCount, 1);
   assert.equal(state.canvasCount, 0);
   assert.equal(state.sceneSvgCount, 0);

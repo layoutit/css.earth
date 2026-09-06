@@ -13,7 +13,7 @@ for (const failure of ["decode", "publication"]) test(`Earth deferred material $
       jobs[0].done = true; jobs[0].reject(new Error("row decode failed")); await f.flush();
       assert.equal(f.lifetime.disposed, false); assert.deepEqual(f.errors, []); assert.equal(f.materialErrors.length, 1);
       f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], skySunViewDirection: [1, 0, 0], revision: 3 }); await f.settle();
-      assert.equal(f.presentation.observe().material.atmosphere, "64");
+      assert.equal(f.presentation.observe().materials.atmosphere.frame, 64);
     } else {
       const leaf = f.stage.querySelectorAll("*").find(node => node.classList.contains("earth-atmosphere-material"));
       assert.ok(leaf);

@@ -97,7 +97,7 @@ test("rejects drifted prepared contracts", () => {
 test("keeps the shared production capability planet-neutral", async () => {
   const sources = await Promise.all([
     "orbit-guide-contract.mjs",
-    "orbit-guide-runtime.mjs",
+    "object-orbit.mjs",
     "prepared-orbit-guides.mjs",
   ].map((file) => readFile(new URL(file, import.meta.url), "utf8")));
   for (const source of sources) assert.doesNotMatch(source, /saturn/iu);

@@ -57,14 +57,14 @@ test("Uranus hidden lighting keeps its committed neighborhood and publisher row 
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const off = f.selection.dispatch({ kind: "toggle", name: "shadows", value: false }); await f.settle(); await off;
-    const active = rowPool(f).keys, row = f.presentation.observe().material.activeMaterialRow;
-    const jobs = f.jobs.length, writes = f.presentation.observe().camera.materialAddressWrites;
+    const active = rowPool(f).keys, row = f.presentation.observe().materials.lighting.row;
+    const jobs = f.jobs.length, writes = f.presentation.observe().materials.lighting.addressWrites;
     for (const z of [-1, 1, -.5]) {
       f.selection.setView({ ...f.view, controlPitch: 89, sunViewDirection: [0, 0, z], revision: f.view.revision + 1 });
       await f.settle();
       assert.deepEqual(rowPool(f).keys, active); assert.equal(f.jobs.length, jobs);
-      assert.equal(f.presentation.observe().material.activeMaterialRow, row);
-      assert.equal(f.presentation.observe().camera.materialAddressWrites, writes);
+      assert.equal(f.presentation.observe().materials.lighting.row, row);
+      assert.equal(f.presentation.observe().materials.lighting.addressWrites, writes);
     }
   } finally { f.restore(); }
 });

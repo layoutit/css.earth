@@ -98,7 +98,7 @@ try {
   assert.ok(Math.abs(initialPoleAxis.north.x - initialPoleAxis.south.x) <
     initialPoleAxis.south.y - initialPoleAxis.north.y,
     "Earth's starting polar axis must be closer to vertical than horizontal");
-  await checkDirectionalAtmosphere(page, { id: "earth", phaseKey: "atmosphere", rollKey: "atmosphereLightRollDegrees" });
+  await checkDirectionalAtmosphere(page, { id: "earth", track: "atmosphere", phaseKey: "frame" });
   const cameraTransforms = await page.evaluate(async ({ initialCamera }) => {
     const scene = document.querySelector(".planet-stage .polycss-scene");
     const sky = document.querySelector(".earth-skybox-orientation");
@@ -198,8 +198,8 @@ try {
     )).transform,
     stageElementCount: document.querySelector(".planet-stage")
       .querySelectorAll("*").length,
-    viewBank: { interiorMounted: window.__earth.dom.interiorMounted,
-      interiorLeafCount: window.__earth.dom.interiorLeafCount },
+    viewBank: { interiorMounted: Boolean(document.querySelector(".polycss-mesh.earth-cutaway")),
+      interiorLeafCount: document.querySelector(".polycss-mesh.earth-cutaway").querySelectorAll("b, s, u").length },
     required: window.__earth.runtime.selection().plan.required,
     rasterCircleCount: document.querySelectorAll(".earth-interior-material").length,
     materialCaches: {

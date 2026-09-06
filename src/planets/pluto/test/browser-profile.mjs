@@ -2,10 +2,8 @@ import { createObjectBrowserProfile } from "../../../../site/test/object-browser
 import { objectControls } from "../site/control-content.mjs";
 
 export const browserProfile = createObjectBrowserProfile({
-  id: "pluto", inputSelector: ".pluto-input-surface", controls: objectControls,
+  id: "pluto", controls: objectControls,
   audit: Object.freeze({
-    finalScope: "outer",
-    fullComparisonWidths: Object.freeze([390, 820, 1200]),
     preparedAssetPairs: Object.freeze([
       Object.freeze({
         one: "/scenes/pluto/pluto-surface.webp",

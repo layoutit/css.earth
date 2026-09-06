@@ -2,10 +2,8 @@ import { createObjectBrowserProfile } from "../../../../site/test/object-browser
 import { objectControls } from "../site/control-content.mjs";
 
 export const browserProfile = createObjectBrowserProfile({
-  id: "sun", inputSelector: ".sun-input-surface", controls: objectControls,
+  id: "sun", controls: objectControls,
   audit: Object.freeze({
-    finalScope: "outer",
-    fullComparisonWidths: Object.freeze([390, 820, 1200]),
     preparedAssetPairs: Object.freeze([
       Object.freeze({
         one: "/scenes/sun/sun-corona-photosphere.webp",
