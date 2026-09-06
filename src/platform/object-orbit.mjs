@@ -272,7 +272,10 @@ export function createRetainedCubicSkyOrbit({
     const zoomChanged = zoom !== publishedZoom;
     // The Sun and the orbit, resolved relative to the camera in float64; the
     // same projection places the body.
-    if (perspective) projected = perspective.publish(orientation.sceneMatrix(), sceneMatrix);
+    if (perspective) {
+      heliocentric.setSkyView?.({ matrix: sky.matrix, exposure: cubicSky.starExposure?.() ?? null });
+      projected = perspective.publish(orientation.sceneMatrix(), sceneMatrix);
+    }
     else publishCamera({ sceneMatrix, zoom });
     if (skyboxChanged || zoomChanged) {
       cubicSky.setOrientation({
@@ -514,6 +517,15 @@ export function createRetainedCubicSkyOrbit({
         value: orientation.snapshot(),
       });
       return Object.freeze(state);
+    },
+    sharedState() {
+      const state = this.state();
+      if (perspectiveCamera && skyTracksScene) {
+        // One physical rotation owns the body, registered sky and Sun.
+        // Dolly distance determines zoom; control angles are input bookkeeping.
+        return { distanceKilometers: state.distanceKilometers, pose: orientation.snapshot({ sceneOnly: true }) };
+      }
+      return { controlPitch: state.controlPitch, controlYaw: state.controlYaw, zoom: state.zoom, pose: state.pose };
     },
     skyState() {
       const currentSunPresentation = directionalSun?.state() ??
