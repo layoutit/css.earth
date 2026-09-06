@@ -283,19 +283,11 @@ test('the actual Sun-only shell consumes navigation without loading another nati
   const report = await audit({});
   assert.equal(report.complete, true);
   assert.equal(report.cameraFactorySites.length, 1);
-  assert.ok(report.sharedClosure.includes('src/renderers/css/navigation/index.ts'));
-  assert.ok(!report.sharedClosure.includes('src/renderers/css/index.ts'));
-  assert.ok(!report.sharedClosure.includes('src/renderers/css/runtime/object-runtime.ts'));
-  for (const file of ['site/scene-router.mjs', 'site/view-url-runtime.mjs', 'site/prepared-world-navigation.mjs']) {
-    const source = await readFile(file, 'utf8');
-    const changed = source.replace('/dist/navigation.js', '/dist/index.js');
-    assert.notEqual(changed, source, 'Mutation must reconnect the native renderer entry');
-    await assert.rejects(audit({ [file]: changed }), /native camera factory site; found 2/);
-  }
-  const configFile = 'src/renderers/css/tsup.config.ts', config = await readFile(configFile, 'utf8');
-  const changed = config.replace("'./navigation/index.ts'", "'./index.ts'");
-  assert.notEqual(changed, config, 'Mutation must redirect the actual navigation build entry');
-  await assert.rejects(audit({ [configFile]: changed }), /native camera factory site; found 2/);
+  assert.ok(report.sharedClosure.includes('src/renderers/css/index.ts'));
+  assert.ok(report.sharedClosure.includes('src/renderers/css/universe/world-context-runtime.ts'));
+  assert.ok(report.sharedClosure.includes('src/renderers/css/universe/prepared-world-context.ts'));
+  assert.ok(!report.sharedClosure.includes('src/platform/object-runtime.mjs'));
+
 });
 
 test('every independently selected registry object closes over exactly its own native camera assembly', async () => {
@@ -304,4 +296,31 @@ test('every independently selected registry object closes over exactly its own n
     assert.equal(report.complete, true, object.id);
     assert.equal(report.cameraFactorySites.length, 1, object.id);
   }
+});
+
+test('contextual Sun binding pins both prepared contexts to the shared factories and physical references', async () => {
+  const clientFile = 'src/planets/sun/runtime/client.mjs', contextFile = 'src/planets/sun/prepared/world-context.json';
+  const packagedFile = 'site/packaged-object-runtime.mjs', starsDescriptorFile = 'src/objects/stellar-neighbourhood/object.json';
+  const [client, contextText, packaged, starDescriptorText] = await Promise.all([
+    readFile(clientFile, 'utf8'), readFile(contextFile, 'utf8'), readFile(packagedFile, 'utf8'), readFile(starsDescriptorFile, 'utf8'),
+  ]);
+  const context = JSON.parse(contextText), starDescriptor = JSON.parse(starDescriptorText);
+  const audit = changes => auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === 'sun'),
+    readText: path => Object.hasOwn(changes, relativeFile(path)) ? changes[relativeFile(path)] : readFile(path, 'utf8') });
+  const report = await audit({});
+  assert.equal(report.complete, true);
+  assert.ok(report.entries[0].closure.includes(contextFile));
+  for (const [changes, expected] of [
+    [{ [clientFile]: client.replace('../prepared/world-context.json', '../prepared/other-context.json') }, /imports and one bound shared factory/],
+    [{ [clientFile]: client.replace('bindContextualObject', 'createObjectRuntime') }, /imports and one bound shared factory/],
+    [{ [clientFile]: client.replace('with { type: "json" }', '') }, /imports and one bound shared factory/],
+    [{ [contextFile]: JSON.stringify({ ...context, volume: { ...context.volume, objectId: '../milky-way' } }) }, /volume identity is not pinned/],
+    [{ [contextFile]: JSON.stringify({ ...context, frame: { ...context.frame, originM: [1, 0, 0] } }) }, /physical frame/],
+    [{ [contextFile]: JSON.stringify({ ...context, stars: { ...context.stars, objectId: '../stellar-neighbourhood' } }) }, /star field identity/],
+    [{ [contextFile]: JSON.stringify({ ...context, stars: { ...context.stars, fullDistanceM: context.volume.fadeStartDistanceM } }) }, /star field identity/],
+    [{ [packagedFile]: packaged.replace('loadPreparedCssPointField', 'loadPreparedCssVolume') }, /Contextual binding/],
+    [{ [packagedFile]: packaged.replace('{json,png,webp}', '{json,png}') }, /Contextual binding/],
+    [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, prepared: { ...starDescriptor.prepared, sha256: '0'.repeat(64) } }) }, /point field.*(?:identity|hash).*drifted/],
+    [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, properties: { ...starDescriptor.properties, frame: { ...starDescriptor.properties.frame, epochJdTt: 0 } } }) }, /point field.*frame/],
+  ]) await assert.rejects(audit(changes), expected);
 });

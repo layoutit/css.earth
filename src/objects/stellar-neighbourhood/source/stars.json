@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-stars-source@1",
+  "catalogue": {
+    "path": "stars-hyg.gxct",
+    "sha256": "d1574537361ac78d67f32ddf30ac0122e9d52115851f1519cb91bed26dcf8e74",
+    "count": 109389,
+    "idPrefix": "hyg-v4.4-row"
+  },
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "4803929520d1fbe1c1b834102b77cae70939831e9728f4f1ce5993fa59ac408e"
+  },
+  "license": {
+    "path": "LICENSE.CC-BY-SA-4.0.md",
+    "sha256": "45d033070c4fa82793db0b67758aff7ba7c796648324b61f2af99945146297b0"
+  },
+  "tree": {
+    "leafSize": 32,
+    "maximumDepth": 20
+  },
+  "colors": {
+    "count": 32,
+    "minimumTemperatureK": 1000,
+    "maximumTemperatureK": 40000
+  },
+  "coverage": {
+    "faceDivisions": 4
+  },
+  "atlas": {
+    "tileSize": 32,
+    "haloRadii": 2.5,
+    "coreInnerRadii": 0.75,
+    "coreOuterRadii": 1.25,
+    "haloPeak": 0.08,
+    "samplesPerPixelAxis": 4
+  },
+  "photometry": {
+    "minimumMagnitude": -25,
+    "maximumMagnitude": 35,
+    "step": 0.05,
+    "fovDegrees": 60,
+    "screenFactor": 1,
+    "floor": 0.00392156862745098
+  },
+  "policy": {
+    "activeSlots": 2048,
+    "transitionSlots": 2048,
+    "maxErrorPx": 2,
+    "transitionMs": 180
+  },
+  "labels": {
+    "activeSlots": 1,
+    "transitionSlots": 1,
+    "capHeightPx": 12,
+    "gapPx": 7,
+    "maxAlpha": 0.55,
+    "fadeMs": 300
+  },
+  "diffuseSky": {
+    "faces": [
+      {
+        "id": "front",
+        "path": "sky/front.webp",
+        "sha256": "4694fe3878fc9781ee87866a1f4848befcd91b43bb7f85d13cb542ce8a5457c5"
+      },
+      {
+        "id": "right",
+        "path": "sky/right.webp",
+        "sha256": "213d9fdbd6a835e6d1e3a2f162691674b36ea1f59234941afc021770455a3eb3"
+      },
+      {
+        "id": "back",
+        "path": "sky/back.webp",
+        "sha256": "1f850dc6daca82790f20345f652746e5464b38d04ea0d7b1a3a6644e4d756b77"
+      },
+      {
+        "id": "left",
+        "path": "sky/left.webp",
+        "sha256": "cbdbd655c85daf987b025fe1136a86113e81a148bc29ec6688f77714ca04ad47"
+      },
+      {
+        "id": "top",
+        "path": "sky/top.webp",
+        "sha256": "663f66e2bab44098d34617a204533df743e7c44cd39c23a48ee6fc227ddf71a8"
+      },
+      {
+        "id": "bottom",
+        "path": "sky/bottom.webp",
+        "sha256": "d0e08cc4cefc2e59cb44016887b6868a6d89065525ed9792e204a94549642667"
+      }
+    ],
+    "width": 512,
+    "blurSigmaPixels": 8
+  }
+}

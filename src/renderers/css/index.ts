@@ -1,11 +1,12 @@
 export { createObjectRuntime } from './runtime/object-runtime.js';
-export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView, ObjectRuntimeCapabilities } from './runtime/object-runtime-types.js';
+export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView, ObjectRuntimeCapabilities, WorldContextLayer } from './runtime/object-runtime-types.js';
 export type { ObjectRuntimeServices } from './runtime/object-runtime.js';
 export { OBJECT_RUNTIME_SCHEMA, initialObjectSelection, requireObjectControls, requireObjectAction,
   requireObjectRuntimeDefinition, objectCycleStates, reduceObjectSelection } from './runtime/object-contract.js';
 export type { ObjectControls, ObjectAction, ObjectSelection, LensControl, SettingControl } from './runtime/object-contract.js';
 export type { RuntimePolicy } from './navigation/runtime-policy.js';
 export type { CameraPlan, CameraPose } from './navigation/types.js';
+export type { PerspectiveWorldContext } from './navigation/perspective-dolly.js';
 export { formatSharedView, parseSharedView, formatViewParameters, parseViewParameters } from './navigation/view-url.js';
 export type { SharedView, SharedPlayback } from './navigation/view-url.js';
 export type { PreparedPresentationDefinition, PreparedView, PreparedPresentationPlan } from './rendering/prepared-presentation.js';
@@ -23,3 +24,11 @@ export { worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPo
 export type { PreparedWorldCameraFrame, WorldCameraPose } from './navigation/world-camera.js';
 export { createWorldSelectionTarget } from './navigation/selection-target.js';
 export { savedWorldCamera } from './navigation/saved-world-camera.js';
+export { mountPreparedCssVolume } from './volume/prepared-volume-runtime.js';
+export { validatePreparedCssVolume } from './volume/validation.js';
+export { loadPreparedCssVolume } from './volume/loader.js';
+export { parsePreparedCssPointField } from './stars/validation.js';
+export { loadPreparedCssPointField } from './stars/loader.js';
+export type { PreparedCssPointField, PreparedPointFieldNode, PreparedPointFieldResource, PreparedPointFieldStar, PointFieldRgb, PointFieldVector } from './stars/types.js';
+export { createWorldContextObjectRuntime } from './universe/world-context-runtime.js';
+export type { PreparedCssVolume, PreparedVolumeCameraTransform, PreparedVolumeLeaf, PreparedVolumeLeafStyle, PreparedVolumeMountOptions, PreparedVolumeRuntime, PreparedVolumeStack, VolumeCameraPublication, VolumeAxis } from './volume/types.js';

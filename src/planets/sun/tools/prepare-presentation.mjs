@@ -7,6 +7,7 @@ import { writePreparedPresentation } from "../../../../tools/prepare-presentatio
 import { objectControls } from "../site/control-content.mjs";
 import { PREPARED_SUN_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_SUN_LENSES } from "../runtime/preparedLenses.mjs";
+import worldContext from "../prepared/world-context.json" with { type: "json" };
 
 export async function prepareSunPresentation() {
   const plan=PREPARED_SUN_SCENE,lenses=PREPARED_SUN_LENSES,layers=["surface","poles","corona","limb"];
@@ -24,14 +25,16 @@ export async function prepareSunPresentation() {
   for(const leaf of plan.body.leaves)b.append(body,b.leaf(leaf));
   const corona=b.element("div","sun-corona-layer planet-render-root","",{"aria-hidden":"true"});
   corona.style.setProperty("--sun-corona-image",`url(${JSON.stringify(canonicalPreparedAsset(plan.offLimbContext.defaultUrl,plan.offLimbContext.defaultUrl2x))})`);
-  corona.style.setProperty("--sun-camera-zoom",String(plan.camera.defaultZoom));
+  corona.style.setProperty("--sun-camera-zoom","1");
+  corona.style.scale="1";
   const limb=b.element("div","sun-limb-layer planet-render-root","",{"aria-hidden":"true"});
   limb.style.setProperty("--sun-limb-image",`url(${JSON.stringify(canonicalPreparedAsset(plan.limbMaterial.defaultUrl,plan.limbMaterial.defaultUrl2x))})`);
-  limb.style.setProperty("--sun-camera-zoom",String(plan.camera.defaultZoom));
+  limb.style.setProperty("--sun-camera-zoom","1");
+  limb.style.scale="1";
   b.append(null,corona,limb);
   const {tree,index}=b.finish({camera,scene});
   const layerTargets=[body,body,corona,limb];
-  return {schema:PREPARED_PRESENTATION_SCHEMA,camera:plan.camera,sky:plan.starfield,sun:null,
+  return {schema:PREPARED_PRESENTATION_SCHEMA,camera:{...plan.camera,...worldContext.camera.presentation},sky:plan.starfield,sun:null,
     assets:{entries,pools:[
       preparedResourcePool("warm",entries,{retention:"warm"}),
       preparedResourcePool("material",entries,{retention:"selection",capacity:8,concurrency:8}),
@@ -40,7 +43,7 @@ export async function prepareSunPresentation() {
       ...layers.map((layer,i)=>({kind:"texture",target:index(layerTargets[i]),name:`--sun-${layer}-image`,resource:`${layer}:${lens.id}`,quoted:true})),
       {kind:"attribute",target:-1,name:"data-lens",value:lens.id},
     ],materials:[]})),materials:[],
-    viewBindings:[corona,limb].map(node=>({kind:"zoom-property",target:index(node),property:"--sun-camera-zoom"})),
+    viewBindings:[corona,limb].map(node=>({kind:"silhouette-fit",target:index(node),minimumRadius:0,unitScale:2/plan.camera.logicalBodyDiameter})),
     animations:[],
   };
 }

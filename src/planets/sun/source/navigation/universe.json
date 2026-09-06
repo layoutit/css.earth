@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-world-context-source@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "originM": [
+      0,
+      0,
+      0
+    ],
+    "presentationToReference": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    "metersPerUnit": 2244193.5483870967,
+    "bodyRadiusM": 695700000,
+    "orientationSource": "Sun prepared-sky baseline; identity ICRF axes, not an astrometric sky registration",
+    "presentationRadiusDerivation": {
+      "sourceRadius": 248,
+      "polycssTilePixels": 50,
+      "sceneScale": 0.025,
+      "visibleRadiusUnits": 310
+    }
+  },
+  "focus": {
+    "id": "sun",
+    "name": "Sun",
+    "color": "#f5a623"
+  },
+  "bodies": [
+    {
+      "id": "mercury",
+      "name": "Mercury",
+      "color": "#9d9388"
+    },
+    {
+      "id": "venus",
+      "name": "Venus",
+      "color": "#d6aa69"
+    },
+    {
+      "id": "earth",
+      "name": "Earth",
+      "color": "#5b82a7"
+    },
+    {
+      "id": "mars",
+      "name": "Mars",
+      "color": "#a95e47"
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "color": "#b48b67"
+    },
+    {
+      "id": "saturn",
+      "name": "Saturn",
+      "color": "#d2b68c"
+    },
+    {
+      "id": "uranus",
+      "name": "Uranus",
+      "color": "#8ec7c9"
+    },
+    {
+      "id": "neptune",
+      "name": "Neptune",
+      "color": "#5279bd"
+    }
+  ],
+  "orbit": {
+    "segments": 120,
+    "trail": {
+      "solidTurns": 0.375,
+      "fadeTurns": 0.25
+    }
+  },
+  "camera": {
+    "minimumDistanceM": 695700000,
+    "maximumDistanceM": 2.4809028e+21,
+    "presentation": {
+      "projection": {
+        "model": "css-perspective-shared-with-sky",
+        "cssPerspective": "86.60254037844386cqw"
+      },
+      "dolly": {
+        "model": "multiplicative-wheel-distance",
+        "wheelStepPerDelta": 0.006,
+        "minimumDistanceRadii": 1.2,
+        "maximumDistanceOverOrbitExtent": 1
+      },
+      "levelOfDetail": {
+        "model": "silhouette-diameter-crossfade",
+        "billboardFadeStartDiscPixels": 20,
+        "billboardFullDiscPixels": 14,
+        "markerFadeStartDiscPixels": 8,
+        "markerFullDiscPixels": 4.5
+      },
+      "orbitLineFade": {
+        "visibleBelowDiscHeightShare": 0.12,
+        "hiddenAboveDiscHeightShare": 0.3
+      },
+      "drag": {
+        "model": "screen-axis-tumble"
+      }
+    },
+    "framingReferenceZoom": 1
+  },
+  "system": {
+    "fadeOutStartDistanceM": 100000000000000,
+    "hiddenDistanceM": 1000000000000000
+  },
+  "volume": {
+    "objectId": "milky-way",
+    "fadeStartDistanceM": 413483800000000000000,
+    "fullDistanceM": 826967600000000000000
+  },
+  "sky": {
+    "scenePitchDegrees": 40,
+    "sceneYawDegrees": -105,
+    "skyPitchDegrees": 20,
+    "skyYawDegrees": 105,
+    "skyRollDegrees": 66,
+    "source": "Sun prepared camera default: scene Rx(initialScenePitch=40) Ry(defaultControlYaw=-105); legacy sky Ry(-defaultControlYaw) Rx(initialScenePitch 40 + presentationPitchOffset -20 = 20) Rz(presentationYawOffset=66). Visual baseline preservation only, not astrometric registration."
+  },
+  "stars": {
+    "objectId": "stellar-neighbourhood",
+    "fadeStartDistanceM": 14959787070000,
+    "fullDistanceM": 3085677581491367
+  }
+}
