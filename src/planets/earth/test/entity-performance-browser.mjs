@@ -16,8 +16,9 @@ const mode = option("mode", "baseline"), dpr = Number(option("dpr", "1")), repet
 assert.ok([1, 2].includes(dpr) && repetitions >= 1 && repetitions <= 3);
 const output = resolve(option("output", `output/playwright/entity-performance-${mode}-dpr${dpr}-${Date.now()}`));
 await mkdir(output, { recursive: true });
+const capture = option("capture", "trace") === "trace";
 const viewport = { width: 1440, height: 1000 };
-const report = { schema: "cssearth-entity-performance@1", base, mode, output, dpr, repetitions, viewport,
+const report = { schema: "cssearth-entity-performance@1", base, mode, output, dpr, repetitions, viewport, capture,
   commit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   workingTree: execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim(),
   harnessSha256: createHash("sha256").update(await readFile(new URL(import.meta.url))).digest("hex"),
@@ -26,7 +27,7 @@ const report = { schema: "cssearth-entity-performance@1", base, mode, output, dp
 const browser = await chromium.launch({ channel: "chrome", headless: true }); report.browser = browser.version();
 try {
   for (let repetition = 1; repetition <= repetitions; repetition++) {
-    const context = await browser.newContext({ viewport, deviceScaleFactor: dpr, recordVideo: { dir: output, size: viewport } });
+    const context = await browser.newContext({ viewport, deviceScaleFactor: dpr, ...(capture ? { recordVideo: { dir: output, size: viewport } } : {}) });
     const page = await context.newPage(), cdp = await context.newCDPSession(page);
     await cdp.send("Network.enable");
     await page.addInitScript(() => {
@@ -92,7 +93,7 @@ try {
         await page.evaluate(() => { const d = window.__entityPerf; d.phases = []; d.frames = []; d.longTasks = []; d.inputs = []; d.peaks = {}; });
         const trace = [], collect = ({ value }) => trace.push(...value);
         cdp.on("Tracing.dataCollected", collect);
-        await cdp.send("Tracing.start", { categories: "devtools.timeline,disabled-by-default-devtools.timeline,disabled-by-default-v8.cpu_profiler,disabled-by-default-devtools.screenshot,blink.user_timing", transferMode: "ReportEvents" });
+        if (capture) await cdp.send("Tracing.start", { categories: "devtools.timeline,disabled-by-default-devtools.timeline,disabled-by-default-v8.cpu_profiler,disabled-by-default-devtools.screenshot,blink.user_timing", transferMode: "ReportEvents" });
         async function phase(name, action) {
           const start = await page.evaluate(name => window.__entityPerf.begin(name), name);
           await action(); await page.evaluate(({ name, start }) => window.__entityPerf.end(name, start), { name, start });
@@ -108,7 +109,7 @@ try {
           await phase("noise-open", async () => {
             await page.locator('button[name="lens"][value="buenos-aires-noise"]').click(); await settle("geographic");
           });
-          await page.screenshot({ path: resolve(output, `${label}-noise.png`) });
+          if (capture) await page.screenshot({ path: resolve(output, `${label}-noise.png`) });
           await phase("city-pan", async () => {
             await page.mouse.move(950, 470); await page.mouse.down();
             for (let i = 1; i <= 30; i++) { await page.mouse.move(950 + i * 2, 470 + i / 2); await page.waitForTimeout(16); }
@@ -123,11 +124,12 @@ try {
               resources: performance.getEntriesByType("resource").map(({ name, startTime, duration, transferSize, encodedBodySize, decodedBodySize }) => ({ name, startTime, duration, transferSize, encodedBodySize, decodedBodySize })) };
           });
         } finally {
-          const completed = new Promise(resolve => cdp.once("Tracing.tracingComplete", resolve));
-          await cdp.send("Tracing.end"); await completed; cdp.off("Tracing.dataCollected", collect);
+          if (capture) { const completed = new Promise(resolve => cdp.once("Tracing.tracingComplete", resolve));
+            await cdp.send("Tracing.end"); await completed; }
+          cdp.off("Tracing.dataCollected", collect);
           run.network = [...network.values()];
           run.trace = `${label}-trace.json.gz`;
-          await writeFile(resolve(output, run.trace), gzipSync(JSON.stringify({ traceEvents: trace })));
+          if (capture) await writeFile(resolve(output, run.trace), gzipSync(JSON.stringify({ traceEvents: trace })));
         }
         run.summary = await summarizeEntityTrace(trace, run.metrics, { output, prefix: label, network: run.network });
         assert.ok(run.metrics.stable); assert.deepEqual(errors, []); run.passed = true;
@@ -136,7 +138,7 @@ try {
         network.clear(); const start = performance.now(), reloadTrace = [];
         const collectReload = ({ value }) => reloadTrace.push(...value);
         cdp.on("Tracing.dataCollected", collectReload);
-        await cdp.send("Tracing.start", { categories: "devtools.timeline,disabled-by-default-devtools.timeline,disabled-by-default-v8.cpu_profiler,disabled-by-default-devtools.screenshot,blink.user_timing", transferMode: "ReportEvents" });
+        if (capture) await cdp.send("Tracing.start", { categories: "devtools.timeline,disabled-by-default-devtools.timeline,disabled-by-default-v8.cpu_profiler,disabled-by-default-devtools.screenshot,blink.user_timing", transferMode: "ReportEvents" });
         try {
           await page.reload();
           await page.waitForFunction(() => window.__cssEarth?.ready && window.__earth?.ready && document.querySelector('[data-entity-card]').dataset.entityId === "3435910");
@@ -144,15 +146,16 @@ try {
           await page.evaluate(() => window.__entityPerf.end("document", 0));
           run.refresh = { wallMs: performance.now() - start, network: [...network.values()], metrics: await page.evaluate(() => ({ phases: window.__entityPerf.phases, frames: window.__entityPerf.frames, longTasks: window.__entityPerf.longTasks })) };
         } finally {
-          const completed = new Promise(resolve => cdp.once("Tracing.tracingComplete", resolve));
-          await cdp.send("Tracing.end"); await completed; cdp.off("Tracing.dataCollected", collectReload);
-          await writeFile(resolve(output, `${label}-refresh-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: reloadTrace })));
+          if (capture) { const completed = new Promise(resolve => cdp.once("Tracing.tracingComplete", resolve));
+            await cdp.send("Tracing.end"); await completed; }
+          cdp.off("Tracing.dataCollected", collectReload);
+          if (capture) await writeFile(resolve(output, `${label}-refresh-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: reloadTrace })));
         }
         run.refresh.summary = await summarizeEntityTrace(reloadTrace, run.refresh.metrics, { output, prefix: `${label}-refresh`, network: run.refresh.network });
         await writeFile(resolve(output, "report.json"), JSON.stringify(report, null, 2));
       }
     } finally {
-      await context.close(); const video = await page.video().path();
+      await context.close(); const video = await page.video()?.path();
       for (const run of report.runs.filter(run => run.repetition === repetition)) run.video = video;
     }
   }
