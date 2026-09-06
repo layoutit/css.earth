@@ -1,0 +1,96 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/uranus/",
+  "charts": [
+    {
+      "kind": "spectrum",
+      "id": "uranus",
+      "title": "Uranus modeled disk reflectance",
+      "description": "NASA PSG 253-point Uranus model from 350 to 1000 nanometers.",
+      "metadata": {
+        "source": "NASA GSFC Planetary Spectrum Generator",
+        "sourceUrl": "https://psg.gsfc.nasa.gov/api.php",
+        "measurement": "I/F apparent albedo",
+        "resolution": "R 240",
+        "points": 253,
+        "modeled": "2026-08-30"
+      },
+      "maximum": 0.25,
+      "source": "atmosphere/psg-uranus-r240-rif.txt",
+      "format": "numeric-lines",
+      "pointCount": 253,
+      "requiredHeader": "# Radiance unit: I/F [apparent albedo]",
+      "output": "uranus-atmosphere-spectrum.svg",
+      "maximumRoundingScale": 20
+    },
+    {
+      "kind": "pressure",
+      "id": "uranus",
+      "title": "Uranus temperature-pressure profile",
+      "description": "NASA PSG Uranus atmosphere model with pressure decreasing upward.",
+      "metadata": {
+        "source": "NASA GSFC Planetary Spectrum Generator",
+        "sourceUrl": "https://psg.gsfc.nasa.gov/api.php",
+        "layers": 50,
+        "modeled": "2026-08-30"
+      },
+      "temperatureMinimum": 40,
+      "temperatureMaximum": 240,
+      "pressureTicks": [
+        {
+          "pressure": 0.00001,
+          "label": "10⁻⁵"
+        },
+        {
+          "pressure": 0.01,
+          "label": "10⁻²"
+        }
+      ],
+      "source": "atmosphere/psg-uranus-20260830.cfg",
+      "layerCount": 50,
+      "output": "uranus-temperature-pressure-profile.svg",
+      "temperatureRoundingStep": 20,
+      "includePressureRangeMetadata": false
+    },
+    {
+      "kind": "phase",
+      "id": "uranus",
+      "title": "Uranus photometric phase curve",
+      "description": "V-band dimming of Uranus as phase angle increases from zero to 154 degrees.",
+      "metadata": {
+        "source": {
+          "title": "Computing Apparent Planetary Magnitudes for The Astronomical Almanac",
+          "authors": [
+            "Anthony Mallama",
+            "James L. Hilton"
+          ],
+          "journal": "Astronomy and Computing",
+          "arxiv": "1808.01973",
+          "url": "https://arxiv.org/abs/1808.01973",
+          "sourcePdfSha256": "805e53ab8f921c55e1c5e3dd64bbd567f806cdba56148625afcddfc650b6f9a7",
+          "retrievedAt": "2026-09-01",
+          "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
+        },
+        "planetId": "uranus",
+        "samples": 181,
+        "maximumAngleDegrees": 154,
+        "qualification": "Sub-observer and sub-solar latitude are held fixed so the curve isolates phase-angle dependence.",
+        "measurement": "V-band magnitude change relative to zero-degree phase"
+      },
+      "sampleCount": 181,
+      "maximumAngleDegrees": 154,
+      "segments": [
+        {
+          "maximumAngleDegrees": 154,
+          "kind": "polynomialMagnitude",
+          "coefficients": [
+            -7.11,
+            0.006587,
+            0.0001045
+          ]
+        }
+      ],
+      "output": "uranus-photometric-phase-curve.svg"
+    }
+  ]
+}

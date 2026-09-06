@@ -1,17 +1,23 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { BASE_TILE } from "@layoutit/polycss";
 
 export async function proveSkyboxPointerBoundary(page, planet, profile) {
   const initial = await cameraPose(page, planet.id);
   const bounds = await profile.bounds(page);
+  const { camera: cameraPlan } = JSON.parse(await readFile(
+    new URL(`../../src/planets/${planet.id}/prepared/runtime.json`, import.meta.url), "utf8"));
   const viewport = page.viewportSize();
-  const sky = { x: viewport.width - 32, y: 96 };
+  let sky = { x: viewport.width - 32, y: 96 };
   const results = [];
+  let primaryFailure;
   try {
     for (const zoom of new Set([
       initial.zoom,
       Math.max(bounds.minimumZoom, initial.zoom * 0.65),
     ])) {
       await restore({ ...initial, zoom });
+      sky = await emptySkyPoint(page, planet.id, profile.inputSelector, sky, cameraPlan);
       const cameraBounds = await page.locator(".polycss-camera").boundingBox();
       assert.ok(cameraBounds, `${planet.id}: camera must be visible`);
       const body = {
@@ -51,7 +57,11 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
       await page.mouse.move(sky.x, sky.y);
       assert.deepEqual(await cameraPose(page, planet.id), crossed,
         `${planet.id}: released sky input must not turn hover into drag`);
-      await page.mouse.dblclick(sky.x, sky.y, { delay: 45 });
+      // Navigation markers rotate across the sky during the preceding drag.
+      // Recheck beneath the transparent input using the actual picker's hit
+      // criteria before testing a deliberately empty-sky double click.
+      const clickSky = await emptySkyPoint(page, planet.id, profile.inputSelector, sky, cameraPlan);
+      await page.mouse.dblclick(clickSky.x, clickSky.y, { delay: 45 });
       assert.deepEqual(await cameraPose(page, planet.id), crossed,
         `${planet.id}: sky double-click must remain inert`);
       assert.equal((await motionStats(page, planet.id)).surfaceFlyTo.active, false,
@@ -81,14 +91,24 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
       await page.mouse.up();
       assert.equal((await motionStats(page, planet.id)).pendingPointer, false,
         `${planet.id}: releasing outside must clear pointer ownership`);
-      results.push({ zoom, sky, body, passed: true });
+      results.push({ zoom, sky, clickSky, body, passed: true });
     }
     assert.equal(await profile.stable(page), true,
       `${planet.id}: pointer boundary checks must preserve retained nodes`);
     return results;
+  } catch (error) {
+    primaryFailure = error;
+    throw error;
   } finally {
-    await page.mouse.up();
-    await restore(initial);
+    try {
+      await page.mouse.up();
+      await restore(initial);
+    } catch (cleanupFailure) {
+      // Preserve the first assertion/gesture failure if navigation or teardown
+      // removed its runtime; a restoration failure must not replace its stack.
+      if (primaryFailure) primaryFailure.cleanupFailure = cleanupFailure;
+      else throw cleanupFailure;
+    }
   }
 
   function restore(state) {
@@ -99,9 +119,51 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
 
 function cameraPose(page, id) {
   return page.evaluate(id => {
-    const state = window[`__${id}`].camera.state();
+    const runtime = window[`__${id}`];
+    if (!runtime) throw new Error(`${id}: camera runtime disappeared at ${location.pathname}; active object is ${window.__cssEarth?.activeObjectId}`);
+    const state = runtime.camera.state();
     return { ...state, pose: state.pose };
   }, id);
+}
+
+async function emptySkyPoint(page, id, selector, preferred, cameraPlan) {
+  const result = await page.evaluate(({ id, selector, preferred, cameraPlan, baseTile }) => {
+    const input = document.querySelector(selector);
+    const cameraElement = document.querySelector(".polycss-camera");
+    const camera = cameraElement.getBoundingClientRect();
+    const state = window[`__${id}`].camera.state();
+    let radius = state.silhouetteRadius;
+    if (cameraPlan.projection?.model !== "css-perspective-shared-with-sky") {
+      // Scale cameras do not publish silhouetteRadius. Use the same prepared
+      // body/scene dimensions and live CSS optics as camera-layout.ts; the
+      // camera's viewport rectangle is not the body's painted bounds.
+      const style = getComputedStyle(cameraElement);
+      const stage = document.querySelector(".planet-stage").getBoundingClientRect();
+      const scales = style.scale.trim().split(/\s+/u).slice(0, 2).map(Number);
+      const scale = scales.length && scales.every(value => Number.isFinite(value) && value > 0)
+        ? Math.min(...scales) : Math.min(camera.width / stage.width, camera.height / stage.height);
+      const perspective = Number.parseFloat(style.perspective);
+      const depthRadius = cameraPlan.logicalBodyDiameter * baseTile / 2;
+      radius = perspective * cameraPlan.sceneScale * scale /
+        Math.sqrt((perspective / depthRadius) ** 2 - 1);
+    }
+    if (!Number.isFinite(radius) || radius <= 0) throw new Error(`${id}: prepared body projection is invalid (${radius})`);
+    const candidates = [preferred, ...[32, 72, 120, 180].flatMap(inset =>
+      [96, 150, 220, innerHeight - 96].map(y => ({ x: innerWidth - inset, y })))];
+    const inspected = candidates.map(point => {
+      const elements = document.elementsFromPoint(point.x, point.y);
+      const targets = elements.filter(element => element instanceof HTMLElement &&
+        element.dataset.objectNavigate && element.style.pointerEvents === "auto" && element.ariaDisabled !== "true")
+        .map(element => element.dataset.objectNavigate);
+      const outsideBody = Math.hypot(point.x - camera.x - camera.width / 2,
+        point.y - camera.y - camera.height / 2) > radius + 12;
+      return { point, targets, onInput: input.contains(elements[0]), outsideBody };
+    });
+    return { selected: inspected.find(candidate => candidate.onInput && candidate.outsideBody && !candidate.targets.length)?.point,
+      inspected };
+  }, { id, selector, preferred, cameraPlan, baseTile: BASE_TILE });
+  assert.ok(result.selected, `${id}: no verified empty sky point: ${JSON.stringify(result.inspected)}`);
+  return result.selected;
 }
 
 function motionStats(page, id) {

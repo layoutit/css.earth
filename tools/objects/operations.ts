@@ -1,5 +1,7 @@
 import { fileURLToPath } from 'node:url';
-import { executeAcquisition, parseAcquisitionPlan } from './operations-acquisition.js';
+import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
+import { isPreparedBlockReference, PREPARED_BLOCK_ENCODING } from '../../src/renderers/css/paging/prepared-block-transport.js';
+import type { PreparedReference } from '../../src/renderers/css/paging/types.js';
 import { createHash, randomUUID } from 'node:crypto';
 import { mkdir, readFile, readdir, rename, rm, writeFile, unlink, lstat } from 'node:fs/promises';
 import { dirname, posix, resolve, relative, win32, basename } from 'node:path';
@@ -70,9 +72,18 @@ export function collectRuntimeAssetUrls(id:string,...values:unknown[]):string[] 
  const add=(url:string)=>{if(!url.startsWith(prefix))return;const file=url.slice(prefix.length);if(!/^[a-z0-9][a-z0-9@._-]*$/.test(file))throw new TypeError(`Unsafe runtime asset URL: ${url}.`);urls.add(url);};
  const visit=(value:unknown):void=>{
   if(typeof value==='string'){
-   if(value.startsWith(prefix)&&!/[\s;()"']/.test(value))add(value);
+   if(value!==prefix&&value.startsWith(prefix)&&!/[\s;()"']/.test(value))add(value);
    for(const match of value.matchAll(/url\(\s*["']?(\/scenes\/[^\s)"']+)["']?\s*\)/g))add(match[1]);
-  }else if(Array.isArray(value))value.forEach(visit);else if(value&&typeof value==='object')Object.values(value).forEach(visit);
+  }else if(Array.isArray(value))value.forEach(visit);else if(value&&typeof value==='object'){
+   // Range-addressed geometry is delivered by the pinned paging release, not
+   // the flat image directory. Its integrity is carried in the reference and
+   // verified by both source preparation and the runtime transport.
+   if((value as Record<string,unknown>).encoding===PREPARED_BLOCK_ENCODING){
+    if(!isPreparedBlockReference(value as PreparedReference,prefix))throw new TypeError('Invalid prepared geometry reference.');
+    return;
+   }
+   Object.values(value).forEach(visit);
+  }
  };values.forEach(visit);return [...urls].sort();
 }
 export function parseRuntimeManifest(value:unknown,id:string):RuntimeManifest {
@@ -85,11 +96,11 @@ async function verifyAssetFiles(root:string,manifest:RuntimeManifest,exact:boole
  if(exact){const actual=await readdir(root,{withFileTypes:true});if(actual.some(entry=>!entry.isFile()||!expected.has(entry.name))||actual.length!==expected.size){const actualNames=new Set(actual.map(entry=>entry.name));throw new Error(`Runtime directory closure differs. Missing: ${[...expected].filter(file=>!actualNames.has(file)).join(', ')||'none'}. Undeclared: ${actual.filter(entry=>!entry.isFile()||!expected.has(entry.name)).map(entry=>entry.name).join(', ')||'none'}.`);}}
  for(const asset of manifest.assets){const path=containedPath(root,asset.filename);if(!(await lstat(path)).isFile())throw new Error(`Runtime asset is not a regular file: ${asset.filename}.`);const bytes=await readFile(path);if(bytes.length!==asset.bytes||sha256(bytes)!==asset.sha256)throw new Error(`Runtime asset drifted: ${asset.filename}.`);}
 }
-export async function prepareRuntimeManifest({id,publicRoot,manifestPath,values}:{id:string;publicRoot:string;manifestPath:string;values:unknown[]}) {
+export async function prepareRuntimeManifest({id,publicRoot,manifestPath,values,allowPreparationArtifacts=false}:{id:string;publicRoot:string;manifestPath:string;values:unknown[];allowPreparationArtifacts?:boolean}) {
  const urls=collectRuntimeAssetUrls(id,...values);if(!urls.length)throw new Error('Prepared object has no runtime asset references.');
  const assets:RuntimeAsset[]=[];
  for(const url of urls){const filename=basename(url),bytes=await readFile(containedPath(publicRoot,filename));assets.push({filename,bytes:bytes.length,sha256:sha256(bytes)});}
- const manifest={schema:`css${id}-runtime-assets@1`,assets};await verifyAssetFiles(publicRoot,manifest,true);
+ const manifest={schema:`css${id}-runtime-assets@1`,assets};await verifyAssetFiles(publicRoot,manifest,!allowPreparationArtifacts);
  await mkdir(dirname(manifestPath),{recursive:true});const temporary=`${manifestPath}.partial-${process.pid}-${randomUUID()}`;
  try{await writeFile(temporary,JSON.stringify(manifest,null,2)+'\n',{flag:'wx'});await rename(temporary,manifestPath);}finally{await rm(temporary,{force:true});}
  return manifest;
@@ -112,7 +123,15 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
   const manifest=parseSourceManifest(JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')) as unknown,id);
   const groups=argumentsList.filter(argument=>argument.startsWith('--refresh')).map(argument=>argument.slice(2));
   if(groups.length>1||(groups.length&&argumentsList.includes('--verify-only')))throw new TypeError('Choose one source refresh or verification mode.');
-  if(mode==='acquire'&&groups.length){const plan=parseAcquisitionPlan(JSON.parse(await readFile(resolve(sourceRoot,'preparation/acquisition.json'),'utf8')) as unknown);await executeAcquisition({sourceRoot,manifest,plan,group:groups[0]});}
+  if(mode==='acquire'&&!argumentsList.includes('--verify-only')){
+   const missing:string[]=[];
+   for(const entry of [manifest.inputs,manifest.generatedIntermediates,manifest.documents].flat())try{await lstat(containedPath(sourceRoot,entry.path));}catch(error){if((error as NodeJS.ErrnoException).code==='ENOENT')missing.push(entry.path);else throw error;}
+   if(groups.length||missing.length){
+    const plan=parseAcquisitionPlan(JSON.parse(await readFile(resolve(sourceRoot,'preparation/acquisition.json'),'utf8')) as unknown);
+    if(groups.length)await executeAcquisition({sourceRoot,manifest,plan,group:groups[0]});
+    else await restoreMissingSources({sourceRoot,manifest,plan,missing});
+   }
+  }
   return verifySources({sourceRoot,manifest});
  }
  const manifestPath=resolve(objectRoot,'runtime-assets.json');
@@ -123,6 +142,15 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
  }
  if(mode==='assemble')return assembleRuntimeAssets({id,manifest:parseRuntimeManifest(JSON.parse(await readFile(manifestPath,'utf8')) as unknown,id),productionRoot:resolve(root,'dist/scenes',id)});
  throw new TypeError(`Unknown object operation: ${mode}.`);
+}
+/** Default acquisition restores missing pins only; changed existing bytes fail verification. */
+export async function restoreMissingSources({sourceRoot,manifest,plan,missing,transport}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;missing:string[];transport?:AcquisitionTransport}) {
+ const wanted=new Set(missing);
+ const operations=plan.operations.filter(step=>'path' in step&&wanted.has(step.path));
+ const covered=new Set(operations.map(step=>'path' in step?step.path:''));
+ if([...wanted].some(path=>!covered.has(path)))throw new Error(`No authored acquisition restores: ${[...wanted].filter(path=>!covered.has(path)).join(', ')}.`);
+ if(!operations.length)return {operationCount:0};
+ return executeAcquisition({sourceRoot,manifest,plan:{...plan,operations:operations.map(step=>({...step,groups:['restore-missing']}))},group:'restore-missing',transport});
 }
 if(process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url) && basename(process.argv[1])==='operations.js') {
  const [mode,id,...args]=process.argv.slice(2);if(!mode||!id)throw new TypeError('Usage: operations.js <acquire|verify|manifest|assemble> <id>');

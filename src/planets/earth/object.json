@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "earth",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Earth",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "paged-ellipsoid",
+          "path": "source/preparation/paged-ellipsoid.json",
+          "sha256": "d7942782e6b46ec8618179f21e78f2b827e4dcc81ec9e1c590f9a664068edb55"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "1d473392f7977901ae43bd7a30318cd620ebbe8915a526a72c5455a94952a55a"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "d02686d0bc102cef82090412d2bdc180ce9aeec8a56ccef38caf518580362888"
+        },
+        {
+          "id": "lens-bindings",
+          "path": "source/content/lens-bindings.json",
+          "sha256": "3f92243f419cb28dbc9539459547114a237f0800862feabd557a127dd1009618"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json",
+          "sha256": "521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9"
+        },
+        {
+          "id": "editorial",
+          "path": "source/editorial/earth.json",
+          "sha256": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "23257f353d3af2e8c445a00e160b59add4a9b3266206b031d01e4646d7b3ac8d"
+        }
+      ],
+      "shape": {
+        "kind": "ellipsoid",
+        "radiusKm": 6378.137,
+        "polarRadiusKm": 6356.752
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "paged-ellipsoid",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "buenos-aires-noise",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "topography",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "night-lights",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "cross-section",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "paged-ellipsoid",
+          "model": "lit"
+        },
+        {
+          "id": "atmosphere",
+          "source": "paged-ellipsoid",
+          "model": "lit"
+        }
+      ],
+      "cutaway": {
+        "source": "paged-ellipsoid",
+        "surface": "body",
+        "lens": "cross-section"
+      },
+      "atmosphere": {
+        "source": "paged-ellipsoid",
+        "material": "atmosphere"
+      },
+      "paging": {
+        "source": "paged-ellipsoid",
+        "surface": "body",
+        "maxResidentPages": 512,
+        "maxResidentBytes": 134217728,
+        "maxConcurrentLoads": 4
+      },
+      "destinations": {
+        "source": "paged-ellipsoid",
+        "maxEntries": 34135
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "559d5a61ce7567edb4b63dd7ebbc1787d6b012642c6f3685a8d778e4b67b5f82"
+  }
+}

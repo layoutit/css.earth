@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-banded-ellipsoid@1",
+  "coordinateArithmetic": "bounds",
+  "leafRecord": "explicit",
+  "verifyWrapSeams": true,
+  "shape": {
+    "equatorialRadius": 230,
+    "polarRadius": 215.0788899457282
+  },
+  "latitudeSegments": 24,
+  "longitudeSegments": 32,
+  "latitudeBoundsDegrees": [
+    -80,
+    -76,
+    -72,
+    -68,
+    -64,
+    -56,
+    -48,
+    -40,
+    -32,
+    -24,
+    -16,
+    -8,
+    0,
+    8,
+    16,
+    24,
+    32,
+    40,
+    48,
+    56,
+    64,
+    68,
+    72,
+    76,
+    80
+  ],
+  "surface": {
+    "url": "/scenes/jupiter/jupiter-surface.webp",
+    "width": 2048,
+    "height": 1024,
+    "gutter": 16,
+    "overscan": 0,
+    "overlap": 0.008,
+    "seamBleed": 0,
+    "rasterScale": 4,
+    "color": "#b45e3a",
+    "polarOverlapLatitudeDegrees": 64,
+    "polarOverlap": 0.02
+  },
+  "polar": {
+    "url": "/scenes/jupiter/jupiter-poles.webp",
+    "tileSize": 256,
+    "boundaryLatitudeDegrees": 80,
+    "overlayLatitudeDegrees": 64,
+    "southFirst": true,
+    "separateInnerTiles": false,
+    "fitToTile": false,
+    "surfaceOverlap": 1.035,
+    "innerOverlap": 1.05,
+    "surfaceOffset": 0.1,
+    "innerInset": 2.4,
+    "innerOffsetBeforeSubtract": true
+  },
+  "classes": {
+    "surface": "",
+    "polarInner": "jupiter-pole jupiter-pole-inner jupiter-pole-{pole}",
+    "polarSurface": "jupiter-pole jupiter-pole-outer jupiter-pole-{pole}"
+  },
+  "planOptions": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "textureLighting": "source",
+    "seamBleed": 0
+  },
+  "planes": [],
+  "tiledPlanes": [
+    {
+      "id": "system",
+      "radius": 273.7771337507524,
+      "worldScale": 50,
+      "grid": 4,
+      "overlap": 50,
+      "url": "/scenes/jupiter/jupiter-rings@2x.webp",
+      "className": "jupiter-ring-leaf jupiter-ring-system"
+    }
+  ]
+}

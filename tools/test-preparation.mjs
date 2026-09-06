@@ -8,12 +8,18 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const engineRequire = createRequire(resolve(root, 'packages/engine/package.json'));
 const { build } = createRequire(engineRequire.resolve('tsup'))('esbuild');
 const output = resolve(root, '.local/preparation-tests');
-const entries = [
-  'src/renderers/css/preparation/scene/scene.test.ts',
-  'tools/objects/celestial/celestial.test.ts',
-  'tests/objects/operations.test.ts',
-  'tests/objects/charts.test.ts',
-];
+async function discover(directory, suffix) {
+  const files = [];
+  for (const entry of await readdir(resolve(root, directory), { withFileTypes: true })) {
+    if (['.local', 'dist', 'node_modules', 'unit', 'browser', 'oracle'].includes(entry.name)) continue;
+    const path = `${directory}/${entry.name}`;
+    if (entry.isDirectory()) files.push(...await discover(path, suffix));
+    else if (entry.name.endsWith(suffix)) files.push(path);
+  }
+  return files.sort();
+}
+const entries = ['src/renderers/css/preparation/scene/scene.test.ts',
+  ...await discover('tools/objects', '.test.ts'), ...await discover('tests/objects', '.test.ts')];
 await mkdir(output, { recursive: true });
 const compiled = [];
 for (const entry of entries) {
@@ -34,9 +40,8 @@ function run(args) {
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
-const native = (await readdir(resolve(root, 'tests/objects')))
-  .filter(name => name.endsWith('.test.mjs'))
-  .map(name => resolve(root, 'tests/objects', name));
+const native = [...await discover('tools/objects', '.test.mjs'), ...await discover('tests/objects', '.test.mjs')];
 run(['--test', ...compiled, ...native]);
 run([resolve(dirname(engineRequire.resolve('vitest/package.json')), 'vitest.mjs'),
-  'run', 'src/renderers/css/preparation/presentation/presentation.test.ts']);
+  'run', '--root', resolve(root, 'src/renderers/css/preparation/presentation'),
+  '--exclude', '**/.local/**', 'presentation.test.ts']);

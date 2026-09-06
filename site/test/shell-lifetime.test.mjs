@@ -57,6 +57,8 @@ test("shell with no optional controls keeps Motion/high contrast and accessible 
   const f = fixture(), shell = f.mount();
   const motion = f.selectors.get(".planet-motion-setting");
   const contrast = f.selectors.get(".planet-sky-contrast-setting");
+  assert.equal(contrast.checked, false, 'High contrast starts off');
+  assert.equal(f.documentTarget.body.dataset.skyContrast, 'standard');
   shell.setPlaybackState({ motionRequested: true, reason: "reduced-motion" });
   assert.equal(motion.checked, true);
   assert.equal(f.explanation.hidden, false);

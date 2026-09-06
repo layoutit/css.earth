@@ -1,0 +1,24 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="europa"]) > :is(.europa-sun-camera, .europa-camera, .europa-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="europa"]) .europa-sun-camera, :where(.planet-stage[data-object-id="europa"]) .europa-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="europa"]) .europa-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="europa"]) .europa-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="europa"]) .europa-body > s {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; transform-origin: 0 0; backface-visibility: hidden;
+  background-image: var(--europa-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="europa"]) .europa-body > .europa-polar { background-image: var(--europa-poles-image); }
+:where(.planet-stage[data-object-id="europa"]) .europa-material-root { z-index: 3; --europa-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="europa"]) .europa-material, :where(.planet-stage[data-object-id="europa"]) .europa-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="europa"]) .europa-material { background-repeat: no-repeat; transform: rotate(var(--europa-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="europa"]) .europa-billboard { border-radius: 50%; background-color: var(--europa-billboard-color); opacity: var(--europa-billboard-opacity); }
+.planet-stage:where([data-object-id="europa"])[data-lod="billboard"] .europa-scene, .planet-stage:where([data-object-id="europa"])[data-lod="marker"] .europa-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="europa"])[data-lod="marker"] .europa-billboard { opacity: 0; }
+
+.planet-stage:where([data-object-id="europa"]).europa-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

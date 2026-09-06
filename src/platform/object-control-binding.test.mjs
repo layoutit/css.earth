@@ -1,11 +1,11 @@
-import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
-import { createObjectControlBinding } from "./object-control-binding.mjs";
-import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from "./object-runtime-contract.mjs";
-import { objectControls as moonControls } from "../planets/moon/site/control-content.mjs";
-import { objectControls as saturnControls } from "../planets/saturn/site/control-content.mjs";
+import { createObjectControlBinding } from '../renderers/css/dist/testing.js';
+import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from '../renderers/css/dist/testing.js';
+const { controls: moonControls } = await loadObjectTestDefinition('moon');
+const { controls: saturnControls } = await loadObjectTestDefinition('saturn');
 const flush = async () => { for (let i = 0; i < 10; i++) await Promise.resolve(); };
 class Input extends EventTarget {
   constructor(fields = {}) { super(); Object.assign(this, { name: "", value: "", dataset: {}, disabled: false, attributes: {}, tagName: "INPUT", type: "checkbox", min: "0", max: "4", step: "1" }, fields); }

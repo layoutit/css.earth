@@ -2,6 +2,13 @@
 
 The Moon is a first-class cssEarth object. It is not mounted inside Earth.
 
+Authored geometry, observation-processing parameters, controls, and physical
+source bindings live in `source/preparation/` and `source/content/`, pinned by
+`object.json`. The shared `tools/objects/static-surface/` preparation compiles
+those records into `prepared/*.json`. The migration preserves all 43 accepted
+asset hashes and the complete retained runtime description. Unit and browser
+checks live under `tests/objects/{unit,browser}/moon/`.
+
 ## Surface
 
 - NASA Scientific Visualization Studio CGI Moon Kit colour map, prepared from

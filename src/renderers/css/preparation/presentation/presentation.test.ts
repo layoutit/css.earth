@@ -27,9 +27,9 @@ describe('retained presentation compiler compatibility', () => {
     expect(createHash('sha256').update(JSON.stringify(canonical(prepared))).digest('hex')).toBe(expectedDigests[id]);
   }, 30_000);
 });
-// Updated for Europa’s explicit orbit centre and 13-entry navigation atlas.
-// Other presentation fields remain equal to the PR8 baseline.
+// Updated for PR11's 16-entry navigation atlas: marker counts and shifted indices only.
+// All other presentation fields remain equal to the pinned 13-entry baseline.
 const expectedDigests: Record<string, string> = {
-  mercury: 'e2144ac1364b7491ff8380e9651f59453957339c2f99a6f450b4cde47f89ffd9',
-  venus: '8049b15a1fe2bb6172e1d58c286fb703d8e01a6b527b6959b542dd58347b02c1',
+  mercury: '045bf3e245b1dae08ad4f92da7bb74a5af322f22fc757535acdceff709e47e4b',
+  venus: 'a8efabd16486a7d821a84137e5c741a1c7f55bf0e85862ff0ebeb34af1b23bea',
 };

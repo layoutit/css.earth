@@ -1,0 +1,397 @@
+{
+  "schema": "cssearth-observed-polar-surfaces@1",
+  "namespace": "jupiter",
+  "publicPrefix": "/scenes/jupiter/",
+  "dimensions": {
+    "width": 2048,
+    "height": 1024,
+    "polarTileSize": 256
+  },
+  "packing": {
+    "latitudeBoundsDegrees": [
+      -80,
+      -76,
+      -72,
+      -68,
+      -64,
+      -56,
+      -48,
+      -40,
+      -32,
+      -24,
+      -16,
+      -8,
+      0,
+      8,
+      16,
+      24,
+      32,
+      40,
+      48,
+      56,
+      64,
+      68,
+      72,
+      76,
+      80
+    ],
+    "gutter": 16
+  },
+  "encoding": {
+    "surface": {
+      "quality": 90,
+      "effort": 6,
+      "smartSubsample": true
+    },
+    "polar": {
+      "quality": 90,
+      "alphaQuality": 100,
+      "effort": 6,
+      "smartSubsample": true
+    },
+    "thumbnail": {
+      "quality": 82,
+      "effort": 6
+    }
+  },
+  "thumbnail": {
+    "width": 132,
+    "height": 72,
+    "fit": "cover",
+    "position": "centre"
+  },
+  "descriptor": {
+    "schema": "cssjupiter-prepared-lenses@1",
+    "defaultLens": "normal",
+    "runtimeFilters": false,
+    "runtimeRasterization": false,
+    "controls": [],
+    "provenance": {
+      "normalAuthority": "NASA/ESA Hubble WFC3 Jupiter global map, 27 June 2019",
+      "spectralAuthority": "Hubble OPAL Cycle 32 Jupiter global maps, 11 December 2025",
+      "spectralSourceUrl": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32",
+      "falseColorMethod": "prepared percentile stretch into declared three-stop palettes",
+      "runtimeAuthorityRequests": false
+    }
+  },
+  "lenses": [
+    {
+      "id": "normal",
+      "operation": "rgb-polar-structure",
+      "source": "surface/hubble-jupiter-global-map-2019.png",
+      "control": {
+        "id": "normal",
+        "label": "Normal",
+        "shortLabel": "RGB",
+        "measurement": "Hubble WFC3 visible-color global map",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-lens-normal.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-surface.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-surface@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "NASA/ESA Hubble WFC3 395, 502, and 631 nm visible-color map"
+      },
+      "files": {
+        "surface": "jupiter-surface.webp",
+        "surface2x": "jupiter-surface@2x.webp",
+        "poles": "jupiter-poles.webp",
+        "poles2x": "jupiter-poles@2x.webp",
+        "thumbnail": "jupiter-lens-normal.webp"
+      },
+      "coverage": {
+        "columnStride": 16,
+        "minimumMean": 3,
+        "firstMeasuredRow": 101,
+        "lastMeasuredRow": 1698
+      },
+      "polarDetails": {
+        "north": {
+          "structure": {
+            "path": "surface/juno-pia23808-north-polar-projection.jpg",
+            "resize": {
+              "fit": "fill"
+            }
+          },
+          "palette": {
+            "path": "surface/juno-pia24239-north-pole-detail.tif",
+            "resize": {
+              "fit": "cover",
+              "position": "attention"
+            }
+          },
+          "contrast": 0.22,
+          "tint": 0.2,
+          "structureRadius": 0.9
+        },
+        "south": {
+          "structure": {
+            "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
+            "extract": {
+              "left": 875,
+              "top": 0,
+              "width": 2249,
+              "height": 2249
+            },
+            "resize": {
+              "fit": "fill"
+            }
+          },
+          "palette": {
+            "path": "surface/juno-pia21382-south-pole-visible.jpg",
+            "extract": {
+              "left": 352,
+              "top": 0,
+              "width": 806,
+              "height": 806
+            },
+            "resize": {
+              "fit": "fill"
+            }
+          },
+          "contrast": 0.2,
+          "tint": 0.14,
+          "structureRadius": 0.9
+        }
+      },
+      "transition": {
+        "transitionStartLatitudeDegrees": 64,
+        "transitionEndLatitudeDegrees": 80,
+        "edgeStructureWeight": 0.3,
+        "innerDetailRadius": 0.72,
+        "outerDetailRadius": 0.9
+      },
+      "continuation": {
+        "overlap": 1.035,
+        "detailLookbackDegrees": 0.5,
+        "detailBlendStartRadius": 0.08,
+        "detailBlendEndRadius": 0.96,
+        "edgeStructureWeight": 0.3,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.93,
+        "edgeLatitudeDegrees": 64
+      }
+    },
+    {
+      "id": "ultraviolet",
+      "label": "Ultraviolet",
+      "shortLabel": "UV",
+      "filter": "F275W",
+      "wavelength": "275 nm",
+      "source": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
+      "measurement": "Hubble WFC3 F275W ultraviolet reflectance",
+      "palette": [
+        [
+          8,
+          7,
+          31
+        ],
+        [
+          78,
+          50,
+          143
+        ],
+        [
+          229,
+          216,
+          255
+        ]
+      ],
+      "qualification": "F275W single-band Hubble OPAL data with declared false color and Juno-structured continuation beyond measured polar coverage",
+      "operation": "scalar-harmonic-poles",
+      "files": {
+        "surface": "jupiter-lens-ultraviolet.webp",
+        "surface2x": "jupiter-lens-ultraviolet@2x.webp",
+        "poles": "jupiter-lens-ultraviolet-poles.webp",
+        "poles2x": "jupiter-lens-ultraviolet-poles@2x.webp",
+        "thumbnail": "jupiter-lens-ultraviolet-thumbnail.webp"
+      },
+      "scalar": {
+        "bitpix": -32,
+        "width": 3600,
+        "height": 1800,
+        "percentiles": [
+          0.01,
+          0.995
+        ],
+        "minimumCoverageFraction": 0.5,
+        "lookbackDegrees": 0.5,
+        "convergenceExponent": 2,
+        "edgeTransitionRows": 24
+      },
+      "polarDetails": {
+        "north": {
+          "structure": {
+            "path": "surface/juno-pia23808-north-polar-projection.jpg",
+            "resize": {
+              "fit": "fill"
+            }
+          },
+          "contrast": 0.2,
+          "tint": 0,
+          "structureRadius": 0.9
+        },
+        "south": {
+          "structure": {
+            "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
+            "extract": {
+              "left": 875,
+              "top": 0,
+              "width": 2249,
+              "height": 2249
+            },
+            "resize": {
+              "fit": "fill"
+            }
+          },
+          "contrast": 0.18,
+          "tint": 0,
+          "structureRadius": 0.9
+        }
+      },
+      "continuation": {
+        "overlap": 1.035,
+        "detailLookbackDegrees": 0.5,
+        "detailBlendStartRadius": 0.08,
+        "detailBlendEndRadius": 0.96,
+        "edgeStructureWeight": 0.3,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "measuredProjectionEdgeLatitudeDegrees": 64
+      },
+      "structuralAuthority": {
+        "north": "NASA Juno PIA23808",
+        "south": "NASA Juno JIRAM PIA23556"
+      }
+    },
+    {
+      "id": "methane",
+      "label": "Methane",
+      "shortLabel": "CH4",
+      "filter": "FQ889N",
+      "wavelength": "889 nm",
+      "source": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
+      "measurement": "Hubble WFC3 FQ889N methane-band reflectance",
+      "palette": [
+        [
+          2,
+          15,
+          19
+        ],
+        [
+          18,
+          89,
+          100
+        ],
+        [
+          201,
+          248,
+          239
+        ]
+      ],
+      "qualification": "FQ889N single-band Hubble OPAL data with declared false color and Juno-structured continuation beyond measured polar coverage",
+      "operation": "scalar-harmonic-poles",
+      "files": {
+        "surface": "jupiter-lens-methane.webp",
+        "surface2x": "jupiter-lens-methane@2x.webp",
+        "poles": "jupiter-lens-methane-poles.webp",
+        "poles2x": "jupiter-lens-methane-poles@2x.webp",
+        "thumbnail": "jupiter-lens-methane-thumbnail.webp"
+      },
+      "scalar": {
+        "bitpix": -32,
+        "width": 3600,
+        "height": 1800,
+        "percentiles": [
+          0.01,
+          0.995
+        ],
+        "minimumCoverageFraction": 0.5,
+        "lookbackDegrees": 0.5,
+        "convergenceExponent": 2,
+        "edgeTransitionRows": 24
+      },
+      "polarDetails": {
+        "north": {
+          "structure": {
+            "path": "surface/juno-pia23808-north-polar-projection.jpg",
+            "resize": {
+              "fit": "fill"
+            }
+          },
+          "contrast": 0.2,
+          "tint": 0,
+          "structureRadius": 0.9
+        },
+        "south": {
+          "structure": {
+            "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
+            "extract": {
+              "left": 875,
+              "top": 0,
+              "width": 2249,
+              "height": 2249
+            },
+            "resize": {
+              "fit": "fill"
+            }
+          },
+          "contrast": 0.18,
+          "tint": 0,
+          "structureRadius": 0.9
+        }
+      },
+      "continuation": {
+        "overlap": 1.035,
+        "detailLookbackDegrees": 0.5,
+        "detailBlendStartRadius": 0.08,
+        "detailBlendEndRadius": 0.96,
+        "edgeStructureWeight": 0.3,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "measuredProjectionEdgeLatitudeDegrees": 64
+      },
+      "structuralAuthority": {
+        "north": "NASA Juno PIA23808",
+        "south": "NASA Juno JIRAM PIA23556"
+      }
+    }
+  ],
+  "sourcePins": [
+    {
+      "path": "surface/hubble-jupiter-global-map-2019.png",
+      "expectedBytes": 6720450,
+      "expectedSha256": "e79f89b68b4f1c73387b9871e82a31fb4f53e3885fb2f53dd074d8ac78cb38e3"
+    },
+    {
+      "path": "surface/juno-pia23808-north-polar-projection.jpg",
+      "expectedBytes": 633958,
+      "expectedSha256": "85f84960270f7619c8ecd7cf933da860cff690d078709cbd6e342d0f83b45ac8"
+    },
+    {
+      "path": "surface/juno-pia24239-north-pole-detail.tif",
+      "expectedBytes": 193959,
+      "expectedSha256": "4a58389a26e0619fff294955c5dc07cd1dbf37d9593a714929b41fb57abd72be"
+    },
+    {
+      "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
+      "expectedBytes": 909084,
+      "expectedSha256": "92de7d816bbff6e220c893ded36d0811a21a4f74b13ebc337f9c1a3fc8d1e817"
+    },
+    {
+      "path": "surface/juno-pia21382-south-pole-visible.jpg",
+      "expectedBytes": 154800,
+      "expectedSha256": "c419932d9d5b0d3b01691779f6ff65869d82d5f768908174fc13715170fdb77e"
+    },
+    {
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
+      "expectedBytes": 25925760,
+      "expectedSha256": "ab7fe8bc644233c22bc6d86af42d54c60d49e24a6699ff116e797a80e4ff1796"
+    },
+    {
+      "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
+      "expectedBytes": 25925760,
+      "expectedSha256": "4bdbeb4a4f9fbfe0daa737c4ba29de31b0626fb6e58c54e0142ef6d3aa6ef5ea"
+    }
+  ]
+}

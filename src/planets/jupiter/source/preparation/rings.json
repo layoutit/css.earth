@@ -1,0 +1,293 @@
+{
+  "schema": "cssearth-radial-layer-recipe@1",
+  "units": "kilometers",
+  "sources": [
+    {
+      "id": "nasa-hubble-jupiter-navigation-marker",
+      "path": "presentation/navigation-marker.png",
+      "expectedBytes": 1166501,
+      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
+      "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
+      "credit": "NASA, ESA, STScI, and Amy Simon",
+      "license": "NASA media usage guidelines and credited partner rights"
+    },
+    {
+      "id": "openspace-jupiter-globe",
+      "path": "openspace/globe.asset",
+      "expectedBytes": 1443,
+      "expectedSha256": "35f7f9cc623ff01803c2f2bb1e24a1680303ab70469e7b66660a7a5b2419f743",
+      "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/globe.asset",
+      "credit": "OpenSpace Team",
+      "license": "MIT"
+    },
+    {
+      "id": "pds-jupiter-ring-statistics",
+      "path": "rings/pds-jupiter-rings-table.html",
+      "expectedBytes": 20293,
+      "expectedSha256": "61c744fe0610a60306c45cc7d2a587fb7582a0f4738db47a7421daaec7603597",
+      "origin": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
+      "credit": "NASA Planetary Data System Ring-Moon Systems Node",
+      "license": "United States government scientific data"
+    },
+    {
+      "id": "pds-jupiter-main-ring-halo-caption",
+      "path": "rings/pds-pia00701.html",
+      "expectedBytes": 16498,
+      "expectedSha256": "938d301980cc9bd764b3e1ef84880d0d8cdd542e60271ed8569cb59272447fec",
+      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA00701.html",
+      "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
+      "license": "United States government scientific data"
+    },
+    {
+      "id": "pds-jupiter-gossamer-caption",
+      "path": "rings/pds-pia01623.html",
+      "expectedBytes": 17061,
+      "expectedSha256": "5cdad6f5b3544111beee0a97e78acc1f0ebf17d24fc6288221c461562cd56a65",
+      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA01623.html",
+      "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
+      "license": "United States government scientific data"
+    },
+    {
+      "id": "nasa-galileo-jupiter-main-ring-halo",
+      "path": "rings/pia00701.jpg",
+      "expectedBytes": 10021,
+      "expectedSha256": "6cba8822a2cc938efe3505842b1c2f0d28e63228eab617ec023737b0ba8ab606",
+      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA00701-med.jpg",
+      "credit": "NASA/JPL Galileo",
+      "license": "NASA media usage guidelines"
+    },
+    {
+      "id": "hubble-opal-jupiter-minnaert",
+      "path": "atmosphere/hubble-opal-minnaert.json",
+      "expectedBytes": 1228,
+      "expectedSha256": "86bc3c4b7b60d77e5088c1804521619bb077cd53ea6e1538549b80f603356fbe",
+      "origin": "normalized Table 1 and Figure 1 facts from https://doi.org/10.1088/0004-637X/812/1/55",
+      "credit": "Amy A. Simon, Michael H. Wong, and Glenn S. Orton",
+      "license": "factual values transcribed from the cited paper"
+    },
+    {
+      "id": "nasa-psg-jupiter-configuration",
+      "path": "atmosphere/psg-jupiter-20260830.cfg",
+      "expectedBytes": 8813,
+      "expectedSha256": "8878d1d05c0973a4c4d501542810b20242d9cee0f2964cd01cb48c19ec785d33",
+      "origin": "https://psg.gsfc.nasa.gov/api.php",
+      "credit": "NASA GSFC Planetary Spectrum Generator",
+      "license": "United States government generated data"
+    },
+    {
+      "id": "google-maps-jupiter-cubic-sky-sun-oracle-measurements",
+      "path": "sun/google-maps-sun-oracle.json",
+      "expectedBytes": 2895,
+      "expectedSha256": "0fcc54b72a064eb76adf2a3be008f23c6fb6f3ffae3cdc5df228b83d16b3a27b",
+      "origin": "https://www.google.com/maps/space/venus/ and https://mw1.google.com/mw-weather/static/sun.png",
+      "credit": "Google Maps visual presentation reference; measurements recorded by this project",
+      "license": "Repository-authored factual measurements; exact referenced asset is separately qualified"
+    }
+  ],
+  "layers": [
+    {
+      "kind": "annular-field",
+      "size": 1024,
+      "densities": [
+        1,
+        2
+      ],
+      "outerRadius": 273.7771337507524,
+      "mapping": {
+        "kind": "piecewise-log",
+        "knots": [
+          [
+            71492,
+            230
+          ],
+          [
+            128000,
+            255
+          ],
+          [
+            421800,
+            285
+          ]
+        ]
+      },
+      "grid": {
+        "centerInset": 0,
+        "sampleOffset": 0.5,
+        "marginPixels": 0,
+        "scaleOrder": "multiply-hypot"
+      },
+      "composition": "front-to-back",
+      "alphaUnits": 1,
+      "maximumAlpha": 255,
+      "densityMode": "downsample-highest",
+      "encoding": {
+        "lossless": true,
+        "effort": 6,
+        "alphaQuality": 100
+      },
+      "bands": [
+        {
+          "id": "Halo",
+          "envelope": "smooth-annulus",
+          "bounds": [
+            100000,
+            122400
+          ],
+          "fade": [
+            4000,
+            1200
+          ],
+          "minimumPresentationWidth": 0,
+          "opacity": 0.10352649238413775,
+          "color": [
+            177,
+            174,
+            170
+          ],
+          "source": {
+            "name": "Halo",
+            "innerRadiusKm": 100000,
+            "outerRadiusKm": 122400,
+            "opticalDepthText": "~10^-6",
+            "opticalDepth": 0.000001,
+            "verticalThicknessKm": 10000,
+            "associatedMoons": []
+          }
+        },
+        {
+          "id": "Main Ring",
+          "envelope": "smooth-annulus",
+          "bounds": [
+            122400,
+            129100
+          ],
+          "fade": [
+            600,
+            120
+          ],
+          "minimumPresentationWidth": 3,
+          "opacity": 0.4,
+          "color": [
+            190,
+            187,
+            182
+          ],
+          "source": {
+            "name": "Main Ring",
+            "innerRadiusKm": 122400,
+            "outerRadiusKm": 129100,
+            "opticalDepthText": "< 8 x 10^-6",
+            "opticalDepth": 0.000008,
+            "verticalThicknessKm": 100,
+            "associatedMoons": [
+              "Metis",
+              "Adrastea"
+            ]
+          }
+        },
+        {
+          "id": "Amalthea Gossamer Ring",
+          "envelope": "smooth-annulus",
+          "bounds": [
+            122400,
+            181350
+          ],
+          "fade": [
+            4000,
+            1200
+          ],
+          "minimumPresentationWidth": 0,
+          "opacity": 0.06597539553864472,
+          "color": [
+            171,
+            166,
+            160
+          ],
+          "source": {
+            "name": "Amalthea Gossamer Ring",
+            "innerRadiusKm": 122400,
+            "outerRadiusKm": 181350,
+            "opticalDepthText": "~5 x 10^-7",
+            "opticalDepth": 5e-7,
+            "verticalThicknessKm": 2600,
+            "associatedMoons": [
+              "Amalthea"
+            ]
+          }
+        },
+        {
+          "id": "Thebe Gossamer Ring",
+          "envelope": "smooth-annulus",
+          "bounds": [
+            122400,
+            221900
+          ],
+          "fade": [
+            4000,
+            1200
+          ],
+          "minimumPresentationWidth": 0,
+          "opacity": 0.02317669469022034,
+          "color": [
+            163,
+            158,
+            153
+          ],
+          "source": {
+            "name": "Thebe Gossamer Ring",
+            "innerRadiusKm": 122400,
+            "outerRadiusKm": 221900,
+            "opticalDepthText": "~10^-7",
+            "opticalDepth": 1e-7,
+            "verticalThicknessKm": 8800,
+            "associatedMoons": [
+              "Thebe"
+            ]
+          }
+        },
+        {
+          "id": "Thebe Extension",
+          "envelope": "smooth-annulus",
+          "bounds": [
+            221900,
+            270000
+          ],
+          "fade": [
+            4000,
+            1200
+          ],
+          "minimumPresentationWidth": 0,
+          "opacity": 0.001161586349641542,
+          "color": [
+            163,
+            158,
+            153
+          ],
+          "source": {
+            "name": "Thebe Extension",
+            "innerRadiusKm": 221900,
+            "outerRadiusKm": 270000,
+            "opticalDepthText": "~10^-9",
+            "opticalDepth": 1e-9,
+            "verticalThicknessKm": 8800,
+            "associatedMoons": [
+              "Thebe"
+            ]
+          }
+        }
+      ],
+      "shadow": {
+        "direction": [
+          0.5533678733756293,
+          0.8328856056644635,
+          0.00925011311679697
+        ],
+        "equatorialRadius": 71492,
+        "polarRadius": 66854,
+        "luminance": 0.65
+      },
+      "output": "jupiter-rings{suffix}.webp",
+      "qualification": "PDS radial bounds and optical-depth ordering; accepted logarithmic presentation-radius compression and low-opacity visibility emphasis."
+    }
+  ]
+}

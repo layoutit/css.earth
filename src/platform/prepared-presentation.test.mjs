@@ -1,8 +1,9 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { runtimeDefinition } from "../planets/moon/runtime/definition.mjs";
-import { initialObjectSelection } from "./object-runtime-contract.mjs";
-import { mountPreparedPresentation, resolvePreparedPresentation } from "./prepared-presentation.mjs";
+const runtimeDefinition = await loadObjectTestDefinition('moon');
+import { initialObjectSelection } from '../renderers/css/dist/testing.js';
+import { mountPreparedPresentation, resolvePreparedPresentation } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture, preparedSelectionFixture } from "./test/object-runtime-package.mjs";
 
 const initial = initialObjectSelection(runtimeDefinition.controls);
