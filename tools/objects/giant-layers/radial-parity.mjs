@@ -12,12 +12,18 @@ export async function assertRadialPreparationParity(id) {
   const config=JSON.parse(await readFile(resolve(objectDirectory,'source/preparation/rings.json'),'utf8'));
   const manifest=JSON.parse(await readFile(resolve(objectDirectory,'runtime-assets.json'),'utf8'));
   const result=await prepareGiantLayers({sourceDirectory:resolve(objectDirectory,'source'),config,write:false});
+  const acceptedNames=new Set(manifest.assets.map(asset=>asset.filename));
+  let verified=0;
   for (const {filename,bytes,sha256,data} of result.assets) {
+    // Preparation also emits lower-density intermediates. Only declared public
+    // consumers belong to the deployed closure; Saturn mounts its 2x bank only.
+    if(!acceptedNames.has(filename))continue;
     const expected=manifest.assets.find(asset=>asset.filename===filename);
-    assert.ok(expected,`Unaccepted ring asset ${filename}`);
     assert.deepEqual({filename,bytes,sha256},expected,`${filename}: exact prepared bytes`);
     const accepted=await readFile(resolve(projectRoot,'public/scenes',id,filename));
     assert.ok(accepted.equals(data),`${filename}: accepted encoded payload`);
+    verified++;
   }
-  return result.assets.length;
+  assert.ok(verified>0,'The radial recipe must reproduce active runtime assets');
+  return verified;
 }
