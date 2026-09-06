@@ -7,18 +7,18 @@ import { createGeographicSurfaceRuntime } from "./geographic-surface-runtime.mjs
 // in-flight transport and old pixels; adding a dataset adds no startup work.
 export function createGeographicLensRuntime({ pages, capacity, surface, objectId, getEntity, selectBase, onChange = () => {}, fetcher = fetch }) {
   let revision = 0, request = null, destroyed = false;
-  let selectedDescriptor = null;
+  let selectedDescriptor = null, selectedEntityId = null;
   const overview = createGeographicSurfaceRuntime({ surface, fetcher });
   let state = { id: null, status: "idle", content: null, error: null };
   const publish = next => { state = next; if (!destroyed) onChange(state); };
   function clear() {
     revision++; request?.abort(); request = null;
-    selectedDescriptor = null;
+    selectedDescriptor = null; selectedEntityId = null;
     overview.clear();
     pages.replacePlan(null);
     publish({ id: null, status: "idle", content: null, error: null });
   }
-  const canRetain = entity => Boolean(state.content && entity &&
+  const canRetain = entity => Boolean(state.content && entity && entity.id === selectedEntityId &&
     geographicPackageIncludes(state.content, objectId, entity.id) && entity.lenses?.some(lens =>
       lens.id === state.id && lens.package.sha256 === selectedDescriptor?.package.sha256));
   return Object.freeze({
@@ -44,7 +44,7 @@ export function createGeographicLensRuntime({ pages, capacity, surface, objectId
       const signal = AbortSignal.any([request.signal, AbortSignal.timeout(15000)]);
       pages.replacePlan(null);
       overview.clear();
-      selectedDescriptor = descriptor;
+      selectedDescriptor = descriptor; selectedEntityId = entity.id;
       publish({ id, status: "loading", content: null, error: null });
       try {
         requireGeographicLensReference(descriptor, capacity.assetPath);

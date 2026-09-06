@@ -146,8 +146,9 @@ try {
           });
           await phase("pan-pages", async () => { await settle("city"); await settle("geographic"); });
           if (landCover) {
+            await phase("earth-return", async () => { await page.locator('[data-entity-parent="earth"]').click(); await flight(); });
             await phase("land-cover-open", async () => {
-              await page.locator('button[name="lens"][value="worldcover-land-cover"]').click(); await settle("geographic");
+              await page.locator('button[name="lens"][value="worldcover-land-cover"]').click(); await page.waitForFunction(() => window.__earth.runtime.geographicLens().status === "ready");
             });
             if (capture) await page.screenshot({ path: resolve(output, `${label}-land-cover.png`) });
             await phase("land-cover-pan", async () => {
@@ -155,8 +156,9 @@ try {
               for (let i = 1; i <= 30; i++) { await page.mouse.move(950 - i * 2, 470 - i / 2); await page.waitForTimeout(16); }
               await page.mouse.up(); await page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.active);
             });
-            await phase("land-cover-pages", () => settle("geographic"));
+            await phase("land-cover-pages", () => page.waitForFunction(() => ["ready", "no-coverage"].includes(window.__earth.runtime.geographicLens().status)));
             await phase("land-cover-to-noise", async () => {
+              await select("Buenos Aires", "3435910");
               await page.locator('button[name="lens"][value="buenos-aires-noise"]').click(); await settle("geographic"); await settle("city");
             });
           }

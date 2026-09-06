@@ -6,14 +6,15 @@ import { chromium } from "playwright";
 import { serveBuiltFixture } from "../../../../tools/test-built-server.mjs";
 
 const option = (name, fallback) => process.argv.find(arg=>arg.startsWith(`--${name}=`))?.slice(name.length+3) ?? fallback;
-const built = resolve(option("built-dir","output/playwright/production-fixture-f6ea483d"));
+const built = resolve(option("built-dir","dist"));
 const dpr = Number(option("dpr","1")); assert.ok([1,2].includes(dpr));
 const output = resolve(`output/playwright/global-recovery-dpr${dpr}-${Date.now()}`); await mkdir(output,{recursive:true});
-const fixture = JSON.parse(await readFile(resolve(built,"fixture-receipt.json")));
-assert.equal(fixture.geometryMirror,false); assert.equal(fixture.install.installed,803); assert.equal(fixture.reuse.installed,0);
+let fixture = null;
+try { fixture = JSON.parse(await readFile(resolve(built,"fixture-receipt.json"))); } catch (error) { if (error.code !== "ENOENT") throw error; }
+if (fixture) { assert.equal(fixture.geometryMirror,false); assert.equal(fixture.install.installed,803); assert.equal(fixture.reuse.installed,0); }
 const server = await serveBuiltFixture(built), browser = await chromium.launch({channel:"chrome",headless:true,args:server.launchArgs});
-const report = {output,built,dpr,browser:browser.version(),fixtureCommit:fixture.commit,
-  qualification:"Unchanged built app from a clean Earth asset install; real public geometry/provider endpoints; test failures use separately labeled request interception. No app deployment or development diagnostics.",
+const report = {output,built,dpr,browser:browser.version(),fixtureCommit:fixture?.commit ?? null,
+  qualification:"Built app with real public geometry/provider endpoints; test failures use separately labeled request interception. A clean asset install is claimed only when a fixture receipt is present. No app deployment or development diagnostics.",
   transitions:[],faults:[],teardowns:[],heapPlateau:[],errors:[],requests:[]};
 const context = await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:dpr,recordVideo:{dir:output,size:{width:1440,height:1000}}});
 await context.addInitScript(()=>{
@@ -67,8 +68,13 @@ try{
   await page.goto(saved);const restored=await checkpoint('reload',{capture:true});assert.equal(restored.entity,'3435910');assert.equal(restored.lens,'buenos-aires-noise');assert.equal(new URL(restored.url).search,new URL(saved).search);
   report.history={initial,back,restored,passed:true};
 
+  // Preserve the camera in a normal Earth-card link. The source fault remains
+  // at the same detailed view, while the lens belongs to Earth, not the city.
+  const earthView = new URL(saved); earthView.hash = "";
   // Failure fixtures disable the HTTP cache; these are recovery checks only.
   const faultCase=async(name,pattern,handler)=>{
+    await page.goto(earthView.href);await settle();
+    assert.equal((await state()).entity,'earth');
     await activate('normal');const before=await checkpoint(`${name}-base`);assert.ok(before.pages.length);
     let calls=0;const byUrl=new Map();
     const fixtureErrors=[];
@@ -77,7 +83,7 @@ try{
     await page.route(pattern,route);
     await lens('worldcover-land-cover').click();
     await page.locator('[data-lens-legend="worldcover-land-cover"] [data-geographic-status]').filter({hasText:'could not load'}).waitFor({timeout:120000});
-    const failed=await checkpoint(`${name}-failed`,{fault:true,capture:true});assert.equal(failed.entity,'3435910');assert.ok(calls);
+    const failed=await checkpoint(`${name}-failed`,{fault:true,capture:true});assert.equal(failed.entity,'earth');assert.ok(calls);
     assert.deepEqual(fixtureErrors,[],"The fixture must fail the intended bytes, not its own transport");
     await page.unroute(pattern,route);await activate('worldcover-land-cover');
     const recovered=await checkpoint(`${name}-recovered`,{capture:name==='provider-outage'});assert.ok(recovered.pages.length);
@@ -99,12 +105,12 @@ try{
 
   // Repeated actual entity/lens/body navigation. Pagehide is observed after
   // the application's registered teardown, before the old document is gone.
-  await page.locator('[data-entity-parent="earth"]').click();await settle();
+  await activate('normal');await settle();
   for(let cycle=0;cycle<5;cycle++){
     const transition=async(name,action)=>{await action();report.transitions.push({cycle,...await checkpoint(name)});};
     await transition('buenos-aires',()=>select('Buenos Aires','3435910'));
     await transition('noise',()=>activate('buenos-aires-noise'));
-    await transition('land-cover',()=>activate('worldcover-land-cover'));
+    await transition('earth-land-cover',async()=>{await page.locator('[data-entity-parent="earth"]').click();await settle();await activate('worldcover-land-cover');});
     await transition('tokyo',()=>select('Tokyo','1850147'));
     await transition('lagos',()=>select('Lagos','2332459'));
     await transition('buenos-aires-return',()=>select('Buenos Aires','3435910'));

@@ -1,9 +1,8 @@
 import { GEOGRAPHIC_LENS_CAPACITY, requireGeographicScope, geographicScopeIncludes } from "./geographic-lens-contract.mjs";
 
-// A source's prepared scope is independent of the current viewport containing
-// data. Entity kinds never enter runtime eligibility or dataset identity.
-// Preparation selects references, not source pixels or geometry. The directory
-// interns descriptors so a global observation has one package across all places.
+// Each card explicitly owns its observations. Dataset extent and parentage do
+// not grant ownership. Preparation interns package references independently of
+// card identity; entity kinds never enter runtime eligibility.
 export function preparedEntityLenses(inventory, objectId, entityId) {
   const lenses = inventory.filter(entry => geographicScopeIncludes(requireGeographicScope(entry.scope), objectId, entityId))
     .map(entry => entry.lens);

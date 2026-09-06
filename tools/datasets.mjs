@@ -7,7 +7,7 @@ import { parseArgs } from "node:util";
 import { OBJECTS } from "../site/objects.mjs";
 import { createSourceManifest, assertSourceBytes } from "../src/platform/source-manifest.mjs";
 import { publishSourceBytes } from "../src/platform/source-acquisition.mjs";
-import { requireGeographicLensPackage, requireGeographicLensReference } from "../src/platform/geographic-lens-contract.mjs";
+import { requireGeographicLensPackage, requireGeographicLensReference, requireGeographicScope } from "../src/platform/geographic-lens-contract.mjs";
 import { validateRuntimeAssetManifest } from "../src/platform/runtime-asset-closure.mjs";
 import { runtimeAssets, RUNTIME_ASSET_ORIGIN } from "./runtime-assets.mjs";
 import { installRuntimeAssets } from "./setup.mjs";
@@ -82,6 +82,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
         new Set(config.datasets.map(entry => entry.id)).size !== config.datasets.length ||
         config.datasets.some(entry => !/^[a-z0-9-]+$/u.test(entry.id) || !["prepared-local", "versioned-provider"].includes(entry.source?.type)) ||
         !Array.isArray(config.integration) || config.integration.some(command => !Array.isArray(command) || !command.length || command.some(arg => typeof arg !== "string"))) throw new Error("Invalid dataset inventory.");
+    for (const entry of config.datasets) requireGeographicScope(entry.scope);
     const selected = values.dataset?.length ? config.datasets.filter(entry => values.dataset.includes(entry.id)) : config.datasets;
     if (!selected.length || values.dataset?.some(id => !selected.some(entry => entry.id === id))) throw new Error("Unknown dataset selection.");
     const sourceRoot = resolve(planet, "source"), source = await createSourceManifest({ planetId: objectId, planetName: objectId, sourceRoot });
@@ -118,7 +119,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
         const descriptor = requireGeographicLensReference(module[entry.descriptorExport], `/scenes/${objectId}/`);
         const bytes = await readFile(resolve(root, `public${descriptor.package.url}`));
         if (bytes.length !== descriptor.package.bytes || hash(bytes) !== descriptor.package.sha256) throw new Error("Dataset package identity mismatch.");
-        const content = requireGeographicLensPackage(JSON.parse(bytes), descriptor, entry.scope.entityIds?.[0] ?? objectId, capacity, objectId);
+        const content = requireGeographicLensPackage(JSON.parse(bytes), descriptor, entry.scope.entityIds[0], capacity, objectId);
+        const owners = content.scope?.entityIds ?? content.entityIds;
+        if (owners.length !== entry.scope.entityIds.length || owners.some(id => !entry.scope.entityIds.includes(id))) throw new Error("Dataset package and card ownership differ.");
         observations.push({ id: entry.id, type: entry.source.type, scope: entry.scope, descriptor, source: content.source });
       }
       const bytes = dataReleaseBytes(objectId, assets, observations), id = hash(bytes);

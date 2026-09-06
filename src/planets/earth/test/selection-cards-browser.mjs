@@ -117,7 +117,7 @@ try {
       await select("Tokyo", "1850147");
       assert.equal(await noise.isVisible(), false);
       assert.equal(await page.evaluate(() => window.__earth.selectLens("buenos-aires-noise")), false);
-      assert.deepEqual(await page.locator('[data-lens-option]:not([hidden]) button[name="lens"]').evaluateAll(buttons => buttons.map(button => button.value)), ["normal", "worldcover-land-cover"]);
+      assert.deepEqual(await page.locator('[data-lens-option]:not([hidden]) button[name="lens"]').evaluateAll(buttons => buttons.map(button => button.value)), ["normal"]);
       await settlePages("city"); await capture("05-tokyo");
       await page.locator('[data-entity-parent="earth"]').click();
       await page.waitForFunction(() => document.querySelector("[data-entity-card]").dataset.entityId === "earth"); await flight();

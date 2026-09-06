@@ -81,7 +81,7 @@ try {
           sceneElements: nodes.length, stable: initial.length === nodes.length && initial.every((node,i)=>node===nodes[i]) };
       });
       assert.ok(state.stable);
-      if (name.startsWith("land-cover") || name === "root-return") assert.equal(state.activeLens, "worldcover-land-cover");
+      if (name.startsWith("land-cover")) assert.equal(state.activeLens, "worldcover-land-cover");
       if (name === "noise") assert.equal(state.activeLens, "buenos-aires-noise");
       assert.ok(!state.statuses.some(s=>/unavailable|could not|failed|loading/i.test(s)), state.statuses.join("; "));
       state.heap = await cdp.send("Runtime.getHeapUsage");
@@ -89,7 +89,7 @@ try {
       assert.ok(state.probe.peakSlots <= 544);
       run.checkpoints.push({ name, ...state });
       console.log(JSON.stringify({dpr,cache:run.cache,checkpoint:name,pages:state.pageKeys.length}));
-      if (run.cache === "cold" && ["land-cover-city", "noise", "land-cover-country"].includes(name)) await page.screenshot({ path: resolve(output, `${name}-dpr${dpr}.png`) });
+      if (run.cache === "cold" && ["land-cover-earth", "noise", "country"].includes(name)) await page.screenshot({ path: resolve(output, `${name}-dpr${dpr}.png`) });
     };
     const select = async (query, id) => {
       await page.locator(".planet-sidebar-search").fill(query); await page.locator(`[data-destination-id="${id}"]`).click();
@@ -104,12 +104,13 @@ try {
         await page.goto(`${server.url}/earth/`); await snapshot("initial");
         phase = "search-and-city"; await select("Buenos Aires", "3435910"); await snapshot("base-city");
         phase = "noise"; await page.locator('button[name="lens"][value="buenos-aires-noise"]').click(); await snapshot("noise");
-        phase = "land-cover"; await page.locator('button[name="lens"][value="worldcover-land-cover"]').click(); await snapshot("land-cover-city");
-        phase = "country"; await page.locator('[data-entity-parent="country:AR"]').click(); await snapshot("land-cover-country");
-        phase = "tokyo"; await select("Tokyo", "1850147"); await snapshot("land-cover-tokyo");
-        phase = "lagos"; await select("Lagos", "2332459"); await snapshot("land-cover-lagos");
+        phase = "country"; await page.locator('[data-entity-parent="country:AR"]').click(); await snapshot("country");
+        phase = "tokyo"; await select("Tokyo", "1850147"); await snapshot("tokyo");
+        phase = "lagos"; await select("Lagos", "2332459"); await snapshot("lagos");
+        phase = "earth"; await page.locator('[data-entity-parent="earth"]').click(); await snapshot("root-return");
+        phase = "land-cover"; await page.locator('button[name="lens"][value="worldcover-land-cover"]').click(); await snapshot("land-cover-earth");
         phase = "pan"; await page.mouse.move(1000,550); await page.mouse.down(); await page.mouse.move(1210,610,{steps:24}); await page.waitForTimeout(120); await page.mouse.up(); await snapshot("land-cover-pan");
-        phase = "root"; await page.locator('[data-entity-parent="earth"]').click(); await snapshot("root-return");
+        phase = "normal"; await page.locator('button[name="lens"][value="normal"]').click(); await snapshot("earth-normal");
         // Let outstanding editorial transport finish without changing tile accounting.
         await page.waitForTimeout(1000); await Promise.all(jobs); jobs = [];
         run.cdp = [...cdpRows.values()];

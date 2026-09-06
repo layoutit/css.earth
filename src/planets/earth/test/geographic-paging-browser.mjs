@@ -5,6 +5,8 @@ import { chromium } from "playwright";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { prepareLocationCamera, prepareLocationPoint } from "../tools/city/prepare-location.mjs";
 
+const { preparePlaceCatalog } = await import("../tools/prepare-places.mjs");
+const placesById = new Map((await preparePlaceCatalog()).places.map(place => [place.id, place]));
 const base = process.argv[2] ?? "http://127.0.0.1:4228";
 const dpr = Number(process.argv.find(arg => arg.startsWith("--dpr="))?.slice(6) ?? 1);
 const output = new URL(`../../../../output/playwright/geographic-paging-dpr${dpr}-${Date.now()}/`, import.meta.url);
@@ -41,7 +43,7 @@ const inspect = () => page.evaluate(() => {
 const settle = async () => {
   await page.waitForFunction(() => {
     const api = window.__earth, p = api?.runtime.pages().geographic;
-    return p && ["ready", "no-coverage", "error"].includes(api.runtime.geographicLens().status) &&
+    return p && ["idle", "ready", "no-coverage", "error"].includes(api.runtime.geographicLens().status) &&
       !p.pendingSelection && !p.activeLoads && !p.index.activeLoads && !api.camera.stats().dragInertia.destinationFlyTo.active;
   }, null, { timeout: 120000 });
   const state = await inspect();
@@ -92,7 +94,7 @@ try {
   await page.locator('button[name="lens"][value="worldcover-land-cover"]').click();
   await capture("earth-overview");
   for (const [query, id, label] of [["Buenos Aires", "3435910", "buenos-aires"], ["Tokyo", "1850147", "tokyo"], ["Lagos", "2332459", "lagos"]]) {
-    await select(query, id); await capture(label);
+    await page.evaluate(camera => window.__earth.camera.setState(camera), placesById.get(id).camera); await capture(label);
     for (const [n, dx, dy] of [[1, 280, 40], [2, -380, -100]]) {
       await page.mouse.move(1000, 550); await page.mouse.down();
       await page.mouse.move(1000 + dx, 550 + dy, { steps: 24 });
@@ -105,7 +107,7 @@ try {
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
     await capture(`${label}-zoom`);
   }
-  await page.locator('[data-entity-parent="earth"]').click(); await capture("root-return");
+  assert.equal((await inspect()).entity, "earth"); await capture("earth-owner-retained");
   for (const viewpoint of viewpoints) {
     await page.evaluate(camera => window.__earth.camera.setState(camera), viewpoint.camera);
     await capture(viewpoint.name);
@@ -120,6 +122,8 @@ try {
   await select("Buenos Aires", "3435910"); await capture("noise-before-switch");
   await page.locator('button[name="lens"][value="buenos-aires-noise"]').click(); await capture("noise");
   assert.equal((await inspect()).surface.retainedImages, 0);
+  await page.locator('[data-entity-parent="earth"]').click(); await settle();
+  await page.evaluate(camera => window.__earth.camera.setState(camera), placesById.get("3435910").camera);
   await page.locator('button[name="lens"][value="worldcover-land-cover"]').click(); await capture("land-cover-restored");
   report.probe = await page.evaluate(() => {
     const probe = window.__pagingProbe; probe.running = false;

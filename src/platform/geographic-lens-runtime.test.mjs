@@ -75,38 +75,37 @@ test("package identity, retained capacity and prepared geometry are validated be
   }
 });
 
-test("one object-scoped observation applies to any prepared entity, while local source scope stays exact", () => {
-  const global = { scope: { objectId: "earth" }, lens: { ...descriptor, id: "global-fixture" } };
-  const inventory = [...PREPARED_GEOGRAPHIC_LENSES, global];
+test("card ownership is explicit and never inherited from a body or parent", () => {
   for (const id of ["earth", "country:AR", "admin1:3433955", "3435910", "1850147", "future-geographic-entity"]) {
-    const refs = preparedEntityLenses(inventory, "earth", id);
-    assert.equal(refs.at(-1), global.lens);
-    assert.equal(refs.some(lens => lens.id === descriptor.id), id === "3435910");
+    const refs = preparedEntityLenses(PREPARED_GEOGRAPHIC_LENSES, "earth", id);
+    assert.deepEqual(refs.map(lens => lens.id), id === "earth" ? ["worldcover-land-cover"] : id === "3435910" ? ["buenos-aires-noise"] : []);
   }
-  assert.deepEqual(preparedEntityLenses(inventory, "mars", "earth"), []);
-  for (const value of [null, {}, {objectId:"earth",entityIds:[]}, {objectId:"earth",entityIds:["x","x"]}, {objectId:"earth",kinds:["city"]}]) {
+  assert.deepEqual(preparedEntityLenses(PREPARED_GEOGRAPHIC_LENSES, "mars", "earth"), []);
+  for (const value of [null, {}, {objectId:"earth"}, {objectId:"earth",entityIds:[]}, {objectId:"earth",entityIds:["x","x"]}, {objectId:"earth",kinds:["city"]}]) {
     assert.throws(() => requireGeographicScope(value), /scope/);
   }
 });
 
-test("the same loaded observation survives compatible entity changes without another package or page plan", async () => {
-  const value = { ...content, schema: "cssearth-geographic-lens@2", id: "global-fixture", scope: { objectId: "earth" } };
+test("sharing a prepared package does not carry an active lens between cards", async () => {
+  const value = { ...content, schema: "cssearth-geographic-lens@2", id: "shared-fixture", scope: { objectId: "earth", entityIds: ["earth", "country:AR"] } };
   delete value.entityIds;
   const fixtureBytes = Buffer.from(JSON.stringify(value)), sha256 = hash(fixtureBytes);
   const lens = { ...descriptor, id: value.id, package: { url: `/scenes/earth/fixture-${sha256.slice(0,16)}.json`, bytes: fixtureBytes.length, sha256 } };
   const h = harness(() => new Response(fixtureBytes));
-  h.setEntity({ id: "earth", lenses: [lens] });
+  const earth = { id: "earth", lenses: [lens] }, country = { id: "country:AR", lenses: [lens] };
+  h.setEntity(earth);
   assert.equal(await h.runtime.select(lens.id), true);
-  for (const id of ["country:AR", "admin1:3433955", "3435910", "earth"]) {
-    const entity = { id, lenses: [lens] };
-    assert.equal(h.runtime.canRetain(entity), true);
-    h.setEntity(entity); h.runtime.reconcileEntity();
-    assert.equal(h.runtime.state().id, lens.id);
-    assert.equal(h.runtime.state().status, "ready");
-  }
-  assert.equal(h.requests.length, 1); assert.equal(h.replacements.filter(Boolean).length, 1);
-  assert.equal(h.runtime.canRetain({id:"x",lenses:[{...lens,package:{...lens.package,sha256:"different"}}]}), false);
+  assert.equal(h.runtime.canRetain(earth), true);
+  assert.equal(h.runtime.canRetain(country), false);
+  h.setEntity(country); h.runtime.reconcileEntity();
+  assert.equal(h.runtime.state().id, null); assert.equal(h.mounted(), null);
+  assert.equal(await h.runtime.select(lens.id), true);
+  assert.equal(h.runtime.canRetain(country), true);
+  assert.equal(h.runtime.canRetain(earth), false);
+  assert.equal(h.requests.length, 2);
+  assert.equal(h.runtime.canRetain({id:"country:AR",lenses:[{...lens,package:{...lens.package,sha256:"different"}}]}), false);
   assert.throws(() => requireGeographicLensPackage(value, lens, "earth", capacity, "mars"), /identity/);
-  h.setEntity({ id: "unavailable", lenses: [] }); h.runtime.reconcileEntity();
-  assert.equal(h.runtime.state().id, null); assert.equal(h.mounted(), null); h.runtime.destroy();
+  const inherited = structuredClone(value); delete inherited.scope.entityIds;
+  assert.throws(() => requireGeographicLensPackage(inherited, lens, "earth", capacity, "earth"), /scope/);
+  h.runtime.destroy();
 });

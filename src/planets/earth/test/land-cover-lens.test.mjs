@@ -23,21 +23,22 @@ const rootBytes = await readFile(publicFile(plan.rootDirectory.url));
 const roots = JSON.parse(gunzipSync(rootBytes));
 const hash = bytes => createHash("sha256").update(bytes).digest("hex");
 
-test("one land-cover identity is interned across the root and all 38,252 sourced places", async () => {
-  const catalog = await preparePlaceCatalog(), lens = PREPARED_GEOGRAPHIC_LENSES.find(entry => entry.lens.id === descriptor.id).lens;
+test("Earth owns land cover and no country, region or city inherits it", async () => {
+  const catalog = await preparePlaceCatalog();
   assert.equal(catalog.places.length, 38252);
   assert.deepEqual(PREPARED_ROOT_GEOGRAPHIC_LENSES, [descriptor]);
   for (const entity of catalog.places) {
-    assert.equal(entity.lenses.find(item => item.id === descriptor.id), lens);
+    assert.equal(entity.lenses.some(item => item.id === descriptor.id), false);
     assert.equal(entity.lenses.some(item => item.id === "buenos-aires-noise"), entity.id === "3435910");
-    assert.ok(entity.lensIds.includes(descriptor.id));
+    assert.equal(entity.lensIds.includes(descriptor.id), false);
   }
 });
 
 test("the small lazy package pins its overview and reuses the existing global geometry directories", async () => {
   assert.equal(hash(bytes), descriptor.package.sha256);
   assert.ok(bytes.length < 16 * 1024);
-  assert.equal(content.scope.objectId, "earth"); assert.equal(content.entityIds, undefined);
+  assert.deepEqual(content.scope, { objectId: "earth", entityIds: ["earth"] });
+  for (const id of ["3435910", "1850147", "country:AR", "admin1:3433955"]) assert.throws(() => requireGeographicLensPackage(content, descriptor, id, prepareOverlayCapacity(), "earth"), /identity/);
   assert.equal(plan.roots.length, 0); assert.equal(plan.poolSize, 32);
   assert.equal(plan.geometryVersion, "fef1519d5f243617");
   assert.equal(requireGeographicLensPackage(content, descriptor, "earth", prepareOverlayCapacity(), "earth"), content);

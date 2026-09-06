@@ -23,7 +23,10 @@
     {
       "id": "worldcover-land-cover",
       "scope": {
-        "objectId": "earth"
+        "objectId": "earth",
+        "entityIds": [
+          "earth"
+        ]
       },
       "prepare": "tools/prepare-land-cover-lens.mjs",
       "prepared": "runtime/preparedLandCover.mjs",

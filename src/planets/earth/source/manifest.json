@@ -697,9 +697,9 @@
     },
     {
       "path": "observations.json",
-      "expectedSha256": "0dd42dcd7063de2fa824c236f00f1d3a9990d6f978e46939e35e14401ff978c8",
-      "expectedBytes": 1415,
-      "purpose": "Prepared observation package inventory and source applicability; entity kinds do not define separate lens implementations"
+      "expectedSha256": "23d0b55ed34f3e9fde62ddcbacb7f0e22952e101044c4c34b1c11383ebee2179",
+      "expectedBytes": 1467,
+      "purpose": "Prepared observation package inventory and explicit card ownership; source extent and entity parentage do not grant lenses"
     },
     {
       "path": "land-cover/overview-acquisition.json",

@@ -7,8 +7,11 @@ import { PREPARED_EARTH_CITY_PAGES as geometry } from "../runtime/preparedCityPa
 import { bakeEarthSurfaceRaster } from "./surface-raster.mjs";
 import { preparePolarAtlas } from "./polar-raster.mjs";
 import { prepareOverlayCapacity } from "./city/geographic-overlay.mjs";
-import { requireGeographicLensPackage } from "../../../platform/geographic-lens-contract.mjs";
+import { requireGeographicLensPackage, requireGeographicScope } from "../../../platform/geographic-lens-contract.mjs";
 import { requireGeographicRoots } from "../../../platform/prepared-map/geographic-index-contract.mjs";
+
+const inventory = JSON.parse(await readFile(new URL("../source/observations.json", import.meta.url)));
+const ownership = requireGeographicScope(inventory.datasets.find(entry => entry.id === "worldcover-land-cover")?.scope);
 
 const hash = bytes => createHash("sha256").update(bytes).digest("hex");
 const root = new URL("../source/land-cover/", import.meta.url);
@@ -80,7 +83,7 @@ const pages = { ...capacity, dataset: pin.dataset, geometryDataset: geometry.dat
     urlTemplate: pin.service.urlTemplate.replace("{TileMatrixSet}", pin.service.matrixSet), matrixSet: pin.service.matrixSet,
     tileSize: pin.service.tileSize, levels: pin.service.levels.map(value => String(value).padStart(2,"0")), extent: pin.service.extent,
     emptyImage: Object.fromEntries(Object.entries(pin.service.emptyImage).filter(([key]) => ["bytes","sha256","width","height"].includes(key))) } };
-const content = { schema: "cssearth-geographic-lens@2", id: "worldcover-land-cover", label: "Land cover", scope: { objectId: "earth" }, baseLensId: "normal",
+const content = { schema: "cssearth-geographic-lens@2", id: "worldcover-land-cover", label: "Land cover", scope: ownership, baseLensId: "normal",
   qualification: pin.qualification, coverage: { extent: pin.service.extent, qualification: "Source gaps retain the base map. The overview is sampled from level 3; available detail uses prepared levels 5–14." },
   source: { publisher: pin.publisher, year: pin.year, units: "Land-cover categories", url: pin.sourcePage, license: pin.license, licenseUrl: pin.licenseUrl, sha256: hash(manifestBytes) },
   legend: { kind: "categories", title: "Land cover", meta: `${pin.year} · ${pin.algorithm}`, items: palette.map(({value,...item}) => item) },

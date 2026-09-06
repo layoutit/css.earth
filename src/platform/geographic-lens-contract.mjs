@@ -27,7 +27,7 @@ export function requireGeographicLensReference(value, assetPath) {
 export function requireGeographicScope(scope) {
   if (!scope || !/^[a-z][a-z0-9-]*$/u.test(scope.objectId ?? "") ||
       Object.keys(scope).some(key => !["objectId", "entityIds"].includes(key)) ||
-      scope.entityIds !== undefined && (!Array.isArray(scope.entityIds) || !scope.entityIds.length ||
+      (!Array.isArray(scope.entityIds) || !scope.entityIds.length ||
         scope.entityIds.length > 65536 || new Set(scope.entityIds).size !== scope.entityIds.length ||
         scope.entityIds.some(id => typeof id !== "string" || !id.length || id.length > 128))) {
     throw new Error("Invalid prepared geographic scope.");
@@ -36,13 +36,13 @@ export function requireGeographicScope(scope) {
 }
 
 export function geographicScopeIncludes(scope, objectId, entityId) {
-  return scope.objectId === objectId && (scope.entityIds === undefined || scope.entityIds.includes(entityId));
+  return scope.objectId === objectId && Array.isArray(scope.entityIds) && scope.entityIds.includes(entityId);
 }
 
 export function geographicPackageIncludes(value, objectId, entityId) {
   return value?.schema === "cssearth-geographic-lens@1" ? value.entityIds?.includes(entityId) === true :
     value?.schema === "cssearth-geographic-lens@2" && value.scope?.objectId === objectId &&
-      (value.scope.entityIds === undefined || Array.isArray(value.scope.entityIds) && value.scope.entityIds.includes(entityId));
+      Array.isArray(value.scope.entityIds) && value.scope.entityIds.includes(entityId);
 }
 
 export function requireGeographicLensPackage(value, descriptor, entityId, capacity, objectId) {

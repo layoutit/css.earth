@@ -18,7 +18,7 @@ const status = () => page.evaluate(() => ({ lens: window.__earth.runtime.geograp
   entity: document.querySelector("[data-entity-card]").dataset.entityId }));
 const settle = () => page.waitForFunction(() => {
   const state = window.__earth?.runtime.geographicLens(), pages = window.__earth?.runtime.pages().geographic;
-  return ["ready", "no-coverage"].includes(state?.status) && !pages.pendingSelection && !pages.activeLoads && !pages.index.activeLoads &&
+  return ["idle", "ready", "no-coverage"].includes(state?.status) && !pages.pendingSelection && !pages.activeLoads && !pages.index.activeLoads &&
     !window.__earth.camera.stats().dragInertia.destinationFlyTo.active;
 }, null, { timeout: 120000 });
 const capture = async name => {
@@ -44,7 +44,8 @@ try {
     await page.locator(`[data-destination-id="${id}"]`).click();
     await page.waitForFunction(id => document.querySelector("[data-entity-card]").dataset.entityId === id, id);
     await settle();
-    assert.equal((await status()).lens.id, "worldcover-land-cover");
+    assert.equal((await status()).lens.id, null);
+    assert.equal(await page.locator('button[name="lens"][value="worldcover-land-cover"]').isVisible(), false);
     await capture(name);
   }
   assert.equal(report.requests.filter(url => url.includes("geographic-lens-worldcover-land-cover-")).length, 1);
