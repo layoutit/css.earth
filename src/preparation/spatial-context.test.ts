@@ -6,6 +6,21 @@ import type { OrbitalState } from './spatial-context.js';
 
 const sourcePath = 'src/planets/sun/source/navigation/universe.json';
 
+test('prepared volume opacity preserves authored grading and validates bounded levels and ordered distances', async () => {
+  const raw = JSON.parse(await readFile(sourcePath, 'utf8'));
+  const source = parseWorldContextSource(raw), profile = source.volume.opacityProfile!;
+  assert.deepEqual(profile, { model: 'logarithmic-distance', nearOpacity: .12, fullOpacity: 1,
+    fadeStartDistanceM: 3.085677581491367e16, fullDistanceM: 3.085677581491367e19 });
+  assert.deepEqual(prepareWorldContext({ ...source, bodies: [] }, {}, {}).volume.opacityProfile, profile);
+  const { opacityProfile: _profile, ...legacyVolume } = raw.volume;
+  assert.equal(parseWorldContextSource({ ...raw, volume: legacyVolume }).volume.opacityProfile, undefined);
+  for (const invalid of [{ ...profile, model: 'linear' }, { ...profile, nearOpacity: -.01 }, { ...profile, fullOpacity: 1.01 },
+    { ...profile, fullOpacity: NaN }, { ...profile, nearOpacity: undefined }, { ...profile, fadeStartDistanceM: 0 },
+    { ...profile, fullDistanceM: profile.fadeStartDistanceM }, { ...profile, runtimeExposure: true }]) {
+    assert.throws(() => parseWorldContextSource({ ...raw, volume: { ...raw.volume, opacityProfile: invalid } }), /opacity/i);
+  }
+});
+
 test('stellar handoff survives preparation and rejects missing or out-of-order ranges', async () => {
   const raw = JSON.parse(await readFile(sourcePath, 'utf8')) as Record<string, unknown>;
   const expected = { objectId:'stellar-neighbourhood',fadeStartDistanceM:1.495978707e13,fullDistanceM:3.085677581491367e15 };

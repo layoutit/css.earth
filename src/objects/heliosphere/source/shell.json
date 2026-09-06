@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-surface-shell-recipe@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "originM": [
+      0,
+      0,
+      0
+    ],
+    "localToReferenceXyzw": [
+      0.03513113833981278,
+      0.027299641271711732,
+      0.7888379488084487,
+      -0.6129887627233179
+    ],
+    "metersPerUnit": 149597870700,
+    "boundsUnits": {
+      "min": [
+        -210,
+        -111,
+        -111
+      ],
+      "max": [
+        120,
+        111,
+        111
+      ]
+    }
+  },
+  "shape": {
+    "kind": "asymmetric-radial-shell",
+    "radiusUnits": 120,
+    "latitudeSegments": 32,
+    "longitudeSegments": 64,
+    "tailExponent": 2,
+    "tailExtension": 0.75,
+    "transverseScale": 0.92,
+    "transverseContraction": 0.22,
+    "lobeAmplitude": 0.38,
+    "lobeSharpness": 4
+  },
+  "material": {
+    "colorLinear": [
+      0.5,
+      0.9,
+      0.8
+    ],
+    "opacity": 0.2,
+    "rimFadeFacing": 0.1
+  },
+  "atlas": {
+    "tileSize": 64,
+    "columns": 16,
+    "frames": 128
+  },
+  "visibility": {
+    "hiddenInsideUnits": 100,
+    "fullUntilUnits": 5000,
+    "hiddenBeyondUnits": 6000
+  },
+  "unitScale": 50,
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "e5ec9e2160a24d0207fcf3e86a76d4cfb46f618ae25912e43313ae82efa11ec2"
+  }
+}

@@ -41,6 +41,13 @@ export interface PreparedContextCameraPresentation {
   readonly orbitLineFade: OrbitLineFade;
   readonly drag: { readonly model: 'screen-axis-tumble' };
 }
+export interface PreparedVolumeOpacityProfile {
+  readonly model: 'logarithmic-distance';
+  readonly nearOpacity: number;
+  readonly fullOpacity: number;
+  readonly fadeStartDistanceM: number;
+  readonly fullDistanceM: number;
+}
 export interface PreparedWorldContext {
   readonly schema: 'cssearth-world-context@1';
   readonly frame: PreparedWorldCameraFrame;
@@ -48,7 +55,7 @@ export interface PreparedWorldContext {
   readonly bodies: readonly PreparedContextBody[];
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
-  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
+  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number; readonly opacityProfile?: PreparedVolumeOpacityProfile };
   readonly stars: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
   readonly sky: { readonly sceneRegistration: string };
@@ -158,7 +165,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     }
   }
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
-  const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
+  const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
   const starId = text(stars.objectId, 'star field identity');
   const starStart = positive(stars.fadeStartDistanceM, 'star field fade start');
@@ -183,9 +190,26 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
   return Object.freeze({ schema: 'cssearth-world-context@1', frame, focus, bodies: Object.freeze(bodies),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
-    volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM }),
+    volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM,
+      ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }) }),
     stars: Object.freeze({ objectId: starId, fadeStartDistanceM: starStart, fullDistanceM: starFull }),
     system: Object.freeze({ fadeOutStartDistanceM, hiddenDistanceM }), sky });
+}
+
+function parseVolumeOpacityProfile(value: unknown): PreparedVolumeOpacityProfile {
+  const input = record(value, 'volume opacity profile', ['model', 'nearOpacity', 'fullOpacity', 'fadeStartDistanceM', 'fullDistanceM']);
+  if (input.model !== 'logarithmic-distance') throw new TypeError('Unsupported volume opacity profile model.');
+  const nearOpacity = finite(input.nearOpacity, 'volume near opacity'), fullOpacity = finite(input.fullOpacity, 'volume full opacity');
+  const fadeStartDistanceM = positive(input.fadeStartDistanceM, 'volume opacity fade start'), fullDistanceM = positive(input.fullDistanceM, 'volume opacity full distance');
+  if (nearOpacity < 0 || nearOpacity > 1 || fullOpacity < 0 || fullOpacity > 1 || !(fadeStartDistanceM < fullDistanceM)) throw new TypeError('Volume opacity profile is invalid.');
+  return Object.freeze({ model: input.model, nearOpacity, fullOpacity, fadeStartDistanceM, fullDistanceM });
+}
+
+/** Applies prepared grading by common-focus distance, independently of camera angle or selected detail. */
+export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolumeOpacityProfile): number {
+  if (!profile) return 1;
+  const fade = logarithmicFade(distanceM, profile.fadeStartDistanceM, profile.fullDistanceM);
+  return profile.nearOpacity + (profile.fullOpacity - profile.nearOpacity) * fade;
 }
 
 export function logarithmicFade(distanceM: number, startM: number, endM: number): number {

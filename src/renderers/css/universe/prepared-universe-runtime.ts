@@ -2,18 +2,21 @@ import { mountPreparedCssVolume } from '../volume/prepared-volume-runtime.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import { logarithmicFade, mountPreparedWorldContext, parsePreparedWorldContext } from './prepared-world-context.js';
+import { logarithmicFade, mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedCssPointField } from '../stars/types.js';
 import { mountPreparedCssPointField } from '../stars/prepared-point-field-runtime.js';
 import { mountWorldContextPointSource } from './world-context-point-source.js';
 import type { PreparedAssets } from '../rendering/prepared-residency.js';
+import type { PreparedCssSurfaceShell } from '../shell/types.js';
+import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
-export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites }: {
+export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [] }: {
   context: unknown; volume: PreparedCssVolume; stars: PreparedCssPointField;
   resolveStarResource(path: string): string; resolveResource(path: string): string;
   sprites: Readonly<Record<string, SpriteWithUrl>>;
+  shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
 }) {
   const plan = parsePreparedWorldContext(context), payload = validatePreparedCssVolume(volume);
   if (payload.id !== plan.volume.objectId || stars.id !== plan.stars.objectId ||
@@ -24,11 +27,20 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
   const entries = payload.resources.map(resource => ({ key: `${pool}:${resource.path}`, url: resolveResource(resource.path), pool }));
   const starEntries = stars.resources.filter(resource => resource.path === stars.atlas.path).map(resource => ({
     key: `${starPool}:${resource.path}`, url: resolveStarResource(resource.path), pool: starPool }));
+  const shellEntries = shells.flatMap(({ payload, resolveResource }) => {
+    if (payload.frame.referenceFrame !== plan.frame.referenceFrame || payload.frame.epochJdTt !== plan.frame.epochJdTt) {
+      throw new TypeError('Prepared shells must share the universe reference frame and epoch.');
+    }
+    return payload.resources.map(resource => ({ key: `shell:${payload.id}:${resource.path}`,
+      url: resolveResource(resource.path), pool: `shell:${payload.id}` }));
+  });
   const assets: PreparedAssets = {
-    entries: [...entries, ...starEntries],
+    entries: [...entries, ...starEntries, ...shellEntries],
     pools: [{ id: pool, retention: 'mount', capacity: entries.length, concurrency: 8, reuse: false, decoding: 'async' },
-      { id: starPool, retention: 'mount', capacity: starEntries.length, concurrency: 8, reuse: false, decoding: 'async' }],
-    startup: [...entries, ...starEntries].map(entry => entry.key),
+      { id: starPool, retention: 'mount', capacity: starEntries.length, concurrency: 8, reuse: false, decoding: 'async' },
+      ...shells.map(({ payload }) => ({ id: `shell:${payload.id}`, retention: 'mount' as const,
+        capacity: payload.resources.length, concurrency: 2, reuse: false, decoding: 'async' as const }))],
+    startup: [...entries, ...starEntries, ...shellEntries].map(entry => entry.key),
   };
   return Object.freeze({ assets,
     mount(stage: HTMLElement) {
@@ -47,17 +59,21 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
       let pointField: ReturnType<typeof mountPreparedCssPointField> | null = null;
       let focusPoint: ReturnType<typeof mountWorldContextPointSource> = null;
+      const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       let selected = plan.focus;
       let destroyed = false;
       const destroy = () => {
         if (destroyed) return;
         destroyed = true;
-        volumeLayer?.destroy(); spatial?.destroy(); pointField?.destroy(); focusPoint?.destroy(); root.remove();
+        volumeLayer?.destroy(); spatial?.destroy(); pointField?.destroy(); focusPoint?.destroy();
+        for (const shell of shellLayers) shell.destroy();
+        root.remove();
         delete stage.dataset.contextScale;
       };
       try {
         volumeLayer = mountPreparedCssVolume({ host: volumeHost, before: volumeEnd, payload, resolveResource });
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus });
+        for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         spatial = mountPreparedWorldContext({ host: root, before: end, plan, sprites });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource });
         return Object.freeze({ root, destroy,
@@ -77,10 +93,13 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
             const stellarFade = logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
+            const volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
             volumeHost.style.visibility = '';
-            volumeHost.dataset.volumeOpacity = '1';
+            volumeHost.style.opacity = String(volumeOpacity);
+            volumeHost.dataset.volumeOpacity = String(volumeOpacity);
             volumeLayer!.publish({ world, viewport });
             pointField!.publish(world, viewport, 1 - fade);
+            for (const shell of shellLayers) shell.publish(world, viewport);
             spatial!.publish(world, viewport);
             focusPoint?.publish(world, viewport, { opacity: 1 - fade, selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });

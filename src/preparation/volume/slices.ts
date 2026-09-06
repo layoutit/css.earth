@@ -1,12 +1,12 @@
 /** Offline axis-aligned density slabs and straight-alpha raster preparation. */
-import { mkdir, writeFile, readFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import sharp from 'sharp';
+import { encodeVolumeRaster } from './raster.js';
 import { loadVolumeSource, sampleEncoded, sha256, type VolumeSource } from './source.js';
 import type { Axis, Bounds3, Vector3, RadialEmission, VolumeRecipe } from './config.js';
 export interface VolumeSliceQuad {
   id: string; axis: Axis; sliceIndex: number; texturePath: string; widthPx: number; heightPx: number;
-  /** PNG top-left first: required by PolyCSS's image/projective backend. */
+  /** Image top-left first: required by PolyCSS's image/projective backend. */
   vertices: [Vector3, Vector3, Vector3, Vector3];
   uvs: [[number, number], [number, number], [number, number], [number, number]];
   center: Vector3; normal: Vector3; sha256: string; bytes: number; alphaCoverage: number;
@@ -59,7 +59,27 @@ function point(axis: Axis, depth: number, u: number, v: number): Vector3 {
   if (axis === 'y') return [u, depth, v];
   return [u, v, depth];
 }
-function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: number, width: number, height: number,
+export function slabStepSize(recipe: VolumeRecipe, axis: Axis, slabWidth: number): number {
+  const index = axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
+  const metric = recipe.material.stepMetric === 'texture' ? 1 / (recipe.grid.bounds.max[index] - recipe.grid.bounds.min[index]) : 1;
+  return slabWidth / recipe.bake.samplesPerSlab * recipe.material.stepScale * recipe.bake.opticalWeight * metric;
+}
+export function withinVolumeSupport(recipe: VolumeRecipe, position: Vector3): boolean {
+  const support = recipe.material.cylinderSupport;
+  if (!support) return true;
+  const axial = support.axis === 'x' ? 0 : support.axis === 'y' ? 1 : 2;
+  let squared = 0;
+  for (let axis = 0; axis < 3; axis++) if (axis !== axial) {
+    const coordinate = 2 * ((position[axis]! - recipe.grid.bounds.min[axis]!) /
+      (recipe.grid.bounds.max[axis]! - recipe.grid.bounds.min[axis]!)) - 1;
+    squared += coordinate * coordinate;
+  }
+  return squared <= support.radiusSquared;
+}
+export function channelDensity(encoded: number, encoding: VolumeRecipe['grid']['encoding'], decodedPower = 1): number {
+  return encoded ** ((encoding === 'sqrt-density-unorm8' ? 2 : 1) * decodedPower);
+}
+export function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: number, width: number, height: number,
   radialTable: Float64Array | undefined): { rgba: Buffer; alphaCoverage: number } {
   const { material, bake, grid } = source.recipe;
   const pixels = Buffer.alloc(width * height * 4);
@@ -68,8 +88,7 @@ function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: nu
   const horizontal = axis === 'x' ? 1 : 0, vertical = axis === 'z' ? 1 : 2;
   const uMin = grid.bounds.min[horizontal], uMax = grid.bounds.max[horizontal];
   const vMin = grid.bounds.min[vertical], vMax = grid.bounds.max[vertical];
-  const samples = bake.samplesPerSlab, ds = slabWidth / samples * material.stepScale * bake.opticalWeight;
-  const power = grid.encoding === 'sqrt-density-unorm8' ? 2 : 1;
+  const samples = bake.samplesPerSlab, ds = slabStepSize(source.recipe, axis, slabWidth);
   let nonzero = 0;
   for (let row = 0; row < height; row++) {
     const v = vMax - (vMax - vMin) * (row + 0.5) / height;
@@ -79,15 +98,16 @@ function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: nu
       for (let sample = 0; sample < samples; sample++) {
         const d = depth + slabWidth * ((sample + 0.5) / samples - 0.5);
         const [x, y, z] = point(axis, d, u, v);
+        if (!withinVolumeSupport(source.recipe, [x, y, z])) continue;
         sampleEncoded(source, x, y, z, encoded);
         const profile = material.radialEmission;
         const radialDensity = profile && radialTable ? radialSample(radialTable, Math.hypot(x, y, z / profile.flattening)) *
           (1 - smoothstep(profile.verticalTaper[0], profile.verticalTaper[1], Math.abs(z))) : 0;
         for (let channel = 0; channel < 3; channel++) {
           let light = 0, absorption = 0;
-          for (const field of material.emission) light += (encoded[field.channel] ?? 0) ** power * field.strength * (field.color[channel] ?? 0);
+          for (const field of material.emission) light += channelDensity(encoded[field.channel] ?? 0, grid.encoding, field.decodedPower) * field.strength * (field.color[channel] ?? 0);
           if (profile) light += radialDensity * profile.strength * (profile.color[channel] ?? 0);
-          for (const field of material.absorption) absorption += (encoded[field.channel] ?? 0) ** power * field.strength * (field.color[channel] ?? 0);
+          for (const field of material.absorption) absorption += channelDensity(encoded[field.channel] ?? 0, grid.encoding, field.decodedPower) * field.strength * (field.color[channel] ?? 0);
           emission[channel] = (emission[channel] ?? 0) + ds * material.intensityScale * light;
           tau[channel] = (tau[channel] ?? 0) + absorption * ds;
         }
@@ -139,20 +159,21 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
         if (right < left) { left = right = Math.floor(width / 2); top = bottom = Math.floor(height / 2); }
       }
       const croppedWidth = right - left + 1, croppedHeight = bottom - top + 1;
-      const texturePath = `slices/${axis}/${String(index).padStart(2, '0')}.png`, target = resolve(options.outputDirectory, texturePath);
-      await sharp(baked.rgba, { raw: { width, height, channels: 4 } })
-        .extract({ left, top, width: croppedWidth, height: croppedHeight }).png().toFile(target);
+      const texturePath = `slices/${axis}/${String(index).padStart(2, '0')}.${bake.imageEncoding?.format ?? 'png'}`;
+      const target = resolve(options.outputDirectory, texturePath);
+      const bytes = await encodeVolumeRaster({ rgba: baked.rgba, width, height,
+        crop: { left, top, width: croppedWidth, height: croppedHeight }, encoding: bake.imageEncoding });
+      await writeFile(target, bytes);
       const uMin = uLower + (uUpper - uLower) * left / width, uMax = uLower + (uUpper - uLower) * (right + 1) / width;
       const vMax = vUpper - (vUpper - vLower) * top / height, vMin = vUpper - (vUpper - vLower) * (bottom + 1) / height;
-      // Image/projective maps PNG corners by vertex order; UV-only flips do not correct it.
+      // Image/projective maps image corners by vertex order; UV-only flips do not correct it.
       const vertices: [Vector3, Vector3, Vector3, Vector3] = [point(axis, depth, uMin, vMax), point(axis, depth, uMax, vMax),
         point(axis, depth, uMax, vMin), point(axis, depth, uMin, vMin)];
       for (const vertex of vertices) for (let i = 0; i < 3; i++) vertex[i] = (vertex[i] ?? 0) * scale;
       const center = point(axis, depth * scale, (uMin + uMax) * scale / 2, (vMin + vMax) * scale / 2);
       const normal: Vector3 = axis === 'x' ? [-1, 0, 0] : axis === 'y' ? [0, 1, 0] : [0, 0, -1];
-      const png = await readFile(target);
       quads.push({ id: `${axis}-${index}`, axis, sliceIndex: index, texturePath, widthPx: croppedWidth, heightPx: croppedHeight,
-        vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center, normal, sha256: sha256(png), bytes: png.length,
+        vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center, normal, sha256: sha256(bytes), bytes: bytes.length,
         alphaCoverage: baked.alphaCoverage * width * height / (croppedWidth * croppedHeight) });
     }
     console.log(`Prepared ${counts[axis]} ${axis.toUpperCase()} scalar-field slabs.`);

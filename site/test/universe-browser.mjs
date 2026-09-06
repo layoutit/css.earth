@@ -21,7 +21,8 @@ try {
   if (await motion.isChecked()) await motion.uncheck({ force: true });
   snapshots.initial = await read(page);
   await page.screenshot({ path: resolve(output, 'sun-integrated.png') });
-  check('one selected object with all prepared volume leaves ready', snapshots.initial.roots === 1 && snapshots.initial.slices === 288 && snapshots.initial.stable);
+  check('one selected object with all prepared volume leaves ready', snapshots.initial.roots === 1 &&
+    snapshots.initial.slices === preparedVolume.data.stacks.flatMap(stack => stack.leaves).length && snapshots.initial.stable);
   check('detailed object and contextual layers share the same rendered focal length', await page.evaluate(() => {
     const root = document.querySelector('.polycss-camera');
     const cssFocal = parseFloat(getComputedStyle(root).perspective);

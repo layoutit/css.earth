@@ -7,17 +7,17 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -13546364515707167000,
-        -215613549494545320000,
-        -119436920666867320000
+        -13547678355343626000,
+        -215634148836467800000,
+        -119449188638369900000
       ],
       "localToReferenceXyzw": [
-        -0.4832115464916599,
-        0.19625812464824352,
-        0.6992288376354541,
-        -0.4889461958801445
+        0.26949593540448213,
+        -0.4510814161748912,
+        -0.25008111046409387,
+        0.8132385473962505
       ],
-      "metersPerUnit": 82696760000000000000,
+      "metersPerUnit": 60000000000000000000,
       "boundsUnits": {
         "min": [
           -10,
@@ -33,12 +33,12 @@
     },
     "preparation": {
       "source": "source/volume.json",
-      "sha256": "0e17567f4f859ed5a2c1f94978dcc2bb1817bf1a231326ac0c09928acf74316c"
+      "sha256": "49cee9063a69c1fa23241b792f72780b4cb57ee8861fbcdaa442b02321314a40"
     }
   },
   "prepared": {
     "format": "cssearth-density-volume@1",
     "url": "prepared/volume.json",
-    "sha256": "07a82947abda933f4dfbde1279c6679e38d8f04c69a2372f94981f9ab232d0d7"
+    "sha256": "d4493f57338aa6bdbb9885935066cf84be864de89a7ebf4acc307f7dc18fdc41"
   }
 }
