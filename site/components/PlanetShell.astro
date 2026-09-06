@@ -1,6 +1,6 @@
 ---
 import { OBJECTS } from "../objects.mjs";
-import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
+import { PLANET_SEARCH_OBJECTS, objectClassificationLabel } from "../planet-search-objects.mjs";
 import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { orderFacts } from "../fact-order.mjs";
@@ -161,6 +161,7 @@ const initialSpeedState = speedSetting?.state ?? "normal";
 const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
 const planetCount = PLANET_SEARCH_OBJECTS.length;
 const activeObject = OBJECTS.find((object) => object.id === objectId);
+const classificationLabel = activeObject && objectClassificationLabel(activeObject.classification);
 const hasResources = resources.length > 0;
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ??
@@ -180,6 +181,13 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       autocomplete="off"
       value={activeObject?.name ?? ""}
     />
+    <button
+      class="planet-sidebar-view-all"
+      type="button"
+      aria-controls={`${objectId}-object-browser`}
+      aria-label="View all objects"
+      aria-pressed="false"
+    >×</button>
   </div>
   <section class="explorer-about-panel" id={`${objectId}-about`} aria-labelledby={`${objectId}-about-title`} hidden>
     <h2 id={`${objectId}-about-title`}>About</h2>
@@ -257,6 +265,24 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
               />
             </svg>
           </h1>
+          {activeObject && classificationLabel && <div class="planet-title-tags">
+            <button
+              class="planet-classification-tag planet-title-tag"
+              type="button"
+              data-object-query={`${classificationLabel}s`}
+              aria-controls={`${objectId}-object-browser`}
+              aria-label={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
+              title={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
+            >{classificationLabel}</button>
+            <button
+              class="planet-distance-tag planet-title-tag"
+              type="button"
+              data-object-query="All objects"
+              aria-controls={`${objectId}-object-browser`}
+              aria-label={`${activeObject.distanceAu} AU from the Sun; browse all objects`}
+              title="Mean distance from the Sun; browse all objects"
+            >{activeObject.distanceAu} AU</button>
+          </div>}
         </div>
         {introduction && <p class="planet-introduction">{introduction}</p>}
       </section>
@@ -308,7 +334,6 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         class="planet-chart-switcher"
         data-active-chart={defaultChart.id}
         aria-labelledby={`${objectId}-charts-title`}
-        open
       >
         <summary class="planet-panel-summary planet-chart-switcher-header">
           <h2
@@ -516,13 +541,6 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
       </details>}
 
     </div>
-    <button
-      class="planet-sidebar-view-all"
-      type="button"
-      aria-controls={`${objectId}-object-browser`}
-      aria-label="View all objects"
-      aria-pressed="false"
-    >×</button>
   </div>
 <section
   id={`${objectId}-settings`}

@@ -162,7 +162,7 @@ export async function prepareMercuryPresentation() {
       // The terminator overlay fitted to the projected silhouette; it never
       // shrinks below the marker it lights at the far stage.
       { kind: "silhouette-fit", target: index(materialRoot), minimumRadius: POINT_MIN_RADIUS_PX,
-        unitScale: 2 * plan.camera.defaultZoom / plan.camera.logicalBodyDiameter },
+        unitScale: 2 / plan.camera.logicalBodyDiameter },
       // Level of detail from the camera's published stage (see styles.css).
       { kind: "view-attribute", target: -1, property: "data-lod", source: "level-of-detail-stage", precision: null },
       { kind: "view-property", target: index(materialRoot), property: "--mercury-billboard-opacity", source: "billboard-opacity", precision: 6 },

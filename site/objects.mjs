@@ -43,6 +43,11 @@ export const OBJECTS = defineObjects([
       );
       return mountMarsClient;
     }),
+  object("ceres", "Ceres", "dwarf-planet", "#8e8b86", 2.77,
+    "NASA Dawn, USGS, JPL, ESO, and HYG", async () => {
+      const { mountCeresClient } = await import("../src/planets/ceres/runtime/client.mjs");
+      return mountCeresClient;
+    }),
   object("jupiter", "Jupiter", "planet", "#b48b67", 5.2,
     "Explore Jupiter in 3D with cssEarth. Discover the solar system’s largest planet, its colorful cloud bands, giant storms, and orbiting moons.", async () => {
       const { mountJupiterClient } = await import(

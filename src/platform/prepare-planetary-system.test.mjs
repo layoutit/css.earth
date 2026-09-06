@@ -221,7 +221,7 @@ test("places the Sun at Mercury's own observed heliocentric distance", async () 
 
 test("rejects an unlisted body, a non-positive unit scale and a reflected presentation frame", async () => {
   await assert.rejects(
-    prepareMercurySystem({ bodyId: "pluto" }),
+    prepareMercurySystem({ bodyId: "unknown" }),
     /Planetary system preparation arguments are invalid/u,
   );
   await assert.rejects(

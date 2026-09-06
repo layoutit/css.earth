@@ -17,10 +17,10 @@ export const objectControls = Object.freeze({
     "controls": [
       {
         "id": "normal",
-        "label": "Normal",
+        "label": "Visible color",
         "thumbnailUrl": "/scenes/earth/earth-lens-normal.webp",
         "description": "Blue Marble + WorldCover 2021",
-        "title": "Normal: NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
+        "title": "Visible color: NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
         "legend": undefined,
         "legendNote": undefined
       },
@@ -101,10 +101,10 @@ export const objectControls = Object.freeze({
       },
       {
         "id": "topography",
-        "label": "Topography",
+        "label": "Elevation",
         "thumbnailUrl": "/scenes/earth/earth-lens-topography.webp",
         "description": "Land and seafloor relief",
-        "title": "Topography: NASA Blue Marble topography and bathymetry",
+        "title": "Elevation: NASA Blue Marble topography and bathymetry",
         "legend": undefined,
         "legendNote": undefined
       },

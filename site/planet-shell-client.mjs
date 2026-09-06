@@ -252,8 +252,13 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   let open = false;
   const filter = () => {
     const query = search.value.trim().toLocaleLowerCase("en");
+    const showAll = query === "all objects";
+    const classification = items.find(item => {
+      const name = item.dataset.objectClassificationName;
+      return name && (query === name || query === `${name}s` || query === item.dataset.objectClassification);
+    })?.dataset.objectClassification;
     visibleObjects = 0;
-    void destinations?.search(query);
+    void destinations?.search(classification || showAll ? "" : query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
       empty.hidden = true;
@@ -263,12 +268,13 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     browser.hidden = false;
     let visible = 0;
     for (const item of items) {
-      const match = (item.dataset.objectName ?? "").includes(query);
+      const match = showAll || (classification ? item.dataset.objectClassification === classification
+        : (item.dataset.objectName ?? "").includes(query));
       item.hidden = !match;
       if (match) visible += 1;
     }
     visibleObjects = visible;
-    empty.hidden = visible !== 0 || Boolean(destinations);
+    empty.hidden = visible !== 0 || Boolean(destinations && !classification && !showAll);
   };
   const render = (next, { resetQuery = false } = {}) => {
     open = next;
@@ -291,6 +297,13 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   }, {
     signal: events.signal,
   });
+  for (const tag of documentTarget.querySelectorAll("[data-object-query]")) {
+    tag.addEventListener("click", () => {
+      search.value = tag.dataset.objectQuery;
+      render(true);
+      search.focus();
+    }, { signal: events.signal });
+  }
   search.addEventListener("input", () => {
     if (!open) render(true);
     else if (open) filter();

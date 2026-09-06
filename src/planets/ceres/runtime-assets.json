@@ -1,0 +1,210 @@
+{
+  "schema": "cssceres-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "ceres-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "filename": "ceres-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "filename": "ceres-elevation-legend.webp",
+      "bytes": 216,
+      "sha256": "c1cb75a0ff10d78c262808c8188b385da4e98881290b8dc68bd7aa18ba4bc66f"
+    },
+    {
+      "filename": "ceres-elevation-map.webp",
+      "bytes": 5918010,
+      "sha256": "0f74cf70457c6fae141431a9466bcb44724da05bd9a9eae41e17e21908ad33e4"
+    },
+    {
+      "filename": "ceres-elevation-poles@2x.webp",
+      "bytes": 12528,
+      "sha256": "8671a120fe849fbef114f683699c5c87c5c4f8eb994a4a2c7e363574d4711b41"
+    },
+    {
+      "filename": "ceres-elevation-surface@2x.webp",
+      "bytes": 8203268,
+      "sha256": "3fa6dc27e80e4bcf8da00e22ccfbaa8bd11b53c022ea2a846f04aabcf75bd386"
+    },
+    {
+      "filename": "ceres-elevation-thumbnail.webp",
+      "bytes": 6496,
+      "sha256": "333407659f6bc7b91073dcd7b1e0d6e896baae376c7131d52ca170ba2e96e94b"
+    },
+    {
+      "filename": "ceres-enhanced-map.webp",
+      "bytes": 8789818,
+      "sha256": "87d194da8637aca4382db4447dabe5267ed83ebcc2f48f5a9528d808a0315a56"
+    },
+    {
+      "filename": "ceres-enhanced-poles@2x.webp",
+      "bytes": 543246,
+      "sha256": "78a7cebf05b320e1b779081cd26a2cd135f19d5e2b6a7594286ad48829d3a082"
+    },
+    {
+      "filename": "ceres-enhanced-surface@2x.webp",
+      "bytes": 12643778,
+      "sha256": "a639b99db49301a54e24f94c258eda396ee389749a09ac7f06811d93cb50918b"
+    },
+    {
+      "filename": "ceres-enhanced-thumbnail.webp",
+      "bytes": 9784,
+      "sha256": "df339adeaa99dcb0dfce95bfc03e7cc40e8f6cb6b2c2883817273ebaa4356ed6"
+    },
+    {
+      "filename": "ceres-lighting.webp",
+      "bytes": 1353582,
+      "sha256": "e94e9db8646a1fba535796256095811c9061235b35ff9466e967ef630ef1814e"
+    },
+    {
+      "filename": "ceres-normal-map.webp",
+      "bytes": 6083852,
+      "sha256": "363eb5be2b1ca3b42066bf305d859a89eb6d225f96d79706710450b538b1ef3b"
+    },
+    {
+      "filename": "ceres-normal-poles@2x.webp",
+      "bytes": 296644,
+      "sha256": "a9708469ed534c00ccdaae3deda0f0b26b11f6d00c9254635d8dd2ebf9265c16"
+    },
+    {
+      "filename": "ceres-normal-surface@2x.webp",
+      "bytes": 8419338,
+      "sha256": "3e03124393de2ceeefed5bf48d674f25f984a51b5bf0351b3e771fbff1c12e35"
+    },
+    {
+      "filename": "ceres-normal-thumbnail.webp",
+      "bytes": 3756,
+      "sha256": "57e7cb49b24c76096f5df3942cc926e9ae5e0422f6964d4a6c0cbcd6f7a47dd2"
+    },
+    {
+      "filename": "ceres-starfield-back-standard.webp",
+      "bytes": 279756,
+      "sha256": "ccc6a1347b35133eb36fb4ef218ade52842083ec938e368018a19ea4aa1f8a3d"
+    },
+    {
+      "filename": "ceres-starfield-back-standard@2x.webp",
+      "bytes": 1036488,
+      "sha256": "45d798a3bdd8b15d788e614be6bc8554273e412b0c08f83dfe9b44340860a0d8"
+    },
+    {
+      "filename": "ceres-starfield-back.webp",
+      "bytes": 579454,
+      "sha256": "9a026f9cf5c5cc3290ca3708a30c5b66a2e9737fa5b9f73dee864ba830440ad5"
+    },
+    {
+      "filename": "ceres-starfield-back@2x.webp",
+      "bytes": 2208660,
+      "sha256": "ec92342c5c18e17cc4bd571a8c60d3a2ccc46581982f913a5c1ece24aa4101c0"
+    },
+    {
+      "filename": "ceres-starfield-bottom-standard.webp",
+      "bytes": 321562,
+      "sha256": "f5d6853bb9f3325d48b6da8de5a0f4e98986e8d955889437be5398b8737f7f67"
+    },
+    {
+      "filename": "ceres-starfield-bottom-standard@2x.webp",
+      "bytes": 1230592,
+      "sha256": "30902cebccec968addcb046da65f0647181f9c51c4946780503769d9b67557b1"
+    },
+    {
+      "filename": "ceres-starfield-bottom.webp",
+      "bytes": 661054,
+      "sha256": "9fe6c827dc2eca3b9ab6e1d3786b5742fd244ab7c99dc9cdbcac8e1e6be0053f"
+    },
+    {
+      "filename": "ceres-starfield-bottom@2x.webp",
+      "bytes": 2572616,
+      "sha256": "2ddf63081a13e997d5b5a941d94a48dedcbd3c10fe45ae5a6c90237cc1385e61"
+    },
+    {
+      "filename": "ceres-starfield-front-standard.webp",
+      "bytes": 386592,
+      "sha256": "4d7e46f6be6e6bb517fe68811ddc21f676b1c50819aa52e4325ff61e2d921ee0"
+    },
+    {
+      "filename": "ceres-starfield-front-standard@2x.webp",
+      "bytes": 1302216,
+      "sha256": "5b18730105e5f27c18a2bc9e0f0a30d9eb732e1db6fd4b61e5932e16172a690e"
+    },
+    {
+      "filename": "ceres-starfield-front.webp",
+      "bytes": 710424,
+      "sha256": "20cd6d50dcde27e8151a1e2a9d3b70b1076fb08c1e4a603e1faa69da140cb1f5"
+    },
+    {
+      "filename": "ceres-starfield-front@2x.webp",
+      "bytes": 2702038,
+      "sha256": "c9dd83f9983070ef8c33f433975d20347f9e2b810270bc536413e8d109a2646f"
+    },
+    {
+      "filename": "ceres-starfield-left-standard.webp",
+      "bytes": 173114,
+      "sha256": "f6769e95311359c0653303b50e4a2d34619b42ea996206df9193bf7e15de285b"
+    },
+    {
+      "filename": "ceres-starfield-left-standard@2x.webp",
+      "bytes": 591900,
+      "sha256": "1156db86759bdc9b88fc8b3b5ab14c7c09be2f4d29400f0969e4c401326b3d18"
+    },
+    {
+      "filename": "ceres-starfield-left.webp",
+      "bytes": 358732,
+      "sha256": "7c0a4ddb8a015c4868f2fd12fa212819974979c8992a13f91e11471fde438756"
+    },
+    {
+      "filename": "ceres-starfield-left@2x.webp",
+      "bytes": 1330470,
+      "sha256": "9dafc9e2d2a5bbefeb921abedc810d41eb37275019bc1e85cc313e4e68817ebb"
+    },
+    {
+      "filename": "ceres-starfield-right-standard.webp",
+      "bytes": 128060,
+      "sha256": "75b9c4970a0634f52822ed7e0d574e450aaded3729a536c99307f4ccbcd4b5ae"
+    },
+    {
+      "filename": "ceres-starfield-right-standard@2x.webp",
+      "bytes": 422640,
+      "sha256": "6815515974ff85d61a1de50cf8eee256d649cc2aef0ef11ff69ffefb455662ba"
+    },
+    {
+      "filename": "ceres-starfield-right.webp",
+      "bytes": 269378,
+      "sha256": "d58f2e0c7785dcaf72fef3119b38824d965127879da26a52caf141831fc8aa0f"
+    },
+    {
+      "filename": "ceres-starfield-right@2x.webp",
+      "bytes": 956550,
+      "sha256": "8d36d2876a95b76128a951c1e6edc80a42cf9ecf2544f7708088cddf8816e1b1"
+    },
+    {
+      "filename": "ceres-starfield-top-standard.webp",
+      "bytes": 394400,
+      "sha256": "33f177b112fcf9adbdc8a482668df508aad22ab4ef2640972aed48ad797f3b46"
+    },
+    {
+      "filename": "ceres-starfield-top-standard@2x.webp",
+      "bytes": 1335396,
+      "sha256": "16b599a336d421d02df2700e399df3d5a62eac2bb05bccb65ad43b48655fae5e"
+    },
+    {
+      "filename": "ceres-starfield-top.webp",
+      "bytes": 730256,
+      "sha256": "055bbde25e70b45fb6710d4402b319c84de60ab25eb10bcbcfd3447a5214974c"
+    },
+    {
+      "filename": "ceres-starfield-top@2x.webp",
+      "bytes": 2825870,
+      "sha256": "f9edfa6197764de1b34b1e9baade4d72324c84c879a13c79784ae0c32b2e0be2"
+    },
+    {
+      "filename": "ceres-system-point.webp",
+      "bytes": 96,
+      "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659"
+    }
+  ]
+}
