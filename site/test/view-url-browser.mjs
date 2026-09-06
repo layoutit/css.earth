@@ -65,6 +65,7 @@ try {
 
   await page.reload({ waitUntil: "networkidle" });
   await ready(page);
+  await settled(page);
   snapshots.reloaded = await read(page);
   compare("reload-restores-real-camera", snapshots.reloaded.camera, savedA.camera);
   verifyPlayback("reload-restores-paused-native-playback", snapshots.reloaded, savedA.playback);
@@ -127,6 +128,10 @@ async function settled(page) {
     const state = window.__mercury.camera.stats().dragInertia;
     return !state.active && !state.wheelZoom.active;
   }, null, { timeout: 10000 });
+  await page.waitForFunction(() => {
+    const stars = window.__mercury.sky.state().captions.stars, slot = stars.slots[0];
+    return slot.alpha === slot.target && (stars.accepted ? slot.occupant === `3:${stars.candidate.id}` : slot.occupant === null);
+  }, null, { timeout: 3000 });
   await page.waitForTimeout(220);
 }
 async function drag(page, from, to) {

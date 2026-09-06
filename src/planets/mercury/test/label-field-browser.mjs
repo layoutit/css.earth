@@ -153,7 +153,14 @@ try {
       ?? captions.visible[0];
     const image = await page2.screenshot();
     if (dumpDirectory) await writeFile(`${dumpDirectory}/captions-dpr2.png`, image);
-    const ink = target ? await inkHeight(image, target.box, 2) : null;
+    let hiddenImage = null;
+    if (target) {
+      const element = page2.locator(".mercury-caption").filter({ hasText: new RegExp(`^${target.text}$`, "u") });
+      const previous = await element.evaluate(element => { const value = element.style.visibility; element.style.visibility = "hidden"; return value; });
+      try { hiddenImage = await page2.screenshot(); }
+      finally { await element.evaluate((element, value) => { element.style.visibility = value; }, previous); }
+    }
+    const ink = target ? await inkHeight(image, hiddenImage, target.box, 2) : null;
     report.capHeight = { target: target?.text ?? null, box: target?.box ?? null, inkHeightCssPixels: ink === null ? null : ink / 2 };
     check("caption-cap-height-on-pixels", ink !== null && Math.abs(ink / 2 - policy.capPixels) <= TOLERANCES.capHeightPixels,
       report.capHeight);
@@ -257,25 +264,21 @@ function setsEqual(a, b) {
   return a.size === b.size && [...a].every((key) => b.has(key));
 }
 
-// Ink height of the text inside a caption's box (device pixels): rows whose
-// brightest pixel exceeds the background, from the first to the last.
-async function inkHeight(image, box, dpr) {
-  const { data, info } = await sharp(image).extract({
+// Only pixels changed by this caption count as ink. Neutral orbit and star
+// pixels underneath it otherwise inflate the measured capital height.
+async function inkHeight(image, hiddenImage, box, dpr) {
+  const rectangle = {
     left: Math.max(0, Math.floor(box.x * dpr)), top: Math.max(0, Math.floor(box.y * dpr)),
     width: Math.ceil(box.width * dpr), height: Math.ceil(box.height * dpr),
-  }).raw().toBuffer({ resolveWithObject: true });
-  // Caption ink is neutral (the shell's secondary text at the policy's
-  // alpha); orbit lines are warm and markers coloured, so both are excluded
-  // by chroma. Rows count as ink relative to the box's brightest neutral
-  // row, so the measure follows whatever colour and alpha the policy sets.
+  };
+  const { data, info } = await sharp(image).extract(rectangle).raw().toBuffer({ resolveWithObject: true });
+  const hidden = await sharp(hiddenImage).extract(rectangle).raw().toBuffer();
   const rowPeaks = [];
   for (let y = 0; y < info.height; y += 1) {
     let peak = 0;
     for (let x = 0; x < info.width; x += 1) {
       const offset = (y * info.width + x) * info.channels;
-      const [r, g, b] = [data[offset], data[offset + 1], data[offset + 2]];
-      const chroma = Math.max(Math.abs(r - g), Math.abs(g - b), Math.abs(r - b));
-      if (chroma > 24) continue;
+      const [r, g, b] = [0, 1, 2].map(channel => data[offset + channel] - hidden[offset + channel]);
       peak = Math.max(peak, 0.2126 * r + 0.7152 * g + 0.0722 * b);
     }
     rowPeaks.push(peak);
