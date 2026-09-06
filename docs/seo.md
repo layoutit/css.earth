@@ -29,9 +29,10 @@ pnpm test:seo
 
 Inspect the images before committing them. A newly registered object needs its
 own capture. The SEO check validates the built pages with JavaScript disabled,
-checks incoming links and sitemap coverage, confirms every referenced image is
-available with the declared dimensions, and verifies metadata and retained
-headings in Chrome at DPR 1 and 2. Results are written to `output/seo/report.json`.
+checks that every object is reachable through links from the homepage, and
+checks sitemap coverage and referenced image dimensions. It also verifies
+metadata and retained headings in Chrome at DPR 1 and 2. Results are written to
+`output/seo/report.json`.
 
 After deployment, verify HTTPS and host redirects, canonical URLs, robots and
 sitemap responses, and real 404 responses on the chosen host. Submit the sitemap
