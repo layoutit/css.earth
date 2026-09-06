@@ -8,6 +8,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "datasets": "node tools/datasets.mjs",
     "setup:assets": "node tools/setup.mjs",
     "publish:runtime-assets": "node tools/publish-runtime-assets.mjs",
     "dev": "astro dev --host 127.0.0.1 --port 4210",

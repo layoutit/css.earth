@@ -49,3 +49,32 @@ Viewport selection preserves complete prepared replacement groups and refines th
 `global-observation-browser.mjs <origin> --dpr=1` records Earth → country → region → city → noise using the same card and scene nodes; repeat with `--dpr=2`. It checks lazy package requests, retention across compatible entities and release outside noise scope. `geographic-paging-browser.mjs <origin> --dpr=1|2` records a longer journey through Buenos Aires, Tokyo, Lagos, countryside, the dateline and high latitudes, including actual pointer/wheel input, rapid replacement, noise switching and body teardown. It samples the observation image and metadata limits each animation frame and verifies complete current cuts and retained identity. Index/source/overview transport validation is covered by `land-cover-lens.test.mjs`, `geographic-surface-runtime.test.mjs` and `geographic-lens-runtime.test.mjs`. Release, delivery-cost and final performance qualification remain separate checks.
 
 `land-cover-browser.mjs <origin> --dpr=1|2` qualifies the visible observation against received provider bytes: every published detail blob has the same SHA-256 and byte count as its source response; all opaque source pixels use the eleven official colors. Real scene screenshots also contain those exact colors with the existing Atmosphere control off. Ordinary journey recordings retain the default atmosphere, which can tint colors slightly. The source and legend remain in the shared card. The same probe checks the accepted noise image and geometry records against `105c159b` and verifies noise remains specific to Buenos Aires. These are representative checks; they do not establish complete worldwide valid-pixel coverage.
+
+## Dataset releases
+
+The observation inventory also declares each dataset's source consumer, pinned documents and preparation command. `prepared-local` observations such as noise produce all displayed images from a checked-in snapshot. `versioned-provider` observations such as land cover prepare the descriptor, coverage and small overview locally, then request versioned provider detail images directly. A release pins those local outputs; it cannot guarantee that a provider will preserve every remotely served pixel indefinitely.
+
+Both observations use the same maintainer workflow:
+
+```sh
+pnpm datasets acquire --object=earth
+pnpm datasets verify --object=earth
+pnpm datasets prepare --object=earth
+pnpm datasets validate --object=earth
+pnpm datasets publish --object=earth --dry-run
+pnpm datasets publish --object=earth
+```
+
+`acquire` restores missing source files from the checkout's pinned Git snapshots and verifies their declared bytes and hashes. Existing edited or corrupt files fail verification without being overwritten. Updating a source snapshot is a separate, explicit intake using its documented publisher acquisition recipe; `acquire` does not silently select a newer export. No command above downloads raw worldwide rasters or rebuilds the global geometry release.
+
+Use `--dataset=buenos-aires-noise` or `--dataset=worldcover-land-cover` to limit source verification/acquisition and preparation. Preparation then refreshes the shared observation registry, entity references, presentation and asset inventory. Validation and publication always include the complete Earth runtime asset closure, so a dataset release includes its common dependencies. The generated release JSON is deterministic, sorted and addressed by its full SHA-256 under `dataset-releases/earth/`. Its local copy and publication receipt are in Earth's `.prepared/data-releases/` directory.
+
+The dry run lists missing assets, their hashes and bytes, and the number of reusable objects. Publication uses the existing authenticated R2 uploader, writes only missing content-addressed files, and verifies every referenced object's full bytes before uploading the release manifest last. Repeating an interrupted publication resumes from the successfully stored objects. A same-size corrupted object blocks release; it is never accepted through a HEAD response alone. Releases have no mutable `latest` pointer and old assets are retained.
+
+Install an exact release into an owned output directory with:
+
+```sh
+pnpm datasets install --object=earth --release=<full-release-sha256> --output=<owned-directory>
+```
+
+The installer checks the manifest hash, validates filenames and installs only byte-verified files under `scenes/earth/`. Repeating the command reuses matching local files. Installing a prior hash restores that prior data inventory. For an application rollback, use the corresponding Git checkout and a fresh output directory: restoring data alone does not replace the application's compiled presentation or remove newer, now-unreferenced files. `pnpm setup:assets` remains the all-object checkout setup command. Asset publication does not merge the PR or deploy the application.
