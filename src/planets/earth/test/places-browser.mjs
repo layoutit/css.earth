@@ -96,7 +96,7 @@ try {
         destinationPages: { buenosAires: [...city.desired].sort(), tokyo: [...tokyo.desired].sort() },
         cityPages: city.retained.filter(slot => slot.published).length, cityUrls: [...cityUrls].sort(), errors });
       console.log(`PASS ${label}: city search, keyboard selection, camera target, imagery, globe return, no coverage, stable DOM`);
-    } finally { await context.close(); }
+    } catch (error) { console.error(error); throw error; } finally { await context.close(); }
   }
   // Flights sample different intermediate views as frame and network timing
   // vary. Compare the fully published destination assets at identical poses.
@@ -105,7 +105,7 @@ try {
   try {
     const page = await fault.newPage();
     let attempts = 0;
-    await page.route(`**${directory.search.url}`, route => {
+    await fault.route(`**${directory.search.url}`, route => {
       if (++attempts === 1) return route.fulfill({ status: 503, body: "Temporarily unavailable" });
       return route.continue();
     });
@@ -124,7 +124,7 @@ try {
     await page.waitForURL("**/mars/");
     reports.push({ label: "retry-and-object-navigation", catalogAttempts: attempts, passed: true });
     console.log("PASS catalogue failure/retry and planet keyboard navigation");
-  } finally { await fault.close(); }
+  } catch (error) { console.error(error); throw error; } finally { await fault.close(); }
 } finally {
   await browser.close();
   await writeFile(new URL("report.json", output), JSON.stringify({ browser: "Real Google Chrome", base, reports }, null, 2) + "\n");

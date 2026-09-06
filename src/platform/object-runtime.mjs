@@ -331,7 +331,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
           retainedSunMarkerCount: heliocentric?.retainedSunMarkerCount ?? 0,
           retainedCaptionCount: heliocentric?.retainedCaptionCount ?? 0,
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
-        runtime: Object.freeze({ geographicLens: () => geographic?.state() ?? null, destinationCatalog: () => definition.destinations?.catalog ?? null, destination: () => destinations?.state() ?? null, lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
+        runtime: Object.freeze({ destinationStats: () => destinations?.stats() ?? null, geographicLens: () => geographic?.state() ?? null, destinationCatalog: () => definition.destinations?.catalog ?? null, destination: () => destinations?.state() ?? null, lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection.state, controls: controls.stats, view: () => currentView,
           presentation: () => Object.freeze({ ...observe().presentation }),
           pages: () => Object.freeze(Object.fromEntries([...pageLayers].map(([id, layer]) => [id, layer.stats()]))) }),

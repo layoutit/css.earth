@@ -58,7 +58,7 @@ export function createDestinationStore({ catalog, signal, fetcher = (...args) =>
       const finish = (fn, value) => {
         if (finished) return; finished = true;
         caller?.removeEventListener("abort", abort); entry.users--;
-        if (!entry.users && pending.get(ref.url) === entry) entry.controller.abort();
+        if (!entry.users && pending.get(ref.url) === entry) { pending.delete(ref.url); entry.controller.abort(); }
         fn(value);
       };
       const abort = () => finish(reject, caller.reason ?? new DOMException("Aborted", "AbortError"));

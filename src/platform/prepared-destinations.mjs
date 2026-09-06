@@ -1,10 +1,10 @@
-import { createDestinationStore } from "./prepared-destination-store.mjs";
+import { createDestinationClient } from "./prepared-destination-client.mjs";
 // The runtime owns catalogue transport and lifetime; packages provide pinned data.
-export function createPreparedDestinations({ plan, ready, lifetime, selectLens, navigate, reset, onChange = () => {} }) {
+export function createPreparedDestinations({ plan, ready, lifetime, selectLens, navigate, reset, onChange = () => {}, createStore = createDestinationClient }) {
   const controller = new AbortController();
   lifetime.onDispose(() => controller.abort());
   const assertLive = () => { if (lifetime.disposed) throw new Error("Object was unmounted."); };
-  const store = createDestinationStore({ catalog: plan.catalog, signal: controller.signal });
+  const store = createStore({ catalog: plan.catalog, signal: controller.signal });
   let selected = null, revision = 0;
   return Object.freeze({
     state: () => selected,

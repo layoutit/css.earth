@@ -1,4 +1,5 @@
 import test from "node:test";
+import { createDestinationStore } from "./prepared-destination-store.mjs";
 import assert from "node:assert/strict";
 import { prepareDestinationPacks } from "../../tools/prepare-destination-packs.mjs";
 import { createPreparedDestinations } from "./prepared-destinations.mjs";
@@ -9,7 +10,7 @@ function fixture(options = {}) {
   const bytes = prepared.outputs.get(prepared.reference.url);
   const lifetime = createSceneLifetime(), calls = [];
   const plan = { catalog: prepared.reference, defaultLens: "normal", statuses: { detail: "Detail", overview: "Overview" } };
-  const destinations = createPreparedDestinations({ plan, lifetime, ready: Promise.resolve(),
+  const destinations = createPreparedDestinations({ plan, lifetime, createStore: createDestinationStore, ready: Promise.resolve(),
     selectLens: async id => { calls.push(id); return true; },
     navigate: camera => { calls.push(camera); return Promise.resolve({ completed: true }); }, reset() {}, ...options });
   return { bytes, lifetime, calls, destinations, prepared };

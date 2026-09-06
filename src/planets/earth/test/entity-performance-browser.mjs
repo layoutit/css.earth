@@ -89,6 +89,14 @@ try {
         } else {
           await page.locator('[data-entity-parent="earth"]').click(); await flight();
           await page.waitForTimeout(200);
+          // Saved-place restoration no longer loads search. Record this cold
+          // index / warm HTTP request separately, then compare resident search
+          // with the baseline's already decoded full catalogue.
+          if (await page.evaluate(() => Boolean(window.__earth.runtime.destinationStats?.() && !window.__earth.runtime.destinationStats().store?.searchDecodedBytes))) {
+            const start = performance.now(); await query("Argentina", "country:AR");
+            run.searchAfterReload = { wallMs: performance.now() - start, residency: "cold index, warm HTTP cache" };
+            await page.locator(".planet-sidebar-search").fill("");
+          }
         }
         await page.evaluate(() => { const d = window.__entityPerf; d.phases = []; d.frames = []; d.longTasks = []; d.inputs = []; d.peaks = {}; });
         const trace = [], collect = ({ value }) => trace.push(...value);
@@ -120,7 +128,7 @@ try {
           run.metrics = await page.evaluate(() => {
             const d = window.__entityPerf;
             return { phases: d.phases, frames: d.frames, longTasks: d.longTasks, inputs: d.inputs, peaks: d.peaks,
-              catalog: window.__earth.runtime.destinationCatalog(), camera: window.__earth.camera.state(), stable: window.__earth.assertStableDomIdentity(),
+              catalog: window.__earth.runtime.destinationCatalog(), destinationStats: window.__earth.runtime.destinationStats?.() ?? null, camera: window.__earth.camera.state(), stable: window.__earth.assertStableDomIdentity(),
               resources: performance.getEntriesByType("resource").map(({ name, startTime, duration, transferSize, encodedBodySize, decodedBodySize }) => ({ name, startTime, duration, transferSize, encodedBodySize, decodedBodySize })) };
           });
         } finally {

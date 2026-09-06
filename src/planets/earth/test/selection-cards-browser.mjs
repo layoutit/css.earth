@@ -46,7 +46,7 @@ try {
       const path = new URL(`${label}-${name}.png`, output).pathname;
       await page.screenshot({ path }); record.screenshots.push({ name, path });
     };
-    const flight = () => page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
+    const flight = () => page.waitForFunction(() => document.querySelector("[data-entity-card]").ariaBusy !== "true" && !window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
     const savedCamera = () => page.evaluate(() => {
       const { zoom, pose } = window.__earth.camera.state();
       return { zoom, matrix: pose.scene.slice(9, -1).split(",").map(Number) };
@@ -159,12 +159,12 @@ try {
       await capture("07-returned-from-mars");
       const normal=page.locator('button[name="lens"][value="normal"]');
       await normal.click();
-      await page.route("**/geographic-lens-*.json",route=>route.fulfill({status:503,body:"Temporarily unavailable"}));
+      await context.route("**/geographic-lens-*.json",route=>route.fulfill({status:503,body:"Temporarily unavailable"}));
       await noise.click(); await page.waitForFunction(()=>window.__earth.runtime.geographicLens().status==="error");
       assert.match(await page.locator('[data-geographic-option]:not([hidden]) [role="status"]').innerText(),/retry/);
       assert.equal(await page.evaluate(()=>window.__earth.runtime.pages().geographic.retained.length),0);
       await capture("08-recoverable-lens-failure");
-      await page.unroute("**/geographic-lens-*.json"); await noise.click(); await settleNoise();
+      await context.unroute("**/geographic-lens-*.json"); await noise.click(); await settleNoise();
       await page.evaluate(()=>window.__earth.setView({zoom:8}));
       await page.waitForFunction(()=>window.__earth.runtime.geographicLens().status==="no-coverage");
       assert.equal(await page.evaluate(()=>window.__earth.runtime.pages().geographic.retained.length),0);
@@ -175,7 +175,7 @@ try {
       await saveMetrics("history-refresh-recovery");
       record.history = {back:true,forward:true,refresh:true,returnFromPlanet:true,retry:true,noCoverage:true};
       assert.deepEqual(errors, []); record.passed = true;
-    } finally {
+    } catch (error) { record.error = error.stack; console.error(error); throw error; } finally {
       await context.close(); record.video = await page.video().path();
     }
   }
