@@ -371,7 +371,7 @@ test("places a scalable Surface Lens browser after the retained chart switcher",
     readFile(new URL("../planet-shell.css", import.meta.url), "utf8"),
     readFile(new URL("../site.css", import.meta.url), "utf8"),
   ]);
-  const factsheetIndex = shell.indexOf('class="planet-facts"');
+  const factsheetIndex = shell.indexOf('class="planet-factsheet-section"');
   const chartsIndex = shell.indexOf('class="planet-chart-switcher"');
   const lensesIndex = shell.indexOf('class="planet-lenses"');
   assert.ok(factsheetIndex >= 0 && factsheetIndex < chartsIndex && chartsIndex < lensesIndex);
@@ -419,22 +419,23 @@ test("places a scalable Surface Lens browser after the retained chart switcher",
   assert.doesNotMatch(client, /createLayersController|layersOpen/u);
 });
 
-test("shows four facts below the introduction with a disclosure for remaining facts", async () => {
+test("keeps the introduction below the title and previews four facts in a collapsed-by-default panel", async () => {
   const [shell, styles] = await Promise.all([
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
     readFile(new URL("../planet-shell.css", import.meta.url), "utf8"),
   ]);
-  const selectedPanel = shell.match(/<section class="planet-selected-panel">[\s\S]*?<\/section>/u)?.[0];
-  assert.ok(selectedPanel);
-  assert.ok(selectedPanel.indexOf('class="planet-introduction"') < selectedPanel.indexOf('class="planet-facts"'));
-  assert.doesNotMatch(shell, /planet-factsheet-(?:section|header|body|panel)|>Factsheet</u);
+  assert.match(
+    shell,
+    /class="planet-selected-panel"[\s\S]*?class="planet-title"[\s\S]*?class="planet-introduction"[\s\S]*?<\/section>\s*<details[\s\S]*?id=\{`\$\{objectId\}-factsheet-panel`\}[\s\S]*?class="planet-factsheet-section"[\s\S]*?<summary class="planet-factsheet-header planet-panel-summary">[\s\S]*?>Factsheet<\/h2>[\s\S]*?class="planet-panel-icon"[\s\S]*?data-panel-icon="facts"[\s\S]*?PREPARED_SHELL_ICONS\.facts\.src[\s\S]*?<\/summary>\s*\{hasFacts && <div class="planet-factsheet-body">[\s\S]*?class="planet-facts"[\s\S]*?class="planet-primary-facts"[\s\S]*?initialFacts\.map\(\(fact\)[\s\S]*?class="planet-facts-overflow"[\s\S]*?View more[\s\S]*?class="planet-additional-facts"[\s\S]*?remainingFacts\.map\(\(fact\)[\s\S]*?<\/div>\}\s*<\/details>/u,
+  );
+  assert.doesNotMatch(shell, /class="planet-factsheet-section"[^>]*\sopen/u);
   assert.match(shell, /const factsheetPreviewCount = 4;/u);
   assert.match(shell, /const initialFacts = allFacts\.slice\(0, factsheetPreviewCount\);/u);
   assert.match(shell, /const remainingFacts = allFacts\.slice\(factsheetPreviewCount\);/u);
   assert.match(shell, /class="planet-facts-toggle"[\s\S]*?View more[\s\S]*?View less/u);
   assert.doesNotMatch(shell, /planet-learn-more|learnMoreUrl|Learn more/u);
   assert.doesNotMatch(shell, /PREPARED_SHELL_TITLES\.facts/u);
-  assert.doesNotMatch(shell, /PREPARED_SHELL_ICONS\.facts/u);
+  assert.match(shell, /PREPARED_SHELL_ICONS\.facts/u);
   assert.doesNotMatch(shell, /planet-information-cross|Close .* information/u);
   assert.doesNotMatch(styles, /planet-information-cross/u);
   assert.match(shell, /import \{ orderFacts \} from "\.\.\/fact-order\.mjs";/u);
@@ -454,7 +455,12 @@ test("shows four facts below the introduction with a disclosure for remaining fa
     /import \{ PREPARED_SHELL_ICONS \} from "\.\.\/prepared-shell-icons\.mjs";/u,
   );
   assert.doesNotMatch(shell, /planet-panel-symbol|chartGlyphs|◉|∿|↕|◎|§/u);
-  assert.match(shell, /PREPARED_SHELL_ICONS\.resources/u);
+  for (const iconKey of [
+    "facts",
+    "resources",
+  ]) {
+    assert.match(shell, new RegExp(`PREPARED_SHELL_ICONS\\.${iconKey}`, "u"));
+  }
   assert.match(
     styles,
     /\.planet-panel-icon\s*\{[\s\S]*?flex:\s*0 0 20px;[\s\S]*?width:\s*20px;[\s\S]*?height:\s*20px;[\s\S]*?margin-left:\s*auto;/u,
@@ -481,6 +487,13 @@ test("shows four facts below the introduction with a disclosure for remaining fa
   for (const className of ["planet-chart", "planet-gallery", "planet-settings"]) {
     assert.match(styles, new RegExp(`\\.${className}\\s*\\{[^}]*margin:\\s*8px 0 0;`, "u"));
   }
+  assert.doesNotMatch(styles, /planet-factsheet-icon|Apple Symbols|Segoe UI Symbol/u);
+  assert.doesNotMatch(styles, /planet-factsheet-(?:disclosure|summary|show|hide|content)/u);
+  assert.match(styles, /\.planet-factsheet-section\s*\{[\s\S]*?margin-top:\s*0;[\s\S]*?padding-bottom:\s*0;[\s\S]*?\.planet-factsheet-section\[open\]\s*\{[\s\S]*?padding-bottom:\s*16px;/u);
+  assert.match(styles, /\.planet-information-panel > \.planet-factsheet-section\s*\{[^}]*padding-block-start:\s*0;/u);
+  assert.doesNotMatch(styles, /\.planet-factsheet-section::before/u);
+  assert.match(styles, /\.planet-factsheet-section > \.planet-factsheet-header\s*\{[^}]*align-items:\s*center;[^}]*height:\s*45px;[^}]*min-height:\s*45px;[^}]*padding:\s*0;/u);
+  assert.doesNotMatch(styles, /\.planet-factsheet-body > \.planet-introduction/u);
 });
 
 test("aligns prepared charts to device pixels after layout", async () => {
