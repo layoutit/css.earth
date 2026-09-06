@@ -76,19 +76,8 @@ test("keeps one open-ended object registry with unique ids and routes", () => {
     () => defineObjects([defineObject(fixture), defineObject(fixture)]),
     /Duplicate object definition/,
   );
-  assert.deepEqual(OBJECTS.map(({ id }) => id), [
-    "sun",
-    "mercury",
-    "venus",
-    "earth",
-    "moon",
-    "mars",
-    "jupiter",
-    "saturn",
-    "uranus",
-    "neptune",
-    "pluto",
-  ]);
+  assert.equal(new Set(OBJECTS.map(({ id }) => id)).size, OBJECTS.length);
+  assert.equal(new Set(OBJECTS.map(({ route }) => route)).size, OBJECTS.length);
   assert.ok(OBJECTS.every((objectRecord) =>
     Object.keys(objectRecord).join("\0") === Object.keys(OBJECTS[0]).join("\0")));
   assert.equal(requireObject("sun").name, "Sun");

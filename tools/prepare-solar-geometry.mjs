@@ -8,7 +8,9 @@
 // the runtime never derives it.
 //
 // Positions and velocities come from VSOP87A (heliocentric rectangular, J2000
-// ecliptic, rotated to ICRF) for planets, JPL Kepler elements for dwarf planets,
+// ecliptic, rotated to ICRF) for planets, JPL Kepler elements for dwarf planets
+// and satellites, and ELP for Earth's Moon. Satellite state vectors are relative
+// to their parent; solar directions include the parent's heliocentric position.
 // and orientations from the IAU/WGCCRE rotation
 // elements, both provided by the vendored astronomy package
 // (packages/astronomy, consumed through its own build; see
@@ -35,10 +37,11 @@ const EPOCH_LABEL = "2026-09-04T00:00:00 TT";
 const VSOP87A_KEY = Object.freeze({ earth: "emb" });
 
 const BODIES = OBJECTS.filter(body =>
-  body.classification === "planet" || body.classification === "dwarf-planet").map(body => body.id);
+  ["planet", "dwarf-planet", "satellite"].includes(body.classification)).map(body => body.id);
 
 const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
+  SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
   systemBarycentreHeliocentricAu,
   systemBarycentreVelocityAuPerDay,
   bodyRotationAt,
@@ -87,16 +90,35 @@ const GM_SUN_AU3_PER_DAY2 = GAUSSIAN_GRAVITATIONAL_CONSTANT ** 2;
 }
 
 const entries = BODIES.map((body) => {
+  const parent = ASTRONOMY_BODY_DATA[body].parent;
+  const isSatellite = parent !== "sun";
+  const moonPosition = isSatellite ? moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT) : null;
+  // ELP supplies the Earth's Moon position; take its centred derivative.
+  // Other satellite records already expose their analytic Kepler velocity.
+  const dt = 0.001;
+  const moonVelocity = !isSatellite ? null : SATELLITE_IDS.includes(body)
+    ? satelliteStateKm(body, EPOCH_JD_TT).velocityKmPerDay
+    : moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT + dt).map((value, index) =>
+      (value - moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
+  const parentPosition = isSatellite
+    ? systemBarycentreHeliocentricAu(VSOP87A_KEY[parent] ?? parent, EPOCH_JD_TT) : null;
+  const mu = isSatellite
+    ? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
+       ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
+    : GM_SUN_AU3_PER_DAY2;
   const kepler = DWARF_PLANET_IDS.includes(body)
     ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT) : null;
-  const heliocentricAu = kepler
+  const heliocentricAu = isSatellite
+    ? parentPosition.map((value, index) => value + moonPosition[index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
     ? kepler.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
     : systemBarycentreHeliocentricAu(VSOP87A_KEY[body] ?? body, EPOCH_JD_TT);
-  const velocityAuPerDay = kepler
+  const velocityAuPerDay = isSatellite
+    ? moonVelocity.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
     ? kepler.velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
     : systemBarycentreVelocityAuPerDay(VSOP87A_KEY[body] ?? body, EPOCH_JD_TT);
+  const orbitPositionAu = isSatellite ? moonPosition.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : heliocentricAu;
   const toSunIcrf = normalize(heliocentricAu.map((component) => -component));
-  const orbitNormalIcrf = normalize(cross(heliocentricAu, velocityAuPerDay));
+  const orbitNormalIcrf = normalize(cross(orbitPositionAu, velocityAuPerDay));
   const velocityIcrf = normalize(velocityAuPerDay);
   // Columns of bodyFixedToIcrf are the body axes in ICRF, so its transpose
   // takes an ICRF direction into the body-fixed frame.
@@ -120,20 +142,21 @@ const entries = BODIES.map((body) => {
   // (r.v) v) / mu. See https://en.wikipedia.org/wiki/Orbital_eccentricity
   // and https://en.wikipedia.org/wiki/Vis-viva_equation.
   const heliocentricDistanceAu = Math.hypot(...heliocentricAu);
+  const orbitDistanceAu = Math.hypot(...orbitPositionAu);
   const speedSquared = dot(velocityAuPerDay, velocityAuPerDay);
   const semiMajorAxisAu = 1 /
-    (2 / heliocentricDistanceAu - speedSquared / GM_SUN_AU3_PER_DAY2);
-  const radialSpeed = dot(heliocentricAu, velocityAuPerDay);
-  const eccentricityVectorIcrf = heliocentricAu.map((component, index) =>
-    ((speedSquared - GM_SUN_AU3_PER_DAY2 / heliocentricDistanceAu) *
-      component - radialSpeed * velocityAuPerDay[index]) / GM_SUN_AU3_PER_DAY2
+    (2 / orbitDistanceAu - speedSquared / mu);
+  const radialSpeed = dot(orbitPositionAu, velocityAuPerDay);
+  const eccentricityVectorIcrf = orbitPositionAu.map((component, index) =>
+    ((speedSquared - mu / orbitDistanceAu) *
+      component - radialSpeed * velocityAuPerDay[index]) / mu
   );
   const eccentricity = Math.hypot(...eccentricityVectorIcrf);
   const perihelionDirectionIcrf = normalize(eccentricityVectorIcrf);
   const perihelionDirection = toBodyFixed(perihelionDirectionIcrf);
   // True anomaly: angle from perihelion to the body, signed by the direction
   // of motion (r.v > 0 while receding from perihelion, i.e. 0 < nu < 180).
-  const radialDirectionIcrf = normalize(heliocentricAu);
+  const radialDirectionIcrf = normalize(orbitPositionAu);
   const cosTrueAnomaly = Math.max(
     -1,
     Math.min(1, dot(perihelionDirectionIcrf, radialDirectionIcrf)),
@@ -156,13 +179,13 @@ const entries = BODIES.map((body) => {
   const orbitTangent = cross(orbitNormal, perihelionDirection);
   const reconstructedPositionBodyFixed = perihelionDirection.map(
     (component, index) =>
-      heliocentricDistanceAu *
+      orbitDistanceAu *
       (Math.cos(trueAnomalyRad) * component +
         Math.sin(trueAnomalyRad) * orbitTangent[index]),
   );
-  const actualPositionBodyFixed = bodyFixed.map((component) =>
-    -component * heliocentricDistanceAu
-  );
+  const centerDirection = toBodyFixed(orbitPositionAu.map(value => -value));
+  const centerPositionAu = centerDirection.map(value => value * orbitDistanceAu);
+  const actualPositionBodyFixed = centerPositionAu.map(value => -value);
   const positionReconstructionError = Math.hypot(
     ...reconstructedPositionBodyFixed.map((component, index) =>
       component - actualPositionBodyFixed[index]
@@ -178,6 +201,8 @@ const entries = BODIES.map((body) => {
 
   return Object.freeze({
     body,
+    parent,
+    centerPositionAu,
     direction: bodyFixed,
     eclipticNorth,
     orbitNormal,
@@ -203,8 +228,8 @@ const entries = BODIES.map((body) => {
     orbitInclinationDegrees,
     obliquityToOrbitDegrees: Math.acos(orbitNormal[2]) * 180 / Math.PI,
     // Flight-path angle: elevation of the velocity above the local horizontal
-    // (perpendicular to the Sun direction); positive when moving outward.
-    flightPathAngleDegrees: -Math.asin(dot(velocityIcrf, toSunIcrf)) * 180 /
+    // (perpendicular to the orbit's radial direction); positive moving outward.
+    flightPathAngleDegrees: Math.asin(dot(velocityIcrf, radialDirectionIcrf)) * 180 /
       Math.PI,
     semiMajorAxisAu,
     eccentricity,
@@ -219,22 +244,27 @@ const entries = BODIES.map((body) => {
 const module = `// Generated by tools/prepare-solar-geometry.mjs. Do not edit by hand.
 //
 // Unit direction from each body to the Sun, the J2000 ecliptic north pole,
-// the body's orbit normal (normalize(r x v) of the heliocentric state vector)
+// the body's orbit normal (normalize(r x v) relative to its orbit centre)
 // and its orbital velocity direction, all in that body's own body-fixed frame
 // (+Z north pole, +X prime meridian) at ${EPOCH_LABEL}, plus the body-fixed
 // to ICRF rotation itself.
 //
-// Positions and velocities: VSOP87A for planets, JPL Kepler elements for dwarf planets;
-// heliocentric rectangular coordinates,
-// J2000 ecliptic, rotated to ICRF. Orientation: IAU/WGCCRE rotation elements
+// Positions: VSOP87A parent-system barycentres plus moon-relative offsets;
+// JPL Kepler elements for dwarf planets and satellites, ELP for the Moon.
+// Satellite orbit elements are relative to their parent, not to the Sun.
+// Parent-system barycentres approximate planet centres in this solar view.
+// Existing planets retain their original preparation values.
+// All vectors use ICRF. Orientation: IAU/WGCCRE rotation elements
 // (pole right ascension, pole declination, prime meridian). Earth uses the
 // Earth-Moon barycentre series.
 //
-// HELIOCENTRIC_ORBITS derives each body's osculating orbit from that same
+// BODY_ORBITS derives each body's osculating orbit from that same
 // state vector (vis-viva and the eccentricity vector), using GM_sun = k^2
 // with the Gaussian
 // gravitational constant k = ${GAUSSIAN_GRAVITATIONAL_CONSTANT} (Gauss, 1809;
 // still the IAU-adopted value, GM_sun = ${GM_SUN_AU3_PER_DAY2} AU^3/day^2).
+// Satellites instead use GM_parent + GM_satellite from the astronomy package.
+// Legacy perihelion/aphelion field names mean periapsis/apoapsis for satellites.
 
 export const SOLAR_GEOMETRY_EPOCH_JD_TT = ${EPOCH_JD_TT};
 export const SOLAR_GEOMETRY_EPOCH_LABEL = ${JSON.stringify(EPOCH_LABEL)};
@@ -304,16 +334,18 @@ ${
 }
 });
 
-// Osculating heliocentric orbit at the epoch, derived from the state vector
+// Osculating orbit around the central body at the epoch, derived from the state vector
 // alone (vis-viva and the eccentricity vector - see the module header).
 // perihelionDirection is the unit eccentricity vector in the body-fixed
 // frame; inclinationDegrees is the same value as
 // BODY_FIXED_ORBIT_NORMAL_DIRECTIONS' orbital inclination comment above.
-export const HELIOCENTRIC_ORBITS = Object.freeze({
+export const BODY_ORBITS = Object.freeze({
 ${
   entries.map((
     {
       body,
+      parent,
+      centerPositionAu,
       semiMajorAxisAu,
       eccentricity,
       heliocentricDistanceAu,
@@ -327,6 +359,7 @@ ${
     `  // a ${semiMajorAxisAu.toPrecision(5)} AU, e ${eccentricity.toPrecision(5)}, ` +
     `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu.toPrecision(5)} AU\n` +
     `  ${body}: Object.freeze({\n` +
+    (parent === "sun" ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n`) +
     `    semiMajorAxisAu: ${semiMajorAxisAu},\n` +
     `    eccentricity: ${eccentricity},\n` +
     `    heliocentricDistanceAu: ${heliocentricDistanceAu},\n` +
@@ -381,8 +414,8 @@ export function requireBodyFixedOrbitalVelocity(bodyId) {
   return direction;
 }
 
-export function requireHeliocentricOrbit(bodyId) {
-  const orbit = HELIOCENTRIC_ORBITS[bodyId];
+export function requireBodyOrbit(bodyId) {
+  const orbit = BODY_ORBITS[bodyId];
   if (orbit === undefined) {
     throw new TypeError(\`No prepared solar geometry for body: \${bodyId}.\`);
   }

@@ -55,6 +55,11 @@ export const OBJECTS = defineObjects([
       );
       return mountJupiterClient;
     }),
+  object("europa", "Europa", "satellite", "#b5b3a9", 5.2,
+    "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s fractured icy moon and its orbit around Jupiter.", async () => {
+      const { mountEuropaClient } = await import("../src/planets/europa/runtime/client.mjs");
+      return mountEuropaClient;
+    }),
   object("saturn", "Saturn", "planet", "#d2b68c", 9.58,
     "Explore Saturn in 3D with cssEarth. Orbit its spectacular rings, discover its moons, and browse scientific facts about this gas giant.", async () => {
       const { mountSaturnClient } = await import(
