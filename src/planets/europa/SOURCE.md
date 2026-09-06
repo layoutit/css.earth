@@ -83,10 +83,12 @@ and the older monochrome mosaic have different positional accuracy.
 The 28ESGLOCOL01 sequence (2000-05-22) was removed from this lens: its
 13.832 km-per-pixel imagery covered sharper monochrome with a visibly blurred
 insert. The lens now uses the monochrome base there, with no invented color.
-The enhanced lens disables both added curvature lighting and directional
-shadows through the existing prepared material contract. Shadows in the
-photographs themselves remain fixed to their acquisition geometry; this lens
-is not an unlit albedo map and cannot be physically relit.
+Both lenses use the shared Shadows control and prepared globe lighting.
+Shading in the photographs remains fixed to its acquisition geometry, so added
+lighting is approximate: these images are not unlit albedo maps. Source-aware
+[photometric normalization](https://isis.astrogeology.usgs.gov/9.0.0/Application/presentation/Tabbed/photomet/photomet.html)
+could reduce broad illumination differences, but
+unobserved terrain inside cast shadows cannot be recovered by brightening it.
 
 The NASA Trek/Jónsson 2015 color mosaic was rejected: its [author documents
 fictional polar terrain and cloned gaps](https://www.planetary.org/articles/0218-mapping-europa),

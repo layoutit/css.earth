@@ -15,8 +15,8 @@ test("Europa mounts through the shared prepared object contract", () => {
   assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id), ["normal", "enhanced"]);
   for (const variant of PREPARED_PRESENTATION.variants) {
     const lighting = variant.materials.find(material => material.track === "lighting");
-    assert.equal(lighting.enabled, variant.when.lensId === "normal",
-      "Photographed color must not receive a second lighting pass, including with Shadows off");
+    assert.equal(lighting.enabled, true, "Both lenses retain the shared lighting control");
+    assert.equal(lighting.mode, variant.when.shadows ? "frames" : "fixed");
   }
 });
 
