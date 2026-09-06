@@ -16,7 +16,7 @@ const execFileAsync = promisify(execFile);
 
 test("prepares Mercury from a complete checked source closure", async () => {
   assert.deepEqual(await verifyMercurySourceManifest(), {
-    inputCount: 23,
+    inputCount: 24,
     generatedIntermediateCount: 0,
     documentCount: 3,
   });
@@ -28,7 +28,7 @@ test("executes the pinned Mercury acquisition verifier", async () => {
     "--verify-only",
   ]);
   assert.deepEqual(JSON.parse(stdout), {
-    inputCount: 23,
+    inputCount: 24,
     generatedIntermediateCount: 0,
     documentCount: 3,
   });

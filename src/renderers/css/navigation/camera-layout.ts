@@ -66,11 +66,13 @@ export function selectPreparedResponsiveZoom({
     stageBounds.height * fit.maximumHeightShare,
     maximumMobileDiameter,
   );
-  const zoom = clamp(
-    targetDiameter / (plan.logicalBodyDiameter * shellScale),
-    fit.minimumZoom,
-    fit.maximumZoom,
-  );
+  const framingRatio = targetDiameter / (plan.logicalBodyDiameter * shellScale);
+  // A physical dolly names zoom relative to the authored default framing;
+  // its distance bounds own the physical limits. The legacy scale bounds
+  // cannot constrain the viewport's requested diameter on this path.
+  const zoom = plan.projection?.model === 'css-perspective-shared-with-sky'
+    ? framingRatio * plan.defaultZoom
+    : clamp(framingRatio, fit.minimumZoom, fit.maximumZoom);
   return Object.freeze({ model: fit.model, widthShare, zoom });
 }
 

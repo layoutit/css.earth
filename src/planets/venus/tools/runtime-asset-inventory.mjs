@@ -24,4 +24,5 @@ export const VENUS_RUNTIME_ASSET_URLS = Object.freeze([
     ],
   ),
   ...dpr("venus-directional-sun"),
+  ...dpr("venus-system-markers"),
 ].map(scene));

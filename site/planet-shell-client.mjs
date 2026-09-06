@@ -14,7 +14,7 @@ export function mountPlanetShell({
     throw new Error("Planet shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
-  let settingsController, objectBrowser;
+  let settingsController, objectBrowser, contentLifetime;
   function own(controller) {
     lifetime.onDispose(() => controller.destroy());
     return controller;
@@ -22,14 +22,9 @@ export function mountPlanetShell({
   try {
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
     own(createSheetController(drawer, windowTarget, lifetime));
-    own(createChartSwitcherController(drawer, windowTarget, lifetime));
-    own(createChartPixelAlignmentController(drawer, windowTarget, lifetime));
-    own(createLensBrowserController(drawer, windowTarget, lifetime));
-    settingsController = own(createSettingsController(
-      documentTarget, windowTarget, { motionEnabled, onMotionChange }, lifetime,
-    ));
-    own(createPanelController(drawer, objectId, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget));
+    lifetime.onDispose(() => disposeContent());
+    mountContent(objectId, motionEnabled, false);
   } catch (error) {
     const cleanupErrors = lifetime.destroy();
     if (cleanupErrors.length) {
@@ -38,6 +33,15 @@ export function mountPlanetShell({
     throw error;
   }
   return Object.freeze({
+    setObject(content) {
+      if (lifetime.disposed) return;
+      const motion = documentTarget.querySelector('.planet-motion-setting').checked;
+      const contrast = documentTarget.querySelector('.planet-sky-contrast-setting').checked;
+      disposeContent();
+      content.apply();
+      objectBrowser.setObject(content.name);
+      mountContent(content.id, motion, contrast);
+    },
     setDestinations(provider) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
     setMotionEnabled(enabled) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
     setPlaybackState(state) {
@@ -48,6 +52,22 @@ export function mountPlanetShell({
       if (errors.length) throw new AggregateError(errors, "Shell cleanup failed.");
     },
   });
+
+  function disposeContent() {
+    const errors = contentLifetime?.destroy() ?? [];
+    contentLifetime = null;
+    if (errors.length) throw new AggregateError(errors, 'Object shell content cleanup failed.');
+  }
+  function mountContent(id, motionEnabled, highContrastSky) {
+    const owner = contentLifetime = createSceneLifetime();
+    const retain = controller => { owner.onDispose(() => controller.destroy()); return controller; };
+    retain(createChartSwitcherController(drawer, windowTarget, owner));
+    retain(createChartPixelAlignmentController(drawer, windowTarget, owner));
+    retain(createLensBrowserController(drawer, windowTarget, owner));
+    settingsController = retain(createSettingsController(documentTarget, windowTarget,
+      { motionEnabled, onMotionChange, highContrastSky }, owner));
+    retain(createPanelController(drawer, id, windowTarget, owner));
+  }
 }
 
 function createLensBrowserController(drawer, windowTarget, lifetime) {
@@ -147,7 +167,7 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
 function createSettingsController(
   documentTarget,
   windowTarget,
-  { motionEnabled, onMotionChange },
+  { motionEnabled, onMotionChange, highContrastSky = false },
   lifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -168,7 +188,6 @@ function createSettingsController(
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
-  let highContrastSky = false;
 
   const renderMotion = () => {
     motion.checked = motionOn;
@@ -239,7 +258,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
 
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
-  const selectedSearchValue = search.value;
+  let selectedSearchValue = search.value;
   let currentSearchValue = selectedSearchValue;
   let visibleObjects = 0;
   const destinations = createDestinationBrowser({
@@ -336,6 +355,11 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   render(false);
 
   return Object.freeze({
+    setObject(name) {
+      selectedSearchValue = name; currentSearchValue = name;
+      destinations?.bind(null);
+      render(false);
+    },
     setDestinations(provider) { destinations?.bind(provider); },
     destroy() {
       events.abort();

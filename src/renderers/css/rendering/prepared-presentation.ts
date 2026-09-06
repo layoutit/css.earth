@@ -9,7 +9,7 @@ export interface PreparedView {
   sunViewDirection: readonly number[] | null; reference?: { sceneMatrix: string; sunViewDirection: readonly number[] | null };
   counterRotation: string; counterRotationFor(systemTransform: string | DOMMatrix | null): string;
   levelOfDetail?: { stage: string; silhouetteDiameter: number | null; billboardOpacity: number; markerOpacity: number };
-  body?: { silhouette?: { radial: readonly number[]; centre: readonly number[]; radialSemiAxis: number; tangentialSemiAxis: number } };
+  body?: { visible?: boolean; screen?: readonly number[] | null; silhouette?: { radial: readonly number[]; centre: readonly number[]; radialSemiAxis: number; tangentialSemiAxis: number } | null };
 }
 export type PreparedWrite = { target: number; name: string } & (
   { kind: "attribute"; value: string | null } | { kind: "class"; value: boolean } |
@@ -178,6 +178,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
           // mathematical silhouette the prepared frames are registered to,
           // never smaller than the prepared floor (the marker it lights).
           const silhouette = view.body?.silhouette;
+          element.style.visibility = view.body?.visible === false ? "hidden" : "";
           if (silhouette) {
             const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
             const radial = Math.max(silhouette.radialSemiAxis, binding.minimumRadius);

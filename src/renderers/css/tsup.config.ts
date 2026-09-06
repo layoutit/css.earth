@@ -1,7 +1,10 @@
 import { fileURLToPath } from 'node:url';
 
 export default {
-  entry: [fileURLToPath(new URL('./index.ts', import.meta.url))],
+  entry: {
+    index: fileURLToPath(new URL('./index.ts', import.meta.url)),
+    navigation: fileURLToPath(new URL('./navigation/index.ts', import.meta.url)),
+  },
   outDir: fileURLToPath(new URL('./dist', import.meta.url)),
   tsconfig: fileURLToPath(new URL('./tsconfig.json', import.meta.url)),
   format: ['esm', 'cjs'],

@@ -42,8 +42,17 @@ mounts one retained scene and one camera. Each object package owns its
 scientific sources, textures, geometry, lighting, optional control content, and
 material presentation. One shared runtime owns mounting, readiness, controls,
 selection transactions, image residency, playback, camera binding, and cleanup.
-All eleven clients bind the same factory. The shell owns navigation, information
-panels, playback permission, and responsive behavior.
+Mercury and Venus consume validated JSON through the TypeScript CSS renderer;
+the other clients retain their existing runtime adapter. The shell owns
+navigation, information panels, playback permission, and responsive behavior.
+
+Mercury and Venus share a prepared heliocentric frame. Selecting either in the
+navigation bar or celestial vault flies the same physical camera to it using
+the Galaxio selection curve. The next fixed asset bank loads during flight;
+the current detailed scene is released before the destination mounts. The
+document and shell persist. Back restores the saved camera and playback state;
+camera input interrupts flight at the last drawn view. Existing object routes
+and compact `?v` links remain supported, including translated camera positions.
 The [architecture](docs/shared-runtime-architecture-proposal.md) explains the
 contract and the rendering differences that remain inside each package. The
 [proof](docs/generic-runtime-contract-proof.md) uses the actual registered objects

@@ -7,6 +7,7 @@ import type { ExposureOptions } from "@cssearth/engine";
 import type { HeliocentricProjection,PreparedPlanetarySystem } from './heliocentric-view.js';
 import type { Vector2,VisibleRect,Matrix3 } from './types.js';
 import type { Sprite,SystemMarkers } from './heliocentric-sprites.js';
+import { bindObjectNavigationTarget } from './heliocentric-navigation.js';
 const LABEL_OWNER_STAR = 3;
 export interface StarCaptionPolicy extends LabelMetrics {poolSize:number;maxAlpha:number;maxAlphaStep:number;}
 export interface CaptionPlan {policy:LabelPolicy;names:Readonly<Record<string,string>>;stars?:{policy:StarCaptionPolicy;records:readonly (CatalogueStar & {id:string})[];exposure:ExposureOptions};}
@@ -36,6 +37,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       measures.push([id, measure]);
     }
     const elements: HTMLElement[] = [];
+    const navigation: ReturnType<typeof bindObjectNavigationTarget>[] = [];
     for (let index = 0; index < policy.poolSize; index += 1) {
       const element = document.createElement("s");
       element.className = `planet-heliocentric-caption ${objectId}-caption`;
@@ -43,6 +45,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       element.style.visibility = "hidden";
       group.appendChild(element);
       elements.push(element);
+      navigation.push(bindObjectNavigationTarget(element, host));
     }
     celestialRoot.appendChild(group);
     const labelField: CaptionField = {
@@ -134,7 +137,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
               candidate: labelField.stars.candidate, accepted: labelField.stars.accepted,
               slots: labelField.stars.pool.slots.map(slot => ({ ...slot, anchor: [...slot.anchor] })) }) : null,
           }); },
-    destroy() {destroyed=true;if(labelFrame!==null)host.ownerDocument.defaultView!.cancelAnimationFrame(labelFrame);},
+    destroy() {destroyed=true;for(const target of navigation)target.destroy();if(labelFrame!==null)host.ownerDocument.defaultView!.cancelAnimationFrame(labelFrame);},
   });
   function publishCaptions(projection:HeliocentricProjection, visibleRect:VisibleRect|null = null) {
     const field = labelField;
@@ -160,11 +163,9 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
         text: labels.names[id], bottomOffsetPx: geometry.bottomOffsetPx,
         box: Object.freeze({ widthPx: geometry.widthPx, bottomOffsetPx: geometry.bottomOffsetPx, topOffsetPx: geometry.topOffsetPx }) });
     };
-    // The observer: its marker sits at the root's centre (the projection
-    // places the body there); admitted above everything once the marker
-    // shows, exactly as the reference labels its focused body.
+    // Focus retains priority even while a world flight places it off-centre.
     const ownMarkerOpacity = getMarkerOpacity() === null ? 0 : Number(getMarkerOpacity());
-    consider(LABEL_OWNER_FOCUS, objectId, 1000, [0, 0],
+    consider(LABEL_OWNER_FOCUS, objectId, 1000, projection.body.visible ? projection.body.screen : null,
       Math.max(markerSprite.size / 2, projection.body.silhouetteRadius), ownMarkerOpacity);
     if (system !== null) {
       // The Sun: brightest of all (the reference ranks by -magnitude; the
@@ -207,6 +208,8 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
     const acceptedKeys = new Set(declutter.resolve().map((entry) => `${entry.owner}:${entry.id}`));
     field.accepted = candidates.filter((candidate) => acceptedKeys.has(candidate.key));
     const slots = field.pool.assign(field.accepted.filter(candidate => candidate.owner !== LABEL_OWNER_STAR), field.settled);
+    const visibleBodies = new Set((projection.system?.bodies ?? [])
+      .filter(body => body.marker.visible && body.marker.alpha > 0).map(body => `${LABEL_OWNER_BODY}:${body.id}`));
     if (stars) {
       const accepted = field.accepted.filter(candidate => candidate.owner === LABEL_OWNER_STAR);
       stars.accepted = accepted.length > 0;
@@ -227,6 +230,9 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       const element = field.elements[index];
       const published = field.published[index];
       const hidden = slot.occupant === null || slot.alpha <= 0;
+      const target = !hidden && slot.occupant !== null && visibleBodies.has(slot.occupant)
+        ? candidates.find(candidate => candidate.key === slot.occupant && candidate.owner === LABEL_OWNER_BODY) : undefined;
+      navigation[index].update(target?.id ?? null, target?.text);
       if (!hidden) {
         if (published.text !== slot.text) {
           element.textContent = slot.text;

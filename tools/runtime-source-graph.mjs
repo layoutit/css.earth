@@ -51,10 +51,26 @@ export async function resolveRuntimeSource(imported, importer, { root, source })
     }
     const properties = new Map(config.properties.map(property => [property.key?.name ?? property.key?.value, property.value]));
     const entry = properties.get('entry'), output = properties.get('outDir');
-    if (entry?.type !== 'ArrayExpression' || entry.elements.length !== 1) throw new Error(`Runtime build entry/output is not source-bound: ${configFile}`);
-    const sourceEntry = pathValue(entry.elements[0]), outputDirectory = output ? pathValue(output) : resolve(directory, 'dist');
-    if (resolve(outputDirectory, sourceEntry.split('/').at(-1).replace(/\.ts$/, '.js')) !== target) throw new Error(`Runtime export does not match its build entry: ${target}`);
-    target = sourceEntry;
+    const entries = new Map(), outputDirectory = output ? pathValue(output) : resolve(directory, 'dist');
+    function bindEntry(name, node) {
+      if (typeof name !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(name) || entries.has(name)) {
+        throw new Error(`Runtime build entry/output is not source-bound: ${configFile}`);
+      }
+      entries.set(name, pathValue(node));
+    }
+    if (entry?.type === 'ArrayExpression' && entry.elements.length > 0) {
+      for (const node of entry.elements) bindEntry(pathValue(node).split('/').at(-1).replace(/\.ts$/, ''), node);
+    } else if (entry?.type === 'ObjectExpression' && entry.properties.length > 0) {
+      for (const property of entry.properties) {
+        if (property.type !== 'Property' || property.computed || property.method || property.kind !== 'init') {
+          throw new Error(`Runtime build entry/output is not source-bound: ${configFile}`);
+        }
+        bindEntry(property.key.name ?? property.key.value, property.value);
+      }
+    } else throw new Error(`Runtime build entry/output is not source-bound: ${configFile}`);
+    const matched = [...entries].find(([name]) => resolve(outputDirectory, `${name}.js`) === target);
+    if (!matched) throw new Error(`Runtime export does not match its build entry: ${target}`);
+    target = matched[1];
   } else if (target.endsWith('.js')) {
     // TypeScript's emitted .js specifiers bind to the neighbouring .ts source.
     const typed = target.replace(/\.js$/, '.ts');

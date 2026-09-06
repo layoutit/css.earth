@@ -2,6 +2,23 @@
   "schema": "cssmercury-authoritative-sources@1",
   "inputs": [
     {
+      "id": "mercury-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedSha256": "c51699bf26519d8f03a19eb1f903dcb4130364a58b7118870f127c51f64dff57",
+      "expectedBytes": 1588,
+      "origin": "Repository-authored physical scene recipe; radius from IAU/NASA and checked astronomy body data, pinned solar geometry from VSOP87A and IAU/WGCCRE",
+      "credit": "Published physical facts and repository-authored presentation",
+      "license": "Repository-authored factual data",
+      "acquisition": "Checked source recipe extracted from the existing prepared physical view and astronomy body table",
+      "redistribution": "Factual physical parameters and synthetic marker colours; no imagery",
+      "consumers": [
+        "scene",
+        "sky-sun",
+        "system-markers",
+        "presentation"
+      ]
+    },
+    {
       "id": "usgs-messenger-bdr-global-z3",
       "path": "maps/mercury-bdr-global.png",
       "expectedBytes": 9385021,

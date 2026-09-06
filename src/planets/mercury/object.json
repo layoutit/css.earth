@@ -21,11 +21,38 @@
         "presentation",
         "runtime-assets"
       ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -58080323005.813934,
+        -3532367026.7142925,
+        4132260206.9121046
+      ],
+      "presentationToReference": [
+        -0.9996221102421355,
+        -1.3877787807814457e-17,
+        0.027488847103145225,
+        -0.02522052412409819,
+        0.39777715593191376,
+        -0.9171353549949015,
+        -0.010934435420536348,
+        -0.9174820620691818,
+        -0.3976268400187745
+      ],
+      "orbitUpReference": [
+        1.3877787807814457e-17,
+        -0.39777715593191376,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 10607.391304347826,
+      "bodyRadiusM": 2439700
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/mercury.json",
-    "sha256": "aa891248fa4ea301b26572eeecbbc74214f9acfafd36c07441a711eb50396b62"
+    "sha256": "db464a450e75ed363fc2409f6b1dfcfd1022404477bd1ca092330a777e694d32"
   }
 }

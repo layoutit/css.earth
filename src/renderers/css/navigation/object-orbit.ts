@@ -12,7 +12,12 @@ import type { RetainedCubicSky } from '../solar-system/cubic-sky-runtime.js';
 import type { RetainedDirectionalSun, DirectionalSunPlan } from '../solar-system/directional-sun-runtime.js';
 import type { mountRetainedHeliocentricView } from '../solar-system/heliocentric-view-runtime.js';
 import type { SunProjection } from '../solar-system/heliocentric-view.js';
-export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; pose?: CameraPose; }
+import { rotationFromMatrix3d } from '../solar-system/heliocentric-view.js';
+import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
+import type { PreparedWorldCameraFrame, WorldCameraPose } from './world-camera.js';
+import type { PositionM } from '@cssearth/engine';
+import { bindWorldCameraPicking } from './world-camera-picking.js';
+export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & Partial<ReturnType<PerspectiveDolly['state']>>;
 export interface OrbitPublication extends CameraAngles { sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; sunPresentation: SunProjection | ReturnType<RetainedDirectionalSun['state']> | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
 export interface RetainedOrbitOptions { stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; cameraPlan: CameraPlan; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
@@ -103,6 +108,7 @@ export function createRetainedCubicSkyOrbit({
     throw new TypeError("Shared retained cubic-sky orbit is invalid.");
   }
   const lifetime = createSceneLifetime();
+  if (perspectiveCamera) lifetime.onDispose(bindWorldCameraPicking(inputSurface, stage));
   let constructing = true;
   const retireFailure = (error: unknown) => {
     if (constructing) throw error;
@@ -123,6 +129,15 @@ export function createRetainedCubicSkyOrbit({
     cameraPlan, heliocentric, cameraElement, sceneElement,
     skyElement: cubicSky.root, stage,
   }) : null;
+  const requireWorldPerspective = (frame: PreparedWorldCameraFrame) => {
+    if (!perspective || !skyTracksScene || !heliocentric) throw new TypeError('This object has no physical world camera.');
+    const units = heliocentric.plan.units;
+    if (Math.abs(frame.metersPerUnit / (units.kilometersPerUnit * 1000) - 1) > 1e-9 ||
+        Math.abs(frame.bodyRadiusM / (units.bodyRadiusUnits * units.kilometersPerUnit * 1000) - 1) > 1e-9) {
+      throw new TypeError('World frame units disagree with the mounted presentation.');
+    }
+    return perspective;
+  };
   const camera: NavigationCamera = perspective ? perspective.camera : createPolyCamera({
     target: [0, 0, 0],
     rotX: cameraPlan.defaultControlPitchDegrees,
@@ -362,6 +377,26 @@ export function createRetainedCubicSkyOrbit({
   return Object.freeze({
     mobilePageFlow: () => inputPolicy.mobile,
     initialResponsiveZoom: () => initialResponsiveZoom,
+    currentResponsiveZoom: () => responsiveFit.zoom,
+    captureWorldCamera(frame: PreparedWorldCameraFrame): WorldCameraPose {
+      const physical = requireWorldPerspective(frame);
+      const rotation = rotationFromMatrix3d(orientation.sceneMatrix());
+      const bodyCenterUnits = physical.bodyCenter();
+      return bodyCenterUnits === null
+        ? worldCameraFromCenteredPresentation({ rotation, distanceUnits: safeCamera.state.distance }, frame, physical.viewport())
+        : worldCameraFromPresentation({ rotation, bodyCenterUnits }, frame);
+    },
+    applyWorldCamera(world: WorldCameraPose, frame: PreparedWorldCameraFrame) {
+      if (lifetime.disposed) return;
+      try {
+        const physical = requireWorldPerspective(frame);
+        const presentation = presentWorldCamera(world, frame, physical.viewport());
+        controls.stop();
+        physical.setBodyCenter(presentation.bodyCenterUnits);
+        orientation.setSceneRotation(presentation.rotation);
+        publish();
+      } catch (error) { retireFailure(error); throw error; }
+    },
     rebaseScene(change: DOMMatrix) {
       if (lifetime.disposed) return;
       try { orientation.rebaseScene(change); publish(); }
@@ -400,13 +435,14 @@ export function createRetainedCubicSkyOrbit({
         throw error;
       }
     },
-    setState({ pitch, controlPitch = pitch, controlYaw, zoom, distance, distanceKilometers, pose }: OrbitStateUpdate = {}): OrbitState {
+    setState({ pitch, controlPitch = pitch, controlYaw, zoom, distance, distanceKilometers, bodyCenterKilometers, pose }: OrbitStateUpdate = {}): OrbitState {
       if (lifetime.disposed) return this.state();
       try {
       controls.stop();
       const resetsOrientation = controlPitch !== undefined ||
         controlYaw !== undefined;
-      if ((distance !== undefined || distanceKilometers !== undefined) && !perspective) {
+      if (resetsOrientation || pose !== undefined) perspective?.centerBody();
+      if ((distance !== undefined || distanceKilometers !== undefined || bodyCenterKilometers !== undefined) && !perspective) {
         throw new TypeError("Only a perspective camera dollies by distance.");
       }
       safeCamera.update({
@@ -425,6 +461,10 @@ export function createRetainedCubicSkyOrbit({
           controlPitch: safeCamera.state.rotX,
           controlYaw: safeCamera.state.rotY,
         });
+      }
+      if (bodyCenterKilometers !== undefined && perspective && heliocentric) {
+        const scale = heliocentric.plan.units.kilometersPerUnit;
+        perspective.setBodyCenter([bodyCenterKilometers[0] / scale, bodyCenterKilometers[1] / scale, bodyCenterKilometers[2] / scale]);
       }
       publish();
       } catch (error) { retireFailure(error); throw error; }
@@ -449,7 +489,9 @@ export function createRetainedCubicSkyOrbit({
         // Dolly distance determines zoom; control angles are input bookkeeping.
         const pose = orientation.snapshot({ sceneOnly: true });
         if (pose.schema !== "cssearth-camera-pose@2" || state.distanceKilometers === undefined) throw new Error("Physical camera snapshot is unavailable.");
-        return { distanceKilometers: state.distanceKilometers, pose };
+        const bodyCenterKilometers = state.bodyCenterKilometers;
+        return { distanceKilometers: state.distanceKilometers, pose,
+          ...(bodyCenterKilometers === undefined ? {} : { bodyCenterKilometers }) };
       }
       const pose = state.pose;
       if (pose.schema !== "cssearth-camera-pose@1") throw new Error("Legacy camera snapshot is unavailable.");

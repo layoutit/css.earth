@@ -1,3 +1,4 @@
+import solarSystemSource from "../source/presentation/solar-system.json" with { type: "json" };
 import { prepareEclipticPresentationFrame } from
   "../../../platform/solar-presentation-frame.mjs";
 
@@ -15,6 +16,6 @@ export const MERCURY_PRESENTATION_FRAME =
 // vertical). The scene pitch is applied as CSS rotateX, so a positive value
 // stands the camera south of the ecliptic while keeping north up.
 export const MERCURY_CAMERA_POSE = Object.freeze({
-  initialScenePitchDegrees: 40,
-  defaultControlYawDegrees: 0,
+  initialScenePitchDegrees: solarSystemSource.initialScenePitchDegrees,
+  defaultControlYawDegrees: solarSystemSource.defaultControlYawDegrees,
 });

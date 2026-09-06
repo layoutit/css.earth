@@ -3,6 +3,7 @@ import test from "node:test";
 
 import { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from "../object-schema.mjs";
 import { OBJECTS, requireObject } from "../objects.mjs";
+import { parsePreparedWorldCameraFrame } from '../../src/renderers/css/dist/index.js';
 import {
   discoverPlanetTests,
   planetAcquireScript,
@@ -37,9 +38,33 @@ test("defines one generic renderable-object contract", () => {
     "route",
     "loadScene",
     "description",
+    "worldFrame",
   ]);
   assert.equal(objectRecord.loadScene, loadScene);
   assert.equal(Object.isFrozen(objectRecord), true);
+  assert.equal(objectRecord.worldFrame, null);
+});
+
+test('world-frame capability is validated and copied at the registry boundary', () => {
+  const frame = { referenceFrame: 'heliocentric-icrf', epochJdTt: 2451545,
+    originM: [1, 2, 3], presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1],
+    metersPerUnit: 1000, bodyRadiusM: 1000000 };
+  const value = defineObject({ ...fixture, worldFrame: frame });
+  assert.deepEqual(value.worldFrame, frame);
+  assert.deepEqual(value.worldFrame, parsePreparedWorldCameraFrame(frame));
+  assert.notEqual(value.worldFrame, frame);
+  assert.ok(Object.isFrozen(value.worldFrame));
+  assert.ok(Object.isFrozen(value.worldFrame.originM));
+  for (const changed of [{ ...frame, originM: [1, 2] }, { ...frame, epochJdTt: NaN },
+    { ...frame, metersPerUnit: 0 }, { ...frame, bodyRadiusM: -1 },
+    { ...frame, presentationToReference: [2, 0, 0, 0, 1, 0, 0, 0, 1] },
+    { ...frame, referenceFrame: '' }, { ...frame, renderer: 'unexpected' },
+    { ...frame, orbitUpReference: [0, 0, 2] }, { ...frame, orbitUpReference: [0, 1] }]) {
+    assert.throws(() => defineObject({ ...fixture, worldFrame: changed }));
+  }
+  frame.originM[0] = 999;
+  assert.equal(value.worldFrame.originM[0], 1);
+  for (const object of OBJECTS) assert.deepEqual(object.worldFrame, parsePreparedWorldCameraFrame(object.worldFrame));
 });
 
 test("rejects invalid object definitions and renderer-specific fields", () => {
