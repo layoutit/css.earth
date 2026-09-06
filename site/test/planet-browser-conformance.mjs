@@ -4,9 +4,11 @@ import { resolve } from "node:path";
 import { chromium } from "playwright";
 
 import { OBJECTS } from "../objects.mjs";
-import { MOBILE_TOUCH_ACTION } from "../runtime-policy.mjs";
+import { MOBILE_TOUCH_ACTION, WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
+  WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../runtime-policy.mjs";
 import { loadPlanetBrowserProfile, assertRenderedObjectControls } from "./load-browser-profile.mjs";
 import { proveSkyboxPointerBoundary } from "./skybox-pointer-boundary.mjs";
+import { proveWheelZoomDistance, wheelWithReceipt } from "./wheel-zoom-distance.mjs";
 import { GOOGLE_EARTH_SURFACE_FLY_TO } from
   "../../src/platform/google-earth-surface-fly-to.mjs";
 import { GOOGLE_EARTH_DRAG_INERTIA } from
@@ -430,7 +432,11 @@ async function proveDesktop(browser, planet, profile) {
       .evaluate((stage) => {
         const directProjectiveLeaves = [...stage.querySelectorAll("s")]
           .filter((leaf) => {
-            const matrix = new DOMMatrix(leaf.style.transform || "none");
+            // A leaf whose transform is not a matrix (a prepared calc() on a
+            // custom property, as retained sky points use) is no texture
+            // frame; only parsed matrices can carry a projective row.
+            let matrix;
+            try { matrix = new DOMMatrix(leaf.style.transform || "none"); } catch { return false; }
             return !leaf.querySelector(":scope > .polycss-projective-texture") &&
               (Math.abs(matrix.m14) > 1e-10 || Math.abs(matrix.m24) > 1e-10);
           });
@@ -904,6 +910,7 @@ async function provePreparedDensity(browser, planet, profile, density) {
       planet,
       profile,
     );
+    if (WHEEL_ZOOM_USE_SCROLL_DISTANCE) await proveWheelZoomDistance(page, planet, profile);
     const interactionInterruptions = await proveInteractionInterruptions(
       page,
       planet,
@@ -1011,11 +1018,11 @@ async function proveWheelTakeover(page, planet, profile) {
   await page.mouse.move(page.viewportSize().width - 32, 96);
   await page.mouse.down();
   assert.equal((await interactionStats(page, planet.id)).pendingPointer, true,
-    `${planet.id}: the sky press must reserve the next drag`);
+    `${planet.id}: the sky press must reserve an orbit drag`);
   const skyPress = await cameraPose(page, planet.id);
   await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 50);
   assert.deepEqual(await cameraPose(page, planet.id), skyPress,
-    `${planet.id}: sky press must stop wheel motion immediately`);
+    `${planet.id}: a sky press must stop wheel motion immediately`);
   await page.mouse.up();
 
   await showInteractionPhase(page, "Reset during wheel zoom: no delayed motion");
@@ -1104,7 +1111,7 @@ async function proveInteractionInterruptions(page, planet, profile) {
   const beforeAnchorWheel = await cameraPose(page, planet.id);
   const distanceBefore = dolly ? await cameraDistance(page, planet.id) : null;
   await page.mouse.move(anchorCoordinates.surface.x, anchorCoordinates.surface.y);
-  await page.mouse.wheel(0, -40);
+  const anchorScrollPixels = await wheelWithReceipt(page, -40);
   await page.waitForTimeout(PREPARED_WHEEL_ZOOM.intervalMilliseconds + 80);
   const afterAnchorWheel = await cameraPose(page, planet.id);
   if (dolly) {
@@ -1116,11 +1123,17 @@ async function proveInteractionInterruptions(page, planet, profile) {
     assert.equal(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
       `${planet.id}: a wheel dolly must not turn the scene`);
   } else {
+    const anchorInputKind = await page.evaluate(id =>
+      window[`__${id}`].camera.stats().dragInertia.wheelZoom.inputKind, planet.id);
+    const anchorSpeed = WHEEL_ZOOM_USE_SCROLL_DISTANCE && anchorInputKind === "wheel"
+      ? WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : WHEEL_ZOOM_SPEED_MULTIPLIER;
     const wheelZoomRatio = afterAnchorWheel.zoom / beforeAnchorWheel.zoom;
     // Camera publication rounds zoom to four decimal places on each frame.
     assert.ok(Math.abs(wheelZoomRatio - Math.exp(
       PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond *
-        PREPARED_WHEEL_ZOOM.intervalMilliseconds)) < 0.002,
+        anchorSpeed * PREPARED_WHEEL_ZOOM.intervalMilliseconds *
+        (WHEEL_ZOOM_USE_SCROLL_DISTANCE
+          ? -anchorScrollPixels / 100 : 1))) < 0.002,
     `${planet.id}: shared wheel response drifted (ratio ${wheelZoomRatio})`);
     assert.notEqual(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
       `${planet.id}: off-centre wheel zoom must apply anchor rotation`);

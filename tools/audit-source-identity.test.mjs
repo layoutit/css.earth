@@ -38,6 +38,8 @@ test("audit binds served application responses to one checkout and server sessio
   assertAuditResponse(observed, baseUrl, identity);
   assert.throws(() => assertAuditResponse({ ...observed, headers: {} }, baseUrl, identity), /not bound/u);
   assert.throws(() => assertAuditResponse({ ...observed, url: "https://example.com/runtime.js" }, baseUrl, identity), /External response/u);
+  assert.throws(() => assertAuditResponse({ ...observed, redirectedFrom: `${baseUrl}/redirect` }, baseUrl, identity), /Redirected response/u);
+  assert.throws(() => assertAuditResponse({ ...observed, requestUrl: `${baseUrl}/other.js` }, baseUrl, identity), /changed its request URL/u);
   await assert.rejects(verifyAuditSource(baseUrl, { ...expected, sourceRoot: `${expected.sourceRoot}-other` }), /different checkout/u);
   await assert.rejects(verifyAuditSource(baseUrl, expected, "another-session"), /restarted/u);
   await writeFile(join(directory, "site/scene-router.mjs"), "export const marker = 'changed';\n");

@@ -164,6 +164,8 @@ try {
     externalRequests,
     browserProblems,
   });
+  // Preserve the measured report before any budget assertion.
+  console.log(JSON.stringify(report, null, 2));
   if (process.env.JUPITER_PERF_REPORT_ONLY !== "1") {
     assert.equal(report.runtime.stableDomIdentity, true);
     assert.equal(report.runtime.retainedLeafCount, 797);
@@ -188,7 +190,7 @@ try {
     assert.ok(report.maximumCompositorLayer.height <= 7000,
       JSON.stringify(report.maximumCompositorLayer));
   }
-  console.log(JSON.stringify(report, null, 2));
+
   await cdp.detach();
   await context.close();
 } finally {

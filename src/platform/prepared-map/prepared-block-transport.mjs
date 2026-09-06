@@ -1,16 +1,18 @@
 import { PREPARED_BLOCK_LIMITS, decodePreparedBlockAsync, restoreWmtsRecords } from "./prepared-block.mjs";
+import { isPreparedAssetPath } from "./city-asset-url.mjs";
 
 export const PREPARED_BLOCK_ENCODING = "gzip-cssearth-prepared-columns@1";
 const HASH = /^[a-f0-9]{64}$/u;
 
 export const preparedReferenceKey = ref => `${ref.url}#${ref.offset ?? "all"}:${ref.bytes}:${ref.sha256}`;
 
-export function isPreparedBlockReference(ref) {
+export function isPreparedBlockReference(ref, assetPath = /^\/scenes\/[a-z][a-z0-9-]*\//u.exec(ref?.url ?? "")?.[0]) {
   return ref?.encoding === PREPARED_BLOCK_ENCODING && HASH.test(ref.sha256 ?? "") && HASH.test(ref.decodedSha256 ?? "") &&
+    isPreparedAssetPath(assetPath) && ref.url.startsWith(assetPath) &&
     [ref.bytes, ref.decodedBytes].every(value => Number.isSafeInteger(value) && value > 0 && value <= PREPARED_BLOCK_LIMITS.bytes) &&
-    (ref.offset === undefined ? ref.url === `/scenes/earth/wmts-index-${ref.sha256.slice(0, 16)}.bin.gz` :
+    (ref.offset === undefined ? ref.url === `${assetPath}wmts-index-${ref.sha256.slice(0, 16)}.bin.gz` :
       Number.isSafeInteger(ref.offset) && ref.offset >= 0 && ref.offset + ref.bytes <= 32*1024*1024 &&
-      /^\/scenes\/earth\/wmts-[a-f0-9]{16}\/(?:5|8)-\d+-\d+\.pack$/u.test(ref.url));
+      /^wmts-[a-f0-9]{16}\/\d+-\d+-\d+\.pack$/u.test(ref.url.slice(assetPath.length)));
 }
 
 async function readBounded(stream, expected, signal) {
@@ -66,7 +68,8 @@ export async function readPreparedWmtsBlock(response, ref, signal) {
       for(const key of node.pages){if(!pageKeys.has(key)||used.has(key))throw new Error("Prepared WMTS tile coverage mismatch.");used.add(key);}
       for(const key of node.children)if(!byKey.has(key)||byKey.get(key).level!==node.level+1)throw new Error("Invalid prepared WMTS child.");
     }
-    if(used.size!==pages.length||external.some(n=>!n.stub||!isPreparedBlockReference(n.directory)))throw new Error("Incomplete prepared WMTS subtree.");
+    const assetPath=/^\/scenes\/[a-z][a-z0-9-]*\//u.exec(ref.url)[0];
+    if(used.size!==pages.length||external.some(n=>!n.stub||!isPreparedBlockReference(n.directory,assetPath)))throw new Error("Incomplete prepared WMTS subtree.");
     return {schema:envelope.schema,dataset:envelope.dataset,nodes:[...nodes,...pages],external};
   }
   if (envelope?.schema !== "cssearth-city-index@1" || !envelope.root || !Array.isArray(envelope.root.children)) throw new Error("Invalid prepared WMTS block topology.");

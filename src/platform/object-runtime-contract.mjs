@@ -1,14 +1,10 @@
 import { assertBodyLayerRegistrations } from "./body-layer-registration.mjs";
 import { requireObjectControls } from "../../site/scene-contract.mjs";
 import { PLANET_SPEED_STATES } from "./planet-feature-controls.mjs";
-import { validatePreparedCubicSky } from "./cubic-sky-contract.mjs";
-import { validateDirectionalSunPlan } from "./directional-sun-contract.mjs";
-import { validatePreparedHeliocentricView } from "./heliocentric-view.mjs";
 
-export const OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@1";
-const definitionKeys = new Set(["schema", "id", "controls", "camera", "sky", "sun",
-  "heliocentricView", "inputSelector", "assets", "initialSelection", "reduceSelection",
-  "resolvePresentation", "createPresentation", "destinations"]);
+import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, requirePreparedPresentation } from "./prepared-presentation-contract.mjs";
+
+export const OBJECT_RUNTIME_SCHEMA = PREPARED_OBJECT_RUNTIME_SCHEMA;
 const presentationKeys = new Set(["cameraElement", "sceneElement", "bodyLayers",
   "nativeAnimations", "commitSelection", "publishFrame", "observe", "motionFrame", "pageLayers"]);
 const retentionModes = new Set(["selection", "mount", "warm"]);
@@ -170,66 +166,12 @@ export function requireResolvedPresentation(plan, definition) {
 }
 
 export function requireObjectRuntimeDefinition(definition, { objectId = definition?.id, controls } = {}) {
-  keys(definition, definitionKeys, "Object runtime definition");
-  if (definition.schema !== OBJECT_RUNTIME_SCHEMA ||
-      !/^[a-z][a-z0-9-]*$/.test(definition.id ?? "") || definition.id !== objectId) {
-    throw new TypeError(`Object runtime identity does not match ${objectId}.`);
-  }
-  requireObjectControls(definition.controls, objectId);
-  if (controls !== undefined && definition.controls !== controls) {
-    throw new TypeError(`${objectId} must supply its actual control-content export.`);
-  }
-  record(definition.camera, "Prepared camera");
-  if (!(definition.camera.sceneScale > 0) || !(definition.camera.minimumZoom > 0) ||
-      !(definition.camera.maximumZoom >= definition.camera.minimumZoom)) {
-    throw new TypeError("Object runtime requires its complete prepared camera plan.");
-  }
-  validatePreparedCubicSky(definition.sky, { requireSun: false });
-  if (definition.sun != null) validateDirectionalSunPlan(definition.sun);
-  if (definition.heliocentricView !== undefined) {
-    // The Sun as real geometry with the body's orbit: needs the observed Sun
-    // plan for its direction and sprite, the perspective camera that frames
-    // by dolly, and the shell's own navigation sprite as the far-view marker.
-    const { plan, bodyMarker, systemMarkers, labels } = record(definition.heliocentricView, "Heliocentric view");
-    validatePreparedHeliocentricView(plan);
-    const sprite = marker => Number.isSafeInteger(marker?.index) && marker.index >= 0 &&
-      Number.isSafeInteger(marker.count) && marker.count > marker.index && marker.size > 0 &&
-      (marker.url === undefined || nonempty(marker.url));
-    if (definition.sun == null || definition.camera.projection?.model !== "css-perspective-shared-with-sky" ||
-        !nonempty(bodyMarker?.url) || !sprite(bodyMarker)) {
-      throw new TypeError("A heliocentric view requires the observed Sun plan, a perspective camera and the shell's body marker.");
-    }
-    // The planetary system draws every other body and the Sun from the same
-    // atlas: one sprite per prepared body, and one for the Sun.
-    if (labels !== undefined && (labels === null || typeof labels.policy !== "object" || typeof labels.names !== "object" ||
-        !nonempty(labels.names[definition.id]) ||
-        (plan.system !== undefined && (!nonempty(labels.names.sun) || plan.system.bodies.some(body => !nonempty(labels.names[body.id])))))) {
-      throw new TypeError("Captions require a policy and a name for the observer, the Sun and every system body.");
-    }
-    if (plan.system !== undefined && (!nonempty(systemMarkers?.url) || !sprite(systemMarkers.sun) ||
-        plan.system.bodies.some(body => !sprite(systemMarkers.bodies?.[body.id])) ||
-        !nonempty(systemMarkers.phase?.url) || !(systemMarkers.phase.frameCount > 1))) {
-      throw new TypeError("A prepared planetary system requires a shell marker for the Sun and every body, and a phase atlas.");
-    }
-  }
-  if (definition.inputSelector != null && !nonempty(definition.inputSelector)) {
-    throw new TypeError("Object input selector must be supplied data or null for the stage.");
-  }
-  if (definition.destinations !== undefined) {
-    const { catalog, defaultLens, statuses } = record(definition.destinations, "Destinations");
-    if (!catalog?.url?.startsWith("/scenes/") || !Number.isSafeInteger(catalog.bytes) || catalog.bytes < 1 ||
-        !Number.isSafeInteger(catalog.count) || catalog.count < 1 || !/^[a-f0-9]{64}$/.test(catalog.sha256 ?? "") ||
-        !definition.controls.lenses?.controls.some(lens => lens.id === defaultLens) ||
-        !nonempty(statuses?.detail) || !nonempty(statuses?.overview)) throw new TypeError("Destinations require a pinned catalogue, default lens and status content.");
-  }
-  requirePreparedResourceCatalog(definition.assets);
-  requireObjectSelection(definition.initialSelection, definition.controls);
-  for (const [name, value] of Object.entries(initialObjectSelection(definition.controls))) {
-    if (!Object.is(definition.initialSelection[name], value)) {
-      throw new TypeError(`Initial ${name} must match the actual control-content default.`);
-    }
-  }
-  for (const name of ["reduceSelection", "resolvePresentation", "createPresentation"]) hook(definition[name], name);
+  if (definition?.schema !== PREPARED_OBJECT_RUNTIME_SCHEMA) throw new TypeError("Object runtime requires the data-only prepared definition.");
+  const { schema, id, controls: suppliedControls, ...prepared } = definition;
+  if (!/^[a-z][a-z0-9-]*$/.test(id ?? "") || id !== objectId) throw new TypeError(`Object runtime identity does not match ${objectId}.`);
+  if (controls !== undefined && suppliedControls !== controls) throw new TypeError(`${objectId} must supply its actual control-content export.`);
+  requirePreparedResourceCatalog(prepared.assets);
+  requirePreparedPresentation({ ...prepared, schema: PREPARED_PRESENTATION_SCHEMA }, { controls: suppliedControls });
   return definition;
 }
 

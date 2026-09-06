@@ -7,7 +7,7 @@ import { PREPARED_EARTH_SCENE as scene } from "../runtime/preparedScene.mjs";
 import { readWorldCoverCatalog } from "../tools/city/worldcover-catalog.mjs";
 import { prepareWmtsCoverage } from "../tools/city/wmts-coverage.mjs";
 import { prepareWmtsTile,wmtsAddress } from "../tools/city/wmts-page-geometry.mjs";
-import { readPreparedWmtsBlock,isPreparedBlockReference } from "../runtime/prepared-block-transport.mjs";
+import { readPreparedWmtsBlock,isPreparedBlockReference } from "../../../platform/prepared-map/prepared-block-transport.mjs";
 
 const pinBytes=await readFile(new URL("../source/city/wmts-release.json",import.meta.url));
 const pin=JSON.parse(pinBytes),hash=bytes=>createHash("sha256").update(bytes).digest("hex");

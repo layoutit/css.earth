@@ -1,4 +1,4 @@
-import { PREPARED_BLOCK_SCHEMA, PREPARED_BLOCK_LIMITS } from "../../runtime/prepared-block.mjs";
+import { PREPARED_BLOCK_SCHEMA, PREPARED_BLOCK_LIMITS } from "../../../../platform/prepared-map/prepared-block.mjs";
 
 // Galaxy's independent field streams and second differences, applied to the
 // bits of finished doubles. Unlike fixed-point quantization, this is lossless.

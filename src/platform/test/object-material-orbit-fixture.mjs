@@ -1,6 +1,7 @@
 import { createObjectRuntime } from '../object-runtime.mjs';
 import { createSceneLifetime } from '../scene-lifetime.mjs';
 import { createPreparedResidency } from '../prepared-residency.mjs';
+import { createObjectSelectionRuntime } from '../object-selection-runtime.mjs';
 import { retainedPresentationFixture } from './object-runtime-package.mjs';
 import { Surface, orbitFixture } from './orbit-fixture.mjs';
 
@@ -25,6 +26,10 @@ export function materialOrbitFixture(id) {
   const levelOfDetail = { stage: 'geometry', silhouetteDiameter: 400, billboardOpacity: 0, markerOpacity: 0 };
   const dolly = { rotX: definition.camera.defaultControlPitchDegrees, rotY: definition.camera.defaultControlYawDegrees, zoom: definition.camera.defaultZoom };
   const shared = orbitFixture(null, false, { HTMLElement: globalThis.HTMLElement,
+    createUnboundedMatrixDragControls(options) {
+      shared.callbacks.drag = options; shared.owners.add('drag');
+      return { update() {}, stop() {}, invalidateTrackball() {}, stats() { return {}; }, destroy() { shared.owners.delete('drag'); } };
+    },
     createCubicSkyCameraOrientation: () => ({ scene: () => identity, sceneMatrix: () => identity,
       skybox: () => ({ matrix: identity, sunViewDirection: [0, 0, 1] }),
       counterRotation: () => identity, billboardCounterRotation: () => identity,
@@ -43,8 +48,9 @@ export function materialOrbitFixture(id) {
     }) });
   const f = { ...shared, stage, errors: [], writes: 0, fail: false };
   const publish = () => { f.writes++; if (f.fail) throw new Error('material publication failed'); };
-  const mount = createObjectRuntime({ ...definition, createPresentation(host, context) {
-    const presentation = definition.createPresentation(host, context);
+  const mount = createObjectRuntime(definition, {
+    createSelection(options) {
+    const { presentation } = options, host = stage;
     const checked = new Set();
     for (const layer of presentation.bodyLayers) for (const overlay of layer.lightingOverlays) {
       for (const node of [overlay, ...overlay.querySelectorAll('*')]) checked.add(node);
@@ -53,10 +59,14 @@ export function materialOrbitFixture(id) {
     for (const node of checked) {
       const original = node.style;
       node.style = new Proxy(original, { set(target, key, value) { publish(); target[key] = value; return true; },
-        get(target, key) { if (key === 'setProperty') return (...args) => { publish(); return original.setProperty(...args); }; return target[key]; } });
+        get(target, key) {
+          if (key === 'setProperty') return (...args) => { publish(); return original.setProperty(...args); };
+          if (f.fail) throw new Error('material publication failed');
+          return target[key];
+        } });
     }
-    return presentation;
-  } }, {
+    return createObjectSelectionRuntime(options);
+    },
     createLifetime() { f.lifetime = createSceneLifetime(); return f.lifetime; },
     waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(),
     createControls: () => ({ publish() {}, setReady() {}, destroy() {} }),

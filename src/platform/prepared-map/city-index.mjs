@@ -67,13 +67,13 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
     requests++;
     try {
       const { ref } = entry;
-      const packed = isPreparedBlockReference(ref);
+      const packed = isPreparedBlockReference(ref, plan.assetPath);
       if (!Number.isSafeInteger(ref.bytes) || ref.bytes < 1 || ref.bytes > limits.maximumDirectoryBytes ||
           (!packed && !isPreparedCityAssetUrl(plan, ref.url, "index", ref.sha256))) {
         throw new Error("Invalid prepared city directory reference.");
       }
       const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(30000)]);
-      if (ref.offset !== undefined && !ref.url.startsWith(`/scenes/earth/wmts-${plan.geometryVersion}/`)) throw new Error("Unexpected prepared geometry version.");
+      if (ref.offset !== undefined && !ref.url.startsWith(`${plan.assetPath}wmts-${plan.geometryVersion}/`)) throw new Error("Unexpected prepared geometry version.");
       const localMirror=["localhost","127.0.0.1","[::1]"].includes(globalThis.location?.hostname);
       const url=plan.geometryOrigin && packed && !localMirror ? new URL(ref.url,plan.geometryOrigin).href : ref.url;
       const response = await fetchIndex(url, { signal, ...(ref.offset===undefined?{}:{headers:{Range:`bytes=${ref.offset}-${ref.offset+ref.bytes-1}`}}) });

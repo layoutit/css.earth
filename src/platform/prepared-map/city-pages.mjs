@@ -1,17 +1,17 @@
 import { createPreparedProjectiveTextureLeaf } from "../prepared-projective-texture-leaf.mjs";
 import { selectCityPages } from "./city-page-selection.mjs";
 import { createCityIndex } from "./city-index.mjs";
-import { normalizeCityAssetOrigin, isPreparedCityAssetUrl } from "./city-asset-url.mjs";
+import { normalizeCityAssetOrigin, isPreparedCityAssetUrl, isPreparedAssetPath } from "./city-asset-url.mjs";
 import { createApiImageTransport } from "./api-image-transport.mjs";
 
 export function mountPreparedMapPages({ plan, carrier, system, scene, camera, stage, className, textureClassName, lensIds, own, onError = error => { throw error; } }) {
   let validAssetOrigin = false;
   try { validAssetOrigin = normalizeCityAssetOrigin(plan.assetOrigin) === plan.assetOrigin; } catch {}
-  if (plan.schema !== "cssearth-earth-city-pages@1" || !validAssetOrigin ||
+  if (plan.schema !== "cssearth-prepared-map-pages@1" || !validAssetOrigin || !isPreparedAssetPath(plan.assetPath) ||
       (plan.pageTemplate !== undefined && plan.pageTemplate !== "clipped-projective") ||
       !Number.isSafeInteger(plan.poolSize) || plan.poolSize < 1 || plan.poolSize > 512 ||
       !Number.isSafeInteger(plan.maximumDecodedBytes) || plan.maximumDecodedBytes < plan.decodedPageBytes*2) {
-    throw new Error("Invalid Earth prepared city-page plan.");
+    throw new Error("Invalid prepared map-page plan.");
   }
   const slots = [];
   let desired = [];

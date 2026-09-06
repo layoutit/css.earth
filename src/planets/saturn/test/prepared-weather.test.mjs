@@ -100,7 +100,7 @@ test("prepares three upper-hemisphere storms on separate retained bands", async 
 test("awaits the prepared storm atlas before declaring the scene ready", async () => {
   const [html, client] = await Promise.all([
     readFile(new URL("../site/SaturnHead.astro", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/definition.mjs", import.meta.url), "utf8"),
   ]);
   assert.match(html, /rel="preload" href="\/scenes\/saturn\/saturn-weather\.webp"/);
   const { runtimeDefinition: definition } = await import("../runtime/definition.mjs");

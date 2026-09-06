@@ -41,6 +41,19 @@
       "consumers": ["assets", "lenses", "scene"]
     },
     {
+      "id": "usgs-messenger-topography-legend",
+      "path": "maps/mercury-topography-legend.png",
+      "expectedBytes": 137315,
+      "expectedSha256": "b8dbc1f533a1da5787ab489ea1ed7a9383444f1e250ba2066dc53c7245e08e10",
+      "origin": "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png",
+      "credit": "USGS Astrogeology; MESSENGER; NASA/PDS",
+      "license": "United States government work / NASA-PDS data; cite USGS authors",
+      "licenseEvidence": ["https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"],
+      "acquisition": "Pinned ancillary legend published with the USGS Mercury MESSENGER MDIS DEM Global Color Shaded Relief 2 km product.",
+      "redistribution": "Committed scientific legend snapshot with product credit.",
+      "consumers": ["lenses"]
+    },
+    {
       "id": "openspace-mercury-globe",
       "path": "maps/globe.asset",
       "expectedBytes": 1599,

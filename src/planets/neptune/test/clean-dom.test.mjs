@@ -6,10 +6,10 @@ test("keeps Neptune on retained DOM and prepared runtime transport", async () =>
   const [client, styles, presentation] = await Promise.all([
     readFile(new URL("../runtime/client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/presentation.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../runtime/preparedPresentation.mjs", import.meta.url), "utf8"),
   ]);
-  assert.match(presentation, /PREPARED_NEPTUNE_SCENE/u);
-  assert.match(presentation, /plan\.fixedMaterialPlane/u);
+  assert.match(presentation, /cssearth-prepared-presentation@1/u);
+  assert.match(presentation, /neptune-fixed-material/u);
   assert.doesNotMatch(client, /neptune-material-composite/u);
   assert.doesNotMatch(client, /mountPreparedOrbitGuide/u);
   assert.doesNotMatch(client, /createPreparedOrbitGuideInteraction/u);
@@ -31,7 +31,7 @@ test("keeps Neptune on retained DOM and prepared runtime transport", async () =>
     /(?:clip-path|(?:-webkit-)?mask(?:-image)?|(?:^|[;{\s])filter\s*:|gradient\(|mix-blend-mode)/imu);
 });
 
-test("keeps Neptune-specific behavior inside its adapter", async () => {
+test("binds Neptune content to the shared runtime", async () => {
   const client = await readFile(
     new URL("../runtime/client.mjs", import.meta.url),
     "utf8",

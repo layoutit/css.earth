@@ -2,6 +2,21 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { installObjectRuntimeProbe, instrumentObjectRuntime } from "./object-runtime-instrumentation.mjs";
+import { installNativeCameraProbe, instrumentPreparedMaterialModule } from "../../tools/native-camera-probe.mjs";
+
+test("material instrumentation observes the actual native target and rejects absent or duplicate factories",async()=>{
+  const source=await readFile(new URL("../../src/platform/prepared-material.mjs",import.meta.url),"utf8");
+  const patched=instrumentPreparedMaterialModule(source);
+  assert.match(patched,/recordMaterial\(element, track\)/);
+  assert.throws(()=>instrumentPreparedMaterialModule(source+source),/one actual publisher/);
+  assert.throws(()=>instrumentPreparedMaterialModule("export const owner = true;"),/one actual publisher/);
+  installNativeCameraProbe();
+  const element={},track={id:"lighting",target:18};
+  globalThis.__nativeCameraProbe.recordMaterial(element,track);
+  assert.equal(globalThis.__nativeCameraProbe.materialAt(0),element);
+  assert.deepEqual(globalThis.__nativeCameraProbe.inspect(),{nativeCameraCount:0,materials:[{id:"lighting",target:18}]});
+  delete globalThis.__nativeCameraProbe;
+});
 
 test("probe forwards actual owned operations, getters, promise identity and native failures", async () => {
   installObjectRuntimeProbe();

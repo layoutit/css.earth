@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { mountPreparedPresentation } from "../../../platform/prepared-presentation.mjs";
 import { runtimeDefinition } from "../runtime/definition.mjs";
 import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../platform/test/object-runtime-package.mjs";
 
@@ -76,7 +77,7 @@ test("Venus latest lens wins; decode failure retains the committed material and 
 for (const replacement of [false, true]) test(`Venus presentation retirement preserves ownership (${replacement})`, () => {
   const f = retainedPresentationFixture(runtimeDefinition);
   try {
-    runtimeDefinition.createPresentation(f.stage, f.context); f.stage.dataset.lens = "selected";
+    mountPreparedPresentation(f.stage, f.context, runtimeDefinition); f.stage.dataset.lens = "selected";
     if (replacement) { f.stage.replaceChildren(f.document.createElement("div")); f.stage.dataset.lens = "replacement"; }
     assert.deepEqual(f.lifetime.destroy(), []);
     assert.equal(f.stage.dataset.lens, replacement ? "replacement" : undefined);

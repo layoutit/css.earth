@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { resolvePreparedPresentation } from "../../../platform/prepared-presentation.mjs";
+import { initialObjectSelection } from "../../../platform/object-runtime-contract.mjs";
 import { fileURLToPath } from "node:url";
 
 import sharp from "sharp";
@@ -76,10 +78,7 @@ test("switches prepared lenses without filters, canvas, or DOM growth", async ()
   const { runtimeDefinition } = await import("../runtime/definition.mjs");
   assert.equal(runtimeDefinition.controls.lenses.defaultLens, PREPARED_MARS_LENSES.defaultLens);
   for (const lens of PREPARED_MARS_LENSES.controls) {
-    const plan = runtimeDefinition.resolvePresentation({
-      selection: { ...runtimeDefinition.initialSelection, lensId: lens.id },
-      view: { skySunViewDirection: runtimeDefinition.sun.referenceViewDirection },
-    });
+    const plan = resolvePreparedPresentation(runtimeDefinition, { selection: { ...initialObjectSelection(runtimeDefinition.controls), lensId: lens.id }, view: { skySunViewDirection: runtimeDefinition.sun.referenceViewDirection } });
     assert.ok(plan.required.includes(`surface:${lens.id}`));
     assert.ok(plan.required.includes(`poles:${lens.id}`));
   }

@@ -4,58 +4,106 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { OBJECTS } from "../site/objects.mjs";
 import { auditObjectRuntimeOwnership } from "./check-object-runtime-ownership.mjs";
+import { readPreparedPresentationModule } from "./check-prepared-presentation.mjs";
 import { applyPreparedProjectiveLayout } from "../src/platform/prepared-projective-texture-leaf.mjs";
 
-export function readPreparedExport(source) {
-  const declaration = source.match(/^\s*(?:\/\/[^\n]*\n)*export const (\w+) = ([\s\S]*);\s*$/);
-  if (!declaration) return null;
-  const expression = declaration[2];
-  try { return { name: declaration[1], value: JSON.parse(expression.startsWith("Object.freeze(") ? expression.slice(14, -1) : expression) }; }
-  catch { return null; }
-}
-export function preparedStyleRecord(text) {
+const cssName = name => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+const textureClass = node => node?.className?.split(/\s+/).includes("polycss-projective-texture");
+export function preparedStyleRecord(text, assignments = []) {
   const properties = new Map([...String(text).matchAll(/(?:^|;)\s*([\w-]+)\s*:\s*([^;]*)/g)].map(match => [match[1], match[2]]));
-  return { width: properties.get("width") ?? "", height: properties.get("height") ?? "", backgroundSize: properties.get("background-size") ?? "",
-    getPropertyValue: name => properties.get(name) ?? "" };
+  // Match the retained publisher: cssText first, then every dictionary reference
+  // in order. The last assignment wins; initial layout values are not final CSS.
+  for (const property of assignments) {
+    if (!property || typeof property.name !== "string" || typeof property.value !== "string" || typeof property.custom !== "boolean") {
+      throw new TypeError("Prepared projective property reference is invalid.");
+    }
+    properties.set(property.custom ? property.name : cssName(property.name), property.value);
+  }
+  return new Proxy({ getPropertyValue: name => properties.get(name) ?? "" }, {
+    get: (target, name) => target[name] ?? properties.get(cssName(name)) ?? "",
+  });
 }
-export async function censusPreparedLeafLayouts({ root = process.cwd(), objects = OBJECTS, ignoreLayouts = false } = {}) {
-  const closure = await auditObjectRuntimeOwnership({ root, objects, strict: false });
+
+function missingLayoutProperties(style) {
+  return ["width", "height", "backgroundSize"].filter(name => {
+    const value = style[name] || (name !== "backgroundSize" && style.getPropertyValue(`--polycss-atlas-${name}`));
+    return !value || value === "auto";
+  });
+}
+function requireMatrix(value, label) {
+  const matrix = /^matrix3d\(([^)]+)\)$/.exec(value);
+  const values = matrix?.[1].split(",").map(Number);
+  if (values?.length !== 16 || !values.every(Number.isFinite)) throw new TypeError(`Prepared projective ${label} transform is missing or invalid.`);
+}
+function requirePair(carrier, texture) {
+  for (const name of ["width", "height"]) {
+    const value = carrier[name] || carrier.getPropertyValue(`--polycss-atlas-${name}`);
+    if (!/^(?:\d+(?:\.\d*)?|\.\d+)px$/.test(value) || Number.parseFloat(value) <= 0) {
+      throw new TypeError(`Prepared projective carrier requires explicit positive ${name}.`);
+    }
+    if (texture[name] !== "100%") throw new TypeError(`Prepared projective texture must fill its carrier ${name}.`);
+  }
+  // One auto dimension is valid for an intrinsic-ratio image. An absent address
+  // or an entirely automatic/zero-sized layer cannot supply a prepared layout.
+  if (!texture.backgroundSize || texture.backgroundSize.split(",").some(layer =>
+      !layer.trim().split(/\s+/).some(value => /^\d+(?:\.\d*)?px$/.test(value) && Number.parseFloat(value) > 0))) {
+    throw new TypeError("Prepared projective texture requires an explicit backgroundSize.");
+  }
+  if (carrier.transformStyle !== "preserve-3d" || texture.transformStyle !== "flat") {
+    throw new TypeError("Prepared projective carrier/texture flattening is invalid.");
+  }
+  requireMatrix(carrier.transform, "carrier");
+  requireMatrix(texture.transform, "texture");
+}
+
+export async function censusPreparedLeafLayouts({
+  root = process.cwd(), objects = OBJECTS, ignoreLayouts = false,
+  readText = path => readFile(path, "utf8"),
+} = {}) {
+  const closure = await auditObjectRuntimeOwnership({ root, objects, strict: false, readText });
   const reports = [];
   for (const object of closure.entries) {
-    const modules = [];
-    for (const file of object.closure.filter(file => file.startsWith(`src/planets/${object.id}/runtime/`))) {
-      const source = await readFile(resolve(root, file), "utf8");
-      const prepared = readPreparedExport(source);
-      if (prepared) modules.push({ file, ...prepared });
+    const file = object.closure.find(file => file.endsWith("/runtime/preparedPresentation.mjs"));
+    const report = { id: object.id, count: 0, completedByDescriptor: 0, failures: [...object.violations], modules: file ? [file] : [], sourceSha256: null };
+    if (!file) {
+      report.failures.push({ error: "Reachable normalized presentation data is missing." });
+      reports.push(report); continue;
     }
-    const classes = {};
-    for (const module of modules.filter(module => module.value.schema === "cssearth-prepared-leaf-layouts@1")) {
-      for (const [file, expected] of Object.entries(module.value.sources)) {
-        const bytes = await readFile(resolve(root, "src/planets", object.id, file));
-        if (createHash("sha256").update(bytes).digest("hex") !== expected) throw new Error(`Prepared layout source drift: ${object.id}/${file}.`);
-      }
-      if (!ignoreLayouts) Object.assign(classes, module.value.classes);
+    const source = await readText(resolve(root, file));
+    report.sourceSha256 = createHash("sha256").update(source).digest("hex");
+    let tree;
+    try { tree = readPreparedPresentationModule(source).tree; }
+    catch (error) { report.failures.push({ file, error: error.message }); reports.push(report); continue; }
+    const children = new Map();
+    for (const node of tree.nodes) if (textureClass(node)) children.set(node.parent, (children.get(node.parent) ?? 0) + 1);
+    for (const [index, node] of tree.nodes.entries()) {
+      if (!textureClass(node)) continue;
+      report.count++;
+      try {
+        const parent = tree.nodes[node.parent];
+        if (!parent || node.parent < 0 || node.parent >= index || children.get(node.parent) !== 1) {
+          throw new TypeError("Prepared projective texture requires one preceding carrier and one texture child.");
+        }
+        const original = preparedStyleRecord(parent.style), missing = missingLayoutProperties(original);
+        const assignments = entry => entry.properties.map(id => {
+          if (!Number.isSafeInteger(id) || id < 0 || id >= tree.properties.length) throw new TypeError("Prepared projective property reference is invalid.");
+          return tree.properties[id];
+        }).filter(property => !ignoreLayouts || !missing.includes(property.name));
+        requirePair(preparedStyleRecord(parent.style, assignments(parent)), preparedStyleRecord(node.style, assignments(node)));
+        // This detects the old stylesheet-only layout without depending on an
+        // object id, private builder, or class-to-layout dispatch table.
+        try { applyPreparedProjectiveLayout(original, null, 2); }
+        catch { report.completedByDescriptor++; }
+      } catch (error) { report.failures.push({ file, path: `PREPARED_PRESENTATION.tree.nodes[${index}]`, error: error.message }); }
     }
-    const report = { id: object.id, count: 0, completedByDescriptor: 0, failures: [], modules: modules.map(({ file }) => file) };
-    function visit(value, file, path, inherited = null) {
-      if (!value || typeof value !== "object") return;
-      const layout = classes[value.className] ?? inherited;
-      if (value.projectiveTextureLayer) {
-        report.count++;
-        const scale = value.projectiveTextureLayer.rasterScale ?? 1;
-        let incomplete = false;
-        try { applyPreparedProjectiveLayout(preparedStyleRecord(value.style), null, scale); } catch { incomplete = true; }
-        try {
-          applyPreparedProjectiveLayout(preparedStyleRecord(value.style), layout, scale);
-          if (incomplete) report.completedByDescriptor++;
-        } catch (error) { report.failures.push({ file, path, error: error.message }); }
-      }
-      for (const [key, child] of Object.entries(value)) visit(child, file, `${path}.${key}`, layout);
-    }
-    for (const module of modules) visit(module.value, module.file, module.name);
+    if (!report.count) report.failures.push({ file, error: "No reachable prepared projective textures were found." });
     reports.push(report);
   }
-  return { schema: "cssearth-prepared-leaf-layout-census@1", complete: reports.every(report => !report.failures.length), objects: reports };
+  return {
+    schema: "cssearth-prepared-leaf-layout-census@2", evidence: "validated-source-data",
+    complete: closure.complete && reports.every(report => report.count > 0 && !report.failures.length),
+    sharedViolations: closure.sharedViolations, objects: reports,
+  };
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const report = await censusPreparedLeafLayouts({ ignoreLayouts: process.argv.includes("--ignore-layouts") });

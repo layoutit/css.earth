@@ -1,3 +1,4 @@
+import { mountPreparedPresentation } from "../../../platform/prepared-presentation.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { runtimeDefinition } from "../runtime/definition.mjs";
@@ -7,14 +8,14 @@ for (const failAtElement of [1, 2, 3]) test(`Uranus partial native construction 
   const f = retainedPresentationFixture(runtimeDefinition, { failAtElement });
   try {
     f.stage.dataset.lens = "previous-owner";
-    assert.throws(() => runtimeDefinition.createPresentation(f.stage, f.context), /injected native/);
+    assert.throws(() => mountPreparedPresentation(f.stage, f.context, runtimeDefinition), /injected native/);
     assert.deepEqual(f.lifetime.destroy(), []); assert.equal(f.stage.dataset.lens, "previous-owner");
   } finally { f.restore(); }
 });
 for (const replacement of [false, true]) test(`Uranus retained-root cleanup preserves its owner (${replacement})`, () => {
   const f = retainedPresentationFixture(runtimeDefinition);
   try {
-    runtimeDefinition.createPresentation(f.stage, f.context);
+    mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
     if (replacement) { f.stage.replaceChildren(f.document.createElement("div")); f.stage.dataset.lens = "replacement"; }
     assert.deepEqual(f.lifetime.destroy(), []);
     assert.equal(f.stage.dataset.lens, replacement ? "replacement" : undefined);

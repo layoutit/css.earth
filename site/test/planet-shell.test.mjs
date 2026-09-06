@@ -362,19 +362,19 @@ test("renders optional source media through one planet-neutral panel contract", 
   assert.match(styles, /\.planet-gallery-image\s*\{[\s\S]*?width:\s*100%;[\s\S]*?height:\s*auto;/u);
 });
 
-test("renders concise per-lens descriptions without a general introduction", async () => {
+test("keeps concise lens descriptions in the object model without secondary row copy", async () => {
   const [shell, saturnPanel] = await Promise.all([
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
     readFile(new URL("../../src/planets/saturn/site/control-content.mjs", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(shell, /planet-lenses-introduction|Explore this object in new ways/u);
-  assert.match(shell, /class="planet-lens-description">\{lens\.description\}<\/span>/u);
+  assert.doesNotMatch(shell, /planet-lens-description|\{lens\.description\}<\/span>/u);
   assert.match(saturnPanel, /normal:\s*"Visible color"/u);
   assert.match(saturnPanel, /ultraviolet:\s*"Hubble at 225 nm"/u);
   assert.match(saturnPanel, /thermal:\s*"Cassini infrared"/u);
 });
 
-test("places the retained chart switcher after Factsheet and before Surface Lens", async () => {
+test("places a scalable Surface Lens browser after the retained chart switcher", async () => {
   const [shell, client, styles, siteStyles] = await Promise.all([
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
     readFile(new URL("../planet-shell-client.mjs", import.meta.url), "utf8"),
@@ -385,39 +385,48 @@ test("places the retained chart switcher after Factsheet and before Surface Lens
   const chartsIndex = shell.indexOf('class="planet-chart-switcher"');
   const lensesIndex = shell.indexOf('class="planet-lenses"');
   assert.ok(factsheetIndex >= 0 && factsheetIndex < chartsIndex && chartsIndex < lensesIndex);
-  assert.match(shell, /class="planet-chart-switcher-controls"[\s\S]*?data-chart-step="-1"[\s\S]*?data-chart-step="1"[\s\S]*?class="planet-chart-current-icon"/u);
+  assert.match(shell, /class="planet-chart-switcher-controls"[\s\S]*?data-chart-step="-1"[\s\S]*?data-chart-step="1"/u);
+  assert.doesNotMatch(shell, /planet-chart-current-icon|planet-chart-icon|data-chart-icon/u);
   assert.match(shell, /orderedCharts\.map\(\(chart\) => \([\s\S]*?class="planet-chart-slide"[\s\S]*?hidden=\{chart\.id !== defaultChart\.id\}/u);
   assert.match(client, /createChartSwitcherController[\s\S]*?activeIndex = \(index \+ slides\.length\) % slides\.length/u);
   assert.match(client, /slide\.hidden = slide\.dataset\.chartId !== activeId/u);
-  assert.doesNotMatch(shell, /planet-lenses-card|planet-layers-trigger|planet-layers-thumbnail|planet-layers-caption|planet-layers-glyph/u);
+  assert.match(shell, /class="planet-panel-summary planet-lens-browser-header"[\s\S]*?<h2 class="planet-panel-heading">\{lenses\.title\.label\}<\/h2>[\s\S]*?class="planet-lens-search"[\s\S]*?aria-label="Search surface lenses"[\s\S]*?class="planet-lens-search-icon"><SearchIcon \/>/u);
+  assert.doesNotMatch(shell, /planet-lens-count|data-lens-count/u);
+  assert.doesNotMatch(shell, /data-panel-icon="lenses"|PREPARED_SHELL_ICONS\.lenses\.src/u);
   assert.match(
     styles,
     /\.planet-information-panel > :is\([\s\S]*?\.planet-lenses,[\s\S]*?\):has\(~ :is\([\s\S]*?\.planet-lenses,[\s\S]*?\)\)\s*\{[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);/u,
   );
-  assert.match(styles, /\.planet-layers-menu \.planet-observation-controls\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?gap:\s*2px;[\s\S]*?margin:\s*2px 0 0;[\s\S]*?padding:\s*0;/u);
-  assert.match(
-    styles,
-    /@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-observation-controls:has\(> \.planet-observation-option:nth-child\(5\)\)\s*\{[\s\S]*?max-height:\s*166px;[\s\S]*?overflow-x:\s*hidden;[\s\S]*?overflow-y:\s*auto;[\s\S]*?scrollbar-width:\s*thin;/u,
-  );
-  assert.doesNotMatch(styles, /\.planet-layers-menu \.planet-observation-controls\s*\{[^}]*(?:height|overflow|scrollbar-width):/u);
-  assert.match(styles, /\.planet-layers-menu \.planet-observation-control\s*\{[\s\S]*?grid-template-columns:\s*36px minmax\(0, 1fr\);[\s\S]*?width:\s*100%;[\s\S]*?height:\s*40px;/u);
+  assert.match(styles, /\.planet-observation-controls\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?gap:\s*0;[\s\S]*?max-height:\s*202px;[\s\S]*?overflow-y:\s*auto;[\s\S]*?scrollbar-width:\s*thin;/u);
+  assert.match(styles, /\.planet-observation-control\s*\{[\s\S]*?grid-template-columns:\s*18px minmax\(0, 1fr\);[\s\S]*?width:\s*100%;[\s\S]*?height:\s*32px;/u);
   assert.match(siteStyles, /--shell-text:\s*#dfdfdf;[\s\S]*?--shell-text-secondary:\s*#b8bbc4;[\s\S]*?--shell-text-muted:\s*#7f8187;/u);
   const layoutStyles = await readFile(new URL("../shell-layout.css", import.meta.url), "utf8");
   assert.match(layoutStyles, /\.planet-sidebar\s*\{[^}]*--shell-text-secondary:\s*#a9acb5;/u);
-  assert.match(styles, /\.planet-layers-menu \.planet-observation-control\s*\{[\s\S]*?color:\s*var\(--shell-text-secondary\);[\s\S]*?opacity:\s*1;[\s\S]*?transition:\s*opacity 120ms ease;/u);
-  assert.match(styles, /\.planet-layers-menu \.planet-observation-control\[aria-pressed="true"\]\s*\{[\s\S]*?opacity:\s*1;/u);
+  assert.match(styles, /\.planet-observation-control\s*\{[\s\S]*?opacity:\s*0\.62;[\s\S]*?transition:\s*opacity 120ms ease;/u);
+  assert.match(styles, /\.planet-observation-control\[aria-pressed="true"\]\s*\{[\s\S]*?opacity:\s*1;/u);
   assert.doesNotMatch(styles, /rgb\(255 255 255 \/ 75%\)/u);
   assert.doesNotMatch(styles, /rgb\(255 255 255 \/ 45%\)/u);
-  assert.match(styles, /\.planet-layers-menu \.planet-lens-icon\s*\{[\s\S]*?width:\s*36px;[\s\S]*?height:\s*36px;[\s\S]*?border:\s*1px solid rgb\(255 255 255 \/ 8%\);[\s\S]*?border-radius:\s*2px;[\s\S]*?box-shadow:\s*none;/u);
-  assert.match(styles, /\.planet-layers-menu \.planet-lens-label\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);[\s\S]*?font:\s*400 0\.875rem\/20px var\(--shell-ui-font\);[\s\S]*?opacity:\s*1;[\s\S]*?text-overflow:\s*ellipsis;/u);
-  assert.match(styles, /\.planet-layers-menu \.planet-lens-description\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);[\s\S]*?font:\s*400 0\.8125rem\/17px var\(--shell-ui-font\);[\s\S]*?opacity:\s*1;[\s\S]*?text-overflow:\s*ellipsis;[\s\S]*?white-space:\s*nowrap;/u);
-  assert.match(styles, /\.planet-observation-control\[aria-pressed="true"\][\s\S]*?\.planet-lens-label\s*\{[\s\S]*?color:\s*var\(--shell-text\);[\s\S]*?opacity:\s*1;/u);
-  assert.match(styles, /\.planet-observation-control\[aria-pressed="true"\][\s\S]*?\.planet-lens-description\s*\{[\s\S]*?color:\s*var\(--shell-text-secondary\);[\s\S]*?opacity:\s*1;/u);
-  assert.doesNotMatch(shell, /planet-lens-scrollbar/u);
-  assert.doesNotMatch(styles, /planet-lens-scrollbar/u);
-  assert.doesNotMatch(client, /createLensScrollbarController|lensScrollbar/u);
+  assert.match(styles, /\.planet-lens-icon\s*\{[\s\S]*?width:\s*18px;[\s\S]*?height:\s*18px;/u);
+  assert.match(styles, /\.planet-lens-label\s*\{[\s\S]*?grid-column:\s*2;[\s\S]*?font:\s*400 1rem\/1\.4 var\(--shell-ui-font\);/u);
+  assert.match(shell, /class="planet-lens-icon"[^>]*width="18" height="18"/u);
+  assert.doesNotMatch(styles, /planet-lens-copy|planet-lens-description/u);
+  assert.match(styles, /\.planet-lens-search\s*\{[\s\S]*?border:\s*0;[\s\S]*?background:\s*transparent;[\s\S]*?text-align:\s*right;/u);
+  assert.match(styles, /\.planet-lens-search-icon \.search-icon\s*\{[\s\S]*?width:\s*100%;[\s\S]*?stroke:\s*currentColor;/u);
+  assert.match(shell, /lenses\.controls\.map\(\(lens\)[\s\S]*?class="planet-observation-option" data-lens-option[\s\S]*?aria-pressed=\{lens\.id === lenses\.defaultLens[\s\S]*?<\/nav>[\s\S]*?<\/details>\}/u);
+  assert.match(shell, /aria-expanded=\{lens\.legend[\s\S]*?aria-controls=\{lens\.legend \? `\$\{objectId\}-\$\{lens\.id\}-legend` : undefined\}/u);
+  assert.match(shell, /lenses\.controls\.map\(\(lens\) => \([\s\S]*?class="planet-observation-option"[\s\S]*?class="planet-observation-control"[\s\S]*?lens\.legend && <section[\s\S]*?class="planet-lens-legend-panel"[\s\S]*?data-lens-legend=\{lens\.id\}[\s\S]*?lens\.legend\.kind === "scale"[\s\S]*?class="planet-lens-legend-scale-row"[\s\S]*?class="planet-lens-legend-labels"[\s\S]*?lens\.legend\.kind === "categories"[\s\S]*?class="planet-lens-legend-categories"[\s\S]*?class="planet-lens-legend-swatch"/u);
+  assert.match(styles, /\.planet-lens-legend-panel\s*\{[\s\S]*?width:\s*100%;[\s\S]*?padding:\s*2px 0 8px;[\s\S]*?background:\s*transparent;/u);
+  assert.match(styles, /\.planet-lens-legend-scale-row\s*\{[\s\S]*?align-items:\s*center;[\s\S]*?height:\s*24px;/u);
+  assert.match(shell, /lens\.legend\.src \|\| lens\.legend\.colors[\s\S]*?class="planet-lens-legend-scale planet-lens-legend-segments"[\s\S]*?lens\.legend\.colors\?\.map/u);
+  assert.match(styles, /\.planet-lens-legend-segments\s*\{[\s\S]*?display:\s*flex;[\s\S]*?overflow:\s*hidden;/u);
+  assert.match(styles, /\.planet-lens-legend-segment\s*\{[\s\S]*?background:\s*var\(--planet-lens-legend-color\);/u);
+  assert.match(styles, /\.planet-lens-legend-categories li\s*\{[\s\S]*?grid-template-columns:\s*8px max-content minmax\(8px, 1fr\) max-content;[\s\S]*?height:\s*24px;/u);
+  assert.match(client, /const legends = \[\.\.\.root\.querySelectorAll\("\[data-lens-legend\]"\)\][\s\S]*?const renderLegend = \(\) => \{[\s\S]*?legend\.hidden = !expanded;[\s\S]*?button\.ariaExpanded = String\(expanded\);[\s\S]*?new windowTarget\.MutationObserver\(renderLegend\)/u);
+  assert.match(client, /createLensBrowserController\(drawer, windowTarget, lifetime\)[\s\S]*?empty\.hidden = visible !== 0/u);
+  assert.match(client, /search\.addEventListener\("click", \(event\) => \{[\s\S]*?event\.stopPropagation\(\)/u);
+  assert.match(client, /button\.addEventListener\("click", \(event\) => \{[\s\S]*?event\.preventDefault\(\);[\s\S]*?event\.stopPropagation\(\);[\s\S]*?render\(activeIndex/u);
   assert.match(layoutStyles, /\.planet-sidebar\s*\{[^}]*overflow:\s*hidden auto;/u);
-  assert.doesNotMatch(client, /createLayersController|MutationObserver|layersOpen/u);
+  assert.doesNotMatch(client, /createLayersController|layersOpen/u);
 });
 
 test("keeps the introduction below the title and previews four facts in a collapsed-by-default panel", async () => {
@@ -457,11 +466,7 @@ test("keeps the introduction below the title and previews four facts in a collap
   );
   assert.doesNotMatch(shell, /planet-panel-symbol|chartGlyphs|◉|∿|↕|◎|§/u);
   for (const iconKey of [
-    "reflectance",
-    "temperaturePressure",
-    "photometricPhase",
     "facts",
-    "lenses",
     "resources",
   ]) {
     assert.match(shell, new RegExp(`PREPARED_SHELL_ICONS\\.${iconKey}`, "u"));
@@ -474,16 +479,8 @@ test("keeps the introduction below the title and previews four facts in a collap
     styles,
     /@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-panel-icon\s*\{[\s\S]*?flex-basis:\s*16px;[\s\S]*?width:\s*16px;[\s\S]*?height:\s*16px;/u,
   );
-  assert.match(styles, /\.planet-panel-icon\[data-panel-icon="reflectance"\]\s*\{[^}]*--planet-panel-icon-scale:\s*0\.86;/u);
-  assert.match(styles, /\.planet-panel-icon\[data-panel-icon="temperature-pressure"\]\s*\{[^}]*--planet-panel-icon-scale:\s*0\.9;/u);
-  assert.match(
-    shell,
-    /class="planet-chart-label"[\s\S]*?data-chart-label=\{chart\.id\}[\s\S]*?\{chart\.title\.label\}[\s\S]*?class="planet-panel-icon planet-chart-icon"[\s\S]*?data-panel-icon=\{chart\.id\}/u,
-  );
-  assert.match(
-    shell,
-    /class="planet-panel-heading">\{lenses\.title\.label\}<\/h2>[\s\S]*?class="planet-panel-icon"[\s\S]*?data-panel-icon="lenses"[\s\S]*?PREPARED_SHELL_ICONS\.lenses\.src/u,
-  );
+  assert.match(shell, /class="planet-chart-label"[\s\S]*?data-chart-label=\{chart\.id\}[\s\S]*?\{chart\.title\.label\}/u);
+  assert.match(shell, /<h2 class="planet-panel-heading">\{lenses\.title\.label\}<\/h2>/u);
   assert.match(
     shell,
     /class="planet-panel-heading">\{PREPARED_SHELL_TITLES\.resources\.label\}<\/h2>[\s\S]*?class="planet-panel-icon"[\s\S]*?data-panel-icon="resources"[\s\S]*?PREPARED_SHELL_ICONS\.resources\.src/u,
@@ -495,17 +492,18 @@ test("keeps the introduction below the title and previews four facts in a collap
   );
   assert.match(
     styles,
-    /\.planet-facts\s*\{[\s\S]*?margin:\s*8px 0 0;[\s\S]*?font-family:\s*var\(--shell-ui-font\);[\s\S]*?font-size:\s*0\.875rem;[\s\S]*?line-height:\s*1\.4;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-facts li\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, max-content\) minmax\(8px, 1fr\) max-content;[\s\S]*?align-items:\s*baseline;[\s\S]*?gap:\s*8px;[\s\S]*?\.planet-facts li::before\s*\{[\s\S]*?border-bottom:\s*1px solid rgb\(255 255 255 \/ 5%\);[\s\S]*?\.planet-fact-label\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);[\s\S]*?opacity:\s*1;[\s\S]*?\.planet-fact-value\s*\{[\s\S]*?grid-column:\s*3;[\s\S]*?font:\s*13px\/1\.4 var\(--shell-ui-font\);/u,
+    /\.planet-facts\s*\{[\s\S]*?margin:\s*8px 0 0;[\s\S]*?font-family:\s*var\(--shell-ui-font\);[\s\S]*?font-size:\s*1rem;[\s\S]*?line-height:\s*1\.4;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-facts li\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, max-content\) minmax\(8px, 1fr\) max-content;[\s\S]*?align-items:\s*baseline;[\s\S]*?gap:\s*8px;[\s\S]*?\.planet-facts li::before\s*\{[\s\S]*?border-bottom:\s*1px dotted rgb\(255 255 255 \/ 12%\);[\s\S]*?\.planet-fact-label\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);[\s\S]*?opacity:\s*1;[\s\S]*?\.planet-fact-value\s*\{[\s\S]*?grid-column:\s*3;[\s\S]*?font:\s*inherit;/u,
   );
   for (const className of ["planet-chart", "planet-gallery", "planet-settings"]) {
     assert.match(styles, new RegExp(`\\.${className}\\s*\\{[^}]*margin:\\s*8px 0 0;`, "u"));
   }
   assert.doesNotMatch(styles, /planet-factsheet-icon|Apple Symbols|Segoe UI Symbol/u);
   assert.doesNotMatch(styles, /planet-factsheet-(?:disclosure|summary|show|hide|content)/u);
-  assert.match(styles, /\.planet-factsheet-section\s*\{[\s\S]*?margin-top:\s*0;[\s\S]*?padding-bottom:\s*16px;/u);
+  assert.match(styles, /\.planet-factsheet-section\s*\{[\s\S]*?margin-top:\s*0;[\s\S]*?padding-bottom:\s*0;[\s\S]*?\.planet-factsheet-section\[open\]\s*\{[\s\S]*?padding-bottom:\s*16px;/u);
   assert.match(styles, /\.planet-information-panel > \.planet-factsheet-section\s*\{[^}]*padding-block-start:\s*0;/u);
   assert.doesNotMatch(styles, /\.planet-factsheet-section::before/u);
-  assert.match(styles, /\.planet-factsheet-section > \.planet-factsheet-header\s*\{[^}]*height:\s*auto;[^}]*min-height:\s*0;[^}]*padding:\s*16px 0 0;/u);
+  assert.match(styles, /\.planet-factsheet-section > \.planet-factsheet-header\s*\{[^}]*align-items:\s*center;[^}]*height:\s*45px;[^}]*min-height:\s*45px;[^}]*padding:\s*0;/u);
+  assert.doesNotMatch(styles, /\.planet-factsheet-body > \.planet-introduction/u);
 });
 
 test("aligns prepared charts to device pixels after layout", async () => {
@@ -631,7 +629,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   );
   assert.match(
     styles,
-    /\.planet-panel-summary:focus-visible\s*\{[^}]*outline:\s*2px solid #b5d8fa;[^}]*outline-offset:\s*-2px;/u,
+    /\.planet-panel-summary:focus-visible\s*\{[^}]*outline:\s*0;/u,
   );
   assert.match(styles, /\.planet-drawer-content\s*\{[^}]*display:\s*flex;[^}]*flex-direction:\s*column;/u);
   assert.doesNotMatch(styles, /border-top:\s*1px solid/u);

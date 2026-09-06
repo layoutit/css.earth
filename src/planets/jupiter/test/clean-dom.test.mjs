@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { mountPreparedPresentation } from "../../../platform/prepared-presentation.mjs";
+import { initialObjectSelection } from "../../../platform/object-runtime-contract.mjs";
 import { PREPARED_JUPITER_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_JUPITER_MOONS } from "../runtime/preparedMoons.mjs";
 import { PREPARED_JUPITER_RINGS } from "../runtime/preparedRings.mjs";
@@ -29,7 +31,7 @@ test("keeps the Jupiter scene as one fixed retained PolyCSS tree", async () => {
   const { retainedPresentationFixture } = await import("../../../platform/test/object-runtime-package.mjs");
   const f = retainedPresentationFixture(runtimeDefinition);
   try {
-    const presentation = runtimeDefinition.createPresentation(f.stage, f.context);
+    const presentation = mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
     const nodes = f.stage.querySelectorAll("*");
     const material = nodes.find(node => node.classList.contains("jupiter-material"));
     const rings = nodes.find(node => node.classList.contains("jupiter-rings"));
@@ -40,7 +42,7 @@ test("keeps the Jupiter scene as one fixed retained PolyCSS tree", async () => {
     assert.equal(rings.children.length, PREPARED_JUPITER_RINGS.retainedDom.leafCount);
     assert.equal(nodes.filter(node => ["B", "S", "U"].includes(node.tagName)).length, 789);
     for (const lens of runtimeDefinition.controls.lenses.controls) {
-      presentation.commitSelection({ selection: { ...runtimeDefinition.initialSelection, lensId: lens.id } });
+      presentation.commitSelection({ selection: { ...initialObjectSelection(runtimeDefinition.controls), lensId: lens.id } });
       assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
     }
     presentation.observe();

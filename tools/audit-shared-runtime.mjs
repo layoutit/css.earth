@@ -15,6 +15,9 @@ import {
 } from "./audit-source-identity.mjs";
 import { captureFixedReadbacks } from "./readback-sequence.mjs";
 import { runtimeAuditPoses } from "./runtime-audit-poses.mjs";
+import { AUDIT_PREPARED_TRANSPORT_SCHEMA, AUDIT_PREPARED_TRANSPORT_HARNESS_FILES,
+  loadAuditPreparedTransports, verifyAuditPreparedTransportResponses } from "./audit-prepared-transport.mjs";
+import { AUDIT_PREPARED_READINESS_SCHEMA, waitForAuditPreparedReadiness } from "./audit-prepared-readiness.mjs";
 
 const [mode, baseUrl, sourceArgument, outputArgument, ...options] = process.argv.slice(2);
 assert.ok(["baseline", "candidate"].includes(mode) && baseUrl && sourceArgument && outputArgument,
@@ -35,11 +38,14 @@ const sourceRoot = resolve(sourceArgument), root = resolve(outputArgument), outp
 await mkdir(root, { recursive: true });
 await mkdir(output); // Refuse to overwrite evidence.
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
-const report = { protocol: "immutable-headless-native-readback-pairs@5", mode, sourceRoot, baseUrl, capturedAt: new Date().toISOString(), headless: true, fingerprints: {}, sourceHashes: {}, harnessHashes: {}, expectedCaptureCount: 0, captures: [], errors: [], comparisons: [] };
+const report = { protocol: "immutable-headless-native-readback-pairs@6", mode, sourceRoot, baseUrl, capturedAt: new Date().toISOString(), headless: true, fingerprints: {}, sourceHashes: {}, harnessHashes: {}, expectedCaptureCount: 0, captures: [], errors: [], comparisons: [] };
 if (reportOnly) {
-  report.protocol = "report-only-fixed-six-native-readbacks@3";
+  report.protocol = "report-only-fixed-six-native-readbacks@4";
   report.qualification = "Diagnostic only; does not satisfy the strict acceptance gate.";
 }
+report.preparedTransportProtocol = AUDIT_PREPARED_TRANSPORT_SCHEMA;
+report.preparedReadinessProtocol = AUDIT_PREPARED_READINESS_SCHEMA;
+report.preparedTransportPlans = {};
 report.reportOnly = reportOnly;
 report.runtimeMatrix = runtimeMatrix;
 report.objectIds = objects.map(({ id }) => id);
@@ -55,6 +61,10 @@ const harnessFiles = execFileSync("git", ["ls-files", "--cached", "--others", "-
 for (const file of [...new Set(harnessFiles)].sort()) {
   report.harnessHashes[file] = sha(await readFile(resolve(harnessRoot, file)));
 }
+report.preparedTransportHarnessHashes = Object.fromEntries(AUDIT_PREPARED_TRANSPORT_HARNESS_FILES.map(file => {
+  assert.ok(report.harnessHashes[file], `Prepared transport verifier must belong to the pinned harness: ${file}`);
+  return [file, report.harnessHashes[file]];
+}));
 report.gitHead = execFileSync("git", ["rev-parse", "HEAD"], { cwd: sourceRoot, encoding: "utf8" }).trim();
 report.gitStatus = execFileSync("git", ["status", "--porcelain"], { cwd: sourceRoot, encoding: "utf8" }).trim();
 const platformFiles = (await readdir(resolve(sourceRoot, "src/platform")))
@@ -101,6 +111,8 @@ try {
   if (baseline) {
     assert.deepEqual(baseline.errors, []);
     assert.equal(baseline.protocol, report.protocol);
+    assert.equal(baseline.preparedTransportProtocol, report.preparedTransportProtocol);
+    assert.deepEqual(baseline.preparedTransportHarnessHashes, report.preparedTransportHarnessHashes, "Match the source-bound transport verifier");
     assert.equal(report.browser, baseline.browser);
     assert.equal(report.headless, baseline.headless, "Match window presentation mode");
     assert.deepEqual(report.browserArgs, baseline.browserArgs);
@@ -121,6 +133,9 @@ try {
     if (baseline) assert.deepEqual(fingerprints, baseline.fingerprints[object.id], `${object.id}: prepared bytes unchanged`);
     const inventory = JSON.parse(await readFile(resolve(packagePath, "runtime-assets.json")));
     const expected = new Map(inventory.assets.map((asset) => [asset.filename, asset]));
+    const transportPlans = await loadAuditPreparedTransports({ root: sourceRoot, objectId: object.id, sourceSnapshot });
+    report.preparedTransportPlans[object.id] = transportPlans.map(({ source, plan }) => ({ source,
+      dataset: plan.dataset, assetPath: plan.assetPath, rootCount: plan.roots.length }));
     const profile = await loadPlanetBrowserProfile(object);
     const testPath = resolve(import.meta.dirname, `../src/planets/${object.id}/test`);
     const hasExtraPoses = (await readdir(testPath)).includes("visual-poses.mjs");
@@ -147,21 +162,31 @@ try {
       if (runtimeMatrix && width !== 1440 && pose.id !== "default") continue;
       const context = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: scale, reducedMotion: "reduce" });
       try {
-        const page = await context.newPage(), checks = [], loaded = new Map(), loadedCode = new Map();
+        const page = await context.newPage(), checks = [], loaded = new Map(), loadedCode = new Map(), transportResponses = [], sourceAssetResponses = [];
         page.on("pageerror", (error) => report.errors.push(`${object.id}: ${error.message}`));
         page.on("response", (response) => {
           checks.push((async () => {
             const url = new URL(response.url());
             const pathname = url.pathname;
-            assertAuditResponse({ url: response.url(), status: response.status(),
-              headers: await response.allHeaders() }, baseUrl, report.sourceIdentity);
-            if (pathname.startsWith(`/scenes/${object.id}/`)) {
-              const asset = expected.get(pathname.split("/").at(-1));
-              assert.ok(asset, `Undeclared asset ${pathname}`);
+            const request = response.request();
+            const observed = { url: response.url(), status: response.status(), headers: await response.allHeaders(),
+              requestUrl: request.url(), redirectedFrom: request.redirectedFrom()?.url() ?? null,
+              requestHeaders: await request.allHeaders(), resourceType: request.resourceType() };
+            const packageAsset = pathname.startsWith(`/scenes/${object.id}/`);
+            const asset = packageAsset ? expected.get(pathname.split("/").at(-1)) : null;
+            if (url.protocol === "blob:" || url.origin !== new URL(baseUrl).origin || packageAsset && !asset) {
+              // Merely collecting a response grants no origin exception. The
+              // complete source-bound metadata graph must qualify it below.
+              transportResponses.push({ ...observed, body: await response.body() });
+              return;
+            }
+            assertAuditResponse(observed, baseUrl, report.sourceIdentity);
+            if (packageAsset) {
               const bytes = await response.body();
               assert.equal(bytes.length, asset.bytes, pathname);
               assert.equal(sha(bytes), asset.sha256, pathname);
               loaded.set(pathname, asset.sha256);
+              sourceAssetResponses.push({ ...observed, body: bytes });
             } else if (["document", "script", "stylesheet"].includes(response.request().resourceType())) {
               const key = pathname + url.search;
               const hash = sha(await response.body());
@@ -204,6 +229,7 @@ try {
             if (animation instanceof CSSAnimation) animation.currentTime = 0;
           }
         });
+        const preparedReadiness = await waitForAuditPreparedReadiness(page, object.id);
         const observedPose = reportOnly ? {
           camera: await profile.camera(page),
           lens: (await profile.lens(page)).id,
@@ -328,7 +354,13 @@ try {
         // readback at a few dark pixels despite an unchanged paused state.
         const frame = await capture(kind === "scene" ? page.locator(".planet-stage") : page, kind === "scene");
         await Promise.all(checks);
-        assert.deepEqual(report.errors, [], "Every response must belong to the recorded audit server");
+        const preparedTransport = await verifyAuditPreparedTransportResponses({ plans: transportPlans,
+          responses: transportResponses, sourceAssetResponses, baseUrl, identity: report.sourceIdentity });
+        for (const [key, hash] of Object.entries(preparedTransport.loadedAssets)) {
+          if (loaded.has(key)) assert.equal(loaded.get(key), hash, `Asset and prepared transport identities disagree: ${key}`);
+          loaded.set(key, hash);
+        }
+        assert.deepEqual(report.errors, [], "Every response must verify its audit source or declared prepared transport");
         await verifyAuditSource(baseUrl, sourceSnapshot, report.sourceIdentity.session);
         assert.ok(loadedCode.size > 0, `${prefix}: application response bytes verified`);
         const loadedApplication = Object.fromEntries([...loadedCode].sort(([a], [b]) => a.localeCompare(b)));
@@ -349,7 +381,7 @@ try {
             })),
           };
         }, object.id) : null;
-        const record = { prefix, kind, pose: pose.id, poseState, loadedAssets, loadedApplication, versionLabel, gpu: gpuAfter, frameSha256s: frame.frames.map(sha), coverage: frame.validation, captureAttempts: frame.attempts,
+        const record = { prefix, kind, pose: pose.id, poseState, loadedAssets, loadedApplication, preparedTransport, preparedReadiness, versionLabel, gpu: gpuAfter, frameSha256s: frame.frames.map(sha), coverage: frame.validation, captureAttempts: frame.attempts,
           ...(runtimeMatrix ? { runtimeObservation } : {}),
           ...(reportOnly ? { observedPose, repeatable: frame.repeatable, stateHashes: frame.stateHashes } : {}) };
         report.captures.push(record);

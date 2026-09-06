@@ -9,7 +9,8 @@ import { createPreparedPlayback } from "./prepared-playback.mjs";
 import { createRetainedCubicSkyOrbit, mountRetainedCubicSky } from "./cubic-sky-runtime.mjs";
 import { mountRetainedDirectionalSun } from "./directional-sun-runtime.mjs";
 import { mountRetainedHeliocentricView } from "./heliocentric-view-runtime.mjs";
-import { invokeRuntimeHook, requireObjectPresentation, requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
+import { mountPreparedPresentation } from "./prepared-presentation.mjs";
+import { initialObjectSelection, invokeRuntimeHook, requireObjectPresentation, requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
@@ -22,6 +23,7 @@ const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, crea
 // used only by native-boundary unit tests; object clients bind one definition.
 export function createObjectRuntime(definition, services = nativeServices) {
   requireObjectRuntimeDefinition(definition);
+  const initialSelection = initialObjectSelection(definition.controls);
   const environment = { ...nativeServices, ...services };
   return function mountObject(stage, { onError, onMotionRequest = () => {} } = {}) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
@@ -82,7 +84,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
     return controller;
 
     function syncPagePlayback() {
-      const running = allowed && (selection?.state().committed?.speed ?? definition.initialSelection.speed ?? 1) !== 0;
+      const running = allowed && (selection?.state().committed?.speed ?? initialSelection.speed ?? 1) !== 0;
       for (const layer of pageLayers.values()) layer.setPlaying(running);
     }
     function setAllowed(value) { allowed = value; playback.setAllowed(value); syncPagePlayback(); }
@@ -130,20 +132,20 @@ export function createObjectRuntime(definition, services = nativeServices) {
     async function start() {
       await lifetime.wait(environment.waitDocument(lifetime, stage.ownerDocument));
       if (lifetime.disposed) return;
-      controls = environment.createControls({ stage, controls: definition.controls, initialSelection: definition.initialSelection,
-        getState: () => selection?.state() ?? { desired: definition.initialSelection, committed: null, pending: true, plan: null },
+      controls = environment.createControls({ stage, controls: definition.controls, initialSelection,
+        getState: () => selection?.state() ?? { desired: initialSelection, committed: null, pending: true, plan: null },
         onAction: action => selection?.dispatch(action) ?? false, onError: error => console.error(error) });
       context.own(() => controls.destroy());
       const startup = await lifetime.wait(resources.prepareStartup());
       if (lifetime.disposed || startup.cancelled) return;
       startupDecodedAssets = resources.stats().decodes;
-      mounted = requireObjectPresentation(invokeRuntimeHook(definition, "createPresentation", [stage, context]), { stage });
+      mounted = requireObjectPresentation(mountPreparedPresentation(stage, context, definition), { stage });
       if (lifetime.disposed) return;
       for (const layer of mounted.pageLayers ?? []) {
         const pages = environment.mountPages({ ...layer, stage, scene: mounted.sceneElement, camera: mounted.cameraElement,
           own: context.own, onError: fatal });
         pageLayers.set(layer.id, pages);
-        pages.setLens({ id: definition.initialSelection.lensId });
+        pages.setLens({ id: initialSelection.lensId });
       }
       syncPagePlayback();
       // Presentation owns its roots immediately during construction, including
@@ -206,14 +208,14 @@ export function createObjectRuntime(definition, services = nativeServices) {
       const observe = () => mounted.observe ? invokeRuntimeHook(mounted, "observe", []) : {};
       const facts = observe();
       const settings = kind => () => {
-        const current = selection.state().committed ?? definition.initialSelection;
+        const current = selection.state().committed ?? initialSelection;
         return Object.freeze(Object.fromEntries(definition.controls.settings.controls
           .filter(control => kind == null || control.kind === kind).map(control => [control.name, current[control.name]])));
       };
       const options = Object.freeze({ state: settings("cycle") });
       const features = Object.freeze({ state: settings("toggle") });
       const parents = Object.freeze(nodes.map(node => node.parentNode));
-      const lensState = () => Object.freeze({ id: selection.state().committed?.lensId ?? definition.initialSelection.lensId,
+      const lensState = () => Object.freeze({ id: selection.state().committed?.lensId ?? initialSelection.lensId,
         ready: selection.state().ready });
       const selectLens = id => selection.dispatch({ kind: "lens", id });
       diagnostics = Object.freeze({ ready: true,
@@ -258,6 +260,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
         runtime: Object.freeze({ lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection.state, controls: controls.stats, view: () => currentView,
+          presentation: () => Object.freeze({ ...observe().presentation }),
           pages: () => Object.freeze(Object.fromEntries([...pageLayers].map(([id, layer]) => [id, layer.stats()]))) }),
         stableNodes: nodes,
         assertStableDomIdentity() {

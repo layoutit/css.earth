@@ -12,11 +12,12 @@ const steps = Object.freeze([
   ["prepare-panel-content.mjs"],
   ["prepare-noise-lens.mjs"],
   ["prepare-lenses.mjs"],
-  ["prepare-global-wmts.mjs"],
-  ["integrate-global-wmts.mjs", "--latest"],
+  ["prepare-pinned-global-wmts.mjs"],
   ["prepare-places.mjs"],
   ["prepare-starfield.mjs"],
   ["prepare-sky-sun.mjs"],
+  ["../../../../tools/prepare-object-controls.mjs", "--object=earth"],
+  ["prepare-presentation.mjs"],
   ["prepare-runtime-asset-manifest.mjs"],
 ]);
 

@@ -187,6 +187,11 @@ export function createPerspectiveDolly({
     rotY: cameraPlan.defaultControlYawDegrees,
     distance: 0,
   };
+  // The zoom alias last set, while the distance still corresponds to it: the
+  // alias round trip through the focal length is exact only to floating
+  // point, and a camera state set by zoom reads back the same number.
+  let aliasZoom = null;
+  let aliasDistance = null;
   let focal = 0;
   let viewportWidth = 1;
   let viewportHeight = 1;
@@ -194,6 +199,9 @@ export function createPerspectiveDolly({
   // out beside its chrome, so the body is viewed slightly off-axis. The
   // offset is the principal point relative to the root's centre.
   let principalOffset = Object.freeze([0, 0]);
+  // The stage's rectangle relative to the root's centre: what is actually on
+  // screen when the shell lays the root out partly beyond the stage.
+  let visibleRect = null;
   let projection = null;
   let lod = levelOfDetailFor(levelOfDetail, Number.POSITIVE_INFINITY);
   let systemOpacity = 0;
@@ -218,6 +226,16 @@ export function createPerspectiveDolly({
       skyBounds.x + skyOriginX - (bounds.x + bounds.width / 2),
       skyBounds.y + skyOriginY - (bounds.y + bounds.height / 2),
     ].map((value) => Number.isFinite(value) ? value : 0));
+    const stageBounds = stage.getBoundingClientRect();
+    const rootCentre = [bounds.x + bounds.width / 2, bounds.y + bounds.height / 2];
+    const candidate = {
+      left: Math.max(stageBounds.x, bounds.x) - rootCentre[0],
+      top: Math.max(stageBounds.y, bounds.y) - rootCentre[1],
+      right: Math.min(stageBounds.x + stageBounds.width, bounds.x + bounds.width) - rootCentre[0],
+      bottom: Math.min(stageBounds.y + stageBounds.height, bounds.y + bounds.height) - rootCentre[1],
+    };
+    visibleRect = candidate.right > candidate.left && candidate.bottom > candidate.top
+      ? Object.freeze(candidate) : null;
     const origin = `calc(50% + ${formatNumber(principalOffset[0])}px) ` +
       `calc(50% + ${formatNumber(principalOffset[1])}px)`;
     cameraElement.style.perspectiveOrigin = origin;
@@ -253,7 +271,9 @@ export function createPerspectiveDolly({
         rotX: cameraState.rotX,
         rotY: cameraState.rotY,
         distance: cameraState.distance,
-        zoom: distanceToZoom(cameraState.distance),
+        zoom: aliasZoom !== null && cameraState.distance === aliasDistance
+          ? aliasZoom
+          : distanceToZoom(cameraState.distance),
       });
     },
     update(partial) {
@@ -264,7 +284,10 @@ export function createPerspectiveDolly({
       } else if (partial.distance !== undefined) {
         cameraState.distance = clampDistance(partial.distance);
       } else if (partial.zoom !== undefined) {
-        cameraState.distance = clampDistance(zoomToDistance(partial.zoom));
+        const requested = zoomToDistance(partial.zoom);
+        cameraState.distance = clampDistance(requested);
+        aliasZoom = cameraState.distance === requested ? partial.zoom : null;
+        aliasDistance = cameraState.distance;
       }
     },
   });
@@ -280,6 +303,15 @@ export function createPerspectiveDolly({
     // changed.
     reclamp() {
       camera.update({ distance: cameraState.distance });
+    },
+    // Re-measures the projection and keeps the framing: the zoom alias (the
+    // silhouette's size on screen) survives a viewport or layout change the
+    // way the scale camera's zoom does, so the distance follows the focal
+    // length (clamped to the prepared bounds).
+    remeasure() {
+      const zoom = camera.state.zoom;
+      measure();
+      camera.update({ zoom });
     },
     // Projects the Sun, the orbit and the body for the accumulated scene
     // rotation and places the body: its centre `distance` from the eye on the
@@ -303,6 +335,7 @@ export function createPerspectiveDolly({
         viewportWidth,
         viewportHeight,
         principalOffset,
+        visibleRect,
       });
       const [bodyX, bodyY, bodyZ] = projection.body.translate;
       const transform =
@@ -380,6 +413,7 @@ export function createPerspectiveDolly({
         distanceRadii: cameraState.distance / bodyRadius,
         focal,
         principalOffset,
+        visibleRect,
         offAxisDegrees: projection?.body.offAxisDegrees ?? null,
         silhouetteRadius: projection?.body.silhouetteRadius ?? null,
       });

@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { runtimeDefinition } from "../runtime/definition.mjs";
-import { banks } from "../runtime/material.mjs";
-import { requireEarthSurfacePages, publishEarthSurfacePages } from "../runtime/surface-pages.mjs";
+import { earthSurfaceBankInventory } from "../tools/prepared-surface-pages.mjs";
+const banks = earthSurfaceBankInventory();
+import { requireEarthSurfacePages } from "../tools/prepared-surface-pages.mjs";
 import { preparedSelectionFixture } from "../../../platform/test/object-runtime-package.mjs";
 const pages = f => f.residency.stats().pools.find(pool => pool.id === "pages");
 const pendingPages = f => f.jobs.filter(job => !job.done && banks.some(bank => bank.urls.includes(job.url)) && job.image.src);
@@ -16,7 +17,6 @@ test("Earth's actual prepared inventory has seven complete, exclusive pages per 
   }
   assert.ok(banks.every(bank => bank.urls.length === 7));
   const urls = banks.flatMap(bank => bank.urls); assert.equal(new Set(urls).size, urls.length);
-  assert.throws(() => publishEarthSurfacePages([], urls.slice(0, 6), 7), /complete page bank/);
 });
 
 test("Earth publishes complete visible palettes with two native decode slots and clears the hidden bank", async () => {

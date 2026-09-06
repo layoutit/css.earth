@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { gunzipSync } from "node:zlib";
-import { isPreparedCityAssetUrl } from "../../runtime/city-asset-url.mjs";
+import { isPreparedCityAssetUrl } from "../../../../platform/prepared-map/city-asset-url.mjs";
 
 export const publishedCoveragePath = new URL("../../source/city/published-coverage.json.gz", import.meta.url);
 
@@ -21,7 +21,7 @@ export function assembleCityCoveragePlan(base, snapshot) {
     const head = receipt.heads?.[0], ref = head?.directory;
     if (receipt.heads?.length !== 1 || receipt.publish?.mode !== "publish-and-verify" || head?.key !== receipt.face.key ||
         head.level !== 0 || head.stub !== true || !Number.isSafeInteger(ref?.bytes) || ref.bytes < 1 ||
-        !ref || !isPreparedCityAssetUrl(base,ref.url,"index",ref.sha256)) {
+        !ref || !isPreparedCityAssetUrl({...base,assetPath:"/scenes/earth/"},ref.url,"index",ref.sha256)) {
       throw new Error("City coverage requires a verified published head.");
     }
     roots.set(head.key,head);

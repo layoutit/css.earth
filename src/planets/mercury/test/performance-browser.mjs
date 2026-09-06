@@ -8,6 +8,8 @@ const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const outputPath = resolve(
   process.argv[3] ?? "output/mercury-performance.json",
 );
+const deviceScaleFactor = Number(process.argv[4] ?? 1);
+assert.ok([1, 2].includes(deviceScaleFactor));
 const SATURN_STANDARD_MAX_INITIAL_RETAINED_NODES = 540;
 const SATURN_STANDARD_MAX_INTERACTIVE_RETAINED_NODES = 1_040;
 const SATURN_STANDARD_MAX_COMPOSITED_LAYERS = 630;
@@ -16,7 +18,7 @@ const browser = await chromium.launch({ channel: "chrome", headless: true });
 try {
   const context = await browser.newContext({
     viewport: { width: 1440, height: 900 },
-    deviceScaleFactor: 1,
+    deviceScaleFactor,
   });
   const page = await context.newPage();
   const session = await context.newCDPSession(page);
@@ -118,7 +120,7 @@ try {
     schema: "cssmercury-browser-performance@1",
     route: "/mercury/",
     browser: "Chrome",
-    viewport: { width: 1440, height: 900, deviceScaleFactor: 1 },
+    viewport: { width: 1440, height: 900, deviceScaleFactor },
     ...profile,
     chrome: {
       jsHeapUsedBytes: metric.JSHeapUsedSize,

@@ -6,7 +6,7 @@ export const isObjectBrowserProfile = profile => profiles.has(profile);
 // The profile supplies observations and user actions for the actual common
 // runtime. Object files supply audit/source facts and declarative view mappings.
 export function createObjectBrowserProfile({ id, inputSelector, audit, controls,
-  independentLenses = [], visibleViews = [], cameraFields = ['pitch', 'zoom'] }) {
+  visibleViews = [], cameraFields = ['pitch', 'zoom'] }) {
   requireObjectControls(controls, id);
   // Preserve the fields in an object's recorded audit without supplying a
   // private camera reader. All values come from the same shared orbit state.
@@ -17,9 +17,6 @@ export function createObjectBrowserProfile({ id, inputSelector, audit, controls,
   }
   cameraFields = Object.freeze([...cameraFields]);
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [];
-  for (const lens of independentLenses) {
-    if (!lensIds.includes(lens.id) || typeof lens.selectionKey !== 'string') throw new TypeError('Independent lens mapping must use actual controls.');
-  }
   for (const view of visibleViews) {
     if (!lensIds.includes(view.lensId) || typeof view.attribute !== 'string' || !view.attribute.startsWith('data-') || typeof view.value !== 'string') throw new TypeError('Visible view mapping must name a retained stage attribute and actual lens.');
   }
@@ -52,27 +49,19 @@ export function createObjectBrowserProfile({ id, inputSelector, audit, controls,
     runtimePresent: page => page.evaluate(key => typeof window[key] !== 'undefined', key),
     retainedImages: page => page.evaluate(key => window[key].runtime.resources().images.entries.filter(entry => entry.ready).length, key),
     selectedDensity: page => page.evaluate(key => window[key].renderStats.selectedPreparedDensity, key),
-    selectLens: (page, lensId) => page.evaluate(async ({ key, lensId, independentLenses }) => {
-      const runtime = window[key];
-      for (const lens of independentLenses) {
-        const enabled = runtime.runtime.selection().committed[lens.selectionKey];
-        if (lens.id === lensId) return enabled ? true : runtime.lenses.select(lens.id);
-        if (enabled) await runtime.lenses.select(lens.id);
-      }
-      return runtime.lenses.select(lensId);
-    }, { key, lensId, independentLenses }),
-    lens: page => page.evaluate(({ key, independentLenses }) => {
+    selectLens: (page, lensId) => page.evaluate(({ key, lensId }) => window[key].lenses.select(lensId), { key, lensId }),
+    lens: page => page.evaluate(key => {
       const runtime = window[key], selection = runtime.runtime.selection().committed;
-      const independent = independentLenses.find(lens => selection[lens.selectionKey]);
-      return { ...runtime.lenses.state(), id: independent?.id ?? selection.lensId };
-    }, { key, independentLenses }),
+      return { ...runtime.lenses.state(), id: selection.lensId };
+    }, key),
     visibleLens: page => page.locator('.planet-stage').evaluate((stage, { defaultLens, visibleViews }) =>
       visibleViews.find(view => stage.getAttribute(view.attribute) === view.value)?.lensId ?? stage.dataset.lens ?? defaultLens,
     { defaultLens, visibleViews }),
-    pressedLens: page => page.evaluate(independentLenses => {
+    pressedLens: page => page.evaluate(() => {
       const pressed = [...document.querySelectorAll('button[name="lens"][aria-pressed="true"]')].map(button => button.value);
-      return independentLenses.find(lens => pressed.includes(lens.id))?.id ?? pressed[0] ?? null;
-    }, independentLenses),
+      if (pressed.length > 1) throw new Error(`Lens selection is exclusive; found multiple pressed buttons: ${pressed.join(', ')}`);
+      return pressed[0] ?? null;
+    }),
     retainedReport: page => page.evaluate(key => ({ initialNodeCount: window[key].dom.retainedInitialNodeCount,
       stableNodeCount: window[key].stableNodes.length }), key),
   });

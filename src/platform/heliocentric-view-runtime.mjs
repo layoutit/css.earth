@@ -272,6 +272,7 @@ export function mountRetainedHeliocentricView({
       viewportWidth,
       viewportHeight,
       principalOffset,
+      visibleRect = null,
     }) {
       if (destroyed) throw new Error("Heliocentric view is destroyed.");
       const projection = projectHeliocentricView(plan, {
@@ -281,6 +282,7 @@ export function mountRetainedHeliocentricView({
         viewportWidth,
         viewportHeight,
         principalOffset,
+        visibleRect,
         // Nothing of the system is projected while it is invisible.
         system: system !== null && systemOpacity > 0,
         trailWeights,

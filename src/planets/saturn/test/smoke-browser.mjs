@@ -207,7 +207,7 @@ async function assertLensBehavior(page, interiorRequests) {
   }
 
   assert.deepEqual(interiorRequests, []);
-  await toggleCrossSection(page, true);
+  await selectLens(page, "cross-section");
   assert.deepEqual(interiorRequests, [
     "/scenes/saturn/saturn-interior-atmosphere-normal-no-shadows.webp",
   ]);
@@ -222,33 +222,30 @@ async function assertLensBehavior(page, interiorRequests) {
     leafCount: 478,
   });
   const retainedCutaway = await page.locator(".saturn-cutaway").elementHandle();
+  await selectLens(page, "cross-section");
+  assert.equal(await page.locator(".planet-stage").getAttribute("data-view"), "interior");
   await selectLens(page, "ultraviolet");
   assert.equal(await page.locator(".planet-stage").getAttribute("data-view"),
-    "interior");
+    null);
   assert.deepEqual(interiorRequests, [
     "/scenes/saturn/saturn-interior-atmosphere-normal-no-shadows.webp",
-    "/scenes/saturn/saturn-interior-atmosphere-ultraviolet-no-shadows.webp",
   ]);
-  await toggleCrossSection(page, false);
+  await selectLens(page, "cross-section");
+  await selectLens(page, "thermal");
+  assert.equal(await page.locator(".planet-stage").getAttribute("data-view"), null);
   assert.equal(await retainedCutaway.evaluate((node) =>
     node === document.querySelector(".saturn-cutaway")), true);
   await selectLens(page, "normal");
 }
 
 async function selectLens(page, id) {
-  await page.evaluate(async (lensId) => {
-    await window.__saturn.lenses.select(lensId);
-  }, id);
+  await page.locator(`button[name="lens"][value="${id}"]`).click();
   await page.waitForFunction((lensId) =>
     window.__saturn.lenses.state().id === lensId, id);
-}
-
-async function toggleCrossSection(page, interior) {
-  await page.evaluate(async () => {
-    await window.__saturn.lenses.select("cross-section");
-  });
-  await page.waitForFunction((expected) =>
-    window.__saturn.runtime.selection().committed.interior === expected, interior);
+  assert.deepEqual(await page.locator('button[name="lens"][aria-pressed="true"]')
+    .evaluateAll(buttons => buttons.map(button => button.value)), [id]);
+  assert.equal(await page.locator(".planet-stage").getAttribute("data-view"),
+    id === "cross-section" ? "interior" : null);
 }
 
 async function assertFeatureBehavior(page) {

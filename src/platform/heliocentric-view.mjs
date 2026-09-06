@@ -136,6 +136,10 @@ export function projectHeliocentricView(plan, {
   viewportWidth,
   viewportHeight,
   principalOffset = [0, 0],
+  // The part of the root on screen, relative to the root's centre (the shell
+  // may lay the root out partly beyond the viewport); markers and captions
+  // count as inside only there. Default: the whole root.
+  visibleRect = null,
   frustumPadding = 1.25,
   nearShare = 0.01,
   system = false,
@@ -148,7 +152,8 @@ export function projectHeliocentricView(plan, {
       !positive(distance) || !positive(focal) ||
       !positive(viewportWidth) || !positive(viewportHeight) ||
       !Array.isArray(principalOffset) || principalOffset.length !== 2 ||
-      principalOffset.some((value) => !Number.isFinite(value))) {
+      principalOffset.some((value) => !Number.isFinite(value)) ||
+      (visibleRect !== null && !validVisibleRect(visibleRect))) {
     throw new TypeError("Heliocentric projection arguments are invalid.");
   }
   const bodyRadius = plan.units.bodyRadiusUnits;
@@ -158,6 +163,7 @@ export function projectHeliocentricView(plan, {
   const near = Math.max(1e-6, distance * nearShare);
   const halfWidth = viewportWidth / 2;
   const halfHeight = viewportHeight / 2;
+  const visible = visibleRect ?? { left: -halfWidth, top: -halfHeight, right: halfWidth, bottom: halfHeight };
   const clipX = halfWidth * frustumPadding;
   const clipY = halfHeight * frustumPadding;
   const [ox, oy] = principalOffset;
@@ -221,16 +227,11 @@ export function projectHeliocentricView(plan, {
     const spriteDiameter = plan.sun.sprite.worldDiameterUnits * focal /
       sunDepth;
     const centerNdc = Object.freeze([x / halfWidth, -y / halfHeight]);
-    const halfWidthNdc = spriteDiameter / 2 / halfWidth;
-    const halfHeightNdc = spriteDiameter / 2 / halfHeight;
-    const intersects = centerNdc[0] + halfWidthNdc >= -1 &&
-      centerNdc[0] - halfWidthNdc <= 1 &&
-      centerNdc[1] + halfHeightNdc >= -1 &&
-      centerNdc[1] - halfHeightNdc <= 1;
-    const fullyVisible = centerNdc[0] - halfWidthNdc >= -1 &&
-      centerNdc[0] + halfWidthNdc <= 1 &&
-      centerNdc[1] - halfHeightNdc >= -1 &&
-      centerNdc[1] + halfHeightNdc <= 1;
+    const halfSprite = spriteDiameter / 2;
+    const intersects = x + halfSprite >= visible.left && x - halfSprite <= visible.right &&
+      y + halfSprite >= visible.top && y - halfSprite <= visible.bottom;
+    const fullyVisible = x - halfSprite >= visible.left && x + halfSprite <= visible.right &&
+      y - halfSprite >= visible.top && y + halfSprite <= visible.bottom;
     // The body hides the Sun when the Sun's centre is behind the disc.
     const occluded = rayHitsSphereBefore(sunEye, bodyCenter, bodyRadius);
     sun = Object.freeze({
@@ -317,7 +318,7 @@ export function projectHeliocentricView(plan, {
       return Object.freeze({ visible: false, classification: "behind-camera", depth, screen: null });
     }
     const [x, y] = project(eye);
-    const inside = Math.abs(x) <= halfWidth && Math.abs(y) <= halfHeight;
+    const inside = x >= visible.left && x <= visible.right && y >= visible.top && y <= visible.bottom;
     const occluded = rayHitsSphereBefore(eye, bodyCenter, bodyRadius);
     return Object.freeze({
       visible: inside && !occluded,
@@ -485,6 +486,12 @@ function splitVisible(start, end, hidden) {
   }
   if (openAt !== null) pieces.push([lerp(start, end, openAt), end]);
   return pieces;
+}
+
+function validVisibleRect(rect) {
+  return rect !== null && typeof rect === "object" &&
+    [rect.left, rect.top, rect.right, rect.bottom].every(Number.isFinite) &&
+    rect.right > rect.left && rect.bottom > rect.top;
 }
 
 // Liang-Barsky against |x| <= clipX, |y| <= clipY; returns the screen-space

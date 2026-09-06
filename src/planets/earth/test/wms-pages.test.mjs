@@ -3,7 +3,7 @@ import test from "node:test";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { prepareWmsPage } from "../tools/city/wms-page-geometry.mjs";
 import { prepareCityPageGeometry, createCityGeographicSampler } from "../tools/city/page-geometry.mjs";
-import { isPreparedWmsImage, readWmsImage } from "../runtime/wms-image.mjs";
+import { isPreparedWmsImage, readWmsImage } from "../../../platform/prepared-map/wms-image.mjs";
 
 function worldPoint(page,u,v) {
   let p=[u*1024,v*1024,0,1];

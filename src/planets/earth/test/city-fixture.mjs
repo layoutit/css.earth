@@ -16,7 +16,7 @@ export async function readCityFixture(overrides = {}) {
   // This legacy raster fixture carries its own preparation-time configuration.
   // The application's newer WMTS hierarchy has a different topology and density.
   const { pages: preparedPages, proofRoots, ...preparedPlan } = prepared;
-  const plan = { ...preparedPlan, ...overrides, roots: index.heads };
+  const plan = { ...preparedPlan, schema: "cssearth-prepared-map-pages@1", assetPath: "/scenes/earth/", ...overrides, roots: index.heads };
   const nodes = new Map(), directories = new Map();
   const queue = plan.roots.map(root => root.directory);
   for (const ref of queue) {

@@ -6,9 +6,9 @@ import { polarGeographicUv } from "../tools/city/wmts-polar-geometry.mjs";
 import { prepareCityPageGeometry, createCityGeographicSampler } from "../tools/city/page-geometry.mjs";
 import { prepareGeographicTextureQuad } from "../tools/city/wms-page-geometry.mjs";
 import { prepareWmtsTile, wmtsAddress, wmtsLatitude, wmtsRow, mercatorStripErrorBound, WMTS_PIXEL_ERROR } from "../tools/city/wmts-page-geometry.mjs";
-import { isPreparedWmtsImage } from "../runtime/wmts-image.mjs";
-import { createApiImageTransport } from "../runtime/api-image-transport.mjs";
-import { selectCityPages } from "../runtime/city-page-selection.mjs";
+import { isPreparedWmtsImage } from "../../../platform/prepared-map/wmts-image.mjs";
+import { createApiImageTransport } from "../../../platform/prepared-map/api-image-transport.mjs";
+import { selectCityPages } from "../../../platform/prepared-map/city-page-selection.mjs";
 
 function point(page,u,v){
   let p=[u*256,v*256,0,1];

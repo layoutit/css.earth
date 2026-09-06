@@ -8,6 +8,11 @@ import {
   DESKTOP_VIEWPORT_MIN,
   MOBILE_VIEWPORT_MAX,
   MOBILE_VIEWPORT_QUERY,
+  SKYBOX_DRAG_ENABLED,
+  WHEEL_ZOOM_SPEED_MULTIPLIER,
+  WHEEL_ZOOM_USE_SCROLL_DISTANCE,
+  WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
+  wheelZoomInputKind,
 } from "../runtime-policy.mjs";
 
 test("automatic playback has one complete readiness, intent and environment policy", () => {
@@ -38,6 +43,32 @@ test("keeps one shared orientation-aware responsive shell boundary", () => {
 
 test("uses one canonical high-density image bank for every mount", () => {
   assert.equal(CANONICAL_PREPARED_IMAGE_DENSITY, 2);
+});
+
+test("skybox orbit dragging is enabled by the shared input policy", () => {
+  assert.equal(SKYBOX_DRAG_ENABLED, true);
+});
+
+test("discrete wheels and precision scroll gestures have separate shared gains", () => {
+  assert.equal(WHEEL_ZOOM_SPEED_MULTIPLIER, 4);
+  assert.equal(WHEEL_ZOOM_USE_SCROLL_DISTANCE, true);
+  assert.equal(WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER, 1);
+});
+
+test("scroll input classification preserves accelerated precision gestures and permits device changes", () => {
+  for (const deltaMode of [1, 2]) assert.equal(wheelZoomInputKind({ deltaY: 1, deltaMode }), "wheel");
+  for (const deltaY of [40, 50, 100, 120, 4.000244140625, 8.00048828125]) {
+    assert.equal(wheelZoomInputKind({ deltaY, timeStamp: 0 }), "wheel");
+  }
+  for (const deltaY of [1, 5, 10, 25, 38, 41.5]) {
+    assert.equal(wheelZoomInputKind({ deltaY, timeStamp: 0 }), "trackpad");
+  }
+  assert.equal(wheelZoomInputKind({ deltaY: 100, timeStamp: 8 }, "trackpad", 0), "trackpad");
+  assert.equal(wheelZoomInputKind({ deltaY: 100, timeStamp: 408 }, "trackpad", 0), "wheel");
+  assert.equal(wheelZoomInputKind({ deltaY: 2, timeStamp: 8 }, "wheel", 0), "trackpad");
+  assert.equal(wheelZoomInputKind({ deltaY: 3, deltaMode: 1, timeStamp: 8 }, "trackpad", 0), "wheel");
+  assert.equal(wheelZoomInputKind({ deltaY: 100, deltaX: 1 }), "trackpad");
+  assert.equal(wheelZoomInputKind({ deltaY: 100, ctrlKey: true }), "trackpad");
 });
 
 test("updates wheel and touch policy without replacing controls", () => {

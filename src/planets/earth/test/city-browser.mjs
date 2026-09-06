@@ -8,7 +8,7 @@ import { readCityFixture } from "./city-fixture.mjs";
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_EARTH_CITY_PAGES } from "../runtime/preparedCityPages.mjs";
 import { prepareCityPageGeometry } from "../tools/city/page-geometry.mjs";
-import { projectCityPage } from "../runtime/city-page-selection.mjs";
+import { projectCityPage } from "../../../platform/prepared-map/city-page-selection.mjs";
 import { readWorldCoverCatalog, sourceTilesForBounds } from "../tools/city/worldcover-catalog.mjs";
 
 const fixture = await readCityFixture();

@@ -7,7 +7,8 @@ import { createObjectControlBinding } from "../object-control-binding.mjs";
 import { createObjectSelectionRuntime } from "../object-selection-runtime.mjs";
 import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coordinate.mjs";
 import { createSceneLifetime } from "../scene-lifetime.mjs";
-import { requireObjectRuntimeDefinition, requireResolvedPresentation } from "../object-runtime-contract.mjs";
+import { mountPreparedPresentation, resolvePreparedPresentation } from "../prepared-presentation.mjs";
+import { initialObjectSelection, requireObjectRuntimeDefinition, requireResolvedPresentation } from "../object-runtime-contract.mjs";
 
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 
@@ -22,7 +23,8 @@ export function objectRuntimePackageTests(definition) {
       skySunViewDirection: definition.sun?.referenceViewDirection ?? null,
       sunViewDirection: definition.sun ? viewSunDirectionToPreparedLightDirection(definition.sun.referenceViewDirection) : null };
     view.reference = view;
-    requireResolvedPresentation(definition.resolvePresentation({ selection: definition.initialSelection, view }), definition);
+    const selection = initialObjectSelection(definition.controls);
+    requireResolvedPresentation(resolvePreparedPresentation(definition, { selection, view }), definition);
   });
 
   function fixture() {
@@ -125,8 +127,16 @@ export function retainedPresentationFixture(definition, { failAtElement = null }
       ownerDocument: document, className: "",
       get parentElement() { return this.parentNode; },
       get isConnected() { return this === stage || this.parentNode?.isConnected === true; },
-      setAttribute(name, value) { attributes.set(name, value); },
-      getAttribute(name) { return attributes.get(name) ?? null; },
+      setAttribute(name, value) {
+        attributes.set(name, String(value));
+        if (name.startsWith("data-")) this.dataset[name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())] = String(value);
+      },
+      getAttribute(name) { return name.startsWith("data-")
+        ? this.dataset[name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())] ?? null : attributes.get(name) ?? null; },
+      removeAttribute(name) {
+        attributes.delete(name);
+        if (name.startsWith("data-")) delete this.dataset[name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())];
+      },
       contains(child) { return child === this || this.children.some(node => node.contains(child)); },
       closest(selector) { return this.className.split(/\s+/).includes(selector.slice(1)) ? this : this.parentNode?.closest(selector) ?? null; },
       animate(keyframes, options) {
@@ -181,7 +191,7 @@ export async function preparedSelectionFixture(definition) {
   } });
   f.lifetime.onDispose(() => residency.destroy());
   const startup = residency.prepareStartup(); await settle(); await startup;
-  const presentation = definition.createPresentation(f.stage, { ...f.context, resources: residency.resources });
+  const presentation = mountPreparedPresentation(f.stage, { ...f.context, resources: residency.resources }, definition);
   residency.finishStartup();
   const inputs = new Map(), buttons = [];
   const input = fields => ({ dataset: {}, disabled: false, listeners: new Map(), ...fields,
@@ -201,7 +211,7 @@ export async function preparedSelectionFixture(definition) {
     onChange: state => binding?.publish(state), onFatalError(error) { errors.push(error); f.lifetime.destroy(); },
     onMaterialError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => selection.destroy());
-  binding = createObjectControlBinding({ stage: f.stage, controls: definition.controls, initialSelection: definition.initialSelection,
+  binding = createObjectControlBinding({ stage: f.stage, controls: definition.controls, initialSelection: initialObjectSelection(definition.controls),
     getState: selection.state, onAction: selection.dispatch, onError: error => materialErrors.push(error) });
   f.lifetime.onDispose(() => binding.destroy());
   const view = { controlPitch: definition.camera.defaultControlPitchDegrees ?? 0,
