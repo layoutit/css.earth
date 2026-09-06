@@ -5,6 +5,7 @@ import sharp from "sharp";
 import { fromFile } from "geotiff";
 import { verifyEuropaSourceManifest } from "../tools/source-manifest.mjs";
 import { COLOR_PHOTOMETRY, colorPhotometricGain, loadColorGeometry } from "../tools/color-photometry.mjs";
+import { matchEuropaColorLevels } from "../tools/prepare-color.mjs";
 
 test("observed terrain survives preparation and explicit polar no-data stays marked", async () => {
   await verifyEuropaSourceManifest();
@@ -84,4 +85,34 @@ test("color sampling withholds incomplete footprints without erasing observed da
   band.data[3] = -3.4028234663852886e38;
   assert.equal(sampleColorBand(band,1,1), null, "ISIS special pixels cannot become terrain");
   assert.equal(sampleColorBand(band,0,0), null, "The image footprint cannot be extrapolated");
+});
+
+test("level matching preserves color ratios, dark detail and gaps without clipping", () => {
+  const width = 24, height = 24;
+  const makeColor = () => {
+    const rgb = Buffer.alloc(width * height * 3), owners = new Uint8Array(width * height);
+    for (let y = 6; y < 18; y++) for (let x = 6; x < 18; x++) {
+      const i = y * width + x;
+      rgb.set([40, 60, 80], i * 3);
+      owners[i] = 1;
+    }
+    rgb.set([4, 6, 8], (12 * width + 12) * 3);
+    return { rgb, owners, observationNames:["observed-patch"] };
+  };
+  const monochrome = { rgb:Buffer.alloc(width * height * 3, 114), missing:new Uint8Array(width * height) };
+  const color = makeColor();
+  const [level] = matchEuropaColorLevels(color, monochrome, {width,height});
+  assert.ok(Math.abs(level.gain - 2) < .01);
+  assert.deepEqual([...color.rgb.subarray((12 * width + 12) * 3, (12 * width + 12) * 3 + 3)], [8,12,16]);
+  assert.deepEqual([...color.rgb.subarray(0,3)], [0,0,0], "Missing color is never populated by level matching");
+  monochrome.rgb.fill(250);
+  const bright = makeColor();
+  const [capped] = matchEuropaColorLevels(bright, monochrome, {width,height});
+  assert.equal(capped.gain, 255 / 80, "One gain is capped by the brightest observed channel");
+  assert.deepEqual([...bright.rgb.subarray((6 * width + 6) * 3, (6 * width + 6) * 3 + 3)], [128,191,255]);
+  monochrome.missing.fill(1);
+  const unsupported = makeColor(), before = Buffer.from(unsupported.rgb);
+  const [unmatched] = matchEuropaColorLevels(unsupported, monochrome, {width,height});
+  assert.equal(unmatched.boundarySamples, 0);
+  assert.deepEqual(unsupported.rgb, before, "Absent monochrome cannot determine an adjustment");
 });

@@ -76,8 +76,8 @@ After the geometric normalization and angle limits below, about 16% of the
 sphere has usable three-band coverage. Observed monochrome
 forms the base elsewhere; grayscale does not imply measured neutral color.
 The gray cartographic grid appears only where both sources lack imagery. The
-fixed display transfer is clamp(I/F, 0, 1)^(1/2.2) for every channel, after any
-linear I/F normalization. Brightness seams remain visible.
+initial display transfer is clamp(I/F, 0, 1)^(1/2.2) for every channel, after any
+linear I/F normalization. The presentation levels are then matched as below.
 No monochrome detail is transferred into color. The newer controlled dataset
 and the older monochrome mosaic have different positional accuracy.
 
@@ -110,8 +110,22 @@ Preparation is offline and reproducible from these pinned inputs.
 Both lenses retain the shared Shadows control and prepared globe lighting.
 This is an approximate disk correction, not calibrated unlit albedo: there is
 no phase-angle normalization, fitted Europa scattering model, terrain model,
-or removal of cast shadows. The two other sequences are unchanged. Residual
+or removal of cast shadows. The two other sequences retain their acquisition
+lighting. Residual
 photographed shadows and seams can remain; added globe lighting is approximate.
+
+To soften brightness steps against monochrome, preparation fits one display
+brightness multiplier per color sequence. The fit is the median ratio of
+monochrome to color luminance (weights 0.2126, 0.7152, 0.0722), using co-located
+valid pixels within a four-texel strip inside each color footprint. It applies
+the same multiplier to all three display channels, capped by the brightest
+channel in the entire sequence so highlights cannot clip. This preserves color
+ratios and relative detail, subject to 8-bit rounding. No monochrome detail is
+transferred, no missing data enters the fit, and no feathering or blending is
+used. This is presentation matching against the contrast-adjusted monochrome
+mosaic, not additional physical calibration; source I/F files are unchanged.
+Remaining differences in color, lighting, resolution and positional accuracy
+can still reveal the boundaries.
 
 The NASA Trek/Jónsson 2015 color mosaic was rejected: its [author documents
 fictional polar terrain and cloned gaps](https://www.planetary.org/articles/0218-mapping-europa),

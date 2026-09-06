@@ -1,4 +1,4 @@
-import { prepareEuropaColor } from "./prepare-color.mjs";
+import { prepareEuropaColor, matchEuropaColorLevels } from "./prepare-color.mjs";
 import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { createHash } from "node:crypto";
@@ -48,6 +48,7 @@ const normal = await prepareSurface("normal", rgb, missing, {
   projection:entry.projection,coverage:entry.coverage,sourceGeoreference:{origin,resolution},
 });
 const color = await prepareEuropaColor({width,height});
+const levels = matchEuropaColorLevels(color, {rgb,missing}, {width,height});
 // Keep observed monochrome wherever the independent color coverage is absent.
 // The grid is needed only if neither source has a valid observation.
 let monochromePixels = 0;
@@ -65,6 +66,7 @@ const enhanced = await prepareSurface("enhanced", color.rgb, color.missing, {
   monochromePixels,
   observationCoverage:color.coverage,
   photometry:color.photometry,
+  levels,
 });
 await writeFile(resolve(EUROPA_PREPARED_ROOT,"surfaces.json"),JSON.stringify({objectId:"europa",surfaces:[normal,enhanced]}));
 console.log("Prepared Europa monochrome and observed enhanced color, with coverage gaps marked.");
