@@ -69,6 +69,7 @@ try {
     assert.ok(roots.length > 0, `${config.label}: mounted scene layers`);
     const rootCount = roots.length;
     const activeObject = OBJECTS.find(object => object.route === config.route);
+    const systemTag = page.locator(".planet-system-tag");
     const classificationTag = page.locator(".planet-classification-tag");
     const tagLabel = await classificationTag.innerText();
     assert.equal(await page.locator('[data-fact-id="classification"]').count(), 0);
@@ -78,11 +79,18 @@ try {
       tagBox.y + tagBox.height <= titleBox.y + titleBox.height + 1,
       `${config.label}: classification tag fits beside the title`);
     const beforeBrowseUrl = page.url();
+    assert.equal(await systemTag.innerText(), activeObject.systemName);
+    await systemTag.click();
+    assert.equal(await search.inputValue(), activeObject.systemName);
+    const visibleObjects = () => page.locator('.planet-object-item:not([hidden]) [data-object-id]')
+      .evaluateAll(links => links.map(link => link.dataset.objectId).sort());
+    assert.deepEqual(await visibleObjects(), OBJECTS.filter(object =>
+      object.systemName === activeObject.systemName).map(object => object.id).sort());
+    assert.equal(page.url(), beforeBrowseUrl, "browsing a system does not navigate");
+    await search.press("Escape");
     await classificationTag.focus();
     await page.keyboard.press("Enter");
     assert.equal(await search.inputValue(), `${tagLabel}s`);
-    const visibleObjects = () => page.locator('.planet-object-item:not([hidden]) [data-object-id]')
-      .evaluateAll(links => links.map(link => link.dataset.objectId).sort());
     assert.deepEqual(await visibleObjects(), OBJECTS.filter(object =>
       object.classification === activeObject.classification).map(object => object.id).sort());
     assert.equal(page.url(), beforeBrowseUrl, "browsing a classification does not navigate");
@@ -96,17 +104,6 @@ try {
     await search.press("Escape");
     assert.equal(await classificationTag.isVisible(), true);
     assert.equal(await search.inputValue(), activeObject.name);
-    const distanceTag = page.locator(".planet-distance-tag");
-    assert.equal(await distanceTag.innerText(), `${activeObject.distanceAu} AU`);
-    await distanceTag.click();
-    assert.equal(await search.inputValue(), "All objects");
-    assert.deepEqual(await page.locator('.planet-object-item:not([hidden]) [data-object-id]')
-      .evaluateAll(links => links.map(link => link.dataset.objectId)),
-    [...OBJECTS].sort((a, b) => a.distanceAu - b.distanceAu).map(object => object.id),
-    "distance badge lists every object in solar-distance order");
-    assert.equal(page.url(), beforeBrowseUrl, "browsing all objects does not navigate");
-    assert.equal(await page.locator('.planet-destination-results').isVisible(), false);
-    await search.press("Escape");
     assert.ok((await Promise.all(roots.map(root => root.evaluate(node => node.isConnected)))).every(Boolean),
       "badge browsing retains the current scene");
     const railBox = await rail.boundingBox();

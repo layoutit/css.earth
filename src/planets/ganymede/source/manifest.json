@@ -1,0 +1,205 @@
+{
+  "schema": "cssganymede-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "usgs-voyager-galileo-mono",
+      "path": "ganymede-mono.tif",
+      "expectedBytes": 136844537,
+      "expectedSha256": "c2c8d9506b8cf8f7a0a90d823d9052e91c8d9885cf7267fdce8de8216f4df888",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif",
+      "credit": "NASA/JPL/USGS",
+      "license": "Public USGS scientific imagery; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Download the published GeoTIFF and verify the pinned bytes before preparation.",
+      "redistribution": "Reacquirable source TIFF excluded from Git; prepared textures retain credits.",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 16539,
+      "height": 8270,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2632344.9707
+      },
+      "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome."
+    },
+    {
+      "id": "usgs-voyager-galileo-color",
+      "path": "ganymede-color.tif",
+      "expectedBytes": 199204541,
+      "expectedSha256": "da47087e75bc530456d8206d5100ad3c687706353700b0cb44a8400957005a33",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif",
+      "credit": "NASA/JPL/USGS",
+      "license": "Public USGS scientific imagery; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Download the published GeoTIFF and verify the pinned bytes before preparation.",
+      "redistribution": "Reacquirable source TIFF excluded from Git; prepared textures retain credits.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 11520,
+      "height": 5760,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2632345
+      },
+      "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Run node src/planets/ganymede/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Pinned shared shell title font.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "path": "system/jupiter-hubble.png",
+      "expectedBytes": 1166501,
+      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
+      "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
+      "credit": "NASA, ESA, STScI, and Amy Simon",
+      "license": "NASA media usage guidelines and credited partner rights",
+      "id": "jupiter-hubble-parent",
+      "bodyId": "jupiter",
+      "consumers": [
+        "parent-marker"
+      ],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
+      "redistribution": "Credited prepared observational image; source binary excluded from Git."
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "e6871a57d3f93c9957cc3a00415090221a13764647b45bddabad3199e15165c4",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "1e5cbcfbae196aeda3ec9f7435968ae1e661ff4e1b9049656f7573613647156e",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "ddd03e1c01fced9839b1e3dc7ad2c29c23857675337609286751f88c2f066651",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "mono.isis.lbl",
+      "expectedBytes": 1770,
+      "expectedSha256": "a6c670ac7648264cd074b23ae9400ea51e66edc2a9830b07fe85687281ae8736",
+      "purpose": "USGS published GeoTIFF mapping and pixel metadata."
+    },
+    {
+      "path": "mono.pds.lbl",
+      "expectedBytes": 2181,
+      "expectedSha256": "6a6c0e5430a2fc5c1330e866add82b42294024c8a046b72cd565c2fd4e12ff08",
+      "purpose": "USGS published GeoTIFF mapping and pixel metadata."
+    },
+    {
+      "path": "color.isis.lbl",
+      "expectedBytes": 1885,
+      "expectedSha256": "60a5465ceab0bd739ebd71d1df8b4e5180ee933d14f9a16e6efc36581a6234cf",
+      "purpose": "USGS published GeoTIFF mapping and pixel metadata."
+    },
+    {
+      "path": "color.pds.lbl",
+      "expectedBytes": 2557,
+      "expectedSha256": "d1a2d221f025e18e4cba756c3187c44447e65ff3fb00537dff009cd5011698c7",
+      "purpose": "USGS published GeoTIFF mapping and pixel metadata."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2641,
+      "expectedSha256": "ad0afc58e7be48f6be87979f1137ac9dd9e3cb6b79a1ce826439fb457e481b38",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 9751,
+      "expectedSha256": "78756a7c443958f959805191fcb03528f65ee150b0050f18ebd9ff4e52fcb830",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5766,
+      "expectedSha256": "0d5f9bd6ce07b0d083656b62b8c5b0f250a2e7ef08386cc822b8dbd821387026",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1696,
+      "expectedSha256": "29dda529e3ab8bbcff799ac336af4cbcefeb21bb80eed0e0eed5d41b2dc30a3c",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1193,
+      "expectedSha256": "caffd4d082b2300947b87d0a38e4ee9613d9813c187872f6e9e16bf970d7d438",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    }
+  ]
+}

@@ -24,6 +24,7 @@ export { worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPo
 export type { PreparedWorldCameraFrame, WorldCameraPose } from './navigation/world-camera.js';
 export type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './runtime/world-navigation-types.js';
 export { createWorldSelectionTarget } from './navigation/selection-target.js';
+export { preparedObjectCapabilities } from './paging/capabilities.js';
 export { savedWorldCamera } from './navigation/saved-world-camera.js';
 export { mountPreparedCssVolume } from './volume/prepared-volume-runtime.js';
 export { validatePreparedCssVolume } from './volume/validation.js';

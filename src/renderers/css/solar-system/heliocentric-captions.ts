@@ -7,13 +7,13 @@ import type { ExposureOptions } from "@cssearth/engine";
 import type { HeliocentricProjection,PreparedPlanetarySystem } from './heliocentric-view.js';
 import type { Vector2,VisibleRect,Matrix3 } from './types.js';
 import type { Sprite,SystemMarkers } from './heliocentric-sprites.js';
-import { bindObjectNavigationTarget } from './heliocentric-navigation.js';
+import { bindObjectNavigationTarget, supportsObjectNavigation } from './heliocentric-navigation.js';
 const LABEL_OWNER_STAR = 3;
 export interface StarCaptionPolicy extends LabelMetrics {poolSize:number;maxAlpha:number;maxAlphaStep:number;}
 export interface CaptionPlan {policy:LabelPolicy;names:Readonly<Record<string,string>>;stars?:{policy:StarCaptionPolicy;records:readonly (CatalogueStar & {id:string})[];exposure:ExposureOptions};}
 export type LabelPolicyOptions = Partial<Pick<LabelPolicy,'capPixels'|'gapPixels'|'spacingPixels'|'maxAlpha'|'maxAlphaStep'|'boxHeightCaps'>>;
 interface CaptionCandidate extends LabelEntry {owner:number;id:string;box:ReturnType<typeof labelBox>;}
-interface StarField {group:HTMLDivElement;element:HTMLElement;measures:Map<string,HTMLElement>;widths:Map<string,number>;policy:StarCaptionPolicy;pool:LabelSlots;candidate:StarLabel|null;accepted:boolean;measured:boolean;}
+interface StarField {group:HTMLDivElement;element:HTMLElement;records:readonly (CatalogueStar & {id:string})[];navigation:ReturnType<typeof bindObjectNavigationTarget>;measures:Map<string,HTMLElement>;widths:Map<string,number>;policy:StarCaptionPolicy;pool:LabelSlots;candidate:StarLabel|null;accepted:boolean;measured:boolean;}
 interface CaptionField {policy:LabelPolicy;group:HTMLDivElement;elements:HTMLElement[];measures:[string,HTMLElement][];widthPerCapHeight:Map<string,number>;declutter:LabelDeclutter;pool:LabelSlots;published:{text:string|null;transform:string|null;opacity:string|null;hidden:boolean}[];measured:boolean;settled:boolean;accepted:CaptionCandidate[];candidates:number;candidateList?:CaptionCandidate[];visibleRect?:VisibleRect|null;stars?:StarField;}
 interface CaptionMount {host:HTMLElement;celestialRoot:HTMLElement;labels:CaptionPlan;objectId:string;markerSprite:Sprite;system:PreparedPlanetarySystem|null;systemMarkers:SystemMarkers|null;getMarkerOpacity:()=>string|null;getSunMarkerOpacity:()=>number;getSunMarkerHidden:()=>boolean;}
 export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,markerSprite,system,systemMarkers,getMarkerOpacity,getSunMarkerOpacity,getSunMarkerHidden}:CaptionMount) {
@@ -41,7 +41,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
     for (let index = 0; index < policy.poolSize; index += 1) {
       const element = document.createElement("s");
       element.className = `planet-heliocentric-caption ${objectId}-caption`;
-      element.style.opacity = "0";
+      element.style.setProperty("--planet-caption-opacity", "0");
       element.style.visibility = "hidden";
       group.appendChild(element);
       elements.push(element);
@@ -58,11 +58,13 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       accepted: [],
       candidates: 0,
     };
-    if (labels.stars) {
-      const { policy: starPolicy, records } = labels.stars;
+    // Keep catalogue projection available, but only mount labels for destinations
+    // the application can navigate to. Never infer a destination from a name.
+    const records = labels.stars?.records.filter(star => supportsObjectNavigation(host, star.id)) ?? [];
+    if (labels.stars && records.length) {
+      const starPolicy = { ...policy, poolSize: labels.stars.policy.poolSize };
       const starGroup = document.createElement("div");
       starGroup.className = "planet-heliocentric-star-captions";
-      starGroup.ariaHidden = "true";
       starGroup.style.fontSize = `${labelFontPixels(starPolicy)}px`;
       const measures = new Map<string,HTMLElement>();
       for (const star of records) {
@@ -74,10 +76,12 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       }
       const element = document.createElement("s");
       element.className = `planet-heliocentric-caption planet-cubic-sky-caption ${objectId}-star-caption`;
-      element.style.opacity = "0";
+      element.style.setProperty("--planet-caption-opacity", "0");
       element.style.visibility = "hidden";
       starGroup.appendChild(element);
-      labelField.stars = { group: starGroup, element, measures, widths: new Map(), policy: starPolicy,
+      const starNavigation = bindObjectNavigationTarget(element, host);
+      navigation.push(starNavigation);
+      labelField.stars = { group: starGroup, element, records, navigation: starNavigation, measures, widths: new Map(), policy: starPolicy,
         pool: createLabelSlots(starPolicy), candidate: null, accepted: false, measured: false };
     }
   if (labelField.stars) celestialRoot.appendChild(labelField.stars.group);
@@ -113,6 +117,13 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       labelField.declutter = createLabelDeclutter({ capacity: next.candidateCapacity, spacingPixels: next.spacingPixels });
       labelField.pool.setMaxAlpha?.(next.maxAlpha);
       labelField.measured = false;
+      if (labelField.stars) {
+        const stars = labelField.stars;
+        stars.policy = { ...next, poolSize: stars.policy.poolSize };
+        stars.group.style.fontSize = `${labelFontPixels(next)}px`;
+        stars.pool.setMaxAlpha(next.maxAlpha);
+        stars.measured = false;
+      }
       return Object.freeze({ ...next, source: options === null ? "prepared" : "session" });
     },
     publish(projection:HeliocentricProjection, visibleRect:VisibleRect|null = null) { lastProjection=projection;publishCaptions(projection,visibleRect); },
@@ -189,7 +200,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
         stars.measured = true;
       }
       const exposure = createExposure({ ...labels.stars!.exposure, ...skyView.exposure });
-      const star = selectStarLabel({ stars: labels.stars!.records, rotation: skyView.rotation, exposure,
+      const star = selectStarLabel({ stars: stars.records, rotation: skyView.rotation, exposure,
         focal: projection.focal, principalOffset: projection.principalOffset,
         visibleRect: visibleRect ?? { left: -projection.viewportWidth / 2, top: -projection.viewportHeight / 2,
           right: projection.viewportWidth / 2, bottom: projection.viewportHeight / 2 } });
@@ -199,7 +210,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
           markerRadiusPx: star.radiusPx });
         declutter.add({ owner: LABEL_OWNER_STAR, id: star.id, priority: star.priority, anchor: star.anchor, ...box });
         candidates.push({ owner: LABEL_OWNER_STAR, id: star.id, key: `${LABEL_OWNER_STAR}:${star.id}`,
-          priority: star.priority, anchor: star.anchor, alpha: star.alpha, text: star.name,
+          priority: star.priority, anchor: star.anchor, alpha: 1, text: star.name,
           bottomOffsetPx: box.bottomOffsetPx, box });
       }
     }
@@ -216,12 +227,14 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       const [slot] = stars.pool.assign(accepted, field.settled);
       const element = stars.element;
       const visible = slot.occupant !== null && slot.alpha > 0;
+      const target = visible ? accepted.find(candidate => candidate.key === slot.occupant) : undefined;
+      stars.navigation.update(target?.id ?? null, target?.text);
       if (visible) {
         if (element.textContent !== slot.text) element.textContent = slot.text;
         element.dataset.occupant = slot.occupant!;
         element.style.transform = `translate(${formatNumber(slot.anchor[0])}px, ${formatNumber(slot.anchor[1] - slot.bottomOffsetPx)}px) translate(-50%, -100%)`;
       }
-      element.style.opacity = formatNumber(slot.alpha);
+      element.style.setProperty("--planet-caption-opacity", formatNumber(slot.alpha));
       element.style.visibility = visible ? "" : "hidden";
     }
     field.settled = true;
@@ -247,7 +260,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
         }
         const opacity = formatNumber(slot.alpha);
         if (published.opacity !== opacity) {
-          element.style.opacity = opacity;
+          element.style.setProperty("--planet-caption-opacity", opacity);
           published.opacity = opacity;
         }
       }

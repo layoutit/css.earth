@@ -28,7 +28,10 @@ export type PreparedViewBinding = { target: number } & (
   { kind: "zoom-property"; property: string } | { kind: "shell-scale"; variable: string; defaultZoom: number } |
   { kind: "counter-rotation"; systemTransform: string | null }
 );
-export interface PreparedPageLayer { id: string; carrier: number; system: number; readonly [key: string]: unknown; }
+export interface PreparedPageLayer {
+  id: string; carrier: number; system: number; plan: unknown;
+  className: string; textureClassName: string; lensIds: string[];
+}
 export interface PreparedPresentationDefinition {
   camera: Parameters<typeof preparedScenePitch>[1]; tree: PreparedTree; variants: readonly PreparedVariant[]; materials: readonly PreparedMaterialTrack[];
   resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[]; pageLayers?: readonly PreparedPageLayer[];

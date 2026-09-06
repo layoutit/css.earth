@@ -1,14 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPreparedResidency } from "./prepared-residency.mjs";
-import PREPARED_MERCURY_ASSETS from "../../src/planets/mercury/prepared/assets.json" with {type: "json"};
-import { PREPARED_MARS_LIGHTING } from "../planets/mars/runtime/preparedLighting.mjs";
-import { PREPARED_JUPITER_LIGHTING } from "../planets/jupiter/runtime/preparedLighting.mjs";
-import { PREPARED_EARTH_SCENE } from "../planets/earth/runtime/preparedScene.mjs";
-import { PREPARED_EARTH_LENSES } from "../planets/earth/runtime/preparedLenses.mjs";
-import { PREPARED_URANUS_LENSES } from "../planets/uranus/runtime/preparedLenses.mjs";
-import { PREPARED_SATURN_LENSES } from "../planets/saturn/runtime/preparedLenses.mjs";
-import { PREPARED_SATURN_RUNTIME_SCENE } from "../planets/saturn/runtime/preparedSceneRuntime.mjs";
+import { createPreparedResidency } from '../renderers/css/dist/testing.js';
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
+const definitions=Object.fromEntries(await Promise.all(['mercury','mars','jupiter','earth','uranus','saturn'].map(async id=>[id,await loadObjectTestDefinition(id)])));
+const assetUrl=(definition,key)=>{const asset=definition.assets.entries.find(entry=>entry.key===key);assert.ok(asset,`Actual prepared resource ${key} is missing`);return asset.url;};
 
 const flush = async () => { for (let index = 0; index < 12; index++) await Promise.resolve(); };
 function harness(assets, options = {}) {
@@ -42,11 +37,13 @@ function catalog(urls, { capacity = urls.length, concurrency = capacity, retenti
   return { pools: [{ id: "material", capacity, concurrency, retention, eviction, reuse }],
     entries: urls.map((url, index) => ({ key: String(index), url, pool: "material" })), startup: startup.map(String) };
 }
-const rowPlans = {
-  mercury: PREPARED_MERCURY_ASSETS.lighting.banks[2], mars: PREPARED_MARS_LIGHTING.banks[2],
-  jupiter: PREPARED_JUPITER_LIGHTING,
-  earthLighting: PREPARED_EARTH_SCENE.material.lighting, earthAtmosphere: PREPARED_EARTH_SCENE.material.atmosphere,
-};
+function rowPlan(definition,trackId='lighting'){
+ const track=definition.materials.find(track=>track.id===trackId),bank=track.banks[0],frame=bank.frames[track.defaultFrame],resource=definition.assets.entries.find(entry=>entry.key===frame.resource),pool=definition.assets.pools.find(pool=>pool.id===resource.pool);
+ assert.ok(bank.rows?.length>2,'Use actual frame-row consumers');
+ const selected=[frame.resource,...frame.prewarm];
+ return{rows:bank.rows.map(row=>({url:assetUrl(definition,row.resource)})),transport:{maximumRetainedRowCount:pool.capacity,defaultRow:frame.row,initialWarmRows:selected.map(key=>bank.rows.find(row=>row.resource===key).row)}};
+}
+const rowPlans={mercury:rowPlan(definitions.mercury),mars:rowPlan(definitions.mars),jupiter:rowPlan(definitions.jupiter),earthLighting:rowPlan(definitions.earth),earthAtmosphere:rowPlan(definitions.earth,'atmosphere')};
 for (const [name, plan] of Object.entries(rowPlans)) test(`${name} prepared row policy preserves its bound and protected published row`, async () => {
   const { maximumRetainedRowCount: capacity, initialWarmRows } = plan.transport;
   const rowUrls = (plan.preparedRows ?? plan.rows).map(row => row.assets?.two ?? row.url ?? row.assetUrl);
@@ -67,7 +64,7 @@ for (const [name, plan] of Object.entries(rowPlans)) test(`${name} prepared row 
 });
 
 test("Uranus retains only active plus latest pending prepared neighborhoods", async () => {
-  const rows = PREPARED_URANUS_LENSES.controls.slice(0, 3).flatMap(lens => lens.materialViewBank[2].rows.map(row => row.url));
+  const rows=definitions.uranus.materials[0].banks.slice(0,3).flatMap(bank=>bank.rows.map(row=>assetUrl(definitions.uranus,row.resource)));
   const { manager, jobs, commit, complete } = harness(catalog(rows, { capacity: 6 }));
   await commit(["3", "4", "5"]);
   const abandoned = manager.request({ required: ["19", "20", "21"] });
@@ -84,7 +81,9 @@ test("Uranus retains only active plus latest pending prepared neighborhoods", as
 });
 
 test("Earth complete page groups retain the committed bank with only two pending decodes", async () => {
-  const banks = PREPARED_EARTH_LENSES.controls.filter(lens => lens.surfaceUrls && !lens.surfaceBankId);
+  const pageEntries=definitions.earth.assets.entries.filter(entry=>entry.pool==='pages'),groups=new Map();
+  for(const entry of pageEntries){const id=entry.key.split(':')[1];if(!groups.has(id))groups.set(id,[]);groups.get(id).push(entry.url);}
+  const banks=[...groups.values()].map(surfaceUrls=>({surfaceUrls}));
   const urls = banks.flatMap(lens => lens.surfaceUrls);
   // Page arrays are the prepared lens data; fail if their schema changes.
   assert.ok(urls.length >= 6, "Use the actual prepared surface page banks");
@@ -108,18 +107,17 @@ test("Earth complete page groups retain the committed bank with only two pending
 });
 
 test("Saturn surface, ring and material groups transfer together and failed requests preserve the active group", async () => {
-  const lenses = PREPARED_SATURN_LENSES.controls.slice(0, 3);
+  const definition=definitions.saturn,lenses=definition.controls.lenses.controls.slice(0,3);
   const assets = { entries: [], pools: [], startup: [] };
-  for (const field of ["surfaceUrl", "ringUrl"]) {
+  for (const field of ["surface", "rings"]) {
     assets.pools.push({ id: field, capacity: 2, concurrency: 2, retention: "selection", reuse: false });
-    for (const lens of lenses) assets.entries.push({ key: `${lens.id}/${field}`, url: lens[field], pool: field });
+    for (const lens of lenses) assets.entries.push({ key: `${lens.id}/${field}`, url: assetUrl(definition,`${field}:${lens.id}`), pool: field });
   }
-  for (const [category, plan] of Object.entries({ exterior: PREPARED_SATURN_RUNTIME_SCENE.preparedLighting.orbitAtlas.runtimeShards,
-    interior: PREPARED_SATURN_RUNTIME_SCENE.interior.atmosphere.runtimeShards })) {
+  for (const category of ['exterior']) {
     assets.pools.push({ id: category, capacity: 2, concurrency: 2, retention: "selection", reuse: false });
     for (const lens of lenses) {
-      const atlas = plan.variants[lens.id].runtimeAtlas;
-      assets.entries.push({ key: `${lens.id}/${category}`, url: atlas.asset2xUrl ?? atlas.assetUrl, pool: category });
+      const bank=definition.materials.find(track=>track.id===category).banks.find(bank=>bank.id===lens.id);assert.ok(bank);
+      assets.entries.push({ key: `${lens.id}/${category}`, url: assetUrl(definition,bank.frames[0].resource), pool: category });
     }
   }
   const keys = lens => assets.entries.filter(entry => entry.key.startsWith(lens.id + "/")).map(entry => entry.key);
@@ -147,6 +145,18 @@ test("frame-used fallback stays protected until a later publication reads its re
   manager.beginFrame(); manager.resources.url("3"); manager.endFrame();
   assert.deepEqual(manager.stats().used, ["3"]);
   manager.destroy();
+});
+
+test('Saturn actual interior atmosphere banks keep the published variant through rejection and retry',async()=>{
+  const definition=definitions.saturn,track=definition.materials.find(track=>track.id==='interior');
+  const urls=track.banks.map(bank=>assetUrl(definition,bank.frames[0].resource));
+  assert.ok(urls.length>=3,'Use the actual retained cutaway material variants');
+  const {manager,commit,jobs,complete}=harness(catalog(urls,{capacity:2,reuse:false}));
+  await commit(['0']);
+  const failed=manager.request({required:['1']});const job=jobs.at(-1);job.done=true;job.reject(new Error('interior material unavailable'));
+  await assert.rejects(failed.ready,/decode/);await flush();assert.deepEqual(manager.stats().committed,['0']);
+  const replacement=manager.request({required:['2']});await complete();await replacement.ready;manager.commit(replacement);
+  assert.deepEqual(manager.stats().committed,['2']);assert.equal(manager.stats().pools[0].resident,1);manager.destroy();
 });
 
 test("over-capacity required demand rejects promptly without retiring the active selection", async () => {

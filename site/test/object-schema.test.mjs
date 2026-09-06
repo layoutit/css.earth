@@ -1,16 +1,15 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { resolve } from "node:path";
+import { authoredObjectFixture } from "./authored-object-fixture.mjs";
 
 import { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from "../object-schema.mjs";
 import { OBJECTS, requireObject } from "../objects.mjs";
 import { parsePreparedWorldCameraFrame } from '../../src/renderers/css/dist/index.js';
 import {
   discoverPlanetTests,
-  planetAcquireScript,
-  planetAssembleScript,
-  planetBrowserSmokeScript,
-  planetPrepareScript,
-  planetTestDirectory,
   resolvePlanetAssembly,
   resolvePlanetCommand,
 } from "../../tools/run-implemented-planets.mjs";
@@ -19,6 +18,7 @@ const loadScene = async () => () => {};
 const fixture = Object.freeze({
   id: "fixture",
   name: "Fixture",
+  systemName: "Test System",
   classification: "dwarf-planet",
   color: "#abcdef",
   distanceAu: 1,
@@ -32,6 +32,7 @@ test("defines one generic renderable-object contract", () => {
   assert.deepEqual(Object.keys(objectRecord), [
     "id",
     "name",
+    "systemName",
     "classification",
     "color",
     "distanceAu",
@@ -85,6 +86,8 @@ test("rejects invalid object definitions and renderer-specific fields", () => {
     /Invalid object definition/);
   assert.throws(() => defineObject({ ...fixture, loadScene: true }),
     /Invalid object definition/);
+  assert.throws(() => defineObject({ ...fixture, systemName: "" }),
+    /Invalid object definition/);
   for (const field of ["scene", "camera", "material", "moons", "lenses"]) {
     assert.throws(
       () => defineObject({ ...fixture, [field]: "unsupported" }),
@@ -110,74 +113,56 @@ test("keeps one open-ended object registry with unique ids and routes", () => {
   assert.throws(() => requireObject("missing"), /Unknown cssEarth object/);
 });
 
-test("derives deterministic test discovery from an object id", async () => {
-  assert.equal(
-    planetTestDirectory("fixture", "/project"),
-    "/project/src/planets/fixture/test",
-  );
+async function authoredFixture(context) {
+  const root = await mkdtemp(resolve(tmpdir(), "cssearth-discovery-"));
+  context.after(() => rm(root, { recursive: true, force: true }));
+  const directory = resolve(root, "src/planets/fixture");
+  await mkdir(directory, { recursive: true });
+  await writeFile(resolve(directory, "object.json"), JSON.stringify(authoredObjectFixture("fixture")));
+  return root;
+}
+
+test("derives deterministic test discovery from an authored object id", async context => {
+  const projectRoot = await authoredFixture(context);
+  const directory = resolve(projectRoot, "tests/objects/unit/fixture");
   assert.deepEqual(
     await discoverPlanetTests("fixture", {
-      projectRoot: "/project",
-      readDirectory: async () => ["z.test.mjs", "notes.md", "a.test.mjs"],
+      projectRoot,
+      readDirectory: async path => {
+        assert.equal(path, directory);
+        return ["z.test.mjs", "notes.md", "a.test.mjs"];
+      },
     }),
-    [
-      "/project/src/planets/fixture/test/a.test.mjs",
-      "/project/src/planets/fixture/test/z.test.mjs",
-    ],
+    [resolve(directory, "a.test.mjs"), resolve(directory, "z.test.mjs")],
   );
-  await assert.rejects(
-    discoverPlanetTests("missing", {
-      readDirectory: async () => { throw new Error("ENOENT"); },
-    }),
-    /test directory is missing/,
-  );
-  await assert.rejects(
-    discoverPlanetTests("empty", { readDirectory: async () => ["README.md"] }),
-    /has no tests/,
-  );
+  await assert.rejects(discoverPlanetTests("fixture", {
+    projectRoot, readDirectory: async () => { throw new Error("ENOENT"); },
+  }), /test directory is missing/);
+  await assert.rejects(discoverPlanetTests("fixture", {
+    projectRoot, readDirectory: async () => ["README.md"],
+  }), /has no tests/);
 });
 
-test("derives and validates object-owned scripts", async () => {
-  const assembly = "/project/src/planets/fixture/tools/compact-production-assets.mjs";
-  assert.equal(planetAssembleScript("fixture", "/project"), assembly);
-  assert.equal(
-    await resolvePlanetAssembly("fixture", {
-      projectRoot: "/project",
-      accessFile: async (path) => assert.equal(path, assembly),
-    }),
-    assembly,
-  );
-  assert.equal(
-    planetAcquireScript("fixture", "/project"),
-    "/project/src/planets/fixture/tools/acquire.mjs",
-  );
-  assert.equal(
-    planetPrepareScript("fixture", "/project"),
-    "/project/src/planets/fixture/tools/prepare.mjs",
-  );
-  assert.equal(
-    planetBrowserSmokeScript("fixture", "/project"),
-    "/project/src/planets/fixture/test/smoke-browser.mjs",
-  );
-  for (const [mode, expected] of [
-    ["acquire", "/project/src/planets/fixture/tools/acquire.mjs"],
-    ["prepare", "/project/src/planets/fixture/tools/prepare.mjs"],
-    ["browser", "/project/src/planets/fixture/test/smoke-browser.mjs"],
-    ["assemble", assembly],
+test("derives shared preparation and external browser scripts from the descriptor", async context => {
+  const projectRoot = await authoredFixture(context);
+  const assembly = resolve(projectRoot, "tools/objects/dist/operations.js");
+  assert.equal(await resolvePlanetAssembly("fixture", {
+    projectRoot, accessFile: async path => assert.equal(path, assembly),
+  }), assembly);
+  for (const [mode, suffix] of [
+    ["acquire", "tools/objects/dist/operations.js"],
+    ["prepare", "tools/objects/dist/prepare-authored.js"],
+    ["browser", "tests/objects/browser/fixture/smoke-browser.mjs"],
+    ["assemble", "tools/objects/dist/operations.js"],
   ]) {
+    const expected = resolve(projectRoot, suffix);
     assert.equal(await resolvePlanetCommand("fixture", mode, {
-      projectRoot: "/project",
-      accessFile: async (path) => assert.equal(path, expected),
+      projectRoot, accessFile: async path => assert.equal(path, expected),
     }), expected);
+    await assert.rejects(resolvePlanetCommand("fixture", mode, {
+      projectRoot, accessFile: async () => { throw new Error("ENOENT"); },
+    }), new RegExp(mode + " script is missing"));
   }
-  await assert.rejects(
-    resolvePlanetCommand("missing", "prepare", {
-      accessFile: async () => { throw new Error("ENOENT"); },
-    }),
-    /prepare script is missing/,
-  );
-  await assert.rejects(
-    resolvePlanetCommand("fixture", "unknown"),
-    /Unknown planet command mode/,
-  );
+  await assert.rejects(resolvePlanetCommand("fixture", "unknown", { projectRoot }),
+    /Unknown planet command mode/);
 });

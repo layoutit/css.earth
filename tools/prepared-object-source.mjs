@@ -22,19 +22,31 @@ export function requireDescriptorAdapterSource(text, exported) {
     returned.arguments[1].type !== 'ObjectExpression') fail();
   const adapter = returned.arguments[2];
   if (adapter?.type !== 'ArrowFunctionExpression' || adapter.params.length !== 1 || adapter.params[0]?.type !== 'Identifier' ||
-    adapter.body?.type !== 'CallExpression' || adapter.body.callee?.type !== 'Identifier' ||
-    adapter.body.callee.name !== 'bindContextualObject' || adapter.body.arguments.length !== 3 ||
-    adapter.body.arguments[0]?.name !== adapter.params[0].name) fail();
+    adapter.body?.type !== 'ConditionalExpression') fail();
+  const descriptorInput = loader.params[0].name;
+  const ownWorldFrame = node => node?.type === 'MemberExpression' && !node.computed && node.property.name === 'worldFrame' &&
+    node.object?.type === 'MemberExpression' && !node.object.computed && node.object.property.name === 'properties' &&
+    node.object.object?.type === 'Identifier' && node.object.object.name === descriptorInput;
+  const contextual = adapter.body.consequent, plain = adapter.body.alternate;
+  if (!ownWorldFrame(adapter.body.test) || contextual?.type !== 'CallExpression' || contextual.callee?.name !== 'bindContextualObject' ||
+    contextual.arguments.length !== 3 || contextual.arguments[0]?.name !== adapter.params[0].name ||
+    !ownWorldFrame(contextual.arguments[2]) || plain?.type !== 'CallExpression' || plain.callee?.name !== 'bindPackagedObject' ||
+    plain.arguments.length !== 1 || plain.arguments[0]?.name !== adapter.params[0].name) fail();
   const contextImport = ast.body.find(statement => statement.type === 'ImportDeclaration' && statement.specifiers.length === 1 &&
     statement.specifiers[0].type === 'ImportDefaultSpecifier' && statement.source.value === '../src/planets/sun/prepared/world-context.json' &&
     statement.attributes?.length === 1 && (statement.attributes[0].key.name ?? statement.attributes[0].key.value) === 'type' &&
     statement.attributes[0].value.value === 'json');
-  if (!contextImport || adapter.body.arguments[1]?.type !== 'Identifier' ||
-    adapter.body.arguments[1].name !== contextImport.specifiers[0].local.name) fail();
-  const descriptorInput = loader.params[0].name, frame = adapter.body.arguments[2];
-  if (frame?.type !== 'MemberExpression' || frame.computed || frame.property.name !== 'worldFrame' ||
-    frame.object?.type !== 'MemberExpression' || frame.object.computed || frame.object.property.name !== 'properties' ||
-    frame.object.object?.type !== 'Identifier' || frame.object.object.name !== descriptorInput) fail();
+  if (!contextImport || contextual.arguments[1]?.type !== 'Identifier' ||
+    contextual.arguments[1].name !== contextImport.specifiers[0].local.name) fail();
+  const plainBinding = functions.get('bindPackagedObject'), defaultMount = plainBinding?.params[1];
+  if (plainBinding?.params.length !== 2 || plainBinding.params[0]?.type !== 'Identifier' ||
+    defaultMount?.type !== 'AssignmentPattern' || defaultMount.left?.type !== 'Identifier' ||
+    defaultMount.right?.type !== 'CallExpression' || bindings.get(defaultMount.right.callee?.name)?.name !== 'createObjectRuntime' ||
+    defaultMount.right.arguments.length !== 1 || defaultMount.right.arguments[0]?.name !== plainBinding.params[0].name) fail();
+  const plainMount = plainBinding.body.body[0]?.argument;
+  if (plainBinding.body.body.length !== 1 || plainMount?.type !== 'ArrowFunctionExpression' || plainMount.params.length !== 2 ||
+    plainMount.body?.type !== 'CallExpression' || plainMount.body.callee?.name !== defaultMount.left.name ||
+    plainMount.body.arguments[0]?.name !== plainMount.params[0]?.name || plainMount.body.arguments[1]?.type !== 'ObjectExpression') fail();
   const bind = functions.get('bindContextualObject');
   if (!bind || bind.params.length !== 3 || bind.params[0]?.type !== 'Identifier' || bind.params[1]?.type !== 'Identifier' ||
     bind.params[2]?.type !== 'AssignmentPattern' || bind.params[2].left?.type !== 'Identifier' ||
@@ -56,7 +68,8 @@ export function requireDescriptorAdapterSource(text, exported) {
     returnStatement.argument.callee.property?.name !== 'assign' || returnStatement.argument.arguments[0]?.name !== mount.id.name) fail();
   const rendererBinding = bindings.get('createWorldContextObjectRuntime');
   if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' ||
-    bindings.get('createNavigableObjectMount')?.source !== rendererBinding.source) fail();
+    bindings.get('createNavigableObjectMount')?.source !== rendererBinding.source ||
+    bindings.get(defaultMount.right.callee.name)?.source !== rendererBinding.source) fail();
   const renderer = rendererBinding.source;
   const transport = returned.arguments[1].properties;
   if (transport.length !== 1 || (transport[0].key.name ?? transport[0].key.value) !== 'read' || !transport[0].method || !transport[0].value.async || transport[0].value.params.length !== 1) fail();

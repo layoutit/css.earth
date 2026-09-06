@@ -12,6 +12,7 @@ const { activeObjectId } = Astro.props;
 <ul class="planet-object-list">
   {PLANET_SEARCH_OBJECTS.map((object) => (
     <li class="planet-object-item" data-object-name={object.name.toLocaleLowerCase("en")}
+      data-object-system-name={object.systemName.toLocaleLowerCase("en")}
       data-object-classification={object.classification}
       data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase("en")}>
       <a

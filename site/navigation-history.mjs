@@ -41,9 +41,11 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
 }
 
 export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, onError = () => {} }) {
+  const available = id => typeof id === 'string' && objects.some(object => object.id === id) && supports(id);
+  const query = event => { if (available(event.detail?.objectId)) event.preventDefault(); };
   const select = event => {
     const id = event.detail?.objectId;
-    if (typeof id !== 'string' || !objects.some(object => object.id === id) || !supports(id)) return;
+    if (!available(id)) return;
     event.preventDefault();
     Promise.resolve(navigate(id)).catch(onError);
   };
@@ -60,5 +62,10 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
   };
   documentTarget.addEventListener('click', click);
   documentTarget.addEventListener('objectnavigate', select);
-  return () => { documentTarget.removeEventListener('click', click); documentTarget.removeEventListener('objectnavigate', select); };
+  documentTarget.addEventListener('objectnavigationquery', query);
+  return () => {
+    documentTarget.removeEventListener('click', click);
+    documentTarget.removeEventListener('objectnavigate', select);
+    documentTarget.removeEventListener('objectnavigationquery', query);
+  };
 }

@@ -1,0 +1,372 @@
+{
+  "schema": "cssearth-radial-layer-recipe@1",
+  "units": "kilometers",
+  "sources": [
+    {
+      "id": "pds-uranus-ring-table",
+      "path": "rings/uranus-rings-table.html",
+      "expectedBytes": 29588,
+      "expectedSha256": "de6a861aacdd4de68cbfebc1975feaf2b1d4d0392eea21c3083d4225b24bbf4a",
+      "origin": "https://pds-rings.seti.org/uranus/uranus_rings_table.html",
+      "credit": "NASA Planetary Data System Rings Node",
+      "license": "United States government scientific data"
+    }
+  ],
+  "layers": [
+    {
+      "kind": "annular-field",
+      "size": 1200,
+      "densities": [
+        1,
+        2
+      ],
+      "outerRadius": 106200,
+      "mapping": {
+        "kind": "linear",
+        "scale": 1
+      },
+      "grid": {
+        "centerInset": 1,
+        "sampleOffset": 0,
+        "marginPixels": 8,
+        "scaleOrder": "divide-multiply"
+      },
+      "composition": "maximum",
+      "alphaUnits": 255,
+      "maximumAlpha": 235,
+      "encoding": {
+        "quality": 96,
+        "alphaQuality": 100
+      },
+      "bands": [
+        {
+          "id": "Zeta",
+          "envelope": "tent",
+          "center": 39600,
+          "width": 3500,
+          "minimumHalfWidthPixels": 0,
+          "edgeGain": 2.5,
+          "opacity": 29.516097302997224,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "Zeta",
+            "radiusKm": 39600,
+            "widthKm": 3500,
+            "opticalDepth": 0.0045,
+            "color": "gray",
+            "sourceLabel": "Zeta",
+            "widthQualification": "source-scaled-width"
+          }
+        },
+        {
+          "id": "6",
+          "envelope": "tent",
+          "center": 41838,
+          "width": 1.53,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 110,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "6",
+            "radiusKm": 41838,
+            "widthKm": 1.53,
+            "opticalDepth": 0.3,
+            "color": "gray",
+            "sourceLabel": "Six",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "5",
+          "envelope": "tent",
+          "center": 42234,
+          "width": 2.28,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 138,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "5",
+            "radiusKm": 42234,
+            "widthKm": 2.28,
+            "opticalDepth": 0.5,
+            "color": "gray",
+            "sourceLabel": "Five",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "4",
+          "envelope": "tent",
+          "center": 42571,
+          "width": 2.33,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 110,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "4",
+            "radiusKm": 42571,
+            "widthKm": 2.33,
+            "opticalDepth": 0.3,
+            "color": "gray",
+            "sourceLabel": "Four",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "Alpha",
+          "envelope": "tent",
+          "center": 44718,
+          "width": 8.46,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 124,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "Alpha",
+            "radiusKm": 44718,
+            "widthKm": 8.46,
+            "opticalDepth": 0.4,
+            "color": "gray",
+            "sourceLabel": "Alpha",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "Beta",
+          "envelope": "tent",
+          "center": 45661,
+          "width": 9.49,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 110,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "Beta",
+            "radiusKm": 45661,
+            "widthKm": 9.49,
+            "opticalDepth": 0.3,
+            "color": "gray",
+            "sourceLabel": "Beta",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "Eta",
+          "envelope": "tent",
+          "center": 47176,
+          "width": 1.6,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 124,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "Eta",
+            "radiusKm": 47176,
+            "widthKm": 1.6,
+            "opticalDepth": 0.4,
+            "color": "gray",
+            "sourceLabel": "Eta",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "Gamma",
+          "envelope": "tent",
+          "center": 47627,
+          "width": 2.15,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 110,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "Gamma",
+            "radiusKm": 47627,
+            "widthKm": 2.15,
+            "opticalDepth": 0.3,
+            "color": "gray",
+            "sourceLabel": "Gamma",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "Delta",
+          "envelope": "tent",
+          "center": 48300,
+          "width": 4.6,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 138,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "Delta",
+            "radiusKm": 48300,
+            "widthKm": 4.6,
+            "opticalDepth": 0.5,
+            "color": "gray",
+            "sourceLabel": "Delta",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "Lambda",
+          "envelope": "tent",
+          "center": 50024,
+          "width": 2.3,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 82,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "Lambda",
+            "radiusKm": 50024,
+            "widthKm": 2.3,
+            "opticalDepth": 0.1,
+            "color": "gray",
+            "sourceLabel": "Lambda",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "Epsilon",
+          "envelope": "tent",
+          "center": 51149,
+          "width": 58.1,
+          "minimumHalfWidthPixels": 0.72,
+          "edgeGain": 2.5,
+          "opacity": 208,
+          "color": [
+            125,
+            137,
+            140
+          ],
+          "source": {
+            "name": "Epsilon",
+            "radiusKm": 51149,
+            "widthKm": 58.1,
+            "opticalDepth": 1.4,
+            "color": "gray",
+            "sourceLabel": "Epsilon",
+            "widthQualification": "source-center-radius-with-minimum-pixel-readability-width"
+          }
+        },
+        {
+          "id": "Nu",
+          "envelope": "tent",
+          "center": 67300,
+          "width": 3800,
+          "minimumHalfWidthPixels": 0,
+          "edgeGain": 2.5,
+          "opacity": 1.0412300418255322,
+          "color": [
+            141,
+            91,
+            86
+          ],
+          "source": {
+            "name": "Nu",
+            "radiusKm": 67300,
+            "widthKm": 3800,
+            "opticalDepth": 0.0000056,
+            "color": "red",
+            "sourceLabel": "Nu",
+            "widthQualification": "source-scaled-width"
+          }
+        },
+        {
+          "id": "Mu",
+          "envelope": "tent",
+          "center": 97700,
+          "width": 17000,
+          "minimumHalfWidthPixels": 0,
+          "edgeGain": 2.5,
+          "opacity": 1.282809416865966,
+          "color": [
+            103,
+            151,
+            181
+          ],
+          "source": {
+            "name": "Mu",
+            "radiusKm": 97700,
+            "widthKm": 17000,
+            "opticalDepth": 0.0000085,
+            "color": "blue",
+            "sourceLabel": "Mu",
+            "widthQualification": "source-scaled-width"
+          }
+        }
+      ],
+      "output": "uranus-rings{suffix}.webp",
+      "qualification": "PDS center radii and physical widths, with the accepted pixel readability floor for narrow rings.",
+      "overlays": [
+        {
+          "kind": "projected-strip-shadow",
+          "bodyRadius": 25559,
+          "outerRadius": 106200,
+          "centerInset": 1,
+          "marginPixels": 8,
+          "direction": [
+            0.91,
+            0.414
+          ],
+          "startFraction": 0.72,
+          "edgeFraction": 0.012,
+          "maximumAlpha": 178,
+          "color": [
+            1,
+            5,
+            7
+          ],
+          "encoding": {
+            "quality": 92,
+            "alphaQuality": 100
+          },
+          "output": "uranus-ring-shadow-plane{suffix}.webp"
+        }
+      ]
+    }
+  ]
+}

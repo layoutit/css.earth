@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPreparedPlayback } from "./prepared-playback.mjs";
+import { createPreparedPlayback } from '../renderers/css/dist/testing.js';
 function animation(time = 12) {
   return { currentTime: time, playbackRate: 1, playState: "running", calls: [],
     play() { this.playState = "running"; this.calls.push("play"); },
