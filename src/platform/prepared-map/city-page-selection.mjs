@@ -127,11 +127,11 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
     for(const ref of next)directories.set(preparedReferenceKey(ref),ref);
     return next;
   };
-  const selected=[],fallbacks=[];
+  const selected=[],fallbacks=[],pending=[];
   let constrained = false;
   // Follow only prepared child references. Each tile's image pieces form one
   // replacement group, so an apron or Mercator strip cannot disappear alone.
-  const visit=(key,path=[])=>{
+  const visit=(key,path=[],ancestors=[])=>{
     const entry=inspect(key);
     if(!entry.visible||entry.span<1){
       // A loaded section can prove that its conservative stub bounds contain
@@ -141,16 +141,27 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
       return [];
     }
     const next=request(entry,path);
-    if(entry.node.stub)return null;
-    const own=(entry.node.pages??[]).map(inspect).filter(p=>p.visible&&p.span>=1).map(p=>({...p,path:next,tile:entry.node}));
+    const lineage=[...ancestors,key];
+    if(entry.node.stub){
+      // Missing metadata is a coverage blocker, not an empty tile. Publication
+      // can retain its old ancestor/descendants while other branches progress.
+      pending.push({key,lineage,pages:[],pending:true});
+      return [];
+    }
+    const own=(entry.node.pages??[]).map(inspect).filter(p=>p.visible&&p.span>=1).map(p=>({...p,path:next,tile:entry.node,lineage}));
     const refine=!plan.coarsestCut && entry.span>entry.node.maximumCssSpan*(plan.selectionScale??1);
     if(entry.node.children.length && refine){
-      const childGroups=entry.node.children.map(key=>visit(key,next));
-      if(childGroups.every(g=>g!==null)){
-        const deeper=childGroups.flat();
-        if(deeper.length<=capacity&&deeper.reduce((s,p)=>s+p.node.width*p.node.height*4,0)<=byteCapacity)return deeper;
+      const pendingStart=pending.length;
+      const childGroups=entry.node.children.map(key=>visit(key,next,lineage));
+      const deeper=childGroups.flat();
+      if(deeper.length<=capacity&&deeper.reduce((s,p)=>s+p.node.width*p.node.height*4,0)<=byteCapacity){
+        if(pending.length===pendingStart || !own.length)return deeper;
+      }else{
         constrained = true;
       }
+      // An available parent supplies complete fallback. Unknown descendants
+      // must not prevent that parent itself from publishing.
+      if(own.length)pending.length=pendingStart;
     }
     if(own.length && entry.node.children.length && refine && fallbacks.length<12)fallbacks.push({key,span:entry.span,own:own.length,children:entry.node.children.map(key=>({key,stub:pages.get(key).stub,pages:pages.get(key).pages?.length}))});
     return own;
@@ -183,7 +194,7 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
     for (let pass = 0; pass < capacity * 20; pass++) {
       const groups = new Map();
       for (const entry of selected) {
-        const group = groups.get(entry.tile.key) ?? { tile: entry.tile, entries: [], path: entry.path, projection: inspect(entry.tile.key) };
+        const group = groups.get(entry.tile.key) ?? { tile: entry.tile, entries: [], path: entry.path, lineage: entry.lineage, projection: inspect(entry.tile.key) };
         group.entries.push(entry); groups.set(entry.tile.key, group);
       }
       const next = [...groups.values()].filter(group => !attempted.has(group.tile.key) && group.tile.children.length &&
@@ -197,7 +208,7 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
         const path = request(child, next.path);
         for (const key of child.node.pages ?? []) {
           const piece = inspect(key);
-          if (piece.visible && piece.span >= 1) replacements.push({...piece, path, tile: child.node});
+          if (piece.visible && piece.span >= 1) replacements.push({...piece, path, tile: child.node, lineage:[...next.lineage,child.node.key]});
         }
       }
       if (!replacements.length || children.some(child => child.node.stub || !child.node.pages?.length && child.node.children?.length)) continue;
@@ -208,5 +219,10 @@ function selectWmtsTree(plan,pages,matrix,scale,viewport,projected=new Map()){
   }
   const ordered=new Map(selected.flatMap(entry=>entry.path.map(ref=>[preparedReferenceKey(ref),ref])));
   for(const [key,ref] of directories)if(!ordered.has(key))ordered.set(key,ref);
-  return {keys:selected.map(p=>p.node.key),directories:[...ordered.values()],fallbacks,selectionScale:plan.selectionScale??1};
+  const groups=new Map();
+  for(const entry of selected){
+    const group=groups.get(entry.tile.key)??{key:entry.tile.key,lineage:entry.lineage,pages:[]};
+    group.pages.push(entry.node.key);groups.set(group.key,group);
+  }
+  return {keys:selected.map(p=>p.node.key),groups:[...groups.values(),...pending],directories:[...ordered.values()],fallbacks,selectionScale:plan.selectionScale??1};
 }

@@ -48,12 +48,33 @@ test("a tile group retains every parent piece until all visible children are ava
   const localPlan={...plan,roots:[parent],topology:"wmts-quadtree@1",poolSize:8,maximumDecodedBytes:8*256*256*4};
   const nodes=new Map([parent,a,b,child].map(n=>[n.key,n])),matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],viewport={width:800,height:600};
   const first=selectCityPages(localPlan,nodes,matrix,1,viewport);assert.deepEqual(first.keys,["apron","strip"]);assert.equal(first.directories.length,1);
+  assert.deepEqual(first.groups,[{key:"root",lineage:["root"],pages:["apron","strip"]}]);
   nodes.set(child.key,{...child,stub:false,pages:["detail"],children:[]});nodes.set("detail",{...a,key:"detail"});
-  assert.deepEqual(selectCityPages(localPlan,nodes,matrix,1,viewport).keys,["detail"]);
+  const refined=selectCityPages(localPlan,nodes,matrix,1,viewport);
+  assert.deepEqual(refined.keys,["detail"]);
+  assert.deepEqual(refined.groups,[{key:"child",lineage:["root","child"],pages:["detail"]}]);
 });
 test("worldwide source coverage includes polar footprints and stops at actual source gaps",()=>{
   const levels=[8,9].map(zoom=>prepareWmtsCoverage([{tile:"N82E015"},{tile:"S35W059"}],zoom,{includePolar:true})),has=coverageLookup(levels);
   assert.equal(has(wmtsAddress(15.5,82.5,8)),true);assert.equal(has(wmtsAddress(-58.5,-34.5,9)),true);assert.equal(has(wmtsAddress(100,0,8)),false);
+});
+
+test("unknown metadata is explicit while available branches remain selectable",()=>{
+  const corners=[[-100,-100,0],[100,-100,0],[100,100,0],[-100,100,0]],normal=[0,0,1];
+  const parent={key:"root",level:5,corners,normal,pages:[],children:["known","unknown"],maximumCssSpan:1};
+  const known={...parent,key:"known",level:6,pages:["image"],children:[]};
+  const image={key:"image",corners,normal,url:"a",width:256,height:256,children:[]};
+  const unknown={key:"unknown",level:6,corners,normal,stub:true,directory:pack.root.directory};
+  const nodes=new Map([parent,known,image,unknown].map(n=>[n.key,n]));
+  const localPlan={...plan,roots:[parent],topology:"wmts-quadtree@1",poolSize:8,maximumDecodedBytes:8*256*256*4};
+  const matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],viewport={width:800,height:600};
+  const first=selectCityPages(localPlan,nodes,matrix,1,viewport);
+  assert.deepEqual(first.keys,["image"]);
+  assert.deepEqual(first.groups,[{key:"known",lineage:["root","known"],pages:["image"]},
+    {key:"unknown",lineage:["root","unknown"],pages:[],pending:true}]);
+  assert.deepEqual(first.directories,[pack.root.directory]);
+  nodes.set(unknown.key,{...unknown,stub:false,pages:[],children:[]});
+  assert.deepEqual(selectCityPages(localPlan,nodes,matrix,1,viewport).groups,[first.groups[0]]);
 });
 
 test("cap and regular pieces do not turn the empty space between them into visible coverage",()=>{

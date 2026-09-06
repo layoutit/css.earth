@@ -3,6 +3,7 @@ import { selectCityPages } from "./city-page-selection.mjs";
 import { createCityIndex } from "./city-index.mjs";
 import { normalizeCityAssetOrigin, isPreparedCityAssetUrl, isPreparedAssetPath } from "./city-asset-url.mjs";
 import { createApiImageTransport } from "./api-image-transport.mjs";
+import { selectPagePublication } from "./page-publication.mjs";
 
 export function mountPreparedMapPages({ plan, carrier, system, scene, camera, stage, className, textureClassName, lensIds, own, onStatus = () => {}, onError = error => { throw error; } }) {
   let validAssetOrigin = false;
@@ -16,6 +17,8 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   const capacity = plan;
   const slots = [];
   let desired = [];
+  let desiredGroups = [];
+  let pageGroups = new Map();
   let progressiveInitialView = false;
   let desiredPages = new Map();
   let destroyed = false;
@@ -57,7 +60,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       leaf.firstElementChild.appendChild(apiTexture);
     }
     slots.push({ leaf, texture: leaf.firstElementChild, apiTexture, image: new Image(),
-      key: null, blobUrl: null, apiHandle: null, controller: null, generation: 0, ready: false, published: false, empty: false, decodedBytes: 0 });
+      key: null, group: null, blobUrl: null, apiHandle: null, controller: null, generation: 0, ready: false, published: false, empty: false, decodedBytes: 0 });
     carrier.appendChild(leaf);
   }
     index = createCityIndex(plan, schedule);
@@ -85,15 +88,21 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     if (slot.blobUrl) URL.revokeObjectURL(slot.blobUrl);
     slot.apiHandle?.release();
     delete slot.leaf.dataset.cityPage;
-    Object.assign(slot, { key: null, blobUrl: null, apiHandle: null, controller: null, ready: false, published: false, empty: false, decodedBytes: 0 });
+    Object.assign(slot, { key: null, group: null, blobUrl: null, apiHandle: null, controller: null, ready: false, published: false, empty: false, decodedBytes: 0 });
+  }
+
+  function clearDesired() {
+    desired = [];
+    desiredGroups = [];
+    pageGroups.clear();
+    desiredPages.clear();
   }
 
   function refresh() {
     pendingFrame = null;
     if (destroyed || !view) return;
     if (!enabled || suspended || view.zoom <= plan.minimumZoom) {
-      desired = [];
-      desiredPages.clear();
+      clearDesired();
       index.update([]);
       for (const slot of slots) if (slot.key) release(slot);
       onStatus();
@@ -115,12 +124,14 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     }
     selectionDiagnostics={fallbacks:selection.fallbacks,scale:selection.selectionScale,cuts:selection.cuts,baseSurfaceFallback:selection.baseSurfaceFallback};
     desired = selection.keys;
+    desiredGroups = selection.groups ?? [];
+    pageGroups = new Map(desiredGroups.flatMap(group=>group.pages.map(key=>[key,group])));
     // Transport at most half a pool of selected prepared records. Directory
     // eviction must not invalidate a page that is already queued for loading.
     desiredPages = new Map(desired.map(key => [key, index.nodes().get(key)]));
     index.update(selection.directories);
     selectionRuns += 1;
-    // Keep the last complete view until every replacement page has decoded.
+    // Retain covering groups while their own replacements decode.
     for (const slot of slots) if (slot.key && !slot.published && !desired.includes(slot.key)) release(slot);
     publishReadyView();
     pump();
@@ -129,7 +140,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   }
 
   function pump() {
-    if (destroyed || !enabled || suspended || plan.topology === "wmts-quadtree@1" && index.stats().activeLoads) return;
+    if (destroyed || !enabled || suspended) return;
     for (const key of desired) {
       if (activeLoads >= plan.maximumConcurrentLoads) break;
       if (slots.some((slot) => slot.key === key)) continue;
@@ -142,16 +153,26 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   }
 
   function publishReadyView() {
+    if(plan.topology === "wmts-quadtree@1"){
+      const publication=selectPagePublication(desiredGroups,slots,{pages:Math.floor(plan.poolSize/2),bytes:Math.floor(plan.maximumDecodedBytes/2)});
+      for(const slot of slots)if(publication.release.includes(slot.key))release(slot);
+      for(const slot of slots)if(publication.publish.includes(slot.key))publishSlot(slot);
+      return;
+    }
     const complete=desired.every(key => slots.some(slot => slot.key === key && slot.ready));
     if (!complete&&!progressiveInitialView) return;
     for (const slot of slots) {
       if (slot.key && !desired.includes(slot.key)) {if(complete)release(slot);}
-      else if (slot.key && slot.ready && !slot.published) {
-        slot.leaf.style.visibility = slot.empty ? "hidden" : "visible";
-        if(slot.apiTexture&&slot.apiTexture.style.backgroundImage!=="none")slot.apiTexture.style.visibility="visible";
-        slot.published = true;
-        publications += 1;
-      }
+      else publishSlot(slot);
+    }
+  }
+
+  function publishSlot(slot) {
+    if (slot.key && slot.ready && !slot.published) {
+      slot.leaf.style.visibility = slot.empty ? "hidden" : "visible";
+      if(slot.apiTexture&&slot.apiTexture.style.backgroundImage!=="none")slot.apiTexture.style.visibility="visible";
+      slot.published = true;
+      publications += 1;
     }
   }
 
@@ -160,6 +181,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     const generation = ++slot.generation;
     const controller = new AbortController();
     slot.key = page.key;
+    slot.group = pageGroups.get(page.key) ?? null;
     slot.controller = controller;
     slot.decodedBytes = page.width*page.height*4;
     activeLoads += 1;
@@ -240,7 +262,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
           next.assetOrigin !== capacity.assetOrigin || !(capacity.rasterScales ?? [capacity.rasterScale]).includes(next.rasterScale) ||
           next.poolSize !== slots.length || next.maximumDecodedBytes > capacity.maximumDecodedBytes ||
           next.maximumConcurrentLoads > capacity.maximumConcurrentLoads)) throw new Error("Map package exceeds mounted capacity.");
-      desired = []; desiredPages.clear(); errors = []; progressiveInitialView = false;
+      clearDesired(); errors = []; progressiveInitialView = false;
       for (const slot of slots) if (slot.key) release(slot);
       index.destroy();
       plan = next ?? capacity;
@@ -256,7 +278,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       if (suspended === Boolean(value)) return;
       suspended = Boolean(value);
       if (suspended) {
-        desired = []; desiredPages.clear(); index.update([]);
+        clearDesired(); index.update([]);
         for (const slot of slots) if (slot.key) release(slot);
       }
       schedule();
@@ -264,8 +286,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     setLens(lens) {
       enabled = (plan.lensIds ?? lensIds).includes(lens.id);
       if (!enabled) {
-        desired = [];
-        desiredPages.clear();
+        clearDesired();
         index.update([]);
         for (const slot of slots) if (slot.key) release(slot);
       }
@@ -292,7 +313,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     cleanup(() => observer?.disconnect());
     cleanup(() => shellObserver?.disconnect());
     cleanup(() => index?.destroy());
-    desiredPages.clear();
+    clearDesired();
     if (pendingFrame !== null) cleanup(() => cancelAnimationFrame(pendingFrame));
     for (const slot of slots) { cleanup(() => release(slot)); cleanup(() => slot.leaf.remove()); }
     cleanup(() => apiImages?.destroy());
