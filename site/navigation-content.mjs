@@ -82,8 +82,16 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
               }
             } else if (incomingFooter) documentTarget.body.append(documentTarget.importNode(incomingFooter, true));
             documentTarget.title = source.title;
-            const description = source.querySelector('meta[name="description"]')?.getAttribute('content');
-            if (description) documentTarget.querySelector('meta[name="description"]')?.setAttribute('content', description);
+            for (const incoming of source.head.querySelectorAll(
+              'link[rel="canonical"], meta[name="description"], meta[property^="og:"], meta[name^="twitter:"]',
+            )) {
+              const key = incoming.tagName === 'LINK' ? 'rel' : incoming.hasAttribute('property') ? 'property' : 'name';
+              const target = documentTarget.head.querySelector(`${incoming.tagName}[${key}="${incoming.getAttribute(key)}"]`);
+              if (target) {
+                const value = incoming.tagName === 'LINK' ? 'href' : 'content';
+                target.setAttribute(value, incoming.getAttribute(value));
+              } else documentTarget.head.append(documentTarget.importNode(incoming, true));
+            }
             documentTarget.body.dataset.objectShell = object.id;
             const stage = documentTarget.querySelector('.planet-stage'), input = documentTarget.querySelector('.planet-input-surface');
             stage.dataset.objectId = object.id;

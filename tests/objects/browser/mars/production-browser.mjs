@@ -93,7 +93,7 @@ try {
             stage.querySelector(".mars-moon-shape")?.closest(".polycss-scene"),
         };
       });
-      assert.equal(initial.title, "Mars in 3D | cssEarth");
+      assert.equal(initial.title, "Mars | cssEarth");
       assert.equal(initial.diagnostics, "undefined");
       assert.equal(initial.stageElements, 551);
       assert.equal(initial.retainedLeaves, 520);
