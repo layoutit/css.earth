@@ -350,7 +350,7 @@ function assertMaterialPresentation(presentation) {
 }
 
 function assertRuntimeState(state) {
-  assert.equal(state.title, "Mars in 3D | cssEarth");
+  assert.equal(state.title, "Mars | cssEarth");
   assert.equal(state.activeObjectId, "mars");
   assert.equal(state.mountedObjectCount, 1);
   assert.equal(state.stageCount, 1);

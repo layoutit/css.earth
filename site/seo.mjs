@@ -4,7 +4,7 @@ export const SITE_ORIGIN = "https://css.earth";
 // camera state, query parameters, and preview hosts never enter metadata.
 export function objectSeo(object) {
   return {
-    title: `${object.name} in 3D | cssEarth`,
+    title: `${object.name} | cssEarth`,
     description: object.description,
     canonical: new URL(object.route, SITE_ORIGIN).href,
     image: new URL(`/social/${object.id}.jpg`, SITE_ORIGIN).href,
