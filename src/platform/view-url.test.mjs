@@ -303,3 +303,88 @@ test("binary decoder rejects reserved bits, unknown versions, invalid quaternion
   const negativeTime = Buffer.from(bytes); negativeTime.writeDoubleBE(-1, bytes.length - 8);
   assert.throws(() => parseSharedView(queryFor(negativeTime)));
 });
+
+const minimalView = () => {
+  const full = browserView();
+  return { ...full, camera: { distanceKilometers: full.camera.distanceKilometers,
+    pose: { schema: "cssearth-camera-pose@2", scene: full.camera.pose.scene } } };
+};
+function assertMinimalPrecision(actual, expected) {
+  assert.deepEqual(Object.keys(actual.camera).sort(), ["distanceKilometers", "pose"]);
+  assert.deepEqual(Object.keys(actual.camera.pose).sort(), ["scene", "schema"]);
+  assert.equal(actual.camera.pose.schema, "cssearth-camera-pose@2");
+  assert.equal(actual.camera.distanceKilometers, expected.camera.distanceKilometers);
+  assert.deepEqual(actual.playback, expected.playback);
+  assert.equal(actual.preparedEpochJdTt, expected.preparedEpochJdTt);
+  const a = matrixValues(actual.camera.pose.scene), b = matrixValues(expected.camera.pose.scene);
+  assert.ok(Math.max(...a.map((value, index) => Math.abs(value - b[index]))) <= 1e-10);
+}
+
+test("minimal physical v3 saves one orientation and distance in70characters without redundant camera fields", () => {
+  const original = minimalView(), query = formatSharedView(original), bytes = unpack(query);
+  assert.equal(query.slice(2).length, 70);
+  assert.equal(bytes.readUInt16BE(0) >>> 12, 3);
+  assert.equal(bytes.length, 52);
+  assert.equal(bytes.readDoubleBE(2), original.camera.distanceKilometers);
+  assert.equal(bytes.readDoubleBE(10), original.preparedEpochJdTt);
+  let current = original;
+  for (let index = 0; index < 100; index += 1) {
+    current = parseSharedView(formatSharedView(current));
+    assertMinimalPrecision(current, original);
+    assert.ok(formatSharedView(current).slice(2).length <= 80);
+  }
+  original.playback.speed = 4; original.playback.motionRequested = true;
+  assert.equal(formatSharedView(original).slice(2).length, 80);
+  assertMinimalPrecision(parseSharedView(formatSharedView(original)), original);
+  for (const epoch of [undefined, null]) {
+    original.preparedEpochJdTt = epoch;
+    original.playback = { times: [], speed: 0, motionRequested: false };
+    assertMinimalPrecision(parseSharedView(formatSharedView(original)), original);
+  }
+});
+
+test("smallest-three encoding covers every omitted component and exact rounded-matrix fallback", () => {
+  const scenes = [
+    "matrix3d(1,0,0,0,0,-1,0,0,0,0,-1,0,0,0,0,1)",
+    "matrix3d(-1,0,0,0,0,1,0,0,0,0,-1,0,0,0,0,1)",
+    "matrix3d(-1,0,0,0,0,-1,0,0,0,0,1,0,0,0,0,1)",
+    "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)",
+  ];
+  for (const [largest, scene] of scenes.entries()) {
+    const input = minimalView(); input.camera.pose.scene = scene;
+    const query = formatSharedView(input);
+    assert.equal((unpack(query).readUInt16BE(0) >> 6) & 3, largest);
+    assertMinimalPrecision(parseSharedView(query), input);
+  }
+  const input = minimalView(); input.camera.pose.scene = shared().camera.pose.scene;
+  const query = formatSharedView(input);
+  assert.equal(unpack(query).readUInt16BE(0) & 0xe0, 32);
+  assert.deepEqual(parseSharedView(query), input);
+});
+
+test("minimal v3 rejects duplicate camera data, reserved flags, invalid smallest-three values and truncation", () => {
+  for (const mutate of [value => { value.camera.zoom = 1; }, value => { value.camera.controlPitch = 0; },
+    value => { value.camera.pose.skybox = value.camera.pose.scene; }, value => { delete value.camera.distanceKilometers; },
+    value => { value.camera.distanceKilometers = 0; }, value => { value.camera.distanceKilometers = Infinity; }]) {
+    const input = minimalView(); mutate(input); assert.throws(() => formatSharedView(input));
+  }
+  const bytes = unpack(formatSharedView(minimalView()));
+  for (let length = 0; length < bytes.length; length += 1) assert.throws(() => parseSharedView(queryFor(bytes.subarray(0, length))));
+  for (const bit of [1, 0x100, 0x200, 0x400, 0x800]) {
+    const bad = Buffer.from(bytes); bad.writeUInt16BE(bad.readUInt16BE(0) | bit, 0);
+    assert.throws(() => parseSharedView(queryFor(bad)));
+  }
+  for (const [offset, value] of [[2, -1], [2, 0], [18, NaN], [18, Infinity], [18, 2], [18, 0.8], [bytes.length - 8, -1]]) {
+    const bad = Buffer.from(bytes); bad.writeDoubleBE(value, offset);
+    assert.throws(() => parseSharedView(queryFor(bad)));
+  }
+  for (const flags of [0x4006, 0x3004, 0x30e6]) {
+    const bad = Buffer.from(bytes); bad.writeUInt16BE(flags, 0);
+    assert.throws(() => parseSharedView(queryFor(bad)));
+  }
+  const count = Buffer.from(bytes); count.writeUInt16BE(2, bytes.length - 10);
+  assert.throws(() => parseSharedView(queryFor(count)));
+  assert.throws(() => parseSharedView(queryFor(Buffer.concat([bytes, Buffer.from([0])]))));
+  const badPadding = formatSharedView(minimalView()) + "=";
+  assert.throws(() => parseSharedView(badPadding));
+});

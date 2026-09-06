@@ -119,6 +119,7 @@ const SHARED_VERSION = 2;
 const LEGACY_SHARED_VERSION = 1;
 const MAX_SHARED_BYTES = 4096;
 const SHARED_POSE_SCHEMA = "cssearth-camera-pose@1";
+const MINIMAL_POSE_SCHEMA = "cssearth-camera-pose@2";
 const POSE_FIELDS = ["scene", "skybox", "sunView"];
 const MATRIX_INDICES = [0, 1, 2, 4, 5, 6, 8, 9, 10];
 
@@ -151,12 +152,14 @@ function poseMatrix(value) {
 function validateShared(view) {
   record(view, ["camera", "preparedEpochJdTt", "playback"], "view");
   const camera = view.camera, playback = view.playback;
-  record(camera, ["controlPitch", "controlYaw", "zoom", "distanceKilometers", "pose"], "camera");
-  if (![camera.controlPitch, camera.controlYaw, camera.zoom].every(Number.isFinite) || !(camera.zoom > 0) ||
+  const minimal = camera?.pose?.schema === MINIMAL_POSE_SCHEMA;
+  record(camera, minimal ? ["distanceKilometers", "pose"] : ["controlPitch", "controlYaw", "zoom", "distanceKilometers", "pose"], "camera");
+  if (minimal ? !Number.isFinite(camera.distanceKilometers) || !(camera.distanceKilometers > 0) :
+    ![camera.controlPitch, camera.controlYaw, camera.zoom].every(Number.isFinite) || !(camera.zoom > 0) ||
       (camera.distanceKilometers !== undefined && (!Number.isFinite(camera.distanceKilometers) || !(camera.distanceKilometers > 0)))) invalid("camera");
-  record(camera.pose, ["schema", "scene", "skybox", "sunView"], "pose");
-  if (camera.pose.schema !== SHARED_POSE_SCHEMA) invalid("pose");
-  for (const field of POSE_FIELDS) poseMatrix(camera.pose[field]);
+  record(camera.pose, minimal ? ["schema", "scene"] : ["schema", "scene", "skybox", "sunView"], "pose");
+  if (camera.pose.schema !== (minimal ? MINIMAL_POSE_SCHEMA : SHARED_POSE_SCHEMA)) invalid("pose");
+  for (const field of minimal ? ["scene"] : POSE_FIELDS) poseMatrix(camera.pose[field]);
   if (view.preparedEpochJdTt !== undefined && view.preparedEpochJdTt !== null && !Number.isFinite(view.preparedEpochJdTt)) invalid("preparedEpochJdTt");
   record(playback, ["times", "speed", "motionRequested"], "playback");
   if (!Array.isArray(playback.times) || !Number.isFinite(playback.speed) || playback.speed < 0 || typeof playback.motionRequested !== "boolean") invalid("playback");
@@ -165,6 +168,7 @@ function validateShared(view) {
 
 export function formatSharedView(view) {
   validateShared(view);
+  if (view.camera.pose.schema === MINIMAL_POSE_SCHEMA) return formatMinimalShared(view);
   const camera = view.camera, pose = camera.pose, playback = view.playback;
   // Pick the pose explicitly: camera.state() deliberately makes it
   // nonenumerable. Astronomical TT metadata stays separate from WAAPI time.
@@ -232,6 +236,7 @@ function parseLegacyShared(bytes) {
 function parseBinaryShared(bytes) {
   if (bytes.length < 2) invalid();
   const data = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), flags = data.getUint16(0);
+  if (flags >>> 12 === 3) return parseMinimalShared(bytes);
   if (flags >>> 12 !== SHARED_VERSION) throw new Error("This shared view link uses an unsupported version.");
   if (flags & 0x0f00 || (flags & 6) === 4) invalid();
   let offset = 2;
@@ -265,6 +270,72 @@ function parseBinaryShared(bytes) {
   view.playback = { times: Array.from({ length: count }, read), speed, motionRequested: Boolean(flags & 16) };
   validateShared(view);
   return view;
+}
+
+function formatMinimalShared(view) {
+  let flags = 3 << 12;
+  const values = [view.camera.distanceKilometers], playback = view.playback;
+  if (view.preparedEpochJdTt !== undefined) {
+    flags |= 2;
+    if (view.preparedEpochJdTt !== null) { flags |= 4; values.push(view.preparedEpochJdTt); }
+  }
+  if (playback.speed !== 1) { flags |= 8; values.push(playback.speed); }
+  if (playback.motionRequested) flags |= 16;
+  const matrix = poseMatrix(view.camera.pose.scene), quaternion = matrixQuaternion(matrix);
+  let largest = 0;
+  for (let i = 1; i < 4; i += 1) if (Math.abs(quaternion[i]) > Math.abs(quaternion[largest])) largest = i;
+  const sign = quaternion[largest] < 0 ? -1 : 1;
+  const small = quaternion.filter((_, i) => i !== largest).map(value => value * sign);
+  const reconstructed = quaternionMatrix(expandQuaternion(small, largest));
+  if (MATRIX_INDICES.some(i => Math.abs(matrix[i] - reconstructed[i]) > 1e-12)) {
+    flags |= 32;
+    values.push(...MATRIX_INDICES.map(i => matrix[i]));
+  } else { flags |= largest << 6; values.push(...small); }
+  const length = 4 + 8 * (values.length + playback.times.length);
+  if (length > MAX_SHARED_BYTES) invalid();
+  const bytes = new Uint8Array(length), data = new DataView(bytes.buffer);
+  data.setUint16(0, flags);
+  let offset = 2;
+  for (const value of values) { data.setFloat64(offset, value); offset += 8; }
+  data.setUint16(offset, playback.times.length); offset += 2;
+  for (const time of playback.times) { data.setFloat64(offset, time); offset += 8; }
+  return `v=${base64url(bytes)}`;
+}
+
+function parseMinimalShared(bytes) {
+  const data = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), flags = data.getUint16(0);
+  if (flags & 0x0f01 || (flags & 6) === 4 || (flags & 32 && flags & 0xc0)) invalid();
+  let offset = 2;
+  const read = () => {
+    if (offset + 8 > bytes.length) invalid();
+    const value = data.getFloat64(offset); offset += 8;
+    if (!Number.isFinite(value)) invalid();
+    return value;
+  };
+  const view = { camera: { distanceKilometers: read() } };
+  if (flags & 2) view.preparedEpochJdTt = flags & 4 ? read() : null;
+  const speed = flags & 8 ? read() : 1;
+  let matrix;
+  if (flags & 32) {
+    matrix = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+    for (const index of MATRIX_INDICES) matrix[index] = read();
+  } else matrix = quaternionMatrix(expandQuaternion([read(), read(), read()], (flags >> 6) & 3));
+  view.camera.pose = { schema: MINIMAL_POSE_SCHEMA, scene: serializeMatrix(matrix) };
+  if (offset + 2 > bytes.length) invalid();
+  const count = data.getUint16(offset); offset += 2;
+  if (offset + count * 8 !== bytes.length) invalid();
+  view.playback = { times: Array.from({ length: count }, read), speed, motionRequested: Boolean(flags & 16) };
+  validateShared(view);
+  return view;
+}
+
+function expandQuaternion(small, largest) {
+  const sum = small.reduce((total, value) => total + value * value, 0);
+  if (!Number.isFinite(sum) || sum > 0.75 + 1e-12) invalid("pose");
+  const omitted = Math.sqrt(1 - sum);
+  if (small.some(value => Math.abs(value) > omitted + 1e-12)) invalid("pose");
+  const quaternion = [...small]; quaternion.splice(largest, 0, omitted);
+  return quaternion;
 }
 
 function serializeMatrix(matrix) {

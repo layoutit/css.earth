@@ -518,6 +518,15 @@ export function createRetainedCubicSkyOrbit({
       });
       return Object.freeze(state);
     },
+    sharedState() {
+      const state = this.state();
+      if (perspectiveCamera && skyTracksScene) {
+        // One physical rotation owns the body, registered sky and Sun.
+        // Dolly distance determines zoom; control angles are input bookkeeping.
+        return { distanceKilometers: state.distanceKilometers, pose: orientation.snapshot({ sceneOnly: true }) };
+      }
+      return { controlPitch: state.controlPitch, controlYaw: state.controlYaw, zoom: state.zoom, pose: state.pose };
+    },
     skyState() {
       const currentSunPresentation = directionalSun?.state() ??
         sunPresentation;

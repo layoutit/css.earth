@@ -39,7 +39,8 @@ export function bindViewUrl({ windowTarget, view, getMotion, setMotion, onError 
         setMotion(saved.playback.motionRequested);
         // Upgrade existing long links using their saved time, rather than a
         // fresh sample of an animation that may already have resumed.
-        const compact = new URLSearchParams(formatSharedView(saved)).get("v");
+        const camera = view.capture(saved.playback.motionRequested)?.camera ?? saved.camera;
+        const compact = new URLSearchParams(formatSharedView({ ...saved, camera })).get("v");
         if (compact.length < query.get("v").length) writeToken(compact);
       }
     } catch (error) { if (!destroyed && current === revision) onError(error); }
