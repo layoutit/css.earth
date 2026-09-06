@@ -1,7 +1,8 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, M_PER_KM } from '@cssearth/astronomy';
+import { parseObjectDescriptor } from '@cssearth/objects';
 import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact } from '../../src/preparation/spatial-context.js';
 
@@ -19,6 +20,8 @@ export interface SpatialContextPreparationOptions {
   readonly sourcePath: string;
   readonly outputPath: string;
   readonly solarGeometryPath: string;
+  /** Directory containing object descriptor folders; inferred beside a navigation source when omitted. */
+  readonly objectsDirectory?: string;
 }
 
 /** Prepares a renderer-neutral solar context from a pinned source document and epoch geometry adapter. */
@@ -27,6 +30,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   if (source.frame.epochJdTt !== geometry.SOLAR_GEOMETRY_EPOCH_JD_TT) throw new TypeError('World context and solar geometry epochs differ.');
   const auM = geometry.ASTRONOMICAL_UNIT_KILOMETERS * M_PER_KM;
+  const objectsDirectory = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
   const facts: Record<string, WorldContextBodyFact> = {}, states: Record<string, OrbitalState> = {};
   for (const body of source.bodies) {
     const data = (BODIES as Readonly<Record<string, { readonly meanRadiusKm: number }>>)[body.id];
@@ -35,11 +39,40 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const positionM = scale(apply(matrix, sunDirection), -orbit.heliocentricDistanceAu * auM);
     states[body.id] = { positionM, normal: unit(apply(matrix, normal)), perihelionDirection: unit(apply(matrix, orbit.perihelionDirection)),
       semiMajorAxisM: orbit.semiMajorAxisAu * auM, eccentricity: orbit.eccentricity, trueAnomalyRadians: orbit.trueAnomalyDegrees * Math.PI / 180 };
-    facts[body.id] = { radiusM: data.meanRadiusKm * M_PER_KM };
+    facts[body.id] = { radiusM: await preparedRadius(body.id, positionM, source.frame.referenceFrame,
+      source.frame.epochJdTt, resolve(objectsDirectory, body.id, 'object.json')) ?? data.meanRadiusKm * M_PER_KM };
   }
   const prepared = prepareWorldContext(source, facts, states);
   await mkdir(dirname(options.outputPath), { recursive: true });
   await writeFile(options.outputPath, `${JSON.stringify(prepared, null, 2)}\n`);
+}
+
+/** A migrated object's prepared frame is authoritative when it names this exact physical epoch and centre. */
+async function preparedRadius(id: string, originM: Vector3, referenceFrame: string, epochJdTt: number,
+  descriptorPath: string): Promise<number | undefined> {
+  let raw: unknown;
+  try { raw = JSON.parse(await readFile(descriptorPath, 'utf8')); }
+  catch (error: unknown) {
+    if (isMissingFile(error)) return undefined;
+    throw error;
+  }
+  const descriptor = parseObjectDescriptor(raw);
+  if (descriptor.id !== id) throw new TypeError(`Prepared descriptor identity differs for ${id}.`);
+  const value = descriptor.properties.worldFrame;
+  if (value === undefined) return undefined;
+  const frame = record(value, `${id} prepared world frame`);
+  const frameReference = text(frame.referenceFrame, `${id} prepared world frame reference`);
+  const frameEpoch = number(frame.epochJdTt, `${id} prepared world frame epoch`);
+  const frameOrigin = vector3(frame.originM, `${id} prepared world frame origin`);
+  const radiusM = positive(frame.bodyRadiusM, `${id} prepared world frame radius`);
+  if (frameReference !== referenceFrame || frameEpoch !== epochJdTt || Math.hypot(...frameOrigin.map((value, axis) => value - originM[axis]!)) > .001) {
+    throw new TypeError(`Prepared world frame is incompatible with solar context for ${id}.`);
+  }
+  return radiusM;
+}
+
+function isMissingFile(error: unknown): boolean {
+  return typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT';
 }
 
 async function loadSolarGeometry(path: string): Promise<SolarGeometry> {
@@ -76,11 +109,13 @@ function scale(value: Vector3, factor: number): Vector3 { return [value[0] * fac
 function unit(value: Vector3): Vector3 { const length = Math.hypot(...value); if (!(length > 0)) throw new TypeError('Solar geometry direction is undefined.'); return scale(value, 1 / length); }
 function vector3(value: unknown, name: string): Vector3 { if (!Array.isArray(value) || value.length !== 3 || value.some(component => typeof component !== 'number' || !Number.isFinite(component))) throw new TypeError(`${name} must be a finite vector.`); return [value[0]!, value[1]!, value[2]!]; }
 function record(value: unknown, name: string): Record<string, unknown> { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${name} is invalid.`); return value as Record<string, unknown>; }
+function text(value: unknown, name: string): string { if (typeof value !== 'string' || value.length === 0) throw new TypeError(`${name} must be text.`); return value; }
 function number(value: unknown, name: string): number { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${name} must be finite.`); return value; }
 function positive(value: unknown, name: string): number { const result = number(value, name); if (!(result > 0)) throw new TypeError(`${name} must be positive.`); return result; }
 function eccentricity(value: unknown, id: string): number { const result = number(value, `${id} eccentricity`); if (result < 0 || result >= 1) throw new TypeError(`${id} eccentricity is invalid.`); return result; }
 
-const invoked = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+const invoked = process.argv[1] && basename(fileURLToPath(import.meta.url)) === 'prepare-spatial-context.js' &&
+  resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (invoked) {
   const [sourcePath, outputPath, solarGeometryPath = resolve(process.cwd(), 'src/platform/solar-geometry.mjs')] = process.argv.slice(2);
   if (!sourcePath || !outputPath || process.argv.length > 5) throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mjs]');

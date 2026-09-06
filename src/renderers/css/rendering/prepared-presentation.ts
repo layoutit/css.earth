@@ -120,7 +120,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     const previous = stage.classList.contains(name);
     context.own(() => { if (owned()) stage.classList.toggle(name, previous); });
   }
-  stage.replaceChildren(...roots);
+  // Presentation owns only its prepared roots; application context siblings survive a detail handoff.
+  for (const root of roots) stage.appendChild(root);
   if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
   for (const name of definition.tree.stageClasses) stage.classList.add(name);
   const animations = definition.animations.map(plan => {

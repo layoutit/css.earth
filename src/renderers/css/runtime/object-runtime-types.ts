@@ -46,6 +46,8 @@ export interface ObjectMountOptions {
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
   worldFrame?: PreparedWorldCameraFrame; preparedResources?: PreparedResourceLease;
   worldContext?: PerspectiveWorldContext;
+  /** The application owns the contextual universe layer for this mount. */
+  externalWorldContext?: boolean;
   initialWorldCamera?: WorldCameraPose;
 }
 export interface PreparedNavigation { maximumZoom: number; camera?: OrbitStateUpdate; }

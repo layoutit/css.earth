@@ -1,4 +1,6 @@
-import type { PreparedWorldCameraFrame, WorldCameraPose } from '../navigation/world-camera.js';
+import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+
+export type ObjectWorldNavigationListener = (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 
 export interface ObjectWorldNavigation {
   readonly frame: PreparedWorldCameraFrame;
@@ -6,4 +8,5 @@ export interface ObjectWorldNavigation {
   apply(pose: WorldCameraPose): void;
   optics(): { focalPixels: number; principalOffsetPixels: readonly [number, number]; framingRadiusPixels: number;
     detailHandoffDiameterPixels: number };
+  subscribe(listener: ObjectWorldNavigationListener): () => void;
 }

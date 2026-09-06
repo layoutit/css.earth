@@ -3,13 +3,15 @@ import { fileURLToPath } from 'node:url';
 import { expect, test } from 'vitest';
 import { mountPreparedWorldContext, parsePreparedWorldContext } from './prepared-world-context.js';
 
-class FakeElement {
+class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];
   readonly style: Record<string, string> = {};
   readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null;
   className = ''; textContent = ''; hidden = false; clientWidth = 0; clientHeight = 0;
-  constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) {}
+  constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) { super(); }
+  setAttribute(): void {}
+  removeAttribute(): void {}
   append(...entries: FakeElement[]): void { for (const entry of entries) this.insertBefore(entry, null); }
   appendChild(entry: FakeElement): FakeElement { this.append(entry); return entry; }
   insertBefore(entry: FakeElement, before: FakeElement | null): void {
@@ -85,4 +87,33 @@ test('projects retained markers, culls focus-occluded bodies, and keeps physical
   }
   expect(nearMercury.style.transform).toBe(find(far, 'contextBody', 'mercury').style.transform);
   expect(nearOrbit.length).toBe(all(far).filter(element => element.dataset.contextOrbit === 'mercury' && element.style.visibility === '').length);
+});
+
+test('selection transfers the detail handoff to the destination while retaining every orbit and marker', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const root = layer.root as unknown as FakeElement, nodes = all(root);
+  const camera = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [100, 0, 20], orientationXyzw: [0, 0, 0, 1] } } as const;
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] } as const;
+  layer.publish(camera, viewport);
+  const marker = find(root, 'contextBody', 'mercury');
+  expect(marker.style.visibility).toBe('');
+  expect(marker.dataset.objectNavigate).toBe('mercury');
+  const selections: string[] = [];
+  host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
+  marker.dispatchEvent(new Event('click'));
+  expect(selections).toEqual(['mercury']);
+  layer.selectObject('mercury'); layer.publish(camera, viewport);
+  expect(marker.style.visibility).toBe('hidden');
+  expect(marker.style.pointerEvents).toBe('none');
+  marker.dispatchEvent(new Event('click'));
+  expect(selections).toEqual(['mercury']);
+  expect(all(root)).toEqual(nodes);
+  expect(() => layer.selectObject('unprepared')).toThrow('unavailable');
+  layer.selectObject('sun'); layer.publish(camera, viewport);
+  expect(marker.style.visibility).toBe('');
+  layer.destroy();
 });

@@ -8,6 +8,7 @@ import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
 import { createPreparedRingProjector } from '../solar-system/prepared-ring-projection.js';
 import { applySprite, writePieces } from '../solar-system/heliocentric-sprites.js';
+import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 
 export interface PreparedContextPoint {
@@ -16,6 +17,19 @@ export interface PreparedContextPoint {
   readonly color: string;
   readonly positionM: PositionM;
   readonly radiusM: number;
+}
+export interface PreparedContextPointSource {
+  readonly absoluteMagnitude: number;
+  readonly color: string;
+  readonly proximityEnhancement?: {
+    readonly fullDistanceM: number;
+    readonly fadeOutDistanceM: number;
+    readonly radiusMultiplier: number;
+    readonly brightnessMultiplier: number;
+  };
+}
+export interface PreparedContextFocus extends PreparedContextPoint {
+  readonly pointSource?: PreparedContextPointSource;
 }
 export interface PreparedContextBody extends PreparedContextPoint {
   readonly orbit: { readonly verticesM: readonly PositionM[]; readonly trail: readonly number[] };
@@ -30,7 +44,7 @@ export interface PreparedContextCameraPresentation {
 export interface PreparedWorldContext {
   readonly schema: 'cssearth-world-context@1';
   readonly frame: PreparedWorldCameraFrame;
-  readonly focus: PreparedContextPoint;
+  readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
@@ -50,6 +64,24 @@ function point(value: unknown, fields: readonly string[] = ['id', 'name', 'color
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !/^#[a-f0-9]{6}$/i.test(color)) throw new TypeError('Invalid context point identity or color.');
   return Object.freeze({ id, color, name: text(input.name, 'point name'),
     positionM: vector(input.positionM, 'point position'), radiusM: positive(input.radiusM, 'point radius') });
+}
+function focusPoint(value: unknown): PreparedContextFocus {
+  const input = record(value, 'context focus', ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource']);
+  const base = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'pointSource']);
+  if (input.pointSource === undefined) return base;
+  const pointSource = record(input.pointSource, 'context focus point source', ['absoluteMagnitude', 'color', 'proximityEnhancement']);
+  const absoluteMagnitude = finite(pointSource.absoluteMagnitude, 'context focus absolute magnitude');
+  const color = text(pointSource.color, 'context focus point color');
+  if (!/^#[a-f0-9]{6}$/i.test(color)) throw new TypeError('Invalid context focus point color.');
+  if (pointSource.proximityEnhancement === undefined) return Object.freeze({ ...base, pointSource: Object.freeze({ absoluteMagnitude, color }) });
+  const enhancement = record(pointSource.proximityEnhancement, 'context focus proximity enhancement', ['fullDistanceM', 'fadeOutDistanceM', 'radiusMultiplier', 'brightnessMultiplier']);
+  const fullDistanceM = positive(enhancement.fullDistanceM, 'context focus proximity full distance');
+  const fadeOutDistanceM = positive(enhancement.fadeOutDistanceM, 'context focus proximity fade-out distance');
+  const radiusMultiplier = positive(enhancement.radiusMultiplier, 'context focus proximity radius multiplier');
+  const brightnessMultiplier = positive(enhancement.brightnessMultiplier, 'context focus proximity brightness multiplier');
+  if (!(fadeOutDistanceM > fullDistanceM && radiusMultiplier >= 1 && brightnessMultiplier >= 1)) throw new TypeError('Invalid context focus proximity enhancement.');
+  return Object.freeze({ ...base, pointSource: Object.freeze({ absoluteMagnitude, color,
+    proximityEnhancement: Object.freeze({ fullDistanceM, fadeOutDistanceM, radiusMultiplier, brightnessMultiplier }) }) });
 }
 function equalPosition(a: PositionM, b: PositionM): boolean { return a.every((value, index) => value === b[index]); }
 function parseSky(value: unknown): PreparedWorldContext['sky'] {
@@ -95,7 +127,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   if (input.schema !== 'cssearth-world-context@1') throw new TypeError('Unsupported prepared world context.');
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
-  const focus = point(input.focus);
+  const focus = focusPoint(input.focus);
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const bodies = array(input.bodies, 'context bodies').map(value => {
     const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']);
@@ -173,10 +205,16 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       root.appendChild(piece); pieces.push(piece);
     }
     root.append(marker, label);
-    return { body, sprite, marker, label, orbit, pieces, previousCount: 0 };
+    const navigation = bindObjectNavigationTarget(marker, host);
+    return { body, sprite, marker, label, orbit, pieces, navigation, previousCount: 0 };
   });
   let destroyed = false;
+  let selectedId = plan.focus.id;
   return Object.freeze({ root,
+    selectObject(id: string) {
+      if (!bodies.some(entry => entry.body.id === id)) throw new TypeError('Selected context body is unavailable.');
+      selectedId = id;
+    },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport) {
       if (destroyed) return;
       if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt) {
@@ -194,11 +232,15 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const focal = viewport.focalPixels, width = host.clientWidth, height = host.clientHeight;
       const project = (eye: readonly number[]): readonly number[] => [ox + focal * eye[0] / -eye[2], oy + focal * eye[1] / -eye[2]];
       const focusEye = toEye(plan.focus.positionM);
-      const hidden = (eye: readonly number[]) => rayHitsSphereBefore(eye, focusEye, plan.focus.radiusM);
+      const selected = bodies.find(entry => entry.body.id === selectedId)!.body;
+      const selectedEye = toEye(selected.positionM);
+      const hidden = (eye: readonly number[], id?: string) =>
+        (id !== plan.focus.id && rayHitsSphereBefore(eye, focusEye, plan.focus.radiusM)) ||
+        (id !== selected.id && rayHitsSphereBefore(eye, selectedEye, selected.radiusM));
       const ring = createPreparedRingProjector({ toEye, project, hidden,
-        near: Math.max(1, distanceM * 0.01), clipX: width / 2, clipY: height / 2 });
-      const focusDiameter = focusEye[2] < -plan.focus.radiusM
-        ? 2 * focal * plan.focus.radiusM / Math.sqrt(focusEye[2] ** 2 - plan.focus.radiusM ** 2) : Number.POSITIVE_INFINITY;
+        near: Math.max(1, Math.min(distanceM, Math.hypot(...selectedEye)) * 0.01), clipX: width / 2, clipY: height / 2 });
+      const focusDiameter = selectedEye[2] < -selected.radiusM
+        ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, focusDiameter);
       const orbitOpacity = orbitLineOpacity(plan.camera.presentation.orbitLineFade, focusDiameter / height);
       for (const entry of bodies) {
@@ -206,10 +248,12 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const eye = toEye(body.positionM), depth = -eye[2];
         const [x, y] = project(eye);
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
-        const isFocus = body.id === plan.focus.id;
-        const visible = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2 && (isFocus || !hidden(eye));
-        const markerOpacity = isFocus ? lod.markerOpacity : 1;
-        marker.style.visibility = visible && markerOpacity > 0 ? '' : 'hidden';
+        const isSelected = body.id === selectedId;
+        const visible = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2 && !hidden(eye, body.id);
+        const markerOpacity = isSelected ? lod.billboardOpacity : 1;
+        const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
+        marker.style.visibility = visible && markerOpacity > 0 && !pointSource ? '' : 'hidden';
+        entry.navigation.update(visible && markerOpacity > 0.1 && !pointSource ? body.id : null, body.name);
         label.style.visibility = visible && markerOpacity > 0.5 ? '' : 'hidden';
         if (visible) {
           marker.style.opacity = String(markerOpacity);
@@ -225,6 +269,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         }
       }
     },
-    destroy() { if (!destroyed) { destroyed = true; root.remove(); } },
+    destroy() { if (!destroyed) { destroyed = true; for (const entry of bodies) entry.navigation.destroy(); root.remove(); } },
   });
 }

@@ -154,3 +154,17 @@ test('canonical catalogue mounts only its fixed pool and preserves its full cove
   layer.publish(world(10),viewport,1);expect(root.children).toEqual(slots);expect(root.dataset.coveredCount).toBe('109389');expect(Number(root.dataset.drawnCount)).toBeGreaterThan(0);expect(root.children.filter(slot=>slot.style.visibility!=='hidden' && slot.dataset.starReference).every(slot=>slot.dataset.starReference!.startsWith('star:'))).toBe(true);
   layer.destroy();
 });
+
+test('changing the detailed object updates star occlusion without replacing the catalogue slots', () => {
+  const { layer, root } = mount(), slots = [...root.children];
+  layer.publish(world(), viewport, 1);
+  const visible = find(root, 'star:2');
+  layer.setOccluder({ positionM: [5 * parsec, 0, -50 * parsec], radiusM: 2 * parsec });
+  layer.publish(world(), viewport, 1);
+  expect(visible.style.visibility).toBe('hidden');
+  layer.setOccluder({ positionM: [50 * parsec, 0, -50 * parsec], radiusM: parsec });
+  layer.publish(world(), viewport, 1);
+  expect(find(root, 'star:2')).toBe(visible);
+  expect(root.children).toEqual(slots);
+  layer.destroy();
+});

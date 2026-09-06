@@ -37,7 +37,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   const fader = createOpacityFader(host.ownerDocument.defaultView!);
   const labels = mountPointFieldLabels(root, payload.labels);
   const coverageAnchorIndices = payload.stars.flatMap((star, index) => star.coverageAnchor ? [index] : []);
-  const occluderLocal = occluder && presentPhysicalPoseInVolume({ positionM: occluder.positionM,
+  let occluderLocal = occluder && presentPhysicalPoseInVolume({ positionM: occluder.positionM,
     orientationXyzw: [0, 0, 0, 1] }, payload.frame).positionUnits;
   host.insertBefore(root, before);
   let timer: ReturnType<typeof setTimeout> | null = null;
@@ -141,6 +141,11 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   }
 
   return Object.freeze({ root,
+    setOccluder(body: { positionM: Vector3; radiusM: number }) {
+      occluder = body;
+      occluderLocal = presentPhysicalPoseInVolume({ positionM: body.positionM,
+        orientationXyzw: [0, 0, 0, 1] }, payload.frame).positionUnits;
+    },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number) {
       if (destroyed) return;
       root.style.opacity = String(opacity); root.style.visibility = opacity > 0 ? '' : 'hidden';

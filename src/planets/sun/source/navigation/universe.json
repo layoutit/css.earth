@@ -32,7 +32,17 @@
   "focus": {
     "id": "sun",
     "name": "Sun",
-    "color": "#f5a623"
+    "color": "#f5a623",
+    "pointSource": {
+      "absoluteMagnitude": 4.832125665882298,
+      "color": "#fff5e0",
+      "proximityEnhancement": {
+        "fullDistanceM": 1000000000000,
+        "fadeOutDistanceM": 100000000000000,
+        "radiusMultiplier": 1.6,
+        "brightnessMultiplier": 1.5
+      }
+    }
   },
   "bodies": [
     {
