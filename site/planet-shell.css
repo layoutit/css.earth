@@ -242,7 +242,6 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
 
 :is(
   .planet-selected-panel,
-  .planet-factsheet-section,
   .planet-gallery-panel,
   .planet-chart-switcher
 ) {
@@ -263,19 +262,8 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   border-top: 0;
 }
 
-.planet-factsheet-section {
-  position: relative;
-  margin-top: 0;
-  padding-bottom: 0;
-}
-
-.planet-factsheet-section[open] {
-  padding-bottom: 16px;
-}
-
 .planet-information-panel > :is(
   .planet-selected-panel,
-  .planet-factsheet-section,
   .planet-gallery-panel,
   .planet-chart-switcher,
   .planet-lenses,
@@ -290,20 +278,14 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   padding-bottom: 11px;
 }
 
-.planet-information-panel > .planet-factsheet-section {
-  padding-block-start: 0;
-}
-
 .planet-information-panel > :is(
   .planet-selected-panel,
-  .planet-factsheet-section,
   .planet-gallery-panel,
   .planet-chart-switcher,
   .planet-lenses,
   .planet-resources-panel,
   .planet-settings-panel
 ):has(~ :is(
-  .planet-factsheet-section,
   .planet-gallery-panel,
   .planet-chart-switcher,
   .planet-lenses,
@@ -311,19 +293,6 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   .planet-settings-panel
 )) {
   border-bottom: 1px solid rgb(0 0 0 / 50%);
-}
-
-.planet-factsheet-section > .planet-factsheet-header {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 45px;
-  min-height: 45px;
-  padding: 0;
-}
-
-.planet-factsheet-body {
-  width: 100%;
 }
 
 :is(
