@@ -110,13 +110,20 @@ export function createSceneRouter({
         if (!mount.destinations) await session.lifetime.wait(session.viewUrl.restore());
         if (active !== session || session.lifetime.disposed) return;
       }
+      const saveView = () => {
+        if (active === session && !session.lifetime.disposed) session.viewUrl?.flush();
+      };
       if (mount.destinations) await session.lifetime.wait(shell.setDestinations?.({
         ...mount.destinations,
+        saveView,
         restoreView: apply => session.viewUrl ? session.viewUrl.restore(apply) : apply({ hasSavedView: false }),
-        async select(place, options) {
+        select(place, options) {
+          // Save departure before even an instantaneous flight changes it.
+          saveView();
           shell.setMotionEnabled?.(false);
           return mount.destinations.select(place, options);
         },
+        reset(options) { saveView(); return mount.destinations.reset(options); },
       }));
       if (active !== session || session.lifetime.disposed) return;
       sceneState = "ready";

@@ -54,7 +54,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
         button.dataset.destinationId = place.id;
         button.ariaLabel = `${place.name}, ${place.context}`;
       }
-      hint.textContent = matches.length ? "Places · Countries and cities" : "No matching places. Try a country or city name.";
+      hint.textContent = matches.length ? "Places" : "No matching places. Try another place name.";
       onResults(matches.length || 1);
     } catch (error) {
       if (destroyed || request !== revision) return;
@@ -90,6 +90,9 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
       loadIntroduction(place, request);
       result.arrival?.then(({ completed }) => {
         if (destroyed || selection !== place || request !== selectionRevision) return;
+        // The new entity entry exists now, including with reduced motion.
+        // Save its endpoint before exposing the completed flight to the UI.
+        provider.saveView?.();
         panel.ariaBusy = "false";
         status.hidden = completed;
         status.textContent = completed ? "" : "Flight stopped. Select the place again to continue.";
@@ -116,6 +119,9 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
       introductionRequest?.abort();
       panel.ariaBusy = "false"; status.hidden = true;
       card.show(card.initial); onReset(); route?.write();
+      result.arrival?.then(() => {
+        if (!destroyed && selection === null && request === selectionRevision) provider.saveView?.();
+      });
     } catch { if (!destroyed) status.textContent = "Could not open the parent. Try again."; }
     finally { if (request === selectionRevision) { selecting = false; for (const button of buttons) button.disabled = false; } }
   }
@@ -143,7 +149,9 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
           }
         },
       });
-      unsubscribe = provider.subscribe(() => { if (!selecting && provider.state()?.id === selection?.id) route.write(); });
+      unsubscribe = provider.subscribe(() => {
+        if (!selecting && provider.state()?.id === selection?.id) { provider.saveView?.(); route.write(); }
+      });
       if (query) void search(query);
       return route.restore();
     },

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createSceneRouter } from "../scene-router.mjs";
+import { parseSharedView } from "../../src/platform/view-url.mjs";
 
 function deferred() {
   let resolve, reject;
@@ -201,4 +202,42 @@ test("an object destination can pause shared motion, and a retired object cannot
   assert.equal(h.router.playback().motionRequested, false);
   assert.deepEqual(h.mounts[1].calls, ["pause"]);
   h.router.destroy();
+});
+
+test("destination history saves departure before a flight and leaves arrival publication after the shell creates its entry", async () => {
+  const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
+  let zoom = 8, changed, destinations;
+  const flights = [];
+  const fly = () => { const flight = deferred(); flights.push(flight); return { arrival: flight.promise }; };
+  const h = harness(() => ({ destinations: { select: fly, reset: fly }, sharedView: {
+    capture: () => ({ camera: { controlPitch: 0, controlYaw: 0, zoom,
+      pose: { schema: "cssearth-camera-pose@1", scene: matrix, skybox: matrix, sunView: matrix } },
+      preparedEpochJdTt: 2461286.5, playback: { times: [0], speed: 1, motionRequested: false } }),
+    restore: async () => true,
+    subscribe(listener) { changed = listener; return () => { changed = null; }; },
+  } }));
+  h.shells[0].setDestinations = provider => { destinations = provider; };
+  h.windowTarget.location = new URL("http://localhost/earth/#place=city");
+  const writes = [], timers = new Set();
+  h.windowTarget.history = { state: {}, replaceState(state, title, next) {
+    h.windowTarget.location = new URL(next, h.windowTarget.location); writes.push(h.windowTarget.location.href);
+  } };
+  h.windowTarget.setTimeout = callback => { timers.add(callback); return callback; };
+  h.windowTarget.clearTimeout = callback => timers.delete(callback);
+  const savedZoom = () => parseSharedView(h.windowTarget.location.search).camera.zoom;
+  await h.router.settled;
+  zoom = 1024; changed(); assert.equal(writes.length, 0);
+  const selected = await destinations.select({ id: "parent" });
+  assert.equal(savedZoom(), 1024, "Departure is saved without waiting 150 ms");
+  h.windowTarget.location.hash = "place=parent";
+  zoom = 375; changed(); flights[0].resolve({ completed: true }); await selected.arrival;
+  assert.equal(savedZoom(), 1024, "Resolving alone cannot overwrite an entry before the shell commits its new identity");
+  destinations.saveView();
+  assert.equal(savedZoom(), 375, "Immediate Back/Forward sees the completed parent pose");
+  assert.equal(timers.size, 0);
+  const reset = await destinations.reset();
+  h.windowTarget.location.hash = "";
+  zoom = 1; changed(); flights[1].resolve({ completed: true }); await reset.arrival; destinations.saveView();
+  assert.equal(savedZoom(), 1); assert.equal(timers.size, 0);
+  assert.deepEqual(h.errors, []); h.router.destroy();
 });

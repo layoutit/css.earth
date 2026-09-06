@@ -10,7 +10,16 @@ const base = process.argv[2] ?? "http://127.0.0.1:4228";
 const output = resolve(`output/playwright/entity-search-${Date.now()}`);
 await mkdir(output, { recursive: true });
 const directory = JSON.parse(gunzipSync(await readFile(`public${PREPARED_EARTH_PLACES.url}`)));
-const ids = Array.from({ length: 50 }, (_, i) => directory.entries[i * 640][0]);
+const strata = [
+  directory.entries.filter(([id]) => /^\d+$/u.test(id)),
+  directory.entries.filter(([id]) => id.startsWith("admin1:")),
+  directory.entries.filter(([id]) => id.startsWith("country:")),
+];
+assert.ok(strata.every(rows => rows.length >= 50));
+const ids = Array.from({ length: 50 }, (_, i) => {
+  const rows = strata[i % strata.length];
+  return rows[Math.floor(i * rows.length / 50)][0];
+});
 const report = { base, output, commit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   workingTree: execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim(), runs: [] };
 const browser = await chromium.launch({ channel: "chrome", headless: true });
@@ -65,6 +74,20 @@ try {
       await page.evaluate(() => {
         window.__searchNodes = [...document.querySelectorAll(".planet-destination-list button")];
         window.__searchLongTasks = []; window.__searchFrames = [];
+        window.__searchPaints = [];
+        let query;
+        document.addEventListener("input", event => {
+          if (event.target.matches?.(".planet-sidebar-search")) query = { query: event.target.value, inputAt: performance.now() };
+        }, true);
+        const results = document.querySelector(".planet-destination-results");
+        new MutationObserver(() => {
+          const current = query;
+          if (!current?.query || current.scheduled || results.hidden || ![...results.querySelectorAll("li")].some(row => !row.hidden)) return;
+          current.scheduled = true;
+          requestAnimationFrame(frameAt => {
+            if (query === current && !results.hidden) window.__searchPaints.push({ ...current, frameAt, inputToReadyFrameMs: Math.max(0, frameAt - current.inputAt) });
+          });
+        }).observe(results, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["hidden"] });
         new PerformanceObserver(list => window.__searchLongTasks.push(...list.getEntries().map(e => ({ at: e.startTime, duration: e.duration })))).observe({ type: "longtask" });
         let previous;
         const frame = now => { if (previous) window.__searchFrames.push(now - previous); previous = now; requestAnimationFrame(frame); }; requestAnimationFrame(frame);
@@ -83,10 +106,19 @@ try {
       record.cold = await page.evaluate(() => ({ longTasks: window.__searchLongTasks, frames: window.__searchFrames, stats: window.__earth.runtime.destinationStats() }));
       await page.screenshot({ path: resolve(output, `dpr${dpr}-cold-search.png`) });
       record.searches = [];
-      for (const [query, id] of [["Paris Texas", "4717560"], ["São Paulo", "3448439"], ["東京", "1850147"], ["Buenos Aires Argentina", "3435910"]]) {
-        const start = performance.now(); await input.fill(query); await page.locator(`[data-destination-id="${id}"]`).waitFor({ state: "visible" });
-        record.searches.push({ query, milliseconds: performance.now() - start });
+      for (let repetition = 1; repetition <= 3; repetition++) for (const [query, id] of [
+        ["Paris Texas", "4717560"], ["São Paulo", "3448439"], ["東京", "1850147"], ["Buenos Aires Argentina", "3435910"],
+        ["Tokyo region", "admin1:1850144"], ["Lagos region", "admin1:2332453"], ["Buenos Aires region", "admin1:3435907"], ["Monaco", "country:MC"],
+      ]) {
+        const inputAfter = await page.evaluate(() => performance.now()), start = performance.now();
+        await input.fill(query); await page.locator(`[data-destination-id="${id}"]`).waitFor({ state: "visible" });
+        await page.waitForFunction(({ query, inputAfter }) => window.__searchPaints.some(p => p.query === query && p.inputAt >= inputAfter), { query, inputAfter });
+        const paint = await page.evaluate(({ query, inputAfter }) => window.__searchPaints.find(p => p.query === query && p.inputAt >= inputAfter), { query, inputAfter });
+        record.searches.push({ query, repetition, milliseconds: performance.now() - start, ...paint });
       }
+      const paints = record.searches.map(row => row.inputToReadyFrameMs).sort((a, b) => a - b);
+      record.searchP95 = paints[Math.ceil(paints.length * .95) - 1];
+      assert.ok(record.searchP95 <= 100, `Warm search input-to-ready-result RAF p95 ${record.searchP95} ms exceeds 100 ms`);
       // Use actual same-document history restoration with the preserved view
       // token. This qualifies record/cache lifetime without 50 camera flights.
       await page.waitForFunction(() => new URL(location.href).searchParams.has("v"));
@@ -104,7 +136,7 @@ try {
       // The live index and at most sixteen card shards should plateau. Allow
       // source-label size variation and V8 overhead, not per-visit accumulation.
       assert.ok(Math.max(...heaps.slice(1)) - Math.min(...heaps.slice(1)) < 4 * 1024 * 1024, JSON.stringify(heaps));
-      assert.ok(record.visits.at(-1).stats.store.evictions >= 34);
+      assert.ok(record.visits.at(-1).stats.store.evictions > 0, "A mixed hierarchy journey exceeds and evicts the fixed detail cache");
       assert.ok(await page.evaluate(() => window.__earth.assertStableDomIdentity() && [...document.querySelectorAll(".planet-destination-list button")].every((node, i) => node === window.__searchNodes[i])));
       assert.equal(await page.locator('[data-entity-card]').count(), 1);
       const retired = Promise.withResolvers();

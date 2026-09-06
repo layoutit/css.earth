@@ -82,7 +82,7 @@ try {
       assert.deepEqual(tokyo.index.errors, []);
       await page.screenshot({ path: new URL(`${label}-tokyo.png`, output).pathname });
       await search.fill("qqqzzzimpossiblecity");
-      await page.getByText("No matching places. Try a country or city name.", { exact: true }).waitFor();
+      await page.getByText("No matching places. Try another place name.", { exact: true }).waitFor();
       await search.press("Escape");
       assert.equal(await search.inputValue(), "Tokyo");
       assert.equal(await page.locator("[data-entity-card]").isVisible(), true);
