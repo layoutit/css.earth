@@ -1,3 +1,4 @@
+import { prepareEuropaColor } from "./prepare-color.mjs";
 import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { createHash } from "node:crypto";
@@ -42,20 +43,42 @@ for (let i=0;i<missing.length;i++) {
   // Withhold pixels straddling no-data boundaries instead of inventing them.
   missing[i] = data[i*info.channels+3] < 255 ? 1 : 0;
 }
-const display = paintMissingCoverage(rgb,{width,height,channels:3},missing);
-const rgba=await sharp(display,{raw:{width,height,channels:3}}).ensureAlpha().raw().toBuffer();
-const projected=reprojectSolidBodySurfaceRaster(rgba,{width,height,latitudeSegments:bandCount});
-const packed=packProjectiveSurfaceRaster(projected,{width,height,bandCount,gutter});
-const {data:packedPixels,...layout}=packed;
-const map=await emit("europa-normal-map.webp",sharp(rgba,{raw:{width,height,channels:4}}));
-const surface=await emit("europa-normal-surface@2x.webp",sharp(packedPixels,{raw:{width:packed.packedWidth,height:packed.packedHeight,channels:4}}));
-const thumbnail=await emit("europa-normal-thumbnail.webp",sharp(rgba,{raw:{width,height,channels:4}}).resize(96,48));
-await writeFile(resolve(EUROPA_PREPARED_ROOT,"surfaces.json"),JSON.stringify({objectId:"europa",surfaces:[{
-  id:"normal",label:"Monochrome",falseColor:false,source:{id:entry.id,sha256:entry.expectedSha256,width:entry.width,height:entry.height},
-  projection:entry.projection,coverage:entry.coverage,map,surface,thumbnail,layout,
-  missingPixels:missing.reduce((a,b)=>a+b,0),sourceGeoreference:{origin,resolution},
-}]}));
-console.log("Prepared Europa's observed surface, documented gaps, and thumbnail.");
+const normal = await prepareSurface("normal", rgb, missing, {
+  label:"Monochrome",falseColor:false,source:{id:entry.id,sha256:entry.expectedSha256,width:entry.width,height:entry.height},
+  projection:entry.projection,coverage:entry.coverage,sourceGeoreference:{origin,resolution},
+});
+const color = await prepareEuropaColor({width,height});
+// Keep observed monochrome wherever the independent color coverage is absent.
+// The grid is needed only if neither source has a valid observation.
+let monochromePixels = 0;
+for (let i = 0; i < color.missing.length; i++) {
+  if (color.missing[i] && !missing[i]) {
+    color.rgb.set(rgb.subarray(i * 3, i * 3 + 3), i * 3);
+    color.missing[i] = 0;
+    monochromePixels++;
+  }
+}
+const enhanced = await prepareSurface("enhanced", color.rgb, color.missing, {
+  label:"Enhanced color",falseColor:true,sourceIds:color.sourceIds,
+  projection:{type:"equirectangular",longitudeDegrees:[0,360],latitudeDegrees:[90,-90],longitudeDirection:"east-positive",referenceRadiusMeters:1560800},
+  coverage:"Valid infrared/green/violet observations over the observed monochrome base. Gray grid only where neither source has imagery.",
+  monochromePixels,
+  observationCoverage:color.coverage,
+});
+await writeFile(resolve(EUROPA_PREPARED_ROOT,"surfaces.json"),JSON.stringify({objectId:"europa",surfaces:[normal,enhanced]}));
+console.log("Prepared Europa monochrome and observed enhanced color, with coverage gaps marked.");
+
+async function prepareSurface(id, rgb, missing, metadata) {
+  const display = paintMissingCoverage(rgb,{width,height,channels:3},missing);
+  const rgba=await sharp(display,{raw:{width,height,channels:3}}).ensureAlpha().raw().toBuffer();
+  const projected=reprojectSolidBodySurfaceRaster(rgba,{width,height,latitudeSegments:bandCount});
+  const packed=packProjectiveSurfaceRaster(projected,{width,height,bandCount,gutter});
+  const {data:packedPixels,...layout}=packed;
+  const map=await emit(`europa-${id}-map.webp`,sharp(rgba,{raw:{width,height,channels:4}}));
+  const surface=await emit(`europa-${id}-surface@2x.webp`,sharp(packedPixels,{raw:{width:packed.packedWidth,height:packed.packedHeight,channels:4}}));
+  const thumbnail=await emit(`europa-${id}-thumbnail.webp`,sharp(rgba,{raw:{width,height,channels:4}}).resize(96,48));
+  return {id,...metadata,map,surface,thumbnail,layout,missingPixels:missing.reduce((a,b)=>a+b,0)};
+}
 async function emit(filename,pipeline) {
  const bytes=await pipeline.webp({lossless:true,effort:4}).toBuffer();
  await writeFile(resolve(EUROPA_PUBLIC_ROOT,filename),bytes);
