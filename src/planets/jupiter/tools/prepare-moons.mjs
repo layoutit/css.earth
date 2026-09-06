@@ -10,7 +10,6 @@ import {
 } from "../../../../tools/prepared-webp.mjs";
 import { PREPARED_JUPITER_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_JUPITER_CAMERA } from "../runtime/preparedCamera.mjs";
-import { PREPARED_JUPITER_LIGHTING } from "../runtime/preparedLighting.mjs";
 import {
   ensureJupiterPreparationDirectories,
   JUPITER_PUBLIC_ROOT,
@@ -358,11 +357,11 @@ function prepareMinorMoonDot(definition) {
 }
 
 function prepareMinorMoonLabelLayout(dots, detailedMoons) {
-  const sampleScenePitchStepDegrees =
-    PREPARED_JUPITER_LIGHTING.pitchStepDegrees;
+  // Label placement samples its own viewing range, independently of light phase.
+  const sampleScenePitchStepDegrees = 0.5;
   const sampleScenePitchDegrees = Object.freeze(Array.from(
-    { length: PREPARED_JUPITER_LIGHTING.frameCount },
-    (_, index) => PREPARED_JUPITER_LIGHTING.minimumPitchDegrees +
+    { length: Math.round(90 / sampleScenePitchStepDegrees) + 1 },
+    (_, index) => -PREPARED_JUPITER_SCENE.geometry.axialTiltDegrees +
       index * sampleScenePitchStepDegrees,
   ));
   const sampleTotalPitchRadians = sampleScenePitchDegrees.map((pitch) =>
@@ -484,8 +483,10 @@ function prepareMinorMoonLabelLayout(dots, detailedMoons) {
     }
     previousOffsets = currentOffsets;
   }
-  const defaultMaterialStateIndex =
-    PREPARED_JUPITER_LIGHTING.transport.defaultFrame;
+  const defaultMaterialStateIndex = Math.round(
+    (PREPARED_JUPITER_CAMERA.initialScenePitchDegrees - sampleScenePitchDegrees[0]) /
+      sampleScenePitchStepDegrees,
+  );
   const preparedDots = Object.freeze(dots.map((dot) => Object.freeze({
     ...dot,
     label: dot.label

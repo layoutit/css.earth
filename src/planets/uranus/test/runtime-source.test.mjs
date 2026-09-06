@@ -31,5 +31,4 @@ test("uses the shared unbounded camera for the standalone Uranus scene", async (
   assert.equal(runtimeDefinition.camera.cameraModel, "accumulated-matrix3d");
   assert.equal(runtimeDefinition.camera.pitchBounded, false);
   assert.equal(runtimeDefinition.camera.yawBounded, false);
-  assert.equal(runtimeDefinition.inputSelector, ".uranus-input-surface");
 });

@@ -91,7 +91,7 @@ try {
       .evaluate((element) => element.style.transform);
     const beforeSkyDrag = await page.locator(".mercury-skybox-orientation")
       .evaluate((element) => element.style.transform);
-    await drag(page, ".mercury-input-surface", 170, 150);
+    await drag(page, ".planet-input-surface", 170, 150);
     assert.notEqual(await page.locator(".mercury-scene")
       .evaluate((element) => element.style.transform), beforeDrag);
     assert.notEqual(await page.locator(".mercury-skybox-orientation")
@@ -102,7 +102,7 @@ try {
     const beforeWheel = await camera.evaluate((element) => element.style.scale);
     const beforeMaterialWheel = await material.evaluate((element) =>
       element.style.scale);
-    await wheel(page, ".mercury-input-surface", -240);
+    await wheel(page, ".planet-input-surface", -240);
     assert.notEqual(await camera.evaluate((element) => element.style.scale),
       beforeWheel);
     assert.notEqual(await material.evaluate((element) => element.style.scale),
@@ -141,7 +141,7 @@ try {
     const shadowlessNodeCount = await stage.evaluate((element) =>
       element.querySelectorAll("*").length);
     for (const [deltaX, deltaY] of [[240, -110], [-360, 190], [510, 260]]) {
-      await drag(page, ".mercury-input-surface", deltaX, deltaY);
+      await drag(page, ".planet-input-surface", deltaX, deltaY);
       assert.equal(await shadowlessMaterial.getAttribute("data-material-mode"),
         "full-phase-curvature");
       assert.equal(await shadowlessMaterial.evaluate((element) =>
