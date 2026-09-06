@@ -68,6 +68,47 @@ try {
     const roots = await page.locator(".planet-stage > .planet-render-root").elementHandles();
     assert.ok(roots.length > 0, `${config.label}: mounted scene layers`);
     const rootCount = roots.length;
+    const activeObject = OBJECTS.find(object => object.route === config.route);
+    const classificationTag = page.locator(".planet-classification-tag");
+    const tagLabel = await classificationTag.innerText();
+    assert.equal(await page.locator('[data-fact-id="classification"]').count(), 0);
+    const tagBox = await classificationTag.boundingBox();
+    const titleBox = await page.locator(".planet-title").boundingBox();
+    assert.ok(tagBox.x >= titleBox.x + titleBox.width && tagBox.y >= titleBox.y &&
+      tagBox.y + tagBox.height <= titleBox.y + titleBox.height + 1,
+      `${config.label}: classification tag fits beside the title`);
+    const beforeBrowseUrl = page.url();
+    await classificationTag.focus();
+    await page.keyboard.press("Enter");
+    assert.equal(await search.inputValue(), `${tagLabel}s`);
+    const visibleObjects = () => page.locator('.planet-object-item:not([hidden]) [data-object-id]')
+      .evaluateAll(links => links.map(link => link.dataset.objectId).sort());
+    assert.deepEqual(await visibleObjects(), OBJECTS.filter(object =>
+      object.classification === activeObject.classification).map(object => object.id).sort());
+    assert.equal(page.url(), beforeBrowseUrl, "browsing a classification does not navigate");
+    assert.equal(await page.locator('.planet-destination-results').isVisible(), false,
+      "classification browsing does not start city search");
+    await search.fill("planets");
+    assert.deepEqual(await visibleObjects(), OBJECTS.filter(object =>
+      object.classification === "planet").map(object => object.id).sort(), "planets excludes dwarf planets");
+    await search.fill("ceres");
+    assert.deepEqual(await visibleObjects(), ["ceres"], "typing a name replaces the classification query");
+    await search.press("Escape");
+    assert.equal(await classificationTag.isVisible(), true);
+    assert.equal(await search.inputValue(), activeObject.name);
+    const distanceTag = page.locator(".planet-distance-tag");
+    assert.equal(await distanceTag.innerText(), `${activeObject.distanceAu} AU`);
+    await distanceTag.click();
+    assert.equal(await search.inputValue(), "All objects");
+    assert.deepEqual(await page.locator('.planet-object-item:not([hidden]) [data-object-id]')
+      .evaluateAll(links => links.map(link => link.dataset.objectId)),
+    [...OBJECTS].sort((a, b) => a.distanceAu - b.distanceAu).map(object => object.id),
+    "distance badge lists every object in solar-distance order");
+    assert.equal(page.url(), beforeBrowseUrl, "browsing all objects does not navigate");
+    assert.equal(await page.locator('.planet-destination-results').isVisible(), false);
+    await search.press("Escape");
+    assert.ok((await Promise.all(roots.map(root => root.evaluate(node => node.isConnected)))).every(Boolean),
+      "badge browsing retains the current scene");
     const railBox = await rail.boundingBox();
     const headerBox = await page.locator(".explorer-shell-header").boundingBox();
     assert.ok(railBox, `${config.label}: visible rail`);
@@ -142,11 +183,8 @@ try {
       const chartIds = await chartSlides.evaluateAll((slides) =>
         slides.map((slide) => slide.dataset.chartId));
       const chartNodes = await chartSlides.elementHandles();
-      assert.equal(await chartSwitcher.evaluate((node) => node.open), true,
-        `${config.label}: chart switcher starts open`);
-      await chartSummary.locator(".planet-chart-switcher-title").click();
       assert.equal(await chartSwitcher.evaluate((node) => node.open), false,
-        `${config.label}: chart title collapses the switcher`);
+        `${config.label}: chart switcher starts collapsed`);
       await chartSummary.locator(".planet-chart-switcher-title").click();
       assert.equal(await chartSwitcher.evaluate((node) => node.open), true,
         `${config.label}: chart title expands the switcher`);

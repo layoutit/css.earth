@@ -76,7 +76,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7206fc742e0970a86b782ac355d1e0859fb09fab34eccebcffbba28f6bc59610"
+          "sha256": "b59ccebe6243f7e98ed3f55c792517bd124b689c17f145ea4ed9a145d0ed3924"
         },
         {
           "id": "solar-system",
@@ -148,6 +148,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/venus.json",
-    "sha256": "e2edec0f1caeeccfadc90702797545148bf810085149d3937793f780b97e3274"
+    "sha256": "4195cecc72bf6e6c89ce6f3ed5ed6a5aa6d9ad72198cdeac576a91beed2e0ac1"
   }
 }

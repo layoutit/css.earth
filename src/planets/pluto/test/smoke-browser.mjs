@@ -55,7 +55,7 @@ try {
     lens: window.__pluto.lenses.state(),
   }));
   assert.deepEqual(baseline, {
-    title: "Pluto - Powered by PolyCSS",
+    title: "Pluto in 3D | cssEarth",
     mountedObjectCount: 1,
     activeObjectId: "pluto",
     stageCount: 1,

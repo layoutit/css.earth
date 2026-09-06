@@ -108,6 +108,7 @@ test("keeps one open-ended object registry with unique ids and routes", () => {
     "earth",
     "moon",
     "mars",
+    "ceres",
     "jupiter",
     "saturn",
     "uranus",

@@ -29,6 +29,6 @@ describe('retained presentation compiler compatibility', () => {
 });
 // Frozen before migration. A simultaneous edit to the compiler and its output cannot hide drift.
 const expectedDigests: Record<string, string> = {
-  mercury: '3aef25d32daac92ceab6804726edc8e747fde63218ca18866e825ecdc235de49',
-  venus: '290279de1d14862890885710b34c1e41fe452664b6c02328b3e7988f21817f95',
+  mercury: '0eae47e755c23b0792daa7533b9dcfd17a09c9884de3fa3b03d866d368c0fc4e',
+  venus: '0e5c3944e53f4c049a4b8e9589641ad4c25f8a0d3def61d17e4a7458d6bf022a',
 };

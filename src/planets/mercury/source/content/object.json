@@ -192,7 +192,13 @@
         "filter": "NASA-dimensioned retained 3D metallic-core cutaway",
         "view": "interior"
       }
-    ]
+    ],
+    "labels": {
+      "normal": "Monochrome",
+      "enhanced": "Enhanced color",
+      "topography": "Elevation",
+      "interior": "Cross section"
+    }
   },
   "settings": {
     "titleKey": "settings",

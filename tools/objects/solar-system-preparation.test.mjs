@@ -40,7 +40,7 @@ const tiles = [
   { id: "makemake", color: [185, 138, 106], size: 5 },
 ];
 
-test("Mercury preserves all baseline bytes except physical geometry and overlay scale corrections", () => {
+test("Mercury preserves all baseline bytes except approved physical, overlay, and registry-marker changes", () => {
   const hash = value => createHash("sha256").update(JSON.stringify(value)).digest("hex");
   const { worldFrame, ...scene } = structuredClone(mercuryScene);
   const {id, controls, ...presentation} = structuredClone(mercuryPresentation);
@@ -54,7 +54,7 @@ test("Mercury preserves all baseline bytes except physical geometry and overlay 
   presentation.tree.properties.find(property => property.value === mercuryScene.camera.defaultTransform).value = oldTransform;
   presentation.viewBindings.find(binding => binding.kind === "silhouette-fit").unitScale = 2 * 1.1 / 460;
   assert.equal(hash(scene), "fd07cb83678d7efd46023c7d997ec2c368d3c293d4a2ee6553711111285129e3");
-  assert.equal(hash(presentation), "491ab38e7ad386ce4db088844c5b05901a8a0c62c445b81a3dc701b0afbdab13");
+  assert.equal(hash(presentation), "510683b7c21ed15f245f649a9da81b04b60f3ca058cc07e15ff4c1268a7fc738");
   assert.deepEqual(worldFrame, mercuryPrepared.worldFrame);
 });
 

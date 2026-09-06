@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process";
 
 import { defineConfig } from "astro/config";
+import { SITE_ORIGIN } from "./site/seo.mjs";
 import { wmtsLocalMirror } from "./src/planets/earth/tools/wmts-local-server.mjs";
 
 function cssEarthVersion() {
@@ -16,6 +17,8 @@ function cssEarthVersion() {
 }
 
 export default defineConfig({
+  site: SITE_ORIGIN,
+  trailingSlash: "always",
   srcDir: "./site",
   publicDir: "./public",
   outDir: "./dist",

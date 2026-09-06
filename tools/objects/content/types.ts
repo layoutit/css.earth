@@ -102,6 +102,7 @@ export interface ObjectContentSource {
   lenses: {
     titleKey: "lenses";
     defaultLens: string;
+    labels?: Record<string, string>;
     controls: LensRecipe[];
   };
   settings: {

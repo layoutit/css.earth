@@ -159,8 +159,9 @@ test("the actual Moon registry import must point to the audited client and retur
     registrySource.replace("return mountMoonClient;", "return () => mountMoonClient();"),
     registrySource.replace("return mountMoonClient;", "mountMoonClient(); return mountMoonClient;"),
     registrySource.replace("    loadScene,", "    loadScene: () => loadScene(),"),
+    registrySource.replace(/\bloadScene,\n/u, "loadScene: () => loadScene(),\n"),
   ]) {
-    assert.notEqual(source, registrySource, 'Mutation must change the actual registry');
+    assert.notEqual(source, registrySource, "The mutation must change the actual registry");
     await assert.rejects(auditObjectRuntimeOwnership(fixture({ "site/objects.mjs": source })), /Actual OBJECTS registry|registered runtime loader/);
   }
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding.replace("mountMoonClient", "differentExport") })), /one bound shared factory export/);
