@@ -36,7 +36,7 @@ The regular globe now uses PR #2's seven bounded surface pages. Topography and n
 
 ## Reproduction and checks
 
-A fresh checkout can run Earth with `pnpm install`, `pnpm setup --object=earth`,
+A fresh checkout can run Earth with `pnpm install`, `pnpm setup:assets --object=earth`,
 and `pnpm dev`. This downloads prepared browser assets and reads visible geometry
 ranges from the published release; the full local geometry mirror is optional.
 
