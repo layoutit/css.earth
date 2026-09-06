@@ -379,7 +379,12 @@ export function createUnboundedMatrixDragControls({
       event.clientX - measuredTrackball.centerX,
       event.clientY - measuredTrackball.centerY,
     ) > measuredTrackball.surfaceRadius;
-    if (!SKYBOX_DRAG_ENABLED && startsOnSky) return;
+    // A tumble-only trackball (perspective plans that opt in) takes every
+    // press as a sky press: the screen-plane orbit mapping, wherever the
+    // pointer is, so the scene tumbles about the screen axes instead of
+    // twisting about the view axis outside the disc.
+    const tumbleOnly = measuredTrackball.tumbleOnly === true;
+    if (!SKYBOX_DRAG_ENABLED && startsOnSky && !tumbleOnly) return;
     // Mouse compatibility events carry the second-press click count. Blocking
     // them here would postpone double-click flights until the final release.
     if (event.pointerType !== "mouse") event.preventDefault();
@@ -389,7 +394,7 @@ export function createUnboundedMatrixDragControls({
     if (lifetime.disposed) return;
 
     // Keep the chosen mapping until release, including crossings of the limb.
-    skyGesture = startsOnSky;
+    skyGesture = startsOnSky || tumbleOnly;
     pointerId = event.pointerId;
     pointerDragging = false;
     previousX = event.clientX;

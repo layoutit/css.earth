@@ -4,6 +4,15 @@ import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
 
 // Reference response from the isolated wheel-handler trace. The shared policy
 // adds scroll-distance sensitivity; disabling it restores the timed response.
+//
+// Two wheel models share one controller. The scale camera zooms and holds the
+// surface point under the cursor (the anchor). A perspective `dolly` moves
+// the eye along its own axis toward the body's centre instead: each wheel
+// event adds deltaY * stepPerDelta to the target log-distance, consumed
+// evenly by the end of the same interval, and no surface anchor exists to
+// hold, so the wheel never turns the scene. The dolly keeps its own prepared
+// gain for every input kind; the shared scroll-distance multipliers belong to
+// the scale camera's response.
 export const PREPARED_WHEEL_ZOOM = Object.freeze({
   schema: "cssearth-prepared-wheel-zoom@1",
   intervalMilliseconds: 200,
@@ -24,6 +33,7 @@ export function createPreparedWheelZoomControls({
   maximumZoom,
   speedMultiplier = WHEEL_ZOOM_SPEED_MULTIPLIER,
   useScrollDistance = WHEEL_ZOOM_USE_SCROLL_DISTANCE,
+  dolly = null,
   onError = null,
 }) {
   if (!(inputSurface instanceof HTMLElement) ||
@@ -33,6 +43,7 @@ export function createPreparedWheelZoomControls({
       minimumZoom <= 0 || maximumZoom < minimumZoom ||
       !Number.isFinite(speedMultiplier) || speedMultiplier <= 0 ||
       typeof useScrollDistance !== "boolean" ||
+      (dolly !== null && !(dolly.stepPerDelta > 0)) ||
       (onError !== null && typeof onError !== "function")) {
     throw new TypeError("Prepared wheel zoom controls are invalid.");
   }
@@ -55,6 +66,7 @@ export function createPreparedWheelZoomControls({
   let previousTimestamp = null;
   let anchor = null;
   let targetZoom = null;
+  let targetDistance = null;
   let inputKind = null;
   let previousInputTimestamp = -Infinity;
   let events = 0;
@@ -67,6 +79,7 @@ export function createPreparedWheelZoomControls({
     direction = 0;
     anchor = null;
     targetZoom = null;
+    targetDistance = null;
   };
   const animate = timestamp => {
     if (previousTimestamp === null) previousTimestamp = timestamp;
@@ -76,7 +89,17 @@ export function createPreparedWheelZoomControls({
       expiresAt - previousTimestamp,
     ));
     previousTimestamp = timestamp;
-    if (elapsed > 0 && direction !== 0) {
+    if (elapsed > 0 && direction !== 0 && dolly !== null) {
+      // The dolly: the outstanding log-distance, spread over the interval.
+      const previousDistance = camera.state.distance;
+      const distance = previousDistance * Math.exp(
+        Math.log(targetDistance / previousDistance) * Math.min(1, elapsed / remaining));
+      rotate({ controlPitchDelta: 0, controlYawDelta: 0, distance });
+      if (disposed) return;
+      frames += 1;
+      // A clamped dolly drops what the bound refused.
+      if (camera.state.distance !== distance) targetDistance = camera.state.distance;
+    } else if (elapsed > 0 && direction !== 0) {
       const previousZoom = camera.state.zoom;
       const zoom = clamp(previousZoom * Math.exp(
         useScrollDistance
@@ -107,8 +130,11 @@ export function createPreparedWheelZoomControls({
       if (disposed) return;
       frames += 1;
     }
-    if (timestamp < expiresAt && camera.state.zoom > minimumZoom &&
-        camera.state.zoom < maximumZoom) {
+    const continuing = dolly !== null
+      ? timestamp < expiresAt && camera.state.distance !== targetDistance
+      : timestamp < expiresAt && camera.state.zoom > minimumZoom &&
+        camera.state.zoom < maximumZoom;
+    if (continuing) {
       frame = requestFrame(animate);
     } else {
       frame = null;
@@ -119,12 +145,17 @@ export function createPreparedWheelZoomControls({
     if (!enabled || !Number.isFinite(event.deltaY) || event.deltaY === 0 || event.defaultPrevented) return;
     event.preventDefault();
     const nextDirection = -Math.sign(event.deltaY);
-    if (useScrollDistance) {
+    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2
+      ? inputSurface.clientHeight || windowTarget.innerHeight || 800 : 1;
+    if (dolly !== null) {
+      inputKind = wheelZoomInputKind(event, inputKind, previousInputTimestamp);
+      previousInputTimestamp = event.timeStamp;
+      const origin = frame !== null && direction === nextDirection ? targetDistance : camera.state.distance;
+      targetDistance = origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta);
+    } else if (useScrollDistance) {
       inputKind = wheelZoomInputKind(event, inputKind, previousInputTimestamp);
       previousInputTimestamp = event.timeStamp;
       const inputSpeed = inputKind === "wheel" ? WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : speedMultiplier;
-      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2
-        ? inputSurface.clientHeight || windowTarget.innerHeight || 800 : 1;
       const origin = frame !== null && direction === nextDirection ? targetZoom : camera.state.zoom;
       targetZoom = clamp(origin * Math.exp(-event.deltaY * unit / 100 *
         PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond * inputSpeed *
@@ -132,7 +163,8 @@ export function createPreparedWheelZoomControls({
     }
     direction = nextDirection;
     expiresAt = event.timeStamp + PREPARED_WHEEL_ZOOM.intervalMilliseconds;
-    anchor = { x:event.clientX, y:event.clientY };
+    // A dolly has no surface anchor: the eye moves along its own axis.
+    anchor = dolly === null ? { x:event.clientX, y:event.clientY } : null;
     events += 1;
     if (frame === null) {
       previousTimestamp = event.timeStamp;
@@ -155,7 +187,8 @@ export function createPreparedWheelZoomControls({
       if (!enabled) stop();
     },
     destroy,
-    stats: () => Object.freeze({ active:frame !== null, events, frames, inputKind }),
+    stats: () => Object.freeze({ active:frame !== null, events, frames, inputKind,
+      model: dolly === null ? "scale-zoom-with-anchor" : "perspective-dolly" }),
   });
 }
 

@@ -41,6 +41,18 @@ slot reuse. Cancellation, retry, URL coalescing, lease release and eviction stay
 the common implementation. A selection resolves all required texture writes before
 publishing any of them.
 
+Mercury's perspective camera rides the same data runtime. Its prepared
+presentation declares three view bindings the interpreter transports from the
+camera's publication: a `silhouette-fit` transform for the lighting overlay
+(the projected silhouette ellipse, floored to the far-view marker), the
+`level-of-detail-stage` attribute on the stage and a `view-property` for the
+billboard disc's opacity. Its lighting track names a `farBank`: past the
+geometry stage the publisher draws the same frame from the one-row billboard
+atlas, so the demand interpreter stops requesting row shards. The optional
+`heliocentricView` record (the Sun as geometry, the orbit, the planetary
+system's markers and captions) is validated with the presentation and mounted
+by the shared runtime beside the retained tree.
+
 Earth's optional destination catalog, page layers, motion-frame indices and
 navigation bounds use the same shared navigation and prepared-map owners. These
 are optional data fields in the contract, with no Earth-ID branch in the runtime.

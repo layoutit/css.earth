@@ -1,0 +1,130 @@
+{
+  "package": "@cssearth/catalog",
+  "upstreamPackage": "@galaxio/catalog",
+  "license": "MIT",
+  "licenseFile": "LICENSE",
+  "author": "Juan Cruz Fortunatti",
+  "origin": "Shared source, same author: this package is maintained in Juan Cruz Fortunatti's other project (galaxio, https://github.com/apresmoi/galaxio) and mirrored here by tools/sync-upstream.mjs. Both projects are his, and the package is MIT under his copyright either way, so it is presented as cssEarth's own package. This file is an engineering sync record (upstream path, commit, per-file hashes), not a third-party attribution.",
+  "repository": "https://github.com/apresmoi/galaxio.git",
+  "directory": "packages/catalog",
+  "subtreeCommit": "773ec45daa35731381cf68af5a26e2e24a758c25",
+  "subtreeCommitDate": "2026-08-30T08:36:59+02:00",
+  "headCommit": "d5b22f85212bdcf7f8fe063bfc32867056eafd57",
+  "upstreamDirty": false,
+  "syncedAt": "2026-09-05T20:58:26.653Z",
+  "syncScript": "tools/sync-upstream.mjs",
+  "transform": "identity only: files listed under identityRules had the upstream project's identity replaced by cssEarth's (see rules; the src/ rules touch string literals only); files listed under excludedFiles are not mirrored; every other file is byte-identical to upstream",
+  "identityRules": {
+    "package-name": "package.json \"name\": @galaxio/<pkg> -> @cssearth/<pkg>",
+    "package-urls": "package.json repository, bugs, homepage: the upstream repository URL -> the cssEarth repository URL",
+    "prose-package-name": "*.md: @galaxio/<pkg> -> @cssearth/<pkg> (headings, install and import examples)",
+    "prose-project-link": "*.md: the [Galaxio](repo) project link -> [cssEarth](repo)",
+    "prose-pipeline-writer-path": "*.md: the Python writer's path inside the upstream pipeline/ (absent here) -> `formats/catalog.py` of the external catalogue pipeline (not part of this repository)",
+    "prose-pipeline-directory": "*.md: \"A Python writer lives in the repo's `pipeline/`\" (absent here) -> the external catalogue pipeline (not part of this repository)",
+    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md §2 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
+    "prose-claude-symlink": "AGENTS.md: drop the sentence announcing the CLAUDE.md symlink, which is not mirrored (EXCLUDED_FILES)",
+    "code-project-url": "src/modelAccuracy.ts: PROJECT_SOURCE_URL string literal, the upstream ARCHITECTURE.md -> this package's AGENTS.md in the cssEarth repository (a documentation URL; no behaviour change)",
+    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio … convention/definition' sourceLabel string literals -> 'cssEarth …' (labels only; no behaviour change)"
+  },
+  "rewrittenFiles": {
+    "AGENTS.md": [
+      "prose-package-name",
+      "prose-pipeline-writer-path",
+      "prose-claude-symlink"
+    ],
+    "FORMAT.md": [
+      "prose-pipeline-writer-path"
+    ],
+    "README.md": [
+      "prose-package-name",
+      "prose-project-link",
+      "prose-pipeline-directory"
+    ],
+    "package.json": [
+      "package-name",
+      "package-urls"
+    ]
+  },
+  "excludedFiles": {
+    "CLAUDE.md": "A symlink to AGENTS.md upstream. Claude Code loads CLAUDE.md per directory, so mirroring it would silently apply the upstream project's operator instructions to any session working in this package. AGENTS.md itself is mirrored as plain documentation.",
+    "scripts/gen_fixture.py": "Imports the upstream Python pipeline (galaxio_pipeline), which is not part of this repository, so it cannot run here. scripts/check-parity.mjs, which invokes it, is mirrored as inert reference; the parity check runs where the pipeline lives."
+  },
+  "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mjs (tools/prepare-solar-geometry.mjs first). A catalog consumer would be wired the same way.",
+  "fileCount": 12,
+  "byteCount": 22820,
+  "files": {
+    "AGENTS.md": {
+      "sha256": "5284a156cbcb8118bf76a08f52dcbe1aee3e6c800b95849f3685d0a3870896e4",
+      "bytes": 2311,
+      "upstreamSha256": "980794ee0c5b2fc40a2cea04343a145a3fd0dd3a76a82b202ddde17d8692a603",
+      "upstreamBytes": 2271,
+      "identityRules": [
+        "prose-package-name",
+        "prose-pipeline-writer-path",
+        "prose-claude-symlink"
+      ]
+    },
+    "FORMAT.md": {
+      "sha256": "4c640abe1c26cbeb6ac27cdf5ac66984ebbcb32f527fc75dfb3c49154f964272",
+      "bytes": 2978,
+      "upstreamSha256": "e143837de3d084a3196fcb8b19dfa43d5f59e7aab1a9ac6141ee20a684bc9aff",
+      "upstreamBytes": 2939,
+      "identityRules": [
+        "prose-pipeline-writer-path"
+      ]
+    },
+    "README.md": {
+      "sha256": "aef11ceb36007188ba81a35d1371fc6368a14e2c973482f917b89c2fb03b178b",
+      "bytes": 927,
+      "upstreamSha256": "22341cebaf2c382673314608eb0241bb661000dbf252c5346afff4e950a6027c",
+      "upstreamBytes": 881,
+      "identityRules": [
+        "prose-package-name",
+        "prose-project-link",
+        "prose-pipeline-directory"
+      ]
+    },
+    "package.json": {
+      "sha256": "880467732d6a8a039e4251da4a0a166bc6042b6988f810a5080be276a008e9d7",
+      "bytes": 1188,
+      "upstreamSha256": "321cd568a7f7430eedc7f0f36291143cf4bb702fb13017ee5dc4cf8eed149695",
+      "upstreamBytes": 1184,
+      "identityRules": [
+        "package-name",
+        "package-urls"
+      ]
+    },
+    "scripts/check-parity.mjs": {
+      "sha256": "c420783597e9e3ae5247aa8f4fc87476df1ef67c62817b0ea14fef178d52a21c",
+      "bytes": 2131
+    },
+    "src/catalog.test.ts": {
+      "sha256": "17f6f5221b9c753b6e02acf3428f5520e9fadd17a2cbf8d7cf5b1553ef18600b",
+      "bytes": 2711
+    },
+    "src/format.ts": {
+      "sha256": "eba9df360bc003aae715a19c64521e0ea984c62bdd539730b823f461f4201e06",
+      "bytes": 2428
+    },
+    "src/index.ts": {
+      "sha256": "251a6eb47424c521e22b50b494149cd1caf7c83cb5db7295033897522c6fa8d0",
+      "bytes": 81
+    },
+    "src/read.ts": {
+      "sha256": "8acadf44f4ebbb829814a55405345b900c438c883592722fd1aacf0096f85719",
+      "bytes": 2894
+    },
+    "src/write.ts": {
+      "sha256": "7ddb3c1c80d26dcc2861f4193c9db1b7a58d2c43cd38eef627a5ff6bbac46d2c",
+      "bytes": 4868
+    },
+    "tsconfig.json": {
+      "sha256": "94677809f35b3025e0af20859deaece2c00d4eec7cc2be3abae20ff20d7d64af",
+      "bytes": 132
+    },
+    "tsup.config.ts": {
+      "sha256": "4dce640872f64dfbda07ff9a70f9b044903a7f5c6ec619b05482048864753188",
+      "bytes": 171
+    }
+  }
+}

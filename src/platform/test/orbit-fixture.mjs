@@ -47,7 +47,7 @@ export function orbitFixture(failure, cleanupFailure = false, dependencies = {})
     HTMLElement: Surface,
     createPolyCamera(state) { return { state, update(value) { Object.assign(state, value); } }; },
     createCubicSkyCameraOrientation() {
-      return { scene: () => "matrix3d(1)", skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: [0, 0, 1] }),
+      return { scene: () => "matrix3d(1)", sceneMatrix: () => "matrix3d(1)", skybox: () => ({ matrix: "matrix3d(1)", sunViewDirection: [0, 0, 1] }),
         counterRotation() { return "matrix3d(1)"; },  reset() {}, rotate() {}, snapshot() { return {}; },
       };
     },

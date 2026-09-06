@@ -1,6 +1,7 @@
 import { requireObjectControls } from "../../site/scene-contract.mjs";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.mjs";
 import { validateDirectionalSunPlan } from "./directional-sun-contract.mjs";
+import { validatePreparedHeliocentricView } from "./heliocentric-view.mjs";
 
 import { PREPARED_PRESENTATION_SCHEMA } from "./prepared-schema.mjs";
 export { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA } from "./prepared-schema.mjs";
@@ -37,7 +38,7 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "inputSelector", "assets", "tree", "variants", "materials", "viewBindings", "animations", "resourceOrder", "destinations", "motionFrame", "pageLayers"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "inputSelector", "assets", "tree", "variants", "materials", "viewBindings", "animations", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -45,6 +46,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   if (plan.sun !== null) validateDirectionalSunPlan(plan.sun);
   if (!(plan.camera?.sceneScale > 0) || !(plan.camera.minimumZoom > 0) || !(plan.camera.maximumZoom >= plan.camera.minimumZoom)) fail("camera plan is incomplete");
   if (plan.inputSelector !== null) string(plan.inputSelector, "input selector");
+  if (plan.heliocentricView !== undefined) heliocentricView(plan.heliocentricView, plan);
   if (!Array.isArray(assets?.entries)) fail("resource catalog is missing");
   const resources = new Set(assets.entries.map(entry => entry.key));
   const resource = (key, nullable = false) => { if (!(nullable && key === null) && !resources.has(key)) fail(`undeclared resource ${key}`); };
@@ -100,7 +102,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   const tracks = array(plan.materials, "materials"); unique(tracks.map(track => track.id), "material tracks");
   const trackMap = new Map(tracks.map(track => [track.id, track]));
   for (const track of tracks) {
-    record(track, "material", ["id", "target", "frame", "defaultFrame", "banks", "rotation", "frameAttribute", "modeAttribute", "quoted"]);
+    record(track, "material", ["id", "target", "frame", "defaultFrame", "banks", "rotation", "frameAttribute", "modeAttribute", "quoted", "farBank"]);
     string(track.id, "track id"); node(track.target);
     if ([tree.camera, tree.scene].includes(track.target)) fail("material target cannot own camera transforms");
     frameMapping(track.frame);
@@ -108,6 +110,16 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     if (track.defaultFrame >= track.frame.count) fail("default frame is outside prepared addresses");
     array(track.banks, "material banks"); unique(track.banks.map(bank => bank.id), "material banks");
     if (!track.banks.length) fail("material banks are empty");
+    // A far bank (optional) replaces the selected bank while the camera's
+    // published level of detail is past the geometry stage: the same frames
+    // from one small atlas, so the row shards stop streaming.
+    if (track.farBank !== undefined) {
+      string(track.farBank, "far bank");
+      const far = track.banks.find(bank => bank.id === track.farBank);
+      if (!far) fail("undeclared far bank");
+      if (!far.rows?.length) fail("far bank requires prepared rows");
+      if (!far.fixed) fail("far bank requires a fixed address");
+    }
     for (const bank of track.banks) {
       record(bank, "bank", ["id", "frames", "default", "fixed", "rows"]); string(bank.id, "bank id");
       if (array(bank.frames, "frame addresses").length !== track.frame.count) fail("every material frame requires a prepared address");
@@ -250,12 +262,26 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }
   for (const binding of array(plan.viewBindings, "view bindings")) {
-    record(binding, "view binding", ["kind", "target", "property", "variable", "defaultZoom", "systemTransform", "source", "precision"]); node(binding.target);
-    choice(binding.kind, new Set(["zoom-property", "shell-scale", "counter-rotation", "view-attribute"]), "view binding");
+    record(binding, "view binding", ["kind", "target", "property", "variable", "defaultZoom", "systemTransform", "source", "precision", "minimumRadius", "unitScale"]);
+    choice(binding.kind, new Set(["zoom-property", "shell-scale", "counter-rotation", "view-attribute", "view-property", "silhouette-fit"]), "view binding");
+    // The stage itself may carry a published level-of-detail attribute or
+    // property; every other binding names a retained node.
+    node(binding.target, ["view-attribute", "view-property"].includes(binding.kind));
     if ([tree.camera, tree.scene].includes(binding.target) && binding.kind !== "view-attribute") fail("view binding cannot duplicate the camera publisher");
-    if (binding.kind === "view-attribute") {
+    if (binding.kind === "silhouette-fit") {
+      // The overlay fitted to the projected silhouette a perspective camera
+      // publishes (see perspective-dolly.mjs), never below a prepared radius.
+      if (!(binding.minimumRadius >= 0) || !(binding.unitScale > 0)) fail("silhouette fit requires a prepared floor and unit scale");
+      if (!plan.camera.projection || plan.camera.projection.model !== "css-perspective-shared-with-sky") fail("silhouette fit requires the perspective camera");
+    } else if (binding.kind === "view-property") {
+      string(binding.property, "view property");
+      if (!binding.property.startsWith("--")) fail("view property must be a custom property");
+      choice(binding.source, new Set(["billboard-opacity", "marker-opacity"]), "view property source");
+      if (binding.precision !== null) { integer(binding.precision, "view property precision"); if (binding.precision > 12) fail("invalid view property precision"); }
+    } else if (binding.kind === "view-attribute") {
       attribute(binding.property);
-      choice(binding.source, new Set(["scene-pitch", "control-yaw", "zoom", "scene-matrix"]), "view attribute source");
+      choice(binding.source, new Set(["scene-pitch", "control-yaw", "zoom", "scene-matrix", "level-of-detail-stage"]), "view attribute source");
+      if (binding.target === -1 && binding.source !== "level-of-detail-stage") fail("only the level of detail is published on the stage");
       if (binding.precision !== null) { integer(binding.precision, "view attribute precision"); if (binding.precision > 12 || binding.source === "scene-matrix") fail("invalid view attribute precision"); }
     } else if (binding.kind === "zoom-property") string(binding.property, "zoom property");
     else if (binding.kind === "shell-scale") { string(binding.variable, "shell variable"); if (!(binding.defaultZoom > 0)) fail("scale default zoom must be positive"); }
@@ -271,4 +297,34 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     for (const frame of animation.keyframes) { record(frame, "keyframe", ["offset", "transform"]); finite(frame.offset, "keyframe offset"); string(frame.transform, "keyframe transform"); }
   }
   return plan;
+}
+
+// The Sun as real geometry with the body's orbit (see heliocentric-view.mjs):
+// needs the observed Sun plan for its direction and sprite, the perspective
+// camera that frames by dolly, and the shell's own navigation sprite as the
+// far-view marker. A planetary system needs one sprite per prepared body and
+// the Sun from the same atlas, and a phase atlas; captions need a policy and
+// a name for every body drawn.
+function heliocentricView(value, plan) {
+  record(value, "heliocentric view", ["plan", "bodyMarker", "systemMarkers", "labels"]);
+  const { plan: view, bodyMarker, systemMarkers, labels } = value;
+  validatePreparedHeliocentricView(view);
+  const nonempty = text => typeof text === "string" && text.length > 0;
+  const sprite = marker => Number.isSafeInteger(marker?.index) && marker.index >= 0 &&
+    Number.isSafeInteger(marker.count) && marker.count > marker.index && marker.size > 0 &&
+    (marker.url === undefined || nonempty(marker.url));
+  if (plan.sun == null || plan.camera.projection?.model !== "css-perspective-shared-with-sky" ||
+      !nonempty(bodyMarker?.url) || !sprite(bodyMarker)) {
+    fail("a heliocentric view requires the observed Sun plan, a perspective camera and the shell's body marker");
+  }
+  const bodyIds = view.system === undefined ? [] : view.system.bodies.map(body => body.id);
+  if (labels !== undefined && (labels === null || typeof labels.policy !== "object" || typeof labels.names !== "object" ||
+      (view.system !== undefined && (!nonempty(labels.names.sun) || bodyIds.some(id => !nonempty(labels.names[id])))))) {
+    fail("captions require a policy and a name for the observer, the Sun and every system body");
+  }
+  if (view.system !== undefined && (!nonempty(systemMarkers?.url) || !sprite(systemMarkers.sun) ||
+      bodyIds.some(id => !sprite(systemMarkers.bodies?.[id])) ||
+      !nonempty(systemMarkers.phase?.url) || !(systemMarkers.phase.frameCount > 1))) {
+    fail("a prepared planetary system requires a shell marker for the Sun and every body, and a phase atlas");
+  }
 }

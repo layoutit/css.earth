@@ -1,0 +1,134 @@
+/* A body's heliocentric neighbourhood (see heliocentric-view-runtime.mjs):
+   the Sun billboard lives inside the object's perspective camera root so it
+   depth-sorts against the body; the orbit line and the body marker live in an
+   overlay root that shares the camera root's box and is written from the same
+   camera-relative projection. */
+.planet-heliocentric-sun {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+.planet-heliocentric-sun[hidden] {
+  display: none;
+}
+
+.planet-heliocentric-orbit {
+  --planet-orbit-line-thickness: 1.5px;
+  --planet-orbit-line-color: rgba(255, 243, 224, 0.6);
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+}
+
+.planet-heliocentric-orbit-piece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 1px;
+  height: var(--planet-orbit-line-thickness);
+  margin-top: calc(var(--planet-orbit-line-thickness) / -2);
+  background-color: var(--planet-orbit-line-color);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* The body's navigation sprite; size, atlas tile and opacity are written by
+   the runtime from the shared marker recipe and the object's level-of-detail
+   policy. */
+.planet-heliocentric-body-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* The planetary system group: the other planets' orbit pieces and markers,
+   with the group's opacity written by the dolly (it fades in as the camera
+   dollies out). Its lines are thinner and fainter than the body's own orbit
+   so that one stays the reference. */
+.planet-heliocentric-system {
+  --planet-orbit-line-thickness: 1px;
+  --planet-orbit-line-color: rgba(255, 243, 224, 0.42);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Planet and Sun markers: screen-space billboards at the shell's marker size
+   for the body; tile, size and opacity are written by the runtime. */
+.planet-heliocentric-system-marker,
+.planet-heliocentric-sun-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* A marker's phase: the object's billboard lighting frame over the sprite,
+   scaled to the marker and rolled toward the Sun by the runtime. */
+.planet-heliocentric-marker-phase {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* Captions above the markers (see label-field.mjs): the shell's UI font at
+   the size that lands capitals at the policy's cap height, a fixed pool
+   positioned by the runtime with their bottom-centre a gap above the
+   marker; the measuring elements are never painted. */
+.planet-heliocentric-captions {
+  position: absolute;
+  inset: 0;
+  /* The shell's navigation typography (its UI stack, weight and secondary
+     text colour), sized by the caption policy's cap height. */
+  font-family: var(--shell-ui-font);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--shell-text-secondary);
+  pointer-events: none;
+}
+
+.planet-heliocentric-caption,
+.planet-heliocentric-caption-measure {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  white-space: nowrap;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.planet-heliocentric-caption-measure {
+  visibility: hidden;
+}
+
+/* The Sun's own perspective root: it shares the body camera's box and eye
+   (the shared orbit writes both roots' perspective and origin from the
+   prepared camera plan) and is inserted before the body's root so the body
+   paints over it. */
+.planet-heliocentric-sun-camera {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}

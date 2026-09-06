@@ -11,6 +11,8 @@ import { PREPARED_MERCURY_LENSES } from "../runtime/preparedLenses.mjs";
 import { PREPARED_MERCURY_SCENE } from "../runtime/preparedScene.mjs";
 import { PREPARED_MERCURY_SKY_SUN } from "../runtime/preparedSkySun.mjs";
 import { PREPARED_MERCURY_STARFIELD } from "../runtime/preparedStarfield.mjs";
+import { MERCURY_PRESENTATION_FRAME } from "../tools/scene-camera-pose.mjs";
+import { validatePreparedPlanetarySystem } from "../../../platform/heliocentric-view.mjs";
 
 test("publishes one prepared retained Mercury scene", () => {
   assert.equal(
@@ -31,7 +33,7 @@ test("publishes one prepared retained Mercury scene", () => {
     PREPARED_MERCURY_SCENE.camera.defaultControlPitchDegrees,
     89 * (1 - 40 / 65),
   );
-  assert.equal(PREPARED_MERCURY_SCENE.camera.defaultControlYawDegrees, -105);
+  assert.equal(PREPARED_MERCURY_SCENE.camera.defaultControlYawDegrees, 0);
   assert.equal(PREPARED_MERCURY_SCENE.camera.responsiveFit.model,
     "continuous-aspect-smoothstep");
   assert.equal(PREPARED_MERCURY_SCENE.camera.runtimeGeometryDerivation, false);
@@ -39,6 +41,27 @@ test("publishes one prepared retained Mercury scene", () => {
   assert.equal(PREPARED_MERCURY_SCENE.material.frameCount, 256);
   assert.equal(PREPARED_MERCURY_SCENE.material.defaultFrame, 230);
   assert.equal(PREPARED_MERCURY_SCENE.bodyTransform, "rotateZ(-118deg)");
+  assert.equal(PREPARED_MERCURY_SCENE.interior.bodyTransform, "rotateZ(120deg)");
+  assert.equal(
+    PREPARED_MERCURY_SCENE.systemTransform,
+    MERCURY_PRESENTATION_FRAME.cssTransform,
+  );
+  assert.equal(
+    PREPARED_MERCURY_SCENE.presentationFrame.model,
+    "ecliptic-north-up-sun-left-presentation-frame",
+  );
+  assert.deepEqual(
+    [...PREPARED_MERCURY_SCENE.presentationFrame.sunDirection],
+    [...PREPARED_MERCURY_SKY_SUN.localDirection],
+  );
+  assert.equal(
+    PREPARED_MERCURY_SCENE.starfield.cameraContract,
+    "scene-locked-unbounded-accumulated-matrix3d",
+  );
+  assert.match(
+    PREPARED_MERCURY_SCENE.starfield.sceneRegistration,
+    /^matrix3d\((?:[^,]+,){15}1\)$/u,
+  );
   assert.equal(
     PREPARED_MERCURY_SCENE.interior.schema,
     "cssmercury-prepared-cutaway@1",
@@ -113,7 +136,7 @@ test("publishes one prepared retained Mercury scene", () => {
   assert.equal(PREPARED_MERCURY_STARFIELD.runtimeRasterization, false);
   assert.equal(
     PREPARED_MERCURY_SCENE.starfield.cameraContract,
-    "inverse-unbounded-accumulated-matrix3d",
+    "scene-locked-unbounded-accumulated-matrix3d",
   );
   assert.equal(PREPARED_MERCURY_SCENE.counts.starfieldFaceCount, 6);
   assert.equal(PREPARED_MERCURY_SCENE.counts.sunBillboardCount, 1);
@@ -125,16 +148,47 @@ test("publishes one prepared retained Mercury scene", () => {
   );
 });
 
+test("carries the planetary system around Mercury", () => {
+  const { heliocentricView, camera } = PREPARED_MERCURY_SCENE;
+  const system = heliocentricView.system;
+  assert.equal(validatePreparedPlanetarySystem(system, heliocentricView), system);
+  assert.deepEqual(system.bodies.map((body) => body.id),
+    ["venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune",
+      "ceres", "pluto", "haumea", "makemake", "eris"]);
+  assert.equal(camera.dolly.maximumDistanceOverSystemExtent, 3);
+  assert.equal(camera.planetarySystem.model, "distance-over-orbit-extent-fade");
+  assert.ok(camera.planetarySystem.visibleAboveDistanceOverOrbitExtent >
+    camera.planetarySystem.hiddenBelowDistanceOverOrbitExtent);
+  assert.equal(camera.sunMarker.model, "sprite-diameter-crossfade");
+  assert.ok(camera.sunMarker.fadeStartSpritePixels > camera.sunMarker.fullSpritePixels);
+
+  const maximumDistance = 3 * system.maximumExtentUnits;
+  const minimumDistance = camera.dolly.minimumDistanceRadii *
+    heliocentricView.units.bodyRadiusUnits;
+  const wheelNotchesEndToEnd = Math.log(maximumDistance / minimumDistance) /
+    (camera.dolly.wheelStepPerDelta * 100);
+  assert.ok(wheelNotchesEndToEnd > 20 && wheelNotchesEndToEnd < 40,
+    `wheelNotchesEndToEnd ${wheelNotchesEndToEnd} is outside (20, 40)`);
+
+  const extentAu = system.maximumExtentUnits / heliocentricView.units.unitsPerAu;
+  assert.ok(extentAu > 97 && extentAu < 99,
+    `system extent ${extentAu} au is not Eris's aphelion`);
+});
+
 test("uses the common object orbit without a decoded transform bank", async () => {
   const client = await readFile(new URL("../runtime/client.mjs", import.meta.url),
     "utf8");
-  const cubicSkyRuntime = await readFile(new URL(
-    "../../../platform/cubic-sky-runtime.mjs",
+  const orientation = await readFile(new URL(
+    "../../../platform/camera-orientation.mjs",
+    import.meta.url,
+  ), "utf8");
+  const orbit = await readFile(new URL(
+    "../../../platform/object-orbit.mjs",
     import.meta.url,
   ), "utf8");
   assert.match(client, /createObjectRuntime/u);
-  assert.match(cubicSkyRuntime, /new DOMMatrix\(\)/u);
-  assert.match(cubicSkyRuntime, /controlYawDelta/u);
+  assert.match(orientation, /new DOMMatrix\(\)/u);
+  assert.match(orbit, /controlYawDelta/u);
   assert.doesNotMatch(
     client,
     /preparedOrbitBank|DecompressionStream|TextDecoder|encodedBase64/u,
@@ -248,6 +302,49 @@ test("prepares every Mercury lighting angle at native DPR resolution", async () 
       assert.equal(row.width / row.frameCount, bank.frameSize);
     }
   }
+});
+
+test("prepares every lighting angle again in one billboard atlas for the far view", async () => {
+  for (const density of [1, 2]) {
+    const bank = PREPARED_MERCURY_ASSETS.lighting.banks[String(density)];
+    const billboard = bank.billboard;
+    assert.equal(billboard.schema, "cssmercury-prepared-lighting-billboard@1");
+    assert.equal(billboard.frameCount, 256);
+    assert.equal(billboard.presentations.length, 256);
+    assert.equal(billboard.frameSize, 24 * density);
+    assert.equal(billboard.width, billboard.columns * billboard.frameSize);
+    assert.equal(billboard.height, billboard.rowCount * billboard.frameSize);
+    assert.ok(billboard.columns * billboard.rowCount >= 256);
+    const path = fileURLToPath(new URL(
+      `../../../../public${billboard.url}`,
+      import.meta.url,
+    ));
+    const bytes = await readFile(path);
+    assert.equal(bytes.byteLength, billboard.bytes);
+    assert.equal(
+      createHash("sha256").update(bytes).digest("hex"),
+      billboard.sha256,
+    );
+    const metadata = await sharp(path).metadata();
+    assert.equal(metadata.width, billboard.width);
+    assert.equal(metadata.height, billboard.height);
+    // Every frame addresses its own tile in the disc box the overlay uses.
+    const size = billboard.presentationFrameSize;
+    for (const presentation of billboard.presentations) {
+      assert.equal(presentation.url, billboard.url);
+      assert.equal(presentation.backgroundPosition,
+        `${-(presentation.frameIndex % billboard.columns) * size}px ` +
+        `${-Math.floor(presentation.frameIndex / billboard.columns) * size}px`);
+      assert.equal(presentation.backgroundSize,
+        `${billboard.columns * size}px ${billboard.rowCount * size}px`);
+    }
+  }
+  const lod = PREPARED_MERCURY_SCENE.camera.levelOfDetail;
+  assert.equal(lod.model, "silhouette-diameter-crossfade");
+  assert.ok(lod.billboardFadeStartDiscPixels > lod.billboardFullDiscPixels);
+  assert.ok(lod.billboardFullDiscPixels > lod.markerFadeStartDiscPixels);
+  assert.ok(lod.markerFadeStartDiscPixels > lod.markerFullDiscPixels);
+  assert.ok(lod.markerFullDiscPixels > 0);
 });
 
 test("reuses the exact full-phase frame for symmetric shadowless curvature", async () => {

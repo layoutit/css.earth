@@ -24,6 +24,7 @@ const settings = {
   controls: [
     { kind: "cycle", name: "speed", label: "Speed", state: "normal" },
     { kind: "toggle", name: "shadows", label: "Shadows", checked: false },
+    { kind: "toggle", name: "orbit", label: "Orbit", checked: true },
   ],
 };
 

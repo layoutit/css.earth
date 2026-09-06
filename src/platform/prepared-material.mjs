@@ -23,7 +23,10 @@ export function preparedMaterialState(track, selected, view) {
   const reference = lightDirection(track.frame, view.reference?.sunViewDirection ?? view.sunViewDirection);
   const useDefault = view.sceneMatrix === view.reference?.sceneMatrix &&
     direction.every((value, i) => Math.abs(value-reference[i]) < 1e-9);
-  const bank = track.banks.find(bank => bank.id === selected.bank);
+  // Past the geometry stage the far bank (when the track has one) replaces
+  // the selected bank: the same frame from one small atlas.
+  const far = track.farBank !== undefined && (view.levelOfDetail?.stage ?? "geometry") !== "geometry";
+  const bank = track.banks.find(bank => bank.id === (far ? track.farBank : selected.bank));
   const mode = selected.mode === "fixed" ? selected.fixedMode : useDefault && bank.default ? "default" : "directional";
   const address = selected.mode === "fixed" ? bank.fixed : useDefault && bank.default ? bank.default : bank.frames[frame];
   return { frame, calculatedFrame, useDefault, bank, address, row: address?.row ?? null, mode,
@@ -38,7 +41,7 @@ export function preparedMaterialAddress(_track, state, resources) {
 
 export function createPreparedMaterialPublisher(track,element,camera) {
   let lastAddress=null;
-  let state={frame:track.defaultFrame,calculatedFrame:track.defaultFrame,appliedFrame:null,appliedRow:null,row:null,mode:null,
+  let state={bank:null,frame:track.defaultFrame,calculatedFrame:track.defaultFrame,appliedFrame:null,appliedRow:null,row:null,mode:null,
     lightRollDegrees:0,addressWrites:0,transformWrites:0,enabled:false,rotationEnabled:false,sunViewDirection:null};
   const planar=track.rotation?.kind==="planar"?createPreparedPlanarRotationPublisher({element,width:track.rotation.width,height:track.rotation.height}):null;
   const ellipsoid=track.rotation?.kind==="ellipsoid"?createPreparedEllipsoidProjection(track.rotation):null;
@@ -51,7 +54,7 @@ export function createPreparedMaterialPublisher(track,element,camera) {
   return Object.freeze({
     publish(selected,view,resources,committedPlan){
       const next=preparedMaterialState(track,selected,view,camera,committedPlan);
-      state={...state,frame:next.frame,calculatedFrame:next.calculatedFrame,row:next.row,mode:selected.modeLabel??next.mode,enabled:next.enabled,
+      state={...state,bank:next.bank.id,frame:next.frame,calculatedFrame:next.calculatedFrame,row:next.row,mode:selected.modeLabel??next.mode,enabled:next.enabled,
         rotationEnabled:next.rotationEnabled,sunViewDirection:next.sunViewDirection};
       const address=preparedMaterialAddress(track,next,resources);
       const publishHidden=selected.publishWhenHidden??"always";

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createPreparedCameraPublisher } from "./prepared-camera-runtime.mjs";
-import { selectPreparedResponsiveZoom } from "./cubic-sky-runtime.mjs";
+import { selectPreparedResponsiveZoom } from "./camera-layout.mjs";
 
 test("zoom preserves the mounted perspective and prepared layer depths", () => {
   const writes = [];

@@ -350,15 +350,18 @@ test("renders optional source media through one planet-neutral panel contract", 
 });
 
 test("keeps concise lens descriptions in the object model without secondary row copy", async () => {
-  const [shell, saturnPanel] = await Promise.all([
+  const [shell, { objectControls: saturnPanel }, { objectControls: saturnSource }] = await Promise.all([
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
-    readFile(new URL("../../src/planets/saturn/site/control-content.mjs", import.meta.url), "utf8"),
+    import("../../src/planets/saturn/site/control-content.mjs"),
+    import("../../src/planets/saturn/site/control-content.source.mjs"),
   ]);
   assert.doesNotMatch(shell, /planet-lenses-introduction|Explore this object in new ways/u);
   assert.doesNotMatch(shell, /planet-lens-description|\{lens\.description\}<\/span>/u);
-  assert.match(saturnPanel, /normal:\s*"Visible color"/u);
-  assert.match(saturnPanel, /ultraviolet:\s*"Hubble at 225 nm"/u);
-  assert.match(saturnPanel, /thermal:\s*"Cassini infrared"/u);
+  const descriptions = Object.fromEntries(saturnPanel.lenses.controls.map(({ id, description }) => [id, description]));
+  assert.deepEqual(descriptions, Object.fromEntries(saturnSource.lenses.controls.map(({ id, description }) => [id, description])));
+  assert.equal(descriptions.normal, "Visible color");
+  assert.equal(descriptions.ultraviolet, "Hubble at 225 nm");
+  assert.equal(descriptions.thermal, "Cassini infrared");
 });
 
 test("places a scalable Surface Lens browser after the retained chart switcher", async () => {

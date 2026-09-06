@@ -1,0 +1,96 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { runtimeDefinition } from "../runtime/definition.mjs";
+import { resolvePreparedPresentation } from "../../../platform/prepared-presentation.mjs";
+import { preparedSelectionFixture } from "../../../platform/test/object-runtime-package.mjs";
+
+const BILLBOARD_LIGHTING_KEY = "lighting-billboard";
+const rows = (f) => f.residency.stats().pools.find((pool) => pool.id === "lighting");
+const lit = { lensId: "normal", speed: 1, shadows: true, orbit: true };
+const geometryView = { sunViewDirection: [1, 0, -1], levelOfDetail: { stage: "geometry", billboardOpacity: 0, markerOpacity: 0, silhouetteDiameter: 400 } };
+const farView = (stage) => ({ ...geometryView, levelOfDetail: { stage, billboardOpacity: 1, markerOpacity: stage === "marker" ? 1 : 0, silhouetteDiameter: 6 } });
+const lightingDemand = (selection, view) => {
+  const plan = resolvePreparedPresentation(runtimeDefinition, { selection, view: { ...view, controlPitch: 0, controlYaw: 0 } });
+  const lighting = (key) => key.startsWith("lighting") || key === "shadowless";
+  return { required: plan.required.filter(lighting), prewarm: plan.prewarm.filter(lighting) };
+};
+
+test("far level-of-detail stages demand the billboard atlas instead of lighting rows", () => {
+  const near = lightingDemand(lit, geometryView);
+  assert.match(near.required[0], /^lighting:\d+$/u);
+  assert.ok(near.prewarm.length > 0);
+  for (const stage of ["crossfade", "billboard", "marker"]) {
+    assert.deepEqual(lightingDemand(lit, farView(stage)), { required: [BILLBOARD_LIGHTING_KEY], prewarm: [] });
+    assert.deepEqual(lightingDemand({ ...lit, shadows: false }, farView(stage)), { required: [BILLBOARD_LIGHTING_KEY], prewarm: [] });
+  }
+  // Before the camera's first perspective publication the geometry stage applies.
+  assert.deepEqual(lightingDemand(lit, { sunViewDirection: [1, 0, -1] }), near);
+  assert.deepEqual(lightingDemand({ ...lit, shadows: false }, geometryView), { required: ["shadowless"], prewarm: [] });
+});
+
+test("Mercury stops streaming rows from the crossfade on and keeps the phase, then resumes in close", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const enable = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enable;
+    f.selection.setView({ ...f.view, ...geometryView, revision: 2 }); await f.settle();
+    const near = f.presentation.observe().materials.lighting;
+    assert.equal(near.bank, "rows");
+    assert.match(f.selection.state().plan.required.join(" "), /lighting:\d+/u);
+    assert.equal(f.stage.dataset.lod, "geometry");
+    const nearFrame = near.frame;
+    const residentRows = rows(f).keys.length;
+    assert.ok(residentRows > 0);
+
+    for (const stage of ["crossfade", "billboard", "marker"]) {
+      f.selection.setView({ ...f.view, ...farView(stage), revision: 3 }); await f.settle();
+      const far = f.presentation.observe().materials.lighting;
+      assert.equal(f.stage.dataset.lod, stage);
+      assert.equal(far.bank, "billboard");
+      // The same frame, the phase, drawn from the atlas (its one row).
+      assert.equal(far.frame, nearFrame);
+      assert.equal(far.appliedFrame, nearFrame);
+      assert.equal(far.appliedRow, 0);
+      assert.deepEqual(f.selection.state().plan.required.filter((key) => key.startsWith("lighting")), [BILLBOARD_LIGHTING_KEY]);
+      // No further rows are requested, and the retained rows stay retained.
+      assert.equal(rows(f).pending, 0);
+      assert.equal(rows(f).keys.length, residentRows);
+      // The billboard disc fades in on the material root (the stage's second child).
+      assert.equal(f.stage.children[1].style.getPropertyValue("--mercury-billboard-opacity"), "1");
+    }
+
+    f.selection.setView({ ...f.view, ...geometryView, revision: 4 }); await f.settle();
+    const back = f.presentation.observe().materials.lighting;
+    assert.equal(f.stage.dataset.lod, "geometry");
+    assert.equal(back.bank, "rows");
+    assert.equal(back.frame, nearFrame);
+    assert.match(f.selection.state().plan.required.join(" "), /lighting:\d+/u);
+    assert.deepEqual(f.errors, []);
+    assert.deepEqual(f.materialErrors, []);
+  } finally { f.restore(); }
+});
+
+test("the overlay is fitted to the published silhouette, floored to the marker", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const fit = runtimeDefinition.viewBindings.find((binding) => binding.kind === "silhouette-fit");
+    const root = f.stage.children[1];
+    const px = (value) => Number(value.toFixed(6)).toString();
+    const silhouette = (radius) => ({ centre: [12, -8], radial: [1, 0], radialSemiAxis: radius, tangentialSemiAxis: radius * 0.5 });
+    f.selection.setView({ ...f.view, ...geometryView, body: { silhouette: silhouette(100) }, revision: 2 }); await f.settle();
+    assert.equal(root.style.transform, `translate(12px, -8px) rotate(0deg) scale(${px(100 * fit.unitScale)}, ${px(50 * fit.unitScale)}) rotate(0deg)`);
+    f.selection.setView({ ...f.view, ...farView("marker"), body: { silhouette: silhouette(1) }, revision: 3 }); await f.settle();
+    assert.equal(root.style.transform, `translate(12px, -8px) rotate(0deg) scale(${px(fit.minimumRadius * fit.unitScale)}, ${px(fit.minimumRadius * fit.unitScale)}) rotate(0deg)`);
+    assert.ok(fit.minimumRadius > 1);
+  } finally { f.restore(); }
+});
+
+test("the orbit toggle only hides the line through a stage class", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    assert.equal(f.stage.classList.contains("mercury-hide-orbit"), false);
+    const hide = f.selection.dispatch({ kind: "toggle", name: "orbit", value: false }); await f.settle(); await hide;
+    assert.equal(f.stage.classList.contains("mercury-hide-orbit"), true);
+    const show = f.selection.dispatch({ kind: "toggle", name: "orbit", value: true }); await f.settle(); await show;
+    assert.equal(f.stage.classList.contains("mercury-hide-orbit"), false);
+  } finally { f.restore(); }
+});

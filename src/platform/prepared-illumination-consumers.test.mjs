@@ -8,7 +8,7 @@ import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coor
 test("Earth starts directional atmosphere decoding without a stability wait", async () => {
   const f = await preparedSelectionFixture(earth);
   try {
-    f.selection.setView({ ...f.view, skySunViewDirection: [1, 0, 0], revision: 2 });
+    f.selection.setView({ ...f.view, skySunViewDirection: [1, 0, 0], sunViewDirection: viewSunDirectionToPreparedLightDirection([1, 0, 0]), revision: 2 });
     await f.flush();
     // Do not advance the fixture clock: short-lived phase rows must already be
     // decoding while the camera is moving, not only once its direction settles.
