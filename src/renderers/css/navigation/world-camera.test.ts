@@ -6,7 +6,7 @@ import mercuryDefinition from "../../../../src/planets/mercury/prepared/runtime.
 import venusDefinition from "../../../../src/planets/venus/prepared/runtime.json" with {type: "json"};
 import { prepareEclipticPresentationFrame } from '../../../platform/solar-presentation-frame.mjs';
 import { ASTRONOMICAL_UNIT_KILOMETERS, BODY_FIXED_SUN_DIRECTIONS, BODY_FIXED_TO_ICRF_MATRICES,
-  HELIOCENTRIC_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../platform/solar-geometry.mjs';
+  BODY_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../platform/solar-geometry.mjs';
 import { projectHeliocentricView } from '../solar-system/heliocentric-view.js';
 import { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraViewport } from './world-camera.js';
@@ -21,7 +21,7 @@ function preparedFrame(id: 'mercury' | 'venus', radiusM: number, radiusUnits: nu
   const directionToIcrf = (vector: readonly number[]) => [0, 1, 2].map(row =>
     [0, 1, 2].reduce((sum, column) => sum + bodyFixedToIcrf[row * 3 + column] * vector[column], 0));
   const origin = directionToIcrf(BODY_FIXED_SUN_DIRECTIONS[id]);
-  const distanceM = HELIOCENTRIC_ORBITS[id].heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS * 1000;
+  const distanceM = BODY_ORBITS[id].heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS * 1000;
   const columns = basis.map(directionToIcrf);
   return { referenceFrame: 'sun-icrf', epochJdTt: SOLAR_GEOMETRY_EPOCH_JD_TT,
     originM: [-origin[0] * distanceM, -origin[1] * distanceM, -origin[2] * distanceM],
