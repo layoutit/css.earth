@@ -81,6 +81,7 @@ export function mountPreparedPresentation(stage, context, definition) {
     context.own(() => { if (owned()) stage.classList.toggle(name, previous); });
   }
   stage.replaceChildren(...roots);
+  if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
   for (const name of definition.tree.stageClasses) stage.classList.add(name);
   const animations = definition.animations.map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, easing: "linear", fill: "both" });
@@ -90,6 +91,9 @@ export function mountPreparedPresentation(stage, context, definition) {
   const materials = new Map(definition.materials.map(track => [track.id,
     createPreparedMaterialPublisher(track, nodes[track.target], definition.camera)]));
   let selectionPublications = 0, framePublications = 0, styleWrites = 0, transformWrites = 0;
+  const GEOMETRY_LEVEL_OF_DETAIL = Object.freeze({ stage: "geometry", silhouetteDiameter: null, billboardOpacity: 0, markerOpacity: 0 });
+  const round = (value, precision) => precision === null ? value : Math.round(value * 10 ** precision) / 10 ** precision;
+  const formatNumber = value => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = index => index === -1 ? stage : nodes[index];
   return Object.freeze({ cameraElement, sceneElement,
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
@@ -113,13 +117,37 @@ export function mountPreparedPresentation(stage, context, definition) {
       selectionPublications++;
     },
     publishFrame({ selection, view, resources, plan }) {
+      // The camera's published level of detail (a perspective dolly, see
+      // perspective-dolly.mjs); before its first publication the geometry
+      // stage applies.
+      const levelOfDetail = view.levelOfDetail ?? GEOMETRY_LEVEL_OF_DETAIL;
       for (const binding of definition.viewBindings) {
         const element = target(binding.target);
         if (binding.kind === "view-attribute") {
           let value = binding.source === "scene-pitch" ? preparedScenePitch(view.controlPitch, definition.camera)
-            : binding.source === "control-yaw" ? view.controlYaw : binding.source === "zoom" ? view.zoom : view.sceneMatrix;
+            : binding.source === "control-yaw" ? view.controlYaw : binding.source === "zoom" ? view.zoom
+              : binding.source === "level-of-detail-stage" ? levelOfDetail.stage : view.sceneMatrix;
           if (binding.precision !== null) { const scale = 10 ** binding.precision; value = Math.round(value * scale) / scale; }
-          writeAttribute(element, binding.property, String(value));
+          if (readAttribute(element, binding.property) !== String(value)) writeAttribute(element, binding.property, String(value));
+        } else if (binding.kind === "view-property") {
+          const value = formatNumber(round(binding.source === "billboard-opacity" ? levelOfDetail.billboardOpacity : levelOfDetail.markerOpacity, binding.precision));
+          if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
+        } else if (binding.kind === "silhouette-fit") {
+          // The overlay fitted to the projected silhouette: an ellipse,
+          // slightly elongated and shifted outward when off-axis, exactly the
+          // mathematical silhouette the prepared frames are registered to,
+          // never smaller than the prepared floor (the marker it lights).
+          const silhouette = view.body?.silhouette;
+          if (silhouette) {
+            const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
+            const radial = Math.max(silhouette.radialSemiAxis, binding.minimumRadius);
+            const tangential = Math.max(silhouette.tangentialSemiAxis, binding.minimumRadius);
+            const transform = `translate(${formatNumber(silhouette.centre[0])}px, ${formatNumber(silhouette.centre[1])}px) ` +
+              `rotate(${formatNumber(radialAngle)}deg) ` +
+              `scale(${formatNumber(radial * binding.unitScale)}, ${formatNumber(tangential * binding.unitScale)}) ` +
+              `rotate(${formatNumber(-radialAngle)}deg)`;
+            if (element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
+          }
         } else if (binding.kind === "zoom-property") { writeStyle(element, binding.property, String(view.zoom)); styleWrites++; }
         else if (binding.kind === "shell-scale") {
           element.style.scale = `calc(var(${binding.variable}) / (var(--planet-viewport-zoom-divisor) / ${view.zoom / binding.defaultZoom}))`;

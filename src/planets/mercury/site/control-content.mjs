@@ -104,6 +104,12 @@ export const objectControls = Object.freeze({
         "name": "shadows",
         "label": "Shadows",
         "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
       }
     ]
   }

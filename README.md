@@ -58,6 +58,13 @@ before publishing it atomically to `.local/wmts-global/<version>/`.
 See [Earth reproduction](docs/global-earth-coverage.md#reproduction-and-checks)
 for acquisition and explicit geometry-authoring commands.
 
+The vendored astronomy package (`packages/astronomy`, see its `SOURCE.md`) is
+a preparation dependency only. It is consumed through its own build, which
+`pnpm install` runs as `postinstall` (`pnpm build:astronomy` repeats it);
+`pnpm prepare:planets` builds it first, and `pnpm prepare:solar-geometry`
+regenerates the checked-in `src/platform/solar-geometry.mjs` from it
+bit-for-bit. The browser runtime never loads it.
+
 After preparation, verify the local source closure or regenerate the browser
 assets with:
 

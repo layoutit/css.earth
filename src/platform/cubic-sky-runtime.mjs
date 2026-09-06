@@ -1,4 +1,4 @@
-
+import { createExposure, exposureLimits, screenFactor, starPresentation, EXPOSURE_KNOBS } from "./star-photometry.mjs";
 
 export function mountRetainedCubicSky({
   host,
@@ -44,15 +44,131 @@ export function mountRetainedCubicSky({
     );
     orientation.appendChild(element);
   }
+  // Catalogue stars (opt-in, see prepare-catalogue-stars.mjs): the retained
+  // band as points just inside the faces, each placed by its prepared cube
+  // transform, sized by a scale the root's size sets (a point at 0.99 of the
+  // half side appears at perspective / (0.99 half side) of its CSS size),
+  // coloured and dimmed by the chain's luminance. Retained once; the
+  // orientation's matrix carries them with the faces.
+  let starGroup = null;
+  let starResizeObserver = null;
+  const stars = plan.catalogueStars ?? null;
+  const starElements = [];
+  // A star's three per-point writes: its radius (at screen factor 1), its
+  // display luminance and its halo colour (its own colour at the bloom's
+  // alpha). The prepared values first; a session exposure recomputes them.
+  const writeStar = (element, star, presentation) => {
+    element.style.setProperty("--planet-cubic-sky-star-radius", `${Number(presentation.radiusPx.toFixed(3))}px`);
+    element.style.setProperty("--planet-cubic-sky-star-halo",
+      `rgb(${star.color[0]} ${star.color[1]} ${star.color[2]} / ${Number(presentation.haloAlpha.toFixed(3))})`);
+    element.style.opacity = String(Number(presentation.luminance.toFixed(4)));
+  };
+  if (stars !== null) {
+    starGroup = document.createElement("div");
+    starGroup.className = `planet-cubic-sky-stars ${objectId}-skybox-stars`;
+    for (const star of stars.retained) {
+      const element = document.createElement("s");
+      element.className = `planet-cubic-sky-star planet-cubic-sky-star-${star.band}`;
+      element.style.backgroundColor = `rgb(${star.color[0]}, ${star.color[1]}, ${star.color[2]})`;
+      writeStar(element, star, star);
+      element.style.transform = star.transform;
+      if (star.name) element.dataset.name = star.name;
+      element.dataset.magnitude = String(star.magnitude);
+      element.dataset.direction = star.direction.join(",");
+      starGroup.appendChild(element);
+      starElements.push({ element, star });
+    }
+    orientation.appendChild(starGroup);
+  }
+  // The session's exposure: null while the prepared chain applies.
+  let sessionExposure = null;
+  let starExposureWrites = 0;
+  const exposureState = () => {
+    const source = sessionExposure === null ? "prepared" : "session";
+    const exposure = sessionExposure ?? (stars === null ? null : createExposure(stars.exposure));
+    if (exposure === null) return null;
+    const limits = exposureLimits(exposure);
+    return Object.freeze({
+      source,
+      adaptationLuminanceCdM2: exposure.adaptationLuminanceCdM2, exposureScale: exposure.exposureScale,
+      intensityMax: exposure.intensityMax, maxRadiusPx: exposure.maxRadiusPx, haloPeak: exposure.haloPeak,
+      linearScale: exposure.linearScale,
+      limitingMagnitude: Number(limits.limitingMagnitude.toFixed(3)),
+      hintsLimitMagnitude: Number(limits.hintsLimitMagnitude.toFixed(3)),
+      pinMagnitude: Number(limits.pinMagnitude.toFixed(3)),
+      retainedCount: starElements.length,
+      drawnCount: starElements.filter(({ element }) => element.style.opacity !== "0").length,
+      writes: starExposureWrites,
+    });
+  };
   cube.appendChild(orientation);
   root.appendChild(cube);
   host.prepend(root);
+  const measureStarScale = () => {
+    if (starGroup === null) return;
+    const view = root.ownerDocument.defaultView;
+    const perspective = parseFloat(view.getComputedStyle(root).perspective);
+    const halfSide = Math.max(root.clientWidth, root.clientHeight);
+    if (!(perspective > 0) || !(halfSide > 0)) return;
+    const scale = perspective / (stars.retainedRadiusShareOfHalfSide * halfSide);
+    starGroup.style.setProperty("--planet-cubic-sky-star-scale", scale.toFixed(5));
+    // The reference's live screen factor: the prepared sizes are at 1.
+    starGroup.style.setProperty("--planet-cubic-sky-star-screen-factor",
+      screenFactor(root.clientWidth, root.clientHeight).toFixed(4));
+  };
+  measureStarScale();
+  if (starGroup !== null && typeof ResizeObserver === "function") {
+    starResizeObserver = new ResizeObserver(() => measureStarScale());
+    starResizeObserver.observe(root);
+  }
   let publishedMatrix = null;
   let publishedZoomScale = null;
   return Object.freeze({
     root,
     cube,
     orientation,
+    starGroup,
+    retainedStarCount: starGroup === null ? 0 : starGroup.childElementCount,
+    catalogueStars: stars === null ? null : Object.freeze({
+      limitingMagnitude: stars.limitingMagnitude, count: stars.count, photographicCount: stars.photographicCount,
+      retainedCount: stars.retainedCount, bands: stars.bands, coexistence: stars.coexistence,
+    }),
+    // Session exposure knob (see star-photometry.mjs): every field optional,
+    // omitted ones keep their current value, null restores the prepared
+    // chain. Recomputes the retained points only (one style write per star
+    // per field); the photograph keeps its prepared exposure. Returns the
+    // applied values with the limits they imply.
+    setStarExposure(options = null) {
+      if (stars === null) return null;
+      if (options !== null && (typeof options !== "object" || Array.isArray(options))) {
+        throw new TypeError("Star exposure options must be a record or null.");
+      }
+      if (options === null) {
+        sessionExposure = null;
+      } else {
+        const current = sessionExposure ?? createExposure(stars.exposure);
+        const next = { fovDegrees: stars.exposure.fovDegrees, screenFactor: 1 };
+        for (const name of Object.keys(EXPOSURE_KNOBS)) {
+          const value = options[name] === undefined ? current[name] : options[name];
+          if (!Number.isFinite(value)) throw new TypeError(`Star exposure ${name} must be finite.`);
+          next[name] = value;
+        }
+        for (const name of Object.keys(options)) {
+          if (!(name in EXPOSURE_KNOBS)) throw new TypeError(`Unknown star exposure knob: ${name}.`);
+        }
+        sessionExposure = createExposure(next);
+      }
+      const exposure = sessionExposure ?? createExposure(stars.exposure);
+      for (const { element, star } of starElements) {
+        const presentation = sessionExposure === null ? star : starPresentation(exposure, star.magnitude);
+        if (presentation === null) {
+          element.style.opacity = "0";
+        } else writeStar(element, star, presentation);
+        starExposureWrites += 1;
+      }
+      return exposureState();
+    },
+    starExposure: exposureState,
     faceCount: orientation.querySelectorAll(".planet-cubic-sky-face").length,
     setOrientation({ matrix, zoom, defaultZoom }) {
       if (typeof matrix !== "string" || !Number.isFinite(zoom) ||
@@ -73,6 +189,7 @@ export function mountRetainedCubicSky({
       }
     },
     destroy() {
+      starResizeObserver?.disconnect();
       root.remove();
     },
   });

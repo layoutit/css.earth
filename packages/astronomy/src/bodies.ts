@@ -1,0 +1,196 @@
+import type { SatelliteId } from './data/satelliteElements.data.js'
+import { SATELLITE_ELEMENTS } from './data/satelliteElements.data.js'
+
+/**
+ * Physical data for the bodies this package places.
+ *
+ * Values come from JPL Solar System Dynamics. Most are transcribed from
+ * Horizons' `OBJ_DATA` block, fetched with
+ * `format=text&COMMAND='<code>'&OBJ_DATA='YES'&MAKE_EPHEM='NO'`. The added
+ * Saturn moons use JPL's current satellite physical-parameters table
+ * (`https://ssd.jpl.nasa.gov/sats/phys_par/`), which publishes the selected
+ * ephemeris GM and IAU WGCCRE mean radius together. They are transcribed rather
+ * than parsed because the physical-data blocks are free text whose layout
+ * differs per body — a parser for them would be a second thing to get wrong.
+ *
+ * `meanRadiusKm` is the volumetric mean radius where Horizons gives one, and
+ * the geometric mean of the triaxial radii where it gives only those (Phobos,
+ * Deimos, Miranda, Ariel). It is NOT the equatorial radius: it is used for the
+ * frame-capture rule, where the right question is "how big is this body", not
+ * "how wide is it at the equator". A renderer that needs the ellipsoid needs
+ * three numbers and should not get them from here.
+ */
+export interface BodyData {
+  readonly id: BodyId
+  readonly name: string
+  readonly horizonsCode: string
+  readonly meanRadiusKm: number
+  /** GM, km^3/s^2. Zero only where Horizons publishes no GM. */
+  readonly gravitationalParameterKm3PerS2: number
+  /** Gravitational parent — the body this one orbits. `null` for the Sun. */
+  readonly parent: BodyId | null
+}
+
+export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
+/**
+ * The five IAU-recognised dwarf planets this package places. Each orbits the
+ * Sun directly — no barycentre level, because moons are out of scope (Charon,
+ * Dysnomia, Namaka/Hi'iaka, S/2015 (136472) 1 are none of them placed here)
+ * and there is therefore no mass offset between "the body" and "the system"
+ * to account for, unlike the eight planets.
+ */
+export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
+export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId
+
+export const PLANET_IDS: readonly PlanetId[] = [
+  'mercury',
+  'venus',
+  'earth',
+  'mars',
+  'jupiter',
+  'saturn',
+  'uranus',
+  'neptune',
+]
+
+export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
+
+const body = (
+  id: BodyId,
+  name: string,
+  horizonsCode: string,
+  meanRadiusKm: number,
+  gravitationalParameterKm3PerS2: number,
+  parent: BodyId | null,
+): BodyData => ({ id, name, horizonsCode, meanRadiusKm, gravitationalParameterKm3PerS2, parent })
+
+export const BODIES: Record<BodyId, BodyData> = {
+  sun: body('sun', 'Sun', '10', 695700, 132712440041.93938, null),
+
+  mercury: body('mercury', 'Mercury', '199', 2439.4, 22031.86855, 'sun'),
+  venus: body('venus', 'Venus', '299', 6051.84, 324858.592, 'sun'),
+  earth: body('earth', 'Earth', '399', 6371.01, 398600.435436, 'sun'),
+  mars: body('mars', 'Mars', '499', 3389.92, 42828.375662, 'sun'),
+  jupiter: body('jupiter', 'Jupiter', '599', 69911, 126686531.9, 'sun'),
+  saturn: body('saturn', 'Saturn', '699', 58232, 37931206.234, 'sun'),
+  uranus: body('uranus', 'Uranus', '799', 25362, 5793950.6103, 'sun'),
+  neptune: body('neptune', 'Neptune', '899', 24624, 6835099.97, 'sun'),
+
+  moon: body('moon', 'Moon', '301', 1737.4, 4902.800066, 'earth'),
+
+  // Horizons publishes Phobos and Deimos as masses, not GM; these are
+  // mass x G with G = 6.67430e-20 km^3 kg^-1 s^-2 (CODATA 2018).
+  phobos: body('phobos', 'Phobos', '401', 11.08, 1.08e16 * 6.6743e-20, 'mars'),
+  deimos: body('deimos', 'Deimos', '402', 6.2, 1.8e15 * 6.6743e-20, 'mars'),
+
+  io: body('io', 'Io', '501', 1821.49, 5959.9155, 'jupiter'),
+  europa: body('europa', 'Europa', '502', 1560.8, 3202.7121, 'jupiter'),
+  ganymede: body('ganymede', 'Ganymede', '503', 2631.2, 9887.8328, 'jupiter'),
+  callisto: body('callisto', 'Callisto', '504', 2410.3, 7179.2834, 'jupiter'),
+
+  mimas: body('mimas', 'Mimas', '601', 198.8, 2.503489, 'saturn'),
+  enceladus: body('enceladus', 'Enceladus', '602', 252.3, 7.210367, 'saturn'),
+  tethys: body('tethys', 'Tethys', '603', 536.3, 41.21, 'saturn'),
+  dione: body('dione', 'Dione', '604', 562.5, 73.116, 'saturn'),
+  rhea: body('rhea', 'Rhea', '605', 764.5, 153.94, 'saturn'),
+  titan: body('titan', 'Titan', '606', 2575.5, 8978.14, 'saturn'),
+  hyperion: body('hyperion', 'Hyperion', '607', 135, 0.37049, 'saturn'),
+  iapetus: body('iapetus', 'Iapetus', '608', 734.5, 120.52, 'saturn'),
+  phoebe: body('phoebe', 'Phoebe', '609', 106.5, 0.55479, 'saturn'),
+  janus: body('janus', 'Janus', '610', 89.2, 0.12662, 'saturn'),
+  epimetheus: body('epimetheus', 'Epimetheus', '611', 58.2, 0.03514, 'saturn'),
+  // Telesto is absent from JPL's consolidated physical-parameters table;
+  // Horizons' target 613 OBJ_DATA block gives GM 0.00048 km^3/s^2 and the
+  // triaxial radii 16.3 x 11.8 x 9.8 km, whose geometric mean is 12.35 km.
+  telesto: body('telesto', 'Telesto', '613', 12.35, 0.00048, 'saturn'),
+  atlas: body('atlas', 'Atlas', '615', 15.1, 0.00037, 'saturn'),
+  prometheus: body('prometheus', 'Prometheus', '616', 43.1, 0.01071, 'saturn'),
+  pandora: body('pandora', 'Pandora', '617', 40.6, 0.00926, 'saturn'),
+  pan: body('pan', 'Pan', '618', 14, 0.00028, 'saturn'),
+
+  miranda: body('miranda', 'Miranda', '705', 235.7, 4.3, 'uranus'),
+  ariel: body('ariel', 'Ariel', '701', 578.9, 83.43, 'uranus'),
+  umbriel: body('umbriel', 'Umbriel', '702', 584.7, 85.4, 'uranus'),
+  titania: body('titania', 'Titania', '703', 788.9, 222.8, 'uranus'),
+  oberon: body('oberon', 'Oberon', '704', 761.4, 205.34, 'uranus'),
+
+  triton: body('triton', 'Triton', '801', 1352.6, 1428.495, 'neptune'),
+  proteus: body('proteus', 'Proteus', '808', 208, 2.58, 'neptune'),
+
+  // Dwarf planets. `horizonsCode` is the exact string this package's Horizons
+  // queries use (`generate-dwarf-planets.mjs`, `fetch-fixtures.mjs`) — for
+  // Ceres, Eris, Haumea and Makemake that is a small-body designation with a
+  // trailing `;`, not a major-body number, because none of them has one.
+  //
+  // Pluto and Ceres have an `OBJ_DATA` physical block, so `meanRadiusKm` and
+  // `gravitationalParameterKm3PerS2` are transcribed the same way as every
+  // planet above. Eris, Haumea and Makemake do not — Horizons carries no mass
+  // or size for them — so those three cite the literature directly:
+  //   eris:     mean radius 1163 km, sphere to the occultation's precision
+  //             (Sicardy et al. 2011, Nature 478, 493); mass 1.67e22 kg
+  //             (same paper, from Dysnomia's orbit); GM = mass x G with
+  //             G = 6.67430e-20 km^3 kg^-1 s^-2 (CODATA 2018), as for Phobos
+  //             and Deimos above.
+  //   haumea:   markedly NOT spherical — see `bodyShapes.ts` for the triaxial
+  //             figure (1161 x 852 x 513 km, Ortiz et al. 2017, Nature 550,
+  //             219). `meanRadiusKm` here is `(a^2 c)^(1/3)` = 797.6 km, the
+  //             volumetric mean the frame-capture rule wants, NOT a width.
+  //             Mass 4.006e21 kg (Ragozzine & Brown 2009, AJ 137, 4766).
+  //   makemake: modelled as an oblate spheroid, equatorial 751 km / polar
+  //             715 km (Ortiz et al. 2012, Nature 491, 566, from a stellar
+  //             occultation); `meanRadiusKm` is the volumetric mean of that,
+  //             738.8 km. GM = 278 km^3/s^2 (Parker et al. 2025, from the
+  //             satellite MK2's orbit — arXiv:2509.05880 — superseding the
+  //             2016 discovery paper's cruder value).
+  pluto: body('pluto', 'Pluto', '999', 1188.3, 869.326, 'sun'),
+  ceres: body('ceres', 'Ceres', '1;', 469.7, 62.6284, 'sun'),
+  eris: body('eris', 'Eris', '136199;', 1163, 1.67e22 * 6.6743e-20, 'sun'),
+  haumea: body('haumea', 'Haumea', '136108;', 797.6, 4.006e21 * 6.6743e-20, 'sun'),
+  makemake: body('makemake', 'Makemake', '136472;', 738.8, 278, 'sun'),
+}
+
+export const BODY_IDS = Object.keys(BODIES) as readonly BodyId[]
+
+export const bodyData = (id: BodyId): BodyData => {
+  const data = BODIES[id]
+  if (!data) throw new Error(`unknown body: ${id}`)
+  return data
+}
+
+/**
+ * Ids of the moons this package places around each planet, in declaration
+ * order. Precomputed rather than filtered on demand: `solarSystem.ts` asks for
+ * it once per planet per simulation tick, and a `filter` there would allocate
+ * eight arrays a frame to answer a question about static data.
+ */
+const MOONS_OF: Record<PlanetId, readonly BodyId[]> = Object.fromEntries(
+  PLANET_IDS.map((planet) => [
+    planet,
+    planet === 'earth'
+      ? (['moon'] as readonly BodyId[])
+      : (Object.keys(SATELLITE_ELEMENTS) as SatelliteId[]).filter((id) => SATELLITE_ELEMENTS[id].parent === planet),
+  ]),
+) as Record<PlanetId, readonly BodyId[]>
+
+export const moonsOf = (planet: PlanetId): readonly BodyId[] => MOONS_OF[planet]
+
+/**
+ * GM of a planet plus every moon this package carries for it — the mass that
+ * VSOP87's "planet" actually is, since VSOP87 integrates each planetary system
+ * as one body.
+ *
+ * It is not the true system GM: the moons left out (Jupiter's 90-odd outer
+ * irregulars, and most of Saturn's small moons) are together under 1e-7 of any
+ * system, which moves the Sun's barycentric offset by well under a kilometre.
+ */
+const SYSTEM_GM: Record<PlanetId, number> = Object.fromEntries(
+  PLANET_IDS.map((planet) => [
+    planet,
+    moonsOf(planet).reduce(
+      (sum, id) => sum + bodyData(id).gravitationalParameterKm3PerS2,
+      bodyData(planet).gravitationalParameterKm3PerS2,
+    ),
+  ]),
+) as Record<PlanetId, number>
+
+export const systemGravitationalParameterKm3PerS2 = (planet: PlanetId): number => SYSTEM_GM[planet]
