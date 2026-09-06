@@ -202,6 +202,35 @@ test('real input interruption preserves the last painted source view and flushes
   assert.deepEqual(h.errors, []); h.router.destroy();
 });
 
+test('input after the detailed handoff keeps the incoming scene and its painted pose, including saved-view links', async () => {
+  const h = harness({ prepare: async ({ toId }) => toId === 'venus' ? {
+    afterMount(mount) {
+      mount.value = saved(34567);
+      const error = new Error('User interrupted the incoming flight');
+      error.name = 'AbortError'; error.preserveView = true; throw error;
+    },
+  } : {} });
+  await h.router.settled;
+  h.mounts[0].value = saved(54321);
+  const url = `https://example.test/venus/?${formatSharedView(saved(98765))}#linked`;
+  assert.equal(await h.router.navigate('venus', { url }), false);
+  const incoming = h.mounts.at(-1);
+  assert.equal(incoming.value.camera.distanceKilometers, 34567);
+  assert.equal(incoming.restores, 0, 'Interruption cannot restore the originally requested arrival camera');
+  assert.equal(incoming.calls.includes('destroy'), false);
+  assert.equal(h.router.state().activeObjectId, 'venus');
+  assert.equal(h.router.state().ready, true);
+  assert.equal(h.documentTarget.documentElement.dataset.scenePresented, 'true');
+  assert.equal(h.windowTarget.location.pathname, '/venus/');
+  assert.equal(h.windowTarget.location.hash, '#linked');
+  assert.equal(h.windowTarget.location.searchParams.get('v'), new URLSearchParams(formatSharedView(saved(34567))).get('v'));
+  assert.equal(h.writes.filter(write => write === 'push').length, 1);
+  assert.equal(h.renders.size, 1); assert.equal(h.maxRendered(), 1);
+  h.windowTarget.history.back(); await h.router.settled;
+  assert.equal(h.mounts.at(-1).value.camera.distanceKilometers, 54321);
+  assert.deepEqual(h.errors, []); h.router.destroy();
+});
+
 test('navbar/search anchors and vault events share one route; modifier and unsupported links stay native', async () => {
   const h = harness(); await h.router.settled;
   function click(id, extra = {}) {

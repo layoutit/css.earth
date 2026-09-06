@@ -1,5 +1,5 @@
-import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample } from '@cssearth/engine';
-import { createWorldSelectionTarget, savedWorldCamera, parseSharedView } from '../src/renderers/css/dist/navigation.js';
+import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
+import { createWorldSelectionTarget, savedWorldCamera, parseSharedView, presentWorldCamera } from '../src/renderers/css/dist/navigation.js';
 
 /** Application routing over prepared physical frames. The CSS scene owns every camera write. */
 export function createPreparedWorldNavigation({ objects, windowTarget = window, documentTarget = document }) {
@@ -22,70 +22,130 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const saved = query?.has('v') ? parseSharedView(`v=${query.get('v')}`) : null;
       const target = saved ? savedWorldCamera(saved, toFactory.navigation.frame, optics)
         : createWorldSelectionTarget(from, toFactory.navigation.frame, optics);
+      // One numeric flight survives the change of detailed object owner.
+      const flight = createSelectionFlight({ from: from.pose, to: target.pose,
+        focusPositionM: toFactory.navigation.frame.originM });
+      const anchors = [frames.get(fromId), toFactory.navigation.frame].map(frame => ({
+        positionM: frame.originM, radiusM: frame.bodyRadiusM,
+      }));
+      const handoffTimeS = source && !reducedMotion
+        ? detailHandoffTime(flight, from, source.frame, optics) : 0;
       const controller = new AbortController();
-      const cancel = () => controller.abort();
+      const cancel = () => controller.abort(signal.reason ?? cancelled());
       signal.addEventListener('abort', cancel, { once: true });
       if (signal.aborted) cancel();
-      let prepared;
+      const events = ['pointerdown', 'wheel', 'keydown'];
+      const interrupt = event => {
+        if (!isFlightInput(event)) return;
+        const error = cancelled(); error.preserveView = true;
+        controller.abort(error);
+      };
+      for (const event of events) documentTarget.addEventListener(event, interrupt, { capture: true });
+      let prepared, released = false, rejectInterruption;
+      const release = () => { if (prepared && !released) { released = true; prepared.resources.destroy(); } };
+      const interrupted = new Promise((_, reject) => { rejectInterruption = reject; });
+      interrupted.catch(() => {});
+      const abort = () => { release(); rejectInterruption(cancellationReason(controller.signal)); cleanup(); };
+      controller.signal.addEventListener('abort', abort, { once: true });
+      if (controller.signal.aborted) abort();
+      function cleanup() {
+        signal.removeEventListener('abort', cancel);
+        controller.signal.removeEventListener('abort', abort);
+        for (const event of events) documentTarget.removeEventListener(event, interrupt, { capture: true });
+      }
       const preparation = toFactory.navigation.prepare({ signal: controller.signal }).then(value => {
         prepared = value;
+        if (controller.signal.aborted) { release(); throw cancellationReason(controller.signal); }
         return value;
       });
       preparation.catch(() => {});
+      const onPaint = world => { lastCamera = world; };
       try {
-        // Source detail remains mounted while its own sky presents the trip.
-        // The destination bank decodes concurrently, without a second scene.
-        await Promise.all([preparation, source ? fly(source, from, target, toFactory.navigation.frame, controller.signal, reducedMotion) : Promise.resolve()]);
-        if (controller.signal.aborted) throw cancelled();
+        // Depart immediately, but stop while source detail is already coarse.
+        // Slow preparation can only hold this distant view, never an enlarged
+        // destination proxy. Nothing mounts until its full bank is decoded.
+        const departure = source && !reducedMotion
+          ? animateWorldFlight({ owner: source, from, flight, anchors, signal: controller.signal,
+            endElapsedS: handoffTimeS, windowTarget, documentTarget, onPaint })
+          : Promise.resolve({ world: reducedMotion ? target : from, elapsedS: reducedMotion ? flight.durationS : 0 });
+        const [, checkpoint] = await Promise.race([Promise.all([preparation, departure]), interrupted]);
+        if (controller.signal.aborted) throw cancellationReason(controller.signal);
         return {
-          mountOptions: { preparedResources: prepared.resources, initialWorldCamera: source ? target : from },
+          mountOptions: { preparedResources: prepared.resources, initialWorldCamera: checkpoint.world },
           async afterMount(mount, { signal: mountedSignal }) {
+            const cancelMounted = () => controller.abort(mountedSignal.reason ?? cancelled());
+            mountedSignal.addEventListener('abort', cancelMounted, { once: true });
+            if (mountedSignal.aborted) cancelMounted();
             try {
-              if (mountedSignal.aborted) throw cancelled();
+              if (controller.signal.aborted) throw cancellationReason(controller.signal);
               if (!mount.navigation) throw new Error('The destination camera is unavailable.');
-              if (source) mount.navigation.apply(target);
-              else {
-                mount.navigation.apply(from);
-                await fly(mount.navigation, from, target, toFactory.navigation.frame, mountedSignal, reducedMotion);
+              mount.navigation.apply(checkpoint.world);
+              if (checkpoint.elapsedS < flight.durationS) {
+                await animateWorldFlight({ owner: mount.navigation, from, flight, anchors, signal: controller.signal,
+                  startElapsedS: checkpoint.elapsedS, windowTarget, documentTarget, onPaint });
               }
               lastCamera = mount.navigation.capture(); lastOptics = mount.navigation.optics();
-            } finally { signal.removeEventListener('abort', cancel); }
+            } finally {
+              mountedSignal.removeEventListener('abort', cancelMounted);
+              cleanup();
+            }
           },
         };
       } catch (error) {
-        controller.abort(); prepared?.resources.destroy();
-        signal.removeEventListener('abort', cancel);
+        controller.abort(error); release(); cleanup();
         throw error;
       }
     },
   });
-
-  function fly(owner, from, to, targetFrame, signal, reducedMotion) {
-    const flight = createSelectionFlight({ from: from.pose, to: to.pose,
-      focusPositionM: targetFrame.originM });
-    return animateWorldFlight({ owner, from, to, flight, signal, reducedMotion,
-      windowTarget, documentTarget, onPaint(world) { lastCamera = world; } });
-  }
 }
 
-export function animateWorldFlight({ owner, from, to, flight, signal, reducedMotion,
-  windowTarget, documentTarget, onPaint = () => {} }) {
+// Find the first coarse-source sample using the existing prepared LOD limit.
+// Clamping the departure to this exact time also survives a delayed RAF: it
+// cannot skip from the departure straight to a large destination proxy.
+function detailHandoffTime(flight, from, frame, optics) {
+  const limit = optics.detailHandoffDiameterPixels;
+  if (!(Number.isFinite(limit) && limit > 0)) throw new TypeError('World navigation needs a prepared detail handoff diameter.');
+  const sample = createSelectionFlightSample();
+  const isCoarse = elapsedS => {
+    const projected = presentWorldCamera(worldSample(flight, from, elapsedS, sample), frame, optics);
+    return projected.silhouette === null || 2 * projected.silhouette.tangentialSemiAxis <= limit;
+  };
+  if (isCoarse(0)) return 0;
+  let previous = 0;
+  for (let step = 1; step <= 64; step++) {
+    const elapsedS = flight.durationS * step / 64;
+    if (isCoarse(elapsedS)) {
+      let low = previous, high = elapsedS;
+      for (let iteration = 0; iteration < 32; iteration++) {
+        const middle = (low + high) / 2;
+        if (isCoarse(middle)) high = middle; else low = middle;
+      }
+      return high;
+    }
+    previous = elapsedS;
+  }
+  // A saved view can stay beside the departing body. It has no small-source
+  // interval; switch at departure so its destination still owns the approach.
+  return 0;
+}
+
+export function animateWorldFlight({ owner, from, flight, anchors, signal, reducedMotion = false,
+  startElapsedS = 0, endElapsedS = flight.durationS, windowTarget, documentTarget, onPaint = () => {} }) {
   return new Promise((resolve, reject) => {
-    let frameId = null, started = null, finished = false;
+    let frameId = null, started = null, finished = false, elapsedS = startElapsedS;
     const sample = createSelectionFlightSample();
     const events = ['pointerdown', 'wheel', 'keydown'];
-    function finish(error) {
+    function finish(error, result) {
       if (finished) return;
       finished = true;
       if (frameId !== null) windowTarget.cancelAnimationFrame(frameId);
       signal.removeEventListener('abort', abort);
-      for (const event of events) documentTarget.removeEventListener(event, interrupt, true);
-      if (error) reject(error); else resolve();
+      for (const event of events) documentTarget.removeEventListener(event, interrupt, { capture: true });
+      if (error) reject(error); else resolve(result);
     }
-    function abort() { finish(cancelled()); }
+    function abort() { finish(cancellationReason(signal)); }
     function interrupt(event) {
-      if (!event.target?.closest?.('.planet-input-surface')) return;
-      if (event.type === 'keydown' && !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '-', '=', 'Escape'].includes(event.key)) return;
+      if (!isFlightInput(event)) return;
       const error = cancelled(); error.preserveView = true;
       finish(error);
     }
@@ -94,18 +154,31 @@ export function animateWorldFlight({ owner, from, to, flight, signal, reducedMot
       if (finished) return;
       try {
         if (started === null) started = time;
-        sampleSelectionFlightInto(flight, reducedMotion ? flight.durationS : (time - started) / 1000, sample);
-        const world = { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt,
-          pose: { positionM: [...sample.positionM], orientationXyzw: [...sample.orientationXyzw] } };
+        const requestedElapsedS = reducedMotion ? endElapsedS
+          : Math.min(endElapsedS, startElapsedS + (time - started) / 1000);
+        elapsedS = reducedMotion ? requestedElapsedS
+          : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
+        const world = worldSample(flight, from, elapsedS, sample);
         owner.apply(world); onPaint(world);
-        if (sample.complete) finish(); else frameId = windowTarget.requestAnimationFrame(paint);
+        if (elapsedS >= endElapsedS) finish(null, { world, elapsedS });
+        else frameId = windowTarget.requestAnimationFrame(paint);
       } catch (error) { finish(error); }
     }
     signal.addEventListener('abort', abort, { once: true });
     if (signal.aborted) { abort(); return; }
-    for (const event of events) documentTarget.addEventListener(event, interrupt, true);
+    for (const event of events) documentTarget.addEventListener(event, interrupt, { capture: true });
     frameId = windowTarget.requestAnimationFrame(paint);
   });
 }
 
+function worldSample(flight, from, elapsedS, sample) {
+  sampleSelectionFlightInto(flight, elapsedS, sample);
+  return { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt,
+    pose: { positionM: [...sample.positionM], orientationXyzw: [...sample.orientationXyzw] } };
+}
+function isFlightInput(event) {
+  return event.target?.closest?.('.planet-input-surface') &&
+    (event.type !== 'keydown' || ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '-', '=', 'Escape'].includes(event.key));
+}
+function cancellationReason(signal) { return signal.reason?.name === 'AbortError' ? signal.reason : cancelled(); }
 function cancelled() { return new DOMException('Object flight was cancelled.', 'AbortError'); }

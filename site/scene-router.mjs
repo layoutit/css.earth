@@ -125,9 +125,20 @@ export function createSceneRouter({
       syncPlayback();
       const result = await session.lifetime.wait(ready);
       if (result.cancelled || active !== session) return;
+      let interrupted = false;
       if (handoff?.afterMount) {
-        const completed = await session.lifetime.wait(handoff.afterMount(mount, { signal: request.controller.signal }));
-        if (completed.cancelled || active !== session || request.controller.signal.aborted) return;
+        try {
+          const completed = await session.lifetime.wait(handoff.afterMount(mount, { signal: request.controller.signal }));
+          if (completed.cancelled || active !== session || request.controller.signal.aborted) return;
+        } catch (error) {
+          if (error?.name !== 'AbortError' || error.preserveView !== true || active !== session ||
+              session.lifetime.disposed || request.controller.signal.aborted) throw error;
+          // The detailed destination already owns the camera. Real input ends
+          // its flight without retiring that scene or restoring the endpoint.
+          interrupted = true;
+          const drawnUrl = captureUrl();
+          if (drawnUrl) request.url = session.url = new URL(drawnUrl, windowTarget.location.href).href;
+        }
       }
       if (request) historyOwner?.commit(request.url, request.options);
       if (mount.sharedView && windowTarget.location?.href) {
@@ -139,7 +150,7 @@ export function createSceneRouter({
         });
         const viewOwner = session.viewUrl;
         session.lifetime.onDispose(() => viewOwner.destroy());
-        await session.lifetime.wait(session.viewUrl.restore());
+        if (!interrupted) await session.lifetime.wait(session.viewUrl.restore());
         if (active !== session || session.lifetime.disposed) return;
       }
       if (mount.destinations) shell.setDestinations?.({
@@ -153,8 +164,8 @@ export function createSceneRouter({
       hasPresented = true;
       if (pending === request) pending = null;
       syncPlayback();
-      if (request && request.options.history !== 'pop') session.viewUrl?.flush();
-      return true;
+      if (request && (request.options.history !== 'pop' || interrupted)) session.viewUrl?.flush();
+      return !interrupted;
     } catch (error) {
       if (active === session) fail(session, error);
     }

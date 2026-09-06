@@ -48,7 +48,7 @@ try {
       const frames = Object.fromEntries(OBJECTS.filter(object => object.worldFrame).map(object => [object.id, object.worldFrame]));
       const stage = document.querySelector('.planet-stage');
       const proof = window.__visibilityProof = { frames: [], delayedStarts: 0, poseFrames: 0, poseTransitions: 0, poseGaps: [],
-        maximumTranslationErrorPixels: 0, maximumOrientationErrorDegrees: 0 };
+        maximumTranslationErrorPixels: 0, maximumProjectedErrorPixels: 0, maximumOrientationErrorDegrees: 0 };
       let previousScene = stage.querySelector('.polycss-scene'), previousId = stage.dataset.objectId;
       let previousDiagnostics = window[`__${previousId}`], arrivingWorld = null;
       function checkPose(scene, id, firstPaint) {
@@ -58,7 +58,10 @@ try {
           arrivingWorld = previousDiagnostics.camera.captureWorldCamera(frames[previousId]);
           proof.poseTransitions++;
         }
-        if (!arrivingWorld || (!firstPaint && document.documentElement.dataset.ready !== 'loading')) return;
+        // Once native selection publishes diagnostics, the incoming owner
+        // continues the same flight. Its first paint and all preparation paints
+        // must retain the handoff pose; later camera movement is intentional.
+        if (!arrivingWorld || (!firstPaint && window[`__${id}`])) return;
         const camera = stage.querySelector('.polycss-camera'), sky = stage.querySelector('.planet-cubic-sky');
         const cameraBounds = camera.getBoundingClientRect(), skyBounds = sky.getBoundingClientRect();
         const origin = getComputedStyle(sky).perspectiveOrigin.split(' ').map(Number.parseFloat);
@@ -75,16 +78,30 @@ try {
         // Compare geometric errors; component-relative error exaggerates tiny
         // entries near zero. Native CSS serializes about six significant digits.
         const translationErrorPixels = Math.hypot(...[12, 13, 14].map(index => actual[index] - target[index]));
+        const radius = frames[id].bodyRadiusM / frames[id].metersPerUnit;
+        const project = (matrix, point) => {
+          const p = new DOMPoint(...point).matrixTransform(matrix);
+          return [p.x, p.y].map(value => value * viewport.focalPixels / (viewport.focalPixels - p.z));
+        };
+        const projectedErrorPixels = Math.max(...[[0, 0, 0], [radius, 0, 0], [-radius, 0, 0],
+          [0, radius, 0], [0, -radius, 0], [0, 0, radius], [0, 0, -radius]].map(point => {
+          const a = project(actualMatrix, point), b = project(expectedMatrix, point);
+          return Math.hypot(a[0] - b[0], a[1] - b[1]);
+        }));
         const orientationErrorDegrees = Math.max(...[0, 4, 8].map(offset => {
           const a = actual.slice(offset, offset + 3), b = target.slice(offset, offset + 3);
           const cross = [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
           return Math.atan2(Math.hypot(...cross), a.reduce((sum, value, index) => sum + value * b[index], 0)) * 180 / Math.PI;
         }));
         proof.maximumTranslationErrorPixels = Math.max(proof.maximumTranslationErrorPixels, translationErrorPixels);
+        proof.maximumProjectedErrorPixels = Math.max(proof.maximumProjectedErrorPixels, projectedErrorPixels);
         proof.maximumOrientationErrorDegrees = Math.max(proof.maximumOrientationErrorDegrees, orientationErrorDegrees);
         proof.poseFrames++;
-        if (translationErrorPixels > .01 || orientationErrorDegrees > .0002) {
-          proof.poseGaps.push({ id, firstPaint, translationErrorPixels, orientationErrorDegrees });
+        // At the distant handoff, CSS serializes translations millions of units
+        // deep. Judge their actual projected center/body-axis error, while the
+        // independent angular bound still rejects a wrong initial orientation.
+        if (projectedErrorPixels > .01 || orientationErrorDegrees > .0002) {
+          proof.poseGaps.push({ id, firstPaint, translationErrorPixels, projectedErrorPixels, orientationErrorDegrees });
         }
       }
       function sample(time) {
@@ -103,13 +120,20 @@ try {
     });
     for (const id of ['venus', 'mercury']) {
       await page.locator(`a.scale-stop[href="/${id}/"]`).click();
-      await page.waitForFunction(id => location.pathname === `/${id}/` && window.__cssEarth?.ready === true, id, { timeout: 60000 });
+      await page.waitForFunction(id => location.pathname === `/${id}/` && window.__cssEarth?.ready === true, id, { timeout: 60000 }).catch(async error => {
+        console.error(JSON.stringify({ delayedSelection, errors, diagnostics: await page.evaluate(() => ({
+          url: location.href, state: window.__cssEarth, stage: document.querySelector('.planet-stage').dataset.objectId,
+          tail: window.__visibilityProof.frames.slice(-3), poseGaps: window.__visibilityProof.poseGaps.slice(0, 3),
+        })) }));
+        throw error;
+      });
     }
     const result = await page.evaluate(() => {
       const proof = window.__visibilityProof; cancelAnimationFrame(proof.raf);
       return { frames: proof.frames.length, delayedStarts: proof.delayedStarts,
         poseFrames: proof.poseFrames, poseTransitions: proof.poseTransitions,
         maximumTranslationErrorPixels: proof.maximumTranslationErrorPixels,
+        maximumProjectedErrorPixels: proof.maximumProjectedErrorPixels,
         maximumOrientationErrorDegrees: proof.maximumOrientationErrorDegrees,
         poseGapCount: proof.poseGaps.length, poseGaps: proof.poseGaps.slice(0, 3),
         loadingFrames: proof.frames.filter(frame => frame.ready === 'loading').length,

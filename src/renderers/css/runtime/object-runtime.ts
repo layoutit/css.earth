@@ -130,8 +130,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0]) { if (!lifetime.disposed) { setAllowed(false); getOrbit().applyWorldCamera(pose, worldFrame); } },
       optics() {
         const state = getOrbit().state();
-        if (state.focal === undefined || !state.principalOffset) throw new TypeError('World navigation requires a physical camera.');
+        if (state.focal === undefined || !state.principalOffset || !definition.camera.levelOfDetail) throw new TypeError('World navigation requires a physical camera.');
         return { focalPixels: state.focal, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,
+          detailHandoffDiameterPixels: definition.camera.levelOfDetail.billboardFullDiscPixels,
           framingRadiusPixels: getOrbit().currentResponsiveZoom() / definition.camera.defaultZoom * definition.camera.logicalBodyDiameter / 2 };
       },
     }) : undefined;
