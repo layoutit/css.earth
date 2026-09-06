@@ -59,7 +59,13 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
 
       await page.mouse.move(body.x, body.y);
       await page.mouse.down();
-      assert.equal((await motionStats(page, planet.id)).projection, "screen-space-sphere");
+      // A prepared camera plan may opt the whole object into the screen-axis
+      // tumble (Mercury's perspective dolly, `drag.model`): every press then
+      // takes the screen-plane orbit mapping, the disc included.
+      const bodyProjection = await page.evaluate((id) =>
+        globalThis[`__${id}`].camera.stats().drag?.model === "screen-axis-tumble"
+          ? "screen-plane-orbit" : "screen-space-sphere", planet.id);
+      assert.equal((await motionStats(page, planet.id)).projection, bodyProjection);
       const beforeBodyDrag = await cameraPose(page, planet.id);
       await page.mouse.move(body.x + 1, body.y + 1);
       const tinyDrag = await cameraPose(page, planet.id);
@@ -70,7 +76,7 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
         `${planet.id}: a captured planet drag must continue outside the disc`);
       assert.equal((await motionStats(page, planet.id)).activeMode, "drag",
         `${planet.id}: leaving the disc must preserve drag ownership`);
-      assert.equal((await motionStats(page, planet.id)).projection, "screen-space-sphere",
+      assert.equal((await motionStats(page, planet.id)).projection, bodyProjection,
         `${planet.id}: planet-start drags retain their mapping outside the disc`);
       await page.mouse.up();
       assert.equal((await motionStats(page, planet.id)).pendingPointer, false,

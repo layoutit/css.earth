@@ -4,6 +4,14 @@ import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER } fro
 
 export async function proveWheelZoomDistance(page, planet, profile) {
   const original = await profile.camera(page), bounds = await profile.bounds(page);
+  // A perspective dolly (Mercury's prepared camera) moves the eye by
+  // exp(deltaY * stepPerDelta) per event for every input kind: the scale
+  // camera's scroll-distance multipliers are not its response.
+  const dolly = await page.evaluate(id => {
+    const stats = window[`__${id}`].camera.stats();
+    return stats.projection?.model === "css-perspective-shared-with-sky" ? stats.dolly : null;
+  }, planet.id);
+  if (dolly) return proveWheelDollyDistance(page, planet, profile, dolly, original, bounds);
   const fullStepRatio = Math.exp(PREPARED_WHEEL_ZOOM.screenLogScalePerMillisecond *
     PREPARED_WHEEL_ZOOM.intervalMilliseconds * WHEEL_ZOOM_SPEED_MULTIPLIER);
   const startZoom = Math.max(bounds.minimumZoom,
@@ -50,6 +58,51 @@ export async function proveWheelZoomDistance(page, planet, profile) {
     assert.ok(Math.abs(results[1].ratio - results[2].ratio) < .005,
       `${planet.id}: large precision packets must retain the same total scroll response`);
     assert.ok(results[3].ratio > 1 && results[3].ratio < 1.01,
+      `${planet.id}: a fine trackpad adjustment must remain small`);
+    assert.equal(await profile.stable(page), true);
+    return results;
+  } finally {
+    await profile.setCamera(page, original);
+  }
+}
+
+async function proveWheelDollyDistance(page, planet, profile, dolly, original, bounds) {
+  const results = [];
+  const distance = () => page.evaluate(id => window[`__${id}`].camera.state().distance, planet.id);
+  try {
+    for (const [name, deltas, kind] of [["wheel-notch", [-100], "wheel"],
+      ["trackpad-stream", Array(20).fill(-5), "trackpad"],
+      ["trackpad-accelerated", [-2, -98], "trackpad"], ["trackpad-fine", [-1], "trackpad"]]) {
+      await profile.setCamera(page, { pitch: bounds.defaultPitch, zoom: bounds.defaultZoom });
+      await page.waitForTimeout(410);
+      const box = await page.locator(".polycss-camera").boundingBox();
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      const events = await page.evaluate(id => window[`__${id}`].camera.stats().dragInertia.wheelZoom.events, planet.id);
+      const before = await distance();
+      let scrollPixels = 0;
+      for (const delta of deltas) {
+        scrollPixels += await wheelWithReceipt(page, delta);
+        assert.equal(await page.evaluate(id =>
+          window[`__${id}`].camera.stats().dragInertia.wheelZoom.inputKind, planet.id), kind,
+        `${planet.id}: ${name} must classify the ${kind} input`);
+        if (deltas.length > 1) await page.waitForTimeout(8);
+      }
+      await page.waitForFunction(({ id, events }) => {
+        const stats = window[`__${id}`].camera.stats().dragInertia.wheelZoom;
+        return stats.events >= events && !stats.active;
+      }, { id: planet.id, events: events + deltas.length });
+      const after = await distance();
+      results.push({ name, kind, scrollPixels, before, after, ratio: after / before,
+        expected: Math.exp(scrollPixels * dolly.wheelStepPerDelta) });
+    }
+    for (const item of results) {
+      assert.ok(Math.abs(item.ratio - item.expected) < 1e-6,
+        `${planet.id}: ${item.name} must dolly by the prepared step per received pixel (${item.ratio} vs ${item.expected})`);
+    }
+    assert.equal(results[0].scrollPixels, results[1].scrollPixels);
+    assert.ok(Math.abs(results[0].ratio - results[1].ratio) < 1e-6,
+      `${planet.id}: the dolly's gain is one for every input kind`);
+    assert.ok(results[3].ratio < 1 && results[3].ratio > 0.99,
       `${planet.id}: a fine trackpad adjustment must remain small`);
     assert.equal(await profile.stable(page), true);
     return results;

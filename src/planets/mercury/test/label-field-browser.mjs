@@ -264,10 +264,12 @@ async function inkHeight(image, box, dpr) {
     left: Math.max(0, Math.floor(box.x * dpr)), top: Math.max(0, Math.floor(box.y * dpr)),
     width: Math.ceil(box.width * dpr), height: Math.ceil(box.height * dpr),
   }).raw().toBuffer({ resolveWithObject: true });
-  let first = -1, last = -1;
+  // Caption ink is neutral (the shell's secondary text at the policy's
+  // alpha); orbit lines are warm and markers coloured, so both are excluded
+  // by chroma. Rows count as ink relative to the box's brightest neutral
+  // row, so the measure follows whatever colour and alpha the policy sets.
+  const rowPeaks = [];
   for (let y = 0; y < info.height; y += 1) {
-    // Caption ink is near-white and neutral; orbit lines are warm and
-    // markers coloured, so both are excluded by chroma.
     let peak = 0;
     for (let x = 0; x < info.width; x += 1) {
       const offset = (y * info.width + x) * info.channels;
@@ -276,8 +278,14 @@ async function inkHeight(image, box, dpr) {
       if (chroma > 24) continue;
       peak = Math.max(peak, 0.2126 * r + 0.7152 * g + 0.0722 * b);
     }
-    if (peak > 150) { if (first < 0) first = y; last = y; }
+    rowPeaks.push(peak);
   }
+  const brightest = Math.max(...rowPeaks);
+  if (!(brightest > 60)) return null;
+  let first = -1, last = -1;
+  // Above seven tenths of the brightest row: the letters' bodies, not the
+  // anti-aliased fringe above and below them.
+  rowPeaks.forEach((peak, y) => { if (peak > brightest * 0.7) { if (first < 0) first = y; last = y; } });
   return first < 0 ? null : last - first + 1;
 }
 

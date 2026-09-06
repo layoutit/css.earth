@@ -91,8 +91,8 @@ try {
     // system's group, its 1536 orbit pieces (twelve rings), twelve markers
     // with their phase overlays, the Sun marker (1562), and the captions:
     // their group, eight retained slots and fourteen measuring elements (23),
-    // and the catalogue stars: their group and 290 retained points (291).
-    stageElements: 4118,
+    // and the catalogue stars: their group and 1,599 retained points (1600).
+    stageElements: 5427,
     cameraCount: 1,
     skyboxFaceCount: 6,
     sunCount: 1,
@@ -112,7 +112,7 @@ try {
     captionCount: 8,
     captionMeasureCount: 14,
     retainedCaptionCount: 8,
-    retainedStarCount: 290,
+    retainedStarCount: 1599,
   });
   const startupMercuryResources = await page.evaluate(() =>
     performance.getEntriesByType("resource")
@@ -143,7 +143,7 @@ try {
     interiorLeaves: document.querySelectorAll(".mercury-cutaway s").length,
     viewBank: { interiorMounted: window.__mercury.dom.interiorMounted, retainedInteriorNodeCount: window.__mercury.dom.retainedInteriorNodeCount },
   })), {
-    elements: 4118,
+    elements: 5427,
     interiorLeaves: 446,
     viewBank: {
       interiorMounted: true,
@@ -655,7 +655,7 @@ try {
   for (const sample of lodLadder) {
     assert.equal(sample.datasetLod, sample.stage);
     assert.equal(sample.stable, true);
-    assert.equal(sample.elements, 4118);
+    assert.equal(sample.elements, 5427);
     assert.equal(sample.materialFrame, lodLadder[0].materialFrame);
     assert.ok(Math.abs(sample.billboardStyleOpacity - sample.billboardOpacity) <
       1e-6);
@@ -723,7 +723,7 @@ try {
     `far bound ${farSystem.maximumDistanceAu} au`);
   assert.ok(farSystem.wheelNotches > 20 && farSystem.wheelNotches < 40);
   assert.equal(farSystem.stable, true);
-  assert.equal(farSystem.elements, 4118);
+  assert.equal(farSystem.elements, 5427);
 
   // Back in close: the row cache resumes on the retained rows.
   assert.equal(await page.evaluate(() => {
@@ -739,7 +739,7 @@ try {
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
     stage.childElementCount), baseline.stageChildren);
   assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-    stage.querySelectorAll("*").length), 4118);
+    stage.querySelectorAll("*").length), 5427);
   assert.equal(await page.evaluate(() =>
     window.__mercury.assertStableDomIdentity()), true);
   assert.deepEqual(externalRequests, []);

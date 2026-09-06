@@ -6,7 +6,6 @@ const steps = Object.freeze([
   ["prepare-panel-content.mjs"],
   ["prepare-assets.mjs"],
   ["prepare-starfield.mjs"],
-  ["prepare-catalog-sky.mjs"],
   ["prepare-sky-sun.mjs"],
   ["prepare-lenses.mjs"],
   ["prepare-charts.mjs"],
