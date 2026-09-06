@@ -1,0 +1,23 @@
+.example-stage > :is(.ganymede-sun-camera, .ganymede-camera, .ganymede-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+.ganymede-sun-camera, .ganymede-camera { z-index: 1; transform-style: preserve-3d; }
+.ganymede-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.ganymede-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+.ganymede-body > s {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; transform-origin: 0 0; backface-visibility: hidden;
+  background-image: var(--ganymede-surface-image); background-repeat: no-repeat;
+}
+.ganymede-body > .ganymede-polar { background-image: var(--ganymede-poles-image); }
+.ganymede-material-root { z-index: 3; --ganymede-billboard-opacity: 0; }
+.ganymede-material, .ganymede-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+.ganymede-material { background-repeat: no-repeat; transform: rotate(var(--ganymede-light-roll, 0deg)); }
+.ganymede-billboard { border-radius: 50%; background-color: var(--ganymede-billboard-color); opacity: var(--ganymede-billboard-opacity); }
+.planet-stage[data-lod="billboard"] .ganymede-scene, .planet-stage[data-lod="marker"] .ganymede-scene { visibility: hidden; }
+.planet-stage[data-lod="marker"] .ganymede-billboard { opacity: 0; }
+
+.planet-stage.ganymede-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

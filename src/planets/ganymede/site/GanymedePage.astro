@@ -1,0 +1,12 @@
+---
+import "../runtime/styles.css";
+import "../../../../site/planet-shell.css";
+import PlanetLayout from "../../../../site/layouts/PlanetLayout.astro";
+import GanymedeHead from "./GanymedeHead.astro";
+import GanymedePanel from "./GanymedePanel.astro";
+---
+
+<PlanetLayout objectId="ganymede">
+  <GanymedeHead slot="planet-head" />
+  <GanymedePanel slot="planet-ui" />
+</PlanetLayout>

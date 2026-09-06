@@ -1,0 +1,68 @@
+Object = IsisCube
+  Object = Core
+    StartByte = 138942
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 11520
+      Lines   = 5760
+      Bands   = 3
+    End_Group
+
+    Group = Pixels
+      Type       = UnsignedByte
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+    ^Core     = Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif
+  End_Object
+
+  Group = Archive
+    DataSetId               = Ganymede_Voyager_GalileoSSI_global_ClrMosaic180_-
+                              1435m
+    ProducerInstitutionName = "Astrogeology Science Center"
+    ProducerId              = Astrogeology
+    ProducerFullName        = USGS
+    ProductId               = n/a
+    ProductVersionId        = n/a
+    InstrumentHostName      = n/a
+    InstrumentName          = n/a
+    InstrumentId            = n/a
+    TargetName              = Ganymede
+    MissionPhaseName        = n/a
+  End_Group
+
+  Group = Mapping
+    ProjectionName     = Equirectangular
+    CenterLongitude    = 180.0
+    TargetName         = Ganymede
+    EquatorialRadius   = 2632345.0 <meters>
+    PolarRadius        = 2632345.0 <meters>
+    LatitudeType       = Planetocentric
+    LongitudeDirection = PositiveEast
+    LongitudeDomain    = 360
+    MinimumLatitude    = -90.0
+    MaximumLatitude    = 90.0
+    MinimumLongitude   = 0.0
+    MaximumLongitude   = 360.0
+    UpperLeftCornerX   = -8269755.62166499998 <meters>
+    UpperLeftCornerY   = 4134877.81083300011 <meters>
+    PixelResolution    = 1435.72146199999997 <meters/pixel>
+    Scale              = 32.0 <pixel/degree>
+    CenterLatitude     = 0.0
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1899             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 1525
+  ^History  = Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.History.IsisC-
+              ube
+End_Object
+End

@@ -53,10 +53,25 @@ export const OBJECTS = defineObjects([
       );
       return mountJupiterClient;
     }),
+  object("io", "Io", "satellite", "#c6ac65", 5.2,
+    "Explore Io in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s volcanic moon and its orbit around Jupiter.", async () => {
+      const { mountIoClient } = await import("../src/planets/io/runtime/client.mjs");
+      return mountIoClient;
+    }),
   object("europa", "Europa", "satellite", "#b5b3a9", 5.2,
     "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s fractured icy moon and its orbit around Jupiter.", async () => {
       const { mountEuropaClient } = await import("../src/planets/europa/runtime/client.mjs");
       return mountEuropaClient;
+    }),
+  object("ganymede", "Ganymede", "satellite", "#a49a83", 5.2,
+    "Explore Ganymede in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s largest moon and its grooved icy surface.", async () => {
+      const { mountGanymedeClient } = await import("../src/planets/ganymede/runtime/client.mjs");
+      return mountGanymedeClient;
+    }),
+  object("callisto", "Callisto", "satellite", "#8b8177", 5.2,
+    "Explore Callisto in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s heavily cratered moon and its ancient surface.", async () => {
+      const { mountCallistoClient } = await import("../src/planets/callisto/runtime/client.mjs");
+      return mountCallistoClient;
     }),
   object("saturn", "Saturn", "planet", "#d2b68c", 9.58,
     "Explore Saturn in 3D with cssEarth. Orbit its spectacular rings, discover its moons, and browse scientific facts about this gas giant.", async () => {
