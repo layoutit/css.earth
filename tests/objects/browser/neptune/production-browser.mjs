@@ -84,7 +84,7 @@ try {
         };
       });
       assert.deepEqual(initial, {
-        title: "Neptune in 3D | cssEarth",
+        title: "Neptune | cssEarth",
         stageChildren: 1,
         stageElements: 809,
         bodyLeafCount: 724,

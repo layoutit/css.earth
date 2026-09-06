@@ -84,7 +84,7 @@ try {
             .length,
         };
       });
-      assert.equal(initial.title, "Earth in 3D | cssEarth");
+      assert.equal(initial.title, "Earth | cssEarth");
       assert.equal(initial.retainedLeaves,
         PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount);
       assert.equal(initial.canvasCount, 0);
