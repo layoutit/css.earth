@@ -8,7 +8,7 @@ import {
   ASTRONOMICAL_UNIT_KILOMETERS,
   requireBodyFixedOrbitNormal,
   requireBodyFixedSunDirection,
-  requireHeliocentricOrbit,
+  requireBodyOrbit,
 } from "./solar-geometry.mjs";
 import {
   NOMINAL_SOLAR_RADIUS_KILOMETERS,
@@ -87,7 +87,7 @@ export function prepareHeliocentricView({
         "products to survive the change of frame.",
     );
   }
-  const orbit = requireHeliocentricOrbit(bodyId);
+  const orbit = requireBodyOrbit(bodyId);
   const kilometersPerUnit = bodyRadiusKilometers / bodyRadiusUnits;
   const unitsPerAu = ASTRONOMICAL_UNIT_KILOMETERS / kilometersPerUnit;
   const sunDirection = normalize(presentationFrame.toPresentation(
@@ -110,9 +110,11 @@ export function prepareHeliocentricView({
     Math.sqrt(1 - eccentricity * eccentricity);
   const sunDistanceUnits = orbit.heliocentricDistanceAu * unitsPerAu;
   const sunPosition = scale(sunDirection, sunDistanceUnits);
-  // The Sun sits at a focus; the centre is a·e from it, away from perihelion.
+  // The orbit focus can be a parent planet while the Sun keeps its own position.
+  const focus = orbit.centerPositionAu
+    ? scale(presentationFrame.toPresentation(orbit.centerPositionAu), unitsPerAu) : sunPosition;
   const center = add(
-    sunPosition,
+    focus,
     scale(perihelionDirection, -semiMajorAxisUnits * eccentricity),
   );
   const majorAxis = scale(perihelionDirection, semiMajorAxisUnits);
@@ -186,6 +188,8 @@ export function prepareHeliocentricView({
       }),
     }),
     orbit: Object.freeze({
+      centerBodyId: orbit.centerBodyId ?? "sun",
+      focus: Object.freeze(focus.map(round)),
       semiMajorAxisAu: orbit.semiMajorAxisAu,
       semiMajorAxisUnits,
       semiMinorAxisUnits,

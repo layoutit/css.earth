@@ -10,7 +10,7 @@ import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from "../../src/platform/direct
 import {
   ASTRONOMICAL_UNIT_KILOMETERS, SOLAR_GEOMETRY_EPOCH_JD_TT,
   SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection,
-  requireBodyFixedToIcrf, requireHeliocentricOrbit,
+  requireBodyFixedToIcrf, requireBodyOrbit,
 } from "../../src/platform/solar-geometry.mjs";
 
 const RESPONSIVE_FIT = Object.freeze({
@@ -119,7 +119,7 @@ export async function prepareSolarSystemScene({
 
 function prepareWorldFrame(bodyId, frame, bodyRadiusUnits, bodyRadiusKilometers) {
   const bodyToIcrf = requireBodyFixedToIcrf(bodyId), sun = requireBodyFixedSunDirection(bodyId);
-  const distanceM = requireHeliocentricOrbit(bodyId).heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS * 1000;
+  const distanceM = requireBodyOrbit(bodyId).heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS * 1000;
   const multiply = vector => [0, 1, 2].map(row => bodyToIcrf[row * 3] * vector[0] +
     bodyToIcrf[row * 3 + 1] * vector[1] + bodyToIcrf[row * 3 + 2] * vector[2]);
   const columns = frame.basis.map(multiply);

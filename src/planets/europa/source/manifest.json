@@ -1,0 +1,663 @@
+{
+  "schema": "csseuropa-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "usgs-voyager-galileo-global-500m",
+      "path": "europa-global-500m.tif",
+      "expectedBytes": 192777263,
+      "expectedSha256": "a323f0c9ccb47d5af9902ea8297fe81f9a9708795645b80801f103c3f7c9a624",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
+      "credit": "NASA/JPL/USGS",
+      "license": "Public USGS scientific imagery; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Download the published GeoTIFF and verify its pinned bytes before preparation.",
+      "redistribution": "Reacquirable source binary excluded from Git; prepared textures retain credits.",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 19631,
+      "height": 9816,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1562089.9658
+      },
+      "coverage": "GeoTIFF GDAL_NODATA=0. Missing pixels receive the shared gray cartographic grid. Published observed shading and resolution differences are preserved."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Run node src/planets/europa/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Pinned shared shell title font.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "path": "system/jupiter-hubble.png",
+      "expectedBytes": 1166501,
+      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
+      "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
+      "credit": "NASA, ESA, STScI, and Amy Simon",
+      "license": "NASA media usage guidelines and credited partner rights",
+      "id": "jupiter-hubble-parent",
+      "bodyId": "jupiter",
+      "consumers": [
+        "parent-marker"
+      ],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
+      "redistribution": "Credited prepared observational image; source binary excluded from Git."
+    },
+    {
+      "id": "usgs-s0349875152.equi",
+      "path": "color/s0349875152.equi.photr.tif",
+      "expectedBytes": 7287787,
+      "expectedSha256": "3b44296107ab39a8ba575fc83248ae127d39693f4ce2e6889aff29e8eddcb88a",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "G1ESGLOBAL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "1996-06-28T01:43:39.354000Z",
+      "width": 3248,
+      "height": 1317
+    },
+    {
+      "id": "usgs-s0349875178.equi",
+      "path": "color/s0349875178.equi.photr.tif",
+      "expectedBytes": 7406122,
+      "expectedSha256": "b03385ff0a4eb81bb5ab6755b3c3aa2054a7c85570db78cc7ff6818e1f6a84f9",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875178/s0349875178.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "G1ESGLOBAL01",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.404,
+      "observedAt": "1996-06-28T01:43:56.796000Z",
+      "width": 3196,
+      "height": 1321
+    },
+    {
+      "id": "usgs-s0349875200.equi",
+      "path": "color/s0349875200.equi.photr.tif",
+      "expectedBytes": 7169272,
+      "expectedSha256": "8f0799310d32a88c91aca062f21591435717044ba44c267bb79361962136feee",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875200/s0349875200.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "G1ESGLOBAL01",
+      "filter": "IR-7560",
+      "wavelengthMicrometers": 0.756,
+      "observedAt": "1996-06-28T01:44:05.463000Z",
+      "width": 3356,
+      "height": 1320
+    },
+    {
+      "id": "usgs-s0426234600.equi",
+      "path": "color/s0426234600.equi.photr.tif",
+      "expectedBytes": 3657909,
+      "expectedSha256": "0d8988fa285cc918da5d896b4606bd2da5e5deb3fe23921656552bef14943a71",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234600/s0426234600.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "12ESGLOCOL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "1997-12-16T05:41:58.839000Z",
+      "width": 1766,
+      "height": 1419
+    },
+    {
+      "id": "usgs-s0426234626.equi",
+      "path": "color/s0426234626.equi.photr.tif",
+      "expectedBytes": 3664881,
+      "expectedSha256": "4d687142eefa0d10f95c1ff4559df295f4e0051fc6ee8d17f1bc0e30bde6c806",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234626/s0426234626.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "12ESGLOCOL01",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.404,
+      "observedAt": "1997-12-16T05:42:16.339000Z",
+      "width": 1760,
+      "height": 1421
+    },
+    {
+      "id": "usgs-s0426234639.equi",
+      "path": "color/s0426234639.equi.photr.tif",
+      "expectedBytes": 3534165,
+      "expectedSha256": "b7e528a4269e9fc8a9b633f5620dbf96cd899c2395c0e8a8cdf787ae3c06230a",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234639/s0426234639.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "12ESGLOCOL01",
+      "filter": "IR-7560",
+      "wavelengthMicrometers": 0.756,
+      "observedAt": "1997-12-16T05:42:25.006000Z",
+      "width": 1772,
+      "height": 1449
+    },
+    {
+      "id": "usgs-s0426234678.equi",
+      "path": "color/s0426234678.equi.photr.tif",
+      "expectedBytes": 1390887,
+      "expectedSha256": "a6872d1ae78f572cf64050ec6b74c1092e9eb5c70c25bca322252535c0a77006",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234678/s0426234678.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "12ESGLOCOL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "1997-12-16T05:42:50.839000Z",
+      "width": 1010,
+      "height": 844
+    },
+    {
+      "id": "usgs-s0440984852.equi",
+      "path": "color/s0440984852.equi.photr.tif",
+      "expectedBytes": 7107148,
+      "expectedSha256": "f6d2610583d7ee0895f67cea72c8ef8e8ba44e4db215e389dde7bc1b0b13077a",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984852/s0440984852.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "1998-03-29T19:23:22.830000Z",
+      "width": 3289,
+      "height": 1332
+    },
+    {
+      "id": "usgs-s0440984865.equi",
+      "path": "color/s0440984865.equi.photr.tif",
+      "expectedBytes": 3324947,
+      "expectedSha256": "c0744bed1cb9c059dc4033634109bb9c47904a59f0b60eda03c3f176a823da30",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "1998-03-29T19:23:31.497000Z",
+      "width": 900,
+      "height": 833
+    },
+    {
+      "id": "usgs-s0440984878.equi",
+      "path": "color/s0440984878.equi.photr.tif",
+      "expectedBytes": 7607954,
+      "expectedSha256": "7897b822a9be1c518341eb6e6eafc40d19f51eb05041764fae5270c845b91d07",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984878/s0440984878.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "1998-03-29T19:23:40.164000Z",
+      "width": 3324,
+      "height": 1325
+    },
+    {
+      "id": "usgs-s0440984901_00.equi",
+      "path": "color/s0440984901_00.equi.photr.tif",
+      "expectedBytes": 4278616,
+      "expectedSha256": "435576dcf72b93380df88d2e09e528cc3a640228c53ddfcb18a16804244df933",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "1998-03-29T19:23:48.830000Z",
+      "width": 1186,
+      "height": 994
+    },
+    {
+      "id": "usgs-s0440984914_13.equi",
+      "path": "color/s0440984914_13.equi.photr.tif",
+      "expectedBytes": 5048470,
+      "expectedSha256": "9b5b2069c177f81792ee7b46c88f82546475eb85d9d157245f8af88a000a3b93",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984914_13/s0440984914_13.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "1998-03-29T19:23:57.497000Z",
+      "width": 1247,
+      "height": 847
+    },
+    {
+      "id": "usgs-s0440984926.equi",
+      "path": "color/s0440984926.equi.photr.tif",
+      "expectedBytes": 5870772,
+      "expectedSha256": "0d2442d2ccc906e6790e64291b602dff0e983b0f9eec23f827b594926347bc98",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.404,
+      "observedAt": "1998-03-29T19:24:06.230000Z",
+      "width": 3305,
+      "height": 1337
+    },
+    {
+      "id": "usgs-s0440984939.equi",
+      "path": "color/s0440984939.equi.photr.tif",
+      "expectedBytes": 2571253,
+      "expectedSha256": "4c48daf581fbab988311b3258209fd143fec5fa1d09951d7bd121aedeb4e4003",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984939/s0440984939.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.404,
+      "observedAt": "1998-03-29T19:24:14.897000Z",
+      "width": 903,
+      "height": 834
+    },
+    {
+      "id": "usgs-s0440984952.equi",
+      "path": "color/s0440984952.equi.photr.tif",
+      "expectedBytes": 5551570,
+      "expectedSha256": "5623a2fce8ff8eec29b9b1ec522b186871256fd55cda8c23a272e2c593504181",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.404,
+      "observedAt": "1998-03-29T19:24:23.564000Z",
+      "width": 3314,
+      "height": 1324
+    },
+    {
+      "id": "usgs-s0440984965.equi",
+      "path": "color/s0440984965.equi.photr.tif",
+      "expectedBytes": 4115365,
+      "expectedSha256": "03bbda32b885b93bf860f6de9c748668fd0e1da7c5f30ff6ff51f03d17f1cf61",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984965/s0440984965.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.404,
+      "observedAt": "1998-03-29T19:24:32.230000Z",
+      "width": 1153,
+      "height": 977
+    },
+    {
+      "id": "usgs-s0440984978.equi",
+      "path": "color/s0440984978.equi.photr.tif",
+      "expectedBytes": 5191247,
+      "expectedSha256": "6e92d6d3e0d281fddef59f7b15be45da38d95192087b5f7d2777bef3cbe58027",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.404,
+      "observedAt": "1998-03-29T19:24:40.897000Z",
+      "width": 1264,
+      "height": 847
+    },
+    {
+      "id": "usgs-s0440985113.equi",
+      "path": "color/s0440985113.equi.photr.tif",
+      "expectedBytes": 5017172,
+      "expectedSha256": "e92576a0b9e6196bd97b000f1ffa0e0fb73c27d8ec35feb464127d4341718bd3",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985113/s0440985113.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "IR-7560",
+      "wavelengthMicrometers": 0.756,
+      "observedAt": "1998-03-29T19:25:58.897000Z",
+      "width": 1287,
+      "height": 1082
+    },
+    {
+      "id": "usgs-s0440985126.equi",
+      "path": "color/s0440985126.equi.photr.tif",
+      "expectedBytes": 2764409,
+      "expectedSha256": "78c8a8af4cea5a266dde8cee21f728799c2af6f65268b49692b04476777eff59",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "IR-7560",
+      "wavelengthMicrometers": 0.756,
+      "observedAt": "1998-03-29T19:26:07.564000Z",
+      "width": 910,
+      "height": 839
+    },
+    {
+      "id": "usgs-s0440985139.equi",
+      "path": "color/s0440985139.equi.photr.tif",
+      "expectedBytes": 6152531,
+      "expectedSha256": "95eb88fc84a49a91d2bd54faf1d6e5d964b5651a3c065a2e92fe87be03b4de67",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985139/s0440985139.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "14ESGLOCOL01",
+      "filter": "IR-7560",
+      "wavelengthMicrometers": 0.756,
+      "observedAt": "1998-03-29T19:26:16.230000Z",
+      "width": 3316,
+      "height": 1322
+    },
+    {
+      "id": "usgs-s0552809300.equi",
+      "path": "color/s0552809300.equi.photr.tif",
+      "expectedBytes": 363290,
+      "expectedSha256": "8b3f25718872b891a8fa4586db6fe1f6cabf4540c0a6f2e15cb5709447830e43",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0552809300/s0552809300.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "28ESGLOCOL01",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.559,
+      "observedAt": "2000-05-22T23:52:05.277000Z",
+      "width": 602,
+      "height": 349
+    },
+    {
+      "id": "usgs-s0552809307.equi",
+      "path": "color/s0552809307.equi.photr.tif",
+      "expectedBytes": 368348,
+      "expectedSha256": "8211b4b10098e417a713d2cd43196c0e8c75827baf90209fda0dcb395559be99",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0552809307/s0552809307.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "28ESGLOCOL01",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.404,
+      "observedAt": "2000-05-22T23:52:14.019000Z",
+      "width": 601,
+      "height": 349
+    },
+    {
+      "id": "usgs-s0552809352.equi",
+      "path": "color/s0552809352.equi.photr.tif",
+      "expectedBytes": 351319,
+      "expectedSha256": "9b15b137f4b4e30956930c7aca9dfdc97bb64c3330faeefb59161d5272cc53e7",
+      "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0552809352/s0552809352.equi.photr.tif",
+      "credit": "NASA/JPL/USGS; Bland, Weller et al. (2021)",
+      "license": "CC0-1.0",
+      "licenseEvidence": [
+        "https://stac.astrogeology.usgs.gov/api/collections/galileo_usgs_photogrammetrically_controlled_observations"
+      ],
+      "acquisition": "Download the USGS radiometrically calibrated, controlled, photometrically trimmed GeoTIFF.",
+      "redistribution": "CC0 mission-data product; original source excluded from Git; retain scientific attribution.",
+      "consumers": [
+        "color"
+      ],
+      "observation": "28ESGLOCOL01",
+      "filter": "IR-7560",
+      "wavelengthMicrometers": 0.756,
+      "observedAt": "2000-05-22T23:52:39.969000Z",
+      "width": 601,
+      "height": 345
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "path": "presentation/title-mark.mjs",
+      "expectedBytes": 3644,
+      "expectedSha256": "2feb6df1c5af65b2ad70bc4069247947f61bcc71d9077d4c8bb1dcc87a077fdc",
+      "generator": "src/planets/europa/tools/prepare-content.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "wms-capabilities.xml",
+      "expectedBytes": 6425,
+      "expectedSha256": "31ef39932ea82df444f3a42e69842b438ce51f0226ff4298655d970a37607247",
+      "purpose": "USGS Europa WMS metadata captured 2026-09-06."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 849,
+      "expectedSha256": "ace986c73d37dcb3090921774c6c416ac33ef5dd8da01a313152f385edd2f999",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2182,
+      "expectedSha256": "10237536f11e05ab529373bb4679830e990b4cafdf4759f76c84ed13a8b9c0cc",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 596,
+      "expectedSha256": "1b8340b842b5ac709d95a9098003fa3c3593f960bb47745868f4f3ba838765e6",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "color/collection.json",
+      "expectedBytes": 3087,
+      "expectedSha256": "a281b3c60701b472dd24f49c2d6380a2270a2c74c50cd7ffcd73d3cb9912cd70",
+      "purpose": "USGS STAC collection metadata, CC0 license, and provenance captured 2026-09-06."
+    }
+  ]
+}

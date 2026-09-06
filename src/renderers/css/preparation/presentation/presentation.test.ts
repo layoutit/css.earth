@@ -27,8 +27,9 @@ describe('retained presentation compiler compatibility', () => {
     expect(createHash('sha256').update(JSON.stringify(canonical(prepared))).digest('hex')).toBe(expectedDigests[id]);
   }, 30_000);
 });
-// Frozen before migration. A simultaneous edit to the compiler and its output cannot hide drift.
+// Updated for Europa’s explicit orbit centre and 13-entry navigation atlas.
+// Other presentation fields remain equal to the PR8 baseline.
 const expectedDigests: Record<string, string> = {
-  mercury: '0eae47e755c23b0792daa7533b9dcfd17a09c9884de3fa3b03d866d368c0fc4e',
-  venus: '0e5c3944e53f4c049a4b8e9589641ad4c25f8a0d3def61d17e4a7458d6bf022a',
+  mercury: 'e2144ac1364b7491ff8380e9651f59453957339c2f99a6f450b4cde47f89ffd9',
+  venus: '8049b15a1fe2bb6172e1d58c286fb703d8e01a6b527b6959b542dd58347b02c1',
 };
