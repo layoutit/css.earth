@@ -401,7 +401,7 @@ test("uses only prepared material addresses for orbit-responsive lighting", asyn
 test("warms the prepared material CSS raster before declaring ready", async () => {
   const [client, css, head] = await Promise.all([
     readFile(new URL("../runtime/definition.mjs", import.meta.url), "utf8"),
-    readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
+    readFile(new URL("../../../../site/site.css", import.meta.url), "utf8"),
     readFile(new URL("../site/SaturnHead.astro", import.meta.url), "utf8"),
   ]);
   const runtime = await readFile(new URL("../../../platform/object-runtime.mjs", import.meta.url), "utf8");
@@ -414,9 +414,9 @@ test("warms the prepared material CSS raster before declaring ready", async () =
   assert.doesNotMatch(client,
     /dataset\.ready|classList\.(?:add|remove)\("(?:loading|ready|error)"/u);
   assert.match(css,
-    /html:not\(\[data-ready="true"\]\) \.example-stage\s*\{[\s\S]*?opacity:\s*0\.001/);
+    /html:not\(\[data-ready="true"\]\) \.planet-stage\s*\{[\s\S]*?opacity:\s*0\.001/);
   assert.doesNotMatch(css,
-    /html:not\(\[data-ready="true"\]\) \.example-stage\s*\{[\s\S]*?opacity:\s*0(?:;|\s*\})/);
+    /html:not\(\[data-ready="true"\]\) \.planet-stage\s*\{[\s\S]*?opacity:\s*0(?:;|\s*\})/);
 });
 
 test("uses the shared prepared cubic starfield and independent Sun", async () => {

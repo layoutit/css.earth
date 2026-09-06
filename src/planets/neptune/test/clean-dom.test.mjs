@@ -1,3 +1,4 @@
+import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-schema.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -8,7 +9,7 @@ test("keeps Neptune on retained DOM and prepared runtime transport", async () =>
     readFile(new URL("../runtime/styles.css", import.meta.url), "utf8"),
     readFile(new URL("../runtime/preparedPresentation.mjs", import.meta.url), "utf8"),
   ]);
-  assert.match(presentation, /cssearth-prepared-presentation@2/u);
+  assert.equal((await import("../runtime/preparedPresentation.mjs")).PREPARED_PRESENTATION.schema, PREPARED_PRESENTATION_SCHEMA);
   assert.match(presentation, /neptune-fixed-material/u);
   assert.doesNotMatch(client, /neptune-material-composite/u);
   assert.doesNotMatch(client, /mountPreparedOrbitGuide/u);
