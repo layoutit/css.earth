@@ -117,7 +117,7 @@ try {
       await select("Tokyo", "1850147");
       assert.equal(await noise.isVisible(), false);
       assert.equal(await page.evaluate(() => window.__earth.selectLens("buenos-aires-noise")), false);
-      assert.equal(await page.locator('[data-lens-option]:not([hidden])').count(), 1);
+      assert.deepEqual(await page.locator('[data-lens-option]:not([hidden]) button[name="lens"]').evaluateAll(buttons => buttons.map(button => button.value)), ["normal", "worldcover-land-cover"]);
       await settlePages("city"); await capture("05-tokyo");
       await page.locator('[data-entity-parent="earth"]').click();
       await page.waitForFunction(() => document.querySelector("[data-entity-card]").dataset.entityId === "earth"); await flight();
@@ -165,7 +165,7 @@ try {
       await normal.click();
       await context.route("**/geographic-lens-*.json",route=>route.fulfill({status:503,body:"Temporarily unavailable"}));
       await noise.click(); await page.waitForFunction(()=>window.__earth.runtime.geographicLens().status==="error");
-      assert.match(await page.locator('[data-geographic-option]:not([hidden]) [role="status"]').innerText(),/retry/);
+      assert.match(await page.locator('[data-lens-legend="buenos-aires-noise"] [role="status"]').innerText(),/retry/);
       assert.equal(await page.evaluate(()=>window.__earth.runtime.pages().geographic.retained.length),0);
       await capture("08-recoverable-lens-failure");
       await context.unroute("**/geographic-lens-*.json"); await noise.click(); await settleNoise();

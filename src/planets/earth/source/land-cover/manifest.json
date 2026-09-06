@@ -11,7 +11,7 @@
   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
   "attribution": "© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
   "retrievedAt": "2026-09-06T06:24:11.934Z",
-  "qualification": "Categorical RGB visualization of the 2021 land-cover product, not pixel-value analysis or a live observation. Projected service extent is not a promise of valid data everywhere. Transparent pixels and the pinned empty-image sentinel indicate no source classification.",
+  "qualification": "This visualization shows the 2021 land-cover categories. It is not a live observation or a measurement of land-use area. Coverage varies by location; unclassified areas show the base map.",
   "service": {
     "layer": "esa-worldcover-map-10m-2021-v2_map",
     "matrixSet": "webmercator",

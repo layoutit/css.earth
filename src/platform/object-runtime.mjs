@@ -53,11 +53,17 @@ export function createObjectRuntime(definition, services = nativeServices) {
     const selectionListeners = new Set();
     lifetime.onDispose(() => selectionListeners.clear());
     let lastGeographicStatus = null;
+    const geographicStatusKey = () => {
+      const state = geographic?.state();
+      return state ? `${state.id}:${state.status}:${state.resolution}` : "idle";
+    };
+    function publishControls(state) {
+      lastGeographicStatus = geographicStatusKey();
+      controls?.publish(state);
+    }
     function publishGeographicStatus() {
       if (lifetime.disposed) return;
-      const state = geographic?.state();
-      const key = state ? `${state.id}:${state.status}` : "idle";
-      if (lastGeographicStatus !== key) { lastGeographicStatus = key; controls?.publish(); }
+      if (lastGeographicStatus !== geographicStatusKey()) publishControls();
     }
     const notifySelection = () => { for(const listener of selectionListeners) listener(); };
     const lensState = () => {
@@ -100,7 +106,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       ready, lifetime, selectLens: id => dispatchAction({ kind: "lens", id }),
       retainLens: entity => geographic?.canRetain(entity) ?? false,
       navigate: camera => { stopMotion(); alignMotionFrame(); return orbit.flyToState(camera); },
-      onChange: () => { geographic?.reconcileEntity(); controls?.publish(); notifySelection(); },
+      onChange: () => { geographic?.reconcileEntity(); publishControls(); notifySelection(); },
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: orbit.initialResponsiveZoom() }),
     }) : null;
@@ -175,7 +181,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
       orbit.rebaseScene(before.multiply(frame().inverse()));
     }
     function publishSelection(state) {
-      controls.publish(state);
+      publishControls(state);
       if (!state.pending && state.committed) { notifySelection(); notifyView(); }
       if (!state.committed || state.pending || !orbit || state.committed.lensId === navigatedLens) return;
       navigatedLens = state.committed.lensId;
@@ -228,7 +234,7 @@ export function createObjectRuntime(definition, services = nativeServices) {
         if (layer.geographic) {
           geographic = createGeographicLensRuntime({ pages, capacity: layer.plan, surface: mounted.observationSurface, objectId: definition.id, getEntity: selectedEntity,
             selectBase: id => id === definition.destinations.defaultLens ? selection.dispatch({kind:"lens",id}) : Promise.resolve(false),
-            onChange: () => { syncPageUnderlays(); controls?.publish(); notifySelection(); } });
+            onChange: () => { syncPageUnderlays(); publishControls(); notifySelection(); } });
           context.own(() => geographic.destroy());
           pages.replacePlan(null);
         } else pages.setLens({ id: initialSelection.lensId });

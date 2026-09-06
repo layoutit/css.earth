@@ -31,7 +31,9 @@ export function createGeographicLensBinding(root, capacity = 0) {
         slot.legend.hidden = !active;
         const content = active ? state.content : null;
         const status = !active ? "" : state.status === "error" ? "This lens could not load. Select it to retry." :
-          state.status === "loading" ? "Loading lens…" : state.status === "no-coverage" ? "No source data in this view. Zoom in or return to the place." : "";
+          state.status === "loading" ? "Loading lens…" : state.status === "no-coverage" ?
+            content?.overview ? "No detailed source data in this view. The overview shows available coverage." : "No source data in this view. Zoom in or return to the place." :
+          state.resolution === "overview" ? "Showing overview. Zoom in for available detail." : "";
         if (slot.status.textContent !== status) slot.status.textContent = status;
         slot.status.hidden = !status;
         if (content === slot.content) continue;

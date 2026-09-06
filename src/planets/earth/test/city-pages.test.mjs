@@ -345,17 +345,23 @@ test("metadata residency releases, cancels and rejects corrupt directories", asy
   assert.equal(index.stats().residentDirectories,0);
   assert.equal(index.nodes().size,plan.roots.length);
   index.destroy();
-  const corrupt = createCityIndex(plan,()=>{},async()=>new Response(Buffer.alloc(bytes.length)));
+  const failedChanges = [];
+  const corrupt = createCityIndex(plan,()=>failedChanges.push(corrupt.stats()),async()=>new Response(Buffer.alloc(bytes.length)));
   corrupt.update([ref]);await wait(corrupt);
   assert.match(corrupt.stats().errors[0],/hash mismatch/);
+  assert.equal(failedChanges.at(-1).activeLoads, 0);
+  assert.match(failedChanges.at(-1).errors[0], /hash mismatch/);
   corrupt.update([ref]);assert.equal(corrupt.stats().requests,1);
   corrupt.destroy();
-  const cancelled = createCityIndex(plan,()=>{},(_url,{signal})=>new Promise((_resolve,reject)=>
+  const cancelledChanges = [];
+  const cancelled = createCityIndex(plan,()=>cancelledChanges.push(cancelled.stats()),(_url,{signal})=>new Promise((_resolve,reject)=>
     signal.addEventListener("abort",()=>reject(new Error("cancelled")),{once:true})));
   cancelled.update([ref]);cancelled.update([]);await wait(cancelled);
   assert.equal(cancelled.stats().aborts,1);
   assert.deepEqual(cancelled.stats().errors,[]);
   assert.equal(cancelled.stats().residentDirectories,0);
+  assert.equal(cancelledChanges.at(-1).activeLoads, 0);
+  assert.equal(cancelledChanges.at(-1).residentDirectories, 0);
   cancelled.destroy();
 });
 

@@ -105,13 +105,15 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
       if (destroyed || controller.signal.aborted || entries.get(preparedReferenceKey(ref)) !== entry) return;
       entry.data = data;
       rebuild();
-      changed();
     } catch (error) {
       if (!destroyed && !controller.signal.aborted) errors = [...errors.slice(-7), error.message];
     } finally {
       entry.controller = null;
       activeLoads--;
       pump();
+      // Cancellation and failure settle loading too. Notify after accounting
+      // for the finished request so the card cannot retain a loading status.
+      if (!destroyed) changed();
     }
   }
   return {
