@@ -32,11 +32,12 @@ export async function prepareEuropaColor({ width, height }) {
     } finally { await file.close(); }
   }
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height).fill(1);
+  const owners = new Uint8Array(width * height);
   const coverage = {};
   // Highest native density wins. Keep boundaries between observations;
   // do not blend across dates, transfer monochrome detail, or synthesize color.
   const ordered = [...groups].sort((a, b) => a[1][0].resolution[0] - b[1][0].resolution[0]);
-  for (const [observation, bands] of ordered) {
+  for (const [observationIndex, [observation, bands]] of ordered.entries()) {
     const channels = ["IR-7560", "GREEN", "VIOLET"].map(filter => bands.filter(band => band.filter === filter));
     if (channels.some(channel => !channel.length)) throw new Error(`Incomplete color observation: ${observation}`);
     let pixels = 0, solidAngle = 0;
@@ -70,6 +71,7 @@ export async function prepareEuropaColor({ width, height }) {
           photometry.correctedPixels++;
         }
         missing[index] = 0;
+        owners[index] = observationIndex + 1;
         pixels++;
         solidAngle += Math.cos(latitude);
         // One fixed display transfer for every band/date. I/F=1 maps to white.
@@ -84,7 +86,8 @@ export async function prepareEuropaColor({ width, height }) {
     coverage[observation] = { pixels, surfacePercent: solidAngle / (width * height * 2 / Math.PI) * 100 };
   }
   for (let i = 0; i < missing.length; i++) if (missing[i] === 2) missing[i] = 1;
-  return { rgb, missing, coverage, photometry, sourceIds: entries.map(entry => entry.id) };
+  return { rgb, missing, owners, observationNames: ordered.map(([name]) => name), coverage, photometry,
+    sourceIds: entries.map(entry => entry.id) };
 }
 
 export function sampleColorBand(band, easting, northing) {
@@ -100,4 +103,38 @@ export function sampleColorBand(band, easting, northing) {
   const dx = px - x, dy = py - y;
   return values[0] * (1 - dx) * (1 - dy) + values[1] * dx * (1 - dy) +
     values[2] * (1 - dx) * dy + values[3] * dx * dy;
+}
+
+// Presentation-only exposure matching against the existing monochrome mosaic.
+// One scalar per observation preserves RGB ratios and internal contrast. The
+// robust boundary fit never copies monochrome detail or blends image pixels.
+export function matchEuropaColorLevels(color, monochrome, { width, height }) {
+  const samples = color.observationNames.map(() => []);
+  const maxima = color.observationNames.map(() => 0);
+  const luminance = (rgb, i) => .2126 * rgb[i] + .7152 * rgb[i + 1] + .0722 * rgb[i + 2];
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const i = y * width + x, owner = color.owners[i];
+    if (!owner) continue;
+    const c = i * 3;
+    maxima[owner - 1] = Math.max(maxima[owner - 1], color.rgb[c], color.rgb[c + 1], color.rgb[c + 2]);
+    if (monochrome.missing[i] || y < 4 || y >= height - 4) continue;
+    // Four-texel strip inside each footprint, with longitude wrap. Compare
+    // co-located valid observations; missing-data indicators cannot set levels.
+    if ([i - 4 * width, i + 4 * width, y * width + (x + 4) % width,
+      y * width + (x + width - 4) % width].every(j => color.owners[j] === owner)) continue;
+    const source = luminance(color.rgb, c), reference = luminance(monochrome.rgb, c);
+    if (source > 0 && reference > 0) samples[owner - 1].push(reference / source);
+  }
+  const levels = color.observationNames.map((observation, i) => {
+    const ratios = samples[i].sort((a, b) => a - b);
+    const requestedGain = ratios.length ? ratios[Math.floor(ratios.length / 2)] : 1;
+    return { observation, boundarySamples: ratios.length,
+      gain: Math.min(requestedGain, maxima[i] ? 255 / maxima[i] : 1) };
+  });
+  for (let i = 0; i < color.owners.length; i++) {
+    if (!color.owners[i]) continue;
+    const { gain } = levels[color.owners[i] - 1];
+    for (let c = 0; c < 3; c++) color.rgb[i * 3 + c] = Math.round(color.rgb[i * 3 + c] * gain);
+  }
+  return levels;
 }
