@@ -1,4 +1,5 @@
 import { preparedReferenceKey } from "./prepared-block-transport.mjs";
+import { selectBackingReplacements } from './backing-replacements.mjs';
 export function projectCityPage(page, matrix, scale, viewport) {
   if(page.coverageParts){
     let visible=false,span=0,center=[0,0],distance=Infinity;
@@ -38,7 +39,36 @@ function projectBounds(corners,matrix,scale){
 }
 
 export function selectCityPages(plan, pages, matrix, scale, viewport) {
+  if(plan.backing){
+    const backing=selectFacePages({...plan,roots:plan.backing.roots},pages,matrix,scale,viewport,true);
+    const backingBytes=backing.keys.reduce((sum,key)=>sum+pages.get(key).width*pages.get(key).height*4,0);
+    let fine=viewport.zoom>plan.minimumZoom?selectWmtsTree(plan,pages,matrix,scale,viewport):{keys:[],directories:[],groups:[]};
+    let pieces=backing.keys.length+fine.keys.length;
+    let bytes=backingBytes+fine.keys.reduce((sum,key)=>sum+pages.get(key).width*pages.get(key).height*4,0);
+    const retired=new Map();
+    const candidates=selectBackingReplacements(backing.groups,fine,pages,node=>projectCityPage(node,matrix,scale,viewport).visible);
+    for(const group of candidates){
+      if(group.replacements.length&&pieces<=Math.floor(plan.poolSize/2)&&bytes<=Math.floor(plan.maximumDecodedBytes/2))continue;
+      retired.set(group.key,group);
+      pieces-=group.pages.length;
+      bytes-=group.pages.reduce((sum,key)=>sum+pages.get(key).width*pages.get(key).height*4,0);
+    }
+    if(pieces>Math.floor(plan.poolSize/2)||bytes>Math.floor(plan.maximumDecodedBytes/2)){
+      // An uncertified region still needs backing. Preserve the existing
+      // bounded cut until preparation can prove a complete replacement there.
+      retired.clear();
+      fine=viewport.zoom>plan.minimumZoom?selectWmtsTree({...plan,
+        poolSize:plan.poolSize-backing.keys.length*2,maximumDecodedBytes:plan.maximumDecodedBytes-backingBytes*2},pages,matrix,scale,viewport):fine;
+    }
+    const directories=new Map([...backing.directories,...fine.directories].map(ref=>[preparedReferenceKey(ref),ref]));
+    return {...fine,keys:[...backing.keys,...fine.keys],groups:[...backing.groups.map(group=>({...group,backing:true,...retired.get(group.key)})),...(fine.groups??[])],directories:[...directories.values()],
+      backing:{pieces:backing.keys.length,decodedBytes:backingBytes,retiring:retired.size}};
+  }
   if(plan.topology === "wmts-quadtree@1")return selectWmtsTree(plan,pages,matrix,scale,viewport);
+  return selectFacePages(plan,pages,matrix,scale,viewport);
+}
+
+function selectFacePages(plan, pages, matrix, scale, viewport, grouped=false) {
   const directories = new Map();
   const projected = new Map();
   const inspect = (key) => {
@@ -50,17 +80,18 @@ export function selectCityPages(plan, pages, matrix, scale, viewport) {
   const request = (node) => {
     if (node.directory) directories.set(preparedReferenceKey(node.directory), node.directory);
   };
-  const selected = [];
-  const visit = (key, path = []) => {
+  const selected = [], pending=[];
+  const visit = (key, path = [], lineage=[]) => {
     const entry = inspect(key);
     // Small metadata branches can wait for zoom. An available image must still
     // cover the view: small phones and face-edge crops can be below that cutoff.
     if (!entry.visible || entry.span < 1 || (!entry.node.url && entry.span < 96)) return;
     request(entry.node);
-    if (entry.node.stub) return;
+    entry.lineage=[...lineage,key];
+    if (entry.node.stub) {if(grouped)pending.push({key,lineage:entry.lineage,pages:[],pending:true});return;}
     entry.path = entry.node.directory ? [...path, entry.node.directory] : path;
     if (entry.node.url) selected.push(entry);
-    else for (const child of entry.node.children) visit(child, entry.path);
+    else for (const child of entry.node.children) visit(child, entry.path, entry.lineage);
   };
   for (const root of plan.roots) visit(typeof root === "string" ? root : root.key);
   selected.sort((a, b) => Math.hypot(...a.center) - Math.hypot(...b.center) || a.node.key.localeCompare(b.node.key));
@@ -80,7 +111,7 @@ export function selectCityPages(plan, pages, matrix, scale, viewport) {
     if (!parent) break;
     finished.add(parent.node.key);
     const children = parent.node.children.map(inspect).filter(child => child.visible)
-      .map(child => ({...child, path: child.node.directory ? [...parent.path, child.node.directory] : parent.path}));
+      .map(child => ({...child, lineage:[...parent.lineage,child.node.key], path: child.node.directory ? [...parent.path, child.node.directory] : parent.path}));
     for (const child of children) request(child.node);
     const replacementBytes=selectedBytes-pixelBytes(parent.node)+children.reduce((sum,entry)=>sum+pixelBytes(entry.node),0);
     // Missing metadata or a full pool leaves the parent covering its children.
@@ -93,7 +124,8 @@ export function selectCityPages(plan, pages, matrix, scale, viewport) {
   // the metadata budget is tight. Never prioritize an off-centre branch first.
   const ordered = new Map(selected.flatMap(entry => entry.path.map(ref => [preparedReferenceKey(ref), ref])));
   for (const ref of directories.values()) if (!ordered.has(preparedReferenceKey(ref))) ordered.set(preparedReferenceKey(ref), ref);
-  return { keys: selected.map(({ node }) => node.key), directories: [...ordered.values()] };
+  return { keys: selected.map(({ node }) => node.key), directories: [...ordered.values()],
+    ...(grouped?{groups:[...selected.map(entry=>({key:entry.node.key,lineage:entry.lineage,pages:[entry.node.key]})),...pending]}:{}) };
 }
 
 

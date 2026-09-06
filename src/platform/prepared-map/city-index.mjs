@@ -7,13 +7,15 @@ import { bindPreparedWmtsRaster } from "./wmts-raster-source.mjs";
 // source pixels or image processing is derived in the browser.
 export function createCityIndex(plan, changed, fetchIndex = fetch) {
   const entries = new Map();
-  let nodes = new Map(plan.roots.map(node => [node.key, node]));
+  const roots=[...plan.roots,...(plan.backing?.roots??[])];
+  let nodes = new Map(roots.map(node => [node.key, node]));
   let activeLoads = 0, requests = 0, aborts = 0, destroyed = false, budgetBlocked = 0;
   let errors = [];
   const limits = plan.index;
+  const backingRootBytes=plan.backing?.rootDecodedBytes??0;
   const resolved = new WeakMap();
   const rebuild = () => {
-    nodes = new Map(plan.roots.map(node => [node.key, node]));
+    nodes = new Map(roots.map(node => [node.key, node]));
     for (const entry of entries.values()) {
       for (const node of entry.data?.external ?? []) nodes.set(node.key, node);
     }
@@ -36,7 +38,7 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
   function update(references) {
     if (destroyed) return;
     const accepted = new Map();
-    let bytes = 0;
+    let bytes = backingRootBytes;
     budgetBlocked = 0;
     for (const ref of references) {
       if (accepted.has(preparedReferenceKey(ref))) continue;
@@ -134,8 +136,8 @@ export function createCityIndex(plan, changed, fetchIndex = fetch) {
     stats: () => ({ activeLoads, requests, aborts, budgetBlocked,
       residentDirectories: entries.size, residentNodes: nodes.size,
       reservedEncodedBytes: [...entries.values()].reduce((sum, entry) => sum + entry.ref.bytes, 0),
-      reservedDecodedBytes: [...entries.values()].reduce((sum, entry) => sum + (entry.ref.decodedBytes ?? entry.ref.bytes), 0),
-      rootEncodedBytes: plan.rootDirectory?.bytes ?? 0, rootDecodedBytes: plan.rootDirectory?.decodedBytes ?? 0,
+      reservedDecodedBytes: [...entries.values()].reduce((sum, entry) => sum + (entry.ref.decodedBytes ?? entry.ref.bytes), backingRootBytes),
+      rootEncodedBytes: plan.rootDirectory?.bytes ?? 0, rootDecodedBytes: (plan.rootDirectory?.decodedBytes ?? 0)+backingRootBytes,
       maximumBytes: limits.maximumBytes, maximumDirectories: limits.maximumDirectories,
       errors: [...errors] }),
     destroy() {

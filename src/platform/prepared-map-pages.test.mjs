@@ -124,3 +124,62 @@ test("prepared pages fetch, decode and publish while unrelated metadata is pendi
     }
   }
 });
+
+for(const mode of ['complete','fallback-failure','reversal']) test(`mounted ancestor demand, progressive detail and bounded cleanup (${mode})`, async () => {
+  const f=retainedPresentationFixture({assets:{entries:[]}}),identity=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
+  Object.defineProperty(HTMLElement.prototype,"firstElementChild",{get(){return this.children[0];}});
+  DOMMatrix.prototype.toFloat64Array=()=>new Float64Array(identity);
+  Object.assign(f.stage,{clientWidth:800,clientHeight:600,getBoundingClientRect:()=>({left:0,top:0,width:800,height:600})});
+  const bounds={corners:[[-100,-100,0],[100,-100,0],[100,100,0],[-100,100,0]],normal:[0,0,1]};
+  const keys=['parent','a','b','c','d'],records=keys.flatMap((key,i)=>[
+    {...bounds,key,level:i?6:5,children:i?[]:keys.slice(1),pages:[key+'-image'],maximumCssSpan:i?384:1},
+    {...bounds,key:key+'-image',width:1,height:1,url:'/scenes/earth/'+key+'.webp',frameMatrix:identity.join(','),textureMatrix:identity.join(',')}
+  ]);
+  const body=Buffer.from(JSON.stringify({schema:'cssearth-city-index@1',dataset:'test',nodes:records,external:[]}));
+  const hash=createHash('sha256').update(body).digest('hex');
+  const frames=new Map(),pending=new Map(),requests=[],released=[];let frame=0,pages;
+  const globals={ResizeObserver:class{observe(){}disconnect(){}},MutationObserver:class{observe(){}disconnect(){}},
+    getComputedStyle:()=>({transform:`matrix3d(${identity})`,scale:'1'}),
+    requestAnimationFrame:callback=>{frames.set(++frame,callback);return frame;},cancelAnimationFrame:id=>frames.delete(id),fetch:async()=>new Response(body)};
+  const saved=new Map(Object.keys(globals).map(name=>[name,Object.getOwnPropertyDescriptor(globalThis,name)]));
+  for(const [name,value]of Object.entries(globals))Object.defineProperty(globalThis,name,{configurable:true,writable:true,value});
+  const drain=async()=>{for(let i=0;i<20;i++){const callbacks=[...frames.values()];frames.clear();for(const callback of callbacks)callback();await new Promise(resolve=>setImmediate(resolve));}};
+  try{
+    pages=mountPreparedMapPages({plan:{schema:'cssearth-prepared-map-pages@1',topology:'wmts-quadtree@1',dataset:'test',
+      assetPath:'/scenes/earth/',assetOrigin:'https://earth-assets.lowpoly.cc',poolSize:8,maximumDecodedBytes:32,decodedPageBytes:4,
+      maximumConcurrentLoads:1,minimumZoom:0,rasterScale:1,initialLayer:{frameMatrix:identity.join(','),textureMatrix:identity.join(',')},
+      roots:[{...bounds,key:'parent',level:5,stub:true,directory:{url:`https://earth-assets.lowpoly.cc/scenes/earth/city-index-test-5-0-0-${hash.slice(0,16)}.json`,bytes:body.length,sha256:hash}}],
+      index:{maximumDirectories:1,maximumBytes:8192,maximumDirectoryBytes:8192,maximumConcurrentLoads:1}},
+      carrier:f.stage,system:f.stage,scene:f.stage,camera:f.stage,stage:f.stage,className:'map-page',lensIds:['normal'],own:f.context.own,
+      images:{acquire(page,{signal}){requests.push(page.key);return{ready:new Promise((resolve,reject)=>{
+        const done=()=>resolve('blob:'+page.key);done.reject=reject;pending.set(page.key,done);
+        signal.addEventListener('abort',()=>reject(signal.reason),{once:true});
+      }),release(){released.push(page.key);},invalidate(){}};},stats(){return{};}}});
+    const retained=[...f.stage.children];
+    pages.publish({zoom:1});await drain();
+    assert.deepEqual(requests,['parent-image']);
+    assert.equal(pages.stats().desired.length,4);
+    if(mode==='fallback-failure')pending.get('parent-image').reject(new Error('injected ancestor failure'));
+    else pending.get('parent-image')();
+    await drain();
+    assert.deepEqual(pages.stats().retained.filter(p=>p.published).map(p=>p.key),mode==='fallback-failure'?[]:['parent-image']);
+    assert.deepEqual(requests,['parent-image','a-image']);
+    if(mode==='reversal'){
+      pages.publish({zoom:0});await drain();
+      assert.deepEqual(pages.stats().retained,[]);assert.equal(pages.stats().reservedDecodedBytes,0);
+      assert.equal(pages.stats().activeLoads,0);assert.deepEqual(requests,['parent-image','a-image']);
+      assert.deepEqual(pages.stats().errors,[]);assert.deepEqual(f.stage.children,retained);return;
+    }
+    for(const key of keys.slice(1)){
+      pending.get(key+'-image')();await drain();assert.ok(pages.stats().reservedDecodedBytes<=32);
+      assert.ok(pages.stats().retained.some(page=>page.key===key+'-image'&&page.published),'a ready child appears before remaining siblings');
+      if(mode==='complete'&&key!=='d')assert.ok(pages.stats().retained.some(page=>page.key==='parent-image'&&page.published));
+    }
+    assert.deepEqual(pages.stats().retained.filter(p=>p.published).map(p=>p.key).sort(),keys.slice(1).map(key=>key+'-image'));
+    assert.deepEqual(requests,keys.map(key=>key+'-image'));
+    assert.deepEqual(released,['parent-image']);assert.deepEqual(pages.stats().fallback,[]);
+    assert.deepEqual(pages.stats().errors,mode==='fallback-failure'?['injected ancestor failure']:[]);
+    pages.publish({zoom:1});await drain();assert.equal(requests.length,5);
+    assert.deepEqual(f.stage.children,retained);
+  }finally{pages?.destroy();f.restore();for(const [name,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,name,descriptor);else delete globalThis[name];}}
+});

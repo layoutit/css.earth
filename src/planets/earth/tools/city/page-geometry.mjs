@@ -48,12 +48,12 @@ export function cityGeographicFrame(leaf) {
 // Partition the accepted face itself, including its presentation apron. Paging
 // nominal geographic rectangles left that apron uncovered: a neighboring coarse
 // face could cover city texels. Geographic reprojection belongs in preparation.
-export function prepareCityPageGeometry(address, scene) {
+export function prepareCityPageGeometry(address, scene, options = {}) {
   const bounds = pageBounds(address);
   const factor = 2 ** address.level;
   const bandIndex = Math.floor(address.y / factor);
   if (bandIndex === 0 || bandIndex === 15) {
-    return preparePolarCityPageGeometry(address, scene, bounds);
+    return preparePolarCityPageGeometry(address, scene, bounds, options);
   }
   // City addresses use geographic 0..360 degrees. Blue Marble's left edge is
   // the antimeridian, so its accepted mesh/atlas origin is 180 degrees away.
@@ -68,7 +68,7 @@ export function prepareCityPageGeometry(address, scene) {
     west: bounds.west - gutterDegrees, east: bounds.east + gutterDegrees,
     south: bounds.south - gutterDegrees, north: bounds.north + gutterDegrees,
   };
-  const { x0, y0, x1, y1, ...patch } = prepareFacePatch(matrix, 32, address);
+  const { x0, y0, x1, y1, ...patch } = prepareFacePatch(matrix, 32, address, options);
   const page = { key: pageKey(address), ...address, bounds, outer, ...patch };
   const inverse = canonicalFaceInverse(scene,bandIndex,longitudeIndex);
   const local = [x1-x0,0,x0, 0,y1-y0,y0,
@@ -83,7 +83,8 @@ export function prepareCityPageGeometry(address, scene) {
   return page;
 }
 
-function prepareFacePatch(matrix, side, address) {
+function prepareFacePatch(matrix, side, address, {normalOffset = 0.001, rasterScale = CITY_PAGE_RASTER_SCALE} = {}) {
+  if (!Number.isFinite(normalOffset) || normalOffset < 0 || !Number.isFinite(rasterScale) || rasterScale <= 0) throw new Error("Invalid prepared face placement.");
   const factor = 2 ** address.level;
   const margin = CITY_PAGE_GUTTER / CITY_PAGE_PIXELS;
   const x0 = side * (address.x % factor - margin) / factor;
@@ -102,7 +103,7 @@ function prepareFacePatch(matrix, side, address) {
   const normal = matrix.slice(8, 11);
   for (let column = 0; column < 4; column += 1) {
     for (let row = 0; row < 3; row += 1) {
-      transform[column * 4 + row] += normal[row] * 0.001 * transform[column * 4 + 3];
+      transform[column * 4 + row] += normal[row] * normalOffset * transform[column * 4 + 3];
     }
   }
   const corners = [[0, 0], [32, 0], [32, 32], [0, 32]].map(([x, y]) => {
@@ -111,7 +112,7 @@ function prepareFacePatch(matrix, side, address) {
     return [0, 1, 2].map((row) =>
       (transform[row] * x + transform[row + 4] * y + transform[row + 12]) / w);
   });
-  const layer = prepareProjectiveTextureLayer(transform.join(","), CITY_PAGE_RASTER_SCALE);
+  const layer = prepareProjectiveTextureLayer(transform.join(","), rasterScale);
   return {
     x0, y0, x1, y1, corners, normal,
     width: CITY_PAGE_PIXELS + 2 * CITY_PAGE_GUTTER,
@@ -184,14 +185,14 @@ function canonicalFaceInverse(scene,band,longitude) {
 }
 
 const polarCaches = new WeakMap();
-function preparePolarCityPageGeometry(address, scene, bounds) {
+function preparePolarCityPageGeometry(address, scene, bounds, options) {
   const north = bounds.hemisphere === "north";
   const leaf = scene.body.bands.find(b => b.latitudeIndex === (north ? 15 : 0)).leaves[0];
   const matrix = leaf.style.match(/matrix3d\(([^)]+)\)/)[1].split(",").map(Number);
   if (matrix[3] !== 0 || matrix[7] !== 0 || matrix[15] !== 1) {
     throw new Error("The accepted polar cap must remain affine.");
   }
-  const { x0, y0, x1, y1, ...patch } = prepareFacePatch(matrix, leaf.leafWidth, address);
+  const { x0, y0, x1, y1, ...patch } = prepareFacePatch(matrix, leaf.leafWidth, address, options);
   let cache = polarCaches.get(scene);
   if (!cache) { cache = new Map(); polarCaches.set(scene, cache); }
   if (!cache.has(north)) {

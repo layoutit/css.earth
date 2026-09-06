@@ -2,7 +2,7 @@
 
 The shared application shell owns the selected entity and its explicit lenses. The existing prepared-map pager owns geographic detail and drawable coverage. One geographic image owner manages transport, decoding and bounded reuse, and the retained CSS renderer applies prepared image handles and transforms.
 
-Local publication/loading and shared image reuse are implemented. The remaining work is a bounded coarse-to-fine representation and continuous browser qualification. Controlled native-memory results and the remaining browser-owned residency are reported below.
+Local publication/loading and shared image reuse are implemented. A bounded coarse-to-fine prototype now preserves the existing fine selection in captured boundary crossings. Global preparation and the complete continuous browser journey remain unfinished. Controlled native-memory results and the remaining browser-owned residency are reported below.
 
 ## Ownership
 
@@ -31,9 +31,11 @@ Keep coverage nodes, image resources and CSS pieces distinct. Multiple pieces ca
 1. Select from the current view and prepared bounds/error records. Never use selected city or card kind as the level-of-detail signal.
 2. Distinguish unknown metadata from a known empty branch. Unknown branches preserve useful previous coverage; they do not authorize retiring it. Continue bounded metadata discovery through expensive intermediate nodes because finer polar groups can require fewer visible pieces.
 3. Load admitted images whose metadata is available. An unrelated directory request must not stop them. Preserve bounded retry, timeout, source validation and cancellation.
-4. Publish complete local replacements independently. A parent connects its selected children into one replacement transaction; a selected parent likewise replaces related old descendants. Keep covering groups while their own metadata or images are incomplete. Release obsolete offscreen groups.
+4. Publish each complete child group as soon as its pieces are ready. Keep its covering ancestor beneath unfinished siblings, retiring that ancestor when its complete selected replacement is drawable. A selected parent likewise replaces related old descendants. Unknown metadata preserves existing coverage. Release obsolete offscreen groups.
 5. Reserve old plus incoming resources before work begins. Publish the new complete cut and retire replaced leases in one synchronous transaction. A late result cannot publish into a newer slot generation or dataset revision.
 6. Under reversal, prioritize current coverage and visible detail. Useful ancestors and previously displayed descendants may remain while needed; avoid an unconditional ladder of all ancestor loads or unbounded prefetch.
+
+For a cold view without related displayed imagery, the pager may request an available prepared ancestor before the desired detail. It selects an affordable ancestor image group only when it costs less than the missing desired images, or when unknown descendant metadata needs coverage. It does not load every intermediate level or put new coarse imagery over displayed detail. Auxiliary ancestors share the existing old-plus-incoming slot and byte reservations. Their failure does not block fine-image requests; cancellation, lens changes and teardown release their handles through the same page lifetime.
 
 A packed metadata response that ends short despite correct range headers gets one retry, bypassing the HTTP cache with `cache: reload`. Both attempts share the same metadata reservation, load slot and 30-second deadline. Aborted requests do not retry. Repeated short transfers, invalid ranges, hash failures and invalid expanded data remain visible failures with explicit user retry; no unverified metadata is published.
 
@@ -75,6 +77,73 @@ Normal backing belongs to base imagery. The current observation-overview path su
 The polar bridge needs a measured endpoint: existing preparation omits cap pieces below WMTS L10, and the first available cap cut may still exceed capacity. Adding only L0–L4 ancestors does not resolve this. Keep coarse coverage until an affordable fine cut exists, including cap/band transitions and both hemispheres; beyond source coverage, retain the accepted base. Include actual antimeridian crossings, not only a stationary view near the dateline.
 
 Begin with one regular seam, one cap/band seam and an antimeridian transition. Compare retained backing with regional retirement only where needed. Verify source/result/difference frames at DPR 1/2, continuous replacement, metadata admission, image count, piece count, simultaneous reservations and release size before global expansion. Do not duplicate the 25 GB fine geometry release or acquire the whole raw imagery dataset.
+
+### Implemented prototype and qualification boundary
+
+Unconditionally reserving backing reduced fine detail under the existing display
+ceiling: one captured regular view fell from 254 fine pieces to 217. Conditional
+retirement therefore lives in the existing selector and publisher. Preparation
+maps the nontransparent source support, including its sampling margin, to known
+fine-index branches. Runtime follows these prepared relationships; missing or
+pending metadata cannot certify replacement. A ready local fine group can replace
+its covering backing independently of an unrelated delayed region. Every view
+change re-evaluates those relationships before old coverage is retired.
+
+Demand reserves the old displayed cut and the complete incoming required cut
+before admitting optional backing or ancestors. Optional coverage cannot consume
+the capacity needed to finish the replacement that releases the old view. Empty
+prepared images do not enter the ancestor demand. Nonempty polar backing remains
+until an affordable covered cut is available; the prototype does not infer polar
+replacement from regular-face relationships.
+
+Preparation also removes transparent image margins while retaining the existing
+quad and texture mapping. Crop edges align to the original CSS pixel grid: arbitrary
+tight crops preserved source texels but changed browser resampling and were
+rejected. For the 254-page pinned prototype, aligned cropping reduces conservative
+decoded image storage from 68,681,600 to 34,898,880 bytes. Encoded WebP size remains
+approximately 11.46 MB. This is a finite fixture footprint, not a global release
+or measured browser-memory reduction.
+
+Five actual pointer crossings and reversals at each DPR cover a regular boundary,
+the antimeridian, northern and southern cap boundaries, and a northern view under
+display pressure. All 20 initial/settled camera checkpoints preserve the baseline
+fine selection and published fine keys; sampled retained DOM, image and metadata
+accounting stays within the original limits. These runs start at prepared poses.
+They do not establish uninterrupted globe-to-city loading or worldwide coverage.
+
+The crop comparison uses six controlled screenshots per DPR with equal recorded
+camera matrices, scale and viewport. All three nonempty northern checkpoints are
+pixel-exact in an aligned DPR 1 run and in the final DPR 2 run. Repeated captures
+also show small browser variation: up to one channel value in a few DPR 1 pixels,
+and a mean absolute channel delta of 0.006573 in a repeated DPR 2 southern base-only
+view. Final comparisons stay within measured A/A variation; zero-tolerance failures
+and raw differences are preserved. This is calibrated screenshot agreement, not
+universal pixel parity. Existing PolyCSS seam bleed remains unchanged.
+
+The normal release does not yet include this backing. Global preparation,
+source-boundary crossings and the complete built entity/lens/history journey
+remain required before enabling it.
+
+Continuous fixture runs cover regular and antimeridian regions,
+the northern cap boundary, and interiors at 80 degrees north and south, each at
+DPR 1 and 2. Each run uses two uninterrupted globe/city/drag/reversal cycles,
+delays one metadata request by 2.5 seconds, and injects one imagery HTTP 503.
+All ten retries recover, obsolete page requests cancel, and 3,140 recorded
+samples retain the same scene nodes and original resource limits. The largest
+sampled cut displays 226 pieces; simultaneous image reservations peak at
+60,003,492 bytes and metadata at 12,582,637 bytes. Complete requested groups
+are not withheld in any sample. These are 200 ms observations, not proof of zero
+transient publication latency or a performance measurement.
+
+In the eight runs with visible source detail, 12–45 nonempty pages publish while
+the delayed directory remains pending. Northern interior backing remains visible
+through expensive fine cuts, with fine imagery appearing near maximum zoom.
+Both southern interior runs instead carry prepared empty-source records and
+retain the base map; they cancel the delayed directory when it becomes obsolete.
+That is source-empty behavior, not proof of useful fine imagery in Antarctica.
+The fixture's base-only cold/warm transition observations last approximately one
+sample in the other regions. The source-boundary crossing and global release
+still need qualification, as does the complete built entity/lens/history journey.
 
 ## Traversal dependency
 

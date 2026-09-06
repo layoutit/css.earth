@@ -1,9 +1,9 @@
 import { createPreparedProjectiveTextureLeaf } from "../prepared-projective-texture-leaf.mjs";
-import { selectCityPages } from "./city-page-selection.mjs";
+import { selectCityPages, projectCityPage } from "./city-page-selection.mjs";
 import { createCityIndex } from "./city-index.mjs";
 import { normalizeCityAssetOrigin, isPreparedAssetPath } from "./city-asset-url.mjs";
 import { createApiImageTransport } from "./api-image-transport.mjs";
-import { selectPagePublication } from "./page-publication.mjs";
+import { selectPagePublication, selectPageFallbacks, usefulFallbacks, selectPageDemand } from "./page-publication.mjs";
 
 export function mountPreparedMapPages({ plan, carrier, system, scene, camera, stage, className, textureClassName, lensIds, own, images = null, onStatus = () => {}, onError = error => { throw error; } }) {
   let validAssetOrigin = false;
@@ -14,10 +14,17 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       !Number.isSafeInteger(plan.maximumDecodedBytes) || plan.maximumDecodedBytes < plan.decodedPageBytes*2) {
     throw new Error("Invalid prepared map-page plan.");
   }
+  if(plan.backing && (plan.topology!=="wmts-quadtree@1" || !Array.isArray(plan.backing.roots) || plan.backing.roots.length>plan.poolSize ||
+      !Number.isFinite(plan.backing.minimumZoom) || plan.backing.minimumZoom<0 || plan.backing.minimumZoom>plan.minimumZoom ||
+      !Number.isSafeInteger(plan.backing.rootDecodedBytes) || plan.backing.rootDecodedBytes<1 || plan.backing.rootDecodedBytes>=plan.index.maximumBytes ||
+      new Set([...plan.roots,...plan.backing.roots].map(node=>node.key)).size!==plan.roots.length+plan.backing.roots.length)) {
+    throw new Error("Invalid prepared map backing.");
+  }
   const capacity = plan;
   const slots = [];
   let desired = [];
   let desiredGroups = [];
+  let fallbackGroups = [];
   let pageGroups = new Map();
   let progressiveInitialView = false;
   let desiredPages = new Map();
@@ -96,6 +103,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   function clearDesired() {
     desired = [];
     desiredGroups = [];
+    fallbackGroups = [];
     pageGroups.clear();
     desiredPages.clear();
   }
@@ -103,7 +111,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
   function refresh() {
     pendingFrame = null;
     if (destroyed || !view) return;
-    if (!enabled || suspended || view.zoom <= plan.minimumZoom) {
+    if (!enabled || suspended || view.zoom <= (plan.backing?.minimumZoom??plan.minimumZoom)) {
       clearDesired();
       index.update([]);
       for (const slot of slots) if (slot.key) release(slot);
@@ -116,25 +124,29 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
       .multiply(new DOMMatrix(getComputedStyle(carrier).transform));
     const scale = Number.parseFloat(getComputedStyle(camera).scale);
     const cameraRect=camera.getBoundingClientRect(),stageRect=stage.getBoundingClientRect();
-    const selection = selectCityPages(plan, index.nodes(), Array.from(matrix.toFloat64Array()), scale,
-      { width: stage.clientWidth, height: stage.clientHeight,
+    const projection = Array.from(matrix.toFloat64Array());
+    const viewport = { width: stage.clientWidth, height: stage.clientHeight, zoom:view.zoom,
         originX:cameraRect.left+cameraRect.width/2-stageRect.left,
-        originY:cameraRect.top+cameraRect.height/2-stageRect.top });
+        originY:cameraRect.top+cameraRect.height/2-stageRect.top };
+    const selection = selectCityPages(plan, index.nodes(), projection, scale, viewport);
     if(desired.join(",")!==selection.keys.join(",")){
       progressiveInitialView=!slots.some(slot=>slot.published)&&selection.keys.every(key=>
         ["terrascope-wms@1","terrascope-wmts@1","prepared-wmts-raster@1"].includes(index.nodes().get(key)?.rasterSource));
     }
-    selectionDiagnostics={fallbacks:selection.fallbacks,scale:selection.selectionScale,cuts:selection.cuts,baseSurfaceFallback:selection.baseSurfaceFallback};
+    selectionDiagnostics={fallbacks:selection.fallbacks,scale:selection.selectionScale,cuts:selection.cuts,baseSurfaceFallback:selection.baseSurfaceFallback,backing:selection.backing};
     desired = selection.keys;
     desiredGroups = selection.groups ?? [];
-    pageGroups = new Map(desiredGroups.flatMap(group=>group.pages.map(key=>[key,group])));
-    // Transport at most half a pool of selected prepared records. Directory
-    // eviction must not invalidate a page that is already queued for loading.
-    desiredPages = new Map(desired.map(key => [key, index.nodes().get(key)]));
+    fallbackGroups = plan.topology === "wmts-quadtree@1" ? selectPageFallbacks(desiredGroups, index.nodes(), slots,
+      {pages:plan.poolSize, bytes:plan.maximumDecodedBytes}, page => projectCityPage(page, projection, scale, viewport).visible) : [];
+    pageGroups = new Map([...desiredGroups,...fallbackGroups].flatMap(group=>group.pages.map(key=>[key,group])));
+    // Pin admitted records before metadata eviction. Auxiliary ancestor images
+    // share the same old-plus-incoming reservation and retained page pool.
+    desiredPages = new Map([...fallbackGroups.flatMap(group=>group.pages),...desired].map(key => [key, index.nodes().get(key)]));
+    const admitted = new Set(pageDemand());
     index.update(selection.directories);
     selectionRuns += 1;
     // Retain covering groups while their own replacements decode.
-    for (const slot of slots) if (slot.key && !slot.published && !desired.includes(slot.key)) release(slot);
+    for (const slot of slots) if (slot.key && !slot.published && !admitted.has(slot.key)) release(slot);
     publishReadyView();
     pump();
     onStatus();
@@ -143,7 +155,8 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
 
   function pump() {
     if (destroyed || !enabled || suspended) return;
-    for (const key of desired) {
+    const demand = pageDemand();
+    for (const key of demand) {
       if (activeLoads >= plan.maximumConcurrentLoads) break;
       if (slots.some((slot) => slot.key === key)) continue;
       const slot = slots.find((candidate) => candidate.key === null);
@@ -154,11 +167,18 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     }
   }
 
+  function pageDemand(){
+    return plan.topology==="wmts-quadtree@1"?selectPageDemand(desiredGroups,slots,desiredPages,
+      {pages:plan.poolSize,bytes:plan.maximumDecodedBytes},usefulFallbacks(desiredGroups,slots,fallbackGroups)):desired;
+  }
+
   function publishReadyView() {
     if(plan.topology === "wmts-quadtree@1"){
-      const publication=selectPagePublication(desiredGroups,slots,{pages:Math.floor(plan.poolSize/2),bytes:Math.floor(plan.maximumDecodedBytes/2)});
+      const publication=selectPagePublication(desiredGroups,slots,{pages:Math.floor(plan.poolSize/2),bytes:Math.floor(plan.maximumDecodedBytes/2)},fallbackGroups);
       for(const slot of slots)if(publication.release.includes(slot.key))release(slot);
       for(const slot of slots)if(publication.publish.includes(slot.key))publishSlot(slot);
+      const useful = new Set(pageDemand());
+      for(const slot of slots)if(slot.key && !slot.published && !useful.has(slot.key))release(slot);
       return;
     }
     const complete=desired.every(key => slots.some(slot => slot.key === key && slot.ready));
@@ -270,7 +290,7 @@ export function mountPreparedMapPages({ plan, carrier, system, scene, camera, st
     setPlaying(value) { playing = Boolean(value); schedule(); },
     stats() {
       return { dataset: plan.dataset, qualification: plan.qualification, suspended,
-        poolSize: slots.length, desired: [...desired], activeLoads, pendingSelection: pendingFrame !== null,
+        poolSize: slots.length, desired: pageDemand().filter(key=>desired.includes(key)), fallback:usefulFallbacks(desiredGroups,slots,fallbackGroups).flatMap(group=>group.pages), activeLoads, pendingSelection: pendingFrame !== null,
         retained: slots.filter((slot) => slot.key).map(({ key, ready, published, empty }) => ({ key, ready, published, ...(empty ? {empty} : {}) })),
         index: index.stats(), apiImages: apiImages.stats(),
         decodedPageByteBound: plan.maximumDecodedBytes,
