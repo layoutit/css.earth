@@ -40,10 +40,11 @@ const tiles = [
   { id: "makemake", color: [185, 138, 106], size: 5 },
 ];
 
-test("Mercury preserves all baseline bytes except approved physical, overlay, and registry-marker changes", () => {
+test("Mercury preserves all baseline bytes except approved physical, overlay, marker, and leaf-transport changes", () => {
   const hash = value => createHash("sha256").update(JSON.stringify(value)).digest("hex");
   const { worldFrame, ...scene } = structuredClone(mercuryScene);
   const {id, controls, ...presentation} = structuredClone(mercuryPresentation);
+  restoreHistoricalNestedLeafTransport(presentation, mercuryScene);
   presentation.schema = "cssearth-prepared-presentation@3";
   const oldTransform = "scale(0.022000000000000002) rotateX(40deg) rotate(0deg) translate3d(0px, 0px, 0px)";
   // Only these three authored fields changed. Restore their historical values
@@ -73,6 +74,68 @@ test("Mercury preserves all baseline bytes except approved physical, overlay, an
   assert.equal(hash(presentation), "510683b7c21ed15f245f649a9da81b04b60f3ca058cc07e15ff4c1268a7fc738");
   assert.deepEqual(worldFrame, mercuryPrepared.worldFrame);
 });
+
+// Reconstruct only the old raster carrier/child representation. The frozen
+// digest still checks every unrelated field and every retained texture address.
+// Verify the new composed matrix against the authored two-stage mapping before
+// restoring it, so reconstruction cannot hide a broken direct-leaf transform.
+function restoreHistoricalNestedLeafTransport(presentation, scene) {
+  const sourceLeaves = new Map();
+  const collect = value => {
+    if (!value || typeof value !== 'object') return;
+    if (value.projectiveTextureLayer) sourceLeaves.set(value.style, value.projectiveTextureLayer);
+    for (const child of Object.values(value)) collect(child);
+  };
+  collect(scene);
+  const tree = presentation.tree, nodes = [], properties = [], propertyIds = new Map(), indices = new Map();
+  const property = (name, value) => ({ name, value, custom: false });
+  const intern = value => {
+    const key = JSON.stringify(value);
+    if (!propertyIds.has(key)) { propertyIds.set(key, properties.length); properties.push(value); }
+    return propertyIds.get(key);
+  };
+  const apply = (matrix, point) => [0, 1, 2, 3].map(row => point.reduce((sum, value, column) => sum + matrix[column * 4 + row] * value, 0));
+  for (const [index, node] of tree.nodes.entries()) {
+    const target = nodes.length; indices.set(index, target);
+    const assignments = node.properties.map(id => tree.properties[id]);
+    const parent = { ...node, parent: node.parent < 0 ? -1 : indices.get(node.parent), attributes: { ...node.attributes } };
+    if (node.attributes['data-prepared-projection'] !== 'single-leaf') {
+      nodes.push({ ...parent, properties: assignments.map(intern) }); continue;
+    }
+    const layer = sourceLeaves.get(node.style);
+    assert.ok(layer, 'Every direct raster leaf must match its original authored geometry');
+    const transformIndex = assignments.findIndex(value => value.name === 'transform');
+    const direct = assignments[transformIndex].value.slice(9, -1).split(',').map(Number);
+    const frame = layer.frameMatrix.split(',').map(Number), texture = layer.textureMatrix.split(',').map(Number);
+    for (const point of [[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]]) {
+      const expected = apply(frame, apply(texture, point));
+      apply(direct, point).forEach((value, axis) => assert.ok(Math.abs(value - expected[axis]) < 1e-10, 'Direct leaf must preserve its authored projective mapping'));
+    }
+    const tail = assignments.findIndex(value => value.name === 'backgroundRepeat');
+    const address = assignments.slice(0, transformIndex);
+    // This historical capability declares dimensions in the source leaf. There
+    // are no stylesheet-derived layout writes to omit from the old carrier.
+    assert.ok(address.every(value => value.custom || ['backgroundPosition', 'backgroundSize'].includes(value.name)));
+    delete parent.attributes['data-prepared-projection'];
+    nodes.push({ ...parent, properties: [property('transform', `matrix3d(${layer.frameMatrix})`),
+      ...assignments.slice(transformIndex + 1, tail), property('backgroundPosition', '0px 0px'),
+      property('backgroundSize', '0px 0px'), property('backgroundRepeat', 'no-repeat')].map(intern) });
+    nodes.push({ parent: target, tag: 'span', className: 'polycss-projective-texture', style: node.style,
+      properties: Object.entries({ position: 'absolute', inset: '0 auto auto 0', display: 'block', width: '100%', height: '100%',
+        margin: '0', padding: '0', border: '0', lineHeight: '0', textDecoration: 'none', transform: `matrix3d(${layer.textureMatrix})`,
+        transformOrigin: '0 0', transformStyle: 'flat', backfaceVisibility: 'visible', backgroundImage: 'inherit' })
+        .map(([name, value]) => property(name, value)).concat(address, assignments.slice(tail)).map(intern), attributes: {} });
+  }
+  const remap = value => {
+    if (!value || typeof value !== 'object') return;
+    for (const [key, child] of Object.entries(value)) {
+      if (key === 'target' && Number.isInteger(child) && child >= 0) { assert.ok(indices.has(child)); value[key] = indices.get(child); }
+      else remap(child);
+    }
+  };
+  for (const key of ['variants', 'materials', 'viewBindings', 'animations']) remap(presentation[key]);
+  presentation.tree = { ...tree, nodes, properties, camera: indices.get(tree.camera), scene: indices.get(tree.scene) };
+}
 
 test("registered descriptors publish the generated physical frames and exact payload identities", async () => {
   for (const [id, scene] of [["mercury", mercuryScene], ["venus", venusScene]]) {

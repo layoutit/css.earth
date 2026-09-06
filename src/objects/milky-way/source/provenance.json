@@ -1,0 +1,191 @@
+{
+  "schema": "cssearth-source-provenance@1",
+  "sources": [
+    {
+      "id": "density",
+      "path": "density.ktx2",
+      "sha256": "34ed2cdfdf388b30be441db4e6a94a7a420e0bf6446aafb2f61c60b49a7fc51b",
+      "bytes": 9868499,
+      "source": "Galaxium / Stellarium Labs SRL, recovered Milky Way procedural model and GPU texture contract",
+      "license": "Reference model: © 2025-present Stellarium Labs SRL. All rights reserved.",
+      "url": "https://galaxium.app/",
+      "built": "2026-09-06",
+      "upstreamRecord": {
+        "key": "textures/milky-way-volume",
+        "path": "textures/milky-way-volume/v6/milky-way-volume.ktx2",
+        "bytes": 9868499,
+        "source": "Galaxium / Stellarium Labs SRL, recovered Milky Way procedural model and GPU texture contract",
+        "license": "Reference model: © 2025-present Stellarium Labs SRL. All rights reserved.",
+        "url": "https://galaxium.app/",
+        "epoch": "",
+        "built": "2026-09-06",
+        "extra": {
+          "synthetic": true,
+          "width": 512,
+          "height": 512,
+          "depth": 64,
+          "format": "VK_FORMAT_R8G8B8A8_UNORM",
+          "colorspace": "linear",
+          "encoding": "sqrt-density-unorm8",
+          "extentKpc": {
+            "x": [
+              -26.800194711215124,
+              26.800194711215124
+            ],
+            "y": [
+              -26.800194711215124,
+              26.800194711215124
+            ],
+            "z": [
+              -3.3500243389018904,
+              3.3500243389018904
+            ]
+          },
+          "channels": {
+            "r": "sqrtDiskDensity",
+            "g": "sqrtStarsDensity",
+            "b": "sqrtDustDensity",
+            "a": "reservedZero"
+          },
+          "galaxiumModel": {
+            "components": {
+              "bulge": {
+                "color": [
+                  1,
+                  0.84,
+                  0.67
+                ],
+                "strength": 6498.02,
+                "z0": 0.75,
+                "r0": 10,
+                "inner": 0.5,
+                "aw": 0,
+                "noise": {
+                  "twirl": 0,
+                  "scale": 0,
+                  "tilt": 0,
+                  "offset": 0
+                }
+              },
+              "disk": {
+                "color": [
+                  0.85,
+                  0.9,
+                  1
+                ],
+                "strength": 3166820,
+                "z0": 0.02,
+                "r0": 0.45,
+                "inner": 0.7,
+                "aw": 0.22,
+                "noise": {
+                  "twirl": 0.12,
+                  "scale": 10,
+                  "tilt": 1,
+                  "offset": 0.1
+                }
+              },
+              "stars": {
+                "color": [
+                  0.7,
+                  0.82,
+                  1
+                ],
+                "strength": 22392.8,
+                "z0": 0.034,
+                "r0": 0.25,
+                "inner": 0.23,
+                "aw": 0.11,
+                "noise": {
+                  "twirl": 0,
+                  "scale": 6,
+                  "tilt": 20,
+                  "offset": 0
+                }
+              },
+              "dust": {
+                "color": [
+                  0.6,
+                  0.8,
+                  1
+                ],
+                "strength": 411.561,
+                "z0": 0.007,
+                "r0": 0.4,
+                "inner": 0.3,
+                "aw": 0.36,
+                "noise": {
+                  "twirl": 0.07,
+                  "scale": 5,
+                  "tilt": 1.5,
+                  "offset": 1
+                }
+              }
+            },
+            "armsRad": [
+              -0.7679449915885925,
+              2.2340199947357178
+            ],
+            "spiral": {
+              "a": 4,
+              "b": -0.7318287491798401,
+              "c": 0.35015732049942017,
+              "coreRadius": 0.19050000607967377
+            },
+            "intensityScale": 3.12499992105586e-7,
+            "stepScale": 1
+          },
+          "radiusM": 826967600000000000000,
+          "orientationXyzw": [
+            -0.48321160272398567,
+            0.19625814748720685,
+            0.6992289190061582,
+            -0.48894625277982323
+          ],
+          "centerOffsetIcrfM": [
+            -13546364515918938000,
+            -215613549495265920000,
+            -119436920667163740000
+          ],
+          "placementFrame": "sol",
+          "sampling": {
+            "coordinates": "index/dimensions*2-1; z*=depth/width",
+            "filter": "linear",
+            "decode": "square RGB after filtering",
+            "radialAxis": "observed native zero; singular shader arithmetic is not assumed portable"
+          },
+          "reference": {
+            "wasmSha256": "8e3115b11fe35929d86d120da20c34213426c3a8eb8727a75ccef1fb16703bc0",
+            "densityShaderSha256": "3cb5b3981723dfb0ab2513ee8be6391f3ebbb912c4d773f7b57a1cdb6096a0aa",
+            "capturedDate": "2026-09-06",
+            "modelSchema": 1
+          }
+        }
+      }
+    }
+  ],
+  "status": "Local integration reference. Recovered Galaxium / Stellarium Labs SRL model; all rights reserved. No publication license implied.",
+  "frameDerivation": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "sourceReferenceFrame": "sol (solar-system barycentre)",
+    "sourceOriginM": [
+      -13546364515918938000,
+      -215613549495265920000,
+      -119436920667163740000
+    ],
+    "sunBarycentricM": [
+      -211772372.76758608,
+      -720607965.0777627,
+      -296413555.3060543
+    ],
+    "originM": [
+      -13546364515707167000,
+      -215613549494545320000,
+      -119436920666867320000
+    ],
+    "formula": "originM = sourceOriginM - sunBarycentricAu(epochJdTt) * M_PER_AU",
+    "ephemeris": "@cssearth/astronomy sunBarycentricAu: ICRF position at the shared navigation epoch",
+    "qualification": "Only the frame origin and derived anchors change; the recorded density grid, material and slice geometry remain unchanged."
+  }
+}

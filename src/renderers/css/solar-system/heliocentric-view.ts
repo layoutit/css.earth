@@ -1,3 +1,4 @@
+import { createPreparedRingProjector } from './prepared-ring-projection.js';
 import { offAxisFrame, silhouetteEllipse, rayHitsSphereBefore, splitVisible, validVisibleRect, clipSegmentToRectangle, eyeFraction, lerp, positive, vector, unit, validTrail, validBehindTurns, validIllumination, dot, magnitude } from "./heliocentric-geometry.js";
 import type { Vector2, Vector3, Matrix3, Matrix3dLike, VisibleRect } from './types.js';
 import type { PreparedPlanetPoint, PlanetOrbitLabelPolicy } from "@cssearth/engine";
@@ -313,53 +314,7 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   // Only the trailing chords (weight above zero) are projected; each segment
   // carries its chord's trail weight as its opacity, so the line fades
   // backwards from the body and the leading half of the orbit is never drawn.
-  const projectRing = (vertices:readonly Vector3[], trail:readonly number[]): readonly OrbitSegment[] => {
-    const eyes = vertices.map(toEye);
-    const segments = [];
-    for (let index = 0; index < eyes.length; index += 1) {
-      const weight = trail[index];
-      if (!(weight > 0)) continue;
-      let start = eyes[index];
-      let end = eyes[(index + 1) % eyes.length];
-      let startDepth = depthOf(start);
-      let endDepth = depthOf(end);
-      if (startDepth <= near && endDepth <= near) continue;
-      if (startDepth <= near) {
-        start = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
-        startDepth = near;
-      } else if (endDepth <= near) {
-        end = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
-        endDepth = near;
-      }
-      const startScreen = project(start);
-      const endScreen = project(end);
-      const window = clipSegmentToRectangle(
-        startScreen,
-        endScreen,
-        clipX,
-        clipY,
-      );
-      if (window === null) continue;
-      // Screen fractions back to eye-space fractions (perspective-correct).
-      const t0 = eyeFraction(window[0], startDepth, endDepth);
-      const t1 = eyeFraction(window[1], startDepth, endDepth);
-      const visibleStart = lerp(start, end, t0);
-      const visibleEnd = lerp(start, end, t1);
-      for (const [pieceStart, pieceEnd] of splitVisible(
-        visibleStart,
-        visibleEnd,
-        hidden,
-      )) {
-        const [x0, y0] = project(pieceStart);
-        const [x1, y1] = project(pieceEnd);
-        if (!Number.isFinite(x0) || !Number.isFinite(y0) ||
-            !Number.isFinite(x1) || !Number.isFinite(y1)) continue;
-        if (Math.hypot(x1 - x0, y1 - y0) < 0.05) continue;
-        segments.push(Object.freeze([x0, y0, x1, y1, weight]));
-      }
-    }
-    return Object.freeze(segments);
-  };
+  const projectRing = createPreparedRingProjector({ toEye, project, hidden, near, clipX, clipY });
   const segments = projectRing(plan.orbit.vertices, trailWeights?.own ?? plan.orbit.trail);
 
   // A point in the scene as a screen-space billboard: where it lands, and

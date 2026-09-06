@@ -47,6 +47,7 @@ export async function prepareBandSurfacePresentation({ namespace, plan, lenses, 
 }
 
 export async function prepareEmissiveSurfacePresentation({ namespace, plan, lenses }) {
+  const projected = plan.camera.projection?.model === 'css-perspective-shared-with-sky';
   const layers=["surface","poles","corona","limb"];
   const celestial=preparedSkyResources(plan.starfield,null,"warm");
   const entries=[...celestial,...lenses.controls.flatMap(lens=>layers.map(layer=>({
@@ -62,10 +63,12 @@ export async function prepareEmissiveSurfacePresentation({ namespace, plan, lens
   for(const leaf of plan.body.leaves)b.append(body,b.leaf(leaf));
   const corona=b.element("div",`${namespace}-corona-layer planet-render-root`,"",{"aria-hidden":"true"});
   corona.style.setProperty(`--${namespace}-corona-image`,`url(${JSON.stringify(canonicalPreparedAsset(plan.offLimbContext.defaultUrl,plan.offLimbContext.defaultUrl2x))})`);
-  corona.style.setProperty(`--${namespace}-camera-zoom`,String(plan.camera.defaultZoom));
+  corona.style.setProperty(`--${namespace}-camera-zoom`,String(projected ? 1 : plan.camera.defaultZoom));
+  if (projected) corona.style.scale = "1";
   const limb=b.element("div",`${namespace}-limb-layer planet-render-root`,"",{"aria-hidden":"true"});
   limb.style.setProperty(`--${namespace}-limb-image`,`url(${JSON.stringify(canonicalPreparedAsset(plan.limbMaterial.defaultUrl,plan.limbMaterial.defaultUrl2x))})`);
-  limb.style.setProperty(`--${namespace}-camera-zoom`,String(plan.camera.defaultZoom));
+  limb.style.setProperty(`--${namespace}-camera-zoom`,String(projected ? 1 : plan.camera.defaultZoom));
+  if (projected) limb.style.scale = "1";
   b.append(null,corona,limb);
   const {tree,index}=b.finish({camera,scene});
   const layerTargets=[body,body,corona,limb];
@@ -78,7 +81,9 @@ export async function prepareEmissiveSurfacePresentation({ namespace, plan, lens
       ...layers.map((layer,i)=>({kind:"texture",target:index(layerTargets[i]),name:`--${namespace}-${layer}-image`,resource:`${layer}:${lens.id}`,quoted:true})),
       {kind:"attribute",target:-1,name:"data-lens",value:lens.id},
     ],materials:[]})),materials:[],
-    viewBindings:[corona,limb].map(node=>({kind:"zoom-property",target:index(node),property:`--${namespace}-camera-zoom`})),
+    viewBindings:[corona,limb].map(node=>projected
+      ? {kind:"silhouette-fit",target:index(node),minimumRadius:0,unitScale:2/plan.camera.logicalBodyDiameter}
+      : {kind:"zoom-property",target:index(node),property:`--${namespace}-camera-zoom`}),
     animations:[],
   };
 }

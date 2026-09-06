@@ -256,8 +256,9 @@ try {
     surface: getComputedStyle(document.querySelector(".mars-body > s")).backgroundImage,
     poles: getComputedStyle(document.querySelector(".mars-pole")).backgroundImage,
     nodes: document.querySelector(".planet-stage").querySelectorAll("*").length,
-    projectiveFrames: [...document.querySelectorAll(".polycss-projective-texture")].map(texture =>
-      getComputedStyle(texture.parentElement).transformStyle),
+    projectiveFrames: [...document.querySelectorAll(".mars-body > s")].map(leaf => ({
+      transformStyle: getComputedStyle(leaf).transformStyle,
+      nestedTexture: Boolean(leaf.querySelector(".polycss-projective-texture")) })),
   }));
   state.trackball = await page.evaluate(async plan => {
     const { measureRetainedPlanetTrackball } = await import('/src/platform/camera-layout.mjs');
@@ -268,8 +269,8 @@ try {
       zoom:window.__mars.view().zoom,defaultZoom:plan.defaultZoom}));
   }, PREPARED_MARS_CAMERA);
   assert.ok(state.projectiveFrames.length > 0);
-  assert.ok(state.projectiveFrames.every(style => style === "preserve-3d"),
-    "Prepared texture projection must not be flattened between its two matrices.");
+  assert.ok(state.projectiveFrames.every(frame => frame.transformStyle === "preserve-3d" && !frame.nestedTexture),
+    "Prepared surface pixels must use a single retained projection plane.");
   assert.ok(Math.abs(state.trackball.centerX - (native.viewport.sceneLeft + native.viewport.width/2 + cameraOffset.x)) < .05,
     "Comparison body center drifted horizontally from the native viewport");
   assert.ok(Math.abs(state.trackball.centerY - (native.viewport.height/2 + cameraOffset.y)) < .05,

@@ -5,6 +5,7 @@ import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
 export type PreparedSelection = ObjectSelection;
 export interface PreparedView {
+  readonly projection?: import('./physical-projection.js').PhysicalProjection;
   revision?: number; controlPitch: number; controlYaw: number; zoom: number; sceneMatrix: string;
   sunViewDirection: readonly number[] | null; reference?: { sceneMatrix: string; sunViewDirection: readonly number[] | null };
   counterRotation: string; counterRotationFor(systemTransform: string | DOMMatrix | null): string;
@@ -123,7 +124,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     const previous = stage.classList.contains(name);
     context.own(() => { if (owned()) stage.classList.toggle(name, previous); });
   }
-  stage.replaceChildren(...roots);
+  // Presentation owns only its prepared roots; application context siblings survive a detail handoff.
+  for (const root of roots) stage.appendChild(root);
   if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
   for (const name of definition.tree.stageClasses) stage.classList.add(name);
   const animations = definition.animations.map(plan => {
@@ -183,6 +185,10 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
           const silhouette = view.body?.silhouette;
           element.style.visibility = view.body?.visible === false ? "hidden" : "";
           if (silhouette) {
+            // This transform already owns physical framing. The legacy shell's
+            // individual scale would otherwise apply the same fit a second time.
+            element.style.scale = "1";
+            element.style.transformOrigin = "50% 50%";
             const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
             const radial = Math.max(silhouette.radialSemiAxis, binding.minimumRadius);
             const tangential = Math.max(silhouette.tangentialSemiAxis, binding.minimumRadius);

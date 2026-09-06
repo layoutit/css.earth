@@ -219,3 +219,29 @@ test('saved camera endpoints survive the early owner handoff unchanged', async (
   f.step(); await drainFrames(f, { task: continuation });
   closePose(f.navigation.capture().pose, target.pose);
 });
+
+
+test('refocusing the selected object paints one existing owner without reloading its prepared bank', async () => {
+  const f = fixture();
+  const initial = f.navigation.capture();
+  const target = createWorldSelectionTarget(initial, f.navigation.frame, f.navigation.optics());
+  const task = f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal });
+  await drainFrames(f, { task });
+  assert.ok(f.paints.length > 2);
+  closePose(f.navigation.capture().pose, target.pose);
+  assert.equal(f.resources.destroyed, 0);
+  assert.equal(f.pending, 0);
+  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+});
+
+test('real input interrupts a same-object focus at the last painted camera', async () => {
+  const f = fixture();
+  const task = f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal });
+  f.tick(0); f.tick(100);
+  const drawn = f.navigation.capture();
+  f.input();
+  await assert.rejects(task, error => error.name === 'AbortError' && error.preserveView === true);
+  f.tick(10000);
+  assert.deepEqual(f.navigation.capture(), drawn);
+  assert.equal(f.pending, 0);
+});

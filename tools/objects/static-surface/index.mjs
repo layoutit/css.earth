@@ -25,6 +25,13 @@ export function isStaticSurfaceRecipe(value) {
   return value?.schema === 'cssearth-static-surface-geometry@1';
 }
 
+/** Bind authored observer framing while preserving the prepared physical surface. */
+export function contextualizeStaticSurfaceScene(scene, context, id) {
+  if (!context) return scene;
+  if (context.schema !== 'cssearth-world-context@1' || context.focus.id !== id) throw new TypeError('Static surface world context identity differs.');
+  return { ...scene, camera: { ...scene.camera, ...context.camera.presentation }, worldFrame: context.frame };
+}
+
 /** Source-pinned geometry, observations and optional emissive/curvature layers. */
 export async function prepareStaticSurfaceObject({ objectDirectory, publicDirectory, outputDirectory, write = false }) {
   const descriptorPath = resolve(objectDirectory, 'object.json'), rawDescriptor = await readJson(descriptorPath);
@@ -51,6 +58,16 @@ export async function prepareStaticSurfaceObject({ objectDirectory, publicDirect
     if (Object.hasOwn(geometry.metadata.body, field) && physical[field] !== geometry.metadata.body[field]) throw new TypeError(`Scene physical parameter differs from its source: ${field}`);
   }
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
+  const contextSource = sources.get('world-context');
+  let worldContext;
+  if (contextSource) {
+    const { prepareSpatialContext } = await import('../dist/prepare-spatial-context.js');
+    const outputPath = resolve(outputDirectory, 'world-context.json');
+    await prepareSpatialContext({ sourcePath: contextSource.path, outputPath,
+      solarGeometryPath: resolve(objectDirectory, '../../platform/solar-geometry.mjs'),
+      objectsDirectory: resolve(objectDirectory, '..') });
+    worldContext = await readJson(outputPath);
+  }
   const ensureDirectories = () => mkdir(publicDirectory, { recursive: true });
   const band = geometry.kind === 'disc-poles' ? prepareBandSurfaceScene(geometry) : null;
   if (raster.kind === 'observation-lenses') await prepareObservationLenses({ sourceDirectory, publicDirectory, config: raster, geometry, surfaceRasterCells: band?.surfaceRasterCells });
@@ -58,7 +75,7 @@ export async function prepareStaticSurfaceObject({ objectDirectory, publicDirect
   else throw new TypeError('Unsupported static observation recipe.');
   const sky = await preparePlanetCubicSky({ objectId: descriptor.id, sourceRoot: sourceDirectory, publicRoot: publicDirectory, ensureDirectories, validateSourceGroup: async () => undefined, includeSun: celestial.includeSun, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, pointSourceContract: CUBIC_SKY_POINT_SOURCE_PRESENTATION_STANDARD, ...(celestial.sourceSchema ? { sourceSchema: celestial.sourceSchema } : {}), writeModule: false });
   const sun = celestial.directionalSun ? await preparePlanetDirectionalSun({ objectId: descriptor.id, publicRoot: publicDirectory, ensureDirectories, ...celestial.directionalSun, writeModule: false }) : null;
-  const scene = band?.scene ?? prepareSegmentedSurfaceScene(geometry, sky);
+  const scene = contextualizeStaticSurfaceScene(band?.scene ?? prepareSegmentedSurfaceScene(geometry, sky), worldContext, descriptor.id);
   const titleReference = sources.get('title');
   const title = createPreparedTitle(required('title'), { inputSha256: titleReference.reference.sha256, generator: 'tools/objects/static-surface/index.mjs' });
   const { panel, controls, lenses, resources } = contentSource;
@@ -75,7 +92,9 @@ export async function prepareStaticSurfaceObject({ objectDirectory, publicDirect
   const payload = JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id, type: descriptor.type, format: 'cssearth-css-object@4', data: definition });
   await writeFile(resolve(outputDirectory, 'object.json'), payload);
   if (write) {
-    await writeFile(descriptorPath, `${JSON.stringify({ ...rawDescriptor, prepared: { format: 'cssearth-css-object@4', url: 'prepared/object.json', sha256: hash(payload) } }, null, 2)}\n`);
+    await writeFile(descriptorPath, `${JSON.stringify({ ...rawDescriptor,
+      properties: { ...rawDescriptor.properties, ...(scene.worldFrame ? { worldFrame: scene.worldFrame } : {}) },
+      prepared: { format: 'cssearth-css-object@4', url: 'prepared/object.json', sha256: hash(payload) } }, null, 2)}\n`);
     await writeFile(resolve(objectDirectory, 'runtime-assets.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   }
   await writeJson(resolve(outputDirectory, 'authored-preparation.json'), { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: [...sources.values()].map(value => value.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true } });

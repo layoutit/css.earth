@@ -14,7 +14,8 @@ export interface ObjectNavigationTarget extends EventTarget {
   removeAttribute(name: string): void;
 }
 
-export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host: EventTarget) {
+export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host: EventTarget,
+  { activation = 'click' }: { activation?: 'click' | 'dblclick' } = {}) {
   let objectId: string | null = null;
   const stopPointer = (event: Event) => { if (objectId !== null) event.stopPropagation(); };
   const activate = (event: Event) => {
@@ -28,10 +29,11 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
     activate(event);
   };
   element.setAttribute('role', 'button');
+  element.dataset.objectNavigateActivation = activation;
   element.addEventListener('pointerdown', stopPointer);
   element.addEventListener('mousedown', stopPointer);
-  element.addEventListener('dblclick', stopPointer);
-  element.addEventListener('click', activate);
+  element.addEventListener('dblclick', activation === 'dblclick' ? activate : stopPointer);
+  element.addEventListener('click', activation === 'click' ? activate : stopPointer);
   element.addEventListener('keydown', keyboard);
   const update = (next: string | null, name?: string) => {
     objectId = next;
@@ -52,8 +54,9 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
     update(null);
     element.removeEventListener('pointerdown', stopPointer);
     element.removeEventListener('mousedown', stopPointer);
-    element.removeEventListener('dblclick', stopPointer);
-    element.removeEventListener('click', activate);
+    delete element.dataset.objectNavigateActivation;
+    element.removeEventListener('dblclick', activation === 'dblclick' ? activate : stopPointer);
+    element.removeEventListener('click', activation === 'click' ? activate : stopPointer);
     element.removeEventListener('keydown', keyboard);
   } });
 }

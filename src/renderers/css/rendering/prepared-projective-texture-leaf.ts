@@ -63,35 +63,15 @@ export function createPreparedProjectiveTextureLeaf(prepared: PreparedProjective
   const rasterScale = layer.rasterScale ?? 1;
   applyPreparedProjectiveLayout(leaf.style, layout, rasterScale);
 
-  const texture = document.createElement("span");
-  texture.className = "polycss-projective-texture";
-  texture.style.cssText = prepared.style;
-  applyPreparedProjectiveLayout(texture.style, layout, rasterScale);
-  texture.style.position = "absolute";
-  texture.style.inset = "0 auto auto 0";
-  texture.style.display = "block";
-  texture.style.width = "100%";
-  texture.style.height = "100%";
-  texture.style.margin = "0";
-  texture.style.padding = "0";
-  texture.style.border = "0";
-  texture.style.lineHeight = "0";
-  texture.style.textDecoration = "none";
-  texture.style.transform = `matrix3d(${layer.textureMatrix})`;
-  texture.style.transformOrigin = "0 0";
-  texture.style.transformStyle = "flat";
-  texture.style.backfaceVisibility = "visible";
-  texture.style.backgroundImage = "inherit";
-  scalePreparedBackgroundAddresses(texture.style, rasterScale);
-  texture.style.backgroundRepeat = "no-repeat";
-  texture.style.backgroundOrigin = "border-box";
-  texture.style.backgroundClip = "border-box";
-  texture.style.pointerEvents = "none";
-
-  leaf.style.transform = `matrix3d(${layer.frameMatrix})`;
-  // The frame and texture matrices form one projective transform. Flattening
-  // between them distorts texel boundaries into wedges at oblique angles.
+  // Transport the prepared homography on the raster itself. A transformed
+  // descendant can escape its CSS paint bounds under a physical perspective.
+  leaf.style.transform = composePreparedProjectiveTransform(layer.frameMatrix, layer.textureMatrix);
   leaf.style.transformStyle = "preserve-3d";
+  leaf.style.transformOrigin = "0 0";
+  scalePreparedBackgroundAddresses(leaf.style, rasterScale);
+  leaf.style.backgroundRepeat = "no-repeat";
+  leaf.style.backgroundOrigin = "border-box";
+  leaf.style.backgroundClip = "border-box";
   for (const property of [
     "--polycss-atlas-width",
     "--polycss-atlas-height",
@@ -110,9 +90,22 @@ export function createPreparedProjectiveTextureLeaf(prepared: PreparedProjective
   if (leaf.style.height) {
     leaf.style.height = scalePreparedPixelLengths(leaf.style.height, rasterScale);
   }
-  leaf.style.backgroundPosition = "0px 0px";
-  leaf.style.backgroundSize = "0px 0px";
-  leaf.style.backgroundRepeat = "no-repeat";
-  leaf.appendChild(texture);
   return leaf;
+}
+
+/** Matrix transport only: multiply the two authored factors without resampling. */
+export function composePreparedProjectiveTransform(frame: string | readonly number[], texture: string | readonly number[]): string {
+  const parse = (value: string | readonly number[]) => {
+    const matrix = typeof value === 'string' ? value.split(',').map(Number) : Array.from(value);
+    if (matrix.length !== 16 || matrix.some(value => !Number.isFinite(value))) throw new TypeError('Invalid prepared projective matrix.');
+    return matrix;
+  };
+  const a = parse(frame), b = parse(texture);
+  const product = Array.from({ length: 16 }, (_, index) => {
+    const row = index % 4, column = Math.floor(index / 4);
+    return a[row] * b[column * 4] + a[row + 4] * b[column * 4 + 1] +
+      a[row + 8] * b[column * 4 + 2] + a[row + 12] * b[column * 4 + 3];
+  });
+  if (product.some(value => !Number.isFinite(value))) throw new TypeError('Prepared projective matrix overflowed.');
+  return `matrix3d(${product.join(',')})`;
 }

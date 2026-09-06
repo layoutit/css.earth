@@ -59,6 +59,11 @@
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
           "sha256": "81ecaffa8af09c19ec770bee22053f653459af3593c2093dc8c16388715c40f6"
+        },
+        {
+          "id": "world-context",
+          "path": "source/navigation/universe.json",
+          "sha256": "1a48fb4e7f7cfa0479ae7bd3bc322643d8566c9bd5c7d61711883a451b931b8b"
         }
       ],
       "shape": {
@@ -105,11 +110,33 @@
         "source": "raster",
         "material": "emission"
       }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "presentationToReference": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 2244193.5483870967,
+      "bodyRadiusM": 695700000
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0e73497fad163c516c3c49316af017900f9bff76625d269bec854d300a092864"
+    "sha256": "7e583634780fabc178bc6ffb426532eb6f6ff7560883bdeacd25a67e50143186"
   }
 }

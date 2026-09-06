@@ -15,7 +15,8 @@ test('mounts prepared PolyCSS texture leaves under retained planet groups',async
  const nodes=presentation.tree.nodes;
  assert.equal(nodes.filter(node=>node.className?.split(/\s+/).includes('polycss-camera')).length,1);
  assert.equal(nodes.filter(node=>node.className?.split(/\s+/).includes('saturn-cutaway')).length,1);
- assert.ok(nodes.some(node=>node.className==='polycss-projective-texture'));
+ assert.ok(nodes.some(node=>node.attributes['data-prepared-projection']==='single-leaf'));
+ assert.equal(nodes.some(node=>node.className==='polycss-projective-texture'),false);
  const data=JSON.stringify(presentation);
  assert.doesNotMatch(data,/bodyVisibility|createPreparedBodyVisibility|PREPARED_SATURN_MOON|saturn-moon|devicePixelRatio/);
  assert.doesNotMatch(data,/canvas|getContext\(|new DOMMatrix|loadPreparedOrbitBank|DecompressionStream/);
