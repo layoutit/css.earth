@@ -12,6 +12,10 @@ No NASA, JPL, DLR, or partner endorsement is implied. The repository's software
 license does not replace these image-use terms.
 
 Original images are downloaded from their public sources, verified against the
-local manifest, and excluded from Git. This preparation slice does not publish
-or bundle a Ceres scene. Its enhanced-color output must remain labeled as false
-color; its monochrome output must not be described as true color.
+local manifest, and excluded from Git. Prepared imagery is published in the Ceres runtime asset inventory. Enhanced
+color remains labeled as false color; monochrome is not described as true color.
+Black south-polar gaps in the enhanced map are retained.
+
+Sky panorama: ESO/S. Brunier, CC BY 4.0. HYG catalogue attribution and the ESO
+license are retained in `source/stars/`. Title outlines derive from Inter by
+Rasmus Andersson, under the SIL Open Font License 1.1.

@@ -13,7 +13,7 @@ const prepared = JSON.parse(await readFile(resolve(import.meta.dirname, "../.pre
 
 test("downloaded Dawn rasters match their pinned sources and reject corruption", async () => {
   await source.verify();
-  for (const entry of source.manifest.inputs) {
+  for (const entry of source.manifest.inputs.filter(input => input.consumers.includes("surfaces"))) {
     const bytes = Buffer.from(await readFile(resolve(sourceRoot, entry.path)));
     bytes[0] ^= 1;
     assert.throws(() => source.assertBytes(entry, bytes), /hash drifted/);
@@ -21,7 +21,7 @@ test("downloaded Dawn rasters match their pinned sources and reject corruption",
 });
 
 test("prepared bands preserve map pixels, orientation, and both seam gutters for each lens", async () => {
-  assert.deepEqual(prepared.surfaces.map(s => s.id), source.manifest.inputs.map(s => s.lensId));
+  assert.deepEqual(prepared.surfaces.map(s => s.id), source.manifest.inputs.filter(input => input.consumers.includes("surfaces")).map(s => s.lensId));
   for (const lens of prepared.surfaces) {
     const entry = source.manifest.inputs.find(input => input.lensId === lens.id);
     const decoded = {};

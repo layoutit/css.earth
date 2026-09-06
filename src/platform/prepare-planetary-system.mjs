@@ -119,10 +119,12 @@ export async function preparePlanetarySystem({
       typeof presentationFrame?.toPresentation !== "function" ||
       !Array.isArray(presentationFrame.basis) ||
       !positive(kilometersPerUnit) ||
-      !Array.isArray(bodies) || !bodies.includes(bodyId) ||
+      !Array.isArray(bodies) || !HELIOCENTRIC_ORBITS[bodyId] ||
+      !BODY_FIXED_TO_ICRF_MATRICES[bodyId] ||
       bodies.some((id) => !HELIOCENTRIC_ORBITS[id] || !(GEOMETRIC_ALBEDO[id] > 0)) ||
       !Array.isArray(dwarfPlanets) || dwarfPlanets.some((id) => !(GEOMETRIC_ALBEDO[id] > 0)) ||
-      dwarfPlanets.some((id) => bodies.includes(id))) {
+      dwarfPlanets.some((id) => bodies.includes(id)) ||
+      ![...bodies, ...dwarfPlanets].includes(bodyId)) {
     throw new TypeError("Planetary system preparation arguments are invalid.");
   }
   if (Math.abs(determinant(presentationFrame.basis) - 1) > 1e-9) {
@@ -271,7 +273,7 @@ export async function preparePlanetarySystem({
       source: "vsop87a-state-vector-via-solar-geometry",
     };
   };
-  const others = [...bodies.filter((id) => id !== bodyId), ...dwarfPlanets].map((id) => {
+  const others = [...bodies, ...dwarfPlanets].filter((id) => id !== bodyId).map((id) => {
     const orbit = orbitFacts(id);
     const position = toScene(resolveKilometers(id));
     const { normal, perihelionDirection } = orbit;
@@ -435,7 +437,7 @@ export async function preparePlanetarySystem({
     sun: Object.freeze({ position: Object.freeze(sunPosition.map(round)) }),
     bodies: Object.freeze(bodiesWithBrightness),
     planetIds: Object.freeze(bodies.filter((id) => id !== bodyId)),
-    dwarfPlanetIds: Object.freeze([...dwarfPlanets]),
+    dwarfPlanetIds: Object.freeze(dwarfPlanets.filter((id) => id !== bodyId)),
     markerBrightness: MARKER_BRIGHTNESS,
     maximumExtentUnits,
     runtimeGeometryDerivation: false,
