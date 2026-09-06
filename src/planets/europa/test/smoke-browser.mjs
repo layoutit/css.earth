@@ -34,11 +34,13 @@ try {
   assert.equal(await page.locator('.planet-stage').getAttribute('data-lens'), "enhanced");
   assert.equal(await page.evaluate(() => window.__europa.assertStableDomIdentity()), true);
   await page.screenshot({path:`${output}/enhanced.png`});
-  assert.equal(await page.locator('.europa-material').evaluate(el => getComputedStyle(el).backgroundImage), "none");
+  const beforeShadows = await page.locator('.europa-material').evaluate(el => getComputedStyle(el).backgroundPosition);
   await page.evaluate(() => document.querySelector('input[name="shadows"]').click());
   await paint();
-  assert.equal(await page.locator('.europa-material').evaluate(el => getComputedStyle(el).backgroundImage), "none",
-    "Shadows cannot add another Sun over the photographed color");
+  assert.notEqual(await page.locator('.europa-material').evaluate(el => getComputedStyle(el).backgroundImage), "none",
+    "Enhanced color retains our prepared shadows");
+  assert.notEqual(await page.locator('.europa-material').evaluate(el => getComputedStyle(el).backgroundPosition), beforeShadows,
+    "The Shadows control changes the displayed lighting frame");
   await page.evaluate(() => document.querySelector('input[name="shadows"]').click());
   await page.evaluate(() => window.__europa.lenses.select("normal"));
   assert.notEqual(await page.locator('.europa-material').evaluate(el => getComputedStyle(el).backgroundImage), "none",

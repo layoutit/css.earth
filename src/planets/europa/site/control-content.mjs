@@ -25,8 +25,8 @@ export const objectControls = Object.freeze({
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "Galileo color · photographed lighting",
-        "title": "Calibrated Galileo observations: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. About 19% of the surface has all three bands. Elsewhere, observed monochrome remains; the gray grid marks gaps in both sources. Original shadows and brightness seams remain. The Shadows setting adds no lighting to this lens.",
+        "description": "Galileo color over monochrome",
+        "title": "Calibrated Galileo observations: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. About 19% of the surface has all three bands. Elsewhere, observed monochrome remains; the gray grid marks gaps in both sources. Original photographed shading and brightness seams remain; added globe lighting is approximate.",
         "thumbnailUrl": "/scenes/europa/europa-enhanced-thumbnail.webp"
       }
     ]

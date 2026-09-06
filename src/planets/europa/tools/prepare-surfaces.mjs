@@ -59,7 +59,7 @@ for (let i = 0; i < color.missing.length; i++) {
   }
 }
 const enhanced = await prepareSurface("enhanced", color.rgb, color.missing, {
-  label:"Enhanced color",falseColor:true,relight:false,sourceIds:[entry.id,...color.sourceIds],
+  label:"Enhanced color",falseColor:true,sourceIds:[entry.id,...color.sourceIds],
   projection:{type:"equirectangular",longitudeDegrees:[0,360],latitudeDegrees:[90,-90],longitudeDirection:"east-positive",referenceRadiusMeters:1560800},
   coverage:"Valid infrared/green/violet observations over the observed monochrome base. Gray grid only where neither source has imagery.",
   monochromePixels,
