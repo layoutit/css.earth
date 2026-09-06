@@ -604,16 +604,17 @@ async function proveDesktop(browser, planet, profile) {
     await proveBreakpointCrossings(page, planet, profile, bounds, baseline);
     await exerciseRetainedInteractions(page, planet, profile);
 
+    const runningBeforePause = await page.locator(".planet-stage").evaluate((stage) =>
+      stage.getAnimations({ subtree: true }).filter(({ playState }) => playState === "running").length);
     await setDocumentVisibility(page, true);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
       stage.getAnimations({ subtree: true }).every(
         ({ playState }) => playState === "paused",
       )), true, `${planet.id}: pause must stop every scene animation`);
     await setDocumentVisibility(page, false);
-    assert.ok(await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).some(
-        ({ playState }) => playState === "running",
-      )), `${planet.id}: resume must restart scene animation`);
+    assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
+      stage.getAnimations({ subtree: true }).filter(({ playState }) => playState === "running").length),
+      runningBeforePause, `${planet.id}: resume must restore the previously running animations`);
 
     const retainedProof = await finishRetainedProbe(
       page,
