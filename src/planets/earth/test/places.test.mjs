@@ -12,11 +12,13 @@ import { createDestinationStore } from "../../../platform/prepared-destination-s
 import { PREPARED_EARTH_SCENE } from "../runtime/preparedScene.mjs";
 import { prepareCityPageGeometry, createCityGeographicSampler } from "../tools/city/page-geometry.mjs";
 import { pageCoordinates, prepareLocationPoint } from "../tools/city/prepare-location.mjs";
+import { readPlaceSources, sourceRows } from "../tools/place-sources.mjs";
 
 const packed = await readFile(new URL(`../../../../public${PREPARED_EARTH_PLACES.url}`, import.meta.url));
 const bytes = gunzipSync(packed);
 const directory = JSON.parse(bytes);
-const catalog = await preparePlaceCatalog(), { places } = catalog;
+let hierarchy;
+const catalog = await preparePlaceCatalog({ onReceipt: value => { hierarchy = value; } }), { places } = catalog;
 const search = JSON.parse(gunzipSync(await readFile(new URL(`../../../../public${directory.search.url}`, import.meta.url))));
 
 test("prepared city catalogue is pinned, distinct and globally distributed", () => {
@@ -99,13 +101,59 @@ test("all entity IDs resolve with source-identical details inside the bounded ca
   for (const [id] of directory.entries) {
     const result = await store.resolve(id);
     assert.deepEqual(result.entity, expected.get(id), id);
-    assert.ok(result.ancestors.length <= 1);
+    assert.ok(result.ancestors.length <= 2);
   }
   assert.equal(await store.resolve("unknown"), null);
   assert.equal(store.stats().searchDecodedBytes, 0, "Direct lookup never loads search");
   assert.ok(store.stats().peakDetailPacks <= store.stats().limits.detailCachePacks);
   assert.ok(store.stats().peakDetailBytes <= store.stats().limits.detailCacheBytes);
   store.dispose(); assert.equal(store.stats().detailDecodedBytes, 0);
+});
+
+test("all source country, ADM1 and city IDs survive, with their deepest verified parent chain", async () => {
+  const { sources } = await readPlaceSources();
+  const countries = sourceRows(sources.get("countryInfo.txt"));
+  const admins = sourceRows(sources.get("admin1CodesASCII.txt"));
+  const cities = sourceRows(sources.get("cities15000.zip"));
+  const byId = new Map(places.map(place => [place.id, place]));
+  const adminByCode = new Map(admins.map(row => [row[0], row]));
+  assert.equal(places.length, countries.length + admins.length + cities.length);
+  for (const row of countries) {
+    const entity = byId.get(`country:${row[0]}`);
+    assert.equal(entity.identifiers.geonames, row[16]);
+    assert.equal(entity.parentId, "earth");
+  }
+  for (const row of admins) {
+    const entity = byId.get(`admin1:${row[3]}`);
+    assert.equal(entity.identifiers.geonames, row[3]);
+    assert.equal(entity.parentId, `country:${row[0].split(".")[0]}`);
+    assert.equal(entity.sourceRecord.featureCode, "ADM1");
+  }
+  const unresolved = new Set(hierarchy.unresolvedCityParents.map(row => row.id));
+  for (const row of cities) {
+    const entity = byId.get(row[0]);
+    assert.ok(entity, `legacy city ID ${row[0]}`);
+    assert.equal(entity.latitude, Number(row[4]));
+    assert.equal(entity.longitude, Number(row[5]));
+    const admin = adminByCode.get(`${row[8]}.${row[10]}`);
+    assert.equal(entity.parentId, admin ? `admin1:${admin[3]}` : `country:${row[8]}`);
+    if (!admin && row[10] && row[10] !== "00") assert.ok(unresolved.has(row[0]), "missing parent codes must be enumerated");
+  }
+  for (const place of places) {
+    const seen = new Set([place.id]); let parent = place.parentId;
+    while (parent !== "earth") {
+      assert.ok(byId.has(parent), `missing parent ${parent}`);
+      assert.ok(!seen.has(parent), `cycle ${parent}`); seen.add(parent); parent = byId.get(parent).parentId;
+    }
+  }
+  for (const id of [...hierarchy.countryPointViews, ...hierarchy.adminPointViews]) {
+    assert.equal(byId.get(id).navigation.kind, "source-point");
+    assert.equal("bounds" in byId.get(id).navigation, false);
+  }
+  for (const id of hierarchy.historical) {
+    assert.equal(byId.get(id).sourceRecord.featureCode, "PCLH");
+    assert.ok(byId.get(id).kindLabel.startsWith("Historical"));
+  }
 });
 
 test("destination preparation reproduces every installed pack byte for byte", async () => {

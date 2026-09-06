@@ -5,7 +5,7 @@
   "sourcePage": "https://www.geonames.org/export/",
   "license": "CC-BY-4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-  "qualification": "Cities with population over 15000 or capitals in this pinned GeoNames snapshot. This is a place catalogue, not an imagery coverage claim.",
+  "qualification": "Cities with population over 15000 or capitals in the pinned GeoNames snapshot, plus every country/territory and ADM1 record in its code tables. Historical country records are explicitly marked. Administrative parentage follows GeoNames codes; geometry only supplies optional navigation views. This is not an imagery or political-boundary completeness claim.",
   "inputs": [
     {
       "path": "cities15000.zip",
@@ -39,6 +39,72 @@
       "sourcePage": "https://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/",
       "license": "Public domain",
       "licenseUrl": "https://www.naturalearthdata.com/about/terms-of-use/"
+    },
+    {
+      "path": "administrative-records.tsv.gz",
+      "origin": "https://download.geonames.org/export/dump/allCountries.zip",
+      "encoding": "gzip",
+      "bytes": 1931598,
+      "sha256": "690b92cc9deee95872c5530dcb1da0b222db5f027a9320affa1cb7b3445b1df9",
+      "decodedBytes": 5572891,
+      "decodedSha256": "375f60508798819a7f0edeefb9789cedeaa9da5e13324123b075436de730ebce",
+      "upstream": {
+        "origin": "https://download.geonames.org/export/dump/allCountries.zip",
+        "bytes": 421181043,
+        "sha256": "a74c3e4f050e83b38236b2a7980e09c4f567506b76c5a7dd8a98e28826aaffc7",
+        "member": "allCountries.txt",
+        "decodedBytes": 1786190012,
+        "decodedSha256": "802860ca9153dcc3564ea36c62c3e6040f3c2929c3337d709b1a3822fbf699a1",
+        "lastModified": "Sun, 06 Sep 2026 02:38:35 GMT"
+      },
+      "filter": {
+        "inputs": [
+          {
+            "path": "countryInfo.txt",
+            "sha256": "93bafc525813f22e4711ff9ed6d626343094ce48c26388dc7c49189b3d7d5512"
+          },
+          {
+            "path": "admin1CodesASCII.txt",
+            "sha256": "590651498043f674accda2b7f46d21286cda0e290b02f8561c5005eee9a5448c"
+          }
+        ],
+        "requestedIds": 4117,
+        "retainedIds": 4117,
+        "missingIds": [],
+        "scannedRecords": 13464058
+      },
+      "retrievedAt": "2026-09-06T05:23:45.136Z",
+      "sourcePage": "https://www.geonames.org/export/",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "path": "ne_10m_admin_1_states_provinces.geojson.gz",
+      "origin": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/9380cca83db5f9aef52d5e762765100745f84b27/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "bytes": 12069003,
+      "sha256": "94365c800296d7860939889ae20bce1f0daeb6af605ea69264bf5c24f9194da3",
+      "encoding": "gzip",
+      "decodedBytes": 40726851,
+      "decodedSha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+      "sourceCommit": "9380cca83db5f9aef52d5e762765100745f84b27",
+      "features": 4596,
+      "sourcePage": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+      "license": "Public domain",
+      "licenseUrl": "https://www.naturalearthdata.com/about/terms-of-use/"
+    },
+    {
+      "path": "shapes_simplified_low.json.zip",
+      "origin": "https://download.geonames.org/export/dump/shapes_simplified_low.json.zip",
+      "bytes": 1302556,
+      "sha256": "37bdc310eedb1b553671482f35403e405d038e226812e807eeb07754c81350e5",
+      "member": "shapes_simplified_low.json",
+      "decodedBytes": 4640460,
+      "decodedSha256": "ff8df60fb2b1d9ec8f190d51196092fec87fadd6154ba128f87bfa504e418aee",
+      "retrievedAt": "2026-09-06T05:23:38.888Z",
+      "sourcePage": "https://www.geonames.org/export/",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
     }
-  ]
+  ],
+  "administrativeSnapshotDate": "2026-09-06"
 }

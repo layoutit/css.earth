@@ -125,6 +125,34 @@ region and license records, acquired September 4, 2026. The snapshot contains
 capitals; it is not every settlement. GeoNames data is CC BY 4.0 and receives
 visible attribution in the shell.
 
+The same pinned code tables supply 252 country/territory records (including two
+explicitly historical entities) and 3,865 ADM1 records. Their 4,117 location
+records were extracted from the September 6 GeoNames `allCountries.zip` stream;
+the compressed and decoded archive hashes, code-table filter and retained subset
+hash are recorded in `source/places/manifest.json`. Only the 1.93 MB compressed
+subset is checked in. `node src/planets/earth/tools/acquire-administrative-records.mjs`
+verifies it without downloading the archive. Explicit `--reacquire` streams the
+publisher ZIP through a CRC-checking decoder with bounded input, line and subset
+sizes; a changed upstream snapshot fails instead of replacing the pin. The full
+archive and expanded world table are never written to disk.
+
+Administrative identity, classification and parents follow GeoNames codes.
+Natural Earth 1:10m ADM1 geometry is pinned to commit
+`9380cca83db5f9aef52d5e762765100745f84b27`, with public-domain source attribution.
+It supplies navigation bounds only for unique matching GeoNames IDs, country
+codes and ADM1 codes. Its type labels are not administrative authority. Accepted
+country camera views keep the earlier 1:110m geometry; new country views use
+GeoNames simplified country shapes under CC BY 4.0. These are framing extents,
+not political boundary overlays. Geometry gaps/conflicts retain the GeoNames
+location point: 726 ADM1 records and four country records have point views.
+
+All 34,310 existing destination IDs and camera destinations are preserved. The
+expanded catalogue has 38,252 entities. Cities link to their deepest verified
+parent; 23 cities with unmatched ADM1 codes retain their verified country parent.
+The generated `.prepared/entity-hierarchy.json` enumerates those records, point
+views, conflicting geometry joins, historical entities and alternate country
+codes. Its preparation report stays out of the browser payload.
+
 `tools/prepare-places.mjs` verifies source hashes, normalizes names and aliases,
 and prepares camera controls against the accepted Earth face projection. It
 writes content-addressed directory, search and detail packs with encoded/decoded
@@ -135,7 +163,7 @@ derivation runs in the browser. The existing camera rounds control angles to
 hundredths of a degree; this is city navigation, not a precision survey marker.
 
 Place coverage and imagery coverage are distinct. Locations within the pinned WorldCover source footprints open at 1024x; other locations open an overview and report that detail is unavailable. City search does not control which geographic regions are prepared. The accepted animated fly-to is preserved, and surface lenses remain available after selecting a destination. Prepared footprint coverage does not certify every source pixel.
-Validation: `node --test src/planets/earth/test/places.test.mjs` and
+Validation: `node --test src/planets/earth/test/places.test.mjs src/planets/earth/test/administrative-places.test.mjs` and
 `node src/planets/earth/test/places-browser.mjs http://127.0.0.1:4228`.
 The browser check uses real Google Chrome at DPR 1 and 2 plus phone-size
 emulation. It exercises search, keyboard selection, camera centering, imagery

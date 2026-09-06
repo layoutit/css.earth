@@ -1,7 +1,7 @@
-// Receipts from the 34,310-record source snapshot: search 10.4 MB, directory
-// below 1 MB, detail shards below 128 KB. Leave bounded room for ADM1 records.
+// The city/country/ADM1 snapshot needs about 18 MB for all source aliases.
+// Keep transport and residency admission finite with measured room.
 export const DESTINATION_LIMITS = Object.freeze({
-  directoryBytes: 2 * 1024 * 1024, searchBytes: 16 * 1024 * 1024,
+  directoryBytes: 2 * 1024 * 1024, searchBytes: 20 * 1024 * 1024,
   detailBytes: 256 * 1024, detailCacheBytes: 4 * 1024 * 1024,
   detailCachePacks: 16, recordsPerPack: 128, entities: 100000,
   aliases: 600000, packs: 1024, parentDepth: 8,
