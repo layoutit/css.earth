@@ -482,7 +482,7 @@ test("keeps the introduction below the title and previews four facts in a collap
   );
   assert.match(
     styles,
-    /\.planet-facts\s*\{[\s\S]*?margin:\s*8px 0 0;[\s\S]*?font-family:\s*var\(--shell-ui-font\);[\s\S]*?font-size:\s*1rem;[\s\S]*?line-height:\s*1\.4;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-facts li\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, max-content\) minmax\(8px, 1fr\) max-content;[\s\S]*?align-items:\s*baseline;[\s\S]*?gap:\s*8px;[\s\S]*?\.planet-facts li::before\s*\{[\s\S]*?border-bottom:\s*1px dotted rgb\(255 255 255 \/ 12%\);[\s\S]*?\.planet-fact-label\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);[\s\S]*?opacity:\s*1;[\s\S]*?\.planet-fact-value\s*\{[\s\S]*?grid-column:\s*3;[\s\S]*?font:\s*inherit;/u,
+    /\.planet-facts\s*\{[\s\S]*?margin:\s*8px 0 0;[\s\S]*?font-family:\s*var\(--shell-ui-font\);[\s\S]*?font-size:\s*0\.875rem;[\s\S]*?line-height:\s*20px;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-facts li\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, max-content\) minmax\(8px, 1fr\) max-content;[\s\S]*?align-items:\s*baseline;[\s\S]*?gap:\s*8px;[\s\S]*?\.planet-facts li::before\s*\{[\s\S]*?border-bottom:\s*1px dotted rgb\(255 255 255 \/ 12%\);[\s\S]*?\.planet-fact-label\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);[\s\S]*?opacity:\s*1;[\s\S]*?\.planet-fact-value\s*\{[\s\S]*?grid-column:\s*3;[\s\S]*?font:\s*inherit;/u,
   );
   for (const className of ["planet-chart", "planet-gallery", "planet-settings"]) {
     assert.match(styles, new RegExp(`\\.${className}\\s*\\{[^}]*margin:\\s*8px 0 0;`, "u"));
@@ -545,9 +545,9 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.doesNotMatch(shell, /PlanetNavigationMarker|activePlanetIndex/u);
   assert.match(
     shell,
-    /class="planet-title-row">\s*<h1 class="planet-title"[\s\S]*?<\/h1>\s*<\/div>/u,
+    /class="planet-title-row">\s*<h1 class="planet-title"[\s\S]*?<\/h1>[\s\S]*?class="planet-classification-tag planet-title-tag"[\s\S]*?class="planet-distance-tag planet-title-tag"[\s\S]*?<\/div>/u,
   );
-  assert.match(shell, /import \{ PLANET_SEARCH_OBJECTS \} from "\.\.\/planet-search-objects\.mjs";/u);
+  assert.match(shell, /import \{ PLANET_SEARCH_OBJECTS, objectClassificationLabel \} from "\.\.\/planet-search-objects\.mjs";/u);
   assert.match(
     shell,
     /const planetCount = PLANET_SEARCH_OBJECTS\.length;/u,
@@ -596,7 +596,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   );
   assert.match(
     styles,
-    /@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-introduction\s*\{[\s\S]*?margin-top:\s*4px;[\s\S]*?padding:\s*0 29px 0 0;[\s\S]*?font-size:\s*1rem;[\s\S]*?text-wrap:\s*balance;/u,
+    /@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-introduction\s*\{[\s\S]*?margin-top:\s*8px;[\s\S]*?padding:\s*0 29px 0 0;[\s\S]*?font-size:\s*1rem;[\s\S]*?text-wrap:\s*balance;/u,
   );
   assert.doesNotMatch(
     styles,
@@ -610,7 +610,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.match(shell, /class="planet-sidebar-search-icon"[\s\S]*?<SearchIcon \/>[\s\S]*?class="planet-sidebar-search"/u);
   assert.match(
     mapsStyles,
-    /\.planet-sidebar-search\s*\{[^}]*padding:\s*12px 20px 12px 48px;[^}]*box-shadow:\s*none;/u,
+    /\.planet-sidebar-search\s*\{[^}]*padding:\s*12px 52px 12px 48px;[^}]*box-shadow:\s*none;/u,
   );
   assert.doesNotMatch(styles, /\.planet-sidebar-search:focus-visible/u);
   assert.match(
@@ -689,7 +689,7 @@ test("switches the desktop sidebar to the one shared planet list", async () => {
   ]);
   assert.match(
     shell,
-    /class="planet-sidebar-search-card"[\s\S]*?class="planet-sidebar-search-icon"[\s\S]*?<SearchIcon \/>[\s\S]*?class="planet-sidebar-search"[\s\S]*?<\/div>[\s\S]*?class="planet-drawer-content"[\s\S]*?class="planet-object-browser maps-object-results"[\s\S]*?hidden[\s\S]*?<PlanetObjectResults activeObjectId=\{objectId\} \/>[\s\S]*?class="planet-information-panel"[\s\S]*?class="planet-sidebar-view-all"[\s\S]*?aria-label="View all objects"[\s\S]*?>×<\/button>/u,
+    /class="planet-sidebar-search-card"[\s\S]*?class="planet-sidebar-search-icon"[\s\S]*?<SearchIcon \/>[\s\S]*?class="planet-sidebar-search"[\s\S]*?class="planet-sidebar-view-all"[\s\S]*?aria-label="View all objects"[\s\S]*?>×<\/button>[\s\S]*?<\/div>[\s\S]*?class="planet-drawer-content"[\s\S]*?class="planet-object-browser maps-object-results"[\s\S]*?hidden[\s\S]*?<PlanetObjectResults activeObjectId=\{objectId\} \/>[\s\S]*?class="planet-information-panel"/u,
   );
   assert.doesNotMatch(shell, /planet-sidebar-search-submit/u);
   assert.doesNotMatch(shell, /CssEarthWordmark|planet-sidebar-wordmark/u);

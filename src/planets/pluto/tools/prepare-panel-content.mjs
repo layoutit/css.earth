@@ -11,7 +11,6 @@ const panel = {
   modified: source.modified,
   introduction: "Pluto is an icy dwarf planet in the Kuiper Belt. New Horizons revealed mountains, glaciers, and a heart-shaped plain during its 2015 flyby.",
   facts: [
-    { id: "classification", label: "Classification", value: "Dwarf planet" },
     { id: "distance-from-sun", label: "Distance from Sun", value: `${source.meanHeliocentricDistanceAu} AU (mean)` },
     { id: "radius", label: "Radius", value: `${source.meanRadiusKm.toLocaleString("en-US")} km` },
     { id: "orbital-period", label: "Orbital period", value: `${source.orbitalPeriodYears} years` },
