@@ -84,7 +84,7 @@ try {
         };
       });
       assert.deepEqual(initial, {
-        title: "Neptune - Powered by PolyCSS",
+        title: "Neptune in 3D | cssEarth",
         stageChildren: 1,
         stageElements: 809,
         bodyLeafCount: 724,
