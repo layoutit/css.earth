@@ -48,8 +48,7 @@ try {
     cameraAnimationTime: document.getAnimations().find(({ id }) =>
       id === "earth-camera-orbit")?.currentTime,
     normalSurfaceImage: getComputedStyle(document.querySelector(
-      ".earth-body:not(.earth-body-polar) > s.earth-surface-leaf > " +
-      ".polycss-projective-texture",
+      ".earth-body:not(.earth-body-polar) > s.earth-surface-leaf",
     )).backgroundImage,
     normalPolesImage: getComputedStyle(document.querySelector(
       ".earth-body-polar > s",
@@ -153,8 +152,8 @@ try {
       const images = (selector) => [...new Set([...document.querySelectorAll(selector)]
         .map((element) => getComputedStyle(element).backgroundImage))].sort();
       return {
-        exterior: images(".earth-body:not(.earth-body-polar) > s.earth-surface-leaf > .polycss-projective-texture"),
-        interior: images(".earth-cutaway-body:not(.earth-cutaway-body-polar) > s > .polycss-projective-texture"),
+        exterior: images(".earth-body:not(.earth-body-polar) > s.earth-surface-leaf"),
+        interior: images(".earth-cutaway-body:not(.earth-cutaway-body-polar) > s"),
         bank: window.__earth.runtime.resources().pools.find(pool => pool.id === "pages"),
       };
     });

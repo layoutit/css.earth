@@ -5,7 +5,8 @@ export type PreparedMaterialView = Pick<PreparedView, "sunViewDirection" | "scen
 export interface PreparedMaterialFrameMapping { thresholds: readonly number[]; indices: readonly number[]; }
 export interface PreparedMaterialAddress { resource: string | null; backgroundPosition: string; backgroundSize: string; frame: number | null; row: number | null; prewarm?: readonly string[]; }
 export interface PreparedMaterialBank { id: string; default?: PreparedMaterialAddress | null; fixed?: PreparedMaterialAddress | null; frames: readonly PreparedMaterialAddress[]; }
-interface RotationPolicy { reference: "initial" | "prepared"; baseDegrees: number; polePolicy?: "azimuth" | "preserve"; zeroAtPole?: boolean; onlyWhenEnabled?: boolean; publishWithAddress?: boolean; }
+interface RotationPolicy { reference: "initial" | "prepared"; baseDegrees: number; polePolicy?: "azimuth" | "preserve"; zeroAtPole?: boolean; onlyWhenEnabled?: boolean; publishWithAddress?: boolean;
+  physical?: Parameters<typeof createPreparedEllipsoidProjection>[0] & {systemTransform:string}; }
 export type PreparedMaterialRotation = RotationPolicy & (
   { kind: "angle"; property: string } |
   { kind: "planar"; width: number; height?: number } |
@@ -71,6 +72,7 @@ export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,ele
     lightRollDegrees:0,addressWrites:0,transformWrites:0,enabled:false,rotationEnabled:false,sunViewDirection:null};
   const planar=track.rotation?.kind==="planar"?createPreparedPlanarRotationPublisher({element,width:track.rotation.width,height:track.rotation.height}):null;
   const ellipsoid=track.rotation?.kind==="ellipsoid"?createPreparedEllipsoidProjection(track.rotation):null;
+  const physical=track.rotation?.physical?createPreparedEllipsoidProjection(track.rotation.physical):null;
   const write=(name: string,value: string)=>{
     const current=readPreparedStyle(element.style,name);
     if(current===value)return false;
@@ -115,14 +117,22 @@ export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,ele
         const base=rotation.reference==="initial"?Math.atan2(reference[1],reference[0])*180/Math.PI:rotation.baseDegrees;
         const angle=!selected.rotationEnabled?0:rotation.polePolicy!=="azimuth"&&Math.hypot(direction[0],direction[1])<1e-9?
           rotation.zeroAtPole?0:state.lightRollDegrees:degrees(Math.atan2(direction[1],direction[0])*180/Math.PI-base);
-        if(rotation.kind==="angle"){
+        if(view.projection&&physical&&rotation.physical){
+          const transform=physical({degrees:angle,projection:view.projection,
+            counterMatrix:view.counterRotationFor(rotation.physical.systemTransform)});
+          element.style.removeProperty('rotate');
+          // The physical matrix already contains the prepared texture centre.
+          if(write('transformOrigin','0 0'))state.transformWrites++;
+          if(write('transform',transform))state.transformWrites++;
+        }else if(rotation.kind==="angle"){
           if(Math.abs(angle-state.lightRollDegrees)>=1e-9||!selected.rotationEnabled||rotation.publishWithAddress){
             if(write(rotation.property,`${angle}deg`))state.transformWrites++;
           }
         }else if(planar){if(planar(angle))state.transformWrites++;}
         else if(ellipsoid && rotation.kind==="ellipsoid"){
           const transform=ellipsoid({degrees:angle,sceneMatrix:view.sceneMatrix,
-            counterMatrix:view.counterRotationFor(rotation.systemTransform),preserveDefault:next.useDefault});
+            counterMatrix:view.counterRotationFor(rotation.systemTransform),preserveDefault:next.useDefault,
+            projection:view.projection});
           if(write("transform",transform))state.transformWrites++;
         }else throw new TypeError("Unknown prepared material rotation.");
         state.lightRollDegrees=angle;

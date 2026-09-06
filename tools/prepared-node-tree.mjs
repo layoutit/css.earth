@@ -46,22 +46,21 @@ export function createPreparedNodeTree({ cssomReads = new Map() } = {}) {
     if (layer.schema !== "polycss-prepared-projective-texture-layer@1") throw new TypeError("Prepared projective layer is incompatible.");
     const scale = layer.rasterScale ?? 1;
     applyPreparedProjectiveLayout(node.style, layout, scale);
-    const texture = element("span", "polycss-projective-texture", prepared.style);
-    applyPreparedProjectiveLayout(texture.style, layout, scale);
-    Object.assign(texture.style, { position: "absolute", inset: "0 auto auto 0", display: "block", width: "100%", height: "100%",
-      margin: "0", padding: "0", border: "0", lineHeight: "0", textDecoration: "none", transform: `matrix3d(${layer.textureMatrix})`,
-      transformOrigin: "0 0", transformStyle: "flat", backfaceVisibility: "visible", backgroundImage: "inherit" });
-    scalePreparedBackgroundAddresses(texture.style, scale);
-    Object.assign(texture.style, { backgroundRepeat: "no-repeat", backgroundOrigin: "border-box", backgroundClip: "border-box", pointerEvents: "none" });
-    node.style.transform = `matrix3d(${layer.frameMatrix})`;
+    // One raster plane owns the complete homography. Splitting the frame and
+    // texture into nested composited planes lets Chrome paint outside the leaf
+    // under a close perspective camera, even when both DOM rectangles are small.
+    // Compose once during preparation; runtime only transports this matrix.
+    scalePreparedBackgroundAddresses(node.style, scale);
+    node.attributes['data-prepared-projection'] = 'single-leaf';
+    node.style.transform = `matrix3d(${composePreparedTextureMatrices(layer.frameMatrix, layer.textureMatrix)})`;
     node.style.transformStyle = "preserve-3d";
     for (const property of ["--polycss-atlas-width", "--polycss-atlas-height"]) {
       const value = node.style.getPropertyValue(property); if (value) node.style.setProperty(property, scalePreparedPixelLengths(value, scale));
     }
     if (node.style.width) node.style.width = scalePreparedPixelLengths(node.style.width, scale);
     if (node.style.height) node.style.height = scalePreparedPixelLengths(node.style.height, scale);
-    Object.assign(node.style, { backgroundPosition: "0px 0px", backgroundSize: "0px 0px", backgroundRepeat: "no-repeat" });
-    append(node, texture); return node;
+    Object.assign(node.style, { backgroundRepeat: "no-repeat", backgroundOrigin: "border-box", backgroundClip: "border-box", pointerEvents: "none" });
+    return node;
   }
   function finish({ camera, scene, stageClasses = [] }) {
     const nodes = [], indices = new Map(), visiting = new Set(), properties = [], propertyIds = new Map();
@@ -85,4 +84,17 @@ export function createPreparedNodeTree({ cssomReads = new Map() } = {}) {
     return { index, tree: { nodes, properties, camera: index(camera), scene: index(scene), stageClasses } };
   }
   return { element, mesh: (className, style = "", attributes = {}) => element("div", `polycss-mesh ${className}`, style, attributes), append, leaf, finish };
+}
+
+function composePreparedTextureMatrices(frameValue, textureValue) {
+  const parse = value => {
+    const matrix = String(value).split(',').map(Number);
+    if (matrix.length !== 16 || matrix.some(value => !Number.isFinite(value))) throw new TypeError('Prepared projective texture matrix is invalid.');
+    return matrix;
+  };
+  const frame = parse(frameValue), texture = parse(textureValue);
+  return Array.from({ length: 16 }, (_, index) => {
+    const row = index % 4, column = Math.floor(index / 4);
+    return [0, 1, 2, 3].reduce((sum, inner) => sum + frame[inner * 4 + row] * texture[column * 4 + inner], 0);
+  }).join(',');
 }

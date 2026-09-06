@@ -12,7 +12,7 @@ function deferred() {
 const saved = distance => ({ camera: { distanceKilometers: distance,
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [1234], speed: 1, motionRequested: false } });
-function harness({ prepare = async () => ({}), factoryGate = null, contentGate = null, persistentWorldContext = null } = {}) {
+function harness({ prepare = async () => ({}), focus = undefined, factoryGate = null, contentGate = null, persistentWorldContext = null } = {}) {
   const documentTarget = new EventTarget(), windowTarget = new EventTarget(), media = new EventTarget();
   documentTarget.hidden = false; documentTarget.documentElement = { dataset: {} };
   documentTarget.body = { classList: { add() {}, remove() {} } };
@@ -77,6 +77,7 @@ function harness({ prepare = async () => ({}), factoryGate = null, contentGate =
       return { id: object.id, apply() { assert.equal(signal.aborted, false); }, dispose() {} };
     },
     navigation: {
+      focus,
       supports: (from, to) => from !== 'earth' && to !== 'earth',
       prepare(options) { preparations.push(options); return prepare(options); },
     },
@@ -327,4 +328,40 @@ test('leaving the document releases its universe and a cached-page restore mount
   h.windowTarget.dispatchEvent(restored); await h.router.settled;
   assert.equal(mounted, 2); assert.equal(h.router.state().ready, true);
   h.router.destroy(); assert.equal(disposed, 2);
+});
+
+
+test('selecting the current object flies the retained camera without preparing or replacing detail', async () => {
+  const gate = deferred(), focuses = [];
+  const h = harness({ focus(options) { focuses.push(options); return gate.promise; } });
+  await h.router.settled;
+  const source = h.mounts[0];
+  source.value = saved(1e10);
+  const selecting = h.router.navigate('mercury'); await flush();
+  assert.equal(focuses.length, 1);
+  assert.equal(focuses[0].mount, source);
+  assert.equal(h.preparations.length, 0);
+  assert.equal(h.router.playback().reason, 'unavailable');
+  source.value = saved(10000); gate.resolve();
+  assert.equal(await selecting, true);
+  assert.equal(h.mounts.length, 1);
+  assert.equal(source.restores, 0);
+  assert.equal(h.shells.length, 1);
+  assert.equal(h.writes.filter(write => write === 'push').length, 0);
+  assert.equal(h.windowTarget.location.searchParams.get('v'), new URLSearchParams(formatSharedView(source.value)).get('v'));
+  h.router.destroy();
+});
+
+test('plain current-object anchors focus but saved-view links restore their specified view', async () => {
+  const focuses = [];
+  const h = harness({ focus(options) { focuses.push(options); } });
+  await h.router.settled;
+  await h.router.navigate('mercury', { url: 'https://example.test/mercury/' });
+  assert.equal(focuses.length, 1);
+  assert.equal(h.mounts[0].restores, 0);
+  await h.router.navigate('mercury', { url: `https://example.test/mercury/?${formatSharedView(saved(77777))}` });
+  assert.equal(focuses.length, 1);
+  assert.equal(h.mounts[0].value.camera.distanceKilometers, 77777);
+  assert.equal(h.mounts.length, 1);
+  h.router.destroy();
 });

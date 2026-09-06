@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { parseWorldContextSource, prepareWorldContext } from './spatial-context.js';
+import type { OrbitalState } from './spatial-context.js';
 
 const sourcePath = 'src/planets/sun/source/navigation/universe.json';
 
@@ -45,12 +46,38 @@ test('prepared ellipses start at their same-epoch ephemeris position', async () 
   const body = source.bodies[0]!;
   const result = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit, segments: 16 } },
     { [body.id]: { radiusM: 1 } }, {
-      [body.id]: { positionM: [7, 0, 0], normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
+      [body.id]: { positionM: [7, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
     });
   assert.deepEqual(result.bodies[0]!.positionM, result.bodies[0]!.orbit.verticesM[0]);
   assert.equal(result.bodies[0]!.orbit.verticesM.length, 16);
   assert.equal(result.bodies[0]!.orbit.trail.length, 16);
   assert.deepEqual(result.focus.positionM, [0, 0, 0]);
+});
+
+test('satellite ellipses are translated to their parent with exact prepared centres', async () => {
+  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')) as unknown);
+  const bodies = [{ id: 'parent', name: 'Parent', color: '#888888' }, { id: 'satellite', name: 'Satellite', color: '#999999' }];
+  const states: Record<string, OrbitalState> = {
+    parent: { positionM: [1000, 0, 0], centerBodyId: source.focus.id, centerPositionM: [0, 0, 0],
+      normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 1000, eccentricity: 0, trueAnomalyRadians: 0 },
+    satellite: { positionM: [1007, 0, 0], centerBodyId: 'parent', centerPositionM: [1000, 0, 0],
+      normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 },
+  };
+  const config = { ...source, bodies, orbit: { ...source.orbit, segments: 16 } };
+  const facts = { parent: { radiusM: 2 }, satellite: { radiusM: 1 } };
+  const orbit = prepareWorldContext(config, facts, states).bodies[1]!.orbit;
+  assert.deepEqual(orbit.centerPositionM, states.parent!.positionM);
+  assert.equal(orbit.centerBodyId, 'parent');
+  assert.deepEqual(orbit.verticesM[0], [1007, 0, 0]);
+  assert(Math.abs(orbit.verticesM[8]![0] - 987) < 1e-10, 'apocentre must remain around the parent, not the global origin');
+  for (const [x, y, z] of orbit.verticesM) {
+    assert(Math.abs(((x - 997) / 10) ** 2 + (y / Math.sqrt(91)) ** 2 - 1) < 1e-12);
+    assert.equal(z, 0);
+  }
+  assert.throws(() => prepareWorldContext(config, facts, { ...states,
+    satellite: { ...states.satellite!, centerPositionM: [0, 0, 0] } }), /parent/);
+  assert.throws(() => prepareWorldContext(config, facts, { ...states,
+    parent: { ...states.parent!, centerBodyId: 'satellite', centerPositionM: states.satellite!.positionM } }), /hierarchy/);
 });
 
 test('prepared sky registration preserves the legacy default sky and rejects a missing baseline', async () => {

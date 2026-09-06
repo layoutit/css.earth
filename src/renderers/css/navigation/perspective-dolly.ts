@@ -2,6 +2,7 @@ import type { CameraPlan, PerspectiveCameraPlan, CameraUpdate, LevelOfDetailPlan
 import type { BodyProjection, HeliocentricProjection } from '../solar-system/heliocentric-view.js';
 import type { VisibleRect } from '../solar-system/types.js';
 import type { PositionM } from '@cssearth/engine';
+import type { PhysicalProjection } from '../rendering/physical-projection.js';
 import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import { scaleWorldPosition, validateWorldPosition } from './world-camera-math.js';
@@ -243,6 +244,7 @@ export function createPerspectiveDolly({
   // screen when the shell lays the root out partly beyond the stage.
   let visibleRect: VisibleRect | null = null;
   let projection: HeliocentricProjection | null = null;
+  let projectedBody: BodyProjection | null = null;
   let lod = levelOfDetailFor(levelOfDetail, Number.POSITIVE_INFINITY);
   let systemOpacity = 0;
   let sunMarkerOpacityValue = 0;
@@ -446,15 +448,30 @@ export function createPerspectiveDolly({
       const genericBody = genericPresentation === null ? undefined : genericBodyProjection(
         genericPresentation, bodyRadius, focal,
       );
+      projectedBody = projection?.body ?? genericBody ?? null;
+      if (projectedBody) lod = levelOfDetailFor(levelOfDetail, projectedBody.silhouetteDiameter);
+      // Raw prepared scene coordinates to the physical eye. Overlay and page
+      // consumers compose their own retained body transforms after this matrix.
+      const scale = cameraPlan.sceneScale;
+      const physicalProjection: PhysicalProjection = Object.freeze({
+        focalPixels: focal, principalOffsetPixels: viewport.principalOffsetPixels,
+        eyeFromScene: Object.freeze([
+          rotation[0] * scale, rotation[3] * scale, rotation[6] * scale, 0,
+          rotation[1] * scale, rotation[4] * scale, rotation[7] * scale, 0,
+          rotation[2] * scale, rotation[5] * scale, rotation[8] * scale, 0,
+          bodyX - principalOffset[0], bodyY - principalOffset[1], bodyZ - focal, 1,
+        ]),
+      });
       return Object.freeze({
         distance,
+        projection: physicalProjection,
         focal,
         viewportWidth,
         viewportHeight,
         principalOffset,
         ...(projection === null && genericBody === undefined ? {} : {
-          body: projection?.body ?? genericBody,
-          ...(projection === null ? {} : { sun: projection.sun, levelOfDetail: lod }),
+          body: projectedBody!, levelOfDetail: lod,
+          ...(projection === null ? {} : { sun: projection.sun }),
         }),
         ...(system === null ? {} : {
           planetarySystem: Object.freeze({
@@ -471,11 +488,12 @@ export function createPerspectiveDolly({
     trackball() {
       const bounds = cameraElement.getBoundingClientRect();
       const stageBounds = stage.getBoundingClientRect();
-      const silhouette = projection?.body.silhouette;
+      const silhouette = projectedBody?.silhouette;
       const centerX = bounds.x + bounds.width / 2 + (silhouette?.centre[0] ?? 0);
       const centerY = bounds.y + bounds.height / 2 + (silhouette?.centre[1] ?? 0);
       const radius = Math.max(
-        projection?.body.silhouetteRadius ?? bodyRadius,
+        Number.isFinite(projectedBody?.silhouetteRadius) ? projectedBody!.silhouetteRadius
+          : Math.hypot(viewportWidth, viewportHeight),
         Math.min(viewportWidth, viewportHeight) / 5,
       );
       return Object.freeze({
@@ -504,8 +522,8 @@ export function createPerspectiveDolly({
         focal,
         principalOffset,
         visibleRect,
-        offAxisDegrees: projection?.body.offAxisDegrees ?? null,
-        silhouetteRadius: projection?.body.silhouetteRadius ?? null,
+        offAxisDegrees: projectedBody?.offAxisDegrees ?? null,
+        silhouetteRadius: projectedBody?.silhouetteRadius ?? null,
         ...(bodyCenterKilometers === undefined ? {} : { bodyCenterKilometers }),
       });
     },
@@ -558,6 +576,7 @@ function genericBodyProjection(
   const silhouette = presentation.silhouette;
   const distance = presentation.distanceUnits;
   const depth = presentation.depthUnits;
+  const silhouetteRadius = silhouette?.tangentialSemiAxis ?? (depth > -bodyRadius ? Infinity : 0);
   const offAxisDegrees = Math.acos(Math.max(-1, Math.min(1, depth / distance))) * 180 / Math.PI;
   return Object.freeze({
     distance,
@@ -565,8 +584,8 @@ function genericBodyProjection(
     visible: silhouette !== null,
     screen: presentation.centerPixels,
     offAxisDegrees,
-    silhouetteRadius: silhouette?.tangentialSemiAxis ?? 0,
-    silhouetteDiameter: 2 * (silhouette?.tangentialSemiAxis ?? 0),
+    silhouetteRadius,
+    silhouetteDiameter: 2 * silhouetteRadius,
     silhouette,
     orthographicRadius: focal * bodyRadius / distance,
     translate: presentation.translateCssPixels,

@@ -30,7 +30,10 @@ export interface PreparedPagePlan {
   initialLayer: { frameMatrix: string; textureMatrix: string };
   index: { maximumDirectories: number; maximumBytes: number; maximumConcurrentLoads: number; maximumDirectoryBytes: number };
 }
-export interface PageViewport { width: number; height: number; originX?: number; originY?: number; }
+export interface PageViewport {
+  width: number; height: number; originX?: number; originY?: number;
+  projection?: Pick<import('../rendering/physical-projection.js').PhysicalProjection, 'focalPixels' | 'principalOffsetPixels'>;
+}
 export interface PageProjection { visible: boolean; span: number; center: number[]; }
 export interface ProjectedPage extends PageProjection { node: PreparedPage; path: PreparedReference[]; }
 export interface PageSelection {

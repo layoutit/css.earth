@@ -98,7 +98,10 @@ try {
     console.log(`UNIFIED ZOOM PASS ${id}: native wheel, retained universe, matching physical orientation`);
   }
   if (!pickingOnly) await flight(page, 'sun', 'nav');
-  for (const id of ['mercury', 'venus', 'sun']) await flight(page, id, 'pick');
+  for (const id of ['mercury', 'venus', 'sun']) {
+    await flight(page, id, 'pick');
+    await refocus(page, id);
+  }
   const final = await snapshot(page);
   assertRetained(final, 'final');
   assert.equal(report.documentRequests.length, 1, 'all six selections retain one document');
@@ -173,7 +176,7 @@ async function flight(page, to, mode) {
   const pick = mode === 'pick' ? await visibleMarker(page, to) : null;
   if (mode === 'nav') await page.locator('.planet-sidebar-search').fill(to);
   const before = await page.evaluate(() => ({ index: window.__unifiedProof.samples.length, events: window.__unifiedProof.events.length, time: performance.now() }));
-  if (pick) await page.mouse.click(pick.x, pick.y);
+  if (pick) await page.mouse.dblclick(pick.x, pick.y, { delay: 90 });
   else await page.locator(`.planet-object-link[data-object-id="${to}"]`).click();
   try {
     if (pick) await page.waitForFunction(count => window.__unifiedProof.events.length > count,
@@ -209,6 +212,28 @@ async function flight(page, to, mode) {
   await page.screenshot({ path: `${output}/${mode}-${from}-${to}.png` });
   console.log(`UNIFIED FLIGHT PASS ${mode} ${from} → ${to}: ${trace.samples.length} frames`);
 }
+async function refocus(page, id) {
+  const pick = await visibleMarker(page, id);
+  const before = await page.evaluate(() => ({ events: window.__unifiedProof.events.length,
+    samples: window.__unifiedProof.samples.length }));
+  await page.evaluate(() => { window.__selectedDetailProof = document.querySelector('.polycss-camera'); });
+  await page.mouse.dblclick(pick.x, pick.y, { delay: 90 });
+  await page.waitForFunction(({ id, distanceKilometers }) => window.__cssEarth.activeObjectId === id &&
+    window[`__${id}`].camera.state().distanceKilometers < distanceKilometers / 50 &&
+    window.__cssEarth.playback.reason !== 'unavailable', { id, distanceKilometers: pick.distanceKilometers }, { timeout: 30000 });
+  const result = await page.evaluate(before => ({
+    sameDetail: document.querySelector('.polycss-camera') === window.__selectedDetailProof,
+    events: window.__unifiedProof.events.slice(before.events),
+    samples: window.__unifiedProof.samples.length - before.samples,
+  }), before);
+  assert.equal(result.sameDetail, true, `${id}: same-object focus retains its detailed renderer`);
+  assert.deepEqual(result.events, [id], `${id}: native double-click selects once`);
+  assert.ok(result.samples > 20, `${id}: refocus paints intermediate frames`);
+  assertRetained(await snapshot(page), `${id} refocus`);
+  report.refocuses ??= []; report.refocuses.push({ id, pick, ...result });
+  console.log(`UNIFIED REFOCUS PASS ${id}: native double-click returns to retained detail`);
+}
+
 async function visibleMarker(page, to) {
   for (const distanceKilometers of [1e8, 3e8, 8e8]) for (let yaw = 0; yaw < 360; yaw += 30) {
     const found = await page.evaluate(({ to, distanceKilometers, yaw }) => {

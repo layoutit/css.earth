@@ -13,10 +13,17 @@ export async function writeObjectJson(id, definition) {
     throw new TypeError('Prepared object identity does not match the application registry.');
   }
   const descriptorPath = resolve(root, 'src/planets', id, 'object.json');
-  const descriptor = JSON.parse(await readFile(descriptorPath, 'utf8'));
+  let descriptor = JSON.parse(await readFile(descriptorPath, 'utf8'));
   if (descriptor.schema !== 'cssearth-object@1' || descriptor.id !== id || typeof descriptor.type !== 'string') {
     throw new TypeError('Prepared object descriptor identity is invalid.');
   }
+  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./objects/dist/prepare-world-navigation.js');
+  const objectDirectory = resolve(root, 'src/planets', id);
+  const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot: root });
+  definition = preparedNavigation.definition;
+  const scene = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/scene.json'), 'utf8'));
+  await writeWorldNavigationArtifacts(resolve(objectDirectory, 'prepared'), preparedNavigation, scene);
+  descriptor = { ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } };
   const payload = JSON.stringify({ schema: 'cssearth-prepared-object@1', id,
     type: descriptor.type, format, data: definition });
   const asset = resolve(root, 'src/planets', id, 'prepared/object.json');

@@ -31,6 +31,7 @@ const presentation = {
   orbitLineFade: { visibleBelowDiscHeightShare: .12, hiddenAboveDiscHeightShare: .3 }, drag: { model: 'screen-axis-tumble' },
 };
 const orbit = (position: readonly [number, number, number], scale: number) => ({
+  centerBodyId: 'sun', centerPositionM: [0, 0, 0],
   verticesM: [[position[0], position[1], position[2]], [0, 100, 0], [-100, 0, 0], [0, -100, 0], [100, 0, 0], [0, 100, 0], [-100, 0, 0], [0, -100, 0]].map(v => v.map(n => n * scale)),
   trail: [1, 1, 1, 1, 1, 1, 1, 1],
 });
@@ -63,13 +64,98 @@ function mount(scale: number) {
 
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
-  expect(parsePreparedWorldContext(source).bodies).toHaveLength(8);
+  expect(parsePreparedWorldContext(source).bodies).toHaveLength(15);
   expect(() => parsePreparedWorldContext({ ...source, focus: { ...(source.focus as Record<string, unknown>), positionM: [1, 0, 0] } })).toThrow('frame origin');
   const camera = source.camera as Record<string, unknown>, presentation = camera.presentation as Record<string, unknown>;
   expect(() => parsePreparedWorldContext({ ...source, camera: { ...camera, presentation: { ...presentation, dolly: { ...(presentation.dolly as Record<string, unknown>), minimumDistanceRadii: 1 } } } })).toThrow('outside the focus');
   const body = (source.bodies as Record<string, unknown>[])[0]!;
   expect(() => parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit: { ...(body.orbit as Record<string, unknown>), verticesM: [[0, 0, 0], ...((body.orbit as { verticesM: unknown[] }).verticesM.slice(1))] } }, ...(source.bodies as unknown[]).slice(1)] })).toThrow('align');
   expect(() => parsePreparedWorldContext({ ...source, sky: { sceneRegistration: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,1,0,0,1)' } })).toThrow('pure matrix3d rotation');
+  const bodies = source.bodies as Record<string, unknown>[];
+  for (const orbit of [{ ...(body.orbit as object), centerBodyId: 'unprepared-parent' },
+    { ...(body.orbit as object), centerPositionM: [1, 0, 0] },
+    { ...(body.orbit as object), centerBodyId: undefined },
+    { ...(body.orbit as object), runtimeEphemeris: true }]) {
+    expect(() => parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit }, ...bodies.slice(1)] })).toThrow();
+  }
+});
+
+test('prepared parent identities must form an acyclic hierarchy ending at the focus', () => {
+  const source = plan(1), [a, b] = source.bodies;
+  expect(() => parsePreparedWorldContext({ ...source, bodies: [
+    { ...a, orbit: { ...a!.orbit, centerBodyId: b!.id, centerPositionM: b!.positionM } },
+    { ...b, orbit: { ...b!.orbit, centerBodyId: a!.id, centerPositionM: a!.positionM } },
+  ] })).toThrow('hierarchy');
+});
+
+test('satellite markers remain occluded by their parent when another detail object is selected', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1), parent = source.bodies[0]!, child = source.bodies[1]!;
+  const positionM = [100, 0, -20];
+  const context = parsePreparedWorldContext({ ...source, bodies: [parent, { ...child, positionM,
+    orbit: { ...child.orbit, centerBodyId: parent.id, centerPositionM: parent.positionM,
+      verticesM: [positionM, ...child.orbit!.verticesM.slice(1)] } }] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [100, 0, 20], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  const root = layer.root as unknown as FakeElement;
+  expect(find(root, 'contextBody', 'mercury').style.visibility).toBe('');
+  expect(find(root, 'contextBody', 'venus').style.visibility).toBe('hidden');
+  expect(find(root, 'contextBody', 'venus').style.pointerEvents).toBe('none');
+  layer.destroy();
+});
+
+test('a prepared object outside the navigation menu renders and selects using its retained asset', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1);
+  const context = parsePreparedWorldContext({ ...source, bodies: source.bodies.map((body, index) => index === 0 ? { ...body, id: 'new-object', name: 'New object' } : body) });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, 'new-object': sprite, venus: sprite } });
+  const root = layer.root as unknown as FakeElement, nodes = all(root);
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 2000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  expect(find(root, 'contextBody', 'new-object').dataset.objectNavigate).toBe('new-object');
+  layer.selectObject('new-object');
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
+test('an orbitless prepared object renders and navigates without manufacturing orbital geometry', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1), { orbit: _orbit, ...point } = source.bodies[0]!;
+  const body = { ...point, id: 'future-object', name: 'Future object' };
+  const context = parsePreparedWorldContext({ ...source, bodies: [body] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, 'future-object': sprite } });
+  const root = layer.root as unknown as FakeElement, nodes = all(root);
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 2000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  const marker = find(root, 'contextBody', 'future-object'), selections: string[] = [];
+  host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
+  expect(marker.style.visibility).toBe('');
+  marker.dispatchEvent(new Event('click'));
+  expect(selections).toEqual(['future-object']);
+  layer.selectObject('future-object');
+  expect(all(root)).toEqual(nodes);
+  expect(nodes.some(node => node.dataset.contextOrbit)).toBe(false);
+  for (const orbit of [null, {}, { runtimeEphemeris: true }]) {
+    expect(() => parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit }] })).toThrow();
+  }
+  expect(() => parsePreparedWorldContext({ ...source, bodies: [{ ...body, radiusM: undefined }] })).toThrow();
+  layer.destroy();
+});
+
+test('an orbit may centre on an orbitless prepared parent while remaining acyclic', () => {
+  const source = plan(1), parent = source.bodies[0]!, child = source.bodies[1]!;
+  const { orbit: _orbit, ...point } = parent;
+  const parsed = parsePreparedWorldContext({ ...source, bodies: [point,
+    { ...child, orbit: { ...child.orbit, centerBodyId: parent.id, centerPositionM: parent.positionM } }] });
+  expect(parsed.bodies[0]!.orbit).toBeUndefined();
+  expect(parsed.bodies[1]!.orbit!.centerBodyId).toBe(parent.id);
 });
 
 test('projects retained markers, culls focus-occluded bodies, and keeps physical scale invariant', () => {

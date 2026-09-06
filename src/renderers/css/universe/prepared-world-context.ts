@@ -32,7 +32,7 @@ export interface PreparedContextFocus extends PreparedContextPoint {
   readonly pointSource?: PreparedContextPointSource;
 }
 export interface PreparedContextBody extends PreparedContextPoint {
-  readonly orbit: { readonly verticesM: readonly PositionM[]; readonly trail: readonly number[] };
+  readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[] };
 }
 export interface PreparedContextCameraPresentation {
   readonly projection: { readonly model: 'css-perspective-shared-with-sky'; readonly cssPerspective: string };
@@ -129,18 +129,34 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   if (!frame) throw new TypeError('World context requires its prepared frame.');
   const focus = focusPoint(input.focus);
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
-  const bodies = array(input.bodies, 'context bodies').map(value => {
+  const bodies = array(input.bodies, 'context bodies').map<PreparedContextBody>(value => {
     const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']);
-    const body = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']), orbit = record(input.orbit, 'body orbit', ['verticesM', 'trail']);
+    const body = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']);
+    if (input.orbit === undefined) return body;
+    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail']);
+    const centerBodyId = text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM = vector(orbit.centerPositionM, 'orbit centre position');
     const verticesM = array(orbit.verticesM, 'orbit vertices').map(value => vector(value, 'orbit vertex'));
     const trail = numbers(orbit.trail, 'orbit trail');
     if (verticesM.length < 8 || trail.length !== verticesM.length || trail.some(value => value < 0 || value > 1) || !equalPosition(body.positionM, verticesM[0]!)) {
       throw new TypeError('Context orbit must align with its body and carry matching prepared trail weights.');
     }
-    return Object.freeze({ ...body, orbit: Object.freeze({ verticesM: Object.freeze(verticesM), trail: Object.freeze(trail) }) });
+    return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail) }) });
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
+  const parents = new Map<string, PreparedContextBody>(bodies.map(body => [body.id, body]));
+  for (const body of bodies) {
+    if (!body.orbit) continue;
+    const parent = body.orbit.centerBodyId === focus.id ? focus : parents.get(body.orbit.centerBodyId);
+    if (!parent || parent.id === body.id || !equalPosition(parent.positionM, body.orbit.centerPositionM)) {
+      throw new TypeError('Context orbit centre must match a prepared parent body.');
+    }
+    const ancestors = new Set([body.id]);
+    for (let id: string | undefined = body.orbit.centerBodyId; id !== undefined && id !== focus.id; id = parents.get(id)?.orbit?.centerBodyId) {
+      if (ancestors.has(id) || !parents.has(id)) throw new TypeError('Context orbit parent hierarchy must terminate at a prepared point.');
+      ancestors.add(id);
+    }
+  }
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
   const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
@@ -186,6 +202,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0';
   root.dataset.worldContext = plan.focus.id;
   host.insertBefore(root, before);
+  const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
   const bodies = [plan.focus, ...plan.bodies].map(body => {
     const sprite = sprites[body.id];
     if (!sprite) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
@@ -194,6 +211,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     marker.style.cssText = 'position:absolute;left:50%;top:50%;background-repeat:no-repeat;text-decoration:none;transform-origin:center;visibility:hidden';
     applySprite(marker, sprite);
     const label = host.ownerDocument.createElement('span');
+    label.dataset.contextLabel = body.id;
     label.textContent = body.name;
     label.style.cssText = 'position:absolute;left:50%;top:50%;font:11px system-ui;color:#c2ccd8;white-space:nowrap;visibility:hidden';
     const pieces: HTMLElement[] = [];
@@ -206,7 +224,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     }
     root.append(marker, label);
     const navigation = bindObjectNavigationTarget(marker, host);
-    return { body, sprite, marker, label, orbit, pieces, navigation, previousCount: 0 };
+    const labelNavigation = bindObjectNavigationTarget(label, host, { activation: 'dblclick' });
+    return { body, sprite, marker, label, orbit, parent: orbit ? points.get(orbit.centerBodyId)! : null, pieces, navigation, labelNavigation, previousCount: 0 };
   });
   let destroyed = false;
   let selectedId = plan.focus.id;
@@ -237,8 +256,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const hidden = (eye: readonly number[], id?: string) =>
         (id !== plan.focus.id && rayHitsSphereBefore(eye, focusEye, plan.focus.radiusM)) ||
         (id !== selected.id && rayHitsSphereBefore(eye, selectedEye, selected.radiusM));
-      const ring = createPreparedRingProjector({ toEye, project, hidden,
-        near: Math.max(1, Math.min(distanceM, Math.hypot(...selectedEye)) * 0.01), clipX: width / 2, clipY: height / 2 });
+      const near = Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...toEye(entry.body.positionM)))) * 0.01);
       const focusDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, focusDiameter);
@@ -246,15 +264,18 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       for (const entry of bodies) {
         const { body, marker, label } = entry;
         const eye = toEye(body.positionM), depth = -eye[2];
+        const parentEye = entry.parent ? toEye(entry.parent.positionM) : null;
+        const parentHidden = (position: readonly number[]) => parentEye !== null && rayHitsSphereBefore(position, parentEye, entry.parent!.radiusM);
         const [x, y] = project(eye);
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isSelected = body.id === selectedId;
-        const visible = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2 && !hidden(eye, body.id);
+        const visible = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2 && !hidden(eye, body.id) && !parentHidden(eye);
         const markerOpacity = isSelected ? lod.billboardOpacity : 1;
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         marker.style.visibility = visible && markerOpacity > 0 && !pointSource ? '' : 'hidden';
         entry.navigation.update(visible && markerOpacity > 0.1 && !pointSource ? body.id : null, body.name);
         label.style.visibility = visible && markerOpacity > 0.5 ? '' : 'hidden';
+        entry.labelNavigation.update(visible && markerOpacity > 0.5 ? body.id : null, body.name);
         if (visible) {
           marker.style.opacity = String(markerOpacity);
           marker.style.transform = `translate(${x}px,${y}px) scale(${Math.max(2.4, diameter) / entry.sprite.size})`;
@@ -262,6 +283,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           label.style.opacity = String(markerOpacity);
         }
         if (entry.orbit) {
+          const ring = createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
+            near, clipX: width / 2, clipY: height / 2 });
           const segments = ring(entry.orbit.verticesM, entry.orbit.trail.map(weight => weight * orbitOpacity));
           const update = writePieces(entry.pieces, segments, entry.previousCount);
           if (update.overflowed) throw new Error('Prepared context line pool overflowed.');
@@ -269,6 +292,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         }
       }
     },
-    destroy() { if (!destroyed) { destroyed = true; for (const entry of bodies) entry.navigation.destroy(); root.remove(); } },
+    destroy() { if (!destroyed) { destroyed = true; for (const entry of bodies) { entry.navigation.destroy(); entry.labelNavigation.destroy(); } root.remove(); } },
   });
 }

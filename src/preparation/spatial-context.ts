@@ -45,6 +45,8 @@ export interface WorldContextSource {
 }
 export interface OrbitalState {
   readonly positionM: Vector3;
+  readonly centerBodyId: string;
+  readonly centerPositionM: Vector3;
   readonly normal: Vector3;
   readonly perihelionDirection: Vector3;
   readonly semiMajorAxisM: number;
@@ -58,7 +60,7 @@ export interface PreparedWorldContext {
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number };
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
-    readonly orbit: { readonly verticesM: readonly Vector3[]; readonly trail: readonly number[] } }[];
+    readonly orbit: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[] } }[];
   readonly camera: WorldContextSource['camera'];
   readonly system: WorldContextSource['system'];
   readonly volume: WorldContextSource['volume'];
@@ -101,14 +103,24 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     const fact = facts[body.id], state = states[body.id];
     if (!fact || !state || !positive(fact.radiusM, `${body.id} radius`)) throw new TypeError(`Missing physical facts for ${body.id}.`);
     validateState(state, body.id);
-    const minor = state.semiMajorAxisM * Math.sqrt(1 - state.eccentricity ** 2), centre = scale(state.perihelionDirection, -state.semiMajorAxisM * state.eccentricity);
+    const parent = state.centerBodyId === source.focus.id ? source.frame.originM : states[state.centerBodyId]?.positionM;
+    if (!parent || state.centerBodyId === body.id || !source.bodies.some(body => body.id === state.centerBodyId) && state.centerBodyId !== source.focus.id ||
+        Math.hypot(...parent.map((value, axis) => value - state.centerPositionM[axis]!)) > .001) {
+      throw new TypeError(`${body.id} orbit centre must match its prepared parent.`);
+    }
+    const ancestors = new Set([body.id]);
+    for (let parentId = state.centerBodyId; parentId !== source.focus.id; parentId = states[parentId]!.centerBodyId) {
+      if (ancestors.has(parentId) || !states[parentId]) throw new TypeError(`${body.id} orbit parent hierarchy is invalid.`);
+      ancestors.add(parentId);
+    }
+    const minor = state.semiMajorAxisM * Math.sqrt(1 - state.eccentricity ** 2), centre = add(state.centerPositionM, scale(state.perihelionDirection, -state.semiMajorAxisM * state.eccentricity));
     const motion = unit(cross(state.normal, state.perihelionDirection));
     const eccentric = 2 * Math.atan2(Math.sqrt(1 - state.eccentricity) * Math.sin(state.trueAnomalyRadians / 2),
       Math.sqrt(1 + state.eccentricity) * Math.cos(state.trueAnomalyRadians / 2));
     const verticesM = freeze(Array.from({ length: source.orbit.segments }, (_, index) => index === 0 ? copy(state.positionM) : ellipse(centre, state.perihelionDirection, motion, state.semiMajorAxisM, minor,
       eccentric + index * 2 * Math.PI / source.orbit.segments)));
     return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
-      orbit: freeze({ verticesM, trail: trailWeights(source.orbit.segments, source.orbit.trail) }) });
+      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, trail: trailWeights(source.orbit.segments, source.orbit.trail) }) });
   });
   return freeze({ schema: 'cssearth-world-context@1', sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM }), bodies: freeze(bodies), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }
@@ -185,7 +197,8 @@ function parsePresentation(value: unknown): WorldContextCameraPresentation {
     orbitLineFade: freeze({ visibleBelowDiscHeightShare, hiddenAboveDiscHeightShare }), drag: freeze({ model: drag.model }) });
 }
 function validateState(state: OrbitalState, id: string): void {
-  [state.positionM, state.normal, state.perihelionDirection].forEach((value, index) => { if (value.length !== 3 || !value.every(Number.isFinite)) throw new TypeError(`${id} vector ${index} is invalid.`); });
+  identifier(state.centerBodyId, `${id} orbit parent`);
+  [state.positionM, state.centerPositionM, state.normal, state.perihelionDirection].forEach((value, index) => { if (!Array.isArray(value) || value.length !== 3 || !value.every(Number.isFinite)) throw new TypeError(`${id} vector ${index} is invalid.`); });
   if (!positive(state.semiMajorAxisM, `${id} semi-major axis`) || !(state.eccentricity >= 0 && state.eccentricity < 1) || !Number.isFinite(state.trueAnomalyRadians) || Math.abs(dot(state.normal, state.perihelionDirection)) > 1e-8) throw new TypeError(`${id} orbit is invalid.`);
 }
 function ellipse(centre: Vector3, perihelion: Vector3, motion: Vector3, major: number, minor: number, anomaly: number): Vector3 { return add(centre, add(scale(perihelion, major * Math.cos(anomaly)), scale(motion, minor * Math.sin(anomaly)))); }

@@ -103,6 +103,15 @@ for (const dispatch of [
 ]) test(`shared owners reject object-ID dispatch: ${dispatch.slice(0, 50)}`, async () => {
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mjs": shared + `\nfunction hidden(definition) { ${dispatch} }` })), /object-ID dispatch/);
 });
+test('nullable physical lighting projection is data while adjacent identity tables remain forbidden', () => {
+  const file = 'src/renderers/css/navigation/perspective-dolly.ts';
+  const inspect = (source, path = file) => inspectObjectRuntimeModule(source, path, { shared: true, objectIds: ['sun', 'moon'] }).violations;
+  assert.deepEqual(inspect('const frame = { ...(projection === null ? {} : { sun: projection.sun }) };'), []);
+  for (const expression of ['{ sun: renderSun }', '{ sun: projection.moon }', '{ moon: projection.moon }', '{ sun: projection.sun, moon: renderMoon }']) {
+    assert.ok(inspect(`const table = ${expression};`).some(issue => /object-ID dispatch/.test(issue.reason)));
+  }
+  assert.ok(inspect('const table = { sun: projection.sun };', 'src/platform/object-runtime.mjs').some(issue => /object-ID dispatch/.test(issue.reason)));
+});
 test("shared owners reject private packages, fixed asset namespaces, v1 hooks and an extra native camera", async () => {
   for (const [source, expected] of [
     [shared + "\nimport { runtimeDefinition } from '../planets/moon/runtime/definition.mjs';", /Shared runtime imports an object package/],
@@ -355,10 +364,24 @@ test('descriptor context binding pins both prepared contexts to the shared facto
   const report = await audit({});
   assert.equal(report.complete, true);
   assert.ok(report.sharedClosure.includes(contextFile));
+  const orbitless = { ...context, bodies: context.bodies.map((body, index) => {
+    if (index) return body;
+    const { orbit, ...point } = body;
+    return point;
+  }) };
+  assert.equal((await audit({ [contextFile]: JSON.stringify(orbitless) })).complete, true,
+    'An orbitless physical point does not require fabricated orbital geometry');
   for (const [changes, expected] of [
     [{ [packagedFile]: packaged.replace("with { type: 'json' }", '') }, /forward its prepared transport/],
     [{ [contextFile]: JSON.stringify({ ...context, volume: { ...context.volume, objectId: '../milky-way' } }) }, /volume identity is not pinned/],
     [{ [contextFile]: JSON.stringify({ ...context, frame: { ...context.frame, originM: [1, 0, 0] } }) }, /physical frame/],
+    [{ [contextFile]: JSON.stringify({ ...context, bodies: [] }) }, /body inventory/],
+    [{ [contextFile]: JSON.stringify({ ...orbitless, bodies: orbitless.bodies.map((body, index) => index ? body : { ...body, radiusM: undefined }) }) }, /physical point/],
+    [{ [contextFile]: JSON.stringify({ ...orbitless, bodies: orbitless.bodies.map((body, index) => index ? body : { ...body, orbit: null }) }) }, /body orbit parent/],
+    [{ [contextFile]: JSON.stringify({ ...context, bodies: context.bodies.map((body, index) => index ? body : { ...body,
+      orbit: { ...body.orbit, centerBodyId: 'missing-parent' } }) }) }, /body orbit parent/],
+    [{ [contextFile]: JSON.stringify({ ...context, bodies: context.bodies.map((body, index) => index ? body : { ...body,
+      orbit: { ...body.orbit, centerPositionM: [1, 0, 0] } }) }) }, /body orbit parent/],
     [{ [contextFile]: JSON.stringify({ ...context, stars: { ...context.stars, objectId: '../stellar-neighbourhood' } }) }, /star field identity/],
     [{ [contextFile]: JSON.stringify({ ...context, stars: { ...context.stars, fullDistanceM: context.volume.fadeStartDistanceM } }) }, /star field identity/],
     [{ [packagedFile]: packaged.replace('createWorldContextObjectRuntime', 'createObjectRuntime') }, /Contextual binding/],

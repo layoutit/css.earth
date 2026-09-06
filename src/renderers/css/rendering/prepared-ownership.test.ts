@@ -9,7 +9,7 @@ class PresentationElement {
   className = '';
   classList = { contains: (_name: string) => false, add: (..._names: string[]) => {}, toggle: (_name: string, _force?: boolean) => {} };
   dataset: Record<string, string> = {};
-  style = { cssText: '', transform: '', visibility: '', setProperty: (_name: string, _value: string) => {}, getPropertyValue: (_name: string) => '' };
+  style = { cssText: '', transform: '', visibility: '', scale: '', transformOrigin: '', setProperty: (_name: string, _value: string) => {}, getPropertyValue: (_name: string) => '' };
   constructor(readonly ownerDocument: PresentationDocument) {}
   appendChild(child: PresentationElement) { child.parentNode?.removeChild(child); child.parentNode = this; this.children.push(child); return child; }
   removeChild(child: PresentationElement) { const index = this.children.indexOf(child); if (index >= 0) this.children.splice(index, 1); child.parentNode = null; return child; }
@@ -73,6 +73,30 @@ test('prepared presentation appends only its own roots and leaves the applicatio
   expect(stage.children).toContain(mounted.cameraElement);
   for (const cleanup of cleanups) cleanup();
   expect(stage.children).toEqual([universe]);
+});
+
+test('physical silhouette fitting replaces shell scale and keeps the prepared centre fixed', () => {
+  const document = new PresentationDocument(), stage = new PresentationElement(document);
+  const mounted = mountPreparedPresentation(stage as unknown as HTMLElement, {
+    own() {}, registerAnimation() {}, seekAnimation() {},
+  }, {
+    camera: {} as never, tree: { nodes: [
+      { tag: 'div', parent: -1, className: null, style: '', properties: [], attributes: {} },
+    ], properties: [], camera: 0, scene: 0, stageClasses: [] },
+    variants: [], materials: [], animations: [],
+    viewBindings: [{ kind: 'silhouette-fit', target: 0, minimumRadius: 0, unitScale: 1 / 253 }],
+  });
+  const overlay = stage.children[0];
+  overlay.style.scale = '0.8'; overlay.style.transformOrigin = '0% 0%';
+  mounted.publishFrame({ selection: {} as never, resources: {} as never, view: {
+    controlPitch: 0, controlYaw: 0, zoom: 1, sceneMatrix: '', sunViewDirection: null,
+    counterRotation: '', counterRotationFor: () => '',
+    body: { visible: true, silhouette: { centre: [70, -40], radial: [0, 1], radialSemiAxis: 506, tangentialSemiAxis: 253 } },
+  } });
+  expect(overlay.style.scale).toBe('1');
+  expect(overlay.style.transformOrigin).toBe('50% 50%');
+  expect(overlay.style.transform).toBe('translate(70px, -40px) rotate(90deg) scale(2, 1) rotate(-90deg)');
+  expect(stage.children).toEqual([overlay]);
 });
 
 for (const rejectOld of [false, true]) test(`retired native work cannot clear a reused replacement slot (${rejectOld})`, async () => {

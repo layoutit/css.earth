@@ -5,6 +5,7 @@ import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
 export type PreparedSelection = ObjectSelection;
 export interface PreparedView {
+  readonly projection?: import('./physical-projection.js').PhysicalProjection;
   revision?: number; controlPitch: number; controlYaw: number; zoom: number; sceneMatrix: string;
   sunViewDirection: readonly number[] | null; reference?: { sceneMatrix: string; sunViewDirection: readonly number[] | null };
   counterRotation: string; counterRotationFor(systemTransform: string | DOMMatrix | null): string;
@@ -184,6 +185,10 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
           const silhouette = view.body?.silhouette;
           element.style.visibility = view.body?.visible === false ? "hidden" : "";
           if (silhouette) {
+            // This transform already owns physical framing. The legacy shell's
+            // individual scale would otherwise apply the same fit a second time.
+            element.style.scale = "1";
+            element.style.transformOrigin = "50% 50%";
             const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
             const radial = Math.max(silhouette.radialSemiAxis, binding.minimumRadius);
             const tangential = Math.max(silhouette.tangentialSemiAxis, binding.minimumRadius);

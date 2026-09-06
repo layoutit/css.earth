@@ -15,6 +15,8 @@ const universeEntries = [
   'src/renderers/css/preparation/volume.test.ts',
   'src/preparation/spatial-context.test.ts',
   'tools/objects/prepare-spatial-context.test.ts',
+  'tools/objects/world-navigation.test.ts',
+  'tools/objects/world-navigation.integration.test.ts',
   'src/preparation/stars/stars.test.ts',
 ];
 async function discover(directory, suffix) {

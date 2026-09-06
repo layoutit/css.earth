@@ -6,7 +6,7 @@ import { parseObjectDescriptor } from '@cssearth/objects';
 import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact } from '../../src/preparation/spatial-context.js';
 
-interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; }
+interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; }
 interface SolarGeometry {
   readonly SOLAR_GEOMETRY_EPOCH_JD_TT: number;
   readonly ASTRONOMICAL_UNIT_KILOMETERS: number;
@@ -35,12 +35,28 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   for (const body of source.bodies) {
     const data = (BODIES as Readonly<Record<string, { readonly meanRadiusKm: number }>>)[body.id];
     const orbit = geometry.BODY_ORBITS[body.id], sunDirection = geometry.BODY_FIXED_SUN_DIRECTIONS[body.id], normal = geometry.BODY_FIXED_ORBIT_NORMAL_DIRECTIONS[body.id], matrix = geometry.BODY_FIXED_TO_ICRF_MATRICES[body.id];
-    if (!data || !orbit || !sunDirection || !normal || !matrix) throw new TypeError(`Solar geometry lacks ${body.id}.`);
-    const positionM = scale(apply(matrix, sunDirection), -orbit.heliocentricDistanceAu * auM);
-    states[body.id] = { positionM, normal: unit(apply(matrix, normal)), perihelionDirection: unit(apply(matrix, orbit.perihelionDirection)),
+    if (!orbit || !sunDirection || !normal || !matrix) throw new TypeError(`Solar geometry lacks ${body.id}.`);
+    // Match the physical-frame finalizer's conversion order even at Pluto-scale coordinates.
+    const distanceM = orbit.heliocentricDistanceAu * geometry.ASTRONOMICAL_UNIT_KILOMETERS * M_PER_KM;
+    const positionM = scale(apply(matrix, sunDirection), -distanceM);
+    const centerBodyId = orbit.centerBodyId ?? source.focus.id;
+    const centerPositionM = orbit.centerPositionAu ? add(positionM, scale(apply(matrix, orbit.centerPositionAu), auM)) : source.frame.originM;
+    states[body.id] = { positionM, centerBodyId, centerPositionM, normal: unit(apply(matrix, normal)), perihelionDirection: unit(apply(matrix, orbit.perihelionDirection)),
       semiMajorAxisM: orbit.semiMajorAxisAu * auM, eccentricity: orbit.eccentricity, trueAnomalyRadians: orbit.trueAnomalyDegrees * Math.PI / 180 };
-    facts[body.id] = { radiusM: await preparedRadius(body.id, positionM, source.frame.referenceFrame,
-      source.frame.epochJdTt, resolve(objectsDirectory, body.id, 'object.json')) ?? data.meanRadiusKm * M_PER_KM };
+    const radiusM = await preparedRadius(body.id, positionM, source.frame.referenceFrame,
+      source.frame.epochJdTt, resolve(objectsDirectory, body.id, 'object.json')) ?? (data ? data.meanRadiusKm * M_PER_KM : undefined);
+    if (radiusM === undefined) throw new TypeError(`World context lacks a physical radius for ${body.id}.`);
+    facts[body.id] = { radiusM };
+  }
+  for (const body of source.bodies) {
+    const state = states[body.id]!;
+    const parentPosition = state.centerBodyId === source.focus.id ? source.frame.originM : states[state.centerBodyId]?.positionM;
+    if (!parentPosition || Math.hypot(...parentPosition.map((value, axis) => value - state.centerPositionM[axis]!)) > .001) {
+      throw new TypeError(`Prepared orbit centre is incompatible with its parent for ${body.id}.`);
+    }
+    // The parent and child ephemeris adapters can differ by sub-millimetre float roundoff.
+    // Use one exact prepared centre so every consumer shares the same placement.
+    states[body.id] = { ...state, centerPositionM: parentPosition };
   }
   const prepared = prepareWorldContext(source, facts, states);
   await mkdir(dirname(options.outputPath), { recursive: true });
@@ -100,12 +116,15 @@ function matrices(value: unknown): Readonly<Record<string, readonly number[]>> {
 function orbits(value: unknown): Readonly<Record<string, Orbit>> {
   const input = record(value, 'Solar geometry orbits'); return Object.freeze(Object.fromEntries(Object.entries(input).map(([id, value]) => {
     const orbit = record(value, `Solar geometry orbit ${id}`);
+    if ((orbit.centerBodyId === undefined) !== (orbit.centerPositionAu === undefined)) throw new TypeError(`${id} orbit parent and centre must be declared together.`);
     return [id, { semiMajorAxisAu: positive(orbit.semiMajorAxisAu, `${id} semi-major axis`), eccentricity: eccentricity(orbit.eccentricity, id), heliocentricDistanceAu: positive(orbit.heliocentricDistanceAu, `${id} distance`),
-      perihelionDirection: vector3(orbit.perihelionDirection, `${id} perihelion`), trueAnomalyDegrees: number(orbit.trueAnomalyDegrees, `${id} anomaly`) }];
+      perihelionDirection: vector3(orbit.perihelionDirection, `${id} perihelion`), trueAnomalyDegrees: number(orbit.trueAnomalyDegrees, `${id} anomaly`),
+      ...(orbit.centerBodyId === undefined ? {} : { centerBodyId: text(orbit.centerBodyId, `${id} orbit parent`), centerPositionAu: vector3(orbit.centerPositionAu, `${id} orbit centre`) }) }];
   })));
 }
 function apply(matrix: readonly number[], value: Vector3): Vector3 { return [matrix[0]! * value[0] + matrix[1]! * value[1] + matrix[2]! * value[2], matrix[3]! * value[0] + matrix[4]! * value[1] + matrix[5]! * value[2], matrix[6]! * value[0] + matrix[7]! * value[1] + matrix[8]! * value[2]]; }
 function scale(value: Vector3, factor: number): Vector3 { return [value[0] * factor, value[1] * factor, value[2] * factor]; }
+function add(a: Vector3, b: Vector3): Vector3 { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
 function unit(value: Vector3): Vector3 { const length = Math.hypot(...value); if (!(length > 0)) throw new TypeError('Solar geometry direction is undefined.'); return scale(value, 1 / length); }
 function vector3(value: unknown, name: string): Vector3 { if (!Array.isArray(value) || value.length !== 3 || value.some(component => typeof component !== 'number' || !Number.isFinite(component))) throw new TypeError(`${name} must be a finite vector.`); return [value[0]!, value[1]!, value[2]!]; }
 function record(value: unknown, name: string): Record<string, unknown> { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${name} is invalid.`); return value as Record<string, unknown>; }
