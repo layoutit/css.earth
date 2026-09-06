@@ -1069,10 +1069,6 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
 @media (min-width: 821px) and (orientation: landscape) {
 
-  .planet-lens-label {
-    transform: translateY(1.5px);
-  }
-
   .planet-resources-panel {
     display: none;
   }
