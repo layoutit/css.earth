@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, copyFile, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
@@ -53,12 +53,77 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 
 /** Verify authored source pins, then prepare each available generic capability lane. */
 export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
+  if (write) {
+    const id = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'descriptor').id;
+    if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid preparation identity.');
+    const stageRoot = resolve(process.cwd(), '.local/object-preparation');
+    await mkdir(stageRoot, { recursive: true });
+    const stage = await mkdtemp(resolve(stageRoot, `${id}-`));
+    const stagedPublic = resolve(stage, 'public'), stagedData = resolve(stage, 'prepared');
+    const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData });
+    const { publishPreparedAssets, readPreparedJsonOutputs } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/publication.mjs')).href) as typeof import('./publication.mjs');
+    if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
+    const outputs = await readPreparedJsonOutputs(stagedData);
+    const manifest = JSON.parse(await readFile(resolve(stagedData, 'runtime-assets.json'), 'utf8'));
+    const previous = await readFile(resolve(objectDirectory, 'runtime-assets.json'), 'utf8').then(JSON.parse,
+      (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
+    await publishPreparedAssets({ id, stage: stagedPublic, destination: publicDirectory, previous, manifest, recovery: resolve(stage, 'previous-public') });
+    await mkdir(outputDirectory, { recursive: true });
+    for (const entry of outputs) {
+      await copyFile(entry.path, resolve(outputDirectory, entry.filename));
+    }
+    await copyFile(resolve(stagedData, 'runtime-assets.json'), resolve(objectDirectory, 'runtime-assets.json'));
+    const scene = result.scene as Record<string, unknown> | undefined;
+    if (scene?.worldFrame !== undefined) {
+      const path = resolve(objectDirectory, 'object.json'), raw = JSON.parse(await readFile(path, 'utf8'));
+      await writeFile(path, `${JSON.stringify({ ...raw, properties: { ...raw.properties, worldFrame: scene.worldFrame } }, null, 2)}\n`);
+    }
+    await writePreparedObject(id, result.definition as Record<string, unknown>);
+    return result;
+  }
   const descriptorPath = resolve(objectDirectory, 'object.json');
   const descriptor = parseAuthoredObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8')) as unknown);
   const entries = await Promise.all(descriptor.recipe.sources.map(reference => verifiedSource(objectDirectory, reference)));
   const sources = new Map(entries.map(entry => [entry.reference.id, entry]));
+  if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-static-surface-geometry@1') {
+    const { prepareStaticSurfaceObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/static-surface/index.mjs')).href) as typeof import('./static-surface/index.mjs');
+    return prepareStaticSurfaceObject({ objectDirectory, publicDirectory, outputDirectory, write });
+  }
   await mkdir(outputDirectory, { recursive: true });
   const sourceDirectory = resolve(objectDirectory, 'source');
+  if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-layered-oblate-preparation@1') {
+    const { prepareLayeredOblateObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/material-composition/index.mjs')).href) as typeof import('./material-composition/index.mjs');
+    return prepareLayeredOblateObject({ objectDirectory, publicDirectory, outputDirectory, write, prepareContent: prepareObjectContentAssets });
+  }
+  if (source(sources, 'paged-ellipsoid')) {
+    const { preparePagedEllipsoidObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/paged-ellipsoid/index.mjs')).href) as typeof import('./paged-ellipsoid/index.mjs');
+    const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
+    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
+      manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
+      allowPreparationArtifacts: true,
+      values: [prepared.definition, prepared.content] });
+    if (write) await writePreparedObject(descriptor.id, prepared.definition);
+    return Object.freeze({ descriptor, sources, ...prepared });
+  }
+  if ((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-banded-ellipsoid@1') {
+    const { prepareLayeredGiantObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/giant-layers/object.mjs')).href) as typeof import('./giant-layers/object.mjs');
+    const prepared = await prepareLayeredGiantObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
+    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
+      manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
+      values: [prepared.raster, prepared.celestial, prepared.scene, prepared.definition, prepared.content] });
+    if (write) await writePreparedObject(descriptor.id, prepared.definition);
+    return Object.freeze({ descriptor, sources, ...prepared });
+  }
+  if (source(sources, 'terrestrial')) {
+    const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mjs')).href) as typeof import('./terrestrial-layers/index.mjs');
+    const prepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
+      config: required(sources, 'terrestrial').value, prepareContent: prepareObjectContentAssets });
+    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
+      manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
+      values: [prepared.raster, prepared.celestial, prepared.scene, prepared.definition, prepared.content] });
+    if (write) await writePreparedObject(descriptor.id, prepared.definition);
+    return Object.freeze({ descriptor, sources, ...prepared });
+  }
   const raster = await prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config: parseRasterRecipe(required(sources, 'raster').value) });
   const celestial = await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config: required(sources, 'celestial').value });
   const rasterConfig = parseRasterRecipe(required(sources, 'raster').value), geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);

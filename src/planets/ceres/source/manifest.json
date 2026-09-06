@@ -125,7 +125,7 @@
       ],
       "lensId": "elevation",
       "format": "geotiff",
-      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60\u00b0 latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
+      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
     }
   ],
   "generatedIntermediates": [],
@@ -153,6 +153,36 @@
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
       "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2867,
+      "expectedSha256": "cb35e715180b73da6dd2c8c8df9e637caf3913ca08cd5ee979e617006076d887",
+      "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 8641,
+      "expectedSha256": "9f8ba32503616c1fd023176e9a5f68e7140388b4212f5aa0877a52942e231128",
+      "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3555,
+      "expectedSha256": "2c3e48c89492b374466d01b25d39c3d6dc45317a1b8543a42b20963df60c4c08",
+      "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 897,
+      "expectedSha256": "a47655aefe82e5b07960ed532403171543890b56b27ba3a8992756aa0b1de98a",
+      "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1387,
+      "expectedSha256": "bbd89c12f8573468cdd8f6ccc3e010e88480841ab53f84189df01e59a20720d8",
+      "purpose": "Authored scientific and presentation recipe for reusable capability preparation."
     }
   ]
 }

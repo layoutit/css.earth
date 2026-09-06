@@ -1,2 +1,0 @@
-// Hubble's observed disk crop, also used by Jupiter's navigation recipe.
-export const parentMarkerOperations = Object.freeze([{"type":"rotate"},{"type":"extract","left":122,"top":150,"width":1079,"height":1019},{"type":"resize","width":"tile","height":"tile","fit":"cover","position":"centre","kernel":"lanczos3"},{"type":"ensure-alpha"},{"type":"ellipse-mask","cx":0.5,"cy":0.5,"rx":0.5,"ry":0.5},{"type":"png"}]);

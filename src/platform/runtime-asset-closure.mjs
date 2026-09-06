@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import { readFile, readdir, rename, rm, stat, unlink, writeFile } from "node:fs/promises";
+import { readFile, readdir, rename, rm, stat, lstat, unlink, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -36,11 +36,15 @@ export async function prepareRuntimeAssetManifest({
   urls,
   publicRoot,
   manifestPath,
+  allowPreparationArtifacts = false,
 }) {
   const filenames = normalizeRuntimeAssetUrls({ planetId, urls });
-  await assertDirectoryClosure(publicRoot, filenames, planetId);
+  // Offline baking may emit intermediate densities. They are not shipped;
+  // production assembly and verification still enforce exact closure.
+  if (!allowPreparationArtifacts) await assertDirectoryClosure(publicRoot, filenames, planetId);
   const assets = [];
   for (const filename of filenames) {
+    if (!(await lstat(resolve(publicRoot, filename))).isFile()) throw new Error(`Runtime asset is not a regular file: ${filename}.`);
     const bytes = await readFile(resolve(publicRoot, filename));
     assets.push(Object.freeze({
       filename,

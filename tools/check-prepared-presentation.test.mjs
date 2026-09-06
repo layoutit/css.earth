@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
+import { preparedObjectOverlay } from './test-prepared-object-overlay.mjs';
 import { readPreparedPresentationModule, readPreparedJsonExports, requirePreparedDefinitionSource,
   requirePreparedControlSource, auditPreparedPresentations } from "./check-prepared-presentation.mjs";
 const definition = `import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../../platform/prepared-schema.mjs";
@@ -50,9 +51,9 @@ export const objectControls = Object.freeze({ lenses: PREPARED_LENSES.controls.m
   ]) assert.throws(() => requirePreparedControlSource(source), /static prepared content/);
 });
 
-const root = process.cwd(), moonPath = `${root}/src/planets/moon/runtime/preparedPresentation.mjs`;
+const root = process.cwd(), moonPath = `${root}/src/planets/moon/prepared/runtime.json`;
 const moonSource = await readFile(moonPath, "utf8");
-const moonPlan = readPreparedPresentationModule(moonSource);
+const moonPlan = JSON.parse(moonSource);
 for (const [name, mutate, expected] of [
   ["second camera", plan => plan.tree.nodes.push({ ...plan.tree.nodes[plan.tree.camera], parent: -1 }), /exactly one camera/],
   ["undeclared texture resource", plan => plan.variants[0].writes.push({ kind: "texture", target: 2, name: "backgroundImage", resource: "unprepared", quoted: true }), /undeclared resource/],
@@ -60,18 +61,16 @@ for (const [name, mutate, expected] of [
   ["selection camera write", plan => plan.variants[0].writes.push({ kind: "style", target: plan.tree.camera, name: "opacity", value: "0" }), /camera\/scene/],
   ["unknown execution slot", plan => plan.publish = { executor: "private" }, /unsupported plan/],
 ]) test(`source audit rejects ${name} in the actual Moon record`, async () => {
-  const plan = structuredClone(moonPlan); mutate(plan);
-  const source = `export const PREPARED_PRESENTATION = Object.freeze(${JSON.stringify(plan)});`;
-  await assert.rejects(auditPreparedPresentations({ root, objects: [{ id: "moon" }],
-    readText: path => path === moonPath ? source : readFile(path, "utf8") }), expected);
+  const { readText } = await preparedObjectOverlay('moon', mutate);
+  await assert.rejects(auditPreparedPresentations({ root, objects: [{ id: "moon" }], readText }), expected);
 });
 test("adapter differences report actual data counts and source hashes without fabricating observed owners", async () => {
   const report = await auditPreparedPresentations({ root, objects: [{ id: "moon" }] });
   const entry = report.entries[0];
   assert.equal(entry.nodes, moonPlan.tree.nodes.length);
   assert.equal(entry.cameraNodes, moonPlan.tree.nodes.filter(node => /(?:^|\s)polycss-camera(?:\s|$)/.test(node.className)).length);
-  assert.equal(entry.observedOwners, null); assert.equal(entry.evidence, "validated-source-data");
-  assert.match(entry.source.presentationSha256, /^[a-f0-9]{64}$/);
+  assert.equal(entry.observedOwners, null); assert.equal(entry.evidence, "validated-authored-json");
+  assert.match(entry.source.runtimeSha256, /^[a-f0-9]{64}$/);
 });
 
 test('authored JSON transport cannot escape its descriptor package', async () => {

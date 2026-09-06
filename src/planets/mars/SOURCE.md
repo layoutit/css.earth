@@ -53,11 +53,9 @@ margin and 0.992 content scale, then clamps its final alpha to a four-sample
 prepared hull of the 32-longitude Mars mesh. The measured Hubble limb therefore
 stays inside the rendered globe silhouette instead of forming an independent
 screen-space halo.
-The prepared material plane is retained inside the same 3D scene and axial
-frame as Phobos and Deimos. One prepared plane and fixed moon billboards use
-the shared camera counter-rotation contract, so a foreground moon transit
-remains in front of both the shadow and the atmosphere through arbitrary pitch
-and yaw instead of being overpainted by a separate screen layer.
+The prepared material plane is retained inside the body's 3D scene and axial
+frame. Its prepared depth transform and shared camera counter-rotation keep
+the source-calibrated material aligned through arbitrary pitch and yaw.
 The reflectance spectrum and temperature-pressure profile are prepared from a
 pinned NASA GSFC Planetary Spectrum Generator configuration and raw I/F
 response. The charts are static SVG outputs. The browser performs no PSG
@@ -98,8 +96,8 @@ ephemeris claim.
 Camera input uses the shared unbounded accumulated `matrix3d` contract. Pointer
 drag may continue through arbitrary pitch, yaw, and diagonal combinations; the
 retained cube applies the inverse rotation. Initial zoom is selected from the
-same continuous viewport-fit contract as Venus and Mercury. The planet and its
-moons receive full zoom response. The cube has no zoom response, while the
+same continuous viewport-fit contract as Venus and Mercury. The planet
+receives full zoom response. The cube has no zoom response, while the
 separate Sun retains its measured angular size.
 
 ## Phobos and Deimos
@@ -111,9 +109,10 @@ from checked JPL Solar System Dynamics MAR099 snapshots. The separate
 OpenSpace scene snapshot pins the MAR097 SPICE kernel used by that source
 scene; it is not the authority for the prepared mean-element table.
 
-The scene declares readability scaling for both moons. It preserves their
-relative orbital order and source shapes but does not claim screen distance or
-screen diameter are physically to scale.
+These are physical/source records, not rendered satellites in the Mars scene.
+The earlier `mars-moon-billboards.webp` and `mars-moon-billboards@2x.webp`
+outputs had no runtime resource or retained-node consumer. They are omitted
+from the consumer-derived runtime inventory; no satellite rendering is added.
 
 ## Editorial information
 
@@ -125,11 +124,31 @@ services.
 ## Runtime boundary
 
 All browser assets are generated under `public/scenes/mars/` and enumerated by
-`runtime-assets.json`. Authoritative inputs stay under `source/`; generated
-preparation intermediates stay under `.prepared/`. No source-authority request
-is permitted at runtime.
+`runtime-assets.json`. Authoritative inputs and pinned capability recipes stay
+under `source/`; generated runtime transport and supporting plans stay under
+`prepared/`. The shared `tools/objects/terrestrial-layers/` operators prepare
+affine ellipsoid texels, observed lenses, measured celestial registration,
+source-calibrated atmosphere and bounded material rows. Shell content and
+scientific charts use the common content preparer. The body package contains
+no executable preparation or runtime code. No source-authority request is
+permitted at runtime.
 The material transport retains at most three decoded row shards. During input,
 it publishes the nearest ready prepared state while the exact Sun phase state
 decodes, then settles on the exact state. Runtime only selects a prepared phase
 and publishes its screen roll; it does not rasterize, derive lighting, or add an
 idle JavaScript loop.
+
+## Reproduction commands
+
+Build the shared preparation commands with `pnpm build:preparation`.
+`node tools/objects/dist/operations.js verify mars` verifies the entire local
+source closure without network access. The existing source refresh workflow is
+`node tools/objects/dist/operations.js acquire mars --refresh`: it reacquires the
+pinned OpenSpace/USGS/JPL files and tile mosaics, then requests and restores the
+NASA PSG configuration and spectrum. Each returned product must match its pin
+before replacing a local file. Checked camera/oracle records and prepared
+coordinate-registration snapshots remain checked-in provenance, not live queries.
+
+`node tools/objects/dist/prepare-authored.js mars` writes an isolated comparison
+stage; add `--write` to prepare canonical outputs. Focused tests run with
+`node --test tests/objects/unit/mars/*.test.mjs`.

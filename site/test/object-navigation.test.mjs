@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
 import { OBJECTS } from "../objects.mjs";
+import { authoredObjectFixture } from "./authored-object-fixture.mjs";
 import { objectNavigation, PLANET_SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mjs";
 import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mjs";
 import { markerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mjs";
@@ -40,13 +41,15 @@ test("prepared marker identity, atlas order, and presentation follow packages", 
 test("an unknown object loads its own marker; missing packages fail without fallback", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-owned-marker-"));
   context.after(() => rm(root, { recursive: true, force: true }));
-  const dir = resolve(root, "src/planets/new-body/tools");
+  const dir = resolve(root, "src/planets/new-body/source/preparation");
   await mkdir(dir, { recursive: true });
   const source = (await loadMarkerDescriptors())[0];
   const fixture = { ...source, planetId: "new-body", presentation: { size: 8 } };
-  await writeFile(resolve(dir, "navigation-marker.mjs"), `export default ${JSON.stringify(fixture)};`);
+  await writeFile(resolve(dir, "navigation.json"), JSON.stringify(fixture));
+  await writeFile(resolve(root, "src/planets/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
   assert.deepEqual(await loadMarkerDescriptors({ projectRoot: root, planets: [{ id: "new-body" }] }), [fixture]);
-  await assert.rejects(loadMarkerDescriptors({ projectRoot: root, planets: [{ id: "missing" }] }), /Cannot find module/);
+  await rm(resolve(dir, "navigation.json"));
+  await assert.rejects(loadMarkerDescriptors({ projectRoot: root, planets: [{ id: "new-body" }] }), /ENOENT/);
   assert.throws(() => markerStyle(undefined), /missing/);
   for (const bad of [null, {}, { size: 0 }, { size: 8, ringAngle: 3 }, { size: 8, ringOpacity: 2 }, { size: 8, css: "url(example)" }]) assert.throws(() => validateMarkerPresentation(bad));
 });

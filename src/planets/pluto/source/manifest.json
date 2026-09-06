@@ -92,9 +92,9 @@
     },
     {
       "id": "presentation-title-mark-mjs",
-      "path": "presentation/title-mark.mjs",
-      "expectedBytes": 2218,
-      "expectedSha256": "608178c43c9547621bdedd91e1cb7817c4d2aa40afadd9b1f4ffc932083dbfdb",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2156,
+      "expectedSha256": "43474864cc1b0c6a2f87d53d955754e76b0318e15b9d0867a495a83ea1b60fa0",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -190,6 +190,48 @@
       "expectedBytes": 1395,
       "expectedSha256": "2148f82d076d4b11a3e25be02fe4f9414df6d43f8f6461ff88f7eadf2cb08af1",
       "purpose": "Checked provider metadata or license notice; acquisition date 2026-09-04"
+    },
+    {
+      "path": "preparation/raster.json",
+      "expectedBytes": 1689,
+      "expectedSha256": "c6a7ceed20cffc38534664dabfe32ded7cb5882566f6013d35474bab20483d71",
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+    },
+    {
+      "path": "preparation/geometry.json",
+      "expectedBytes": 3331,
+      "expectedSha256": "b95a195119f9b51ec660482150a35d8e70ccba428bf6e43011275bd694fc2df6",
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+    },
+    {
+      "path": "preparation/celestial.json",
+      "expectedBytes": 203,
+      "expectedSha256": "c9218698f561b18c3d94e28614ed56c2e10aedd06702f27e21664493979394ba",
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+    },
+    {
+      "path": "content/static.json",
+      "expectedBytes": 7439,
+      "expectedSha256": "a4ba74b1b5d1d98ae7aa1559cacd02319c4eff211a4058bbaa018a0a84eeddd4",
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 803,
+      "expectedSha256": "5399a864015d43e65b918ef173571bb10acdb2c922f8873386edef9b0f87ac99",
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1017,
+      "expectedSha256": "58d733528f1f1602e1aa3f9e1bccefc4f10b2847e4111b655a2b76cf9d9a5160",
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+    },
+    {
+      "path": "preparation/physical.json",
+      "expectedBytes": 1392,
+      "expectedSha256": "82216d23362dd2f957cb656f030fee3c5e78439df30c3bccba40b2dca8bd7476",
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     }
   ]
 }

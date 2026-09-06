@@ -4,10 +4,7 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
 
-import { PREPARED_MARS_TITLE } from "../../src/planets/mars/site/preparedTitle.mjs";
-import { MARS_TITLE_SOURCE } from "../../src/planets/mars/source/presentation/title-mark.mjs";
-import { PREPARED_SATURN_TITLE } from "../../src/planets/saturn/site/preparedTitle.mjs";
-import { SATURN_TITLE_SOURCE } from "../../src/planets/saturn/source/presentation/title-mark.mjs";
+import { loadObjectContent } from "./load-object-content.mjs";
 import {
   PLANET_TITLE_STANDARD,
   createPreparedTitleLayout,
@@ -58,48 +55,23 @@ test("generates all shared title assets once from checked source vectors", async
 });
 
 test("keeps planet title rendering facts object-owned and source-bound", async () => {
-  const pairs = [
-    ["mars", MARS_TITLE_SOURCE, PREPARED_MARS_TITLE],
-    ["saturn", SATURN_TITLE_SOURCE, PREPARED_SATURN_TITLE],
-  ];
-  for (const [planet, source, prepared] of pairs) {
-    assert.equal(prepared.label, source.label);
-    assert.equal(prepared.path, source.path);
-    assert.equal(prepared.sourceSha256, source.sourceSha256);
-    const bytes = await readFile(resolve(
-      projectRoot,
-      `src/planets/${planet}/source/presentation/title-mark.mjs`,
-    ));
-    assert.equal(prepared.inputSha256, sha256(bytes));
-    assert.equal(prepared.generator,
-      `src/planets/${planet}/tools/prepare-title.mjs`);
+  for (const { id } of OBJECTS) {
+    const loaded = await loadObjectContent(id);
+    const { schema, ...source } = await loaded.source("title");
+    const expected = { ...source, ...createPreparedTitleLayout(source) };
+    for (const [field, value] of Object.entries(expected)) {
+      assert.deepEqual(loaded.prepared.title[field], value, id + ": source-bound title " + field);
+    }
   }
-  const saturnPanel = await readFile(resolve(
-    projectRoot,
-    "src/planets/saturn/site/SaturnPanel.astro",
-  ), "utf8");
-  assert.match(saturnPanel, /PREPARED_SATURN_TITLE/u);
-  assert.doesNotMatch(saturnPanel, /const title\s*=|M7\.83 29\.33/u);
+  const panel = await readFile(new URL("../components/PreparedObjectPanel.astro", import.meta.url), "utf8");
+  assert.match(panel, /title=\{content\.title\}/u);
+  assert.doesNotMatch(panel, /M7\.83 29\.33|createPreparedTitleLayout/u);
 });
 
 test("normalizes every implemented planet title to the complete Saturn standard", async () => {
   for (const { id } of OBJECTS) {
-    let prepared;
-    if (id === "mercury" || id === "venus") {
-      const source = JSON.parse(await readFile(
-        new URL(`../../src/planets/${id}/source/content/object.json`, import.meta.url),
-        "utf8",
-      ));
-      prepared = { ...source.title, ...createPreparedTitleLayout(source.title) };
-    } else {
-      const preparedModule = await import(new URL(
-        `../../src/planets/${id}/site/preparedTitle.mjs`,
-        import.meta.url,
-      ));
-      prepared = Object.values(preparedModule).find(
-        (value) => value?.label?.toLowerCase() === id,
-      );
-    }
+    const { prepared: content } = await loadObjectContent(id);
+    const prepared = content.title;
     assert.ok(prepared, `${id}: prepared title is missing`);
     for (const field of [
       "weight",

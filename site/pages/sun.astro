@@ -1,5 +1,15 @@
 ---
-import SunPage from "../../src/planets/sun/site/SunPage.astro";
+import PlanetLayout from "../layouts/PlanetLayout.astro";
+import PreparedObjectHead from "../components/PreparedObjectHead.astro";
+import PreparedObjectPanel from "../components/PreparedObjectPanel.astro";
+import preparedContent from "../../src/planets/sun/prepared/content.json";
+import preparedObject from "../../src/planets/sun/prepared/object.json";
+import type { PreparedObjectContentDocument } from "../../tools/objects/content/types";
+import "../../src/renderers/css/styles/sun-surfaces.css";
+import "../planet-shell.css";
 ---
 
-<SunPage />
+<PlanetLayout objectId="sun">
+  <PreparedObjectHead slot="planet-head" preparedAssets={preparedObject.data.assets} />
+  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent as PreparedObjectContentDocument} preparedControls={preparedObject.data.controls} />
+</PlanetLayout>

@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-static-celestial@1",
+  "id": "moon",
+  "includeSun": false,
+  "sourceSchema": "cssearth-prepared-star-source@1",
+  "directionalSun": {
+    "meanHeliocentricDistanceAu": 1
+  }
+}

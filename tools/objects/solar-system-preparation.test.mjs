@@ -53,17 +53,20 @@ test("Mercury preserves all baseline bytes except approved physical, overlay, an
   presentation.camera = scene.camera;
   presentation.tree.properties.find(property => property.value === mercuryScene.camera.defaultTransform).value = oldTransform;
   presentation.viewBindings.find(binding => binding.kind === "silhouette-fit").unitScale = 2 * 1.1 / 460;
-  // Europa adds an explicit orbit centre and changes the shared marker strip.
-  // Normalize only those additions when comparing the historical migration.
+  // New moons add an explicit orbit centre and change the shared marker strip.
+  // Restore the historical strip layout for this migration snapshot only.
   for (const orbit of [scene.heliocentricView.orbit, presentation.heliocentricView.plan.orbit]) {
     delete orbit.centerBodyId;
     delete orbit.focus;
   }
   const view = presentation.heliocentricView;
+  const historicalMarkerIds = ["sun", "mercury", "venus", "earth", "moon", "mars", "ceres", "jupiter", "saturn", "uranus", "neptune", "pluto"];
+  const currentMarkerIds = Object.keys(PREPARED_NAVIGATION_MARKERS);
   for (const marker of [view.bodyMarker, view.systemMarkers.sun, ...Object.values(view.systemMarkers.bodies)]) {
     if (marker.count === PREPARED_NAVIGATION_MARKERS.mercury.count && !marker.url?.startsWith('/scenes/')) {
-      marker.count = 12;
-      if (marker.index >= 9) marker.index--;
+      marker.count = historicalMarkerIds.length;
+      marker.index = historicalMarkerIds.indexOf(currentMarkerIds[marker.index]);
+      assert.ok(marker.index >= 0, "Historical migration snapshot contains only its original markers");
     }
   }
   assert.equal(hash(scene), "fd07cb83678d7efd46023c7d997ec2c368d3c293d4a2ee6553711111285129e3");

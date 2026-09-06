@@ -1,0 +1,338 @@
+{
+  "schema": "cssearth-ellipsoid-materials@1",
+  "urlPrefix": "/scenes/uranus/",
+  "raster": {
+    "shape": {
+      "equatorialRadius": 230,
+      "polarRadius": 224.72671074768184,
+      "arithmetic": "division",
+      "rootSelection": "facing",
+      "includeDistance": true
+    },
+    "view": {
+      "right": [
+        1,
+        0,
+        0
+      ],
+      "down": [
+        0,
+        1,
+        0
+      ],
+      "forward": [
+        0,
+        0,
+        1
+      ],
+      "rotations": [
+        {
+          "kind": "rotate",
+          "axis": "x",
+          "state": "scenePitchDegrees",
+          "factor": -1
+        },
+        {
+          "kind": "rotate",
+          "axis": "z",
+          "degrees": -14
+        },
+        {
+          "kind": "rotate",
+          "axis": "y",
+          "degrees": -82.23
+        },
+        {
+          "kind": "rotate",
+          "axis": "z",
+          "degrees": 176
+        }
+      ]
+    },
+    "light": {
+      "direction": [
+        -0.45,
+        -0.29,
+        0.845
+      ],
+      "operations": [
+        {
+          "kind": "normalize"
+        },
+        {
+          "kind": "rotate",
+          "axis": "x",
+          "degrees": -40
+        },
+        {
+          "kind": "rotate",
+          "axis": "x",
+          "state": "scenePitchDegrees",
+          "factor": 1
+        },
+        {
+          "kind": "normalize"
+        },
+        {
+          "kind": "rotate",
+          "axis": "x",
+          "state": "scenePitchDegrees",
+          "factor": -1
+        },
+        {
+          "kind": "rotate",
+          "axis": "z",
+          "degrees": -14
+        },
+        {
+          "kind": "rotate",
+          "axis": "y",
+          "degrees": -82.23
+        },
+        {
+          "kind": "rotate",
+          "axis": "z",
+          "degrees": 176
+        }
+      ]
+    },
+    "grid": {
+      "kind": "fixed-span",
+      "span": 512
+    },
+    "lighting": {
+      "ambient": 0.24,
+      "terminator": [
+        0.04,
+        0.24
+      ],
+      "terminatorWidth": 0.2,
+      "smoothstepOrder": "direct-first",
+      "alphaOrder": "lighting-first",
+      "radialShadowGain": 0.82
+    },
+    "atmosphere": {
+      "model": "additive-floor",
+      "limbExponent": 1.72,
+      "floor": 0.04,
+      "gain": 0.2
+    },
+    "silhouette": {
+      "horizontalScale": 1.012,
+      "verticalScale": 0.988,
+      "fadeStart": 0.14,
+      "opaqueAt": 0.06,
+      "sideFadeStart": 0.8,
+      "sideOpaqueAt": 0.9
+    }
+  },
+  "fixedState": {
+    "scenePitchDegrees": 40,
+    "systemObliquityDegrees": 0
+  },
+  "bank": {
+    "frames": 256,
+    "frameSize": 256,
+    "columns": 16,
+    "gutter": 2,
+    "maximumScenePitchDegrees": 65,
+    "presentationSize": 256,
+    "presentationAssetUrl": false,
+    "encoding": {
+      "quality": 90,
+      "alphaQuality": 100,
+      "smartSubsample": true
+    }
+  },
+  "radialLayer": {
+    "recipe": "rings",
+    "layerIndex": 0,
+    "size": 1200,
+    "outerRadius": 955.6711921436676
+  },
+  "lenses": [
+    {
+      "id": "normal",
+      "fixedBase": [
+        166,
+        218,
+        225
+      ],
+      "atmosphere": [
+        157,
+        229,
+        238
+      ],
+      "bankBaseFromCoverage": true,
+      "rowOutput": "uranus-orbit-material-normal-row-{row}.webp",
+      "fixed": [
+        {
+          "density": 1,
+          "shadowless": false,
+          "size": 512,
+          "filename": "uranus-fixed-material-normal.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        },
+        {
+          "density": 2,
+          "shadowless": false,
+          "size": 1024,
+          "filename": "uranus-fixed-material-normal@2x.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        },
+        {
+          "density": 1,
+          "shadowless": true,
+          "size": 512,
+          "filename": "uranus-fixed-material-normal-shadowless.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        },
+        {
+          "density": 2,
+          "shadowless": true,
+          "size": 1024,
+          "filename": "uranus-fixed-material-normal-shadowless@2x.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "methane",
+      "fixedBase": [
+        60,
+        121,
+        132
+      ],
+      "atmosphere": [
+        121,
+        218,
+        228
+      ],
+      "bankBaseFromCoverage": true,
+      "rowOutput": "uranus-orbit-material-methane-row-{row}.webp",
+      "fixed": [
+        {
+          "density": 1,
+          "shadowless": false,
+          "size": 512,
+          "filename": "uranus-fixed-material-methane.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        },
+        {
+          "density": 2,
+          "shadowless": false,
+          "size": 1024,
+          "filename": "uranus-fixed-material-methane@2x.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        },
+        {
+          "density": 1,
+          "shadowless": true,
+          "size": 512,
+          "filename": "uranus-fixed-material-methane-shadowless.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        },
+        {
+          "density": 2,
+          "shadowless": true,
+          "size": 1024,
+          "filename": "uranus-fixed-material-methane-shadowless@2x.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "near-infrared",
+      "fixedBase": [
+        90,
+        68,
+        151
+      ],
+      "atmosphere": [
+        194,
+        183,
+        245
+      ],
+      "bankBaseFromCoverage": true,
+      "rowOutput": "uranus-orbit-material-near-infrared-row-{row}.webp",
+      "fixed": [
+        {
+          "density": 1,
+          "shadowless": false,
+          "size": 512,
+          "filename": "uranus-fixed-material-near-infrared.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        },
+        {
+          "density": 2,
+          "shadowless": false,
+          "size": 1024,
+          "filename": "uranus-fixed-material-near-infrared@2x.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        },
+        {
+          "density": 1,
+          "shadowless": true,
+          "size": 512,
+          "filename": "uranus-fixed-material-near-infrared-shadowless.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        },
+        {
+          "density": 2,
+          "shadowless": true,
+          "size": 1024,
+          "filename": "uranus-fixed-material-near-infrared-shadowless@2x.webp",
+          "encoding": {
+            "quality": 94,
+            "alphaQuality": 100,
+            "smartSubsample": true
+          }
+        }
+      ]
+    }
+  ]
+}

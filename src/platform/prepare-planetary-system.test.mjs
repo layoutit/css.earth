@@ -57,6 +57,21 @@ async function prepareMercurySystem(overrides = {}) {
   });
 }
 
+test("satellite parent frames contain both close and distant moon orbits without changing physical positions", async () => {
+  const astronomy = await loadAstronomyPackage();
+  for (const id of ["moon", "io", "europa", "ganymede", "callisto"]) {
+    const frame = prepareEclipticPresentationFrame(id);
+    const kilometersPerUnit = astronomy.BODIES[id].meanRadiusKm / 230;
+    const system = await preparePlanetarySystem({ bodyId: id, presentationFrame: frame, kilometersPerUnit });
+    const parent = system.bodies.find(body => body.id === astronomy.BODIES[id].parent);
+    const moonPosition = astronomy.moonPositionRelativeToPlanetKm(id, SOLAR_GEOMETRY_EPOCH_JD_TT);
+    const expected = scale(frame.toPresentation(applyMatrix(
+      transposeMatrix(BODY_FIXED_TO_ICRF_MATRICES[id]), scale(moonPosition, -1))), 1 / kilometersPerUnit);
+    assert.deepEqual(parent.position, expected.map(Math.round),
+      `${id}: the parent position must keep its physical distance and direction`);
+  }
+});
+
 function applyMatrix(matrix, [x, y, z]) {
   return [
     matrix[0] * x + matrix[1] * y + matrix[2] * z,

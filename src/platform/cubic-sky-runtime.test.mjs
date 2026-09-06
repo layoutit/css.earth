@@ -67,7 +67,7 @@ function mountStarFixture(t, { width = 1440, height = 900 } = {}) {
 test("prepared star radii keep Galaxio's pixel ceiling on mount and resize", t => {
   const f = mountStarFixture(t);
   const originalElements = [...f.elements];
-  const originalOpacities = f.elements.map(element => element.style.opacity);
+  const originalOpacities = f.elements.map(element => element.style['--planet-cubic-sky-star-luminance']);
   const bright = f.elements.find(element => element.dataset.name === "Sirius");
   const faint = f.elements.find(element => Number(element.dataset.magnitude) === 5);
   assert.ok(bright && faint, "the real retained catalogue exercises bright and faint points");
@@ -79,7 +79,7 @@ test("prepared star radii keep Galaxio's pixel ceiling on mount and resize", t =
     assert.ok(f.elements.every(element => f.radius(element) <= 1.2501), "no retained disc exceeds the ceiling");
   }
   assert.deepEqual(f.elements, originalElements, "resizing retains the mounted stars");
-  assert.deepEqual(f.elements.map(element => element.style.opacity), originalOpacities,
+  assert.deepEqual(f.elements.map(element => element.style['--planet-cubic-sky-star-luminance']), originalOpacities,
     "radius correction preserves the prepared exposure");
   f.sky.destroy();
   assert.equal(f.disconnected(), true);
@@ -92,12 +92,23 @@ test("session star radius limits survive resize and reset to the prepared ceilin
   for (const [width, height] of [[800, 600], [1440, 900], [390, 844]]) {
     f.resize(width, height);
     assert.ok(Math.abs(f.radius(bright) - 2) < .0001, "viewport factor cannot enlarge or shrink the session ceiling");
-    assert.equal(bright.style.opacity, "0.7");
+    assert.equal(bright.style['--planet-cubic-sky-star-luminance'], "0.7");
   }
   f.sky.setStarExposure(null);
   assert.ok(Math.abs(f.radius(bright) - 1.25) < .0001, "reset applies the prepared ceiling at the current viewport");
-  assert.equal(bright.style.opacity, "0.95");
+  assert.equal(bright.style['--planet-cubic-sky-star-luminance'], "0.95");
+  assert.equal(bright.style.opacity, undefined, 'Presentation emphasis belongs to CSS, not an inline opacity override');
   assert.equal(f.sky.starExposure().source, "prepared");
+});
+
+test('zero-exposure stars stay dark under either presentation mode and reset without remounting', t => {
+  const f = mountStarFixture(t), original = [...f.elements];
+  const dark = f.sky.setStarExposure({ exposureScale: .000001 });
+  assert.equal(dark.drawnCount, 0);
+  assert.ok(f.elements.every(element => element.style['--planet-cubic-sky-star-luminance'] === '0'));
+  f.sky.setStarExposure(null);
+  assert.deepEqual(f.elements, original);
+  assert.equal(f.sky.starExposure().drawnCount, original.length);
 });
 
 test("release publishes both launch steps once and leaves no idle clock", (t) => {

@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { createExplorerRailController } from "../explorer-rail.mjs";
 import { MOBILE_VIEWPORT_QUERY } from "../runtime-policy.mjs";
 
-test("Planet information starts the horizontal rail and Solar System is deprecated", async () => {
+test("Planet information starts the horizontal rail and the legacy Solar System rail panel is absent", async () => {
   const read = (path) => readFile(new URL(path, import.meta.url), "utf8");
   const [rail, navigation, styles, client, railStyles, mapsStyles, shell, materialSymbol, materialSources, shellStyles, buildConfig] = await Promise.all([
     read("../components/ExplorerRail.astro"),
@@ -20,7 +20,7 @@ test("Planet information starts the horizontal rail and Solar System is deprecat
     read("../../astro.config.mjs"),
   ]);
   assert.doesNotMatch(
-    rail + shell,
+    rail,
     /PlanetaryScale|explorer-milky-way-panel|explorer-rail-milky-way|aria-label="Solar System"|>Solar System</u,
   );
   assert.match(rail, /explorer-rail-explore[\s\S]*?explorer-rail-about[\s\S]*?planet-settings-action/u);

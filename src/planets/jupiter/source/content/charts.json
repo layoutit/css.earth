@@ -1,0 +1,132 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/jupiter/",
+  "charts": [
+    {
+      "kind": "spectrum",
+      "id": "jupiter",
+      "title": "Jupiter modeled disk reflectance",
+      "description": "Full 253-point NASA PSG modeled reflectance spectrum from 350 to 1000 nanometers. The wavelength band marks ultraviolet, visible light, and near-infrared regions.",
+      "metadata": {
+        "source": "NASA GSFC Planetary Spectrum Generator",
+        "sourceUrl": "https://psg.gsfc.nasa.gov/api.php",
+        "measurement": "I/F apparent albedo",
+        "resolution": "R 240",
+        "points": 253,
+        "rangeMicrometers": [
+          0.35,
+          0.9979984388
+        ],
+        "model": "Jupiter atmosphere, Moses et al. 2005, NASA PSG",
+        "configured": "2026-08-30"
+      },
+      "maximum": 0.24,
+      "source": "atmosphere/psg-jupiter-r240-rif.txt",
+      "format": "numeric-lines",
+      "pointCount": 253,
+      "requiredHeader": "# Radiance unit: I/F [apparent albedo]",
+      "output": "jupiter-reflectance-spectrum.svg"
+    },
+    {
+      "kind": "pressure",
+      "id": "jupiter",
+      "title": "Jupiter temperature and pressure profile",
+      "description": "NASA PSG Jupiter vertical atmosphere model with 50 layers. Pressure runs from 10 bar to 10 nanobar on a logarithmic scale.",
+      "metadata": {
+        "source": "NASA GSFC Planetary Spectrum Generator",
+        "sourceUrl": "https://psg.gsfc.nasa.gov/api.php",
+        "atmosphere": "Jupiter atmosphere, Moses et al. 2005, JGR",
+        "layers": 50,
+        "pressureRangeBar": [
+          1e-8,
+          10
+        ],
+        "temperatureRangeKelvin": [
+          108.6,
+          492.2
+        ],
+        "configured": "2026-08-30"
+      },
+      "temperatureMinimum": 100,
+      "temperatureMaximum": 500,
+      "pressureTicks": [
+        {
+          "pressure": 1e-8,
+          "label": "10⁻⁸"
+        },
+        {
+          "pressure": 0.000001,
+          "label": "10⁻⁶"
+        },
+        {
+          "pressure": 0.0001,
+          "label": "10⁻⁴"
+        },
+        {
+          "pressure": 0.01,
+          "label": "10⁻²"
+        },
+        {
+          "pressure": 10,
+          "label": "10"
+        }
+      ],
+      "source": "atmosphere/psg-jupiter-20260830.cfg",
+      "layerCount": 50,
+      "output": "jupiter-temperature-pressure-profile.svg"
+    },
+    {
+      "kind": "phase",
+      "id": "jupiter",
+      "title": "Jupiter photometric phase curve",
+      "description": "V-band dimming of Jupiter as phase angle increases from zero to 130 degrees.",
+      "metadata": {
+        "source": {
+          "title": "Computing Apparent Planetary Magnitudes for The Astronomical Almanac",
+          "authors": [
+            "Anthony Mallama",
+            "James L. Hilton"
+          ],
+          "journal": "Astronomy and Computing",
+          "arxiv": "1808.01973",
+          "url": "https://arxiv.org/abs/1808.01973",
+          "sourcePdfSha256": "805e53ab8f921c55e1c5e3dd64bbd567f806cdba56148625afcddfc650b6f9a7",
+          "retrievedAt": "2026-09-01",
+          "qualification": "V-band phase equations transcribed from equations 2 through 17. Distance, rotation, season, latitude, and ring terms cancel or are held fixed so each curve isolates phase-angle dependence."
+        },
+        "planetId": "jupiter",
+        "samples": 181,
+        "maximumAngleDegrees": 130,
+        "qualification": "The greater-than-12-degree Cassini branch is limited to 130 degrees because the source paper reports no constraining data beyond that angle.",
+        "measurement": "V-band magnitude change relative to zero-degree phase"
+      },
+      "sampleCount": 181,
+      "maximumAngleDegrees": 130,
+      "segments": [
+        {
+          "maximumAngleDegrees": 12,
+          "kind": "polynomialMagnitude",
+          "coefficients": [
+            -9.395,
+            -0.00037,
+            0.000616
+          ]
+        },
+        {
+          "maximumAngleDegrees": 130,
+          "kind": "albedoPolynomialMagnitude",
+          "constant": -9.428,
+          "coefficients": [
+            1,
+            -1.507,
+            -0.363,
+            -0.062,
+            2.809,
+            -1.876
+          ]
+        }
+      ],
+      "output": "jupiter-photometric-phase-curve.svg"
+    }
+  ]
+}

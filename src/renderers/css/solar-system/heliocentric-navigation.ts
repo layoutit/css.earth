@@ -1,3 +1,10 @@
+/** The shell owns destination availability. Unhandled queries fail closed. */
+export function supportsObjectNavigation(host: EventTarget, objectId: string): boolean {
+  const query = new CustomEvent('objectnavigationquery', { bubbles: true, cancelable: true, detail: { objectId } });
+  host.dispatchEvent(query);
+  return query.defaultPrevented;
+}
+
 /** A retained target reports selection to the application; it never owns navigation. */
 export interface ObjectNavigationTarget extends EventTarget {
   readonly style: Pick<CSSStyleDeclaration, 'pointerEvents' | 'cursor'>;

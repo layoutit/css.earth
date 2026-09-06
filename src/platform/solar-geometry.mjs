@@ -70,11 +70,29 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     -0.6328659125175593,
     0.007887263540702127,
   ]),
+  // subsolar latitude 0.475°, longitude -17.358°
+  io: Object.freeze([
+    0.9544263659799828,
+    -0.29833120058950274,
+    0.008294979027691163,
+  ]),
   // subsolar latitude -0.005°, longitude -147.224°
   europa: Object.freeze([
     -0.8407937362158917,
     -0.541355598616355,
     -0.00009479899619779797,
+  ]),
+  // subsolar latitude 0.557°, longitude 57.421°
+  ganymede: Object.freeze([
+    0.5384295730001025,
+    0.8426144321209788,
+    0.00972181569293623,
+  ]),
+  // subsolar latitude 0.287°, longitude 155.901°
+  callisto: Object.freeze([
+    -0.9128274128516184,
+    0.40831484693830605,
+    0.005010001633591387,
   ]),
   // subsolar latitude -7.237°, longitude 71.460°
   saturn: Object.freeze([
@@ -145,11 +163,29 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     -0.014359394961547417,
     0.9992527919818485,
   ]),
+  // pole tilt to the ecliptic 2.226°, Sun ecliptic latitude -0.620°
+  io: Object.freeze([
+    -0.008138992021358179,
+    0.03798743984686221,
+    0.9992450706522187,
+  ]),
   // pole tilt to the ecliptic 2.087°, Sun ecliptic latitude -0.619°
   europa: Object.freeze([
     0.027847553005524106,
     -0.0234799183496585,
     0.999336383419466,
+  ]),
+  // pole tilt to the ecliptic 2.341°, Sun ecliptic latitude -0.622°
+  ganymede: Object.freeze([
+    -0.04081462560765104,
+    0.0016633119803377285,
+    0.9991653515458607,
+  ]),
+  // pole tilt to the ecliptic 1.952°, Sun ecliptic latitude -0.621°
+  callisto: Object.freeze([
+    0.0021429154337511136,
+    -0.03400256102562538,
+    0.999419448358467,
   ]),
   // pole tilt to the ecliptic 28.052°, Sun ecliptic latitude 2.416°
   saturn: Object.freeze([
@@ -222,11 +258,29 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.03669268883752183,
     0.9985190851589119,
   ]),
+  // orbital inclination to the ecliptic 2.228°, obliquity to the orbit 0.013°
+  io: Object.freeze([
+    0.00022332875596922652,
+    0.000017882528257073815,
+    0.9999999749022406,
+  ]),
   // orbital inclination to the ecliptic 2.045°, obliquity to the orbit 0.046°
   europa: Object.freeze([
     0.000756411541704305,
     -0.00024244703460264003,
     0.9999996845304577,
+  ]),
+  // orbital inclination to the ecliptic 2.321°, obliquity to the orbit 0.050°
+  ganymede: Object.freeze([
+    -0.00039412575369457404,
+    -0.0007759441402324511,
+    0.9999996212877188,
+  ]),
+  // orbital inclination to the ecliptic 2.029°, obliquity to the orbit 0.080°
+  callisto: Object.freeze([
+    0.00031039403578500546,
+    0.0013641050560101453,
+    0.9999990214359905,
   ]),
   // orbital inclination to the ecliptic 2.488°, obliquity to the orbit 26.730°
   saturn: Object.freeze([
@@ -300,11 +354,29 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     0.8008889475142054,
     0.053421715232624095,
   ]),
+  // flight-path angle 0.233°
+  io: Object.freeze([
+    -0.0027943114408412327,
+    -0.9999960957329188,
+    0.000018506509001148256,
+  ]),
   // flight-path angle 0.424°
   europa: Object.freeze([
     -0.019318525498735698,
     -0.9998133539239616,
     -0.00022778909901955552,
+  ]),
+  // flight-path angle 0.078°
+  ganymede: Object.freeze([
+    -0.04074066430086276,
+    -0.9991694410992328,
+    -0.0007913569176404567,
+  ]),
+  // flight-path angle -0.248°
+  callisto: Object.freeze([
+    0.010899282769555806,
+    -0.9999396753260209,
+    0.0013606410259257575,
   ]),
   // flight-path angle -3.110°
   saturn: Object.freeze([
@@ -378,11 +450,29 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     0.9025992706344895, 0.011939351261786208, -0.43031617276316164,
     0.4304361288292537, -0.010474530424375038, 0.9025602601548968,
   ]),
+  // pole RA 268.094°, Dec 64.479°, prime meridian W 327.992°
+  io: Object.freeze([
+    0.8315931730163224, 0.5552002846204169, -0.014333127713539551,
+    -0.5062637957845927, 0.7471782626809053, -0.4306060994167643,
+    -0.22836322749168914, 0.36534543617589094, 0.9024261457842558,
+  ]),
   // pole RA 267.257°, Dec 64.805°, prime meridian W 98.632°
   europa: Object.freeze([
     -0.10709879560589393, -0.994039671402531, -0.02037104949960068,
     0.9007700611139847, -0.08833576813295844, -0.4252176960911534,
     0.4208837665917697, -0.06388993462438687, 0.9048618299349445,
+  ]),
+  // pole RA 268.067°, Dec 64.361°, prime meridian W 253.161°
+  ganymede: Object.freeze([
+    -0.3186186338179186, 0.94777065417426, -0.014592918491460462,
+    -0.8526239390607422, -0.2932909749476222, -0.43244979194678457,
+    -0.41414319350261825, -0.12534429025834626, 0.9015399182371706,
+  ]),
+  // pole RA 268.177°, Dec 64.758°, prime meridian W 154.591°
+  callisto: Object.freeze([
+    -0.8904676836613986, -0.45484423737782265, -0.013565547496886458,
+    0.41663995604358994, -0.8029617097550306, -0.4262201774849162,
+    0.18297117637130392, -0.38518724328755355, 0.9045177368221345,
   ]),
   // pole RA 40.579°, Dec 83.536°, prime meridian W 347.700°
   saturn: Object.freeze([
@@ -523,6 +613,23 @@ export const BODY_ORBITS = Object.freeze({
     perihelionAu: 4.957710302847302,
     aphelionAu: 5.456824010302392,
   }),
+  // a 0.0028281 AU, e 0.0043582, perihelion 0.0028158 AU, aphelion 0.0028405 AU
+  io: Object.freeze({
+    centerBodyId: "jupiter",
+    centerPositionAu: Object.freeze([0.0028236838737907763,0.0000035856393568791123,-6.306739429096705e-7]),
+    semiMajorAxisAu: 0.002828136991452244,
+    eccentricity: 0.004358206763213317,
+    heliocentricDistanceAu: 5.300464257225573,
+    perihelionDirection: Object.freeze([
+      -0.35848936886483657,
+      0.9335338067769744,
+      0.00006336704168852238,
+    ]),
+    trueAnomalyDegrees: 69.0653044249533,
+    inclinationDegrees: 2.2281916642067765,
+    perihelionAu: 0.002815811385688803,
+    aphelionAu: 0.0028404625972156847,
+  }),
   // a 0.0044933 AU, e 0.010305, perihelion 0.0044470 AU, aphelion 0.0045396 AU
   europa: Object.freeze({
     centerBodyId: "jupiter",
@@ -539,6 +646,40 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 2.045455589904641,
     perihelionAu: 0.004447011186074449,
     aphelionAu: 0.004539620788605994,
+  }),
+  // a 0.0071618 AU, e 0.0013900, perihelion 0.0071518 AU, aphelion 0.0071717 AU
+  ganymede: Object.freeze({
+    centerBodyId: "jupiter",
+    centerPositionAu: Object.freeze([0.0071542286175485656,-0.0002819534051974234,0.0000026008866384013246]),
+    semiMajorAxisAu: 0.0071617730117441636,
+    eccentricity: 0.0013899522685525472,
+    heliocentricDistanceAu: 5.3013812918425804,
+    perihelionDirection: Object.freeze([
+      -0.1598329770235545,
+      0.9871438219847842,
+      0.0007029744379261349,
+    ]),
+    trueAnomalyDegrees: 78.5459137582781,
+    inclinationDegrees: 2.320788230286769,
+    perihelionAu: 0.007151818489099631,
+    aphelionAu: 0.007171727534388696,
+  }),
+  // a 0.012598 AU, e 0.0080409, perihelion 0.012497 AU, aphelion 0.012700 AU
+  callisto: Object.freeze({
+    centerBodyId: "jupiter",
+    centerPositionAu: Object.freeze([0.012512821208785644,0.00008226027072165777,-0.000003996120635710656]),
+    semiMajorAxisAu: 0.012598493189332198,
+    eccentricity: 0.008040875479720962,
+    heliocentricDistanceAu: 5.286379386337367,
+    perihelionDirection: Object.freeze([
+      -0.837105050326396,
+      -0.5470412439397282,
+      0.0010060551261404022,
+    ]),
+    trueAnomalyDegrees: 327.2123612563018,
+    inclinationDegrees: 2.029456851385949,
+    perihelionAu: 0.012497190274364665,
+    aphelionAu: 0.012699796104299731,
   }),
   // a 9.5415 AU, e 0.055228, perihelion 9.0146 AU, aphelion 10.068 AU
   saturn: Object.freeze({

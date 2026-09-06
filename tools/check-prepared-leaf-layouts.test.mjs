@@ -6,14 +6,12 @@ import { resolve } from "node:path";
 import { OBJECTS } from "../site/objects.mjs";
 import { censusPreparedLeafLayouts, preparedStyleRecord } from "./check-prepared-leaf-layouts.mjs";
 import { readPreparedPresentationModule } from "./check-prepared-presentation.mjs";
+import { preparedObjectOverlay } from './test-prepared-object-overlay.mjs';
 
 async function changedObject(id, mutate) {
-  const file = resolve(`src/planets/${id}/runtime/preparedPresentation.mjs`);
-  const plan = readPreparedPresentationModule(await readFile(file, "utf8"));
-  const changed = mutate(plan);
-  const source = `export const PREPARED_PRESENTATION = ${JSON.stringify(plan)};`;
+  const { changed, readText } = await preparedObjectOverlay(id, mutate);
   const result = await censusPreparedLeafLayouts({ objects: OBJECTS.filter(object => object.id === id),
-    readText: path => path === file ? source : readFile(path, "utf8") });
+    readText });
   return { result, changed };
 }
 const firstTexture = plan => plan.tree.nodes.findIndex(node => node.className?.split(/\s+/).includes("polycss-projective-texture"));

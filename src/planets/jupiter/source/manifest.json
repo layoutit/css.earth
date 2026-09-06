@@ -2,28 +2,21 @@
   "schema": "cssjupiter-authoritative-sources@1",
   "inputs": [
     {
-      "id": "inter-jupiter-title-vector",
-      "path": "presentation/title-mark.mjs",
-      "expectedSha256": "b9a93788a097d79e61c0be4829ef1a5d450234feba10f775349c7592621481ef",
-      "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Jupiter outline",
-      "credit": "Rasmus Andersson and the Inter project",
-      "license": "SIL Open Font License 1.1",
-      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
-      "redistribution": "project-authored SVG outline with Inter attribution",
-      "consumers": ["title"],
-      "expectedBytes": 3355
-    },
-    {
       "id": "nasa-hubble-jupiter-navigation-marker",
       "path": "presentation/navigation-marker.png",
       "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
       "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
       "credit": "NASA, ESA, STScI, and Amy Simon",
       "license": "NASA media usage guidelines and credited partner rights",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked full-disc Hubble source snapshot",
-      "consumers": ["navigation", "atmosphere", "lighting"],
-      "expectedBytes": 1166501
+      "consumers": [
+        "navigation",
+        "atmosphere",
+        "lighting"
+      ],
+      "expectedBytes": 1166501,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "openspace-jupiter-globe",
@@ -32,10 +25,15 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/globe.asset",
       "credit": "OpenSpace Team",
       "license": "MIT",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked MIT source snapshot",
-      "consumers": ["body", "scene", "lighting"],
-      "expectedBytes": 1443
+      "consumers": [
+        "body",
+        "scene",
+        "lighting"
+      ],
+      "expectedBytes": 1443,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "openspace-jupiter-kernels",
@@ -44,10 +42,14 @@
       "origin": "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/jupiter/kernels.asset",
       "credit": "OpenSpace Team",
       "license": "MIT",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked MIT source snapshot",
-      "consumers": ["scene", "moons"],
-      "expectedBytes": 1037
+      "consumers": [
+        "scene",
+        "moons"
+      ],
+      "expectedBytes": 1037,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "nasa-hubble-jupiter-global-map-2019",
@@ -56,10 +58,14 @@
       "origin": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png",
       "credit": "NASA, ESA, A. Simon (NASA GSFC), and M. H. Wong (UC Berkeley)",
       "license": "NASA media usage guidelines and credited partner rights",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked Hubble WFC3 global-map snapshot",
-      "consumers": ["body", "lenses"],
-      "expectedBytes": 6720450
+      "consumers": [
+        "body",
+        "lenses"
+      ],
+      "expectedBytes": 6720450,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "nasa-juno-jupiter-north-pole-detail-pia24239",
@@ -71,10 +77,13 @@
       "licenseEvidence": [
         "https://science.nasa.gov/photojournal/jupiter-north-pole-detail/"
       ],
-      "acquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked NASA Photojournal PIA24239 north-polar-region image product",
-      "consumers": ["body"],
-      "expectedBytes": 193959
+      "consumers": [
+        "body"
+      ],
+      "expectedBytes": 193959,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only"
     },
     {
       "id": "nasa-juno-jupiter-north-polar-projection-pia23808",
@@ -86,10 +95,13 @@
       "licenseEvidence": [
         "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/"
       ],
-      "acquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked NASA Photojournal north-polar projection; color is explicitly extreme false color and is not transported into the runtime asset",
-      "consumers": ["body"],
-      "expectedBytes": 633958
+      "consumers": [
+        "body"
+      ],
+      "expectedBytes": 633958,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only"
     },
     {
       "id": "nasa-juno-jupiter-south-polar-cyclones-pia23556",
@@ -101,10 +113,13 @@
       "licenseEvidence": [
         "https://science.nasa.gov/photojournal/jupiters-south-pole-cyclones-in-2016/"
       ],
-      "acquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked NASA Photojournal 5-micron south-polar cyclone image; infrared palette is not transported into the runtime asset",
-      "consumers": ["body"],
-      "expectedBytes": 909084
+      "consumers": [
+        "body"
+      ],
+      "expectedBytes": 909084,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only"
     },
     {
       "id": "nasa-juno-jupiter-south-pole-visible-pia21382",
@@ -116,10 +131,13 @@
       "licenseEvidence": [
         "https://science.nasa.gov/photojournal/jovian-stormy-weather/"
       ],
-      "acquisition": "tools/acquire-sources.mjs --refresh --polar-only",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked NASA Photojournal visible-light south-polar image used only for prepared palette chroma",
-      "consumers": ["body"],
-      "expectedBytes": 154800
+      "consumers": [
+        "body"
+      ],
+      "expectedBytes": 154800,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only"
     },
     {
       "id": "hyg-v41-jupiter-representative-field",
@@ -128,10 +146,14 @@
       "origin": "prepared subset of HYG Stellar Database v4.1 at commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
       "credit": "David Nash / Astronexus",
       "license": "CC-BY-SA-4.0",
-      "licenseEvidence": ["stars/LICENSE.md"],
+      "licenseEvidence": [
+        "stars/LICENSE.md"
+      ],
       "acquisition": "checked deterministic subset of the pinned HYG v4.1 catalog snapshot",
       "redistribution": "catalog-derived representative field with source ids, magnitudes, color indices, and projection provenance",
-      "consumers": ["starfield"],
+      "consumers": [
+        "starfield"
+      ],
       "expectedBytes": 144994
     },
     {
@@ -143,7 +165,9 @@
       "license": "CC-BY-SA-4.0",
       "acquisition": "checked license snapshot accompanying the prepared catalog subset",
       "redistribution": "license and attribution record",
-      "consumers": ["starfield"],
+      "consumers": [
+        "starfield"
+      ],
       "expectedBytes": 596
     },
     {
@@ -153,10 +177,13 @@
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
       "credit": "NASA, ESA, A. A. Simon, and M. H. Wong",
       "license": "CC BY 4.0",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked Hubble OPAL high-level science product",
-      "consumers": ["lenses"],
-      "expectedBytes": 25925760
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 25925760,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "hubble-opal-jupiter-fq889n",
@@ -165,10 +192,13 @@
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
       "credit": "NASA, ESA, A. A. Simon, and M. H. Wong",
       "license": "CC BY 4.0",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked Hubble OPAL high-level science product",
-      "consumers": ["lenses"],
-      "expectedBytes": 25925760
+      "consumers": [
+        "lenses"
+      ],
+      "expectedBytes": 25925760,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "jpl-satellite-physical-parameters",
@@ -177,10 +207,13 @@
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
       "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
       "license": "United States government data",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked source snapshot",
-      "consumers": ["moons"],
-      "expectedBytes": 84633
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 84633,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "jpl-satellite-mean-elements",
@@ -189,10 +222,13 @@
       "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
       "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
       "license": "United States government data",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked source snapshot",
-      "consumers": ["moons"],
-      "expectedBytes": 418952
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 418952,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "jupiter-moon-catalog",
@@ -205,10 +241,13 @@
         "https://ssd.jpl.nasa.gov/sats/discovery.html",
         "https://ssd.jpl.nasa.gov/sats/elem/"
       ],
-      "acquisition": "node src/planets/jupiter/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes",
+      "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "normalized factual data only; source HTML is not redistributed",
-      "consumers": ["moons"],
-      "expectedBytes": 87703
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 87703,
+      "historicalAcquisition": "node src/planets/jupiter/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes"
     },
     {
       "id": "nasa-galileo-galilean-satellites",
@@ -217,10 +256,13 @@
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01299/PIA01299.jpg?crop=faces%2Cfocalpoint&fit=clip&h=635&w=1870",
       "credit": "NASA/JPL/DLR",
       "license": "NASA media usage guidelines and credited partner rights",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked Galileo comparative montage snapshot",
-      "consumers": ["moons"],
-      "expectedBytes": 161334
+      "consumers": [
+        "moons"
+      ],
+      "expectedBytes": 161334,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "pds-jupiter-ring-statistics",
@@ -229,10 +271,13 @@
       "origin": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
       "credit": "NASA Planetary Data System Ring-Moon Systems Node",
       "license": "United States government scientific data",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked PDS factual table snapshot",
-      "consumers": ["rings"],
-      "expectedBytes": 20293
+      "consumers": [
+        "rings"
+      ],
+      "expectedBytes": 20293,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "pds-jupiter-main-ring-halo-caption",
@@ -241,10 +286,13 @@
       "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA00701.html",
       "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
       "license": "United States government scientific data",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked PDS observation caption snapshot",
-      "consumers": ["rings"],
-      "expectedBytes": 16498
+      "consumers": [
+        "rings"
+      ],
+      "expectedBytes": 16498,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "pds-jupiter-gossamer-caption",
@@ -253,10 +301,13 @@
       "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA01623.html",
       "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
       "license": "United States government scientific data",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked PDS observation caption snapshot",
-      "consumers": ["rings"],
-      "expectedBytes": 17061
+      "consumers": [
+        "rings"
+      ],
+      "expectedBytes": 17061,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "nasa-galileo-jupiter-main-ring-halo",
@@ -265,10 +316,13 @@
       "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA00701-med.jpg",
       "credit": "NASA/JPL Galileo",
       "license": "NASA media usage guidelines",
-      "acquisition": "tools/acquire-sources.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked Galileo observational image snapshot",
-      "consumers": ["rings"],
-      "expectedBytes": 10021
+      "consumers": [
+        "rings"
+      ],
+      "expectedBytes": 10021,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
       "id": "hubble-opal-jupiter-minnaert",
@@ -282,7 +336,10 @@
       ],
       "acquisition": "checked project-authored transcription validated by Jupiter preparation; the paper itself is not redistributed",
       "redistribution": "normalized factual data only",
-      "consumers": ["atmosphere", "lighting"],
+      "consumers": [
+        "atmosphere",
+        "lighting"
+      ],
       "expectedBytes": 1228
     },
     {
@@ -292,10 +349,15 @@
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government generated data",
-      "acquisition": "tools/acquire-sources.mjs --refresh expands a pinned Jupiter ephemeris seed",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked generated source snapshot",
-      "consumers": ["atmosphere", "lighting", "spectrum"],
-      "expectedBytes": 8813
+      "consumers": [
+        "atmosphere",
+        "lighting",
+        "spectrum"
+      ],
+      "expectedBytes": 8813,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh expands a pinned Jupiter ephemeris seed"
     },
     {
       "id": "nasa-psg-jupiter-reflectance",
@@ -304,10 +366,13 @@
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government generated data",
-      "acquisition": "tools/acquire-sources.mjs --refresh requests I/F at R 240 from the pinned configuration",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked generated source snapshot",
-      "consumers": ["spectrum"],
-      "expectedBytes": 11912
+      "consumers": [
+        "spectrum"
+      ],
+      "expectedBytes": 11912,
+      "historicalAcquisition": "tools/acquire-sources.mjs --refresh requests I/F at R 240 from the pinned configuration"
     },
     {
       "id": "eso-jupiter-milky-way-panorama",
@@ -317,10 +382,15 @@
       "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
       "credit": "ESO/S. Brunier",
       "license": "CC-BY-4.0",
-      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
       "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": ["starfield", "scene"]
+      "consumers": [
+        "starfield",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-jupiter-cubic-sky-sun-oracle-asset",
@@ -332,7 +402,11 @@
       "license": "Google proprietary; no redistribution grant verified",
       "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
       "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": ["starfield", "sun-oracle", "scene"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-jupiter-cubic-sky-sun-oracle-measurements",
@@ -344,7 +418,194 @@
       "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
       "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
       "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": ["starfield", "sun-oracle", "scene", "lighting"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene",
+        "lighting"
+      ]
+    },
+    {
+      "id": "jupiter-authored-preparation-rings",
+      "path": "preparation/rings.json",
+      "expectedBytes": 9174,
+      "expectedSha256": "5d75b7dec573d5be29af90ef161d3880f9600515ca6220ed51bfad6bbf75b211",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "radial-layers"
+      ]
+    },
+    {
+      "id": "jupiter-authored-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1182,
+      "expectedSha256": "11270d502f9ef0ddeb3adc4c1ab81a1cd8b13d9d23298d10814035f68755bb94",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "jupiter-authored-content-object",
+      "path": "content/object.json",
+      "expectedBytes": 11793,
+      "expectedSha256": "0d5d6a0e19c31c064706376bac4e36aead604a7af6897df62d6369e1bb49d255",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "content"
+      ]
+    },
+    {
+      "id": "jupiter-authored-presentation-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3291,
+      "expectedSha256": "42f0c0546aaf5f9334ae92522beebc2426694280ebb451edbc68a77e6eedbf8e",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "jupiter-authored-editorial-object",
+      "path": "editorial/object.json",
+      "expectedBytes": 12801,
+      "expectedSha256": "305413d1b1edea39bfe58254b959af6df378ce20e08f63bdcf097a92f1c63e8b",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "NASA Science",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "content"
+      ]
+    },
+    {
+      "id": "jupiter-authored-materials",
+      "path": "preparation/materials.json",
+      "expectedBytes": 2232,
+      "expectedSha256": "2814b9d03a04313e18be3ef8c330010708bb35dd27b4b8cccaba83ec4d192eb4",
+      "origin": "Checked source-informed normalized ellipsoid lighting and retained material preparation parameters",
+      "credit": "cssEarth and the institutional sources identified by the source manifest",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with referenced observation provenance",
+      "consumers": [
+        "material-composition"
+      ]
+    },
+    {
+      "id": "jupiter-authored-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1787,
+      "expectedSha256": "ee719f5c65cbba9ad69de931cbc96f6a79820e6a559fd21e220e8bd89ccb11a3",
+      "origin": "Checked oblate tessellation and retained texture presentation conventions",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "geometry"
+      ]
+    },
+    {
+      "id": "jupiter-authored-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 2168,
+      "expectedSha256": "ba02eaa090fd2113118c1c4012e9397135df5490ad4c05ab630ec2f0ae001ab2",
+      "origin": "Checked retained scene camera and layer composition conventions",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "jupiter-authored-observations",
+      "path": "preparation/observations.json",
+      "expectedBytes": 11054,
+      "expectedSha256": "b29fc8270ed0e63241efc8d3ae6c0bea7cd8c2ddaa7193fa258c67a0bf2b3040",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and NASA/ESA Hubble, NASA Juno source authorities identified in the recipe",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "observations"
+      ]
+    },
+    {
+      "id": "jupiter-authored-charts",
+      "path": "content/charts.json",
+      "expectedBytes": 4316,
+      "expectedSha256": "3a78a58e034a2f037474c68408bc4ca79b5299af9b07fbbf20c2d1aadda88ccf",
+      "origin": "Checked source-dependent scientific and presentation parameters",
+      "credit": "cssEarth and the scientific authorities cited by this source",
+      "license": "Project-authored scientific specification with cited authority",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with institutional provenance",
+      "consumers": [
+        "charts"
+      ]
+    },
+    {
+      "id": "jupiter-authored-photometry",
+      "path": "photometry/phase.json",
+      "expectedBytes": 1302,
+      "expectedSha256": "3df5f516dc2b6cdd61bdfc9193f06749d9426205cfa8c73d724e5ac8af732ede",
+      "origin": "Checked source-dependent scientific and presentation parameters",
+      "credit": "cssEarth and the scientific authorities cited by this source",
+      "license": "Project-authored scientific specification with cited authority",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with institutional provenance",
+      "consumers": [
+        "photometry"
+      ]
+    },
+    {
+      "id": "jupiter-authored-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 328,
+      "expectedSha256": "e842e41edc71debd1aaaed7b951f173591c6e72be39018e98f7dbddbbd37c9ce",
+      "origin": "Checked source-dependent scientific and presentation parameters",
+      "credit": "cssEarth and the scientific authorities cited by this source",
+      "license": "Project-authored scientific specification with cited authority",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with institutional provenance",
+      "consumers": [
+        "celestial"
+      ]
+    },
+    {
+      "id": "jupiter-authored-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 6280,
+      "expectedSha256": "133ffeb5c124f320247307b58e7f388291e5cbdc6724b67ca5f73373d12a3377",
+      "origin": "Checked source restoration and verification operations",
+      "credit": "cssEarth with original source credits preserved per input",
+      "license": "Project-authored acquisition specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "acquisition"
+      ]
     }
   ],
   "generatedIntermediates": [],

@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-layered-oblate-presentation@1",
+  "namespace": "saturn",
+  "camera": {
+    "cameraModel": "accumulated-matrix3d",
+    "minimumControlPitchDegrees": 0,
+    "maximumControlPitchDegrees": 89,
+    "defaultControlPitchDegrees": 34.230769230769226,
+    "defaultControlYawDegrees": 0,
+    "materialReferenceControlPitchDegrees": 34.230769230769226,
+    "materialReferenceControlYawDegrees": 0,
+    "initialScenePitchDegrees": 40,
+    "maximumScenePitchDegrees": 65,
+    "minimumZoom": 0.42,
+    "maximumZoom": 4,
+    "defaultZoom": 1.1,
+    "sceneScale": 0.022,
+    "logicalBodyDiameter": 460,
+    "pitchBounded": false,
+    "yawBounded": false,
+    "responsiveFit": {
+      "model": "continuous-aspect-smoothstep",
+      "portraitBaseWidthShare": 0.34,
+      "narrowPortraitWidthShareGain": 0.08,
+      "landscapeWidthShareGain": 0.02,
+      "narrowPortraitAspectRatio": 0.46,
+      "portraitAspectRatio": 0.75,
+      "squareAspectRatio": 1,
+      "maximumHeightShare": 0.61,
+      "maximumMobilePreviewShare": 0.925,
+      "minimumZoom": 0.42,
+      "maximumZoom": 2
+    }
+  },
+  "counterSerialization": {
+    "counterPrecision": 6,
+    "counterFractionDigits": 7,
+    "counterFractionScale": 1.0000000000000001e-7
+  },
+  "stylesheet": {
+    "path": "src/renderers/css/styles/saturn-surfaces.css",
+    "sha256": "348e75eca14d710ac7fcf14d96b15e9107cfadf13b0c8fdd80cd6e9824308db5",
+    "bytes": 8576,
+    "scope": ":where(.planet-stage[data-object-id=\"saturn\"]) "
+  }
+}

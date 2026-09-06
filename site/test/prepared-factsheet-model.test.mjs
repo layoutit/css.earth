@@ -2,16 +2,16 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { PREPARED_EARTH_PANEL } from "../../src/planets/earth/site/preparedPanel.mjs";
-import { PREPARED_CERES_PANEL } from "../../src/planets/ceres/site/preparedPanel.mjs";
-import { PREPARED_JUPITER_PANEL } from "../../src/planets/jupiter/site/preparedPanel.mjs";
-import { PREPARED_MARS_PANEL } from "../../src/planets/mars/site/preparedPanel.mjs";
-import { PREPARED_MOON_PANEL } from "../../src/planets/moon/site/preparedPanel.mjs";
-import { PREPARED_NEPTUNE_PANEL } from "../../src/planets/neptune/site/preparedPanel.mjs";
-import { PREPARED_PLUTO_PANEL } from "../../src/planets/pluto/site/preparedPanel.mjs";
-import { PREPARED_SATURN_PANEL } from "../../src/planets/saturn/site/preparedPanel.mjs";
-import { PREPARED_SUN_PANEL } from "../../src/planets/sun/site/preparedPanel.mjs";
-import { PREPARED_URANUS_PANEL } from "../../src/planets/uranus/site/preparedPanel.mjs";
+import PREPARED_EARTH_PANEL from "../../src/planets/earth/prepared/content.json" with { type: "json" };
+import PREPARED_CERES_PANEL from "../../src/planets/ceres/prepared/content.json" with { type: "json" };
+import PREPARED_JUPITER_PANEL from "../../src/planets/jupiter/prepared/content.json" with { type: "json" };
+import PREPARED_MARS_PANEL from "../../src/planets/mars/prepared/content.json" with { type: "json" };
+import PREPARED_MOON_PANEL from "../../src/planets/moon/prepared/content.json" with { type: "json" };
+import PREPARED_NEPTUNE_PANEL from "../../src/planets/neptune/prepared/content.json" with { type: "json" };
+import PREPARED_PLUTO_PANEL from "../../src/planets/pluto/prepared/content.json" with { type: "json" };
+import PREPARED_SATURN_PANEL from "../../src/planets/saturn/prepared/content.json" with { type: "json" };
+import PREPARED_SUN_PANEL from "../../src/planets/sun/prepared/content.json" with { type: "json" };
+import PREPARED_URANUS_PANEL from "../../src/planets/uranus/prepared/content.json" with { type: "json" };
 
 const mercurySource = JSON.parse(await readFile(
   new URL("../../src/planets/mercury/source/content/object.json", import.meta.url),

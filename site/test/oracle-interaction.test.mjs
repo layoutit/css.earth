@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { compareTrajectories, bindInputReceipts, verifyWheelReceipts, interruptionObservations,
   assertMotionOnlyReference, readBrowserRun } from
-  "../../src/planets/mars/tools/oracle/google-earth-pro/interaction-suite-analysis.mjs";
+  "../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mjs";
 
 const pose = (time, degrees) => {
   const angle = degrees * Math.PI / 180;
@@ -65,7 +65,7 @@ test("an interruption interval ends at each renderer's next actual input receipt
 });
 
 test("oracle registration rejects an independent CSS translation of the scene", async () => {
-  const {assertRegisteredProjection}=await import('../../src/planets/mars/tools/oracle/google-earth-pro/interaction-suite-analysis.mjs');
+  const {assertRegisteredProjection}=await import('../../tests/objects/oracle/mars/google-earth-pro/interaction-suite-analysis.mjs');
   const native={startMatrix:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,-4,1],focalLength:600,
     report:{viewport:{sceneLeft:207,width:693,height:600}}};
   const browser={state:{trackball:{centerX:553.5,centerY:300,focalLength:600}}};
@@ -132,7 +132,7 @@ test("input pairing retains the final consumed release position even without a t
         acceptedMonotonicSeconds:100 + index * .02}))],
   }));
   execFileSync(process.execPath, [new URL(
-    "../../src/planets/mars/tools/oracle/google-earth-pro/pair-rendered-motion-inputs.mjs",
+    "../../tests/objects/oracle/mars/google-earth-pro/pair-rendered-motion-inputs.mjs",
     import.meta.url).pathname, directory]);
   const result = JSON.parse(await readFile(join(directory, "paired-input-report.json")));
   assert.equal(result.consumedInputEvidence.launch.history.length, 4);
