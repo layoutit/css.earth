@@ -17,9 +17,10 @@ assert.ok([1, 2].includes(dpr) && repetitions >= 1 && repetitions <= 3);
 const output = resolve(option("output", `output/playwright/entity-performance-${mode}-dpr${dpr}-${Date.now()}`));
 await mkdir(output, { recursive: true });
 const capture = option("capture", "trace") === "trace";
+const landCover = process.argv.includes("--with-land-cover");
 const traceCategories = option("trace-categories", "devtools.timeline,disabled-by-default-devtools.timeline,disabled-by-default-v8.cpu_profiler,disabled-by-default-devtools.screenshot,blink.user_timing");
 const viewport = { width: 1440, height: 1000 };
-const report = { schema: "cssearth-entity-performance@1", base, mode, output, dpr, repetitions, viewport, capture, traceCategories,
+const report = { schema: "cssearth-entity-performance@1", base, mode, output, dpr, repetitions, viewport, capture, landCover, traceCategories,
   commit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   workingTree: execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim(),
   harnessSha256: createHash("sha256").update(await readFile(new URL(import.meta.url))).digest("hex"),
@@ -144,6 +145,21 @@ try {
             await page.mouse.up(); await page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.active);
           });
           await phase("pan-pages", async () => { await settle("city"); await settle("geographic"); });
+          if (landCover) {
+            await phase("land-cover-open", async () => {
+              await page.locator('button[name="lens"][value="worldcover-land-cover"]').click(); await settle("geographic");
+            });
+            if (capture) await page.screenshot({ path: resolve(output, `${label}-land-cover.png`) });
+            await phase("land-cover-pan", async () => {
+              await page.mouse.move(950, 470); await page.mouse.down();
+              for (let i = 1; i <= 30; i++) { await page.mouse.move(950 - i * 2, 470 - i / 2); await page.waitForTimeout(16); }
+              await page.mouse.up(); await page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.active);
+            });
+            await phase("land-cover-pages", () => settle("geographic"));
+            await phase("land-cover-to-noise", async () => {
+              await page.locator('button[name="lens"][value="buenos-aires-noise"]').click(); await settle("geographic"); await settle("city");
+            });
+          }
           await page.waitForTimeout(200);
           run.metrics = await page.evaluate(() => {
             const d = window.__entityPerf;

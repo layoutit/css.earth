@@ -41,7 +41,23 @@ export async function summarizeEntityTrace(events, metrics, { output, prefix, ne
     }
     frames.push(pair);
   }
-  const summary = { phases, cpu, worstFrames: frames, qualification: "Trace event times are inclusive and must not be summed across parent/child events. Videos and unfiltered frame intervals remain the presentation evidence." };
+  const markedPhase = metrics?.phases.find(phase => `entity:${phase.name}:start` === startMark?.name);
+  const worstPresentationFrames = [];
+  if (markedPhase) {
+    const clockOffset = startMark.ts - markedPhase.start * 1000;
+    const slowest = metrics.frames.filter(frame => frame.phase && frame.phase !== "document")
+      .sort((a, b) => b.duration - a.duration).slice(0, 3);
+    for (const [index, frame] of slowest.entries()) {
+      const start = clockOffset + (frame.at - frame.duration) * 1000, end = clockOffset + frame.at * 1000;
+      const pair = { phase: frame.phase, intervalMs: frame.duration, before: null, after: null };
+      for (const [side, shot] of [["before", shots.findLast(shot => shot.ts <= start)], ["after", shots.find(shot => shot.ts >= end)]]) if (shot) {
+        const name = `${prefix}-frame-${index + 1}-${side}.jpg`;
+        await writeFile(resolve(output, name), Buffer.from(shot.args.snapshot, "base64")); pair[side] = name;
+      }
+      worstPresentationFrames.push(pair);
+    }
+  }
+  const summary = { phases, cpu, worstFrames: frames, worstPresentationFrames, qualification: "Trace event times are inclusive and must not be summed across parent/child events. Videos and unfiltered frame intervals remain the presentation evidence." };
   await writeFile(resolve(output, `${prefix}-summary.json`), JSON.stringify(summary, null, 2));
   return summary;
 }
@@ -52,6 +68,7 @@ export async function writeEntityPerformanceReview(report) {
   const runs = report.runs.filter(run => run.summary).map(run => `<section><h2>${escape(run.label)}</h2><table><thead><tr><th>Scenario</th><th>Total ms</th><th>Input → next frame</th><th>Frame p95</th><th>Worst frame</th><th>Longest task</th><th>Requests overlapping</th></tr></thead><tbody>${run.summary.phases.map(row).join("")}</tbody></table>
     ${run.video ? `<video controls preload="none" src="${escape(run.video.split("/").at(-1))}"></video>` : ""}
     <h3>Frames surrounding the longest main-thread tasks</h3>${run.summary.worstFrames.map(pair => `<p>${rounded(pair.taskMs)} ms task</p><div class="pair">${[pair.before, pair.after].map(path => path ? `<img loading="lazy" src="${escape(path)}">` : "<p>No frame available</p>").join("")}</div>`).join("")}
+    <h3>Frames surrounding the longest presentation intervals</h3>${(run.summary.worstPresentationFrames ?? []).map(pair => `<p>${escape(pair.phase)} · ${rounded(pair.intervalMs)} ms interval</p><div class="pair">${[pair.before, pair.after].map(path => path ? `<img loading="lazy" src="${escape(path)}">` : "<p>No frame available</p>").join("")}</div>`).join("")}
     <details><summary>CPU samples and event attribution</summary><pre>${escape(JSON.stringify({ cpu: run.summary.cpu, phases: run.summary.phases.map(({name,events,longest}) => ({name,events,longest})) }, null, 2))}</pre></details></section>`).join("");
   await writeFile(resolve(report.output, "review.html"), `<!doctype html><html lang="en"><meta charset="utf-8"><title>Entity exploration performance</title><style>body{font:16px system-ui;background:#16191d;color:#e7edf4;margin:32px auto;max-width:1200px;padding:0 20px}table{border-collapse:collapse;width:100%}td,th{padding:9px;border-bottom:1px solid #445;text-align:left}.bad{color:#ff948a;font-weight:bold}section{margin:40px 0;border-top:2px solid #556;padding-top:12px}video{width:100%;max-height:600px;margin:20px 0}.pair{display:flex;gap:12px}.pair img{width:48%;object-fit:contain}pre{overflow:auto;max-height:500px;font-size:12px}</style><h1>Entity exploration · ${escape(report.mode)}</h1><p>${escape(report.commit)} · Chrome ${escape(report.browser)} · DPR ${report.dpr} · ${report.viewport.width}×${report.viewport.height}</p><p>Each video contains a cold/warm pair. Frame intervals include browser rendering; input-to-frame times begin at the browser input event and end at the next animation frame with ready result rows. Total scenario times also include automation, two settling frames, network waits and the accepted 4.5 s flight. Red marks a frame interval above 100 ms. Trace event durations are inclusive.</p>${runs}</html>`);
 }

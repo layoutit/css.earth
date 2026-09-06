@@ -59,7 +59,9 @@
     "prepare:earth-global": "node src/planets/earth/tools/prepare-global-wmts.mjs && node src/planets/earth/tools/integrate-global-wmts.mjs --latest",
     "test:earth-global": "node src/planets/earth/test/wmts-tree-browser.mjs --global",
     "oracle:interactions": "node src/planets/mars/tools/oracle/google-earth-pro/run-interaction-suite.mjs",
-    "test:browser:earth-entities": "node src/planets/earth/test/selection-cards-browser.mjs"
+    "test:browser:earth-entities": "node src/planets/earth/test/selection-cards-browser.mjs",
+    "test": "pnpm test:platform && pnpm test:shell && pnpm test:planets",
+    "test:browser": "node tools/test-browser.mjs"
   },
   "dependencies": {
     "@layoutit/polycss": "0.2.11"

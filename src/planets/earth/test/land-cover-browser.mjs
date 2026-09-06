@@ -11,13 +11,14 @@ import { prepareLocationCamera, prepareLocationPoint } from "../tools/city/prepa
 
 const base = process.argv[2] ?? "http://127.0.0.1:4228";
 const dpr = Number(process.argv.find(arg => arg.startsWith("--dpr="))?.slice(6) ?? 1);
+const globalCoverage = process.argv.includes("--global");
 const output = new URL(`../../../../output/playwright/land-cover-dpr${dpr}-${Date.now()}/`, import.meta.url);
 await mkdir(output, { recursive: true });
 const sha = bytes => createHash("sha256").update(bytes).digest("hex");
 const descriptor = PREPARED_GEOGRAPHIC_LENSES.find(entry => entry.lens.id === "worldcover-land-cover").lens;
 const content = JSON.parse(await readFile(new URL(`../../../../public${descriptor.package.url}`, import.meta.url)));
 const palette = new Set(content.legend.items.map(item => item.color.slice(4, -1)));
-const report = { base, dpr, commit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+const report = { base, dpr, globalCoverage, commit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   retrievedAt: new Date().toISOString(), workingDiffSha256: sha(execFileSync("git", ["diff", "--binary"], { maxBuffer: 32 * 1024 ** 2 })),
   harnessSha256: sha(await readFile(new URL(import.meta.url))),
   package: descriptor.package, source: content.source, sourceTiles: [], views: [], errors: [] };
@@ -117,6 +118,14 @@ async function select(query, id) {
   await page.locator(".planet-sidebar-search").fill(query); await page.locator(`[data-destination-id="${id}"]`).click();
   await page.waitForFunction(id => document.querySelector("[data-entity-card]").dataset.entityId === id, id);
 }
+async function unlit() {
+  if (await page.evaluate(() => window.__earth.settings.state().atmosphere)) {
+    await page.locator(".planet-settings-action").click();
+    await page.locator('label:has(input[name="atmosphere"])').click();
+    await page.waitForFunction(() => window.__earth.settings.state().atmosphere === false);
+    await page.getByRole("button", { name: "Planet information", exact: true }).click();
+  }
+}
 try {
   await page.goto(`${base}/earth/`); await page.waitForFunction(() => window.__earth?.ready);
   // The default atmosphere is a prepared translucent material over the globe.
@@ -137,6 +146,35 @@ try {
     ["dateline-east", -179.95, -16.5, 128], ["arctic", 20, 80, 32], ["antarctic-source-gap", 0, -80, 32]]) {
     const camera = prepareLocationCamera(PREPARED_EARTH_SCENE, prepareLocationPoint(PREPARED_EARTH_SCENE, longitude, latitude), zoom);
     await page.evaluate(camera => window.__earth.camera.setState(camera), camera); await capture(name, { colorPixels: name === "cropland" });
+  }
+  if (globalCoverage) {
+    report.qualification = "Stratified source-backed viewpoints and seeded catalogue samples. This is not exhaustive worldwide valid-pixel or physical-device proof.";
+    for (const [name, longitude, latitude, zoom] of [
+      ["north-america-new-york", -74.006, 40.713, 1024], ["europe-london", -.1276, 51.5072, 1024],
+      ["oceania-sydney", 151.2093, -33.8688, 1024], ["asia-delhi", 77.209, 28.614, 1024],
+      ["africa-cairo", 31.2357, 30.0444, 1024], ["face-boundary-west", 112.49, 32.1, 512], ["face-boundary-east", 112.51, 32.1, 512],
+    ]) {
+      const camera = prepareLocationCamera(PREPARED_EARTH_SCENE, prepareLocationPoint(PREPARED_EARTH_SCENE, longitude, latitude), zoom);
+      await page.evaluate(camera => window.__earth.camera.setState(camera), camera); await capture(name, { colorPixels: true });
+    }
+    const { preparePlaceCatalog } = await import("../tools/prepare-places.mjs"), catalog = await preparePlaceCatalog();
+    let seed = 260906; report.randomSeed = seed; report.randomSamples = [];
+    for (const kind of ["country", "admin1", "city"]) {
+      const candidates = catalog.places.filter(place => place.kind === kind), used = new Set();
+      for (let i = 0; i < 3; i++) {
+        let place;
+        do { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; place = candidates[seed % candidates.length]; } while (used.has(place.id));
+        used.add(place.id);
+        await page.goto(`${base}/earth/#place=${encodeURIComponent(place.id)}&lens=worldcover-land-cover`);
+        await page.waitForFunction(id => window.__earth?.ready && document.querySelector('[data-entity-card]').dataset.entityId === id, place.id);
+        await unlit(); await capture(`sample-${kind}-${i+1}`);
+        assert.equal(await page.locator('.planet-title').getAttribute('aria-label'), place.name);
+        assert.ok(await page.locator(`[data-entity-parent="${place.parentId}"]`).isVisible());
+        report.randomSamples.push({ id: place.id, name: place.name, kind, parentId: place.parentId, identifiers: place.identifiers,
+          latitude: place.latitude, longitude: place.longitude, camera: place.camera, view: report.views.at(-1).name });
+      }
+    }
+    report.catalogSourceSha256 = sha(await readFile(new URL("../source/places/manifest.json", import.meta.url)));
   }
   await select("Buenos Aires", "3435910"); await settle();
   const legend = page.locator('[data-lens-legend="worldcover-land-cover"]');
