@@ -11,19 +11,47 @@ test("every object mounts one canonical high-density image bank", async () => {
   const ownership = await auditObjectRuntimeOwnership();
   assert.equal(ownership.complete, true);
   for (const objectRecord of OBJECTS) {
+    const entry = ownership.entries.find(entry => entry.id === objectRecord.id);
+    assert.equal(entry.factoryCalls, 1,
+      `${objectRecord.id}: its actual registered loader must have one runtime factory`);
+    if (entry.migrated && (objectRecord.id === "mercury" || objectRecord.id === "venus")) {
+      const page = await readFile(
+        new URL(`../pages/${objectRecord.id}.astro`, import.meta.url),
+        "utf8",
+      );
+      const prepared = JSON.parse(await readFile(
+        new URL(`../../src/planets/${objectRecord.id}/prepared/object.json`, import.meta.url),
+        "utf8",
+      ));
+      const startupKeys = new Set(prepared.data.assets.startup);
+      const startupUrls = prepared.data.assets.entries
+        .filter(asset => startupKeys.has(asset.key))
+        .map(asset => asset.url)
+        .filter(url => typeof url === "string");
+      const sharedStyles = await readFile(
+        new URL("../../src/renderers/css/styles/planet-surfaces.css", import.meta.url),
+        "utf8",
+      );
+      assert.match(page, /PreparedObjectHead/u,
+        `${objectRecord.id}: migrated page must use the shared prepared head`);
+      assert.ok(startupUrls.some(url => url.includes("@2x")),
+        `${objectRecord.id}: prepared startup assets must include a high-density asset`);
+      assert.doesNotMatch(sharedStyles, /image-set\(/u,
+        `${objectRecord.id}: shared scene CSS must not select assets by device DPR`);
+      continue;
+    }
     const objectRoot = new URL(
       `../../src/planets/${objectRecord.id}/`,
       import.meta.url,
     );
     const [client, head, styles] = await Promise.all([
-      readFile(new URL("runtime/client.mjs", objectRoot), "utf8"),
+      readFile(new URL(`../../${entry.entry.adapter ?? entry.entry.file}`, import.meta.url), "utf8"),
       readFile(
         new URL(`site/${objectRecord.name}Head.astro`, objectRoot),
         "utf8",
       ),
       readFile(new URL("runtime/styles.css", objectRoot), "utf8"),
     ]);
-    assert.ok(ownership.entries.find(entry => entry.id === objectRecord.id).closure.includes("src/platform/object-runtime.mjs"));
     assert.doesNotMatch(
       client,
       /devicePixelRatio/u,

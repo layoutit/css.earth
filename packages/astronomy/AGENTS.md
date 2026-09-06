@@ -9,7 +9,7 @@ the ephemeris series.
   pipeline, by workers and by the renderer; a transitive dep would be dragged
   into all three.
 - **Zero browser globals.** `lib` is `ES2022`, no `DOM`. If you need `window`,
-  `performance` or a canvas, the code belongs in `packages/engine`.
+  `performance` or a canvas, the code belongs in the application renderer.
 - **No three.js types.** Not even as a type-only import. This package must be
   usable by something that has never heard of three.
 - Everything is float64. Nothing here knows that float32 exists — the downcast
@@ -91,14 +91,9 @@ tuple. That is the whole point of the split — this happens O(frames) once per
 tick so that `resolveInto`, which is O(objects × depth), can call no user
 code at all.
 
-The shipped tree is complete before its first snapshot; `Engine.frame` calls
-`refreshSnapshot` directly once per tick, followed by any number of
-`resolveInto` calls against that snapshot. A star needs no frame: its `Focus`
-sits on `sol`, with its parsec offset converted to kiloparsecs by exact division
-by 1000. At 714 pc the float64 quantisation is 3.3e-8 rad at 1 au arrival,
-below M0's 8.08e-7 bound, which is not crossed until ~17,642 pc. Reintroduce a
-growable-snapshot capability only for a stellar SURFACE tier that lands at a
-stellar radius rather than an au, as T0 does on a planet.
+Complete the frame tree before creating its first snapshot. Refresh once per tick,
+then resolve objects against that snapshot without per-object ephemeris callbacks.
+Growable snapshots require a concrete consumer and numerical error-budget tests.
 
 ## `add` enforces the structure re-anchoring depends on
 
@@ -110,8 +105,7 @@ must lie inside its parent's:
 
 `Frame.maxOffsetInParent` is the supremum over epochs of the origin's length,
 in the parent's unit — an upper bound, not a sample. Understating it silently
-breaks the termination argument for the camera's eviction rule (see
-`packages/engine/src/camera/cameraRig.ts`). Same-unit and coarsening nesting
+breaks the termination argument for the camera's eviction rule (see the frame-boundary tests). Same-unit and coarsening nesting
 are unsupported, which is why sibling frames at the same scale hang off a
 coarser parent rather than off each other.
 
@@ -122,7 +116,7 @@ equality. Reference sources, in order of preference: JPL Horizons vectors, the
 published catalogue row, then a second independent implementation.
 
 `vitest run` here is fast and has no browser. Keep it that way — a test that
-needs a DOM belongs in `packages/engine`.
+needs a DOM belongs with the application renderer.
 
 ## The ephemeris layer (M2)
 
@@ -185,3 +179,22 @@ and range from 0.07 % of orbit radius (Io) to 76 % (Mimas, which librates 49
 degrees from its resonance with Tethys). Do not quote them as accuracy. Do not
 quietly improve one moon by hand-tuning its elements — the fit is reproducible
 and a hand-tuned element is not.
+
+## Shared package contract
+
+- Packages are renderer agnostic: no CSS/DOM rendering, application shell, or renderer-specific types.
+- No per-object folders, planet-specific implementations, or branches on named object IDs.
+- Keep object JSON, source inputs/manifests, licences, required notices, provenance, and prepared payloads outside packages.
+- Shared parsers validate versioned JSON into reusable object types and capability data.
+- Objects using the same capabilities use the same implementation and differ through their JSON.
+- Preparation and rendering use explicit interfaces; concrete renderer implementations live outside packages.
+- Capabilities must compose so complex objects can add prepared layers or paging without planet-specific forks.
+- Implement Mercury and Venus first; preserve room for Earth's complexity without implementing Earth now.
+- Scientific reference tables belong to astronomy/catalog; object presentation customizations do not.
+
+## Source size and package maintenance
+
+- Use strict TypeScript and validate external unknown values; no `any` or TypeScript suppression comments.
+- Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
+- `pnpm lint:packages` enforces the limit. Split code by responsibility; keep bulk prepared data outside source code.
+- Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.

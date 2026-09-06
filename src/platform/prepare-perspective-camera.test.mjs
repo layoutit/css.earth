@@ -1,12 +1,18 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { preparePerspectiveCamera } from "./prepare-perspective-camera.mjs";
-import { PREPARED_MERCURY_SCENE } from "../planets/mercury/runtime/preparedScene.mjs";
-import { runtimeDefinition as mercury } from "../planets/mercury/runtime/definition.mjs";
+import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with { type: "json" };
+import mercury from "../../src/planets/mercury/prepared/runtime.json" with { type: "json" };
 import { runtimeDefinition as ceres } from "../planets/ceres/runtime/definition.mjs";
 
 test("Mercury's prepared camera reproduces the shared recipe", () => {
   assert.deepEqual(preparePerspectiveCamera({ sky: PREPARED_MERCURY_SCENE.starfield }), PREPARED_MERCURY_SCENE.camera);
+});
+
+test("Ceres's prepared camera keeps geometry scale separate from silhouette framing", () => {
+  assert.deepEqual(preparePerspectiveCamera({ sky: ceres.sky }), ceres.camera);
+  assert.equal(ceres.camera.defaultTransform.match(/^scale\(([^)]+)\)/)[1], String(ceres.camera.sceneScale));
+  assert.equal(ceres.camera.state.zoom, 1.1);
 });
 
 for (const [id, definition] of [["ceres", ceres], ["mercury", mercury]]) {

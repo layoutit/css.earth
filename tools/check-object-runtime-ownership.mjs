@@ -9,6 +9,8 @@ import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA } from "../src/platform/prepared-presentation-contract.mjs";
 import { readPreparedJsonExports, readPreparedPresentationModule, requirePreparedDefinitionSource,
   requirePreparedControlSource } from "./check-prepared-presentation.mjs";
+import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mjs';
+import { readDescriptorDefinition, requireDescriptorAdapterSource } from './prepared-object-source.mjs';
 
 const runtimePath = "src/platform/object-runtime.mjs";
 const registryPath = "site/objects.mjs";
@@ -35,6 +37,10 @@ const propertyName = node => node?.computed ? node.property?.value : node?.prope
 
 export function walkRuntimeAst(node, visit) {
   if (!node || typeof node !== "object") return;
+  if (node.type?.startsWith('TS')) {
+    if (node.expression) walkRuntimeAst(node.expression, visit);
+    return;
+  }
   if (typeof node.type === "string") visit(node);
   for (const value of Object.values(node)) {
     if (Array.isArray(value)) for (const child of value) walkRuntimeAst(child, visit);
@@ -47,7 +53,7 @@ function preparedData(source) {
 }
 
 export function inspectObjectRuntimeModule(source, file, { shared = false, shellContent = false,
-  objectIds = OBJECTS.map(o => o.id), registryImportOffsets = new Set() } = {}) {
+  objectIds = OBJECTS.map(o => o.id), registryImportOffsets = new Set(), registryDescriptors = new Set() } = {}) {
   if ((!shared || shellContent) && preparedData(source)) return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
   let ast;
   try {
@@ -56,7 +62,7 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
       const error = parsed.diagnostics.find(diagnostic => diagnostic.severity === "error");
       if (error) throw Object.assign(new SyntaxError(error.text), { pos: error.labels[0]?.start ?? 0 });
       ast = parsed.ast;
-    } else ast = parseAst(source);
+    } else ast = parseRuntimeSource(source, file);
   }
   catch (error) {
     return { imports: [], violations: [{ file, line: source.slice(0, error.pos ?? 0).split("\n").length,
@@ -82,8 +88,9 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
   const hasId = node => values(node).some(value => ids.has(value));
   walkRuntimeAst(ast, node => { if (node.type === "ImportDeclaration" ||
       node.type === "ExportNamedDeclaration" && node.source || node.type === "ExportAllDeclaration") {
+    if (node.importKind === 'type' || node.exportKind === 'type') return;
     const imported = node.source.value;
-    imports.push(imported);
+    if (!registryDescriptors.has(imported)) imports.push(imported);
     for (const specifier of node.specifiers ?? []) {
       const name = specifier.imported?.name;
       if (name) aliases.set(specifier.local.name, name);
@@ -95,6 +102,21 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
     if (["CallExpression", "NewExpression"].includes(node.type) &&
         ["eval", "Function"].includes(node.callee?.name ?? propertyName(node.callee))) note(node, "Runtime code construction hides ownership");
     if (shared) {
+      if (node.type === 'CallExpression' && (aliases.get(node.callee?.name) ?? node.callee?.name) === 'createObjectRuntime') factoryCalls++;
+      const operation = node.callee?.name ?? propertyName(node.callee);
+      if (['CallExpression', 'NewExpression'].includes(node.type) && (
+        ['OffscreenCanvas', 'WebGLRenderingContext', 'WebGL2RenderingContext', 'getContext'].includes(operation) ||
+        ['createElement', 'createElementNS'].includes(operation) && node.arguments.some(argument => values(argument).some(value => ['canvas', 'svg'].includes(value))))) {
+        note(node, 'Forbidden runtime canvas, WebGL, or SVG scene rendering');
+      }
+      const forbiddenProperty = name => /^(?:clip-?path|mask(?:-.*|[A-Z].*)?|filter|mix-?blend-?mode|background-?blend-?mode)$/i.test(name ?? '');
+      const forbiddenValue = value => typeof value === 'string' && /(?:linear|radial|conic)-gradient\s*\(|\b(?:clip-path|mask(?:-\w+)?|filter|mix-blend-mode|background-blend-mode)\s*:/i.test(value);
+      if (node.type === 'AssignmentExpression' && node.left.type === 'MemberExpression' &&
+        (forbiddenProperty(propertyName(node.left)) || values(node.right).some(forbiddenValue)) ||
+        node.type === 'CallExpression' && ['setProperty', 'setAttribute'].includes(operation) &&
+          (values(node.arguments[0]).some(forbiddenProperty) || node.arguments.slice(1).some(argument => values(argument).some(forbiddenValue)))) {
+        note(node, 'Forbidden runtime CSS masks, filters, gradients, or blending');
+      }
       if (node.type === "CallExpression" &&
           (node.callee.type === "Identifier" ? aliases.get(node.callee.name) ?? node.callee.name : propertyName(node.callee)) === "createPolyCamera") {
         cameraFactories.push({ file, line: source.slice(0, node.start).split("\n").length });
@@ -142,10 +164,12 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
 }
 
 function registryLoaders(source, root) {
-  const ast = parseAst(source), imports = new Map(), entries = new Map(), importOffsets = new Set();
+  const ast = parseAst(source), imports = new Map(), entries = new Map(), importOffsets = new Set(), descriptors = new Map(), descriptorImports = new Set();
   const fail = message => { throw new TypeError(`Actual OBJECTS registry: ${message}.`); };
   for (const node of ast.body) if (node.type === "ImportDeclaration") for (const specifier of node.specifiers) {
     if (specifier.type === "ImportSpecifier" && node.source.value === "./object-schema.mjs") imports.set(specifier.local.name, specifier.imported.name);
+    if (specifier.type === 'ImportDefaultSpecifier' && node.specifiers.length === 1 && node.attributes?.length === 1 &&
+      (node.attributes[0].key.name ?? node.attributes[0].key.value) === 'type' && node.attributes[0].value.value === 'json') descriptors.set(specifier.local.name, node.source.value);
   }
   const definitions = ast.body.filter(node => node.type === "ExportNamedDeclaration").flatMap(node => node.declaration?.declarations ?? [])
     .filter(node => node.id.name === "OBJECTS");
@@ -154,18 +178,20 @@ function registryLoaders(source, root) {
       call.arguments.length !== 1 || array?.type !== "ArrayExpression" || !array.elements.length) fail("requires one concrete registry array");
   const helpers = new Map(ast.body.filter(node => node.type === "FunctionDeclaration").map(node => [node.id.name, node]));
   for (const entry of array.elements) {
-    if (entry?.type !== "CallExpression" || entry.arguments.length !== 7 ||
+    if (entry?.type !== "CallExpression" || ![7, 8].includes(entry.arguments.length) ||
         entry.arguments.slice(0, 6).some(value => value.type !== "Literal") || typeof entry.arguments[0].value !== "string") fail("entries must bind prepared metadata and one loader");
     const helper = helpers.get(entry.callee?.name), params = helper?.params ?? [], returned = helper?.body.body[0]?.argument;
-    if (!helper || helper.async || helper.generator || params.length !== 7 || params.some(param => param.type !== "Identifier") || helper.body.body.length !== 1 ||
+    if (!helper || helper.async || helper.generator || params.length !== 8 || params.slice(0, 7).some(param => param.type !== "Identifier") ||
+        params[7].type !== 'AssignmentPattern' || params[7].left.type !== 'Identifier' || params[7].right.type !== 'Literal' || params[7].right.value !== null || helper.body.body.length !== 1 ||
         helper.body.body[0].type !== "ReturnStatement" || returned?.type !== "CallExpression" ||
         imports.get(returned.callee?.name) !== "defineObject" || returned.arguments.length !== 1 || returned.arguments[0].type !== "ObjectExpression") fail("entry helper must forward its declared loader directly");
     const properties = returned.arguments[0].properties;
-    const preparedValue = value => value.type === "Literal" || value.type === "Identifier" && params.some(param => param.name === value.name) ||
+    const preparedValue = value => value.type === "Literal" || value.type === "Identifier" && params.some(param => (param.type === 'AssignmentPattern' ? param.left.name : param.name) === value.name) ||
       value.type === "TemplateLiteral" && value.expressions.every(preparedValue);
     if (properties.some(property => property.type !== "Property" || property.computed || property.kind !== "init" || property.method || !preparedValue(property.value)) ||
         properties.find(property => property.key.name === "id")?.value.name !== params[0].name ||
-        properties.find(property => property.key.name === "loadScene")?.value.name !== params[6].name) fail("entry helper cannot replace the object id or loader");
+        properties.find(property => property.key.name === "loadScene")?.value.name !== params[6].name ||
+        properties.find(property => property.key.name === 'worldFrame')?.value.name !== params[7].left.name) fail("entry helper cannot replace the object id, loader or world frame");
     const id = entry.arguments[0].value, loader = entry.arguments[6], statements = loader.body?.body;
     if (!["ArrowFunctionExpression", "FunctionExpression"].includes(loader.type) || !loader.async || loader.generator || loader.params.length ||
         statements?.length !== 2 || statements[0].type !== "VariableDeclaration" || statements[0].kind !== "const" ||
@@ -174,13 +200,30 @@ function registryLoaders(source, root) {
     if (declaration.id?.type !== "ObjectPattern" || declaration.id.properties.length !== 1 || binding.type !== "Property" || binding.computed ||
         binding.key.type !== "Identifier" || binding.value.type !== "Identifier" || declaration.init?.type !== "AwaitExpression" ||
         imported?.type !== "ImportExpression" || imported.source?.type !== "Literal" || typeof imported.source.value !== "string" ||
-        imported.options || statements[1].argument?.type !== "Identifier" || statements[1].argument.name !== binding.value.name) fail(`${id} loader must return its actual imported export`);
+        imported.options) fail(`${id} loader must return its actual imported export`);
+    const returnedBinding = statements[1].argument;
     const client = relative(root, resolve(root, dirname(registryPath), imported.source.value));
-    if (client !== `src/planets/${id}/runtime/client.mjs`) fail(`${id} loader must name its actual runtime client, received ${client}`);
     if (entries.has(id)) fail(`duplicate loader for ${id}`);
-    entries.set(id, { client, exported: binding.key.name }); importOffsets.add(imported.start);
+    if (returnedBinding?.type === 'CallExpression' && returnedBinding.callee.name === binding.value.name && returnedBinding.arguments.length === 1 &&
+      binding.key.name === 'loadPackagedObject' && descriptors.has(returnedBinding.arguments[0]?.name)) {
+      const descriptorImport = descriptors.get(returnedBinding.arguments[0].name);
+      const descriptor = relative(root, resolve(root, dirname(registryPath), descriptorImport));
+      if (descriptor !== `src/planets/${id}/object.json`) fail(`${id} loader must bind its own actual JSON descriptor`);
+      const frame = entry.arguments[7];
+      if (frame?.type !== 'MemberExpression' || frame.computed || frame.property.name !== 'worldFrame' ||
+          frame.object.type !== 'MemberExpression' || frame.object.computed || frame.object.property.name !== 'properties' ||
+          frame.object.object.name !== returnedBinding.arguments[0].name) fail(`${id} world frame must come from its own actual JSON descriptor`);
+      entries.set(id, { kind: 'descriptor', client, descriptor, exported: binding.key.name });
+      descriptorImports.add(descriptorImport);
+    } else {
+      if (entry.arguments.length !== 7) fail(`${id} legacy loader cannot declare an unbound world frame`);
+      if (returnedBinding?.type !== 'Identifier' || returnedBinding.name !== binding.value.name) fail(`${id} loader must return its actual imported export`);
+      if (client !== `src/planets/${id}/runtime/client.mjs`) fail(`${id} loader must name its actual runtime client, received ${client}`);
+      entries.set(id, { kind: 'legacy', client, exported: binding.key.name });
+    }
+    importOffsets.add(imported.start);
   }
-  return { entries, importOffsets };
+  return { entries, importOffsets, descriptorImports };
 }
 
 function thinClient(source, file, root, expectedExport) {
@@ -209,11 +252,16 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   readText = path => readFile(path, "utf8"), verifyDefinition, strict = true,
   listRuntimeFiles = async directory => (await readdir(directory, { recursive: true })).filter(file => file.endsWith(".mjs")) } = {}) {
   const entries = [], sharedClosure = new Set(), sharedViolations = [], cameraFactorySites = [];
-  let registry = { entries: new Map(), importOffsets: new Set() };
+  let registry = { entries: new Map(), importOffsets: new Set(), descriptorImports: new Set() };
+  const sharedEdges = new Map(), sharedFactoryCalls = new Map();
   const cache = new Map();
-  const verify = verifyDefinition ?? (async (object, plan) => {
+  const verify = verifyDefinition ?? (async (object, definition) => {
+    if (definition?.schema === PREPARED_OBJECT_RUNTIME_SCHEMA) {
+      requireObjectRuntimeDefinition(definition, { objectId: object.id });
+      return;
+    }
     const { objectControls } = await import(pathToFileURL(resolve(root, `src/planets/${object.id}/site/control-content.mjs`)));
-    requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA,
+    requireObjectRuntimeDefinition({ ...definition, schema: PREPARED_OBJECT_RUNTIME_SCHEMA,
       id: object.id, controls: objectControls }, { objectId: object.id, controls: objectControls });
   });
   const sources = new Map();
@@ -222,7 +270,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     const key = `${shared}:${shellContent}:${path}`;
     if (!cache.has(key)) {
       cache.set(key, inspectObjectRuntimeModule(await source(path), relative(root, path), { shared, shellContent, objectIds: OBJECTS.map(o => o.id),
-        registryImportOffsets: path === resolve(root, registryPath) ? registry.importOffsets : new Set() }));
+        registryImportOffsets: path === resolve(root, registryPath) ? registry.importOffsets : new Set(),
+        registryDescriptors: path === resolve(root, registryPath) ? registry.descriptorImports : new Set() }));
     }
     return cache.get(key);
   }
@@ -237,22 +286,46 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     // Stylesheets are source-bound shell content, not JavaScript ownership.
     if (file.endsWith(".css")) { await source(path); return; }
     const facts = await inspect(path, true, shellContent);
+    sharedEdges.set(path, new Set());
+    sharedFactoryCalls.set(path, facts.factoryCalls);
     sharedViolations.push(...facts.violations);
     cameraFactorySites.push(...facts.cameraFactories);
     for (const imported of facts.imports) {
-      if (imported.startsWith(".") && /\.(?:mjs|astro|css)$/.test(imported)) await sharedVisit(resolve(dirname(path), imported), shellContent);
-      else if (imported !== "@layoutit/polycss") sharedViolations.push({ file, line: 1, reason: `Unclosed shared runtime import ${imported}` });
+      if (imported === '@layoutit/polycss') continue;
+      try {
+        const target = await resolveRuntimeSource(imported, path, { root, source });
+        if (!target) throw new Error(`Unclosed shared runtime import ${imported}`);
+        sharedEdges.get(path).add(target);
+        await sharedVisit(target, shellContent);
+      } catch (error) { sharedViolations.push({ file, line: 1, reason: error.message }); }
     }
+  }
+  function reachable(path, reached = new Set()) {
+    if (reached.has(path)) return reached;
+    reached.add(path);
+    for (const target of sharedEdges.get(path) ?? []) reachable(target, reached);
+    return reached;
   }
   try { registry = registryLoaders(await source(resolve(root, registryPath)), root); }
   catch (error) { sharedViolations.push({ file: registryPath, line: 1, reason: error.message }); }
   await sharedVisit(resolve(root, registryPath));
-  await sharedVisit(resolve(root, runtimePath));
+  const assemblyRoots = new Set(objects.map(object => registry.entries.get(object.id))
+    .filter(Boolean).map(loader => loader.kind === 'descriptor' ? loader.client : runtimePath));
+  if (!assemblyRoots.size) assemblyRoots.add(runtimePath);
+  for (const file of assemblyRoots) await sharedVisit(resolve(root, file));
   // Runtime imports are visited first, so a runtime dependency cannot acquire
   // shell-content status by also being imported by a shell component.
   for (const file of shellEntries) await sharedVisit(resolve(root, file), true);
-  if (cameraFactorySites.length !== 1) sharedViolations.push({ file: runtimePath, line: 1,
-    reason: `Expected one shared native camera factory site; found ${cameraFactorySites.length}` });
+  const assemblyFiles = new Set();
+  for (const assembly of assemblyRoots) {
+    const closure = reachable(resolve(root, assembly));
+    for (const file of closure) assemblyFiles.add(file);
+    const count = cameraFactorySites.filter(site => closure.has(resolve(root, site.file))).length;
+    if (count !== 1) sharedViolations.push({ file: assembly, line: 1,
+      reason: `Expected one shared native camera factory site; found ${count} in registered assembly` });
+  }
+  if (cameraFactorySites.some(site => !assemblyFiles.has(resolve(root, site.file)))) sharedViolations.push({ file: registryPath, line: 1,
+    reason: `Unexpected native camera factory site; found ${cameraFactorySites.length} including an owner outside every registered assembly` });
   for (const object of objects) {
     const loader = registry.entries.get(object.id);
     if (!loader) {
@@ -261,6 +334,23 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       continue;
     }
     const { client } = loader;
+    if (loader.kind === 'descriptor') {
+      const violations = [], owners = [], orphanExecutors = [];
+      const assemblyClosure = reachable(resolve(root, client));
+      const factoryCalls = [...assemblyClosure].reduce((count, file) => count + (sharedFactoryCalls.get(file) ?? 0), 0);
+      let prepared = null;
+      try {
+        requireDescriptorAdapterSource(await source(resolve(root, client)), loader.exported);
+        prepared = await readDescriptorDefinition({ objectId: object.id, descriptorFile: loader.descriptor, root, source });
+        await verify(object, prepared.definition);
+      } catch (error) { violations.push({ file: loader.descriptor, line: 1, reason: error.message }); }
+      if (factoryCalls !== 1) violations.push({ file: client, line: 1, reason: `Expected one actual shared factory call; found ${factoryCalls}` });
+      entries.push({ id: object.id, migrated: violations.length === 0, entry: { file: loader.descriptor, exported: loader.exported, registry: registryPath, adapter: client },
+        schema: prepared ? PREPARED_OBJECT_RUNTIME_SCHEMA : null, factoryCalls,
+        presentation: prepared ? { file: relative(root, prepared.payloadPath), format: 'json', property: 'data' } : null,
+        closure: [...(prepared?.closure ?? [])].map(path => relative(root, path)).sort(), owners, orphanExecutors, violations });
+      continue;
+    }
     const runtimeDirectory = dirname(resolve(root, client));
     const thin = thinClient(await source(resolve(root, client)), client, root, loader.exported);
     const visited = new Set(), violations = [], owners = [];

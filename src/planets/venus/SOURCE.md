@@ -204,14 +204,14 @@ epoch nor an ephemeris-derived inertial orientation.
 Run the following commands from the repository root:
 
 ```sh
-node src/planets/venus/tools/acquire.mjs --verify-only
-node src/planets/venus/tools/prepare.mjs
+node tools/objects/dist/operations.js acquire venus --verify-only
+pnpm prepare:planets --object=venus
 ```
 
 Refreshing acquisition is explicit and never occurs in the browser:
 
 ```sh
-node src/planets/venus/tools/acquire.mjs --refresh
+node tools/objects/dist/operations.js acquire venus --refresh
 ```
 
 Every checked input and generated runtime asset is byte-bound by a committed

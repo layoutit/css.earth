@@ -193,3 +193,9 @@ CDS `VI/79` (Chapront-Touzé & Chapront 1988, flattened by a port of the
 `ELP82B.F` distributed with it), and the satellite data from JPL Horizons plus
 JPL Solar System Dynamics' satellite physical-parameters table. Each committed
 fixture records the URL that produced it.
+
+## Source size
+
+All source files, tests, tools, and generated code are limited to 600 physical
+lines. Run `pnpm lint:packages` from the repository root. Package instructions
+live in AGENTS.md; CLAUDE.md links to the same file.

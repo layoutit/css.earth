@@ -64,7 +64,7 @@
 // claim. A precessing ellipse cannot represent a real satellite orbit; what the
 // test proves is that the propagator reproduces JPL data to within the residual
 // the fit leaves, at epochs the fit did not see.
-import { writeFileSync } from 'node:fs'
+import { writeRecordSections } from './lib/write-record-sections.mjs'
 import { elementsUrl, horizons, parseElements } from './lib/horizons.mjs'
 import { HEADER, shortest } from './lib/sources.mjs'
 
@@ -437,7 +437,7 @@ ${results.map(entry).join('\n')}
 
 export type SatelliteId = keyof typeof SATELLITE_ELEMENTS
 `
-writeFileSync(new URL('../src/data/satelliteElements.data.ts', import.meta.url), out)
+writeRecordSections(new URL('../src/data/satelliteElements.data.ts', import.meta.url), out, 'satellites')
 
 process.stdout.write('satellite   a(km)        e      i_L(deg)   n(rad/d)     node-dot(deg/yr)  peri-dot(deg/yr)  lambda resid(rad)  pole RA/Dec(deg)\n')
 for (const r of results) {

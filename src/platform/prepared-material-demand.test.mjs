@@ -1,3 +1,4 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
@@ -5,7 +6,7 @@ import { preparedMaterialAddress, preparedMaterialFrame, preparedMaterialState }
 import { resolvePreparedMaterialDemand } from "./prepared-material-demand.mjs";
 import { PREPARED_JUPITER_LIGHTING as lighting } from "../planets/jupiter/runtime/preparedLighting.mjs";
 
-const definitions = await Promise.all(OBJECTS.map(async ({id}) => (await import(`../planets/${id}/runtime/definition.mjs`)).runtimeDefinition));
+const definitions = await Promise.all(OBJECTS.map(({id}) => loadObjectTestDefinition(id)));
 const view = z => ({ sunViewDirection: [Math.sqrt(1-z*z), 0, z], sceneMatrix: "moved",
   reference: { sunViewDirection: [0, 0, 1], sceneMatrix: "initial" } });
 

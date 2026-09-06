@@ -1,0 +1,346 @@
+/* Shared prepared CSS object presentation. Capability selectors remain object-prefixed
+   until the renderer capability variables replace their legacy names. */
+/* Root dimensions are defaults; the shared shell positions every render root
+   around its dock, including the camera, material and heliocentric overlays. */
+:where(.example-stage > :is(
+  .mercury-sun-camera,
+  .mercury-camera,
+  .mercury-material-root,
+  .venus-material-composite,
+  .polycss-camera
+)) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* A true perspective camera: the eye sits at the sky's vanishing point, 0.866
+   of the stage width in front of the stage (a 60 degree horizontal field of
+   view), the same camera the sky cube was prepared for. The shared orbit
+   writes the perspective from the prepared camera plan and the perspective
+   origin so the eye stays on the sky's axis wherever the shell lays the root
+   out, and frames by dolly; the roots are never scaled. The Sun's root shares
+   the eye and paints first, beneath the body. */
+.mercury-sun-camera,
+.mercury-camera {
+  z-index: 1;
+  transform-style: preserve-3d;
+}
+
+.polycss-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polycss-mesh {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform-origin: 0 0 0;
+}
+
+.mercury-body {
+  transform-style: preserve-3d;
+  animation-name: mercury-body-spin;
+  animation-duration: 72s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.mercury-body > s,
+.mercury-cutaway-body > s,
+.mercury-interior-core > s,
+.mercury-interior-sections > s {
+  position: absolute;
+  display: block;
+  width: var(--polycss-atlas-width, 64px);
+  height: var(--polycss-atlas-height, 64px);
+  margin: 0;
+  padding: 0;
+  transform-origin: 0 0;
+  backface-visibility: hidden;
+  background-image: var(--mercury-surface-image);
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-clip: border-box;
+  pointer-events: none;
+}
+
+.mercury-body > .mercury-polar,
+.mercury-cutaway-body > .mercury-polar {
+  background-image: var(--mercury-poles-image);
+}
+
+.mercury-cutaway,
+.mercury-cutaway-body,
+.mercury-interior-core,
+.mercury-interior-sections {
+  transform-style: preserve-3d;
+}
+
+.mercury-cutaway {
+  visibility: hidden;
+}
+
+.mercury-cutaway-body > s:not(.mercury-polar) {
+  background-image: var(--mercury-interior-outer-image);
+}
+
+.mercury-cutaway-body > .mercury-polar {
+  background-image: var(--mercury-interior-outer-poles-image);
+}
+
+.mercury-interior-core > s:not(.mercury-interior-pole) {
+  background-image: url("/scenes/mercury/mercury-interior-core@2x.webp");
+}
+
+.mercury-interior-core > .mercury-interior-pole {
+  background-image:
+    url("/scenes/mercury/mercury-interior-core-poles@2x.webp");
+}
+
+.mercury-interior-sections > s {
+  background-image: url("/scenes/mercury/mercury-interior-section@2x.webp");
+}
+
+.planet-stage[data-lens="enhanced"] .mercury-polar-north {
+  --mercury-pole-position: -512px 0px !important;
+}
+
+.planet-stage[data-lens="enhanced"] .mercury-polar-south {
+  --mercury-pole-position: -768px 0px !important;
+}
+
+.planet-stage[data-lens="topography"] .mercury-polar-north {
+  --mercury-pole-position: -1024px 0px !important;
+}
+
+.planet-stage[data-lens="topography"] .mercury-polar-south {
+  --mercury-pole-position: -1280px 0px !important;
+}
+
+/* The terminator overlay follows the body's silhouette: the runtime writes
+   its scale from the projected silhouette diameter on every publication. */
+.mercury-material-root {
+  --mercury-disc-size: 460px;
+  --mercury-billboard-opacity: 0;
+  z-index: 3;
+}
+
+/* Level of detail (the stage is `data-lod` on the stage element, the
+   opacities are written per publication):
+     geometry   the retained leaves, the overlay on top;
+     crossfade  the billboard disc fades in over the geometry, beneath the
+                overlay, which now draws from the billboard lighting atlas;
+     billboard  the geometry is hidden beneath the opaque disc;
+     marker     the navigation sprite has faded in over the disc, which hides.
+   The finer stage always stays painted until the coarser one is opaque. */
+.mercury-billboard {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: var(--mercury-disc-size);
+  height: var(--mercury-disc-size);
+  margin: calc(var(--mercury-disc-size) / -2) 0 0
+    calc(var(--mercury-disc-size) / -2);
+  border-radius: 50%;
+  background-color: var(--mercury-billboard-color, #484848);
+  opacity: var(--mercury-billboard-opacity);
+  pointer-events: none;
+}
+
+.planet-stage[data-lod="billboard"] .mercury-scene,
+.planet-stage[data-lod="marker"] .mercury-scene {
+  visibility: hidden;
+}
+
+/* At the marker stage the flat disc gives way to the navigation sprite, but
+   the lighting overlay stays alive over it (floored to the sprite's size by
+   the runtime) so the marker keeps the phase and never steps up to a fully
+   lit sprite brighter than the body it replaces. The material root paints
+   above the orbit overlay for that reason. */
+.planet-stage[data-lod="marker"] .mercury-billboard {
+  visibility: hidden;
+}
+
+.mercury-material {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: var(--mercury-disc-size);
+  height: var(--mercury-disc-size);
+  margin: calc(var(--mercury-disc-size) / -2) 0 0
+    calc(var(--mercury-disc-size) / -2);
+  background-repeat: no-repeat;
+  transform: rotate(var(--mercury-light-roll, 0deg));
+  pointer-events: none;
+}
+
+.planet-stage.mercury-hide-shadows .mercury-material {
+  transform: none;
+}
+
+/* The orbit toggle hides the line only; the body marker shares the overlay
+   and stays. */
+.planet-stage.mercury-hide-orbit .planet-heliocentric-orbit-piece {
+  visibility: hidden;
+}
+
+.planet-stage[data-view="interior"] .mercury-body,
+.planet-stage[data-view="interior"][data-lod="geometry"] .mercury-material-root {
+  visibility: hidden;
+}
+
+/* The cutaway carries no overlay; from afar it is the exterior billboard, so
+   the overlay fades in with the disc. */
+.planet-stage[data-view="interior"] .mercury-material {
+  opacity: var(--mercury-billboard-opacity);
+}
+
+.planet-stage[data-view="interior"]:not([data-lod="billboard"]):not([data-lod="marker"])
+  .mercury-cutaway {
+  visibility: visible;
+}
+
+@keyframes mercury-body-spin {
+  from {
+    transform: rotateZ(-118deg);
+  }
+
+  to {
+    transform: rotateZ(-478deg);
+  }
+}
+
+/* VENUS */
+.planet-stage[data-object-id="venus"] > :is(.polycss-camera, .venus-material-composite) {
+  --venus-scene-side-padding: 16px;
+  --venus-reference-width: 1920px;
+  --venus-reference-height: 1080px;
+  --venus-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--venus-scene-side-padding) - var(--venus-scene-side-padding)) /
+        var(--venus-reference-width)
+    ),
+    calc(100cqh / var(--venus-reference-height))
+  );
+}
+
+.planet-stage[data-object-id="venus"] .polycss-camera,
+.planet-stage[data-object-id="venus"] .venus-material-composite {
+  z-index: 1;
+}
+
+.planet-stage[data-object-id="venus"] .venus-body {
+  transform-style: preserve-3d;
+  animation-name: venus-body-spin;
+  animation-duration: 36s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.planet-stage[data-object-id="venus"][data-lens="radar"] .venus-body,
+.planet-stage[data-object-id="venus"][data-lens="elevation"] .venus-body {
+  animation-duration: 96s;
+}
+
+.planet-stage[data-object-id="venus"] .polycss-scene s,
+.planet-stage[data-object-id="venus"] .venus-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.planet-stage[data-object-id="venus"] .polycss-scene s:not(.venus-polar) {
+  background-image: url("/scenes/venus/venus-clouds@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="venus"] .polycss-scene s.venus-polar {
+  background-image: url("/scenes/venus/venus-poles-clouds@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="venus"][data-lens="radar"] .polycss-scene s:not(.venus-polar) {
+  background-image: url("/scenes/venus/venus-radar@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="venus"][data-lens="radar"] .polycss-scene s.venus-polar {
+  background-image: url("/scenes/venus/venus-poles-radar@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="venus"][data-lens="elevation"] .polycss-scene s:not(.venus-polar) {
+  background-image: url("/scenes/venus/venus-elevation@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="venus"][data-lens="elevation"] .polycss-scene s.venus-polar {
+  background-image:
+    url("/scenes/venus/venus-poles-elevation@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="venus"] .venus-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 512px;
+  height: 512px;
+  background-image: url("/scenes/venus/venus-material@2x.webp");
+  background-size: 4096px 2048px;
+  transform: translate(-50%, -50%) rotate(var(--venus-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.planet-stage[data-object-id="venus"][data-lens="radar"] .venus-fixed-material,
+.planet-stage[data-object-id="venus"][data-lens="elevation"] .venus-fixed-material {
+  background-image: url("/scenes/venus/venus-observation-material@2x.webp");
+}
+
+.planet-stage[data-object-id="venus"].venus-hide-atmosphere .venus-fixed-material {
+  background-image: url("/scenes/venus/venus-lighting@2x.webp");
+}
+
+.planet-stage[data-object-id="venus"].venus-hide-stars .venus-skybox {
+  visibility: hidden;
+}
+
+@keyframes venus-body-spin {
+  from { transform: rotateZ(-118deg); }
+  to { transform: rotateZ(-478deg); }
+}
+
+/* Retained sizing previously installed as a side effect of createPolyScene.
+   Scene preparation and the common camera now own this presentation. */
+.planet-stage[data-object-id="venus"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.planet-stage[data-object-id="venus"] .polycss-scene {
+  will-change: transform;
+}
+
+.planet-stage[data-object-id="venus"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}

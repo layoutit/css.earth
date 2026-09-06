@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Mirrors the astronomy and catalog packages, and the prepared point
+// Mirrors astronomy files outside locally maintained sections, and prepared point
 // catalogues, from the author's other project (galaxio) into cssEarth. Both
 // projects are Juan Cruz Fortunatti's; the packages are his own MIT code, so
 // they are presented here as cssEarth's own packages and this sync is an
@@ -10,7 +10,7 @@
 // The upstream layout is mirrored so a sync is a directory-to-directory copy:
 //
 //   packages/astronomy   <-  <upstream>/packages/astronomy   (git-tracked files)
-//   packages/catalog     <-  <upstream>/packages/catalog     (git-tracked files)
+//   packages/catalog is maintained locally; the sync never writes it.
 //   data/catalogs/<name> <-  <upstream>/data/catalogs/<name> (VENDORED_CATALOGS)
 //
 // Package files are copied byte-for-byte except for one deliberate rewrite:
@@ -34,7 +34,7 @@
 //   node tools/sync-upstream.mjs
 //   UPSTREAM_ROOT=/path/to/checkout node tools/sync-upstream.mjs
 //
-// Never hand-edit the mirrored trees: the sync overwrites them and
+// Never hand-edit mirrored files outside the declared local sections: sync overwrites them and
 // tools/sync-upstream.test.mjs fails on any drift — including any upstream
 // identity that leaks back in.
 
@@ -160,10 +160,6 @@ export const IDENTITY_RULES = Object.freeze([
 // Upstream files that are not mirrored at all, with the reason. Recorded in
 // upstream.json under excludedFiles so the omission is auditable.
 export const EXCLUDED_FILES = Object.freeze({
-  "CLAUDE.md":
-    "A symlink to AGENTS.md upstream. Claude Code loads CLAUDE.md per directory, so " +
-    "mirroring it would silently apply the upstream project's operator instructions to " +
-    "any session working in this package. AGENTS.md itself is mirrored as plain documentation.",
   "scripts/gen_fixture.py":
     "Imports the upstream Python pipeline (galaxio_pipeline), which is not part of this " +
     "repository, so it cannot run here. scripts/check-parity.mjs, which invokes it, is " +
@@ -177,14 +173,6 @@ export const PACKAGES = Object.freeze([
     directory: "packages/astronomy",
     upstreamPackage: "@galaxio/astronomy",
     package: "@cssearth/astronomy",
-    entry: "src/index.ts",
-  },
-  {
-    id: "catalog",
-    upstreamDirectory: "packages/catalog",
-    directory: "packages/catalog",
-    upstreamPackage: "@galaxio/catalog",
-    package: "@cssearth/catalog",
     entry: "src/index.ts",
   },
 ]);
@@ -239,7 +227,15 @@ const toPosix = (path) => path.split(sep).join("/");
 // Directories that are never upstream material: pnpm links a workspace
 // package's devDependencies into its own node_modules, and a local build
 // would emit dist. Both are gitignored and invisible to the manifest.
-const IGNORED_DIRECTORIES = new Set(["node_modules", "dist"]);
+const IGNORED_DIRECTORIES = new Set(["node_modules", "dist", ".cache", "coverage"]);
+
+// Local guides and sectioned scientific records survive upstream refreshes.
+export function locallyMaintainedFile(target, rel) {
+  if (target.id !== "astronomy") return false;
+  return ["README.md", "AGENTS.md", "CLAUDE.md", "tools/fetch-fixtures.mjs",
+    "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs"].includes(rel) ||
+    /^src\/(?:data\/satelliteElements\.data|__fixtures__\/horizons)(?:\.[a-z-]+)?\.ts$/.test(rel);
+}
 
 function packageOwnedFiles() {
   return [PROVENANCE_FILE, LICENSE_FILE, "SOURCE.md", "NOTICE.md"];
@@ -254,7 +250,7 @@ export function isOwnedFile(target, rel) {
     if (rel === "SOURCE.md" || rel === "NOTICE.md") return true;
     return /^LICENSE\.[^/]+$/.test(rel);
   }
-  return packageOwnedFiles().includes(rel);
+  return packageOwnedFiles().includes(rel) || locallyMaintainedFile(target, rel);
 }
 
 export function targetFor(id) {
@@ -451,6 +447,7 @@ async function syncPackage(pkg, { root, upstream, license, allowDirty, log }) {
   const excluded = {};
   for (const tracked of subtree.trackedFiles) {
     const rel = toPosix(relative(pkg.upstreamDirectory, tracked));
+    if (locallyMaintainedFile(target, rel)) continue;
     if (isOwnedFile(target, rel)) {
       throw new Error(`Upstream now ships ${rel}, which collides with a cssEarth-owned file.`);
     }
@@ -504,6 +501,8 @@ async function syncPackage(pkg, { root, upstream, license, allowDirty, log }) {
     identityRules: Object.fromEntries(
       IDENTITY_RULES.map((rule) => [rule.id, rule.description]),
     ),
+    localMaintenance: "Guides and sectioned scientific records are maintained locally and preserved by sync.",
+    locallyMaintainedFiles: (await listFiles(target.dest)).map(file => toPosix(relative(target.dest, file))).filter(rel => locallyMaintainedFile(target, rel)),
     rewrittenFiles: rewritten,
     excludedFiles: excluded,
     importNote: IMPORT_NOTE,

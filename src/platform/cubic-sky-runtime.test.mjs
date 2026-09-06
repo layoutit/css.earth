@@ -13,7 +13,7 @@ import {
 } from "./google-earth-drag-inertia.mjs";
 import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "./sphere-drag.mjs";
 import { mountRetainedCubicSky } from "./cubic-sky-runtime.mjs";
-import { PREPARED_MERCURY_STARFIELD } from "../planets/mercury/runtime/preparedStarfield.mjs";
+import PREPARED_MERCURY_STARFIELD from "../../src/planets/mercury/prepared/sky.json" with {type: "json"};
 
 function mountStarFixture(t, { width = 1440, height = 900 } = {}) {
   const globals = new Map(["document", "HTMLElement", "ResizeObserver"].map(name =>

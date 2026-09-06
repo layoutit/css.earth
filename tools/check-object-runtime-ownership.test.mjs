@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { OBJECTS } from "../site/objects.mjs";
@@ -157,9 +158,10 @@ test("the actual Moon registry import must point to the audited client and retur
     registrySource.replace("../src/planets/moon/runtime/client.mjs", "../src/planets/moon/site/private-loader.mjs"),
     registrySource.replace("return mountMoonClient;", "return () => mountMoonClient();"),
     registrySource.replace("return mountMoonClient;", "mountMoonClient(); return mountMoonClient;"),
+    registrySource.replace("    loadScene,", "    loadScene: () => loadScene(),"),
     registrySource.replace(/\bloadScene,\n/u, "loadScene: () => loadScene(),\n"),
   ]) {
-    assert.notEqual(source, registrySource, "The mutation must change the registry");
+    assert.notEqual(source, registrySource, "The mutation must change the actual registry");
     await assert.rejects(auditObjectRuntimeOwnership(fixture({ "site/objects.mjs": source })), /Actual OBJECTS registry|registered runtime loader/);
   }
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding.replace("mountMoonClient", "differentExport") })), /one bound shared factory export/);
@@ -174,4 +176,132 @@ test("the actual OBJECTS registry has only normalized packages and one shared so
   assert.ok(report.sharedClosure.includes("site/components/PlanetShell.astro"));
   assert.ok(report.sharedClosure.includes("site/prepared-shell-titles.mjs"));
   assert.ok(!report.sharedClosure.includes("src/planets/uranus/site/preparedLensControls.mjs"));
+});
+
+const descriptorObjects = OBJECTS.filter(object => ['mercury', 'venus'].includes(object.id));
+async function descriptorOverlay(changes = {}) {
+  return auditObjectRuntimeOwnership({ objects: descriptorObjects,
+    readText: path => Object.hasOwn(changes, relativeFile(path)) ? changes[relativeFile(path)] : readFile(path, 'utf8') });
+}
+const relativeFile = path => path.slice(process.cwd().length + 1);
+
+test('descriptor loaders prove the actual JSON transport and typed source build closure', async () => {
+  const report = await descriptorOverlay();
+  assert.equal(report.complete, true);
+  assert.equal(report.cameraFactorySites.length, 1, 'one native camera factory in the selected renderer assembly');
+  for (const entry of report.entries) {
+    assert.equal(entry.entry.file, `src/planets/${entry.id}/object.json`);
+    assert.equal(entry.factoryCalls, 1);
+    assert.equal(entry.presentation.file, `src/planets/${entry.id}/prepared/object.json`);
+    assert.ok(entry.closure.includes(entry.presentation.file));
+  }
+  for (const file of ['src/renderers/css/index.ts', 'src/renderers/css/runtime/object-runtime.ts',
+    'src/renderers/css/runtime/deferred-object-mount.ts', 'packages/engine/src/runtime/scene-lifetime.ts',
+    'packages/objects/src/parse.ts']) assert.ok(report.sharedClosure.includes(file), file);
+  for (const file of ['src/renderers/css/tsup.config.ts', 'packages/engine/tsup.config.ts', 'packages/objects/package.json'])
+    assert.match(report.sourceHashes[file], /^[a-f0-9]{64}$/, file);
+  assert.ok(report.sharedClosure.every(file => !file.includes('/dist/')), 'source build entries, never emitted bundles, own the proof');
+});
+
+test('authored descriptors do not inspect deleted private runtime modules', async () => {
+  const mercury = OBJECTS.find(object => object.id === 'mercury');
+  const report = await auditObjectRuntimeOwnership({ objects: [mercury],
+    listRuntimeFiles: async directory => { if (directory.endsWith('/mercury/runtime')) throw new Error('deleted authored runtime was read'); return []; } });
+  assert.equal(report.complete, true);
+});
+
+test('authored JSON transport rejects mismatched bytes, controls, source pins and physical frames', async () => {
+  const file = 'src/planets/mercury/object.json', descriptor = JSON.parse(await readFile(file, 'utf8'));
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, id: 'venus' }) }), /descriptor identity/);
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url: '../venus/prepared/object.json' } }) }), /owning object prepared directory/);
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url: 'prepared/../prepared/object.json' } }) }), /owning object prepared directory/);
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, sha256: '0'.repeat(64) } }) }), /SHA-256/);
+  const runtimePath = 'src/planets/mercury/prepared/runtime.json';
+  const runtime = JSON.parse(await readFile(runtimePath, 'utf8'));
+  runtime.camera.defaultZoom += .1;
+  await assert.rejects(descriptorOverlay({ [runtimePath]: JSON.stringify(runtime) }), /differ from the checked authored runtime/);
+  const sourcePath = 'src/planets/mercury/source/content/object.json';
+  await assert.rejects(descriptorOverlay({ [sourcePath]: `${await readFile(sourcePath, 'utf8')} ` }), /source digest drifted/);
+  const payloadPath = 'src/planets/mercury/prepared/object.json', payload = JSON.parse(await readFile(payloadPath, 'utf8'));
+  runtime.controls.lenses.controls[0].id = '';
+  payload.data = runtime;
+  const bytes = JSON.stringify(payload);
+  descriptor.prepared.sha256 = createHash('sha256').update(bytes).digest('hex');
+  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify(descriptor), [payloadPath]: bytes,
+    [runtimePath]: JSON.stringify(runtime) }), /control|lens/i);
+  const scenePath = 'src/planets/mercury/prepared/scene.json', scene = JSON.parse(await readFile(scenePath, 'utf8'));
+  scene.worldFrame.bodyRadiusM += 1;
+  await assert.rejects(descriptorOverlay({ [scenePath]: JSON.stringify(scene) }), /physical frame/);
+});
+
+test('descriptor binding cannot bypass the shared factory or redirect the prepared inventory', async () => {
+  const file = 'site/packaged-object-runtime.mjs', source = await readFile(file, 'utf8');
+  for (const changed of [source.replace('return createNavigableObjectMount(', 'return differentFactory('),
+    source.replace('../src/planets/*/prepared/object.json', '../src/planets/other/*.json'),
+    source.replace('`../src/planets/${descriptorInput.id}/${reference}`', '`../src/planets/${otherDescriptor.id}/${reference}`'),
+    source.replace('createNavigableObjectMount(descriptorInput,', 'createNavigableObjectMount(otherDescriptor,'),
+    source.replace('}, bindPackagedObject)', '}, differentBinding)')]) {
+    assert.notEqual(changed, source, 'Mutation must change the actual loader');
+    await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport/);
+  }
+  const registry = await readFile('site/objects.mjs', 'utf8');
+  await assert.rejects(descriptorOverlay({ 'site/objects.mjs': registry.replace('loadPackagedObject(mercuryDescriptor)', 'loadPackagedObject(venusDescriptor)') }), /own actual JSON descriptor/);
+  for (const source of [registry.replace('mercuryDescriptor.properties.worldFrame', 'venusDescriptor.properties.worldFrame'),
+    registry.replace(', mercuryDescriptor.properties.worldFrame', ''),
+    registry.replace('    worldFrame,', '    worldFrame: null,')]) {
+    assert.notEqual(source, registry, 'World-frame mutation must change the actual binding');
+    await assert.rejects(descriptorOverlay({ 'site/objects.mjs': source }), /world frame/);
+  }
+});
+
+test('typed renderer closure rejects forbidden scene APIs, styles, hidden imports and extra cameras', async () => {
+  const file = 'src/renderers/css/runtime/object-runtime.ts', source = await readFile(file, 'utf8');
+  for (const [injected, expected] of [
+    ["document.createElement(('canvas' as const));", /Forbidden runtime canvas/],
+    ["document.createElementNS('http://www.w3.org/2000/svg', 'svg');", /Forbidden runtime canvas/],
+    ["function hidden(node: HTMLElement) { node.style.filter = 'blur(2px)'; }", /Forbidden runtime CSS/],
+    ["function hidden(node: HTMLElement) { node.style.background = 'linear-gradient(red, blue)'; }", /Forbidden runtime CSS/],
+    ["function hidden(node: HTMLElement) { node.style.setProperty('mask-image', 'url(mask.png)'); }", /Forbidden runtime CSS/],
+    ["import('./hidden.js');", /Dynamic runtime imports/],
+    ["import { createPolyCamera } from '@layoutit/polycss'; (createPolyCamera as typeof createPolyCamera)({});", /native camera factory site; found 2/],
+  ]) await assert.rejects(descriptorOverlay({ [file]: `${source}\n${injected}` }), expected);
+});
+
+test('workspace runtime exports and renderer build entries remain source-bound', async () => {
+  const file = 'src/renderers/css/tsup.config.ts', config = await readFile(file, 'utf8');
+  const renamed = config.replace('    index:', '    other:');
+  assert.notEqual(renamed, config, 'Mutation must rename the emitted renderer entry');
+  await assert.rejects(descriptorOverlay({ [file]: renamed }), /does not match its build entry/);
+  const manifestFile = 'packages/engine/package.json', manifest = JSON.parse(await readFile(manifestFile, 'utf8'));
+  manifest.exports['.'].import = './dist/other.js';
+  await assert.rejects(descriptorOverlay({ [manifestFile]: JSON.stringify(manifest) }), /does not match its build entry/);
+});
+
+test('the actual Sun-only shell consumes navigation without loading another native camera owner', async () => {
+  const audit = changes => auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === 'sun'),
+    readText: path => Object.hasOwn(changes, relativeFile(path)) ? changes[relativeFile(path)] : readFile(path, 'utf8') });
+  const report = await audit({});
+  assert.equal(report.complete, true);
+  assert.equal(report.cameraFactorySites.length, 1);
+  assert.ok(report.sharedClosure.includes('src/renderers/css/navigation/index.ts'));
+  assert.ok(!report.sharedClosure.includes('src/renderers/css/index.ts'));
+  assert.ok(!report.sharedClosure.includes('src/renderers/css/runtime/object-runtime.ts'));
+  for (const file of ['site/scene-router.mjs', 'site/view-url-runtime.mjs', 'site/prepared-world-navigation.mjs']) {
+    const source = await readFile(file, 'utf8');
+    const changed = source.replace('/dist/navigation.js', '/dist/index.js');
+    assert.notEqual(changed, source, 'Mutation must reconnect the native renderer entry');
+    await assert.rejects(audit({ [file]: changed }), /native camera factory site; found 2/);
+  }
+  const configFile = 'src/renderers/css/tsup.config.ts', config = await readFile(configFile, 'utf8');
+  const changed = config.replace("'./navigation/index.ts'", "'./index.ts'");
+  assert.notEqual(changed, config, 'Mutation must redirect the actual navigation build entry');
+  await assert.rejects(audit({ [configFile]: changed }), /native camera factory site; found 2/);
+});
+
+test('every independently selected registry object closes over exactly its own native camera assembly', async () => {
+  for (const object of OBJECTS) {
+    const report = await auditObjectRuntimeOwnership({ objects: [object] });
+    assert.equal(report.complete, true, object.id);
+    assert.equal(report.cameraFactorySites.length, 1, object.id);
+  }
 });
