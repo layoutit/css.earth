@@ -13,6 +13,11 @@ test("Europa mounts through the shared prepared object contract", () => {
   assert.equal(runtimeDefinition.id, "europa");
   assert.equal(runtimeDefinition.tree.nodes.filter(node => node.className?.includes("polycss-camera")).length, 1);
   assert.deepEqual(runtimeDefinition.controls.lenses.controls.map(lens => lens.id), ["normal", "enhanced"]);
+  for (const variant of PREPARED_PRESENTATION.variants) {
+    const lighting = variant.materials.find(material => material.track === "lighting");
+    assert.equal(lighting.enabled, variant.when.lensId === "normal",
+      "Photographed color must not receive a second lighting pass, including with Shadows off");
+  }
 });
 
 // Two different parent systems exercise the same preparation path. Distances

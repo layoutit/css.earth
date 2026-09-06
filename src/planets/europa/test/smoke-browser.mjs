@@ -34,7 +34,15 @@ try {
   assert.equal(await page.locator('.planet-stage').getAttribute('data-lens'), "enhanced");
   assert.equal(await page.evaluate(() => window.__europa.assertStableDomIdentity()), true);
   await page.screenshot({path:`${output}/enhanced.png`});
+  assert.equal(await page.locator('.europa-material').evaluate(el => getComputedStyle(el).backgroundImage), "none");
+  await page.evaluate(() => document.querySelector('input[name="shadows"]').click());
+  await paint();
+  assert.equal(await page.locator('.europa-material').evaluate(el => getComputedStyle(el).backgroundImage), "none",
+    "Shadows cannot add another Sun over the photographed color");
+  await page.evaluate(() => document.querySelector('input[name="shadows"]').click());
   await page.evaluate(() => window.__europa.lenses.select("normal"));
+  assert.notEqual(await page.locator('.europa-material').evaluate(el => getComputedStyle(el).backgroundImage), "none",
+    "Returning to Monochrome restores its existing lighting");
   await page.evaluate(() => document.querySelector('input[name="shadows"]').click());
   await paint();
   await page.screenshot({path:`${output}/shadows.png`});

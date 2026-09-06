@@ -61,8 +61,10 @@ const variants = surfaces.flatMap(s => [false, true].flatMap(shadows => [false, 
     { kind: "attribute", target: -1, name: "data-lens", value: s.id },
     { kind: "class", target: -1, name: "europa-hide-orbit", value: !orbit },
   ],
-  materials: [{ track: "lighting", bank: "atlas", mode: shadows ? "frames" : "fixed", enabled: !s.scientific,
-    rotationEnabled: shadows && !s.scientific, frameOverride: null, clearWhenHidden: true, fixedMode: "full-phase-curvature" }],
+  // Color observations already contain illumination from their acquisition dates.
+  // Applying a second Sun or full-phase falloff cannot relight those photographs.
+  materials: [{ track: "lighting", bank: "atlas", mode: shadows ? "frames" : "fixed", enabled: s.relight !== false,
+    rotationEnabled: shadows && s.relight !== false, frameOverride: null, clearWhenHidden: true, fixedMode: "full-phase-curvature" }],
 }))));
 const atlasUrl = "/navigation/planet-markers@2x.webp";
 const sprite = id => {
