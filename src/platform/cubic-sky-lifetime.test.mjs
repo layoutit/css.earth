@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { Surface, orbitFixture } from "./test/orbit-fixture.mjs";
-import { createUnboundedMatrixDragControls } from "./cubic-sky-runtime.mjs";
+import { createUnboundedMatrixDragControls } from "./camera-input.mjs";
 
 
 test("drag constructor removes partially attached listeners if initial style publication fails", () => {

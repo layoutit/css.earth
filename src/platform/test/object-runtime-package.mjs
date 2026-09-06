@@ -8,7 +8,8 @@ import { createObjectSelectionRuntime } from "../object-selection-runtime.mjs";
 import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coordinate.mjs";
 import { createSceneLifetime } from "../scene-lifetime.mjs";
 import { mountPreparedPresentation, resolvePreparedPresentation } from "../prepared-presentation.mjs";
-import { initialObjectSelection, requireObjectRuntimeDefinition } from "../object-runtime-contract.mjs";
+import { initialObjectSelection } from "../object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "../../../tools/object-runtime-contract.mjs";
 
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 

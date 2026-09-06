@@ -37,8 +37,7 @@ export async function prepareJupiterPresentation() {
   b.append(scene, materialSystem, system); b.append(materialSystem, counter); b.append(counter, material); b.append(material, leaf);
   const { tree, index } = b.finish({ camera, scene,  stageClasses: ["jupiter-stage"] });
   const track = { id: "lighting", target: index(leaf),
-    frame: { source: "scene-pitch", minimum: lighting.minimumPitchDegrees, maximum: lighting.maximumPitchDegrees,
-      count: lighting.frameCount, baseFrame: 0, step: lighting.pitchStepDegrees, remap: null }, defaultPose: [],
+    frame: { count: lighting.frameCount, samples: lighting.presentations.map(p => p.cameraLightDirection) },
     banks: [{ id: "lighting", frames: lighting.presentations.map(p => ({ resource: `lighting:${p.rowIndex}`,
       frame: p.frameIndex, row: p.rowIndex, backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize })),
       rows: lighting.rows.map((row, index) => ({ row: index, resource: `lighting:${index}`,
@@ -46,9 +45,7 @@ export async function prepareJupiterPresentation() {
         lastFrame: Math.min(lighting.presentations.length - 1, (index + 1) * lighting.transport.framesPerRow - 1) })), default: null,
       fixed: { resource: "shadowless", frame: null, row: null,
         backgroundPosition: lighting.shadowless.backgroundPosition, backgroundSize: lighting.shadowless.backgroundSize } }],
-    demand: { mode: "current", prewarm: "directional", capacity: lighting.transport.maximumRetainedRowCount,
-      framesPerRow: lighting.transport.framesPerRow, defaultFrame: lighting.transport.defaultFrame,
-      initialRows: lighting.transport.initialWarmRows, holdHiddenNeighborhood: false, preserveFrameWhenFixed: true, fallback: "nearest-frame" },
+    demand: { capacity: lighting.transport.maximumRetainedRowCount, defaultFrame: lighting.transport.defaultFrame },
     rotation: { kind: "planar", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false,
       width: lighting.presentationFrameSize, height: lighting.presentationFrameSize, polePolicy: "azimuth" },
     frameAttribute: null, modeAttribute: null, quoted: true };

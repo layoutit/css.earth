@@ -87,9 +87,8 @@ export async function prepareNeptunePresentation() {
   }));
   const track = { id: "lighting", target: index(leaf), frame: { source: "reference-sun-z", minimum: 0, maximum: 2,
       count: initialOrbit.frameCount, baseFrame: defaultFrame, remap: null },
-    defaultPose: [{ source: "control-pitch", scale: 1, offset: 0, value: cameraPlan.defaultControlPitchDegrees, epsilon: .01 }], banks,
-    demand: { mode: "away-enabled-or-lens-change", prewarm: "none", capacity: 3, framesPerRow: initialOrbit.frameColumns,
-      defaultFrame, initialRows, holdHiddenNeighborhood: false, fallback: "hold" },
+     banks,
+    demand: { capacity: 3, defaultFrame },
     rotation: { kind: "planar", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false,
       width: 1024, height: 1024, polePolicy: "azimuth" }, frameAttribute: null, modeAttribute: null, quoted: true };
   const variants = lenses.controls.flatMap(({ id }) => [false, true].flatMap(shadows => [false, true].map(rings => ({

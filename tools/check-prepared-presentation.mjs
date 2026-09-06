@@ -5,7 +5,7 @@ import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
 import { OBJECTS } from "../site/objects.mjs";
 import { requirePreparedPresentation, PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mjs";
-import { requireObjectRuntimeDefinition } from "../src/platform/object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
 
 export function readPreparedJsonModule(source, expectedExport) {
   const match = source.match(/^\s*(?:\/\/[^\n]*\n\s*)*export const ([A-Z][A-Z0-9_]*)\s*=\s*([\s\S]*);\s*$/);
@@ -52,7 +52,7 @@ export function requirePreparedDefinitionSource(source) {
   const values = new Map(properties.slice(1).map(property => [property.key.name, property.value]));
   if (values.size !== 3 || !["schema", "id", "controls"].every(key => values.has(key)) ||
       bindings.get(values.get("schema")?.name)?.name !== "PREPARED_OBJECT_RUNTIME_SCHEMA" ||
-      bindings.get(values.get("schema")?.name)?.path !== "../../../platform/prepared-presentation-contract.mjs" ||
+      bindings.get(values.get("schema")?.name)?.path !== "../../../platform/prepared-schema.mjs" ||
       bindings.get(values.get("controls")?.name)?.name !== "objectControls" ||
       bindings.get(values.get("controls")?.name)?.path !== "../site/control-content.mjs" ||
       values.get("id")?.type !== "Literal" || typeof values.get("id").value !== "string" || imports.length !== 3) {
@@ -141,7 +141,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
         controls: { lenses: objectControls.lenses?.controls.map(lens => lens.id) ?? [],
           settings: objectControls.settings?.controls.map(({ name, kind }) => ({ name, kind })) ?? [] },
         materialTracks: plan.materials.map(track => ({ id: track.id, frame: track.frame,
-          demand: track.demand, rotation: track.rotation?.kind ?? null, banks: track.banks.length })),
+          phaseFrames: track.frame.indices.length, rotation: track.rotation?.kind ?? null, banks: track.banks.length })),
         resources: plan.assets.entries.length, pools: plan.assets.pools,
         cameraNodes: plan.tree.nodes.filter(node => /(?:^|\s)polycss-camera(?:\s|$)/.test(node.className)).length,
         sceneNodes: plan.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className)).length,

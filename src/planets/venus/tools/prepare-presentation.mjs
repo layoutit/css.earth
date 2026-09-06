@@ -35,10 +35,9 @@ export async function prepareVenusPresentation() {
     maximum:material.maximumLightViewZ,count:material.frameCount,baseFrame:0,span:material.directionalFrameCount-1,
     maximumFrame:material.directionalFrameCount-1,remap:{kind:"phase-plateau",lowerTransition:sourceRemap.lowerTransition,
       plateau:sourceRemap.plateau,upperTransition:sourceRemap.upperTransition,plateauViewZ:sourceRemap.plateauViewZ}},
-    defaultPose:[],banks:[{id:"lighting",frames:material.backgroundPositions.map((backgroundPosition,frame)=>({
+    banks:[{id:"lighting",frames:material.backgroundPositions.map((backgroundPosition,frame)=>({
       resource:null,frame,row:null,backgroundPosition,backgroundSize:material.backgroundSize})),default:null,fixed:null}],
-    demand:{mode:"current",prewarm:"none",capacity:1,framesPerRow:material.frameCount,defaultFrame:material.defaultFrame,
-      initialRows:[],holdHiddenNeighborhood:false,fallback:"hold"},
+    demand:{ capacity:1, defaultFrame:material.defaultFrame },
     rotation:{kind:"angle",source:"view-sun",reference:"prepared",baseDegrees:material.baseLightAzimuthDegrees,
       zeroAtPole:false,property:"--venus-light-roll"},frameAttribute:null,modeAttribute:null,quoted:true};
   const variants=[];

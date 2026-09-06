@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
-import { basename, isAbsolute, resolve } from "node:path";
+import { basename, dirname, isAbsolute, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import sharp from "sharp";
+import { parseAst } from "vite";
 import cwebpPath from "cwebp-bin";
 import { OBJECTS } from "../site/objects.mjs";
 import { defaultPreparationConcurrency, runObjectCommand, runPreparationObjects } from "./run-implemented-planets.mjs";
@@ -72,7 +73,12 @@ export async function objectPreparationFiles(root, id) {
     path === `${base}/runtime-assets.json` ||
     path.includes("/.prepared/") || generatedSources.has(path);
   const outputs = [...packageFiles.filter(output), ...await listPreparationFiles(root, `public/scenes/${id}`)];
-  const inputs = [...packageFiles.filter(path => !output(path)), ...await preparationFileSets(root, id)];
+  const generators = [`${base}/tools/prepare.mjs`];
+  const content = `${base}/site/control-content.source.mjs`;
+  const dependencies = await preparationDependencies(root, [...generators, content]);
+  const inputs = [...dependencies.filter(path => !output(path)),
+    ...packageFiles.filter(path => path.startsWith(`${base}/source/`) && !output(path)),
+    ...await preparationFileSets(root, id)];
   // Editorial input is also a preparation output for packages which enrich it.
   // Its content is checked with all other outputs on every cache hit.
   const editorial = `data/planets/${id}.json`;
@@ -81,14 +87,45 @@ export async function objectPreparationFiles(root, id) {
   return { inputs: [...new Set(inputs)].sort(), outputs: [...new Set(outputs)].sort() };
 }
 
-export async function sharedPreparationFiles(root) {
-  return [...new Set([
-    "package.json", "pnpm-lock.yaml",
-    ...await listPreparationFiles(root, "src/platform"),
-    ...(await listPreparationFiles(root, "site")).filter(path => !/\.(?:astro|css)$/.test(path)),
-    ...(await listPreparationFiles(root, "tools")).filter(path =>
-      !/^tools\/(?:audit-|benchmark-|compare-|measure-|preview|serve-)/.test(path)),
-  ])].sort();
+// Follow code imported by generators, including their literal CLI steps. Do
+// not fingerprint whole runtime, shell or tooling directories.
+export async function preparationDependencies(root, entries) {
+  const visited = new Set();
+  async function visit(path) {
+    if (visited.has(path)) return;
+    assert.ok(!path.startsWith("../") && !isAbsolute(path), "Preparation import escaped the project");
+    visited.add(path);
+    const source = await readFile(resolve(root, path), "utf8");
+    if (!/\.mjs$/.test(path) || generatedModule(path)) return;
+    const ast = parseAst(source);
+    const dependencies = ast.body.filter(node => ["ImportDeclaration", "ExportNamedDeclaration", "ExportAllDeclaration"].includes(node.type))
+      .map(node => node.source?.value).filter(value => value?.startsWith("."));
+    // Steps are executed by preparation-runner, rather than imported.
+    if (path.endsWith("/tools/prepare.mjs")) {
+      const declaration = ast.body.find(node => node.type === "VariableDeclaration" && node.declarations.some(value => value.id.name === "steps"));
+      let value = declaration?.declarations.find(value => value.id.name === "steps").init;
+      function findSteps(node) {
+        if (!node || typeof node !== "object") return;
+        if (node.type === "Property" && node.key.name === "steps") value = node.value;
+        for (const child of Object.values(node)) if (Array.isArray(child)) child.forEach(findSteps);
+        else if (child && typeof child === "object") findSteps(child);
+      }
+      if (!value) findSteps(ast);
+      const steps = value?.type === "CallExpression" ? value.arguments[0] : value;
+      assert.equal(steps?.type, "ArrayExpression", "Preparation steps must be a literal list");
+      for (const step of steps.elements) {
+        assert.equal(typeof step.elements?.[0]?.value, "string", "Preparation step must name its script");
+        dependencies.push(step.elements[0].value);
+      }
+    }
+    for (const dependency of dependencies) await visit(relative(root, resolve(root, dirname(path), dependency)));
+  }
+  for (const entry of entries) await visit(entry);
+  return [...visited].sort();
+}
+
+export async function sharedPreparationFiles() {
+  return ["package.json", "pnpm-lock.yaml"];
 }
 
 export async function preparationEnvironment() {

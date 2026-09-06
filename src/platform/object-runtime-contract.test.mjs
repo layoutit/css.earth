@@ -3,9 +3,8 @@ import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
 import { objectControls } from "../planets/moon/site/control-content.mjs";
 import { runtimeDefinition as moonDefinition } from "../planets/moon/runtime/definition.mjs";
-import { initialObjectSelection,
-  reduceObjectSelection, requireObjectAction,
-  requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
+import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from "./object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
 
 function definition(overrides = {}) {
   return { ...moonDefinition, assets: structuredClone(moonDefinition.assets), ...overrides };

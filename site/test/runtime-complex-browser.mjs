@@ -15,7 +15,7 @@ assert.ok(["all", "saturn", "neptune"].includes(selected));
 const output = resolve(process.argv[4] ?? `output/playwright/runtime-complex-${Date.now()}`);
 await mkdir(output, { recursive: true });
 const report = { capturedAt: new Date().toISOString(), baseUrl, source: {}, cases: [] };
-for (const file of ["site/scene-router.mjs", "src/platform/latest-selection.mjs",
+for (const file of ["site/scene-router.mjs", "src/platform/object-selection-runtime.mjs",
   "src/planets/saturn/runtime/client.mjs", "src/planets/neptune/runtime/client.mjs",
   "src/planets/saturn/runtime/definition.mjs", "src/planets/saturn/runtime/preparedPresentation.mjs",
   "src/platform/prepared-presentation.mjs", "src/platform/prepared-material.mjs",

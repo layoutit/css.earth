@@ -82,12 +82,11 @@ export async function prepareEarthPresentation() {
     const material=plan.material[id],address=(frame,resource,frameIndex=null,row=null)=>({resource,frame:frameIndex,row,backgroundPosition:frame.backgroundPosition,backgroundSize:frame.backgroundSize});
     const illumination=material.illumination;
     return {id,target:index(materialNodes[id]),frame:{source:illumination?"prepared-light-z":"sun-z",minimum:illumination?.minimumLightViewZ??-1,maximum:illumination?.maximumLightViewZ??1,count:material.frameCount,baseFrame:0,remap:null},
-      defaultPose:illumination?[]:[{source:"frame",scale:-65/(material.frameCount-1),offset:65,value:material.defaultScenePitchDegrees,epsilon:0.01}],
+
       banks:[{id,frames:material.frames.map(frame=>address(frame,`${id}:${frame.rowIndex}`,frame.frameIndex,frame.rowIndex)),
-        default:address(material.defaultPresentation,`default:${id}`),fixed:id==="lighting"?address(material.shadowlessPresentation,"shadowless:lighting"):null,
+        default:null,fixed:id==="lighting"?address(material.shadowlessPresentation,"shadowless:lighting"):null,
         rows:material.preparedRows.map((_,row)=>({row,resource:`${id}:${row}`,firstFrame:row*material.framesPerShard,lastFrame:Math.min(material.frameCount-1,(row+1)*material.framesPerShard-1)}))}],
-      demand:{mode:"visible-directional",prewarm:"symmetric",capacity:material.transport.maximumRetainedRowCount,framesPerRow:material.framesPerShard,
-        defaultFrame:material.defaultFrame,defaultRow:material.transport.defaultRow,initialRows:material.transport.initialWarmRows,holdHiddenNeighborhood:false,fallback:"hold"},
+      demand:{ capacity:material.transport.maximumRetainedRowCount, defaultFrame:material.defaultFrame },
       rotation:{kind:"planar",source:illumination?"prepared-light":"view-sun",reference:illumination?"prepared":"initial",baseDegrees:illumination?.baseLightAzimuthDegrees??0,
         zeroAtPole:!!illumination,publishWithAddress:true,...(!illumination?{polePolicy:"azimuth"}:{}),width:material.presentationTileSize,height:material.presentationTileSize},
       frameAttribute:null,modeAttribute:null,quoted:true};

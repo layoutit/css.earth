@@ -1,5 +1,5 @@
 import { pathToFileURL } from "node:url";
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../../site/runtime-policy.mjs";
+import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../../../platform/prepared-object-assets.mjs";
 import { preparedSkyResources, preparedResourcePool } from "../../../platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
 import { prepareCssomDeclarationReads } from "../../../../tools/prepared-cssom.mjs";
@@ -93,9 +93,8 @@ export async function prepareUranusPresentation() {
   const initialRows = [...new Set([-1, 0, 1].map(offset => Math.max(0, Math.min(lighting.rowCount - 1, initialRow + offset))))];
   const track = { id: "lighting", target: index(leaf), frame: { source: "reference-sun-z", minimum: 0, maximum: 2,
     count: lighting.frameCount, baseFrame: defaultFrame, remap: null },
-    defaultPose: [{ source: "control-pitch", scale: 1, offset: 0, value: cameraPlan.defaultControlPitchDegrees, epsilon: .01 }], banks,
-    demand: { mode: "neighborhood", prewarm: "none", capacity: 6, framesPerRow: lighting.rowColumns,
-      defaultFrame, initialRows, holdHiddenNeighborhood: true, neighborhoodOffsets: [-1, 0, 1], fallback: "hold" },
+     banks,
+    demand: { capacity: 6, defaultFrame },
     rotation: { kind: "planar", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false,
       width: lighting.frameSize, height: lighting.frameSize, polePolicy: "azimuth" }, frameAttribute: null, modeAttribute: null, quoted: false };
   const variants = lenses.controls.flatMap(({ id }) => [false, true].flatMap(shadows => [false, true].map(rings => ({

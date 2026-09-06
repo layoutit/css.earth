@@ -3,7 +3,7 @@ import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { readPreparedPresentationModule, readPreparedJsonExports, requirePreparedDefinitionSource,
   requirePreparedControlSource, auditPreparedPresentations } from "./check-prepared-presentation.mjs";
-const definition = `import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../../platform/prepared-presentation-contract.mjs";
+const definition = `import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../../../platform/prepared-schema.mjs";
 import { objectControls } from "../site/control-content.mjs";
 import { PREPARED_PRESENTATION } from "./preparedPresentation.mjs";
 export const runtimeDefinition = Object.freeze({ ...PREPARED_PRESENTATION, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: "moon", controls: objectControls });`;
