@@ -1,3 +1,4 @@
+import { lightingView } from "./material-view-fixture.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
@@ -303,8 +304,7 @@ test("keeps unattended playback on compositor animations", async () => {
   ]);
   assert.equal(runtimeDefinition.assets.pools.find(pool => pool.id === "lighting").capacity, PREPARED_JUPITER_LIGHTING.transport.maximumRetainedRowCount);
   const track = runtimeDefinition.materials.find(track => track.id === "lighting");
-  assert.equal(track.demand.fallback, "nearest-frame");
-  assert.equal(track.frame.count, PREPARED_JUPITER_LIGHTING.frameCount);
+  assert.equal(track.banks[0].frames.length, PREPARED_JUPITER_LIGHTING.frameCount);
   assert.equal(track.rotation.kind, "planar");
   const bank = track.banks[0];
   for (const expected of PREPARED_JUPITER_LIGHTING.presentations) {
@@ -322,9 +322,8 @@ test("keeps unattended playback on compositor animations", async () => {
     const selected = selectedPreparedVariant(runtimeDefinition,
       { ...initialObjectSelection(runtimeDefinition.controls), shadows: true }).materials.find(material => material.track === track.id);
     const resources = { ...f.resources, has: () => true };
-    for (const [controlPitch, frame] of [[runtimeDefinition.camera.defaultControlPitchDegrees, PREPARED_JUPITER_LIGHTING.transport.defaultFrame],
-      [runtimeDefinition.camera.maximumControlPitchDegrees, 6]]) {
-      const view = { controlPitch, sunViewDirection: [1, 0, 0] }; view.reference = view;
+    for (const frame of [PREPARED_JUPITER_LIGHTING.transport.defaultFrame, 6]) {
+      const view = lightingView({}, frame); view.reference = view;
       publisher.publish(selected, view, resources);
       const expected = PREPARED_JUPITER_LIGHTING.presentations[frame];
       assert.equal(publisher.observe().appliedFrame, frame);

@@ -1,3 +1,4 @@
+import { viewSunDirectionToPreparedLightDirection } from "../../../platform/directional-sun-coordinate.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { mountPreparedPresentation } from "../../../platform/prepared-presentation.mjs";
@@ -24,11 +25,11 @@ test("Mars retains a visible fallback through a row miss, recoverable decode fai
       PREPARED_MARS_LIGHTING.shadowlessFrameOffset + PREPARED_MARS_LIGHTING.defaultFrame);
     const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); assert.equal(await request, true);
     const previous = f.presentation.observe().materials.lighting.appliedFrame;
-    const view = { ...f.view, skySunViewDirection: [0, 0, 1], revision: 2 };
+    const view = { ...f.view, sunViewDirection: viewSunDirectionToPreparedLightDirection([0, 0, 1]), revision: 2 };
     f.selection.setView(view); await f.flush();
     assert.equal(f.selection.state().loadingMaterial, true);
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame, previous);
-    const failed = f.jobs.at(-1); failed.done = true; failed.reject(new Error("row decode failed")); await f.flush();
+    const failed = f.jobs.find(job => !job.done && job.url === runtimeDefinition.assets.entries.find(entry => entry.key === runtimeDefinition.materials[0].banks[0].frames[0].resource).url); assert.ok(failed); failed.done = true; failed.reject(new Error("row decode failed")); await f.flush();
     assert.equal(f.lifetime.disposed, false); assert.equal(f.materialErrors.length, 1);
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame, previous);
     f.selection.setView({ ...view, revision: 3 }); await f.settle();
@@ -82,7 +83,7 @@ test("Mars atmosphere follows every Sun phase in both ground-shadow modes throug
       const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: shadows });
       await f.settle(); assert.equal(await request, true);
       for (const { direction, phase } of cases) {
-        f.selection.setView({ ...f.view, skySunViewDirection: direction, revision: revision++ });
+        f.selection.setView({ ...f.view, sunViewDirection: viewSunDirectionToPreparedLightDirection(direction), revision: revision++ });
         await f.settle();
         const observed = f.presentation.observe();
         assert.equal(observed.materials.lighting.calculatedFrame, phase);
@@ -106,7 +107,7 @@ test("Mars atmosphere follows every Sun phase in both ground-shadow modes throug
 test("Mars ground-mode changes keep the published image and rotation until the replacement row is decoded", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
-    f.selection.setView({ ...f.view, skySunViewDirection: [1, 0, 0], revision: 2 });
+    f.selection.setView({ ...f.view, sunViewDirection: [1, 0, 0], revision: 2 });
     await f.settle();
     const leaf = f.stage.querySelectorAll("*").find(node => node.tagName === "S" &&
       node.parentNode?.className === "polycss-mesh mars-material-plane");

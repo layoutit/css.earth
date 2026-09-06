@@ -1,3 +1,4 @@
+import { lightingView } from "./material-view-fixture.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { mountPreparedPresentation } from "../../../platform/prepared-presentation.mjs";
@@ -22,13 +23,13 @@ test("Jupiter retains a visible fallback through a row miss, recoverable decode 
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame, null);
     const request = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); assert.equal(await request, true);
     const previous = f.presentation.observe().materials.lighting.appliedFrame;
-    const view = { ...f.view, controlPitch: 0, revision: 2 };
+    const view = lightingView({ ...f.view, revision: 2 }, 136);
     f.selection.setView(view); await f.flush();
     assert.equal(f.selection.state().loadingMaterial, true);
-    assert.ok(Number.isInteger(f.presentation.observe().materials.lighting.appliedFrame));
-    const failed = f.jobs.at(-1); failed.done = true; failed.reject(new Error("row decode failed")); await f.flush();
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, previous);
+    const failed = f.jobs.find(job => !job.done && job.url === runtimeDefinition.assets.entries.find(entry => entry.key === "lighting:34").url); assert.ok(failed); failed.done = true; failed.reject(new Error("row decode failed")); await f.flush();
     assert.equal(f.lifetime.disposed, false); assert.equal(f.materialErrors.length, 1);
-    assert.ok(Number.isInteger(f.presentation.observe().materials.lighting.appliedFrame));
+    assert.equal(f.presentation.observe().materials.lighting.appliedFrame, previous);
     f.selection.setView({ ...view, revision: 3 }); await f.settle();
     assert.equal(f.presentation.observe().materials.lighting.appliedFrame, 136);
     const pool = f.residency.stats().pools.find(pool => pool.id === "lighting");
@@ -68,8 +69,8 @@ test("Jupiter's directional neighborhood is data passed to the common bounded ow
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {
     const enabled = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true }); await f.settle(); await enabled;
-    for (const [pitch, expected] of [[0, ["lighting:35", "lighting:36"]], [89, ["lighting:0"]]]) {
-      f.selection.setView({ ...f.view, controlPitch: pitch }); await f.settle();
+    for (const [frame, expected] of [[136, ["lighting:33", "lighting:35"]], [0, ["lighting:1", "lighting:2"]]]) {
+      f.selection.setView(lightingView(f.view, frame)); await f.settle();
       assert.deepEqual(f.selection.state().plan.prewarm, expected);
       assert.ok(f.residency.stats().pools.find(pool => pool.id === "lighting").nativeSlots <= 3);
     }

@@ -1,3 +1,4 @@
+import { viewSunDirectionToPreparedLightDirection } from "../../../platform/directional-sun-coordinate.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -78,7 +79,7 @@ test("switches prepared lenses without filters, canvas, or DOM growth", async ()
   const { runtimeDefinition } = await import("../runtime/definition.mjs");
   assert.equal(runtimeDefinition.controls.lenses.defaultLens, PREPARED_MARS_LENSES.defaultLens);
   for (const lens of PREPARED_MARS_LENSES.controls) {
-    const plan = resolvePreparedPresentation(runtimeDefinition, { selection: { ...initialObjectSelection(runtimeDefinition.controls), lensId: lens.id }, view: { skySunViewDirection: runtimeDefinition.sun.referenceViewDirection } });
+    const plan = resolvePreparedPresentation(runtimeDefinition, { selection: { ...initialObjectSelection(runtimeDefinition.controls), lensId: lens.id }, view: { sunViewDirection: viewSunDirectionToPreparedLightDirection(runtimeDefinition.sun.referenceViewDirection) } });
     assert.ok(plan.required.includes(`surface:${lens.id}`));
     assert.ok(plan.required.includes(`poles:${lens.id}`));
   }
