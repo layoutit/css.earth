@@ -9,7 +9,7 @@ import { COLOR_PHOTOMETRY, colorPhotometricGain, loadColorGeometry } from "./col
 export async function prepareEuropaColor({ width, height }) {
   const entries = await validateEuropaSourceGroup("color");
   const geometry = await loadColorGeometry();
-  const photometry = { ...COLOR_PHOTOMETRY, correctedPixels: 0, withheldPixels: 0, clippedChannels: 0 };
+  const photometry = { ...COLOR_PHOTOMETRY, observations: {}, correctedPixels: 0, withheldPixels: 0 };
   const groups = new Map();
   for (const entry of entries) {
     const file = await fromFile(resolve(EUROPA_SOURCE_ROOT, entry.path));
@@ -27,17 +27,22 @@ export async function prepareEuropaColor({ width, height }) {
       const [data] = await image.readRasters();
       if (!groups.has(entry.observation)) groups.set(entry.observation, []);
       const capture = geometry.get(entry.id);
-      if (entry.observation === COLOR_PHOTOMETRY.observation && !capture) throw new Error(`Missing photometry: ${entry.id}`);
+      if (!capture || !Object.hasOwn(COLOR_PHOTOMETRY.observationWeights, entry.observation)) {
+        throw new Error(`Missing photometry: ${entry.id}`);
+      }
       groups.get(entry.observation).push({ ...entry, data, origin, resolution, capture });
     } finally { await file.close(); }
   }
-  const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height).fill(1);
+  // Keep corrected highlights until exposure matching; quantize only afterward.
+  const rgb = new Float32Array(width * height * 3), missing = new Uint8Array(width * height).fill(1);
   const owners = new Uint8Array(width * height);
   const coverage = {};
   // Highest native density wins. Keep boundaries between observations;
   // do not blend across dates, transfer monochrome detail, or synthesize color.
   const ordered = [...groups].sort((a, b) => a[1][0].resolution[0] - b[1][0].resolution[0]);
   for (const [observationIndex, [observation, bands]] of ordered.entries()) {
+    const weight = COLOR_PHOTOMETRY.observationWeights[observation];
+    const stats = photometry.observations[observation] = { correctedPixels: 0, withheldPixels: 0 };
     const channels = ["IR-7560", "GREEN", "VIOLET"].map(filter => bands.filter(band => band.filter === filter));
     if (channels.some(channel => !channel.length)) throw new Error(`Incomplete color observation: ${observation}`);
     let pixels = 0, solidAngle = 0;
@@ -56,20 +61,19 @@ export async function prepareEuropaColor({ width, height }) {
           return null;
         });
         if (samples.some(sample => sample === null)) continue;
-        let gains = [1, 1, 1];
-        if (observation === COLOR_PHOTOMETRY.observation) {
-          const longitude = (x + 0.5) * 2 * Math.PI / width;
-          const normal = [Math.cos(latitude) * Math.cos(longitude), Math.cos(latitude) * Math.sin(longitude), Math.sin(latitude)];
-          gains = samples.map(({ band }) => colorPhotometricGain(normal, band.capture));
-          if (gains.some(gain => gain === null)) {
-            // Reserve this footprint until all color sequences finish, then use
-            // monochrome rather than substituting another date's color.
-            missing[index] = 2;
-            photometry.withheldPixels++;
-            continue;
-          }
-          photometry.correctedPixels++;
+        const longitude = (x + 0.5) * 2 * Math.PI / width;
+        const normal = [Math.cos(latitude) * Math.cos(longitude), Math.cos(latitude) * Math.sin(longitude), Math.sin(latitude)];
+        const gains = samples.map(({ band }) => colorPhotometricGain(normal, band.capture, weight));
+        if (gains.some(gain => gain === null)) {
+          // Reserve this footprint until all color sequences finish, then use
+          // monochrome rather than substituting another date's color.
+          missing[index] = 2;
+          stats.withheldPixels++;
+          photometry.withheldPixels++;
+          continue;
         }
+        stats.correctedPixels++;
+        photometry.correctedPixels++;
         missing[index] = 0;
         owners[index] = observationIndex + 1;
         pixels++;
@@ -78,8 +82,7 @@ export async function prepareEuropaColor({ width, height }) {
         // Infrared/red, green/green, violet/blue is enhanced, not natural color.
         for (let c = 0; c < 3; c++) {
           const value = samples[c].value * gains[c];
-          if (observation === COLOR_PHOTOMETRY.observation && value > 1) photometry.clippedChannels++;
-          rgb[index * 3 + c] = Math.round(255 * Math.min(1, Math.max(0, value)) ** (1 / 2.2));
+          rgb[index * 3 + c] = 255 * Math.max(0, value) ** (1 / 2.2);
         }
       }
     }

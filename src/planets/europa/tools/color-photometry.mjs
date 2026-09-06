@@ -5,7 +5,10 @@ import { assertEuropaSourceBytes, europaSourceManifest, validateEuropaSourceGrou
 
 const radians = Math.PI / 180;
 export const COLOR_PHOTOMETRY = Object.freeze({
-  observation: "14ESGLOCOL01", model: "Lommel-Seeliger",
+  model: "Lunar-Lambert",
+  // Qualified per observation: preserve the accepted March correction and
+  // reduce the remaining June/December gradients with a gentler mixed disk.
+  observationWeights: Object.freeze({ "14ESGLOCOL01": 1, "12ESGLOCOL01": 0.5, "G1ESGLOBAL01": 0.5 }),
   referenceIncidenceDegrees: 30, referenceEmissionDegrees: 0,
   maximumIncidenceDegrees: 75, maximumEmissionDegrees: 75,
   phaseNormalization: false, radiusKm: 1560.8,
@@ -65,7 +68,8 @@ export function controlledBodyFrame(label, et) {
 
 // A spherical disk correction, not a fitted Europa albedo or terrain model.
 // Oblique observations are withheld; real monochrome supplies those pixels.
-export function colorPhotometricGain(normal, geometry) {
+export function colorPhotometricGain(normal, geometry, weight) {
+  if (!Number.isFinite(weight) || weight < 0 || weight > 1) throw new Error("Missing or invalid observation disk weight");
   const cosine = position => {
     const v = position.map((value, i) => value - COLOR_PHOTOMETRY.radiusKm * normal[i]);
     return normal.reduce((sum, value, i) => sum + value * v[i], 0) / Math.hypot(...v);
@@ -74,6 +78,8 @@ export function colorPhotometricGain(normal, geometry) {
   if (!Number.isFinite(mu0) || !Number.isFinite(mu) ||
       mu0 < Math.cos(COLOR_PHOTOMETRY.maximumIncidenceDegrees * radians) ||
       mu < Math.cos(COLOR_PHOTOMETRY.maximumEmissionDegrees * radians)) return null;
-  const reference = Math.cos(COLOR_PHOTOMETRY.referenceIncidenceDegrees * radians);
-  return (reference / (reference + 1)) / (mu0 / (mu0 + mu));
+  // ISIS Lunar-Lambert: weight 0 is Lambert, weight 1 is Lommel-Seeliger.
+  const disk = (incidence, emission) => (1 - weight) * incidence + 2 * weight * incidence / (incidence + emission);
+  return disk(Math.cos(COLOR_PHOTOMETRY.referenceIncidenceDegrees * radians),
+    Math.cos(COLOR_PHOTOMETRY.referenceEmissionDegrees * radians)) / disk(mu0, mu);
 }
