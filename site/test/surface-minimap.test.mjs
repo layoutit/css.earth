@@ -1,0 +1,90 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { cesiumMinimapExcerpts } from '../../tools/prepare-cesium-minimap.mjs';
+import { directionOnMap, mapDirection, orbitMapCamera } from '../surface-minimap-math.mjs';
+import { rotateWorldPosition, worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
+import Camera from '@cesium/engine/Source/Scene/Camera.js';
+import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
+import Rectangle from '@cesium/engine/Source/Core/Rectangle.js';
+import { minimapCamera, rectangleOnMap, surfaceViewRectangle } from '../surface-minimap-rectangle.mjs';
+
+// Independently specified CSS surface axes: the first map column is +Y,
+// quarter-turn east is +X, and north is +Z. A mirrored map must fail these.
+const axes = { prime: [0, 1, 0], east: [1, 0, 0], north: [0, 0, 1] };
+const near = (a, b, epsilon = 1e-9) => assert.ok(Math.abs(a - b) < epsilon, `${a} != ${b}`);
+const vectorNear = (a, b, epsilon) => a.forEach((value, i) => near(value, b[i], epsilon));
+
+test('vendored Cesium helpers reproduce the pinned upstream methods verbatim', async () => {
+  for (const [name, expected] of await cesiumMinimapExcerpts()) {
+    assert.equal(await readFile(new URL(`../vendor/${name}`, import.meta.url), 'utf8'), expected);
+  }
+});
+
+test('flat map cardinal landmarks retain east-west order and north-up orientation', () => {
+  for (const [u, v, direction] of [[0, .5, [0, 1, 0]], [.25, .5, [1, 0, 0]], [.5, .5, [0, -1, 0]], [.75, .5, [-1, 0, 0]], [.2, 0, [0, 0, 1]]]) {
+    vectorNear(mapDirection(u, v, axes), direction);
+    const point = directionOnMap(direction, axes);
+    near(point.v, v);
+    if (v !== 0) near(point.u, u);
+  }
+  vectorNear(mapDirection(1.25, .5, axes), [1, 0, 0]);
+});
+
+test('map navigation rotates camera and eye together, retaining distance and roll', () => {
+  const origin = [1e11, -2e11, 3e11];
+  const world = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5,
+    pose: { positionM: origin.map((x, i) => x + [0, 0, 1e7][i]), orientationXyzw: [0, 0, Math.SQRT1_2, Math.SQRT1_2] } };
+  const moved = orbitMapCamera(world, origin, [1, 0, 0]);
+  vectorNear(moved.pose.positionM.map((x, i) => x - origin[i]), [1e7, 0, 0], 1e-4);
+  const rotation = worldRotationFromQuaternion(moved.pose.orientationXyzw);
+  vectorNear(rotateWorldPosition(rotation, [0, 0, -1]), [-1, 0, 0]);
+  vectorNear(rotateWorldPosition(rotation, [1, 0, 0]), [0, 1, 0]);
+  assert.equal(moved.referenceFrame, world.referenceFrame);
+  assert.deepEqual(world.pose.orientationXyzw, [0, 0, Math.SQRT1_2, Math.SQRT1_2]);
+});
+
+test('opposite-side clicks and seam crossings stay finite and reach the requested point', () => {
+  let world = { pose: { positionM: [0, 10, 0], orientationXyzw: [0, 0, 0, 1] } };
+  for (const u of [.5, .99, 1.01, -.01]) {
+    world = orbitMapCamera(world, [0, 0, 0], mapDirection(u, .5, axes));
+    vectorNear(world.pose.positionM, mapDirection(u, .5, axes).map(x => x * 10));
+    near(Math.hypot(...world.pose.orientationXyzw), 1);
+  }
+});
+
+const identity = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+const view = { left: -.8, right: .8, top: -.5, bottom: .5 };
+
+test('minimap uses the upstream Cesium rectangle for zoom, roll, poles and horizon cases', () => {
+  for (const distance of [1.02, 1.2, 2, 4]) {
+    for (const u of [.001, .25, .7, .999]) {
+      for (const v of [.001, .2, .5, .8, .999]) {
+        const world = orbitMapCamera({ pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, Math.sin(.3), Math.cos(.3)] } },
+          [0, 0, 0], mapDirection(u, v, axes));
+        const state = { eye: world.pose.positionM, rotation: worldRotationFromQuaternion(world.pose.orientationXyzw), view, axes };
+        const expected = Camera.prototype.computeViewRectangle.call(minimapCamera(state), Ellipsoid.UNIT_SPHERE);
+        assert.deepEqual(surfaceViewRectangle(state).bounds, rectangleOnMap(expected));
+      }
+    }
+  }
+});
+
+test('Cesium whole-globe fallback is retained and the rectangle shrinks with close zoom', () => {
+  const far = surfaceViewRectangle({ eye: [0, 0, 4], rotation: identity, view, axes });
+  assert.deepEqual(far.bounds, { left: 0, top: 0, width: 1, height: 1 });
+  const close = surfaceViewRectangle({ eye: [0, 0, 1.1], rotation: identity, view, axes });
+  assert.ok(close.bounds.height < far.bounds.height / 3);
+  near(close.center.v, 0);
+});
+
+test('out-of-view globe hides the rectangle and zero-longitude bounds wrap on the texture', () => {
+  const space = surfaceViewRectangle({ eye: [0, 0, 4], rotation: identity,
+    view: { left: 1, right: 2, top: -.5, bottom: .5 }, axes });
+  assert.deepEqual(space, { bounds: null, center: null });
+  const wrapped = rectangleOnMap(new Rectangle(-Math.PI / 6, -Math.PI / 4, Math.PI / 6, Math.PI / 4));
+  near(wrapped.left, 11 / 12);
+  near(wrapped.width, 1 / 6);
+  near(wrapped.top, .25);
+  near(wrapped.height, .5);
+});

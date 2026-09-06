@@ -1,5 +1,7 @@
 ---
 import PlanetShell from "./PlanetShell.astro";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import type {
   PreparedObjectContent,
   PreparedObjectContentDocument,
@@ -13,7 +15,41 @@ interface Props {
   };
 }
 
+interface SurfaceImages {
+  surfaces?: Array<{
+    id: string;
+    source?: string;
+    map?: { url: string; width: number; height: number };
+  }>;
+}
+
 const { preparedContent: content, preparedControls: controls } = Astro.props;
+const surfaceFiles = import.meta.glob<SurfaceImages>(
+  ["../../src/planets/*/source/preparation/raster.json", "../../src/planets/*/prepared/surfaces.json"],
+  { import: "default" },
+);
+const imageFiles = import.meta.glob<ImageMetadata>(
+  "../../src/planets/*/source/{maps,surface}/*.{png,jpg,jpeg,webp}",
+  { import: "default" },
+);
+const minimapFiles = import.meta.glob("../../src/planets/*/source/presentation/surface-map.json", { import: "default" });
+const objectRoot = `../../src/planets/${content.objectId}`;
+const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
+const raster = await surfaceFiles[`${objectRoot}/source/preparation/raster.json`]?.();
+const preparedSurfaces = await surfaceFiles[`${objectRoot}/prepared/surfaces.json`]?.();
+const lenses = controls.lenses && {
+  ...controls.lenses,
+  controls: await Promise.all(controls.lenses.controls.map(async (lens) => {
+    const map = preparedSurfaces?.surfaces?.find(surface => surface.id === lens.id)?.map;
+    if (map) return { ...lens, texture: { ...map, minimap } };
+    const source = raster?.surfaces?.find(surface => surface.id === lens.id)?.source;
+    const loadImage = typeof source === "string" && imageFiles[`${objectRoot}/source/${source}`];
+    if (!loadImage) return lens;
+    const image = await loadImage();
+    const preview = await getImage({ src: image, width: 640, format: "webp" });
+    return { ...lens, texture: { url: preview.src, width: 640, height: Math.round(640 * image.height / image.width), minimap } };
+  })),
+};
 ---
 
 <PlanetShell
@@ -25,7 +61,7 @@ const { preparedContent: content, preparedControls: controls } = Astro.props;
   charts={content.charts}
   galleries={content.galleries}
   resources={content.resources}
-  lenses={controls.lenses}
+  lenses={lenses}
   settings={controls.settings}
   destinations={content.destinations}
 />

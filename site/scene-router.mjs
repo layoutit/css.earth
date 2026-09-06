@@ -173,6 +173,8 @@ export function createSceneRouter({
           return mount.destinations.select(place);
         },
       });
+      shell.setCamera?.(mount);
+      session.lifetime.onDispose(() => shell.setCamera?.(null));
       sceneState = "ready";
       hasPresented = true;
       if (pending === request) pending = null;

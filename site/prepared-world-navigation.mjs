@@ -188,7 +188,7 @@ function worldSample(flight, from, elapsedS, sample) {
     pose: { positionM: [...sample.positionM], orientationXyzw: [...sample.orientationXyzw] } };
 }
 function isFlightInput(event) {
-  return event.target?.closest?.('.planet-input-surface') &&
+  return event.target?.closest?.('.planet-input-surface, .planet-surface-minimap') &&
     (event.type !== 'keydown' || ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', '+', '-', '=', 'Escape'].includes(event.key));
 }
 function cancellationReason(signal) { return signal.reason?.name === 'AbortError' ? signal.reason : cancelled(); }
