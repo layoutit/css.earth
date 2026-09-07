@@ -5,20 +5,20 @@ import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometry
 // varies linearly down its texture. Bake the inverse mapping into each band so
 // the published equirectangular image lands at the correct surface coordinates.
 export function reprojectSolidBodySurfaceRaster(source, { width, height,
-  latitudeSegments = 16, longitudeSegments = 32 }) {
+  latitudeSegments = 16, longitudeSegments = 32, seamOverlap = 0.005 }) {
   const output = Buffer.from(source);
   const cellWidth = width / longitudeSegments, cellHeight = height / latitudeSegments;
   const latitudeStep = Math.PI / latitudeSegments, longitudeStep = 2 * Math.PI / longitudeSegments;
   const columns = Array.from({ length: width }, (_, x) => {
     const cell = Math.floor(x / cellWidth), u = (x % cellWidth + 0.5) / cellWidth;
-    const left = (cell - 0.005) * longitudeStep, right = (cell + 1.005) * longitudeStep;
+    const left = (cell - seamOverlap) * longitudeStep, right = (cell + 1 + seamOverlap) * longitudeStep;
     const px = (1 - u) * Math.cos(left) + u * Math.cos(right);
     const py = (1 - u) * Math.sin(left) + u * Math.sin(right);
     return { longitude: Math.atan2(py, px), radius: Math.hypot(px, py) };
   });
   for (let band = 1; band < latitudeSegments - 1; band++) {
-    const north = Math.PI / 2 - (band - 0.005) * latitudeStep;
-    const south = Math.PI / 2 - (band + 1.005) * latitudeStep;
+    const north = Math.PI / 2 - (band - seamOverlap) * latitudeStep;
+    const south = Math.PI / 2 - (band + 1 + seamOverlap) * latitudeStep;
     for (let row = 0; row < cellHeight; row++) {
       const t = 1 - (row + 0.5) / cellHeight;
       const z = (1 - t) * Math.tan(south) + t * Math.tan(north);
@@ -64,20 +64,20 @@ function sampleMap(source, width, height, longitude, latitude, output, offset) {
 
 // Mercury's projective latitude-band geometry, parameterized for solid bodies.
 // All mesh construction runs during preparation; the runtime receives leaves.
-export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius,
-  mapUrl, polesUrl, latitudeSegments = 16, longitudeSegments = 32 }) {
-  const sourceWidth = 2048, sourceHeight = 1024, poleTileSize = 256;
+export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius, secondaryRadius = radius,
+  mapUrl, polesUrl, latitudeSegments = 16, longitudeSegments = 32,
+  sourceWidth = 2048, sourceHeight = 1024, poleTileSize = 256, seamOverlap = 0.005 }) {
   const cellWidth = sourceWidth / longitudeSegments, cellHeight = sourceHeight / latitudeSegments;
   const gutter = cellHeight / 4;
   const planOptions = { tileSize: 50, layerElevation: 50, textureLighting: "baked", seamBleed: 0 };
-  const polygons = createSpherePolygons(0.005);
+  const polygons = createSpherePolygons(seamOverlap);
   return [...polygons, ...["north", "south"].map(pole => createPolarCapPolygon(pole, true))]
     .map((polygon, index) => prepareLeaf(polygon, index));
   function spherePoint(latitude, longitude) {
     const latitudeRadius = Math.cos(latitude);
     return [
       radius * latitudeRadius * Math.cos(longitude),
-      radius * latitudeRadius * Math.sin(longitude),
+      secondaryRadius * latitudeRadius * Math.sin(longitude),
       polarRadius * Math.sin(latitude),
     ];
   }
@@ -187,6 +187,7 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
   }
 
   function prepareLeaf(polygon, index) {
+    if (polygon.polar && secondaryRadius !== radius) polygon = { ...polygon, vertices: polygon.vertices.map(([x, y, z]) => [x, y * secondaryRadius / radius, z]) };
     const plan = computeTextureAtlasPlanPublic(polygon, index, {
       ...planOptions,
     });

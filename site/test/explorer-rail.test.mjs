@@ -3,7 +3,6 @@ import test from "node:test";
 import { createExplorerRailController } from "../explorer-rail.mjs";
 import { MOBILE_VIEWPORT_QUERY } from "../runtime-policy.mjs";
 
-
 function fixture({ mobile = false } = {}) {
   const documentTarget = new EventTarget();
   class Element extends EventTarget {
@@ -37,7 +36,10 @@ function fixture({ mobile = false } = {}) {
     },
     scrollTo(options) { scrolls.push(options); },
   };
-  const mount = () => createExplorerRailController(documentTarget, windowTarget);
+  const solarSystemRequests = [];
+  const mount = () => createExplorerRailController(documentTarget, windowTarget, {
+    onOpenSolarSystem() { solarSystemRequests.push("solar-system"); },
+  });
   const elements = Object.fromEntries(Object.entries(nodes).map(([key, { node }]) => [key, node]));
   const escape = () => {
     const event = new Event("keydown", { cancelable: true });
@@ -45,7 +47,7 @@ function fixture({ mobile = false } = {}) {
     documentTarget.dispatchEvent(event);
     return event;
   };
-  return { ...elements, documentTarget, windowTarget, mount, scrolls, escape };
+  return { ...elements, documentTarget, windowTarget, mount, scrolls, escape, solarSystemRequests };
 }
 
 test("rail switches the retained About panel without storing or mounting a scene", () => {
@@ -58,15 +60,16 @@ test("rail switches the retained About panel without storing or mounting a scene
   f.about.click();
   assert.equal(f.panel.hidden, false);
   assert.equal(f.drawer.hidden, true);
-  assert.equal(f.search.hidden, true);
+  assert.equal(f.search.hidden, false);
   assert.equal(f.about.ariaPressed, "true");
   assert.equal(f.aside.ariaLabel, "About cssEarth");
   assert.deepEqual(f.scrolls, []);
   f.explore.click();
+  assert.deepEqual(f.solarSystemRequests, ["solar-system"]);
   assert.equal(f.panel.hidden, true);
   assert.equal(f.drawer.hidden, false);
   assert.equal(f.search.hidden, false);
-  assert.equal(f.documentTarget.activeElement, f.searchInput);
+  assert.notEqual(f.documentTarget.activeElement, f.searchInput, "Opening the list must not focus search");
   assert.equal(f.about.ariaPressed, "false");
   controller.destroy();
 });
@@ -88,7 +91,7 @@ test("settings shares the panel slot and mobile navigation returns to the top", 
   f.about.click();
   f.settings.click();
   assert.equal(f.drawer.hidden, true);
-  assert.equal(f.search.hidden, true);
+  assert.equal(f.search.hidden, false);
   assert.equal(f.panel.hidden, true);
   assert.equal(f.settingsPanel.hidden, false);
   assert.equal(f.settings.ariaPressed, "true");
@@ -102,7 +105,7 @@ test("settings shares the panel slot and mobile navigation returns to the top", 
   controller.destroy();
 });
 
-test("settings stays selected on repeat clicks and closes through About, Planet information, or Escape", () => {
+test("settings stays selected on repeat clicks and closes through About, Solar System, or Escape", () => {
   const f = fixture();
   const controller = f.mount();
   f.aside.scrollTop = 200;
@@ -126,17 +129,22 @@ test("settings stays selected on repeat clicks and closes through About, Planet 
   controller.destroy();
 });
 
-test("search belongs only to Planet information while About and Settings own their cards", () => {
+test("search stays visible in About and Settings and typing returns to the results", () => {
   const f = fixture();
   const controller = f.mount();
   assert.equal(f.search.hidden, false);
   f.about.click();
-  assert.equal(f.search.hidden, true);
+  assert.equal(f.search.hidden, false);
   assert.equal(f.panel.hidden, false);
+  f.searchInput.focus();
+  assert.equal(f.panel.hidden, false, "focusing search keeps About open until an action");
+  f.searchInput.dispatchEvent(new Event("input"));
+  assert.equal(f.panel.hidden, true);
+  assert.equal(f.drawer.hidden, false);
   f.settings.click();
-  assert.equal(f.search.hidden, true);
+  assert.equal(f.search.hidden, false);
   assert.equal(f.settingsPanel.hidden, false);
-  f.explore.click();
+  f.searchInput.dispatchEvent(new Event("input"));
   assert.equal(f.search.hidden, false);
   assert.equal(f.drawer.hidden, false);
   assert.equal(f.panel.hidden, true);

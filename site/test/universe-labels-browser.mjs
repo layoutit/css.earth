@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { wheelWithReceipt } from './wheel-zoom-distance.mjs';
+import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mjs';
 
 const output = '.local/universe-labels';
 const base = process.argv[2] ?? 'http://localhost:4210';
@@ -47,12 +47,13 @@ try {
   assert.ok(await page.evaluate(() => window.__labelJourneyNodes.every(node => node.isConnected)), 'zoom retains environment and label DOM');
   await page.screenshot({ path: `${output}/galaxy.png` });
   snapshots.sunRotation = await rotateAndReadSun(page);
-  assert.ok(snapshots.sunRotation.length > 10 && snapshots.sunRotation.every(sample => sample.opacity > .99 && sample.visible),
+  assert.ok(snapshots.sunRotation.length > 10 && snapshots.sunRotation.every(sample => sample.opacity > 0 && sample.visible &&
+      Math.abs(sample.opacity - snapshots.sunRotation[0].opacity) < 1e-6),
     'Sun locator caption stays painted throughout native galaxy rotation');
   const sunBox = await page.locator('[data-context-label="sun"]').boundingBox();
   assert.ok(sunBox, 'Sun text has a native hit target');
   // The retained transparent input surface picks the scene text underneath it.
-  await page.mouse.dblclick(sunBox.x + sunBox.width / 2, sunBox.y + sunBox.height / 2, { delay: 90 });
+  await page.mouse.click(sunBox.x + sunBox.width / 2, sunBox.y + sunBox.height / 2);
   await page.waitForFunction(() => window.__cssEarth.activeObjectId === 'sun' && window.__sun?.ready, null, { timeout: 30000 });
   assert.equal(await page.locator('.polycss-camera').count(), 1);
   assert.ok(await page.evaluate(() => window.__labelJourneyNodes.every(node => node.isConnected)), 'Sun label navigation retains the shared environment');
@@ -84,17 +85,7 @@ async function rotateAndReadSun(page) {
   await page.waitForTimeout(250);
   return page.evaluate(() => { window.__trackSunRotation = false; return window.__sunRotationSamples; });
 }
-async function scrollTo(page, targetKm) {
-  await page.mouse.move(1010, 460);
-  for (let attempt = 0; attempt < 24; attempt++) {
-    const current = await page.evaluate(() => window[`__${window.__cssEarth.activeObjectId}`].camera.state().distanceKilometers);
-    if (Math.abs(current / targetKm - 1) < 1e-6) return;
-    const step = await page.evaluate(() => window[`__${window.__cssEarth.activeObjectId}`].camera.stats().dolly.wheelStepPerDelta);
-    await wheelWithReceipt(page, Math.max(-300, Math.min(300, Math.log(targetKm / current) / step)));
-    await page.waitForFunction(() => { const state = window[`__${window.__cssEarth.activeObjectId}`].camera.stats().dragInertia; return !state.active && !state.wheelZoom.active; }, null, { timeout: 6000 });
-  }
-  throw new Error(`Native wheel did not reach ${targetKm} km`);
-}
+
 async function read(page) {
   return page.evaluate(() => {
     const visible = element => {
@@ -110,7 +101,7 @@ async function read(page) {
         const rect = element.getBoundingClientRect();
         return { id: element.dataset.contextLabel ?? '', text: element.textContent, left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom };
       }),
-      locator: document.querySelector('[data-context-focus-locator="sun"]')?.getAttribute('style'),
+      locator: document.querySelector('[data-context-indicator="sun"]')?.getAttribute('style'),
     };
   });
 }

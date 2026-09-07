@@ -17,19 +17,32 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   gestures.set(inputSurface, gesture);
   let pointer: { id: number; x: number; y: number; dragged: boolean } | null = null;
   let hovered: HTMLElement | null = null;
-  let previousCursor = '';
-  const pick = (event: MouseEvent) => document.elementsFromPoint(event.clientX, event.clientY)
-    .find((element): element is HTMLElement => element instanceof HTMLElement && host.contains(element) &&
-      Boolean(element.dataset.objectNavigate) && element.style.pointerEvents === 'auto' && element.ariaDisabled !== 'true');
+  const pick = (event: MouseEvent) => {
+    const hits = document.elementsFromPoint(event.clientX, event.clientY)
+      .filter((element): element is HTMLElement => element instanceof HTMLElement && host.contains(element));
+    return hits.find(element => Boolean(element.dataset.objectNavigate) &&
+      element.style.pointerEvents === 'auto' && element.ariaDisabled !== 'true') ??
+      hits.find(element => {
+        const orbit = element.parentElement;
+        return orbit?.dataset.contextOrbit && orbit.dataset.objectNavigate && orbit.ariaDisabled !== 'true' &&
+          parseFloat(element.style.opacity || '1') > 0.1;
+      })?.parentElement ?? null;
+  };
+  let hoveredGroup: HTMLElement | null = null;
   const setHovered = (target: HTMLElement | null) => {
     if (target === hovered) return;
     if (hovered) delete hovered.dataset.objectHovered;
+    if (hoveredGroup) delete hoveredGroup.dataset.objectHovered;
+    hoveredGroup = target?.closest<HTMLElement>('[data-context-group]') ??
+      (target?.dataset.objectNavigate
+        ? host.querySelector<HTMLElement>(`[data-context-group="${target.dataset.objectNavigate}"]`) : null);
+    if (hoveredGroup) hoveredGroup.dataset.objectHovered = 'true';
     if (target) {
-      if (!hovered) previousCursor = inputSurface.style.cursor;
       target.dataset.objectHovered = 'true';
-      inputSurface.style.cursor = 'pointer';
+      if (target.dataset.objectNavigate) inputSurface.style.setProperty('--object-hover-cursor', 'pointer');
+      else inputSurface.style.removeProperty('--object-hover-cursor');
     } else {
-      inputSurface.style.cursor = previousCursor;
+      inputSurface.style.removeProperty('--object-hover-cursor');
     }
     hovered = target;
   };
@@ -56,7 +69,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   };
   const move = (event: PointerEvent) => {
     setHovered(event.target === inputSurface && event.buttons === 0 && event.pointerType !== 'touch'
-      ? pick(event) ?? null : null);
+      ? pick(event) : null);
     const second = gesture.second;
     if (second?.pointerId === event.pointerId) {
       if (Math.hypot(event.clientX - second.x, event.clientY - second.y) <= CLICK_SLOP_PIXELS) {

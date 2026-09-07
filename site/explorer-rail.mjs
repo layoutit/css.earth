@@ -1,7 +1,7 @@
 import { MOBILE_VIEWPORT_QUERY } from "./runtime-policy.mjs";
 
 // Shell navigation only. Panel switches retain the mounted object scene.
-export function createExplorerRailController(documentTarget, windowTarget) {
+export function createExplorerRailController(documentTarget, windowTarget, { onOpenSolarSystem = () => {} } = {}) {
   const explore = documentTarget.querySelector(".explorer-rail-explore");
   const about = documentTarget.querySelector(".explorer-rail-about");
   const panel = documentTarget.querySelector(".explorer-about-panel");
@@ -26,7 +26,7 @@ export function createExplorerRailController(documentTarget, windowTarget) {
     panel.hidden = next !== "about";
     settingsPanel.hidden = next !== "settings";
     drawer.hidden = next !== "explore";
-    searchCard.hidden = next !== "explore";
+    searchCard.hidden = false;
     explore.ariaPressed = String(next === "explore");
     about.ariaPressed = String(next === "about");
     settings.ariaPressed = String(next === "settings");
@@ -43,10 +43,16 @@ export function createExplorerRailController(documentTarget, windowTarget) {
   };
   explore.addEventListener("click", () => {
     show("explore");
-    search.focus();
+    onOpenSolarSystem();
   }, { signal: events.signal });
   about.addEventListener("click", () => show("about"), { signal: events.signal });
   settings.addEventListener("click", () => show("settings"), { signal: events.signal });
+  const showSearch = () => { if (activePanel !== "explore") show("explore"); };
+  search.addEventListener("input", showSearch, { signal: events.signal });
+  search.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === "ArrowDown") showSearch();
+  }, { capture: true, signal: events.signal });
+  documentTarget.querySelector(".planet-sidebar-view-all")?.addEventListener("click", showSearch, { signal: events.signal });
   documentTarget.addEventListener("keydown", (event) => {
     if (event.key !== "Escape" || activePanel === "explore") return;
     event.preventDefault();

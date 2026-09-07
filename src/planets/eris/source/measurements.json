@@ -1,0 +1,28 @@
+{
+  "sources": [
+    {
+      "url": "https://doi.org/10.1038/nature10550",
+      "credit": "Sicardy et al. (2011), Nature 478, 493–496",
+      "measurement": "2010-11-06 stellar occultation: spherical radius and geometric albedo"
+    },
+    {
+      "url": "https://arxiv.org/abs/2303.13445",
+      "credit": "Bernstein et al. (2023)",
+      "measurement": "Photometric rotation period, consistent with synchronous rotation with Dysnomia"
+    }
+  ],
+  "radiusKm": 1163,
+  "radiusUncertaintyKm": 6,
+  "shape": "sphere",
+  "shapeQualification": "The occultation is consistent with a sphere; no resolved topography or detailed shape mesh is available.",
+  "rotationPeriodDays": 15.771,
+  "rotationPeriodUncertaintyDays": 0.008,
+  "rotationQualification": "Photometric period from Bernstein et al. (2023), consistent with the 15.78590-day Dysnomia orbit. Content only; not an absolute rotational ephemeris.",
+  "visibleGeometricAlbedo": 0.96,
+  "visibleGeometricAlbedoUncertainty": {
+    "lower": 0.04,
+    "upper": 0.09
+  },
+  "resolvedSurfaceCoverage": null,
+  "orientationQualification": "The illustration is shown at an arbitrary display orientation. No measured surface longitude or spin pole is assigned."
+}

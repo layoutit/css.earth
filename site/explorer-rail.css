@@ -73,6 +73,7 @@
   position: static;
 }
 
+.planet-object-browser-title,
 .explorer-about-panel h2,
 .explorer-settings-panel h2 {
   display: flex;
@@ -81,14 +82,9 @@
   margin: 0;
   padding: 0 var(--explorer-card-padding-inline-end) 11px
     var(--explorer-card-padding-inline-start);
-  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
+  border-bottom: 2px solid rgb(0 0 0 / 50%);
   color: var(--shell-text);
   font: 500 22px/30.13px var(--shell-ui-font);
-}
-
-.explorer-about-panel h2 {
-  padding-bottom: 0;
-  border-bottom: 0;
 }
 
 .explorer-about-content,

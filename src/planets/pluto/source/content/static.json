@@ -75,9 +75,23 @@
           "id": "topography",
           "label": "Elevation",
           "thumbnailUrl": "/scenes/pluto/pluto-topography-thumbnail.webp",
-          "description": "USGS stereo elevation; authored blue/tan/red scale −8/0/+8 km; gray grid: no elevation data",
-          "title": "Elevation: USGS stereo elevation; authored blue/tan/red scale −8/0/+8 km; gray grid: no elevation data",
-          "detail": "Stereo relief"
+          "description": "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+          "title": "Elevation: USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+          "detail": "Stereo relief",
+          "legend": {
+            "kind": "scale",
+            "title": "Elevation",
+            "meta": "km",
+            "src": "/scenes/pluto/pluto-topography-legend.webp",
+            "width": 256,
+            "height": 16,
+            "labels": [
+              "−8",
+              "0",
+              "+8"
+            ],
+            "sourceUrl": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+          }
         },
         {
           "id": "monochrome",
@@ -137,8 +151,22 @@
         "surface2xUrl": "/scenes/pluto/pluto-topography@2x.webp",
         "polesUrl": "/scenes/pluto/pluto-topography-poles.webp",
         "poles2xUrl": "/scenes/pluto/pluto-topography-poles@2x.webp",
-        "qualification": "USGS stereo elevation; authored blue/tan/red scale −8/0/+8 km; gray grid: no elevation data",
-        "detail": "Stereo relief"
+        "qualification": "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
+        "detail": "Stereo relief",
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "meta": "km",
+          "src": "/scenes/pluto/pluto-topography-legend.webp",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−8",
+            "0",
+            "+8"
+          ],
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m"
+        }
       },
       {
         "id": "monochrome",

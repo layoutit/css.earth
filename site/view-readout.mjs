@@ -2,6 +2,7 @@ import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
 import { minimapCamera } from './surface-minimap-rectangle.mjs';
 import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mjs';
+import { viewDistance } from './overview-context.mjs';
 
 const referenceAxes = { prime: [1, 0, 0], east: [0, 1, 0], north: [0, 0, 1] };
 const dot = (a, b) => a.reduce((sum, value, i) => sum + value * b[i], 0);
@@ -71,11 +72,13 @@ export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes }
 
 export function createViewReadout({ drawer, documentTarget, windowTarget }) {
   const root = documentTarget.querySelector('.planet-view-readout');
-  if (!root) return { setCamera() {}, setPlaybackState() {}, destroy() {} };
+  if (!root) return { setCamera() {}, setOverviewScope() {}, setPlaybackState() {}, destroy() {} };
   const dateGroup = root.querySelector('.planet-view-date'), date = root.querySelector('[data-view-date]');
   const coordinates = root.querySelector('.planet-view-coordinates');
   const latitude = root.querySelector('[data-view-latitude]'), longitude = root.querySelector('[data-view-longitude]');
   const altitude = root.querySelector('[data-view-altitude]');
+  const distanceLabel = root.querySelector('[data-view-distance-label]');
+  const distanceGroup = root.querySelector('.planet-view-altitude');
   const scale = root.querySelector('.planet-view-scale'), scaleLabel = root.querySelector('[data-view-scale-label]');
   const ruler = root.querySelector('.planet-view-ruler');
   const measure = root.querySelector('.planet-view-measure');
@@ -83,6 +86,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
   const configs = new Map(maps.map(map => [map, JSON.parse(map.dataset.surfaceMinimap)]));
   const events = new AbortController();
   let camera = null, unsubscribe = null, frame = null, playing = false, disposed = false;
+  let overviewScope = 'solar-system';
   const write = (element, value) => { if (element.textContent !== value) element.textContent = value; };
   function render() {
     frame = null;
@@ -100,7 +104,10 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
       radiusM: navigation.frame.bodyRadiusM, rotation: worldRotationFromQuaternion(world.pose.orientationXyzw),
       view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes,
     });
-    write(altitude, formatViewDistance(value.altitudeM));
+    const distance = viewDistance(world, navigation.frame, overviewScope);
+    write(altitude, formatViewDistance(distance.meters));
+    if (distanceLabel) write(distanceLabel, distance.label);
+    if (distanceGroup) distanceGroup.title = distance.title;
     coordinates.hidden = !value.coordinates;
     if (value.coordinates) {
       write(latitude, formatViewCoordinate(value.coordinates.latitude, 'N', 'S'));
@@ -118,6 +125,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
   function schedule() { if (!disposed && frame === null) frame = windowTarget.requestAnimationFrame(render); }
   windowTarget.addEventListener('resize', schedule, { signal: events.signal });
   return {
+    setOverviewScope(scope) { overviewScope = scope; schedule(); },
     setCamera(next) { unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(schedule) ?? null; schedule(); },
     setPlaybackState(state) { playing = state.allowed; schedule(); },
     destroy() { disposed = true; unsubscribe?.(); events.abort(); if (frame !== null) windowTarget.cancelAnimationFrame(frame); },

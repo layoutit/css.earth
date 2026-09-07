@@ -1,6 +1,6 @@
 /* Shared presentation for the retained, anonymous point and orbit leaves. */
 .prepared-point-field-stars > s,
-.prepared-world-context > s:not([data-context-body]) {
+.prepared-world-context s:not([data-context-body]) {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -15,8 +15,52 @@
   text-decoration: none;
 }
 
-.prepared-world-context > s:not([data-context-body]) {
+.prepared-world-context s:not([data-context-body]) {
   width: 1px;
-  height: 1px;
-  background: #768394;
+  height: var(--context-line-width, 1px);
+  margin-top: calc(var(--context-line-width, 1px) * -.5);
+  transform-origin: 0 50%;
+  background: var(--shell-text, #dfdfdf);
+  pointer-events: var(--context-orbit-pointer-events, none);
+}
+
+.prepared-world-context [data-context-indicator] {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 0 var(--context-line-width, 1px) var(--shell-text, #dfdfdf);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.prepared-world-context [data-context-indicator]::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+}
+
+/* A little hit slop around the line, without changing its visible stroke. */
+.context-orbit > s::before {
+  content: '';
+  position: absolute;
+  inset: -3px 0;
+}
+
+.context-orbit > s { cursor: pointer; }
+
+[data-context-group] {
+  --context-line-opacity: .35;
+  --context-label-opacity: .65;
+}
+
+[data-context-group]:is([data-object-hovered="true"], :focus-within) {
+  --context-line-opacity: .75;
+  --context-label-opacity: 1;
+}
+
+.context-orbit,
+[data-context-indicator] {
+  transition: opacity 120ms ease;
 }

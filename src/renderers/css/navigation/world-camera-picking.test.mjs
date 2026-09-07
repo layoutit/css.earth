@@ -38,7 +38,10 @@ function fixture(hitTest = () => false) {
   class Surface extends EventTarget {
     ownerDocument = document;
     dataset = {};
-    style = { removeProperty(name) { delete this[name]; } };
+    style = { setProperty(name, value) { this[name] = value; }, removeProperty(name) { delete this[name]; } };
+    parentElement = null;
+    closest() { return this.dataset.contextGroup ? this : this.parentElement?.closest() ?? null; }
+    querySelector() { return document.group ?? null; }
     captured = new Set();
     contains(element) { return element === this || document.targets.includes(element); }
     setPointerCapture(id) { this.captured.add(id); }
@@ -79,6 +82,11 @@ function firstClick(f) {
 function secondClick(f) {
   f.fire('pointerdown', 100); f.fire('mousedown', 100, { detail: 2 });
   f.fire('pointerup', 120); f.fire('click', 120, { detail: 2 }); f.fire('dblclick', 120, { detail: 2 });
+}
+
+function cursor(surface) {
+  const fallback = /var\(--object-hover-cursor, (\w+)\)/.exec(surface.style.cursor ?? '');
+  return fallback ? surface.style['--object-hover-cursor'] ?? fallback[1] : surface.style.cursor;
 }
 
 test('physical hit uses the actual translated ellipse and visible marker, never the enlarged drag radius', () => {
@@ -145,17 +153,16 @@ test('blank clicks after the native double-click interval are not swallowed', ()
 });
 
 test('hover uses the same retained target as picking and restores the input cursor', () => {
-  const f = fixture();
-  f.surface.style.cursor = 'grab';
+  const f = fixture(() => true);
   f.document.targets = [f.target];
   f.fire('pointermove', 0, { buttons: 0 });
   assert.equal(f.target.dataset.objectHovered, 'true');
-  assert.equal(f.surface.style.cursor, 'pointer');
+  assert.equal(cursor(f.surface), 'pointer');
   assert.equal(f.selections, 0);
   f.document.targets = [];
   f.fire('pointermove', 10, { buttons: 0 });
   assert.equal(f.target.dataset.objectHovered, undefined);
-  assert.equal(f.surface.style.cursor, 'grab');
+  assert.equal(cursor(f.surface), 'grab');
   f.document.targets = [f.target];
   f.target.ariaDisabled = 'true';
   f.fire('pointermove', 20, { buttons: 0 });
@@ -166,9 +173,36 @@ test('hover uses the same retained target as picking and restores the input curs
   f.fire('pointermove', 40, { buttons: 0 });
   f.destroy();
   assert.equal(f.target.dataset.objectHovered, undefined);
-  assert.equal(f.surface.style.cursor, 'grab');
+  assert.equal(f.surface.style.cursor, undefined);
+  assert.equal(f.surface.style['--object-hover-cursor'], undefined);
   assert.equal(getEventListeners(f.surface, 'pointerleave').length, 0);
   assert.equal(getEventListeners(f.window, 'blur').length, 0);
+});
+
+test('sky and surface hover cursors follow the physical hit and both use grabbing during a drag', () => {
+  let bodyVisible = true;
+  const f = fixture(x => bodyVisible && x < 600);
+  f.fire('pointermove', 0, { buttons: 0, clientX: 750 });
+  assert.equal(cursor(f.surface), 'crosshair');
+  f.fire('pointerdown', 10, { clientX: 750 });
+  f.fire('pointermove', 20, { clientX: 550 });
+  assert.equal(cursor(f.surface), 'grabbing');
+  f.fire('pointerup', 30, { clientX: 550 });
+  assert.equal(cursor(f.surface), 'grab');
+  f.fire('pointerdown', 40, { clientX: 550 });
+  assert.equal(cursor(f.surface), 'grabbing');
+  f.fire('pointermove', 50, { clientX: 750 });
+  assert.equal(cursor(f.surface), 'grabbing');
+  f.fire('pointerup', 60, { clientX: 750 });
+  assert.equal(cursor(f.surface), 'crosshair');
+  f.fire('pointermove', 70, { buttons: 0, clientX: 550 });
+  assert.equal(cursor(f.surface), 'grab');
+  bodyVisible = false;
+  f.controls.invalidateTrackball();
+  assert.equal(cursor(f.surface), 'crosshair');
+  f.controls.update({ drag: false });
+  assert.equal(cursor(f.surface), '');
+  f.destroy();
 });
 
 test('hover clears before a drag and on leaving the scene', () => {
@@ -183,5 +217,48 @@ test('hover clears before a drag and on leaving the scene', () => {
   assert.equal(f.target.dataset.objectHovered, 'true');
   f.fire('pointerleave', 50, { buttons: 0 });
   assert.equal(f.target.dataset.objectHovered, undefined);
+  f.destroy();
+});
+
+
+test('label, circle and visible orbit share hover, pointer cursor and single-click navigation', () => {
+  const f = fixture();
+  const group = new f.target.constructor(), orbit = new f.target.constructor();
+  const circle = new f.target.constructor(), chord = new f.target.constructor();
+  group.dataset.contextGroup = 'venus';
+  orbit.dataset.contextOrbit = 'venus'; orbit.parentElement = group;
+  orbit.dataset.objectNavigate = 'venus'; orbit.click = f.target.click;
+  orbit.style.pointerEvents = 'none';
+  chord.parentElement = orbit;
+  f.target.parentElement = circle.parentElement = group;
+  circle.dataset.objectNavigate = 'venus'; circle.style.pointerEvents = 'auto';
+  for (const target of [f.target, circle, chord]) {
+    f.document.targets = [target];
+    f.fire('pointermove', 0, { buttons: 0 });
+    assert.equal(group.dataset.objectHovered, 'true');
+    assert.equal(cursor(f.surface), 'pointer');
+  }
+  firstClick(f);
+  assert.equal(f.selections, 1);
+  assert.equal(group.dataset.objectHovered, undefined);
+  f.document.targets = [chord]; f.fire('pointermove', 30, { buttons: 0 });
+  f.document.targets = []; f.fire('pointermove', 40, { buttons: 0 });
+  assert.equal(group.dataset.objectHovered, undefined);
+  f.document.group = group; f.target.parentElement = null;
+  f.document.targets = [f.target]; f.fire('pointermove', 50, { buttons: 0 });
+  assert.equal(group.dataset.objectHovered, 'true', 'the separate Sun point can highlight its context owner');
+  f.destroy();
+});
+
+test('faded orbit chords and empty orbit groups cannot select a body', () => {
+  const f = fixture(), orbit = new f.target.constructor(), chord = new f.target.constructor();
+  orbit.dataset.contextOrbit = orbit.dataset.objectNavigate = 'venus';
+  orbit.style.pointerEvents = 'none'; orbit.click = f.target.click;
+  chord.parentElement = orbit; chord.style.opacity = '.01';
+  for (const targets of [[orbit], [chord]]) {
+    f.document.targets = targets;
+    firstClick(f);
+    assert.equal(f.selections, 0);
+  }
   f.destroy();
 });

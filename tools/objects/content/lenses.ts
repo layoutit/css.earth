@@ -55,7 +55,7 @@ export function prepareLenses(
   recipe: { title: { label: string; src: string; width: number; height: number }; defaultLens: string; controls: LensRecipe[] },
   assets: PreparedRasterAssets = {},
 ) {
-  if (!recipe.controls.some((control) => control.id === recipe.defaultLens)) {
+  if (recipe.controls.length && !recipe.controls.some((control) => control.id === recipe.defaultLens)) {
     throw new Error(`${objectId}: default lens ${recipe.defaultLens} is not declared`);
   }
   return {

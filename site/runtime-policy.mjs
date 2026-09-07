@@ -9,6 +9,22 @@ export const WHEEL_ZOOM_SPEED_MULTIPLIER = 4;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
 
+// Leave a body only once the observer has reached the scale of its orbit.
+// A much larger Sun disc is required to show its card again on approach.
+export const OVERVIEW_SELECTION_POLICY = Object.freeze({
+  orbitDistanceFactor: 1.5,
+  minimumDistanceRadii: 128,
+  enterSunDiameterPixels: 48,
+  centerRadiusPixels: 160,
+  settleMilliseconds: 180,
+});
+
+export function sceneCursor({ surface, pressed, enabled }) {
+  if (!enabled) return "";
+  if (pressed) return "grabbing";
+  return surface ? "grab" : "crosshair";
+}
+
 // WheelEvent has no device type. Infer discrete steps from line/page units or
 // coarse pixel steps; keep accelerated packets on the current precision gesture.
 export function wheelZoomInputKind(event, previousKind = null, previousTimestamp = -Infinity) {
