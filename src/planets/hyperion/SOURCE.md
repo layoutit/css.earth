@@ -1,0 +1,113 @@
+# Hyperion sources and preparation
+
+## Included views
+
+**Monochrome** uses 11 clear-filter Cassini ISS observations, calibrated to I/F by
+CISSCAL 4.0beta and distributed by the [PDS Ring-Moon Systems Node](https://pds-rings.seti.org/cassini/iss/access.html).
+The exact IMG/LBL URLs and byte pins are in `source/manifest.json`. Original
+1024 × 1024 samples remain the preparation inputs; no display-catalog texture
+is substituted. Selected camera resolutions range from approximately 176 m to
+1.8 km per pixel. The best 2005 mosaic sector retains finer detail than the
+sparser reverse side. Missing or unstable observation geometry remains visibly
+unavailable rather than filled with invented terrain.
+
+Frames are projected through the measured shape, using the sub-spacecraft and
+sub-solar latitude/west longitude, range, north azimuth and image-center positions
+in Table 1 of the [Hyperion model documentation](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf).
+The source table's `_1` names identify observations; the archive currently serves
+updated `_2_CALIB` products with the same image clocks. Cassini NAC's published
+2003.44 mm focal length and 12 micrometer pixel pitch in the pinned
+[NAIF instrument kernel](https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti)
+set a 5.9896977199 microradian pixel scale. Preparation converts west
+longitude to east longitude, rather than assuming the source is east-positive.
+
+The selected full-resolution calibrated files contain a 4096-byte VICAR label
+followed by a 4096-byte binary
+telemetry header. Actual float pixels start at byte 8192. The detached PDS
+`^IMAGE` pointer is stale in these files; the VICAR `LBLSIZE`, `NLB` and `RECSIZE`
+fields and exact file length determine the decoder offset. Reading at 4096 would
+turn telemetry into a false image row and omit the last real row.
+
+A bounded Lunar-Lambert disk normalization and overlap exposure match reduce
+illumination differences before composition. They do not recover data from
+cast shadows, establish absolute surface albedo or remove all illumination from
+small crater walls. These remaining photographed details are explicitly part
+of the observational lens. The application's separate Shadows setting remains
+available through prepared shape-aware illumination banks.
+
+**Elevation** is radial height above a 135 km reference sphere, sampled from the
+released shape. The scale spans −50 to +60 km and includes the moon's global
+elongation. It is a shape-derived scientific view, not a fine-resolution stereo
+DEM or a gravity-referenced altitude. Fixed cartographic relief makes slopes
+legible without fabricating measurements.
+
+## Shape and orientation
+
+The [PDS Saturn Small Moon Shape Models release](https://sbn.psi.edu/pds/resource/saturnsatshapes.html)
+provides Thomas's Hyperion model: 14,636 vertices and 29,268 triangular plates,
+with Cartesian coordinates in kilometers. The release is credited to Thomas,
+Joseph and Ansty (2018), DOI [10.26033/ewy3-jy61](https://doi.org/10.26033/ewy3-jy61).
+The checked-in XML and PDF document its frame and limitations. The longest
+shape axis is not inferred from the NASA overview's approximate diameters.
+
+The model uses the spin frame observed during Cassini's September 26, 2005
+flyby and retains Bahloo at 196°W. Hyperion has no IAU-approved modern rotation
+solution. Its source record therefore requests an explicitly arbitrary display
+orientation with no simulated constant spin. Orbital position comes from the
+shared astronomy package; the surface attitude is not a prediction for that epoch.
+
+The well-observed 2005 sector has reported relative uncertainty below 1 km;
+relative errors on the opposite side reach 6 km. Small craters are not reliably
+represented in the shape itself. The shared meshoptimizer path simplifies the
+released connectivity before texture baking, targeting 1,200 leaves within the
+2,000-leaf ceiling. Native PolyCSS raster triangles carry prepared texels and
+normal-interpolated directional lighting. A spherical detached lighting overlay
+is not used on this irregular silhouette.
+
+The navigation image comes from the same prepared shape and Monochrome map.
+The dedicated Surface Lens preview is a small map, not the HD atlas.
+
+## Source survey
+
+- **Included:** Cassini calibrated clear-filter frames and the PDS controlled
+  shape/camera release. They provide restorable imagery with an explicit common
+  registration frame and a conceptually distinct global-relief view.
+- **Unresolved:** Zubarev and Nadezhdina's 2025 paper, [Shape, mosaic and control
+  point network](https://doi.org/10.1016/j.icarus.2024.116440), reports a newer
+  50 m/pixel mosaic and DEM in a new reference frame. Its public downloadable
+  pixel/model release was not located from the paper and linked 2025 LPSC
+  abstract. The research exists; this package does not claim to include it.
+- **Excluded:** The [USGS Voyager control network](https://astrogeology.usgs.gov/search/map/hyperion_image_control_network)
+  has a four-frame high-pass-filtered Voyager map. It is much coarser than the
+  selected Cassini data and uses an older frame; it is not an extra lens.
+- **Excluded:** NASA's [Hyperion 3D model](https://science.nasa.gov/resource/hyperion-3d-model/)
+  is a useful visualization but its small UV atlas has no delivered per-pixel
+  observational coverage or controlled frame. It is not relabeled as an
+  observation or used to fill gaps in measured imagery.
+- **Excluded:** NASA press mosaics provide excellent regional images but do not
+  publish a single projection/camera model for the composited pixels. The
+  original controlled ISS frames are used instead. Available enhanced-color
+  press views are not treated as a registered global color dataset.
+
+Facts and context follow [NASA's Hyperion overview](https://science.nasa.gov/saturn/moons/hyperion/)
+and the vendored JPL physical/orbital data. The stars and title retain the common
+ESO/S. Brunier and Inter credits documented beside the source inputs.
+
+Three additional published control rows (N1497116847, N1550270298 and
+N1550320098) produced grossly mismatched source-image silhouettes and were
+excluded. Four SUM2 close-up frames were also excluded: their full-resolution
+center convention was ambiguous and their binned resolution did not improve
+on the retained full-resolution mosaic images.
+
+The 1,200-leaf approximation was compared with the released 29,268-plate model
+using 2,048 equal-area Fibonacci radial rays. Mean radial difference was 371 m,
+95th percentile 945 m, 99th percentile 1.34 km and maximum sampled difference
+1.94 km. These are sampled approximation errors, not exhaustive bounds or a
+claim that the observational shape itself is accurate to those values.
+
+The prepared 4096 × 2048 Monochrome map contains 6,836,406 valid output samples
+out of 8,388,608 (81.5% of equirectangular pixels). This is raster coverage, not
+an equal-area surface fraction. The remaining pixels use the shared missing-data
+presentation.
+
+The initial camera uses the prepared ecliptic presentation basis and the radial mesh’s CSS X/Y transport to face the source portrait direction; geographic longitude/latitude are not copied into scene yaw/pitch.
