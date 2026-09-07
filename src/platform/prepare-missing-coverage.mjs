@@ -1,13 +1,13 @@
 // Prepare-only cartographic styling. Gray is a data gap, never inferred terrain.
-// The JPEG has no validity channel: conservatively use only exactly black pixels
-// connected to its southern border. Nonzero JPEG edge pixels remain untouched.
-export function blackFillCoverage(data, { width, height, channels }, { southConnected = false } = {}) {
+// Images without validity channels may restrict exact black fill to a polar edge.
+// Interior photographed black and nonzero edge pixels remain observations.
+export function blackFillCoverage(data, { width, height, channels }, { southConnected = false, northConnected = false } = {}) {
   const missing = new Uint8Array(width * height);
   const black = (i) => {
     for (let c = 0; c < channels; c++) if (data[i * channels + c] !== 0) return false;
     return true;
   };
-  if (!southConnected) {
+  if (!southConnected && !northConnected) {
     for (let i = 0; i < missing.length; i++) missing[i] = Number(black(i));
     return missing;
   }
@@ -16,7 +16,10 @@ export function blackFillCoverage(data, { width, height, channels }, { southConn
   const visit = (i) => {
     if (!missing[i] && black(i)) { missing[i] = 1; queue[tail++] = i; }
   };
-  for (let x = 0; x < width; x++) visit((height - 1) * width + x);
+  for (let x = 0; x < width; x++) {
+    if (northConnected) visit(x);
+    if (southConnected) visit((height - 1) * width + x);
+  }
   while (head < tail) {
     const i = queue[head++], x = i % width;
     if (i >= width) visit(i - width);

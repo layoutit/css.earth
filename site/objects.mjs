@@ -1,3 +1,4 @@
+import mirandaDescriptor from "../src/planets/miranda/object.json" with { type: "json" };
 import charonDescriptor from "../src/planets/charon/object.json" with { type: "json" };
 import tritonDescriptor from "../src/planets/triton/object.json" with { type: "json" };
 import haumeaDescriptor from "../src/planets/haumea/object.json" with { type: "json" };
@@ -134,6 +135,11 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(uranusDescriptor);
     }, uranusDescriptor.properties.worldFrame),
+  object("miranda", "Miranda", "satellite", "#aaa8a0", 19.2,
+    "Explore Miranda in 3D with cssEarth. Inspect Voyager imagery of Uranus’s small moon, its giant scarps, and its ridged coronae.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mirandaDescriptor);
+    }, mirandaDescriptor.properties.worldFrame),
   object("neptune", "Neptune", "planet", "#5279bd", 30.05,
     "Explore Neptune in 3D with cssEarth. Discover the distant blue ice giant, its turbulent atmosphere, faint rings, and orbiting moons.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

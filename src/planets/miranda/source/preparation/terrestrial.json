@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "miranda",
+  "displayName": "Miranda",
+  "publicBase": "/scenes/miranda/",
+  "distanceAu": 19.2,
+  "raster": {
+    "width": 1440,
+    "height": 720,
+    "bandCount": 16,
+    "gutter": 16,
+    "poleSize": 512,
+    "surfaceQuality": 95,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "connectedEdge": "north",
+          "centerLongitude": 0
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 235.7,
+    "camera": {
+      "initialScenePitchDegrees": -15.360353235744041,
+      "defaultControlYawDegrees": -95.34202350653379
+    },
+    "mapUrl": "/scenes/miranda/miranda-normal-surface@2x.webp",
+    "polesUrl": "/scenes/miranda/miranda-normal-poles@2x.webp"
+  },
+  "celestial": {
+    "sunSource": "Vendored JPL Horizons Uranus satellite elements and IAU/NAIF Miranda rotation at the shared epoch."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      170,
+      168,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}
