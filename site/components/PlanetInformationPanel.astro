@@ -5,6 +5,7 @@ import { objectClassificationLabel } from "../planet-search-objects.mjs";
 import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
+import { sceneSources } from "../scene-sources.mjs";
 import MaterialSymbol from "./MaterialSymbol.astro";
 import SearchIcon from "./SearchIcon.astro";
 import PlanetCard from "./PlanetCard.astro";
@@ -14,7 +15,8 @@ const { objectId, title, introduction = "", facts = [], moreFacts = [], gallerie
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
 const activeObject = OBJECTS.find((object) => object.id === objectId);
 const classificationLabel = activeObject && objectClassificationLabel(activeObject.classification);
-const hasResources = resources.length > 0;
+const sources = sceneSources(resources);
+const hasResources = sources.length > 0;
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
 ---
@@ -299,7 +301,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
           />
         </summary>
         <div class="planet-resources-links">
-          {resources.map((resource) => (
+          {sources.map((resource) => (
             <a
               class="planet-resource-row"
               href={resource.href}

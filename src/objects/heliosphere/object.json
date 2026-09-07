@@ -12,33 +12,33 @@
         0
       ],
       "localToReferenceXyzw": [
-        0.03513113833981278,
-        0.027299641271711732,
-        0.7888379488084487,
-        -0.6129887627233179
+        0.026512876830526073,
+        -0.20138529322564358,
+        0.9707764298832948,
+        0.12780514159311135
       ],
       "metersPerUnit": 149597870700,
       "boundsUnits": {
         "min": [
-          -210,
-          -111,
-          -111
+          -383,
+          -383,
+          -383
         ],
         "max": [
-          120,
-          111,
-          111
+          383,
+          383,
+          383
         ]
       }
     },
     "preparation": {
       "source": "source/shell.json",
-      "sha256": "44f3ec923e19161c01be7ebad8272f4e99dcb9db6a887ee69f342b62d9cb5302"
+      "sha256": "261aec2e707eac92ed5b014195410c63edcd79488fb6977c363b6e742295b0c2"
     }
   },
   "prepared": {
     "format": "cssearth-surface-shell@1",
     "url": "prepared/shell.json",
-    "sha256": "645eb62279150aafd9f0f2988b6a4d1c2897826ec0f83435530d0b0459295ac5"
+    "sha256": "c1f186b8a90095ca798413f2d058a396601c8b66707cd92420973864660a6d5c"
   }
 }

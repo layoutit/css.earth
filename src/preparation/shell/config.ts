@@ -2,16 +2,14 @@
 import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/objects';
 import { finite, record, text, triple, type Vector3 } from '../volume/config.js';
 
-export interface AnalyticShellShape {
-  kind: 'asymmetric-radial-shell'; radiusUnits: number; latitudeSegments: number; longitudeSegments: number;
-  tailExponent: number; tailExtension: number; transverseScale: number; transverseContraction: number;
-  lobeAmplitude: number; lobeSharpness: number;
-}
-export interface IndexedShellShape { kind: 'indexed-mesh'; path: string; sha256: string; }
+export interface ShellDisplaySubdivision { method: 'radial-linear'; segmentsPerEdge: number; }
+interface ShellShapeSource { path: string; sha256: string; displaySubdivision?: ShellDisplaySubdivision; }
+export interface IndexedShellShape extends ShellShapeSource { kind: 'indexed-mesh'; }
+export interface GriddedShellShape extends ShellShapeSource { kind: 'gridded-surface'; }
 export interface ShellRecipe {
   schema: 'cssearth-surface-shell-recipe@1';
   frame: DensityVolumeFrame;
-  shape: AnalyticShellShape | IndexedShellShape;
+  shape: IndexedShellShape | GriddedShellShape;
   material: { colorLinear: Vector3; opacity: number; rimFadeFacing: number };
   atlas: { tileSize: number; columns: number; frames: number; facingLevels?: number[]; triangleInsetPixels?: number };
   visibility: { hiddenInsideUnits: number; fullUntilUnits: number; hiddenBeyondUnits: number };
@@ -29,18 +27,9 @@ export function parseShellRecipe(value: unknown): ShellRecipe {
   const s = record(r.shape, 'shape'), m = record(r.material, 'material'), a = record(r.atlas, 'atlas');
   const v = record(r.visibility, 'visibility'), p = record(r.provenance, 'provenance');
   let shape: ShellRecipe['shape'];
-  if (s.kind === 'indexed-mesh') shape = { kind: s.kind, ...pinnedSource(s) };
-  else if (s.kind === 'asymmetric-radial-shell') {
-    const latitudeSegments = positive(s.latitudeSegments, 'latitudeSegments', true);
-    const longitudeSegments = positive(s.longitudeSegments, 'longitudeSegments', true);
-    if (latitudeSegments < 4 || longitudeSegments < 4 || (latitudeSegments + 1) * (longitudeSegments + 1) > 65536) {
-      throw new TypeError('Shell segment counts exceed supported indexed geometry.');
-    }
-    shape = { kind: s.kind, radiusUnits: positive(s.radiusUnits, 'radiusUnits'), latitudeSegments, longitudeSegments,
-      tailExponent: positive(s.tailExponent, 'tailExponent'), tailExtension: finite(s.tailExtension, 'tailExtension'),
-      transverseScale: positive(s.transverseScale, 'transverseScale'), transverseContraction: finite(s.transverseContraction, 'transverseContraction'),
-      lobeAmplitude: finite(s.lobeAmplitude, 'lobeAmplitude'), lobeSharpness: positive(s.lobeSharpness, 'lobeSharpness') };
-  } else throw new TypeError('Unsupported surface source.');
+  if (s.kind === 'indexed-mesh' || s.kind === 'gridded-surface') shape = { kind: s.kind, ...pinnedSource(s),
+    ...(s.displaySubdivision === undefined ? {} : { displaySubdivision: parseDisplaySubdivision(s.displaySubdivision) }) };
+  else throw new TypeError('Unsupported surface source.');
   const frames = positive(a.frames, 'frames', true), columns = positive(a.columns, 'columns', true);
   if (frames < 2 || columns > frames) throw new TypeError('Atlas needs at least two ordered facing samples.');
   let facingLevels: number[] | undefined;
@@ -69,6 +58,13 @@ export function parseShellRecipe(value: unknown): ShellRecipe {
     material: { colorLinear, opacity, rimFadeFacing }, atlas: { tileSize, columns, frames,
       ...(facingLevels ? { facingLevels } : {}), ...(triangleInsetPixels === undefined ? {} : { triangleInsetPixels }) },
     visibility: { hiddenInsideUnits, fullUntilUnits, hiddenBeyondUnits }, unitScale: positive(r.unitScale, 'unitScale'), provenance: pinnedSource(p) };
+}
+function parseDisplaySubdivision(value: unknown): ShellDisplaySubdivision {
+  const subdivision = record(value, 'display subdivision');
+  if (subdivision.method !== 'radial-linear') throw new TypeError('Unsupported shell display subdivision.');
+  const segmentsPerEdge = positive(subdivision.segmentsPerEdge, 'segmentsPerEdge', true);
+  if (segmentsPerEdge > 8) throw new TypeError('Shell display subdivision exceeds the prepared face bound.');
+  return { method: subdivision.method, segmentsPerEdge };
 }
 function pinnedSource(p: Record<string, unknown>): { path: string; sha256: string } {
   const path = text(p.path, 'source path'), sha256 = text(p.sha256, 'source hash');

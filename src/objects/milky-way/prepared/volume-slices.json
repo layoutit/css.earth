@@ -33308,7 +33308,7 @@
       },
       "pathMetric": "Euclidean distance in normalized texture coordinates; per-axis integration divides by that source-axis extent.",
       "omitted": "OpenSpace camera-dependent volume fade, per-ray jitter, additive HDR display, and separate MilkyWayPoints/halo star renderer; cssEarth retains its independently sourced star field.",
-      "cssApproximation": "CSS slabs integrate common physical/source distance on all axes, preserving the working renderer convention and avoiding an axis-dependent optical coefficient. OpenSpace instead integrates normalized texture distance; exact additive raymarch photometry is not reproduced. Display exposure gain 16 is applied after integration, calibrated three stops below the working CSS/Galaxio gain 128 because the OpenSpace emission model produced an overly bright native view. Display gain is not a published OpenSpace source parameter.",
+      "cssApproximation": "CSS slabs integrate common physical/source distance on all axes to avoid an axis-dependent optical coefficient. OpenSpace instead integrates normalized texture distance; exact additive raymarch photometry is not reproduced. Display exposure gain 16 is applied after integration and balanced against the NASA interior panorama. Display gain is an authored presentation parameter, not a published OpenSpace source parameter.",
       "cssTextureEncoding": {
         "format": "WebP",
         "quality": 90,

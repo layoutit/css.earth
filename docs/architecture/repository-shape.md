@@ -39,7 +39,6 @@ tools/                          # thin TypeScript commands: prepare, acquire, ve
 tests/                          # cross-layer integration, browser and visual oracles
 public/                         # generated serving mirror; never the source of truth
 docs/architecture/              # decisions and diagrams
-experiments/milky-way/           # current isolated proof; not a production renderer
 ```
 
 ```text
