@@ -52,7 +52,7 @@ export function parseTerrestrialProfile(value) {
     throw new TypeError('Authored Sun qualification must explain the source frame.');
   }
   for (const lens of value.raster.scientific ?? []) {
-    const meshGrid = ['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet'].includes(lens.format);
+    const meshGrid = ['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model'].includes(lens.format);
     const tableGrid = lens.format === 'pds-radial-table';
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
@@ -64,7 +64,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
@@ -137,7 +137,7 @@ export function parseTerrestrialProfile(value) {
     observationIds.add(observation.id);
   }
   for (const mosaic of value.raster.mosaics ?? []) {
-    if (!['pds3-byte-equirectangular', 'controlled-orthographic'].includes(mosaic.format) || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
+    if (!['pds3-byte-equirectangular', 'controlled-orthographic', 'controlled-shape-camera'].includes(mosaic.format) || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
         observationIds.has(mosaic.id) || !/^[a-z][a-z0-9-]*$/.test(mosaic.consumer)) {
       throw new TypeError('Invalid PDS byte mosaic identity or format.');
     }
@@ -192,8 +192,9 @@ export async function prepareTerrestrialSun({ config, publicDirectory }) {
   const frame = prepareEclipticPresentationFrame(config.namespace), sceneDirection = frame.sunDirection;
   const presentation = { ...DIRECTIONAL_SUN_PRESENTATION_STANDARD,
     source: config.celestial.sunSource, sourcePath: 'src/platform/solar-geometry.mjs',
-    qualification: config.celestial.sunQualification ?? (`Observed ${config.displayName} Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL}, ` +
-      'expressed in the ecliptic presentation frame (north up, Sun left at zero yaw) and in view space at the default camera pose.'),
+    qualification: config.celestial.sunQualification ?? (`Computed ${config.displayName} Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL}, ` +
+      'expressed in the ecliptic presentation frame (north up, Sun left at zero yaw) and in view space at the default camera pose.' +
+      (config.celestial.qualification ? ` ${config.celestial.qualification}` : '')),
     bodyFixedDirection: requireBodyFixedSunDirection(config.namespace), presentationFrame: frame.model,
     localDirection: sceneDirection,
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: config.namespace, ...config.geometry.camera, sceneDirection }),

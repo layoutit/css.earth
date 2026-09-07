@@ -246,6 +246,41 @@
       "color": "#ddd6cf"
     },
     {
+      "id": "pan",
+      "name": "Pan",
+      "color": "#a6a29a"
+    },
+    {
+      "id": "atlas",
+      "name": "Atlas",
+      "color": "#a6a29a"
+    },
+    {
+      "id": "prometheus",
+      "name": "Prometheus",
+      "color": "#a6a29a"
+    },
+    {
+      "id": "pandora",
+      "name": "Pandora",
+      "color": "#a6a29a"
+    },
+    {
+      "id": "janus",
+      "name": "Janus",
+      "color": "#a6a29a"
+    },
+    {
+      "id": "epimetheus",
+      "name": "Epimetheus",
+      "color": "#a6a29a"
+    },
+    {
+      "id": "hyperion",
+      "name": "Hyperion",
+      "color": "#a6a29a"
+    },
+    {
       "id": "ida",
       "name": "Ida",
       "color": "#a49c8d"
@@ -290,8 +325,8 @@
         "markerFullDiscPixels": 4.5
       },
       "orbitLineFade": {
-        "visibleBelowDiscHeightShare": 0.01,
-        "hiddenAboveDiscHeightShare": 0.03
+        "visibleBelowDiscHeightShare": 0.12,
+        "hiddenAboveDiscHeightShare": 0.3
       },
       "drag": {
         "model": "screen-axis-tumble"

@@ -47,7 +47,11 @@
       "cx": 0.5,
       "cy": 0.5,
       "rx": 0.48,
-      "ry": 0.43
+      "ry": 0.43,
+      "shading": {
+        "ambient": 0.35,
+        "diffuse": 0.65
+      }
     },
     {
       "type": "png"
