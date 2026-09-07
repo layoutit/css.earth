@@ -64,3 +64,25 @@ test('PDS rejects truncated data and unsupported raster encoding', () => {
   invalid.write('SAMPLE_BITS = 4', invalid.indexOf('SAMPLE_BITS = 8'));
   assert.throws(() => decodePdsByteImage(invalid), /Unsupported/);
 });
+
+test('uncompressed simple cylindrical data preserves interior black shadows under an edge-fill policy', async () => {
+  const directory=await mkdtemp(join(tmpdir(),'pds-edge-'));
+  try {
+    const bytes=tile(-.5,100);
+    // Same fixed-size header, but without a declared missing value.
+    let header=bytes.subarray(0,8*180).toString('ascii').replace('EQUIRECTANGULAR','"SIMPLE CYLINDRICAL"').replace('MISSING_CONSTANT = 0','COMMENT = no mask');
+    bytes.fill(0,0,8*180);bytes.write(header);
+    bytes[8*180]=0; bytes[8*180+180]=0; // Connected northern gap.
+    bytes[8*180+90*180+30]=0; // Isolated genuine crater shadow.
+    await writeFile(join(directory,'map.IMG'),bytes);
+    const entry={id:'map',path:'map.IMG',width:180,height:180,projection:{referenceRadiusMeters:1000}};
+    const {rgb,missing}=await preparePdsByteMosaic(directory,[entry],360,180,{noData:0,connectedEdge:'north'});
+    assert.equal(missing[180],1);
+    assert.equal(missing[360+180],1);
+    const crater=90*360+180+30;
+    assert.equal(missing[crater],0);
+    assert.equal(rgb[crater*3],0);
+    assert.equal(missing[crater+1],0);
+    assert.equal(rgb[(crater+1)*3],100);
+  } finally {await rm(directory,{recursive:true,force:true});}
+});

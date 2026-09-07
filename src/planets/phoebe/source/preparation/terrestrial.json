@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "phoebe",
+  "displayName": "Phoebe",
+  "publicBase": "/scenes/phoebe/",
+  "distanceAu": 9.58,
+  "raster": {
+    "width": 2880,
+    "height": 1440,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "surfaceQuality": 95,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "pds3-byte-monochrome",
+          "noData": 0,
+          "connectedEdge": "north"
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "scientific-surfaces",
+        "path": "shape/phoebe_ver128q.tab",
+        "format": "pds-vertex-facet",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 99846,
+          "expectedFaces": 196608
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -106.8
+        },
+        "minimum": -12,
+        "maximum": 12,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 106800,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.45
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        }
+      }
+    ],
+    "observedColors": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 106.5,
+    "camera": {
+      "initialScenePitchDegrees": 25,
+      "defaultControlYawDegrees": 45
+    },
+    "mapUrl": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
+    "polesUrl": "/scenes/phoebe/phoebe-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/phoebe_ver128q.tab",
+      "format": "pds-vertex-facet",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 99846,
+        "expectedFaces": 196608
+      },
+      "latitudeSegments": 20,
+      "longitudeSegments": 32,
+      "faceBudget": 2000,
+      "tileSize": 128,
+      "atlasColumns": 16
+    }
+  },
+  "celestial": {
+    "sunSource": "Vendored JPL Horizons Saturn satellite elements and the Gaskell model’s documented body-fixed orientation at the shared epoch."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      155,
+      151,
+      146
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

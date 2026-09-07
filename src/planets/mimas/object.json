@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "b395fd7d82b4961c5f11dcae91b4395c280f723eb6bfd2847fac032f97e67d22"
+          "sha256": "05e0f10925f40c390c6c7115a2482adad9c5e3e099e445dd053c2686377ba400"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5dac3bbaad34bc019307266f9e7b9e533d67ab7783ab84c75dff475c01fa1dbd"
+          "sha256": "b90f05df6ded8994e3ceeb23d407513ce42eb6c2146b475752d74cc5dad7011f"
         },
         {
           "id": "title",
@@ -38,16 +38,16 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "dd41280c21b2c8688f728fd681c9baa2093dd196d9b69a94be5bb848690a61cf"
+          "sha256": "bb7009cf802c23e1e7e30d5dd435a464c003628c626d663603c4a667c3908452"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "fc76405a3495ac49c24417367b6d99fe2d8e988d222c9e5a8b78e3ef78f4295d"
+          "sha256": "a6e562df87b0871c967523ecba84e657f0975b6d7d79028dbd1b86bd2fa608f0"
         }
       ],
       "shape": {
-        "kind": "sphere",
+        "kind": "radial-terrain",
         "radiusKm": 198.8
       },
       "surfaces": [
@@ -113,6 +113,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1da4d11533fed4be23909ae933d8e597009e050ed444d1cb4785fb72376370b1"
+    "sha256": "b8f53e372a6c574477a5c9bf8747d89dc00de8a8b23b13cdef9d4300131d8681"
   }
 }
