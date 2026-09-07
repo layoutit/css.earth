@@ -9,36 +9,29 @@
       0
     ],
     "localToReferenceXyzw": [
-      0.03513113833981278,
-      0.027299641271711732,
-      0.7888379488084487,
-      -0.6129887627233179
+      0.026512876830526073,
+      -0.20138529322564358,
+      0.9707764298832948,
+      0.12780514159311135
     ],
     "metersPerUnit": 149597870700,
     "boundsUnits": {
       "min": [
-        -210,
-        -111,
-        -111
+        -188.25000000000003,
+        -111.0000000000001,
+        -175.59954702827685
       ],
       "max": [
-        120,
-        111,
-        111
+        192.25763964014533,
+        120.0,
+        182.0
       ]
     }
   },
   "shape": {
-    "kind": "asymmetric-radial-shell",
-    "radiusUnits": 120,
-    "latitudeSegments": 16,
-    "longitudeSegments": 32,
-    "tailExponent": 2,
-    "tailExtension": 0.75,
-    "transverseScale": 0.92,
-    "transverseContraction": 0.22,
-    "lobeAmplitude": 0.38,
-    "lobeSharpness": 4
+    "kind": "gridded-surface",
+    "path": "ibex/heliopause-grid.json",
+    "sha256": "37744651c502570fd0bb80a122c6430abf3d743a3b72f131fd023e4900613f0e"
   },
   "material": {
     "colorLinear": [
@@ -87,6 +80,6 @@
   "unitScale": 50,
   "provenance": {
     "path": "provenance.json",
-    "sha256": "7f99f40637811d00603ff45b3d6077bd9c6f8f5c62120f07beef3ff717bc4441"
+    "sha256": "436711eb8aaaecd92a531ce84ac48577345ac84d34054c7c1bbce938a0887144"
   }
 }

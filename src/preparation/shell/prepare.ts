@@ -1,4 +1,4 @@
-/** Self-contained preparation entry point for analytic transparent surface objects. */
+/** Self-contained preparation entry point for pinned transparent surface objects. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';

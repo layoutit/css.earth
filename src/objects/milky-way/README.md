@@ -69,7 +69,7 @@ recorded in `source/acquisition.json`; the exact Node/Zstd versions are in
 `source/provenance.json`. The import rejects any raw or derivative mismatch.
 Normal preparation uses the checked derivative without downloading.
 
-The working CSS/Galaxio display convention integrates a common physical path
+The working CSS display convention integrates a common physical path
 metric on every axis. The display gain is calibrated to 16 after slab
 integration: three stops below the previous 128 baseline, which was too bright
 with the OpenSpace emission model. These are renderer approximation choices, separate from OpenSpace's authored

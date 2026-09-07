@@ -37,6 +37,8 @@ jobs:
           pnpm typecheck:preparation
       - name: Test prepared source, materials and world context
         run: pnpm test:preparation --universe
+      - name: Test shared scientific source credits
+        run: node --test site/test/scene-sources.test.mjs
       - name: Test shared environment rendering and camera
         run: >-
           pnpm test:renderer

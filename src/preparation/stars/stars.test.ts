@@ -98,7 +98,7 @@ test('prepared point-field closes every source and image digest and samples the 
   const data = await payload();
   await verifiedBytes(objectDirectory,{path:descriptor.prepared.url,sha256:descriptor.prepared.sha256});
   for (const reference of [recipe.catalogue,recipe.provenance,recipe.license,...(recipe.diffuseSky?.faces??[])]) await verifiedBytes(sourceDirectory,reference);
-  assert.equal(data.resources.length,7); assert.equal(data.diffuseSky?.length,6);
+  assert.deepEqual(data.resources.map(resource=>resource.path),['point-atlas.png']); assert.equal(data.diffuseSky,undefined);
   for (const resource of data.resources) {
     const bytes = await verifiedBytes(preparedDirectory,resource); assert.equal(bytes.length,resource.bytes);
     const metadata = await sharp(bytes).metadata(); assert.equal(metadata.width,resource.width); assert.equal(metadata.height,resource.height);

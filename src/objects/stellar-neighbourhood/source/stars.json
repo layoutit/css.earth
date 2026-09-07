@@ -8,7 +8,7 @@
   },
   "provenance": {
     "path": "provenance.json",
-    "sha256": "4803929520d1fbe1c1b834102b77cae70939831e9728f4f1ce5993fa59ac408e"
+    "sha256": "cbd87b268133305c051395b7a8b5a22da68f1100269923983cb989c465b13e28"
   },
   "license": {
     "path": "LICENSE.CC-BY-SA-4.0.md",
@@ -55,41 +55,5 @@
     "gapPx": 7,
     "maxAlpha": 0.55,
     "fadeMs": 300
-  },
-  "diffuseSky": {
-    "faces": [
-      {
-        "id": "front",
-        "path": "sky/front.webp",
-        "sha256": "4694fe3878fc9781ee87866a1f4848befcd91b43bb7f85d13cb542ce8a5457c5"
-      },
-      {
-        "id": "right",
-        "path": "sky/right.webp",
-        "sha256": "213d9fdbd6a835e6d1e3a2f162691674b36ea1f59234941afc021770455a3eb3"
-      },
-      {
-        "id": "back",
-        "path": "sky/back.webp",
-        "sha256": "1f850dc6daca82790f20345f652746e5464b38d04ea0d7b1a3a6644e4d756b77"
-      },
-      {
-        "id": "left",
-        "path": "sky/left.webp",
-        "sha256": "cbdbd655c85daf987b025fe1136a86113e81a148bc29ec6688f77714ca04ad47"
-      },
-      {
-        "id": "top",
-        "path": "sky/top.webp",
-        "sha256": "663f66e2bab44098d34617a204533df743e7c44cd39c23a48ee6fc227ddf71a8"
-      },
-      {
-        "id": "bottom",
-        "path": "sky/bottom.webp",
-        "sha256": "d0e08cc4cefc2e59cb44016887b6868a6d89065525ed9792e204a94549642667"
-      }
-    ],
-    "width": 512,
-    "blurSigmaPixels": 8
   }
 }
