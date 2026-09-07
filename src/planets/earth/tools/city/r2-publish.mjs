@@ -48,6 +48,7 @@ export async function publishPreparedCityAssets({ source, cors, assetUrls, stagi
   }
 
   const credentials = r2S3Credentials();
+  let transfer = {};
   if (!verifyOnly && !dryRun && credentials) {
     const environment = { ...process.env,
       RCLONE_CONFIG_CSSEARTH_TYPE: "s3",
@@ -65,17 +66,19 @@ export async function publishPreparedCityAssets({ source, cors, assetUrls, stagi
   } else if (!verifyOnly && !dryRun) {
     const directory = await mkdtemp(resolve(root, ".local/earth-city-r2-"));
     try {
-      for (const type of ["image/webp", "application/json"]) {
-        const group = assets.filter((asset) => asset.type === type);
-        for (let offset = 0; offset < group.length; offset += batchSize) {
-          const batch = group.slice(offset, offset + batchSize);
-          const manifest = resolve(directory, `batch-${type.replace("/", "-")}-${offset}.json`);
+      let batchId = 0;
+      transfer = await publishCityRestBatches(assets, {
+        batchSize: Math.min(batchSize, 64),
+        onProgress: progress => console.log(JSON.stringify(progress)),
+        upload: async batch => {
+          const type = batch[0].type;
+          const manifest = resolve(directory, `batch-${batchId++}.json`);
           await writeFile(manifest, `${JSON.stringify(batch.map(({ key, file }) => ({ key, file })))}\n`);
           await run("npx", ["--yes", `wrangler@${CITY_R2_WRANGLER_VERSION}`, "r2", "bulk", "put", bucket,
             "--filename", manifest, "--concurrency", String(concurrency), "--remote", "--force",
             "--content-type", type, "--cache-control", CITY_R2_CACHE_CONTROL], root);
-        }
-      }
+        },
+      });
     } finally {
       await rm(directory, { recursive: true, force: true });
     }
@@ -88,7 +91,64 @@ export async function publishPreparedCityAssets({ source, cors, assetUrls, stagi
     objects: assets.length, bytes: assets.reduce((sum, asset) => sum + asset.bytes, 0),
     webp: summarize(assets.filter(({ type }) => type === "image/webp")),
     json: summarize(assets.filter(({ type }) => type === "application/json")),
-    cacheControl: CITY_R2_CACHE_CONTROL };
+    cacheControl: CITY_R2_CACHE_CONTROL, ...transfer };
+}
+
+// Public HEAD requests discover resumable objects without spending management
+// API requests. Full-byte verification still belongs to the release publisher.
+// Pace REST writes below the shared 1,200 requests / five minute API allowance.
+export async function publishCityRestBatches(assets, { upload, fetcher = fetch, batchSize = 64,
+  now = Date.now, wait = ms => new Promise(resolveWait => setTimeout(resolveWait, ms)), onProgress = () => {} } = {}) {
+  if (typeof upload !== 'function' || !Number.isInteger(batchSize) || batchSize < 1 || batchSize > 64) {
+    throw new Error('REST publication requires an upload adapter and batches of at most 64.');
+  }
+  const missing = async candidates => {
+    let cursor = 0, failure;
+    const absent = new Set();
+    await Promise.all(Array.from({ length: Math.min(4, candidates.length) }, async () => {
+      while (!failure && cursor < candidates.length) {
+        const asset = candidates[cursor++];
+        try {
+          const response = await fetcher(asset.url, { method: 'HEAD', signal: AbortSignal.timeout(30000) });
+          await response.body?.cancel();
+          if (response.status === 404) absent.add(asset);
+          else if (!response.ok || Number(response.headers.get('content-length')) !== asset.bytes) {
+            throw new Error(`Cannot reuse immutable city asset ${asset.filename} (HTTP ${response.status}).`);
+          }
+        } catch (error) { failure ??= error; }
+      }
+    }));
+    if (failure) throw failure;
+    return candidates.filter(asset => absent.has(asset));
+  };
+  const pending = await missing(assets), reused = assets.length - pending.length;
+  onProgress({ phase: 'reconciled', objects: assets.length, reused, remaining: pending.length });
+  let nextStart = 0, uploaded = 0;
+  for (const type of new Set(pending.map(asset => asset.type))) {
+    const group = pending.filter(asset => asset.type === type);
+    for (let offset = 0; offset < group.length; offset += batchSize) {
+      const batch = group.slice(offset, offset + batchSize);
+      for (let attempt = 0; ; attempt++) {
+        while (now() < nextStart) await wait(Math.min(30000, nextStart - now()));
+        const remaining = attempt ? await missing(batch) : batch;
+        if (!remaining.length) break;
+        // Three writes/second leaves allowance for Wrangler and other account
+        // activity. A retry charges its entire attempted batch conservatively.
+        nextStart = now() + Math.ceil(remaining.length * 1000 / 3);
+        try { await upload(remaining); break; }
+        catch (error) {
+          if (!error.rateLimited || attempt >= 2) throw error;
+          // Wrangler does not expose Retry-After here. Cloudflare documents a
+          // five-minute cooldown; keep the same identity and reconcile afterward.
+          nextStart = Math.max(nextStart, now() + 300000);
+          onProgress({ phase: 'rate-limited', resumeAt: nextStart, remaining: remaining.length });
+        }
+      }
+      uploaded += batch.length;
+      onProgress({ phase: 'uploaded', objects: assets.length, uploaded, reused });
+    }
+  }
+  return { uploaded, reused };
 }
 
 function r2S3Credentials() {
@@ -143,9 +203,17 @@ async function publishedAssetMatches(asset, origin) {
 
 async function run(command, arguments_, root, environment = process.env) {
   await new Promise((accept, reject) => {
-    const child = spawn(command, arguments_, { cwd: root, stdio: "inherit", env: environment });
+    const child = spawn(command, arguments_, { cwd: root, stdio: ['inherit', 'pipe', 'pipe'], env: environment });
+    let recent = '', rateLimited = false;
+    const forward = destination => chunk => {
+      destination.write(chunk);
+      recent = (recent + chunk.toString()).slice(-8192);
+      rateLimited ||= /\b429:\s*Too Many Requests\b|\bHTTP 429\b/u.test(recent);
+    };
+    child.stdout.on('data', forward(process.stdout));
+    child.stderr.on('data', forward(process.stderr));
     child.once("error", reject);
-    child.once("exit", (code, signal) => code === 0 ? accept() :
-      reject(new Error(`${command} exited ${signal ?? code}.`)));
+    child.once("close", (code, signal) => code === 0 ? accept() :
+      reject(Object.assign(new Error(`${command} exited ${signal ?? code}.`), { rateLimited })));
   });
 }

@@ -148,34 +148,39 @@ view. Final comparisons stay within measured A/A variation; zero-tolerance failu
 and raw differences are preserved. This is calibrated screenshot agreement, not
 universal pixel parity. Existing PolyCSS seam bleed remains unchanged.
 
-The normal release does not yet include this backing. Global preparation,
-and the complete built entity/lens/history journey
-remain required before enabling it.
+The normal release does not yet include this backing. Public delivery,
+integration, and the complete built entity/lens/history journey remain required
+before enabling it.
 
-Continuous fixture runs cover regular and antimeridian regions,
+Continuous fixture runs with the complete global release cover regular and antimeridian regions,
 the northern cap boundary, and interiors at 80 degrees north and south, each at
 DPR 1 and 2. Each run uses two uninterrupted globe/city/drag/reversal cycles,
 delays one metadata request by 2.5 seconds, and injects one imagery HTTP 503.
-All ten retries recover, obsolete page requests cancel, and 3,140 recorded
+All ten retries recover, obsolete page requests cancel, and 3,171 recorded
 samples retain the same scene nodes and original resource limits. The largest
-sampled cut displays 226 pieces; simultaneous image reservations peak at
-60,003,492 bytes and metadata at 12,582,637 bytes. Complete requested groups
+sampled cut displays 231 pieces; simultaneous page reservations peak at
+59,970,468 bytes, shared image ownership at 93,872,148 bytes, and metadata at
+12,582,811 bytes. Complete requested groups
 are not withheld in any sample. These are 200 ms observations, not proof of zero
 transient publication latency or a performance measurement.
 
-In the eight runs with visible source detail, 12–45 nonempty pages publish while
+In the eight runs with visible source detail, 12–40 nonempty pages publish while
 the delayed directory remains pending. Northern interior backing remains visible
 through expensive fine cuts, with fine imagery appearing near maximum zoom.
 Both southern interior runs instead carry prepared empty-source records and
 retain the base map; they cancel the delayed directory when it becomes obsolete.
 That is source-empty behavior, not proof of useful fine imagery in Antarctica.
-The fixture's base-only cold/warm transition observations last approximately one
-sample in the other regions. Additional real pointer crossings of the provider's
+Cold base-only intervals reach 801 ms; some warm transitions last about 200 ms.
+Additional real pointer crossings of the provider's
 85.0511287798066-degree boundary pass in both hemispheres at DPR 1/2. Eight
 initial/settled checkpoints preserve the fine selection and actual published
-fine keys. Northern views can still include covered pixels below that latitude;
-the southern fixture remains source-empty. Global release and the complete built
-entity/lens/history journey still need qualification.
+fine keys. Together with the five other boundary cases at both DPRs, all 28
+global initial/settled checkpoints preserve the exact baseline fine keys and
+match actual published fine detail. Northern views can still include covered
+pixels below that latitude; the southern fixture remains source-empty. These
+controlled local fixtures establish representative loading behavior with the
+global release, not public delivery, worldwide valid pixels, or the complete
+built entity/lens/history journey.
 
 ### Reproducible global coarse preparation
 
@@ -230,13 +235,24 @@ then integrate its verified manifest:
 
 ```sh
 pnpm publish:earth-coarse <prepared-release-directory> --dry-run
-pnpm publish:earth-coarse <prepared-release-directory>
+pnpm publish:earth-coarse <prepared-release-directory> --concurrency=8
 pnpm integrate:earth-coarse <prepared-release-directory>
 ```
 
-`--verify-only` can finish verification after an interrupted upload. Integration
+Publication accepts one to eight transfers, with two by default. The existing
+REST uploader checks public object lengths to resume without reuploading files
+already present. It uses batches of at most 64 and budgets three writes per
+second, leaving headroom under the shared management API limit. A rate-limited
+batch waits five minutes, rechecks partial success, and retries at most twice.
+Other failures remain explicit. See [Cloudflare's API limits](https://developers.cloudflare.com/fundamentals/api/reference/limits/).
+
+Publication verifies
+delivery headers and every public file's complete SHA-256 through the shared
+dataset-release verifier before writing its receipt. `--verify-only` can finish
+verification after an interrupted upload. Integration
 requires the public delivery receipt, exact fine root closure and geometry
-version. Regenerating the same fine release preserves its backing; changing that
+version, and refreshes the prepared Earth presentation for the next build.
+Regenerating the same fine release preserves its backing; changing that
 release requires new backing certificates. The existing image owner, metadata
 queue, retained slots and runtime budgets remain shared. Publishing data does
 not deploy the site or qualify the complete browser journey.
