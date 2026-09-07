@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-sky-provenance@1",
-  "title": "NASA Deep Star Maps 2020 \u2014 Milky Way-only celestial map",
+  "title": "NASA Deep Star Maps 2020 — Milky Way-only celestial map",
   "sourcePage": "https://svs.gsfc.nasa.gov/4851/",
   "source": {
     "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_8k.exr",
@@ -32,7 +32,13 @@
       "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k_print.jpg",
       "sha256": "1ebe95804f5f0e6e23f77488aaa33fdb4aaef3fd336821fb41b261ddeaee2df0"
     },
-    "measurement": "Before the separate display gain, exposure4.5 matches NASA preview meanRGB within0.001 withRGB RMSE0.01387 at1024x512. The final bake multiplies all sRGB channels by0.25 before quantization to lower interior glare without changing source white balance. This is display calibration, not photometry.",
-    "displayGain": 0.25
+    "measurement": "Before display attenuation, exposure 4.5 matches NASA preview mean RGB within 0.001 with RGB RMSE 0.01387 at 1024x512. Final display gain 0.12 dims bright and faint background regions alike. An additional smooth shadow floor suppresses faint texture grain: zero below display luminance 0.04, full contribution above 0.12. This suppresses faint image detail intentionally; source HDR pixels and white balance remain unchanged. Display calibration, not photometry.",
+    "displayGain": 0.12,
+    "shadowFloor": {
+      "blackPoint": 0.04,
+      "fullSignal": 0.12,
+      "space": "post-transfer display RGB luminance",
+      "curve": "one smoothstep factor multiplies all three RGB channels before quantization; opaque alpha unchanged"
+    }
   }
 }

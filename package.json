@@ -44,6 +44,7 @@
     "test:browser:conformance": "node site/test/planet-browser-conformance.mjs",
     "test:browser:view-url": "node site/test/view-url-browser.mjs",
     "test:browser:universe": "node site/test/universe-environments-browser.mjs",
+    "test:browser:universe-labels": "node site/test/universe-labels-browser.mjs",
     "test:browser:mercury-rotation": "node tests/objects/browser/mercury/rotation-limits-browser.mjs",
     "benchmark:payloads": "node tools/measure-object-payloads.mjs",
     "oracle:venus": "node tests/objects/oracle/venus/run.mjs",

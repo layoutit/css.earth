@@ -28,12 +28,25 @@ test('occlusion removes only rays crossing the focused sphere before their endpo
   assert.equal(rayHitsSphereBefore([0, 0, -20], [0, 0, -10], 2), true);
   assert.equal(rayHitsSphereBefore([0, 0, -5], [0, 0, -10], 2), false);
   assert.equal(rayHitsSphereBefore([20, 0, -20], [0, 0, -10], 2), false);
+  assert.equal(rayHitsSphereBefore([0, 0, -1e25], [0, 0, -1e7], 1e6), true, 'a nearby planet still occults a very distant source');
+  assert.equal(rayHitsSphereBefore([0, 0, -1e25], [2e6, 0, -1e7], 1e6), false);
   const pieces = splitVisible([-2, 0, 0], [2, 0, 0], ([x]) => Math.abs(x) < 1);
   assert.equal(pieces.length, 2);
   assert.ok(Math.abs(pieces[0][1][0] + 1) < 1e-6);
   assert.ok(Math.abs(pieces[1][0][0] - 1) < 1e-6);
   assert.deepEqual(clipSegmentToRectangle([-20, 0], [20, 0], 10, 5), [0.25, 0.75]);
   assert.equal(clipSegmentToRectangle([-20, 6], [20, 6], 10, 5), null);
+});
+
+test('a planet offset from the Sun cannot falsely occult it while a kiloparsec observer rotates', () => {
+  const distance = 3.085677581491367e19, separation = 3e12, radius = 2.5e7;
+  for (let degrees = 1; degrees < 360; degrees++) {
+    const angle = degrees * Math.PI / 180;
+    if (Math.abs(Math.cos(angle)) < .01) continue;
+    assert.equal(rayHitsSphereBefore([0, 0, -distance], [separation * Math.cos(angle), 0, -distance + separation * Math.sin(angle)], radius), false, `${degrees} degrees`);
+  }
+  assert.equal(rayHitsSphereBefore([0, 0, -distance], [0, 0, -distance + separation], radius), true);
+  assert.equal(rayHitsSphereBefore([0, 0, -distance], [0, 0, -distance - separation], radius), false);
 });
 
 test('prepared trails retain a solid tail, linear fade and undrawn remainder', () => {

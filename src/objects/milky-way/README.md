@@ -98,7 +98,7 @@ additive HDR raymarching, stochastic sampling or camera-dependent fade.
 The renderer transports the prepared images and geometry; stars use the
 application's independently prepared star catalog.
 
-The shared display attenuates the completed volume image to 0.2 over opaque
+The shared display attenuates the completed volume image to 0.094 over opaque
 black through 1 kpc from the common focus, then ramps smoothly in logarithmic
 distance to full brightness at 25 kpc. This provisional display attenuation
 is independent of camera angle and of the NASA-to-volume crossfade. It is
@@ -121,17 +121,20 @@ original 130.95 MiB EXR stays in the acquisition cache. Source acquisition,
 original and decoded SHA256, exact Node/Zstd versions, NASA/Gaia credits and
 usage notice live together under `source/sky/`.
 
-Six opaque 1536 × 1536 WebP faces add **1.47 MiB download and 54 MiB decoded**.
-The complete volume + sky bank is therefore **15.73 MiB download and
+Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**.
+The complete volume + sky bank is therefore **14.57 MiB download and
 185.05 MiB decoded**, across 550 unique images. Sky faces use quality 90. Original source
 chunks are offline inputs and are never sent to the browser.
 
 The offline baker samples linear RGB before applying a fixed exposure of 4.5
 and the standard sRGB display curve. Before final attenuation, the transfer at
 1024 × 512 matches NASA's preview mean RGB within 0.001 and has RGB RMSE
-0.01387 on the [0,1] scale. A final uniform display gain of 0.25 darkens all
+0.01387 on the [0,1] scale. A final uniform display gain of 0.12 darkens all
 three sRGB channels before quantization without changing source white balance.
-Source HDR pixels stay unchanged. This is a display fit, not calibrated photometry.
+A shared smooth shadow factor suppresses faint image grain: zero below
+transferred display luminance 0.04 and full contribution above 0.12. This
+intentionally removes faint background detail while retaining the separately
+rendered catalogue stars. Alpha stays opaque and source HDR pixels stay unchanged. This is a display fit, not calibrated photometry.
 The NASA Milky Way-only image omits bright Hipparcos/Tycho stars, so the
 application's separately prepared bright stars and labels coexist with it.
 Faint Gaia stars remain in the image; it is not literally star-free.

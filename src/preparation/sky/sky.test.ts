@@ -82,13 +82,47 @@ test('optional sky gain preserves legacy bytes and attenuates transferred RGB be
     for (let pixel = 0; pixel < 4; pixel++) assert.deepEqual([...attenuated.subarray(pixel * 4, pixel * 4 + 4)], [68, 94, 128, 255]);
   }
 });
-test('sky recipe display gain defaults to identity and rejects nonfinite or out-of-range values', async () => {
+test('offline sky shadow suppression removes black noise, rolls soft signal, and preserves color ratios and opaque alpha', () => {
+  const bake = { faceSize: 1, exposure: 1, transfer: 'linear-to-srgb' as const, displayGain: 1, webpQuality: 100 };
+  const shadowFloor = { blackPoint: .04, fullSignal: .12 };
+  const source = (halfBits: number[]) => {
+    const rgb16f = Buffer.alloc(4 * 2 * 6);
+    for (let pixel = 0; pixel < 8; pixel++) for (let channel = 0; channel < 3; channel++)
+      rgb16f.writeUInt16LE(halfBits[channel]!, pixel * 6 + channel * 2);
+    return { width: 4, height: 2, rgb16f };
+  };
+  const face = SKY_BASES[0]!;
+  const belowBlack = skyFacePixels(source([0x1a57, 0x1a57, 0x1a57]), face, { ...bake, shadowFloor });
+  assert.deepEqual([...belowBlack], [0, 0, 0, 255]);
+  const soft = skyFacePixels(source([0x1f5e, 0x1f5e, 0x1f5e]), face, { ...bake, shadowFloor });
+  assert.equal(soft[0], soft[1]); assert.equal(soft[1], soft[2]); assert(soft[0]! > 0 && soft[0]! < displayByte(halfToFloat(0x1f5e), 1));
+  const brightSource = source([0x22de, 0x22de, 0x22de]);
+  assert.deepEqual(skyFacePixels(brightSource, face, { ...bake, shadowFloor }), skyFacePixels(brightSource, face, bake));
+
+  const colorSource = source([0x1a57, 0x1f5e, 0x22de]);
+  const omitted = skyFacePixels(colorSource, face, bake);
+  assert.deepEqual([...omitted], [displayByte(halfToFloat(0x1a57), 1), displayByte(halfToFloat(0x1f5e), 1),
+    displayByte(halfToFloat(0x22de), 1), 255], 'omitting shadowFloor must retain the legacy raster path');
+  const colored = skyFacePixels(colorSource, face, { ...bake, shadowFloor });
+  assert.equal(colored[3], 255);
+  assert(Math.abs(colored[0]! / colored[1]! - omitted[0]! / omitted[1]!) < .08);
+  assert(Math.abs(colored[1]! / colored[2]! - omitted[1]! / omitted[2]!) < .08);
+});
+test('sky recipe display controls default safely and reject malformed values', async () => {
   const raw = JSON.parse(await readFile('src/objects/milky-way/source/sky/recipe.json', 'utf8'));
-  const { displayGain: _gain, ...bake } = raw.bake;
-  assert.equal(parseSkyRecipe({ ...raw, bake }).bake.displayGain, 1);
+  const { displayGain: _gain, shadowFloor: _floor, ...bake } = raw.bake;
+  const omitted = parseSkyRecipe({ ...raw, bake });
+  assert.equal(omitted.bake.displayGain, 1);
+  assert.equal('shadowFloor' in omitted.bake, false);
   for (const displayGain of [.01, .5, 1]) assert.equal(parseSkyRecipe({ ...raw, bake: { ...bake, displayGain } }).bake.displayGain, displayGain);
   for (const displayGain of [0, -.01, 1.001, NaN, Infinity, -Infinity, null, '0.5'])
     assert.throws(() => parseSkyRecipe({ ...raw, bake: { ...bake, displayGain } }), /sky display gain/i);
+  for (const shadowFloor of [{}, null, [.04, .12], { blackPoint: -.01, fullSignal: .12 }, { blackPoint: .04, fullSignal: .04 },
+    { blackPoint: .12, fullSignal: .04 }, { blackPoint: .04, fullSignal: 1.01 }, { blackPoint: NaN, fullSignal: .12 },
+    { blackPoint: .04, fullSignal: '0.12' }])
+    assert.throws(() => parseSkyRecipe({ ...raw, bake: { ...bake, shadowFloor } }), /sky shadow/i);
+  assert.deepEqual(parseSkyRecipe({ ...raw, bake: { ...bake, shadowFloor: { blackPoint: .04, fullSignal: .12 } } }).bake.shadowFloor,
+    { blackPoint: .04, fullSignal: .12 });
 });
 test('actual pinned NASA HALF source is unchanged and unsupported/missing recipes fail', async () => {
   const root = 'src/objects/milky-way/source/sky', raw: unknown = JSON.parse(await readFile(`${root}/recipe.json`, 'utf8')), recipe = parseSkyRecipe(raw);

@@ -41,18 +41,30 @@ export function sampleLinearSky(source: LinearHalfImage, u: number, v: number, o
     out[c] = (a + ax * (b - a)) * (1 - ay) + (d + ax * (e - d)) * ay;
   }
 }
-export function displayByte(linear: number, exposure: number, displayGain = 1): number {
+function transferredDisplay(linear: number, exposure: number): number {
   const c = Math.max(0, Math.min(1, linear * exposure));
+  return c === 1 ? 1 : c <= 0.0031308 ? c * 12.92 : 1.055 * c ** (1 / 2.4) - 0.055;
+}
+export function displayByte(linear: number, exposure: number, displayGain = 1): number {
   // Display attenuation follows the original transfer, equally in each RGB channel.
-  const srgb = c === 1 ? 1 : c <= 0.0031308 ? c * 12.92 : 1.055 * c ** (1 / 2.4) - 0.055;
-  return Math.round(255 * displayGain * srgb);
+  return Math.round(255 * displayGain * transferredDisplay(linear, exposure));
 }
 export function skyFacePixels(source: LinearHalfImage, basis: SkyBasis, bake: SkyRecipe['bake']): Buffer {
-  const size = bake.faceSize, rgba = Buffer.alloc(size * size * 4, 255), rgb: Vector3 = [0, 0, 0];
+  const size = bake.faceSize, rgba = Buffer.alloc(size * size * 4, 255), rgb: Vector3 = [0, 0, 0], displayRgb: Vector3 = [0, 0, 0];
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     const ray = skyRay(basis, 2 * (x + 0.5) / size - 1, 1 - 2 * (y + 0.5) / size), [u, v] = skyUv(ray);
     sampleLinearSky(source, u, v, rgb);
-    for (let c = 0; c < 3; c++) rgba[(y * size + x) * 4 + c] = displayByte(rgb[c]!, bake.exposure, bake.displayGain);
+    if (!bake.shadowFloor) {
+      for (let c = 0; c < 3; c++) rgba[(y * size + x) * 4 + c] = displayByte(rgb[c]!, bake.exposure, bake.displayGain);
+      continue;
+    }
+    for (let c = 0; c < 3; c++) displayRgb[c] = transferredDisplay(rgb[c]!, bake.exposure);
+    // This is ordinary transferred display RGB luminance, not radiometric luminance.
+    const luminance = displayRgb[0] * .2126 + displayRgb[1] * .7152 + displayRgb[2] * .0722;
+    const t = Math.max(0, Math.min(1, (luminance - bake.shadowFloor.blackPoint) /
+      (bake.shadowFloor.fullSignal - bake.shadowFloor.blackPoint)));
+    const commonGain = (bake.displayGain ?? 1) * t * t * (3 - 2 * t);
+    for (let c = 0; c < 3; c++) rgba[(y * size + x) * 4 + c] = Math.round(255 * commonGain * displayRgb[c]!);
   }
   return rgba;
 }
