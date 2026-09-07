@@ -33,7 +33,7 @@ export function parseTerrestrialProfile(value) {
       !Number.isSafeInteger(value.raster.bandCount) || value.raster.bandCount <= 0 ||
       !Number.isSafeInteger(value.raster.gutter) || value.raster.gutter < 0 ||
       !Number.isSafeInteger(value.raster.poleSize) || value.raster.poleSize <= 0 ||
-      !Array.isArray(value.raster.observations) || !value.raster.observations.length ||
+      !Array.isArray(value.raster.observations) || !(value.raster.observations.length || value.raster.mosaics?.length) ||
       !Number.isFinite(value.geometry?.radius) || value.geometry.radius <= 0 || !Number.isFinite(value.geometry.radiusKm) || value.geometry.radiusKm <= 0 ||
       !Number.isSafeInteger(value.lighting?.frameSize) || value.lighting.frameSize <= 0 ||
       !Number.isSafeInteger(value.lighting.frameCount) || value.lighting.frameCount < 2 ||
@@ -46,7 +46,7 @@ export function parseTerrestrialProfile(value) {
     throw new TypeError('Surface WebP quality must be an integer from 1 to 100.');
   }
   for (const lens of value.raster.scientific ?? []) {
-    const meshGrid = ['wavefront-obj-zip', 'pds-vertex-facet'].includes(lens.format);
+    const meshGrid = ['wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model'].includes(lens.format);
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
           !grid || (!meshGrid && (!Number.isSafeInteger(grid.width) || grid.width <= 0 || !Number.isSafeInteger(grid.height) || grid.height <= 0)) ||
@@ -57,7 +57,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj-zip', 'pds-vertex-facet'].includes(lens.format) || !lens.grid ||
+    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model'].includes(lens.format) || !lens.grid ||
         (!meshGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
@@ -120,7 +120,7 @@ export function parseTerrestrialProfile(value) {
     observationIds.add(observation.id);
   }
   for (const mosaic of value.raster.mosaics ?? []) {
-    if (!['pds3-byte-equirectangular', 'controlled-orthographic'].includes(mosaic.format) || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
+    if (!['pds3-byte-equirectangular', 'controlled-orthographic', 'controlled-shape-camera'].includes(mosaic.format) || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
         observationIds.has(mosaic.id) || !/^[a-z][a-z0-9-]*$/.test(mosaic.consumer)) {
       throw new TypeError('Invalid PDS byte mosaic identity or format.');
     }
@@ -165,8 +165,9 @@ export async function prepareTerrestrialCelestial({ sourceDirectory, publicDirec
   const frame = prepareEclipticPresentationFrame(config.namespace), sceneDirection = frame.sunDirection;
   const presentation = { ...DIRECTIONAL_SUN_PRESENTATION_STANDARD,
     source: config.celestial.sunSource, sourcePath: 'src/platform/solar-geometry.mjs',
-    qualification: `Observed ${config.displayName} Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL}, ` +
-      'expressed in the ecliptic presentation frame (north up, Sun left at zero yaw) and in view space at the default camera pose.',
+    qualification: `Computed ${config.displayName} Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL}, ` +
+      'expressed in the ecliptic presentation frame (north up, Sun left at zero yaw) and in view space at the default camera pose.' +
+      (config.celestial.qualification ? ` ${config.celestial.qualification}` : ''),
     bodyFixedDirection: requireBodyFixedSunDirection(config.namespace), presentationFrame: frame.model,
     localDirection: sceneDirection,
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: config.namespace, ...config.geometry.camera, sceneDirection }),
