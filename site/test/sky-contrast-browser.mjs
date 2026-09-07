@@ -59,8 +59,8 @@ function read(page) {
       scene: document.querySelector('.polycss-scene')?.getAttribute('style'),
       emphasis: Number(getComputedStyle(layer).opacity),
       glow: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
-      stars: [...layer.querySelectorAll('[data-star-slot]')].filter(element => getComputedStyle(element).visibility === 'visible')
-        .map(element => ({ style: element.getAttribute('style'), reference: element.dataset.starReference })),
+      stars: window.__cssEarthUniverse.inspect().stars.points.filter(({ element }) => getComputedStyle(element).visibility === 'visible')
+        .map(({ element, reference }) => ({ style: element.getAttribute('style'), reference })),
       labels: [...document.querySelectorAll('.prepared-star-label')].map(element => element.getAttribute('style')),
       bodies: [...document.querySelectorAll('[data-context-label], [data-object-navigate]')]
         .map(element => element.getAttribute('style')),

@@ -18,15 +18,15 @@ const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFa
 page.on('pageerror',error=>report.errors.push(error.message));
 try {
   await page.goto(report.url,{waitUntil:'domcontentloaded'});
-  await page.waitForFunction(()=>window.__sun?.ready && document.querySelectorAll('[data-volume-slice]').length===288,null,{timeout:30000});
+  await page.waitForFunction(()=>window.__sun?.ready && document.querySelectorAll('.css-volume-mesh > s').length===288,null,{timeout:30000});
   const motion=page.locator('input[name="motion"]');
   if(await motion.count() && await motion.isChecked())await motion.uncheck({force:true});
   // Resolve every actual CSS image before the first pixel measurement; no arbitrary asset-load delay.
   await page.evaluate(async()=>{
-    const urls=new Set([...document.querySelectorAll('[data-volume-slice]')].map(node=>getComputedStyle(node).backgroundImage.slice(5,-2)));
+    const urls=new Set([...document.querySelectorAll('.css-volume-mesh > s')].map(node=>getComputedStyle(node).backgroundImage.slice(5,-2)));
     await Promise.all([...urls].map(url=>new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve();image.onerror=()=>reject(new Error(`Missing volume image ${url}`));image.src=url;})));
   });
-  await page.evaluate(()=>{window.__cullingNodes=[...document.querySelectorAll('[data-volume-slice]')];});
+  await page.evaluate(()=>{window.__cullingNodes=[...document.querySelectorAll('.css-volume-mesh > s')];});
   await checkCase('saved-view',null,10);
   const s=Math.SQRT1_2;
   const poses=[
@@ -62,7 +62,7 @@ async function measure(name){
 async function checkCase(name,world,minimumRatio){
   const baseline=await measure(`${name}-fixed`);
   assert(baseline.energy>50000 && baseline.litPixels>1000,`${name}: prepared galaxy must contain substantial rendered light`);
-  const layers=await page.evaluate(()=>[...document.querySelectorAll('.css-volume-projection')].map(node=>({axis:node.dataset.volumeAxis,opacity:getComputedStyle(node).opacity,visibility:getComputedStyle(node).visibility})));
+  const layers=await page.evaluate(()=>[...document.querySelectorAll('.css-volume-projection')].map((node,projection)=>({projection,opacity:getComputedStyle(node).opacity,visibility:getComputedStyle(node).visibility})));
   await page.evaluate(()=>{for(const root of document.querySelectorAll('.css-volume-projection'))root.style.transformStyle='preserve-3d';});
   let mutant;
   try{mutant=await measure(`${name}-mutant`);}finally{await page.evaluate(()=>{for(const root of document.querySelectorAll('.css-volume-projection'))root.style.removeProperty('transform-style');});}
