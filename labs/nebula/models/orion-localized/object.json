@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "orion-localized",
+  "type": "density-volume",
+  "properties": {
+    "volume": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2451545,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "localToReferenceXyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 3170875839484227.5,
+      "boundsUnits": {
+        "min": [
+          -0.5,
+          -0.5,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/experiment.json",
+      "sha256": "7c84a585bedbe9e0e4a71688542eda382aa130aa9f012ea3cbfaeb8476b63a41"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-density-volume@1",
+    "url": "prepared/volume.json",
+    "sha256": "854de3e2057cec08c4f9250b6f0dd3727c873a12f214feec574949c8d50affab"
+  }
+}

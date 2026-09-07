@@ -1,0 +1,276 @@
+{
+  "schema": "cssearth-structure-benchmark@1",
+  "title": "Tarantula core · automatic structure benchmark",
+  "source": {
+    "imagePath": "source.png",
+    "name": "Tarantula core · native SMASH crop",
+    "widthPx": 512,
+    "heightPx": 512,
+    "description": "Native pixel crop, 8-bit sRGB display RGB. No resize or manual structure masks.",
+    "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+    "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/"
+  },
+  "methods": [
+    {
+      "id": "wavelets",
+      "name": "Starlet · automatic regions",
+      "status": "complete",
+      "note": "Independent B3-starlet prototype with connected regions and covariance morphology. Not a DAWIS implementation. No manual region masks.",
+      "panels": [
+        {
+          "id": "diffuse",
+          "name": "Diffuse / background",
+          "imagePath": "wavelets/diffuse.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "compact",
+          "name": "Compact structures",
+          "imagePath": "wavelets/compact.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "elongated",
+          "name": "Filament candidates",
+          "imagePath": "wavelets/elongated.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "residual",
+          "name": "Signed residual",
+          "imagePath": "wavelets/residual.png",
+          "description": "Zero = gray; positive = orange; negative = blue. Fixed range ±0.1 display luminance. 67614 preview pixels saturate; numerical residuals are retained."
+        },
+        {
+          "id": "reconstruction",
+          "name": "Reconstruction",
+          "imagePath": "wavelets/reconstruction.png",
+          "description": "Sum of all components plus signed residual. Agreement checks bookkeeping, not whether the structure separation is correct."
+        },
+        {
+          "id": "structures",
+          "name": "Detected structure outlines",
+          "imagePath": "wavelets/structures.png",
+          "description": "Automatically detected support boundaries. Colors indicate morphology, not verified stars or gas."
+        }
+      ],
+      "metrics": {
+        "Diffuse signal (%)": 86.72946598004498,
+        "Compact signal (%)": 0.3735936050230129,
+        "Filament signal (%)": 0.04584352187529925,
+        "Signed residual signal (%)": 12.851096892820038,
+        "Absolute residual / source (%)": 12.85109689435252,
+        "Maximum reconstruction error": 2.9802322387695312e-8,
+        "Component preview clipped pixels": 0,
+        "Component pixels with undefined source hue": 0,
+        "Detected scale regions": 510,
+        "Compact regions": 406,
+        "Elongated regions": 57,
+        "Diffuse regions": 47,
+        "Hierarchy links": 139,
+        "Wavelet thresholds": "0.228, 0.140, 0.0878, 0.0714, 0.0650, 0.0669, 0.0999"
+      }
+    },
+    {
+      "id": "wavelets-sensitivity",
+      "name": "Starlet · lower threshold",
+      "status": "complete",
+      "note": "Controlled sensitivity run: only the threshold multiplier changes from 3 to 2. The estimated scale is a display-texture proxy, not calibrated noise.",
+      "panels": [
+        {
+          "id": "diffuse",
+          "name": "Diffuse / background",
+          "imagePath": "wavelets-sensitivity/diffuse.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "compact",
+          "name": "Compact structures",
+          "imagePath": "wavelets-sensitivity/compact.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "elongated",
+          "name": "Filament candidates",
+          "imagePath": "wavelets-sensitivity/elongated.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "residual",
+          "name": "Signed residual",
+          "imagePath": "wavelets-sensitivity/residual.png",
+          "description": "Zero = gray; positive = orange; negative = blue. Fixed range ±0.1 display luminance. 53753 preview pixels saturate; numerical residuals are retained."
+        },
+        {
+          "id": "reconstruction",
+          "name": "Reconstruction",
+          "imagePath": "wavelets-sensitivity/reconstruction.png",
+          "description": "Sum of all components plus signed residual. Agreement checks bookkeeping, not whether the structure separation is correct."
+        },
+        {
+          "id": "structures",
+          "name": "Detected structure outlines",
+          "imagePath": "wavelets-sensitivity/structures.png",
+          "description": "Automatically detected support boundaries. Colors indicate morphology, not verified stars or gas."
+        }
+      ],
+      "metrics": {
+        "Diffuse signal (%)": 87.66037792113497,
+        "Compact signal (%)": 1.7630145522638445,
+        "Filament signal (%)": 0.6330985483000408,
+        "Signed residual signal (%)": 9.943508978182816,
+        "Absolute residual / source (%)": 9.943509007554368,
+        "Maximum reconstruction error": 2.9802322387695312e-8,
+        "Component preview clipped pixels": 0,
+        "Component pixels with undefined source hue": 0,
+        "Detected scale regions": 3101,
+        "Compact regions": 2317,
+        "Elongated regions": 647,
+        "Diffuse regions": 137,
+        "Hierarchy links": 1346,
+        "Wavelet thresholds": "0.152, 0.0933, 0.0585, 0.0476, 0.0433, 0.0446, 0.0666"
+      }
+    },
+    {
+      "id": "median",
+      "name": "Median · separation control",
+      "status": "complete",
+      "note": "7×7 RGB median kernel from the existing pipeline. Sky subtraction and support masking disabled for the shared crop. No filament detector.",
+      "panels": [
+        {
+          "id": "diffuse",
+          "name": "Diffuse / background",
+          "imagePath": "median/diffuse.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "compact",
+          "name": "Compact structures",
+          "imagePath": "median/compact.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "elongated",
+          "name": "Filament candidates",
+          "imagePath": "median/elongated.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "residual",
+          "name": "Signed residual",
+          "imagePath": "median/residual.png",
+          "description": "Zero = gray; positive = orange; negative = blue. Fixed range ±0.1 display luminance. 33709 preview pixels saturate; numerical residuals are retained."
+        },
+        {
+          "id": "reconstruction",
+          "name": "Reconstruction",
+          "imagePath": "median/reconstruction.png",
+          "description": "Sum of all components plus signed residual. Agreement checks bookkeeping, not whether the structure separation is correct."
+        }
+      ],
+      "metrics": {
+        "Diffuse signal (%)": 94.67255120374368,
+        "Compact signal (%)": 12.746916894880044,
+        "Filament signal (%)": 0,
+        "Signed residual signal (%)": -7.419468098608926,
+        "Absolute residual / source (%)": 7.419468117176196,
+        "Maximum reconstruction error": 1.4901161193847656e-8,
+        "Component preview clipped pixels": 675,
+        "Component pixels with undefined source hue": 0
+      }
+    },
+    {
+      "id": "getsf",
+      "name": "getsf · official extraction",
+      "status": "unavailable",
+      "panels": [],
+      "note": "The native 512×512 getsf run reached its 30-minute bound. Source-background separation converged in 19 iterations; filament separation did not finish. No partial component maps are presented.",
+      "metrics": {
+        "Runtime bound (seconds)": 1800,
+        "Source-background iterations": 19,
+        "Source-background last correction": 0.0045,
+        "Filament-background iterations": 10,
+        "Filament-background last correction": 0.0107
+      }
+    }
+  ],
+  "metadata": {
+    "source": "https://noirlab.edu/public/images/noirlab2030a/",
+    "crop": "Native 512×512 pixels; original origin (2156, 956). No resampling.",
+    "limitations": [
+      "All quantities use display sRGB, not calibrated photometry or measured gas density.",
+      "Compact/filament labels describe morphology; they do not distinguish foreground stars from intrinsic knots.",
+      "Residuals must remain accounted for. Exact reconstruction alone cannot validate a decomposition.",
+      "This experiment compares automatic 2D extraction. No new 3D depth model has been baked."
+    ]
+  },
+  "provenance": {
+    "recipePath": "labs/nebula/models/tarantula-core-benchmark.json",
+    "recipeSha256": "51557afe0bd57950017467b3e490ab833201b973513a3c06199c96b657f7959d",
+    "input": {
+      "path": "labs/nebula/models/tarantula-core-benchmark/source.png",
+      "sha256": "40eced6ba27a4d57533379c626c3b7873f9ef6fea3d23dd12f6c5ee1cade8b2e",
+      "width": 512,
+      "height": 512,
+      "original": {
+        "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
+        "id": "noirlab2030a",
+        "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+        "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+        "bytes": 264225774,
+        "width": 6737,
+        "height": 6536,
+        "publisherUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+        "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+        "license": "CC-BY-4.0"
+      },
+      "crop": {
+        "left": 2156,
+        "top": 956,
+        "width": 512,
+        "height": 512
+      },
+      "conversion": "Native pixel crop, 8-bit sRGB display RGB. No resize or manual structure masks.",
+      "name": "Tarantula core · native SMASH crop"
+    },
+    "codePins": {
+      "labs/nebula/src/prepare-structures.ts": "9420c05b098c14f1dba8e20e9bdae73c54661ea1dfb0ba8bffc0366c05c81a7c",
+      "labs/nebula/src/benchmark-products.ts": "06db93422a845695a9243f8f6badf80627b2f3aa073bbe4ad112d7633d0cdec2",
+      "labs/nebula/src/structure-wavelets.ts": "b57a73db510544d8f411df960545f4c9a95f722b854094864dfc7d54396d2cb5"
+    },
+    "catalogSha256": "55a173a8ec4ff1da0fbae9602fe6ab41133c972ae09396460d2d11d3a4d01be9",
+    "settings": {
+      "scales": 7,
+      "significanceSigma": 3,
+      "compactMaxScale": 2,
+      "elongatedAxisRatio": 2.5,
+      "minRegionPixels": 4,
+      "connectivity": 8
+    },
+    "diagnostics": {
+      "noiseSigmaByScale": [
+        0.07587837397796385,
+        0.04666699269192568,
+        0.029263983515786265,
+        0.0238027188397133,
+        0.02165121915628271,
+        0.02228500864263862,
+        0.033295245198522457
+      ],
+      "thresholdByScale": [
+        0.22763512193389154,
+        0.14000097807577705,
+        0.08779195054735879,
+        0.0714081565191399,
+        0.06495365746884812,
+        0.06685502592791587,
+        0.09988573559556738
+      ],
+      "inputSum": 125920.07799686119,
+      "assignedSum": 109737.96676567197,
+      "residualSum": 16182.111230891198,
+      "maxAnalysisReconstructionError": 1.4901161193847656e-8,
+      "maxComponentReconstructionError": 2.9802322387695312e-8
+    }
+  }
+}

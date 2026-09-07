@@ -1,0 +1,76 @@
+{
+  "recipe": {
+    "schema": "cssearth-coherent-experiment@1",
+    "id": "orion-coherent-controls",
+    "benchmark": {
+      "path": "labs/nebula/models/orion-structure-benchmark.json",
+      "sha256": "d893f64ce195f4ff15c01a4ebe769eec9978a90f0982c0b2352789fcb2d8d535"
+    },
+    "projectedWidthKpc": 0.0001027610875,
+    "projectedScaleNote": "51.1981056 arcsec at the cited 414±7 pc Orion cluster distance; projected XY only. See sources/orion-reference.json.",
+    "depthExtentWidths": 1,
+    "master": {
+      "width": 512,
+      "sliceCounts": {
+        "x": 32,
+        "y": 32,
+        "z": 32
+      },
+      "samplesPerSlab": 16
+    },
+    "delivery": {
+      "width": 512,
+      "quality": 90
+    },
+    "exposureGain": 1,
+    "maxDisplaySignal": 0.98,
+    "variants": [
+      {
+        "id": "orion-broad",
+        "name": "A · broad depth",
+        "directory": "labs/nebula/models/orion-broad",
+        "useCatalog": false,
+        "useDensityPrior": false,
+        "baseFraction": 1,
+        "baseHalfThickness": 0.45,
+        "structureHalfThickness": 0.035,
+        "scaleThicknessFactor": 1.2,
+        "maxDepthVariation": 0
+      },
+      {
+        "id": "orion-localized",
+        "name": "B · localized depth",
+        "directory": "labs/nebula/models/orion-localized",
+        "useCatalog": false,
+        "useDensityPrior": false,
+        "baseFraction": 1,
+        "baseHalfThickness": 0.06,
+        "structureHalfThickness": 0.035,
+        "scaleThicknessFactor": 1.2,
+        "maxDepthVariation": 0
+      },
+      {
+        "id": "orion-coherent",
+        "name": "C · automatic structures",
+        "directory": "labs/nebula/models/orion-coherent",
+        "useCatalog": true,
+        "useDensityPrior": false,
+        "baseFraction": 0.2,
+        "baseHalfThickness": 0.45,
+        "structureHalfThickness": 0.035,
+        "scaleThicknessFactor": 1.2,
+        "maxDepthVariation": 0.1
+      }
+    ],
+    "limitations": [
+      "Research controls only: automatic extraction is not yet accepted for production gas geometry.",
+      "All three targets retain the exact same display photograph, including foreground stars and intrinsic knots; no stellar-membership separation.",
+      "Broad is an isolated finite-depth control, not a reproduction of the whole-LMC stellar-column model.",
+      "Unknown depth, thickness, and affine family tilt are authored priors; a correct front projection cannot determine them.",
+      "The 3D object uses a local laboratory frame; it is not placed in the production celestial scene.",
+      "No extinction, radiative transfer, physical gas density, or calibrated photometry is inferred."
+    ]
+  },
+  "selectedVariant": "orion-coherent",
+  "cacheKey": "faca43cff03a003b"
+}

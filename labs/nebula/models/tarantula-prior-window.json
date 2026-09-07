@@ -1,0 +1,86 @@
+{
+  "schema": "cssearth-prior-window-recipe@1",
+  "input": {
+    "path": ".local/nebula-lab/highres/77866e765cb12784/density.f32",
+    "sha256": "c0b01682199abcb9367c5f40f335801f08209a52cb530e7cf2cfe8502710d30f",
+    "bytes": 28311552,
+    "layout": "float32-le-x-fastest-density",
+    "dimensions": [
+      384,
+      384,
+      48
+    ],
+    "boundsKpc": {
+      "min": [
+        -6,
+        -6,
+        -5
+      ],
+      "max": [
+        6,
+        6,
+        5
+      ]
+    }
+  },
+  "cellBounds": {
+    "minInclusive": [
+      150,
+      208,
+      0
+    ],
+    "maxExclusive": [
+      170,
+      228,
+      48
+    ]
+  },
+  "translationKpc": [
+    -1.0104211489178418,
+    0.820897135659731,
+    0.104166666666667
+  ],
+  "output": {
+    "path": "labs/nebula/models/tarantula-core-benchmark/depth-prior.f32.gz",
+    "receiptPath": "labs/nebula/models/tarantula-core-benchmark/depth-prior.f32.gz.json",
+    "compression": "gzip",
+    "level": 9
+  },
+  "provenance": {
+    "densityReceiptPath": "labs/nebula/models/lmc-highres-1024/source/provenance.json",
+    "particleRecipePath": "labs/nebula/models/magellanic-particles.json",
+    "simulation": {
+      "datasetUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "paperUrl": "https://doi.org/10.1093/mnras/stag1287",
+      "license": "CC0-1.0",
+      "archiveSha256": "21562a5b32c27f39ee67215e9e2c3b1cd2fcfb4a115d2f2c8e0307fc8a51eb54",
+      "archiveEntry": "run34681lsmcgabestModelA_HR.00440.gz",
+      "snapshotSha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
+      "snapshotAgeGyr": 2.2,
+      "selectedFamily": "simulation stars",
+      "selectedParticleCount": 1620000,
+      "gasParticleCount": 0
+    },
+    "densityPreparation": {
+      "particleInputSha256": "fdcf3e9db15f3bbfeb33c157f6725a1e9172b07a18fb9318a4ba03ece0469f2c",
+      "method": "Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.",
+      "smoothingSigmaVoxels": 0.8,
+      "windowOperation": "Select source cells x=150..169, y=208..227, z=0..47 and copy their float32 bytes without interpolation or normalization."
+    },
+    "alignment": {
+      "method": "Authored central-bar alignment in the XZ simulation projection; rigid -34 degree rotation with no scaling or coordinate warp.",
+      "photoCropCenterKpc": [
+        -1.0104211489178418,
+        0.820897135659731
+      ],
+      "zCenterShiftKpc": 0.104166666666667,
+      "interpretation": "The window is translated into a crop-local frame. This is an authored photograph-to-simulation alignment, not astrometric identity or measured Tarantula depth."
+    }
+  },
+  "limitations": [
+    "The source contains simulation stellar density only; it contains no gas or dust particles and does not measure Tarantula emission depth.",
+    "The Z cell spacing is 0.20833333333333334 kpc (about 208 pc), far coarser than individual Tarantula structures.",
+    "The density field already includes mass-weighted CIC deposition and authored 0.8-voxel Gaussian smoothing; this window step performs no further filtering or normalization.",
+    "The XY crop registration and local translation inherit the authored photograph/simulation alignment and are only a weak placement prior."
+  ]
+}

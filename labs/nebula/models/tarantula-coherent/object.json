@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "tarantula-coherent",
+  "type": "density-volume",
+  "properties": {
+    "volume": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2451545,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "localToReferenceXyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 18977517004538237000,
+      "boundsUnits": {
+        "min": [
+          -0.5,
+          -0.5,
+          -0.5
+        ],
+        "max": [
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/experiment.json",
+      "sha256": "c5f8f59f77a877227f010c15149a87518a8681d41b633a33b52a78f0ab947c54"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-density-volume@1",
+    "url": "prepared/volume.json",
+    "sha256": "991a381b28d18efe6833e7b5a9e7d47117861f74891093389247c9ba46ca5df4"
+  }
+}

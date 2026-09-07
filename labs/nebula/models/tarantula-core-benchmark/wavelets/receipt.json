@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-structure-products@1",
+  "dimensions": [
+    512,
+    512
+  ],
+  "units": "Rec.709 coefficients applied to display sRGB, normalized 0…1. Not calibrated photometry.",
+  "products": {
+    "diffuse.png": {
+      "sha256": "648906940c60d5dcf2a43546453a7cb66a962a6c17ebcc4bde929ac229229cbf",
+      "bytes": 693290
+    },
+    "compact.png": {
+      "sha256": "14d9ef1b8ce10081c6f22e6a77490d27a6dfb6ad3ee85848553a665e03553da0",
+      "bytes": 11185
+    },
+    "elongated.png": {
+      "sha256": "db8c4127f6e33e1bd8a924c723351b79156d181bcacaa5f4e2e736edaf294816",
+      "bytes": 2286
+    },
+    "residual.png": {
+      "sha256": "fdec3d0ddd7a54fd1b5130c7d6aa1947f670b73a24d08e7b2e19708d4f8959f1",
+      "bytes": 162452
+    },
+    "reconstruction.png": {
+      "sha256": "bd9c2eee39ad68c1ec5dc45bf3c0bcec59cf0816bc3ee5f558d8cdfbc921a0cb",
+      "bytes": 745630
+    },
+    "structures.png": {
+      "sha256": "4b1f18bf287bae2c81ed366de97b764ba957301ef47b94e9dd86c553ed4a5ada",
+      "bytes": 739098
+    }
+  },
+  "rawProducts": {
+    "diffuse": {
+      "sha256": "012047f11e94ae943b863d2eb565370165477ecde6027d175cb0ac8ae0154ca9",
+      "bytes": 895785
+    },
+    "compact": {
+      "sha256": "fc8b03966bc2081ce2acf85cf7e45979c3cd31fa98e2a77bbf127aff713f119b",
+      "bytes": 14543
+    },
+    "elongated": {
+      "sha256": "12a97aa2898887335b5b60a05c57f567e070123429791abb48082ee782205292",
+      "bytes": 2831
+    },
+    "residual": {
+      "sha256": "0e16cf772e0751dddaeb321849838749336f84805ac1d76adacf916d42b1b748",
+      "bytes": 477827
+    }
+  },
+  "rawCacheDirectory": ".local/nebula-lab/tarantula-core-benchmark/wavelets",
+  "metrics": {
+    "Diffuse signal (%)": 86.72946598004498,
+    "Compact signal (%)": 0.3735936050230129,
+    "Filament signal (%)": 0.04584352187529925,
+    "Signed residual signal (%)": 12.851096892820038,
+    "Absolute residual / source (%)": 12.85109689435252,
+    "Maximum reconstruction error": 2.9802322387695312e-8,
+    "Component preview clipped pixels": 0,
+    "Component pixels with undefined source hue": 0,
+    "Detected scale regions": 510,
+    "Compact regions": 406,
+    "Elongated regions": 57,
+    "Diffuse regions": 47,
+    "Hierarchy links": 139,
+    "Wavelet thresholds": "0.228, 0.140, 0.0878, 0.0714, 0.0650, 0.0669, 0.0999"
+  }
+}

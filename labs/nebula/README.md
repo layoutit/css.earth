@@ -29,6 +29,7 @@ Open <http://127.0.0.1:4331/> or the [high-resolution LMC candidate](http://127.
 
 - [Research plan](docs/research-plan.md): image decomposition, coherent local depth, sampling controls, scientific sources and acceptance criteria. First target: Tarantula.
 - [Automatic structure benchmark](docs/structure-benchmark.md): native Tarantula crop, wavelet/getsf comparisons, retained residuals and detected structures. Open the lab's **Structure benchmark** tab.
+- [Repeatability and coherent depth](docs/coherent-depth.md): the same code on Tarantula and Orion, paired 3D controls, measured coverage and the current morphology limit.
 - [Workflows](docs/workflows.md): inspection controls, complete preparation commands and existing experiments.
 - [Source references and credits](sources/README.md): image provenance and registration constraints.
 

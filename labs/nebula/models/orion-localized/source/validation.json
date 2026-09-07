@@ -1,0 +1,47 @@
+{
+  "columns": {
+    "testedNativeColumns": 290,
+    "zSamples": [
+      512,
+      1024
+    ],
+    "maximumDisplayChannelError": [
+      0.0000010082223209639807,
+      8.340642343451776e-8
+    ],
+    "maximumDisplayConvergenceDifference": [
+      0.0000010663314250480838,
+      8.504589756874736e-7,
+      7.655713001875064e-7
+    ],
+    "clippedSourcePixels": 2752,
+    "maxDisplaySignal": 0.98,
+    "interpretation": "Numerical reference-column and Z-integration gate before image quantization. Does not validate segmentation, perspective views, or physical depth."
+  },
+  "axisSampling": {
+    "x": {
+      "rays": 121,
+      "samples": [
+        512,
+        1024
+      ],
+      "maximumDisplayDifference": 2.1094237467877974e-15
+    },
+    "y": {
+      "rays": 121,
+      "samples": [
+        512,
+        1024
+      ],
+      "maximumDisplayDifference": 2.7755575615628914e-15
+    },
+    "z": {
+      "rays": 121,
+      "samples": [
+        512,
+        1024
+      ],
+      "maximumDisplayDifference": 0.0000010460148526236779
+    }
+  }
+}

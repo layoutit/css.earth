@@ -1,0 +1,209 @@
+{
+  "schema": "cssearth-prior-window@1",
+  "recipe": {
+    "path": "labs/nebula/models/tarantula-prior-window.json",
+    "sha256": "bee68ce992183b9fe38ad6b84f378dbc6069039e83c99bfca4f6c593d665ccac"
+  },
+  "source": {
+    "path": ".local/nebula-lab/highres/77866e765cb12784/density.f32",
+    "sha256": "c0b01682199abcb9367c5f40f335801f08209a52cb530e7cf2cfe8502710d30f",
+    "bytes": 28311552,
+    "layout": "float32-le-x-fastest-density",
+    "dimensions": [
+      384,
+      384,
+      48
+    ],
+    "boundsKpc": {
+      "min": [
+        -6,
+        -6,
+        -5
+      ],
+      "max": [
+        6,
+        6,
+        5
+      ]
+    }
+  },
+  "operation": "Raw little-endian float32 row copy in x-fastest order; no interpolation, arithmetic on values, normalization, or axis reordering.",
+  "cellBounds": {
+    "minInclusive": [
+      150,
+      208,
+      0
+    ],
+    "maxExclusive": [
+      170,
+      228,
+      48
+    ]
+  },
+  "dimensions": [
+    20,
+    20,
+    48
+  ],
+  "cellSizeKpc": [
+    0.03125,
+    0.03125,
+    0.20833333333333334
+  ],
+  "sourceWindowBoundsKpc": {
+    "min": [
+      -1.3125,
+      0.5,
+      -5
+    ],
+    "max": [
+      -0.6875,
+      1.125,
+      5
+    ]
+  },
+  "translationKpc": [
+    -1.0104211489178418,
+    0.820897135659731,
+    0.104166666666667
+  ],
+  "translationOperation": "translated output bounds = source window bounds - translationKpc; density values are unchanged.",
+  "boundsKpc": {
+    "min": [
+      -0.30207885108215815,
+      -0.320897135659731,
+      -5.104166666666667
+    ],
+    "max": [
+      0.32292114891784185,
+      0.304102864340269,
+      4.895833333333333
+    ]
+  },
+  "output": {
+    "path": "labs/nebula/models/tarantula-core-benchmark/depth-prior.f32.gz",
+    "sha256": "880d497384ab910238cd0a1fa1c430f66625363e874ece5f7d2c2be362d3693f",
+    "bytes": 50414,
+    "compression": "gzip",
+    "compressionLevel": 9,
+    "decodedSha256": "0e4b22f859c88d88082e7d8e23df1204f19f2bac37b359a9d1c670a6e578453c",
+    "decodedBytes": 76800,
+    "layout": "float32-le-x-fastest-density"
+  },
+  "statistics": {
+    "minimum": 0,
+    "maximum": 0.1979767382144928,
+    "sum": 262.7438096189116,
+    "nonzeroCells": 13509,
+    "totalCells": 19200
+  },
+  "sampleValidation": [
+    {
+      "sourceCell": [
+        150,
+        208,
+        0
+      ],
+      "outputCell": [
+        0,
+        0,
+        0
+      ],
+      "value": 0,
+      "rawLittleEndianHex": "00000000"
+    },
+    {
+      "sourceCell": [
+        169,
+        208,
+        0
+      ],
+      "outputCell": [
+        19,
+        0,
+        0
+      ],
+      "value": 0,
+      "rawLittleEndianHex": "00000000"
+    },
+    {
+      "sourceCell": [
+        160,
+        218,
+        24
+      ],
+      "outputCell": [
+        10,
+        10,
+        24
+      ],
+      "value": 0.07820358127355576,
+      "rawLittleEndianHex": "3329a03d"
+    },
+    {
+      "sourceCell": [
+        150,
+        227,
+        24
+      ],
+      "outputCell": [
+        0,
+        19,
+        24
+      ],
+      "value": 0.03426738083362579,
+      "rawLittleEndianHex": "f45b0c3d"
+    },
+    {
+      "sourceCell": [
+        169,
+        227,
+        47
+      ],
+      "outputCell": [
+        19,
+        19,
+        47
+      ],
+      "value": 0,
+      "rawLittleEndianHex": "00000000"
+    }
+  ],
+  "provenance": {
+    "densityReceiptPath": "labs/nebula/models/lmc-highres-1024/source/provenance.json",
+    "particleRecipePath": "labs/nebula/models/magellanic-particles.json",
+    "simulation": {
+      "datasetUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "paperUrl": "https://doi.org/10.1093/mnras/stag1287",
+      "license": "CC0-1.0",
+      "archiveSha256": "21562a5b32c27f39ee67215e9e2c3b1cd2fcfb4a115d2f2c8e0307fc8a51eb54",
+      "archiveEntry": "run34681lsmcgabestModelA_HR.00440.gz",
+      "snapshotSha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
+      "snapshotAgeGyr": 2.2,
+      "selectedFamily": "simulation stars",
+      "selectedParticleCount": 1620000,
+      "gasParticleCount": 0
+    },
+    "densityPreparation": {
+      "particleInputSha256": "fdcf3e9db15f3bbfeb33c157f6725a1e9172b07a18fb9318a4ba03ece0469f2c",
+      "method": "Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.",
+      "smoothingSigmaVoxels": 0.8,
+      "windowOperation": "Select source cells x=150..169, y=208..227, z=0..47 and copy their float32 bytes without interpolation or normalization."
+    },
+    "alignment": {
+      "method": "Authored central-bar alignment in the XZ simulation projection; rigid -34 degree rotation with no scaling or coordinate warp.",
+      "photoCropCenterKpc": [
+        -1.0104211489178418,
+        0.820897135659731
+      ],
+      "zCenterShiftKpc": 0.104166666666667,
+      "interpretation": "The window is translated into a crop-local frame. This is an authored photograph-to-simulation alignment, not astrometric identity or measured Tarantula depth."
+    }
+  },
+  "limitations": [
+    "The source contains simulation stellar density only; it contains no gas or dust particles and does not measure Tarantula emission depth.",
+    "The Z cell spacing is 0.20833333333333334 kpc (about 208 pc), far coarser than individual Tarantula structures.",
+    "The density field already includes mass-weighted CIC deposition and authored 0.8-voxel Gaussian smoothing; this window step performs no further filtering or normalization.",
+    "The XY crop registration and local translation inherit the authored photograph/simulation alignment and are only a weak placement prior."
+  ]
+}

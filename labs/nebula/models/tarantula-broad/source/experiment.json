@@ -1,0 +1,98 @@
+{
+  "recipe": {
+    "schema": "cssearth-coherent-experiment@1",
+    "id": "tarantula-coherent-controls",
+    "benchmark": {
+      "path": "labs/nebula/models/tarantula-core-benchmark.json",
+      "sha256": "51557afe0bd57950017467b3e490ab833201b973513a3c06199c96b657f7959d"
+    },
+    "projectedWidthKpc": 0.6150194407338578,
+    "projectedScaleNote": "Native SMASH crop width derived from the existing authored LMC photo/simulation registration; not a matched gas-cloud registration.",
+    "depthExtentWidths": 1,
+    "master": {
+      "width": 512,
+      "sliceCounts": {
+        "x": 32,
+        "y": 32,
+        "z": 32
+      },
+      "samplesPerSlab": 16
+    },
+    "delivery": {
+      "width": 512,
+      "quality": 90
+    },
+    "exposureGain": 1,
+    "maxDisplaySignal": 0.98,
+    "variants": [
+      {
+        "id": "tarantula-broad",
+        "name": "A · broad depth",
+        "directory": "labs/nebula/models/tarantula-broad",
+        "useCatalog": false,
+        "useDensityPrior": false,
+        "baseFraction": 1,
+        "baseHalfThickness": 0.45,
+        "structureHalfThickness": 0.035,
+        "scaleThicknessFactor": 1.2,
+        "maxDepthVariation": 0
+      },
+      {
+        "id": "tarantula-localized",
+        "name": "B · localized depth",
+        "directory": "labs/nebula/models/tarantula-localized",
+        "useCatalog": false,
+        "useDensityPrior": false,
+        "baseFraction": 1,
+        "baseHalfThickness": 0.06,
+        "structureHalfThickness": 0.035,
+        "scaleThicknessFactor": 1.2,
+        "maxDepthVariation": 0
+      },
+      {
+        "id": "tarantula-coherent",
+        "name": "C · automatic structures",
+        "directory": "labs/nebula/models/tarantula-coherent",
+        "useCatalog": true,
+        "useDensityPrior": true,
+        "baseFraction": 0.2,
+        "baseHalfThickness": 0.45,
+        "structureHalfThickness": 0.035,
+        "scaleThicknessFactor": 1.2,
+        "maxDepthVariation": 0.1
+      }
+    ],
+    "limitations": [
+      "Research controls only: automatic extraction is not yet accepted for production gas geometry.",
+      "All three targets retain the exact same display photograph, including foreground stars and intrinsic knots; no stellar-membership separation.",
+      "Broad is an isolated finite-depth control, not a reproduction of the whole-LMC stellar-column model.",
+      "Unknown depth, thickness, and affine family tilt are authored priors; a correct front projection cannot determine them.",
+      "The 3D object uses a local laboratory frame; it is not placed in the production celestial scene.",
+      "No extinction, radiative transfer, physical gas density, or calibrated photometry is inferred."
+    ],
+    "densityPrior": {
+      "path": "labs/nebula/models/tarantula-core-benchmark/depth-prior.f32.gz",
+      "sha256": "880d497384ab910238cd0a1fa1c430f66625363e874ece5f7d2c2be362d3693f",
+      "dimensions": [
+        20,
+        20,
+        48
+      ],
+      "boundsKpc": {
+        "min": [
+          -0.30207885108215815,
+          -0.320897135659731,
+          -5.104166666666667
+        ],
+        "max": [
+          0.32292114891784185,
+          0.304102864340269,
+          4.895833333333333
+        ]
+      },
+      "note": "Raw cropped stellar density, translated to the authored image crop centre and strongest sampled Z bin. 208 pc depth cells; no gas measurements. See adjacent depth-prior receipt."
+    }
+  },
+  "selectedVariant": "tarantula-broad",
+  "cacheKey": "8e78f061a531e003"
+}

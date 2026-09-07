@@ -1,0 +1,270 @@
+{
+  "schema": "cssearth-structure-benchmark@1",
+  "title": "Orion LL Orionis field · automatic structure benchmark",
+  "source": {
+    "imagePath": "source.png",
+    "name": "Orion · LL Orionis bow-shock field · native 512×512",
+    "widthPx": 512,
+    "heightPx": 512,
+    "description": "Native pixel crop from the pinned display composite; Adobe RGB converted to 8-bit sRGB display RGB. No resize or manual structure masks. Source and scale evidence are pinned in labs/nebula/sources/orion-reference.json.",
+    "credit": "NASA, ESA, and The Hubble Heritage Team (STScI/AURA), Acknowledgment: NASA, ESA, M. Robberto (STScI) and the Hubble Space Telescope Orion Treasury Project Team",
+    "sourcePageUrl": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/"
+  },
+  "methods": [
+    {
+      "id": "wavelets",
+      "name": "Starlet · automatic regions",
+      "status": "complete",
+      "note": "Independent B3-starlet prototype with connected regions and covariance morphology. Not a DAWIS implementation. No manual region masks.",
+      "panels": [
+        {
+          "id": "diffuse",
+          "name": "Diffuse / background",
+          "imagePath": "wavelets/diffuse.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "compact",
+          "name": "Compact structures",
+          "imagePath": "wavelets/compact.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "elongated",
+          "name": "Filament candidates",
+          "imagePath": "wavelets/elongated.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "residual",
+          "name": "Signed residual",
+          "imagePath": "wavelets/residual.png",
+          "description": "Zero = gray; positive = orange; negative = blue. Fixed range ±0.1 display luminance. 16 preview pixels saturate; numerical residuals are retained."
+        },
+        {
+          "id": "reconstruction",
+          "name": "Reconstruction",
+          "imagePath": "wavelets/reconstruction.png",
+          "description": "Sum of all components plus signed residual. Agreement checks bookkeeping, not whether the structure separation is correct."
+        },
+        {
+          "id": "structures",
+          "name": "Detected structure outlines",
+          "imagePath": "wavelets/structures.png",
+          "description": "Automatically detected support boundaries. Colors indicate morphology, not verified stars or gas."
+        }
+      ],
+      "metrics": {
+        "Diffuse signal (%)": 98.23663600697307,
+        "Compact signal (%)": 0.03483263283279694,
+        "Filament signal (%)": 0.07546786766548369,
+        "Signed residual signal (%)": 1.6530634925286516,
+        "Absolute residual / source (%)": 1.6530635081309542,
+        "Maximum reconstruction error": 0,
+        "Component preview clipped pixels": 0,
+        "Component pixels with undefined source hue": 0,
+        "Detected scale regions": 290,
+        "Compact regions": 155,
+        "Elongated regions": 114,
+        "Diffuse regions": 21,
+        "Hierarchy links": 126,
+        "Wavelet thresholds": "0.0106, 0.00714, 0.00961, 0.0145, 0.0225, 0.0312, 0.0421"
+      }
+    },
+    {
+      "id": "wavelets-sensitivity",
+      "name": "Starlet · lower threshold",
+      "status": "complete",
+      "note": "Controlled sensitivity run: only the threshold multiplier changes from 3 to 2. The estimated scale is a display-texture proxy, not calibrated noise.",
+      "panels": [
+        {
+          "id": "diffuse",
+          "name": "Diffuse / background",
+          "imagePath": "wavelets-sensitivity/diffuse.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "compact",
+          "name": "Compact structures",
+          "imagePath": "wavelets-sensitivity/compact.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "elongated",
+          "name": "Filament candidates",
+          "imagePath": "wavelets-sensitivity/elongated.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "residual",
+          "name": "Signed residual",
+          "imagePath": "wavelets-sensitivity/residual.png",
+          "description": "Zero = gray; positive = orange; negative = blue. Fixed range ±0.1 display luminance. 0 preview pixels saturate; numerical residuals are retained."
+        },
+        {
+          "id": "reconstruction",
+          "name": "Reconstruction",
+          "imagePath": "wavelets-sensitivity/reconstruction.png",
+          "description": "Sum of all components plus signed residual. Agreement checks bookkeeping, not whether the structure separation is correct."
+        },
+        {
+          "id": "structures",
+          "name": "Detected structure outlines",
+          "imagePath": "wavelets-sensitivity/structures.png",
+          "description": "Automatically detected support boundaries. Colors indicate morphology, not verified stars or gas."
+        }
+      ],
+      "metrics": {
+        "Diffuse signal (%)": 98.35587782661818,
+        "Compact signal (%)": 0.05714192304335734,
+        "Filament signal (%)": 0.16814208137183914,
+        "Signed residual signal (%)": 1.4188381689666154,
+        "Absolute residual / source (%)": 1.4188382478446386,
+        "Maximum reconstruction error": 0,
+        "Component preview clipped pixels": 0,
+        "Component pixels with undefined source hue": 0,
+        "Detected scale regions": 1369,
+        "Compact regions": 798,
+        "Elongated regions": 515,
+        "Diffuse regions": 56,
+        "Hierarchy links": 487,
+        "Wavelet thresholds": "0.00704, 0.00476, 0.00640, 0.00966, 0.0150, 0.0208, 0.0280"
+      }
+    },
+    {
+      "id": "median",
+      "name": "Median · separation control",
+      "status": "complete",
+      "note": "7×7 RGB median kernel from the existing pipeline. Sky subtraction and support masking disabled for the shared crop. No filament detector.",
+      "panels": [
+        {
+          "id": "diffuse",
+          "name": "Diffuse / background",
+          "imagePath": "median/diffuse.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "compact",
+          "name": "Compact structures",
+          "imagePath": "median/compact.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "elongated",
+          "name": "Filament candidates",
+          "imagePath": "median/elongated.png",
+          "description": "Same coordinates and gain; source hue inherited where defined. Positive signal over source black is neutral gray. Morphology does not establish physical membership."
+        },
+        {
+          "id": "residual",
+          "name": "Signed residual",
+          "imagePath": "median/residual.png",
+          "description": "Zero = gray; positive = orange; negative = blue. Fixed range ±0.1 display luminance. 0 preview pixels saturate; numerical residuals are retained."
+        },
+        {
+          "id": "reconstruction",
+          "name": "Reconstruction",
+          "imagePath": "median/reconstruction.png",
+          "description": "Sum of all components plus signed residual. Agreement checks bookkeeping, not whether the structure separation is correct."
+        }
+      ],
+      "metrics": {
+        "Diffuse signal (%)": 99.98824411341067,
+        "Compact signal (%)": 0.3240388580690604,
+        "Filament signal (%)": 0,
+        "Signed residual signal (%)": -0.31228297147973755,
+        "Absolute residual / source (%)": 0.31228297147973755,
+        "Maximum reconstruction error": 0,
+        "Component preview clipped pixels": 724,
+        "Component pixels with undefined source hue": 0
+      }
+    },
+    {
+      "id": "getsf",
+      "name": "getsf · official extraction",
+      "status": "unavailable",
+      "panels": [],
+      "note": "This bake has no verified getsf import. Run the local research comparator and rebuild with --getsf-import; no substitute result is shown."
+    }
+  ],
+  "metadata": {
+    "source": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/",
+    "crop": "Native 512×512 pixels; original origin (1700, 650). No resampling.",
+    "limitations": [
+      "All quantities use display sRGB, not calibrated photometry or measured gas density.",
+      "Compact/filament labels describe morphology; they do not distinguish foreground stars from intrinsic knots.",
+      "Residuals must remain accounted for. Exact reconstruction alone cannot validate a decomposition.",
+      "This experiment compares automatic 2D extraction. No new 3D depth model has been baked."
+    ]
+  },
+  "provenance": {
+    "recipePath": "labs/nebula/models/orion-structure-benchmark.json",
+    "recipeSha256": "d893f64ce195f4ff15c01a4ebe769eec9978a90f0982c0b2352789fcb2d8d535",
+    "input": {
+      "name": "Orion · LL Orionis bow-shock field · native 512×512",
+      "path": "labs/nebula/models/orion-structure-benchmark/source.png",
+      "sha256": "467b33eed47995f19a46cd379ecede7ba081e27d6a3088af0a0d96cb5e6d56b7",
+      "width": 512,
+      "height": 512,
+      "receiptPath": "labs/nebula/sources/orion-reference.json",
+      "original": {
+        "path": ".local/nebula-lab/orion-source/STScI-01EVT7Y95A2C07EEX772ZV79V3.tif",
+        "id": "orion-llori-hst-2006",
+        "url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2006/01/STScI-01EVT7Y95A2C07EEX772ZV79V3.tif",
+        "sha256": "dd5b957da63a9b74bc28aab639d025044338e60047264ccb2eb0554fadde881b",
+        "bytes": 28894870,
+        "width": 4806,
+        "height": 3364,
+        "publisherUrl": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/",
+        "credit": "NASA, ESA, and The Hubble Heritage Team (STScI/AURA), Acknowledgment: NASA, ESA, M. Robberto (STScI) and the Hubble Space Telescope Orion Treasury Project Team",
+        "license": "NASA/STScI image-use policy; attribution required and no endorsement implied"
+      },
+      "crop": {
+        "left": 1700,
+        "top": 650,
+        "width": 512,
+        "height": 512
+      },
+      "conversion": "Native pixel crop from the pinned display composite; Adobe RGB converted to 8-bit sRGB display RGB. No resize or manual structure masks. Source and scale evidence are pinned in labs/nebula/sources/orion-reference.json."
+    },
+    "codePins": {
+      "labs/nebula/src/prepare-structures.ts": "9420c05b098c14f1dba8e20e9bdae73c54661ea1dfb0ba8bffc0366c05c81a7c",
+      "labs/nebula/src/benchmark-products.ts": "06db93422a845695a9243f8f6badf80627b2f3aa073bbe4ad112d7633d0cdec2",
+      "labs/nebula/src/structure-wavelets.ts": "b57a73db510544d8f411df960545f4c9a95f722b854094864dfc7d54396d2cb5"
+    },
+    "catalogSha256": "94247dac8ea462ab612f444d0de5de61939cbb9cf8e5411b716c295c4d7539f1",
+    "settings": {
+      "scales": 7,
+      "significanceSigma": 3,
+      "compactMaxScale": 2,
+      "elongatedAxisRatio": 2.5,
+      "minRegionPixels": 4,
+      "connectivity": 8
+    },
+    "diagnostics": {
+      "noiseSigmaByScale": [
+        0.003522383161099198,
+        0.002379626783127716,
+        0.00320173269383171,
+        0.0048318936886459175,
+        0.0075134806885720365,
+        0.010387890981753677,
+        0.014021708685838765
+      ],
+      "thresholdByScale": [
+        0.010567149483297594,
+        0.007138880349383148,
+        0.00960519808149513,
+        0.014495681065937752,
+        0.02254044206571611,
+        0.031163672945261033,
+        0.04206512605751629
+      ],
+      "inputSum": 181372.17875909805,
+      "assignedSum": 178373.9814864276,
+      "residualSum": 2998.1972726704553,
+      "maxAnalysisReconstructionError": 0,
+      "maxComponentReconstructionError": 0
+    }
+  }
+}

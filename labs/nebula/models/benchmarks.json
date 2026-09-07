@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-structure-benchmark-catalogue@1",
+  "benchmarks": [
+    {
+      "id": "full1024",
+      "name": "Tarantula · full native 1024×1024",
+      "manifestPath": "labs/nebula/models/structure-benchmark/benchmark.json"
+    },
+    {
+      "id": "tarantula-core",
+      "name": "Tarantula core · native 512×512",
+      "manifestPath": "labs/nebula/models/tarantula-core-benchmark/benchmark.json"
+    },
+    {
+      "id": "orion-llori",
+      "name": "Orion LL Orionis field · native 512×512",
+      "manifestPath": "labs/nebula/models/orion-structure-benchmark/benchmark.json"
+    }
+  ]
+}

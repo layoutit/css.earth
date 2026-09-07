@@ -1,7 +1,7 @@
 [
   {
     "id": "lmc-particles",
-    "name": "LMC · particle volume",
+    "name": "LMC \u00b7 particle volume",
     "directory": "labs/nebula/models/lmc-particles",
     "imagePath": "labs/nebula/sources/lmc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
@@ -25,7 +25,7 @@
   },
   {
     "id": "lmc-highres-1024",
-    "name": "LMC · master 1024",
+    "name": "LMC \u00b7 master 1024",
     "directory": "labs/nebula/models/lmc-highres-1024",
     "imagePath": "labs/nebula/sources/lmc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
@@ -44,7 +44,7 @@
   },
   {
     "id": "lmc-highres-512",
-    "name": "LMC · master 512",
+    "name": "LMC \u00b7 master 512",
     "directory": "labs/nebula/models/lmc-highres-512",
     "imagePath": "labs/nebula/sources/lmc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
@@ -63,7 +63,7 @@
   },
   {
     "id": "smc-particles",
-    "name": "SMC · particle volume",
+    "name": "SMC \u00b7 particle volume",
     "directory": "labs/nebula/models/smc-particles",
     "imagePath": "labs/nebula/sources/smc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
@@ -75,39 +75,117 @@
   },
   {
     "id": "lmc",
-    "name": "Large Magellanic Cloud · image layers",
+    "name": "Large Magellanic Cloud \u00b7 image layers",
     "directory": "src/objects/lmc",
     "image": "source/source.jpg",
     "framingRadiusUnits": 4
   },
   {
     "id": "smc",
-    "name": "Small Magellanic Cloud · image layers",
+    "name": "Small Magellanic Cloud \u00b7 image layers",
     "directory": "src/objects/smc",
     "image": "source/source.jpg",
     "framingRadiusUnits": 3
   },
   {
     "id": "m31",
-    "name": "Andromeda · M31",
+    "name": "Andromeda \u00b7 M31",
     "directory": "src/objects/m31",
     "image": "source/source.jpg",
     "framingRadiusUnits": 25
   },
   {
     "id": "m33",
-    "name": "Triangulum · M33",
+    "name": "Triangulum \u00b7 M33",
     "directory": "src/objects/m33",
     "image": "source/source.jpg",
     "framingRadiusUnits": 9
   },
   {
     "id": "milky-way",
-    "name": "Milky Way · volume reference",
+    "name": "Milky Way \u00b7 volume reference",
     "directory": "src/objects/milky-way",
     "image": "source/sky/nasa-preview.jpg",
     "sourcePageUrl": "https://svs.gsfc.nasa.gov/4851/",
     "credit": "NASA interior-sky comparison; the 3D volume uses OpenSpace density data.",
     "modelNote": "Prepared emission and extinction slices from the OpenSpace Milky Way density model. The source tab shows its NASA interior-sky comparison."
+  },
+  {
+    "id": "tarantula-broad",
+    "name": "Tarantula \u00b7 A \u00b7 broad depth",
+    "directory": "labs/nebula/models/tarantula-broad",
+    "imagePath": "labs/nebula/models/tarantula-core-benchmark/source.png",
+    "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+    "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+    "modelNote": "Diagnostic: same frozen photograph and exposure. Broad finite depth control. Depth is modeled, not measured gas geometry.",
+    "framingRadiusUnits": 0.6,
+    "hasDetail": false,
+    "comparisonGroup": "tarantula-core",
+    "referenceProjectionScale": 100
+  },
+  {
+    "id": "tarantula-localized",
+    "name": "Tarantula \u00b7 B \u00b7 localized depth",
+    "directory": "labs/nebula/models/tarantula-localized",
+    "imagePath": "labs/nebula/models/tarantula-core-benchmark/source.png",
+    "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+    "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+    "modelNote": "Diagnostic: same frozen photograph and exposure. One localized depth control. Depth is modeled, not measured gas geometry.",
+    "framingRadiusUnits": 0.6,
+    "hasDetail": false,
+    "comparisonGroup": "tarantula-core",
+    "referenceProjectionScale": 100
+  },
+  {
+    "id": "tarantula-coherent",
+    "name": "Tarantula \u00b7 C \u00b7 automatic structures",
+    "directory": "labs/nebula/models/tarantula-coherent",
+    "imagePath": "labs/nebula/models/tarantula-core-benchmark/source.png",
+    "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+    "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+    "modelNote": "Diagnostic: same frozen photograph and exposure. Automatically detected supports get finite depth. Unsupported light remains broad; stars are still included. Depth is modeled, not measured gas geometry.",
+    "framingRadiusUnits": 0.6,
+    "hasDetail": false,
+    "comparisonGroup": "tarantula-core",
+    "referenceProjectionScale": 100
+  },
+  {
+    "id": "orion-broad",
+    "name": "Orion \u00b7 A \u00b7 broad depth",
+    "directory": "labs/nebula/models/orion-broad",
+    "imagePath": "labs/nebula/models/orion-structure-benchmark/source.png",
+    "sourcePageUrl": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/",
+    "credit": "NASA, ESA, and The Hubble Heritage Team (STScI/AURA), Acknowledgment: NASA, ESA, M. Robberto (STScI) and the Hubble Space Telescope Orion Treasury Project Team",
+    "modelNote": "Diagnostic: same frozen photograph and exposure. Broad finite depth control. Depth is modeled, not measured gas geometry.",
+    "framingRadiusUnits": 0.6,
+    "hasDetail": false,
+    "comparisonGroup": "orion-core",
+    "referenceProjectionScale": 100
+  },
+  {
+    "id": "orion-localized",
+    "name": "Orion \u00b7 B \u00b7 localized depth",
+    "directory": "labs/nebula/models/orion-localized",
+    "imagePath": "labs/nebula/models/orion-structure-benchmark/source.png",
+    "sourcePageUrl": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/",
+    "credit": "NASA, ESA, and The Hubble Heritage Team (STScI/AURA), Acknowledgment: NASA, ESA, M. Robberto (STScI) and the Hubble Space Telescope Orion Treasury Project Team",
+    "modelNote": "Diagnostic: same frozen photograph and exposure. One localized depth control. Depth is modeled, not measured gas geometry.",
+    "framingRadiusUnits": 0.6,
+    "hasDetail": false,
+    "comparisonGroup": "orion-core",
+    "referenceProjectionScale": 100
+  },
+  {
+    "id": "orion-coherent",
+    "name": "Orion \u00b7 C \u00b7 automatic structures",
+    "directory": "labs/nebula/models/orion-coherent",
+    "imagePath": "labs/nebula/models/orion-structure-benchmark/source.png",
+    "sourcePageUrl": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/",
+    "credit": "NASA, ESA, and The Hubble Heritage Team (STScI/AURA), Acknowledgment: NASA, ESA, M. Robberto (STScI) and the Hubble Space Telescope Orion Treasury Project Team",
+    "modelNote": "Diagnostic: same frozen photograph and exposure. Automatically detected supports get finite depth. Unsupported light remains broad; stars are still included. Depth is modeled, not measured gas geometry.",
+    "framingRadiusUnits": 0.6,
+    "hasDetail": false,
+    "comparisonGroup": "orion-core",
+    "referenceProjectionScale": 100
   }
 ]

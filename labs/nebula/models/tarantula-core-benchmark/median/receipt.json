@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-structure-products@1",
+  "dimensions": [
+    512,
+    512
+  ],
+  "units": "Rec.709 coefficients applied to display sRGB, normalized 0…1. Not calibrated photometry.",
+  "products": {
+    "diffuse.png": {
+      "sha256": "ab043f2fd35b21d5c16f1243b47fa963564beeee62d27fccc48e9eee27b0b16d",
+      "bytes": 707796
+    },
+    "compact.png": {
+      "sha256": "c912d242da498d60978cdf1c22483bec5bb6bafe4520278a2779aa042a376c4e",
+      "bytes": 366794
+    },
+    "elongated.png": {
+      "sha256": "019ce802fc4816f083d97209227de3e44ca7a23e0056f83d5cd848f7fe260f02",
+      "bytes": 864
+    },
+    "residual.png": {
+      "sha256": "e5a6dc8a7678801fd7290c9c3b320ec12219a2d95e0256e67359b57c88855bb6",
+      "bytes": 249191
+    },
+    "reconstruction.png": {
+      "sha256": "bd9c2eee39ad68c1ec5dc45bf3c0bcec59cf0816bc3ee5f558d8cdfbc921a0cb",
+      "bytes": 745630
+    }
+  },
+  "rawProducts": {
+    "diffuse": {
+      "sha256": "dc2e9483d4bc6b47575df57086460869b0f52661ab96b81c0b18461d0883a418",
+      "bytes": 825745
+    },
+    "compact": {
+      "sha256": "40c3a32be5dfa6e4b272055293452b9c395cf937306dd02ed36f383fa096b043",
+      "bytes": 526817
+    },
+    "elongated": {
+      "sha256": "89f707d6e9d4b138766d528531357b9c95d5b7795364e65f033f127074e46307",
+      "bytes": 1051
+    },
+    "residual": {
+      "sha256": "90fe6e9932c463ecb9b2aecbc7a1a9253854cc4bbbf09d1674c0309bbd93eeb8",
+      "bytes": 526054
+    }
+  },
+  "rawCacheDirectory": ".local/nebula-lab/tarantula-core-benchmark/median",
+  "metrics": {
+    "Diffuse signal (%)": 94.67255120374368,
+    "Compact signal (%)": 12.746916894880044,
+    "Filament signal (%)": 0,
+    "Signed residual signal (%)": -7.419468098608926,
+    "Absolute residual / source (%)": 7.419468117176196,
+    "Maximum reconstruction error": 1.4901161193847656e-8,
+    "Component preview clipped pixels": 675,
+    "Component pixels with undefined source hue": 0
+  }
+}

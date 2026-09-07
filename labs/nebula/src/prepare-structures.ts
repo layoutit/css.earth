@@ -10,7 +10,7 @@ import type { BenchmarkImage, BenchmarkMethod, ComponentMaps } from './benchmark
 
 interface Recipe {
   schema: 'cssearth-structure-benchmark-recipe@1'; id: string; title: string;
-  input: { path: string; sha256: string; width: number; height: number; conversion: string;
+  input: { path: string; sha256: string; width: number; height: number; conversion: string; name?: string;
     crop: { left: number; top: number; width: number; height: number };
     original: { path: string; sha256: string; publisherUrl: string; credit: string; license: string } };
   outputDirectory: string; cacheDirectory: string; medianSize: number; wavelets: WaveletSettings;
@@ -175,7 +175,7 @@ const codePaths = ['prepare-structures.ts', 'benchmark-products.ts', 'structure-
 const codePins = Object.fromEntries(await Promise.all(codePaths.map(async name =>
   [`labs/nebula/src/${name}`, digest(await readFile(`labs/nebula/src/${name}`))])));
 const manifest = { schema: 'cssearth-structure-benchmark@1', title: recipe.title,
-  source: { imagePath: 'source.png', name: 'Tarantula and surroundings · native SMASH crop', widthPx: image.width, heightPx: image.height,
+    source: { imagePath: 'source.png', name: recipe.input.name ?? recipe.title, widthPx: image.width, heightPx: image.height,
     description: recipe.input.conversion, credit: recipe.input.original.credit, sourcePageUrl: recipe.input.original.publisherUrl },
   methods, metadata: { source: recipe.input.original.publisherUrl,
     crop: `Native ${image.width}×${image.height} pixels; original origin (${recipe.input.crop.left}, ${recipe.input.crop.top}). No resampling.`,

@@ -2,6 +2,8 @@
 
 Native image decomposition in the Nebula Lab. This stage identifies candidate structures; it does not assign depth or change any production galaxy.
 
+The **Benchmark** selector now includes the original 1024² field, a native 512² Tarantula core and a native 512² Orion bow-shock field. Their isolated 3D controls and results are in [repeatability and coherent depth](coherent-depth.md). Neither automatic mask has passed the morphology gate for production use.
+
 ## Inspect or rebuild
 
 From a clean checkout at the repository root, the committed source crop and prepared panels are sufficient. No restricted software is needed for the independent wavelet and median paths.

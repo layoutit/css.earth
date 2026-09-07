@@ -4,6 +4,7 @@ import { createBenchmarkView } from './benchmark-view';
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
 const controls = element<HTMLFieldSetElement>('render-controls');
+const cameraPose = element<HTMLSelectElement>('camera-pose');
 const axis = element<HTMLSelectElement>('axis');
 const layer = element<HTMLInputElement>('layer');
 const layerValue = element<HTMLOutputElement>('layer-value');
@@ -16,7 +17,7 @@ const sourceCredit = element('source-credit');
 const tabs = ['render-tab', 'source-tab', 'structure-tab'].map(id => element<HTMLButtonElement>(id));
 const tabNames = ['render', 'source', 'structure'];
 const benchmark = createBenchmarkView({ host: element('structure-panel'),
-  manifestUrl: localFile('labs/nebula/models/structure-benchmark/benchmark.json') });
+  catalogueUrl: localFile('labs/nebula/models/benchmarks.json') });
 type Viewer = Awaited<ReturnType<typeof createNebulaLabViewer>>;
 let viewer: Viewer | null = null;
 let busy = false, disposed = false;
@@ -113,6 +114,7 @@ document.querySelectorAll<HTMLInputElement>('input[name="component"]').forEach(i
   input.addEventListener('change', () => { if (input.checked) void run(() => viewer!.setComponent(input.value as 'all' | 'diffuse' | 'detail')); });
 });
 axis.addEventListener('change', () => void run(() => viewer!.setAxis(axis.value as 'auto' | 'x' | 'y' | 'z')));
+cameraPose.addEventListener('change', () => void run(() => viewer!.setPose(cameraPose.value as Parameters<Viewer['setPose']>[0])));
 layer.addEventListener('input', () => void run(() => viewer!.setLayer(Number(layer.value) < 0 ? null : Number(layer.value))));
 element('all-layers').addEventListener('click', () => void run(() => viewer!.setLayer(null)));
 element('reset').addEventListener('click', () => void run(() => viewer!.reset()));
@@ -127,6 +129,7 @@ try {
     if (disposed) return;
     subject.value = state.subjectId;
     updateSource(state.subjectId);
+    cameraPose.value = state.pose;
     axis.value = state.axis;
     document.querySelectorAll<HTMLInputElement>('input[name="component"]').forEach(input => { input.checked = input.value === state.component; });
     layer.max = String(Math.max(-1, state.layerCount - 1));

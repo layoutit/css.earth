@@ -1,8 +1,8 @@
 # Research plan: coherent nebula structures in 3D
 
-Status: automatic 2D decomposition benchmark implemented; 3D reconstruction remains proposed. Updated 2026-09-07.
+Status: automatic 2D benchmarks and isolated 3D controls implemented for Tarantula and Orion. Reusable tooling passes; current masks fail the production morphology gate. [Decision and results](coherent-depth.md). Updated 2026-09-08.
 
-**Automatic approximation first; optional detailed refinement second.** The pipeline must discover structures without hand-authoring every cloud. Tarantula inside the LMC is the initial benchmark and later a candidate for registered high-resolution refinement. Its name and specific features must not enter the reusable algorithms. Prove a coherent local volume before integrating it into a whole galaxy or applying it to the SMC and Orion.
+**Automatic approximation first; optional detailed refinement second.** The pipeline must discover structures without hand-authoring every cloud. Tarantula inside the LMC is the initial benchmark and later a candidate for registered high-resolution refinement. Its name and specific features must not enter reusable algorithms. Prove a coherent local volume before production integration; the Orion transfer diagnostic does not establish that acceptance.
 
 The first implemented comparison is documented in [automatic structure benchmark](structure-benchmark.md). It compares an independent starlet prototype, the existing median kernel, and an imported run of official getsf when available. These are 2D morphology experiments; none recovers measured gas depth.
 
@@ -107,6 +107,6 @@ For each newly acquired input, record publisher, paper/data identifier, bands, W
 - Before each experiment, record its hypothesis, fixed controls, success measure and maximum runs. Allow at most three fix/review rounds per experiment and two final cleanup rounds; carry results forward without restarting the counters.
 - Stop at an impasse if improvement requires unavailable evidence, corrects one view by breaking another, or exceeds the agreed budget. State whether the owning problem is registration, decomposition, depth geometry, sampling or rendering; do not move the defect into a different stage.
 - During iteration, run only affected lab/preparation checks. At an implementation's final gate, run the required repository checks and browser comparisons; report unrelated failures separately. Use an independent different-vendor review when available and record an unavailable review honestly.
-- The first deliverable is a source/registration sheet and a 2D decomposition comparison for the selected crop. Then build the localized 3D controls. Do not expand to the SMC, other galaxies, Orion or production integration before the Tarantula decision.
+- Source sheets, 2D comparisons and localized 3D controls are now available. The subsequent Orion transfer diagnostic used unchanged extraction settings after rejecting Tarantula's masks for production. SMC, whole-galaxy integration and detailed-image refinement remain separate work behind the morphology gate.
 
 Running/rebuilding the existing baseline is documented in [workflows](workflows.md).

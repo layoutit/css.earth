@@ -30,6 +30,8 @@ interface LabSubjectRecord {
   modelNote?: string;
   framingRadiusUnits?: number;
   hasDetail?: boolean;
+  comparisonGroup?: string;
+  referenceProjectionScale?: number;
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
 export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__}/${path}`;
@@ -38,6 +40,10 @@ const recipes = import.meta.glob('../../../src/objects/*/source/recipe.json', { 
 const candidates = import.meta.glob('../../../.local/nebula-lab/*-{cutout,diffuse,residual,mask}.png',
   { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 export const subjects = subjectRecords.map(record => {
+  if (record.referenceProjectionScale !== undefined &&
+      (!Number.isFinite(record.referenceProjectionScale) || record.referenceProjectionScale <= 0)) {
+    throw new TypeError(`Lab subject ${record.id} has an invalid reference projection scale.`);
+  }
   const recipe = recipes[`../../../${record.directory}/source/recipe.json`];
   const imagePath = record.imagePath ?? (record.image ? `${record.directory}/${record.image}` : null);
   if (!imagePath) throw new TypeError(`Lab subject ${record.id} has no comparison image path.`);
@@ -63,9 +69,16 @@ export const subjects = subjectRecords.map(record => {
 });
 type Axis = 'auto' | 'x' | 'y' | 'z';
 type Component = 'all' | 'diffuse' | 'detail';
+export type CameraPose = 'front' | 'x-minus-60' | 'x-minus-30' | 'x-plus-30' | 'x-plus-60' |
+  'y-minus-60' | 'y-minus-30' | 'y-plus-30' | 'y-plus-60' | 'edge-x' | 'edge-y' | 'manual';
+const POSE_OFFSETS: Record<Exclude<CameraPose, 'manual'>, readonly [number, number]> = {
+  front: [0, 0], 'x-minus-60': [-60, 0], 'x-minus-30': [-30, 0], 'x-plus-30': [30, 0], 'x-plus-60': [60, 0],
+  'y-minus-60': [0, -60], 'y-minus-30': [0, -30], 'y-plus-30': [0, 30], 'y-plus-60': [0, 60],
+  'edge-x': [90, 0], 'edge-y': [0, 90],
+};
 export interface LabState {
   subjectId: string; component: Component; axis: Axis; layer: number | null;
-  layerCount: number; status: string; error?: string; distanceUnits?: number;
+  layerCount: number; status: string; pose: CameraPose; error?: string; distanceUnits?: number;
 }
 
 /** One inspected object; production input, transforms and retained leaves, without the application shell. */
@@ -80,12 +93,13 @@ export async function createNebulaLabViewer({ host, subjectId, onState }: {
   let mounted: { publish(publication: Parameters<ReturnType<typeof mountPreparedCssImageLayers>['publish']>[0]): void; destroy(): void } | null = null;
   let banks: { axis: Exclude<Axis, 'auto'>; root: HTMLElement; leaves: { nodes: HTMLElement[]; detail: boolean }[] }[] = [];
   let axis: Axis = 'auto', component: Component = 'all', layer: number | null = null;
+  let pose: CameraPose = 'front';
   let layerCount = 0, status = 'Loading prepared object', error: string | undefined;
   let disposed = false, loadVersion = 0, frameRequest = 0, revision = 0;
   let radius = 1, fitDistance = 6, width = 1, height = 1, focal = 1;
   let rotation = new DOMMatrix().rotateAxisAngle(1, 0, 0, 180);
   const values = { rotX: 0, rotY: 0, zoom: 1, distance: fitDistance };
-  const report = () => onState({ subjectId: subject.id, component, axis, layer, layerCount, status,
+  const report = () => onState({ subjectId: subject.id, component, axis, layer, layerCount, status, pose,
     ...(error ? { error } : {}), distanceUnits: values.distance });
   const schedule = () => {
     if (!disposed && !frameRequest) frameRequest = requestAnimationFrame(() => { frameRequest = 0; publish(); });
@@ -102,6 +116,7 @@ export async function createNebulaLabViewer({ host, subjectId, onState }: {
     },
   };
   function rotate(delta: CameraDelta) {
+    const changedRotation = Boolean(delta.rotation) || delta.controlPitchDelta !== 0 || delta.controlYawDelta !== 0;
     camera.update({ rotX: values.rotX + delta.controlPitchDelta, rotY: values.rotY + delta.controlYawDelta,
       ...(delta.zoom === undefined ? {} : { zoom: delta.zoom }), ...(delta.distance === undefined ? {} : { distance: delta.distance }) });
     const m = delta.rotation ? worldRotationFromQuaternion(delta.rotation as [number, number, number, number]) : null;
@@ -110,6 +125,7 @@ export async function createNebulaLabViewer({ host, subjectId, onState }: {
       ? new DOMMatrix([m[0], m[3], m[6], 0, m[1], m[4], m[7], 0, m[2], m[5], m[8], 0, 0, 0, 0, 1])
       : new DOMMatrix().rotateAxisAngle(1, 0, 0, delta.controlPitchDelta).rotateAxisAngle(0, 1, 0, delta.controlYawDelta);
     rotation = increment.multiply(rotation); revision++;
+    if (changedRotation) { pose = 'manual'; report(); }
   }
   const controls = createObjectInteractionControls({ inputSurface: host, runtimePolicy, camera,
     trackballMetrics() {
@@ -156,21 +172,40 @@ export async function createNebulaLabViewer({ host, subjectId, onState }: {
     inspectLayers(); host.dataset.cameraRevision = String(revision); host.dataset.distance = String(values.distance);
   }
   function measure() {
-    width = Math.max(1, host.clientWidth); height = Math.max(1, host.clientHeight); focal = Math.max(width, height) * 1.15;
+    width = Math.max(1, host.clientWidth); height = Math.max(1, host.clientHeight);
+    focal = Math.max(width, height) * 1.15 * (subject.referenceProjectionScale ?? 1);
     schedule();
   }
   const observer = new ResizeObserver(measure); observer.observe(host); measure();
   function reset() {
-    controls.stop(); rotation = new DOMMatrix().rotateAxisAngle(1, 0, 0, 180);
+    controls.stop(); pose = 'front'; rotation = new DOMMatrix().rotateAxisAngle(1, 0, 0, 180);
     fitDistance = Math.max(radius * 2, focal * radius / (Math.min(width, height) * .32));
     values.distance = fitDistance; values.zoom = 1; values.rotX = values.rotY = 0; revision++;
+    schedule(); report();
+  }
+  function applyPose(value: Exclude<CameraPose, 'manual'>) {
+    const [rotX, rotY] = POSE_OFFSETS[value];
+    controls.stop(); pose = value;
+    const base = new DOMMatrix().rotateAxisAngle(1, 0, 0, 180);
+    rotation = new DOMMatrix().rotateAxisAngle(1, 0, 0, rotX).rotateAxisAngle(0, 1, 0, rotY).multiply(base);
+    values.rotX = rotX; values.rotY = rotY; revision++; schedule(); report();
+  }
+  function retainCamera() {
+    return { pose, rotation: new DOMMatrix(Array.from(rotation.toFloat64Array())), rotX: values.rotX, rotY: values.rotY, distance: values.distance };
+  }
+  function restoreCamera(saved: ReturnType<typeof retainCamera>) {
+    controls.stop(); pose = saved.pose; rotation = saved.rotation;
+    fitDistance = Math.max(radius * 2, focal * radius / (Math.min(width, height) * .32));
+    values.rotX = saved.rotX; values.rotY = saved.rotY; values.distance = saved.distance; values.zoom = fitDistance / values.distance; revision++;
     schedule(); report();
   }
   async function setSubject(id: string) {
     const next = subjects.find(item => item.id === id);
     if (!next) throw new TypeError(`Unknown lab subject: ${id}`);
+    const retain = subject.id !== next.id && subject.comparisonGroup !== undefined && subject.comparisonGroup === next.comparisonGroup ? retainCamera() : null;
     const version = ++loadVersion;
     controls.stop(); subject = next; status = 'Loading prepared object'; error = undefined;
+    measure();
     axis = 'auto'; component = 'all'; layer = null;
     mounted?.destroy(); mounted = null; banks = []; payload = null; host.dataset.ready = 'false'; report();
     try {
@@ -204,7 +239,8 @@ export async function createNebulaLabViewer({ host, subjectId, onState }: {
       });
       radius = next.framingRadiusUnits ?? Math.max(...loaded.frame.boundsUnits.max.map((v, index) => (v - loaded.frame.boundsUnits.min[index]) / 2));
       status = `${loaded.resources.length} prepared images · ${(loaded.resources.reduce((sum, item) => sum + item.bytes, 0) / 1e6).toFixed(1)} MB`;
-      host.dataset.subject = id; host.dataset.ready = 'true'; reset();
+      host.dataset.subject = id; host.dataset.ready = 'true';
+      if (retain) restoreCamera(retain); else reset();
     } catch (failure) {
       if (disposed || version !== loadVersion) return;
       status = 'Could not load prepared object'; error = failure instanceof Error ? failure.message : String(failure); report();
@@ -212,6 +248,10 @@ export async function createNebulaLabViewer({ host, subjectId, onState }: {
   }
   await setSubject(subject.id);
   return Object.freeze({ setSubject, reset,
+    setPose(value: CameraPose) {
+      if (value === 'manual' || !(value in POSE_OFFSETS)) throw new TypeError('Manual camera pose is controlled by pointer input.');
+      applyPose(value);
+    },
     setComponent(value: Component) {
       if (!['all', 'diffuse', 'detail'].includes(value)) throw new TypeError('Unknown component.');
       component = value; if (value !== 'all') axis = 'z'; layer = null; publish(); report();

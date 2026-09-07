@@ -23,6 +23,21 @@
             <label><input type="radio" name="component" value="diffuse" /> Diffuse</label>
             <label><input type="radio" name="component" value="detail" /> Compact detail</label>
           </div>
+          <label class="field-label" for="camera-pose">Camera pose</label>
+          <select id="camera-pose" aria-label="Fixed camera pose">
+            <option value="front">Front</option>
+            <option value="x-minus-60">Around X −60°</option>
+            <option value="x-minus-30">Around X −30°</option>
+            <option value="x-plus-30">Around X +30°</option>
+            <option value="x-plus-60">Around X +60°</option>
+            <option value="y-minus-60">Around Y −60°</option>
+            <option value="y-minus-30">Around Y −30°</option>
+            <option value="y-plus-30">Around Y +30°</option>
+            <option value="y-plus-60">Around Y +60°</option>
+            <option value="edge-x">Edge-on X</option>
+            <option value="edge-y">Edge-on Y</option>
+            <option value="manual">Manual</option>
+          </select>
           <label class="field-label" for="axis">Projection axis</label>
           <select id="axis">
             <option value="auto">Auto</option>
