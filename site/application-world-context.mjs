@@ -1,4 +1,4 @@
-import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField } from '../src/renderers/css/dist/universe.js';
+import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
@@ -30,9 +30,15 @@ function loadApplicationUniverse() {
       loadPreparedCssVolume(volumeSet.descriptor, volumeSet.transport),
       loadPreparedCssPointField(starSet.descriptor, starSet.transport),
     ]);
+    const shells = await Promise.all(Object.values(descriptors).filter(descriptor => descriptor.type === 'surface-shell')
+      .map(async descriptor => {
+        const set = resourceSet(descriptor.id);
+        return { payload: await loadPreparedCssSurfaceShell(set.descriptor, set.transport),
+          resolveResource: path => set.resolve(`prepared/${path}`) };
+      }));
     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
       .map(([id, sprite]) => [id, contextMarkerSprite(sprite)]));
-    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites,
+    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, shells,
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolveStarResource: path => starSet.resolve(`prepared/${path}`) });
     const markerPool = 'context-markers';

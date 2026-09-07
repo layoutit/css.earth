@@ -39,4 +39,5 @@ export { parsePreparedWorldContext } from './universe/prepared-world-context.js'
 export type { PreparedContextFocus, PreparedContextPointSource, PreparedWorldContext } from './universe/prepared-world-context.js';
 export type { PreparedCssVolume, PreparedVolumeCameraTransform, PreparedVolumeLeaf, PreparedVolumeLeafStyle, PreparedVolumeMountOptions, PreparedVolumeRuntime, PreparedVolumeStack, VolumeCameraPublication, VolumeAxis } from './volume/types.js';
 export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
+export { createPreparedObjectNavigation } from './runtime/prepared-object-navigation.js';
 export { createPreparedUniverse } from './universe/prepared-universe-runtime.js';

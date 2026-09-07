@@ -11,6 +11,7 @@ import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mjs';
 import * as applicationWorldContext from './application-world-context.mjs';
 import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mjs';
+import { createNavigationTiming } from './navigation-timing.mjs';
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
@@ -220,9 +221,13 @@ export function createSceneRouter({
       if (options.overview) url.searchParams.set('overview', 'solar-system');
     }
     const request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
-      url: url.href, options: { ...options, history: mode } };
+      url: url.href, options: { ...options, history: mode }, timing: createNavigationTiming(windowTarget, objectId, id) };
+    request.controller.signal.addEventListener('abort', () => request.timing.mark('cancelled'), { once: true });
     pending = request;
-    if (object.id === objectId && !options.overview) shellOwner?.shell?.setOverview?.(false);
+    if (object.id !== objectId && !options.overview) {
+      const restoreSelection = shellOwner?.shell?.beginObjectSelection?.(object);
+      if (restoreSelection) request.lifetime.onDispose(restoreSelection);
+    } else if (object.id === objectId && !options.overview) shellOwner?.shell?.setOverview?.(false);
     mountTask = transition(request, object);
     return mountTask;
   }
@@ -240,7 +245,7 @@ export function createSceneRouter({
           syncPlayback();
           const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
             mount: source.mount, signal: request.controller.signal, reducedMotion: reducedMotionActive,
-            targetWorldCamera: request.options.targetWorldCamera }));
+            targetWorldCamera: request.options.targetWorldCamera, timing: request.timing }));
           if (focused.cancelled || pending !== request) return false;
         }
         if (!restore) {
@@ -254,31 +259,40 @@ export function createSceneRouter({
         if (pending !== request) return false;
         pending = null; request.lifetime.destroy(); syncPlayback();
         if (!restore) source.viewUrl?.flush();
+        request.timing.mark('finished');
         return true;
       }
       syncPlayback();
-      const contentTask = (loadContent ?? contentTransport.load)(object, { signal: request.controller.signal });
-      // Observe content even if the factory fails before it can be awaited.
-      const loadedTask = Promise.all([loadObject(object.id), contentTask]);
-      const loaded = await request.lifetime.wait(loadedTask);
-      if (loaded.cancelled || pending !== request) return false;
-      const [factory, content] = loaded.value;
-      request.lifetime.onDispose(() => content.dispose?.());
-      const prepared = await request.lifetime.wait(navigation.prepare({
-        fromId: objectId, toId: object.id, fromMount: source?.mount ?? null, toFactory: factory,
+      const contentTask = (loadContent ?? contentTransport.load)(object, { signal: request.controller.signal })
+        .then(content => {
+          request.lifetime.onDispose(() => content.dispose?.());
+          request.timing.mark('content-ready'); return content;
+        });
+      const factoryTask = loadObject(object.id).then(factory => { request.timing.mark('factory-ready'); return factory; });
+      // The registry already owns the physical frames. Start the camera while
+      // the destination factory, content and texture bank load independently.
+      const preparationTask = navigation.prepare({
+        fromId: objectId, toId: object.id, fromMount: source?.mount ?? null, toFactory: factoryTask,
         signal: request.controller.signal, history: request.options.history, url: request.url,
         motionRequested: motionEnabled, reducedMotion: reducedMotionActive,
-        targetWorldCamera: request.options.targetWorldCamera, preserveView: request.options.preserveView,
-      }));
-      if (prepared.cancelled || pending !== request) return false;
+        targetWorldCamera: request.options.targetWorldCamera,
+        preserveView: request.options.preserveView,
+        timing: request.timing,
+      });
+      const loaded = await request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
+      if (loaded.cancelled || pending !== request) return false;
+      const [factory, content, handoff] = loaded.value;
+      request.timing.mark('handoff');
       if (active) retire(active, null, { preserveShell: true, flush: false });
       objectId = object.id;
       if (stage.dataset) stage.dataset.objectId = object.id;
-      const result = await mountApplication({ factory, content, handoff: prepared.value, request });
+      const result = await mountApplication({ factory, content, handoff, request });
+      request.timing.mark(result === true ? 'finished' : sceneState === 'error' ? 'failed' : 'cancelled');
       if (pending === request) pending = null;
       request.lifetime.destroy();
       return result === true;
     } catch (error) {
+      request.timing.mark(error?.name === 'AbortError' ? 'cancelled' : 'failed');
       if (pending !== request || request.controller.signal.aborted) return false;
       pending = null; request.controller.abort(); request.lifetime.destroy();
       if (active === source && source) {

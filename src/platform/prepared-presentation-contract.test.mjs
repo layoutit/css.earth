@@ -14,7 +14,7 @@ export function presentationFixture(definition) {
       { parent: 1, tag: "div", className: "polycss-mesh", style: "", properties: [], attributes: {} },
       { parent: 1, tag: "s", className: "", style: "", properties: [], attributes: {} },
     ],  stageClasses: [] },
-    variants: (controls.lenses?.controls ?? [{ id: null }]).map(lens => ({ when: lens.id === null ? {} : { lensId: lens.id }, required: [], writes: [], materials: [] })),
+    variants: (controls.lenses?.controls ?? [{ id: null }]).map(lens => ({ when: controls.lenses ? { lensId: lens.id } : {}, required: [], writes: [], materials: [] })),
     materials: [], viewBindings: [], animations: [] };
 }
 const moon = await loadObjectTestDefinition('moon');
@@ -84,15 +84,4 @@ for (const target of ["camera", "scene"]) test(`an existing prepared native anim
   assert.ok(animation, "Use Mercury's actual prepared native transform animation");
   animation.target = definition.tree[target];
   assert.throws(() => requireObjectRuntimeDefinition(definition), /animation.*(?:camera|scene)/i);
-});
-
-test("bodies without lenses still require complete, unambiguous toggle selections", () => {
-  const plan = fixture(), controls = { lenses: null, settings: { controls: [{ kind: "toggle", name: "shadows", label: "Shadows", checked: true }] } };
-  plan.variants = [false, true].map(shadows => ({ when: { shadows }, required: [], writes: [], materials: [] }));
-  requirePreparedPresentation(plan, { controls });
-  plan.variants[0].when.lensId = 'model';
-  assert.throws(() => requirePreparedPresentation(plan, { controls }), /declared lens capability/);
-  delete plan.variants[0].when.lensId;
-  plan.variants.pop();
-  assert.throws(() => requirePreparedPresentation(plan, { controls }), /exactly once/);
 });

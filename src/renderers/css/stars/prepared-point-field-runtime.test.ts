@@ -7,9 +7,18 @@ import type { PreparedCssPointField } from './types.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 
 class FakeElement {
-  readonly children: FakeElement[] = []; readonly style = { setProperty(name: string, value: string) { Object.assign(this, { [name]: value }); } } as unknown as CSSStyleDeclaration; readonly dataset: Record<string,string> = {};
+  writes = 0;
+  readonly children: FakeElement[] = [];
+  readonly style = new Proxy({ setProperty(name: string, value: string) { Object.assign(this, { [name]: value }); } }, {
+    set: (target, key, value) => { this.writes++; return Reflect.set(target, key, value); },
+  }) as unknown as CSSStyleDeclaration;
+  readonly dataset: Record<string,string> = new Proxy({}, { set: (target: Record<string,string>, key: string, value: string) => {
+    this.writes++; target[key] = value; return true;
+  } });
   parentNode: FakeElement|null = null; className=''; ariaHidden=''; textContent=''; clientWidth=800; clientHeight=600;
   constructor(readonly ownerDocument: FakeDocument) {}
+  get offsetWidth(){return this.textContent.length*8;}
+  get offsetHeight(){return 17;}
   getBoundingClientRect() {return {x:0,y:0,left:0,top:0,right:this.clientWidth,bottom:this.clientHeight,width:this.clientWidth,height:this.clientHeight};}
   appendChild(child: FakeElement): FakeElement { this.insertBefore(child,null); return child; }
   insertBefore(child: FakeElement,before: FakeElement|null): void {
@@ -48,15 +57,36 @@ function fixture():PreparedCssPointField {
     policy:{activeSlots:4,transitionSlots:4,maxErrorPx:2,transitionMs:180},resources:[{path:'points.png',sha256:'0'.repeat(64),bytes:1,width:32,height:32}],provenance:{},
   };
 }
-function mount(payload=fixture()) {
+function mount(payload=fixture(), showLabels = true) {
   const document=new FakeDocument(),host=document.createElement(),before=document.createElement();host.appendChild(before);
   const resolveResource=vi.fn((path:string)=>`/prepared/${path}`);
-  const layer=mountPreparedCssPointField({host:host as unknown as HTMLElement,before:before as unknown as Element,payload,resolveResource});
+  const layer=mountPreparedCssPointField({host:host as unknown as HTMLElement,before:before as unknown as Element,payload,resolveResource,showLabels});
   return {document,host,before,layer,root:layer.root as unknown as FakeElement,resolveResource};
 }
 function leaves(root: FakeElement): FakeElement[] {
   return root.children.flatMap(child => child.className === 'prepared-point-field-stars' ? child.children : [child]);
 }
+
+test('foreground label exclusion hides only star text and is released by the next publication',()=>{
+  const source=fixture(),payload={...source,stars:source.stars.map((star,index)=>({...star,name:index===2?'Rigil Kentaurus':null}))};
+  const {layer,root,document}=mount(payload);
+  layer.publish(world(),viewport,1);document.frame(500);
+  const labels=root.children.filter(element=>element.className==='prepared-star-label'),active=labels[0]!;
+  expect(active.textContent).toBe('Rigil Kentaurus');expect(active.style.visibility).toBe('');
+  const points=layer.inspect().points.filter(point=>point.reference!==null && point.element.style.visibility!=='hidden');
+  expect(points.length).toBeGreaterThan(0);
+  const retained=leaves(root),drawn=layer.inspect().visiblePoints;
+  const alpha=Number(active.style.opacity);
+  // The named star projects to (70,-20), with text directly above that anchor.
+  layer.publish(world(),viewport,1,[{left:50,top:-50,right:90,bottom:-25}]);
+  expect(Number(active.style.opacity)).toBeCloseTo(alpha);document.frame(250);
+  expect(Number(active.style.opacity)).toBeCloseTo(alpha/2);document.frame(250);
+  expect(Number(active.style.opacity)).toBe(0);expect(layer.inspect().visiblePoints).toBe(drawn);
+  expect(points.every(point=>point.element.style.visibility!=='hidden')).toBe(true);
+  expect(leaves(root)).toEqual(retained);
+  layer.publish(world(),viewport,1);expect(Number(active.style.opacity)).toBe(0);
+  document.frame(250);expect(Number(active.style.opacity)).toBeCloseTo(alpha/2);layer.destroy();
+});
 function find(layer:ReturnType<typeof mountPreparedCssPointField>,reference:string):FakeElement {
   const element=layer.inspect().points.find(point=>point.reference===reference && point.element.style.visibility!=='hidden')?.element as unknown as FakeElement;
   if(!element)throw new Error(`No visible slot for ${reference}`);return element;
@@ -67,6 +97,20 @@ function center(element:FakeElement):readonly [number,number] {
   const half=Number(match[3])*32/2;return [Number(match[1])+half,Number(match[2])+half];
 }
 afterEach(()=>vi.useRealTimers());
+
+test('an unchanged camera and surviving identities do not rewrite retained star DOM', () => {
+  vi.useFakeTimers();
+  const { layer, root } = mount(fixture(), false);
+  layer.publish(world(), viewport, 1);
+  const slots = leaves(root);
+  slots.forEach(slot => { slot.writes = 0; });
+  layer.publish(world(), viewport, 1);
+  expect(slots.reduce((sum, slot) => sum + slot.writes, 0)).toBe(0);
+  layer.publish(world(1), viewport, 1);
+  expect(center(find(layer, 'star:2'))[0]).toBeCloseTo(66, 12);
+  expect(leaves(root)).toEqual(slots);
+  layer.destroy();
+});
 
 test('point projection preserves principal point and distance-dependent parallax under translation and rotation',()=>{
   const identity=[1,0,0,0,1,0,0,0,1] as const;
@@ -169,5 +213,37 @@ test('changing the detailed object updates star occlusion without replacing the 
   layer.publish(world(), viewport, 1);
   expect(find(layer, 'star:2')).toBe(visible);
   expect(leaves(root)).toEqual(slots);
+  layer.destroy();
+});
+
+test('background catalogue names can be suppressed without changing the prepared star points', () => {
+  const data = fixture();
+  const named = { ...data, stars: data.stars.map(star => ({ ...star, name: 'Aldebaran' })) };
+  const annotated = mount(named), background = mount(named, false);
+  for (const camera of [world(), world(5)]) {
+    annotated.layer.publish(camera, viewport, 1);
+    background.layer.publish(camera, viewport, 1);
+    expect(leaves(annotated.root).some(node => node.className === 'prepared-star-label' && node.textContent === 'Aldebaran')).toBe(true);
+    expect(leaves(background.root).some(node => node.className === 'prepared-star-label')).toBe(false);
+    expect(background.root.dataset).toEqual(annotated.root.dataset);
+    const presentation = (layer: ReturnType<typeof mountPreparedCssPointField>) =>
+      Object.fromEntries(Object.entries(find(layer, 'star:2').style).filter(([, value]) => typeof value !== 'function'));
+    expect(presentation(background.layer)).toEqual(presentation(annotated.layer));
+  }
+  annotated.layer.destroy(); background.layer.destroy();
+  expect(background.document.frames.size).toBe(0);
+});
+
+test('publication suppresses floating-point noise but bounds actual parallax rounding below a thousandth of a pixel', () => {
+  const { layer, root } = mount(fixture(), false);
+  layer.publish(world(), viewport, 1);
+  const slots = leaves(root); slots.forEach(slot => { slot.writes = 0; });
+  layer.publish(world(.000001), viewport, 1);
+  expect(slots.reduce((sum, slot) => sum + slot.writes, 0)).toBe(0);
+  layer.publish(world(.123456789), viewport, 1);
+  const expected = projectPreparedPoint(fixture().stars[2].positionUnits, [.123456789, 0, 0], [1,0,0,0,1,0,0,0,1], 400, 30, -20);
+  const actual = center(find(layer, 'star:2'));
+  expect(Math.abs(actual[0] - expected.x)).toBeLessThan(.001);
+  expect(Math.abs(actual[1] - expected.y)).toBeLessThan(.001);
   layer.destroy();
 });

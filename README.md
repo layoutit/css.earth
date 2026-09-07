@@ -12,6 +12,10 @@ Explore the live version: [css.earth](https://css.earth) 🪐
 
 ## How to Build
 
+Use Node.js 24 or Node.js 22.15+ and pnpm 10. Source preparation uses Node's
+[native Zstandard support](https://nodejs.org/api/zlib.html#zlibzstddecompresssyncbuffer-options),
+which is unavailable in earlier Node 22 releases.
+
 Install dependencies and download the prepared browser assets, then start the site:
 
 ```sh

@@ -353,9 +353,12 @@ function requireContextualBindingSource(source) {
     returned.callee.property?.name !== 'assign' || returned.arguments[0]?.name !== mount.id.name) fail();
   const renderer = bindings.get('createWorldContextObjectRuntime');
   if (!renderer || bindings.get('createNavigableObjectMount')?.source !== renderer.source ||
-    bindings.get('prepareObjectResources')?.source !== renderer.source) fail();
-  const nodes = []; walkRuntimeAst(ast, node => nodes.push(node));
-  if (!nodes.some(node => node.type === 'CallExpression' && node.callee?.name === 'prepareObjectResources')) fail();
+    bindings.get('createPreparedObjectNavigation')?.source !== renderer.source) fail();
+  const navigation = property(returned.arguments[1], 'navigation')?.value;
+  const load = navigation?.arguments?.[0];
+  if (navigation?.type !== 'CallExpression' || navigation.callee?.name !== 'createPreparedObjectNavigation' ||
+    navigation.arguments.length !== 2 || navigation.arguments[1]?.name !== frameParam.left.name ||
+    load?.type !== 'ArrowFunctionExpression' || !load.async || load.params.length !== 0 || load.body?.name !== definition.name) fail();
 }
 
 function requireApplicationWorldContextSource(source) {
@@ -369,7 +372,7 @@ function requireApplicationWorldContextSource(source) {
   }
   const context = [...defaults].find(([, path]) => path === '../src/planets/sun/prepared/world-context.json')?.[0];
   const renderer = '../src/renderers/css/dist/universe.js';
-  const required = ['createPreparedUniverse', 'prepareObjectResources', 'loadPreparedCssVolume', 'loadPreparedCssPointField'];
+  const required = ['createPreparedUniverse', 'prepareObjectResources', 'loadPreparedCssVolume', 'loadPreparedCssPointField', 'loadPreparedCssSurfaceShell'];
   if (!context || !required.every(name => [...imports].some(([local, binding]) => binding.name === name && binding.source === renderer)) ||
     ![...imports].some(([local, binding]) => binding.name === 'PREPARED_NAVIGATION_MARKERS' && binding.source === './prepared-navigation-markers.mjs')) fail();
   const nodes = []; walkRuntimeAst(ast, node => nodes.push(node));
@@ -378,7 +381,7 @@ function requireApplicationWorldContextSource(source) {
   const patterns = globs.map(node => node.arguments[0]?.value);
   if (!patterns.includes('../src/objects/*/object.json') || !patterns.includes('../src/objects/*/prepared/**/*.{json,png,webp}') ||
     calls('loadPreparedCssVolume').length !== 1 || calls('loadPreparedCssPointField').length !== 1 || calls('createPreparedUniverse').length !== 1 ||
-    calls('prepareObjectResources').length !== 1) fail();
+    calls('loadPreparedCssSurfaceShell').length !== 1 || calls('prepareObjectResources').length !== 1) fail();
   const resourceCalls = nodes.filter(node => node.type === 'CallExpression' && node.callee?.name === 'resourceSet');
   if (!resourceCalls.some(node => memberPath(node.arguments[0])?.join('.') === 'applicationContext.volume.objectId') &&
     !resourceCalls.some(node => memberPath(node.arguments[0])?.join('.') === `${context}.volume.objectId`)) fail();
@@ -404,7 +407,7 @@ function requireApplicationWorldContextSource(source) {
     memberPath(starCall.arguments[1])?.join('.') !== `${starSet.id.name}.transport`) fail();
   const universe = calls('createPreparedUniverse')[0], fields = universe.arguments[0]?.properties;
   if (universe.arguments.length !== 1 || universe.arguments[0]?.type !== 'ObjectExpression' ||
-    !['context', 'volume', 'stars', 'sprites', 'resolveResource', 'resolveStarResource'].every(name => property({ properties: fields }, name))) fail();
+    !['context', 'volume', 'stars', 'sprites', 'shells', 'resolveResource', 'resolveStarResource'].every(name => property({ properties: fields }, name))) fail();
 }
 
 function requireContextFrame(value, objectId) {
