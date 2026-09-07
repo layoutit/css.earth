@@ -40,7 +40,10 @@ function fixture(hitTest = () => false) {
     dataset = {};
     style = { setProperty(name, value) { this[name] = value; }, removeProperty(name) { delete this[name]; } };
     parentElement = null;
-    closest() { return this.dataset.contextGroup ? this : this.parentElement?.closest() ?? null; }
+    closest(selector) {
+      const matches = selector === '[data-context-orbit]' ? this.dataset.contextOrbit : this.dataset.contextGroup;
+      return matches ? this : this.parentElement?.closest(selector) ?? null;
+    }
     querySelector() { return document.group ?? null; }
     captured = new Set();
     contains(element) { return element === this || document.targets.includes(element); }
@@ -229,7 +232,8 @@ test('label, circle and visible orbit share hover, pointer cursor and single-cli
   orbit.dataset.contextOrbit = 'venus'; orbit.parentElement = group;
   orbit.dataset.objectNavigate = 'venus'; orbit.click = f.target.click;
   orbit.style.pointerEvents = 'none';
-  chord.parentElement = orbit;
+  const block = new f.target.constructor(); block.parentElement = orbit;
+  chord.parentElement = block;
   f.target.parentElement = circle.parentElement = group;
   circle.dataset.objectNavigate = 'venus'; circle.style.pointerEvents = 'auto';
   for (const target of [f.target, circle, chord]) {

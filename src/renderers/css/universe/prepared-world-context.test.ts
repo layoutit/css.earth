@@ -84,6 +84,28 @@ function mount(scale: number) {
   return layer.root as unknown as FakeElement;
 }
 
+test('camera viewport snapshots drive clipping and resize without reading host layout', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  Object.defineProperties(root.parentNode!, {
+    clientWidth: { get() { throw new Error('Publication flushed host layout'); } },
+    clientHeight: { get() { throw new Error('Publication flushed host layout'); } },
+  });
+  const mercury = layer.inspect().find(entry => entry.id === 'mercury')!;
+  const publish = (widthPixels: number, heightPixels: number) => layer.publish({
+    referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] },
+  }, { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels, heightPixels });
+  publish(800, 600);
+  expect(mercury.indicator.style.visibility).toBe('');
+  publish(40, 600);
+  expect(mercury.indicator.style.visibility).toBe('hidden');
+  publish(800, 600);
+  expect(mercury.indicator.style.visibility).toBe('');
+  publish(800, 10);
+  expect(mercury.indicator.style.visibility).toBe('hidden');
+  layer.destroy();
+});
+
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   expect(parsePreparedWorldContext(source).bodies.map(body => body.id).sort())
@@ -280,7 +302,7 @@ test('orbit and circle keep a one-pixel stroke across zoom and physical system s
         { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 5000, heightPixels: 5000 });
       const mercury = layer.inspect().find(body => body.id === 'mercury')!;
       const width = (mercury.indicator as unknown as FakeElement).style['--context-line-width'];
-      expect((mercury.orbit[0].parentNode as unknown as FakeElement).style['--context-line-width']).toBe(width);
+      expect((mercury.orbit[0].parentNode as unknown as FakeElement).parentNode!.style['--context-line-width']).toBe(width);
       expect(find(root, 'contextIndicator', 'sun').style['--context-line-width']).toBe(width);
       return parseFloat(width);
     };

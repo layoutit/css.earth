@@ -77,7 +77,8 @@
     "test:preparation": "node tools/test-preparation.mjs",
     "typecheck:preparation": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json",
     "test:seo": "node site/test/seo-browser.mjs",
-    "prepare:social": "node tools/prepare-social-images.mjs"
+    "prepare:social": "node tools/prepare-social-images.mjs",
+    "test:browser:flight": "node site/test/flight-registry-browser.mjs"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

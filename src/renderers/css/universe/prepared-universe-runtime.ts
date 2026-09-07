@@ -93,6 +93,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,
           setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
+          setNavigationIndicatorsVisible(visible: boolean) { spatial!.setNavigationIndicatorsVisible(visible); },
           inspect() {
             return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(),
               foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });

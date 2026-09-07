@@ -70,7 +70,7 @@ export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes }
   };
 }
 
-export function createViewReadout({ drawer, documentTarget, windowTarget }) {
+export function createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }) {
   const root = documentTarget.querySelector('.planet-view-readout');
   if (!root) return { setCamera() {}, setOverviewScope() {}, setPlaybackState() {}, destroy() {} };
   const dateGroup = root.querySelector('.planet-view-date'), date = root.querySelector('[data-view-date]');
@@ -86,19 +86,23 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
   const configs = new Map(maps.map(map => [map, JSON.parse(map.dataset.surfaceMinimap)]));
   const events = new AbortController();
   let camera = null, unsubscribe = null, frame = null, playing = false, disposed = false;
+  let timer = null, lastRender = -Infinity, dateDay = null, playbackReason = null;
   let overviewScope = 'solar-system';
   const write = (element, value) => { if (element.textContent !== value) element.textContent = value; };
   function render() {
     frame = null;
-    if (disposed) return;
+    if (disposed || documentTarget.hidden) return;
+    lastRender = windowTarget.performance.now();
     const navigation = camera?.navigation;
     const scene = documentTarget.querySelector('.polycss-scene');
     if (!navigation || !scene) { dateGroup.hidden = true; coordinates.hidden = true; scale.hidden = true; write(altitude, '—'); return; }
     const map = maps.find(map => !map.closest('[data-lens-details]')?.hidden) ?? maps[0];
-    const surface = surfaceMapContext(configs.get(map), camera, documentTarget, windowTarget);
+    const surface = surfaceReader ? surfaceReader.read(map, camera)
+      : surfaceMapContext(configs.get(map), camera, documentTarget, windowTarget);
     const world = navigation.capture(), optics = navigation.optics();
     dateGroup.hidden = !Number.isFinite(world.epochJdTt);
-    write(date, formatViewDate(world.epochJdTt));
+    const day = Number.isFinite(world.epochJdTt) ? Math.floor(world.epochJdTt + .5) : null;
+    if (day !== dateDay) { dateDay = day; write(date, formatViewDate(world.epochJdTt)); }
     const value = measureView({
       eyeM: world.pose.positionM.map((x, i) => x - navigation.frame.originM[i]),
       radiusM: navigation.frame.bodyRadiusM, rotation: worldRotationFromQuaternion(world.pose.orientationXyzw),
@@ -122,12 +126,37 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
     }
     if (playing) schedule();
   }
-  function schedule() { if (!disposed && frame === null) frame = windowTarget.requestAnimationFrame(render); }
-  windowTarget.addEventListener('resize', schedule, { signal: events.signal });
+  function schedule(immediate = false) {
+    if (disposed || documentTarget.hidden) return;
+    if (immediate && timer !== null) { windowTarget.clearTimeout(timer); timer = null; }
+    if (frame !== null || timer !== null) return;
+    const wait = immediate ? 0 : 100 - (windowTarget.performance.now() - lastRender);
+    if (wait > 0) timer = windowTarget.setTimeout(() => {
+      timer = null; schedule(true);
+    }, wait);
+    else frame = windowTarget.requestAnimationFrame(render);
+  }
+  const refresh = () => schedule(true);
+  windowTarget.addEventListener('resize', refresh, { signal: events.signal });
+  documentTarget.addEventListener('visibilitychange', () => {
+    if (documentTarget.hidden) {
+      if (timer !== null) windowTarget.clearTimeout(timer);
+      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+      timer = frame = null;
+    } else refresh();
+  }, { signal: events.signal });
   return {
-    setOverviewScope(scope) { overviewScope = scope; schedule(); },
-    setCamera(next) { unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(schedule) ?? null; schedule(); },
-    setPlaybackState(state) { playing = state.allowed; schedule(); },
-    destroy() { disposed = true; unsubscribe?.(); events.abort(); if (frame !== null) windowTarget.cancelAnimationFrame(frame); },
+    setOverviewScope(scope) { overviewScope = scope; refresh(); },
+    setCamera(next) { unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(() => schedule()) ?? null; refresh(); },
+    setPlaybackState(state) {
+      const changed = playing !== state.allowed || playbackReason !== state.reason;
+      playing = state.allowed; playbackReason = state.reason;
+      if (changed) refresh();
+    },
+    destroy() {
+      disposed = true; unsubscribe?.(); events.abort();
+      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+      if (timer !== null) windowTarget.clearTimeout(timer);
+    },
   };
 }

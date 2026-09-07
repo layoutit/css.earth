@@ -1,8 +1,10 @@
 import { createDestinationBrowser } from "./destination-browser.mjs";
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
 import { createExplorerRailController } from "./explorer-rail.mjs";
-import { createSurfaceMinimap } from "./surface-minimap.mjs";
+import { createSurfaceMinimap, loadSurfacePreview } from "./surface-minimap.mjs";
 import { createViewReadout } from "./view-readout.mjs";
+import { createSurfaceMapReader } from "./surface-map-context.mjs";
+import { mountDiagnosticRecorder } from './diagnostic-recorder.mjs';
 import { overviewScopeAtCamera } from './overview-context.mjs';
 
 export function mountPlanetShell({
@@ -36,6 +38,7 @@ export function mountPlanetShell({
     return controller;
   }
   try {
+    if (import.meta.env?.DEV === true) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
     own(createSheetController(drawer, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget, {
@@ -63,6 +66,9 @@ export function mountPlanetShell({
       information.replaceChildren(...[...card.childNodes].map(node => node.cloneNode(true)));
       restorePanelState([...information.children].filter(node => node instanceof windowTarget.HTMLDetailsElement)
         .map(node => [panelKey(node), node]), object.id, windowTarget);
+      for (const map of information.querySelectorAll('.planet-surface-minimap')) {
+        if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
+      }
       information.ariaBusy = 'true'; information.inert = true;
       const preview = { id: object.id, commit() {
         selectionPreview = null;
@@ -131,10 +137,11 @@ export function mountPlanetShell({
       { motionEnabled, onMotionChange, highContrastSky, heliosphereEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
       }, owner));
-    minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget,
+    const surfaceReader = retain(createSurfaceMapReader({ documentTarget, windowTarget }));
+    minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
       onInteraction() { settingsController.setMotionEnabled(false); },
     }));
-    viewReadout = retain(createViewReadout({ drawer, documentTarget, windowTarget }));
+    viewReadout = retain(createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }));
     retain(createPanelController(drawer, id, windowTarget, owner));
   }
 }

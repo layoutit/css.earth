@@ -23,6 +23,7 @@ function requireDefinition(value: unknown): asserts value is ObjectRuntimeDefini
   if (plan.heliocentricView !== undefined && plan.heliocentricView !== null) requireHeliocentric(plan.heliocentricView, plan.camera, plan.sun != null, id);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, ['content-first', 'materials-first'], 'resource order');
   requireAssets(plan.assets); requireTree(plan.tree);
+  if (!Array.isArray(plan.tree.activationGroups)) fail('activation groups must be prepared before transport');
   const resources = new Set(plan.assets.entries.map(entry => entry.key));
   requireMaterials(plan.materials, plan.tree, resources);
   requireVariants(plan.variants, plan.tree, resources, plan.materials, plan.controls, plan.camera);
