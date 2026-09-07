@@ -25,9 +25,9 @@ function harness(controls = moonControls, mutate = () => {}) {
   const lensInputs = (controls.lenses?.controls ?? []).map(lens => new Input({ name: "lens", value: lens.id, tagName: "BUTTON", type: "button" }));
   const settingInputs = (controls.settings?.controls ?? []).map(control => new Input({ name: control.name,
     type: control.kind === "toggle" ? "checkbox" : "range", checked: control.checked, value: String(initial[control.name]) }));
-  const motion = new Input({ name: "motion" }), contrast = new Input({ name: "skyContrast" });
-  settingInputs.push(motion, contrast);
-  const lensRoot = root(lensInputs, geographicControlSlots(controls.lenses.geographicCapacity ?? 0)), settingsRoot = root(settingInputs);
+  const motion = new Input({ name: "motion" }), contrast = new Input({ name: "skyContrast" }), heliosphere = new Input({ name: "heliosphere" });
+  settingInputs.push(motion, contrast, heliosphere);
+  const lensRoot = root(lensInputs, geographicControlSlots(controls.lenses?.geographicCapacity ?? 0)), settingsRoot = root(settingInputs);
   const stage = { ownerDocument: { querySelector: selector => selector === ".planet-lenses" ? lensRoot : settingsRoot } };
   const errors = [], actions = []; let state = { committed: null, desired: initial, plan: null, pending: true };
   let actionImplementation = action => {
@@ -37,7 +37,7 @@ function harness(controls = moonControls, mutate = () => {}) {
   mutate({ lensInputs, settingInputs, stage, lensRoot });
   const binding = createObjectControlBinding({ stage, controls, initialSelection: initial, getState: () => state,
     onAction(action) { actions.push(action); return actionImplementation(action); }, onError: error => errors.push(error) });
-  return { binding, lensInputs, settingInputs, lensRoot, settingsRoot, motion, contrast, errors, actions, initial,
+  return { binding, lensInputs, settingInputs, lensRoot, settingsRoot, motion, contrast, heliosphere, errors, actions, initial,
     setState(next) { state = next; binding.publish(state); }, state: () => state,
     onAction(callback) { actionImplementation = callback; },
     ready() { state = { ...state, committed: initial, desired: initial, pending: false }; binding.setReady(); },
@@ -47,8 +47,9 @@ function harness(controls = moonControls, mutate = () => {}) {
 for (const object of OBJECTS) test(`${object.id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
   const {controls} = await loadObjectTestDefinition(object.id);
   const h = harness(controls);
-  assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast"].includes(input.name))].every(input => input.disabled));
+  assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast", "heliosphere"].includes(input.name))].every(input => input.disabled));
   assert.equal(h.motion.disabled, false); assert.equal(h.contrast.disabled, false);
+  assert.equal(h.heliosphere.disabled, false);
   h.lensInputs[0]?.emit("click"); assert.equal(h.actions.length, 0);
   h.ready();
   for (const input of h.lensInputs) input.emit("click");
@@ -63,7 +64,7 @@ for (const object of OBJECTS) test(`${object.id}: one binder consumes every actu
     }
   }
   const count = h.actions.length;
-  h.motion.emit("change"); h.contrast.emit("change"); assert.equal(h.actions.length, count);
+  h.motion.emit("change"); h.contrast.emit("change"); h.heliosphere.emit("change"); assert.equal(h.actions.length, count);
   assert.deepEqual(h.errors, []);
   assert.equal(h.binding.stats().listenerCount, (controls.lenses?.controls.length ?? 0) + (controls.lenses?.geographicCapacity ?? 0) + (controls.settings?.controls.length ?? 0));
   h.binding.destroy(); h.binding.destroy(); h.lensInputs[0]?.emit("click");

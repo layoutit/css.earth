@@ -27,7 +27,7 @@ function fixture() {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-sky-contrast-setting"]) {
+    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -67,6 +67,7 @@ test("shell with no optional controls keeps Motion/high contrast and accessible 
   const motion = f.selectors.get(".planet-motion-setting");
   const contrast = f.selectors.get(".planet-sky-contrast-setting");
   assert.equal(contrast.checked, false, 'High contrast starts off');
+  assert.equal(f.selectors.get('.planet-heliosphere-setting').checked, false, 'Heliosphere starts off');
   assert.equal(f.documentTarget.body.dataset.skyContrast, 'standard');
   shell.setPlaybackState({ motionRequested: true, reason: "reduced-motion" });
   assert.equal(motion.checked, true);
@@ -107,8 +108,10 @@ test('object content replacement retains shell controls and input state without 
   const drawer = f.selectors.get('.planet-drawer-content');
   const motion = f.selectors.get('.planet-motion-setting');
   const contrast = f.selectors.get('.planet-sky-contrast-setting');
+  const heliosphere = f.selectors.get('.planet-heliosphere-setting');
   motion.checked = true; motion.dispatchEvent(new Event('change'));
   contrast.checked = true; contrast.dispatchEvent(new Event('change'));
+  heliosphere.checked = true; heliosphere.dispatchEvent(new Event('change'));
   const searchListeners = search.listeners.size, drawerListeners = drawer.listeners.size;
   for (const id of ['second', 'third', 'first']) {
     shell.setObject({ id, name: id, apply() {} });
@@ -119,6 +122,7 @@ test('object content replacement retains shell controls and input state without 
     assert.equal(drawer.listeners.size, drawerListeners);
     assert.equal(motion.checked, true);
     assert.equal(contrast.checked, true);
+    assert.equal(heliosphere.checked, true);
     assert.equal(f.documentTarget.body.dataset.skyContrast, 'high');
   }
   assert.deepEqual(f.changes, [true]);

@@ -31,6 +31,7 @@ export function createSceneRouter({
   let active = null;
   let mountTask = null;
   let motionEnabled = false;
+  let heliosphereEnabled = false;
   let scenePaused = true;
   let sceneError = null;
   let sceneState = "loading";
@@ -102,9 +103,13 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner = {};
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, heliosphereEnabled,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
+          } },
+          onHeliosphereChange(next) { if (shellOwner === owner && active) {
+            heliosphereEnabled = next === true;
+            worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
           } },
         });
       }
@@ -480,6 +485,7 @@ export function createSceneRouter({
           throw new TypeError('Persistent world context mount must publish and destroy.');
         }
         worldContextMount = value;
+        value.setHeliosphereEnabled?.(heliosphereEnabled);
         return value;
       }).catch(error => {
         if (worldContextAbort === controller) worldContextMountTask = null;
