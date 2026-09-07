@@ -34,7 +34,7 @@ test("native raster triangle audit rejects missing dimensions, addresses, flatte
       const matrix = text.split(','); matrix[3] = '0.1'; return `matrix3d(${matrix.join(',')})`;
     }); }, /affine transform/],
   ]) {
-    const { result } = await changedObject('vesta', plan => mutate(plan.tree.nodes.find(node => node.tag === 'u')));
+    const { result } = await changedObject('phoebe', plan => mutate(plan.tree.nodes.find(node => node.tag === 'u')));
     assert.equal(result.complete, false);
     assert.ok(result.objects[0].failures.some(failure => error.test(failure.error)), JSON.stringify(result.objects[0].failures));
   }

@@ -6,53 +6,32 @@
     "size": 5
   },
   "source": {
-    "id": "cassini-iss-2017-mimas",
-    "path": "observations/PIA17214_unlabeled.png",
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
     "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA17214_unlabeled.png",
     "credit": "NASA/JPL-Caltech/Space Science Institute",
     "license": "NASA/JPL imagery with attribution",
-    "licenseEvidence": [
-      "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-    ],
-    "acquisition": "Download the pinned published map; verify its original bytes.",
-    "redistribution": "Prepared derivatives retain NASA/JPL/SSI and source-author credits.",
     "consumers": [
-      "surfaces",
       "navigation"
     ],
-    "lensId": "normal",
-    "label": "Monochrome",
-    "falseColor": false,
-    "width": 5760,
-    "height": 2880,
-    "projection": {
-      "type": "equirectangular",
-      "referenceRadiusMeters": 198200,
-      "centerLongitude": 0,
-      "longitudeDirection": "east-positive",
-      "latitudeType": "planetocentric",
-      "longitudeDegrees": [
-        180,
-        540
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "cassini-iss-2017-mimas",
+        "cassini-spc-2025-shape"
       ],
-      "latitudeDegrees": [
-        90,
-        -90
-      ]
+      "size": 512,
+      "longitudeDegrees": 248,
+      "latitudeDegrees": 0,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "normal"
     },
-    "coverage": "Published full rectangular mosaic; no separate validity mask or documented missing code. Preserve every supplied pixel, including black shadows. Native resolution and illumination vary.",
-    "catalog": "https://science.nasa.gov/resource/mimas-global-map-june-2017/",
-    "expectedBytes": 6959979,
-    "expectedSha256": "f8ffa667b2c35ec890973ea3300a33d3ee506f596b53d3818cdfee56943e038b"
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 221018,
+    "expectedSha256": "078d41eef18a92fec177620eec8c1b153a3b578cf07b560fc67eab12b3b6a9f5"
   },
   "operations": [
-    {
-      "type": "extract",
-      "left": 600,
-      "top": 920,
-      "width": 1100,
-      "height": 1100
-    },
     {
       "type": "resize",
       "width": "tile",
@@ -62,17 +41,10 @@
       "kernel": "lanczos3"
     },
     {
-      "type": "ensure-alpha"
-    },
-    {
-      "type": "ellipse-mask",
-      "cx": 0.5,
-      "cy": 0.5,
-      "rx": 0.5,
-      "ry": 0.5
-    },
-    {
       "type": "png"
     }
-  ]
+  ],
+  "context": {
+    "pixels": 512
+  }
 }

@@ -1,9 +1,9 @@
 import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
-import { loadObjShape } from './obj-shape.mjs';
-import { prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mjs';
+import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
+import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
+import { loadObjShape, loadPdsVertexFacetShape } from './obj-shape.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
 import { createRasterEmitter } from './solid-raster.mjs';
 import { renderRadialSnapshot } from './radial-snapshot.mjs';
@@ -18,34 +18,21 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
   await source.validatePath(profile.path);
-  const nativeRaster = profile.primitive === 'u';
-  if (profile.primitive !== undefined && !nativeRaster) throw new TypeError('Unknown radial triangle primitive.');
-  const grid = await (profile.format === 'wavefront-obj-zip' ? loadObjShape : loadPdsScalarGrid)(resolve(sourceDirectory, profile.path), profile.grid);
+  const loader = ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadPdsScalarGrid;
+  const grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
   const scale = config.geometry.radius / (config.geometry.radiusKm * 1000);
-  const simplified = profile.simplification
+  if (profile.primitive !== undefined && profile.primitive !== 'u') throw new TypeError('Unknown radial triangle primitive.');
+  const simplified = profile.simplification?.method === 'meshoptimizer'
     ? await (await import('./radial-meshoptimizer.mjs')).simplifyRadialTerrain(grid.sample, profile, scale)
     : null;
-  const faces = simplified?.faces ?? radialTriangles(grid.sample, profile, scale);
+  const faces = simplified?.faces ?? (profile.simplification
+    ? await simplifyRadialShape(grid, profile, scale)
+    : radialTriangles(grid.sample, profile, scale));
   const tileSize = profile.tileSize, columns = profile.atlasColumns;
   if (![tileSize, columns].every(value => Number.isInteger(value) && value > 0) || tileSize > 512 || columns > 64) throw new TypeError('Invalid radial texture layout.');
   const width = columns * tileSize, height = Math.ceil(faces.length / columns) * tileSize;
-  const url = `${config.publicBase}${config.namespace}-normal-surface@2x.webp`;
   const plans = faces.map((face, index) => {
     const rect = { x: index % columns * tileSize, y: Math.floor(index / columns) * tileSize, width: tileSize, height: tileSize };
-    if (!nativeRaster) {
-      const [a, b, c] = face.vertices;
-      // Extend the prepared rectangle beyond the true triangle. Alpha describes
-      // the overlapping triangle; adjoining CSS raster edges cannot expose sky.
-      const ab = sub(b, a), ac = sub(c, a), bleed = 3 / tileSize;
-      const at = (u, v) => a.map((n, i) => n + u * ab[i] + v * ac[i]);
-      const polygon = { vertices: [at(-bleed, -bleed), at(1 + bleed, -bleed), at(1 + bleed, 1 + bleed), at(-bleed, 1 + bleed)], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], texture: url,
-        textureImageSource: { url, width, height, sourceRect: rect },
-        texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' }, color: '#888888' };
-      const plan = computeTextureAtlasPlanPublic(polygon, index, { tileSize: BASE_TILE, layerElevation: BASE_TILE, textureLighting: 'baked', seamBleed: 0 });
-      const geometry = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
-      if (!geometry) throw new Error(`Radial face ${index} failed preparation.`);
-      return { face, rect, geometry, matrix: geometry.matrix.split(',').map(Number) };
-    }
     const plan = computeSolidTrianglePlan({ vertices: face.vertices, color: '#888888' }, index,
       // The core planner takes CSS units, including its seam overlap. Scale
       // that overlap with the source coordinates, as with tile/elevation.
@@ -60,12 +47,27 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
       backgroundPosition: [-rect.x, -rect.y], backgroundSize: [width, height] };
     return { face, rect, geometry, matrix };
   });
-  const leaves = plans.map(({ geometry: g }) => nativeRaster ? ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
+  const leaves = plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
-    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster` }) : ({ tag: 's', className: `${config.namespace}-terrain-face`, polar: null,
-    projectiveTextureLayer: prepareProjectiveTextureLayer(g.matrix, 4),
-    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px` }));
-  return { grid, faces, plans, leaves, width, height, tileSize, nativeRaster, ...(simplified ? { simplification: simplified.report } : {}) };
+    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster` }));
+  return { grid, faces, plans, leaves, width, height, tileSize, ...(simplified ? { simplification: simplified.report } : {}) };
+}
+
+/** Simplify the released topology before UV sampling. Original positions are
+ * retained; geometry and the simplifier never enter the browser runtime. */
+export async function simplifyRadialShape(mesh, profile, scale) {
+  const { targetFaces, maximumErrorMeters } = profile.simplification;
+  if (!mesh.positions || !mesh.indices || !Number.isInteger(targetFaces) || targetFaces < 4 ||
+      !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 2000 ||
+      !(maximumErrorMeters > 0) || !Number.isFinite(maximumErrorMeters) || !(scale > 0)) throw new TypeError('Invalid source mesh simplification.');
+  await MeshoptSimplifier.ready;
+  const [indices] = MeshoptSimplifier.simplify(Uint32Array.from(mesh.indices.flat()),
+    Float32Array.from(mesh.positions.flat()), 3, targetFaces * 3, maximumErrorMeters, ['ErrorAbsolute']);
+  if (!indices.length || indices.length / 3 > targetFaces) throw new Error('Source mesh cannot meet the leaf target within its authored error limit.');
+  const triangles = [];
+  for (let i = 0; i < indices.length; i += 3) triangles.push(Array.from(indices.subarray(i, i + 3),
+    index => mesh.positions[index].map(value => value * scale)));
+  return surfaceTriangles(triangles);
 }
 
 export function radialTriangles(sample, profile, scale) {
@@ -102,6 +104,16 @@ export function sampleRadialTriangles(sample, rows, columns, scale, canonicalPol
   return shadeRadialFaces(faces);
 }
 
+function surfaceTriangles(triangles) {
+  const faces = triangles.map(([a, b, c]) => {
+    let normal = cross(sub(b, a), sub(c, a));
+    if (dot(normal, a) < 0) { [b, c] = [c, b]; normal = normal.map(x => -x); }
+    if (!(Math.hypot(...normal) > 1e-8)) throw new Error('Degenerate terrain face.');
+    return { vertices: [a, b, c], normal: unit(normal) };
+  });
+  return shadeRadialFaces(faces);
+}
+
 export function shadeRadialFaces(faces) {
   // Area-weighted shared normals remove lighting discontinuities without
   // changing any source-derived position or smoothing the physical silhouette.
@@ -122,7 +134,7 @@ export function shadeRadialFaces(faces) {
  * renderer switches between these prepared banks through ordinary variants.
  */
 export async function prepareRadialMaterials({ radial, surfaces, config, source, publicDirectory, outputDirectory, sunDirection }) {
-  const { width, height, tileSize, nativeRaster } = radial;
+  const { width, height, tileSize } = radial;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
     const { data: map, info } = await sharp(resolve(publicDirectory, surface.map.url.split('/').at(-1))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -136,10 +148,8 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         const css = [(m[0] * x + m[4] * y + m[12]) / w, (m[1] * x + m[5] * y + m[13]) / w, (m[2] * x + m[6] * y + m[14]) / w];
         const point = [css[1] / BASE_TILE, css[0] / BASE_TILE, css[2] / BASE_TILE];
         const ap = sub(point, a), u = (dot(ap, ab) * bb - dot(ap, ac) * abac) / denominator, v = (dot(ap, ac) * aa - dot(ap, ab) * abac) / denominator;
-        // Native u owns coverage; rectangular source-image leaves retain
-        // their previously prepared alpha boundary.
-        const bleed = 3 / tileSize;
-        const alpha = nativeRaster || !(u < -bleed || v < -bleed || u + v > 1 + bleed) ? 255 : 0;
+        // PolyCSS's native u primitive owns triangle coverage. Fill its entire
+        // raster so antialiasing never samples a transparent triangle edge.
         const normal = unit(face.vertexNormals[0].map((n, i) => n * (1 - u - v) + face.vertexNormals[1][i] * u + face.vertexNormals[2][i] * v));
         // Fixed-epoch directional illumination is baked in the body's frame.
         const illumination = .12 + .88 * Math.max(0, dot(normal, sunDirection));
@@ -154,7 +164,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
           flood[offset + channel] = Math.round(top * (1 - ty) + bottom * ty);
           shadow[offset + channel] = Math.round(flood[offset + channel] * illumination);
         }
-        flood[offset + 3] = shadow[offset + 3] = alpha;
+        flood[offset + 3] = shadow[offset + 3] = 255;
       }
     }
     const encoding = { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };

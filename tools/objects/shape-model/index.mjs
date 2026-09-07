@@ -38,10 +38,27 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
       (config.ring && (!Number.isInteger(ringSegments) || ringSegments < 3 ||
         config.ring.innerRadiusKm <= axes[0] || config.ring.outerRadiusKm <= config.ring.innerRadiusKm))) throw new TypeError('Invalid shape tessellation, ring, or quad budget.');
   const sourceDirectory = resolve(objectDirectory, 'source'), publicBase = `/scenes/${id}/`;
+  const lenses = sources.get('content').value.lenses.controls;
+  const declaredLenses = descriptor.recipe.surfaces.flatMap(surface => surface.lenses);
+  if (lenses.length > 1 || lenses.length !== declaredLenses.length ||
+      lenses.some(lens => lens.id !== declaredLenses[0].id || lens.thumbnail !== `${lens.id}-thumbnail.webp`)) {
+    throw new TypeError('A shape model exposes its one base-color surface through the authored lens contract.');
+  }
+  const lens = lenses[0];
   const source = await createSourceManifest({ planetId: id, planetName: config.displayName, sourceRoot: sourceDirectory });
   await source.verify();
   await Promise.all([mkdir(outputDirectory, { recursive: true }), mkdir(publicDirectory, { recursive: true })]);
-  const { textures, source: modelSource } = await prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory });
+  const { textures, map, source: modelSource } = await prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensId: lens?.id });
+  if (lens) {
+    await writeJson(outputDirectory, 'assets', { surfaces: { [lens.id]: {
+      url: textures.surface, url2x: textures.surface, polesUrl: textures.poles, polesUrl2x: textures.poles,
+    } } });
+    const manifest = JSON.parse(await readFile(resolve(sourceDirectory, 'manifest.json'), 'utf8'));
+    const input = manifest.inputs.find(input => input.id === lens.source.id);
+    await writeJson(outputDirectory, 'surfaces', { objectId: id, surfaces: [{ id: lens.id, map,
+      attribution: { label: input.credit, url: lens.source.url ?? input.origin },
+    }] });
+  }
   textures.lighting = await prepareSphereLighting({ publicDirectory, publicBase });
   await writeFile(resolve(publicDirectory, 'marker.webp'), await prepareModelMarker(axes));
   const ringTexture = config.ring ? await prepareRingRaster({ config, publicDirectory, publicBase }) : null;
@@ -98,7 +115,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const definition = JSON.parse(JSON.stringify({ schema: 'cssearth-object-runtime@4', id, camera: { ...scene.camera, ...materialReference, responsiveFit: { ...scene.camera.responsiveFit, maximumHeightShare: config.camera.maximumHeightShare } }, sky: scene.starfield, sun,
     controls: preparedContent.controls, tree,
     assets: { entries, pools: [preparedResourcePool('mounted', entries)], startup: entries.map(entry => entry.key) },
-    variants: [{ when: {}, required: ['surface', 'poles', 'lighting', ...(ringTexture ? ['ring'] : [])], writes: [
+    variants: [{ when: lens ? { lensId: lens.id } : {}, required: ['surface', 'poles', 'lighting', ...(ringTexture ? ['ring'] : [])], writes: [
       { kind: 'texture', target: index(body), name: '--shape-surface', resource: 'surface', quoted: true },
       { kind: 'texture', target: index(body), name: '--shape-poles', resource: 'poles', quoted: true },
       ...(material ? [{ kind: 'texture', target: index(material), name: '--shape-lighting', resource: 'lighting', quoted: true }] : []),
