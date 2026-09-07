@@ -86,7 +86,11 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const scene = b.mesh(`polycss-scene ${id}-scene`), system = b.mesh(`${id}-system`, `transform:${plan.systemTransform}`);
   const body = b.mesh(`${id}-body`);
   b.append(null, camera); b.append(camera, scene); b.append(scene, system); b.append(system, body);
-  for (const leaf of plan.bodyLeaves) b.append(body, b.leaf(leaf));
+  for (const leaf of plan.bodyLeaves) {
+    const node = b.leaf(leaf);
+    Object.assign(node.attributes, leaf.attributes ?? {});
+    b.append(body, node);
+  }
   const materialRoot = b.element('div', `${id}-material-root planet-render-root`);
   const billboard = b.element('s', `${id}-billboard`), material = b.element('s', `${id}-material`);
   b.append(null, materialRoot); b.append(materialRoot, billboard); b.append(materialRoot, material);
