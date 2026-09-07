@@ -111,6 +111,29 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   }
 });
 
+test('prepared planetary systems retain moon orbits with a small selected planet', async () => {
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])) });
+  for (const [planet, moon] of [['saturn', 'titan'], ['jupiter', 'europa'], ['uranus', 'titania']]) {
+    const body = context.bodies.find(body => body.id === planet)!;
+    layer.selectObject(planet);
+    const publish = (radii: number) => layer.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+      pose: { positionM: [body.positionM[0], body.positionM[1], body.positionM[2] + radii * body.radiusM], orientationXyzw: [0, 0, 0, 1] } },
+      { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+    const orbit = layer.inspect().find(body => body.id === moon)!.orbit;
+    // The planet spans about 20px, or 3.3% of this viewport: the moon system is readable.
+    publish(40);
+    expect(orbit.some(piece => piece.style.visibility === ''), `${planet} moon system at overview distance`).toBe(true);
+    // A close-up still retires orbit lines when the selected planet fills the screen.
+    publish(2);
+    expect(orbit.every(piece => piece.style.visibility === 'hidden'), `${planet} close-up`).toBe(true);
+  }
+  layer.destroy();
+});
+
 test.each(['opacityProfile', 'brightnessProfile'] as const)('%s has a constant plateau, a logarithmic smooth ramp and legacy opacity one', key => {
   const base = plan(1), profile = { model: 'logarithmic-distance' as const, nearOpacity: .12, fullOpacity: 1, fadeStartDistanceM: 100, fullDistanceM: 100_000 };
   const parsed = parsePreparedWorldContext({ ...base, volume: { ...base.volume, [key]: profile } });

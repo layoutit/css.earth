@@ -32020,8 +32020,8 @@
         "markerFullDiscPixels": 4.5
       },
       "orbitLineFade": {
-        "visibleBelowDiscHeightShare": 0.01,
-        "hiddenAboveDiscHeightShare": 0.03
+        "visibleBelowDiscHeightShare": 0.12,
+        "hiddenAboveDiscHeightShare": 0.3
       },
       "drag": {
         "model": "screen-axis-tumble"
