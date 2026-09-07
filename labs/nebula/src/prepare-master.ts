@@ -9,9 +9,9 @@ import { convertParticlesToDensityVolume } from './particles.js';
 import { extractExtendedSource, type ExtractionOptions, type NativeExtractionReceipt } from './extraction.js';
 import { createPhotoMasterEmissionSampler } from './photo-master.js';
 import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from './master-slices.js';
-import { compileCssVolume } from '../../src/renderers/css/preparation/volume.js';
-import type { VolumeRecipe } from '../../src/preparation/volume/config.js';
-import type { VolumeSlices } from '../../src/preparation/volume/slices.js';
+import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.js';
+import type { VolumeRecipe } from '../../../src/preparation/volume/config.js';
+import type { VolumeSlices } from '../../../src/preparation/volume/slices.js';
 
 type Vec3 = [number, number, number];
 interface MasterExperiment {
@@ -58,7 +58,7 @@ export async function preparePhotoMaster(recipePath: string) {
   const frame: DensityVolumeFrame = descriptor.properties.volume;
   const compilerRecipe: VolumeRecipe = JSON.parse(await readFile(resolve(target.directory, 'source/volume.json'), 'utf8'));
   const pipeline = await Promise.all(['extraction.ts', 'native-extraction.ts', 'particles.ts', 'photo-master.ts', 'master-slices.ts', 'prepare-master.ts']
-    .map(async name => ({ path: `labs/nebula/${name}`, sha256: await fileSha(`labs/nebula/${name}`) })));
+    .map(async name => ({ path: `labs/nebula/src/${name}`, sha256: await fileSha(`labs/nebula/src/${name}`) })));
   const masterInputs = { base: recipe.base, photo: recipe.photo, pipeline,
     extraction: recipe.extraction, master: recipe.master, particles: imported.rotatedOutput.sha256 };
   const masterInputsSha256 = sha(JSON.stringify(masterInputs));

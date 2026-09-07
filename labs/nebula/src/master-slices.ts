@@ -2,10 +2,10 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import type { Axis, Bounds3, Vector3, VolumeImageEncoding } from '../../src/preparation/volume/config.js';
-import type { VolumeSlices, VolumeSliceQuad } from '../../src/preparation/volume/slices.js';
-import { encodeVolumeRaster } from '../../src/preparation/volume/raster.js';
-import { containedPath, sha256 } from '../../src/preparation/volume/source.js';
+import type { Axis, Bounds3, Vector3, VolumeImageEncoding } from '../../../src/preparation/volume/config.js';
+import type { VolumeSlices, VolumeSliceQuad } from '../../../src/preparation/volume/slices.js';
+import { encodeVolumeRaster } from '../../../src/preparation/volume/raster.js';
+import { containedPath, sha256 } from '../../../src/preparation/volume/source.js';
 
 export interface MasterDeliveryBank {
   width: number;

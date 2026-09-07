@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
-import { decodeDensityKtx2 } from '../../src/preparation/volume/source.js';
+import { decodeDensityKtx2 } from '../../../src/preparation/volume/source.js';
 import { convertParticlesToDensityVolume } from './particles.js';
 
 test('CIC volume retains bounded mass, varies on every axis and applies one fixed color projection',async()=>{

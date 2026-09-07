@@ -1,18 +1,18 @@
 import records from './subjects.json';
-import sourceCatalog from './sources.json';
-import * as runtimePolicy from '../../site/runtime-policy.mjs';
-import { createObjectInteractionControls } from '../../src/renderers/css/navigation/object-interaction-controls';
-import { worldCameraFromCenteredPresentation } from '../../src/renderers/css/navigation/world-camera';
-import { worldRotationFromQuaternion } from '../../src/renderers/css/navigation/world-camera-math';
-import { rotationFromMatrix3d } from '../../src/renderers/css/solar-system/heliocentric-geometry';
-import { loadPreparedCssImageLayers } from '../../src/renderers/css/image-layers/loader';
-import type { PreparedCssImageLayers } from '../../src/renderers/css/image-layers/loader';
-import { mountPreparedCssImageLayers } from '../../src/renderers/css/image-layers/prepared-image-layer-runtime';
-import { loadPreparedCssVolume } from '../../src/renderers/css/volume/loader';
-import { mountPreparedCssVolume } from '../../src/renderers/css/volume/prepared-volume-runtime';
-import type { PreparedCssVolume } from '../../src/renderers/css/volume/types';
-import type { CameraDelta, CameraUpdate } from '../../src/renderers/css/navigation/types';
-import '../../src/renderers/css/styles/volume.css';
+import sourceCatalog from '../sources/index.json';
+import * as runtimePolicy from '../../../site/runtime-policy.mjs';
+import { createObjectInteractionControls } from '../../../src/renderers/css/navigation/object-interaction-controls';
+import { worldCameraFromCenteredPresentation } from '../../../src/renderers/css/navigation/world-camera';
+import { worldRotationFromQuaternion } from '../../../src/renderers/css/navigation/world-camera-math';
+import { rotationFromMatrix3d } from '../../../src/renderers/css/solar-system/heliocentric-geometry';
+import { loadPreparedCssImageLayers } from '../../../src/renderers/css/image-layers/loader';
+import type { PreparedCssImageLayers } from '../../../src/renderers/css/image-layers/loader';
+import { mountPreparedCssImageLayers } from '../../../src/renderers/css/image-layers/prepared-image-layer-runtime';
+import { loadPreparedCssVolume } from '../../../src/renderers/css/volume/loader';
+import { mountPreparedCssVolume } from '../../../src/renderers/css/volume/prepared-volume-runtime';
+import type { PreparedCssVolume } from '../../../src/renderers/css/volume/types';
+import type { CameraDelta, CameraUpdate } from '../../../src/renderers/css/navigation/types';
+import '../../../src/renderers/css/styles/volume.css';
 
 declare const __NEBULA_REPO_ROOT__: string;
 interface LabSubjectRecord {
@@ -33,12 +33,12 @@ interface LabSubjectRecord {
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
 const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__}/${path}`;
-const recipes = import.meta.glob('../../src/objects/*/source/recipe.json', { eager: true, import: 'default' }) as
+const recipes = import.meta.glob('../../../src/objects/*/source/recipe.json', { eager: true, import: 'default' }) as
   Record<string, { source: { publisherUrl: string; credit: string }; geometry: { supportRadiusKpc: number } }>;
-const candidates = import.meta.glob('../../.local/nebula-lab/*-{cutout,diffuse,residual,mask}.png',
+const candidates = import.meta.glob('../../../.local/nebula-lab/*-{cutout,diffuse,residual,mask}.png',
   { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 export const subjects = subjectRecords.map(record => {
-  const recipe = recipes[`../../${record.directory}/source/recipe.json`];
+  const recipe = recipes[`../../../${record.directory}/source/recipe.json`];
   const imagePath = record.imagePath ?? (record.image ? `${record.directory}/${record.image}` : null);
   if (!imagePath) throw new TypeError(`Lab subject ${record.id} has no comparison image path.`);
   const sourceUrl = localFile(imagePath);
@@ -46,7 +46,7 @@ export const subjects = subjectRecords.map(record => {
   const credit = record.credit ?? recipe?.source.credit;
   const declared = sourceCatalog.subjects.find(item => item.subjectId === (record.sourceSubjectId ?? record.id))?.sources;
   const sourceImages = declared?.map(source => ({ id: source.id, name: source.name,
-    sourceUrl: localFile(`labs/nebula/${source.path}`), sourcePageUrl: source.sourcePageUrl, credit: source.credit }))
+    sourceUrl: localFile(`${sourceCatalog.pathBase}/${source.path}`), sourcePageUrl: source.sourcePageUrl, credit: source.credit }))
     ?? [{ id: `${record.id}-source`, name: `${record.name} · source`, sourceUrl, sourcePageUrl, credit }];
   for (const comparison of record.comparisonImages ?? []) {
     sourceImages.push({ id: comparison.id, name: comparison.name, sourceUrl: localFile(comparison.imagePath),
@@ -54,7 +54,7 @@ export const subjects = subjectRecords.map(record => {
       credit: `Offline extraction used by this volume. ${sourceImages[0]?.credit ?? ''}` });
   }
   for (const kind of ['cutout', 'diffuse', 'residual', 'mask']) {
-    const url = candidates[`../../.local/nebula-lab/${record.id}-${kind}.png`];
+    const url = candidates[`../../../.local/nebula-lab/${record.id}-${kind}.png`];
     if (url) sourceImages.push({ id: `${record.id}-${kind}`, name: `Extraction candidate · ${kind}`, sourceUrl: url,
       sourcePageUrl, credit: `Local extraction experiment. Not a calibrated measurement. ${credit ?? ''}` });
   }

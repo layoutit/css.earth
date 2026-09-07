@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
 const directory = dirname(fileURLToPath(import.meta.url));
-const root = resolve(directory, '../..');
+const root = resolve(directory, '../../..');
 const packageRequire = createRequire(resolve(root, 'packages/engine/package.json'));
 const { build } = createRequire(packageRequire.resolve('tsup'))('esbuild');
 const output = resolve(root, '.local/nebula-lab/compiled');

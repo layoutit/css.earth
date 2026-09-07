@@ -4,11 +4,11 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type MasterVolumeOptions } from './master-slices.js';
-import { sha256 } from '../../src/preparation/volume/source.js';
-import { compileCssVolume } from '../../src/renderers/css/preparation/volume.js';
-import { validatePreparedCssVolume } from '../../src/renderers/css/volume/validation.js';
-import type { VolumeRecipe } from '../../src/preparation/volume/config.js';
-import type { VolumeSliceQuad } from '../../src/preparation/volume/slices.js';
+import { sha256 } from '../../../src/preparation/volume/source.js';
+import { compileCssVolume } from '../../../src/renderers/css/preparation/volume.js';
+import { validatePreparedCssVolume } from '../../../src/renderers/css/volume/validation.js';
+import type { VolumeRecipe } from '../../../src/preparation/volume/config.js';
+import type { VolumeSliceQuad } from '../../../src/preparation/volume/slices.js';
 
 async function temporary(t: { after(fn: () => Promise<void>): void }) {
   await mkdir(resolve('.local/nebula-lab'), { recursive: true });

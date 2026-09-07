@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
-import { encodeDensityKtx2 } from '../../src/preparation/volume/acquisition.js';
+import { encodeDensityKtx2 } from '../../../src/preparation/volume/acquisition.js';
 import { bakePhotoConstrainedEmission } from './photo-emission.js';
 import type { PhotoEmissionOptions, PhotoEmissionDiagnostics } from './photo-emission.js';
 

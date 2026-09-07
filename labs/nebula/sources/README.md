@@ -1,7 +1,7 @@
 # Nebula Lab source images
 
 These are inspection inputs, not an aligned composite or measured 3D scene.
-The adjacent `../sources.json` records URLs, credits, SHA-256 checksums, bands
+The adjacent `index.json` records URLs, credits, SHA-256 checksums, bands
 and original/derivative AVM/TAN registration. Paths are relative to `labs/nebula`.
 
 - **LMC:** the existing SMASH JPEG is reused without duplication. Credit:

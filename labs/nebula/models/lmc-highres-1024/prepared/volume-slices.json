@@ -11748,28 +11748,28 @@
         },
         "pipeline": [
           {
-            "path": "labs/nebula/extraction.ts",
+            "path": "labs/nebula/src/extraction.ts",
             "sha256": "4c732380e97b811d0696b879891421c25ccf9d6f2c2e6a5b54800f7574ec8788"
           },
           {
-            "path": "labs/nebula/native-extraction.ts",
+            "path": "labs/nebula/src/native-extraction.ts",
             "sha256": "e206d18d0ccc7b03b9518189666306e24a12757685ca9453836bdfe15113bf88"
           },
           {
-            "path": "labs/nebula/particles.ts",
-            "sha256": "929d9124205f696005a805f52347c709e8d83265e8a4b9caa262d36549bb8a1d"
+            "path": "labs/nebula/src/particles.ts",
+            "sha256": "cd81b42a7ae5df01fec92e7792bfac5cdd5673e31827cab0fa0a9002b5ed8961"
           },
           {
-            "path": "labs/nebula/photo-master.ts",
+            "path": "labs/nebula/src/photo-master.ts",
             "sha256": "691f84d96eddd755b6ac4b6c48a50d98ee001535ef2e1929536edd5182def9e2"
           },
           {
-            "path": "labs/nebula/master-slices.ts",
-            "sha256": "f02ea3639a16f5d73c6733ca7d83215e5dfcf66b9df5fad5a46e0202d950eb3d"
+            "path": "labs/nebula/src/master-slices.ts",
+            "sha256": "6727162eba0a3cc8a9955daa93ece8054702c2ac7ef78309ca5a8bc67b094248"
           },
           {
-            "path": "labs/nebula/prepare-master.ts",
-            "sha256": "0b566628f902dc35754c092f4ddb68876836f1fa81f5f679a22787186377f1e7"
+            "path": "labs/nebula/src/prepare-master.ts",
+            "sha256": "346c3f6ca20952d877a3bf313648634eb4ee1c7517982bc83d57438d81f1770c"
           }
         ],
         "extraction": {
@@ -11788,7 +11788,7 @@
         },
         "particles": "fdcf3e9db15f3bbfeb33c157f6725a1e9172b07a18fb9318a4ba03ece0469f2c"
       },
-      "masterInputsSha256": "f66c98058824c7439fc593eccc659b1a9ade081f86c386968a0c376fb6ee1976",
+      "masterInputsSha256": "77866e765cb12784f8ae882d06f15afc92b56920469f9ad5f8870bb51c76e81c",
       "source": {
         "url": "https://doi.org/10.5061/dryad.1vhhmgr82",
         "paper": "https://doi.org/10.1093/mnras/stag1287",
@@ -11884,7 +11884,7 @@
           "bytes": 2950736
         },
         "densityField": {
-          "path": ".local/nebula-lab/highres/f66c98058824c743/density.f32",
+          "path": ".local/nebula-lab/highres/77866e765cb12784/density.f32",
           "sha256": "c0b01682199abcb9367c5f40f335801f08209a52cb530e7cf2cfe8502710d30f",
           "bytes": 28311552,
           "layout": "float32-le-x-fastest-density",

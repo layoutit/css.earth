@@ -10,7 +10,7 @@ import { convertParticlesToDensityVolume } from './particles.js';
 import type { ParticlePhotoEmissionOptions } from './particles.js';
 import { extractExtendedSource } from './extraction.js';
 import { createParticleAlignmentDiagnostic } from './alignment.js';
-import type { VolumeRecipe, Vector3 } from '../../src/preparation/volume/config.js';
+import type { VolumeRecipe, Vector3 } from '../../../src/preparation/volume/config.js';
 
 interface ParticleExperiment {
   schema: 'cssearth-magellanic-particle-experiment@1';

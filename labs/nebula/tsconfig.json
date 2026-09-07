@@ -7,6 +7,6 @@
     "types": ["node"],
     "typeRoots": ["../../node_modules/.pnpm/node_modules/@types"]
   },
-  "include": ["*.ts", "../../node_modules/vite/client.d.ts"],
-  "exclude": ["*.test.ts"]
+  "include": ["vite.config.ts", "src/**/*.ts", "../../node_modules/vite/client.d.ts"],
+  "exclude": ["src/**/*.test.ts"]
 }
