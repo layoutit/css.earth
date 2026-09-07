@@ -44,7 +44,7 @@ export function requireObjectControls(content: ObjectControls, objectId = 'unkno
     throw new TypeError(`Object ${objectId} lens IDs/default are invalid.`);
   }
   const settings = content.settings?.controls ?? [], names = settings.map(setting => setting.name);
-  if (names.some(name => !nonempty(name) || ['motion', 'skyContrast'].includes(name)) || new Set(names).size !== names.length ||
+  if (names.some(name => !nonempty(name) || ['motion', 'skyContrast', 'heliosphere'].includes(name)) || new Set(names).size !== names.length ||
       settings.some(setting => !['toggle', 'cycle'].includes(setting.kind) || !nonempty(setting.label) ||
         (setting.kind === 'toggle' ? typeof setting.checked !== 'boolean' : !nonempty(setting.state)))) {
     throw new TypeError(`Object ${objectId} settings controls are invalid.`);
