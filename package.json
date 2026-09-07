@@ -41,6 +41,7 @@
     "test:planets": "node tools/run-implemented-planets.mjs test",
     "test:shell": "node --test site/test/*.test.mjs",
     "test:browser": "pnpm test:browser:conformance && pnpm test:browser:planets",
+    "test:browser:dom": "node site/test/dom-cleanliness-browser.mjs",
     "test:browser:conformance": "node site/test/planet-browser-conformance.mjs",
     "test:browser:planets": "node tools/run-implemented-planets.mjs browser",
     "test:browser:mercury-geometry": "node tests/objects/browser/mercury/lighting-geometry-browser.mjs",

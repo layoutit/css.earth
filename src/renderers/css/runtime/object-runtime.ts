@@ -250,12 +250,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Presentation owns its roots immediately during construction, including
       // partial construction failures. Shared celestial layers join afterwards.
       const cubicSky = environment.mountSky({ host: stage, plan: definition.sky,
-        imageDensity: context.density, objectId: definition.id, requireSun: false });
+        imageDensity: context.density, objectId: definition.id, requireSun: false, renderContent: !externalWorldContext });
       context.own(() => cubicSky.destroy());
       if (externalWorldContext) {
-        // The application-owned context supplies the visible sky. Keep this
-        // prepared sky mounted for the orbit orientation contract, but retain
-        // the historical wrapper and make the object copy paint-inert.
+        // The application-owned context supplies the visible sky. Keep the
+        // orientation handles mounted for the orbit contract, without the
+        // unused photographic faces or catalogue star leaves.
         const skyFade = stage.ownerDocument.createElement('div');
         skyFade.className = 'prepared-context-sky-fade';
         skyFade.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;visibility:hidden';
