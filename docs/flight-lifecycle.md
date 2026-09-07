@@ -40,6 +40,7 @@ After the normal package/renderer build and `pnpm prepare:object-json`:
 
 ```sh
 node --test tools/prepared-activation-registry.test.mjs
+node --test tools/prepared-activation-transport.test.mjs
 node site/test/flight-registry-browser.mjs http://127.0.0.1:4210
 node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 mars
 DPR=2 node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 saturn
