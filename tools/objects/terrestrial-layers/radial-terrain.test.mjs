@@ -4,8 +4,28 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { radialTriangles } from './radial-terrain.mjs';
+import { radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from './radial-terrain.mjs';
 import { loadPdsScalarGrid, parsePdsScalarLabel } from './pds-scalar-grid.mjs';
+
+test('source topology preserves translated inward-facing facets and welds duplicated positions', async () => {
+  const vertices = [[1,0,0],[0,1,0],[0,0,1],[0,0,0]];
+  const tetrahedron = [0,1,2,0,3,1,1,3,2,2,3,0];
+  const positions = tetrahedron.map(index => vertices[index].map((v, i) => v + (i === 0 ? 4 : 0)));
+  const indices = Array.from({length: 4}, (_, i) => [i * 3, i * 3 + 1, i * 3 + 2]);
+  const faces = await simplifyRadialShape({positions, indices}, {faceBudget: 4,
+    simplification: {method: 'source-meshoptimizer', targetFaces: 4, maximumErrorMeters: .001}}, 1);
+  assert.equal(faces.length, 4);
+  assert.ok(faces.some(face => face.normal.reduce((sum, n, i) => sum + n * face.vertices[0][i], 0) < 0),
+    'A valid outward face may point toward the coordinate origin');
+  assert.equal(faces.simplification.topology.eulerCharacteristic, 2);
+  assert.equal(faces.simplification.topology.components, 1);
+  assert.ok(faces.simplification.weldedVertices < positions.length);
+  assert.equal(validateClosedMesh(tetrahedron, vertices).components, 1);
+  assert.throws(() => validateClosedMesh(tetrahedron.slice(3), vertices), /not closed/);
+  assert.throws(() => validateClosedMesh([1,0,2,...tetrahedron.slice(3)], vertices), /not closed/);
+  assert.deepEqual([...removeOppositeFacePairs(Uint32Array.from([...tetrahedron, 0,1,4,4,1,0]))], tetrahedron);
+  assert.throws(() => removeOppositeFacePairs([0,1,2,1,2,0]), /ambiguous duplicate/);
+});
 
 test('radial geometry retains independently specified ellipsoid axes and rejects missing radii', () => {
   const profile = { latitudeSegments: 12, longitudeSegments: 24, faceBudget: 1000 };

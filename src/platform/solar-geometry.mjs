@@ -28,6 +28,30 @@ export const SOLAR_GEOMETRY_EPOCH_LABEL = "2026-09-04T00:00:00 TT";
 export const ASTRONOMICAL_UNIT_KILOMETERS = 149597870.7;
 
 export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
+  // subsolar latitude -1.627°, longitude 155.752°
+  ryugu: Object.freeze([
+    -0.9114053618071176,
+    0.4105285964089597,
+    -0.028399612668601363,
+  ]),
+  // subsolar latitude 1.846°, longitude 162.400°
+  bennu: Object.freeze([
+    -0.9526969769474067,
+    0.30220952743349627,
+    0.032216015329263326,
+  ]),
+  // subsolar latitude 0.764°, longitude 2.003°
+  itokawa: Object.freeze([
+    0.9993001132869097,
+    0.034951838180833444,
+    0.013328638060588979,
+  ]),
+  // subsolar latitude 32.473°, longitude -90.789°
+  eros: Object.freeze([
+    -0.011615678325130717,
+    -0.8435662878579908,
+    0.5368994263421561,
+  ]),
   // subsolar latitude 0.015°, longitude -16.454°
   mercury: Object.freeze([
     0.9590465723427557,
@@ -247,6 +271,30 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
 });
 
 export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
+  // pole tilt to the ecliptic 177.428°, Sun ecliptic latitude 0.597°
+  ryugu: Object.freeze([
+    0.033255982616586084,
+    0.03012350394234176,
+    -0.9989927998391386,
+  ]),
+  // pole tilt to the ecliptic 173.484°, Sun ecliptic latitude 3.976°
+  bennu: Object.freeze([
+    -0.08124645683583685,
+    0.07921775929464982,
+    -0.9935409200752415,
+  ]),
+  // pole tilt to the ecliptic 179.534°, Sun ecliptic latitude -0.303°
+  itokawa: Object.freeze([
+    0.008081430042792992,
+    -0.0009816580050858448,
+    -0.9999668628689775,
+  ]),
+  // pole tilt to the ecliptic 78.642°, Sun ecliptic latitude 8.172°
+  eros: Object.freeze([
+    0.9787772668845445,
+    -0.05664583068511092,
+    0.19694240705347066,
+  ]),
   // pole tilt to the ecliptic 7.035°, Sun ecliptic latitude -5.111°
   mercury: Object.freeze([
     -0.06195657166883868,
@@ -468,6 +516,30 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
 // The orbit lies in the plane perpendicular to this direction; every
 // direction from the body to another point of its orbit does too.
 export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
+  // orbital inclination to the ecliptic 5.866°, obliquity to the orbit 171.648°
+  ryugu: Object.freeze([
+    0.0841575529465833,
+    0.1183918328732657,
+    -0.9893941985836342,
+  ]),
+  // orbital inclination to the ecliptic 6.033°, obliquity to the orbit 177.548°
+  bennu: Object.freeze([
+    -0.03921292779983899,
+    -0.017112370645553546,
+    -0.9990843373130487,
+  ]),
+  // orbital inclination to the ecliptic 1.621°, obliquity to the orbit 178.168°
+  itokawa: Object.freeze([
+    0.01433036373527763,
+    -0.028568034844856913,
+    -0.9994891235327765,
+  ]),
+  // orbital inclination to the ecliptic 10.829°, obliquity to the orbit 89.007°
+  eros: Object.freeze([
+    0.9998461741832679,
+    -0.0027416920371665103,
+    0.01732371483994766,
+  ]),
   // orbital inclination to the ecliptic 7.003°, obliquity to the orbit 0.034°
   mercury: Object.freeze([
     -0.00010821574179740304,
@@ -690,6 +762,30 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
 // the epoch, perpendicular to the orbit normal but not to the Sun direction
 // (the flight-path angle is the orbit's eccentricity showing).
 export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
+  // flight-path angle 7.799°
+  ryugu: Object.freeze([
+    -0.27540395299337844,
+    -0.9514761082008083,
+    -0.13728029064168065,
+  ]),
+  // flight-path angle 6.053°
+  bennu: Object.freeze([
+    -0.19924933098348574,
+    -0.9796400165007223,
+    0.02459963766191764,
+  ]),
+  // flight-path angle -9.893°
+  itokawa: Object.freeze([
+    0.137652826776845,
+    0.9901305936906284,
+    -0.026326920028508425,
+  ]),
+  // flight-path angle 11.026°
+  eros: Object.freeze([
+    -0.010677497063939332,
+    0.6884435212218519,
+    0.725211354809139,
+  ]),
   // flight-path angle 11.860°
   mercury: Object.freeze([
     -0.4742989419816672,
@@ -912,6 +1008,30 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
 // (prime meridian), +Y and +Z (north pole) axes in ICRF, so an ICRF direction
 // is the matrix times a body-fixed direction and the transpose goes back.
 export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
+  // pole RA 96.431°, Dec -66.387°, prime meridian W 324.636°
+  ryugu: Object.freeze([
+    -0.7509640087134342, -0.6588172574891779, -0.044865118427210755,
+    -0.6183126529626297, 0.6776885227025469, 0.39802980966700746,
+    -0.23182433177594605, 0.32664673185519233, -0.9162747359634872,
+  ]),
+  // pole RA 85.459°, Dec -60.365°, prime meridian W 330.390°
+  bennu: Object.freeze([
+    -0.9006837302536946, -0.4327076725136904, 0.03915211621451261,
+    -0.3592736685318165, 0.7924311018708238, 0.49292532891654356,
+    -0.24431792639096364, 0.4299034995619099, -0.8691902737079163,
+  ]),
+  // pole RA 90.026°, Dec -67.027°, prime meridian W 278.179°
+  itokawa: Object.freeze([
+    -0.1418540965543036, -0.9898875616882467, -0.00017465869620912324,
+    -0.9113884369880288, 0.13053605241674007, 0.39029662558619704,
+    -0.3863269757799477, 0.05552435712686768, -0.9206891514242838,
+  ]),
+  // pole RA 11.363°, Dec 17.232°, prime meridian W 116.751°
+  eros: Object.freeze([
+    -0.1706658386304024, 0.3066661033034913, 0.9363915167328428,
+    -0.4934127840647446, -0.8491948789306943, 0.1881804509489791,
+    0.8528874462940929, -0.42991157077070596, 0.2962415319826122,
+  ]),
   // pole RA 281.002°, Dec 61.414°, prime meridian W 7.912°
   mercury: Object.freeze([
     0.9492124293886011, -0.30109510135437934, 0.09130993283639001,
@@ -1136,6 +1256,66 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
 // frame; inclinationDegrees is the same value as
 // BODY_FIXED_ORBIT_NORMAL_DIRECTIONS' orbital inclination comment above.
 export const BODY_ORBITS = Object.freeze({
+  // a 1.1909 AU, e 0.19105, perihelion 0.96339 AU, aphelion 1.4184 AU
+  ryugu: Object.freeze({
+    semiMajorAxisAu: 1.1909057649446586,
+    eccentricity: 0.19104505064003635,
+    heliocentricDistanceAu: 1.3525431668189398,
+    perihelionDirection: Object.freeze([
+      -0.4784251560698116,
+      0.8757854899054819,
+      0.06410261859387419,
+    ]),
+    trueAnomalyDegrees: 142.53770225413768,
+    inclinationDegrees: 5.866471313669286,
+    perihelionAu: 0.9633891127732951,
+    aphelionAu: 1.418422417116022,
+  }),
+  // a 1.1259 AU, e 0.20368, perihelion 0.89659 AU, aphelion 1.3552 AU
+  bennu: Object.freeze({
+    semiMajorAxisAu: 1.1259160504788546,
+    eccentricity: 0.20367799894481095,
+    heliocentricDistanceAu: 1.3232200391469155,
+    perihelionDirection: Object.freeze([
+      -0.7346009874495494,
+      0.6782809491530201,
+      0.017214623267020886,
+    ]),
+    trueAnomalyDegrees: 154.87581921853285,
+    inclinationDegrees: 6.033025528819681,
+    perihelionAu: 0.8965917223374766,
+    aphelionAu: 1.3552403786202325,
+  }),
+  // a 1.3241 AU, e 0.28015, perihelion 0.95315 AU, aphelion 1.6950 AU
+  itokawa: Object.freeze({
+    semiMajorAxisAu: 1.324091400156864,
+    eccentricity: 0.280145229969674,
+    heliocentricDistanceAu: 1.6214998927700746,
+    perihelionDirection: Object.freeze([
+      0.8666730587789877,
+      0.4988731794901727,
+      -0.0018330226511077408,
+    ]),
+    trueAnomalyDegrees: 207.93512650997016,
+    inclinationDegrees: 1.6209126619170688,
+    perihelionAu: 0.9531535103590516,
+    aphelionAu: 1.6950292899546764,
+  }),
+  // a 1.4583 AU, e 0.22285, perihelion 1.1333 AU, aphelion 1.7832 AU
+  eros: Object.freeze({
+    semiMajorAxisAu: 1.458260435226333,
+    eccentricity: 0.22285182287414632,
+    heliocentricDistanceAu: 1.6281962976059121,
+    perihelionDirection: Object.freeze([
+      0.0020218187830535754,
+      -0.9631062972562481,
+      -0.2691136793887822,
+    ]),
+    trueAnomalyDegrees: 131.90777401405057,
+    inclinationDegrees: 10.828541787969442,
+    perihelionAu: 1.133284439010899,
+    aphelionAu: 1.7832364314417672,
+  }),
   // a 0.38710 AU, e 0.20564, perihelion 0.30749 AU, aphelion 0.46670 AU
   mercury: Object.freeze({
     semiMajorAxisAu: 0.3870957146291471,
