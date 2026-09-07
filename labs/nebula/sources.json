@@ -6,6 +6,22 @@
       "subjectId": "lmc",
       "sources": [
         {
+          "id": "lmc-smash-full",
+          "name": "LMC — SMASH full-resolution original derivative",
+          "path": "sources/lmc-smash-full.webp",
+          "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+          "downloadUrl": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+          "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+          "role": "base",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "sha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
+          "widthPx": 6737,
+          "heightPx": 6536,
+          "format": "webp",
+          "sourceModification": "Full spatial resolution; publisher 16-bit TIFF converted to 8-bit sRGB WebP quality 92. No crop or resize. Pinned TIFF and transformation in reference-images.json."
+        },
+        {
           "id": "lmc-smash",
           "name": "Large Magellanic Cloud — SMASH",
           "path": "../../src/objects/lmc/source/source.jpg",
@@ -242,6 +258,22 @@
     {
       "subjectId": "smc",
       "sources": [
+        {
+          "id": "smc-smash-full",
+          "name": "SMC — SMASH full-resolution original derivative",
+          "path": "sources/smc-smash-full.webp",
+          "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030b/",
+          "downloadUrl": "https://noirlab.edu/public/media/archives/images/original/noirlab2030b.tif",
+          "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+          "role": "base",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "sha256": "3ed2fd1ae7729b860f00d2bd7d0c13b6a05f81c8d66e587e626cc4e2bac92698",
+          "widthPx": 3827,
+          "heightPx": 3190,
+          "format": "webp",
+          "sourceModification": "Full spatial resolution; publisher 16-bit TIFF converted to 8-bit sRGB WebP quality 92. No crop or resize. Pinned TIFF and transformation in reference-images.json."
+        },
         {
           "id": "smc-smash",
           "name": "Small Magellanic Cloud — SMASH",

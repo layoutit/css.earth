@@ -4,9 +4,14 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { encodeDensityKtx2 } from '../../src/preparation/volume/acquisition.js';
+import { bakePhotoConstrainedEmission } from './photo-emission.js';
+import type { PhotoEmissionOptions, PhotoEmissionDiagnostics } from './photo-emission.js';
 
 type Vec3 = [number, number, number];
 type Bounds = { min: Vec3; max: Vec3 };
+export type ParticlePhotoEmissionOptions = Pick<PhotoEmissionOptions,
+  'edgeFeatherFraction' | 'columnDensityFloorFraction' | 'columnDensityFullSignalFraction' |
+  'exposureGain' | 'maxDisplaySignal' | 'detail'>;
 
 export interface ParticleColorConstraint {
   imagePath: string;
@@ -25,6 +30,7 @@ export interface ParticleVolumeOptions {
   normalizationQuantile: number;
   encoding: 'sqrt-density-unorm8' | 'linear-density-unorm8';
   colorConstraint?: ParticleColorConstraint;
+  photoEmission?: ParticlePhotoEmissionOptions;
   fallbackColor?: Vec3;
   zstdLevel?: number;
 }
@@ -36,12 +42,14 @@ export interface ParticleVolumeReceipt {
     normalizationQuantile: number; encoding: ParticleVolumeOptions['encoding'];
     fallbackColor: Vec3; zstdLevel: number;
     colorConstraint?: Omit<ParticleColorConstraint, 'imagePath'> & { imagePath: string; imageSha256: string };
+    photoEmission?: ParticlePhotoEmissionOptions;
   };
   particles: { count: number; accepted: number; inputMass: number; acceptedMass: number; depositedMass: number };
   normalization: { quantile: number; densityAtUnit: number; encoding: ParticleVolumeOptions['encoding'] };
   diagnostics: { occupiedVoxels: number; axisVariation: Vec3 };
   outputs: { gridPath: string; gridSha256: string; decodedSha256: string; bytes: number };
   interpretation: { density: string; color: string; dust: string };
+  emission?: { mode: 'photo-constrained'; encodingScale: number; diagnostics: PhotoEmissionDiagnostics };
 }
 
 const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
@@ -137,6 +145,17 @@ export async function convertParticlesToDensityVolume(options: ParticleVolumeOpt
   const positive = Array.from(field).filter(value => value > 0).sort((a, b) => a - b);
   const densityAtUnit = positive[Math.min(positive.length - 1, Math.floor(options.normalizationQuantile * (positive.length - 1)))]!;
   const color = await loadColor(options.colorConstraint), rgba = Buffer.alloc(field.length * 4);
+  if (options.photoEmission && (!color || !options.colorConstraint ||
+      color.right.some((v, i) => Math.abs(v - Number(i === 0)) > 1e-8) ||
+      color.up.some((v, i) => Math.abs(v - Number(i === 1)) > 1e-8))) {
+    throw new TypeError('Photo-constrained emission requires an XY-aligned color image; rotate the source particles first.');
+  }
+  const projected = options.photoEmission && color && options.colorConstraint
+    ? await bakePhotoConstrainedEmission({ density: field, dimensions: options.dimensions, boundsKpc: options.boundsKpc,
+      photo: { rgba: color.data, width: color.info.width, height: color.info.height },
+      projection: { centerKpc: options.colorConstraint.centerKpc.slice(0, 2) as [number, number],
+        spanKpc: options.colorConstraint.spanKpc, flipY: options.colorConstraint.flipY }, ...options.photoEmission }) : undefined;
+  const emissionScale = projected?.diagnostics.recommendedEncodingScale ?? 1;
   const marginals = [new Float64Array(width), new Float64Array(height), new Float64Array(depth)];
   for (let z = 0; z < depth; z++) for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const index = (z * height + y) * width + x, value = clamp(field[index]! / densityAtUnit);
@@ -146,7 +165,7 @@ export async function convertParticlesToDensityVolume(options: ParticleVolumeOpt
       options.boundsKpc.min[2] + (z + 0.5) / depth * (options.boundsKpc.max[2] - options.boundsKpc.min[2]),
     ];
     let rgb: Vec3 = [...fallback];
-    if (color && options.colorConstraint) {
+    if (!projected && color && options.colorConstraint) {
       const delta: Vec3 = position.map((entry, axis) => entry - options.colorConstraint!.centerKpc[axis]!) as Vec3;
       const u = 0.5 + dot(delta, color.right) / options.colorConstraint.spanKpc[0];
       const projectedV = 0.5 + dot(delta, color.up) / options.colorConstraint.spanKpc[1];
@@ -159,7 +178,10 @@ export async function convertParticlesToDensityVolume(options: ParticleVolumeOpt
     }
     const transfer = (sample: number) => options.encoding === 'sqrt-density-unorm8' ? Math.sqrt(sample) : sample;
     const output = 4 * index;
-    for (let channel = 0; channel < 3; channel++) rgba[output + channel] = Math.round(255 * transfer(value * clamp(rgb[channel]!)));
+    for (let channel = 0; channel < 3; channel++) {
+      const emission = projected ? projected.emissionPerKpc[3 * index + channel]! / emissionScale : value * clamp(rgb[channel]!);
+      rgba[output + channel] = Math.round(255 * transfer(clamp(emission)));
+    }
     rgba[output + 3] = Math.round(255 * transfer(value));
     marginals[0][x] += field[index]!; marginals[1][y] += field[index]!; marginals[2][z] += field[index]!;
   }
@@ -175,14 +197,17 @@ export async function convertParticlesToDensityVolume(options: ParticleVolumeOpt
     input: { path: options.particlePath, sha256: sha(particleBytes), bytes: particleBytes.length, layout: 'float32-le-xyzmass-kpc' },
     options: { dimensions: options.dimensions, boundsKpc: options.boundsKpc, smoothingSigmaVoxels: options.smoothingSigmaVoxels,
       normalizationQuantile: options.normalizationQuantile, encoding: options.encoding, fallbackColor: fallback, zstdLevel,
+      ...(options.photoEmission ? { photoEmission: options.photoEmission } : {}),
       ...(options.colorConstraint && color ? { colorConstraint: { ...options.colorConstraint, imageSha256: color.imageSha256 } } : {}) },
     particles: { count, accepted, inputMass, acceptedMass, depositedMass: field.reduce((sum, value) => sum + value, 0) },
     normalization: { quantile: options.normalizationQuantile, densityAtUnit, encoding: options.encoding },
     diagnostics: { occupiedVoxels: positive.length, axisVariation },
     outputs: { gridPath: 'density.ktx2', gridSha256: sha(ktx), decodedSha256: sha(rgba), bytes: ktx.length },
     interpretation: { density: 'Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.',
-      color: color ? 'Fixed orthographic RGB constraint from an authored observational image; color is not simulated stellar population synthesis.' : 'Authored uniform fallback color.',
+      color: projected ? 'Photographic brightness and color distributed through the simulated conditional depth profile. Authored display emissivity, not measured gas, dust or stellar population synthesis.' :
+        color ? 'Fixed orthographic RGB constraint from an authored observational image; color is not simulated stellar population synthesis.' : 'Authored uniform fallback color.',
       dust: 'No dust or extinction is encoded; alpha is stellar-density support.' },
+    ...(projected ? { emission: { mode: 'photo-constrained' as const, encodingScale: emissionScale, diagnostics: projected.diagnostics } } : {}),
   };
   await writeFile(resolve(options.outputDirectory, 'particles-receipt.json'), JSON.stringify(receipt, null, 2) + '\n');
   return receipt;

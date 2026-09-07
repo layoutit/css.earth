@@ -16,7 +16,8 @@ export interface VolumeSlices {
   quads: VolumeSliceQuad[]; boundsUnits: Bounds3; provenance: unknown;
   approximation: { method: string; radialEmission: string; limitations: string[];
     samplesPerSlab: number; opticalWeight: number; exposureGain: number;
-    displayColorMatrix?: DisplayColorMatrix; sliceCounts: Record<Axis, number>; slabPitchUnits: Record<Axis, number> };
+    displayColorMatrix?: DisplayColorMatrix; emissionTransfer?: VolumeRecipe['material']['emissionTransfer'];
+    sliceCounts: Record<Axis, number>; slabPitchUnits: Record<Axis, number> };
 }
 const clamp = (value: number): number => Math.max(0, Math.min(1, value));
 const smoothstep = (lo: number, hi: number, value: number): number => {
@@ -83,6 +84,7 @@ export function channelDensity(encoded: number, encoding: VolumeRecipe['grid']['
 export function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: number, width: number, height: number,
   radialTable: Float64Array | undefined): { rgba: Buffer; alphaCoverage: number } {
   const { material, bake, grid } = source.recipe;
+  if (material.emissionTransfer === 'shared-opacity' && material.absorption.length > 0) throw new TypeError('Shared-opacity emission does not support absorption.');
   const pixels = Buffer.alloc(width * height * 4);
   const encoded: [number, number, number, number] = [0, 0, 0, 0];
   const emission: Vector3 = [0, 0, 0], tau: Vector3 = [0, 0, 0];
@@ -115,16 +117,30 @@ export function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWi
       }
       // Keep exponential energy in ordinary alpha. Per-slab sRGB encoding amplifies
       // emission before composition; equal achromatic slabs must accumulate as 1-exp(-sum).
-      const red = 1 - Math.exp(-material.exposureGain * emission[0] * Math.exp(-tau[0] / 2));
-      const green = 1 - Math.exp(-material.exposureGain * emission[1] * Math.exp(-tau[1] / 2));
-      const blue = 1 - Math.exp(-material.exposureGain * emission[2] * Math.exp(-tau[2] / 2));
+      let red = 1 - Math.exp(-material.exposureGain * emission[0] * Math.exp(-tau[0] / 2));
+      let green = 1 - Math.exp(-material.exposureGain * emission[1] * Math.exp(-tau[1] / 2));
+      let blue = 1 - Math.exp(-material.exposureGain * emission[2] * Math.exp(-tau[2] / 2));
       const dustOpacity = 1 - Math.exp(-(tau[0] * 0.2126 + tau[1] * 0.7152 + tau[2] * 0.0722));
-      const alpha = Math.max(red, green, blue, dustOpacity), offset = 4 * (row * width + column);
+      let alpha = Math.max(red, green, blue, dustOpacity);
+      let colorNormalization = alpha;
+      if (material.emissionTransfer === 'shared-opacity') {
+        // A common chromaticity q and scalar optical depth E give q*(1-exp(-E)).
+        // Source-over then telescopes to q*(1-exp(-sum(E))) at any slab spacing.
+        // This is a display-emission model; RGB-varying columns remain an approximation.
+        const peak = Math.max(...emission);
+        alpha = -Math.expm1(-material.exposureGain * peak);
+        // Encode straight optical ratios directly: cancelling alpha after an
+        // intermediate multiplication can flip RGBA8 half-byte rounding ties.
+        // The bounded linear display matrix commutes with this normalization.
+        colorNormalization = peak;
+        red = emission[0]; green = emission[1]; blue = emission[2];
+      }
+      const offset = 4 * (row * width + column);
       if (alpha > 0) {
         const graded = gradePremultipliedDisplayRgb([red, green, blue], material.displayColorMatrix);
-        pixels[offset] = Math.round(clamp(graded[0] / alpha) * 255);
-        pixels[offset + 1] = Math.round(clamp(graded[1] / alpha) * 255);
-        pixels[offset + 2] = Math.round(clamp(graded[2] / alpha) * 255);
+        pixels[offset] = Math.round(clamp(graded[0] / colorNormalization) * 255);
+        pixels[offset + 1] = Math.round(clamp(graded[1] / colorNormalization) * 255);
+        pixels[offset + 2] = Math.round(clamp(graded[2] / colorNormalization) * 255);
         pixels[offset + 3] = Math.round(clamp(alpha) * 255);
         if (pixels[offset + 3]) nonzero++;
       }
@@ -184,13 +200,18 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
   const boundsUnits: Bounds3 = { min: [grid.bounds.min[0] * scale, grid.bounds.min[1] * scale, grid.bounds.min[2] * scale],
     max: [grid.bounds.max[0] * scale, grid.bounds.max[1] * scale, grid.bounds.max[2] * scale] };
   const result: VolumeSlices = { quads, boundsUnits, provenance: source.provenance, approximation: {
-    method: 'Filtered scalar fields; decoded after filtering; integrated emission/absorption; symmetric slab attenuation; exponential energy in ordinary alpha.',
+    method: material.emissionTransfer === 'shared-opacity'
+      ? 'Filtered scalar fields; decoded after filtering; integrated RGB emission; exponential shared opacity with optical RGB ratios in ordinary alpha.'
+      : 'Filtered scalar fields; decoded after filtering; integrated emission/absorption; symmetric slab attenuation; exponential energy in ordinary alpha.',
     radialEmission: material.radialEmission ? 'Abel-deprojected radial profile, ellipsoidal normalization and authored boundary taper.' : 'None.',
-    limitations: ['Ordinary alpha approximates emitted light and wavelength-dependent extinction.',
+    limitations: [material.emissionTransfer === 'shared-opacity'
+      ? 'Shared-opacity display emission preserves column-constant chromaticity before RGBA8 quantization; varying chromaticity remains a slab approximation. Extinction is unsupported.'
+      : 'Ordinary alpha approximates emitted light and wavelength-dependent extinction.',
       'Finite slices and axis handoffs approximate a continuous field; angle-dependent opacity and sampling differences remain.',
       ...(material.displayColorMatrix ? ['The display color matrix transforms ordinary display RGB values; it is not linear-light photometry.'] : []),
       'No runtime ray integration, near-field noise or global HDR display pass.'],
     samplesPerSlab: bake.samplesPerSlab, opticalWeight: bake.opticalWeight, exposureGain: material.exposureGain,
+    ...(material.emissionTransfer ? { emissionTransfer: material.emissionTransfer } : {}),
     ...(material.displayColorMatrix ? { displayColorMatrix: material.displayColorMatrix } : {}),
     sliceCounts: counts, slabPitchUnits: pitches } };
   await writeFile(resolve(options.outputDirectory, 'volume-slices.json'), JSON.stringify(result, null, 2) + '\n');

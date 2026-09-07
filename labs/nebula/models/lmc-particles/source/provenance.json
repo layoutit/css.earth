@@ -25,40 +25,53 @@
   },
   "density": "Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.",
   "photo": {
-    "path": "src/objects/lmc/source/source.jpg",
-    "sha256": "68cce2d2ebd9d43839c66f513df4819365e920fa4e6added41cc054f78739d58",
+    "path": "labs/nebula/sources/lmc-smash-full.webp",
+    "sha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
     "url": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
-    "license": "CC-BY-4.0"
+    "license": "CC-BY-4.0",
+    "acquisition": {
+      "path": "labs/nebula/sources/lmc-smash-full.webp.json",
+      "sha256": "430264b503fa44d7d19f1a97c5323339f13789cbd1d5e115cd6ea94ec13d5bc5"
+    }
   },
   "display": {
     "rotation": [
-      1,
+      0.8290375725550416,
       0,
+      0.5591929034707469,
+      -0.5591929034707469,
       0,
-      0,
-      0,
-      1,
+      0.8290375725550416,
       0,
       -1,
       0
     ],
     "boundsKpc": {
       "min": [
-        -16,
-        -13,
+        -6,
+        -6,
         -5
       ],
       "max": [
-        16,
-        13,
+        6,
+        6,
         5
       ]
     },
-    "alignment": "Authored lab alignment, not an astrometric fit between the simulation and photograph.",
-    "color": "Fixed orthographic RGB constraint from an authored observational image; color is not simulated stellar population synthesis.",
+    "alignment": {
+      "method": "Authored central-bar alignment in the XZ simulation projection; a rigid −34° rotation, with no scaling or coordinate warp.",
+      "photoScale": "Angular WCS extent at the reference 49.59 kpc distance, evaluated on the tangent plane.",
+      "displayScope": "Photographed central region. The finite core grid excludes outer simulation tidal tails; full imported particles are preserved.",
+      "registration": "Photo center is matched to the simulated central bar, not an astrometric identity between simulation and observed stars."
+    },
+    "color": "Photographic brightness and color distributed through the simulated conditional depth profile. Authored display emissivity, not measured gas, dust or stellar population synthesis.",
     "dust": "No dust or extinction is encoded; alpha is stellar-density support.",
-    "massRetention": 0.9956895061728395,
-    "brightness": "Authored mass-to-light conversion and exposure; not calibrated photometry."
+    "massRetention": 0.786437037037037,
+    "brightness": "Photographic display brightness constrained along the reference projection; not calibrated photometry."
+  },
+  "extraction": {
+    "maxPixels": 2400,
+    "medianSize": 7
   }
 }

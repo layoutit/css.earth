@@ -35,17 +35,26 @@ The particle subjects use the 2.2 Gyr snapshot from [Garver et al.'s simulation 
 - The importer selects 1,620,000 LMC and 225,000 SMC stellar particles from the Tipsy star family; dark matter does not become luminous material.
 - Centering and rigid display rotation preserve physical distances. Mass deposition and smoothing create a real XYZ density grid, then the existing volume baker prepares 64 slabs on each axis.
 - Colors are sampled into the volume once. The camera never reprojects the photograph. The authored alignment is not an astrometric fit, and brightness is not calibrated photometry.
+- The LMC experiment constrains projected brightness as well as color. It distributes photo emission along the simulated conditional depth profile, with an authored narrower depth for positive local detail. A shared-opacity bake preserves constant column hue through ordinary CSS alpha composition. No foreground-star depth or gas tomography is inferred.
 - This collisionless simulation supplies stellar mass density, not gas, dust extinction, or emission-line structure. These are initial morphology experiments, not final optical reconstructions.
-- Display bounds retain about 99.6% of each galaxy's stellar mass. Receipts record exact retained mass, units, transformation, source hashes and output hashes.
+- LMC's higher-resolution grid covers the photographed core and retains 78.64% of the simulation's stellar mass; the full imported particles are preserved. The SMC density experiment retains 99.55%. Receipts record exact retained mass, units, transformation, source hashes and output hashes.
+- The LMC Source image chooser includes a physical-scale photo / stellar mass / contour comparison. It exposes mismatches; the independently measured centroids and display contours are not a fit score. The photo footprint follows published sky coordinates and distance; its central-bar placement remains authored.
 
 The prepared candidates are checked in. Rebuilding requires Python 3 and a manual download of `lsmcmodelA2020_2500Myr.zip` from the linked dataset. From a clean checkout, after placing the archive in Downloads:
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm build:preparation
+pnpm lab:nebula:images
 pnpm lab:nebula:particles labs/nebula/models/magellanic-particles.json "$HOME/Downloads/lsmcmodelA2020_2500Myr.zip"
 pnpm test:lab:nebula
 pnpm lab:nebula
 ```
 
-The archive and imported particles stay in the ignored local cache. The shared experiment recipe pins the archive and decompressed snapshot; per-model source receipts, compressed density grid and prepared CSS banks live under `models/`. The full archive is never a browser dependency. Rendering the two candidate banks downloads about 1.2 MB combined, with about 60 MB decoded texture data.
+The archive and imported particles stay in the ignored local cache. The shared experiment recipe pins the archive and decompressed snapshot; per-model source receipts, compressed density grid and prepared CSS banks live under `models/`. The full archive is never a browser dependency. Pass an optional final target id such as `lmc-particles` to rebuild just that experiment.
+
+## Full-resolution photographs
+
+The lab includes full-spatial-resolution working references from the publisher's SMASH TIFFs: LMC 6737×6536 and SMC 3827×3190. `sources/reference-images.json` pins the original URLs, bytes, hashes, dimensions, credits and deterministic conversion. `pnpm lab:nebula:images` verifies or downloads the originals into the ignored cache, then recreates the checked-in 8-bit sRGB WebP references. These are lossy display derivatives with no crop or spatial resize, not scientific FITS data. Large reference images load only for source inspection and are not part of the prepared CSS texture banks.
+
+ESO/VISTA offers larger infrared mosaics ([LMC](https://www.eso.org/public/images/eso1914a/), [SMC](https://www.eso.org/public/images/eso1714a/)), but their Y/J/Ks emission and colors differ from the optical/near-infrared SMASH composite. They are alternative observational views, not replacements silently mixed into the current optical appearance. The ESO Tarantula reference also uses a different display grade and enhanced H-alpha; its WCS footprint needs matched-star verification before a detail patch is composed.

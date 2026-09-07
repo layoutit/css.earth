@@ -173,19 +173,19 @@
   },
   "interpretation": "Simulation star-family particles, not observed individual stars. Source masses are unchanged; no ages, populations, luminosities or dust are inferred.",
   "displayRotation": [
-    1,
+    0.8290375725550416,
     0,
+    0.5591929034707469,
+    -0.5591929034707469,
     0,
-    0,
-    0,
-    1,
+    0.8290375725550416,
     0,
     -1,
     0
   ],
   "rotatedOutput": {
     "path": ".local/nebula-lab/particles/lmc-particles.f32",
-    "sha256": "e4b46d4b82869859fa123b7e66e5b7ebd17754f3bd5159774f9cbb5045fc4cc8",
+    "sha256": "fdcf3e9db15f3bbfeb33c157f6725a1e9172b07a18fb9318a4ba03ece0469f2c",
     "bytes": 25920000
   }
 }

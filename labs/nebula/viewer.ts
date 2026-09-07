@@ -24,6 +24,7 @@ interface LabSubjectRecord {
   imagePath?: string;
   /** Reuse a photographed subject's reference catalogue for derived experiments. */
   sourceSubjectId?: string;
+  comparisonImages?: { id: string; name: string; imagePath: string }[];
   sourcePageUrl?: string;
   credit?: string;
   modelNote?: string;
@@ -47,6 +48,11 @@ export const subjects = subjectRecords.map(record => {
   const sourceImages = declared?.map(source => ({ id: source.id, name: source.name,
     sourceUrl: localFile(`labs/nebula/${source.path}`), sourcePageUrl: source.sourcePageUrl, credit: source.credit }))
     ?? [{ id: `${record.id}-source`, name: `${record.name} · source`, sourceUrl, sourcePageUrl, credit }];
+  for (const comparison of record.comparisonImages ?? []) {
+    sourceImages.push({ id: comparison.id, name: comparison.name, sourceUrl: localFile(comparison.imagePath),
+      sourcePageUrl: sourceImages[0]?.sourcePageUrl,
+      credit: `Offline extraction used by this volume. ${sourceImages[0]?.credit ?? ''}` });
+  }
   for (const kind of ['cutout', 'diffuse', 'residual', 'mask']) {
     const url = candidates[`../../.local/nebula-lab/${record.id}-${kind}.png`];
     if (url) sourceImages.push({ id: `${record.id}-${kind}`, name: `Extraction candidate · ${kind}`, sourceUrl: url,

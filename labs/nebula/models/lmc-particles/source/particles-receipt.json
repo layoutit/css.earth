@@ -2,25 +2,25 @@
   "schema": "cssearth-particle-volume-lab@1",
   "input": {
     "path": ".local/nebula-lab/particles/lmc-particles.f32",
-    "sha256": "e4b46d4b82869859fa123b7e66e5b7ebd17754f3bd5159774f9cbb5045fc4cc8",
+    "sha256": "fdcf3e9db15f3bbfeb33c157f6725a1e9172b07a18fb9318a4ba03ece0469f2c",
     "bytes": 25920000,
     "layout": "float32-le-xyzmass-kpc"
   },
   "options": {
     "dimensions": [
-      128,
-      128,
-      64
+      384,
+      384,
+      48
     ],
     "boundsKpc": {
       "min": [
-        -16,
-        -13,
+        -6,
+        -6,
         -5
       ],
       "max": [
-        16,
-        13,
+        6,
+        6,
         5
       ]
     },
@@ -33,11 +33,23 @@
       0.8
     ],
     "zstdLevel": 9,
+    "photoEmission": {
+      "edgeFeatherFraction": 0.08,
+      "columnDensityFloorFraction": 0.001,
+      "columnDensityFullSignalFraction": 0.01,
+      "maxDisplaySignal": 0.98,
+      "detail": {
+        "spatialSigmaKpc": 0.2,
+        "depthSigmaKpc": 0.2,
+        "contrastStrength": 2
+      },
+      "exposureGain": 1
+    },
     "colorConstraint": {
       "imagePath": "labs/nebula/models/lmc-particles/source/photo-diffuse.png",
       "centerKpc": [
-        -0.7,
-        -4,
+        0.138536068,
+        -1.648790306,
         0
       ],
       "rightDirection": [
@@ -51,41 +63,81 @@
         0
       ],
       "spanKpc": [
-        22,
-        20
+        8.092550727,
+        7.851107548
       ],
-      "imageSha256": "5cd39c8a12f63c9f24777e3979bbb529b6e9025421558022d930f10c02216a5b"
+      "imageSha256": "573e4cfd8269b74e6cc348b8dff472850945bdb051aeef9c6f3d7e9a6da07812"
     }
   },
   "particles": {
     "count": 1620000,
-    "accepted": 1613017,
+    "accepted": 1274028,
     "inputMass": 31370.560079813004,
-    "acceptedMass": 31235.337474234402,
-    "depositedMass": 31235.337474234482
+    "acceptedMass": 24670.970319360495,
+    "depositedMass": 24670.970319361
   },
   "normalization": {
     "quantile": 0.999,
-    "densityAtUnit": 4.892742383657249,
+    "densityAtUnit": 0.41235992409812716,
     "encoding": "sqrt-density-unorm8"
   },
   "diagnostics": {
-    "occupiedVoxels": 602776,
+    "occupiedVoxels": 4608341,
     "axisVariation": [
-      1.6137117881766179,
-      1.4703775967569848,
-      1.4817491413315094
+      0.8425243313454337,
+      1.20226751857859,
+      1.5840611147973949
     ]
   },
   "outputs": {
     "gridPath": "density.ktx2",
-    "gridSha256": "7af1b29cfb1fb0471fd0758d6638625d9101b9cfcd65a3325102663aef825164",
-    "decodedSha256": "2433c76cd3f84aff846ff489e3c67bf1d71059e25e543d193233c6f6f1314c80",
-    "bytes": 584354
+    "gridSha256": "3ee737547a95a8f54057627e8f488ad9f016e146fba0f8aeb5f00a3d0eea8953",
+    "decodedSha256": "0fa359b92c04e887a367318e7e6c9126c36fd5873c122fd84d7ecddf1591024e",
+    "bytes": 3705134
   },
   "interpretation": {
     "density": "Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.",
-    "color": "Fixed orthographic RGB constraint from an authored observational image; color is not simulated stellar population synthesis.",
+    "color": "Photographic brightness and color distributed through the simulated conditional depth profile. Authored display emissivity, not measured gas, dust or stellar population synthesis.",
     "dust": "No dust or extinction is encoded; alpha is stellar-density support."
+  },
+  "emission": {
+    "mode": "photo-constrained",
+    "encodingScale": 5.259347915649414,
+    "diagnostics": {
+      "constrainedColumns": 16511,
+      "zeroDensityPhotoColumns": 0,
+      "zeroPhotoColumns": 130945,
+      "sampledPhotoRgbSum": [
+        5650.7737457115145,
+        5854.430075844967,
+        6505.609740386905
+      ],
+      "constrainedDisplayRgbSum": [
+        5650.7737457115145,
+        5854.430075844967,
+        6505.609740386905
+      ],
+      "emittedOpticalRgbSum": [
+        7968.556237471865,
+        8215.754161350618,
+        9106.016760696788
+      ],
+      "maxColumnOpticalError": 6.281251740958282e-8,
+      "maximumEmissionPerKpc": 5.259347915649414,
+      "recommendedEncodingScale": 5.259347915649414,
+      "voxelDepthKpc": 0.20833333333333334,
+      "edgeFeatherFraction": 0.08,
+      "columnDensityFloorFraction": 0.001,
+      "columnDensityFullSignalFraction": 0.01,
+      "exposureGain": 1,
+      "maxDisplaySignal": 0.98,
+      "detail": {
+        "spatialSigmaKpc": 0.2,
+        "depthSigmaKpc": 0.2,
+        "contrastStrength": 2,
+        "activeColumns": 10194,
+        "opticalFraction": 0.1504520602331568
+      }
+    }
   }
 }

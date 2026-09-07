@@ -82,7 +82,8 @@
     "typecheck:preparation": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json",
     "test:seo": "node site/test/seo-browser.mjs",
     "prepare:social": "node tools/prepare-social-images.mjs",
-    "prepare:image-layers": "node tools/objects/dist/prepare-image-layers.js"
+    "prepare:image-layers": "node tools/objects/dist/prepare-image-layers.js",
+    "lab:nebula:images": "node --experimental-strip-types labs/nebula/run.ts acquire-images labs/nebula/sources/reference-images.json"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

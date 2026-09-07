@@ -20,8 +20,8 @@
       "id": "lmc-particles",
       "directory": "labs/nebula/models/lmc-particles",
       "referenceObject": "src/objects/lmc/object.json",
-      "photo": "src/objects/lmc/source/source.jpg",
-      "photoSha256": "68cce2d2ebd9d43839c66f513df4819365e920fa4e6added41cc054f78739d58",
+      "photo": "labs/nebula/sources/lmc-smash-full.webp",
+      "photoSha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
       "photoUrl": "https://noirlab.edu/public/images/noirlab2030a/",
       "photoCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
       "starRange": {
@@ -29,45 +29,67 @@
         "count": 1620000
       },
       "rotation": [
-        1,
+        0.8290375725550416,
         0,
+        0.5591929034707469,
+        -0.5591929034707469,
         0,
-        0,
-        0,
-        1,
+        0.8290375725550416,
         0,
         -1,
         0
       ],
       "boundsKpc": {
         "min": [
-          -16,
-          -13,
+          -6,
+          -6,
           -5
         ],
         "max": [
-          16,
-          13,
+          6,
+          6,
           5
         ]
       },
       "dimensions": [
-        128,
-        128,
-        64
+        384,
+        384,
+        48
       ],
       "colorSpanKpc": [
-        22,
-        20
+        8.092550727,
+        7.851107548
       ],
       "colorCenterKpc": [
-        -0.7,
-        -4,
+        0.138536068,
+        -1.648790306,
         0
       ],
       "smoothingSigmaVoxels": 0.8,
       "normalizationQuantile": 0.999,
-      "exposureGain": 0.6
+      "exposureGain": 1,
+      "extraction": {
+        "maxPixels": 2400,
+        "medianSize": 7
+      },
+      "alignment": {
+        "method": "Authored central-bar alignment in the XZ simulation projection; a rigid −34° rotation, with no scaling or coordinate warp.",
+        "photoScale": "Angular WCS extent at the reference 49.59 kpc distance, evaluated on the tangent plane.",
+        "displayScope": "Photographed central region. The finite core grid excludes outer simulation tidal tails; full imported particles are preserved.",
+        "registration": "Photo center is matched to the simulated central bar, not an astrometric identity between simulation and observed stars."
+      },
+      "photoEmission": {
+        "edgeFeatherFraction": 0.08,
+        "columnDensityFloorFraction": 0.001,
+        "columnDensityFullSignalFraction": 0.01,
+        "maxDisplaySignal": 0.98,
+        "detail": {
+          "spatialSigmaKpc": 0.2,
+          "depthSigmaKpc": 0.2,
+          "contrastStrength": 2
+        }
+      },
+      "photoReceipt": "labs/nebula/sources/lmc-smash-full.webp.json"
     },
     {
       "id": "smc-particles",

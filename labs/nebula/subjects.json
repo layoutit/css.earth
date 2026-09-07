@@ -3,19 +3,31 @@
     "id": "lmc-particles",
     "name": "LMC · particle volume",
     "directory": "labs/nebula/models/lmc-particles",
-    "imagePath": "src/objects/lmc/source/source.jpg",
+    "imagePath": "labs/nebula/sources/lmc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
     "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
-    "modelNote": "3D density from simulation stellar particles. Fixed photo-based colors and display alignment are approximate. Dust extinction is not modeled.",
-    "framingRadiusUnits": 8,
+    "modelNote": "Photographic brightness and color distributed through simulated stellar depth in the observed central region. Alignment and unseen structure are approximate; dust extinction is not modeled.",
+    "framingRadiusUnits": 3.5,
     "hasDetail": false,
-    "sourceSubjectId": "lmc"
+    "sourceSubjectId": "lmc",
+    "comparisonImages": [
+      {
+        "id": "lmc-volume-diffuse",
+        "name": "Diffuse image used by this volume",
+        "imagePath": "labs/nebula/models/lmc-particles/source/photo-diffuse.png"
+      },
+      {
+        "id": "lmc-density-alignment",
+        "name": "Alignment: photo / stellar density / overlay",
+        "imagePath": "labs/nebula/models/lmc-particles/source/alignment-comparison.png"
+      }
+    ]
   },
   {
     "id": "smc-particles",
     "name": "SMC · particle volume",
     "directory": "labs/nebula/models/smc-particles",
-    "imagePath": "src/objects/smc/source/source.jpg",
+    "imagePath": "labs/nebula/sources/smc-smash-full.webp",
     "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
     "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
     "modelNote": "3D density from simulation stellar particles. Fixed photo-based colors and display alignment are approximate. Dust extinction is not modeled.",

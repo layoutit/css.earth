@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-lab-reference-image@1",
+  "source": {
+    "id": "noirlab2030a",
+    "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+    "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+    "bytes": 264225774,
+    "width": 6737,
+    "height": 6536,
+    "publisherUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+    "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+    "license": "CC-BY-4.0",
+    "output": {
+      "path": "labs/nebula/sources/lmc-smash-full.webp",
+      "quality": 92,
+      "effort": 5,
+      "sha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0"
+    }
+  },
+  "interpretation": "Full spatial resolution, converted from publisher 16-bit TIFF to 8-bit sRGB WebP. Lossy display reference; no crop or resize. Original TIFF remains in the ignored cache.",
+  "outputBytes": 28128434
+}

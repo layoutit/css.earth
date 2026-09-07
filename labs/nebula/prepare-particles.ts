@@ -7,7 +7,9 @@ import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { importTipsyStars } from './tipsy.js';
 import { convertParticlesToDensityVolume } from './particles.js';
+import type { ParticlePhotoEmissionOptions } from './particles.js';
 import { extractExtendedSource } from './extraction.js';
+import { createParticleAlignmentDiagnostic } from './alignment.js';
 import type { VolumeRecipe, Vector3 } from '../../src/preparation/volume/config.js';
 
 interface ParticleExperiment {
@@ -16,11 +18,14 @@ interface ParticleExperiment {
     entry: string; snapshotSha256: string; snapshotAgeGyr: number; massUnitSolarMass: number;
     totalCount: number; gasCount: number; darkCount: number; starCount: number };
   targets: { id: string; directory: string; referenceObject: string; photo: string;
-    photoSha256: string; photoUrl: string; photoCredit: string;
+    photoSha256: string; photoUrl: string; photoCredit: string; photoReceipt?: string;
     starRange: { start: number; count: number }; rotation: number[];
     boundsKpc: { min: Vector3; max: Vector3 }; dimensions: Vector3;
     colorSpanKpc: [number, number]; colorCenterKpc: Vector3;
-    smoothingSigmaVoxels: number; normalizationQuantile: number; exposureGain: number }[];
+    smoothingSigmaVoxels: number; normalizationQuantile: number; exposureGain: number;
+    extraction?: { maxPixels: number; medianSize: number };
+    photoEmission?: Omit<ParticlePhotoEmissionOptions, 'exposureGain'>;
+    alignment?: { method: string; photoScale: string; displayScope: string; registration: string } }[];
 }
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 async function fileDigest(path: string) {
@@ -61,13 +66,15 @@ function rotateParticles(bytes: Buffer, matrix: number[]) {
   }
 }
 
-export async function prepareParticleExperiments(recipePath: string, archivePath: string) {
+export async function prepareParticleExperiments(recipePath: string, archivePath: string, targetId?: string) {
   const recipe: ParticleExperiment = JSON.parse(await readFile(recipePath, 'utf8'));
   if (recipe.schema !== 'cssearth-magellanic-particle-experiment@1') throw new TypeError('Unsupported experiment recipe.');
+  const targets = targetId ? recipe.targets.filter(target => target.id === targetId) : recipe.targets;
+  if (!targets.length) throw new TypeError(`Unknown experiment target: ${targetId}`);
   const root = process.cwd(), cache = resolve(root, '.local/nebula-lab/particles');
   await mkdir(cache, { recursive: true });
   const input = await snapshot(recipe.source, resolve(archivePath), cache);
-  for (const target of recipe.targets) {
+  for (const target of targets) {
     console.log(`PARTICLES_IMPORT ${target.id}`);
     const objectDirectory = resolve(root, target.directory), sourceDirectory = resolve(objectDirectory, 'source');
     await mkdir(sourceDirectory, { recursive: true });
@@ -83,29 +90,39 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
       rotatedOutput: { path: particlePath, sha256: digest(particles), bytes: particles.length } });
     if (await fileDigest(target.photo) !== target.photoSha256) throw new Error('Observation photo SHA256 mismatch.');
     const extraction = await extractExtendedSource({ inputPath: target.photo,
-      outputDirectory: sourceDirectory, id: 'photo', maxPixels: 1200 });
+      outputDirectory: sourceDirectory, id: 'photo', maxPixels: 1200, ...target.extraction });
+    if (target.photoEmission) await createParticleAlignmentDiagnostic({ rotatedParticlePath: particlePath,
+      extractedPhotoPath: relative(root, resolve(sourceDirectory, extraction.outputs.diffuse)),
+      photoCenterKpc: target.colorCenterKpc, photoSpanKpc: target.colorSpanKpc,
+      boundsKpc: target.boundsKpc, resolution: 512, outputDirectory: sourceDirectory });
     const converted = await convertParticlesToDensityVolume({ particlePath,
       outputDirectory: sourceDirectory, dimensions: target.dimensions, boundsKpc: target.boundsKpc,
       smoothingSigmaVoxels: target.smoothingSigmaVoxels, normalizationQuantile: target.normalizationQuantile,
       encoding: 'sqrt-density-unorm8', fallbackColor: [.68, .73, .8],
+      photoEmission: target.photoEmission ? { ...target.photoEmission, exposureGain: target.exposureGain } : undefined,
       colorConstraint: { imagePath: relative(root, resolve(sourceDirectory, extraction.outputs.diffuse)),
         centerKpc: target.colorCenterKpc, rightDirection: [1, 0, 0], upDirection: [0, 1, 0], spanKpc: target.colorSpanKpc } });
     const provenance = { schema: 'cssearth-particle-volume-provenance@1', source: recipe.source,
       sourceFamily: imported.selection, density: converted.interpretation.density,
-      photo: { path: target.photo, sha256: target.photoSha256, url: target.photoUrl, credit: target.photoCredit, license: 'CC-BY-4.0' },
+      photo: { path: target.photo, sha256: target.photoSha256, url: target.photoUrl, credit: target.photoCredit, license: 'CC-BY-4.0',
+        ...(target.photoReceipt ? { acquisition: { path: target.photoReceipt, sha256: await fileDigest(target.photoReceipt) } } : {}) },
       display: { rotation: target.rotation, boundsKpc: target.boundsKpc,
-        alignment: 'Authored lab alignment, not an astrometric fit between the simulation and photograph.',
+        alignment: target.alignment ?? 'Authored lab alignment, not an astrometric fit between the simulation and photograph.',
         color: converted.interpretation.color, dust: converted.interpretation.dust,
         massRetention: converted.particles.acceptedMass / converted.particles.inputMass,
-        brightness: 'Authored mass-to-light conversion and exposure; not calibrated photometry.' } };
+        brightness: converted.emission ? 'Photographic display brightness constrained along the reference projection; not calibrated photometry.' :
+          'Authored mass-to-light conversion and exposure; not calibrated photometry.' },
+      ...(target.extraction ? { extraction: target.extraction } : {}) };
     await json(resolve(sourceDirectory, 'provenance.json'), provenance);
     const volume: VolumeRecipe = { schema: 'cssearth-volume-recipe@1',
       grid: { path: 'density.ktx2', sha256: converted.outputs.gridSha256,
         decodedSha256: converted.outputs.decodedSha256, dimensions: target.dimensions,
         encoding: 'sqrt-density-unorm8', bounds: target.boundsKpc },
       material: { emission: [0, 1, 2].map(channel => ({ channel,
-        color: [Number(channel === 0), Number(channel === 1), Number(channel === 2)] as Vector3, strength: 1 })),
-        absorption: [], intensityScale: 1, stepScale: 1, stepMetric: 'source', exposureGain: target.exposureGain },
+        color: [Number(channel === 0), Number(channel === 1), Number(channel === 2)] as Vector3,
+        strength: converted.emission?.encodingScale ?? 1 })),
+        absorption: [], intensityScale: 1, stepScale: 1, stepMetric: 'source', exposureGain: target.exposureGain,
+        ...(converted.emission ? { emissionTransfer: 'shared-opacity' as const } : {}) },
       bake: { sliceCounts: { x: 64, y: 64, z: 64 }, unitsPerSourceUnit: 1, imageWidth: 512,
         samplesPerSlab: 2, cropTransparent: true, opticalWeight: 1, imageEncoding: { format: 'webp', quality: 90 } },
       anchors: [], provenance: { path: 'provenance.json', sha256: await fileDigest(resolve(sourceDirectory, 'provenance.json')) } };
@@ -122,7 +139,7 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
   }
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [recipe, archive, extra] = process.argv.slice(2);
-  if (!recipe || !archive || extra) throw new TypeError('Usage: prepare-particles <recipe.json> <archive.zip>');
-  await prepareParticleExperiments(recipe, archive);
+  const [recipe, archive, targetId, extra] = process.argv.slice(2);
+  if (!recipe || !archive || extra) throw new TypeError('Usage: prepare-particles <recipe.json> <archive.zip> [target-id]');
+  await prepareParticleExperiments(recipe, archive, targetId);
 }

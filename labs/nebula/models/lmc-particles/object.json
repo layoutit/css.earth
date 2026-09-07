@@ -20,25 +20,25 @@
       "metersPerUnit": 30856775814913670000,
       "boundsUnits": {
         "min": [
-          -16,
-          -13,
+          -6,
+          -6,
           -5
         ],
         "max": [
-          16,
-          13,
+          6,
+          6,
           5
         ]
       }
     },
     "preparation": {
       "source": "source/volume.json",
-      "sha256": "fb43400a6ad58c1b2ce2f160cebb92bc04c1aafff8dda10bfa236653ec48815b"
+      "sha256": "73b3282d2e57cc78f14f03c73a56d1bd090a72314a6169039162af8ce07a1caa"
     }
   },
   "prepared": {
     "format": "cssearth-density-volume@1",
     "url": "prepared/volume.json",
-    "sha256": "e3c68c203e2a02ab9ab23cf4f678416a1a86a971fc2ca73b77e3ece0d4869407"
+    "sha256": "37054f80a406a302d02cdacf2f76234de343a21a28825b962445371dec87772e"
   }
 }

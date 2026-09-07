@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-nebula-extraction-lab@1",
   "id": "photo",
-  "width": 1200,
-  "height": 1164,
+  "width": 2400,
+  "height": 2328,
   "skyRgb": [
-    20,
-    19,
-    18
+    13,
+    12,
+    12
   ],
-  "threshold": 52.29626687999999,
-  "supportFraction": 0.2553874008942935,
+  "threshold": 61.477404560000004,
+  "supportFraction": 0.23315111220644877,
   "outputs": {
     "cutout": "photo-cutout.png",
     "diffuse": "photo-diffuse.png",
