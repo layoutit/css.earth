@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/aumap-cyl-180180.cub.gz",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/2e616ac7f472dfbca4226d58f24d8810e8f431b50059bfca4ce29258925328b9/aumap-cyl-180180.cub.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/audem-ZTL-cyl-180180.cub.gz",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/2f2568538e310cf26388a99ca59e43ea09f12e66b8208ca84f3466e048e8dc69/audem-ZTL-cyl-180180.cub.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    }
+  ]
+}
