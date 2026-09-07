@@ -110,7 +110,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             volumeHost.dataset.volumeOpacity = String(volumeOpacity);
             // Attenuate the completed image against opaque black, outside every
             // camera's 3D context. This does not change slab optical coefficients.
-            volumeImage.style.opacity = String(volumeBrightness);
+            volumeImage.style.opacity = `var(--universe-volume-brightness-override, ${volumeBrightness})`;
             volumeImage.dataset.volumeBrightness = String(volumeBrightness);
             // Both backgrounds are opaque completed images. Keep the sky underlay
             // opaque: the two levels give (1-t)*sky+t*brightness*volume.

@@ -91,7 +91,8 @@
         "material": "venus-material.webp",
         "shortLabel": "VIS",
         "qualification": "OpenSpace synchronized Venus cloud deck",
-        "falseColor": false
+        "falseColor": false,
+        "detail": "Visible light"
       },
       {
         "id": "radar",
@@ -108,7 +109,8 @@
         "material": "venus-observation-material.webp",
         "shortLabel": "SAR",
         "qualification": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
-        "falseColor": true
+        "falseColor": true,
+        "detail": "Radar mosaic"
       },
       {
         "id": "elevation",
@@ -168,7 +170,8 @@
         },
         "shortLabel": "DEM",
         "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
-        "falseColor": true
+        "falseColor": true,
+        "detail": "Shaded relief"
       }
     ],
     "labels": {

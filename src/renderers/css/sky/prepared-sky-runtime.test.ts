@@ -137,14 +137,14 @@ test.each([true, false])('shared universe retains independent sky crossfade and 
     mounted.publish(camera, viewport);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected, 12);
     const expectedGain = withBrightness ? gain : 1;
-    expect(Number(volumeImage.style.opacity)).toBeCloseTo(expectedGain, 12);
+    expect(volumeImage.style.opacity).toBe(`var(--universe-volume-brightness-override, ${Number(volumeImage.dataset.volumeBrightness)})`);
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     expect(skyRoot.style.visibility).toBe(expected < 1 ? 'visible' : 'hidden');
     expect(skyRoot.style.opacity).toBeUndefined();
     expect(Number(skyRoot.dataset.skyContribution)).toBeCloseTo(1 - expected, 12);
     expect(starPublish).toHaveBeenLastCalledWith(camera, viewport, 1 - logarithmicFade(distance, context.volume.fadeStartDistanceM, context.volume.fullDistanceM));
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport);
-    expect(Number(volumeImage.style.opacity)).toBeCloseTo(expectedGain, 12);
+    expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected, 12);
   }
   expect(document.count).toBe(count); expect(root.children).toEqual(originalNodes);

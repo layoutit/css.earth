@@ -215,6 +215,16 @@ async function descriptorOverlay(changes = {}) {
 }
 const relativeFile = path => path.slice(process.cwd().length + 1);
 
+test('the minimap dependency closure includes Cesium math and rejects imported rendering code', async () => {
+  const report = await descriptorOverlay();
+  const math = report.sharedClosure.find(file => file.endsWith('/@cesium/engine/Source/Core/Math.js'));
+  assert.ok(math, 'Cesium dependencies must be inspected rather than skipped');
+  assert.ok(report.sharedClosure.some(file => file.includes('/mersenne-twister/')), 'Transitive math dependencies are included');
+  assert.equal(report.sharedClosure.some(file => /\/(?:FeatureDetection|getImagePixels|Resource)\.js$/.test(file)), false);
+  const source = await readFile(math, 'utf8');
+  await assert.rejects(descriptorOverlay({ [math]: source + '\ndocument.createElement("canvas");' }), /Forbidden runtime canvas/);
+});
+
 test('descriptor loaders prove the actual JSON transport and typed source build closure', async () => {
   const report = await descriptorOverlay();
   assert.equal(report.complete, true);

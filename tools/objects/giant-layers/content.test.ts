@@ -19,8 +19,8 @@ for (const id of ['jupiter', 'saturn', 'uranus', 'neptune']) {
       assert.deepEqual(actual.title[key], expected.title[key], `${id}: title.${key}`);
     }
     assert.deepEqual(actual.settings, controls.settings);
-    assert.deepEqual({ ...actual.lenses, controls: actual.lenses.controls.map(({id,label,thumbnailUrl,description,legend,title}) =>
-      ({id,label,thumbnailUrl,description,...(legend ? {legend} : {}),title})) }, controls.lenses);
+    assert.deepEqual({ ...actual.lenses, controls: actual.lenses.controls.map(({id,label,detail,thumbnailUrl,description,legend,title}) =>
+      ({id,label,...(detail ? {detail} : {}),thumbnailUrl,description,...(legend ? {legend} : {}),title})) }, controls.lenses);
     assert.deepEqual(actual.charts.map(({id,title,open,src,width,height,alt})=>({id,title,open,src,width,height,alt})),
       expected.charts.map(({id,title,open,src,width,height,alt}: Record<string, unknown>)=>({id,title,open,src,width,height,alt})));
   });

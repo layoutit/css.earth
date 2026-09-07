@@ -84,7 +84,8 @@
         "source": {
           "id": "normal",
           "url": "https://science.nasa.gov/neptune/"
-        }
+        },
+        "detail": "Visible light"
       },
       {
         "id": "methane",
@@ -128,7 +129,8 @@
         "source": {
           "id": "methane",
           "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
-        }
+        },
+        "detail": "619 nm"
       },
       {
         "id": "near-infrared",
@@ -172,7 +174,8 @@
         "source": {
           "id": "near-infrared",
           "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
-        }
+        },
+        "detail": "845 nm"
       }
     ]
   },
