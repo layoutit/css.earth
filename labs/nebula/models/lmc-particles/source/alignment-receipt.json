@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-particle-alignment-diagnostic@1",
+  "inputs": {
+    "particles": {
+      "path": ".local/nebula-lab/particles/lmc-particles.f32",
+      "sha256": "fdcf3e9db15f3bbfeb33c157f6725a1e9172b07a18fb9318a4ba03ece0469f2c",
+      "bytes": 25920000
+    },
+    "photo": {
+      "path": "labs/nebula/models/lmc-particles/source/photo-diffuse.png",
+      "sha256": "573e4cfd8269b74e6cc348b8dff472850945bdb051aeef9c6f3d7e9a6da07812",
+      "bytes": 9339689
+    }
+  },
+  "mapping": {
+    "photoCenterKpc": [
+      0.138536068,
+      -1.648790306,
+      0
+    ],
+    "photoSpanKpc": [
+      8.092550727,
+      7.851107548
+    ],
+    "boundsKpc": {
+      "min": [
+        -6,
+        -6,
+        -5
+      ],
+      "max": [
+        6,
+        6,
+        5
+      ]
+    },
+    "width": 512,
+    "height": 512,
+    "kpcPerPixel": [
+      0.0234375,
+      0.0234375
+    ],
+    "yDirection": "up",
+    "projection": "Orthographic XY. Input particle XYZ unchanged; optional authored Z bounds select the same display region."
+  },
+  "mass": {
+    "inputCount": 1620000,
+    "acceptedCount": 1274028,
+    "inputMass": 31370.560079813004,
+    "acceptedMass": 24670.970319360495,
+    "projectedMass": 24670.970319360295,
+    "centroidKpc": [
+      0.04923170384966046,
+      -0.10893451678110135
+    ]
+  },
+  "photo": {
+    "summedDisplayLuminance": 10515.691771778345,
+    "centroidKpc": [
+      0.2865053884825296,
+      0.033220964221630636
+    ]
+  },
+  "interpretation": {
+    "alignment": "Authored placement, not an astrometric correspondence or fitted transformation.",
+    "mass": "Raw source-unit stellar mass deposited by boundary-normalized 2D CIC; no smoothing.",
+    "photo": "Extracted straight display RGB multiplied by alpha, bilinearly sampled in premultiplied form.",
+    "densityDisplay": "log(1 + 99 × columnMass / peakColumnMass) / log(100)",
+    "contourFractionsOfPeakMass": [
+      0.1,
+      0.3,
+      0.6
+    ],
+    "centroids": "Independent raw mass and display-luminance centroids; not a goodness-of-fit statistic."
+  },
+  "outputs": {
+    "comparison": "alignment-comparison.png",
+    "sha256": "6da3180a85633631e4ea5bc10b3d8b3137d94957f20ba0c72135c72f01072552",
+    "bytes": 494294
+  }
+}
