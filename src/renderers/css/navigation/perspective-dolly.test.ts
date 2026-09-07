@@ -13,10 +13,11 @@ import scene from '../../../planets/mercury/prepared/scene.json';
 
 
 it('publishes physical scene coordinates without CSS perspective-origin or focal shims', () => {
-  const width = 1440, height = 900, focal = 1247;
+  let width = 1440, height = 900, focal = 1247;
+  let layoutReads = 0;
   const view = { getComputedStyle: () => ({ perspective: `${focal}px`, perspectiveOrigin: `${width/2}px ${height/2}px` }) };
   const make = (x: number) => ({ style: {}, ownerDocument: { defaultView: view },
-    getBoundingClientRect: () => ({ width, height, x, y: 0, left: x, top: 0 }) });
+    getBoundingClientRect: () => { layoutReads++; return { width, height, x, y: 0, left: x, top: 0 }; } });
   const options = { cameraPlan: { ...scene.camera, sceneScale: .3 }, heliocentric: null,
     worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0],
       presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 100 },
@@ -26,7 +27,11 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   const bodyCenter = [120, -70, -1200] as const;
   dolly.setBodyCenter(bodyCenter);
   const rotation = { m11: 0, m21: -1, m31: 0, m12: 1, m22: 0, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;
+  const measured = layoutReads;
   const published = dolly.publish(rotation, 'rotateZ(90deg)');
+  expect(layoutReads).toBe(measured, 'Camera publication must not force layout after its transform writes');
+  expect(published.stageViewport).toEqual({ focalPixels: focal, widthPixels: width, heightPixels: height,
+    principalOffsetPixels: [0, 0] });
   expect(published.projection.focalPixels).toBe(focal);
   expect(published.projection.principalOffsetPixels).toEqual([-170, 0]);
   const expected = [0, .3, 0, 0, -.3, 0, 0, 0, 0, 0, .3, 0, ...bodyCenter, 1];
@@ -56,7 +61,13 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   expect(grazing.body!.silhouette).toBeNull();
   expect(grazing.levelOfDetail!.stage).toBe('geometry');
   expect(Number.isFinite(dolly.trackball().radius)).toBe(true);
-
+  width = 1000; height = 700; focal = 866;
+  dolly.remeasure();
+  const resizedReads = layoutReads;
+  expect(dolly.publish(rotation, 'rotateZ(90deg)').stageViewport).toEqual({
+    focalPixels: focal, widthPixels: width, heightPixels: height, principalOffsetPixels: [0, 0],
+  });
+  expect(layoutReads).toBe(resizedReads, 'The next frame uses the refreshed layout cache');
 });
 
 it('overview centering preserves the current view and only converges while dollying out', () => {

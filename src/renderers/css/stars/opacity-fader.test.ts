@@ -45,3 +45,23 @@ test('duration zero clears a completed fade before the element is admitted again
   fader.set(element as unknown as HTMLElement,1,100);clock.frame(50);
   expect(Number(element.style.opacity)).toBeCloseTo(.5);fader.destroy();
 });
+
+test('cancelling a pool retains unfinished fades and stops after its final active member', () => {
+  const clock = new Clock(), fader = createOpacityFader(clock);
+  const settled = Array.from({ length: 2048 }, () => new Element());
+  for (const element of settled) fader.set(element as unknown as HTMLElement, .5);
+  const fading = new Element();
+  fader.set(fading as unknown as HTMLElement, 1, 100);
+  for (const element of settled) fader.cancel(element as unknown as HTMLElement);
+  expect(clock.pending.size).toBe(1);
+  clock.frame(50);
+  expect(Number(fading.style.opacity)).toBeCloseTo(.5);
+  fader.set(fading as unknown as HTMLElement, .8, 0);
+  expect(clock.pending.size).toBe(0);
+  expect(fading.style.opacity).toBe('0.8');
+  fader.set(fading as unknown as HTMLElement, 0, 100);
+  clock.frame(100);
+  expect(fading.style.opacity).toBe('0');
+  expect(clock.pending.size).toBe(0);
+  fader.destroy();
+});

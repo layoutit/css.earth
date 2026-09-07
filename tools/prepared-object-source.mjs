@@ -73,8 +73,9 @@ export function requireDescriptorAdapterSource(text, exported) {
     bindings.get(defaultMount.right.callee.name)?.source !== rendererBinding.source) fail();
   const renderer = rendererBinding.source;
   const transport = returned.arguments[1].properties;
-  if (transport.length !== 1 || (transport[0].key.name ?? transport[0].key.value) !== 'read' || !transport[0].method || !transport[0].value.async || transport[0].value.params.length !== 1) fail();
-  const method = transport[0].value, reference = method.params[0]?.name, nodes = [];
+  if (transport.length !== 1 || (transport[0].key.name ?? transport[0].key.value) !== 'read' || !transport[0].method || !transport[0].value.async ||
+    transport[0].value.params.length !== 2 || transport[0].value.params.some(param => param.type !== 'Identifier')) fail();
+  const method = transport[0].value, reference = method.params[0]?.name, signal = method.params[1].name, nodes = [];
   const walk = node => { if (!node || typeof node !== 'object') return; if (node.type) nodes.push(node); for (const value of Object.values(node)) if (Array.isArray(value)) value.forEach(walk); else if (value && typeof value === 'object') walk(value); };
   walk(method.body);
   const glob = nodes.filter(node => node.type === 'VariableDeclarator' && node.init?.type === 'CallExpression' && node.init.callee?.property?.name === 'glob');
@@ -90,7 +91,10 @@ export function requireDescriptorAdapterSource(text, exported) {
     template.expressions[1]?.name !== reference || template.quasis[0].value.cooked !== '../src/planets/' ||
     template.quasis[1].value.cooked !== '/' || template.quasis[2].value.cooked !== '') fail();
   const fetched = nodes.find(node => node.type === 'VariableDeclarator' && node.init?.type === 'AwaitExpression' && node.init.argument?.callee?.name === 'fetch');
-  if (fetched?.init.argument.arguments.length !== 1 || fetched.init.argument.arguments[0].name !== address.id.name ||
+  const fetchOptions = fetched?.init.argument.arguments[1];
+  if (fetched?.init.argument.arguments.length !== 2 || fetched.init.argument.arguments[0].name !== address.id.name ||
+    fetchOptions?.type !== 'ObjectExpression' || fetchOptions.properties.length !== 1 || fetchOptions.properties[0].key?.name !== 'signal' ||
+    fetchOptions.properties[0].value?.name !== signal ||
     !nodes.some(node => node.type === 'ReturnStatement' && node.argument?.type === 'CallExpression' && node.argument.callee.object?.name === fetched.id.name && node.argument.callee.property?.name === 'arrayBuffer')) fail();
   return renderer;
 }

@@ -19,16 +19,23 @@ class CSSAnimation {
   play() { this.playState = "running"; } pause() { this.playState = "paused"; }
   cancel() { this.playState = "idle"; this.cancels++; }
 }
-function harness({ definition = moonDefinition, failAtElement = null, stageId = definition.id, runtimeFactory = createObjectRuntime } = {}, services = {}) {
+function harness({ definition = moonDefinition, failAtElement = null, stageId = definition.id, runtimeFactory = createObjectRuntime, diagnostics = false } = {}, services = {}) {
   const f = retainedPresentationFixture(definition, { failAtElement });
   const errors = [], jobs = [], events = [], flights = [], native = new CSSAnimation(), created = [];
   f.document.readyState = "complete"; f.document.defaultView = {};
   f.document.querySelector = () => f.stage;
-  f.stage.dataset.objectId = stageId; f.stage.getAnimations = () => [native, ...f.animations];
+  f.stage.dataset.objectId = stageId; f.stage.getAnimations = () => { throw new Error("Mount must not discover live animations"); };
   const createElement = f.document.createElement;
   f.document.createElement = tag => {
     const node = createElement(tag), remove = node.remove;
     node.remove = () => { if (/polycss-camera/.test(node.className)) events.push("remove:camera"); return remove.call(node); };
+    const animate = node.animate;
+    node.animate = (keyframes, options) => {
+      if (options.iterations === Infinity && !native.effect) {
+        native.effect = { updateTiming() {} }; return native;
+      }
+      return animate.call(node, keyframes, options);
+    };
     created.push(node); return node;
   };
   let lifetime, playback, resources, resourceOptions, orbitArguments, coordinator;
@@ -61,7 +68,7 @@ function harness({ definition = moonDefinition, failAtElement = null, stageId = 
       },
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...services,
     });
-    runtime = mount(f.stage, { inputSurface: f.stage,
+    runtime = mount(f.stage, { diagnostics, inputSurface: f.stage,
       capabilities: { ...preparedObjectCapabilities, ...(services.mountPages ? { mountPages: services.mountPages } : {}) },
       onError: error => errors.push(error) });
   } catch (error) { f.restore(); throw error; }
@@ -98,12 +105,12 @@ test("development diagnostics start with the mounted sky and expose its star con
   const bundle = await build({ configFile: false, logLevel: "silent",
     define: { "import.meta.env.DEV": "true" },
     build: { write: false, minify: false,
-      lib: { entry: fileURLToPath(new URL("./object-runtime.mjs", import.meta.url)), formats: ["es"] } } });
+      lib: { entry: fileURLToPath(new URL("../renderers/css/runtime/object-runtime.ts", import.meta.url)), formats: ["es"] } } });
   const chunks = (Array.isArray(bundle) ? bundle : [bundle]).flatMap(output => output.output).filter(item => item.type === "chunk");
   assert.equal(chunks.length, 1);
   const { createObjectRuntime: developmentRuntime } = await import(`data:text/javascript;base64,${Buffer.from(chunks[0].code).toString("base64")}`);
   const calls = [], sky = { starGroup: {}, setStarExposure(options) { calls.push(options); return options; }, destroy() {} };
-  const h = harness({ runtimeFactory: developmentRuntime }, { mountSky: () => sky }); t.after(h.restore);
+  const h = harness({ runtimeFactory: developmentRuntime, diagnostics: true }, { mountSky: () => sky }); t.after(h.restore);
   await h.complete();
   const diagnostics = h.document.defaultView.__moon;
   assert.equal(diagnostics?.ready, true);
@@ -249,4 +256,9 @@ test("prepared geographic destinations and lens targets use the physical surface
     zoom: earthDefinition.camera.defaultZoom,
   }]);
   assert.deepEqual(h.errors, []);
+});
+
+test('mount rejects an uncompiled motion document instead of discovering live CSS animations', () => {
+  const { motion, ...uncompiled } = moonDefinition;
+  assert.throws(() => createObjectRuntime(uncompiled), /motion bindings must be prepared/);
 });

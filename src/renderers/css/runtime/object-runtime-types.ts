@@ -45,10 +45,12 @@ export interface ObjectMountOptions {
   inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; mobilePreviewElement?: HTMLElement | null;
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
   worldFrame?: PreparedWorldCameraFrame; preparedResources?: PreparedResourceLease;
+  preparedTree?: import('../rendering/prepared-tree.js').PreparedTreeLease;
   worldContext?: PerspectiveWorldContext;
   /** The application owns the contextual universe layer for this mount. */
   externalWorldContext?: boolean;
   initialWorldCamera?: WorldCameraPose;
+  initialProjection?: import('../rendering/physical-projection.js').PhysicalProjection;
 }
 export interface PreparedNavigation { maximumZoom: number; camera?: OrbitStateUpdate; }
 export type SelectionSnapshot = ObjectSelection;

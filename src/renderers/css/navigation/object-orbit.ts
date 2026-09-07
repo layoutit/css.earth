@@ -14,7 +14,7 @@ import type { mountRetainedHeliocentricView } from '../solar-system/heliocentric
 import type { SunProjection } from '../solar-system/heliocentric-view.js';
 import { rotationFromMatrix3d } from '../solar-system/heliocentric-view.js';
 import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
-import type { PreparedWorldCameraFrame, WorldCameraPose } from './world-camera.js';
+import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import type { PositionM } from '@cssearth/engine';
 import { bindWorldCameraPicking } from './world-camera-picking.js';
 import { hitsProjectedBody } from './world-camera-hit.js';
@@ -23,7 +23,7 @@ import { worldRotationCss } from './world-camera-math.js';
 import type { PhysicalProjection } from '../rendering/physical-projection.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & Partial<ReturnType<PerspectiveDolly['state']>>;
-export interface OrbitPublication extends CameraAngles { sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; sunPresentation: SunProjection | ReturnType<RetainedDirectionalSun['state']> | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection?: PhysicalProjection; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
+export interface OrbitPublication extends CameraAngles { sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; sunPresentation: SunProjection | ReturnType<RetainedDirectionalSun['state']> | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection?: PhysicalProjection; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; stageViewport?: WorldCameraViewport; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
 export interface RetainedOrbitOptions { stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
 export interface OrbitServices extends InteractionServices { createPolyCamera?: typeof createPolyCamera; createCubicSkyCameraOrientation?: typeof createCubicSkyCameraOrientation; bindResponsiveOrbitPolicy?: RuntimePolicy['bindResponsiveOrbitPolicy']; selectPreparedResponsiveZoom?: typeof selectPreparedResponsiveZoom; createPerspectiveDolly?: typeof createPerspectiveDolly; HTMLElement?: typeof HTMLElement; matchMedia?: (query: string) => MediaQueryList; MutationObserver?: typeof MutationObserver; }
 export type RetainedCubicSkyOrbit = ReturnType<typeof createRetainedCubicSkyOrbit>;
@@ -276,6 +276,7 @@ export function createRetainedCubicSkyOrbit({
         focal: projected.focal,
         viewportWidth: projected.viewportWidth,
         viewportHeight: projected.viewportHeight,
+        stageViewport: projected.stageViewport,
         principalOffset: projected.principalOffset,
         body: projected.body,
         levelOfDetail: projected.levelOfDetail,

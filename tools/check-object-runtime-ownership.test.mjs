@@ -286,6 +286,9 @@ test('descriptor binding cannot bypass the shared factory or redirect the prepar
       'bindContextualObject(definition, applicationContext, applicationContext.frame)'),
     source.replace(': bindPackagedObject(definition)', ': bindPackagedObject(otherDefinition)'),
     source.replace('mount = createObjectRuntime(definition)', 'mount = createObjectRuntime(otherDefinition)'),
+    source.replace('createPreparedObjectNavigation(async () => definition, frame)', 'createPreparedObjectNavigation(async () => otherDefinition, frame)'),
+    source.replace('createPreparedObjectNavigation(async () => definition, frame)', 'createPreparedObjectNavigation(async () => definition, context.frame)'),
+    source.replace('fetch(url, { signal })', 'fetch(url, { signal: otherSignal })'),
     source.replace('=> mount(stage,', '=> differentMount(stage,')]) {
     assert.notEqual(changed, source, 'Mutation must change the actual loader');
     await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport|Contextual binding/);

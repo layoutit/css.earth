@@ -18,9 +18,11 @@ export function mountPlanetShell({
   }
   const lifetime = createSceneLifetime();
   let settingsController, objectBrowser, contentLifetime, minimapController, viewReadout;
+  let selectionPreview = null;
   let overview = false, overviewScope = 'solar-system', camera = null, unsubscribeOverview = null;
   lifetime.onDispose(() => unsubscribeOverview?.());
   function updateOverview(force = false, world = camera?.navigation?.capture()) {
+    if (selectionPreview) return;
     const scope = overview && world ? overviewScopeAtCamera(world, overviewScope) : 'solar-system';
     if (!force && scope === overviewScope) return;
     overviewScope = scope;
@@ -38,6 +40,7 @@ export function mountPlanetShell({
       onOpenSolarSystem: () => objectBrowser.showSolarSystem(),
     }));
     lifetime.onDispose(() => disposeContent());
+    lifetime.onDispose(() => selectionPreview?.restore());
     mountContent(objectId, motionEnabled, false);
   } catch (error) {
     const cleanupErrors = lifetime.destroy();
@@ -47,12 +50,40 @@ export function mountPlanetShell({
     throw error;
   }
   return Object.freeze({
+    beginObjectSelection(object) {
+      selectionPreview?.restore();
+      const information = drawer.querySelector('.planet-information-panel');
+      const previous = [...information.childNodes], restoreBrowser = objectBrowser.previewObject(object.name);
+      const previousBusy = information.ariaBusy, previousInert = information.inert;
+      const card = documentTarget.querySelector(`template[data-object-card="${object.id}"]`)
+        ?.content.querySelector('.planet-information-panel');
+      if (!card) throw new Error(`Prepared sidebar card is missing for ${object.id}.`);
+      information.replaceChildren(...[...card.childNodes].map(node => node.cloneNode(true)));
+      restorePanelState([...information.children].filter(node => node instanceof windowTarget.HTMLDetailsElement)
+        .map(node => [panelKey(node), node]), object.id, windowTarget);
+      information.ariaBusy = 'true'; information.inert = true;
+      const preview = { id: object.id, commit() {
+        selectionPreview = null;
+        information.ariaBusy = previousBusy; information.inert = previousInert;
+      }, restore() {
+        if (selectionPreview !== preview) return;
+        selectionPreview = null;
+        information.replaceChildren(...previous);
+        information.ariaBusy = previousBusy; information.inert = previousInert;
+        restoreBrowser();
+      } };
+      selectionPreview = preview;
+      return preview.restore;
+    },
     setObject(content) {
       if (lifetime.disposed) return;
+      const preserveSidebar = selectionPreview?.id === content.id;
+      if (preserveSidebar) selectionPreview.commit();
+      else selectionPreview?.restore();
       const motion = documentTarget.querySelector('.planet-motion-setting').checked;
       const contrast = documentTarget.querySelector('.planet-sky-contrast-setting').checked;
       disposeContent();
-      content.apply();
+      content.apply({ preserveSidebar });
       overview = false; overviewScope = 'solar-system';
       objectBrowser.setObject(content.name);
       mountContent(content.id, motion, contrast);
@@ -435,6 +466,15 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     }
   };
   return Object.freeze({
+    previewObject(name) {
+      const previous = { selectedSearchValue, currentSearchValue, overview, open, query: search.value };
+      overview = false; selectedSearchValue = name; currentSearchValue = name;
+      markSelection(); render(false);
+      return () => {
+        ({ selectedSearchValue, currentSearchValue, overview } = previous);
+        search.value = previous.query; markSelection(); render(previous.open);
+      };
+    },
     showSolarSystem() {
       search.value = "Solar System";
       render(true);
