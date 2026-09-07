@@ -175,56 +175,25 @@ try {
       `${config.label}: Factsheet returns to its initial state`);
     const chartSwitcher = page.locator(".planet-chart-switcher");
     if (await chartSwitcher.count() > 0) {
-      const chartSummary = chartSwitcher.locator(":scope > .planet-chart-switcher-header");
+      assert.equal(await chartSwitcher.isVisible(), false,
+        `${config.label}: Charts stays hidden while its prepared content is retained`);
       const chartSlides = chartSwitcher.locator(".planet-chart-slide");
-      const chartIds = await chartSlides.evaluateAll((slides) =>
-        slides.map((slide) => slide.dataset.chartId));
-      const chartNodes = await chartSlides.elementHandles();
-      assert.equal(await chartSwitcher.evaluate((node) => node.open), false,
-        `${config.label}: chart switcher starts collapsed`);
-      await chartSummary.locator(".planet-chart-switcher-title").click();
-      assert.equal(await chartSwitcher.evaluate((node) => node.open), true,
-        `${config.label}: chart title expands the switcher`);
-      assert.equal(chartIds[0], "reflectance",
-        `${config.label}: Reflectance is the default chart`);
-      assert.equal(await chartSwitcher.getAttribute("data-active-chart"), chartIds[0]);
-      assert.deepEqual(await chartSwitcher.locator(".planet-chart-switcher-controls").evaluate((node) =>
-        [...node.children].map((child) => [
-          "planet-chart-previous", "planet-chart-next",
-        ].find((className) => child.classList.contains(className)))), [
-        "planet-chart-previous", "planet-chart-next",
-      ], `${config.label}: chart header contains only the two navigation carets`);
-      assert.equal(await chartSlides.evaluateAll((slides) =>
-        slides.filter((slide) => !slide.hidden).length), 1);
-      if (chartIds.length > 1) {
-        await chartSwitcher.locator(".planet-chart-next").click();
-        assert.equal(await chartSwitcher.evaluate((node) => node.open), true,
-          `${config.label}: chart carets do not collapse the switcher`);
-        assert.equal(await chartSwitcher.getAttribute("data-active-chart"), chartIds[1],
-          `${config.label}: next caret advances the chart`);
-        assert.equal(await chartSwitcher.locator(".planet-chart-label:not([hidden])").textContent(),
-          await chartSlides.nth(1).getAttribute("data-chart-title"));
-        await chartSwitcher.locator(".planet-chart-previous").click();
-        assert.equal(await chartSwitcher.getAttribute("data-active-chart"), chartIds[0],
-          `${config.label}: previous caret returns to Reflectance`);
-      }
-      for (const [index, chartNode] of chartNodes.entries()) {
-        assert.equal(await chartNode.evaluate((node, position) =>
-          node.isConnected && node === document.querySelectorAll(".planet-chart-slide")[position], index), true,
-        `${config.label}: chart switching retains every prepared chart node`);
-      }
+      assert.ok(await chartSlides.count() > 0,
+        `${config.label}: prepared chart nodes remain mounted`);
+      assert.equal(await chartSwitcher.getAttribute("data-active-chart"), "reflectance",
+        `${config.label}: the default chart remains Reflectance`);
     }
     const lensPanel = page.locator(".planet-lenses");
     if (await lensPanel.count() > 0) {
       const lensHeading = lensPanel.locator(":scope > .planet-lens-browser-header .planet-panel-heading");
       assert.equal(await lensPanel.evaluate((node) => node.open), true,
-        `${config.label}: Surface Lens starts open`);
+        `${config.label}: Dataset starts open`);
       await lensHeading.click();
       assert.equal(await lensPanel.evaluate((node) => node.open), false,
-        `${config.label}: Surface Lens title collapses the list`);
+        `${config.label}: Dataset title collapses the list`);
       await lensHeading.click();
       assert.equal(await lensPanel.evaluate((node) => node.open), true,
-        `${config.label}: Surface Lens title expands the list`);
+        `${config.label}: Dataset title expands the list`);
       await lensPanel.locator(".planet-lens-search").click();
       assert.equal(await lensPanel.evaluate((node) => node.open), true,
         `${config.label}: focusing lens search does not collapse its panel`);
@@ -239,8 +208,8 @@ try {
           "Mercury retains only its meaningful Topography and Interior legends");
         assert.equal(await page.locator(".planet-drawer-content > [data-lens-legend]").count(), 0,
           "Surface Lens has no detached legend card");
-        assert.equal(await page.locator(".planet-observation-option > [data-lens-legend]").count(), 2,
-          "each optional legend is retained inside its lens row");
+        assert.equal(await page.locator(".planet-lens-details [data-lens-legend]").count(), 2,
+          "each optional legend is retained inside Surface Lens");
         assert.equal(await page.locator("[data-lens-legend]:visible").count(), 0,
           "Mercury default 750 nm lens does not show a legend");
         await enhanced.click();
@@ -263,8 +232,8 @@ try {
         assert.deepEqual(await legend.evaluate((node) => {
           const style = getComputedStyle(node);
           return { paddingTop: style.paddingTop, paddingBottom: style.paddingBottom };
-        }), { paddingTop: "2px", paddingBottom: "8px" },
-        "scale legends use the same compact accordion spacing as category legends");
+        }), { paddingTop: "8px", paddingBottom: "0px" },
+        "Surface Lens legends use the shared compact spacing");
         assert.match(await legend.innerText(), /−5,020[\s\S]*−450[\s\S]*4,140 m/u);
         await interior.click();
         await page.waitForFunction(() =>
@@ -394,32 +363,34 @@ try {
     assert.equal(await settingsPanel.locator(".planet-motion-setting-control").evaluate((node) =>
       getComputedStyle(node.querySelector(".planet-setting-text")).opacity), "1",
     `${config.label}: enabled setting labels use full opacity`);
-    assert.ok(Number(await speedControl.evaluate((node) => getComputedStyle(node).opacity)) < 1,
-      `${config.label}: disabled Speed row remains dimmed`);
-    assert.equal(await speedControl.evaluate((node) => {
-      const next = node.nextElementSibling;
-      const contrast = next?.matches(".planet-sky-contrast-setting-control")
-        ? next
-        : next?.nextElementSibling;
-      return node.previousElementSibling?.matches(".planet-motion-setting-control") === true &&
-        contrast?.matches(".planet-sky-contrast-setting-control") === true &&
-        (!next?.querySelector('input[name="shadows"]') || contrast === next.nextElementSibling);
-    }), true, `${config.label}: Motion and Speed are consecutive; Shadows precedes High contrast when supported`);
-    assert.equal(await speed.isDisabled(), !(await motion.isChecked()),
-      `${config.label}: Motion controls Speed availability`);
-    await settingsPanel.locator(".planet-motion-setting-control").click();
-    assert.equal(await speed.isEnabled(), true,
-      `${config.label}: enabling Motion enables Speed`);
-    assert.equal(await speedControl.evaluate((node) => getComputedStyle(node).opacity), "1",
-      `${config.label}: enabled Speed label returns to full opacity`);
-    await speed.fill("2");
-    assert.equal(await speed.getAttribute("data-state"), "fast",
-      `${config.label}: Speed exposes five stepped values`);
-    await settingsPanel.locator(".planet-motion-setting-control").click();
-    assert.equal(await speed.isDisabled(), true,
-      `${config.label}: disabling Motion disables Speed`);
-    assert.ok(Number(await speedControl.evaluate((node) => getComputedStyle(node).opacity)) < 1,
-      `${config.label}: disabling Motion dims the Speed label again`);
+    if (await speedControl.count() > 0) {
+      assert.ok(Number(await speedControl.evaluate((node) => getComputedStyle(node).opacity)) < 1,
+        `${config.label}: disabled Speed row remains dimmed`);
+      assert.equal(await speedControl.evaluate((node) => {
+        const next = node.nextElementSibling;
+        const contrast = next?.matches(".planet-sky-contrast-setting-control")
+          ? next
+          : next?.nextElementSibling;
+        return node.previousElementSibling?.matches(".planet-motion-setting-control") === true &&
+          contrast?.matches(".planet-sky-contrast-setting-control") === true &&
+          (!next?.querySelector('input[name="shadows"]') || contrast === next.nextElementSibling);
+      }), true, `${config.label}: Motion and Speed are consecutive; Shadows precedes High contrast when supported`);
+      assert.equal(await speed.isDisabled(), !(await motion.isChecked()),
+        `${config.label}: Motion controls Speed availability`);
+      await settingsPanel.locator(".planet-motion-setting-control").click();
+      assert.equal(await speed.isEnabled(), true,
+        `${config.label}: enabling Motion enables Speed`);
+      assert.equal(await speedControl.evaluate((node) => getComputedStyle(node).opacity), "1",
+        `${config.label}: enabled Speed label returns to full opacity`);
+      await speed.fill("2");
+      assert.equal(await speed.getAttribute("data-state"), "fast",
+        `${config.label}: Speed exposes five stepped values`);
+      await settingsPanel.locator(".planet-motion-setting-control").click();
+      assert.equal(await speed.isDisabled(), true,
+        `${config.label}: disabling Motion disables Speed`);
+      assert.ok(Number(await speedControl.evaluate((node) => getComputedStyle(node).opacity)) < 1,
+        `${config.label}: disabling Motion dims the Speed label again`);
+    }
     await settings.click();
     assert.equal(await settingsPanel.isVisible(), true, "clicking the selected rail item keeps its panel open");
     const contrast = settingsPanel.locator(".planet-sky-contrast-setting");

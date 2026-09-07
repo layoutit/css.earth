@@ -41,6 +41,18 @@ try {
     surfaceProbe.append(leaf);
     document.querySelector('.planet-stage').append(surfaceProbe);
     const shell = mountPlanetShell({ objectId: 'mercury', documentTarget: document, windowTarget: window });
+    const probeTagBrowsing = () => [...document.querySelectorAll('[data-object-query]')].map(tag => {
+      tag.click();
+      const search = document.querySelector('.planet-sidebar-search');
+      const result = {
+        expected: tag.dataset.objectQuery,
+        query: search.value,
+        open: !document.querySelector('.planet-object-browser').hidden,
+        informationHidden: document.querySelector('.planet-information-panel').hidden,
+      };
+      search.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      return result;
+    });
     shell.setObject(content);
     const first = {
       metadata: headMetadata(document),
@@ -57,6 +69,7 @@ try {
       activeBrowser: document.querySelector('.planet-object-link.is-active').dataset.objectId,
       selectedTitle: document.querySelector('.planet-title').getAttribute('aria-label'),
       aboutLabelBound: Boolean(document.getElementById(document.querySelector('.explorer-about-panel').getAttribute('aria-labelledby'))),
+      tagBrowsing: probeTagBrowsing(),
     };
     const reverse = await transport.load({ id: 'mercury', name: 'Mercury', route: '/mercury/' }, { signal: new AbortController().signal });
     shell.setObject(reverse);
@@ -66,6 +79,7 @@ try {
       selectedSearch: document.querySelector('.planet-sidebar-search').value,
       surfaceStylesRetained: surfaceStyles.every(style => style.isConnected),
       selectedSurface: getComputedStyle(leaf).backgroundImage,
+      tagBrowsing: probeTagBrowsing(),
     };
     surfaceProbe.remove();
     shell.destroy();
@@ -88,6 +102,14 @@ try {
   assert.equal(proof.first.activeBrowser, 'venus');
   assert.equal(proof.first.selectedTitle, 'Venus');
   assert.equal(proof.first.aboutLabelBound, true);
+  for (const transition of [proof.first, proof.second]) {
+    assert.equal(transition.tagBrowsing.length, 2);
+    for (const tag of transition.tagBrowsing) {
+      assert.equal(tag.query, tag.expected, 'System and classification labels must filter after content replacement.');
+      assert.equal(tag.open, true);
+      assert.equal(tag.informationHidden, true);
+    }
+  }
   assert.ok(proof.second.identities.every(Boolean));
   assert.equal(proof.second.selectedSearch, 'Mercury');
   assert.equal(proof.second.surfaceStylesRetained, true);

@@ -323,13 +323,14 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   }, {
     signal: events.signal,
   });
-  for (const tag of documentTarget.querySelectorAll("[data-object-query]")) {
-    tag.addEventListener("click", () => {
-      search.value = tag.dataset.objectQuery;
-      render(true);
-      search.focus();
-    }, { signal: events.signal });
-  }
+  information.addEventListener("click", (event) => {
+    const tag = event.target instanceof windowTarget.HTMLElement
+      ? event.target.closest("[data-object-query]") : null;
+    if (!tag || !information.contains(tag)) return;
+    search.value = tag.dataset.objectQuery;
+    render(true);
+    search.focus();
+  }, { signal: events.signal });
   search.addEventListener("input", () => {
     if (!open) render(true);
     else if (open) filter();
