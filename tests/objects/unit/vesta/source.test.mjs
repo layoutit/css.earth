@@ -34,7 +34,7 @@ test('Vesta uses one shared scene and its measured mesh for drawing and hits', a
   assert.equal(descriptor.properties.recipe.shape.kind, 'radial-terrain');
   assert.equal(runtime.tree.nodes.filter(n => n.className?.includes('polycss-camera')).length, 1);
   assert.equal(runtime.surfaceHit.triangles.length, terrain.faces.length);
-  assert.ok(terrain.faces.length <= 2000);
+  assert.ok(terrain.faces.length <= 1250, 'Vesta stays near the requested 1200-face budget');
   assert.equal(scene.bodyLeaves.length, terrain.faces.length);
   for (const [index, leaf] of scene.bodyLeaves.entries()) {
     assert.equal(leaf.tag, 'u');

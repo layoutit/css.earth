@@ -58,10 +58,11 @@ credits. Required binaries are restored through `source/preparation/acquisition.
 
 ## Prepared presentation
 
-The original radial model supplies 1,840 retained triangles. Their positions
+The original radial model is sampled on a 20 × 32 grid into 1,216 retained
+triangles, within the requested roughly 1,200-face budget. Their positions
 are unchanged by lighting; area-weighted vertex normals provide continuous
 directional shading. The 8,192 × 4,096 normalized maps are sampled into fixed
-2,048 × 14,720 atlases. PolyCSS prepares native `u` triangles in raster mode:
+2,048 × 9,728 atlases. PolyCSS prepares native `u` triangles in raster mode:
 each leaf matches its 128 × 128 texel cell, with the inverse matrix scale
 preserving the measured geometry. The cells are opaque; the native triangle
 primitive supplies their boundary. Runtime mounts the prepared leaves and
