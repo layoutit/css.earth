@@ -45,10 +45,6 @@ export function planetPrepareScript(id, projectRoot = process.cwd()) {
   return planetOwnedScript(id, "tools/prepare.mjs", projectRoot);
 }
 
-export function planetBrowserSmokeScript(id, projectRoot = process.cwd()) {
-  return planetOwnedScript(id, "test/smoke-browser.mjs", projectRoot);
-}
-
 export async function resolvePlanetAssembly(
   id,
   { projectRoot = process.cwd(), accessFile = access } = {},
@@ -71,14 +67,14 @@ export async function resolvePlanetCommand(
   const resolvers = Object.freeze({
     acquire: planetAcquireScript,
     prepare: planetPrepareScript,
-    browser: planetBrowserSmokeScript,
+    browser: () => resolve(projectRoot, "site/test/dom-cleanliness-browser.mjs"),
     assemble: planetAssembleScript,
   });
   const resolveScript = resolvers[mode];
   if (!resolveScript) throw new TypeError(`Unknown planet command mode: ${mode}.`);
   const authored = await authoredObject(id, projectRoot);
   const script = authored
-    ? mode === 'browser' ? resolve(projectRoot, 'tests/objects/browser', id, 'smoke-browser.mjs')
+    ? mode === 'browser' ? resolveScript(id, projectRoot)
       : resolve(projectRoot, 'tools/objects/dist', mode === 'prepare' ? 'prepare-authored.js' : 'operations.js')
     : resolveScript(id, projectRoot);
   try {
@@ -223,6 +219,11 @@ async function main(mode = process.argv[2]) {
       "Usage: node tools/run-implemented-planets.mjs " +
       "acquire|prepare|test|browser|assemble",
     );
+  }
+
+  if (mode === "browser") {
+    await run(process.execPath, [resolve("site/test/dom-cleanliness-browser.mjs"), ...process.argv.slice(3)]);
+    return;
   }
 
   if (mode === "prepare") {

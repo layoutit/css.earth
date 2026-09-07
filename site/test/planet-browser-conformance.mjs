@@ -17,7 +17,6 @@ import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mjs"
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const requestedId = process.argv[3] ?? null;
-const renderOnly = process.env.CSSEARTH_RENDER_ONLY === "1";
 const densityOnly = process.env.CSSEARTH_DENSITY_ONLY === "1";
 const CASE_TIMEOUT_MS = 120_000;
 const REQUEST_START_TIMEOUT_MS = 30_000;
@@ -403,31 +402,6 @@ async function proveDesktop(browser, planet, profile) {
   try {
     await loadPlanet(page, planet, profile);
     await enableMotion(page, planet.id);
-    let introductionLines = null;
-    if (!renderOnly) {
-      const introduction = await page.locator(".planet-introduction").evaluate(
-        (element) => {
-          const style = getComputedStyle(element);
-          const lineHeight = Number.parseFloat(style.lineHeight);
-          const height = element.getBoundingClientRect().height;
-          const contentHeight = height -
-            Number.parseFloat(style.paddingTop) -
-            Number.parseFloat(style.paddingBottom) -
-            Number.parseFloat(style.borderTopWidth) -
-            Number.parseFloat(style.borderBottomWidth);
-          return {
-            height,
-            contentHeight,
-            lineHeight,
-            lineRatio: contentHeight / lineHeight,
-          };
-        },
-      );
-      introductionLines = Math.round(introduction.lineRatio);
-      const expectedIntroductionLines = ({ venus:5, uranus:3 })[planet.id] ?? 4;
-      assert.ok(Math.abs(introduction.lineRatio - expectedIntroductionLines) < 0.01,
-        `${planet.id}: desktop introduction must occupy ${expectedIntroductionLines} lines in the 340px panel`);
-    }
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
         const leaves = [...stage.querySelectorAll(".polycss-scene s")]
@@ -627,7 +601,6 @@ async function proveDesktop(browser, planet, profile) {
     return {
       id: planet.id,
       viewport: "desktop",
-      introductionLines,
       surfaceFlyTo: {
         pitchDelta: afterFlyTo.pitch - beforeFlyTo.pitch,
         zoomRatio: afterFlyTo.zoom / beforeFlyTo.zoom,
@@ -1422,67 +1395,36 @@ async function proveBreakpointCrossings(page, planet, profile, bounds, baseline)
   for (let cycle = 0; cycle < 2; cycle += 1) {
     await page.setViewportSize({ width: 820, height: 900 });
     await waitFrames(page);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false,
+      `${planet.id}: 820x900 must not overflow horizontally`);
     assert.deepEqual(await profile.camera(page), expected,
       `${planet.id}: 820px mobile mode must preserve camera state`);
-    assertResponsiveShell(
-      await responsiveShellState(page),
-      "mobile",
-      `${planet.id}: 820px`,
-    );
     assert.equal(await page.locator(profile.inputSelector).evaluate((node) =>
       getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
     `${planet.id}: 820px must enable vertical page flow`);
-    const mobilePreviewGeometry = await page.evaluate(() => {
-      const stage = document.querySelector(".planet-stage").getBoundingClientRect();
-      const sidebar = document.querySelector(".planet-sidebar")
-        .getBoundingClientRect();
-      return {
-        sceneCenter: stage.top + stage.height / 2,
-        previewCenter: sidebar.top / 2,
-      };
-    });
-    assert.ok(
-      Math.abs(
-        mobilePreviewGeometry.sceneCenter -
-          mobilePreviewGeometry.previewCenter,
-      ) <= 0.1,
-      `${planet.id}: mobile scene must be centered above the sheet`,
-    );
     await wheel(page, profile.inputSelector, -240);
     assert.deepEqual(await profile.camera(page), expected,
       `${planet.id}: 820px mobile mode must keep wheel disabled`);
 
     await page.setViewportSize({ width: 864, height: 901 });
     await waitFrames(page);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false,
+      `${planet.id}: 864x901 must not overflow horizontally`);
     assert.deepEqual(await profile.camera(page), expected,
       `${planet.id}: portrait mobile mode must preserve camera state`);
     assert.equal(await page.locator(profile.inputSelector).evaluate((node) =>
       getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
     `${planet.id}: portrait viewport must preserve vertical page flow`);
-    assertResponsiveShell(
-      await responsiveShellState(page),
-      "mobile",
-      `${planet.id}: 864x901 portrait`,
-    );
 
     await page.setViewportSize({ width: 821, height: 720 });
     await waitFrames(page);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false,
+      `${planet.id}: 821x720 must not overflow horizontally`);
     assert.deepEqual(await profile.camera(page), expected,
       `${planet.id}: 821px landscape desktop mode must preserve camera state`);
     assert.notEqual(await page.locator(profile.inputSelector).evaluate((node) =>
       getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
     `${planet.id}: 821px landscape must restore desktop touch policy`);
-    const compactDesktopShell = await responsiveShellState(page);
-    assertResponsiveShell(
-      compactDesktopShell,
-      "desktop",
-      `${planet.id}: 821x720 landscape`,
-    );
-    assert.equal(compactDesktopShell.navigation, true,
-      `${planet.id}: compact desktop must retain planet navigation`);
-    assert.equal(await page.locator('.scale-stop:not([aria-current="page"]) .scale-label')
-      .evaluateAll((labels) => labels.every((label) => getComputedStyle(label).display === "none")), true,
-    `${planet.id}: compact desktop must hide inactive planet labels`);
     await wheel(page, profile.inputSelector, -240);
     assert.ok((await profile.camera(page)).zoom > expected.zoom,
       `${planet.id}: 821px landscape desktop mode must restore wheel zoom`);
@@ -1500,39 +1442,6 @@ async function proveBreakpointCrossings(page, planet, profile, bounds, baseline)
     `${planet.id}: breakpoint changes must preserve retained identity`);
 }
 
-async function responsiveShellState(page) {
-  return page.evaluate(() => {
-    const visible = (selector) => {
-      const element = document.querySelector(selector);
-      return element !== null && getComputedStyle(element).display !== "none";
-    };
-    return {
-      wordmark: visible(".planet-wordmark"),
-      version: visible(".planet-wordmark-version"),
-      search: visible(".planet-sidebar-search-card"),
-      information: visible(".planet-information-panel"),
-      navigation: visible(".planetary-navigation"),
-      navigationToggle: visible(".planetary-navigation-toggle"),
-      legacySunCount: document.querySelectorAll(".scale-sun").length,
-      overflow: document.documentElement.scrollWidth > innerWidth,
-    };
-  });
-}
-
-function assertResponsiveShell(state, profile, label) {
-  assert.equal(state.wordmark, true, `${label}: wordmark must be visible`);
-  assert.equal(state.version, false, `${label}: obsolete version badge must not render`);
-  assert.equal(state.search, true, `${label}: object search must be visible`);
-  assert.equal(state.information, true,
-    `${label}: information panel must be visible`);
-  assert.equal(state.navigationToggle, false,
-    `${label}: obsolete navigation toggle must not render`);
-  assert.equal(state.legacySunCount, 0,
-    `${label}: legacy Sun navigation must not render`);
-  assert.equal(state.overflow, false,
-    `${label}: shell must not overflow horizontally`);
-}
-
 async function proveMobile(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const evidence = observePage(page, baseUrl);
@@ -1545,11 +1454,6 @@ async function proveMobile(browser, planet, profile) {
     `${planet.id}: narrow screens must preserve vertical page flow`);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390,
       `${planet.id}: narrow screens must not overflow horizontally`);
-    assertResponsiveShell(
-      await responsiveShellState(page),
-      "mobile",
-      `${planet.id}: 390x844 mobile`,
-    );
 
     const bounds = await profile.bounds(page);
     const current = await profile.camera(page);

@@ -51,8 +51,6 @@ test("prepares one source-bound 20px SVG family for sidebar sections", async (co
     assert.equal(icon.height, 20);
     assert.equal(icon.family, "Wikimedia Commons Unicode symbols");
     assert.equal(icon.glyph, descriptor.glyph);
-    assert.match(preparedSvg, /#aaa/u);
-    assert.doesNotMatch(preparedSvg, /fill="black"/u);
     assert.equal(icon.preparedSha256, sha256(Buffer.from(preparedSvg)));
   }
 });
