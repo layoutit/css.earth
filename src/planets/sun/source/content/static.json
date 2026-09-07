@@ -80,7 +80,8 @@
           "label": "Photosphere",
           "thumbnailUrl": "/scenes/sun/sun-lens-photosphere.webp",
           "description": "HMI continuum",
-          "title": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation"
+          "title": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation",
+          "detail": "Continuum"
         },
         {
           "id": "magnetic",
@@ -164,7 +165,8 @@
             "meta": "G",
             "sourceUrl": "https://jsoc.stanford.edu/HMI/LOS_Synoptic_charts.html"
           },
-          "title": "False-colour NASA SDO/HMI CR2311 full-surface radial magnetic-field map"
+          "title": "False-colour NASA SDO/HMI CR2311 full-surface radial magnetic-field map",
+          "detail": "Radial field"
         },
         {
           "id": "chromosphere",
@@ -247,7 +249,8 @@
             "meta": "304 Å",
             "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
           },
-          "title": "NASA SDO AIA 304 angstrom CR2311 full-surface synoptic map"
+          "title": "NASA SDO AIA 304 angstrom CR2311 full-surface synoptic map",
+          "detail": "304 Å"
         },
         {
           "id": "corona",
@@ -330,7 +333,8 @@
             "meta": "171 Å",
             "sourceUrl": "https://sdo.gsfc.nasa.gov/data/synoptic/"
           },
-          "title": "NASA SDO AIA 171 angstrom CR2311 full-surface synoptic map"
+          "title": "NASA SDO AIA 171 angstrom CR2311 full-surface synoptic map",
+          "detail": "171 Å"
         }
       ]
     },
@@ -377,7 +381,8 @@
         "limb2xUrl": "/scenes/sun/sun-limb-photosphere@2x.webp",
         "thumbnailUrl": "/scenes/sun/sun-lens-photosphere.webp",
         "qualification": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation",
-        "falseColor": false
+        "falseColor": false,
+        "detail": "Continuum"
       },
       {
         "id": "magnetic",
@@ -393,7 +398,8 @@
         "limb2xUrl": "/scenes/sun/sun-limb-magnetic@2x.webp",
         "thumbnailUrl": "/scenes/sun/sun-lens-magnetic.webp",
         "qualification": "False-colour NASA SDO/HMI CR2311 full-surface radial magnetic-field map",
-        "falseColor": true
+        "falseColor": true,
+        "detail": "Radial field"
       },
       {
         "id": "chromosphere",
@@ -409,7 +415,8 @@
         "limb2xUrl": "/scenes/sun/sun-limb-chromosphere@2x.webp",
         "thumbnailUrl": "/scenes/sun/sun-lens-chromosphere.webp",
         "qualification": "NASA SDO AIA 304 angstrom CR2311 full-surface synoptic map",
-        "falseColor": true
+        "falseColor": true,
+        "detail": "304 Å"
       },
       {
         "id": "corona",
@@ -425,7 +432,8 @@
         "limb2xUrl": "/scenes/sun/sun-limb-corona@2x.webp",
         "thumbnailUrl": "/scenes/sun/sun-lens-corona.webp",
         "qualification": "NASA SDO AIA 171 angstrom CR2311 full-surface synoptic map",
-        "falseColor": true
+        "falseColor": true,
+        "detail": "171 Å"
       }
     ],
     "provenance": {

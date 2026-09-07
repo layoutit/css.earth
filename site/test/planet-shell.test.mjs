@@ -380,11 +380,11 @@ test("places a scalable Surface Lens browser after the retained chart switcher",
   );
   assert.match(styles, /\.planet-observation-controls\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?gap:\s*8px;[\s\S]*?max-height:\s*202px;[\s\S]*?overflow-y:\s*auto;[\s\S]*?scrollbar-width:\s*thin;/u);
   assert.match(styles, /\.planet-observation-control\s*\{[\s\S]*?grid-template-columns:\s*16px minmax\(0, 1fr\);[\s\S]*?width:\s*100%;[\s\S]*?height:\s*auto;/u);
-  assert.match(siteStyles, /--shell-text:\s*#dfdfdf;[\s\S]*?--shell-text-secondary:\s*#b8bbc4;[\s\S]*?--shell-text-muted:\s*#7f8187;/u);
+  assert.match(siteStyles, /--shell-text:\s*#dfdfdf;[\s\S]*?--shell-text-secondary:\s*#a9acb5;[\s\S]*?--shell-text-muted:\s*#7f8187;/u);
   const layoutStyles = await readFile(new URL("../shell-layout.css", import.meta.url), "utf8");
-  assert.match(layoutStyles, /\.planet-sidebar\s*\{[^}]*--shell-text-secondary:\s*#a9acb5;/u);
-  assert.match(styles, /\.planet-observation-control\s*\{[\s\S]*?opacity:\s*0\.62;[\s\S]*?transition:\s*opacity 120ms ease;/u);
-  assert.match(styles, /\.planet-observation-control\[aria-pressed="true"\]\s*\{[\s\S]*?opacity:\s*1;/u);
+  assert.doesNotMatch(layoutStyles, /--shell-text(?:-secondary|-muted)?:/u);
+  assert.match(styles, /\.planet-observation-control\s*\{[^}]*color:\s*var\(--shell-text-muted\);[^}]*transition:\s*color 120ms ease;/u);
+  assert.match(styles, /\.planet-observation-control\[aria-pressed="true"\]\s*\{[^}]*color:\s*var\(--shell-text\);/u);
   assert.doesNotMatch(styles, /rgb\(255 255 255 \/ 75%\)/u);
   assert.doesNotMatch(styles, /rgb\(255 255 255 \/ 45%\)/u);
   assert.match(styles, /\.planet-lens-icon\s*\{[\s\S]*?width:\s*16px;[\s\S]*?height:\s*16px;/u);
@@ -564,8 +564,8 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.match(navigationStyles, /\.scale-stops\s*\{[^}]*position:\s*relative;[^}]*height:\s*64px;/u);
   assert.match(navigationStyles, /\.scale-planet\s*\{[^}]*left:\s*var\(--planet-offset\);/u);
   assert.doesNotMatch(navigationStyles, /\.scale-sun|sun-marker(?:@2x)?\.webp/u);
-  assert.match(navigationStyles, /\.scale-label\s*\{[^}]*opacity:\s*\.72;[^}]*white-space:\s*nowrap;/u);
-  assert.match(navigationStyles, /\.scale-stop\[aria-current="page"\] \.scale-label\s*\{[^}]*opacity:\s*1;/u);
+  assert.match(navigationStyles, /\.scale-label\s*\{[^}]*color:\s*var\(--shell-text-muted\);[^}]*white-space:\s*nowrap;/u);
+  assert.match(navigationStyles, /\.scale-stop\[aria-current="page"\] \.scale-label\s*\{[^}]*color:\s*var\(--shell-text\);/u);
   assert.match(
     styles,
     /\.planet-information-panel\s*\{[\s\S]*?padding:\s*12px 0;[\s\S]*?border:\s*0;[\s\S]*?border-radius:\s*8px;[\s\S]*?background:\s*var\(--explorer-panel-background\);/u,
@@ -727,7 +727,7 @@ test("renders a Google Maps-style desktop source footer without changing the mob
   assert.doesNotMatch(footer, /planet-attribution-developed|Developed by|github\.com\/layoutit|LayoutitStudio\/polycss/u);
   assert.match(
     styles,
-    /\.planet-attribution-footer\s*\{\s*display:\s*none;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-resources-panel\s*\{\s*display:\s*none;[\s\S]*?\.planet-attribution-footer\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?right:\s*0;[\s\S]*?bottom:\s*0;[\s\S]*?display:\s*flex;[\s\S]*?flex-wrap:\s*wrap;[\s\S]*?justify-content:\s*flex-end;[\s\S]*?gap:\s*2px 8px;[\s\S]*?max-width:\s*calc\(100vw - 358px\);[\s\S]*?padding:\s*0 8px 0 4px;[\s\S]*?background:\s*#000;[\s\S]*?font:\s*12px\/1\.4 var\(--shell-ui-font\);[\s\S]*?\.planet-attribution-link\s*\{[\s\S]*?display:\s*inline-flex;[\s\S]*?gap:\s*3px;[\s\S]*?\.planet-attribution-source\s*\{[\s\S]*?text-decoration:\s*underline;[\s\S]*?\.planet-attribution-role\s*\{[\s\S]*?text-transform:\s*capitalize;[\s\S]*?\.planet-attribution-separator\s*\{[\s\S]*?color:\s*rgb\(255 255 255 \/ 38%\);/u,
+    /\.planet-attribution-footer\s*\{\s*display:\s*none;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-resources-panel\s*\{\s*display:\s*none;[\s\S]*?\.planet-attribution-footer\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?right:\s*0;[\s\S]*?bottom:\s*0;[\s\S]*?left:\s*0;[\s\S]*?display:\s*flex;[\s\S]*?flex-wrap:\s*wrap;[\s\S]*?justify-content:\s*flex-end;[\s\S]*?gap:\s*2px 8px;[\s\S]*?padding:\s*0 8px 0 4px;[\s\S]*?background:\s*#000;[\s\S]*?font:\s*12px\/1\.4 var\(--shell-ui-font\);[\s\S]*?\.planet-attribution-link\s*\{[\s\S]*?display:\s*inline-flex;[\s\S]*?gap:\s*3px;[\s\S]*?\.planet-attribution-source\s*\{[\s\S]*?text-decoration:\s*underline;[\s\S]*?\.planet-attribution-role\s*\{[\s\S]*?text-transform:\s*capitalize;[\s\S]*?\.planet-attribution-separator\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);/u,
   );
   assert.doesNotMatch(shell, /planet-attribution-credit|>Scene data</u);
 });

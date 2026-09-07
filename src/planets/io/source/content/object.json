@@ -71,7 +71,8 @@
         "source": {
           "id": "usgs-normal-global-1km",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Global mosaic"
       },
       {
         "id": "enhanced",
@@ -84,7 +85,8 @@
         "source": {
           "id": "usgs-enhanced-global-1km",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Color mosaic"
       }
     ]
   },

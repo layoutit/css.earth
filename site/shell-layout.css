@@ -8,6 +8,7 @@ body[data-object-shell] {
   --explorer-wordmark-size: 36px;
   --explorer-content-inset: 20px;
   --explorer-panel-padding: 0px;
+  --explorer-status-height: 18px;
   --explorer-header-top: 8px;
   --explorer-panel-block-padding: 12px;
   --explorer-search-height: 48px;
@@ -77,7 +78,6 @@ body[data-object-shell] {
 }
 
 .planet-sidebar {
-  --shell-text-secondary: #a9acb5;
   position: fixed;
   z-index: 160;
   inset: 0 auto auto var(--explorer-panel-left);
@@ -123,9 +123,6 @@ body[data-object-shell] {
     translate: var(--explorer-scene-offset) 0;
   }
 
-  .planet-attribution-footer {
-    max-width: calc(100% - var(--explorer-dock-width));
-  }
 }
 
 /* Preserve the scene-above-information flow on phones and portrait tablets. */

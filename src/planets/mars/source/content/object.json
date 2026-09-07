@@ -92,7 +92,8 @@
         "source": {
           "id": "normal",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Global mosaic"
       },
       {
         "id": "elevation",
@@ -157,7 +158,8 @@
         "source": {
           "id": "elevation",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Shaded relief"
       },
       {
         "id": "thermal",
@@ -170,7 +172,8 @@
         "source": {
           "id": "thermal",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Infrared"
       }
     ]
   },

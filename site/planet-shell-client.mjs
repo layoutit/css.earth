@@ -2,6 +2,7 @@ import { createDestinationBrowser } from "./destination-browser.mjs";
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
 import { createExplorerRailController } from "./explorer-rail.mjs";
 import { createSurfaceMinimap } from "./surface-minimap.mjs";
+import { createViewReadout } from "./view-readout.mjs";
 
 export function mountPlanetShell({
   objectId,
@@ -15,7 +16,7 @@ export function mountPlanetShell({
     throw new Error("Planet shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
-  let settingsController, objectBrowser, contentLifetime, minimapController;
+  let settingsController, objectBrowser, contentLifetime, minimapController, viewReadout;
   function own(controller) {
     lifetime.onDispose(() => controller.destroy());
     return controller;
@@ -44,12 +45,15 @@ export function mountPlanetShell({
       mountContent(content.id, motion, contrast);
     },
     setDestinations(provider) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
-    setCamera(provider) { if (!lifetime.disposed) minimapController.setCamera(provider); },
+    setCamera(provider) {
+      if (!lifetime.disposed) { minimapController.setCamera(provider); viewReadout.setCamera(provider); }
+    },
     setMotionEnabled(enabled) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
     setPlaybackState(state) {
       if (!lifetime.disposed) {
         settingsController.setPlaybackState(state);
         minimapController.setPlaybackState(state);
+        viewReadout.setPlaybackState(state);
       }
     },
     destroy() {
@@ -74,6 +78,7 @@ export function mountPlanetShell({
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget,
       onInteraction() { settingsController.setMotionEnabled(false); },
     }));
+    viewReadout = retain(createViewReadout({ drawer, documentTarget, windowTarget }));
     retain(createPanelController(drawer, id, windowTarget, owner));
   }
 }

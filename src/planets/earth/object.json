@@ -33,7 +33,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d02686d0bc102cef82090412d2bdc180ce9aeec8a56ccef38caf518580362888"
+          "sha256": "00f8acff9effacf94c37f4707a1cb49bb86494603c198e2a8e0b670146888968"
         },
         {
           "id": "lens-bindings",
@@ -164,6 +164,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "334bb66c2429bfbcd969abfd35b95fc63198291d5fa0bf806607dc3916982e6f"
+    "sha256": "ceaf9716ad0d469c0c0ec63b40e81ba91139bbab5322e72b13e18220337d5a92"
   }
 }

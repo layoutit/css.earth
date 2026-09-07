@@ -1,6 +1,7 @@
-import { rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
+import { worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
 import { directionOnMap, mapDirection, orbitMapCamera } from './surface-minimap-math.mjs';
 import { surfaceViewRectangle } from './surface-minimap-rectangle.mjs';
+import { surfaceMapContext, surfaceMapViewport } from './surface-map-context.mjs';
 
 export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onInteraction }) {
   const maps = [...drawer.querySelectorAll('[data-surface-minimap]')];
@@ -17,23 +18,7 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
 
   function context(map) {
     if (!camera?.navigation || !active(map)) return null;
-    const { config } = elements.get(map);
-    const body = documentTarget.querySelector(config.surfaceSelector);
-    const scene = body?.closest('.polycss-scene');
-    if (!body || !scene) return null;
-    let matrix = new windowTarget.DOMMatrix();
-    for (let node = body; node && node !== scene; node = node.parentElement) {
-      matrix = new windowTarget.DOMMatrix(windowTarget.getComputedStyle(node).transform).multiply(matrix);
-    }
-    const transform = direction => {
-      const p = matrix.transformPoint({ x: direction[0], y: direction[1], z: direction[2], w: 0 });
-      const length = Math.hypot(p.x, p.y, p.z);
-      return rotateWorldPosition(camera.navigation.frame.presentationToReference, [p.x / length, p.y / length, p.z / length]);
-    };
-    const axes = { prime: transform(config.prime), east: transform(config.east), north: transform(config.north) };
-    const world = camera.navigation.capture();
-    const relative = world.pose.positionM.map((x, i) => x - camera.navigation.frame.originM[i]);
-    return { world, relative, axes, scene };
+    return surfaceMapContext(elements.get(map).config, camera, documentTarget, windowTarget);
   }
 
   function render() {
@@ -47,17 +32,8 @@ export function createSurfaceMinimap({ drawer, documentTarget, windowTarget, onI
       map.dataset.ready = String(Boolean(state));
       if (!state) continue;
       visible = true;
-      const root = state.scene.closest('.polycss-camera').getBoundingClientRect();
-      const stage = state.scene.closest('.planet-stage').getBoundingClientRect();
       const optics = camera.navigation.optics();
-      const ox = root.x + root.width / 2 + optics.principalOffsetPixels[0];
-      const oy = root.y + root.height / 2 + optics.principalOffsetPixels[1];
-      const view = {
-        left: (Math.max(root.left, stage.left) - ox) / optics.focalPixels,
-        right: (Math.min(root.right, stage.right) - ox) / optics.focalPixels,
-        top: (Math.max(root.top, stage.top) - oy) / optics.focalPixels,
-        bottom: (Math.min(root.bottom, stage.bottom) - oy) / optics.focalPixels,
-      };
+      const view = surfaceMapViewport(state.scene, optics);
       const extent = surfaceViewRectangle({ eye: state.relative.map(x => x / camera.navigation.frame.bodyRadiusM),
         rotation: worldRotationFromQuaternion(state.world.pose.orientationXyzw), view, axes: state.axes });
       const center = extent.center ?? directionOnMap(state.relative, state.axes);

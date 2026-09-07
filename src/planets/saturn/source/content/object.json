@@ -88,7 +88,8 @@
         "source": {
           "id": "normal",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
-        }
+        },
+        "detail": "Visible light"
       },
       {
         "id": "ultraviolet",
@@ -131,7 +132,8 @@
         "source": {
           "id": "ultraviolet",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
-        }
+        },
+        "detail": "225 nm"
       },
       {
         "id": "methane",
@@ -174,7 +176,8 @@
         "source": {
           "id": "methane",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
-        }
+        },
+        "detail": "889 nm"
       },
       {
         "id": "thermal",
@@ -217,7 +220,8 @@
         "source": {
           "id": "thermal",
           "url": "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/"
-        }
+        },
+        "detail": "Infrared"
       },
       {
         "id": "cross-section",
@@ -273,7 +277,8 @@
         "source": {
           "id": "cross-section",
           "url": "https://science.nasa.gov/resource/saturn-interior-cutaway-illustration/"
-        }
+        },
+        "detail": "Structure"
       }
     ]
   },

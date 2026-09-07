@@ -71,7 +71,8 @@
         "source": {
           "id": "usgs-voyager-galileo-mono",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Global mosaic"
       },
       {
         "id": "enhanced",
@@ -84,7 +85,8 @@
         "source": {
           "id": "usgs-voyager-galileo-color",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Infrared color"
       }
     ]
   },

@@ -71,7 +71,8 @@
         "source": {
           "id": "usgs-voyager-galileo-global-500m",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Global mosaic"
       },
       {
         "id": "enhanced",
@@ -84,7 +85,8 @@
         "source": {
           "id": "observed-color",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Color mosaic"
       }
     ]
   },
