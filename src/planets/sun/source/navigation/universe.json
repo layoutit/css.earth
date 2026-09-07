@@ -206,15 +206,15 @@
       "model": "logarithmic-distance",
       "nearOpacity": 0,
       "fullOpacity": 1,
-      "fadeStartDistanceM": 3085677581491367,
-      "fullDistanceM": 308567758149136700
+      "fadeStartDistanceM": 3.0856775814913674e+18,
+      "fullDistanceM": 1.5428387907456837e+20
     },
     "brightnessProfile": {
       "model": "logarithmic-distance",
       "nearOpacity": 0.094,
       "fullOpacity": 1,
-      "fadeStartDistanceM": 30856775814913670000,
-      "fullDistanceM": 771419395372841800000
+      "fadeStartDistanceM": 3.085677581491367e+19,
+      "fullDistanceM": 7.714193953728418e+20
     }
   },
   "sky": {

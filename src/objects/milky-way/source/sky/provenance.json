@@ -40,5 +40,16 @@
       "space": "post-transfer display RGB luminance",
       "curve": "one smoothstep factor multiplies all three RGB channels before quantization; opaque alpha unchanged"
     }
+  },
+  "presentation": {
+    "model": "finite-origin-cube",
+    "originM": [
+      0,
+      0,
+      0
+    ],
+    "radiusM": 6.171355162982735e+20,
+    "handoffCompleteDistanceM": 1.5428387907456837e+20,
+    "meaning": "Visual depth approximation for continuous camera-relative parallax. NASA supplies angular radiance, not measured depths. One closed six-face shell reuses the prepared image bank; the volume replaces it by the time the observer reaches one quarter of the shell radius."
   }
 }

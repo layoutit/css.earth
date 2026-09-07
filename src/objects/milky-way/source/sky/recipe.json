@@ -42,6 +42,14 @@
   },
   "provenance": {
     "path": "provenance.json",
-    "sha256": "471ecfd698e4df8fb1a27ef17a3eaad1f370b667063cbac120daa7a7eba804ce"
+    "sha256": "8d14c48db5652af0c75b99fdc7675462720621a64103cee3b2a26819a43f8336"
+  },
+  "parallax": {
+    "originM": [
+      0,
+      0,
+      0
+    ],
+    "radiusM": 6.171355162982735e+20
   }
 }

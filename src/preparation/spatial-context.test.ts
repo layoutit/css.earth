@@ -14,7 +14,9 @@ test('prepared volume opacity preserves authored grading and validates bounded l
   assert(profile.fadeStartDistanceM > source.system.hiddenDistanceM, 'NASA stays opaque throughout the prepared Solar System');
   const brightness = source.volume.brightnessProfile!;
   assert.deepEqual(brightness, raw.volume.brightnessProfile);
-  assert(profile.fullDistanceM < brightness.fadeStartDistanceM, 'the physical volume owns the view before exterior brightening');
+  assert(profile.fadeStartDistanceM < brightness.fadeStartDistanceM && profile.fullDistanceM > brightness.fadeStartDistanceM,
+    'NASA remains present while the faint incoming volume starts brightening');
+  assert(profile.fullDistanceM < brightness.fullDistanceM, 'the panorama retires before the exterior galaxy reaches full brightness');
   const prepared = prepareWorldContext({ ...source, bodies: [] }, {}, {});
   assert.deepEqual(prepared.volume.opacityProfile, profile);
   assert.deepEqual(prepared.volume.brightnessProfile, brightness);

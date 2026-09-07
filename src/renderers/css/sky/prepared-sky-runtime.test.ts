@@ -109,7 +109,10 @@ test('optional sky is validated as part of the existing volume capability and sh
   const { sky: _sky, ...legacy } = withSky; expect(validatePreparedCssVolume(legacy).sky).toBeUndefined();
 });
 
-test.each([true, false])('shared universe retains independent sky crossfade and completed-image attenuation (profile=%s)', withBrightness => {
+test.each([
+  { withSky: true, withBrightness: true }, { withSky: true, withBrightness: false },
+  { withSky: false, withBrightness: true }, { withSky: false, withBrightness: false },
+])('shared universe crossfades NASA with the independently graded completed volume (sky=$withSky, profile=$withBrightness)', ({ withSky, withBrightness }) => {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
   const base = new URL('../../../', import.meta.url);
   const context = JSON.parse(readFileSync(new URL('planets/sun/prepared/world-context.json', base), 'utf8'));
@@ -117,12 +120,15 @@ test.each([true, false])('shared universe retains independent sky crossfade and 
   if (!withBrightness) delete context.volume.brightnessProfile;
   const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
   const sky = { ...fixture(), referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt };
-  const data = { ...volume, sky, resources: [...volume.resources.filter(resource => !resource.path.startsWith('sky/')), ...resources] };
+  const { sky: _originalSky, ...volumeWithoutSky } = volume;
+  const data = { ...volumeWithoutSky, ...(withSky ? { sky } : {}), resources: [
+    ...volume.resources.filter(resource => !resource.path.startsWith('sky/')), ...(withSky ? resources : []),
+  ] };
   const stars = JSON.parse(readFileSync(new URL('objects/stellar-neighbourhood/prepared/stars.json', base), 'utf8')).data;
   const document = new FakeDocument(), stage = document.createElement(), detail = document.createElement(); stage.appendChild(detail);
   const universe = createPreparedUniverse({ context, volume: data, stars, resolveResource: path => `/volume/${path}`, resolveStarResource: path => `/stars/${path}`, sprites: {} });
   const skyAssets = universe.assets.entries.filter(entry => entry.key.includes(':sky/'));
-  expect(skyAssets).toHaveLength(6);
+  expect(skyAssets).toHaveLength(withSky ? 6 : 0);
   for (const asset of skyAssets) expect(universe.assets.startup).toContain(asset.key);
   const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
   const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
@@ -137,21 +143,49 @@ test.each([true, false])('shared universe retains independent sky crossfade and 
     expect(axis.children[0]!.children[0]!.style.opacity).toBeUndefined();
   }
   const count = document.count, originalNodes = [...root.children];
-  expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
+  if (withSky) expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
+  else expect(skyRoot).toBeUndefined();
   const profile = context.volume.opacityProfile;
-  const nearGain = brightness.nearOpacity, farGain = brightness.fullOpacity, midGain = (nearGain + farGain) / 2;
-  for (const [distance, expected, gain] of [[profile.fadeStartDistanceM / 2, 0, nearGain], [Math.sqrt(profile.fadeStartDistanceM * profile.fullDistanceM), .5, nearGain],
-    [profile.fullDistanceM, 1, nearGain], [Math.sqrt(brightness.fadeStartDistanceM * brightness.fullDistanceM), 1, midGain], [brightness.fullDistanceM, 1, farGain], [profile.fadeStartDistanceM / 2, 0, nearGain]]) {
+  const nearGain = brightness.nearOpacity;
+  const regressionDistance = 98 * 3.085677581491367e16;
+  const gradedDistance = 2255 * 3.085677581491367e16;
+  expect(profile.fadeStartDistanceM).toBeGreaterThan(regressionDistance);
+  const distances = [profile.fadeStartDistanceM / 2, regressionDistance, gradedDistance,
+    Math.sqrt(profile.fadeStartDistanceM * profile.fullDistanceM), profile.fullDistanceM,
+    Math.sqrt(brightness.fadeStartDistanceM * brightness.fullDistanceM), brightness.fullDistanceM,
+    profile.fadeStartDistanceM / 2];
+  for (const distance of distances) {
+    const expected = logarithmicFade(distance, profile.fadeStartDistanceM, profile.fullDistanceM);
+    const gain = nearGain + (brightness.fullOpacity - nearGain) * logarithmicFade(distance, brightness.fadeStartDistanceM, brightness.fullDistanceM);
     const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distance], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(camera, viewport);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected, 12);
     const expectedGain = withBrightness ? gain : 1;
+    if (withBrightness && distance === gradedDistance) {
+      expect(expectedGain).toBeGreaterThan(.23);
+      expect(expectedGain).toBeLessThan(.25);
+    }
     expect(volumeImage.style.opacity).toBe(`var(--universe-volume-brightness-override, ${Number(volumeImage.dataset.volumeBrightness)})`);
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
-    expect(skyRoot.style.visibility).toBe(expected < 1 ? 'visible' : 'hidden');
-    expect(skyRoot.style.opacity).toBeUndefined();
-    expect(Number(skyRoot.dataset.skyContribution)).toBeCloseTo(1 - expected, 12);
+    if (withSky) {
+      expect(skyRoot.style.visibility).toBe(expected < 1 ? 'visible' : 'hidden');
+      expect(skyRoot.style.opacity).toBeUndefined();
+      const skyWeight = Number(skyRoot.dataset.skyContribution);
+      expect(skyWeight).toBeCloseTo(1 - expected, 12);
+      expect(Number(volumeRoot.style.opacity) + skyWeight).toBeCloseTo(1, 12);
+      // The two completed images are NASA and the separately graded B*volume.
+      // The host matte must not turn grading into additional NASA contribution.
+      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBeCloseTo(.4 * (expected * expectedGain + 1 - expected), 12);
+      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4, 1)).toBeCloseTo(.4, 12);
+      if (distance === regressionDistance) {
+        expect(expected).toBe(0);
+        expect(skyWeight).toBe(1);
+        expect(skyRoot.style.visibility).toBe('visible');
+        if (withBrightness) expect(expectedGain).toBe(.094);
+        expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(.4);
+      }
+    } else expect(completedPixel(volumeRoot, volumeImage, undefined, .4)).toBeCloseTo(.4 * expected * expectedGain, 12);
     expect(starPublish).toHaveBeenLastCalledWith(camera, viewport, 1 - logarithmicFade(distance, context.volume.fadeStartDistanceM, context.volume.fullDistanceM), mounted.inspect().foregroundLabelExclusions);
     expect(starPublish.mock.lastCall![3]).toEqual(expect.arrayContaining(foregroundRects));
     expect(spatialPublish.mock.invocationCallOrder.at(-1)).toBeLessThan(starPublish.mock.invocationCallOrder.at(-1)!);
@@ -162,3 +196,12 @@ test.each([true, false])('shared universe retains independent sky crossfade and 
   expect(document.count).toBe(count); expect(root.children).toEqual(originalNodes);
   mounted.destroy(); expect(stage.children).toEqual([detail]); expect(document.defaultView.pending.size).toBe(0);
 });
+
+/** Ordinary source-over of a completed volume image through the actual two DOM
+ * opacity levels, including the outer host's optional opaque black backdrop. */
+function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement | undefined, value: number, override?: number): number {
+  const t = Number(host.style.opacity), g = override ?? Number(image.dataset.volumeBrightness);
+  const foregroundAlpha = t * (host.style.background === '#000' ? 1 : g);
+  const underlay = sky?.style.visibility === 'visible' ? value : 0;
+  return t * g * value + (1 - foregroundAlpha) * underlay;
+}

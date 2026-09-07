@@ -2,6 +2,7 @@
 import { record, finite, text } from '../volume/config.js';
 export interface SkyReference { path: string; sha256: string; }
 export interface SkyShadowFloor { blackPoint: number; fullSignal: number; }
+export interface SkyParallax { originM: [number, number, number]; radiusM: number; }
 export interface SkyRecipe {
   schema: 'cssearth-sky-recipe@1';
   source: { format: 'rgb16f-le-zstd-rows'; width: number; height: number; decodedSha256: string;
@@ -10,6 +11,7 @@ export interface SkyRecipe {
   bake: { faceSize: number; exposure: number; transfer: 'linear-to-srgb'; displayGain?: number;
     shadowFloor?: SkyShadowFloor; webpQuality: number };
   provenance: SkyReference;
+  parallax?: SkyParallax;
 }
 export function reference(value: unknown): SkyReference {
   const r = record(value, 'sky source reference'), path = text(r.path, 'sky path'), sha256 = text(r.sha256, 'sky digest');
@@ -39,6 +41,14 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
   const displayGain = b.displayGain === undefined ? 1 : positive(b.displayGain, 'sky display gain');
   if (displayGain > 1) throw new TypeError('Sky display gain must be at most one.');
   let shadowFloor: SkyShadowFloor | undefined;
+  let parallax: SkyParallax | undefined;
+  if (r.parallax !== undefined) {
+    const input = record(r.parallax, 'sky parallax');
+    if (Object.keys(input).length !== 2 || Object.keys(input).some(key => !['originM', 'radiusM'].includes(key)) ||
+      !Array.isArray(input.originM) || input.originM.length !== 3) throw new TypeError('Sky parallax needs an origin and radius only.');
+    parallax = { originM: input.originM.map(n => finite(n, 'sky parallax origin')) as [number, number, number],
+      radiusM: positive(input.radiusM, 'sky parallax radius') };
+  }
   if (b.shadowFloor !== undefined) {
     const floor = record(b.shadowFloor, 'sky shadow floor');
     const blackPoint = finite(floor.blackPoint, 'sky shadow black point');
@@ -50,5 +60,5 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
   return { schema: r.schema, source: { format: s.format, width, height, decodedSha256, chunks, acquisition: reference(s.acquisition) },
     projection: { frame: p.frame, mapping: p.mapping, centerRaDegrees: 0 },
     bake: { faceSize, exposure: positive(b.exposure, 'sky exposure'), transfer: b.transfer, displayGain,
-      ...(shadowFloor ? { shadowFloor } : {}), webpQuality }, provenance: reference(r.provenance) };
+      ...(shadowFloor ? { shadowFloor } : {}), webpQuality }, provenance: reference(r.provenance), ...(parallax ? { parallax } : {}) };
 }

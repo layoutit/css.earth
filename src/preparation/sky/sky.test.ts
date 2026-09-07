@@ -1,11 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
-import { deflateSync } from 'node:zlib';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { deflateSync, zstdCompressSync } from 'node:zlib';
 import { decodeExrRgbHalf, halfToFloat } from './exr.js';
 import { parseSkyRecipe } from './config.js';
 import { loadSkySource } from './source.js';
-import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels } from './bake.js';
+import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels, prepareSkyFaces } from './bake.js';
 import { sha256 } from '../volume/source.js';
 import type { PreparedCssSky } from '../../renderers/css/sky/types.js';
 
@@ -132,6 +134,32 @@ test('actual pinned NASA HALF source is unchanged and unsupported/missing recipe
   assert.throws(() => parseSkyRecipe({ ...recipe, projection: { ...recipe.projection, mapping: 'ra-right' } }), /Unsupported/);
   assert.throws(() => parseSkyRecipe({ ...recipe, source: { ...recipe.source, chunks: recipe.source.chunks.slice(1) } }), /every row/);
   const noTransfer = { ...recipe.bake, transfer: undefined }; assert.throws(() => parseSkyRecipe({ ...recipe, bake: noTransfer }), /Unsupported/);
+});
+
+test('optional authored sky parallax validates physical placement and survives the real offline bake without changing pixels', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'sky-parallax-'));
+  try {
+    const source = Buffer.alloc(4 * 2 * 6); for (let i = 0; i < source.length; i += 2) source.writeUInt16LE(0x3400, i);
+    const packed = zstdCompressSync(source), provenance = Buffer.from('{}');
+    await writeFile(join(directory, 'source.zst'), packed); await writeFile(join(directory, 'provenance.json'), provenance);
+    const raw = { schema: 'cssearth-sky-recipe@1', source: { format: 'rgb16f-le-zstd-rows', width: 4, height: 2,
+      decodedSha256: sha256(source), chunks: [{ path: 'source.zst', sha256: sha256(packed), firstRow: 0, rows: 2 }],
+      acquisition: { path: 'acquisition.json', sha256: 'a'.repeat(64) } },
+      projection: { frame: 'icrf-j2000', mapping: 'equirectangular-ra-left', centerRaDegrees: 0 },
+      bake: { faceSize: 2, exposure: 1, transfer: 'linear-to-srgb', webpQuality: 90 },
+      provenance: { path: 'provenance.json', sha256: sha256(provenance) } };
+    const placement = { originM: [1, -2, 3], radiusM: 1e20 }, infiniteRecipe = parseSkyRecipe(raw);
+    assert.equal('parallax' in infiniteRecipe, false);
+    const finiteRecipe = parseSkyRecipe({ ...raw, parallax: placement }); assert.deepEqual(finiteRecipe.parallax, placement);
+    for (const parallax of [null, {}, { originM: [0, 0], radiusM: 1 }, { originM: [0, NaN, 0], radiusM: 1 },
+      { originM: [0, 0, Infinity], radiusM: 1 }, { originM: [0, 0, '0'], radiusM: 1 },
+      ...[0, -1, NaN, Infinity, '1'].map(radiusM => ({ originM: [0, 0, 0], radiusM })), { ...placement, extra: true }])
+      assert.throws(() => parseSkyRecipe({ ...raw, parallax }), /parallax/i);
+    const infinite = await prepareSkyFaces({ sourceDirectory: directory, outputDirectory: join(directory, 'infinite'), recipe: infiniteRecipe });
+    const finite = await prepareSkyFaces({ sourceDirectory: directory, outputDirectory: join(directory, 'finite'), recipe: finiteRecipe });
+    assert.equal('parallax' in infinite, false); assert.deepEqual(finite.parallax, placement);
+    assert.deepEqual(finite.faces, infinite.faces, 'parallax is prepared placement metadata; all images and geometry stay unchanged');
+  } finally { await rm(directory, { recursive: true, force: true }); }
 });
 test('actual compiled sky image corners retain ICRF orientation after PolyCSS reflection', async () => {
   const volume = JSON.parse(await readFile('src/objects/milky-way/prepared/volume.json', 'utf8')) as { data: { sky: PreparedCssSky } };
