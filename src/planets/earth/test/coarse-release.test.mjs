@@ -17,10 +17,12 @@ const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const fineRoots = Array.from({ length: 1024 }, (_, i) => ({ key: `wmts-tile-5-${i % 32}-${Math.floor(i / 32)}` }));
 
 test('release encoder retains source rows and visible pixels through cropping and WebP encoding', async () => {
-  const entry = { key: '0-9-10', level: 0, x: 9, y: 10, children: [], tiles: ['0-0-0'], resolution: { zoom: 0 } };
+  const entry = { key: '0-9-10', level: 0, x: 9, y: 10, children: [], tiles: ['0-0-0'], resolution: { zoom: 0 },
+    catalogTiles: ['source-inventory-only'], stop: false, empty: null };
   const source = Buffer.alloc(256 * 256 * 4);
   for (let y = 0; y < 256; y++) for (let x = 0; x < 256; x++) source.set([x, y, 55, x % 3 ? 255 : 93], (y * 256 + x) * 4);
   const result = await prepareCoarseRaster(entry, scene, fineRoots, new Map([['0-0-0', source]]));
+  for (const key of ['tiles', 'resolution', 'catalogTiles', 'stop', 'empty']) assert.equal(Object.hasOwn(result.page, key), false, `Preparation-only ${key} must not reach runtime`);
   const geometry = prepareCoarsePageGeometry(entry, scene);
   const sampled = sampleCoarsePage(geometry, 0, (x, y) => source.subarray((y * 256 + x) * 4, (y * 256 + x + 1) * 4));
   // Existing preparation uses Sharp's vertical flip; compare it with the new

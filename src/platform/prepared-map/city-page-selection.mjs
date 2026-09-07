@@ -40,20 +40,47 @@ function projectBounds(corners,matrix,scale){
 
 export function selectCityPages(plan, pages, matrix, scale, viewport) {
   if(plan.backing){
-    const backing=selectFacePages({...plan,roots:plan.backing.roots},pages,matrix,scale,viewport,true);
-    const backingBytes=backing.keys.reduce((sum,key)=>sum+pages.get(key).width*pages.get(key).height*4,0);
+    const backingPlan={...plan,roots:plan.backing.roots};
+    let backing=selectFacePages(backingPlan,pages,matrix,scale,viewport,true);
+    const pageBytes=key=>pages.get(key).width*pages.get(key).height*4;
+    const capacity=Math.floor(plan.poolSize/2),byteCapacity=Math.floor(plan.maximumDecodedBytes/2);
     let fine=viewport.zoom>plan.minimumZoom?selectWmtsTree(plan,pages,matrix,scale,viewport):{keys:[],directories:[],groups:[]};
-    let pieces=backing.keys.length+fine.keys.length;
-    let bytes=backingBytes+fine.keys.reduce((sum,key)=>sum+pages.get(key).width*pages.get(key).height*4,0);
-    const retired=new Map();
-    const candidates=selectBackingReplacements(backing.groups,fine,pages,node=>projectCityPage(node,matrix,scale,viewport).visible);
-    for(const group of candidates){
-      if(group.replacements.length&&pieces<=Math.floor(plan.poolSize/2)&&bytes<=Math.floor(plan.maximumDecodedBytes/2))continue;
-      retired.set(group.key,group);
-      pieces-=group.pages.length;
-      bytes-=group.pages.reduce((sum,key)=>sum+pages.get(key).width*pages.get(key).height*4,0);
+    const visible=node=>projectCityPage(node,matrix,scale,viewport).visible;
+    const fit=()=>{
+      let pieces=backing.keys.length+fine.keys.length;
+      let bytes=[...backing.keys,...fine.keys].reduce((sum,key)=>sum+pageBytes(key),0);
+      const retired=new Map();
+      for(const group of selectBackingReplacements(backing.groups,fine,pages,visible)){
+        if(group.replacements.length&&pieces<=capacity&&bytes<=byteCapacity)continue;
+        retired.set(group.key,group);
+        pieces-=group.pages.length;
+        bytes-=group.pages.reduce((sum,key)=>sum+pageBytes(key),0);
+      }
+      return {retired,fits:pieces<=capacity&&bytes<=byteCapacity};
+    };
+    let allocation=fit();
+    if(!allocation.fits){
+      // Keep the fine cut and refine backing only within its remaining budget.
+      // Certified replacements cost no displayed slots; other regions retain
+      // a covering prepared parent when their children would crowd out detail.
+      const costs=new Map();
+      backing=selectFacePages(backingPlan,pages,matrix,scale,viewport,true,{
+        pages:capacity-fine.keys.length,
+        bytes:byteCapacity-fine.keys.reduce((sum,key)=>sum+pageBytes(key),0),
+        cost:node=>{
+          if(!costs.has(node.key)){
+            const group={key:node.key,pages:[node.key]};
+            const covered=selectBackingReplacements([group],fine,pages,visible).length>0;
+            costs.set(node.key,{pages:covered?0:1,bytes:covered?0:pageBytes(node.key)});
+          }
+          return costs.get(node.key);
+        },
+      });
+      allocation=fit();
     }
-    if(pieces>Math.floor(plan.poolSize/2)||bytes>Math.floor(plan.maximumDecodedBytes/2)){
+    const backingBytes=backing.keys.reduce((sum,key)=>sum+pageBytes(key),0);
+    const retired=allocation.retired;
+    if(!allocation.fits){
       // An uncertified region still needs backing. Preserve the existing
       // bounded cut until preparation can prove a complete replacement there.
       retired.clear();
@@ -68,7 +95,7 @@ export function selectCityPages(plan, pages, matrix, scale, viewport) {
   return selectFacePages(plan,pages,matrix,scale,viewport);
 }
 
-function selectFacePages(plan, pages, matrix, scale, viewport, grouped=false) {
+function selectFacePages(plan, pages, matrix, scale, viewport, grouped=false, refinementBudget) {
   const directories = new Map();
   const projected = new Map();
   const inspect = (key) => {
@@ -103,6 +130,9 @@ function selectFacePages(plan, pages, matrix, scale, viewport, grouped=false) {
   if(selected.length>capacity||selectedBytes>byteCapacity) {
     throw new Error('Prepared city root coverage exceeds its retained page budget.');
   }
+  const cost=entry=>refinementBudget?.cost(entry.node)??{pages:1,bytes:pixelBytes(entry.node)};
+  let chargedPages=selected.reduce((sum,entry)=>sum+cost(entry).pages,0);
+  let chargedBytes=selected.reduce((sum,entry)=>sum+cost(entry).bytes,0);
   const finished = new Set();
   for (;;) {
     const parent = selected.filter(({ node, span }) => !finished.has(node.key) &&
@@ -117,8 +147,12 @@ function selectFacePages(plan, pages, matrix, scale, viewport, grouped=false) {
     // Missing metadata or a full pool leaves the parent covering its children.
     if (!children.length || children.some(child => child.node.stub || !child.node.url) ||
         selected.length - 1 + children.length > capacity || replacementBytes > byteCapacity) continue;
+    const nextPages=chargedPages-cost(parent).pages+children.reduce((sum,entry)=>sum+cost(entry).pages,0);
+    const nextBytes=chargedBytes-cost(parent).bytes+children.reduce((sum,entry)=>sum+cost(entry).bytes,0);
+    if(refinementBudget&&(nextPages>refinementBudget.pages||nextBytes>refinementBudget.bytes))continue;
     selected.splice(selected.indexOf(parent), 1, ...children);
     selectedBytes=replacementBytes;
+    chargedPages=nextPages;chargedBytes=nextBytes;
   }
   // Preserve selected pages' directory paths before speculative discovery when
   // the metadata budget is tight. Never prioritize an off-centre branch first.

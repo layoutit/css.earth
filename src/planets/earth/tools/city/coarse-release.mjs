@@ -53,7 +53,8 @@ function createSourceWindow(pins, directory, limit) {
 // Preparation owns geographic sampling, row orientation, transparency trimming
 // and retirement certificates. Runtime receives the existing page descriptor.
 export async function prepareCoarseRaster(entry, scene, fineRoots, bank) {
-  const geometry = prepareCoarsePageGeometry(entry, scene);
+  const address = { level: entry.level, x: entry.x, y: entry.y };
+  const geometry = prepareCoarsePageGeometry(address, scene);
   const sampled = entry.empty ? Buffer.alloc(geometry.width * geometry.height * 4)
     : sampleCoarsePage(geometry, entry.resolution.zoom, (x, y) => {
       const key = `${entry.resolution.zoom}-${Math.floor(x / 256)}-${Math.floor(y / 256)}`;
@@ -65,7 +66,7 @@ export async function prepareCoarseRaster(entry, scene, fineRoots, bank) {
     });
   const rgba = Buffer.alloc(sampled.length), stride = geometry.width * 4;
   for (let y = 0; y < geometry.height; y++) sampled.copy(rgba, y * stride, (geometry.height - y - 1) * stride, (geometry.height - y) * stride);
-  const replacement = prepareCoarseReplacements(entry, scene, fineRoots, { rgba, width: geometry.width, height: geometry.height });
+  const replacement = prepareCoarseReplacements(address, scene, fineRoots, { rgba, width: geometry.width, height: geometry.height });
   const trimmed = trimCoarsePageRgba(rgba, geometry.width, geometry.height);
   const bytes = await sharp(trimmed.rgba, { raw: { width: trimmed.width, height: trimmed.height, channels: 4 } }).webp({ lossless: true, effort: 4 }).toBuffer();
   const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer();

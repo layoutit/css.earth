@@ -2,7 +2,7 @@
 
 The shared application shell owns the selected entity and its explicit lenses. The existing prepared-map pager owns geographic detail and drawable coverage. One geographic image owner manages transport, decoding and bounded reuse, and the retained CSS renderer applies prepared image handles and transforms.
 
-Local publication/loading and shared image reuse are implemented. A bounded coarse-to-fine prototype now preserves the existing fine selection in captured boundary crossings. Global preparation and the complete continuous browser journey remain unfinished. Controlled native-memory results and the remaining browser-owned residency are reported below.
+Local publication/loading and shared image reuse are implemented. The global coarse release is prepared locally; its metadata preserves the original fine selection in 28 recorded views. Global browser qualification, public delivery and the complete continuous application journey remain unfinished. Controlled native-memory results and the remaining browser-owned residency are reported below.
 
 ## Ownership
 
@@ -88,6 +88,34 @@ fine-index branches. Runtime follows these prepared relationships; missing or
 pending metadata cannot certify replacement. A ready local fine group can replace
 its covering backing independently of an unrelated delayed region. Every view
 change re-evaluates those relationships before old coverage is retired.
+
+Global expansion exposed a second pressure case: uncertified polar backing
+refinement crowded out fine detail even after all eligible regular backing
+retired. When that combined cut does not fit, the same face traversal refines
+backing within the capacity left by the original fine cut. Certified replacements
+consume no displayed capacity; other regions keep an affordable prepared parent.
+The existing publication lineage retains old children until that parent is ready,
+then releases their slots for fine detail. Both piece and byte limits apply. If
+even the covering roots cannot coexist with the fine cut, the existing bounded
+fine fallback still applies.
+
+With the complete global metadata, this preserves all fine keys in 28 recorded
+DPR 1/2 views. Four northern views previously reduced 247 fine pieces to 192;
+they now retain all 247 with eight essential backing pieces, within the unchanged
+256-piece display limit. This comparison exercises the production metadata index
+and selector. Subsequent real-Chrome crossings at both DPRs also publish those
+exact 247 fine images, remain within the limits during movement, and return to
+the same cut.
+
+Four continuous regular/northern routes using the complete local release pass
+at DPR 1/2, with 1,194 samples, at most 231 displayed and 235 retained pieces,
+and no sampled complete-ready groups withheld. Between 12 and 40 images publish
+while an unrelated directory remains pending; every route retries an injected
+503. The delayed fixture still shows base-only intervals up to 801 ms on cold
+entry and approximately 200 ms on some warm entries. Recordings retain visible
+seam bleed and are not performance or final visual qualification. Global
+antimeridian/interior-cap runs, public delivery and the built entity/lens/history
+journey remain open.
 
 Demand reserves the old displayed cut and the complete incoming required cut
 before admitting optional backing or ancestors. Optional coverage cannot consume
@@ -187,6 +215,15 @@ content addressed; a resumed preparation preserves the same canonical manifest.
 The source decode cache stays within 48 MiB, output assets within 1 GiB. The
 completed release is under `releases/<release-version>/` beneath the plan
 directory; `prepared.json` identifies that local directory.
+
+The first complete local release contains 363,148,674 bytes of WebP images and
+10,518,498 bytes of metadata across 1,606 directories. Root headers use 247,876
+bytes; the largest directory is 53,582 bytes. Runtime descriptors contain only
+the prepared address, image and coverage facts: source tile inventories and
+sampling plans stay in preparation receipts. Of 6,914 prepared images, 1,837 are
+empty at their sampled resolution. These counts do not imply missing descendants
+or source coverage beyond the provider's valid pixels. Public delivery and
+integration are separate steps.
 
 Publish only the new release's files through the existing Earth bucket workflow,
 then integrate its verified manifest:
