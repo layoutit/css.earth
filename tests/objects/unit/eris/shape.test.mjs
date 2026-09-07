@@ -18,9 +18,20 @@ test('Eris prepares the occultation sphere inside the actual quad budget without
 
 test('the illustration mounts without invented observations or extra shadow/ring assets', async () => {
   const runtime = await json('prepared/runtime.json');
-  assert.equal(runtime.controls.lenses, null);
+  assert.equal(runtime.controls.lenses.defaultLens, 'illustration');
+  assert.deepEqual(runtime.controls.lenses.controls.map(lens => lens.label), ['Illustrative model']);
+  const lens = (await json('prepared/lenses.json')).controls[0];
+  assert.ok(lens.surfaceUrl && lens.polesUrl);
+  assert.equal(lens.surfaceUrl, lens.surface2xUrl);
+  assert.equal(lens.polesUrl, lens.poles2xUrl);
+  const { images } = await json('prepared/minimaps.json');
+  assert.equal(images.length, 1);
+  assert.equal(images[0].id, lens.id);
+  assert.deepEqual([images[0].width, images[0].height], [640, 320]);
+  assert.equal(images[0].attribution.url, lens.source.url);
+  assert.ok((await readFile(new URL('prepared/' + images[0].path, root))).length < 100_000);
   assert.deepEqual(runtime.controls.settings.controls, []);
-  assert.deepEqual(runtime.variants.map(v => v.when), [{}]);
+  assert.deepEqual(runtime.variants.map(v => v.when), [{ lensId: 'illustration' }]);
   assert.ok(runtime.assets.entries.some(a => a.key === 'surface'));
   assert.ok(runtime.assets.entries.every(a => a.key !== 'ring' && !a.key.includes('lit-')));
   assert.deepEqual(runtime.animations, []);
