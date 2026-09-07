@@ -140,7 +140,12 @@ const hasResources = sources.length > 0;
       </PlanetCard>
       <PlanetCard data-solar-system-results>
         <PlanetCardHeader title={OVERVIEW_TITLES['solar-system']}
-          introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids and comets." />
+          introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids and comets.">
+          <div class="planet-title-tags">
+            <span class="planet-system-tag planet-title-tag">{overviewFacts['solar-system'].facts.find(fact => fact.id === 'galaxy').value}</span>
+            <span class="planet-classification-tag planet-title-tag">System</span>
+          </div>
+        </PlanetCardHeader>
         <PlanetFactsheet id={`${objectId}-solar-system`} facts={overviewFacts['solar-system'].facts} />
         <PlanetObjectResults activeObjectId={objectId} />
       </PlanetCard>
