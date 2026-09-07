@@ -843,3 +843,29 @@ test('orbit endpoints follow the rendered circle through growth and shrink witho
     vi.unstubAllGlobals();
   }
 });
+
+test('flight overlays fade independently while retained body images keep following the camera', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const mercury = layer.inspect().find(entry => entry.id === 'mercury')!;
+  const nodes = all(root), orbit = mercury.orbit.map(node => ({ ...node.style }));
+  const markerTransform = mercury.marker.style.transform, markerOpacity = mercury.marker.style.opacity;
+  const labelTransform = mercury.label.style.transform;
+  layer.setNavigationIndicatorsVisible(false);
+  const measurements = nodes.reduce((sum, node) => sum + node.measurements, 0);
+  expect(mercury.label.style.opacity).toBe('0');
+  expect(mercury.indicator.style.opacity).toBe('0');
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [50, 0, 1_000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels: 800, heightPixels: 600 });
+  expect(nodes.reduce((sum, node) => sum + node.measurements, 0)).toBe(measurements);
+  expect(mercury.marker.style.transform).not.toBe(markerTransform);
+  expect(Number(mercury.marker.style.opacity)).toBeCloseTo(Number(markerOpacity), 4);
+  expect(mercury.orbit.map(node => ({ ...node.style }))).toEqual(orbit);
+  expect(mercury.label.style.transform).toBe(labelTransform);
+  layer.setNavigationIndicatorsVisible(true);
+  expect(mercury.indicator.style.opacity).not.toBe('0');
+  expect(mercury.indicator.style.transform).toContain('50px');
+  expect(mercury.orbit.map(node => ({ ...node.style }))).not.toEqual(orbit);
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
