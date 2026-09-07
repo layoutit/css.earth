@@ -22,13 +22,11 @@ export function objectPackagePaths(objectRecord, projectRoot = process.cwd(), au
       resolve(root, "runtime-assets.json"),
       ...(authored ? [resolve(root, 'object.json'), resolve(root, 'prepared/runtime.json'),
         resolve(root, 'prepared/content.json'),
-        resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mjs'),
-        resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'smoke-browser.mjs')] : [
+        resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mjs')] : [
       resolve(root, "runtime", "client.mjs"),
       resolve(root, "site", `${objectRecord.name}Page.astro`),
       resolve(root, "site", "control-content.mjs"),
       resolve(root, "test", "browser-profile.mjs"),
-      resolve(root, "test", "smoke-browser.mjs"),
       resolve(root, "tools", "acquire.mjs"),
       resolve(root, "tools", "prepare.mjs"),
       resolve(root, "tools", "navigation-marker.mjs"),

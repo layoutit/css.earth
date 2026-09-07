@@ -1,5 +1,5 @@
 import {createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform} from '@layoutit/polycss';
-import {preparedSkyResources,preparedResourcePool} from '../../../src/platform/prepared-object-assets.mjs';
+import {preparedSunResources,preparedResourcePool} from '../../../src/platform/prepared-object-assets.mjs';
 import {PREPARED_PRESENTATION_SCHEMA} from '../../../src/platform/prepared-presentation-contract.mjs';
 import {prepareCssomDeclarationReads} from '../../prepared-cssom.mjs';
 import {createPreparedNodeTree} from '../../prepared-node-tree.mjs';
@@ -24,7 +24,7 @@ export async function prepareLayeredSurfacePresentation({config,geometryConfig,g
       [resources.fixedRole]:url(prefix,highest(material.fixed.filter(product=>!product.shadowless)).filename),[resources.shadowlessRole]:url(prefix,highest(material.fixed.filter(product=>product.shadowless)).filename)};
   };
   const staticRoles=['surface','poles',resources.fixedRole,resources.shadowlessRole],staticKeys=id=>staticRoles.map(role=>`${role}:${id}`);
-  const celestial=[...preparedSkyResources(sky,sun,resources.celestialPool),...config.planes.map(plane=>({key:plane.assetKey,url:plane.assetUrl,pool:resources.celestialPool}))];
+  const celestial=[...preparedSunResources(sun,resources.celestialPool),...config.planes.map(plane=>({key:plane.assetKey,url:plane.assetUrl,pool:resources.celestialPool}))];
   const rowCount=bank.frames/bank.columns,rowUrl=(id,row)=>url(prefix,materialConfig.lenses.find(lens=>lens.id===id).rowOutput.replace('{row}',String(row).padStart(2,'0')));
   const entries=[...celestial,...lensIds.flatMap(id=>[...Object.entries(surface(id)).map(([role,url])=>({key:`${role}:${id}`,url,pool:resources.staticPool})),...Array.from({length:rowCount},(_,row)=>({key:`${resources.rowKey}:${id}:${row}`,url:rowUrl(id,row),pool:resources.rowPool}))])];
   const meshTransform=authoredTransform(config.meshTransform),systemTransform=authoredTransform(config.systemTransform);

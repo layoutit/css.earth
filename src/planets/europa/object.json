@@ -1,82 +1,11 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "9edb7d925bc23fb06015f4976fc1dbd038e512d11f6cd0bedd179dc7fdbd2404"
+  },
   "id": "europa",
-  "type": "layered-body",
   "properties": {
-    "preparation": {
-      "schema": "cssearth-object-preparation@1",
-      "label": "Europa",
-      "steps": [
-        "verify-sources",
-        "assets",
-        "starfield",
-        "sky-sun",
-        "scene",
-        "controls",
-        "presentation",
-        "runtime-assets"
-      ]
-    },
-    "recipe": {
-      "schema": "cssearth-authored-object@1",
-      "sources": [
-        {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "f01c68f01c26d65cfd554a9f7919bd41aaae983bc06b1bd3fc46ca1920aa9c16"
-        },
-        {
-          "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "50ab6f07987ee185d58024caf92a7a4a20a3661222890a61e58e0a248e3afb5f"
-        },
-        {
-          "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "fdd009d83cb3440824c59ded7526e65d757614e0fa16e13f920c5f4b2ad26dc7"
-        },
-        {
-          "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "0a9bedffcafea2db8cdc0f407c1abc300cf91e553a676c5da5b8f46de6505836"
-        },
-        {
-          "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "620ecbe8332f0771caa3d6e1a202cacb0aa2c5135d039813b16df8358302e3c3"
-        }
-      ],
-      "shape": {
-        "kind": "sphere",
-        "radiusKm": 1560.8
-      },
-      "surfaces": [
-        {
-          "id": "body",
-          "source": "terrestrial",
-          "projection": "equirectangular",
-          "lenses": [
-            {
-              "id": "normal",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "enhanced",
-              "source": "content",
-              "material": "lighting"
-            }
-          ]
-        }
-      ],
-      "materials": [
-        {
-          "id": "lighting",
-          "source": "terrestrial",
-          "model": "lit"
-        }
-      ]
-    },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
@@ -103,11 +32,82 @@
       ],
       "metersPerUnit": 6786.086956521739,
       "bodyRadiusM": 1560800
+    },
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Europa",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "enhanced",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1560.8
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "b7b5d725fa904fbd761bbc59daedd48e392eb7b83977bf25b0ae3986bf520dee"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "50ab6f07987ee185d58024caf92a7a4a20a3661222890a61e58e0a248e3afb5f"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "fdd009d83cb3440824c59ded7526e65d757614e0fa16e13f920c5f4b2ad26dc7"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "0a9bedffcafea2db8cdc0f407c1abc300cf91e553a676c5da5b8f46de6505836"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "620ecbe8332f0771caa3d6e1a202cacb0aa2c5135d039813b16df8358302e3c3"
+        }
+      ]
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "caedabc69fa7bc188e1e9a248f1bcca2f225e66cbe727803ed82c8cb32c59260"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

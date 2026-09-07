@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "676309f337641b400e9704bb95fb3f04bc43e826326b0d5906c32f7617a0d1d3"
+  },
   "id": "neptune",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -206,9 +209,6 @@
       "bodyRadiusM": 24764000
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "803b9af75abc523925e52b0fddc34c2e8755fc95b4f409765b0b4980dedbac3b"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

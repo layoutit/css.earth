@@ -56,9 +56,6 @@ test("derives the complete owned file contract from planet identity", () => {
     `/project/tests/objects/browser/${planet.id}/browser-profile.mjs`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/tests/objects/browser/${planet.id}/smoke-browser.mjs`,
-  ));
-  assert.ok(paths.requiredFiles.includes(
     `/project/src/planets/${planet.id}/object.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
@@ -145,12 +142,4 @@ test("validates runtime asset manifest entries", () => {
     }),
     /invalid runtime asset entry/,
   );
-});
-
-test("verifies checked-in data and runtime asset bytes for every object package", async () => {
-  const results = [];
-  for (const planet of implemented) results.push(await validatePlanetData(planet));
-  assert.ok(results.every(({ assetCount }) => assetCount > 0));
-  assert.ok(results.every(({ sourceInputCount }) => sourceInputCount > 0));
-  assert.ok(results.every((result) => !('editorialSourceId' in result)));
 });

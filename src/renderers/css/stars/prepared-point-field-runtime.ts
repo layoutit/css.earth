@@ -22,17 +22,16 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   root.className = 'prepared-point-field';
   root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0;visibility:hidden';
   root.ariaHidden = 'true';
-  root.dataset.catalogueCount = String(payload.stars.length);
   const starLayer = host.ownerDocument.createElement('div');
   starLayer.className = 'prepared-point-field-stars';
   starLayer.style.cssText = 'position:absolute;inset:0';
   root.appendChild(starLayer);
   const atlasUrl = resolveResource(payload.atlas.path);
+  starLayer.style.setProperty('--point-atlas', `url(${JSON.stringify(atlasUrl)})`);
+  starLayer.style.setProperty('--point-tile-size', `${payload.atlas.tileSize}px`);
   const makeSlots = (count: number): Slot[] => Array.from({ length: count }, () => {
     const element = host.ownerDocument.createElement('s');
-    element.dataset.starSlot = '';
-    element.style.cssText = `position:absolute;left:50%;top:50%;width:${payload.atlas.tileSize}px;height:${payload.atlas.tileSize}px;background-repeat:no-repeat;text-decoration:none;transform-origin:0 0;visibility:hidden`;
-    element.style.backgroundImage = `url(${JSON.stringify(atlasUrl)})`;
+    element.style.visibility = 'hidden';
     starLayer.appendChild(element);
     return { element, reference: null, entering: false };
   });
@@ -47,6 +46,8 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   let timer: ReturnType<typeof setTimeout> | null = null;
   let latest: Publication | null = null;
   let destroyed = false, initialized = false;
+  let selected: PreparedPointFieldSelection | null = null;
+  let visiblePoints = 0, individualPoints = 0;
 
   function select(publication: Publication): PreparedPointFieldSelection {
     const { local, rotation } = camera(publication, payload);
@@ -80,12 +81,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
       const slot = free[added++]; slot.reference = reference; slot.entering = initialized;
       if (initialized) fader.set(slot.element, 0, 0);
     }
-    root.dataset.coveredCount = String(selection.coveredCount);
-    root.dataset.consideredCount = String(selection.consideredCount);
-    root.dataset.drawnCount = String(selection.drawnCount);
-    root.dataset.representatives = String(selection.representatives.length);
-    root.dataset.maxProjectedErrorPx = String(selection.maxProjectedErrorPx);
-    root.dataset.budgetLimited = String(selection.budgetLimited);
+    selected = selection;
     if (initialized && (removed > 0 || added > 0)) {
       // Surviving identities stay opaque. Only replaced hierarchy members fade.
       timer = setTimeout(finishTransition, payload.policy.transitionMs);
@@ -132,7 +128,6 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
       if (!shown) return;
       if (!departing) { visible++; if (reference.kind === 'star') individual++; }
       if (!departing && reference.kind === 'star') { const candidate = label(reference.index); if (candidate) candidates.push(candidate); }
-      element.dataset.starReference = key(reference);
       element.style.backgroundPosition = `${-(point.colorIndex % payload.atlas.columns) * payload.atlas.tileSize}px ${-Math.floor(point.colorIndex / payload.atlas.columns) * payload.atlas.tileSize}px`;
       element.style.transform = `translate(${projection.x - size / 2}px,${projection.y - size / 2}px) scale(${size / payload.atlas.tileSize})`;
       fader.set(element, departing ? 0 : light.luminance,
@@ -140,11 +135,22 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
     };
     for (const slot of outgoing) write(slot, true);
     for (const slot of active) write(slot, false);
-    root.dataset.visiblePoints = String(visible); root.dataset.individualPoints = String(individual);
+    visiblePoints = visible; individualPoints = individual;
     labels.publish(candidates, label);
   }
 
   return Object.freeze({ root,
+    // Allocate diagnostics only when requested; render leaves stay anonymous.
+    inspect() {
+      return Object.freeze({ catalogueCount: payload.stars.length,
+        coveredCount: selected?.coveredCount ?? 0, consideredCount: selected?.consideredCount ?? 0,
+        drawnCount: selected?.drawnCount ?? 0, representatives: selected?.representatives.length ?? 0,
+        maxProjectedErrorPx: selected?.maxProjectedErrorPx ?? 0, budgetLimited: selected?.budgetLimited ?? false,
+        visiblePoints, individualPoints,
+        points: Object.freeze([...outgoing, ...active].map(slot => Object.freeze({ element: slot.element,
+          reference: slot.reference === null ? null : key(slot.reference) }))),
+      });
+    },
     setOccluder(body: { positionM: Vector3; radiusM: number }) {
       occluder = body;
       occluderLocal = presentPhysicalPoseInVolume({ positionM: body.positionM,

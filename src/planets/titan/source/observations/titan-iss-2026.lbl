@@ -1,0 +1,62 @@
+Object = IsisCube
+  Object = Core
+
+    Group = Dimensions
+      Samples = 23048
+      Lines   = 11524
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = Real
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+    StartByte = 92859
+    ^Core     = Titan_Controlled_GlobalEqui_V6NoArcEdgesClouds_702M_WeightedAv-
+                erage_ComboIncV2Ema60_Sharpen31x31.tif
+    Format    = BandSequential
+  End_Object
+
+  Group = BandBin
+    FilterName   = CL1/CB3
+    OriginalBand = 1
+    Center       = 937.99400000000003
+    Width        = 9.4979899999999997
+  End_Group
+
+  Group = Mapping
+    TargetName           = Titan
+    EquatorialRadius     = 2575000.0 <meters>
+    PolarRadius          = 2575000.0 <meters>
+    LatitudeType         = Planetocentric
+    LongitudeDirection   = PositiveEast
+    LongitudeDomain      = 180
+    MinimumLatitude      = -90.002747049000007
+    MinimumLongitude     = -0.0054940980000079236
+    MaximumLatitude      = 90.002747049000007
+    MaximumLongitude     = 0.0054940979999570346
+    ProjectionName       = Equirectangular
+    CenterLongitude      = 180.0
+    CenterLatitude       = 0.0
+    CenterLatitudeRadius = 2575000.0
+    UpperLeftCornerX     = -8089848.0
+    UpperLeftCornerY     = 4044924.0
+    PixelResolution      = 702.0 <meters/pixel>
+    Scale                = 64.020268146515647 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1709             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 25482
+  ^History  = Titan_Controlled_GlobalEqui_V6NoArcEdgesClouds_702M_WeightedAver-
+              age_ComboIncV2Ema60_Sharpen31x31.History.IsisCube
+End_Object
+End

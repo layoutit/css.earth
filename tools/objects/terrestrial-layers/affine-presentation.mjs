@@ -1,4 +1,4 @@
-import { canonicalPreparedAsset,preparedSkyResources,preparedResourcePool,CANONICAL_PREPARED_IMAGE_DENSITY } from '../../../src/platform/prepared-object-assets.mjs';
+import { canonicalPreparedAsset,preparedSunResources,preparedResourcePool,CANONICAL_PREPARED_IMAGE_DENSITY } from '../../../src/platform/prepared-object-assets.mjs';
 import { PREPARED_PRESENTATION_SCHEMA,requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mjs';
 import { prepareCssomDeclarationReads } from '../../prepared-cssom.mjs';
 import { createPreparedNodeTree } from '../../prepared-node-tree.mjs';
@@ -8,7 +8,7 @@ import { requirePreparedResourceCatalog } from '../../object-runtime-contract.mj
 /** Retained affine leaves and a camera-facing row-addressed material share one scene. */
 export async function prepareAffinePresentation({config,scene:scenePlan,camera:cameraPlan,lighting,lenses,sun,controls}) {
   const bank = lighting.banks[String(CANONICAL_PREPARED_IMAGE_DENSITY)];
-  const celestial = preparedSkyResources(scenePlan.starfield, sun, "warm");
+  const celestial = preparedSunResources(sun, "warm");
   const lensKeys = id => [`surface:${id}`, `poles:${id}`];
   const entries = [...celestial, ...lenses.controls.flatMap(lens => ["surface", "poles"].map(layer => ({
     key: `${layer}:${lens.id}`, url: canonicalPreparedAsset(lens[`${layer}Url`], lens[`${layer}2xUrl`]), pool: "warm",

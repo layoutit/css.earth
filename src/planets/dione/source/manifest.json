@@ -1,0 +1,274 @@
+{
+  "schema": "cssdione-authoritative-sources@1",
+  "inputs": [
+    {
+      "credit": "NASA/JPL/Space Science Institute",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-voyager-2010-dione",
+      "path": "observations/Dione_Cassini_Voyager_mosaic_global_154m.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Dione_Cassini_Voyager_mosaic_global_154m.tif",
+      "catalog": "https://astrogeology.usgs.gov/search/map/dione_cassini_voyager_global_mosaic_154m",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 23040,
+      "height": 11520,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 563000,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "USGS 2010 Cassini/Voyager mosaic. Preserve all nonzero source values; exactly zero is GeoTIFF no-data. Photographed shading and native resolution vary.",
+      "expectedBytes": 265490551,
+      "expectedSha256": "5c5d796c02e3c99fde5dd034e01dd1f25905699a4885843aed445ded955e08b5"
+    },
+    {
+      "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-iss-2014-dione-color",
+      "path": "observations/PIA18434.jpg",
+      "origin": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18434.jpg",
+      "catalog": "https://www.jpl.nasa.gov/images/pia18434-color-maps-of-dione-2014/",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 14134,
+      "height": 7067,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Published global rectangular display mosaic without a separate validity mask. Preserve all supplied pixels, including dark terrain, residual photographed shadows and coarse inserts.",
+      "expectedBytes": 10255303,
+      "expectedSha256": "5e885d0e3bac1e1ee36934063d5c9cdf609dc10ad44677cba31bc9e703b674ff"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-dione-eq",
+      "path": "observations/dione_eqradius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqradius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "width": 2222,
+      "height": 679,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 561400,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "PDS SPC radius model. Sample original equatorial and polar geotransforms within documented latitude limits. No extrapolation across source edges.",
+      "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 561.4 km.",
+      "expectedBytes": 6044025,
+      "expectedSha256": "08a2a6141d0095531da511468d4176577dd3ac8ce45c0d154ba5a655a9711617"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-dione-np",
+      "path": "observations/dione_npradius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npradius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "projection": {
+        "type": "polar-stereographic",
+        "referenceRadiusMeters": 561400,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "PDS SPC radius model. Sample original equatorial and polar geotransforms within documented latitude limits. No extrapolation across source edges.",
+      "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 561.4 km.",
+      "expectedBytes": 790785,
+      "expectedSha256": "f2a0bf4a4eba63ddfd566231fc02fc7f1f8aeaba0687e437d8669d8844f436ee"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-dione-sp",
+      "path": "observations/dione_spradius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spradius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "projection": {
+        "type": "polar-stereographic",
+        "referenceRadiusMeters": 561400,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "PDS SPC radius model. Sample original equatorial and polar geotransforms within documented latitude limits. No extrapolation across source edges.",
+      "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 561.4 km.",
+      "expectedBytes": 790785,
+      "expectedSha256": "416107461ff452d07944f5391d3e9e5bdda8c6d7544379444778e6ec52c72970"
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 848,
+      "expectedSha256": "99ad2505fb6a4e465b7067dfe7aff0999b71a1374723570de6fa1ba586bc4fa7",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/catalog.json",
+      "expectedBytes": 2333,
+      "expectedSha256": "d0f1338ced2baf599b5f94ab627bfc41755ee7704a7060b47f8771621a0e7627",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/productdescription.pdf",
+      "expectedBytes": 50640,
+      "expectedSha256": "bf336ad869c7a0ddf06b400adf7839bba3738db6c5dcbc8da6cead7566e6252e",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/dione_eqradius_g.xml",
+      "expectedBytes": 9188,
+      "expectedSha256": "39be0e45a5d4f22b117b2707bf75e28b77bfac87170cae64af236876855953c2",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/dione_npradius_g.xml",
+      "expectedBytes": 9228,
+      "expectedSha256": "4883fbacbbddbbf1a5ebab3e8c0a1531aded58599dda3b21bf2210f8c1cc733c",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/dione_spradius_g.xml",
+      "expectedBytes": 9231,
+      "expectedSha256": "6c0126745b21f8ffb94c6dffc6a6df51c3a7eb7e0dc0561de52989ea135789fe",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 5129,
+      "expectedSha256": "35bf1c59e9bab26f283e9a88837312150d676c7b7d547c925e26aa87a3135107",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1979,
+      "expectedSha256": "06396916eb3869582624deb81dc30d2cf05a772aeccd43901cfb19941b53b2d4",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1945,
+      "expectedSha256": "af021aeb1e25499e57e87bb5c67b6e00bbee61edc251ceae9c7a5d136d564bd7",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 8226,
+      "expectedSha256": "1e9c644a0378a86b69c101adc77418be6c5b4779200216171e558451df63c2ba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2803,
+      "expectedSha256": "d6cf4475be0dc37fa0d3827fa762a87b9c408c8c3eff244716b51c2c0cf573c9",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    }
+  ],
+  "generatedIntermediates": []
+}

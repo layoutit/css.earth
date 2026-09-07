@@ -1,4 +1,4 @@
-import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mjs";
+import { canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mjs";
 import { prepareCssomDeclarationReads } from "../../prepared-cssom.mjs";
 import { createPreparedNodeTree } from "../../prepared-node-tree.mjs";
@@ -13,7 +13,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     ...plan.interior.shells.flatMap(shell=>shell.leaves.map(leaf=>leaf.asset)),
     ...plan.interior.sectionLeaves.map(leaf=>leaf.asset)].map(pair=>canonicalPreparedAsset(pair)))];
   const interiorKeys=interiorUrls.map((_,i)=>`interior:${i}`);
-  const celestial=preparedSkyResources(sky,sun,"mounted");
+  const celestial=preparedSunResources(sun,"mounted");
   const entries=[...celestial,...banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"}))),
     ...lenses.controls.filter(lens=>lens.view!=="interior").map(lens=>({key:`poles:${lens.id}`,url:canonicalPreparedAsset(lens.polesUrl),pool:"mounted"})),
     ...interiorUrls.map((url,i)=>({key:interiorKeys[i],url,pool:"mounted"})),

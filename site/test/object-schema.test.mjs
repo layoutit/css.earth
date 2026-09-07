@@ -152,7 +152,7 @@ test("derives shared preparation and external browser scripts from the descripto
   for (const [mode, suffix] of [
     ["acquire", "tools/objects/dist/operations.js"],
     ["prepare", "tools/objects/dist/prepare-authored.js"],
-    ["browser", "tests/objects/browser/fixture/smoke-browser.mjs"],
+    ["browser", "site/test/dom-cleanliness-browser.mjs"],
     ["assemble", "tools/objects/dist/operations.js"],
   ]) {
     const expected = resolve(projectRoot, suffix);

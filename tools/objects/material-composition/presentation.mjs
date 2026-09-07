@@ -1,5 +1,6 @@
+import { prepareAtlasRows } from './atlas-rows.mjs';
 
-import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mjs";
+import { canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mjs";
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from "../../../src/platform/prepared-ellipsoid-projection.mjs";
 import { prepareCssomDeclarationReads } from "../../prepared-cssom.mjs";
@@ -18,7 +19,7 @@ function prepareTransform(value) {
   return matrix;
 }
 
-export async function prepareLayeredOblatePresentation({config,plan,layouts,lenses,views,sky,sun}) {
+export async function prepareLayeredOblatePresentation({publicDirectory,config,plan,layouts,lenses,views,sky,sun}) {
   const {namespace,camera}=config;
   const exteriorAtlas = plan.preparedLighting.orbitAtlas.runtimeShards, interiorAtlas = plan.interior.atmosphere.runtimeShards;
   const exteriorLenses = lenses.controls.filter(lens => lens.view !== "interior"), normal = exteriorLenses.find(lens => lens.id === lenses.defaultLens);
@@ -31,15 +32,23 @@ export async function prepareLayeredOblatePresentation({config,plan,layouts,lens
   ];
   const interior = [...Object.entries(views.interiorLenses.normal.assets).map(([name, asset]) => ({ key: `interior:${name}`, url: canonicalPreparedAsset(asset), pool: "interior" })),
     { key: "interior:outer-poles", url: canonicalPreparedAsset(views.assets.outerPoles.normal), pool: "interior" }];
+  const rowBanks = new Map();
+  for (const [pool, atlas, prefix] of [["exterior-material", exteriorAtlas, "exterior"], ["interior-material", interiorAtlas, "interior-material"]]) {
+    for (const [name, variant] of Object.entries(atlas.variants)) {
+      if (pool === "interior-material" && name !== "normal" && !name.startsWith("normal-")) continue;
+      const resource = `${prefix}:${name}`;
+      const rows = await prepareAtlasRows({ variant, resource, publicDirectory });
+      rowBanks.set(resource, { ...rows, pool });
+    }
+  }
   const entries = [
-    ...preparedSkyResources(sky, sun, "warm"),
+    ...preparedSunResources(sun, "warm"),
     { key: "weather", url: `/scenes/${namespace}/${namespace}-weather.webp`, pool: "warm" },
     { key: "ring-shadow", url: `/scenes/${namespace}/${namespace}-ring-shadow.webp`, pool: "warm" },
     ...plan.ringMotionPlates.map((plate, index) => ({ key: `ring-motion:${index}`, url: canonicalPreparedAsset(plate.textureUrl, plate.texture2xUrl), pool: "warm" })),
     ...interior,
     ...exteriorLenses.flatMap(lens => lensAssets(lens).map(entry => ({ ...entry, pool: lens.id === lenses.defaultLens ? "warm" : "lenses" }))),
-    ...Object.entries(exteriorAtlas.variants).map(([id, variant]) => ({ key: `exterior:${id}`, url: variant.runtimeAtlas.asset2xUrl || variant.runtimeAtlas.assetUrl, pool: "exterior-material" })),
-    ...Object.entries(interiorAtlas.variants).filter(([id]) => id === "normal" || id.startsWith("normal-")).map(([id, variant]) => ({ key: `interior-material:${id}`, url: variant.runtimeAtlas.asset2xUrl || variant.runtimeAtlas.assetUrl, pool: "interior-material" })),
+    ...[...rowBanks.values()].flatMap(({ entries, pool }) => entries.map(entry => ({ ...entry, pool }))),
   ];
   const leaves = [plan.ringPlane, plan.ringShadowPlane, ...plan.ringMotionPlates.map(plate => plate.leaf),
     ...plan.bodyBands.flatMap(band => band.leaves), ...plan.interior.outerBodyBands.flatMap(band => band.leaves),
@@ -76,7 +85,9 @@ export async function prepareLayeredOblatePresentation({config,plan,layouts,lens
     }
     for (const leaf of band.leaves) b.append(carriers.get(key), leaf.tag === "s" ? b.leaf(leaf) : b.element(leaf.tag, null, leaf.style));
   }
-  const cutaway = b.mesh(`${namespace}-cutaway`); b.append(system, cutaway);
+  const cutaway = b.mesh(`${namespace}-cutaway`);
+  cutaway.style.display = "none";
+  b.append(system, cutaway);
   for (const band of plan.interior.outerBodyBands) {
     if (!band.leaves.length) continue;
     const polar = band.leaves.some(leaf => leaf.className?.includes(`${namespace}-cutaway-outer-pole`));
@@ -92,6 +103,9 @@ export async function prepareLayeredOblatePresentation({config,plan,layouts,lens
   const materialMesh = b.mesh(`${namespace}-fixed-material`, plan.fixedMaterialPlane.transform);
   const materialCounter = b.mesh(`${namespace}-fixed-material-counter`), materialSystem = b.mesh(`${namespace}-system`, plan.systemTransform);
   const exteriorLeaf = b.leaf(plan.fixedMaterialPlane.leaf), interiorLeaf = b.leaf(plan.interior.atmosphere.leaf);
+  for (const leaf of [exteriorLeaf, interiorLeaf]) {
+    for (const name of ["background-image", "background-position", "background-size"]) leaf.style.removeProperty(name);
+  }
   exteriorLeaf.className = [exteriorLeaf.className, `${namespace}-exterior-material`].filter(Boolean).join(" ");
   interiorLeaf.className = [...new Set([...(interiorLeaf.className ?? "").split(/\s+/).filter(Boolean), `${namespace}-interior-material`])].join(" ");
   interiorLeaf.style.backgroundImage = "none";
@@ -114,10 +128,13 @@ export async function prepareLayeredOblatePresentation({config,plan,layouts,lens
   const track = (id, target, atlas, interior) => ({ id, target: index(target), frame,
     banks: Object.entries(atlas.variants).filter(([name]) => !interior || name === "normal" || name.startsWith("normal-")).map(([name, variant]) => {
       const resource = `${interior ? "interior-material" : "exterior"}:${name}`;
-      const address = (p, frame) => ({ resource, frame, row: null, backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize });
-      return { id: name, frames: Array.from({ length: frame.count }, (_, index) => address(variant.presentations[interior
-        ? Math.round(index / (frame.count - 1) * (plan.interior.atmosphere.frameCount - 1)) : index], index)),
-        default: address(variant.defaultPresentation, null), fixed: null };
+      const rows = rowBanks.get(resource);
+      const frames = Array.from({ length: frame.count }, (_, index) => ({ ...rows.frames[interior
+          ? Math.round(index / (frame.count - 1) * (plan.interior.atmosphere.frameCount - 1)) : index], frame: index }));
+      return { id: name, rows: rows.rows.map(row => ({ ...row,
+        firstFrame: frames.findIndex(p => p.row === row.row), lastFrame: frames.findLastIndex(p => p.row === row.row) })),
+        frames,
+        default: null, fixed: null };
     }),
     demand: { capacity: 2, defaultFrame },
     rotation: { kind: "ellipsoid", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false, polePolicy: "azimuth",
@@ -128,18 +145,19 @@ export async function prepareLayeredOblatePresentation({config,plan,layouts,lens
     const mode = !rings ? shadows ? "ringless" : "ringless-no-shadows" : shadows ? "full" : "no-shadows";
     const material = mode === "full" ? lens.materialLens : `${lens.materialLens}-${mode}`;
     return { when: { lensId: lens.id, rings, shadows }, required: [...lensAssets(content).map(entry => entry.key), ...(interiorView ? interior.map(entry => entry.key) : [])],
-      writes: [{ kind: "attribute", target: -1, name: "data-view", value: interiorView ? "interior" : null },
+      writes: [{ kind: "style", target: index(cutaway), name: "display", value: interiorView ? "block" : "none" },
+        { kind: "attribute", target: -1, name: "data-view", value: interiorView ? "interior" : null },
         { kind: "attribute", target: -1, name: "data-lens", value: interiorView || lens.id === lenses.defaultLens ? null : lens.id },
         { kind: "class", target: -1, name: `${namespace}-hide-rings`, value: !rings },
         { kind: "class", target: -1, name: `${namespace}-hide-shadows`, value: !shadows }],
-      materials: [{ track: "exterior", bank: material, mode: "default-pose", enabled: true, rotationEnabled: true, frameOverride: null, clearWhenHidden: false, fixedMode: "fixed" },
-        { track: "interior", bank: interiorView ? material : "normal", mode: "default-pose", enabled: interiorView, rotationEnabled: true, frameOverride: null, clearWhenHidden: true, fixedMode: "fixed" }] };
+      materials: [{ track: "exterior", bank: material, mode: "frames", enabled: true, rotationEnabled: true, frameOverride: null, clearWhenHidden: false, fixedMode: "fixed" },
+        { track: "interior", bank: interiorView ? material : "normal", mode: "frames", enabled: interiorView, rotationEnabled: true, frameOverride: null, clearWhenHidden: true, fixedMode: "fixed" }] };
   })));
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: 8, concurrency: 8 }),
       preparedResourcePool("interior", entries, { retention: "selection", decoding: "sync" }),
       ...["exterior-material", "interior-material"].map(id => preparedResourcePool(id, entries, { retention: "selection", decoding: "sync", capacity: 2, concurrency: 2 }))],
-      startup: [...entries.filter(entry => entry.pool === "warm").map(entry => entry.key), `exterior:${exteriorAtlas.defaultVariant}`] },
+      startup: [...entries.filter(entry => entry.pool === "warm").map(entry => entry.key)] },
     tree, variants, materials: [track("exterior", exteriorLeaf, exteriorAtlas, false), track("interior", interiorLeaf, interiorAtlas, true)],
     viewBindings: [{ kind: "counter-rotation", target: index(materialCounter), systemTransform: materialSystem.style.transform }], animations: [] };
 }

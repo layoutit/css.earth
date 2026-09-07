@@ -54,21 +54,25 @@ function copyOpacity(root: FakeElement, copy: FakeElement): number {
 function sliceTransmission(root: FakeElement, copies: readonly FakeElement[], alpha: number): number {
   return copies.reduce((transmission, copy) => transmission * (1 - alpha * copyOpacity(root, copy)), 1);
 }
+function opticalGain(root: FakeElement): number {
+  return 1 + Number(root.style['--volume-optical-copy-1']) + Number(root.style['--volume-optical-copy-2']);
+}
 
 test('optical copies reuse canonical textures and transforms inside isolated unflattened axis cameras', () => {
-  const { runtime, roots, meshes, resolver } = mount(payload(3)); runtime.publish(publication([1, 1, 1]));
-  expect(roots).toHaveLength(3); expect(roots.map(root => root.dataset.volumeAxis)).toEqual(AXES);
+  const { data, runtime, roots, meshes, resolver } = mount(payload(3)); runtime.publish(publication([1, 1, 1]));
+  expect(roots).toHaveLength(3);
   for (let axis = 0; axis < 3; axis++) {
     const root = roots[axis]!, camera = root.children[0]!, scene = camera.children[0]!, mesh = meshes[axis]!;
     expect(root.children).toEqual([camera]); expect(camera.children).toEqual([scene]); expect(scene.children).toEqual([mesh]);
     for (const ancestor of [camera, scene, mesh]) { expect(ancestor.style.opacity).toBeUndefined(); expect(ancestor.style.background).toBeUndefined(); }
-    expect(mesh.children.filter(node => node.dataset.volumeSlice)).toHaveLength(3);
-    expect(mesh.children.filter(node => node.dataset.volumeSliceCopy)).toHaveLength(6);
+    expect(mesh.children).toHaveLength(9);
+    for (const node of [root, camera, scene, mesh, ...mesh.children]) expect(node.dataset).toEqual({});
     for (let index = 0; index < 3; index++) {
       const copies = mesh.children.slice(index * 3, index * 3 + 3), original = copies[0]!;
-      expect(original.dataset.volumeSlice).toBe(`${AXES[axis]}-${index}`);
+      expect(original.style).toMatchObject(data.stacks[axis]!.leaves[index]!.style);
+      expect(original.style.opacity).toBeUndefined();
       for (let copy = 1; copy < 3; copy++) {
-        expect(copies[copy]!.dataset.volumeSliceCopy).toBe(`${original.dataset.volumeSlice}:${copy}`);
+        expect(copies[copy]!.style.opacity).toBe(`var(--volume-optical-copy-${copy}, 0)`);
         expect(copies[copy]!.style.transform).toBe(original.style.transform);
         expect(copies[copy]!.style.backgroundImage).toBe(original.style.backgroundImage);
       }
@@ -123,7 +127,7 @@ test('coincident copies preserve opaque dust and exactly multiply integer optica
   // X remains inside the active band while its optical length is exactly doubled.
   runtime.publish(publication([.5, Math.sqrt(.375), Math.sqrt(.375)]));
   const root = roots[0]!, copies = meshes[0]!.children;
-  expect(Number(root.dataset.volumeOpticalGain)).toBeCloseTo(2, 12);
+  expect(opticalGain(root)).toBeCloseTo(2, 12);
   for (const alpha of [0, 1 / 255, .25, .5, .8, 1]) expect(sliceTransmission(root, copies, alpha)).toBeCloseTo((1 - alpha) ** 2, 12);
   runtime.publish(publication([1, 1, 1]));
   for (let axis = 0; axis < 3; axis++) expect(sliceTransmission(roots[axis]!, meshes[axis]!.children, 1)).toBe(0);
@@ -135,7 +139,7 @@ test('the active band has enough retained copies and remains continuous across g
   const { runtime, roots, meshes } = mount();
   const sample = (direction: VolumeVector) => {
     runtime.publish(publication(direction));
-    return roots.map((root, axis) => ({ gain: Number(root.dataset.volumeOpticalGain), opacity: Number(root.style.opacity), transmission: sliceTransmission(root, meshes[axis]!.children, .3) }));
+    return roots.map((root, axis) => ({ gain: opticalGain(root), opacity: Number(root.style.opacity), transmission: sliceTransmission(root, meshes[axis]!.children, .3) }));
   };
   for (let latitude = -90; latitude <= 90; latitude += 5) for (let longitude = 0; longitude < 360; longitude += 5) {
     const a = latitude * Math.PI / 180, b = longitude * Math.PI / 180;

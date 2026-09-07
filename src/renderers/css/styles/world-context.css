@@ -1,0 +1,22 @@
+/* Shared presentation for the retained, anonymous point and orbit leaves. */
+.prepared-point-field-stars > s,
+.prepared-world-context > s:not([data-context-body]) {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 0 0;
+}
+
+.prepared-point-field-stars > s {
+  width: var(--point-tile-size);
+  height: var(--point-tile-size);
+  background-image: var(--point-atlas);
+  background-repeat: no-repeat;
+  text-decoration: none;
+}
+
+.prepared-world-context > s:not([data-context-body]) {
+  width: 1px;
+  height: 1px;
+  background: #768394;
+}

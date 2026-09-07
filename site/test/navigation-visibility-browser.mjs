@@ -113,7 +113,7 @@ try {
         }
         proof.frames.push({ time, id: stage.dataset.objectId, ready: document.documentElement.dataset.ready,
           opacity: Number(getComputedStyle(stage).opacity), scenes: stage.querySelectorAll('.polycss-scene').length,
-          skies: stage.querySelectorAll('.planet-cubic-sky').length, vaults: stage.querySelectorAll('.planet-heliocentric-sky').length });
+          universes: stage.querySelectorAll('.prepared-universe').length });
         proof.raf = requestAnimationFrame(sample);
       }
       proof.raf = requestAnimationFrame(sample);
@@ -137,10 +137,10 @@ try {
         maximumOrientationErrorDegrees: proof.maximumOrientationErrorDegrees,
         poseGapCount: proof.poseGaps.length, poseGaps: proof.poseGaps.slice(0, 3),
         loadingFrames: proof.frames.filter(frame => frame.ready === 'loading').length,
-        gaps: proof.frames.filter(frame => frame.opacity !== 1 || frame.skies < 1 || frame.vaults < 1),
+        gaps: proof.frames.filter(frame => frame.opacity !== 1 || frame.universes !== 1),
         maximumDetailedScenes: Math.max(...proof.frames.map(frame => frame.scenes)) };
     });
-    assert.deepEqual(result.gaps, [], 'Every painted handoff frame keeps the world sky and vault fully visible');
+    assert.deepEqual(result.gaps, [], 'Every painted handoff frame retains the visible world and its universe');
     assert.equal(result.poseGapCount, 0, `Incoming painted world camera differs from outgoing final pose: ${JSON.stringify(result.poseGaps)}`);
     assert.equal(result.poseTransitions, 2, 'Both incoming first-painted camera poses were checked');
     assert.ok(result.poseFrames >= (delayedSelection ? 20 : 2), 'Initial selection never paints the default camera pose');

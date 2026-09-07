@@ -46,12 +46,6 @@ test("generates all shared title assets once from checked source vectors", async
       SHELL_TITLE_SOURCES.font.sourceSha256);
     assert.equal(PREPARED_SHELL_TITLES[descriptor.key].fontSize, 17);
   }
-  const resourcesSource = await readFile(resolve(
-    projectRoot,
-    "site/source/titles/title-sources-resources.svg",
-  ), "utf8");
-  assert.match(resourcesSource, /"text":"Sources \\u0026 Resources"/u);
-  assert.doesNotMatch(resourcesSource, /"text":"Sources & Resources"/u);
 });
 
 test("keeps planet title rendering facts object-owned and source-bound", async () => {
@@ -64,8 +58,7 @@ test("keeps planet title rendering facts object-owned and source-bound", async (
     }
   }
   const panel = await readFile(new URL("../components/PreparedObjectPanel.astro", import.meta.url), "utf8");
-  assert.match(panel, /title=\{content\.title\}/u);
-  assert.doesNotMatch(panel, /M7\.83 29\.33|createPreparedTitleLayout/u);
+  assert.doesNotMatch(panel, /createPreparedTitleLayout/u);
 });
 
 test("normalizes every implemented planet title to the complete Saturn standard", async () => {

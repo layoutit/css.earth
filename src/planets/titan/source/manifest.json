@@ -1,0 +1,213 @@
+{
+  "schema": "csstitan-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "usgs-cassini-iss-2026-938nm",
+      "path": "observations/titan-iss-2026.png",
+      "expectedBytes": 73480116,
+      "expectedSha256": "5b17af4c230f5f2434497d77621dbe6503458ac15d54557a946c1e1ca9562cb2",
+      "origin": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f",
+      "credit": "NASA/JPL-Caltech/Space Science Institute/USGS; Weller et al. (2026)",
+      "license": "CC0 1.0 Universal",
+      "licenseEvidence": [
+        "https://www.usgs.gov/data/geodetically-improved-images-and-mosaics-titan-rigorous-photogrammetric-control-cassini",
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "acquisition": "Download the published lossless USGS PNG display export and verify its exact bytes.",
+      "redistribution": "CC0 prepared derivatives retain scientific credits; original is reacquired separately.",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Near-infrared",
+      "falseColor": false,
+      "width": 23048,
+      "height": 11524,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2575000,
+        "pixelResolutionMeters": 702,
+        "centerLongitude": 180,
+        "upperLeftMeters": [
+          -8089848,
+          4044924
+        ]
+      },
+      "coverage": "USGS ISIS display export: exact zero indicates Null and is masked; valid values starting at one remain, including dark lakes and dunes. A small southern gap receives a gray grid. Grid edges extend by less than half a source pixel beyond the poles/meridian.",
+      "photometry": "Published weighted, high-pass-sharpened ISS mosaic at 938 nm. Haze and cloud residuals, variable native resolution and image boundaries remain. This is a display-stretched infrared observation, not visible color or calibrated albedo."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire titan restores this pinned shared input.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire titan restores this pinned shared input.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "cassini-radar-midr-090",
+      "path": "radar/MIBEF00N090_T126S00_V01.IMG.gz",
+      "expectedBytes": 21088532,
+      "expectedSha256": "23adb939bf8076fae0fcdf98a7c910fcebe36ffd066cfb3c48cdb0324a8bd770",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
+      "credit": "NASA/JPL-Caltech/ASI; Cassini RADAR Team; USGS R. L. Kirk",
+      "license": "Public NASA mission data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/citation/policy.shtml"
+      ],
+      "acquisition": "Download the original gzip PDS3 MIDR image; preparation reads its attached label.",
+      "redistribution": "Prepared observation derivatives retain NASA/JPL-Caltech/ASI and USGS credits.",
+      "consumers": [
+        "radar"
+      ],
+      "width": 5760,
+      "height": 5760,
+      "projection": {
+        "type": "Equirectangular",
+        "referenceRadiusMeters": 2575000,
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001."
+    },
+    {
+      "id": "cassini-radar-midr-270",
+      "path": "radar/MIBEF00N270_T126S00_V01.IMG.gz",
+      "expectedBytes": 21369517,
+      "expectedSha256": "d10b9a8b48a7a7c9045b54986412caf03d84319649a436aaefb46c71f8ca2cc6",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz",
+      "credit": "NASA/JPL-Caltech/ASI; Cassini RADAR Team; USGS R. L. Kirk",
+      "license": "Public NASA mission data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/citation/policy.shtml"
+      ],
+      "acquisition": "Download the original gzip PDS3 MIDR image; preparation reads its attached label.",
+      "redistribution": "Prepared observation derivatives retain NASA/JPL-Caltech/ASI and USGS credits.",
+      "consumers": [
+        "radar"
+      ],
+      "width": 5760,
+      "height": 5760,
+      "projection": {
+        "type": "Equirectangular",
+        "referenceRadiusMeters": 2575000,
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001."
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "observations/titan-iss-2026.lbl",
+      "expectedBytes": 1709,
+      "expectedSha256": "77b1bf7c39ab7428b8e61b1dde12bbe9e9a9870ae644ed5ce03516680e2741f0",
+      "purpose": "Original USGS projection, spectral band and scientific processing metadata."
+    },
+    {
+      "path": "observations/titan-iss-2026.xml",
+      "expectedBytes": 23275,
+      "expectedSha256": "193072253161304133478829a0786391354ea5fdddea82a644b632037ba8868d",
+      "purpose": "Original USGS projection, spectral band and scientific processing metadata."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 848,
+      "expectedSha256": "a331430a197b0a24a9b5e466ce3031832a012284e46f94b27addd212bfb0fc59",
+      "purpose": "Authored preparation, shared source licensing or editorial content."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Authored preparation, shared source licensing or editorial content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Authored preparation, shared source licensing or editorial content."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2146,
+      "expectedSha256": "df0ff235ffbc4836bcdb60d3931f7bc34bb29284b206d9b14c7236bf727d5b0c",
+      "purpose": "Authored preparation, shared source licensing or editorial content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 2545,
+      "expectedSha256": "281c032a625f08b9e14edf141102b4638b0c73a80fc0112a5fd28854878663f8",
+      "purpose": "Authored preparation, shared source licensing or editorial content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1242,
+      "expectedSha256": "2a541c1c03ffab4df5f04302801b2f84525bd6a3b0526ae009a1381b8a4a9bf6",
+      "purpose": "Authored preparation, shared source licensing or editorial content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2559,
+      "expectedSha256": "368b4ae5dc17b4ad70c9f7ff47c572486d9f8ad23aba5c9d325700462b904296",
+      "purpose": "Authored preparation, shared source licensing or editorial content."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 6684,
+      "expectedSha256": "bcc1c3a1bd93a9779b74f04a7edc05d866a1632cd2cca1b3fe5bb97389f8f845",
+      "purpose": "Authored preparation, shared source licensing or editorial content."
+    },
+    {
+      "path": "radar/MIBEF00N090_T126S00_V01.LBL",
+      "expectedBytes": 8876,
+      "expectedSha256": "1ca5dc37c0fcb79d1178b66c7d91be9e832c0e718d59c2e0a1777e9ca0db9e0c",
+      "purpose": "Original detached PDS3 label; attached label is consumed during preparation."
+    },
+    {
+      "path": "radar/MIBEF00N270_T126S00_V01.LBL",
+      "expectedBytes": 8519,
+      "expectedSha256": "73e3a95aaad6e2fb7b3c180a57cfeba19378bb5d16788df7ee483dd9603230f8",
+      "purpose": "Original detached PDS3 label; attached label is consumed during preparation."
+    }
+  ]
+}
