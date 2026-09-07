@@ -7,14 +7,14 @@
     "NASAExposureOrWhiteBalanceEdited": false
   },
   "chosenDisplayColorMatrix": [
-    1.0,
-    0.0,
-    0.0,
-    0.0,
+    1,
+    0,
+    0,
+    0,
     0.951277424,
-    0.0,
-    0.0,
-    0.0,
+    0,
+    0,
+    0,
     0.709752511
   ],
   "retainedSaturation": 1,
@@ -123,14 +123,19 @@
     }
   },
   "chosenDisplayBrightness": {
-    "skyDisplayGain": 0.25,
-    "volumeInteriorGain": 0.2,
-    "referenceBandMean": 0.272453,
-    "gradedVolumeBandMean": 0.348833,
-    "displayedMeans": {
-      "sky": 0.06811325,
-      "volume": 0.0697666
+    "skyDisplayGain": 0.12,
+    "skyShadowFloor": {
+      "blackPoint": 0.04,
+      "fullSignal": 0.12
     },
-    "reason": "Lower both interior backgrounds while keeping their matched-band display luminance within about 3 percent. Colour fitting remains independent of brightness."
+    "volumeInteriorGain": 0.094,
+    "referenceBandMean": 0.272453,
+    "gradedVolumeBandMean": 0.348621,
+    "displayedMeans": {
+      "sky": 0.0326785,
+      "volume": 0.0327704
+    },
+    "reason": "Lower all interior background regions, with extra suppression of faint NASA image grain. The matched-band display means remain within about 1 percent before final image quantization. Colour fitting remains independent of brightness.",
+    "measurement": "Original NASA preview at 512x256; shadow smoothstep applied per pixel before the original paired Galactic-band patch average. Volume uses actual re-encoded central-ray composite. Quantization and native wide-field differences remain."
   }
 }

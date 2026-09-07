@@ -87,14 +87,21 @@ export function rotationFromMatrix3d(matrix: Matrix3dLike): Matrix3 {
 // True when the ray from the eye to `eye` (eye-space point) enters the sphere
 // at `center` before reaching the point.
 export function rayHitsSphereBefore(eye:Vector3, center:Vector3, radius:number) {
-  const a = dot(eye, eye);
-  if (!(a > 0)) return false;
-  const b = dot(eye, center);
-  const c = dot(center, center) - radius * radius;
-  const discriminant = b * b - a * c;
-  if (discriminant < 0) return false;
-  const t = (b - Math.sqrt(discriminant)) / a;
-  return t > 0 && t < 1;
+  const distance = Math.hypot(...eye);
+  if (!(distance > 0)) return false;
+  const direction: Vector3 = [eye[0] / distance, eye[1] / distance, eye[2] / distance];
+  // Use the nearer ray endpoint: a nearby occluder needs eye-relative distances,
+  // while distant neighbouring bodies need target-relative distances. Avoid
+  // subtracting eye-distance fourth powers to recover a planet-radius signal.
+  const offset: Vector3 = [center[0] - eye[0], center[1] - eye[1], center[2] - eye[2]];
+  const fromTarget = Math.hypot(...offset) < Math.hypot(...center);
+  const relative = fromTarget ? offset : center;
+  const along = dot(relative, direction);
+  const perpendicular: Vector3 = [relative[0] - direction[0] * along, relative[1] - direction[1] * along, relative[2] - direction[2] * along];
+  const halfChordSquared = radius * radius - dot(perpendicular, perpendicular);
+  if (halfChordSquared < 0) return false;
+  const entry = along - Math.sqrt(halfChordSquared);
+  return fromTarget ? entry < 0 && entry > -distance : entry > 0 && entry < distance;
 }
 
 // Cuts a segment into the pieces the sphere does not hide, by sampling and

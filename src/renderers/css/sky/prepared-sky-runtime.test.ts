@@ -12,12 +12,14 @@ import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js
 import { logarithmicFade } from '../universe/prepared-world-context.js';
 
 const starPublish = vi.hoisted(() => vi.fn());
+const spatialPublish = vi.hoisted(() => vi.fn());
+const foregroundRects = vi.hoisted(() => [{ left: 100, top: 100, right: 150, bottom: 114 }]);
 // These unrelated layers keep their normal publication contract; the test mounts
 // the actual universe, sky and volume compositor without building a star catalogue.
-vi.mock('../stars/prepared-point-field-runtime.js', () => ({ mountPreparedCssPointField: () => ({ publish: starPublish, setOccluder() {}, destroy() {} }) }));
+vi.mock('../stars/prepared-point-field-runtime.js', () => ({ mountPreparedCssPointField: () => ({ publish: starPublish, inspect: () => ({}), setOccluder() {}, destroy() {} }) }));
 vi.mock('../universe/world-context-point-source.js', () => ({ mountWorldContextPointSource: () => null }));
 vi.mock('../universe/prepared-world-context.js', async importOriginal => ({ ...await importOriginal<typeof import('../universe/prepared-world-context.js')>(),
-  mountPreparedWorldContext: () => ({ publish() {}, selectObject() {}, destroy() {} }) }));
+  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], selectObject() {}, backgroundExclusionRects: () => foregroundRects, destroy() {} }) }));
 
 const bases = [
   ['px', [1, 0, 0], [0, -1, 0], [0, 0, 1]], ['nx', [-1, 0, 0], [0, 1, 0], [0, 0, 1]],
@@ -34,16 +36,23 @@ const world = (positionM: readonly [number, number, number] = [0, 0, 0], orienta
 const viewport = { focalPixels: 600, principalOffsetPixels: [17, -11] } as const;
 class FakeElement {
   readonly children: FakeElement[] = []; readonly style: Record<string, string> = {}; readonly dataset: Record<string, string> = {};
-  parentNode: FakeElement | null = null; className = '';
+  parentNode: FakeElement | null = null; className = ''; textContent = ''; clientWidth = 800; clientHeight = 600;
   constructor(readonly ownerDocument: FakeDocument) { Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } }); }
   get firstChild(): FakeElement | null { return this.children[0] ?? null; }
+  get offsetWidth(): number { return this.textContent.length * 7; }
+  get offsetHeight(): number { return 14; }
   setAttribute(name: string, value: string): void { this.dataset[name.slice(5).replace(/-([a-z])/gu, (_, letter: string) => letter.toUpperCase())] = value; }
   append(child: FakeElement): void { this.appendChild(child); }
   appendChild(child: FakeElement): void { this.insertBefore(child, null); }
   insertBefore(child: FakeElement, before: FakeElement | null): void { child.remove(); child.parentNode = this; this.children.splice(before ? this.children.indexOf(before) : this.children.length, 0, child); }
   remove(): void { if (this.parentNode) this.parentNode.children.splice(this.parentNode.children.indexOf(this), 1); this.parentNode = null; }
 }
-class FakeDocument { count = 0; createElement(): FakeElement { this.count++; return new FakeElement(this); } }
+class FakeWindow {
+  next = 0; pending = new Map<number, (time: number) => void>(); performance = { now: () => 0 };
+  requestAnimationFrame = (callback: (time: number) => void) => { const id = ++this.next; this.pending.set(id, callback); return id; };
+  cancelAnimationFrame = (id: number) => { this.pending.delete(id); };
+}
+class FakeDocument { count = 0; defaultView = new FakeWindow(); createElement(): FakeElement { this.count++; return new FakeElement(this); } }
 afterEach(() => vi.unstubAllGlobals());
 
 test('retains exactly six prepared images and changes only shared camera presentation during travel and rotation', () => {
@@ -143,11 +152,13 @@ test.each([true, false])('shared universe retains independent sky crossfade and 
     expect(skyRoot.style.visibility).toBe(expected < 1 ? 'visible' : 'hidden');
     expect(skyRoot.style.opacity).toBeUndefined();
     expect(Number(skyRoot.dataset.skyContribution)).toBeCloseTo(1 - expected, 12);
-    expect(starPublish).toHaveBeenLastCalledWith(camera, viewport, 1 - logarithmicFade(distance, context.volume.fadeStartDistanceM, context.volume.fullDistanceM));
+    expect(starPublish).toHaveBeenLastCalledWith(camera, viewport, 1 - logarithmicFade(distance, context.volume.fadeStartDistanceM, context.volume.fullDistanceM), mounted.inspect().foregroundLabelExclusions);
+    expect(starPublish.mock.lastCall![3]).toEqual(expect.arrayContaining(foregroundRects));
+    expect(spatialPublish.mock.invocationCallOrder.at(-1)).toBeLessThan(starPublish.mock.invocationCallOrder.at(-1)!);
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport);
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected, 12);
   }
   expect(document.count).toBe(count); expect(root.children).toEqual(originalNodes);
-  mounted.destroy(); expect(stage.children).toEqual([detail]);
+  mounted.destroy(); expect(stage.children).toEqual([detail]); expect(document.defaultView.pending.size).toBe(0);
 });

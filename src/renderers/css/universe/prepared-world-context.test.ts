@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test } from 'vitest';
 import { mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
+import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];
@@ -9,9 +10,11 @@ class FakeElement extends EventTarget {
   readonly dataset: Record<string, string> = {};
   parentNode: FakeElement | null = null;
   className = ''; textContent = ''; hidden = false; clientWidth = 0; clientHeight = 0;
+  measurements = 0;
   constructor(readonly ownerDocument: FakeDocument, readonly tagName: string) { super(); }
   setAttribute(): void {}
   removeAttribute(): void {}
+  getBoundingClientRect() { this.measurements++; return { width: this.textContent.length * 7, height: 14 }; }
   append(...entries: FakeElement[]): void { for (const entry of entries) this.insertBefore(entry, null); }
   appendChild(entry: FakeElement): FakeElement { this.append(entry); return entry; }
   insertBefore(entry: FakeElement, before: FakeElement | null): void {
@@ -21,7 +24,20 @@ class FakeElement extends EventTarget {
   }
   remove(): void { if (this.parentNode) { const index = this.parentNode.children.indexOf(this); if (index >= 0) this.parentNode.children.splice(index, 1); this.parentNode = null; } }
 }
-class FakeDocument { createElement(tagName: string): FakeElement { return new FakeElement(this, tagName); } }
+class Clock {
+  now = 0; next = 0; frames = new Map<number, (time: number) => void>(); timers = new Map<number, { at: number; callback: () => void }>();
+  performance = { now: () => this.now };
+  requestAnimationFrame = (callback: (time: number) => void) => { const id = ++this.next; this.frames.set(id, callback); return id; };
+  cancelAnimationFrame = (id: number) => { this.frames.delete(id); };
+  setTimeout = (callback: () => void, milliseconds: number) => { const id = ++this.next; this.timers.set(id, { at: this.now + milliseconds, callback }); return id; };
+  clearTimeout = (id: number) => { this.timers.delete(id); };
+  advance(milliseconds: number) {
+    this.now += milliseconds;
+    const frames = [...this.frames.values()]; this.frames.clear(); for (const callback of frames) callback(this.now);
+    for (const [id, timer] of [...this.timers]) if (timer.at <= this.now) { this.timers.delete(id); timer.callback(); }
+  }
+}
+class FakeDocument { defaultView = new Clock(); createElement(tagName: string): FakeElement { return new FakeElement(this, tagName); } }
 
 const mounted = new WeakMap<FakeElement, ReturnType<typeof mountPreparedWorldContext>>();
 const sprite = { url: '/marker.png', index: 0, count: 1, size: 16 };
@@ -222,5 +238,183 @@ test('selection transfers the detail handoff to the destination while retaining 
   expect(() => layer.selectObject('unprepared')).toThrow('unavailable');
   layer.selectObject('sun'); layer.publish(camera, viewport);
   expect(marker.style.visibility).toBe('');
+  layer.destroy();
+});
+
+test('one retained focus label and locator survive system retirement at their physical galaxy position', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const base = plan(1);
+  const context = parsePreparedWorldContext({ ...base,
+    focus: { ...base.focus, id: 'anchor', name: 'Anchor' },
+    bodies: base.bodies.map(body => ({ ...body, orbit: { ...body.orbit, centerBodyId: 'anchor' } })),
+    system: { fadeOutStartDistanceM: 1000, hiddenDistanceM: 10000 } });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { anchor: sprite, mercury: sprite, venus: sprite } });
+  const root = layer.root as unknown as FakeElement;
+  const focus = layer.inspect().find(body => body.id === 'anchor')!;
+  const label = focus.label as unknown as FakeElement, locator = focus.locator as unknown as FakeElement;
+  const retained = all(host);
+  expect(label.textContent).toBe('Anchor');
+  expect(label.parentNode).not.toBe(root);
+  expect(all(host).filter(node => node.dataset.contextLabel === 'anchor')).toEqual([label]);
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
+  const camera = (distance: number) => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } });
+  for (const [distance, locatorOpacity] of [[50, 0], [Math.sqrt(1000 * 10000), .5], [1e21, 1], [50, 0]]) {
+    layer.publish(camera(distance!), viewport);
+    document.defaultView.advance(200);
+    expect(Number(locator.style.opacity)).toBeCloseTo(locatorOpacity!, 12);
+    expect(locator.style.visibility).toBe(locatorOpacity! > 0 ? '' : 'hidden');
+    expect(label.style.visibility).toBe(distance! > 1000 ? '' : 'hidden');
+    expect(all(host)).toEqual(retained);
+  }
+  const distant = camera(1e21);
+  distant.pose.positionM = [-1e20, 5e19, 1e21];
+  layer.publish(distant, viewport);
+  document.defaultView.advance(200);
+  expect(root.hidden).toBe(true);
+  expect(label.parentNode!.hidden).toBe(false);
+  expect(label.style.visibility).toBe(''); expect(label.style.opacity).toBe('1');
+  expect(locator.style.visibility).toBe(''); expect(locator.style.opacity).toBe('1');
+  expect(locator.style.transform).toBe('translate(67px,-43px)');
+  expect(label.style.transform).toBe('translate(79px,-47px)');
+  expect(locator.dataset.objectNavigate).toBe('anchor');
+  const selections: string[] = [];
+  host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
+  label.dispatchEvent(new Event('click')); expect(selections).toEqual([]);
+  label.dispatchEvent(new Event('dblclick')); expect(selections).toEqual(['anchor']);
+  // Roll moves the physical projected location; a reversed view must cull it.
+  distant.pose.orientationXyzw = [0, 0, Math.SQRT1_2, Math.SQRT1_2];
+  layer.publish(distant, viewport);
+  expect(locator.style.transform).not.toBe('translate(67px,-43px)');
+  for (const pose of [
+    { ...camera(1e21).pose, orientationXyzw: [0, 1, 0, 0] },
+    { ...camera(1e21).pose, positionM: [-2e21, 0, 1e21] },
+  ]) {
+    layer.publish({ ...distant, pose }, viewport);
+    expect(locator.style.visibility).toBe('hidden'); expect(label.style.visibility).toBe('hidden');
+    expect(locator.style.pointerEvents).toBe('none'); expect(label.style.pointerEvents).toBe('none');
+    label.dispatchEvent(new Event('dblclick')); expect(selections).toEqual(['anchor']);
+  }
+  layer.destroy(); expect(host.children).toEqual([before]);
+  label.dispatchEvent(new Event('dblclick')); expect(selections).toEqual(['anchor']);
+  expect(label.measurements).toBe(1, 'camera publication must never remeasure label layout');
+});
+
+test('satellite labels wait for a resolved parent while markers remain visible and accepted text blocks background labels', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const base = plan(1), parent = { ...base.bodies[0]!, radiusM: 5 }, satellite = base.bodies[1]!;
+  const positionM = [250, 0, 0];
+  const context = parsePreparedWorldContext({ ...base, system: { fadeOutStartDistanceM: 1e10, hiddenDistanceM: 1e11 },
+    bodies: [parent, { ...satellite, positionM, orbit: { ...satellite.orbit, centerBodyId: parent.id,
+      centerPositionM: parent.positionM, verticesM: Array.from({ length: 8 }, () => positionM) } }] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const child = layer.inspect().find(body => body.id === satellite.id)!;
+  const marker = child.marker as unknown as FakeElement, label = child.label as unknown as FakeElement;
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
+  const camera = (z: number) => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+    pose: { positionM: [100, 0, z], orientationXyzw: [0, 0, 0, 1] } });
+  layer.publish(camera(1000), viewport);
+  document.defaultView.advance(200);
+  expect(marker.style.visibility).toBe(''); expect(label.style.visibility).toBe('hidden');
+  expect(label.style.pointerEvents).toBe('none');
+  layer.publish(camera(180), viewport);
+  expect(marker.style.visibility).toBe(''); expect(label.style.visibility).toBe('');
+  expect(label.dataset.objectNavigateActivation).toBe('dblclick'); expect(label.style.pointerEvents).toBe('auto');
+  const left = 400 * 150 / 180 + 8;
+  expect(layer.labelExclusionRects()).toContainEqual({ left, top: -8, right: left + 37, bottom: 8 });
+  layer.publish(camera(1000), viewport);
+  document.defaultView.advance(200);
+  expect(marker.style.visibility).toBe(''); expect(label.style.visibility).toBe('hidden');
+  expect(label.style.pointerEvents).toBe('none'); expect(label.measurements).toBe(1);
+  layer.destroy(); expect(layer.labelExclusionRects()).toEqual([]);
+});
+
+test('a background star label inside the orbit footprint is excluded even outside every accepted body label', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const camera = { referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } };
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
+  layer.publish(camera, viewport);
+  const backgroundText = { left: -10, top: -30, right: 10, bottom: -20 };
+  expect(layer.labelExclusionRects().every(rect => !labelRectsOverlap(backgroundText, rect))).toBe(true);
+  expect(layer.backgroundExclusionRects().some(rect => labelRectsOverlap(backgroundText, rect))).toBe(true);
+  expect(layer.inspect().find(body => body.id === 'sun')!.label.style.visibility).toBe('');
+  // Close orbits clip the viewport; they must not claim the entire background.
+  layer.publish({ ...camera, pose: { ...camera.pose, positionM: [0, 0, 50] } }, viewport);
+  expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());
+  layer.destroy();
+});
+
+test('solar text fades through collision and distance changes, reverses continuously, and disables fading targets immediately', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const context = parsePreparedWorldContext({ ...plan(1), system: { fadeOutStartDistanceM: 1e10, hiddenDistanceM: 1e11 } });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const label = layer.inspect().find(body => body.id === 'mercury')!.label as unknown as FakeElement;
+  const nodes = all(host), clock = document.defaultView;
+  const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  publish(1000); expect(label.style.opacity).toBe('0');
+  clock.advance(100); expect(Number(label.style.opacity)).toBeCloseTo(.5, 12);
+  clock.advance(100); expect(label.style.opacity).toBe('1');
+  publish(2000); // Mercury's text now overlaps the higher-priority Sun label.
+  expect(label.style.visibility).toBe(''); expect(label.style.opacity).toBe('1');
+  expect(label.style.pointerEvents).toBe('none');
+  clock.advance(100); expect(Number(label.style.opacity)).toBeCloseTo(.5, 12);
+  publish(1000); expect(Number(label.style.opacity)).toBeCloseTo(.5, 12);
+  expect(clock.timers.size).toBe(0);
+  clock.advance(100); expect(Number(label.style.opacity)).toBeCloseTo(.75, 12);
+  clock.advance(100); expect(label.style.opacity).toBe('1');
+  publish(2000); clock.advance(200);
+  expect(label.style.visibility).toBe('hidden'); expect(label.style.opacity).toBe('0');
+  publish(1000); clock.advance(200); publish(1e21);
+  expect((layer.root as unknown as FakeElement).hidden).toBe(true);
+  expect(label.parentNode!.hidden).toBe(false); expect(label.style.visibility).toBe('');
+  clock.advance(100); expect(Number(label.style.opacity)).toBeCloseTo(.5, 12);
+  clock.advance(100); expect(label.style.visibility).toBe('hidden');
+  publish(1000); clock.advance(100); publish(2000);
+  expect(clock.timers.size).toBeGreaterThan(0); expect(clock.frames.size).toBeGreaterThan(0);
+  expect(all(host)).toEqual(nodes);
+  layer.destroy(); expect(clock.frames.size).toBe(0); expect(clock.timers.size).toBe(0);
+});
+
+test('the Sun locator stays visible across galactic observer rotations while resolved occluders still hide it', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const base = plan(1), distance = 3.085677581491367e19;
+  const context = parsePreparedWorldContext({ ...base,
+    focus: { ...base.focus, radiusM: 6.957e8 }, frame: { ...base.frame, bodyRadiusM: 6.957e8 },
+    bodies: [{ id: 'uranus', name: 'Uranus', positionM: [3e12, 0, 0], radiusM: 2.5e7, color: '#99bbcc' }],
+    system: { fadeOutStartDistanceM: 1e14, hiddenDistanceM: 1e15 } });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, uranus: sprite } });
+  layer.selectObject('uranus');
+  const focus = layer.inspect().find(body => body.id === 'sun')!, label = focus.label as unknown as FakeElement;
+  const locator = focus.locator as unknown as FakeElement;
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
+  for (let degrees = 0; degrees < 360; degrees++) {
+    const angle = degrees * Math.PI / 180;
+    layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: {
+      positionM: [distance * Math.sin(angle), 0, distance * Math.cos(angle)],
+      orientationXyzw: [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)],
+    } }, viewport);
+    document.defaultView.advance(200);
+    expect(label.style.visibility, `${degrees} degrees`).toBe(''); expect(label.style.opacity).toBe('1');
+    expect(locator.style.visibility, `${degrees} degrees`).toBe(''); expect(locator.style.opacity).toBe('1');
+  }
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: {
+    positionM: [3e12 + 1e8, 0, 0], orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2],
+  } }, viewport);
+  expect(label.style.pointerEvents).toBe('none');
+  document.defaultView.advance(200);
+  expect(label.style.visibility).toBe('hidden'); expect(label.style.opacity).toBe('0');
   layer.destroy();
 });

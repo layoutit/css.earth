@@ -34,10 +34,14 @@
     "exposure": 4.5,
     "transfer": "linear-to-srgb",
     "webpQuality": 90,
-    "displayGain": 0.25
+    "displayGain": 0.12,
+    "shadowFloor": {
+      "blackPoint": 0.04,
+      "fullSignal": 0.12
+    }
   },
   "provenance": {
     "path": "provenance.json",
-    "sha256": "1b17c185b6682402c9e6753943db9361cc4a2bcf476b6fa5b46fb7c2a09a0428"
+    "sha256": "471ecfd698e4df8fb1a27ef17a3eaad1f370b667063cbac120daa7a7eba804ce"
   }
 }

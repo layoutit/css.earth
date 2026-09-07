@@ -40,6 +40,7 @@ jobs:
       - name: Test shared environment rendering and camera
         run: >-
           pnpm test:renderer
-          volume/ sky/ shell/ stars/ universe/
+          volume/ sky/ shell/ stars/ labels/ universe/
+          solar-system/heliocentric-geometry
           navigation/world-camera
           navigation/saved-world-camera

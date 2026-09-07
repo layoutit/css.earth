@@ -11,6 +11,7 @@ import type { PreparedAssets } from '../rendering/prepared-residency.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
+import { mountEnvironmentLabels } from './environment-labels.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [] }: {
@@ -68,13 +69,14 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
       let pointField: ReturnType<typeof mountPreparedCssPointField> | null = null;
       let focusPoint: ReturnType<typeof mountWorldContextPointSource> = null;
+      let environmentLabels: ReturnType<typeof mountEnvironmentLabels> | null = null;
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       let selected = plan.focus;
       let destroyed = false;
       const destroy = () => {
         if (destroyed) return;
         destroyed = true;
-        volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); pointField?.destroy(); focusPoint?.destroy();
+        volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); pointField?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
         for (const shell of shellLayers) shell.destroy();
         root.remove();
         delete stage.dataset.contextScale;
@@ -86,9 +88,11 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         spatial = mountPreparedWorldContext({ host: root, before: end, plan, sprites });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource });
+        environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,
           inspect() {
-            return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect() });
+            return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(),
+              foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });
           },
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
             const body = [plan.focus, ...plan.bodies].find(body => body.id === id);
@@ -120,9 +124,12 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             skyLayer?.publish(world, viewport, volumeOpacity < 1);
             if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - volumeOpacity);
             if (volumeOpacity > 0) volumeLayer!.publish({ world, viewport });
-            pointField!.publish(world, viewport, 1 - fade);
             for (const shell of shellLayers) shell.publish(world, viewport);
             spatial!.publish(world, viewport);
+            const foregroundRects = spatial!.backgroundExclusionRects();
+            const environmentRects = environmentLabels!.publish({ world, viewport,
+              shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects });
+            pointField!.publish(world, viewport, 1 - fade, [...foregroundRects, ...environmentRects]);
             focusPoint?.publish(world, viewport, { opacity: 1 - fade, selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });
             stage.dataset.contextScale = fade > 0 ? 'galactic' : stellarFade > 0 ? 'stellar' : Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis])) > selected.radiusM * 100 ? 'system' : 'object';
