@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { createHash } from "node:crypto";
 import { chromium } from "playwright";
 
-const root=resolve(import.meta.dirname,"../../../.."),base=process.argv[2]??"http://127.0.0.1:4228";
+const root=resolve(import.meta.dirname,"../../../.."),base=(process.argv.slice(2).find(argument=>/^https?:\/\//u.test(argument))??"http://127.0.0.1:4210").replace(/\/$/u,"");
 const output=resolve(root,`output/playwright/global-delivery-${Date.now()}`);
 await mkdir(output,{recursive:true});
 const report={base,output,qualification:"Unchanged built application bytes served by the harness on the production application origin; geometry and imagery fetched from their real public endpoints. The live application is not deployed by this test.",runs:[]};

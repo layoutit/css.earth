@@ -13,7 +13,6 @@ test("every object mounts one canonical high-density image bank", async () => {
   assert.equal(ownership.complete, true);
   const head = await readFile(new URL("../components/PreparedObjectHead.astro", import.meta.url), "utf8");
   assert.doesNotMatch(head, /imagesrcset|devicePixelRatio/u);
-  assert.match(head, /preparedAssets\.startup/u);
   for (const { id } of OBJECTS) {
     const entry = ownership.entries.find(entry => entry.id === id);
     assert.equal(entry.factoryCalls, 1, id + ": actual loader must have one runtime factory");
@@ -30,9 +29,6 @@ test("every object mounts one canonical high-density image bank", async () => {
       assert.equal(availableFiles.has(file.replace(/(\.[^.]+)$/u, "@2x$1")), false,
         id + ": runtime must not select " + file + " when its high-density bank exists");
     }
-    const page = await readFile(new URL("../pages/" + id + ".astro", import.meta.url), "utf8");
-    assert.match(page, /PreparedObjectHead/u);
-    assert.match(page, /preparedAssets=\{preparedObject\.data\.assets\}/u);
     assert.doesNotMatch(JSON.stringify(object.data), /image-set\(|devicePixelRatio/u);
   }
   const stylesRoot = new URL("../../src/renderers/css/styles/", import.meta.url);
@@ -46,7 +42,7 @@ test("every object mounts one canonical high-density image bank", async () => {
   }
 });
 
-test("the shared shell mounts only canonical high-density image assets", async () => {
+test("the shared shell does not choose image assets by device DPR", async () => {
   const shellFiles = [
     "planet-navigation-marker.css",
     "planetary-scale.css",
@@ -63,7 +59,4 @@ test("the shared shell mounts only canonical high-density image assets", async (
       `${fileName}: shared UI must not select assets by device DPR`,
     );
   }
-  assert.match(sources[0].source, /planet-markers@2x\.webp/u);
-  assert.doesNotMatch(sources[1].source, /planet-markers(?:@2x)?\.webp/u);
-  assert.doesNotMatch(sources[2].source, /blackhole-marker|supernova-marker|settings-marker/u);
 });

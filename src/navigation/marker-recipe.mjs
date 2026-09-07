@@ -7,6 +7,7 @@ import sharp from "sharp";
 const SHA256 = /^[0-9a-f]{64}$/u;
 const PLANET_ID = /^[a-z][a-z0-9-]*$/u;
 const OPERATION_TYPES = new Set([
+  "linear",
   "rotate",
   "trim",
   "extract",
@@ -72,7 +73,8 @@ export async function renderMarker(descriptor, { sourcePath, tileSize }) {
   }
   let image = sharp(await validateMarkerSourceBytes(descriptor.source, sourcePath));
   for (const operation of descriptor.operations) {
-    if (operation.type === "rotate") image = image.rotate();
+    if (operation.type === "linear") image = image.linear(operation.multiplier, operation.offset);
+    else if (operation.type === "rotate") image = image.rotate();
     else if (operation.type === "trim") {
       image = image.trim({ threshold: operation.threshold });
     } else if (operation.type === "extract") {
@@ -108,6 +110,9 @@ function validateOperation(operation) {
   if (!operation || typeof operation !== "object" || Array.isArray(operation) ||
       !OPERATION_TYPES.has(operation.type)) {
     throw new TypeError("Navigation marker operation is invalid.");
+  }
+  if (operation.type === "linear" && (!Number.isFinite(operation.multiplier) || operation.multiplier <= 0 || !Number.isFinite(operation.offset))) {
+    throw new TypeError("Navigation marker display stretch is invalid.");
   }
   if (operation.type === "trim" &&
       (!Number.isFinite(operation.threshold) || operation.threshold < 0)) {

@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "276efc7f67dba29011c7316cb4fa1dc2a83e3f0444873a5cde37c8ff423eb77f"
+  },
   "id": "moon",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -125,9 +128,6 @@
       "bodyRadiusM": 1737400
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "429e2f71c5b9808634762487753702ae80a5e3e93a73541648cfc868625ed255"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

@@ -40,13 +40,31 @@ export function parseTerrestrialProfile(value) {
       value.lighting.logicalSize !== value.geometry.radius * 2 || value.presentation?.defaultLens !== value.raster.observations[0]?.id) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
+  if (value.raster.surfaceQuality !== undefined &&
+      (!Number.isInteger(value.raster.surfaceQuality) || value.raster.surfaceQuality < 1 || value.raster.surfaceQuality > 100)) {
+    throw new TypeError('Surface WebP quality must be an integer from 1 to 100.');
+  }
   for (const lens of value.raster.scientific ?? []) {
+    for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
+      if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
+          !grid || !Number.isSafeInteger(grid.width) || grid.width <= 0 || !Number.isSafeInteger(grid.height) || grid.height <= 0 ||
+          ![undefined, 'equirectangular', 'polar-stereographic'].includes(grid.projection) ||
+          (grid.projection === 'polar-stereographic' && ![-90, 90].includes(grid.poleLatitude)) ||
+          (grid.latitudeRange && (grid.latitudeRange.length !== 2 || !grid.latitudeRange.every(Number.isFinite) ||
+            grid.latitudeRange[0] < -90 || grid.latitudeRange[1] > 90 || grid.latitudeRange[0] >= grid.latitudeRange[1]))) {
+        throw new TypeError('Invalid scientific source projection or extent.');
+      }
+    }
     if (lens.format !== 'geotiff' || !lens.grid || !Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) ||
         lens.grid.width <= 0 || lens.grid.height <= 0 || !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
+        (lens.sampling !== undefined && !['nearest', 'bilinear'].includes(lens.sampling)) ||
+        (lens.valueTransform && (!Number.isFinite(lens.valueTransform.scale) || lens.valueTransform.scale <= 0 ||
+          !Number.isFinite(lens.valueTransform.offset))) ||
         (lens.relief && (!(lens.relief.referenceRadiusMeters > 0) || !Array.isArray(lens.relief.lightDirection) ||
           lens.relief.lightDirection.length !== 3 || lens.relief.lightDirection.some(value => !Number.isFinite(value)) ||
-          Math.abs(Math.hypot(...lens.relief.lightDirection) - 1) > 1e-12 || lens.relief.ambient < 0 || lens.relief.ambient >= 1))) {
+          Math.abs(Math.hypot(...lens.relief.lightDirection) - 1) > 1e-12 || lens.relief.ambient < 0 || lens.relief.ambient >= 1 ||
+          (lens.relief.heightToMeters !== undefined && (!Number.isFinite(lens.relief.heightToMeters) || lens.relief.heightToMeters <= 0))))) {
       throw new TypeError('Invalid scientific surface grid or relief profile.');
     }
   }
@@ -55,12 +73,22 @@ export function parseTerrestrialProfile(value) {
     const policy = observation.validity;
     if (!/^[a-z][a-z0-9-]*$/.test(observation.id) || observationIds.has(observation.id) ||
         (observation.monochromeBase && !observationIds.has(observation.monochromeBase)) ||
-        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha'].includes(policy?.kind)) {
+        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome'].includes(policy?.kind)) {
       throw new TypeError('Invalid observation identity, validity policy, or fallback ordering.');
     }
-    if (policy.kind.startsWith('geotiff-') && (!Number.isFinite(policy.noData) ||
+    const byteImage = ['image-monochrome-no-data', 'image-rgb-no-data'].includes(policy.kind);
+    if ((policy.kind.startsWith('geotiff-') || byteImage) && (!(byteImage && policy.noData === null) && !Number.isFinite(policy.noData) ||
         !Number.isFinite(policy.centerLongitude) || policy.centerLongitude < 0 || policy.centerLongitude > 360)) {
       throw new TypeError('Invalid observed GeoTIFF no-data or coordinate policy.');
+    }
+    if (byteImage && policy.noData !== null && (!Number.isInteger(policy.noData) || policy.noData < 0 || policy.noData > 255)) {
+      throw new TypeError('Byte observation no-data must be an exact byte value.');
+    }
+    if (policy.kind === 'geotiff-float-monochrome' &&
+        (!Array.isArray(policy.displayRange) || policy.displayRange.length !== 2 || !policy.displayRange.every(Number.isFinite) ||
+         !(policy.displayRange[0] < policy.displayRange[1]) || !(policy.specialValueMagnitude > 0) ||
+         !(policy.resolutionMeters > 0) || !Array.isArray(policy.origin) || policy.origin.length !== 2 || !policy.origin.every(Number.isFinite))) {
+      throw new TypeError('Invalid floating-point observation grid or display stretch.');
     }
     if (policy.kind === 'geotiff-rgb-alpha' && (
         !['rgb', 'monochrome'].includes(policy.channels) || !['all-channels', 'any-channel'].includes(policy.zeroValidity) ||
@@ -72,6 +100,13 @@ export function parseTerrestrialProfile(value) {
       throw new TypeError('Invalid observed channel or geographic withholding policy.');
     }
     observationIds.add(observation.id);
+  }
+  for (const mosaic of value.raster.mosaics ?? []) {
+    if (mosaic.format !== 'pds3-byte-equirectangular' || !/^[a-z][a-z0-9-]*$/.test(mosaic.id) ||
+        observationIds.has(mosaic.id) || !/^[a-z][a-z0-9-]*$/.test(mosaic.consumer)) {
+      throw new TypeError('Invalid PDS byte mosaic identity or format.');
+    }
+    observationIds.add(mosaic.id);
   }
   for (const lens of value.raster.observedColors ?? []) {
     const p = lens.profile;

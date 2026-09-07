@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { mkdir, mkdtemp, copyFile, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, copyFile, cp, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
@@ -56,6 +56,8 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write });
   if (write || !result.definition) return result;
+  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-surface-minimaps.mjs')).href);
+  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
   const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
   return Object.freeze({ ...result, definition: prepared.definition, scene });
@@ -81,6 +83,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     for (const entry of outputs) {
       await copyFile(entry.path, resolve(outputDirectory, entry.filename));
     }
+    await cp(resolve(stagedData, 'minimaps'), resolve(outputDirectory, 'minimaps'), { recursive: true })
+      .catch((error: NodeJS.ErrnoException) => { if (error.code !== 'ENOENT') throw error; });
     await copyFile(resolve(stagedData, 'runtime-assets.json'), resolve(objectDirectory, 'runtime-assets.json'));
     const scene = result.scene as Record<string, unknown> | undefined;
     if (scene?.worldFrame !== undefined) {
@@ -129,7 +133,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
       config: required(sources, 'terrestrial').value, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
-      values: [prepared.raster, prepared.celestial, prepared.scene, prepared.definition, prepared.content] });
+      allowPreparationArtifacts: true,
+      values: [prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
     return Object.freeze({ descriptor, sources, ...prepared });
   }

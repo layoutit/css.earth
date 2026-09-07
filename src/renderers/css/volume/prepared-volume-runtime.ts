@@ -20,10 +20,10 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
     if (!stack) throw new TypeError(`Prepared CSS volume has no ${axis} stack.`);
-    const root = element(document, 'div', { 'data-volume-id': payload.id, 'data-volume-axis': axis });
-    const camera = element(document, 'div', { 'data-volume-camera': axis });
-    const scene = element(document, 'div', { 'data-volume-scene': axis });
-    const mesh = element(document, 'div', { 'data-volume-mesh': axis });
+    const root = document.createElement('div');
+    const camera = document.createElement('div');
+    const scene = document.createElement('div');
+    const mesh = document.createElement('div');
     root.className = 'css-volume-projection';
     camera.className = 'css-volume-camera';
     scene.className = 'css-volume-scene';
@@ -75,7 +75,6 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       // Integer gains are exact; the fractional step linearly approximates alpha.
       root.style.setProperty('--volume-optical-copy-1', String(Math.min(1, Math.max(0, opticalGain - 1))));
       root.style.setProperty('--volume-optical-copy-2', String(Math.min(1, Math.max(0, opticalGain - 2))));
-      root.dataset.volumeOpticalGain = String(opticalGain);
     }
   };
   return Object.freeze({ publish, roots: Object.freeze(roots), destroy() {
@@ -109,11 +108,7 @@ export function preparedVolumeCameraTransform(publication: VolumeCameraPublicati
 
 function createLeaf(document: Document, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], textureUrl: string, copy: number): HTMLElement {
   const node = document.createElement('s');
-  if (copy === 0) node.dataset.volumeSlice = leaf.id;
-  else {
-    node.dataset.volumeSliceCopy = `${leaf.id}:${copy}`;
-    node.style.opacity = `var(--volume-optical-copy-${copy}, 0)`;
-  }
+  if (copy > 0) node.style.opacity = `var(--volume-optical-copy-${copy}, 0)`;
   node.style.width = leaf.style.width;
   node.style.height = leaf.style.height;
   node.style.transform = leaf.style.transform;
@@ -153,11 +148,6 @@ function axisWeights(camera: VolumeLocalCamera): readonly { weight: number; opti
   });
 }
 
-function element(document: Document, tag: string, data: Record<string, string>): HTMLElement {
-  const result = document.createElement(tag);
-  for (const [key, value] of Object.entries(data)) result.setAttribute(key, value);
-  return result;
-}
 function escapeUrl(value: string): string { return value.replace(/["\\\n\r]/gu, character => `\\${character}`); }
 function format(value: number): string { return Math.abs(value) < 1e-9 ? '0' : Number(value.toFixed(6)).toString(); }
 function dot(matrix: readonly number[], offset: number, point: VolumeVector): number {

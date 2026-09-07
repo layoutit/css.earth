@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { wheelWithReceipt } from './wheel-zoom-distance.mjs';
+import preparedVolume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 
 const origin = process.argv[2] ?? process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
 const output = '.local/unified-universe-browser';
@@ -108,7 +109,7 @@ try {
   // Replacing a retained leaf with an identical-looking node must turn the
   // identity assertion red; a count-only test would incorrectly accept this.
   await page.evaluate(() => {
-    const node = document.querySelector('[data-volume-slice]');
+    const node = document.querySelector('.css-volume-mesh > s');
     const replacement = node.cloneNode(true);
     window.__unifiedLeafMutation = { node, replacement };
     node.replaceWith(replacement);
@@ -157,8 +158,8 @@ async function snapshot(page) {
       roots: document.querySelectorAll('.polycss-camera').length,
       sameDocument: probe.document === document && probe.timeOrigin === performance.timeOrigin,
       retained: probe.selectors.every((selector, i) => document.querySelector(selector) === probe.roots[i]) && probe.universe.every(node => node.isConnected),
-      slices: document.querySelectorAll('[data-volume-slice]').length,
-      slots: document.querySelectorAll('[data-star-slot]').length,
+      slices: document.querySelectorAll('.css-volume-mesh > s').length,
+      slots: document.querySelectorAll('.prepared-point-field-stars > s').length,
       volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
       materialReady: diagnostic.runtime.selection().ready,
       pending: diagnostic.renderStats.textureStats.pendingInteractiveImageCount };
@@ -168,7 +169,7 @@ function assertRetained(value, label) {
   assert.equal(value.sameDocument, true, `${label}: one document`);
   assert.equal(value.retained, true, `${label}: original universe nodes remain connected`);
   assert.equal(value.roots, 1, `${label}: exactly one detailed scene`);
-  assert.equal(value.slices, 288);
+  assert.equal(value.slices, preparedVolume.data.stacks.flatMap(stack => stack.leaves).length * 3);
   assert.equal(value.slots, 4096);
 }
 async function flight(page, to, mode) {
@@ -299,9 +300,9 @@ async function backgroundProjection(page) {
       return Array.from(matrix.toFloat64Array());
     }),
     sky: Array.from(new DOMMatrix(getComputedStyle(document.querySelector('.prepared-celestial-sky-scene')).transform).toFloat64Array()),
-    stars: Object.fromEntries([...document.querySelectorAll('[data-star-reference]')]
-      .filter(node => node.style.visibility !== 'hidden' && Number(node.style.opacity) > 0)
-      .map(node => [node.dataset.starReference, node.style.transform])),
+    stars: Object.fromEntries(window.__cssEarthUniverse.inspect().stars.points
+      .filter(({ element, reference }) => reference && element.style.visibility !== 'hidden' && Number(element.style.opacity) > 0)
+      .map(({ element, reference }) => [reference, element.style.transform])),
   }));
 }
 function sameProjection(actual, expected, id) {

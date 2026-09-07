@@ -1,0 +1,60 @@
+Object = IsisCube
+  Object = Core
+
+    Group = Dimensions
+      Samples = 8049
+      Lines   = 4025
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = Real
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+    StartByte = 24824
+    ^Core     = Enceladus_Cassini_DEM_global_200m_schenk2024.tif
+    Format    = BandSequential
+  End_Object
+
+  Group = BandBin
+    FilterName   = CL1/CL2
+    OriginalBand = 1
+    Center       = 651.065000000000055
+    Width        = 340.923000000000002
+  End_Group
+
+  Group = Mapping
+    TargetName           = Enceladus
+    EquatorialRadius     = 256200.0 <meters>
+    PolarRadius          = 256200.0 <meters>
+    LatitudeType         = Planetocentric
+    LongitudeDirection   = PositiveEast
+    LongitudeDomain      = 180
+    MinimumLatitude      = -89.9914975646538835
+    MinimumLongitude     = -0.0277225137832647107
+    MaximumLatitude      = 90.0362249491293625
+    MaximumLongitude     = -0.0170048706922221599
+    ProjectionName       = Equirectangular
+    CenterLongitude      = 180.0
+    CenterLatitude       = 0.0
+    CenterLatitudeRadius = 256200.0
+    UpperLeftCornerX     = -805000.0
+    UpperLeftCornerY     = 402600.0
+    PixelResolution      = 200.0 <meters/pixel>
+    Scale                = 22.3576677180473595 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1574             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 22539
+  ^History  = Enceladus_Cassini_DEM_global_200m_schenk2024.History.IsisCube
+End_Object
+End

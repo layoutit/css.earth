@@ -30,6 +30,26 @@ To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 `pnpm preview`. To regenerate assets from source instead, run
 `pnpm prepare:checkout`; that is the full preparation workflow described below.
 
+## Checks
+
+`pnpm test` runs package, renderer, platform, and shell behavior tests. It does
+not reconstruct bodies or verify the full archive of scientific source files.
+
+`pnpm test:browser` uses the existing server on **4210** for the shared body
+and navigation checks at DPR 1 and DPR 2. It never starts a server or saves a
+screenshot matrix. To check one body, use
+`pnpm test:browser http://localhost:4210 mimas`.
+
+Source acquisition verification (`pnpm acquire:planets -- --verify-only`),
+preparation tests (`pnpm test:preparation`), prepared body data tests
+(`pnpm test:planets`), and extended interaction conformance
+(`pnpm test:browser:conformance`) are separate, explicit commands for changes
+that need them. Source/preparation checks require their declared raw inputs.
+For a camera or lens lifecycle change, focus conformance with
+`pnpm test:browser:conformance http://localhost:4210 mimas`.
+SEO and Earth delivery diagnostics also reuse an existing server; they never
+launch a private Astro instance or rewrite the renderer.
+
 ## How It Works
 
 cssEarth uses PolyCSS to turn planetary geometry into real HTML elements.
@@ -112,6 +132,12 @@ a preparation dependency only. It is consumed through its own build, which
 `pnpm prepare:planets` builds it first, and `pnpm prepare:solar-geometry`
 regenerates the checked-in `src/platform/solar-geometry.mjs` from it
 bit-for-bit. The browser runtime never loads it.
+
+Surface minimaps are separate prepared WebP images, at most 640 pixels wide
+for the sidebar at DPR 2. Object preparation writes them under
+`prepared/minimaps/`; `pnpm prepare:surface-minimaps` refreshes them from existing
+normalized maps or raster sources. The sidebar never downloads the HD globe map
+for its preview.
 
 After preparation, verify the local source closure or regenerate the browser
 assets with:

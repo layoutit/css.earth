@@ -60,7 +60,7 @@ same sourced sky as the established moon integration; their licenses are retaine
 - `node tools/objects/dist/operations.js acquire callisto --refresh` restores and verifies pinned inputs.
 - `node tools/objects/dist/prepare-authored.js callisto --write` prepares the package.
 - `node --test tests/objects/unit/callisto/*.test.mjs` checks source, pixels and runtime.
-- `node tests/objects/browser/callisto/smoke-browser.mjs http://localhost:4232` checks Chrome DPR 1 and 2.
+- `pnpm test:browser http://localhost:4210 callisto` checks Chrome DPR 1 and 2.
 - `pnpm setup:assets --object=callisto` installs the published runtime closure without source preparation.
 
 The original TIFF, font, panorama and parent photograph remain reacquirable,
@@ -74,3 +74,5 @@ Reusable observation masking, projection, lighting, celestial, and retained-scen
 operations live in `tools/objects/terrestrial-layers/`; no package-local executable
 preparer or runtime is required. Run `pnpm build:preparation` before the commands
 above. Omit `--write` from preparation to generate an isolated comparison stage.
+
+Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.

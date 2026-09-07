@@ -87,6 +87,9 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         spatial = mountPreparedWorldContext({ host: root, before: end, plan, sprites });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource });
         return Object.freeze({ root, destroy,
+          inspect() {
+            return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect() });
+          },
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
             const body = [plan.focus, ...plan.bodies].find(body => body.id === id);
             if (!body || frame.referenceFrame !== plan.frame.referenceFrame || frame.epochJdTt !== plan.frame.epochJdTt ||

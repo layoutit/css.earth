@@ -1,0 +1,219 @@
+{
+  "schema": "cssmimas-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "cassini-iss-2017-mimas",
+      "path": "observations/PIA17214_unlabeled.png",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA17214_unlabeled.png",
+      "credit": "NASA/JPL-Caltech/Space Science Institute",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned published map; verify its original bytes.",
+      "redistribution": "Prepared derivatives retain NASA/JPL/SSI and source-author credits.",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 5760,
+      "height": 2880,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 198200,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          180,
+          540
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ]
+      },
+      "coverage": "Published full rectangular mosaic; no separate validity mask or documented missing code. Preserve every supplied pixel, including black shadows. Native resolution and illumination vary.",
+      "catalog": "https://science.nasa.gov/resource/mimas-global-map-june-2017/",
+      "expectedBytes": 6959979,
+      "expectedSha256": "f8ffa667b2c35ec890973ea3300a33d3ee506f596b53d3818cdfee56943e038b"
+    },
+    {
+      "id": "cassini-iss-2014-mimas-color",
+      "path": "observations/PIA18437.jpg",
+      "origin": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18437.jpg",
+      "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned published map; verify its original bytes.",
+      "redistribution": "Prepared derivatives retain NASA/JPL/SSI and source-author credits.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 6356,
+      "height": 3178,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 198200,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ]
+      },
+      "coverage": "Published full rectangular mosaic; no separate validity mask or documented missing code. Preserve every supplied pixel, including black shadows. Native resolution and illumination vary.",
+      "catalog": "https://www.jpl.nasa.gov/images/pia18437-color-maps-of-mimas-2014/",
+      "expectedBytes": 1848860,
+      "expectedSha256": "303d5653875d507e8859a26d0afdedd0173c7d4e691f27c3266ca63d1aa4f97f"
+    },
+    {
+      "id": "cassini-spc-2025-elevation",
+      "path": "observations/mimas_radius_g.tif",
+      "expectedBytes": 9881891,
+      "expectedSha256": "cb2368b033cde32ae6cda6831d248299929518cbcf747bc832e671cc5751fc2c",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichmimasshape.html"
+      ],
+      "acquisition": "Download the pinned PDS GeoTIFF with the authored acquisition recipe.",
+      "redistribution": "Prepared derivatives retain source authors, mission credit and DOI 10.26033/y8wv-r303.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "width": 2222,
+      "height": 1111,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 198200,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "pixelResolutionMeters": 559.13276289079,
+        "upperLeftMeters": [
+          -622663.6639415,
+          311331.83197075
+        ]
+      },
+      "coverage": "All 2,468,642 raster cells are finite and valid. The geotransform covers less than the global bounding box advertised in the label; preserve the eastern and southern edge gaps.",
+      "units": "Radius from center in meters; height relative to 198.2 km sphere is derived during preparation."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 848,
+      "expectedSha256": "52dbb3cb35211b8c6adc5ac8078d14a88c681ec6fe50a97654d07a696e25c5d9",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/catalog.json",
+      "expectedBytes": 2827,
+      "expectedSha256": "165862a1ff169a69b9ed5a0ebfa74a2a3b3993996cd7b608f8f3a3fb1397b4aa",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3438,
+      "expectedSha256": "b395fd7d82b4961c5f11dcae91b4395c280f723eb6bfd2847fac032f97e67d22",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 2128,
+      "expectedSha256": "dd41280c21b2c8688f728fd681c9baa2093dd196d9b69a94be5bb848690a61cf",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1272,
+      "expectedSha256": "fc76405a3495ac49c24417367b6d99fe2d8e988d222c9e5a8b78e3ef78f4295d",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 9356,
+      "expectedSha256": "5dac3bbaad34bc019307266f9e7b9e533d67ab7783ab84c75dff475c01fa1dbd",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3868,
+      "expectedSha256": "0a3a20c115b49280f396bb2ec4e1ff688211dc993d4729a806e90e961c8367f9",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/mimas_radius_g.xml",
+      "expectedBytes": 8719,
+      "expectedSha256": "def4b065852f8789c86a9dda0aa8ae5af7f542cf351a467c92f4ad8a2b1354c3",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.xml",
+      "purpose": "PDS source label: radial units, reference sphere, geotransform and missing constant."
+    }
+  ],
+  "generatedIntermediates": []
+}

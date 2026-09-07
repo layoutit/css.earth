@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "45250e597a01b20710501705e71c281cb848baeb49c695316cb475c074ef1efc"
+  },
   "id": "mars",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -140,9 +143,6 @@
       "bodyRadiusM": 3396190
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "bb9a689b857ce3dbba016627f6d9646a046a7f23942693c19e98742c4dbb3782"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

@@ -24,6 +24,8 @@ try {
   assert.equal(Number(snapshots.initial.shell.shellOpacity), 0, 'shell is hidden inside the Solar System');
   assert.equal(snapshots.initial.shellFaces, shell.data.faces.length);
   assert.equal(snapshots.initial.volumeLeaves, volume.data.stacks.flatMap(stack => stack.leaves).length);
+  assert.equal(snapshots.initial.volumeImages, snapshots.initial.volumeLeaves * 3);
+  assert.ok(snapshots.initial.volumeCopiesValid, 'each prepared slab owns three identical retained image planes');
   assert.equal(snapshots.initial.skyFaces, 6, 'the NASA sky must be mounted in the actual shared view');
   assert.equal(snapshots.initial.skyVisibility, 'visible');
   assert.equal(snapshots.initial.skyOpacity, 1, 'the nearby background is opaque');
@@ -136,7 +138,16 @@ async function read(page) {
     shell: { ...document.querySelector('.prepared-surface-shell').dataset },
     shellFaces: document.querySelectorAll('[data-shell-face]').length,
     shellTransform: document.querySelector('.prepared-surface-shell-scene').style.transform,
-    volumeLeaves: document.querySelectorAll('[data-volume-slice]').length,
+    volumeLeaves: document.querySelectorAll('.css-volume-mesh > s:nth-child(3n + 1)').length,
+    volumeImages: document.querySelectorAll('.css-volume-mesh > s').length,
+    volumeCopiesValid: [...document.querySelectorAll('.css-volume-mesh')].every(mesh => {
+      const images = [...mesh.children];
+      return images.length % 3 === 0 && images.every((node, index) => {
+        const original = images[index - index % 3];
+        return node.style.transform === original.style.transform && node.style.backgroundImage === original.style.backgroundImage &&
+          node.style.opacity === (index % 3 ? `var(--volume-optical-copy-${index % 3}, 0)` : '');
+      });
+    }),
     volumeTransform: [...document.querySelectorAll('.css-volume-scene')].map(node => node.style.transform).join('|'),
     volumeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
     volumeBrightness: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),

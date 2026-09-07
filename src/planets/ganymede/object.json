@@ -1,82 +1,11 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "7a0b7e283db7f80f39a183fe04bad5a8322312577784a9ffc902b39562bf5dcc"
+  },
   "id": "ganymede",
-  "type": "layered-body",
   "properties": {
-    "preparation": {
-      "schema": "cssearth-object-preparation@1",
-      "label": "Ganymede",
-      "steps": [
-        "verify-sources",
-        "assets",
-        "starfield",
-        "sky-sun",
-        "scene",
-        "controls",
-        "presentation",
-        "runtime-assets"
-      ]
-    },
-    "recipe": {
-      "schema": "cssearth-authored-object@1",
-      "sources": [
-        {
-          "id": "terrestrial",
-          "path": "source/preparation/terrestrial.json",
-          "sha256": "ad0afc58e7be48f6be87979f1137ac9dd9e3cb6b79a1ce826439fb457e481b38"
-        },
-        {
-          "id": "content",
-          "path": "source/content/object.json",
-          "sha256": "f48f1040a222f4d7b4f44acdee67a49e9a991b515046e9498d8d368cc438631d"
-        },
-        {
-          "id": "title",
-          "path": "source/presentation/title-mark.json",
-          "sha256": "0d5f9bd6ce07b0d083656b62b8c5b0f250a2e7ef08386cc822b8dbd821387026"
-        },
-        {
-          "id": "navigation",
-          "path": "source/preparation/navigation.json",
-          "sha256": "29dda529e3ab8bbcff799ac336af4cbcefeb21bb80eed0e0eed5d41b2dc30a3c"
-        },
-        {
-          "id": "acquisition",
-          "path": "source/preparation/acquisition.json",
-          "sha256": "caffd4d082b2300947b87d0a38e4ee9613d9813c187872f6e9e16bf970d7d438"
-        }
-      ],
-      "shape": {
-        "kind": "sphere",
-        "radiusKm": 2631.2
-      },
-      "surfaces": [
-        {
-          "id": "body",
-          "source": "terrestrial",
-          "projection": "equirectangular",
-          "lenses": [
-            {
-              "id": "normal",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "enhanced",
-              "source": "content",
-              "material": "lighting"
-            }
-          ]
-        }
-      ],
-      "materials": [
-        {
-          "id": "lighting",
-          "source": "terrestrial",
-          "model": "lit"
-        }
-      ]
-    },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
@@ -103,11 +32,82 @@
       ],
       "metersPerUnit": 11440,
       "bodyRadiusM": 2631200
+    },
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ganymede",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "enhanced",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2631.2
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "4d76bbd1db574ecbd3a2d0fb42c7beb562990e3eb710963150d5fcab01206237"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "f48f1040a222f4d7b4f44acdee67a49e9a991b515046e9498d8d368cc438631d"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "0d5f9bd6ce07b0d083656b62b8c5b0f250a2e7ef08386cc822b8dbd821387026"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "29dda529e3ab8bbcff799ac336af4cbcefeb21bb80eed0e0eed5d41b2dc30a3c"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "caffd4d082b2300947b87d0a38e4ee9613d9813c187872f6e9e16bf970d7d438"
+        }
+      ]
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "e0141f1c98c740efbd792769fbc421956fbaea87eebd2aad1febf6206c05c1df"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

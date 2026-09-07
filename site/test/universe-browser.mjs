@@ -22,7 +22,7 @@ try {
   snapshots.initial = await read(page);
   await page.screenshot({ path: resolve(output, 'sun-integrated.png') });
   check('one selected object with all prepared volume leaves ready', snapshots.initial.roots === 1 &&
-    snapshots.initial.slices === preparedVolume.data.stacks.flatMap(stack => stack.leaves).length && snapshots.initial.stable);
+    snapshots.initial.slices === preparedVolume.data.stacks.flatMap(stack => stack.leaves).length * 3 && snapshots.initial.stable);
   check('detailed object and contextual layers share the same rendered focal length', await page.evaluate(() => {
     const root = document.querySelector('.polycss-camera');
     const cssFocal = parseFloat(getComputedStyle(root).perspective);
@@ -48,8 +48,8 @@ try {
   await page.waitForTimeout(250);
   snapshots.stars = await read(page);
   await page.screenshot({ path: resolve(output, 'stellar-neighbourhood-integrated.png') });
-  check('the complete catalogue feeds bounded exact-position star slots', snapshots.stars.starField.catalogueCount === '109389' &&
-    snapshots.stars.starField.consideredCount === '109389' && snapshots.stars.starSlots === 4096 && Number(snapshots.stars.starField.visiblePoints) > 50 &&
+  check('the complete catalogue feeds bounded exact-position star slots', snapshots.stars.starField.catalogueCount === 109389 &&
+    snapshots.stars.starField.consideredCount === 109389 && snapshots.stars.starSlots === 4096 && Number(snapshots.stars.starField.visiblePoints) > 50 &&
     snapshots.stars.starField.individualPoints === snapshots.stars.starField.visiblePoints);
   check('the prepared NASA sky replaces local volume haze', snapshots.initial.volumeOpacity === 0 && snapshots.initial.skyVisible && snapshots.stars.volumeOpacity === 0 && snapshots.stars.skyVisible);
   check('named stars receive visible labels', await page.locator('.prepared-star-label').evaluateAll(nodes => nodes.some(node =>
@@ -140,22 +140,22 @@ async function starRequests(page) {
   return page.evaluate(() => performance.getEntriesByType('resource').filter(entry => entry.name.includes('/stellar-neighbourhood/prepared/')).length);
 }
 async function starPositions(page) {
-  return page.evaluate(() => Object.fromEntries([...document.querySelectorAll('[data-star-reference]')]
-    .filter(node => node.style.visibility !== 'hidden')
-    .map(node => [node.dataset.starReference, node.style.transform])));
+  return page.evaluate(() => Object.fromEntries(window.__cssEarthUniverse.inspect().stars.points
+    .filter(({ element, reference }) => reference && element.style.visibility !== 'hidden')
+    .map(({ element, reference }) => [reference, element.style.transform])));
 }
 async function read(page) {
   return page.evaluate(() => ({
     camera: window.__sun.camera.state(),
     scale: document.querySelector('.planet-stage').dataset.contextScale,
     roots: document.querySelectorAll('.polycss-camera').length,
-    slices: document.querySelectorAll('[data-volume-slice]').length,
+    slices: document.querySelectorAll('.css-volume-mesh > s').length,
     stable: window.__sun.assertStableDomIdentity(),
-    starField: { ...document.querySelector('.prepared-point-field').dataset },
-    starSlots: document.querySelectorAll('[data-star-slot]').length,
+    starField: (({ points, ...stats }) => stats)(window.__cssEarthUniverse.inspect().stars),
+    starSlots: document.querySelectorAll('.prepared-point-field-stars > s').length,
     volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
     skyVisible: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility === 'visible',
     volumeTransforms: [...document.querySelectorAll('.css-volume-scene')].map(node => getComputedStyle(node).transform),
-    visibleOrbits: [...document.querySelectorAll('[data-context-orbit]')].filter(node => getComputedStyle(node).visibility !== 'hidden').length,
+    visibleOrbits: window.__cssEarthUniverse.inspect().bodies.flatMap(body => body.orbit).filter(node => getComputedStyle(node).visibility !== 'hidden').length,
   }));
 }

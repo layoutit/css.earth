@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "826e5f6df0640a16ec7ea32eb1cf3c5c9d3efb3c39ff91857042630b8341c565"
+  },
   "id": "earth",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -161,9 +164,6 @@
       "bodyRadiusM": 6378137
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "ceaf9716ad0d469c0c0ec63b40e81ba91139bbab5322e72b13e18220337d5a92"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

@@ -56,7 +56,13 @@ export function createApplicationWorldContext() {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
         const layer = prepared.mount(stage);
-        return { ...layer, destroy() { layer.destroy(); resources.destroy(); } };
+        const target = stage.ownerDocument.defaultView;
+        const diagnostics = import.meta.env?.DEV === true ? Object.freeze({ inspect: layer.inspect }) : null;
+        if (diagnostics) target.__cssEarthUniverse = diagnostics;
+        return { ...layer, destroy() {
+          if (diagnostics && target.__cssEarthUniverse === diagnostics) delete target.__cssEarthUniverse;
+          layer.destroy(); resources.destroy();
+        } };
       } catch (error) { resources.destroy(); throw error; }
     },
   };

@@ -96,8 +96,8 @@ function read(page) {
       sky: { opacity: getComputedStyle(document.querySelector('.prepared-celestial-sky')).opacity,
         visibility: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility,
         transform: document.querySelector('.prepared-celestial-sky-scene').style.transform },
-      stars: [...layer.querySelectorAll('[data-star-slot]')].filter(element => getComputedStyle(element).visibility === 'visible')
-        .map(element => ({ style: element.getAttribute('style'), reference: element.dataset.starReference })),
+      stars: window.__cssEarthUniverse.inspect().stars.points.filter(({ element }) => getComputedStyle(element).visibility === 'visible')
+        .map(({ element, reference }) => ({ style: element.getAttribute('style'), reference })),
       labels: [...document.querySelectorAll('.prepared-star-label')].map(element => element.getAttribute('style')),
       bodies: [...document.querySelectorAll('[data-context-label], [data-object-navigate]')]
         .map(element => element.getAttribute('style')),

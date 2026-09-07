@@ -23,6 +23,7 @@ class FakeElement extends EventTarget {
 }
 class FakeDocument { createElement(tagName: string): FakeElement { return new FakeElement(this, tagName); } }
 
+const mounted = new WeakMap<FakeElement, ReturnType<typeof mountPreparedWorldContext>>();
 const sprite = { url: '/marker.png', index: 0, count: 1, size: 16 };
 const presentation = {
   projection: { model: 'css-perspective-shared-with-sky', cssPerspective: '86.60254037844386cqw' },
@@ -59,12 +60,15 @@ function mount(scale: number) {
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: plan(scale), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 2_000].map(value => value * scale), orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [30, -20] });
+  mounted.set(layer.root as unknown as FakeElement, layer);
   return layer.root as unknown as FakeElement;
 }
 
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
-  expect(parsePreparedWorldContext(source).bodies).toHaveLength(15);
+  const authored = JSON.parse(await readFile(new URL('../../../planets/sun/source/navigation/universe.json', import.meta.url), 'utf8')) as { bodies: { id: string }[] };
+  expect(parsePreparedWorldContext(source).bodies.map(body => body.id))
+    .toEqual(authored.bodies.map(body => body.id));
   expect(() => parsePreparedWorldContext({ ...source, focus: { ...(source.focus as Record<string, unknown>), positionM: [1, 0, 0] } })).toThrow('frame origin');
   const camera = source.camera as Record<string, unknown>, presentation = camera.presentation as Record<string, unknown>;
   expect(() => parsePreparedWorldContext({ ...source, camera: { ...camera, presentation: { ...presentation, dolly: { ...(presentation.dolly as Record<string, unknown>), minimumDistanceRadii: 1 } } } })).toThrow('outside the focus');
@@ -158,7 +162,7 @@ test('an orbitless prepared object renders and navigates without manufacturing o
   expect(selections).toEqual(['future-object']);
   layer.selectObject('future-object');
   expect(all(root)).toEqual(nodes);
-  expect(nodes.some(node => node.dataset.contextOrbit)).toBe(false);
+  expect(layer.inspect().every(body => body.orbit.length === 0)).toBe(true);
   for (const orbit of [null, {}, { runtimeEphemeris: true }]) {
     expect(() => parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit }] })).toThrow();
   }
@@ -181,7 +185,7 @@ test('projects retained markers, culls focus-occluded bodies, and keeps physical
   expect(nearSun.style.transform).toContain('translate(30px,-20px)');
   expect(nearMercury.style.visibility).toBe('');
   expect(nearVenus.style.visibility).toBe('hidden');
-  const nearOrbit = all(near).filter(element => element.dataset.contextOrbit === 'mercury' && element.style.visibility === '');
+  const nearOrbit = mounted.get(near)!.inspect().find(body => body.id === 'mercury')!.orbit.filter(element => element.style.visibility === '');
   expect(nearOrbit.length).toBeGreaterThan(0);
   for (const piece of nearOrbit) {
     const values = piece.style.transform.match(/-?[0-9.]+/g)!.map(Number);
@@ -189,7 +193,7 @@ test('projects retained markers, culls focus-occluded bodies, and keeps physical
     expect(Math.abs(values[5]!)).toBeLessThanOrEqual(300);
   }
   expect(nearMercury.style.transform).toBe(find(far, 'contextBody', 'mercury').style.transform);
-  expect(nearOrbit.length).toBe(all(far).filter(element => element.dataset.contextOrbit === 'mercury' && element.style.visibility === '').length);
+  expect(nearOrbit.length).toBe(mounted.get(far)!.inspect().find(body => body.id === 'mercury')!.orbit.filter(element => element.style.visibility === '').length);
 });
 
 test('selection transfers the detail handoff to the destination while retaining every orbit and marker', () => {
