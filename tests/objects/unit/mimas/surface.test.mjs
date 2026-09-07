@@ -5,7 +5,42 @@ import {readFile} from 'node:fs/promises';
 import {fromFile} from 'geotiff';
 import sharp from 'sharp';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {loadObjShape, parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import {simplifyRadialShape} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
 const root = new URL('../../../../', import.meta.url);
+test('Mimas source simplification stays closed, preserves source positions and agrees with the independent radius product', async () => {
+  const config = JSON.parse(await readFile(new URL('src/planets/mimas/source/preparation/terrestrial.json', root)));
+  const sourceRoot = new URL('src/planets/mimas/source/', root).pathname;
+  const profile = config.geometry.radialTerrain;
+  const source = await loadObjShape(`${sourceRoot}/${profile.path}`, profile.grid);
+  const elevation = await loadScienceSurface(sourceRoot, config.raster.scientific[0]);
+  for (const [lon, lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[45,45],[135,-45],[248.24,-1.38]]) {
+    assert.ok(Math.abs(source.sample(lon,lat) / 1000 - (elevation.sample(lon,lat) + 198.2)) < 1.5,
+      `Independent OBJ and GeoTIFF geography/units differ at ${lon},${lat}`);
+  }
+  assert.ok(source.sample(0,-90) > 190000, 'The released mesh closes the pole even where the raster has no coverage');
+  const faces = await simplifyRadialShape(source, profile, 1);
+  assert.ok(faces.length <= 720 && faces.length > 0);
+  const originals = new Set(source.positions.map(v => v.join(','))), edges = new Map();
+  for (const face of faces) for (let i=0;i<3;i++) {
+    const a=face.vertices[i].join(','),b=face.vertices[(i+1)%3].join(',');
+    assert.ok(originals.has(a), 'Simplification must retain released positions');
+    const edge=[a,b].sort().join('|');edges.set(edge,(edges.get(edge)??0)+1);
+  }
+  assert.ok([...edges.values()].every(count=>count===2), 'Every retained edge must join exactly two faces');
+  const obj=faces.flatMap(f=>f.vertices.map(v=>'v '+v.join(' '))).join('\n')+'\n'+faces.map((_,i)=>`f ${3*i+1} ${3*i+2} ${3*i+3}`).join('\n');
+  const coarse=parseObjShape(obj,{metersPerUnit:1,expectedVertices:faces.length*3,expectedFaces:faces.length});
+  const errors=[];
+  for(let lat=-87;lat<90;lat+=6)for(let lon=3;lon<360;lon+=6) {
+    const radius=coarse.sample(lon,lat);
+    assert.ok(radius > 0, 'Simplified body must have no radial holes');
+    errors.push(Math.abs(radius-source.sample(lon,lat)));
+  }
+  errors.sort((a,b)=>a-b);
+  assert.ok(errors[Math.floor(errors.length*.95)] < 3000, 'Simplification must retain the broad relief across the body');
+  await assert.rejects(simplifyRadialShape(source,{...profile,simplification:{targetFaces:4,maximumErrorMeters:1}},1),/error limit/);
+});
+
 test('Mimas elevation uses PDS radius units, east-positive geography and exact raster bounds', async () => {
   const config = JSON.parse(await readFile(new URL('src/planets/mimas/source/preparation/terrestrial.json', root)));
   const sourceRoot = new URL('src/planets/mimas/source/', root).pathname;

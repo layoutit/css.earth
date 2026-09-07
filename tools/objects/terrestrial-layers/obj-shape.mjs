@@ -11,8 +11,10 @@ const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1
 /** Read the released triangular surface in its body-fixed frame. Units are
  * authored explicitly; no ellipsoid or missing terrain is synthesized. */
 export async function loadObjShape(path, profile) {
-  const { stdout } = await exec('unzip', ['-p', path, profile.member], { maxBuffer: 96 * 1024 * 1024 });
-  return parseObjShape(stdout, profile);
+  const text = profile.member
+    ? (await exec('unzip', ['-p', path, profile.member], { maxBuffer: 96 * 1024 * 1024 })).stdout
+    : await readFile(path, 'utf8');
+  return parseObjShape(text, profile);
 }
 
 /** PDS vertex-facet tables retain their explicit row ids and kilometre units. */
@@ -128,6 +130,6 @@ function radialShape(vertices, indices, { metersPerUnit, expectedVertices, expec
     visit(root);
     return faceId<0?null:{radius:nearest,faceId};
   }
-  return { vertices: vertices.length, faces: faces.length, bounds:[root.min,root.max], hit,
+  return { vertices: vertices.length, faces: faces.length, positions: vertices, indices, bounds:[root.min,root.max], hit,
     sample(longitude,latitude) {return hit(longitude,latitude)?.radius??null;} };
 }
