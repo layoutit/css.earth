@@ -11,11 +11,13 @@ interface Entry {
   from: number;
   started: number;
   duration: number;
+  written: number;
 }
 
 /** Retained, wall-time opacity interpolation without CSS or Web Animations. */
 export function createOpacityFader(windowTarget: OpacityFaderWindow) {
   const entries = new Map<HTMLElement, Entry>();
+  const active = new Set<Entry>();
   let frame: number | null = null;
   let destroyed = false;
 
@@ -27,7 +29,10 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow) {
   };
   const write = (entry: Entry, value: number) => {
     entry.current = clamp(value);
-    entry.element.style.opacity = String(entry.current);
+    if (entry.written !== entry.current) {
+      entry.written = entry.current;
+      entry.element.style.opacity = String(entry.current);
+    }
   };
   const valueAt = (entry: Entry, timestamp: number) => {
     if (entry.current === entry.target || entry.duration <= 0) return entry.current;
@@ -38,37 +43,36 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow) {
     if (destroyed || frame !== null) return;
     frame = windowTarget.requestAnimationFrame(tick);
   };
-  const hasActive = () => { for (const entry of entries.values()) if (entry.current !== entry.target) return true; return false; };
+  const cancelIfSettled = () => {
+    if (active.size === 0 && frame !== null) {
+      windowTarget.cancelAnimationFrame(frame);
+      frame = null;
+    }
+  };
   const tick = (time: number) => {
     frame = null;
-    let active = false;
-    for (const entry of entries.values()) {
-      if (entry.current === entry.target) continue;
+    for (const entry of active) {
       const progress = entry.duration > 0 ? Math.max(0, Math.min(1, (time - entry.started) / entry.duration)) : 1;
-      write(entry, entry.from + (entry.target - entry.from) * progress);
-      if (progress < 1) active = true;
+      write(entry, progress === 1 ? entry.target : entry.from + (entry.target - entry.from) * progress);
+      if (progress === 1) active.delete(entry);
     }
-    if (active) schedule();
+    if (active.size > 0) schedule();
   };
 
   return Object.freeze({
     set(element: HTMLElement, alpha: number, durationMs = 0, preserveDeadline = false) {
       if (destroyed) return;
       const target = clamp(alpha), duration = Number.isFinite(durationMs) ? Math.max(0, durationMs) : 0;
-      const timestamp = now();
       let entry = entries.get(element);
+      if (entry && entry.target === target && (entry.current === target || entry.duration === duration)) {
+        if (duration === 0) entry.duration = 0;
+        return;
+      }
+      const timestamp = now();
       if (!entry) {
-        entry = { element, current: read(element), target, from: read(element), started: timestamp, duration };
+        const current = read(element);
+        entry = { element, current, written: Number.NaN, target, from: current, started: timestamp, duration };
         entries.set(element, entry);
-      } else if (entry.target === target && entry.current === target) {
-        if (duration === 0 && entry.duration !== 0) {
-          entry.from = entry.current;
-          entry.started = timestamp;
-          entry.duration = 0;
-        }
-        return;
-      } else if (entry.target === target && entry.duration === duration) {
-        return;
       } else {
         entry.current = valueAt(entry, timestamp);
         entry.from = entry.current;
@@ -82,18 +86,19 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow) {
           entry.duration = duration;
         }
       }
-      if (duration === 0) {
+      if (duration === 0 || entry.duration === 0 || entry.current === target) {
         write(entry, target);
+        active.delete(entry);
+        cancelIfSettled();
         return;
       }
+      active.add(entry);
       schedule();
     },
     cancel(element: HTMLElement) {
-      entries.delete(element);
-      if (!hasActive() && frame !== null) {
-        windowTarget.cancelAnimationFrame(frame);
-        frame = null;
-      }
+      const entry = entries.get(element);
+      if (entry) { active.delete(entry); entries.delete(element); }
+      cancelIfSettled();
     },
     destroy() {
       if (destroyed) return;
@@ -101,6 +106,7 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow) {
       if (frame !== null) windowTarget.cancelAnimationFrame(frame);
       frame = null;
       entries.clear();
+      active.clear();
     },
   });
 }

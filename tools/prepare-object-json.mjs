@@ -1,9 +1,11 @@
 import { createHash } from 'node:crypto';
-import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { OBJECTS } from '../site/objects.mjs';
 import { authoredObject } from './authored-object.mjs';
+import { preparePresentationBindings } from './prepared-presentation-bindings.mjs';
+import { writePreparedText } from './write-prepared-text.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const format = 'cssearth-css-object@4';
@@ -21,16 +23,17 @@ export async function writeObjectJson(id, definition) {
   const objectDirectory = resolve(root, 'src/planets', id);
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot: root });
   definition = preparedNavigation.definition;
+  definition = await preparePresentationBindings(definition, root);
   const scene = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/scene.json'), 'utf8'));
-  await writeWorldNavigationArtifacts(resolve(objectDirectory, 'prepared'), preparedNavigation, scene);
+  await writeWorldNavigationArtifacts(resolve(objectDirectory, 'prepared'), { ...preparedNavigation, definition }, scene);
   descriptor = { ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } };
   const payload = JSON.stringify({ schema: 'cssearth-prepared-object@1', id,
     type: descriptor.type, format, data: definition });
   const asset = resolve(root, 'src/planets', id, 'prepared/object.json');
   await mkdir(resolve(root, 'src/planets', id, 'prepared'), { recursive: true });
-  await writeFile(asset, payload);
+  await writePreparedText(asset, payload);
   const prepared = { format, url: 'prepared/object.json', sha256: createHash('sha256').update(payload).digest('hex') };
-  await writeFile(descriptorPath, `${JSON.stringify({ ...descriptor, prepared }, null, 2)}\n`);
+  await writePreparedText(descriptorPath, `${JSON.stringify({ ...descriptor, prepared }, null, 2)}\n`);
   return { id, bytes: Buffer.byteLength(payload), ...prepared };
 }
 

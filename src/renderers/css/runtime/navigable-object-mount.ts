@@ -5,7 +5,7 @@ import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
 import { createDeferredObjectMount } from './deferred-object-mount.js';
 import type { ObjectSceneLifecycle } from './deferred-object-mount.js';
 import type { ObjectRuntimeDefinition, ObjectMountOptions } from './object-runtime-types.js';
-import { prepareObjectResources } from './prepared-resource-lease.js';
+import { createPreparedObjectNavigation } from './prepared-object-navigation.js';
 
 type Bind = (definition: ObjectRuntimeDefinition) => (stage: HTMLElement, options: ObjectMountOptions) => ObjectSceneLifecycle;
 
@@ -14,33 +14,20 @@ export function createNavigableObjectMount(input: unknown, transport: PreparedCs
   const descriptor = parseObjectDescriptor(input);
   const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
   let loading: Promise<ObjectRuntimeDefinition> | null = null;
-  function load() {
+  let loadingSignal: AbortSignal | undefined;
+  function load(signal?: AbortSignal) {
+    if (loadingSignal?.aborted) loading = null;
     if (!loading) {
-      const request = loadPreparedCssObject(descriptor, transport);
+      const request = loadPreparedCssObject(descriptor, transport, { signal });
       loading = request;
-      request.catch(() => { if (loading === request) loading = null; });
+      loadingSignal = signal;
+      request.then(() => { if (loading === request) loadingSignal = undefined; },
+        () => { if (loading === request) { loading = null; loadingSignal = undefined; } });
     }
     return loading;
   }
   const mount = createDeferredObjectMount(load, definition => (stage: HTMLElement, options: ObjectMountOptions) =>
     bind(definition)(stage, { ...options, ...(frame ? { worldFrame: frame } : {}) }));
-  const navigation = frame ? Object.freeze({ frame,
-    async prepare({ signal }: { signal: AbortSignal }) {
-      const definition = await abortable(load(), signal);
-      const resources = prepareObjectResources(definition.assets, { signal });
-      try { await resources.ready; return Object.freeze({ frame, definition, resources }); }
-      catch (error) { resources.destroy(); throw error; }
-    },
-  }) : null;
+  const navigation = frame ? createPreparedObjectNavigation(load, frame) : null;
   return Object.assign(mount, { navigation });
-}
-
-function abortable<T>(promise: Promise<T>, signal: AbortSignal): Promise<T> {
-  return new Promise((resolve, reject) => {
-    const abort = () => reject(new DOMException('Navigation was cancelled.', 'AbortError'));
-    if (signal.aborted) { abort(); return; }
-    signal.addEventListener('abort', abort, { once: true });
-    promise.then(value => { signal.removeEventListener('abort', abort); resolve(value); },
-      error => { signal.removeEventListener('abort', abort); reject(error); });
-  });
 }

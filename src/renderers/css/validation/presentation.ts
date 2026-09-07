@@ -63,19 +63,44 @@ export function requireViewBindings(value: unknown, tree: PreparedTree, camera: 
     else if (binding.systemTransform !== null) text(binding.systemTransform, 'counter rotation transform', true);
   }
 }
-export function requireAnimations(value: unknown, tree: PreparedTree): asserts value is PreparedPresentationDefinition['animations'] {
+export function requireAnimations(value: unknown, tree: PreparedTree, motion = false): asserts value is PreparedPresentationDefinition['animations'] {
   for (const input of array(value, 'animations')) {
-    const animation = record(input, 'animation', ['target', 'id', 'keyframes', 'duration', 'mode', 'sourceMinimum', 'millisecondsPerDegree']);
+    const animation = record(input, 'animation', motion ? ['target', 'id', 'keyframes', 'duration', 'timings'] : ['target', 'id', 'keyframes', 'duration', 'mode', 'sourceMinimum', 'millisecondsPerDegree']);
     const target = nodeReference(animation.target, tree); text(animation.id, 'animation id');
     if ([tree.camera, tree.scene].includes(target)) fail('prepared animation cannot target camera or scene');
-    choice(animation.mode, ['pose'], 'prepared animation mode'); positive(animation.duration, 'animation duration');
-    finite(animation.sourceMinimum, 'animation minimum'); finite(animation.millisecondsPerDegree, 'animation time mapping');
+    positive(animation.duration, 'animation duration');
+    if (motion) for (const item of array(animation.timings, 'motion timings')) {
+      const timing = record(item, 'motion timing', ['when', 'duration']);
+      positive(timing.duration, 'motion duration');
+      const when = timing.when;
+      if (!when || typeof when !== 'object' || Array.isArray(when) || Object.values(when).some(value => !['string', 'boolean', 'number'].includes(typeof value))) fail('motion timing needs a selection');
+    }
+    if (!motion) {
+      choice(animation.mode, ['pose'], 'prepared animation mode');
+      finite(animation.sourceMinimum, 'animation minimum'); finite(animation.millisecondsPerDegree, 'animation time mapping');
+    }
     const frames = array(animation.keyframes, 'keyframes'); if (!frames.length) fail('prepared animation has no keyframes');
     for (const input of frames) {
       const frame = record(input, 'keyframe', ['offset', 'transform']);
       const offset = finite(frame.offset, 'keyframe offset'); if (offset < 0 || offset > 1) fail('keyframe offset must be within animation');
       text(frame.transform, 'keyframe transform');
     }
+  }
+}
+export function requireFacing(value: unknown, tree: PreparedTree): void {
+  const targets = new Set<number>();
+  for (const item of array(value, 'facing planes')) {
+    const face = record(item, 'facing plane', ['target', 'plane', 'tolerance']);
+    positive(face.tolerance, 'native backface tolerance');
+    const target = nodeReference(face.target, tree);
+    if ([tree.camera, tree.scene].includes(target) || targets.has(target)) fail('facing target must be a unique prepared leaf');
+    if (!ancestor(target, tree.scene, tree)) fail('facing target must belong to scene');
+    if (tree.nodes.some(node => node.parent === target)) fail('facing target must be a leaf');
+    targets.add(target);
+    const plane = array(face.plane, 'facing plane coordinates');
+    if (plane.length !== 4) fail('facing plane needs four coordinates');
+    plane.forEach(value => finite(value, 'facing plane coordinate'));
+    if (Math.abs(Math.hypot(...plane.slice(0, 3) as number[]) - 1) > 1e-6) fail('facing plane must have a unit normal');
   }
 }
 export function requireOptionalPresentation(plan: Record<string, unknown>, tree: PreparedTree, controls: ObjectControls): void {

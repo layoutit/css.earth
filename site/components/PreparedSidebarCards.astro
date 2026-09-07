@@ -1,0 +1,14 @@
+---
+import { OBJECTS } from '../objects.mjs';
+import PreparedObjectPanel from './PreparedObjectPanel.astro';
+import type { PreparedObjectContent, PreparedObjectContentDocument } from '../../tools/objects/content/types';
+
+// Inert, server-rendered cards: selecting a body never waits for its scene assets.
+const content = import.meta.glob('../../src/planets/*/prepared/content.json', { import: 'default', eager: true });
+const controls = import.meta.glob<Pick<PreparedObjectContent, 'lenses' | 'settings'>>('../../src/planets/*/prepared/controls.json', { import: 'default', eager: true });
+---
+{OBJECTS.map(object => <template data-object-card={object.id}>
+  <PreparedObjectPanel informationOnly
+    preparedContent={content[`../../src/planets/${object.id}/prepared/content.json`] as PreparedObjectContentDocument}
+    preparedControls={controls[`../../src/planets/${object.id}/prepared/controls.json`]} />
+</template>)}

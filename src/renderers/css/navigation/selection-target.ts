@@ -3,7 +3,7 @@ import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } f
 import { worldQuaternionFromRotation, worldRotationFromQuaternion, rotateWorldPosition } from './world-camera-math.js';
 import { distanceForSilhouetteRadius } from '../solar-system/heliocentric-geometry.js';
 
-/** Galaxio selection: measured departure ray, shared orbital horizon, north-up arrival.
+/** Selection follows the measured departure ray, with a north-up arrival.
  * The CSS viewport supplies the approach framing instead of a fixed field of view. */
 export function createWorldSelectionTarget(from: WorldCameraPose, frame: PreparedWorldCameraFrame,
   viewport: WorldCameraViewport & { framingRadiusPixels: number }): WorldCameraPose {
@@ -14,13 +14,9 @@ export function createWorldSelectionTarget(from: WorldCameraPose, frame: Prepare
   const up = frame.orbitUpReference ?? rotateWorldPosition(sourceRotation, [0, -1, 0]);
   const offset: PositionM = [from.pose.positionM[0] - frame.originM[0],
     from.pose.positionM[1] - frame.originM[1], from.pose.positionM[2] - frame.originM[2]];
-  let direction = unit(offset);
-  if (frame.orbitUpReference) {
-    const projected = subtract(direction, scale(up, dot(direction, up)));
-    // At the exact orbital pole use the already drawn right axis to pick a stable meridian.
-    direction = Math.hypot(...projected) > 1e-10 ? unit(projected)
-      : unit(cross(rotateWorldPosition(sourceRotation, [1, 0, 0]), up));
-  }
+  // Keep the viewing latitude. Flattening this ray into the orbital plane
+  // introduces an unsolicited dive while the flight independently turns to face it.
+  const direction = unit(offset);
   const radius = viewport.framingRadiusPixels;
   const range = distanceForSilhouetteRadius(frame.bodyRadiusM, viewport.focalPixels,
     radius, viewport.principalOffsetPixels);
@@ -45,9 +41,7 @@ function basis(back: PositionM, downHint: PositionM) {
   const down = cross(back, right);
   return [right[0], down[0], back[0], right[1], down[1], back[1], right[2], down[2], back[2]];
 }
-function dot(a: PositionM, b: PositionM) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
 function scale(a: PositionM, k: number): PositionM { return [a[0] * k, a[1] * k, a[2] * k]; }
-function subtract(a: PositionM, b: PositionM): PositionM { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
 function cross(a: PositionM, b: PositionM): PositionM { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
 function unit(a: PositionM): PositionM {
   const length = Math.hypot(...a);
