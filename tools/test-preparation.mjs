@@ -11,6 +11,7 @@ const output = resolve(root, '.local/preparation-tests');
 const universeOnly = process.argv.length === 3 && process.argv[2] === '--universe';
 if (process.argv.length > 2 && !universeOnly) throw new TypeError('Usage: test-preparation.mjs [--universe]');
 const universeEntries = [
+  'src/preparation/image-layers/image-layers.test.ts',
   'src/preparation/volume/volume.test.ts',
   'src/preparation/sky/sky.test.ts',
   'src/renderers/css/preparation/volume.test.ts',

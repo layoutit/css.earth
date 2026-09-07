@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Deepest, widest view of the Small Magellanic Cloud from SMASH",
+  "publisher": "NSF's NOIRLab via AstroPix",
+  "sourceId": "noirlab2030b",
+  "sourcePage": "https://noirlab.edu/public/images/noirlab2030b/",
+  "download": "https://www.astropix.org/archive/noirlab/noirlab2030b/noirlab_noirlab2030b_3000.jpg",
+  "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      3827,
+      3190
+    ],
+    "bands": [
+      "DECam g",
+      "DECam r",
+      "DECam i",
+      "DECam z"
+    ],
+    "fieldOfViewDeg": [
+      5.3,
+      4.4
+    ]
+  },
+  "checkedSource": {
+    "kind": "publisher-curated AstroPix JPEG derivative",
+    "dimensions": [
+      3000,
+      2501
+    ],
+    "sha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c"
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0,
+    "lineOfNodesPaDeg": 0,
+    "reference": "Ripepi et al. 2017, arXiv:1707.04500; the broad envelope is not a thin disk or per-pixel distance map"
+  },
+  "displayModel": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth.",
+  "coverage": "The SMASH image covers the main optical body, not the full Bridge, Wing or tidal debris. Released foreground and background sources remain."
+}

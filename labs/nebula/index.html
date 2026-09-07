@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Nebula Lab · css.earth</title>
+    <link rel="stylesheet" href="./lab.css" />
+  </head>
+  <body>
+    <header class="lab-header">
+      <h1>Nebula Lab</h1>
+      <span>Local workspace</span>
+    </header>
+    <main class="lab-layout">
+      <aside class="lab-controls" aria-label="Inspection controls">
+        <label class="field-label" for="subject">Subject</label>
+        <select id="subject" disabled></select>
+        <fieldset id="render-controls" disabled>
+          <legend>Prepared image layers</legend>
+          <div class="component-options">
+            <label><input type="radio" name="component" value="all" checked /> Whole object</label>
+            <label><input type="radio" name="component" value="diffuse" /> Diffuse</label>
+            <label><input type="radio" name="component" value="detail" /> Compact detail</label>
+          </div>
+          <label class="field-label" for="axis">Projection axis</label>
+          <select id="axis">
+            <option value="auto">Auto</option>
+            <option value="x">X</option>
+            <option value="y">Y</option>
+            <option value="z">Z</option>
+          </select>
+          <div class="layer-heading">
+            <label for="layer">Depth</label>
+            <output id="layer-value" for="layer">All layers</output>
+          </div>
+          <input id="layer" type="range" min="-1" max="-1" step="1" value="-1" aria-valuetext="All layers" />
+          <button id="all-layers" class="text-button" type="button">Show all layers</button>
+          <button id="reset" class="reset-button" type="button">Reset camera</button>
+        </fieldset>
+        <p class="interaction-hint">Drag to orbit. Scroll or pinch to zoom.</p>
+        <p id="model-note" class="model-note">Depth is modeled from a source image; it is not a measured 3D reconstruction.</p>
+        <a id="source-link" hidden target="_blank" rel="noreferrer">Source and credit ↗</a>
+        <p id="source-credit" class="source-credit"></p>
+      </aside>
+      <section class="lab-workspace" aria-label="Object inspection">
+        <div class="workspace-toolbar">
+          <div role="tablist" aria-label="View">
+            <button id="render-tab" type="button" role="tab" aria-selected="true" aria-controls="render-panel">3D view</button>
+            <button id="source-tab" type="button" role="tab" aria-selected="false" aria-controls="source-panel" tabindex="-1">Source image</button>
+          </div>
+          <p id="status" role="status" aria-live="polite">Loading prepared layers…</p>
+        </div>
+        <div class="workspace-content">
+          <div id="render-panel" role="tabpanel" aria-labelledby="render-tab">
+            <div id="viewer" aria-label="Interactive prepared object" tabindex="0"></div>
+          </div>
+          <div id="source-panel" role="tabpanel" aria-labelledby="source-tab" hidden>
+            <div id="source-choice-wrapper" class="source-tools" hidden>
+              <label for="source-choice">Image</label>
+              <select id="source-choice"></select>
+            </div>
+            <img id="source-image" alt="" />
+            <p id="source-image-status" role="status"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

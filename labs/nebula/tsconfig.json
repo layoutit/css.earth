@@ -1,0 +1,12 @@
+{
+  "extends": "../../src/renderers/css/tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "typeRoots": ["../../node_modules/.pnpm/node_modules/@types"]
+  },
+  "include": ["*.ts", "../../node_modules/vite/client.d.ts"],
+  "exclude": ["*.test.ts"]
+}

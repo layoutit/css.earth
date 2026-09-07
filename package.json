@@ -11,6 +11,9 @@
     "setup:assets": "node tools/setup.mjs",
     "publish:runtime-assets": "node tools/publish-runtime-assets.mjs",
     "dev": "astro dev --host 127.0.0.1 --port 4210",
+    "lab:nebula": "vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort",
+    "lab:nebula:extract": "node --experimental-strip-types labs/nebula/extraction.ts",
+    "test:lab:nebula": "node --experimental-strip-types --test labs/nebula/*.test.ts",
     "postinstall": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:object-json",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
@@ -37,7 +40,7 @@
     "test:earth-delivery": "node tests/objects/browser/earth/global-delivery-browser.mjs",
     "publish:earth-city-face": "node tools/objects/geographic-pages/operations/publish-global-city-face.mjs --object=earth",
     "status:earth-city-global": "node tools/objects/geographic-pages/operations/status-global-city.mjs --object=earth",
-    "test": "pnpm test:packages && pnpm test:renderer && pnpm test:platform && pnpm test:shell",
+    "test": "pnpm test:packages && pnpm test:renderer && pnpm test:platform && pnpm test:shell && pnpm test:lab:nebula",
     "test:platform": "node --test src/platform/*.test.mjs src/navigation/*.test.mjs tools/*.test.mjs",
     "test:planets": "node tools/run-implemented-planets.mjs test",
     "test:shell": "node --test site/test/*.test.mjs",
@@ -77,7 +80,8 @@
     "test:preparation": "node tools/test-preparation.mjs",
     "typecheck:preparation": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json",
     "test:seo": "node site/test/seo-browser.mjs",
-    "prepare:social": "node tools/prepare-social-images.mjs"
+    "prepare:social": "node tools/prepare-social-images.mjs",
+    "prepare:image-layers": "node tools/objects/dist/prepare-image-layers.js"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

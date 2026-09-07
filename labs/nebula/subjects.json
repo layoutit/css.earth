@@ -1,0 +1,39 @@
+[
+  {
+    "id": "lmc",
+    "name": "Large Magellanic Cloud",
+    "directory": "src/objects/lmc",
+    "image": "source/source.jpg",
+    "framingRadiusUnits": 4
+  },
+  {
+    "id": "smc",
+    "name": "Small Magellanic Cloud",
+    "directory": "src/objects/smc",
+    "image": "source/source.jpg",
+    "framingRadiusUnits": 3
+  },
+  {
+    "id": "m31",
+    "name": "Andromeda \u00b7 M31",
+    "directory": "src/objects/m31",
+    "image": "source/source.jpg",
+    "framingRadiusUnits": 25
+  },
+  {
+    "id": "m33",
+    "name": "Triangulum \u00b7 M33",
+    "directory": "src/objects/m33",
+    "image": "source/source.jpg",
+    "framingRadiusUnits": 9
+  },
+  {
+    "id": "milky-way",
+    "name": "Milky Way \u00b7 volume reference",
+    "directory": "src/objects/milky-way",
+    "image": "source/sky/nasa-preview.jpg",
+    "sourcePageUrl": "https://svs.gsfc.nasa.gov/4851/",
+    "credit": "NASA interior-sky comparison; the 3D volume uses OpenSpace density data.",
+    "modelNote": "Prepared emission and extinction slices from the OpenSpace Milky Way density model. The source tab shows its NASA interior-sky comparison."
+  }
+]
