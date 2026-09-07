@@ -51,7 +51,7 @@ function address(value: unknown, resources: ReadonlySet<string>): void {
   text(item.backgroundPosition, 'background position'); text(item.backgroundSize, 'background size');
 }
 function rotation(value: unknown): void {
-  const item = record(value, 'rotation', ['kind', 'reference', 'baseDegrees', 'zeroAtPole', 'property', 'width', 'height', 'projection', 'polePolicy', 'systemTransform', 'onlyWhenEnabled', 'publishWithAddress']);
+  const item = record(value, 'rotation', ['kind', 'reference', 'baseDegrees', 'zeroAtPole', 'property', 'width', 'height', 'projection', 'polePolicy', 'systemTransform', 'onlyWhenEnabled', 'publishWithAddress', 'physical']);
   const kind = choice(item.kind, ['angle', 'planar', 'ellipsoid'], 'rotation kind');
   choice(item.reference, ['prepared', 'initial'], 'rotation reference'); finite(item.baseDegrees, 'rotation base'); boolean(item.zeroAtPole, 'pole rotation policy');
   for (const key of ['onlyWhenEnabled', 'publishWithAddress']) if (item[key] !== undefined) boolean(item[key], key);
@@ -59,15 +59,26 @@ function rotation(value: unknown): void {
   if (item.polePolicy !== undefined) choice(item.polePolicy, ['azimuth'], 'pole policy');
   if (kind === 'angle') text(item.property, 'angle property');
   else { positive(item.width, 'rotation width'); positive(item.height, 'rotation height'); }
-  if (kind === 'ellipsoid') {
-    const projection = record(item.projection, 'ellipsoid projection', ['equatorialRadius', 'polarRadius', 'coverageScale', 'bodySystemMatrix', 'bodyMeshMatrix', 'materialSystemMatrix', 'materialMeshMatrix', 'baseProjection', 'centerTranslation', 'inverseCenterTranslation', 'counterPrecision', 'counterFractionDigits', 'counterFractionScale']);
+  if (item.physical!==undefined){
+    const physical=record(item.physical,'physical material projection',['width','height','systemTransform','projection']);
+    positive(physical.width,'physical material width');positive(physical.height,'physical material height');text(physical.systemTransform,'physical material system transform');
+    ellipsoidProjection(physical.projection);
+  }
+  if (kind === 'ellipsoid') ellipsoidProjection(item.projection);
+}
+function ellipsoidProjection(value:unknown):void{
+    const projection = record(value, 'ellipsoid projection', ['equatorialRadius', 'polarRadius', 'coverageScale', 'bodySystemMatrix', 'bodyMeshMatrix', 'materialSystemMatrix', 'materialMeshMatrix', 'baseProjection', 'centerTranslation', 'inverseCenterTranslation', 'counterPrecision', 'counterFractionDigits', 'counterFractionScale','textureEllipse']);
     for (const key of ['equatorialRadius', 'polarRadius', 'coverageScale']) positive(projection[key], key);
     for (const key of ['bodySystemMatrix', 'bodyMeshMatrix', 'materialSystemMatrix', 'materialMeshMatrix', 'baseProjection', 'centerTranslation', 'inverseCenterTranslation']) numbers(projection[key], key, 16);
     if (projection.counterPrecision !== undefined && integer(projection.counterPrecision, 'counter precision', 1) > 16) fail('counter precision must be bounded');
     if (projection.counterFractionDigits !== undefined && (integer(projection.counterFractionDigits, 'fraction precision', 1) > 16 ||
       !(positive(projection.counterFractionScale, 'fraction scale') > 0) || projection.counterPrecision === undefined)) fail('fraction precision must be bounded');
     if (projection.counterFractionScale !== undefined && projection.counterFractionDigits === undefined) fail('fraction scale requires precision');
-  }
+    if(projection.textureEllipse!==undefined){
+      const ellipse=record(projection.textureEllipse,'texture ellipse',['center','covariance']);numbers(ellipse.center,'texture ellipse center',2);
+      const [xx,xy,yy]=numbers(ellipse.covariance,'texture ellipse covariance',3);
+      if(!(xx>0)||!(xx*yy-xy*xy>0))fail('texture ellipse covariance must be positive definite');
+    }
 }
 export function requireSelectedMaterial(value: unknown, tracks: readonly PreparedMaterialTrack[]): asserts value is PreparedMaterialSelection {
   const selected = record(value, 'selected material', ['track', 'bank', 'mode', 'enabled', 'rotationEnabled', 'frameOverride', 'frameOffset', 'clearWhenHidden', 'fixedMode', 'modeLabel', 'addressAttributes', 'publishWhenHidden']);

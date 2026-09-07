@@ -8,7 +8,7 @@ import { readPreparedPresentationModule } from "./check-prepared-presentation.mj
 import { applyPreparedProjectiveLayout } from "../src/platform/prepared-projective-texture-leaf.mjs";
 
 const cssName = name => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
-const textureClass = node => node?.className?.split(/\s+/).includes("polycss-projective-texture");
+const projectiveLeaf = node => node?.attributes?.["data-prepared-projection"] === "single-leaf";
 export function preparedStyleRecord(text, assignments = []) {
   const properties = new Map([...String(text).matchAll(/(?:^|;)\s*([\w-]+)\s*:\s*([^;]*)/g)].map(match => [match[1], match[2]]));
   // Match the retained publisher: cssText first, then every dictionary reference
@@ -35,25 +35,23 @@ function requireMatrix(value, label) {
   const values = matrix?.[1].split(",").map(Number);
   if (values?.length !== 16 || !values.every(Number.isFinite)) throw new TypeError(`Prepared projective ${label} transform is missing or invalid.`);
 }
-function requirePair(carrier, texture) {
+function requireLeaf(carrier) {
   for (const name of ["width", "height"]) {
     const value = carrier[name] || carrier.getPropertyValue(`--polycss-atlas-${name}`);
     if (!/^(?:\d+(?:\.\d*)?|\.\d+)px$/.test(value) || Number.parseFloat(value) <= 0) {
       throw new TypeError(`Prepared projective carrier requires explicit positive ${name}.`);
     }
-    if (texture[name] !== "100%") throw new TypeError(`Prepared projective texture must fill its carrier ${name}.`);
   }
   // One auto dimension is valid for an intrinsic-ratio image. An absent address
   // or an entirely automatic/zero-sized layer cannot supply a prepared layout.
-  if (!texture.backgroundSize || texture.backgroundSize.split(",").some(layer =>
+  if (!carrier.backgroundSize || carrier.backgroundSize.split(",").some(layer =>
       !layer.trim().split(/\s+/).some(value => /^\d+(?:\.\d*)?px$/.test(value) && Number.parseFloat(value) > 0))) {
     throw new TypeError("Prepared projective texture requires an explicit backgroundSize.");
   }
-  if (carrier.transformStyle !== "preserve-3d" || texture.transformStyle !== "flat") {
+  if (carrier.transformStyle !== "preserve-3d") {
     throw new TypeError("Prepared projective carrier/texture flattening is invalid.");
   }
   requireMatrix(carrier.transform, "carrier");
-  requireMatrix(texture.transform, "texture");
 }
 
 export async function censusPreparedLeafLayouts({
@@ -75,21 +73,20 @@ export async function censusPreparedLeafLayouts({
     try { tree = object.presentation?.format === 'json' ? JSON.parse(source).data.tree : readPreparedPresentationModule(source).tree; }
     catch (error) { report.failures.push({ file, error: error.message }); reports.push(report); continue; }
     const children = new Map();
-    for (const node of tree.nodes) if (textureClass(node)) children.set(node.parent, (children.get(node.parent) ?? 0) + 1);
+    for (const node of tree.nodes) children.set(node.parent, (children.get(node.parent) ?? 0) + 1);
     for (const [index, node] of tree.nodes.entries()) {
-      if (!textureClass(node)) continue;
+      if (!projectiveLeaf(node)) continue;
       report.count++;
       try {
-        const parent = tree.nodes[node.parent];
-        if (!parent || node.parent < 0 || node.parent >= index || children.get(node.parent) !== 1) {
-          throw new TypeError("Prepared projective texture requires one preceding carrier and one texture child.");
+        if (node.parent < 0 || node.parent >= index || children.has(index)) {
+          throw new TypeError("Prepared projective raster requires one leaf without nested texture children.");
         }
-        const original = preparedStyleRecord(parent.style), missing = missingLayoutProperties(original);
+        const original = preparedStyleRecord(node.style), missing = missingLayoutProperties(original);
         const assignments = entry => entry.properties.map(id => {
           if (!Number.isSafeInteger(id) || id < 0 || id >= tree.properties.length) throw new TypeError("Prepared projective property reference is invalid.");
           return tree.properties[id];
         }).filter(property => !ignoreLayouts || !missing.includes(property.name));
-        requirePair(preparedStyleRecord(parent.style, assignments(parent)), preparedStyleRecord(node.style, assignments(node)));
+        requireLeaf(preparedStyleRecord(node.style, assignments(node)));
         // This detects the old stylesheet-only layout without depending on an
         // object id, private builder, or class-to-layout dispatch table.
         try { applyPreparedProjectiveLayout(original, null, 2); }

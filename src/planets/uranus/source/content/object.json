@@ -89,7 +89,8 @@
         "source": {
           "id": "normal",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
-        }
+        },
+        "detail": "Visible light"
       },
       {
         "id": "methane",
@@ -133,7 +134,8 @@
         "source": {
           "id": "methane",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
-        }
+        },
+        "detail": "727 nm"
       },
       {
         "id": "near-infrared",
@@ -177,7 +179,8 @@
         "source": {
           "id": "near-infrared",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
-        }
+        },
+        "detail": "845 nm"
       }
     ]
   },

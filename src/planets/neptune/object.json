@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "676309f337641b400e9704bb95fb3f04bc43e826326b0d5906c32f7617a0d1d3"
+  },
   "id": "neptune",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -63,7 +66,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "60ea460506b51f18cc070e2d79c968e2fe38cced2d00df539144a00801658820"
+          "sha256": "ebaa31d18566865ac42d29b0b70e7025b8ffc8861ac8fa7e517a129a8e947008"
         },
         {
           "id": "rings",
@@ -177,11 +180,35 @@
         "source": "materials",
         "material": "lighting"
       }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4464323069020.515,
+        219850064405.67654,
+        -21150265923.520695
+      ],
+      "presentationToReference": [
+        0.809448495652493,
+        -0.3732094783428179,
+        0.45332970138851225,
+        0.49862388743234554,
+        0.8446010878639085,
+        -0.1949954390773222,
+        -0.31010861285648217,
+        0.38387978281512025,
+        0.8697522409157936
+      ],
+      "orbitUpReference": [
+        -5.551115123125783e-17,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 102330.57851239669,
+      "bodyRadiusM": 24764000
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "fcac8c1894da76148ffa46bab3ccf0ef0e14e9ba6beeb8e1c4f15b9e5a88c95d"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

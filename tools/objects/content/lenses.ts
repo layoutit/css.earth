@@ -69,6 +69,7 @@ export function prepareLenses(
       return {
         id: control.id,
         label: control.label,
+        ...(control.detail ? { detail: control.detail } : {}),
         ...(control.shortLabel ? { shortLabel: control.shortLabel } : {}),
         ...(control.falseColor !== undefined ? { falseColor: control.falseColor } : {}),
         ...(control.filter ? { filter: control.filter } : {}),

@@ -24,9 +24,12 @@ test("all four sourced solar layers wait for the complete replacement group", as
     jobs[3].done=true;jobs[3].resolve();await f.settle();assert.equal(await action,true);
     assert.ok(textures(f).every((value,index)=>value!==before[index]));
     assert.deepEqual(f.stage.querySelectorAll("*"),nodes);
-    f.presentation.publishFrame({view:{...f.view,zoom:2.25}});
-    for(const node of nodes.filter(n=>n.className.includes("sun-corona-layer")||n.className.includes("sun-limb-layer")))
-      assert.equal(node.style.getPropertyValue("--sun-camera-zoom"),"2.25");
+    f.presentation.publishFrame({view:{...f.view,zoom:2.25,body:{visible:true,
+      silhouette:{radial:[1,0],centre:[12,-8],radialSemiAxis:310,tangentialSemiAxis:248}}}});
+    for(const node of nodes.filter(n=>n.className.includes("sun-corona-layer")||n.className.includes("sun-limb-layer"))){
+      assert.equal(node.style.getPropertyValue("--sun-camera-zoom"),"1");
+      assert.equal(node.style.transform,"translate(12px, -8px) rotate(0deg) scale(1.25, 1) rotate(0deg)");
+    }
     assert.deepEqual(f.errors,[]);
   }finally{f.restore();}
 });

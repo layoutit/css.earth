@@ -55,7 +55,7 @@ try {
     lens: window.__moon.lenses.state(),
   }));
   assert.deepEqual(baseline, {
-    title: "Moon in 3D | cssEarth",
+    title: "Moon | cssEarth",
     mountedObjectCount: 1,
     activeObjectId: "moon",
     stageCount: 1,

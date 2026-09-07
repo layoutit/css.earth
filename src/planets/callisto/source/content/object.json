@@ -71,7 +71,8 @@
         "source": {
           "id": "usgs-voyager-galileo-global-1km",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Global mosaic"
       }
     ]
   },

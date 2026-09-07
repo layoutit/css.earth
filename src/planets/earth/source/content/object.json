@@ -84,7 +84,8 @@
         "thumbnail": "/scenes/earth/earth-lens-normal.webp",
         "source": {
           "id": "surface-observation"
-        }
+        },
+        "detail": "Global mosaic"
       },
       {
         "id": "buenos-aires-noise",
@@ -166,7 +167,8 @@
         },
         "source": {
           "id": "noise-daytime"
-        }
+        },
+        "detail": "Daytime · dBA"
       },
       {
         "id": "topography",
@@ -176,7 +178,8 @@
         "thumbnail": "/scenes/earth/earth-lens-topography.webp",
         "source": {
           "id": "surface-observation"
-        }
+        },
+        "detail": "Land + seafloor"
       },
       {
         "id": "night-lights",
@@ -186,7 +189,8 @@
         "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
         "source": {
           "id": "surface-observation"
-        }
+        },
+        "detail": "Nighttime"
       },
       {
         "id": "cross-section",
@@ -224,7 +228,8 @@
         },
         "source": {
           "id": "surface-observation"
-        }
+        },
+        "detail": "Structure"
       }
     ]
   },

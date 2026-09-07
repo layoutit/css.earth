@@ -130,7 +130,7 @@ function readMetadata(page) {
 function verifyMetadata(seo, object) {
   assert.equal(seo.titleCount, 1);
   assert.equal(seo.canonicalCount, 1);
-  assert.equal(seo.title, `${object.name} in 3D | cssEarth`);
+  assert.equal(seo.title, `${object.name} | cssEarth`);
   assert.equal(seo.canonical, origin + object.route);
   assert.ok(seo.description.includes(object.name) && seo.description.includes("cssEarth"));
   assert.equal(seo.og.type, "website");

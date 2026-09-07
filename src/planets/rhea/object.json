@@ -81,11 +81,38 @@
           "model": "lit"
         }
       ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1391056083516.6829,
+        244824603459.86795,
+        41354869861.32678
+      ],
+      "presentationToReference": [
+        0.9853132863285641,
+        0,
+        -0.17075634039298568,
+        0.1566658792951436,
+        0.39777715593191376,
+        0.9040072657248931,
+        0.06792297143886356,
+        -0.9174820620691818,
+        0.39193511673770365
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191376,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 3323.913043478261,
+      "bodyRadiusM": 764500
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "96cf8717c6ad50cb15b9ef62a2e072022e3fd2b27c7fecd52ffc47ed010f3a54"
+    "sha256": "ef2676e789b6253906dab30d7298ed18980cd9cee8e3c789deb4387ccb78626b"
   }
 }

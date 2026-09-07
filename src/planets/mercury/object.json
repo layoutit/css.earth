@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "9eb1058d7e613fa7aea686ac7dbc4798b67b848f14f7027759b1d45f68c666f5"
+  },
   "id": "mercury",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -75,7 +78,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "f306d0cb6f694b2b1a5cde2f7a2e08ecb2767208c1fea952cb894da279434933"
+          "sha256": "7892ae509369e1ef2039767c701f4b25ebef7a9b5d138ac5c7158a9f634bc579"
         },
         {
           "id": "solar-system",
@@ -151,9 +154,6 @@
       }
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "a501393d3f5ca7fa2dc96b9186ef237c08e47863bdbb1ea670f95c54890eae38"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

@@ -37,7 +37,7 @@ try {
     stable: window.__uranus.assertStableDomIdentity(),
   }));
   assert.deepEqual(state, {
-    title: "Uranus in 3D | cssEarth",
+    title: "Uranus | cssEarth",
     active: "uranus",
     mounted: 1,
     cameraCount: 1,

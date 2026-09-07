@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 export default {
   entry: {
     index: fileURLToPath(new URL('./index.ts', import.meta.url)),
+    universe: fileURLToPath(new URL('./universe/index.ts', import.meta.url)),
     navigation: fileURLToPath(new URL('./navigation/index.ts', import.meta.url)),
     testing: fileURLToPath(new URL('./testing.ts', import.meta.url)),
   },

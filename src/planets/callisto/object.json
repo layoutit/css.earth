@@ -1,8 +1,38 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "84b7e7a196bad869bb34a2cf634cdbcbd25813a6c1a7f6aaa905876a3b352811"
+  },
   "id": "callisto",
-  "type": "layered-body",
   "properties": {
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -495895143655.1052,
+        561740714739.1378,
+        252881799436.10452
+      ],
+      "presentationToReference": [
+        -0.6270924887078226,
+        1.0408340855860843e-17,
+        -0.7789448058792288,
+        0.7146678867361534,
+        0.3977771559319137,
+        -0.5753461096477483,
+        0.30984644951057627,
+        -0.9174820620691818,
+        -0.2494430666644635
+      ],
+      "orbitUpReference": [
+        -1.0408340855860843e-17,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 10479.565217391304,
+      "bodyRadiusM": 2410300
+    },
     "preparation": {
       "schema": "cssearth-object-preparation@1",
       "label": "Callisto",
@@ -18,7 +48,32 @@
       ]
     },
     "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2410.3
+      },
       "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
       "sources": [
         {
           "id": "terrestrial",
@@ -28,7 +83,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4b6c8604e6b6bfa5ad55f1aeb16a73971e7c6d13c24a130daf29eb3c4be6dc47"
+          "sha256": "e9284222caa8b1269973294f17790804d3d931187bc7a9479a1d080c0e063b75"
         },
         {
           "id": "title",
@@ -45,37 +100,9 @@
           "path": "source/preparation/acquisition.json",
           "sha256": "a210414d15be18834f204fd9fcedfa8c71485b6b83f0d0af136b114e1c2767fb"
         }
-      ],
-      "shape": {
-        "kind": "sphere",
-        "radiusKm": 2410.3
-      },
-      "surfaces": [
-        {
-          "id": "body",
-          "source": "terrestrial",
-          "projection": "equirectangular",
-          "lenses": [
-            {
-              "id": "normal",
-              "source": "content",
-              "material": "lighting"
-            }
-          ]
-        }
-      ],
-      "materials": [
-        {
-          "id": "lighting",
-          "source": "terrestrial",
-          "model": "lit"
-        }
       ]
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "9d564e5ba87d8691581f45cdee09a85c5e496306b47ab5514051f0fba4f604a1"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

@@ -4,13 +4,14 @@ import mercury from '../../../../src/planets/mercury/prepared/runtime.json' with
 import venus from '../../../../src/planets/venus/prepared/runtime.json' with { type: 'json' };
 import { selectPreparedResponsiveZoom } from './camera-layout.ts';
 
-function responsiveFit(plan, width, height) {
+function responsiveFit(plan, width, height, options = {}) {
   const bounds = () => ({ width, height });
   return selectPreparedResponsiveZoom({
     stage: { getBoundingClientRect: bounds },
     cameraElement: { getBoundingClientRect: bounds },
     plan,
     mobile: width < 768,
+    ...options,
   });
 }
 
@@ -36,4 +37,11 @@ test('legacy camera responsive framing retains its authored scale bounds', () =>
   const plan = { ...venus.camera, projection: undefined };
   assert.equal(responsiveFit(plan, 390, 844).zoom, plan.responsiveFit.minimumZoom);
   assert.equal(responsiveFit(plan, 10000, 10000).zoom, plan.responsiveFit.maximumZoom);
+});
+
+test('physical responsive framing uses the world context framing reference', () => {
+  const plan = mercury.camera;
+  const authored = responsiveFit(plan, 1440, 900);
+  const worldReference = responsiveFit(plan, 1440, 900, { framingReferenceZoom: 1 });
+  assert.ok(Math.abs(worldReference.zoom / authored.zoom - 1 / plan.defaultZoom) < 1e-12);
 });

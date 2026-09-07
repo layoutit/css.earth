@@ -14,6 +14,27 @@ interface Props {
 }
 
 const { preparedContent: content, preparedControls: controls } = Astro.props;
+const previewFiles = import.meta.glob<{ images: Array<{ id: string; path: string; width: number; height: number }> }>(
+  "../../src/planets/*/prepared/minimaps.json",
+  { import: "default" },
+);
+const imageFiles = import.meta.glob<string>(
+  "../../src/planets/*/prepared/minimaps/*.webp",
+  { query: "?url", import: "default" },
+);
+const minimapFiles = import.meta.glob("../../src/planets/*/source/presentation/surface-map.json", { import: "default" });
+const objectRoot = `../../src/planets/${content.objectId}`;
+const minimap = await minimapFiles[`${objectRoot}/source/presentation/surface-map.json`]?.();
+const previews = await previewFiles[`${objectRoot}/prepared/minimaps.json`]?.();
+const lenses = controls.lenses && {
+  ...controls.lenses,
+  controls: await Promise.all(controls.lenses.controls.map(async (lens) => {
+    const preview = previews?.images.find(image => image.id === lens.id);
+    if (!preview) return lens;
+    const url = await imageFiles[`${objectRoot}/prepared/${preview.path}`]();
+    return { ...lens, texture: { url, width: preview.width, height: preview.height, minimap } };
+  })),
+};
 ---
 
 <PlanetShell
@@ -25,7 +46,7 @@ const { preparedContent: content, preparedControls: controls } = Astro.props;
   charts={content.charts}
   galleries={content.galleries}
   resources={content.resources}
-  lenses={controls.lenses}
+  lenses={lenses}
   settings={controls.settings}
   destinations={content.destinations}
 />

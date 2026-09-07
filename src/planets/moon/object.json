@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "276efc7f67dba29011c7316cb4fa1dc2a83e3f0444873a5cde37c8ff423eb77f"
+  },
   "id": "moon",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -38,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/static.json",
-          "sha256": "0923a6005898099f167ed3298b45809df859d8176d3112474ca03e688783b530"
+          "sha256": "9cdbc48daf7af06cb2afe4639f000f6e25ed5dc72b013b7e840db1de5b01a0d8"
         },
         {
           "id": "title",
@@ -96,11 +99,35 @@
           "model": "lit"
         }
       ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        142187500595.13907,
+        -46738265180.70099,
+        -20223996617.1983
+      ],
+      "presentationToReference": [
+        -0.5596821892231959,
+        0.8270765037281106,
+        -0.05196444984039918,
+        -0.7200339402344946,
+        -0.5163730901983671,
+        -0.4635838183428941,
+        -0.4102523272045133,
+        -0.22204343876789892,
+        0.88452797543289
+      ],
+      "orbitUpReference": [
+        -6.938893903907228e-18,
+        -0.3977771559319138,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 6867.193675889329,
+      "bodyRadiusM": 1737400
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "0116510d9b0b930ecfe6fd2cc0912a8267b62c317411ebd1e535fbe324436a30"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

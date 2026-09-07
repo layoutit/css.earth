@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "825b254a10ec785794eb41f600c9b4b05e2244e855770d89a060b575d1b1757c"
+  },
   "id": "saturn",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -38,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "cfe6a149d69d6021059b06dce212f69dee05f21342033df40b3d976e49edd934"
+          "sha256": "73992b49fd4c12caae215d8699c1e6c662d33e144ffffa6c8954ac0185f853e8"
         },
         {
           "id": "geometry",
@@ -140,11 +143,35 @@
         "surface": "body",
         "lens": "cross-section"
       }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1390634086629.1033,
+        245139735109.86838,
+        41365218073.91039
+      ],
+      "presentationToReference": [
+        -0.9879788801694436,
+        0.11562179815149831,
+        -0.10261253398755377,
+        -0.07371537340911127,
+        -0.9358122030953988,
+        -0.34470503950608494,
+        -0.1358814779956709,
+        -0.33299717766063786,
+        0.9330857964880623
+      ],
+      "orbitUpReference": [
+        -5.551115123125783e-17,
+        -0.3977771559319137,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 238213.4387351779,
+      "bodyRadiusM": 60268000
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "9fad3e4afd7873f7181f253fb7e3f556549178ca281acade0b79876355bdd86d"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

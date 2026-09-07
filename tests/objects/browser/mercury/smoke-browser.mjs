@@ -84,7 +84,7 @@ try {
     retainedStarCount: document.querySelectorAll(".mercury-skybox-stars .planet-cubic-sky-star").length,
   }));
   assert.deepEqual(baseline, {
-    title: "Mercury in 3D | cssEarth",
+    title: "Mercury | cssEarth",
     mountedObjectCount: 1,
     activeObjectId: "mercury",
     stageCount: 1,

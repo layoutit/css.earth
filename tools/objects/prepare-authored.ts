@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { mkdir, mkdtemp, copyFile, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, copyFile, cp, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
@@ -10,6 +10,7 @@ import { prepareCelestialAssets } from './celestial/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { loadGeometryAdapters } from './geometry-adapters.js';
 import { prepareRuntimeManifest } from './operations.js';
+import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean; }
 export interface VerifiedSource { readonly reference: SourceReference; readonly path: string; readonly value: unknown; }
@@ -53,6 +54,16 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 
 /** Verify authored source pins, then prepare each available generic capability lane. */
 export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
+  const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write });
+  if (write || !result.definition) return result;
+  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-surface-minimaps.mjs')).href);
+  await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
+  const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
+  const scene = await writeWorldNavigationArtifacts(outputDirectory, prepared, result.scene as Record<string, unknown> | undefined);
+  return Object.freeze({ ...result, definition: prepared.definition, scene });
+}
+
+async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   if (write) {
     const id = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'descriptor').id;
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid preparation identity.');
@@ -72,6 +83,8 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
     for (const entry of outputs) {
       await copyFile(entry.path, resolve(outputDirectory, entry.filename));
     }
+    await cp(resolve(stagedData, 'minimaps'), resolve(outputDirectory, 'minimaps'), { recursive: true })
+      .catch((error: NodeJS.ErrnoException) => { if (error.code !== 'ENOENT') throw error; });
     await copyFile(resolve(stagedData, 'runtime-assets.json'), resolve(objectDirectory, 'runtime-assets.json'));
     const scene = result.scene as Record<string, unknown> | undefined;
     if (scene?.worldFrame !== undefined) {
