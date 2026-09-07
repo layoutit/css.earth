@@ -22,9 +22,9 @@ test('small shell attribution records match the checked scientific provenance', 
   assert.equal(heliosphere.publication.url, `https://doi.org/${heliosphere.publication.doi}`);
   const leadAuthor = heliosphere.publication.authors[0].split(' ').at(-1);
   const year = heliosphere.publication.journal.match(/\((\d{4})\)/u)[1];
-  assert.equal(sources[3].description, `${leadAuthor} et al. (${year}): IBEX-constrained heliopause, published Z–H model; tail-sounding limits left open.`);
+  assert.equal(sources[3].description, `${leadAuthor} et al. (${year}): IBEX-derived envelope, published Z–H model; tail distances are ENA sounding limits, not a measured heliopause closure.`);
   assert.match(heliosphere.sourceReference.variant, /Zirnstein–Heerikhuisen/u);
-  assert.match(heliosphere.approximation.geometry, /category 3 entries.*replaced by null/u);
+  assert.match(heliosphere.approximation.geometry, /All 91 coordinates.*remain exact/u);
 });
 
 test('every shared route retains its object sources and the actual environment credits', async () => {
@@ -41,7 +41,7 @@ test('every shared route retains its object sources and the actual environment c
     assert.match(byLabel.get('HYG').description, /David Nash.*CC-BY-SA-4\.0/u);
     assert.equal(sources.filter(source => source.label === 'HYG').length, 1);
     assert.equal(sources.filter(source => source.label === 'IBEX').length, 1);
-    assert.match(byLabel.get('IBEX').description, /Reisenfeld et al\. \(2021\).*IBEX-constrained.*published Z–H model; tail-sounding limits left open/u);
+    assert.match(byLabel.get('IBEX').description, /Reisenfeld et al\. \(2021\).*IBEX-derived.*published Z–H model; tail distances are ENA sounding limits, not a measured heliopause closure/u);
     assert.equal(new Set(sources.map(source => source.href)).size, sources.length);
     assert.doesNotMatch(JSON.stringify(sources), /Galaxio|Galaxium/u);
   }

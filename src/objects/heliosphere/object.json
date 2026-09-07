@@ -20,25 +20,25 @@
       "metersPerUnit": 149597870700,
       "boundsUnits": {
         "min": [
-          -188.25000000000003,
-          -111.0000000000001,
-          -175.59954702827685
+          -383,
+          -383,
+          -383
         ],
         "max": [
-          192.25763964014533,
-          120,
-          182
+          383,
+          383,
+          383
         ]
       }
     },
     "preparation": {
       "source": "source/shell.json",
-      "sha256": "5e1753888f323c43013cb9e1758137e992149646148ab099ce4f45c6f5069b5d"
+      "sha256": "5f3b6812ca0a91e0525f5b83b30a4a3c443162f9a040b60ff58e2fe36f5bcf99"
     }
   },
   "prepared": {
     "format": "cssearth-surface-shell@1",
     "url": "prepared/shell.json",
-    "sha256": "bc4e96223b6b1238325be5446d5c3aa4d749bac236ce439e7ebb94bcb67f9d00"
+    "sha256": "0d27f69226a7077c8d2e866a4a819d2654f9660709d6c9ae84ca1aa6ba8620a8"
   }
 }

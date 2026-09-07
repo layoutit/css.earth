@@ -36,7 +36,78 @@ export function parseIndexedShellMesh(value: unknown): ShellMesh {
 export async function loadShellMesh(sourceDirectory: string, recipe: ShellRecipe): Promise<ShellMesh> {
   const bytes = await verifiedBytes(sourceDirectory, recipe.shape);
   const input: unknown = JSON.parse(bytes.toString('utf8'));
-  return recipe.shape.kind === 'gridded-surface' ? parseGriddedShellMesh(input) : parseIndexedShellMesh(input);
+  const mesh = recipe.shape.kind === 'gridded-surface' ? parseGriddedShellMesh(input) : parseIndexedShellMesh(input);
+  return recipe.shape.displaySubdivision ? subdivideRadialMesh(mesh, recipe.shape.displaySubdivision.segmentsPerEdge) : mesh;
+}
+
+/** Offline radial interpolation: exact samples, shared curved edges, and smooth surface-derived display normals. */
+export function subdivideRadialMesh(mesh: ShellMesh, segmentsPerEdge: number): ShellMesh {
+  if (!Number.isSafeInteger(segmentsPerEdge) || segmentsPerEdge < 1 || segmentsPerEdge > 8) {
+    throw new TypeError('Radial subdivision segments must be an integer from 1 through 8.');
+  }
+  if (mesh.triangles.length * segmentsPerEdge ** 2 > 20_000) {
+    throw new TypeError('Radial subdivision exceeds the prepared face budget.');
+  }
+  const scale = Math.max(...mesh.positionsUnits.map(position => Math.hypot(...position)));
+  const tolerance = Math.max(scale * 1e-12, Number.EPSILON);
+  const buckets = new Map<string, number[]>(), canonical = new Uint32Array(mesh.positionsUnits.length);
+  const bucketKey = (x: number, y: number, z: number) => `${x},${y},${z}`;
+  for (let index = 0; index < mesh.positionsUnits.length; index++) {
+    const position = mesh.positionsUnits[index]!;
+    const cell = position.map(value => Math.round(value / tolerance));
+    let match = -1;
+    for (let x = -1; x <= 1 && match < 0; x++) for (let y = -1; y <= 1 && match < 0; y++) for (let z = -1; z <= 1 && match < 0; z++) {
+      for (const candidate of buckets.get(bucketKey(cell[0]! + x, cell[1]! + y, cell[2]! + z)) ?? []) {
+        if (Math.hypot(...position.map((value, axis) => value - mesh.positionsUnits[candidate]![axis]!)) <= tolerance) { match = candidate; break; }
+      }
+    }
+    canonical[index] = match < 0 ? index : canonical[match]!;
+    const key = bucketKey(cell[0]!, cell[1]!, cell[2]!);
+    const members = buckets.get(key); if (members) members.push(index); else buckets.set(key, [index]);
+  }
+  const positionsUnits = mesh.positionsUnits.map(position => [...position] as Vector3);
+  const edgeVertices = new Map<string, number>(), triangles: [number, number, number][] = [];
+  const point = (sourceTriangle: readonly [number, number, number], weights: readonly [number, number, number], triangleIndex: number): number => {
+    const active = weights.flatMap((weight, corner) => weight > 0 ? [corner] : []);
+    if (active.length === 1) return canonical[sourceTriangle[active[0]!]!]!;
+    let key: string;
+    if (active.length === 2) {
+      const ia = canonical[sourceTriangle[active[0]!]!]!, ib = canonical[sourceTriangle[active[1]!]!]!;
+      const wa = weights[active[0]!]!, wb = weights[active[1]!]!;
+      key = ia < ib ? `e:${ia}:${ib}:${wb}` : `e:${ib}:${ia}:${wa}`;
+    } else key = `t:${triangleIndex}:${weights.join(':')}`;
+    const cached = edgeVertices.get(key); if (cached !== undefined) return cached;
+    const direction: Vector3 = [0, 0, 0]; let radius = 0;
+    for (let corner = 0; corner < 3; corner++) {
+      const position = mesh.positionsUnits[sourceTriangle[corner]!]!, weight = weights[corner]! / segmentsPerEdge;
+      const sourceRadius = Math.hypot(...position); radius += weight * sourceRadius;
+      for (let axis = 0; axis < 3; axis++) direction[axis] += weight * position[axis]! / sourceRadius;
+    }
+    const unit = unitVector(direction), index = positionsUnits.length;
+    positionsUnits.push(unit.map(value => value * radius) as Vector3); edgeVertices.set(key, index); return index;
+  };
+  mesh.triangles.forEach((source, triangleIndex) => {
+    const grid: number[][] = [];
+    for (let i = 0; i <= segmentsPerEdge; i++) {
+      grid[i] = [];
+      for (let j = 0; j <= segmentsPerEdge - i; j++) grid[i]![j] = point(source,
+        [segmentsPerEdge - i - j, i, j], triangleIndex);
+    }
+    for (let i = 0; i < segmentsPerEdge; i++) for (let j = 0; j < segmentsPerEdge - i; j++) {
+      triangles.push([grid[i]![j]!, grid[i + 1]![j]!, grid[i]![j + 1]!]);
+      if (j < segmentsPerEdge - i - 1) triangles.push([grid[i + 1]![j]!, grid[i + 1]![j + 1]!, grid[i]![j + 1]!]);
+    }
+  });
+  const sums = positionsUnits.map((): Vector3 => [0, 0, 0]);
+  for (const triangle of triangles) {
+    const [a, b, c] = triangle.map(index => positionsUnits[index]!) as [Vector3, Vector3, Vector3];
+    const ab = b.map((value, axis) => value - a[axis]!) as Vector3, ac = c.map((value, axis) => value - a[axis]!) as Vector3;
+    let normal: Vector3 = [ab[1] * ac[2] - ab[2] * ac[1], ab[2] * ac[0] - ab[0] * ac[2], ab[0] * ac[1] - ab[1] * ac[0]];
+    if (normal.reduce((sum, value, axis) => sum + value * a[axis]!, 0) < 0) { [triangle[1], triangle[2]] = [triangle[2], triangle[1]]; normal = normal.map(value => -value) as Vector3; }
+    for (const index of triangle) for (let axis = 0; axis < 3; axis++) sums[index]![axis] += normal[axis]!;
+  }
+  const radialNormals = sums.map((normal, index) => Math.hypot(...normal) > 0 ? unitVector(normal) : unitVector(positionsUnits[index]!));
+  return { positionsUnits, radialNormals, triangles };
 }
 
 /** Connects adjacent published samples; null samples leave holes, including at the grid boundary. */
