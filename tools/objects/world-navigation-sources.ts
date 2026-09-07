@@ -7,6 +7,8 @@ export interface AuthoredPresentationBasis { readonly bodyToPresentation: Matrix
 
 /** Read each capability's existing authored axes; object identities never select a backend. */
 export function authoredPresentationBasis(sources: ReadonlyMap<string, Input>, eclipticBasis: Matrix3): AuthoredPresentationBasis {
+  const model = sources.get('shape-model');
+  if (model?.schema === 'cssearth-shape-model@1') return checked(eclipticBasis, model.displayRadius, 50);
   const solar = sources.get('solar-system'), terrestrial = sources.get('terrestrial');
   const geometry = sources.get('geometry'), presentation = sources.get('presentation'), paged = sources.get('paged-ellipsoid');
   if (solar?.schema === 'cssearth-solar-system-preparation@1') {

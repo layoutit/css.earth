@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import sharp from 'sharp';
-import { wheelWithReceipt } from './wheel-zoom-distance.mjs';
+import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mjs';
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
@@ -85,19 +85,7 @@ async function read(page) {
     };
   });
 }
-async function scrollTo(page, targetKm) {
-  await page.mouse.move(1050, 600);
-  for (let attempt = 0; attempt < 24; attempt++) {
-    const current = await page.evaluate(() => window.__sun.camera.state().distanceKilometers);
-    if (Math.abs(current / targetKm - 1) < 1e-6) return;
-    await wheelWithReceipt(page, Math.max(-300, Math.min(300, Math.log(targetKm / current) / .006)));
-    await page.waitForFunction(() => {
-      const inertia = window.__sun.camera.stats().dragInertia;
-      return !inertia.active && !inertia.wheelZoom.active;
-    }, null, { timeout: 6000 });
-  }
-  throw new Error(`Native wheel failed to reach ${targetKm} km.`);
-}
+
 async function backgroundSignal(png) {
   const { data, info } = await sharp(png).extract({ left: 380, top: 60, width: 1040, height: 780 })
     .removeAlpha().resize(104, 78).blur(2).raw().toBuffer({ resolveWithObject: true });

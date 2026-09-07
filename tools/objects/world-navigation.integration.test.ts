@@ -40,7 +40,8 @@ for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pi
     // Check the source-derived basis against the actual retained surface carrier,
     // independently of the family adapter's authored field selection.
     const nodes = definition.tree.nodes;
-    let index = nodes.findIndex((node: { className: string | null }) => node.className?.split(' ').includes(`${descriptor.id}-body`));
+    let index = nodes.findIndex((node: { className: string | null }) => node.className?.split(' ')
+      .some(className => className === `${descriptor.id}-body` || className === 'shape-model-body'));
     assert.ok(index >= 0, 'Retained surface carrier is missing.');
     const transforms: string[] = [];
     const retainedTransform = (node: any): string => node.properties.map((propertyIndex: number) => definition.tree.properties[propertyIndex])

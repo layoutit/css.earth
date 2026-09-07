@@ -29,7 +29,7 @@ test("decodes signed USGS elevation and preserves missing observations", async (
   assert.equal(grid.width, 24888); assert.equal(grid.height, 12444);
   assert.deepEqual(elevationColor(-32768), [0, 0, 0]);
   assert.notDeepEqual(elevationColor(-1000), elevationColor(1000));
-  assert.deepEqual(elevationColor(0), [214, 208, 178]);
+  assert.deepEqual(elevationColor(0), [187, 171, 128]);
   let low = Infinity, high = -Infinity, missing = 0;
   for (let y = 0; y < grid.height; y += 101) for (let x = 0; x < grid.width; x += 101) {
     const v = grid.sample(x, y);

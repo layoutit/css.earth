@@ -35,3 +35,91 @@ test('ready unclaimed resources are cancelled promptly without double destructio
   expect(() => lease.claim(assets, {})).toThrow('unavailable');
   expect(await residency.prepareStartup()).toBeNull();
 });
+
+function decodingFixture() {
+  const assets: PreparedAssets = {
+    entries: ['base', 'a', 'b', 'c'].map(key => ({ key, url: `/${key}.webp`, pool: key === 'base' ? 'base' : 'material' })),
+    startup: ['base'], pools: [
+      { id: 'base', capacity: 1, concurrency: 1, reuse: false, retention: 'mount' },
+      { id: 'material', capacity: 2, concurrency: 2, reuse: true, retention: 'selection', eviction: 'unused' },
+    ],
+  };
+  const decodes = new Map<string, { resolve(): void; reject(error: Error): void }>();
+  const createResources: typeof createPreparedResidency = options => createPreparedResidency({ ...options,
+    createImage: () => ({ src: '', decoding: 'async', naturalWidth: 8, naturalHeight: 8,
+      decode() { return new Promise<void>((resolve, reject) => decodes.set(this.src, { resolve, reject })); } }),
+  });
+  const controller = new AbortController();
+  const lease = prepareObjectResources(assets, { createResources, signal: controller.signal });
+  return { assets, lease, controller, decodes };
+}
+
+test('startup yields its reservation; a moving view replaces stale demand before claim', async () => {
+  const f = decodingFixture();
+  let key = 'a';
+  const prepared = f.lease.prepareDemand(() => ({ required: [key] }));
+  expect([...f.decodes.keys()]).toEqual(['/base.webp']);
+  f.decodes.get('/base.webp')!.resolve();
+  await vi.waitFor(() => expect(f.decodes.has('/a.webp')).toBe(true));
+  key = 'b';
+  f.decodes.get('/a.webp')!.resolve();
+  await vi.waitFor(() => expect(f.decodes.has('/b.webp')).toBe(true));
+  f.decodes.get('/b.webp')!.resolve();
+  await prepared;
+  const residency = f.lease.claim(f.assets, {});
+  expect([...residency.resources.readyKeys()].sort()).toEqual(['b', 'base']);
+  const ticket = residency.request({ required: ['b'] });
+  expect(await ticket.ready).toBe(ticket);
+  residency.commit(ticket);
+  expect(f.decodes.size).toBe(3); // The mount reuses the decoded image handle.
+  residency.destroy();
+});
+
+test('view preparation cancels pending native decode and propagates required image failure', async () => {
+  const cancelled = decodingFixture();
+  const pending = cancelled.lease.prepareDemand(() => ({ required: ['a'] }));
+  cancelled.controller.abort();
+  await expect(pending).rejects.toThrow('cancelled');
+  expect(() => cancelled.lease.claim(cancelled.assets, {})).toThrow('unavailable');
+
+  const failed = decodingFixture();
+  const preparation = failed.lease.prepareDemand(() => ({ required: ['a'] }));
+  failed.decodes.get('/base.webp')!.resolve();
+  await vi.waitFor(() => expect(failed.decodes.has('/a.webp')).toBe(true));
+  failed.decodes.get('/a.webp')!.reject(new Error('image failed'));
+  await expect(preparation).rejects.toThrow('did not decode');
+  failed.lease.destroy();
+});
+
+function boundedLease(startup: string[], capacity: number) {
+  const assets: PreparedAssets = { entries: ['a', 'b', 'c', 'd', 'e', 'f'].map(key => ({ key, url: `/${key}.webp`, pool: 'lighting' })),
+    startup, pools: [{ id: 'lighting', capacity, concurrency: capacity, reuse: true, retention: 'selection', eviction: 'capacity' }] };
+  let residency!: ReturnType<typeof createPreparedResidency>;
+  const lease = prepareObjectResources(assets, { createResources: options => residency = createPreparedResidency({ ...options,
+    createImage: () => ({ src: '', decoding: 'async', naturalWidth: 8, naturalHeight: 8, decode: async () => {} }),
+  }) });
+  return { assets, lease, residency };
+}
+
+test('a full default startup pool yields to an unpublished incoming view without increasing capacity', async () => {
+  const f = boundedLease(['a', 'b', 'c'], 3);
+  await f.lease.prepareDemand(() => ({ required: ['d'], prewarm: ['e', 'f'] }));
+  expect(f.residency.stats().committed).toEqual([]);
+  expect(f.residency.stats().pools[0].resident).toBeLessThanOrEqual(3);
+  const adopted = f.lease.claim(f.assets, {});
+  expect(adopted.stats().committed).toEqual(['d']);
+  expect(adopted.resources.has('d')).toBe(true);
+  adopted.destroy();
+});
+
+test('a second preflight checkpoint replaces a ready unpublished selection instead of protecting both', async () => {
+  const f = boundedLease([], 2);
+  await f.lease.prepareDemand(() => ({ required: ['a', 'b'] }));
+  await f.lease.prepareDemand(() => ({ required: ['c', 'd'] }));
+  expect(f.residency.stats().committed).toEqual([]);
+  expect(f.residency.stats().pools[0].resident).toBe(2);
+  const adopted = f.lease.claim(f.assets, {});
+  expect(adopted.stats().committed).toEqual(['c', 'd']);
+  expect(adopted.resources.has('c')).toBe(true); expect(adopted.resources.has('d')).toBe(true);
+  adopted.destroy();
+});

@@ -9,6 +9,19 @@ export interface PhysicalProjection {
   readonly eyeFromScene: Matrix4;
 }
 
+/** Shared by detached incoming-view preparation and the mounted camera. */
+export function physicalProjectionFromCamera(rotation: readonly number[], center: readonly number[], scale: number,
+  viewport: { focalPixels: number; principalOffsetPixels: readonly [number, number] }): PhysicalProjection {
+  return Object.freeze({ focalPixels: viewport.focalPixels, principalOffsetPixels: viewport.principalOffsetPixels,
+    eyeFromScene: Object.freeze([
+      rotation[0] * scale, rotation[3] * scale, rotation[6] * scale, 0,
+      rotation[1] * scale, rotation[4] * scale, rotation[7] * scale, 0,
+      rotation[2] * scale, rotation[5] * scale, rotation[8] * scale, 0,
+      center[0], center[1], center[2], 1,
+    ]) as Matrix4,
+  });
+}
+
 export function requirePhysicalProjection(value: PhysicalProjection): PhysicalProjection {
   if (!(value.focalPixels > 0) || !Number.isFinite(value.focalPixels) ||
     value.principalOffsetPixels.length !== 2 || !value.principalOffsetPixels.every(Number.isFinite) ||

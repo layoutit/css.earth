@@ -10,6 +10,21 @@ class Clock {
   frame(milliseconds:number){this.now+=milliseconds;const callbacks=[...this.pending.values()];this.pending.clear();for(const callback of callbacks)callback(this.now);}
 }
 
+test('a separate alpha property preserves the shared hover opacity and reverses continuously', () => {
+  const clock = new Clock(), values = new Map([['--label-alpha', '0']]);
+  const element = { style: { opacity: 'calc(var(--label-alpha) * var(--hover-opacity))',
+    getPropertyValue: (key: string) => values.get(key) ?? '',
+    setProperty: (key: string, value: string) => values.set(key, value) } } as unknown as HTMLElement;
+  const fader = createOpacityFader(clock, '--label-alpha');
+  fader.set(element, 1, 200); clock.frame(100);
+  expect(values.get('--label-alpha')).toBe('0.5');
+  fader.set(element, 0, 200); clock.frame(100);
+  expect(values.get('--label-alpha')).toBe('0.25');
+  expect(element.style.opacity).toBe('calc(var(--label-alpha) * var(--hover-opacity))');
+  clock.frame(100); expect(values.get('--label-alpha')).toBe('0');
+  expect(clock.pending.size).toBe(0); fader.destroy();
+});
+
 test('interpolates on wall time, retargets from the current value, and avoids Web Animations',()=>{
   const clock=new Clock(),element=new Element(),fader=createOpacityFader(clock);
   fader.set(element as unknown as HTMLElement,1,100);expect(element.style.opacity).toBe('0');expect(clock.pending.size).toBe(1);
@@ -44,4 +59,24 @@ test('duration zero clears a completed fade before the element is admitted again
   fader.set(element as unknown as HTMLElement,0,0);
   fader.set(element as unknown as HTMLElement,1,100);clock.frame(50);
   expect(Number(element.style.opacity)).toBeCloseTo(.5);fader.destroy();
+});
+
+test('cancelling a pool retains unfinished fades and stops after its final active member', () => {
+  const clock = new Clock(), fader = createOpacityFader(clock);
+  const settled = Array.from({ length: 2048 }, () => new Element());
+  for (const element of settled) fader.set(element as unknown as HTMLElement, .5);
+  const fading = new Element();
+  fader.set(fading as unknown as HTMLElement, 1, 100);
+  for (const element of settled) fader.cancel(element as unknown as HTMLElement);
+  expect(clock.pending.size).toBe(1);
+  clock.frame(50);
+  expect(Number(fading.style.opacity)).toBeCloseTo(.5);
+  fader.set(fading as unknown as HTMLElement, .8, 0);
+  expect(clock.pending.size).toBe(0);
+  expect(fading.style.opacity).toBe('0.8');
+  fader.set(fading as unknown as HTMLElement, 0, 100);
+  clock.frame(100);
+  expect(fading.style.opacity).toBe('0');
+  expect(clock.pending.size).toBe(0);
+  fader.destroy();
 });

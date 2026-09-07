@@ -77,20 +77,11 @@
   width: 100%;
 }
 
-.planet-sidebar .maps-object-results {
-  display: block;
-  flex: 0 0 auto;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 6px 12px 6px var(--explorer-card-padding-left, 20px);
-  border-radius: 4px;
-  color: var(--shell-text-secondary);
-  background: var(--explorer-panel-background);
-  pointer-events: auto;
-}
-
+.planet-sidebar .maps-object-results { display: contents; }
 .planet-sidebar .maps-object-results[hidden],
-.planet-sidebar .maps-object-results .planet-object-item[hidden] { display: none; }
+.planet-sidebar .maps-object-results .planet-object-item[hidden],
+.planet-card[hidden],
+[data-object-type-group][hidden] { display: none; }
 
 .planet-sidebar .maps-object-results .planet-object-list {
   position: relative;
@@ -128,8 +119,79 @@
 .planet-sidebar .maps-object-results .planet-object-name { overflow: hidden; font: 400 0.9375rem/20px var(--shell-ui-font); text-overflow: ellipsis; white-space: nowrap; }
 .planet-sidebar .maps-object-results .planet-object-distance { color: var(--shell-text-muted); font: 400 13px/20px var(--shell-ui-font); white-space: nowrap; }
 .planet-sidebar .maps-object-results .planet-object-distance-unit { font-size: 12px; }
-.planet-sidebar .maps-object-results .planet-object-link:hover,
-.planet-sidebar .maps-object-results .planet-object-link:focus-visible,
+.planet-sidebar .maps-object-results .planet-object-link[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: default;
+}
+.planet-sidebar .maps-object-results .planet-object-link[aria-disabled="true"] .planet-navigation-marker > i {
+  background: currentColor;
+}
+.planet-sidebar .maps-object-results .planet-object-item > .planet-object-link { margin-right: 0; }
+.planet-sidebar .maps-object-results .planet-object-summary {
+  display: grid;
+  grid-template-columns: 11px minmax(0, 1fr) max-content 10px;
+  align-items: center;
+  gap: 12px;
+  height: 34px;
+  cursor: pointer;
+  list-style: none;
+}
+.planet-sidebar .maps-object-results .planet-object-summary::-webkit-details-marker { display: none; }
+.planet-sidebar .maps-object-results .planet-object-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.planet-sidebar .maps-object-results .planet-object-moon-count {
+  color: var(--shell-text-muted);
+  font: 400 12px/20px var(--shell-ui-font);
+}
+.planet-sidebar .maps-object-results .planet-object-label > .planet-object-link {
+  display: block;
+  justify-self: start;
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+}
+.planet-sidebar .maps-object-results .planet-object-summary .planet-object-name { display: block; }
+.planet-sidebar .maps-object-results .planet-object-label > .planet-object-link:hover .planet-object-name {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.planet-sidebar .maps-object-results .planet-object-summary::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-right: 4px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+.planet-sidebar .maps-object-results .planet-object-group[open] > .planet-object-summary::after { transform: rotate(45deg); }
+.planet-sidebar .maps-object-results .planet-object-summary:hover { color: var(--shell-text); }
+.planet-sidebar .maps-object-results .planet-object-summary:focus-visible { outline: 1px solid var(--shell-text-muted); outline-offset: 2px; }
+.planet-sidebar .maps-object-results .planet-object-moons {
+  margin: 0 0 5px 5px;
+  padding-left: 14px;
+  border-left: 1px solid rgb(223 223 223 / 18%);
+}
+.planet-sidebar .maps-object-results .planet-object-moons::before { content: none; }
+.planet-sidebar .maps-object-results .planet-object-moons > .planet-object-item { position: relative; }
+.planet-sidebar .maps-object-results .planet-object-moons > .planet-object-item::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: -14px;
+  width: 9px;
+  border-top: 1px solid rgb(223 223 223 / 18%);
+}
+.planet-sidebar .maps-object-results .planet-object-moons .planet-object-link {
+  grid-template-columns: 11px minmax(0, 1fr);
+  height: 32px;
+}
+.planet-sidebar .maps-object-results .planet-object-link:not([aria-disabled="true"]):hover,
+.planet-sidebar .maps-object-results .planet-object-link:not([aria-disabled="true"]):focus-visible,
 .planet-sidebar .maps-object-results .planet-object-link.is-active { color: var(--shell-text); outline: 0; }
 .planet-sidebar .maps-object-results .planet-object-link.is-active .planet-object-name { text-decoration: underline; text-underline-offset: 3px; }
 .planet-sidebar .maps-object-results .planet-object-empty { height: 40px; margin: 0; color: var(--shell-text-muted); font: 400 0.875rem/40px var(--shell-ui-font); }
@@ -248,7 +310,7 @@
 .planet-sidebar-search::-webkit-search-cancel-button { display: none; }
 .planet-sidebar-search:focus-visible {
   outline: 0;
-  box-shadow: inset 0 0 0 1px rgb(181 216 250 / 55%);
+  box-shadow: none;
 }
 
 .planet-sidebar-view-all {
@@ -278,7 +340,7 @@
 }
 
 @media (min-width: 821px) and (orientation: landscape) {
-  body[data-object-shell] .planet-sidebar .planet-information-panel {
+  body[data-object-shell] .planet-sidebar .planet-card {
     border-radius: 8px;
     background: var(--explorer-panel-background);
   }

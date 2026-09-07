@@ -1,0 +1,23 @@
+{
+  "source": "Ortiz et al. 2017, Nature 550, 219-223; doi:10.1038/nature24051",
+  "url": "https://arxiv.org/abs/2006.03113",
+  "semiAxesKm": [
+    1161,
+    852,
+    513
+  ],
+  "semiAxesUncertaintyKm": [
+    30,
+    4,
+    16
+  ],
+  "note": "Main text b uncertainty is 4 km; Methods quotes 2 km. Nominal axes depend on the shape/lightcurve assumptions and ring-flux contribution; not resolved topography.",
+  "ringRadiusKm": 2287,
+  "ringWidthKm": 70,
+  "poleJ2000Degrees": [
+    285.1,
+    -10.6
+  ],
+  "rotationPeriodHours": 3.915341,
+  "resolvedSurfaceCoverage": null
+}

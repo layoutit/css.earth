@@ -24,7 +24,10 @@ export function preparePointPhotometry(config: StarsRecipe['photometry']): Prepa
   const count = Math.round((config.maximumMagnitude-config.minimumMagnitude)/config.step)+1;
   const samples = Array.from({length:count},(_,i) => {
     const presentation = starPresentation(exposure,config.minimumMagnitude+i*config.step);
-    return { radiusPx: presentation?.radiusPx ?? 0, luminance: Math.min(1, Math.max(0, presentation?.luminance ?? 0)) };
+    // Publish display samples to 1e-12; native pow/log tails differ between V8
+    // versions and carry no visible precision at this pixel/opacity scale.
+    const sample = (value: number) => Number(value.toFixed(12));
+    return { radiusPx: sample(presentation?.radiusPx ?? 0), luminance: sample(Math.min(1, Math.max(0, presentation?.luminance ?? 0))) };
   });
   const limits = exposureLimits(exposure);
   return { minimumMagnitude:config.minimumMagnitude,maximumMagnitude:config.maximumMagnitude,step:config.step,floor:config.floor,limitingMagnitude:limits.limitingMagnitude,hintsLimitMagnitude:limits.hintsLimitMagnitude,minimumRadiusPx:POINT_MIN_RADIUS_PX,samples };

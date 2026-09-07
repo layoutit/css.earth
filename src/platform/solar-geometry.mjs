@@ -11,8 +11,8 @@
 // Satellite orbit elements are relative to their parent, not to the Sun.
 // Parent-system barycentres approximate planet centres in this solar view.
 // Existing planets retain their original preparation values.
-// All vectors use ICRF. Orientation: IAU/WGCCRE rotation elements
-// (pole right ascension, pole declination, prime meridian). Earth uses the
+// All vectors use ICRF. Orientation: IAU/WGCCRE elements, object-owned observed
+// poles, or explicitly arbitrary display orientations. Earth uses the
 // Earth-Moon barycentre series.
 //
 // BODY_ORBITS derives each body's osculating orbit from that same
@@ -160,6 +160,24 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.4885781627373289,
     0.8663655379326224,
   ]),
+  // subsolar latitude -21.455°, longitude -19.723°
+  haumea: Object.freeze([
+    0.8761058512125794,
+    -0.3140829297079759,
+    -0.36577376988671045,
+  ]),
+  // subsolar latitude -20.268°, longitude -68.219°
+  makemake: Object.freeze([
+    0.34808814184283215,
+    -0.8711110941232323,
+    -0.3464103162491401,
+  ]),
+  // subsolar latitude 0.038°, longitude 116.952°
+  eris: Object.freeze([
+    -0.45324502671610184,
+    0.891385719291275,
+    0.00066723361469343,
+  ]),
 });
 
 export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
@@ -294,6 +312,24 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     0.24356596228682376,
     0.8889956599431309,
     -0.38776582961572414,
+  ]),
+  // pole tilt to the ecliptic 77.953°, Sun ecliptic latitude -28.201°
+  haumea: Object.freeze([
+    -0.10362274255531338,
+    0.9724707716962535,
+    0.2087173337837765,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude -27.148°
+  makemake: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 10.422°
+  eris: Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
   ]),
 });
 
@@ -431,6 +467,24 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.032178535161385545,
     0.8689390788437296,
     -0.4938718650956725,
+  ]),
+  // orbital inclination to the ecliptic 28.208°, obliquity to the orbit 87.034°
+  haumea: Object.freeze([
+    0.3560881271482898,
+    0.9330188008541714,
+    0.05174130803011588,
+  ]),
+  // orbital inclination to the ecliptic 29.032°, obliquity to the orbit 39.979°
+  makemake: Object.freeze([
+    -0.4306675206174681,
+    -0.47681130400251154,
+    0.766274407154922,
+  ]),
+  // orbital inclination to the ecliptic 43.880°, obliquity to the orbit 64.003°
+  eris: Object.freeze([
+    -0.801063566301262,
+    -0.40764680100615613,
+    0.4383163793131064,
   ]),
 });
 
@@ -570,6 +624,24 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     -0.1877014716883806,
     -0.26869346385036763,
   ]),
+  // flight-path angle -6.789°
+  haumea: Object.freeze([
+    0.4263158159998441,
+    -0.21147786572868782,
+    0.8795066442814552,
+  ]),
+  // flight-path angle 1.362°
+  makemake: Object.freeze([
+    -0.8407200394047429,
+    -0.0968071309407047,
+    -0.5327459007278393,
+  ]),
+  // flight-path angle -10.497°
+  eris: Object.freeze([
+    0.3018638778299622,
+    0.3572103089266757,
+    0.8838998780732841,
+  ]),
 });
 
 // Body-fixed to ICRF rotation, row-major: the columns are the body's +X
@@ -707,6 +779,24 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     -0.7287898875992956, -0.09604588932324515, -0.6779679099169169,
     -0.684031147679219, 0.05716182312110747, 0.7272096774535675,
     -0.031091618447040417, 0.9937342266026555, -0.10735733855105338,
+  ]),
+  // pole RA 285.100°, Dec -10.600°, prime meridian W 0.000°
+  haumea: Object.freeze([
+    0.965472630879225, 0.04792015620551823, 0.25605909015769485,
+    0.26050450864264857, -0.17759999442984964, -0.9489971775276097,
+    0, 0.9829353491495543, -0.18395135061272014,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  makemake: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  eris: Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
   ]),
 });
 
@@ -1069,6 +1159,51 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 17.02988887116561,
     perihelionAu: 29.815323879603046,
     aphelionAu: 49.42324932162337,
+  }),
+  // a 43.016 AU, e 0.19551, perihelion 34.606 AU, aphelion 51.426 AU
+  haumea: Object.freeze({
+    semiMajorAxisAu: 43.01623145274767,
+    eccentricity: 0.19550633543357385,
+    heliocentricDistanceAu: 49.761786841583024,
+    perihelionDirection: Object.freeze([
+      0.9200786409604006,
+      -0.35974731913384383,
+      0.1550392235031983,
+    ]),
+    trueAnomalyDegrees: 210.4165469171031,
+    inclinationDegrees: 28.20842063408973,
+    perihelionAu: 34.60628567725853,
+    aphelionAu: 51.4261772282368,
+  }),
+  // a 45.523 AU, e 0.16011, perihelion 38.234 AU, aphelion 52.812 AU
+  makemake: Object.freeze({
+    semiMajorAxisAu: 45.52298703617302,
+    eccentricity: 0.1601130462459993,
+    heliocentricDistanceAu: 52.73310432282259,
+    perihelionDirection: Object.freeze([
+      0.44935590872598913,
+      -0.8496110016272106,
+      -0.2761166659349784,
+    ]),
+    trueAnomalyDegrees: 172.82564237232992,
+    inclinationDegrees: 29.031536868409273,
+    perihelionAu: 38.234162907594225,
+    aphelionAu: 52.81181116475182,
+  }),
+  // a 67.984 AU, e 0.43723, perihelion 38.260 AU, aphelion 97.708 AU
+  eris: Object.freeze({
+    semiMajorAxisAu: 67.98396103644909,
+    eccentricity: 0.4372260575778503,
+    heliocentricDistanceAu: 95.4648834548521,
+    perihelionDirection: Object.freeze([
+      -0.3440996171840731,
+      0.9127851380928871,
+      0.22004259844521692,
+    ]),
+    trueAnomalyDegrees: 194.12822295819902,
+    inclinationDegrees: 43.88007505692898,
+    perihelionAu: 38.25960177395626,
+    aphelionAu: 97.70832029894191,
   }),
 });
 

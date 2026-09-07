@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, stat, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -28,6 +28,10 @@ test('migrated world-frame radii override astronomy only at the same position an
     await prepareSpatialContext({ sourcePath, solarGeometryPath, outputPath: resolve(directory, 'world-context.json'), objectsDirectory });
     const output = JSON.parse(await readFile(resolve(directory, 'world-context.json'), 'utf8')) as { bodies: readonly { id: string; radiusM: number }[] };
     assert.equal(output.bodies.find(body => body.id === 'mercury')?.radiusM, customRadiusM);
+    const outputPath = resolve(directory, 'world-context.json');
+    await utimes(outputPath, 1, 1);
+    await prepareSpatialContext({ sourcePath, solarGeometryPath, outputPath, objectsDirectory });
+    assert.equal((await stat(outputPath)).mtimeMs, 1000, 'unchanged context must not trigger hot reload');
 
     await writeFile(resolve(objectDirectory, 'object.json'), JSON.stringify({ ...descriptor, properties: { ...properties,
       worldFrame: { ...frame, originM: [0, 0, 0] } } }));
@@ -84,8 +88,13 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     for (const body of result.bodies) {
       const id = body.id as BodyId, parent = BODIES[id].parent!;
       assert.equal(body.orbit.centerBodyId, parent);
-      assert(Math.hypot(...modelPositionM(id).map((value, axis) => value - body.positionM[axis])) < .001, `${id} differs from its independent ephemeris`);
-      assert(Math.hypot(...modelPositionM(parent).map((value, axis) => value - body.orbit.centerPositionM[axis])) < .001, `${id} orbit differs from its parent's independent ephemeris`);
+      // At outer-dwarf coordinates one floating-point step already exceeds a
+      // millimetre. Bound the independent conversion by four relative epsilons.
+      const agrees = (expected: readonly number[], actual: readonly number[]) =>
+        Math.hypot(...expected.map((value, axis) => value - actual[axis]!)) <=
+          Math.max(.001, Math.hypot(...expected) * Number.EPSILON * 4);
+      assert(agrees(modelPositionM(id), body.positionM), `${id} differs from its independent ephemeris`);
+      assert(agrees(modelPositionM(parent), body.orbit.centerPositionM), `${id} orbit differs from its parent's independent ephemeris`);
     }
     for (const [id, parentId] of [['moon', 'earth'], ['io', 'jupiter'], ['europa', 'jupiter'], ['ganymede', 'jupiter'], ['callisto', 'jupiter']]) {
       const child = result.bodies.find((body: { id: string }) => body.id === id);
