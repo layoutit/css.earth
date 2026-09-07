@@ -15,30 +15,29 @@ export interface CameraViewport {
 export function createCameraViewport(stage: HTMLElement, previewElement: HTMLElement | null = null): CameraViewport {
   const view = stage.ownerDocument.defaultView;
   if (!view) throw new Error('Camera viewport requires a window.');
-  const probe = stage.ownerDocument.createElement('div');
-  probe.style.cssText = 'position:absolute;inset:0;visibility:hidden;pointer-events:none';
-  probe.ariaHidden = 'true';
-  stage.appendChild(probe);
-  let snapshot: CameraViewportSnapshot | null = null;
-  let perspective = '', frame: number | null = null, destroyed = false;
+  const projections = new Map<string, { probe: HTMLElement; snapshot: CameraViewportSnapshot | null }>();
+  let frame: number | null = null, destroyed = false;
   const listeners = new Set<() => void>();
   const measure = () => {
     const bounds = stage.getBoundingClientRect();
-    const focalPixels = Number.parseFloat(view.getComputedStyle(probe).perspective);
-    if (!(bounds.width > 0 && bounds.height > 0 && focalPixels > 0)) {
-      throw new Error('Shared camera viewport has no projection.');
+    const measuredBounds = Object.freeze({ x: bounds.x, y: bounds.y, left: bounds.x, top: bounds.y, width: bounds.width, height: bounds.height });
+    const previewTop = previewElement?.getBoundingClientRect().top ?? null;
+    let changed = false;
+    for (const entry of projections.values()) {
+      const focalPixels = Number.parseFloat(view.getComputedStyle(entry.probe).perspective);
+      if (!(bounds.width > 0 && bounds.height > 0 && focalPixels > 0)) throw new Error('Shared camera viewport has no projection.');
+      const previous = entry.snapshot;
+      if (previous && previous.focalPixels === focalPixels && previous.previewTop === previewTop &&
+          Object.entries(measuredBounds).every(([key, value]) => previous.bounds[key as keyof CameraViewportSnapshot['bounds']] === value)) continue;
+      entry.snapshot = Object.freeze({ bounds: measuredBounds, focalPixels, previewTop });
+      changed = true;
     }
-    const next = Object.freeze({ bounds: Object.freeze({ x: bounds.x, y: bounds.y, left: bounds.x, top: bounds.y, width: bounds.width, height: bounds.height }),
-      focalPixels, previewTop: previewElement?.getBoundingClientRect().top ?? null });
-    if (snapshot && snapshot.focalPixels === next.focalPixels && snapshot.previewTop === next.previewTop &&
-        Object.entries(next.bounds).every(([key, value]) => snapshot!.bounds[key as keyof CameraViewportSnapshot['bounds']] === value)) return false;
-    snapshot = next;
-    return true;
+    return changed;
   };
   const invalidate = () => {
     // Keep the last published measurement until the layout owner refreshes it.
     // Sidebar content resizes must not force an incoming scene to measure DOM.
-    if (destroyed || frame !== null || !perspective) return;
+    if (destroyed || frame !== null || projections.size === 0) return;
     frame = view.requestAnimationFrame(() => {
       frame = null;
       if (destroyed) return;
@@ -53,13 +52,20 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
   return {
     read(cssPerspective) {
       if (destroyed) throw new Error('Camera viewport has been destroyed.');
-      if (perspective !== cssPerspective) {
-        perspective = cssPerspective;
+      let entry = projections.get(cssPerspective);
+      if (!entry) {
+        // Each authored projection is resolved once during preparation. An
+        // incoming FOV must not invalidate the outgoing camera's snapshot.
+        const probe = stage.ownerDocument.createElement('div');
+        probe.style.cssText = 'position:absolute;inset:0;visibility:hidden;pointer-events:none';
+        probe.ariaHidden = 'true';
         probe.style.perspective = cssPerspective;
-        snapshot = null;
+        stage.appendChild(probe);
+        entry = { probe, snapshot: null };
+        projections.set(cssPerspective, entry);
       }
-      if (!snapshot) measure();
-      return snapshot!;
+      if (!entry.snapshot) measure();
+      return entry.snapshot!;
     },
     subscribe(listener) { listeners.add(listener); return () => { listeners.delete(listener); }; },
     destroy() {
@@ -69,7 +75,9 @@ export function createCameraViewport(stage: HTMLElement, previewElement: HTMLEle
       observer.disconnect();
       view.removeEventListener('resize', invalidate);
       view.removeEventListener('scroll', invalidate);
-      listeners.clear(); probe.remove(); snapshot = null;
+      listeners.clear();
+      for (const { probe } of projections.values()) probe.remove();
+      projections.clear();
     },
   };
 }

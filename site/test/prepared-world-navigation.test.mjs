@@ -52,6 +52,20 @@ async function drainFrames(fixture, { task, stepMs = 1000 / 60 } = {}) {
 }
 const range = (pose, origin) => Math.hypot(...pose.positionM.map((value, axis) => value - origin[axis]));
 
+test('a terminal extreme-range pose finishes without a tail of identical publications', async () => {
+  const f = fixture();
+  f.navigation.frame.bodyRadiusM = 695700000;
+  f.navigation.apply({ referenceFrame: 'world', epochJdTt: 1,
+    pose: { positionM: [0, 0, 2.4809028e21], orientationXyzw: [0, 0, 0, 1] } });
+  const from = f.navigation.capture();
+  const target = createWorldSelectionTarget(from, f.navigation.frame, f.navigation.optics());
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal }) });
+  assert.deepEqual(f.paints.at(-1).pose, target.pose);
+  const terminal = f.paints.filter(world => JSON.stringify(world.pose) === JSON.stringify(target.pose));
+  assert.equal(terminal.length, 1, 'one terminal publication, with no dead flight tail');
+  assert.equal(f.pending, 0);
+});
+
 test('the exact final camera demand finishes before the old scene is handed off', async () => {
   const f = fixture(), viewReady = deferred();
   let readView, finalView, resolved = false;

@@ -25,7 +25,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         } });
       lastCamera = owner.capture(); lastOptics = owner.optics();
     },
-    async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url, targetWorldCamera = null, preserveView = false, presentWorld = null, timing = { mark() {} } }) {
+    async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url, targetWorldCamera = null, preserveView = false, presentWorld = null, cameraViewport, timing = { mark() {} } }) {
       if (!supports(fromId, toId)) throw new TypeError('Objects do not share a prepared world frame.');
       const targetFrame = frames.get(toId);
       const source = fromMount?.navigation;
@@ -37,7 +37,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         // Input stays live while the new detail bank loads. Snapshot the last
         // drawn camera at handoff, not the camera from the start of preparation.
         const factory = await toFactory;
-        const prepared = await factory.navigation.prepare({ signal,
+        const prepared = await factory.navigation.prepare({ signal, cameraViewport,
           getView: () => ({ world: source?.capture() ?? lastCamera, viewport: source?.optics() ?? lastOptics }) });
         timing.mark('assets-ready');
         const release = () => prepared.destroy();
@@ -95,7 +95,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       let bankReady = false;
       const preparation = Promise.resolve(toFactory).then(factory => {
         if (!factory.navigation) throw new TypeError('Destination has no prepared navigation.');
-        return factory.navigation.prepare({ signal: controller.signal,
+        return factory.navigation.prepare({ signal: controller.signal, cameraViewport,
           getView: () => ({ world: reducedMotion ? target : lastCamera, viewport: optics }) });
       }).then(value => {
         prepared = value;
@@ -266,10 +266,17 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
       if (finished) return;
       try {
         if (started === null) started = time;
+        const permittedEndS = reducedMotion ? endElapsedS : limitElapsedS();
         const requestedElapsedS = reducedMotion ? endElapsedS
-          : Math.min(endElapsedS, limitElapsedS(), startElapsedS + (time - started) / 1000);
+          : Math.min(endElapsedS, permittedEndS, startElapsedS + (time - started) / 1000);
         elapsedS = reducedMotion ? requestedElapsedS
           : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
+        // At extreme range ratios the source curve reaches its exact terminal
+        // position before its duration cap. Do not keep publishing that same
+        // pose after both position and orientation have finished. A detail
+        // readiness hold must still be respected.
+        if (endElapsedS === flight.durationS && permittedEndS >= endElapsedS &&
+            sample.progress === 1 && elapsedS >= flight.orientationDurationS) elapsedS = endElapsedS;
         const world = worldSample(flight, from, elapsedS, sample);
         if (publishedElapsed !== elapsedS) { owner.apply(world); onPaint(world); publishedElapsed = elapsedS; }
         if (elapsedS >= endElapsedS || stopWhen(elapsedS)) finish(null, { world, elapsedS, time });

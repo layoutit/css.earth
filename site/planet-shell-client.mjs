@@ -1,3 +1,4 @@
+import { createChartPixelAlignmentController } from "./chart-pixel-alignment.mjs";
 import { createDestinationBrowser } from "./destination-browser.mjs";
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
 import { createExplorerRailController } from "./explorer-rail.mjs";
@@ -131,7 +132,7 @@ export function mountPlanetShell({
     const owner = contentLifetime = createSceneLifetime();
     const retain = controller => { owner.onDispose(() => controller.destroy()); return controller; };
     retain(createChartSwitcherController(drawer, windowTarget, owner));
-    retain(createChartPixelAlignmentController(drawer, windowTarget, owner));
+    retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
       { motionEnabled, onMotionChange, highContrastSky, heliosphereEnabled,
@@ -522,51 +523,6 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       for (const item of items) item.hidden = false;
       empty.hidden = true;
       render(false);
-    },
-  });
-}
-
-function createChartPixelAlignmentController(drawer, windowTarget, lifetime) {
-  const charts = [...drawer.querySelectorAll(".planet-chart")]
-    .filter((chart) => chart instanceof windowTarget.HTMLElement);
-  const switchers = [...drawer.querySelectorAll(".planet-chart-switcher")]
-    .filter((switcher) => switcher instanceof windowTarget.HTMLElement);
-  const events = new AbortController();
-  lifetime.onDispose(() => events.abort());
-  let frame = 0;
-  lifetime.onDispose(() => {
-    if (frame !== 0) windowTarget.cancelAnimationFrame(frame);
-    frame = 0;
-  });
-
-  const align = () => {
-    frame = 0;
-    const density = Math.max(1, windowTarget.devicePixelRatio || 1);
-    for (const chart of charts) {
-      chart.style.removeProperty("translate");
-      const top = chart.getBoundingClientRect().top;
-      const alignedTop = Math.round(top * density) / density;
-      chart.style.setProperty("translate", `0 ${alignedTop - top}px`);
-    }
-  };
-  const schedule = () => {
-    if (frame === 0) frame = windowTarget.requestAnimationFrame(align);
-  };
-
-  windowTarget.addEventListener("resize", schedule, { signal: events.signal });
-  for (const switcher of switchers) {
-    switcher.addEventListener("chartchange", schedule, { signal: events.signal });
-  }
-  for (const chart of charts) {
-    chart.addEventListener("load", schedule, { signal: events.signal });
-  }
-  schedule();
-
-  return Object.freeze({
-    destroy() {
-      events.abort();
-      if (frame !== 0) windowTarget.cancelAnimationFrame(frame);
-      for (const chart of charts) chart.style.removeProperty("translate");
     },
   });
 }
