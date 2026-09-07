@@ -33,12 +33,12 @@ export function parseTerrestrialProfile(value) {
       !Number.isSafeInteger(value.raster.bandCount) || value.raster.bandCount <= 0 ||
       !Number.isSafeInteger(value.raster.gutter) || value.raster.gutter < 0 ||
       !Number.isSafeInteger(value.raster.poleSize) || value.raster.poleSize <= 0 ||
-      !Array.isArray(value.raster.observations) || !(value.raster.observations.length || value.raster.mosaics?.length) ||
+      !Array.isArray(value.raster.observations) ||
       !Number.isFinite(value.geometry?.radius) || value.geometry.radius <= 0 || !Number.isFinite(value.geometry.radiusKm) || value.geometry.radiusKm <= 0 ||
       !Number.isSafeInteger(value.lighting?.frameSize) || value.lighting.frameSize <= 0 ||
       !Number.isSafeInteger(value.lighting.frameCount) || value.lighting.frameCount < 2 ||
       !Number.isSafeInteger(value.lighting.columns) || value.lighting.columns <= 0 || value.lighting.frameCount % value.lighting.columns ||
-      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.mosaics ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
+      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.mosaics ?? []), ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
   if (value.raster.surfaceQuality !== undefined &&
@@ -46,7 +46,7 @@ export function parseTerrestrialProfile(value) {
     throw new TypeError('Surface WebP quality must be an integer from 1 to 100.');
   }
   for (const lens of value.raster.scientific ?? []) {
-    const meshGrid = ['wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model'].includes(lens.format);
+    const meshGrid = ['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model'].includes(lens.format);
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
           !grid || (!meshGrid && (!Number.isSafeInteger(grid.width) || grid.width <= 0 || !Number.isSafeInteger(grid.height) || grid.height <= 0)) ||
@@ -57,7 +57,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model'].includes(lens.format) || !lens.grid ||
+    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model'].includes(lens.format) || !lens.grid ||
         (!meshGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
@@ -100,7 +100,9 @@ export function parseTerrestrialProfile(value) {
     if (['geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(policy.kind) &&
         (!Array.isArray(policy.displayRange) || policy.displayRange.length !== 2 || !policy.displayRange.every(Number.isFinite) ||
          !(policy.displayRange[0] < policy.displayRange[1]) || !(policy.specialValueMagnitude > 0) ||
-         !(policy.resolutionMeters > 0) || !Array.isArray(policy.origin) || policy.origin.length !== 2 || !policy.origin.every(Number.isFinite))) {
+         ![undefined, 4, 8].includes(policy.sampleBytes) ||
+         ![undefined, 'degrees'].includes(policy.coordinates) || !(policy.coordinates === 'degrees' ? policy.resolutionDegrees > 0 : policy.resolutionMeters > 0) ||
+         !Array.isArray(policy.origin) || policy.origin.length !== 2 || !policy.origin.every(Number.isFinite))) {
       throw new TypeError('Invalid floating-point observation grid or display stretch.');
     }
     if (policy.kind === 'geotiff-rgb-alpha' && (

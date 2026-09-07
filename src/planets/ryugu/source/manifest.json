@@ -1,0 +1,304 @@
+{
+  "schema": "cssryugu-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "ryugu-shape",
+      "path": "shape/ryugu_shape_spc_200k_v20200323.obj.gz",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
+      "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-triangle-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "meters",
+        "referenceRadiusMeters": 448
+      },
+      "coverage": "Released global model; detailed geometry is simplified for the display.",
+      "expectedBytes": 3150352,
+      "expectedSha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595"
+    },
+    {
+      "id": "ryugu-normal",
+      "path": "maps/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
+      "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 1800,
+      "height": 900,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 448
+      },
+      "coverage": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
+      "expectedBytes": 12965947,
+      "expectedSha256": "b01f45512c7028865cc656712d8982f837a29bcbea07df6460f4d7acd0c1c969"
+    },
+    {
+      "id": "ryugu-enhanced",
+      "path": "maps/ryugu_global.png",
+      "origin": "https://doi.org/10.7910/DVN/WW3IH0",
+      "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 3600,
+      "height": 1800,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 448
+      },
+      "coverage": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
+      "expectedBytes": 9557231,
+      "expectedSha256": "984780a02a343e13873e76030b56dd9f34fbb476baf983f52af6ac12b4741974"
+    },
+    {
+      "id": "ryugu-ryugu_global_color_enhanced.png",
+      "path": "maps/ryugu_global_color_enhanced.png",
+      "origin": "https://dataverse.harvard.edu/api/access/datafile/13452500",
+      "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues",
+      "license": "CC-BY-4.0; Hirata and colleagues",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "expectedBytes": 9634064,
+      "expectedSha256": "3bc584b95c756b9b480e97238138a3906fe11e8ae8092132f4a5fe3a1c9d3c40"
+    },
+    {
+      "id": "ryugu-ryugu_global.tif",
+      "path": "maps/ryugu_global.tif",
+      "origin": "https://dataverse.harvard.edu/api/access/datafile/13452500",
+      "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues",
+      "license": "CC-BY-4.0; Hirata and colleagues",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "expectedBytes": 215772319,
+      "expectedSha256": "8775e50c6e0c01840b5d72207cf4b4a4ecd8d427aa35a087bde3ceef2340473a"
+    },
+    {
+      "id": "ryugu-ryugu_shape_spc_200k_v20200323.bds",
+      "path": "shape/ryugu_shape_spc_200k_v20200323.bds",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
+      "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "expectedBytes": 6936576,
+      "expectedSha256": "8af04c9aee94e5c9d49017043f7c50a140789d006ebfc46f155713567765db89"
+    },
+    {
+      "id": "ryugu-info.zip",
+      "path": "reference/info.zip",
+      "origin": "https://dataverse.harvard.edu/api/access/datafile/13463836",
+      "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues",
+      "license": "CC-BY-4.0; Hirata and colleagues",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "reference"
+      ],
+      "expectedBytes": 54623613,
+      "expectedSha256": "ee9fe9935303c39fb91509fd2136ab04a961619ca9324628cf32a4f22a89d519"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
+      "credit": "JAXA/Hayabusa2 ONC team; N. Hirata and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "expectedBytes": 133068,
+      "expectedSha256": "6dc9082db4fa294c4ab52430af3d8ee45dbb4bf2d79540c6495be672e9159857",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "ryugu-normal",
+          "ryugu-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 8282,
+      "expectedSha256": "0734cd1a7f16f516e650593ecceef9d32dc6d687685a3fc5161e27b8e9f6451c"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 2278,
+      "expectedSha256": "47f3950584d598f6c40a56454e0b2d7eec685c58619389080ee9082cf45dc6f0"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 1349,
+      "expectedSha256": "e23619793ecaf2a309825a3e3ab086844806d4d9176a508b51f923438d744ee1"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 338,
+      "expectedSha256": "556d6f72a71cff1c5303fa10ed0034be9023703d72078e6df250713124ee02a1"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 3458,
+      "expectedSha256": "82610c1a576bc899f1a33a4400252af9485aed7f9d16a2a56dd637643fa998d0"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 3007,
+      "expectedSha256": "f8459547fa630651abcddddf187d276eda8d348567bdda9d73d7a498544def16"
+    },
+    {
+      "path": "reference/ReadMeSecond.txt",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 69620,
+      "expectedSha256": "832a58efd9fe25e62325f333d28264e632c2d24ee47de683081b603a85d19622"
+    },
+    {
+      "path": "reference/dsk-index.html",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 23485,
+      "expectedSha256": "059460304a11166b18a6fb7755f85c99a69a44d75f5a2c767ac7debb0a597f3a"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 1652,
+      "expectedSha256": "2a0abdb0ed2eeb9434aea81c59763df94e2213f990016829b05bf866a1d99492"
+    },
+    {
+      "path": "reference/hyb2_onc_20180703_BOX-A_l3erm_v06.lblx",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 24429,
+      "expectedSha256": "aeff2bb61ba8fe981bb823c4eafe6fd5c70025d7df8eebb6e5a5d1f07e4c6fa9"
+    },
+    {
+      "path": "reference/hyb2_onc_20180710_BOX-A_l3em_v06.lblx",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 25515,
+      "expectedSha256": "278aa5d446a7661d3513b7ec5f22e194c949e4b0e738635dbc9020cad4e21dce"
+    },
+    {
+      "path": "reference/mosaic_info.xlsx",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 16859,
+      "expectedSha256": "9b9bf04b3c375732414d64e9aa2a71ae42ccc6fbf8d879c15b356b53417addef"
+    },
+    {
+      "path": "reference/paper.pdf",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 1000264,
+      "expectedSha256": "d81f6379ea16479ca3cc15e31ff1632ba050c4cdf03733eebad0bc6819f360d1"
+    },
+    {
+      "path": "reference/pck-index.html",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 4609,
+      "expectedSha256": "ca40cd9382048496fdbe5d1a9211ecd70090a9c61ca0a158866643c846cfb8b5"
+    },
+    {
+      "path": "reference/ryugu_global.lis",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 15631,
+      "expectedSha256": "5338a995e8ee3c2c76db1c7ce408143fba4fd6f9b642e9104626be6d969b76ac"
+    },
+    {
+      "path": "reference/ryugu_shape_spc_200k_v20200323.xml",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 4083,
+      "expectedSha256": "edaa06f9eb442a375b0bad4b56ee4afb3ebadd79e72ce092e1940cea3df76c70"
+    },
+    {
+      "path": "reference/ryugu_v10.tpc",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 11410,
+      "expectedSha256": "5c06e668bbc96fdd1c7a5e027543a5b8f8b70d75bc2dbb5e171b24389d0db10c"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 89771,
+      "expectedSha256": "11d325c515fecc6566d5564f78dda3b4e6ac7aeda786fdde8c1059307c6ba8ae"
+    }
+  ]
+}
