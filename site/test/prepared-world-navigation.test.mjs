@@ -328,6 +328,38 @@ test('refocusing the selected object paints one existing owner without reloading
   for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
 });
 
+test('the application keeps flying while destination groups activate, then transfers the live pose without a reset', async () => {
+  const f = fixture(), context = [];
+  const task = f.start({ presentWorld: world => context.push(world) });
+  const handoff = await drainFrames(f, { task });
+  const checkpoint = handoff.mountOptions.initialWorldCamera;
+  for (let i=0; i<12; i++) f.step();
+  assert.ok(context.length > 5, 'The universe still presents frames while no detail owner is ready');
+  assert.notDeepEqual(context.at(-1), checkpoint, 'Mounting must not freeze the camera at handoff');
+  const mount = f.mounted();
+  handoff.mountOptions.onNavigationReady(mount.navigation);
+  assert.deepEqual(mount.navigation.capture(), context.at(-1));
+  for (let i=0; i<12; i++) f.step();
+  assert.deepEqual(mount.navigation.capture(), context.at(-1), 'The incoming camera tracks the live world before full readiness');
+  const incoming = mount.navigation.capture(), count = context.length;
+  const finished = handoff.afterMount(mount, {signal:f.controller.signal});
+  assert.deepEqual(mount.navigation.capture(), incoming, 'Full readiness does not reset to the initial checkpoint');
+  await drainFrames(f, {task:finished});
+  assert.equal(context.length,count, 'The mounted owner takes over publication without duplicate universe writes');
+  assert.equal(f.pending,0);
+});
+
+test('cancellation during connected activation stops the application flight and releases its resources', async () => {
+  const f = fixture(), context=[];
+  const handoff = await drainFrames(f,{task:f.start({presentWorld:world=>context.push(world)})});
+  f.step(); const count=context.length;
+  f.controller.abort(); f.step();
+  assert.equal(context.length,count);
+  assert.equal(f.pending,0);
+  assert.equal(f.resources.destroyed,1);
+  for (const name of ['pointerdown','wheel','keydown']) assert.equal(getEventListeners(f.documentTarget,name).length,0);
+});
+
 test('real input interrupts a same-object focus at the last painted camera', async () => {
   const f = fixture();
   const task = f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal });

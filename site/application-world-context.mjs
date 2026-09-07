@@ -2,6 +2,7 @@ import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, 
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
+import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 let universePromise = null;
@@ -64,6 +65,7 @@ export function createApplicationWorldContext() {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
         const layer = prepared.mount(stage);
+        const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
         const target = stage.ownerDocument.defaultView;
         const diagnostics = import.meta.env?.DEV === true ? Object.freeze({ inspect: layer.inspect }) : null;
         if (diagnostics) target.__cssEarthUniverse = diagnostics;
@@ -73,7 +75,7 @@ export function createApplicationWorldContext() {
           publication = { world, viewport };
           layer.publish(world, viewport, { heliosphere: heliosphereEnabled });
         };
-        return { ...layer, publish,
+        return { ...layer, viewport, publish,
           setHeliosphereEnabled(enabled) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;
             heliosphereEnabled = enabled === true;
@@ -82,7 +84,7 @@ export function createApplicationWorldContext() {
           destroy() {
             destroyed = true; publication = null;
             if (diagnostics && target.__cssEarthUniverse === diagnostics) delete target.__cssEarthUniverse;
-            layer.destroy(); resources.destroy();
+            viewport.destroy(); layer.destroy(); resources.destroy();
           },
         };
       } catch (error) { resources.destroy(); throw error; }

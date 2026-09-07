@@ -8,6 +8,7 @@ export function createWorldNavigationPublicationHub(onError: (error: unknown) =>
   return Object.freeze({
     publish(world: WorldCameraPose, viewport: WorldCameraViewport) {
       if (disposed) return;
+      if (latest && samePublication(latest[0], latest[1], world, viewport)) return;
       latest = [world, viewport];
       for (const listener of listeners) {
         try { listener(world, viewport); }
@@ -28,4 +29,12 @@ export function createWorldNavigationPublicationHub(onError: (error: unknown) =>
     },
     destroy() { disposed = true; listeners.clear(); latest = null; },
   });
+}
+
+function samePublication(a: WorldCameraPose, av: WorldCameraViewport, b: WorldCameraPose, bv: WorldCameraViewport) {
+  return a.referenceFrame === b.referenceFrame && a.epochJdTt === b.epochJdTt &&
+    a.pose.positionM.every((value, axis) => value === b.pose.positionM[axis]) &&
+    a.pose.orientationXyzw.every((value, axis) => value === b.pose.orientationXyzw[axis]) &&
+    av.focalPixels === bv.focalPixels && av.widthPixels === bv.widthPixels && av.heightPixels === bv.heightPixels &&
+    av.principalOffsetPixels[0] === bv.principalOffsetPixels[0] && av.principalOffsetPixels[1] === bv.principalOffsetPixels[1];
 }

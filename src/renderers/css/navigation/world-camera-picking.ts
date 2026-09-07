@@ -20,13 +20,15 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   const pick = (event: MouseEvent) => {
     const hits = document.elementsFromPoint(event.clientX, event.clientY)
       .filter((element): element is HTMLElement => element instanceof HTMLElement && host.contains(element));
-    return hits.find(element => Boolean(element.dataset.objectNavigate) &&
-      element.style.pointerEvents === 'auto' && element.ariaDisabled !== 'true') ??
-      hits.find(element => {
-        const orbit = element.parentElement;
-        return orbit?.dataset.contextOrbit && orbit.dataset.objectNavigate && orbit.ariaDisabled !== 'true' &&
-          parseFloat(element.style.opacity || '1') > 0.1;
-      })?.parentElement ?? null;
+    const direct = hits.find(element => Boolean(element.dataset.objectNavigate) &&
+      element.style.pointerEvents === 'auto' && element.ariaDisabled !== 'true');
+    if (direct) return direct;
+    for (const element of hits) {
+      const orbit = element.parentElement?.closest<HTMLElement>('[data-context-orbit]');
+      if (orbit?.dataset.objectNavigate && orbit.ariaDisabled !== 'true' &&
+          parseFloat(element.style.opacity || '1') > 0.1) return orbit;
+    }
+    return null;
   };
   let hoveredGroup: HTMLElement | null = null;
   const setHovered = (target: HTMLElement | null) => {

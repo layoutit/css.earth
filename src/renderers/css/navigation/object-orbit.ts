@@ -24,7 +24,7 @@ import type { PhysicalProjection } from '../rendering/physical-projection.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & Partial<ReturnType<PerspectiveDolly['state']>>;
 export interface OrbitPublication extends CameraAngles { sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; sunPresentation: SunProjection | ReturnType<RetainedDirectionalSun['state']> | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection?: PhysicalProjection; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; stageViewport?: WorldCameraViewport; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
-export interface RetainedOrbitOptions { preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
+export interface RetainedOrbitOptions { preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport?: import('./camera-viewport.js').CameraViewport; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
 export interface OrbitServices extends InteractionServices { createPolyCamera?: typeof createPolyCamera; createCubicSkyCameraOrientation?: typeof createCubicSkyCameraOrientation; bindResponsiveOrbitPolicy?: RuntimePolicy['bindResponsiveOrbitPolicy']; selectPreparedResponsiveZoom?: typeof selectPreparedResponsiveZoom; createPerspectiveDolly?: typeof createPerspectiveDolly; HTMLElement?: typeof HTMLElement; matchMedia?: (query: string) => MediaQueryList; MutationObserver?: typeof MutationObserver; }
 export type RetainedCubicSkyOrbit = ReturnType<typeof createRetainedCubicSkyOrbit>;
 import { createPreparedCameraPublisher } from "../rendering/prepared-camera-runtime.js";
@@ -61,6 +61,7 @@ export function createRetainedCubicSkyOrbit({
   worldContext,
   preparedSurfaceHitTest,
   cameraPlan,
+  viewport,
   objectId,
   mobilePreviewElement,
   onPublish = () => {},
@@ -142,7 +143,7 @@ export function createRetainedCubicSkyOrbit({
   // prepared PolyCSS state.
   const perspective = perspectiveCamera ? createPerspectiveDolly({
     cameraPlan, heliocentric, worldContext, cameraElement, sceneElement,
-    skyElement: cubicSky.root, stage,
+    skyElement: cubicSky.root, stage, viewport,
   }) : null;
   const requireWorldPerspective = (frame: PreparedWorldCameraFrame) => {
     if (!perspective || !skyTracksScene) throw new TypeError('This object has no physical world camera.');
@@ -364,7 +365,7 @@ export function createRetainedCubicSkyOrbit({
     plan: cameraPlan,
     mobile: inputPolicy.mobile,
     mobilePreviewElement,
-    framingReferenceZoom: worldContext?.framingReferenceZoom,
+    framingReferenceZoom: worldContext?.framingReferenceZoom, viewport,
   });
   safeCamera.update({ zoom: responsiveFit.zoom });
   const initialResponsiveZoom = responsiveFit.zoom;
@@ -380,32 +381,35 @@ export function createRetainedCubicSkyOrbit({
       plan: cameraPlan,
       mobile: inputPolicy.mobile,
       mobilePreviewElement,
-      framingReferenceZoom: worldContext?.framingReferenceZoom,
+      framingReferenceZoom: worldContext?.framingReferenceZoom, viewport,
     });
     publish();
   });
-  lifetime.onDispose(() => windowTarget?.removeEventListener("resize", handleViewportResize));
-  windowTarget?.addEventListener("resize", handleViewportResize, {
-    passive: true,
-  });
-  if (perspective && typeof MutationObserver === "function") {
-    // The shell moves the render roots when the sidebar collapses; the eye
-    // stays at the sky's vanishing point, so re-measure the offset then.
-    const relayout = guardNative(() => {
-      perspective.remeasure();
-      publish();
+  if (viewport) lifetime.onDispose(viewport.subscribe(handleViewportResize));
+  else {
+    lifetime.onDispose(() => windowTarget?.removeEventListener("resize", handleViewportResize));
+    windowTarget?.addEventListener("resize", handleViewportResize, {
+      passive: true,
     });
-    const sidebarObserver = new MutationObserver(relayout);
-    sidebarObserver.observe(stage.ownerDocument.body, {
-      attributes: true,
-      attributeFilter: ["data-sidebar-collapsed"],
-    });
-    lifetime.onDispose(() => sidebarObserver.disconnect());
-    const onTransitionEnd = (event: TransitionEvent) => {
-      if (event.propertyName === "translate") relayout();
-    };
-    lifetime.onDispose(() => stage.removeEventListener("transitionend", onTransitionEnd));
-    stage.addEventListener("transitionend", onTransitionEnd);
+    if (perspective && typeof MutationObserver === "function") {
+      // The shell moves the render roots when the sidebar collapses; the eye
+      // stays at the sky's vanishing point, so re-measure the offset then.
+      const relayout = guardNative(() => {
+        perspective.remeasure();
+        publish();
+      });
+      const sidebarObserver = new MutationObserver(relayout);
+      sidebarObserver.observe(stage.ownerDocument.body, {
+        attributes: true,
+        attributeFilter: ["data-sidebar-collapsed"],
+      });
+      lifetime.onDispose(() => sidebarObserver.disconnect());
+      const onTransitionEnd = (event: TransitionEvent) => {
+        if (event.propertyName === "translate") relayout();
+      };
+      lifetime.onDispose(() => stage.removeEventListener("transitionend", onTransitionEnd));
+      stage.addEventListener("transitionend", onTransitionEnd);
+    }
   }
   publish();
   constructing = false;

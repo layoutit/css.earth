@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { chromium } from 'playwright';
+import { prepareActivationGroups } from './prepared-activation-groups.mjs';
 
 /** Resolve authored motion and immutable leaf facing offline. Runtime receives
  * explicit animation handles and planes, never a live style discovery pass. */
@@ -146,6 +147,6 @@ export async function preparePresentationBindings(definition, root) {
       return { motion: [...tracks.values()], facing: [...planes].filter(([target, plane]) => plane && facingPlane(target))
         .map(([target, binding]) => ({ target, ...binding })) };
     }, definition);
-    return { ...definition, ...prepared };
+    return { ...definition, ...prepared, tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } };
   } finally { await browser.close(); }
 }

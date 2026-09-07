@@ -1,3 +1,4 @@
+import { createRetainedLeafPool } from '../rendering/retained-leaf-pool.js';
 import type { PositionM } from '@cssearth/engine';
 import { createLabelDeclutter } from '@cssearth/engine';
 import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
@@ -7,7 +8,7 @@ import { rotateWorldPosition, transposeWorldRotation, validateWorldRotation, wor
 import { levelOfDetailFor, orbitLineOpacity } from '../navigation/perspective-dolly.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { clipSegmentToRectangle, rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
-import { createPreparedRingProjector } from '../solar-system/prepared-ring-projection.js';
+import { createPreparedRingProjector, createSphereChordTest } from '../solar-system/prepared-ring-projection.js';
 import { applySprite, writePieces } from '../solar-system/heliocentric-sprites.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
@@ -305,25 +306,22 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     label.style.cssText = 'position:absolute;left:50%;top:50%;white-space:nowrap;visibility:hidden';
     label.style.opacity = 'calc(var(--context-label-alpha, 0) * var(--context-label-opacity, 1))';
     label.style.setProperty('--context-label-alpha', '0');
-    const pieces: HTMLElement[] = [];
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
     const orbitRoot = host.ownerDocument.createElement('div');
     orbitRoot.className = 'context-orbit';
     orbitRoot.dataset.contextOrbit = body.id;
     orbitRoot.style.cssText = 'position:absolute;inset:0;pointer-events:none';
     if (orbit) group.appendChild(orbitRoot);
-    if (orbit) for (let i = 0; i < orbit.verticesM.length * 2; i++) {
-      const piece = host.ownerDocument.createElement('s');
-      piece.style.visibility = 'hidden';
-      orbitRoot.appendChild(piece); pieces.push(piece);
-    }
+    const piecePool = createRetainedLeafPool(orbitRoot, orbit ? orbit.verticesM.length * 2 : 0, 'context-orbit-block');
+    const pieces = piecePool.elements;
     group.append(marker, indicator, label);
     const navigation = bindObjectNavigationTarget(marker, host);
     const indicatorNavigation = bindObjectNavigationTarget(indicator, host);
     const labelNavigation = bindObjectNavigationTarget(label, host);
     const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host) : null;
-    return { body, group, sprite, marker, indicator, label, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId)! : null, pieces, navigation, indicatorNavigation, labelNavigation, orbitNavigation,
+    return { body, group, sprite, marker, indicator, label, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId)! : null, pieces, piecePool, navigation, indicatorNavigation, labelNavigation, orbitNavigation,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
+      orbitAppearance: { width: 1, opacity: 1 },
       orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, previousCount: 0,
       fade: { element: label, target: 0, hideTimer: null } as LabelFadeState };
@@ -332,7 +330,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   // reclip the cached screen-space chords without republishing the scene.
   const markerEntries = new Map(bodies.map(entry => [entry.indicator, entry]));
   const markerResize = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(changes => {
-    if (destroyed) return;
+    if (destroyed || !navigationIndicatorsVisible) return;
     for (const change of changes) {
       const entry = markerEntries.get(change.target as HTMLElement);
       const box = change.borderBoxSize[0];
@@ -344,7 +342,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       if (!clip) continue;
       const segments = entry.indicatorShown
         ? orbitOutsideMarker(clip.segments, clip.x, clip.y, radius) : clip.segments;
-      const update = writePieces(entry.pieces, segments, entry.previousCount);
+      const update = writePieces(entry.pieces, segments, entry.previousCount, entry.piecePool.setVisible);
       if (update.overflowed) throw new Error('Prepared context line pool overflowed.');
       entry.previousCount = update.count;
     }
@@ -377,6 +375,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   let destroyed = false;
   let selectedId = plan.focus.id;
   let overview = false;
+  let navigationIndicatorsVisible = true;
+  const suspendedOpacity = new Map<HTMLElement, string>();
   let latest: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
   const invalidateLabelSizes = () => { for (const entry of bodies) entry.labelSize.width = 0; };
   const fonts = host.ownerDocument.fonts;
@@ -384,6 +384,25 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   return Object.freeze({ root,
     labelExclusionRects: () => labelExclusions,
     backgroundExclusionRects: () => backgroundExclusions,
+    setNavigationIndicatorsVisible(visible: boolean) {
+      if (destroyed || visible === navigationIndicatorsVisible) return;
+      navigationIndicatorsVisible = visible;
+      if (!visible) {
+        for (const entry of bodies) {
+          for (const node of [entry.label, entry.indicator, entry.orbitRoot]) {
+            suspendedOpacity.set(node, node.style.opacity); node.style.opacity = '0';
+          }
+          entry.labelNavigation.update(null, entry.body.name);
+          entry.indicatorNavigation.update(null, entry.body.name);
+          entry.orbitNavigation?.update(null, entry.body.name);
+          entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', 'none');
+        }
+      } else {
+        for (const [node, opacity] of suspendedOpacity) node.style.opacity = opacity;
+        suspendedOpacity.clear();
+        if (latest) this.publish(latest.world, latest.viewport);
+      }
+    },
     setOverview(enabled: boolean) {
       if (overview === enabled || destroyed) return;
       overview = enabled;
@@ -407,7 +426,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
       const opacity = 1 - logarithmicFade(distanceM, plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
       // Cache the retained UI text bounds before any projection writes.
-      for (const entry of bodies) if (entry.labelSize.width === 0) {
+      for (const entry of bodies) if (navigationIndicatorsVisible && entry.labelSize.width === 0) {
         const bounds = entry.label.getBoundingClientRect();
         entry.labelSize = { width: Math.ceil(bounds.width), height: Math.ceil(bounds.height) };
       }
@@ -418,11 +437,17 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
       const [ox, oy] = viewport.principalOffsetPixels;
       const focal = viewport.focalPixels;
-      const width = host.clientWidth, height = host.clientHeight;
+      // Publication shares the camera owner's resize snapshot. Reading layout
+      // here would flush the preceding sky/shell writes on every flight frame.
+      const width = viewport.widthPixels ?? host.clientWidth;
+      const height = viewport.heightPixels ?? host.clientHeight;
       const project = (eye: readonly number[]): readonly number[] => [ox + focal * eye[0] / -eye[2], oy + focal * eye[1] / -eye[2]];
       const focusEye = toEye(plan.focus.positionM);
       const selected = bodies.find(entry => entry.body.id === selectedId)!.body;
       const selectedEye = toEye(selected.positionM);
+      const focusMayOcclude = createSphereChordTest(focusEye, plan.focus.radiusM, project);
+      const selectedMayOcclude = selected.id === plan.focus.id ? focusMayOcclude
+        : createSphereChordTest(selectedEye, selected.radiusM, project);
       const hidden = (eye: readonly number[], id?: string) =>
         (id !== plan.focus.id && rayHitsSphereBefore(eye, focusEye, plan.focus.radiusM)) ||
         (id !== selected.id && rayHitsSphereBefore(eye, selectedEye, selected.radiusM));
@@ -440,6 +465,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const eye = toEye(body.positionM), depth = -eye[2];
         const parentEye = entry.parent ? toEye(entry.parent.positionM) : null;
         const parentHidden = (position: readonly number[]) => parentEye !== null && rayHitsSphereBefore(position, parentEye, entry.parent!.radiusM);
+        const parentMayOcclude = entry.parent === null ? null : entry.parent.id === plan.focus.id ? focusMayOcclude
+          : entry.parent.id === selected.id ? selectedMayOcclude : createSphereChordTest(parentEye!, entry.parent.radiusM, project);
         const [x, y] = project(eye);
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isSelected = body.id === selectedId;
@@ -454,9 +481,11 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const parentDepth = parentEye === null ? 0 : -parentEye[2];
         const parentDiameter = entry.parent && parentDepth > entry.parent.radiusM
           ? 2 * focal * entry.parent.radiusM / Math.sqrt(parentDepth ** 2 - entry.parent.radiusM ** 2) : 0;
-        const segments = entry.orbit && opacity > 0 && orbitOpacity > 0 ? createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
+        const segments = navigationIndicatorsVisible && entry.orbit && opacity > 0 && orbitOpacity > 0 ? createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
+          mayOcclude: (a, b) => focusMayOcclude(a, b) || selectedMayOcclude(a, b) || Boolean(parentMayOcclude?.(a, b)),
           near, clipX: width / 2, clipY: height / 2 })(entry.orbit.verticesM, entry.orbit.trail) : [];
-        const appearance = entry.orbit ? orbitPresentation(segments) : { width: 1, opacity: 1 };
+        if (entry.orbit && navigationIndicatorsVisible) entry.orbitAppearance = orbitPresentation(segments);
+        const appearance = entry.orbitAppearance;
         const bodyLod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, diameter);
         const proxyOpacity = 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
         const markerOpacity = (isSelected ? lod.billboardOpacity : 1) *
@@ -468,7 +497,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const hovered = entry.group.dataset.objectHovered === 'true' || label.dataset.objectHovered === 'true' || marker.dataset.objectHovered === 'true' || indicator.dataset.objectHovered === 'true' || host.ownerDocument.activeElement === label || host.ownerDocument.activeElement === indicator;
         const primary = entry.parent === null || entry.parent.id === plan.focus.id;
         const priority = (isAnchor ? 4e6 : 0) + (hovered ? 2e6 : 0) + (isSelected ? 1e6 : 0) + (primary ? 1000 : 0) + Math.min(99, diameter);
-        if (annotationVisible && indicatorOpacity > 0) {
+        if (navigationIndicatorsVisible && annotationVisible && indicatorOpacity > 0) {
           const radius = BODY_INDICATOR_DIAMETER / 2, padding = entry.indicatorShown ? 0 : 2;
           indicators.add({ owner: 0, id: body.id, priority: priority + (entry.indicatorShown ? 100 : 0),
             anchor: [x, y], widthPx: BODY_INDICATOR_DIAMETER + padding * 2,
@@ -486,9 +515,10 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       }
       // An orbitless anchor uses the same stroke as the visible system, then thins as it recedes.
       projectedBodies[0].lineWidth = anchorLineWidth;
-      indicators.resolve();
+      if (navigationIndicatorsVisible) indicators.resolve();
       for (const projected of projectedBodies) {
         const { entry, x, y, indicatorOpacity, segments } = projected;
+        if (!navigationIndicatorsVisible) continue;
         entry.indicatorShown = indicators.accepted(0, entry.body.id);
         const crowded = projected.annotationVisible && indicatorOpacity > 0 && !entry.indicatorShown;
         if (crowded) {
@@ -504,6 +534,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       }
       for (const projected of projectedBodies) {
         const { entry, x, y, diameter, markerOpacity, indicatorOpacity, annotationVisible, parentDiameter, priority, orbitVisibility } = projected;
+        if (!navigationIndicatorsVisible) break;
         const { body, labelSize: size } = entry;
         const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
@@ -542,7 +573,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           widthPx: size.width + padding * 2, bottomOffsetPx: 0, topOffsetPx: size.height + padding * 2 });
         projected.labelPosition = [labelX, labelY];
       }
-      labels.resolve();
+      if (navigationIndicatorsVisible) labels.resolve();
       const acceptedRects: LabelScreenRect[] = [];
       const orbitBounds = { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity };
       // Only the resolved presentation owns DOM visibility and hit targets.
@@ -551,14 +582,17 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         marker.style.visibility = visible && markerOpacity > 0 && !pointSource ? '' : 'hidden';
         entry.navigation.update(visible && markerOpacity > 0.1 && !pointSource ? body.id : null, body.name);
+        if (visible) {
+          marker.style.opacity = String(markerOpacity);
+          marker.style.transform = `translate(${x}px,${y}px) scale(${Math.max(2.4, diameter) / entry.sprite.size})`;
+        }
+        if (!navigationIndicatorsVisible) continue;
         indicator.style.visibility = entry.indicatorShown ? '' : 'hidden';
         indicator.style.setProperty('--context-line-width', `${lineWidth}px`);
         entry.indicatorNavigation.update(entry.indicatorShown && indicatorOpacity > 0.1 ? body.id : null, body.name);
         if (annotationVisible) {
           indicator.style.opacity = `calc(${indicatorOpacity} * var(--context-line-opacity, 1))`;
           indicator.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
-          marker.style.opacity = String(markerOpacity);
-          marker.style.transform = `translate(${x}px,${y}px) scale(${Math.max(2.4, diameter) / entry.sprite.size})`;
         }
         if (entry.orbit) {
           if (entry.orbit.centerBodyId === plan.focus.id && orbitVisibility > .1) for (const [x0, y0, x1, y1] of segments) {
@@ -572,7 +606,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           entry.orbitRoot.style.setProperty('--context-line-width', `${lineWidth}px`);
           entry.orbitRoot.style.opacity = `calc(${orbitVisibility} * var(--context-line-opacity, 1))`;
           entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', orbitVisibility > 0.1 ? 'auto' : 'none');
-          const update = writePieces(entry.pieces, segments, entry.previousCount);
+          const update = writePieces(entry.pieces, segments, entry.previousCount, entry.piecePool.setVisible);
           if (update.overflowed) throw new Error('Prepared context line pool overflowed.');
           entry.previousCount = update.count;
         }

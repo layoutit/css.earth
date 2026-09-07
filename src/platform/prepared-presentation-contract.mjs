@@ -51,7 +51,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   const resource = (key, nullable = false) => { if (!(nullable && key === null) && !resources.has(key)) fail(`undeclared resource ${key}`); };
   const resourceList = (list, label) => { array(list, label).forEach(key => resource(key)); unique(list, label); };
   const tree = plan.tree;
-  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses"]);
+  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses", "activationGroups"]);
   for (const property of array(tree.properties,"prepared style properties")) {
     record(property,"prepared style property",["name","value","custom"]);string(property.name,"prepared property name");
     if(typeof property.value!=="string"||typeof property.custom!=="boolean")fail("prepared property assignment is invalid");
@@ -85,12 +85,26 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       !/(?:^|\s)polycss-camera(?:\s|$)/.test(tree.nodes[tree.camera].className)) fail("tree requires exactly one camera");
   if (tree.nodes.filter(entry => /(?:^|\s)polycss-scene(?:\s|$)/.test(entry.className)).length !== 1) fail("tree requires exactly one scene");
   array(tree.stageClasses, "stage classes").forEach(value => string(value, "stage class"));
+  if (tree.activationGroups !== undefined) {
+    const containers = new Set(tree.nodes.map(node => node.parent)), activated = new Set();
+    for (const group of array(tree.activationGroups, 'activation groups')) {
+      array(group, 'activation group');
+      if (!group.length || group.length > 64) fail('activation group must contain 1 to 64 leaves');
+      for (const target of group) {
+        node(target);
+        if (containers.has(target) || target === tree.camera || target === tree.scene || activated.has(target)) fail('activation target must be a unique retained leaf');
+        activated.add(target);
+      }
+    }
+  }
   function ancestor(child, parent) { for (let id = tree.nodes[child]?.parent; id >= 0; id = tree.nodes[id].parent) if (id === parent) return true; return false; }
   function attribute(name) { if (!/^(?:data-[a-z0-9-]+|aria-[a-z0-9-]+)$/.test(name)) fail(`unsupported attribute ${name}`); }
   const forbiddenProperty = /^(?:transform|scale|rotate|perspective)$/;
+  const activationTargets = new Set(tree.activationGroups?.flat() ?? []);
   function write(binding) {
     record(binding, "selection binding", ["kind", "target", "name", "value", "resource", "quoted"]);
     node(binding.target, true); string(binding.name, "binding name");
+    if (binding.kind === 'style' && binding.name === 'display' && activationTargets.has(binding.target)) fail('selection display cannot race prepared activation');
     choice(binding.kind, new Set(["style", "texture", "attribute", "class"]), "selection binding");
     if (binding.kind === "texture") { resource(binding.resource, true); if (typeof binding.quoted !== "boolean") fail("texture quote mode is required"); }
     else if (binding.kind === "class") { if (typeof binding.value !== "boolean") fail("class binding must be boolean"); }

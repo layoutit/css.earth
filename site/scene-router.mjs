@@ -129,7 +129,7 @@ export function createSceneRouter({
       let mount;
       mount = loaded.value(stage, {
         ...handoff?.mountOptions,
-        ...(worldContextMount ? { externalWorldContext: true } : {}),
+        ...(worldContextMount ? { externalWorldContext: true, viewport: worldContextMount.viewport } : {}),
         onMotionRequest: requestMotion,
         onError(error) {
           if (active === session && session.mount === mount) fail(session, error);
@@ -283,6 +283,7 @@ export function createSceneRouter({
         targetWorldCamera: request.options.targetWorldCamera,
         preserveView: request.options.preserveView,
         timing: request.timing,
+        presentWorld: worldContextMount ? (world, viewport) => worldContextMount?.publish(world, viewport) : null,
       });
       const loaded = await request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
       if (loaded.cancelled || pending !== request) return false;
@@ -300,6 +301,7 @@ export function createSceneRouter({
       request.timing.mark(error?.name === 'AbortError' ? 'cancelled' : 'failed');
       if (pending !== request || request.controller.signal.aborted) return false;
       pending = null; request.controller.abort(); request.lifetime.destroy();
+      worldContextMount?.setNavigationIndicatorsVisible?.(true);
       if (active === source && source) {
         if (error?.preserveView === true) {
           const url = captureUrl();
@@ -377,6 +379,7 @@ export function createSceneRouter({
   }
 
   function publishSceneState() {
+    worldContextMount?.setNavigationIndicatorsVisible?.(!pending || pending.options.preserveView === true);
     const state = readSceneState();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;

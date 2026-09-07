@@ -11,6 +11,7 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
   const variants = array(value, 'selection variants'); if (!variants.length) fail('selection variants are empty');
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [], settings = new Map(controls.settings?.controls.map(setting => [setting.name, setting]) ?? []);
   const keys: Record<string, unknown>[] = [];
+  const activationTargets = new Set(tree.activationGroups?.flat() ?? []);
   for (const input of variants) {
     const variant = record(input, 'variant', ['when', 'required', 'writes', 'materials', 'navigation']);
     const when = record(variant.when, 'selection key', ['lensId', ...settings.keys()]); keys.push(when);
@@ -20,6 +21,9 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
     }
     resourceList(variant.required, resources, 'selection resources');
     array(variant.writes, 'selection writes').forEach(write => requireWrite(write, tree, resources));
+    for (const input of variant.writes as PreparedVariant['writes']) {
+      if (input.kind === 'style' && input.name === 'display' && activationTargets.has(input.target)) fail('selection display cannot race prepared activation');
+    }
     const materials = array(variant.materials, 'selected materials'); unique(materials.map(value => record(value, 'selected material').track), 'selected tracks');
     if (materials.length !== tracks.length) fail('each variant must specify every material track');
     materials.forEach(value => requireSelectedMaterial(value, tracks));
