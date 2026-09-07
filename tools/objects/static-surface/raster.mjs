@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 import { orientLatitudeBands, preparePolarAtlas } from './projection.mjs';
 import { writeCurvatureMaterial } from './curvature.mjs';
-import { decodeElevationGrid, elevationRaster } from './elevation.mjs';
+import { decodeElevationGrid, elevationRaster, elevationColor } from './elevation.mjs';
 import { bakeSurfaceRaster } from './inverse-homography.mjs';
 
 /** Observation interpretation is selected by the source recipe, never body ID. */
@@ -17,6 +17,14 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
   for (const plan of config.lenses) {
     const input = resolve(sourceDirectory, plan.input);
     const elevation = plan.elevation ? decodeElevationGrid(await readFile(input), plan.elevation) : null;
+    if (plan.elevation) {
+      const width = 256, height = 16, data = Buffer.alloc(width * height * 3);
+      for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+        data.set(elevationColor((2 * x / (width - 1) - 1) * plan.elevation.rangeMetres, plan.elevation), (y * width + x) * 3);
+      }
+      await sharp(data, { raw: { width, height, channels: 3 } }).webp({ lossless: true })
+        .toFile(resolve(publicDirectory, `${plan.output}-legend.webp`));
+    }
     const source = plan.coverage ? await sharp(input, { limitInputPixels: false }).raw().toBuffer({ resolveWithObject: true }) : null;
     if (plan.coverage && plan.coverage.kind !== 'black-fill') throw new TypeError('Unsupported observed coverage source.');
     const sourceMissing = source && blackFillCoverage(source.data, source.info, { southConnected: plan.coverage.southConnected });
