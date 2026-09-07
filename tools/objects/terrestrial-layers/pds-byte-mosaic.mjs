@@ -2,10 +2,11 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import sharp from 'sharp';
+import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 
 // PDS3 byte images carry their projection and validity in the attached label.
 // This reader deliberately supports only unrotated, planetocentric cylindrical grids.
-export function decodePdsByteImage(bytes) {
+export function decodePdsByteImage(bytes, policy = {}) {
   const label = bytes.subarray(0, 65536).toString('ascii');
   const field = key => {
     const value = label.match(new RegExp(`^\\s*${key.replaceAll('^', '\\^')}\\s*=\\s*([^\\r\\n]+)`, 'm'))?.[1];
@@ -25,11 +26,11 @@ export function decodePdsByteImage(bytes) {
   const centerEast = westPositive ? 360 - number('CENTER_LONGITUDE') : number('CENTER_LONGITUDE');
   const left = centerEast * ppd - number('SAMPLE_PROJECTION_OFFSET') - 0.5;
   const top = 90 * ppd - number('LINE_PROJECTION_OFFSET') - 0.5;
-  const noData = number('MISSING_CONSTANT');
+  const noData = policy.noData ?? number('MISSING_CONSTANT');
   const labelEnd = label.search(/^END\s*$/m);
   if (field('PDS_VERSION_ID') !== 'PDS3' || field('RECORD_TYPE') !== 'FIXED_LENGTH' ||
       field('SAMPLE_TYPE') !== 'UNSIGNED_INTEGER' || number('SAMPLE_BITS') !== 8 ||
-      field('MAP_PROJECTION_TYPE') !== 'EQUIRECTANGULAR' || number('CENTER_LATITUDE') !== 0 ||
+      !['EQUIRECTANGULAR', 'SIMPLE CYLINDRICAL'].includes(field('MAP_PROJECTION_TYPE')) || number('CENTER_LATITUDE') !== 0 ||
       number('MAP_PROJECTION_ROTATION') !== 0 ||
       !['WEST', 'EAST'].includes(field('POSITIVE_LONGITUDE_DIRECTION')) ||
       number('B_AXIS_RADIUS') !== radiusKm || number('C_AXIS_RADIUS') !== radiusKm ||
@@ -44,10 +45,11 @@ export function decodePdsByteImage(bytes) {
     left: ((left % (360 * ppd)) + 360 * ppd) % (360 * ppd), top };
 }
 
-export async function preparePdsByteMosaic(sourceDirectory, entries, width, height) {
+export async function preparePdsByteMosaic(sourceDirectory, entries, width, height, policy = {}) {
   let mosaic, grid;
   for (const entry of entries) {
-    const tile = decodePdsByteImage(gunzipSync(await readFile(resolve(sourceDirectory, entry.path))));
+    const bytes = await readFile(resolve(sourceDirectory, entry.path));
+    const tile = decodePdsByteImage(bytes[0] === 0x1f && bytes[1] === 0x8b ? gunzipSync(bytes) : bytes, policy);
     if (tile.width !== entry.width || tile.height !== entry.height ||
         tile.radiusKm * 1000 !== entry.projection.referenceRadiusMeters) throw new Error(`PDS source grid changed: ${entry.id}`);
     if (!grid) {
@@ -55,9 +57,11 @@ export async function preparePdsByteMosaic(sourceDirectory, entries, width, heig
       mosaic = Buffer.alloc(grid.width * grid.height * 2);
     }
     if (grid.ppd !== tile.ppd || grid.radiusKm !== tile.radiusKm) throw new Error('PDS mosaic tiles must share one source grid.');
+    const connected = policy.connectedEdge ? blackFillCoverage(tile.pixels, { width: tile.width, height: tile.height, channels: 1 },
+      { northConnected: policy.connectedEdge === 'north', southConnected: policy.connectedEdge === 'south' }) : null;
     for (let y = 0; y < tile.height; y++) for (let x = 0; x < tile.width; x++) {
       const value = tile.pixels[y * tile.width + x];
-      if (value === tile.noData) continue;
+      if (connected ? connected[y * tile.width + x] : value === tile.noData) continue;
       const i = ((y + tile.top) * grid.width + (x + tile.left) % grid.width) * 2;
       if (mosaic[i + 1]) throw new Error('PDS mosaic has overlapping observations without a composition rule.');
       mosaic[i] = value;

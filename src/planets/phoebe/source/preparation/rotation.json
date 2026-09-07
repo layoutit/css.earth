@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-linear-rotation@1",
+  "rightAscensionDegrees": 356.9,
+  "declinationDegrees": 77.88,
+  "referenceEpochJdTt": 2451545,
+  "primeMeridianDegrees": 178.58,
+  "spinRateDegreesPerDay": 931.639,
+  "source": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
+  "qualification": "Uses the rotation frame documented with the 2012 Gaskell shape. Its pole declination is 77.88 degrees, 0.08 degrees above the later NAIF pck00011 constant. This is the source model orientation, not a modern measured rotation phase."
+}
