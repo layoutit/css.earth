@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "ec6f33ab1e57d51284f5efe15995e8c5cf9e8ac49fd97cb4cff65848e0eadf3a"
+  },
   "id": "sun",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -38,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/static.json",
-          "sha256": "66ba22b2f1bee3e9f4ceaf01356238645ddb30260f3d230c419364682c44482c"
+          "sha256": "33dcff59d4a6e6265f7a7b7b904b44f4c936cc8b1b3e3830c7e7f6f7c8560f02"
         },
         {
           "id": "title",
@@ -59,6 +62,11 @@
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
           "sha256": "81ecaffa8af09c19ec770bee22053f653459af3593c2093dc8c16388715c40f6"
+        },
+        {
+          "id": "world-context",
+          "path": "source/navigation/universe.json",
+          "sha256": "b4603ab1d186177af83254669fe48493a6e70ec67b81c64059d1a0bb3f5197d4"
         }
       ],
       "shape": {
@@ -105,11 +113,30 @@
         "source": "raster",
         "material": "emission"
       }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "presentationToReference": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 2244193.5483870967,
+      "bodyRadiusM": 695700000
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "2e5eeb1070f845f87bf2755ed124afa90984b649cbbb9c1a12bfdeb35ed487f0"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

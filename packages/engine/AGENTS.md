@@ -14,7 +14,7 @@ Do not import the application, legacy runtime, or object-specific configuration.
 - Objects using the same capabilities use the same implementation and differ through their JSON.
 - Preparation and rendering use explicit interfaces; concrete renderer implementations live outside packages.
 - Capabilities must compose so complex objects can add prepared layers or paging without planet-specific forks.
-- Implement Mercury and Venus first; preserve room for Earth's complexity without implementing Earth now.
+- The shared scene and navigation contract covers every prepared object and future object type, independently of navigation-menu membership.
 - Scientific reference tables belong to astronomy/catalog; object presentation customizations do not.
 
 ## Source size and package maintenance

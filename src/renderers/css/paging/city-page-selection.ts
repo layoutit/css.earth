@@ -1,42 +1,7 @@
 import { preparedReferenceKey } from "./prepared-block-transport.js";
-import type { PreparedBounds, PreparedPage, PreparedPagePlan, PreparedReference, PageViewport, PageProjection, ProjectedPage, PageSelection } from "./types.js";
-export function projectCityPage(page: PreparedBounds, matrix: readonly number[], scale: number, viewport: PageViewport): PageProjection {
-  if(page.coverageParts){
-    let visible=false,span=0,center=[0,0],distance=Infinity;
-    for(const part of page.coverageParts){
-      const projected=projectCityPage(part,matrix,scale,viewport);
-      if(!projected.visible)continue;
-      visible=true;span=Math.max(span,projected.span);
-      const next=Math.hypot(...projected.center);
-      if(next<distance){distance=next;center=projected.center;}
-    }
-    return {visible,span,center};
-  }
-  const [left,right,top,bottom]=projectBounds(page.corners,matrix,scale);
-  const front = matrix[2] * page.normal[0] + matrix[6] * page.normal[1] + matrix[10] * page.normal[2] + (page.normalSlack??0)*Math.hypot(matrix[2],matrix[6],matrix[10]) > 0;
-  const [coverLeft,coverRight,coverTop,coverBottom]=page.coverageCorners?projectBounds(page.coverageCorners,matrix,scale):[left,right,top,bottom];
-  const originX=viewport.originX??viewport.width/2,originY=viewport.originY??viewport.height/2;
-  return {
-    visible: front && coverLeft < viewport.width-originX && coverRight > -originX &&
-      coverTop < viewport.height-originY && coverBottom > -originY,
-    span: Math.max(right - left, bottom - top),
-    center: [(left+right)/2+originX-viewport.width/2,(top+bottom)/2+originY-viewport.height/2],
-  };
-}
-
-// Project the prepared corners directly into bounds, without allocating point
-// and coordinate arrays for each corner on every camera update.
-function projectBounds(corners: PreparedBounds["corners"],matrix: readonly number[],scale: number){
-  let left=Infinity,right=-Infinity,top=Infinity,bottom=-Infinity;
-  for(const [x,y,z] of corners){
-    const px=matrix[0]*x+matrix[4]*y+matrix[8]*z+matrix[12];
-    const py=matrix[1]*x+matrix[5]*y+matrix[9]*z+matrix[13];
-    const pz=matrix[2]*x+matrix[6]*y+matrix[10]*z+matrix[14];
-    const perspective=1/(1-pz/1_000_000),sx=px*perspective*scale,sy=py*perspective*scale;
-    left=Math.min(left,sx);right=Math.max(right,sx);top=Math.min(top,sy);bottom=Math.max(bottom,sy);
-  }
-  return [left,right,top,bottom];
-}
+import type { PreparedPage, PreparedPagePlan, PreparedReference, PageViewport, PageProjection, ProjectedPage, PageSelection } from "./types.js";
+import { projectCityPage } from "./city-page-projection.js";
+export { projectCityPage } from "./city-page-projection.js";
 
 export function selectCityPages(plan: PreparedPagePlan, pages: ReadonlyMap<string, PreparedPage>, matrix: readonly number[], scale: number, viewport: PageViewport): PageSelection {
   if(plan.topology === "wmts-quadtree@1")return selectWmtsTree(plan,pages,matrix,scale,viewport);
@@ -137,7 +102,7 @@ function selectWmtsTree(plan: PreparedPagePlan,pages: ReadonlyMap<string, Prepar
       // A loaded section can prove that its conservative stub bounds contain
       // no visible image pieces. Keep that proof while those stub bounds are
       // visible; evicting it would restore the stub and request it forever.
-      if(entry.node.coverageParts && !entry.node.stub && projectCityPage(entry.node,matrix,scale,viewport).visible)request(entry,path);
+      if(entry.node.directory && !entry.node.stub && projectCityPage(entry.node,matrix,scale,viewport).visible)request(entry,path);
       return [];
     }
     const next=request(entry,path);

@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "45250e597a01b20710501705e71c281cb848baeb49c695316cb475c074ef1efc"
+  },
   "id": "mars",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -38,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a0590c348699e1bfc11a733920a9a765c3a0edadcd05e43a56144093aa61987b"
+          "sha256": "fdfd85a044740c892885f2eed15ef969282c08cf3137680862ffd4b2bbf86529"
         },
         {
           "id": "charts",
@@ -111,11 +114,35 @@
         "source": "atmosphere",
         "material": "lighting"
       }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        74050071537.75005,
+        196535819337.77313,
+        88149236725.30312
+      ],
+      "presentationToReference": [
+        0.5843656306078638,
+        -0.26248937865170513,
+        0.7678646598583081,
+        0.5848450891201395,
+        0.7922025633274264,
+        -0.17427369391136116,
+        -0.5625593581981636,
+        0.5509214324679124,
+        0.6164515745386444
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.39777715593191365,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 13423.675889328062,
+      "bodyRadiusM": 3396190
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "f4cdf32b0d7ca30ba1a8f0f6436c18f61882aca10686870ce7b6cbb06ff86441"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

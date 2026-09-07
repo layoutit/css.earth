@@ -2,6 +2,18 @@
 
 Shared camera, navigation, lifecycle, and renderer-independent execution contracts.
 
+`selectPreparedPointField()` selects deterministic exact-star references for a
+perspective view; hierarchy nodes are traversal bounds and are never drawn as
+centroid dots. `selectVisiblePreparedStars()` adds camera-distance apparent-
+magnitude filtering and optional prepared coverage anchors. `consideredCount`
+and `drawnCount` describe the catalogue and retained pool; `coveredCount` is a
+compatibility alias for the considered catalogue size. The error field is a
+diagnostic rather than a pixel guarantee.
+
+`presentPhysicalPoseInVolume()` expresses the canonical physical observer in a
+prepared volume's local units. This projection never replaces the observer with
+large-origin volume coordinates, preserving close-object camera precision.
+
 ```text
 packages/engine/
 ├── src/           Generic TypeScript implementation and tests

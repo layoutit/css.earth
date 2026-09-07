@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "19828366e754c7cda06d548653a69dda52b046c5deec2a6260dc7f470c804b5a"
+  },
   "id": "uranus",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -59,7 +62,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4a8e66385a1b4164b712f6c02e45ec95e79786065f82d1caef292ca805e5383b"
+          "sha256": "c830b553957323cb06615011f17fb5ba607a9156f1208323431e7c3e570d3c88"
         },
         {
           "id": "rings",
@@ -173,11 +176,35 @@
         "source": "materials",
         "material": "lighting"
       }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1350798675035.729,
+        2367053320812.988,
+        1017582363581.5109
+      ],
+      "presentationToReference": [
+        -0.3744930803430425,
+        0.8395579774714749,
+        -0.3935699877266886,
+        -0.8125629229664072,
+        -0.5016138014825489,
+        -0.29685870440752554,
+        -0.44665023116020897,
+        0.2086288489788321,
+        0.8700445818337699
+      ],
+      "orbitUpReference": [
+        7.632783294297951e-17,
+        -0.39777715593191365,
+        0.9174820620691816
+      ],
+      "metersPerUnit": 101023.71541501977,
+      "bodyRadiusM": 25559000
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "7463d8244d7cab65541ceabda4688b864c64cdcdd31563a40d9e5cfb7201e6c0"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

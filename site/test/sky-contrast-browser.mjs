@@ -15,46 +15,34 @@ try {
     page.on('pageerror', error => errors.push(error.message));
     for (const id of ['mercury', 'venus', 'ceres', 'europa']) {
       await page.goto(new URL(`/${id}/`, baseUrl).href, { waitUntil: 'networkidle' });
-      await page.waitForFunction(() => document.documentElement.dataset.ready === 'true');
+      await page.waitForFunction(() => window.__cssEarth?.ready && document.querySelector('.prepared-point-field-stars'));
+      // Wait for the existing label admission fade before comparing emphasis.
+      await page.waitForTimeout(1000);
       assert.equal(await page.locator('.planet-sky-contrast-setting').isChecked(), false);
       const before = await read(page);
       assert.equal(before.mode, 'standard');
-      assert.equal(before.stars.length, 1599);
-      assert.ok(before.stars.every(star => near(star.opacity, star.luminance * .35) && star.shadow === 'none'));
+      assert.equal(before.emphasis, .35);
+      assert.ok(before.stars.length > 0, 'The visible shared star field must be checked');
       await page.evaluate(() => { window.__contrastNodes = [...document.querySelector('.planet-stage').querySelectorAll('*')]; });
       if (id === 'mercury') await page.screenshot({ path: resolve(output, `standard-dpr${dpr}.png`) });
       await page.getByRole('button', { name: 'Settings', exact: true }).click();
       await page.locator('.planet-sky-contrast-setting-control').click();
       const high = await read(page);
       assert.equal(high.mode, 'high');
-      assert.ok(high.stars.every(star => near(star.opacity, star.luminance) && star.shadow !== 'none'));
-      assert.ok(high.faces.every((url, index) => url !== before.faces[index]));
-      assert.deepEqual(high.bodies, before.bodies, 'Clickable body points and captions keep their presentation');
+      assert.equal(high.emphasis, 1);
+      assert.deepEqual(high.stars, before.stars, 'Prepared point photometry and transforms are preserved');
+      assert.equal(high.glow, 1);
+      assert.ok(high.glow > before.glow, 'High contrast increases background brightness, not the reverse');
+      assert.deepEqual(high.labels, before.labels, 'Labels retain their own emphasis');
+      assert.deepEqual(high.bodies, before.bodies, 'Clickable body points and captions retain their presentation');
       assert.equal(high.scene, before.scene, 'Contrast must not move the camera');
       if (id === 'mercury') await page.screenshot({ path: resolve(output, `high-dpr${dpr}.png`) });
       await page.locator('.planet-sky-contrast-setting-control').click();
       const reset = await read(page);
-      assert.deepEqual(reset.stars, before.stars);
-      assert.deepEqual(reset.faces, before.faces);
+      assert.deepEqual(reset, before);
       assert.equal(await page.evaluate(() => [...document.querySelector('.planet-stage').querySelectorAll('*')]
         .every((node, index) => node === window.__contrastNodes[index])), true);
-
-      // Test-only navigation binding exercises the clickable exception without
-      // inventing a production galaxy destination or mounting another object.
-      const target = await page.evaluate(async () => {
-        const { bindObjectNavigationTarget } = await import('/src/renderers/css/dist/navigation.js');
-        const star = document.querySelector('.planet-cubic-sky-star');
-        const target = bindObjectNavigationTarget(star, document.querySelector('.planet-stage'));
-        target.update('venus', 'Venus');
-        const bright = { opacity: Number(getComputedStyle(star).opacity), shadow: getComputedStyle(star).boxShadow,
-          luminance: Number(star.style.getPropertyValue('--planet-cubic-sky-star-luminance')), tabIndex: star.tabIndex };
-        target.destroy();
-        return { ...bright, restored: Number(getComputedStyle(star).opacity) };
-      });
-      assert.ok(near(target.opacity, target.luminance) && target.shadow !== 'none' && target.tabIndex === 0);
-      assert.ok(near(target.restored, target.luminance * .35), 'Losing the click action restores background emphasis');
-      results.push({ id, dpr, defaultHighContrast: false, stars: before.stars.length, standardOpacity: before.stars[0].opacity,
-        highOpacity: high.stars[0].opacity, clickableOpacity: target.opacity, stable: true });
+      results.push({ id, dpr, stars: before.stars.length, standardEmphasis: before.emphasis, highEmphasis: high.emphasis, stable: true });
     }
     assert.deepEqual(errors, []);
     await context.close();
@@ -63,17 +51,19 @@ try {
   console.log(JSON.stringify({ ok: true, results }));
 } finally { await browser.close(); }
 
-function near(a, b) { return Math.abs(a - b) < .00001; }
 function read(page) {
-  return page.evaluate(() => ({
-    mode: document.body.dataset.skyContrast,
-    scene: document.querySelector('.polycss-scene')?.getAttribute('style'),
-    stars: [...document.querySelectorAll('.planet-cubic-sky-star')].map(element => ({
-      opacity: Number(getComputedStyle(element).opacity), shadow: getComputedStyle(element).boxShadow,
-      luminance: Number(element.style.getPropertyValue('--planet-cubic-sky-star-luminance')),
-    })),
-    faces: [...document.querySelectorAll('.planet-cubic-sky-face')].map(element => getComputedStyle(element).backgroundImage),
-    bodies: [...document.querySelectorAll('.planet-heliocentric-system-marker, .planet-heliocentric-caption')]
-      .map(element => element.getAttribute('style')),
-  }));
+  return page.evaluate(() => {
+    const layer = document.querySelector('.prepared-point-field-stars');
+    return {
+      mode: document.body.dataset.skyContrast,
+      scene: document.querySelector('.polycss-scene')?.getAttribute('style'),
+      emphasis: Number(getComputedStyle(layer).opacity),
+      glow: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
+      stars: window.__cssEarthUniverse.inspect().stars.points.filter(({ element }) => getComputedStyle(element).visibility === 'visible')
+        .map(({ element, reference }) => ({ style: element.getAttribute('style'), reference })),
+      labels: [...document.querySelectorAll('.prepared-star-label')].map(element => element.getAttribute('style')),
+      bodies: [...document.querySelectorAll('[data-context-label], [data-object-navigate]')]
+        .map(element => element.getAttribute('style')),
+    };
+  });
 }

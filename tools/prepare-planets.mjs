@@ -73,7 +73,7 @@ export async function objectPreparationFiles(root, id) {
     const directories = ['tools/objects', 'src/preparation', 'src/renderers/css/preparation', 'packages/objects/src'];
     const compiler = (await Promise.all(directories.map(directory => listPreparationFiles(root, directory)))).flat()
       .filter(path => !path.includes('/dist/') && !/\.test\.ts$/.test(path));
-    const shared = await preparationDependencies(root, ['tools/prepared-node-tree.mjs', 'tools/prepared-cssom.mjs',
+    const shared = await preparationDependencies(root, ['tools/prepare-surface-minimaps.mjs', 'tools/prepared-node-tree.mjs', 'tools/prepared-cssom.mjs',
       'tools/prepare-materials.mjs', 'src/platform/prepare-cubic-sky-source.mjs', 'src/platform/prepare-directional-sun.mjs',
       'tools/objects/solar-system-scene.mjs', 'tools/objects/solar-system-presentation.mjs', 'tools/objects/solar-system-markers.mjs']);
     const outputs = [descriptor, `${base}/runtime-assets.json`, `${base}/prepared/object.json`,

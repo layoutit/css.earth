@@ -1,5 +1,5 @@
 import type { CameraPlan, TrackballMetrics } from './types.js';
-export interface ResponsiveZoomOptions { stage: HTMLElement; cameraElement: HTMLElement; plan: CameraPlan; mobile: boolean; mobilePreviewElement?: HTMLElement | null; }
+export interface ResponsiveZoomOptions { stage: HTMLElement; cameraElement: HTMLElement; plan: CameraPlan; mobile: boolean; mobilePreviewElement?: HTMLElement | null; framingReferenceZoom?: number; }
 export interface TrackballLayoutOptions { stage: HTMLElement; cameraElement: HTMLElement; logicalBodyDiameter: number; sceneScale?: number; }
 import { preparedCameraZoomScale } from "../rendering/prepared-camera-runtime.js";
 import { BASE_TILE } from "@layoutit/polycss";
@@ -11,6 +11,7 @@ export function selectPreparedResponsiveZoom({
   plan,
   mobile,
   mobilePreviewElement,
+  framingReferenceZoom = plan.defaultZoom,
 }: ResponsiveZoomOptions) {
   const fit = plan.responsiveFit;
   const numericFields = [
@@ -25,6 +26,7 @@ export function selectPreparedResponsiveZoom({
     fit?.minimumZoom,
     fit?.maximumZoom,
     plan.logicalBodyDiameter,
+    framingReferenceZoom,
   ];
   if (fit?.model !== "continuous-aspect-smoothstep" ||
       numericFields.some((value) => !Number.isFinite(value)) ||
@@ -71,7 +73,7 @@ export function selectPreparedResponsiveZoom({
   // its distance bounds own the physical limits. The legacy scale bounds
   // cannot constrain the viewport's requested diameter on this path.
   const zoom = plan.projection?.model === 'css-perspective-shared-with-sky'
-    ? framingRatio * plan.defaultZoom
+    ? framingRatio * framingReferenceZoom
     : clamp(framingRatio, fit.minimumZoom, fit.maximumZoom);
   return Object.freeze({ model: fit.model, widthShare, zoom });
 }

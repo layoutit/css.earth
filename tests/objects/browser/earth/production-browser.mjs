@@ -70,7 +70,7 @@ try {
             stage.querySelector(".polycss-scene"),
           ).transform,
           normalSurfaceImage: getComputedStyle(
-            stage.querySelector(".earth-body:not(.earth-body-polar) > s > .polycss-projective-texture"),
+            stage.querySelector(".earth-body:not(.earth-body-polar) > s"),
           ).backgroundImage,
           normalPolesImage: getComputedStyle(
             stage.querySelector(".earth-body-polar > s"),
@@ -84,7 +84,7 @@ try {
             .length,
         };
       });
-      assert.equal(initial.title, "Earth in 3D | cssEarth");
+      assert.equal(initial.title, "Earth | cssEarth");
       assert.equal(initial.retainedLeaves,
         PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount);
       assert.equal(initial.canvasCount, 0);

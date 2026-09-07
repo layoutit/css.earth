@@ -112,7 +112,7 @@ export function createCubicSkyCameraOrientation({
   return Object.freeze({
     reset,
     setSceneRotation(rotation: readonly number[]) {
-      if (!skyRegistration || !sunTracksScene) throw new TypeError('A world camera requires registered scene-tracking sky and Sun.');
+      if (!skyRegistration) throw new TypeError('A world camera requires a registered scene-tracking sky.');
       validateWorldRotation(rotation);
       sceneMatrix = new DOMMatrix([rotation[0], rotation[3], rotation[6], 0,
         rotation[1], rotation[4], rotation[7], 0, rotation[2], rotation[5], rotation[8], 0, 0, 0, 0, 1]);
@@ -122,9 +122,10 @@ export function createCubicSkyCameraOrientation({
       sceneMatrix = sceneMatrix.multiply(change);
       invalidatePresentations();
     },
-    prepareFlight(target: CameraAngles) {
+    prepareFlight(target: CameraAngles, targetCorrection?: DOMMatrix) {
       const from = [sceneMatrix, skyboxMatrix, sunViewMatrix];
       reset(target);
+      if (targetCorrection) sceneMatrix = targetCorrection.multiply(sceneMatrix);
       const to = [sceneMatrix, skyboxMatrix, sunViewMatrix];
       [sceneMatrix, skyboxMatrix, sunViewMatrix] = from;
       invalidatePresentations();
@@ -142,7 +143,7 @@ export function createCubicSkyCameraOrientation({
     },
     snapshot({ sceneOnly = false } = {}): CameraPose {
       if (sceneOnly) {
-        if (!skyRegistration || !sunTracksScene) throw new TypeError("This camera needs its independent sky orientation.");
+        if (!skyRegistration) throw new TypeError("This camera needs a registered scene orientation.");
         return Object.freeze({ schema: "cssearth-camera-pose@2", scene: formatMatrix3d(sceneMatrix) });
       }
       return Object.freeze({
@@ -154,7 +155,7 @@ export function createCubicSkyCameraOrientation({
     },
     restore(snapshot: CameraPose) {
       if (snapshot?.schema === "cssearth-camera-pose@2") {
-        if (!skyRegistration || !sunTracksScene) throw new TypeError("This camera needs its independent sky orientation.");
+        if (!skyRegistration) throw new TypeError("This camera needs a registered scene orientation.");
         sceneMatrix = parseCameraPoseMatrix(snapshot.scene, "scene");
         invalidatePresentations();
         return;

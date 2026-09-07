@@ -23,13 +23,12 @@ describe('retained presentation compiler compatibility', () => {
     const input = { ...profile, scene, assets, lenses, sun, markers, controls, solarSource } as PresentationInputs;
     const prepared = await prepareCssPresentation(input);
     expect(prepared).toEqual(expected);
-    expect(prepared.tree.nodes.length).toBe(id === 'mercury' ? 1805 : 904);
+    expect(prepared.tree.nodes.length).toBe(id === 'mercury' ? 909 : 456);
     expect(createHash('sha256').update(JSON.stringify(canonical(prepared))).digest('hex')).toBe(expectedDigests[id]);
   }, 30_000);
 });
-// Updated for PR11's 16-entry navigation atlas: marker counts and shifted indices only.
-// All other presentation fields remain equal to the pinned 13-entry baseline.
+// Source-compiled direct leaves compose the prepared frame and texture transform.
 const expectedDigests: Record<string, string> = {
-  mercury: '045bf3e245b1dae08ad4f92da7bb74a5af322f22fc757535acdceff709e47e4b',
-  venus: 'a8efabd16486a7d821a84137e5c741a1c7f55bf0e85862ff0ebeb34af1b23bea',
+  mercury: '56519a7b96af7ebdbe81ab5a1d69b0e00bc1d9f064d13a6705c43aa7c44498da',
+  venus: '7c5846a3e69c5b8e8bbdb22408034d0e17eda4e93cf741bdf3c1ae879d7a5e43',
 };

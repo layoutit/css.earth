@@ -88,8 +88,23 @@
       "licenseEvidence": [
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
       "redistribution": "Credited prepared observational image; source binary excluded from Git."
+    },
+    {
+      "id": "callisto-surface-minimap-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 155,
+      "expectedSha256": "a3f124900fc2f62dc6d3b76ead7962907ae909c5203e3104950fe56368befde5",
+      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation metadata",
+      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
+      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
+      "consumers": [
+        "lenses",
+        "presentation"
+      ]
     }
   ],
   "generatedIntermediates": [],
@@ -120,8 +135,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 7391,
-      "expectedSha256": "4b6c8604e6b6bfa5ad55f1aeb16a73971e7c6d13c24a130daf29eb3c4be6dc47",
+      "expectedBytes": 7426,
+      "expectedSha256": "e9284222caa8b1269973294f17790804d3d931187bc7a9479a1d080c0e063b75",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {

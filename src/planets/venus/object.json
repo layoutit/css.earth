@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "10398f1ed1c7a213934c3d15ec77bd71cb92e47b911a03679538291106864095"
+  },
   "id": "venus",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -76,7 +79,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "b59ccebe6243f7e98ed3f55c792517bd124b689c17f145ea4ed9a145d0ed3924"
+          "sha256": "ba1bc42dfa81ab7deb06687c45870a4f0354a68cf0851378d01ccd885e0240f3"
         },
         {
           "id": "solar-system",
@@ -145,9 +148,6 @@
       }
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "1495ff1a0de4b3aef9b7060fa875de659a77009afafb490d0c9c4b800afad7d0"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }
