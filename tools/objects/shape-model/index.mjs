@@ -19,6 +19,7 @@ import { preparedSunResources, preparedResourcePool } from '../../../src/platfor
 import { createPreparedNodeTree } from '../../prepared-node-tree.mjs';
 import { prepareCssomDeclarationReads } from '../../prepared-cssom.mjs';
 import { prepareModelMarker, prepareModelRasters, prepareRingRaster, prepareSphereLighting } from './raster.mjs';
+import { prepareShapeLighting } from './lighting.mjs';
 
 const writeJson = (dir, name, data) => writeFile(resolve(dir, name + '.json'), JSON.stringify(data) + '\n');
 
@@ -30,7 +31,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const { latitudeSegments, longitudeSegments, width, height, poleSize } = config.mesh;
   const ringSegments = config.ring?.segments ?? 0;
   const sphereLighting = shape.kind === 'sphere' && !config.ring;
-  const quadCount = (latitudeSegments - 2) * longitudeSegments + 4 + ringSegments + Number(sphereLighting);
+  const quadCount = (latitudeSegments - 2) * longitudeSegments + 4 + ringSegments + 1;
   if (![latitudeSegments, longitudeSegments, width, height, poleSize, config.quadBudget].every(n => Number.isInteger(n) && n > 0) ||
       latitudeSegments < 4 || longitudeSegments < 4 || !!config.ring !== !!descriptor.recipe.rings ||
       width % longitudeSegments || height % latitudeSegments || quadCount > config.quadBudget || quadCount > 2000 ||
@@ -41,7 +42,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   await source.verify();
   await Promise.all([mkdir(outputDirectory, { recursive: true }), mkdir(publicDirectory, { recursive: true })]);
   const { textures, source: modelSource } = await prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory });
-  if (sphereLighting) textures.lighting = await prepareSphereLighting({ publicDirectory, publicBase });
+  textures.lighting = await prepareSphereLighting({ publicDirectory, publicBase });
   await writeFile(resolve(publicDirectory, 'marker.webp'), await prepareModelMarker(axes));
   const ringTexture = config.ring ? await prepareRingRaster({ config, publicDirectory, publicBase }) : null;
   const skySource = JSON.parse(await readFile(resolve(sourceDirectory, 'stars/hyg-v41-field.json'), 'utf8'));
@@ -88,16 +89,24 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const material = sphereLighting ? b.element('s', 'shape-model-material',
     `width:${scene.camera.logicalBodyDiameter}px;height:${scene.camera.logicalBodyDiameter}px;margin:${-scene.camera.logicalBodyDiameter / 2}px 0 0 ${-scene.camera.logicalBodyDiameter / 2}px`) : null;
   if (material) { b.append(null, materialRoot); b.append(materialRoot, material); }
+  const shapeLighting = !sphereLighting ? prepareShapeLighting({ builder: b, root, axes, config, scene }) : null;
+  const materialReference = shapeLighting ? {
+    materialReferenceControlPitchDegrees: scene.camera.defaultControlPitchDegrees,
+    materialReferenceControlYawDegrees: scene.camera.defaultControlYawDegrees,
+  } : {};
   const { tree, index } = b.finish({ camera, scene: root });
-  const definition = JSON.parse(JSON.stringify({ schema: 'cssearth-object-runtime@4', id, camera: { ...scene.camera, responsiveFit: { ...scene.camera.responsiveFit, maximumHeightShare: config.camera.maximumHeightShare } }, sky: scene.starfield, sun,
+  const definition = JSON.parse(JSON.stringify({ schema: 'cssearth-object-runtime@4', id, camera: { ...scene.camera, ...materialReference, responsiveFit: { ...scene.camera.responsiveFit, maximumHeightShare: config.camera.maximumHeightShare } }, sky: scene.starfield, sun,
     controls: preparedContent.controls, tree,
     assets: { entries, pools: [preparedResourcePool('mounted', entries)], startup: entries.map(entry => entry.key) },
-    variants: [{ when: {}, required: ['surface', 'poles', ...(sphereLighting ? ['lighting'] : []), ...(ringTexture ? ['ring'] : [])], writes: [
+    variants: [{ when: {}, required: ['surface', 'poles', 'lighting', ...(ringTexture ? ['ring'] : [])], writes: [
       { kind: 'texture', target: index(body), name: '--shape-surface', resource: 'surface', quoted: true },
       { kind: 'texture', target: index(body), name: '--shape-poles', resource: 'poles', quoted: true },
       ...(material ? [{ kind: 'texture', target: index(material), name: '--shape-lighting', resource: 'lighting', quoted: true }] : []),
       ...(ring ? [{ kind: 'texture', target: index(ring), name: '--shape-ring', resource: 'ring', quoted: true }] : []),
-    ], materials: [] }], materials: [], animations: [], viewBindings: materialRoot ? [{ kind: 'silhouette-fit', target: index(materialRoot), minimumRadius: 1.5, unitScale: 2 / scene.camera.logicalBodyDiameter }] : [],
+    ], materials: shapeLighting ? [shapeLighting.selection] : [] }],
+    materials: shapeLighting ? [shapeLighting.track(index(shapeLighting.leaf))] : [], animations: [],
+    viewBindings: shapeLighting ? [shapeLighting.binding(index(shapeLighting.counter))] :
+      [{ kind: 'silhouette-fit', target: index(materialRoot), minimumRadius: 1.5, unitScale: 2 / scene.camera.logicalBodyDiameter }],
     heliocentricView: { plan: scene.heliocentricView,
       bodyMarker: { url: publicBase + 'marker.webp', index: 0, count: 1, size: 3 },
       systemMarkers: { url: '/navigation/planet-markers.webp', sun: marker('sun'), bodies: Object.fromEntries(scene.heliocentricView.system.bodies.map(body => [body.id, marker(body.id)])),
@@ -106,8 +115,8 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   }));
   const { id: _id, controls: _controls, ...presentation } = definition;
   requirePreparedPresentation({ ...presentation, schema: 'cssearth-prepared-presentation@3' }, { controls: preparedContent.controls });
-  const geometry = { ...scene, bodyLeaves, ringLeaves, counts: { bodyQuads: bodyLeaves.length, ringQuads: ringLeaves.length, lightingQuads: Number(sphereLighting), totalQuads: quadCount, budget: config.quadBudget },
-    model: { semiAxesKm: axes, ...(config.ring ? { ring: config.ring } : {}), surface: 'NASA VTAD illustrative model texture; no observed terrain', modelSource, phase: 'arbitrary-display-phase', lighting: sphereLighting ? 'prepared full-phase curvature lighting fitted to the projected sphere; no directional Sun shadows' : 'original illustrative base color; no added directional shadows' } };
+  const geometry = { ...scene, bodyLeaves, ringLeaves, counts: { bodyQuads: bodyLeaves.length, ringQuads: ringLeaves.length, lightingQuads: 1, totalQuads: quadCount, budget: config.quadBudget },
+    model: { semiAxesKm: axes, ...(config.ring ? { ring: config.ring } : {}), surface: 'NASA VTAD illustrative model texture; no observed terrain', modelSource, phase: 'arbitrary-display-phase', lighting: sphereLighting ? 'prepared full-phase curvature lighting fitted to the projected sphere; no directional Sun shadows' : 'prepared illustrative full-phase curvature fitted to the projected shape; no directional Sun shadows' } };
   await Promise.all([writeJson(outputDirectory, 'scene', geometry), writeJson(outputDirectory, 'runtime', definition),
     writeJson(outputDirectory, 'sky', scene.starfield), writeJson(outputDirectory, 'sun', sun)]);
   return { scene: geometry, definition, content: preparedContent.content };

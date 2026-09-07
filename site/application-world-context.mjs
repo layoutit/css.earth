@@ -1,5 +1,6 @@
 import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
@@ -29,13 +30,20 @@ function loadApplicationUniverse() {
       loadPreparedCssVolume(volumeSet.descriptor, volumeSet.transport),
       loadPreparedCssPointField(starSet.descriptor, starSet.transport),
     ]);
-    const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS).map(([id, sprite]) => [id, {
-      url: '/navigation/planet-markers@2x.webp', index: sprite.index, count: sprite.count,
-      size: sprite.presentation.size,
-    }]));
-    return createPreparedUniverse({ context: applicationContext, volume, stars, sprites,
+    const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
+      .map(([id, sprite]) => [id, contextMarkerSprite(sprite)]));
+    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites,
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolveStarResource: path => starSet.resolve(`prepared/${path}`) });
+    const markerPool = 'context-markers';
+    const markerEntries = [...new Set(Object.values(sprites).map(sprite => sprite.url))]
+      .map((url, index) => ({ key: `${markerPool}:${index}`, url, pool: markerPool }));
+    return { ...universe, assets: {
+      entries: [...universe.assets.entries, ...markerEntries],
+      pools: [...universe.assets.pools, { id: markerPool, retention: 'mount', capacity: markerEntries.length,
+        concurrency: 4, reuse: false, decoding: 'async' }],
+      startup: [...universe.assets.startup, ...markerEntries.map(entry => entry.key)],
+    } };
   })().catch(error => { universePromise = null; throw error; });
   return universePromise;
 }
