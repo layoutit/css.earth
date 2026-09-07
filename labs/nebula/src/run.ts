@@ -26,10 +26,10 @@ if (command === 'test') {
     (args.length === 0 || args.includes(name.replace(/\.test\.ts$/, '')))).sort();
   if (!names.length) throw new TypeError('No matching lab tests.');
   execution = ['--test', ...await Promise.all(names.map(compile))];
-} else if (command === 'prepare-particles' || command === 'prepare-master' || command === 'extract' || command === 'acquire-images') {
+} else if (command === 'prepare-particles' || command === 'prepare-master' || command === 'prepare-structures' || command === 'getsf-run' || command === 'getsf-install' || command === 'extract' || command === 'acquire-images') {
   execution = [await compile(`${command}.ts`), ...args];
 } else {
-  throw new TypeError('Usage: run.ts test [test-name ...] | extract <image> <out> [id] | prepare-particles <recipe.json> <archive.zip> [target-id] | prepare-master <recipe.json> | acquire-images <recipe.json>');
+  throw new TypeError('Usage: run.ts test [test-name ...] | extract <image> <out> [id] | prepare-particles <recipe.json> <archive.zip> [target-id] | prepare-master <recipe.json> | prepare-structures <recipe.json> [options] | getsf-install <local-directory> | getsf-run <recipe.json> <installed-getsf> <work-directory> [negative-policy] | acquire-images <recipe.json>');
 }
 const result = spawnSync(process.execPath, execution, { cwd: root, stdio: 'inherit' });
 if (result.error) throw result.error;

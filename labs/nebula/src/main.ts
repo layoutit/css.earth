@@ -1,4 +1,5 @@
-import { createNebulaLabViewer, subjects } from './viewer';
+import { createNebulaLabViewer, localFile, subjects } from './viewer';
+import { createBenchmarkView } from './benchmark-view';
 
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
@@ -12,19 +13,33 @@ const imageStatus = element('source-image-status');
 const sourceChoice = element<HTMLSelectElement>('source-choice');
 const sourceLink = element<HTMLAnchorElement>('source-link');
 const sourceCredit = element('source-credit');
-const tabs = [element<HTMLButtonElement>('render-tab'), element<HTMLButtonElement>('source-tab')];
+const tabs = ['render-tab', 'source-tab', 'structure-tab'].map(id => element<HTMLButtonElement>(id));
+const tabNames = ['render', 'source', 'structure'];
+const benchmark = createBenchmarkView({ host: element('structure-panel'),
+  manifestUrl: localFile('labs/nebula/models/structure-benchmark/benchmark.json') });
 type Viewer = Awaited<ReturnType<typeof createNebulaLabViewer>>;
 let viewer: Viewer | null = null;
 let busy = false, disposed = false;
 let sourceSubject: string | null = null;
+let currentTab = 0;
 
 for (const value of subjects) subject.add(new Option(value.name, value.id));
 
-function selectTab(index: number) {
+function selectTab(index: number, updateUrl = true) {
+  currentTab = index;
   tabs.forEach((tab, i) => { tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1; });
   element('render-panel').setAttribute('aria-hidden', String(index !== 0));
   element('source-panel').hidden = index !== 1;
+  element('structure-panel').hidden = index !== 2;
+  status.hidden = index === 2;
   if (index === 1) showSource();
+  if (index === 2) void benchmark.open();
+  setBusy(busy);
+  if (updateUrl) {
+    const url = new URL(location.href);
+    if (index === 0) url.searchParams.delete('tab'); else url.searchParams.set('tab', tabNames[index]);
+    history.replaceState(history.state, '', url);
+  }
   updateCredit();
 }
 tabs.forEach((tab, index) => {
@@ -32,13 +47,14 @@ tabs.forEach((tab, index) => {
   tab.addEventListener('keydown', event => {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
     event.preventDefault();
-    const next = event.key === 'Home' ? 0 : event.key === 'End' ? 1 : 1 - index;
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
+      (index + (event.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
     selectTab(next); tabs[next].focus();
   });
 });
 
 function setBusy(value: boolean) {
-  busy = value; subject.disabled = value; controls.disabled = value;
+  busy = value; subject.disabled = value || currentTab === 2; controls.disabled = value || currentTab === 2;
   element('viewer').setAttribute('aria-busy', String(value));
 }
 function fail(error: unknown) {
@@ -68,9 +84,10 @@ function chosenSource() {
 }
 function updateCredit() {
   const item = element('source-panel').hidden ? subjects.find(value => value.id === sourceSubject) : chosenSource();
-  sourceLink.hidden = !item?.sourcePageUrl;
+  sourceLink.hidden = currentTab === 2 || !item?.sourcePageUrl;
   if (item?.sourcePageUrl) sourceLink.href = item.sourcePageUrl;
   sourceCredit.textContent = item?.credit ?? '';
+  sourceCredit.hidden = element('model-note').hidden = currentTab === 2;
 }
 function showSource() {
   if (element('source-panel').hidden) return;
@@ -101,6 +118,7 @@ element('all-layers').addEventListener('click', () => void run(() => viewer!.set
 element('reset').addEventListener('click', () => void run(() => viewer!.reset()));
 
 setBusy(true);
+selectTab(Math.max(0, tabNames.indexOf(new URL(location.href).searchParams.get('tab') ?? 'render')), false);
 try {
   if (!subjects.length) throw new Error('No prepared subjects are available.');
   const requestedSubject = new URL(location.href).searchParams.get('subject');
@@ -123,6 +141,6 @@ try {
   if (disposed) viewer.destroy(); else setBusy(false);
 } catch (error) { fail(error); }
 
-function destroy() { if (!disposed) { disposed = true; viewer?.destroy(); } }
+function destroy() { if (!disposed) { disposed = true; benchmark.destroy(); viewer?.destroy(); } }
 window.addEventListener('pagehide', destroy, { once: true });
 if (import.meta.hot) import.meta.hot.dispose(destroy);

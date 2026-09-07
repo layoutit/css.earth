@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-structure-benchmark-recipe@1",
+  "id": "tarantula-smash-native",
+  "title": "Tarantula · automatic structure benchmark",
+  "input": {
+    "path": "labs/nebula/models/structure-benchmark/source.png",
+    "sha256": "ed39874f9638000df0a04cab20577e8e935ff1deba31bcedcaac07f5ff93120b",
+    "width": 1024,
+    "height": 1024,
+    "original": {
+      "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
+      "id": "noirlab2030a",
+      "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+      "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+      "bytes": 264225774,
+      "width": 6737,
+      "height": 6536,
+      "publisherUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "license": "CC-BY-4.0"
+    },
+    "crop": {
+      "left": 1900,
+      "top": 700,
+      "width": 1024,
+      "height": 1024
+    },
+    "conversion": "Native pixel crop, 8-bit sRGB display RGB. No resize or manual structure masks."
+  },
+  "outputDirectory": "labs/nebula/models/structure-benchmark",
+  "cacheDirectory": ".local/nebula-lab/structure-benchmark",
+  "medianSize": 7,
+  "wavelets": {
+    "scales": 7,
+    "significanceSigma": 3,
+    "compactMaxScale": 2,
+    "elongatedAxisRatio": 2.5,
+    "minRegionPixels": 4,
+    "connectivity": 8
+  },
+  "residualDisplayRange": 0.1,
+  "waveletSensitivity": {
+    "significanceSigma": 2
+  },
+  "getsf": {
+    "pixelScaleArcsec": 4.996248331536,
+    "beamFwhmPx": 2,
+    "sourceMaxFootprintRadiusPx": 8,
+    "filamentMaxFootprintRadiusPx": 32,
+    "wcs": {
+      "referencePixel": [
+        1468.5,
+        -1544
+      ],
+      "referenceSkyDeg": [
+        78.7957840796,
+        -71.566506171
+      ],
+      "rotationDeg": -16.92
+    }
+  }
+}

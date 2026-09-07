@@ -1,8 +1,10 @@
 # Research plan: coherent nebula structures in 3D
 
-Status: proposed experiments; reconstruction work has not started. Updated 2026-09-07.
+Status: automatic 2D decomposition benchmark implemented; 3D reconstruction remains proposed. Updated 2026-09-07.
 
-**First subject: Tarantula inside the LMC.** Preserve its knots, filaments and cavities when rotating, while keeping the observed projection recognizable. Prove the method in an isolated lab subject before integrating it into a whole galaxy or applying it to the SMC and Orion.
+**Automatic approximation first; optional detailed refinement second.** The pipeline must discover structures without hand-authoring every cloud. Tarantula inside the LMC is the initial benchmark and later a candidate for registered high-resolution refinement. Its name and specific features must not enter the reusable algorithms. Prove a coherent local volume before integrating it into a whole galaxy or applying it to the SMC and Orion.
+
+The first implemented comparison is documented in [automatic structure benchmark](structure-benchmark.md). It compares an independent starlet prototype, the existing median kernel, and an imported run of official getsf when available. These are 2D morphology experiments; none recovers measured gas depth.
 
 ## What the current experiment established
 
@@ -33,7 +35,8 @@ Wavelets identify scale, not distance. A single photograph cannot uniquely deter
 
 | Candidate | Purpose | Limitation / decision |
 |---|---|---|
-| Undecimated starlet wavelets | Separate diffuse light, intermediate clouds and compact features without moving their image coordinates | Start here. Signed coefficients are analysis data, not positive emitting layers; reconstruct nonnegative components and retain a residual. |
+| [getsf](https://irfu.cea.fr/Pisp/alexander.menshchikov/) | Automatically separate sources, filaments and background, with support maps and catalogues | Research comparator. Keep its restricted software local; do not vendor it or assume commercial-use permission. Its scientific input assumptions need explicit display-image adaptation. |
+| Undecimated starlet wavelets | Separate diffuse light, intermediate clouds and compact features without moving their image coordinates | Independent initial implementation, not a reimplementation of DAWIS. Signed coefficients are analysis data, not positive emitting layers; reconstruct nonnegative components and retain a residual. |
 | Connected components and filament skeletons | Group structures across scales and preserve connections | Start with masks checked against the source; distinguish real gaps from thresholding artifacts. |
 | Curvelets + morphological component analysis | Separate elongated filaments from compact sources and smooth backgrounds | Compare only if starlets fragment important filaments; [astronomical examples](https://www.cosmostat.org/statistical-methods/mca/mca-experiments). |
 | PSF-based point/extended-source fitting | Replace indiscriminate median filtering when usable instrumental images are available | [STARRED](https://arxiv.org/abs/2305.18526) separates point and extended channels; requires a defensible PSF/noise model. A display composite is not calibrated input. |
@@ -44,15 +47,22 @@ Wavelets identify scale, not distance. A single photograph cannot uniquely deter
 
 | Step | Work | Reviewable output / gate |
 |---|---|---|
-| 1. Freeze evidence | Select one Tarantula crop, several named knots/filament segments and one diffuse control region. Preserve original coordinates, masks, source bytes and fixed cameras. | Baseline screenshots and crops; source-to-model transform; evidence manifest. No color or framing changes between comparisons. |
+| 1. Freeze evidence | Select one native Tarantula crop with compact sources, filamentary emission and diffuse surroundings. Preserve original coordinates, source bytes and fixed cameras. Named landmarks may aid evaluation; extraction must not require manually drawn masks. | Baseline screenshots and crop; source-to-model transform; evidence manifest. No color or framing changes between comparisons. |
 | 2. Verify registration | Check WCS, angular/physical scale, orientation and matched-star residuals before adding a detailed image. Keep display grade and filter differences explicit. | Source/target overlay, residual map and coverage mask. If registration is inadequate, continue with the SMASH crop rather than pasting a misaligned patch. |
-| 3. Separate structures in 2D | Compare the current median separation with starlet scales and connected structures. Try curvelets/MCA only if the simpler decomposition fails. | Source, diffuse, compact, filament, point-source-candidate and residual panels. Components reconstruct the input without double-counting or clipping signed residuals into invented light. |
+| 3. Separate structures in 2D | Benchmark official getsf against independent starlet scales/connected regions and the current median control. Try curvelets/MCA only if the simpler decomposition fails. All regions and cross-scale associations are discovered automatically. | Source, diffuse, compact, filament-candidate and residual panels, plus a deterministic support catalogue. Components reconstruct the input without double-counting or clipping signed residuals into invented light. Exact reconstruction checks accounting; useful separation requires inspecting the actual components. |
 | 4. Test depth ownership | Compare A: current stellar-column model; B: one localized Tarantula depth region; C: connected substructures with individual coherent depth support. Hold extraction and exposure fixed. | An isolated, genuinely 3D Tarantula subject. B diagnoses whether localization alone helps; C must beat B without becoming a flat card or random clumps. |
 | 5. Test sampling independently | On the same field, increase integration samples before changing slab spacing. Compare analytic sampling or a finer local grid; increase local slab density only where warranted. | Separate plots for model error, integration error and layer-spacing artifacts. Thin features survive all axis banks; a sampling failure is not hidden by broadening the clouds. |
 | 6. Fit and bake | Fit the reference projection with bounded depth/thickness priors; bake high-resolution masters, then derive delivery banks. | Fixed-camera front/oblique/side comparisons, reprojection residuals, slice inspection and measured payloads. |
 | 7. Decide | Compare all retained candidates, their costs and unresolved scientific assumptions. | A short decision record: adopt, reject, or request specific missing data. LMC integration and other objects are separate follow-up work. |
 
 An isolated subject can use its own physical bounds and fine sampling with the existing renderer. Whole-LMC integration must subsequently check whether the prepared format needs local/adaptive slice spacing; do not silently force a small cloud back into the coarse global grid.
+
+## Automatic placement and optional refinements
+
+- The next fitting experiment consumes detected supports and their cross-scale relationships, plus the stellar placement prior. It proposes bounded, coherent depth support for entire connected structures. The stellar simulation supplies broad placement evidence, not a correspondence between each observed nebula and a simulated gas cloud.
+- Unknown regions receive the same automatic approximation; uncertainty and failed assignments remain explicit. Manual per-region depth, masks or shape parameters are optional data overrides, never required to process a new image.
+- A named region such as Tarantula may later replace its base contribution with a registered image at higher angular resolution and better constrained local geometry. The base contribution must be removed once, preserving source position, scale and brightness across the handoff.
+- Close-up detail needs prepared local resolution levels and a bounded resident set, beyond this 2D benchmark. The current fixed-bank renderer is not claimed to support that hierarchy yet; assess the prepared contract before production integration.
 
 ## Comparison protocol
 

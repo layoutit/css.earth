@@ -1,0 +1,173 @@
+{
+  "schema": "cssearth-getsf-experiment-status@1",
+  "status": "incomplete",
+  "sourceSha256": "ed39874f9638000df0a04cab20577e8e935ff1deba31bcedcaac07f5ff93120b",
+  "getsfParameters": {
+    "pixelScaleArcsec": 4.996248331536,
+    "beamFwhmPx": 2,
+    "sourceMaxFootprintRadiusPx": 8,
+    "filamentMaxFootprintRadiusPx": 32,
+    "wcs": {
+      "referencePixel": [
+        1468.5,
+        -1544
+      ],
+      "referenceSkyDeg": [
+        78.7957840796,
+        -71.566506171
+      ],
+      "rotationDeg": -16.92
+    }
+  },
+  "getsfParametersSha256": "e83e2ccf580329e80425ee2c8a8bfd903f737311a299f1c2fd5813da9b374381",
+  "summary": "Actual getsf260706 ran on the full1024×1024 crop but did not complete before the agreed experiment deadline. Source background completed 11 iterations; last relative correction 0.0094, convergence target0.005. No final component maps or catalog were produced.",
+  "metrics": {
+    "lastCompletedIteration": 11,
+    "lastRelativeCorrection": 0.0094,
+    "convergenceThreshold": 0.005,
+    "finalRunElapsedSeconds": 1616,
+    "experimentBudgetSeconds": 1800,
+    "software": "getsf260706",
+    "outcome": "incomplete; no comparison maps imported"
+  },
+  "source": {
+    "imagePath": "labs/nebula/models/structure-benchmark/source.png",
+    "width": 1024,
+    "height": 1024,
+    "inputFitsSha256": "3df4aee9e0d4b91fa3c6b86a7965c996fd80e470b8568089c4d3e1ea7cdba43e",
+    "inputFloat32Sha256": "42e611629d40fe1a5c8ab4dd8e6a88673a22e2e9b905f692b29f607adc00fe15",
+    "intensity": "Float32 Rec.709 dot product of 8-bit sRGB /255, without linear-light conversion. Not calibrated radiance.",
+    "fitsUnitCaveat": "BUNIT MJy/sr is a getsf-required compatibility placeholder. Wavelength 001 and distance100 are unused physical placeholders; no physical flux, mass, or membership is inferred.",
+    "rowOrder": "FITS Y is reversed from DOM; exported maps reverse it back without reprojection."
+  },
+  "configuration": {
+    "path": "getsf.cfg",
+    "sha256": "1992b59db6a3ee868622fdd82ca0c1558325d22cb9bd9389941240cb404e897f"
+  },
+  "software": {
+    "name": "getsf",
+    "version": "260706",
+    "author": "Alexander Men’shchikov",
+    "url": "https://irfu.cea.fr/Pisp/alexander.menshchikov/getsf.v260706.zip",
+    "archiveSha256": "70725784d898a2d49c11ebc37cdaa94c07a6cad830215c6fdfdb32b23255c99b",
+    "compiler": "GNU Fortran (Homebrew GCC 16.2.0) 16.2.0",
+    "cfitsio": {
+      "version": "4.7.0",
+      "url": "https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio-4.7.0.tar.gz",
+      "sha256": "ce573bbea8e75b429f8c3d3e86498741ba3dc9628a1530d2f65268397ad059e8",
+      "build": [
+        "./configure --disable-curl --enable-static --disable-shared",
+        "make -j8"
+      ],
+      "staticLibrarySha256": "15fb92759025de8cd1c81d42c606393dc13824e087a5890fb77a81a69eb5aa19"
+    },
+    "executableSha256": "f95f3ebd9d0a9ab40c655956c15f7e8ac2dbb4fb1f528ca6e7c8cf6303ef250d",
+    "allBinariesSha256": "7945cc3478763a6a833514df884c368dc6a2090138d948d4160abd9ec5f012ca",
+    "manualSourcePatches": false,
+    "upstreamInstallerTransforms": {
+      "description": "The author installer rewrites tools.for portability declarations and replaces its bundled precompiled tools.a.",
+      "toolsForAfterInstallSha256": "cdb89424a67cc0ce682a8c6026058574fcc1f5be54c14155c66fc7c7a71b81f1"
+    },
+    "license": "Author’s research/education/non-profit/non-military agreement; commercial use needs written permission. No restricted software vendored."
+  },
+  "execution": {
+    "command": "GETSF_HOME=<local-source> GETSF_BIN=<local-bin> <local-bin>/getsf",
+    "cwd": ".local/nebula-lab/getsf/benchmark/runs",
+    "startedAt": "2026-09-07T21:13:32.000Z",
+    "stoppedAt": "2026-09-07T21:40:27.522Z",
+    "finalRunElapsedSeconds": 1616,
+    "reason": "30minute cumulative extraction bound",
+    "budgetNote": "The agreed30minute experiment window includes the earlier interrupted setup run; final run duration is reported separately.",
+    "logPath": "execution.log",
+    "logSha256": "a7d28aaae18faa4c81dd33042ea60ad02b03394672b8c8193bebf2a28d4b4d41",
+    "noSurvivingSubprocesses": true
+  },
+  "completedStages": [
+    "verified native macOS compilation",
+    "input/header validation",
+    "99-scale decomposition",
+    "source-background iterations listed below"
+  ],
+  "missingStages": [
+    "source-background convergence",
+    "filament/background separation",
+    "flattening",
+    "detection and catalogs",
+    "final observed component outputs"
+  ],
+  "skippedStages": [
+    "physical flux/mass measurements",
+    "optional visualization"
+  ],
+  "convergence": {
+    "phase": "source-background",
+    "threshold": 0.005,
+    "iterations": [
+      {
+        "iteration": 1,
+        "minutes": 3.583,
+        "maxRelativeCorrection": 0
+      },
+      {
+        "iteration": 2,
+        "minutes": 2.15,
+        "maxRelativeCorrection": 0.0782
+      },
+      {
+        "iteration": 3,
+        "minutes": 2.166,
+        "maxRelativeCorrection": 0.0478
+      },
+      {
+        "iteration": 4,
+        "minutes": 2.066,
+        "maxRelativeCorrection": 0.0391
+      },
+      {
+        "iteration": 5,
+        "minutes": 2.016,
+        "maxRelativeCorrection": 0.0247
+      },
+      {
+        "iteration": 6,
+        "minutes": 2.2,
+        "maxRelativeCorrection": 0.0196
+      },
+      {
+        "iteration": 7,
+        "minutes": 2.166,
+        "maxRelativeCorrection": 0.0189
+      },
+      {
+        "iteration": 8,
+        "minutes": 2.1,
+        "maxRelativeCorrection": 0.017
+      },
+      {
+        "iteration": 9,
+        "minutes": 2.133,
+        "maxRelativeCorrection": 0.0122
+      },
+      {
+        "iteration": 10,
+        "minutes": 2.116,
+        "maxRelativeCorrection": 0.0104
+      },
+      {
+        "iteration": 11,
+        "minutes": 2.333,
+        "maxRelativeCorrection": 0.0094
+      }
+    ],
+    "last": {
+      "iteration": 11,
+      "minutes": 2.333,
+      "maxRelativeCorrection": 0.0094
+    }
+  },
+  "partialEvidence": {
+    "path": ".local/nebula-lab/getsf/benchmark/001/+components/+sources",
+    "note": "Unconverged intermediate FITS only; not imported or presented as final maps."
+  },
+  "nextPracticalExperiment": "Freeze a512×512 native subcrop and run both methods on that identical smaller input. Keep angular sampling and authored morphology scales; do not downsample or claim completion of this1024 crop."
+}

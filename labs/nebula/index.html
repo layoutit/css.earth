@@ -48,6 +48,7 @@
           <div role="tablist" aria-label="View">
             <button id="render-tab" type="button" role="tab" aria-selected="true" aria-controls="render-panel">3D view</button>
             <button id="source-tab" type="button" role="tab" aria-selected="false" aria-controls="source-panel" tabindex="-1">Source image</button>
+            <button id="structure-tab" type="button" role="tab" aria-selected="false" aria-controls="structure-panel" tabindex="-1">Structure benchmark</button>
           </div>
           <p id="status" role="status" aria-live="polite">Loading prepared layers…</p>
         </div>
@@ -63,6 +64,7 @@
             <img id="source-image" alt="" />
             <p id="source-image-status" role="status"></p>
           </div>
+          <section id="structure-panel" role="tabpanel" aria-labelledby="structure-tab" hidden></section>
         </div>
       </section>
     </main>

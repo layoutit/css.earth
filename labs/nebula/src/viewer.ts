@@ -32,7 +32,7 @@ interface LabSubjectRecord {
   hasDetail?: boolean;
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
-const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__}/${path}`;
+export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__}/${path}`;
 const recipes = import.meta.glob('../../../src/objects/*/source/recipe.json', { eager: true, import: 'default' }) as
   Record<string, { source: { publisherUrl: string; credit: string }; geometry: { supportRadiusKpc: number } }>;
 const candidates = import.meta.glob('../../../.local/nebula-lab/*-{cutout,diffuse,residual,mask}.png',
