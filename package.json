@@ -87,7 +87,9 @@
     "lab:nebula:images": "node --experimental-strip-types labs/nebula/src/run.ts acquire-images labs/nebula/sources/reference-images.json",
     "lab:nebula:master": "node --experimental-strip-types labs/nebula/src/run.ts prepare-master",
     "lab:nebula:structures": "node --experimental-strip-types labs/nebula/src/run.ts prepare-structures labs/nebula/models/structure-benchmark.json",
-    "lab:nebula:getsf": "node --experimental-strip-types labs/nebula/src/run.ts getsf-run labs/nebula/models/structure-benchmark.json"
+    "lab:nebula:getsf": "node --experimental-strip-types labs/nebula/src/run.ts getsf-run labs/nebula/models/structure-benchmark.json",
+    "lab:nebula:coherent": "node --experimental-strip-types labs/nebula/src/run.ts prepare-coherent",
+    "test:browser:nebula": "node --experimental-strip-types labs/nebula/src/run.ts browser-coherent"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",
