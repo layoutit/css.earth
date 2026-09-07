@@ -60,9 +60,12 @@ test("every object forwards its object-owned legend through the shared shell", a
   await Promise.all(OBJECTS.map(async ({ id }) => {
     const loaded = await loadObjectContent(id);
     const source = await loaded.source("content");
+    if (source.provenance?.title?.path?.endsWith(".json")) {
+      const { schema, ...title } = await loaded.source("title"); source.title = title;
+    }
     const controls = source.schema === "cssearth-static-surface-content@1"
       ? source.controls : prepareObjectContent(source);
-    const legends = lenses => lenses.controls.map(({ id, legend }) => ({ id, legend }));
+    const legends = lenses => (lenses?.controls ?? []).map(({ id, legend }) => ({ id, legend }));
     assert.deepEqual(
       JSON.parse(JSON.stringify(legends(loaded.object.data.controls.lenses))),
       JSON.parse(JSON.stringify(legends(controls.lenses))),

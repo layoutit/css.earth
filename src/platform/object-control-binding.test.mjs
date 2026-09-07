@@ -19,13 +19,13 @@ function root(inputs) {
 }
 function harness(controls = moonControls, mutate = () => {}) {
   const initial = initialObjectSelection(controls);
-  const lensInputs = controls.lenses.controls.map(lens => new Input({ name: "lens", value: lens.id, tagName: "BUTTON", type: "button" }));
+  const lensInputs = (controls.lenses?.controls ?? []).map(lens => new Input({ name: "lens", value: lens.id, tagName: "BUTTON", type: "button" }));
   const settingInputs = controls.settings.controls.map(control => new Input({ name: control.name,
     type: control.kind === "toggle" ? "checkbox" : "range", checked: control.checked, value: String(initial[control.name]) }));
   const motion = new Input({ name: "motion" }), contrast = new Input({ name: "skyContrast" });
   settingInputs.push(motion, contrast);
   const lensRoot = root(lensInputs), settingsRoot = root(settingInputs);
-  const stage = { ownerDocument: { querySelector: selector => selector === ".planet-lenses" ? lensRoot : settingsRoot } };
+  const stage = { ownerDocument: { querySelector: selector => selector === ".planet-lenses" ? (controls.lenses ? lensRoot : null) : settingsRoot } };
   const errors = [], actions = []; let state = { committed: null, desired: initial, plan: null, pending: true };
   let actionImplementation = action => {
     state = { ...state, committed: reduceObjectSelection(state.committed ?? initial, action), pending: false };
@@ -46,7 +46,7 @@ for (const object of OBJECTS) test(`${object.id}: one binder consumes every actu
   const h = harness(controls);
   assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast"].includes(input.name))].every(input => input.disabled));
   assert.equal(h.motion.disabled, false); assert.equal(h.contrast.disabled, false);
-  h.lensInputs[0].emit("click"); assert.equal(h.actions.length, 0);
+  h.lensInputs[0]?.emit("click"); assert.equal(h.actions.length, 0);
   h.ready();
   for (const input of h.lensInputs) input.emit("click");
   for (const control of controls.settings.controls) {
@@ -62,8 +62,8 @@ for (const object of OBJECTS) test(`${object.id}: one binder consumes every actu
   const count = h.actions.length;
   h.motion.emit("change"); h.contrast.emit("change"); assert.equal(h.actions.length, count);
   assert.deepEqual(h.errors, []);
-  assert.equal(h.binding.stats().listenerCount, controls.lenses.controls.length + controls.settings.controls.length);
-  h.binding.destroy(); h.binding.destroy(); h.lensInputs[0].emit("click");
+  assert.equal(h.binding.stats().listenerCount, (controls.lenses?.controls.length ?? 0) + controls.settings.controls.length);
+  h.binding.destroy(); h.binding.destroy(); h.lensInputs[0]?.emit("click");
   assert.equal(h.actions.length, count); assert.equal(h.binding.stats().listenerCount, 0);
   assert.equal(h.lensRoot.classList.contains("is-loading"), false);
   assert.equal(h.settingsRoot.classList.contains("is-loading"), false);
@@ -126,7 +126,7 @@ test("one failed native listener removal does not stop the rest of control clean
   assert.equal(h.binding.stats().listenerCount, 0);
   assert.ok(h.lensInputs.every(input => input.disabled));
   assert.equal(h.lensRoot.attributes["aria-busy"], "false");
-  h.lensInputs[0].emit("click"); assert.equal(h.actions.length, 0);
+  h.lensInputs[0]?.emit("click"); assert.equal(h.actions.length, 0);
   h.binding.destroy();
 });
 

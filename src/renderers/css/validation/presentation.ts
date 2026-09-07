@@ -14,7 +14,7 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
   for (const input of variants) {
     const variant = record(input, 'variant', ['when', 'required', 'writes', 'materials', 'navigation']);
     const when = record(variant.when, 'selection key', ['lensId', ...settings.keys()]); keys.push(when);
-    if (!lensIds.includes(text(when.lensId, 'variant lens'))) fail('variant must name declared exclusive lens');
+    if (lensIds.length ? !lensIds.includes(text(when.lensId, 'variant lens')) : Object.hasOwn(when, 'lensId')) fail('variant must match the declared lens capability');
     for (const [key, value] of Object.entries(when)) if (key !== 'lensId') {
       if (settings.get(key)?.kind !== 'toggle') fail('variants may only bind discrete toggle settings'); boolean(value, 'variant toggle');
     }
@@ -36,8 +36,8 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
   }
   const toggles = [...new Set(keys.flatMap(when => Object.keys(when).filter(key => key !== 'lensId')))];
   if (toggles.length > 12) fail('selection table exceeds bounded toggle combinations');
-  for (const lensId of lensIds) for (let bits = 0; bits < 2 ** toggles.length; bits++) {
-    const state: Record<string, string | boolean> = {lensId, ...Object.fromEntries(toggles.map((name, bit) => [name, !!(bits & 2 ** bit)]))};
+  for (const lensId of lensIds.length ? lensIds : [null]) for (let bits = 0; bits < 2 ** toggles.length; bits++) {
+    const state: Record<string, string | boolean | null> = {lensId, ...Object.fromEntries(toggles.map((name, bit) => [name, !!(bits & 2 ** bit)]))};
     if (keys.filter(when => Object.entries(when).every(([key, value]) => state[key] === value)).length !== 1) fail('selection table must cover each combination exactly once');
   }
 }

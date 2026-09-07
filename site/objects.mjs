@@ -1,3 +1,4 @@
+import haumeaDescriptor from "../src/planets/haumea/object.json" with { type: "json" };
 import iapetusDescriptor from "../src/planets/iapetus/object.json" with { type: "json" };
 import rheaDescriptor from "../src/planets/rhea/object.json" with { type: "json" };
 import marsDescriptor from "../src/planets/mars/object.json" with { type: "json" };
@@ -139,6 +140,11 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(plutoDescriptor);
     }, plutoDescriptor.properties.worldFrame),
+  object("haumea", "Haumea", "dwarf-planet", "#cccccc", 43.1,
+    "Explore Haumea’s measured elongated shape and narrow ring, with an illustrative NASA surface texture.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(haumeaDescriptor);
+    }, haumeaDescriptor.properties.worldFrame),
 ]);
 
 export function requireObject(id) {

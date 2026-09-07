@@ -175,7 +175,7 @@ export interface PreparedObjectContentAssets {
   content: PreparedObjectContentDocument;
   lenses: PreparedObjectContent["lenses"];
   controls: {
-    lenses: PreparedObjectContent["lenses"];
+    lenses: PreparedObjectContent["lenses"] | null;
     settings: PreparedObjectContent["settings"];
   };
   files: readonly string[];

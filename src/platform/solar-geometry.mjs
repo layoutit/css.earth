@@ -11,8 +11,8 @@
 // Satellite orbit elements are relative to their parent, not to the Sun.
 // Parent-system barycentres approximate planet centres in this solar view.
 // Existing planets retain their original preparation values.
-// All vectors use ICRF. Orientation: IAU/WGCCRE rotation elements
-// (pole right ascension, pole declination, prime meridian). Earth uses the
+// All vectors use ICRF. Orientation: IAU/WGCCRE elements, or the object-owned
+// observed pole with explicitly arbitrary display meridian where supplied. Earth uses the
 // Earth-Moon barycentre series.
 //
 // BODY_ORBITS derives each body's osculating orbit from that same
@@ -160,6 +160,12 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.4885781627373289,
     0.8663655379326224,
   ]),
+  // subsolar latitude -21.455°, longitude -19.723°
+  haumea: Object.freeze([
+    0.8761058512125794,
+    -0.3140829297079759,
+    -0.36577376988671045,
+  ]),
 });
 
 export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
@@ -294,6 +300,12 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     0.24356596228682376,
     0.8889956599431309,
     -0.38776582961572414,
+  ]),
+  // pole tilt to the ecliptic 77.953°, Sun ecliptic latitude -28.201°
+  haumea: Object.freeze([
+    -0.10362274255531338,
+    0.9724707716962535,
+    0.2087173337837765,
   ]),
 });
 
@@ -431,6 +443,12 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.032178535161385545,
     0.8689390788437296,
     -0.4938718650956725,
+  ]),
+  // orbital inclination to the ecliptic 28.208°, obliquity to the orbit 87.034°
+  haumea: Object.freeze([
+    0.3560881271482898,
+    0.9330188008541714,
+    0.05174130803011588,
   ]),
 });
 
@@ -570,6 +588,12 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     -0.1877014716883806,
     -0.26869346385036763,
   ]),
+  // flight-path angle -6.789°
+  haumea: Object.freeze([
+    0.4263158159998441,
+    -0.21147786572868782,
+    0.8795066442814552,
+  ]),
 });
 
 // Body-fixed to ICRF rotation, row-major: the columns are the body's +X
@@ -707,6 +731,12 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     -0.7287898875992956, -0.09604588932324515, -0.6779679099169169,
     -0.684031147679219, 0.05716182312110747, 0.7272096774535675,
     -0.031091618447040417, 0.9937342266026555, -0.10735733855105338,
+  ]),
+  // pole RA 285.100°, Dec -10.600°, prime meridian W 0.000°
+  haumea: Object.freeze([
+    0.965472630879225, 0.04792015620551823, 0.25605909015769485,
+    0.26050450864264857, -0.17759999442984964, -0.9489971775276097,
+    0, 0.9829353491495543, -0.18395135061272014,
   ]),
 });
 
@@ -1069,6 +1099,21 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 17.02988887116561,
     perihelionAu: 29.815323879603046,
     aphelionAu: 49.42324932162337,
+  }),
+  // a 43.016 AU, e 0.19551, perihelion 34.606 AU, aphelion 51.426 AU
+  haumea: Object.freeze({
+    semiMajorAxisAu: 43.01623145274767,
+    eccentricity: 0.19550633543357385,
+    heliocentricDistanceAu: 49.761786841583024,
+    perihelionDirection: Object.freeze([
+      0.9200786409604006,
+      -0.35974731913384383,
+      0.1550392235031983,
+    ]),
+    trueAnomalyDegrees: 210.4165469171031,
+    inclinationDegrees: 28.20842063408973,
+    perihelionAu: 34.60628567725853,
+    aphelionAu: 51.4261772282368,
   }),
 });
 
