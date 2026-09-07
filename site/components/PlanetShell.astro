@@ -108,6 +108,26 @@ const hasResources = sources.length > 0;
       aria-label="Planets"
       hidden
     >
+      <PlanetCard data-prepared-focus-card hidden>
+        <section class="planet-selected-panel">
+          <div class="planet-title-row">
+            <h1 class="planet-title" style="height:auto;font-size:26px;font-weight:500;line-height:1.2" data-focus-name></h1>
+            <div class="planet-title-tags"><span class="planet-classification-tag planet-title-tag" data-focus-status></span></div>
+          </div>
+          <p class="planet-introduction" data-focus-aliases hidden></p>
+        </section>
+        <PlanetAccordion title="Factsheet" open>
+          <div class="planet-factsheet-body"><div class="planet-facts"><ul class="planet-primary-facts">
+            {[['distance', 'Distance from Sun'], ['uncertainty', 'Distance uncertainty'], ['membership', 'Membership'], ['association', 'Association']].map(([id, label]) =>
+              <li><span class="planet-fact-label">{label}</span><span class="planet-fact-value" {...{ [`data-focus-${id}`]: '' }}></span></li>)}
+          </ul></div></div>
+          <p class="planet-introduction" data-focus-basis></p>
+          <p class="planet-introduction" data-focus-reference></p>
+          <div class="planet-resources-links">
+            {Array.from({ length: 3 }, () => <a class="planet-resource-row" data-focus-source target="_blank" rel="noreferrer" hidden></a>)}
+          </div>
+        </PlanetAccordion>
+      </PlanetCard>
       <PlanetCard class="planet-galactic-overview" data-galactic-overview hidden>
         <PlanetCardHeader title={OVERVIEW_TITLES['milky-way']}
           introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">

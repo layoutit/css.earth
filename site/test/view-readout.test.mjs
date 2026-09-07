@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { formatViewCoordinate, formatViewDate, formatViewDistance, measureView, viewScale } from '../view-readout.mjs';
+import { formatViewCoordinate, formatViewDate, formatViewDistance, measureView, viewScale, measurePreparedFocusView } from '../view-readout.mjs';
 
 const identity = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const state = { eyeM: [0, 0, 3e6], radiusM: 1e6, rotation: identity,
@@ -54,4 +54,14 @@ test('galaxy distances keep a finite ruler without a spurious surface hit', () =
   assert.equal(value.coordinates, null);
   assert.ok(Number.isFinite(value.scale.pixels));
   assert.match(value.scale.label, /ly$/);
+});
+
+test('prepared focus uses its own depth plane for scale and never supplies planetary coordinates', () => {
+  const focus = { name: 'Prepared galaxy', positionM: [1e20, 0, 0] };
+  const world = { pose: { positionM: [1e20, 0, 1e18], orientationXyzw: [0,0,0,1] } };
+  const value = measurePreparedFocusView(world, focus, 1000);
+  assert.deepEqual(value.scale, viewScale(1e15));
+  assert.equal(value.coordinates, null);
+  assert.equal(value.scaleTitle, 'Scale at the distance of Prepared galaxy');
+  assert.equal(measurePreparedFocusView({ pose: { ...world.pose, orientationXyzw: [0,1,0,0] } }, focus, 1000).scale, null);
 });

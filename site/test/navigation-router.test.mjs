@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createSceneRouter } from '../scene-router.mjs';
 import { formatSharedView } from '../../src/renderers/css/dist/index.js';
+import { createPreparedContextNavigation } from '../prepared-context-navigation.mjs';
 
 const flush = () => new Promise(setImmediate);
 function deferred() {
@@ -26,6 +27,7 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
     replaceState(state, _, url) { location = new URL(url, location); entries[index] = { state, url: location.href }; writes.push('replace'); },
     pushState(state, _, url) { location = new URL(url, location); entries.splice(++index); entries.push({ state, url: location.href }); writes.push('push'); },
     back() { if (index) { const entry = entries[--index]; location = new URL(entry.url); const event = new Event('popstate'); event.state = entry.state; windowTarget.dispatchEvent(event); } },
+    forward() { if (index + 1 < entries.length) { const entry = entries[++index]; location = new URL(entry.url); const event = new Event('popstate'); event.state = entry.state; windowTarget.dispatchEvent(event); } },
   };
   const objects = ['mercury', 'venus', 'earth'].map(id => ({ id, name: id, route: `/${id}/` }));
   const stage = { dataset: { objectId: 'mercury' } }, input = {}, renders = new Set(), mounts = [], errors = [], shells = [], preparations = [], disposedContent = [];
@@ -39,12 +41,19 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
     };
     mount.sharedView = {
       capture: () => mount.value,
-      async restore(value) { mount.restores++; mount.value = value; return true; },
+      async restore(value) { mount.restores++; mount.value = value; mount.navigation?.setPreparedFocus(null); return true; },
       subscribe(listener) { listeners.add(listener); return () => listeners.delete(listener); },
     };
     if (persistentWorldContext) {
       mount.navigation = {
         frame: { id },
+        focus: null,
+        preparedFocus() { return this.focus; },
+        setPreparedFocus(focus) {
+          this.focus = focus;
+          for (const listener of listeners) listener({ referenceFrame: 'test', epochJdTt: 1, pose: { id } },
+            { focalPixels: 10, principalOffsetPixels: [id === 'mercury' ? 1 : 2, 0] });
+        },
         capture: () => ({ id }),
         apply() {},
         optics: () => ({ focalPixels: 1, principalOffsetPixels: [0, 0], framingRadiusPixels: 1, detailHandoffDiameterPixels: 1 }),
@@ -66,6 +75,7 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
       const shell = { input, options, destroyed: 0, selected: 'mercury',
         setPlaybackState(value) { this.playback = value; },
         setMotionEnabled(value) { options.onMotionChange(value); },
+        setPreparedFocus(record, sources) { this.preparedFocus = record; this.focusSources = sources; },
         setObject(content) { assert.equal(renders.size, 0); content.apply(); this.selected = content.id; },
         destroy() { this.destroyed++; },
       };
@@ -86,6 +96,63 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
   return { router, windowTarget, documentTarget, media, mounts, shells, renders, errors, writes, entries, preparations, disposedContent,
     maxRendered: () => maxRendered };
 }
+
+function catalogueContext() {
+  const selected = [], errors = [];
+  return { selected, errors, async mount({ windowTarget }) {
+    const layer = { imageLayerFrames: {},
+      resolveGalaxy: id => ['catalogue:a', 'catalogue:b'].includes(id) ? { id, name: id, positionM: [1e20, 0, 0],
+        skyPosition: { sourceRef: 'catalogue:coordinates' }, distance: { sourceRef: 'paper' }, membership: { sourceRef: 'catalogue:membership' } } : null,
+      selectGalaxy: id => selected.push(id) };
+    const controller = createPreparedContextNavigation({ layer, windowTarget, onError: error => errors.push(error),
+      presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });
+    return { publish() {}, connectNavigation: controller.connect, suspendFocus: controller.suspend,
+      restoreFocus: controller.restore, destroy: controller.destroy };
+  } };
+}
+
+test('same-owner Back and Forward restore the exact saved camera before its prepared focus without rewriting the incoming ID', async () => {
+  const context = catalogueContext(), h = harness({ persistentWorldContext: context });
+  await h.router.settled;
+  const link = (id, distance) => `https://example.test/mercury/?focus=${id}&${formatSharedView(saved(distance))}`;
+  await h.router.navigate('mercury', { url: link('catalogue:a', 3e12) });
+  assert.equal(h.mounts[0].navigation.preparedFocus()?.id, 'catalogue:a');
+  assert.equal(h.shells[0].preparedFocus?.id, 'catalogue:a');
+  h.mounts[0].value = saved(4e12);
+  await h.router.navigate('mercury', { url: link('catalogue:b', 7e12) });
+  const pushes = h.writes.filter(value => value === 'push').length;
+  h.windowTarget.history.back(); await h.router.settled;
+  assert.equal(h.mounts[0].value.camera.distanceKilometers, 4e12);
+  assert.equal(h.mounts[0].navigation.preparedFocus()?.id, 'catalogue:a');
+  assert.equal(h.windowTarget.location.searchParams.get('focus'), 'catalogue:a');
+  h.windowTarget.history.forward(); await h.router.settled;
+  assert.equal(h.mounts[0].value.camera.distanceKilometers, 7e12);
+  assert.equal(h.mounts[0].navigation.preparedFocus()?.id, 'catalogue:b');
+  assert.equal(h.shells[0].preparedFocus?.id, 'catalogue:b');
+  assert.equal(h.windowTarget.location.searchParams.get('focus'), 'catalogue:b');
+  assert.equal(h.writes.filter(value => value === 'push').length, pushes);
+  assert.equal(h.mounts.length, 1);
+  assert.deepEqual([...h.errors, ...context.errors], []);
+  h.router.destroy();
+});
+
+test('ordinary planet selection clears the departed catalogue focus in both the requested URL and mounted camera', async () => {
+  for (const target of ['mercury', 'venus']) {
+    const context = catalogueContext(), h = harness({ persistentWorldContext: context,
+      focus: async ({ mount }) => mount.navigation.setPreparedFocus(null),
+      prepare: async ({ fromMount }) => { fromMount.navigation.setPreparedFocus(null); return {}; } });
+    await h.router.settled;
+    await h.router.navigate('mercury', { url: `https://example.test/mercury/?focus=catalogue:a&${formatSharedView(saved(3e12))}` });
+    await h.router.navigate(target);
+    assert.equal(h.windowTarget.location.searchParams.has('focus'), false);
+    assert.equal(h.mounts.at(-1).navigation.preparedFocus(), null);
+    assert.equal(h.shells[0].preparedFocus, null);
+    if (target === 'venus') assert.equal(new URL(h.preparations.at(-1).url).searchParams.has('focus'), false);
+    assert.equal(h.maxRendered(), 1);
+    assert.deepEqual([...h.errors, ...context.errors], []);
+    h.router.destroy();
+  }
+});
 
 test('persistent world context is mounted once and follows the active physical navigation', async () => {
   const events = [], owner = {

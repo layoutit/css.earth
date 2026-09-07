@@ -170,6 +170,7 @@ export function createSceneRouter({
         if (!interrupted) await session.lifetime.wait(session.viewUrl.restore());
         if (active !== session || session.lifetime.disposed) return;
       }
+      worldContextMount?.restoreFocus?.(session.url ?? windowTarget.location.href);
       if (mount.destinations) shell.setDestinations?.({
         ...mount.destinations,
         async select(place) {
@@ -213,11 +214,12 @@ export function createSceneRouter({
     const mode = options.history ?? 'push';
     if (mode === 'pop') historyOwner?.remember();
     else historyOwner?.checkpoint();
+    worldContextMount?.suspendFocus?.();
     active?.viewUrl?.destroy();
     if (active) active.viewUrl = null;
     const url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
     if (!options.url) {
-      url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview');
+      url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview'); url.searchParams.delete('focus');
       if (options.overview) url.searchParams.set('overview', 'solar-system');
     }
     const request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
@@ -314,6 +316,7 @@ export function createSceneRouter({
     // A failed history restoration keeps its incoming URL for diagnosis, like
     // Galaxio's invalid-route state. The old scene must not write into it.
     if (new URL(session.url).pathname !== windowTarget.location.pathname) return;
+    worldContextMount?.suspendFocus?.();
     const owner = bindViewUrl({ windowTarget, view: session.mount.sharedView, listenToPopState: !navigation,
       getMotion: () => motionEnabled,
       setMotion(next) { session.shell.setMotionEnabled?.(next); motionEnabled = next === true; syncPlayback(); },
@@ -322,6 +325,7 @@ export function createSceneRouter({
     session.viewUrl = owner;
     session.lifetime.onDispose(() => owner.destroy());
     if (restore) await session.lifetime.wait(owner.restore());
+    if (active === session && !session.lifetime.disposed) worldContextMount?.restoreFocus?.(session.url);
   }
 
   function readPlayback() {
@@ -467,6 +471,15 @@ export function createSceneRouter({
     if (!owner || !navigation || typeof navigation.subscribe !== 'function') return;
     owner.selectObject?.(mountedObjectId, navigation.frame);
     owner.setOverview?.(overview);
+    const disconnectFocus = owner.connectNavigation?.(navigation, {
+      onFocusChange(url) { if (active === session) session.url = url; },
+      onFocusContentChange(record, sources) { if (active === session) shellOwner?.shell?.setPreparedFocus?.(record, sources); },
+      onFlightStart() {
+        if (active !== session) return;
+        motionEnabled = false; shellOwner?.shell?.setMotionEnabled?.(false); syncPlayback();
+      },
+    });
+    if (disconnectFocus) session.lifetime.onDispose(disconnectFocus);
     const unsubscribe = navigation.subscribe((world, viewport) => {
       if (active === session && worldContextMount === owner) owner.publish(world, viewport);
     });
@@ -485,7 +498,7 @@ export function createSceneRouter({
     if (!owner || !navigation || !sun?.worldFrame) return;
     session.lifetime.onDispose(watchOverviewSelection({ navigation: owner, objects, objectId,
       getOverview: () => overview,
-      isAvailable: () => active === session && sceneState === 'ready' && !pending,
+      isAvailable: () => active === session && sceneState === 'ready' && !pending && !owner.preparedFocus?.(),
       windowTarget,
       onChange(next) {
         if (!next.overview) {
