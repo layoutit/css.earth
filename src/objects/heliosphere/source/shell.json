@@ -17,14 +17,14 @@
     "metersPerUnit": 149597870700,
     "boundsUnits": {
       "min": [
-        -383.0,
-        -383.0,
-        -383.0
+        -383,
+        -383,
+        -383
       ],
       "max": [
-        383.0,
-        383.0,
-        383.0
+        383,
+        383,
+        383
       ]
     }
   },
@@ -84,6 +84,6 @@
   "unitScale": 50,
   "provenance": {
     "path": "provenance.json",
-    "sha256": "c335403442b84d38e0c60c6375c76bc7a3304274a8e612030a2f330b51772bf8"
+    "sha256": "8d199b6fbb90b541566ac96dad4b945ff869e2c7f54fd1c9d4e685d56bb4f659"
   }
 }
