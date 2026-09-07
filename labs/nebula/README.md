@@ -58,3 +58,25 @@ The archive and imported particles stay in the ignored local cache. The shared e
 The lab includes full-spatial-resolution working references from the publisher's SMASH TIFFs: LMC 6737×6536 and SMC 3827×3190. `sources/reference-images.json` pins the original URLs, bytes, hashes, dimensions, credits and deterministic conversion. `pnpm lab:nebula:images` verifies or downloads the originals into the ignored cache, then recreates the checked-in 8-bit sRGB WebP references. These are lossy display derivatives with no crop or spatial resize, not scientific FITS data. Large reference images load only for source inspection and are not part of the prepared CSS texture banks.
 
 ESO/VISTA offers larger infrared mosaics ([LMC](https://www.eso.org/public/images/eso1914a/), [SMC](https://www.eso.org/public/images/eso1714a/)), but their Y/J/Ks emission and colors differ from the optical/near-infrared SMASH composite. They are alternative observational views, not replacements silently mixed into the current optical appearance. The ESO Tarantula reference also uses a different display grade and enhanced H-alpha; its WCS footprint needs matched-star verification before a detail patch is composed.
+
+## High-resolution LMC master experiment
+
+The **LMC · master 1024** and **LMC · master 512** subjects bypass the old 384-cell RGB grid. They extract directly from the pinned 6737×6536 TIFF at native spatial resolution, sample that photograph independently of the coarse simulated depth field, and bake 2048-pixel lossless PNG masters. The 1024- and 512-pixel delivery banks are then area-downsampled from the verified PNG bytes with premultiplied alpha and encoded as WebP. Both use the same 192 prepared slabs and existing CSS renderer; their image payloads are 2.60 MB and 0.69 MB respectively (42.9 MB and 10.3 MB decoded).
+
+The selected native 7-pixel median retains more filaments than the 19-pixel kernel that approximately matches the old filter's angular scale. It also retains more stellar contamination: this is frequency separation, not membership-based foreground-star subtraction. Native TIFF input does not imply 16-bit scientific radiometry throughout; extraction and slab masters contain 8-bit display RGB/alpha.
+
+The experiment retains the baseline physical bounds, alignment, exposure and depth-model parameters. Higher resolution does not recover measured gas/dust depth. Spreading photographic features through stellar depth still causes perspective streaking, and two integration samples per slab can alias fine features in side banks. These candidates demonstrate the resolution pipeline; they are not final optical reconstructions.
+
+From a clean checkout, with the manually downloaded simulation archive in Downloads:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm build:preparation
+pnpm lab:nebula:images
+pnpm lab:nebula:particles labs/nebula/models/magellanic-particles.json "$HOME/Downloads/lsmcmodelA2020_2500Myr.zip" lmc-particles
+pnpm lab:nebula:master labs/nebula/models/lmc-highres.json
+pnpm test:lab:nebula
+pnpm lab:nebula
+```
+
+Open <http://127.0.0.1:4331/?subject=lmc-highres-1024>. The original particle bake remains in the Subject chooser. Large originals, full-resolution extractions, density intermediates and lossless masters stay in the ignored local cache; only the small delivery banks, recipes and provenance are checked in. Re-running the master command verifies cached PNGs and derives delivery again. A changed source, master setting or pipeline implementation creates a new master cache; changing only delivery width or quality reuses the same master.

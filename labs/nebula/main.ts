@@ -24,6 +24,7 @@ function selectTab(index: number) {
   tabs.forEach((tab, i) => { tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1; });
   element('render-panel').setAttribute('aria-hidden', String(index !== 0));
   element('source-panel').hidden = index !== 1;
+  if (index === 1) showSource();
   updateCredit();
 }
 tabs.forEach((tab, index) => {
@@ -60,6 +61,7 @@ function updateSource(id: string) {
   sourceChoice.replaceChildren(...item.sourceImages.map(source => new Option(source.name, source.id)));
   element('source-choice-wrapper').hidden = item.sourceImages.length < 2;
   showSource();
+  updateCredit();
 }
 function chosenSource() {
   return subjects.find(value => value.id === sourceSubject)?.sourceImages.find(source => source.id === sourceChoice.value);
@@ -71,6 +73,7 @@ function updateCredit() {
   sourceCredit.textContent = item?.credit ?? '';
 }
 function showSource() {
+  if (element('source-panel').hidden) return;
   const item = chosenSource();
   if (!item) return;
   imageStatus.textContent = 'Loading source image…';
@@ -100,7 +103,9 @@ element('reset').addEventListener('click', () => void run(() => viewer!.reset())
 setBusy(true);
 try {
   if (!subjects.length) throw new Error('No prepared subjects are available.');
-  viewer = await createNebulaLabViewer({ host: element('viewer'), subjectId: subjects[0].id, onState(state) {
+  const requestedSubject = new URL(location.href).searchParams.get('subject');
+  const initialSubject = subjects.find(item => item.id === requestedSubject) ?? subjects[0];
+  viewer = await createNebulaLabViewer({ host: element('viewer'), subjectId: initialSubject.id, onState(state) {
     if (disposed) return;
     subject.value = state.subjectId;
     updateSource(state.subjectId);

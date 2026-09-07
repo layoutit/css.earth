@@ -84,7 +84,8 @@
     "prepare:social": "node tools/prepare-social-images.mjs",
     "prepare:galaxy-catalog": "node tools/objects/dist/prepare-galaxy-catalog.js src/objects/local-group",
     "prepare:image-layers": "node tools/objects/dist/prepare-image-layers.js",
-    "lab:nebula:images": "node --experimental-strip-types labs/nebula/run.ts acquire-images labs/nebula/sources/reference-images.json"
+    "lab:nebula:images": "node --experimental-strip-types labs/nebula/run.ts acquire-images labs/nebula/sources/reference-images.json",
+    "lab:nebula:master": "node --experimental-strip-types labs/nebula/run.ts prepare-master"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

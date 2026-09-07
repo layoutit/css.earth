@@ -24,6 +24,44 @@
     ]
   },
   {
+    "id": "lmc-highres-1024",
+    "name": "LMC · master 1024",
+    "directory": "labs/nebula/models/lmc-highres-1024",
+    "imagePath": "labs/nebula/sources/lmc-smash-full.webp",
+    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
+    "modelNote": "Native SMASH photograph detail with simulated stellar depth. Prepared from a lossless 2048px master; alignment and unseen structure remain modeled, not measured gas or dust.",
+    "framingRadiusUnits": 3.5,
+    "hasDetail": false,
+    "sourceSubjectId": "lmc",
+    "comparisonImages": [
+      {
+        "id": "lmc-density-alignment",
+        "name": "Baseline alignment: photo / density / overlay",
+        "imagePath": "labs/nebula/models/lmc-particles/source/alignment-comparison.png"
+      }
+    ]
+  },
+  {
+    "id": "lmc-highres-512",
+    "name": "LMC · master 512",
+    "directory": "labs/nebula/models/lmc-highres-512",
+    "imagePath": "labs/nebula/sources/lmc-smash-full.webp",
+    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
+    "modelNote": "Native SMASH photograph detail with simulated stellar depth. Prepared from a lossless 2048px master; alignment and unseen structure remain modeled, not measured gas or dust.",
+    "framingRadiusUnits": 3.5,
+    "hasDetail": false,
+    "sourceSubjectId": "lmc",
+    "comparisonImages": [
+      {
+        "id": "lmc-density-alignment",
+        "name": "Baseline alignment: photo / density / overlay",
+        "imagePath": "labs/nebula/models/lmc-particles/source/alignment-comparison.png"
+      }
+    ]
+  },
+  {
     "id": "smc-particles",
     "name": "SMC · particle volume",
     "directory": "labs/nebula/models/smc-particles",

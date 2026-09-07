@@ -7,7 +7,9 @@ export interface ExtractionOptions {
   inputPath: string;
   outputDirectory: string;
   id?: string;
-  maxPixels?: number;
+  maxPixels?: number | null;
+  /** Opt-in native extraction can omit the two large compact-source output banks. */
+  outputMode?: 'all' | 'diffuse-only';
   medianSize?: number;
   supportPixels?: number;
   thresholdSigma?: number;
@@ -20,6 +22,15 @@ export interface ExtractionReceipt {
   skyRgb: [number,number,number]; threshold: number; supportFraction: number;
   outputs: { cutout: string; diffuse: string; residual: string; mask: string; comparison: string };
   method: string; limitations: string[];
+}
+export interface NativeExtractionReceipt extends Omit<ExtractionReceipt, 'outputs'> {
+  outputs: { diffuse: string; mask: string; comparison: string; cutout?: string; residual?: string };
+  outputHashes: Record<string,string>;
+  options: { maxPixels: null; medianSize: number; outputMode: 'all' | 'diffuse-only'; supportPixels: number;
+    thresholdSigma: number; bridgeFraction: number; softEdgeFraction: number };
+  source: { path: string; sha256: string; bytes: number; depth: string; width: number; height: number };
+  processing: { nativeResolution: true; medianSize: number; outputMode: 'all' | 'diffuse-only';
+    borderStatistic: string; elapsedSeconds: number; maximumResidentBytes: number };
 }
 
 const clamp=(v:number,lo=0,hi=255)=>Math.max(lo,Math.min(hi,v));
@@ -37,7 +48,12 @@ function strongestInteriorComponent(mask:Uint8Array,signal:Uint8Array,width:numb
   const out=new Uint8Array(mask.length);for(const p of best)out[p]=255;return out;
 }
 
-export async function extractExtendedSource(options:ExtractionOptions):Promise<ExtractionReceipt>{
+export function extractExtendedSource(options:ExtractionOptions & {maxPixels:null}):Promise<NativeExtractionReceipt>;
+export function extractExtendedSource(options:ExtractionOptions & {maxPixels?:number}):Promise<ExtractionReceipt>;
+export function extractExtendedSource(options:ExtractionOptions):Promise<ExtractionReceipt|NativeExtractionReceipt>;
+export async function extractExtendedSource(options:ExtractionOptions):Promise<ExtractionReceipt|NativeExtractionReceipt>{
+  if(options.maxPixels===null){const {extractNativeSource}=await import('./native-extraction.js');return extractNativeSource(options,createSupportMask);}
+  if(options.outputMode==='diffuse-only')throw new TypeError('diffuse-only output requires maxPixels:null.');
   const id=options.id??basename(options.inputPath).replace(/\.[^.]+$/,''),maxPixels=options.maxPixels??1800,medianSize=options.medianSize??9;
   if(!Number.isInteger(medianSize)||medianSize<3||medianSize%2!==1)throw new TypeError('medianSize must be an odd integer of at least three.');
   const decoded=await sharp(options.inputPath).rotate().resize({width:maxPixels,height:maxPixels,fit:'inside',withoutEnlargement:true}).removeAlpha().toColourspace('srgb').raw().toBuffer({resolveWithObject:true}),{width,height}=decoded.info,rgb=decoded.data;
@@ -47,14 +63,7 @@ export async function extractExtendedSource(options:ExtractionOptions):Promise<E
   const median=(await sharp(rgb,{raw:{width,height,channels:3}}).median(medianSize).raw().toBuffer()),extendedLuma=Buffer.alloc(width*height),borderSignal:number[]=[];
   for(let p=0;p<width*height;p++){const i=3*p,v=clamp(luminance(median[i]-sky[0],median[i+1]-sky[1],median[i+2]-sky[2]));extendedLuma[p]=Math.round(v);const x=p%width,y=Math.floor(p/width);if(x<band||y<band||x>=width-band||y>=height-band)borderSignal.push(v);}
   const baseline=quantile([...borderSignal],.5),mad=quantile(borderSignal.map(v=>Math.abs(v-baseline)),.5),threshold=baseline+(options.thresholdSigma??6)*Math.max(1,1.4826*mad);
-  const supportPixels=Math.min(options.supportPixels??420,width,height),small=await sharp(extendedLuma,{raw:{width,height,channels:1}}).resize({width:supportPixels,height:supportPixels,fit:'inside'}).blur(1.2).greyscale().raw().toBuffer({resolveWithObject:true}),sw=small.info.width,sh=small.info.height,seed=new Uint8Array(sw*sh);
-  if(small.info.channels!==1||small.data.length!==sw*sh)throw new TypeError('Support signal must remain single-channel.');
-  const high=new Uint8Array(seed.length),highThreshold=Math.max(threshold*1.8,quantile([...small.data],.9));for(let p=0;p<seed.length;p++){if(small.data[p]>=threshold)seed[p]=255;if(small.data[p]>=highThreshold)high[p]=255;}
-  const radius=Math.max(1,Math.round(Math.min(sw,sh)*(options.bridgeFraction??.006))),highMain=strongestInteriorComponent(high,small.data,sw,sh),bridged=new Uint8Array(seed.length);
-  for(let y=0;y<sh;y++)for(let x=0;x<sw;x++){let on=false;for(let dy=-radius;dy<=radius&&!on;dy++)for(let dx=-radius;dx<=radius;dx++){if(dx*dx+dy*dy>radius*radius)continue;const nx=x+dx,ny=y+dy;if(nx>=0&&ny>=0&&nx<sw&&ny<sh&&seed[ny*sw+nx]){on=true;break;}}if(on)bridged[y*sw+x]=255;}
-  const connected=connectedFromSeed(bridged,highMain,sw,sh),softSigma=Math.max(.3,Math.min(sw,sh)*(options.softEdgeFraction??.018)),maskResult=await sharp(connected,{raw:{width:sw,height:sh,channels:1}}).blur(softSigma).resize(width,height).greyscale().raw().toBuffer({resolveWithObject:true});
-  if(maskResult.info.channels!==1||maskResult.data.length!==width*height)throw new TypeError('Support mask must remain single-channel.');
-  const mask=maskResult.data;
+  const mask=await createSupportMask(extendedLuma,width,height,threshold,options);
   const cutout=Buffer.alloc(width*height*4),diffuse=Buffer.alloc(width*height*4),residual=Buffer.alloc(width*height*4);let supportSum=0;
   for(let p=0;p<width*height;p++){const si=3*p,di=4*p,support=mask[p]/255;supportSum+=support;let maxSignal=0,maxDiffuse=0;
     let maxResidual=0;for(let c=0;c<3;c++){const source=Math.max(0,rgb[si+c]-sky[c]),smooth=Math.max(0,median[si+c]-sky[c]),compact=Math.max(0,source-smooth);cutout[di+c]=source;diffuse[di+c]=smooth;residual[di+c]=compact;maxSignal=Math.max(maxSignal,source);maxDiffuse=Math.max(maxDiffuse,smooth);maxResidual=Math.max(maxResidual,compact);}
@@ -67,4 +76,15 @@ export async function extractExtendedSource(options:ExtractionOptions):Promise<E
   await sharp({create:{width:panelWidth*5,height:panelHeight,channels:3,background:'#05070b'}}).composite([{input:await sharp(rgb,{raw:{width,height,channels:3}}).resize(panelWidth,panelHeight).png().toBuffer(),left:0,top:0},{input:await panel(resolve(options.outputDirectory,files.diffuse)),left:panelWidth,top:0},{input:await panel(resolve(options.outputDirectory,files.residual)),left:2*panelWidth,top:0},{input:maskPanel,left:3*panelWidth,top:0},{input:await panel(resolve(options.outputDirectory,files.cutout)),left:4*panelWidth,top:0}]).png().toFile(resolve(options.outputDirectory,files.comparison));
   const receipt:ExtractionReceipt={schema:'cssearth-nebula-extraction-lab@1',id,width,height,skyRgb:sky,threshold,supportFraction:supportSum/(width*height),outputs:files,method:'Border-robust sky subtraction; median-filtered extended-emission seed; morphology-connected, softly feathered support; compact residual retained only inside that support.',limitations:['The compact residual is a frequency separation, not a star catalogue.','Foreground stars projected inside the galaxy support cannot be distinguished reliably from intrinsic compact sources in broadband JPEG imagery.','Disconnected emission outside the morphology-connected support may be omitted.']};
   await writeFile(resolve(options.outputDirectory,`${id}-receipt.json`),JSON.stringify(receipt,null,2)+'\n');return receipt;
+}
+
+async function createSupportMask(extendedLuma:Buffer,width:number,height:number,threshold:number,options:ExtractionOptions):Promise<Buffer>{
+  const supportPixels=Math.min(options.supportPixels??420,width,height),small=await sharp(extendedLuma,{raw:{width,height,channels:1}}).resize({width:supportPixels,height:supportPixels,fit:'inside'}).blur(1.2).greyscale().raw().toBuffer({resolveWithObject:true}),sw=small.info.width,sh=small.info.height,seed=new Uint8Array(sw*sh);
+  if(small.info.channels!==1||small.data.length!==sw*sh)throw new TypeError('Support signal must remain single-channel.');
+  const high=new Uint8Array(seed.length),highThreshold=Math.max(threshold*1.8,quantile([...small.data],.9));for(let p=0;p<seed.length;p++){if(small.data[p]>=threshold)seed[p]=255;if(small.data[p]>=highThreshold)high[p]=255;}
+  const radius=Math.max(1,Math.round(Math.min(sw,sh)*(options.bridgeFraction??.006))),highMain=strongestInteriorComponent(high,small.data,sw,sh),bridged=new Uint8Array(seed.length);
+  for(let y=0;y<sh;y++)for(let x=0;x<sw;x++){let on=false;for(let dy=-radius;dy<=radius&&!on;dy++)for(let dx=-radius;dx<=radius;dx++){if(dx*dx+dy*dy>radius*radius)continue;const nx=x+dx,ny=y+dy;if(nx>=0&&ny>=0&&nx<sw&&ny<sh&&seed[ny*sw+nx]){on=true;break;}}if(on)bridged[y*sw+x]=255;}
+  const connected=connectedFromSeed(bridged,highMain,sw,sh),softSigma=Math.max(.3,Math.min(sw,sh)*(options.softEdgeFraction??.018)),maskResult=await sharp(connected,{raw:{width:sw,height:sh,channels:1}}).blur(softSigma).resize(width,height).greyscale().raw().toBuffer({resolveWithObject:true});
+  if(maskResult.info.channels!==1||maskResult.data.length!==width*height)throw new TypeError('Support mask must remain single-channel.');
+  return maskResult.data;
 }
