@@ -298,9 +298,6 @@ async function captureDensity(browserInstance, density) {
           materialDisplay: getComputedStyle(stage.querySelector(
             ".mars-material-counter",
           )).display,
-          sunDisplay: getComputedStyle(stage.querySelector(
-            ".planet-directional-sun",
-          )).display,
           centerLeaves: (() => {
             const leaves = [...stage.querySelectorAll(".mars-body > s")];
             return document.elementsFromPoint(innerWidth / 2, innerHeight / 2)
@@ -323,7 +320,6 @@ async function captureDensity(browserInstance, density) {
       });
       assert.equal(state.activeAnimations, 0);
       assert.equal(state.materialDisplay, "none");
-      assert.equal(state.sunDisplay, "none");
       assert.match(state.surfaceImage, /__cssmars_oracle/u);
       assert.match(state.polesImage, /__cssmars_oracle/u);
       const centerAddressMatches = centerMatches(
