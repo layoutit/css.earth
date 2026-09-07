@@ -59,7 +59,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4a8e66385a1b4164b712f6c02e45ec95e79786065f82d1caef292ca805e5383b"
+          "sha256": "c830b553957323cb06615011f17fb5ba607a9156f1208323431e7c3e570d3c88"
         },
         {
           "id": "rings",
@@ -205,6 +205,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "26674a49b0c3208af561c4411030189f54e781d549b80adcc09c0224b5ff9bd0"
+    "sha256": "dc8befd1677a5cd6666757c5308e5bef61bb9d94f1b7405aad68ceef7e1272ed"
   }
 }

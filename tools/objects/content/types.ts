@@ -46,6 +46,7 @@ export interface LensSource {
 export interface LensRecipe {
   id: string;
   label: string;
+  detail?: string;
   shortLabel?: string;
   description: string;
   title: string;

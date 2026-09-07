@@ -88,7 +88,8 @@
         "source": {
           "id": "normal",
           "url": "https://science.nasa.gov/asset/hubble/jupiter-global-map-2019/"
-        }
+        },
+        "detail": "Visible light"
       },
       {
         "id": "ultraviolet",
@@ -131,7 +132,8 @@
         "source": {
           "id": "ultraviolet",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
-        }
+        },
+        "detail": "275 nm"
       },
       {
         "id": "methane",
@@ -174,7 +176,8 @@
         "source": {
           "id": "methane",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-jupiter-cycle-32"
-        }
+        },
+        "detail": "889 nm"
       }
     ]
   },

@@ -51,6 +51,28 @@ const seo = objectSeo(objectRecord);
     <title>{seo.title}</title>
   </head>
   <body class="loading" data-object-shell={objectRecord.id}>
+    <div class="planet-view-readout" aria-label="View information">
+      <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
+        <span>Date: <span data-view-date></span></span>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+      </span>
+      <span class="planet-view-coordinates" title="Coordinates at the center of the view" hidden>
+        <span data-view-latitude></span>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+        <span data-view-longitude></span>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+      </span>
+      <span class="planet-view-altitude" title="Camera altitude above the selected object's reference surface">
+        Altitude: <span data-view-altitude>—</span>
+      </span>
+      <span class="planet-view-scale" hidden>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+        <span class="planet-view-ruler-slot" aria-hidden="true">
+          <span class="planet-view-ruler"><span class="planet-view-measure"></span></span>
+        </span>
+        <span data-view-scale-label></span>
+      </span>
+    </div>
     <header class="explorer-shell-header">
       <div class="explorer-shell-wordmark">
         <CssEarthWordmark />

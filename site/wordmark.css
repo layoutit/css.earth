@@ -19,7 +19,6 @@
   align-items: flex-start;
   gap: 5px;
   line-height: 0;
-  opacity: .9;
 }
 
 .planet-wordmark-two-line > svg {
@@ -36,7 +35,6 @@
   height: calc(16.27em / 22);
   vertical-align: calc(-0.26em / 22);
   overflow: visible;
-  opacity: .9;
 }
 
 .planet-wordmark-css,

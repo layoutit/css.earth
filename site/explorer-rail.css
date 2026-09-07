@@ -116,7 +116,7 @@
 
 .explorer-about-introduction a {
   color: inherit;
-  text-decoration-color: rgb(184 187 196 / 55%);
+  text-decoration-color: var(--shell-text-muted);
   text-underline-offset: 2px;
 }
 

@@ -65,6 +65,7 @@ interface Gallery {
 interface Lens {
   id: string;
   label: string;
+  detail?: string;
   thumbnailUrl: string;
   texture?: { url: string; width: number; height: number; minimap?: unknown };
   description: string;
@@ -420,6 +421,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                 >
                   <img class="planet-lens-icon" src={lens.thumbnailUrl} width="16" height="16" alt="" />
                   <span class="planet-lens-label">{lens.label}</span>
+                  {lens.detail && <span class="planet-lens-detail">{lens.detail}</span>}
                 </button>
               </div>
             ))}

@@ -85,7 +85,8 @@
         "poles": "mercury-poles.webp",
         "falseColor": false,
         "filter": "MESSENGER MDIS BDR global 750 nm monochrome basemap",
-        "view": "exterior"
+        "view": "exterior",
+        "detail": "750 nm"
       },
       {
         "id": "enhanced",
@@ -101,7 +102,8 @@
         "poles": "mercury-poles.webp",
         "falseColor": true,
         "filter": "NASA Trek/USGS MESSENGER enhanced-color mosaic with qualified prepared coverage completion",
-        "view": "exterior"
+        "view": "exterior",
+        "detail": "False color"
       },
       {
         "id": "topography",
@@ -147,7 +149,8 @@
         },
         "falseColor": true,
         "filter": "USGS MESSENGER global color shaded relief",
-        "view": "exterior"
+        "view": "exterior",
+        "detail": "Shaded relief"
       },
       {
         "id": "interior",
@@ -190,7 +193,8 @@
         },
         "falseColor": false,
         "filter": "NASA-dimensioned retained 3D metallic-core cutaway",
-        "view": "interior"
+        "view": "interior",
+        "detail": "Structure"
       }
     ],
     "labels": {

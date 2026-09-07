@@ -1,4 +1,5 @@
 .planetary-navigation {
+  display: none;
   --planet-min-size: 6px;
   position: fixed;
   z-index: 190;
@@ -69,14 +70,12 @@
 }
 
 .scale-label {
-  color: var(--shell-text-secondary);
-  opacity: .72;
+  color: var(--shell-text-muted);
   white-space: nowrap;
 }
 
 .scale-stop[aria-current="page"] .scale-label {
   color: var(--shell-text);
-  opacity: 1;
 }
 
 .scale-stop:hover .planet-navigation-marker,

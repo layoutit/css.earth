@@ -60,8 +60,8 @@ test("Planet information starts the horizontal rail and the legacy Solar System 
   assert.match(styles, /\.scale-planet\s*\{[^}]*left:\s*var\(--planet-offset\);/u);
   assert.doesNotMatch(styles, /\.scale-sun|sun-marker(?:@2x)?\.webp/u);
   assert.match(styles, /--planet-min-size:\s*6px/u);
-  assert.match(styles, /\.scale-label\s*\{[^}]*opacity:\s*\.72;/u);
-  assert.match(styles, /\.scale-stop\[aria-current="page"\] \.scale-label\s*\{[^}]*opacity:\s*1;/u);
+  assert.match(styles, /\.scale-label\s*\{[^}]*color:\s*var\(--shell-text-muted\);/u);
+  assert.match(styles, /\.scale-stop\[aria-current="page"\] \.scale-label\s*\{[^}]*color:\s*var\(--shell-text\);/u);
   assert.match(styles, /\.scale-stop \.planet-navigation-marker > i\s*\{[^}]*width:\s*max\(var\(--planet-min-size\), var\(--planet-size\)\);[^}]*height:\s*max\(var\(--planet-min-size\), var\(--planet-size\)\);/u);
   assert.match(styles, /\.scale-stops\s*\{[^}]*margin:\s*0 28px;/u);
   assert.match(styles, /@media \(max-width:\s*1100px\), \(orientation:\s*portrait\)/u);
@@ -89,7 +89,7 @@ test("Planet information starts the horizontal rail and the legacy Solar System 
   );
   assert.match(
     railStyles,
-    /\.explorer-about-introduction a\s*\{[^}]*color:\s*inherit;[^}]*text-decoration-color:\s*rgb\(184 187 196 \/ 55%\);/u,
+    /\.explorer-about-introduction a\s*\{[^}]*color:\s*inherit;[^}]*text-decoration-color:\s*var\(--shell-text-muted\);/u,
   );
   assert.doesNotMatch(railStyles, /\.explorer-about[^}]*color:\s*#(?:b5d8fa|d3e9ff)/u);
   assert.match(

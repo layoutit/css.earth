@@ -35,8 +35,8 @@ try {
     await page.waitForFunction(() => document.querySelector(".planet-stage")?.getAttribute("aria-busy") === "false");
     const rail = page.getByRole("navigation", { name: "Explorer", exact: true });
     const planetaryNavigation = page.locator(".planetary-navigation");
-    assert.equal(await planetaryNavigation.isVisible(), !config.mobile,
-      `${config.label}: top planet navigation follows the desktop/mobile input boundary`);
+    assert.equal(await planetaryNavigation.isVisible(), false,
+      `${config.label}: top planet navigation is hidden`);
     const settings = rail.locator(".planet-settings-action");
     const about = rail.getByRole("button", { name: "About", exact: true });
     const explore = rail.getByRole("button", { name: "Planet information", exact: true });
