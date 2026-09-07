@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "deimos",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://sbn.psi.edu/pds/resource/stookemaps.html",
+    "credit": "Philip Stooke; NASA/JPL; USGS/PDS",
+    "license": "Public-domain NASA mission data and published PDS cartographic product; cite Stooke.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "stooke-mosaic",
+        "ernst-2023-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 20,
+      "latitudeDegrees": 10,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "normal"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 91108,
+    "expectedSha256": "456d9a56fb8815dfe48a52dc68ccc540824fffc36a7295365197fd0fda83eeeb"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

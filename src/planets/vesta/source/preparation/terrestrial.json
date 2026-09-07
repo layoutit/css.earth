@@ -117,7 +117,8 @@
       "faceBudget": 2000,
       "tileSize": 128,
       "atlasColumns": 16,
-      "lightFieldSize": 4
+      "lightFieldSize": 4,
+      "primitive": "u"
     }
   },
   "celestial": {
