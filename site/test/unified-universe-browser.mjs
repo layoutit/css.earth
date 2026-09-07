@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { wheelWithReceipt } from './wheel-zoom-distance.mjs';
+import preparedVolume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 
 const origin = process.argv[2] ?? process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
 const output = '.local/unified-universe-browser';
@@ -168,7 +169,7 @@ function assertRetained(value, label) {
   assert.equal(value.sameDocument, true, `${label}: one document`);
   assert.equal(value.retained, true, `${label}: original universe nodes remain connected`);
   assert.equal(value.roots, 1, `${label}: exactly one detailed scene`);
-  assert.equal(value.slices, 288);
+  assert.equal(value.slices, preparedVolume.data.stacks.flatMap(stack => stack.leaves).length * 3);
   assert.equal(value.slots, 4096);
 }
 async function flight(page, to, mode) {
@@ -289,7 +290,7 @@ async function scrollTo(page, target) {
 }
 async function backgroundRequests(page) {
   return page.evaluate(() => performance.getEntriesByType('resource').map(entry => entry.name)
-    .filter(name => name.includes('/milky-way/prepared/slices/') || name.includes('/stellar-neighbourhood/prepared/')).sort());
+    .filter(name => name.includes('/milky-way/prepared/') || name.includes('/stellar-neighbourhood/prepared/')).sort());
 }
 async function backgroundProjection(page) {
   return page.evaluate(() => ({
@@ -298,12 +299,14 @@ async function backgroundProjection(page) {
       // Translation depends on the observer; compare it too at this fixed world pose.
       return Array.from(matrix.toFloat64Array());
     }),
+    sky: Array.from(new DOMMatrix(getComputedStyle(document.querySelector('.prepared-celestial-sky-scene')).transform).toFloat64Array()),
     stars: Object.fromEntries(window.__cssEarthUniverse.inspect().stars.points
       .filter(({ element, reference }) => reference && element.style.visibility !== 'hidden' && Number(element.style.opacity) > 0)
       .map(({ element, reference }) => [reference, element.style.transform])),
   }));
 }
 function sameProjection(actual, expected, id) {
+  actual.sky.forEach((value, i) => assert.ok(Math.abs(value - expected.sky[i]) < .001, `${id}: same world observer gives the same celestial sky matrix`));
   assert.equal(actual.volume.length, expected.volume.length);
   actual.volume.forEach((matrix, axis) => matrix.forEach((value, i) => {
     assert.ok(Math.abs(value - expected.volume[axis][i]) < 0.001, `${id}: same world observer gives the same galaxy matrix`);

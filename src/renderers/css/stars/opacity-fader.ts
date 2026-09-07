@@ -15,7 +15,7 @@ interface Entry {
 }
 
 /** Retained, wall-time opacity interpolation without CSS or Web Animations. */
-export function createOpacityFader(windowTarget: OpacityFaderWindow) {
+export function createOpacityFader(windowTarget: OpacityFaderWindow, property: 'opacity' | `--${string}` = 'opacity') {
   const entries = new Map<HTMLElement, Entry>();
   const active = new Set<Entry>();
   let frame: number | null = null;
@@ -24,14 +24,15 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow) {
   const now = () => windowTarget.performance.now();
   const clamp = (value: number) => Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
   const read = (element: HTMLElement) => {
-    const value = Number.parseFloat(element.style.opacity);
+    const value = Number.parseFloat(property === 'opacity' ? element.style.opacity : element.style.getPropertyValue(property));
     return Number.isFinite(value) ? clamp(value) : 0;
   };
   const write = (entry: Entry, value: number) => {
     entry.current = clamp(value);
     if (entry.written !== entry.current) {
       entry.written = entry.current;
-      entry.element.style.opacity = String(entry.current);
+      if (property === 'opacity') entry.element.style.opacity = String(entry.current);
+      else entry.element.style.setProperty(property, String(entry.current));
     }
   };
   const valueAt = (entry: Entry, timestamp: number) => {

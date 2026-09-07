@@ -1,0 +1,98 @@
+import { M_PER_AU, eclipticJ2000ToIcrf } from '@galaxio/astronomy'
+import type { Focus } from './altitude.js'
+
+// Illustrative Galaxium model, recovered from its shipped constructor; not a measured boundary.
+export const HELIOSPHERE_REFERENCE_RADIUS_AU = 120
+export const HELIOSPHERE_REFERENCE_RADIUS_M = HELIOSPHERE_REFERENCE_RADIUS_AU * M_PER_AU
+export const HELIOSPHERE_BOUNDING_RADIUS_AU = 210
+export const HELIOSPHERE_APPROACH_DISTANCE_M = 456 * M_PER_AU
+export const HELIOSPHERE_LATITUDE_SEGMENTS = 64
+export const HELIOSPHERE_LONGITUDE_SEGMENTS = 128
+
+// The live Sun → Scene parent chain is identity in equatorial axes. Do not rotate this a second time.
+export const HELIOSPHERE_ORIENTATION_ICRF = [
+  0.03513113833981278, 0.027299641271711732, 0.7888379488084487, -0.6129887627233179,
+] as const
+
+export const HELIOSPHERE_FOCUS: Focus = {
+  position: { frame: 'sun', offset: [0, 0, 0] },
+  // A transparent region has no solid ground; selecting from inside must not teleport the camera.
+  radiusM: 0,
+  label: 'Heliosphere',
+  orbitUpIcrf: eclipticJ2000ToIcrf([0, 0, 1]),
+}
+
+export function heliosphereApproachDistanceM(aspect: number, verticalFovRad: number): number {
+  const halfAngleRad = Math.atan(0.8 * Math.min(1, aspect) * Math.tan(verticalFovRad / 2))
+  return Math.max(HELIOSPHERE_APPROACH_DISTANCE_M, HELIOSPHERE_BOUNDING_RADIUS_AU * M_PER_AU / Math.sin(halfAngleRad))
+}
+
+// @noalloc
+export function heliosphereDistanceWeight(distanceAu: number): number {
+  const near = Math.max(0, Math.min(1, (distanceAu + 5) / 10))
+  const far = Math.max(0, Math.min(1, (distanceAu - 5000) / 1000))
+  return near * near * (3 - 2 * near) * (1 - far * far * (3 - 2 * far))
+}
+
+export interface HeliosphereGeometryData {
+  readonly positionsNormalized: Float32Array
+  readonly normals: Float32Array
+  readonly indices: Uint16Array
+}
+
+export function createHeliosphereGeometryData(): HeliosphereGeometryData {
+  const latitudes = HELIOSPHERE_LATITUDE_SEGMENTS
+  const longitudes = HELIOSPHERE_LONGITUDE_SEGMENTS
+  const columns = longitudes + 1
+  const positionsNormalized = new Float32Array((latitudes + 1) * columns * 3)
+  const normals = new Float32Array(positionsNormalized.length)
+  for (let j = 0; j <= latitudes; j++) {
+    const thetaRad = j * Math.PI / latitudes
+    const sinTheta = j === 0 || j === latitudes ? 0 : Math.sin(thetaRad)
+    const cosTheta = Math.cos(thetaRad)
+    for (let i = 0; i < longitudes; i++) {
+      const phiRad = i * 2 * Math.PI / longitudes
+      const x = sinTheta === 0 ? 0 : -sinTheta * Math.cos(phiRad)
+      const y = cosTheta
+      const z = sinTheta === 0 ? 0 : sinTheta * Math.sin(phiRad)
+      const tail = Math.max(-x, 0) ** 2
+      const index = (j * columns + i) * 3
+      positionsNormalized[index] = x * (1 + 0.75 * tail)
+      positionsNormalized[index + 1] = y * (0.92 - 0.22 * tail)
+      positionsNormalized[index + 2] = z * (0.92 - 0.22 * tail) + 0.38 * tail * Math.tanh(4 * z)
+      // The reference deliberately uses radial normals from the rounded vertices, not surface derivatives.
+      const px = positionsNormalized[index]!
+      const py = positionsNormalized[index + 1]!
+      const pz = positionsNormalized[index + 2]!
+      const inverseLength = 1 / Math.sqrt(px * px + py * py + pz * pz)
+      normals[index] = px * inverseLength
+      normals[index + 1] = py * inverseLength
+      normals[index + 2] = pz * inverseLength
+    }
+    const first = j * columns * 3
+    const last = (j * columns + longitudes) * 3
+    for (let axis = 0; axis < 3; axis++) {
+      positionsNormalized[last + axis] = positionsNormalized[first + axis]!
+      normals[last + axis] = normals[first + axis]!
+    }
+  }
+  const indices = new Uint16Array(2 * (latitudes - 1) * longitudes * 3)
+  let next = 0
+  for (let j = 0; j < latitudes; j++) {
+    for (let i = 0; i < longitudes; i++) {
+      const a = j * columns + i
+      const b = a + columns
+      if (j !== 0) {
+        indices[next++] = a
+        indices[next++] = b
+        indices[next++] = a + 1
+      }
+      if (j !== latitudes - 1) {
+        indices[next++] = a + 1
+        indices[next++] = b
+        indices[next++] = b + 1
+      }
+    }
+  }
+  return { positionsNormalized, normals, indices }
+}

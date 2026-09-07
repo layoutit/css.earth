@@ -13,7 +13,8 @@ import type { PointFieldView } from './point-field-selection.js';
 
 type Slot = { element: HTMLElement; reference: PointReference | null; entering: boolean;
   identity: string | null; shown: boolean; x: number; y: number; size: number };
-type Publication = { world: WorldCameraPose; viewport: WorldCameraViewport };
+type Publication = { world: WorldCameraPose; viewport: WorldCameraViewport; labelExclusionRects: readonly LabelScreenRect[] };
+import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 type Matrix3 = PreparedPointFieldInput['viewRotation'];
 const key = (reference: PointReference) => `${reference.kind}:${reference.index}`;
 
@@ -179,7 +180,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
     for (const slot of outgoing) write(slot, true);
     for (const slot of active) write(slot, false);
     visiblePoints = visible; individualPoints = individual;
-    labels?.publish(candidates, label);
+    labels?.publish(candidates, label, publication.labelExclusionRects);
   }
 
   return Object.freeze({ root,
@@ -199,11 +200,12 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
       occluderLocal = presentPhysicalPoseInVolume({ positionM: body.positionM,
         orientationXyzw: [0, 0, 0, 1] }, payload.frame).positionUnits;
     },
-    publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number) {
+    publish(world: WorldCameraPose, viewport: WorldCameraViewport, opacity: number,
+      labelExclusionRects: readonly LabelScreenRect[] = []) {
       if (destroyed) return;
       root.style.opacity = String(opacity); root.style.visibility = opacity > 0 ? '' : 'hidden';
       if (opacity <= 0) { latest = null; return; }
-      latest = { world, viewport };
+      latest = { world, viewport, labelExclusionRects };
       if (timer === null) updateSelection(latest);
       render(latest);
     },

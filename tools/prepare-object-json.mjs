@@ -60,6 +60,18 @@ export async function prepareObjectJson(ids) {
     results.push(await writeObjectJson(object.id, runtimeDefinition));
   }
   if (ids && results.length !== new Set(ids).size) throw new TypeError('A requested object has no registered JSON descriptor.');
+  // Contexts consume finalized body frames. Preparing them first can retain a
+  // previous radius and make an otherwise valid destination fail at handoff.
+  const { prepareSpatialContext } = await import('./objects/dist/prepare-spatial-context.js');
+  for (const object of OBJECTS) {
+    const directory = resolve(root, 'src/planets', object.id);
+    const descriptor = JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8'));
+    const source = descriptor.properties?.recipe?.sources?.find(source => source.id === 'world-context');
+    if (!source) continue;
+    await prepareSpatialContext({ sourcePath: resolve(directory, source.path),
+      outputPath: resolve(directory, 'prepared/world-context.json'),
+      solarGeometryPath: resolve(root, 'src/platform/solar-geometry.mjs') });
+  }
   return results;
 }
 

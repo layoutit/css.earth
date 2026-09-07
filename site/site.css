@@ -89,7 +89,6 @@ html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; 
   color: var(--shell-text);
   font: 400 14px/18px var(--shell-ui-font);
   text-decoration: none;
-  transition: opacity 120ms ease;
 }
 
 [data-context-label]:is([data-object-hovered="true"], :hover, :focus-visible) {
