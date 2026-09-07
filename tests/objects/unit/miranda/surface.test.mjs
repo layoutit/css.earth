@@ -1,23 +1,29 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import sharp from 'sharp';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
 import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mjs';
-
 const root = new URL('../../../../src/planets/miranda/source/', import.meta.url).pathname;
-test('Miranda registers the Voyager map without mirroring and preserves its northern gap', async () => {
-  const config = JSON.parse(await readFile(`${root}/preparation/terrestrial.json`));
-  const manifest = JSON.parse(await readFile(`${root}/manifest.json`));
-  const entry = manifest.inputs.find(x => x.lensId === 'normal');
-  const {rgb,missing} = await readObservation(root,entry,config.raster.observations[0].validity,1440,720);
-  const raw = await sharp(`${root}/${entry.path}`).toColourspace('b-w').raw().toBuffer();
-  // Independent USGS Gazetteer feature centres, in east-positive degrees.
-  for (const [longitude,latitude] of [[257.1,-24.8],[73.7,-29.1],[325.7,-66.9]]) {
-    const x=Math.floor(longitude*4),y=Math.floor((90-latitude)*4);
-    const sourceX=Math.floor(((longitude+180)%360)*4);
-    assert.equal(missing[y*1440+x],0);
-    assert.equal(rgb[(y*1440+x)*3],raw[y*1440+sourceX]);
+test('Miranda mosaic and kilometre DEM register despite their different longitude origins', async () => {
+  const config=JSON.parse(await readFile(root+'preparation/terrestrial.json'));
+  const manifest=JSON.parse(await readFile(root+'manifest.json'));
+  const entry=manifest.inputs.find(x=>x.lensId==='normal');
+  const policy=config.raster.observations[0].validity;
+  const mosaic=await loadScienceSurface(root,{path:entry.path,format:'isis3',grid:policy.grid,sampling:'bilinear'});
+  const dem=await loadScienceSurface(root,config.raster.scientific[0]);
+  // Independent NumPy untile and geographic lookup on the pinned original cubes.
+  // USGS Gazetteer centres: Elsinore, Arden, Inverness (east-positive longitude).
+  for(const [lon,lat,dn,km] of [[257.1,-24.8,486.825195,.446178168],[73.7,-29.1,1870.390747,-.233635366],[325.7,-66.9,1564.252319,1.164340019]]) {
+    assert.ok(Math.abs(mosaic.sample(lon,lat)-dn)<.001);
+    assert.ok(Math.abs(dem.sample(lon,lat)-km)<.000001);
   }
-  assert.equal(missing[30*1440+720],1,'Unobserved north stays missing');
-  assert.equal(missing[690*1440+720],0,'Observed south remains terrain');
+  for(const source of [mosaic,dem]) {
+    assert.equal(source.sample(180,60),null,'Unobserved north stays missing');
+    assert.notEqual(source.sample(180,-85),null,'Measured south remains valid');
+  }
+  const {rgb,missing}=await readObservation(root,entry,policy,360,180);
+  assert.equal(missing[30*360+180],1);
+  const value=mosaic.sample(325.5,-66.5),index=156*360+325;
+  assert.equal(missing[index],0);
+  assert.equal(rgb[index*3],Math.round(Math.max(0,Math.min(255,value/2400*255))));
 });

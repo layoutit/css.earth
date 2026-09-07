@@ -55,7 +55,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (lens.format !== 'geotiff' || !lens.grid || !Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) ||
+    if (!['geotiff', 'isis3'].includes(lens.format) || !lens.grid || !Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) ||
         lens.grid.width <= 0 || lens.grid.height <= 0 || !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
         (lens.sampling !== undefined && !['nearest', 'bilinear'].includes(lens.sampling)) ||
@@ -73,7 +73,7 @@ export function parseTerrestrialProfile(value) {
     const policy = observation.validity;
     if (!/^[a-z][a-z0-9-]*$/.test(observation.id) || observationIds.has(observation.id) ||
         (observation.monochromeBase && !observationIds.has(observation.monochromeBase)) ||
-        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(policy?.kind)) {
+        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome'].includes(policy?.kind)) {
       throw new TypeError('Invalid observation identity, validity policy, or fallback ordering.');
     }
     const byteImage = ['image-monochrome-no-data', 'image-rgb-no-data'].includes(policy.kind);
@@ -102,6 +102,11 @@ export function parseTerrestrialProfile(value) {
           policy.withholdLongitudeDegrees[0] < 0 || policy.withholdLongitudeDegrees[1] > 360 ||
           policy.withholdLongitudeDegrees[0] >= policy.withholdLongitudeDegrees[1])))) {
       throw new TypeError('Invalid observed channel or geographic withholding policy.');
+    }
+    if (policy.kind === 'isis3-float-monochrome' &&
+        (!policy.grid || !Array.isArray(policy.displayRange) || policy.displayRange.length !== 2 ||
+          !policy.displayRange.every(Number.isFinite) || !(policy.displayRange[0] < policy.displayRange[1]))) {
+      throw new TypeError('Invalid ISIS3 observation grid or display range.');
     }
     observationIds.add(observation.id);
   }
