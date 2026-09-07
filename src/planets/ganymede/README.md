@@ -8,7 +8,7 @@ source's synthesized-red sector retain observed monochrome. See `SOURCE.md`.
 node tools/objects/dist/operations.js acquire ganymede --refresh
 node tools/objects/dist/prepare-authored.js ganymede --write
 node --test tests/objects/unit/ganymede/*.test.mjs
-node tests/objects/browser/ganymede/smoke-browser.mjs http://localhost:4232
+pnpm test:browser http://localhost:4210 ganymede
 ```
 
 Prepared asset installation: `pnpm setup:assets --object=ganymede` after the

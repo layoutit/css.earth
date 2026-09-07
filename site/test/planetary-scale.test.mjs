@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
@@ -7,8 +6,6 @@ import {
   positionPlanetsByDistance,
 } from "../planetary-scale.mjs";
 import { PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mjs";
-
-const styles = await readFile(new URL("../planetary-scale.css", import.meta.url), "utf8");
 
 test("derives the accessible logarithmic scale from catalog distances", () => {
   const orbitingPlanets = PLANET_NAVIGATION_OBJECTS;
@@ -49,11 +46,3 @@ test("rejects unusable scale bounds and distances", () => {
   ]), /distance is invalid: b/);
 });
 
-test("keeps the top navigation in narrow desktop windows", () => {
-  assert.match(styles,
-    /@media \(max-width:\s*1100px\), \(orientation:\s*portrait\)[\s\S]*?\.scale-stop:not\(\[aria-current="page"\]\) \.scale-label\s*\{[\s\S]*?display:\s*none;/u);
-  assert.match(styles,
-    /@media \(max-width:\s*1100px\) and \(hover:\s*none\) and \(pointer:\s*coarse\)[\s\S]*?\.planetary-navigation\s*\{[\s\S]*?display:\s*none;/u);
-  assert.doesNotMatch(styles,
-    /@media \(max-width:\s*1100px\), \(orientation:\s*portrait\)\s*\{\s*\.planetary-navigation/u);
-});

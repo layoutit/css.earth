@@ -58,6 +58,6 @@ Focused checks:
 
 ```sh
 node --test tests/objects/unit/ceres/*.test.mjs
-node tests/objects/browser/ceres/smoke-browser.mjs http://127.0.0.1:4210
+pnpm test:browser http://localhost:4210 ceres
 node site/test/planet-browser-conformance.mjs http://127.0.0.1:4210 ceres
 ```

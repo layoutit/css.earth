@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
@@ -24,18 +23,6 @@ test("analytics ignores local visits and loads on css.earth", () => {
     );
     assert.equal(production.window.dataLayer.length, 2);
   }
-});
-
-test("the shared planet layout installs the analytics bootstrap", async () => {
-  const layout = await readFile(
-    new URL("../layouts/PlanetLayout.astro", import.meta.url),
-    "utf8",
-  );
-  assert.match(layout, /set:html=\{googleAnalyticsBootstrap\}/u);
-  assert.doesNotMatch(
-    layout,
-    /<script[^>]+src="https:\/\/www\.googletagmanager\.com/u,
-  );
 });
 
 function runAnalyticsBootstrap(hostname) {

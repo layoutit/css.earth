@@ -1,16 +1,15 @@
 import assert from "node:assert/strict";
-import { spawn } from "node:child_process";
 import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
-import { once } from "node:events";
 import { chromium } from "playwright";
-import { PREPARED_EARTH_SCENE, preparePagingDiagnostic, routePagingDiagnostic } from "../../unit/earth/prepared-fixture.mjs";
+import { PREPARED_EARTH_SCENE, runtimeDefinition, preparePagingDiagnostic, routePagingDiagnostic } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_CITY_PAGES } from "../../unit/earth/prepared-fixture.mjs";
 import { prepareWmsPage } from "../../../../tools/objects/geographic-pages/wms-page-geometry.mjs";
 import { prepareCityPageGeometry } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
 import { pageCoordinates, prepareLocationPoint, prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
 
 const root=new URL("../../../../",import.meta.url);
+const base=(process.argv.slice(2).find(argument=>/^https?:\/\//u.test(argument))??"http://127.0.0.1:4210").replace(/\/$/u,"");
 const output=new URL(`output/playwright/wms-direct-${Date.now()}/`,root);
 await mkdir(output,{recursive:true});
 const selected=process.argv.find(arg=>arg.startsWith("--sample="))?.slice(9);
@@ -39,25 +38,16 @@ for(const sample of samples){
     }
   }
   sample.camera=prepareLocationCamera(PREPARED_EARTH_SCENE,
-    prepareLocationPoint(PREPARED_EARTH_SCENE,sample.longitude,sample.latitude),1024);
+    prepareLocationPoint(PREPARED_EARTH_SCENE,sample.longitude,sample.latitude),1024,
+    {body:PREPARED_EARTH_SCENE.earth,camera:runtimeDefinition.camera});
 }
 const plan={...PREPARED_EARTH_CITY_PAGES,qualification:"Direct WMS diagnostic: four geographic windows; not global coverage.",
   roots:[...roots.values()], initialLayer:roots.values().next().value};
 const report={capturedAt:new Date().toISOString(),qualification:plan.qualification,
   planBytes:Buffer.byteLength(JSON.stringify(plan)),channel:"chrome",mode:"headless",samples,runs:[],responses:[]};
 await writeFile(new URL("plan.json",output),JSON.stringify(plan));
-const server=spawn(process.execPath,["node_modules/astro/bin/astro.mjs","dev","--host","127.0.0.1","--port","4298"],
-  {cwd:root,stdio:["ignore","pipe","pipe"]});
-let log="",base=null,browser;
-for(const stream of [server.stdout,server.stderr])stream.on("data",data=>{
-  log+=String(data);base??=log.match(/http:\/\/127\.0\.0\.1:\d+/)?.[0];
-});
+let browser;
 try{
-  const deadline=Date.now()+30000;
-  while(!base){
-    if(server.exitCode!==null||Date.now()>deadline)throw new Error(`Diagnostic server failed: ${log.slice(-2000)}`);
-    await new Promise(resolve=>setTimeout(resolve,100));
-  }
   report.base=base;
   browser=await chromium.launch({channel:"chrome",headless:true});
   report.browser=browser.version();
@@ -124,8 +114,6 @@ try{
   assert.ok(report.passed,"At least one direct API view failed to load completely; see report.json.");
 }finally{
   await browser?.close();
-  if(server.exitCode===null){server.kill("SIGTERM");await once(server,"exit");}
-  await writeFile(new URL("server.log",output),log);
   await writeFile(new URL("report.json",output),JSON.stringify(report,null,2));
   console.log(JSON.stringify({output:output.pathname,passed:report.passed??false}));
 }

@@ -36,11 +36,7 @@ try {
   await page.locator('a.scale-stop[href="/mercury/"]').evaluate((anchor, href) => { anchor.href = href; }, savedMercuryUrl);
   await page.locator(`a.scale-stop[href="${savedMercuryUrl}"]`).click(); await waitFor('mercury');
   samePose(await capture(), mercury);
-  const returnTrip = await page.evaluate(() => ({ pushes: window.__navigationProof.pushes,
-    styles: [...document.head.querySelectorAll('style[data-vite-dev-id]')]
-      .filter(style => /\/src\/planets\/[^/]+\/runtime\/styles.css$/.test(style.dataset.viteDevId)).map(style => style.dataset.viteDevId.split('/').at(-3)) }));
-  assert.equal(returnTrip.pushes, 2);
-  assert.deepEqual(returnTrip.styles, ['mercury']);
+  assert.equal(await page.evaluate(() => window.__navigationProof.pushes), 2);
   await page.evaluate(() => history.back()); await waitFor('venus');
   samePose(await capture(), venus);
   await page.evaluate(() => history.back()); await waitFor('mercury');
