@@ -12,6 +12,7 @@ import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mjs';
 import { prepareSolidRasters, prepareSolidMaterial } from './solid-raster.mjs';
 import { prepareSolidScene, prepareSolidPresentation } from './solid-scene.mjs';
+import { loadRadialTerrain, prepareRadialMaterials } from './radial-terrain.mjs';
 import { prepareAffineLayers } from './affine-preparation.mjs';
 
 export function parseTerrestrialProfile(value) {
@@ -45,9 +46,10 @@ export function parseTerrestrialProfile(value) {
     throw new TypeError('Surface WebP quality must be an integer from 1 to 100.');
   }
   for (const lens of value.raster.scientific ?? []) {
+    const meshGrid = lens.format === 'wavefront-obj-zip';
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
-          !grid || !Number.isSafeInteger(grid.width) || grid.width <= 0 || !Number.isSafeInteger(grid.height) || grid.height <= 0 ||
+          !grid || (!meshGrid && (!Number.isSafeInteger(grid.width) || grid.width <= 0 || !Number.isSafeInteger(grid.height) || grid.height <= 0)) ||
           ![undefined, 'equirectangular', 'polar-stereographic'].includes(grid.projection) ||
           (grid.projection === 'polar-stereographic' && ![-90, 90].includes(grid.poleLatitude)) ||
           (grid.latitudeRange && (grid.latitudeRange.length !== 2 || !grid.latitudeRange.every(Number.isFinite) ||
@@ -55,8 +57,9 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['geotiff', 'isis3'].includes(lens.format) || !lens.grid || !Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) ||
-        lens.grid.width <= 0 || lens.grid.height <= 0 || !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
+    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj-zip'].includes(lens.format) || !lens.grid ||
+        (!meshGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
+        !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
         (lens.sampling !== undefined && !['nearest', 'bilinear'].includes(lens.sampling)) ||
         (lens.valueTransform && (!Number.isFinite(lens.valueTransform.scale) || lens.valueTransform.scale <= 0 ||
@@ -66,6 +69,12 @@ export function parseTerrestrialProfile(value) {
           Math.abs(Math.hypot(...lens.relief.lightDirection) - 1) > 1e-12 || lens.relief.ambient < 0 || lens.relief.ambient >= 1 ||
           (lens.relief.heightToMeters !== undefined && (!Number.isFinite(lens.relief.heightToMeters) || lens.relief.heightToMeters <= 0))))) {
       throw new TypeError('Invalid scientific surface grid or relief profile.');
+    }
+    if (meshGrid && (typeof lens.grid.member !== 'string' || lens.grid.member.includes('..') || lens.grid.member.startsWith('/') ||
+        !(lens.grid.metersPerUnit > 0) || !Number.isSafeInteger(lens.grid.expectedVertices) || lens.grid.expectedVertices < 4 ||
+        !Number.isSafeInteger(lens.grid.expectedFaces) || lens.grid.expectedFaces < 4 ||
+        (lens.coverage && [lens.coverage.path,lens.coverage.member].some(p => typeof p !== 'string' || p.startsWith('/') || p.split('/').includes('..'))))) {
+      throw new TypeError('Invalid sourced mesh grid.');
     }
   }
   const observationIds = new Set();
@@ -180,8 +189,14 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const context = { sourceDirectory, publicDirectory, outputDirectory, config, source };
   if (config.kind === 'affine-photographic-atmosphere') return prepareAffineLayers({...context,prepareContent});
+  const radial = await loadRadialTerrain(context);
   const surfaces = await prepareSolidRasters(context);
   const raster = await prepareSolidMaterial({ ...context, surfaces });
+  if (radial) {
+    await prepareRadialMaterials({ ...context, radial, surfaces, sunDirection: requireBodyFixedSunDirection(config.namespace) });
+    await writeFile(resolve(outputDirectory, 'surfaces.json'), JSON.stringify({ objectId: config.namespace, surfaces }) + '\n');
+    await writeFile(resolve(outputDirectory, 'material.json'), JSON.stringify(raster) + '\n');
+  }
   const assets = { surfaces: Object.fromEntries(raster.surfaces.map(surface => [surface.id, {
     url: surface.surface.url, url2x: surface.surface.url,
     polesUrl: surface.polesUrl, polesUrl2x: surface.polesUrl,
@@ -189,7 +204,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(assets)}\n`);
   const content = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   const celestial = await prepareTerrestrialCelestial(context);
-  const scene = await prepareSolidScene({ ...context, celestial });
+  const scene = await prepareSolidScene({ ...context, celestial, radial });
   const definition = await prepareSolidPresentation({ ...context, scene, material: raster, controls: content.controls });
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(definition)}\n`);
   return { raster, celestial, scene, definition, content };

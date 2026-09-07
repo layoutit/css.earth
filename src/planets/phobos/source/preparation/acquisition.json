@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/phobos-mosaic.tif",
+      "url": "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+      "url": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    }
+  ]
+}

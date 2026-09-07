@@ -1,7 +1,7 @@
 import type { ObjectDescriptor } from './descriptor.js';
 import { parseObjectDescriptor } from './parse.js';
 
-export type ShapeKind = 'sphere' | 'ellipsoid';
+export type ShapeKind = 'sphere' | 'ellipsoid' | 'radial-terrain';
 export interface SourceReference { readonly id: string; readonly path: string; readonly sha256: string; }
 export interface ShapeRecipe { readonly kind: ShapeKind; readonly radiusKm: number; readonly polarRadiusKm?: number; readonly secondaryRadiusKm?: number; }
 export interface MaterialRecipe { readonly id: string; readonly source: string; readonly model: 'lit' | 'unlit' | 'emissive'; readonly frameBank?: string; }
@@ -152,10 +152,10 @@ export function parseAuthoredRecipe(value: unknown): AuthoredRecipe {
   if (input.schema !== 'cssearth-authored-object@1') throw new TypeError('Unsupported authored recipe schema.');
   const parsedSources = sources(input.sources), sourceIds = new Set(parsedSources.map(item => item.id));
   const shapeInput = record(input.shape, 'recipe.shape'); keys(shapeInput, ['kind', 'radiusKm', 'polarRadiusKm', 'secondaryRadiusKm'], 'recipe.shape');
-  if (shapeInput.kind !== 'sphere' && shapeInput.kind !== 'ellipsoid') throw new TypeError('recipe.shape.kind is not supported.');
+  if (shapeInput.kind !== 'sphere' && shapeInput.kind !== 'ellipsoid' && shapeInput.kind !== 'radial-terrain') throw new TypeError('recipe.shape.kind is not supported.');
   const radiusKm = positive(shapeInput.radiusKm, 'recipe.shape.radiusKm');
   const polarRadiusKm = shapeInput.polarRadiusKm === undefined ? undefined : positive(shapeInput.polarRadiusKm, 'recipe.shape.polarRadiusKm');
-  if ((shapeInput.kind === 'sphere' && polarRadiusKm !== undefined) || (shapeInput.kind === 'ellipsoid' && polarRadiusKm === undefined)) throw new TypeError('recipe.shape polar radius does not match its kind.');
+  if ((shapeInput.kind !== 'ellipsoid' && polarRadiusKm !== undefined) || (shapeInput.kind === 'ellipsoid' && polarRadiusKm === undefined)) throw new TypeError('recipe.shape polar radius does not match its kind.');
   const secondaryRadiusKm = shapeInput.secondaryRadiusKm === undefined ? undefined : positive(shapeInput.secondaryRadiusKm, 'recipe.shape.secondaryRadiusKm');
   if (secondaryRadiusKm !== undefined && (shapeInput.kind !== 'ellipsoid' || secondaryRadiusKm > radiusKm || polarRadiusKm! > secondaryRadiusKm)) throw new TypeError('Triaxial axes must satisfy a >= b >= c > 0.');
   const frameBanks = parseFrameBanks(input.frameBanks, sourceIds), frameIds = new Set(frameBanks?.map(item => item.id));
