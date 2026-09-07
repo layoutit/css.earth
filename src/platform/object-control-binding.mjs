@@ -11,7 +11,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const settingsRoot = document.querySelector(".planet-settings");
   const lensInputs = [...(lensRoot?.querySelectorAll('button[name="lens"]') ?? [])];
   const settingsInputs = [...(settingsRoot?.querySelectorAll("input[name], button[name]") ?? [])]
-    .filter(input => !["motion", "skyContrast"].includes(input.name));
+    .filter(input => !["motion", "skyContrast", "heliosphere"].includes(input.name));
   const legends = [...(lensRoot?.querySelectorAll("[data-lens-legend]") ?? [])]
     .filter(legend => legend.dataset?.lensLegend !== undefined);
   const lenses = new Map(lensInputs.map(input => [input.value, input]));

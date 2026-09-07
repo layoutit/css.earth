@@ -21,9 +21,13 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const loader = ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadPdsScalarGrid;
   const grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
   const scale = config.geometry.radius / (config.geometry.radiusKm * 1000);
-  const faces = profile.simplification
+  if (profile.primitive !== undefined && profile.primitive !== 'u') throw new TypeError('Unknown radial triangle primitive.');
+  const simplified = profile.simplification?.method === 'meshoptimizer'
+    ? await (await import('./radial-meshoptimizer.mjs')).simplifyRadialTerrain(grid.sample, profile, scale)
+    : null;
+  const faces = simplified?.faces ?? (profile.simplification
     ? await simplifyRadialShape(grid, profile, scale)
-    : radialTriangles(grid.sample, profile, scale);
+    : radialTriangles(grid.sample, profile, scale));
   const tileSize = profile.tileSize, columns = profile.atlasColumns;
   if (![tileSize, columns].every(value => Number.isInteger(value) && value > 0) || tileSize > 512 || columns > 64) throw new TypeError('Invalid radial texture layout.');
   const width = columns * tileSize, height = Math.ceil(faces.length / columns) * tileSize;
@@ -46,7 +50,7 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const leaves = plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
     style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster` }));
-  return { grid, faces, plans, leaves, width, height, tileSize };
+  return { grid, faces, plans, leaves, width, height, tileSize, ...(simplified ? { simplification: simplified.report } : {}) };
 }
 
 /** Simplify the released topology before UV sampling. Original positions are
@@ -70,20 +74,34 @@ export function radialTriangles(sample, profile, scale) {
   const { latitudeSegments: rows, longitudeSegments: columns, faceBudget } = profile;
   if (![rows, columns, faceBudget].every(n => Number.isInteger(n) && n >= 4) ||
       2 * columns * (rows - 1) > faceBudget || faceBudget > 2000 || !(scale > 0)) throw new TypeError('Invalid radial mesh budget.');
+  return sampleRadialTriangles(sample, rows, columns, scale);
+}
+
+export function sampleRadialTriangles(sample, rows, columns, scale, canonicalPoles = false) {
+  if (![rows, columns].every(n => Number.isInteger(n) && n >= 4) ||
+      2 * columns * (rows - 1) > 262144 || !Number.isFinite(scale) || !(scale > 0)) throw new TypeError('Invalid radial sampling budget.');
   const point = (row, col) => {
-    const latitude = -90 + row * 180 / rows, longitude = col * 360 / columns;
+    const pole = row === 0 || row === rows;
+    const latitude = -90 + row * 180 / rows, longitude = canonicalPoles && pole ? 0 : col * 360 / columns;
     const radius = sample(longitude, latitude);
     if (!(radius > 0)) throw new Error(`Terrain model has no radius at ${longitude}, ${latitude}; no geometry fallback is supplied.`);
+    if (canonicalPoles && pole) return [0, 0, (row === 0 ? -1 : 1) * radius * scale];
     const lat = latitude * Math.PI / 180, lon = longitude * Math.PI / 180;
     return [radius * scale * Math.cos(lat) * Math.cos(lon), radius * scale * Math.cos(lat) * Math.sin(lon), radius * scale * Math.sin(lat)];
   };
-  const triangles = [];
+  const faces = [];
+  function triangle(a, b, c) {
+    let normal = cross(sub(b, a), sub(c, a));
+    if (dot(normal, a) < 0) { [b, c] = [c, b]; normal = normal.map(x => -x); }
+    if (!(Math.hypot(...normal) > 1e-8)) throw new Error('Degenerate terrain face.');
+    faces.push({ vertices: [a, b, c], normal: unit(normal) });
+  }
   for (let row = 0; row < rows; row++) for (let col = 0; col < columns; col++) {
     const a = point(row, col), b = point(row, (col + 1) % columns), c = point(row + 1, (col + 1) % columns), d = point(row + 1, col);
-    if (row !== 0) triangles.push([a, b, c]);
-    if (row !== rows - 1) triangles.push([a, c, d]);
+    if (row !== 0) triangle(a, b, c);
+    if (row !== rows - 1) triangle(a, c, d);
   }
-  return surfaceTriangles(triangles);
+  return shadeRadialFaces(faces);
 }
 
 function surfaceTriangles(triangles) {
@@ -93,6 +111,10 @@ function surfaceTriangles(triangles) {
     if (!(Math.hypot(...normal) > 1e-8)) throw new Error('Degenerate terrain face.');
     return { vertices: [a, b, c], normal: unit(normal) };
   });
+  return shadeRadialFaces(faces);
+}
+
+export function shadeRadialFaces(faces) {
   // Area-weighted shared normals remove lighting discontinuities without
   // changing any source-derived position or smoothing the physical silhouette.
   const key = vertex => vertex.map(value => Math.round(value * 1e6)).join(',');
@@ -160,6 +182,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     source.assertBytes(entry, png);
   }
   await writeFile(resolve(outputDirectory, 'terrain.json'), JSON.stringify({ schema: 'cssearth-prepared-radial-terrain@1',
-    source: config.geometry.radialTerrain, faces: radial.faces, width, height }) + '\n');
+    source: config.geometry.radialTerrain, faces: radial.faces, width, height,
+    ...(radial.simplification ? { simplification: radial.simplification } : {}) }) + '\n');
   return surfaces;
 }

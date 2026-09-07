@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-measured-rotation@1",
+  "rightAscensionDegrees": 309.03312,
+  "declinationDegrees": 42.22623,
+  "primeMeridianDegrees": 74.6625,
+  "spinDegreesPerDay": 1617.3331237,
+  "referenceEpochJdTt": 2451545,
+  "coordinateSystem": "Dawn Claudia, DLR HAMO mapping solution",
+  "source": "https://dawngis.dlr.de/data/Vesta/dtm_vesta.php",
+  "qualification": "DLR mapping pole and rotation solution. Vesta surface products retain Dawn Claudia east longitudes; they are not relabeled as IAU Claudia Double Prime."
+}

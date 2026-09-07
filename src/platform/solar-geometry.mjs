@@ -58,6 +58,12 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.33468515337620997,
     -0.10272460687535767,
   ]),
+  // subsolar latitude -18.039°, longitude -126.751°
+  vesta: Object.freeze([
+    -0.5689269136961081,
+    -0.7618588109374191,
+    -0.3096664642308605,
+  ]),
   // subsolar latitude -5.392°, longitude 95.190°
   phobos: Object.freeze([
     -0.09005662019272576,
@@ -270,6 +276,12 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     0.22449798631782458,
     -0.3895579660959707,
     0.8932218342553055,
+  ]),
+  // pole tilt to the ecliptic 32.285°, Sun ecliptic latitude 7.124°
+  vesta: Object.freeze([
+    -0.5210918069960907,
+    -0.11726899203205934,
+    0.8454060043489955,
   ]),
   // pole tilt to the ecliptic 25.688°, Sun ecliptic latitude -0.678°
   phobos: Object.freeze([
@@ -485,6 +497,12 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     0.22773876707071045,
     -0.35966485761499517,
     0.9048625554026963,
+  ]),
+  // orbital inclination to the ecliptic 7.144°, obliquity to the orbit 27.437°
+  vesta: Object.freeze([
+    -0.4604634185467489,
+    -0.016885738822218554,
+    0.8875180629174088,
   ]),
   // orbital inclination to the ecliptic 25.720°, obliquity to the orbit 0.078°
   phobos: Object.freeze([
@@ -702,6 +720,12 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     -0.8984493486172954,
     -0.40172069439402847,
   ]),
+  // flight-path angle 4.883°
+  vesta: Object.freeze([
+    -0.6304944306721749,
+    0.7100200425014979,
+    -0.31360534456150674,
+  ]),
   // flight-path angle -0.067°
   phobos: Object.freeze([
     0.09187293936618643,
@@ -917,6 +941,12 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     -0.5503192943095455, 0.7057780815755774, 0.4461232720651784,
     -0.8271459122561303, -0.38792695550072054, -0.40662306505400775,
     -0.11392240406793457, -0.5927815590615478, 0.7972651435300198,
+  ]),
+  // pole RA 309.033°, Dec 42.226°, prime meridian W 285.287°
+  vesta: Object.freeze([
+    0.6130693093977287, 0.6377074164994287, 0.4663424415772343,
+    -0.3375308603907496, 0.7451257454789227, -0.5752047824108908,
+    -0.7142961151780628, 0.19523543317262892, 0.6720596591638451,
   ]),
   // pole RA 316.107°, Dec 53.430°, prime meridian W 116.490°
   phobos: Object.freeze([
@@ -1182,6 +1212,21 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 1.847464238954901,
     perihelionAu: 1.3812861009462531,
     aphelionAu: 1.6659699939658361,
+  }),
+  // a 2.3613 AU, e 0.090226, perihelion 2.1482 AU, aphelion 2.5743 AU
+  vesta: Object.freeze({
+    semiMajorAxisAu: 2.361275514314349,
+    eccentricity: 0.09022581855851258,
+    heliocentricDistanceAu: 2.4322074019742863,
+    perihelionDirection: Object.freeze([
+      0.3875072041381994,
+      -0.9033457814536908,
+      0.1838601802207754,
+    ]),
+    trueAnomalyDegrees: 114.25656581165211,
+    inclinationDegrees: 7.143879481315724,
+    perihelionAu: 2.148227498193164,
+    aphelionAu: 2.574323530435534,
   }),
   // a 0.000062790 AU, e 0.016656, perihelion 0.000061744 AU, aphelion 0.000063836 AU
   phobos: Object.freeze({

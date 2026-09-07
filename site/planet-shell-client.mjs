@@ -11,6 +11,8 @@ export function mountPlanetShell({
   windowTarget = window,
   motionEnabled = false,
   onMotionChange = () => {},
+  heliosphereEnabled = false,
+  onHeliosphereChange = () => {},
 }) {
   const drawer = documentTarget.querySelector(".planet-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
@@ -126,7 +128,9 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget, owner));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky }, owner));
+      { motionEnabled, onMotionChange, highContrastSky, heliosphereEnabled,
+        onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
+      }, owner));
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget,
       onInteraction() { settingsController.setMotionEnabled(false); },
     }));
@@ -223,13 +227,14 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
 function createSettingsController(
   documentTarget,
   windowTarget,
-  { motionEnabled, onMotionChange, highContrastSky = false },
+  { motionEnabled, onMotionChange, highContrastSky = false, heliosphereEnabled, onHeliosphereChange },
   lifetime,
 ) {
   if (typeof onMotionChange !== "function") {
     throw new TypeError("Planet shell motion change handler must be a function.");
   }
   const motion = documentTarget.querySelector(".planet-motion-setting");
+  const heliosphere = documentTarget.querySelector(".planet-heliosphere-setting");
   const skyContrast = documentTarget.querySelector(
     ".planet-sky-contrast-setting",
   );
@@ -237,6 +242,7 @@ function createSettingsController(
     '.planet-speed-setting[type="range"][name="speed"]',
   );
   if (!(motion instanceof windowTarget.HTMLInputElement) ||
+      !(heliosphere instanceof windowTarget.HTMLInputElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) ||
       !(skyContrast instanceof windowTarget.HTMLInputElement)) {
     throw new Error("Planet shell settings controls are incomplete.");
@@ -264,6 +270,8 @@ function createSettingsController(
     highContrastSky = skyContrast.checked;
     renderSkyContrast();
   }, { signal: events.signal });
+  heliosphere.checked = heliosphereEnabled === true;
+  heliosphere.addEventListener("change", () => onHeliosphereChange(heliosphere.checked), { signal: events.signal });
   renderMotion();
   renderSkyContrast();
 

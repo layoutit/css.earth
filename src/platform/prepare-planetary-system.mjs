@@ -78,7 +78,7 @@ export const SYSTEM_ORBIT_SEGMENTS = 120;
 export const GEOMETRIC_ALBEDO = Object.freeze({
   mercury: 0.142, venus: 0.689, earth: 0.434, mars: 0.170,
   jupiter: 0.538, saturn: 0.499, uranus: 0.488, neptune: 0.442,
-  pluto: 0.52, ceres: 0.09, eris: 0.96, haumea: 0.80, makemake: 0.81,
+  pluto: 0.52, ceres: 0.09, eris: 0.96, haumea: 0.80, makemake: 0.81, vesta: 0.4228,
 });
 
 // Illumination and brightness are as seen from the observer body, not from
@@ -113,6 +113,7 @@ export async function preparePlanetarySystem({
   kilometersPerUnit,
   bodies = PLANETARY_SYSTEM_BODIES,
   dwarfPlanets = DWARF_PLANET_BODIES,
+  asteroids = [],
   astronomy = null,
 }) {
   if (!/^[a-z][a-z0-9-]*$/u.test(bodyId ?? "") ||
@@ -143,7 +144,18 @@ export async function preparePlanetarySystem({
     DWARF_PLANET_IDS,
     dwarfPlanetElements,
     dwarfPlanetPositionKm,
+    ASTEROID_IDS,
+    asteroidElements,
+    asteroidPositionKm,
   } = astronomy ?? await loadAstronomyPackage();
+  if (!Array.isArray(asteroids) || asteroids.some(id => !ASTEROID_IDS.includes(id)) ||
+      new Set([...bodies, ...dwarfPlanets, ...asteroids]).size !== bodies.length + dwarfPlanets.length + asteroids.length) {
+    throw new TypeError('Unknown or duplicate asteroid in planetary system.');
+  }
+  // A selected heliocentric small body participates in the same system even
+  // when it is not one of the context objects requested by a different scene.
+  const smallBodies = [...asteroids];
+  if (ASTEROID_IDS.includes(bodyId) && !smallBodies.includes(bodyId)) smallBodies.push(bodyId);
   if (dwarfPlanets.some((id) => !DWARF_PLANET_IDS.includes(id))) {
     throw new TypeError("An unknown dwarf planet was requested.");
   }
@@ -158,7 +170,7 @@ export async function preparePlanetarySystem({
     return scale(toSun, -BODY_ORBITS[id].heliocentricDistanceAu);
   };
 
-  const satelliteObserver = ![...bodies, ...dwarfPlanets].includes(bodyId);
+  const satelliteObserver = ![...bodies, ...dwarfPlanets, ...smallBodies].includes(bodyId);
   const observerUnitMeters = satelliteObserver ? M_PER_KM / 10 : M_PER_KM;
   const parent = satelliteObserver ? BODY_ORBITS[bodyId].centerBodyId : null;
   if (satelliteObserver && ![...bodies, ...dwarfPlanets].includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
@@ -187,12 +199,12 @@ export async function preparePlanetarySystem({
   }
   // Dwarf planets: the package's own Keplerian position at the epoch (km,
   // ICRF, heliocentric), as one more km frame each under the Sun.
-  for (const id of dwarfPlanets) {
+  for (const id of [...dwarfPlanets, ...smallBodies]) {
     tree.add(fixedFrame(
       id,
       "sun",
       id === parent ? parentUnitMeters : M_PER_KM,
-      scale(dwarfPlanetPositionKm(id, SOLAR_GEOMETRY_EPOCH_JD_TT), 1 / ASTRONOMICAL_UNIT_KILOMETERS),
+      scale((smallBodies.includes(id) ? asteroidPositionKm : dwarfPlanetPositionKm)(id, SOLAR_GEOMETRY_EPOCH_JD_TT), 1 / ASTRONOMICAL_UNIT_KILOMETERS),
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));
   }
@@ -263,11 +275,11 @@ export async function preparePlanetarySystem({
     };
   };
   const orbitFacts = (id) => {
-    if (dwarfPlanets.includes(id)) {
-      const elements = dwarfPlanetElements(id);
+    if (dwarfPlanets.includes(id) || smallBodies.includes(id)) {
+      const elements = (smallBodies.includes(id) ? asteroidElements : dwarfPlanetElements)(id);
       const { normalIcrf, perihelionIcrf } = keplerOrientation(elements);
       return {
-        kind: "dwarf-planet",
+        kind: smallBodies.includes(id) ? 'asteroid' : 'dwarf-planet',
         semiMajorAxisAu: elements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
         eccentricity: elements.eccentricity,
         inclinationDegrees: elements.inclinationRad * 180 / Math.PI,
@@ -292,7 +304,7 @@ export async function preparePlanetarySystem({
       source: "vsop87a-state-vector-via-solar-geometry",
     };
   };
-  const others = [...bodies, ...dwarfPlanets].filter((id) => id !== bodyId).map((id) => {
+  const others = [...bodies, ...dwarfPlanets, ...smallBodies].filter((id) => id !== bodyId).map((id) => {
     const orbit = orbitFacts(id);
     const position = toScene(resolveKilometers(id));
     const { normal, perihelionDirection } = orbit;
