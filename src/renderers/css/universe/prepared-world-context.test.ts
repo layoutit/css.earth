@@ -438,7 +438,7 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
 });
 
 
-test('the Sun caption hides while crowded and returns on the same side as the view widens', () => {
+test('the Sun caption hides while crowded and returns below the marker as the view widens', () => {
   const root = mount(1), layer = mounted.get(root)!;
   const label = find(root, 'contextLabel', 'sun');
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -448,27 +448,27 @@ test('the Sun caption hides while crowded and returns on the same side as the vi
   expect(label.style.visibility).toBe('hidden');
   publish(4000);
   expect(label.style.visibility).toBe('');
-  expect(label.style.transform).toBe('translate(12px,-7px)');
+  expect(label.style.transform).toBe('translate(-9px,12px)');
   publish(1200);
   expect(label.style.visibility).toBe('hidden');
   publish(8000);
   expect(label.style.visibility).toBe('');
-  expect(label.style.transform).toBe('translate(12px,-7px)');
+  expect(label.style.transform).toBe('translate(-9px,12px)');
   layer.destroy();
 });
 
 test.each([
-  { reason: 'an orbit clears the visible stroke', x: 81.5, extent: 200, weight: 1, shown: true },
-  { reason: 'a visible orbit crosses the text', x: 50, extent: 200, weight: 1, shown: false },
-  { reason: 'the crossing orbit trail is faded away', x: 50, extent: 200, weight: .01, shown: true },
-  { reason: 'the crossing orbit is unresolved at this zoom', x: 50, extent: 65, weight: 1, shown: true },
-])('the fixed Sun caption respects visible space when $reason', ({ x, extent, weight, shown }) => {
+  { reason: 'an orbit clears the visible stroke', y: 81.5, extent: 200, weight: 1, shown: true },
+  { reason: 'a visible orbit crosses the text', y: 50, extent: 200, weight: 1, shown: false },
+  { reason: 'the crossing orbit trail is faded away', y: 50, extent: 200, weight: .01, shown: true },
+  { reason: 'the crossing orbit is unresolved at this zoom', y: 50, extent: 65, weight: 1, shown: true },
+])('the fixed Sun caption respects visible space when $reason', ({ y, extent, weight, shown }) => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
-  const source = plan(1), body = source.bodies[0], positionM = [-extent, extent, 0];
+  const source = plan(1), body = source.bodies[0], positionM = [-extent, -extent, 0];
   const context = parsePreparedWorldContext({ ...source, bodies: [{ ...body, positionM, orbit: { ...body.orbit,
-    verticesM: [positionM, [x, extent, 0], [x, -extent, 0], [-extent, -extent, 0],
-      positionM, [x, extent, 0], [x, -extent, 0], [-extent, -extent, 0]], trail: Array(8).fill(weight),
+    verticesM: [positionM, [-extent, y, 0], [extent, y, 0], [extent, -extent, 0],
+      positionM, [-extent, y, 0], [extent, y, 0], [extent, -extent, 0]], trail: Array(8).fill(weight),
   } }] });
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: { sun: sprite, mercury: sprite } });
@@ -479,7 +479,7 @@ test.each([
   const label = find(layer.root as unknown as FakeElement, 'contextLabel', 'sun');
   expect(label.style.visibility).toBe(shown ? '' : 'hidden');
   expect(label.style.pointerEvents).toBe(shown ? 'auto' : 'none');
-  if (shown) expect(label.style.transform).toBe('translate(12px,-7px)');
+  if (shown) expect(label.style.transform).toBe('translate(-9px,12px)');
   layer.destroy();
 });
 
@@ -596,7 +596,7 @@ test('one retained focus label and locator survive system retirement at their ph
   expect(label.style.visibility).toBe(''); expect(label.style.getPropertyValue('--context-label-alpha')).toBe('1');
   expect(locator.style.visibility).toBe(''); expect(locator.style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
   expect(locator.style.transform).toBe('translate(70px,-40px) translate(-50%,-50%)');
-  expect(label.style.transform).toBe('translate(82px,-47px)');
+  expect(label.style.transform).toBe('translate(52px,-28px)');
   expect(locator.dataset.objectNavigate).toBe('anchor');
   const selections: string[] = [];
   host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
@@ -662,7 +662,7 @@ test('a background star label inside the orbit footprint is excluded even outsid
   const backgroundText = { left: -10, top: -30, right: 10, bottom: -20 };
   expect(layer.labelExclusionRects().every(rect => !labelRectsOverlap(backgroundText, rect))).toBe(true);
   expect(layer.backgroundExclusionRects().some(rect => labelRectsOverlap(backgroundText, rect))).toBe(true);
-  expect(layer.inspect().find(body => body.id === 'sun')!.label.style.visibility).toBe('');
+  expect(layer.inspect().find(body => body.id === 'sun')!.label.style.visibility).toBe('hidden');
   // Close orbits clip the viewport; they must not claim the entire background.
   layer.publish({ ...camera, pose: { ...camera.pose, positionM: [0, 0, 50] } }, viewport);
   expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());
