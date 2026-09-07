@@ -24,6 +24,7 @@ import {
 import { validateMarkerPresentation } from "../src/navigation/marker-presentation.mjs";
 import { OBJECTS } from "../site/objects.mjs";
 import { optimizePreparedQ75Webp } from "./prepared-webp.mjs";
+import { loadAstronomyPackage } from "../src/platform/astronomy-package.mjs";
 import { authoredObject } from './authored-object.mjs';
 
 const markerTileSize = 16;
@@ -74,14 +75,17 @@ export async function prepareNavigation({
     const stagedOutput = resolve(staging, "assets");
     await mkdir(stagedOutput);
     const result = await renderNavigation({ projectRoot, outputRoot: stagedOutput, descriptors });
-    const presentations = Object.fromEntries(descriptors.map((descriptor, index) => [descriptor.planetId, { index, count: descriptors.length, presentation: descriptor.presentation }]));
+    const contextMarkers = await prepareContextMarkers({ projectRoot, outputRoot: stagedOutput, descriptors, planets });
+    const presentations = Object.fromEntries(descriptors.map((descriptor, index) => [descriptor.planetId, { index, count: descriptors.length, presentation: descriptor.presentation,
+      ...(contextMarkers[descriptor.planetId] ? { context: contextMarkers[descriptor.planetId] } : {}),
+    }]));
     const stagedPresentation = resolve(staging, "presentation.mjs");
     await writeFile(stagedPresentation, "// Generated from object-owned marker recipes. Do not edit.\nexport const PREPARED_NAVIGATION_MARKERS = Object.freeze(" + JSON.stringify(presentations) + ");\n");
     const changes = (await readdir(stagedOutput)).sort().map((filename) => ({
       source: resolve(stagedOutput, filename), target: resolve(outputRoot, filename),
     }));
     const generatedTargets = new Set(changes.map(({ target }) => target));
-    const obsolete = [...descriptors.map(({ planetId }) => `${planetId}.webp`),
+    const obsolete = [...descriptors.flatMap(({ planetId }) => [`${planetId}.webp`, `${planetId}-context.webp`]),
       "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp"];
     changes.push(...[...new Set(obsolete)].map((filename) => ({ target: resolve(outputRoot, filename) })).filter(({ target }) => !generatedTargets.has(target)));
     changes.push({ source: stagedPresentation, target: presentationPath });
@@ -145,6 +149,35 @@ export async function moveNavigationFile(source, target, io = { rename, copyFile
       throw failure;
     }
   }
+}
+
+// A moon's parent can occupy hundreds of pixels in the shared world view.
+// Derive the needed parents from the astronomy catalogue; UI icons stay tiny.
+export async function prepareContextMarkers({ projectRoot, outputRoot, descriptors, planets = PLANET_MARKER_PLANETS }) {
+  const { BODIES } = await loadAstronomyPackage();
+  const parents = new Set(planets.filter(({ classification }) => classification === "satellite")
+    .map(({ id }) => BODIES[id]?.parent).filter(Boolean));
+  const markers = {};
+  for (const descriptor of descriptors) {
+    if (!parents.has(descriptor.planetId)) continue;
+    const sourcePath = resolve(projectRoot, "src/planets", descriptor.planetId, "source", descriptor.source.path);
+    const bytes = await validateMarkerSourceBytes(descriptor.source, sourcePath);
+    let crop = sharp(bytes);
+    for (const operation of descriptor.operations) {
+      if (operation.type === "resize") break;
+      if (operation.type === "rotate") crop = crop.rotate();
+      if (operation.type === "trim") crop = crop.trim({ threshold: operation.threshold });
+      if (operation.type === "extract") crop = crop.extract({ left: operation.left, top: operation.top, width: operation.width, height: operation.height });
+    }
+    const { info } = await crop.raw().toBuffer({ resolveWithObject: true });
+    // Fixed canonical image, capped by the actual native crop, never the UI atlas.
+    const pixels = Math.min(1536, info.width, info.height);
+    const png = await renderMarker(descriptor, { sourcePath, tileSize: pixels });
+    const filename = `${descriptor.planetId}-context.webp`;
+    await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(outputRoot, filename));
+    markers[descriptor.planetId] = { url: `/navigation/${filename}`, pixels };
+  }
+  return markers;
 }
 
 async function renderNavigation({ projectRoot, outputRoot, descriptors }) {

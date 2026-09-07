@@ -31,7 +31,8 @@ test("prepared marker identity, atlas order, and presentation follow packages", 
   assert.deepEqual(Object.keys(PREPARED_NAVIGATION_MARKERS), descriptors.map(({ planetId }) => planetId));
   for (const [index, descriptor] of descriptors.entries()) {
     const marker = PREPARED_NAVIGATION_MARKERS[descriptor.planetId];
-    assert.deepEqual(marker, { index, count: descriptors.length, presentation: descriptor.presentation });
+    const { context: _context, ...atlasMarker } = marker;
+    assert.deepEqual(atlasMarker, { index, count: descriptors.length, presentation: descriptor.presentation });
     assert.ok(markerStyle(marker, { color: "#ffffff" }).style.includes(`--planet-marker-count:${descriptors.length}`));
   }
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.scale.ringExtra, 20);

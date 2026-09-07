@@ -50,7 +50,9 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
       const suffix = density === 2 ? '@2x' : '';
       await Promise.all([
         sharp(atlas.data, { raw: { width: atlas.width, height: atlas.height, channels: atlas.channels } })
-          .webp({ quality: 88, ...(atlas.channels === 4 ? { alphaQuality: 100 } : {}), smartSubsample: true })
+          // Chroma subsampling across transparent, warped face boundaries
+          // produces colored seams even when the geometry overlaps correctly.
+          .webp(atlas.channels === 4 ? { lossless: true } : { quality: 88, smartSubsample: true })
           .toFile(resolve(publicDirectory, `${plan.output}${suffix}.webp`)),
         sharp(poles, { raw: { width: config.polarTile * 4 * density, height: config.polarTile * density, channels: 4 } })
           .webp({ quality: 88, alphaQuality: 100, smartSubsample: true })
