@@ -9,11 +9,12 @@ const sourcePath = 'src/planets/sun/source/navigation/universe.json';
 test('prepared volume opacity preserves authored grading and validates bounded levels and ordered distances', async () => {
   const raw = JSON.parse(await readFile(sourcePath, 'utf8'));
   const source = parseWorldContextSource(raw), profile = source.volume.opacityProfile!;
-  assert.deepEqual(profile, { model: 'logarithmic-distance', nearOpacity: 0, fullOpacity: 1,
-    fadeStartDistanceM: 3.085677581491367e16, fullDistanceM: 3.085677581491367e19 });
+  assert.deepEqual(profile, raw.volume.opacityProfile);
+  assert.equal(profile.nearOpacity, 0); assert.equal(profile.fullOpacity, 1);
+  assert(profile.fadeStartDistanceM > source.system.hiddenDistanceM, 'NASA stays opaque throughout the prepared Solar System');
   const brightness = source.volume.brightnessProfile!;
-  assert.deepEqual(brightness, { model: 'logarithmic-distance', nearOpacity: .25, fullOpacity: 1,
-    fadeStartDistanceM: 3.085677581491367e19, fullDistanceM: 7.714193953728418e20 });
+  assert.deepEqual(brightness, raw.volume.brightnessProfile);
+  assert(profile.fullDistanceM < brightness.fadeStartDistanceM, 'the physical volume owns the view before exterior brightening');
   const prepared = prepareWorldContext({ ...source, bodies: [] }, {}, {});
   assert.deepEqual(prepared.volume.opacityProfile, profile);
   assert.deepEqual(prepared.volume.brightnessProfile, brightness);

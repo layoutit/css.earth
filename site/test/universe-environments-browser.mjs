@@ -5,10 +5,12 @@ import { chromium } from 'playwright';
 import { wheelWithReceipt } from './wheel-zoom-distance.mjs';
 import shell from '../../src/objects/heliosphere/prepared/shell.json' with { type: 'json' };
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
+import worldContext from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
 const output = resolve('.local/universe-shared-sky');
 const reportedView = '/mercury/?v=QMZBVmWEdTha6EHA0HFrNnyfwfqFzIA0Li5BQsczQAAAAL-57UJuUPUpP6TYXnEpHWy_4dF-IEqKvAABAAAAAAAAAAA';
-const parsecKm = 3.085677581491367e13;
+const opacityProfile = worldContext.volume.opacityProfile;
+const brightnessProfile = worldContext.volume.brightnessProfile;
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL ?? 'chrome', headless: true });
 const errors = [], snapshots = {};
@@ -20,6 +22,10 @@ try {
   await page.waitForFunction(() => window.__mercury?.ready && window.__cssEarth?.ready, null, { timeout: 30000 });
   const motion = page.locator('input[name="motion"]');
   if (await motion.isChecked()) await motion.uncheck({ force: true });
+  await page.evaluate(async () => {
+    const { OBJECTS } = await import('/site/objects.mjs');
+    window.__environmentFrame = OBJECTS.find(object => object.id === 'mercury').worldFrame;
+  });
   snapshots.initial = await read(page);
   assert.equal(Number(snapshots.initial.shell.shellOpacity), 0, 'shell is hidden inside the Solar System');
   assert.equal(snapshots.initial.shellFaces, shell.data.faces.length);
@@ -30,7 +36,7 @@ try {
   assert.equal(snapshots.initial.skyVisibility, 'visible');
   assert.equal(snapshots.initial.skyOpacity, 1, 'the nearby background is opaque');
   assert.equal(snapshots.initial.volumeOpacity, 0, 'the nearby view must not composite bright volume haze');
-  assert.equal(snapshots.initial.volumeBrightness, .25);
+  assert.equal(snapshots.initial.volumeBrightness, brightnessProfile.nearOpacity);
   await page.screenshot({ path: resolve(output, 'mercury-reported.png') });
   await page.evaluate(() => { window.__environmentNodes = [...document.querySelector('.prepared-universe').querySelectorAll('*')]; });
   await drag(page, 190, -95);
@@ -49,7 +55,11 @@ try {
   await page.screenshot({ path: resolve(output, 'heliosphere-rotated.png') });
   await scrollTo(page, shell.data.visibility.hiddenBeyondM * 1.01 / 1000);
   assert.equal(Number((await read(page)).shell.shellOpacity), 0, 'shell fades away beyond its prepared range');
-  for (const [name, distance, opacity] of [['nearStars', .1 * parsecKm, 0], ['transition', Math.sqrt(1000) * parsecKm, .5], ['distantStars', 1001 * parsecKm, 1]]) {
+  for (const [name, distance, opacity] of [
+    ['nearStars', opacityProfile.fadeStartDistanceM / 2000, 0],
+    ['transition', Math.sqrt(opacityProfile.fadeStartDistanceM * opacityProfile.fullDistanceM) / 1000, .5],
+    ['distantStars', opacityProfile.fullDistanceM * 1.01 / 1000, 1],
+  ]) {
     await scrollTo(page, distance);
     snapshots[name] = await read(page);
     assert.ok(Math.abs(snapshots[name].volumeOpacity - opacity) < 1e-6, `${name}: actual volume opacity follows prepared profile`);
@@ -57,10 +67,14 @@ try {
     assert.equal(snapshots[name].skyOpacity, 1, 'crossfade must keep the background opaque');
     await page.screenshot({ path: resolve(output, `${name}.png`) });
   }
+  await scrollTo(page, Math.max(opacityProfile.fullDistanceM * 2, brightnessProfile.fadeStartDistanceM) / 1000);
+  snapshots.translated = await read(page);
+  assertPhysicalTranslation(snapshots.distantStars, snapshots.translated);
+  await page.screenshot({ path: resolve(output, 'volume-translated.png') });
   await scrollTo(page, 1.2e18);
   await page.waitForTimeout(450);
   snapshots.galaxy = await read(page);
-  assert.equal(snapshots.galaxy.volumeBrightness, 1, 'accepted exterior exposure is preserved');
+  assert.equal(snapshots.galaxy.volumeBrightness, brightnessProfile.fullOpacity, 'accepted exterior exposure is preserved');
   await page.screenshot({ path: resolve(output, 'milky-way.png') });
   snapshots.rotationTiming = await drag(page, -260, 210);
   await page.waitForTimeout(450);
@@ -80,6 +94,8 @@ try {
   assert.equal(Number(snapshots.returned.shell.shellOpacity), 0);
   assert.equal(snapshots.returned.roots, 1);
   assert.equal(snapshots.returned.volumeOpacity, 0);
+  assert.ok([snapshots.initial, snapshots.transition, snapshots.distantStars, snapshots.returned]
+    .every((snapshot, index) => Math.abs(snapshot.volumeOpacity - [0, .5, 1, 0][index]) < 1e-6), 'native round trip traverses the complete prepared handoff');
   assert.equal(snapshots.returned.skyVisibility, 'visible');
   assert.equal(snapshots.returned.camera.pose.scene, snapshots.galaxyRotated.camera.pose.scene, 'return preserves shared observer orientation');
   await page.screenshot({ path: resolve(output, 'mercury-returned.png') });
@@ -134,6 +150,7 @@ async function read(page) {
     url: location.href,
     distanceKm: window.__mercury.camera.state().distanceKilometers,
     camera: window.__mercury.camera.state(),
+    world: window.__mercury.camera.captureWorldCamera(window.__environmentFrame),
     roots: document.querySelectorAll('.polycss-camera').length,
     shell: { ...document.querySelector('.prepared-surface-shell').dataset },
     shellFaces: document.querySelectorAll('[data-shell-face]').length,
@@ -149,6 +166,7 @@ async function read(page) {
       });
     }),
     volumeTransform: [...document.querySelectorAll('.css-volume-scene')].map(node => node.style.transform).join('|'),
+    volumeMatrices: [...document.querySelectorAll('.css-volume-scene')].map(node => Array.from(new DOMMatrix(node.style.transform).toFloat64Array())),
     volumeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
     volumeBrightness: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),
     skyFaces: document.querySelectorAll('[data-sky-face]').length,
@@ -157,4 +175,27 @@ async function read(page) {
     skyTransform: document.querySelector('.prepared-celestial-sky-scene').style.transform,
     preparedRequests: performance.getEntriesByType('resource').filter(entry => /\/(heliosphere|milky-way)\/prepared\//.test(entry.name)).length,
   }));
+}
+
+function assertPhysicalTranslation(before, after) {
+  for (const snapshot of [before, after]) {
+    assert.equal(snapshot.skyVisibility, 'hidden', 'physical travel check must be entirely volume-owned');
+    assert.equal(snapshot.volumeOpacity, 1);
+    assert.equal(snapshot.roots, 1);
+  }
+  const a = before.world.pose.orientationXyzw, b = after.world.pose.orientationXyzw;
+  const sign = a.reduce((sum, n, i) => sum + n * b[i], 0) < 0 ? -1 : 1;
+  assert.ok(a.every((n, i) => Math.abs(n - sign * b[i]) < 1e-8), 'native dolly preserves physical orientation');
+  const displacementM = Math.hypot(...after.world.pose.positionM.map((n, i) => n - before.world.pose.positionM[i]));
+  assert.ok(displacementM > 0, 'the physical observer must actually translate');
+  const expectedCssDisplacement = displacementM * 50 / volume.data.frame.metersPerUnit;
+  before.volumeMatrices.forEach((matrix, axis) => {
+    const translated = after.volumeMatrices[axis];
+    for (let i = 0; i < 12; i++) assert.ok(Math.abs(translated[i] - matrix[i]) < 1e-8, 'fixed orientation preserves volume rotation');
+    const actual = Math.hypot(...[12, 13, 14].map(i => translated[i] - matrix[i]));
+    // Chrome serializes CSS transforms to fewer digits than the physical pose.
+    assert.ok(Math.abs(actual - expectedCssDisplacement) < .02,
+      'volume translation must equal the actual observer displacement in the prepared physical scale');
+    assert.ok(actual > 1e-4, 'volume projection must change during travel, even with fixed orientation');
+  });
 }

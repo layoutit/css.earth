@@ -5,7 +5,7 @@ import { deflateSync } from 'node:zlib';
 import { decodeExrRgbHalf, halfToFloat } from './exr.js';
 import { parseSkyRecipe } from './config.js';
 import { loadSkySource } from './source.js';
-import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte } from './bake.js';
+import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels } from './bake.js';
 import { sha256 } from '../volume/source.js';
 import type { PreparedCssSky } from '../../renderers/css/sky/types.js';
 
@@ -61,6 +61,34 @@ test('linear filtering happens before the fixed display transfer and wraps right
   const source = { width: 4, height: 2, rgb16f }, rgb: [number, number, number] = [0, 0, 0];
   sampleLinearSky(source, 0, .5, rgb); assert.deepEqual(rgb, [.5, .5, .5]); assert.equal(displayByte(rgb[0], 1), 188);
   sampleLinearSky(source, 1, .5, rgb); assert.deepEqual(rgb, [.5, .5, .5]);
+});
+test('optional sky gain preserves legacy bytes and attenuates transferred RGB before quantization with opaque alpha', () => {
+  for (const linear of [-1, 0, .001, .0031308, .01, .25, .5, 1, 2]) for (const exposure of [.5, 1, 4.5]) {
+    const c = Math.max(0, Math.min(1, linear * exposure));
+    const legacy = Math.round(255 * (c <= .0031308 ? c * 12.92 : 1.055 * c ** (1 / 2.4) - .055));
+    assert.equal(displayByte(linear, exposure), legacy);
+    assert.equal(displayByte(linear, exposure, 1), legacy);
+  }
+  assert.equal(displayByte(.25, 1, .5), 68, 'gain precedes byte quantization; half of rounded 137 would be 69');
+  assert.equal(displayByte(1, 1, .5), 128, 'gain follows sRGB transfer; half linear radiance would be 188');
+  const rgb16f = Buffer.alloc(4 * 2 * 6);
+  for (let pixel = 0; pixel < 8; pixel++) [0x3400, 0x3800, 0x3c00].forEach((bits, channel) => rgb16f.writeUInt16LE(bits, pixel * 6 + channel * 2));
+  const source = { width: 4, height: 2, rgb16f }, bake = { faceSize: 2, exposure: 1, transfer: 'linear-to-srgb' as const, webpQuality: 100 };
+  for (const face of SKY_BASES) {
+    const legacy = skyFacePixels(source, face, bake);
+    assert.deepEqual(legacy, Buffer.from([137, 188, 255, 255, 137, 188, 255, 255, 137, 188, 255, 255, 137, 188, 255, 255]));
+    assert.deepEqual(skyFacePixels(source, face, { ...bake, displayGain: 1 }), legacy);
+    const attenuated = skyFacePixels(source, face, { ...bake, displayGain: .5 });
+    for (let pixel = 0; pixel < 4; pixel++) assert.deepEqual([...attenuated.subarray(pixel * 4, pixel * 4 + 4)], [68, 94, 128, 255]);
+  }
+});
+test('sky recipe display gain defaults to identity and rejects nonfinite or out-of-range values', async () => {
+  const raw = JSON.parse(await readFile('src/objects/milky-way/source/sky/recipe.json', 'utf8'));
+  const { displayGain: _gain, ...bake } = raw.bake;
+  assert.equal(parseSkyRecipe({ ...raw, bake }).bake.displayGain, 1);
+  for (const displayGain of [.01, .5, 1]) assert.equal(parseSkyRecipe({ ...raw, bake: { ...bake, displayGain } }).bake.displayGain, displayGain);
+  for (const displayGain of [0, -.01, 1.001, NaN, Infinity, -Infinity, null, '0.5'])
+    assert.throws(() => parseSkyRecipe({ ...raw, bake: { ...bake, displayGain } }), /sky display gain/i);
 });
 test('actual pinned NASA HALF source is unchanged and unsupported/missing recipes fail', async () => {
   const root = 'src/objects/milky-way/source/sky', raw: unknown = JSON.parse(await readFile(`${root}/recipe.json`, 'utf8')), recipe = parseSkyRecipe(raw);

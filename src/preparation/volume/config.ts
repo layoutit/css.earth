@@ -1,5 +1,7 @@
 /** Data-only emission/absorption recipe for a bounded scalar-field volume. */
 export type Vector3 = [number, number, number];
+/** Row-major transform of ordinary display RGB values during offline preparation. */
+export type DisplayColorMatrix = [number, number, number, number, number, number, number, number, number];
 export type Axis = 'x' | 'y' | 'z';
 export interface Bounds3 { min: Vector3; max: Vector3; }
 export interface VolumeImageEncoding { format: 'png' | 'webp'; quality?: number; }
@@ -15,7 +17,7 @@ export interface VolumeRecipe {
     acquisition?: { path: string; sha256: string }; };
   material: { emission: DensityChannel[]; absorption: DensityChannel[]; radialEmission?: RadialEmission;
     intensityScale: number; stepScale: number; exposureGain: number;
-    stepMetric?: 'source' | 'texture'; cylinderSupport?: { axis: Axis; radiusSquared: number }; };
+    displayColorMatrix?: DisplayColorMatrix; stepMetric?: 'source' | 'texture'; cylinderSupport?: { axis: Axis; radiusSquared: number }; };
   bake: { sliceCounts: Record<Axis, number>; unitsPerSourceUnit: number; imageWidth: number;
     samplesPerSlab: number; cropTransparent: boolean; opticalWeight: number; imageEncoding?: VolumeImageEncoding; };
   anchors: { id: string; referencePositionM: Vector3 }[];
@@ -59,6 +61,19 @@ function interval(value: unknown, at: string): [number, number] {
 }
 function color(value: unknown): Vector3 {
   const rgb = triple(value, 'color'); if (rgb.some(c => c < 0)) throw new TypeError('Color must be nonnegative.'); return rgb;
+}
+function displayColorMatrix(value: unknown): DisplayColorMatrix {
+  if (!Array.isArray(value) || value.length !== 9) throw new TypeError('displayColorMatrix must contain nine coefficients.');
+  const matrix = value.map((entry, index) => {
+    const coefficient = finite(entry, `displayColorMatrix coefficient ${index}`);
+    if (coefficient < 0) throw new TypeError('displayColorMatrix coefficients must be nonnegative.');
+    return coefficient;
+  }) as DisplayColorMatrix;
+  for (let row = 0; row < 3; row++) {
+    if (matrix[row * 3]! + matrix[row * 3 + 1]! + matrix[row * 3 + 2]! > 1)
+      throw new TypeError('Each displayColorMatrix row must sum to at most one.');
+  }
+  return matrix;
 }
 function channels(value: unknown, at: string): DensityChannel[] {
   if (!Array.isArray(value)) throw new TypeError(`${at} must be an array.`);
@@ -117,6 +132,7 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
     ...(acquisition ? { acquisition: { path: sourcePath(acquisition.path), sha256: digest(acquisition.sha256, 'acquisition digest') } } : {}) },
     material: { emission: channels(m.emission, 'emission'), absorption: channels(m.absorption, 'absorption'),
       ...(radialEmission ? { radialEmission } : {}), ...(cylinderSupport ? { cylinderSupport } : {}),
+      ...(m.displayColorMatrix === undefined ? {} : { displayColorMatrix: displayColorMatrix(m.displayColorMatrix) }),
       ...(m.stepMetric ? { stepMetric: m.stepMetric } : {}), intensityScale: positive(m.intensityScale, 'intensityScale'),
       stepScale: positive(m.stepScale, 'stepScale'), exposureGain: positive(m.exposureGain, 'exposureGain') },
     bake: { sliceCounts: { x: positive(counts.x, 'x count', true), y: positive(counts.y, 'y count', true), z: positive(counts.z, 'z count', true) },

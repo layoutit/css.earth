@@ -86,6 +86,34 @@ test('generic volume config validates spatial bounds and channel indices', async
   assert.throws(() => parseVolumeRecipe({ ...recipe, material: { ...recipe.material, absorption: [{ channel: 3, color: [1,1,1], strength: 1, decodedPower: 0 }] } }), /decodedPower/);
   assert.throws(() => parseVolumeRecipe({ ...recipe, bake: { ...recipe.bake, imageEncoding: { format: 'jpeg', quality: 90 } } }), /image encoding/);
   assert.throws(() => parseVolumeRecipe({ ...recipe, bake: { ...recipe.bake, imageEncoding: { format: 'webp', quality: 101 } } }), /quality/);
+  for (const matrix of [[1, 0], [1, 0, 0, 0, -1, 0, 0, 0, 1], [1, 0, 0, 0, 1, 0, 0, 0, Infinity], [1, .01, 0, 0, 1, 0, 0, 0, 1]])
+    assert.throws(() => parseVolumeRecipe({ ...recipe, material: { ...recipe.material, displayColorMatrix: matrix } }), /displayColorMatrix/);
+});
+
+test('offline display grading cross-mixes emitted RGB while preserving the original slab alpha and dark dust', async () => {
+  const sourceRecipe = await readRecipe();
+  const material = { ...sourceRecipe.material };
+  delete material.displayColorMatrix;
+  const recipe = { ...sourceRecipe, material: { ...material, exposureGain: 1 } };
+  const fixture = { width: 1, height: 1, depth: 1, encodedRgba: Buffer.from([64, 128, 192, 0]), recipe, provenance: {} };
+  const slabWidth = .25 / recipe.bake.sliceCounts.z;
+  const withMatrix = (matrix: number[]) => parseVolumeRecipe({ ...recipe, material: { ...recipe.material, displayColorMatrix: matrix } });
+  const original = bakeSlab(fixture, 'z', 0, slabWidth, 1, 1, undefined).rgba;
+  const identity = bakeSlab({ ...fixture, recipe: withMatrix([1, 0, 0, 0, 1, 0, 0, 0, 1]) }, 'z', 0, slabWidth, 1, 1, undefined).rgba;
+  assert.deepEqual(identity, original, 'the optional identity must retain every previously baked byte');
+
+  const mixed = bakeSlab({ ...fixture, recipe: withMatrix([0, 1, 0, 0, 0, 1, 1, 0, 0]) }, 'z', 0, slabWidth, 1, 1, undefined).rgba;
+  assert.deepEqual([...mixed], [original[1]!, original[2]!, original[0]!, original[3]!],
+    'the known row-major transform must permute premultiplied display channels before straight-alpha encoding');
+  const dimmed = bakeSlab({ ...fixture, recipe: withMatrix([0, .5, 0, 0, 0, .5, .5, 0, 0]) }, 'z', 0, slabWidth, 1, 1, undefined).rgba;
+  assert.equal(dimmed[3], original[3], 'grading must retain alpha derived from the original emission and dust');
+  assert(Math.max(...dimmed.subarray(0, 3)) < Math.max(...mixed.subarray(0, 3)));
+
+  const dust = { ...fixture, encodedRgba: Buffer.from([0, 0, 0, 192]) };
+  const dark = bakeSlab(dust, 'z', 0, slabWidth, 1, 1, undefined).rgba;
+  const gradedDark = bakeSlab({ ...dust, recipe: withMatrix([.2, .3, .5, .5, .5, 0, 0, .25, .75]) }, 'z', 0, slabWidth, 1, 1, undefined).rgba;
+  assert.deepEqual([...dark.subarray(0, 3)], [0, 0, 0]);
+  assert.deepEqual(gradedDark, dark, 'a linear display matrix must neither emit from black nor alter dust opacity');
 });
 
 test('compressed volume rasters preserve every original alpha value and crop coordinate', async () => {

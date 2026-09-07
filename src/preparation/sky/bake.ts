@@ -41,22 +41,28 @@ export function sampleLinearSky(source: LinearHalfImage, u: number, v: number, o
     out[c] = (a + ax * (b - a)) * (1 - ay) + (d + ax * (e - d)) * ay;
   }
 }
-export function displayByte(linear: number, exposure: number): number {
+export function displayByte(linear: number, exposure: number, displayGain = 1): number {
   const c = Math.max(0, Math.min(1, linear * exposure));
-  return Math.round(255 * (c <= 0.0031308 ? c * 12.92 : 1.055 * c ** (1 / 2.4) - 0.055));
+  // Display attenuation follows the original transfer, equally in each RGB channel.
+  const srgb = c === 1 ? 1 : c <= 0.0031308 ? c * 12.92 : 1.055 * c ** (1 / 2.4) - 0.055;
+  return Math.round(255 * displayGain * srgb);
+}
+export function skyFacePixels(source: LinearHalfImage, basis: SkyBasis, bake: SkyRecipe['bake']): Buffer {
+  const size = bake.faceSize, rgba = Buffer.alloc(size * size * 4, 255), rgb: Vector3 = [0, 0, 0];
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const ray = skyRay(basis, 2 * (x + 0.5) / size - 1, 1 - 2 * (y + 0.5) / size), [u, v] = skyUv(ray);
+    sampleLinearSky(source, u, v, rgb);
+    for (let c = 0; c < 3; c++) rgba[(y * size + x) * 4 + c] = displayByte(rgb[c]!, bake.exposure, bake.displayGain);
+  }
+  return rgba;
 }
 export async function prepareSkyFaces(options: { sourceDirectory: string; outputDirectory: string; recipe: SkyRecipe }): Promise<BakedSky> {
   const { sourceDirectory, outputDirectory, recipe } = options, source = await loadSkySource(sourceDirectory, recipe);
   const provenance: unknown = JSON.parse((await verifiedBytes(sourceDirectory, recipe.provenance)).toString('utf8'));
-  const size = recipe.bake.faceSize, faces: BakedSkyFace[] = [], rgb: Vector3 = [0, 0, 0];
+  const size = recipe.bake.faceSize, faces: BakedSkyFace[] = [];
   await mkdir(resolve(outputDirectory, 'sky'), { recursive: true });
   for (const basis of SKY_BASES) {
-    const rgba = Buffer.alloc(size * size * 4, 255);
-    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
-      const ray = skyRay(basis, 2 * (x + 0.5) / size - 1, 1 - 2 * (y + 0.5) / size), [u, v] = skyUv(ray);
-      sampleLinearSky(source, u, v, rgb);
-      for (let c = 0; c < 3; c++) rgba[(y * size + x) * 4 + c] = displayByte(rgb[c]!, recipe.bake.exposure);
-    }
+    const rgba = skyFacePixels(source, basis, recipe.bake);
     const bytes = await sharp(rgba, { raw: { width: size, height: size, channels: 4 } }).webp({ quality: recipe.bake.webpQuality, alphaQuality: 100, effort: 5, smartSubsample: true }).toBuffer();
     const texturePath = `sky/${basis.id}.webp`; await writeFile(resolve(outputDirectory, texturePath), bytes);
     const corners = [[-1, 1], [1, 1], [1, -1], [-1, -1]] as const;
