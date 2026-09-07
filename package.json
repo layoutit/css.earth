@@ -12,9 +12,9 @@
     "publish:runtime-assets": "node tools/publish-runtime-assets.mjs",
     "dev": "astro dev --host 127.0.0.1 --port 4210",
     "lab:nebula": "vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort",
-    "lab:nebula:extract": "node --experimental-strip-types labs/nebula/run.ts extract",
-    "test:lab:nebula": "node --experimental-strip-types labs/nebula/run.ts test",
-    "lab:nebula:particles": "node --experimental-strip-types labs/nebula/run.ts prepare-particles",
+    "lab:nebula:extract": "node --experimental-strip-types labs/nebula/src/run.ts extract",
+    "test:lab:nebula": "node --experimental-strip-types labs/nebula/src/run.ts test",
+    "lab:nebula:particles": "node --experimental-strip-types labs/nebula/src/run.ts prepare-particles",
     "postinstall": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:object-json",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
@@ -84,8 +84,8 @@
     "prepare:social": "node tools/prepare-social-images.mjs",
     "prepare:galaxy-catalog": "node tools/objects/dist/prepare-galaxy-catalog.js src/objects/local-group",
     "prepare:image-layers": "node tools/objects/dist/prepare-image-layers.js",
-    "lab:nebula:images": "node --experimental-strip-types labs/nebula/run.ts acquire-images labs/nebula/sources/reference-images.json",
-    "lab:nebula:master": "node --experimental-strip-types labs/nebula/run.ts prepare-master"
+    "lab:nebula:images": "node --experimental-strip-types labs/nebula/src/run.ts acquire-images labs/nebula/sources/reference-images.json",
+    "lab:nebula:master": "node --experimental-strip-types labs/nebula/src/run.ts prepare-master"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",
