@@ -1,4 +1,6 @@
 import haumeaDescriptor from "../src/planets/haumea/object.json" with { type: "json" };
+import makemakeDescriptor from "../src/planets/makemake/object.json" with { type: "json" };
+import erisDescriptor from "../src/planets/eris/object.json" with { type: "json" };
 import iapetusDescriptor from "../src/planets/iapetus/object.json" with { type: "json" };
 import rheaDescriptor from "../src/planets/rhea/object.json" with { type: "json" };
 import marsDescriptor from "../src/planets/mars/object.json" with { type: "json" };
@@ -145,6 +147,16 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(haumeaDescriptor);
     }, haumeaDescriptor.properties.worldFrame),
+  object("makemake", "Makemake", "dwarf-planet", "#bfa48b", 45.8,
+    "Explore Makemake with an illustrative NASA surface texture and its distant orbit around the Sun.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(makemakeDescriptor);
+    }, makemakeDescriptor.properties.worldFrame),
+  object("eris", "Eris", "dwarf-planet", "#ddd6cf", 67.78,
+    "Explore Eris with an illustrative NASA texture on its occultation-constrained spherical shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(erisDescriptor);
+    }, erisDescriptor.properties.worldFrame),
 ]);
 
 export function requireObject(id) {

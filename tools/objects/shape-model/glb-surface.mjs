@@ -12,7 +12,7 @@ export async function prepareGlbSurface(path, width, height) {
   const jsonSize = file.readUInt32LE(12), gltf = JSON.parse(file.subarray(20, 20 + jsonSize).toString());
   const binary = file.subarray(28 + jsonSize);
   if (gltf.meshes.length !== 1 || gltf.meshes[0].primitives.length !== 1 || gltf.nodes.length !== 1 ||
-      ['matrix', 'translation', 'rotation', 'scale'].some(k => gltf.nodes[0][k])) throw new TypeError('Surface reprojection requires a single untransformed ellipsoid mesh.');
+      ['matrix', 'translation', 'rotation', 'scale'].some(k => gltf.nodes[0][k])) throw new TypeError('Surface reprojection requires a single untransformed surface mesh.');
   const primitive = gltf.meshes[0].primitives[0];
   if ((primitive.mode ?? 4) !== 4) throw new TypeError('Surface model must contain triangles.');
   function accessor(index) {
@@ -26,9 +26,13 @@ export async function prepareGlbSurface(path, width, height) {
     }));
   }
   const positions = accessor(primitive.attributes.POSITION), uv = accessor(primitive.attributes.TEXCOORD_0), indices = accessor(primitive.indices).flat();
-  const axes = [0, 1, 2].map(i => Math.max(...positions.map(p => Math.abs(p[i]))));
+  const axes = fitEllipsoidAxes(positions);
   const points = positions.map(p => p.map((v, i) => v / axes[i]));
-  if (points.some(p => Math.abs(Math.hypot(...p) - 1) > .001)) throw new TypeError('GLB surface must be an ellipsoid centered at its origin.');
+  // Artist meshes can deviate slightly from a true ellipsoid. Keep their exact
+  // triangles for UV intersections; the output shape comes from measured recipe
+  // dimensions. Reject meshes outside this bounded radial approximation.
+  const sourceRadialResidual = Math.max(...points.map(p => Math.abs(Math.hypot(...p) - 1)));
+  if (sourceRadialResidual > .01) throw new TypeError('GLB surface must be centered and within 1% of an axis-aligned ellipsoid.');
   const texture = gltf.materials[primitive.material].pbrMetallicRoughness.baseColorTexture;
   if ((texture.texCoord ?? 0) !== 0 || texture.extensions) throw new TypeError('Unsupported base-color UV transform.');
   const image = gltf.images[gltf.textures[texture.index].source], view = gltf.bufferViews[image.bufferView];
@@ -47,15 +51,30 @@ export async function prepareGlbSurface(path, width, height) {
     if (u < -1e-7 || v < -1e-7 || u + v > 1 + 1e-7 || distance <= 0) return null;
     return t.uv[0].map((value, i) => value * (1 - u - v) + t.uv[1][i] * u + t.uv[2][i] * v);
   }
-  // Bucket triangles by latitude/longitude. Polar vertices have no longitude;
-  // sample the bucket corners and center once, never search the full mesh per texel.
-  const columns = 64, rows = 32, buckets = Array.from({ length: columns * rows }, () => new Set());
+  // A spherical cap enclosing a triangle also encloses its radial projection.
+  // Conservatively cover that cap's latitude/longitude bounds, including poles
+  // and the wrap seam. Sampling a few directions misses small source triangles.
+  const columns = 64, rows = 32, buckets = Array.from({ length: columns * rows }, () => []);
   const direction = (u, v) => { const lat = (.5 - v) * Math.PI, lon = u * 2 * Math.PI; return [Math.cos(lat) * Math.cos(lon), Math.cos(lat) * Math.sin(lon), Math.sin(lat)]; };
-  for (let y = 0; y < rows; y++) for (let x = 0; x < columns; x++) {
-    const bucket = buckets[y * columns + x];
-    for (const dy of [.00001, .5, .99999]) for (const dx of [.00001, .5, .99999]) {
-      const d = direction((x + dx) / columns, (y + dy) / rows);
-      for (let i = 0; i < triangles.length; i++) if (intersect(d, triangles[i])) bucket.add(i);
+  const halfPi = Math.PI / 2, tau = Math.PI * 2, epsilon = 1e-7;
+  const unit = p => { const length = Math.hypot(...p); return p.map(value => value / length); };
+  for (const [index, triangle] of triangles.entries()) {
+    if (Math.hypot(...triangle.normal) < 1e-14) continue;
+    const vertices = [triangle.p, triangle.p.map((v, i) => v + triangle.e1[i]), triangle.p.map((v, i) => v + triangle.e2[i])].map(unit);
+    const center = unit([0, 1, 2].map(i => vertices.reduce((sum, vertex) => sum + vertex[i], 0)));
+    const radius = Math.max(...vertices.map(vertex => Math.acos(Math.max(-1, Math.min(1, dot(center, vertex)))))) + epsilon;
+    if (!Number.isFinite(radius) || radius >= halfPi) throw new TypeError('Surface triangles must fit within a hemisphere.');
+    const latitude = Math.asin(Math.max(-1, Math.min(1, center[2]))), longitude = Math.atan2(center[1], center[0]);
+    const north = Math.min(halfPi, latitude + radius), south = Math.max(-halfPi, latitude - radius);
+    const firstRow = Math.max(0, Math.floor((.5 - north / Math.PI) * rows));
+    const lastRow = Math.min(rows - 1, Math.floor((.5 - south / Math.PI) * rows));
+    const longitudeRadius = north >= halfPi || south <= -halfPi
+      ? Math.PI : Math.asin(Math.min(1, Math.sin(radius) / Math.cos(latitude))) + epsilon;
+    for (let x = 0; x < columns; x++) {
+      const bucketCenter = (x + .5) / columns * tau;
+      const difference = Math.abs(Math.atan2(Math.sin(bucketCenter - longitude), Math.cos(bucketCenter - longitude)));
+      if (difference > longitudeRadius + Math.PI / columns) continue;
+      for (let y = firstRow; y <= lastRow; y++) buckets[y * columns + x].push(index);
     }
   }
   const output = Buffer.alloc(width * height * 4);
@@ -73,5 +92,35 @@ export async function prepareGlbSurface(path, width, height) {
       (data[(y0 * info.width + x0) * 4 + c] * (1 - px + x0) + data[(y0 * info.width + x1) * 4 + c] * (px - x0)) * (1 - py + y0) +
       (data[(y1 * info.width + x0) * 4 + c] * (1 - px + x0) + data[(y1 * info.width + x1) * 4 + c] * (px - x0)) * (py - y0));
   }
-  return { pixels: output, sourceAxes: axes, sourceImage: { name: image.name, width: info.width, height: info.height }, sourceTriangles: triangles.length };
+  return { pixels: output, sourceAxes: axes, sourceRadialResidual, sourceImage: { name: image.name, width: info.width, height: info.height }, sourceTriangles: triangles.length };
+}
+
+/** Fit centered, axis-aligned ellipsoid radii from all vertices, not sampled extrema. */
+function fitEllipsoidAxes(positions) {
+  const scales = [0, 1, 2].map(axis => positions.reduce((maximum, p) => Math.max(maximum, Math.abs(p[axis])), 0));
+  if (scales.some(value => !Number.isFinite(value) || value <= 0)) throw new TypeError('Surface model has invalid dimensions.');
+  const matrix = Array.from({ length: 3 }, () => [0, 0, 0, 0]);
+  for (const p of positions) {
+    const squared = p.map((value, axis) => (value / scales[axis]) ** 2);
+    for (let row = 0; row < 3; row++) {
+      for (let column = 0; column < 3; column++) matrix[row][column] += squared[row] * squared[column];
+      matrix[row][3] += squared[row];
+    }
+  }
+  for (let column = 0; column < 3; column++) {
+    let pivot = column;
+    for (let row = column + 1; row < 3; row++) if (Math.abs(matrix[row][column]) > Math.abs(matrix[pivot][column])) pivot = row;
+    [matrix[column], matrix[pivot]] = [matrix[pivot], matrix[column]];
+    const divisor = matrix[column][column];
+    if (Math.abs(divisor) < 1e-10) throw new TypeError('Surface vertices do not constrain an ellipsoid.');
+    for (let index = column; index < 4; index++) matrix[column][index] /= divisor;
+    for (let row = 0; row < 3; row++) {
+      if (row === column) continue;
+      const factor = matrix[row][column];
+      for (let index = column; index < 4; index++) matrix[row][index] -= factor * matrix[column][index];
+    }
+  }
+  const axes = scales.map((scale, axis) => scale / Math.sqrt(matrix[axis][3]));
+  if (axes.some(value => !Number.isFinite(value) || value <= 0)) throw new TypeError('Surface model is not an axis-aligned ellipsoid.');
+  return axes;
 }

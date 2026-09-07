@@ -1,14 +1,15 @@
 import sharp from 'sharp';
+import { lambertAttenuationAtlas } from '../terrestrial-layers/solid-raster.mjs';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mjs';
 import { prepareGlbSurface } from './glb-surface.mjs';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mjs';
 
-/** Preserve the illustrative base color under even flood illumination. */
+/** Preserve the illustrative base color; view-dependent lighting is a separate prepared layer. */
 export async function prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory }) {
   const { width, height, latitudeSegments, longitudeSegments, poleSize } = config.mesh;
-  const { pixels } = await prepareGlbSurface(resolve(sourceDirectory, config.surfaceModel), width, height);
+  const { pixels, ...source } = await prepareGlbSurface(resolve(sourceDirectory, config.surfaceModel), width, height);
   const emit = async (name, data, w, h) => {
     const bytes = await sharp(data, { raw: { width: w, height: h, channels: 4 } }).webp({ lossless: true, effort: 4 }).toBuffer();
     await writeFile(resolve(publicDirectory, name), bytes);
@@ -18,10 +19,10 @@ export async function prepareModelRasters({ config, axes, publicDirectory, publi
   const packed = packProjectiveSurfaceRaster(projected, { width, height, bandCount: latitudeSegments, gutter: height / latitudeSegments / 4 });
   const poles = prepareSolidBodyPoleRaster(pixels, { width, height, tileSize: poleSize,
     radius: config.displayRadius, polarRadius: config.displayRadius * axes[2] / axes[0], latitudeSegments });
-  return {
+  return { source, textures: {
     surface: await emit('surface.webp', packed.data, packed.packedWidth, packed.packedHeight),
     poles: await emit('poles.webp', poles, poleSize * 2, poleSize),
-  };
+  } };
 }
 
 export async function prepareRingRaster({ config, publicDirectory, publicBase }) {
@@ -42,4 +43,16 @@ export async function prepareModelMarker(axes) {
     pixels.set([value, value, value, 255], (y * size + x) * 4);
   }
   return sharp(pixels, { raw: { width: size, height: size, channels: 4 } }).webp({ lossless: true }).toBuffer();
+}
+
+/** Same full-phase curvature as terrestrial bodies, with no directional shadow bank. */
+export async function prepareSphereLighting({ publicDirectory, publicBase }) {
+  const size = 512;
+  const atlas = lambertAttenuationAtlas({ frameSize: size, columns: 2, frameCount: 2,
+    terminatorWidth: .1, directionalAmbient: .05, fullPhaseAmbient: .35,
+    fullPhaseDiffuse: .65, maximumOpacity: .95 });
+  await sharp(atlas.pixels, { raw: { width: atlas.width, height: atlas.height, channels: 4 } })
+    .extract({ left: size, top: 0, width: size, height: size })
+    .webp({ lossless: true }).toFile(resolve(publicDirectory, 'lighting.webp'));
+  return publicBase + 'lighting.webp';
 }
