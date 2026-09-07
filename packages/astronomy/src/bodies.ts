@@ -34,7 +34,8 @@ export interface BodyData {
 export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
 /** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
-export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId
+export type AsteroidId = 'vesta'
+export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId
 
 export const PLANET_IDS: readonly PlanetId[] = [
   'mercury',
@@ -48,6 +49,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 ]
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
+export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta']
 
 const body = (
   id: BodyId,
@@ -60,6 +62,8 @@ const body = (
 
 export const BODIES: Record<BodyId, BodyData> = {
   sun: body('sun', 'Sun', '10', 695700, 132712440041.93938, null),
+  // JPL Horizons physical block, solution JPL#36 (2021-Apr-13), retrieved 2026-09-07.
+  vesta: body('vesta', 'Vesta', '4;', 261.385, 17.28828, 'sun'),
 
   mercury: body('mercury', 'Mercury', '199', 2439.4, 22031.86855, 'sun'),
   venus: body('venus', 'Venus', '299', 6051.84, 324858.592, 'sun'),

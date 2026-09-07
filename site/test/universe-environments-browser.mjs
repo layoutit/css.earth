@@ -48,6 +48,10 @@ try {
   await page.screenshot({ path: resolve(output, 'near-rotated.png') });
   await page.mouse.move(1010, 460);
   await scrollTo(page, 800 * 149597870.7);
+  assert.equal(Number((await read(page)).shell.shellOpacity), 0, 'heliosphere stays off at shell distance by default');
+  await page.locator('.planet-settings-action').click();
+  await page.locator('.planet-settings label').filter({ hasText: 'Heliosphere' }).click();
+  await page.locator('.planet-settings-action').click();
   snapshots.heliosphere = await read(page);
   assert.equal(Number(snapshots.heliosphere.shell.shellOpacity), 1);
   assert.ok(Number(snapshots.heliosphere.shell.shellVisibleFaces) > 0);
@@ -56,6 +60,11 @@ try {
   snapshots.heliosphereRotated = await read(page);
   assert.notEqual(snapshots.heliosphereRotated.shellTransform, snapshots.heliosphere.shellTransform);
   await page.screenshot({ path: resolve(output, 'heliosphere-rotated.png') });
+  await page.locator('.planet-settings-action').click();
+  await page.locator('.planet-settings label').filter({ hasText: 'Heliosphere' }).click();
+  assert.equal(Number((await read(page)).shell.shellOpacity), 0, 'disabling the shell updates a stationary camera');
+  await page.locator('.planet-settings label').filter({ hasText: 'Heliosphere' }).click();
+  await page.locator('.planet-settings-action').click();
   await scrollTo(page, shell.data.visibility.hiddenBeyondM * 1.01 / 1000);
   assert.equal(Number((await read(page)).shell.shellOpacity), 0, 'shell fades away beyond its prepared range');
   for (const [name, distance, opacity] of [
