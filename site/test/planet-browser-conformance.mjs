@@ -182,8 +182,10 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden, motion
       `${planet.id}: readiness must apply the latest shared Motion and visibility`);
     assert.equal(await page.locator('input[name="motion"]').isChecked(), motionRequested,
       `${planet.id}: visibility changes must preserve Motion intent`);
+    // Motion permission owns the prepared object; context hover/fade transitions
+    // can run independently and are not planetary playback.
     const animationStates = await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).map(({ playState }) => playState));
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).map(({ playState }) => playState));
     assert.ok(expectedPlaying
       ? animationStates.length === 0 || animationStates.includes("running")
       : animationStates.every((state) => state === "paused"),
@@ -561,15 +563,15 @@ async function proveDesktop(browser, planet, profile) {
     await exerciseRetainedInteractions(page, planet, profile);
 
     const runningBeforePause = await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).filter(({ playState }) => playState === "running").length);
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).filter(({ playState }) => playState === "running").length);
     await setDocumentVisibility(page, true);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).every(
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).every(
         ({ playState }) => playState === "paused",
       )), true, `${planet.id}: pause must stop every scene animation`);
     await setDocumentVisibility(page, false);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).filter(({ playState }) => playState === "running").length),
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).filter(({ playState }) => playState === "running").length),
       runningBeforePause, `${planet.id}: resume must restore the previously running animations`);
 
     const retainedProof = await finishRetainedProbe(
@@ -722,7 +724,7 @@ async function exerciseRetainedInteractions(page, planet, profile) {
     assert.equal(await speed.getAttribute("data-state"), state.label,
       `${planet.id}: speed control must publish ${state.label}`);
     const animations = await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).map((animation) => ({
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).map((animation) => ({
         currentTime: animation.currentTime,
         playbackRate: animation.playbackRate,
         playState: animation.playState,
@@ -737,7 +739,7 @@ async function exerciseRetainedInteractions(page, planet, profile) {
       await setDocumentVisibility(page, false);
       await waitFrames(page);
       const afterResume = await page.locator(".planet-stage").evaluate((stage) =>
-        stage.getAnimations({ subtree: true }).map((animation) => ({
+        stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).map((animation) => ({
           currentTime: animation.currentTime,
           playbackRate: animation.playbackRate,
           playState: animation.playState,
@@ -1075,7 +1077,9 @@ async function proveInteractionInterruptions(page, planet, profile) {
     // A perspective dolly: the prepared step per wheel delta moves the eye
     // along its axis, and there is no surface anchor to hold.
     const distanceRatio = (await cameraDistance(page, planet.id)) / distanceBefore;
-    assert.ok(Math.abs(distanceRatio - Math.exp(anchorScrollPixels * dolly.wheelStepPerDelta)) < 1e-6,
+    const kind = await page.evaluate(id => window[`__${id}`].camera.stats().dragInertia.wheelZoom.inputKind, planet.id);
+    const gain = kind === "wheel" ? WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : WHEEL_ZOOM_SPEED_MULTIPLIER;
+    assert.ok(Math.abs(distanceRatio - Math.exp(anchorScrollPixels * dolly.wheelStepPerDelta * gain)) < 1e-6,
       `${planet.id}: prepared wheel dolly step drifted (ratio ${distanceRatio})`);
     assert.equal(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
       `${planet.id}: a wheel dolly must not turn the scene`);

@@ -69,6 +69,21 @@ test('transport failure stays a failed load with no runtime preparation fallback
   expect(mount).not.toHaveBeenCalled();
 });
 
+test('cancellation reaches the transport and an already-cancelled load cannot read bytes', async () => {
+  const f = await fixture(), controller = new AbortController();
+  let received: AbortSignal | undefined;
+  const read = vi.fn((_url: string, signal?: AbortSignal) => new Promise<ArrayBuffer>((_resolve, reject) => {
+    received = signal;
+    signal!.addEventListener('abort', () => reject(signal!.reason), { once: true });
+  }));
+  const loading = loadPreparedCssObject(f.descriptor, { read }, { signal: controller.signal });
+  expect(received).toBe(controller.signal);
+  controller.abort();
+  await expect(loading).rejects.toMatchObject({ name: 'AbortError' });
+  await expect(loadPreparedCssObject(f.descriptor, { read }, { signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
+  expect(read).toHaveBeenCalledOnce();
+});
+
 test('authenticated invalid UTF-8 JSON fails before the renderer can mount', async () => {
   const f = await fixture(), bytes = new Uint8Array([0xff]).buffer, mount = vi.fn();
   const descriptor = { ...f.descriptor, prepared: { ...f.reference, sha256: await sha256(bytes) } };

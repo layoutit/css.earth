@@ -58,9 +58,14 @@ Polar leaves are resampled at prepare time. Regular-face projective warps are ba
 into RGBA atlas cells; the browser retains affine frames and flat child textures.
 This avoids Chrome's triangular projective-child flattening artifacts without
 changing the shared renderer or deriving geometry at runtime.
+Overlapping faces use matching expanded source coordinates. Each warped face
+has a one-pixel source-sampled apron so its antialiased edge is covered by its
+neighbor. These RGBA atlases use lossless WebP: lossy chroma subsampling produced
+colored tile seams even with correct geometry and alpha. Map resolution and the
+source-derived missing-coverage grid are unchanged.
 The DEM uses nearest source samples before this atlas conversion. Its authored
 blue/tan/red palette is linear at −8/0/+8 km and clips outside that range.
-It is an elevation color overlay, not geometry displacement or surface color.
+Terrain shading is derived from that same signed DEM using latitude-corrected spacing on its 1,188,300 m reference sphere. A fixed northwest light at 45° elevation and 25% ambient reveals slopes, with no vertical exaggeration. Where a neighbouring elevation is missing, no slope is invented. Color encodes height; brightness encodes terrain relief. The blue/tan/red endpoints use stronger contrast while keeping the same −8/0/+8 km scale. This does not displace geometry or represent surface color.
 
 The sphere uses a 16 × 32 retained grid with 452 leaves. Display radius, camera,
 full-phase curvature shading, initial longitude, and 84-second rotation are
@@ -71,8 +76,8 @@ solution. All these choices are prepared; the browser only transports state.
 
 ## Reproduction and evidence
 
-Run `node src/planets/pluto/tools/acquire.mjs`, then the repository title-source
-preparer and `node src/planets/pluto/tools/prepare.mjs`. Binary inputs are
+Run `node tools/objects/dist/operations.js acquire pluto`, then
+`node tools/objects/dist/prepare-authored.js pluto --write`. Binary inputs are
 reacquired only when absent, verified before publication, and never silently
 refreshed. Git contains the metadata, provider snapshots, title source, and
 license notices. No additional source-provider registry is required.

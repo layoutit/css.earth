@@ -34,27 +34,36 @@
       "label": "Topography",
       "input": "lenses/pluto-dem.tif",
       "output": "pluto-topography",
-      "qualification": "USGS stereo elevation; authored blue/tan/red scale −8/0/+8 km; gray grid: no elevation data",
+      "qualification": "USGS stereo elevation; blue/tan/red scale −8/0/+8 km; brightness shows relief under fixed northwest lighting; gray grid: no elevation data",
       "elevation": {
         "noData": -32768,
         "rangeMetres": 8000,
         "palette": [
           [
-            57,
-            94,
-            151
+            28,
+            85,
+            153
           ],
           [
-            214,
-            208,
-            178
+            187,
+            171,
+            128
           ],
           [
-            176,
-            80,
-            47
+            170,
+            62,
+            36
           ]
-        ]
+        ],
+        "relief": {
+          "referenceRadiusMeters": 1188300,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
       }
     },
     {

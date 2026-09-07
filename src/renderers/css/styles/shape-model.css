@@ -1,0 +1,9 @@
+/* Geometry and lighting are prepared; this stylesheet only lays out retained nodes. */
+.shape-model-camera { position: absolute; inset: 0; z-index: 1; transform-origin: 50% 50%; transform-style: preserve-3d; pointer-events: none; }
+.shape-model-camera .polycss-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+.shape-model-system, .shape-model-body, .shape-model-ring, .shape-model-lighting-counter { position: absolute; transform-origin: 0 0 0; transform-style: preserve-3d; }
+.shape-model-body > s, .shape-model-ring > s { position: absolute; display: block; width: var(--polycss-atlas-width); height: var(--polycss-atlas-height); margin: 0; padding: 0; transform-origin: 0 0; background-repeat: no-repeat; backface-visibility: hidden; }
+.shape-model-ring > s { backface-visibility: visible; }
+.shape-model-lighting { position: absolute; display: block; margin: 0; padding: 0; transform-origin: 0 0; background-repeat: no-repeat; backface-visibility: hidden; pointer-events: none; }
+.shape-model-material-root { position: absolute; inset: 0; z-index: 3; transform-origin: 50% 50%; pointer-events: none; }
+.shape-model-material { position: absolute; display: block; left: 50%; top: 50%; pointer-events: none; background-image: var(--shape-lighting); background-repeat: no-repeat; background-size: 100% 100%; }

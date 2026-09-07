@@ -124,7 +124,7 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
   display: none;
 }
 
-.planet-information-panel {
+.planet-card {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -173,6 +173,19 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
 
 .planet-surface-minimap[data-dragging="true"] { cursor: grabbing; }
 .planet-surface-minimap:focus { outline: none; }
+
+.planet-lens-source {
+  margin: 8px 4px 0 0;
+  color: var(--shell-text-muted);
+  font: 400 12px/16px var(--shell-ui-font);
+}
+.planet-lens-source a {
+  color: var(--shell-text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--shell-text-muted);
+  text-underline-offset: 2px;
+}
+.planet-lens-source a:hover { color: var(--shell-text); }
 
 .planet-surface-minimap[data-ready="true"] > .planet-lens-texture { opacity: .35; }
 
@@ -351,7 +364,7 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
   padding-bottom: 16px;
 }
 
-.planet-information-panel > :is(
+.planet-card > :is(
   .planet-selected-panel,
   .planet-factsheet-section,
   .planet-gallery-panel,
@@ -359,21 +372,22 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
   .planet-lenses,
   .planet-lens-details,
   .planet-resources-panel,
+  .planet-accordion,
   .planet-settings-panel
 ) {
   padding-inline: var(--explorer-card-padding-inline-start, 16px)
     var(--explorer-card-padding-inline-end, 12px);
 }
 
-.planet-information-panel > .planet-selected-panel {
+.planet-card > .planet-selected-panel {
   padding-bottom: 12px;
 }
 
-.planet-information-panel > .planet-factsheet-section {
+.planet-card > .planet-factsheet-section {
   padding-block-start: 0;
 }
 
-.planet-information-panel > :is(
+.planet-card > :is(
   .planet-selected-panel,
   .planet-factsheet-section,
   .planet-gallery-panel,
@@ -381,6 +395,7 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
   .planet-lenses,
   .planet-lens-details,
   .planet-resources-panel,
+  .planet-accordion,
   .planet-settings-panel
 ):has(~ :is(
   .planet-factsheet-section,
@@ -389,9 +404,10 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
   .planet-lenses,
   .planet-lens-details,
   .planet-resources-panel,
+  .planet-accordion,
   .planet-settings-panel
 )) {
-  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
+  border-bottom: 2px solid rgb(0 0 0 / 50%);
 }
 
 .planet-factsheet-section > .planet-factsheet-header {
@@ -413,6 +429,7 @@ body[data-sky-contrast="high"] .prepared-point-field-stars {
   .planet-lenses,
   .planet-lens-details,
   .planet-resources-panel,
+  .planet-accordion,
   .planet-settings-panel
 ):not([open]) {
   min-height: 30px;
@@ -592,10 +609,13 @@ details:not([open]) > .planet-panel-summary .planet-panel-icon {
   color: var(--shell-text-muted);
   font: 400 12px/16px var(--shell-ui-font);
   white-space: nowrap;
+}
+
+button.planet-title-tag {
   cursor: pointer;
 }
 
-.planet-title-tag:hover {
+button.planet-title-tag:hover {
   background: rgb(255 255 255 / 10%);
   color: var(--shell-text);
 }
@@ -1338,6 +1358,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-lenses,
     .planet-lens-details,
     .planet-resources-panel,
+    .planet-accordion,
     .planet-settings-panel
   ) {
     position: relative;
@@ -1351,6 +1372,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-lenses,
     .planet-lens-details,
     .planet-resources-panel,
+    .planet-accordion,
     .planet-settings-panel
   ):not([open]) {
     min-height: 45px;
@@ -1363,6 +1385,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-lenses,
     .planet-lens-details,
     .planet-resources-panel,
+    .planet-accordion,
     .planet-settings-panel
   )[open] {
     padding-bottom: 12px;
@@ -1487,7 +1510,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     pointer-events: auto;
   }
 
-  .planet-information-panel {
+  .planet-card {
     flex: 0 0 auto;
     height: auto;
     max-height: none;
@@ -1614,7 +1637,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     cursor: grabbing;
   }
 
-  .planet-information-panel {
+  .planet-card {
     display: contents;
   }
 
@@ -1636,13 +1659,14 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-lenses,
     .planet-lens-details,
     .planet-resources-panel,
+    .planet-accordion,
     .planet-settings-panel
   ) {
     padding: 0;
     border: 0;
   }
 
-  :is(.planet-lenses, .planet-lens-details, .planet-resources-panel, .planet-settings-panel) {
+  :is(.planet-lenses, .planet-lens-details, .planet-resources-panel, .planet-accordion, .planet-settings-panel) {
     color: var(--shell-text-secondary);
   }
 
@@ -1652,6 +1676,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-lenses,
     .planet-lens-details,
     .planet-resources-panel,
+    .planet-accordion,
     .planet-settings-panel
   ) {
     margin-top: 24px;
@@ -1663,6 +1688,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-lenses,
     .planet-lens-details,
     .planet-resources-panel,
+    .planet-accordion,
     .planet-settings-panel
   ):not([open]),
   .planet-panel-summary,
@@ -1705,7 +1731,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     transform: none;
   }
 
-  .planet-information-panel {
+  .planet-card {
     display: flex;
     flex: 0 0 auto;
     height: auto;
@@ -1740,6 +1766,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-lenses,
     .planet-lens-details,
     .planet-resources-panel,
+    .planet-accordion,
     .planet-settings-panel
   ) {
     position: relative;
@@ -1753,6 +1780,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-lenses,
     .planet-lens-details,
     .planet-resources-panel,
+    .planet-accordion,
     .planet-settings-panel
   ):not([open]) {
     min-height: 45px;
@@ -1764,6 +1792,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
     .planet-lenses,
     .planet-lens-details,
     .planet-resources-panel,
+    .planet-accordion,
     .planet-settings-panel
   )[open] {
     padding-bottom: 12px;

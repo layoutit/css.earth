@@ -1,3 +1,5 @@
+import { terrainBrightness } from '../terrestrial-layers/scientific-raster.mjs';
+
 // USGS's pinned GeoTIFF is uncompressed, signed 16-bit, one strip per row.
 // Reading these samples directly avoids image-library conversion of negative
 // elevations into unsigned display luminance. No-data is not terrain at zero.
@@ -37,12 +39,21 @@ export function elevationRaster(grid, width, height) {
   const { recipe } = grid;
   const data = Buffer.alloc(width * height * 3);
   const missing = new Uint8Array(width * height);
+  const terrain = { sample(longitude, latitude) {
+    if (latitude < -90 || latitude >= 90) return null;
+    const x = Math.floor(((longitude % 360 + 360) % 360) / 360 * grid.width);
+    const y = Math.min(grid.height - 1, Math.floor((90 - latitude) / 180 * grid.height));
+    const value = grid.sample(x, y);
+    return value === recipe.noData ? null : value;
+  } };
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const sourceX = Math.min(grid.width - 1, Math.floor((x + 0.5) * grid.width / width));
     const sourceY = Math.min(grid.height - 1, Math.floor((y + 0.5) * grid.height / height));
     const metres = grid.sample(sourceX, sourceY);
     missing[y * width + x] = Number(metres === recipe.noData);
-    data.set(elevationColor(metres, recipe), (y * width + x) * 3);
+    const brightness = recipe.relief && metres !== recipe.noData
+      ? terrainBrightness(terrain, (x + .5) / width * 360, 90 - (y + .5) / height * 180, 360 / width, recipe.relief) : 1;
+    data.set(elevationColor(metres, recipe).map(value => Math.max(0, Math.min(255, Math.round(value * brightness)))), (y * width + x) * 3);
   }
   return { data, info: { width, height, channels: 3 }, missing };
 }

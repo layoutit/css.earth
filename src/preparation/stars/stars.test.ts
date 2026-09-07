@@ -51,6 +51,8 @@ test('published aggregate precision removes observed cross-CPU tails without cha
     hierarchyPosition([-76.995335077125, 11.941339734320895, -82.5787177826444]));
   const magnitudes = [-2.592572389396131, -2.592572389396132];
   assert.equal(hierarchyMagnitude(magnitudes[0]!), hierarchyMagnitude(magnitudes[1]!));
+  assert.equal(hierarchyMagnitude(-4.757106367063499), hierarchyMagnitude(-4.757106367063501),
+    'Node 22/24 log10 tails at a half-quantum must publish the same magnitude');
   for (const value of magnitudes) assert(Math.abs(10 ** (-.4 * (hierarchyMagnitude(value) - value)) - 1) < 1e-12);
   for (const value of [0, .5e-10, 1e-10, 12.5, 998.12345678905]) {
     assert(hierarchyRadius(value) >= value, 'published radius cannot shrink its actual enclosure');
@@ -109,7 +111,9 @@ test('prepared point-field closes every source and image digest and samples the 
   const exposure = createExposure({fovDegrees:60,screenFactor:1}), limits=exposureLimits(exposure); assert.equal(data.photometry.samples.length,1201); assert.equal(data.photometry.floor,recipe.photometry.floor); assert.equal(data.photometry.limitingMagnitude,limits.limitingMagnitude); assert.equal(data.photometry.hintsLimitMagnitude,limits.hintsLimitMagnitude); assert.equal(data.photometry.minimumRadiusPx,POINT_MIN_RADIUS_PX); assert.deepEqual(data.labels,recipe.labels);
   data.photometry.samples.forEach((sample,index)=>{
     const expected = starPresentation(exposure,-25+index*.05);
-    assert.deepEqual(sample,{radiusPx:expected?.radiusPx??0,luminance:Math.min(1,Math.max(0,expected?.luminance??0))}); assert(sample.luminance<=1);
+    assert(Math.abs(sample.radiusPx - (expected?.radiusPx ?? 0)) <= 5.1e-13);
+    assert(Math.abs(sample.luminance - Math.min(1,Math.max(0,expected?.luminance??0))) <= 5.1e-13);
+    assert(sample.luminance<=1);
   });
   await assert.rejects(()=>verifiedBytes(sourceDirectory,{...recipe.catalogue,sha256:'0'.repeat(64)}),/digest/);
 });

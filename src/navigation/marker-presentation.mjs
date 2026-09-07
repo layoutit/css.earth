@@ -37,3 +37,14 @@ export function markerStyle(marker, { color, scale = 1, view = "navigation" } = 
     ] : []),
   ].join(";") };
 }
+
+// Resolved context uses its prepared native-density image. Layout size is still
+// the same physical proxy basis used by the world camera; DPR never selects it.
+export function contextMarkerSprite(marker) {
+  return {
+    url: marker.context?.url ?? "/navigation/planet-markers@2x.webp",
+    index: marker.context ? 0 : marker.index,
+    count: marker.context ? 1 : marker.count,
+    size: marker.presentation.size,
+  };
+}

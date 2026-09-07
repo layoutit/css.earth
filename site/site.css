@@ -84,6 +84,23 @@ html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; 
   outline-offset: -4px;
 }
 
+[data-context-label] {
+  background: transparent;
+  color: var(--shell-text);
+  font: 400 14px/18px var(--shell-ui-font);
+  text-decoration: none;
+}
+
+[data-context-label]:is([data-object-hovered="true"], :hover, :focus-visible) {
+  --context-label-opacity: 1;
+}
+
+.prepared-world-context [data-context-indicator="sun"] {
+  box-shadow: none;
+  border-radius: 0;
+  background: url("/navigation/sun-indicator-hexagon.png") center / 100% 100% no-repeat;
+}
+
 /* Keep prepared title artwork while exposing the heading as ordinary text. */
 .visually-hidden {
   position: absolute;

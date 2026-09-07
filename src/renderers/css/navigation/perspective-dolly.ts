@@ -1,9 +1,10 @@
+import { physicalProjectionFromCamera } from '../rendering/physical-projection.js';
 import type { CameraPlan, PerspectiveCameraPlan, CameraUpdate, LevelOfDetailPlan, OrbitLineFade, PlanetarySystemFade, SunMarkerFade } from './types.js';
 import type { BodyProjection, HeliocentricProjection } from '../solar-system/heliocentric-view.js';
 import type { VisibleRect } from '../solar-system/types.js';
 import type { PositionM } from '@cssearth/engine';
 import type { PhysicalProjection } from '../rendering/physical-projection.js';
-import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
+import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFromPresentation, worldCameraSilhouetteDiameter } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import { scaleWorldPosition, validateWorldPosition } from './world-camera-math.js';
 import type { mountRetainedHeliocentricView } from '../solar-system/heliocentric-view-runtime.js';
@@ -228,6 +229,7 @@ export function createPerspectiveDolly({
   // Null is the original centred dolly. A world publication adopts a full
   // eye-space centre, retained across drag, wheel and viewport changes.
   let bodyCenter: PositionM | null = null;
+  let zoomOutCentering = false;
   // The zoom alias last set, while the distance still corresponds to it: the
   // alias round trip through the focal length is exact only to floating
   // point, and a camera state set by zoom reads back the same number.
@@ -240,6 +242,7 @@ export function createPerspectiveDolly({
   // out beside its chrome, so the body is viewed slightly off-axis. The
   // offset is the principal point relative to the root's centre.
   let principalOffset = Object.freeze([0, 0]);
+  let stageViewport: WorldCameraViewport;
   // The stage's rectangle relative to the root's centre: what is actually on
   // screen when the shell lays the root out partly beyond the stage.
   let visibleRect: VisibleRect | null = null;
@@ -271,6 +274,10 @@ export function createPerspectiveDolly({
     ].map((value) => Number.isFinite(value) ? value : 0));
     const stageBounds = stage.getBoundingClientRect();
     const rootCentre = [bounds.x + bounds.width / 2, bounds.y + bounds.height / 2];
+    stageViewport = Object.freeze({ focalPixels: focal,
+      widthPixels: stageBounds.width, heightPixels: stageBounds.height,
+      principalOffsetPixels: [rootCentre[0] - stageBounds.x - stageBounds.width / 2 + principalOffset[0],
+        rootCentre[1] - stageBounds.y - stageBounds.height / 2 + principalOffset[1]] as const });
     const candidate = {
       left: Math.max(stageBounds.x, bounds.x) - rootCentre[0],
       top: Math.max(stageBounds.y, bounds.y) - rootCentre[1],
@@ -343,7 +350,20 @@ export function createPerspectiveDolly({
         aliasDistance = cameraState.distance;
       }
       if (bodyCenter !== null && cameraState.distance !== previousDistance) {
-        bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
+        if (zoomOutCentering && cameraState.distance > previousDistance) {
+          // Dolly back along the content-centre ray. Its perpendicular offset
+          // stays fixed in world units, so the body drifts toward the centre
+          // naturally as the user zooms out. There is no separate camera turn.
+          const axisLength = Math.hypot(principalOffset[0], principalOffset[1], focal);
+          const axis: PositionM = [-principalOffset[0] / axisLength, -principalOffset[1] / axisLength, -focal / axisLength];
+          const along = bodyCenter.reduce((sum, value, index) => sum + value * axis[index]!, 0);
+          if (along > 0) {
+            const across: PositionM = [bodyCenter[0] - axis[0] * along,
+              bodyCenter[1] - axis[1] * along, bodyCenter[2] - axis[2] * along];
+            const nextAlong = Math.sqrt(Math.max(0, cameraState.distance ** 2 - Math.hypot(...across) ** 2));
+            bodyCenter = [across[0] + axis[0] * nextAlong, across[1] + axis[1] * nextAlong, across[2] + axis[2] * nextAlong];
+          } else bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
+        } else bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
       }
     },
   });
@@ -355,6 +375,7 @@ export function createPerspectiveDolly({
       return { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] };
     },
     bodyCenter: () => bodyCenter,
+    setZoomOutCentering(enabled: boolean) { zoomOutCentering = enabled; },
     setBodyCenter(next: PositionM) {
       validateWorldPosition(next);
       const distance = Math.hypot(...next);
@@ -453,18 +474,12 @@ export function createPerspectiveDolly({
       // Raw prepared scene coordinates to the physical eye. Overlay and page
       // consumers compose their own retained body transforms after this matrix.
       const scale = cameraPlan.sceneScale;
-      const physicalProjection: PhysicalProjection = Object.freeze({
-        focalPixels: focal, principalOffsetPixels: viewport.principalOffsetPixels,
-        eyeFromScene: Object.freeze([
-          rotation[0] * scale, rotation[3] * scale, rotation[6] * scale, 0,
-          rotation[1] * scale, rotation[4] * scale, rotation[7] * scale, 0,
-          rotation[2] * scale, rotation[5] * scale, rotation[8] * scale, 0,
-          bodyX - principalOffset[0], bodyY - principalOffset[1], bodyZ - focal, 1,
-        ]),
-      });
+      const physicalProjection = physicalProjectionFromCamera(rotation,
+        [bodyX - principalOffset[0], bodyY - principalOffset[1], bodyZ - focal], scale, viewport);
       return Object.freeze({
         distance,
         projection: physicalProjection,
+        stageViewport,
         focal,
         viewportWidth,
         viewportHeight,
@@ -576,7 +591,7 @@ function genericBodyProjection(
   const silhouette = presentation.silhouette;
   const distance = presentation.distanceUnits;
   const depth = presentation.depthUnits;
-  const silhouetteRadius = silhouette?.tangentialSemiAxis ?? (depth > -bodyRadius ? Infinity : 0);
+  const silhouetteRadius = worldCameraSilhouetteDiameter(presentation, bodyRadius) / 2;
   const offAxisDegrees = Math.acos(Math.max(-1, Math.min(1, depth / distance))) * 180 / Math.PI;
   return Object.freeze({
     distance,

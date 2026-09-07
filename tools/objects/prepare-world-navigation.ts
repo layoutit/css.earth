@@ -46,7 +46,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const frame = preparePhysicalWorldFrame({ referenceFrame: 'sun-icrf', epochJdTt: solar.SOLAR_GEOMETRY_EPOCH_JD_TT,
     originM, bodyToReference, bodyToPresentation: authored.bodyToPresentation, orbitUpReference: eclipticUp,
     physicalRadiusM: bodyRadiusM, renderedRadiusUnits });
-  const alreadyPhysical = sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
+  const alreadyPhysical = sources.has('shape-model') || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
     sources.get('terrestrial')?.kind === 'solid-observation-body';
   const camera = alreadyPhysical ? definition.camera : physicalCamera(definition.camera, definition.sky.projection, descriptor.recipe.paging !== undefined);
   const sky = alreadyPhysical ? definition.sky : { ...definition.sky, cameraContract: 'scene-locked-unbounded-accumulated-matrix3d',
