@@ -515,7 +515,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
         // Keep a clear placement stable; try other sides before hiding a label.
-        const placements = body.id === plan.focus.id ? [0] :
+        const placements = body.id === plan.focus.id ? [3] :
           diameter >= plan.camera.presentation.levelOfDetail.billboardFullDiscPixels ? [3, 2, 0, 1] :
           [entry.labelPlacement, ...[0, 1, 2, 3].filter(index => index !== entry.labelPlacement)];
         const withinViewport = (index: number) => {

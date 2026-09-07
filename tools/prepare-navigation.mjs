@@ -502,7 +502,8 @@ export async function prepareSunIndicator({
   const path = `M ${xy(rounded[0].before)} ` + rounded.map(({ point, after }, index) =>
     `Q ${xy(point)} ${xy(after)} L ${xy(rounded[(index + 1) % 6].before)}`).join(" ") + " Z";
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 20 20">` +
-    `<path d="${path}" fill="none" stroke="${hex}" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
+    `<path d="${path}" fill="none" stroke="${hex}" stroke-width="1.5" stroke-linejoin="round"/>` +
+    `<circle cx="10" cy="10" r="1" fill="${hex}"/></svg>`;
   await mkdir(outputRoot, { recursive: true });
   await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, "sun-indicator-hexagon.png"));
 }
