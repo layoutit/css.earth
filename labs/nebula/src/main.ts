@@ -1,5 +1,7 @@
 import { createNebulaLabViewer, localFile, subjects } from './viewer';
 import { createBenchmarkView } from './benchmark-view';
+import { defaultOverlayPlacement } from './overlay-placement';
+import { createOverlayPlacementControls } from './overlay-placement-controls';
 
 const element = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const subject = element<HTMLSelectElement>('subject');
@@ -132,12 +134,29 @@ async function refreshOverlayControls() {
       const label = document.createElement('label'); label.htmlFor = checkbox.id; label.textContent = overlay.label;
       const prior = saved.get(overlay.id), opacity = document.createElement('input'); opacity.type = 'range'; opacity.min = '0'; opacity.max = '100'; opacity.value = String(Math.round((prior?.opacity ?? .55) * 100));
       checkbox.checked = prior?.enabled ?? false; opacity.setAttribute('aria-label', `${overlay.label} opacity`); opacity.disabled = busy || !checkbox.checked;
-      const detail = document.createElement('p'); detail.className = 'overlay-detail'; detail.textContent = `${overlay.credit} ${overlay.registrationNote}`;
+      const placement = createOverlayPlacementControls({ id: overlay.id, label: overlay.label,
+        placement: prior?.placement ?? defaultOverlayPlacement(), defaults: defaultOverlayPlacement(),
+        async onCopy() {
+          const saved = viewer!.getOverlayState().find(value => value.id === overlay.id);
+          const value = saved?.placement ?? defaultOverlayPlacement();
+          await navigator.clipboard.writeText(JSON.stringify({
+            schema: 'cssearth-nebula-image-placement@1', subjectId: item!.id,
+            overlayCatalogue: item!.density!.overlays, imageId: overlay.id,
+            positionKpc: { x: value.x, y: value.y, z: value.z },
+            rotationDegrees: { x: value.rotationX, y: value.rotationY, z: value.rotationZ },
+            scale: value.scale, opacity: saved?.opacity ?? .55,
+          }, null, 2));
+        },
+        onChange: partial => { try { viewer!.setOverlayPlacement(overlay.id, partial); } catch (error) { fail(error); } } });
+      const credit = document.createElement('details'); credit.className = 'overlay-credit overlay-detail';
+      const creditSummary = document.createElement('summary'); creditSummary.textContent = 'Image notes and credit';
+      const detail = document.createElement('p'); detail.textContent = `${overlay.credit} ${overlay.registrationNote}`;
       const source = document.createElement('a'); source.href = overlay.sourcePageUrl; source.target = '_blank'; source.rel = 'noreferrer'; source.textContent = 'Source ↗'; source.className = 'overlay-detail';
+      credit.append(creditSummary, detail, source);
       const update = (enabled: boolean, value: number) => { checkbox.disabled = busy; opacity.disabled = busy || !enabled; void viewer!.setOverlay(overlay.id, enabled, value / 100).catch(fail); };
       checkbox.addEventListener('change', () => update(checkbox.checked, Number(opacity.value)));
       opacity.addEventListener('input', () => { if (checkbox.checked) update(true, Number(opacity.value)); });
-      row.append(label, checkbox, opacity, detail, source); overlayOptions.append(row);
+      row.append(label, checkbox, opacity, placement, credit); overlayOptions.append(row);
     }
     overlayStatus.textContent = 'Prepared photo planes share the density reference frame.';
     overlayRegistration.textContent = 'Approximate paper-based simulation placement; image WCS registration. Model/observation correspondence remains unvalidated. Outside the photograph footprint is unknown.';

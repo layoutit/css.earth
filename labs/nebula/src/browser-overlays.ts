@@ -49,6 +49,17 @@ async function identitiesHold() {
   return page.evaluate(() => { const leaves = [...document.querySelectorAll('#viewer .css-volume-mesh:not([data-overlay-mesh]) > s')];
     return Boolean(window.__overlayLeaves?.length && window.__overlayLeaves.length === leaves.length && window.__overlayLeaves.every((node, i) => node === leaves[i])); });
 }
+async function placementProbe(id: string) {
+  return page.evaluate(value => {
+    const node = document.querySelector<HTMLElement>(`[data-overlay-leaf="${value}"]`)!;
+    const matrix = new DOMMatrix(node.style.transform), width = parseFloat(node.style.width), height = parseFloat(node.style.height);
+    const point = (x: number, y: number) => { const p = new DOMPoint(x, y).matrixTransform(matrix); return [p.x / p.w, p.y / p.w, p.z / p.w]; };
+    return { center: point(width / 2, height / 2), corner: point(0, 0), transform: node.style.transform };
+  }, id);
+}
+async function editPlacement(key: string, value: number) {
+  await page.locator(`#placement-vista-infrared-${key}`).fill(String(value));
+}
 async function visualSubject(id: string, overlays: [string, number][]) {
   await page.waitForFunction(count => document.querySelectorAll('#overlay-options .overlay-option').length === count, overlays.length);
   const baseline = await screenshot(`${id}-density`); for (const overlay of overlays) await toggle(...overlay);
@@ -78,6 +89,37 @@ try {
   await page.locator('#overlay-smash-original').uncheck(); await page.locator('#overlay-smash-extracted').uncheck();
   await page.waitForFunction(() => [...document.querySelectorAll<HTMLElement>('[data-overlay-mesh] > s')].filter(node => getComputedStyle(node).visibility === 'visible').length === 3);
   const vista = await screenshot('lmc-vista-only'), switched = await imageDifference(lmc.overlaid, vista); assert.ok(switched.mean > .1 && switched.changedFraction > .001, 'switching overlays made no visible difference');
+  await page.locator('[data-placement-for="vista-infrared"] > summary').click();
+  const originalPlacement = await placementProbe('vista-infrared'), unaffected = await placementProbe('smash-original');
+  const stillCamera = await state();
+  await editPlacement('x', 2); await editPlacement('y', -1); await editPlacement('z', .5);
+  await editPlacement('rotationZ', 90); await editPlacement('scale', 140);
+  const placed = await placementProbe('vista-infrared');
+  const near = (a: number, b: number) => assert.ok(Math.abs(a - b) < .001, `${a} differs from ${b}`);
+  placed.center.forEach((value, axis) => near(value, originalPlacement.center[axis]! + [100, -50, 25][axis]!));
+  const beforeVector = originalPlacement.corner.map((value, axis) => value - originalPlacement.center[axis]!);
+  const expectedVector = [-beforeVector[1]! * 1.4, beforeVector[0]! * 1.4, beforeVector[2]! * 1.4];
+  placed.corner.forEach((value, axis) => near(value - placed.center[axis]!, expectedVector[axis]!));
+  assert.deepEqual(await placementProbe('smash-original'), unaffected, 'placement changed another image');
+  assert.equal(await identitiesHold(), true);
+  assert.deepEqual((await state()).scenes, stillCamera.scenes, 'placement moved the density camera');
+  const edited = await screenshot('lmc-manual-placement'); assert.ok((await imageDifference(vista, edited)).mean > .1);
+  await page.locator('[data-placement-for="vista-infrared"] .overlay-tilt > summary').click();
+  await editPlacement('rotationX', 30); await editPlacement('rotationY', -20);
+  const tilted = await placementProbe('vista-infrared');
+  tilted.center.forEach((value, axis) => near(value, placed.center[axis]!));
+  assert.ok(Math.abs(tilted.corner[2]! - placed.corner[2]!) > 1, '3D tilt did not move image depth');
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(baseURL).origin });
+  await page.locator('#copy-placement-vista-infrared').click();
+  await page.waitForFunction(() => document.querySelector('#copy-placement-vista-infrared')?.textContent === 'Copied!');
+  const copied = JSON.parse(await page.evaluate(() => navigator.clipboard.readText()));
+  assert.deepEqual(copied, { schema: 'cssearth-nebula-image-placement@1', subjectId: 'lmc-particles',
+    overlayCatalogue: 'labs/nebula/models/lmc-overlays/overlays.json', imageId: 'vista-infrared',
+    positionKpc: { x: 2, y: -1, z: .5 }, rotationDegrees: { x: 30, y: -20, z: 90 }, scale: 1.4, opacity: .6 });
+  assert.deepEqual(await placementProbe('vista-infrared'), tilted, 'copy moved the image');
+  await page.locator('#reset-placement-vista-infrared').click();
+  assert.deepEqual(await placementProbe('vista-infrared'), originalPlacement, 'reset changed the original sky placement');
+  await editPlacement('x', 2); const savedPlacement = await placementProbe('vista-infrared');
   await page.evaluate(() => { window.__overlayPlanes = [...document.querySelectorAll('[data-overlay-mesh] > s')]; window.__overlayScenes = window.__overlayPlanes.map(node => node.closest('.css-volume-scene')!); });
   const beforeDrag = await state(), box = await page.locator('#viewer').boundingBox(); assert.ok(box); await page.mouse.move(box.x + box.width * .45, box.y + box.height * .5); await page.mouse.down();
   await page.mouse.move(box.x + box.width * .58, box.y + box.height * .42, { steps: 12 }); await page.mouse.up(); await page.waitForFunction(() => (document.querySelector('#camera-pose') as HTMLSelectElement).value === 'manual');
@@ -87,8 +129,13 @@ try {
   await page.click('#density-tab'); await ready('density', 'lmc-particles'); await page.waitForFunction(() => document.querySelectorAll('#overlay-options .overlay-option').length === 3);
   const restored = await state(); assert.deepEqual({ planes: restored.planes, visible: restored.visiblePlanes }, { planes: 3, visible: 3 }, 'density remount did not restore Vista');
   assert.equal(await page.locator('#overlay-vista-infrared').isChecked(), true); assert.equal(await page.locator('label[for="overlay-vista-infrared"] + input + input').inputValue(), '60');
+  assert.deepEqual(await placementProbe('vista-infrared'), savedPlacement, 'tab switch lost manual placement');
+  assert.equal(await page.locator('#placement-vista-infrared-x').inputValue(), '2');
   await page.selectOption('#subject', 'smc-particles'); await ready('density', 'smc-particles'); await page.selectOption('#camera-pose', 'front');
   await page.waitForFunction(() => (document.querySelector('#camera-pose') as HTMLSelectElement).value === 'front'); await visualSubject('smc', [['smash-original', 40], ['vista-infrared', 70]]);
+  assert.equal(await page.locator('#placement-vista-infrared-x').inputValue(), '0', 'LMC placement leaked to SMC');
+  await page.selectOption('#subject', 'lmc-particles'); await ready('density', 'lmc-particles');
+  assert.deepEqual(await placementProbe('vista-infrared'), savedPlacement, 'subject round trip lost manual placement');
   assert.deepEqual(report.errors, []); assert.deepEqual(report.failedRequests, []); report.passed = true;
 } catch (error) { report.failure = error instanceof Error ? error.stack ?? error.message : String(error); }
 await writeFile(`${output}/report.json`, JSON.stringify(report, null, 2)); await browser.close();

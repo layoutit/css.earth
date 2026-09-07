@@ -57,8 +57,13 @@ export async function prepareOverlays(path: string) {
       const plan = computeTextureAtlasPlanPublic(polygon, overlays.length, { tileSize: 50, layerElevation: 50, seamBleed: 0 });
       const geometry = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
       if (!geometry) throw new TypeError(`Could not prepare photographic plane: ${input.id}`);
+      // Decode the prepared projective image centre offline, including its homogeneous divisor.
+      const matrix = geometry.matrix.split(',').map(Number), cx = geometry.leafWidth / 2, cy = geometry.leafHeight / 2;
+      const w = matrix[3]! * cx + matrix[7]! * cy + matrix[15]!;
+      const pivotCssPx = [0, 1, 2].map(axis => (matrix[axis]! * cx + matrix[axis + 4]! * cy + matrix[axis + 12]!) / w);
+      if (!pivotCssPx.every(Number.isFinite)) throw new TypeError(`Invalid image centre: ${input.id}`);
       overlays.push({ id: input.id, label: input.label, texturePath, widthPx: width, heightPx: height,
-        sha256: sha256(texture.data), bytes: texture.data.length,
+        sha256: sha256(texture.data), bytes: texture.data.length, pivotCssPx,
         style: { width: `${geometry.leafWidth}px`, height: `${geometry.leafHeight}px`, transform: `matrix3d(${geometry.matrix})`,
           backgroundSize: geometry.backgroundSize.map(n => `${n}px`).join(' '),
           backgroundPosition: geometry.backgroundPosition.map(n => `${n}px`).join(' ') },
