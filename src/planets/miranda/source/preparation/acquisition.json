@@ -6,8 +6,16 @@
       "groups": [
         "refresh"
       ],
-      "path": "observations/ura5vuu2.tif",
-      "url": "https://space.jpl.nasa.gov/tmaps/pix/ura5vuu2.tif"
+      "path": "observations/mumap-cyl-180180.cub.gz",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c/mumap-cyl-180180.cub.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "science/mudem-ZT-cyl.cub.gz",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570/mudem-ZT-cyl.cub.gz"
     },
     {
       "kind": "download",

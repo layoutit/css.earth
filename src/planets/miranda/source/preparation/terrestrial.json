@@ -6,8 +6,8 @@
   "publicBase": "/scenes/miranda/",
   "distanceAu": 19.2,
   "raster": {
-    "width": 5760,
-    "height": 2880,
+    "width": 6400,
+    "height": 3200,
     "bandCount": 16,
     "gutter": 64,
     "poleSize": 1024,
@@ -17,14 +17,80 @@
       {
         "id": "normal",
         "validity": {
-          "kind": "image-monochrome-no-data",
-          "noData": 0,
-          "connectedEdge": "north",
-          "centerLongitude": 0
+          "kind": "isis3-float-monochrome",
+          "grid": {
+            "width": 6294,
+            "height": 3147,
+            "targetName": "Miranda",
+            "centerLongitude": 180,
+            "referenceRadiusMeters": 240400,
+            "polarRadiusMeters": 232900,
+            "origin": [
+              -1510560,
+              377760
+            ],
+            "resolutionMeters": 240,
+            "specialValueMagnitude": 1e+30,
+            "longitudeRange": [-180, 180]
+          },
+          "displayRange": [
+            0,
+            2400
+          ]
         }
       }
     ],
-    "scientific": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "isis3",
+        "path": "science/mudem-ZT-cyl.cub.gz",
+        "description": "Voyager terrain model · shaded relief",
+        "title": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
+        "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+        "minimum": -6,
+        "maximum": 7,
+        "colors": [
+          "#1c5599",
+          "#bbab80",
+          "#aa3e24"
+        ],
+        "labels": [
+          "−6",
+          "0.5",
+          "7"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "grid": {
+          "width": 6294,
+          "height": 3147,
+          "targetName": "Miranda",
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 240400,
+          "polarRadiusMeters": 232900,
+          "origin": [
+            -755280,
+            377760
+          ],
+          "resolutionMeters": 240,
+          "specialValueMagnitude": 1e+30,
+          "longitudeRange": [0, 360]
+        },
+        "relief": {
+          "referenceRadiusMeters": 240400,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
+      }
+    ],
     "observedColors": []
   },
   "lighting": {
