@@ -67,5 +67,5 @@ path to `public/navigation/sun-indicator-hexagon.png` at a fixed 80px resolution
 `src/planets/sun/swatch.json`, matching the navigation label. The independent
 spectral swatch remains recorded there with its ASTM E490-00, CIE 1931, and sRGB
 provenance.
-The live scene uses the PNG; its center remains transparent for the Sun's
-separate physical point and glow.
+The PNG includes a 2px center dot so the navigation landmark remains visible
+at distant scales. The Sun's physical point and glow still render separately.
