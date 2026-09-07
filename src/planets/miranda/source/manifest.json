@@ -1,0 +1,187 @@
+{
+  "schema": "cssmiranda-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "schenk-2020-miranda-normal",
+      "path": "observations/mumap-cyl-180180.cub.gz",
+      "expectedBytes": 33170078,
+      "expectedSha256": "70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c",
+      "origin": "https://repository.hou.usra.edu/bitstreams/bc39b4c9-3f85-403b-a2d6-1f0d7206eaf6/download",
+      "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+      "mirror": "https://earth-assets.lowpoly.cc/source-assets/70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c/mumap-cyl-180180.cub.gz",
+      "upstreamSha256": "6333d213b902704c0c27ff9a605ceb8823661ad5de32b5245d1ef6000a26a0a8",
+      "upstreamBytes": 82012695,
+      "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
+      "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
+      "license": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
+      "licenseEvidence": [
+        "observations/aaReadMe_uranian_MAP_DEM.txt",
+        "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+      ],
+      "acquisition": "Restore the byte-preserving compressed source mirror using preparation/acquisition.json.",
+      "redistribution": "Original cube retained byte-for-byte inside gzip; author, release reference and caveats accompany the prepared visualization.",
+      "width": 6294,
+      "height": 3147,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 240400
+      },
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "coverage": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations."
+    },
+    {
+      "id": "schenk-2020-miranda-elevation",
+      "path": "science/mudem-ZT-cyl.cub.gz",
+      "expectedBytes": 31117604,
+      "expectedSha256": "45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570",
+      "origin": "https://repository.hou.usra.edu/bitstreams/9181435b-9c9c-4645-ba6d-673d4a959e72/download",
+      "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+      "mirror": "https://earth-assets.lowpoly.cc/source-assets/45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570/mudem-ZT-cyl.cub.gz",
+      "upstreamSha256": "1173b7f87ee2818e23b72ac07f0fafe964fbe3c71c8bda0930537fac4510923c",
+      "upstreamBytes": 82006980,
+      "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
+      "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
+      "license": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
+      "licenseEvidence": [
+        "observations/aaReadMe_uranian_MAP_DEM.txt",
+        "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+      ],
+      "acquisition": "Restore the byte-preserving compressed source mirror using preparation/acquisition.json.",
+      "redistribution": "Original cube retained byte-for-byte inside gzip; author, release reference and caveats accompany the prepared visualization.",
+      "width": 6294,
+      "height": 3147,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 240400
+      },
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "coverage": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3505,
+      "expectedSha256": "8cc5a1cf0c7ebf7e742d52286c968805804dc842e636c868aae98b61f71fb43d",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 3229,
+      "expectedSha256": "d836d9eee1001e4b7a0840530db6d9f21508a0782e81b3c601540ef35f136d29",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1051,
+      "expectedSha256": "7b25ba4920cd5a13048458fdbebc8cfc05bd05b7e35449484660a24d46be4b37",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 9546,
+      "expectedSha256": "fdaa2a09cb0194200234db2fb07ff06d7cdf7f40acb2fcbd23903d1e713743a5",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4848,
+      "expectedSha256": "b4e1922ac32d3562695cdcab63f7e24c0e909cebe86e40303e1b042a32129cc3",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "cd34205b7db415dbbfbb54766ba4ee00d25d9386a84369a93f3ceed7ed9d6ea3",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
+      "purpose": "Original author README with DEM datum, construction and limitations.",
+      "expectedBytes": 2426,
+      "expectedSha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
+    }
+  ]
+}

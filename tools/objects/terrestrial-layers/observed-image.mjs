@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 
 /** Byte maps declare an exact missing code, or null when no validity mask is supplied. */
 export async function prepareByteObservation(path, entry, policy, width, height) {
@@ -10,11 +11,19 @@ export async function prepareByteObservation(path, entry, policy, width, height)
   }
   if (policy.grid) return prepareProjectedByteObservation(path, entry, policy, width, height);
   const source = await sharp(path).toColourspace('srgb').raw().toBuffer();
+  if (policy.connectedEdge !== undefined &&
+      (!['north', 'south'].includes(policy.connectedEdge) || policy.noData !== 0)) {
+    throw new Error('Connected coverage requires a north/south edge and exact black fill.');
+  }
+  const connected = policy.connectedEdge === undefined ? null : blackFillCoverage(source,
+    { width: entry.width, height: entry.height, channels: 3 },
+    { northConnected: policy.connectedEdge === 'north', southConnected: policy.connectedEdge === 'south' });
   const rgba = Buffer.alloc(entry.width * entry.height * 4);
   let sourceMissingPixels = 0;
   for (let i = 0; i < rgba.length / 4; i++) {
     const color = source.subarray(i * 3, i * 3 + 3);
-    const missing = policy.noData !== null && color.every(value => value === policy.noData);
+    const missing = connected ? Boolean(connected[i]) :
+      policy.noData !== null && color.every(value => value === policy.noData);
     rgba.set(color, i * 4);
     rgba[i * 4 + 3] = missing ? 0 : 255;
     sourceMissingPixels += Number(missing);

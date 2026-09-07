@@ -18,6 +18,7 @@ import {
 } from "../src/navigation/marker-descriptors.mjs";
 import {
   renderMarker,
+  readMarkerImage,
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
 } from "../src/navigation/marker-recipe.mjs";
@@ -161,8 +162,7 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
   for (const descriptor of descriptors) {
     if (!parents.has(descriptor.planetId) && !descriptor.context) continue;
     const sourcePath = resolve(projectRoot, "src/planets", descriptor.planetId, "source", descriptor.source.path);
-    const bytes = await validateMarkerSourceBytes(descriptor.source, sourcePath);
-    let crop = sharp(bytes);
+    let crop = await readMarkerImage(descriptor.source, sourcePath);
     for (const operation of descriptor.operations) {
       if (operation.type === "resize") break;
       if (operation.type === "rotate") crop = crop.rotate();

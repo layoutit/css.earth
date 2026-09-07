@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "titania",
+  "displayName": "Titania",
+  "publicBase": "/scenes/titania/",
+  "distanceAu": 19.2,
+  "raster": {
+    "width": 6400,
+    "height": 3200,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 1024,
+    "surfaceQuality": 95,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "isis3-float-monochrome",
+          "grid": {
+            "width": 1722,
+            "height": 861,
+            "targetName": "Titania",
+            "centerLongitude": 180,
+            "referenceRadiusMeters": 788900,
+            "polarRadiusMeters": 788900,
+            "origin": [
+              -4959360,
+              1241280
+            ],
+            "resolutionMeters": 2880,
+            "specialValueMagnitude": 1e+30,
+            "longitudeRange": [
+              -180,
+              180
+            ]
+          },
+          "displayRange": [
+            0,
+            3000
+          ]
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "isis3",
+        "path": "science/tudem-ZL-180180.cub.gz",
+        "description": "Voyager stereo terrain model \u00b7 shaded relief",
+        "title": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution.",
+        "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+        "minimum": -8,
+        "maximum": 8,
+        "colors": [
+          "#1c5599",
+          "#bbab80",
+          "#aa3e24"
+        ],
+        "labels": [
+          "\u22128",
+          "0",
+          "8"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "grid": {
+          "width": 1722,
+          "height": 861,
+          "targetName": "Titania",
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 788900,
+          "polarRadiusMeters": 788900,
+          "origin": [
+            -4959360,
+            1241280
+          ],
+          "resolutionMeters": 2880,
+          "specialValueMagnitude": 1e+30,
+          "longitudeRange": [
+            -180,
+            180
+          ]
+        },
+        "relief": {
+          "referenceRadiusMeters": 788900,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
+      }
+    ],
+    "observedColors": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 788.9,
+    "camera": {
+      "initialScenePitchDegrees": 30.034983297842686,
+      "defaultControlYawDegrees": -26.722762808544566
+    },
+    "mapUrl": "/scenes/titania/titania-normal-surface@2x.webp",
+    "polesUrl": "/scenes/titania/titania-normal-poles@2x.webp"
+  },
+  "celestial": {
+    "sunSource": "Vendored JPL Horizons Uranus satellite elements and IAU/NAIF Titania rotation at the shared epoch."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      168,
+      163,
+      156
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}
