@@ -27,5 +27,5 @@ remain identified as published modeling choices. Offline display tessellation
 between source samples adds no scientific measurements; it does not improve
 the source's angular resolution or establish a physical tail closure.
 
-The separate `../LICENSE.rendering-MIT.txt` records software derivation of
+The separate `../LICENSE.GALAXIO-MIT.txt` records Galaxio software derivation of
 the retained rim presentation. That notice does not apply to IBEX data.

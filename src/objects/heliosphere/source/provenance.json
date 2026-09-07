@@ -4,8 +4,8 @@
   "sources": [
     {
       "path": "ibex/NOTICE.md",
-      "sha256": "b5bb9d97349864c1a256436a8a0915be2947c64941b69035507dec179f107698",
-      "bytes": 1810
+      "sha256": "e0fd4a370544085c5544fcf6392ba5bc7038e404f625a7be49279683bc0f28b1",
+      "bytes": 1816
     },
     {
       "path": "ibex/apjsabf658.tar.gz",
@@ -33,10 +33,18 @@
       "bytes": 35861
     },
     {
-      "path": "LICENSE.rendering-MIT.txt",
+      "path": "LICENSE.GALAXIO-MIT.txt",
       "sha256": "cb2e341b0397f15586815e1f4c6ccf5395ed14cfe6abc8633677fedfd69516a3",
       "bytes": 1077,
-      "role": "Original presentation software copyright and permission notice; unchanged bytes, not a license for IBEX data."
+      "role": "Original presentation software copyright and permission notice; unchanged bytes, not a license for IBEX data.",
+      "origin": "galaxio/LICENSE"
+    },
+    {
+      "path": "galaxio-heliosphereRenderer.ts.txt",
+      "sha256": "b2af28ae40714152e608e0cbd2952f6c95fd47ddcfda1bd03f18e3b0e691613d",
+      "bytes": 4908,
+      "origin": "galaxio/packages/engine/src/scene/heliosphereRenderer.ts",
+      "role": "Original Galaxio rim-material software reference; active geometry and frame come from the published IBEX model."
     }
   ],
   "publication": {
@@ -134,5 +142,5 @@
     },
     "bounds": "Conservative Cartesian cube with half-extent equal to the largest original source radius, 383 AU. Positive barycentric radius interpolation cannot exceed that source radius; this encloses the curved display interpolation as well as original samples."
   },
-  "attribution": "Scientific geometry: Reisenfeld et al. (2021), ApJS 254, 40, DOI 10.3847/1538-4365/abf658, IBEX. Retained rim-presentation software derivation: Copyright (c) 2026 Juan Cruz Fortunatti, MIT; see separate unchanged LICENSE.rendering-MIT.txt."
+  "attribution": "Scientific geometry: Reisenfeld et al. (2021), ApJS 254, 40, DOI 10.3847/1538-4365/abf658, IBEX. Galaxio rim-presentation software derivation: Copyright (c) 2026 Juan Cruz Fortunatti, MIT; see separate unchanged LICENSE.GALAXIO-MIT.txt."
 }

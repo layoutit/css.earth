@@ -6,7 +6,8 @@ heliosphere/
 ├── source/
 │   ├── shell.json                      Scientific grid and display recipe
 │   ├── provenance.json                 Original sources, limitations and hashes
-│   ├── LICENSE.rendering-MIT.txt        Retained presentation software notice
+│   ├── galaxio-heliosphereRenderer.ts.txt Original rim presentation reference
+│   ├── LICENSE.GALAXIO-MIT.txt          Galaxio presentation software notice
 │   └── ibex/
 │       ├── apjsabf658.tar.gz            Original workbook and publisher ReadMe
 │       ├── apjsabf658f8_int.html.gz      Lossless original interactive Figure 8
@@ -63,7 +64,7 @@ prepared leaves and selects atlas addresses; it generates no geometry or
 images. Original archives and extraction code are offline inputs only.
 
 The scientific source has its original AAS notice, not a claimed CC-BY/MIT
-license. The separate MIT notice covers the retained software derivation.
+license. The original Galaxio renderer and its MIT notice document the retained rim presentation; IBEX supplies the geometry.
 
 From a clean checkout, run from the repository root (Python 3 is required):
 

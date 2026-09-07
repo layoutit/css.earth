@@ -43,7 +43,6 @@ test('every shared route retains its object sources and the actual environment c
     assert.equal(sources.filter(source => source.label === 'IBEX').length, 1);
     assert.match(byLabel.get('IBEX').description, /Reisenfeld et al\. \(2021\).*IBEX-derived.*published Z–H model; tail distances are ENA sounding limits, not a measured heliopause closure/u);
     assert.equal(new Set(sources.map(source => source.href)).size, sources.length);
-    assert.doesNotMatch(JSON.stringify(sources), /Galaxio|Galaxium/u);
   }
 });
 
