@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
+import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import { parseShellRecipe } from './config.js';
-import { prepareShellMesh, parseIndexedShellMesh, loadShellMesh, type ShellMesh } from './mesh.js';
+import { parseGriddedShellMesh, parseIndexedShellMesh, loadShellMesh, type ShellMesh } from './mesh.js';
 import { prepareSurfaceShellObject } from './prepare.js';
 import { sha256, verifiedBytes } from '../volume/source.js';
 import type { PreparedCssSurfaceShell } from '../../renderers/css/shell/types.js';
@@ -22,27 +23,52 @@ function close(actual: readonly number[], expected: readonly number[], tolerance
   actual.forEach((value, index) => assert(Math.abs(value - expected[index]!) < tolerance, `${actual} differs from ${expected}`));
 }
 
-test('illustrative source shape preserves nose, tail, nonlinear landmark and independent ICRF orientation', async () => {
-  const r = await recipe(); assert.equal(r.shape.kind, 'asymmetric-radial-shell');
-  if (r.shape.kind !== 'asymmetric-radial-shell') throw new Error('Expected the current illustrative fixture.');
-  const mesh = prepareShellMesh(r), columns = r.shape.longitudeSegments + 1;
-  assert.equal(mesh.positionsUnits.length, 561); assert.equal(mesh.triangles.length, 960);
-  close(mesh.positionsUnits[8 * columns + 16]!, [120, 0, 0]);
-  close(mesh.positionsUnits[8 * columns]!, [-210, 0, 0]);
-  close(mesh.positionsUnits[8 * columns + 8]!, [0, 0, 110.4]);
-  close(mesh.positionsUnits[0]!, [0, 110.4, 0]);
-  close(mesh.positionsUnits[16 * columns]!, [0, -110.4, 0]);
-  close(mesh.positionsUnits[6 * columns + 4]!, [-0.86238533 * 120, 0.31613827 * 120, 0.70012331 * 120], 2e-5);
-  const missingLobes = prepareShellMesh({ ...r, shape: { ...r.shape, lobeAmplitude: 0 } });
-  assert(Math.abs(missingLobes.positionsUnits[6 * columns + 4]![2] - mesh.positionsUnits[6 * columns + 4]![2]) > 18,
-    'Removing the nonlinear tail term must fail the independent landmark');
-  const [qx, qy, qz, qw] = r.frame.localToReferenceXyzw;
-  const rotatedNose = [120 * (1 - 2 * (qy * qy + qz * qz)), 240 * (qx * qy + qw * qz), 240 * (qx * qz - qw * qy)];
-  close(rotatedNose, [-29.52253917453236, -115.8215353812353, 10.66731562397298], 1e-9);
-  assert(Math.hypot(rotatedNose[0]! - 120, rotatedNose[1]!, rotatedNose[2]!) > 100, 'Identity orientation must fail');
-  for (let row = 0; row <= r.shape.latitudeSegments; row++) {
-    assert.deepEqual(mesh.positionsUnits[row * columns], mesh.positionsUnits[(row + 1) * columns - 1]);
-    assert.deepEqual(mesh.radialNormals[row * columns], mesh.radialNormals[(row + 1) * columns - 1]);
+test('scientific grid and uncertainty rows reproduce from the pinned publisher workbook and figure', () => {
+  const output = execFileSync('python3', [join(objectDirectory, 'source/ibex/extract.py'), '--check'], { encoding: 'utf8' });
+  assert.match(output, /IBEX ORIGINAL EXTRACTION VERIFIED: 56 macropixels; 67 matching entries; 13 tail-limit entries masked/);
+});
+
+test('published gridded source preserves physical samples and leaves sounding-limit gaps open', async () => {
+  const r = await recipe(); assert.equal(r.shape.kind, 'gridded-surface');
+  const source = JSON.parse(await readFile(join(objectDirectory, 'source', r.shape.path), 'utf8'));
+  const mesh = await loadShellMesh(join(objectDirectory, 'source'), r);
+  assert.deepEqual(mesh.positionsUnits, source.positionsUnits.flat().filter((p: unknown) => p !== null));
+  assert.equal(mesh.triangles.length, 87);
+  assert.equal(source.positionsUnits.flat().filter((p: unknown) => p === null).length, 13);
+  // Figure 8's unmodified nose sample is +Y, 120 AU. North/south pole samples
+  // are the authors' gridded 182/156 AU values, not the old analytic deformation.
+  close(source.positionsUnits[5][3], [0, 120, 0], 1e-10);
+  close(source.positionsUnits[0][0], [0, 0, -156], 1e-10);
+  close(source.positionsUnits[0][6], [0, 0, 182], 1e-10);
+  // Published modified ecliptic +Y is longitude 255 degrees, latitude zero.
+  const [x, y, z, w] = r.frame.localToReferenceXyzw;
+  const transformed = [2 * (x * y - w * z), 1 - 2 * (x * x + z * z), 2 * (y * z + w * x)];
+  const obliquity = 84381.448 / 3600 * Math.PI / 180, longitude = 255 * Math.PI / 180;
+  close(transformed, [Math.cos(longitude), Math.sin(longitude) * Math.cos(obliquity), Math.sin(longitude) * Math.sin(obliquity)], 1e-12);
+  // A source grid has no implicit cyclic seam or cap. Every face uses only
+  // immediate grid neighbours; excluded tail cells cannot gain closing faces.
+  const sourceIndices = source.positionsUnits.flatMap((row: unknown[], i: number) => row.flatMap((value, j) => value === null ? [] : [[i, j]]));
+  for (const triangle of mesh.triangles) {
+    const cells = triangle.map(index => sourceIndices[index]);
+    for (const axis of [0, 1]) assert(Math.max(...cells.map(c => c[axis])) - Math.min(...cells.map(c => c[axis])) <= 1);
+  }
+});
+
+test('gridded surfaces retain holes, suppress repeated-pole slivers and reject malformed samples', () => {
+  const input = { schema: 'cssearth-surface-grid@1', positionsUnits: [
+    [[1, 0, 2], [1, 1, 2], null], [[2, 0, 2], [2, 1, 2], [2, 2, 2]],
+  ] };
+  const mesh = parseGriddedShellMesh(input);
+  assert.equal(mesh.positionsUnits.length, 5); assert.equal(mesh.triangles.length, 2);
+  for (const triangle of mesh.triangles) assert(triangle.every(index => index < 5));
+  const pole = { schema: 'cssearth-surface-grid@1', positionsUnits: [
+    [[0, 0, 2], [1, 0, 1]], [[1e-15, 0, 2], [0, 1, 1]],
+  ] };
+  assert.equal(parseGriddedShellMesh(pole).triangles.length, 1, 'floating-point copies of a pole cannot create an extra skinny triangle');
+  for (const positionsUnits of [[], [[[1, 2, 3]]], [input.positionsUnits[0], []], [[null, null], [null, null]],
+    [[[0, 0, 0], [1, 1, 2]], [[2, 0, 2], [2, 1, 2]]],
+    [[[NaN, 0, 2], [1, 1, 2]], [[2, 0, 2], [2, 1, 2]]]]) {
+    assert.throws(() => parseGriddedShellMesh({ ...input, positionsUnits }));
   }
 });
 
@@ -163,7 +189,7 @@ test('every sorted triple and corner order selects its correct prepared tile wit
 });
 
 test('interpolated corner material reduces source shader error at outside and near-surface viewpoints', async () => {
-  const r = await recipe(), mesh = prepareShellMesh(r), shell = await prepared(), levels = r.atlas.facingLevels!;
+  const r = await recipe(), mesh = await loadShellMesh(join(objectDirectory, 'source'), r), shell = await prepared(), levels = r.atlas.facingLevels!;
   const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i]!, 0);
   const direction = (a: readonly number[], b: readonly number[]) => {
     const delta = a.map((v, i) => v - b[i]!), length = Math.hypot(...delta);
@@ -171,7 +197,7 @@ test('interpolated corner material reduces source shader error at outside and ne
   };
   const mix = (vectors: readonly (readonly number[])[], weights: readonly number[]) => [0, 1, 2].map(axis =>
     vectors.reduce((sum, v, corner) => sum + v[axis]! * weights[corner]!, 0));
-  for (const camera of [[456, 0, 0], [0, 0, 150]]) {
+  for (const camera of [[456, 0, 0], [0, 0, r.frame.boundsUnits.max[2] * 1.15]]) {
     let flatError = 0, interpolatedError = 0, samples = 0;
     for (let faceIndex = 0; faceIndex < mesh.triangles.length; faceIndex++) {
       const face = shell.faces[faceIndex]!;
@@ -199,7 +225,7 @@ test('pinned preparation deterministically regenerates actual geometry, images a
   try {
     const envelope = await prepareSurfaceShellObject({ objectDirectory, outputDirectory: temporary });
     assert.equal(envelope.type, 'surface-shell'); assert.equal(envelope.format, 'cssearth-surface-shell@1');
-    assert.equal(envelope.data.faces.length, 960);
+    assert.equal(envelope.data.faces.length, 87);
     for (const name of ['shell.json', 'surface-mesh.json', 'rim-atlas.png']) {
       assert.deepEqual(await readFile(join(temporary, name)), await readFile(join(objectDirectory, 'prepared', name)), `${name} must reproduce byte for byte`);
     }

@@ -6,6 +6,7 @@ import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { orderFacts } from "../fact-order.mjs";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
 import { requireObjectControls } from "../scene-contract.mjs";
+import { sceneSources } from "../scene-sources.mjs";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import SearchIcon from "./SearchIcon.astro";
 import MaterialSymbol from "./MaterialSymbol.astro";
@@ -165,7 +166,8 @@ const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
 const planetCount = PLANET_SEARCH_OBJECTS.length;
 const activeObject = OBJECTS.find((object) => object.id === objectId);
 const classificationLabel = activeObject && objectClassificationLabel(activeObject.classification);
-const hasResources = resources.length > 0;
+const sources = sceneSources(resources);
+const hasResources = sources.length > 0;
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ??
   orderedCharts[0];
@@ -581,7 +583,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
           />
         </summary>
         <div class="planet-resources-links">
-          {resources.map((resource) => (
+          {sources.map((resource) => (
             <a
               class="planet-resource-row"
               href={resource.href}
@@ -660,9 +662,9 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
 </aside>
 {hasResources && <footer
   class="planet-attribution-footer"
-  aria-label={`${title.label} scene sources`}
+  aria-label={`${title.label} and shared universe sources`}
 >
-  {resources.map((resource, index) => (
+  {sources.map((resource, index) => (
     <>
       {index > 0 && <span class="planet-attribution-separator" aria-hidden="true">·</span>}
       <a

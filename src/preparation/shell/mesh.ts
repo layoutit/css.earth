@@ -10,38 +10,9 @@ export interface ShellMesh {
 }
 export function unitVector(v: Vector3): Vector3 {
   const length = Math.hypot(...v);
-  if (!(length > 0)) throw new TypeError('Shell contains a degenerate direction.');
+  if (!(length > 0) || !Number.isFinite(length)) throw new TypeError('Shell contains a degenerate direction.');
   return v.map(n => n / length) as Vector3;
 }
-export function prepareShellMesh(recipe: ShellRecipe): ShellMesh {
-  const s = recipe.shape;
-  if (s.kind !== 'asymmetric-radial-shell') throw new TypeError('Indexed geometry must be loaded from its pinned source.');
-  const rows = s.latitudeSegments, columns = s.longitudeSegments + 1;
-  const positionsUnits: Vector3[] = [], radialNormals: Vector3[] = [], triangles: [number, number, number][] = [];
-  for (let j = 0; j <= rows; j++) {
-    const theta = j * Math.PI / rows, sinTheta = j === 0 || j === rows ? 0 : Math.sin(theta);
-    for (let i = 0; i < s.longitudeSegments; i++) {
-      const phi = i * 2 * Math.PI / s.longitudeSegments;
-      const x = sinTheta === 0 ? 0 : -sinTheta * Math.cos(phi), y = Math.cos(theta);
-      const z = sinTheta === 0 ? 0 : sinTheta * Math.sin(phi), tail = Math.max(-x, 0) ** s.tailExponent;
-      // Round normalized coordinates before computing radial normals, as the source does.
-      const p: Vector3 = [Math.fround(x * (1 + s.tailExtension * tail)),
-        Math.fround(y * (s.transverseScale - s.transverseContraction * tail)),
-        Math.fround(z * (s.transverseScale - s.transverseContraction * tail) + s.lobeAmplitude * tail * Math.tanh(s.lobeSharpness * z))];
-      radialNormals.push(unitVector(p).map(Math.fround) as Vector3);
-      positionsUnits.push(p.map(n => n * s.radiusUnits) as Vector3);
-    }
-    positionsUnits.push([...positionsUnits[j * columns]!]);
-    radialNormals.push([...radialNormals[j * columns]!]);
-  }
-  for (let j = 0; j < rows; j++) for (let i = 0; i < s.longitudeSegments; i++) {
-    const a = j * columns + i, b = a + columns;
-    if (j !== 0) triangles.push([a, b, a + 1]);
-    if (j !== rows - 1) triangles.push([a + 1, b, b + 1]);
-  }
-  return { positionsUnits, radialNormals, triangles };
-}
-
 /** Reads numeric right-handed geometry. Open meshes remain open: no caps or interpolation are invented. */
 export function parseIndexedShellMesh(value: unknown): ShellMesh {
   const source = record(value, 'indexed surface');
@@ -63,7 +34,44 @@ export function parseIndexedShellMesh(value: unknown): ShellMesh {
   return { positionsUnits, radialNormals, triangles };
 }
 export async function loadShellMesh(sourceDirectory: string, recipe: ShellRecipe): Promise<ShellMesh> {
-  if (recipe.shape.kind === 'asymmetric-radial-shell') return prepareShellMesh(recipe);
   const bytes = await verifiedBytes(sourceDirectory, recipe.shape);
-  return parseIndexedShellMesh(JSON.parse(bytes.toString('utf8')) as unknown);
+  const input: unknown = JSON.parse(bytes.toString('utf8'));
+  return recipe.shape.kind === 'gridded-surface' ? parseGriddedShellMesh(input) : parseIndexedShellMesh(input);
+}
+
+/** Connects adjacent published samples; null samples leave holes, including at the grid boundary. */
+export function parseGriddedShellMesh(value: unknown): ShellMesh {
+  const source = record(value, 'gridded surface'), rows = source.positionsUnits;
+  if (source.schema !== 'cssearth-surface-grid@1' || !Array.isArray(rows) || rows.length < 2 ||
+      !Array.isArray(rows[0]) || rows[0].length < 2 || rows.length * rows[0].length > 12_000) {
+    throw new TypeError('Gridded surface needs a bounded rectangular sample array.');
+  }
+  const columns = rows[0].length, positionsUnits: Vector3[] = [], radialNormals: Vector3[] = [];
+  const indices = rows.map(row => {
+    if (!Array.isArray(row) || row.length !== columns) throw new TypeError('Gridded surface rows must have equal length.');
+    return row.map(value => {
+      if (value === null) return -1;
+      const position = triple(value, 'grid vertex'), index = positionsUnits.length;
+      positionsUnits.push(position); radialNormals.push(unitVector(position)); return index;
+    });
+  });
+  const triangles: [number, number, number][] = [];
+  const connect = (ia: number, ib: number, ic: number) => {
+    if (ia < 0 || ib < 0 || ic < 0) return;
+    const a = positionsUnits[ia]!, b = positionsUnits[ib]!, c = positionsUnits[ic]!;
+    const ab = b.map((n, i) => n - a[i]!) as Vector3, ac = c.map((n, i) => n - a[i]!) as Vector3;
+    const normal: Vector3 = [ab[1] * ac[2] - ab[2] * ac[1], ab[2] * ac[0] - ab[0] * ac[2], ab[0] * ac[1] - ab[1] * ac[0]];
+    // Geographic grids repeat their pole sample; do not create zero-area triangles.
+    const scale = Math.max(Math.hypot(...ab), Math.hypot(...ac), Math.hypot(...b.map((n, i) => n - c[i]!)));
+    if (scale === 0 || Math.hypot(...normal) <= scale * scale * 1e-12) return;
+    const outward = normal.reduce((sum, n, i) => sum + n * a[i]!, 0);
+    if (outward === 0) throw new TypeError('Surface grid contains an edge-on radial face.');
+    triangles.push(outward > 0 ? [ia, ib, ic] : [ia, ic, ib]);
+  };
+  for (let row = 0; row < rows.length - 1; row++) for (let column = 0; column < columns - 1; column++) {
+    const a = indices[row]![column]!, b = indices[row + 1]![column]!, c = indices[row]![column + 1]!, d = indices[row + 1]![column + 1]!;
+    connect(a, b, c); connect(c, b, d);
+  }
+  if (!triangles.length || triangles.length > 20_000) throw new TypeError('Surface grid has no usable faces or exceeds the prepared face budget.');
+  return { positionsUnits, radialNormals, triangles };
 }

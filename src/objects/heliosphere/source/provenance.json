@@ -1,44 +1,129 @@
 {
   "schema": "cssearth-source-provenance@1",
-  "description": "Illustrative Galaxium heliosphere model recovered by Galaxio from its shipped constructor; this is not a measured heliopause boundary.",
+  "description": "IBEX-derived heliopause from Reisenfeld et al. (2021), original Figure 8 Z–H numerical surface with category 3 tail-limit triangles left open. Geometry is model-dependent, not a fully measured closed boundary.",
   "sources": [
     {
-      "path": "galaxio-heliosphereModel.ts.txt",
-      "sha256": "342353fb3b3b9ff4c1f155b55f17b5ba943076cbe18d2929c13fd78f37be24b4",
-      "origin": "galaxio/packages/engine/src/scene/heliosphereModel.ts"
+      "path": "ibex/NOTICE.md",
+      "sha256": "f600423a03d3a85d6ead2a4c5bfaf7b45f6fa5514743d4fad3c5b35f3beb81a1",
+      "bytes": 1675
     },
     {
-      "path": "galaxio-heliosphereRenderer.ts.txt",
-      "sha256": "b2af28ae40714152e608e0cbd2952f6c95fd47ddcfda1bd03f18e3b0e691613d",
-      "origin": "galaxio/packages/engine/src/scene/heliosphereRenderer.ts"
+      "path": "ibex/apjsabf658.tar.gz",
+      "sha256": "879656b96640a0fa98642884cf15ee120abcb89fbffaa1c2ab027b810412682d",
+      "bytes": 17671
     },
     {
-      "path": "LICENSE.GALAXIO-MIT.txt",
+      "path": "ibex/apjsabf658f8_int.html.gz",
+      "sha256": "6f598f4576ad24a7b53930a4dd6ee92fd143aad32393c5d31f552e38b27bcb1e",
+      "bytes": 1706239
+    },
+    {
+      "path": "ibex/extract.py",
+      "sha256": "379d2970cdda0073d084e0d008d6e5f0eb4ac975e115ff911f7beaccb778eaf0",
+      "bytes": 5504
+    },
+    {
+      "path": "ibex/heliopause-grid.json",
+      "sha256": "37744651c502570fd0bb80a122c6430abf3d743a3b72f131fd023e4900613f0e",
+      "bytes": 7556
+    },
+    {
+      "path": "ibex/macropixels.json",
+      "sha256": "34da7cd1986a8e4db56c9911e1e47ad549200d72a4646643dd64a0010ced6f58",
+      "bytes": 35861
+    },
+    {
+      "path": "LICENSE.rendering-MIT.txt",
       "sha256": "cb2e341b0397f15586815e1f4c6ccf5395ed14cfe6abc8633677fedfd69516a3",
-      "origin": "galaxio/LICENSE"
+      "bytes": 1077,
+      "role": "Original presentation software copyright and permission notice; unchanged bytes, not a license for IBEX data."
     }
   ],
+  "publication": {
+    "title": "A Three-dimensional Map of the Heliosphere from IBEX",
+    "doi": "10.3847/1538-4365/abf658",
+    "url": "https://doi.org/10.3847/1538-4365/abf658",
+    "journal": "The Astrophysical Journal Supplement Series 254, 40 (2021)",
+    "authors": [
+      "Daniel B. Reisenfeld",
+      "Maciej Bzowski",
+      "Herbert O. Funsten",
+      "Jacob Heerikhuisen",
+      "Paul H. Janzen",
+      "Marzena A. Kubiak",
+      "David J. McComas",
+      "Nathan A. Schwadron",
+      "Justyna M. Sokół",
+      "Alex Zimorino",
+      "Eric J. Zirnstein"
+    ],
+    "notice": "© 2021. The American Astronomical Society. All rights reserved.",
+    "dataLicense": "No separate license declared in the supplemental ReadMe; no CC-BY or MIT license asserted for the scientific source."
+  },
+  "originals": {
+    "tableArchive": {
+      "url": "https://content.cld.iop.org/journals/0067-0049/254/2/40/1/apjsabf658.tar.gz",
+      "sha256": "879656b96640a0fa98642884cf15ee120abcb89fbffaa1c2ab027b810412682d",
+      "bytes": 17671,
+      "workbook": "Table_heliosphere_dimensions_supplement.xlsx",
+      "workbookSha256": "29a5fd047ac9370eed6365e52542ec8f5dcc9a9d606144f221b292db13818e34",
+      "workbookBytes": 19492
+    },
+    "figure": {
+      "url": "https://content.cld.iop.org/journals/0067-0049/254/2/40/1/apjsabf658_int/apjsabf658f8_int.html",
+      "archiveUrl": "https://content.cld.iop.org/journals/0067-0049/254/2/40/1/apjsabf658_int/apjsabf658_int.tar.gz",
+      "archiveSha256": "92c1da49a96aeb915b6a16ccc4331eaab94aafb182477b7854ba64d46dd6f08e",
+      "archiveBytes": 14771200,
+      "originalHtmlSha256": "283cab7ada16be5d8e729f3d3799fd2fec3c0ef9f26b463c0a4fa9b45729b6cf",
+      "originalHtmlBytes": 5379009,
+      "compression": "Lossless gzip; original uncompressed HTML hash checked before extraction. Publisher JavaScript is never executed."
+    }
+  },
   "sourceReference": {
-    "latitudeSegments": 64,
-    "longitudeSegments": 128,
-    "triangles": 16128,
-    "referenceRadiusAu": 120,
-    "boundingRadiusAu": 210,
-    "approachDistanceAu": 456,
-    "nearDistanceWeight": "smoothstep(-5, 5, distanceAu)",
-    "farDistanceWeight": "1 - smoothstep(5000, 6000, distanceAu)",
-    "rendering": "Unlit FrontSide with normal alpha blending; depth test enabled and depth write disabled."
+    "observations": "IBEX-Hi ENA observations 2009–2019, correlated with earlier 1 AU solar-wind dynamic pressure; three assumed termination-shock models.",
+    "variant": "Figure 8 cyan surface, trace 0; Zirnstein–Heerikhuisen termination-shock model",
+    "rows": 13,
+    "columns": 7,
+    "coordinateUnit": "AU",
+    "metersPerAu": 149597870700,
+    "frame": "Modified right-handed J2000 ecliptic: +X at longitude 165 degrees; +Y at 255 degrees; +Z north ecliptic pole.",
+    "localToIcrf": "Rx(84381.448 arcseconds) * Rz(165 degrees)",
+    "macroPixelCount": 56,
+    "categoryCounts": {
+      "1": 21,
+      "2": 20,
+      "3": 10,
+      "4": 5
+    },
+    "categoryMeaning": {
+      "1": "Well-constrained upwind estimates, approximate uncertainty ±10 AU.",
+      "2": "Flanks/poles and high-latitude estimates, approximate uncertainty ±15 AU.",
+      "3": "Tail ENA formation-region edge, approximate ±30 AU sounding uncertainty; actual heliopause may be much farther. Not a measured tail closure.",
+      "4": "Five noisy regions manually constrained by neighboring pixels or higher-energy time structure; retained as published."
+    },
+    "crosscheck": {
+      "directlyMatchingGridEntries": 67,
+      "includesRepeatedSeamAndPoles": true,
+      "distanceToleranceAu": 1e-10,
+      "authorInterpolatedHighLatitudeEntries": 24,
+      "polarMacropixelLatitudeDeg": [
+        -85,
+        85
+      ],
+      "publishedPolarVertexLatitudeDeg": [
+        -90,
+        90
+      ]
+    }
   },
   "approximation": {
-    "latitudeSegments": 16,
-    "longitudeSegments": 32,
-    "triangles": 960,
-    "geometry": "Same Float32-rounded analytic deformation at one quarter the source angular sampling on each axis. Every prepared corner permutation covers the identical physical triangle.",
-    "normal": "Original source radial normals are prepared per vertex, normalized once offline. Runtime evaluates each vertex-facing scalar once, separately from geometric face culling.",
+    "geometry": "Exact published non-tail grid coordinates; all 13 category 3 entries (ten unique samples plus three seam duplicates) replaced by null. Preparation skips triangles touching null and omits degenerate pole triangles. No resampling, smoothing, interpolation or closing cap is added. Category 4 constrained values remain.",
+    "normal": "Prepared radial vertex normals support the display rim; geometric triangle normals govern face culling. Renderer-derived normals are not scientific measurements.",
     "material": "22 nonuniform facing levels in [-1,1]; 2024 sorted corner triples. Every 32px tile evaluates the original rim equation on barycentrically interpolated corner facing values, baking linear-to-sRGB color and alpha. Six prepared corner permutations address the shared sorted bank. Quantization, raster sampling, coarse silhouettes and the interpolation of vertex-facing scalars approximate the original per-pixel shader, particularly near the boundary.",
     "coverage": "All three triangle edges use exact pixel-area coverage inside a 1.5px transparent atlas inset. Prepared expanded parallelograms map the inset triangle corners to the unchanged physical source vertices. Fractional alpha is 1-(1-opacity)^coverage, so neighboring optical depths combine correctly under ordinary source-over. No runtime clipping, mask, filter or mesh construction.",
     "atlasDecodedBytes": 8290304,
-    "runtime": "960 retained triangle leaves plus three wrappers; 561 prepared vertex-facing samples and 960 face culling checks per visible camera publication. No per-face vector allocation."
+    "display": "Current colorLinear [0.5,0.9,0.8], opacity 0.2, rimFadeFacing 0.1, visibility and unitScale 50 preserved. These are presentation choices, not the paper’s photometry or plasma brightness.",
+    "runtime": "Fixed prepared triangle leaves and atlas. Scientific archives, workbook decoding, frame construction and grid triangulation remain offline."
   },
-  "attribution": "Galaxio code: Copyright (c) 2026 Juan Cruz Fortunatti, MIT License. Model recovered by Galaxio from Galaxium, as recorded in the copied source."
+  "attribution": "Scientific geometry: Reisenfeld et al. (2021), ApJS 254, 40, DOI 10.3847/1538-4365/abf658, IBEX. Retained rim-presentation software derivation: Copyright (c) 2026 Juan Cruz Fortunatti, MIT; see separate unchanged LICENSE.rendering-MIT.txt."
 }
