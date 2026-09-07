@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/uumap-cyl-180180.cub.gz",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/d20a2962f9343736a2cb82f7b18b746fdc606bbe301bbde9c99fe8cef8da84ad/uumap-cyl-180180.cub.gz"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    }
+  ]
+}

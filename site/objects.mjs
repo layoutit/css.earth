@@ -1,3 +1,7 @@
+import oberonDescriptor from "../src/planets/oberon/object.json" with { type: "json" };
+import titaniaDescriptor from "../src/planets/titania/object.json" with { type: "json" };
+import umbrielDescriptor from "../src/planets/umbriel/object.json" with { type: "json" };
+import arielDescriptor from "../src/planets/ariel/object.json" with { type: "json" };
 import mirandaDescriptor from "../src/planets/miranda/object.json" with { type: "json" };
 import charonDescriptor from "../src/planets/charon/object.json" with { type: "json" };
 import tritonDescriptor from "../src/planets/triton/object.json" with { type: "json" };
@@ -140,6 +144,26 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(mirandaDescriptor);
     }, mirandaDescriptor.properties.worldFrame),
+  object("ariel", "Ariel", "satellite", "#b0afa9", 19.2,
+    "Explore Ariel in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(arielDescriptor);
+    }, arielDescriptor.properties.worldFrame),
+  object("umbriel", "Umbriel", "satellite", "#918f8c", 19.2,
+    "Explore Umbriel in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(umbrielDescriptor);
+    }, umbrielDescriptor.properties.worldFrame),
+  object("titania", "Titania", "satellite", "#a8a59e", 19.2,
+    "Explore Titania in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(titaniaDescriptor);
+    }, titaniaDescriptor.properties.worldFrame),
+  object("oberon", "Oberon", "satellite", "#9f978e", 19.2,
+    "Explore Oberon in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(oberonDescriptor);
+    }, oberonDescriptor.properties.worldFrame),
   object("neptune", "Neptune", "planet", "#5279bd", 30.05,
     "Explore Neptune in 3D with cssEarth. Discover the distant blue ice giant, its turbulent atmosphere, faint rings, and orbiting moons.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

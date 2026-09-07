@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "ariel",
+  "owner": "object",
+  "context": {
+    "pixels": 256
+  },
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "schenk-2020-ariel-normal",
+    "path": "observations/aumap-cyl-180180.cub.gz",
+    "expectedBytes": 12992353,
+    "expectedSha256": "2e616ac7f472dfbca4226d58f24d8810e8f431b50059bfca4ce29258925328b9",
+    "origin": "https://repository.hou.usra.edu/bitstreams/fcdd781c-765e-4686-928f-257395918dc8/download",
+    "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+    "mirror": "https://earth-assets.lowpoly.cc/source-assets/2e616ac7f472dfbca4226d58f24d8810e8f431b50059bfca4ce29258925328b9/aumap-cyl-180180.cub.gz",
+    "upstreamSha256": "fd85bca38db1954253012f270f476100202b13709bb889dfb0cf5cc8e87cdd80",
+    "upstreamBytes": 26753560,
+    "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
+    "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
+    "license": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
+    "licenseEvidence": [
+      "observations/aaReadMe_uranian_MAP_DEM.txt",
+      "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+    ],
+    "acquisition": "Restore the byte-preserving compressed source mirror using preparation/acquisition.json.",
+    "redistribution": "Original cube retained byte-for-byte inside gzip; author, release reference and caveats accompany the prepared visualization.",
+    "width": 3652,
+    "height": 1826,
+    "projection": {
+      "type": "equirectangular",
+      "longitudeDegrees": [
+        -180,
+        180
+      ],
+      "latitudeDegrees": [
+        90,
+        -90
+      ],
+      "longitudeDirection": "east-positive",
+      "referenceRadiusMeters": 581100
+    },
+    "consumers": [
+      "surfaces",
+      "navigation"
+    ],
+    "lensId": "normal",
+    "label": "Monochrome",
+    "falseColor": false,
+    "coverage": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
+    "raster": {
+      "kind": "isis3-float-monochrome",
+      "grid": {
+        "width": 3652,
+        "height": 1826,
+        "targetName": "Ariel",
+        "centerLongitude": 180,
+        "referenceRadiusMeters": 581100,
+        "polarRadiusMeters": 577700,
+        "origin": [
+          -3652000,
+          913000
+        ],
+        "resolutionMeters": 1000,
+        "specialValueMagnitude": 1e+30,
+        "longitudeRange": [
+          -180,
+          180
+        ]
+      },
+      "displayRange": [
+        0,
+        3000
+      ]
+    }
+  },
+  "operations": [
+    {
+      "type": "extract",
+      "left": 2200,
+      "top": 1100,
+      "width": 700,
+      "height": 700
+    },
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "ensure-alpha"
+    },
+    {
+      "type": "ellipse-mask",
+      "cx": 0.5,
+      "cy": 0.5,
+      "rx": 0.5,
+      "ry": 0.5,
+      "shading": {
+        "ambient": 0.35,
+        "diffuse": 0.65
+      }
+    },
+    {
+      "type": "png"
+    }
+  ]
+}
