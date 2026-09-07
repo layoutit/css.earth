@@ -59,12 +59,36 @@ const report={schema:'cssearth-exploration@1',output,built,dpr,cycles,record,tra
     frameQualification:screenshots||memoryDumps?'Includes intrusive screenshot/memory-dump checkpoints; measure their overhead separately':'No screenshot, memory-dump or video observer when record=false'},
   actions:[],checkpoints:[],errors:[],consoleErrors:[],network:[]};
 await context.addInitScript(()=>{
-  const p=window.__exploration={phase:'startup',frames:[],tasks:[],samples:[],wheels:[],marks:[],blobs:[],live:new Map(),decodes:[],pendingDecodes:0};
+  const p=window.__exploration={phase:'startup',frames:[],tasks:[],samples:[],wheels:[],marks:[],blobs:[],live:new Map(),decodes:[],pendingDecodes:0,searches:[]};
+  // Measure the actual input event through the next callback with completed
+  // result rows. Keep superseded queries, misses and failures in the receipt.
+  let pendingSearch=null;
+  document.addEventListener('input',event=>{
+    if(!event.target.matches?.('.planet-sidebar-search'))return;
+    if(pendingSearch?.outcome==='pending')pendingSearch.outcome='superseded';
+    pendingSearch={query:event.target.value,at:performance.now(),phase:p.phase,trusted:event.isTrusted,outcome:'pending'};
+    p.searches.push(pendingSearch);
+  },true);
+  document.addEventListener('DOMContentLoaded',()=>{
+    const root=document.querySelector('.planet-destination-results');if(!root)return;
+    new MutationObserver(()=>{
+      const query=pendingSearch;if(!query||query.outcome!=='pending'||query.scheduled||root.closest('[hidden]'))return;
+      const hint=root.querySelector('.planet-destination-hint')?.textContent;
+      if(hint!=='Places'&&!hint?.startsWith('No matching places.')&&!hint?.startsWith('Places could not load.'))return;
+      query.readyAt=performance.now();query.scheduled=true;
+      const results=[...root.querySelectorAll('[data-destination-id]')].filter(node=>!node.closest('[hidden]')).map(node=>node.dataset.destinationId);
+      requestAnimationFrame(()=>{
+        if(pendingSearch!==query||query.outcome!=='pending')return;
+        query.callbackAt=performance.now();query.inputToCallbackMs=query.callbackAt-query.at;
+        query.outcome=hint==='Places'?'results':hint.startsWith('No matching')?'empty':'failed';query.results=results;
+      });
+    }).observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden']});
+  },{once:true});
   let previous,previousCallback,baseline=null;
   const frame=at=>{const callbackAt=performance.now();if(previous!==undefined)p.frames.push({at,ms:at-previous,callbackAt,callbackMs:callbackAt-previousCallback,visibility:document.visibilityState,phase:p.phase});previous=at;previousCallback=callbackAt;requestAnimationFrame(frame)};
   requestAnimationFrame(frame);
   new PerformanceObserver(list=>{for(const e of list.getEntries())p.tasks.push({at:e.startTime,ms:e.duration,phase:p.phase})}).observe({type:'longtask',buffered:true});
-  addEventListener('wheel',e=>p.wheels.push({at:performance.now(),deltaY:e.deltaY,phase:p.phase}),{passive:true});
+  addEventListener('wheel',e=>p.wheels.push({at:performance.now(),deltaY:e.deltaY,phase:p.phase,sceneTarget:!!e.target.closest?.('.planet-input-surface'),trusted:e.isTrusted}),{passive:true});
   const create=URL.createObjectURL,revoke=URL.revokeObjectURL,decode=HTMLImageElement.prototype.decode;
   URL.createObjectURL=function(blob){const url=create.call(this,blob);p.live.set(url,blob.size);p.blobs.push({kind:'create',at:performance.now(),url,bytes:blob.size});return url};
   URL.revokeObjectURL=function(url){p.live.delete(url);p.blobs.push({kind:'revoke',at:performance.now(),url});return revoke.call(this,url)};
@@ -108,8 +132,16 @@ const setOffline=async offline=>{
     report.offlineProbe=probe;assert.equal(probe.rejected,true,'Offline emulation must reject an uncached local request');
   }
 };
-const requests=new Map(),started=Date.now();let phase='startup',tracing=false;
+const requests=new Map(),contextRequests=new Map(),started=Date.now();let phase='startup',tracing=false;
 const relative=()=>Date.now()-started;
+// Playwright follows dedicated-worker sessions. Page-level CDP misses their
+// fetches and can leave the worker bootstrap request without a terminal event.
+// Preserve that raw CDP log for byte/cache accounting, but use the reconciled
+// context lifecycle to report which requests are actually pending.
+context.on('request',request=>contextRequests.set(request,{id:contextRequests.size,url:request.url(),at:relative(),phase,type:request.resourceType()}));
+context.on('response',response=>{const row=contextRequests.get(response.request());if(row)Object.assign(row,{status:response.status(),responseAt:relative()})});
+context.on('requestfinished',request=>{const row=contextRequests.get(request);if(row)row.end=relative()});
+context.on('requestfailed',request=>{const row=contextRequests.get(request);if(row)Object.assign(row,{end:relative(),error:request.failure()?.errorText})});
 const startTrace=async()=>{
   const extraCategories=gpuDetail?(await browserCdp.send('Tracing.getCategories')).categories.filter(name=>/dawn|skia/i.test(name)):[];
   report.extraTraceCategories=extraCategories;
@@ -151,15 +183,49 @@ const select=async(name,id)=>{
 };
 const lens=async id=>page.locator(`button[name="lens"][value="${id}"]:visible`).click({timeout:15000,delay:100});
 let pointer={x:930,y:500};
+const sceneHit=point=>page.evaluate(({x,y})=>!!document.elementFromPoint(x,y)?.closest('.planet-input-surface'),point);
+const revealScene=async()=>{
+  // On portrait layouts, reading a card scrolls the document. Return to the
+  // map with ordinary wheel input before aiming at its current screen bounds.
+  for(let step=0;step<8;step++){
+    const scroll=await page.evaluate(()=>{
+      if(scrollY<=1)return null;
+      for(const y of [innerHeight*.6,innerHeight*.4,innerHeight*.8])for(const x of [innerWidth*.5,innerWidth*.8]){
+        if(document.elementFromPoint(x,y)?.closest('.planet-sidebar'))return {x,y,from:scrollY};
+      }
+      throw new Error('No visible information panel to scroll back from.');
+    });
+    if(!scroll)break;
+    await page.mouse.move(scroll.x,scroll.y,{steps:8});
+    await page.mouse.wheel(0,-Math.min(700,scroll.from+80)*dpr);await look(200);
+    const to=await page.evaluate(()=>scrollY);
+    (report.actions.at(-1).documentScrolls??=[]).push({from:scroll.from,to});
+    assert.ok(to<scroll.from,'Wheel input over the information panel must reveal the map');
+  }
+  pointer=await page.evaluate(()=>{
+    const r=document.querySelector('.polycss-camera').getBoundingClientRect();
+    return {x:Math.min(innerWidth-190,r.left+r.width/2+40),y:r.top+r.height/2};
+  });
+  assert.ok(await sceneHit(pointer),'The gesture must start on the visible map input surface');
+};
 const drag=async(dx,dy=20)=>{
+  await revealScene();
+  assert.ok(await sceneHit({x:pointer.x+dx,y:pointer.y+dy}),'The drag must finish on the visible map');
+  const before=(await state()).transform;
   await page.mouse.move(pointer.x,pointer.y,{steps:12});await page.mouse.down();await look(90);
   for(let i=1;i<=30;i++){const t=(1-Math.cos(Math.PI*i/30))/2;await page.mouse.move(pointer.x+dx*t,pointer.y+dy*t);await look(28)}
   await look(90);await page.mouse.up();
+  assert.notEqual((await state()).transform,before,'The drag must actually move the camera');
 };
 const wheel=async(total,steps=20)=>{
+  await revealScene();const before=(await state()).transform;
+  const first=await page.evaluate(()=>window.__exploration.wheels.length);
   await page.mouse.move(pointer.x,pointer.y,{steps:12});
   const weights=Array.from({length:steps},(_,i)=>Math.sin(Math.PI*(i+1)/(steps+1))),sum=weights.reduce((a,b)=>a+b,0);
   for(const weight of weights){await page.mouse.wheel(0,total*weight/sum*dpr);await look(55)}
+  const delivered=await page.evaluate(first=>window.__exploration.wheels.slice(first),first);
+  assert.ok(delivered.length>0&&delivered.every(event=>event.trusted&&event.sceneTarget),'Zoom input must reach the map');
+  assert.notEqual((await state()).transform,before,'The zoom gesture must actually move the camera');
 };
 const checkpoint=async name=>{
   await mark(`checkpoint-${name}`);
@@ -169,7 +235,9 @@ const checkpoint=async name=>{
     row.memoryDump=await browserCdp.send('Tracing.requestMemoryDump',{levelOfDetail:'detailed'});
     await mark(`memory-${name}-end`);
   }
-  row.pendingRequests=[...requests.values()].filter(r=>r.end===undefined).map(r=>({url:r.url,age:relative()-r.at}));
+  row.pendingRequests=[...contextRequests.values()].filter(r=>r.end===undefined).map(r=>({url:r.url,age:relative()-r.at}));
+  row.unresolvedPageNetworkEvents=[...requests.values()].filter(r=>r.end===undefined).map(r=>({url:r.url,age:relative()-r.at}));
+  row.workerTargets=page.workers().map(worker=>worker.url());
   report.checkpoints.push(row);if(screenshots)await page.screenshot({path:resolve(output,`${name}.png`)});
   await writeFile(resolve(output,'progress.json'),JSON.stringify({checkpoint:row,actions:report.actions.length,errors:report.errors},null,2));
   console.log(JSON.stringify({checkpoint:name,entity:row.state.entity,pages:row.state.pages.length,pending:row.pendingRequests.length,elapsed:relative(),output}));
@@ -213,7 +281,13 @@ try{
     await action('compare-imagery',()=>lens('normal'));await look(3500);
     await action('compare-noise',()=>lens('buenos-aires-noise'));await look(4500);
   }else{
-    await action('correct-search',async()=>{await search.pressSequentially('Buneos',{delay:100});await look(700);await search.press('ControlOrMeta+A');await search.pressSequentially('Buenos Aires',{delay:90});await page.locator('[data-destination-id="3435910"]:visible').click({delay:100})});
+    await action('correct-search',async()=>{
+      await search.click({clickCount:3,delay:100});
+      await search.pressSequentially('Buneos',{delay:100});assert.equal(await search.inputValue(),'Buneos');
+      await look(700);await search.press('ControlOrMeta+A');
+      await search.pressSequentially('Buenos Aires',{delay:90});assert.equal(await search.inputValue(),'Buenos Aires');
+      await page.locator('[data-destination-id="3435910"]:visible').click({delay:100});
+    });
     await look(6500);await action('small-zoom',()=>wheel(-51,10));await look(2000);
     await action('city-drag',()=>drag(-100));await look(1600);
     await action('noise',()=>lens('buenos-aires-noise'));await look(5000);await checkpoint('first-noise');await assertOwner('3435910');
@@ -260,20 +334,30 @@ try{
   assert.deepEqual(report.errors,[]);report.functionalPassed=true;
 }catch(error){report.functionalPassed=false;report.error=String(error);await page.screenshot({path:resolve(output,'failure.png')}).catch(()=>{})}
 finally{
+  const cleanup=name=>{const step={name,at:relative()};(report.cleanup??=[]).push(step);console.log(JSON.stringify({cleanup:step,output}))};
+  cleanup('reset-network');
   await context.setOffline(false).catch(()=>{});
   if(tracing)await stopTrace();
-  report.metrics=await page.evaluate(()=>{const p=window.__exploration;return {frames:p.frames,tasks:p.tasks,samples:p.samples,wheels:p.wheels,marks:p.marks,blobs:p.blobs,decodes:p.decodes}}).catch(()=>null);
-  report.network=[...requests.values()];report.scripts=[...new Map(fixture.requests.filter(r=>r.sha256).map(r=>[r.path,r])).values()];
+  cleanup('capture-metrics');
+  report.metrics=await page.evaluate(()=>{const p=window.__exploration;return {frames:p.frames,tasks:p.tasks,samples:p.samples,wheels:p.wheels,marks:p.marks,blobs:p.blobs,decodes:p.decodes,searches:p.searches}}).catch(()=>null);
+  report.network=[...requests.values()];report.contextNetwork=[...contextRequests.values()];
+  report.scripts=[...new Map(fixture.requests.filter(r=>r.sha256).map(r=>[r.path,r])).values()];
   for(const script of report.scripts)assert.equal(script.sha256,createHash('sha256').update(await readFile(resolve(built,`.${script.path}`))).digest('hex'));
   // Read backend identity after the journey so inspection cannot warm its GPU
   // process before the measured cold arrival.
+  cleanup('read-graphics');
   try{report.environment.graphics=(await browserCdp.send('SystemInfo.getInfo')).gpu}
   catch(error){report.environment.graphicsReadError=String(error)}
-  await context.close();report.video=await page.video()?.path();await browser.close();await fixture.close();report.closed=true;report.elapsed=relative();
+  cleanup('close-context');await context.close();report.video=await page.video()?.path();
+  cleanup('close-browser');await browser.close();
+  cleanup('close-fixture');await fixture.close();report.closed=true;report.elapsed=relative();cleanup('complete');
   const intervals=(report.metrics?.frames??[]).map(f=>f.ms).sort((a,b)=>a-b);
+  const interactive=(report.metrics?.frames??[]).filter(frame=>frame.phase!=='startup');
+  const callbacks=interactive.map(frame=>frame.callbackMs).sort((a,b)=>a-b);
+  const searchCallbacks=(report.metrics?.searches??[]).filter(query=>query.outcome==='results').map(query=>query.inputToCallbackMs).sort((a,b)=>a-b);
   report.summary={functionalPassed:report.functionalPassed,visualStatus:report.visualStatus,
     traceStatus:!trace?'not-recorded':!report.traceFile?'invalid-phase-not-reached':report.traceDataLoss?'invalid-data-loss':'captured-awaiting-analysis',
-    actions:report.actions.length,frameP95:intervals[Math.floor(intervals.length*.95)],worstFrame:intervals.at(-1),framesOver100:intervals.filter(ms=>ms>100).length,pageErrors:report.errors.length};
+    actions:report.actions.length,interactionCallbackP95:callbacks[Math.floor(callbacks.length*.95)],interactionCallbackMax:callbacks.at(-1),interactionCallbacksOver100:callbacks.filter(ms=>ms>100).length,searchResultCallbackP95:searchCallbacks[Math.floor(searchCallbacks.length*.95)],frameP95:intervals[Math.floor(intervals.length*.95)],worstFrame:intervals.at(-1),framesOver100:intervals.filter(ms=>ms>100).length,pageErrors:report.errors.length};
   await writeFile(resolve(output,'report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({output,...report.summary,error:report.error}));
 }
 if(!report.functionalPassed)process.exitCode=1;
