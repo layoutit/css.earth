@@ -17,13 +17,27 @@ async function changedObject(id, mutate) {
 const firstTexture = plan => plan.tree.nodes.findIndex(node => node.attributes?.["data-prepared-projection"] === "single-leaf");
 const omitProperties = (plan, node, names) => { node.properties = node.properties.filter(id => !names.includes(plan.tree.properties[id].name)); };
 
-test("all existing objects supply complete reachable normalized projective layouts", async () => {
+test("all existing objects supply complete reachable prepared texture layouts", async () => {
   const result = await censusPreparedLeafLayouts();
   assert.equal(result.complete, true, JSON.stringify(result.objects.flatMap(object => object.failures)));
   assert.equal(result.evidence, "validated-source-data");
   assert.deepEqual(result.objects.map(object => object.id), OBJECTS.map(object => object.id));
   assert.ok(result.objects.every(object => object.count > 0 && object.failures.length === 0 && /^[a-f0-9]{64}$/.test(object.sourceSha256)));
   assert.equal(result.objects.find(object => object.id === "saturn").completedByDescriptor, 162);
+});
+test("native raster triangle audit rejects missing dimensions, addresses, flattening and projective matrices", async () => {
+  for (const [mutate, error] of [
+    [node => { node.style = node.style.replace(/--polycss-atlas-width:[^;]+/, '--polycss-atlas-width:0px'); }, /explicit positive width/],
+    [node => { node.style = node.style.replace(/background-position:[^;]+/, 'background-position:auto'); }, /texture address/],
+    [node => { node.style += ';transform-style:flat'; }, /flattening/],
+    [node => { node.style = node.style.replace(/matrix3d\(([^)]+)\)/, (_, text) => {
+      const matrix = text.split(','); matrix[3] = '0.1'; return `matrix3d(${matrix.join(',')})`;
+    }); }, /affine transform/],
+  ]) {
+    const { result } = await changedObject('vesta', plan => mutate(plan.tree.nodes.find(node => node.tag === 'u')));
+    assert.equal(result.complete, false);
+    assert.ok(result.objects[0].failures.some(failure => error.test(failure.error)), JSON.stringify(result.objects[0].failures));
+  }
 });
 test("removing Saturn's actual normalized layout assignments exposes all 162 original omissions", async () => {
   const { result, changed } = await changedObject("saturn", plan => {
