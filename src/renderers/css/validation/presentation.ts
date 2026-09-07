@@ -105,6 +105,21 @@ export function requireFacing(value: unknown, tree: PreparedTree): void {
 }
 export function requireOptionalPresentation(plan: Record<string, unknown>, tree: PreparedTree, controls: ObjectControls): void {
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [];
+  if (plan.surfaceHit !== undefined) {
+    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles']);
+    if (!ancestor(nodeReference(hit.target, tree), tree.scene, tree)) fail('surface hit target must belong to scene');
+    const triangles = array(hit.triangles, 'surface hit triangles');
+    if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
+    for (const input of triangles) {
+      const triangle = array(input, 'surface triangle');
+      if (triangle.length !== 3) fail('surface triangle needs three points');
+      for (const value of triangle) {
+        const point = array(value, 'surface point');
+        if (point.length !== 3) fail('surface point needs three coordinates');
+        point.forEach(n => finite(n, 'surface coordinate'));
+      }
+    }
+  }
   if (plan.motionFrame !== undefined) {
     const frame = array(plan.motionFrame, 'motion frame'); if (!frame.length) fail('motion frame is empty'); unique(frame, 'motion frame');
     for (const value of frame) if (!ancestor(nodeReference(value, tree), tree.scene, tree)) fail('motion frame must belong to scene');

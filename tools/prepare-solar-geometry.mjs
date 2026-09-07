@@ -37,10 +37,11 @@ const EPOCH_LABEL = "2026-09-04T00:00:00 TT";
 const VSOP87A_KEY = Object.freeze({ earth: "emb" });
 
 const BODIES = OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite"].includes(body.classification)).map(body => body.id);
+  ["planet", "dwarf-planet", "satellite", "asteroid"].includes(body.classification)).map(body => body.id);
 
 const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
+  ASTEROID_IDS, asteroidElements,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
   systemBarycentreHeliocentricAu,
   systemBarycentreVelocityAuPerDay,
@@ -119,7 +120,8 @@ const entries = BODIES.map((body) => {
        ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
     : GM_SUN_AU3_PER_DAY2;
   const kepler = DWARF_PLANET_IDS.includes(body)
-    ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT) : null;
+    ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT)
+    : ASTEROID_IDS.includes(body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT) : null;
   const heliocentricAu = isSatellite
     ? parentPosition.map((value, index) => value + moonPosition[index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
     ? kepler.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)

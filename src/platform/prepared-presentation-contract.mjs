@@ -38,7 +38,7 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "surfaceHit"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -207,6 +207,17 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     if (!array(plan.motionFrame,"motion frame").length) fail("motion frame is empty");
     unique(plan.motionFrame,"motion frame");
     for(const id of plan.motionFrame) {node(id);if(!ancestor(id,tree.scene))fail("motion frame must belong to scene");}
+  }
+  if (plan.surfaceHit !== undefined) {
+    const hit = plan.surfaceHit;
+    record(hit, 'surface hit', ['target', 'triangles']); node(hit.target);
+    if (!ancestor(hit.target, tree.scene)) fail('surface hit target must belong to scene');
+    const triangles = array(hit.triangles, 'surface hit triangles');
+    if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
+    for (const triangle of triangles) {
+      if (!Array.isArray(triangle) || triangle.length !== 3 || triangle.some(point =>
+        !Array.isArray(point) || point.length !== 3 || point.some(n => !Number.isFinite(n)))) fail('surface hit requires finite prepared triangles');
+    }
   }
   if (plan.pageLayers !== undefined) {
     const layers=array(plan.pageLayers,"page layers");unique(layers.map(layer=>layer.id),"page layers");

@@ -1,6 +1,7 @@
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
+import { BASE_TILE } from '@layoutit/polycss';
 import { prepareSolidBodySurface } from '../../../src/platform/prepare-solid-body-surface.mjs';
 import { preparePerspectiveCamera } from '../../../src/platform/prepare-perspective-camera.mjs';
 import { prepareHeliocentricView } from '../../../src/platform/prepare-heliocentric-view.mjs';
@@ -21,7 +22,7 @@ import { prepareMaterialTracks } from '../../prepare-materials.mjs';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mjs';
 import { requirePreparedResourceCatalog } from '../../object-runtime-contract.mjs';
 
-export async function prepareSolidScene({ config, celestial, outputDirectory }) {
+export async function prepareSolidScene({ config, celestial, outputDirectory, radial = null }) {
   const { namespace: id, geometry } = config;
   const { BODIES } = await loadAstronomyPackage();
   const radiusKm = BODIES[id].meanRadiusKm, radius = geometry.radius;
@@ -33,8 +34,9 @@ export async function prepareSolidScene({ config, celestial, outputDirectory }) 
   const sun = celestial.sun;
   const scene = {
     camera: preparePerspectiveCamera({ sky, radius, ...geometry.camera }), sky, sun,
+    ...(radial ? { surfaceTriangles: radial.faces.map(face => face.vertices.map(v => [v[1] * BASE_TILE, v[0] * BASE_TILE, v[2] * BASE_TILE])) } : {}),
     systemTransform: frame.cssTransform,
-    bodyLeaves: prepareSolidBodySurface({ id, radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
+    bodyLeaves: radial?.leaves ?? prepareSolidBodySurface({ id, radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
       sourceWidth: config.raster.width, sourceHeight: config.raster.height,
       latitudeSegments: config.raster.bandCount, gutter: config.raster.gutter,
       poleTileSize: config.raster.poleSize }),
@@ -76,6 +78,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     ...surfaces.flatMap(s => [
       { key: `surface:${s.id}`, url: s.surface.url, pool: s.id === config.presentation.defaultLens ? 'mounted' : 'lenses' },
       { key: `poles:${s.id}`, url: s.polesUrl, pool: s.id === config.presentation.defaultLens ? 'mounted' : 'lenses' },
+      ...(s.shadowSurface ? [{ key: `shadow:${s.id}`, url: s.shadowSurface.url, pool: 'lenses' }] : []),
     ]),
   ];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.bodyLeaves.map(leaf => leaf.style)) });
@@ -96,15 +99,15 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     rotation: { kind: 'angle', source: 'view-sun', reference: 'prepared', baseDegrees: 0,
       zeroAtPole: false, property: `--${id}-light-roll` }, frameAttribute: null, modeAttribute: null, quoted: true };
   const variants = surfaces.flatMap(s => [false, true].flatMap(shadows => [false, true].map(orbit => ({
-    when: { lensId: s.id, shadows, orbit }, required: [`surface:${s.id}`, `poles:${s.id}`, 'lighting'],
+    when: { lensId: s.id, shadows, orbit }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, 'lighting'],
     writes: [
-      { kind: 'texture', target: index(body), name: `--${id}-surface-image`, resource: `surface:${s.id}`, quoted: true },
+      { kind: 'texture', target: index(body), name: `--${id}-surface-image`, resource: s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, quoted: true },
       { kind: 'texture', target: index(body), name: `--${id}-poles-image`, resource: `poles:${s.id}`, quoted: true },
       { kind: 'style', target: index(materialRoot), name: `--${id}-billboard-color`, value: s.billboardColor },
       { kind: 'attribute', target: -1, name: 'data-lens', value: s.id },
       { kind: 'class', target: -1, name: `${id}-hide-orbit`, value: !orbit },
     ],
-    materials: [{ track: 'lighting', bank: 'atlas', mode: shadows ? 'frames' : 'fixed', enabled: true,
+    materials: config.geometry.radialTerrain ? [] : [{ track: 'lighting', bank: 'atlas', mode: shadows ? 'frames' : 'fixed', enabled: true,
       rotationEnabled: shadows, frameOverride: null, clearWhenHidden: true, fixedMode: 'full-phase-curvature' }],
   }))));
   const atlasUrl = config.presentation.markerAtlasUrl;
@@ -121,7 +124,8 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       ...(entries.some(entry => entry.pool === 'lenses')
         ? [preparedResourcePool('lenses', entries, { retention: 'selection', capacity: 4, concurrency: 2 })] : [])],
     startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
-    tree, variants, materials: [track], animations: [],
+    tree, variants, materials: config.geometry.radialTerrain ? [] : [track], animations: [],
+    ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles } } : {}),
     heliocentricView: { plan: plan.heliocentricView,
       bodyMarker: { url: atlasUrl, ...sprite(id), size: 3 },
       systemMarkers: { url: atlasUrl, sun: sprite('sun'),

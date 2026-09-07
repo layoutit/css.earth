@@ -1,0 +1,26 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  4 Vesta (A807 FA)            2026-Sep-07 09:18:18
+Rec #:       4 (+COV) Soln.date: 2021-Apr-13_11:15:57   # obs: 9451 (1950-2021)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458849.5 ! 2020-Jan-01.00 (TDB)         Residual RMS= .47385
+   EC= .08857261385730482  QR= 2.15270823108896    TP= 2458247.8038331456
+   OM= 103.8092892453337   W=  150.8357762126256   IN= 7.14181494423702
+   A= 2.361908654291772    MA= 163.3754032354997   ADIST= 2.571109077494583
+   PER= 3.62997            N= .271524753           ANGMOM= .026333145
+   DAN= 2.53982            DDN= 2.17514            L= 254.8345779
+   B= 3.4734318            MOID= 1.13987994        TP= 2018-May-09.3038331456
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= 17.28828            RAD= 261.385            ROTPER= 5.342128
+   H= 3.25                 G= .320                 B-V= .782
+                           ALBEDO= .4228           STYP= V
+
+ASTEROID comments: 
+1: soln ref.= JPL#36, OCC=0           radar(2977 delay, 0 Dop
+2: source=ORB
+*******************************************************************************
