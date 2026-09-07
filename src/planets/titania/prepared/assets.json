@@ -1,0 +1,16 @@
+{
+  "surfaces": {
+    "normal": {
+      "url": "/scenes/titania/titania-normal-surface@2x.webp",
+      "url2x": "/scenes/titania/titania-normal-surface@2x.webp",
+      "polesUrl": "/scenes/titania/titania-normal-poles@2x.webp",
+      "polesUrl2x": "/scenes/titania/titania-normal-poles@2x.webp"
+    },
+    "elevation": {
+      "url": "/scenes/titania/titania-elevation-surface@2x.webp",
+      "url2x": "/scenes/titania/titania-elevation-surface@2x.webp",
+      "polesUrl": "/scenes/titania/titania-elevation-poles@2x.webp",
+      "polesUrl2x": "/scenes/titania/titania-elevation-poles@2x.webp"
+    }
+  }
+}

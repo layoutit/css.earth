@@ -7,7 +7,7 @@ import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-su
 import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mjs';
 import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor } from './scientific-raster.mjs';
-import {prepareMaskedObservation, prepareFloatObservation} from './observed-geotiff.mjs';
+import {prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation} from './observed-geotiff.mjs';
 import { prepareByteObservation } from './observed-image.mjs';
 import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mjs';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mjs';
@@ -31,6 +31,7 @@ function surfaceEncoding(config) {
 
 export async function readObservation(sourceDirectory, entry, validity, width, height) {
   const path = resolve(sourceDirectory, entry.path);
+  if (validity.kind === 'isis3-float-monochrome') return prepareIsisObservation(path, entry, validity, width, height);
   if (['geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(validity.kind)) return prepareFloatObservation(path, entry, validity, width, height);
   const metadata = await sharp(path).metadata();
   if (metadata.width !== entry.width || metadata.height !== entry.height) throw new Error(`Observation source dimensions changed: ${entry.path}`);
