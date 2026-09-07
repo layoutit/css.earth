@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:gaskell.phoebe.shape-model:data:phoebe_ver128q_tab</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>PHOEBE Q=128 VERTEX-FACET SHAPE MODEL</title>
+    <information_model_version>1.10.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Gaskell, R.W.</author_list>
+      <publication_year>2013</publication_year>
+      <description>This line gives the count of plates     
+        representing the surface of the numerical shape model of Phoebe,      
+        derived from the Implicitly Connected Quadrilateral (ICQ) model with q
+        = 128, also included in this data set.  The shape model comprises     
+        triangular plates and vertices that are specified in a body-fixed     
+        coordinate system.Table of triangular plates of numerical 
+        shape model.  These triangular plates approximate the surface of the  
+        target.  The corners of each triangular plate are three vertices from 
+the vertex table, indicated by vertex number.This line gives the count of vertices   
+        representing the surface of the numerical shape model of Phoebe,      
+        derived from the Implicitly Connected Quadrilateral (ICQ) model with q
+        = 128, also included in this data set.  The shape model comprises     
+        triangular plates and vertices that are specified in a body-fixed     
+        coordinate system.Table of vertices of numerical shape    
+        model. These are the vertices of plates that approximate the surface  
+        of the target.  Each row of this table contains the X, Y and Z        
+        coordinates of one vertex in a Cartesian coordinate system.</description>
+    </Citation_Information>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2020-02-28</modification_date>
+        <version_id>1.0</version_id>
+        <description>Migrated from PHOEBE_VER128Q_TAB in CO-SA-ISSNA-5-PHOEBESHAPE-V2.0</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time xsi:nil="true" nilReason="inapplicable" />
+      <stop_date_time xsi:nil="true" nilReason="inapplicable" />
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <wavelength_range>Visible</wavelength_range>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>CASSINI-HUYGENS</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.cassini-huygens</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <name>CO + ISSNA</name>
+      <description>CASSINI ORBITER with IMAGING SCIENCE SUBSYSTEM - NARROW      
+        ANGLE</description>
+      <Observing_System_Component>
+        <name>IMAGING SCIENCE SUBSYSTEM - NARROW      
+        ANGLE</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:issna.co</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>CASSINI ORBITER</name>
+        <type>Spacecraft</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.co</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <name>CO + ISSWA</name>
+      <description>CASSINI ORBITER with IMAGING SCIENCE SUBSYSTEM - WIDE ANGLE</description>
+      <Observing_System_Component>
+        <name>IMAGING SCIENCE SUBSYSTEM - WIDE ANGLE</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:isswa.co</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>CASSINI ORBITER</name>
+        <type>Spacecraft</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.co</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Saturn IX (Phoebe)</name>
+      <type>Satellite</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:satellite.saturn.phoebe</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <Internal_Reference>
+      <lid_reference>urn:nasa:pds:gaskell.phoebe.shape-model:document:bundle_description</lid_reference>
+      <reference_type>data_to_document</reference_type>
+    </Internal_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>phoebe_ver128q.tab</file_name>
+      <local_identifier>PHOEBE_VER128Q_TAB</local_identifier>
+      <creation_date_time>2013-04-16</creation_date_time>
+      <file_size unit="byte">16897992</file_size>
+      <records>296456</records>
+    </File>
+    <Table_Character>
+      <local_identifier>PLATECOUNT_TABLE</local_identifier>
+      <offset unit="byte">5691279</offset>
+      <records>1</records>
+      <description>This line gives the count of plates     
+        representing the surface of the numerical shape model of Phoebe,      
+        derived from the Implicitly Connected Quadrilateral (ICQ) model with q
+        = 128, also included in this data set.  The shape model comprises     
+        triangular plates and vertices that are specified in a body-fixed     
+        coordinate system.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>1</fields>
+        <groups>0</groups>
+        <record_length unit="byte">57</record_length>
+        <Field_Character>
+          <name>NUMPLATES</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">8</field_length>
+          <field_format>%8d</field_format>
+          <description>The number of triangular plates in the  
+        shape model</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>PLATE_TABLE</local_identifier>
+      <offset unit="byte">5691336</offset>
+      <records>196608</records>
+      <description>Table of triangular plates of numerical 
+        shape model.  These triangular plates approximate the surface of the  
+        target.  The corners of each triangular plate are three vertices from 
+        the vertex table, indicated by vertex number.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">57</record_length>
+        <Field_Character>
+          <name>PLATE_NUMBER</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">10</field_length>
+          <field_format>%10d</field_format>
+          <description>A unique number assigned to each plate  
+        in the model</description>
+        </Field_Character>
+        <Field_Character>
+          <name>PLATE_VERTEX_1</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">12</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9d</field_format>
+          <description>The vertex number of the first of three 
+        vertices defining this triangular plate.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>PLATE_VERTEX_2</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">22</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9d</field_format>
+          <description>The vertex number of the second of three
+        vertices defining this triangular plate.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>PLATE_VERTEX_3</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">32</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9d</field_format>
+          <description>The vertex number of the third of three 
+        vertices defining this triangular plate.</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>VERTEXCOUNT_TABLE</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>1</records>
+      <description>This line gives the count of vertices   
+        representing the surface of the numerical shape model of Phoebe,      
+        derived from the Implicitly Connected Quadrilateral (ICQ) model with q
+        = 128, also included in this data set.  The shape model comprises     
+        triangular plates and vertices that are specified in a body-fixed     
+        coordinate system.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>1</fields>
+        <groups>0</groups>
+        <record_length unit="byte">57</record_length>
+        <Field_Character>
+          <name>NUMVERTICES</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">8</field_length>
+          <field_format>%8d</field_format>
+          <description>Number of vertices in the shape model</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>VERTEX_TABLE</local_identifier>
+      <offset unit="byte">57</offset>
+      <records>99846</records>
+      <description>Table of vertices of numerical shape    
+        model. These are the vertices of plates that approximate the surface  
+        of the target.  Each row of this table contains the X, Y and Z        
+        coordinates of one vertex in a Cartesian coordinate system.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">57</record_length>
+        <Field_Character>
+          <name>VERTEX_NUMBER</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">10</field_length>
+          <field_format>%10d</field_format>
+          <description>A unique number assigned to each vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>VERTEX_X</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">12</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">14</field_length>
+          <field_format>%14.5f</field_format>
+          <unit>Kilometer</unit>
+          <description>The x coordinate of the specified vertex
+        in the model</description>
+        </Field_Character>
+        <Field_Character>
+          <name>VERTEX_Y</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">27</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">14</field_length>
+          <field_format>%14.5f</field_format>
+          <unit>Kilometer</unit>
+          <description>The y coordinate of the specified vertex
+        in the model</description>
+        </Field_Character>
+        <Field_Character>
+          <name>VERTEX_Z</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">42</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">14</field_length>
+          <field_format>%14.5f</field_format>
+          <unit>Kilometer</unit>
+          <description>The z coordinate of the specified vertex
+        in the model</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>
+

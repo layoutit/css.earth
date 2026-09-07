@@ -2,7 +2,7 @@ import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, BASE_TILE } from '@layoutit/polycss';
-import { loadObjShape } from './obj-shape.mjs';
+import { loadObjShape, loadPdsVertexFacetShape } from './obj-shape.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
 import { createRasterEmitter } from './solid-raster.mjs';
 import { prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mjs';
@@ -18,7 +18,8 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
   await source.validatePath(profile.path);
-  const grid = await (profile.format === 'wavefront-obj-zip' ? loadObjShape : loadPdsScalarGrid)(resolve(sourceDirectory, profile.path), profile.grid);
+  const loader = profile.format === 'wavefront-obj-zip' ? loadObjShape : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadPdsScalarGrid;
+  const grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
   const faces = radialTriangles(grid.sample, profile, config.geometry.radius / (config.geometry.radiusKm * 1000));
   const tileSize = profile.tileSize, columns = profile.atlasColumns;
   if (![tileSize, columns].every(value => Number.isInteger(value) && value > 0) || tileSize > 512 || columns > 64) throw new TypeError('Invalid radial texture layout.');

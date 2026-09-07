@@ -46,7 +46,7 @@ export function parseTerrestrialProfile(value) {
     throw new TypeError('Surface WebP quality must be an integer from 1 to 100.');
   }
   for (const lens of value.raster.scientific ?? []) {
-    const meshGrid = lens.format === 'wavefront-obj-zip';
+    const meshGrid = ['wavefront-obj-zip', 'pds-vertex-facet'].includes(lens.format);
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
           !grid || (!meshGrid && (!Number.isSafeInteger(grid.width) || grid.width <= 0 || !Number.isSafeInteger(grid.height) || grid.height <= 0)) ||
@@ -57,7 +57,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj-zip'].includes(lens.format) || !lens.grid ||
+    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj-zip', 'pds-vertex-facet'].includes(lens.format) || !lens.grid ||
         (!meshGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
@@ -70,7 +70,7 @@ export function parseTerrestrialProfile(value) {
           (lens.relief.heightToMeters !== undefined && (!Number.isFinite(lens.relief.heightToMeters) || lens.relief.heightToMeters <= 0))))) {
       throw new TypeError('Invalid scientific surface grid or relief profile.');
     }
-    if (meshGrid && (typeof lens.grid.member !== 'string' || lens.grid.member.includes('..') || lens.grid.member.startsWith('/') ||
+    if (meshGrid && ((lens.format === 'wavefront-obj-zip' && (typeof lens.grid.member !== 'string' || lens.grid.member.includes('..') || lens.grid.member.startsWith('/'))) ||
         !(lens.grid.metersPerUnit > 0) || !Number.isSafeInteger(lens.grid.expectedVertices) || lens.grid.expectedVertices < 4 ||
         !Number.isSafeInteger(lens.grid.expectedFaces) || lens.grid.expectedFaces < 4 ||
         (lens.coverage && [lens.coverage.path,lens.coverage.member].some(p => typeof p !== 'string' || p.startsWith('/') || p.split('/').includes('..'))))) {
@@ -82,7 +82,7 @@ export function parseTerrestrialProfile(value) {
     const policy = observation.validity;
     if (!/^[a-z][a-z0-9-]*$/.test(observation.id) || observationIds.has(observation.id) ||
         (observation.monochromeBase && !observationIds.has(observation.monochromeBase)) ||
-        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome'].includes(policy?.kind)) {
+        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome', 'pds3-byte-monochrome'].includes(policy?.kind)) {
       throw new TypeError('Invalid observation identity, validity policy, or fallback ordering.');
     }
     const byteImage = ['image-monochrome-no-data', 'image-rgb-no-data'].includes(policy.kind);
@@ -90,7 +90,7 @@ export function parseTerrestrialProfile(value) {
         !Number.isFinite(policy.centerLongitude) || policy.centerLongitude < 0 || policy.centerLongitude > 360)) {
       throw new TypeError('Invalid observed GeoTIFF no-data or coordinate policy.');
     }
-    if (policy.connectedEdge !== undefined && (!byteImage || policy.noData !== 0 ||
+    if (policy.connectedEdge !== undefined && (!(byteImage || policy.kind === 'pds3-byte-monochrome') || policy.noData !== 0 ||
         !['north', 'south'].includes(policy.connectedEdge))) {
       throw new TypeError('Connected coverage requires a byte image with exact black fill and a polar edge.');
     }

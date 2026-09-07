@@ -52,3 +52,7 @@ src/planets/*/.prepared/
 
 /src/planets/charon/source/observations/*.tif
 /src/planets/charon/source/science/*.tif
+
+# Pinned PDS raster and vertex-facet source products.
+src/planets/*/source/**/*.IMG
+src/planets/*/source/**/*.tab
