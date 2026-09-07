@@ -1,3 +1,14 @@
+import panDescriptor from "../src/planets/pan/object.json" with { type: "json" };
+import atlasDescriptor from "../src/planets/atlas/object.json" with { type: "json" };
+import prometheusDescriptor from "../src/planets/prometheus/object.json" with { type: "json" };
+import pandoraDescriptor from "../src/planets/pandora/object.json" with { type: "json" };
+import janusDescriptor from "../src/planets/janus/object.json" with { type: "json" };
+import epimetheusDescriptor from "../src/planets/epimetheus/object.json" with { type: "json" };
+import hyperionDescriptor from "../src/planets/hyperion/object.json" with { type: "json" };
+import ryuguDescriptor from "../src/planets/ryugu/object.json" with { type: "json" };
+import bennuDescriptor from "../src/planets/bennu/object.json" with { type: "json" };
+import itokawaDescriptor from "../src/planets/itokawa/object.json" with { type: "json" };
+import erosDescriptor from "../src/planets/eros/object.json" with { type: "json" };
 import phoebeDescriptor from "../src/planets/phoebe/object.json" with { type: "json" };
 import deimosDescriptor from "../src/planets/deimos/object.json" with { type: "json" };
 import phobosDescriptor from "../src/planets/phobos/object.json" with { type: "json" };
@@ -68,6 +79,26 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(marsDescriptor);
     }, marsDescriptor.properties.worldFrame),
+  object("ryugu", "Ryugu", "asteroid", "#a49c8d", 1.19,
+    "Explore Ryugu in 3D with cssEarth using mission-derived shape and surface data.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ryuguDescriptor);
+    }, ryuguDescriptor.properties.worldFrame),
+  object("bennu", "Bennu", "asteroid", "#a49c8d", 1.126,
+    "Explore Bennu in 3D with cssEarth using mission-derived shape and surface data.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bennuDescriptor);
+    }, bennuDescriptor.properties.worldFrame),
+  object("itokawa", "Itokawa", "asteroid", "#a49c8d", 1.323,
+    "Explore Itokawa in 3D with cssEarth using mission-derived shape and surface data.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(itokawaDescriptor);
+    }, itokawaDescriptor.properties.worldFrame),
+  object("eros", "Eros", "asteroid", "#a49c8d", 1.458,
+    "Explore Eros in 3D with cssEarth using mission-derived shape and surface data.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(erosDescriptor);
+    }, erosDescriptor.properties.worldFrame),
   object("vesta", "Vesta", "asteroid", "#a49c8d", 2.36,
     "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
@@ -118,6 +149,41 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(saturnDescriptor);
     }, saturnDescriptor.properties.worldFrame),
+  object("pan", "Pan", "satellite", "#a6a29a", 9.58,
+    "Explore Pan with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(panDescriptor);
+    }, panDescriptor.properties.worldFrame),
+  object("atlas", "Atlas", "satellite", "#a6a29a", 9.58,
+    "Explore Atlas with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(atlasDescriptor);
+    }, atlasDescriptor.properties.worldFrame),
+  object("prometheus", "Prometheus", "satellite", "#a6a29a", 9.58,
+    "Explore Prometheus with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(prometheusDescriptor);
+    }, prometheusDescriptor.properties.worldFrame),
+  object("pandora", "Pandora", "satellite", "#a6a29a", 9.58,
+    "Explore Pandora with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(pandoraDescriptor);
+    }, pandoraDescriptor.properties.worldFrame),
+  object("janus", "Janus", "satellite", "#a6a29a", 9.58,
+    "Explore Janus with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(janusDescriptor);
+    }, janusDescriptor.properties.worldFrame),
+  object("epimetheus", "Epimetheus", "satellite", "#a6a29a", 9.58,
+    "Explore Epimetheus with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(epimetheusDescriptor);
+    }, epimetheusDescriptor.properties.worldFrame),
+  object("hyperion", "Hyperion", "satellite", "#a6a29a", 9.58,
+    "Explore Hyperion with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hyperionDescriptor);
+    }, hyperionDescriptor.properties.worldFrame),
   object("mimas", "Mimas", "satellite", "#aeaba5", 9.58,
     "Explore Mimas in 3D with cssEarth. Inspect Cassini imagery of Saturn’s cratered moon and its giant Herschel impact basin.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

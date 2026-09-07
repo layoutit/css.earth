@@ -1,0 +1,32 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              25143 Itokawa (1998 SF36)        2026-Sep-07 14:42:58
+Rec #:   25143 (+COV) Soln.date: 2025-May-22_17:09:17   # obs: 1025 (1998-2024)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2453005.5 ! 2004-Jan-01.00 (TDB)         Residual RMS= .18946
+   EC= .279465894044321    QR= .9531059217424466   TP= 2453145.4131572028
+   OM= 70.91767938852736   W=  161.0144462702274   IN= 1.727962095421385
+   A= 1.322776970395172    MA= 269.357329363154    ADIST= 1.692448019047896
+   PER= 1.52138            N= .647849512           ANGMOM= .018996185
+   DAN= 1.65748            DDN= .96457             L= 231.9401412
+   B= .5620813             MOID= .0128853          TP= 2004-May-19.9131572028
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= 2.1E-9              RAD= .165               ROTPER= 12.132
+   H= 19.26                G= .150                 B-V= n.a.
+                           ALBEDO= n.a.            STYP= S(IV)
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -2.855043703676E-14 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#237, PHA  OCC=0       radar(21 delay,18 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************

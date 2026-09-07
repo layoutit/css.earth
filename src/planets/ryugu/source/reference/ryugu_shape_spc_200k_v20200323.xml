@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1G00.sch"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_SPICE_Kernel xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1G00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:jaxa:darts:hyb2_spice:spice_kernels:dsk_ryugu_shape_spc_200k_v20200323.bds</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>ryugu_shape_spc_200k_v20200323.bds</title>
+    <information_model_version>1.16.0.0</information_model_version>
+    <product_class>Product_SPICE_Kernel</product_class>
+    <Citation_Information>
+      <publication_year>2025</publication_year>
+      <keyword>Observation Geometry</keyword>
+      <description>SPICE binary DSK file containing shape model of (162173) Ryugu based on ONC observations including the entire proximity phase from 2018-06-19 to 2019-11-19 with Sterephotoclinometry (SPC) method using ONC-T, ONC-W1, and ONC-W2 images, created by the Hayabusa2 Shape model team. This file contains about 200 thousand plates. The original name of this file was SHAPE_SPC_200k_v20200323.bds.</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Context_Area>
+    <Time_Coordinates>
+      <start_date_time>1950-01-01T00:00:00.000Z</start_date_time>
+      <stop_date_time>2050-01-01T00:00:00.000Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Observation Geometry</purpose>
+      <processing_level>Derived</processing_level>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>Hayabusa2</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:jaxa:darts:context:investigation:mission.hyb2</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Hayabusa2</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:jaxa:darts:context:instrument_host:spacecraft.hyb2</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(162173) Ryugu</name>
+      <type>Asteroid</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:asteroid.162173_ryugu</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+  </Context_Area>
+  <Reference_List>
+    <Internal_Reference>
+      <lid_reference>urn:jaxa:darts:hyb2_spice:document:spiceds</lid_reference>
+      <reference_type>data_to_document</reference_type>
+    </Internal_Reference>
+  </Reference_List>
+  <File_Area_SPICE_Kernel>
+    <File>
+      <file_name>ryugu_shape_spc_200k_v20200323.bds</file_name>
+      <creation_date_time>2025-03-11T11:26:26.037Z</creation_date_time>
+      <file_size unit="byte">6936576</file_size>
+      <md5_checksum>40e86e3b2b24f0f5e385340a9f2a24d9</md5_checksum>
+    </File>
+    <SPICE_Kernel>
+      <offset unit="byte">0</offset>
+      <object_length unit="byte">6936576</object_length>
+      <parsing_standard_id>SPICE</parsing_standard_id>
+      <description>SPICE binary DSK file containing shape model of (162173) Ryugu based on ONC observations including the entire proximity phase from 2018-06-19 to 2019-11-19 with Sterephotoclinometry (SPC) method using ONC-T, ONC-W1, and ONC-W2 images, created by the Hayabusa2 Shape model team. This file contains about 200 thousand plates. The original name of this file was SHAPE_SPC_200k_v20200323.bds.</description>
+      <kernel_type>DSK</kernel_type>
+      <encoding_type>Binary</encoding_type>
+    </SPICE_Kernel>
+  </File_Area_SPICE_Kernel>
+</Product_SPICE_Kernel>

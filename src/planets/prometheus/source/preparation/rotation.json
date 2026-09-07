@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-linear-rotation@1",
+  "rightAscensionDegrees": 40.57039852156057,
+  "declinationDegrees": 83.52893316906228,
+  "referenceEpochJdTt": 2451545,
+  "primeMeridianDegrees": 276.26,
+  "spinRateDegreesPerDay": 587.284953,
+  "source": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/prometheus_document.pdf",
+  "qualification": "Archinal et al. 2011 elements documented with this PDS shape. Pole secular terms are evaluated at the shared 2026-09-04 TT display epoch; linear spin uses the documented J2000 meridian. This fixed-epoch display omits small optical librations."
+}
