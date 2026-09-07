@@ -17,10 +17,22 @@ const max = (runs, group, field) => Math.max(...runs.map(run => field === "reque
 const assets = await runtimeAssets(root, OBJECTS.map(o => o.id));
 const prior = JSON.parse(execFileSync("git", ["show", "105c159b:src/planets/earth/runtime-assets.json"], { cwd: root }));
 const unique = new Map([...assets, ...prior.assets].map(a=>[`${a.sha256}/${a.filename}`,a]));
+const coarsePinPath = resolve(root, "src/planets/earth/source/city/coarse-release.json");
+const coarsePin = await readFile(coarsePinPath, "utf8").then(JSON.parse).catch(error => {
+  if (error.code === "ENOENT") return null;
+  throw error;
+});
+if (coarsePin) {
+  assert.equal(coarsePin.schema, "cssearth-global-coarse-pin@1");
+  for (const field of ["files", "imageBytes", "indexBytes"]) {
+    assert.ok(Number.isSafeInteger(coarsePin[field]) && coarsePin[field] > 0, `Invalid coarse storage pin: ${field}.`);
+  }
+}
 const storage = { geometryBytes: 25344236995, geometryPacks: 19632,
   currentAndPriorRuntimeBytes: [...unique.values()].reduce((s,a)=>s+a.bytes,0),
-  qualification: "Declared current object inventories plus the retained POC inventory and one existing geometry release. This is a reproducible storage basis, not a complete live bucket inventory or invoice. Add other retained releases with additionalRetainedStorageGB." };
-storage.modeledGB = (storage.geometryBytes + storage.currentAndPriorRuntimeBytes) / 1e9 + assumptions.additionalRetainedStorageGB;
+  coarseReleaseBytes: coarsePin ? coarsePin.imageBytes + coarsePin.indexBytes : 0,
+  qualification: "Declared current object inventories, the retained POC inventory, one existing geometry release and the integrated coarse release pin when present. This is a reproducible storage basis, not a complete live bucket inventory or invoice. Add other retained releases with additionalRetainedStorageGB." };
+storage.modeledGB = (storage.geometryBytes + storage.currentAndPriorRuntimeBytes + storage.coarseReleaseBytes) / 1e9 + assumptions.additionalRetainedStorageGB;
 const measured = Object.fromEntries(["application","r2","provider","editorial"].map(group => [group, {
   cold: { requests: max(cold,group,"requests"), responseBodyBytes: max(cold,group,"responseBodyBytes") },
   warm: { requests: max(warm,group,"requests"), responseBodyBytes: max(warm,group,"responseBodyBytes") },
@@ -41,7 +53,11 @@ for (const dailySessions of assumptions.dailySessions) for (const edgeHitFractio
 }
 const report = { measuredAt: new Date().toISOString(), measurement: path, commit: input.commit, assumptions, storage, measured, scenarios,
   qualification: "Per-session request counts include browser-cache requests and aborted attempts. The default maximum-observed basis uses the larger cold or warm count independently for each service: warm page replacement can initiate more requests. The cache-mix basis is an editable alternative; coldSessionFraction always controls the separate client-byte estimate. Response bytes exclude unavailable aborted-body lengths. Cache percentages are assumptions, not forecasts or guarantees. Pages static requests do not invoke a Worker. Provider/editorial requests are external and excluded from Cloudflare charges. Pricing excludes taxes, domain fees, other services and account-wide usage. No numeric upstream quota or monthly dollar ceiling has been established.",
-  publication: { uploadedFiles: 600, uploadedBytes: 110897456, reusedFiles: 203, unchangedGeometryUploads: 0,
+  coarseRelease: coarsePin ? { version: coarsePin.version, manifestSha256: coarsePin.manifestSha256,
+    files: coarsePin.files, bytes: storage.coarseReleaseBytes,
+    marginalStorageUSDPerMonthBeforeRounding: storage.coarseReleaseBytes / 1e9 * prices.gbMonth,
+    qualification: "Integrated release inventory; not the number of writes made by a particular upload or retry." } : null,
+  initialFeaturePublication: { uploadedFiles: 600, uploadedBytes: 110897456, reusedFiles: 203, unchangedGeometryUploads: 0,
     marginalStorageUSDPerMonthBeforeRounding: 110897456 / 1e9 * prices.gbMonth,
     normalAtlasBeforeBytes: 6476100, normalAtlasAfterBytes: 45956184,
     observationOverviewBytes: 206548, normalAtlasDecodedBytesApprox: 381000000 },
@@ -52,7 +68,9 @@ const lines = ["# Earth delivery cost model", "", `Prices checked ${assumptions.
   ...scenarios.map(s=>`| ${s.dailySessions.toLocaleString("en-US")} | ${s.edgeHitFraction*100}% | ${s.r2Reads.toLocaleString("en-US")} | $${s.r2TotalUSD.toFixed(3)} | ${s.providerRequests.toLocaleString("en-US")} |`), "",
   report.qualification, "", storage.qualification, "", `Modeled stored data: ${storage.modeledGB.toFixed(3)} GB. Each scenario repeats the measured journey; longer sessions can request more tiles. Browser and CDN caches are distinct.`, "",
   "The normal atlas increased from 6.48 MB to 45.96 MB to shorten individual image decodes; its approximately 381 MB decoded footprint is separate from the 128 MiB observation pool. The land-cover overview adds 0.207 MB. This network and memory tradeoff remains visible even when origin charges are small.", "",
-  "The current release added 600 files / 110,897,456 bytes; unchanged geometry and noise images were reused. Release verification performs HEAD and GET reads. Both read/write free allowances are shared with other account usage; no account invoice is inferred from this model.", "",
+  "The initial feature publication added 600 files / 110,897,456 bytes; unchanged geometry and noise images were reused. These historical counts exclude subsequent releases.", "",
+  coarsePin ? `The integrated global coarse release ${coarsePin.version} contains ${coarsePin.files.toLocaleString("en-US")} files / ${storage.coarseReleaseBytes.toLocaleString("en-US")} bytes, included in modeled storage. Its release inventory does not imply that every file was uploaded again when publication resumed.` : "No integrated global coarse release pin is present; coarse storage is not included in this run.", "",
+  "Release verification performs HEAD and GET reads. Both read/write free allowances are shared with other account usage; no account invoice is inferred from this model.", "",
   "Terrascope's service terms prohibit degrading open services through high load and provide no uninterrupted-service guarantee. The direct API avoids mirroring the raster, but anticipated sustained traffic needs an upstream capacity decision. The user has not set a monthly dollar ceiling.", "",
   ...Object.entries(assumptions.sources).map(([label,url])=>`- [${label}](${url})`), ""];
 await writeFile(resolve(dirname(path),"costs.md"),lines.join("\n"));
