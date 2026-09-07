@@ -112,13 +112,19 @@
           300000
         ]
       },
-      "latitudeSegments": 20,
-      "longitudeSegments": 32,
-      "faceBudget": 1250,
+      "latitudeSegments": 64,
+      "longitudeSegments": 128,
+      "faceBudget": 850,
       "tileSize": 128,
       "atlasColumns": 16,
       "lightFieldSize": 4,
-      "primitive": "u"
+      "primitive": "u",
+      "simplification": {
+        "method": "meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 8000,
+        "regularize": true
+      }
     }
   },
   "celestial": {

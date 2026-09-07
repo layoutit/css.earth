@@ -58,11 +58,18 @@ credits. Required binaries are restored through `source/preparation/acquisition.
 
 ## Prepared presentation
 
-The original radial model is sampled on a 20 × 32 grid into 1,216 retained
-triangles, within the requested roughly 1,200-face budget. Their positions
-are unchanged by lighting; area-weighted vertex normals provide continuous
+The original radial model is sampled on a 64 × 128 grid into 16,128 source
+triangles. Meshoptimizer 1.2.0 welds and compacts equal positions, then simplifies
+that mesh to 800 retained triangles before texture and lighting preparation.
+The `ErrorAbsolute` and `RegularizeLight` flags bound the estimated error and
+discourage thin triangles; the source profile records the 8 km error limit.
+This is the simplifier's approximate metric, not a guaranteed maximum surface
+distance. The selected vertices retain their sampled source positions, with
+one canonical vertex at each pole. Normals are recomputed for the final mesh.
+See the [upstream simplifier documentation](https://github.com/zeux/meshoptimizer/blob/v1.2/js/README.md#simplifier).
+Lighting leaves those positions unchanged; area-weighted vertex normals provide continuous
 directional shading. The 8,192 × 4,096 normalized maps are sampled into fixed
-2,048 × 9,728 atlases. PolyCSS prepares native `u` triangles in raster mode:
+2,048 × 6,400 atlases. PolyCSS prepares native `u` triangles in raster mode:
 each leaf matches its 128 × 128 texel cell, with the inverse matrix scale
 preserving the measured geometry. The cells are opaque; the native triangle
 primitive supplies their boundary. Runtime mounts the prepared leaves and
