@@ -1,0 +1,131 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "phobos",
+  "displayName": "Phobos",
+  "publicBase": "/scenes/phobos/",
+  "distanceAu": 1.52,
+  "raster": {
+    "width": 5760,
+    "height": 2880,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "surfaceQuality": 95,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-byte-monochrome",
+          "noData": 0,
+          "centerLongitude": 0,
+          "origin": [
+            -34871.678455,
+            17435.839227
+          ],
+          "resolutionMeters": 4.84328867,
+          "displayRange": [
+            0,
+            255
+          ],
+          "wrapLongitude": true,
+          "specialValueMagnitude": 1e+30
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "scientific-surfaces",
+        "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+        "format": "wavefront-obj-zip",
+        "grid": {
+          "member": "phobos_g_148m_spc_obj_0000n00000_v004.obj",
+          "metersPerUnit": 1000,
+          "expectedVertices": 98306,
+          "expectedFaces": 196608
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -11.1
+        },
+        "minimum": -3.5,
+        "maximum": 3.5,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 11080.0,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.45
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        }
+      }
+    ],
+    "observedColors": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 11.08,
+    "camera": {
+      "initialScenePitchDegrees": 25,
+      "defaultControlYawDegrees": 45
+    },
+    "mapUrl": "/scenes/phobos/phobos-normal-surface@2x.webp",
+    "polesUrl": "/scenes/phobos/phobos-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+      "format": "wavefront-obj-zip",
+      "grid": {
+        "member": "phobos_g_148m_spc_obj_0000n00000_v004.obj",
+        "metersPerUnit": 1000,
+        "expectedVertices": 98306,
+        "expectedFaces": 196608
+      },
+      "latitudeSegments": 20,
+      "longitudeSegments": 32,
+      "faceBudget": 2000,
+      "tileSize": 128,
+      "atlasColumns": 16
+    }
+  },
+  "celestial": {
+    "sunSource": "Vendored JPL Horizons Mars satellite elements and IAU/NAIF rotation at the shared epoch."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      154,
+      149,
+      142
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

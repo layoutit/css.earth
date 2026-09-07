@@ -64,6 +64,18 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     -0.7618588109374191,
     -0.3096664642308605,
   ]),
+  // subsolar latitude -5.392°, longitude 95.190°
+  phobos: Object.freeze([
+    -0.09005662019272576,
+    0.9914940319742367,
+    -0.09396483235197348,
+  ]),
+  // subsolar latitude -4.974°, longitude -12.900°
+  deimos: Object.freeze([
+    0.9710896266749596,
+    -0.2224093239519974,
+    -0.08671233812730013,
+  ]),
   // subsolar latitude -2.887°, longitude 67.129°
   ceres: Object.freeze([
     0.38816287844429326,
@@ -264,6 +276,18 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     -0.5210918069960907,
     -0.11726899203205934,
     0.8454060043489955,
+  ]),
+  // pole tilt to the ecliptic 25.688°, Sun ecliptic latitude -0.678°
+  phobos: Object.freeze([
+    0.41887611408158665,
+    0.11152204671456858,
+    0.901169037499904,
+  ]),
+  // pole tilt to the ecliptic 24.128°, Sun ecliptic latitude -0.679°
+  deimos: Object.freeze([
+    -0.024164981368859362,
+    -0.4080626307425325,
+    0.9126340685438639,
   ]),
   // pole tilt to the ecliptic 8.445°, Sun ecliptic latitude 0.474°
   ceres: Object.freeze([
@@ -467,6 +491,18 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.4604634185467489,
     -0.016885738822218554,
     0.8875180629174088,
+  ]),
+  // orbital inclination to the ecliptic 25.720°, obliquity to the orbit 0.078°
+  phobos: Object.freeze([
+    -0.0008633323149859207,
+    0.0010546063728097688,
+    0.9999990712309248,
+  ]),
+  // orbital inclination to the ecliptic 23.998°, obliquity to the orbit 0.163°
+  deimos: Object.freeze([
+    0.0015821792691437242,
+    -0.0023679778109739202,
+    0.9999959446867007,
   ]),
   // orbital inclination to the ecliptic 10.588°, obliquity to the orbit 4.040°
   ceres: Object.freeze([
@@ -672,6 +708,18 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     0.7100200425014979,
     -0.31360534456150674,
   ]),
+  // flight-path angle -0.067°
+  phobos: Object.freeze([
+    0.09187293936618643,
+    -0.9957700976252531,
+    0.0011294634172472895,
+  ]),
+  // flight-path angle -0.005°
+  deimos: Object.freeze([
+    -0.0014775020319185428,
+    -0.9999961103587716,
+    -0.0023656405207182485,
+  ]),
   // flight-path angle -4.331°
   ceres: Object.freeze([
     0.9479081038554033,
@@ -875,6 +923,18 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     0.6130693093977287, 0.6377074164994287, 0.4663424415772343,
     -0.3375308603907496, 0.7451257454789227, -0.5752047824108908,
     -0.7142961151780628, 0.19523543317262892, 0.6720596591638451,
+  ]),
+  // pole RA 316.107°, Dec 53.430°, prime meridian W 116.490°
+  phobos: Object.freeze([
+    -0.8272440165279755, -0.3623774624483509, 0.4293598861423324,
+    0.1769285446925099, -0.893339456946053, -0.41308704256648104,
+    0.5332575617763456, -0.26575776446385396, 0.8031246375473247,
+  ]),
+  // pole RA 314.132°, Dec 54.482°, prime meridian W 226.043°
+  deimos: Object.freeze([
+    -0.09020644813873707, 0.9100666848568182, 0.40452617446577466,
+    -0.9038602743151134, 0.09575456789328013, -0.41697442036961835,
+    -0.4182097574533637, -0.40324892044653043, 0.813935443957017,
   ]),
   // pole RA 291.418°, Dec 66.764°, prime meridian W 171.048°
   ceres: Object.freeze([
@@ -1137,6 +1197,40 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 7.143879481315724,
     perihelionAu: 2.148227498193164,
     aphelionAu: 2.574323530435534,
+  }),
+  // a 0.000062790 AU, e 0.016656, perihelion 0.000061744 AU, aphelion 0.000063836 AU
+  phobos: Object.freeze({
+    centerBodyId: "mars",
+    centerPositionAu: Object.freeze([0.00006149235226715754,0.000005600720671330647,4.718182294544088e-8]),
+    semiMajorAxisAu: 0.00006279014674277711,
+    eccentricity: 0.01665624463721801,
+    heliocentricDistanceAu: 1.5225609853775552,
+    perihelionDirection: Object.freeze([
+      -0.9868157779315041,
+      -0.16184608830975597,
+      -0.000681266666619884,
+    ]),
+    trueAnomalyDegrees: 355.8900683966444,
+    inclinationDegrees: 25.7201858593642,
+    perihelionAu: 0.00006174429869782259,
+    aphelionAu: 0.00006383599478773163,
+  }),
+  // a 0.00015685 AU, e 0.00049768, perihelion 0.00015677 AU, aphelion 0.00015693 AU
+  deimos: Object.freeze({
+    centerBodyId: "mars",
+    centerPositionAu: Object.freeze([0.00015677399993991564,-2.4540356694606786e-7,-2.4862669110605444e-7]),
+    semiMajorAxisAu: 0.00015685111831791843,
+    eccentricity: 0.0004976825427502895,
+    heliocentricDistanceAu: 1.5227132930670912,
+    perihelionDirection: Object.freeze([
+      -0.9831946651729264,
+      -0.18255680913882572,
+      0.0011233042988371689,
+    ]),
+    trueAnomalyDegrees: 349.39156085377834,
+    inclinationDegrees: 23.998174325296954,
+    perihelionAu: 0.00015677305625452073,
+    aphelionAu: 0.00015692918038131613,
   }),
   // a 2.7656 AU, e 0.079602, perihelion 2.5454 AU, aphelion 2.9857 AU
   ceres: Object.freeze({
