@@ -4,9 +4,9 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
-import { BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
+import { ASTEROID_IDS, asteroidPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
   systemBarycentreHeliocentricAu, M_PER_AU } from '@cssearth/astronomy';
-import type { BodyId, DwarfPlanetId, Vsop87BodyKey } from '@cssearth/astronomy';
+import type { AsteroidId, BodyId, DwarfPlanetId, Vsop87BodyKey } from '@cssearth/astronomy';
 import { prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();
@@ -78,6 +78,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     const modelPositionM = (id: BodyId): readonly number[] => {
       const parent = BODIES[id].parent;
       if (parent === null) return [0, 0, 0];
+      if (ASTEROID_IDS.includes(id as AsteroidId)) return asteroidPositionKm(id as AsteroidId, source.frame.epochJdTt).map(value => value * 1000);
       if (DWARF_PLANET_IDS.includes(id as DwarfPlanetId)) return dwarfPlanetPositionKm(id as DwarfPlanetId, source.frame.epochJdTt).map(value => value * 1000);
       if (parent !== 'sun') {
         const parentPosition = modelPositionM(parent);

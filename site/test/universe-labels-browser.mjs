@@ -32,6 +32,11 @@ try {
   await page.screenshot({ path: `${output}/system.png` });
 
   await open(views.shell);
+  assert.ok(!(await read(page)).labels.some(label => label.text === 'Heliosphere'), 'disabled shell has no caption');
+  await page.locator('.planet-settings-action').click();
+  await page.locator('.planet-settings label').filter({ hasText: 'Heliosphere' }).click();
+  await page.locator('.planet-settings-action').click();
+  await page.waitForTimeout(250);
   snapshots.shell = await read(page);
   assert.ok(snapshots.shell.labels.some(label => label.text === 'Heliosphere'), 'the visible shell has its caption');
   assertNoOverlaps(snapshots.shell.labels);
