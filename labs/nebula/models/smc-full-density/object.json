@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "smc-full-density",
+  "type": "density-volume",
+  "properties": {
+    "volume": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        558685736318132900000,
+        162842042038617440000,
+        -1.83671292332706e+21
+      ],
+      "localToReferenceXyzw": [
+        0.5930234436925893,
+        0.7905512466577111,
+        0.12224251888534837,
+        0.09169889975068647
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -13.459315128949534,
+          -49.78084165635432,
+          -28.57700521531428
+        ],
+        "max": [
+          37.19077656170363,
+          17.521334973691673,
+          0.33286447113158957
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/volume.json",
+      "sha256": "319358fc2ef89b273d1a369d7d43393eae64a6a2b49ffb99651b5735e3bb681f"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-density-volume@1",
+    "url": "prepared/volume.json",
+    "sha256": "a6a11de64202477b31b2fa2402c1a40b33e079ab95bd0946dabab41a0ad18f99"
+  }
+}

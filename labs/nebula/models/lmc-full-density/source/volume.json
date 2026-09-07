@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-volume-recipe@1",
+  "grid": {
+    "path": "density.ktx2",
+    "sha256": "874682f828f1143ada8d4013f1a80634019f83d6ff6e7d906e51b0a764929f60",
+    "decodedSha256": "532b70e38e034ad4a0b711c0fc54183fe78a73d14e714cf898125c8644599ce5",
+    "dimensions": [
+      266,
+      259,
+      116
+    ],
+    "encoding": "sqrt-density-unorm8",
+    "bounds": {
+      "min": [
+        -34.2494860589516,
+        -39.659852117301206,
+        -14.063476651908141
+      ],
+      "max": [
+        28.24754056340629,
+        21.19251590973147,
+        13.190865784909581
+      ]
+    }
+  },
+  "material": {
+    "emission": [
+      {
+        "channel": 3,
+        "color": [
+          1,
+          1,
+          1
+        ],
+        "strength": 1
+      }
+    ],
+    "absorption": [],
+    "intensityScale": 1,
+    "stepScale": 1,
+    "stepMetric": "source",
+    "exposureGain": 0.6,
+    "emissionTransfer": "shared-opacity"
+  },
+  "bake": {
+    "sliceCounts": {
+      "x": 48,
+      "y": 48,
+      "z": 48
+    },
+    "unitsPerSourceUnit": 1,
+    "imageWidth": 512,
+    "samplesPerSlab": 2,
+    "cropTransparent": true,
+    "opticalWeight": 1,
+    "imageEncoding": {
+      "format": "webp",
+      "quality": 90
+    }
+  },
+  "anchors": [],
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "259147f9067bf5e9e9389d95d8fc94e34c5e9f2e249bb59679b0fdcac5469bb9"
+  }
+}
