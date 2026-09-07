@@ -218,8 +218,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
     if (orbit) for (let i = 0; i < orbit.verticesM.length * 2; i++) {
       const piece = host.ownerDocument.createElement('s');
-      piece.dataset.contextOrbit = body.id;
-      piece.style.cssText = 'position:absolute;left:50%;top:50%;width:1px;height:1px;background:#768394;transform-origin:0 0;visibility:hidden';
+      piece.style.visibility = 'hidden';
       root.appendChild(piece); pieces.push(piece);
     }
     root.append(marker, label);
@@ -230,6 +229,11 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   let destroyed = false;
   let selectedId = plan.focus.id;
   return Object.freeze({ root,
+    inspect() {
+      return Object.freeze(bodies.map(({ body, marker, label, pieces }) => Object.freeze({
+        id: body.id, marker, label, orbit: Object.freeze([...pieces]),
+      })));
+    },
     selectObject(id: string) {
       if (!bodies.some(entry => entry.body.id === id)) throw new TypeError('Selected context body is unavailable.');
       selectedId = id;

@@ -20,10 +20,10 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
     if (!stack) throw new TypeError(`Prepared CSS volume has no ${axis} stack.`);
-    const root = element(document, 'div', { 'data-volume-id': payload.id, 'data-volume-axis': axis });
-    const camera = element(document, 'div', { 'data-volume-camera': axis });
-    const scene = element(document, 'div', { 'data-volume-scene': axis });
-    const mesh = element(document, 'div', { 'data-volume-mesh': axis });
+    const root = document.createElement('div');
+    const camera = document.createElement('div');
+    const scene = document.createElement('div');
+    const mesh = document.createElement('div');
     root.className = 'css-volume-projection';
     camera.className = 'css-volume-camera';
     scene.className = 'css-volume-scene';
@@ -98,7 +98,6 @@ export function preparedVolumeCameraTransform(publication: VolumeCameraPublicati
 
 function createLeaf(document: Document, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], resolveResource: (path: string) => string): HTMLElement {
   const node = document.createElement('s');
-  node.dataset.volumeSlice = leaf.id;
   node.style.width = leaf.style.width;
   node.style.height = leaf.style.height;
   node.style.transform = leaf.style.transform;
@@ -133,11 +132,6 @@ function axisWeights(camera: VolumeLocalCamera): readonly number[] {
   });
 }
 
-function element(document: Document, tag: string, data: Record<string, string>): HTMLElement {
-  const result = document.createElement(tag);
-  for (const [key, value] of Object.entries(data)) result.setAttribute(key, value);
-  return result;
-}
 function escapeUrl(value: string): string { return value.replace(/["\\\n\r]/gu, character => `\\${character}`); }
 function format(value: number): string { return Math.abs(value) < 1e-9 ? '0' : Number(value.toFixed(6)).toString(); }
 function dot(matrix: readonly number[], offset: number, point: VolumeVector): number {

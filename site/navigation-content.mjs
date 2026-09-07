@@ -56,7 +56,9 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
                 if (item.media === null) item.element.removeAttribute('media');
                 else item.element.setAttribute('media', item.media);
               }
-              documentTarget.head.append(item.element);
+              // Moving an attached link clears its CSSStyleSheet until the
+              // browser reloads it. The destination camera measures immediately.
+              if (item.element.parentNode !== documentTarget.head) documentTarget.head.append(item.element);
             }
             styles = next.map(({ element }) => element);
             committed = true; signal.removeEventListener('abort', dispose);
