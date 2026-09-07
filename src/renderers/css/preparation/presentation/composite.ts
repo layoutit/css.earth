@@ -1,4 +1,4 @@
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-presentation.js';
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
@@ -11,7 +11,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
 
   const material=plan.material;
   const layers=["surface","poles","material"] as const;
-  const warm=[...preparedSkyResources(plan.starfield,sun,"warm"),
+  const warm=[...preparedSunResources(sun,"warm"),
     {key:"lighting",url:canonicalPreparedAsset(material.lightingUrl,material.lighting2xUrl),pool:"warm"}];
   const entries=[...warm,...lenses.controls.flatMap(lens=>layers.map(layer=>({key:`${layer}:${lens.id}`,
     url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material"})))];

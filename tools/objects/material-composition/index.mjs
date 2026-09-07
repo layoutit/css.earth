@@ -71,7 +71,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   if(relative(projectRoot,stylesheetPath).startsWith('..'))throw new TypeError('Layered stylesheet escapes project.');
   const stylesheet=await readFile(stylesheetPath,'utf8');
   const layouts=prepareLayeredLeafLayouts({scene,stylesheet,config:presentationConfig});
-  const raw=await prepareLayeredOblatePresentation({config:presentationConfig,plan:scene,layouts,lenses:materialLenses,views,sky,sun});
+  const raw=await prepareLayeredOblatePresentation({publicDirectory,config:presentationConfig,plan:scene,layouts,lenses:materialLenses,views,sky,sun});
   const presentation={...raw,materials:prepareMaterialTracks(raw),variants:raw.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
   requirePreparedPresentation(presentation,{controls});
   const definition={...presentation,schema:'cssearth-object-runtime@4',id:descriptor.id,controls};

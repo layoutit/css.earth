@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "mimas",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mimas",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "b395fd7d82b4961c5f11dcae91b4395c280f723eb6bfd2847fac032f97e67d22"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "5dac3bbaad34bc019307266f9e7b9e533d67ab7783ab84c75dff475c01fa1dbd"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "0a3a20c115b49280f396bb2ec4e1ff688211dc993d4729a806e90e961c8367f9"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "dd41280c21b2c8688f728fd681c9baa2093dd196d9b69a94be5bb848690a61cf"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "fc76405a3495ac49c24417367b6d99fe2d8e988d222c9e5a8b78e3ef78f4295d"
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 198.8
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "enhanced",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "60b0d0bee252f93c833578f51684a70c3fa0004a17c0849054f9132c5baab877"
+  }
+}

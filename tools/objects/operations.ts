@@ -136,9 +136,9 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
  }
  const manifestPath=resolve(objectRoot,'runtime-assets.json');
  if(mode==='manifest'){
-  const entries=(await readdir(preparationRoot)).filter(file=>file.endsWith('.json')&&file!=='runtime-assets.json'&&file!=='object.json');
+  const entries=['runtime.json','content.json','controls.json'];
   const values=await Promise.all(entries.map(async file=>JSON.parse(await readFile(resolve(preparationRoot,file),'utf8')) as unknown));
-  return prepareRuntimeManifest({id,publicRoot:resolve(root,'public/scenes',id),manifestPath,values});
+  return prepareRuntimeManifest({id,publicRoot:resolve(root,'public/scenes',id),manifestPath,values,allowPreparationArtifacts:true});
  }
  if(mode==='assemble')return assembleRuntimeAssets({id,manifest:parseRuntimeManifest(JSON.parse(await readFile(manifestPath,'utf8')) as unknown,id),productionRoot:resolve(root,'dist/scenes',id)});
  throw new TypeError(`Unknown object operation: ${mode}.`);

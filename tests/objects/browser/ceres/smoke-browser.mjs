@@ -36,7 +36,7 @@ try {
     await paint();
     if (lens.legend) await page.locator(`[data-lens-legend="${lens.id}"]`).waitFor({ state: "visible" });
     const overlay = await page.locator('.ceres-material').evaluate(element => element.style.backgroundImage);
-    assert.equal(overlay === "none", Boolean(lens.legend), `${lens.id}: relief uses prepared shading; photographs restore globe lighting`);
+    assert.notEqual(overlay, "none", `${lens.id}: every surface retains globe lighting`);
     assert.equal(await page.evaluate(() => window.__ceres.assertStableDomIdentity()), true);
     const current = PNG.sync.read(await page.screenshot({ path: `${output}/${lens.id}.png` }));
     let changed = 0;

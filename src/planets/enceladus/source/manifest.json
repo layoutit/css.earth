@@ -1,0 +1,199 @@
+{
+  "schema": "cssenceladus-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "cassini-schenk-2024-normal",
+      "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
+      "expectedBytes": 518340175,
+      "expectedSha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
+      "origin": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; Paul M. Schenk and William B. McKinnon (2024), LPI/USRA",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-mosaic-100m-schenk"
+      ],
+      "acquisition": "Download the original USGS/PDS GeoTIFF and verify its pinned bytes.",
+      "redistribution": "Prepared derivatives retain the source authors and mission credits.",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 16098,
+      "height": 8049,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "referenceRadiusMeters": 256200,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "pixelResolutionMeters": 100,
+        "upperLeftMeters": [
+          -804900,
+          402500
+        ]
+      },
+      "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
+      "units": "Published display DN"
+    },
+    {
+      "id": "cassini-schenk-2024-elevation",
+      "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
+      "expectedBytes": 129613723,
+      "expectedSha256": "7c08c46238cde6528c9143f0c667d42cd3bc6ac60c572595a7e6cad2d6775f91",
+      "origin": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; Paul M. Schenk and William B. McKinnon (2024), LPI/USRA",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk"
+      ],
+      "acquisition": "Download the original USGS/PDS GeoTIFF and verify its pinned bytes.",
+      "redistribution": "Prepared derivatives retain the source authors and mission credits.",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "width": 8049,
+      "height": 4025,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "referenceRadiusMeters": 256200,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "pixelResolutionMeters": 200,
+        "upperLeftMeters": [
+          -805000,
+          402600
+        ]
+      },
+      "coverage": "Published Cassini mosaic/model. Exact PDS missing constant and floating-point special values are excluded; observed zero values remain valid.",
+      "units": "km above the Thomas et al. (2016) reference ellipsoid: 256.2 × 251.4 × 248.6 km."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire enceladus restores this pinned shared input.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "node tools/objects/dist/operations.js acquire enceladus restores this pinned shared input.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 9904,
+      "expectedSha256": "ff4bab19838f279add1eb56cd9a369926c7b907f346a710056edf3060dd31e38",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.lbl",
+      "expectedBytes": 1574,
+      "expectedSha256": "3d1f1cf57178368a315143e9dc9a9b87a95102f3120d8ddcd1be99dc3a0186e0",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.xml",
+      "expectedBytes": 9525,
+      "expectedSha256": "4735016c4147ab11b5c0d427a90f8cef97122188e683df8942177ff509f1e40c",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.lbl",
+      "expectedBytes": 1583,
+      "expectedSha256": "32489887749bb1dab8abeaa14ccaca514c164567d86a75e00157b7c535d70399",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.xml",
+      "expectedBytes": 9542,
+      "expectedSha256": "caa946c123431e1079dc138c311347c1e97bb4757ff5d57abbeaee032dc6b67d",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "observations/dem-catalog.txt",
+      "expectedBytes": 7406,
+      "expectedSha256": "ed68c71a2b2497bb5cd40b65e313d8fcac102c4f6329c1b69e37255344c27aa9",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "observations/mosaic-catalog.txt",
+      "expectedBytes": 5692,
+      "expectedSha256": "82c08be0a841c3f4cb0ae032437e7a091471690ccdd42a8a4dafaa67e65cce9b",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1084,
+      "expectedSha256": "7b73ecc941f3a189e382e1455cc3e8bb13dacf84c555a43f49809d8d7e5830e0",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 2164,
+      "expectedSha256": "c213d34132bf46390b114171748a567b93662074ae5dff1cb78e11e672955ec6",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3380,
+      "expectedSha256": "9e783c4db4c96e7ddcccdcfe9f3a27ac42372453525226832b14ba90a6312ead",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5285,
+      "expectedSha256": "260343813824ac4967afeffd876addee5649809cb4f3d435e41109bcb4b830bc",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 852,
+      "expectedSha256": "45865cf55d53451b9dbb5c28575c2d3cef8d83872fe3cbe0b683acc360354d9c",
+      "purpose": "Original source metadata, licensing, or authored preparation and content."
+    }
+  ]
+}

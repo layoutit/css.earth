@@ -75,6 +75,8 @@ keep their base color; neither heights nor coverage are interpolated to shade ga
 
 The map and its numeric legend are prepared together. The surface uses
 the existing Ceres band/pole projection. Generic prepared material selection
-disables lighting for Elevation, even when Shadows is on, and restores lighting
-when returning to a photographic lens. No runtime controller or runtime
-scientific-data parser is added.
+keeps the same globe curvature shading on every lens. Shadows switches it to
+approximate directional illumination; it does not change the fixed terrain
+light direction. No runtime controller or runtime scientific-data parser is added.
+
+Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.

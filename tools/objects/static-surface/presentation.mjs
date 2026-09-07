@@ -1,9 +1,9 @@
-import { canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mjs";
+import { canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mjs";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mjs";
 import { prepareCssomDeclarationReads } from "../../prepared-cssom.mjs";
 import { createPreparedNodeTree } from "../../prepared-node-tree.mjs";
 export async function prepareBandSurfacePresentation({ namespace, plan, lenses, sky, sun }) {
-  const celestial = preparedSkyResources(sky, sun, "mounted");
+  const celestial = preparedSunResources(sun, "mounted");
   const entries = [...celestial,
     { key: "curvature", url: canonicalPreparedAsset(lenses.material), pool: "mounted" },
     ...lenses.controls.flatMap(lens => [
@@ -48,7 +48,7 @@ export async function prepareBandSurfacePresentation({ namespace, plan, lenses, 
 
 export async function prepareEmissiveSurfacePresentation({ namespace, plan, lenses }) {
   const layers=["surface","poles","corona","limb"];
-  const celestial=preparedSkyResources(plan.starfield,null,"warm");
+  const celestial=preparedSunResources(null,"warm");
   const entries=[...celestial,...lenses.controls.flatMap(lens=>layers.map(layer=>({
     key:`${layer}:${lens.id}`,url:canonicalPreparedAsset(lens[`${layer}Url`],lens[`${layer}2xUrl`]),pool:"material",
   })))];

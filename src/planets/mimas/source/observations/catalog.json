@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-source-notes@1",
+  "normal": {
+    "url": "https://science.nasa.gov/resource/mimas-global-map-june-2017/",
+    "published": "2017-06-13",
+    "labeledMap": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA17214_labeled.png",
+    "coordinates": "West-longitude labels run 180 to 0 to 180 from left to right. Convert to east-positive by wrapping the left edge at 180 E; no mirror."
+  },
+  "enhanced": {
+    "url": "https://www.jpl.nasa.gov/images/pia18437-color-maps-of-mimas-2014/",
+    "published": "2014-11-04",
+    "labeledMap": "https://www.lpi.usra.edu/icy_moons/images/msmap-cyl-KH-anno.jpg",
+    "coordinates": "West-longitude labels run 360 to 180 to 0 from left to right. East-positive longitude increases from 0 to 360; no mirror.",
+    "processing": "Published radiometric calibration, geographic registration, photometric correction, and mosaic assembly by Paul Schenk. No further photometric correction or blending applied here."
+  },
+  "herschel": {
+    "url": "https://planetarynames.wr.usgs.gov/Feature/2478",
+    "latitude": -1.38,
+    "longitudeWest": 111.76,
+    "longitudeEast": 248.24
+  },
+  "shape": {
+    "url": "https://science.nasa.gov/saturn/moons/mimas/",
+    "meanRadiusKm": 198.8,
+    "nasaApproximateAxesKm": [
+      207,
+      197,
+      191
+    ],
+    "rendering": "Mean-radius sphere: deviates about +4.1% to -3.9% from these reference semiaxes. No claimed shape-model geometry or height displacement."
+  },
+  "coverage": "Both delivered products contain global imagery, including lower-resolution inserts. No validity masks or missing-value codes accompany these display images. Do not classify observed black shadows as gaps or invent missing terrain.",
+  "elevation": {
+    "url": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
+    "doi": "10.26033/y8wv-r303",
+    "version": "1.0",
+    "released": "2025-08-28",
+    "label": "observations/mimas_radius_g.xml",
+    "sourceUnits": "Radius from body center, meters",
+    "displayConversion": "height_km = radius_m * 0.001 - 198.2",
+    "coordinates": "Planetocentric latitude, east-positive longitude; use exact GeoTIFF origin and pixel spacing, without stretching the raster to 360 by 180 degrees.",
+    "boundsDegrees": {
+      "west": 0,
+      "east": 359.15174241934125,
+      "north": 90,
+      "south": -89.57587120967062
+    },
+    "coverage": "All 2,468,642 raster cells are finite and valid. The geotransform covers less than the global bounding box advertised in the label; preserve the eastern and southern edge gaps.",
+    "processing": "Bilinear interpolation within the measured raster only; 1x height scale and northwest cartographic relief. Source is 2222 by 1111 at 559.13 m, resampled to the shared 8192 by 4096 display layout without adding detail."
+  }
+}
