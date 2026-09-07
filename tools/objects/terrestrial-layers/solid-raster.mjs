@@ -31,6 +31,7 @@ function surfaceEncoding(config) {
 
 export async function readObservation(sourceDirectory, entry, validity, width, height) {
   const path = resolve(sourceDirectory, entry.path);
+  if (validity.kind === 'pds3-byte-monochrome') return preparePdsByteMosaic(sourceDirectory, [entry], width, height, validity);
   if (validity.kind === 'isis3-float-monochrome') return prepareIsisObservation(path, entry, validity, width, height);
   if (['geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(validity.kind)) return prepareFloatObservation(path, entry, validity, width, height);
   const metadata = await sharp(path, { limitInputPixels: false }).metadata();

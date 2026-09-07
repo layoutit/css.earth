@@ -20,6 +20,15 @@ export async function readAuthoredRotation(directory, reference, epochJdTt) {
       primeMeridianRad: ((primeMeridianDegrees + (epochJdTt - referenceEpochJdTt) * spinDegreesPerDay) % 360) * rad,
       spinRateRadPerDay: spinDegreesPerDay * rad };
   }
+  if (source.schema === 'cssearth-linear-rotation@1') {
+    const { rightAscensionDegrees: ra, declinationDegrees: dec, referenceEpochJdTt: epoch,
+      primeMeridianDegrees: meridian, spinRateDegreesPerDay: rate } = source;
+    if (![ra, dec, epoch, meridian, rate, epochJdTt].every(Number.isFinite) || Math.abs(dec) > 90 ||
+        !rate || typeof source.source !== 'string' || !source.source.trim()) throw new TypeError('Invalid source-bound rotation.');
+    const rad = Math.PI / 180, w = meridian + rate * (epochJdTt - epoch);
+    return { poleRightAscensionRad: ra * rad, poleDeclinationRad: dec * rad,
+      primeMeridianRad: ((w % 360 + 360) % 360) * rad, spinRateRadPerDay: rate * rad };
+  }
   const observed = source.schema === 'cssearth-observed-pole@1';
   if ((!observed && source.schema !== 'cssearth-display-orientation@1') || source.phase !== 'arbitrary-display-phase' ||
       ![source.rightAscensionDegrees, source.declinationDegrees, source.displayMeridianDegrees, epochJdTt].every(Number.isFinite) ||

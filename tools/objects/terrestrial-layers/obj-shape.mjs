@@ -1,6 +1,7 @@
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { resolve } from 'node:path';
+import { readFile } from 'node:fs/promises';
 
 const exec = promisify(execFile);
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
@@ -10,14 +11,36 @@ const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1
 /** Read the released triangular surface in its body-fixed frame. Units are
  * authored explicitly; no ellipsoid or missing terrain is synthesized. */
 export async function loadObjShape(path, profile) {
-  const { stdout } = await exec('unzip', ['-p', path, profile.member], { maxBuffer: 96 * 1024 * 1024 });
-  return parseObjShape(stdout, profile);
+  const text = profile.member
+    ? (await exec('unzip', ['-p', path, profile.member], { maxBuffer: 96 * 1024 * 1024 })).stdout
+    : await readFile(path, 'utf8');
+  return parseObjShape(text, profile);
+}
+
+/** PDS vertex-facet tables retain their explicit row ids and kilometre units. */
+export async function loadPdsVertexFacetShape(path, profile) {
+  return parsePdsVertexFacetShape(await readFile(path, 'utf8'), profile);
+}
+
+export function parsePdsVertexFacetShape(text, profile) {
+  const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
+  const vertexCount = rows[0]?.[0], faceOffset = vertexCount + 1;
+  if (vertexCount !== profile.expectedVertices || rows[faceOffset]?.[0] !== profile.expectedFaces ||
+      rows.length !== vertexCount + profile.expectedFaces + 2) throw new Error('PDS shape dimensions changed.');
+  const table = (start, count, columns) => rows.slice(start, start + count).map((row, i) => {
+    if (row.length !== columns || row[0] !== i + 1 || row.some(n => !Number.isFinite(n))) throw new Error('Invalid PDS shape row.');
+    return row.slice(1);
+  });
+  const vertices = table(1, vertexCount, 4).map(v => v.map(n => n * profile.metersPerUnit));
+  const indices = table(faceOffset + 1, profile.expectedFaces, 4).map(f => f.map(n => n - 1));
+  return radialShape(vertices, indices, profile);
 }
 
 /** Sample a bounded scientific grid from the source mesh. A facet-support
  * column can withhold regions whose detailed SPC solution is absent. */
-export async function loadObjScalarGrid(root, lens) {
-  const mesh = await loadObjShape(resolve(root, lens.path), lens.grid);
+export async function loadShapeScalarGrid(root, lens) {
+  const load = lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
+  const mesh = await load(resolve(root, lens.path), lens.grid);
   const { width = 721, height = 361 } = lens.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');
   let validity;
@@ -58,9 +81,14 @@ export function parseObjShape(text, { metersPerUnit, expectedVertices, expectedF
       indices.push(f);
     }
   }
+  return radialShape(vertices, indices, { metersPerUnit, expectedVertices, expectedFaces });
+}
+
+function radialShape(vertices, indices, { metersPerUnit, expectedVertices, expectedFaces }) {
+  if (!(metersPerUnit > 0)) throw new TypeError('Shape units must be explicit.');
   if (vertices.length !== expectedVertices || indices.length !== expectedFaces) throw new Error('OBJ shape dimensions changed.');
   const faces = indices.map((f, id) => {
-    if (f.some(i => i >= vertices.length)) throw new Error('OBJ face references an absent vertex.');
+    if (f.some(i => !Number.isInteger(i) || i < 0 || i >= vertices.length)) throw new Error('Shape face references an absent vertex.');
     const [a,b,c] = f.map(i => vertices[i]), ab = sub(b,a), ac = sub(c,a);
     if (!(Math.hypot(...cross(ab,ac)) > 0)) throw new Error('Degenerate source shape face.');
     return { id, a, ab, ac, min: a.map((v,i) => Math.min(v,b[i],c[i])), max: a.map((v,i) => Math.max(v,b[i],c[i])) };
@@ -102,6 +130,6 @@ export function parseObjShape(text, { metersPerUnit, expectedVertices, expectedF
     visit(root);
     return faceId<0?null:{radius:nearest,faceId};
   }
-  return { vertices: vertices.length, faces: faces.length, bounds:[root.min,root.max], hit,
+  return { vertices: vertices.length, faces: faces.length, positions: vertices, indices, bounds:[root.min,root.max], hit,
     sample(longitude,latitude) {return hit(longitude,latitude)?.radius??null;} };
 }

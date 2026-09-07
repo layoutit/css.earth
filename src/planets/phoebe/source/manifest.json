@@ -1,0 +1,225 @@
+{
+  "schema": "cssphoebe-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "cassini-mosaic",
+      "path": "observations/SP_1M_0_0_SIMP.IMG",
+      "expectedBytes": 4158720,
+      "expectedSha256": "e2a26482052ef9d67dd5c82df096daedc9cec0c0345c94e07f9b4461622aa69a",
+      "origin": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG",
+      "catalog": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
+      "credit": "NASA/JPL/Space Science Institute; DLR",
+      "license": "Public NASA mission data, archived in PDS. Retain mission and cartography credits.",
+      "licenseEvidence": [
+        "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
+        "observations/datainfo.txt"
+      ],
+      "acquisition": "Download the pinned original PDS3 byte mosaic.",
+      "redistribution": "Retain the NASA/JPL/SSI and DLR attribution.",
+      "width": 2880,
+      "height": 1440,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 106800
+      },
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "coverage": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data."
+    },
+    {
+      "id": "gaskell-2012-shape",
+      "path": "shape/phoebe_ver128q.tab",
+      "expectedBytes": 16897992,
+      "expectedSha256": "92550ba0625255a2f91cd5d9a7b52e020fc4ba76c7ef3fd76a9728a66df697c2",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.phoebe.shape-model/data/phoebe_ver128q.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
+      "credit": "Robert Gaskell; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; cite Gaskell and the PDS archive.",
+      "licenseEvidence": [
+        "shape/README.txt",
+        "https://sbn.psi.edu/pds/resource/phoebeshape.html"
+      ],
+      "acquisition": "Download the original PDS4 vertex-facet table.",
+      "redistribution": "Retain the model author and archive credit.",
+      "consumers": [
+        "shape",
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-fixed-mesh",
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
+      "credit": "NASA/JPL/Space Science Institute; DLR",
+      "license": "Public NASA mission data, archived in PDS. Retain mission and cartography credits.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "cassini-mosaic",
+          "gaskell-2012-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": -20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 175814,
+      "expectedSha256": "0e9ff01de751738d7dfbc8b3fcacc84948984f19aad8ff5e061e0327e243426f"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4568,
+      "expectedSha256": "bace704cd563476193b50a3ccb7e6bf69a3e93024ff562cbce740f1e8591bb31",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "observations/datainfo.txt",
+      "expectedBytes": 2879,
+      "expectedSha256": "e624ef80aadb786289ced6c7e7fb687ed43bf2a43681615ba2d3490346e90aa9",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "observations/regional-color-example-label.txt",
+      "expectedBytes": 13093,
+      "expectedSha256": "383d1877fa726030589d125c57c46dc2432376408f44875527b0c3ccec2e8707",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 982,
+      "expectedSha256": "e1ceb5ea8c2b6a1ac9f1fda2462a87edc546b31ca9bf25e338dd504862eb29f7",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1282,
+      "expectedSha256": "dd8eb3b09ef8197239465791b8893c429a2da91bee168bf1d69e227d6afbe521",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 532,
+      "expectedSha256": "74eeab739921e8b14e05943ab35548a07d6cfc9e04dc283c8b23824296b5d3ad",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2847,
+      "expectedSha256": "5e86c9b34ab60d330e317a7cfb97b6f14514e99366f5f8c9cd86085b3d71d88c",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3892,
+      "expectedSha256": "24ac25702c2b96ae23274cca88949210c6bb96f42afd4eeff450c7d9bb5f438a",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "shape/README.txt",
+      "expectedBytes": 5911,
+      "expectedSha256": "c950ffefbadd767e022a772724ff5b5170134fa98d650c11559752b20fa3d7c2",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "shape/icqmodel.asc",
+      "expectedBytes": 7297,
+      "expectedSha256": "1e4f9ac874076e5f02c15efb0cc803ff6d3c6d707f2f88edb1ec0ff1b75f8415",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "shape/phoebe_ver128q.xml",
+      "expectedBytes": 13891,
+      "expectedSha256": "502d5119f3de1e7770594683e672e49c586ac9e0ad5b9cab85a109ee1537038e",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 849,
+      "expectedSha256": "c1c83cb4ab9949ee346e0211c2f169b08bea66ff8bfbaa9f9c16276ed6cdbe1b",
+      "purpose": "Authored content, source documentation or preparation metadata."
+    }
+  ]
+}
