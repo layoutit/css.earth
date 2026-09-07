@@ -333,7 +333,8 @@ export function createRetainedCubicSkyOrbit({
       const markerBounds = marker !== null && !marker.hidden && Number(marker.style.opacity) > 0
         ? marker.getBoundingClientRect() : null;
       const radius = worldContext?.bodyRadiusUnits ?? heliocentric?.plan.units.bodyRadiusUnits;
-      return hitsProjectedBody(clientX, clientY, body, cameraElement.getBoundingClientRect(), markerBounds,
+      const cameraBounds = cameraPlan.projection ? viewport?.read(cameraPlan.projection.cssPerspective).bounds : null;
+      return hitsProjectedBody(clientX, clientY, body, cameraBounds ?? cameraElement.getBoundingClientRect(), markerBounds,
         projected && radius ? { focalPixels: projected.focal,
           principalOffsetPixels: [projected.principalOffset[0]!, projected.principalOffset[1]!], bodyRadiusUnits: radius } : undefined);
     } : null,

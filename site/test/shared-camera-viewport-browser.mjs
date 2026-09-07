@@ -15,15 +15,19 @@ try {
     await page.goto(`${origin}/sun/?overview=solar-system&v=QMY-Wp0Ui2g9eAAAAAAAAAAAwhaDLpsLNZhBQsczQAAAAD_WST4rO1jov9dbC19kads_3S3JdnPBsgABAAAAAAAAAAA`);
     await page.waitForFunction(() => window.__cssEarth?.ready);
     for (const id of ['haumea', 'saturn', 'mars', 'sun']) {
-      // Read-only probes detect forbidden camera measurement during attachment;
-      // the shared viewport's own stage/projection-probe reads remain legitimate.
+      // Include the shared projection probes after handoff: changing FOV must
+      // be prepared before teardown, not force layout from the incoming mount.
       await page.evaluate(() => {
         window.__cameraMountReads = [];
         window.__mountedInput = document.querySelector('.planet-input-surface');
         const read = Element.prototype.getBoundingClientRect, style = window.getComputedStyle;
         window.__restoreCameraReadProbes = () => { Element.prototype.getBoundingClientRect = read; window.getComputedStyle = style; };
         const record = (element, operation) => {
-          if (element.matches?.('.polycss-camera, .planet-cubic-sky') && !window.__cssEarth?.ready)
+          const requested = performance.getEntriesByName('cssEarth:navigation:requested').at(-1);
+          const handoff = performance.getEntriesByName('cssEarth:navigation:handoff').at(-1);
+          const attaching = requested && handoff && handoff.startTime >= requested.startTime;
+          const projectionProbe = attaching && element.parentElement?.matches('.planet-stage') && element.style.perspective;
+          if ((projectionProbe || element.matches?.('.polycss-camera, .planet-cubic-sky, .planet-chart')) && !window.__cssEarth?.ready)
             if (window.__cameraMountReads.length < 3) window.__cameraMountReads.push({ operation, className: element.className, stack: new Error().stack });
         };
         Element.prototype.getBoundingClientRect = function () { record(this, 'bounds'); return read.call(this); };
@@ -55,6 +59,22 @@ try {
         results.push({ dpr, id, size, ...measured });
       }
     }
+    // A stationary pointer must not remeasure the camera after every wheel
+    // publication merely to choose the cursor's surface/sky appearance.
+    await page.mouse.move(1200, 500);
+    await page.evaluate(() => {
+      const original = Element.prototype.getBoundingClientRect;
+      window.__wheelCameraReads = 0;
+      window.__restoreWheelProbe = () => { Element.prototype.getBoundingClientRect = original; };
+      Element.prototype.getBoundingClientRect = function () {
+        if (this.matches?.('.polycss-camera')) window.__wheelCameraReads++;
+        return original.call(this);
+      };
+    });
+    await page.mouse.wheel(0, 200);
+    await page.waitForTimeout(350);
+    const wheelReads = await page.evaluate(() => { window.__restoreWheelProbe(); return window.__wheelCameraReads; });
+    assert.equal(wheelReads, 0, `DPR ${dpr}: cursor picking consumes the published viewport`);
     await page.close();
   }
   assert.deepEqual(errors, []);

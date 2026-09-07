@@ -282,6 +282,7 @@ export function createSceneRouter({
         motionRequested: motionEnabled, reducedMotion: reducedMotionActive,
         targetWorldCamera: request.options.targetWorldCamera,
         preserveView: request.options.preserveView,
+        cameraViewport: worldContextMount?.viewport,
         timing: request.timing,
         presentWorld: worldContextMount ? (world, viewport) => worldContextMount?.publish(world, viewport) : null,
       });

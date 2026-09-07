@@ -20,7 +20,9 @@ The application owns viewport measurement across mounts. Object cameras and
 world overlays consume its published bounds and projection. Resize and scroll
 schedule a measurement; an unchanged result preserves the snapshot and does not
 notify consumers. Replacing sidebar content cannot invalidate that snapshot
-synchronously inside an object mount.
+synchronously inside an object mount. Each authored projection retains its own
+measurement. Destination preparation resolves a new field of view before the
+outgoing scene is removed, and cursor picking consumes the same viewport data.
 
 Navigation annotations fade during flight and suspend projection, decluttering,
 hit targets, and DOM writes until they are needed again. Physical sprites and
@@ -33,6 +35,11 @@ The shell owns one surface-axis reader shared by the minimap and view readout.
 Closed minimaps unsubscribe. Preview images acquire a URL only when their
 accordion and dataset are visible. Header values update at most ten times per
 second, with a trailing update and immediate refresh on camera-owner changes.
+Chart pixel alignment activates only for intersecting charts and batches its
+reads before writes; hidden charts schedule no alignment frame. If the flight
+curve reaches its exact terminal position and orientation before its duration
+cap, the lifecycle completes then rather than republishing a stationary pose.
+Destination-detail readiness holds still take precedence.
 
 ## Verification
 

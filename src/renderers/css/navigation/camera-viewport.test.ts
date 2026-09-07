@@ -3,6 +3,32 @@ import { createCameraViewport } from './camera-viewport.js';
 import { createPerspectiveDolly } from './perspective-dolly.js';
 import scene from '../../../planets/mercury/prepared/scene.json';
 
+test('prepared FOVs retain independent measurements across switches and resize together', () => {
+  let width = 1000, reads = 0, resize!: () => void, refresh!: FrameRequestCallback;
+  const remove = vi.fn();
+  const view = {
+    ResizeObserver: class { constructor(callback: () => void) { resize = callback; } observe() {} disconnect() {} },
+    getComputedStyle: (probe: HTMLElement) => { reads++; return { perspective: `${parseFloat(probe.style.perspective) * width / 100}px` }; },
+    requestAnimationFrame: (callback: FrameRequestCallback) => { refresh = callback; return 1; },
+    cancelAnimationFrame() {}, addEventListener() {}, removeEventListener() {},
+  };
+  const stage = { ownerDocument: { defaultView: view, createElement: () => ({ style: {}, remove }) }, appendChild() {},
+    getBoundingClientRect: () => { reads++; return { x: 0, y: 0, width, height: 800 }; } };
+  const viewport = createCameraViewport(stage as unknown as HTMLElement);
+  const wide = viewport.read('80cqw'), narrow = viewport.read('120cqw');
+  const preparedReads = reads;
+  expect(viewport.read('80cqw')).toBe(wide);
+  expect(viewport.read('120cqw')).toBe(narrow);
+  expect(reads).toBe(preparedReads);
+  expect(wide.focalPixels).toBe(800); expect(narrow.focalPixels).toBe(1200);
+  width = 700; resize(); refresh(0);
+  const resizedReads = reads;
+  expect(viewport.read('80cqw').focalPixels).toBe(560);
+  expect(viewport.read('120cqw').focalPixels).toBe(840);
+  expect(reads).toBe(resizedReads);
+  viewport.destroy(); expect(remove).toHaveBeenCalledTimes(2);
+});
+
 test('one viewport snapshot survives camera mounts and refreshes on layout changes', () => {
   let width = 1200, reads = 0, resize!: () => void;
   const frames = new Map<number, FrameRequestCallback>(), events = new Map<string, () => void>();
