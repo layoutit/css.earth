@@ -472,14 +472,17 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const { entry, x, y, diameter, markerOpacity, indicatorOpacity, annotationVisible, parentDiameter, priority, orbitVisibility } = projected;
         const { body, labelSize: size } = entry;
         const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
+        const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
         if (!annotationVisible || markerOpacity <= 0.5 || size.width === 0 ||
-            (satellite && body.id !== selectedId && parentDiameter < plan.camera.presentation.levelOfDetail.billboardFadeStartDiscPixels) ||
-            (entry.orbit && orbitVisibility <= 0.5 && body.id !== selectedId) || (indicatorOpacity > 0 && !entry.indicatorShown)) continue;
+            (!resolvedDisc && body.id !== selectedId &&
+              ((satellite && parentDiameter < plan.camera.presentation.levelOfDetail.billboardFadeStartDiscPixels) ||
+               (entry.orbit && orbitVisibility <= 0.5))) || (indicatorOpacity > 0 && !entry.indicatorShown)) continue;
         const gap = Math.max(5, diameter / 2, entry.indicatorShown ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
         // Keep a clear placement stable; try other sides before hiding a label.
         const placements = body.id === plan.focus.id ? [0] :
+          diameter >= plan.camera.presentation.levelOfDetail.billboardFullDiscPixels ? [3, 2, 0, 1] :
           [entry.labelPlacement, ...[0, 1, 2, 3].filter(index => index !== entry.labelPlacement)];
         const withinViewport = (index: number) => {
           const [lx, ly] = positions[index];

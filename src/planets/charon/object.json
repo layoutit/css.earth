@@ -38,7 +38,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "dca801994903573995e2105fdfa4038acc5e9580fbe408f223a0655a4bd6c275"
+          "sha256": "d92a8c44e5085a010315acf1c365d5b793a0c02e346fbcbb175e048d55dcc24d"
         },
         {
           "id": "acquisition",
@@ -108,6 +108,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8d3b539c6696768db122e9ae91294f7ae8fe44ef4ae7ffc5d85d2d0625474b89"
+    "sha256": "1ecba95c103990908c70989d1d5c060542cc9874215bca774b4994b15d8db708"
   }
 }

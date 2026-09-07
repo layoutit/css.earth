@@ -66,9 +66,9 @@ function sampleMap(source, width, height, longitude, latitude, output, offset) {
 // All mesh construction runs during preparation; the runtime receives leaves.
 export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius, secondaryRadius = radius,
   mapUrl, polesUrl, latitudeSegments = 16, longitudeSegments = 32,
-  sourceWidth = 2048, sourceHeight = 1024, poleTileSize = 256, seamOverlap = 0.005 }) {
+  sourceWidth = 2048, sourceHeight = 1024, poleTileSize = 256, seamOverlap = 0.005,
+  gutter = sourceHeight / latitudeSegments / 4 }) {
   const cellWidth = sourceWidth / longitudeSegments, cellHeight = sourceHeight / latitudeSegments;
-  const gutter = cellHeight / 4;
   const planOptions = { tileSize: 50, layerElevation: 50, textureLighting: "baked", seamBleed: 0 };
   const polygons = createSpherePolygons(seamOverlap);
   return [...polygons, ...["north", "south"].map(pole => createPolarCapPolygon(pole, true))]

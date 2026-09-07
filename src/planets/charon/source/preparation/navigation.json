@@ -2,6 +2,9 @@
   "schema": "cssearth-navigation-marker@1",
   "planetId": "charon",
   "owner": "object",
+  "context": {
+    "pixels": 512
+  },
   "presentation": {
     "size": 5
   },
@@ -67,7 +70,11 @@
       "cx": 0.5,
       "cy": 0.5,
       "rx": 0.5,
-      "ry": 0.5
+      "ry": 0.5,
+      "shading": {
+        "ambient": 0.35,
+        "diffuse": 0.65
+      }
     },
     {
       "type": "png"

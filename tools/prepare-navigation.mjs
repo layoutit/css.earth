@@ -152,14 +152,14 @@ export async function moveNavigationFile(source, target, io = { rename, copyFile
 }
 
 // A moon's parent can occupy hundreds of pixels in the shared world view.
-// Derive the needed parents from the astronomy catalogue; UI icons stay tiny.
+// Parents and explicitly sized resolved views use their own image; UI icons stay tiny.
 export async function prepareContextMarkers({ projectRoot, outputRoot, descriptors, planets = PLANET_MARKER_PLANETS }) {
   const { BODIES } = await loadAstronomyPackage();
   const parents = new Set(planets.filter(({ classification }) => classification === "satellite")
     .map(({ id }) => BODIES[id]?.parent).filter(Boolean));
   const markers = {};
   for (const descriptor of descriptors) {
-    if (!parents.has(descriptor.planetId)) continue;
+    if (!parents.has(descriptor.planetId) && !descriptor.context) continue;
     const sourcePath = resolve(projectRoot, "src/planets", descriptor.planetId, "source", descriptor.source.path);
     const bytes = await validateMarkerSourceBytes(descriptor.source, sourcePath);
     let crop = sharp(bytes);
@@ -171,7 +171,7 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
     }
     const { info } = await crop.raw().toBuffer({ resolveWithObject: true });
     // Fixed canonical image, capped by the actual native crop, never the UI atlas.
-    const pixels = Math.min(1536, info.width, info.height);
+    const pixels = Math.min(descriptor.context?.pixels ?? 1536, info.width, info.height);
     const png = await renderMarker(descriptor, { sourcePath, tileSize: pixels });
     const filename = `${descriptor.planetId}-context.webp`;
     await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(outputRoot, filename));

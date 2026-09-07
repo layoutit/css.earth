@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { posix, win32 } from "node:path";
 
 import sharp from "sharp";
+import { blackFillCoverage, paintMissingCoverage } from "../platform/prepare-missing-coverage.mjs";
 
 const SHA256 = /^[0-9a-f]{64}$/u;
 const PLANET_ID = /^[a-z][a-z0-9-]*$/u;
@@ -13,6 +14,7 @@ const OPERATION_TYPES = new Set([
   "extract",
   "resize",
   "ensure-alpha",
+  "missing-coverage",
   "ellipse-mask",
   "png",
 ]);
@@ -26,6 +28,9 @@ export function validateMarkerDescriptor(descriptor) {
     throw new TypeError("Navigation marker descriptor is invalid.");
   }
   validateMarkerSource(descriptor.source);
+  if (descriptor.context !== undefined && (!Number.isSafeInteger(descriptor.context?.pixels) || descriptor.context.pixels < 32)) {
+    throw new TypeError("Resolved marker size must be a positive image size of at least 32 pixels.");
+  }
   if (descriptor.owner === "object" && !httpOrigin(descriptor.source.origin)) {
     throw new TypeError("Object marker source must have an HTTP(S) origin.");
   }
@@ -73,7 +78,11 @@ export async function renderMarker(descriptor, { sourcePath, tileSize }) {
   }
   let image = sharp(await validateMarkerSourceBytes(descriptor.source, sourcePath));
   for (const operation of descriptor.operations) {
-    if (operation.type === "linear") image = image.linear(operation.multiplier, operation.offset);
+    if (operation.type === "missing-coverage") {
+      const { data, info } = await image.removeAlpha().toColourspace("srgb").raw().toBuffer({ resolveWithObject: true });
+      const missing = blackFillCoverage(data, info, operation);
+      image = sharp(paintMissingCoverage(data, info, missing), { raw: info });
+    } else if (operation.type === "linear") image = image.linear(operation.multiplier, operation.offset);
     else if (operation.type === "rotate") image = image.rotate();
     else if (operation.type === "trim") {
       image = image.trim({ threshold: operation.threshold });
@@ -94,6 +103,17 @@ export async function renderMarker(descriptor, { sourcePath, tileSize }) {
       });
     } else if (operation.type === "ensure-alpha") image = image.ensureAlpha();
     else if (operation.type === "ellipse-mask") {
+      if (operation.shading) {
+        // Prepare full-phase curvature in the same footprint as the silhouette.
+        const { data, info } = await image.toColourspace("srgb").ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+        for (let y = 0; y < info.height; y++) for (let x = 0; x < info.width; x++) {
+          const dx = ((x + 0.5) / info.width - operation.cx) / operation.rx;
+          const dy = ((y + 0.5) / info.height - operation.cy) / operation.ry;
+          const light = operation.shading.ambient + operation.shading.diffuse * Math.sqrt(Math.max(0, 1 - dx * dx - dy * dy));
+          for (let channel = 0; channel < 3; channel++) data[(y * info.width + x) * info.channels + channel] *= light;
+        }
+        image = sharp(data, { raw: info });
+      }
       const mask = Buffer.from(
         `<svg xmlns="http://www.w3.org/2000/svg" width="${tileSize}" height="${tileSize}">` +
         `<ellipse cx="${tileSize * operation.cx}" cy="${tileSize * operation.cy}" ` +
@@ -118,6 +138,10 @@ function validateOperation(operation) {
       (!Number.isFinite(operation.threshold) || operation.threshold < 0)) {
     throw new TypeError("Navigation marker trim is invalid.");
   }
+  if (operation.type === "missing-coverage" &&
+      (operation.kind !== "black-fill" || typeof operation.southConnected !== "boolean")) {
+    throw new TypeError("Navigation marker coverage is invalid.");
+  }
   if (operation.type === "extract" &&
       ![operation.left, operation.top, operation.width, operation.height]
         .every((value) => Number.isSafeInteger(value) && value >= 0) ||
@@ -135,6 +159,12 @@ function validateOperation(operation) {
       ![operation.cx, operation.cy, operation.rx, operation.ry]
         .every((value) => Number.isFinite(value) && value > 0 && value <= 1)) {
     throw new TypeError("Navigation marker mask is invalid.");
+  }
+  if (operation.type === "ellipse-mask" && operation.shading !== undefined &&
+      (!Number.isFinite(operation.shading?.ambient) || !Number.isFinite(operation.shading?.diffuse) ||
+       operation.shading.ambient < 0 || operation.shading.diffuse < 0 ||
+       operation.shading.ambient + operation.shading.diffuse > 1)) {
+    throw new TypeError("Navigation marker curvature shading is invalid.");
   }
 }
 
