@@ -10,6 +10,13 @@ import { createPreparedRingProjector } from '../solar-system/prepared-ring-proje
 import { applySprite, writePieces } from '../solar-system/heliocentric-sprites.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
+import { compactOrbitFootprint, selectContextLabels } from './context-label-layout.js';
+import type { ContextLabelCandidate } from './context-label-layout.js';
+import type { LabelScreenRect } from '../labels/screen-label-layout.js';
+import { createOpacityFader } from '../stars/opacity-fader.js';
+
+const LABEL_FADE_MS = 200;
+interface LabelFadeState { element: HTMLElement; target: number; hideTimer: number | null; }
 
 export interface PreparedContextPoint {
   readonly id: string;
@@ -41,6 +48,13 @@ export interface PreparedContextCameraPresentation {
   readonly orbitLineFade: OrbitLineFade;
   readonly drag: { readonly model: 'screen-axis-tumble' };
 }
+export interface PreparedVolumeOpacityProfile {
+  readonly model: 'logarithmic-distance';
+  readonly nearOpacity: number;
+  readonly fullOpacity: number;
+  readonly fadeStartDistanceM: number;
+  readonly fullDistanceM: number;
+}
 export interface PreparedWorldContext {
   readonly schema: 'cssearth-world-context@1';
   readonly frame: PreparedWorldCameraFrame;
@@ -48,7 +62,10 @@ export interface PreparedWorldContext {
   readonly bodies: readonly PreparedContextBody[];
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
-  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
+  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
+    readonly opacityProfile?: PreparedVolumeOpacityProfile;
+    /** Display attenuation of the completed volume image over black; not physical exposure. */
+    readonly brightnessProfile?: PreparedVolumeOpacityProfile };
   readonly stars: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
   readonly sky: { readonly sceneRegistration: string };
@@ -158,7 +175,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     }
   }
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
-  const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
+  const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
   const starId = text(stars.objectId, 'star field identity');
   const starStart = positive(stars.fadeStartDistanceM, 'star field fade start');
@@ -183,9 +200,27 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
   return Object.freeze({ schema: 'cssearth-world-context@1', frame, focus, bodies: Object.freeze(bodies),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
-    volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM }),
+    volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM,
+      ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
+      ...(volume.brightnessProfile === undefined ? {} : { brightnessProfile: parseVolumeOpacityProfile(volume.brightnessProfile) }) }),
     stars: Object.freeze({ objectId: starId, fadeStartDistanceM: starStart, fullDistanceM: starFull }),
     system: Object.freeze({ fadeOutStartDistanceM, hiddenDistanceM }), sky });
+}
+
+function parseVolumeOpacityProfile(value: unknown): PreparedVolumeOpacityProfile {
+  const input = record(value, 'volume opacity profile', ['model', 'nearOpacity', 'fullOpacity', 'fadeStartDistanceM', 'fullDistanceM']);
+  if (input.model !== 'logarithmic-distance') throw new TypeError('Unsupported volume opacity profile model.');
+  const nearOpacity = finite(input.nearOpacity, 'volume near opacity'), fullOpacity = finite(input.fullOpacity, 'volume full opacity');
+  const fadeStartDistanceM = positive(input.fadeStartDistanceM, 'volume opacity fade start'), fullDistanceM = positive(input.fullDistanceM, 'volume opacity full distance');
+  if (nearOpacity < 0 || nearOpacity > 1 || fullOpacity < 0 || fullOpacity > 1 || !(fadeStartDistanceM < fullDistanceM)) throw new TypeError('Volume opacity profile is invalid.');
+  return Object.freeze({ model: input.model, nearOpacity, fullOpacity, fadeStartDistanceM, fullDistanceM });
+}
+
+/** Applies prepared grading by common-focus distance, independently of camera angle or selected detail. */
+export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolumeOpacityProfile): number {
+  if (!profile) return 1;
+  const fade = logarithmicFade(distanceM, profile.fadeStartDistanceM, profile.fullDistanceM);
+  return profile.nearOpacity + (profile.fullOpacity - profile.nearOpacity) * fade;
 }
 
 export function logarithmicFade(distanceM: number, startM: number, endM: number): number {
@@ -214,6 +249,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     label.dataset.contextLabel = body.id;
     label.textContent = body.name;
     label.style.cssText = 'position:absolute;left:50%;top:50%;font:11px system-ui;color:#c2ccd8;white-space:nowrap;visibility:hidden';
+    label.style.opacity = '0';
     const pieces: HTMLElement[] = [];
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
     if (orbit) for (let i = 0; i < orbit.verticesM.length * 2; i++) {
@@ -224,14 +260,68 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     root.append(marker, label);
     const navigation = bindObjectNavigationTarget(marker, host);
     const labelNavigation = bindObjectNavigationTarget(label, host, { activation: 'dblclick' });
-    return { body, sprite, marker, label, orbit, parent: orbit ? points.get(orbit.centerBodyId)! : null, pieces, navigation, labelNavigation, previousCount: 0 };
+    return { body, sprite, marker, label, orbit, parent: orbit ? points.get(orbit.centerBodyId)! : null, pieces, navigation, labelNavigation, previousCount: 0,
+      labelWidth: 0, labelHeight: 0, labelTarget: 0, inFrame: false,
+      fade: { element: label, target: 0, hideTimer: null } as LabelFadeState };
   });
+  // Annotations own their fades outside the retiring physical system layer.
+  // Keep the focus label exactly once; its locator is not a brighter photosphere.
+  const focusLayer = host.ownerDocument.createElement('div');
+  focusLayer.className = 'prepared-focus-locator prepared-context-labels';
+  focusLayer.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0';
+  const focusLocator = host.ownerDocument.createElement('s');
+  focusLocator.dataset.contextFocusLocator = plan.focus.id;
+  focusLocator.style.cssText = 'position:absolute;left:50%;top:50%;width:6px;height:6px;box-sizing:border-box;border:1px solid #c2ccd8;border-radius:50%;text-decoration:none;visibility:hidden';
+  focusLocator.style.opacity = '0';
+  focusLayer.append(focusLocator, ...bodies.map(entry => entry.label));
+  host.insertBefore(focusLayer, before);
+  const locatorNavigation = bindObjectNavigationTarget(focusLocator, host);
+  const windowTarget = host.ownerDocument.defaultView!;
+  const fader = createOpacityFader(windowTarget);
+  const locatorFade: LabelFadeState = { element: focusLocator, target: 0, hideTimer: null };
+  const fadeStates = [locatorFade, ...bodies.map(entry => entry.fade)];
+  const clearHide = (state: LabelFadeState) => {
+    if (state.hideTimer !== null) windowTarget.clearTimeout(state.hideTimer);
+    state.hideTimer = null;
+  };
+  const fade = (state: LabelFadeState, target: number, cull = false) => {
+    state.target = target;
+    if (cull || (target === 0 && Number(state.element.style.opacity) === 0)) {
+      clearHide(state); fader.set(state.element, 0); state.element.style.visibility = 'hidden'; return;
+    }
+    if (target > 0) {
+      clearHide(state); state.element.style.visibility = ''; fader.set(state.element, target, LABEL_FADE_MS);
+    } else {
+      fader.set(state.element, 0, LABEL_FADE_MS);
+      if (state.hideTimer === null) state.hideTimer = windowTarget.setTimeout(() => {
+        state.hideTimer = null;
+        if (state.target === 0) { fader.set(state.element, 0); state.element.style.visibility = 'hidden'; }
+      }, LABEL_FADE_MS);
+    }
+  };
   let destroyed = false;
+  const measureLabels = () => {
+    if (destroyed) return;
+    for (const entry of bodies) {
+      const bounds = entry.label.getBoundingClientRect();
+      entry.labelWidth = Math.ceil(bounds.width) + 2;
+      entry.labelHeight = Math.ceil(bounds.height) + 2;
+    }
+  };
+  measureLabels();
+  const fonts = host.ownerDocument.fonts;
+  fonts?.addEventListener('loadingdone', measureLabels);
+  void fonts?.ready.then(measureLabels);
+  let labelExclusions: readonly LabelScreenRect[] = [];
+  let backgroundExclusions: readonly LabelScreenRect[] = [];
   let selectedId = plan.focus.id;
   return Object.freeze({ root,
+    labelExclusionRects: () => labelExclusions,
+    backgroundExclusionRects: () => backgroundExclusions,
     inspect() {
       return Object.freeze(bodies.map(({ body, marker, label, pieces }) => Object.freeze({
         id: body.id, marker, label, orbit: Object.freeze([...pieces]),
+        ...(body.id === plan.focus.id ? { locator: focusLocator } : {}),
       })));
     },
     selectObject(id: string) {
@@ -247,7 +337,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const opacity = 1 - logarithmicFade(distanceM, plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
       root.style.opacity = String(opacity);
       root.hidden = opacity === 0;
-      if (opacity === 0) return;
       const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
       const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
@@ -265,37 +354,75 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, focusDiameter);
       const orbitOpacity = orbitLineOpacity(plan.camera.presentation.orbitLineFade, focusDiameter / height);
+      const labelCandidates: ContextLabelCandidate[] = [];
+      const orbitBounds = { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity };
       for (const entry of bodies) {
         const { body, marker, label } = entry;
+        entry.labelTarget = 0;
+        entry.labelNavigation.update(null);
         const eye = toEye(body.positionM), depth = -eye[2];
         const parentEye = entry.parent ? toEye(entry.parent.positionM) : null;
         const parentHidden = (position: readonly number[]) => parentEye !== null && rayHitsSphereBefore(position, parentEye, entry.parent!.radiusM);
         const [x, y] = project(eye);
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isSelected = body.id === selectedId;
-        const visible = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2 && !hidden(eye, body.id) && !parentHidden(eye);
+        const inFrame = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2;
+        entry.inFrame = inFrame;
+        const visible = inFrame && !hidden(eye, body.id) && !parentHidden(eye);
+        // A location annotation is not occulted by an unresolved body marker.
+        // Resolved bodies still hide it; physical sprites/PSFs keep exact occlusion.
+        const annotationVisible = body.id === plan.focus.id
+          ? inFrame && !(selectedId !== body.id && focusDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels && rayHitsSphereBefore(eye, selectedEye, selected.radiusM))
+          : visible;
         const markerOpacity = isSelected ? lod.billboardOpacity : 1;
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
+        if (body.id === plan.focus.id) {
+          const locatorOpacity = 1 - opacity;
+          fade(locatorFade, annotationVisible ? locatorOpacity : 0, !inFrame);
+          locatorNavigation.update(annotationVisible && locatorOpacity > .1 ? body.id : null, body.name);
+          if (inFrame) focusLocator.style.transform = `translate(${x - 3}px,${y - 3}px)`;
+        }
         marker.style.visibility = visible && markerOpacity > 0 && !pointSource ? '' : 'hidden';
         entry.navigation.update(visible && markerOpacity > 0.1 && !pointSource ? body.id : null, body.name);
-        label.style.visibility = visible && markerOpacity > 0.5 ? '' : 'hidden';
-        entry.labelNavigation.update(visible && markerOpacity > 0.5 ? body.id : null, body.name);
-        if (visible) {
+        if (inFrame) {
           marker.style.opacity = String(markerOpacity);
           marker.style.transform = `translate(${x}px,${y}px) scale(${Math.max(2.4, diameter) / entry.sprite.size})`;
           label.style.transform = `translate(${x + Math.max(5, diameter / 2) + 4}px,${y - 7}px)`;
-          label.style.opacity = String(markerOpacity);
+          const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
+          const parentDepth = parentEye === null ? 0 : -parentEye[2]!;
+          const parentDiameter = entry.parent && parentDepth > entry.parent.radiusM
+            ? 2 * focal * entry.parent.radiusM / Math.sqrt(parentDepth ** 2 - entry.parent.radiusM ** 2) : 0;
+          if (annotationVisible && markerOpacity > .5 && (body.id === plan.focus.id || opacity > .1) &&
+              (!satellite || parentDiameter >= plan.camera.presentation.levelOfDetail.billboardFadeStartDiscPixels)) {
+            const left = x + Math.max(5, diameter / 2) + 3, top = y - 8;
+            labelCandidates.push({ id: body.id, priority: body.id === plan.focus.id ? 0 : satellite ? 2 : 1,
+              distanceM: Math.hypot(...eye), rect: { left, top, right: left + entry.labelWidth, bottom: top + entry.labelHeight } });
+          }
         }
-        if (entry.orbit) {
+        if (entry.orbit && opacity > 0) {
           const ring = createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
             near, clipX: width / 2, clipY: height / 2 });
           const segments = ring(entry.orbit.verticesM, entry.orbit.trail.map(weight => weight * orbitOpacity));
+          if (entry.orbit.centerBodyId === plan.focus.id && opacity > .1 && orbitOpacity > .1) for (const [x0, y0, x1, y1] of segments) {
+            orbitBounds.left = Math.min(orbitBounds.left, x0, x1); orbitBounds.right = Math.max(orbitBounds.right, x0, x1);
+            orbitBounds.top = Math.min(orbitBounds.top, y0, y1); orbitBounds.bottom = Math.max(orbitBounds.bottom, y0, y1);
+          }
           const update = writePieces(entry.pieces, segments, entry.previousCount);
           if (update.overflowed) throw new Error('Prepared context line pool overflowed.');
           entry.previousCount = update.count;
         }
       }
+      const accepted = selectContextLabels(labelCandidates, width, height);
+      labelExclusions = accepted.map(candidate => candidate.rect);
+      const footprint = compactOrbitFootprint(orbitBounds, width, height);
+      backgroundExclusions = footprint ? [...labelExclusions, footprint] : labelExclusions;
+      for (const candidate of accepted) {
+        const entry = bodies.find(entry => entry.body.id === candidate.id)!;
+        entry.labelTarget = (entry.body.id === plan.focus.id ? 1 : opacity) * (entry.body.id === selectedId ? lod.billboardOpacity : 1);
+        entry.labelNavigation.update(entry.body.id, entry.body.name);
+      }
+      for (const entry of bodies) fade(entry.fade, entry.labelTarget, !entry.inFrame);
     },
-    destroy() { if (!destroyed) { destroyed = true; for (const entry of bodies) { entry.navigation.destroy(); entry.labelNavigation.destroy(); } root.remove(); } },
+    destroy() { if (!destroyed) { destroyed = true; for (const state of fadeStates) clearHide(state); fader.destroy(); fonts?.removeEventListener('loadingdone', measureLabels); labelExclusions = []; backgroundExclusions = []; locatorNavigation.destroy(); for (const entry of bodies) { entry.navigation.destroy(); entry.labelNavigation.destroy(); } focusLayer.remove(); root.remove(); } },
   });
 }

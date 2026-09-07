@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-source-provenance@1",
+  "description": "Illustrative Galaxium heliosphere model recovered by Galaxio from its shipped constructor; this is not a measured heliopause boundary.",
+  "sources": [
+    {
+      "path": "galaxio-heliosphereModel.ts.txt",
+      "sha256": "342353fb3b3b9ff4c1f155b55f17b5ba943076cbe18d2929c13fd78f37be24b4",
+      "origin": "galaxio/packages/engine/src/scene/heliosphereModel.ts"
+    },
+    {
+      "path": "galaxio-heliosphereRenderer.ts.txt",
+      "sha256": "b2af28ae40714152e608e0cbd2952f6c95fd47ddcfda1bd03f18e3b0e691613d",
+      "origin": "galaxio/packages/engine/src/scene/heliosphereRenderer.ts"
+    },
+    {
+      "path": "LICENSE.GALAXIO-MIT.txt",
+      "sha256": "cb2e341b0397f15586815e1f4c6ccf5395ed14cfe6abc8633677fedfd69516a3",
+      "origin": "galaxio/LICENSE"
+    }
+  ],
+  "sourceReference": {
+    "latitudeSegments": 64,
+    "longitudeSegments": 128,
+    "triangles": 16128,
+    "referenceRadiusAu": 120,
+    "boundingRadiusAu": 210,
+    "approachDistanceAu": 456,
+    "nearDistanceWeight": "smoothstep(-5, 5, distanceAu)",
+    "farDistanceWeight": "1 - smoothstep(5000, 6000, distanceAu)",
+    "rendering": "Unlit FrontSide with normal alpha blending; depth test enabled and depth write disabled."
+  },
+  "approximation": {
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "triangles": 960,
+    "geometry": "Same Float32-rounded analytic deformation at one quarter the source angular sampling on each axis. Every prepared corner permutation covers the identical physical triangle.",
+    "normal": "Original source radial normals are prepared per vertex, normalized once offline. Runtime evaluates each vertex-facing scalar once, separately from geometric face culling.",
+    "material": "22 nonuniform facing levels in [-1,1]; 2024 sorted corner triples. Every 32px tile evaluates the original rim equation on barycentrically interpolated corner facing values, baking linear-to-sRGB color and alpha. Six prepared corner permutations address the shared sorted bank. Quantization, raster sampling, coarse silhouettes and the interpolation of vertex-facing scalars approximate the original per-pixel shader, particularly near the boundary.",
+    "coverage": "All three triangle edges use exact pixel-area coverage inside a 1.5px transparent atlas inset. Prepared expanded parallelograms map the inset triangle corners to the unchanged physical source vertices. Fractional alpha is 1-(1-opacity)^coverage, so neighboring optical depths combine correctly under ordinary source-over. No runtime clipping, mask, filter or mesh construction.",
+    "atlasDecodedBytes": 8290304,
+    "runtime": "960 retained triangle leaves plus three wrappers; 561 prepared vertex-facing samples and 960 face culling checks per visible camera publication. No per-face vector allocation."
+  },
+  "attribution": "Galaxio code: Copyright (c) 2026 Juan Cruz Fortunatti, MIT License. Model recovered by Galaxio from Galaxium, as recorded in the copied source."
+}

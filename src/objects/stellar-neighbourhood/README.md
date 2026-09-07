@@ -42,3 +42,10 @@ This is a local stellar neighbourhood (all rows within 991 pc), not a complete
 Milky Way census. Catalogue astrometry is preserved without proper-motion
 propagation to the navigation epoch. Source details and modifications remain
 in the pinned provenance; reproduction requires no sibling checkout or network.
+
+Derived hierarchy centres are published at 1e-10 parsec precision and aggregate
+magnitudes at 1e-12 magnitude precision. Bounds are recomputed from those
+published centres and rounded outward, preserving conservative containment.
+This removes insignificant cross-CPU floating-point tails while keeping
+relative aggregate luminosity error below 1e-12. Original catalogue positions
+and magnitudes, photometry samples and all image bytes remain unchanged.

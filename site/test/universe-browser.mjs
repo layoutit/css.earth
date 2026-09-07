@@ -21,7 +21,8 @@ try {
   if (await motion.isChecked()) await motion.uncheck({ force: true });
   snapshots.initial = await read(page);
   await page.screenshot({ path: resolve(output, 'sun-integrated.png') });
-  check('one selected object with all prepared volume leaves ready', snapshots.initial.roots === 1 && snapshots.initial.slices === 288 && snapshots.initial.stable);
+  check('one selected object with all prepared volume leaves ready', snapshots.initial.roots === 1 &&
+    snapshots.initial.slices === preparedVolume.data.stacks.flatMap(stack => stack.leaves).length * 3 && snapshots.initial.stable);
   check('detailed object and contextual layers share the same rendered focal length', await page.evaluate(() => {
     const root = document.querySelector('.polycss-camera');
     const cssFocal = parseFloat(getComputedStyle(root).perspective);
@@ -50,7 +51,7 @@ try {
   check('the complete catalogue feeds bounded exact-position star slots', snapshots.stars.starField.catalogueCount === 109389 &&
     snapshots.stars.starField.consideredCount === 109389 && snapshots.stars.starSlots === 4096 && Number(snapshots.stars.starField.visiblePoints) > 50 &&
     snapshots.stars.starField.individualPoints === snapshots.stars.starField.visiblePoints);
-  check('the same galaxy volume remains visible inside the stellar neighbourhood', snapshots.stars.volumeOpacity === 1 && snapshots.initial.volumeOpacity === 1);
+  check('the prepared NASA sky replaces local volume haze', snapshots.initial.volumeOpacity === 0 && snapshots.initial.skyVisible && snapshots.stars.volumeOpacity === 0 && snapshots.stars.skyVisible);
   check('named stars receive visible labels', await page.locator('.prepared-star-label').evaluateAll(nodes => nodes.some(node =>
     node.textContent && Number(getComputedStyle(node).opacity) > 0)));
   check('the incompatible photographic background is retired at solar scale', await page.locator('.prepared-context-sky-fade').evaluate(node => getComputedStyle(node).visibility === 'hidden'));
@@ -103,7 +104,7 @@ try {
   await scrollTo(page, initialDistance);
   snapshots.returned = await read(page);
   await page.screenshot({ path: resolve(output, 'sun-returned.png') });
-  check('scroll returns to the detailed Sun and the same galactic background', close(snapshots.returned.camera.distanceKilometers, initialDistance) && snapshots.returned.volumeOpacity === 1 && snapshots.returned.roots === 1 && snapshots.returned.stable);
+  check('scroll returns to the detailed Sun and the NASA background', close(snapshots.returned.camera.distanceKilometers, initialDistance) && snapshots.returned.volumeOpacity === 0 && snapshots.returned.skyVisible && snapshots.returned.roots === 1 && snapshots.returned.stable);
   check('no browser errors throughout the journey', errors.length === 0);
   console.log(`UNIVERSE_BROWSER_PASSED ${checks.length} checks; Sun → solar system → Milky Way → Sun.`);
 } finally {
@@ -153,6 +154,7 @@ async function read(page) {
     starField: (({ points, ...stats }) => stats)(window.__cssEarthUniverse.inspect().stars),
     starSlots: document.querySelectorAll('.prepared-point-field-stars > s').length,
     volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
+    skyVisible: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility === 'visible',
     volumeTransforms: [...document.querySelectorAll('.css-volume-scene')].map(node => getComputedStyle(node).transform),
     visibleOrbits: window.__cssEarthUniverse.inspect().bodies.flatMap(body => body.orbit).filter(node => getComputedStyle(node).visibility !== 'hidden').length,
   }));

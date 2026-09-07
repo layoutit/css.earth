@@ -31,7 +31,12 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     root.style.opacity = '0';
     root.style.display = 'block';
     root.style.visibility = 'hidden';
-    for (const leaf of stack.leaves) mesh.append(createLeaf(document, leaf, options.resolveResource));
+    for (const leaf of stack.leaves) {
+      const textureUrl = options.resolveResource(leaf.texturePath);
+      // Coincident copies reuse the same prepared pixels and transform. They
+      // increase optical length without intersecting another axis's planes.
+      for (let copy = 0; copy < 3; copy++) mesh.append(createLeaf(document, leaf, textureUrl, copy));
+    }
     scene.append(mesh);
     camera.append(scene);
     root.append(camera);
@@ -61,10 +66,15 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     let total = 0;
     for (let index = 0; index < roots.length; index++) {
       const root = roots[index]!;
-      const weight = strengths[index] ?? 0;
+      const { weight, opticalGain } = strengths[index]!;
       total += weight;
       root.style.visibility = weight > 0 ? 'visible' : 'hidden';
       root.style.opacity = total > 0 ? String(weight / total) : '0';
+      // Variables affect atomic images, never mesh opacity (which flattens 3D).
+      // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).
+      // Integer gains are exact; the fractional step linearly approximates alpha.
+      root.style.setProperty('--volume-optical-copy-1', String(Math.min(1, Math.max(0, opticalGain - 1))));
+      root.style.setProperty('--volume-optical-copy-2', String(Math.min(1, Math.max(0, opticalGain - 2))));
     }
   };
   return Object.freeze({ publish, roots: Object.freeze(roots), destroy() {
@@ -96,14 +106,15 @@ export function preparedVolumeCameraTransform(publication: VolumeCameraPublicati
     ] as [number, number, number]), focalPixels: viewport.focalPixels });
 }
 
-function createLeaf(document: Document, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], resolveResource: (path: string) => string): HTMLElement {
+function createLeaf(document: Document, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], textureUrl: string, copy: number): HTMLElement {
   const node = document.createElement('s');
+  if (copy > 0) node.style.opacity = `var(--volume-optical-copy-${copy}, 0)`;
   node.style.width = leaf.style.width;
   node.style.height = leaf.style.height;
   node.style.transform = leaf.style.transform;
   node.style.backgroundSize = leaf.style.backgroundSize;
   node.style.backgroundPosition = leaf.style.backgroundPosition;
-  node.style.backgroundImage = `url("${escapeUrl(resolveResource(leaf.texturePath))}")`;
+  node.style.backgroundImage = `url("${escapeUrl(textureUrl)}")`;
   return node;
 }
 
@@ -121,14 +132,19 @@ function cameraView(camera: VolumeLocalCamera): readonly number[] {
     cameraToVolume[2]!, cameraToVolume[5]!, cameraToVolume[8]!];
 }
 
-function axisWeights(camera: VolumeLocalCamera): readonly number[] {
+function axisWeights(camera: VolumeLocalCamera): readonly { weight: number; opticalGain: number }[] {
   const matrix = worldRotationFromQuaternion(camera.orientationXyzw);
   const back: VolumeVector = [matrix[2]!, matrix[5]!, matrix[8]!];
-  const strengths = [Math.abs(back[0]), Math.abs(back[1]), Math.abs(back[2])];
+  const length = Math.hypot(...back);
+  const strengths = back.map(value => Math.abs(value) / length);
   const maximum = Math.max(...strengths);
   return strengths.map(value => {
     const t = Math.max(0, Math.min(1, (value - maximum + 0.16) / 0.16));
-    return t * t * (3 - 2 * t);
+    const weight = t * t * (3 - 2 * t);
+    // Crossing count is |d_i|*L/pitch_i, but each texture integrates pitch_i.
+    // Restore the missing central-ray length before the normalized image mix.
+    // The active .16 band implies |d_i| > .465, hence gain <2.15: 3 copies suffice.
+    return { weight, opticalGain: weight > 0 ? Math.max(1, 1 / value) : 1 };
   });
 }
 

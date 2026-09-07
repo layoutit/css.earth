@@ -399,6 +399,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
     [{ [applicationFile]: application.replace('createPreparedUniverse', 'createObjectRuntime') }, /Application world context/],
     [{ [applicationFile]: application.replace('../src/objects/*/prepared/**/*.{json,png,webp}', '../src/objects/*/prepared/**/*.{json,png}') }, /Application world context/],
     [{ [applicationFile]: application.replace('loadPreparedCssPointField', 'loadPreparedCssVolume') }, /Application world context/],
+    [{ [applicationFile]: application.replace('loadPreparedCssSurfaceShell', 'loadPreparedCssVolume') }, /Application world context/],
     [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, prepared: { ...starDescriptor.prepared, sha256: '0'.repeat(64) } }) }, /point field.*(?:identity|hash).*drifted/],
     [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, properties: { ...starDescriptor.properties, frame: { ...starDescriptor.properties.frame, epochJdTt: 0 } } }) }, /point field.*frame/],
     (() => {
