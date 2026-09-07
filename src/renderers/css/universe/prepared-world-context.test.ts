@@ -619,7 +619,7 @@ test('one retained focus label and locator survive system retirement at their ph
   expect(label.measurements).toBe(1, 'camera publication must never remeasure label layout');
 });
 
-test('satellite labels wait for a resolved parent while markers remain visible and accepted text blocks background labels', () => {
+test('unresolved satellite labels wait for a resolved parent while markers remain visible and accepted text blocks background labels', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const base = plan(1), parent = { ...base.bodies[0]!, radiusM: 5 }, satellite = base.bodies[1]!;
@@ -648,6 +648,28 @@ test('satellite labels wait for a resolved parent while markers remain visible a
   expect(marker.style.visibility).toBe(''); expect(label.style.visibility).toBe('hidden');
   expect(label.style.pointerEvents).toBe('none'); expect(label.measurements).toBe(1);
   layer.destroy(); expect(layer.labelExclusionRects()).toEqual([]);
+});
+
+test('resolved body labels remain visible when close-up framing hides orbit lines', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const base = plan(1), position = [35, 0, -60] as const;
+  const context = parsePreparedWorldContext({ ...base, bodies: [{ ...base.bodies[0],
+    positionM: position, radiusM: 8, orbit: orbit(position, 1) }] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite } });
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 40], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  const body = layer.inspect().find(body => body.id === 'mercury')!;
+  expect(body.marker.style.visibility).toBe('');
+  expect(body.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
+  expect(body.label.style.visibility).toBe('');
+  expect(body.label.dataset.objectNavigate).toBe('mercury');
+  const [labelX, labelY] = body.label.style.transform.match(/-?[\d.]+/g)!.map(Number);
+  expect(labelX + 'Mercury'.length * 6 / 2).toBeCloseTo(140);
+  expect(labelY).toBeGreaterThan(32);
+  layer.destroy();
 });
 
 test('a background star label inside the orbit footprint is excluded even outside every accepted body label', () => {

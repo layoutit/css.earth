@@ -48,3 +48,27 @@ test("polar textures use the same projection as their flat caps", () => {
     assert.ok(Math.abs(actual - expected) < 1, `${pole} ${x},${y}: ${actual} vs ${expected}`);
   }
 });
+
+test("CSS UVs sample the actual atlas when HD padding is not a quarter-band", async () => {
+  const { packProjectiveSurfaceRaster } = await import('./projective-surface-raster.mjs');
+  // Like Charon and Triton, the packed gutter is independent of image density.
+  const gutter = 6;
+  const packed = packProjectiveSurfaceRaster(reprojectSolidBodySurfaceRaster(source, { width, height }),
+    { width, height, bandCount: 16, gutter });
+  const geometry = prepareSolidBodySurface({ id: 'fixture', mapUrl: '/map.webp', polesUrl: '/poles.webp',
+    sourceWidth: width, sourceHeight: height, gutter });
+  for (const band of [1, 7, 14]) for (const longitude of [1, 8, 23, 30]) {
+    const leaf = geometry[1 + (14 - band) * 32 + longitude];
+    const cssSize = ['width', 'height'].map(key => Number(leaf.style.match(new RegExp(`atlas-${key}:([\\d.]+)`))[1]));
+    const position = leaf.style.match(/--fixture-surface-position:([^;]+)/)[1].split(' ').map(parseFloat);
+    const size = leaf.style.match(/background-size:([^;]+)/)[1].split(' ').map(parseFloat);
+    for (const u of [.08, .5, .92]) for (const v of [.08, .5, .92]) {
+      const x = Math.floor((u * cssSize[0] - position[0]) * packed.packedWidth / size[0]);
+      const y = Math.floor((v * cssSize[1] - position[1]) * packed.packedHeight / size[1]);
+      const actual = packed.data.subarray((y * packed.packedWidth + x) * 4, (y * packed.packedWidth + x) * 4 + 2);
+      const coordinate = coordinatesAt(leaf, u, v);
+      assert.ok(Math.abs(actual[0] - longitudeByte(coordinate.longitude)) < 2, `longitude at band ${band}, face ${longitude}`);
+      assert.ok(Math.abs(actual[1] - latitudeByte(coordinate.latitude)) < 2, `latitude at band ${band}, face ${longitude}`);
+    }
+  }
+});

@@ -38,6 +38,10 @@ Gaps remain the shared neutral grid, with no invented neighboring heights.
 The shared solid-body recipe prepares a 12,800 × 6,400 map and 1,024 px polar
 tiles. Terminal WebP encoding is q90; lossless intermediate maps are preparation
 inputs, not globe downloads. One generic object adapter owns runtime behavior.
+The resolved context billboard has a dedicated 512 px image from the same
+observed navigation crop, rather than enlarging the 32 px UI icon. Prepared
+35% ambient / 65% diffuse full-phase shading rounds its circular silhouette;
+this is a navigation illustration, not a new terrain or illumination dataset.
 No atmosphere shell is supplied: New Horizons found no detectable atmosphere.
 
 ## Physical placement
