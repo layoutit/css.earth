@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-measured-rotation@1",
+  "rightAscensionDegrees": 85.45864,
+  "declinationDegrees": -60.36468,
+  "primeMeridianDegrees": 150.48977,
+  "spinDegreesPerDay": 2011.143058731885,
+  "referenceEpochJdTt": 2451545,
+  "coordinateSystem": "Bennu mission body-fixed frame; east longitude",
+  "source": "reference/bennu_v17.tpc",
+  "primeMeridianQuadraticDegreesPerDaySquared": 0.000002
+}

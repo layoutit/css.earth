@@ -1,0 +1,54 @@
+JPL IOM 314.10-110 23.Jan, 1995 Don Yeomans
+
+perih. = 1.13308 au
+e = 0.222985
+i=10.8308 deg
+rotation period = 5.27011 h (=> 1639.43 deg/d)
+a:b:c = 40.6126 : 16.764 : 15.0313
+
+IOWANEM = I, Incidence angle, deg
+          Omega, Long. of ascending node, deg
+          W, Argument of perihelion, deg
+          A, mean distance, AU
+          N, daily motion, deg/d
+          E, Eccentricity
+          M, Mean anomaly, deg
+
+\begindata
+
+BODY2000433_ORBIT_REF_FRAME = ( 17 )
+BODY2000433_ORBIT_JED_EPOCH = ( 2450000.5 )
+BODY2000433_ORBIT_IOWANEM = (
+                              10.8308
+                              304.441
+                              178.567
+                              1.4583
+                              0.55970
+                              0.222985
+                              273.349
+                            )
+
+\begintext
+
+Data from alex et al.
+
+\begindata
+
+BODY2000433_POLE_RA = ( 11.363 0 0 )
+BODY2000433_POLE_DEC = ( 17.232 0 0 )
+BODY2000433_PM = ( 326.08 1639.38928 0 )
+
+
+BODY2000433_RADII = (15.97 6.97 6.97)
+
+\begintext
+
+OLD VALUES:
+
+BODY2000433_CONSTANT_REF_FRAME = ( 2 )
+BODY2000433_CONSTANTS_JED_EPOCH = ( 2433282.5 )
+BODY2000433_POLE_RA = ( 10.35 0 0 )
+BODY2000433_POLE_DEC = ( 16.42 0 0 )
+BODY2000433_PM = ( 0 1639.43 0 )
+
+BODY2000433_RADII = ( 21.8 8.4 8.25 )
