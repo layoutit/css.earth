@@ -111,6 +111,29 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   }
 });
 
+test('prepared planetary systems retain moon orbits with a small selected planet', async () => {
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])) });
+  for (const [planet, moon] of [['saturn', 'titan'], ['jupiter', 'europa'], ['uranus', 'titania']]) {
+    const body = context.bodies.find(body => body.id === planet)!;
+    layer.selectObject(planet);
+    const publish = (radii: number) => layer.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+      pose: { positionM: [body.positionM[0], body.positionM[1], body.positionM[2] + radii * body.radiusM], orientationXyzw: [0, 0, 0, 1] } },
+      { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+    const orbit = layer.inspect().find(body => body.id === moon)!.orbit;
+    // The planet spans about 20px, or 3.3% of this viewport: the moon system is readable.
+    publish(40);
+    expect(orbit.some(piece => piece.style.visibility === ''), `${planet} moon system at overview distance`).toBe(true);
+    // A close-up still retires orbit lines when the selected planet fills the screen.
+    publish(2);
+    expect(orbit.every(piece => piece.style.visibility === 'hidden'), `${planet} close-up`).toBe(true);
+  }
+  layer.destroy();
+});
+
 test.each(['opacityProfile', 'brightnessProfile'] as const)('%s has a constant plateau, a logarithmic smooth ramp and legacy opacity one', key => {
   const base = plan(1), profile = { model: 'logarithmic-distance' as const, nearOpacity: .12, fullOpacity: 1, fadeStartDistanceM: 100, fullDistanceM: 100_000 };
   const parsed = parsePreparedWorldContext({ ...base, volume: { ...base.volume, [key]: profile } });
@@ -288,6 +311,8 @@ test('orbit and circle keep a one-pixel stroke across zoom and physical system s
     expect(strokeAt(Math.sqrt(64 * 512))).toBe(1);
     expect(strokeAt(64)).toBeCloseTo(1);
     expect(strokeAt(24)).toBe(1);
+    expect(layer.inspect().find(body => body.id === 'mercury')!.orbit.some(piece => piece.style.visibility === '')).toBe(true);
+    expect(strokeAt(8)).toBe(1);
     expect(layer.inspect().find(body => body.id === 'mercury')!.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
     layer.destroy();
   }
@@ -461,7 +486,8 @@ test.each([
   { reason: 'an orbit clears the visible stroke', y: 81.5, extent: 200, weight: 1, shown: true },
   { reason: 'a visible orbit crosses the text', y: 50, extent: 200, weight: 1, shown: false },
   { reason: 'the crossing orbit trail is faded away', y: 50, extent: 200, weight: .01, shown: true },
-  { reason: 'the crossing orbit is unresolved at this zoom', y: 50, extent: 65, weight: 1, shown: true },
+  { reason: 'a small resolved orbit still crosses the text', y: 50, extent: 65, weight: 1, shown: false },
+  { reason: 'the orbit is unresolved at this zoom', y: 10, extent: 10, weight: 1, shown: true },
 ])('the fixed Sun caption respects visible space when $reason', ({ y, extent, weight, shown }) => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
@@ -501,7 +527,7 @@ test('switching to the Solar System card immediately reveals the Sun ring withou
 });
 
 
-test('crowded inner bodies hide their billboards, circles, labels and orbits together behind the Sun marker', () => {
+test('crowded body markers hide without suppressing their resolved orbit paths', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
@@ -523,7 +549,7 @@ test('crowded inner bodies hide their billboards, circles, labels and orbits tog
       expect(element.style.visibility).toBe('hidden');
       expect(element.style.pointerEvents).toBe('none');
     }
-    expect(body.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
+    expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   }
   publish(100);
   for (const body of entries.slice(1)) {
@@ -579,12 +605,13 @@ test('one retained focus label and locator survive system retirement at their ph
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   const camera = (distance: number) => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } });
-  for (const [distance, locatorOpacity] of [[50, 0], [Math.sqrt(1000 * 10000), 1], [1e21, 1], [50, 0]]) {
+  // At intermediate distance the still-resolved orbit crosses the caption.
+  for (const [distance, locatorOpacity, captionVisible] of [[50, 0, false], [Math.sqrt(1000 * 10000), 1, false], [8000, 1, true], [1e21, 1, true], [50, 0, false]] as const) {
     layer.publish(camera(distance!), viewport);
     document.defaultView.advance(200);
     if (locatorOpacity) expect(locator.style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
     expect(locator.style.visibility).toBe(locatorOpacity! > 0 ? '' : 'hidden');
-    expect(label.style.visibility).toBe(distance! > 1000 ? '' : 'hidden');
+    expect(label.style.visibility).toBe(captionVisible ? '' : 'hidden');
     expect(all(host)).toEqual(retained);
   }
   const distant = camera(1e21);

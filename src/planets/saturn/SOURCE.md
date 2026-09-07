@@ -536,3 +536,7 @@ no atmospheric-layer parsing, scaling, or chart rendering at runtime.
 
 Source: [NASA GSFC Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/)
 and its [API](https://psg.gsfc.nasa.gov/helpapi.php), modeled 2026-08-29.
+
+## Context billboard
+
+The navigation portrait crops the pinned OpenSpace surface map. Because this is a flat map rather than an already-lit disc photograph, the shared marker preparer applies full-phase curvature inside its existing oblate ellipse (35% ambient, 65% diffuse). The centre retains the map brightness and the limb darkens symmetrically; no directional terminator or new surface detail is added. Both the small navigation atlas and the resolved Saturn context image use this same authored recipe.
