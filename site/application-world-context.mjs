@@ -67,10 +67,24 @@ export function createApplicationWorldContext() {
         const target = stage.ownerDocument.defaultView;
         const diagnostics = import.meta.env?.DEV === true ? Object.freeze({ inspect: layer.inspect }) : null;
         if (diagnostics) target.__cssEarthUniverse = diagnostics;
-        return { ...layer, destroy() {
-          if (diagnostics && target.__cssEarthUniverse === diagnostics) delete target.__cssEarthUniverse;
-          layer.destroy(); resources.destroy();
-        } };
+        let heliosphereEnabled = false, publication = null, destroyed = false;
+        const publish = (world, viewport) => {
+          if (destroyed) return;
+          publication = { world, viewport };
+          layer.publish(world, viewport, { heliosphere: heliosphereEnabled });
+        };
+        return { ...layer, publish,
+          setHeliosphereEnabled(enabled) {
+            if (destroyed || heliosphereEnabled === (enabled === true)) return;
+            heliosphereEnabled = enabled === true;
+            if (publication) publish(publication.world, publication.viewport);
+          },
+          destroy() {
+            destroyed = true; publication = null;
+            if (diagnostics && target.__cssEarthUniverse === diagnostics) delete target.__cssEarthUniverse;
+            layer.destroy(); resources.destroy();
+          },
+        };
       } catch (error) { resources.destroy(); throw error; }
     },
   };
