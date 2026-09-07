@@ -5,6 +5,7 @@ import { OBJECTS } from "../objects.mjs";
 import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mjs";
+import { sceneSources } from "../scene-sources.mjs";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
 import SearchIcon from "./SearchIcon.astro";
 import PlanetCard from './PlanetCard.astro';
@@ -51,7 +52,8 @@ const unavailableSystems = planetarySystems.unavailable.map(system => ({
   ...system,
   markerStyle: `--planet-size:${PREPARED_NAVIGATION_MARKERS[systemStar.id].presentation.size * system.radiusSolar}px;--planet-color:rgb(${temperatureColor(system.temperatureK).join(' ')})`,
 }));
-const hasResources = resources.length > 0;
+const sources = sceneSources(resources);
+const hasResources = sources.length > 0;
 ---
 
 <aside id={`${objectId}-sidebar`} class="planet-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Planet information">
@@ -225,9 +227,9 @@ const hasResources = resources.length > 0;
 </aside>
 {hasResources && <footer
   class="planet-attribution-footer"
-  aria-label={`${title.label} scene sources`}
+  aria-label={`${title.label} and shared universe sources`}
 >
-  {resources.map((resource, index) => (
+  {sources.map((resource, index) => (
     <>
       {index > 0 && <span class="planet-attribution-separator" aria-hidden="true">·</span>}
       <a

@@ -1,4 +1,4 @@
-/** Self-contained preparation CLI for analytic transparent surface objects. */
+/** Self-contained preparation CLI for pinned transparent surface objects. */
 import { prepareSurfaceShellObject } from '../../src/preparation/shell/prepare.js';
 
 const directory = process.argv[2];
