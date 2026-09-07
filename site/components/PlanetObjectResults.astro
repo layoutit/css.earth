@@ -25,7 +25,7 @@ const groups = [...types].map(([type, label]) => ({ type, label,
 })).filter(group => group.objects.length > 0);
 ---
 
-{groups.map(group => <PlanetAccordion title={group.label} count={group.objects.length} data-object-type-group={group.type} open={group.type === 'planet'}>
+{groups.map(group => <PlanetAccordion name="solar-system-object-types" title={group.label} count={group.objects.length} data-object-type-group={group.type} open={group.type === 'planet'}>
   <ul class="planet-object-list">
     {group.objects.map(object => <PlanetObjectResult object={object} activeObjectId={activeObjectId}
       detail={object.classification === 'satellite' ? names.get(parents.get(object.id)) : undefined} />)}

@@ -1,0 +1,24 @@
+---
+import { OBJECTS } from '../objects.mjs';
+
+// Resolve provenance-bearing swatches during the page build. Only CSS colors
+// reach the browser; existing retained groups own geometry and interaction.
+const swatches = import.meta.glob<{ hex: string; display?: { hex: string } }>('../../src/planets/*/swatch.json', {
+  eager: true,
+  import: 'default',
+});
+const styles = OBJECTS.flatMap(({ id }) => {
+  const swatch = swatches[`../../src/planets/${id}/swatch.json`];
+  if (!swatch) return [];
+  const hex = swatch.display?.hex ?? swatch.hex;
+  if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error(`Invalid ${id} swatch.`);
+  const group = `.prepared-world-context [data-context-group="${id}"]`;
+  return [`${group} { --shell-text: ${hex}; }`];
+}).join('\n');
+const dwarfOrbitStyles = OBJECTS
+  .filter(({ classification }) => classification === 'dwarf-planet')
+  .map(({ id }) => `:where(.prepared-world-context) [data-context-group="${id}"] { --context-base-line-opacity: .25; --context-base-label-opacity: .5; }`)
+  .join('\n');
+---
+
+<style is:inline set:html={styles + '\n' + dwarfOrbitStyles}></style>

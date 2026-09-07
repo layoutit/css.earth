@@ -376,7 +376,12 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     }
     for (const group of groups) {
       group.details.hidden = filtering && !group.items.some(item => !item.hidden);
-      if (filtering) group.details.open = !group.details.hidden;
+    }
+    // Keep a matching category open, or reveal the first matching category.
+    const openGroup = groups.find(group => !group.details.hidden && group.details.open)
+      ?? groups.find(group => !group.details.hidden);
+    for (const group of groups) {
+      if (filtering) group.details.open = group === openGroup;
       else if (filteringGroups) group.details.open = group.open;
     }
     filteringGroups = filtering;
