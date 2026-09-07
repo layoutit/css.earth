@@ -182,7 +182,7 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
 
 async function renderNavigation({ projectRoot, outputRoot, descriptors }) {
   const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
-  await prepareSunIndicator({ outputRoot });
+  await prepareSunIndicator({ projectRoot, outputRoot });
 
   for (const density of [1, 2]) {
     const tileSize = markerTileSize * density;
@@ -483,12 +483,16 @@ async function renderNavigation({ projectRoot, outputRoot, descriptors }) {
 
 /** Project-authored UI outline, rasterized once at canonical 4x density. */
 export async function prepareSunIndicator({
-  outputRoot = resolve(import.meta.dirname, "../public/navigation"),
+  projectRoot = resolve(import.meta.dirname, ".."),
+  outputRoot = resolve(projectRoot, "public/navigation"),
 } = {}) {
+  const swatch = JSON.parse(await readFile(resolve(projectRoot, "src/planets/sun/swatch.json"), "utf8"));
+  const hex = swatch.display?.hex ?? swatch.hex;
+  if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error("Invalid Sun swatch.");
   const points = Array.from({ length: 6 }, (_, index) => {
     const angle = index * Math.PI / 3;
-    const radius = 7.1;
-    return [8 + Math.cos(angle) * radius, 8 + Math.sin(angle) * radius];
+    const radius = 9.1;
+    return [10 + Math.cos(angle) * radius, 10 + Math.sin(angle) * radius];
   });
   const inset = (point, neighbour) => point.map((value, axis) => value + (neighbour[axis] - value) * .12);
   const rounded = points.map((point, index) => ({ point,
@@ -497,8 +501,8 @@ export async function prepareSunIndicator({
   const xy = point => point.map(value => value.toFixed(4)).join(" ");
   const path = `M ${xy(rounded[0].before)} ` + rounded.map(({ point, after }, index) =>
     `Q ${xy(point)} ${xy(after)} L ${xy(rounded[(index + 1) % 6].before)}`).join(" ") + " Z";
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 16 16">` +
-    `<path d="${path}" fill="none" stroke="#dfdfdf" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 20 20">` +
+    `<path d="${path}" fill="none" stroke="${hex}" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
   await mkdir(outputRoot, { recursive: true });
   await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, "sun-indicator-hexagon.png"));
 }
