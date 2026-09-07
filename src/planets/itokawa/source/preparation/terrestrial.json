@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "itokawa",
+  "displayName": "Itokawa",
+  "publicBase": "/scenes/itokawa/",
+  "distanceAu": 1.323,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/ver128q.tab",
+        "format": "pds-vertex-facet",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 99846,
+          "expectedFaces": 196608
+        },
+        "sampleGrid": {
+          "width": 1025,
+          "height": 513
+        },
+        "valueTransform": {
+          "scale": 1,
+          "offset": -165
+        },
+        "minimum": -85,
+        "maximum": 155,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 165,
+          "heightToMeters": 1,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 0.165,
+    "camera": {
+      "initialScenePitchDegrees": 25,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/itokawa/itokawa-elevation-surface@2x.webp",
+    "polesUrl": "/scenes/itokawa/itokawa-elevation-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ver128q.tab",
+      "format": "pds-vertex-facet",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 99846,
+        "expectedFaces": 196608
+      },
+      "faceBudget": 850,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 6,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
+  },
+  "presentation": {
+    "defaultLens": "elevation",
+    "pointColor": [
+      180,
+      180,
+      180
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

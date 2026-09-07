@@ -2,6 +2,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
+import { gunzipSync } from 'node:zlib';
 
 const exec = promisify(execFile);
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
@@ -13,7 +14,7 @@ const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1
 export async function loadObjShape(path, profile) {
   const text = profile.member
     ? (await exec('unzip', ['-p', path, profile.member], { maxBuffer: 96 * 1024 * 1024 })).stdout
-    : await readFile(path, 'utf8');
+    : profile.compression === 'gzip' ? gunzipSync(await readFile(path)).toString('utf8') : await readFile(path, 'utf8');
   return parseObjShape(text, profile);
 }
 
@@ -24,15 +25,17 @@ export async function loadPdsVertexFacetShape(path, profile) {
 
 export function parsePdsVertexFacetShape(text, profile) {
   const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
-  const vertexCount = rows[0]?.[0], faceOffset = vertexCount + 1;
-  if (vertexCount !== profile.expectedVertices || rows[faceOffset]?.[0] !== profile.expectedFaces ||
-      rows.length !== vertexCount + profile.expectedFaces + 2) throw new Error('PDS shape dimensions changed.');
+  const vertexCount = rows[0]?.[0], combinedHeader = rows[0]?.length === 2;
+  const faceOffset = vertexCount + (combinedHeader ? 1 : 2);
+  if (vertexCount !== profile.expectedVertices ||
+      (combinedHeader ? rows[0][1] : rows[faceOffset - 1]?.[0]) !== profile.expectedFaces ||
+      rows.length !== faceOffset + profile.expectedFaces) throw new Error('PDS shape dimensions changed.');
   const table = (start, count, columns) => rows.slice(start, start + count).map((row, i) => {
     if (row.length !== columns || row[0] !== i + 1 || row.some(n => !Number.isFinite(n))) throw new Error('Invalid PDS shape row.');
     return row.slice(1);
   });
   const vertices = table(1, vertexCount, 4).map(v => v.map(n => n * profile.metersPerUnit));
-  const indices = table(faceOffset + 1, profile.expectedFaces, 4).map(f => f.map(n => n - 1));
+  const indices = table(faceOffset, profile.expectedFaces, 4).map(f => f.map(n => n - 1));
   return radialShape(vertices, indices, profile);
 }
 
