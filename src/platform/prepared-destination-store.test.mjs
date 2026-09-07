@@ -56,6 +56,65 @@ test("a failed or corrupt pack can retry without retaining unverified details", 
   assert.equal((await store.resolve("00140")).entity.id, "00140"); store.dispose();
 });
 
+for (const stage of ["directory", "search index"]) test(`typing corrections share the pending ${stage} download while canceled queries finish promptly`, async () => {
+  const prepared = fixture();
+  const delayedUrl = stage === "directory" ? prepared.reference.url : prepared.directory.search.url;
+  let release, requestSignal, started;
+  const fetching = new Promise(resolve => { started = resolve; }), calls = [];
+  const store = createDestinationStore({ catalog: prepared.reference, fetcher: async (url, { signal }) => {
+    calls.push(url);
+    if (url === delayedUrl) {
+      requestSignal = signal; started();
+      await new Promise((resolve, reject) => {
+        release = resolve;
+        signal.addEventListener("abort", () => reject(signal.reason), { once: true });
+      });
+    }
+    return new Response(prepared.outputs.get(url));
+  } });
+  try {
+    const first = new AbortController();
+    const canceled = assert.rejects(store.search("Pla", 8, first.signal), { name: "AbortError" });
+    await fetching; first.abort(); await canceled;
+    assert.equal(requestSignal.aborted, false, "a superseded query must not discard the shared catalogue transfer");
+    const next = store.search("Place 14");
+    release();
+    assert.ok((await next).some(row => row.id === "00014"));
+    await store.search("Place 15");
+    assert.equal(calls.filter(url => url === prepared.reference.url).length, 1);
+    assert.equal(calls.filter(url => url === prepared.directory.search.url).length, 1);
+    assert.equal(store.stats().activeLoads, 0);
+  } finally { release?.(); store.dispose(); }
+});
+
+test("shared search preparation retries corrupt bytes and aborts with its mounted store", async () => {
+  const prepared = fixture(); let corrupt = true;
+  const store = createDestinationStore({ catalog: prepared.reference, fetcher: async url => {
+    const bytes = Buffer.from(prepared.outputs.get(url));
+    if (corrupt && url === prepared.directory.search.url) bytes[0] ^= 1;
+    return new Response(bytes);
+  } });
+  await assert.rejects(store.search("Place"), /identity drifted/);
+  assert.equal(store.stats().searchDecodedBytes, 0);
+  corrupt = false; assert.ok((await store.search("Place 14")).some(row => row.id === "00014"));
+  store.dispose();
+
+  let started, requestSignal;
+  const fetching = new Promise(resolve => { started = resolve; });
+  const next = createDestinationStore({ catalog: prepared.reference, fetcher: async (url, { signal }) => {
+    if (url === prepared.directory.search.url) {
+      requestSignal = signal; started();
+      await new Promise((_, reject) => signal.addEventListener("abort", () => reject(signal.reason), { once: true }));
+    }
+    return new Response(prepared.outputs.get(url));
+  } });
+  const query = new AbortController();
+  const canceled = assert.rejects(next.search("Place", 8, query.signal), { name: "AbortError" });
+  await fetching; query.abort(); await canceled;
+  next.dispose(); assert.equal(requestSignal.aborted, true);
+  await assert.rejects(next.search("Place"), /disposed/);
+});
+
 test("prepared address cycles and missing parents reject without an unbounded traversal", async () => {
   for (const parent of ["00000", "missing"]) {
     const prepared = fixture(1, places => { places[0].parentId = parent; });

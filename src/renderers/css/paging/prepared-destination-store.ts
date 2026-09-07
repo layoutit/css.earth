@@ -9,6 +9,7 @@ import { lowerBound, searchDestinationIndex } from "./prepared-destination-index
 export function createDestinationStore({ catalog, signal, fetcher = (input, init) => fetch(input, init) }: { catalog: DestinationCatalog; signal?: AbortSignal; fetcher?: typeof fetch }) {
   validateDestinationReference(catalog, limits.directoryBytes);
   let directory: DestinationDirectory | null = null, searchIndex: DestinationSearch | null = null;
+  let searchPreparation: Promise<DestinationSearch> | null = null;
   let disposed = false, cacheBytes = 0;
   const cache = new Map<string, { value: unknown; bytes: number }>(), pending = new Map<string, PendingRead>();
   const counters = { requests: 0, cacheHits: 0, evictions: 0, peakDetailBytes: 0, peakDetailPacks: 0, peakLoads: 0 };
@@ -19,7 +20,7 @@ export function createDestinationStore({ catalog, signal, fetcher = (input, init
   function dispose() {
     disposed = true;
     for (const entry of pending.values()) entry.controller.abort();
-    cache.clear(); cacheBytes = 0; directory = searchIndex = null;
+    cache.clear(); cacheBytes = 0; directory = searchIndex = null; searchPreparation = null;
   }
   signal?.addEventListener("abort", dispose, { once: true });
   function retain(ref: DestinationReference, value: unknown) {
@@ -76,6 +77,33 @@ export function createDestinationStore({ catalog, signal, fetcher = (input, init
     directory ??= await read(catalog, caller, value => validateDestinationDirectory(value, catalog.count));
     return directory;
   }
+  function prepareSearch() {
+    // Every query uses the same bounded index. Its acquisition belongs to the
+    // mounted store, so typing cannot repeatedly discard a partial download.
+    // Individual queries still stop immediately; disposal aborts the transfer.
+    if (!searchPreparation) {
+      const preparation = (async () => {
+        const dir = await loadDirectory();
+        const index = await read(dir.search, undefined, value => validateDestinationSearch(value, catalog.count));
+        assertLive();
+        return searchIndex = index;
+      })();
+      searchPreparation = preparation;
+      void preparation.catch(() => { if (searchPreparation === preparation) searchPreparation = null; });
+    }
+    return searchPreparation;
+  }
+  function waitForSearch(preparation: Promise<DestinationSearch>, caller?: AbortSignal) {
+    if (!caller) return preparation;
+    return new Promise<DestinationSearch>((resolve, reject) => {
+      const abort = () => { caller.removeEventListener("abort", abort); reject(caller.reason); };
+      caller.addEventListener("abort", abort, { once: true });
+      if (caller.aborted) abort();
+      preparation.then(value => {
+        caller.removeEventListener("abort", abort); resolve(value);
+      }, error => { caller.removeEventListener("abort", abort); reject(error); });
+    });
+  }
   function validateDetails(input: unknown): DestinationDetails {
     const value = input as DestinationDetails;
     if (value?.schema !== "cssearth-destination-details@1" || !Array.isArray(value.records) ||
@@ -114,10 +142,10 @@ export function createDestinationStore({ catalog, signal, fetcher = (input, init
       return { entity, ancestors };
     },
     async search(query: string, limit = 8, caller?: AbortSignal) {
-      const dir = await loadDirectory(caller);
-      searchIndex ??= await read(dir.search, caller, value => validateDestinationSearch(value, catalog.count));
       assertLive(caller);
-      return searchDestinationIndex(searchIndex, query, limit);
+      const index = await waitForSearch(prepareSearch(), caller);
+      assertLive(caller);
+      return searchDestinationIndex(index, query, limit);
     },
     stats: () => ({ ...counters, activeLoads: pending.size, detailPacks: cache.size, detailDecodedBytes: cacheBytes,
       directoryDecodedBytes: directory ? catalog.decodedBytes : 0, searchDecodedBytes: searchIndex ? directory!.search.decodedBytes : 0,
