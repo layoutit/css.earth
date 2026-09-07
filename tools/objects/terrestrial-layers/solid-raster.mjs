@@ -9,6 +9,7 @@ import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../
 import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor } from './scientific-raster.mjs';
 import {prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation} from './observed-geotiff.mjs';
 import { prepareByteObservation } from './observed-image.mjs';
+import { prepareFitsObservation } from './observed-fits.mjs';
 import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mjs';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mjs';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mjs';
@@ -31,6 +32,7 @@ function surfaceEncoding(config) {
 
 export async function readObservation(sourceDirectory, entry, validity, width, height) {
   const path = resolve(sourceDirectory, entry.path);
+  if (validity.kind === 'fits-byte-monochrome') return prepareFitsObservation(path, entry, validity, width, height);
   if (validity.kind === 'pds3-byte-monochrome') return preparePdsByteMosaic(sourceDirectory, [entry], width, height, validity);
   if (validity.kind === 'isis3-float-monochrome') return prepareIsisObservation(path, entry, validity, width, height);
   if (['geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(validity.kind)) return prepareFloatObservation(path, entry, validity, width, height);

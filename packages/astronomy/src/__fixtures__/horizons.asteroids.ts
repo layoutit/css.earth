@@ -220,5 +220,137 @@ export const ASTEROID_FIXTURES = {
         ]
       }
     ]
+  },
+  "ida": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27243%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -333190981.8044333,
+          233814000.0101212,
+          101520998.4953341
+        ],
+        "velocity": [
+          -993267.5621509945,
+          -1082038.536642233,
+          -502441.8275418284
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -360929403.6924175,
+          200015536.2711017,
+          85869094.62552822
+        ],
+        "velocity": [
+          -854436.5601086186,
+          -1168738.531402858,
+          -539888.320668256
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -384375913.9623361,
+          163839982.1317783,
+          69196765.4287604
+        ],
+        "velocity": [
+          -707478.8880492107,
+          -1240417.670312674,
+          -570432.1543852069
+        ]
+      }
+    ]
+  },
+  "gaspra": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27951%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -360421054.1326164,
+          92764381.4052954,
+          11212045.50137465
+        ],
+        "velocity": [
+          -543077.302522472,
+          -1304166.568059255,
+          -573386.9215521389
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -373602438.8625157,
+          52961476.66525924,
+          -6036048.664885815
+        ],
+        "velocity": [
+          -335838.0142903853,
+          -1345341.273929294,
+          -574854.7633872493
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -380590774.7263028,
+          12277786.25574778,
+          -23185074.44412332
+        ],
+        "velocity": [
+          -130529.3039820304,
+          -1363121.431144029,
+          -566902.5504371651
+        ]
+      }
+    ]
+  },
+  "mathilde": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27253%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -237508974.7646396,
+          -300893378.6130803,
+          -90010258.35712758
+        ],
+        "velocity": [
+          1477162.218726321,
+          -564673.9231473223,
+          -171001.0234192413
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -191517272.3039987,
+          -315522831.490963,
+          -94448901.65765406
+        ],
+        "velocity": [
+          1586838.394327691,
+          -406773.2343452077,
+          -123751.3844176694
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -142450625.8905538,
+          -325062253.8816032,
+          -97363920.45380892
+        ],
+        "velocity": [
+          1681276.90228341,
+          -225143.2969064245,
+          -69366.54007010063
+        ]
+      }
+    ]
   }
 } as const

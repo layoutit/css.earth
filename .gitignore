@@ -26,6 +26,7 @@ output/playwright/
 # licenses, configuration, and authored source modules remain tracked.
 src/planets/*/source/**/*.csv
 src/planets/*/source/**/*.fits
+src/planets/*/source/**/*.fit
 src/planets/*/source/**/*.gif
 src/planets/*/source/**/*.glb
 src/planets/*/source/**/*.IMG.gz

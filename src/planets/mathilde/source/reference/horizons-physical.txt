@@ -1,0 +1,26 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               253 Mathilde (A885 VA)          2026-Sep-07 16:11:08
+Rec #:     253 (+COV) Soln.date: 2026-Jun-05_03:21:10   # obs: 7970 (1885-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2456394.5 ! 2013-Apr-12.00 (TDB)         Residual RMS= .20336
+   EC= .2661453496717469   QR= 1.942201899881878   TP= 2456854.9469178542
+   OM= 179.6192943895378   W=  157.3246051935762   IN= 6.741334773946812
+   A= 2.646575720427923    MA= 254.5959840237143   ADIST= 3.350949540973969
+   PER= 4.30561            N= .228916759           ANGMOM= .026975556
+   DAN= 3.25957            DDN= 1.97428            L= 337.0849523
+   B= 2.5937446            MOID= .933397           TP= 2014-Jul-16.4469178542
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= .00689              RAD= 26.4               ROTPER= 417.7
+   H= 10.35                G= .150                 B-V= n.a.
+                           ALBEDO= .0436           STYP= Cb
+
+ASTEROID comments: 
+1: soln ref.= JPL#250, OCC=0           radar( 1 delay, 0 Dop.)
+2: source=ORB
+*******************************************************************************

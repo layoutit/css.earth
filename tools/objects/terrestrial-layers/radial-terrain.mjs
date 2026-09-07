@@ -5,6 +5,7 @@ import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
 import { loadObjShape, loadPdsVertexFacetShape } from './obj-shape.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
+import { loadPdsRadialTable } from './pds-radial-table.mjs';
 import { createRasterEmitter } from './solid-raster.mjs';
 import { renderRadialSnapshot } from './radial-snapshot.mjs';
 
@@ -18,7 +19,9 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
   await source.validatePath(profile.path);
-  const loader = ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadPdsScalarGrid;
+  const loader = ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape
+    : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape
+    : profile.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
   const grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
   const scale = config.geometry.radius / (config.geometry.radiusKm * 1000);
   if (profile.primitive !== undefined && profile.primitive !== 'u') throw new TypeError('Unknown radial triangle primitive.');

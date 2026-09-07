@@ -1,0 +1,59 @@
+{
+  "method": "Stride-2 nonzero source samples excluding 2deg poles; shape normal from ±0.1deg central differences; finite observer+Sun directions from published highest-resolution SSI pair. No cast-shadow or terrain self-occlusion model.",
+  "observations": [
+    {
+      "id": "107318313",
+      "scLat": 52.01,
+      "scWest": 63.69,
+      "sunLat": 5.05,
+      "sunWest": 39.58,
+      "rangeM": 5355000
+    },
+    {
+      "id": "107318326",
+      "scLat": 52.2,
+      "scWest": 64,
+      "sunLat": 5.05,
+      "sunWest": 39.7,
+      "rangeM": 5288000
+    }
+  ],
+  "candidates": [
+    {
+      "rows": "north-to-south",
+      "samplesIncrease": "east",
+      "valid": 22330,
+      "visibleFraction": 0.9953873712494402,
+      "illuminatedFraction": 0.9541871921182266,
+      "bothFraction": 0.9499328257948948,
+      "meanValidLatitude": 43.814621585311244
+    },
+    {
+      "rows": "north-to-south",
+      "samplesIncrease": "west",
+      "valid": 22330,
+      "visibleFraction": 0.7854455888938647,
+      "illuminatedFraction": 0.5174652933273622,
+      "bothFraction": 0.5056874160322437,
+      "meanValidLatitude": 43.814621585311244
+    },
+    {
+      "rows": "south-to-north",
+      "samplesIncrease": "east",
+      "valid": 22330,
+      "visibleFraction": 0.2897895208240036,
+      "illuminatedFraction": 0.7774294670846394,
+      "bothFraction": 0.2856695029108822,
+      "meanValidLatitude": -43.814621585311244
+    },
+    {
+      "rows": "south-to-north",
+      "samplesIncrease": "west",
+      "valid": 22330,
+      "visibleFraction": 0.07895208240035827,
+      "illuminatedFraction": 0.29072995969547694,
+      "bothFraction": 0.007926556202418271,
+      "meanValidLatitude": -43.814621585311244
+    }
+  ]
+}

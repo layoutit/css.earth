@@ -1,0 +1,71 @@
+Data Set Overview
+=================
+
+This dataset includes the Galileo Orbiter Solid State Imaging data on the asteroid 951 Gaspra in Integrated Software for Imagers and Spectrometers (ISIS) cube format, where for each color set obtained the images have been spatially co-registered with each other and with images describing the incidence, emission, and phase angle values across the surface. Each color backplane has been radiometrically calibrated. No photometric correction was applied. The geometric angle backplanes are archived with the color data at the spatial resolution of the color data, and then again separately at the spatial resolution of the shape file. The shape file has already been archived in the PDS under 'Small Body Optical Shape Models' and can be accessed via https://doi.org/10.26033/g5e0-kh52.
+
+The raw data have already been archived in PDS with the data set name 'Galileo Imaging (SSI) Asteroid, Earth and Moon Experiment Data Records' and can be found by searching on the data set identification 'GO-A/E-SSI-2-REDR-V1.0'. Radiometrically calibrated images have already been archived in the PDS with the data set name 'Galileo SSI/Gaspra Radiometrically Calibrated Images V1.0' and can be accessed via https://doi.org/10.26033/efah-k239. Only those images in which Gaspra actually appears in the image frame were archived as part of the radiometrically calibrated data set.
+
+
+Processing
+========== 
+
+The radiometrically calibrated images were co-registered using a combination of ISIS and IDL software. For all images it was assumed that the images required a simple translation in coordinate system to co-register. The registration was not performed in ISIS due to the unavailability of camera kernels (required by the ISIS software) within the PDS archive. All cubes containing color data contains Gaspra in the middle of the image and is cropped to a 150 x 150 sample and line dimension.
+
+Geometry angle images were created using the AstroidApp-0913 software (a java based program). Incidence, emission, and phase angle images were created separately by AstroidApp-0913 and cubed together within IDL. These full resolution cubes are archived as one of the cubes in each color set image pair. The full resolution cube was reduced in resolution using IDL and co-registered with the color images, forming the last 3 backplanes to the color image cube (the second cube in the color set image pair).
+
+Description of the ISIS software can be found in:
+
+Anderson, J.A., 2008.
+ISIS camera model design.
+39th LPSC (Houston), Abstract #2159, Lunar and Planetary Institute.
+
+and
+
+Anderson, J.A., Sides, S.C., Soltesz, D.L., Sucharski, T.L., Becker, K.J. 2004.
+Modernization of the integrated software for imagers and spectrometers.
+35th LPSC (Houston), Abstract #2039, Lunar and Planetary Institute.
+
+Description of the AstroidApp-0913 and IDL software can be found in:
+
+Domingue, D.L., Vilas, F., Choo, T., Stockstill-Cahill, K.R., Cahill, J.T.S., Hendrix, A.R., 2016.
+Regional spectrophotometric properties of 951 Gaspra.
+Icarus 280, 340-358.
+doi:10.1016/j.icarus.2016.07.011
+
+
+Data
+====
+
+The data are included in a series of ISIS cube file pairs. The first cube file of the pair is denoted with filenames of the form set*_colorgeom.qub, where * denotes the color set identifier. The second cube file of the pair is denoted with filenames of the form set*_geom.qub, where * denotes the color set identifier.
+
+There are a-f color set identifiers. The general table, color-set_id.tab, denotes which images were acquired at similar viewing conditions but in separate filters, thus constituting a color image set. The table includes image file named, filter name, and a designator for which color set the image belongs. Images with the same designator value (A-F) belong to the same color image set.
+
+Cubes with filenames of the form set*_colorgeom.qub are 150x150x9 cubes, where the sample and line dimension is 150x150 with 9 image backplanes. The first six backplanes are the color data in the following filter order:
+
+Violet (0.404 microns)
+Green (0.559 microns)
+Red (0.671 microns)
+IR-7560 (0.756 microns)
+IR-8890 (0.887 microns)
+IR-9680 (0.986 microns)
+
+The last 3 image backplanes are the geometry angles in the order of incidence, emission, and then phase angles. The angles are based on the shape model archived in the PDS with the data set name 'SMALL BODY SHAPE MODELS V1.0' (urn:nasa:pds:ast-sat.thomas.shape-models::1.0).
+
+Cubes with the filenames in the form set*_geom.qub are 350x350x3 cubes, where the order of the three backplanes are incidence, emission, and phase angles. This cube corresponds to the last three backplanes of the corresponding set*_colorgeom.qub, but are archived at full spatial resolution.
+
+Pixel locations with null values are locations with no data.
+
+The geometry information was generated using AstroidApp-0913 for each image within each color image set. The geometry information (incidence, emission, and phase angle) is at the higher spatial resolution of the shape model compared to the color reflectance images. The geometry information was reduced to the color data resolution via averaging the higher spatial information to the lower spatial information resolution.
+
+
+Confidence Level Overview
+=========================
+
+Data Coverage and Quality
+-------------------------
+
+This dataset includes only those Galileo SSI images in which 951 Gaspra actually appears. No viable camera kernels for the time frame in which the Gaspra images were acquired were included in the original PDS archive. These kernels are used by GLLSSICAL to convert raw values to reflectance. A work around was used in which GLLSSICAL was set to assume nadir pointing for all images. This produces negligible errors in radiometric values, but disables any calculations of viewing and illumination conditions.
+
+Instances where there are incident and emission angle values, but no phase angle values are considered areas where topography from the shape model occults the view from the spacecraft.
+
+Several images include saturated lines (rows of pixels) and pixels. These were present in the original raw images and not removed in the radiometric calibration process.

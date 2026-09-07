@@ -4,7 +4,7 @@ import { writeFileSync } from 'node:fs';
 import { elementsUrl, vectorsUrl, horizons, parseElements, parseVectors } from './lib/horizons.mjs';
 
 const epochJdTt = 2461286.5;
-const bodies = [['vesta', '4;'], ['eros', '433;'], ['itokawa', '25143;'], ['bennu', '101955;'], ['ryugu', '162173;']];
+const bodies = [['vesta', '4;'], ['eros', '433;'], ['itokawa', '25143;'], ['bennu', '101955;'], ['ryugu', '162173;'], ['ida', '243;'], ['gaspra', '951;'], ['mathilde', '253;']];
 const records = {}, fixtures = {};
 for (const [id, command] of bodies) {
   const query = elementsUrl({ command, center: '500@10', startJd: epochJdTt, stopJd: epochJdTt + 1, stepDays: 1 });
