@@ -1,7 +1,6 @@
 /** Deterministic offline extraction of extended astronomical emission from a photographed star field. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 
 export interface ExtractionOptions {
@@ -69,6 +68,3 @@ export async function extractExtendedSource(options:ExtractionOptions):Promise<E
   const receipt:ExtractionReceipt={schema:'cssearth-nebula-extraction-lab@1',id,width,height,skyRgb:sky,threshold,supportFraction:supportSum/(width*height),outputs:files,method:'Border-robust sky subtraction; median-filtered extended-emission seed; morphology-connected, softly feathered support; compact residual retained only inside that support.',limitations:['The compact residual is a frequency separation, not a star catalogue.','Foreground stars projected inside the galaxy support cannot be distinguished reliably from intrinsic compact sources in broadband JPEG imagery.','Disconnected emission outside the morphology-connected support may be omitted.']};
   await writeFile(resolve(options.outputDirectory,`${id}-receipt.json`),JSON.stringify(receipt,null,2)+'\n');return receipt;
 }
-
-const direct=process.argv[1]!==undefined&&!basename(process.argv[1]).includes('.test.')&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href;
-if(direct){if(!process.argv[2]||!process.argv[3]||process.argv[5])throw new TypeError('Usage: extraction <input-image> <output-directory> [id]');console.log(JSON.stringify(await extractExtendedSource({inputPath:process.argv[2],outputDirectory:process.argv[3],id:process.argv[4]}),null,2));}

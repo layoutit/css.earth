@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "lmc-particles",
+  "type": "density-volume",
+  "properties": {
+    "volume": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        105965308676973530000,
+        533209933280955330000,
+        -1.4303831216834226e+21
+      ],
+      "localToReferenceXyzw": [
+        0.09631989992847079,
+        0.9788280334299664,
+        0.17973685917567428,
+        0.01768669847817273
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -16,
+          -13,
+          -5
+        ],
+        "max": [
+          16,
+          13,
+          5
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/volume.json",
+      "sha256": "fb43400a6ad58c1b2ce2f160cebb92bc04c1aafff8dda10bfa236653ec48815b"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-density-volume@1",
+    "url": "prepared/volume.json",
+    "sha256": "e3c68c203e2a02ab9ab23cf4f678416a1a86a971fc2ca73b77e3ece0d4869407"
+  }
+}

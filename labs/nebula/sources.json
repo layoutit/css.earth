@@ -175,8 +175,8 @@
               -69.4417113845
             ],
             "scaleDegPerPixel": [
-              -0.0000594553783266,
-              0.0000594553783266
+              -5.94553783266e-05,
+              5.94553783266e-05
             ],
             "rotationDeg": 0.020000000000000004,
             "pixelConvention": "AVM/FITS reference pixels; x increases right, y increases up. DOM image y increases down."
@@ -219,10 +219,10 @@
             "cdMatrixDegPerPixel": [
               [
                 -0.0007736166138291431,
-                -2.70026054968465e-7
+                -2.70026054968465e-07
               ],
               [
-                -2.7004315215694075e-7,
+                -2.7004315215694075e-07,
                 0.0007735676339940724
               ]
             ],
@@ -236,6 +236,27 @@
             "quality": "Publisher AVM registration; not independently astrometrically fitted. Verify matched-star residuals before composition."
           },
           "sourceModification": "Unmodified publisher JPEG derivative; no local color grading, crop or resize."
+        }
+      ]
+    },
+    {
+      "subjectId": "smc",
+      "sources": [
+        {
+          "id": "smc-smash",
+          "name": "Small Magellanic Cloud — SMASH",
+          "path": "../../src/objects/smc/source/source.jpg",
+          "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030b/",
+          "downloadUrl": "https://www.astropix.org/archive/noirlab/noirlab2030b/noirlab_noirlab2030b_3000.jpg",
+          "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+          "role": "base",
+          "license": "CC-BY-4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "sha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
+          "widthPx": 3000,
+          "heightPx": 2501,
+          "format": "jpeg",
+          "sourceModification": "Unmodified publisher JPEG derivative."
         }
       ]
     }
@@ -278,12 +299,12 @@
           ],
           "cdMatrixDegPerPixel": [
             [
-              -0.000013887719021368,
+              -1.3887719021368e-05,
               0
             ],
             [
               0,
-              0.000013887719021368
+              1.3887719021368e-05
             ]
           ],
           "pixelConvention": "FITS one-based pixel centers; SCI extension."

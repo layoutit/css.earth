@@ -1,0 +1,126 @@
+{
+  "schema": "cssearth-magellanic-particle-experiment@1",
+  "source": {
+    "url": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "paper": "https://doi.org/10.1093/mnras/stag1287",
+    "license": "CC0-1.0",
+    "archiveSha256": "21562a5b32c27f39ee67215e9e2c3b1cd2fcfb4a115d2f2c8e0307fc8a51eb54",
+    "archiveBytes": 3547448578,
+    "entry": "run34681lsmcgabestModelA_HR.00440.gz",
+    "snapshotSha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
+    "snapshotAgeGyr": 2.2,
+    "massUnitSolarMass": 232000,
+    "totalCount": 5005000,
+    "gasCount": 0,
+    "darkCount": 2920000,
+    "starCount": 2085000
+  },
+  "targets": [
+    {
+      "id": "lmc-particles",
+      "directory": "labs/nebula/models/lmc-particles",
+      "referenceObject": "src/objects/lmc/object.json",
+      "photo": "src/objects/lmc/source/source.jpg",
+      "photoSha256": "68cce2d2ebd9d43839c66f513df4819365e920fa4e6added41cc054f78739d58",
+      "photoUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+      "photoCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "starRange": {
+        "start": 240000,
+        "count": 1620000
+      },
+      "rotation": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -1,
+        0
+      ],
+      "boundsKpc": {
+        "min": [
+          -16,
+          -13,
+          -5
+        ],
+        "max": [
+          16,
+          13,
+          5
+        ]
+      },
+      "dimensions": [
+        128,
+        128,
+        64
+      ],
+      "colorSpanKpc": [
+        22,
+        20
+      ],
+      "colorCenterKpc": [
+        -0.7,
+        -4,
+        0
+      ],
+      "smoothingSigmaVoxels": 0.8,
+      "normalizationQuantile": 0.999,
+      "exposureGain": 0.6
+    },
+    {
+      "id": "smc-particles",
+      "directory": "labs/nebula/models/smc-particles",
+      "referenceObject": "src/objects/smc/object.json",
+      "photo": "src/objects/smc/source/source.jpg",
+      "photoSha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
+      "photoUrl": "https://noirlab.edu/public/images/noirlab2030b/",
+      "photoCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "starRange": {
+        "start": 1860000,
+        "count": 225000
+      },
+      "rotation": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "boundsKpc": {
+        "min": [
+          -13,
+          -13,
+          -10
+        ],
+        "max": [
+          10,
+          9,
+          16
+        ]
+      },
+      "dimensions": [
+        128,
+        128,
+        128
+      ],
+      "colorSpanKpc": [
+        18,
+        18
+      ],
+      "colorCenterKpc": [
+        0,
+        0,
+        0
+      ],
+      "smoothingSigmaVoxels": 0.8,
+      "normalizationQuantile": 0.999,
+      "exposureGain": 0.6
+    }
+  ]
+}

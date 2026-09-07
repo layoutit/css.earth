@@ -1,35 +1,59 @@
 [
   {
+    "id": "lmc-particles",
+    "name": "LMC · particle volume",
+    "directory": "labs/nebula/models/lmc-particles",
+    "imagePath": "src/objects/lmc/source/source.jpg",
+    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
+    "modelNote": "3D density from simulation stellar particles. Fixed photo-based colors and display alignment are approximate. Dust extinction is not modeled.",
+    "framingRadiusUnits": 8,
+    "hasDetail": false,
+    "sourceSubjectId": "lmc"
+  },
+  {
+    "id": "smc-particles",
+    "name": "SMC · particle volume",
+    "directory": "labs/nebula/models/smc-particles",
+    "imagePath": "src/objects/smc/source/source.jpg",
+    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Photo colors: CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin (CC BY 4.0).",
+    "modelNote": "3D density from simulation stellar particles. Fixed photo-based colors and display alignment are approximate. Dust extinction is not modeled.",
+    "framingRadiusUnits": 7,
+    "hasDetail": false,
+    "sourceSubjectId": "smc"
+  },
+  {
     "id": "lmc",
-    "name": "Large Magellanic Cloud",
+    "name": "Large Magellanic Cloud · image layers",
     "directory": "src/objects/lmc",
     "image": "source/source.jpg",
     "framingRadiusUnits": 4
   },
   {
     "id": "smc",
-    "name": "Small Magellanic Cloud",
+    "name": "Small Magellanic Cloud · image layers",
     "directory": "src/objects/smc",
     "image": "source/source.jpg",
     "framingRadiusUnits": 3
   },
   {
     "id": "m31",
-    "name": "Andromeda \u00b7 M31",
+    "name": "Andromeda · M31",
     "directory": "src/objects/m31",
     "image": "source/source.jpg",
     "framingRadiusUnits": 25
   },
   {
     "id": "m33",
-    "name": "Triangulum \u00b7 M33",
+    "name": "Triangulum · M33",
     "directory": "src/objects/m33",
     "image": "source/source.jpg",
     "framingRadiusUnits": 9
   },
   {
     "id": "milky-way",
-    "name": "Milky Way \u00b7 volume reference",
+    "name": "Milky Way · volume reference",
     "directory": "src/objects/milky-way",
     "image": "source/sky/nasa-preview.jpg",
     "sourcePageUrl": "https://svs.gsfc.nasa.gov/4851/",

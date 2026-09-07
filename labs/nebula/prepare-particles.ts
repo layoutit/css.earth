@@ -1,0 +1,128 @@
+/** Reproducible local experiment: a pinned simulation snapshot, photograph colors, and the shared volume baker. */
+import { createHash } from 'node:crypto';
+import { createReadStream } from 'node:fs';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve, relative } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
+import { importTipsyStars } from './tipsy.js';
+import { convertParticlesToDensityVolume } from './particles.js';
+import { extractExtendedSource } from './extraction.js';
+import type { VolumeRecipe, Vector3 } from '../../src/preparation/volume/config.js';
+
+interface ParticleExperiment {
+  schema: 'cssearth-magellanic-particle-experiment@1';
+  source: { url: string; license: string; archiveSha256: string; archiveBytes: number;
+    entry: string; snapshotSha256: string; snapshotAgeGyr: number; massUnitSolarMass: number;
+    totalCount: number; gasCount: number; darkCount: number; starCount: number };
+  targets: { id: string; directory: string; referenceObject: string; photo: string;
+    photoSha256: string; photoUrl: string; photoCredit: string;
+    starRange: { start: number; count: number }; rotation: number[];
+    boundsKpc: { min: Vector3; max: Vector3 }; dimensions: Vector3;
+    colorSpanKpc: [number, number]; colorCenterKpc: Vector3;
+    smoothingSigmaVoxels: number; normalizationQuantile: number; exposureGain: number }[];
+}
+const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
+async function fileDigest(path: string) {
+  const hash = createHash('sha256');
+  for await (const chunk of createReadStream(path)) hash.update(chunk);
+  return hash.digest('hex');
+}
+const json = async (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
+
+async function snapshot(source: ParticleExperiment['source'], archive: string, cache: string) {
+  const destination = resolve(cache, source.entry.replace(/\.gz$/, ''));
+  if (await fileDigest(destination).catch(() => '') === source.snapshotSha256) return destination;
+  if (await fileDigest(archive) !== source.archiveSha256) throw new Error('Archive SHA256 differs from the published pin.');
+  // Extract only the named member; no archive paths are used as output paths.
+  const extraction = spawnSync('python3', ['-c',
+    'import sys,zipfile,gzip; z=zipfile.ZipFile(sys.argv[1]); data=z.read(sys.argv[2]); open(sys.argv[3],"wb").write(gzip.decompress(data))',
+    archive, source.entry, destination], { stdio: 'inherit' });
+  if (extraction.error) throw extraction.error;
+  if (extraction.status !== 0 || await fileDigest(destination) !== source.snapshotSha256) {
+    throw new Error('Snapshot extraction or pinned-byte verification failed.');
+  }
+  return destination;
+}
+
+function rotateParticles(bytes: Buffer, matrix: number[]) {
+  if (matrix.length !== 9 || matrix.some(n => !Number.isFinite(n))) throw new TypeError('Expected a finite rotation matrix.');
+  for (let a = 0; a < 3; a++) for (let b = 0; b < 3; b++) {
+    const dot = [0, 1, 2].reduce((sum, k) => sum + matrix[3 * a + k] * matrix[3 * b + k], 0);
+    if (Math.abs(dot - Number(a === b)) > 1e-6) throw new TypeError('Display rotation must preserve distances.');
+  }
+  const [a,b,c,d,e,f,g,h,i] = matrix;
+  if (Math.abs(a*(e*i-f*h)-b*(d*i-f*g)+c*(d*h-e*g)-1) > 1e-6) throw new TypeError('Display rotation must preserve handedness.');
+  for (let offset = 0; offset < bytes.length; offset += 16) {
+    const p = [bytes.readFloatLE(offset), bytes.readFloatLE(offset + 4), bytes.readFloatLE(offset + 8)];
+    for (let axis = 0; axis < 3; axis++) {
+      bytes.writeFloatLE(p.reduce((sum, value, k) => sum + value * matrix[3 * axis + k], 0), offset + 4 * axis);
+    }
+  }
+}
+
+export async function prepareParticleExperiments(recipePath: string, archivePath: string) {
+  const recipe: ParticleExperiment = JSON.parse(await readFile(recipePath, 'utf8'));
+  if (recipe.schema !== 'cssearth-magellanic-particle-experiment@1') throw new TypeError('Unsupported experiment recipe.');
+  const root = process.cwd(), cache = resolve(root, '.local/nebula-lab/particles');
+  await mkdir(cache, { recursive: true });
+  const input = await snapshot(recipe.source, resolve(archivePath), cache);
+  for (const target of recipe.targets) {
+    console.log(`PARTICLES_IMPORT ${target.id}`);
+    const objectDirectory = resolve(root, target.directory), sourceDirectory = resolve(objectDirectory, 'source');
+    await mkdir(sourceDirectory, { recursive: true });
+    const particlePath = relative(root, resolve(cache, `${target.id}.f32`));
+    const importedPath = relative(root, resolve(cache, `${target.id}-centered.f32`));
+    const imported = await importTipsyStars({ snapshotPath: relative(root, input), outputPath: importedPath,
+      starRange: target.starRange, positionUnit: 'kpc', massUnitSolarMass: recipe.source.massUnitSolarMass,
+      center: 'median', expected: recipe.source });
+    const particles = await readFile(importedPath); rotateParticles(particles, target.rotation);
+    await writeFile(particlePath, particles);
+    await json(resolve(sourceDirectory, 'import.json'), { ...imported,
+      displayRotation: target.rotation,
+      rotatedOutput: { path: particlePath, sha256: digest(particles), bytes: particles.length } });
+    if (await fileDigest(target.photo) !== target.photoSha256) throw new Error('Observation photo SHA256 mismatch.');
+    const extraction = await extractExtendedSource({ inputPath: target.photo,
+      outputDirectory: sourceDirectory, id: 'photo', maxPixels: 1200 });
+    const converted = await convertParticlesToDensityVolume({ particlePath,
+      outputDirectory: sourceDirectory, dimensions: target.dimensions, boundsKpc: target.boundsKpc,
+      smoothingSigmaVoxels: target.smoothingSigmaVoxels, normalizationQuantile: target.normalizationQuantile,
+      encoding: 'sqrt-density-unorm8', fallbackColor: [.68, .73, .8],
+      colorConstraint: { imagePath: relative(root, resolve(sourceDirectory, extraction.outputs.diffuse)),
+        centerKpc: target.colorCenterKpc, rightDirection: [1, 0, 0], upDirection: [0, 1, 0], spanKpc: target.colorSpanKpc } });
+    const provenance = { schema: 'cssearth-particle-volume-provenance@1', source: recipe.source,
+      sourceFamily: imported.selection, density: converted.interpretation.density,
+      photo: { path: target.photo, sha256: target.photoSha256, url: target.photoUrl, credit: target.photoCredit, license: 'CC-BY-4.0' },
+      display: { rotation: target.rotation, boundsKpc: target.boundsKpc,
+        alignment: 'Authored lab alignment, not an astrometric fit between the simulation and photograph.',
+        color: converted.interpretation.color, dust: converted.interpretation.dust,
+        massRetention: converted.particles.acceptedMass / converted.particles.inputMass,
+        brightness: 'Authored mass-to-light conversion and exposure; not calibrated photometry.' } };
+    await json(resolve(sourceDirectory, 'provenance.json'), provenance);
+    const volume: VolumeRecipe = { schema: 'cssearth-volume-recipe@1',
+      grid: { path: 'density.ktx2', sha256: converted.outputs.gridSha256,
+        decodedSha256: converted.outputs.decodedSha256, dimensions: target.dimensions,
+        encoding: 'sqrt-density-unorm8', bounds: target.boundsKpc },
+      material: { emission: [0, 1, 2].map(channel => ({ channel,
+        color: [Number(channel === 0), Number(channel === 1), Number(channel === 2)] as Vector3, strength: 1 })),
+        absorption: [], intensityScale: 1, stepScale: 1, stepMetric: 'source', exposureGain: target.exposureGain },
+      bake: { sliceCounts: { x: 64, y: 64, z: 64 }, unitsPerSourceUnit: 1, imageWidth: 512,
+        samplesPerSlab: 2, cropTransparent: true, opticalWeight: 1, imageEncoding: { format: 'webp', quality: 90 } },
+      anchors: [], provenance: { path: 'provenance.json', sha256: await fileDigest(resolve(sourceDirectory, 'provenance.json')) } };
+    await json(resolve(sourceDirectory, 'volume.json'), volume);
+    const reference = JSON.parse(await readFile(target.referenceObject, 'utf8'));
+    const frame = { ...reference.properties.frame, boundsUnits: target.boundsKpc };
+    await json(resolve(objectDirectory, 'object.json'), { schema: 'cssearth-object@1', id: target.id,
+      type: 'density-volume', properties: { volume: frame,
+        preparation: { source: 'source/volume.json', sha256: await fileDigest(resolve(sourceDirectory, 'volume.json')) } } });
+    console.log(`PARTICLES_BAKE ${target.id}: ${(100 * provenance.display.massRetention).toFixed(2)}% stellar mass inside display bounds`);
+    const baked = spawnSync(process.execPath, [resolve(root, 'tools/objects/dist/prepare-volume.js'), objectDirectory], { stdio: 'inherit' });
+    if (baked.error) throw baked.error;
+    if (baked.status !== 0) throw new Error(`Shared volume bake failed for ${target.id}.`);
+  }
+}
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const [recipe, archive, extra] = process.argv.slice(2);
+  if (!recipe || !archive || extra) throw new TypeError('Usage: prepare-particles <recipe.json> <archive.zip>');
+  await prepareParticleExperiments(recipe, archive);
+}
