@@ -8,12 +8,15 @@ export async function prepareFloatObservation(path, entry, policy, width, height
   try {
     const image = await file.getImage(), keys = image.getGeoKeys();
     const origin = image.getOrigin(), resolution = image.getResolution();
+    const geographic = policy.coordinates === 'degrees';
+    const projectionMatches = geographic ? keys.GTModelTypeGeoKey === 2 && keys.GeogAngularUnitsGeoKey === 9102
+      : keys.ProjCenterLongGeoKey === policy.centerLongitude && keys.ProjStdParallel1GeoKey === 0 && keys.ProjCenterLatGeoKey === 0;
     if (image.getWidth() !== entry.width || image.getHeight() !== entry.height ||
         image.getSamplesPerPixel() !== 1 || image.getSampleFormat(0) !== (policy.kind === 'geotiff-byte-monochrome' ? 1 : 3) ||
-        image.getSampleByteSize(0) !== (policy.kind === 'geotiff-byte-monochrome' ? 1 : 4) ||
-        image.getGDALNoData() !== policy.noData || keys.ProjCenterLongGeoKey !== policy.centerLongitude ||
-        keys.GeogSemiMajorAxisGeoKey !== entry.projection.referenceRadiusMeters || keys.ProjStdParallel1GeoKey !== 0 ||
-        keys.ProjCenterLatGeoKey !== 0 || resolution[0] !== policy.resolutionMeters || resolution[1] !== -policy.resolutionMeters ||
+        image.getSampleByteSize(0) !== (policy.kind === 'geotiff-byte-monochrome' ? 1 : policy.sampleBytes ?? 4) ||
+        image.getGDALNoData() !== policy.noData || !projectionMatches ||
+        keys.GeogSemiMajorAxisGeoKey !== entry.projection.referenceRadiusMeters ||
+        resolution[0] !== (geographic ? policy.resolutionDegrees : policy.resolutionMeters) || resolution[1] !== -resolution[0] ||
         origin[0] !== policy.origin[0] || origin[1] !== policy.origin[1]) {
       throw new Error(`Float observation grid changed: ${entry.id}`);
     }
@@ -23,11 +26,12 @@ export async function prepareFloatObservation(path, entry, policy, width, height
     const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
     const radius = entry.projection.referenceRadiusMeters, [low, high] = policy.displayRange;
     for (let y = 0; y < height; y++) {
-      const northing = (90 - (y + 0.5) / height * 180) * Math.PI / 180 * radius;
+      const latitude = 90 - (y + 0.5) / height * 180;
+      const northing = geographic ? latitude : latitude * Math.PI / 180 * radius;
       for (let x = 0; x < width; x++) {
         let deltaLongitude = (x + 0.5) / width * 360 - policy.centerLongitude;
         if (policy.wrapLongitude) deltaLongitude = ((deltaLongitude + 180) % 360 + 360) % 360 - 180;
-        const easting = deltaLongitude * Math.PI / 180 * radius;
+        const easting = geographic ? deltaLongitude : deltaLongitude * Math.PI / 180 * radius;
         const value = sampleColorBand(band, easting, northing), i = y * width + x;
         if (value === null) { missing[i] = 1; continue; }
         const gray = Math.round(255 * Math.max(0, Math.min(1, (value - low) / (high - low))));

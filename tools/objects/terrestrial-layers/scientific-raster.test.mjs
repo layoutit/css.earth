@@ -122,3 +122,9 @@ test('capability selection and validity policy are independent of body names', a
   assert.equal(parseTerrestrialProfile(variant).namespace, 'test-body');
   variant.geometry.radius = 231; assert.throws(() => parseTerrestrialProfile(variant), /Invalid terrestrial/);
 });
+
+test('a measured elevation lens can be the only surface capability', async () => {
+  const config = JSON.parse(await readFile(new URL('../../../src/planets/itokawa/source/preparation/terrestrial.json', import.meta.url)));
+  assert.equal(parseTerrestrialProfile(config).presentation.defaultLens, 'elevation');
+  assert.throws(() => parseTerrestrialProfile({...config, raster: {...config.raster, scientific: []}}), /Invalid terrestrial/);
+});

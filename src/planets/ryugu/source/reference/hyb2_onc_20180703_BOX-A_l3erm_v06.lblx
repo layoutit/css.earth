@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1O00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1O00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1O00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1O00_1920.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational
+    xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:pds="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1"
+    xmlns:cart="http://pds.nasa.gov/pds4/cart/v1"
+    xmlns:img="http://pds.nasa.gov/pds4/img/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1O00.xsd
+                        http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1O00_1510.xsd
+                        http://pds.nasa.gov/pds4/cart/v1 https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1O00_1970.xsd
+                        http://pds.nasa.gov/pds4/img/v1 https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1O00_1920.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:jaxa:darts:hyb2_onc_map:data_reflectance_map:hyb2_onc_20180703_box-a_l3erm</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>Hayabusa2 ONC Multiband Reflectance Mosaic Map hyb2_onc_20180703_BOX-A_l3erm</title>
+    <information_model_version>1.24.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2026-01-06</modification_date>
+        <version_id>1.0</version_id>
+        <description>Initial version.</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2018-07-03T06:15:08Z</start_date_time>
+      <stop_date_time>2018-07-03T13:54:32Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <wavelength_range>Near Infrared</wavelength_range>
+        <wavelength_range>Ultraviolet</wavelength_range>
+        <wavelength_range>Visible</wavelength_range>
+        <domain>Surface</domain>
+        <discipline_name>Imaging</discipline_name>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>Hayabusa2 Asteroid Sample Return Mission</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:jaxa:darts:context:investigation:mission.hyb2</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Hayabusa2</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:jaxa:darts:context:instrument_host:spacecraft.hyb2</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Optical Navigation Camera</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:jaxa:darts:context:instrument:hyb2.onc</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(162173) Ryugu</name>
+      <type>Asteroid</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:asteroid.162173_ryugu</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Discipline_Area>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <img:Imaging>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>imaging_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <img:Optical_Filter>
+          <img:filter_name>ul-band</img:filter_name>
+          <img:filter_id>u</img:filter_id>
+          <img:filter_number>1</img:filter_number>
+          <img:bandwidth unit="nm">34.7</img:bandwidth>
+          <img:center_filter_wavelength unit="nm">397.5</img:center_filter_wavelength>
+          <img:array_band_number>1</img:array_band_number>
+        </img:Optical_Filter>
+        <img:Optical_Filter>
+          <img:filter_name>b-band</img:filter_name>
+          <img:filter_id>b</img:filter_id>
+          <img:filter_number>8</img:filter_number>
+          <img:bandwidth unit="nm">26.7</img:bandwidth>
+          <img:center_filter_wavelength unit="nm">479.8</img:center_filter_wavelength>
+          <img:array_band_number>2</img:array_band_number>
+        </img:Optical_Filter>
+        <img:Optical_Filter>
+          <img:filter_name>v-band</img:filter_name>
+          <img:filter_id>v</img:filter_id>
+          <img:filter_number>3</img:filter_number>
+          <img:bandwidth unit="nm">27.9</img:bandwidth>
+          <img:center_filter_wavelength unit="nm">548.9</img:center_filter_wavelength>
+          <img:array_band_number>3</img:array_band_number>
+        </img:Optical_Filter>
+        <img:Optical_Filter>
+          <img:filter_name>Na-band</img:filter_name>
+          <img:filter_id>n</img:filter_id>
+          <img:filter_number>6</img:filter_number>
+          <img:bandwidth unit="nm">11.6</img:bandwidth>
+          <img:center_filter_wavelength unit="nm">589.9</img:center_filter_wavelength>
+          <img:array_band_number>4</img:array_band_number>
+        </img:Optical_Filter>
+        <img:Optical_Filter>
+          <img:filter_name>w-band</img:filter_name>
+          <img:filter_id>w</img:filter_id>
+          <img:filter_number>4</img:filter_number>
+          <img:bandwidth unit="nm">28.8</img:bandwidth>
+          <img:center_filter_wavelength unit="nm">700.1</img:center_filter_wavelength>
+          <img:array_band_number>5</img:array_band_number>
+        </img:Optical_Filter>
+        <img:Optical_Filter>
+          <img:filter_name>x-band</img:filter_name>
+          <img:filter_id>x</img:filter_id>
+          <img:filter_number>5</img:filter_number>
+          <img:bandwidth unit="nm">42.4</img:bandwidth>
+          <img:center_filter_wavelength unit="nm">857.3</img:center_filter_wavelength>
+          <img:array_band_number>6</img:array_band_number>
+        </img:Optical_Filter>
+        <img:Optical_Filter>
+          <img:filter_name>p-band</img:filter_name>
+          <img:filter_id>p</img:filter_id>
+          <img:filter_number>7</img:filter_number>
+          <img:bandwidth unit="nm">57.2</img:bandwidth>
+          <img:center_filter_wavelength unit="nm">945.1</img:center_filter_wavelength>
+          <img:array_band_number>7</img:array_band_number>
+        </img:Optical_Filter>
+      </img:Imaging>
+      <cart:Cartography>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <cart:Spatial_Domain>
+          <cart:Bounding_Coordinates>
+            <cart:west_bounding_coordinate unit="deg">0</cart:west_bounding_coordinate>
+            <cart:east_bounding_coordinate unit="deg">360</cart:east_bounding_coordinate>
+            <cart:north_bounding_coordinate unit="deg">90</cart:north_bounding_coordinate>
+            <cart:south_bounding_coordinate unit="deg">-90</cart:south_bounding_coordinate>
+          </cart:Bounding_Coordinates>
+        </cart:Spatial_Domain>
+        <cart:Spatial_Reference_Information>
+          <cart:Horizontal_Coordinate_System_Definition>
+            <cart:Planar>
+              <cart:Map_Projection>
+                <cart:map_projection_name>Equirectangular</cart:map_projection_name>
+                <cart:Equirectangular>
+                  <cart:latitude_of_projection_origin unit="deg">0</cart:latitude_of_projection_origin>
+                  <cart:standard_parallel_1 unit="deg">0</cart:standard_parallel_1>
+                  <cart:longitude_of_central_meridian unit="deg">0</cart:longitude_of_central_meridian>
+                </cart:Equirectangular>
+              </cart:Map_Projection>
+              <cart:Planar_Coordinate_Information>
+                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                <cart:Coordinate_Representation>
+                  <cart:pixel_resolution_x unit="m/pixel">1.5638150097869195</cart:pixel_resolution_x>
+                  <cart:pixel_resolution_y unit="m/pixel">1.5638150097869195</cart:pixel_resolution_y>
+                  <cart:pixel_scale_x unit="pixel/deg">5</cart:pixel_scale_x>
+                  <cart:pixel_scale_y unit="pixel/deg">5</cart:pixel_scale_y>
+                </cart:Coordinate_Representation>
+              </cart:Planar_Coordinate_Information>
+              <cart:Geo_Transformation>
+                <cart:upperleft_corner_x unit="m">0</cart:upperleft_corner_x>
+                <cart:upperleft_corner_y unit="m">703.71675440411366</cart:upperleft_corner_y>
+              </cart:Geo_Transformation>
+            </cart:Planar>
+            <cart:Geodetic_Model>
+              <cart:latitude_type>Planetocentric</cart:latitude_type>
+              <cart:spheroid_name>162173_Ryugu_JAXA2024_-_Sphere</cart:spheroid_name>
+              <cart:a_axis_radius unit="m">448</cart:a_axis_radius>
+              <cart:b_axis_radius unit="m">448</cart:b_axis_radius>
+              <cart:c_axis_radius unit="m">448</cart:c_axis_radius>
+              <cart:longitude_direction>Positive East</cart:longitude_direction>
+            </cart:Geodetic_Model>
+          </cart:Horizontal_Coordinate_System_Definition>
+        </cart:Spatial_Reference_Information>
+      </cart:Cartography>
+    </Discipline_Area>
+  </Observation_Area>
+  <Reference_List>
+    <Internal_Reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc_map:browse:hyb2_onc_20180703_box-a_l3erm_rgb::1.0</lidvid_reference>
+      <reference_type>data_to_browse</reference_type>
+    </Internal_Reference>
+    <Internal_Reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc_map:browse:hyb2_onc_20180703_box-a_l3erm_enhancedrgb::1.0</lidvid_reference>
+      <reference_type>data_to_browse</reference_type>
+    </Internal_Reference>
+    <Source_Product_Internal>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_061508_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_061521_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_061540_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_061553_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_061613_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_061625_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_061645_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_065317_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_065330_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_065349_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_065402_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_065421_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_065434_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_065453_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_073126_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_073139_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_073158_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_073211_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_073230_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_073243_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_073302_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_080935_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_080948_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_081007_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_081020_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_081039_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_081052_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_081111_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_084744_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_084757_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_084816_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_084829_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_084848_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_084901_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_084920_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_092553_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_092606_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_092625_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_092638_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_092657_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_092710_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_092729_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_100402_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_100415_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_100434_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_100447_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_100506_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_100519_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_100538_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_104211_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_104224_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_104243_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_104256_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_104315_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_104328_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_104347_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_112020_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_112033_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_112052_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_112105_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_112124_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_112137_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_112156_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_115829_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_115842_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_115901_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_115914_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_115933_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_115946_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_120005_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_123638_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_123651_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_123710_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_123723_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_123742_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_123755_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_123814_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_131447_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_131500_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_131519_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_131532_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_131551_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_131604_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_131623_tuf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_135256_tvf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_135309_twf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_135328_txf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_135341_tnf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_135400_tpf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_135413_tbf_l2e::1.0</lidvid_reference>
+      <lidvid_reference>urn:jaxa:darts:hyb2_onc:data_reflectance:hyb2_onc_20180703_135432_tuf_l2e::1.0</lidvid_reference>
+      <reference_type>data_to_derived_source_product</reference_type>
+    </Source_Product_Internal>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>hyb2_onc_20180703_BOX-A_l3erm_v06.tif</file_name>
+    </File>
+    <Header>
+      <offset unit="byte">0</offset>
+      <object_length unit="byte">7799</object_length>
+      <parsing_standard_id>TIFF 6.0</parsing_standard_id>
+      <description>TIFF/GeoTIFF header. The TIFF/GeoTIFF format is used throughout the geospatial and science communities to share geographic image data. </description>
+    </Header>
+    <Array_3D_Image>
+      <local_identifier>image</local_identifier>
+      <offset unit="byte">7799</offset>
+      <axes>3</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <Element_Array>
+        <data_type>IEEE754LSBDouble</data_type>
+        <unit>none</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>900</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>1800</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Band</axis_name>
+        <elements>7</elements>
+        <sequence_number>3</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <missing_constant>-1</missing_constant>
+      </Special_Constants>
+    </Array_3D_Image>
+  </File_Area_Observational>
+</Product_Observational>

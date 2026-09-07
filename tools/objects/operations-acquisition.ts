@@ -1,5 +1,11 @@
 import sharp from 'sharp';
-import { readFile } from 'node:fs/promises';
+import { readFile, mkdir, rename, rm } from 'node:fs/promises';
+import { createReadStream, createWriteStream } from 'node:fs';
+import { resolve } from 'node:path';
+import { Readable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { createHash } from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import { containedPath, publishPinnedSource } from './operations.js';
@@ -11,22 +17,24 @@ interface OperationBase { groups:string[]; }
 interface Download extends OperationBase {kind:'download';path:string;url:string;headers?:Record<string,string>;encoding?:'gzip'|'pretty-json';expectedJsonFields?:Record<string,unknown>;}
 interface RequestDownload extends OperationBase {kind:'request-download';path:string;url:string;form:Record<string,string>;fileSource?:string;trimEnd?:boolean;appendText?:string;headers?:Record<string,string>;replacements?:{pattern:string;flags?:string;replacement:string}[];requiredPrefix?:string;requiredText?:string[];numericLineCount?:number;}
 interface JsonDocument extends OperationBase {kind:'json-document';path:string;value:Record<string,unknown>;}
+interface ZipMember extends OperationBase {kind:'zip-member';path:string;url:string;archiveSha256:string;archiveBytes:number;member:string;}
 interface SatelliteCatalog extends OperationBase {kind:'satellite-catalog';path:string;recipePath:string;headers?:Record<string,string>;}
 interface VerifyDownload extends OperationBase {kind:'verify-download';url:string;sha256:string;}
 interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:string;tileSize:number;columns:number;rows:number;dataWidth:number;dataHeight:number;width:number;height:number;forceRgb:boolean;concurrency:number;}
 interface RequestCheck extends OperationBase {kind:'verify-request';url:string;form:Record<string,string>;fileSource?:string;expectedPath:string;selector:'trim'|'numeric-lines'|'before-marker';marker?:string;rowCount?:number;headers?:Record<string,string>;}
 interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
 interface Catalog extends OperationBase {kind:'catalog-field';path:string;url:string;sha256:string;catalogRows:number;selectedCount:number;selection?:{model:'gnomonic';centerRaDegrees:number;centerDecDegrees:number;horizontalFovDegrees:number;aspectRatio:number};template:{schema:string;source:Record<string,unknown>;projection:Record<string,unknown>;presentation:Record<string,unknown>;starColumns?:string[]};}
-export type AcquisitionOperation=Download|RequestDownload|JsonDocument|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|Catalog;
+export type AcquisitionOperation=Download|RequestDownload|JsonDocument|ZipMember|SatelliteCatalog|VerifyDownload|Mosaic|RequestCheck|JsonCheck|Catalog;
 export interface AcquisitionPlan {schema:'cssearth-acquisition-plan@1';operations:AcquisitionOperation[];}
 export interface AcquisitionTransport { fetch(url:string,init?:RequestInit):Promise<Response>; }
 const record=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected acquisition object.');return value as Record<string,unknown>;};
 export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
  const plan=record(value);if(plan.schema!=='cssearth-acquisition-plan@1'||!Array.isArray(plan.operations)||!plan.operations.length)throw new TypeError('Invalid acquisition plan.');
- for(const value of plan.operations){const step=record(value);if(!['json-document','satellite-catalog'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
-  if(!['download','request-download','json-document','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','catalog-field'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
-  for(const key of ['path','expectedPath','fileSource','recipePath'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
-  if(['download','request-download','json-document','satellite-catalog','tile-mosaic','catalog-field'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
+ for(const value of plan.operations){const step=record(value);if(!['json-document','satellite-catalog','zip-member'].includes(String(step.kind))&&(typeof step.url!=='string'||!/^https?:\/\//.test(step.url))||!Array.isArray(step.groups)||!step.groups.length||step.groups.some(group=>typeof group!=='string'))throw new TypeError('Acquisition URL or groups are missing.');
+  if(!['download','request-download','json-document','zip-member','satellite-catalog','verify-download','tile-mosaic','verify-request','verify-json','catalog-field'].includes(String(step.kind)))throw new TypeError('Unknown acquisition operator.');
+  for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
+  if(['download','request-download','json-document','zip-member','satellite-catalog','tile-mosaic','catalog-field'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
+  if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.archiveSha256!=='string'||!/^[a-f0-9]{64}$/.test(step.archiveSha256)||!Number.isSafeInteger(step.archiveBytes)||Number(step.archiveBytes)<=0||typeof step.member!=='string'||!/^[A-Za-z0-9_./-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
   if(step.headers!==undefined){const headers=record(step.headers);if(Object.values(headers).some(value=>typeof value!=='string'))throw new TypeError('Acquisition headers must be text.');}
   if(step.kind==='request-download'||step.kind==='verify-request'){const form=record(step.form);if(Object.values(form).some(value=>typeof value!=='string'))throw new TypeError('Acquisition form values must be text.');}
   if(step.kind==='request-download'&&(step.trimEnd!==undefined&&typeof step.trimEnd!=='boolean'||step.appendText!==undefined&&typeof step.appendText!=='string'))throw new TypeError('Invalid response text transformation.');
@@ -65,6 +73,19 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    if(step.encoding==='gzip')data=gzipSync(data,{level:9});
    if(step.encoding==='pretty-json'){const value=JSON.parse(new TextDecoder().decode(data)) as unknown;for(const[key,expected]of Object.entries(step.expectedJsonFields??{})){let actual=value;for(const part of key.split('.'))actual=record(actual)[part];if(actual!==expected)throw new Error(`Source JSON identity ${key} drifted.`);}data=new TextEncoder().encode(JSON.stringify(value,null,2)+'\n');}
    await publish(step.path,data);
+  }
+  else if(step.kind==='zip-member'){
+   const cache=resolve('.local/source-archives');await mkdir(cache,{recursive:true});
+   const archivePath=resolve(cache,`${step.archiveSha256}.zip`);
+   const verifyArchive=async(path:string)=>{const hash=createHash('sha256');let size=0;for await(const chunk of createReadStream(path)){hash.update(chunk);size+=chunk.length;}if(size!==step.archiveBytes||hash.digest('hex')!==step.archiveSha256)throw new Error('ZIP source pin differs.');};
+   try{await verifyArchive(archivePath);}catch(error){
+    if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;
+    const response=await request(step.url);if(!response.body)throw new Error('ZIP download has no body.');
+    const temporary=`${archivePath}.partial-${process.pid}`;
+    try{await pipeline(Readable.fromWeb(response.body as never),createWriteStream(temporary));await verifyArchive(temporary);await rename(temporary,archivePath);}finally{await rm(temporary,{force:true});}
+   }
+   const {stdout}=await promisify(execFile)('unzip',['-p',archivePath,step.member],{encoding:'buffer',maxBuffer:512*1024*1024});
+   await publish(step.path,stdout);
   }
   else if(step.kind==='json-document')await publish(step.path,new TextEncoder().encode(JSON.stringify(step.value,null,2)+'\n'));
   else if(step.kind==='satellite-catalog'){

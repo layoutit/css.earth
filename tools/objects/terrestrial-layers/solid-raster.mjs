@@ -79,7 +79,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const { width, height, bandCount, gutter } = config.raster;
   const emit = createRasterEmitter(publicDirectory, config.publicBase), surfaces = [], observations = new Map();
-  const entries = await source.validateGroup('surfaces');
+  const entries = config.raster.observations.length ? await source.validateGroup('surfaces') : [];
   if (entries.length !== config.raster.observations.length ||
       new Set(entries.map(entry => entry.lensId)).size !== entries.length ||
       entries.some(entry => !config.raster.observations.some(recipe => recipe.id === entry.lensId))) {
