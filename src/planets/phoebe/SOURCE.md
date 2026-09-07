@@ -12,7 +12,7 @@ Elevation is radial height in kilometres above a 106.8 km reference sphere, from
 
 ## Shape and orientation
 
-The PDS4 `phoebe_ver128q.tab` vertex-facet product has 99,846 explicit vertex rows and 196,608 triangular facets, with coordinates in kilometres. Preparation reads those row identifiers, checks the released dimensions and units, and intersects rays with the actual source facets. The retained display uses 1,216 triangles, below the 2,000-face budget. It is a simplified rendering of the source model, not a scientific-resolution reconstruction. Elevation is sampled on a 721 × 361 angular grid from the source mesh, independently of that display simplification.
+The PDS4 `phoebe_ver128q.tab` vertex-facet product has 99,846 explicit vertex rows and 196,608 triangular facets, with coordinates in kilometres. Preparation reads those row identifiers, checks the released dimensions and units, and intersects rays with the actual source facets. The retained display uses 1,216 triangles, below the 2,000-face budget. It is a simplified rendering of the source model, not a scientific-resolution reconstruction. Each face is prepared as a native PolyCSS `u` triangle in raster mode, with a 128 × 128 texture cell and precomputed flood/directional lighting banks. PolyCSS owns triangle coverage; no transparent rectangular face wrapper or runtime geometry is used. Elevation is sampled on a 721 × 361 angular grid from the source mesh, independently of that display simplification.
 
 The source documents 208 Cassini ISS images and a 147 m position RMS. That error statistic is not an image or terrain resolution claim. Q128 was selected for roughly kilometre-scale source sampling at this body's size; the archive also provides denser Q256 and Q512 versions.
 
