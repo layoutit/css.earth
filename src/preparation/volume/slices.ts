@@ -1,9 +1,10 @@
 /** Offline axis-aligned density slabs and straight-alpha raster preparation. */
-import { mkdir, writeFile, readFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import sharp from 'sharp';
+import { encodeVolumeRaster } from './raster.js';
+import { gradePremultipliedDisplayRgb } from './color-grade.js';
 import { loadVolumeSource, sampleEncoded, sha256, type VolumeSource } from './source.js';
-import type { Axis, Bounds3, Vector3, RadialEmission, VolumeRecipe } from './config.js';
+import type { Axis, Bounds3, DisplayColorMatrix, Vector3, RadialEmission, VolumeRecipe } from './config.js';
 export interface VolumeSliceQuad {
   id: string; axis: Axis; sliceIndex: number; texturePath: string; widthPx: number; heightPx: number;
   /** Image top-left first: required by PolyCSS's image/projective backend. */
@@ -15,7 +16,7 @@ export interface VolumeSlices {
   quads: VolumeSliceQuad[]; boundsUnits: Bounds3; provenance: unknown;
   approximation: { method: string; radialEmission: string; limitations: string[];
     samplesPerSlab: number; opticalWeight: number; exposureGain: number;
-    sliceCounts: Record<Axis, number>; slabPitchUnits: Record<Axis, number> };
+    displayColorMatrix?: DisplayColorMatrix; sliceCounts: Record<Axis, number>; slabPitchUnits: Record<Axis, number> };
 }
 const clamp = (value: number): number => Math.max(0, Math.min(1, value));
 const smoothstep = (lo: number, hi: number, value: number): number => {
@@ -59,7 +60,27 @@ function point(axis: Axis, depth: number, u: number, v: number): Vector3 {
   if (axis === 'y') return [u, depth, v];
   return [u, v, depth];
 }
-function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: number, width: number, height: number,
+export function slabStepSize(recipe: VolumeRecipe, axis: Axis, slabWidth: number): number {
+  const index = axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
+  const metric = recipe.material.stepMetric === 'texture' ? 1 / (recipe.grid.bounds.max[index] - recipe.grid.bounds.min[index]) : 1;
+  return slabWidth / recipe.bake.samplesPerSlab * recipe.material.stepScale * recipe.bake.opticalWeight * metric;
+}
+export function withinVolumeSupport(recipe: VolumeRecipe, position: Vector3): boolean {
+  const support = recipe.material.cylinderSupport;
+  if (!support) return true;
+  const axial = support.axis === 'x' ? 0 : support.axis === 'y' ? 1 : 2;
+  let squared = 0;
+  for (let axis = 0; axis < 3; axis++) if (axis !== axial) {
+    const coordinate = 2 * ((position[axis]! - recipe.grid.bounds.min[axis]!) /
+      (recipe.grid.bounds.max[axis]! - recipe.grid.bounds.min[axis]!)) - 1;
+    squared += coordinate * coordinate;
+  }
+  return squared <= support.radiusSquared;
+}
+export function channelDensity(encoded: number, encoding: VolumeRecipe['grid']['encoding'], decodedPower = 1): number {
+  return encoded ** ((encoding === 'sqrt-density-unorm8' ? 2 : 1) * decodedPower);
+}
+export function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: number, width: number, height: number,
   radialTable: Float64Array | undefined): { rgba: Buffer; alphaCoverage: number } {
   const { material, bake, grid } = source.recipe;
   const pixels = Buffer.alloc(width * height * 4);
@@ -68,8 +89,7 @@ function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: nu
   const horizontal = axis === 'x' ? 1 : 0, vertical = axis === 'z' ? 1 : 2;
   const uMin = grid.bounds.min[horizontal], uMax = grid.bounds.max[horizontal];
   const vMin = grid.bounds.min[vertical], vMax = grid.bounds.max[vertical];
-  const samples = bake.samplesPerSlab, ds = slabWidth / samples * material.stepScale * bake.opticalWeight;
-  const power = grid.encoding === 'sqrt-density-unorm8' ? 2 : 1;
+  const samples = bake.samplesPerSlab, ds = slabStepSize(source.recipe, axis, slabWidth);
   let nonzero = 0;
   for (let row = 0; row < height; row++) {
     const v = vMax - (vMax - vMin) * (row + 0.5) / height;
@@ -79,15 +99,16 @@ function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: nu
       for (let sample = 0; sample < samples; sample++) {
         const d = depth + slabWidth * ((sample + 0.5) / samples - 0.5);
         const [x, y, z] = point(axis, d, u, v);
+        if (!withinVolumeSupport(source.recipe, [x, y, z])) continue;
         sampleEncoded(source, x, y, z, encoded);
         const profile = material.radialEmission;
         const radialDensity = profile && radialTable ? radialSample(radialTable, Math.hypot(x, y, z / profile.flattening)) *
           (1 - smoothstep(profile.verticalTaper[0], profile.verticalTaper[1], Math.abs(z))) : 0;
         for (let channel = 0; channel < 3; channel++) {
           let light = 0, absorption = 0;
-          for (const field of material.emission) light += (encoded[field.channel] ?? 0) ** power * field.strength * (field.color[channel] ?? 0);
+          for (const field of material.emission) light += channelDensity(encoded[field.channel] ?? 0, grid.encoding, field.decodedPower) * field.strength * (field.color[channel] ?? 0);
           if (profile) light += radialDensity * profile.strength * (profile.color[channel] ?? 0);
-          for (const field of material.absorption) absorption += (encoded[field.channel] ?? 0) ** power * field.strength * (field.color[channel] ?? 0);
+          for (const field of material.absorption) absorption += channelDensity(encoded[field.channel] ?? 0, grid.encoding, field.decodedPower) * field.strength * (field.color[channel] ?? 0);
           emission[channel] = (emission[channel] ?? 0) + ds * material.intensityScale * light;
           tau[channel] = (tau[channel] ?? 0) + absorption * ds;
         }
@@ -100,9 +121,10 @@ function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWidth: nu
       const dustOpacity = 1 - Math.exp(-(tau[0] * 0.2126 + tau[1] * 0.7152 + tau[2] * 0.0722));
       const alpha = Math.max(red, green, blue, dustOpacity), offset = 4 * (row * width + column);
       if (alpha > 0) {
-        pixels[offset] = Math.round(clamp(red / alpha) * 255);
-        pixels[offset + 1] = Math.round(clamp(green / alpha) * 255);
-        pixels[offset + 2] = Math.round(clamp(blue / alpha) * 255);
+        const graded = gradePremultipliedDisplayRgb([red, green, blue], material.displayColorMatrix);
+        pixels[offset] = Math.round(clamp(graded[0] / alpha) * 255);
+        pixels[offset + 1] = Math.round(clamp(graded[1] / alpha) * 255);
+        pixels[offset + 2] = Math.round(clamp(graded[2] / alpha) * 255);
         pixels[offset + 3] = Math.round(clamp(alpha) * 255);
         if (pixels[offset + 3]) nonzero++;
       }
@@ -139,9 +161,11 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
         if (right < left) { left = right = Math.floor(width / 2); top = bottom = Math.floor(height / 2); }
       }
       const croppedWidth = right - left + 1, croppedHeight = bottom - top + 1;
-      const texturePath = `slices/${axis}/${String(index).padStart(2, '0')}.webp`, target = resolve(options.outputDirectory, texturePath);
-      await sharp(baked.rgba, { raw: { width, height, channels: 4 } })
-        .extract({ left, top, width: croppedWidth, height: croppedHeight }).webp({ lossless: true, quality: 100, effort: 6 }).toFile(target);
+      const texturePath = `slices/${axis}/${String(index).padStart(2, '0')}.${bake.imageEncoding?.format ?? 'png'}`;
+      const target = resolve(options.outputDirectory, texturePath);
+      const bytes = await encodeVolumeRaster({ rgba: baked.rgba, width, height,
+        crop: { left, top, width: croppedWidth, height: croppedHeight }, encoding: bake.imageEncoding });
+      await writeFile(target, bytes);
       const uMin = uLower + (uUpper - uLower) * left / width, uMax = uLower + (uUpper - uLower) * (right + 1) / width;
       const vMax = vUpper - (vUpper - vLower) * top / height, vMin = vUpper - (vUpper - vLower) * (bottom + 1) / height;
       // Image/projective maps image corners by vertex order; UV-only flips do not correct it.
@@ -150,9 +174,8 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
       for (const vertex of vertices) for (let i = 0; i < 3; i++) vertex[i] = (vertex[i] ?? 0) * scale;
       const center = point(axis, depth * scale, (uMin + uMax) * scale / 2, (vMin + vMax) * scale / 2);
       const normal: Vector3 = axis === 'x' ? [-1, 0, 0] : axis === 'y' ? [0, 1, 0] : [0, 0, -1];
-      const image = await readFile(target);
       quads.push({ id: `${axis}-${index}`, axis, sliceIndex: index, texturePath, widthPx: croppedWidth, heightPx: croppedHeight,
-        vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center, normal, sha256: sha256(image), bytes: image.length,
+        vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center, normal, sha256: sha256(bytes), bytes: bytes.length,
         alphaCoverage: baked.alphaCoverage * width * height / (croppedWidth * croppedHeight) });
     }
     console.log(`Prepared ${counts[axis]} ${axis.toUpperCase()} scalar-field slabs.`);
@@ -165,8 +188,10 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
     radialEmission: material.radialEmission ? 'Abel-deprojected radial profile, ellipsoidal normalization and authored boundary taper.' : 'None.',
     limitations: ['Ordinary alpha approximates emitted light and wavelength-dependent extinction.',
       'Finite slices and axis handoffs approximate a continuous field; angle-dependent opacity and sampling differences remain.',
+      ...(material.displayColorMatrix ? ['The display color matrix transforms ordinary display RGB values; it is not linear-light photometry.'] : []),
       'No runtime ray integration, near-field noise or global HDR display pass.'],
     samplesPerSlab: bake.samplesPerSlab, opticalWeight: bake.opticalWeight, exposureGain: material.exposureGain,
+    ...(material.displayColorMatrix ? { displayColorMatrix: material.displayColorMatrix } : {}),
     sliceCounts: counts, slabPitchUnits: pitches } };
   await writeFile(resolve(options.outputDirectory, 'volume-slices.json'), JSON.stringify(result, null, 2) + '\n');
   return result;

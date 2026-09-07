@@ -1,0 +1,119 @@
+import { M_PER_AU, type FrameSnapshot, type FrameTree, type Vec3 } from '@galaxio/astronomy'
+import { BufferAttribute, BufferGeometry, FrontSide, Mesh, MeshBasicNodeMaterial, NormalBlending, Vector3 } from 'three/webgpu'
+import { dot, float, modelWorldMatrixInverse, normalGeometry, normalize, positionGeometry, smoothstep, vec3, vec4 } from 'three/tsl'
+import { floatUniform } from '../bodies/uniforms.js'
+import type { Tier } from '../tiers.js'
+import type { TierContent } from '../tiers/compositor.js'
+import type { Focus } from './altitude.js'
+import {
+  createHeliosphereGeometryData,
+  HELIOSPHERE_BOUNDING_RADIUS_AU,
+  HELIOSPHERE_ORIENTATION_ICRF,
+  HELIOSPHERE_REFERENCE_RADIUS_M,
+  heliosphereDistanceWeight,
+} from './heliosphereModel.js'
+
+/** A Sun-relative illustrative boundary; it neither receives sunlight nor writes depth. */
+export class HeliosphereRenderer {
+  readonly node: Mesh<BufferGeometry, MeshBasicNodeMaterial>
+  readonly content: TierContent
+  readonly opacity = floatUniform(0)
+  readonly #verticesUnits: Float64Array
+  readonly #focusFromSunScratch = new Float64Array(3)
+  #distanceWeight = 0
+  #tierWeight = 0
+  cameraDistanceAu = 0
+
+  constructor(tier: Tier) {
+    const data = createHeliosphereGeometryData()
+    const geometry = new BufferGeometry()
+    geometry.setAttribute('position', new BufferAttribute(data.positionsNormalized, 3))
+    geometry.setAttribute('normal', new BufferAttribute(data.normals, 3))
+    geometry.setIndex(new BufferAttribute(data.indices, 1))
+    geometry.computeBoundingSphere()
+
+    const material = new MeshBasicNodeMaterial({
+      transparent: true,
+      side: FrontSide,
+      depthWrite: false,
+      depthTest: true,
+      blending: NormalBlending,
+      toneMapped: false,
+    })
+    // All tier cameras sit at zero. Transform that point into the shell's local axes.
+    const cameraLocal = modelWorldMatrixInverse.mul(vec4(0, 0, 0, 1)).xyz
+    const facing = dot(normalize(cameraLocal.sub(positionGeometry)), normalGeometry)
+    const rim = float(1).sub(facing).mul(smoothstep(0, 0.1, facing))
+    material.colorNode = vec3(0.5, 0.9, 0.8).mul(rim)
+    material.opacityNode = this.opacity.mul(0.2).mul(rim)
+
+    this.node = new Mesh(geometry, material)
+    this.node.name = 'Heliosphere'
+    this.node.scale.setScalar(HELIOSPHERE_REFERENCE_RADIUS_M / tier.unitM)
+    this.node.quaternion.set(...HELIOSPHERE_ORIENTATION_ICRF)
+    this.node.visible = false
+    this.node.frustumCulled = false
+    this.node.updateMatrix()
+    this.#verticesUnits = new Float64Array(data.positionsNormalized.length)
+    const vertex = new Vector3()
+    for (let i = 0; i < data.positionsNormalized.length; i += 3) {
+      vertex.fromArray(data.positionsNormalized, i).applyMatrix4(this.node.matrix)
+      this.#verticesUnits[i] = vertex.x
+      this.#verticesUnits[i + 1] = vertex.y
+      this.#verticesUnits[i + 2] = vertex.z
+    }
+    this.content = {
+      position: { frame: 'sun', offset: [0, 0, 0] },
+      node: this.node,
+      boundingRadiusUnits: HELIOSPHERE_BOUNDING_RADIUS_AU * M_PER_AU / tier.unitM,
+      occludes: false,
+      nearBound: this,
+    }
+  }
+
+  // @noalloc
+  updateHeliosphereView(tree: FrameTree, snapshot: FrameSnapshot, focus: Focus, directionIcrf: Vec3, rangeM: number): void {
+    tree.resolveInto(this.#focusFromSunScratch, 'sun', focus.position, snapshot)
+    const sunUnitM = tree.get('sun').unitM
+    const xM = this.#focusFromSunScratch[0]! * sunUnitM + directionIcrf[0] * rangeM
+    const yM = this.#focusFromSunScratch[1]! * sunUnitM + directionIcrf[1] * rangeM
+    const zM = this.#focusFromSunScratch[2]! * sunUnitM + directionIcrf[2] * rangeM
+    this.cameraDistanceAu = Math.sqrt(xM * xM + yM * yM + zM * zM) / M_PER_AU
+    this.#distanceWeight = heliosphereDistanceWeight(this.cameraDistanceAu)
+    this.#applyHeliosphereWeight()
+  }
+
+  // @noalloc
+  setWeight(tierWeight: number): void {
+    this.#tierWeight = tierWeight
+    this.#applyHeliosphereWeight()
+  }
+
+  // @noalloc
+  #applyHeliosphereWeight(): void {
+    // Below 100 AU every radial-normal facing term is negative. Skip the invisible
+    // shell so it cannot widen planetary depth ranges from inside the solar system.
+    const weight = this.cameraDistanceAu > 100 ? this.#tierWeight * this.#distanceWeight : 0
+    this.opacity.value = weight
+    this.node.visible = weight > 0
+  }
+
+  // @noalloc
+  nearestUnitsFrom(x: number, y: number, z: number): number {
+    const vertices = this.#verticesUnits
+    let nearestSquared = Infinity
+    for (let i = 0; i < vertices.length; i += 3) {
+      const dx = x + vertices[i]!
+      const dy = y + vertices[i + 1]!
+      const dz = z + vertices[i + 2]!
+      const squared = dx * dx + dy * dy + dz * dz
+      if (squared < nearestSquared) nearestSquared = squared
+    }
+    return Math.sqrt(nearestSquared)
+  }
+
+  dispose(): void {
+    this.node.geometry.dispose()
+    this.node.material.dispose()
+  }
+}

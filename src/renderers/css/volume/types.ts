@@ -1,6 +1,7 @@
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { PhysicalCameraPose, PositionM } from '@cssearth/engine';
 import type { WorldCameraViewport, WorldCameraPose } from '../navigation/world-camera.js';
+import type { PreparedCssSky } from '../sky/types.js';
 
 export type VolumeAxis = 'x' | 'y' | 'z';
 export type VolumeVector = readonly [number, number, number];
@@ -36,6 +37,7 @@ export interface PreparedCssVolume {
   readonly resources: readonly { readonly path: string; readonly sha256: string; readonly bytes: number; readonly width: number; readonly height: number }[];
   readonly provenance: unknown;
   readonly approximation: unknown;
+  readonly sky?: PreparedCssSky;
 }
 
 export interface VolumeCameraPublication {

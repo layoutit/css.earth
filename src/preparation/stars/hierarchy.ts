@@ -1,5 +1,6 @@
 import type { Point3, PreparedStar, PreparedStarNode, Rgb } from './types.js';
 import { nearestColor } from './color.js';
+import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.js';
 
 /** Every input row occurs exactly once in the reordered array. Internal bounds contain its actual members. */
 export function prepareStarHierarchy(input: readonly PreparedStar[], colors: readonly Rgb[], leafSize: number, maximumDepth: number) {
@@ -14,11 +15,11 @@ export function prepareStarHierarchy(input: readonly PreparedStar[], colors: rea
       flux += weight; px += row.positionUnits[0]*weight; py += row.positionUnits[1]*weight; pz += row.positionUnits[2]*weight;
       red += color[0]*weight; green += color[1]*weight; blue += color[2]*weight;
     }
-    const positionUnits: Point3 = [px/flux, py/flux, pz/flux];
+    const positionUnits = hierarchyPosition([px/flux, py/flux, pz/flux]);
     let radiusUnits = 0;
     for (const row of rows) radiusUnits = Math.max(radiusUnits, Math.hypot(row.positionUnits[0]-positionUnits[0], row.positionUnits[1]-positionUnits[1], row.positionUnits[2]-positionUnits[2]));
     const children: number[] = [];
-    nodes.push({ positionUnits, radiusUnits, absoluteMagnitude: -2.5*Math.log10(flux), colorIndex: nearestColor([red/flux,green/flux,blue/flux], colors), first, count: rows.length, children });
+    nodes.push({ positionUnits, radiusUnits: hierarchyRadius(radiusUnits), absoluteMagnitude: hierarchyMagnitude(-2.5*Math.log10(flux)), colorIndex: nearestColor([red/flux,green/flux,blue/flux], colors), first, count: rows.length, children });
     if (rows.length <= leafSize) stars.push(...rows);
     else {
       const mid: Point3 = [(min[0]+max[0])/2,(min[1]+max[1])/2,(min[2]+max[2])/2];

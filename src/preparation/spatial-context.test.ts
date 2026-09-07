@@ -6,6 +6,30 @@ import type { OrbitalState } from './spatial-context.js';
 
 const sourcePath = 'src/planets/sun/source/navigation/universe.json';
 
+test('prepared volume opacity preserves authored grading and validates bounded levels and ordered distances', async () => {
+  const raw = JSON.parse(await readFile(sourcePath, 'utf8'));
+  const source = parseWorldContextSource(raw), profile = source.volume.opacityProfile!;
+  assert.deepEqual(profile, raw.volume.opacityProfile);
+  assert.equal(profile.nearOpacity, 0); assert.equal(profile.fullOpacity, 1);
+  assert(profile.fadeStartDistanceM > source.system.hiddenDistanceM, 'NASA stays opaque throughout the prepared Solar System');
+  const brightness = source.volume.brightnessProfile!;
+  assert.deepEqual(brightness, raw.volume.brightnessProfile);
+  assert(profile.fadeStartDistanceM < brightness.fadeStartDistanceM && profile.fullDistanceM > brightness.fadeStartDistanceM,
+    'NASA remains present while the faint incoming volume starts brightening');
+  assert(profile.fullDistanceM < brightness.fullDistanceM, 'the panorama retires before the exterior galaxy reaches full brightness');
+  const prepared = prepareWorldContext({ ...source, bodies: [] }, {}, {});
+  assert.deepEqual(prepared.volume.opacityProfile, profile);
+  assert.deepEqual(prepared.volume.brightnessProfile, brightness);
+  const { opacityProfile: _profile, brightnessProfile: _brightness, ...legacyVolume } = raw.volume;
+  assert.equal(parseWorldContextSource({ ...raw, volume: legacyVolume }).volume.opacityProfile, undefined);
+  assert.equal(parseWorldContextSource({ ...raw, volume: legacyVolume }).volume.brightnessProfile, undefined);
+  for (const invalid of [{ ...profile, model: 'linear' }, { ...profile, nearOpacity: -.01 }, { ...profile, fullOpacity: 1.01 },
+    { ...profile, fullOpacity: NaN }, { ...profile, nearOpacity: undefined }, { ...profile, fadeStartDistanceM: 0 },
+    { ...profile, fullDistanceM: profile.fadeStartDistanceM }, { ...profile, runtimeExposure: true }]) {
+    for (const key of ['opacityProfile', 'brightnessProfile']) assert.throws(() => parseWorldContextSource({ ...raw, volume: { ...raw.volume, [key]: invalid } }), /opacity/i);
+  }
+});
+
 test('stellar handoff survives preparation and rejects missing or out-of-order ranges', async () => {
   const raw = JSON.parse(await readFile(sourcePath, 'utf8')) as Record<string, unknown>;
   const expected = { objectId:'stellar-neighbourhood',fadeStartDistanceM:1.495978707e13,fullDistanceM:3.085677581491367e15 };
