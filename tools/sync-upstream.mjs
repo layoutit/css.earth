@@ -229,11 +229,14 @@ const toPosix = (path) => path.split(sep).join("/");
 // would emit dist. Both are gitignored and invisible to the manifest.
 const IGNORED_DIRECTORIES = new Set(["node_modules", "dist", ".cache", "coverage"]);
 
-// Local guides and sectioned scientific records survive upstream refreshes.
+// Local body models, their checks, guides and scientific records survive refreshes.
 export function locallyMaintainedFile(target, rel) {
   if (target.id !== "astronomy") return false;
   return ["README.md", "AGENTS.md", "CLAUDE.md", "tools/fetch-fixtures.mjs",
-    "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs"].includes(rel) ||
+    "tools/generate-satellites.mjs", "tools/lib/write-record-sections.mjs",
+    "tools/fetch-rotation-fixtures.mjs", "src/__fixtures__/rotation.ts",
+    "src/bodies.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
+    "src/modelAccuracy.ts", "src/rotation.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||
     /^src\/(?:data\/satelliteElements\.data|__fixtures__\/horizons)(?:\.[a-z-]+)?\.ts$/.test(rel);
 }
 
@@ -501,7 +504,7 @@ async function syncPackage(pkg, { root, upstream, license, allowDirty, log }) {
     identityRules: Object.fromEntries(
       IDENTITY_RULES.map((rule) => [rule.id, rule.description]),
     ),
-    localMaintenance: "Guides and sectioned scientific records are maintained locally and preserved by sync.",
+    localMaintenance: "Body models, their checks, guides and scientific records are maintained locally and preserved by sync.",
     locallyMaintainedFiles: (await listFiles(target.dest)).map(file => toPosix(relative(target.dest, file))).filter(rel => locallyMaintainedFile(target, rel)),
     rewrittenFiles: rewritten,
     excludedFiles: excluded,

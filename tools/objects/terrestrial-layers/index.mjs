@@ -73,7 +73,7 @@ export function parseTerrestrialProfile(value) {
     const policy = observation.validity;
     if (!/^[a-z][a-z0-9-]*$/.test(observation.id) || observationIds.has(observation.id) ||
         (observation.monochromeBase && !observationIds.has(observation.monochromeBase)) ||
-        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome'].includes(policy?.kind)) {
+        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(policy?.kind)) {
       throw new TypeError('Invalid observation identity, validity policy, or fallback ordering.');
     }
     const byteImage = ['image-monochrome-no-data', 'image-rgb-no-data'].includes(policy.kind);
@@ -84,7 +84,7 @@ export function parseTerrestrialProfile(value) {
     if (byteImage && policy.noData !== null && (!Number.isInteger(policy.noData) || policy.noData < 0 || policy.noData > 255)) {
       throw new TypeError('Byte observation no-data must be an exact byte value.');
     }
-    if (policy.kind === 'geotiff-float-monochrome' &&
+    if (['geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(policy.kind) &&
         (!Array.isArray(policy.displayRange) || policy.displayRange.length !== 2 || !policy.displayRange.every(Number.isFinite) ||
          !(policy.displayRange[0] < policy.displayRange[1]) || !(policy.specialValueMagnitude > 0) ||
          !(policy.resolutionMeters > 0) || !Array.isArray(policy.origin) || policy.origin.length !== 2 || !policy.origin.every(Number.isFinite))) {

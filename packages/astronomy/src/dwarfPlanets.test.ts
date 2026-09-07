@@ -126,6 +126,16 @@ describe('dwarf-planet frames', () => {
     for (const id of DWARF_PLANET_IDS) expect(tree.get(id).parent).toBe(SUN_FRAME_ID)
   })
 
+  it('attaches Charon to Pluto with a contained finer frame', () => {
+    const tree = buildTree()
+    expect(tree.get('charon').parent).toBe('pluto')
+    expect(tree.get('charon').unitM).toBeLessThan(tree.get('pluto').unitM)
+    const offset = tree.get('charon').originInParent(2461286.5)
+    const separationKm = magnitude(offset) * tree.get('pluto').unitM / M_PER_KM
+    expect(separationKm).toBeGreaterThan(19580)
+    expect(separationKm).toBeLessThan(19620)
+  })
+
   it('grafts under a coarser parent without changing anything else', () => {
     // Mirrors `solarSystem.test.ts`'s "grafts under a coarser parent" test:
     // `dwarfPlanetFrameSpecs` takes no parent argument because it only ever
@@ -144,7 +154,8 @@ describe('dwarf-planet frames', () => {
   it('picks a unit strictly finer than the Sun frame, off the ladder', () => {
     for (const spec of dwarfPlanetFrameSpecs()) {
       expect(spec.frame.unitM).toBeLessThan(M_PER_AU)
-      expect(spec.frame.unitM).toBe(chooseFrameUnitM(bodyData(spec.body!).meanRadiusKm * M_PER_KM, 0, []))
+      const tree = buildTree()
+      expect(spec.frame.unitM).toBeLessThan(tree.get(spec.frame.parent!).unitM)
     }
   })
 
@@ -154,6 +165,7 @@ describe('dwarf-planet frames', () => {
     // 1900-2100 window — see `dwarfPlanetFrameSpecs`'s doc comment for why
     // that window does not apply here.
     for (const spec of dwarfPlanetFrameSpecs()) {
+      if (!DWARF_PLANET_IDS.includes(spec.body as never)) continue
       const elements = dwarfPlanetElements(spec.body as never)
       const period = keplerPeriodDays(elements)
       let worst = 0

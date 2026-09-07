@@ -60,7 +60,9 @@ export function scienceMapPoint(longitude, latitude, grid) {
     const distance = 2 * radius * Math.tan(Math.PI / 4 - sign * latitude * radians / 2);
     return [distance * Math.sin(angle), -sign * distance * Math.cos(angle)];
   }
-  return [(longitude - grid.centerLongitude) * radians * radius, latitude * radians * radius];
+  const delta = longitude - grid.centerLongitude;
+  const wrapped = grid.wrapLongitude ? ((delta + 180) % 360 + 360) % 360 - 180 : delta;
+  return [wrapped * radians * radius, latitude * radians * radius];
 }
 
 export async function loadScienceSurface(root, lens) {

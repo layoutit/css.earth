@@ -32,13 +32,7 @@ export interface BodyData {
 }
 
 export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
-/**
- * The five IAU-recognised dwarf planets this package places. Each orbits the
- * Sun directly — no barycentre level, because moons are out of scope (Charon,
- * Dysnomia, Namaka/Hi'iaka, S/2015 (136472) 1 are none of them placed here)
- * and there is therefore no mass offset between "the body" and "the system"
- * to account for, unlike the eight planets.
- */
+/** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId
 
@@ -116,6 +110,7 @@ export const BODIES: Record<BodyId, BodyData> = {
 
   triton: body('triton', 'Triton', '801', 1352.6, 1428.495, 'neptune'),
   proteus: body('proteus', 'Proteus', '808', 208, 2.58, 'neptune'),
+  charon: body('charon', 'Charon', '901', 606, 106.10, 'pluto'),
 
   // Dwarf planets. `horizonsCode` is the exact string this package's Horizons
   // queries use (`generate-dwarf-planets.mjs`, `fetch-fixtures.mjs`) — for
@@ -163,16 +158,11 @@ export const bodyData = (id: BodyId): BodyData => {
  * it once per planet per simulation tick, and a `filter` there would allocate
  * eight arrays a frame to answer a question about static data.
  */
-const MOONS_OF: Record<PlanetId, readonly BodyId[]> = Object.fromEntries(
-  PLANET_IDS.map((planet) => [
-    planet,
-    planet === 'earth'
-      ? (['moon'] as readonly BodyId[])
-      : (Object.keys(SATELLITE_ELEMENTS) as SatelliteId[]).filter((id) => SATELLITE_ELEMENTS[id].parent === planet),
-  ]),
-) as Record<PlanetId, readonly BodyId[]>
+const MOONS_OF = new Map<BodyId, readonly BodyId[]>(
+  BODY_IDS.map(parent => [parent, BODY_IDS.filter(id => BODIES[id].parent === parent && parent !== 'sun')]),
+)
 
-export const moonsOf = (planet: PlanetId): readonly BodyId[] => MOONS_OF[planet]
+export const moonsOf = (parent: BodyId): readonly BodyId[] => MOONS_OF.get(parent)!
 
 /**
  * GM of a planet plus every moon this package carries for it — the mass that

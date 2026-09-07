@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "charon",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; USGS Astrogeology",
+    "license": "Public domain US mission imagery; cite the map authors",
+    "licenseEvidence": [
+      "https://www.usgs.gov/media/images/charon-new-horizons-global-mosaic-300m"
+    ],
+    "acquisition": "Restore the pinned source through source/preparation/acquisition.json.",
+    "redistribution": "Retain mission and map author credits.",
+    "width": 12693,
+    "height": 6347,
+    "projection": {
+      "type": "equirectangular",
+      "longitudeDegrees": [
+        -180,
+        180
+      ],
+      "latitudeDegrees": [
+        90,
+        -90
+      ],
+      "longitudeDirection": "east-positive",
+      "referenceRadiusMeters": 606000
+    },
+    "id": "new-horizons-charon-monochrome",
+    "path": "observations/charon-mosaic.tif",
+    "origin": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
+    "catalog": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m",
+    "consumers": [
+      "surfaces",
+      "navigation"
+    ],
+    "lensId": "normal",
+    "label": "Monochrome",
+    "falseColor": false,
+    "coverage": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
+    "expectedBytes": 80613890,
+    "expectedSha256": "4a874809e0a33a851cd026b8e4647f5875ed15807e677d413812367509564b00"
+  },
+  "operations": [
+    {
+      "type": "extract",
+      "left": 5500,
+      "top": 2100,
+      "width": 1800,
+      "height": 1800
+    },
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "ensure-alpha"
+    },
+    {
+      "type": "ellipse-mask",
+      "cx": 0.5,
+      "cy": 0.5,
+      "rx": 0.5,
+      "ry": 0.5
+    },
+    {
+      "type": "png"
+    }
+  ]
+}
