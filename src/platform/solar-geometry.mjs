@@ -154,6 +154,12 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     -0.8009238166767914,
     -0.3254083400169346,
   ]),
+  // subsolar latitude -29.920°, longitude 93.429°
+  triton: Object.freeze([
+    -0.05184493131562652,
+    0.8651683290178136,
+    -0.4987944121192641,
+  ]),
   // subsolar latitude 60.039°, longitude 101.955°
   pluto: Object.freeze([
     -0.10345111685687171,
@@ -306,6 +312,12 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     -0.4684123104310973,
     -0.09286796848440412,
     0.8786156428531084,
+  ]),
+  // pole tilt to the ecliptic 54.560°, Sun ecliptic latitude 1.373°
+  triton: Object.freeze([
+    0.7072743556803884,
+    0.40438777737428105,
+    0.579856457502355,
   ]),
   // pole tilt to the ecliptic 112.816°, Sun ecliptic latitude 4.198°
   pluto: Object.freeze([
@@ -461,6 +473,12 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.470816776814121,
     -0.06209060087682991,
     0.8800433625413673,
+  ]),
+  // orbital inclination to the ecliptic 123.700°, obliquity to the orbit 178.064°
+  triton: Object.freeze([
+    0.033730223012512515,
+    0.0020246859465804716,
+    -0.9994289232868656,
   ]),
   // orbital inclination to the ecliptic 17.030°, obliquity to the orbit 119.595°
   pluto: Object.freeze([
@@ -618,6 +636,12 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     0.5894009807760147,
     -0.3483565249043778,
   ]),
+  // flight-path angle -0.001°
+  triton: Object.freeze([
+    -0.05436578777424124,
+    0.9985210692643659,
+    0.00018802880930249977,
+  ]),
   // flight-path angle 13.106°
   pluto: Object.freeze([
     -0.9447602764776404,
@@ -773,6 +797,12 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     0.5228625336123317, 0.772480363604735, 0.3604009694626106,
     -0.46709144483341436, 0.6133134946683321, -0.636923966750468,
     -0.7130500354869403, 0.16468346942791218, 0.6814976168624943,
+  ]),
+  // pole RA 304.320°, Dec 16.812°, prime meridian W 76.219°
+  triton: Object.freeze([
+    0.038352775933222866, -0.8409765196200916, 0.53971062434039,
+    0.36631121255721016, -0.490676689575897, -0.7906026067890903,
+    0.9297016511403442, 0.22802385786254112, 0.2892403155032183,
   ]),
   // pole RA 132.993°, Dec -6.163°, prime meridian W 358.208°
   pluto: Object.freeze([
@@ -1144,6 +1174,23 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 1.7707475678590865,
     perihelionAu: 29.772148559243192,
     aphelionAu: 30.37441283762429,
+  }),
+  // a 0.0023717 AU, e 0.000045681, perihelion 0.0023716 AU, aphelion 0.0023718 AU
+  triton: Object.freeze({
+    centerBodyId: "neptune",
+    centerPositionAu: Object.freeze([0.0023669020608411335,0.00012889686832831334,0.00008014287777002764]),
+    semiMajorAxisAu: 0.002371664093836469,
+    eccentricity: 0.00004568070688645848,
+    heliocentricDistanceAu: 29.878603950383205,
+    perihelionDirection: Object.freeze([
+      0.8952484960244746,
+      0.44447948216396477,
+      0.031114631625161614,
+    ]),
+    trueAnomalyDegrees: 203.27473737857414,
+    inclinationDegrees: 123.7003861858392,
+    perihelionAu: 0.002371555754544165,
+    aphelionAu: 0.0023717724331287727,
   }),
   // a 39.619 AU, e 0.24745, perihelion 29.815 AU, aphelion 49.423 AU
   pluto: Object.freeze({

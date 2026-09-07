@@ -1,0 +1,195 @@
+{
+  "schema": "csstriton-authoritative-sources@1",
+  "inputs": [
+    {
+      "credit": "NASA/JPL; USGS Astrogeology",
+      "license": "Public domain / CC0",
+      "licenseEvidence": [
+        "https://www.usgs.gov/data/high-resolution-voyager-2-images-neptunes-moon-triton"
+      ],
+      "acquisition": "Restore the pinned source through source/preparation/acquisition.json.",
+      "redistribution": "Retain NASA/JPL and author credits.",
+      "id": "usgs-2023-triton-clear-frames",
+      "path": "observations/fully_processed.zip",
+      "origin": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594",
+      "catalog": "https://doi.org/10.5066/P9MGH7FB",
+      "consumers": [
+        "monochrome-frames"
+      ],
+      "label": "Monochrome",
+      "falseColor": false,
+      "coverage": "Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
+      "expectedBytes": 103721158,
+      "expectedSha256": "59c2a4133472869afddc42c00b5a9becd7c0dda028ac646490af933ac0ce2fac"
+    },
+    {
+      "credit": "NASA/JPL; Paul Schenk, Lunar and Planetary Institute",
+      "license": "NASA/JPL imagery; LPI permits public map use with the stated credit",
+      "licenseEvidence": [
+        "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
+      ],
+      "acquisition": "Restore the pinned source through source/preparation/acquisition.json.",
+      "redistribution": "Retain NASA/JPL and author credits.",
+      "id": "voyager-triton-enhanced-color",
+      "path": "observations/tnmap-cyl-KH.jpg",
+      "origin": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg",
+      "catalog": "https://www.lpi.usra.edu/icy_moons/neptune/triton/",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 14138,
+      "height": 7069,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1352600
+      },
+      "coverage": "Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
+      "expectedBytes": 12442504,
+      "expectedSha256": "ff533af3163f53cc5560cd983cfe0f06b1c2cd0f3db36518d4c5cc5f5ddfeabb"
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "voyager-triton-sun-vectors",
+      "path": "photometry/horizons-sun.json",
+      "expectedBytes": 12149,
+      "expectedSha256": "0204e69032f964e6cde29c866bea48fff33c34d6db2947ab0bd2d43107c18779",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40801%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272447763.752269036%0A2447763.753363481%0A2447763.754474592%0A2447763.7567134807%0A2447763.7578079253%0A2447763.758919036%0A2447763.7599968025%0A2447763.7611079137%0A2447763.7621968025%0A2447763.763330136%0A2447763.764441247%0A2447763.765530136%0A2447763.766663469%0A2447763.76777458%0A2447763.7717134575%0A2447763.777269013%0A2447763.7828078903%0A2447763.7889356567%0A2447763.7944912123%0A2447763.8000300894%0A2447763.8033800893%0A2447763.806713411%0A2447763.8133800663%0A2447763.8167133997%0A2447763.820030066%0A2447763.823380055%0A2447763.826713388%0A2447763.830030055%0A2447763.8333633766%0A2447763.83669671%0A2447763.8400300434%0A2447763.8589188973%0A2447763.8622411196%0A2447763.863363342%0A2447763.864463342%0A2447763.865585564%0A2447763.866685564%0A2447763.867807775%0A2447763.868907775%0A2447763.870029997%0A2447763.871129997%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics",
+      "license": "Public data",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/"
+      ],
+      "acquisition": "Pinned source response",
+      "redistribution": "Retain NASA/JPL credit",
+      "consumers": [
+        "photometry"
+      ]
+    },
+    {
+      "id": "voyager-triton-observer-vectors",
+      "path": "photometry/horizons-observer.json",
+      "expectedBytes": 13670,
+      "expectedSha256": "1f3e3ca7884365b866b5c26dc6243932dec7da61e927ed5614a5633a3382e32d",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-32%27&CENTER=%27500%40801%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272447763.752269036%0A2447763.753363481%0A2447763.754474592%0A2447763.7567134807%0A2447763.7578079253%0A2447763.758919036%0A2447763.7599968025%0A2447763.7611079137%0A2447763.7621968025%0A2447763.763330136%0A2447763.764441247%0A2447763.765530136%0A2447763.766663469%0A2447763.76777458%0A2447763.7717134575%0A2447763.777269013%0A2447763.7828078903%0A2447763.7889356567%0A2447763.7944912123%0A2447763.8000300894%0A2447763.8033800893%0A2447763.806713411%0A2447763.8133800663%0A2447763.8167133997%0A2447763.820030066%0A2447763.823380055%0A2447763.826713388%0A2447763.830030055%0A2447763.8333633766%0A2447763.83669671%0A2447763.8400300434%0A2447763.8589188973%0A2447763.8622411196%0A2447763.863363342%0A2447763.864463342%0A2447763.865585564%0A2447763.866685564%0A2447763.867807775%0A2447763.868907775%0A2447763.870029997%0A2447763.871129997%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics",
+      "license": "Public data",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/"
+      ],
+      "acquisition": "Pinned source response",
+      "redistribution": "Retain NASA/JPL credit",
+      "consumers": [
+        "photometry"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 6782,
+      "expectedSha256": "a9db6ef3ba900686250b9e18c71277b7f81ec6399a963ca6f8fcb857502937fb",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/usgs-metadata.xml",
+      "expectedBytes": 18754,
+      "expectedSha256": "c7f20eeb2022f308eb002914a01f36943d75e3aa1dd916f3b143470d759d05c7",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 978,
+      "expectedSha256": "2f8ee7265450143ec1652b65ff793dd1fcd25feabf988b1c167dcdae57c70ffb",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 2044,
+      "expectedSha256": "7a0b31bc9c5fb16ebd8b4c631d13248d9219aac6539286fff8cb398fb3db53e6",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3846,
+      "expectedSha256": "931308680fdd1456c0dd0d1a16a14b4880c3084043aad766c5eb06d84fded2e0",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 29,
+      "expectedSha256": "7439571ba65953b5180445c9bc1b68d6086904d7182c157a468f0f23b8698bd6",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2409,
+      "expectedSha256": "410024b9808e2301697c2d8467849104ddc56f239e33d50dd291d58e8b1b1d24",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 849,
+      "expectedSha256": "cb4de5e6903336c7735cc075cd6671337eecf351e8e938eb8e7e9fd4b914b452",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    }
+  ],
+  "generatedIntermediates": []
+}
