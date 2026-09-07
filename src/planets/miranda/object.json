@@ -23,7 +23,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "f35d2e47694ee35650c9fe3d9ec80727cf62ef6ac3544d8403c81a372236f75d"
+          "sha256": "e7c53f9da89cf32984076b4ce4c52aa6191a2385184464cada3316f7b132b398"
         },
         {
           "id": "content",
@@ -103,6 +103,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2c4eb37172c17b8aa7c59111f2cf9c76851af52d9e776d6f64e1ddcea4f52e80"
+    "sha256": "e614edc7586e27ed790c84d5ba84c920ef53ec8e1a07ae5b27eea6d0c161b68d"
   }
 }

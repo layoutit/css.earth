@@ -6,11 +6,11 @@
   "publicBase": "/scenes/miranda/",
   "distanceAu": 19.2,
   "raster": {
-    "width": 1440,
-    "height": 720,
+    "width": 5760,
+    "height": 2880,
     "bandCount": 16,
-    "gutter": 16,
-    "poleSize": 512,
+    "gutter": 64,
+    "poleSize": 1024,
     "surfaceQuality": 95,
     "reportMissingPixels": true,
     "observations": [
@@ -42,8 +42,8 @@
     "radius": 230,
     "radiusKm": 235.7,
     "camera": {
-      "initialScenePitchDegrees": -15.360353235744041,
-      "defaultControlYawDegrees": -95.34202350653379
+      "initialScenePitchDegrees": 23.022753656808817,
+      "defaultControlYawDegrees": -48.195796262497225
     },
     "mapUrl": "/scenes/miranda/miranda-normal-surface@2x.webp",
     "polesUrl": "/scenes/miranda/miranda-normal-poles@2x.webp"
