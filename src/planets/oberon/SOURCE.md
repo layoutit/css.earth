@@ -25,9 +25,34 @@ The 5760 × 2880 prepared sampling grid, 64-pixel atlas gutters and 1024-pixel p
 | [Schenk and Moore 2023 topography overview](https://www.hou.usra.edu/meetings/uranusflagship2023/pdf/8140.pdf) and [2020 source paper](https://doi.org/10.1098/rsta.2020.0102) | Supporting scientific context. The authors explicitly describe the lack of extended topography on Oberon and Umbriel, confirming why this package has no Elevation lens. Paper figures are not substitutes for measured raster coverage. |
 | [JPL simulator Oberon texture](https://space.jpl.nasa.gov/tmaps/uranus.html), 1440 × 720, 4 pixels/degree | Superseded as a display source. It derives from USGS/Voyager grayscale imagery, but does not provide the selected release's revised control metadata and floating-point source values. Its nominal pixel count is not evidence of more native detail. No duplicate lens is added. |
 | [PDS Voyager 2 Uranus ISS EDR archive](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=VG2-U-ISS-2-EDR-V1.0) | Underlying observation archive, excluded from this presentation in favor of the already corrected and controlled release. Raw frames would require a separate radiometric and pointing reconstruction; PDS warns about errors in original emission/incidence metadata. |
-| [Helfenstein et al. 1991 color photometry](https://ntrs.nasa.gov/citations/19910046112) | Useful distinct color/albedo candidate, unresolved as a reusable mapped layer. The paper presents terrain photometry and color ratios; a qualified registered digital raster with complete band/coverage metadata was not obtained in this pass. This is not a claim that those observations are absent. |
+| [Helfenstein et al. 1991 color photometry](https://ntrs.nasa.gov/citations/19910046112) | Distinct color/albedo candidate. The cited calibrated Voyager sequence was reconstructed in the final trial below; its mounted visual quality did not qualify a second lens for this merge. |
 | [JPL PIA00034 color disc](https://www.jpl.nasa.gov/images/pia00034-oberon-at-voyager-closest-approach/) | Excluded from mapped lenses. The published disc reconstructs color from violet, clear and green filters; the press image alone does not supply a calibrated, registered surface product or new coverage. |
 | [Geologic map manuscript catalog](https://planetarymapping.elte.hu/map-catalog/map/6000/geologic-map-of-oberon/) | Unresolved interpretive candidate. The catalog records a manuscript color plate but supplies no downloadable qualified geospatial units or source projection/coverage metadata. It is not used as a scientific raster. |
+
+## Final color reconstruction trial (2026-09-07)
+
+Tested the actual PDS calibrated, distortion-corrected frames `C2683625_GEOMED.IMG`
+(CLEAR), `C2683627_GEOMED.IMG` (VIOLET) and `C2683629_GEOMED.IMG` (GREEN), from
+the [VGISS_7206 C26836XX directory](https://pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26836XX/).
+These are the approximately 5 km/pixel sequence identified by
+[Helfenstein et al.](https://www.lpi.usra.edu/meetings/lpsc1990/pdf/1250.pdf).
+The PDS labels provide I/F calibration and pixel field of view; the 1000 × 1000
+image grid contains a roughly 300-pixel moon disc.
+
+A perspective reconstruction matched the clear frame to this package's mapped
+source, then registered the other bands to the clear image. Final image-space
+RMS residuals were 0.55 pixels (clear), 0.86 (violet) and 1.07 (green). A bounded
+Lunar-Lambert trial used current Horizons/NAIF capture geometry, preserved
+measured channel ratios, and withheld unstable limb/terminator samples. Green,
+clear and violet were displayed as RGB, with monochrome outside color coverage;
+no monochrome detail was injected into the color bands.
+
+**Not included:** matched Chrome globe views remained noticeably softer than the
+published monochrome mosaic, with chromatic fringes and a visible coverage
+transition. The trial establishes an accessible color source and feasible coarse
+registration, but does not qualify a second lens for this merge. Further work
+would need better inter-band registration and a sharper, validated reconstruction;
+the existing observed-color candidate is no longer merely a missing-download issue.
 
 ## Physical context and restoration
 
