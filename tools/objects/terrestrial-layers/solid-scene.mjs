@@ -9,7 +9,7 @@ import { prepareAstrometricSkySceneRegistration } from '../../../src/platform/as
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mjs';
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mjs';
 import { PREPARED_PRESENTATION_SCHEMA } from '../../../src/platform/prepared-presentation-contract.mjs';
-import { preparedSkyResources, preparedResourcePool } from '../../../src/platform/prepared-object-assets.mjs';
+import { preparedSunResources, preparedResourcePool } from '../../../src/platform/prepared-object-assets.mjs';
 import { prepareCssomDeclarationReads } from '../../prepared-cssom.mjs';
 import { createPreparedNodeTree } from '../../prepared-node-tree.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from '../../../site/prepared-navigation-markers.mjs';
@@ -55,7 +55,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       owner: 'object', source: entry, operations: config.parentMarker.operations },
     { sourcePath: resolve(sourceDirectory, entry.path), tileSize: config.parentMarker.tileSize });
     const filename = `${id}-parent-${entry.bodyId}.webp`;
-    await sharp(png).webp({ lossless: true }).toFile(resolve(publicDirectory, filename));
+    await sharp(png).webp({ quality: 90, alphaQuality: 100, smartSubsample: true, effort: 4 }).toFile(resolve(publicDirectory, filename));
     parentMarker = { id: entry.bodyId, url: `${config.publicBase}${filename}`, index: 0, count: 1, size: config.parentMarker.size };
     await writeFile(resolve(outputDirectory, 'parent-marker.json'), JSON.stringify(parentMarker));
   }
@@ -66,7 +66,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   }
   await sharp(point, { raw: { width: 32, height: 32, channels: 4 } }).webp({ lossless: true }).toFile(resolve(publicDirectory, `${id}-system-point.webp`));
   const entries = [
-    ...preparedSkyResources(plan.sky, plan.sun, 'mounted'),
+    ...preparedSunResources(plan.sun, 'mounted'),
     { key: 'lighting', url: lighting.url, pool: 'mounted' },
     { key: 'system-point', url: pointUrl, pool: 'mounted' },
     ...(parentMarker ? [{ key: 'parent-marker', url: parentMarker.url, pool: 'mounted' }] : []),
@@ -101,8 +101,8 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       { kind: 'attribute', target: -1, name: 'data-lens', value: s.id },
       { kind: 'class', target: -1, name: `${id}-hide-orbit`, value: !orbit },
     ],
-    materials: [{ track: 'lighting', bank: 'atlas', mode: shadows ? 'frames' : 'fixed', enabled: !s.scientific,
-      rotationEnabled: shadows && !s.scientific, frameOverride: null, clearWhenHidden: true, fixedMode: 'full-phase-curvature' }],
+    materials: [{ track: 'lighting', bank: 'atlas', mode: shadows ? 'frames' : 'fixed', enabled: true,
+      rotationEnabled: shadows, frameOverride: null, clearWhenHidden: true, fixedMode: 'full-phase-curvature' }],
   }))));
   const atlasUrl = config.presentation.markerAtlasUrl;
   const sprite = bodyId => {

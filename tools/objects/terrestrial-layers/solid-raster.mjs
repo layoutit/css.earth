@@ -7,7 +7,9 @@ import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-su
 import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../src/platform/prepare-solid-body-surface.mjs';
 import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor } from './scientific-raster.mjs';
-import {prepareMaskedObservation} from './observed-geotiff.mjs';
+import {prepareMaskedObservation, prepareFloatObservation} from './observed-geotiff.mjs';
+import { prepareByteObservation } from './observed-image.mjs';
+import { preparePdsByteMosaic } from './pds-byte-mosaic.mjs';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mjs';
 
 export function createRasterEmitter(publicDirectory, publicBase) {
@@ -20,10 +22,18 @@ export function createRasterEmitter(publicDirectory, publicBase) {
   };
 }
 
-async function readObservation(sourceDirectory, entry, validity, width, height) {
+// Terminal display encoding only. Source maps stay lossless for pole sampling.
+function surfaceEncoding(config) {
+  return config.raster.surfaceQuality === undefined ? { lossless: true, effort: 4 }
+    : { quality: config.raster.surfaceQuality, alphaQuality: 100, effort: 4, smartSubsample: true };
+}
+
+export async function readObservation(sourceDirectory, entry, validity, width, height) {
   const path = resolve(sourceDirectory, entry.path);
+  if (validity.kind === 'geotiff-float-monochrome') return prepareFloatObservation(path, entry, validity, width, height);
   const metadata = await sharp(path).metadata();
   if (metadata.width !== entry.width || metadata.height !== entry.height) throw new Error(`Observation source dimensions changed: ${entry.path}`);
+  if (['image-monochrome-no-data', 'image-rgb-no-data'].includes(validity.kind)) return prepareByteObservation(path, entry, validity, width, height);
   if(validity.kind==='geotiff-rgb-alpha')return prepareMaskedObservation(path,entry,validity,width,height);
   if (validity.kind === 'south-connected-black') {
     const source = await sharp(path).removeAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -90,10 +100,21 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       ...(observation.sourceGeoreference ? { sourceGeoreference: observation.sourceGeoreference } : {}),
     }));
   }
+  for (const recipe of config.raster.mosaics ?? []) {
+    const tiles = await source.validateGroup(recipe.consumer);
+    const { rgb, missing, grid } = await preparePdsByteMosaic(sourceDirectory, tiles, width, height);
+    surfaces.push(await packSurface(recipe.id, rgb, missing, { ...recipe.metadata,
+      sourceIds: tiles.map(tile => tile.id), sourceGrid: grid }));
+  }
   for (const lens of config.raster.scientific ?? []) {
     await source.validateGroup(lens.consumer);
     const entry = source.manifest.inputs.find(input => input.lensId === lens.id);
     if (!entry || entry.path !== lens.path) throw new Error(`Scientific source ${lens.id} differs from its manifest.`);
+    const additionalSources = (lens.additionalGrids ?? []).map(grid => {
+      const input = source.manifest.inputs.find(input => input.path === grid.path && input.consumers.includes(lens.consumer));
+      if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
+      return {id: input.id, sha256: input.expectedSha256, width: input.width, height: input.height};
+    });
     const raster = await loadScienceSurface(sourceDirectory, lens);
     const { rgb, missing } = paintScienceSurface(raster, lens, width, height);
     const scale = Buffer.alloc(256 * 3);
@@ -101,6 +122,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const legend = await emit(`${config.namespace}-${lens.id}-legend.webp`, sharp(scale, { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill' }));
     surfaces.push(await packSurface(lens.id, rgb, null, { label: lens.label, falseColor: true,
       source: { id: entry.id, sha256: entry.expectedSha256, width: entry.width, height: entry.height },
+      ...(additionalSources.length ? {additionalSources} : {}),
       projection: entry.projection, coverage: entry.coverage, scientific: true, legend,
       missingPixels: missing.reduce((sum, value) => sum + value, 0) }));
   }
@@ -128,7 +150,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const { data, ...layout } = packed, stem = `${config.namespace}-${id}`;
     const normalized = sharp(rgba, { raw: { width, height, channels: 4 } });
     const map = await emit(`${stem}-map.webp`, normalized.clone());
-    const surface = await emit(`${stem}-surface@2x.webp`, sharp(data, { raw: { width: packed.packedWidth, height: packed.packedHeight, channels: 4 } }));
+    const surface = await emit(`${stem}-surface@2x.webp`, sharp(data, { raw: { width: packed.packedWidth, height: packed.packedHeight, channels: 4 } }), surfaceEncoding(config));
     const thumbnail = await emit(`${stem}-thumbnail.webp`, normalized.clone().resize(96, 48));
     return { id, ...metadata, map, surface, thumbnail, layout,
       ...(missing && config.raster.reportMissingPixels ? { missingPixels: missing.reduce((sum, value) => sum + value, 0) } : {}) };
@@ -162,13 +184,13 @@ export async function prepareSolidMaterial({ surfaces, publicDirectory, outputDi
     const atlas = prepareSolidBodyPoleRaster(data, { width: info.width, height: info.height, tileSize: poleSize });
     const filename = `${config.namespace}-${surface.id}-poles@2x.webp`;
     surface.polesUrl = `${config.publicBase}${filename}`;
-    await sharp(atlas, { raw: { width: poleSize * 2, height: poleSize, channels: 4 } }).webp({ lossless: true }).toFile(resolve(publicDirectory, filename));
+    await sharp(atlas, { raw: { width: poleSize * 2, height: poleSize, channels: 4 } }).webp(surfaceEncoding(config)).toFile(resolve(publicDirectory, filename));
     const mean = await sharp(data, { raw: info }).resize(1, 1).removeAlpha().raw().toBuffer();
     surface.billboardColor = `#${mean.subarray(0, 3).toString('hex')}`;
   }
   const { pixels, width, height, rows } = lambertAttenuationAtlas(config.lighting);
   const filename = `${config.namespace}-lighting.webp`, url = `${config.publicBase}${filename}`;
-  await sharp(pixels, { raw: { width, height, channels: 4 } }).webp({ lossless: true }).toFile(resolve(publicDirectory, filename));
+  await sharp(pixels, { raw: { width, height, channels: 4 } }).webp({ lossless: true, quality: 100, effort: 6 }).toFile(resolve(publicDirectory, filename));
   const { columns, frameCount, logicalSize } = config.lighting;
   const frames = Array.from({ length: frameCount }, (_, frame) => ({ resource: 'lighting', frame, row: 0,
     backgroundPosition: `${-(frame % columns) * logicalSize}px ${-Math.floor(frame / columns) * logicalSize}px`,

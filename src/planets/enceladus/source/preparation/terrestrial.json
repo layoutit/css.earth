@@ -1,0 +1,121 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "enceladus",
+  "displayName": "Enceladus",
+  "publicBase": "/scenes/enceladus/",
+  "distanceAu": 9.58,
+  "raster": {
+    "width": 8192,
+    "height": 4096,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 1024,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "specialValueMagnitude": 1e+30,
+          "centerLongitude": 180,
+          "resolutionMeters": 100,
+          "origin": [
+            -804900,
+            402500
+          ],
+          "displayRange": [
+            0,
+            16500
+          ]
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "geotiff",
+        "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
+        "description": "Cassini terrain model · shaded relief",
+        "title": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies.",
+        "sourceUrl": "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk",
+        "minimum": -1,
+        "maximum": 1,
+        "colors": [
+          "#2166ac",
+          "#92c5de",
+          "#f7f7f7",
+          "#f4a582",
+          "#b35806"
+        ],
+        "labels": [
+          "≤ −1",
+          "0",
+          "≥ 1"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "grid": {
+          "width": 8049,
+          "height": 4025,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 256200,
+          "noData": -3.4028226550889045e+38,
+          "specialValueMagnitude": 1e+30,
+          "origin": [
+            -805000,
+            402600
+          ],
+          "resolutionMeters": 200
+        },
+        "relief": {
+          "referenceRadiusMeters": 256200,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 252.3,
+    "camera": {
+      "initialScenePitchDegrees": 40,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
+    "polesUrl": "/scenes/enceladus/enceladus-normal-poles@2x.webp"
+  },
+  "celestial": {
+    "sunSource": "JPL Enceladus orbit plus VSOP87 Saturn position and IAU/WGCCRE Enceladus rotation"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      211,
+      215,
+      216
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

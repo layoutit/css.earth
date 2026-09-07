@@ -9,14 +9,10 @@ export function canonicalPreparedAsset(pair, high) {
   return url;
 }
 
-export function preparedSkyResources(sky, sun, pool) {
-  return [
-    ...sky.faces.flatMap((face, index) => [
-      { key: `sky:${index}:standard`, url: canonicalPreparedAsset(face.url, face.url2x), pool },
-      { key: `sky:${index}:contrast`, url: canonicalPreparedAsset(face.highContrastUrl, face.highContrastUrl2x), pool },
-    ]),
-    ...(sun ? [{ key: "directional-sun", url: canonicalPreparedAsset(sun.asset), pool }] : []),
-  ];
+// The retained sky's selected CSS background loads on demand. Preloading both
+// modes here made every first visit download the unused high-contrast sky.
+export function preparedSunResources(sun, pool) {
+  return sun ? [{ key: "directional-sun", url: canonicalPreparedAsset(sun.asset), pool }] : [];
 }
 
 export function preparedResourcePool(id, entries, { retention = "mount", concurrency, capacity, reuse = false, ...policy } = {}) {

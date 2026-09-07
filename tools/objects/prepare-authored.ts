@@ -120,7 +120,8 @@ export async function prepareAuthoredObject({ objectDirectory, publicDirectory, 
       config: required(sources, 'terrestrial').value, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
-      values: [prepared.raster, prepared.celestial, prepared.scene, prepared.definition, prepared.content] });
+      allowPreparationArtifacts: true,
+      values: [prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
     return Object.freeze({ descriptor, sources, ...prepared });
   }

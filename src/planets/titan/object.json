@@ -1,0 +1,86 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "titan",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Titan",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "df0ff235ffbc4836bcdb60d3931f7bc34bb29284b206d9b14c7236bf727d5b0c"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "bcc1c3a1bd93a9779b74f04a7edc05d866a1632cd2cca1b3fe5bb97389f8f845"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "368b4ae5dc17b4ad70c9f7ff47c572486d9f8ad23aba5c9d325700462b904296"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "281c032a625f08b9e14edf141102b4638b0c73a80fc0112a5fd28854878663f8"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "2a541c1c03ffab4df5f04302801b2f84525bd6a3b0526ae009a1381b8a4a9bf6"
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2575.5
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "radar",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "feb4a1f8136886279d8db8ed6e7891ce69c218a316b3949b47a00d884390dd9c"
+  }
+}
