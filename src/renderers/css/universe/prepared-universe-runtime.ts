@@ -57,10 +57,12 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       };
       try {
         volumeLayer = mountPreparedCssVolume({ host: volumeHost, before: volumeEnd, payload, resolveResource });
-        pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus });
+        // Catalogue names are background metadata. Prepared objects get their navigable labels from the world context.
+        pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         spatial = mountPreparedWorldContext({ host: root, before: end, plan, sprites });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource });
         return Object.freeze({ root, destroy,
+          setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
           inspect() {
             return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect() });
           },
@@ -86,7 +88,9 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             volumeLayer!.publish({ world, viewport });
             pointField!.publish(world, viewport, 1 - fade);
             spatial!.publish(world, viewport);
-            focusPoint?.publish(world, viewport, { opacity: 1 - fade, selectedDetail: selected.id === plan.focus.id,
+            // Keep the system landmark softly visible through the galactic overview.
+            const focusOpacity = 1 - .45 * logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.camera.maximumDistanceM);
+            focusPoint?.publish(world, viewport, { opacity: focusOpacity, selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });
             stage.dataset.contextScale = fade > 0 ? 'galactic' : stellarFade > 0 ? 'stellar' : Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis])) > selected.radiusM * 100 ? 'system' : 'object';
           },

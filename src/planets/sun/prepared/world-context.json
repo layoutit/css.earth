@@ -35,7 +35,7 @@
       "proximityEnhancement": {
         "fullDistanceM": 1000000000000,
         "fadeOutDistanceM": 100000000000000,
-        "radiusMultiplier": 1.6,
+        "radiusMultiplier": 2.4,
         "brightnessMultiplier": 1.5
       }
     },
@@ -18646,8 +18646,8 @@
         "markerFullDiscPixels": 4.5
       },
       "orbitLineFade": {
-        "visibleBelowDiscHeightShare": 0.12,
-        "hiddenAboveDiscHeightShare": 0.3
+        "visibleBelowDiscHeightShare": 0.01,
+        "hiddenAboveDiscHeightShare": 0.03
       },
       "drag": {
         "model": "screen-axis-tumble"

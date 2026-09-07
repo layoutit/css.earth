@@ -182,6 +182,7 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
 
 async function renderNavigation({ projectRoot, outputRoot, descriptors }) {
   const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
+  await prepareSunIndicator({ outputRoot });
 
   for (const density of [1, 2]) {
     const tileSize = markerTileSize * density;
@@ -478,6 +479,28 @@ async function renderNavigation({ projectRoot, outputRoot, descriptors }) {
       NAVIGATION_SHARE_SOURCE.expectedSha256,
     ]),
   });
+}
+
+/** Project-authored UI outline, rasterized once at canonical 4x density. */
+export async function prepareSunIndicator({
+  outputRoot = resolve(import.meta.dirname, "../public/navigation"),
+} = {}) {
+  const points = Array.from({ length: 6 }, (_, index) => {
+    const angle = index * Math.PI / 3;
+    const radius = 7.1;
+    return [8 + Math.cos(angle) * radius, 8 + Math.sin(angle) * radius];
+  });
+  const inset = (point, neighbour) => point.map((value, axis) => value + (neighbour[axis] - value) * .12);
+  const rounded = points.map((point, index) => ({ point,
+    before: inset(point, points[(index + 5) % 6]), after: inset(point, points[(index + 1) % 6]),
+  }));
+  const xy = point => point.map(value => value.toFixed(4)).join(" ");
+  const path = `M ${xy(rounded[0].before)} ` + rounded.map(({ point, after }, index) =>
+    `Q ${xy(point)} ${xy(after)} L ${xy(rounded[(index + 1) % 6].before)}`).join(" ") + " Z";
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 16 16">` +
+    `<path d="${path}" fill="none" stroke="#dfdfdf" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
+  await mkdir(outputRoot, { recursive: true });
+  await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, "sun-indicator-hexagon.png"));
 }
 
 async function loadObjectDescriptor(planetId, projectRoot) {

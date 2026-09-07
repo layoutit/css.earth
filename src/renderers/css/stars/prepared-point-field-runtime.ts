@@ -14,7 +14,8 @@ type Matrix3 = PreparedPointFieldInput['viewRotation'];
 const key = (reference: PointReference) => `${reference.kind}:${reference.index}`;
 
 /** Projects prepared points/proxies only. The fixed pools never manufacture catalogue data or imagery. */
-export function mountPreparedCssPointField({ host, before, payload, resolveResource, occluder }: {
+export function mountPreparedCssPointField({ host, before, payload, resolveResource, occluder, showLabels = true }: {
+  showLabels?: boolean;
   host: HTMLElement; before: Element; payload: PreparedCssPointField; resolveResource(path: string): string;
   occluder?: { positionM: Vector3; radiusM: number };
 }) {
@@ -38,7 +39,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
   const outgoing = makeSlots(payload.policy.transitionSlots);
   const active = makeSlots(payload.policy.activeSlots);
   const fader = createOpacityFader(host.ownerDocument.defaultView!);
-  const labels = mountPointFieldLabels(root, payload.labels);
+  const labels = showLabels ? mountPointFieldLabels(root, payload.labels) : null;
   const coverageAnchorIndices = payload.stars.flatMap((star, index) => star.coverageAnchor ? [index] : []);
   let occluderLocal = occluder && presentPhysicalPoseInVolume({ positionM: occluder.positionM,
     orientationXyzw: [0, 0, 0, 1] }, payload.frame).positionUnits;
@@ -136,7 +137,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
     for (const slot of outgoing) write(slot, true);
     for (const slot of active) write(slot, false);
     visiblePoints = visible; individualPoints = individual;
-    labels.publish(candidates, label);
+    labels?.publish(candidates, label);
   }
 
   return Object.freeze({ root,
@@ -168,7 +169,7 @@ export function mountPreparedCssPointField({ host, before, payload, resolveResou
       if (destroyed) return; destroyed = true;
       if (timer !== null) clearTimeout(timer);
       fader.destroy();
-      labels.destroy();
+      labels?.destroy();
       root.remove();
     },
   });

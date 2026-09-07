@@ -83,6 +83,8 @@ test("shared router owns minimal adapter shell lifecycle", async () => {
   await router.settled;
   assert.deepEqual(router.state(), {
     activeObjectId: "future",
+    selectedObjectId: "future",
+    overview: false,
     error: null,
     lifecycle: "paused",
     mountedObjectCount: 1,
@@ -181,6 +183,8 @@ test("shared router contains synchronous shell bootstrap failure", async () => {
     await router.settled;
     assert.deepEqual(router.state(), {
       activeObjectId: "future",
+      selectedObjectId: "future",
+      overview: false,
       error: "shell failed",
       lifecycle: "error",
       mountedObjectCount: 0,
@@ -293,6 +297,8 @@ test("keeps the shared shell planet-neutral", async () => {
     readFile(new URL("../layouts/PlanetLayout.astro", import.meta.url), "utf8"),
     readFile(new URL("../components/ExplorerRail.astro", import.meta.url), "utf8"),
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
+    readFile(new URL("../components/PlanetInformationPanel.astro", import.meta.url), "utf8"),
+    readFile(new URL("../planet-shell-types.ts", import.meta.url), "utf8"),
     readFile(new URL("../planet-shell-client.mjs", import.meta.url), "utf8"),
     readFile(new URL("../planet-shell.css", import.meta.url), "utf8"),
     readFile(new URL("../scene-router.mjs", import.meta.url), "utf8"),

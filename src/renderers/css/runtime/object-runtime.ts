@@ -94,7 +94,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: getOrbit().initialResponsiveZoom() }),
     }) : null;
-    const preparedEpochJdTt = definition.heliocentricView?.plan.system?.epochJdTt ?? null;
+    const legacyPreparedEpochJdTt = definition.heliocentricView?.plan.system?.epochJdTt ?? null;
+    const preparedEpochJdTt = worldFrame?.epochJdTt ?? legacyPreparedEpochJdTt;
     let restoreVersion = 0;
     const sharedView = Object.freeze({
       capture(motionRequested = false): SharedView | null {
@@ -113,7 +114,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (!view) throw new TypeError("A saved object view is required.");
         const version = ++restoreVersion;
         if (!readyPublished || lifetime.disposed) return false;
-        if ((view.preparedEpochJdTt ?? null) !== preparedEpochJdTt) {
+        // Older local views without an orbital layer did not carry an epoch.
+        const legacyLocalView = view.preparedEpochJdTt == null && legacyPreparedEpochJdTt === null;
+        if (!legacyLocalView && (view.preparedEpochJdTt ?? null) !== preparedEpochJdTt) {
           throw new TypeError("This view uses a different prepared astronomical date.");
         }
         playback.validateMotion(view.playback.times);
@@ -131,6 +134,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       subscribe(listener: () => void) { viewListeners.add(listener); return () => viewListeners.delete(listener); },
     });
     const navigation: ObjectWorldNavigation | undefined = worldFrame ? Object.freeze({ frame: worldFrame,
+      setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0]) { if (!lifetime.disposed) { setAllowed(false); getOrbit().applyWorldCamera(pose, worldFrame); } },
       optics() {

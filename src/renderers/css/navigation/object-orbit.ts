@@ -410,6 +410,7 @@ export function createRetainedCubicSkyOrbit({
     mobilePageFlow: () => inputPolicy.mobile,
     initialResponsiveZoom: () => initialResponsiveZoom,
     currentResponsiveZoom: () => responsiveFit.zoom,
+    setZoomOutCentering(enabled: boolean) { perspective?.setZoomOutCentering(enabled); },
     captureWorldCamera(frame: PreparedWorldCameraFrame): WorldCameraPose {
       const physical = requireWorldPerspective(frame);
       const rotation = rotationFromMatrix3d(orientation.sceneMatrix());

@@ -1,0 +1,10 @@
+---
+const { title, count, open = false, ...attributes } = Astro.props;
+---
+<details class="planet-accordion" open={open} {...attributes}>
+  <summary class="planet-panel-summary">
+    <h2 class="planet-panel-heading">{title}{count !== undefined && <> <span class="planet-panel-heading-count">({count})</span></>}</h2>
+    <span class="planet-panel-toggle" aria-hidden="true"></span>
+  </summary>
+  <slot />
+</details>

@@ -59,3 +59,9 @@ and Saturn 1440 pixels in the current catalogue. These three images add about
 positions, camera behavior and retained context elements are unchanged. No
 second detailed object scene is mounted. The images remain source-derived
 context proxies; they do not claim a newly rendered observation geometry.
+
+The Sun's scene indicator is a project-authored rounded hexagonal outline.
+`prepareSunIndicator` in `tools/prepare-navigation.mjs` rasterizes the numerical
+path to `public/navigation/sun-indicator-hexagon.png` at a fixed 64px resolution for a
+16px UI box. The live scene uses the PNG; its center remains transparent for
+the Sun's separate physical point and glow.

@@ -4,6 +4,7 @@ export type ObjectWorldNavigationListener = (world: WorldCameraPose, viewport: W
 
 export interface ObjectWorldNavigation {
   readonly frame: PreparedWorldCameraFrame;
+  setZoomOutCentering?(enabled: boolean): void;
   capture(): WorldCameraPose;
   apply(pose: WorldCameraPose): void;
   optics(): { focalPixels: number; principalOffsetPixels: readonly [number, number]; framingRadiusPixels: number;
