@@ -280,7 +280,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
 }) {
   const root = host.ownerDocument.createElement('div');
   root.className = 'prepared-world-context';
-  root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0';
+  root.style.cssText = 'position:absolute;inset:0;pointer-events:none';
   root.dataset.worldContext = plan.focus.id;
   host.insertBefore(root, before);
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
@@ -410,7 +410,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       let anchorLineWidth = 1;
       // Project first, resolve shared body visibility, then place labels and publish once.
       // A rejected proxy must never leave its billboard or orbit behind.
-      const projectedBodies: { entry: (typeof bodies)[number]; x: number; y: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean; annotationVisible: boolean; inFrame: boolean; parentDiameter: number; priority: number; lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition?: readonly number[] }[] = [];
+      const projectedBodies: { entry: (typeof bodies)[number]; x: number; y: number; depth: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean; annotationVisible: boolean; inFrame: boolean; parentDiameter: number; priority: number; lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition?: readonly number[] }[] = [];
       for (const entry of bodies) {
         const { body, marker, indicator, label } = entry;
         const eye = toEye(body.positionM), depth = -eye[2];
@@ -450,7 +450,15 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             anchor: [x, y], widthPx: BODY_INDICATOR_DIAMETER + padding * 2,
             bottomOffsetPx: -radius - padding, topOffsetPx: radius + padding });
         }
-        projectedBodies.push({ entry, x, y, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, inFrame, parentDiameter, priority, lineWidth: appearance.width, orbitVisibility, segments });
+        projectedBodies.push({ entry, x, y, depth, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, inFrame, parentDiameter, priority, lineWidth: appearance.width, orbitVisibility, segments });
+      }
+      // Reserve the existing detail layers (0..3). Far bodies stay behind them;
+      // near bodies paint above them, ordered by eye depth without moving DOM nodes.
+      const backToFront = [...projectedBodies].sort((a, b) => b.depth - a.depth);
+      const selectedIndex = backToFront.findIndex(({ entry }) => entry.body.id === selectedId);
+      for (const [index, { entry }] of backToFront.entries()) {
+        const relativeDepth = index - selectedIndex;
+        entry.group.style.zIndex = String(relativeDepth > 0 ? relativeDepth + 3 : relativeDepth);
       }
       // An orbitless anchor uses the same stroke as the visible system, then thins as it recedes.
       projectedBodies[0].lineWidth = anchorLineWidth;

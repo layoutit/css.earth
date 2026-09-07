@@ -755,3 +755,34 @@ test('the Sun locator stays visible across galactic observer rotations while res
   expect(label.style.visibility).toBe('hidden'); expect(label.style.getPropertyValue('--context-label-alpha')).toBe('0');
   layer.destroy();
 });
+
+test('billboards straddle the selected detail in camera-depth order without replacing nodes', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1);
+  const context = { ...source, bodies: source.bodies.map((body, index) => ({ ...body,
+    positionM: (index === 0 ? [20, 0, 30] : [-20, 0, -30]) as [number, number, number] })) };
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const root = layer.root as unknown as FakeElement, nodes = all(root);
+  // The container must not trap foreground children behind the detailed body.
+  expect(root.style.cssText).not.toContain('z-index');
+  const depth = (id: string) => Number(find(root, 'contextGroup', id).style.zIndex);
+  const publish = (z: number, orientationXyzw: [number, number, number, number]) => layer.publish({
+    referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, z], orientationXyzw },
+  }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  publish(100, [0, 0, 0, 1]);
+  expect(depth('venus')).toBeLessThan(0);
+  expect(depth('sun')).toBe(0);
+  expect(depth('mercury')).toBeGreaterThan(3);
+  publish(-100, [0, 1, 0, 0]);
+  expect(depth('mercury')).toBeLessThan(0);
+  expect(depth('venus')).toBeGreaterThan(3);
+  layer.selectObject('venus');
+  publish(-100, [0, 1, 0, 0]);
+  expect(depth('venus')).toBe(0);
+  expect(depth('mercury')).toBeLessThan(depth('sun'));
+  expect(depth('sun')).toBeLessThan(0);
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});

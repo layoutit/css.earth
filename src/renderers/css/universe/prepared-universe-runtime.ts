@@ -49,7 +49,8 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       const document = stage.ownerDocument;
       const root = document.createElement('div');
       root.className = 'prepared-universe';
-      root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0';
+      // Keep the background below every depth-sorted body in the isolated stage.
+      root.style.cssText = `position:absolute;inset:0;pointer-events:none;z-index:${-plan.bodies.length - 2}`;
       stage.insertBefore(root, stage.firstChild);
       const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
       const volumeHost = document.createElement('div');
@@ -86,7 +87,8 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
-        spatial = mountPreparedWorldContext({ host: root, before: end, plan, sprites });
+        // Billboards share the detail stage, so a nearer body can cover the selected detail.
+        spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,
