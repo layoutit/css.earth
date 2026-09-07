@@ -148,6 +148,12 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.2927924188904021,
     0.9561120750243349,
   ]),
+  // subsolar latitude 71.916°, longitude 106.275°
+  miranda: Object.freeze([
+    -0.0869922037409115,
+    0.29797844072663066,
+    0.9506004446403471,
+  ]),
   // subsolar latitude -18.990°, longitude -122.111°
   neptune: Object.freeze([
     -0.502623569012939,
@@ -312,6 +318,12 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     0.8763611790632965,
     -0.4625339059609962,
     0.1343632005693996,
+  ]),
+  // pole tilt to the ecliptic 85.821°, Sun ecliptic latitude 0.159°
+  miranda: Object.freeze([
+    0.9950643598423292,
+    0.06736064675096756,
+    0.07286606233952053,
   ]),
   // pole tilt to the ecliptic 28.524°, Sun ecliptic latitude 1.370°
   neptune: Object.freeze([
@@ -479,6 +491,12 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     0.8698957198074813,
     -0.47434474294036033,
     0.13519800851147012,
+  ]),
+  // orbital inclination to the ecliptic 98.176°, obliquity to the orbit 172.088°
+  miranda: Object.freeze([
+    -0.06206348774425009,
+    -0.12286202012731895,
+    -0.990481220164852,
   ]),
   // orbital inclination to the ecliptic 1.771°, obliquity to the orbit 28.352°
   neptune: Object.freeze([
@@ -648,6 +666,12 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     0.842946781478207,
     -0.2151762659737923,
   ]),
+  // flight-path angle -0.036°
+  miranda: Object.freeze([
+    -0.024304185716658343,
+    0.9922861190737388,
+    -0.12156300609242962,
+  ]),
   // flight-path angle -0.438°
   neptune: Object.freeze([
     -0.7288718786020061,
@@ -815,6 +839,12 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     -0.4305373289608206, -0.8773219396544694, -0.2119995815377986,
     -0.1504783367892547, 0.3013679204583705, -0.9415591572895124,
     0.8899403791987539, -0.37347502020820195, -0.2617680858165513,
+  ]),
+  // pole RA 259.433°, Dec -18.894°, prime meridian W 81.933°
+  miranda: Object.freeze([
+    0.07915766943869647, -0.9816466198811917, -0.17350497700315456,
+    -0.3409105367200576, 0.1368994361972955, -0.9300744864375674,
+    0.93675720937833, 0.13277220358453704, -0.323817035736278,
   ]),
   // pole RA 299.503°, Dec 42.961°, prime meridian W 283.005°
   neptune: Object.freeze([
@@ -1189,6 +1219,23 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 0.7729574367149298,
     perihelionAu: 18.35168296263812,
     aphelionAu: 20.180379987520066,
+  }),
+  // a 0.00086883 AU, e 0.00075943, perihelion 0.00086817 AU, aphelion 0.00086949 AU
+  miranda: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([0.0008672494663203502,0.00001491222830803315,-0.000056191548093604456]),
+    semiMajorAxisAu: 0.0008688313848285732,
+    eccentricity: 0.00075942584218235,
+    heliocentricDistanceAu: 19.446248704137076,
+    perihelionDirection: Object.freeze([
+      0.5309551598645248,
+      0.8362520242738819,
+      -0.13700062084192,
+    ]),
+    trueAnomalyDegrees: 236.42899433766684,
+    inclinationDegrees: 98.17550054525125,
+    perihelionAu: 0.0008681715718224354,
+    aphelionAu: 0.0008694911978347111,
   }),
   // a 30.073 AU, e 0.010013, perihelion 29.772 AU, aphelion 30.374 AU
   neptune: Object.freeze({

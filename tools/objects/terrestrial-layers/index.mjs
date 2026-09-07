@@ -81,6 +81,10 @@ export function parseTerrestrialProfile(value) {
         !Number.isFinite(policy.centerLongitude) || policy.centerLongitude < 0 || policy.centerLongitude > 360)) {
       throw new TypeError('Invalid observed GeoTIFF no-data or coordinate policy.');
     }
+    if (policy.connectedEdge !== undefined && (!byteImage || policy.noData !== 0 ||
+        !['north', 'south'].includes(policy.connectedEdge))) {
+      throw new TypeError('Connected coverage requires a byte image with exact black fill and a polar edge.');
+    }
     if (byteImage && policy.noData !== null && (!Number.isInteger(policy.noData) || policy.noData < 0 || policy.noData > 255)) {
       throw new TypeError('Byte observation no-data must be an exact byte value.');
     }
