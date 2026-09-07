@@ -4,7 +4,7 @@ export interface CubicSkyFace {id:string;url:string;url2x:string;highContrastUrl
 export interface PreparedRetainedStar extends StarPresentation {color:Vector3;direction:Vector3;magnitude:number;name?:string|null;band:string;transform:string;}
 export interface PreparedCatalogueStars {exposure:ExposureOptions & {maxRadiusPx:number};retained:readonly PreparedRetainedStar[];retainedRadiusShareOfHalfSide:number;limitingMagnitude:number;count:number;photographicCount:number;retainedCount:number;bands:readonly unknown[];coexistence:string;}
 export interface CubicSkyPlan {faces:readonly CubicSkyFace[];cameraPitchResponse:number;cameraZoomResponse:number;presentationPitchOffsetDegrees:number;presentationYawOffsetDegrees:number;sceneRegistration?:string;cameraContract?:string|{source:string;sourcePath:string;rotationResponse:number;zoomResponse:number;horizontalFovDegrees:number;focalLengthOverViewportWidth:number;qualification:string};projection?:{cssPerspective:string;horizontalFovDegrees:number;focalLengthOverViewportWidth?:number};catalogueStars?:PreparedCatalogueStars;sun?:{localDirection:Vector3;initialViewDirection:Vector3};}
-export interface CubicSkyMountOptions {host:HTMLElement;plan:CubicSkyPlan;imageDensity:number;objectId:string;requireSun?:boolean;}
+export interface CubicSkyMountOptions {host:HTMLElement;plan:CubicSkyPlan;imageDensity:number;objectId:string;requireSun?:boolean;renderContent?:boolean;}
 export type RetainedCubicSky = ReturnType<typeof mountRetainedCubicSky>;
 const exposureKnob = (key:string): key is keyof ExposureKnobs => key in EXPOSURE_KNOBS;
 import { createExposure, exposureLimits, screenFactor, starPresentation, EXPOSURE_KNOBS, POINT_MIN_RADIUS_PX } from "@cssearth/engine";
@@ -15,6 +15,7 @@ export function mountRetainedCubicSky({
   imageDensity,
   objectId,
   requireSun = true,
+  renderContent = true,
 }: CubicSkyMountOptions) {
   if (!(host instanceof HTMLElement) || ![1, 2].includes(imageDensity) ||
       !/^[a-z][a-z0-9-]*$/u.test(objectId)) {
@@ -34,7 +35,9 @@ export function mountRetainedCubicSky({
   const orientation = document.createElement("div");
   orientation.className =
     `planet-cubic-sky-orientation ${objectId}-skybox-orientation`;
-  for (const face of plan.faces) {
+  // The shared universe supplies the visible sky in the application. Its
+  // object camera still needs these orientation handles, but no image leaves.
+  for (const face of renderContent ? plan.faces : []) {
     const element = document.createElement("div");
     element.className =
       `planet-cubic-sky-face planet-cubic-sky-${face.id} ` +
@@ -61,7 +64,7 @@ export function mountRetainedCubicSky({
   // orientation's matrix carries them with the faces.
   let starGroup: HTMLDivElement | null = null;
   let starResizeObserver: ResizeObserver | null = null;
-  const stars = plan.catalogueStars ?? null;
+  const stars = renderContent ? plan.catalogueStars ?? null : null;
   const starElements: {element:HTMLElement;star:PreparedRetainedStar;presentation:StarPresentation|null}[] = [];
   let starScreenFactor = 1;
   const writeStarRadius = (element:HTMLElement, presentation:StarPresentation, maxRadiusPx:number) => {
