@@ -1,3 +1,6 @@
+import idaDescriptor from "../src/planets/ida/object.json" with { type: "json" };
+import gaspraDescriptor from "../src/planets/gaspra/object.json" with { type: "json" };
+import mathildeDescriptor from "../src/planets/mathilde/object.json" with { type: "json" };
 import ryuguDescriptor from "../src/planets/ryugu/object.json" with { type: "json" };
 import bennuDescriptor from "../src/planets/bennu/object.json" with { type: "json" };
 import itokawaDescriptor from "../src/planets/itokawa/object.json" with { type: "json" };
@@ -92,6 +95,21 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(erosDescriptor);
     }, erosDescriptor.properties.worldFrame),
+  object("ida", "Ida", "asteroid", "#a49c8d", 2.861,
+    "Explore Ida in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(idaDescriptor);
+    }, idaDescriptor.properties.worldFrame),
+  object("gaspra", "Gaspra", "asteroid", "#a49c8d", 2.21,
+    "Explore Gaspra in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(gaspraDescriptor);
+    }, gaspraDescriptor.properties.worldFrame),
+  object("mathilde", "Mathilde", "asteroid", "#a49c8d", 2.647,
+    "Explore Mathilde with NEAR imagery, measured partial elevation, and a published visualization shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mathildeDescriptor);
+    }, mathildeDescriptor.properties.worldFrame),
   object("vesta", "Vesta", "asteroid", "#a49c8d", 2.36,
     "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

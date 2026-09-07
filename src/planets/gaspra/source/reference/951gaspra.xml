@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:ast-sat.thomas.shape-models:data:951gaspra_tab</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>951 GASPRA SHAPE MODEL</title>
+    <information_model_version>1.15.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Thomas, P.C.</author_list>
+      <publication_year>2021</publication_year>
+      <description>Numerical shape model of asteroid 951 Gaspra, constructed from Galileo images of
+Gaspra taken October 29, 1991, using stereogrammetry and limb matching techniques. 
+For further information see Thomas et al. 1994, Icarus 107, 25.  This shape model
+consists of a grid with points every 2 degrees in latitude and longitude, with a
+radius in km associated with each point.  Coordinates are planetocentric.</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>1991-10-29T14:33:45.592Z</start_date_time>
+      <stop_date_time>1991-10-29T22:26:15.149Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>Galileo</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.galileo</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Galileo Orbiter</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.go</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Solid State Imaging System</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:go.ssi</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(951) Gaspra</name>
+      <type>Asteroid</type>
+    </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <doi>10.1006/icar.1994.1004</doi>
+      <reference_text>Thomas, P.C., J. Veverka, D. Simonelli, P. Helfenstein, B. Carcich, M.J.S. Belton,
+M.E. Davies, and C. Chapman, The Shape of Gaspra, Icarus 107, 25-36, 1994. doi:
+10.1006/icar.1994.1004</reference_text>
+    </External_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>951gaspra.tab</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2021-10-12</creation_date_time>
+      <file_size unit="byte">527072</file_size>
+      <records>16471</records>
+    </File>
+    <Table_Character>
+      <local_identifier>table</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>16471</records>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>3</fields>
+        <groups>0</groups>
+        <record_length unit="byte">32</record_length>
+        <Field_Character>
+          <name>LATITUDE</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">10</field_length>
+          <field_format>%10.4f</field_format>
+          <unit>DEGREE</unit>
+          <description>Shape model latitude</description>
+        </Field_Character>
+        <Field_Character>
+          <name>LONGITUDE</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">12</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9.4f</field_format>
+          <unit>DEGREE</unit>
+          <description>Shape model longitude. The longitudes are West on Gaspra (prograde rotation).</description>
+        </Field_Character>
+        <Field_Character>
+          <name>RADIUS</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">22</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9.4f</field_format>
+          <unit>KILOMETER</unit>
+          <description>Shape model radius for this latitude and longitude</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>
+

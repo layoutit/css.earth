@@ -1,0 +1,26 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  243 Ida (A884 SB)            2026-Sep-07 16:09:43
+Rec #:     243 (+COV) Soln.date: 2026-Jun-05_03:20:34  # obs: 12966 (1885-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457351.5 ! 2015-Nov-25.00 (TDB)         Residual RMS= .24115
+   EC= .04122993671311469  QR= 2.743314291471128   TP= 2457409.7583745634
+   OM= 324.0195562677311   W=  110.8060925381941   IN= 1.13212254291052
+   A= 2.861284886249381    MA= 348.1362827903862   ADIST= 2.979255481027635
+   PER= 4.84005            N= .203639688           ANGMOM= .029073181
+   DAN= 2.89888            DDN= 2.81519            L= 74.8293632
+   B= 1.0582858            MOID= 1.75810003        TP= 2016-Jan-22.2583745634
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= .00275              RAD= 16.                ROTPER= 4.634
+   H= 10.06                G= .150                 B-V= .802
+                           ALBEDO= .262            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#191, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -66,5 +66,44 @@ export const ASTEROID_ELEMENTS = {
       "meanAnomalyAtEpochRad": 2.2264734587205286,
       "meanMotionRadPerDay": 0.013236261696412763
     }
+  },
+  "ida": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27243%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 428227850.1923914,
+      "eccentricity": 0.04616448944575747,
+      "inclinationRad": 0.42511042456400683,
+      "ascendingNodeRad": 6.25475656479662,
+      "argumentOfPeriapsisRad": 1.3584324087644835,
+      "meanAnomalyAtEpochRad": 1.1793401613664845,
+      "meanMotionRadPerDay": 0.003551871100818331
+    }
+  },
+  "gaspra": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27951%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 330550195.6427701,
+      "eccentricity": 0.1738926259725353,
+      "inclinationRad": 0.393759454228351,
+      "ascendingNodeRad": 6.103851933477968,
+      "argumentOfPeriapsisRad": 0.5653445348175159,
+      "meanAnomalyAtEpochRad": 2.422395861017539,
+      "meanMotionRadPerDay": 0.0052373721167424565
+    }
+  },
+  "mathilde": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27253%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 395995778.8622339,
+      "eccentricity": 0.2643618862750068,
+      "inclinationRad": 0.29145750923914276,
+      "ascendingNodeRad": 0.0036128293358736554,
+      "argumentOfPeriapsisRad": 5.879157515755841,
+      "meanAnomalyAtEpochRad": 5.117847950673388,
+      "meanMotionRadPerDay": 0.0039942360281778645
+    }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>

@@ -4,3 +4,6 @@ src/planets/pluto/source/lenses/usgs-dem-metadata.html -whitespace
 src/planets/pluto/source/lenses/usgs-mosaic-metadata.html -whitespace
 src/planets/pluto/source/orbit/jpl-physical.html -whitespace
 src/planets/pluto/source/surface/nasa-color-metadata.html -whitespace
+src/planets/ida/source/reference/** -whitespace
+src/planets/gaspra/source/reference/** -whitespace
+src/planets/mathilde/source/reference/** -whitespace
