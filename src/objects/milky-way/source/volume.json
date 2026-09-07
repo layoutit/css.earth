@@ -76,7 +76,18 @@
     "cylinderSupport": {
       "axis": "z",
       "radiusSquared": 0.7
-    }
+    },
+    "displayColorMatrix": [
+      1,
+      0,
+      0,
+      0,
+      0.951277424,
+      0,
+      0,
+      0,
+      0.709752511
+    ]
   },
   "bake": {
     "sliceCounts": {
@@ -106,10 +117,10 @@
   ],
   "provenance": {
     "path": "provenance.json",
-    "sha256": "06a0915cde67e6e9d414494a8e4bbac016692d572a08883b7c19307c506ac139"
+    "sha256": "b33735c94889b0658961e2cf374646dd09b52b4d627651d80dcb0142a2f03745"
   },
   "sky": {
     "path": "sky/recipe.json",
-    "sha256": "1b37520670c1588f5adbaabea2d20474825ec524bf698722454d8f3d5e9473bd"
+    "sha256": "8e321ec64e25ce03ace16bac1c9539f064b62eaae5cc10f69d448e9c50a7ba2f"
   }
 }

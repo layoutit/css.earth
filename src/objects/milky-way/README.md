@@ -8,6 +8,7 @@ milky-way/
 │   ├── acquisition.json        Original raw URL/hash and exact reduction recipe
 │   ├── volume.json             Channels, material, sampling and crop recipe
 │   ├── provenance.json         Authors, transfer equations, frame and source pins
+│   ├── color-calibration.json  NASA palette fit, held-out metrics and limitations
 │   ├── openspace/              Original MIT notice, asset, shader and sync listing
 │   └── sky/                    NASA source, lossless HDR row chunks and cube recipe
 └── prepared/
@@ -33,7 +34,7 @@ orbit alignment, and PolyCSS pixel-to-world mapping. The normal
 volume after building tools, use `pnpm prepare:volume <object-directory>`.
 Preparation reads the local pinned inputs; no sibling checkout or network
 source is required. The checked volume source is 41.77 MiB. The 1024px WebP volume bank is
-14.65 MiB compressed and decodes to 131.05 MiB across 544 retained leaves.
+14.27 MiB compressed and decodes to 131.05 MiB across 544 retained leaves.
 WebP uses quality 90 for RGB and preserves alpha exactly. Each axis has the
 same physical slice pitch; four samples per Z slab integrate all 128 original
 source Z layers. The thin galaxy detail retains its full in-plane resolution.
@@ -76,13 +77,28 @@ emission/absorption coefficients. OpenSpace integrates normalized texture
 distance and uses an additive raymarch display; baking that direction-dependent
 coefficient into separate CSS stacks causes brightness changes at handoffs.
 
+A single offline display-RGB matrix, `diag(1, 0.951277424, 0.709752511)`,
+grades every slab toward the original NASA interior palette. It follows the
+exponential display transfer and preserves the original emission/dust alpha,
+so it changes colour without changing geometry, opacity or optical correction.
+The same matrix applies from every viewing direction. Source emission and
+absorption coefficients remain unchanged.
+
+The calibration compares matching ICRF directions at the Sun, using paired
+patches within 15° of the Galactic plane and held-out longitude blocks. The
+selected grade reduces held-out chromaticity error by 53.8% while retaining
+colour variation. The checked calibration receipt records its baseline inputs,
+method and limitations; the matrix in the recipe reproduces the final bake.
+The NASA image and simulated volume have different dust structures, so this
+matches their palette, not their exact morphology or physical photometry.
+
 Ordinary-alpha slices approximate RGB extinction and emitted energy. They
 retain finite-slice/axis-handoff artifacts and do not reproduce OpenSpace's
 additive HDR raymarching, stochastic sampling or camera-dependent fade.
 The renderer transports the prepared images and geometry; stars use the
 application's independently prepared star catalog.
 
-The shared display attenuates the completed volume image to 0.25 over opaque
+The shared display attenuates the completed volume image to 0.2 over opaque
 black through 1 kpc from the common focus, then ramps smoothly in logarithmic
 distance to full brightness at 25 kpc. This provisional display attenuation
 is independent of camera angle and of the NASA-to-volume crossfade. It is
@@ -105,16 +121,17 @@ original 130.95 MiB EXR stays in the acquisition cache. Source acquisition,
 original and decoded SHA256, exact Node/Zstd versions, NASA/Gaia credits and
 usage notice live together under `source/sky/`.
 
-Six opaque 1536 × 1536 WebP faces add **5.63 MiB download and 54 MiB decoded**.
-The complete volume + sky bank is therefore **20.28 MiB download and
-185.05 MiB decoded**, across 550 unique images. Sky faces use quality 90;
-the modest transfer-target overrun preserves visible detail. Original source
+Six opaque 1536 × 1536 WebP faces add **1.47 MiB download and 54 MiB decoded**.
+The complete volume + sky bank is therefore **15.73 MiB download and
+185.05 MiB decoded**, across 550 unique images. Sky faces use quality 90. Original source
 chunks are offline inputs and are never sent to the browser.
 
 The offline baker samples linear RGB before applying a fixed exposure of 4.5
-and the standard sRGB display curve. Source RGB colours are unchanged. At
-1024 × 512 this matches NASA's preview mean RGB within 0.001 and has RGB RMSE
-0.01387 on the [0,1] scale; it is a display fit, not calibrated photometry.
+and the standard sRGB display curve. Before final attenuation, the transfer at
+1024 × 512 matches NASA's preview mean RGB within 0.001 and has RGB RMSE
+0.01387 on the [0,1] scale. A final uniform display gain of 0.25 darkens all
+three sRGB channels before quantization without changing source white balance.
+Source HDR pixels stay unchanged. This is a display fit, not calibrated photometry.
 The NASA Milky Way-only image omits bright Hipparcos/Tycho stars, so the
 application's separately prepared bright stars and labels coexist with it.
 Faint Gaia stars remain in the image; it is not literally star-free.
@@ -123,6 +140,10 @@ The cube's authored bases are ICRF directions, independent of the volume's
 Galactic local frame. Each face is a real prepared PolyCSS plane; camera
 translation leaves distant sky directions unchanged. Runtime transports the
 six prepared planes and crossfades toward the OpenSpace volume as the same
-camera travels outward. Neither cube geometry nor imagery is generated in
+camera travels outward: the handoff starts at 0.1 pc from the shared focus,
+is halfway at 1 pc and finishes at 10 pc. The volume then supplies physical
+translation and changing perspective. This range is a presentation choice,
+not an inferred distance to the panorama; the image contains no depth data.
+Neither cube geometry nor imagery is generated in
 the browser. The NASA source epoch is recorded in provenance; shared camera
 frame metadata uses the volume's Sun-centred ICRF frame and epoch.

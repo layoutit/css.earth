@@ -130,8 +130,9 @@ test.each([true, false])('shared universe retains independent sky crossfade and 
   const count = document.count, originalNodes = [...root.children];
   expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
   const profile = context.volume.opacityProfile;
-  for (const [distance, expected, gain] of [[profile.fadeStartDistanceM / 2, 0, .25], [Math.sqrt(profile.fadeStartDistanceM * profile.fullDistanceM), .5, .25],
-    [profile.fullDistanceM, 1, .25], [Math.sqrt(brightness.fadeStartDistanceM * brightness.fullDistanceM), 1, .625], [brightness.fullDistanceM, 1, 1], [profile.fadeStartDistanceM / 2, 0, .25]]) {
+  const nearGain = brightness.nearOpacity, farGain = brightness.fullOpacity, midGain = (nearGain + farGain) / 2;
+  for (const [distance, expected, gain] of [[profile.fadeStartDistanceM / 2, 0, nearGain], [Math.sqrt(profile.fadeStartDistanceM * profile.fullDistanceM), .5, nearGain],
+    [profile.fullDistanceM, 1, nearGain], [Math.sqrt(brightness.fadeStartDistanceM * brightness.fullDistanceM), 1, midGain], [brightness.fullDistanceM, 1, farGain], [profile.fadeStartDistanceM / 2, 0, nearGain]]) {
     const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distance], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(camera, viewport);

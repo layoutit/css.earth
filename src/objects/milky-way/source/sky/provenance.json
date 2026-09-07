@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-sky-provenance@1",
-  "title": "NASA Deep Star Maps 2020 — Milky Way-only celestial map",
+  "title": "NASA Deep Star Maps 2020 \u2014 Milky Way-only celestial map",
   "sourcePage": "https://svs.gsfc.nasa.gov/4851/",
   "source": {
     "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_8k.exr",
@@ -32,6 +32,7 @@
       "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k_print.jpg",
       "sha256": "1ebe95804f5f0e6e23f77488aaa33fdb4aaef3fd336821fb41b261ddeaee2df0"
     },
-    "measurement": "At 1024×512, exposure 4.5 preserves NASA preview mean RGB within 0.001; RGB RMSE 0.01387 in [0,1]. This fixed display fit is not exact photometry."
+    "measurement": "Before the separate display gain, exposure4.5 matches NASA preview meanRGB within0.001 withRGB RMSE0.01387 at1024x512. The final bake multiplies all sRGB channels by0.25 before quantization to lower interior glare without changing source white balance. This is display calibration, not photometry.",
+    "displayGain": 0.25
   }
 }

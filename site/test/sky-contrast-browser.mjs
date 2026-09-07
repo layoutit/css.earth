@@ -3,6 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { wheelWithReceipt } from './wheel-zoom-distance.mjs';
+import worldContext from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
 const baseUrl = process.argv[2] ?? 'http://127.0.0.1:4210';
 const objects = process.env.SKY_CONTRAST_OBJECT ? [process.env.SKY_CONTRAST_OBJECT] : ['mercury', 'venus', 'ceres', 'europa'];
@@ -24,7 +25,7 @@ try {
       if (await motion.isChecked()) await motion.uncheck({ force: true });
       await checkContrast(page, id, dpr, 'near', 0);
       await page.mouse.move(1010, 460);
-      await scrollTo(page, 1001 * 3.085677581491367e13);
+      await scrollTo(page, worldContext.volume.opacityProfile.fullDistanceM * 1.01 / 1000);
       await checkContrast(page, id, dpr, 'galaxy', 1);
     }
     assert.deepEqual(errors, []);

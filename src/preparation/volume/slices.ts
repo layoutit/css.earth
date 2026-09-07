@@ -2,8 +2,9 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { encodeVolumeRaster } from './raster.js';
+import { gradePremultipliedDisplayRgb } from './color-grade.js';
 import { loadVolumeSource, sampleEncoded, sha256, type VolumeSource } from './source.js';
-import type { Axis, Bounds3, Vector3, RadialEmission, VolumeRecipe } from './config.js';
+import type { Axis, Bounds3, DisplayColorMatrix, Vector3, RadialEmission, VolumeRecipe } from './config.js';
 export interface VolumeSliceQuad {
   id: string; axis: Axis; sliceIndex: number; texturePath: string; widthPx: number; heightPx: number;
   /** Image top-left first: required by PolyCSS's image/projective backend. */
@@ -15,7 +16,7 @@ export interface VolumeSlices {
   quads: VolumeSliceQuad[]; boundsUnits: Bounds3; provenance: unknown;
   approximation: { method: string; radialEmission: string; limitations: string[];
     samplesPerSlab: number; opticalWeight: number; exposureGain: number;
-    sliceCounts: Record<Axis, number>; slabPitchUnits: Record<Axis, number> };
+    displayColorMatrix?: DisplayColorMatrix; sliceCounts: Record<Axis, number>; slabPitchUnits: Record<Axis, number> };
 }
 const clamp = (value: number): number => Math.max(0, Math.min(1, value));
 const smoothstep = (lo: number, hi: number, value: number): number => {
@@ -120,9 +121,10 @@ export function bakeSlab(source: VolumeSource, axis: Axis, depth: number, slabWi
       const dustOpacity = 1 - Math.exp(-(tau[0] * 0.2126 + tau[1] * 0.7152 + tau[2] * 0.0722));
       const alpha = Math.max(red, green, blue, dustOpacity), offset = 4 * (row * width + column);
       if (alpha > 0) {
-        pixels[offset] = Math.round(clamp(red / alpha) * 255);
-        pixels[offset + 1] = Math.round(clamp(green / alpha) * 255);
-        pixels[offset + 2] = Math.round(clamp(blue / alpha) * 255);
+        const graded = gradePremultipliedDisplayRgb([red, green, blue], material.displayColorMatrix);
+        pixels[offset] = Math.round(clamp(graded[0] / alpha) * 255);
+        pixels[offset + 1] = Math.round(clamp(graded[1] / alpha) * 255);
+        pixels[offset + 2] = Math.round(clamp(graded[2] / alpha) * 255);
         pixels[offset + 3] = Math.round(clamp(alpha) * 255);
         if (pixels[offset + 3]) nonzero++;
       }
@@ -186,8 +188,10 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
     radialEmission: material.radialEmission ? 'Abel-deprojected radial profile, ellipsoidal normalization and authored boundary taper.' : 'None.',
     limitations: ['Ordinary alpha approximates emitted light and wavelength-dependent extinction.',
       'Finite slices and axis handoffs approximate a continuous field; angle-dependent opacity and sampling differences remain.',
+      ...(material.displayColorMatrix ? ['The display color matrix transforms ordinary display RGB values; it is not linear-light photometry.'] : []),
       'No runtime ray integration, near-field noise or global HDR display pass.'],
     samplesPerSlab: bake.samplesPerSlab, opticalWeight: bake.opticalWeight, exposureGain: material.exposureGain,
+    ...(material.displayColorMatrix ? { displayColorMatrix: material.displayColorMatrix } : {}),
     sliceCounts: counts, slabPitchUnits: pitches } };
   await writeFile(resolve(options.outputDirectory, 'volume-slices.json'), JSON.stringify(result, null, 2) + '\n');
   return result;

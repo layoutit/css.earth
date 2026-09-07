@@ -118,7 +118,24 @@
       "smartSubsample": true,
       "note": "RGB is perceptually compressed; alpha texels are preserved exactly. Source RGBA scientific volume remains lossless and unchanged."
     },
-    "cssSampling": "256 X/Y slabs and 32 Z slabs have equal physical/source pitch 0.0078125; each Z slab integrates 4 samples at the original 128 source Z texel centres. In-plane texture width remains 1024; no adaptive image resampling."
+    "cssSampling": "256 X/Y slabs and 32 Z slabs have equal physical/source pitch 0.0078125; each Z slab integrates 4 samples at the original 128 source Z texel centres. In-plane texture width remains 1024; no adaptive image resampling.",
+    "cssDisplayColorGrade": {
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0.951277424,
+        0,
+        0,
+        0,
+        0.709752511
+      ],
+      "space": "Ordinary display RGB after exponential transfer; one linear matrix on premultiplied emitted RGB with alpha unchanged. This is not linear-light photometry.",
+      "reference": "NASA original Milky Way-only preview; matched ICRF rays at the Sun, fit independently of luminance.",
+      "calibration": "color-calibration.json",
+      "scope": "Same coefficients for every slab and axis, observer position and distance. No added desaturation; source emission/absorption coefficients and scientific input bytes unchanged."
+    }
   },
   "derivative": {
     "method": "encoded-box-average-round-half-up",
@@ -160,6 +177,10 @@
       "path": "openspace/sync-response.txt",
       "sha256": "5b0f8456ba998a056bcbd0f0d241df93e3543243037cea74f8e9d717ca13423d",
       "bytes": 279
+    },
+    {
+      "path": "color-calibration.json",
+      "sha256": "d7c8a28bb7b7f55775b4d57e056bc0113074926d9be9702d573e98ab988c9310"
     }
   ]
 }

@@ -6,7 +6,7 @@ export interface SkyRecipe {
   source: { format: 'rgb16f-le-zstd-rows'; width: number; height: number; decodedSha256: string;
     chunks: (SkyReference & { firstRow: number; rows: number })[]; acquisition: SkyReference };
   projection: { frame: 'icrf-j2000'; mapping: 'equirectangular-ra-left'; centerRaDegrees: 0 };
-  bake: { faceSize: number; exposure: number; transfer: 'linear-to-srgb'; webpQuality: number };
+  bake: { faceSize: number; exposure: number; transfer: 'linear-to-srgb'; displayGain?: number; webpQuality: number };
   provenance: SkyReference;
 }
 export function reference(value: unknown): SkyReference {
@@ -34,7 +34,9 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
   if (nextRow !== height || new Set(chunks.map(c => c.path)).size !== chunks.length) throw new TypeError('Sky chunks must be unique and complete.');
   const faceSize = positive(b.faceSize, 'face size', true), webpQuality = positive(b.webpQuality, 'WebP quality', true);
   if (faceSize > 4096 || webpQuality > 100) throw new TypeError('Sky bake exceeds its bounded limits.');
+  const displayGain = b.displayGain === undefined ? 1 : positive(b.displayGain, 'sky display gain');
+  if (displayGain > 1) throw new TypeError('Sky display gain must be at most one.');
   return { schema: r.schema, source: { format: s.format, width, height, decodedSha256, chunks, acquisition: reference(s.acquisition) },
     projection: { frame: p.frame, mapping: p.mapping, centerRaDegrees: 0 },
-    bake: { faceSize, exposure: positive(b.exposure, 'sky exposure'), transfer: b.transfer, webpQuality }, provenance: reference(r.provenance) };
+    bake: { faceSize, exposure: positive(b.exposure, 'sky exposure'), transfer: b.transfer, displayGain, webpQuality }, provenance: reference(r.provenance) };
 }

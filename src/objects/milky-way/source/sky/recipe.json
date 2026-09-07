@@ -33,10 +33,11 @@
     "faceSize": 1536,
     "exposure": 4.5,
     "transfer": "linear-to-srgb",
-    "webpQuality": 90
+    "webpQuality": 90,
+    "displayGain": 0.25
   },
   "provenance": {
     "path": "provenance.json",
-    "sha256": "034f36ae8f1b0a23469f725b89b12678b9bb24cf6f7f04a6d94e7fdbe084d2e3"
+    "sha256": "1b17c185b6682402c9e6753943db9361cc4a2bcf476b6fa5b46fb7c2a09a0428"
   }
 }
