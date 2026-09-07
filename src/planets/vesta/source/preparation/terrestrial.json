@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "vesta",
+  "displayName": "Vesta",
+  "publicBase": "/scenes/vesta/",
+  "distanceAu": 2.3619,
+  "raster": {
+    "width": 8192,
+    "height": 4096,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 0,
+          "centerLongitude": 180,
+          "grid": {
+            "pixelsPerDegree": 74.176493209759,
+            "sampleOffset": 13351,
+            "lineOffset": 6675
+          }
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "science/vesta-hamo-dtm-64.pds.zip",
+        "format": "pds3-radius-zip",
+        "grid": {
+          "member": "Vesta_HAMO_dtm_global_64.pds",
+          "width": 23041,
+          "height": 11521,
+          "pixelsPerDegree": 64.00000035354296,
+          "noData": -32768,
+          "validRange": [
+            200000,
+            300000
+          ]
+        },
+        "sampleGrid": {
+          "width": 8193,
+          "height": 4097
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -255
+        },
+        "minimum": -45,
+        "maximum": 40,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 255000,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 261.385,
+    "camera": {
+      "initialScenePitchDegrees": 40,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/vesta/vesta-normal-surface@2x.webp",
+    "polesUrl": "/scenes/vesta/vesta-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "science/vesta-hamo-dtm-64.pds.zip",
+      "grid": {
+        "member": "Vesta_HAMO_dtm_global_64.pds",
+        "width": 23041,
+        "height": 11521,
+        "pixelsPerDegree": 64.00000035354296,
+        "noData": -32768,
+        "validRange": [
+          200000,
+          300000
+        ]
+      },
+      "latitudeSegments": 24,
+      "longitudeSegments": 40,
+      "faceBudget": 2000,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "lightFieldSize": 4
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons osculating Kepler elements and the DLR Dawn Claudia rotation model"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      180,
+      180,
+      180
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

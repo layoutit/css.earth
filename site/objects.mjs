@@ -20,6 +20,7 @@ import ioDescriptor from "../src/planets/io/object.json" with { type: "json" };
 import ganymedeDescriptor from "../src/planets/ganymede/object.json" with { type: "json" };
 import callistoDescriptor from "../src/planets/callisto/object.json" with { type: "json" };
 import ceresDescriptor from "../src/planets/ceres/object.json" with { type: "json" };
+import vestaDescriptor from "../src/planets/vesta/object.json" with { type: "json" };
 import plutoDescriptor from "../src/planets/pluto/object.json" with { type: "json" };
 import moonDescriptor from "../src/planets/moon/object.json" with { type: "json" };
 import earthDescriptor from "../src/planets/earth/object.json" with { type: "json" };
@@ -59,6 +60,11 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(marsDescriptor);
     }, marsDescriptor.properties.worldFrame),
+  object("vesta", "Vesta", "asteroid", "#a49c8d", 2.36,
+    "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(vestaDescriptor);
+    }, vestaDescriptor.properties.worldFrame),
   object("ceres", "Ceres", "dwarf-planet", "#8e8b86", 2.77,
     "NASA Dawn, USGS, JPL, ESO, and HYG", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

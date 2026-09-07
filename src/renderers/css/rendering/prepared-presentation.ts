@@ -1,4 +1,5 @@
 import { buildPreparedTree, type PreparedTreeLease } from './prepared-tree.js';
+import { bindPreparedSurfaceHit, type PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
 import { createPreparedFacing, type PreparedFacingPlane } from './prepared-facing.js';
 import type { ObjectSelection } from "../runtime/object-contract.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand } from "./prepared-material.js";
@@ -42,6 +43,7 @@ export interface PreparedPresentationDefinition {
   /** Authored infinite motion, resolved from source CSS during preparation. */
   motion?: readonly { target: number; id: string; keyframes: { offset: number; transform: string }[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
   facing?: readonly PreparedFacingPlane[];
+  surfaceHit?: PreparedSurfaceHit;
 }
 export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; }
 export interface PreparedPresentationContext { own(cleanup: () => void): unknown; registerAnimation(animation: Animation, options: PreparedAnimationOptions): unknown; seekAnimation(animation: Animation, time: number): void; }
@@ -143,6 +145,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const formatNumber = (value: number) => Math.abs(value) < 1e-9 ? "0" : Number(value.toFixed(6)).toString();
   const target = (index: number) => index === -1 ? stage : nodes[index];
   return Object.freeze({ cameraElement, sceneElement,
+    ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
       carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),

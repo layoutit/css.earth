@@ -34,8 +34,8 @@
   },
   "excludedFiles": {},
   "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mjs (tools/prepare-solar-geometry.mjs first). A catalog consumer would be wired the same way.",
-  "fileCount": 33,
-  "byteCount": 386903,
+  "fileCount": 32,
+  "byteCount": 386491,
   "files": {
     "package.json": {
       "sha256": "a00c3ed14ee3f66a083a1f07a68bc2d02006f65c301dc467127a2b8cd1d5ea92",
@@ -86,10 +86,6 @@
     "src/frames.ts": {
       "sha256": "cd868d2ecb83e1534faceccec55b59490edfdd762558749a08b43988ff1bd41c",
       "bytes": 19278
-    },
-    "src/index.ts": {
-      "sha256": "5156649888cdd889012e04d9085bcb377ecf2f43f4a389a5554db5295e396f24",
-      "bytes": 412
     },
     "src/kepler.test.ts": {
       "sha256": "c6245c3a8060ba24e7e6e954e6fe2a509bfb60bcceea6357a77731425f9ac521",
@@ -176,17 +172,21 @@
       "bytes": 171
     }
   },
-  "localMaintenance": "Body models, their checks, guides and scientific records are maintained locally and preserved by sync.",
+  "localMaintenance": "Body models, their public export surface, checks, guides and scientific records are maintained locally and preserved by sync.",
   "locallyMaintainedFiles": [
     "AGENTS.md",
     "CLAUDE.md",
     "README.md",
+    "src/__fixtures__/horizons.asteroids.ts",
     "src/__fixtures__/horizons.moons-and-small-bodies.ts",
     "src/__fixtures__/horizons.planetary.ts",
     "src/__fixtures__/horizons.ts",
     "src/__fixtures__/rotation.ts",
+    "src/asteroids.test.ts",
+    "src/asteroids.ts",
     "src/bodies.test.ts",
     "src/bodies.ts",
+    "src/data/asteroidElements.data.ts",
     "src/data/satelliteElements.data.jupiter.ts",
     "src/data/satelliteElements.data.mars.ts",
     "src/data/satelliteElements.data.neptune.ts",
@@ -196,12 +196,14 @@
     "src/data/satelliteElements.data.uranus.ts",
     "src/dwarfPlanets.test.ts",
     "src/dwarfPlanets.ts",
+    "src/index.ts",
     "src/modelAccuracy.ts",
     "src/rotation.ts",
     "src/satellites.test.ts",
     "src/solarSystem.test.ts",
     "tools/fetch-fixtures.mjs",
     "tools/fetch-rotation-fixtures.mjs",
+    "tools/generate-asteroids.mjs",
     "tools/generate-satellites.mjs",
     "tools/lib/write-record-sections.mjs"
   ],

@@ -6,6 +6,28 @@ import { join } from 'node:path';
 import sharp from 'sharp';
 import { prepareByteObservation } from './observed-image.mjs';
 
+test('projected RGB crops keep their extent, channel identity and dark valid samples', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-cropped-map-'));
+  try {
+    const path = join(directory, 'crop.png'), pixels = Buffer.alloc(12 * 5 * 3);
+    for (let y = 0; y < 5; y++) for (let x = 0; x < 12; x++) pixels.set([x + 1, y + 1, 0], (y * 12 + x) * 3);
+    await sharp(pixels, { raw: { width: 12, height: 5, channels: 3 } }).png().toFile(path);
+    const result = await prepareByteObservation(path, { id: 'crop', width: 12, height: 5 }, {
+      kind: 'image-rgb-no-data', noData: 0, centerLongitude: 180,
+      grid: { pixelsPerDegree: 1 / 30, sampleOffset: 5.5, lineOffset: 2.5 },
+    }, 12, 6);
+    assert.deepEqual(result.rgb.subarray(0, 12 * 5 * 3), pixels);
+    assert.ok(result.missing.subarray(0, 12 * 5).every(v => v === 0));
+    assert.ok(result.missing.subarray(12 * 5).every(v => v === 1), 'the cropped south row is not stretched into invented coverage');
+    const smaller = await prepareByteObservation(path, { id: 'crop', width: 12, height: 5 }, {
+      kind: 'image-rgb-no-data', noData: 0, centerLongitude: 180,
+      grid: { pixelsPerDegree: 1 / 30, sampleOffset: 5.5, lineOffset: 2.5 },
+    }, 6, 3);
+    assert.equal(smaller.rgb.length, 6 * 3 * 3);
+    assert.ok(smaller.rgb.some(v => v > 0), 'downsampling retains observed RGB rather than indexing a native-size joined alpha band');
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
 test('byte-map coverage preserves dark observations and rolls longitude without mirroring', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-byte-map-'));
   try {
