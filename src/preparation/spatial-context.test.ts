@@ -50,7 +50,7 @@ test('Sun context source derives its physical scale from the prepared visible ra
   assert(source.system.hiddenDistanceM < source.stars.fullDistanceM);
   assert.equal(source.camera.framingReferenceZoom, 1);
   assert.deepEqual(source.focus.pointSource,{absoluteMagnitude:4.832125665882298,color:'#fff5e0',
-    proximityEnhancement:{fullDistanceM:1e12,fadeOutDistanceM:1e14,radiusMultiplier:1.6,brightnessMultiplier:1.5}});
+    proximityEnhancement:{fullDistanceM:1e12,fadeOutDistanceM:1e14,radiusMultiplier:2.4,brightnessMultiplier:1.5}});
   const prepared = prepareWorldContext({ ...source, bodies: [] }, {}, {});
   assert.deepEqual(prepared.focus.pointSource,source.focus.pointSource,'prepared focus must preserve authored far-point photometry');
   assert.equal(source.camera.presentation.dolly.maximumDistanceOverOrbitExtent, 1);

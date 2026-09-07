@@ -14,7 +14,7 @@ export function presentationFixture(definition) {
       { parent: 1, tag: "div", className: "polycss-mesh", style: "", properties: [], attributes: {} },
       { parent: 1, tag: "s", className: "", style: "", properties: [], attributes: {} },
     ],  stageClasses: [] },
-    variants: controls.lenses.controls.map(lens => ({ when: { lensId: lens.id }, required: [], writes: [], materials: [] })),
+    variants: (controls.lenses?.controls ?? [{ id: null }]).map(lens => ({ when: controls.lenses ? { lensId: lens.id } : {}, required: [], writes: [], materials: [] })),
     materials: [], viewBindings: [], animations: [] };
 }
 const moon = await loadObjectTestDefinition('moon');

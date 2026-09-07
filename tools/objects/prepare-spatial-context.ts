@@ -59,8 +59,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     states[body.id] = { ...state, centerPositionM: parentPosition };
   }
   const prepared = prepareWorldContext(source, facts, states);
+  const text = `${JSON.stringify(prepared, null, 2)}\n`;
+  try { if (await readFile(options.outputPath, 'utf8') === text) return; }
+  catch (error: unknown) { if (!isMissingFile(error)) throw error; }
   await mkdir(dirname(options.outputPath), { recursive: true });
-  await writeFile(options.outputPath, `${JSON.stringify(prepared, null, 2)}\n`);
+  await writeFile(options.outputPath, text);
 }
 
 /** A migrated object's prepared frame is authoritative when it names this exact physical epoch and centre. */

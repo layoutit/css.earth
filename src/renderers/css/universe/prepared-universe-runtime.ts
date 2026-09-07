@@ -84,12 +84,13 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       try {
         if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
-        pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus });
+        pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         spatial = mountPreparedWorldContext({ host: root, before: end, plan, sprites });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,
+          setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
           inspect() {
             return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(),
               foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });

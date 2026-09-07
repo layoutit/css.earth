@@ -28,6 +28,9 @@ export interface WorldCameraPose {
 
 export interface WorldCameraViewport {
   readonly focalPixels: number;
+  /** Measured layout dimensions, transported with the camera rather than read after frame writes. */
+  readonly widthPixels?: number;
+  readonly heightPixels?: number;
   /** Relative to the selected presentation root centre, in CSS pixels. */
   readonly principalOffsetPixels: readonly [number, number];
 }
@@ -48,6 +51,10 @@ export interface WorldCameraPresentation extends LocalWorldCameraPresentation {
   readonly centerPixels: readonly [number, number] | null;
   /** Null when the sphere intersects/leaves the forward image plane. */
   readonly silhouette: SilhouetteEllipse | null;
+}
+
+export function worldCameraSilhouetteDiameter(presentation: WorldCameraPresentation, radiusUnits: number): number {
+  return 2 * (presentation.silhouette?.tangentialSemiAxis ?? (presentation.depthUnits > -radiusUnits ? Infinity : 0));
 }
 
 /** Capture the existing centred physical dolly, including its off-axis eye. */

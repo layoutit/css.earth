@@ -105,6 +105,10 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
   if ((!shared || shellContent) && preparedData(source)) return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
   let ast;
   try {
+    if (shellContent && file.endsWith('.json')) {
+      JSON.parse(source);
+      return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
+    }
     if (file.endsWith(".astro")) {
       const parsed = parseAstro(source);
       const error = parsed.diagnostics.find(diagnostic => diagnostic.severity === "error");
@@ -349,9 +353,12 @@ function requireContextualBindingSource(source) {
     returned.callee.property?.name !== 'assign' || returned.arguments[0]?.name !== mount.id.name) fail();
   const renderer = bindings.get('createWorldContextObjectRuntime');
   if (!renderer || bindings.get('createNavigableObjectMount')?.source !== renderer.source ||
-    bindings.get('prepareObjectResources')?.source !== renderer.source) fail();
-  const nodes = []; walkRuntimeAst(ast, node => nodes.push(node));
-  if (!nodes.some(node => node.type === 'CallExpression' && node.callee?.name === 'prepareObjectResources')) fail();
+    bindings.get('createPreparedObjectNavigation')?.source !== renderer.source) fail();
+  const navigation = property(returned.arguments[1], 'navigation')?.value;
+  const load = navigation?.arguments?.[0];
+  if (navigation?.type !== 'CallExpression' || navigation.callee?.name !== 'createPreparedObjectNavigation' ||
+    navigation.arguments.length !== 2 || navigation.arguments[1]?.name !== frameParam.left.name ||
+    load?.type !== 'ArrowFunctionExpression' || !load.async || load.params.length !== 0 || load.body?.name !== definition.name) fail();
 }
 
 function requireApplicationWorldContextSource(source) {

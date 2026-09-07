@@ -10,37 +10,65 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
     return Boolean(a && b && a.referenceFrame === b.referenceFrame && a.epochJdTt === b.epochJdTt);
   };
   return Object.freeze({ supports,
-    async focus({ objectId, mount, signal, reducedMotion = false }) {
+    async focus({ objectId, mount, signal, reducedMotion = false, targetWorldCamera = null, timing = { mark() {} } }) {
       const owner = mount?.navigation, frame = frames.get(objectId);
       if (!owner || !frame) throw new TypeError('Object focus requires its mounted prepared camera.');
       const from = owner.capture(), optics = owner.optics();
-      const target = createWorldSelectionTarget(from, frame, optics);
+      const target = targetWorldCamera ?? createWorldSelectionTarget(from, frame, optics);
       const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM: frame.originM });
       await animateWorldFlight({ owner, from, flight,
         anchors: [{ positionM: frame.originM, radiusM: frame.bodyRadiusM }], signal, reducedMotion,
-        windowTarget, documentTarget, onPaint(world) { lastCamera = world; } });
+        windowTarget, documentTarget, onPaint(world) {
+          lastCamera = world;
+          if (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
+              world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis])) timing.mark('first-motion');
+        } });
       lastCamera = owner.capture(); lastOptics = owner.optics();
     },
-    async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url }) {
-      if (!supports(fromId, toId) || !toFactory.navigation) throw new TypeError('Objects do not share a prepared world frame.');
+    async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url, targetWorldCamera = null, preserveView = false, timing = { mark() {} } }) {
+      if (!supports(fromId, toId)) throw new TypeError('Objects do not share a prepared world frame.');
+      const targetFrame = frames.get(toId);
       const source = fromMount?.navigation;
       const from = source?.capture() ?? lastCamera;
       const optics = source?.optics() ?? lastOptics;
       if (!from || !optics) throw new Error('The drawn world camera is not ready.');
       lastCamera = from; lastOptics = optics;
+      if (preserveView) {
+        // Input stays live while the new detail bank loads. Snapshot the last
+        // drawn camera at handoff, not the camera from the start of preparation.
+        const factory = await toFactory;
+        const prepared = await factory.navigation.prepare({ signal,
+          getView: () => ({ world: source?.capture() ?? lastCamera, viewport: source?.optics() ?? lastOptics }) });
+        timing.mark('assets-ready');
+        const release = () => prepared.destroy();
+        if (signal.aborted) { release(); throw cancellationReason(signal); }
+        signal.addEventListener('abort', release, { once: true });
+        const checkpoint = source?.capture() ?? lastCamera;
+        return {
+          mountOptions: { preparedResources: prepared.resources, preparedTree: prepared.tree, initialWorldCamera: checkpoint, initialProjection: prepared.projection({ world: checkpoint, viewport: source?.optics() ?? lastOptics }) },
+          async afterMount(mount) {
+            signal.removeEventListener('abort', release);
+            if (signal.aborted) throw cancellationReason(signal);
+            timing.mark('mounted');
+            lastCamera = mount.navigation.capture(); lastOptics = mount.navigation.optics();
+          },
+        };
+      }
       const query = url ? new URL(url).searchParams : null;
       if (query?.getAll('v').length > 1) throw new TypeError('A destination URL may contain only one saved view.');
       const saved = query?.has('v') ? parseSharedView(`v=${query.get('v')}`) : null;
-      const target = saved ? savedWorldCamera(saved, toFactory.navigation.frame, optics)
-        : createWorldSelectionTarget(from, toFactory.navigation.frame, optics);
+      const target = targetWorldCamera ?? (saved ? savedWorldCamera(saved, targetFrame, optics)
+        : createWorldSelectionTarget(from, targetFrame, optics));
       // One numeric flight survives the change of detailed object owner.
       const flight = createSelectionFlight({ from: from.pose, to: target.pose,
-        focusPositionM: toFactory.navigation.frame.originM });
-      const anchors = [frames.get(fromId), toFactory.navigation.frame].map(frame => ({
+        focusPositionM: targetFrame.originM });
+      const anchors = [frames.get(fromId), targetFrame].map(frame => ({
         positionM: frame.originM, radiusM: frame.bodyRadiusM,
       }));
       const handoffTimeS = source && !reducedMotion
         ? detailHandoffTime(flight, from, source.frame, optics) : 0;
+      const approachLimitS = source && !reducedMotion
+        ? destinationDetailTime(flight, from, targetFrame, optics) : 0;
       const controller = new AbortController();
       const cancel = () => controller.abort(signal.reason ?? cancelled());
       signal.addEventListener('abort', cancel, { once: true });
@@ -53,7 +81,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       };
       for (const event of events) documentTarget.addEventListener(event, interrupt, { capture: true });
       let prepared, released = false, rejectInterruption;
-      const release = () => { if (prepared && !released) { released = true; prepared.resources.destroy(); } };
+      const release = () => { if (prepared && !released) { released = true; prepared.destroy(); } };
       const interrupted = new Promise((_, reject) => { rejectInterruption = reject; });
       interrupted.catch(() => {});
       const abort = () => { release(); rejectInterruption(cancellationReason(controller.signal)); cleanup(); };
@@ -64,25 +92,44 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         controller.signal.removeEventListener('abort', abort);
         for (const event of events) documentTarget.removeEventListener(event, interrupt, { capture: true });
       }
-      const preparation = toFactory.navigation.prepare({ signal: controller.signal }).then(value => {
+      let bankReady = false;
+      const preparation = Promise.resolve(toFactory).then(factory => {
+        if (!factory.navigation) throw new TypeError('Destination has no prepared navigation.');
+        return factory.navigation.prepare({ signal: controller.signal,
+          getView: () => ({ world: reducedMotion ? target : lastCamera, viewport: optics }) });
+      }).then(value => {
         prepared = value;
         if (controller.signal.aborted) { release(); throw cancellationReason(controller.signal); }
+        bankReady = true;
         return value;
       });
       preparation.catch(() => {});
-      const onPaint = world => { lastCamera = world; };
+      let moved = false;
+      const onPaint = world => {
+        lastCamera = world;
+        if (!moved && (world.pose.positionM.some((value, axis) => value !== from.pose.positionM[axis]) ||
+            world.pose.orientationXyzw.some((value, axis) => value !== from.pose.orientationXyzw[axis]))) {
+          moved = true; timing.mark('first-motion');
+        }
+      };
       try {
-        // Depart immediately, but stop while source detail is already coarse.
-        // Slow preparation can only hold this distant view, never an enlarged
-        // destination proxy. Nothing mounts until its full bank is decoded.
+        // Keep moving with the current owner while the bank loads. Transfer as
+        // soon as it is ready and the source is coarse, or hold before the
+        // destination proxy would grow into a detailed view.
         const departure = source && !reducedMotion
           ? animateWorldFlight({ owner: source, from, flight, anchors, signal: controller.signal,
-            endElapsedS: handoffTimeS, windowTarget, documentTarget, onPaint })
+            endElapsedS: approachLimitS,
+            stopWhen: elapsed => bankReady && elapsed >= handoffTimeS,
+            windowTarget, documentTarget, onPaint })
           : Promise.resolve({ world: reducedMotion ? target : from, elapsedS: reducedMotion ? flight.durationS : 0 });
         const [, checkpoint] = await Promise.race([Promise.all([preparation, departure]), interrupted]);
+        // A final RAF can cross a material boundary after preparation resolves.
+        // Keep the existing scene until this exact drawn view is decoded too.
+        await prepared.prepareView(() => ({ world: checkpoint.world, viewport: optics }));
         if (controller.signal.aborted) throw cancellationReason(controller.signal);
+        timing.mark('assets-ready');
         return {
-          mountOptions: { preparedResources: prepared.resources, initialWorldCamera: checkpoint.world },
+          mountOptions: { preparedResources: prepared.resources, preparedTree: prepared.tree, initialWorldCamera: checkpoint.world, initialProjection: prepared.projection({ world: checkpoint.world, viewport: optics }) },
           async afterMount(mount, { signal: mountedSignal }) {
             const cancelMounted = () => controller.abort(mountedSignal.reason ?? cancelled());
             mountedSignal.addEventListener('abort', cancelMounted, { once: true });
@@ -90,6 +137,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
             try {
               if (controller.signal.aborted) throw cancellationReason(controller.signal);
               if (!mount.navigation) throw new Error('The destination camera is unavailable.');
+              timing.mark('mounted');
               mount.navigation.apply(checkpoint.world);
               if (checkpoint.elapsedS < flight.durationS) {
                 await animateWorldFlight({ owner: mount.navigation, from, flight, anchors, signal: controller.signal,
@@ -108,6 +156,37 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       }
     },
   });
+}
+
+// Last safe source-owned sample: the target still fits its prepared proxy.
+function destinationDetailTime(flight, from, frame, optics) {
+  const sample = createSelectionFlightSample(), limit = optics.detailHandoffDiameterPixels;
+  const needsDetail = elapsed => {
+    const projected = presentWorldCamera(worldSample(flight, from, elapsed, sample), frame, optics);
+    const ellipse = projected.silhouette, center = projected.centerPixels;
+    if (!ellipse || !center) return false;
+    // A target crossing the eye plane far outside the viewport can have an
+    // enormous projected ellipse. It does not require a visible detail mount.
+    const radius = Math.max(ellipse.radialSemiAxis, ellipse.tangentialSemiAxis);
+    if (Math.abs(center[0]) > (optics.widthPixels ?? Infinity) / 2 + radius ||
+        Math.abs(center[1]) > (optics.heightPixels ?? Infinity) / 2 + radius) return false;
+    return 2 * ellipse.tangentialSemiAxis > limit;
+  };
+  if (needsDetail(0)) return 0;
+  let previous = 0;
+  for (let step = 1; step <= 64; step++) {
+    const elapsed = flight.durationS * step / 64;
+    if (needsDetail(elapsed)) {
+      let low = previous, high = elapsed;
+      for (let iteration = 0; iteration < 32; iteration++) {
+        const middle = (low + high) / 2;
+        if (needsDetail(middle)) high = middle; else low = middle;
+      }
+      return low;
+    }
+    previous = elapsed;
+  }
+  return flight.durationS;
 }
 
 // Find the first coarse-source sample using the existing prepared LOD limit.
@@ -141,7 +220,7 @@ function detailHandoffTime(flight, from, frame, optics) {
 }
 
 export function animateWorldFlight({ owner, from, flight, anchors, signal, reducedMotion = false,
-  startElapsedS = 0, endElapsedS = flight.durationS, windowTarget, documentTarget, onPaint = () => {} }) {
+  startElapsedS = 0, endElapsedS = flight.durationS, windowTarget, documentTarget, onPaint = () => {}, stopWhen = () => false }) {
   return new Promise((resolve, reject) => {
     let frameId = null, started = null, finished = false, elapsedS = startElapsedS;
     const sample = createSelectionFlightSample();
@@ -171,7 +250,7 @@ export function animateWorldFlight({ owner, from, flight, anchors, signal, reduc
           : advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample);
         const world = worldSample(flight, from, elapsedS, sample);
         owner.apply(world); onPaint(world);
-        if (elapsedS >= endElapsedS) finish(null, { world, elapsedS });
+        if (elapsedS >= endElapsedS || stopWhen(elapsedS)) finish(null, { world, elapsedS });
         else frameId = windowTarget.requestAnimationFrame(paint);
       } catch (error) { finish(error); }
     }

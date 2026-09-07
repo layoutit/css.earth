@@ -67,6 +67,9 @@ function preparePolarInnerLeaves(body) {
 
 function createSpherePolygons(body, overlap) {
   const polygons = [];
+  // The inverse raster samples one continuous globe. Legacy band textures
+  // have separately reversed rows and cannot sample across their band border.
+  const textureOverlap = rasterAtlas ? overlap : 0;
   for (let latitudeIndex = 0;
     latitudeIndex < body.latitudeSegments;
     latitudeIndex += 1) {
@@ -104,17 +107,24 @@ function createSpherePolygons(body, overlap) {
           spherePoint(body, latitude1 + latitudeOverlap, longitude1 + longitudeOverlap),
           spherePoint(body, latitude1 + latitudeOverlap, longitude0 - longitudeOverlap),
         ],
-        uvs: [[u0, v0], [u1, v0], [u1, v1], [u0, v1]],
+        uvs: [
+          [u0 - textureOverlap / body.longitudeSegments, v0 - textureOverlap / body.latitudeSegments],
+          [u1 + textureOverlap / body.longitudeSegments, v0 - textureOverlap / body.latitudeSegments],
+          [u1 + textureOverlap / body.longitudeSegments, v1 + textureOverlap / body.latitudeSegments],
+          [u0 - textureOverlap / body.longitudeSegments, v1 + textureOverlap / body.latitudeSegments],
+        ],
         texture: body.texture.one,
         textureImageSource: {
           url: body.texture.one,
           width: body.texture.width,
           height: body.texture.height,
           sourceRect: {
-            x: longitudeIndex * sourceWidth,
-            y: (body.latitudeSegments - 1 - latitudeIndex) * sourceHeight,
-            width: sourceWidth,
-            height: sourceHeight,
+            // Geometry overlap must read the adjoining source texels too;
+            // stretching the unexpanded image repeats terrain at every edge.
+            x: (longitudeIndex - textureOverlap) * sourceWidth,
+            y: (body.latitudeSegments - 1 - latitudeIndex - textureOverlap) * sourceHeight,
+            width: sourceWidth * (1 + 2 * textureOverlap),
+            height: sourceHeight * (1 + 2 * textureOverlap),
           },
         },
         texturePresentation: {

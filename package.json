@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "engines": {
-    "node": ">=22.12.0"
+    "node": "^22.15.0 || >=24.0.0"
   },
   "scripts": {
     "setup:assets": "node tools/setup.mjs",
@@ -22,6 +22,7 @@
     "prepare:planet-info": "node tools/prepare-planet-information.mjs",
     "prepare:navigation": "node tools/prepare-navigation.mjs",
     "prepare:planet-title-sources": "node tools/prepare-planet-title-sources.mjs",
+    "prepare:overview-titles": "node tools/prepare-overview-titles.mjs",
     "prepare:titles": "node tools/prepare-shell-titles.mjs",
     "prepare:icons": "node tools/prepare-shell-icons.mjs",
     "prepare:wordmark": "node tools/prepare-wordmark-rail.mjs",

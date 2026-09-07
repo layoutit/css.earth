@@ -3,7 +3,7 @@ import { parseObjectDescriptor } from './parse.js';
 
 export type ShapeKind = 'sphere' | 'ellipsoid';
 export interface SourceReference { readonly id: string; readonly path: string; readonly sha256: string; }
-export interface ShapeRecipe { readonly kind: ShapeKind; readonly radiusKm: number; readonly polarRadiusKm?: number; }
+export interface ShapeRecipe { readonly kind: ShapeKind; readonly radiusKm: number; readonly polarRadiusKm?: number; readonly secondaryRadiusKm?: number; }
 export interface MaterialRecipe { readonly id: string; readonly source: string; readonly model: 'lit' | 'unlit' | 'emissive'; readonly frameBank?: string; }
 export interface FrameBankRecipe { readonly id: string; readonly source: string; readonly frames: number; readonly rows: number; readonly residentRows: number; }
 export interface LensRecipe { readonly id: string; readonly source: string; readonly material?: string; readonly frameBank?: string; }
@@ -119,7 +119,7 @@ function parseSurfaces(value: unknown, sourceIds: ReadonlySet<string>, materialI
   const output = value.map((item, index) => {
     const at = `recipe.surfaces[${index}]`, input = record(item, at); keys(input, ['id', 'source', 'projection', 'lenses'], at);
     if (input.projection !== 'equirectangular' && input.projection !== 'cubemap') throw new TypeError(`${at}.projection is not supported.`);
-    if (!Array.isArray(input.lenses) || !input.lenses.length) throw new TypeError(`${at}.lenses must be a nonempty array.`);
+    if (!Array.isArray(input.lenses)) throw new TypeError(`${at}.lenses must be an array.`);
     const lenses = input.lenses.map((item, lensIndex) => {
       const lensAt = `${at}.lenses[${lensIndex}]`, lens = record(item, lensAt); keys(lens, ['id', 'source', 'material', 'frameBank'], lensAt);
       return freeze({ id: id(lens.id, `${lensAt}.id`), source: sourceRef(lens.source, sourceIds, `${lensAt}.source`),
@@ -151,11 +151,13 @@ export function parseAuthoredRecipe(value: unknown): AuthoredRecipe {
   keys(input, ['schema', 'sources', 'shape', 'surfaces', 'materials', 'frameBanks', 'cutaway', 'atmosphere', 'rings', 'emission', 'motion', 'paging', 'destinations', 'worldFrame'], 'recipe');
   if (input.schema !== 'cssearth-authored-object@1') throw new TypeError('Unsupported authored recipe schema.');
   const parsedSources = sources(input.sources), sourceIds = new Set(parsedSources.map(item => item.id));
-  const shapeInput = record(input.shape, 'recipe.shape'); keys(shapeInput, ['kind', 'radiusKm', 'polarRadiusKm'], 'recipe.shape');
+  const shapeInput = record(input.shape, 'recipe.shape'); keys(shapeInput, ['kind', 'radiusKm', 'polarRadiusKm', 'secondaryRadiusKm'], 'recipe.shape');
   if (shapeInput.kind !== 'sphere' && shapeInput.kind !== 'ellipsoid') throw new TypeError('recipe.shape.kind is not supported.');
   const radiusKm = positive(shapeInput.radiusKm, 'recipe.shape.radiusKm');
   const polarRadiusKm = shapeInput.polarRadiusKm === undefined ? undefined : positive(shapeInput.polarRadiusKm, 'recipe.shape.polarRadiusKm');
   if ((shapeInput.kind === 'sphere' && polarRadiusKm !== undefined) || (shapeInput.kind === 'ellipsoid' && polarRadiusKm === undefined)) throw new TypeError('recipe.shape polar radius does not match its kind.');
+  const secondaryRadiusKm = shapeInput.secondaryRadiusKm === undefined ? undefined : positive(shapeInput.secondaryRadiusKm, 'recipe.shape.secondaryRadiusKm');
+  if (secondaryRadiusKm !== undefined && (shapeInput.kind !== 'ellipsoid' || secondaryRadiusKm > radiusKm || polarRadiusKm! > secondaryRadiusKm)) throw new TypeError('Triaxial axes must satisfy a >= b >= c > 0.');
   const frameBanks = parseFrameBanks(input.frameBanks, sourceIds), frameIds = new Set(frameBanks?.map(item => item.id));
   const materials = parseMaterials(input.materials, sourceIds, frameIds), materialIds = new Set(materials?.map(item => item.id));
   const parsedSurfaces = parseSurfaces(input.surfaces, sourceIds, materialIds, frameIds), surfaceIds = new Set(parsedSurfaces.map(item => item.id));
@@ -167,7 +169,7 @@ export function parseAuthoredRecipe(value: unknown): AuthoredRecipe {
   const paging = input.paging === undefined ? undefined : (() => { const at = 'recipe.paging', item = record(input.paging, at); keys(item, ['source', 'surface', 'maxResidentPages', 'maxResidentBytes', 'maxConcurrentLoads'], at); return freeze({ source: sourceRef(item.source, sourceIds, `${at}.source`), surface: optionalRef(item.surface, surfaceIds, `${at}.surface`)! , maxResidentPages: positive(item.maxResidentPages, `${at}.maxResidentPages`, true), maxResidentBytes: positive(item.maxResidentBytes, `${at}.maxResidentBytes`, true), maxConcurrentLoads: positive(item.maxConcurrentLoads, `${at}.maxConcurrentLoads`, true) }); })();
   const destinations = input.destinations === undefined ? undefined : (() => { const at = 'recipe.destinations', item = record(input.destinations, at); keys(item, ['source', 'maxEntries'], at); return freeze({ source: sourceRef(item.source, sourceIds, `${at}.source`), maxEntries: positive(item.maxEntries, `${at}.maxEntries`, true) }); })();
   const worldFrame = parseWorldFrame(input.worldFrame);
-  return freeze({ schema: 'cssearth-authored-object@1', sources: parsedSources, shape: freeze({ kind: shapeInput.kind, radiusKm, ...(polarRadiusKm === undefined ? {} : { polarRadiusKm }) }), surfaces: parsedSurfaces, ...(materials === undefined ? {} : { materials }), ...(frameBanks === undefined ? {} : { frameBanks }), ...(cutaway === undefined ? {} : { cutaway }), ...(atmosphere === undefined ? {} : { atmosphere }), ...(rings === undefined ? {} : { rings }), ...(emission === undefined ? {} : { emission }), ...(motion === undefined ? {} : { motion }), ...(paging === undefined ? {} : { paging }), ...(destinations === undefined ? {} : { destinations }), ...(worldFrame === undefined ? {} : { worldFrame }) });
+  return freeze({ schema: 'cssearth-authored-object@1', sources: parsedSources, shape: freeze({ kind: shapeInput.kind, radiusKm, ...(secondaryRadiusKm === undefined ? {} : { secondaryRadiusKm }), ...(polarRadiusKm === undefined ? {} : { polarRadiusKm }) }), surfaces: parsedSurfaces, ...(materials === undefined ? {} : { materials }), ...(frameBanks === undefined ? {} : { frameBanks }), ...(cutaway === undefined ? {} : { cutaway }), ...(atmosphere === undefined ? {} : { atmosphere }), ...(rings === undefined ? {} : { rings }), ...(emission === undefined ? {} : { emission }), ...(motion === undefined ? {} : { motion }), ...(paging === undefined ? {} : { paging }), ...(destinations === undefined ? {} : { destinations }), ...(worldFrame === undefined ? {} : { worldFrame }) });
 }
 
 /** Keeps the legacy envelope compatible while making authored capability data typed. */

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
-import { wheelWithReceipt } from './wheel-zoom-distance.mjs';
+import { scrollToDistance as scrollTo } from './wheel-zoom-distance.mjs';
 import shell from '../../src/objects/heliosphere/prepared/shell.json' with { type: 'json' };
 import volume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
 import worldContext from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
@@ -20,11 +20,14 @@ try {
   page.on('pageerror', error => errors.push(error.message));
   await page.goto(`${process.argv[2] ?? 'http://127.0.0.1:4210'}${reportedView}`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => window.__mercury?.ready && window.__cssEarth?.ready, null, { timeout: 30000 });
+  // A restored system-wide Mercury view automatically settles into Sun overview.
+  // Wait for that handoff before starting a separate pointer gesture.
+  await page.waitForFunction(() => window.__cssEarth?.activeObjectId === 'sun' && window.__sun?.ready, null, { timeout: 30000 });
   const motion = page.locator('input[name="motion"]');
   if (await motion.isChecked()) await motion.uncheck({ force: true });
   await page.evaluate(async () => {
     const { OBJECTS } = await import('/site/objects.mjs');
-    window.__environmentFrame = OBJECTS.find(object => object.id === 'mercury').worldFrame;
+    window.__environmentFrames = Object.fromEntries(OBJECTS.map(object => [object.id, object.worldFrame]));
   });
   snapshots.initial = await read(page);
   assert.equal(Number(snapshots.initial.shell.shellOpacity), 0, 'shell is hidden inside the Solar System');
@@ -84,12 +87,13 @@ try {
   assert.equal(snapshots.galaxyRotated.roots, 1, 'one detailed object scene throughout');
   assert.equal(snapshots.galaxyRotated.preparedRequests, snapshots.initial.preparedRequests, 'images are ready before travel');
   assert.ok(await page.evaluate(() => window.__environmentNodes.every(node => node.isConnected)), 'travel retains environment DOM');
-  assert.equal(new URL(page.url()).pathname, '/mercury/');
+  assert.equal(new URL(page.url()).pathname, '/sun/');
+  assert.equal(new URL(page.url()).searchParams.get('overview'), 'solar-system');
   const beforeEmpty = snapshots.galaxyRotated.camera;
   await page.mouse.dblclick(1280, 180);
   await settled(page);
   assert.deepEqual((await read(page)).camera, beforeEmpty, 'empty sky does not navigate');
-  await scrollTo(page, snapshots.initial.distanceKm);
+  await scrollTo(page, 2e6);
   snapshots.returned = await read(page);
   assert.equal(Number(snapshots.returned.shell.shellOpacity), 0);
   assert.equal(snapshots.returned.roots, 1);
@@ -98,9 +102,10 @@ try {
     .every((snapshot, index) => Math.abs(snapshot.volumeOpacity - [0, .5, 1, 0][index]) < 1e-6), 'native round trip traverses the complete prepared handoff');
   assert.equal(snapshots.returned.skyVisibility, 'visible');
   assert.equal(snapshots.returned.camera.pose.scene, snapshots.galaxyRotated.camera.pose.scene, 'return preserves shared observer orientation');
-  await page.screenshot({ path: resolve(output, 'mercury-returned.png') });
+  assert.equal(new URL(page.url()).searchParams.has('overview'), false, 'approaching the Sun restores its card');
+  await page.screenshot({ path: resolve(output, 'sun-returned.png') });
   assert.deepEqual(errors, []);
-  console.log('UNIVERSE_ENVIRONMENTS_PASSED reported Mercury view → heliosphere → NASA/volume transition → Milky Way → Mercury; retained CSS scenes and decoded images.');
+  console.log('UNIVERSE_ENVIRONMENTS_PASSED reported Mercury view → heliosphere → NASA/volume transition → Milky Way → Sun; retained CSS scenes and decoded images.');
 } finally {
   await writeFile(resolve(output, 'report.json'), JSON.stringify({ snapshots, errors }, null, 2));
   for (const context of browser.contexts()) await context.close();
@@ -109,20 +114,12 @@ try {
 
 async function settled(page) {
   await page.waitForFunction(() => {
-    const state = window.__mercury.camera.stats().dragInertia;
+    const state = window[`__${window.__cssEarth.activeObjectId}`].camera.stats().dragInertia;
     return !state.active && !state.wheelZoom.active;
   }, null, { timeout: 6000 });
   await page.waitForTimeout(80);
 }
-async function scrollTo(page, targetKm) {
-  for (let step = 0; step < 24; step++) {
-    const distance = await page.evaluate(() => window.__mercury.camera.state().distanceKilometers);
-    if (Math.abs(distance / targetKm - 1) < 1e-6) return;
-    await wheelWithReceipt(page, Math.max(-300, Math.min(300, Math.log(targetKm / distance) / .006)));
-    await settled(page);
-  }
-  throw new Error(`Native wheel did not reach ${targetKm} km.`);
-}
+
 async function drag(page, dx, dy) {
   await page.evaluate(() => {
     window.__frameTimes = []; window.__trackFrames = true; let previous;
@@ -148,9 +145,9 @@ async function drag(page, dx, dy) {
 async function read(page) {
   return page.evaluate(() => ({
     url: location.href,
-    distanceKm: window.__mercury.camera.state().distanceKilometers,
-    camera: window.__mercury.camera.state(),
-    world: window.__mercury.camera.captureWorldCamera(window.__environmentFrame),
+    distanceKm: window[`__${window.__cssEarth.activeObjectId}`].camera.state().distanceKilometers,
+    camera: window[`__${window.__cssEarth.activeObjectId}`].camera.state(),
+    world: window[`__${window.__cssEarth.activeObjectId}`].camera.captureWorldCamera(window.__environmentFrames[window.__cssEarth.activeObjectId]),
     roots: document.querySelectorAll('.polycss-camera').length,
     shell: { ...document.querySelector('.prepared-surface-shell').dataset },
     shellFaces: document.querySelectorAll('[data-shell-face]').length,

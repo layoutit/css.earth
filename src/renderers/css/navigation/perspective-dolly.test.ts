@@ -13,10 +13,11 @@ import scene from '../../../planets/mercury/prepared/scene.json';
 
 
 it('publishes physical scene coordinates without CSS perspective-origin or focal shims', () => {
-  const width = 1440, height = 900, focal = 1247;
+  let width = 1440, height = 900, focal = 1247;
+  let layoutReads = 0;
   const view = { getComputedStyle: () => ({ perspective: `${focal}px`, perspectiveOrigin: `${width/2}px ${height/2}px` }) };
   const make = (x: number) => ({ style: {}, ownerDocument: { defaultView: view },
-    getBoundingClientRect: () => ({ width, height, x, y: 0, left: x, top: 0 }) });
+    getBoundingClientRect: () => { layoutReads++; return { width, height, x, y: 0, left: x, top: 0 }; } });
   const options = { cameraPlan: { ...scene.camera, sceneScale: .3 }, heliocentric: null,
     worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0],
       presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 100 },
@@ -26,7 +27,11 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   const bodyCenter = [120, -70, -1200] as const;
   dolly.setBodyCenter(bodyCenter);
   const rotation = { m11: 0, m21: -1, m31: 0, m12: 1, m22: 0, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;
+  const measured = layoutReads;
   const published = dolly.publish(rotation, 'rotateZ(90deg)');
+  expect(layoutReads).toBe(measured, 'Camera publication must not force layout after its transform writes');
+  expect(published.stageViewport).toEqual({ focalPixels: focal, widthPixels: width, heightPixels: height,
+    principalOffsetPixels: [0, 0] });
   expect(published.projection.focalPixels).toBe(focal);
   expect(published.projection.principalOffsetPixels).toEqual([-170, 0]);
   const expected = [0, .3, 0, 0, -.3, 0, 0, 0, 0, 0, .3, 0, ...bodyCenter, 1];
@@ -56,5 +61,51 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   expect(grazing.body!.silhouette).toBeNull();
   expect(grazing.levelOfDetail!.stage).toBe('geometry');
   expect(Number.isFinite(dolly.trackball().radius)).toBe(true);
+  width = 1000; height = 700; focal = 866;
+  dolly.remeasure();
+  const resizedReads = layoutReads;
+  expect(dolly.publish(rotation, 'rotateZ(90deg)').stageViewport).toEqual({
+    focalPixels: focal, widthPixels: width, heightPixels: height, principalOffsetPixels: [0, 0],
+  });
+  expect(layoutReads).toBe(resizedReads, 'The next frame uses the refreshed layout cache');
+});
 
+it('overview centering preserves the current view and only converges while dollying out', () => {
+  const width = 1440, height = 900, focal = 1247;
+  const view = { getComputedStyle: () => ({ perspective: `${focal}px`, perspectiveOrigin: `${width / 2}px ${height / 2}px` }) };
+  const make = (left: number) => ({ style: {}, ownerDocument: { defaultView: view },
+    getBoundingClientRect: () => ({ width, height, x: left, y: 0, left, top: 0 }) });
+  const dolly = createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null,
+    worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0, 0, 0],
+      presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 100 },
+      bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
+    cameraElement: make(170), skyElement: make(0), stage: make(0), sceneElement: { style: {} },
+  } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
+  dolly.setBodyCenter([1300, -600, -3500]);
+  const initial = dolly.bodyCenter(), initialDistance = dolly.camera.state.distance;
+  const screen = () => { const [x, y, z] = dolly.bodyCenter()!; return [-170 + focal * x / -z, focal * y / -z]; };
+  const initialOffset = Math.hypot(...screen());
+  dolly.setZoomOutCentering(true);
+  expect(dolly.bodyCenter()).toEqual(initial, 'Enabling centering does not move the eye');
+  let previousOffset = initialOffset;
+  for (let step = 1; step <= 100; step++) {
+    const distance = initialDistance * (1 + step * .09);
+    dolly.camera.update({ distance });
+    expect(Math.hypot(...dolly.bodyCenter()!)).toBeCloseTo(distance, 8);
+    const offset = Math.hypot(...screen());
+    expect(offset).toBeLessThan(previousOffset);
+    expect(previousOffset - offset).toBeLessThan(initialOffset * .1);
+    previousOffset = offset;
+  }
+  expect(previousOffset).toBeLessThan(initialOffset * .11);
+  const finalScreen = screen();
+  dolly.camera.update({ distance: dolly.camera.state.distance * .9 });
+  screen().forEach((value, axis) => expect(value).toBeCloseTo(finalScreen[axis]!, 9));
+  dolly.setZoomOutCentering(false);
+  dolly.camera.update({ distance: dolly.camera.state.distance * 2 });
+  screen().forEach((value, axis) => expect(value).toBeCloseTo(finalScreen[axis]!, 9));
+  dolly.setBodyCenter([100, 0, 1000]);
+  dolly.setZoomOutCentering(true);
+  dolly.camera.update({ distance: dolly.camera.state.distance * 2 });
+  expect(dolly.bodyCenter()).toEqual([200, 0, 2000], 'A body behind the eye cannot jump across the camera');
 });
