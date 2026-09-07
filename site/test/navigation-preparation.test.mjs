@@ -67,9 +67,10 @@ for (const failure of ["object source", "late utility source", "publication", "r
   test(`failed ${failure} preserves accepted files or recoverable backups outside public`, async (context) => {
     const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-failure-"));
     context.after(() => rm(root, { recursive: true, force: true }));
-    for (const path of ["src/planets/new-body/source/preparation", "src/navigation/source", "site", "public/navigation"]) {
+    for (const path of ["src/planets/new-body/source/preparation", "src/planets/sun", "src/navigation/source", "site", "public/navigation"]) {
       await mkdir(resolve(root, path), { recursive: true });
     }
+    await copyFile(resolve(projectRoot, "src/planets/sun/swatch.json"), resolve(root, "src/planets/sun/swatch.json"));
     const original = (await loadMarkerDescriptors())[0];
     const descriptor = { ...original, planetId: "new-body", source: { ...original.source, path: "source.jpg" } };
     await writeFile(resolve(root, "src/planets/new-body/source/preparation/navigation.json"), JSON.stringify(descriptor));

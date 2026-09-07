@@ -161,7 +161,7 @@ export async function preparePlanetarySystem({
   const satelliteObserver = ![...bodies, ...dwarfPlanets].includes(bodyId);
   const observerUnitMeters = satelliteObserver ? M_PER_KM / 10 : M_PER_KM;
   const parent = satelliteObserver ? BODY_ORBITS[bodyId].centerBodyId : null;
-  if (satelliteObserver && !bodies.includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
+  if (satelliteObserver && ![...bodies, ...dwarfPlanets].includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
   const observerPositionKm = satelliteObserver ? scale(
     applyMatrix(BODY_FIXED_TO_ICRF_MATRICES[bodyId], BODY_ORBITS[bodyId].centerPositionAu),
     -ASTRONOMICAL_UNIT_KILOMETERS) : null;
@@ -191,7 +191,7 @@ export async function preparePlanetarySystem({
     tree.add(fixedFrame(
       id,
       "sun",
-      M_PER_KM,
+      id === parent ? parentUnitMeters : M_PER_KM,
       scale(dwarfPlanetPositionKm(id, SOLAR_GEOMETRY_EPOCH_JD_TT), 1 / ASTRONOMICAL_UNIT_KILOMETERS),
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));

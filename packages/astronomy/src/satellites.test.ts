@@ -65,6 +65,7 @@ const TOLERANCE_KM: Record<SatelliteId, number> = {
   oberon: 1587,
   triton: 56642,
   proteus: 787,
+  charon: 2,
 }
 
 describe('satellite ephemerides against JPL Horizons', () => {
@@ -166,6 +167,6 @@ describe('satellite ephemerides against JPL Horizons', () => {
   })
 
   it('rejects an unknown satellite', () => {
-    expect(() => satellitePositionKm('charon' as SatelliteId, 2451545)).toThrow(/unknown satellite/)
+    expect(() => satellitePositionKm('missing' as SatelliteId, 2451545)).toThrow(/unknown satellite/)
   })
 })

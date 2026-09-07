@@ -154,11 +154,23 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     -0.8009238166767914,
     -0.3254083400169346,
   ]),
+  // subsolar latitude -29.920°, longitude 93.429°
+  triton: Object.freeze([
+    -0.05184493131562652,
+    0.8651683290178136,
+    -0.4987944121192641,
+  ]),
   // subsolar latitude 60.039°, longitude 101.955°
   pluto: Object.freeze([
     -0.10345111685687171,
     0.4885781627373289,
     0.8663655379326224,
+  ]),
+  // subsolar latitude 60.039°, longitude -78.044°
+  charon: Object.freeze([
+    0.10345476212212139,
+    -0.48857790305043647,
+    0.8663652490982618,
   ]),
   // subsolar latitude -21.455°, longitude -19.723°
   haumea: Object.freeze([
@@ -307,11 +319,23 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     -0.09286796848440412,
     0.8786156428531084,
   ]),
+  // pole tilt to the ecliptic 54.560°, Sun ecliptic latitude 1.373°
+  triton: Object.freeze([
+    0.7072743556803884,
+    0.40438777737428105,
+    0.579856457502355,
+  ]),
   // pole tilt to the ecliptic 112.816°, Sun ecliptic latitude 4.198°
   pluto: Object.freeze([
     0.24356596228682376,
     0.8889956599431309,
     -0.38776582961572414,
+  ]),
+  // pole tilt to the ecliptic 112.816°, Sun ecliptic latitude 4.198°
+  charon: Object.freeze([
+    -0.24356596228653016,
+    -0.8889956599432113,
+    -0.3877658296157241,
   ]),
   // pole tilt to the ecliptic 77.953°, Sun ecliptic latitude -28.201°
   haumea: Object.freeze([
@@ -462,11 +486,23 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     -0.06209060087682991,
     0.8800433625413673,
   ]),
+  // orbital inclination to the ecliptic 123.700°, obliquity to the orbit 178.064°
+  triton: Object.freeze([
+    0.033730223012512515,
+    0.0020246859465804716,
+    -0.9994289232868656,
+  ]),
   // orbital inclination to the ecliptic 17.030°, obliquity to the orbit 119.595°
   pluto: Object.freeze([
     -0.032178535161385545,
     0.8689390788437296,
     -0.4938718650956725,
+  ]),
+  // orbital inclination to the ecliptic 112.891°, obliquity to the orbit 0.085°
+  charon: Object.freeze([
+    -0.00031622395008561746,
+    0.0014511192334292768,
+    0.9999988971270837,
   ]),
   // orbital inclination to the ecliptic 28.208°, obliquity to the orbit 87.034°
   haumea: Object.freeze([
@@ -618,11 +654,23 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     0.5894009807760147,
     -0.3483565249043778,
   ]),
+  // flight-path angle -0.001°
+  triton: Object.freeze([
+    -0.05436578777424124,
+    0.9985210692643659,
+    0.00018802880930249977,
+  ]),
   // flight-path angle 13.106°
   pluto: Object.freeze([
     -0.9447602764776404,
     -0.1877014716883806,
     -0.26869346385036763,
+  ]),
+  // flight-path angle -0.004°
+  charon: Object.freeze([
+    0.026205651366755428,
+    -0.9996555083749998,
+    0.0014589077985861512,
   ]),
   // flight-path angle -6.789°
   haumea: Object.freeze([
@@ -774,11 +822,23 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     -0.46709144483341436, 0.6133134946683321, -0.636923966750468,
     -0.7130500354869403, 0.16468346942791218, 0.6814976168624943,
   ]),
+  // pole RA 304.320°, Dec 16.812°, prime meridian W 76.219°
+  triton: Object.freeze([
+    0.038352775933222866, -0.8409765196200916, 0.53971062434039,
+    0.36631121255721016, -0.490676689575897, -0.7906026067890903,
+    0.9297016511403442, 0.22802385786254112, 0.2892403155032183,
+  ]),
   // pole RA 132.993°, Dec -6.163°, prime meridian W 358.208°
   pluto: Object.freeze([
     -0.7287898875992956, -0.09604588932324515, -0.6779679099169169,
     -0.684031147679219, 0.05716182312110747, 0.7272096774535675,
     -0.031091618447040417, 0.9937342266026555, -0.10735733855105338,
+  ]),
+  // pole RA 132.993°, Dec -6.163°, prime meridian W 178.208°
+  charon: Object.freeze([
+    0.7287898875992639, 0.09604588932348586, -0.6779679099169169,
+    0.6840311476792379, -0.05716182312088154, 0.7272096774535675,
+    0.031091618447368626, -0.9937342266026453, -0.10735733855105338,
   ]),
   // pole RA 285.100°, Dec -10.600°, prime meridian W 0.000°
   haumea: Object.freeze([
@@ -1145,6 +1205,23 @@ export const BODY_ORBITS = Object.freeze({
     perihelionAu: 29.772148559243192,
     aphelionAu: 30.37441283762429,
   }),
+  // a 0.0023717 AU, e 0.000045681, perihelion 0.0023716 AU, aphelion 0.0023718 AU
+  triton: Object.freeze({
+    centerBodyId: "neptune",
+    centerPositionAu: Object.freeze([0.0023669020608411335,0.00012889686832831334,0.00008014287777002764]),
+    semiMajorAxisAu: 0.002371664093836469,
+    eccentricity: 0.00004568070688645848,
+    heliocentricDistanceAu: 29.878603950383205,
+    perihelionDirection: Object.freeze([
+      0.8952484960244746,
+      0.44447948216396477,
+      0.031114631625161614,
+    ]),
+    trueAnomalyDegrees: 203.27473737857414,
+    inclinationDegrees: 123.7003861858392,
+    perihelionAu: 0.002371555754544165,
+    aphelionAu: 0.0023717724331287727,
+  }),
   // a 39.619 AU, e 0.24745, perihelion 29.815 AU, aphelion 49.423 AU
   pluto: Object.freeze({
     semiMajorAxisAu: 39.61928660061321,
@@ -1159,6 +1236,23 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 17.02988887116561,
     perihelionAu: 29.815323879603046,
     aphelionAu: 49.42324932162337,
+  }),
+  // a 0.00013099 AU, e 0.00015999, perihelion 0.00013097 AU, aphelion 0.00013101 AU
+  charon: Object.freeze({
+    centerBodyId: "pluto",
+    centerPositionAu: Object.freeze([0.00013096401355229727,0.0000034245434665201285,3.644457698833404e-8]),
+    semiMajorAxisAu: 0.000130989712346983,
+    eccentricity: 0.00015998897939485725,
+    heliocentricDistanceAu: 35.58924107897982,
+    perihelionDirection: Object.freeze([
+      0.9206234177144705,
+      -0.39045074859859413,
+      0.0008577147106397301,
+    ]),
+    trueAnomalyDegrees: 204.48044720800618,
+    inclinationDegrees: 112.8909485902874,
+    perihelionAu: 0.00013096875543659338,
+    aphelionAu: 0.00013101066925737262,
   }),
   // a 43.016 AU, e 0.19551, perihelion 34.606 AU, aphelion 51.426 AU
   haumea: Object.freeze({

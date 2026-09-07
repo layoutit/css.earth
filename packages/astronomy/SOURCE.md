@@ -4,8 +4,8 @@ The package owns time scales, float64 vectors, reference frames, ephemeris
 series, rotation models, and accuracy records. LICENSE retains the MIT terms.
 
 The upstream source, commit and hashes for mirrored files remain in upstream.json.
-Locally maintained files are listed separately: package guides and the generated
-record section writers and their output. The sync preserves these files; their
+Locally maintained files are listed separately: package guides, body and rotation registries, dwarf/satellite frame integration,
+their numerical checks, and scientific record generators and outputs. The sync preserves these files; their
 changes are reviewed through version control and numerical tests. It must not
 overwrite them with the upstream single-file layout.
 

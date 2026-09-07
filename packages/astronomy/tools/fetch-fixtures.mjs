@@ -74,6 +74,7 @@ const SATELLITES = [
   ['oberon', '704', '500@799'],
   ['triton', '801', '500@899'],
   ['proteus', '808', '500@899'],
+  ['charon', '901', '500@999'],
 ]
 
 // Deliberately NOT the epochs the mean elements were fitted on: the satellite

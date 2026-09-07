@@ -199,3 +199,9 @@ fixture records the URL that produced it.
 All source files, tests, tools, and generated code are limited to 600 physical
 lines. Run `pnpm lint:packages` from the repository root. Package instructions
 live in AGENTS.md; CLAUDE.md links to the same file.
+
+Charon uses the shared Horizons satellite fit over 1900–2100. Its maximum
+residual at the six independent vector epochs is 1.021 km (regression guard
+2 km); this is a sampled residual, not a universal accuracy bound. The
+Pluto-centred child frame uses the same unit/containment rule as other moons.
+Pluto's existing heliocentric elements target its centre, not its barycentre.
