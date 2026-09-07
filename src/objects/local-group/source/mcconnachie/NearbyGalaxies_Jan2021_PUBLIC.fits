@@ -1,0 +1,519 @@
+SIMPLE  =                    T / Standard FITS format                           BITPIX  =                    8 / Character data                                 NAXIS   =                    1 / Text string                                    NAXIS1  =                 5262 / Number of characters                           VOTMETA =                    T / Table metadata in VOTable format               EXTEND  =                    T / There are standard extensions                  COMMENT                                                                         COMMENT The data in this primary HDU consists of bytes which                    COMMENT comprise a VOTABLE document.                                            COMMENT The VOTable describes the metadata of the table contained               COMMENT in the following BINTABLE extension.                                    COMMENT Such a BINTABLE extension can be used on its own as a perfectly         COMMENT good table, but the information from this HDU may provide some          COMMENT useful additional metadata.                                             COMMENT There is one following BINTABLE.                                        NTABLE  =                    1 / Number of following BINTABLE HDUs              END                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             <?xml version='1.0'?>
+<VOTABLE version="1.3"
+ xmlns="http://www.ivoa.net/xml/VOTable/v1.3">
+<!--
+ !  VOTable written by STIL version 3.3-3 (uk.ac.starlink.votable.VOTableWriter)
+ !  at 2021-01-19T19:56:51
+ !-->
+<RESOURCE>
+<!-- Describes BINTABLE extensions in the following HDU.-->
+<TABLE name="Joined" nrows="144">
+<PARAM arraysize="33" datatype="char" name="Match type" value="Pair match; Best match, symmetric">
+<DESCRIPTION>Type of match which created this table</DESCRIPTION>
+</PARAM>
+<PARAM arraysize="11" datatype="char" name="Match algorithm" value="Exact Value">
+<DESCRIPTION>Matching algorithm which created this table</DESCRIPTION>
+</PARAM>
+<PARAM arraysize="89" datatype="char" name="Join Type" value="All from 1 (An output row for each matched or unmatched row in table 1 (LEFT OUTER JOIN))">
+<DESCRIPTION>Determines which rows appear in output table</DESCRIPTION>
+</PARAM>
+<PARAM arraysize="22" datatype="char" name="First input table" value="2: NearbyGalaxies.fits"/>
+<PARAM arraysize="19" datatype="char" name="Second input table" value="1: values.ascii.tex"/>
+<FIELD arraysize="16" datatype="char" name="GalaxyName">
+<DESCRIPTION>Galaxy name</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="10" datatype="char" name="RA">
+<DESCRIPTION>Right Ascension (hours minutes seconds)</DESCRIPTION>
+</FIELD>
+<FIELD arraysize="11" datatype="char" name="Dec">
+<DESCRIPTION>Declination (degrees arcminutes arcseconds)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="EB-V">
+<DESCRIPTION>Foreground reddening, E(B-V), measured directly from the Schlegel et al 1998 maps (they do not include the recalibration by Schlafly &amp; Finbiener 2011)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="dmod">
+<DESCRIPTION>Distance Modulus, (m-M)o err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="dmod+"/>
+<FIELD datatype="float" name="dmod-"/>
+<FIELD datatype="float" name="vh">
+<DESCRIPTION>Heliocentric radial velocity, vh(km/s) err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="vh+"/>
+<FIELD datatype="float" name="vh-"/>
+<FIELD datatype="float" name="Vmag">
+<DESCRIPTION>Apparent V magnitude in Vega mags, Vmag err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="Vmag+"/>
+<FIELD datatype="float" name="Vmag-"/>
+<FIELD datatype="float" name="PA">
+<DESCRIPTION>Position Angle of major axis in degrees measured east from north, PA err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="PA+"/>
+<FIELD datatype="float" name="PA-"/>
+<FIELD datatype="float" name="e=1-b/a">
+<DESCRIPTION>Projected ellipticity, e=1-b/a err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="e+"/>
+<FIELD datatype="float" name="e-"/>
+<FIELD datatype="float" name="muVo">
+<DESCRIPTION>Central V surface brightness, muVo(mag/sq.arcsec) err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="muVo+"/>
+<FIELD datatype="float" name="muVo-"/>
+<FIELD datatype="float" name="rh">
+<DESCRIPTION>Half-light radius measured on major axis, rh(arcmins) err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="rh+"/>
+<FIELD datatype="float" name="rh-"/>
+<FIELD datatype="float" name="sigma_s">
+<DESCRIPTION>Stellar radial velocity dispersion, sigma_s(km/s) err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="sigma_s+"/>
+<FIELD datatype="float" name="sigma_s-">
+<DESCRIPTION>Stellar peak/max rotation velocity, vrot_s(km/s) err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="vrot_s"/>
+<FIELD datatype="float" name="vrot_s+"/>
+<FIELD datatype="float" name="vrot_s-"/>
+<FIELD datatype="float" name="MHI">
+<DESCRIPTION>Mass of HI (calculated for the adopted distance modulus), M_HI (10^6M_sun)</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="sigma_g">
+<DESCRIPTION>HI radial velocity dispersion, sigma_g(km/s) err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="sigma_g+"/>
+<FIELD datatype="float" name="sigma_g-"/>
+<FIELD datatype="float" name="vrot_g">
+<DESCRIPTION>HI peak/max rotation velocity, vrot_g(km/s) err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="vrot_g+"/>
+<FIELD datatype="float" name="vrot_g-"/>
+<FIELD datatype="float" name="[Fe/H]">
+<DESCRIPTION>Stellar mean metallicity in dex, [Fe/H] err+ err-</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="feh+"/>
+<FIELD datatype="float" name="feh-"/>
+<FIELD datatype="short" name="F">
+<DESCRIPTION>Flag, F, for technique used to measure metallicity: 1=High res. spectroscopy; 2=Spectral synthesis; 3=CaT calibration; 4=CMD modelling; 5=Isochrones; 6=color of red giant branch</DESCRIPTION>
+<VALUES null='-32768'/>
+</FIELD>
+<FIELD datatype="float" name="pmra">
+<DESCRIPTION>mu_alpha*cos(delta) - proper motion in RA direction in mas/yr,  +err, -err</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="epmra+"/>
+<FIELD datatype="float" name="epmra-"/>
+<FIELD datatype="float" name="pmdec">
+<DESCRIPTION>mu_delta - proper motion in declination direction in mas/yr, +err, -err</DESCRIPTION>
+</FIELD>
+<FIELD datatype="float" name="epmdec+"/>
+<FIELD datatype="float" name="epmdec-"/>
+<FIELD arraysize="53" datatype="char" name="References">
+<DESCRIPTION>References, numbers refer to list given in supplementary file "References.dat"</DESCRIPTION>
+</FIELD>
+<!-- Dummy VOTable - no DATA element -->
+</TABLE>
+</RESOURCE>
+</VOTABLE>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  XTENSION= 'BINTABLE'           / binary table extension                         BITPIX  =                    8 / 8-bit bytes                                    NAXIS   =                    2 / 2-dimensional table                            NAXIS1  =                  268 / width of table in bytes                        NAXIS2  =                  144 / number of rows in table                        PCOUNT  =                    0 / size of special data area                      GCOUNT  =                    1 / one data group                                 TFIELDS =                   49 / number of columns                              EXTNAME = 'Joined  '           / table name                                     TTYPE1  = 'GalaxyName'         / label for column 1                             TFORM1  = '16A     '           / format for column 1                            TCOMM1  = 'Galaxy name'                                                         TTYPE2  = 'RA      '           / label for column 2                             TFORM2  = '10A     '           / format for column 2                            TCOMM2  = 'Right Ascension (hours minutes seconds)'                             TTYPE3  = 'Dec     '           / label for column 3                             TFORM3  = '11A     '           / format for column 3                            TCOMM3  = 'Declination (degrees arcminutes arcseconds)'                         TTYPE4  = 'EB-V    '           / label for column 4                             TFORM4  = 'E       '           / format for column 4                            TTYPE5  = 'dmod    '           / label for column 5                             TFORM5  = 'E       '           / format for column 5                            TCOMM5  = 'Distance Modulus, (m-M)o err+ err-'                                  TTYPE6  = 'dmod+   '           / label for column 6                             TFORM6  = 'E       '           / format for column 6                            TTYPE7  = 'dmod-   '           / label for column 7                             TFORM7  = 'E       '           / format for column 7                            TTYPE8  = 'vh      '           / label for column 8                             TFORM8  = 'E       '           / format for column 8                            TCOMM8  = 'Heliocentric radial velocity, vh(km/s) err+ err-'                    TTYPE9  = 'vh+     '           / label for column 9                             TFORM9  = 'E       '           / format for column 9                            TTYPE10 = 'vh-     '           / label for column 10                            TFORM10 = 'E       '           / format for column 10                           TTYPE11 = 'Vmag    '           / label for column 11                            TFORM11 = 'E       '           / format for column 11                           TCOMM11 = 'Apparent V magnitude in Vega mags, Vmag err+ err-'                   TTYPE12 = 'Vmag+   '           / label for column 12                            TFORM12 = 'E       '           / format for column 12                           TTYPE13 = 'Vmag-   '           / label for column 13                            TFORM13 = 'E       '           / format for column 13                           TTYPE14 = 'PA      '           / label for column 14                            TFORM14 = 'E       '           / format for column 14                           TTYPE15 = 'PA+     '           / label for column 15                            TFORM15 = 'E       '           / format for column 15                           TTYPE16 = 'PA-     '           / label for column 16                            TFORM16 = 'E       '           / format for column 16                           TTYPE17 = 'e=1-b/a '           / label for column 17                            TFORM17 = 'E       '           / format for column 17                           TCOMM17 = 'Projected ellipticity, e=1-b/a err+ err-'                            TTYPE18 = 'e+      '           / label for column 18                            TFORM18 = 'E       '           / format for column 18                           TTYPE19 = 'e-      '           / label for column 19                            TFORM19 = 'E       '           / format for column 19                           TTYPE20 = 'muVo    '           / label for column 20                            TFORM20 = 'E       '           / format for column 20                           TCOMM20 = 'Central V surface brightness, muVo(mag/sq.arcsec) err+ err-'         TTYPE21 = 'muVo+   '           / label for column 21                            TFORM21 = 'E       '           / format for column 21                           TTYPE22 = 'muVo-   '           / label for column 22                            TFORM22 = 'E       '           / format for column 22                           TTYPE23 = 'rh      '           / label for column 23                            TFORM23 = 'E       '           / format for column 23                           TCOMM23 = 'Half-light radius measured on major axis, rh(arcmins) err+ err-'     TTYPE24 = 'rh+     '           / label for column 24                            TFORM24 = 'E       '           / format for column 24                           TTYPE25 = 'rh-     '           / label for column 25                            TFORM25 = 'E       '           / format for column 25                           TTYPE26 = 'sigma_s '           / label for column 26                            TFORM26 = 'E       '           / format for column 26                           TCOMM26 = 'Stellar radial velocity dispersion, sigma_s(km/s) err+ err-'         TTYPE27 = 'sigma_s+'           / label for column 27                            TFORM27 = 'E       '           / format for column 27                           TTYPE28 = 'sigma_s-'           / label for column 28                            TFORM28 = 'E       '           / format for column 28                           TCOMM28 = 'Stellar peak/max rotation velocity, vrot_s(km/s) err+ err-'          TTYPE29 = 'vrot_s  '           / label for column 29                            TFORM29 = 'E       '           / format for column 29                           TTYPE30 = 'vrot_s+ '           / label for column 30                            TFORM30 = 'E       '           / format for column 30                           TTYPE31 = 'vrot_s- '           / label for column 31                            TFORM31 = 'E       '           / format for column 31                           TTYPE32 = 'MHI     '           / label for column 32                            TFORM32 = 'E       '           / format for column 32                           TTYPE33 = 'sigma_g '           / label for column 33                            TFORM33 = 'E       '           / format for column 33                           TCOMM33 = 'HI radial velocity dispersion, sigma_g(km/s) err+ err-'              TTYPE34 = 'sigma_g+'           / label for column 34                            TFORM34 = 'E       '           / format for column 34                           TTYPE35 = 'sigma_g-'           / label for column 35                            TFORM35 = 'E       '           / format for column 35                           TTYPE36 = 'vrot_g  '           / label for column 36                            TFORM36 = 'E       '           / format for column 36                           TCOMM36 = 'HI peak/max rotation velocity, vrot_g(km/s) err+ err-'               TTYPE37 = 'vrot_g+ '           / label for column 37                            TFORM37 = 'E       '           / format for column 37                           TTYPE38 = 'vrot_g- '           / label for column 38                            TFORM38 = 'E       '           / format for column 38                           TTYPE39 = '[Fe/H]  '           / label for column 39                            TFORM39 = 'E       '           / format for column 39                           TCOMM39 = 'Stellar mean metallicity in dex, [Fe/H] err+ err-'                   TTYPE40 = 'feh+    '           / label for column 40                            TFORM40 = 'E       '           / format for column 40                           TTYPE41 = 'feh-    '           / label for column 41                            TFORM41 = 'E       '           / format for column 41                           TTYPE42 = 'F       '           / label for column 42                            TFORM42 = 'I       '           / format for column 42                           TNULL42 =               -32768 / blank value for column 42                      TTYPE43 = 'pmra    '           / label for column 43                            TFORM43 = 'E       '           / format for column 43                           TTYPE44 = 'epmra+  '           / label for column 44                            TFORM44 = 'E       '           / format for column 44                           TTYPE45 = 'epmra-  '           / label for column 45                            TFORM45 = 'E       '           / format for column 45                           TTYPE46 = 'pmdec   '           / label for column 46                            TFORM46 = 'E       '           / format for column 46                           TTYPE47 = 'epmdec+ '           / label for column 47                            TFORM47 = 'E       '           / format for column 47                           TTYPE48 = 'epmdec- '           / label for column 48                            TFORM48 = 'E       '           / format for column 48                           TTYPE49 = 'References'         / label for column 49                            TFORM49 = '53A     '           / format for column 49                           DATE-HDU= '2021-01-19T19:56:51' / Date of HDU creation (UTC)                    STILVERS= '3.3-3   '           / Version of STIL software                       STILCLAS= 'uk.ac.starlink.votable.FitsPlusTableWriter' / STIL Author class      END                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             *Bootes3        13:57:12.026:48:0.0  <¨1AíÃÕ=ÃÃÕ=ÃÃÕCEÄ @s33@s33AIôö?   ?   B¥  Dy¿ Dy¿ ?   Dy¿ Dy¿ A˙ff>ôôö>ôôöDy¿ Dy¿ Dy¿ A`  @LÃÕ@LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ff>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (14)(15)(99)                                         *CanisMajor     7:12:35.0 -27:40:0.0 >á+Ad£◊>ôôö>ôôöBÆ  @Ä  @Ä  ΩÃÃÕ?LÃÕ?LÃÕBˆ  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A¿  ?ôö?ôöDy¿ Dy¿ Dy¿ A†  @@  @@  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ø   >LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (1)(2)(95)(176)                                      *Cetus2         1:17:52.8 -17:25:12.0<£◊
+AàÃÕ=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Aã33?333?333Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A‰ff?ôôö?ôôö?Û33?Ä  ?   Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ø£◊
+=è\)=è\) @5¬è=LÃÕ=è\)>ÎÖ=u¬è=è\)(232)(260)(266)(267)                                 *Columba1       5:31:26.4 -28:1:48.0 <ÃÃÕA™ff>aGÆ>aGÆC≥3@†  @ôôöAÜff>LÃÕ>LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Aﬂôö?333?333?Û33?   >ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	>Bè\=u¬è=u¬èæ∏QÏ=u¬è=u¬è(232)(248)(266)(267)                                 *Draco2         15:52:47.664:33:55.0 <ìtºAÖ\)=LÃÕ=LÃÕ√´@ ?åÃÕ?ôôöA`  ?LÃÕ?LÃÕBò  A∞  B   >kÖ>ôö>ôöAÃı√?¶ff?¶ff@@  ?333?   Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿,ÃÕ=ÃÃÕ=ÃÃÕ ?ä=q=è\)=è\)?hı√=£◊
+=£◊
+(225)(259)(266)(267)                                 *Eridanus3      2:22:45.5 -52:17:1.0 <ÃÃÕAùôö>LÃÕ>LÃÕDy¿ Dy¿ Dy¿ Aä£◊?\(ˆ?\(ˆBx  A0  A0  >£◊
+>∏>∏A∂∏R@àı√@QÏ>îz·>kÖ>kÖDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	?ä=q>\)>Êffæ˙·H>.{>∏(226)(227)(255)(266)(267)                            *Grus1          22:56:42.4-50:9:48.0 <oA£33>LÃÕ>LÃÕ√Ä @ôö?ÃÃÕAáp§?
+=?
+=A0  B   B   ?
+=q>Ö∏>Ö∏A÷·H?‚è\?¨ÃÕ@∏?^∏R?^∏RAÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øµ¬è?ÃÕ>◊
+= =è\)=LÃÕ=LÃÕæîz·=u¬è=è\)(226)(252)(255)(266)(267)                            *Grus2          22:4:4.8  -46:26:24.0<ÉoAîı√>W
+=>W
+=¬‹  ?   ?   Ak33>LÃÕ>LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A‚ÃÕ?333?333@¿  ?fff?   Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ £◊=·GÆ=·GÆ >¬è\<ı¬è<ı¬èø∫·H=#◊
+=#◊
+(232)(262)(266)(267)                                 *Horologium1    2:55:31.7 -54:7:8.0  <e`BAú  >LÃÕ>LÃÕB·ôö@   @&ffA33?\)?\)BH  A–  A–  >û∏R>#◊
+>#◊
+A“=q?åÃÕ?}p§?≈∏>Æ{>Æ{@úÃÕ@333?fffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿0£◊=ÃÃÕ=ÃÃÕ ?QÎÖ<ı¬è<ı¬èø(ˆ<ı¬è<ı¬è(226)(227)(254)(255)(266)(267)                       *Horologium2    3:16:32.1 -50:1:5.0  <£◊
+AõÆ>LÃÕ>LÃÕC(≥3ANffAIôöAè33?Çè\?Çè\C  AÄ  AÄ  ?\(ˆ>Bè\>Bè\A›∏@Æ?ÏÃÕ@5∏?ßÆ?ßÆDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ffDy¿ Dy¿  ?Bè\>LÃÕ>îz·æ—ÎÖ>kÖ>W
+=(230)(231)(248)(255)(266)(267)                       *Hydra1         8:55:36.0 3:36:0.0   =æwAxQÏ=LÃÕ=LÃÕB≤ÃÕ?≥33?≥33APQÏ>ôôö>ôôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Aff?¿  ?¿  @¿  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øhı√<ı¬è<ı¬è ¿  ¿  ¿  ¿  ¿  ¿  (243)(244)                                           *Indus1         21:8:49.1 -51:9:56.0 <˝Û∂A†  >LÃÕ>LÃÕDy¿ Dy¿ Dy¿ AÖp§?∏R?∏R@†  A†  A†  ?8QÏ>îz·>îz·A√
+=@ÃÕ?√◊
+?^∏R>Êff>ÊffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	>∏QÏ=è\)=è\)øYôö=u¬è=u¬è(226)(227)(228)(255)(266)(267)                       *Indus2         20:38:52.8-46:9:36.0 =CñA≠33>#◊
+>#◊
+Dy¿ Dy¿ Dy¿ Aã33>LÃÕ>LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ AÎ¬è?333?333@9ôö?åÃÕ?Ä  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	º#◊
+=ÃÃÕ=ÃÃÕæu¬è=ÃÃÕ=ÃÃÕ(232)(266)(267)                                      *Pegasus3       22:24:22.65:25:12.0  >á+A¨z·>LÃÕ>LÃÕ√^Êf@&ff@&ffAå  ?   ?   C  Aà  Aà  >ÎÖ>8QÏ>Ö∏AŸGÆ?Ä  ?Ä  ?¶ff?   >ÃÃÕ@¨ÃÕ@@  @   Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ffDy¿ Dy¿  =u¬è=ÃÃÕ=ÃÃÕæLÃÕ=ÃÃÕ=ÃÃÕ(229)(249)(266)(267)                                 *Phoenix2       23:39:59.4-54:24:22.0<T˝ÙAúÃÕ>LÃÕ>LÃÕBôö@lÃÕ@s33AÇff?!GÆ?!GÆ¡ò  A`  A`  ?(ˆ>ôö>ôöAŒÃÕ?É◊
+?xQÏ?Œ{>ä=q>ä=qA0  Aff@©ôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	>ı¬è=#◊
+=#◊
+øï¬è=LÃÕ=LÃÕ(226)(227)(248)(255)(266)(267)                       *Pictor1        4:43:47.4 -50:16:59.0<T˝ÙA¢ff>LÃÕ>LÃÕDy¿ Dy¿ Dy¿ AÜÃÕ?ôö?ôöBê  A   A   >u¬è>Bè\>Bè\Aƒ  @è\?∫·H?(ı√>£◊
+>£◊
+Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	>#◊
+=£◊
+=£◊
+    =ÃÃÕ=ÃÃÕ(226)(227)(255)(266)(267)                            *Reticulum2     3:35:42.1 -54:2:57.0 <ìtºAã33>LÃÕ>LÃÕBÅff?¶ff?LÃÕAXQÏ>¬è\>¬è\Bä  @   @   ?\)<ı¬è<ı¬èA÷(ˆ>ÎÖ>ÎÖ@≤·H>W
+=>W
+=@N{?—ÎÖ>˙·HDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿p§=∏QÏ=ÃÃÕ @ı√<#◊
+<#◊
+øÆ{<£◊
+<£◊
+(226)(227)(254)(255)(266)(267)                       *Reticulum3     3:45:26.4 -60:27:0.0 =Dõ¶Aûz·>û∏R>û∏RCâö@  @ÏÃÕAÑ  >ôôö>ôôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A·GÆ?LÃÕ?LÃÕ@ôö?fff?LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	>∏QÏ>\)>\)=LÃÕ>Bè\>Ä  (232)(248)(266)(267)                                 *Sagittarius2   19:52:40.5-22:4:5.0  =·GÆAöè\<ı¬è<£◊
+√1LÕ?ôôö?ôôöA^ff>ÃÃÕ>ÃÃÕBŒ  A‡  Aà  =u¬è=u¬è=u¬èA«
+=?fff?fff?Ÿôö=LÃÕ=LÃÕ@,ÃÕ?¶ff?Ä  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ÎÖ<ı¬è<ı¬è øE∏<ı¬è<ı¬èøc◊
+<£◊
+<£◊
+(225)(251)(266)(267)                                 *Triangulum2    2:13:17.4 36:10:42.0 =° ¡Aã33=ÃÃÕ=ÃÃÕ√æŸö?åÃÕ?åÃÕAyôö?   ?   B`  AÄ  A¿  >W
+=>.{>W
+=A‡z·?Ä  ?Ä  @yôö?åÃÕ?fffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿\)=LÃÕ=LÃÕ ?\)=LÃÕ=LÃÕ=è\)=u¬è=u¬è(221)(261)(266)(267)                                 *Tucana3        23:56:36.0-59:36:0.0 <Dõ¶Aà{>#◊
+>#◊
+¬Ãôö@ôö@ôöAiôö>ÃÃÕ>ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A‚  ?fff?fff@¿  ?LÃÕ?ôö=ÃÃÕ?333=ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿·H=è\)=£◊
+ Ω£◊
+<#◊
+<#◊
+øœ\)<£◊
+<£◊
+(232)(253)(266)(267)                                 *Tucana4        0:2:55.2  -60:51:0.0 <Dõ¶AìGÆ>Bè\>Bè\A~ff?Êff?ŸôöAnff>ôôö>ôôöAÿ  A  A   >«Æ=è\)=ÃÃÕAÁ33?LÃÕ?LÃÕAÃÕ?≥33?fff@âôö?Ÿôö?Ä  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿\)>ôö>#◊
+ ?
+=q=u¬è=u¬èø’¬è=è\)=è\)(232)(262)(266)(267)                                 *Tucana5        23:37:24.0-63:16:12.0<¥9XAïÆ>Æ{>Æ{¬33@   @ÃÕAàÃÕ?   ?   AË  A0  A0  ?è\=∏QÏ>8QÏAÃff?Ä  ?Ä  @ff?ôö>ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿
+·H>kÖ>kÖ æ\)=u¬è=LÃÕøì33=£◊
+=u¬è(232)(262)(266)(267)                                 AndromedaI      0:45:39.8 38:2:28.0  =YáA¬·H=è\)=è\)√º&f@ÃÕ@ÃÕAH  =ÃÃÕ=ÃÃÕA∞  Ap  Ap  >aGÆ=#◊
+=#◊
+A≈ôö>LÃÕ>LÃÕ@Fff>ôôö>ôôöA#33?Û33?Û33Dy¿ Dy¿ Dy¿                             øπôö=#◊
+=#◊
+ ¿  ¿  ¿  ¿  ¿  ¿  (40)(47)(105)(130)(201)                              AndromedaII     1:16:29.8 33:25:9.0  =y€#A¿è\=u¬è=u¬è√@ff?   ?   A8  >LÃÕ>LÃÕB  @¿  @¿  >LÃÕ=£◊
+=£◊
+Aƒ  >LÃÕ>LÃÕ@∆ff>LÃÕ>LÃÕ@˘ôö?åÃÕ?åÃÕA.ff@ôö@ôö                            ø±ÎÖ<ı¬è<ı¬è ¿  ¿  ¿  ¿  ¿  ¿  (40)(47)(105)(130)(204)                              AndromedaIII    0:35:33.8 36:29:52.0 =e`BA¬ı√=è\)=è\)√¨&f?Ÿôö?ŸôöAc33>ôôö>ôôöC  @@  @@  ?∏<£◊
+<£◊
+A∆ff>LÃÕ>LÃÕ@ÃÕ>LÃÕ>LÃÕAÃÕ?≥33?≥33Dy¿ Dy¿ Dy¿                             ø„◊
+=#◊
+=#◊
+ ¿  ¿  ¿  ¿  ¿  ¿  (40)(47)(105)(143)(130)(201)                         AndromedaIX     0:52:53.0 43:11:45.0 =ôôöA√\)=è\)=è\)√Qff@   @   AÇff?åÃÕ?åÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A‡  ?ôôö?ôôö@   =ÃÃÕ=ÃÃÕA.ff@   @   Dy¿ Dy¿ Dy¿                             ¿ÃÕ>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (40)(44)(103)(130)(201)                              AndromedaV      1:10:17.1 47:37:41.0 >   A√Ö=£◊
+=£◊
+√…Ä @Ä  @Ä  Anff>LÃÕ>LÃÕB   A   A   >8QÏ=LÃÕ=LÃÕA ff>LÃÕ>LÃÕ?≥33>LÃÕ>LÃÕA8  @©ôö@åÃÕDy¿ Dy¿ Dy¿                             ¿   =ÃÃÕ=ÃÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (40)(49)(105)(144)(143)(130)(207)                    AndromedaVI     23:51:46.324:34:57.0 =Å%A√¬è=è\)=è\)√©Êf?Û33?Û33AP  >LÃÕ>LÃÕC#  @@  @@  >—ÎÖ<ı¬è<ı¬èA¿ÃÕ>LÃÕ>LÃÕ@33>LÃÕ>LÃÕAFff?¿  ?¶ffDy¿ Dy¿ Dy¿                             ø¿  =ÃÃÕ=ÃÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (40)(49)(105)(144)(130)(207)                         AndromedaVII    23:26:31.750:40:33.0 >FßA√GÆ=ÃÃÕ=ÃÃÕ√ôôö?¶ff?¶ffA333>ôôö>ôôöBº  A   A   >∏=#◊
+=#◊
+Aπôö>LÃÕ>LÃÕ@`  =ÃÃÕ=ÃÃÕAP  ?Ä  ?Ä  Dy¿ Dy¿ Dy¿                             ø≥33>ôôö>ôôö ¿  ¿  ¿  ¿  ¿  ¿  (40)(47)(105)(130)(201)                              AndromedaX      1:6:33.7  44:48:16.0 >ìA¡
+==£◊
+>∏√$ö?Ÿôö?ŸôöAÑÃÕ?Ä  ?Ä  B8  @†  @†  >·GÆ=u¬è=u¬èA“ff?åÃÕ?åÃÕ?¶ff=ÃÃÕ=ÃÃÕ@ÃÃÕ?≥33?≥33Dy¿ Dy¿ Dy¿                             ø˜
+==·GÆ=·GÆ ¿  ¿  ¿  ¿  ¿  ¿  (50)(47)(104)(130)(201)(202)                         AndromedaXI     0:46:20.0 33:48:5.0  =£◊
+A¬£◊=LÃÕ=LÃÕ√—ÃÕ@åÃÕ@åÃÕAå  ?ôôö?ôôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A‘  ?¶ff?¶ff?5¬è<ı¬è<ı¬è@ì33Dy¿ Dy¿ Dy¿ Dy¿ Dy¿                             øÊff=ÃÃÕ=ÃÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (44)(103)(130)(206)(207)                             AndromedaXII    0:47:27.0 34:22:29.0 =·GÆA∆∏R=∏QÏ>Æ{ƒôö@LÃÕ@LÃÕAíff?ôôö?ôôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A‰  ?¶ff?¶ff?ôôö>LÃÕ>LÃÕ@&ff@£33@&ffDy¿ Dy¿ Dy¿                             ¿ÃÕ>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (44)(103)(130)(202)(207)                             AndromedaXIII   0:51:51.0 33:0:16.0  =ßÔûAƒı√=LÃÕ=LÃÕ√9ff@ôö@ôöAêÃÕ?ôôö?ôôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A⁄ff?¶ff?¶ff?GÆ=£◊
+=£◊
+@πôö@   @   Dy¿ Dy¿ Dy¿                             øŸôö>ôôö>ôôö ¿  ¿  ¿  ¿  ¿  ¿  (44)(103)(130)(201)(206)(207)                        AndromedaXIV    0:51:35.0 29:41:49.0 =u¬èAƒ  =u¬è?\)√LÕ?ôôö?ôôöA~ff?   ?   Dy¿ Dy¿ Dy¿ >û∏R=∏QÏ=∏QÏAŸôö?ôö?ôö?Ÿôö?LÃÕ?LÃÕ@©ôö?Ä  ?Ä  Dy¿ Dy¿ Dy¿                             ¿£◊=LÃÕ=LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (54)(47)(130)(201)(202)                              AndromedaXIX    0:19:32.1 35:2:37.0  =}Û∂Aƒè\=£◊
+>‹(ˆ¬ﬂ33?ÃÃÕ?≥33Ayôö?ôö?ôöB  A   A   >.{<£◊
+<£◊
+AÍff?333?333@∆ff=ÃÃÕ=ÃÃÕ@ñff?ÃÃÕ?≥33Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÊff>ôôö>ôôö ¿  ¿  ¿  ¿  ¿  ¿  (51)(202)(207)                                       AndromedaXV     1:14:18.7 38:7:3.0   =@ÉAø◊
+>Ö∏=ı¬è√°Ä ?≥33?≥33Aiôö>ôôö>ôôö    Dy¿ Dy¿     Dy¿ Dy¿ A∆ff>ÃÃÕ>ÃÃÕ?ö·H=LÃÕ=LÃÕ@Ä  ?≥33?≥33Dy¿ Dy¿ Dy¿                             øÊff>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (55)(56)(130)(201)(202)                              AndromedaXVI    0:59:29.8 32:22:36.0 =â7LAª∏>Bè\>\)√∑¶f@333@333Afff>ôôö>ôôö    Dy¿ Dy¿     Dy¿ Dy¿ Aø33>ÃÃÕ>ÃÃÕ?c◊
+=LÃÕ=LÃÕ@s33@9ôö@9ôöDy¿ Dy¿ Dy¿                             ¿ff>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (55)(56)(130)(201)(202)                              AndromedaXVII   0:37:7.0  44:19:20.0 =óçPA¬z·=·GÆ=£◊
+√{ôö?Êff@   A|ÃÕ>ÃÃÕ>ÃÃÕBÙ  @‡  @‡  >ä=q=u¬è=u¬èAÕôö?   ?   ?û∏R=£◊
+=£◊
+@9ôö@ÃÕ?Û33Dy¿ Dy¿ Dy¿                             øŸôö>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (46)(104)(130)(104)(202)(207)                        AndromedaXVIII  0:2:14.5  45:5:20.0  =ŸáAÀ\)=è\)=£◊
+√¶Õ@,ÃÕ@,ÃÕAÄ  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ AÃÃÕDy¿ Dy¿ ?kÖ=u¬è=u¬èA33@33@33Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ø≥33>ôôö>ôôö ¿  ¿  ¿  ¿  ¿  ¿  (51)(201)(202)(207)                                  AndromedaXX     0:7:30.7  35:7:56.0  =q©¸A¬ÃÕ=ı¬è>#◊
+√‰ö@Fff@fffAëôö?LÃÕ?LÃÕB†  A†  A†  >ôôö>ôö>ôöA—ôö?LÃÕ?LÃÕ?Æ>\)=#◊
+@„33@yôö@   Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ÃÕ>ÃÃÕ>ÃÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (51)(202)(207)                                       AndromedaXXI    23:54:47.742:28:15.0 =æv…Aƒ∏R=u¬è=è\)√µ@ ?fff?fffAlÃÕ?ôö?ôöB‹  Ap  Ap  >LÃÕ=è\)=è\)Aÿ  >ÃÃÕ>ÃÃÕ@`  >ôôö>ôôö@ê  ?ôôö?Ä  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÊff=ÃÃÕ=ÃÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (53)(201)(202)(207)                                  AndromedaXXII   1:27:40.0 28:5:25.0  =° ¡A∆è\=è\)>∏QÏ√ÃÕ@   @   Aê  ?LÃÕ?LÃÕB‰  Ap  Ap  ?\)=·GÆ=·GÆA’ôö?ôö?ôö?p£◊=ÃÃÕ=ÃÃÕ@333?Û33?≥33Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÊff?ôö?ôö ¿  ¿  ¿  ¿  ¿  ¿  (53)(201)(202)(207)(212)                             AndromedaXXIII  1:29:21.8 38:43:8.0  =á+A√p§>∏>∏√m≥3?ôôö?ôôöAc33?   ?   C
+  @†  @†  >ÃÃÕ=LÃÕ=LÃÕA‡  ?   ?   @ì33>LÃÕ>LÃÕ@„33?Ä  ?Ä  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ÃÕ>ôôö>ôôö ¿  ¿  ¿  ¿  ¿  ¿  (48)(207)                                            AndromedaXXIV   1:18:30.0 46:21:58.0 =©˚ÁAø∏=ı¬è=ı¬è√ 33@¶ff@¶ffAÇff?   ?   @†  A   A   >Ä  =LÃÕ=LÃÕAﬁff?   ?   @ff=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÊff>ôôö>ôôö ¿  ¿  ¿  ¿  ¿  ¿  (48)(207)                                            AndromedaXXIX   23:58:55.630:45:20.0 =<jA¬è\>aGÆ>aGÆ√Bff?¿  ?¿  AÄ  >ÃÃÕ>ÃÃÕBL  A   A   >≥33=u¬è=u¬èA”Ö?fff?fff?Ÿôö>LÃÕ>LÃÕ@∂ff?ôôö?ôôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÊffDy¿ Dy¿  ¿  ¿  ¿  ¿  ¿  ¿  (57)(216)                                            AndromedaXXV    0:30:8.9  46:51:7.0  =ŒŸAƒff=ı¬è=ı¬è¬◊ôö?Ä  ?Ä  AlÃÕ?   ?   C*  A   A   >Ä  =LÃÕ=LÃÕAÿÃÕ?   ?   @@  >LÃÕ>LÃÕ@@  ?ôôö?åÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÛ33=ÃÃÕ=ÃÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (48)(207)                                            AndromedaXXVI   0:23:45.6 47:54:58.0 =·GÆA√GÆ=ı¬è=ı¬è√ÇÃÕ@@  @333Aäff?   ?   C  A   A   >Ä  =LÃÕ=LÃÕA€33?   ?   ?Ä  =ÃÃÕ=ÃÃÕA	ôö@333@ÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÊff?   ?    ¿  ¿  ¿  ¿  ¿  ¿  (48)(207)                                            AndromedaXXVII  0:37:27.1 45:23:13.0 =£◊
+Aƒ∏R=ı¬è=ı¬èƒÊf@ñff@ê  AÖôö?   ?   C  A   A   >ÃÃÕ>LÃÕ>LÃÕA‹ÃÕ?   ?   ?Êff>ôôö>ôôöAlÃÕ@âôö@FffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ff?   ?    ¿  ¿  ¿  ¿  ¿  ¿  (48)(207)                                            AndromedaXXVIII 22:32:41.231:12:58.0 =∏QÏA¿ÃÕ?   >LÃÕ√£ö@,ÃÕ@,ÃÕAyôö>ÃÃÕ?fffB  AÄ  AÄ  >Æ{>∏>∏A“ff>ÃÃÕ?fff?é{>W
+=>W
+=@”33@9ôö@ffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ff>ôôö>ôôö ¿  ¿  ¿  ¿  ¿  ¿  (61)(207)                                            AndromedaXXX    0:36:34.9 49:38:48.0 >)˚ÁA¡\)=ÃÃÕ>Ö∏√ÃÕ@¿  @”33AÅôö>ôôö>ôôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A‘·H?LÃÕ?LÃÕ?¨ÃÕ=ı¬è>8QÏA<ÃÕ@ˆff@ñffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øŸôö>ÃÃÕ>ÃÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (202)(207)(208)                                      AndromedaXXXI   22:58:16.341:17:28.0 >\)A√33=ı¬è=ı¬èDy¿ Dy¿ Dy¿ AK33?333?333¬l  @¿  @¿  >‹(ˆ=è\)=è\)AŒff?LÃÕ?LÃÕ@Üff>ÃÃÕ?   Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (209)                                                AndromedaXXXII  0:35:59.4 51:33:35.0 >GÆA√ôö>\)>\)Dy¿ Dy¿ Dy¿ AC33?333?333¬¥  @‡  @‡  ?   =∏QÏ=∏QÏA”33?LÃÕ?LÃÕ@–  ?ôôö?Ä  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (209)                                                AndromedaXXXIII 3:1:23.6  40:59:18.0 >∏A√Ö>8QÏ>8QÏDy¿ Dy¿ Dy¿ Aaôö?333?333¿¿  Ap  A   >‹(ˆ>ôö>.{AÃÃÕ?Ä  ?fff?Ÿôö>ÃÃÕ>ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (215)                                                Antlia          10:4:4.1  -27:19:52.0=° ¡AÕ33=ÃÃÕ=ÃÃÕCµ  @   @   As33>LÃÕ>LÃÕC  @†  @†  >ÃÃÕ=#◊
+=#◊
+Aø33>LÃÕ>LÃÕ?ôôö=ı¬è=ı¬èDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ?:·H@ÃÃÕ?333?333Dy¿ Dy¿ Dy¿ øÃÃÕ=ÃÃÕ=ÃÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (59)(81)(118)(117)(81)                               Antlia2         9:35:32.8 -36:46:2.0 >ôöA§ÃÕ=·GÆ=·GÆCëYö?   ?   A9∏>ôö>ôöC  @¿  @¿  >¬è\=£◊
+=£◊
+AÒ¬è?&ff?&ffBòff@Êff@Êff@∂∏R?ä=q?ä=qDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÆ{=#◊
+=#◊
+ Ω∏QÏ<#◊
+<#◊
+=ı¬è<#◊
+<#◊
+(236)(266)(267)                                      AntliaB         9:48:56.1 -25:59:24.0=£◊
+AÃz·>#◊
+>#◊
+Cº  @   @   A~ff?ôö?ôö@Ä  A@  A@  >ôôö=LÃÕ=LÃÕAƒz·?åÃÕ?åÃÕ?8QÏ=è\)=è\)Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ >è\)<£◊
+<£◊
+Dy¿ Dy¿ Dy¿ Dy¿ ¿   Dy¿ Dy¿  ¿  ¿  ¿  ¿  ¿  ¿  (224)                                                Aquarius        20:46:51.8-12:50:53.0=PÂ`A…33=£◊
+=£◊
+√	≥3@ff@ffAh  =ÃÃÕ=ÃÃÕB≈ff?Ä  ?Ä  ?   =ÃÃÕ=ÃÃÕAºÃÕ>LÃÕ>LÃÕ?º(ˆ=#◊
+=#◊
+@¸ÃÕ?Û33?ÃÃÕDy¿ Dy¿ Dy¿ @É33@πôö=ÃÃÕ=ÃÃÕ            ø¶ff>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (40)(69)(113)(217)                                   Aquarius2       22:33:55.5-9:19:39.0 =â7LA°GÆ=è\)=è\)¬é33@   @   A|ÃÕ>\)>\)BÚ  A  A  >«Æ=∏QÏ=∏QÏA‰z·?#◊
+?#◊
+@£33?LÃÕ?LÃÕ@¨ÃÕ@Yôö?fffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿33?   ?    æ.{=ÃÃÕ=ÃÃÕæ‹(ˆ=£◊
+=£◊
+(238)(266)(267)                                      Bootes(1)       14:0:6.0  14:30:0.0  <ãCñAò·H=£◊
+=£◊
+B∆  @ff@ffAQp§>Ä  >Ä  @‡  @@  @@  >Ä  <£◊
+<£◊
+A„
+=>ôôö>ôôöA4(ˆ>ä=q>ä=q@ôö?fff?   Dy¿ Dy¿ Dy¿                             ¿#33=·GÆ=·GÆ æ«Æ<#◊
+<#◊
+øáÆ<#◊
+<#◊
+(20)(13)(98)(134)(130)(178)(255)(266)(267)           Bootes2         13:58:0.0 12:51:0.0  <˝Û∂AêÃÕ=u¬è=u¬è¬Í  @¶ff@¶ffArè\?=p§?=p§¬å  Aÿ  Aÿ  >u¬è=ı¬è=ı¬èA‹ff?ãÖ?Ö∏@C33>Êff>ÊffA(  @ÏÃÕ@ÏÃÕDy¿ Dy¿ Dy¿                             øÂ∏=LÃÕ=LÃÕ ¿∏=∏QÏ=£◊
+æ—ÎÖ=u¬è=u¬è(9)(10)(98)(130)(255)(266)(267)                      Bootes4         15:34:45.443:43:34.0 <ÃÃÕA¨ÃÕ>LÃÕ>LÃÕDy¿ Dy¿ Dy¿ Aàè\>kÖ>W
+=@@  @Ä  @Ä  ?#◊
+=LÃÕ=LÃÕAı√?:·H?5¬è@Û33?LÃÕ?LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	æôö=ÃÃÕ=ÃÃÕΩÃÃÕ=ÃÃÕ=ÃÃÕ(240)(266)(267)                                      CanesVenatici(1)13:28:3.5 33:33:21.0 <e`BA≠Ö=ÃÃÕ=ÃÃÕA˜33?ôö?ôöAQôö>LÃÕ>LÃÕBå  @Ä  @Ä  >«Æ<ı¬è<ı¬èAÿÃÕ>LÃÕ>LÃÕAff>ÃÃÕ>ÃÃÕ@Û33>ÃÃÕ>ÃÃÕDy¿ Dy¿ Dy¿                             ø˝p§<#◊
+<#◊
+ Ω·GÆ<£◊
+<£◊
+Ωı¬è<£◊
+<£◊
+(36)(8)(98)(130)(179)(180)(266)(267)                 CanesVenatici2  12:57:10.034:19:15.0 <#◊
+A®(ˆ=u¬è=u¬è√ Êf?ôôö?ôôöA}ôö>£◊
+>£◊
+A   A0  A0  >ÎÖ=·GÆ=·GÆA‘  ?.{?!GÆ?¡GÆ>kÖ>kÖ@ì33?Ä  ?Ä  Dy¿ Dy¿ Dy¿                             ¿p§=LÃÕ=LÃÕ æôö=è\)=è\)æä=q=u¬è=u¬è(33)(8)(98)(130)(179)(180)(255)(266)(267)            Carina          6:41:36.7 -50:57:58.0=y€#A†·H>∏>∏C^Êf=ÃÃÕ=ÃÃÕA*·H=LÃÕ=LÃÕBp  ?Ä  ?Ä  >Ωp§<#◊
+<#◊
+A ÃÕ=è\)=è\)A6·H=ı¬è=ı¬è@”33?ôôö?ôôö                                        ø‹(ˆ<#◊
+<#◊
+ ?Æ<#◊
+<#◊
+=ı¬è<#◊
+<#◊
+(29)(26)(100)(136)(130)(190)(255)(266)(267)          Carina2         7:36:25.6 -57:59:57.0>@ÉAéQÏ=LÃÕ=LÃÕCÓôö?ôôö?ôôöAT£◊=ÃÃÕ=ÃÃÕC*  A  A  >Æ{=è\)=è\)A⁄QÏ?ôö?ôöA
+=?@  ?@  @Yôö?ôôö?LÃÕ    >ôôö>ôôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿(ˆ=∏QÏ=∏QÏ ?£◊<#◊
+<#◊
+>∏<£◊
+<£◊
+(237)(246)(266)(267)                                 Carina3         7:38:31.2 -57:53:59.0>H¥9Aâ¬è=ÃÃÕ=ÃÃÕCéLÕ@Yôö@FffAm∏>LÃÕ>LÃÕC  A`  A`  ?ÃÕ>8QÏ>8QÏA‘£◊?333?333@p  ?Ä  ?Ä  @≥33@âôö@ffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÊff>LÃÕ>LÃÕ @GÆ=LÃÕ=LÃÕ?≈∏=u¬è=è\)(237)(246)(266)(267)                                 Centaurus1      12:38:20.4-40:54:7.2 =˝Û∂A¢£◊=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Alz·=·GÆ=·GÆA†  A0  A0  >ÃÃÕ=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ @8QÏ?   >ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÊffDy¿ Dy¿  æ\)=LÃÕ=LÃÕæLÃÕ=#◊
+=#◊
+(256)(266)(267)                                      Cetus           0:26:11.0 -11:2:40.0 <Â`BA√∏=è\)=è\)¬ßÃÕ?ôôö?ôôöAQôö>LÃÕ>LÃÕB|  @@  @@  >®ı√=u¬è=u¬èA»  >LÃÕ>LÃÕ@LÃÕ=ÃÃÕ=ÃÃÕAÃÕ?Ä  ?Ä  @ˆff?ôôö?ôôö                            øÛ33=ÃÃÕ=ÃÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (40)(68)(105)(130)(217)                              Cetus3          2:5:19.4  -4:16:12.0 <ƒõ¶A∞  >LÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Aúff?ÎÖ?\)B   @†  @¿  ?Bè\=u¬è=£◊
+A·Æ?àı√?áÆ?ùp§>◊
+=>Bè\Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	>\)=£◊
+=£◊
+æ#◊
+=£◊
+=£◊
+(241)(266)(267)                                      ComaBerenices   12:26:59.023:54:15.0 <ãCñAëôö>LÃÕ>LÃÕBƒ33?fff?fffA]∏>Ä  >Ä  ¬h  @Ä  @Ä  >Ωp§=LÃÕ=LÃÕA◊◊
+>Ωp§>Ωp§@¥(ˆ>ôôö>ôôö@ì33?LÃÕ?LÃÕ                                        ¿&ff=LÃÕ=LÃÕ >—ÎÖ<£◊
+<£◊
+ø⁄·H<£◊
+<£◊
+(5)(8)(98)(130)(179)(180)(255)(266)(267)             Crater2         11:49:14.4-18:24:47.0<ı¬èA¢ÃÕ<£◊
+<£◊
+BØ  >ÃÃÕ>ÃÃÕABff=ÃÃÕ=ÃÃÕ    Dy¿ Dy¿ =LÃÕ=LÃÕ=LÃÕAÎ
+=?ôö?ôöA˘ôö@   @   @,ÃÕ>ôôö>ôôö?ôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ø˝p§=ÃÃÕ=ÃÃÕ Ωè\)<£◊
+<£◊
+Ω·GÆ<#◊
+<#◊
+(245)(247)(266)(267)                                 DDO113          12:14:57.936:13:8.0  <£◊
+A⁄ÃÕ=u¬è=u¬èCé  @¿  @¿  AÉ33>ôôö>ôôöDy¿ Dy¿ Dy¿     =∏QÏ=∏QÏA¿  >LÃÕ>LÃÕ?333=è\)=è\)Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ B@  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ø˛∏R>W
+=>W
+= ¿  ¿  ¿  ¿  ¿  ¿  (89)(41)(117)(167)                                   DDO125          12:27:40.943:29:44.0 <£◊
+Aÿz·=LÃÕ=LÃÕCBÊf>LÃÕ>LÃÕAK33>ôôö>ôôöB‡  @Ä  @Ä  >—ÎÖ<#◊
+<#◊
+A∞ÃÕ>LÃÕ>LÃÕ?Ö∏=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ B  @Èôö?¿  ?¿  A333@,ÃÕ@,ÃÕø›p§>.{>.{ ¿  ¿  ¿  ¿  ¿  ¿  (89)(84)(117)(119)(169)(170)                         DDO190          14:24:43.444:31:33.0 <Dõ¶AŸ◊
+<ı¬è<ı¬èC  @Ä  @Ä  ALÃÕ=ÃÃÕ=ÃÃÕB§  @†  @†  =ÃÃÕ<£◊
+<£◊
+A´33>LÃÕ>LÃÕ?#◊
+=u¬è=u¬èDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ B,  A   @ôö@ôöA≈ôö@   @   ¿   =£◊
+=£◊
+ ¿  ¿  ¿  ¿  ¿  ¿  (89)(93)(126)(117)(169)(170)                         DDO99           11:50:53.038:52:49.0 <‘˝ÙAÿè\>\)>\)C{  @Ä  @Ä  A^ff=ÃÃÕ=ÃÃÕBå  @Ä  @Ä  >îz·<#◊
+<#◊
+A∑33>LÃÕ>LÃÕ?fff=∏QÏ=∏QÏDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ BP  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿QÏ>aGÆ>aGÆ ¿  ¿  ¿  ¿  ¿  ¿  (89)(90)(123)(119)(117)                              *DESJ0225+0304  2:25:42.4 3:4:10.1   =•„Aá
+==u¬è=LÃÕDy¿ Dy¿ Dy¿ A|z·?   >ôôöA˙  A7ÆAV=q?(ˆ>\)>kÖDy¿ Dy¿ Dy¿ @+Ö?™=q?333Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ø°GÆ<ı¬è<ı¬è ?àı√?z·?\)æW
+=>ı¬è?ö·H(257)(266)(267)                                      Draco           17:20:12.457:54:55.0 <›/Aõ33>.{>.{√ëÄ =ÃÃÕ=ÃÃÕA+
+==LÃÕ=LÃÕBÆ  ?Ä  ?Ä  >ôôö<#◊
+<#◊
+A»ı√=è\)=è\)A·H=∏QÏ=∏QÏAôö?ôôö?ôôö                                        ø˜
+=<#◊
+<#◊
+ =,1;£◊
+;£◊
+æBè\<#◊
+<#◊
+(21)(22)(98)(135)(130)(180)(255)(266)(267)           ESO294-G010     0:26:33.4 -41:51:19.0;ƒõ¶A‘QÏ=#◊
+=#◊
+BÍ  @†  @†  AtÃÕ>ôôö>ôôöA   Dy¿ Dy¿ ?è\Dy¿ Dy¿ A≤ff>LÃÕ>LÃÕ>◊
+==#◊
+=#◊
+Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ >Æ{A33?fff?fffDy¿ Dy¿ Dy¿ øΩp§>.{>.{ ¿  ¿  ¿  ¿  ¿  ¿  (59)(86)(121)(117)(161)                              ESO410-G005     0:15:31.6 -32:10:48.0<e`BA”\)=#◊
+=#◊
+Dy¿ Dy¿ Dy¿ Anff>ôôö>ôôöBd  Dy¿ Dy¿ >Ωp§Dy¿ Dy¿ A±ôö>LÃÕ>LÃÕ?   =LÃÕ=LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ?:·HAc33?ôö?ôöDy¿ Dy¿ Dy¿ ø˜
+=>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (59)(121)(117)(161)                                  Eridanus2       3:44:21.1 -43:32:0.0 <#◊
+A∑33>LÃÕ>LÃÕBó33@S33@S33A{
+==∏QÏ=∏QÏB§  @‡  @‡  >Ωp§=u¬è=u¬èA’
+=>ôôö>ôôö?ÁÆ>.{>.{@‹ÃÕ?ôôö?fff            Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿QÏ>∏>∏ >W
+==∏QÏ=∏QÏΩLÃÕ=·GÆ=·GÆ(226)(227)(250)(255)(266)(267)                       Fornax          2:39:59.3 -34:26:57.0<¨1A¶∏R>8QÏ>8QÏB]33=ÃÃÕ=ÃÃÕ@Ï(ˆ>\)>\)B8  ?Ä  ?Ä  >è\)<#◊
+<#◊
+Aº∏R>#◊
+>#◊
+Aì33>LÃÕ>LÃÕA;33?fff?fff            >.{                        ø}p§<#◊
+<#◊
+ >√ïÅ:Éo:Éoæ∑ŒŸ;o;o(29)(26)(100)(136)(138)(130)(180)(255)(266)(267)     GR8             12:58:40.414:13:3.0  <‘˝ÙA’Ö=ı¬è=ı¬èCUÊf@   @   Ah  >LÃÕ>LÃÕBt  @   @   >LÃÕ=LÃÕ=LÃÕA¥ÃÕ>LÃÕ>LÃÕ>£◊
+=#◊
+=#◊
+Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A0  @‡  >LÃÕ>LÃÕ            Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (59)(69)(123)(124)                                   HIZSS3(A)       7:0:29.3  -4:12:30.0 ?Å©¸A–ı√>\)>\)Cê  @   @   Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A`  Dy¿ Dy¿ Dy¿ B(  @Ä  @Ä  Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (82)(83)                                             HIZSS3B         7:0:29.3  -4:12:30.0 ?Å©¸A–ı√>\)>\)C°LÕ?≥33?≥33Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ @&ffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (82)(83)                                             Hercules        16:31:2.0 12:47:30.0 =}Û∂A§ÃÕ>LÃÕ>LÃÕB4ÃÕ?åÃÕ?åÃÕAlQÏ>.{>.{¬í  @   @   ?0£◊=#◊
+=#◊
+A÷è\>«Æ>«Æ@øÆ?z·?z·@lÃÕ?fff?fffDy¿ Dy¿ Dy¿                             ¿=q=#◊
+=#◊
+ ºı¬è=#◊
+=#◊
+æ∏QÏ<ı¬è<ı¬è(30)(31)(98)(130)(179)(180)(255)(266)(267)           Hydra2          12:21:42.1-31:59:7.0 =y€#A•∏>#◊
+>#◊
+CóåÕ?≥33?≥33AÄQÏ>Ωp§>Ωp§AË  A»  A»  >.{>∏>∏A—∏?c◊
+?J=q?¿  >£◊
+>£◊
+Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿GÆ=£◊
+=£◊
+ æÆ{=ÃÃÕ=ÃÃÕΩ∏QÏ=£◊
+=∏QÏ(222)(223)(255)(266)(267)                            Hydrus1         2:29:33.4 -79:18:32.0=∫^5Aâôö=#◊
+=#◊
+B†ÃÕ?ôö?ôöAG◊
+=£◊
+=£◊
+B¬  A`  A`  >W
+=>ôö=è\)A“ÃÕ?z·?z·@Ìp§?∏R?
+=q@,(ˆ?è\>‹(ˆDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿!GÆ=∏QÏ=∏QÏ @rè\<#◊
+<#◊
+ø¿  <#◊
+<#◊
+(235)(266)(267)                                      IC10            0:20:17.3 59:18:14.0 ?»¥9Aƒ  =ı¬è=ı¬è√Æ  ?Ä  ?Ä  A  >LÃÕ>LÃÕDy¿ Dy¿ Dy¿ >Bè\<£◊
+<£◊
+AƒÃÕ>LÃÕ>LÃÕ@)ôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ BH  A   ?Ä  ?Ä  B  @†  @†  ø£◊
+Dy¿ Dy¿  ¿  ¿  ¿  ¿  ¿  ¿  (59)(43)(41)(106)(145)(146)(196)                     IC1613          1:4:47.8  2:7:4.0    <ÃÃÕA√∏=ı¬è=ı¬è√gôö?ôôö?ôôöA33=ÃÃÕ=ÃÃÕBH  @   @   =·GÆ<ı¬è<ı¬èA∂ffDy¿ Dy¿ @ŸÎÖDy¿ Dy¿ A,ÃÕ?Ä  ?fffDy¿ Dy¿ Dy¿ BÇ  @ºÃÕ?Ä  ?Ä  A»  @@  @@  øÃÃÕ>LÃÕ>LÃÕ =£◊
+=u¬è=è\)Ω#◊
+<ı¬è<ı¬è(62)(63)(41)(148)(149)(217)(268)                     IC3104          12:18:46.0-79:43:34.0>—ÎÖA÷=q>8QÏ>8QÏC÷Ä @Ä  @Ä  ALÃÕDy¿ Dy¿ B4  @   @   ?∏<£◊
+<£◊
+A∫ffDy¿ Dy¿ @ £◊Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ AP  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (91)(67)(41)                                         IC4662          17:47:8.8 -64:38:30.0=è\)A◊Ö>.{>.{Có  @@  @@  A1ôö>ôôö>ôôöBﬁ  @Ä  @Ä  >ä=q<#◊
+<#◊
+Aïôö>LÃÕ>LÃÕ>ı¬è=LÃÕ=LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ C4  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ø´Ö>∏>∏ ¿  ¿  ¿  ¿  ¿  ¿  (92)(67)(117)(119)                                   IC5152          22:2:41.5 -51:17:47.0<ÃÃÕA”ôö=LÃÕ=LÃÕBÙ  @   @   A.ffDy¿ Dy¿ B»  @   @   >¬è\<£◊
+<£◊
+A†ÃÕDy¿ Dy¿ ?xQÏDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ BÆ  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (59)(67)(41)                                         KK258           22:40:43.9-30:47:59.0<T˝ÙA÷ÃÕ=è\)=è\)B∏  @†  @†  AÇffDy¿ Dy¿ Dy¿ Dy¿ Dy¿ ?   Dy¿ Dy¿ A–  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÃÃÕDy¿ Dy¿  ¿  ¿  ¿  ¿  ¿  ¿  (219)(220)                                           KKH86           13:54:33.54:14:35.0  <›/Aÿz·>#◊
+>#◊
+Cèôö?333?333AàÃÕ>ôôö>ôôöC1  ?Ä  ?Ä  >«Æ<#◊
+<#◊
+Aπôö>LÃÕ>LÃÕ>è\)<ı¬è<ı¬èDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ?aGÆDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿∏>îz·>îz· ¿  ¿  ¿  ¿  ¿  ¿  (89)(84)(117)(119)(173)                              KKH98           23:45:34.038:43:4.0  =˚ÁmAÿ{=∏QÏ=∏QÏ√Êf?Ä  ?Ä  As33>ôôö>ôôöC/  ?Ä  ?Ä  >—ÎÖ<#◊
+<#◊
+A∂ff>LÃÕ>LÃÕ?#◊
+=u¬è=u¬èDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ @”33Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ø¯QÏ>Ä  >Ä   ¿  ¿  ¿  ¿  ¿  ¿  (59)(84)(117)(119)(90)                               KKR25           16:13:48.054:22:16.0 <tºA”\)=è\)=è\)¬Ç  Ap  Ap  Ax  >LÃÕ>LÃÕDy¿ Dy¿ Dy¿ >˙·H<ı¬è<ı¬èA¿  >LÃÕ>LÃÕ>£◊<ı¬è<ı¬èDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ff>ôôö>ôôö ¿  ¿  ¿  ¿  ¿  ¿  (59)(120)(203)                                       KKR3            14:7:10.5 35:3:37.0  <e`BA’ôö=ı¬è=ı¬èB}33?Êff?ÊffAâôö>ôôö>ôôö    ?Ä  ?Ä  =LÃÕ<#◊
+<#◊
+Aæff>LÃÕ>LÃÕ>∏QÏ=#◊
+=#◊
+Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ @   @  ?   ?               ¿GÆ>Ä  >Ä   ¿  ¿  ¿  ¿  ¿  ¿  (59)(88)(117)(119)                                   KKs3            2:24:44.4 -73:30:51.0=LÃÕA’
+==è\)=è\)Cû  @‡  @‡  Ah  =ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ ?ôöDy¿ Dy¿ A«33=ÃÃÕ=ÃÃÕ?ÎÖ=u¬è=u¬èDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÛ33Dy¿ Dy¿  ¿  ¿  ¿  ¿  ¿  ¿  (233)(234)(220)                                      LGS3            1:3:55.0  21:53:6.0  =#◊
+A√p§=è\)=è\)√è@ >ôôö>ôôöAdÃÕ=ÃÃÕ=ÃÃÕ    Dy¿ Dy¿ >LÃÕDy¿ Dy¿ A∆ff=ÃÃÕ=ÃÃÕ@ff>LÃÕ>LÃÕ@¸ÃÕ@©ôö@9ôöDy¿ Dy¿ Dy¿ >¬è\Aôö>ôôö>ôôö@†  Dy¿ Dy¿ ¿ff>aGÆ>aGÆ ¿  ¿  ¿  ¿  ¿  ¿  (40)(60)(107)(147)                                   LMC             5:23:34.5 -69:45:22.0?mOﬂAî(ˆ=∏QÏ=∏QÏCÉö@Yôö@Yôö>ÃÃÕ=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A°ôö?   ?   BG33A~ffA~ffCÊ  A|ÃÕ>LÃÕ>LÃÕB|  @@  @@  ø   Dy¿ Dy¿  ¿  ¿  ¿  ¿  ¿  ¿  (16)(17)(41)(131)(132)(182)                          Leo1            10:8:28.1 12:18:23.0 =tºA∞(ˆ>∏>∏Cç@ =ÃÃÕ=ÃÃÕA#◊
+>è\)>è\)Bú  ?Ä  ?Ä  >ôôö<#◊
+<#◊
+A¥·H>ôôö>ôôö@S33<ı¬è<ı¬èA33?≥33?≥33                                        ø∑
+=<#◊
+<#◊
+ ΩLÃÕ<#◊
+<#◊
+Ω·GÆ<#◊
+<#◊
+(38)(39)(100)(130)(180)(255)(266)(267)               Leo2            11:13:28.822:9:6.0   <ãCñAÆ∏R>∏>∏Bú  =ÃÃÕ=ÃÃÕAAôö=#◊
+=#◊
+B,  A   A   =è\)<£◊
+<£◊
+A¡ÎÖ=è\)=è\)@∏R<ı¬è<ı¬è@”33?333?333Dy¿ Dy¿ Dy¿                             øœ\)<#◊
+<#◊
+ æ\)<£◊
+<£◊
+Ωı¬è<£◊
+<£◊
+(37)(22)(100)(130)(180)(255)(266)(267)               Leo4            11:32:57.0-0:32:0.0  <‘˝ÙAßÖ=∏QÏ=∏QÏCLÕ?≥33?≥33A33>Ö∏>Ö∏¡Ë  Aÿ  Aÿ  >Bè\=∏QÏ=∏QÏAﬁff?Æ?   @'
+=>û∏R>û∏R@S33?Ÿôö?ŸôöDy¿ Dy¿ Dy¿                             ¿"è\=è\)=è\) Ω£◊
+=∏QÏ=∏QÏæW
+==£◊
+=£◊
+(32)(8)(101)(130)(179)(180)(255)(266)(267)           Leo5            11:31:9.6 2:13:12.0  <›/A´Æ>#◊
+>#◊
+C-LÕ@Fff@FffAÜÃÕ>∏QÏ>∏QÏ¬Ç  A®  A®  >≥33=è\)=è\)A«∏?fff?J=q?Ä  >aGÆ>aGÆ@lÃÕ@33?≥33Dy¿ Dy¿ Dy¿                             ¿   >LÃÕ>LÃÕ Ωu¬è=∏QÏ=∏QÏæÄ  =∏QÏ=£◊
+(34)(34)(101)(139)(130)(255)(258)(266)(267)          LeoA            9:59:26.5 30:44:47.0 <¨1Aƒ{=ı¬è=ı¬èA¿  ?¿  ?¿  AFff>LÃÕ>LÃÕB‰  @†  @†  >ÃÃÕ<ı¬è<ı¬èA∂ffDy¿ Dy¿ @	ôöDy¿ Dy¿ @÷ff?≥33?ôôö            A0  AÃÕ?≥33?≥33            ø≥33>LÃÕ>LÃÕ >˙·H>£◊
+>£◊
+æÎÖ>è\)>è\)(72)(73)(41)(112)(155)(198)(217)(268)                LeoP            10:21:45.118:5:17.0  <‘˝ÙA–ff>LÃÕ>LÃÕCÑ  @   @   Aá33=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ?p£◊Dy¿ Dy¿ Dy¿ A  ?¿  ?¿  Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (211)(218)                                           LeoT            9:34:53.4 17:3:5.0   <˝Û∂A∏ÃÕ=ÃÃÕ=ÃÃÕBff@   @   Ax  >\)>\)¬÷  AÄ  AÄ  >kÖ=∏QÏ=∏QÏAÀ\)>ÃÃÕ>Ωp§?†  >\)>\)@  ?ÃÃÕ?ÃÃÕDy¿ Dy¿ Dy¿ >è\)@‹ÃÕ?Ä  ?Ä              ¿GÆ=LÃÕ=LÃÕ >8QÏ>è\)>îz·Ω£◊
+>.{>#◊
+(70)(8)(111)(153)(179)(180)(255)(266)(267)           M32             0:42:41.8 40:51:55.0 >≤-Aƒ=q>W
+=>W
+=√G  @¿  @¿  Aôö=ÃÃÕ=ÃÃÕC  @   @   >Ä  <£◊
+<£◊
+A1ôöDy¿ Dy¿ >£◊=LÃÕ=LÃÕB∏  @†  @†  B\  @@  @@                              æÄ  Dy¿ Dy¿  ¿  ¿  ¿  ¿  ¿  ¿  (42)(43)(41)(102)(140)(130)(195)                     NGC147          0:33:12.1 48:30:32.0 >1&ÈA¡33=∏QÏ=∏QÏ√Aö?LÃÕ?LÃÕA  =ÃÃÕ=ÃÃÕA»  @@  @@  >—ÎÖ<£◊
+<£◊
+A©ôöDy¿ Dy¿ @J·HDy¿ Dy¿ AÄ  ?Ä  ?Ä  Aà  @   @                               øåÃÕ=ÃÃÕ=ÃÃÕ ºæÌ<jJå<jJå=‘,<o4◊<o4◊(40)(52)(41)(130)(269)                               NGC185          0:38:58.0 48:20:15.0 ><jAøôö=∏QÏ=∏QÏ√KÃÕ?åÃÕ?åÃÕA33=ÃÃÕ=ÃÃÕB  @@  @@  >ôö<#◊
+<#◊
+A¶ffDy¿ Dy¿ @#33Dy¿ Dy¿ A¿  ?Ä  ?Ä  Ap  @†  @†  =·GÆAtÃÕ?LÃÕ?LÃÕ            ø¶ff=ÃÃÕ=ÃÃÕ º∆?<g∞<g∞;æÌ<pÿE<pÿE(40)(52)(41)(142)(269)                               NGC205          0:40:22.1 41:41:7.0  =Æ{Aƒ£◊=è\)=è\)√v  ?Ä  ?Ä  Aôö=ÃÃÕ=ÃÃÕA‡  @†  @†  >‹(ˆ=ÃÃÕ=ÃÃÕAôôöDy¿ Dy¿ @p§=ÃÃÕ=ÃÃÕB  @†  @†  A0  @†  @†  >ÃÃÕAÄÃÕDy¿ Dy¿             øLÃÕ>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (40)(45)(41)(102)(142)                               NGC300          0:54:53.5 -37:41:4.0 <T˝ÙA‘∏R=u¬è=u¬èC  @   @   Aôö=ÃÃÕ=ÃÃÕBﬁ  @   @   >îz·<#◊
+<#◊
+A®  Dy¿ Dy¿ @†  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ B†  @†  @†  D·  AP  @†  @†  B≈ôö@Fff@FffDy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (59)(67)(41)(164)(165)                               NGC3109         10:3:6.9  -26:9:35.0 =â7LAÃè\=£◊
+=£◊
+C…Ä @   @   A+33=ÃÃÕ=ÃÃÕB∑  ?Ä  ?Ä  ?QÎÖ<#◊
+<#◊
+A¥ÃÕ=ÃÃÕ=ÃÃÕ@âôö=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ C·  A   Dy¿ Dy¿ BêÃÕ?   ?   øÎÖ>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (80)(67)(116)(156)(81)(157)                          NGC4163         12:12:9.1 36:10:9.0  <£◊
+A⁄=q<ı¬è<ı¬èC%  @†  @†  AS33>ôôö>ôôöA0  @   @   >ôôö=LÃÕ=LÃÕA®ÃÕ>LÃÕ>LÃÕ>Êff=LÃÕ=LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ @¸ÃÕ@ÏÃÕDy¿ Dy¿ A33Dy¿ Dy¿ ø”33>ôö>ôö ¿  ¿  ¿  ¿  ¿  ¿  (89)(94)(124)(117)(174)                              NGC55           0:14:53.6 -39:11:48.0<T˝ÙA”p§=ı¬è=ı¬èC  @   @   @¸ÃÕ=ÃÃÕ=ÃÃÕBÿ  @   @   ?Tz·<#◊
+<#◊
+AöffDy¿ Dy¿ @•∏Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ D¢Ä Dy¿ Dy¿ Dy¿ B¨  @¿  @¿  Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (85)(67)(41)(162)                                    NGC6822         19:44:56.6-14:47:21.0>lãDA∫z·=£◊
+=£◊
+¬Z  ?Ÿôö?ŸôöAôö>LÃÕ>LÃÕC•  A   A   >u¬è=LÃÕ=LÃÕAùôöDy¿ Dy¿ @)ôöDy¿ Dy¿ Aπôö?ôôö?ôôöDy¿ Dy¿ Dy¿ C  @πôö?Û33?Û33B<  @   @   øÄ  ?   ?    º£◊
+<£◊
+<£◊
+    <£◊
+<£◊
+(66)(67)(41)(110)(151)(197)(217)(268)                PegasusdIrr     23:28:36.314:44:35.0 =ãCñA∆è\=è\)=è\)√3Ä ?¿  ?¿  AIôö>LÃÕ>LÃÕB  @   @   >ÎÖ<£◊
+<£◊
+A∂ffDy¿ Dy¿ @ff=#◊
+=#◊
+ADÃÕ?ôôö?åÃÕA   >ôôö>ôôö@ºÃÕA  Dy¿ Dy¿ A®  Dy¿ Dy¿ ø≥33>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (40)(69)(41)(63)(217)                                Phoenix         1:51:6.3  -44:26:41.0<ÉoA∏z·=ı¬è=ı¬è¡©ôö?Ä  ?Ä  AS33>ÃÃÕ>ÃÃÕA   @Ä  @Ä  >ôôö<ı¬è<ı¬èAŒffDy¿ Dy¿ @33=è\)=è\)AÃÕ?333?333@∞  ?ôö?ôö=ı¬èA   @Ä  @Ä              øæ∏R=#◊
+=#◊
+ =∏QÏ<ı¬è<ı¬èΩè\)=#◊
+=#◊
+(64)(65)(108)(109)(150)(263)(264)(266)(267)          Pictor2         6:44:43.2 -59:53:49.0=›/Aíff=ı¬è>ôöDy¿ Dy¿ Dy¿ Aqôö>ÃÃÕ?   A`  Bp  BÑ  >∏>aGÆ>∏A‹·H?fff?Ä  @s33?¿  ?Ä  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ øÊff>ôôö>ôôö ?ï¬è=ÃÃÕ=£◊
+?è\)=è\)=è\)(239)(266)(267)                                      Pisces2         22:58:31.05:57:9.0   =Ö∏A™z·>.{>.{√bÄ @,ÃÕ@,ÃÕAà£◊>¬è\>¬è\B∆  AP  AP  >ÃÃÕ=ÃÃÕ=ÃÃÕA‘(ˆ?E∏?5¬è?ú(ˆ>LÃÕ>LÃÕ@¨ÃÕ@fff@ôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿ÃÕ=è\)=è\) =·GÆ=·GÆ=·GÆæu¬è=ı¬è=·GÆ(35)(223)(255)(258)(266)(267)                        SMC             0:52:44.8 -72:49:43.0>÷á+Aò=q=ı¬è=ı¬èCôö?ôö?ôö@ÃÕ>LÃÕ>LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A‹ÃÕ?   ?               CÊ  A∞  @   @   Bp  @†  @†  øÄ  <£◊
+<£◊
+ ¿  ¿  ¿  ¿  ¿  ¿  (18)(19)(41)(133)(132)(184)                          SagittariusdIrr 19:29:59.0-17:40:51.0=˝Û∂A…∏>8QÏ>8QÏ¬ù  ?Ä  ?Ä  AYôö>LÃÕ>LÃÕB¥  Dy¿ Dy¿ ?   Dy¿ Dy¿ Aø33>LÃÕ>LÃÕ?hı√=LÃÕ=LÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ AÃÕA   ?Ä  ?Ä              ¿ff>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (76)(60)(115)                                        SagittariusdSph 18:55:19.5-30:32:43.0>¨AàÃÕ>ôö>ôöC  @   @   @fff>ôôö>ôôöBÃ  @   @   ?#◊
+<£◊
+<£◊
+A…ôö>ôôö>ôôöC´  A@  A@  A6ff?333?333                                        æÃÃÕ>LÃÕ>LÃÕ ¿  ¿  ¿  ¿  ¿  ¿  (3)(4)(96)(97)(128)(129)(130)(177)                   Sculptor        1:0:9.4   -33:42:33.0<ìtºAù\)>\)>\)BﬁÃÕ=ÃÃÕ=ÃÃÕAôö>\)>\)Bº  ?Ä  ?Ä  >Ωp§<#◊
+<#◊
+A∫QÏ>ôö>ôöAEGÆ=LÃÕ=LÃÕA33?≥33?≥33            >aGÆ                        ø◊
+=<#◊
+<#◊
+ = ¿É;o;oæ#◊
+;o;o(25)(26)(100)(136)(137)(130)(187)(180)(255)(266)(267)Segue(1)        10:7:4.0  16:4:55.0  <˝Û∂AÜff>LÃÕ>LÃÕCPÄ ?fff?fffAx  ?:·H?:·HBñ  AÄ  AÄ  >Æ{=·GÆ=·GÆA‡z·?ÅGÆ?z·H@|ÃÕ>ı¬è>ı¬è@yôö?LÃÕ?LÃÕ                                        ¿.{>ÃÃÕ>ÃÃÕ ¿p§=u¬è=u¬è¿U¬è=LÃÕ=LÃÕ(5)(6)(98)(130)(178)(255)(266)(267)                  Segue2          2:19:16.0 20:10:31.0 >=p§Açôö=ÃÃÕ=ÃÃÕ¬ÃÕ@   @   A}p§?aGÆ?aGÆC&  Ap  Ap  >W
+==è\)=è\)A„◊
+?áÆ?áÆ@hı√>îz·>îz·@Yôö@   ?ôôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿{>∏>∏ ?º(ˆ=#◊
+=#◊
+æû∏R=#◊
+=#◊
+(11)(214)(255)(266)(267)                             Sextans(1)      10:13:3.0 -1:36:53.0 =@ÉAù\)=ÃÃÕ=ÃÃÕC`33=ÃÃÕ=ÃÃÕA&ff?   ?   B`  @†  @†  >≥33=LÃÕ=LÃÕAÿÃÕ?   ?   Aﬁff?ôôö?ôôö@¸ÃÕ?¶ff?¶ff                                        ø˜
+=<#◊
+<#◊
+ æ—ÎÖ<#◊
+<#◊
+=#◊
+<#◊
+<#◊
+(27)(26)(100)(136)(130)(180)(266)(267)               SextansA        10:11:0.8 -4:41:34.0 =8QÏAŒ=q=£◊
+=£◊
+C¢  @   @   A8  =ÃÃÕ=ÃÃÕ    ?Ä  ?Ä  >.{<£◊
+<£◊
+A∂ffDy¿ Dy¿ @{Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Bö  A   ?Ä  ?Ä  A†  @   @   øÏÃÕDy¿ Dy¿  ¿  ¿  ¿  ¿  ¿  ¿  (59)(67)(41)(119)(159)(199)                          SextansB        10:0:0.1  5:19:56.0  <˝Û∂AŒ(ˆ<ı¬è<ı¬èCò  ?Ä  ?Ä  A4ÃÕ>LÃÕ>LÃÕB‹  @   @   >û∏R<ı¬è<ı¬èAØ33>ôôö>ôôö?áÆ=ÃÃÕ=ÃÃÕA   Dy¿ Dy¿ B¥  Dy¿ Dy¿ BL  Aê  Dy¿ Dy¿ Bé  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (59)(63)(41)(117)(158)                               Triangulum      1:33:50.9 30:39:37.0 ='ÔûAƒQÏ=u¬è=u¬è√333?Ÿôö?Ÿôö@∂ff=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ AÀÆ?ôö?ôöDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ A{A{A{ 	¿  ¿  ¿  ¿  ¿  ¿  (40)(58)(41)                                         Tucana          22:41:49.6-64:25:10.0<˝Û∂A≈ÎÖ=ı¬è=ı¬èCB  @âôö@âôöAs33>LÃÕ>LÃÕB¬  @   @   >ı¬è<ı¬è<ı¬èA»  =ÃÃÕ=ÃÃÕ?åÃÕ>LÃÕ>LÃÕA|ÃÕ@É33@FffAÄ  Dy¿ Dy¿                             ø˘ôö>ôö>ôö ¿  ¿  ¿  ¿  ¿  ¿  (74)(75)(114)(130)                                   Tucana2         22:51:55.1-58:34:8.0 <õ•„Añff>LÃÕ>LÃÕ√ö@`  @`  Ap  =ÃÃÕ=ÃÃÕB÷  Aê  Aê  >«Æ=ÃÃÕ>LÃÕAÈÖ?ôö?ôöAGÆ?‘z·?é{A	ôö@åÃÕ@,ÃÕ            Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ¿∏R>8QÏ=ı¬è ?fff<£◊
+<£◊
+ø°GÆ<£◊
+<£◊
+(226)(227)(252)(266)(267)                            UGC4879         9:16:2.2  52:50:24.0 <ÉoAÕ\)=#◊
+=#◊
+¡Èôö?ÃÃÕ?¶ffAS33>LÃÕ>LÃÕB®ffA(  A(  >·GÆ=#◊
+=#◊
+A©ôö>LÃÕ>LÃÕ>—ÎÖ=#◊
+=#◊
+Aôö?¶ff?ôôöDy¿ Dy¿ Dy¿ ?s33A0  ?åÃÕ?åÃÕ            ø =q=u¬è=u¬è ¿  ¿  ¿  ¿  ¿  ¿  (78)(79)(77)(200)(213)(217)                          UGC8508         13:30:44.454:54:36.0 <u¬èAÿz·<ı¬è<ı¬èB`  @†  @†  A[33=ÃÃÕ=ÃÃÕB  @   @   >Êff=LÃÕ=LÃÕA¨  >LÃÕ>LÃÕ>◊
+==#◊
+=#◊
+Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ AË  Dy¿ Dy¿ Dy¿ A˘ôö@33@33øÙz·>Bè\>Bè\ ¿  ¿  ¿  ¿  ¿  ¿  (89)(90)(124)(117)(90)(168)                          UGC9128         14:15:56.523:3:19.0  <ºjA÷ff=#◊
+=#◊
+C  ?Ä  ?Ä  Afff>ôôö>ôôöB8  @   @   >ÃÃÕ=LÃÕ=LÃÕA¥ÃÕ>LÃÕ>LÃÕ?#◊
+=è\)=è\)Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Aê  Ap  Dy¿ Dy¿ B`  Dy¿ Dy¿ ¿∏>u¬è>u¬è ¿  ¿  ¿  ¿  ¿  ¿  (59)(63)(124)(117)                                   UGCA86          3:59:48.3 67:8:19.0  ?p ≈A⁄·H>.{>.{BÜ  @Ä  @Ä  Ac33Dy¿ Dy¿ A»  ?Ä  ?Ä  >£◊
+<ı¬è<ı¬èA∂ffDy¿ Dy¿ ?p£◊Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ DW  AÃÕ?Ä  ?Ä  BÙ  @†  @†  Dy¿ Dy¿ Dy¿  	¿  ¿  ¿  ¿  ¿  ¿  (92)(41)(125)(119)(172)                              UKS2323-326     23:26:27.5-32:23:20.0<u¬èA’¬è=∏QÏ=∏QÏBx  @†  @†  AX  >LÃÕ>LÃÕB  @Ä  @Ä  =ÃÃÕ<#◊
+<#◊
+A∑33>LÃÕ>LÃÕ?fff=ÃÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Aà  Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ ø◊
+=>Bè\>Bè\ ¿  ¿  ¿  ¿  ¿  ¿  (59)(87)(122)(119)(166)(117)                         UrsaMajor(1)    10:34:52.851:55:12.0 <£◊
+Aüp§=ÃÃÕ=ÃÃÕ¬]33?≥33?≥33Alı√>¬è\>¬è\BÜ  @   @   ?ÎÖ<ı¬è<ı¬èAË·H>£◊>£◊Ap§>Æ{>Æ{@Û33?Ä  ?Ä  Dy¿ Dy¿ Dy¿                             ¿Ö=#◊
+=#◊
+ æ«Æ<ı¬è<ı¬èø!GÆ<ı¬è<ı¬è(28)(8)(98)(130)(179)(180)(255)(266)(267)            UrsaMajor2      8:51:30.0 63:7:48.0  =¿ÉAå  >ôôö>ôôö¬È  ?Û33?Û33AT  >Ö∏>Ö∏¬ö  @   @   ?\)<ı¬è<ı¬èA‡è\>®ı√>®ı√A_33>ÎÖ>ÎÖ@÷ff?≥33?≥33                                        ¿{=u¬è=u¬è ?‹(ˆ<£◊
+<£◊
+øÒÎÖ<ı¬è<ı¬è(7)(8)(98)(130)(179)(180)(255)(266)(267)             UrsaMinor       15:9:8.5  67:13:21.0 =oAõ33=ÃÃÕ=ÃÃÕ√vÊf=ÃÃÕ=ÃÃÕA%ÎÖ=LÃÕ=LÃÕBH  ?Ä  ?Ä  ?ÃÕ<#◊
+<#◊
+AŒ(ˆ=£◊
+=£◊
+Aäè\=·GÆ=·GÆA  ?ôôö?ôôö                                        ¿QÏ<#◊
+<#◊
+ Ω˝Û∂;Éo;Éo=üæw;Éo;Éo(23)(24)(100)(135)(130)(180)(255)(266)(267)          Virgo1          12:0:9.1  0:40:51.6  <ƒõ¶Aûff>LÃÕ=ÃÃÕDy¿ Dy¿ Dy¿ Aõ¬è?@  ?^∏RBx  A   AP  ?
+==ı¬è>\)AÎÎÖ?†  ?Ø\)?·GÆ>˙·H>ÃÃÕDy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿ Dy¿  	æ£◊
+>\)>\)ø∏R=ÃÃÕ=£◊
+(242)(241)(266)(267)                                 WLM             0:1:58.2  -15:27:39.0=•„A∆ÃÕ=£◊
+=£◊
+√  ?Ä  ?Ä  A)ôö=ÃÃÕ=ÃÃÕC3  @   @   ?ÃÕ=LÃÕ=ÃÃÕAΩôöDy¿ Dy¿ A	ÎÖ>Ö∏>Ö∏Aå  @   @   Aà  ?Ä  ?Ä  Bt  @ê  ?Ä  ?Ä  A  @@  @@  ø£◊
+<£◊
+<£◊
+ =·GÆ=£◊
+=£◊
+ΩÃÃÕ=LÃÕ=LÃÕ(40)(71)(41)(154)(205)(268)                          Willman1        10:49:21.051:3:0.0   <e`BAè33>ÃÃÕ>ÃÃÕ¡DÃÕ@   @   AuÎÖ?=p§?=p§Bî  @Ä  @Ä  >£◊=u¬è=u¬èAŒı√?p£◊?p£◊@!ÎÖ>aGÆ>aGÆ@âôö@33?¶ffDy¿ Dy¿ Dy¿                             ¿ffDy¿ Dy¿  >W
+==u¬è=u¬èøä=q=∏QÏ=∏QÏ(12)(13)(98)(130)(181)(255)(266)(267)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

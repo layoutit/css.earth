@@ -70,9 +70,16 @@ export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes }
   };
 }
 
+export function measurePreparedFocusView(world, focus, focalPixels) {
+  const forward = rotateWorldPosition(worldRotationFromQuaternion(world.pose.orientationXyzw), [0, 0, -1]);
+  const relative = focus.positionM.map((value, axis) => value - world.pose.positionM[axis]);
+  return { coordinates: null, scale: viewScale(dot(relative, forward) / focalPixels),
+    scaleTitle: `Scale at the distance of ${focus.name}` };
+}
+
 export function createViewReadout({ drawer, documentTarget, windowTarget }) {
   const root = documentTarget.querySelector('.planet-view-readout');
-  if (!root) return { setCamera() {}, setOverviewScope() {}, setPlaybackState() {}, destroy() {} };
+  if (!root) return { setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, destroy() {} };
   const dateGroup = root.querySelector('.planet-view-date'), date = root.querySelector('[data-view-date]');
   const coordinates = root.querySelector('.planet-view-coordinates');
   const latitude = root.querySelector('[data-view-latitude]'), longitude = root.querySelector('[data-view-longitude]');
@@ -87,6 +94,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
   const events = new AbortController();
   let camera = null, unsubscribe = null, frame = null, playing = false, disposed = false;
   let overviewScope = 'solar-system';
+  let preparedFocus = null;
   const write = (element, value) => { if (element.textContent !== value) element.textContent = value; };
   function render() {
     frame = null;
@@ -95,16 +103,16 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
     const scene = documentTarget.querySelector('.polycss-scene');
     if (!navigation || !scene) { dateGroup.hidden = true; coordinates.hidden = true; scale.hidden = true; write(altitude, '—'); return; }
     const map = maps.find(map => !map.closest('[data-lens-details]')?.hidden) ?? maps[0];
-    const surface = surfaceMapContext(configs.get(map), camera, documentTarget, windowTarget);
+    const surface = preparedFocus ? null : surfaceMapContext(configs.get(map), camera, documentTarget, windowTarget);
     const world = navigation.capture(), optics = navigation.optics();
     dateGroup.hidden = !Number.isFinite(world.epochJdTt);
     write(date, formatViewDate(world.epochJdTt));
-    const value = measureView({
+    const value = preparedFocus ? measurePreparedFocusView(world, preparedFocus, optics.focalPixels) : measureView({
       eyeM: world.pose.positionM.map((x, i) => x - navigation.frame.originM[i]),
       radiusM: navigation.frame.bodyRadiusM, rotation: worldRotationFromQuaternion(world.pose.orientationXyzw),
       view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes,
     });
-    const distance = viewDistance(world, navigation.frame, overviewScope);
+    const distance = viewDistance(world, navigation.frame, overviewScope, undefined, preparedFocus);
     write(altitude, formatViewDistance(distance.meters));
     if (distanceLabel) write(distanceLabel, distance.label);
     if (distanceGroup) distanceGroup.title = distance.title;
@@ -125,6 +133,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
   function schedule() { if (!disposed && frame === null) frame = windowTarget.requestAnimationFrame(render); }
   windowTarget.addEventListener('resize', schedule, { signal: events.signal });
   return {
+    setPreparedFocus(record) { preparedFocus = record; schedule(); },
     setOverviewScope(scope) { overviewScope = scope; schedule(); },
     setCamera(next) { unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(schedule) ?? null; schedule(); },
     setPlaybackState(state) { playing = state.allowed; schedule(); },

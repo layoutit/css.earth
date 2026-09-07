@@ -82,6 +82,7 @@
     "typecheck:preparation": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json",
     "test:seo": "node site/test/seo-browser.mjs",
     "prepare:social": "node tools/prepare-social-images.mjs",
+    "prepare:galaxy-catalog": "node tools/objects/dist/prepare-galaxy-catalog.js src/objects/local-group",
     "prepare:image-layers": "node tools/objects/dist/prepare-image-layers.js",
     "lab:nebula:images": "node --experimental-strip-types labs/nebula/run.ts acquire-images labs/nebula/sources/reference-images.json"
   },
@@ -92,6 +93,8 @@
   "devDependencies": {
     "@cssearth/astronomy": "workspace:*",
     "@cssearth/catalog": "workspace:*",
+    "@cssearth/engine": "workspace:*",
+    "@cssearth/objects": "workspace:*",
     "@typescript-eslint/parser": "^8.69.0",
     "astro": "^7.2.4",
     "classic-level": "3.0.0",
@@ -104,7 +107,6 @@
     "pngjs": "7.0.0",
     "sharp": "0.35.3",
     "vite": "7.3.1",
-    "@cssearth/engine": "workspace:*",
-    "@cssearth/objects": "workspace:*"
+    "yaml": "^2.9.0"
   }
 }

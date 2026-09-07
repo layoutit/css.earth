@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { mountPlanetShell } from "../planet-shell-client.mjs";
 import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
+import catalogue from '../../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
+import clusters from '../../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
 
 class Element extends EventTarget {
   dataset = {}; children = []; value = ""; style = { removeProperty() {}, setProperty() {} };
@@ -47,7 +49,8 @@ function fixture() {
   for (const name of ["HTMLElement", "HTMLButtonElement", "HTMLInputElement", "HTMLDetailsElement", "HTMLLIElement"])
     windowTarget[name] = Element;
   const frames = new Map();
-  windowTarget.requestAnimationFrame = (callback) => { frames.set(1, callback); return 1; };
+  let nextFrame = 0;
+  windowTarget.requestAnimationFrame = (callback) => { const id = ++nextFrame; frames.set(id, callback); return id; };
   windowTarget.cancelAnimationFrame = (id) => frames.delete(id);
   windowTarget.localStorage = { getItem() { return null; } };
   const changes = [];
@@ -169,4 +172,66 @@ test('camera scale changes retained overview content without moving the camera a
   search.value = 'Solar System'; search.dispatchEvent(new Event('input'));
   assert.equal(groups[0].open, true); assert.equal(groups[1].open, false, 'Search preserves the previous collapsed state');
   shell.destroy(); assert.equal(listeners.size, 0);
+});
+
+test('a prepared galaxy takes precedence over the retained Milky Way card and clears cleanly on planet return', () => {
+  const f = fixture(), browser = f.selectors.get('.planet-object-browser'), drawer = f.selectors.get('.planet-drawer-content');
+  const galaxy = new Element(), system = new Element(), card = new Element();
+  browser.selectors.set('[data-galactic-overview]', galaxy);
+  browser.selectors.set('[data-solar-system-results]', system);
+  browser.selectors.set('[data-prepared-focus-card]', card); drawer.selectors.set('[data-prepared-focus-card]', card);
+  const names = ['name','aliases','status','distance','uncertainty','membership','association','basis','reference'];
+  for (const name of names) card.selectors.set(`[data-focus-${name}]`, new Element());
+  const links = [new Element(), new Element(), new Element()];
+  card.selectors.set('[data-focus-source]', links);
+  const readout = new Element();
+  for (const selector of ['.planet-view-date', '[data-view-date]', '.planet-view-coordinates', '[data-view-latitude]', '[data-view-longitude]',
+    '[data-view-altitude]', '[data-view-distance-label]', '.planet-view-altitude', '.planet-view-scale', '[data-view-scale-label]', '.planet-view-ruler', '.planet-view-measure']) {
+    readout.selectors.set(selector, new Element());
+  }
+  f.selectors.set('.planet-view-readout', readout);
+  const bounds = { x: 0, y: 0, left: 0, top: 0, right: 1000, bottom: 800, width: 1000, height: 800 };
+  f.selectors.set('.polycss-scene', { closest: () => ({ getBoundingClientRect: () => bounds }) });
+  const renderReadout = () => { const frames = [...f.frames.values()]; f.frames.clear(); frames.forEach(callback => callback()); };
+  const retained = [...card.selectors.values()], source = catalogue.sources.find(value => value.id === 'lvdb-v1.1.1');
+  const record = catalogue.objects.find(value => value.detailedObjectId === 'm31');
+  const shell = f.mount(), search = f.selectors.get('.planet-sidebar-search');
+  shell.setOverview(true);
+  shell.setCamera({ navigation: { capture: () => ({ epochJdTt: catalogue.frame.epochJdTt,
+    pose: { positionM: record.positionM.map((value, axis) => value + (axis === 2 ? 1e18 : 0)), orientationXyzw: [0,0,0,1] } }),
+    frame: { originM: [0,0,0], bodyRadiusM: 100 }, optics: () => ({ focalPixels: 1000, principalOffsetPixels: [0,0] }),
+    subscribe: () => () => {} } });
+  assert.equal(search.value, 'Milky Way');
+  shell.setPreparedFocus(record, [source]);
+  renderReadout();
+  assert.equal(search.value, record.name);
+  assert.equal(card.hidden, false); assert.equal(galaxy.hidden, true); assert.equal(system.hidden, true);
+  assert.equal(card.querySelector('[data-focus-name]').textContent, record.name);
+  assert.match(card.querySelector('[data-focus-aliases]').textContent, /Andromeda/u);
+  assert.match(card.querySelector('[data-focus-status]').textContent, /Confirmed galaxy/u);
+  assert.equal(card.querySelector('[data-focus-basis]').textContent, record.membership.basis);
+  assert.equal(links[0].href, source.url);
+  assert.equal(readout.querySelector('[data-view-distance-label]').textContent, `Distance to ${record.name}:`);
+  assert.equal(readout.querySelector('[data-view-altitude]').textContent, '105.7 ly');
+  assert.equal(readout.querySelector('.planet-view-coordinates').hidden, true);
+  const candidate = catalogue.objects.find(value => value.status === 'candidate');
+  shell.setPreparedFocus(candidate);
+  assert.equal(card.querySelector('[data-focus-status]').textContent, 'Candidate galaxy');
+  assert.equal(links[0].hidden, true);
+  const cluster = clusters.objects[0];
+  shell.setPreparedFocus(cluster, [clusters.sources[0]]);
+  assert.equal(card.hidden, false); assert.equal(search.value, cluster.name);
+  assert.equal(card.querySelector('[data-focus-status]').textContent, 'X-ray selected galaxy cluster');
+  assert.match(card.querySelector('[data-focus-distance]').textContent, /comoving, redshift-derived/u);
+  assert.match(card.querySelector('[data-focus-basis]').textContent, /R500.*not the cluster boundary.*peculiar velocities are not corrected/u);
+  assert.equal(links[0].href, clusters.sources[0].url);
+  assert.deepEqual([...card.selectors.values()], retained, 'Selection updates the same retained card nodes');
+  shell.setPreparedFocus(null);
+  renderReadout();
+  assert.equal(readout.querySelector('[data-view-distance-label]').textContent, 'Distance from Sun:');
+  assert.equal(card.hidden, true); assert.equal(search.value, 'Milky Way');
+  shell.setObject({ id: 'next', name: 'Next planet', apply() {} });
+  assert.equal(search.value, 'Next planet');
+  assert.equal(f.selectors.get('.planet-information-panel').hidden, false);
+  shell.destroy();
 });

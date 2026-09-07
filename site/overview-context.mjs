@@ -10,7 +10,9 @@ export function overviewScopeAtCamera(world, previous = 'solar-system', plan = c
   return distance(world.pose.positionM, plan.focus.positionM) >= threshold ? 'milky-way' : 'solar-system';
 }
 
-export function viewDistance(world, frame, scope, plan = context) {
+export function viewDistance(world, frame, scope, plan = context, focus = null) {
+  if (focus) return { label: `Distance to ${focus.name}:`, meters: distance(world.pose.positionM, focus.positionM),
+    title: `Camera distance from the prepared center of ${focus.name}` };
   return scope === 'milky-way' ? {
     label: 'Distance from Sun:',
     meters: distance(world.pose.positionM, plan.focus.positionM),

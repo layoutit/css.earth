@@ -1,3 +1,5 @@
 export * from './format.js'
 export * from './read.js'
 export * from './write.js'
+export * from './spatial.js'
+export * from './clusters.js'

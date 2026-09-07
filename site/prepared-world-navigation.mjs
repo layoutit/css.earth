@@ -16,6 +16,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const from = owner.capture(), optics = owner.optics();
       const target = targetWorldCamera ?? createWorldSelectionTarget(from, frame, optics);
       const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM: frame.originM });
+      owner.setPreparedFocus?.(null);
       await animateWorldFlight({ owner, from, flight,
         anchors: [{ positionM: frame.originM, radiusM: frame.bodyRadiusM }], signal, reducedMotion,
         windowTarget, documentTarget, onPaint(world) {
@@ -32,6 +33,7 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       const from = source?.capture() ?? lastCamera;
       const optics = source?.optics() ?? lastOptics;
       if (!from || !optics) throw new Error('The drawn world camera is not ready.');
+      source?.setPreparedFocus?.(null);
       lastCamera = from; lastOptics = optics;
       if (preserveView) {
         // Input stays live while the new detail bank loads. Snapshot the last

@@ -27,6 +27,48 @@ const sharedSources = Object.freeze([
     "role": "heliopause",
     "href": "https://doi.org/10.3847/1538-4365/abf658",
     "description": "Reisenfeld et al. (2021): IBEX-derived envelope, published Z–H model; tail distances are ENA sounding limits, not a measured heliopause closure."
+  },
+  {
+    "label": "LVDB",
+    "role": "galaxies",
+    "href": "https://doi.org/10.33232/001c.144859",
+    "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. Catalogue compilation: CC0 1.0; original measurement papers retain their separate rights."
+  },
+  {
+    "label": "McConnachie",
+    "role": "membership",
+    "href": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
+    "description": "McConnachie (2012), AJ 144, 4, DOI 10.1088/0004-6256/144/1/4; author October 2019 Table 1 membership classifications. LVDB host associations supplement this historical table."
+  },
+  {
+    "label": "ESA/Hubble",
+    "role": "M31 image",
+    "href": "https://esahubble.org/images/heic1112f/",
+    "description": "Wide-field view of the Andromeda Galaxy. ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble). CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
+  },
+  {
+    "label": "ESO",
+    "role": "M33 image",
+    "href": "https://www.eso.org/public/images/eso1424a/",
+    "description": "VST snaps a very detailed view of the Triangulum Galaxy. ESO. CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
+  },
+  {
+    "label": "NOIRLab",
+    "role": "LMC image",
+    "href": "https://noirlab.edu/public/images/noirlab2030a/",
+    "description": "Deepest, widest view of the Large Magellanic Cloud from SMASH. CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin. CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
+  },
+  {
+    "label": "NOIRLab",
+    "role": "SMC image",
+    "href": "https://noirlab.edu/public/images/noirlab2030b/",
+    "description": "Deepest, widest view of the Small Magellanic Cloud from SMASH. CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin. CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
+  },
+  {
+    "label": "MCXC-II",
+    "role": "clusters",
+    "href": "https://www.aanda.org/articles/aa/full_html/2024/08/aa49427-24/aa49427-24.html",
+    "description": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187. Seven cluster centres with redshift-derived comoving distances in the publication cosmology; peculiar velocities are not corrected. Outlines show the published R500 overdensity aperture, not a cluster boundary or member distribution."
   }
 ].map(Object.freeze));
 

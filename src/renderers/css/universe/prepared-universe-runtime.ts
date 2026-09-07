@@ -12,13 +12,20 @@ import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
+import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
+import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
+import type { PreparedCatalogObject } from '@cssearth/catalog';
+import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
-export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [] }: {
+export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [], imageLayers = [], catalog }: {
   context: unknown; volume: PreparedCssVolume; stars: PreparedCssPointField;
   resolveStarResource(path: string): string; resolveResource(path: string): string;
   sprites: Readonly<Record<string, SpriteWithUrl>>;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
+  imageLayers?: readonly { payload: PreparedCssImageLayers; resolveResource(path: string): string }[];
+  catalog?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number;
+    clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 }) {
   const plan = parsePreparedWorldContext(context), payload = validatePreparedCssVolume(volume);
   if (payload.id !== plan.volume.objectId || stars.id !== plan.stars.objectId ||
@@ -36,16 +43,25 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
     return payload.resources.map(resource => ({ key: `shell:${payload.id}:${resource.path}`,
       url: resolveResource(resource.path), pool: `shell:${payload.id}` }));
   });
+  const imageEntries = imageLayers.flatMap(({ payload, resolveResource }) => {
+    if (payload.frame.referenceFrame !== plan.frame.referenceFrame || payload.frame.epochJdTt !== plan.frame.epochJdTt) {
+      throw new TypeError('Prepared image models must share the universe reference frame and epoch.');
+    }
+    return payload.resources.map(resource => ({ key: `image-layers:${payload.id}:${resource.path}`,
+      url: resolveResource(resource.path), pool: `image-layers:${payload.id}` }));
+  });
   const assets: PreparedAssets = {
-    entries: [...entries, ...starEntries, ...shellEntries],
+    entries: [...entries, ...starEntries, ...shellEntries, ...imageEntries],
     pools: [{ id: pool, retention: 'mount', capacity: entries.length, concurrency: 8, reuse: false, decoding: 'async' },
       { id: starPool, retention: 'mount', capacity: starEntries.length, concurrency: 8, reuse: false, decoding: 'async' },
       ...shells.map(({ payload }) => ({ id: `shell:${payload.id}`, retention: 'mount' as const,
-        capacity: payload.resources.length, concurrency: 2, reuse: false, decoding: 'async' as const }))],
-    startup: [...entries, ...starEntries, ...shellEntries].map(entry => entry.key),
+        capacity: payload.resources.length, concurrency: 2, reuse: false, decoding: 'async' as const })),
+      ...imageLayers.map(({ payload }) => ({ id: `image-layers:${payload.id}`, retention: 'mount' as const,
+        capacity: payload.resources.length, concurrency: 4, reuse: false, decoding: 'async' as const }))],
+    startup: [...entries, ...starEntries, ...shellEntries, ...imageEntries].map(entry => entry.key),
   };
   return Object.freeze({ assets,
-    mount(stage: HTMLElement) {
+    mount(stage: HTMLElement, { onSelectGalaxy }: { onSelectGalaxy?: (object: PreparedCatalogObject) => void } = {}) {
       const document = stage.ownerDocument;
       const root = document.createElement('div');
       root.className = 'prepared-universe';
@@ -70,6 +86,8 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       let pointField: ReturnType<typeof mountPreparedCssPointField> | null = null;
       let focusPoint: ReturnType<typeof mountWorldContextPointSource> = null;
       let environmentLabels: ReturnType<typeof mountEnvironmentLabels> | null = null;
+      let galaxyCatalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
+      const imageBanks: ReturnType<typeof mountPreparedCssImageLayers>[] = [];
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       let selected = plan.focus;
       let destroyed = false;
@@ -78,21 +96,27 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         destroyed = true;
         volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); pointField?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
         for (const shell of shellLayers) shell.destroy();
+        for (const bank of imageBanks) bank.destroy(); galaxyCatalog?.destroy();
         root.remove();
         delete stage.dataset.contextScale;
       };
       try {
         if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
+        for (const bank of imageLayers) imageBanks.push(mountPreparedCssImageLayers({ host: root, before: end, ...bank }));
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         spatial = mountPreparedWorldContext({ host: root, before: end, plan, sprites });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
+        if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, clusters: catalog.clusters?.payload, onSelect: onSelectGalaxy });
         return Object.freeze({ root, destroy,
+          selectGalaxy(id: string | null) { galaxyCatalog?.select(id); },
+          resolveGalaxy(id: string) { return galaxyCatalog?.resolve(id) ?? null; },
+          imageLayerFrames: Object.freeze(Object.fromEntries(imageLayers.map(({ payload }) => [payload.id, payload.frame]))),
           setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
           inspect() {
-            return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(),
+            return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(), galaxies: galaxyCatalog?.inspect(),
               foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });
           },
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
@@ -125,12 +149,20 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             skyLayer?.publish(world, viewport, volumeOpacity < 1);
             if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - volumeOpacity);
             if (volumeOpacity > 0) volumeLayer!.publish({ world, viewport });
+            for (const bank of imageBanks) {
+              bank.root.style.opacity = String(volumeOpacity);
+              bank.root.style.visibility = volumeOpacity > 0 ? 'visible' : 'hidden';
+              if (volumeOpacity > 0) bank.publish({ world, viewport });
+            }
             for (const shell of shellLayers) shell.publish(world, viewport);
             spatial!.publish(world, viewport);
             const foregroundRects = spatial!.backgroundExclusionRects();
             const environmentRects = environmentLabels!.publish({ world, viewport,
               shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects });
-            pointField!.publish(world, viewport, 1 - fade, [...foregroundRects, ...environmentRects]);
+            const galaxyRects = catalog ? galaxyCatalog!.publish(world, viewport,
+              logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM), [...foregroundRects, ...environmentRects],
+              catalog.clusters ? logarithmicFade(distanceM, catalog.clusters.fadeStartDistanceM, catalog.clusters.fullDistanceM) : 0) : [];
+            pointField!.publish(world, viewport, 1 - fade, [...foregroundRects, ...environmentRects, ...galaxyRects]);
             focusPoint?.publish(world, viewport, { opacity: 1 - fade, selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });
             stage.dataset.contextScale = fade > 0 ? 'galactic' : stellarFade > 0 ? 'stellar' : Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis])) > selected.radiusM * 100 ? 'system' : 'object';
