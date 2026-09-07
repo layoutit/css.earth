@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "triton",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "credit": "NASA/JPL; Paul Schenk, Lunar and Planetary Institute",
+    "license": "NASA/JPL imagery; LPI permits public map use with the stated credit",
+    "licenseEvidence": [
+      "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
+    ],
+    "acquisition": "Restore the pinned source through source/preparation/acquisition.json.",
+    "redistribution": "Retain NASA/JPL and author credits.",
+    "id": "voyager-triton-enhanced-color",
+    "path": "observations/tnmap-cyl-KH.jpg",
+    "origin": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg",
+    "catalog": "https://www.lpi.usra.edu/icy_moons/neptune/triton/",
+    "consumers": [
+      "surfaces",
+      "navigation"
+    ],
+    "lensId": "enhanced",
+    "label": "Enhanced color",
+    "falseColor": true,
+    "width": 14138,
+    "height": 7069,
+    "projection": {
+      "type": "equirectangular",
+      "longitudeDegrees": [
+        -180,
+        180
+      ],
+      "latitudeDegrees": [
+        90,
+        -90
+      ],
+      "longitudeDirection": "east-positive",
+      "referenceRadiusMeters": 1352600
+    },
+    "coverage": "Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
+    "expectedBytes": 12442504,
+    "expectedSha256": "ff533af3163f53cc5560cd983cfe0f06b1c2cd0f3db36518d4c5cc5f5ddfeabb"
+  },
+  "operations": [
+    {
+      "type": "extract",
+      "left": 5400,
+      "top": 3600,
+      "width": 2400,
+      "height": 2400
+    },
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "ensure-alpha"
+    },
+    {
+      "type": "ellipse-mask",
+      "cx": 0.5,
+      "cy": 0.5,
+      "rx": 0.5,
+      "ry": 0.5
+    },
+    {
+      "type": "png"
+    }
+  ]
+}

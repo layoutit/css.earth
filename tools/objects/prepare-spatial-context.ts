@@ -51,7 +51,12 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   for (const body of source.bodies) {
     const state = states[body.id]!;
     const parentPosition = state.centerBodyId === source.focus.id ? source.frame.originM : states[state.centerBodyId]?.positionM;
-    if (!parentPosition || Math.hypot(...parentPosition.map((value, axis) => value - state.centerPositionM[axis]!)) > .001) {
+    // Matrix products at Neptune's distance have millimetre-scale roundoff.
+    // Keep the check within a few floating-point ULPs before using the exact
+    // prepared parent position below, rather than a fixed sub-ULP tolerance.
+    const tolerance = parentPosition ? Math.max(.001, 8 * Number.EPSILON *
+      Math.max(...parentPosition.map(Math.abs), ...state.centerPositionM.map(Math.abs))) : 0;
+    if (!parentPosition || Math.hypot(...parentPosition.map((value, axis) => value - state.centerPositionM[axis]!)) > tolerance) {
       throw new TypeError(`Prepared orbit centre is incompatible with its parent for ${body.id}.`);
     }
     // The parent and child ephemeris adapters can differ by sub-millimetre float roundoff.
