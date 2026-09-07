@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4885982d2ea51da8e90755be5895df672f8e44c4733217c2d8a1cfac948fd8fc"
+    "sha256": "70731e073832e41a257058d29144016b60e57a8eca0d12427ed141de796418ba"
   },
   "id": "vesta",
   "properties": {
@@ -56,7 +56,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "e0d3b637e8518a40fb4644096963d5af7336f40b2cc4bfac0453f3d4565144f4"
+          "sha256": "8753bde9d25036ef1701f3bac7288de432eaa8f3ae678754f877e707e88a3b0e"
         },
         {
           "id": "rotation",
@@ -76,7 +76,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "152646b2b88f0bed722017732644ac5c9a772c905c0db734c18a50fd72962fdd"
+          "sha256": "258d1305e2ff0c1f5545f83bd00dde95abf6a22b32a5d760dd2a19cd0a1053ca"
         },
         {
           "id": "acquisition",

@@ -79,8 +79,8 @@
       "origin": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
       "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
       "license": "Dawn source derivative; see NOTICE.md.",
-      "expectedBytes": 302887,
-      "expectedSha256": "a426bef44f062e33cfacb99c7cc43b9315cf0f9d847930f044b39fc161fb8927",
+      "expectedBytes": 304346,
+      "expectedSha256": "31c4174cffe718db773866b85045e45c12bfbc76e686ad9315731ceffccaeee3",
       "consumers": [
         "navigation"
       ],
@@ -135,7 +135,7 @@
       "path": "preparation/navigation.json",
       "purpose": "Authored preparation or presentation data.",
       "expectedBytes": 1232,
-      "expectedSha256": "152646b2b88f0bed722017732644ac5c9a772c905c0db734c18a50fd72962fdd"
+      "expectedSha256": "258d1305e2ff0c1f5545f83bd00dde95abf6a22b32a5d760dd2a19cd0a1053ca"
     },
     {
       "path": "preparation/rotation.json",
@@ -146,8 +146,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Authored preparation or presentation data.",
-      "expectedBytes": 3254,
-      "expectedSha256": "e0d3b637e8518a40fb4644096963d5af7336f40b2cc4bfac0453f3d4565144f4"
+      "expectedBytes": 3415,
+      "expectedSha256": "8753bde9d25036ef1701f3bac7288de432eaa8f3ae678754f877e707e88a3b0e"
     },
     {
       "path": "presentation/title-mark.json",
