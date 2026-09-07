@@ -1,0 +1,105 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "makemake",
+  "displayName": "Makemake",
+  "title": {
+    "label": "Makemake"
+  },
+  "panel": {
+    "introduction": "Makemake is a distant, reddish dwarf planet with one known moon. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Approximate radius",
+        "value": "715 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "About 22.5 hours"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "About 305 Earth years"
+      },
+      {
+        "id": "moon-count",
+        "label": "Moons",
+        "value": "1 — nicknamed MK 2"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "distance",
+        "label": "Average solar distance",
+        "value": "45.8 AU"
+      },
+      {
+        "id": "surface",
+        "label": "Surface coverage",
+        "value": "Unresolved; no terrain map"
+      },
+      {
+        "id": "shape",
+        "label": "Display shape",
+        "value": "Spherical approximation"
+      },
+      {
+        "id": "appearance",
+        "label": "Surface representation",
+        "value": "NASA VTAD illustration; terrain details are not observations"
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "",
+    "controls": []
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Makemake overview",
+      "href": "https://science.nasa.gov/dwarf-planets/makemake/"
+    },
+    {
+      "label": "NASA VTAD",
+      "role": "illustration",
+      "description": "Makemake model and illustrative surface texture",
+      "href": "https://science.nasa.gov/resource/makemake-3d-model/"
+    },
+    {
+      "label": "Ortiz et al.",
+      "role": "shape",
+      "description": "2011 occultation projected size and atmospheric constraints",
+      "href": "https://doi.org/10.1038/nature11597"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "NASA Science; Ortiz et al. (2012); JPL orbital elements"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/dwarf-planets/makemake/",
+      "credit": "NASA Science"
+    }
+  }
+}
