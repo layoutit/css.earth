@@ -66,7 +66,8 @@
         "source": {
           "id": "usgs-dawn-fc-global-140m",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Global mosaic"
       },
       {
         "id": "enhanced",
@@ -79,7 +80,8 @@
         "source": {
           "id": "nasa-dawn-fc-pia19977",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "False color"
       },
       {
         "id": "elevation",
@@ -106,7 +108,8 @@
         "source": {
           "id": "dawn-elevation",
           "path": "../manifest.json"
-        }
+        },
+        "detail": "Shaded relief"
       }
     ]
   },

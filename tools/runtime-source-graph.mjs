@@ -1,4 +1,5 @@
 import { dirname, relative, resolve } from 'node:path';
+import { createRequire } from 'node:module';
 import { parseAst } from 'vite';
 import { parseForESLint } from '@typescript-eslint/parser';
 
@@ -28,9 +29,9 @@ export async function resolveRuntimeSource(imported, importer, { root, source })
     const manifest = JSON.parse(await source(resolve(directory, 'package.json')));
     if (manifest.name !== imported || typeof manifest.exports?.['.']?.import !== 'string') throw new Error(`Workspace export is not concrete: ${imported}`);
     target = resolve(directory, manifest.exports['.'].import);
-  } else return null;
+  } else target = createRequire(importer).resolve(imported);
   if (relative(root, target).startsWith('../')) throw new Error(`Runtime import escapes the source root: ${imported}`);
-  if (target.includes('/dist/')) {
+  if (target.includes('/dist/') && !target.includes('/node_modules/')) {
     const directory = target.slice(0, target.lastIndexOf('/dist/'));
     const configFile = resolve(directory, 'tsup.config.ts');
     const ast = parseRuntimeSource(await source(configFile), configFile);
