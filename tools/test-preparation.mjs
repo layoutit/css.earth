@@ -20,6 +20,7 @@ const universeEntries = [
   'tools/objects/world-navigation.integration.test.ts',
   'src/preparation/stars/stars.test.ts',
   'src/preparation/shell/shell.test.ts',
+  'src/preparation/shell/mesh-subdivision.test.ts',
 ];
 async function discover(directory, suffix) {
   const files = [];

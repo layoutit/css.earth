@@ -1,11 +1,11 @@
 {
   "schema": "cssearth-source-provenance@1",
-  "description": "IBEX-derived heliopause from Reisenfeld et al. (2021), original Figure 8 Z–H numerical surface with category 3 tail-limit triangles left open. Geometry is model-dependent, not a fully measured closed boundary.",
+  "description": "IBEX-derived heliopause from Reisenfeld et al. (2021), the complete original Figure 8 Z–H model/display envelope. Category 3 tail distances are ENA sounding limits, not a measured physical heliopause closure.",
   "sources": [
     {
       "path": "ibex/NOTICE.md",
-      "sha256": "f600423a03d3a85d6ead2a4c5bfaf7b45f6fa5514743d4fad3c5b35f3beb81a1",
-      "bytes": 1675
+      "sha256": "b5bb9d97349864c1a256436a8a0915be2947c64941b69035507dec179f107698",
+      "bytes": 1810
     },
     {
       "path": "ibex/apjsabf658.tar.gz",
@@ -19,13 +19,13 @@
     },
     {
       "path": "ibex/extract.py",
-      "sha256": "379d2970cdda0073d084e0d008d6e5f0eb4ac975e115ff911f7beaccb778eaf0",
-      "bytes": 5504
+      "sha256": "99036efdee49c9784ccb4afae791c16ae672ddaab8813f7f47fa6efed7c933a5",
+      "bytes": 5644
     },
     {
       "path": "ibex/heliopause-grid.json",
-      "sha256": "37744651c502570fd0bb80a122c6430abf3d743a3b72f131fd023e4900613f0e",
-      "bytes": 7556
+      "sha256": "dbae182236b56654eff4552d5f3530af5e556db4853a312c6dc87ba5704e5bb9",
+      "bytes": 8670
     },
     {
       "path": "ibex/macropixels.json",
@@ -114,16 +114,25 @@
         -90,
         90
       ]
-    }
+    },
+    "tailDisplay": "The complete envelope follows the original published figure. The ten category 3 samples (13 grid entries with seam copies) represent the detectable tail ENA region, not proof of a closed physical heliopause. All source values and categories remain available in macropixels.json."
   },
   "approximation": {
-    "geometry": "Exact published non-tail grid coordinates; all 13 category 3 entries (ten unique samples plus three seam duplicates) replaced by null. Preparation skips triangles touching null and omits degenerate pole triangles. No resampling, smoothing, interpolation or closing cap is added. Category 4 constrained values remain.",
-    "normal": "Prepared radial vertex normals support the display rim; geometric triangle normals govern face culling. Renderer-derived normals are not scientific measurements.",
+    "geometry": "All 91 coordinates of the complete published 13 by 7 grid remain exact in the scientific source, including repeated poles/seam and category 3 tail values. Offline radial-linear display subdivision uses four segments per original triangle edge. Radius interpolates linearly while direction is normalized; original samples remain fixed and shared edges are welded. This rounds display facets without adding scientific measurements or asserting greater source resolution. Category 3 values retain their sounding-limit classification; the closed display envelope does not locate the physical end of the tail.",
+    "normal": "Area-weighted outward surface normals are prepared on the refined display mesh, including welded source seams and poles. They occupy the retained radialNormals compatibility field for material transport; they are renderer-derived surface normals, not measurements or a Sun-radial science assumption.",
     "material": "22 nonuniform facing levels in [-1,1]; 2024 sorted corner triples. Every 32px tile evaluates the original rim equation on barycentrically interpolated corner facing values, baking linear-to-sRGB color and alpha. Six prepared corner permutations address the shared sorted bank. Quantization, raster sampling, coarse silhouettes and the interpolation of vertex-facing scalars approximate the original per-pixel shader, particularly near the boundary.",
     "coverage": "All three triangle edges use exact pixel-area coverage inside a 1.5px transparent atlas inset. Prepared expanded parallelograms map the inset triangle corners to the unchanged physical source vertices. Fractional alpha is 1-(1-opacity)^coverage, so neighboring optical depths combine correctly under ordinary source-over. No runtime clipping, mask, filter or mesh construction.",
     "atlasDecodedBytes": 8290304,
     "display": "Current colorLinear [0.5,0.9,0.8], opacity 0.2, rimFadeFacing 0.1, visibility and unitScale 50 preserved. These are presentation choices, not the paper’s photometry or plasma brightness.",
-    "runtime": "Fixed prepared triangle leaves and atlas. Scientific archives, workbook decoding, frame construction and grid triangulation remain offline."
+    "runtime": "Fixed prepared triangle leaves and atlas. Scientific archives, workbook decoding, frame construction and grid triangulation remain offline.",
+    "displaySubdivision": {
+      "method": "radial-linear",
+      "segmentsPerEdge": 4,
+      "sourceTriangleCount": 120,
+      "expectedDisplayTriangleCount": 1920,
+      "scope": "Display interpolation only; original geometry and uncertainty classification remain checked separately."
+    },
+    "bounds": "Conservative Cartesian cube with half-extent equal to the largest original source radius, 383 AU. Positive barycentric radius interpolation cannot exceed that source radius; this encloses the curved display interpolation as well as original samples."
   },
   "attribution": "Scientific geometry: Reisenfeld et al. (2021), ApJS 254, 40, DOI 10.3847/1538-4365/abf658, IBEX. Retained rim-presentation software derivation: Copyright (c) 2026 Juan Cruz Fortunatti, MIT; see separate unchanged LICENSE.rendering-MIT.txt."
 }

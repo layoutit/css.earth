@@ -26,7 +26,7 @@ const sharedSources = Object.freeze([
     "label": "IBEX",
     "role": "heliopause",
     "href": "https://doi.org/10.3847/1538-4365/abf658",
-    "description": "Reisenfeld et al. (2021): IBEX-constrained heliopause, published Z–H model; tail-sounding limits left open."
+    "description": "Reisenfeld et al. (2021): IBEX-derived envelope, published Z–H model; tail distances are ENA sounding limits, not a measured heliopause closure."
   }
 ].map(Object.freeze));
 

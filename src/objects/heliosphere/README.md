@@ -11,7 +11,7 @@ heliosphere/
 │       ├── apjsabf658.tar.gz            Original workbook and publisher ReadMe
 │       ├── apjsabf658f8_int.html.gz      Lossless original interactive Figure 8
 │       ├── extract.py                  Checked offline numerical extraction
-│       ├── heliopause-grid.json         Published positions, open tail mask
+│       ├── heliopause-grid.json         Complete published model envelope
 │       ├── macropixels.json             All 56 samples, models and categories
 │       └── NOTICE.md                    Scientific credits and rights notice
 └── prepared/
@@ -35,10 +35,20 @@ Extraction preserves these choices and all retained coordinates exactly.
 
 Category 1 and 2 distances carry the paper's approximate ±10 and ±15 AU
 uncertainties. Category 3 traces the detectable tail ENA region; its reported
-extent does not establish the end of the heliopause. We omit every triangle
-touching these tail-limit vertices, leaving an open tail. Category 4's noisy,
-manually constrained values remain as published and are recorded separately.
-No new interpolation or closing cap is added during preparation.
+extent does not establish the end of the heliopause. The complete published
+envelope retains these uncertain distances for display; its closed geometry
+must not be interpreted as a measured physical tail closure. Category 4's
+noisy, manually constrained values also remain as published.
+
+Offline display tessellation interpolates between the retained source samples
+to avoid magnifying giant facets. It adds no scientific measurements, improves
+no source resolution and does not reduce the reported uncertainties. Original
+scientific arrays and category metadata remain separate from the prepared
+display geometry. Four segments per original triangle edge produce 1,920
+display triangles. Radius interpolates linearly while direction is normalized;
+original samples and shared edges remain fixed. Surface-derived smooth normals
+replace the old Sun-radial presentation normals. A conservative ±383 AU bound
+contains both the source and the curved display interpolation.
 
 The original frame is right-handed, with +Y toward ecliptic longitude 255°
 and +Z toward the north J2000 ecliptic pole. The source frame explicitly

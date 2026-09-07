@@ -25,16 +25,29 @@ function close(actual: readonly number[], expected: readonly number[], tolerance
 
 test('scientific grid and uncertainty rows reproduce from the pinned publisher workbook and figure', () => {
   const output = execFileSync('python3', [join(objectDirectory, 'source/ibex/extract.py'), '--check'], { encoding: 'utf8' });
-  assert.match(output, /IBEX ORIGINAL EXTRACTION VERIFIED: 56 macropixels; 67 matching entries; 13 tail-limit entries masked/);
+  assert.match(output, /IBEX ORIGINAL EXTRACTION VERIFIED: 56 macropixels; 67 matching entries; 13 tail-limit entries retained/);
 });
 
-test('published gridded source preserves physical samples and leaves sounding-limit gaps open', async () => {
+test('published envelope retains every source sample and prepares a closed, finely tessellated display', async () => {
   const r = await recipe(); assert.equal(r.shape.kind, 'gridded-surface');
   const source = JSON.parse(await readFile(join(objectDirectory, 'source', r.shape.path), 'utf8'));
   const mesh = await loadShellMesh(join(objectDirectory, 'source'), r);
-  assert.deepEqual(mesh.positionsUnits, source.positionsUnits.flat().filter((p: unknown) => p !== null));
-  assert.equal(mesh.triangles.length, 87);
-  assert.equal(source.positionsUnits.flat().filter((p: unknown) => p === null).length, 13);
+  assert.equal(source.positionsUnits.flat().filter((p: unknown) => p === null).length, 0,
+    'Uncertain published tail samples must remain present; deleting them tears away half the envelope');
+  const original = parseGriddedShellMesh(source);
+  assert.equal(original.triangles.length, 120);
+  for (const sample of original.positionsUnits) assert(mesh.positionsUnits.some(vertex =>
+    Math.hypot(...vertex.map((n, i) => n - sample[i]!)) < 1e-10), 'Display tessellation must preserve each original sample');
+  assert(mesh.triangles.length >= 960 && mesh.triangles.length <= 2000,
+    'The coarse scientific grid needs a bounded, finer display mesh');
+  const welded = mesh.positionsUnits.map(p => p.map(n => Math.round(n * 1e8)).join(','));
+  const edges = new Map<string, number>();
+  for (const triangle of mesh.triangles) for (let i = 0; i < 3; i++) {
+    const a = welded[triangle[i]!]!, b = welded[triangle[(i + 1) % 3]!]!;
+    assert.notEqual(a, b, 'Pole welding must not create degenerate edges');
+    const key = [a, b].sort().join('|'); edges.set(key, (edges.get(key) ?? 0) + 1);
+  }
+  assert([...edges.values()].every(count => count === 2), 'Every display edge must meet its neighbour, including the tail, seam and poles');
   // Figure 8's unmodified nose sample is +Y, 120 AU. North/south pole samples
   // are the authors' gridded 182/156 AU values, not the old analytic deformation.
   close(source.positionsUnits[5][3], [0, 120, 0], 1e-10);
@@ -45,10 +58,10 @@ test('published gridded source preserves physical samples and leaves sounding-li
   const transformed = [2 * (x * y - w * z), 1 - 2 * (x * x + z * z), 2 * (y * z + w * x)];
   const obliquity = 84381.448 / 3600 * Math.PI / 180, longitude = 255 * Math.PI / 180;
   close(transformed, [Math.cos(longitude), Math.sin(longitude) * Math.cos(obliquity), Math.sin(longitude) * Math.sin(obliquity)], 1e-12);
-  // A source grid has no implicit cyclic seam or cap. Every face uses only
-  // immediate grid neighbours; excluded tail cells cannot gain closing faces.
+  // Source topology remains only immediate neighbours; the publisher already
+  // supplies its repeated longitude seam and poles. Display subdivision is separate.
   const sourceIndices = source.positionsUnits.flatMap((row: unknown[], i: number) => row.flatMap((value, j) => value === null ? [] : [[i, j]]));
-  for (const triangle of mesh.triangles) {
+  for (const triangle of original.triangles) {
     const cells = triangle.map(index => sourceIndices[index]);
     for (const axis of [0, 1]) assert(Math.max(...cells.map(c => c[axis])) - Math.min(...cells.map(c => c[axis])) <= 1);
   }
@@ -197,7 +210,7 @@ test('interpolated corner material reduces source shader error at outside and ne
   };
   const mix = (vectors: readonly (readonly number[])[], weights: readonly number[]) => [0, 1, 2].map(axis =>
     vectors.reduce((sum, v, corner) => sum + v[axis]! * weights[corner]!, 0));
-  for (const camera of [[456, 0, 0], [0, 0, r.frame.boundsUnits.max[2] * 1.15]]) {
+  for (const camera of [[456, 0, 0], [0, 0, Math.max(...mesh.positionsUnits.map(p => p[2])) * 1.15]]) {
     let flatError = 0, interpolatedError = 0, samples = 0;
     for (let faceIndex = 0; faceIndex < mesh.triangles.length; faceIndex++) {
       const face = shell.faces[faceIndex]!;
@@ -225,7 +238,7 @@ test('pinned preparation deterministically regenerates actual geometry, images a
   try {
     const envelope = await prepareSurfaceShellObject({ objectDirectory, outputDirectory: temporary });
     assert.equal(envelope.type, 'surface-shell'); assert.equal(envelope.format, 'cssearth-surface-shell@1');
-    assert.equal(envelope.data.faces.length, 87);
+    assert.equal(envelope.data.faces.length, 1920);
     for (const name of ['shell.json', 'surface-mesh.json', 'rim-atlas.png']) {
       assert.deepEqual(await readFile(join(temporary, name)), await readFile(join(objectDirectory, 'prepared', name)), `${name} must reproduce byte for byte`);
     }

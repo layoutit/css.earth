@@ -1,4 +1,4 @@
-"""Extract the publisher's Figure 8 HP grid; retain its positions and open its tail.
+"""Extract the publisher's complete Figure 8 HP model/display envelope.
 
 Python 3 standard library only. No publisher JavaScript is executed. --check
 compares both checked numerical derivatives against extraction from originals.
@@ -62,7 +62,7 @@ if hp['type'] != 'surface' or hp['colorscale'] != [[0, 'cyan'], [1, 'cyan']]:
     raise ValueError('Expected the original cyan heliopause surface')
 if not all(len(hp[k]) == 13 and all(len(r) == 7 for r in hp[k]) for k in 'xyz'):
     raise ValueError('Expected original 13 by 7 grid')
-grid, masked, matched = [], [], 0
+grid, tail_limits, matched = [], [], 0
 for i in range(13):
     row = []
     for j in range(7):
@@ -80,17 +80,17 @@ for i in range(13):
         elif round(abs(latitude)) != 62:
             raise ValueError('Unexpected interpolation outside published high-latitude rings')
         if original and original['category'] == 3:
-            masked.append([i, j])
-            row.append(None)
-        else:
-            row.append(point)
+            tail_limits.append([i, j])
+        # Retain the published envelope; category 3 identifies uncertainty,
+        # not absent geometry or a measured physical heliopause closure.
+        row.append(point)
     grid.append(row)
-if matched != 67 or len(masked) != 13:
-    raise ValueError('Figure/table correspondence or tail mask changed')
+if matched != 67 or len(tail_limits) != 13:
+    raise ValueError('Figure/table correspondence or tail-limit classification changed')
 outputs = {
     'heliopause-grid.json': {'schema': 'cssearth-surface-grid@1', 'positionsUnits': grid},
     'macropixels.json': {'schema': 'cssearth-ibex-macropixels@1', 'referenceFrame': 'ecliptic-J2000',
-                        'rows': list(table.values()), 'tailSoundingLimitGridIndices': masked},
+                        'rows': list(table.values()), 'tailSoundingLimitGridIndices': tail_limits},
 }
 if sys.argv[1:] not in ([], ['--check']):
     raise ValueError('Usage: python3 extract.py [--check]')
@@ -103,4 +103,4 @@ for filename, value in outputs.items():
     else:
         path.write_bytes(encoded)
     print(filename, len(encoded), hashlib.sha256(encoded).hexdigest())
-print('IBEX ORIGINAL EXTRACTION VERIFIED: 56 macropixels; 67 matching entries; 13 tail-limit entries masked')
+print('IBEX ORIGINAL EXTRACTION VERIFIED: 56 macropixels; 67 matching entries; 13 tail-limit entries retained as uncertain')

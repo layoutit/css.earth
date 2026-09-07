@@ -17,21 +17,25 @@
     "metersPerUnit": 149597870700,
     "boundsUnits": {
       "min": [
-        -188.25000000000003,
-        -111.0000000000001,
-        -175.59954702827685
+        -383.0,
+        -383.0,
+        -383.0
       ],
       "max": [
-        192.25763964014533,
-        120.0,
-        182.0
+        383.0,
+        383.0,
+        383.0
       ]
     }
   },
   "shape": {
     "kind": "gridded-surface",
     "path": "ibex/heliopause-grid.json",
-    "sha256": "37744651c502570fd0bb80a122c6430abf3d743a3b72f131fd023e4900613f0e"
+    "sha256": "dbae182236b56654eff4552d5f3530af5e556db4853a312c6dc87ba5704e5bb9",
+    "displaySubdivision": {
+      "method": "radial-linear",
+      "segmentsPerEdge": 4
+    }
   },
   "material": {
     "colorLinear": [
@@ -80,6 +84,6 @@
   "unitScale": 50,
   "provenance": {
     "path": "provenance.json",
-    "sha256": "436711eb8aaaecd92a531ce84ac48577345ac84d34054c7c1bbce938a0887144"
+    "sha256": "c335403442b84d38e0c60c6375c76bc7a3304274a8e612030a2f330b51772bf8"
   }
 }
