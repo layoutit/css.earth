@@ -48,13 +48,13 @@ test("bakes Pluto homographies into textures while keeping scene frames affine",
       const frame = layer.frameMatrix.split(",").map(Number);
       assert.deepEqual([frame[3], frame[7], frame[11], frame[15]], [0, 0, 0, 1]);
     }
-    const matrix = leaf.style.match(/matrix3d\(([^)]+)\)/u)?.[1].split(",").map(Number);
+    // The compiled layer frame is published; legacy leaf.style is not its transform.
+    const matrix = (layer?.frameMatrix ?? leaf.style.match(/matrix3d\(([^)]+)\)/u)?.[1]).split(",").map(Number);
     assert.equal(matrix?.length, 16);
     assert.ok(matrix.every(Number.isFinite));
-    // A projective denominator must stay positive across all four corners.
-    for (const x of [0, leaf.leafWidth]) for (const y of [0, leaf.leafHeight]) {
-      assert.ok(matrix[3] * x + matrix[7] * y + matrix[15] > 0);
-    }
+    // Pole leaves do not expose projective leafWidth/leafHeight. An affine
+    // published frame has a constant positive denominator everywhere.
+    assert.deepEqual([matrix[3], matrix[7], matrix[11], matrix[15]], [0, 0, 0, 1]);
     if (layer) projectiveFaces++;
   }
   assert.equal(projectiveFaces, 448);
@@ -142,4 +142,20 @@ test("keeps runtime scene work retained and CSS-only", async () => {
   assert.doesNotMatch(client, /createElementNS/u);
   assert.doesNotMatch(styles,
     /clip-path|mask(?:-image)?\s*:|filter\s*:|linear-gradient|radial-gradient|mix-blend-mode/u);
+});
+
+
+test("Pluto prepares small geographic previews for every observation, including elevation", async () => {
+  const root = new URL('../../../../src/planets/pluto/prepared/', import.meta.url);
+  const { images } = JSON.parse(await readFile(new URL('minimaps.json', root)));
+  assert.deepEqual(images.map(image => image.id), PREPARED_PLUTO_LENSES.controls.map(lens => lens.id));
+  for (const image of images) {
+    const path = new URL(image.path, root);
+    const bytes = await readFile(path), metadata = await sharp(bytes).metadata();
+    assert.equal(metadata.width, 640);
+    assert.equal(metadata.height, 320, 'Preview must remain a geographic map, not a packed face atlas');
+    assert.ok(bytes.length < 100_000);
+    const { channels } = await sharp(bytes).stats();
+    assert.ok(channels.some(channel => channel.stdev > 15), 'Preview must contain actual observed structure');
+  }
 });

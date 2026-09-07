@@ -31,17 +31,7 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
     let thumbnailRaster;
     for (const density of config.densities) {
       const width = config.width * density, height = config.height * density;
-      let raster;
-      if (elevation) raster = elevationRaster(elevation, width, height);
-      else {
-        let pipeline = sharp(input, { limitInputPixels: false }).resize(width, height, { fit: 'fill' }).removeAlpha();
-        if (plan.presentation) pipeline = applyTonalPresentation(pipeline, plan.presentation);
-        if (plan.coverage) pipeline = pipeline.toColourspace('srgb');
-        raster = await pipeline.raw().toBuffer({ resolveWithObject: true });
-      }
-      const { info } = raster;
-      const missing = raster.missing ?? (sourceMissing && sampleCoverage(sourceMissing, source.info, width, height));
-      const data = missing ? paintMissingCoverage(raster.data, info, missing) : raster.data;
+      const { data, info } = await observationRaster({ input, plan, elevation, source, sourceMissing, width, height });
       if (density === 2) thumbnailRaster = { data, info };
       const atlas = config.surfaceProjection === 'inverse-homography'
         ? bakeSurfaceRaster(data, { width, height, channels: info.channels }, surfaceRasterCells, density, geometry.rasterAtlas)
@@ -72,6 +62,25 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
     await thumbnail.webp({ quality: 88, effort: 6 }).toFile(resolve(publicDirectory, `${plan.output}-thumbnail.webp`));
   }
   await Promise.all(config.densities.map(density => writeCurvatureMaterial({ publicDirectory, material: config.material, density })));
+}
+
+/** The same source interpretation feeds globe atlases and small, unwarped maps. */
+export async function observationRaster({ input, plan, width, height, elevation, source, sourceMissing }) {
+  elevation ??= plan.elevation ? decodeElevationGrid(await readFile(input), plan.elevation) : null;
+  source ??= plan.coverage ? await sharp(input, { limitInputPixels: false }).raw().toBuffer({ resolveWithObject: true }) : null;
+  if (plan.coverage && plan.coverage.kind !== 'black-fill') throw new TypeError('Unsupported observed coverage source.');
+  sourceMissing ??= source && blackFillCoverage(source.data, source.info, { southConnected: plan.coverage.southConnected });
+  let raster;
+  if (elevation) raster = elevationRaster(elevation, width, height);
+  else {
+    let pipeline = sharp(input, { limitInputPixels: false }).resize(width, height, { fit: 'fill' }).removeAlpha();
+    if (plan.presentation) pipeline = applyTonalPresentation(pipeline, plan.presentation);
+    if (plan.coverage) pipeline = pipeline.toColourspace('srgb');
+    raster = await pipeline.raw().toBuffer({ resolveWithObject: true });
+  }
+  const { info } = raster;
+  const missing = raster.missing ?? (sourceMissing && sampleCoverage(sourceMissing, source.info, width, height));
+  return { info, data: missing ? paintMissingCoverage(raster.data, info, missing) : raster.data };
 }
 
 function applyTonalPresentation(pipeline, presentation) {
