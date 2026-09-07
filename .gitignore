@@ -37,6 +37,7 @@ src/planets/*/source/**/*.tiff
 src/planets/europa/source/photometry/*.lbl
 src/planets/*/source/**/*.ttf
 src/planets/*/source/**/*.webp
+src/planets/*/source/**/*.zip
 
 # Accepted Saturn source-of-truth inputs without a direct acquisition URL.
 !src/planets/saturn/source/cassini-pia21611.jpg
