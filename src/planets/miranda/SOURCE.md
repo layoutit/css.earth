@@ -1,6 +1,6 @@
 # Miranda
 
-The Monochrome lens uses the [NASA/JPL Solar System Simulator map](https://space.jpl.nasa.gov/tmaps/uranus.html), a USGS mosaic of Voyager imagery (`ura5vuu2.tif`). The pinned 1440 × 720, 8-bit monochrome TIFF contains four pixels per degree. The app preserves that native density; a larger pole atlas does not add observed detail. No elevation or color dataset is implied.
+The Monochrome lens uses the [NASA/JPL Solar System Simulator map](https://space.jpl.nasa.gov/tmaps/uranus.html), a USGS mosaic of Voyager imagery (`ura5vuu2.tif`). The pinned 1440 × 720, 8-bit monochrome TIFF contains four pixels per degree. The prepared map uses a 5760 × 2880 sampling grid and a 1024-pixel pole tile to avoid face-edge aliasing in the projective atlas. This resampling preserves the original detail; it does not turn the source into a higher-resolution observation. No elevation or color dataset is implied.
 
 The map is interpreted as simple cylindrical, north at the top, −180° to +180° east-positive longitude. The TIFF lacks georeferencing tags. This interpretation is independently checked visually against the [USGS Gazetteer](https://planetarynames.wr.usgs.gov/SearchResults?Target=98_Miranda): Elsinore (257.1° E, 24.8° S), Arden (73.7° E, 29.1° S), and Inverness (325.7° E, 66.9° S). Preparation rolls longitude into the shared 0–360° surface layout without mirroring. This is display registration, not new geodetic control.
 
