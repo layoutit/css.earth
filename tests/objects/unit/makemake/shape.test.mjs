@@ -7,8 +7,8 @@ const json = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'
 test('Makemake uses the documented spherical approximation within the actual quad budget', async () => {
   const scene = await json('prepared/scene.json');
   assert.deepEqual(scene.model.semiAxesKm, [715, 715, 715]);
-  assert.equal(scene.bodyLeaves.length, 1924);
-  assert.equal(scene.counts.totalQuads, 1925);
+  assert.equal(scene.bodyLeaves.length, 452);
+  assert.equal(scene.counts.totalQuads, 453);
   assert.ok(scene.counts.totalQuads <= 2000);
   assert.deepEqual(scene.ringLeaves, []);
 });

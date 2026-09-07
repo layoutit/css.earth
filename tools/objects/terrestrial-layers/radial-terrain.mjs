@@ -1,6 +1,7 @@
 import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
+import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
 import { loadObjShape, loadPdsVertexFacetShape } from './obj-shape.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
@@ -17,9 +18,12 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
   await source.validatePath(profile.path);
-  const loader = profile.format === 'wavefront-obj-zip' ? loadObjShape : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadPdsScalarGrid;
+  const loader = ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadPdsScalarGrid;
   const grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
-  const faces = radialTriangles(grid.sample, profile, config.geometry.radius / (config.geometry.radiusKm * 1000));
+  const scale = config.geometry.radius / (config.geometry.radiusKm * 1000);
+  const faces = profile.simplification
+    ? await simplifyRadialShape(grid, profile, scale)
+    : radialTriangles(grid.sample, profile, scale);
   const tileSize = profile.tileSize, columns = profile.atlasColumns;
   if (![tileSize, columns].every(value => Number.isInteger(value) && value > 0) || tileSize > 512 || columns > 64) throw new TypeError('Invalid radial texture layout.');
   const width = columns * tileSize, height = Math.ceil(faces.length / columns) * tileSize;
@@ -45,6 +49,23 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   return { grid, faces, plans, leaves, width, height, tileSize };
 }
 
+/** Simplify the released topology before UV sampling. Original positions are
+ * retained; geometry and the simplifier never enter the browser runtime. */
+export async function simplifyRadialShape(mesh, profile, scale) {
+  const { targetFaces, maximumErrorMeters } = profile.simplification;
+  if (!mesh.positions || !mesh.indices || !Number.isInteger(targetFaces) || targetFaces < 4 ||
+      !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 2000 ||
+      !(maximumErrorMeters > 0) || !Number.isFinite(maximumErrorMeters) || !(scale > 0)) throw new TypeError('Invalid source mesh simplification.');
+  await MeshoptSimplifier.ready;
+  const [indices] = MeshoptSimplifier.simplify(Uint32Array.from(mesh.indices.flat()),
+    Float32Array.from(mesh.positions.flat()), 3, targetFaces * 3, maximumErrorMeters, ['ErrorAbsolute']);
+  if (!indices.length || indices.length / 3 > targetFaces) throw new Error('Source mesh cannot meet the leaf target within its authored error limit.');
+  const triangles = [];
+  for (let i = 0; i < indices.length; i += 3) triangles.push(Array.from(indices.subarray(i, i + 3),
+    index => mesh.positions[index].map(value => value * scale)));
+  return surfaceTriangles(triangles);
+}
+
 export function radialTriangles(sample, profile, scale) {
   const { latitudeSegments: rows, longitudeSegments: columns, faceBudget } = profile;
   if (![rows, columns, faceBudget].every(n => Number.isInteger(n) && n >= 4) ||
@@ -56,18 +77,22 @@ export function radialTriangles(sample, profile, scale) {
     const lat = latitude * Math.PI / 180, lon = longitude * Math.PI / 180;
     return [radius * scale * Math.cos(lat) * Math.cos(lon), radius * scale * Math.cos(lat) * Math.sin(lon), radius * scale * Math.sin(lat)];
   };
-  const faces = [];
-  function triangle(a, b, c) {
+  const triangles = [];
+  for (let row = 0; row < rows; row++) for (let col = 0; col < columns; col++) {
+    const a = point(row, col), b = point(row, (col + 1) % columns), c = point(row + 1, (col + 1) % columns), d = point(row + 1, col);
+    if (row !== 0) triangles.push([a, b, c]);
+    if (row !== rows - 1) triangles.push([a, c, d]);
+  }
+  return surfaceTriangles(triangles);
+}
+
+function surfaceTriangles(triangles) {
+  const faces = triangles.map(([a, b, c]) => {
     let normal = cross(sub(b, a), sub(c, a));
     if (dot(normal, a) < 0) { [b, c] = [c, b]; normal = normal.map(x => -x); }
     if (!(Math.hypot(...normal) > 1e-8)) throw new Error('Degenerate terrain face.');
-    faces.push({ vertices: [a, b, c], normal: unit(normal) });
-  }
-  for (let row = 0; row < rows; row++) for (let col = 0; col < columns; col++) {
-    const a = point(row, col), b = point(row, (col + 1) % columns), c = point(row + 1, (col + 1) % columns), d = point(row + 1, col);
-    if (row !== 0) triangle(a, b, c);
-    if (row !== rows - 1) triangle(a, c, d);
-  }
+    return { vertices: [a, b, c], normal: unit(normal) };
+  });
   // Area-weighted shared normals remove lighting discontinuities without
   // changing any source-derived position or smoothing the physical silhouette.
   const key = vertex => vertex.map(value => Math.round(value * 1e6)).join(',');

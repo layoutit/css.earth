@@ -9,9 +9,9 @@ test('Eris prepares the occultation sphere inside the actual quad budget without
   const descriptor = parseAuthoredObjectDescriptor(await json('object.json'));
   assert.deepEqual(descriptor.recipe.shape, { kind: 'sphere', radiusKm: 1163 });
   const scene = await json('prepared/scene.json');
-  assert.equal(scene.bodyLeaves.length, 1924);
+  assert.equal(scene.bodyLeaves.length, 452);
   assert.equal(scene.ringLeaves.length, 0);
-  assert.equal(scene.counts.totalQuads, 1925);
+  assert.equal(scene.counts.totalQuads, 453);
   assert.ok(scene.counts.totalQuads <= 2000);
   assert.deepEqual(scene.model.semiAxesKm, [1163, 1163, 1163]);
 });

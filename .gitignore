@@ -56,3 +56,4 @@ src/planets/*/.prepared/
 # Pinned PDS raster and vertex-facet source products.
 src/planets/*/source/**/*.IMG
 src/planets/*/source/**/*.tab
+src/planets/*/source/**/*.obj
