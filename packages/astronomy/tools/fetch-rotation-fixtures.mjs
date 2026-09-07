@@ -53,6 +53,7 @@ const BODIES = [
   ['neptune', '899'],
   ['triton', '801'],
   ['proteus', '808'],
+  ['charon', '901'],
   ['pluto', '999'],
   // Ceres has no major-body number, but Horizons resolves '2000001' (the
   // Dawn-mission code) for a body-fixed site — verified live; the small-body

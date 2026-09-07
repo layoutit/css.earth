@@ -48,7 +48,7 @@ describe('the solar-system frame tree', () => {
     // from a rule instead of taking them from a table someone typed.
     expect(() => buildTree()).not.toThrow()
     const tree = buildTree()
-    expect(tree.frameCount).toBe(2 + PLANET_IDS.length * 2 + 1 + SATELLITE_IDS.length)
+    expect(tree.frameCount).toBe(2 + PLANET_IDS.length * 2 + PLANET_IDS.flatMap(moonsOf).length)
   })
 
   it('grafts under a coarser parent without changing anything else', () => {

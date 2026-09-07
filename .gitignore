@@ -48,3 +48,6 @@ src/planets/*/.prepared/
 
 # Prepared JSON transport rebuilt from checked-in object preparation output.
 /src/planets/*/prepared/object.json
+
+/src/planets/charon/source/observations/*.tif
+/src/planets/charon/source/science/*.tif
