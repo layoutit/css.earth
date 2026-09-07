@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-linear-rotation@1",
+  "rightAscensionDegrees": 40.57039852156057,
+  "declinationDegrees": 83.51893316906228,
+  "referenceEpochJdTt": 2451545,
+  "primeMeridianDegrees": 58.83,
+  "spinRateDegreesPerDay": 518.2359876,
+  "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+  "qualification": "Approximate fixed-epoch display orientation from the secular IAU/PCK pole and prime-meridian terms. Periodic nutation and libration corrections are omitted; this is not the precise binary rotation kernel used for Cassini control. Photograph registration independently uses the measured camera solution in the PDS shape document."
+}

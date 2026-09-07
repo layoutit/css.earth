@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hyperion",
+  "displayName": "Hyperion",
+  "panel": {
+    "introduction": "Hyperion is Saturn\u2019s sponge-like, chaotically tumbling moon. Deep craters cover a porous, irregular body whose dark crater floors contrast with brighter icy walls.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "135 km"
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Distance from Sun",
+        "value": "9.58 AU (system mean)"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 21.3 days"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation",
+        "value": "Chaotic tumbling"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Saturn",
+        "value": "About 1.5 million km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "William Lassell and William and George Bond \u00b7 1848"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
+        "title": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
+        "detail": "Cassini clear-filter mosaic",
+        "thumbnail": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
+        "surface": "hyperion-normal-surface@2x.webp",
+        "poles": "hyperion-normal-poles@2x.webp",
+        "source": {
+          "id": "cassini-n1506383441",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
+        }
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
+        "title": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side.",
+        "detail": "Shape-derived radial height",
+        "thumbnail": "/scenes/hyperion/hyperion-elevation-thumbnail.webp",
+        "surface": "hyperion-elevation-surface@2x.webp",
+        "poles": "hyperion-elevation-poles@2x.webp",
+        "source": {
+          "id": "thomas-hyperion-shape",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "\u221250",
+            "0",
+            "60"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+          "image": "/scenes/hyperion/hyperion-elevation-legend.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Hyperion overview",
+      "href": "https://science.nasa.gov/saturn/moons/hyperion/"
+    },
+    {
+      "label": "NASA/JPL/SSI; PDS",
+      "role": "surface",
+      "description": "Cassini ISS calibrated observations and Thomas controlled shape",
+      "href": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/hyperion/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

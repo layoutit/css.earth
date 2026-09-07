@@ -1,3 +1,10 @@
+import panDescriptor from "../src/planets/pan/object.json" with { type: "json" };
+import atlasDescriptor from "../src/planets/atlas/object.json" with { type: "json" };
+import prometheusDescriptor from "../src/planets/prometheus/object.json" with { type: "json" };
+import pandoraDescriptor from "../src/planets/pandora/object.json" with { type: "json" };
+import janusDescriptor from "../src/planets/janus/object.json" with { type: "json" };
+import epimetheusDescriptor from "../src/planets/epimetheus/object.json" with { type: "json" };
+import hyperionDescriptor from "../src/planets/hyperion/object.json" with { type: "json" };
 import ryuguDescriptor from "../src/planets/ryugu/object.json" with { type: "json" };
 import bennuDescriptor from "../src/planets/bennu/object.json" with { type: "json" };
 import itokawaDescriptor from "../src/planets/itokawa/object.json" with { type: "json" };
@@ -142,6 +149,41 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(saturnDescriptor);
     }, saturnDescriptor.properties.worldFrame),
+  object("pan", "Pan", "satellite", "#a6a29a", 9.58,
+    "Explore Pan with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(panDescriptor);
+    }, panDescriptor.properties.worldFrame),
+  object("atlas", "Atlas", "satellite", "#a6a29a", 9.58,
+    "Explore Atlas with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(atlasDescriptor);
+    }, atlasDescriptor.properties.worldFrame),
+  object("prometheus", "Prometheus", "satellite", "#a6a29a", 9.58,
+    "Explore Prometheus with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(prometheusDescriptor);
+    }, prometheusDescriptor.properties.worldFrame),
+  object("pandora", "Pandora", "satellite", "#a6a29a", 9.58,
+    "Explore Pandora with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(pandoraDescriptor);
+    }, pandoraDescriptor.properties.worldFrame),
+  object("janus", "Janus", "satellite", "#a6a29a", 9.58,
+    "Explore Janus with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(janusDescriptor);
+    }, janusDescriptor.properties.worldFrame),
+  object("epimetheus", "Epimetheus", "satellite", "#a6a29a", 9.58,
+    "Explore Epimetheus with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(epimetheusDescriptor);
+    }, epimetheusDescriptor.properties.worldFrame),
+  object("hyperion", "Hyperion", "satellite", "#a6a29a", 9.58,
+    "Explore Hyperion with Cassini imagery, mapped radial height and its measured irregular shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hyperionDescriptor);
+    }, hyperionDescriptor.properties.worldFrame),
   object("mimas", "Mimas", "satellite", "#aeaba5", 9.58,
     "Explore Mimas in 3D with cssEarth. Inspect Cassini imagery of Saturn’s cratered moon and its giant Herschel impact basin.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

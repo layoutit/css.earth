@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1600_1310.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:geom="http://pds.nasa.gov/pds4/geom/v1" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd http://pds.nasa.gov/pds4/geom/v1 https://pds.nasa.gov/pds4/geom/v1/PDS4_GEOM_1900_1510.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:saturn_satellite_shape_models:data:epimetheus_30k_plt_tab</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>EPIMETHEUS_30K_PLT</title>
+    <information_model_version>1.15.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Thomas, P.</author_list>
+      <publication_year>2018</publication_year>
+      <description>This multi-part table contains three sections. The first is a single line that
+includes the number of vertices and the number of facets that make up the shape model
+of Epimetheus. The second contains position location for all of the vertices of the
+model. The third section defines the plates by referencing three vertices (from the
+second section) for each plate.</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time xsi:nil="true" nilReason="inapplicable" />
+      <stop_date_time xsi:nil="true" nilReason="inapplicable" />
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>Cassini-huygens</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.cassini-huygens</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Cassini Orbiter</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.co</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Imaging Science Subsystem - Narrow Angle</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:issna.co</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>EPIMETHEUS</name>
+      <type>Satellite</type>
+    </Target_Identification>
+        <Discipline_Area>
+<geom:Geometry>
+<geom:SPICE_Kernel_Files>
+<geom:SPICE_Kernel_Identification>
+<geom:kernel_type>PCK</geom:kernel_type>
+<geom:spice_kernel_file_name>epimetheus_mst2013.bpc</geom:spice_kernel_file_name>
+</geom:SPICE_Kernel_Identification>
+</geom:SPICE_Kernel_Files>
+</geom:Geometry>
+</Discipline_Area>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <reference_text>Porco, C.C., R.A. West, S. Squyres, A. McEwen, P. Thomas, C.D. Murray, A. DelGenio,
+A.P. Ingersoll, T.V. Johnson, G. Neukum, J. Veverka, L. Dones, A. Brahic, J.A. Burns,
+V. Haemmerle, B. Knowles, D. Dawson, T. Roatsch, K. Beurle, and W. Owen, Cassini
+Imaging Science: Instrument Characteristics and Capabilities and Anticipated
+Scientific Investigations at Saturn, Space Science Reviews 115,363-497, 2004.</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Thomas, P.C., J.W. Armstrong, S.W. Asmar, J.A. Burns, T. Denk, B. Giese, P.
+Helfenstein, L. Iess, T.V. Johnson, A. McEwen, L. Nicolaisen, C. Porco, N. Rappaport,
+J. Richardson, L. Somenzi, P. Tortora, E.P. Turtle and J. Veverka, Hyperion's
+sponge-like appearance, Nature, 448, 50-56, doi:10.1038/nature05779, 2007</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Tiscareno, M.S., P.C. Thomas, and J.A. Burns, The rotation of Janus and Epimetheus,
+Icarus 204, 254-261, doi:10.1016/j.icarus.2009.06.023</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Cassini Mission Plan, Revision N (PD 699-100), JPL Document D-5564, Jet Propulsion
+Laboratory, Pasadena, CA, 2002.</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Owen Jr., W.M., Cassini ISS geometric calibration. JPL Interoffice Memorandum 312
+(E-2003_001), 2003</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Thomas, P.C., J.A. Burns, M. Hedman, P. Helfenstein, S. Morrison, M.S. Tiscareno, and
+J. Veverka. The inner small satellites of Saturn: A variety of worlds. Icarus 226,
+999-1019 (2013)</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Thomas, P.C., J. Joseph, B. Carcich, J. Veverka, B.E. Clark, J.F. Bell III, M.
+Robinson, S. Murchie, L. Prockter, A. Cheng, N. Izenberg, M. Malin, C. Chapman, L.A.
+McFadden, R. Kirk, M. Gaffey, and P.G. Lucey, Eros: Shape, Topography, and Slope
+Processes, Icarus, Vol. 155, pp. 18-37, 2002.</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Simonelli, D.P., P.C. Thomas, B.T. Carcich, and J. Veverka, Generation and Use of
+Numerical Shape Models for Irregular Solar System Objects, Icarus, 103, 49-61, 1993.</reference_text>
+    </External_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>epimetheus_30k_plt.tab</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2018-08-15</creation_date_time>
+      <file_size unit="byte">2087100</file_size>
+      <records>41742</records>
+    </File>
+    <Table_Character>
+      <local_identifier>VERTICES_FACETS_TABLE</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>1</records>
+      <description>This is a single row of data that lists the number of vertices and facets that make
+up this shape model of Epimetheus, derived solely from Cassini ISS Narrow Angle
+Camera data.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>2</fields>
+        <groups>0</groups>
+        <record_length unit="byte">50</record_length>
+        <Field_Character>
+          <name>NUMBER_OF_VERTICES</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">8</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">5</field_length>
+          <field_format>%5d</field_format>
+          <description>Number of vertices that define the plates of the shape model.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>NUMBER_OF_FACETS</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">20</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">5</field_length>
+          <field_format>%5d</field_format>
+          <description>Number of facets defining the triangular plates in the shape model.</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>VERTEX_COORDINATE_TABLE</local_identifier>
+      <offset unit="byte">50</offset>
+      <records>13915</records>
+      <description>Table of vertices of numerical shape model of Saturn's satellite Epimetheus. These
+are the vertices of plates that approximate the surface of Epimetheus. Each row of
+this table contains the X, Y and Z coordinates of one vertex in a Cartesian
+coordinate system that is fixed with respect to Epimetheus's body-fixed rotating
+reference frame.  The origin of the coordinate system is coincident with Epimetheus's
+model center of figure to an accuracy of about 25 m.  The +Z axis of the coordinate
+system is coincident with Epimetheus's North spin pole.  The +X axis of the
+coordinate system is coincident with Epimetheus's Prime Meridian, which on average
+points toward Saturn.  The coordinate system is right-handed, with the +Y being
+opposite to direction of Epimetheus's orbital motion (trailing side).</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>3</fields>
+        <groups>0</groups>
+        <record_length unit="byte">50</record_length>
+        <Field_Character>
+          <name>X</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">2</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">14</field_length>
+          <field_format>%14.8e</field_format>
+          <unit>KILOMETER</unit>
+          <description>Vertex X coordinate.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Y</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">18</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">14</field_length>
+          <field_format>%14.8e</field_format>
+          <unit>KILOMETER</unit>
+          <description>Vertex Y coordinate.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Z</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">34</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">14</field_length>
+          <field_format>%14.8e</field_format>
+          <unit>KILOMETER</unit>
+          <description>Vertex Z coordinate.</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>VERTEX_ORDERING_TABLE</local_identifier>
+      <offset unit="byte">695800</offset>
+      <records>27826</records>
+      <description>Table of triangular plates of numerical shape model of Epimetheus.  These triangular
+plates approximate the surface of Epimetheus.  Each row of this table contains three
+integer offsets that point to three vertices from the previous table.  Those three
+vertices are the vertices of one triangular plate of the shape model.  Each integer
+is the offset from the first row in the table of vertices, thus THE COUNTING STARTS
+FROM ZERO.  An offset of 0 points to the first row in the table of vertices, an
+offset of 1 to the second row, and so on.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>3</fields>
+        <groups>0</groups>
+        <record_length unit="byte">50</record_length>
+        <Field_Character>
+          <name>ONE</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">8</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">5</field_length>
+          <field_format>%5d</field_format>
+          <description>First vertex defining a plate.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>TWO</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">20</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">5</field_length>
+          <field_format>%5d</field_format>
+          <description>Second vertex defining a plate.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>THREE</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">32</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">5</field_length>
+          <field_format>%5d</field_format>
+          <description>Third vertex defining a plate.</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>
+

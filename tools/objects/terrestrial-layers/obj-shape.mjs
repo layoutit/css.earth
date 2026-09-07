@@ -23,6 +23,21 @@ export async function loadPdsVertexFacetShape(path, profile) {
   return parsePdsVertexFacetShape(await readFile(path, 'utf8'), profile);
 }
 
+/** PDS4 plate tables: counts on the first row, followed by unnumbered XYZ
+ * vertices and explicitly indexed triangles. Keep the released topology and units. */
+export async function loadPdsPlateShape(path, profile) {
+  return parsePdsPlateShape(await readFile(path, 'utf8'), profile);
+}
+
+export function parsePdsPlateShape(text, profile) {
+  const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
+  const [vertices, faces] = rows.shift();
+  if (![0,1].includes(profile.indexBase) || vertices !== profile.expectedVertices || faces !== profile.expectedFaces || rows.length !== vertices + faces ||
+      rows.some(row => row.length !== 3 || row.some(n => !Number.isFinite(n)))) throw new Error('PDS plate dimensions or rows changed.');
+  return radialShape(rows.slice(0, vertices).map(v => v.map(n => n * profile.metersPerUnit)),
+    rows.slice(vertices).map(f => f.map(n => n - profile.indexBase)), profile);
+}
+
 export function parsePdsVertexFacetShape(text, profile) {
   const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
   const vertexCount = rows[0]?.[0], combinedHeader = rows[0]?.length === 2;
@@ -42,7 +57,7 @@ export function parsePdsVertexFacetShape(text, profile) {
 /** Sample a bounded scientific grid from the source mesh. A facet-support
  * column can withhold regions whose detailed SPC solution is absent. */
 export async function loadShapeScalarGrid(root, lens) {
-  const load = lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
+  const load = lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
   const mesh = await load(resolve(root, lens.path), lens.grid);
   const { width = 721, height = 361 } = lens.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');
@@ -106,23 +121,20 @@ function radialShape(vertices, indices, { metersPerUnit, expectedVertices, expec
     return {min,max,left:build(items.slice(0,half)),right:build(items.slice(half))};
   }
   const root = build(faces);
-  function hit(longitude, latitude) {
-    if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || Math.abs(latitude)>90) return null;
-    const lon=longitude*Math.PI/180, lat=latitude*Math.PI/180;
-    const d=[Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)];
-    let nearest=Infinity, faceId=-1;
+  function intersect(origin, d, maximumDistance = Infinity) {
+    let nearest=maximumDistance, faceId=-1;
     function visit(n) {
       let lo=0,hi=nearest;
       for (let i=0;i<3;i++) {
-        if (Math.abs(d[i])<1e-15) { if(n.min[i]>0||n.max[i]<0)return; continue; }
-        const a=n.min[i]/d[i],b=n.max[i]/d[i]; lo=Math.max(lo,Math.min(a,b));hi=Math.min(hi,Math.max(a,b));
+        if (Math.abs(d[i])<1e-15) { if(n.min[i]>origin[i]||n.max[i]<origin[i])return; continue; }
+        const a=(n.min[i]-origin[i])/d[i],b=(n.max[i]-origin[i])/d[i]; lo=Math.max(lo,Math.min(a,b));hi=Math.min(hi,Math.max(a,b));
         if(lo>hi)return;
       }
       if (!n.items) {visit(n.left);visit(n.right);return;}
       for (const f of n.items) {
         const h=cross(d,f.ac),det=dot(f.ab,h);
         if(Math.abs(det)<1e-12)continue;
-        const s=f.a.map(v=>-v),u=dot(s,h)/det;
+        const s=sub(origin,f.a),u=dot(s,h)/det;
         if(u < -1e-9 || u > 1+1e-9)continue;
         const q=cross(s,f.ab),v=dot(d,q)/det;
         if(v < -1e-9 || u+v > 1+1e-9)continue;
@@ -133,6 +145,11 @@ function radialShape(vertices, indices, { metersPerUnit, expectedVertices, expec
     visit(root);
     return faceId<0?null:{radius:nearest,faceId};
   }
-  return { vertices: vertices.length, faces: faces.length, positions: vertices, indices, bounds:[root.min,root.max], hit,
+  function hit(longitude, latitude) {
+    if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || Math.abs(latitude)>90) return null;
+    const lon=longitude*Math.PI/180, lat=latitude*Math.PI/180;
+    return intersect([0,0,0],[Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)]);
+  }
+  return { vertices: vertices.length, faces: faces.length, positions: vertices, indices, bounds:[root.min,root.max], hit, intersect,
     sample(longitude,latitude) {return hit(longitude,latitude)?.radius??null;} };
 }
