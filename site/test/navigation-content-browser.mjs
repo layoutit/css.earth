@@ -10,6 +10,13 @@ try {
   const proof = await page.evaluate(async () => {
     const { createNavigationContent } = await import('/site/navigation-content.mjs');
     const { mountPlanetShell } = await import('/site/planet-shell-client.mjs');
+    const headMetadata = doc => ({
+      title: doc.title,
+      tags: [...doc.head.querySelectorAll('link[rel="canonical"], meta[name="description"], meta[property^="og:"], meta[name^="twitter:"]')]
+        .map(node => node.outerHTML).sort(),
+    });
+    const initialMetadata = headMetadata(document);
+    const expectedMetadata = headMetadata(new DOMParser().parseFromString(await fetch('/venus/').then(response => response.text()), 'text/html'));
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface'];
     const retained = selectors.map(selector => document.querySelector(selector));
     const sharedStyles = [...document.head.querySelectorAll('style[data-vite-dev-id]')]
@@ -36,6 +43,7 @@ try {
     const shell = mountPlanetShell({ objectId: 'mercury', documentTarget: document, windowTarget: window });
     shell.setObject(content);
     const first = {
+      metadata: headMetadata(document),
       sourceUnchangedDuringPreparation: before === afterPreparation,
       surfaceBefore,
       surfaceAfterPreparation,
@@ -53,6 +61,7 @@ try {
     const reverse = await transport.load({ id: 'mercury', name: 'Mercury', route: '/mercury/' }, { signal: new AbortController().signal });
     shell.setObject(reverse);
     const second = {
+      metadata: headMetadata(document),
       identities: selectors.map((selector, index) => document.querySelector(selector) === retained[index]),
       selectedSearch: document.querySelector('.planet-sidebar-search').value,
       surfaceStylesRetained: surfaceStyles.every(style => style.isConnected),
@@ -60,8 +69,10 @@ try {
     };
     surfaceProbe.remove();
     shell.destroy();
-    return { first, second };
+    return { first, second, initialMetadata, expectedMetadata };
   });
+  assert.deepEqual(proof.first.metadata, proof.expectedMetadata, 'Navigation must copy the destination title, canonical and social metadata.');
+  assert.deepEqual(proof.second.metadata, proof.initialMetadata, 'Returning must restore the original metadata.');
   assert.equal(proof.first.sourceUnchangedDuringPreparation, true);
   assert.match(proof.first.surfaceBefore, /\/scenes\/mercury\//);
   assert.equal(proof.first.surfaceAfterPreparation, proof.first.surfaceBefore,
@@ -82,5 +93,5 @@ try {
   assert.equal(proof.second.surfaceStylesRetained, true);
   assert.equal(proof.second.selectedSurface, proof.first.surfaceBefore,
     'Returning to Mercury must restore its image using the retained shared stylesheet.');
-  console.log(JSON.stringify({ status: 'passed', checks: 17, ...proof }));
+  console.log(JSON.stringify({ status: 'passed', checks: 19, ...proof }));
 } finally { await browser.close(); }

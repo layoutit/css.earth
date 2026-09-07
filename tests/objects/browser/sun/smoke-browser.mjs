@@ -54,7 +54,7 @@ try {
     limbCount: document.querySelectorAll(".sun-limb-layer").length,
   }));
   assert.deepEqual(baseline, {
-    title: "Sun in 3D | cssEarth",
+    title: "Sun | cssEarth",
     mountedObjectCount: 1,
     activeObjectId: "sun",
     stageCount: 1,
