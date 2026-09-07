@@ -7,7 +7,7 @@ import { prepareGlbSurface } from './glb-surface.mjs';
 import { packProjectiveSurfaceRaster } from '../../../src/platform/projective-surface-raster.mjs';
 
 /** Preserve the illustrative base color; view-dependent lighting is a separate prepared layer. */
-export async function prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory }) {
+export async function prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensId }) {
   const { width, height, latitudeSegments, longitudeSegments, poleSize } = config.mesh;
   const { pixels, ...source } = await prepareGlbSurface(resolve(sourceDirectory, config.surfaceModel), width, height);
   const emit = async (name, data, w, h) => {
@@ -19,7 +19,17 @@ export async function prepareModelRasters({ config, axes, publicDirectory, publi
   const packed = packProjectiveSurfaceRaster(projected, { width, height, bandCount: latitudeSegments, gutter: height / latitudeSegments / 4 });
   const poles = prepareSolidBodyPoleRaster(pixels, { width, height, tileSize: poleSize,
     radius: config.displayRadius, polarRadius: config.displayRadius * axes[2] / axes[0], latitudeSegments });
-  return { source, textures: {
+  // Sidebar images use the interpreted flat map, before face projection and gutters.
+  let map;
+  if (lensId) {
+    const flat = sharp(pixels, { raw: { width, height, channels: 4 } });
+    await flat.clone().resize({ width: 640, withoutEnlargement: true }).webp({ lossless: true })
+      .toFile(resolve(publicDirectory, `${lensId}-map.webp`));
+    await flat.clone().resize(48, 48).webp({ lossless: true })
+      .toFile(resolve(publicDirectory, `${lensId}-thumbnail.webp`));
+    map = { url: publicBase + `${lensId}-map.webp`, width: Math.min(width, 640), height: Math.round(height * Math.min(width, 640) / width) };
+  }
+  return { source, map, textures: {
     surface: await emit('surface.webp', packed.data, packed.packedWidth, packed.packedHeight),
     poles: await emit('poles.webp', poles, poleSize * 2, poleSize),
   } };

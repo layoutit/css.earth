@@ -15,11 +15,22 @@ test('Haumea retains its measured triaxial shape and ring within the actual leaf
   assert.ok(runtime.tree.nodes.filter(node => node.tag === 's').length <= 2000);
   assert.deepEqual([scene.model.ring.innerRadiusKm, scene.model.ring.outerRadiusKm], [2252, 2322]);
 });
-test('the NASA illustration stays evenly lit without a fabricated lens or shadow control', async () => {
+test('the NASA illustration stays evenly lit with an identified model dataset and no shadow control', async () => {
   const runtime = await json('prepared/runtime.json');
-  assert.equal(runtime.controls.lenses, null);
+  assert.equal(runtime.controls.lenses.defaultLens, 'illustration');
+  assert.deepEqual(runtime.controls.lenses.controls.map(lens => lens.label), ['Illustrative model']);
+  const lens = (await json('prepared/lenses.json')).controls[0];
+  assert.ok(lens.surfaceUrl && lens.polesUrl);
+  assert.equal(lens.surfaceUrl, lens.surface2xUrl);
+  assert.equal(lens.polesUrl, lens.poles2xUrl);
+  const { images } = await json('prepared/minimaps.json');
+  assert.equal(images.length, 1);
+  assert.equal(images[0].id, lens.id);
+  assert.deepEqual([images[0].width, images[0].height], [640, 320]);
+  assert.equal(images[0].attribution.url, lens.source.url);
+  assert.ok((await readFile(new URL('prepared/' + images[0].path, root))).length < 100_000);
   assert.deepEqual(runtime.controls.settings.controls, []);
-  assert.deepEqual(runtime.variants.map(v => v.when), [{}]);
+  assert.deepEqual(runtime.variants.map(v => v.when), [{ lensId: 'illustration' }]);
   assert.ok(runtime.assets.entries.some(a => a.key === 'surface'));
   assert.ok(runtime.assets.entries.every(a => !a.key.includes('lit-')));
   const material = runtime.materials[0];

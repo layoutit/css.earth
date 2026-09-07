@@ -130,7 +130,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   if (source(sources, 'shape-model')) {
     const { prepareShapeModel } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/shape-model/index.mjs')).href);
     const prepared = await prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
-    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, manifestPath: resolve(outputDirectory, 'runtime-assets.json'), values: [prepared.definition, prepared.content] });
+    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, manifestPath: resolve(outputDirectory, 'runtime-assets.json'), allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
     return Object.freeze({ descriptor, sources, ...prepared });
   }
   if (source(sources, 'terrestrial')) {

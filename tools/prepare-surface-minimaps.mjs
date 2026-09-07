@@ -58,7 +58,8 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     }
     const result = await pipeline.webp({ quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true })
       .toFile(resolve(outputDirectory, path));
-    images.push({ id: surface.id, path, width: result.width, height: result.height });
+    images.push({ id: surface.id, path, width: result.width, height: result.height,
+      ...(surface.attribution ? { attribution: surface.attribution } : {}) });
   }
   await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images }) + '\n');
   return images;

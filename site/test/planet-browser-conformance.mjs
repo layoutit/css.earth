@@ -406,7 +406,7 @@ async function proveDesktop(browser, planet, profile) {
     await enableMotion(page, planet.id);
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
-        const leaves = [...stage.querySelectorAll(".polycss-scene s")]
+        const leaves = [...stage.querySelectorAll(".polycss-scene :is(s,u)")]
           .filter(leaf => getComputedStyle(leaf).backgroundImage !== "none");
         return {
           texturedLeafCount: leaves.length,
@@ -1379,7 +1379,9 @@ function cameraPose(page, objectId) {
     return {
       controlPitch: camera.controlPitch,
       controlYaw: camera.controlYaw,
-      zoom: camera.zoom,
+      // Anchor reprojection can leave sub-nanounit zoom round-off at rest.
+      // Rotation and the rendered pose still require exact equality below.
+      zoom: Number(camera.zoom.toFixed(9)),
       pose: camera.pose,
     };
   }, objectId);

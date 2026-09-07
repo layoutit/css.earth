@@ -1,3 +1,4 @@
+import phoebeDescriptor from "../src/planets/phoebe/object.json" with { type: "json" };
 import deimosDescriptor from "../src/planets/deimos/object.json" with { type: "json" };
 import phobosDescriptor from "../src/planets/phobos/object.json" with { type: "json" };
 import oberonDescriptor from "../src/planets/oberon/object.json" with { type: "json" };
@@ -146,6 +147,11 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(iapetusDescriptor);
     }, iapetusDescriptor.properties.worldFrame),
+  object("phoebe", "Phoebe", "satellite", "#9b9792", 9.58,
+    "Explore Phoebe in 3D with cssEarth. Inspect Cassini imagery and shape-derived elevation on Saturn’s irregular outer moon.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(phoebeDescriptor);
+    }, phoebeDescriptor.properties.worldFrame),
   object("uranus", "Uranus", "planet", "#8ec7c9", 19.2,
     "Explore Uranus in 3D with cssEarth. Discover the ice giant that spins on its side, its faint rings, and its system of moons.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

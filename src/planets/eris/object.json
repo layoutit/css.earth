@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "548f481f6a256708aeeec9bbcf0a05165f9556ba2567ae96a1eb3cc5bec36ff0"
+    "sha256": "c39e8b8658c279ec9e28393abbd00edeead132f923f45a7dae0e857d0f859358"
   },
   "properties": {
     "preparation": {
@@ -32,7 +32,7 @@
         {
           "id": "shape-model",
           "path": "source/preparation/shape-model.json",
-          "sha256": "dadc3725ef59ca3f9f8674955c0c90326332dd3e9c1b2c4a3fa72973bd95a75a"
+          "sha256": "abc023870658f0d1d49f23131ada3573ecc8acb8d50a4624eec9b619ed397723"
         },
         {
           "id": "rotation",
@@ -42,7 +42,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "90787e9472f8dfe4818b3490cfc80d5dbb488a7cd0fa5cb482b7d15b46cbf44d"
+          "sha256": "8c5d8d601b855d482734b643f6b51dc1f9dbfa6d5c9335c8d0ec5b1632f3e5f7"
         },
         {
           "id": "acquisition",
@@ -65,7 +65,13 @@
           "id": "body",
           "source": "shape-model",
           "projection": "equirectangular",
-          "lenses": []
+          "lenses": [
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
         }
       ],
       "materials": [
