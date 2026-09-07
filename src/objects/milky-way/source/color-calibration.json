@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-volume-colour-calibration@1",
+  "reference": {
+    "title": "Original NASA Deep Star Maps 2020 Milky Way-only preview",
+    "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k_print.jpg",
+    "sourceUnchanged": true,
+    "NASAExposureOrWhiteBalanceEdited": false
+  },
+  "chosenDisplayColorMatrix": [
+    1,
+    0,
+    0,
+    0,
+    0.951277424,
+    0,
+    0,
+    0,
+    0.709752511
+  ],
+  "retainedSaturation": 1,
+  "colourChoice": "Fit one diagonal white balance to the matched original NASA palette. Preserve relative colour variation rather than minimize error with grayscale. This is an artistic display-RGB grade, not radiometric calibration.",
+  "method": {
+    "observerIcrfM": [
+      0,
+      0,
+      0
+    ],
+    "volumeLocalObserverUnits": [
+      -1.037675756590518,
+      3.981072339160477,
+      -0.06909292457124128
+    ],
+    "rays": "512x256 equirectangular ICRF directions, RA increases left; each ray treated as camera centre",
+    "volumeCompositor": "actual 544 prepared WebPs; premultiplied bilinear sample; far-to-near slab composition; per-axis central-ray optical gain1/abs(direction); three coincident copies with clamped fractional alpha; normalized runtime smoothstep axis weights over0.16band",
+    "referenceSampling": "original1024x512NASApreview resized512x256 with Sharp default Lanczos3; no colour/exposure modifications",
+    "patches": "paired8x8pixelpatchmeans, both display luminance>.10, abs Galactic latitude<15degrees; longitude blocks x%4<2 train, other blocks held-out",
+    "patchCount": 508,
+    "trainingPatchCount": 250,
+    "heldoutPatchCount": 258,
+    "weights": "cos(ICRF declination) at patchcentre",
+    "fit": "normalize each RGBpatch by RGBsum, fit multiplicative per-channel gains on training patches using60log-ratio iterations, normalize maximum gain1; choose saturation1 to retain source variation",
+    "luminance": "display-RGB weighted sum .2126R+.7152G+.0722B, not physical linear-light luminance; volume full display gain1, baked exposure16"
+  },
+  "chromaticityRmse": {
+    "beforeTraining": 0.057622429812699445,
+    "afterTraining": 0.025911835779121196,
+    "beforeHeldout": 0.056388269521559224,
+    "afterHeldout": 0.026050612138947108,
+    "relativeHeldoutReduction": 0.5380136265932574
+  },
+  "matchedBandStatistics": {
+    "beforeVolume": {
+      "solidAngleWeightedMeanDisplayLuminance": 0.3709666846377456,
+      "solidAngleWeightedMedianDisplayLuminance": 0.355699346482195,
+      "meanRgbFractions": [
+        0.3140888369183469,
+        0.30858521211460116,
+        0.37732595096705285
+      ],
+      "greenOverRed": 0.9824774899428327,
+      "blueOverRed": 1.2013351212005845,
+      "chromaticityRmsSpread": 0.015301286991556792
+    },
+    "originalNasa": {
+      "solidAngleWeightedMeanDisplayLuminance": 0.27245287755398945,
+      "solidAngleWeightedMedianDisplayLuminance": 0.2510533578431372,
+      "meanRgbFractions": [
+        0.35820814542683327,
+        0.3347929589290716,
+        0.3069988956440955
+      ],
+      "greenOverRed": 0.9346324565850935,
+      "blueOverRed": 0.8570405211703996,
+      "chromaticityRmsSpread": 0.018208915613226368
+    },
+    "gradedVolume": {
+      "solidAngleWeightedMeanDisplayLuminance": 0.34883312721326304,
+      "solidAngleWeightedMedianDisplayLuminance": 0.3348553920752285,
+      "meanRgbFractions": [
+        0.3586903490164573,
+        0.3352719275962172,
+        0.306037723387326
+      ],
+      "greenOverRed": 0.9347113144124053,
+      "blueOverRed": 0.8532086916374895,
+      "chromaticityRmsSpread": 0.014003583552254046
+    }
+  },
+  "limitations": [
+    "The simulated volume and NASA catalogue-based sky render have different dust/emission structures; no exact map match claimed.",
+    "The matrix is global and does not reproduce NASA-specific warm-core or dust-lane morphology.",
+    "Diagnostic uses each ray as a narrow-camera centre; broad-FOV axis weighting, GPU mip filtering and 8-bit compositor quantization are not reconstructed.",
+    "Diagonal white balance can warm originally neutral portions; it preserves source hue variation better than the rejected grayscale optimum.",
+    "Near-scene brightness must be evaluated separately; these colour metrics deliberately remove intensity.",
+    "Production bake applies matrix before lossy WebP encoding, so small codec differences are expected."
+  ],
+  "inputs": {
+    "src/objects/milky-way/prepared/volume.json": {
+      "sha256": "d7ec931902e14ef950f2ebf1a550777972dcd54def1734213eff05106b980f19"
+    },
+    "src/objects/milky-way/prepared/volume-slices.json": {
+      "sha256": "8965724bc8e96017a6900e85f1fbebfb4a0722d6561bc5150ef8b15f69add819"
+    },
+    "src/objects/milky-way/source/volume.json": {
+      "sha256": "d9500d43f7ead97c36b2156dfed875a70593c8122852244f9a036351deba17e8"
+    },
+    "src/objects/milky-way/object.json": {
+      "sha256": "0d2d577bcc356ccd74a6e2aa1181dbeb41724f9ae736235218ce185f3b0849a1"
+    },
+    "src/objects/milky-way/source/sky/nasa-preview.jpg": {
+      "sha256": "1ebe95804f5f0e6e23f77488aaa33fdb4aaef3fd336821fb41b261ddeaee2df0"
+    }
+  },
+  "localReproductionScripts": {
+    ".local/calibrate-galaxy.mjs": {
+      "sha256": "1e858b335dc3033ae32fd2778922529d9ef2609de04d2adfe94e5532d537ecfd"
+    },
+    ".local/fit-galaxy-grade.py": {
+      "sha256": "ecd5ee29aca91ab990e3b15a29294b8cdbc77b00528b1cfed93cc664339ba030"
+    },
+    ".local/galaxy-calibration/final-receipt.py": {
+      "sha256": "0e37557b2fb4cccb05e08bc3418b99582fb6e9fa1084eae8969dfd0d8db2890c"
+    }
+  },
+  "chosenDisplayBrightness": {
+    "skyDisplayGain": 0.12,
+    "skyShadowFloor": {
+      "blackPoint": 0.04,
+      "fullSignal": 0.12
+    },
+    "volumeInteriorGain": 0.094,
+    "referenceBandMean": 0.272453,
+    "gradedVolumeBandMean": 0.348621,
+    "displayedMeans": {
+      "sky": 0.0326785,
+      "volume": 0.0327704
+    },
+    "reason": "Keep the dim NASA background in the Solar System, then blend into the completed volume image over 100 pc to 5 kpc. Preserve the accepted volume display gain: 0.094 through 1 kpc, rising to 1 at 25 kpc.",
+    "measurement": "The displayedMeans values are historical standalone matched-band measurements, not the luminance of the combined transition. Original NASA preview at 512x256; shadow smoothstep applied per pixel before the original paired Galactic-band patch average. Volume uses actual re-encoded central-ray composite.",
+    "composition": "Complementary completed-image blend t*(B*volume)+(1-t)*NASA. The independent handoff t runs from 100 pc to 5 kpc; B preserves the accepted volume brightness profile. NASA remains opaque underneath.",
+    "handoff": {
+      "fadeStartDistanceM": 3.0856775814913674e+18,
+      "fullDistanceM": 1.5428387907456837e+20
+    }
+  }
+}

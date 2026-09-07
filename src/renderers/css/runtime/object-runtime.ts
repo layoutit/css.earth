@@ -35,9 +35,10 @@ const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, crea
 // used only by native-boundary unit tests; object clients bind one definition.
 export function createObjectRuntime(definition: ObjectRuntimeDefinition, services: Partial<ObjectRuntimeServices> = {}) {
   requireObjectRuntimeDefinition(definition);
+  if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
   const initialSelection = initialObjectSelection(definition.controls);
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, externalWorldContext = false, preparedResources, initialWorldCamera }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, externalWorldContext = false, preparedResources, preparedTree, initialWorldCamera, initialProjection }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
@@ -65,6 +66,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     lifetime.onDispose(() => { viewListeners.clear(); worldPublication.destroy(); });
     const playback = environment.createPlayback();
     lifetime.onDispose(() => playback.destroy());
+    if (preparedTree) lifetime.onDispose(() => preparedTree.destroy());
     let resources: ReturnType<typeof createPreparedResidency>;
     try {
       const resourceOptions = { assets: definition.assets,
@@ -114,7 +116,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (!view) throw new TypeError("A saved object view is required.");
         const version = ++restoreVersion;
         if (!readyPublished || lifetime.disposed) return false;
-        // Older local views without an orbital layer did not carry an epoch.
+        // Older local views of objects without an embedded orbital layer did
+        // not carry an epoch. New captures use the shared prepared world frame.
         const legacyLocalView = view.preparedEpochJdTt == null && legacyPreparedEpochJdTt === null;
         if (!legacyLocalView && (view.preparedEpochJdTt ?? null) !== preparedEpochJdTt) {
           throw new TypeError("This view uses a different prepared astronomical date.");
@@ -141,6 +144,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         const state = getOrbit().state();
         if (state.focal === undefined || !state.principalOffset || !definition.camera.levelOfDetail) throw new TypeError('World navigation requires a physical camera.');
         return { focalPixels: state.focal, principalOffsetPixels: [state.principalOffset[0], state.principalOffset[1]] as const,
+          widthPixels: latestWorldPublication?.stageViewport?.widthPixels,
+          heightPixels: latestWorldPublication?.stageViewport?.heightPixels,
           detailHandoffDiameterPixels: definition.camera.levelOfDetail.billboardFullDiscPixels,
           framingRadiusPixels: getOrbit().currentResponsiveZoom() / definition.camera.defaultZoom * definition.camera.logicalBodyDiameter / 2 };
       },
@@ -227,7 +232,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (!worldFrame || orbit === null || publication.focal === undefined ||
           !publication.principalOffset || publication.principalOffset.length !== 2) return;
       const latestWorld = orbit.captureWorldCamera(worldFrame);
-      const latestWorldViewport = stageWorldViewport(stage, mounted?.cameraElement ?? null,
+      const latestWorldViewport = publication.stageViewport ?? stageWorldViewport(stage, mounted?.cameraElement ?? null,
         publication.focal, publication.principalOffset);
       worldPublication.publish(latestWorld, latestWorldViewport);
     }
@@ -238,10 +243,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         getState: () => selection?.state() ?? { desired: initialSelection, committed: null, pending: true, plan: null, loadingMaterial: false, ready: false, error: null, viewRevision: null },
         onAction: action => selection?.dispatch(action) ?? false, onError: error => console.error(error) });
       context.own(() => controls?.destroy());
-      const startup = await lifetime.wait(resources.prepareStartup());
+      // A claimed preflight bank already completed and released default startup.
+      // Re-running it would pin obsolete lighting rows beside the incoming view.
+      const startup = await lifetime.wait<boolean | void | null>(preparedResources ? preparedResources.ready : resources.prepareStartup());
       if (lifetime.disposed || startup.cancelled) return;
       startupDecodedAssets = resources.stats().decodes;
-      mounted = mountPreparedPresentation(stage, context, definition);
+      mounted = mountPreparedPresentation(stage, context, definition, preparedTree, initialProjection);
       if (lifetime.disposed) return;
       for (const layer of mounted.pageLayers ?? []) {
         if (!capabilities.mountPages) throw new TypeError("Prepared pages require an injected runtime capability.");
@@ -295,10 +302,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       const directionalSun = externalWorldContext || definition.sun == null || heliocentric ? null : environment.mountSun({ host: stage, plan: definition.sun,
         imageDensity: context.density, objectId: definition.id, before: mounted.cameraElement });
       if (directionalSun) context.own(() => directionalSun.destroy());
-      for (const animation of stage.getAnimations({ subtree: true })) {
-        const initialTime = animation.constructor?.name === "CSSAnimation" ? 0 : undefined;
-        playback.register(animation, { initialTime });
-      }
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
       selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime,
         onCommit: next => {
@@ -321,7 +324,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (!worldFrame) throw new TypeError('An initial world camera needs a prepared frame.');
         orbit.applyWorldCamera(initialWorldCamera, worldFrame);
       }
-      resources.finishStartup();
+      if (!preparedResources) resources.finishStartup();
       const initialized = await lifetime.wait(selection.start());
       if (lifetime.disposed || initialized.cancelled) return;
       if (!initialized.value) throw new Error("Initial object selection did not commit.");

@@ -1,8 +1,11 @@
 /** Data-only emission/absorption recipe for a bounded scalar-field volume. */
 export type Vector3 = [number, number, number];
+/** Row-major transform of ordinary display RGB values during offline preparation. */
+export type DisplayColorMatrix = [number, number, number, number, number, number, number, number, number];
 export type Axis = 'x' | 'y' | 'z';
 export interface Bounds3 { min: Vector3; max: Vector3; }
-export interface DensityChannel { channel: number; color: Vector3; strength: number; }
+export interface VolumeImageEncoding { format: 'png' | 'webp'; quality?: number; }
+export interface DensityChannel { channel: number; color: Vector3; strength: number; decodedPower?: number; }
 export interface RadialEmission {
   color: Vector3; strength: number; flattening: number; radialScale: number; inner: number;
   exponent: number; falloff: number; radialTaper: [number, number]; verticalTaper: [number, number];
@@ -10,13 +13,16 @@ export interface RadialEmission {
 export interface VolumeRecipe {
   schema: 'cssearth-volume-recipe@1';
   grid: { path: string; sha256: string; decodedSha256: string; dimensions: Vector3;
-    encoding: 'sqrt-density-unorm8' | 'linear-density-unorm8'; bounds: Bounds3; };
+    encoding: 'sqrt-density-unorm8' | 'linear-density-unorm8'; bounds: Bounds3;
+    acquisition?: { path: string; sha256: string }; };
   material: { emission: DensityChannel[]; absorption: DensityChannel[]; radialEmission?: RadialEmission;
-    intensityScale: number; stepScale: number; exposureGain: number; };
+    intensityScale: number; stepScale: number; exposureGain: number;
+    displayColorMatrix?: DisplayColorMatrix; stepMetric?: 'source' | 'texture'; cylinderSupport?: { axis: Axis; radiusSquared: number }; };
   bake: { sliceCounts: Record<Axis, number>; unitsPerSourceUnit: number; imageWidth: number;
-    samplesPerSlab: number; cropTransparent: boolean; opticalWeight: number; };
+    samplesPerSlab: number; cropTransparent: boolean; opticalWeight: number; imageEncoding?: VolumeImageEncoding; };
   anchors: { id: string; referencePositionM: Vector3 }[];
   provenance: { path: string; sha256: string };
+  sky?: { path: string; sha256: string };
 }
 export function record(value: unknown, at: string): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`);
@@ -56,12 +62,26 @@ function interval(value: unknown, at: string): [number, number] {
 function color(value: unknown): Vector3 {
   const rgb = triple(value, 'color'); if (rgb.some(c => c < 0)) throw new TypeError('Color must be nonnegative.'); return rgb;
 }
+function displayColorMatrix(value: unknown): DisplayColorMatrix {
+  if (!Array.isArray(value) || value.length !== 9) throw new TypeError('displayColorMatrix must contain nine coefficients.');
+  const matrix = value.map((entry, index) => {
+    const coefficient = finite(entry, `displayColorMatrix coefficient ${index}`);
+    if (coefficient < 0) throw new TypeError('displayColorMatrix coefficients must be nonnegative.');
+    return coefficient;
+  }) as DisplayColorMatrix;
+  for (let row = 0; row < 3; row++) {
+    if (matrix[row * 3]! + matrix[row * 3 + 1]! + matrix[row * 3 + 2]! > 1)
+      throw new TypeError('Each displayColorMatrix row must sum to at most one.');
+  }
+  return matrix;
+}
 function channels(value: unknown, at: string): DensityChannel[] {
   if (!Array.isArray(value)) throw new TypeError(`${at} must be an array.`);
   return value.map((entry: unknown) => {
     const c = record(entry, at), channel = finite(c.channel, 'channel');
     if (!Number.isInteger(channel) || channel < 0 || channel > 3) throw new TypeError('Channel must be an RGBA index.');
-    return { channel, color: color(c.color), strength: positive(c.strength, 'strength') };
+    return { channel, color: color(c.color), strength: positive(c.strength, 'strength'),
+      ...(c.decodedPower === undefined ? {} : { decodedPower: positive(c.decodedPower, 'decodedPower') }) };
   });
 }
 export function parseVolumeRecipe(value: unknown): VolumeRecipe {
@@ -76,12 +96,29 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
   const counts = record(b.sliceCounts, 'sliceCounts');
   if (typeof b.cropTransparent !== 'boolean') throw new TypeError('cropTransparent must be boolean.');
   const p = record(r.provenance, 'provenance');
+  const sky = r.sky === undefined ? undefined : record(r.sky, 'sky recipe');
   if (!Array.isArray(r.anchors)) throw new TypeError('anchors must be an array.');
   const anchors = r.anchors.map((entry: unknown) => {
     const anchor = record(entry, 'anchor'); return { id: text(anchor.id, 'anchor id'), referencePositionM: triple(anchor.referencePositionM, 'anchor position') };
   });
   if (new Set(anchors.map(a => a.id)).size !== anchors.length) throw new TypeError('Anchor IDs must be unique.');
   let radialEmission: RadialEmission | undefined;
+  let cylinderSupport: VolumeRecipe['material']['cylinderSupport'];
+  if (m.cylinderSupport !== undefined) {
+    const support = record(m.cylinderSupport, 'cylinderSupport');
+    if (support.axis !== 'x' && support.axis !== 'y' && support.axis !== 'z') throw new TypeError('Invalid cylinder axis.');
+    cylinderSupport = { axis: support.axis, radiusSquared: positive(support.radiusSquared, 'radiusSquared') };
+  }
+  if (m.stepMetric !== undefined && m.stepMetric !== 'source' && m.stepMetric !== 'texture') throw new TypeError('Invalid stepMetric.');
+  const acquisition = g.acquisition === undefined ? undefined : record(g.acquisition, 'acquisition');
+  let imageEncoding: VolumeImageEncoding | undefined;
+  if (b.imageEncoding !== undefined) {
+    const encoding = record(b.imageEncoding, 'imageEncoding');
+    if (encoding.format !== 'png' && encoding.format !== 'webp') throw new TypeError('Unsupported volume image encoding.');
+    const quality = encoding.quality === undefined ? undefined : positive(encoding.quality, 'image quality', true);
+    if (quality !== undefined && (encoding.format !== 'webp' || quality > 100)) throw new TypeError('WebP image quality must be at most 100.');
+    imageEncoding = { format: encoding.format, ...(quality === undefined ? {} : { quality }) };
+  }
   if (m.radialEmission !== undefined) {
     const c = record(m.radialEmission, 'radialEmission');
     radialEmission = { color: color(c.color), strength: positive(c.strength, 'strength'),
@@ -91,13 +128,17 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
     if (radialEmission.radialTaper[1] !== 1) throw new TypeError('Abel radial profile support must end at unit radius.');
   }
   return { schema: r.schema, grid: { path: sourcePath(g.path), sha256: digest(g.sha256, 'grid digest'),
-    decodedSha256: digest(g.decodedSha256, 'decoded digest'), dimensions, encoding: g.encoding, bounds: { min, max } },
+    decodedSha256: digest(g.decodedSha256, 'decoded digest'), dimensions, encoding: g.encoding, bounds: { min, max },
+    ...(acquisition ? { acquisition: { path: sourcePath(acquisition.path), sha256: digest(acquisition.sha256, 'acquisition digest') } } : {}) },
     material: { emission: channels(m.emission, 'emission'), absorption: channels(m.absorption, 'absorption'),
-      ...(radialEmission ? { radialEmission } : {}), intensityScale: positive(m.intensityScale, 'intensityScale'),
+      ...(radialEmission ? { radialEmission } : {}), ...(cylinderSupport ? { cylinderSupport } : {}),
+      ...(m.displayColorMatrix === undefined ? {} : { displayColorMatrix: displayColorMatrix(m.displayColorMatrix) }),
+      ...(m.stepMetric ? { stepMetric: m.stepMetric } : {}), intensityScale: positive(m.intensityScale, 'intensityScale'),
       stepScale: positive(m.stepScale, 'stepScale'), exposureGain: positive(m.exposureGain, 'exposureGain') },
     bake: { sliceCounts: { x: positive(counts.x, 'x count', true), y: positive(counts.y, 'y count', true), z: positive(counts.z, 'z count', true) },
       unitsPerSourceUnit: positive(b.unitsPerSourceUnit, 'unitsPerSourceUnit'), imageWidth: positive(b.imageWidth, 'imageWidth', true),
       samplesPerSlab: positive(b.samplesPerSlab, 'samplesPerSlab', true), cropTransparent: b.cropTransparent,
-      opticalWeight: positive(b.opticalWeight, 'opticalWeight') }, anchors,
-    provenance: { path: sourcePath(p.path), sha256: digest(p.sha256, 'provenance digest') } };
+      opticalWeight: positive(b.opticalWeight, 'opticalWeight'), ...(imageEncoding ? { imageEncoding } : {}) }, anchors,
+    provenance: { path: sourcePath(p.path), sha256: digest(p.sha256, 'provenance digest') },
+    ...(sky ? { sky: { path: sourcePath(sky.path), sha256: digest(sky.sha256, 'sky recipe digest') } } : {}) };
 }

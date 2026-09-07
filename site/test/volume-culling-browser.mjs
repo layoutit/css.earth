@@ -18,7 +18,8 @@ const page=await browser.newPage({viewport:{width:1440,height:900},deviceScaleFa
 page.on('pageerror',error=>report.errors.push(error.message));
 try {
   await page.goto(report.url,{waitUntil:'domcontentloaded'});
-  await page.waitForFunction(()=>window.__sun?.ready && document.querySelectorAll('.css-volume-mesh > s').length===288,null,{timeout:30000});
+  await page.waitForFunction(count=>window.__sun?.ready && document.querySelectorAll('.css-volume-mesh > s').length===count,
+    volume.stacks.flatMap(stack=>stack.leaves).length*3,{timeout:30000});
   const motion=page.locator('input[name="motion"]');
   if(await motion.count() && await motion.isChecked())await motion.uncheck({force:true});
   // Resolve every actual CSS image before the first pixel measurement; no arbitrary asset-load delay.

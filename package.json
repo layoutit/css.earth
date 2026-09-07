@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "engines": {
-    "node": ">=22.12.0"
+    "node": "^22.15.0 || >=24.0.0"
   },
   "scripts": {
     "setup:assets": "node tools/setup.mjs",
@@ -44,6 +44,9 @@
     "test:browser": "node site/test/dom-cleanliness-browser.mjs",
     "test:browser:conformance": "node site/test/planet-browser-conformance.mjs",
     "test:browser:view-url": "node site/test/view-url-browser.mjs",
+    "test:browser:universe": "node site/test/universe-environments-browser.mjs",
+    "test:browser:universe-labels": "node site/test/universe-labels-browser.mjs",
+    "test:browser:galaxy-handoff": "node site/test/galaxy-handoff-browser.mjs",
     "test:browser:mercury-rotation": "node tests/objects/browser/mercury/rotation-limits-browser.mjs",
     "benchmark:payloads": "node tools/measure-object-payloads.mjs",
     "oracle:venus": "node tests/objects/oracle/venus/run.mjs",
@@ -68,8 +71,9 @@
     "build:preparation": "pnpm --filter @cssearth/engine exec tsup --config ../../tools/objects/tsup.config.ts",
     "prepare:volume": "node tools/objects/dist/prepare-volume.js",
     "prepare:stars": "node tools/objects/dist/prepare-stars.js",
+    "prepare:surface-shell": "node tools/objects/dist/prepare-shell.js",
     "prepare:world-context": "node tools/objects/dist/prepare-spatial-context.js src/planets/sun/source/navigation/universe.json src/planets/sun/prepared/world-context.json",
-    "prepare:universe": "pnpm build:preparation && pnpm prepare:volume src/objects/milky-way && pnpm prepare:stars src/objects/stellar-neighbourhood && pnpm prepare:world-context",
+    "prepare:universe": "pnpm build:preparation && pnpm prepare:volume src/objects/milky-way && pnpm prepare:stars src/objects/stellar-neighbourhood && pnpm prepare:surface-shell src/objects/heliosphere && pnpm prepare:world-context",
     "test:preparation": "node tools/test-preparation.mjs",
     "typecheck:preparation": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json",
     "test:seo": "node site/test/seo-browser.mjs",
