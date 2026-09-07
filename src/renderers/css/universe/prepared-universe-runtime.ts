@@ -108,7 +108,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             pointField!.setOccluder(body);
             root.dataset.selectedObject = id;
           },
-          publish(world: WorldCameraPose, viewport: WorldCameraViewport) {
+          publish(world: WorldCameraPose, viewport: WorldCameraViewport, shellVisibility: Readonly<Record<string, boolean>> = {}) {
             if (destroyed) return;
             const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
@@ -127,7 +127,9 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             skyLayer?.publish(world, viewport, volumeOpacity < 1);
             if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - volumeOpacity);
             if (volumeOpacity > 0) volumeLayer!.publish({ world, viewport });
-            for (const shell of shellLayers) shell.publish(world, viewport);
+            for (const [index, shell] of shellLayers.entries()) {
+              shell.publish(world, viewport, shellVisibility[shells[index]!.payload.id] !== false);
+            }
             spatial!.publish(world, viewport);
             const foregroundRects = spatial!.backgroundExclusionRects();
             const environmentRects = environmentLabels!.publish({ world, viewport,

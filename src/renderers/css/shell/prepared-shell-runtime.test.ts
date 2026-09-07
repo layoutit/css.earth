@@ -224,6 +224,8 @@ test('hidden distance publications skip all retained face reads and camera style
   const writes = [camera, scene, ...leaves].map(node => ({ ...node.writes }));
   const center = payload.faces[0]!.centerUnits;
   Object.defineProperty(payload.faces[0], 'centerUnits', { configurable: true, get() { throw new Error('Hidden shell read a face'); } });
+  runtime.publish(world(payload, [0, 0, 6]), viewport, false);
+  expect(runtime.stats()).toMatchObject({ visible: false, distanceM: 60, opacity: 0, visibleFaces: 0 });
   runtime.publish(world(payload, [0, 0, 0]), viewport);
   runtime.publish(world(payload, [0, 0, 30]), viewport);
   expect([camera, scene, ...leaves].map(node => node.writes)).toEqual(writes);
