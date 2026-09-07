@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m33",
+  "source": {
+    "path": "source.jpg",
+    "sha256": "24b3d51ec8f2d1ad998bb5bb6f83111f251df0b64b21bcaafd1c2213a5d00853",
+    "dimensions": [
+      4000,
+      3355
+    ],
+    "originalDimensions": [
+      19058,
+      15983
+    ],
+    "publisherUrl": "https://www.eso.org/public/images/eso1424a/",
+    "downloadUrl": "https://cdn.eso.org/images/publicationjpg/eso1424a.jpg",
+    "credit": "ESO",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 23.467166666666667,
+    "centerDecDeg": 30.67393611111111,
+    "fieldOfViewDeg": [
+      1.1335,
+      0.9506666666666667
+    ],
+    "northClockwiseDeg": -90
+  },
+  "target": {
+    "centerRaDeg": 23.462,
+    "centerDecDeg": 30.6603,
+    "distancePc": 859013.521505396
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 54,
+    "lineOfNodesPaDeg": 22.5,
+    "thicknessKpc": 1.2,
+    "supportRadiusKpc": 15,
+    "supportTaperFraction": 0.9,
+    "depthWeights": [
+      0.004505775865647428,
+      0.006220527722822393,
+      0.008405193171577847,
+      0.011115550900766309,
+      0.014387227404528809,
+      0.018225776828952187,
+      0.022597365584021843,
+      0.027421575220713538,
+      0.03256790405498035,
+      0.03785733555111008,
+      0.04306982455543612,
+      0.04795777043713778,
+      0.05226460710202956,
+      0.055746707084891246,
+      0.05819605849938327,
+      0.05946080001600135,
+      0.05946080001600135,
+      0.05819605849938328,
+      0.05574670708489124,
+      0.05226460710202956,
+      0.04795777043713778,
+      0.04306982455543613,
+      0.037857335551110066,
+      0.03256790405498035,
+      0.027421575220713538,
+      0.02259736558402185,
+      0.018225776828952187,
+      0.014387227404528809,
+      0.011115550900766309,
+      0.008405193171577851,
+      0.006220527722822393,
+      0.004505775865647428
+    ],
+    "depthScales": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 2400,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.006,
+    "encoding": {
+      "format": "webp",
+      "quality": 82
+    },
+    "diffuseFacePixels": 320,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.08,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2
+  },
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "17e205fb26ff54083afb30859f6bec0df62377b1467bc1a8d26a249894434e0d"
+  }
+}

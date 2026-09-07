@@ -17,6 +17,11 @@ capabilities; this package does not choose a renderer or execute object tools.
 physical frame, bounds, and pinned preparation source. Volume images, concrete
 sampling, and renderer-specific slice geometry remain outside this package.
 
+`parseImageLayerBankDescriptor()` uses the same physical-frame contract for
+spatial models reconstructed from observations. Its type distinguishes prepared
+image layers from measured density grids; concrete imagery, depth assumptions
+and compiled rendering leaves stay with the object and preparation adapter.
+
 ```text
 packages/objects/
 ├── src/           Generic TypeScript implementation and tests
