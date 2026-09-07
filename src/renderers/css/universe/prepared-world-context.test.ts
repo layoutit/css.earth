@@ -619,7 +619,7 @@ test('one retained focus label and locator survive system retirement at their ph
   expect(label.measurements).toBe(1, 'camera publication must never remeasure label layout');
 });
 
-test('satellite labels wait for a resolved parent while markers remain visible and accepted text blocks background labels', () => {
+test('unresolved satellite labels wait for a resolved parent while markers remain visible and accepted text blocks background labels', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const base = plan(1), parent = { ...base.bodies[0]!, radiusM: 5 }, satellite = base.bodies[1]!;
@@ -648,6 +648,28 @@ test('satellite labels wait for a resolved parent while markers remain visible a
   expect(marker.style.visibility).toBe(''); expect(label.style.visibility).toBe('hidden');
   expect(label.style.pointerEvents).toBe('none'); expect(label.measurements).toBe(1);
   layer.destroy(); expect(layer.labelExclusionRects()).toEqual([]);
+});
+
+test('resolved body labels remain visible when close-up framing hides orbit lines', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const base = plan(1), position = [35, 0, -60] as const;
+  const context = parsePreparedWorldContext({ ...base, bodies: [{ ...base.bodies[0],
+    positionM: position, radiusM: 8, orbit: orbit(position, 1) }] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite } });
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 40], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  const body = layer.inspect().find(body => body.id === 'mercury')!;
+  expect(body.marker.style.visibility).toBe('');
+  expect(body.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
+  expect(body.label.style.visibility).toBe('');
+  expect(body.label.dataset.objectNavigate).toBe('mercury');
+  const [labelX, labelY] = body.label.style.transform.match(/-?[\d.]+/g)!.map(Number);
+  expect(labelX + 'Mercury'.length * 6 / 2).toBeCloseTo(140);
+  expect(labelY).toBeGreaterThan(32);
+  layer.destroy();
 });
 
 test('a background star label inside the orbit footprint is excluded even outside every accepted body label', () => {
@@ -734,6 +756,36 @@ test('the Sun locator stays visible across galactic observer rotations while res
   layer.destroy();
 });
 
+test('billboards straddle the selected detail in camera-depth order without replacing nodes', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1);
+  const context = { ...source, bodies: source.bodies.map((body, index) => ({ ...body,
+    positionM: (index === 0 ? [20, 0, 30] : [-20, 0, -30]) as [number, number, number] })) };
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const root = layer.root as unknown as FakeElement, nodes = all(root);
+  // The container must not trap foreground children behind the detailed body.
+  expect(root.style.cssText).not.toContain('z-index');
+  const depth = (id: string) => Number(find(root, 'contextGroup', id).style.zIndex);
+  const publish = (z: number, orientationXyzw: [number, number, number, number]) => layer.publish({
+    referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, z], orientationXyzw },
+  }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  publish(100, [0, 0, 0, 1]);
+  expect(depth('venus')).toBeLessThan(0);
+  expect(depth('sun')).toBe(0);
+  expect(depth('mercury')).toBeGreaterThan(3);
+  publish(-100, [0, 1, 0, 0]);
+  expect(depth('mercury')).toBeLessThan(0);
+  expect(depth('venus')).toBeGreaterThan(3);
+  layer.selectObject('venus');
+  publish(-100, [0, 1, 0, 0]);
+  expect(depth('venus')).toBe(0);
+  expect(depth('mercury')).toBeLessThan(depth('sun'));
+  expect(depth('sun')).toBeLessThan(0);
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
 
 test('orbit endpoints follow the rendered circle through growth and shrink without camera publication', () => {
   let notify: ResizeObserverCallback;

@@ -4,11 +4,7 @@ const radians=Math.PI/180;
 
 /** Controlled ISIS labels plus pinned observer/Sun vectors, interpreted only during preparation. */
 export async function loadControlledObservationGeometry({sourceDirectory,entries,vectors:paths}) {
- const vectors={};
- for(const name of ['sun','observer']){
-  const {response}=JSON.parse(await readFile(resolve(sourceDirectory,paths[name]),'utf8'));
-  vectors[name]=response.result.split('$$SOE')[1].split('$$EOE')[0].trim().split('\n').map(line=>{const[jd,,...position]=line.split(',');return{et:(Number(jd)-2451545)*86400,position:position.slice(0,3).map(Number)}});
- }
+ const vectors=await readObservationVectors(sourceDirectory,paths);
  const geometry=new Map();
  for(const entry of entries){
   const label=await readFile(resolve(sourceDirectory,entry.path),'utf8'),et=Number(label.match(/CkTableStartTime\s*=\s*([^\s]+)/)[1]),frame=controlledBodyFrame(label,et);
@@ -18,8 +14,17 @@ export async function loadControlledObservationGeometry({sourceDirectory,entries
  return geometry;
 }
 
+export async function readObservationVectors(sourceDirectory,paths) {
+ const vectors={};
+ for(const name of ['sun','observer']){
+  const {response}=JSON.parse(await readFile(resolve(sourceDirectory,paths[name]),'utf8'));
+  vectors[name]=response.result.split('$$SOE')[1].split('$$EOE')[0].trim().split('\n').map(line=>{const[jd,,...position]=line.split(',');return{et:(Number(jd)-2451545)*86400,position:position.slice(0,3).map(Number)}});
+ }
+ return vectors;
+}
+
 export function controlledBodyFrame(label, et) {
-  const array = key => label.match(new RegExp(`\\b${key}\\s*=\\s*\\(([^)]+)\\)`))[1].split(",").map(Number);
+  const array = key => typeof label === 'object' ? label[key] : label.match(new RegExp(`\\b${key}\\s*=\\s*\\(([^)]+)\\)`))[1].split(",").map(Number);
   const centuries = et / (86400 * 36525), days = et / 86400;
   const rates = array("SysNutPrec1");
   const arguments_ = array("SysNutPrec0").map((value, i) => (value + rates[i] * centuries) * radians);

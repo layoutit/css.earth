@@ -9,6 +9,7 @@ import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../
 import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor } from './scientific-raster.mjs';
 import {prepareMaskedObservation, prepareFloatObservation} from './observed-geotiff.mjs';
 import { prepareByteObservation } from './observed-image.mjs';
+import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mjs';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mjs';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mjs';
 
@@ -30,7 +31,7 @@ function surfaceEncoding(config) {
 
 export async function readObservation(sourceDirectory, entry, validity, width, height) {
   const path = resolve(sourceDirectory, entry.path);
-  if (validity.kind === 'geotiff-float-monochrome') return prepareFloatObservation(path, entry, validity, width, height);
+  if (['geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(validity.kind)) return prepareFloatObservation(path, entry, validity, width, height);
   const metadata = await sharp(path).metadata();
   if (metadata.width !== entry.width || metadata.height !== entry.height) throw new Error(`Observation source dimensions changed: ${entry.path}`);
   if (['image-monochrome-no-data', 'image-rgb-no-data'].includes(validity.kind)) return prepareByteObservation(path, entry, validity, width, height);
@@ -102,7 +103,10 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   for (const recipe of config.raster.mosaics ?? []) {
     const tiles = await source.validateGroup(recipe.consumer);
-    const { rgb, missing, grid } = await preparePdsByteMosaic(sourceDirectory, tiles, width, height);
+    if (recipe.photometry) await source.validateGroup(recipe.photometry.consumer);
+    const { rgb, missing, grid } = recipe.format === 'controlled-orthographic'
+      ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, recipe, width, height)
+      : await preparePdsByteMosaic(sourceDirectory, tiles, width, height);
     surfaces.push(await packSurface(recipe.id, rgb, missing, { ...recipe.metadata,
       sourceIds: tiles.map(tile => tile.id), sourceGrid: grid }));
   }

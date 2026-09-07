@@ -280,7 +280,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
 }) {
   const root = host.ownerDocument.createElement('div');
   root.className = 'prepared-world-context';
-  root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0';
+  root.style.cssText = 'position:absolute;inset:0;pointer-events:none';
   root.dataset.worldContext = plan.focus.id;
   host.insertBefore(root, before);
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
@@ -434,7 +434,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       let anchorLineWidth = 1;
       // Project first, resolve shared body visibility, then place labels and publish once.
       // A rejected proxy must never leave its billboard or orbit behind.
-      const projectedBodies: { entry: (typeof bodies)[number]; x: number; y: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean; annotationVisible: boolean; inFrame: boolean; parentDiameter: number; priority: number; lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition?: readonly number[] }[] = [];
+      const projectedBodies: { entry: (typeof bodies)[number]; x: number; y: number; depth: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean; annotationVisible: boolean; inFrame: boolean; parentDiameter: number; priority: number; lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition?: readonly number[] }[] = [];
       for (const entry of bodies) {
         const { body, marker, indicator, label } = entry;
         const eye = toEye(body.positionM), depth = -eye[2];
@@ -474,7 +474,15 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             anchor: [x, y], widthPx: BODY_INDICATOR_DIAMETER + padding * 2,
             bottomOffsetPx: -radius - padding, topOffsetPx: radius + padding });
         }
-        projectedBodies.push({ entry, x, y, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, inFrame, parentDiameter, priority, lineWidth: appearance.width, orbitVisibility, segments });
+        projectedBodies.push({ entry, x, y, depth, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, inFrame, parentDiameter, priority, lineWidth: appearance.width, orbitVisibility, segments });
+      }
+      // Reserve the existing detail layers (0..3). Far bodies stay behind them;
+      // near bodies paint above them, ordered by eye depth without moving DOM nodes.
+      const backToFront = [...projectedBodies].sort((a, b) => b.depth - a.depth);
+      const selectedIndex = backToFront.findIndex(({ entry }) => entry.body.id === selectedId);
+      for (const [index, { entry }] of backToFront.entries()) {
+        const relativeDepth = index - selectedIndex;
+        entry.group.style.zIndex = String(relativeDepth > 0 ? relativeDepth + 3 : relativeDepth);
       }
       // An orbitless anchor uses the same stroke as the visible system, then thins as it recedes.
       projectedBodies[0].lineWidth = anchorLineWidth;
@@ -498,14 +506,17 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const { entry, x, y, diameter, markerOpacity, indicatorOpacity, annotationVisible, parentDiameter, priority, orbitVisibility } = projected;
         const { body, labelSize: size } = entry;
         const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
+        const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
         if (!annotationVisible || markerOpacity <= 0.5 || size.width === 0 ||
-            (satellite && body.id !== selectedId && parentDiameter < plan.camera.presentation.levelOfDetail.billboardFadeStartDiscPixels) ||
-            (entry.orbit && orbitVisibility <= 0.5 && body.id !== selectedId) || (indicatorOpacity > 0 && !entry.indicatorShown)) continue;
+            (!resolvedDisc && body.id !== selectedId &&
+              ((satellite && parentDiameter < plan.camera.presentation.levelOfDetail.billboardFadeStartDiscPixels) ||
+               (entry.orbit && orbitVisibility <= 0.5))) || (indicatorOpacity > 0 && !entry.indicatorShown)) continue;
         const gap = Math.max(5, diameter / 2, entry.indicatorShown ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
         // Keep a clear placement stable; try other sides before hiding a label.
         const placements = body.id === plan.focus.id ? [3] :
+          diameter >= plan.camera.presentation.levelOfDetail.billboardFullDiscPixels ? [3, 2, 0, 1] :
           [entry.labelPlacement, ...[0, 1, 2, 3].filter(index => index !== entry.labelPlacement)];
         const withinViewport = (index: number) => {
           const [lx, ly] = positions[index];

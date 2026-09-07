@@ -50,6 +50,13 @@ For the color JPEG, only exactly black pixels connected to the southern border
 are marked. Nonzero JPEG edge pixels remain untouched, so a dark boundary fringe
 can remain. The monochrome product reserves zero for gaps; the DEM uses −32,768.
 Coverage is sampled separately before image interpolation. No surface is inpainted.
+The navigation icon and resolved context billboard apply this same coverage
+treatment before resizing and the circular silhouette mask. Missing observations
+remain a neutral grid inside the complete disc, rather than black holes against
+space; this is a context illustration, not a reconstructed observation.
+The disc has prepared full-phase curvature shading (35% ambient, 65% diffuse),
+using the same footprint as its circular mask. This display shading adds depth
+without a directional terminator or inferred terrain relief.
 
 The full 2:1 maps use north-to-south latitude rows and a common 0–360° longitude
 domain. Each retained face's south-to-north coordinate is mapped into the

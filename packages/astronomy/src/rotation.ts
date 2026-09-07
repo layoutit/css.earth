@@ -466,6 +466,14 @@ const MODELS: Record<string, Model> = {
     spinRateDegPerDay: 56.3625225,
   }),
 
+  // NAIF pck00011.tpc BODY901; synchronous with Pluto, opposite prime meridian.
+  charon: (d) => ({
+    rightAscensionDeg: 132.993,
+    declinationDeg: -6.163,
+    primeMeridianDeg: 122.695 + 56.3625225 * d,
+    spinRateDegPerDay: 56.3625225,
+  }),
+
   // Dawn-mission solution. Source: NAIF `dawn_ceres_v05.tpc`,
   // BODY2000001_POLE_RA / _POLE_DEC / _PM.
   ceres: (d) => ({

@@ -37,6 +37,7 @@ src/planets/*/source/**/*.tiff
 src/planets/europa/source/photometry/*.lbl
 src/planets/*/source/**/*.ttf
 src/planets/*/source/**/*.webp
+src/planets/*/source/**/*.zip
 
 # Accepted Saturn source-of-truth inputs without a direct acquisition URL.
 !src/planets/saturn/source/cassini-pia21611.jpg
@@ -47,3 +48,6 @@ src/planets/*/.prepared/
 
 # Prepared JSON transport rebuilt from checked-in object preparation output.
 /src/planets/*/prepared/object.json
+
+/src/planets/charon/source/observations/*.tif
+/src/planets/charon/source/science/*.tif

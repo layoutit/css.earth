@@ -111,7 +111,9 @@ const entries = BODIES.map((body) => {
     : moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT + dt).map((value, index) =>
       (value - moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
   const parentPosition = isSatellite
-    ? systemBarycentreHeliocentricAu(VSOP87A_KEY[parent] ?? parent, EPOCH_JD_TT) : null;
+    ? DWARF_PLANET_IDS.includes(parent)
+      ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+      : systemBarycentreHeliocentricAu(VSOP87A_KEY[parent] ?? parent, EPOCH_JD_TT) : null;
   const mu = isSatellite
     ? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
        ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3

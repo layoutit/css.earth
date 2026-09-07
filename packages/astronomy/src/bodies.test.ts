@@ -24,8 +24,7 @@ describe('the body table', () => {
   })
 
   it('parents every dwarf planet directly on the Sun', () => {
-    // Unlike the eight planets, there is no barycentre level: moons are out
-    // of scope, so a dwarf planet's own frame IS its heliocentric position.
+    // Dwarf element sources target the body centre directly.
     for (const id of DWARF_PLANET_IDS) expect(bodyData(id).parent).toBe('sun')
   })
 
@@ -79,7 +78,7 @@ describe('the body table', () => {
     expect(moonsOf('venus')).toEqual([])
     const fromSatellites = SATELLITE_IDS.filter((id) => SATELLITE_ELEMENTS[id].parent === 'jupiter')
     expect(moonsOf('jupiter')).toEqual(fromSatellites)
-    const total = PLANET_IDS.flatMap((planet) => moonsOf(planet))
+    const total = [...PLANET_IDS, ...DWARF_PLANET_IDS].flatMap((planet) => moonsOf(planet))
     expect(total.length).toBe(SATELLITE_IDS.length + 1)
     expect(moonsOf('saturn')).toEqual([
       'mimas',

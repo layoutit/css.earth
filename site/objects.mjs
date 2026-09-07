@@ -1,3 +1,5 @@
+import charonDescriptor from "../src/planets/charon/object.json" with { type: "json" };
+import tritonDescriptor from "../src/planets/triton/object.json" with { type: "json" };
 import haumeaDescriptor from "../src/planets/haumea/object.json" with { type: "json" };
 import makemakeDescriptor from "../src/planets/makemake/object.json" with { type: "json" };
 import erisDescriptor from "../src/planets/eris/object.json" with { type: "json" };
@@ -137,11 +139,21 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(neptuneDescriptor);
     }, neptuneDescriptor.properties.worldFrame),
+  object("triton", "Triton", "satellite", "#b8afa5", 30.07,
+    "Explore Neptune’s retrograde moon through Voyager monochrome and enhanced-color imagery.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tritonDescriptor);
+    }, tritonDescriptor.properties.worldFrame),
   object("pluto", "Pluto", "dwarf-planet", "#bca18a", 39,
     "Explore Pluto in 3D with cssEarth. Discover this distant dwarf planet’s icy landscape, its heart-shaped region, and its companion Charon.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(plutoDescriptor);
     }, plutoDescriptor.properties.worldFrame),
+  object("charon", "Charon", "satellite", "#aaa9a3", 39.48,
+    "Explore Charon with New Horizons imagery, deep canyons and measured elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(charonDescriptor);
+    }, charonDescriptor.properties.worldFrame),
   object("haumea", "Haumea", "dwarf-planet", "#cccccc", 43.1,
     "Explore Haumea’s measured elongated shape and narrow ring, with an illustrative NASA surface texture.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

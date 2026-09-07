@@ -1,0 +1,120 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "charon",
+  "displayName": "Charon",
+  "publicBase": "/scenes/charon/",
+  "distanceAu": 39.48,
+  "raster": {
+    "width": 12800,
+    "height": 6400,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 1024,
+    "surfaceQuality": 90,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-byte-monochrome",
+          "noData": 0,
+          "centerLongitude": 0,
+          "wrapLongitude": true,
+          "resolutionMeters": 300,
+          "origin": [
+            -1903950,
+            952200
+          ],
+          "displayRange": [
+            0,
+            255
+          ],
+          "specialValueMagnitude": 256
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "geotiff",
+        "path": "science/charon-dem.tif",
+        "description": "New Horizons terrain model · shaded relief",
+        "title": "Color encodes elevation relative to a 606 km reference sphere. Fixed northwest relief lighting reveals terrain slopes; gray grid marks missing measurements.",
+        "sourceUrl": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m",
+        "minimum": -15000,
+        "maximum": 15000,
+        "colors": [
+          "#1c5599",
+          "#bbab80",
+          "#aa3e24"
+        ],
+        "labels": [
+          "−15",
+          "0",
+          "15"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "grid": {
+          "width": 12693,
+          "height": 6347,
+          "centerLongitude": 0,
+          "wrapLongitude": true,
+          "referenceRadiusMeters": 606000,
+          "noData": -32768,
+          "resolutionMeters": 300,
+          "origin": [
+            -1903950,
+            952200
+          ]
+        },
+        "relief": {
+          "referenceRadiusMeters": 606000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
+      }
+    ],
+    "observedColors": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 606,
+    "camera": {
+      "initialScenePitchDegrees": 47.87196946905508,
+      "defaultControlYawDegrees": -171.78338431880607
+    },
+    "mapUrl": "/scenes/charon/charon-normal-surface@2x.webp",
+    "polesUrl": "/scenes/charon/charon-normal-poles@2x.webp"
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons Charon relative-orbit fit and Pluto heliocentric elements; NAIF pck00011 orientation"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      170,
+      169,
+      163
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

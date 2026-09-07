@@ -34,7 +34,10 @@ export async function prepareSolidScene({ config, celestial, outputDirectory }) 
   const scene = {
     camera: preparePerspectiveCamera({ sky, radius, ...geometry.camera }), sky, sun,
     systemTransform: frame.cssTransform,
-    bodyLeaves: prepareSolidBodySurface({ id, radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl }),
+    bodyLeaves: prepareSolidBodySurface({ id, radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
+      sourceWidth: config.raster.width, sourceHeight: config.raster.height,
+      latitudeSegments: config.raster.bandCount, gutter: config.raster.gutter,
+      poleTileSize: config.raster.poleSize }),
     heliocentricView: prepareHeliocentricView({ bodyId: id, presentationFrame: frame,
       bodyRadiusUnits: radius, bodyRadiusKilometers: radiusKm,
       sunSprite: { imagePixels: sun.asset.density1.width,
