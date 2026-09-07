@@ -21,8 +21,7 @@ try {
         const scene = document.querySelector('.planet-stage [class$="-scene"]');
         window.__productionSamples.push({ count: document.querySelectorAll('.polycss-camera').length,
           transform: scene?.style.transform, opacity: Number(getComputedStyle(stage).opacity),
-          skies: stage.querySelectorAll('.planet-cubic-sky').length,
-          vaults: stage.querySelectorAll('.planet-heliocentric-sky').length });
+          universes: stage.querySelectorAll('.prepared-universe').length });
         window.__productionFrame = requestAnimationFrame(sample);
       };
       sample();
@@ -44,7 +43,7 @@ try {
     assert.equal(result.current, id); assert.equal(result.roots, 1);
     assert.equal(result.diagnostics, false);
     assert.ok(result.samples.every(sample => sample.count <= 1));
-    assert.ok(result.samples.every(sample => sample.opacity === 1 && sample.skies >= 1 && sample.vaults >= 1),
+    assert.ok(result.samples.every(sample => sample.opacity === 1 && sample.universes === 1),
       'Production handoffs keep the world fully visible at every painted frame.');
     assert.ok(new Set(result.samples.map(sample => sample.transform).filter(Boolean)).size > 10);
     assert.equal(await page.locator('.planet-sidebar-search').inputValue(), id[0].toUpperCase() + id.slice(1));

@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
-import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
+import { PREPARED_EARTH_SCENE, runtimeDefinition } from "../../unit/earth/prepared-fixture.mjs";
 import { readPublishedCoverage } from "../../../../tools/objects/geographic-pages/operations/published-coverage.mjs";
 import { prepareCityPageGeometry } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
 import { prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
 
-const base = process.argv[2] ?? "http://127.0.0.1:4228";
+const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const output = new URL("../../../../output/playwright/published-coverage/", import.meta.url);
 await mkdir(output, { recursive: true });
 const snapshot = await readPublishedCoverage(new URL('../../../../src/planets/earth/source/city/published-coverage.json.gz',import.meta.url));
@@ -19,7 +19,8 @@ const samples = snapshot.faces.map(receipt => {
   const page = prepareCityPageGeometry({ level, x, y }, PREPARED_EARTH_SCENE);
   const point = page.corners.reduce((sum, corner) => sum.map((v, axis) => v + corner[axis] / 4), [0, 0, 0]);
   return { region: receipt.face.key, sourceWindow: source.id, sourceValidFraction: valid(source),
-    camera: prepareLocationCamera(PREPARED_EARTH_SCENE, point, 32) };
+    camera: prepareLocationCamera(PREPARED_EARTH_SCENE, point, 32,
+      { body: PREPARED_EARTH_SCENE.earth, camera: runtimeDefinition.camera }) };
 });
 const report = { capturedAt: new Date().toISOString(), base, mode: "headless", channel: "chrome",
   qualification: "Source-window samples in every published region; not exhaustive pixel or alignment proof.", samples, runs: [] };

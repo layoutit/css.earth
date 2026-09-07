@@ -1,6 +1,5 @@
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import { OBJECTS } from "../objects.mjs";
@@ -13,11 +12,7 @@ assert.ok(selected.length, "Select an implemented object.");
 const output = resolve(process.argv[4] ??
   `output/playwright/runtime-playback-${Date.now()}`);
 await mkdir(output, { recursive: true });
-const report = { capturedAt: new Date().toISOString(), baseUrl, source: {}, cases: [] };
-for (const file of ["site/scene-router.mjs", "site/runtime-policy.mjs",
-  ...selected.map(({ id }) => `src/planets/${id}/runtime/client.mjs`)]) {
-  report.source[file] = createHash("sha256").update(await readFile(file)).digest("hex");
-}
+const report = { capturedAt: new Date().toISOString(), baseUrl, cases: [] };
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 report.browser = browser.version();
 try {

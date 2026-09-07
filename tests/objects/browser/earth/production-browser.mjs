@@ -4,7 +4,7 @@ import { CANONICAL_PREPARED_IMAGE_DENSITY } from
   "../../../../site/runtime-policy.mjs";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
 
-const baseUrl = process.argv[2] ?? "http://127.0.0.1:4310";
+const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const densities = process.argv[3] ? [Number(process.argv[3])] : [1, 2];
 assert.ok(densities.every((density) => density === 1 || density === 2));
 

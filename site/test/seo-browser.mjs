@@ -4,14 +4,12 @@ import { resolve } from "node:path";
 import { chromium } from "playwright";
 import sharp from "sharp";
 import { OBJECTS } from "../objects.mjs";
-import { previewSite } from "../../tools/preview.mjs";
 import { assertHomepageReachability } from "./seo-discovery.mjs";
 
-// Inspect the built response as a crawler without JavaScript, then verify the
-// same metadata and retained heading in real Chrome at both supported DPRs.
+// Inspect the supplied server as a crawler without JavaScript. General browser
+// conformance owns scene rendering and retained DOM checks at both DPRs.
 const origin = "https://css.earth";
-const server = await previewSite({ port: 4267 });
-const base = "http://127.0.0.1:4267";
+const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const canonicalUrls = OBJECTS.map(({ route }) => origin + route);
 const report = [];
 const socialImages = new Set();
@@ -77,34 +75,11 @@ try {
   }
   await page.close();
 
-  for (const density of [1, 2]) {
-    const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: density });
-    for (const object of OBJECTS) {
-      const problems = [];
-      const onError = (error) => problems.push(error.message);
-      page.on("pageerror", onError);
-      await page.goto(base + object.route, { waitUntil: "networkidle", timeout: 60000 });
-      await page.waitForFunction(() => document.documentElement.dataset.ready === "true", null, { timeout: 60000 });
-      verifyMetadata(await readMetadata(page), object);
-      assert.equal(await page.locator(".planet-stage").count(), 1);
-      assert.equal(await page.locator(".polycss-camera").count(), 1);
-      assert.equal(await page.locator("h1").textContent().then((text) => text.trim()), object.name);
-      const textBounds = await page.locator("h1 .visually-hidden").boundingBox();
-      assert.equal(textBounds.width, 1);
-      assert.equal(textBounds.height, 1);
-      assert.deepEqual(problems, []);
-      page.off("pageerror", onError);
-      report.push({ mode: "chrome", object: object.id, density, mountedScenes: 1 });
-      console.log(`SEO and heading: ${object.id}, DPR ${density}`);
-    }
-    await page.close();
-  }
   await mkdir("output/seo", { recursive: true });
-  await writeFile("output/seo/report.json", JSON.stringify({ ok: true, browser: browser.version(), checks: report }, null, 2) + "\n");
-  console.log(`SEO passed: ${OBJECTS.length + 1} pages, query/hash normalization, ${OBJECTS.length} scene images, Chrome DPR 1 and 2.`);
+  await writeFile("output/seo/report.json", JSON.stringify({ ok: true, base, browser: browser.version(), checks: report }, null, 2) + "\n");
+  console.log(`SEO passed: ${OBJECTS.length + 1} pages without JavaScript, query/hash normalization, ${OBJECTS.length} scene images.`);
 } finally {
   await browser?.close();
-  await server.close();
 }
 
 function readMetadata(page) {

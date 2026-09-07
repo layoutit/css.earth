@@ -24,15 +24,15 @@ pnpm build
 pnpm prepare:social                  # all registered objects
 # pnpm prepare:social --object=earth # one object
 pnpm build                          # include the new images
-pnpm test:seo
+pnpm test:seo http://localhost:4210 # use the existing server
 ```
 
 Inspect the images before committing them. A newly registered object needs its
-own capture. The SEO check validates the built pages with JavaScript disabled,
-checks that every object is reachable through links from the homepage, and
-checks sitemap coverage and referenced image dimensions. It also verifies
-metadata and retained headings in Chrome at DPR 1 and 2. Results are written to
-`output/seo/report.json`.
+own capture. The SEO check reads the existing server on 4210 (or the supplied
+URL) with JavaScript disabled. It checks metadata, headings, homepage reachability,
+sitemap coverage, and referenced image dimensions. To inspect production output,
+point it at an already-running preview of that build. It never starts another
+server. Results are written to `output/seo/report.json`.
 
 After deployment, verify HTTPS and host redirects, canonical URLs, robots and
 sitemap responses, and real 404 responses on the chosen host. Submit the sitemap
