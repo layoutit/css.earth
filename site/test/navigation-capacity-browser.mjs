@@ -48,7 +48,7 @@ try {
       console.log(`BANK PASS ${object.id} DPR ${dpr}: startup, two view replacements, claim within capacity`);
     }
     // Real flights on the small lighting pools, plus a full default body bank.
-    for (const id of ['mars', 'mercury', 'earth', 'saturn']) {
+    for (const id of ['mars', 'mercury', 'earth', 'saturn', 'haumea', 'makemake', 'eris']) {
       await page.goto(origin + sourcePath); await ready(page, 'sun');
       const object = OBJECTS.find(object => object.id === id);
       await page.locator('.planet-sidebar-search').fill(object.name);

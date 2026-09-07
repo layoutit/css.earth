@@ -46,15 +46,15 @@ body[data-sky-contrast="high"] .planet-cubic-sky-face {
   background-image: var(--planet-cubic-sky-high-contrast-image);
 }
 
-.prepared-volume-context {
-  opacity: calc(.15 + .55 * var(--universe-galactic-fade, 0));
+body[data-sky-contrast="high"] .prepared-volume-image {
+  --universe-volume-brightness-override: 1;
 }
 
 .prepared-point-field-stars {
   opacity: .35;
 }
 
-body[data-sky-contrast="high"] :is(.prepared-volume-context, .prepared-point-field-stars) {
+body[data-sky-contrast="high"] .prepared-point-field-stars {
   opacity: 1;
 }
 

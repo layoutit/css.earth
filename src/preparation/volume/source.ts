@@ -47,7 +47,7 @@ export async function loadVolumeSource(sourceDirectory: string, recipe: VolumeRe
   const provenance: unknown = JSON.parse(provenanceBytes.toString('utf8'));
   return { ...decoded, recipe, provenance };
 }
-/** Matches Three's clamp-to-edge trilinear encoded sampling. Square AFTER filtering. */
+/** Clamp-to-edge trilinear encoded sampling. Apply channel transfer AFTER filtering. */
 export function sampleEncoded(source: VolumeSource, x: number, y: number, z: number, out: [number, number, number, number]): void {
   const { min, max } = source.recipe.grid.bounds;
   if (x < min[0] || x > max[0] || y < min[1] || y > max[1] || z < min[2] || z > max[2]) {

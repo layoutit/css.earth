@@ -31,6 +31,13 @@ export interface WorldContextPointSource {
   };
 }
 type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource };
+export interface VolumeOpacityProfile {
+  readonly model: 'logarithmic-distance';
+  readonly nearOpacity: number;
+  readonly fullOpacity: number;
+  readonly fadeStartDistanceM: number;
+  readonly fullDistanceM: number;
+}
 export interface WorldContextSource {
   readonly schema: 'cssearth-world-context-source@1';
   readonly sky: SkyBaseline;
@@ -40,7 +47,10 @@ export interface WorldContextSource {
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number; readonly presentation: WorldContextCameraPresentation };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
-  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
+  readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
+    readonly opacityProfile?: VolumeOpacityProfile;
+    /** Display attenuation of the completed volume image over black; not physical exposure. */
+    readonly brightnessProfile?: VolumeOpacityProfile };
   readonly stars: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
 }
 export interface OrbitalState {
@@ -88,12 +98,24 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   if (segments < 8 || solidTurns + fadeTurns >= 1) throw new TypeError('World context orbit trail is invalid.');
   const camera = parseCamera(input.camera), volume = record(input.volume, 'World context volume');
   const system = parseSystem(input.system);
-  keys(volume, ['objectId', 'fadeStartDistanceM', 'fullDistanceM'], 'World context volume');
+  keys(volume, ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile'], 'World context volume');
   const fadeStartDistanceM = positive(volume.fadeStartDistanceM, 'Volume fade start'), fullDistanceM = positive(volume.fullDistanceM, 'Volume full distance');
   if (!(fadeStartDistanceM < fullDistanceM && fullDistanceM <= camera.maximumDistanceM)) throw new TypeError('Volume distance range is invalid.');
   const stars = parseStars(input.stars, fadeStartDistanceM);
   return freeze({ schema: input.schema, sky: parseSkyBaseline(input.sky), frame, focus, bodies: freeze(bodies), orbit: freeze({ segments, trail: freeze({ solidTurns, fadeTurns }) }), camera, system, stars,
-    volume: freeze({ objectId: identifier(volume.objectId, 'Volume object id'), fadeStartDistanceM, fullDistanceM }) });
+    volume: freeze({ objectId: identifier(volume.objectId, 'Volume object id'), fadeStartDistanceM, fullDistanceM,
+      ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
+      ...(volume.brightnessProfile === undefined ? {} : { brightnessProfile: parseVolumeOpacityProfile(volume.brightnessProfile) }) }) });
+}
+
+function parseVolumeOpacityProfile(value: unknown): VolumeOpacityProfile {
+  const input = record(value, 'Volume opacity profile');
+  keys(input, ['model', 'nearOpacity', 'fullOpacity', 'fadeStartDistanceM', 'fullDistanceM'], 'Volume opacity profile');
+  if (input.model !== 'logarithmic-distance') throw new TypeError('Volume opacity profile model is unsupported.');
+  const nearOpacity = finite(input.nearOpacity, 'Volume near opacity'), fullOpacity = finite(input.fullOpacity, 'Volume full opacity');
+  const fadeStartDistanceM = positive(input.fadeStartDistanceM, 'Volume opacity fade start'), fullDistanceM = positive(input.fullDistanceM, 'Volume opacity full distance');
+  if (nearOpacity < 0 || nearOpacity > 1 || fullOpacity < 0 || fullOpacity > 1 || !(fadeStartDistanceM < fullDistanceM)) throw new TypeError('Volume opacity profile is invalid.');
+  return freeze({ model: input.model, nearOpacity, fullOpacity, fadeStartDistanceM, fullDistanceM });
 }
 
 /** Builds static true-ellipse vertices in physical metres from a same-epoch ephemeris adapter. */

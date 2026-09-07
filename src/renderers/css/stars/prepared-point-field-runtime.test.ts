@@ -17,6 +17,8 @@ class FakeElement {
   } });
   parentNode: FakeElement|null = null; className=''; ariaHidden=''; textContent=''; clientWidth=800; clientHeight=600;
   constructor(readonly ownerDocument: FakeDocument) {}
+  get offsetWidth(){return this.textContent.length*8;}
+  get offsetHeight(){return 17;}
   getBoundingClientRect() {return {x:0,y:0,left:0,top:0,right:this.clientWidth,bottom:this.clientHeight,width:this.clientWidth,height:this.clientHeight};}
   appendChild(child: FakeElement): FakeElement { this.insertBefore(child,null); return child; }
   insertBefore(child: FakeElement,before: FakeElement|null): void {
@@ -64,6 +66,27 @@ function mount(payload=fixture(), showLabels = true) {
 function leaves(root: FakeElement): FakeElement[] {
   return root.children.flatMap(child => child.className === 'prepared-point-field-stars' ? child.children : [child]);
 }
+
+test('foreground label exclusion hides only star text and is released by the next publication',()=>{
+  const source=fixture(),payload={...source,stars:source.stars.map((star,index)=>({...star,name:index===2?'Rigil Kentaurus':null}))};
+  const {layer,root,document}=mount(payload);
+  layer.publish(world(),viewport,1);document.frame(500);
+  const labels=root.children.filter(element=>element.className==='prepared-star-label'),active=labels[0]!;
+  expect(active.textContent).toBe('Rigil Kentaurus');expect(active.style.visibility).toBe('');
+  const points=layer.inspect().points.filter(point=>point.reference!==null && point.element.style.visibility!=='hidden');
+  expect(points.length).toBeGreaterThan(0);
+  const retained=leaves(root),drawn=layer.inspect().visiblePoints;
+  const alpha=Number(active.style.opacity);
+  // The named star projects to (70,-20), with text directly above that anchor.
+  layer.publish(world(),viewport,1,[{left:50,top:-50,right:90,bottom:-25}]);
+  expect(Number(active.style.opacity)).toBeCloseTo(alpha);document.frame(250);
+  expect(Number(active.style.opacity)).toBeCloseTo(alpha/2);document.frame(250);
+  expect(Number(active.style.opacity)).toBe(0);expect(layer.inspect().visiblePoints).toBe(drawn);
+  expect(points.every(point=>point.element.style.visibility!=='hidden')).toBe(true);
+  expect(leaves(root)).toEqual(retained);
+  layer.publish(world(),viewport,1);expect(Number(active.style.opacity)).toBe(0);
+  document.frame(250);expect(Number(active.style.opacity)).toBeCloseTo(alpha/2);layer.destroy();
+});
 function find(layer:ReturnType<typeof mountPreparedCssPointField>,reference:string):FakeElement {
   const element=layer.inspect().points.find(point=>point.reference===reference && point.element.style.visibility!=='hidden')?.element as unknown as FakeElement;
   if(!element)throw new Error(`No visible slot for ${reference}`);return element;

@@ -158,3 +158,52 @@ remain implementation evidence; the integration run did not repeat those traces.
 
 Builds and validation ran outside the live preview checkout. The earlier Pluto
 asset and Milky Way source-closure blockers are resolved in this combined PR.
+
+## Integration with the shared universe on main
+
+PR 19 now incorporates main `b698b01ed93eef440d0ae8e832025fe16bf4a784`
+in the isolated `cssEarth-pr19-prepared-runtime` checkout. The retained worker and
+resource owners coexist with the prepared NASA sky, Milky Way crossfade and
+heliosphere shell. Foreground labels and compact orbit footprints exclude
+background captions; the existing Sun indicator also serves as the distant
+locator. One alpha fader owns label visibility while hover remains independent.
+
+A real destination mismatch was found during integration: the Sun context still
+used Makemake's former radius while its finalized detail frame used the new one.
+Object preparation now refreshes dependent contexts after all requested body frames
+are final. A registry-wide test compares every context body's radius and origin
+with its actual detail frame. Identical context bytes retain their modification
+time, preventing unnecessary development reloads.
+
+Native logarithm and power results differed by a last bit between Node 22 and 24.
+The offline star compiler now publishes photometry at 12 decimal places and treats
+arithmetic uncertainty at a hierarchy-magnitude rounding boundary consistently.
+The catalog, hierarchy membership and positions, and texture bytes are unchanged.
+Exact prepared JSON and resource reproduction passes on Node 22.15 and 24.19.
+The minimum supported Node version is 22.15 because universe preparation uses
+native Zstd; the README and engine constraint now state that requirement.
+
+Validation on the combined tree:
+
+- Source verification for all 26 bodies, full production build, renderer and
+  preparation type checking, and the aggregate package/renderer/platform/shell
+  tests. The renderer has 300 tests, platform 583 and shell 215.
+- All 74 universe preparation tests on both Node 22.15 and Node 24.19, including
+  exact prepared output reproduction and independent physical-frame checks.
+- Production Chrome conformance for all 26 objects at DPR 1 and 2; 66 capacity and
+  real-flight checks including Haumea, Makemake and Eris; immediate complete
+  selection and cancellation at both DPRs.
+- Extended Makemake browser conformance: loading-time Motion/visibility policy,
+  native wheel and drag interruption, retained identity, canonical density and
+  paused release at DPR 1 and 2.
+- Sun/system/galaxy round trip, compact URL restore, physical panorama translation,
+  continuous cloud handoff, heliosphere lifecycle, label exclusion and single-click
+  Sun navigation. Browser probes follow the shared input gain and Sun overview
+  selection rules, and distinguish UI transitions from prepared object motion.
+- Emitted production workers: cold destination decoders retire, one selector
+  survives navigation, and the document and single mounted detail scene persist.
+
+Logs are retained locally in `output/pr19-merge/`. The earlier paired visual and
+performance samples remain scoped to their recorded implementation and hardware;
+this integration does not claim to eliminate the remaining layout/paint hitch.
+Builds and tests did not modify or restart the user's port 4210 preview.

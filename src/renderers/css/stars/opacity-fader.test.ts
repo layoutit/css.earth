@@ -10,6 +10,21 @@ class Clock {
   frame(milliseconds:number){this.now+=milliseconds;const callbacks=[...this.pending.values()];this.pending.clear();for(const callback of callbacks)callback(this.now);}
 }
 
+test('a separate alpha property preserves the shared hover opacity and reverses continuously', () => {
+  const clock = new Clock(), values = new Map([['--label-alpha', '0']]);
+  const element = { style: { opacity: 'calc(var(--label-alpha) * var(--hover-opacity))',
+    getPropertyValue: (key: string) => values.get(key) ?? '',
+    setProperty: (key: string, value: string) => values.set(key, value) } } as unknown as HTMLElement;
+  const fader = createOpacityFader(clock, '--label-alpha');
+  fader.set(element, 1, 200); clock.frame(100);
+  expect(values.get('--label-alpha')).toBe('0.5');
+  fader.set(element, 0, 200); clock.frame(100);
+  expect(values.get('--label-alpha')).toBe('0.25');
+  expect(element.style.opacity).toBe('calc(var(--label-alpha) * var(--hover-opacity))');
+  clock.frame(100); expect(values.get('--label-alpha')).toBe('0');
+  expect(clock.pending.size).toBe(0); fader.destroy();
+});
+
 test('interpolates on wall time, retargets from the current value, and avoids Web Animations',()=>{
   const clock=new Clock(),element=new Element(),fader=createOpacityFader(clock);
   fader.set(element as unknown as HTMLElement,1,100);expect(element.style.opacity).toBe('0');expect(clock.pending.size).toBe(1);
