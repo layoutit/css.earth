@@ -1,6 +1,6 @@
 import sharp from 'sharp';
 import {fromFile} from 'geotiff';
-import {sampleColorBand} from './scientific-raster.mjs';
+import {sampleColorBand, loadScienceSurface} from './scientific-raster.mjs';
 
 /** Scalar observations keep native georeferencing, validity and display range. */
 export async function prepareFloatObservation(path, entry, policy, width, height) {
@@ -77,4 +77,23 @@ export async function prepareMaskedObservation(path,entry,policy,width,height) {
   const rgb=Buffer.alloc(width*height*3),missing=new Uint8Array(width*height);
   for(let y=0;y<height;y++)for(let x=0;x<width;x++){const i=y*width+x,j=y*width+(x+roll+width)%width;rgb.set(data.subarray(j*4,j*4+3),i*3);missing[i]=data[j*4+3]<255?1:0}
   return {rgb,missing,sourceGeoreference:{origin,resolution},withheldSyntheticPixels};
+}
+
+/** Mapped numeric observations use the same geographic sampling as elevation. */
+export async function prepareIsisObservation(path, entry, policy, width, height) {
+  if (entry.width !== policy.grid.width || entry.height !== policy.grid.height) {
+    throw new Error(`Observed ISIS3 dimensions changed: ${entry.id}`);
+  }
+  const source = await loadScienceSurface('.', {path, format:'isis3', grid:policy.grid, sampling:'bilinear'});
+  const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
+  const [low, high] = policy.displayRange;
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const value = source.sample((x + .5) / width * 360, 90 - (y + .5) / height * 180);
+    const i = y * width + x;
+    if (value === null) { missing[i] = 1; continue; }
+    const gray = Math.round(255 * Math.max(0, Math.min(1, (value - low) / (high - low))));
+    rgb.fill(gray, i * 3, i * 3 + 3);
+  }
+  return {rgb, missing, sourceGeoreference:{origin:policy.grid.origin,
+    resolution:[policy.grid.resolutionMeters, -policy.grid.resolutionMeters]}};
 }

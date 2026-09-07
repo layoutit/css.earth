@@ -148,6 +148,36 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
     0.2927924188904021,
     0.9561120750243349,
   ]),
+  // subsolar latitude 71.916°, longitude 106.275°
+  miranda: Object.freeze([
+    -0.0869922037409115,
+    0.29797844072663066,
+    0.9506004446403471,
+  ]),
+  // subsolar latitude 73.038°, longitude 78.763°
+  ariel: Object.freeze([
+    0.056849000020554825,
+    0.28613716799981687,
+    0.956500764393687,
+  ]),
+  // subsolar latitude 72.991°, longitude -33.634°
+  umbriel: Object.freeze([
+    0.24354988228850313,
+    -0.16202516388547544,
+    0.9562590136072658,
+  ]),
+  // subsolar latitude 72.918°, longitude 108.800°
+  titania: Object.freeze([
+    -0.09466265481291809,
+    0.2780672745424118,
+    0.9558857529079118,
+  ]),
+  // subsolar latitude 72.732°, longitude 36.294°
+  oberon: Object.freeze([
+    0.23925038864105483,
+    0.17571046886018887,
+    0.95492674204257,
+  ]),
   // subsolar latitude -18.990°, longitude -122.111°
   neptune: Object.freeze([
     -0.502623569012939,
@@ -312,6 +342,36 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
     0.8763611790632965,
     -0.4625339059609962,
     0.1343632005693996,
+  ]),
+  // pole tilt to the ecliptic 85.821°, Sun ecliptic latitude 0.159°
+  miranda: Object.freeze([
+    0.9950643598423292,
+    0.06736064675096756,
+    0.07286606233952053,
+  ]),
+  // pole tilt to the ecliptic 82.121°, Sun ecliptic latitude 0.159°
+  ariel: Object.freeze([
+    0.7847554976823098,
+    -0.6044544478767419,
+    0.1370898584849123,
+  ]),
+  // pole tilt to the ecliptic 82.163°, Sun ecliptic latitude 0.152°
+  umbriel: Object.freeze([
+    -0.8561075540097522,
+    -0.4984848814634854,
+    0.13635497394585241,
+  ]),
+  // pole tilt to the ecliptic 81.993°, Sun ecliptic latitude 0.165°
+  titania: Object.freeze([
+    0.9810753845059687,
+    -0.1344940740743696,
+    0.13929261988829045,
+  ]),
+  // pole tilt to the ecliptic 82.273°, Sun ecliptic latitude 0.158°
+  oberon: Object.freeze([
+    0.18924647235451325,
+    -0.972680020207191,
+    0.13445947713386025,
   ]),
   // pole tilt to the ecliptic 28.524°, Sun ecliptic latitude 1.370°
   neptune: Object.freeze([
@@ -479,6 +539,36 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
     0.8698957198074813,
     -0.47434474294036033,
     0.13519800851147012,
+  ]),
+  // orbital inclination to the ecliptic 98.176°, obliquity to the orbit 172.088°
+  miranda: Object.freeze([
+    -0.06206348774425009,
+    -0.12286202012731895,
+    -0.990481220164852,
+  ]),
+  // orbital inclination to the ecliptic 97.730°, obliquity to the orbit 179.762°
+  ariel: Object.freeze([
+    0.004034871184584703,
+    0.0009500993780051645,
+    -0.999991408525941,
+  ]),
+  // orbital inclination to the ecliptic 97.737°, obliquity to the orbit 179.797°
+  umbriel: Object.freeze([
+    0.000039922556516414076,
+    -0.0035380156362139203,
+    -0.9999937404061824,
+  ]),
+  // orbital inclination to the ecliptic 97.771°, obliquity to the orbit 179.744°
+  titania: Object.freeze([
+    0.0043148001106969045,
+    0.0011525823354133354,
+    -0.9999900269772519,
+  ]),
+  // orbital inclination to the ecliptic 97.920°, obliquity to the orbit 179.741°
+  oberon: Object.freeze([
+    -0.0036083696372296303,
+    0.002721249628984679,
+    -0.9999897871823582,
   ]),
   // orbital inclination to the ecliptic 1.771°, obliquity to the orbit 28.352°
   neptune: Object.freeze([
@@ -648,6 +738,36 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
     0.842946781478207,
     -0.2151762659737923,
   ]),
+  // flight-path angle -0.036°
+  miranda: Object.freeze([
+    -0.024304185716658343,
+    0.9922861190737388,
+    -0.12156300609242962,
+  ]),
+  // flight-path angle -0.019°
+  ariel: Object.freeze([
+    -0.016881615265761703,
+    0.9998571064886865,
+    0.0008818560484272484,
+  ]),
+  // flight-path angle 0.187°
+  umbriel: Object.freeze([
+    -0.012503577400547805,
+    0.99991556714674,
+    -0.0035382382341684893,
+  ]),
+  // flight-path angle 0.013°
+  titania: Object.freeze([
+    -0.015348970497569489,
+    0.9998816075972622,
+    0.0010862289718055196,
+  ]),
+  // flight-path angle -0.031°
+  oberon: Object.freeze([
+    -0.01461083517980469,
+    0.9998894089313402,
+    0.0027736983043925027,
+  ]),
   // flight-path angle -0.438°
   neptune: Object.freeze([
     -0.7288718786020061,
@@ -815,6 +935,36 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
     -0.4305373289608206, -0.8773219396544694, -0.2119995815377986,
     -0.1504783367892547, 0.3013679204583705, -0.9415591572895124,
     0.8899403791987539, -0.37347502020820195, -0.2617680858165513,
+  ]),
+  // pole RA 259.433°, Dec -18.894°, prime meridian W 81.933°
+  miranda: Object.freeze([
+    0.07915766943869647, -0.9816466198811917, -0.17350497700315456,
+    -0.3409105367200576, 0.1368994361972955, -0.9300744864375674,
+    0.93675720937833, 0.13277220358453704, -0.323817035736278,
+  ]),
+  // pole RA 257.158°, Dec -15.004°, prime meridian W 122.484°
+  ariel: Object.freeze([
+    -0.5721717958994725, -0.7915349347226002, -0.2146902025963496,
+    -0.09353847764672323, 0.3230485920698318, -0.9417484591764581,
+    0.8147821728392847, -0.5187601124560258, -0.25887826588554214,
+  ]),
+  // pole RA 257.226°, Dec -15.052°, prime meridian W 234.696°
+  umbriel: Object.freeze([
+    -0.5167553720011079, 0.8290801932553199, -0.21351795863514184,
+    0.33447204583534684, -0.034072399804987136, -0.9417895317565633,
+    -0.78809411624673, -0.558090588276895, -0.2596970527634749,
+  ]),
+  // pole RA 257.246°, Dec -14.883°, prime meridian W 92.718°
+  titania: Object.freeze([
+    -0.1028955386693747, -0.9715418160403866, -0.21335184041129532,
+    -0.2397610662812991, 0.23239083631703333, -0.942607622657235,
+    0.9653637341528807, -0.04583665433708516, -0.25684988203538045,
+  ]),
+  // pole RA 257.562°, Dec -15.191°, prime meridian W 164.030°
+  oberon: Object.freeze([
+    -0.954368610258585, -0.2144174936921094, -0.207859794457445,
+    0.13667101426512387, 0.3052657584799479, -0.9424085369729013,
+    0.2655213543443152, -0.9278135346600933, -0.2620314013409544,
   ]),
   // pole RA 299.503°, Dec 42.961°, prime meridian W 283.005°
   neptune: Object.freeze([
@@ -1189,6 +1339,91 @@ export const BODY_ORBITS = Object.freeze({
     inclinationDegrees: 0.7729574367149298,
     perihelionAu: 18.35168296263812,
     aphelionAu: 20.180379987520066,
+  }),
+  // a 0.00086883 AU, e 0.00075943, perihelion 0.00086817 AU, aphelion 0.00086949 AU
+  miranda: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([0.0008672494663203502,0.00001491222830803315,-0.000056191548093604456]),
+    semiMajorAxisAu: 0.0008688313848285732,
+    eccentricity: 0.00075942584218235,
+    heliocentricDistanceAu: 19.446248704137076,
+    perihelionDirection: Object.freeze([
+      0.5309551598645248,
+      0.8362520242738819,
+      -0.13700062084192,
+    ]),
+    trueAnomalyDegrees: 236.42899433766684,
+    inclinationDegrees: 98.17550054525125,
+    perihelionAu: 0.0008681715718224354,
+    aphelionAu: 0.0008694911978347111,
+  }),
+  // a 0.0012768 AU, e 0.0015858, perihelion 0.0012748 AU, aphelion 0.0012789 AU
+  ariel: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([0.0012746567647170556,0.000021930764995133516,0.000005163956622373254]),
+    semiMajorAxisAu: 0.0012768377703358037,
+    eccentricity: 0.0015857870752954367,
+    heliocentricDistanceAu: 19.44645677518439,
+    perihelionDirection: Object.freeze([
+      -0.9821245784165745,
+      0.1881940328449353,
+      -0.0037839756375037392,
+    ]),
+    trueAnomalyDegrees: 348.16690403175903,
+    inclinationDegrees: 97.72951086256019,
+    perihelionAu: 0.0012748129775023561,
+    aphelionAu: 0.001278862563169251,
+  }),
+  // a 0.0017786 AU, e 0.0040937, perihelion 0.0017713 AU, aphelion 0.0017858 AU
+  umbriel: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([0.0017740811199411022,0.000016397357036833935,1.2811828383407166e-8]),
+    semiMajorAxisAu: 0.0017785570702196557,
+    eccentricity: 0.00409367003451786,
+    heliocentricDistanceAu: 19.44680249582002,
+    perihelionDirection: Object.freeze([
+      -0.5943385887965793,
+      -0.8042099728642058,
+      0.0028215976049465463,
+    ]),
+    trueAnomalyDegrees: 53.00495432133114,
+    inclinationDegrees: 97.73691584865449,
+    perihelionAu: 0.0017712762444366174,
+    aphelionAu: 0.0017858378960026937,
+  }),
+  // a 0.0029169 AU, e 0.0013045, perihelion 0.0029131 AU, aphelion 0.0029207 AU
+  titania: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([0.00291280991774117,0.000044029571941490074,0.000012619066112597553]),
+    semiMajorAxisAu: 0.002916915431472231,
+    eccentricity: 0.0013045067039407544,
+    heliocentricDistanceAu: 19.446121493964693,
+    perihelionDirection: Object.freeze([
+      -0.9814754928092749,
+      -0.19153590777453802,
+      -0.004455675905475215,
+    ]),
+    trueAnomalyDegrees: 10.17643863278551,
+    inclinationDegrees: 97.77094272302931,
+    perihelionAu: 0.0029131102957370473,
+    aphelionAu: 0.002920720567207415,
+  }),
+  // a 0.0039024 AU, e 0.0017769, perihelion 0.0038955 AU, aphelion 0.0039093 AU
+  oberon: Object.freeze({
+    centerBodyId: "uranus",
+    centerPositionAu: Object.freeze([0.003895328111304024,0.000059066440287647365,-0.000013895191064210667]),
+    semiMajorAxisAu: 0.003902405705111162,
+    eccentricity: 0.0017768884619802179,
+    heliocentricDistanceAu: 19.447301839721334,
+    perihelionDirection: Object.freeze([
+      -0.9568755676581276,
+      0.2904671116556991,
+      0.004243237600181665,
+    ]),
+    trueAnomalyDegrees: 342.2452819626265,
+    inclinationDegrees: 97.91986056472152,
+    perihelionAu: 0.003895471565439784,
+    aphelionAu: 0.0039093398447825395,
   }),
   // a 30.073 AU, e 0.010013, perihelion 29.772 AU, aphelion 30.374 AU
   neptune: Object.freeze({

@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import { fromFile } from 'geotiff';
+import {loadIsis3Raster} from './isis3-raster.mjs';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 import {composeCorrectedColor} from './photometric-observations.mjs';
 
@@ -60,6 +61,7 @@ export function scienceMapPoint(longitude, latitude, grid) {
     const distance = 2 * radius * Math.tan(Math.PI / 4 - sign * latitude * radians / 2);
     return [distance * Math.sin(angle), -sign * distance * Math.cos(angle)];
   }
+  if (grid.longitudeRange?.[0] === -180) longitude = ((longitude + 180) % 360 + 360) % 360 - 180;
   const delta = longitude - grid.centerLongitude;
   const wrapped = grid.wrapLongitude ? ((delta + 180) % 360 + 360) % 360 - 180 : delta;
   return [wrapped * radians * radius, latitude * radians * radius];
@@ -76,6 +78,16 @@ export async function loadScienceSurface(root, lens) {
       }
       return null;
     } };
+  }
+  if (lens.format === 'isis3') {
+    const grid = lens.grid;
+    const {data, origin, resolution} = await loadIsis3Raster(resolve(root, lens.path), grid);
+    return {sample(longitude, latitude) {
+      if (latitude < -90 || latitude > 90) return null;
+      const [easting, northing] = scienceMapPoint(longitude, latitude, grid);
+      return sampleScienceGrid(data, grid, (easting - origin[0]) / resolution[0],
+        (northing - origin[1]) / resolution[1], lens);
+    }};
   }
   if (lens.format !== 'geotiff') throw new Error(`Unsupported scientific source format: ${lens.format}`);
   const tiff = await fromFile(resolve(root, lens.path));

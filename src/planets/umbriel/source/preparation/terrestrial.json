@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "umbriel",
+  "displayName": "Umbriel",
+  "publicBase": "/scenes/umbriel/",
+  "distanceAu": 19.2,
+  "raster": {
+    "width": 5760,
+    "height": 2880,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 1024,
+    "surfaceQuality": 95,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "isis3-float-monochrome",
+          "grid": {
+            "width": 919,
+            "height": 460,
+            "targetName": "Umbriel",
+            "centerLongitude": 180,
+            "referenceRadiusMeters": 584700,
+            "polarRadiusMeters": 584700,
+            "origin": [
+              -3676000,
+              920000
+            ],
+            "resolutionMeters": 4000,
+            "specialValueMagnitude": 1e+30,
+            "longitudeRange": [
+              -180,
+              180
+            ]
+          },
+          "displayRange": [
+            0,
+            1950
+          ]
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 584.7,
+    "camera": {
+      "initialScenePitchDegrees": -30.593377910399358,
+      "defaultControlYawDegrees": -99.1923306830255
+    },
+    "mapUrl": "/scenes/umbriel/umbriel-normal-surface@2x.webp",
+    "polesUrl": "/scenes/umbriel/umbriel-normal-poles@2x.webp"
+  },
+  "celestial": {
+    "sunSource": "Vendored JPL Horizons Uranus satellite elements and IAU/NAIF Umbriel rotation at the shared epoch."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      145,
+      143,
+      140
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

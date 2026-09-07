@@ -71,12 +71,21 @@ export async function validateMarkerSourceBytes(source, sourcePath) {
   return bytes;
 }
 
+export async function readMarkerImage(source, sourcePath) {
+  const bytes = await validateMarkerSourceBytes(source, sourcePath);
+  if (!source.raster) return sharp(bytes);
+  const {readObservation} = await import('../../tools/objects/terrestrial-layers/solid-raster.mjs');
+  const {rgb, missing} = await readObservation('/', {...source, path: sourcePath}, source.raster, source.width, source.height);
+  const info = {width: source.width, height: source.height, channels: 3};
+  return sharp(paintMissingCoverage(rgb, info, missing), {raw: info});
+}
+
 export async function renderMarker(descriptor, { sourcePath, tileSize }) {
   validateMarkerDescriptor(descriptor);
   if (!Number.isSafeInteger(tileSize) || tileSize <= 0) {
     throw new TypeError("Navigation marker tile size is invalid.");
   }
-  let image = sharp(await validateMarkerSourceBytes(descriptor.source, sourcePath));
+  let image = await readMarkerImage(descriptor.source, sourcePath);
   for (const operation of descriptor.operations) {
     if (operation.type === "missing-coverage") {
       const { data, info } = await image.removeAlpha().toColourspace("srgb").raw().toBuffer({ resolveWithObject: true });
