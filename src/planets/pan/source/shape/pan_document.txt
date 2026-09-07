@@ -1,0 +1,79 @@
+Ancillary	Data	
+This data set contains the Peter Thomas shape model for Saturn’s satellite Pan (Saturn XVIII) , 
+based on optical data from the Cassini Imaging Science Subsystem (ISS) Narrow-Angle Camera 
+(NAC) instrument. The current version of this data set contains the following shape model file: 
+Pan_30k_plt.tab 
+This shape model file also has a detached label file, with a suffix of .xml, which describes the 
+format and content. The shape model is in a plate model format and only represents the model 
+shape, with no gravity or slope information. 
+Coordinate	System	
++X is Saturn-facing; + Y is opposite the direction of orbital motion; +Z is along the positive rotation
+axis. Because of orbital eccentricity, the x-axis deviates slightly from perfect Saturn alignment
+around the orbit; these small deviations are accounted for in the rotation model used.
+The rotational model used in construction of this model is a binary kernel: pan_mst2018.bpc 
+prepared by M. S. Tiscareno, and available through the Navigation and Ancillary Information 
+Facility (NAIF). 
+For information on using SPICE kernels, please see pck_req.txt - "PCK Required Reading", PCK 
+required reading document, last revised on 2009 Apr 15 by B.V. Semenov. 
+Confidence	Level	Notes	
+Images used and their associated viewing geometries are listed in Table 1 below. Uncertainties in 
+the shape model have been based on pixel scale and spatial density and solution residuals of 
+control points.  
+Likely uncertainty of model radii for Pan range from 0.2 to 0.3 km, portions of the leading side are 
+the most uncertain. 
+Limitations	
+The shape model is intended for global geometric, geologic, and geophysical studies. The 
+morphology of small craters is not reliably included; some relatively large craters show 
+approximate measures such as depth/diameter. Regional slopes can be calculated to accuracies 
+estimated by the listed uncertainties. 
+Acknowledgements	
+ The following people helped in the development of the software and/or models during 
+the Cassini mission:  Beatrice Mueller and Conor Kingston for direct assistance in formatting and 
+submitting the data sets, Brian Carcich for software development used to derive the shape 
+models, Matt Tiscareno for preparing small body kernels that improved the accuracy of the 
+models, Mike Evans for assistance in modifying the plate model format to meet PDS 
+Requirements, Chuck Acton for assistance in archiving kernels, Pam Smith for data management. 
+Table	1.	Cassini	ISS	Images	used	for	Pan	shape	model	
+Filt: filters used in each filter wheel.  CL: clear; UV: ultraviolet; VIO: violet; BL: blue; GRN: green; 
+MT: methane; RED: red; CB: methane continuum; IR: infrared; P: polarization.  Details of filter 
+bandpasses and use in Porco et al. (2004). 
+SC lat lon: Sub spacecraft position in degrees. Lon is West longitude where 90ºW is the leading 
+point.  
+Solar lat lon: sub solar position in degrees 
+Range: distance to object center from spacecraft, km 
+Noraz: image orientation of the projected object spin axis, degrees clockwise from up.  
+Samp: object center x-coordinate in image 0 is at left of image in pixels 
+Line: object center y-coordinate in image; 0 is at top of image in pixels 
+Phase: solar phase angle at center of image in degrees. 
+Images used in construction of model of PAN: 
+S/C Solar  
+Image        filt filt lat lon lat lon   range      noraz    samp     line     phase  
+N1524968647_1  CL1  CL2  -0.08 201.37 -17.68 251.49  208961.1   359.91   592.70   510.80    52.31  
+N1524968705_1  CL1  CL2  -0.07 201.81 -17.68 251.91  209314.5   359.91   592.20   511.00    52.30  
+N1524970213_1  CL1  CL2  -0.03 212.98 -17.67 262.84  220399.8   359.91   592.00   511.00    52.09  
+N1524970909_1  CL1  CL2  -0.02 217.92 -17.68 267.88  226669.4   359.91   597.40   510.30    52.19  
+N1530371111_1  CL1  CL2  -0.35 105.79 -16.87 153.83  270031.4   359.91   506.90   520.20    50.09  
+N1530372126_1  CL1  CL2  -0.35 111.55 -16.88 161.18  260968.5   359.92   510.20   520.50    51.57  
+N1867600368_1  CL1  CL2  73.00 106.67  26.71 168.12   97965.6    19.41   508.00   511.20    56.31  
+N1867602962_1  CL1  CL2  71.20 162.91  26.71 186.91   50326.3    59.98   517.30   514.40    46.49  
+N1867604117_1  CL1  CL2  56.83 201.28  26.71 195.29   31068.7   100.63   503.50   469.40    30.42  
+N1867604259_1  UV2  CL2  54.13 204.52  26.71 196.07   29566.4   106.20   499.00   503.20    28.12  
+N1867604433_1  UV2  CL2  49.56 209.08  26.71 197.22   27540.6   116.17   495.10   503.30    24.61  
+N1867604488_1  CL1  GRN  46.08 211.97  26.71 197.99   26330.0   124.61   493.70   504.60    22.33  
+N1867604558_1  CL1  UV3  43.74 213.71  26.71 198.45   25638.9   130.89   490.30   505.90    21.03  
+N1867604614_1  CL1  IR3  41.45 215.28  26.71 198.89   25048.0   137.50   487.70   509.00    19.97  
+N1867604669_1  CL1  CL2  39.21 216.71  26.71 199.29   24541.8   144.40   483.20   507.80    19.17  
+N1867606181_1  CL1  CL2 -26.17 246.07  26.71 210.24   30343.5   233.97   424.70   481.00    63.14  
+N1867606229_1  CL1  UV3 -27.30 246.69  26.71 210.55   30932.6   234.05   423.70   482.00    64.22  
+N1867606284_1  CL1  GRN -28.85 247.57  26.71 210.99   31804.5   234.12   423.00   482.40    65.71  
+N1867606339_1  CL1  IR1 -30.18 248.36  26.71 211.39   32614.2   234.15   420.90   483.30    66.98  
+N1867606643_1  P0   GRN -36.41 252.49  26.71 213.59   37353.3   233.98   517.50   511.10    72.98  
+N1867606676_1  P60  GRN -36.99 252.92  26.71 213.83   37890.9   233.93   519.60   512.10    73.54  
+N1867606709_1  P12  GRN -37.55 253.34  26.71 214.06   38432.2   233.88   526.10   514.60    74.08  
+N1867606742_1  CL1  CL2 -38.11 253.77  26.71 214.31   38982.7   233.83   526.70   508.10    74.62  
+N1867606790_1  P0   MT2 -38.80 254.32  26.71 214.63   39698.6   233.76   534.20   512.70    75.28  
+N1867606838_1  P60  MT2 -39.54 254.92  26.70 214.98   40502.7   233.67   535.30   513.60    75.98  
+N1867606886_1  P12  MT2 -40.24 255.51  26.71 215.32   41312.9   233.58   538.60   516.10    76.67  
+N1867607239_1  CL1  CL2 -44.74 259.74  26.71 217.92   47505.5   232.83   535.60   515.90    81.00  
+ 
+ 

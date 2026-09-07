@@ -10,6 +10,7 @@ import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObserved
 import {prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation} from './observed-geotiff.mjs';
 import { prepareByteObservation } from './observed-image.mjs';
 import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mjs';
+import { prepareShapeCameraMosaic } from './shape-camera-mosaic.mjs';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mjs';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mjs';
 
@@ -105,8 +106,10 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
   }
   for (const recipe of config.raster.mosaics ?? []) {
     const tiles = await source.validateGroup(recipe.consumer);
-    if (recipe.photometry) await source.validateGroup(recipe.photometry.consumer);
-    const { rgb, missing, grid } = recipe.format === 'controlled-orthographic'
+    if (recipe.photometry?.consumer) await source.validateGroup(recipe.photometry.consumer);
+    const { rgb, missing, grid } = recipe.format === 'controlled-shape-camera'
+      ? await prepareShapeCameraMosaic(sourceDirectory, tiles, recipe, width, height, config.geometry.radialTerrain)
+      : recipe.format === 'controlled-orthographic'
       ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, recipe, width, height)
       : await preparePdsByteMosaic(sourceDirectory, tiles, width, height);
     surfaces.push(await packSurface(recipe.id, rgb, missing, { ...recipe.metadata,

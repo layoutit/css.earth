@@ -110,8 +110,12 @@ test('executable values, symbols, nonfinite numbers and cycles are rejected with
 
 test('a body without lenses validates both fixed and toggle-selected presentations', async () => {
   const original = JSON.parse(await readFile(new URL('../../../../src/planets/haumea/prepared/runtime.json', import.meta.url), 'utf8'));
-  assert.equal(parsePreparedObjectRuntime(original).controls.lenses, null);
+  parsePreparedObjectRuntime(original);
   const input = structuredClone(original);
+  // Exercise an absent capability independently of the body's current lenses.
+  input.controls.lenses = null;
+  input.variants = [{ ...input.variants[0], when: {} }];
+  assert.equal(parsePreparedObjectRuntime(input).controls.lenses, null);
   input.variants[0].when.lensId = 'model';
   assert.throws(() => parsePreparedObjectRuntime(input), /declared lens capability/);
   delete input.variants[0].when.lensId;
