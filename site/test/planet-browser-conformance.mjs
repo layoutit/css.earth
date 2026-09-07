@@ -406,7 +406,7 @@ async function proveDesktop(browser, planet, profile) {
     await enableMotion(page, planet.id);
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
-        const leaves = [...stage.querySelectorAll(".polycss-scene s")]
+        const leaves = [...stage.querySelectorAll(".polycss-scene :is(s,u)")]
           .filter(leaf => getComputedStyle(leaf).backgroundImage !== "none");
         return {
           texturedLeafCount: leaves.length,

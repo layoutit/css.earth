@@ -30,11 +30,37 @@ test('Dawn radius anchors preserve meters, poles and east longitude; elevation h
 });
 
 test('Vesta uses one shared scene and its measured mesh for drawing and hits', async () => {
-  const [runtime, terrain, descriptor, manifest] = await Promise.all(['prepared/runtime.json', 'prepared/terrain.json', 'object.json', 'runtime-assets.json'].map(read));
+  const [runtime, terrain, descriptor, manifest, scene] = await Promise.all(['prepared/runtime.json', 'prepared/terrain.json', 'object.json', 'runtime-assets.json', 'prepared/scene.json'].map(read));
   assert.equal(descriptor.properties.recipe.shape.kind, 'radial-terrain');
   assert.equal(runtime.tree.nodes.filter(n => n.className?.includes('polycss-camera')).length, 1);
   assert.equal(runtime.surfaceHit.triangles.length, terrain.faces.length);
   assert.ok(terrain.faces.length <= 2000);
+  assert.equal(scene.bodyLeaves.length, terrain.faces.length);
+  for (const [index, leaf] of scene.bodyLeaves.entries()) {
+    assert.equal(leaf.tag, 'u');
+    assert.equal(leaf.attributes['data-polycss-texture-leaf-sizing'], 'raster');
+    assert.equal(leaf.projectiveTextureLayer, undefined);
+    assert.ok(leaf.style.includes(`--polycss-atlas-width:${terrain.source.tileSize}px`));
+    assert.ok(leaf.style.includes(`--polycss-atlas-height:${terrain.source.tileSize}px`));
+    // Test the browser primitive's actual footprint against source positions.
+    // Raster fitting must retain every measured vertex inside the native u.
+    const matrix = leaf.style.match(/matrix3d\(([^)]+)\)/)[1].split(',').map(Number);
+    const size = terrain.source.tileSize;
+    const corners = [[size / 2, 0], [0, size], [size, size]].map(([x, y]) =>
+      [0, 1, 2].map(axis => matrix[axis] * x + matrix[axis + 4] * y + matrix[axis + 12]));
+    const sub = (a, b) => a.map((value, axis) => value - b[axis]);
+    const dot = (a, b) => a.reduce((sum, value, axis) => sum + value * b[axis], 0);
+    const ab = sub(corners[1], corners[0]), ac = sub(corners[2], corners[0]);
+    const aa = dot(ab, ab), bb = dot(ac, ac), abac = dot(ab, ac), determinant = aa * bb - abac * abac;
+    for (const [y, x, z] of terrain.faces[index].vertices) {
+      const p = sub([x * 50, y * 50, z * 50], corners[0]);
+      const u = (dot(p, ab) * bb - dot(p, ac) * abac) / determinant;
+      const v = (dot(p, ac) * aa - dot(p, ab) * abac) / determinant;
+      assert.ok(u >= 0 && v >= 0 && u + v <= 1, `native triangle ${index} covers its source vertices`);
+      assert.ok(Math.hypot(...p.map((value, axis) => value - u * ab[axis] - v * ac[axis])) < 1e-5,
+        `native triangle ${index} stays in its measured plane`);
+    }
+  }
   assert.deepEqual(runtime.surfaceHit.triangles[0][0], [terrain.faces[0].vertices[0][1] * 50, terrain.faces[0].vertices[0][0] * 50, terrain.faces[0].vertices[0][2] * 50]);
   for (const asset of manifest.assets) {
     const bytes = await readFile(resolve(root, 'public/scenes/vesta', asset.filename));
