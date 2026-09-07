@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {createApiImageTransport} from './prepared-map/api-image-transport.mjs';
+import {createApiImageTransport} from "../renderers/css/dist/testing.js";
 
 const bytes=Buffer.from([1,2,3,4]);
 const sha256=createHash('sha256').update(bytes).digest('hex');

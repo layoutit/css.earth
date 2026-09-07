@@ -37,6 +37,17 @@ test("prepared Wikidata identity works for any entity kind without a name search
   assert.equal(new URL(f.requests[0].url).searchParams.get("action"), "wbgetentities");
 });
 
+test("a prepared administrative article link does not require Wikidata to repeat every GeoNames record", async () => {
+  const f = fixture({ geonames: "999" });
+  const result = await f.source.load({ wikidata: "Q80", geonames: "123" });
+  assert.equal(result.source.wikidata, "Q80");
+  assert.equal(result.source.geonames, "123");
+  assert.equal(result.source.identityMethod, "prepared-wikidata");
+  assert.equal(f.requests.length, 2, "the source link is used directly");
+  assert.equal(await fixture({ linkedId: "Q81" }).source.load({ wikidata: "Q80", geonames: "123" }), null,
+    "the article must still belong to the exact prepared Wikidata identity");
+});
+
 test("ambiguous identities, stale external IDs, wrong articles and disambiguations publish no introduction", async () => {
   for (const options of [{ hits: 0 }, { hits: 2 }, { geonames: "999" }, { linkedId: "Q81" }, { disambiguation: true }]) {
     assert.equal(await fixture(options).source.load({ geonames: "123" }), null);

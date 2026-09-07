@@ -2,20 +2,6 @@
   "schema": "csssaturn-authoritative-sources@1",
   "inputs": [
     {
-      "id": "inter-saturn-title-vector",
-      "path": "presentation/title-mark.mjs",
-      "expectedSha256": "cb0aced786d60aec377a044df7edb6c5fa0dea7cabb4677c75a83a13ff88b677",
-      "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Saturn outline",
-      "credit": "Rasmus Andersson and the Inter project",
-      "license": "SIL Open Font License 1.1",
-      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
-      "redistribution": "project-authored SVG outline with Inter attribution",
-      "consumers": [
-        "title"
-      ],
-      "expectedBytes": 3721
-    },
-    {
       "id": "openspace-saturn-surface",
       "path": "saturn-surface-original.jpg",
       "expectedSha256": "5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0",
@@ -109,7 +95,7 @@
       "origin": "accepted cssEarth Saturn three-storm texel snapshot prepared from the declared Saturn surface and documented storm kernels",
       "credit": "cssEarth adapter preparation using the OpenSpace Saturn surface",
       "license": "project-authored prepared presentation over the OpenSpace MIT source",
-      "acquisition": "checked accepted static snapshot; node src/planets/saturn/tools/prepare-weather-source.mjs validates and copies it without re-encoding",
+      "acquisition": "checked accepted static snapshot; shared material-composition preparation validates and copies it without re-encoding",
       "redistribution": "project runtime asset with OpenSpace attribution",
       "consumers": [
         "scene",
@@ -124,7 +110,7 @@
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, wephm=y, watm=y, OBJECT-DATE=2026/08/29 12:00, OBJECT-NAME=Saturn",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "U.S. government scientific model response",
-      "acquisition": "node src/planets/saturn/tools/acquire-atmosphere-spectrum.mjs with the checked seed and generator parameters documented in SOURCE.md",
+      "acquisition": "shared verify-request operations in preparation/acquisition.json, with the checked seed and generator parameters documented in SOURCE.md",
       "redistribution": "checked text configuration with NASA attribution",
       "consumers": [
         "spectrum",
@@ -186,7 +172,7 @@
         "https://ssd.jpl.nasa.gov/sats/elem/",
         "https://minorplanetcenter.net/mpec/K26/K26M19.html"
       ],
-      "acquisition": "node src/planets/saturn/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes",
+      "acquisition": "shared satellite-catalog operation in preparation/acquisition.json validates the pinned snapshot; explicit refresh must pass all authority hashes",
       "redistribution": "normalized factual data only; no MPC circular text is redistributed",
       "consumers": [
         "moons"
@@ -203,7 +189,7 @@
       "licenseEvidence": [
         "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/dione/layers/colorlayers/dione_texture.asset"
       ],
-      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "permitted with the OpenSpace MIT notice",
       "consumers": [
         "moons"
@@ -220,7 +206,7 @@
       "licenseEvidence": [
         "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/enceladus/layers/colorlayers/enceladus_texture.asset"
       ],
-      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "permitted with the OpenSpace MIT notice",
       "consumers": [
         "moons"
@@ -237,7 +223,7 @@
       "licenseEvidence": [
         "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/iapetus/layers/colorlayers/iapetus_texture.asset"
       ],
-      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "permitted with the OpenSpace MIT notice",
       "consumers": [
         "moons"
@@ -254,7 +240,7 @@
       "licenseEvidence": [
         "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/mimas/layers/colorlayers/mimas_texture.asset"
       ],
-      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "permitted with the OpenSpace MIT notice",
       "consumers": [
         "moons"
@@ -271,7 +257,7 @@
       "licenseEvidence": [
         "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/rhea/layers/colorlayers/rhea_texture.asset"
       ],
-      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "permitted with the OpenSpace MIT notice",
       "consumers": [
         "moons"
@@ -288,7 +274,7 @@
       "licenseEvidence": [
         "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/tethys/layers/colorlayers/tethys_texture.asset"
       ],
-      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "permitted with the OpenSpace MIT notice",
       "consumers": [
         "moons"
@@ -305,7 +291,7 @@
       "licenseEvidence": [
         "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/saturn/titan/layers/colorlayers/cassini_iss_global_mosaic_4km_local.asset"
       ],
-      "acquisition": "node src/planets/saturn/tools/acquire-moon-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "prepared derivative with USGS, NASA/PDS, and OpenSpace credit",
       "consumers": [
         "moons"
@@ -319,7 +305,7 @@
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
-      "acquisition": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "prepared false-color derivative with source credit",
       "consumers": [
         "lenses"
@@ -333,7 +319,7 @@
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
-      "acquisition": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "prepared false-color derivative with source credit",
       "consumers": [
         "lenses"
@@ -347,7 +333,7 @@
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
-      "acquisition": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "prepared false-color derivative with source credit",
       "consumers": [
         "lenses"
@@ -361,7 +347,7 @@
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
-      "acquisition": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "acquisition": "shared pinned download operation in preparation/acquisition.json",
       "redistribution": "prepared false-color derivative with source credit",
       "consumers": [
         "lenses"
@@ -376,10 +362,15 @@
       "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
       "credit": "ESO/S. Brunier",
       "license": "CC-BY-4.0",
-      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
       "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": ["starfield", "scene"]
+      "consumers": [
+        "starfield",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-saturn-cubic-sky-sun-oracle-asset",
@@ -391,7 +382,11 @@
       "license": "Google proprietary; no redistribution grant verified",
       "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
       "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": ["starfield", "sun-oracle", "scene"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-saturn-cubic-sky-sun-oracle-measurements",
@@ -403,14 +398,215 @@
       "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
       "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
       "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": ["starfield", "sun-oracle", "scene", "lighting"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene",
+        "lighting"
+      ]
+    },
+    {
+      "id": "saturn-authored-preparation-rings",
+      "path": "preparation/rings.json",
+      "expectedBytes": 13371,
+      "expectedSha256": "581819f574dc232122019d0c199ac5e64d5a715a89a12643782cc6d80f56e5f7",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "radial-layers"
+      ]
+    },
+    {
+      "id": "saturn-authored-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1209,
+      "expectedSha256": "db2aa0b55161f0f4b83a20f7127c1c06c1f2b90483890b9634465bbbfe3a7c1e",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "saturn-authored-presentation-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3658,
+      "expectedSha256": "9f9d9b32564f69f63cb364879b5ad818210809388aca6fb07e373d9e876b6ce1",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "saturn-authored-editorial-object",
+      "path": "editorial/object.json",
+      "expectedBytes": 8643,
+      "expectedSha256": "f8edb3a3a3f5d88b9865fa526080baed5fe5260bedd8f491dca084646404fe29",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "NASA Science",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "content"
+      ]
+    },
+    {
+      "id": "saturn-authored-content",
+      "path": "content/object.json",
+      "expectedBytes": 14415,
+      "expectedSha256": "73992b49fd4c12caae215d8699c1e6c662d33e144ffffa6c8954ac0185f853e8",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "content"
+      ]
+    },
+    {
+      "id": "saturn-authored-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 10046,
+      "expectedSha256": "1917a7427018f30692a34d1204575b8bf762dfbe8f45f2f9f7cf5b3c0b880acf",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "geometry"
+      ]
+    },
+    {
+      "id": "saturn-authored-surface",
+      "path": "preparation/surface.json",
+      "expectedBytes": 8444,
+      "expectedSha256": "7eb6b780e8f338a3eedb3286fb092b58eb58121866be10a933aab881842324e6",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "surface"
+      ]
+    },
+    {
+      "id": "saturn-authored-materials",
+      "path": "preparation/materials.json",
+      "expectedBytes": 2097,
+      "expectedSha256": "11cfcfad7f2e168dff9f759037ebba57d216519de7a4703244ae611720145544",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "materials"
+      ]
+    },
+    {
+      "id": "saturn-authored-radial-motion",
+      "path": "preparation/radial-motion.json",
+      "expectedBytes": 4479,
+      "expectedSha256": "cc0c35fab54fba274693e1cd87762c56ed98763010daa21e3b17d62d992a51df",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "radial-motion"
+      ]
+    },
+    {
+      "id": "saturn-authored-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 1489,
+      "expectedSha256": "9128adac51d287dfa945137573140a5242446106861fa9d68780b4210da3d5bc",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "saturn-authored-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 371,
+      "expectedSha256": "d41b923e65b434cf28f664e9c4546c654fb93c61b9169a43c8159c02f22fac59",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "celestial"
+      ]
+    },
+    {
+      "id": "saturn-authored-charts",
+      "path": "content/charts.json",
+      "expectedBytes": 3935,
+      "expectedSha256": "fa4ee604146d97d8101e83626a115294eb11eeaecbd603d5f92b39cf96823562",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "charts"
+      ]
+    },
+    {
+      "id": "saturn-authored-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 7091,
+      "expectedSha256": "53a1933246d476b9306c6775250fa0f62feca6b2657f704b4dd4b01b06ccdd3e",
+      "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
+      "credit": "cssEarth and the institutional sources identified in this recipe",
+      "license": "Project-authored acquisition specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "acquisition"
+      ]
+    },
+    {
+      "id": "saturn-authored-satellite-catalog",
+      "path": "preparation/satellite-catalog.json",
+      "expectedBytes": 1471,
+      "expectedSha256": "a8130fcdc23be3ab84e2d2e824d138287370ec374528ba9757a53c6de14b8ba1",
+      "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
+      "credit": "cssEarth and the institutional sources identified in this recipe",
+      "license": "Project-authored acquisition specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "acquisition"
+      ]
     }
   ],
   "generatedIntermediates": [
     {
       "path": "lenses/manifest.json",
       "expectedSha256": "4fe757b1e66df8328b15951f8488accac0717f0208da155a2b05cbc2365a3403",
-      "generator": "node src/planets/saturn/tools/acquire-lens-sources.mjs",
+      "generator": "tools/objects/operations-acquisition.ts json-document operation in preparation/acquisition.json",
       "expectedBytes": 2316
     }
   ],

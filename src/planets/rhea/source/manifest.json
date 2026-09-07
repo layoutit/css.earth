@@ -1,0 +1,208 @@
+{
+  "schema": "cssrhea-authoritative-sources@1",
+  "inputs": [
+    {
+      "credit": "NASA/JPL/Space Science Institute",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-voyager-2012-rhea",
+      "path": "observations/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
+      "catalog": "https://astrogeology.usgs.gov/search/map/rhea_cassini_voyager_global_mosaic_417m",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 11520,
+      "height": 5760,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 764100,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "USGS 2012 Cassini/Voyager mosaic. Its download-link label is wrong; this pinned 11520 by 5760 file matches the 417 m metadata. Preserve nonzero pixels; zero is GeoTIFF no-data. Origin easting zero means left edge 180 E despite projection center 180 E.",
+      "expectedBytes": 66401915,
+      "expectedSha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7"
+    },
+    {
+      "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-iss-2014-rhea-color",
+      "path": "observations/PIA18438.jpg",
+      "origin": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18438.jpg",
+      "catalog": "https://www.jpl.nasa.gov/images/pia18438-color-maps-of-rhea-2014/",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 12015,
+      "height": 6008,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Published global rectangular display mosaic without a separate validity mask. Preserve supplied pixels, including real dark terrain, residual photographed shadows and coarse inserts. The one-pixel departure from 2:1 aspect is retained in source and resampled at preparation.",
+      "expectedBytes": 10389170,
+      "expectedSha256": "4a3f4c5cca6ec558a6dcd664ee818dd700df527fc07fe623d1c56d4e2ae81bc4"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichrheashape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-rhea",
+      "path": "observations/rhea_radius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_radius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "width": 2222,
+      "height": 1111,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 763500,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Global SPC radius model. Sample original geotransform within actual raster bounds. Narrow uncovered east/south edges are not extrapolated.",
+      "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 763.5 km.",
+      "expectedBytes": 9881887,
+      "expectedSha256": "a4d49eb12bfe5c0d97513d3d4692c78c7b5dd7179f8c2097203a37a4834bb51d"
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 847,
+      "expectedSha256": "f6a3ea28815d7c8ff42aa6d4f732390998bd87ca1715cba354e87c8be50f218b",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/catalog.json",
+      "expectedBytes": 2633,
+      "expectedSha256": "6542fc34671cedcb641b184bd6d2add69a9649125ba79ed84bb8171e4149b6c9",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/productdescription.pdf",
+      "expectedBytes": 37018,
+      "expectedSha256": "c1bebf3b34b893f16c3da8d4db8cf39825f1611f7c1957fb5caf6a4307b61fde",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/rheashapeassessment.pdf",
+      "expectedBytes": 179526,
+      "expectedSha256": "765eb535685ff615c5e70a0f798429597c6fe05e6100bc845ead716ba9c8f087",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/rhea_radius_g.xml",
+      "expectedBytes": 8710,
+      "expectedSha256": "723180b17c4d6950ac54d32535ee17da8135d003f5edff2b0225a7ffd6b43875",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3531,
+      "expectedSha256": "ed36804c6ceebfea535edfc871a42efe419e23ce18afdc5c3cceb9caa183ada9",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 2073,
+      "expectedSha256": "ef3c78fe1b17960108c07b7bc7507e767836d15a6499293bd94a2aba97334cc7",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1271,
+      "expectedSha256": "d7c05b93f19a8339614bc5b214df6446cd4fcd3c99c9cef48d54fab5654a7d8c",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 8485,
+      "expectedSha256": "2b925ce1ade767f002b2872186ddb398f1caf64752c13ed2556da689afb6f5d3",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3016,
+      "expectedSha256": "4c3947c71005a0a0122167ac13cefa48d0c03556e4100e38e95eb3c68b667394",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    }
+  ],
+  "generatedIntermediates": []
+}

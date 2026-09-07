@@ -1,0 +1,190 @@
+{
+  "schema": "cssearth-radial-motion-shadow@1",
+  "namespace": "saturn",
+  "publicPrefix": "/scenes/saturn/",
+  "parameters": {
+    "mainRingMotionTextureSize": 1024,
+    "mainRingRasterizedBands": [
+      "c",
+      "b-inner",
+      "b-outer",
+      "a"
+    ],
+    "mainRingMotionTransparentGutter": 1,
+    "mainRingPointSourceOpacityRange": [
+      0.48,
+      0.76
+    ],
+    "mainRingPointPresentationOpacityRange": [
+      0.82,
+      1
+    ],
+    "bodyGmKm3PerS2": 37931206.23,
+    "bodyReferenceRotationSeconds": 38018,
+    "presentationReferenceRotationSeconds": 72,
+    "bodyEquatorialRadiusKm": 60268,
+    "bodyPolarRadiusKm": 54364,
+    "displayEquatorialRadius": 230,
+    "fRingOuterKm": 140612,
+    "mainRingInvertedLuminanceThreshold": 0.5,
+    "mainRingMaxTracerIntensity": 0.72,
+    "mainRingMotionFormations": {
+      "c": {
+        "kind": "wake-arcs",
+        "share": 0.4,
+        "centersRadians": [
+          0.82,
+          3.94
+        ],
+        "spreadRadians": 0.2,
+        "radialShearRadians": 0.18
+      },
+      "b-inner": {
+        "kind": "b-ring-spokes",
+        "share": 0.62,
+        "centersRadians": [
+          0.82,
+          3.94
+        ],
+        "spreadRadians": 0.045,
+        "radialShearRadians": 0
+      },
+      "b-outer": {
+        "kind": "b-ring-spokes",
+        "share": 0.62,
+        "centersRadians": [
+          0.82,
+          3.94
+        ],
+        "spreadRadians": 0.045,
+        "radialShearRadians": 0
+      },
+      "a": {
+        "kind": "wake-arcs",
+        "share": 0.4,
+        "centersRadians": [
+          1.38,
+          4.5
+        ],
+        "spreadRadians": 0.2,
+        "radialShearRadians": -0.18
+      },
+      "f": {
+        "kind": "uniform",
+        "share": 0,
+        "centersRadians": [],
+        "spreadRadians": 0,
+        "radialShearRadians": 0
+      }
+    },
+    "mainRingMotionBands": [
+      {
+        "id": "c",
+        "count": 30,
+        "boundsKm": [
+          74500,
+          91975
+        ]
+      },
+      {
+        "id": "b-inner",
+        "count": 50,
+        "boundsKm": [
+          91975,
+          104750
+        ]
+      },
+      {
+        "id": "b-outer",
+        "count": 55,
+        "boundsKm": [
+          104750,
+          117500
+        ]
+      },
+      {
+        "id": "a",
+        "count": 55,
+        "boundsKm": [
+          122050,
+          136770
+        ]
+      },
+      {
+        "id": "f",
+        "count": 10,
+        "boundsKm": [
+          139826,
+          140612
+        ]
+      }
+    ],
+    "staticWorldLightDirection": [
+      0.883835,
+      -0.385595,
+      0.264864
+    ],
+    "bodyObliquityDegrees": 26.73,
+    "staticSystemTiltAxis": "source-x",
+    "staticSystemNodeDegrees": -60,
+    "staticMeshRotationDegrees": 128,
+    "bodyShadowRingDirectTransmission": 0.16,
+    "bodyShadowDenseAlphaStart": 0.06274509803921569,
+    "bodyShadowDenseAlphaEnd": 0.3764705882352941,
+    "bodyShadowEdgeFeatherSigma": 6,
+    "bodyShadowRingSupportAlpha": 32,
+    "ringShadowTextureSize": 1024,
+    "ringShadowTransparentGutter": 4,
+    "bodySolarAlbedoMultiplier": "#fff1ea"
+  },
+  "motion": {
+    "seed": 1396790357,
+    "bandSeedMultiplier": 2654435769,
+    "maximumAttemptsPerPoint": 20000,
+    "densityExponent": 0.5,
+    "brightVisibilityFloor": 0.4,
+    "whiteMix": 0.74,
+    "luminanceRange": [
+      0.96,
+      1.04
+    ],
+    "elevationRange": [
+      0.012,
+      0.028
+    ],
+    "opacityMinimum": 0.5,
+    "formationOpacityMaximum": 0.76,
+    "fieldOpacityMaximum": 0.72,
+    "plateElevation": 0.02,
+    "pointRadius": 1.18
+  },
+  "shadow": {
+    "sampleOffsets": [
+      -0.25,
+      0.25
+    ],
+    "filename": "saturn-ring-shadow.webp"
+  },
+  "fields": {
+    "bodyOnRings": "saturnOnRings",
+    "ringsOnBody": "ringsOnSaturn",
+    "gravitationalParameter": "saturnGmKm3PerS2"
+  },
+  "shadowModel": {
+    "model": "prepared-static-mutual-ray-occlusion",
+    "systemTiltAxis": "source-x",
+    "saturnOnRings": {
+      "model": "ray-to-oblate-ellipsoid-prepared-alpha-overlay",
+      "edgeFeather": {
+        "model": "prepared-gaussian-alpha-penumbra-remasked-to-ring-support",
+        "runtimeWork": false
+      },
+      "overlayTextureUrl": "/scenes/saturn/saturn-ring-shadow.webp",
+      "authority": "https://science.nasa.gov/photojournal/saturns-shadow-upon-the-rings/"
+    },
+    "ringsOnSaturn": {
+      "model": "ray-to-prepared-ring-alpha-profile",
+      "authority": "https://science.nasa.gov/photojournal/rings-and-shadows/"
+    }
+  }
+}

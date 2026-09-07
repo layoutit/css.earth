@@ -128,10 +128,16 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
   return Object.freeze({
     bind(next) {
       if (destroyed) return;
-      provider = next;
-      route?.destroy(); unsubscribe?.();
+      revision++; selectionRevision++;
+      searchRequest?.abort(); detailRequest?.abort(); introductionRequest?.abort();
+      route?.destroy(); unsubscribe?.(); route = null; unsubscribe = null;
+      provider = next; selection = null; selecting = false;
+      panel.ariaBusy = "false"; status.hidden = true;
+      for (const button of buttons) button.disabled = false;
+      clearRows();
+      if (!provider) { root.hidden = true; return; }
       route = createEntityRoute({ windowTarget: documentTarget.defaultView, rootId: card.initial.id,
-        restoreView: provider.restoreView,
+        restoreView: provider.restoreView, writeUrl: provider.writeRoute, listenHistory: provider.listenHistory ?? true,
         read: () => ({ entityId: selection?.id ?? card.initial.id, lensId: provider.lens().id,
           defaultLens: card.initial.lensIds[0] }),
         async apply(id, lensId, live, options) {
@@ -156,6 +162,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
       return route.restore();
     },
     search,
+    restore() { return route?.restore(); },
     async selectById(id) { return id === card.initial.id ? selectRoot() : select({ id, name: "place" }); },
     destroy() { if (destroyed) return; destroyed = true; revision++; selectionRevision++; selection = null; route?.destroy(); unsubscribe?.(); events.abort(); clearRows(); },
   });

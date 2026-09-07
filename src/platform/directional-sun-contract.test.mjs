@@ -1,22 +1,15 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { PREPARED_EARTH_SKY_SUN } from
-  "../planets/earth/runtime/preparedSkySun.mjs";
-import { PREPARED_JUPITER_SKY_SUN } from
-  "../planets/jupiter/runtime/preparedSkySun.mjs";
-import { PREPARED_MARS_SKY_SUN } from
-  "../planets/mars/runtime/preparedSkySun.mjs";
-import { PREPARED_MERCURY_SKY_SUN } from
-  "../planets/mercury/runtime/preparedSkySun.mjs";
-import { PREPARED_NEPTUNE_SKY_SUN } from
-  "../planets/neptune/runtime/preparedSkySun.mjs";
-import { PREPARED_SATURN_SKY_SUN } from
-  "../planets/saturn/runtime/preparedSkySun.mjs";
-import { PREPARED_URANUS_SKY_SUN } from
-  "../planets/uranus/runtime/preparedSkySun.mjs";
-import { PREPARED_VENUS_SKY_SUN } from
-  "../planets/venus/runtime/preparedSkySun.mjs";
+const { sun: PREPARED_EARTH_SKY_SUN } = await loadObjectTestDefinition('earth');
+const { sun: PREPARED_JUPITER_SKY_SUN } = await loadObjectTestDefinition('jupiter');
+const { sun: PREPARED_MARS_SKY_SUN } = await loadObjectTestDefinition('mars');
+import PREPARED_MERCURY_SKY_SUN from "../../src/planets/mercury/prepared/sun.json" with {type: "json"};
+const { sun: PREPARED_NEPTUNE_SKY_SUN } = await loadObjectTestDefinition('neptune');
+const { sun: PREPARED_SATURN_SKY_SUN } = await loadObjectTestDefinition('saturn');
+const { sun: PREPARED_URANUS_SKY_SUN } = await loadObjectTestDefinition('uranus');
+import PREPARED_VENUS_SKY_SUN from "../../src/planets/venus/prepared/sun.json" with {type: "json"};
 import {
   DIRECTIONAL_SUN_DISTANCE_STANDARD,
   DIRECTIONAL_SUN_PRESENTATION_STANDARD,

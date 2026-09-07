@@ -8,7 +8,7 @@ import {
   projectHeliocentricView,
   validatePreparedPlanetarySystem,
 } from "./heliocentric-view.mjs";
-import { PREPARED_MERCURY_SCENE } from "../planets/mercury/runtime/preparedScene.mjs";
+import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
 
 const plan = PREPARED_MERCURY_SCENE.heliocentricView;
 const IDENTITY = Object.freeze([1, 0, 0, 0, 1, 0, 0, 0, 1]);

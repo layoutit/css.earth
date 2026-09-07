@@ -1,7 +1,8 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { runtimeDefinition as mars } from "../planets/mars/runtime/definition.mjs";
-import { runtimeDefinition as earth } from "../planets/earth/runtime/definition.mjs";
+const mars = await loadObjectTestDefinition('mars');
+const earth = await loadObjectTestDefinition('earth');
 import { preparedSelectionFixture } from "./test/object-runtime-package.mjs";
 import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mjs";
 

@@ -26,7 +26,7 @@ import {
   BODY_FIXED_ORBIT_NORMAL_DIRECTIONS,
   BODY_FIXED_SUN_DIRECTIONS,
   BODY_FIXED_TO_ICRF_MATRICES,
-  HELIOCENTRIC_ORBITS,
+  BODY_ORBITS,
   SOLAR_GEOMETRY_EPOCH_JD_TT,
   SOLAR_GEOMETRY_EPOCH_LABEL,
 } from "./solar-geometry.mjs";
@@ -119,8 +119,9 @@ export async function preparePlanetarySystem({
       typeof presentationFrame?.toPresentation !== "function" ||
       !Array.isArray(presentationFrame.basis) ||
       !positive(kilometersPerUnit) ||
-      !Array.isArray(bodies) || !bodies.includes(bodyId) ||
-      bodies.some((id) => !HELIOCENTRIC_ORBITS[id] || !(GEOMETRIC_ALBEDO[id] > 0)) ||
+      !Array.isArray(bodies) || !BODY_ORBITS[bodyId] ||
+      !BODY_FIXED_TO_ICRF_MATRICES[bodyId] ||
+      bodies.some((id) => !BODY_ORBITS[id] || !(GEOMETRIC_ALBEDO[id] > 0)) ||
       !Array.isArray(dwarfPlanets) || dwarfPlanets.some((id) => !(GEOMETRIC_ALBEDO[id] > 0)) ||
       dwarfPlanets.some((id) => bodies.includes(id))) {
     throw new TypeError("Planetary system preparation arguments are invalid.");
@@ -137,6 +138,7 @@ export async function preparePlanetarySystem({
     ZERO,
     M_PER_AU,
     M_PER_KM,
+    FRAME_EXIT_BALL_UNITS,
     BODIES,
     DWARF_PLANET_IDS,
     dwarfPlanetElements,
@@ -153,10 +155,23 @@ export async function preparePlanetarySystem({
   // Sun direction is in its own frame, its rotation takes it to ICRF.
   const heliocentricIcrfAu = (id) => {
     const toSun = applyMatrix(BODY_FIXED_TO_ICRF_MATRICES[id], BODY_FIXED_SUN_DIRECTIONS[id]);
-    return scale(toSun, -HELIOCENTRIC_ORBITS[id].heliocentricDistanceAu);
+    return scale(toSun, -BODY_ORBITS[id].heliocentricDistanceAu);
   };
 
-  // The frame tree: the Sun in au, every planet in km inside it. The tree's
+  const satelliteObserver = ![...bodies, ...dwarfPlanets].includes(bodyId);
+  const observerUnitMeters = satelliteObserver ? M_PER_KM / 10 : M_PER_KM;
+  const parent = satelliteObserver ? BODY_ORBITS[bodyId].centerBodyId : null;
+  if (satelliteObserver && !bodies.includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
+  const observerPositionKm = satelliteObserver ? scale(
+    applyMatrix(BODY_FIXED_TO_ICRF_MATRICES[bodyId], BODY_ORBITS[bodyId].centerPositionAu),
+    -ASTRONOMICAL_UNIT_KILOMETERS) : null;
+  // Enclose the moon's fixed position AND its exit ball. Keep kilometre units
+  // where they fit; wider satellite orbits require a coarser parent frame.
+  // Rounding up to whole kilometres avoids a floating-point boundary equality.
+  const parentUnitMeters = satelliteObserver ? M_PER_KM * Math.max(1, Math.ceil(
+    (magnitude(observerPositionKm) + FRAME_EXIT_BALL_UNITS * observerUnitMeters / M_PER_KM) / FRAME_EXIT_BALL_UNITS)) : M_PER_KM;
+
+  // The frame tree: the Sun in au, planets in their prepared local units. The tree's
   // own invariants (a child's exit ball inside its parent's, a body's capture
   // ball inside its own exit ball) are checked on `add`.
   const tree = new FrameTree();
@@ -165,7 +180,7 @@ export async function preparePlanetarySystem({
     tree.add(fixedFrame(
       id,
       "sun",
-      M_PER_KM,
+      id === parent ? parentUnitMeters : M_PER_KM,
       heliocentricIcrfAu(id),
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));
@@ -181,11 +196,17 @@ export async function preparePlanetarySystem({
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));
   }
+  if (satelliteObserver) {
+    // A moon uses 100 m units under its parent's prepared frame, with
+    // enough capture radius for a resolved satellite.
+    tree.add(fixedFrame(bodyId, parent, observerUnitMeters,
+      scale(observerPositionKm, M_PER_KM / parentUnitMeters), BODIES[bodyId].meanRadiusKm * M_PER_KM));
+  }
   const epoch = SOLAR_GEOMETRY_EPOCH_JD_TT;
   // ICRF offset from the observer in km, resolved through the tree: the two
   // chains meet at the Sun frame and are differenced there.
-  const resolveKilometers = (id) =>
-    tree.resolve(bodyId, { frame: id, offset: ZERO }, epoch);
+  const resolveKilometers = (id) => scale(
+    tree.resolve(bodyId, { frame: id, offset: ZERO }, epoch), observerUnitMeters / M_PER_KM);
 
   // ICRF (km, observer-relative) into the observer's presentation frame in
   // scene units. Both steps are rotations, so lengths carry over.
@@ -208,7 +229,7 @@ export async function preparePlanetarySystem({
   // about which epoch or frame they describe.
   const sunFromGeometry = scale(
     normalize(presentationFrame.toPresentation(BODY_FIXED_SUN_DIRECTIONS[bodyId])),
-    HELIOCENTRIC_ORBITS[bodyId].heliocentricDistanceAu * unitsPerAu,
+    BODY_ORBITS[bodyId].heliocentricDistanceAu * unitsPerAu,
   );
   const sunResidual = magnitude(subtract(sunPosition, sunFromGeometry));
   if (sunResidual > 1e-6 * magnitude(sunFromGeometry)) {
@@ -258,7 +279,7 @@ export async function preparePlanetarySystem({
         source: "jpl-horizons-osculating-elements-via-astronomy-package",
       };
     }
-    const orbit = HELIOCENTRIC_ORBITS[id];
+    const orbit = BODY_ORBITS[id];
     return {
       kind: "planet",
       semiMajorAxisAu: orbit.semiMajorAxisAu,
@@ -271,7 +292,7 @@ export async function preparePlanetarySystem({
       source: "vsop87a-state-vector-via-solar-geometry",
     };
   };
-  const others = [...bodies.filter((id) => id !== bodyId), ...dwarfPlanets].map((id) => {
+  const others = [...bodies, ...dwarfPlanets].filter((id) => id !== bodyId).map((id) => {
     const orbit = orbitFacts(id);
     const position = toScene(resolveKilometers(id));
     const { normal, perihelionDirection } = orbit;
@@ -401,7 +422,7 @@ export async function preparePlanetarySystem({
   // point of the outer one is farther from the Sun than every point of the
   // inner one (perihelion beyond aphelion). True of the eight planets; a
   // wrong element would break it here rather than on screen.
-  const ordered = bodies.map((id) => HELIOCENTRIC_ORBITS[id]);
+  const ordered = bodies.map((id) => BODY_ORBITS[id]);
   for (let index = 1; index < ordered.length; index += 1) {
     if (!(ordered[index].perihelionAu > ordered[index - 1].aphelionAu)) {
       throw new RangeError(
@@ -435,7 +456,7 @@ export async function preparePlanetarySystem({
     sun: Object.freeze({ position: Object.freeze(sunPosition.map(round)) }),
     bodies: Object.freeze(bodiesWithBrightness),
     planetIds: Object.freeze(bodies.filter((id) => id !== bodyId)),
-    dwarfPlanetIds: Object.freeze([...dwarfPlanets]),
+    dwarfPlanetIds: Object.freeze(dwarfPlanets.filter((id) => id !== bodyId)),
     markerBrightness: MARKER_BRIGHTNESS,
     maximumExtentUnits,
     runtimeGeometryDerivation: false,

@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "ceres",
+  "displayName": "Ceres",
+  "publicBase": "/scenes/ceres/",
+  "distanceAu": 2.77,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 32,
+    "poleSize": 512,
+    "reportMissingPixels": false,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "south-connected-black"
+        }
+      },
+      {
+        "id": "enhanced",
+        "validity": {
+          "kind": "south-connected-black"
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "geotiff",
+        "path": "science/ceres-hamo-dtm.tif",
+        "description": "Dawn stereo model · shaded relief",
+        "title": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+        "sourceUrl": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m",
+        "minimum": -30000,
+        "maximum": 20000,
+        "colors": [
+          "#253494",
+          "#2c7fb8",
+          "#41b6c4",
+          "#ffffcc",
+          "#d95f0e"
+        ],
+        "labels": [
+          "−30",
+          "−5",
+          "20"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "grid": {
+          "width": 21600,
+          "height": 10800,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 470000,
+          "noData": -32768,
+          "withholdLatitudeDegrees": 60
+        },
+        "relief": {
+          "referenceRadiusMeters": 470000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 469.7,
+    "camera": {
+      "initialScenePitchDegrees": 40,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/ceres/ceres-normal-surface@2x.webp",
+    "polesUrl": "/scenes/ceres/ceres-normal-poles@2x.webp"
+  },
+  "celestial": {
+    "sunSource": "JPL Kepler heliocentric positions with IAU/WGCCRE rotation elements"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      180,
+      180,
+      180
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

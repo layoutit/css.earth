@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selectPagePublication, selectPageFallbacks, usefulFallbacks, selectPageDemand} from './prepared-map/page-publication.mjs';
+import {selectPagePublication, selectPageFallbacks, usefulFallbacks, selectPageDemand} from "../renderers/css/dist/testing.js";
 const limits={pages:8,bytes:8*4};
 const group=(key,lineage=[key],pages=[`${key}-image`])=>({key,lineage,pages});
 const slots=(g,{published=false,ready=true}={})=>g.pages.map(key=>({key,group:g,published,ready,decodedBytes:4}));

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createDestinationClient } from "./prepared-destination-client.mjs";
+import { createDestinationClient } from "../renderers/css/dist/testing.js";
 
 class WorkerDouble extends EventTarget {
   sent = []; terminated = false;

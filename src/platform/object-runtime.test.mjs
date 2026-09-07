@@ -1,16 +1,17 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { build } from "vite";
-import { createObjectRuntime } from "./object-runtime.mjs";
+import { createObjectRuntime, preparedObjectCapabilities } from "../renderers/css/dist/index.js";
 import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
-import { createPreparedResidency } from "./prepared-residency.mjs";
-import { createPreparedPlayback } from "./prepared-playback.mjs";
+import { createPreparedResidency } from '../renderers/css/dist/testing.js';
+import { createPreparedPlayback } from '../renderers/css/dist/testing.js';
 import { createSceneLifetime } from "./scene-lifetime.mjs";
-import { createObjectSelectionRuntime } from "./object-selection-runtime.mjs";
+import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
-import { runtimeDefinition as moonDefinition } from "../planets/moon/runtime/definition.mjs";
-import { runtimeDefinition as earthDefinition } from "../planets/earth/runtime/definition.mjs";
+const moonDefinition = await loadObjectTestDefinition('moon');
+const earthDefinition = await loadObjectTestDefinition('earth');
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 class CSSAnimation {
@@ -20,7 +21,7 @@ class CSSAnimation {
 }
 function harness({ definition = moonDefinition, failAtElement = null, stageId = definition.id, runtimeFactory = createObjectRuntime } = {}, services = {}) {
   const f = retainedPresentationFixture(definition, { failAtElement });
-  const errors = [], jobs = [], events = [], native = new CSSAnimation(), created = [];
+  const errors = [], jobs = [], events = [], flights = [], native = new CSSAnimation(), created = [];
   f.document.readyState = "complete"; f.document.defaultView = {};
   f.document.querySelector = () => f.stage;
   f.stage.dataset.objectId = stageId; f.stage.getAnimations = () => [native, ...f.animations];
@@ -40,7 +41,7 @@ function harness({ definition = moonDefinition, failAtElement = null, stageId = 
     const mount = runtimeFactory(definition, {
       createLifetime() { lifetime = createSceneLifetime(); return lifetime; },
       createPlayback() { playback = createPreparedPlayback(); return playback; },
-      createControls() { return { publish(state) { if (state.committed) events.push("controls"); }, setReady() { events.push("ready"); }, destroy() {} }; },
+      createControls() { return { publish(state) { if (state?.committed) events.push("controls"); }, setReady() { events.push("ready"); }, destroy() {} }; },
       createSelection(options) { coordinator = createObjectSelectionRuntime(options); return coordinator; },
       createResources(options) {
         resourceOptions = options;
@@ -54,13 +55,15 @@ function harness({ definition = moonDefinition, failAtElement = null, stageId = 
       createOrbit(options) {
         orbitArguments = options; options.onPublish(publication);
         return { state: () => ({ ...publication, pose: { schema: "cssearth-camera-pose@1", scene: matrix, skybox: matrix, sunView: matrix } }), setState: value => Object.assign(publication, value),
-          flyToState: async () => {}, initialResponsiveZoom: () => definition.camera.defaultZoom,
+          flyToState: async (...args) => { flights.push(args); }, rebaseScene() {}, initialResponsiveZoom: () => definition.camera.defaultZoom,
           refresh: () => options.onPublish(publication),
           invalidate: () => options.onPublish(publication), destroy() { events.push("remove:orbit"); } };
       },
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...services,
     });
-    runtime = mount(f.stage, { onError: error => errors.push(error) });
+    runtime = mount(f.stage, { inputSurface: f.stage,
+      capabilities: { ...preparedObjectCapabilities, ...(services.mountPages ? { mountPages: services.mountPages } : {}) },
+      onError: error => errors.push(error) });
   } catch (error) { f.restore(); throw error; }
   async function resolveJobs() {
     for (let wave = 0; wave < 40; wave++) {
@@ -72,7 +75,7 @@ function harness({ definition = moonDefinition, failAtElement = null, stageId = 
   }
   async function complete() { await resolveJobs(); await runtime.ready; }
   function restore() { try { runtime.destroy(); } finally { f.restore(); } }
-  return { ...f, runtime, errors, jobs, events, native, created, complete, resolveJobs, restore,
+  return { ...f, runtime, errors, jobs, events, flights, native, created, complete, resolveJobs, restore,
     lifetime: () => lifetime, playback: () => playback, selection: () => coordinator,
     resources: () => resources, resourceOptions: () => resourceOptions, orbitArguments: () => orbitArguments };
 }
@@ -175,16 +178,16 @@ test("stage identity cannot mount a different existing object's prepared plan", 
 });
 test("detached native roots cannot satisfy mounted stage readiness", async t => {
   const h = harness(); t.after(h.restore);
-  const attach = h.stage.replaceChildren.bind(h.stage);
-  h.stage.replaceChildren = (...nodes) => { attach(...nodes); for (const node of nodes) node.remove(); };
+  const attach = h.stage.appendChild.bind(h.stage);
+  h.stage.appendChild = node => { attach(node); node.remove(); return node; };
   const failure = assert.rejects(h.runtime.ready, /belong to the mounted stage|retained object stage/); await h.resolveJobs(); await failure;
   assert.equal(h.resources().stats().images.entries.length, 0); assert.deepEqual(h.errors, []);
 });
 test("resource readiness contains a native shared material failure and retires the whole mount", async t => {
   const h = harness(); t.after(h.restore); await h.complete();
-  const binding = moonDefinition.viewBindings.find(binding => binding.kind === "shell-scale");
+  const binding = moonDefinition.viewBindings.find(binding => binding.kind === "silhouette-fit");
   assert.ok(binding); const target = h.created[binding.target];
-  Object.defineProperty(target.style, "scale", { configurable: true, set() { throw new Error("native material write failed"); } });
+  Object.defineProperty(target.style, "visibility", { configurable: true, set() { throw new Error("native material write failed"); } });
   assert.doesNotThrow(() => h.resourceOptions().onReady());
   assert.equal(h.errors.length, 1); assert.match(h.errors[0].message, /native material write failed/);
   assert.equal(h.resources().stats().images.entries.length, 0); assert.equal(h.native.cancels, 1);
@@ -224,4 +227,35 @@ test("partial prepared page construction retires the actual tree and all resourc
   const h = harness({ definition: earthDefinition }, { mountPages({ own }) { own(() => { cleaned = true; }); throw new Error("page construction"); } });
   t.after(h.restore); const failure = assert.rejects(h.runtime.ready, /page construction/); await h.resolveJobs(); await failure;
   assert.equal(cleaned, true); assert.equal(h.stage.children.length, 0); assert.equal(h.resources().stats().images.entries.length, 0);
+});
+
+test("destinations and optional prepared lens targets use physical surface flight while reset keeps authored framing", async t => {
+  // Earth observations now belong to entity packages. Exercise the generic
+  // optional lens navigation contract without assigning city lenses to Earth.
+  const definition=structuredClone(earthDefinition),camera={controlPitch:25,controlYaw:10,zoom:100};
+  const lensId=definition.controls.lenses.controls.find(lens=>lens.id!==definition.controls.lenses.defaultLens).id;
+  for(const variant of definition.variants)if(variant.when.lensId===lensId)variant.navigation={camera};
+  const h = harness({ definition }, { mountPages: () => ({
+    replacePlan() {}, setSuspended() {}, publish() {}, setLens() {}, setPlaying() {}, stats: () => ({}),
+  }) });
+  t.after(h.restore);
+  // This boundary test records camera requests; native conformance measures
+  // the actual geographic point through the complete browser matrix chain.
+  h.document.defaultView.DOMMatrix = class extends globalThis.DOMMatrix { inverse() { return this; } };
+  h.document.defaultView.getComputedStyle = () => ({ transform: matrix });
+  await h.complete();
+  const request = h.selection().dispatch({ kind: 'lens', id: lensId });
+  await h.resolveJobs(); assert.equal(await request, true);
+  assert.deepEqual(h.flights.at(-1), [camera, { surfaceTarget: true }]);
+  const place = { id: 'test-place', camera, coverage: 'detail', lensIds: [definition.destinations.defaultLens] };
+  const destination = h.runtime.destinations.select(place);
+  await h.resolveJobs(); await (await destination).arrival;
+  assert.deepEqual(h.flights.at(-1), [place.camera, { surfaceTarget: true }]);
+  await h.runtime.destinations.reset();
+  assert.deepEqual(h.flights.at(-1), [{
+    controlPitch: earthDefinition.camera.defaultControlPitchDegrees,
+    controlYaw: earthDefinition.camera.defaultControlYawDegrees,
+    zoom: earthDefinition.camera.defaultZoom,
+  }]);
+  assert.deepEqual(h.errors, []);
 });

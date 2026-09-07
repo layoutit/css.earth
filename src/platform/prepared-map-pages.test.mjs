@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mountPreparedMapPages } from "./prepared-map/city-pages.mjs";
+import { mountPreparedMapPages } from "../renderers/css/dist/testing.js";
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
 
 for (const failure of [null, "construction", "cleanup"]) test(`prepared map lifetime releases native pages and observers (${failure})`, () => {
@@ -22,7 +22,7 @@ for (const failure of [null, "construction", "cleanup"]) test(`prepared map life
   try {
     const mount = () => mountPreparedMapPages({ plan: { schema: "cssearth-prepared-map-pages@1", assetPath: "/scenes/earth/",
       assetOrigin: "https://earth-assets.lowpoly.cc", poolSize: 2, maximumDecodedBytes: 16,
-      decodedPageBytes: 4, rasterScale: 1, initialLayer: { frameMatrix: "", textureMatrix: "" },
+      decodedPageBytes: 4, rasterScale: 1, initialLayer: { frameMatrix: "1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1", textureMatrix: "1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1" },
       roots: [], index: { maximumDirectories: 1, maximumBytes: 1024, maximumConcurrentLoads: 1 } },
       carrier: f.stage, system: f.stage, scene: f.stage, camera: f.stage, stage: f.stage,
       className: "map-page", textureClassName: "map-texture", lensIds: ["normal"], own: f.context.own });
@@ -79,7 +79,7 @@ test("prepared pages fetch, decode and publish while unrelated metadata is pendi
   let pages;
   try {
     const bounds = { corners: [[-100,-100,0],[100,-100,0],[100,100,0],[-100,100,0]], normal: [0,0,1] };
-    const image = { ...bounds, key: "image", rasterSource: "prepared-raster@1", width: 1, height: 1,
+    const image = { ...bounds, key: "image", level: 5, rasterSource: "prepared-raster@1", width: 1, height: 1,
       bytes: pixels.length, sha256, url: `/scenes/earth/test-${sha256.slice(0,16)}.webp`,
       frameMatrix: identity.join(","), textureMatrix: identity.join(",") };
     const known = { ...bounds, key: "ready-region", level: 5, pages: [image.key], children: [], maximumCssSpan: 384 };
@@ -133,7 +133,7 @@ for(const mode of ['complete','fallback-failure','reversal']) test(`mounted ance
   const bounds={corners:[[-100,-100,0],[100,-100,0],[100,100,0],[-100,100,0]],normal:[0,0,1]};
   const keys=['parent','a','b','c','d'],records=keys.flatMap((key,i)=>[
     {...bounds,key,level:i?6:5,children:i?[]:keys.slice(1),pages:[key+'-image'],maximumCssSpan:i?384:1},
-    {...bounds,key:key+'-image',width:1,height:1,url:'/scenes/earth/'+key+'.webp',frameMatrix:identity.join(','),textureMatrix:identity.join(',')}
+    {...bounds,key:key+'-image',level:i?6:5,width:1,height:1,url:'/scenes/earth/'+key+'.webp',frameMatrix:identity.join(','),textureMatrix:identity.join(',')}
   ]);
   const body=Buffer.from(JSON.stringify({schema:'cssearth-city-index@1',dataset:'test',nodes:records,external:[]}));
   const hash=createHash('sha256').update(body).digest('hex');

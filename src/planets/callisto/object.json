@@ -1,0 +1,108 @@
+{
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "84b7e7a196bad869bb34a2cf634cdbcbd25813a6c1a7f6aaa905876a3b352811"
+  },
+  "id": "callisto",
+  "properties": {
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -495895143655.1052,
+        561740714739.1378,
+        252881799436.10452
+      ],
+      "presentationToReference": [
+        -0.6270924887078226,
+        1.0408340855860843e-17,
+        -0.7789448058792288,
+        0.7146678867361534,
+        0.3977771559319137,
+        -0.5753461096477483,
+        0.30984644951057627,
+        -0.9174820620691818,
+        -0.2494430666644635
+      ],
+      "orbitUpReference": [
+        -1.0408340855860843e-17,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 10479.565217391304,
+      "bodyRadiusM": 2410300
+    },
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Callisto",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2410.3
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "d437635e5b0f16f5c8f10458f89becb380616a97805a1e7c1ba0b088b408983e"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "e9284222caa8b1269973294f17790804d3d931187bc7a9479a1d080c0e063b75"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "21dc4663b57b1fc34278f405e23e70d0869ed510a9e3ef1a76b4b89e1ab32847"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "07bc4bcf33c4aeea29bdc791545be5e52f852884848b2eea2c78671d275d99b8"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "a210414d15be18834f204fd9fcedfa8c71485b6b83f0d0af136b114e1c2767fb"
+        }
+      ]
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
+}

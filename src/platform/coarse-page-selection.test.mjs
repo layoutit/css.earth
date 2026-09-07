@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {selectCityPages} from './prepared-map/city-page-selection.mjs';
-import {selectPagePublication,selectPageDemand} from './prepared-map/page-publication.mjs';
-import {createCityIndex} from './prepared-map/city-index.mjs';
+import {selectCityPages} from "../renderers/css/dist/testing.js";
+import {selectPagePublication,selectPageDemand} from "../renderers/css/dist/testing.js";
+import {createCityIndex} from "../renderers/css/dist/testing.js";
 
 const corners=[[-50,-50,0],[50,-50,0],[50,50,0],[-50,50,0]],normal=[0,0,1];
 const matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],viewport={width:800,height:600,zoom:16};
@@ -116,4 +116,54 @@ test('unknown backing children retain a covering parent without suppressing unre
  const result=selectCityPages({...plan,roots:[root],backing:{roots:[parent]},poolSize:10},pages,matrix,1,viewport);
  assert.deepEqual(result.keys,[parent.key,...root.pages]);
  assert.ok(result.directories.includes(ref));
+});
+
+for(const bound of ['pieces','bytes'])test(`backing uses capacity released by a complete fine fallback under ${bound} pressure`,()=>{
+ const capChildren=Array.from({length:4},(_,i)=>({...backing,key:`cap-child-${i}`,level:1,
+   corners:corners.map(([x,y,z])=>[x/4+(i>1?2000:0),y/4,z])}));
+ const cap={...backing,key:'cap',maximumCssSpan:1,children:capChildren.map(p=>p.key)};
+ const parentPieces=Array.from({length:5},(_,i)=>({...piece,key:`parent-piece-${i}`}));
+ const childPieces=Array.from({length:8},(_,i)=>({...piece,key:`child-piece-${i}`}));
+ const childTiles=Array.from({length:4},(_,i)=>({...tile,key:`child-tile-${i}`,level:6,
+   pages:childPieces.slice(i*2,i*2+2).map(p=>p.key)}));
+ const root={...tile,key:'root',maximumCssSpan:60,pages:parentPieces.map(p=>p.key),children:childTiles.map(p=>p.key)};
+ const pages=new Map([cap,...capChildren,root,...parentPieces,...childTiles,...childPieces].map(p=>[p.key,p]));
+ const cut={...plan,roots:[root],backing:{roots:[cap]},poolSize:bound==='pieces'?16:24,
+   maximumDecodedBytes:bound==='bytes'?2*8*256*256*4:8*1024**2};
+ const fineOnly=selectCityPages({...cut,backing:undefined},pages,matrix,1,viewport);
+ assert.deepEqual(fineOnly.keys,childPieces.map(p=>p.key),'The initial fine cut fills its available allowance');
+ const result=selectCityPages(cut,pages,matrix,1,viewport);
+ assert.deepEqual(result.groups.filter(g=>!g.backing).flatMap(g=>g.pages),parentPieces.map(p=>p.key),
+   'Keep the same complete fine fallback while improving backing');
+ assert.deepEqual(result.groups.filter(g=>g.backing).map(g=>g.key),capChildren.slice(0,2).map(p=>p.key),
+   'Reconsider backing refinement against the final fine cut');
+ assert.ok(result.keys.length<=cut.poolSize/2);
+ assert.ok(result.keys.reduce((sum,key)=>sum+pages.get(key).width*pages.get(key).height*4,0)<=cut.maximumDecodedBytes/2);
+});
+
+for(const bound of ['pieces','bytes'])test(`optional fine refinement leaves room for still-visible backing under ${bound} pressure`,()=>{
+ const capChildren=Array.from({length:4},(_,i)=>({...backing,key:`cap-child-${i}`,level:1,width:256,height:256,
+   corners:corners.map(([x,y,z])=>[x/4+(i>1?2000:0),y/4,z])}));
+ const cap={...backing,key:'cap',width:256,height:256,maximumCssSpan:25,children:capChildren.map(p=>p.key)};
+ const pages=new Map([cap,...capChildren].map(p=>[p.key,p]));
+ const roots=Array.from({length:3},(_,r)=>{
+   const own=Array.from({length:2},(_,i)=>({...piece,key:`own-${r}-${i}`}));
+   const children=Array.from({length:4},(_,i)=>{
+     const image={...piece,key:`child-image-${r}-${i}`};pages.set(image.key,image);
+     return {...tile,key:`child-tile-${r}-${i}`,pages:[image.key]};
+   });
+   const root={...tile,key:`root-${r}`,maximumCssSpan:60,pages:own.map(p=>p.key),children:children.map(p=>p.key)};
+   for(const p of [...own,...children,root])pages.set(p.key,p);
+   return root;
+ });
+ const cut={...plan,roots,backing:{roots:[cap]},poolSize:bound==='pieces'?18:40,
+   maximumDecodedBytes:bound==='bytes'?2*9*256*256*4:8*1024**2};
+ const standalone=selectCityPages({...cut,backing:undefined},pages,matrix,1,viewport);
+ assert.equal(standalone.keys.length,8,'Fine selection uses its spare capacity without backing');
+ const result=selectCityPages(cut,pages,matrix,1,viewport);
+ assert.deepEqual(result.groups.filter(g=>g.backing).map(g=>g.key),capChildren.slice(0,2).map(p=>p.key));
+ assert.deepEqual(new Set(result.groups.filter(g=>!g.backing).flatMap(g=>g.pages)),new Set(roots.flatMap(p=>p.pages)),
+   'Keep the complete fine cut before optional refinement, with room for visible backing');
+ assert.ok(result.keys.length<=cut.poolSize/2);
+ assert.ok(result.keys.reduce((sum,key)=>sum+pages.get(key).width*pages.get(key).height*4,0)<=cut.maximumDecodedBytes/2);
 });

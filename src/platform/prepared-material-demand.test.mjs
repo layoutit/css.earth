@@ -1,12 +1,15 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
-import { createPreparedMaterialPublisher, preparedMaterialAddress, preparedMaterialFrame, preparedMaterialState } from "./prepared-material.mjs";
-import { resolvePreparedMaterialDemand } from "./prepared-material-demand.mjs";
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
-import { PREPARED_JUPITER_LIGHTING as lighting } from "../planets/jupiter/runtime/preparedLighting.mjs";
+import { createPreparedMaterialPublisher, preparedMaterialAddress, preparedMaterialFrame, preparedMaterialState } from '../renderers/css/dist/testing.js';
+import { resolvePreparedMaterialDemand } from '../renderers/css/dist/testing.js';
+import materialSource from '../planets/jupiter/source/preparation/materials.json' with {type:'json'};
+import {prepareNormalizedDiscAddresses} from '../../tools/objects/giant-layers/normalized-disc-presentation.mjs';
+const lighting=prepareNormalizedDiscAddresses(materialSource);
 
-const definitions = await Promise.all(OBJECTS.map(async ({id}) => (await import(`../planets/${id}/runtime/definition.mjs`)).runtimeDefinition));
+const definitions = await Promise.all(OBJECTS.map(({id}) => loadObjectTestDefinition(id)));
 const view = z => ({ sunViewDirection: [Math.sqrt(1-z*z), 0, z], sceneMatrix: "moved",
   reference: { sunViewDirection: [0, 0, 1], sceneMatrix: "initial" } });
 

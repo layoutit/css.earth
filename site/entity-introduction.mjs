@@ -27,6 +27,7 @@ export function createEntityIntroductionSource({ fetcher = globalThis.fetch, now
       if (!identifiers) return null;
       const geonames = /^\d+$/u.test(identifiers.geonames ?? "") ? identifiers.geonames : null;
       let wikidata = /^Q[1-9]\d*$/u.test(identifiers.wikidata ?? "") ? identifiers.wikidata : null;
+      const preparedWikidata = wikidata !== null;
       if (!geonames && !wikidata) return null;
       const key = JSON.stringify([wikidata, geonames]);
       const existing = cache.get(key);
@@ -42,7 +43,11 @@ export function createEntityIntroductionSource({ fetcher = globalThis.fetch, now
       const result = await get(api("www.wikidata.org", { action: "wbgetentities", ids: wikidata,
         props: "claims|sitelinks", sitefilter: "enwiki" }), requestSignal);
       const entity = result.entities?.[wikidata];
-      if (entity?.id !== wikidata || (geonames && !entity.claims?.P1566?.some(claim =>
+      // A source-supplied Wikidata link is already bound to the prepared entity.
+      // Administrative and settlement records can share that article while
+      // Wikidata lists only the settlement's GeoNames ID. A discovered link
+      // still has to prove the exact GeoNames claim used to find it.
+      if (entity?.id !== wikidata || (!preparedWikidata && geonames && !entity.claims?.P1566?.some(claim =>
         claim.rank !== "deprecated" && claim.mainsnak?.datavalue?.value === geonames))) return null;
       const title = entity.sitelinks?.enwiki?.title;
       if (!title) return null;
@@ -59,6 +64,7 @@ export function createEntityIntroductionSource({ fetcher = globalThis.fetch, now
       const value = Object.freeze({
         text: page.extract,
         source: Object.freeze({ wikidata, geonames, pageId: page.pageid, revision: page.lastrevid,
+          identityMethod: preparedWikidata ? "prepared-wikidata" : "geonames-claim",
           title: page.title, url: article.href, retrievedAt: new Date(now()).toISOString(),
           license: "CC BY-SA 4.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" }),
         resources: [

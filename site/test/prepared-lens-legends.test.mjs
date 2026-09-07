@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { loadObjectContent } from "./load-object-content.mjs";
+import { prepareObjectContent } from "../../tools/objects/dist/content/prepare.js";
 import test from "node:test";
 import { OBJECTS } from "../objects.mjs";
 
@@ -56,14 +58,15 @@ test("rejects invalid scale palettes", () => {
 
 test("every object forwards its object-owned legend through the shared shell", async () => {
   await Promise.all(OBJECTS.map(async ({ id }) => {
-    const [{ objectControls: controls }, { objectControls: source }] = await Promise.all([
-      import(`../../src/planets/${id}/site/control-content.mjs`),
-      import(`../../src/planets/${id}/site/control-content.source.mjs`),
-    ]);
+    const loaded = await loadObjectContent(id);
+    const source = await loaded.source("content");
+    const controls = source.schema === "cssearth-static-surface-content@1"
+      ? source.controls : prepareObjectContent(source);
+    const legends = lenses => lenses.controls.map(({ id, legend }) => ({ id, legend }));
     assert.deepEqual(
-      controls.lenses.controls.map(({ id, legend }) => ({ id, legend })),
-      source.lenses.controls.map(({ id, legend }) => ({ id, legend })),
-      `${id} must forward every object-owned prepared legend`,
+      JSON.parse(JSON.stringify(legends(loaded.object.data.controls.lenses))),
+      JSON.parse(JSON.stringify(legends(controls.lenses))),
+      id + " must forward every source-derived legend, including colors and ranges",
     );
   }));
 });

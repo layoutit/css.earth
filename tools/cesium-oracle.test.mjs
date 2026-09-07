@@ -11,7 +11,7 @@ import { imageFixture } from './cesium-oracle/network.mjs';
 
 test('oracle observation hooks match the current owner and fail on source drift',async()=>{
   for(const name of ['city-pages','city-index','api-image-transport']){
-    const url=new URL(`../src/platform/prepared-map/${name}.mjs`,import.meta.url),source=await readFile(url,'utf8');
+    const url=new URL(`../src/renderers/css/paging/${name}.ts`,import.meta.url),source=await readFile(url,'utf8');
     assert.notEqual(instrumentCss(source,url.pathname),source);
     assert.throws(()=>instrumentCss(source+source,url.pathname),/hook drift/);
   }
@@ -36,6 +36,15 @@ test('rotating the source camera cannot alter its lens or manufacture a roll',()
     assert.ok(Math.abs(frame.up[0]-1)+Math.abs(frame.up[1])+Math.abs(frame.up[2])<1e-10);
     assert.ok(Math.abs(frame.direction.reduce((sum,v,i)=>sum+v*frame.up[i],0))<1e-12);
   }
+});
+
+test('physical camera observation preserves its actual eye and focal length',()=>{
+  const definition={perspective:1000000,bodyRadius:10,ecefToBody:[[1,0,0],[0,1,0],[0,0,1]]};
+  const projection=[2,0,0,0,0,2,0,0,0,0,2,0,2,-4,-60,1];
+  const frame=referenceCameraFrame({projection,scale:1,viewport:{projection:{focalPixels:800,principalOffsetPixels:[35,-12]}}},definition,-40);
+  assert.deepEqual(frame.positionBodyRadii,[-.1,.2,3]);
+  assert.ok(frame.direction.every((value,index)=>Math.abs(value-[0,0,-1][index])<1e-12));
+  assert.equal(frame.distanceBodyRadii,2);assert.equal(frame.focalPixels,800);
 });
 
 test('generated timeline is executable JavaScript and retains incomplete captures',async()=>{

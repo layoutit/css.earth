@@ -1,0 +1,161 @@
+{
+  "schema": "csscallisto-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "usgs-voyager-galileo-global-1km",
+      "path": "callisto-global-1km.tif",
+      "expectedBytes": 114640717,
+      "expectedSha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
+      "credit": "NASA/JPL/USGS",
+      "license": "Public USGS scientific imagery; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Download the published GeoTIFF and verify its pinned bytes before preparation.",
+      "redistribution": "Reacquirable source binary excluded from Git; prepared textures retain credits.",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 15138,
+      "height": 7569,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2409300.0488
+      },
+      "coverage": "GeoTIFF GDAL_NODATA=0. Missing pixels and resampled boundaries receive the shared gray cartographic grid. USGS source resolution ranges from 400 m to 60 km per pixel; low-resolution observed fill remains observed data.",
+      "photometry": "USGS Lunar-Lambert normalization with empirical parameters and linear overlap matching; photographed relief and residual seams remain."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Run node src/planets/callisto/tools/acquire.mjs to download the official 6000 by 3000 ESO original and verify its exact bytes before publication.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Pinned shared shell title font.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "path": "system/jupiter-hubble.png",
+      "expectedBytes": 1166501,
+      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
+      "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
+      "credit": "NASA, ESA, STScI, and Amy Simon",
+      "license": "NASA media usage guidelines and credited partner rights",
+      "id": "jupiter-hubble-parent",
+      "bodyId": "jupiter",
+      "consumers": [
+        "parent-marker"
+      ],
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter\u2019s navigation recipe.",
+      "redistribution": "Credited prepared observational image; source binary excluded from Git."
+    },
+    {
+      "id": "callisto-surface-minimap-frame",
+      "path": "presentation/surface-map.json",
+      "expectedBytes": 155,
+      "expectedSha256": "a3f124900fc2f62dc6d3b76ead7962907ae909c5203e3104950fe56368befde5",
+      "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
+      "credit": "cssEarth contributors",
+      "license": "Repository-authored presentation metadata",
+      "acquisition": "Copied the surface selector and texture longitude/latitude axes from this object package",
+      "redistribution": "Repository-authored numeric axes and CSS selector; no imagery",
+      "consumers": [
+        "lenses",
+        "presentation"
+      ]
+    }
+  ],
+  "generatedIntermediates": [],
+  "documents": [
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "89c25f19bea74aed2e06d654b503d0c0b937b8d9d8a3edca31a28c37df5dcc93",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Shared astrometric sky source and licensing."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2165,
+      "expectedSha256": "d437635e5b0f16f5c8f10458f89becb380616a97805a1e7c1ba0b088b408983e",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 7426,
+      "expectedSha256": "e9284222caa8b1269973294f17790804d3d931187bc7a9479a1d080c0e063b75",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4130,
+      "expectedSha256": "21dc4663b57b1fc34278f405e23e70d0869ed510a9e3ef1a76b4b89e1ab32847",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1943,
+      "expectedSha256": "07bc4bcf33c4aeea29bdc791545be5e52f852884848b2eea2c78671d275d99b8",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 971,
+      "expectedSha256": "a210414d15be18834f204fd9fcedfa8c71485b6b83f0d0af136b114e1c2767fb",
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+    }
+  ]
+}

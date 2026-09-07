@@ -598,12 +598,6 @@
   ],
   "generatedIntermediates": [
     {
-      "path": "presentation/title-mark.mjs",
-      "expectedSha256": "09a320559134c615bff94243a0bc316814f9e612fec424f400e3d40115a270a6",
-      "expectedBytes": 2649,
-      "generator": "tools/prepare-planet-title-sources.mjs"
-    },
-    {
       "path": "moon/earth-moon.json",
       "expectedSha256": "3c0097bcf6b166cb0ba2d03c3cc290902983e448baf82eb64e60d25257cd6d4f",
       "expectedBytes": 745,
@@ -697,8 +691,8 @@
     },
     {
       "path": "observations.json",
-      "expectedSha256": "23d0b55ed34f3e9fde62ddcbacb7f0e22952e101044c4c34b1c11383ebee2179",
-      "expectedBytes": 1467,
+      "expectedSha256": "f19a30ecbc488713a00d62a8d441a9989a6ec89e362befad1a0a5c1c254d7198",
+      "expectedBytes": 867,
       "purpose": "Prepared observation package inventory and explicit card ownership; source extent and entity parentage do not grant lenses"
     },
     {
@@ -706,6 +700,66 @@
       "purpose": "Dated 64-tile overview source receipt, cache response headers and exact aggregate identity",
       "expectedBytes": 11461,
       "expectedSha256": "d11418c60012636508cfdb89d21f19cf7402cf05ea083823cc1264a88d6aa144"
+    },
+    {
+      "path": "preparation/paged-ellipsoid.json",
+      "expectedBytes": 6895,
+      "expectedSha256": "62ae5d1954af494489b3fa0ef6fcd6eec8fad62cd8c2e46a9d6b0eba95cdfc54",
+      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+    },
+    {
+      "path": "preparation/celestial.json",
+      "expectedBytes": 120,
+      "expectedSha256": "3e6925a3c4ed5209a8ed6c3f6286ef807bd8afccdd5946db3cc80ed6ab634e0d",
+      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 9371,
+      "expectedSha256": "216a0a611d08609793decaf90cafb592ffebd1a405cc9cdc52d90cc3c75566e0",
+      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+    },
+    {
+      "path": "content/lens-bindings.json",
+      "expectedBytes": 2117,
+      "expectedSha256": "19567369d492595a583163c699c53898a5f8a5a22d75a3c02f065df38d202e35",
+      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+    },
+    {
+      "path": "content/charts.json",
+      "expectedBytes": 3429,
+      "expectedSha256": "521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa",
+      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2587,
+      "expectedSha256": "72515c37abfd6e66e8cdac6eef3fa85ca2d42c137ba91b6b6f5c670226398cf9",
+      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+    },
+    {
+      "path": "editorial/earth.json",
+      "expectedBytes": 10001,
+      "expectedSha256": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d",
+      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 804,
+      "expectedSha256": "cd076c0f57ea34fc244b4cda0cb83d8c21c39488501d0aee7f8b5d91803593e2",
+      "purpose": "Source-owned navigation marker recipe consumed by shared navigation preparation."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 20651,
+      "expectedSha256": "23257f353d3af2e8c445a00e160b59add4a9b3266206b031d01e4646d7b3ac8d",
+      "purpose": "Authored source acquisition and exact pinned derived-record restoration."
+    },
+    {
+      "path": "city/coarse-release.json",
+      "expectedBytes": 248911,
+      "expectedSha256": "88538eb7bb3a4b113d169c699b88b00c51fd8f0d42030c1db4dc67ce59a5513f",
+      "purpose": "Verified global coarse imagery binding, source release identity and exact fine geometry compatibility."
     }
   ]
 }

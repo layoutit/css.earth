@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-source-notes@1",
+  "normal": {
+    "url": "https://astrogeology.usgs.gov/search/map/iapetus_cassini_voyager_global_mosaic_803m",
+    "edition": "May 2008",
+    "filenameResolution": "The upstream filename says 783m; the catalog and actual GeoTIFF geotransform establish 802.85145591739 m/pixel.",
+    "coordinates": "North up; center longitude 0, positive raster easting. Roll the 180 E left edge by half a width to 0–360 E, never mirror. USGS already applied the stated 4.5-degree westward IAU correction; do not apply it again.",
+    "noData": 0
+  },
+  "enhanced": {
+    "url": "https://www.jpl.nasa.gov/images/pia18436-color-maps-of-iapetus-2014/",
+    "published": "2014-11-04",
+    "coordinates": "North up, 0 E left edge. The bright trailing hemisphere is centered near 90 E; dark Cassini Regio is centered near 270 E. Compared matching crater/ridge and boundary patterns with the rolled monochrome source.",
+    "processing": "Published calibration, registration and photometric correction by Paul Schenk. Preserve intrinsic hemisphere albedo and color, including very dark pixels. No new brightness matching or photographic shadow removal."
+  },
+  "shape": {
+    "renderingSphereKm": 734.5,
+    "source": "packages/astronomy/src/bodies.ts, NAIF 608",
+    "monochromeCartographicRadiusKm": 736,
+    "nasaFactRadiusKm": 736,
+    "limitations": "Spherical rendering approximation. Iapetus has an oblate figure and a prominent equatorial ridge; the observed ridge remains in the imagery, not in displaced geometry."
+  },
+  "terrain": {
+    "included": false,
+    "reason": "No directly downloadable qualified height raster found. The current PDS Cassini SPC archive has no Iapetus bundle; the 2025 author abstract describes Iapetus as forthcoming. The USGS foundational inventory lists older Cassini stereo topography as unreleased. Do not derive elevation from image brightness.",
+    "archive": "https://sbnarchive.psi.edu/pds4/cassini/",
+    "authorAbstract": "https://meetingorganizer.copernicus.org/EPSC-DPS2025/EPSC-DPS2025-115.html",
+    "inventory": "https://fdp.astrogeology.usgs.gov/fdp/saturn/"
+  },
+  "facts": {
+    "url": "https://science.nasa.gov/saturn/moons/iapetus/",
+    "albedo": "NASA reports leading hemisphere albedo 0.03–0.05 versus trailing 0.5–0.6. The contrast is physical surface reflectivity, not no-data.",
+    "atmosphere": "No visible atmosphere layer is included."
+  },
+  "landmarks": {
+    "cassiniRegio": {
+      "latitude": -28.1,
+      "longitudeWest": 92.6,
+      "longitudeEast": 267.4,
+      "url": "https://planetarynames.wr.usgs.gov/Feature/1047"
+    },
+    "carcassoneMontes": {
+      "latitude": 0,
+      "longitudeWest": 216.7,
+      "longitudeEast": 143.3,
+      "url": "https://planetarynames.wr.usgs.gov/SearchResults?Feature+Type=27_Mons,+montes&Target=76_Iapetus"
+    },
+    "engelier": {
+      "latitude": -40.5,
+      "longitudeWest": 264.7,
+      "longitudeEast": 95.3,
+      "url": "https://planetarynames.wr.usgs.gov/SearchResults?Target=76_Iapetus"
+    },
+    "almeric": {
+      "latitude": 53.4,
+      "longitudeWest": 276,
+      "longitudeEast": 84,
+      "url": "https://planetarynames.wr.usgs.gov/SearchResults?Target=76_Iapetus"
+    }
+  }
+}

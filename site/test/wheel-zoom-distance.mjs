@@ -68,7 +68,10 @@ export async function proveWheelZoomDistance(page, planet, profile) {
 
 async function proveWheelDollyDistance(page, planet, profile, dolly, original, bounds) {
   const results = [];
-  const distance = () => page.evaluate(id => window[`__${id}`].camera.state().distance, planet.id);
+  const distance = () => page.evaluate(({ id, origin }) => {
+    const state = window[`__${id}`].camera.state();
+    return origin === 'surface' ? state.distance * (1 - 1 / state.distanceRadii) : state.distance;
+  }, { id: planet.id, origin: dolly.distanceOrigin });
   try {
     for (const [name, deltas, kind] of [["wheel-notch", [-100], "wheel"],
       ["trackpad-stream", Array(20).fill(-5), "trackpad"],

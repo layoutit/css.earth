@@ -93,12 +93,13 @@ test("a single supplied lens keeps interaction proof without inventing a race", 
   assert.equal(validatePlanetBrowserProfile(object, candidate, single).objectControls, single);
 });
 
-test("all current objects retain their complete lens and speed browser evidence", async () => {
+test("all objects retain browser evidence for the controls they support", async () => {
   for (const object of OBJECTS) {
     const current = await loadPlanetBrowserProfile(object);
-    assert.ok(current.objectControls.lenses.controls.length > 1, object.id);
-    assert.ok(current.objectControls.settings.controls.some(({ name }) => name === "speed"), object.id);
-    assert.equal(current.audit.retained.speedClicks, 5, object.id);
-    assert.deepEqual(new Set(current.audit.retained.lensIds), new Set(current.objectControls.lenses.controls.map(({ id }) => id)), object.id);
+    if (current.objectControls.settings?.controls.some(({ name }) => name === "speed")) {
+      assert.equal(current.audit.retained.speedClicks, 5, object.id);
+    }
+    assert.deepEqual(new Set(current.audit.retained.lensIds ?? []),
+      new Set(current.objectControls.lenses?.controls.map(({ id }) => id) ?? []), object.id);
   }
 });

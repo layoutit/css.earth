@@ -1,7 +1,22 @@
 import { isObjectBrowserProfile } from "./object-browser-profile.mjs";
 import assert from "node:assert/strict";
+import { readFile } from 'node:fs/promises';
+import { authoredObject } from '../../tools/authored-object.mjs';
 
 export async function loadPlanetBrowserProfile(planet) {
+  if (await authoredObject(planet.id)) {
+    const { browserProfile } = await import(new URL(`../../tests/objects/browser/${planet.id}/browser-profile.mjs`, import.meta.url).href);
+    assert.ok(isObjectBrowserProfile(browserProfile), `${planet.id}: profile must use the common browser-profile factory`);
+    const { default: controls } = await import(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url).href, {with: {type: 'json'}});
+    assert.deepEqual(browserProfile.objectControls, controls, `${planet.id}: browser profile must use prepared JSON controls`);
+    const definition = JSON.parse(await readFile(new URL(`../../src/planets/${planet.id}/prepared/runtime.json`, import.meta.url), 'utf8'));
+    const validated = validatePlanetBrowserProfile(planet, browserProfile, controls, definition.destinations?.rootEntity?.lensIds);
+    const preparedRemoteRoots = [...new Set((definition.pageLayers ?? []).flatMap(({ plan }) =>
+      [plan.assetOrigin, plan.geometryOrigin].filter(Boolean)
+        .map(origin => new URL(`/scenes/${planet.id}/`, origin).href)))];
+    return Object.freeze({ ...validated, preparedRemoteRoots, dormantSkyAssets: definition.sky.faces.flatMap(face =>
+      [face.url, face.url2x, face.highContrastUrl, face.highContrastUrl2x]) });
+  }
   const { objectControls } = await import(new URL(
     `../../src/planets/${planet.id}/site/control-content.mjs`, import.meta.url,
   ).href);
@@ -15,12 +30,15 @@ export async function loadPlanetBrowserProfile(planet) {
   return validatePlanetBrowserProfile(planet, browserProfile, objectControls);
 }
 
-export function validatePlanetBrowserProfile(planet, browserProfile, objectControls) {
+export function validatePlanetBrowserProfile(planet, browserProfile, objectControls, rootLensIds) {
   assert.equal(browserProfile?.id, planet.id,
     `${planet.id}: browser profile identity must match its object package`);
   assert.equal(typeof browserProfile.inputSelector, "string",
     `${planet.id}: browser profile must provide inputSelector`);
   const lensIds = objectControls.lenses?.controls.map(({ id }) => id) ?? [];
+  rootLensIds ??= lensIds;
+  assert.ok(Array.isArray(rootLensIds) && rootLensIds.every(id => lensIds.includes(id)),
+    `${planet.id}: root lenses must come from the prepared controls`);
   assert.ok(browserProfile.audit && typeof browserProfile.audit === "object",
     `${planet.id}: browser profile must provide audit expectations`);
   assert.ok(Array.isArray(browserProfile.audit.preparedAssetPairs) &&
@@ -30,13 +48,13 @@ export function validatePlanetBrowserProfile(planet, browserProfile, objectContr
       typeof two === "string" && two.startsWith("/")),
   `${planet.id}: browser profile must provide prepared asset pairs`);
   const race = browserProfile.audit.lensRace;
-  if (lensIds.length > 1) assert.ok(race &&
+  if (rootLensIds.length > 1) assert.ok(race &&
     [race.defaultId, race.slowId, race.winnerId, race.slowAsset].every(
       (value) => typeof value === "string" && value.length > 0,
     ) &&
     typeof race.preReadyDisabled === "boolean" &&
     race.defaultId === objectControls.lenses.defaultLens &&
-    [race.defaultId, race.slowId, race.winnerId].every((id) => lensIds.includes(id)) &&
+    [race.defaultId, race.slowId, race.winnerId].every((id) => rootLensIds.includes(id)) &&
     race.slowId !== race.defaultId && race.slowId !== race.winnerId &&
     race.slowAsset.startsWith(`/scenes/${planet.id}/`),
   `${planet.id}: browser profile must provide lens race evidence inputs`);
@@ -53,7 +71,7 @@ export function validatePlanetBrowserProfile(planet, browserProfile, objectContr
     retained.allowedMountSelectors.every((selector) =>
       typeof selector === "string" && selector.startsWith(".")),
   `${planet.id}: browser profile must declare retained interaction evidence`);
-  return Object.freeze({ ...browserProfile, objectControls });
+  return Object.freeze({ ...browserProfile, objectControls, rootLensIds });
 }
 
 export async function assertRenderedObjectControls(page, profile) {

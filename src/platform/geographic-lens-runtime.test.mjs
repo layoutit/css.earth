@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { createGeographicLensRuntime } from "./geographic-lens-runtime.mjs";
-import { requireGeographicLensPackage } from "./geographic-lens-contract.mjs";
-import { preparedEntityLenses, requireGeographicScope } from "./geographic-lens-applicability.mjs";
-import { PREPARED_GEOGRAPHIC_LENSES } from "../planets/earth/runtime/preparedGeographicLenses.mjs";
-import { runtimeDefinition } from "../planets/earth/runtime/definition.mjs";
+import { createGeographicLensRuntime } from "../renderers/css/dist/testing.js";
+import { requireGeographicLensPackage, requireGeographicScope } from "../renderers/css/dist/testing.js";
+import { preparedEntityLenses } from "./geographic-lens-applicability.mjs";
+const {inventory: PREPARED_GEOGRAPHIC_LENSES} = JSON.parse(await readFile(new URL("../planets/earth/prepared/geographic-lenses.json", import.meta.url)));
+const runtimeDefinition = JSON.parse(await readFile(new URL("../planets/earth/prepared/runtime.json", import.meta.url)));
 
 const descriptor = PREPARED_GEOGRAPHIC_LENSES[0].lens;
 const bytes = await readFile(new URL(`../../public${descriptor.package.url}`, import.meta.url));

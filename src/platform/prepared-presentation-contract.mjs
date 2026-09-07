@@ -141,7 +141,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       }
     }
     if (track.rotation !== null) {
-      record(track.rotation, "rotation", ["kind", "reference", "baseDegrees", "zeroAtPole", "property", "width", "height", "projection", "polePolicy", "systemTransform", "onlyWhenEnabled", "publishWithAddress"]);
+      record(track.rotation, "rotation", ["kind", "reference", "baseDegrees", "zeroAtPole", "property", "width", "height", "projection", "polePolicy", "systemTransform", "onlyWhenEnabled", "publishWithAddress", "physical"]);
       choice(track.rotation.kind, new Set(["angle", "planar", "ellipsoid"]), "rotation kind");
       choice(track.rotation.reference, new Set(["prepared", "initial"]), "rotation reference");
       finite(track.rotation.baseDegrees, "rotation base");
@@ -152,6 +152,13 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       if (track.rotation.kind === "angle") string(track.rotation.property, "angle property");
       else { finite(track.rotation.width, "rotation width"); finite(track.rotation.height, "rotation height"); if (track.rotation.width <= 0 || track.rotation.height <= 0) fail("rotation size must be positive"); }
       if (track.rotation.kind === "ellipsoid") projection(track.rotation.projection);
+      if(track.rotation.physical!==undefined){
+        const physical=track.rotation.physical;
+        record(physical,"physical material projection",["width","height","systemTransform","projection"]);
+        finite(physical.width,"physical material width");finite(physical.height,"physical material height");
+        if(!(physical.width>0)||!(physical.height>0))fail("physical material size must be positive");
+        string(physical.systemTransform,"physical material system transform");projection(physical.projection);
+      }
     }
     if (track.frameAttribute !== null) attribute(track.frameAttribute);
     if (track.modeAttribute !== null) attribute(track.modeAttribute);
@@ -175,12 +182,19 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   }
   function matrix(values, label) { if (!Array.isArray(values) || values.length !== 16 || !values.every(Number.isFinite)) fail(`${label} must be a finite prepared matrix`); }
   function projection(value) {
-    record(value, "ellipsoid projection", ["equatorialRadius", "polarRadius", "coverageScale", "bodySystemMatrix", "bodyMeshMatrix", "materialSystemMatrix", "materialMeshMatrix", "baseProjection", "centerTranslation", "inverseCenterTranslation", "counterPrecision", "counterFractionDigits", "counterFractionScale"]);
+    record(value, "ellipsoid projection", ["equatorialRadius", "polarRadius", "coverageScale", "bodySystemMatrix", "bodyMeshMatrix", "materialSystemMatrix", "materialMeshMatrix", "baseProjection", "centerTranslation", "inverseCenterTranslation", "counterPrecision", "counterFractionDigits", "counterFractionScale","textureEllipse"]);
     for (const key of ["equatorialRadius", "polarRadius", "coverageScale"]) if (!(value[key] > 0)) fail(`projection ${key} must be positive`);
     if(value.counterPrecision!==undefined&&(!Number.isInteger(value.counterPrecision)||value.counterPrecision<1||value.counterPrecision>16))fail("projection counter precision must be bounded");
     if(value.counterFractionDigits!==undefined&&(!Number.isInteger(value.counterFractionDigits)||value.counterFractionDigits<1||value.counterFractionDigits>16||!Number.isFinite(value.counterFractionScale)||value.counterFractionScale<=0||value.counterPrecision===undefined))fail("projection fractional precision must be bounded");
     if(value.counterFractionScale!==undefined&&value.counterFractionDigits===undefined)fail("projection fractional scale requires precision");
     for (const key of ["bodySystemMatrix", "bodyMeshMatrix", "materialSystemMatrix", "materialMeshMatrix", "baseProjection", "centerTranslation", "inverseCenterTranslation"]) matrix(value[key], key);
+    if(value.textureEllipse!==undefined){
+      const ellipse=value.textureEllipse;record(ellipse,"texture ellipse",["center","covariance"]);
+      if(!Array.isArray(ellipse.center)||ellipse.center.length!==2||!ellipse.center.every(Number.isFinite)||
+        !Array.isArray(ellipse.covariance)||ellipse.covariance.length!==3||!ellipse.covariance.every(Number.isFinite))fail("texture ellipse must be finite");
+      const [xx,xy,yy]=ellipse.covariance;
+      if(!(xx>0)||!(xx*yy-xy*xy>0))fail("texture ellipse covariance must be positive definite");
+    }
   }
   const lensIds = (controls.lenses?.controls ?? []).map(lens => lens.id);
   const settings = new Map((controls.settings?.controls ?? []).map(control => [control.name, control]));

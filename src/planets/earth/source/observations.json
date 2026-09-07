@@ -10,15 +10,12 @@
           "3435910"
         ]
       },
-      "prepare": "tools/prepare-noise-lens.mjs",
-      "prepared": "runtime/preparedNoise.mjs",
-      "descriptorExport": "PREPARED_EARTH_NOISE_DESCRIPTOR",
-      "assetsExport": "PREPARED_EARTH_NOISE_ASSETS",
       "source": {
         "type": "prepared-local",
         "consumer": "noise-lens",
         "documents": []
-      }
+      },
+      "operator": "vector-overlay"
     },
     {
       "id": "worldcover-land-cover",
@@ -28,10 +25,6 @@
           "earth"
         ]
       },
-      "prepare": "tools/prepare-land-cover-lens.mjs",
-      "prepared": "runtime/preparedLandCover.mjs",
-      "descriptorExport": "PREPARED_EARTH_LAND_COVER_DESCRIPTOR",
-      "assetsExport": "PREPARED_EARTH_LAND_COVER_ASSETS",
       "source": {
         "type": "versioned-provider",
         "consumer": "land-cover",
@@ -40,21 +33,8 @@
           "land-cover/service-admission.json",
           "land-cover/overview-acquisition.json"
         ]
-      }
+      },
+      "operator": "worldcover-land-cover"
     }
-  ],
-  "integration": [
-    [
-      "tools/prepare-geographic-lenses.mjs"
-    ],
-    [
-      "tools/prepare-places.mjs"
-    ],
-    [
-      "tools/prepare-presentation.mjs"
-    ],
-    [
-      "tools/prepare-runtime-asset-manifest.mjs"
-    ]
   ]
 }

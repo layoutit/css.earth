@@ -1,0 +1,182 @@
+{
+  "schema": "cssearth-radial-layer-recipe@1",
+  "units": "kilometers",
+  "sources": [
+    {
+      "id": "pds-neptune-ring-table",
+      "path": "pds/neptune-rings.html",
+      "expectedBytes": 14304,
+      "expectedSha256": "bf12c609c781da68134e7bb3b4eabe9dfe3656382103e47447796bc1f3b537d8",
+      "origin": "https://pds-rings.seti.org/neptune/neptune_tables.html",
+      "credit": "NASA PDS Rings Node, SETI Institute",
+      "license": "public NASA Planetary Data System scientific data"
+    }
+  ],
+  "layers": [
+    {
+      "kind": "annular-field",
+      "size": 1024,
+      "densities": [
+        1,
+        2
+      ],
+      "outerRadius": 62933,
+      "mapping": {
+        "kind": "linear",
+        "scale": 1
+      },
+      "grid": {
+        "centerInset": 1,
+        "sampleOffset": 0,
+        "marginPixels": 0,
+        "scaleOrder": "divide-multiply"
+      },
+      "composition": "maximum",
+      "alphaUnits": 255,
+      "maximumAlpha": 255,
+      "encoding": {
+        "lossless": true,
+        "effort": 6
+      },
+      "bands": [
+        {
+          "id": "annulus-0",
+          "envelope": "constant",
+          "bounds": [
+            41000,
+            43000
+          ],
+          "inclusive": [
+            true,
+            true
+          ],
+          "opacity": 8,
+          "color": [
+            144,
+            174,
+            207
+          ]
+        },
+        {
+          "id": "annulus-1",
+          "envelope": "constant",
+          "bounds": [
+            53150,
+            53250
+          ],
+          "inclusive": [
+            true,
+            true
+          ],
+          "opacity": 48,
+          "color": [
+            144,
+            174,
+            207
+          ]
+        },
+        {
+          "id": "annulus-2",
+          "envelope": "constant",
+          "bounds": [
+            53200,
+            57200
+          ],
+          "inclusive": [
+            true,
+            true
+          ],
+          "opacity": 10,
+          "color": [
+            144,
+            174,
+            207
+          ]
+        },
+        {
+          "id": "annulus-3",
+          "envelope": "constant",
+          "bounds": [
+            57110,
+            57290
+          ],
+          "inclusive": [
+            false,
+            false
+          ],
+          "opacity": 32,
+          "color": [
+            144,
+            174,
+            207
+          ]
+        },
+        {
+          "id": "annulus-4",
+          "envelope": "constant",
+          "bounds": [
+            61863,
+            62043
+          ],
+          "inclusive": [
+            false,
+            false
+          ],
+          "opacity": 20,
+          "color": [
+            144,
+            174,
+            207
+          ]
+        },
+        {
+          "id": "annulus-5",
+          "envelope": "constant",
+          "bounds": [
+            62825,
+            62975
+          ],
+          "inclusive": [
+            false,
+            false
+          ],
+          "opacity": 82,
+          "color": [
+            144,
+            174,
+            207
+          ]
+        },
+        {
+          "id": "arcs",
+          "envelope": "constant",
+          "bounds": [
+            62785,
+            63015
+          ],
+          "inclusive": [
+            false,
+            false
+          ],
+          "arcs": {
+            "centers": [
+              -2.6,
+              -2.25,
+              -1.85,
+              -1.45
+            ],
+            "halfWidth": 0.13
+          },
+          "opacity": 165,
+          "color": [
+            144,
+            174,
+            207
+          ]
+        }
+      ],
+      "output": "neptune-rings{suffix}.webp",
+      "qualification": "PDS radial ring positions with the accepted schematic opacity, width emphasis and fixed arc presentation."
+    }
+  ]
+}

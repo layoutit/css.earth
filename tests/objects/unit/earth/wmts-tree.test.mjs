@@ -1,0 +1,183 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { PREPARED_EARTH_SCENE as scene } from "../../unit/earth/prepared-fixture.mjs";
+import { prepareRegionPack,coverageLookup } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mjs";
+import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mjs";
+import { wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mjs";
+import { readPreparedWmtsBlock,preparedReferenceKey } from "../../../../src/renderers/css/dist/testing.js";
+import { createCityIndex } from "../../../../src/renderers/css/dist/testing.js";
+import { selectCityPages } from "../../../../src/renderers/css/dist/testing.js";
+const dataset="esa-worldcover-rgbnir-2021-v200",version="1111111111111111";
+const pack=prepareRegionPack(wmtsAddress(-58.38,-34.6,8),scene,()=>true,dataset,version,{assetPath:'/scenes/earth/'});
+const response=ref=>new Response(pack.bytes.subarray(ref.offset,ref.offset+ref.bytes),{status:206,headers:{"Content-Range":`bytes ${ref.offset}-${ref.offset+ref.bytes-1}/${pack.bytes.length}`}});
+const plan={assetPath:"/scenes/earth/",dataset,geometryVersion:version,assetOrigin:"https://earth-assets.lowpoly.cc",roots:[pack.root],index:{maximumDirectories:48,maximumBytes:3*1024*1024,maximumDirectoryBytes:2*1024*1024,maximumConcurrentLoads:3}};
+test("regional ranges decode independently and preserve separate resident sections",async()=>{
+  const root=await readPreparedWmtsBlock(response(pack.root.directory),pack.root.directory);
+  assert.equal(root.external.length,64);
+  const a=root.external[0].directory,b=root.external[1].directory;
+  assert.equal(a.url,b.url);assert.notEqual(preparedReferenceKey(a),preparedReferenceKey(b));
+  const wanted=[pack.root.directory,a,b];let changed=0;
+  const index=createCityIndex(plan,()=>changed++,async(url,options)=>{
+    const ref=wanted.find(ref=>options.headers.Range===`bytes=${ref.offset}-${ref.offset+ref.bytes-1}`);
+    assert.ok(ref);assert.equal(url,ref.url);return response(ref);
+  });
+  try{
+    index.update(wanted);
+    for(let i=0;i<100&&index.stats().activeLoads;i++)await new Promise(r=>setTimeout(r,20));
+    assert.equal(changed,3);assert.equal(index.stats().residentDirectories,3);assert.deepEqual(index.stats().errors,[]);
+    assert.equal(index.nodes().get(root.external[0].key).stub,undefined);assert.equal(index.nodes().get(root.external[1].key).stub,undefined);
+    const retained=index.nodes().get(root.external[1].key);
+    index.update([pack.root.directory,b]);assert.equal(index.nodes().get(root.external[0].key).stub,true);
+    assert.equal(index.nodes().get(root.external[1].key).stub,undefined);
+    assert.equal(index.nodes().get(root.external[1].key),retained,"unrelated section eviction preserves decoded node identity");
+  }finally{index.destroy();}
+});
+test("range transport rejects a full-file response, shifted range, and corrupt bytes",async()=>{
+  const ref=pack.root.directory;
+  await assert.rejects(readPreparedWmtsBlock(new Response(pack.bytes),ref),/exact byte range/);
+  const wrong=new Response(pack.bytes.subarray(ref.offset),{status:206,headers:{"Content-Range":`bytes 0-${ref.bytes-1}/${pack.bytes.length}`}});
+  await assert.rejects(readPreparedWmtsBlock(wrong,ref),/exact byte range/);
+  const bytes=Buffer.from(pack.bytes.subarray(ref.offset));bytes[20]^=1;
+  await assert.rejects(readPreparedWmtsBlock(new Response(bytes,{status:206,headers:{"Content-Range":`bytes ${ref.offset}-${ref.offset+ref.bytes-1}/${pack.bytes.length}`}}),ref),/hash/);
+});
+test("a short metadata transfer retries once without expanding its reservation or accepting bad bytes",async()=>{
+  const ref=pack.root.directory,range=`bytes=${ref.offset}-${ref.offset+ref.bytes-1}`;
+  const short=()=>new Response(new Uint8Array(0),{status:206,headers:{"Content-Range":`bytes ${ref.offset}-${ref.offset+ref.bytes-1}/${pack.bytes.length}`,"Content-Length":String(ref.bytes)}});
+  const wait=async index=>{for(let i=0;i<100&&index.stats().activeLoads;i++)await new Promise(resolve=>setTimeout(resolve,10));assert.equal(index.stats().activeLoads,0);};
+  for(const alwaysShort of [false,true]){
+    const calls=[];let changes=0;
+    const index=createCityIndex(plan,()=>changes++,async(url,options)=>{
+      calls.push(options);assert.equal(url,ref.url);assert.equal(options.headers.Range,range);
+      assert.equal(index.stats().activeLoads,1);assert.equal(index.stats().reservedDecodedBytes,ref.decodedBytes);
+      return alwaysShort||calls.length===1?short():response(ref);
+    });
+    try{
+      index.update([ref]);await wait(index);
+      assert.equal(calls.length,2);assert.equal(calls[0].cache,undefined);assert.equal(calls[1].cache,"reload");
+      assert.equal(index.stats().requests,2);assert.equal(changes,1);
+      if(alwaysShort){assert.match(index.stats().errors[0],/byte length mismatch/);assert.equal(index.nodes().get(pack.root.key).stub,true);}
+      else{assert.deepEqual(index.stats().errors,[]);assert.equal(index.nodes().get(pack.root.key).stub,undefined);}
+    }finally{index.destroy();}
+  }
+  let requests=0;
+  const corrupt=createCityIndex(plan,()=>{},async()=>{requests++;const bytes=Buffer.from(pack.bytes.subarray(ref.offset,ref.offset+ref.bytes));bytes[20]^=1;return new Response(bytes,{status:206,headers:response(ref).headers});});
+  try{corrupt.update([ref]);await wait(corrupt);assert.equal(requests,1);assert.match(corrupt.stats().errors[0],/hash/);}finally{corrupt.destroy();}
+  requests=0;
+  const expanded=createCityIndex(plan,()=>{},async()=>{requests++;return response(ref);});
+  try{expanded.update([{...ref,decodedBytes:ref.decodedBytes+1}]);await wait(expanded);assert.equal(requests,1);assert.match(expanded.stats().errors[0],/byte length/);}finally{expanded.destroy();}
+});
+test("cancellation while a metadata body is pending never becomes a short-transfer retry",async()=>{
+  const ref=pack.root.directory;let started,body,requests=0;
+  const reading=new Promise(resolve=>started=resolve);
+  const index=createCityIndex(plan,()=>{},async(_url,{signal})=>{
+    requests++;
+    const stream=new ReadableStream({pull(controller){body=controller;started();}});
+    signal.addEventListener("abort",()=>body.close(),{once:true});
+    return new Response(stream,{status:206,headers:response(ref).headers});
+  });
+  try{
+    index.update([ref]);await reading;index.update([]);
+    for(let i=0;i<100&&index.stats().activeLoads;i++)await new Promise(resolve=>setTimeout(resolve,2));
+    assert.equal(index.stats().activeLoads,0);assert.equal(requests,1);
+    assert.deepEqual(index.stats().errors,[]);assert.equal(index.stats().residentDirectories,0);
+  }finally{index.destroy();}
+});
+test("a tile group retains every parent piece until all visible children are available",()=>{
+  const corners=[[-100,-100,0],[100,-100,0],[100,100,0],[-100,100,0]],normal=[0,0,1];
+  const parent={key:"root",level:5,corners,normal,pages:["apron","strip"],children:["child"],maximumCssSpan:1};
+  const a={key:"apron",url:"a",corners,normal,width:256,height:256,children:[]},b={...a,key:"strip"};
+  const ref=pack.root.directory,child={key:"child",level:6,corners,normal,stub:true,directory:ref};
+  const localPlan={...plan,roots:[parent],topology:"wmts-quadtree@1",poolSize:8,maximumDecodedBytes:8*256*256*4};
+  const nodes=new Map([parent,a,b,child].map(n=>[n.key,n])),matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],viewport={width:800,height:600};
+  const first=selectCityPages(localPlan,nodes,matrix,1,viewport);assert.deepEqual(first.keys,["apron","strip"]);assert.equal(first.directories.length,1);
+  assert.deepEqual(first.groups,[{key:"root",lineage:["root"],pages:["apron","strip"]}]);
+  nodes.set(child.key,{...child,stub:false,pages:["detail"],children:[]});nodes.set("detail",{...a,key:"detail"});
+  const refined=selectCityPages(localPlan,nodes,matrix,1,viewport);
+  assert.deepEqual(refined.keys,["detail"]);
+  assert.deepEqual(refined.groups,[{key:"child",lineage:["root","child"],pages:["detail"]}]);
+});
+test("worldwide source coverage includes polar footprints and stops at actual source gaps",()=>{
+  const levels=[8,9].map(zoom=>prepareWmtsCoverage([{tile:"N82E015"},{tile:"S35W059"}],zoom,{includePolar:true})),has=coverageLookup(levels);
+  assert.equal(has(wmtsAddress(15.5,82.5,8)),true);assert.equal(has(wmtsAddress(-58.5,-34.5,9)),true);assert.equal(has(wmtsAddress(100,0,8)),false);
+});
+
+test("unknown metadata is explicit while available branches remain selectable",()=>{
+  const corners=[[-100,-100,0],[100,-100,0],[100,100,0],[-100,100,0]],normal=[0,0,1];
+  const parent={key:"root",level:5,corners,normal,pages:[],children:["known","unknown"],maximumCssSpan:1};
+  const known={...parent,key:"known",level:6,pages:["image"],children:[]};
+  const image={key:"image",corners,normal,url:"a",width:256,height:256,children:[]};
+  const unknown={key:"unknown",level:6,corners,normal,stub:true,directory:pack.root.directory};
+  const nodes=new Map([parent,known,image,unknown].map(n=>[n.key,n]));
+  const localPlan={...plan,roots:[parent],topology:"wmts-quadtree@1",poolSize:8,maximumDecodedBytes:8*256*256*4};
+  const matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],viewport={width:800,height:600};
+  const first=selectCityPages(localPlan,nodes,matrix,1,viewport);
+  assert.deepEqual(first.keys,["image"]);
+  assert.deepEqual(first.groups,[{key:"known",lineage:["root","known"],pages:["image"]},
+    {key:"unknown",lineage:["root","unknown"],pages:[],pending:true}]);
+  assert.deepEqual(first.directories,[pack.root.directory]);
+  nodes.set(unknown.key,{...unknown,stub:false,pages:[],children:[]});
+  assert.deepEqual(selectCityPages(localPlan,nodes,matrix,1,viewport).groups,[first.groups[0]]);
+});
+
+test("cap and regular pieces do not turn the empty space between them into visible coverage",()=>{
+  const normal=[0,0,1],quad=x=>[[x,-10,0],[x+10,-10,0],[x+10,10,0],[x,10,0]];
+  const leaves=[{key:"left",corners:quad(-1000),normal,width:256,height:256,children:[]},{key:"right",corners:quad(1000),normal,width:256,height:256,children:[]}];
+  const root={key:"two-faces",level:10,corners:[[-1000,-10,0],[1010,-10,0],[1010,10,0],[-1000,10,0]],normal,pages:leaves.map(p=>p.key),children:[],maximumCssSpan:384};
+  const selected=selectCityPages({topology:"wmts-quadtree@1",roots:[root],poolSize:8,maximumDecodedBytes:8*256*256*4},new Map([root,...leaves].map(n=>[n.key,n])),[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],1,{width:800,height:600});
+  assert.deepEqual(selected.keys,[]);assert.deepEqual(selected.directories,[]);
+});
+
+test("loaded metadata that proves an empty view remains resident until its stub leaves the view",()=>{
+  const normal=[0,0,1],quad=x=>[[x,-10,0],[x+10,-10,0],[x+10,10,0],[x,10,0]];
+  const ref=pack.root.directory;
+  const root={key:"wide-stub",level:11,corners:quad(0),coverageParts:[{normal,corners:quad(0)}],normal,
+    pages:["offscreen"],children:[],maximumCssSpan:384,directory:ref};
+  const image={key:"offscreen",corners:quad(1000),normal,width:256,height:256,children:[]};
+  const parent={key:"parent",level:5,corners:quad(0),normal,pages:[],children:[root.key],maximumCssSpan:1};
+  const nodes=new Map([parent,root,image].map(n=>[n.key,n])),matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
+  const localPlan={topology:"wmts-quadtree@1",roots:[parent],poolSize:8,maximumDecodedBytes:8*256*256*4};
+  const selected=selectCityPages(localPlan,nodes,matrix,1,{width:800,height:600});
+  assert.deepEqual(selected.keys,[]);assert.deepEqual(selected.directories,[ref]);
+  matrix[12]=2000;
+  assert.deepEqual(selectCityPages(localPlan,nodes,matrix,1,{width:800,height:600}).directories,[]);
+});
+
+test("wide views reveal the base surface when complete root groups exceed either budget, then recover",()=>{
+  const normal=[0,0,1],nodes=new Map(),roots=[];
+  for(const [i,x] of [-200,0,200].entries()){
+    const corners=[[x,-10,0],[x+10,-10,0],[x+10,10,0],[x,10,0]];
+    const pieces=["apron","strip"].map(part=>({key:`${i}-${part}`,corners,normal,width:256,height:256,children:[]}));
+    const root={key:`root-${i}`,level:5,corners,normal,pages:pieces.map(p=>p.key),children:[],maximumCssSpan:384};
+    roots.push(root);for(const node of [root,...pieces])nodes.set(node.key,node);
+  }
+  const matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
+  // First constrain slots, then independently constrain decoded bytes.
+  for(const limits of [{poolSize:8,maximumDecodedBytes:16*256*256*4},{poolSize:16,maximumDecodedBytes:8*256*256*4}]){
+    const localPlan={topology:"wmts-quadtree@1",roots,...limits};
+    const wide=selectCityPages(localPlan,nodes,matrix,1,{width:800,height:600});
+    assert.deepEqual(wide.keys,[]);
+    assert.equal(wide.baseSurfaceFallback,"retained-budget");
+    const close=selectCityPages(localPlan,nodes,matrix,1,{width:400,height:600});
+    assert.deepEqual(new Set(close.keys),new Set(["0-apron","0-strip","1-apron","1-strip"]));
+    assert.equal(close.baseSurfaceFallback,undefined);
+  }
+});
+
+test("a constrained viewport spends remaining slots on complete child groups instead of a distant parent fallback",()=>{
+  const nodes=new Map(), normal=[0,0,1];
+  const build=(key,level,x,y,size)=>{
+    const corners=[[x,y,0],[x+size,y,0],[x+size,y+size,0],[x,y+size,0]];
+    const tile={key,level,corners,normal,pages:[`${key}-image`],children:[],maximumCssSpan:120};
+    const image={key:tile.pages[0],level,corners,normal,width:256,height:256,children:[]};
+    nodes.set(key,tile);nodes.set(image.key,image);
+    if(level<7)for(const [i,[dx,dy]]of [[0,0],[1,0],[0,1],[1,1]].entries())tile.children.push(build(`${key}-${i}`,level+1,x+dx*size/2,y+dy*size/2,size/2).key);
+    return tile;
+  };
+  const root=build("root",5,-400,-400,800);
+  const selection=selectCityPages({topology:"wmts-quadtree@1",roots:[root],poolSize:14,maximumDecodedBytes:14*256*256*4},
+    nodes,[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],1,{width:1000,height:1000});
+  assert.equal(selection.keys.length,7);
+  assert.equal(selection.keys.filter(key=>nodes.get(key).level===7).length,4);
+  assert.equal(selection.keys.filter(key=>nodes.get(key).level===6).length,3);
+  assert.ok(!selection.keys.includes(root.pages[0]));
+});

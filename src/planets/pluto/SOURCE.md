@@ -1,5 +1,13 @@
 # Pluto source and presentation contract
 
+Authored geometry, observation-processing parameters, controls, and physical
+source bindings live in `source/preparation/` and `source/content/`, pinned by
+`object.json`. The shared `tools/objects/static-surface/` preparation compiles
+those records into `prepared/*.json`. The migration preserves all 43 accepted
+asset hashes, signed DEM and missing-coverage interpretation, and the complete
+retained runtime description. Unit and browser checks live under
+`tests/objects/{unit,browser}/pluto/`.
+
 Pluto is a standalone dwarf planet in the shared object shell. Charon and the
 other moons are not mounted. This is a source-backed presentation, not an
 epoch-specific ephemeris or a pixel-identical OpenSpace recreation.

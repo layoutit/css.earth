@@ -1,0 +1,29 @@
+// Shared UI vocabulary. Packages select names from their source meaning;
+// runtime IDs such as "normal" or "surface" do not determine that meaning.
+export const LENS_LABELS = Object.freeze({
+  visibleColor: "Visible color",
+  monochrome: "Monochrome",
+  enhancedColor: "Enhanced color",
+  elevation: "Elevation",
+  thermalInfrared: "Thermal infrared",
+  crossSection: "Cross section",
+  ultraviolet: "Ultraviolet",
+  methane: "Methane",
+  nearInfrared: "Near infrared",
+});
+
+// Preparation only: preserve IDs, assets, legends, and source descriptions.
+// New concepts can keep a package-owned label without extending a fixed enum.
+export function prepareLensLabels(lenses, labels) {
+  return {
+    ...lenses,
+    controls: lenses.controls.map(lens => {
+      const label = labels[lens.id] ?? lens.label;
+      let title = lens.title;
+      if (title === lens.label || title?.startsWith(`${lens.label}: `) || title?.startsWith(`${lens.label}, `)) {
+        title = label + title.slice(lens.label.length);
+      }
+      return { ...lens, label, title };
+    }),
+  };
+}

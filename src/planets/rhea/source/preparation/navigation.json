@@ -1,0 +1,70 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "rhea",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "credit": "NASA/JPL/Space Science Institute",
+    "license": "NASA/JPL imagery with attribution",
+    "licenseEvidence": [
+      "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+    ],
+    "acquisition": "Download the pinned original through the shared acquisition recipe.",
+    "redistribution": "Retain mission and source-author credits.",
+    "id": "cassini-voyager-2012-rhea",
+    "path": "observations/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
+    "origin": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
+    "catalog": "https://astrogeology.usgs.gov/search/map/rhea_cassini_voyager_global_mosaic_417m",
+    "consumers": [
+      "surfaces",
+      "navigation"
+    ],
+    "lensId": "normal",
+    "label": "Monochrome",
+    "falseColor": false,
+    "width": 11520,
+    "height": 5760,
+    "projection": {
+      "type": "equirectangular",
+      "referenceRadiusMeters": 764100,
+      "centerLongitude": 180,
+      "longitudeDirection": "east-positive",
+      "latitudeType": "planetocentric"
+    },
+    "coverage": "USGS 2012 Cassini/Voyager mosaic. Its download-link label is wrong; this pinned 11520 by 5760 file matches the 417 m metadata. Preserve nonzero pixels; zero is GeoTIFF no-data. Origin easting zero means left edge 180 E despite projection center 180 E.",
+    "expectedBytes": 66401915,
+    "expectedSha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7"
+  },
+  "operations": [
+    {
+      "type": "extract",
+      "left": 8200,
+      "top": 1800,
+      "width": 1800,
+      "height": 1800
+    },
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "ensure-alpha"
+    },
+    {
+      "type": "ellipse-mask",
+      "cx": 0.5,
+      "cy": 0.5,
+      "rx": 0.5,
+      "ry": 0.5
+    },
+    {
+      "type": "png"
+    }
+  ]
+}

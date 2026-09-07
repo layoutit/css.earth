@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-static-surface-raster@1",
+  "kind": "observation-lenses",
+  "width": 1024,
+  "height": 512,
+  "latitudeSegments": 16,
+  "polarTile": 128,
+  "densities": [
+    1,
+    2
+  ],
+  "surfaceProjection": "oriented-bands",
+  "thumbnail": "source-center-crop",
+  "material": {
+    "frameSize": 512,
+    "limbFloor": 0.52,
+    "radiusScale": 0.505,
+    "output": "moon-curvature"
+  },
+  "lenses": [
+    {
+      "id": "surface",
+      "label": "Surface",
+      "input": "surface/lroc-color-2k.jpg",
+      "output": "moon-surface",
+      "qualification": "NASA LRO/LROC visible-colour global surface mosaic",
+      "presentation": {
+        "model": "prepared-neutral-lunar-reflectance-presentation",
+        "saturation": 0.35,
+        "linearGain": 0.9,
+        "linearOffset": -78,
+        "sharpenSigma": 0.65,
+        "qualification": "Prepared tonal presentation preserves the LROC surface structure; brightness and saturation are display choices, not calibrated albedo."
+      }
+    },
+    {
+      "id": "topography",
+      "label": "Topography",
+      "input": "lenses/lola-topography-print.jpg",
+      "output": "moon-topography",
+      "qualification": "NASA LRO/LOLA elevation map with shaded relief"
+    },
+    {
+      "id": "crust",
+      "label": "Crust",
+      "input": "lenses/grail-crustal-thickness-print.jpg",
+      "output": "moon-crustal-thickness",
+      "qualification": "NASA GRAIL crustal-thickness map with shaded relief"
+    }
+  ]
+}

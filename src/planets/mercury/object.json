@@ -1,0 +1,159 @@
+{
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "acdc4fcbb0a67a3d34a41141fad1875fc981a105196f3b835cc8d849727d3971"
+  },
+  "id": "mercury",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mercury",
+      "steps": [
+        "verify-sources",
+        "title",
+        "panel-content",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "lenses",
+        "charts",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -58080323005.813934,
+        -3532367026.7142925,
+        4132260206.9121046
+      ],
+      "presentationToReference": [
+        -0.9996221102421355,
+        -1.3877787807814457e-17,
+        0.027488847103145225,
+        -0.02522052412409819,
+        0.39777715593191376,
+        -0.9171353549949015,
+        -0.010934435420536348,
+        -0.9174820620691818,
+        -0.3976268400187745
+      ],
+      "orbitUpReference": [
+        1.3877787807814457e-17,
+        -0.39777715593191376,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 10607.391304347826,
+      "bodyRadiusM": 2439700
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json",
+          "sha256": "224e40068158743efcaf05e22502534bf746f3e68603ef16f819102897ecd5d0"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json",
+          "sha256": "8526916afcb8c7f8c875610d0b5b47297045f3677d0b5c78856850c797af84e1"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json",
+          "sha256": "89a51f7de8228ddce272f4213beea43da4f99b36b63b726a09d5dc2acfd2d9fe"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json",
+          "sha256": "93f35492fb9aa508c31dc024f67045900139e73d72f186cdaa353e8cf441a42f"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "7892ae509369e1ef2039767c701f4b25ebef7a9b5d138ac5c7158a9f634bc579"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json",
+          "sha256": "c51699bf26519d8f03a19eb1f903dcb4130364a58b7118870f127c51f64dff57"
+        },
+        {
+          "id": "charts",
+          "path": "source/content/charts.json",
+          "sha256": "390a7527acc15ec81c5a89e79f637c2f6704c2ae9c12b9a24e79f494e49b12c4"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "359cf37a2f6df3358ecc84cd0c7e5bc8dfc316d4137521eba6215f3a2350caaa"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "6f609298d1203cc6a0d45691ac55003c8a21d13fab15dcef188988a4ca06d582"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "c986f2e8e412262fb838357f2724842e1878045a8c83ef6b4f43931035c44424"
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2439.7
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "enhanced",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "topography",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "interior",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "cutaway": {
+        "source": "geometry",
+        "surface": "body",
+        "lens": "interior",
+        "material": "lighting"
+      }
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
+}

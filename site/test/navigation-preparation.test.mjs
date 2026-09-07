@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, symlink, unlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
@@ -7,6 +6,7 @@ import test from "node:test";
 import sharp from "sharp";
 
 import { OBJECTS } from "../objects.mjs";
+import { authoredObjectFixture } from "./authored-object-fixture.mjs";
 import {
   loadMarkerDescriptors,
   moveNavigationFile,
@@ -14,25 +14,7 @@ import {
 } from "../../tools/prepare-navigation.mjs";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
-const expectedOutputHashes = Object.freeze({
-  "blackhole-marker.png": "488f3617279968cfd9e7b7513d2f0978cb2a68d412d1e8abc1a13f7b3e10aba9",
-  "blackhole-marker@2x.png": "12ec338c57230ce476ed610179286fd08c555bfa4c353a064feb332bdbdc283b",
-  "download-marker.webp": "f518e9e44e371169ecb22b6b1789ef7c3becf8e5a4dfe1bf6a912f6b4659e4f8",
-  "download-marker@2x.webp": "670fb0ea4c67d011427dec16858efd98dc9a2dce914865bfb15e976a81e75173",
-  "github-marker.webp": "383e97a9726672e1b9e8109c5db583bbc188a6cbbe9073101e33f118f7350a13",
-  "github-marker@2x.webp": "a710f0afb1815524a5695ba78e999222430d59f7da515dca4550bd06e7fb4a9d",
-  // Reviewed 11-object Q75 atlases, NOT pixel parity with the old 9-object atlas.
-  "planet-markers.webp": "e919019540147f968390b978577cc9cc697ef73a712c81f9b870b874d3ed4038",
-  "planet-markers@2x.webp": "61ce1d65902dc8b2cdb990f94f35dff97b8d4905419f4467f7af737f541ee510",
-  "share-marker.webp": "b74f154b94b4dd17ac8818e47e1fb5ea07799431d3254521d5517300aa90f8e8",
-  "share-marker@2x.webp": "4611f24161d95d8a4f1d7668e901755f5cdb6ff890d92bf9927ad65a331c2c01",
-  "settings-marker.webp": "e4f9d6dce0ea4121fa193dd316bb6c077c3901c9fa9f79a0f7adae8d9a0fa34f",
-  "settings-marker@2x.webp": "d5045534307c19387d6791cb25d514e13406cc8af43e21f0102aa6c9a0a075d3",
-  "sun-marker.webp": "4715219676a73cbbdccfe4c249d098a1903f6682bc3078c976c2fe20e27c24b7",
-  "sun-marker@2x.webp": "5b848106311b4e73203ac9ccba317f35d068a7a0f47c7e3dbee656e0a4eeb52e",
-  "supernova-marker.png": "6eee6129ab5d5b0fb037cba6b463cd82e3f673e70b6e070eeeab314b812a7707",
-  "supernova-marker@2x.png": "89e782175bb64c9241a467d147afa08120cfebfa11acebb3dc7b07f9c5108d1f",
-});
+const expectedOutputFiles = (await readdir(resolve(projectRoot, "public/navigation"))).sort();
 
 const transparentMarkerFiles = Object.freeze([
   "blackhole-marker.png",
@@ -58,17 +40,16 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
     source.origin && source.credit && source.license && source.expectedSha256));
 });
 
-test("reproduces the reviewed 11-object atlases and unchanged utility markers", async (context) => {
+test("reproduces the checked-in registry-derived atlases and utility markers", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-"));
   context.after(() => rm(root, { recursive: true, force: true }));
   const presentationPath = resolve(root, "prepared-navigation-markers.mjs");
   await prepareNavigation({ projectRoot, outputRoot: root, presentationPath });
   assert.equal(await readFile(presentationPath, "utf8"), await readFile(resolve(projectRoot, "site/prepared-navigation-markers.mjs"), "utf8"));
-  assert.deepEqual((await readdir(root)).filter((file) => file !== "prepared-navigation-markers.mjs").sort(), Object.keys(expectedOutputHashes).sort());
-  for (const [filename, expected] of Object.entries(expectedOutputHashes)) {
+  assert.deepEqual((await readdir(root)).filter((file) => file !== "prepared-navigation-markers.mjs").sort(), expectedOutputFiles);
+  for (const filename of expectedOutputFiles) {
     const bytes = await readFile(resolve(root, filename));
-    assert.equal(createHash("sha256").update(bytes).digest("hex"), expected, filename);
-    assert.equal(createHash("sha256").update(await readFile(resolve(projectRoot, "public/navigation", filename))).digest("hex"), expected, `Published ${filename}`);
+    assert.deepEqual(bytes, await readFile(resolve(projectRoot, "public/navigation", filename)), filename);
   }
   for (const filename of transparentMarkerFiles) {
     const { data, info } = await sharp(resolve(root, filename))
@@ -86,12 +67,13 @@ for (const failure of ["object source", "late utility source", "publication", "r
   test(`failed ${failure} preserves accepted files or recoverable backups outside public`, async (context) => {
     const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-failure-"));
     context.after(() => rm(root, { recursive: true, force: true }));
-    for (const path of ["src/planets/new-body/tools", "src/planets/new-body/source", "src/navigation/source", "site", "public/navigation"]) {
+    for (const path of ["src/planets/new-body/source/preparation", "src/navigation/source", "site", "public/navigation"]) {
       await mkdir(resolve(root, path), { recursive: true });
     }
     const original = (await loadMarkerDescriptors())[0];
     const descriptor = { ...original, planetId: "new-body", source: { ...original.source, path: "source.jpg" } };
-    await writeFile(resolve(root, "src/planets/new-body/tools/navigation-marker.mjs"), `export default ${JSON.stringify(descriptor)};\n`);
+    await writeFile(resolve(root, "src/planets/new-body/source/preparation/navigation.json"), JSON.stringify(descriptor));
+    await writeFile(resolve(root, "src/planets/new-body/object.json"), JSON.stringify(authoredObjectFixture("new-body")));
     const sourcePath = resolve(root, "src/planets/new-body/source/source.jpg");
     await copyFile(resolve(projectRoot, "src/planets", original.planetId, "source", original.source.path), sourcePath);
     if (failure === "object source") await writeFile(sourcePath, "corrupt object source");
@@ -104,7 +86,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
     }
     const outputRoot = resolve(root, "public/navigation");
     const previous = new Map([
-      ...Object.keys(expectedOutputHashes).filter((filename) => filename !== "download-marker@2x.webp").map((filename) => [resolve(outputRoot, filename), `accepted ${filename}`]),
+      ...expectedOutputFiles.filter((filename) => filename !== "download-marker@2x.webp").map((filename) => [resolve(outputRoot, filename), `accepted ${filename}`]),
       [resolve(outputRoot, "new-body.webp"), "accepted legacy marker"],
       [resolve(outputRoot, "unrelated.txt"), "unrelated output"],
       [resolve(root, "site/prepared-navigation-markers.mjs"), "accepted presentation"],

@@ -1,14 +1,14 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
-import { resolve, sep } from 'node:path';
+import { resolve, sep, dirname } from 'node:path';
 import { dev } from 'astro';
 import { installation, project, PIN } from './acquire.mjs';
 import { instrumentCss } from './instrument-css.mjs';
-import { prepareCityPageGeometry } from '../../src/planets/earth/tools/city/page-geometry.mjs';
-import { prepareLocationPoint } from '../../src/planets/earth/tools/city/prepare-location.mjs';
+import { prepareCityPageGeometry } from '../objects/geographic-pages/page-geometry.mjs';
+import { prepareLocationPoint } from '../objects/geographic-pages/prepare-location.mjs';
 import { multiplyPreparedMatrix4 } from '../../src/platform/prepared-ellipsoid-projection.mjs';
-import { PREPARED_EARTH_SCENE } from '../../src/planets/earth/runtime/preparedScene.mjs';
-import { PREPARED_PRESENTATION } from '../../src/planets/earth/runtime/preparedPresentation.mjs';
+const PREPARED_EARTH_SCENE=JSON.parse(await readFile(new URL('../../src/planets/earth/prepared/scene.json',import.meta.url),'utf8'));
+const PREPARED_PRESENTATION=JSON.parse(await readFile(new URL('../../src/planets/earth/prepared/runtime.json',import.meta.url),'utf8'));
 
 export function referenceConfig() {
   const plan=PREPARED_PRESENTATION.pageLayers.find(l=>l.id==='city').plan;
@@ -36,8 +36,13 @@ export function referenceConfig() {
 export function oraclePlugin(config) {
   const root=new URL('./',import.meta.url).pathname;
   return {name:'cesium-loading-oracle',enforce:'pre',
+    resolveId(source,importer){
+      const path=source.startsWith('.')&&importer?resolve(dirname(importer.split('?')[0]),source):source;
+      const entry=path.match(/\/src\/renderers\/css\/dist\/(index|navigation|universe)\.js$/)?.[1];
+      if(entry)return new URL(`../../src/renderers/css/${entry==='index'?'index.ts':entry+'/index.ts'}`,import.meta.url).pathname;
+    },
     async load(id){
-      if(['/prepared-map/city-pages.mjs','/prepared-map/api-image-transport.mjs','/prepared-map/city-index.mjs'].some(s=>id.endsWith(s)))return instrumentCss(await readFile(id,'utf8'),id);
+      if(['/paging/city-pages.ts','/paging/api-image-transport.ts','/paging/city-index.ts'].some(s=>id.endsWith(s)))return instrumentCss(await readFile(id,'utf8'),id);
     },
     configureServer(server){server.middlewares.use(async(req,res,next)=>{
       if(!req.url?.startsWith('/__oracle/'))return next();

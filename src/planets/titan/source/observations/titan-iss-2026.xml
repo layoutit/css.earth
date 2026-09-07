@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>Lynn A. Weller</origin>
+        <origin>Brent B. Archinal</origin>
+        <origin>Bonnie Redding</origin>
+        <origin>Erich Karkoschka</origin>
+        <origin>Michael T. Bland</origin>
+        <pubdate>20250904</pubdate>
+        <title>Geodetically improved images and mosaics of Titan via rigorous photogrammetric control of Cassini Imaging Science Subsystem data</title>
+        <geoform>raster digital data</geoform>
+        <onlink>https://doi.org/10.5066/P14FAEKS</onlink>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>Saturn’s moon Titan is a focus of scientific investigation and future exploration by NASA’s Dragonfly mission. Its surface is covered by lakes of liquid ethane and methane, vast dune seas, and abundant organics sourced from photochemical reactions in its dense atmosphere. Over the course of its 13-year mission, NASA’s Cassini spacecraft’s Imaging Science Subsystem (ISS) acquired near-global imaging of Titan’s surface at a wavelength of 938 nm. At this wavelength, the methane that dominates Titan’s thick atmosphere is sufficiently transparent that, after extensive image processing, surface features can be discerned. From this data we generated a global photogrammetric control network consisting of 6,896 ISS images. The network included 92,831 tie points and more than 4.5 million image measures. The images are tied to Cassini Synthetic Aperture Radar data, which establish Titan’s geodetic reference frame. Least squares bundle adjustment was used to solve for tie point locations (latitude, longitude, and radius) and spacecraft (i.e., Cassini) position. Final control point uncertainties were &lt; 600 m in latitude and longitude and &lt; 800 m in radius. Due to the challenges resulting from generally low image signal-to-noise ratios and Titan’s diffuse surface features, hazy atmosphere and dense clouds, the network is effectively pixel-registered, rather than sub-pixel: two-sigma (95th percentile) tie point location residuals were ~1.1 pixels. Using a subset of these photogrammetrically controlled images, we generated a global mosaic. To further improve the uniformity of the mosaic and visibility of surface features, images were weighted by incidence angle and CCD position, and areas of low incidence and emission were trimmed. A 3131-pixel high pass filter was applied to the resulting mosaic to sharpen surface features. Here we provide this mosaic in both equirectangular and polar projections at 702 m/pixel. We also release updated camera extrinsics and spacecraft ephemeris data for every image in the network as a Navigation and Ancillary Information Facility (NAIF) Spacecraft, Planet, Instrument, C-Matrix, and Events (SPICE) kernel. The control network in ISIS format, image list, and bundle adjustment statistics are also included, and these provide a starting point for additional control network development or improvements.</abstract>
+      <purpose>Saturn’s moon Titan is uniquely Earth-like. Beneath its shroud of clouds, the moon’s surface includes numerous lakes, dendritic networks of stream-like features, and eroded topography that indicate an active hydrologic cycle, with liquid methane and ethane filling the role that water does on Earth. Vast seas of low-albedo, linear sand dunes, likely composed of organic material, cover the mid-latitudes. The surface and atmosphere are active, with occasional precipitation events, erosion, and active sand migration. In addition, Titan likely contains a liquid water ocean in its deep interior. The complex photochemistry occurring in its methane-dominated atmosphere, the abundance of solid organics on its surface, and the presence of liquid hydrocarbon lakes makes Titan a laboratory of low-temperature prebiotic chemistry, and therefore a target for NASA’s up-coming Dragonfly mission. 
+
+Because of its dense atmosphere, the surface of Titan was only relatively recently revealed by NASA’s Cassini-Huygens mission (2004 – 2017), which acquired both swaths of synthetic aperture radar (SAR) “images” of the surface from Cassini SAR, and traditional visible images through a methane window at 938 nm from the Imaging Science Subsystem (ISS). Over the course of its 13-year mission, Cassini acquired near global imaging of the surface, enabling us to produce the first photogrammetrically controlled imaging dataset. This controlled data provides a foundational data set for Titan. With the images properly located with known precision, scientists and mission planners can utilize the individual images or mosaics to investigate Titan’s surface processes, integrate additional datasets (e.g., Visible and Infrared Mapping Spectrometer data), derive new topographic information, and plan future missions (e.g., Dragonfly).</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <rngdates>
+          <begdate>20040702</begdate>
+          <enddate>20170913</enddate>
+        </rngdates>
+      </timeinfo>
+      <current>publication date</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>None planned</update>
+    </status>
+    <spdom>
+      <descgeog>Titan global</descgeog>
+      <bounding>
+        <westbc>-180.0000</westbc>
+        <eastbc>180.0000</eastbc>
+        <northbc>90.0000</northbc>
+        <southbc>-90.0000</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>ISO 19115 Topic Category</themekt>
+        <themekey>biota</themekey>
+      </theme>
+      <theme>
+        <themekt>None</themekt>
+        <themekey>Images</themekey>
+        <themekey>Mosaic</themekey>
+        <themekey>Cassini</themekey>
+        <themekey>NAIF SPICE kernels</themekey>
+      </theme>
+      <theme>
+        <themekt>USGS Metadata Identifier</themekt>
+        <themekey>USGS:68a5107ad4be02198e361c35</themekey>
+      </theme>
+      <place>
+        <placekt>None</placekt>
+        <placekey>Titan</placekey>
+      </place>
+    </keywords>
+    <accconst>No access constraints. Please see 'Distribution Information' for details.</accconst>
+    <useconst>These data are marked with a Creative Commons Zero v1.0 Universal (CC0-1.0) public domain dedication and do not have any use constraints. Users are advised to read the dataset's metadata thoroughly to understand appropriate use and data limitations.</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntperp>
+          <cntper>Michael T Bland</cntper>
+          <cntorg>USGS - SOUTHWEST REGION</cntorg>
+        </cntperp>
+        <cntpos>Research Space Scientist</cntpos>
+        <cntaddr>
+          <addrtype>mailing and physical</addrtype>
+          <address>Flagstaff Science Campus, Building 6</address>
+          <city>Flagstaff</city>
+          <state>AZ</state>
+          <postal>86001</postal>
+        </cntaddr>
+        <cntvoice>928-556-7080</cntvoice>
+        <cntemail>mbland@usgs.gov</cntemail>
+      </cntinfo>
+    </ptcontac>
+    <datacred>Tammy Becker and Ella Lee generated a preliminary version of a Titan control network, and this work is indebted to their work processing developing approaches to process Titan ISS images and tie them to Cassini SAR data. We thank the Cassini Image Science Subsystem team and the Cassini Synthetic Aperture Radar team, without whom these data sets would not exist.</datacred>
+    <native>This data set was created on a Linux operating system using the USGS' ISIS photogrammetric software.</native>
+    <crossref>
+      <citeinfo>
+        <origin>Porco, C. C.</origin>
+        <pubdate>2004</pubdate>
+        <title>Cassini Imaging Science: Instrument characteristics and anticipated scientific investigations at Saturn</title>
+        <geoform>publication</geoform>
+        <pubinfo>
+          <pubplace>Space Science Reviews</pubplace>
+          <publish>Springer Nature</publish>
+        </pubinfo>
+        <othercit>Image data is available from NASA's Planetary Data System</othercit>
+        <onlink>https://link.springer.com/article/10.1007/s11214-004-1456-7</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Elachi, C.</origin>
+        <pubdate>2004</pubdate>
+        <title>Radar: The Cassini Titan Radar Mapper</title>
+        <geoform>publication</geoform>
+        <pubinfo>
+          <pubplace>Space Science Reviews</pubplace>
+          <publish>Springer Nature</publish>
+        </pubinfo>
+        <othercit>Radar data is available from NASA's Planetary Data System</othercit>
+        <onlink>https://link.springer.com/article/10.1007/s11214-004-1438-9</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Archinal, Brent</origin>
+        <origin>Weller, Lynn</origin>
+        <origin>Karkoschka, Erich</origin>
+        <pubdate>202503</pubdate>
+        <title>A global control network and mosaic of Cassini ISS images of Titan</title>
+        <geoform>publication</geoform>
+        <pubinfo>
+          <pubplace>Lunar and Planetary Science Conference</pubplace>
+          <publish>Lunar and Planetary Institute</publish>
+        </pubinfo>
+        <onlink>https://www.hou.usra.edu/meetings/lpsc2025/pdf/2195.pdf</onlink>
+      </citeinfo>
+    </crossref>
+    <crossref>
+      <citeinfo>
+        <origin>Brent A. Archinal</origin>
+        <origin>Lynn A. Weller</origin>
+        <origin>Bonnie L. Redding</origin>
+        <origin>Erich Karkoschka</origin>
+        <pubdate>20250313</pubdate>
+        <title>A global control network and mosaic of Cassini ISS images of Titan</title>
+        <geoform>publication</geoform>
+        <pubinfo>
+          <pubplace>Lunar and Planetary Science Conference 56</pubplace>
+          <publish>Lunar and Planetary Institute</publish>
+        </pubinfo>
+        <onlink>https://lpsc2025.ipostersessions.com/default.aspx?s=2F-27-8B-E9-32-2F-6D-96-21-B4-F7-16-7F-7A-63-5A&amp;guestview=true</onlink>
+      </citeinfo>
+    </crossref>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>To the best of our knowledge all attributes are accurate. No formal attribute accuracy tests were completed.</attraccr>
+    </attracc>
+    <logic>To the best of our knowledge, the data is logically consistent. No formal logical consistency or topology tests were conducted.</logic>
+    <complete>The data set includes updates camera pointing and spacecraft emphemeris information for 6,896 Cassini ISS images of Titan. This is a subset of all available images (~19,000) acquired of Titan in the CB3 and MT1 filters. The mosaics provide nearly global image coverage of Titan.</complete>
+    <posacc>
+      <horizpa>
+        <horizpar>Tie points within the Cassini ISS Titan polar control network have a horizontal uncertainty of 583 m in latitude and 572 m in longitude (RMS), respectively. This corresponds to RMS residuals of 0.83 pixels, with two-sigma (5th and 95th percentile) residuals of -1.15 and 1.17 pixels, and maximum residuals of 6.25 pixels. We therefore contend that the data is pixel-registered, rather than subpixel-registered. The image network is tied to Cassini SAR data, which establishes the geodetic datum for Titan, via 72 manually selected ground points.</horizpar>
+      </horizpa>
+      <vertacc>
+        <vertaccr>Tie points within the Cassini ISS Titan global control network have a vertical root mean square uncertainty of 772 m, with maximum and minimum uncertainty of 103 m and 1,002 m, respectively.</vertaccr>
+      </vertacc>
+    </posacc>
+    <lineage>
+      <srcinfo>
+        <srccite>
+          <citeinfo>
+            <origin>Carolyn Porco</origin>
+            <pubdate>20040702</pubdate>
+            <title>Cassini Imaging Science Subsystem images</title>
+            <geoform>raster digital data</geoform>
+            <othercit>Images are available from NASA's Planetary Data System</othercit>
+            <onlink>https://pds-imaging.jpl.nasa.gov/volumes/iss.html</onlink>
+          </citeinfo>
+        </srccite>
+        <typesrc>Digital and/or Hardcopy</typesrc>
+        <srctime>
+          <timeinfo>
+            <rngdates>
+              <begdate>20040702</begdate>
+              <enddate>20170913</enddate>
+            </rngdates>
+          </timeinfo>
+          <srccurr>publication date</srccurr>
+        </srctime>
+        <srccitea>Cassini ISS images</srccitea>
+        <srccontr>Images that were used in the photogrammetric solution.</srccontr>
+      </srcinfo>
+      <srcinfo>
+        <srccite>
+          <citeinfo>
+            <origin>Charles Elachi</origin>
+            <pubdate>20040702</pubdate>
+            <title>Cassini Synthetic Aperture Radar data</title>
+            <geoform>raster digital data</geoform>
+            <othercit>Cassini radar data are available from NASA's Planetary Data System. The radar mosaic used in this work is available from Cornell University.</othercit>
+            <onlink>https://pds-imaging.jpl.nasa.gov/volumes/radar.html</onlink>
+            <onlink>https://data.astro.cornell.edu/RADAR/</onlink>
+          </citeinfo>
+        </srccite>
+        <typesrc>Digital and/or Hardcopy</typesrc>
+        <srctime>
+          <timeinfo>
+            <rngdates>
+              <begdate>2004</begdate>
+              <enddate>2017</enddate>
+            </rngdates>
+          </timeinfo>
+          <srccurr>publication date</srccurr>
+        </srctime>
+        <srccitea>Cassini Radar Data</srccitea>
+        <srccontr>The radar was used to establish Titan's reference frame. ISS images were tied to the radar swaths.</srccontr>
+      </srcinfo>
+      <srcinfo>
+        <srccite>
+          <citeinfo>
+            <origin>Boris Semenov</origin>
+            <pubdate>2017</pubdate>
+            <title>NASA Navigation and Ancillary Information Facility (NAIF) Spacecraft, Planet, Instrument, C-matrix, Events (SPICE) data</title>
+            <geoform>tabular digital data</geoform>
+            <onlink>https://naif.jpl.nasa.gov/naif/</onlink>
+          </citeinfo>
+        </srccite>
+        <typesrc>Digital and/or Hardcopy</typesrc>
+        <srctime>
+          <timeinfo>
+            <rngdates>
+              <begdate>2004</begdate>
+              <enddate>2017</enddate>
+            </rngdates>
+          </timeinfo>
+          <srccurr>publication date</srccurr>
+        </srctime>
+        <srccitea>NAIF SPICE data</srccitea>
+        <srccontr>NAIF SPICE data provides a priori information for the spacecraft and planetary ephemeris, camera pointing, and instrument information.</srccontr>
+      </srcinfo>
+      <procstep>
+        <procdesc>Control network development began with an assessment of all ~19,000 Cassini Imaging Science Subsystem (ISS) images [Porco et al., 2004] of Titan in the CB3 (938 nm) and MT1 filters with a pixel scale ranging from better than 100 meters per pixel to much less than 10 kilometers per pixel. All processing and network development was done using the USGS’ Integrated Software for Imagers and Spectrometers (ISIS) [https://isis.astrogeology.usgs.gov/9.0.0/]. Images were radiometrically calibrated using the standard Cassini ISS calibration (cisscal) with additional flat fields and filters applied to remove CCD artifacts, noisy pixels and cosmic rays not removed by calibration. The CB3 filter images were further processed through a multistep method utilizing the MT1 filter closest in time to reduce atmospheric effects and enhance feature visibility [Perry et al, 2005]. These steps resulted in ~11,000 CB3 images for network consideration. &amp;#xD;
+&amp;#xD;
+
+Before network development began, a preliminary update to image locations was applied to ~9,000 images (via ISIS’ deltack application) based on the previous efforts of co-author Karkoschka. Correspondences between overlapping images (tie points) were then identified using ISIS’ findfeatures application, which utilizes feature-based detector/extractor algorithms. Subsequent pixel and (where possible) sub-pixel matching was performed with ISIS’ area-based pointreg maximum correlation algorithm. When necessary, additional points were added manually to ensure that all images were well connected. The final network included 6,896 images having better than 5-kilometer resolution, 92,831 points and 4,591,931 measures. To tie the image control network to Titan’s geodetic coordinate system, ISS images were manually tied to an existing Cassini Synthetic Aperture Radar (SAR, Elachi et al., 2004) mosaic (https://data.astro.cornell.edu/RADAR/) via 72 ground points, which were constrained during bundle adjustment. &amp;#xD;
+&amp;#xD;
+
+Bundle adjustment, a non-linear, least squares minimization of tie point location residuals, was performed using ISIS’ jigsaw application [Edmundson et al., 2012] to solve for point latitude, longitude, and radius and spacecraft position. Point positions were constrained to 4 km in latitude and longitude and 2 km in radius, and spacecraft location was constrained to 2 km. Camera angles were constrained to 0.5 degrees. Final bundle adjustment resulted in root mean square (RMS) tie point uncertainties of 583 m, 572 m, and 772 m, in latitude, longitude, and radius, respectively. This corresponds to RMS residuals of 0.83 pixels, with two-sigma (5th and 95th percentile) residuals of -1.15 and 1.17 pixels, and maximum residuals of 6.25 pixels. We therefore contend that the data is pixel-registered, rather than subpixel-registered. &amp;#xD;
+&amp;#xD;
+
+Mosaics were generated from a subset of 5,091 controlled images, which omits images that contain large feature-obscuring clouds or bright limbs, were low resolution (4.5 km and lower) or were simply too noisy. In addition to the basic and feature enhancing processing described above, images were weighted according to incidence angle (lower incidence preferred) and CCD position (to limit vignetting). All images were trimmed at an emission angle of 60 degrees, while most were trimmed at an incidence angle 70 degrees although some polar images were trimmed at an incidence angle of 80 degrees to maintain features where applicable and ensure adequate spatial coverage. We then applied a 3131-pixel high-pass filter to emphasize surface detail. The mosaics provided here are average mosaics such that the value of each pixel is the average value of all of the pixels at that location. The number of images at each pixel location typically ranged from 20 – 30 images in the leading and trailing hemispheres and south pole, to several hundred images in the sub and anti-jovian hemispheres and north pole. Because these are average mosaics, they should not be used for photometric analysis. Mosaics were produced in both equirectangular and polar (north and south) projection using Titan’s IAU-approved radius of 2,575 km [Archinal et al. 2018] at 702 m/pixel. We used ISIS’ ckwriter and spkwriter applications to create SPICE CK (camera pointing kernels) and SPK (spacecraft position kernels) for every image include in the control network. &amp;#xD;
+&amp;#xD;
+
+References: &amp;#xD;
+Perry, J., McEwen, A., Fussner, S., Turtle, E., West, R., Porco, C., Knowles, B., Dawson, D., &amp; Cassini ISS Team (2005). Processing ISS images of Titan's Surface. Paper presented at the 36th Lunar and Planetary Science Conference, Lunar and Planetary Institute, Houston, TX. https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/20050173947.pdf &amp;#xD;
+&amp;#xD;
+
+Edmundson, K. L., Cook, D. A., Thomas, O. H., Archinal, B. A., Kirk, R. L. 2012. Jigsaw: The ISIS3 bundle adjustment for extraterrestrial photogrammetry. International Annals of Photogrammetry, Remote Sensing, and Spatial Information Sciences, I-4, 203-208. Available as http://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/I-4/203/2012/isprsannals-I-4-203-2012.pdf. &amp;#xD;
+&amp;#xD;
+
+Elachi, C., et al., 2004. Radar: The Cassini Titan Radar Mapper. Space Sci. Rev. 115: 71-110, https://doi.org/10.1007/s11214-004-1438-9 &amp;#xD;
+&amp;#xD;
+
+Porco, C. C., et al., 2004. Cassini imaging science: Instrument characteristics and anticipated scientific investigations at Saturn. Space Sci. Rev. 115: 363-497, https://doi.org/10.1007/s11214-004-1456-7</procdesc>
+        <procdate>20240930</procdate>
+        <proccont>
+          <cntinfo>
+            <cntperp>
+              <cntper>Lynn A Weller</cntper>
+              <cntorg>USGS - SOUTHWEST REGION</cntorg>
+            </cntperp>
+            <cntpos>Cartographer</cntpos>
+            <cntaddr>
+              <addrtype>mailing and physical</addrtype>
+              <address>Flagstaff Science Campus, Building 6</address>
+              <city>Flagstaff</city>
+              <state>AZ</state>
+              <postal>86001</postal>
+            </cntaddr>
+            <cntvoice>928-556-7054</cntvoice>
+            <cntemail>lweller@usgs.gov</cntemail>
+          </cntinfo>
+        </proccont>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>U.S. Geological Survey - ScienceBase</cntorg>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing address</addrtype>
+          <address>Denver Federal Center</address>
+          <address>Building 810</address>
+          <address>Mail Stop 302</address>
+          <city>Denver</city>
+          <state>CO</state>
+          <postal>80225</postal>
+        </cntaddr>
+        <cntvoice>1-888-275-8747</cntvoice>
+        <cntemail>sciencebase@usgs.gov</cntemail>
+      </cntinfo>
+    </distrib>
+    <distliab>Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data for other purposes, nor on all computer systems, nor shall the act of distribution constitute any such warranty.</distliab>
+    <stdorder>
+      <digform>
+        <digtinfo>
+          <formname>Digital Data</formname>
+        </digtinfo>
+        <digtopt>
+          <onlinopt>
+            <computer>
+              <networka>
+                <networkr>https://doi.org/10.5066/P14FAEKS</networkr>
+              </networka>
+            </computer>
+          </onlinopt>
+        </digtopt>
+      </digform>
+      <fees>None</fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20250904</metd>
+    <metc>
+      <cntinfo>
+        <cntperp>
+          <cntper>Michael T Bland</cntper>
+          <cntorg>USGS - SOUTHWEST REGION</cntorg>
+        </cntperp>
+        <cntpos>Research Space Scientist</cntpos>
+        <cntaddr>
+          <addrtype>mailing and physical</addrtype>
+          <address>Flagstaff Science Campus, Building 6</address>
+          <city>Flagstaff</city>
+          <state>AZ</state>
+          <postal>86001</postal>
+        </cntaddr>
+        <cntvoice>928-556-7080</cntvoice>
+        <cntemail>mbland@usgs.gov</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Biological Data Profile of the Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001.1-1999</metstdv>
+  </metainfo>
+</metadata>

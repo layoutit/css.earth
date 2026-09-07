@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
-import { createGeographicSurfaceRuntime } from "./geographic-surface-runtime.mjs";
-import { createApiImageTransport } from "./prepared-map/api-image-transport.mjs";
+import { createGeographicSurfaceRuntime } from "../renderers/css/dist/testing.js";
+import { createApiImageTransport } from "../renderers/css/dist/testing.js";
 
 const bytes = new Uint8Array([1,2,3,4]), sha256 = createHash("sha256").update(bytes).digest("hex");
 const overview = { images: Array.from({length:8},(_,i)=>({slot:String(i),image:{url:`/scenes/earth/image-${i}-${sha256.slice(0,16)}.webp`,bytes:4,sha256,width:2,height:2}})) };

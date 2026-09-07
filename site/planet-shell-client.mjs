@@ -2,6 +2,8 @@ import { createEntityCard } from "./entity-card.mjs";
 import { createDestinationBrowser } from "./destination-browser.mjs";
 import { createSceneLifetime } from "../src/platform/scene-lifetime.mjs";
 import { createExplorerRailController } from "./explorer-rail.mjs";
+import { createSurfaceMinimap } from "./surface-minimap.mjs";
+import { createViewReadout } from "./view-readout.mjs";
 
 export function mountPlanetShell({
   objectId,
@@ -15,7 +17,7 @@ export function mountPlanetShell({
     throw new Error("Planet shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
-  let settingsController, objectBrowser;
+  let settingsController, objectBrowser, contentLifetime, minimapController, viewReadout;
   function own(controller) {
     lifetime.onDispose(() => controller.destroy());
     return controller;
@@ -23,16 +25,9 @@ export function mountPlanetShell({
   try {
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime));
     own(createSheetController(drawer, windowTarget, lifetime));
-    own(createChartSwitcherController(drawer, windowTarget, lifetime));
-    own(createChartPixelAlignmentController(drawer, windowTarget, lifetime));
-    for (const root of drawer.querySelectorAll("[data-lens-browser]")) {
-      own(createLensBrowserController(root, windowTarget, lifetime));
-    }
-    settingsController = own(createSettingsController(
-      documentTarget, windowTarget, { motionEnabled, onMotionChange }, lifetime,
-    ));
-    own(createPanelController(drawer, objectId, windowTarget, lifetime));
     own(createExplorerRailController(documentTarget, windowTarget));
+    lifetime.onDispose(() => disposeContent());
+    mountContent(objectId, motionEnabled, false);
   } catch (error) {
     const cleanupErrors = lifetime.destroy();
     if (cleanupErrors.length) {
@@ -41,19 +36,57 @@ export function mountPlanetShell({
     throw error;
   }
   return Object.freeze({
+    setObject(content) {
+      if (lifetime.disposed) return;
+      const motion = documentTarget.querySelector('.planet-motion-setting').checked;
+      const contrast = documentTarget.querySelector('.planet-sky-contrast-setting').checked;
+      disposeContent();
+      content.apply();
+      objectBrowser.setObject(content.name);
+      mountContent(content.id, motion, contrast);
+    },
     setDestinations(provider) { if (!lifetime.disposed) return objectBrowser.setDestinations(provider); },
+    restoreDestinations() { if (!lifetime.disposed) return objectBrowser.restoreDestinations(); },
+    setCamera(provider) {
+      if (!lifetime.disposed) { minimapController.setCamera(provider); viewReadout.setCamera(provider); }
+    },
     setMotionEnabled(enabled) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
     setPlaybackState(state) {
-      if (!lifetime.disposed) settingsController.setPlaybackState(state);
+      if (!lifetime.disposed) {
+        settingsController.setPlaybackState(state);
+        minimapController.setPlaybackState(state);
+        viewReadout.setPlaybackState(state);
+      }
     },
     destroy() {
       const errors = lifetime.destroy();
       if (errors.length) throw new AggregateError(errors, "Shell cleanup failed.");
     },
   });
+
+  function disposeContent() {
+    const errors = contentLifetime?.destroy() ?? [];
+    contentLifetime = null;
+    if (errors.length) throw new AggregateError(errors, 'Object shell content cleanup failed.');
+  }
+  function mountContent(id, motionEnabled, highContrastSky) {
+    const owner = contentLifetime = createSceneLifetime();
+    const retain = controller => { owner.onDispose(() => controller.destroy()); return controller; };
+    retain(createChartSwitcherController(drawer, windowTarget, owner));
+    retain(createChartPixelAlignmentController(drawer, windowTarget, owner));
+    retain(createLensBrowserController(drawer, windowTarget, owner));
+    settingsController = retain(createSettingsController(documentTarget, windowTarget,
+      { motionEnabled, onMotionChange, highContrastSky }, owner));
+    minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget,
+      onInteraction() { settingsController.setMotionEnabled(false); },
+    }));
+    viewReadout = retain(createViewReadout({ drawer, documentTarget, windowTarget }));
+    retain(createPanelController(drawer, id, windowTarget, owner));
+  }
 }
 
-function createLensBrowserController(root, windowTarget, lifetime) {
+function createLensBrowserController(drawer, windowTarget, lifetime) {
+  const root = drawer.querySelector(".planet-lenses");
   if (!root) {
     return Object.freeze({ destroy() {} });
   }
@@ -75,31 +108,25 @@ function createLensBrowserController(root, windowTarget, lifetime) {
     throw new Error("Planet shell surface lens browser has no valid lenses.");
   }
 
-  const legends = [...root.querySelectorAll("[data-lens-legend]")]
-    .filter((legend) => legend instanceof windowTarget.HTMLElement);
+  const details = [...drawer.querySelectorAll("[data-lens-details]")];
   const lensIds = new Set(buttons.map((button) => button.value));
-  if (legends.some((legend) => !lensIds.has(legend.dataset.lensLegend ?? ""))) {
-    throw new Error("Planet shell surface lens legend has no matching lens.");
+  if (details.some((detail) => !lensIds.has(detail.dataset.lensDetails ?? ""))) {
+    throw new Error("Planet shell surface lens details have no matching lens.");
   }
 
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
-  const renderLegend = () => {
+  const renderSelection = () => {
     const activeLens = buttons.find((button) => button.ariaPressed === "true")
       ?.value;
-    for (let index = 0; index < buttons.length; index += 1) {
-      const button = buttons[index];
-      const legend = options[index].querySelector("[data-lens-legend]");
-      if (!(legend instanceof windowTarget.HTMLElement)) continue;
-      const expanded = button.value === activeLens;
-      legend.hidden = !expanded;
-      button.ariaExpanded = String(expanded);
+    for (const detail of details) {
+      detail.hidden = detail.dataset.lensDetails !== activeLens;
     }
   };
-  const legendObserver = new windowTarget.MutationObserver(renderLegend);
-  lifetime.onDispose(() => legendObserver.disconnect());
+  const selectionObserver = new windowTarget.MutationObserver(renderSelection);
+  lifetime.onDispose(() => selectionObserver.disconnect());
   for (const button of buttons) {
-    legendObserver.observe(button, {
+    selectionObserver.observe(button, {
       attributes: true,
       attributeFilter: ["aria-pressed"],
     });
@@ -117,6 +144,8 @@ function createLensBrowserController(root, windowTarget, lifetime) {
       if (matches) visible += 1;
     }
     empty.hidden = visible !== 0 || !query;
+    const count = root.querySelector("[data-lens-count]");
+    if (count) count.textContent = `(${options.filter(option => option.dataset.entityAvailable !== "false").length})`;
   };
 
   const scopeObserver = new windowTarget.MutationObserver(filter);
@@ -134,20 +163,17 @@ function createLensBrowserController(root, windowTarget, lifetime) {
     filter();
   }, { signal: events.signal });
   filter();
-  renderLegend();
+  renderSelection();
 
   return Object.freeze({
     destroy() {
       events.abort();
-      legendObserver.disconnect();
+      selectionObserver.disconnect();
       scopeObserver.disconnect();
       search.value = "";
-      for (const option of options) option.hidden = false;
+      for (const option of options) option.hidden = option.dataset.entityAvailable === "false";
       empty.hidden = true;
-      for (const legend of legends) legend.hidden = true;
-      for (const button of buttons) {
-        if (button.hasAttribute("aria-expanded")) button.ariaExpanded = "false";
-      }
+      renderSelection();
     },
   });
 }
@@ -155,7 +181,7 @@ function createLensBrowserController(root, windowTarget, lifetime) {
 function createSettingsController(
   documentTarget,
   windowTarget,
-  { motionEnabled, onMotionChange },
+  { motionEnabled, onMotionChange, highContrastSky = false },
   lifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -176,7 +202,6 @@ function createSettingsController(
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
-  let highContrastSky = false;
 
   const renderMotion = () => {
     motion.checked = motionOn;
@@ -247,23 +272,34 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
 
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
-  const selectedSearchValue = search.value;
+  let selectedSearchValue = search.value;
   let currentSearchValue = selectedSearchValue;
   let visibleObjects = 0;
-  const card = createEntityCard({ documentTarget, onNavigate: id => destinations?.selectById(id) });
-  lifetime.onDispose(() => card.destroy());
-  const destinations = createDestinationBrowser({
+  let card, destinations;
+  function mountEntityContent() {
+    card = createEntityCard({ documentTarget, onNavigate: id => destinations?.selectById(id) });
+    destinations = createDestinationBrowser({
     documentTarget, windowTarget, card,
     onResults(count) { empty.hidden = visibleObjects + count > 0; },
     onSelected(place) { currentSearchValue = place.name; render(false); search.blur(); },
     onReset() { currentSearchValue = selectedSearchValue; render(false); },
   });
-  lifetime.onDispose(() => destinations?.destroy());
+  }
+  function disposeEntityContent() { destinations?.destroy(); card?.destroy(); destinations = null; card = null; }
+  lifetime.onDispose(disposeEntityContent);
+  mountEntityContent();
   let open = false;
   const filter = () => {
     const query = search.value.trim().toLocaleLowerCase("en");
+    const showAll = query === "all objects";
+    const classification = items.find(item => {
+      const name = item.dataset.objectClassificationName;
+      return name && (query === name || query === `${name}s` || query === item.dataset.objectClassification);
+    })?.dataset.objectClassification;
+    const systemName = items.find(item =>
+      query === item.dataset.objectSystemName)?.dataset.objectSystemName;
     visibleObjects = 0;
-    void destinations?.search(query);
+    void destinations?.search(classification || systemName || showAll ? "" : query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
       empty.hidden = true;
@@ -273,12 +309,14 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     browser.hidden = false;
     let visible = 0;
     for (const item of items) {
-      const match = (item.dataset.objectName ?? "").includes(query);
+      const match = showAll || (classification ? item.dataset.objectClassification === classification
+        : systemName ? item.dataset.objectSystemName === systemName
+        : (item.dataset.objectName ?? "").includes(query));
       item.hidden = !match;
       if (match) visible += 1;
     }
     visibleObjects = visible;
-    empty.hidden = visible !== 0 || Boolean(destinations);
+    empty.hidden = visible !== 0 || Boolean(destinations && !classification && !showAll);
   };
   const render = (next, { resetQuery = false } = {}) => {
     open = next;
@@ -300,6 +338,14 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   }, {
     signal: events.signal,
   });
+  information.addEventListener("click", (event) => {
+    const tag = event.target instanceof windowTarget.HTMLElement
+      ? event.target.closest("[data-object-query]") : null;
+    if (!tag || !information.contains(tag)) return;
+    search.value = tag.dataset.objectQuery;
+    render(true);
+    search.focus();
+  }, { signal: events.signal });
   search.addEventListener("input", () => {
     if (!open) render(true);
     else if (open) filter();
@@ -345,10 +391,17 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   render(false);
 
   return Object.freeze({
+    setObject(name) {
+      selectedSearchValue = name; currentSearchValue = name;
+      disposeEntityContent();
+      mountEntityContent();
+      render(false);
+    },
     setDestinations(provider) { return destinations?.bind(provider); },
+    restoreDestinations() { return destinations?.restore(); },
     destroy() {
       events.abort();
-      destinations?.destroy();
+      disposeEntityContent();
       currentSearchValue = selectedSearchValue;
       search.value = selectedSearchValue;
       for (const item of items) item.hidden = false;

@@ -28,11 +28,13 @@ src/planets/*/source/**/*.csv
 src/planets/*/source/**/*.fits
 src/planets/*/source/**/*.gif
 src/planets/*/source/**/*.glb
+src/planets/*/source/**/*.IMG.gz
 src/planets/*/source/**/*.jpeg
 src/planets/*/source/**/*.jpg
 src/planets/*/source/**/*.png
 src/planets/*/source/**/*.tif
 src/planets/*/source/**/*.tiff
+src/planets/europa/source/photometry/*.lbl
 src/planets/*/source/**/*.ttf
 src/planets/*/source/**/*.webp
 
@@ -42,3 +44,6 @@ src/planets/*/source/**/*.webp
 !src/planets/saturn/source/saturn-weather-static.webp
 
 src/planets/*/.prepared/
+
+# Prepared JSON transport rebuilt from checked-in object preparation output.
+/src/planets/*/prepared/object.json

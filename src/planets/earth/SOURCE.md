@@ -79,9 +79,9 @@ The Earth heading outline is extracted at preparation time from Inter Variable 4
 Run:
 
 ```sh
-node src/planets/earth/tools/acquire.mjs
-node src/planets/earth/tools/prepare.mjs
-node src/planets/earth/tools/acquire.mjs --verify-only
+node tools/objects/dist/operations.js acquire earth
+node tools/objects/dist/prepare-authored.js earth --write
+node tools/objects/dist/operations.js acquire earth --verify-only
 ```
 
 `--refresh` is explicit and fail-closed: every refreshed authority must match the committed byte size and SHA-256 before publication.
@@ -163,8 +163,8 @@ derivation runs in the browser. The existing camera rounds control angles to
 hundredths of a degree; this is city navigation, not a precision survey marker.
 
 Place coverage and imagery coverage are distinct. Locations within the pinned WorldCover source footprints open at 1024x; other locations open an overview and report that detail is unavailable. City search does not control which geographic regions are prepared. The accepted animated fly-to is preserved, and surface lenses remain available after selecting a destination. Prepared footprint coverage does not certify every source pixel.
-Validation: `node --test src/planets/earth/test/places.test.mjs src/planets/earth/test/administrative-places.test.mjs` and
-`node src/planets/earth/test/places-browser.mjs http://127.0.0.1:4228`.
+Validation: `node --test tests/objects/unit/earth/places.test.mjs tests/objects/unit/earth/administrative-places.test.mjs` and
+`node tests/objects/browser/earth/places-browser.mjs http://127.0.0.1:4228`.
 The browser check uses real Google Chrome at DPR 1 and 2 plus phone-size
 emulation. It exercises search, keyboard selection, camera centering, imagery
 loading, globe return, globally available destinations and retained scene identity. Phone

@@ -1,3 +1,4 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
@@ -16,12 +17,12 @@ export function presentationFixture(definition) {
     variants: controls.lenses.controls.map(lens => ({ when: { lensId: lens.id }, required: [], writes: [], materials: [] })),
     materials: [], viewBindings: [], animations: [] };
 }
-const { runtimeDefinition: moon } = await import("../planets/moon/runtime/definition.mjs");
+const moon = await loadObjectTestDefinition('moon');
 const fixture = () => structuredClone(presentationFixture(moon));
 
-test("v2 binds the actual eleven control, camera, sky and resource contracts", async () => {
+test("v2 binds every registered object's actual control, camera, sky and resource contracts", async () => {
   for (const object of OBJECTS) {
-    const { runtimeDefinition } = await import(`../planets/${object.id}/runtime/definition.mjs`);
+    const runtimeDefinition = await loadObjectTestDefinition(object.id);
     const plan = presentationFixture(runtimeDefinition);
     requirePreparedPresentation(plan, { controls: runtimeDefinition.controls });
     requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: object.id, controls: runtimeDefinition.controls });
@@ -57,8 +58,8 @@ test("unknown nodes, resources, camera writers and unsupported tree styles fail"
 });
 
 test("preparation rejects malformed phase tables and undeclared neighbors", async () => {
-  const { PREPARED_PRESENTATION } = await import("../planets/uranus/runtime/preparedPresentation.mjs");
-  const { objectControls } = await import("../planets/uranus/site/control-content.mjs");
+  const {id,controls:objectControls,...runtime}=await loadObjectTestDefinition('uranus');
+  const PREPARED_PRESENTATION={...runtime,schema:PREPARED_PRESENTATION_SCHEMA};
   requirePreparedPresentation(PREPARED_PRESENTATION, { controls: objectControls });
   for (const change of [
     plan => { plan.materials[0].frame.thresholds[1] = -2; },
@@ -76,7 +77,7 @@ test("preparation rejects malformed phase tables and undeclared neighbors", asyn
 });
 
 for (const target of ["camera", "scene"]) test(`an existing prepared native animation cannot target the ${target}`, async () => {
-  const { runtimeDefinition: mercury } = await import("../planets/mercury/runtime/definition.mjs");
+  const { default: mercury } = await import("../../src/planets/mercury/prepared/runtime.json", {with: {type: "json"}});
   const definition = structuredClone(mercury);
   requireObjectRuntimeDefinition(definition);
   const animation = definition.animations.find(entry => entry.id === "mercury-interior-presentation-orbit");

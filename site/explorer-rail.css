@@ -81,7 +81,7 @@
   margin: 0;
   padding: 0 var(--explorer-card-padding-inline-end) 11px
     var(--explorer-card-padding-inline-start);
-  border-bottom: 1px solid rgb(0 0 0 / 50%);
+  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
   color: var(--shell-text);
   font: 500 22px/30.13px var(--shell-ui-font);
 }
@@ -104,7 +104,7 @@
   margin: 0;
   padding: 12px var(--explorer-card-padding-inline-end)
     16px var(--explorer-card-padding-inline-start);
-  border-bottom: 1px solid rgb(0 0 0 / 50%);
+  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
   color: var(--shell-text-secondary);
   font: 400 16px/1.4 var(--shell-ui-font);
   text-wrap: balance;
@@ -116,7 +116,7 @@
 
 .explorer-about-introduction a {
   color: inherit;
-  text-decoration-color: rgb(184 187 196 / 55%);
+  text-decoration-color: var(--shell-text-muted);
   text-underline-offset: 2px;
 }
 
@@ -139,7 +139,7 @@
   min-height: 45px;
   padding: 0 var(--explorer-card-padding-inline-end) 0
     var(--explorer-card-padding-inline-start);
-  border-bottom: 1px solid rgb(0 0 0 / 50%);
+  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
   color: var(--shell-text-muted);
   font: 400 13px/18px var(--shell-ui-font);
   text-transform: uppercase;
@@ -193,7 +193,7 @@
   min-height: 45px;
   padding: 0 var(--explorer-card-padding-inline-end) 0
     var(--explorer-card-padding-inline-start);
-  border-bottom: 1px solid rgb(0 0 0 / 50%);
+  border-bottom: 1.5px solid rgb(0 0 0 / 50%);
 }
 
 .explorer-settings-panel .planet-setting-control:last-child {

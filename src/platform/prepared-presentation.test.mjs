@@ -1,8 +1,9 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { runtimeDefinition } from "../planets/moon/runtime/definition.mjs";
-import { initialObjectSelection } from "./object-runtime-contract.mjs";
-import { mountPreparedPresentation, resolvePreparedPresentation } from "./prepared-presentation.mjs";
+const runtimeDefinition = await loadObjectTestDefinition('moon');
+import { initialObjectSelection } from '../renderers/css/dist/testing.js';
+import { mountPreparedPresentation, resolvePreparedPresentation } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture, preparedSelectionFixture } from "./test/object-runtime-package.mjs";
 
 const initial = initialObjectSelection(runtimeDefinition.controls);
@@ -24,9 +25,13 @@ test("the shared builder mounts exactly the prepared parent order and publishes 
       assert.equal(f.stage.dataset.lens, lens.id);
       assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
     }
-    presentation.publishFrame({ view: { zoom: 1.8 } });
+    presentation.publishFrame({ view: { zoom: 1.8, body: { visible: true,
+      silhouette: { centre: [10, 20], radial: [1, 0], radialSemiAxis: 300, tangentialSemiAxis: 280 } } } });
     const scaleBinding = runtimeDefinition.viewBindings[0];
-    assert.equal(nodes[scaleBinding.target].style.scale, `calc(var(--moon-shell-scale) / (var(--planet-viewport-zoom-divisor) / ${1.8 / runtimeDefinition.camera.defaultZoom}))`);
+    assert.equal(scaleBinding.kind, 'silhouette-fit');
+    assert.equal(nodes[scaleBinding.target].style.scale, '1');
+    assert.equal(nodes[scaleBinding.target].style.transformOrigin, '50% 50%');
+    assert.match(nodes[scaleBinding.target].style.transform, /^translate\(10px, 20px\)/u);
     assert.equal(presentation.observe().presentation.nodes, nodes.length);
   } finally { f.restore(); }
 });

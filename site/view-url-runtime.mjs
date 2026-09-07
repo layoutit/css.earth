@@ -1,8 +1,8 @@
-import { formatSharedView, parseSharedView } from "../src/platform/view-url.mjs";
+import { formatSharedView, parseSharedView } from "../src/renderers/css/dist/navigation.js";
 
 // One URL owner in the shared shell. Camera publication only schedules a
 // bounded history write; native motion is sampled once per second while on.
-export function bindViewUrl({ windowTarget, view, getMotion, setMotion, listenHistory = true, onError = () => {} }) {
+export function bindViewUrl({ windowTarget, view, getMotion, setMotion, onError = () => {}, listenHistory = true, listenToPopState = true }) {
   let timer = null, destroyed = false, restoring = false, revision = 0;
   const clear = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; };
   function writeToken(token) {
@@ -63,13 +63,13 @@ export function bindViewUrl({ windowTarget, view, getMotion, setMotion, listenHi
   }
   const unsubscribe = view.subscribe(schedule);
   const onPopState = () => { void restore(); };
-  if (listenHistory) windowTarget.addEventListener("popstate", onPopState);
+  if (listenHistory && listenToPopState) windowTarget.addEventListener("popstate", onPopState);
   return Object.freeze({
     restore, schedule, flush,
     destroy() {
       if (destroyed) return;
       destroyed = true; revision++; clear(); unsubscribe();
-      windowTarget.removeEventListener("popstate", onPopState);
+      if (listenHistory && listenToPopState) windowTarget.removeEventListener("popstate", onPopState);
     },
   });
 }

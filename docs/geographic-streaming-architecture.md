@@ -2,7 +2,7 @@
 
 The shared application shell owns the selected entity and its explicit lenses. The existing prepared-map pager owns geographic detail and drawable coverage. One geographic image owner manages transport, decoding and bounded reuse, and the retained CSS renderer applies prepared image handles and transforms.
 
-Local publication/loading and shared image reuse are implemented. The global coarse release is prepared locally; its metadata preserves the original fine selection in 28 recorded views. Global browser qualification, public delivery and the complete continuous application journey remain unfinished. Controlled native-memory results and the remaining browser-owned residency are reported below.
+Local publication/loading and shared image reuse are implemented. The global coarse release is published and integrated; its metadata preserves the original fine selection in 28 recorded views. Production browser journeys use its public assets through the normal transport. Final visual and sustained performance qualification remain open. Controlled native-memory results and the remaining browser-owned residency are reported below.
 
 ## Ownership
 
@@ -19,6 +19,8 @@ flowchart TD
 
 - Keep one shared shell, generic object adapter and mounted object scene. Entity kind does not create a new renderer or card. Every card owns its lenses: land cover belongs to Earth and the noise observation belongs to Buenos Aires. Camera position selects base imagery detail independently of card identity.
 - Reuse the existing object and geographic lens lifetime for cancellation, dataset revisions, clearing old observations and teardown. Do not add a second dataset session or general layer manager.
+- The prepared `pageLayers` order owns painting between page layers. Resolution only orders pages within their own layer. The shared mount transports both ranks into CSS's integer stacking order, so an observation at level zero still paints after high-resolution base imagery. Replacing a geographic package keeps its mounted layer rank; image arrival order and slot reuse cannot change it.
+- `pnpm test:browser:earth-noise` exercises that rule against the production build in real Chrome at DPR 1/2. It compares visible road marks with the same loaded observation in isolation, restores every visibility property, and verifies unchanged page identities, styles, bounds and camera. This visual check is part of `pnpm test:browser`; published-page counts alone do not prove an observation remains visible.
 - Earth preparation owns projection, geometry, source sampling, imagery, error bounds, provider addresses and any coverage relationships needed for replacement. Runtime may project prepared bounds for selection and decode/transport prepared records; it cannot generate scene geometry or images.
 - The pager owns desired detail, current useful coverage, metadata demand and affordable complete replacement decisions. Keep selection and publication as small policy functions while sufficient. If their fallback histories diverge or coverage decisions spread into loaders, consolidate that state into one prepared-map controller.
 - Strengthen the existing geographic image transport and share it with pages and overviews under the scene lifetime. Consumers hold leases. Do not wrap a second cache around it or rewrite fixed object-atlas residency.
@@ -30,12 +32,27 @@ Keep coverage nodes, image resources and CSS pieces distinct. Multiple pieces ca
 
 1. Select from the current view and prepared bounds/error records. Never use selected city or card kind as the level-of-detail signal.
 2. Distinguish unknown metadata from a known empty branch. Unknown branches preserve useful previous coverage; they do not authorize retiring it. Continue bounded metadata discovery through expensive intermediate nodes because finer polar groups can require fewer visible pieces.
-3. Load admitted images whose metadata is available. An unrelated directory request must not stop them. Preserve bounded retry, timeout, source validation and cancellation.
+3. Load admitted images whose metadata is available. An unrelated directory request must not stop them. Rank the final selected image groups by distance from the viewport centre, keeping each image's prepared pieces together. Protect metadata paths needed by the drawable cut before ranking further discovery. View changes reorder waiting metadata without restarting active requests or discarding loaded entries. Preserve bounded retry, timeout, source validation and cancellation.
 4. Publish each complete child group as soon as its pieces are ready. Keep its covering ancestor beneath unfinished siblings, retiring that ancestor when its complete selected replacement is drawable. A selected parent likewise replaces related old descendants. Unknown metadata preserves existing coverage. Release obsolete offscreen groups.
 5. Reserve old plus incoming resources before work begins. Publish the new complete cut and retire replaced leases in one synchronous transaction. A late result cannot publish into a newer slot generation or dataset revision.
 6. Under reversal, prioritize current coverage and visible detail. Useful ancestors and previously displayed descendants may remain while needed; avoid an unconditional ladder of all ancestor loads or unbounded prefetch.
 
+Projected rectangles are only the broad visibility check. Prepared quadrilaterals
+also intersect the viewport itself, so a rotated face whose rectangle overlaps
+the screen cannot consume capacity when the face is entirely outside it. Volume
+bounds and near-plane crossings remain conservative.
+
+Earth preparation certifies opaque discs from the retained polar face transforms
+and the actual polar texture alpha, with a two-source-pixel interior margin.
+The base page plan carries those bounds; observation plans do not. Runtime can
+exclude a piece only when every prepared corner lies behind a front-facing disc
+and every eye ray intersects its opaque interior. Nearly coplanar and partly
+exposed pieces stay eligible. This changes visibility accounting, not geometry,
+image sampling, scene paint order or seam bleed.
+
 For a cold view without related displayed imagery, the pager may request an available prepared ancestor before the desired detail. It selects an affordable ancestor image group only when it costs less than the missing desired images, or when unknown descendant metadata needs coverage. It does not load every intermediate level or put new coarse imagery over displayed detail. Auxiliary ancestors share the existing old-plus-incoming slot and byte reservations. Their failure does not block fine-image requests; cancellation, lens changes and teardown release their handles through the same page lifetime.
+
+Retained page slots assign CSS paint order from the prepared pyramid level when binding an image. Slot allocation order cannot decide which coincident page covers another. A real Chrome search/zoom/drag replay exposed coarse backing covering ready detail at close scale; changing paint order revealed the same loaded images without changing their geometry, sampling or camera. The corrected journey also checks the city noise overlay and return to base imagery at DPR 1/2. This is a focused interaction result; continuous global stress remains open.
 
 A packed metadata response that ends short despite correct range headers gets one retry, bypassing the HTTP cache with `cache: reload`. Both attempts share the same metadata reservation, load slot and 30-second deadline. Aborted requests do not retry. Repeated short transfers, invalid ranges, hash failures and invalid expanded data remain visible failures with explicit user retry; no unverified metadata is published.
 
@@ -99,6 +116,27 @@ then releases their slots for fine detail. Both piece and byte limits apply. If
 even the covering roots cannot coexist with the fine cut, the existing bounded
 fine fallback still applies.
 
+After that fine fallback, backing refinement runs once more against the final
+fine cut. Complete source-image groups can release several slots at once; keeping
+the earlier reservation would strand polar backing at its root despite available
+capacity and loaded metadata. The final fine pieces stay unchanged, and refined
+backing still uses the same combined piece/byte limits and publication lifetime.
+
+Optional fine refinement also accounts for still-visible backing before spending
+unused capacity. The complete fine cut establishes which prepared backing regions
+it can replace; only the remaining backing consumes its refinement allowance.
+This prevents newly available slots from sharpening an already detailed band
+while forcing the adjacent polar image back to a much coarser parent. The existing
+selector, replacement certificates and publication lifetime own both allocations.
+
+A saved northern view in the current production build publishes 241 fine pieces
+and 15 backing pieces at DPR 1 and 2, including 13 polar pieces. All 35 previously
+visible fine groups retain equal or finer prepared coverage. Before adopting
+occlusion, hiding the 40 identified hidden pieces changed zero screenshot pixels
+at both DPRs, including with backing hidden. These are focused source, selection
+and browser checks; they do not qualify every polar transition or sustained
+global exploration.
+
 With the complete global metadata, this preserves all fine keys in 28 recorded
 DPR 1/2 views. Four northern views previously reduced 247 fine pieces to 192;
 they now retain all 247 with eight essential backing pieces, within the unchanged
@@ -113,9 +151,8 @@ and no sampled complete-ready groups withheld. Between 12 and 40 images publish
 while an unrelated directory remains pending; every route retries an injected
 503. The delayed fixture still shows base-only intervals up to 801 ms on cold
 entry and approximately 200 ms on some warm entries. Recordings retain visible
-seam bleed and are not performance or final visual qualification. Global
-antimeridian/interior-cap runs, public delivery and the built entity/lens/history
-journey remain open.
+seam bleed and are not performance or final visual qualification. The subsequent
+global boundary and built-application journeys below extend these initial fixtures.
 
 Demand reserves the old displayed cut and the complete incoming required cut
 before admitting optional backing or ancestors. Optional coverage cannot consume
@@ -148,9 +185,9 @@ view. Final comparisons stay within measured A/A variation; zero-tolerance failu
 and raw differences are preserved. This is calibrated screenshot agreement, not
 universal pixel parity. Existing PolyCSS seam bleed remains unchanged.
 
-The normal release does not yet include this backing. Public delivery,
-integration, and the complete built entity/lens/history journey remain required
-before enabling it.
+The normal release now includes backing version `a04244b87a15305a`. Its public
+delivery and integration are recorded in the source pin and publication receipt;
+they do not qualify visual quality or performance by themselves.
 
 Continuous fixture runs with the complete global release cover regular and antimeridian regions,
 the northern cap boundary, and interiors at 80 degrees north and south, each at
@@ -179,8 +216,17 @@ global initial/settled checkpoints preserve the exact baseline fine keys and
 match actual published fine detail. Northern views can still include covered
 pixels below that latitude; the southern fixture remains source-empty. These
 controlled local fixtures establish representative loading behavior with the
-global release, not public delivery, worldwide valid pixels, or the complete
-built entity/lens/history journey.
+global release, not worldwide valid pixels or the complete built application.
+
+The built application also passes paced UI journeys at DPR 1 and 2: corrected
+search, interrupted travel, parent navigation, lens comparison, history, revisits
+and offline retry. A separate exploration reaches the accepted caps at about
+80.82 degrees north and 79.87 degrees south through search, wheel and drag input.
+Source-backed ray readback of recorded CSS transforms confirms that the
+Fiji-to-Samoa flight crosses the antimeridian. These coordinate checks describe
+where the camera looked; they do not assert useful fine imagery at those points.
+Antarctica retains the NASA overview because the selected source has no fine
+pages there. The city noise layer remains confined to the Buenos Aires card.
 
 ### Reproducible global coarse preparation
 
@@ -227,8 +273,11 @@ bytes; the largest directory is 53,582 bytes. Runtime descriptors contain only
 the prepared address, image and coverage facts: source tile inventories and
 sampling plans stay in preparation receipts. Of 6,914 prepared images, 1,837 are
 empty at their sampled resolution. These counts do not imply missing descendants
-or source coverage beyond the provider's valid pixels. Public delivery and
-integration are separate steps.
+or source coverage beyond the provider's valid pixels. Release `a04244b87a15305a`
+has a complete public SHA-256 verification receipt for all 8,520 files
+(373,667,172 bytes), and `src/planets/earth/source/city/coarse-release.json` pins its integrated
+manifest. The production browser journeys request those public assets directly.
+Publishing this data does not deploy the application.
 
 Publish only the new release's files through the existing Earth bucket workflow,
 then integrate its verified manifest:
@@ -266,6 +315,17 @@ There is no mandatory Cesium dependency. Consider a pinned extraction only if a 
 Reference inspected: CesiumJS commit `488b114e16f5879f5d51456640aae67850a715c0`, particularly [QuadtreePrimitive](https://github.com/CesiumGS/cesium/blob/488b114e16f5879f5d51456640aae67850a715c0/packages/engine/Source/Scene/QuadtreePrimitive.js). If code or tests are copied/adapted, preserve applicable licenses/notices and mark modifications; keep data-provider attribution separate. Source research does not warrant branding the application Cesium-powered. [License](https://github.com/CesiumGS/cesium/blob/488b114e16f5879f5d51456640aae67850a715c0/LICENSE.md).
 
 ## Completion evidence
+
+Record an ordinary Buenos Aires visit with the built application:
+
+```sh
+node tests/objects/browser/earth/exploration-browser.mjs --cycles=0 --trace=false --dpr=1
+```
+
+This follows city search and the complete flight, three small zoom gestures, a
+river drag, and noise/imagery comparisons with viewing pauses. Use `--dpr=2` for
+the same CSS-pixel gestures at DPR 2. Recordings retain original timing and
+loading behavior. Scripted Chrome input does not qualify a physical trackpad.
 
 Complete the same PR with continuous cold/warm globe-to-region-to-city exploration, reversals, interrupted travel, delayed/failing imagery and metadata, offline recovery, lens/history changes and sustained revisits. Run real Chrome at DPR 1/2; label narrow viewport and CPU/network emulation honestly. Capture visible checkpoints and videos separately from performance measurements so screenshot overhead is not blamed on the application.
 

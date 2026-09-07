@@ -1,13 +1,18 @@
 // Content only: reuse the shell's existing lens rows, legend and typography.
 export function createGeographicLensBinding(root, capacity = 0) {
-  const slots = [...(root?.querySelectorAll("[data-geographic-option]") ?? [])].map(option => ({
-    option, button: option.querySelector("button"), image: option.querySelector("img"),
-    label: option.querySelector(".planet-lens-label"), legend: option.querySelector("[data-lens-legend]"),
-    status: option.querySelector("[data-geographic-status]"), rows: [...option.querySelectorAll("li")],
-    qualification: option.querySelector("[data-geographic-qualification]"), source: option.querySelector("[data-geographic-source]"),
-    attribution: option.querySelector("[data-geographic-attribution]"), license: option.querySelector("[data-geographic-license]"),
-    content: null,
-  }));
+  const slots = [...(root?.querySelectorAll("[data-geographic-option]") ?? [])].map(option => {
+    const button = option.querySelector("button");
+    const details = root.ownerDocument.getElementById(button.getAttribute("aria-controls"));
+    if (!details?.hasAttribute("data-geographic-details")) throw new Error("Geographic lens details are missing.");
+    return {
+      option, button, details, image: option.querySelector("img"),
+      label: option.querySelector(".planet-lens-label"), legend: details.querySelector("[data-lens-legend]"),
+      status: details.querySelector("[data-geographic-status]"), rows: [...details.querySelectorAll("li")],
+      qualification: details.querySelector("[data-geographic-qualification]"), source: details.querySelector("[data-geographic-source]"),
+      attribution: details.querySelector("[data-geographic-attribution]"), license: details.querySelector("[data-geographic-license]"),
+      content: null,
+    };
+  });
   if (slots.length !== capacity) throw new Error("Geographic lens controls do not match the mounted capacity.");
   let previousEntity;
   return {
@@ -19,6 +24,7 @@ export function createGeographicLensBinding(root, capacity = 0) {
         const lens = lenses[index], active = Boolean(lens && state?.id === lens.id);
         if (entity !== previousEntity) {
           slot.button.value = lens?.id ?? `geographic-slot-${index}`;
+          slot.details.dataset.lensDetails = slot.button.value;
           slot.legend.dataset.lensLegend = slot.button.value;
           slot.label.textContent = lens?.label ?? "";
           if (lens) slot.image.src = lens.thumbnailUrl; else slot.image.removeAttribute("src");
@@ -28,7 +34,7 @@ export function createGeographicLensBinding(root, capacity = 0) {
         }
         slot.button.disabled = !ready || !lens;
         slot.button.setAttribute("aria-pressed", String(active));
-        slot.legend.hidden = !active;
+        slot.details.hidden = !active;
         const content = active ? state.content : null;
         const status = !active ? "" : state.status === "error" ? "This lens could not load. Select it to retry." :
           state.status === "loading" ? "Loading lens…" : state.status === "no-coverage" ?

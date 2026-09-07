@@ -19,7 +19,7 @@ const contexts=[],pages={},network={},report={schema:'cssearth-cesium-loading-or
   head:execFileSync('git',['rev-parse','HEAD'],{cwd:project,encoding:'utf8'}).trim(),sourceHashes:{},config:{...server.config,faces:undefined},
   qualification:'Loading observation with real wheel/drag input in cssEarth. Cesium follows sampled geographic center, roll and local scale. This is not native-input parity, pixel parity, or a performance benchmark. NASA base imagery in cssEarth differs from the WMTS overview in Cesium. Imagery passes through a bounded recording/replay fixture; geometry uses the existing local release.',
   actions:[],checkpoints:[],errors:[],frames:[]};
-for(const file of ['src/platform/prepared-map/city-pages.mjs','src/platform/prepared-map/api-image-transport.mjs','src/platform/prepared-map/city-index.mjs','src/platform/prepared-map/page-publication.mjs','src/platform/prepared-map/city-page-selection.mjs','src/planets/earth/runtime/preparedPresentation.mjs'])report.sourceHashes[file]=sha256(await readFile(new URL(file,project)));
+for(const file of ['src/renderers/css/paging/city-pages.ts','src/renderers/css/paging/api-image-transport.ts','src/renderers/css/paging/city-index.ts','src/renderers/css/paging/page-publication.ts','src/renderers/css/paging/city-page-selection.ts','src/planets/earth/prepared/runtime.json'])report.sourceHashes[file]=sha256(await readFile(new URL(file,project)));
 for(const name of await readdir(new URL('./',import.meta.url)))if(/\.(mjs|html)$/.test(name)){
   const file='tools/cesium-oracle/'+name;report.sourceHashes[file]=sha256(await readFile(new URL(file,project)));
 }
@@ -92,6 +92,7 @@ try {
     report.network[engine]={events:network[engine].events,requests:[...network[engine].requests.values()]};
   }
   assert.deepEqual(report.errors,[]);assert.ok(Object.values(report.traces).every(t=>!t.overflow),'No observation overflow');
+  assert.ok(report.traces.css.samples.every(s=>!s.errors?.length&&!s.index?.errors?.length),'No CSS page or metadata loading failure');
   assert.ok(!report.traces.cesium.events.some(e=>e.type==='render-error'),'No Cesium renderer failure');
   const centers=report.traces.cesium.samples.flatMap(s=>(s.registration.anchors??[]).filter(a=>a.screen[0]===s.registration.center.screen[0]&&a.screen[1]===s.registration.center.screen[1]));
   report.registration={centerSamples:centers.length,maximumCenterErrorPixels:Math.max(...centers.map(a=>a.errorPixels))};

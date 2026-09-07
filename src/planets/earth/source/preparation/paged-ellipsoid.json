@@ -1,0 +1,249 @@
+{
+  "schema": "cssearth-paged-ellipsoid@1",
+  "namespace": "earth",
+  "displayName": "Earth",
+  "publicBase": "/scenes/earth/",
+  "sceneBodyKey": "earth",
+  "interiorRadiusKey": "earthRadiusKm",
+  "interiorSchema": "cssearth-earth-interior-source@1",
+  "equatorialRadiusKm": 6378.137,
+  "polarRadiusKm": 6356.752,
+  "destinations": {
+    "searchLabel": "Search objects and places",
+    "descriptionSuffix": " places worldwide.",
+    "statuses": {
+      "detail": "WorldCover imagery · 2021. Source gaps retain the Earth base map.",
+      "overview": "Earth overview. WorldCover detail is unavailable at this location."
+    },
+    "lensIds": [
+      "normal",
+      "night-lights"
+    ]
+  },
+  "geometry": {
+    "BODY_LATITUDE_SEGMENTS": 16,
+    "BODY_LONGITUDE_SEGMENTS": 32,
+    "EQUATORIAL_RADIUS": 230,
+    "TILE_SIZE": 50,
+    "SEAM_BLEED": 0.15,
+    "PLANET_SEAM_BLEED": 0,
+    "INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE": 4,
+    "SURFACE_OVERLAP": 0.008,
+    "POLAR_CAP_BAND_SPAN": 1,
+    "POLAR_SURFACE_OVERLAP": 1.035,
+    "POLAR_INNER_OVERLAP": 1.05,
+    "POLAR_INNER_INSET": 2.4,
+    "OBLIQUITY_DEGREES": 23.4,
+    "PRESENTATION_NODE_DEGREES": -60,
+    "MESH_ROTATION_Z": 128,
+    "CAMERA_ZOOM": 1.1,
+    "CAMERA_SCENE_PITCH_DEGREES": 40,
+    "CAMERA_MINIMUM_CONTROL_PITCH_DEGREES": 0,
+    "CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES": 89,
+    "CAMERA_DEFAULT_CONTROL_PITCH_DEGREES": 34.230769230769226,
+    "CAMERA_MILLISECONDS_PER_CONTROL_DEGREE": 1000,
+    "INTERIOR_REFERENCE_CONTROL_YAW_DEGREES": -105,
+    "INTERIOR_LATITUDE_SEGMENTS": 8,
+    "INTERIOR_LONGITUDE_SEGMENTS": 16,
+    "interiorCutaway": {
+      "centerLongitudeDegrees": -56.25,
+      "widthDegrees": 112.5
+    },
+    "rotationSeconds": 72
+  },
+  "atlas": {
+    "pageSize": 4096,
+    "density": 8,
+    "gutter": 4,
+    "sourceWidth": 2048,
+    "sourceHeight": 1024,
+    "maximumDeliveryHeight": 1024
+  },
+  "material": {
+    "tileSize": 504,
+    "presentationSize": 720,
+    "framesPerShard": 4,
+    "frameCount": 128,
+    "discRadius": 0.468,
+    "illumination": {
+      "frameCount": 128,
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0
+    },
+    "worldLight": [
+      0.883835,
+      -0.385595,
+      0.264864
+    ],
+    "solarTint": "#fff1ea"
+  },
+  "atmosphere": {
+    "sourcePath": "openspace/earth-atmosphere.asset",
+    "sourceId": "openspace-earth-atmosphere-config",
+    "responsePath": "atmosphere/google-earth-pro-presentation-response.json",
+    "maximumOpacityKey": "earthMaximumOpacity"
+  },
+  "interiorPath": "interior/earth-interior.json",
+  "cityPath": "city/manifest.json",
+  "surface": {
+    "width": 8192,
+    "height": 4096,
+    "quality": 84,
+    "clouds": {
+      "path": "blue-marble-clouds.tif",
+      "maximumAlpha": 0.76,
+      "threshold": 12,
+      "scale": 0.8,
+      "color": [
+        245,
+        250,
+        255
+      ]
+    },
+    "maps": [
+      {
+        "path": "blue-marble-december.jpg",
+        "name": "earth-surface",
+        "compositeClouds": true,
+        "thumbnail": "earth-lens-normal.webp"
+      },
+      {
+        "path": "blue-marble-topography.jpg",
+        "name": "earth-topography",
+        "thumbnail": "earth-lens-topography.webp"
+      },
+      {
+        "path": "black-marble-2016.jpg",
+        "name": "earth-night-lights",
+        "thumbnail": "earth-lens-night-lights.webp"
+      }
+    ]
+  },
+  "camera": {
+    "cameraModel": "accumulated-matrix3d",
+    "minimumControlPitchDegrees": 0,
+    "maximumControlPitchDegrees": 89,
+    "defaultControlPitchDegrees": 34.230769230769226,
+    "defaultControlYawDegrees": 0,
+    "materialReferenceControlPitchDegrees": 34.230769230769226,
+    "materialReferenceControlYawDegrees": 0,
+    "initialScenePitchDegrees": 40,
+    "maximumScenePitchDegrees": 65,
+    "minimumZoom": 0.42,
+    "maximumZoom": 4096,
+    "defaultZoom": 1.1,
+    "sceneScale": 0.022,
+    "logicalBodyDiameter": 460,
+    "pitchBounded": false,
+    "yawBounded": false,
+    "responsiveFit": {
+      "model": "continuous-aspect-smoothstep",
+      "portraitBaseWidthShare": 0.34,
+      "narrowPortraitWidthShareGain": 0.08,
+      "landscapeWidthShareGain": 0.02,
+      "narrowPortraitAspectRatio": 0.46,
+      "portraitAspectRatio": 0.75,
+      "squareAspectRatio": 1,
+      "maximumHeightShare": 0.61,
+      "maximumMobilePreviewShare": 0.925,
+      "minimumZoom": 0.42,
+      "maximumZoom": 2
+    }
+  },
+  "geographic": {
+    "kind": "segmented-16x32-polar-caps",
+    "pages": {
+      "schema": "cssearth-earth-city-pages@1",
+      "initialAddress": {
+        "longitude": -58.38,
+        "latitude": -34.6,
+        "zoom": 14
+      },
+      "presentation": {
+        "rasterScale": 8,
+        "pageTemplate": "clipped-projective",
+        "poolSize": 512,
+        "decodedPageBytes": 262144,
+        "maximumDecodedBytes": 134217728,
+        "maximumConcurrentLoads": 4,
+        "minimumZoom": 8,
+        "maximumZoom": 4096,
+        "targetCssPixels": 384,
+        "index": {
+          "maximumDirectories": 96,
+          "maximumBytes": 12582912,
+          "maximumDirectoryBytes": 2097152,
+          "maximumConcurrentLoads": 3
+        }
+      },
+      "coarseReleasePath": "city/coarse-release.json"
+    },
+    "noise": {
+      "poolSize": 32,
+      "directory": "noise",
+      "dataset": "buenos-aires-noise-2025",
+      "assetOrigin": "https://earth-assets.lowpoly.cc",
+      "credit": "Buenos Aires APrA",
+      "period": "Diurno",
+      "bounds": {
+        "west": -59,
+        "east": -58,
+        "south": -35,
+        "north": -34
+      },
+      "coarse": {
+        "level": 0,
+        "x": 26,
+        "y": 4
+      },
+      "camera": {
+        "longitude": -58.44,
+        "latitude": -34.61,
+        "zoom": 1024
+      },
+      "size": 4096,
+      "side": 1024,
+      "columns": 4,
+      "opacity": 0.66,
+      "label": "Daytime noise",
+      "baseLensId": "normal"
+    },
+    "places": {
+      "directory": "places",
+      "coverageDirectory": "city",
+      "coverageLevel": 14,
+      "detailZoom": 1024,
+      "overviewZoom": 8
+    },
+    "observation": {
+      "schema": "cssearth-prepared-map-pages@1",
+      "dataset": null,
+      "assetOrigin": "https://earth-assets.lowpoly.cc",
+      "assetPath": "/scenes/earth/",
+      "roots": [],
+      "initialLayer": {
+        "frameMatrix": "1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1",
+        "textureMatrix": "1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1"
+      },
+      "pageTemplate": "clipped-projective",
+      "rasterScale": 32,
+      "rasterScales": [
+        8,
+        32
+      ],
+      "poolSize": 32,
+      "minimumZoom": 16,
+      "maximumDecodedBytes": 134217728,
+      "decodedPageBytes": 4194304,
+      "targetCssPixels": 2048,
+      "maximumConcurrentLoads": 3,
+      "index": {
+        "maximumDirectories": 32,
+        "maximumBytes": 8388608,
+        "maximumDirectoryBytes": 2097152,
+        "maximumConcurrentLoads": 3
+      }
+    }
+  }
+}

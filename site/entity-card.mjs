@@ -43,6 +43,16 @@ export function createEntityCard({ documentTarget, onNavigate }) {
     }
     root.dataset.entityId = entity.id; root.dataset.entityKind = entity.kind;
     heading.ariaLabel = entity.name;
+    const accessibleTitle = heading.querySelector('[data-entity-title]');
+    if (accessibleTitle) write(accessibleTitle, entity.name);
+    const isRoot = entity.id === initial.id;
+    const rootTags = root.querySelector('[data-root-entity-tags]');
+    const entityTags = root.querySelector('[data-entity-tags]');
+    if (rootTags) rootTags.hidden = !isRoot;
+    if (entityTags) {
+      entityTags.hidden = isRoot || !entity.kind;
+      write(entityTags.querySelector('[data-entity-kind-label]'), entity.kindLabel ?? (entity.kind ? entity.kind[0].toUpperCase() + entity.kind.slice(1) : ''));
+    }
     vector.toggleAttribute("hidden", !entity.title);
     text.hidden = Boolean(entity.title);
     if (entity.title) {

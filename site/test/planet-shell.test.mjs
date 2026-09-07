@@ -2,9 +2,8 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-const lensBrowser = await readFile(new URL("../components/LensBrowser.astro", import.meta.url), "utf8");
-
 import { objectAdapter } from "../object-adapter.mjs";
+import { loadObjectContent } from "./load-object-content.mjs";
 import { OBJECTS } from "../objects.mjs";
 import { requireSceneLifecycle } from "../scene-contract.mjs";
 import { createSceneRouter } from "../scene-router.mjs";
@@ -234,12 +233,14 @@ test("shared router cancels a pending adapter before publication", async () => {
 test("keeps implemented routes backed by object-owned files", async () => {
   for (const planet of OBJECTS) {
     const owned = [
-      `../../src/planets/${planet.id}/SOURCE.md`,
-      `../../src/planets/${planet.id}/NOTICE.md`,
-      `../../src/planets/${planet.id}/site`,
-      `../../src/planets/${planet.id}/test`,
-      `../../src/planets/${planet.id}/tools`,
-      `../pages/${planet.id}.astro`,
+      "../../src/planets/" + planet.id + "/SOURCE.md",
+      "../../src/planets/" + planet.id + "/NOTICE.md",
+      "../../src/planets/" + planet.id + "/object.json",
+      "../../src/planets/" + planet.id + "/source/manifest.json",
+      "../../src/planets/" + planet.id + "/prepared/object.json",
+      "../../src/planets/" + planet.id + "/prepared/content.json",
+      "../../tests/objects/browser/" + planet.id + "/browser-profile.mjs",
+      "../pages/" + planet.id + ".astro",
     ];
     await Promise.all(owned.map((relativePath) =>
       access(new URL(relativePath, import.meta.url))));
@@ -275,38 +276,25 @@ test("renders source-backed charts in one canonical switcher with Reflectance fi
   ];
 
   for (const [id, name, expectedChartIds] of panels) {
-    const panel = await readFile(
-      new URL(`../../src/planets/${id}/site/${name}Panel.astro`, import.meta.url),
-      "utf8",
-    );
-    const chartBlock = panel.match(/const charts = \[([\s\S]*?)\n\];/u)?.[1];
-    assert.ok(chartBlock, `${name} must declare its applicable charts.`);
-    const chartIds = [...chartBlock.matchAll(/id:\s*"([^"]+)"/gu)]
-      .map(([, chartId]) => chartId);
-    assert.deepEqual(
-      chartIds,
-      expectedChartIds,
-      `${name} chart order`,
-    );
+    const { prepared: content } = await loadObjectContent(id);
+    assert.deepEqual(content.charts.map(({ id: chartId }) => chartId),
+      expectedChartIds, name + " chart order");
   }
 
   const shell = await readFile(
     new URL("../components/PlanetShell.astro", import.meta.url),
     "utf8",
   );
-  assert.match(lensBrowser, /data-lens-browser open>/u);
+  assert.match(shell, /class="planet-lenses" open>/u);
   assert.match(shell, /const defaultChart = orderedCharts\.find\(\(chart\) => chart\.id === "reflectance"\)/u);
   assert.match(shell, /class="planet-chart-switcher"[\s\S]*?data-active-chart=\{defaultChart\.id\}/u);
   assert.doesNotMatch(shell, /class="planet-chart-panel"|open=\{chart\.open\}|open=\{gallery\.open\}/u);
 
-  const mercury = await readFile(
-    new URL("../../src/planets/mercury/site/MercuryPanel.astro", import.meta.url),
+  const mercury = JSON.parse(await readFile(
+    new URL("../../src/planets/mercury/prepared/content.json", import.meta.url),
     "utf8",
-  );
-  assert.doesNotMatch(
-    mercury,
-    /id:\s*"temperature-pressure"|mercury-no-atmosphere-profile/u,
-  );
+  ));
+  assert.doesNotMatch(JSON.stringify(mercury.charts), /temperature-pressure|mercury-no-atmosphere-profile/u);
 });
 
 test("keeps the shared shell planet-neutral", async () => {
@@ -352,11 +340,12 @@ test("renders optional source media through one planet-neutral panel contract", 
 });
 
 test("keeps concise lens descriptions in the object model without secondary row copy", async () => {
-  const [shell, { objectControls: saturnPanel }, { objectControls: saturnSource }] = await Promise.all([
+  const [shell, saturn] = await Promise.all([
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
-    import("../../src/planets/saturn/site/control-content.mjs"),
-    import("../../src/planets/saturn/site/control-content.source.mjs"),
+    loadObjectContent("saturn"),
   ]);
+  const saturnPanel = saturn.object.data.controls;
+  const saturnSource = await saturn.source("content");
   assert.doesNotMatch(shell, /planet-lenses-introduction|Explore this object in new ways/u);
   assert.doesNotMatch(shell, /planet-lens-description|\{lens\.description\}<\/span>/u);
   const descriptions = Object.fromEntries(saturnPanel.lenses.controls.map(({ id, description }) => [id, description]));
@@ -375,46 +364,48 @@ test("places a scalable Surface Lens browser after the retained chart switcher",
   ]);
   const factsheetIndex = shell.indexOf('class="planet-factsheet-section"');
   const chartsIndex = shell.indexOf('class="planet-chart-switcher"');
-  const lensesIndex = shell.indexOf('<LensBrowser objectId=');
+  const lensesIndex = shell.indexOf('class="planet-lenses"');
   assert.ok(factsheetIndex >= 0 && factsheetIndex < chartsIndex && chartsIndex < lensesIndex);
   assert.match(shell, /class="planet-chart-switcher-controls"[\s\S]*?data-chart-step="-1"[\s\S]*?data-chart-step="1"/u);
   assert.doesNotMatch(shell, /planet-chart-current-icon|planet-chart-icon|data-chart-icon/u);
   assert.match(shell, /orderedCharts\.map\(\(chart\) => \([\s\S]*?class="planet-chart-slide"[\s\S]*?hidden=\{chart\.id !== defaultChart\.id\}/u);
   assert.match(client, /createChartSwitcherController[\s\S]*?activeIndex = \(index \+ slides\.length\) % slides\.length/u);
   assert.match(client, /slide\.hidden = slide\.dataset\.chartId !== activeId/u);
-  assert.match(lensBrowser, /class="planet-panel-summary planet-lens-browser-header"[\s\S]*?<h2 class="planet-panel-heading">\{lenses\.title\.label\}<\/h2>[\s\S]*?class="planet-lens-search"[\s\S]*?aria-label="Search surface lenses"[\s\S]*?class="planet-lens-search-icon"><SearchIcon \/>/u);
-  assert.doesNotMatch(shell, /planet-lens-count|data-lens-count/u);
+  assert.match(shell, /class="planet-panel-summary planet-lens-browser-header"[\s\S]*?<h2 class="planet-panel-heading">Dataset <span class="planet-panel-heading-count" data-lens-count>\(\{initialEntity\.lensIds\.length\}\)<\/span><\/h2>[\s\S]*?class="planet-lens-search"[\s\S]*?aria-label="Search datasets"[\s\S]*?class="planet-lens-search-icon"><SearchIcon \/>/u);
+  assert.doesNotMatch(shell, /class="planet-lens-count"/u);
   assert.doesNotMatch(shell, /data-panel-icon="lenses"|PREPARED_SHELL_ICONS\.lenses\.src/u);
   assert.match(
     styles,
-    /\.planet-information-panel > :is\([\s\S]*?\.planet-lenses,[\s\S]*?\):has\(~ :is\([\s\S]*?\.planet-lenses,[\s\S]*?\)\)\s*\{[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);/u,
+    /\.planet-information-panel > :is\([\s\S]*?\.planet-lenses,[\s\S]*?\):has\(~ :is\([\s\S]*?\.planet-lenses,[\s\S]*?\)\)\s*\{[^}]*border-bottom:\s*1\.5px solid rgb\(0 0 0 \/ 50%\);/u,
   );
-  assert.match(styles, /\.planet-observation-controls\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?gap:\s*0;[\s\S]*?max-height:\s*202px;[\s\S]*?overflow-y:\s*auto;[\s\S]*?scrollbar-width:\s*thin;/u);
-  assert.match(styles, /\.planet-observation-control\s*\{[\s\S]*?grid-template-columns:\s*18px minmax\(0, 1fr\);[\s\S]*?width:\s*100%;[\s\S]*?height:\s*32px;/u);
-  assert.match(siteStyles, /--shell-text:\s*#dfdfdf;[\s\S]*?--shell-text-secondary:\s*#b8bbc4;[\s\S]*?--shell-text-muted:\s*#7f8187;/u);
+  assert.match(styles, /\.planet-observation-controls\s*\{[\s\S]*?flex-direction:\s*column;[\s\S]*?gap:\s*8px;[\s\S]*?max-height:\s*202px;[\s\S]*?overflow-y:\s*auto;[\s\S]*?scrollbar-width:\s*thin;/u);
+  assert.match(styles, /\.planet-observation-control\s*\{[\s\S]*?grid-template-columns:\s*16px minmax\(0, 1fr\);[\s\S]*?width:\s*100%;[\s\S]*?height:\s*auto;/u);
+  assert.match(siteStyles, /--shell-text:\s*#dfdfdf;[\s\S]*?--shell-text-secondary:\s*#a9acb5;[\s\S]*?--shell-text-muted:\s*#7f8187;/u);
   const layoutStyles = await readFile(new URL("../shell-layout.css", import.meta.url), "utf8");
-  assert.match(layoutStyles, /\.planet-sidebar\s*\{[^}]*--shell-text-secondary:\s*#a9acb5;/u);
-  assert.match(styles, /\.planet-observation-control\s*\{[\s\S]*?opacity:\s*0\.62;[\s\S]*?transition:\s*opacity 120ms ease;/u);
-  assert.match(styles, /\.planet-observation-control\[aria-pressed="true"\]\s*\{[\s\S]*?opacity:\s*1;/u);
+  assert.doesNotMatch(layoutStyles, /--shell-text(?:-secondary|-muted)?:/u);
+  assert.match(styles, /\.planet-observation-control\s*\{[^}]*color:\s*var\(--shell-text-muted\);[^}]*transition:\s*color 120ms ease;/u);
+  assert.match(styles, /\.planet-observation-control\[aria-pressed="true"\]\s*\{[^}]*color:\s*var\(--shell-text\);/u);
   assert.doesNotMatch(styles, /rgb\(255 255 255 \/ 75%\)/u);
   assert.doesNotMatch(styles, /rgb\(255 255 255 \/ 45%\)/u);
-  assert.match(styles, /\.planet-lens-icon\s*\{[\s\S]*?width:\s*18px;[\s\S]*?height:\s*18px;/u);
-  assert.match(styles, /\.planet-lens-label\s*\{[\s\S]*?grid-column:\s*2;[\s\S]*?font:\s*400 1rem\/1\.4 var\(--shell-ui-font\);/u);
-  assert.match(lensBrowser, /class="planet-lens-icon"[^>]*width="18" height="18"/u);
+  assert.match(styles, /\.planet-lens-icon\s*\{[\s\S]*?width:\s*16px;[\s\S]*?height:\s*16px;/u);
+  assert.match(styles, /\.planet-lens-label\s*\{[\s\S]*?grid-column:\s*2;[\s\S]*?font:\s*400 0\.9375rem\/20px var\(--shell-ui-font\);/u);
+  assert.match(shell, /class="planet-lens-icon"[^>]*width="16" height="16"/u);
   assert.doesNotMatch(styles, /planet-lens-copy|planet-lens-description/u);
   assert.match(styles, /\.planet-lens-search\s*\{[\s\S]*?border:\s*0;[\s\S]*?background:\s*transparent;[\s\S]*?text-align:\s*right;/u);
   assert.match(styles, /\.planet-lens-search-icon \.search-icon\s*\{[\s\S]*?width:\s*100%;[\s\S]*?stroke:\s*currentColor;/u);
-  assert.match(lensBrowser, /lenses\.controls\.map\(\(lens\)[\s\S]*?class="planet-observation-option" data-lens-option[\s\S]*?aria-pressed=\{lens\.id === lenses\.defaultLens[\s\S]*?<\/nav>[\s\S]*?<\/details>/u);
-  assert.match(lensBrowser, /aria-expanded=\{lens\.legend[\s\S]*?aria-controls=\{lens\.legend \? `\$\{objectId\}-\$\{lens\.id\}-legend` : undefined\}/u);
-  assert.match(lensBrowser, /lenses\.controls\.map\(\(lens\) => \([\s\S]*?class="planet-observation-option"[\s\S]*?class="planet-observation-control"[\s\S]*?lens\.legend && <section[\s\S]*?class="planet-lens-legend-panel"[\s\S]*?data-lens-legend=\{lens\.id\}[\s\S]*?lens\.legend\.kind === "scale"[\s\S]*?class="planet-lens-legend-scale-row"[\s\S]*?class="planet-lens-legend-labels"[\s\S]*?lens\.legend\.kind === "categories"[\s\S]*?class="planet-lens-legend-categories"[\s\S]*?class="planet-lens-legend-swatch"/u);
-  assert.match(styles, /\.planet-lens-legend-panel\s*\{[\s\S]*?width:\s*100%;[\s\S]*?padding:\s*2px 0 8px;[\s\S]*?background:\s*transparent;/u);
+  assert.match(shell, /lenses\.controls\.map\(\(lens\)[\s\S]*?class="planet-observation-option" data-lens-option[\s\S]*?aria-pressed=\{lens\.id === lenses\.defaultLens[\s\S]*?<\/nav>[\s\S]*?<\/details>\}/u);
+  assert.match(shell, /aria-controls=\{`\$\{objectId\}-\$\{lens\.id\}-details`\}/u);
+  const lensList = shell.slice(shell.indexOf('aria-label="Datasets"'), shell.indexOf('class="planet-lens-empty"'));
+  assert.doesNotMatch(lensList, /data-lens-legend|aria-expanded/u);
+  assert.match(shell, /class="planet-lens-details"[\s\S]*?data-lens-details=\{lens\.id\}[\s\S]*?hidden=\{lens\.id !== lenses\.defaultLens\}[\s\S]*?\{lens\.description\}[\s\S]*?lens\.legend && <section[\s\S]*?class="planet-lens-legend-panel"[\s\S]*?data-lens-legend=\{lens\.id\}[\s\S]*?lens\.legend\.kind === "scale"[\s\S]*?class="planet-lens-legend-scale-row"[\s\S]*?class="planet-lens-legend-labels"[\s\S]*?lens\.legend\.kind === "categories"[\s\S]*?class="planet-lens-legend-categories"[\s\S]*?class="planet-lens-legend-swatch"/u);
+  assert.match(styles, /\.planet-lens-legend-panel\s*\{[\s\S]*?width:\s*100%;[\s\S]*?padding:\s*8px 0 0;[\s\S]*?background:\s*transparent;/u);
   assert.match(styles, /\.planet-lens-legend-scale-row\s*\{[\s\S]*?align-items:\s*center;[\s\S]*?height:\s*24px;/u);
-  assert.match(lensBrowser, /lens\.legend\.src \|\| lens\.legend\.colors[\s\S]*?class="planet-lens-legend-scale planet-lens-legend-segments"[\s\S]*?lens\.legend\.colors\?\.map/u);
+  assert.match(shell, /lens\.legend\.src \|\| lens\.legend\.colors[\s\S]*?class="planet-lens-legend-scale planet-lens-legend-segments"[\s\S]*?lens\.legend\.colors\?\.map/u);
   assert.match(styles, /\.planet-lens-legend-segments\s*\{[\s\S]*?display:\s*flex;[\s\S]*?overflow:\s*hidden;/u);
   assert.match(styles, /\.planet-lens-legend-segment\s*\{[\s\S]*?background:\s*var\(--planet-lens-legend-color\);/u);
   assert.match(styles, /\.planet-lens-legend-categories li\s*\{[\s\S]*?grid-template-columns:\s*8px max-content minmax\(8px, 1fr\) max-content;[\s\S]*?height:\s*24px;/u);
-  assert.match(client, /const legends = \[\.\.\.root\.querySelectorAll\("\[data-lens-legend\]"\)\][\s\S]*?const renderLegend = \(\) => \{[\s\S]*?legend\.hidden = !expanded;[\s\S]*?button\.ariaExpanded = String\(expanded\);[\s\S]*?new windowTarget\.MutationObserver\(renderLegend\)/u);
-  assert.match(client, /createLensBrowserController\(root, windowTarget, lifetime\)[\s\S]*?empty\.hidden = visible !== 0/u);
+  assert.match(client, /const details = \[\.\.\.drawer\.querySelectorAll\("\[data-lens-details\]"\)\][\s\S]*?const renderSelection = \(\) => \{[\s\S]*?detail\.hidden = detail\.dataset\.lensDetails !== activeLens;[\s\S]*?new windowTarget\.MutationObserver\(renderSelection\)/u);
+  assert.match(client, /createLensBrowserController\(drawer, windowTarget, owner\)[\s\S]*?empty\.hidden = visible !== 0/u);
   assert.match(client, /search\.addEventListener\("click", \(event\) => \{[\s\S]*?event\.stopPropagation\(\)/u);
   assert.match(client, /button\.addEventListener\("click", \(event\) => \{[\s\S]*?event\.preventDefault\(\);[\s\S]*?event\.stopPropagation\(\);[\s\S]*?render\(activeIndex/u);
   assert.match(layoutStyles, /\.planet-sidebar\s*\{[^}]*overflow:\s*hidden auto;/u);
@@ -472,7 +463,7 @@ test("keeps the introduction below the title and previews four facts in a collap
     /@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-panel-icon\s*\{[\s\S]*?flex-basis:\s*16px;[\s\S]*?width:\s*16px;[\s\S]*?height:\s*16px;/u,
   );
   assert.match(shell, /class="planet-chart-label"[\s\S]*?data-chart-label=\{chart\.id\}[\s\S]*?\{chart\.title\.label\}/u);
-  assert.match(lensBrowser, /<h2 class="planet-panel-heading">\{lenses\.title\.label\}<\/h2>/u);
+  assert.match(shell, /<h2 class="planet-panel-heading">Dataset <span class="planet-panel-heading-count" data-lens-count>\(\{initialEntity\.lensIds\.length\}\)<\/span><\/h2>/u);
   assert.match(
     shell,
     /class="planet-panel-heading">\{PREPARED_SHELL_TITLES\.resources\.label\}<\/h2>[\s\S]*?class="planet-panel-icon"[\s\S]*?data-panel-icon="resources"[\s\S]*?PREPARED_SHELL_ICONS\.resources\.src/u,
@@ -480,11 +471,11 @@ test("keeps the introduction below the title and previews four facts in a collap
   assert.doesNotMatch(shell, /class="planet-panel-title"|title-(?:factsheet|reflectance-spectrum|thermal-profile|surface-lens|sources-resources)\.svg/u);
   assert.match(
     styles,
-    /@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-panel-heading\s*\{[\s\S]*?font:\s*400 0\.8125rem\/18px var\(--shell-ui-font\);[\s\S]*?text-transform:\s*uppercase;[\s\S]*?transform:\s*translateY\(1\.5px\);/u,
+    /@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-panel-heading\s*\{[\s\S]*?font:\s*400 0\.875rem\/18px var\(--shell-ui-font\);[\s\S]*?text-transform:\s*uppercase;[\s\S]*?transform:\s*translateY\(1\.5px\);/u,
   );
   assert.match(
     styles,
-    /\.planet-facts\s*\{[\s\S]*?margin:\s*8px 0 0;[\s\S]*?font-family:\s*var\(--shell-ui-font\);[\s\S]*?font-size:\s*1rem;[\s\S]*?line-height:\s*1\.4;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-facts li\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, max-content\) minmax\(8px, 1fr\) max-content;[\s\S]*?align-items:\s*baseline;[\s\S]*?gap:\s*8px;[\s\S]*?\.planet-facts li::before\s*\{[\s\S]*?border-bottom:\s*1px dotted rgb\(255 255 255 \/ 12%\);[\s\S]*?\.planet-fact-label\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);[\s\S]*?opacity:\s*1;[\s\S]*?\.planet-fact-value\s*\{[\s\S]*?grid-column:\s*3;[\s\S]*?font:\s*inherit;/u,
+    /\.planet-facts\s*\{[\s\S]*?margin:\s*8px 0 0;[\s\S]*?font-family:\s*var\(--shell-ui-font\);[\s\S]*?font-size:\s*0\.875rem;[\s\S]*?line-height:\s*20px;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-facts li\s*\{[\s\S]*?grid-template-columns:\s*minmax\(0, max-content\) minmax\(8px, 1fr\) max-content;[\s\S]*?align-items:\s*baseline;[\s\S]*?gap:\s*8px;[\s\S]*?\.planet-facts li::before\s*\{[\s\S]*?border-bottom:\s*1px dotted rgb\(255 255 255 \/ 12%\);[\s\S]*?\.planet-fact-label\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);[\s\S]*?opacity:\s*1;[\s\S]*?\.planet-fact-value\s*\{[\s\S]*?grid-column:\s*3;[\s\S]*?font:\s*inherit;/u,
   );
   for (const className of ["planet-chart", "planet-gallery", "planet-settings"]) {
     assert.match(styles, new RegExp(`\\.${className}\\s*\\{[^}]*margin:\\s*8px 0 0;`, "u"));
@@ -547,9 +538,9 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.doesNotMatch(shell, /PlanetNavigationMarker|activePlanetIndex/u);
   assert.match(
     shell,
-    /class="planet-title-row">\s*<h1 class="planet-title"[\s\S]*?<\/h1>\s*<\/div>/u,
+    /class="planet-title-row">\s*<h1 class="planet-title"[\s\S]*?<\/h1>[\s\S]*?class="planet-system-tag planet-title-tag"[\s\S]*?>\{activeObject\.systemName\}<\/button>[\s\S]*?class="planet-classification-tag planet-title-tag"[\s\S]*?>\{classificationLabel\}<\/button>[\s\S]*?<\/div>/u,
   );
-  assert.match(shell, /import \{ PLANET_SEARCH_OBJECTS \} from "\.\.\/planet-search-objects\.mjs";/u);
+  assert.match(shell, /import \{ PLANET_SEARCH_OBJECTS, objectClassificationLabel \} from "\.\.\/planet-search-objects\.mjs";/u);
   assert.match(
     shell,
     /const planetCount = PLANET_SEARCH_OBJECTS\.length;/u,
@@ -573,8 +564,8 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.match(navigationStyles, /\.scale-stops\s*\{[^}]*position:\s*relative;[^}]*height:\s*64px;/u);
   assert.match(navigationStyles, /\.scale-planet\s*\{[^}]*left:\s*var\(--planet-offset\);/u);
   assert.doesNotMatch(navigationStyles, /\.scale-sun|sun-marker(?:@2x)?\.webp/u);
-  assert.match(navigationStyles, /\.scale-label\s*\{[^}]*opacity:\s*\.72;[^}]*white-space:\s*nowrap;/u);
-  assert.match(navigationStyles, /\.scale-stop\[aria-current="page"\] \.scale-label\s*\{[^}]*opacity:\s*1;/u);
+  assert.match(navigationStyles, /\.scale-label\s*\{[^}]*color:\s*var\(--shell-text-muted\);[^}]*white-space:\s*nowrap;/u);
+  assert.match(navigationStyles, /\.scale-stop\[aria-current="page"\] \.scale-label\s*\{[^}]*color:\s*var\(--shell-text\);/u);
   assert.match(
     styles,
     /\.planet-information-panel\s*\{[\s\S]*?padding:\s*12px 0;[\s\S]*?border:\s*0;[\s\S]*?border-radius:\s*8px;[\s\S]*?background:\s*var\(--explorer-panel-background\);/u,
@@ -598,7 +589,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   );
   assert.match(
     styles,
-    /@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-introduction\s*\{[\s\S]*?margin-top:\s*4px;[\s\S]*?padding:\s*0 29px 0 0;[\s\S]*?font-size:\s*1rem;[\s\S]*?text-wrap:\s*balance;/u,
+    /@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-introduction\s*\{[\s\S]*?margin-top:\s*10px;[\s\S]*?padding:\s*0 29px 0 0;[\s\S]*?font-size:\s*1rem;[\s\S]*?text-wrap:\s*balance;/u,
   );
   assert.doesNotMatch(
     styles,
@@ -612,7 +603,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.match(shell, /class="planet-sidebar-search-icon"[\s\S]*?<SearchIcon \/>[\s\S]*?class="planet-sidebar-search"/u);
   assert.match(
     mapsStyles,
-    /\.planet-sidebar-search\s*\{[^}]*padding:\s*12px 20px 12px 48px;[^}]*box-shadow:\s*none;/u,
+    /\.planet-sidebar-search\s*\{[^}]*padding:\s*12px 52px 12px 48px;[^}]*box-shadow:\s*none;/u,
   );
   assert.doesNotMatch(styles, /\.planet-sidebar-search:focus-visible/u);
   assert.match(
@@ -627,7 +618,7 @@ test("keeps the shared sidebar content and controls intact", async () => {
   assert.doesNotMatch(styles, /border-top:\s*1px solid/u);
   assert.match(
     styles,
-    /\.planet-information-panel > :is\([\s\S]*?\.planet-chart-switcher[\s\S]*?\):has\(~ :is\([\s\S]*?\.planet-chart-switcher[\s\S]*?\)\)\s*\{[^}]*border-bottom:\s*1px solid rgb\(0 0 0 \/ 50%\);/u,
+    /\.planet-information-panel > :is\([\s\S]*?\.planet-chart-switcher[\s\S]*?\):has\(~ :is\([\s\S]*?\.planet-chart-switcher[\s\S]*?\)\)\s*\{[^}]*border-bottom:\s*1\.5px solid rgb\(0 0 0 \/ 50%\);/u,
   );
   assert.match(
     styles,
@@ -691,7 +682,7 @@ test("switches the desktop sidebar to the one shared planet list", async () => {
   ]);
   assert.match(
     shell,
-    /class="planet-sidebar-search-card"[\s\S]*?class="planet-sidebar-search-icon"[\s\S]*?<SearchIcon \/>[\s\S]*?class="planet-sidebar-search"[\s\S]*?<\/div>[\s\S]*?class="planet-drawer-content"[\s\S]*?class="planet-object-browser maps-object-results"[\s\S]*?hidden[\s\S]*?<PlanetObjectResults activeObjectId=\{objectId\} \/>[\s\S]*?class="planet-information-panel"[\s\S]*?class="planet-sidebar-view-all"[\s\S]*?aria-label="View all objects"[\s\S]*?>×<\/button>/u,
+    /class="planet-sidebar-search-card"[\s\S]*?class="planet-sidebar-search-icon"[\s\S]*?<SearchIcon \/>[\s\S]*?class="planet-sidebar-search"[\s\S]*?class="planet-sidebar-view-all"[\s\S]*?aria-label="View all objects"[\s\S]*?>×<\/button>[\s\S]*?<\/div>[\s\S]*?class="planet-drawer-content"[\s\S]*?class="planet-object-browser maps-object-results"[\s\S]*?hidden[\s\S]*?<PlanetObjectResults activeObjectId=\{objectId\} \/>[\s\S]*?class="planet-information-panel"/u,
   );
   assert.doesNotMatch(shell, /planet-sidebar-search-submit/u);
   assert.doesNotMatch(shell, /CssEarthWordmark|planet-sidebar-wordmark/u);
@@ -701,7 +692,7 @@ test("switches the desktop sidebar to the one shared planet list", async () => {
   assert.doesNotMatch(shell, /OBJECTS\.map|planet-object-marker|planet-object-browser-title/u);
   assert.match(
     client,
-    /createObjectBrowserController\([\s\S]*?\.planet-sidebar-search-card[\s\S]*?\.planet-sidebar-view-all[\s\S]*?\.planet-object-browser[\s\S]*?const selectedSearchValue = search\.value;[\s\S]*?if \(query\.length === 0\)[\s\S]*?item\.hidden = true;[\s\S]*?empty\.hidden = true;[\s\S]*?browser\.hidden = true;[\s\S]*?return;[\s\S]*?browser\.hidden = false;[\s\S]*?item\.dataset\.objectName[\s\S]*?if \(next && resetQuery\) search\.value = "";[\s\S]*?if \(!next\) search\.value = currentSearchValue;[\s\S]*?trigger\.ariaLabel = next[\s\S]*?`Show \$\{selectedSearchValue\} information`[\s\S]*?trigger\.textContent = "×";[\s\S]*?trigger\.addEventListener\("click"[\s\S]*?render\(true, \{ resetQuery: true \}\)[\s\S]*?search\.addEventListener\("input"[\s\S]*?search\.addEventListener\("focus", \(\) => search\.select\(\)[\s\S]*?search\.addEventListener\("keydown"[\s\S]*?event\.key !== "Escape"[\s\S]*?documentTarget\.addEventListener\("pointerdown"[\s\S]*?searchCard\.contains\(event\.target\)[\s\S]*?search\.blur\(\)/u,
+    /createObjectBrowserController\([\s\S]*?\.planet-sidebar-search-card[\s\S]*?\.planet-sidebar-view-all[\s\S]*?\.planet-object-browser[\s\S]*?let selectedSearchValue = search\.value;[\s\S]*?if \(query\.length === 0\)[\s\S]*?item\.hidden = true;[\s\S]*?empty\.hidden = true;[\s\S]*?browser\.hidden = true;[\s\S]*?return;[\s\S]*?browser\.hidden = false;[\s\S]*?item\.dataset\.objectName[\s\S]*?if \(next && resetQuery\) search\.value = "";[\s\S]*?if \(!next\) search\.value = currentSearchValue;[\s\S]*?trigger\.ariaLabel = next[\s\S]*?`Show \$\{selectedSearchValue\} information`[\s\S]*?trigger\.textContent = "×";[\s\S]*?trigger\.addEventListener\("click"[\s\S]*?render\(true, \{ resetQuery: true \}\)[\s\S]*?search\.addEventListener\("input"[\s\S]*?search\.addEventListener\("focus", \(\) => search\.select\(\)[\s\S]*?search\.addEventListener\("keydown"[\s\S]*?event\.key !== "Escape"[\s\S]*?documentTarget\.addEventListener\("pointerdown"[\s\S]*?searchCard\.contains\(event\.target\)[\s\S]*?search\.blur\(\)/u,
   );
   assert.match(mapsStyles, /\.planet-sidebar-view-all\s*\{[^}]*width:\s*44px;[^}]*height:\s*44px;/u);
   assert.doesNotMatch(mapsStyles, /planet-sidebar-search-submit/u);
@@ -730,13 +721,13 @@ test("renders a Google Maps-style desktop source footer without changing the mob
     shell,
     /\{hasResources && <footer[\s\S]*?class="planet-attribution-footer"[\s\S]*?resources\.map\(\(resource, index\)[\s\S]*?index > 0 && <span class="planet-attribution-separator" aria-hidden="true">·<\/span>[\s\S]*?class="planet-attribution-link"[\s\S]*?href=\{resource\.href\}[\s\S]*?title=\{resource\.description\}[\s\S]*?class="planet-attribution-role">\{resource\.role\}[\s\S]*?class="planet-attribution-source">\{resource\.label\}[\s\S]*?<\/footer>\}/u,
   );
-  assert.doesNotMatch(shell, /middot| · |·\s*<\/footer>/u);
   const footer = shell.match(/\{hasResources && <footer[\s\S]*?<\/footer>\}/u)?.[0];
   assert.ok(footer);
+  assert.doesNotMatch(footer, /middot| · |·\s*<\/footer>/u);
   assert.doesNotMatch(footer, /planet-attribution-developed|Developed by|github\.com\/layoutit|LayoutitStudio\/polycss/u);
   assert.match(
     styles,
-    /\.planet-attribution-footer\s*\{\s*display:\s*none;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-resources-panel\s*\{\s*display:\s*none;[\s\S]*?\.planet-attribution-footer\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?right:\s*0;[\s\S]*?bottom:\s*0;[\s\S]*?display:\s*flex;[\s\S]*?flex-wrap:\s*wrap;[\s\S]*?justify-content:\s*flex-end;[\s\S]*?gap:\s*2px 8px;[\s\S]*?max-width:\s*calc\(100vw - 358px\);[\s\S]*?padding:\s*0 8px 0 4px;[\s\S]*?background:\s*#000;[\s\S]*?font:\s*12px\/1\.4 var\(--shell-ui-font\);[\s\S]*?\.planet-attribution-link\s*\{[\s\S]*?display:\s*inline-flex;[\s\S]*?gap:\s*3px;[\s\S]*?\.planet-attribution-source\s*\{[\s\S]*?text-decoration:\s*underline;[\s\S]*?\.planet-attribution-role\s*\{[\s\S]*?text-transform:\s*capitalize;[\s\S]*?\.planet-attribution-separator\s*\{[\s\S]*?color:\s*rgb\(255 255 255 \/ 38%\);/u,
+    /\.planet-attribution-footer\s*\{\s*display:\s*none;[\s\S]*?@media \(min-width:\s*821px\) and \(orientation:\s*landscape\)[\s\S]*?\.planet-resources-panel\s*\{\s*display:\s*none;[\s\S]*?\.planet-attribution-footer\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?right:\s*0;[\s\S]*?bottom:\s*0;[\s\S]*?left:\s*0;[\s\S]*?display:\s*flex;[\s\S]*?flex-wrap:\s*wrap;[\s\S]*?justify-content:\s*flex-end;[\s\S]*?gap:\s*2px 8px;[\s\S]*?padding:\s*0 8px 0 4px;[\s\S]*?background:\s*#000;[\s\S]*?font:\s*12px\/1\.4 var\(--shell-ui-font\);[\s\S]*?\.planet-attribution-link\s*\{[\s\S]*?display:\s*inline-flex;[\s\S]*?gap:\s*3px;[\s\S]*?\.planet-attribution-source\s*\{[\s\S]*?text-decoration:\s*underline;[\s\S]*?\.planet-attribution-role\s*\{[\s\S]*?text-transform:\s*capitalize;[\s\S]*?\.planet-attribution-separator\s*\{[\s\S]*?color:\s*var\(--shell-text-muted\);/u,
   );
   assert.doesNotMatch(shell, /planet-attribution-credit|>Scene data</u);
 });

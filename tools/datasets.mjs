@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { execFileSync, spawn } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -39,13 +39,6 @@ export async function verifyDatasetSource({ destination, entry, objectId, acquir
   }
   assertSourceBytes({ bytes, entry, planetName: objectId });
 }
-function run(planet, args) {
-  if (!/^tools\/[a-z0-9-]+\.mjs$/u.test(args[0])) throw new Error("Invalid dataset preparation command.");
-  return new Promise((accept, reject) => {
-    const child = spawn(process.execPath, [resolve(planet, args[0]), ...args.slice(1)], { cwd: root, stdio: "inherit" });
-    child.once("error", reject); child.once("close", code => code === 0 ? accept() : reject(new Error(`Dataset preparation exited ${code}.`)));
-  });
-}
 export function dataReleaseBytes(objectId, assets, observations) {
   const records = assets.map(({ filename, bytes, sha256 }) => ({ filename, bytes, sha256 })).sort((a,b) => a.filename.localeCompare(b.filename));
   validateRuntimeAssetManifest(objectId, { schema: `css${objectId}-runtime-assets@1`, assets: records });
@@ -80,8 +73,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const config = JSON.parse(await readFile(resolve(planet, "source/observations.json")));
     if (config.schema !== "cssearth-observation-inventory@1" || config.objectId !== objectId || !Array.isArray(config.datasets) ||
         new Set(config.datasets.map(entry => entry.id)).size !== config.datasets.length ||
-        config.datasets.some(entry => !/^[a-z0-9-]+$/u.test(entry.id) || !["prepared-local", "versioned-provider"].includes(entry.source?.type)) ||
-        !Array.isArray(config.integration) || config.integration.some(command => !Array.isArray(command) || !command.length || command.some(arg => typeof arg !== "string"))) throw new Error("Invalid dataset inventory.");
+        config.datasets.some(entry => !/^[a-z0-9-]+$/u.test(entry.id) || !/^[a-z][a-z0-9-]*$/u.test(entry.operator) ||
+          !["prepared-local", "versioned-provider"].includes(entry.source?.type))) throw new Error("Invalid dataset inventory.");
     for (const entry of config.datasets) requireGeographicScope(entry.scope);
     const selected = values.dataset?.length ? config.datasets.filter(entry => values.dataset.includes(entry.id)) : config.datasets;
     if (!selected.length || values.dataset?.some(id => !selected.some(entry => entry.id === id))) throw new Error("Unknown dataset selection.");
@@ -107,16 +100,19 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       console.log(JSON.stringify({ objectId, datasets: selected.map(entry => entry.id), verifiedSourceFiles: sourceEntries.size, source: "pinned repository snapshots" }));
     } else {
       if (phase === "prepare") {
-        for (const entry of selected) await run(planet, [entry.prepare]);
-        for (const command of config.integration ?? []) await run(planet, command);
+        // The object preparer owns observation packages, entity bindings and
+        // the complete publication. Dataset selection scopes source admission;
+        // it never creates a second partial runtime preparation path.
+        const { prepareAuthoredObject } = await import('./objects/dist/prepare-authored.js');
+        await prepareAuthoredObject({ objectDirectory: planet, publicDirectory: resolve(root, 'public/scenes', objectId),
+          outputDirectory: resolve(planet, 'prepared'), write: true });
       }
       const assets = await runtimeAssets(root, [objectId]); await verifyPublicationInputs(assets);
-      const { runtimeDefinition } = await import(pathToFileURL(resolve(planet, "runtime/definition.mjs")));
+      const runtimeDefinition = JSON.parse(await readFile(resolve(planet, 'prepared/runtime.json'), 'utf8'));
       const capacity = runtimeDefinition.pageLayers.find(layer => layer.geographic)?.plan, observations = [];
       for (const entry of config.datasets) {
-        if (!/^runtime\/prepared[A-Za-z]+\.mjs$/u.test(entry.prepared)) throw new Error("Invalid dataset descriptor module.");
-        const module = await import(pathToFileURL(resolve(planet, entry.prepared)));
-        const descriptor = requireGeographicLensReference(module[entry.descriptorExport], `/scenes/${objectId}/`);
+        const prepared = JSON.parse(await readFile(resolve(planet, 'prepared', `observation-${entry.id}.json`), 'utf8'));
+        const descriptor = requireGeographicLensReference(prepared.descriptor, `/scenes/${objectId}/`);
         const bytes = await readFile(resolve(root, `public${descriptor.package.url}`));
         if (bytes.length !== descriptor.package.bytes || hash(bytes) !== descriptor.package.sha256) throw new Error("Dataset package identity mismatch.");
         const content = requireGeographicLensPackage(JSON.parse(bytes), descriptor, entry.scope.entityIds[0], capacity, objectId);

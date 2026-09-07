@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { prepareDestinationPacks } from "../../tools/prepare-destination-packs.mjs";
-import { createDestinationStore } from "./prepared-destination-store.mjs";
-import { DESTINATION_LIMITS, validateDestinationDirectory, validateDestinationSearch } from "./prepared-destination-contract.mjs";
+import { createDestinationStore } from "../renderers/css/dist/testing.js";
+import { DESTINATION_LIMITS, validateDestinationDirectory, validateDestinationSearch } from "../renderers/css/dist/testing.js";
 
 function fixture(count = 260, mutate = () => {}) {
   const places = Array.from({ length: count }, (_, i) => ({ id: String(i).padStart(5, "0"), name: `Place ${i}`, names: [`place ${i}`],

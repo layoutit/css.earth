@@ -1,6 +1,7 @@
 // Entity and lens identity travel with the body route. The body router still
 // owns navigation between objects; these entries reuse the current scene.
-export function createEntityRoute({ windowTarget, rootId, apply, read, restoreView = apply => apply({ hasSavedView: false }) }) {
+export function createEntityRoute({ windowTarget, rootId, apply, read, restoreView = apply => apply({ hasSavedView: false }),
+  listenHistory = true, writeUrl = (url, { replace }) => windowTarget.history[replace ? "replaceState" : "pushState"](windowTarget.history.state, "", url) }) {
   const path = windowTarget.location.pathname;
   const events = new AbortController();
   let revision = 0, restoring = false, destroyed = false;
@@ -12,7 +13,7 @@ export function createEntityRoute({ windowTarget, rootId, apply, read, restoreVi
     if (lensId && lensId !== defaultLens) params.set("lens", lensId);
     url.hash = params.toString();
     if (url.href === windowTarget.location.href) return;
-    windowTarget.history[replace ? "replaceState" : "pushState"](windowTarget.history.state, "", url);
+    writeUrl(url, { replace });
   }
   async function restore() {
     const current = ++revision;
@@ -21,7 +22,7 @@ export function createEntityRoute({ windowTarget, rootId, apply, read, restoreVi
     try { await restoreView(({ hasSavedView }) => apply(params.get("place") ?? rootId, params.get("lens"), () => !destroyed && current === revision, { navigate: !hasSavedView })); }
     finally { if (current === revision) { restoring = false; write({ replace: true }); } }
   }
-  windowTarget.addEventListener("popstate", event => {
+  if (listenHistory) windowTarget.addEventListener("popstate", event => {
     if (windowTarget.location.pathname !== path) return;
     event.stopImmediatePropagation();
     void restore();

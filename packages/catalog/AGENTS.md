@@ -32,7 +32,7 @@ prevent.
 
 ## Reading is on the hot path
 
-A catalogue is read once and uploaded to the GPU. Nothing in `read.ts` may
+A catalogue is read once and supplied to a renderer. Nothing in `read.ts` may
 allocate per row — the string column is the one exception, and it is lazy and
 cached because labels are only ever needed for the handful of objects on screen.
 
@@ -46,3 +46,22 @@ layout is avoiding.
 layout change, and either keep the previous reader working or rebuild all of
 `data/` in the same change — a browser with a cached app shell will fetch new
 data files against an old reader.
+
+## Shared package contract
+
+- Packages are renderer agnostic: no CSS/DOM rendering, application shell, or renderer-specific types.
+- No per-object folders, planet-specific implementations, or branches on named object IDs.
+- Keep object JSON, source inputs/manifests, licences, required notices, provenance, and prepared payloads outside packages.
+- Shared parsers validate versioned JSON into reusable object types and capability data.
+- Objects using the same capabilities use the same implementation and differ through their JSON.
+- Preparation and rendering use explicit interfaces; concrete renderer implementations live outside packages.
+- Capabilities must compose so complex objects can add prepared layers or paging without planet-specific forks.
+- The shared scene and navigation contract covers every prepared object and future object type, independently of navigation-menu membership.
+- Scientific reference tables belong to astronomy/catalog; object presentation customizations do not.
+
+## Source size and package maintenance
+
+- Use strict TypeScript and validate external unknown values; no `any` or TypeScript suppression comments.
+- Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
+- `pnpm lint:packages` enforces the limit. Split code by responsibility; keep bulk prepared data outside source code.
+- Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.

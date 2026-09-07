@@ -2,18 +2,6 @@
   "schema": "cssuranus-authoritative-sources@1",
   "inputs": [
     {
-      "id": "inter-uranus-title-vector",
-      "path": "presentation/title-mark.mjs",
-      "expectedSha256": "dfe91c839b556a96e1bb73e9f639260ee939fd37089cf8b2787374defc72ee21",
-      "expectedBytes": 3658,
-      "origin": "Inter Variable 4.001 git-9221beed3, prepared Uranus outline",
-      "credit": "Rasmus Andersson and the Inter project",
-      "license": "SIL Open Font License 1.1",
-      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
-      "redistribution": "project-authored SVG outline with Inter attribution",
-      "consumers": ["title"]
-    },
-    {
       "id": "hubble-opal-uranus-2025a-color",
       "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
       "expectedSha256": "854ba9d0b744c2d6e6b646d315847a3528b94b4f0b8970cc4285d71228e69c7b",
@@ -23,7 +11,10 @@
       "license": "STScI public science archive data",
       "acquisition": "pinned Hubble OPAL Cycle 33 rotation-A global-map product",
       "redistribution": "checked scientific archive product with full credit",
-      "consumers": ["scene", "lenses"]
+      "consumers": [
+        "scene",
+        "lenses"
+      ]
     },
     {
       "id": "hubble-opal-uranus-2025a-fq727n",
@@ -35,7 +26,9 @@
       "license": "STScI public science archive data",
       "acquisition": "pinned Hubble OPAL Cycle 33 FQ727N global-map product",
       "redistribution": "checked scientific archive product with full credit",
-      "consumers": ["lenses"]
+      "consumers": [
+        "lenses"
+      ]
     },
     {
       "id": "hubble-opal-uranus-2025a-f845m",
@@ -47,7 +40,9 @@
       "license": "STScI public science archive data",
       "acquisition": "pinned Hubble OPAL Cycle 33 F845M global-map product",
       "redistribution": "checked scientific archive product with full credit",
-      "consumers": ["lenses"]
+      "consumers": [
+        "lenses"
+      ]
     },
     {
       "id": "pds-uranus-ring-table",
@@ -59,7 +54,9 @@
       "license": "United States government scientific data",
       "acquisition": "checked PDS Uranus ring table snapshot",
       "redistribution": "checked scientific table with source credit",
-      "consumers": ["rings"]
+      "consumers": [
+        "rings"
+      ]
     },
     {
       "id": "jpl-uranus-discovery-table",
@@ -71,7 +68,9 @@
       "license": "United States government scientific data",
       "acquisition": "checked JPL satellite discovery table snapshot",
       "redistribution": "checked factual table with source credit",
-      "consumers": ["moons"]
+      "consumers": [
+        "moons"
+      ]
     },
     {
       "id": "jpl-uranus-elements-table",
@@ -83,7 +82,9 @@
       "license": "United States government scientific data",
       "acquisition": "checked JPL separate satellite mean-elements table snapshot",
       "redistribution": "checked factual table with source credit",
-      "consumers": ["moons"]
+      "consumers": [
+        "moons"
+      ]
     },
     {
       "id": "jpl-uranus-physical-parameters",
@@ -95,7 +96,10 @@
       "license": "United States government scientific data",
       "acquisition": "checked JPL satellite physical-parameter table snapshot",
       "redistribution": "checked factual table with source credit",
-      "consumers": ["scene", "moons"]
+      "consumers": [
+        "scene",
+        "moons"
+      ]
     },
     {
       "id": "voyager-pia01361-uranus-moons",
@@ -107,7 +111,9 @@
       "license": "NASA and JPL public media reuse policies",
       "acquisition": "checked PIA01361 dynamic image response; source bytes identify as JPEG",
       "redistribution": "checked source image and prepared crops with full credit",
-      "consumers": ["moons"]
+      "consumers": [
+        "moons"
+      ]
     },
     {
       "id": "nasa-pia18182-uranus-navigation-disc",
@@ -117,9 +123,14 @@
       "origin": "https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg",
       "credit": "NASA/JPL-Caltech",
       "license": "NASA media usage guidelines",
-      "acquisition": "node src/planets/uranus/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked NASA image with full credit and no endorsement claim",
-      "consumers": ["navigation", "scene", "lenses"]
+      "consumers": [
+        "navigation",
+        "scene",
+        "lenses"
+      ],
+      "historicalAcquisition": "node src/planets/uranus/tools/acquire.mjs --refresh"
     },
     {
       "id": "webb-uranus-navigation-reference",
@@ -131,7 +142,9 @@
       "license": "NASA, ESA, CSA, and STScI public media policies",
       "acquisition": "checked NASA Science dynamic image response",
       "redistribution": "checked visual reference with full credit",
-      "consumers": ["reference"]
+      "consumers": [
+        "reference"
+      ]
     },
     {
       "id": "nasa-psg-uranus-expanded-configuration",
@@ -143,7 +156,9 @@
       "license": "United States government scientific model response",
       "acquisition": "pinned expanded PSG configuration",
       "redistribution": "checked text configuration with NASA attribution",
-      "consumers": ["charts"]
+      "consumers": [
+        "charts"
+      ]
     },
     {
       "id": "nasa-psg-uranus-r240-rif",
@@ -155,7 +170,9 @@
       "license": "United States government scientific model response",
       "acquisition": "checked ASCII response with only the request timestamp and elapsed-time comment lines removed",
       "redistribution": "checked model response with NASA attribution",
-      "consumers": ["charts"]
+      "consumers": [
+        "charts"
+      ]
     },
     {
       "id": "hyg-v41-uranus-cubic-sky-registration",
@@ -165,10 +182,14 @@
       "origin": "HYG Stellar Database v4.1 commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce",
       "credit": "David Nash / Astronexus",
       "license": "CC-BY-SA-4.0",
-      "licenseEvidence": ["stars/LICENSE.md"],
+      "licenseEvidence": [
+        "stars/LICENSE.md"
+      ],
       "acquisition": "Prepared deterministic coordinate-registration subset from the pinned HYG v4.1 source.",
       "redistribution": "Share-alike prepared subset with attribution and license evidence.",
-      "consumers": ["starfield"]
+      "consumers": [
+        "starfield"
+      ]
     },
     {
       "id": "eso-uranus-milky-way-panorama",
@@ -178,10 +199,15 @@
       "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
       "credit": "ESO/S. Brunier",
       "license": "CC-BY-4.0",
-      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
       "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": ["starfield", "scene"]
+      "consumers": [
+        "starfield",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-uranus-cubic-sky-sun-oracle-asset",
@@ -193,7 +219,11 @@
       "license": "Google proprietary; no redistribution grant verified",
       "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
       "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": ["starfield", "sun-oracle", "scene"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-uranus-cubic-sky-sun-oracle-measurements",
@@ -205,7 +235,194 @@
       "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
       "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
       "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": ["starfield", "sun-oracle", "scene", "lighting"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene",
+        "lighting"
+      ]
+    },
+    {
+      "id": "uranus-authored-preparation-rings",
+      "path": "preparation/rings.json",
+      "expectedBytes": 9827,
+      "expectedSha256": "0187ce35b4db1570a676b7b360a8066a22412cbc02a30c990bccf8c17a478fb1",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "radial-layers"
+      ]
+    },
+    {
+      "id": "uranus-authored-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 863,
+      "expectedSha256": "1df46b208af90dde0e19f5ff36931da03c49595436604a1daa7f69d7066e9d56",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "uranus-authored-content-object",
+      "path": "content/object.json",
+      "expectedBytes": 11380,
+      "expectedSha256": "c830b553957323cb06615011f17fb5ba607a9156f1208323431e7c3e570d3c88",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "content"
+      ]
+    },
+    {
+      "id": "uranus-authored-presentation-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3595,
+      "expectedSha256": "5a445e3cd7da5859de675835f3c2e3a650f8805b364efe672e9074a084642aa3",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "uranus-authored-editorial-object",
+      "path": "editorial/object.json",
+      "expectedBytes": 4662,
+      "expectedSha256": "ac0971c8bf730c39b94204377ecc6e15e2ac3fe2882139e43fd7b1a15d301c7e",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "NASA Science",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "content"
+      ]
+    },
+    {
+      "id": "uranus-authored-observations",
+      "path": "preparation/observations.json",
+      "expectedBytes": 14043,
+      "expectedSha256": "7460b922b37079359b23c2b321b1abb739270f83e18fefc34b9832b01ec9021e",
+      "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
+      "credit": "cssEarth and the institutional sources identified in the recipe",
+      "license": "Project-authored specification; observation source terms retained",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "observed-surfaces"
+      ]
+    },
+    {
+      "id": "uranus-authored-materials",
+      "path": "preparation/materials.json",
+      "expectedBytes": 7473,
+      "expectedSha256": "7da0fe026b0769397aa3c5c23f170892e29ff544dfcea4966cb966b72b2f6982",
+      "origin": "Checked source-informed oblate lighting and retained material preparation parameters",
+      "credit": "cssEarth and the institutional sources identified by the source manifest",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with referenced observation provenance",
+      "consumers": [
+        "material-composition"
+      ]
+    },
+    {
+      "id": "uranus-authored-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1839,
+      "expectedSha256": "8ac51ff107b0f06444661f53134c4c001c59b08bb99357100b9ce6d67cd8f759",
+      "origin": "Checked oblate tessellation and retained texture presentation conventions",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "geometry"
+      ]
+    },
+    {
+      "id": "uranus-authored-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 3146,
+      "expectedSha256": "ef6c3e19766fc6deafaaa3e379c53a7f55c1eb62521b39fdff1fcf7a5207c960",
+      "origin": "Checked retained scene composition, physical presentation and material residency policy",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "uranus-authored-charts",
+      "path": "content/charts.json",
+      "expectedBytes": 3317,
+      "expectedSha256": "e601104a469ea0f3e5f36776145bfb303f6a60fc50e268db1215b97b96af71b1",
+      "origin": "Checked source-dependent chart axes and source/provenance declarations",
+      "credit": "cssEarth and NASA GSFC Planetary Spectrum Generator",
+      "license": "Project-authored scientific specification with cited authority",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with institutional provenance",
+      "consumers": [
+        "charts"
+      ]
+    },
+    {
+      "id": "uranus-authored-photometry",
+      "path": "photometry/phase.json",
+      "expectedBytes": 1022,
+      "expectedSha256": "3756adbfc034398fedab0113bf7e967a9a95944a4fcf5028b3b78e2bc59257e4",
+      "origin": "Checked scientific phase model from site/source/scientific-charts/planetary-context.json",
+      "credit": "Anthony Mallama and James L. Hilton",
+      "license": "Project-authored scientific specification with cited authority",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with institutional provenance",
+      "consumers": [
+        "charts"
+      ]
+    },
+    {
+      "id": "uranus-authored-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 328,
+      "expectedSha256": "d9a200db859e0a87f8d6c949bec7808afbb00473d30142f83cbb9c6b518da6cc",
+      "origin": "Checked shared photographic sky and clean-room directional Sun presentation inputs",
+      "credit": "cssEarth; ESO/S. Brunier; HYG Stellar Database",
+      "license": "Project-authored specification; original sky-source terms retained",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "celestial"
+      ]
+    },
+    {
+      "id": "uranus-authored-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 3883,
+      "expectedSha256": "2ea5f5085e8a1044d544e3782fcd72a9a54c15e6114bb808ca80a268b01293a9",
+      "origin": "Checked source restoration and verification operations",
+      "credit": "cssEarth with original source credits preserved per input",
+      "license": "Project-authored acquisition specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "acquisition"
+      ]
     }
   ],
   "generatedIntermediates": [],

@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "surface/lroc-color-2k.jpg",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "lenses/lola-topography-print.jpg",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/LDEM_16.0centered.0centered_print.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "lenses/grail-crustal-thickness-print.jpg",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    }
+  ]
+}

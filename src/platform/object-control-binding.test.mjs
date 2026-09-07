@@ -1,15 +1,18 @@
 import { geographicControlSlots } from "./test/geographic-controls.mjs";
+import { loadObjectTestDefinition } from "../../tools/object-test-data.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
-import { createObjectControlBinding } from "./object-control-binding.mjs";
-import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from "./object-runtime-contract.mjs";
-import { objectControls as moonControls } from "../planets/moon/site/control-content.mjs";
-import { objectControls as saturnControls } from "../planets/saturn/site/control-content.mjs";
+import { createObjectControlBinding } from '../renderers/css/dist/testing.js';
+import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from '../renderers/css/dist/testing.js';
+const { controls: moonControls } = await loadObjectTestDefinition('moon');
+const { controls: saturnControls } = await loadObjectTestDefinition('saturn');
 const flush = async () => { for (let i = 0; i < 10; i++) await Promise.resolve(); };
 class Input extends EventTarget {
   constructor(fields = {}) { super(); Object.assign(this, { name: "", value: "", dataset: {}, disabled: false, attributes: {}, tagName: "INPUT", type: "checkbox", min: "0", max: "4", step: "1" }, fields); }
   setAttribute(key, value) { this.attributes[key] = value; }
+  hasAttribute(key) { return Object.hasOwn(this.attributes, key); }
+  closest() { return null; }
   emit(type) { this.dispatchEvent(new Event(type)); }
 }
 function root(inputs, slots = []) {
@@ -42,7 +45,7 @@ function harness(controls = moonControls, mutate = () => {}) {
 }
 
 for (const object of OBJECTS) test(`${object.id}: one binder consumes every actual control and owns no shell preference listener`, async () => {
-  const { objectControls: controls } = await import(`../planets/${object.id}/site/control-content.mjs`);
+  const {controls} = await loadObjectTestDefinition(object.id);
   const h = harness(controls);
   assert.ok([...h.lensInputs, ...h.settingInputs.filter(input => !["motion", "skyContrast"].includes(input.name))].every(input => input.disabled));
   assert.equal(h.motion.disabled, false); assert.equal(h.contrast.disabled, false);

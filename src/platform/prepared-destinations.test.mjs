@@ -1,8 +1,8 @@
 import test from "node:test";
-import { createDestinationStore } from "./prepared-destination-store.mjs";
+import { createDestinationStore } from "../renderers/css/dist/testing.js";
 import assert from "node:assert/strict";
 import { prepareDestinationPacks } from "../../tools/prepare-destination-packs.mjs";
-import { createPreparedDestinations } from "./prepared-destinations.mjs";
+import { createPreparedDestinations } from "../renderers/css/dist/testing.js";
 import { createSceneLifetime } from "./scene-lifetime.mjs";
 
 function fixture(options = {}) {

@@ -1,25 +1,17 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { PREPARED_EARTH_STARFIELD } from
-  "../planets/earth/runtime/preparedStarfield.mjs";
-import { PREPARED_JUPITER_STARFIELD } from
-  "../planets/jupiter/runtime/preparedStarfield.mjs";
-import { PREPARED_MARS_STARFIELD } from
-  "../planets/mars/runtime/preparedStarfield.mjs";
-import { PREPARED_MERCURY_STARFIELD } from
-  "../planets/mercury/runtime/preparedStarfield.mjs";
-import { PREPARED_NEPTUNE_STARFIELD } from
-  "../planets/neptune/runtime/preparedStarfield.mjs";
-import { PREPARED_SATURN_STARFIELD } from
-  "../planets/saturn/runtime/preparedStarfield.mjs";
-import { PREPARED_SUN_STARFIELD } from
-  "../planets/sun/runtime/preparedStarfield.mjs";
-import { PREPARED_URANUS_STARFIELD } from
-  "../planets/uranus/runtime/preparedStarfield.mjs";
-import { PREPARED_VENUS_STARFIELD } from
-  "../planets/venus/runtime/preparedStarfield.mjs";
+const { sky: PREPARED_EARTH_STARFIELD } = await loadObjectTestDefinition('earth');
+const { sky: PREPARED_JUPITER_STARFIELD } = await loadObjectTestDefinition('jupiter');
+const { sky: PREPARED_MARS_STARFIELD } = await loadObjectTestDefinition('mars');
+import PREPARED_MERCURY_STARFIELD from "../../src/planets/mercury/prepared/sky.json" with {type: "json"};
+const { sky: PREPARED_NEPTUNE_STARFIELD } = await loadObjectTestDefinition('neptune');
+const { sky: PREPARED_SATURN_STARFIELD } = await loadObjectTestDefinition('saturn');
+const { sky: PREPARED_SUN_STARFIELD } = await loadObjectTestDefinition('sun');
+const { sky: PREPARED_URANUS_STARFIELD } = await loadObjectTestDefinition('uranus');
+import PREPARED_VENUS_STARFIELD from "../../src/planets/venus/prepared/sky.json" with {type: "json"};
 import {
   CUBIC_SKY_CAMERA_PRESENTATION_STANDARD,
   CUBIC_SKY_FACE_IDS,

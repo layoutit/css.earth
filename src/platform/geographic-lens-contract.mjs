@@ -52,7 +52,9 @@ export function requireGeographicLensPackage(value, descriptor, entityId, capaci
       !text(value.baseLensId) || !text(value.qualification) ||
       !source || !text(source.publisher) || !Number.isInteger(source.year) || !text(source.units) ||
       !https(source.url) || !https(source.licenseUrl) || !text(source.license) || !hash(source.sha256) ||
-      legend?.kind !== "categories" || !Array.isArray(legend.items) || !legend.items.length ||
+      !["categories", "scale"].includes(legend?.kind) ||
+      legend.kind === "scale" && (!Array.isArray(legend.labels) || legend.labels.length !== 2 || !legend.labels.every(text)) ||
+      !Array.isArray(legend.items) || !legend.items.length ||
       legend.items.length > GEOGRAPHIC_LEGEND_CAPACITY || legend.items.some(item => !text(item.label) ||
         !/^rgb\((?:\d{1,3},){2}\d{1,3}\)$/u.test(item.color) || item.color.match(/\d+/gu).some(n => +n > 255))) {
     throw new Error("Incompatible geographic lens content or source identity.");

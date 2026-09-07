@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { constants } from "node:fs";
-import { copyFile, lstat, mkdir, mkdtemp, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
+import { copyFile, lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -24,6 +24,7 @@ import {
 import { validateMarkerPresentation } from "../src/navigation/marker-presentation.mjs";
 import { OBJECTS } from "../site/objects.mjs";
 import { optimizePreparedQ75Webp } from "./prepared-webp.mjs";
+import { authoredObject } from './authored-object.mjs';
 
 const markerTileSize = 16;
 const PLANET_MARKER_PLANETS = Object.freeze(
@@ -447,6 +448,9 @@ async function renderNavigation({ projectRoot, outputRoot, descriptors }) {
 }
 
 async function loadObjectDescriptor(planetId, projectRoot) {
+  if (await authoredObject(planetId, projectRoot)) {
+    return JSON.parse(await readFile(resolve(projectRoot, 'src/planets', planetId, 'source/preparation/navigation.json'), 'utf8'));
+  }
   const modulePath = resolve(
     projectRoot,
     "src/planets",

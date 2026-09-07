@@ -1,9 +1,10 @@
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { OBJECTS } from "../../site/objects.mjs";
-import { objectControls } from "../planets/moon/site/control-content.mjs";
-import { runtimeDefinition as moonDefinition } from "../planets/moon/runtime/definition.mjs";
-import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from "./object-runtime-contract.mjs";
+const moonDefinition = await loadObjectTestDefinition('moon');
+const objectControls = moonDefinition.controls;
+import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from '../renderers/css/dist/testing.js';
 import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
 
 function definition(overrides = {}) {
@@ -12,7 +13,7 @@ function definition(overrides = {}) {
 
 test("validates actions against real controls for every existing object", async () => {
   for (const object of OBJECTS) {
-    const { objectControls: controls } = await import(`../planets/${object.id}/site/control-content.mjs`);
+    const {controls} = await loadObjectTestDefinition(object.id);
     for (const lens of controls.lenses?.controls ?? []) {
       assert.equal(requireObjectAction(controls, { kind: "lens", id: lens.id }).id, lens.id);
     }

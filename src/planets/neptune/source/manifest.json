@@ -2,20 +2,6 @@
   "schema": "cssneptune-authoritative-sources@1",
   "inputs": [
     {
-      "id": "inter-neptune-title-vector",
-      "path": "presentation/title-mark.mjs",
-      "expectedSha256": "15f51c6d978a8354fb3921fa7996565570c9b2f491a99e0a1a652bedbd255a2a",
-      "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Neptune outline",
-      "credit": "Rasmus Andersson and the Inter project",
-      "license": "SIL Open Font License 1.1",
-      "acquisition": "checked vector extraction from the pinned InterVariable.ttf source",
-      "redistribution": "project-authored SVG outline with Inter attribution",
-      "consumers": [
-        "title"
-      ],
-      "expectedBytes": 4009
-    },
-    {
       "id": "hubble-opal-neptune-visible",
       "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
       "expectedSha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8",
@@ -25,14 +11,15 @@
       "licenseEvidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
       ],
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "prepared derivative with OPAL and STScI credit",
       "consumers": [
         "scene",
         "lenses",
         "navigation"
       ],
-      "expectedBytes": 789926
+      "expectedBytes": 789926,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "hubble-opal-neptune-fq619n",
@@ -44,12 +31,13 @@
       "licenseEvidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
       ],
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "prepared false-colour derivative with source credit",
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 1045440
+      "expectedBytes": 1045440,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "hubble-opal-neptune-f845m",
@@ -61,12 +49,13 @@
       "licenseEvidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
       ],
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "prepared false-colour derivative with source credit",
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 1045440
+      "expectedBytes": 1045440,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "hubble-opal-neptune-readme",
@@ -75,13 +64,14 @@
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked plain-text observing record with source credit",
       "consumers": [
         "scene",
         "lenses"
       ],
-      "expectedBytes": 1541
+      "expectedBytes": 1541,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "ras-oxford-neptune-true-colour-reference",
@@ -93,13 +83,14 @@
       "licenseEvidence": [
         "https://ras.ac.uk/media/1488"
       ],
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked true-colour calibration reference with attribution",
       "consumers": [
         "scene",
         "lenses"
       ],
-      "expectedBytes": 338632
+      "expectedBytes": 338632,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "jpl-neptune-discovery-table",
@@ -108,13 +99,14 @@
       "origin": "https://ssd.jpl.nasa.gov/sats/discovery.html",
       "credit": "NASA/JPL Solar System Dynamics",
       "license": "NASA/JPL United States government data",
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked public factual table",
       "consumers": [
         "moons",
         "panel"
       ],
-      "expectedBytes": 116148
+      "expectedBytes": 116148,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "jpl-neptune-mean-elements",
@@ -123,12 +115,13 @@
       "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
       "credit": "NASA/JPL Solar System Dynamics",
       "license": "NASA/JPL United States government data",
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked public factual table",
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 418952
+      "expectedBytes": 418952,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "jpl-neptune-physical-parameters",
@@ -137,12 +130,13 @@
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
       "credit": "NASA/JPL Solar System Dynamics",
       "license": "NASA/JPL United States government data",
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked public factual table",
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 84633
+      "expectedBytes": 84633,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "pds-neptune-ring-table",
@@ -151,13 +145,14 @@
       "origin": "https://pds-rings.seti.org/neptune/neptune_tables.html",
       "credit": "NASA PDS Rings Node, SETI Institute",
       "license": "public NASA Planetary Data System scientific data",
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked public factual table",
       "consumers": [
         "rings",
         "panel"
       ],
-      "expectedBytes": 14304
+      "expectedBytes": 14304,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "openspace-neptune-globe",
@@ -169,12 +164,13 @@
       "licenseEvidence": [
         "https://github.com/OpenSpace/OpenSpace/blob/56e29b54b8592084ff1fef47c2e08de0b22ce516/LICENSE.md"
       ],
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "permitted with OpenSpace MIT notice",
       "consumers": [
         "scene"
       ],
-      "expectedBytes": 1191
+      "expectedBytes": 1191,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "openspace-neptune-kernels",
@@ -183,12 +179,13 @@
       "origin": "OpenSpace commit 56e29b54b8592084ff1fef47c2e08de0b22ce516 Neptune SPICE asset",
       "credit": "OpenSpace Team and NASA NAIF",
       "license": "MIT asset definition; linked NASA NAIF kernels are not redistributed",
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "checked asset definition only",
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 1147
+      "expectedBytes": 1147,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "openspace-neptune-major-moons",
@@ -197,12 +194,13 @@
       "origin": "OpenSpace commit 56e29b54b8592084ff1fef47c2e08de0b22ce516 Neptune major moons asset",
       "credit": "OpenSpace Team",
       "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "permitted with OpenSpace MIT notice",
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 2756
+      "expectedBytes": 2756,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "nasa-science-neptune-editorial",
@@ -211,12 +209,13 @@
       "origin": "https://science.nasa.gov/neptune/neptune-facts/",
       "credit": "NASA Science",
       "license": "United States government editorial material",
-      "acquisition": "tools/prepare-planet-information.mjs neptune during adapter acquisition",
+      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked normalized factual snapshot with source identity",
       "consumers": [
         "panel"
       ],
-      "expectedBytes": 8148
+      "expectedBytes": 8148,
+      "historicalAcquisition": "tools/prepare-planet-information.mjs neptune during adapter acquisition"
     },
     {
       "id": "nasa-psg-neptune-configuration",
@@ -225,13 +224,14 @@
       "origin": "https://psg.gsfc.nasa.gov/api.php, expanded Neptune configuration dated 2026/08/30",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific model response",
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "checked text configuration with NASA attribution",
       "consumers": [
         "spectrum",
         "temperature-pressure-profile"
       ],
-      "expectedBytes": 8864
+      "expectedBytes": 8864,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "nasa-psg-neptune-r240-rif",
@@ -240,12 +240,13 @@
       "origin": "https://psg.gsfc.nasa.gov/api.php, pinned Neptune 0.35 to 1.0 um R=240 I/F response",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific model response",
-      "acquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "checked raw ASCII response with NASA attribution",
       "consumers": [
         "spectrum"
       ],
-      "expectedBytes": 12113
+      "expectedBytes": 12113,
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
       "id": "hyg-v41-neptune-field",
@@ -270,10 +271,15 @@
       "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
       "credit": "ESO/S. Brunier",
       "license": "CC-BY-4.0",
-      "licenseEvidence": ["stars/ESO-IMAGE-LICENSE.md"],
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
       "acquisition": "Exact official 6000 by 3000 ESO full-sky panorama reused by the generic cubic-sky contract.",
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
-      "consumers": ["starfield", "scene"]
+      "consumers": [
+        "starfield",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-neptune-cubic-sky-sun-oracle-asset",
@@ -285,7 +291,11 @@
       "license": "Google proprietary; no redistribution grant verified",
       "acquisition": "Exact asset captured during the read-only Google Maps Venus investigation on 2026-08-31 and reused as the generic cubic-sky presentation source.",
       "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
-      "consumers": ["starfield", "sun-oracle", "scene"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene"
+      ]
     },
     {
       "id": "google-maps-neptune-cubic-sky-sun-oracle-measurements",
@@ -297,7 +307,194 @@
       "license": "Repository-authored factual measurements; exact referenced asset is separately qualified",
       "acquisition": "Read-only browser observation of the canonical Venus route on 2026-08-31, generalized as the shared cubic-sky presentation contract.",
       "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
-      "consumers": ["starfield", "sun-oracle", "scene", "lighting"]
+      "consumers": [
+        "starfield",
+        "sun-oracle",
+        "scene",
+        "lighting"
+      ]
+    },
+    {
+      "id": "neptune-authored-preparation-rings",
+      "path": "preparation/rings.json",
+      "expectedBytes": 3791,
+      "expectedSha256": "fee3c1d33b6cb97a068942ef53ae26cd15f48e89bf3ae25ed4067315a0d36ea7",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "radial-layers"
+      ]
+    },
+    {
+      "id": "neptune-authored-preparation-navigation",
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1186,
+      "expectedSha256": "9fdd021f202113bf1d6a2eca6a05bf52653a2f11a13edb1b04e5ad3b8783647c",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "neptune-authored-content-object",
+      "path": "content/object.json",
+      "expectedBytes": 11871,
+      "expectedSha256": "ebaa31d18566865ac42d29b0b70e7025b8ffc8861ac8fa7e517a129a8e947008",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "cssEarth and the institutional sources identified inside the JSON",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "content"
+      ]
+    },
+    {
+      "id": "neptune-authored-presentation-title-mark",
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3945,
+      "expectedSha256": "8ca67cf11677b7892d745970247206232fbb935583fccc7fe5d1898d141ddb5b",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "Rasmus Andersson and the Inter project",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "neptune-authored-editorial-object",
+      "path": "editorial/object.json",
+      "expectedBytes": 8148,
+      "expectedSha256": "62608eec61497708dde0317c43bcbad173bf8044e516997ddf33cc80c304858e",
+      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "credit": "NASA Science",
+      "license": "Project-authored specification; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "content"
+      ]
+    },
+    {
+      "id": "neptune-authored-observations",
+      "path": "preparation/observations.json",
+      "expectedBytes": 12996,
+      "expectedSha256": "67711c6f0e6aa548d94ca2a434a40ab10dea79da9d40965eba74654987e51a6c",
+      "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
+      "credit": "cssEarth and the institutional sources identified in the recipe",
+      "license": "Project-authored specification; observation source terms retained",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "observed-surfaces"
+      ]
+    },
+    {
+      "id": "neptune-authored-materials",
+      "path": "preparation/materials.json",
+      "expectedBytes": 4791,
+      "expectedSha256": "7ddf646b781a982b02f66e22a6bad93964c260da8a1e3abf56cd94b820cbfbc8",
+      "origin": "Checked source-informed oblate lighting and retained material preparation parameters",
+      "credit": "cssEarth and the institutional sources identified by the source manifest",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with referenced observation provenance",
+      "consumers": [
+        "material-composition"
+      ]
+    },
+    {
+      "id": "neptune-authored-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1620,
+      "expectedSha256": "19eb613445e8d64c7f745b29667d43e268ce85116b4891951dae88e881a3e2c1",
+      "origin": "Checked oblate tessellation and retained texture presentation conventions",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "geometry"
+      ]
+    },
+    {
+      "id": "neptune-authored-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 2961,
+      "expectedSha256": "8aa3f35d817d25b0755f8d917ab380fa747706751e8c3d4962b0e5398887f1f8",
+      "origin": "Checked retained scene composition, physical presentation and material residency policy",
+      "credit": "cssEarth",
+      "license": "Project-authored specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "neptune-authored-charts",
+      "path": "content/charts.json",
+      "expectedBytes": 3648,
+      "expectedSha256": "b924bf227bdced8c394dd79184f903627f2e8ed1293b10cc8b69a0a05dabe42e",
+      "origin": "Checked source-dependent chart axes and source/provenance declarations",
+      "credit": "cssEarth and NASA GSFC Planetary Spectrum Generator",
+      "license": "Project-authored scientific specification with cited authority",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with institutional provenance",
+      "consumers": [
+        "charts"
+      ]
+    },
+    {
+      "id": "neptune-authored-photometry",
+      "path": "photometry/phase.json",
+      "expectedBytes": 1017,
+      "expectedSha256": "aa2c0a3e4b1d6f7958d930ecc7e4b9bcb2de8797473f35d52399b5039ce3b060",
+      "origin": "Checked scientific phase model from site/source/scientific-charts/planetary-context.json",
+      "credit": "Anthony Mallama and James L. Hilton",
+      "license": "Project-authored scientific specification with cited authority",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with institutional provenance",
+      "consumers": [
+        "charts"
+      ]
+    },
+    {
+      "id": "neptune-authored-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 330,
+      "expectedSha256": "d382149e96d1fe9decaf6bbe994cb3489021bb12b08ddd7c4cf89e8f246161c2",
+      "origin": "Checked shared photographic sky and clean-room directional Sun presentation inputs",
+      "credit": "cssEarth; ESO/S. Brunier; HYG Stellar Database",
+      "license": "Project-authored specification; original sky-source terms retained",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "celestial"
+      ]
+    },
+    {
+      "id": "neptune-authored-acquisition",
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 3753,
+      "expectedSha256": "2533634cfe016f466a29490ba0d394ec723e1bbddc2b4c74bcf18317a27401c3",
+      "origin": "Checked source restoration and verification operations",
+      "credit": "cssEarth with original source credits preserved per input",
+      "license": "Project-authored acquisition specification",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source",
+      "consumers": [
+        "acquisition"
+      ]
     }
   ],
   "generatedIntermediates": [],

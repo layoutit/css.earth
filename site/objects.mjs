@@ -1,83 +1,144 @@
+import iapetusDescriptor from "../src/planets/iapetus/object.json" with { type: "json" };
+import rheaDescriptor from "../src/planets/rhea/object.json" with { type: "json" };
+import marsDescriptor from "../src/planets/mars/object.json" with { type: "json" };
+import neptuneDescriptor from "../src/planets/neptune/object.json" with { type: "json" };
+import uranusDescriptor from "../src/planets/uranus/object.json" with { type: "json" };
+import saturnDescriptor from "../src/planets/saturn/object.json" with { type: "json" };
+import enceladusDescriptor from "../src/planets/enceladus/object.json" with { type: "json" };
+import mimasDescriptor from "../src/planets/mimas/object.json" with { type: "json" };
+import tethysDescriptor from "../src/planets/tethys/object.json" with { type: "json" };
+import dioneDescriptor from "../src/planets/dione/object.json" with { type: "json" };
+import titanDescriptor from "../src/planets/titan/object.json" with { type: "json" };
+import jupiterDescriptor from "../src/planets/jupiter/object.json" with { type: "json" };
+import europaDescriptor from "../src/planets/europa/object.json" with { type: "json" };
+import ioDescriptor from "../src/planets/io/object.json" with { type: "json" };
+import ganymedeDescriptor from "../src/planets/ganymede/object.json" with { type: "json" };
+import callistoDescriptor from "../src/planets/callisto/object.json" with { type: "json" };
+import ceresDescriptor from "../src/planets/ceres/object.json" with { type: "json" };
+import plutoDescriptor from "../src/planets/pluto/object.json" with { type: "json" };
+import moonDescriptor from "../src/planets/moon/object.json" with { type: "json" };
+import earthDescriptor from "../src/planets/earth/object.json" with { type: "json" };
+import sunDescriptor from "../src/planets/sun/object.json" with { type: "json" };
+import mercuryDescriptor from "../src/planets/mercury/object.json" with { type: "json" };
+import venusDescriptor from "../src/planets/venus/object.json" with { type: "json" };
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
   object("sun", "Sun", "star", "#f5a623", 0,
-    "pinned NASA Science and Solar Dynamics Observatory", async () => {
-      const { mountSunClient } = await import(
-        "../src/planets/sun/runtime/client.mjs"
-      );
-      return mountSunClient;
-    }),
+    "Explore the Sun in 3D with cssEarth. Discover our nearest star, its glowing atmosphere, and the science behind the center of the solar system.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(sunDescriptor);
+    }, sunDescriptor.properties.worldFrame),
   object("mercury", "Mercury", "planet", "#9d9388", 0.39,
-    "NASA, USGS, OpenSpace, and HYG", async () => {
-      const { mountMercuryClient } = await import(
-        "../src/planets/mercury/runtime/client.mjs"
-      );
-      return mountMercuryClient;
-    }),
+    "Explore Mercury in 3D with cssEarth. Inspect the smallest planet, its cratered surface, and the extreme conditions closest to the Sun.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mercuryDescriptor);
+    }, mercuryDescriptor.properties.worldFrame),
   object("venus", "Venus", "planet", "#d6aa69", 0.72,
-    "NASA, USGS, OpenSpace, and HYG", async () => {
-      const { mountVenusClient } = await import(
-        "../src/planets/venus/runtime/client.mjs"
-      );
-      return mountVenusClient;
-    }),
+    "Explore Venus in 3D with cssEarth. Look beneath its clouds, discover its volcanic surface, and learn about the hottest planet in our solar system.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(venusDescriptor);
+    }, venusDescriptor.properties.worldFrame),
   object("earth", "Earth", "planet", "#5b82a7", 1,
-    "NASA, JPL, OpenSpace, and HYG", async () => {
-      const { mountEarthClient } = await import(
-        "../src/planets/earth/runtime/client.mjs"
-      );
-      return mountEarthClient;
-    }),
+    "Explore Earth in 3D with cssEarth. Orbit our home planet, discover its surface and atmosphere, and browse scientific facts in your browser.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(earthDescriptor);
+    }, earthDescriptor.properties.worldFrame),
   object("moon", "Moon", "satellite", "#aaa7a0", 1,
-    "NASA, JPL, OpenSpace, and HYG", async () => {
-      const { mountMoonClient } = await import(
-        "../src/planets/moon/runtime/client.mjs"
-      );
-      return mountMoonClient;
-    }),
+    "Explore the Moon in 3D with cssEarth. Discover impact craters, ancient lava plains, and the history of Earth’s natural satellite.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(moonDescriptor);
+    }, moonDescriptor.properties.worldFrame),
   object("mars", "Mars", "planet", "#a95e47", 1.52,
-    "OpenSpace, NASA, USGS, and JPL", async () => {
-      const { mountMarsClient } = await import(
-        "../src/planets/mars/runtime/client.mjs"
-      );
-      return mountMarsClient;
-    }),
+    "Explore Mars in 3D with cssEarth. Discover the red planet’s volcanoes, deep canyons, polar ice, and thin atmosphere in an interactive explorer.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(marsDescriptor);
+    }, marsDescriptor.properties.worldFrame),
+  object("ceres", "Ceres", "dwarf-planet", "#8e8b86", 2.77,
+    "NASA Dawn, USGS, JPL, ESO, and HYG", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ceresDescriptor);
+    }, ceresDescriptor.properties.worldFrame),
   object("jupiter", "Jupiter", "planet", "#b48b67", 5.2,
-    "NASA, ESA, STScI, JPL, and OpenSpace", async () => {
-      const { mountJupiterClient } = await import(
-        "../src/planets/jupiter/runtime/client.mjs"
-      );
-      return mountJupiterClient;
-    }),
+    "Explore Jupiter in 3D with cssEarth. Discover the solar system’s largest planet, its colorful cloud bands, giant storms, and orbiting moons.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(jupiterDescriptor);
+    }, jupiterDescriptor.properties.worldFrame),
+  object("io", "Io", "satellite", "#c6ac65", 5.2,
+    "Explore Io in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s volcanic moon and its orbit around Jupiter.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ioDescriptor);
+    }, ioDescriptor.properties.worldFrame),
+  object("europa", "Europa", "satellite", "#b5b3a9", 5.2,
+    "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s fractured icy moon and its orbit around Jupiter.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(europaDescriptor);
+    }, europaDescriptor.properties.worldFrame),
+  object("ganymede", "Ganymede", "satellite", "#a49a83", 5.2,
+    "Explore Ganymede in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s largest moon and its grooved icy surface.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ganymedeDescriptor);
+    }, ganymedeDescriptor.properties.worldFrame),
+  object("callisto", "Callisto", "satellite", "#8b8177", 5.2,
+    "Explore Callisto in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s heavily cratered moon and its ancient surface.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(callistoDescriptor);
+    }, callistoDescriptor.properties.worldFrame),
   object("saturn", "Saturn", "planet", "#d2b68c", 9.58,
-    "OpenSpace and NASA", async () => {
-      const { mountSaturnClient } = await import(
-        "../src/planets/saturn/runtime/client.mjs"
-      );
-      return mountSaturnClient;
-    }),
+    "Explore Saturn in 3D with cssEarth. Orbit its spectacular rings, discover its moons, and browse scientific facts about this gas giant.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(saturnDescriptor);
+    }, saturnDescriptor.properties.worldFrame),
+  object("mimas", "Mimas", "satellite", "#aeaba5", 9.58,
+    "Explore Mimas in 3D with cssEarth. Inspect Cassini imagery of Saturn’s cratered moon and its giant Herschel impact basin.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mimasDescriptor);
+    }, mimasDescriptor.properties.worldFrame),
+  object("enceladus", "Enceladus", "satellite", "#d3d7d8", 9.58,
+    "Explore Enceladus in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s fractured icy ocean moon.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(enceladusDescriptor);
+    }, enceladusDescriptor.properties.worldFrame),
+  object("tethys", "Tethys", "satellite", "#bcbbae", 9.58,
+    "Explore Tethys in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s icy moon, Odysseus crater, and Ithaca Chasma.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tethysDescriptor);
+    }, tethysDescriptor.properties.worldFrame),
+  object("dione", "Dione", "satellite", "#bab9b1", 9.58,
+    "Explore Dione in 3D with cssEarth. Inspect Cassini and Voyager imagery and elevation maps of Saturn’s icy moon, its bright cliffs and fractured terrain.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(dioneDescriptor);
+    }, dioneDescriptor.properties.worldFrame),
+  object("rhea", "Rhea", "satellite", "#bebbb0", 9.58,
+    "Explore Rhea in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s icy moon, its impact basins and bright fractures.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(rheaDescriptor);
+    }, rheaDescriptor.properties.worldFrame),
+  object("titan", "Titan", "satellite", "#bca06b", 9.58,
+    "Explore Titan in 3D with cssEarth. See through Saturn’s largest moon’s haze with Cassini near-infrared imagery.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(titanDescriptor);
+    }, titanDescriptor.properties.worldFrame),
+  object("iapetus", "Iapetus", "satellite", "#9a8f7a", 9.58,
+    "Explore Iapetus in 3D with cssEarth. Inspect Cassini imagery of Saturn’s two-toned moon and its equatorial ridge.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(iapetusDescriptor);
+    }, iapetusDescriptor.properties.worldFrame),
   object("uranus", "Uranus", "planet", "#8ec7c9", 19.2,
-    "Hubble OPAL, NASA, JPL, PDS, and Voyager", async () => {
-      const { mountUranusClient } = await import(
-        "../src/planets/uranus/runtime/client.mjs"
-      );
-      return mountUranusClient;
-    }),
+    "Explore Uranus in 3D with cssEarth. Discover the ice giant that spins on its side, its faint rings, and its system of moons.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(uranusDescriptor);
+    }, uranusDescriptor.properties.worldFrame),
   object("neptune", "Neptune", "planet", "#5279bd", 30.05,
-    "NASA, ESA, STScI, JPL, PDS, and OpenSpace", async () => {
-      const { mountNeptuneClient } = await import(
-        "../src/planets/neptune/runtime/client.mjs"
-      );
-      return mountNeptuneClient;
-    }),
+    "Explore Neptune in 3D with cssEarth. Discover the distant blue ice giant, its turbulent atmosphere, faint rings, and orbiting moons.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(neptuneDescriptor);
+    }, neptuneDescriptor.properties.worldFrame),
   object("pluto", "Pluto", "dwarf-planet", "#bca18a", 39,
-    "NASA New Horizons, USGS, JPL, ESO, and HYG", async () => {
-      const { mountPlutoClient } = await import(
-        "../src/planets/pluto/runtime/client.mjs"
-      );
-      return mountPlutoClient;
-    }),
+    "Explore Pluto in 3D with cssEarth. Discover this distant dwarf planet’s icy landscape, its heart-shaped region, and its companion Charon.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(plutoDescriptor);
+    }, plutoDescriptor.properties.worldFrame),
 ]);
 
 export function requireObject(id) {
@@ -86,16 +147,17 @@ export function requireObject(id) {
   return objectRecord;
 }
 
-function object(id, name, classification, color, distanceAu, authority, loadScene) {
+function object(id, name, classification, color, distanceAu, description, loadScene, worldFrame = null, systemName = "Solar System") {
   return defineObject({
     id,
     name,
+    systemName,
     classification,
     color,
     distanceAu,
     route: `/${id}/`,
     loadScene,
-    description:
-      `An interactive retained-DOM ${name} visualization prepared from ${authority} source material.`,
+    worldFrame,
+    description,
   });
 }

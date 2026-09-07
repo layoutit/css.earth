@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { projectCityPage } from './prepared-map/city-page-selection.mjs';
-import { selectBackingReplacements } from './prepared-map/backing-replacements.mjs';
+import { projectCityPage } from "../renderers/css/dist/testing.js";
+import { selectBackingReplacements } from "../renderers/css/dist/testing.js";
 
 const matrix=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1], viewport={width:800,height:600};
 const shape={corners:[[-20,-20,0],[20,-20,0],[20,20,0],[-20,20,0]],normal:[0,0,1]};

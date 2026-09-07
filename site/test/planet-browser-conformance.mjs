@@ -59,7 +59,7 @@ try {
     }
     reports.push(await runCase(planet, "dpr-1", () => provePreparedDensity(browser, planet, profile, 1)));
     reports.push(await runCase(planet, "dpr-2", () => provePreparedDensity(browser, planet, profile, 2)));
-    if ((profile.objectControls.lenses?.controls.length ?? 0) > 1) {
+    if (profile.rootLensIds.length > 1) {
       reports.push(await runCase(planet, "lens-race", () => proveLensRace(browser, planet, profile)));
       reports.push(await runCase(planet, "lens-reacquire", () => proveLensReacquire(browser, planet, profile)));
       reports.push(await runCase(planet, "lens-rejection", () => proveLensRejection(browser, planet, profile)));
@@ -124,7 +124,7 @@ async function proveInitialShell(browser, planet, profile) {
 
 async function provePreReadyTarget(browser, planet, profile, finalHidden, motionRequested) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: "no-preference" });
-  const evidence = observePage(page, baseUrl);
+  const evidence = observePage(page, baseUrl, profile);
   let releaseAssets;
   let markStarted;
   const gate = new Promise((resolve) => { releaseAssets = resolve; });
@@ -247,7 +247,7 @@ async function releaseDecodeGate(page) {
 
 async function proveLensRace(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
-  const evidence = observePage(page, baseUrl);
+  const evidence = observePage(page, baseUrl, profile);
   const race = profile.audit.lensRace;
   await installDecodeGate(page, race.slowAsset);
   try {
@@ -285,7 +285,7 @@ async function proveLensRace(browser, planet, profile) {
 
 async function proveLensReacquire(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
-  const evidence = observePage(page, baseUrl);
+  const evidence = observePage(page, baseUrl, profile);
   const race = profile.audit.lensRace;
   await installDecodeGate(page, race.slowAsset);
   try {
@@ -311,7 +311,7 @@ async function proveLensReacquire(browser, planet, profile) {
 
 async function proveLensRejection(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
-  const evidence = observePage(page, baseUrl);
+  const evidence = observePage(page, baseUrl, profile);
   const race = profile.audit.lensRace;
   await page.route(`**${race.slowAsset}`, (route) => route.fulfill({
     status: 200,
@@ -322,7 +322,14 @@ async function proveLensRejection(browser, planet, profile) {
   try {
     await loadPlanet(page, planet, profile);
     await assert.rejects(profile.selectLens(page, race.slowId));
-    await assertLensConsistency(page, planet, profile, race.defaultId);
+    await assertLensConsistency(page, planet, profile, race.defaultId, false);
+    const rejected = await page.evaluate(id => window[`__${id}`].runtime.selection(), planet.id);
+    assert.equal(rejected.ready, true,
+      `${planet.id}: a rejected lens must preserve the ready committed material`);
+    assert.equal(rejected.pending, false,
+      `${planet.id}: rejection must finish the pending selection`);
+    assert.ok(rejected.error,
+      `${planet.id}: rejection must remain observable until explicit retry`);
     await page.unroute(`**${race.slowAsset}`);
     await profile.selectLens(page, race.slowId);
     await assertLensConsistency(page, planet, profile, race.slowId);
@@ -337,7 +344,7 @@ async function proveLensRejection(browser, planet, profile) {
 
 async function proveLensDestroy(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 1200, height: 800 } });
-  const evidence = observePage(page, baseUrl);
+  const evidence = observePage(page, baseUrl, profile);
   const race = profile.audit.lensRace;
   await installDecodeGate(page, race.slowAsset);
   try {
@@ -376,12 +383,12 @@ async function proveLensDestroy(browser, planet, profile) {
   }
 }
 
-async function assertLensConsistency(page, planet, profile, expectedId) {
+async function assertLensConsistency(page, planet, profile, expectedId, ready = true) {
   const state = await profile.lens(page);
   assert.equal(state.id, expectedId,
     `${planet.id}: runtime lens state must match the winning request`);
-  assert.equal(state.ready, true,
-    `${planet.id}: winning lens state must be ready`);
+  assert.equal(state.ready, ready,
+    `${planet.id}: lens readiness must distinguish success from a rejected request`);
   assert.equal(await profile.visibleLens(page), expectedId,
     `${planet.id}: visible material must match runtime lens state`);
   assert.equal(await profile.pressedLens(page), expectedId,
@@ -399,7 +406,7 @@ if (evidenceDirectory) {
 
 async function proveDesktop(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-  const evidence = observePage(page, baseUrl);
+  const evidence = observePage(page, baseUrl, profile);
   try {
     await loadPlanet(page, planet, profile);
     await enableMotion(page, planet.id);
@@ -415,56 +422,54 @@ async function proveDesktop(browser, planet, profile) {
             Number.parseFloat(style.paddingBottom) -
             Number.parseFloat(style.borderTopWidth) -
             Number.parseFloat(style.borderBottomWidth);
+          const bounds = element.getBoundingClientRect();
+          const range = document.createRange();
+          range.selectNodeContents(element);
+          const textBounds = [...range.getClientRects()];
           return {
             height,
             contentHeight,
             lineHeight,
             lineRatio: contentHeight / lineHeight,
+            fontSize: Number.parseFloat(style.fontSize),
+            unclipped: textBounds.length > 0 && textBounds.every(rect =>
+              rect.left >= bounds.left - 0.5 && rect.right <= bounds.right + 0.5 &&
+              rect.top >= bounds.top - 0.5 && rect.bottom <= bounds.bottom + 0.5) &&
+              element.scrollWidth <= element.clientWidth &&
+              element.scrollHeight <= element.clientHeight,
           };
         },
       );
       introductionLines = Math.round(introduction.lineRatio);
-      const expectedIntroductionLines = ({ venus:5, uranus:3 })[planet.id] ?? 4;
-      assert.ok(Math.abs(introduction.lineRatio - expectedIntroductionLines) < 0.01,
-        `${planet.id}: desktop introduction must occupy ${expectedIntroductionLines} lines in the 340px panel`);
+      // Source-owned introductions differ in length. Prove the shared type
+      // scale and complete text instead of maintaining an object-id line count.
+      assert.equal(introduction.fontSize, 16,
+        `${planet.id}: desktop introduction must use the shared 16px type scale`);
+      assert.ok(Math.abs(introduction.lineHeight - 22.4) < 0.01,
+        `${planet.id}: desktop introduction must use the shared 1.4 line height`);
+      assert.ok(introductionLines > 0 &&
+        Math.abs(introduction.lineRatio - introductionLines) < 0.01 && introduction.unclipped,
+        `${planet.id}: desktop introduction must render all text without clipping`);
     }
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
-        const directProjectiveLeaves = [...stage.querySelectorAll("s")]
-          .filter((leaf) => {
-            // A leaf whose transform is not a matrix (a prepared calc() on a
-            // custom property, as retained sky points use) is no texture
-            // frame; only parsed matrices can carry a projective row.
-            let matrix;
-            try { matrix = new DOMMatrix(leaf.style.transform || "none"); } catch { return false; }
-            return !leaf.querySelector(":scope > .polycss-projective-texture") &&
-              (Math.abs(matrix.m14) > 1e-10 || Math.abs(matrix.m24) > 1e-10);
-          });
-        const textures = [...stage.querySelectorAll(
-          ".polycss-projective-texture",
-        )];
+        const leaves = [...stage.querySelectorAll(".polycss-scene s")]
+          .filter(leaf => getComputedStyle(leaf).backgroundImage !== "none");
         return {
-          directProjectiveLeafCount: directProjectiveLeaves.length,
-          flattenedTextureCount: textures.length,
-          allTexturesFlat: textures.every((texture) =>
-            texture.style.transformStyle === "flat"),
-          allFramesAffine: textures.every((texture) => {
-            const matrix = new DOMMatrix(
-              texture.parentElement.style.transform || "none",
-            );
-            return Math.abs(matrix.m14) <= 1e-10 &&
-              Math.abs(matrix.m24) <= 1e-10;
+          texturedLeafCount: leaves.length,
+          nestedProjectiveTextureCount: stage.querySelectorAll(".polycss-projective-texture").length,
+          finiteTextureBounds: leaves.every(leaf => {
+            const bounds = leaf.getBoundingClientRect();
+            return [bounds.x, bounds.y, bounds.width, bounds.height].every(Number.isFinite);
           }),
         };
       });
-    assert.equal(projectiveTextureReport.directProjectiveLeafCount, 0,
-      `${planet.id}: no texture leaf may retain the exploding projective frame`);
-    assert.ok(projectiveTextureReport.flattenedTextureCount > 0,
-      `${planet.id}: prepared projective textures must be mounted`);
-    assert.equal(projectiveTextureReport.allTexturesFlat, true,
-      `${planet.id}: prepared projective textures must rasterize flat`);
-    assert.equal(projectiveTextureReport.allFramesAffine, true,
-      `${planet.id}: prepared texture frames must remain affine`);
+    assert.ok(projectiveTextureReport.texturedLeafCount > 0,
+      `${planet.id}: actual prepared surface pixels must be mounted`);
+    assert.equal(projectiveTextureReport.nestedProjectiveTextureCount, 0,
+      `${planet.id}: surface pixels must use a single prepared projection plane`);
+    assert.equal(projectiveTextureReport.finiteTextureBounds, true,
+      `${planet.id}: prepared texture bounds must remain finite`);
     const baseline = await sceneState(page, profile);
     assertSceneStructure(baseline, planet.id);
     const retainedReport = await profile.retainedReport(page);
@@ -486,7 +491,7 @@ async function proveDesktop(browser, planet, profile) {
     await waitFrames(page);
     const downwardThrow = await profile.camera(page);
     assert.ok(downwardThrow.pitch > downward.pitch,
-      `${planet.id}: a fast release must continue with Google Earth drag inertia`);
+      `${planet.id}: a fast release must continue with Google Earth drag inertia (${JSON.stringify({downward,downwardThrow,stats:await interactionStats(page,planet.id)})})`);
 
     await profile.setCamera(page, {
       pitch: bounds.defaultPitch,
@@ -604,16 +609,17 @@ async function proveDesktop(browser, planet, profile) {
     await proveBreakpointCrossings(page, planet, profile, bounds, baseline);
     await exerciseRetainedInteractions(page, planet, profile);
 
+    const runningBeforePause = await page.locator(".planet-stage").evaluate((stage) =>
+      stage.getAnimations({ subtree: true }).filter(({ playState }) => playState === "running").length);
     await setDocumentVisibility(page, true);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
       stage.getAnimations({ subtree: true }).every(
         ({ playState }) => playState === "paused",
       )), true, `${planet.id}: pause must stop every scene animation`);
     await setDocumentVisibility(page, false);
-    assert.ok(await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).some(
-        ({ playState }) => playState === "running",
-      )), `${planet.id}: resume must restart scene animation`);
+    assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
+      stage.getAnimations({ subtree: true }).filter(({ playState }) => playState === "running").length),
+      runningBeforePause, `${planet.id}: resume must restore the previously running animations`);
 
     const retainedProof = await finishRetainedProbe(
       page,
@@ -725,9 +731,9 @@ async function beginRetainedProbe(page) {
 async function exerciseRetainedInteractions(page, planet, profile) {
   const retained = profile.audit.retained;
   await assertRenderedObjectControls(page, profile);
-  const lensIds = profile.objectControls.lenses?.controls.length ? retained.lensIds : [];
+  const lensIds = (retained.lensIds ?? []).filter(id => profile.rootLensIds.includes(id));
   for (const id of lensIds) {
-    await page.locator(`button[name="lens"][value="${id}"]`).evaluate((button) => button.click());
+    await page.locator(`button[name="lens"][value="${id}"]`).click();
     await page.waitForFunction(() => {
       const root = document.querySelector(".planet-lenses");
       return root?.getAttribute("aria-busy") !== "true" && !root?.classList.contains("is-loading");
@@ -863,7 +869,7 @@ async function provePreparedDensity(browser, planet, profile, density) {
     } } : {}),
   });
   const page = await context.newPage();
-  const evidence = observePage(page, baseUrl);
+  const evidence = observePage(page, baseUrl, profile);
   const requestedPaths = new Set();
   page.on("request", (request) => {
     requestedPaths.add(new URL(request.url()).pathname);
@@ -897,7 +903,18 @@ async function provePreparedDensity(browser, planet, profile, density) {
       assert.ok(requestedPaths.has(url),
         `${planet.id}: DPR ${density} must request canonical ${url}`);
     }
+    // The shared universe owns the visible sky. Per-object cubemaps retain
+    // camera orientation handles only and must not download either density.
+    const dormantSkyAssets = new Set(profile.dormantSkyAssets ?? []);
+    if (dormantSkyAssets.size) {
+      assert.equal(await page.locator('.prepared-universe').count(), 1);
+      assert.equal(await page.locator('.prepared-point-field').count(), 1);
+      assert.equal(await page.locator('.planet-cubic-sky-face').count(), 0);
+      for (const path of dormantSkyAssets) assert.equal(requestedPaths.has(path), false,
+        `${planet.id}: shared sky must not also load object cubemap ${path}`);
+    }
     for (const pair of profile.audit.preparedAssetPairs) {
+      if (dormantSkyAssets.has(pair.one) && dormantSkyAssets.has(pair.two)) continue;
       const selectedAsset = pair.two;
       const rejectedAsset = pair.one;
       assert.ok(requestedPaths.has(selectedAsset),
@@ -922,7 +939,7 @@ async function provePreparedDensity(browser, planet, profile, density) {
       `${planet.id}: the full interaction sequence must preserve retained nodes`);
     if (densityOnly) {
       assert.deepEqual(evidence.externalRequests, [],
-        `${planet.id}: browser must make no external requests`);
+        `${planet.id}: browser must make no undeclared external requests`);
       assert.deepEqual(evidence.problems.filter(problem => problem.startsWith("pageerror:")), [],
         `${planet.id}: interaction proof must have no runtime exceptions`);
     } else {
@@ -1077,10 +1094,10 @@ async function proveInteractionInterruptions(page, planet, profile) {
     zoom: bounds.defaultZoom,
   });
 
-  await drag(page, profile.inputSelector, 90, 150);
+  const throwInput = await drag(page, profile.inputSelector, 90, 150);
   const inertiaBeforeWheel = await interactionStats(page, planet.id);
   assert.equal(inertiaBeforeWheel.activeMode, "inertia",
-    `${planet.id}: fast release must enter inertia before wheel interruption`);
+    `${planet.id}: fast release must enter inertia before wheel interruption (${JSON.stringify({ input:throwInput, interaction:inertiaBeforeWheel })})`);
   assert.equal(inertiaBeforeWheel.activeMotionCount, 1,
     `${planet.id}: inertia must be the only active camera motion`);
   await wheel(page, profile.inputSelector, -40);
@@ -1189,9 +1206,9 @@ async function proveInteractionInterruptions(page, planet, profile) {
     `${planet.id}: a one-pixel drag must respond immediately after stopping coast`);
   await page.mouse.up();
   await waitFrames(page);
-  assert.deepEqual(await cameraPose(page, planet.id), tinyDragPose,
-    `${planet.id}: releasing a tiny drag must not restart rotation`);
   const releasedPointer = await interactionStats(page, planet.id);
+  assert.deepEqual(await cameraPose(page, planet.id), tinyDragPose,
+    `${planet.id}: releasing a tiny drag must not restart rotation (${JSON.stringify(releasedPointer)})`);
   assert.equal(releasedPointer.pendingPointer, false,
     `${planet.id}: pointer-up must clear the pending press`);
   assert.equal(releasedPointer.activeMotionCount, 0,
@@ -1373,6 +1390,7 @@ async function proveInteractionInterruptions(page, planet, profile) {
 
   return {
     wheelInterruptedInertia: true,
+    throwInput,
     wheelZoomRatio,
     wheelAnchorRotationApplied: true,
     pointerStoppedInertia: true,
@@ -1409,8 +1427,11 @@ function wheelDolly(page, objectId) {
 }
 
 function cameraDistance(page, objectId) {
-  return page.evaluate((id) =>
-    globalThis[`__${id}`].camera.state().distance, objectId);
+  return page.evaluate((id) => {
+    const camera = globalThis[`__${id}`].camera, state = camera.state();
+    return camera.stats().dolly?.distanceOrigin === 'surface'
+      ? state.distance * (1 - 1 / state.distanceRadii) : state.distance;
+  }, objectId);
 }
 
 function cameraPose(page, objectId) {
@@ -1495,11 +1516,14 @@ async function proveBreakpointCrossings(page, planet, profile, bounds, baseline)
       "desktop",
       `${planet.id}: 821x720 landscape`,
     );
-    assert.equal(compactDesktopShell.navigation, true,
-      `${planet.id}: compact desktop must retain planet navigation`);
-    assert.equal(await page.locator('.scale-stop:not([aria-current="page"]) .scale-label')
-      .evaluateAll((labels) => labels.every((label) => getComputedStyle(label).display === "none")), true,
-    `${planet.id}: compact desktop must hide inactive planet labels`);
+    const search = page.locator('.planet-sidebar-search');
+    await search.fill(planet.name);
+    await page.locator(`.planet-object-link[data-object-id="${planet.id}"]`).waitFor({ state: 'visible' });
+    await search.press('Escape');
+    assert.equal(await page.locator('.planet-information-panel').isVisible(), true,
+      `${planet.id}: compact desktop search must return to the shared card`);
+    assert.deepEqual(await profile.camera(page), expected,
+      `${planet.id}: searching objects must preserve camera state`);
     await wheel(page, profile.inputSelector, -240);
     assert.ok((await profile.camera(page)).zoom > expected.zoom,
       `${planet.id}: 821px landscape desktop mode must restore wheel zoom`);
@@ -1528,7 +1552,6 @@ async function responsiveShellState(page) {
       version: visible(".planet-wordmark-version"),
       search: visible(".planet-sidebar-search-card"),
       information: visible(".planet-information-panel"),
-      navigation: visible(".planetary-navigation"),
       navigationToggle: visible(".planetary-navigation-toggle"),
       legacySunCount: document.querySelectorAll(".scale-sun").length,
       overflow: document.documentElement.scrollWidth > innerWidth,
@@ -1552,7 +1575,7 @@ function assertResponsiveShell(state, profile, label) {
 
 async function proveMobile(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  const evidence = observePage(page, baseUrl);
+  const evidence = observePage(page, baseUrl, profile);
   try {
     await loadPlanet(page, planet, profile);
     const state = await sceneState(page, profile);
@@ -1669,12 +1692,56 @@ async function drag(page, selector, deltaX, deltaY) {
   assert.ok(box, "Retained camera must be visible for a planet drag.");
   const x = box.x + box.width * 0.5;
   const y = box.y + box.height * 0.5;
+  await page.evaluate(() => {
+    const events = [];
+    const lifetime = new AbortController();
+    for (const type of ["pointerdown", "pointermove", "pointerup", "pointercancel"]) {
+      document.addEventListener(type, event => {
+        events.push({ type, at:event.timeStamp, receivedAt:performance.now(),
+          x:event.clientX, y:event.clientY, trusted:event.isTrusted });
+      }, { capture:true, signal:lifetime.signal });
+    }
+    window.__conformanceDragReceipt = () => { lifetime.abort(); return events; };
+  });
   await page.mouse.move(x, y);
-  await page.mouse.down();
-  // A changing final movement launches a throw; uniform steps intentionally do not.
-  await page.mouse.move(x + deltaX * .7, y + deltaY * .7, { steps: 10 });
-  await page.mouse.move(x + deltaX, y + deltaY);
-  await page.mouse.up();
+  const input = await page.context().newCDPSession(page);
+  try {
+    await input.send("Input.dispatchMouseEvent", {
+      type:"mousePressed", x, y, button:"left", buttons:1, clickCount:1,
+    });
+    // A changing final movement launches a throw; uniform steps do not.
+    for (let step = 1; step <= 10; step++) {
+      await input.send("Input.dispatchMouseEvent", {
+        type:"mouseMoved", x:x + deltaX * .7 * step / 10,
+        y:y + deltaY * .7 * step / 10, button:"left", buttons:1,
+      });
+      await page.waitForTimeout(16);
+    }
+    // Native release does not wait for the renderer to acknowledge the move.
+    // One CDP channel preserves send order; Playwright's mouse.move waits for
+    // animation frames and can otherwise send a concurrent mouse.up first.
+    await Promise.all([
+      input.send("Input.dispatchMouseEvent", {
+        type:"mouseMoved", x:x + deltaX, y:y + deltaY, button:"left", buttons:1,
+      }),
+      input.send("Input.dispatchMouseEvent", {
+        type:"mouseReleased", x:x + deltaX, y:y + deltaY,
+        button:"left", buttons:0, clickCount:1,
+      }),
+    ]);
+  } finally { await input.detach(); }
+  const receipt = await page.evaluate(() => {
+    const events = window.__conformanceDragReceipt();
+    delete window.__conformanceDragReceipt;
+    return events;
+  });
+  const release = receipt.at(-1);
+  const lastMove = receipt.findLast(event => event.type === "pointermove");
+  assert.ok(receipt.every(event => event.trusted) && release?.type === "pointerup" &&
+    lastMove && release.at >= lastMove.at &&
+    release.at - lastMove.at <= GOOGLE_EARTH_DRAG_INERTIA.releaseFreshnessMilliseconds,
+    `The drag driver must deliver an ordered, fresh browser release: ${JSON.stringify(receipt)}`);
+  return receipt;
 }
 
 async function wheel(page, selector, deltaY) {
@@ -1733,7 +1800,7 @@ function waitFrames(page) {
     requestAnimationFrame(() => requestAnimationFrame(resolve))));
 }
 
-function observePage(page, localBaseUrl) {
+function observePage(page, localBaseUrl, profile) {
   const problems = [];
   const externalRequests = [];
   page.on("console", (message) => {
@@ -1745,14 +1812,17 @@ function observePage(page, localBaseUrl) {
   page.on("request", (request) => {
     const requestUrl = new URL(request.url());
     const localUrl = new URL(localBaseUrl);
-    if (requestUrl.origin !== localUrl.origin) externalRequests.push(request.url());
+    if (requestUrl.origin !== localUrl.origin &&
+        !profile.preparedRemoteRoots?.some(root => request.url().startsWith(root))) {
+      externalRequests.push(request.url());
+    }
   });
   return { problems, externalRequests };
 }
 
 function assertEvidence({ problems, externalRequests }, id) {
   assert.deepEqual(problems, [], `${id}: browser must report no problems`);
-  assert.deepEqual(externalRequests, [], `${id}: browser must make no external requests`);
+  assert.deepEqual(externalRequests, [], `${id}: browser must make no undeclared external requests`);
 }
 
 function setDocumentVisibility(page, hidden) {

@@ -4,8 +4,11 @@ import CssEarthWordmark from "../components/CssEarthWordmark.astro";
 import PlanetaryScale from "../components/PlanetaryScale.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mjs";
 import { requireObject } from "../objects.mjs";
+import { objectSeo } from "../seo.mjs";
 import "../../src/platform/cubic-sky.css";
 import "../../src/platform/heliocentric-view.css";
+import "../../src/renderers/css/styles/volume.css";
+import "../../src/renderers/css/styles/world-context.css";
 import "../site.css";
 import "../maps-shell.css";
 import "../explorer-rail.css";
@@ -17,6 +20,7 @@ interface Props {
 
 const { objectId } = Astro.props;
 const objectRecord = requireObject(objectId);
+const seo = objectSeo(objectRecord);
 ---
 
 <!doctype html>
@@ -24,14 +28,52 @@ const objectRecord = requireObject(objectId);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={objectRecord.description} />
+    <meta name="description" content={seo.description} />
+    <link rel="canonical" href={seo.canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="cssEarth" />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={seo.canonical} />
+    <meta property="og:image" content={seo.image} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={seo.imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={seo.image} />
+    <meta name="twitter:image:alt" content={seo.imageAlt} />
     <meta name="theme-color" content="#000000" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <script is:inline set:html={googleAnalyticsBootstrap}></script>
     <slot name="planet-head" />
-    <title>{objectRecord.name} - Powered by PolyCSS</title>
+    <title>{seo.title}</title>
   </head>
   <body class="loading" data-object-shell={objectRecord.id}>
+    <div class="planet-view-readout" aria-label="View information">
+      <span class="planet-view-date" title="Date of the scene's prepared orbital positions (Terrestrial Time)" hidden>
+        <span>Date: <span data-view-date></span></span>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+      </span>
+      <span class="planet-view-coordinates" title="Coordinates at the center of the view" hidden>
+        <span data-view-latitude></span>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+        <span data-view-longitude></span>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+      </span>
+      <span class="planet-view-altitude" title="Camera altitude above the selected object's reference surface">
+        Altitude: <span data-view-altitude>—</span>
+      </span>
+      <span class="planet-view-scale" hidden>
+        <span class="planet-view-separator" aria-hidden="true">·</span>
+        <span class="planet-view-ruler-slot" aria-hidden="true">
+          <span class="planet-view-ruler"><span class="planet-view-measure"></span></span>
+        </span>
+        <span data-view-scale-label></span>
+      </span>
+    </div>
     <header class="explorer-shell-header">
       <div class="explorer-shell-wordmark">
         <CssEarthWordmark />

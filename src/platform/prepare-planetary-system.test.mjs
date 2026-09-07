@@ -14,7 +14,7 @@ import {
   ASTRONOMICAL_UNIT_KILOMETERS,
   BODY_FIXED_SUN_DIRECTIONS,
   BODY_FIXED_TO_ICRF_MATRICES,
-  HELIOCENTRIC_ORBITS,
+  BODY_ORBITS,
   SOLAR_GEOMETRY_EPOCH_JD_TT,
 } from "./solar-geometry.mjs";
 import { loadAstronomyPackage } from "./astronomy-package.mjs";
@@ -57,6 +57,21 @@ async function prepareMercurySystem(overrides = {}) {
   });
 }
 
+test("satellite parent frames contain both close and distant moon orbits without changing physical positions", async () => {
+  const astronomy = await loadAstronomyPackage();
+  for (const id of ["moon", "io", "europa", "ganymede", "callisto"]) {
+    const frame = prepareEclipticPresentationFrame(id);
+    const kilometersPerUnit = astronomy.BODIES[id].meanRadiusKm / 230;
+    const system = await preparePlanetarySystem({ bodyId: id, presentationFrame: frame, kilometersPerUnit });
+    const parent = system.bodies.find(body => body.id === astronomy.BODIES[id].parent);
+    const moonPosition = astronomy.moonPositionRelativeToPlanetKm(id, SOLAR_GEOMETRY_EPOCH_JD_TT);
+    const expected = scale(frame.toPresentation(applyMatrix(
+      transposeMatrix(BODY_FIXED_TO_ICRF_MATRICES[id]), scale(moonPosition, -1))), 1 / kilometersPerUnit);
+    assert.deepEqual(parent.position, expected.map(Math.round),
+      `${id}: the parent position must keep its physical distance and direction`);
+  }
+});
+
 function applyMatrix(matrix, [x, y, z]) {
   return [
     matrix[0] * x + matrix[1] * y + matrix[2] * z,
@@ -96,7 +111,7 @@ function magnitude(vector) {
 function directPositionUnits(id) {
   const heliocentricIcrfKm = (bodyId) => scale(
     applyMatrix(BODY_FIXED_TO_ICRF_MATRICES[bodyId], BODY_FIXED_SUN_DIRECTIONS[bodyId]),
-    -HELIOCENTRIC_ORBITS[bodyId].heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS,
+    -BODY_ORBITS[bodyId].heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS,
   );
   const diffIcrfKm = subtract(heliocentricIcrfKm(id), heliocentricIcrfKm("mercury"));
   const mercuryToBodyFixed = transposeMatrix(BODY_FIXED_TO_ICRF_MATRICES.mercury);
@@ -127,7 +142,7 @@ test("agrees with an independent frame-tree-free derivation of every body's posi
   const transposed = [mercuryMatrix[0], mercuryMatrix[3], mercuryMatrix[6], mercuryMatrix[1], mercuryMatrix[4],
     mercuryMatrix[7], mercuryMatrix[2], mercuryMatrix[5], mercuryMatrix[8]];
   const mercuryKm = scale(applyMatrix(mercuryMatrix, BODY_FIXED_SUN_DIRECTIONS.mercury),
-    -HELIOCENTRIC_ORBITS.mercury.heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS);
+    -BODY_ORBITS.mercury.heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS);
   for (const body of dwarfsOf(system)) {
     const heliocentricKm = astronomy.dwarfPlanetPositionKm(body.id, SOLAR_GEOMETRY_EPOCH_JD_TT);
     const bodyFixedKm = applyMatrix(transposed, subtract(heliocentricKm, mercuryKm));
@@ -166,7 +181,7 @@ test("nests every orbit strictly outside the one before it, mercury included", a
   // Mercury itself carries no ring in the output (it is the observer), so
   // the innermost pair is checked on the raw orbital facts alone.
   assert.ok(
-    HELIOCENTRIC_ORBITS.venus.perihelionAu > HELIOCENTRIC_ORBITS.mercury.aphelionAu,
+    BODY_ORBITS.venus.perihelionAu > BODY_ORBITS.mercury.aphelionAu,
     "venus's perihelion must lie outside mercury's aphelion",
   );
   const planets = planetsOf(system);
@@ -213,7 +228,7 @@ test("maximumExtentUnits bounds and equals every vertex and body position magnit
 
 test("places the Sun at Mercury's own observed heliocentric distance", async () => {
   const system = await prepareMercurySystem();
-  const expected = HELIOCENTRIC_ORBITS.mercury.heliocentricDistanceAu * UNITS_PER_AU;
+  const expected = BODY_ORBITS.mercury.heliocentricDistanceAu * UNITS_PER_AU;
   const actual = magnitude(system.sun.position);
   assert.ok(Math.abs(actual - expected) <= 1e-9 * expected,
     `Sun distance ${actual} disagrees with ${expected}`);
@@ -221,7 +236,7 @@ test("places the Sun at Mercury's own observed heliocentric distance", async () 
 
 test("rejects an unlisted body, a non-positive unit scale and a reflected presentation frame", async () => {
   await assert.rejects(
-    prepareMercurySystem({ bodyId: "pluto" }),
+    prepareMercurySystem({ bodyId: "unknown" }),
     /Planetary system preparation arguments are invalid/u,
   );
   await assert.rejects(
@@ -261,7 +276,7 @@ test("mutation check: an absurd planet radius trips the frame tree's own invaria
 });
 
 test("mutation check: the output's semi-major axes stay strictly increasing outward", async () => {
-  // HELIOCENTRIC_ORBITS is frozen and cannot be mutated in place to simulate
+  // BODY_ORBITS is frozen and cannot be mutated in place to simulate
   // a swap, so this instead pins down the property such a swap would break:
   // the prepared ring order is by increasing semi-major axis.
   const system = await prepareMercurySystem();
@@ -296,7 +311,7 @@ test("lights every body from Mercury's vantage: phase from Sun-body-observer, on
     // Geometry: a body outside the observer's orbit can never be seen at a
     // phase angle beyond asin(observer aphelion / body perihelion).
     if (body.id !== "venus") {
-      const bound = Math.asin(HELIOCENTRIC_ORBITS.mercury.aphelionAu / body.perihelionAu) * 180 / Math.PI;
+      const bound = Math.asin(BODY_ORBITS.mercury.aphelionAu / body.perihelionAu) * 180 / Math.PI;
       assert.ok(body.illumination.phaseAngleDegrees <= bound + 1e-9, `${body.id} phase ${body.illumination.phaseAngleDegrees} > ${bound}`);
       assert.ok(body.illumination.illuminatedFraction >= 0.9, body.id);
     }

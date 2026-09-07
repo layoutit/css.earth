@@ -16,8 +16,8 @@ const report={schema:'cssearth-cesium-loading-oracle@1',dpr,pin,browser:browser.
   head:execFileSync('git',['rev-parse','HEAD'],{cwd:project,encoding:'utf8'}).trim(),
   qualification:'Continuous real interaction in cssEarth; Cesium follows the prepared geographic view every animation frame. Video and lifecycle events share recorded frame timestamps. The imagery fixture adds 350 ms per response. This is a loading comparison, not native-input parity or a performance benchmark.'};
 for(const name of await readdir(new URL('./',import.meta.url)))if(/\.(mjs|html)$/.test(name)){const file='tools/cesium-oracle/'+name;report.sourceHashes[file]=sha256(await readFile(new URL(file,project)));}
-for(const name of ['city-pages','city-index','api-image-transport','page-publication','city-page-selection']){const file=`src/platform/prepared-map/${name}.mjs`;report.sourceHashes[file]=sha256(await readFile(new URL(file,project)));}
-for(const file of ['package.json','astro.config.mjs','src/planets/earth/runtime/preparedPresentation.mjs','src/planets/earth/runtime/preparedScene.mjs'])report.sourceHashes[file]=sha256(await readFile(new URL(file,project)));
+for(const name of ['city-pages','city-index','api-image-transport','page-publication','city-page-selection']){const file=`src/renderers/css/paging/${name}.ts`;report.sourceHashes[file]=sha256(await readFile(new URL(file,project)));}
+for(const file of ['package.json','astro.config.mjs','src/planets/earth/prepared/runtime.json','src/planets/earth/prepared/scene.json'])report.sourceHashes[file]=sha256(await readFile(new URL(file,project)));
 report.preparedFacesSha256=sha256(JSON.stringify(server.config.faces));report.config={...server.config,faces:undefined};
 const context=await browser.newContext({viewport:{width:2560,height:960},deviceScaleFactor:dpr});
 await context.addInitScript(()=>{
@@ -74,6 +74,7 @@ try{
   report.network=Object.fromEntries(Object.entries(ids).map(([engine,id])=>[engine,{events:network.events.filter(e=>e.frameId===id),requests:[...network.requests.values()].filter(r=>r.frameId===id)}]));
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.follow.errors,[]);assert.ok(frames.length>100);
   assert.ok(Object.values(report.traces).every(t=>!t.overflow));
+  assert.ok(report.traces.css.samples.every(s=>!s.errors?.length&&!s.index?.errors?.length),'No CSS page or metadata loading failure');
   assert.ok(report.traces.css.samples.length>50&&report.traces.cesium.samples.length>50,'Both renderer timelines remain attached throughout the take');
   const centers=report.traces.cesium.samples.flatMap(s=>(s.registration.anchors??[]).filter(a=>a.screen[0]===s.registration.center.screen[0]&&a.screen[1]===s.registration.center.screen[1]));
   report.registration={maximumCenterErrorPixels:Math.max(...centers.map(a=>a.errorPixels)),

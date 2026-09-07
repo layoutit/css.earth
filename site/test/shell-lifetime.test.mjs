@@ -64,6 +64,8 @@ test("shell with no optional controls keeps Motion/high contrast and accessible 
   const f = fixture(), shell = f.mount();
   const motion = f.selectors.get(".planet-motion-setting");
   const contrast = f.selectors.get(".planet-sky-contrast-setting");
+  assert.equal(contrast.checked, false, 'High contrast starts off');
+  assert.equal(f.documentTarget.body.dataset.skyContrast, 'standard');
   shell.setPlaybackState({ motionRequested: true, reason: "reduced-motion" });
   assert.equal(motion.checked, true);
   assert.equal(f.explanation.hidden, false);
@@ -95,6 +97,31 @@ test("failed shell construction cleans earlier controllers and their scheduled w
   assert.ok(f.elements.every((element) => element.listeners.size === 0));
   assert.equal(f.windowTarget.listeners.size, 0);
   assert.equal(f.documentTarget.listeners.size, 0);
+});
+
+test('object content replacement retains shell controls and input state without accumulating listeners', () => {
+  const f = fixture(), shell = f.mount();
+  const search = f.selectors.get('.planet-sidebar-search');
+  const drawer = f.selectors.get('.planet-drawer-content');
+  const motion = f.selectors.get('.planet-motion-setting');
+  const contrast = f.selectors.get('.planet-sky-contrast-setting');
+  motion.checked = true; motion.dispatchEvent(new Event('change'));
+  contrast.checked = true; contrast.dispatchEvent(new Event('change'));
+  const searchListeners = search.listeners.size, drawerListeners = drawer.listeners.size;
+  for (const id of ['second', 'third', 'first']) {
+    shell.setObject({ id, name: id, apply() {} });
+    assert.equal(f.selectors.get('.planet-sidebar-search'), search);
+    assert.equal(f.selectors.get('.planet-drawer-content'), drawer);
+    assert.equal(search.value, id);
+    assert.equal(search.listeners.size, searchListeners);
+    assert.equal(drawer.listeners.size, drawerListeners);
+    assert.equal(motion.checked, true);
+    assert.equal(contrast.checked, true);
+    assert.equal(f.documentTarget.body.dataset.skyContrast, 'high');
+  }
+  assert.deepEqual(f.changes, [true]);
+  shell.destroy();
+  assert.ok(f.elements.every(element => element.listeners.size === 0));
 });
 
 test("Motion cannot enable Speed before the shared runtime is ready or after it retires", () => {
