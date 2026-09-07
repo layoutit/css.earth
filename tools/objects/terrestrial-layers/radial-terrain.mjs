@@ -1,10 +1,9 @@
 import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, BASE_TILE } from '@layoutit/polycss';
+import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
 import { createRasterEmitter } from './solid-raster.mjs';
-import { prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mjs';
 import { renderRadialSnapshot } from './radial-snapshot.mjs';
 
 const sub = (a, b) => a.map((v, i) => v - b[i]);
@@ -22,25 +21,25 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const tileSize = profile.tileSize, columns = profile.atlasColumns;
   if (![tileSize, columns].every(value => Number.isInteger(value) && value > 0) || tileSize > 512 || columns > 64) throw new TypeError('Invalid radial texture layout.');
   const width = columns * tileSize, height = Math.ceil(faces.length / columns) * tileSize;
-  const url = `${config.publicBase}${config.namespace}-normal-surface@2x.webp`;
   const plans = faces.map((face, index) => {
-    const [a, b, c] = face.vertices;
-    // Extend the prepared rectangle beyond the true triangle. Alpha describes
-    // the overlapping triangle; adjoining CSS raster edges cannot expose sky.
-    const ab = sub(b, a), ac = sub(c, a), bleed = 3 / tileSize;
-    const at = (u, v) => a.map((n, i) => n + u * ab[i] + v * ac[i]);
     const rect = { x: index % columns * tileSize, y: Math.floor(index / columns) * tileSize, width: tileSize, height: tileSize };
-    const polygon = { vertices: [at(-bleed, -bleed), at(1 + bleed, -bleed), at(1 + bleed, 1 + bleed), at(-bleed, 1 + bleed)], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], texture: url,
-      textureImageSource: { url, width, height, sourceRect: rect },
-      texturePresentation: { backend: 'image', lighting: 'source', projection: 'projective' }, color: '#888888' };
-    const plan = computeTextureAtlasPlanPublic(polygon, index, { tileSize: BASE_TILE, layerElevation: BASE_TILE, textureLighting: 'baked', seamBleed: 0 });
-    const geometry = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
-    if (!geometry) throw new Error(`Radial face ${index} failed preparation.`);
-    return { face, rect, geometry, matrix: geometry.matrix.split(',').map(Number) };
+    const plan = computeSolidTrianglePlan({ vertices: face.vertices, color: '#888888' }, index,
+      // The core planner takes CSS units, including its seam overlap. Scale
+      // that overlap with the source coordinates, as with tile/elevation.
+      { tileSize: BASE_TILE, layerElevation: BASE_TILE, bleedRatio: 1, seamBleed: SOLID_TRIANGLE_BLEED * BASE_TILE },
+      { primitive: 'corner-bevel', includeColor: false, matrixDecimals: 9 });
+    if (!plan) throw new Error(`Radial face ${index} failed PolyCSS triangle preparation.`);
+    // The same raster sizing transport used by Mario: the u leaf matches its
+    // prepared texel cell, and the inverse basis scale preserves the geometry.
+    const matrix = plan.transformText.slice(9, -1).split(',').map(Number);
+    for (const component of [0, 1, 2, 4, 5, 6]) matrix[component] *= SOLID_TRIANGLE_CANONICAL_SIZE / tileSize;
+    const geometry = { matrix: matrix.join(','), leafWidth: tileSize, leafHeight: tileSize,
+      backgroundPosition: [-rect.x, -rect.y], backgroundSize: [width, height] };
+    return { face, rect, geometry, matrix };
   });
-  const leaves = plans.map(({ geometry: g }) => ({ tag: 's', className: `${config.namespace}-terrain-face`, polar: null,
-    projectiveTextureLayer: prepareProjectiveTextureLayer(g.matrix, 4),
-    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px` }));
+  const leaves = plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
+    attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
+    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster` }));
   return { grid, faces, plans, leaves, width, height, tileSize };
 }
 
@@ -82,7 +81,7 @@ export function radialTriangles(sample, profile, scale) {
   return faces;
 }
 
-/** Bake triangle alpha, coordinates and fixed-epoch Sun illumination. The
+/** Bake opaque triangle rasters, coordinates and fixed-epoch Sun illumination. The
  * renderer switches between these prepared banks through ordinary variants.
  */
 export async function prepareRadialMaterials({ radial, surfaces, config, source, publicDirectory, outputDirectory, sunDirection }) {
@@ -100,9 +99,8 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         const css = [(m[0] * x + m[4] * y + m[12]) / w, (m[1] * x + m[5] * y + m[13]) / w, (m[2] * x + m[6] * y + m[14]) / w];
         const point = [css[1] / BASE_TILE, css[0] / BASE_TILE, css[2] / BASE_TILE];
         const ap = sub(point, a), u = (dot(ap, ab) * bb - dot(ap, ac) * abac) / denominator, v = (dot(ap, ac) * aa - dot(ap, ab) * abac) / denominator;
-        // Prepared overlap covers the same source direction on adjacent faces.
-        const bleed = 3 / tileSize;
-        if (u < -bleed || v < -bleed || u + v > 1 + bleed) continue;
+        // PolyCSS's native u primitive owns triangle coverage. Fill its entire
+        // raster so antialiasing never samples a transparent triangle edge.
         const normal = unit(face.vertexNormals[0].map((n, i) => n * (1 - u - v) + face.vertexNormals[1][i] * u + face.vertexNormals[2][i] * v));
         // Fixed-epoch directional illumination is baked in the body's frame.
         const illumination = .12 + .88 * Math.max(0, dot(normal, sunDirection));

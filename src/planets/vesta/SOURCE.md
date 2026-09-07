@@ -61,8 +61,11 @@ credits. Required binaries are restored through `source/preparation/acquisition.
 The original radial model supplies 1,840 retained triangles. Their positions
 are unchanged by lighting; area-weighted vertex normals provide continuous
 directional shading. The 8,192 × 4,096 normalized maps are sampled into fixed
-2,048 × 14,720 triangle atlases. Alpha is prepared into those images; runtime
-does not construct geometry or clip triangle shapes.
+2,048 × 14,720 atlases. PolyCSS prepares native `u` triangles in raster mode:
+each leaf matches its 128 × 128 texel cell, with the inverse matrix scale
+preserving the measured geometry. The cells are opaque; the native triangle
+primitive supplies their boundary. Runtime mounts the prepared leaves and
+does not construct geometry or lighting.
 
 Natural color and elevation each have an unlit and a fixed-epoch directional
 lighting bank. This approximates diffuse illumination, without cast shadows
