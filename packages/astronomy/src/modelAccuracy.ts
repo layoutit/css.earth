@@ -91,6 +91,7 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   oberon: 1380.33900460793,
   triton: 49252.75275560124,
   proteus: 684.0919384620709,
+  charon: 1.0206866493052924,
 }
 
 const AU_KM = M_PER_AU / M_PER_KM

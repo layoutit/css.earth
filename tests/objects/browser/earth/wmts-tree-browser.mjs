@@ -1,15 +1,15 @@
 import assert from "node:assert/strict";
 import { mkdir,writeFile,readFile,open } from "node:fs/promises";
-import { dev } from "astro";
 import { chromium } from "playwright";
 import { PREPARED_EARTH_NOISE as noisePlan } from "../../unit/earth/prepared-fixture.mjs";
-import { PREPARED_EARTH_SCENE as scene, preparePagingDiagnostic } from "../../unit/earth/prepared-fixture.mjs";
+import { PREPARED_EARTH_SCENE as scene, preparePagingDiagnostic, routePagingDiagnostic } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_CITY_PAGES as existing } from "../../unit/earth/prepared-fixture.mjs";
 import { prepareRegionPack } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mjs";
 import { prepareWmtsTile,wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mjs";
 import { prepareLocationPoint,prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
 import sourceConfig from '../../../../src/planets/earth/source/preparation/paged-ellipsoid.json' with { type: 'json' };
 const root=new URL("../../../../",import.meta.url),output=new URL(`output/playwright/wmts-tree-${Date.now()}/`,root);
+const base=(process.argv.slice(2).find(argument=>/^https?:\/\//u.test(argument))??"http://127.0.0.1:4210").replace(/\/$/u,"");
 await mkdir(output,{recursive:true});
 const requested=process.argv.find(a=>a.startsWith("--sample="))?.slice(9),mobile=process.argv.includes("--mobile");
 const noise=process.argv.includes("--noise");
@@ -32,32 +32,33 @@ else for(const sample of samples){
 }
 const plan={...existing,index:{...existing.index,maximumBytes:12*1024*1024,maximumDirectories:96},topology:"wmts-quadtree@1",geometryVersion:version,roots,rasterScale:8,decodedPageBytes:256*256*4,pageTemplate:"clipped-projective",
   initialLayer:prepareWmtsTile(wmtsAddress(-58.38,-34.6,14),scene)[0],qualification:manifest?"Global prepared source-footprint index":"Regional pack transport checkpoint; worldwide build in progress"};
-const config=new URL("astro.config.mjs",output);
-const diagnostic=await preparePagingDiagnostic(plan);
-await writeFile(config,globalManifest?`export { default } from ${JSON.stringify(new URL("astro.config.mjs",root).href)};`:`import base from ${JSON.stringify(new URL("astro.config.mjs",root).href)};
-import {open,stat} from "node:fs/promises";
-export default {...base,vite:{...base.vite,plugins:[{name:"wmts-tree-checkpoint",enforce:"pre",transform(code,id){
-if(id.endsWith("/src/planets/earth/object.json"))return ${JSON.stringify(diagnostic.descriptorJson)};
-if(id.endsWith("/src/planets/earth/prepared/object.json"))return ${JSON.stringify(diagnostic.preparedJson)};
-},configureServer(server){const paths=${JSON.stringify(paths)},directory=${JSON.stringify(manifest?.directory??null)};
-server.middlewares.use(async(req,res,next)=>{
-if(req.url==='/src/planets/earth/prepared/object.json'){res.setHeader('Content-Type','application/json');res.end(${JSON.stringify(diagnostic.preparedJson)});return;}
-const name=req.url?.match(/^\\/scenes\\/earth\\/wmts-${version}\\/((?:5|8)-\\d+-\\d+\\.pack)$/)?.[1];
-const path=paths[req.url]??(directory&&name?directory+"/"+name:null);if(!path)return next();
-try{const size=(await stat(path)).size,match=/^bytes=(\\d+)-(\\d+)$/.exec(req.headers.range??"");
-if(!match){res.statusCode=416;res.end();return;}const start=Number(match[1]),end=Number(match[2]);
-if(end>=size||end<start){res.statusCode=416;res.end();return;}
-const handle=await open(path),bytes=Buffer.alloc(end-start+1);try{await handle.read(bytes,0,bytes.length,start);}finally{await handle.close();}
-res.statusCode=206;res.setHeader("Content-Range",\`bytes \${start}-\${end}/\${size}\`);res.setHeader("Content-Length",bytes.length);
-res.setHeader("Content-Type","application/octet-stream");res.setHeader("Cache-Control","public,max-age=31536000,immutable");res.end(bytes);
-}catch(error){res.statusCode=500;res.end(error.message);}});}}]}};`);
-let server,browser;
-const report={output:output.pathname,createdAt:new Date().toISOString(),qualification:plan.qualification,runs:[]};
+const diagnostic=globalManifest?null:await preparePagingDiagnostic(plan);
+let browser;
+const report={base,output:output.pathname,createdAt:new Date().toISOString(),qualification:plan.qualification,runs:[]};
 try{
-  server=await dev({root,configFile:config.pathname.slice(root.pathname.length),server:{host:"127.0.0.1",port:4318},logLevel:"error"});
   browser=await chromium.launch({channel:"chrome",headless:true});report.browser=browser.version();
   for(const dpr of mobile?[2]:[1,2]){
     const context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1400,height:1000},deviceScaleFactor:dpr,isMobile:mobile,hasTouch:mobile,recordVideo:{dir:output.pathname,size:{width:1400,height:1000}}});
+    if(diagnostic){
+      await routePagingDiagnostic(context,diagnostic);
+      await context.route(`${base}/scenes/earth/wmts-${version}/*.pack`,async route=>{
+        const path=paths[new URL(route.request().url()).pathname];
+        if(!path)return route.fallback();
+        const match=/^bytes=(\d+)-(\d+)$/.exec(route.request().headers().range??"");
+        if(!match)return route.fulfill({status:416,body:""});
+        let handle;
+        try{
+          handle=await open(path);
+          const size=(await handle.stat()).size,start=Number(match[1]),end=Number(match[2]);
+          if(end>=size||end<start)return await route.fulfill({status:416,body:""});
+          const bytes=Buffer.alloc(end-start+1);
+          await handle.read(bytes,0,bytes.length,start);
+          await route.fulfill({status:206,contentType:"application/octet-stream",
+            headers:{"content-range":`bytes ${start}-${end}/${size}`,"content-length":String(bytes.length)},body:bytes});
+        }catch(error){await route.fulfill({status:500,body:error.message});}
+        finally{await handle?.close();}
+      });
+    }
     const page=await context.newPage(),run={dpr,views:[],errors:[],ranges:[],imagery:[]};report.runs.push(run);
     page.on("pageerror",error=>run.errors.push(error.message));
     page.on("response",async response=>{if(response.status()>=400 && !response.url().includes("mapproxy"))console.log(JSON.stringify({failedUrl:response.url(),status:response.status(),body:(await response.text().catch(()=>"")).slice(0,2500)}));});
@@ -65,7 +66,7 @@ try{
     page.on("response",response=>{if(response.url().endsWith(".pack"))run.ranges.push({url:response.url(),status:response.status(),range:response.headers()["content-range"],bytes:Number(response.headers()["content-length"])});
       if(response.url().includes("mapproxy/wmts"))run.imagery.push({url:response.url(),status:response.status()});});
     try{
-      await page.goto(`http://127.0.0.1:${server.address.port}/earth/`);await page.waitForFunction(()=>window.__earth?.ready);
+      await page.goto(`${base}/earth/`);await page.waitForFunction(()=>window.__earth?.ready);
       await page.evaluate(()=>{{ const motion = document.querySelector('input[name="motion"]'); if (motion.checked) motion.click(); }window.__savedNodes=[...document.querySelector(".planet-stage").querySelectorAll("*")];});
       for(const sample of [...samples,{...samples[0],id:samples[0].id+"-revisit"}]){
         const camera=noise?noisePlan.camera:prepareLocationCamera(scene,prepareLocationPoint(scene,sample.lon,sample.lat),2048,
@@ -110,4 +111,4 @@ try{
   }
   if(!mobile)assert.deepEqual(report.runs[0].views.map(v=>v.state.paging.desired),report.runs[1].views.map(v=>v.state.paging.desired));
   report.passed=true;
-}finally{await browser?.close();await server?.stop();await writeFile(new URL("report.json",output),JSON.stringify(report,null,2));console.log(JSON.stringify({output:output.pathname,passed:report.passed??false}));}
+}finally{await browser?.close();await writeFile(new URL("report.json",output),JSON.stringify(report,null,2));console.log(JSON.stringify({output:output.pathname,passed:report.passed??false}));}

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
-import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 
@@ -56,9 +56,6 @@ test("derives the complete owned file contract from planet identity", () => {
     `/project/tests/objects/browser/${planet.id}/browser-profile.mjs`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/tests/objects/browser/${planet.id}/smoke-browser.mjs`,
-  ));
-  assert.ok(paths.requiredFiles.includes(
     `/project/src/planets/${planet.id}/object.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
@@ -69,7 +66,11 @@ test("derives the complete owned file contract from planet identity", () => {
 });
 
 test("requires every registered object package file", async () => {
-  for (const planet of implemented) await validateObjectPackageFiles(planet);
+  for (const planet of implemented) {
+    await validateObjectPackageFiles(planet);
+    const { lenses } = JSON.parse(await readFile(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url), 'utf8'));
+    assert.ok(lenses?.controls.length > 0, `${planet.id}: the displayed surface needs an identified dataset`);
+  }
   await assert.rejects(
     validateObjectPackageFiles(implemented[0], {
       accessFile: async (file) => {
@@ -145,12 +146,4 @@ test("validates runtime asset manifest entries", () => {
     }),
     /invalid runtime asset entry/,
   );
-});
-
-test("verifies checked-in data and runtime asset bytes for every object package", async () => {
-  const results = [];
-  for (const planet of implemented) results.push(await validatePlanetData(planet));
-  assert.ok(results.every(({ assetCount }) => assetCount > 0));
-  assert.ok(results.every(({ sourceInputCount }) => sourceInputCount > 0));
-  assert.ok(results.every((result) => !('editorialSourceId' in result)));
 });

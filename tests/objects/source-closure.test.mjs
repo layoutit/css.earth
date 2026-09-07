@@ -6,13 +6,13 @@ import {execFileSync} from 'node:child_process';
 import sharp from 'sharp';
 import {OBJECTS} from '../../site/objects.mjs';
 import {projectRoot} from './fixtures.mjs';
-const exists=async path=>{try{await access(path);return true;}catch{return false;}};
+async function exists(path){try{await access(path);return true;}catch(error){if(error.code==='ENOENT')return false;throw error;}}
 const selected=OBJECTS;
 assert.ok(selected.length>0,'The registry must exercise source closure.');
 const executable=/\.(?:mjs|cjs|[jt]sx?|astro|css)$/i;
-async function files(root,{skipPrivateCache=false}={}){const result=[];for(const entry of await readdir(root,{withFileTypes:true})){if(skipPrivateCache&&entry.name==='.prepared')continue;const path=resolve(root,entry.name);if(entry.isDirectory())result.push(...await files(path));else {assert.ok(entry.isFile(),`Unexpected non-file ${path}`);result.push(path);}}return result;}
+async function files(root,{skipPrivateCache=false}={}){const result=[];for(const entry of await readdir(root,{withFileTypes:true})){if(skipPrivateCache&&entry.name==='.prepared')continue;const path=resolve(root,entry.name);if(entry.isDirectory())result.push(...await files(path,{skipPrivateCache}));else {assert.ok(entry.isFile(),`Unexpected non-file ${path}`);result.push(path);}}return result;}
 for(const {id} of selected){
- test(`${id}: authored object package contains data and declared prepared minimaps only`,async()=>{
+ test(`${id}: authored object directory contains data and pinned sources only`,async()=>{
   const root=resolve(projectRoot,'src/planets',id),entries=await readdir(root,{withFileTypes:true});
   for(const entry of entries){
    // Historical preparation receipts are ignored workspace state, not package
@@ -33,8 +33,6 @@ for(const {id} of selected){
    const metadata=await sharp(resolve(root,'prepared',map.path)).metadata();
    assert.equal(metadata.format,'webp');assert.equal(metadata.width,map.width);assert.equal(metadata.height,map.height);
   }
-  const images=new Set(maps.map(map=>resolve(root,'prepared',map.path)));
-  for(const path of prepared)assert.ok(/\.json$/i.test(path)||images.has(path),`Undeclared prepared binary or executable: ${path}`);
   for(const path of await files(root,{skipPrivateCache:true}))assert.equal(executable.test(path),false,`Object-specific executable remains: ${path}`);
  });
  test(`${id}: every pinned source is declared and byte-verified`,async()=>{

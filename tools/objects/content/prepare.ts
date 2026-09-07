@@ -172,7 +172,7 @@ export async function prepareObjectContentAssets({
     })),
   };
   const controls = {
-    lenses: shellLenses,
+    lenses: shellLenses.controls.length ? shellLenses : null,
     settings: preparedWithAssets.settings,
   };
   await mkdir(publicDirectory, { recursive: true });
@@ -186,7 +186,7 @@ export async function prepareObjectContentAssets({
     id: preparedWithAssets.objectId,
     content,
     lenses: preparedWithAssets.lenses,
-    controls: { lenses: shellLenses, settings: preparedWithAssets.settings },
+    controls,
     files: ["content.json", "lenses.json", "controls.json"],
   };
 }

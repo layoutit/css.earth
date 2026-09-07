@@ -1,5 +1,5 @@
 import { createObjectRuntime, createNavigableObjectMount, preparedObjectCapabilities,
-  createWorldContextObjectRuntime, prepareObjectResources } from '../src/renderers/css/dist/index.js';
+  createWorldContextObjectRuntime, createPreparedObjectNavigation } from '../src/renderers/css/dist/index.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import * as runtimePolicy from './runtime-policy.mjs';
 
@@ -18,18 +18,12 @@ export function bindPackagedObject(definition, mount = createObjectRuntime(defin
 
 export function bindContextualObject(definition, context, frame = context.frame) {
   const mount = bindPackagedObject(definition, createWorldContextObjectRuntime({ definition, context, frame }));
-  return Object.assign(mount, { navigation: Object.freeze({ frame,
-    async prepare({ signal } = {}) {
-      const resources = prepareObjectResources(definition.assets, { signal });
-      await resources.ready;
-      return { frame, definition, resources };
-    },
-  }) });
+  return Object.assign(mount, { navigation: createPreparedObjectNavigation(async () => definition, frame) });
 }
 
 export async function loadPackagedObject(descriptorInput) {
   return createNavigableObjectMount(descriptorInput, {
-    async read(reference) {
+    async read(reference, signal) {
       // Vite emits the prepared bytes as assets. The inventory is used only
       // during mount; loading the registry never requests renderer content.
       const preparedAssets = import.meta.glob('../src/planets/*/prepared/object.json', {
@@ -37,7 +31,7 @@ export async function loadPackagedObject(descriptorInput) {
       });
       const url = preparedAssets[`../src/planets/${descriptorInput.id}/${reference}`];
       if (typeof url !== 'string') throw new Error(`Prepared object asset is not available: ${reference}.`);
-      const response = await fetch(url);
+      const response = await fetch(url, { signal });
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();
     },

@@ -1,3 +1,16 @@
+import phoebeDescriptor from "../src/planets/phoebe/object.json" with { type: "json" };
+import deimosDescriptor from "../src/planets/deimos/object.json" with { type: "json" };
+import phobosDescriptor from "../src/planets/phobos/object.json" with { type: "json" };
+import oberonDescriptor from "../src/planets/oberon/object.json" with { type: "json" };
+import titaniaDescriptor from "../src/planets/titania/object.json" with { type: "json" };
+import umbrielDescriptor from "../src/planets/umbriel/object.json" with { type: "json" };
+import arielDescriptor from "../src/planets/ariel/object.json" with { type: "json" };
+import mirandaDescriptor from "../src/planets/miranda/object.json" with { type: "json" };
+import charonDescriptor from "../src/planets/charon/object.json" with { type: "json" };
+import tritonDescriptor from "../src/planets/triton/object.json" with { type: "json" };
+import haumeaDescriptor from "../src/planets/haumea/object.json" with { type: "json" };
+import makemakeDescriptor from "../src/planets/makemake/object.json" with { type: "json" };
+import erisDescriptor from "../src/planets/eris/object.json" with { type: "json" };
 import iapetusDescriptor from "../src/planets/iapetus/object.json" with { type: "json" };
 import rheaDescriptor from "../src/planets/rhea/object.json" with { type: "json" };
 import marsDescriptor from "../src/planets/mars/object.json" with { type: "json" };
@@ -54,6 +67,16 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(marsDescriptor);
     }, marsDescriptor.properties.worldFrame),
+  object("phobos", "Phobos", "satellite", "#99948e", 1.52,
+    "Explore Phobos in 3D with cssEarth. Inspect mapped spacecraft imagery, elevation and the measured irregular shape of Mars’s moon.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(phobosDescriptor);
+    }, phobosDescriptor.properties.worldFrame),
+  object("deimos", "Deimos", "satellite", "#99948e", 1.52,
+    "Explore Deimos in 3D with cssEarth. Inspect mapped spacecraft imagery, elevation and the measured irregular shape of Mars’s moon.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(deimosDescriptor);
+    }, deimosDescriptor.properties.worldFrame),
   object("ceres", "Ceres", "dwarf-planet", "#8e8b86", 2.77,
     "NASA Dawn, USGS, JPL, ESO, and HYG", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
@@ -124,21 +147,76 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(iapetusDescriptor);
     }, iapetusDescriptor.properties.worldFrame),
+  object("phoebe", "Phoebe", "satellite", "#9b9792", 9.58,
+    "Explore Phoebe in 3D with cssEarth. Inspect Cassini imagery and shape-derived elevation on Saturn’s irregular outer moon.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(phoebeDescriptor);
+    }, phoebeDescriptor.properties.worldFrame),
   object("uranus", "Uranus", "planet", "#8ec7c9", 19.2,
     "Explore Uranus in 3D with cssEarth. Discover the ice giant that spins on its side, its faint rings, and its system of moons.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(uranusDescriptor);
     }, uranusDescriptor.properties.worldFrame),
+  object("miranda", "Miranda", "satellite", "#aaa8a0", 19.2,
+    "Explore Miranda in 3D with cssEarth. Inspect Voyager imagery of Uranus’s small moon, its giant scarps, and its ridged coronae.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mirandaDescriptor);
+    }, mirandaDescriptor.properties.worldFrame),
+  object("ariel", "Ariel", "satellite", "#b0afa9", 19.2,
+    "Explore Ariel in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(arielDescriptor);
+    }, arielDescriptor.properties.worldFrame),
+  object("umbriel", "Umbriel", "satellite", "#918f8c", 19.2,
+    "Explore Umbriel in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(umbrielDescriptor);
+    }, umbrielDescriptor.properties.worldFrame),
+  object("titania", "Titania", "satellite", "#a8a59e", 19.2,
+    "Explore Titania in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(titaniaDescriptor);
+    }, titaniaDescriptor.properties.worldFrame),
+  object("oberon", "Oberon", "satellite", "#9f978e", 19.2,
+    "Explore Oberon in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(oberonDescriptor);
+    }, oberonDescriptor.properties.worldFrame),
   object("neptune", "Neptune", "planet", "#5279bd", 30.05,
     "Explore Neptune in 3D with cssEarth. Discover the distant blue ice giant, its turbulent atmosphere, faint rings, and orbiting moons.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(neptuneDescriptor);
     }, neptuneDescriptor.properties.worldFrame),
+  object("triton", "Triton", "satellite", "#b8afa5", 30.07,
+    "Explore Neptune’s retrograde moon through Voyager monochrome and enhanced-color imagery.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tritonDescriptor);
+    }, tritonDescriptor.properties.worldFrame),
   object("pluto", "Pluto", "dwarf-planet", "#bca18a", 39,
     "Explore Pluto in 3D with cssEarth. Discover this distant dwarf planet’s icy landscape, its heart-shaped region, and its companion Charon.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(plutoDescriptor);
     }, plutoDescriptor.properties.worldFrame),
+  object("charon", "Charon", "satellite", "#aaa9a3", 39.48,
+    "Explore Charon with New Horizons imagery, deep canyons and measured elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(charonDescriptor);
+    }, charonDescriptor.properties.worldFrame),
+  object("haumea", "Haumea", "dwarf-planet", "#cccccc", 43.1,
+    "Explore Haumea’s measured elongated shape and narrow ring, with an illustrative NASA surface texture.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(haumeaDescriptor);
+    }, haumeaDescriptor.properties.worldFrame),
+  object("makemake", "Makemake", "dwarf-planet", "#bfa48b", 45.8,
+    "Explore Makemake with an illustrative NASA surface texture and its distant orbit around the Sun.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(makemakeDescriptor);
+    }, makemakeDescriptor.properties.worldFrame),
+  object("eris", "Eris", "dwarf-planet", "#ddd6cf", 67.78,
+    "Explore Eris with an illustrative NASA texture on its occultation-constrained spherical shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(erisDescriptor);
+    }, erisDescriptor.properties.worldFrame),
 ]);
 
 export function requireObject(id) {

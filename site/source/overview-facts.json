@@ -1,0 +1,24 @@
+{
+  "verifiedOn": "2026-09-07",
+  "solar-system": {
+    "sources": ["https://science.nasa.gov/solar-system/solar-system-facts/"],
+    "facts": [
+      { "id": "age", "label": "Age", "value": "≈4.6 billion years" },
+      { "id": "central-star", "label": "Central star", "value": "Sun" },
+      { "id": "planet-count", "label": "Planets", "value": "8" },
+      { "id": "galaxy", "label": "Galaxy", "value": "Milky Way" }
+    ]
+  },
+  "milky-way": {
+    "sources": [
+      "https://science.nasa.gov/solar-system/solar-system-facts/",
+      "https://science.nasa.gov/universe/galaxies/"
+    ],
+    "facts": [
+      { "id": "galaxy-type", "label": "Galaxy type", "value": "Barred spiral" },
+      { "id": "stellar-disk-diameter", "label": "Stellar disk diameter", "value": ">100,000 ly" },
+      { "id": "galaxy-group", "label": "Galaxy group", "value": "Local Group" },
+      { "id": "sun-location", "label": "Sun’s location", "value": "Orion Spur" }
+    ]
+  }
+}

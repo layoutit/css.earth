@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bea76507052b8eeb148c08ed1abf81627ed8d83b37e9066fab2dcf5f5fc15cf2"
+    "sha256": "6499e42bb5456aae51db5ce861ee60910974f602b720dd82447bd59128e34584"
   },
   "id": "pluto",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "c6a7ceed20cffc38534664dabfe32ded7cb5882566f6013d35474bab20483d71"
+          "sha256": "15d16c2b012ada865c77c3996b73cd2f1f28454358dce98dcbe485e4721cd010"
         },
         {
           "id": "geometry",
@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/static.json",
-          "sha256": "d71497801fa63b80ab0ad25c561f0f121475fb6ce707d27df05d0b864698855b"
+          "sha256": "6de5aec112ac3b8cac7dab23cacafab0e487d0a85bad40f589dab3fbdc197de8"
         },
         {
           "id": "title",
@@ -51,7 +51,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "5399a864015d43e65b918ef173571bb10acdb2c922f8873386edef9b0f87ac99"
+          "sha256": "2c2d7a33e27e26f044fce5e94163aafbaa167976b95b4cff890e0c6e92a0ce84"
         },
         {
           "id": "acquisition",

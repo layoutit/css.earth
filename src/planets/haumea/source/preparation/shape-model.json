@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-shape-model@1",
+  "displayName": "Haumea",
+  "displayRadius": 230,
+  "distanceAu": 43.1,
+  "quadBudget": 2000,
+  "mesh": {
+    "latitudeSegments": 32,
+    "longitudeSegments": 48,
+    "width": 3072,
+    "height": 1536,
+    "poleSize": 256,
+    "seamOverlap": 0.025
+  },
+  "ring": {
+    "innerRadiusKm": 2252,
+    "outerRadiusKm": 2322,
+    "segments": 128,
+    "displayValue": 130,
+    "displayOpacity": 0.5,
+    "qualification": "Ring dimensions from the 2017 occultation. Gray appearance and constant display opacity are schematic; the measured 0.5 occultation opacity is not a view-independent optical model."
+  },
+  "camera": {
+    "initialScenePitchDegrees": 40,
+    "defaultControlYawDegrees": -50,
+    "maximumHeightShare": 0.4
+  },
+  "surfaceModel": "nasa-haumea.glb"
+}

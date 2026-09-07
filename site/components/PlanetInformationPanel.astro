@@ -1,0 +1,378 @@
+---
+import { orderFacts } from "../fact-order.mjs";
+import { GEOGRAPHIC_LEGEND_CAPACITY } from "../../src/platform/geographic-lens-contract.mjs";
+import type { Props } from "../planet-shell-types";
+import { OBJECTS } from "../objects.mjs";
+import { objectClassificationLabel } from "../planet-search-objects.mjs";
+import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
+import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
+import { orderScientificCharts } from "../scientific-chart-order.mjs";
+import { sceneSources } from "../scene-sources.mjs";
+import MaterialSymbol from "./MaterialSymbol.astro";
+import SearchIcon from "./SearchIcon.astro";
+import PlanetCard from "./PlanetCard.astro";
+import PlanetCardHeader from "./PlanetCardHeader.astro";
+import PlanetFactsheet from "./PlanetFactsheet.astro";
+const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], resources = [], lenses, destinations } = Astro.props;
+const hasLenses = Boolean(lenses && lenses.controls.length > 0);
+const activeObject = OBJECTS.find((object) => object.id === objectId);
+const classificationLabel = activeObject && objectClassificationLabel(activeObject.classification);
+const sources = sceneSources(resources);
+const hasResources = sources.length > 0;
+const orderedCharts = orderScientificCharts(charts);
+const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
+const allFacts = orderFacts(facts, moreFacts);
+const initialEntity = {
+  id: objectId, name: title.label, kind: activeObject?.kind, parentId: null,
+  title, introduction, facts: allFacts, resources: sources,
+  lensIds: destinations?.lensIds ?? [...(lenses?.controls.filter(lens => !lens.entityIds).map(lens => lens.id) ?? []), ...(destinations?.lenses ?? []).map(lens => lens.id)],
+  ...(destinations?.lenses?.length ? { lenses: destinations.lenses } : {}),
+  sections: ["search", "charts", ...galleries.filter(gallery => !gallery.hidden).map(gallery => `gallery:${gallery.id}`)],
+};
+const serializedEntity = JSON.stringify(initialEntity).replaceAll("<", "\\u003c");
+---
+
+    <PlanetCard class="planet-information-panel" data-entity-card data-entity-id={objectId} data-entity-kind={activeObject?.kind}>
+      <script type="application/json" data-initial-entity set:html={serializedEntity}></script>
+
+      <PlanetCardHeader {title} {introduction} entity>
+      <nav slot="before-title" class="entity-path" aria-label="Place hierarchy" hidden>
+        {Array.from({ length: 8 }, () => <span hidden><button type="button" data-entity-parent></button><span class="entity-path-separator" aria-hidden="true">›</span></span>)}
+      </nav>
+          {activeObject && classificationLabel && <div class="planet-title-tags" data-root-entity-tags>
+            <button
+              class="planet-system-tag planet-title-tag"
+              type="button"
+              data-object-query={activeObject.systemName}
+              aria-controls={`${objectId}-object-browser`}
+              aria-label={`Browse ${activeObject.systemName} objects`}
+              title={`Browse ${activeObject.systemName} objects`}
+            >{activeObject.systemName}</button>
+            <button
+              class="planet-classification-tag planet-title-tag"
+              type="button"
+              data-object-query={`${classificationLabel}s`}
+              aria-controls={`${objectId}-object-browser`}
+              aria-label={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
+              title={`Browse ${classificationLabel.toLocaleLowerCase("en")}s`}
+            >{classificationLabel}</button>
+          </div>}
+          <span class="planet-title-tags" data-entity-tags hidden><span class="planet-title-tag" data-entity-kind-label></span></span>
+        <p slot="after-introduction" class="planet-destination-status" role="status" hidden></p>
+      </PlanetCardHeader>
+      <PlanetFactsheet id={objectId} {facts} {moreFacts} />
+      {defaultChart && <details
+        id={`${objectId}-charts`}
+        class="planet-chart-switcher" data-card-section="charts"
+        style="display: none;"
+        data-active-chart={defaultChart.id}
+        aria-labelledby={`${objectId}-charts-title`}
+      >
+        <summary class="planet-panel-summary planet-chart-switcher-header">
+          <h2
+            id={`${objectId}-charts-title`}
+            class="planet-panel-heading planet-chart-switcher-title"
+            aria-live="polite"
+          >
+            {orderedCharts.map((chart) => (
+              <span
+                class="planet-chart-label"
+                data-chart-label={chart.id}
+                hidden={chart.id !== defaultChart.id}
+              >{chart.title.label}</span>
+            ))}
+          </h2>
+          <div class="planet-chart-switcher-controls" aria-label="Choose chart">
+            <button
+              class="planet-chart-step planet-chart-previous"
+              type="button"
+              data-chart-step="-1"
+              aria-controls={`${objectId}-chart-slides`}
+              aria-label="Previous chart"
+              disabled={orderedCharts.length < 2}
+            ><span aria-hidden="true">‹</span></button>
+            <button
+              class="planet-chart-step planet-chart-next"
+              type="button"
+              data-chart-step="1"
+              aria-controls={`${objectId}-chart-slides`}
+              aria-label="Next chart"
+              disabled={orderedCharts.length < 2}
+            ><span aria-hidden="true">›</span></button>
+          </div>
+        </summary>
+        <div id={`${objectId}-chart-slides`} class="planet-chart-slides">
+          {orderedCharts.map((chart) => (
+            <figure
+              id={`${objectId}-${chart.id}`}
+              class="planet-chart-slide"
+              data-chart-id={chart.id}
+              data-chart-title={chart.title.label}
+              aria-label={chart.title.label}
+              hidden={chart.id !== defaultChart.id}
+            >
+              <img
+                class="planet-chart"
+                src={chart.src}
+                width={chart.width}
+                height={chart.height}
+                alt={chart.alt}
+              />
+            </figure>
+          ))}
+        </div>
+      </details>}
+      {hasLenses && lenses && <details id={`${objectId}-lenses`} class="planet-lenses" open>
+        <summary class="planet-panel-summary planet-lens-browser-header">
+          <h2 class="planet-panel-heading">Dataset <span class="planet-panel-heading-count" data-lens-count>({initialEntity.lensIds.length})</span></h2>
+          <label class="planet-lens-search-field">
+            <input
+              class="planet-lens-search"
+              type="search"
+              aria-label="Search datasets"
+              autocomplete="off"
+            />
+            <span class="planet-lens-search-icon"><SearchIcon /></span>
+          </label>
+        </summary>
+        <div id={`${objectId}-layers-menu`} class="planet-layers-menu">
+          <nav class="planet-observation-controls" aria-label="Datasets">
+            {lenses.controls.map((lens) => (
+              <div class="planet-observation-option" data-lens-option data-entity-ids={lens.entityIds?.join(" ")} hidden={!initialEntity.lensIds.includes(lens.id)}>
+                <button
+                  class="planet-observation-control"
+                  type="button"
+                  name="lens"
+                  value={lens.id}
+                  aria-pressed={lens.id === lenses.defaultLens ? "true" : "false"}
+                  aria-controls={`${objectId}-${lens.id}-details`}
+                  title={lens.title}
+                >
+                  <img class="planet-lens-icon" src={lens.thumbnailUrl} width="16" height="16" alt="" />
+                  <span class="planet-lens-label">{lens.label}</span>
+                  {lens.detail && <span class="planet-lens-detail">{lens.detail}</span>}
+                </button>
+              </div>
+            ))}
+            {Array.from({length: lenses.geographicCapacity ?? 0}, (_, index) => {
+              const lens = destinations?.lenses?.[index];
+              return <div class="planet-observation-option" data-lens-option data-geographic-option data-entity-available={String(Boolean(lens))} hidden={!lens}>
+                <button class="planet-observation-control" type="button" name="lens" data-geographic-lens
+                  value={lens?.id ?? `geographic-slot-${index}`} aria-pressed="false"
+                  aria-controls={`${objectId}-geographic-${index}-details`} disabled>
+                  <img class="planet-lens-icon" src={lens?.thumbnailUrl} width="16" height="16" alt="" />
+                  <span class="planet-lens-label">{lens?.label ?? ""}</span>
+                </button>
+              </div>;
+            })}
+          </nav>
+          <p class="planet-lens-empty" aria-live="polite" hidden>No matching datasets</p>
+        </div>
+      </details>}
+      {hasLenses && lenses && <details
+        id={`${objectId}-surface-lens`}
+        class="planet-lens-details"
+        open
+      >
+        <summary class="planet-panel-summary">
+          <h2 class="planet-panel-heading">Surface Lens</h2>
+          <span class="planet-panel-icon" aria-hidden="true">
+            <MaterialSymbol name="info" />
+          </span>
+        </summary>
+        <div class="planet-lens-details-body" aria-live="polite" aria-atomic="true">
+          {lenses.controls.map((lens) => (
+            <div
+              id={`${objectId}-${lens.id}-details`}
+              data-lens-details={lens.id}
+              hidden={lens.id !== lenses.defaultLens}
+            >
+              {lens.texture ? <div
+                class="planet-surface-minimap"
+                data-surface-minimap={lens.texture.minimap ? JSON.stringify(lens.texture.minimap) : undefined}
+                role={lens.texture.minimap ? "group" : undefined}
+                tabindex={lens.texture.minimap ? 0 : undefined}
+                aria-label={lens.texture.minimap ? `${lens.label} surface map. Drag or use arrow keys to look around; scroll or use plus and minus to zoom.` : undefined}
+              >
+                <img
+                  class="planet-lens-texture"
+                  src={lens.texture.url}
+                  width={lens.texture.width}
+                  height={lens.texture.height}
+                  alt={lens.description}
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                />
+                {lens.texture.minimap && <>
+                  {[-1, 0, 1].map(() => <span
+                    class="planet-minimap-viewport"
+                    style={`background-image: url(${JSON.stringify(lens.texture.url)})`}
+                    aria-hidden="true"
+                    hidden
+                  ></span>)}
+                </>}
+              </div> : <p class="planet-lens-details-copy">{lens.description}</p>}
+              {lens.texture?.attribution && <p class="planet-lens-source">
+                Source: {lens.texture.attribution.url
+                  ? <a href={lens.texture.attribution.url} target="_blank" rel="noreferrer">{lens.texture.attribution.label}</a>
+                  : lens.texture.attribution.label}
+              </p>}
+              {lens.legend && <section
+                id={`${objectId}-${lens.id}-legend`}
+                class="planet-lens-legend-panel"
+                data-lens-legend={lens.id}
+                aria-label={`${lens.label} legend`}
+              >
+                {(lens.legend.title !== lens.label ||
+                  (lens.legend.kind === "categories" && lens.legend.meta)) &&
+                  <p class="planet-lens-legend-title">
+                    <span>{lens.legend.title}</span>
+                    {lens.legend.kind === "categories" && lens.legend.meta &&
+                      <span>{lens.legend.meta}</span>}
+                  </p>}
+                {lens.legend.kind === "scale" && lens.legend.labels &&
+                  (lens.legend.src || lens.legend.colors) && <>
+                  <div class="planet-lens-legend-scale-row">
+                    {lens.legend.src
+                      ? <img
+                          class="planet-lens-legend-scale"
+                          src={lens.legend.src}
+                          width={lens.legend.width}
+                          height={lens.legend.height}
+                          alt={`${lens.legend.title} color scale from ${lens.legend.labels[0]} to ${lens.legend.labels.at(-1)} ${lens.legend.meta ?? ""}`}
+                        />
+                      : <span
+                          class="planet-lens-legend-scale planet-lens-legend-segments"
+                          role="img"
+                          aria-label={`${lens.legend.title} color scale from ${lens.legend.labels[0]} to ${lens.legend.labels.at(-1)} ${lens.legend.meta ?? ""}`}
+                        >
+                          {lens.legend.colors?.map((color) => (
+                            <span
+                              class="planet-lens-legend-segment"
+                              style={`--planet-lens-legend-color: ${color}`}
+                              aria-hidden="true"
+                            ></span>
+                          ))}
+                        </span>}
+                  </div>
+                  <div class="planet-lens-legend-labels" aria-hidden="true">
+                    {lens.legend.labels.map((label, index) => (
+                      <span>{label}{index === lens.legend.labels.length - 1 && lens.legend.meta
+                        ? ` ${lens.legend.meta}`
+                        : ""}</span>
+                    ))}
+                  </div>
+                </>}
+                {lens.legend.kind === "categories" && lens.legend.items && (
+                  <ul class="planet-lens-legend-categories">
+                    {lens.legend.items.map((item) => (
+                      <li>
+                        <span
+                          class="planet-lens-legend-swatch"
+                          style={`--planet-lens-legend-color: ${item.color}`}
+                          aria-hidden="true"
+                        ></span>
+                        <span class="planet-lens-legend-category-label">{item.label}</span>
+                        <span class="planet-lens-legend-category-description">{item.description}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>}
+            </div>
+          ))}
+          {Array.from({length: lenses.geographicCapacity ?? 0}, (_, index) => (
+            <div id={`${objectId}-geographic-${index}-details`} data-lens-details={destinations?.lenses?.[index]?.id ?? `geographic-slot-${index}`} data-geographic-details hidden>
+              <section class="planet-lens-legend-panel" data-lens-legend={`geographic-slot-${index}`}>
+                <p class="planet-place-lens-note" data-geographic-status role="status" hidden></p>
+                <p class="planet-lens-legend-title" data-geographic-legend-heading hidden>
+                  <span data-geographic-legend-title></span><span data-geographic-legend-meta></span>
+                </p>
+                <div data-geographic-legend-scale hidden>
+                  <div class="planet-lens-legend-scale-row">
+                    <span class="planet-lens-legend-scale planet-lens-legend-segments" role="img" data-geographic-legend-bar>
+                      {Array.from({length: GEOGRAPHIC_LEGEND_CAPACITY}, () => (
+                        <span class="planet-lens-legend-segment" aria-hidden="true" hidden></span>
+                      ))}
+                    </span>
+                  </div>
+                  <div class="planet-lens-legend-labels" aria-hidden="true">
+                    <span data-geographic-legend-low></span><span data-geographic-legend-high></span>
+                  </div>
+                </div>
+                <ul class="planet-lens-legend-categories" data-geographic-legend-categories hidden>
+                  {Array.from({length: GEOGRAPHIC_LEGEND_CAPACITY}, () => (
+                    <li hidden><span class="planet-lens-legend-swatch" aria-hidden="true"></span>
+                      <span class="planet-lens-legend-category-label"></span>
+                      <span class="planet-lens-legend-category-description"></span></li>
+                  ))}
+                </ul>
+                <p class="planet-place-lens-note" data-geographic-qualification hidden></p>
+                <p class="planet-place-lens-note" data-geographic-source hidden>
+                  <a target="_blank" rel="noreferrer" data-geographic-attribution></a>
+                  <span> · </span><a target="_blank" rel="noreferrer" data-geographic-license></a>
+                </p>
+              </section>
+            </div>
+          ))}
+        </div>
+      </details>}
+      {galleries.map((gallery) => (
+      <details id={`${objectId}-${gallery.id}`} class="planet-gallery-panel" data-card-section={`gallery:${gallery.id}`} hidden={gallery.hidden}>
+        <summary class="planet-panel-summary">
+          <h2 class="planet-panel-heading">{gallery.title.label}</h2>
+          <span class="planet-panel-toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="planet-gallery" aria-label={gallery.title.label}>
+          {gallery.items.map((item) => (
+            <figure class="planet-gallery-item" data-gallery-item={item.id}>
+              <img
+                class="planet-gallery-image"
+                src={item.src}
+                width={item.width}
+                height={item.height}
+                alt={item.alt}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class="planet-gallery-caption">
+                <strong>{item.label}</strong>
+                <span>{item.caption}</span>
+                <a class="planet-gallery-source" href={item.sourceUrl} target="_blank" rel="noreferrer">Archive file</a>
+              </figcaption>
+            </figure>
+          ))}
+          {gallery.qualification && <p class="planet-gallery-qualification">{gallery.qualification}</p>}
+        </div>
+      </details>
+      ))}
+      {hasResources && <details id={`${objectId}-resources`} class="planet-resources-panel">
+        <summary class="planet-panel-summary">
+          <h2 class="planet-panel-heading">{PREPARED_SHELL_TITLES.resources.label}</h2>
+          <img
+            class="planet-panel-icon"
+            data-panel-icon="resources"
+            src={PREPARED_SHELL_ICONS.resources.src}
+            width={PREPARED_SHELL_ICONS.resources.width}
+            height={PREPARED_SHELL_ICONS.resources.height}
+            alt=""
+          />
+        </summary>
+        <div class="planet-resources-links">
+          {sources.map((resource) => (
+            <a
+              class="planet-resource-row"
+              href={resource.href}
+              title={resource.description}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="planet-resource-description">{resource.description}</span>
+              <span class="planet-resource-label">{resource.label}</span>
+            </a>
+          ))}
+        </div>
+      </details>}
+
+    </PlanetCard>

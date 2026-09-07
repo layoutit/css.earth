@@ -40,7 +40,7 @@ export function requirePreparedData(value, label = "data", seen = new Set()) {
 
 export function requirePreparedPresentation(plan, { controls, assets = plan?.assets } = {}) {
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "observationSurface"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "resourceOrder", "destinations", "motionFrame", "pageLayers", "heliocentricView", "surfaceHit", "observationSurface"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -220,6 +220,17 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     unique(plan.motionFrame,"motion frame");
     for(const id of plan.motionFrame) {node(id);if(!ancestor(id,tree.scene))fail("motion frame must belong to scene");}
   }
+  if (plan.surfaceHit !== undefined) {
+    const hit = plan.surfaceHit;
+    record(hit, 'surface hit', ['target', 'triangles']); node(hit.target);
+    if (!ancestor(hit.target, tree.scene)) fail('surface hit target must belong to scene');
+    const triangles = array(hit.triangles, 'surface hit triangles');
+    if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
+    for (const triangle of triangles) {
+      if (!Array.isArray(triangle) || triangle.length !== 3 || triangle.some(point =>
+        !Array.isArray(point) || point.length !== 3 || point.some(n => !Number.isFinite(n)))) fail('surface hit requires finite prepared triangles');
+    }
+  }
   if (plan.pageLayers !== undefined) {
     const layers=array(plan.pageLayers,"page layers");unique(layers.map(layer=>layer.id),"page layers");
     if(layers.filter(layer=>layer.geographic).length>1)fail("only one geographic overlay pool may mount");
@@ -265,7 +276,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       }
     }
     record(variant.when, "selection key", ["lensId", ...settings.keys()]);
-    if (!lensIds.includes(variant.when.lensId)) fail("variant must name one declared exclusive lens");
+    if (lensIds.length ? !lensIds.includes(variant.when.lensId) : Object.hasOwn(variant.when, "lensId")) fail("variant must match the declared lens capability");
     for (const [key, value] of Object.entries(variant.when)) if (key !== "lensId") {
       const control = settings.get(key);
       if (control.kind !== "toggle" || typeof value !== "boolean") fail("presentation variants may only bind discrete toggle settings");
@@ -299,7 +310,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   }
   const toggleNames = [...new Set(variants.flatMap(variant => Object.keys(variant.when).filter(key => key !== "lensId")))];
   if (toggleNames.length > 12) fail("selection table exceeds bounded toggle combinations");
-  for (const lensId of lensIds) for (let index = 0; index < 2 ** toggleNames.length; index++) {
+  for (const lensId of lensIds.length ? lensIds : [null]) for (let index = 0; index < 2 ** toggleNames.length; index++) {
     const state = { lensId, ...Object.fromEntries(toggleNames.map((name, bit) => [name, !!(index & 2 ** bit)])) };
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }
@@ -337,6 +348,33 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
     finite(animation.sourceMinimum, "animation minimum"); finite(animation.millisecondsPerDegree, "animation time mapping");
     if (!array(animation.keyframes, "keyframes").length) fail("prepared animation has no keyframes");
     for (const frame of animation.keyframes) { record(frame, "keyframe", ["offset", "transform"]); finite(frame.offset, "keyframe offset"); string(frame.transform, "keyframe transform"); }
+  }
+  if (plan.motion !== undefined) for (const animation of array(plan.motion, "motion")) {
+    record(animation, "motion", ["target", "id", "keyframes", "duration", "timings"]);
+    node(animation.target); string(animation.id, "motion id");
+    for (const timing of array(animation.timings, "motion timings")) {
+      record(timing, "motion timing", ["when", "duration"]);
+      if (!timing.when || typeof timing.when !== 'object' || Array.isArray(timing.when) || !(timing.duration > 0)) fail("invalid motion timing");
+    }
+    if ([tree.camera, tree.scene].includes(animation.target) || !(animation.duration > 0)) fail("unsupported prepared motion");
+    if (!array(animation.keyframes, "motion keyframes").length) fail("prepared motion has no keyframes");
+    for (const frame of animation.keyframes) {
+      record(frame, "keyframe", ["offset", "transform"]); finite(frame.offset, "keyframe offset"); string(frame.transform, "keyframe transform");
+      if (frame.offset < 0 || frame.offset > 1) fail("motion offset must be within animation");
+    }
+  }
+  if (plan.facing !== undefined) {
+    const targets = new Set();
+    for (const face of array(plan.facing, 'facing planes')) {
+      record(face, 'facing plane', ['target', 'plane', 'tolerance']); node(face.target);
+      if (!(Number.isFinite(face.tolerance) && face.tolerance > 0)) fail('native backface tolerance must be positive');
+      if ([tree.camera, tree.scene].includes(face.target) || targets.has(face.target) || tree.nodes.some(node => node.parent === face.target)) fail('facing target must be a unique prepared leaf');
+      if (!ancestor(face.target, tree.scene)) fail('facing target must belong to scene');
+      targets.add(face.target);
+      if (array(face.plane, 'facing plane coordinates').length !== 4) fail('facing plane needs four coordinates');
+      face.plane.forEach(value => finite(value, 'facing plane coordinate'));
+      if (Math.abs(Math.hypot(...face.plane.slice(0, 3)) - 1) > 1e-6) fail('facing plane must have a unit normal');
+    }
   }
   return plan;
 }

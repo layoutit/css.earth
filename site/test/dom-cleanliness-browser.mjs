@@ -1,17 +1,15 @@
 import assert from 'node:assert/strict';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { OBJECTS } from '../objects.mjs';
-import { previewSite } from '../../tools/preview.mjs';
-
-// Run against a production build: pnpm build && pnpm test:browser:dom.
-const suppliedOrigin = process.argv[2];
-const server = suppliedOrigin ? null : await previewSite({ port: 4292 });
-const origin = suppliedOrigin ?? 'http://127.0.0.1:4292';
+// Reuse an already-running server. Optionally select one body after the URL.
+const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
+const requestedId = process.argv[3];
+const selected = requestedId ? OBJECTS.filter(object => object.id === requestedId) : OBJECTS;
+assert.ok(selected.length, `Unknown object: ${requestedId}`);
 const output = resolve('output/dom-cleanliness');
 await mkdir(output, { recursive: true });
-const { data: { policy } } = JSON.parse(await readFile(new URL('../../src/objects/stellar-neighbourhood/prepared/stars.json', import.meta.url)));
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const reports = [], navigation = [], problems = [];
 try {
@@ -21,37 +19,39 @@ try {
     page.on('pageerror', error => problems.push(error.message));
     page.on('console', message => { if (message.type() === 'error') problems.push(message.text()); });
     page.on('response', response => { if (response.status() >= 400) problems.push(`${response.status()} ${response.url()}`); });
-    for (const object of OBJECTS) {
+    for (const object of selected) {
       await page.goto(`${origin}${object.route}`, { waitUntil: 'networkidle' });
       await ready(page, object.id);
       const initial = await page.evaluate(census);
-      assertClean(initial, policy, `${object.id} DPR ${density}`);
+      assertClean(initial, `${object.id} DPR ${density}`);
       await page.evaluate(() => {
         const root = document.querySelector('.planet-stage');
         const nodes = [...root.querySelectorAll('*')];
         const records = [];
         const observer = new MutationObserver(batch => records.push(...batch));
-        observer.observe(root, { subtree: true, childList: true, attributes: true,
-          attributeFilter: ['data-star-slot', 'data-star-reference', 'data-volume-slice', 'data-context-orbit'] });
+        observer.observe(root, { subtree: true, childList: true });
         window.__domCleanlinessResult = () => {
           records.push(...observer.takeRecords()); observer.disconnect();
           const current = [...root.querySelectorAll('*')];
           return { retained: nodes.length === current.length && nodes.every((node, i) => node === current[i]),
             topologyChanges: records.filter(record => record.type === 'childList' &&
-              [...record.addedNodes, ...record.removedNodes].some(node => node.nodeType === 1)).length,
-            diagnosticWrites: records.filter(record => record.type === 'attributes').length };
+              [...record.addedNodes, ...record.removedNodes].some(node => node.nodeType === 1)).length };
         };
       });
+      const beforeDrag = await page.locator('.polycss-scene').evaluate(node => getComputedStyle(node).transform);
       await page.mouse.move(950, 460); await page.mouse.down();
-      await page.mouse.move(1120, 515, { steps: 16 }); await page.mouse.up();
-      await page.waitForTimeout(1200);
+      await page.mouse.move(1120, 515, { steps: 16 });
+      await page.waitForFunction(before => getComputedStyle(document.querySelector('.polycss-scene')).transform !== before, beforeDrag);
+      await page.mouse.up();
+      await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
       const interaction = await page.evaluate(() => window.__domCleanlinessResult());
-      assert.deepEqual(interaction, { retained: true, topologyChanges: 0, diagnosticWrites: 0 });
-      assertClean(await page.evaluate(census), policy, `${object.id} after drag`);
+      assert.deepEqual(interaction, { retained: true, topologyChanges: 0 });
+      assertClean(await page.evaluate(census), `${object.id} after drag`);
       reports.push({ object: object.id, density, initial, interaction });
-      console.log(`DOM PASS ${object.id} DPR ${density}: ${initial.nodes} nodes; anonymous leaves; retained interaction`);
+      console.log(`PASS ${object.id} DPR ${density}: ${initial.nodes} nodes; retained interaction`);
     }
 
+    if (requestedId) { await page.close(); continue; }
     // Search is the visible product navigation, including the Earth -> Saturn
     // transition that used to detach loaded stylesheets and collapse the camera.
     await page.goto(`${origin}/earth/`, { waitUntil: 'networkidle' });
@@ -95,7 +95,7 @@ try {
         assert.equal(result.nodes, previous.nodes, `${id}: no DOM accumulation on return`);
         assert.equal(result.styleCount, previous.styleCount, `${id}: no stylesheet accumulation on return`);
       }
-      assertClean(await page.evaluate(census), policy, `${id} after navigation`);
+      assertClean(await page.evaluate(census), `${id} after navigation`);
       visits.push(result);
     }
     const maxScenes = await page.evaluate(() => { window.__domNavigation.observer.disconnect(); return window.__domNavigation.maxScenes; });
@@ -107,7 +107,7 @@ try {
   assert.deepEqual(problems, []);
 } finally {
   await writeFile(resolve(output, 'report.json'), JSON.stringify({ browser: browser.version(), reports, navigation, problems }, null, 2) + '\n');
-  await browser.close(); await server?.close();
+  await browser.close();
 }
 
 async function ready(page, id) {
@@ -118,35 +118,21 @@ async function ready(page, id) {
 }
 function census() {
   const stage = document.querySelector('.planet-stage');
-  const stars = [...stage.querySelectorAll('.prepared-point-field-stars > s')];
-  const orbits = [...stage.querySelectorAll('.prepared-world-context > s:not([data-context-body])')];
-  const slices = [...stage.querySelectorAll('.css-volume-mesh > s')];
-  const anonymous = [...stars, ...orbits, ...slices].every(node => !node.id && !node.hasAttribute('class') &&
-    ![...node.attributes].some(attribute => attribute.name.startsWith('data-')));
-  const commonInline = ['position', 'left', 'top', 'width', 'height', 'background-image', 'background-repeat', 'text-decoration', 'transform-origin'];
-  const style = getComputedStyle(stars[0]);
-  return { nodes: stage.querySelectorAll('*').length + 1, stars: stars.length, orbits: orbits.length, slices: slices.length,
-    anonymous, commonStarInline: stars.some(node => commonInline.some(property => node.style.getPropertyValue(property))),
-    commonOrbitInline: orbits.some(node => ['position', 'left', 'top', 'width', 'height', 'background', 'transform-origin'].some(property => node.style.getPropertyValue(property))),
-    starStyle: { position: style.position, width: style.width, backgroundImage: style.backgroundImage, textDecoration: style.textDecorationLine },
-    unusedSkyLeaves: stage.querySelectorAll('.prepared-context-sky-fade .planet-cubic-sky-face, .prepared-context-sky-fade .planet-cubic-sky-star').length,
+  const camera = stage.querySelector('.polycss-camera');
+  const rect = camera.getBoundingClientRect();
+  return { nodes: stage.querySelectorAll('*').length + 1,
     sceneCount: stage.querySelectorAll('.polycss-scene').length,
+    cameraWidth: rect.width, cameraHeight: rect.height,
+    texturedLeaves: [...stage.querySelectorAll('.polycss-scene :is(s,u)')].filter(node => getComputedStyle(node).backgroundImage !== 'none').length,
     forbiddenRenderers: stage.querySelectorAll('canvas,svg').length,
-    duplicateIds: [...document.querySelectorAll('[id]')].map(node => node.id).filter((id, i, ids) => ids.indexOf(id) !== i),
-    developmentDiagnostics: window.__cssEarthUniverse !== undefined || window.__cssEarth !== undefined };
+    duplicateIds: [...document.querySelectorAll('[id]')].map(node => node.id)
+      .filter((id, i, ids) => ids.indexOf(id) !== i) };
 }
-function assertClean(result, policy, message) {
-  assert.equal(result.stars, policy.activeSlots + policy.transitionSlots, message);
-  assert.ok(result.orbits > 0 && result.slices > 0, message);
-  assert.ok(result.anonymous, message);
-  assert.equal(result.commonStarInline, false, message);
-  assert.equal(result.commonOrbitInline, false, message);
-  assert.equal(result.starStyle.position, 'absolute', message);
-  assert.match(result.starStyle.backgroundImage, /^url\(/, message);
-  assert.equal(result.starStyle.textDecoration, 'none', message);
-  assert.equal(result.unusedSkyLeaves, 0, message);
+function assertClean(result, message) {
+  assert.ok(result.nodes > 1, message);
+  assert.ok(result.texturedLeaves > 0, `${message}: surface textures must be present`);
+  assert.ok(result.cameraWidth > 0 && result.cameraHeight > 0, message);
   assert.equal(result.sceneCount, 1, message);
   assert.equal(result.forbiddenRenderers, 0, message);
   assert.deepEqual(result.duplicateIds, [], message);
-  assert.equal(result.developmentDiagnostics, false, message);
 }

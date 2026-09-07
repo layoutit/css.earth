@@ -29,6 +29,7 @@ src/planets/*/source/**/*.fits
 src/planets/*/source/**/*.gif
 src/planets/*/source/**/*.glb
 src/planets/*/source/**/*.IMG.gz
+src/planets/*/source/**/*.cub.gz
 src/planets/*/source/**/*.jpeg
 src/planets/*/source/**/*.jpg
 src/planets/*/source/**/*.png
@@ -37,6 +38,7 @@ src/planets/*/source/**/*.tiff
 src/planets/europa/source/photometry/*.lbl
 src/planets/*/source/**/*.ttf
 src/planets/*/source/**/*.webp
+src/planets/*/source/**/*.zip
 
 # Accepted Saturn source-of-truth inputs without a direct acquisition URL.
 !src/planets/saturn/source/cassini-pia21611.jpg
@@ -47,3 +49,11 @@ src/planets/*/.prepared/
 
 # Prepared JSON transport rebuilt from checked-in object preparation output.
 /src/planets/*/prepared/object.json
+
+/src/planets/charon/source/observations/*.tif
+/src/planets/charon/source/science/*.tif
+
+# Pinned PDS raster and vertex-facet source products.
+src/planets/*/source/**/*.IMG
+src/planets/*/source/**/*.tab
+src/planets/*/source/**/*.obj

@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-numeric-source-inspection@1",
+  "method": "Independent NumPy tile reshape and bilinear geographic lookup on original ISIS3 cubes; no shared JavaScript decoder used. Validity excludes non-finite and ISIS special pixels with absolute magnitude above 1e30.",
+  "coordinateReference": "Named feature centers from Nathan et al.2024 Table A1, DOI10.3847/PSJ/ad04d6; Gazetteer positive-east coordinates.",
+  "grid": {
+    "width": 1722,
+    "height": 861,
+    "targetName": "Titania",
+    "centerLongitude": 180,
+    "referenceRadiusMeters": 788900,
+    "polarRadiusMeters": 788900,
+    "origin": [
+      -4959360,
+      1241280
+    ],
+    "resolutionMeters": 2880,
+    "specialValueMagnitude": 1e+30,
+    "longitudeRange": [
+      -180,
+      180
+    ]
+  },
+  "sources": {
+    "normal": {
+      "upstreamSha256": "9e9b6fbeb18aa687160b1d814610dfadd39966784e0ee0e9624c43299bf58542",
+      "upstreamBytes": 6011208,
+      "validPixels": 691620,
+      "totalPixels": 1482642,
+      "minimum": -650.4500732421875,
+      "maximum": 8932.4365234375,
+      "percentiles": {
+        "0.1": 208.66123559570312,
+        "1": 524.0297412109375,
+        "10": 986.2981994628906,
+        "50": 1238.8988037109375,
+        "90": 1527.7876953124999,
+        "99": 2085.2480029296858,
+        "99.9": 2986.7347441406473
+      },
+      "approximateSurfaceCoveragePercent": 44.83867865186539
+    },
+    "elevation": {
+      "upstreamSha256": "7ac7659bc3c57922d966448f073125c1cd06b19d36dbea40de6a725d485690fa",
+      "upstreamBytes": 6000752,
+      "validPixels": 491052,
+      "totalPixels": 1482642,
+      "minimum": -7.497335910797119,
+      "maximum": 7.902501583099365,
+      "percentiles": {
+        "0.1": -6.551324364662171,
+        "1": -4.805502104759216,
+        "10": -2.6152670860290526,
+        "50": -0.047599343582987785,
+        "90": 2.845637130737305,
+        "99": 5.055003547668456,
+        "99.9": 6.0907019162178475
+      },
+      "approximateSurfaceCoveragePercent": 27.75274332804356
+    }
+  },
+  "samples": [
+    {
+      "name": "Ursula",
+      "longitude": 45.2,
+      "latitude": -12.4,
+      "normal": 2722.5139343819287,
+      "elevation": -5.22480217014172
+    },
+    {
+      "name": "Gertrude",
+      "longitude": 287.1,
+      "latitude": -15.8,
+      "normal": 1196.5235345866618,
+      "elevation": -4.602648946692492
+    },
+    {
+      "name": "Messina Chasmata",
+      "longitude": 335,
+      "latitude": -33.3,
+      "normal": 759.0643452179544,
+      "elevation": -2.606547170311242
+    },
+    {
+      "name": "Bona",
+      "longitude": 351.2,
+      "latitude": -55.8,
+      "normal": 1441.9123454632518,
+      "elevation": 1.5519655799854268
+    },
+    {
+      "name": "north",
+      "longitude": 180,
+      "latitude": 60,
+      "normal": null,
+      "elevation": null
+    },
+    {
+      "name": "south",
+      "longitude": 180,
+      "latitude": -85,
+      "normal": 1268.7017339182041,
+      "elevation": 1.0549227876653575
+    },
+    {
+      "name": "zero meridian",
+      "longitude": 0,
+      "latitude": -50,
+      "normal": 1065.2059323424155,
+      "elevation": 0.7434095742571665
+    },
+    {
+      "name": "negative source sample",
+      "longitude": 44.355201570549355,
+      "latitude": -15.792108375363949,
+      "normal": -650.4500732421303,
+      "elevation": null
+    }
+  ],
+  "photometricHistory": {
+    "executionDateTime": "2020-03-01T12:47:54",
+    "angleSource": "ELLIPSOID",
+    "maximumEmissionDegrees": 81,
+    "maximumIncidenceDegrees": 89.7,
+    "useDem": false,
+    "modelReference": "eu_pho10.pvl, not included in cube release",
+    "laterProcessing": "Cube history includes lowpass and highpass operations. Published product is displayed, not independently calibrated reflectance."
+  }
+}

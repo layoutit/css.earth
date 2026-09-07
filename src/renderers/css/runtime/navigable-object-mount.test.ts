@@ -7,6 +7,11 @@ test('preflight and native mount share one authenticated definition and transfer
   const payload = JSON.parse(await readFile(new URL('../../../../src/planets/venus/prepared/object.json', import.meta.url), 'utf8'));
   // This test exercises transport/ownership; native image decoding has its own real-browser gate.
   payload.data.assets.startup = [];
+  payload.data.materials = [];
+  for (const variant of payload.data.variants) {
+    variant.required = []; variant.materials = [];
+    for (const write of variant.writes) if (write.kind === 'texture') write.resource = null;
+  }
   const bytes = new TextEncoder().encode(JSON.stringify(payload)).buffer;
   descriptor.prepared.sha256 = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(v => v.toString(16).padStart(2, '0')).join('');
   const read = vi.fn(async () => bytes), destroyed = vi.fn();
@@ -19,7 +24,11 @@ test('preflight and native mount share one authenticated definition and transfer
   const factory = createNavigableObjectMount(descriptor, { read }, bind);
   expect(read).not.toHaveBeenCalled();
   const signal = new AbortController();
-  const prepared = await factory.navigation!.prepare({ signal: signal.signal });
+  const prepared = await factory.navigation!.prepare({ signal: signal.signal, getView: () => ({
+    world: { referenceFrame: 'sun-icrf', epochJdTt: descriptor.properties.worldFrame.epochJdTt,
+      pose: { positionM: [0, 0, 1e12], orientationXyzw: [0, 0, 0, 1] } },
+    viewport: { focalPixels: 1000, principalOffsetPixels: [0, 0] },
+  }) });
   expect(bind).not.toHaveBeenCalled();
   const mount = factory({} as HTMLElement, { preparedResources: prepared.resources, onError() {},
     inputSurface: {} as HTMLElement, runtimePolicy: {} as never });

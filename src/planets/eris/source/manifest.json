@@ -1,0 +1,113 @@
+{
+  "schema": "csseris-authoritative-sources@1",
+  "inputs": [
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1211,
+      "expectedSha256": "8b04d9ee8318ebecf3ea33cd59b7c35e18574e412dab8583807568da47d3b4b3",
+      "id": "eris-observational-measurements",
+      "origin": "https://doi.org/10.1038/nature10550",
+      "credit": "Sicardy et al. (2011); Bernstein et al. (2023)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed nominal observational measurements with uncertainties",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ]
+    },
+    {
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "id": "eso-milky-way-panorama",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Pinned acquisition plan downloads the official 6000 by 3000 ESO original",
+      "redistribution": "Permitted under CC-BY-4.0 with complete ESO/S. Brunier credit",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "path": "nasa-eris.glb",
+      "expectedBytes": 4398964,
+      "expectedSha256": "1b97f1b9eea244b047a72c2a3ac0db315715b7d421033d860d669ffd78681d54",
+      "id": "nasa-vtad-eris-model",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/e/Eris_1_2326.glb",
+      "credit": "NASA Visualization Technology Applications and Development (VTAD)",
+      "license": "NASA media usage guidelines; NASA-provided illustrative model with attribution",
+      "acquisition": "Original GLB downloaded from NASA Science",
+      "redistribution": "NASA media; illustrative terrain, not spacecraft mapping",
+      "consumers": [
+        "shape-model"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3671,
+      "expectedSha256": "8c5d8d601b855d482734b643f6b51dc1f9dbfa6d5c9335c8d0ec5b1632f3e5f7",
+      "purpose": "Object-owned preparation, content or attribution"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 470,
+      "expectedSha256": "e228401d8d2676f4acf78ebb2b0776a22d5d61e10287b6049d93eba8e1e19736",
+      "purpose": "Object-owned preparation, content or attribution"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 852,
+      "expectedSha256": "ec4926b5bc3275601ec90f907e6cd0fb77b873c9f99bc9c8fd2bef198525b7ea",
+      "purpose": "Object-owned preparation, content or attribution"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 459,
+      "expectedSha256": "6e531fcb60f0c3c93c6227f2e3c6d696c77a1d220da38626dfd2fb1c40cebf9e",
+      "purpose": "Object-owned preparation, content or attribution"
+    },
+    {
+      "path": "preparation/shape-model.json",
+      "expectedBytes": 451,
+      "expectedSha256": "abc023870658f0d1d49f23131ada3573ecc8acb8d50a4624eec9b619ed397723",
+      "purpose": "Object-owned preparation, content or attribution"
+    },
+    {
+      "path": "presentation/navigation-marker.svg",
+      "expectedBytes": 114,
+      "expectedSha256": "677dba4cd7635440de2bde04c6bbee6956ad07c276f146ff7ebef594d7f6b0c2",
+      "purpose": "Object-owned preparation, content or attribution"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 1941,
+      "expectedSha256": "2f157ab93e92ca89cf42e7ab084c40462273c84e54ba2f4a8bdbf6179b3295a7",
+      "purpose": "Object-owned preparation, content or attribution"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96",
+      "purpose": "Object-owned preparation, content or attribution"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
+      "purpose": "Object-owned preparation, content or attribution"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 100844,
+      "expectedSha256": "2fe5171f1a8ba5081b963443ba67a122f9c8e471087d3bc736266212117e41c2",
+      "purpose": "Object-owned preparation, content or attribution"
+    }
+  ],
+  "generatedIntermediates": []
+}

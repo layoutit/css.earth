@@ -9,6 +9,7 @@ export * from './rendering/prepared-presentation.js';
 export * from './rendering/prepared-material.js';
 export * from './rendering/prepared-material-demand.js';
 export * from './runtime/object-contract.js';
+export { createObjectViewDemand } from './runtime/prepared-object-navigation.js';
 export * from './paging/prepared-block.js';
 export * from './paging/prepared-block-transport.js';
 export * from './paging/city-index.js';
@@ -41,3 +42,5 @@ export { createGeographicSurfaceRuntime } from './paging/geographic-surface-runt
 export { requireGeographicLensPackage, requireGeographicScope, requireGeographicOverview, geographicPackageIncludes } from './paging/geographic-lens-contract.js';
 
 export { readPreparedBytes, readPreparedJson } from './paging/prepared-json-transport.js';
+export { mountPreparedCssPointField, projectPreparedPoint, pointPhotometry } from './stars/prepared-point-field-runtime.js';
+export { createPointFieldSelection } from './stars/point-field-selection.js';

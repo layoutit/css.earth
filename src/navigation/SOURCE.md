@@ -47,3 +47,25 @@ source already owned by the Saturn adapter.
 Prepared output: `pnpm prepare:navigation` writes the 1× and 2× planet-marker
 atlas, Sun marker, black-hole marker, supernova marker, and action markers to
 `public/navigation/`.
+
+
+Resolved world-context parents use independent prepared images from the same
+pinned object source and crop recipe. `prepare:navigation` derives the required
+parents from registered satellites and the astronomy catalogue, so adding a
+moon does not require a second list of parent identities. The canonical output
+is capped at 1536 pixels and at the native source crop: Earth 993, Jupiter 1019,
+and Saturn 1440 pixels in the current catalogue. These three images add about
+275 KiB total; small UI markers retain their existing atlas. Their physical size,
+positions, camera behavior and retained context elements are unchanged. No
+second detailed object scene is mounted. The images remain source-derived
+context proxies; they do not claim a newly rendered observation geometry.
+
+The Sun's scene indicator is a project-authored rounded hexagonal outline.
+`prepareSunIndicator` in `tools/prepare-navigation.mjs` rasterizes the numerical
+path to `public/navigation/sun-indicator-hexagon.png` at a fixed 80px resolution for a
+20px UI box. Its stroke uses the authored soft-yellow `display.hex` accent in
+`src/planets/sun/swatch.json`, matching the navigation label. The independent
+spectral swatch remains recorded there with its ASTM E490-00, CIE 1931, and sRGB
+provenance.
+The PNG includes a 2px center dot so the navigation landmark remains visible
+at distant scales. The Sun's physical point and glow still render separately.

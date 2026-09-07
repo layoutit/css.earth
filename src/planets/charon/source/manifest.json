@@ -1,0 +1,177 @@
+{
+  "schema": "csscharon-authoritative-sources@1",
+  "inputs": [
+    {
+      "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; USGS Astrogeology",
+      "license": "Public domain US mission imagery; cite the map authors",
+      "licenseEvidence": [
+        "https://www.usgs.gov/media/images/charon-new-horizons-global-mosaic-300m"
+      ],
+      "acquisition": "Restore the pinned source through source/preparation/acquisition.json.",
+      "redistribution": "Retain mission and map author credits.",
+      "width": 12693,
+      "height": 6347,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 606000
+      },
+      "id": "new-horizons-charon-monochrome",
+      "path": "observations/charon-mosaic.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
+      "catalog": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "coverage": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
+      "expectedBytes": 80613890,
+      "expectedSha256": "4a874809e0a33a851cd026b8e4647f5875ed15807e677d413812367509564b00"
+    },
+    {
+      "credit": "NASA/JHUAPL/SwRI; Paul Schenk, LPI; USGS Astrogeology",
+      "license": "Public domain US mission imagery; cite the map authors",
+      "licenseEvidence": [
+        "https://www.usgs.gov/media/images/charon-new-horizons-global-mosaic-300m"
+      ],
+      "acquisition": "Restore the pinned source through source/preparation/acquisition.json.",
+      "redistribution": "Retain mission and map author credits.",
+      "width": 12693,
+      "height": 6347,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 606000
+      },
+      "id": "new-horizons-charon-dem",
+      "path": "science/charon-dem.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
+      "catalog": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "coverage": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
+      "expectedBytes": 161176369,
+      "expectedSha256": "4496de98a9b682fd3440da616ef7f5adfbc315b438e4d18833ae3a843eb41bcc"
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 8190,
+      "expectedSha256": "c7e29a47636d083e6cd3375163a7990b93adc7219cbad1a91a37f0c9c8639297",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/dataset.cat",
+      "expectedBytes": 35600,
+      "expectedSha256": "b2a0a6f7e0eea428d82de3a5ca8e91722510275634e540ea05ed31cc724f3d60",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 958,
+      "expectedSha256": "f08978c561e19f306f8e68e9be6839e2a7a71f2c7ee89cacb0c213685d9fd85b",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 2274,
+      "expectedSha256": "d92a8c44e5085a010315acf1c365d5b793a0c02e346fbcbb175e048d55dcc24d",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3128,
+      "expectedSha256": "7328d671d50b98f41c0d8cf144cfb823cf29d81ae5d73993d1733a75764322db",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3829,
+      "expectedSha256": "06158211a49a37af331a98d83e1121974aae114dd20d3bc7df5905fb7d28d3df",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 849,
+      "expectedSha256": "3ecb64dfaad394158f12cd0bf2733268a7c58ab76a17f774149b421d30c2937b",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    }
+  ],
+  "generatedIntermediates": []
+}

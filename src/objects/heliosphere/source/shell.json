@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-surface-shell-recipe@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "originM": [
+      0,
+      0,
+      0
+    ],
+    "localToReferenceXyzw": [
+      0.026512876830526073,
+      -0.20138529322564358,
+      0.9707764298832948,
+      0.12780514159311135
+    ],
+    "metersPerUnit": 149597870700,
+    "boundsUnits": {
+      "min": [
+        -383,
+        -383,
+        -383
+      ],
+      "max": [
+        383,
+        383,
+        383
+      ]
+    }
+  },
+  "shape": {
+    "kind": "gridded-surface",
+    "path": "ibex/heliopause-grid.json",
+    "sha256": "dbae182236b56654eff4552d5f3530af5e556db4853a312c6dc87ba5704e5bb9",
+    "displaySubdivision": {
+      "method": "radial-linear",
+      "segmentsPerEdge": 4
+    }
+  },
+  "material": {
+    "colorLinear": [
+      0.5,
+      0.9,
+      0.8
+    ],
+    "opacity": 0.2,
+    "rimFadeFacing": 0.1
+  },
+  "atlas": {
+    "tileSize": 32,
+    "columns": 46,
+    "frames": 2024,
+    "facingLevels": [
+      -1,
+      -0.5,
+      -0.2,
+      -0.07,
+      0,
+      0.0125,
+      0.025,
+      0.0375,
+      0.05,
+      0.0625,
+      0.075,
+      0.0875,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.625,
+      0.75,
+      0.875,
+      1
+    ],
+    "triangleInsetPixels": 1.5
+  },
+  "visibility": {
+    "hiddenInsideUnits": 100,
+    "fullUntilUnits": 5000,
+    "hiddenBeyondUnits": 6000
+  },
+  "unitScale": 50,
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "8d199b6fbb90b541566ac96dad4b945ff869e2c7f54fd1c9d4e685d56bb4f659"
+  }
+}

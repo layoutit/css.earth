@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>Michael Bland</origin>
+        <pubdate>20231130</pubdate>
+        <title>High Resolution Voyager 2 Images of Neptune's Moon, Triton</title>
+        <geoform>raster digital data</geoform>
+        <onlink>https://doi.org/10.5066/P9MGH7FB</onlink>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>We processed 41 Voyager 2 images of Neptune’s moon Triton with pixel scales &lt; 2 km/pixel form their raw, compressed, archived state to more usable cloud-optimized geotiffs, which can easily be used within spatial analysis software such as GIS. Processing was done using the USGS’ ISIS software and included geometric and radiometric calibration, and the removal of image reseaux and corner markers (originally used for geometric calibration). The images were also photogrammetrically controlled relative to one another to improve their locations on the surface, which were initially inaccurate by up to 200 km. After performing a least squares bundle adjustment, the root mean square (RMS) uncertainty in image locations was 0.50, 0.52, and 0.51 pixels in latitude, longitude, and radius, respectively, with minimum and maximum residuals of -4.21 and +3.197 pixels, respectively. Each individual image was warped to an orthographic projection centered at 15o W and 18o N at the native image resolution. Because reseaux removal introduces interpolated data, two versions of each image are provided: a fully processed version with reseaux removed, and a partially processed version that retains the reseaux (i.e., no interpolation). We also generated a mosaic of Triton images that is spatially consistent with the entire dataset and provides context for the individual images (not every image is included in the mosaic). The mosaic uses the same orthographic projection as the individual images, but a consistent scale of 600 m/pixel. Three versions of the mosaic are included: a fully processed version (reseaux removed, some interpolated pixel values), a partially processed version (reseaux retained, no interpolation), and a fully processed but sharpened (high pass filter with 100% albedo add-back) to enhance surface features. This data release improves the usability and accessibility of this singular dataset and enables new scientific investigations of Triton.</abstract>
+      <purpose>Triton is the largest solid object beyond the orbit of Saturn, and the Neptunian moon may contain a liquid water ocean beneath its young surface. Triton has only been visited by a single spacecraft, NASA’s Voyager 2 mission, which returned a small set of images with pixel scale &lt; 2 km/pixel. These images provide the only source of information about Triton’s geology, which includes surface features and terrain types found nowhere else in the solar system. Unfortunately, these images are only currently available in archival formats within NASA’s Planetary Data System, and they require significant processing (geometric and radiometric calibration, spatial referencing, reseaux removal) before they can be used for scientific analysis. Although processed image mosaics of Triton are not publicly available, those products are necessarily projected to a uniform pixel scale and do not include all of the data, specifically excluding the highest resolution images. The purpose of this data release is to provide the community with “analysis ready” versions of the Voyager 2 Triton images that can be readily used in spatial analysis software (e.g., GIS). Our goal is to improve the usability and accessibility of this singular dataset, and by doing so, enable greater and more diverse scientific investigations of this putative ocean world.</purpose>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <sngdate>
+          <caldate>19890825</caldate>
+        </sngdate>
+      </timeinfo>
+      <current>publication date</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>None planned</update>
+    </status>
+    <spdom>
+      <bounding>
+        <westbc>-101.5250</westbc>
+        <eastbc>106.2170</eastbc>
+        <northbc>66.3240</northbc>
+        <southbc>-72.0000</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>ISO 19115 Topic Category</themekt>
+        <themekey>biota</themekey>
+      </theme>
+      <theme>
+        <themekt>USGS Thesaurus</themekt>
+        <themekey>planetary sciences</themekey>
+        <themekey>remote sensing</themekey>
+      </theme>
+      <theme>
+        <themekt>USGS Metadata Identifier</themekt>
+        <themekey>USGS:6515fe80d34e469cabfce1bb</themekey>
+      </theme>
+      <place>
+        <placekt>IAU Gazzeteer of Planetary Nomenclature</placekt>
+        <placekey>Triton</placekey>
+      </place>
+    </keywords>
+    <accconst>None.  Please see 'Distribution Info' for details.</accconst>
+    <useconst>None.  Users are advised to read the dataset's metadata thoroughly to understand appropriate use and data limitations.</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntperp>
+          <cntper>Michael Bland</cntper>
+          <cntorg>U. S. Geological Survey</cntorg>
+        </cntperp>
+        <cntaddr>
+          <addrtype>mailing and physical</addrtype>
+          <address>2255 N Gemini Dr.</address>
+          <city>Flagstaff</city>
+          <state>AZ</state>
+          <postal>86001</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>928 556-7080</cntvoice>
+        <cntemail>mbland@usgs.gov</cntemail>
+      </cntinfo>
+    </ptcontac>
+    <datacred>Data was originally acquired by NASA's Voyager 2 Imaging Science Subsystem Team and archived in NASA's Planetary Data System Cartography and Imaging Node.</datacred>
+    <native>Data was processed using the USGS' ISIS software version 7.0.0 (https://doi.org/10.5281/zenodo.6558530)</native>
+    <crossref>
+      <citeinfo>
+        <origin>Michael Bland</origin>
+        <origin>Emily Martin</origin>
+        <origin>Alex Patthoff</origin>
+        <pubdate>20231001</pubdate>
+        <title>Increasing the usability and accessibility of Voyager 2 images of Triton</title>
+        <geoform>publication</geoform>
+        <onlink>To be added</onlink>
+      </citeinfo>
+    </crossref>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>No formal attribute accuracy tests were conducted.</attraccr>
+    </attracc>
+    <logic>No formal logical consistency tests were conducted</logic>
+    <complete>We include 41 of the 43 images of Triton acquired at pixel scales &lt; 2 km/pixel by the Voyager 2 spacecraft. The 2 images not included are poorly illuminated (high phase) images of Triton's limb that could not be photogrammetrically controlled. The images cover the portion of Triton that was illuminated when the Voyager 2 spacecraft flew past in August of 1989.</complete>
+    <posacc>
+      <horizpa>
+        <horizpar>Root mean square (RMS) uncertainty in latitude and longitude of each tie point included in the photogrammetric solution are  0.50 and 0.52 pixels, respectively. The median point residual is -0.008 pixels (i.e., errors are nearly centered on 0), 1st and 3rd quartile residuals are -0.302 and +0.301 pixels, respectively, and minimum and maximum residuals are -4.21 and +3.197 pixels, respectively. Pixel size ranges from 336 m to 1637 m.</horizpar>
+      </horizpa>
+      <vertacc>
+        <vertaccr>Root mean square (RMS) uncertainty in radial values of each tie point included in the photogrammetric solution are  0.51 pixels.</vertaccr>
+      </vertacc>
+    </posacc>
+    <lineage>
+      <srcinfo>
+        <srccite>
+          <citeinfo>
+            <origin>NASA</origin>
+            <pubdate>19990824</pubdate>
+            <title>Raw Voyager 2 images of Triton</title>
+            <geoform>raster digital data</geoform>
+            <othercit>http://doi.org/10.17189/2e1e-de40</othercit>
+            <onlink>https://planetarydata.jpl.nasa.gov/img/data/vg2-n-iss-2-edr-v1.0/vg_0011/</onlink>
+          </citeinfo>
+        </srccite>
+        <typesrc>Digital and/or Hardcopy</typesrc>
+        <srctime>
+          <timeinfo>
+            <sngdate>
+              <caldate>19890825</caldate>
+            </sngdate>
+          </timeinfo>
+          <srccurr>publication date</srccurr>
+        </srctime>
+        <srccitea>Raw Voyager 2 images of Triton</srccitea>
+        <srccontr>Provided the raw images.</srccontr>
+      </srcinfo>
+      <srcinfo>
+        <srccite>
+          <citeinfo>
+            <origin>NASA's Navigation and Ancillary Information Facility</origin>
+            <pubdate>20230301</pubdate>
+            <title>Navigation and Ancillary Information Facility (NAIF) Spacecraft, Planet, Instrument, C-matrix (pointing) and Events (SPICE) kernels</title>
+            <geoform>tabular digital data</geoform>
+            <onlink>https://naif.jpl.nasa.gov/naif/data.html</onlink>
+          </citeinfo>
+        </srccite>
+        <typesrc>Digital and/or Hardcopy</typesrc>
+        <srctime>
+          <timeinfo>
+            <sngdate>
+              <caldate>19890825</caldate>
+            </sngdate>
+          </timeinfo>
+          <srccurr>ground condition</srccurr>
+        </srctime>
+        <srccitea>NAIF SPICE Information</srccitea>
+        <srccontr>Provides data on spacecraft and target emphemeris, camera pointing, and other ancillary information.</srccontr>
+      </srcinfo>
+      <procstep>
+        <procdesc>We downloaded compressed, raw Voyager 2 images of Triton form the Planetary Data System Cartography and Imaging Node and processed them using the USGS ISIS software (v. 7.0.0 https://doi.org/10.5281/zenodo.6558530). Data was ingested into ISIS using the voy2isis application and reconstructed SPICE (Spacecraft, Planet, Instrument, C-matrix (pointing) and Events) kernels [Acton et al., 2017]) information was attached using ISIS’ spiceinit application. Specifically, the default kernels included the pck0009.tpc planetary constants kernel (PCK) for target information such as body radius, the de430.bsp and nep081.bsp for sun and target ephemeris (SPKs), the vgr2_nep081.bsp spacecraft ephemeris kernel (SPK), the vg2_nep_version1_type2_iss_sedr.bc camera pointing kernel (CK), the vg2_v02.tf frames kernel (FK), the vg2_issna_v02.ti  instrument kernel (IK), the voyagerAddendum004.ti (IAK), and the vg200044.tsc spacecraft clock kernel (SCLK). 
+
+The data was then radiometrically calibrated using ISIS’ voycal to convert pixel values (“data number” or DN) to a quantity proportional to radiance (I/F). Vidicon detectors, such as those used by Voyager 2, build up signal (dark current) even when the camera shutter is closed. The amplitude of this signal varies by line and sample on the detector. Additionally, the sensitivity of the detector depends on the signal intensity, which is a function of the scene (i.e., like the dark current it varies by line and sample) and the distance from the sun. Voycal uses supplementary dark current and gain files, as well as the distance between the target planet and the Sun, to correct each image and enable calculation of a “radiance factor”, for which a calibrated DN of 10000 is equivalent to an I/F of 1. Geometric distortion was corrected using ISIS’ findrx application, which uses area-based matching to refine the location of image reseaux, which are used in the distortion model within ISIS’ Voyager 2 camera model.
+
+The locations of Voyager 2 images on Triton’s surface are inaccurate by up to 200 km, such that overlapping images are significantly misaligned. Once initial processing was completed, we improved the locations of each image by constructing a photogrammetric control network using the ISIS software. Our basic approach was to identify regions in which two or more images overlap and then identify point in common (tie points) between the images within that region. Each image included in the tie point is referred to as an image measure, and each tie point must have at least two measures. Including a greater number of measures can improve the accuracy of the solution. Subpixel image-to-image matching was performed using ISIS’ pointreg application, which uses an area-based maximum correlation algorithm. Once image matching was completed, we performed a least squares bundle adjustment (ISIS’ jigsaw application) to solve for the exterior orientation of the camera at the time each image was acquired. We assume that the camera position is known, and only solve for the camera orientation. Solving for the exterior camera orientation then enables calculation of the three-dimensional location of each tie point (i.e., latitude, longitude, and radius) and updated position of the images associated with those points. 
+
+In practice, we improved image locations in two steps. The a priori (reconstructed) locations were so inaccurate that calculating regions of image overlap was problematic. That is, many images that overlap based on the SPICE information did not actually contain regions in common, and many images that had regions in common did not overlap based on the initial SPICE. We therefore generated a sparse control network manually to bring the images into rough alignment. We then started with a “clean” set of images, but applied pointing (CK) kernels derived from the initial network. This enabled a more accurate calculation of image overlaps and the construction of a robust control network. The final control network included 41 images, 958 points, and 3910 measures. Bundle adjustment with 2 km uncertainty in latitude, longitude, and radius, yielded a σ0 = 0.385, with median point residual of -0.008 pixels (i.e., errors are nearly centered on 0), 1st and 3rd quartile residuals of -0.302 and +0.301 pixels, respectively, and minimum and maximum residuals of -4.21 and +3.197 pixels, respectively. The total RMS uncertainty was 0.50, 0.52, and 0.51 pixels in latitude, longitude, and radius, respectively. 
+With the image locations corrected, the final step in our processing was to remove image reseaux and corner marks from the images. This was done using ISIS’ remrx application, which replaced each reseau with a 7x7 block of null pixels. Corner marks were removed by applying a mask to each image that replaced the mark with null pixels. Null pixels from both the reseaux and corner markers were then “filled in” using a low pass filter that operated only on the nulls. Thus, the reseaux and corner marks were replaced with interpolated data. For this reason, we provide versions of the images with reseaux removed (including the interpolated data) and with reseaux included (without any interpolated data). 
+
+Using these images, we used ISIS’ automos to create three version of a Triton image mosaic. Each used the same orthographic projection centered at 15 deg. W and 18 deg. N and a pixel scale of 600 m. One version of the mosaic used the fully processed images (reseaux and corner marks removed) and a second version used the partially processed images (reseaux retained). The third version of the mosaic used the fully processed images but added a sharpening filter (a 51x51 pixel high pass filter with 100% albedo add-back) to enhance surface features. These three versions of the mosaic provide context for the full set of Voyager 2 Triton images.</procdesc>
+        <procdate>20230301</procdate>
+        <proccont>
+          <cntinfo>
+            <cntperp>
+              <cntper>Michael Bland</cntper>
+              <cntorg>U. S. Geological Survey</cntorg>
+            </cntperp>
+            <cntaddr>
+              <addrtype>mailing and physical</addrtype>
+              <address>2255 N Gemini Dr</address>
+              <city>Flagstaff</city>
+              <state>AZ</state>
+              <postal>86001</postal>
+              <country>USA</country>
+            </cntaddr>
+            <cntvoice>928 556-7080</cntvoice>
+          </cntinfo>
+        </proccont>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <spdoinfo>
+    <direct>Raster</direct>
+    <rastinfo>
+      <rasttype>Point</rasttype>
+    </rastinfo>
+  </spdoinfo>
+  <spref>
+    <horizsys>
+      <geograph>
+        <latres>0.001</latres>
+        <longres>0.001</longres>
+        <geogunit>Decimal degrees</geogunit>
+      </geograph>
+      <geodetic>
+        <horizdn>Triton IAU 2000</horizdn>
+        <ellips>Triton</ellips>
+        <semiaxis>1352600</semiaxis>
+        <denflat>1.0E-10</denflat>
+      </geodetic>
+    </horizsys>
+  </spref>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>U.S. Geological Survey - ScienceBase</cntorg>
+        </cntorgp>
+        <cntaddr>
+          <addrtype>mailing and physical</addrtype>
+          <address>Denver Federal Center, Building 810, Mail Stop 302</address>
+          <city>Denver</city>
+          <state>CO</state>
+          <postal>80225</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>1-888-275-8747</cntvoice>
+        <cntemail>sciencebase@usgs.gov</cntemail>
+      </cntinfo>
+    </distrib>
+    <distliab>Unless otherwise stated, all data, metadata and related materials are considered to satisfy the quality standards relative to the purpose for which the data were collected. Although these data and associated metadata have been reviewed for accuracy and completeness and approved for release by the U.S. Geological Survey (USGS), no warranty expressed or implied is made regarding the display or utility of the data for other purposes, nor on all computer systems, nor shall the act of distribution constitute any such warranty.</distliab>
+    <stdorder>
+      <digform>
+        <digtinfo>
+          <formname>Digital Data</formname>
+        </digtinfo>
+        <digtopt>
+          <onlinopt>
+            <computer>
+              <networka>
+                <networkr>https://doi.org/10.5066/P9MGH7FB</networkr>
+              </networka>
+            </computer>
+          </onlinopt>
+        </digtopt>
+      </digform>
+      <fees>None</fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20231130</metd>
+    <metc>
+      <cntinfo>
+        <cntperp>
+          <cntper>Marc Hunter</cntper>
+        </cntperp>
+        <cntaddr>
+          <addrtype>mailing and physical</addrtype>
+          <address>2255 N. Gemini Dr</address>
+          <city>Flagstaff</city>
+          <state>AZ</state>
+          <postal>86001</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>928 556-7133</cntvoice>
+        <cntemail>mahunter@usgs.gov</cntemail>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001-1998</metstdv>
+  </metainfo>
+</metadata>

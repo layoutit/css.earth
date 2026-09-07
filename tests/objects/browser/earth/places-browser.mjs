@@ -6,7 +6,7 @@ import { chromium } from "playwright";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
 import { prepareLocationPoint } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
 
-const base = process.argv[2] ?? "http://127.0.0.1:4228";
+const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const output = new URL(`../../../../output/playwright/city-selection-${Date.now()}/`, import.meta.url);
 await mkdir(output, { recursive: true });
 const directory = JSON.parse(gunzipSync(await readFile(new URL(`../../../../public${PREPARED_EARTH_PLACES.url}`, import.meta.url))));

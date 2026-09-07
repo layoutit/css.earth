@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 import { orientLatitudeBands, preparePolarAtlas } from './projection.mjs';
 import { writeCurvatureMaterial } from './curvature.mjs';
-import { decodeElevationGrid, elevationRaster } from './elevation.mjs';
+import { decodeElevationGrid, elevationRaster, elevationColor } from './elevation.mjs';
 import { bakeSurfaceRaster } from './inverse-homography.mjs';
 
 /** Observation interpretation is selected by the source recipe, never body ID. */
@@ -17,23 +17,21 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
   for (const plan of config.lenses) {
     const input = resolve(sourceDirectory, plan.input);
     const elevation = plan.elevation ? decodeElevationGrid(await readFile(input), plan.elevation) : null;
+    if (plan.elevation) {
+      const width = 256, height = 16, data = Buffer.alloc(width * height * 3);
+      for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+        data.set(elevationColor((2 * x / (width - 1) - 1) * plan.elevation.rangeMetres, plan.elevation), (y * width + x) * 3);
+      }
+      await sharp(data, { raw: { width, height, channels: 3 } }).webp({ lossless: true })
+        .toFile(resolve(publicDirectory, `${plan.output}-legend.webp`));
+    }
     const source = plan.coverage ? await sharp(input, { limitInputPixels: false }).raw().toBuffer({ resolveWithObject: true }) : null;
     if (plan.coverage && plan.coverage.kind !== 'black-fill') throw new TypeError('Unsupported observed coverage source.');
     const sourceMissing = source && blackFillCoverage(source.data, source.info, { southConnected: plan.coverage.southConnected });
     let thumbnailRaster;
     for (const density of config.densities) {
       const width = config.width * density, height = config.height * density;
-      let raster;
-      if (elevation) raster = elevationRaster(elevation, width, height);
-      else {
-        let pipeline = sharp(input, { limitInputPixels: false }).resize(width, height, { fit: 'fill' }).removeAlpha();
-        if (plan.presentation) pipeline = applyTonalPresentation(pipeline, plan.presentation);
-        if (plan.coverage) pipeline = pipeline.toColourspace('srgb');
-        raster = await pipeline.raw().toBuffer({ resolveWithObject: true });
-      }
-      const { info } = raster;
-      const missing = raster.missing ?? (sourceMissing && sampleCoverage(sourceMissing, source.info, width, height));
-      const data = missing ? paintMissingCoverage(raster.data, info, missing) : raster.data;
+      const { data, info } = await observationRaster({ input, plan, elevation, source, sourceMissing, width, height });
       if (density === 2) thumbnailRaster = { data, info };
       const atlas = config.surfaceProjection === 'inverse-homography'
         ? bakeSurfaceRaster(data, { width, height, channels: info.channels }, surfaceRasterCells, density, geometry.rasterAtlas)
@@ -42,7 +40,9 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
       const suffix = density === 2 ? '@2x' : '';
       await Promise.all([
         sharp(atlas.data, { raw: { width: atlas.width, height: atlas.height, channels: atlas.channels } })
-          .webp({ quality: 88, ...(atlas.channels === 4 ? { alphaQuality: 100 } : {}), smartSubsample: true })
+          // Chroma subsampling across transparent, warped face boundaries
+          // produces colored seams even when the geometry overlaps correctly.
+          .webp(atlas.channels === 4 ? { lossless: true } : { quality: 88, smartSubsample: true })
           .toFile(resolve(publicDirectory, `${plan.output}${suffix}.webp`)),
         sharp(poles, { raw: { width: config.polarTile * 4 * density, height: config.polarTile * density, channels: 4 } })
           .webp({ quality: 88, alphaQuality: 100, smartSubsample: true })
@@ -62,6 +62,25 @@ export async function prepareObservationLenses({ sourceDirectory, publicDirector
     await thumbnail.webp({ quality: 88, effort: 6 }).toFile(resolve(publicDirectory, `${plan.output}-thumbnail.webp`));
   }
   await Promise.all(config.densities.map(density => writeCurvatureMaterial({ publicDirectory, material: config.material, density })));
+}
+
+/** The same source interpretation feeds globe atlases and small, unwarped maps. */
+export async function observationRaster({ input, plan, width, height, elevation, source, sourceMissing }) {
+  elevation ??= plan.elevation ? decodeElevationGrid(await readFile(input), plan.elevation) : null;
+  source ??= plan.coverage ? await sharp(input, { limitInputPixels: false }).raw().toBuffer({ resolveWithObject: true }) : null;
+  if (plan.coverage && plan.coverage.kind !== 'black-fill') throw new TypeError('Unsupported observed coverage source.');
+  sourceMissing ??= source && blackFillCoverage(source.data, source.info, { southConnected: plan.coverage.southConnected });
+  let raster;
+  if (elevation) raster = elevationRaster(elevation, width, height);
+  else {
+    let pipeline = sharp(input, { limitInputPixels: false }).resize(width, height, { fit: 'fill' }).removeAlpha();
+    if (plan.presentation) pipeline = applyTonalPresentation(pipeline, plan.presentation);
+    if (plan.coverage) pipeline = pipeline.toColourspace('srgb');
+    raster = await pipeline.raw().toBuffer({ resolveWithObject: true });
+  }
+  const { info } = raster;
+  const missing = raster.missing ?? (sourceMissing && sampleCoverage(sourceMissing, source.info, width, height));
+  return { info, data: missing ? paintMissingCoverage(raster.data, info, missing) : raster.data };
 }
 
 function applyTonalPresentation(pipeline, presentation) {

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { mountPlanetShell } from "../planet-shell-client.mjs";
+import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 
 class Element extends EventTarget {
   dataset = {}; children = []; value = ""; style = { removeProperty() {}, setProperty() {} };
@@ -48,6 +49,7 @@ function fixture() {
   const documentTarget = new Element();
   documentTarget.selectors = selectors;
   documentTarget.body = new Element();
+  documentTarget.documentElement = new Element();
   const windowTarget = new Element();
   for (const name of ["HTMLElement", "HTMLButtonElement", "HTMLInputElement", "HTMLDetailsElement", "HTMLLIElement"])
     windowTarget[name] = Element;
@@ -140,4 +142,38 @@ test("Motion cannot enable Speed before the shared runtime is ready or after it 
   shell.setPlaybackState({ motionRequested: true, reason: "loading" });
   assert.equal(speed.disabled, true);
   shell.destroy();
+});
+
+test('camera scale changes retained overview content without moving the camera and search opens matching body groups', () => {
+  const f = fixture(), browser = f.selectors.get('.planet-object-browser');
+  const galaxy = new Element(), system = new Element();
+  browser.selectors.set('[data-galactic-overview]', galaxy);
+  browser.selectors.set('[data-solar-system-results]', system);
+  const groups = ['planet', 'satellite'].map(type => {
+    const group = new Element(), item = new Element();
+    item.dataset = { objectName: type === 'planet' ? 'earth' : 'moon', objectSystemName: 'solar system',
+      objectClassification: type, objectClassificationName: type === 'planet' ? 'planet' : 'moon' };
+    group.selectors.set('.planet-object-item', [item]); group.open = type === 'planet';
+    return group;
+  });
+  browser.selectors.set('[data-object-type-group]', groups);
+  browser.selectors.set('.planet-object-item', groups.flatMap(group => group.querySelectorAll('.planet-object-item')));
+  const shell = f.mount(), search = f.selectors.get('.planet-sidebar-search'), listeners = new Set();
+  let world = { pose: { positionM: [0, 0, context.camera.maximumDistanceM] } };
+  const before = structuredClone(world);
+  shell.setOverview(true);
+  shell.setCamera({ navigation: { capture: () => world,
+    subscribe(callback) { listeners.add(callback); callback(world); return () => listeners.delete(callback); },
+  } });
+  assert.equal(search.value, 'Milky Way');
+  assert.equal(galaxy.hidden, false); assert.equal(system.hidden, true);
+  assert.deepEqual(world, before, 'Only the sidebar context changes');
+  world = { pose: { positionM: [0, 0, context.volume.fadeStartDistanceM * .9] } };
+  for (const callback of listeners) callback(world);
+  assert.equal(search.value, 'Solar System'); assert.equal(system.hidden, false); assert.equal(galaxy.hidden, true);
+  search.value = 'moon'; search.dispatchEvent(new Event('input'));
+  assert.equal(groups[0].hidden, true); assert.equal(groups[1].hidden, false); assert.equal(groups[1].open, true);
+  search.value = 'Solar System'; search.dispatchEvent(new Event('input'));
+  assert.equal(groups[0].open, true); assert.equal(groups[1].open, false, 'Search preserves the previous collapsed state');
+  shell.destroy(); assert.equal(listeners.size, 0);
 });

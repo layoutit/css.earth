@@ -107,3 +107,21 @@ test('executable values, symbols, nonfinite numbers and cycles are rejected with
     assert.throws(() => parsePreparedObjectRuntime(invalid), TypeError);
   }
 });
+
+test('a body without lenses validates both fixed and toggle-selected presentations', async () => {
+  const original = JSON.parse(await readFile(new URL('../../../../src/planets/haumea/prepared/runtime.json', import.meta.url), 'utf8'));
+  // Haumea now has an illustrative lens. Build a fixed-presentation fixture
+  // explicitly so this capability test is independent of catalogue curation.
+  original.controls.lenses = null;
+  for (const variant of original.variants) delete variant.when.lensId;
+  assert.equal(parsePreparedObjectRuntime(original).controls.lenses, null);
+  const input = structuredClone(original);
+  input.variants[0].when.lensId = 'model';
+  assert.throws(() => parsePreparedObjectRuntime(input), /declared lens capability/);
+  delete input.variants[0].when.lensId;
+  input.controls.settings.controls = [{ kind: 'toggle', name: 'shadows', label: 'Shadows', checked: true }];
+  input.variants = [false, true].map(shadows => ({ ...structuredClone(original.variants[0]), when: { shadows } }));
+  parsePreparedObjectRuntime(input);
+  input.variants.pop();
+  assert.throws(() => parsePreparedObjectRuntime(input), /exactly once/);
+});

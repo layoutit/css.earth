@@ -193,8 +193,8 @@
     },
     {
       "path": "preparation/raster.json",
-      "expectedBytes": 1689,
-      "expectedSha256": "c6a7ceed20cffc38534664dabfe32ded7cb5882566f6013d35474bab20483d71",
+      "expectedBytes": 1946,
+      "expectedSha256": "15d16c2b012ada865c77c3996b73cd2f1f28454358dce98dcbe485e4721cd010",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {
@@ -211,14 +211,14 @@
     },
     {
       "path": "content/static.json",
-      "expectedBytes": 7651,
-      "expectedSha256": "d71497801fa63b80ab0ad25c561f0f121475fb6ce707d27df05d0b864698855b",
+      "expectedBytes": 8672,
+      "expectedSha256": "6de5aec112ac3b8cac7dab23cacafab0e487d0a85bad40f589dab3fbdc197de8",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 803,
-      "expectedSha256": "5399a864015d43e65b918ef173571bb10acdb2c922f8873386edef9b0f87ac99",
+      "expectedBytes": 1136,
+      "expectedSha256": "2c2d7a33e27e26f044fce5e94163aafbaa167976b95b4cff890e0c6e92a0ce84",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {

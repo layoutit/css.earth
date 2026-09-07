@@ -39,7 +39,7 @@
       "proximityEnhancement": {
         "fullDistanceM": 1000000000000,
         "fadeOutDistanceM": 100000000000000,
-        "radiusMultiplier": 1.6,
+        "radiusMultiplier": 2.4,
         "brightnessMultiplier": 1.5
       }
     }
@@ -69,6 +69,16 @@
       "id": "mars",
       "name": "Mars",
       "color": "#a95e47"
+    },
+    {
+      "id": "phobos",
+      "name": "Phobos",
+      "color": "#9b9186"
+    },
+    {
+      "id": "deimos",
+      "name": "Deimos",
+      "color": "#a49b90"
     },
     {
       "id": "ceres",
@@ -141,9 +151,39 @@
       "color": "#9a8f7a"
     },
     {
+      "id": "phoebe",
+      "name": "Phoebe",
+      "color": "#9b9792"
+    },
+    {
       "id": "uranus",
       "name": "Uranus",
       "color": "#8ec7c9"
+    },
+    {
+      "id": "miranda",
+      "name": "Miranda",
+      "color": "#aaa8a0"
+    },
+    {
+      "id": "ariel",
+      "name": "Ariel",
+      "color": "#b0afa9"
+    },
+    {
+      "id": "umbriel",
+      "name": "Umbriel",
+      "color": "#918f8c"
+    },
+    {
+      "id": "titania",
+      "name": "Titania",
+      "color": "#a8a59e"
+    },
+    {
+      "id": "oberon",
+      "name": "Oberon",
+      "color": "#9f978e"
     },
     {
       "id": "neptune",
@@ -151,9 +191,34 @@
       "color": "#5279bd"
     },
     {
+      "id": "triton",
+      "name": "Triton",
+      "color": "#b8afa5"
+    },
+    {
       "id": "pluto",
       "name": "Pluto",
       "color": "#c3b299"
+    },
+    {
+      "id": "charon",
+      "name": "Charon",
+      "color": "#aaa9a3"
+    },
+    {
+      "id": "haumea",
+      "name": "Haumea",
+      "color": "#cccccc"
+    },
+    {
+      "id": "makemake",
+      "name": "Makemake",
+      "color": "#bfa48b"
+    },
+    {
+      "id": "eris",
+      "name": "Eris",
+      "color": "#ddd6cf"
     }
   ],
   "orbit": {
@@ -185,8 +250,8 @@
         "markerFullDiscPixels": 4.5
       },
       "orbitLineFade": {
-        "visibleBelowDiscHeightShare": 0.12,
-        "hiddenAboveDiscHeightShare": 0.3
+        "visibleBelowDiscHeightShare": 0.01,
+        "hiddenAboveDiscHeightShare": 0.03
       },
       "drag": {
         "model": "screen-axis-tumble"
@@ -201,7 +266,21 @@
   "volume": {
     "objectId": "milky-way",
     "fadeStartDistanceM": 413483800000000000000,
-    "fullDistanceM": 826967600000000000000
+    "fullDistanceM": 826967600000000000000,
+    "opacityProfile": {
+      "model": "logarithmic-distance",
+      "nearOpacity": 0,
+      "fullOpacity": 1,
+      "fadeStartDistanceM": 3085677581491367400,
+      "fullDistanceM": 154283879074568370000
+    },
+    "brightnessProfile": {
+      "model": "logarithmic-distance",
+      "nearOpacity": 0.094,
+      "fullOpacity": 1,
+      "fadeStartDistanceM": 30856775814913670000,
+      "fullDistanceM": 771419395372841800000
+    }
   },
   "sky": {
     "scenePitchDegrees": 40,

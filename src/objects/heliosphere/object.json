@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "heliosphere",
+  "type": "surface-shell",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "localToReferenceXyzw": [
+        0.026512876830526073,
+        -0.20138529322564358,
+        0.9707764298832948,
+        0.12780514159311135
+      ],
+      "metersPerUnit": 149597870700,
+      "boundsUnits": {
+        "min": [
+          -383,
+          -383,
+          -383
+        ],
+        "max": [
+          383,
+          383,
+          383
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/shell.json",
+      "sha256": "261aec2e707eac92ed5b014195410c63edcd79488fb6977c363b6e742295b0c2"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-surface-shell@1",
+    "url": "prepared/shell.json",
+    "sha256": "c1f186b8a90095ca798413f2d058a396601c8b66707cd92420973864660a6d5c"
+  }
+}

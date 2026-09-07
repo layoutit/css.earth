@@ -1,0 +1,121 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "haumea",
+  "displayName": "Haumea",
+  "title": {
+    "label": "Haumea"
+  },
+  "panel": {
+    "introduction": "Haumea is a rapidly rotating, elongated dwarf planet with a narrow ring. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Model dimensions",
+        "value": "2,322 × 1,704 × 1,026 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "3.915 hours"
+      },
+      {
+        "id": "ring-width",
+        "label": "Ring width",
+        "value": "About 70 km"
+      },
+      {
+        "id": "moon-count",
+        "label": "Moons",
+        "value": "2 — Hiʻiaka and Namaka"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "ring-radius",
+        "label": "Ring radius",
+        "value": "About 2,287 km"
+      },
+      {
+        "id": "surface",
+        "label": "Surface coverage",
+        "value": "Unresolved; no terrain map"
+      },
+      {
+        "id": "phase",
+        "label": "Rotational phase",
+        "value": "Arbitrary display orientation"
+      },
+      {
+        "id": "appearance",
+        "label": "Surface representation",
+        "value": "NASA VTAD illustration; terrain details are not observations"
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "illustration",
+    "controls": [
+      {
+        "id": "illustration",
+        "label": "Illustrative model",
+        "description": "NASA VTAD · model texture",
+        "title": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+        "qualification": "Illustration; not an observed surface map.",
+        "thumbnail": "illustration-thumbnail.webp",
+        "surface": "surface.webp",
+        "poles": "poles.webp",
+        "source": {
+          "id": "nasa-vtad-haumea-model",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/haumea-3d-model/"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Haumea overview",
+      "href": "https://science.nasa.gov/dwarf-planets/haumea/"
+    },
+    {
+      "label": "NASA VTAD",
+      "role": "illustration",
+      "description": "Haumea model and illustrative surface texture",
+      "href": "https://science.nasa.gov/resource/haumea-3d-model/"
+    },
+    {
+      "label": "Ortiz et al.",
+      "role": "shape",
+      "description": "2017 occultation shape and ring measurements",
+      "href": "https://doi.org/10.1038/nature24051"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Ortiz et al. (2017); JPL orbital elements"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/dwarf-planets/haumea/",
+      "credit": "NASA Science"
+    }
+  }
+}

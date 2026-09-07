@@ -13,7 +13,7 @@ import { readWorldCoverCatalog, sourceTilesForBounds } from "../../../../tools/o
 
 const fixture = await readCityFixture();
 
-const base = process.argv[2] ?? "http://127.0.0.1:4228";
+const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const boundaryOnly = process.argv.includes('--boundary-only');
 const motionOnly = process.argv.includes('--motion-only');
 const handoffOnly = process.argv.includes('--handoff-only');

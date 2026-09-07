@@ -12,6 +12,7 @@ import type { HeliocentricMountOptions } from "../solar-system/heliocentric-view
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
 import type { PerspectiveWorldContext } from '../navigation/perspective-dolly.js';
+import type { PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
 
 export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition {
   readonly schema: string; readonly id: string; readonly controls: ObjectControls;
@@ -20,6 +21,7 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
   readonly heliocentricView?: { plan: HeliocentricMountOptions["plan"]; bodyMarker: HeliocentricMountOptions["markerSprite"];
     systemMarkers?: HeliocentricMountOptions["systemMarkers"]; labels?: HeliocentricMountOptions["labels"] } | null;
   readonly destinations?: PreparedDestinationPlan;
+  readonly surfaceHit?: PreparedSurfaceHit;
 }
 export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number; }
 export type PageLayerRuntime = ReturnType<typeof import('../paging/city-pages.js').mountPreparedMapPages>;
@@ -41,10 +43,12 @@ export interface ObjectMountOptions {
   inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; mobilePreviewElement?: HTMLElement | null;
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
   worldFrame?: PreparedWorldCameraFrame; preparedResources?: PreparedResourceLease;
+  preparedTree?: import('../rendering/prepared-tree.js').PreparedTreeLease;
   worldContext?: PerspectiveWorldContext;
   /** The application owns the contextual universe layer for this mount. */
   externalWorldContext?: boolean;
   initialWorldCamera?: WorldCameraPose;
+  initialProjection?: import('../rendering/physical-projection.js').PhysicalProjection;
 }
 export interface PreparedNavigation { maximumZoom: number; camera?: OrbitStateUpdate; }
 export type SelectionSnapshot = ObjectSelection;

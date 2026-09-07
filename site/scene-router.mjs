@@ -10,6 +10,8 @@ import { createNavigationHistory, bindNavigationLinks } from './navigation-histo
 import { formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mjs';
 import * as applicationWorldContext from './application-world-context.mjs';
+import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mjs';
+import { createNavigationTiming } from './navigation-timing.mjs';
 
 const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
@@ -36,6 +38,7 @@ export function createSceneRouter({
   let destroyed = false;
   let nextGeneration = 0;
   let shellOwner = null, pending = null, historyOwner = null, unbindLinks = null;
+  let overview = new URL(windowTarget.location?.href ?? 'https://example.test').searchParams.get('overview') === 'solar-system';
   const worldContextOwner = persistentWorldContext;
   let worldContextMount = null;
   let worldContextMountTask = null;
@@ -108,6 +111,7 @@ export function createSceneRouter({
       const shell = shellOwner.shell;
       session.shell = shell;
       if (content) shell.setObject(content);
+      shell.setOverview?.(request ? new URL(request.url).searchParams.get('overview') === 'solar-system' : overview);
       if (active !== session) return;
       publishSceneState();
       if (worldContextOwner) {
@@ -201,7 +205,9 @@ export function createSceneRouter({
       sceneState = "ready";
       hasPresented = true;
       if (pending === request) pending = null;
+      setOverview(new URL(session.url ?? windowTarget.location?.href ?? 'https://example.test').searchParams.get('overview') === 'solar-system');
       syncPlayback();
+      connectOverviewSelection(session);
       if (request && (request.options.history !== 'pop' || interrupted)) session.viewUrl?.flush();
       return !interrupted;
     } catch (error) {
@@ -234,7 +240,8 @@ export function createSceneRouter({
     if (active) active.viewUrl = null;
     const url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
     if (!options.url) {
-      url.pathname = object.route; url.searchParams.delete('v');
+      url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview');
+      if (options.overview) url.searchParams.set('overview', 'solar-system');
       if (object.id !== objectId) {
         const entity = new URLSearchParams(url.hash.slice(1));
         if (entity.has('place') || entity.has('lens')) {
@@ -243,8 +250,13 @@ export function createSceneRouter({
       }
     }
     const request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
-      url: url.href, options: { ...options, history: mode } };
+      url: url.href, options: { ...options, history: mode }, timing: createNavigationTiming(windowTarget, objectId, id) };
+    request.controller.signal.addEventListener('abort', () => request.timing.mark('cancelled'), { once: true });
     pending = request;
+    if (object.id !== objectId && !options.overview) {
+      const restoreSelection = shellOwner?.shell?.beginObjectSelection?.(object);
+      if (restoreSelection) request.lifetime.onDispose(restoreSelection);
+    } else if (object.id === objectId && !options.overview) shellOwner?.shell?.setOverview?.(false);
     mountTask = transition(request, object);
     return mountTask;
   }
@@ -258,40 +270,58 @@ export function createSceneRouter({
         if (restore) {
           if (request.options.history === 'pop' || request.url !== windowTarget.location.href) historyOwner?.commit(request.url, request.options);
           source.url = request.url;
-        } else if (!request.cancelledFlight && navigation.focus) {
+        } else if (!request.cancelledFlight && !request.options.preserveView && navigation.focus) {
           syncPlayback();
           const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
-            mount: source.mount, signal: request.controller.signal, reducedMotion: reducedMotionActive }));
+            mount: source.mount, signal: request.controller.signal, reducedMotion: reducedMotionActive,
+            targetWorldCamera: request.options.targetWorldCamera, timing: request.timing }));
           if (focused.cancelled || pending !== request) return false;
         }
+        if (!restore) {
+          source.url = request.url;
+          const changesSelection = overview !== (new URL(request.url).searchParams.get('overview') === 'solar-system');
+          historyOwner?.commit(request.url, { ...request.options,
+            history: changesSelection ? request.options.history : 'replace' });
+        }
+        setOverview(new URL(request.url).searchParams.get('overview') === 'solar-system');
         await bindSessionView(source, { restore });
         if (pending !== request) return false;
         pending = null; request.lifetime.destroy(); syncPlayback();
         if (!restore) source.viewUrl?.flush();
+        request.timing.mark('finished');
         return true;
       }
       syncPlayback();
-      const contentTask = (loadContent ?? contentTransport.load)(object, { signal: request.controller.signal });
-      // Observe content even if the factory fails before it can be awaited.
-      const loadedTask = Promise.all([loadObject(object.id), contentTask]);
-      const loaded = await request.lifetime.wait(loadedTask);
-      if (loaded.cancelled || pending !== request) return false;
-      const [factory, content] = loaded.value;
-      request.lifetime.onDispose(() => content.dispose?.());
-      const prepared = await request.lifetime.wait(navigation.prepare({
-        fromId: objectId, toId: object.id, fromMount: source?.mount ?? null, toFactory: factory,
+      const contentTask = (loadContent ?? contentTransport.load)(object, { signal: request.controller.signal })
+        .then(content => {
+          request.lifetime.onDispose(() => content.dispose?.());
+          request.timing.mark('content-ready'); return content;
+        });
+      const factoryTask = loadObject(object.id).then(factory => { request.timing.mark('factory-ready'); return factory; });
+      // The registry already owns the physical frames. Start the camera while
+      // the destination factory, content and texture bank load independently.
+      const preparationTask = navigation.prepare({
+        fromId: objectId, toId: object.id, fromMount: source?.mount ?? null, toFactory: factoryTask,
         signal: request.controller.signal, history: request.options.history, url: request.url,
         motionRequested: motionEnabled, reducedMotion: reducedMotionActive,
-      }));
-      if (prepared.cancelled || pending !== request) return false;
+        targetWorldCamera: request.options.targetWorldCamera,
+        preserveView: request.options.preserveView,
+        timing: request.timing,
+      });
+      const loaded = await request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
+      if (loaded.cancelled || pending !== request) return false;
+      const [factory, content, handoff] = loaded.value;
+      request.timing.mark('handoff');
       if (active) retire(active, null, { preserveShell: true, flush: false });
       objectId = object.id;
       if (stage.dataset) stage.dataset.objectId = object.id;
-      const result = await mountApplication({ factory, content, handoff: prepared.value, request });
+      const result = await mountApplication({ factory, content, handoff, request });
+      request.timing.mark(result === true ? 'finished' : sceneState === 'error' ? 'failed' : 'cancelled');
       if (pending === request) pending = null;
       request.lifetime.destroy();
       return result === true;
     } catch (error) {
+      request.timing.mark(error?.name === 'AbortError' ? 'cancelled' : 'failed');
       if (pending !== request || request.controller.signal.aborted) return false;
       pending = null; request.controller.abort(); request.lifetime.destroy();
       if (active === source && source) {
@@ -336,12 +366,15 @@ export function createSceneRouter({
   }
 
   function readSceneState() {
+    const selected = pending ? new URL(pending.url).searchParams.get('overview') !== 'solar-system' : !overview;
     return Object.freeze({
       activeObjectId: objectId,
+      selectedObjectId: selected ? pending?.id ?? objectId : null,
+      overview: !selected,
       error: sceneError instanceof Error ? sceneError.message : null,
       lifecycle: sceneState === "ready" ? (scenePaused ? "paused" : "mounted") : sceneState,
       mountedObjectCount: active?.mount ? 1 : 0,
-      ready: sceneState === "ready",
+      ready: sceneState === "ready" && pending === null,
     });
   }
 
@@ -397,6 +430,8 @@ export function createSceneRouter({
     if (DEVELOPMENT_DIAGNOSTICS) {
       windowTarget.__cssEarth = Object.freeze({
         activeObjectId: objectId,
+        get selectedObjectId() { return readSceneState().selectedObjectId; },
+        get overview() { return readSceneState().overview; },
         get mountedObjectCount() { return readSceneState().mountedObjectCount; },
         get ready() { return readSceneState().ready; },
         get error() { return readSceneState().error; },
@@ -461,10 +496,40 @@ export function createSceneRouter({
     const navigation = mount?.navigation;
     if (!owner || !navigation || typeof navigation.subscribe !== 'function') return;
     owner.selectObject?.(mountedObjectId, navigation.frame);
+    owner.setOverview?.(overview);
     const unsubscribe = navigation.subscribe((world, viewport) => {
       if (active === session && worldContextMount === owner) owner.publish(world, viewport);
     });
     session.lifetime.onDispose(unsubscribe);
+  }
+  function setOverview(enabled) {
+    overview = enabled;
+    active?.mount?.navigation?.setZoomOutCentering?.(enabled);
+    shellOwner?.shell?.setOverview?.(enabled);
+    worldContextMount?.setOverview?.(enabled);
+    if (stage.dataset) stage.dataset.selection = enabled ? 'solar-system' : objectId;
+  }
+  function connectOverviewSelection(session) {
+    const owner = session.mount?.navigation;
+    const sun = solarSystemFocus(objects);
+    if (!owner || !navigation || !sun?.worldFrame) return;
+    session.lifetime.onDispose(watchOverviewSelection({ navigation: owner, objects, objectId,
+      getOverview: () => overview,
+      isAvailable: () => active === session && sceneState === 'ready' && !pending,
+      windowTarget,
+      onChange(next) {
+        if (!next.overview) {
+          // The overview already uses the Sun's camera and prepared detail.
+          // Showing its card must not move the view or allocate another scene.
+          setOverview(false);
+          const url = new URL(windowTarget.location.href); url.searchParams.delete('overview');
+          session.url = url.href;
+          historyOwner?.commit(url.href, { history: 'replace' });
+          return;
+        }
+        void navigate(sun.id, { overview: true, history: 'replace', preserveView: true });
+      },
+    }));
   }
   function destroyWorldContext() {
     worldContextAbort?.abort(new DOMException('World context router was destroyed.', 'AbortError'));

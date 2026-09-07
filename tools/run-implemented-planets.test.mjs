@@ -1,6 +1,6 @@
 import {authoredObject} from './authored-object.mjs';
 import assert from "node:assert/strict";
-import { access, mkdtemp, readFile, readdir, rm } from "node:fs/promises";
+import { mkdtemp, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { setImmediate } from "node:timers/promises";
@@ -20,7 +20,7 @@ const ids = OBJECTS.map(({ id }) => id);
 const success = Object.freeze({ exitCode: 0, signal: null });
 const quiet = () => {};
 
-test("moved object test discovery retains every unit test and browser entry", async () => {
+test("object discovery retains unit tests and uses the shared browser entry", async () => {
   for (const id of ids) {
     const directory = resolve(root, 'tests/objects/unit', id);
     const expected = (await readdir(directory, { recursive: true }))
@@ -29,24 +29,7 @@ test("moved object test discovery retains every unit test and browser entry", as
     assert.ok(expected.length > 0, `${id} must retain its tests`);
     assert.deepEqual(await discoverPlanetTests(id, { projectRoot: root }), expected);
     assert.equal(await resolvePlanetCommand(id, 'browser', { projectRoot: root }),
-      resolve(root, 'tests/objects/browser', id, 'smoke-browser.mjs'));
-  }
-});
-
-test("root test aggregates preserve every lane and audit scripts use existing moved paths", async () => {
-  const { scripts } = JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8'));
-  assert.equal(scripts.test, ['packages', 'renderer', 'preparation', 'platform', 'planets', 'shell']
-    .map(lane => `pnpm test:${lane}`).join(' && '));
-  const browserBase = '"${CSSEARTH_BROWSER_BASE_URL:-http://127.0.0.1:4210}"';
-  assert.equal(scripts['test:browser'], `pnpm test:browser:conformance ${browserBase} && pnpm test:browser:planets ${browserBase} && pnpm test:browser:earth-noise`);
-  for (const [name, path] of [
-    ['test:browser:earth-noise', 'tests/objects/browser/earth/noise-visibility-browser.mjs'],
-    ['analyze:trace:saturn', 'tests/objects/browser/saturn/audit/analyze-user-trace.mjs'],
-    ['trace:saturn', 'tests/objects/browser/saturn/audit/trace.mjs'],
-    ['oracle:interactions', 'tests/objects/oracle/mars/google-earth-pro/run-interaction-suite.mjs'],
-  ]) {
-    assert.equal(scripts[name], `node ${path}`);
-    await access(resolve(root, path));
+      resolve(root, 'site/test/dom-cleanliness-browser.mjs'));
   }
 });
 

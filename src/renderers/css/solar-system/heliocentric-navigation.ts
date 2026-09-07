@@ -17,6 +17,7 @@ export interface ObjectNavigationTarget extends EventTarget {
 export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host: EventTarget,
   { activation = 'click' }: { activation?: 'click' | 'dblclick' } = {}) {
   let objectId: string | null = null;
+  let previousLabel: string | null | undefined;
   const stopPointer = (event: Event) => { if (objectId !== null) event.stopPropagation(); };
   const activate = (event: Event) => {
     if (objectId === null || ('button' in event && event.button !== 0)) return;
@@ -36,7 +37,10 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
   element.addEventListener('click', activation === 'click' ? activate : stopPointer);
   element.addEventListener('keydown', keyboard);
   const update = (next: string | null, name?: string) => {
+    const label = next === null ? null : `Go to ${name ?? next}`;
+    if (objectId === next && previousLabel === label) return;
     objectId = next;
+    previousLabel = label;
     element.style.pointerEvents = next === null ? 'none' : 'auto';
     element.style.cursor = next === null ? '' : 'pointer';
     element.tabIndex = next === null ? -1 : 0;
@@ -46,7 +50,7 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
       element.removeAttribute('aria-label');
     } else {
       element.dataset.objectNavigate = next;
-      element.setAttribute('aria-label', `Go to ${name ?? next}`);
+      element.setAttribute('aria-label', label!);
     }
   };
   update(null);

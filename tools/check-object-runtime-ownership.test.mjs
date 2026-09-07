@@ -286,6 +286,9 @@ test('descriptor binding cannot bypass the shared factory or redirect the prepar
       'bindContextualObject(definition, applicationContext, applicationContext.frame)'),
     source.replace(': bindPackagedObject(definition)', ': bindPackagedObject(otherDefinition)'),
     source.replace('mount = createObjectRuntime(definition)', 'mount = createObjectRuntime(otherDefinition)'),
+    source.replace('createPreparedObjectNavigation(async () => definition, frame)', 'createPreparedObjectNavigation(async () => otherDefinition, frame)'),
+    source.replace('createPreparedObjectNavigation(async () => definition, frame)', 'createPreparedObjectNavigation(async () => definition, context.frame)'),
+    source.replace('fetch(url, { signal })', 'fetch(url, { signal: otherSignal })'),
     source.replace('=> mount(stage,', '=> differentMount(stage,')]) {
     assert.notEqual(changed, source, 'Mutation must change the actual loader');
     await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport|Contextual binding/);
@@ -399,6 +402,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
     [{ [applicationFile]: application.replace('createPreparedUniverse', 'createObjectRuntime') }, /Application world context/],
     [{ [applicationFile]: application.replace('../src/objects/*/prepared/**/*.{json,png,webp}', '../src/objects/*/prepared/**/*.{json,png}') }, /Application world context/],
     [{ [applicationFile]: application.replace('loadPreparedCssPointField', 'loadPreparedCssVolume') }, /Application world context/],
+    [{ [applicationFile]: application.replace('loadPreparedCssSurfaceShell', 'loadPreparedCssVolume') }, /Application world context/],
     [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, prepared: { ...starDescriptor.prepared, sha256: '0'.repeat(64) } }) }, /point field.*(?:identity|hash).*drifted/],
     [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, properties: { ...starDescriptor.properties, frame: { ...starDescriptor.properties.frame, epochJdTt: 0 } } }) }, /point field.*frame/],
     (() => {
@@ -408,4 +412,13 @@ test('descriptor context binding pins both prepared contexts to the shared facto
       return [{ [starsDescriptorFile]: JSON.stringify(descriptor), [starsPayloadFile]: bytes }, /point field.*identity/];
     })(),
   ]) await assert.rejects(audit(changes), expected);
+});
+
+
+test('shell-only JSON is parsed as data and malformed or executable content is rejected', () => {
+  const inspect = source => inspectObjectRuntimeModule(source, 'site/source/example.json', { shared: true, shellContent: true });
+  assert.equal(inspect('{"label":"Solar System"}').dataOnly, true);
+  for (const invalid of ['{"label":}', 'document.createElement("canvas")']) {
+    assert.equal(inspect(invalid).violations.length, 1);
+  }
 });

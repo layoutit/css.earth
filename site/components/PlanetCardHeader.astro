@@ -1,0 +1,18 @@
+---
+const { title, introduction = '', entity = false, ...attributes } = Astro.props;
+---
+<section class="planet-selected-panel" {...attributes}>
+  <slot name="before-title" />
+  <div class="planet-title-row">
+    <h1 class="planet-title" aria-label={title.label}>
+      {entity && <span class="planet-title-text" hidden></span>}
+      <span class="visually-hidden" data-entity-title={entity ? true : undefined}>{title.label}</span>
+      <svg class="planet-title-svg" viewBox={title.renderViewBox} width={title.renderWidth} height={title.renderHeight} aria-hidden="true" focusable="false">
+        <path d={title.path} transform={title.renderPathOffsetY === 0 ? undefined : `translate(0 ${title.renderPathOffsetY})`} />
+      </svg>
+    </h1>
+    <slot />
+  </div>
+  {(introduction || entity) && <p class="planet-introduction" hidden={!introduction}>{introduction}</p>}
+  <slot name="after-introduction" />
+</section>

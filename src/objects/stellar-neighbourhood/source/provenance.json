@@ -32,46 +32,6 @@
       },
       "credit": "HYG Stellar Database by David Nash / Astronexus. Prepared derivatives licensed CC-BY-SA-4.0.",
       "modifications": "Complete row set reordered into a spatial hierarchy; luminosity-weighted proxies and 32-color display quantization. No astrometry propagation."
-    },
-    {
-      "id": "diffuse-sky",
-      "credit": "ESO/S. Brunier",
-      "license": "CC-BY-4.0",
-      "url": "https://www.eso.org/public/images/eso0932a/",
-      "source": "Existing prepared Sun standard cubic sky from ESO eso0932a all-sky panorama",
-      "modifications": "Offline 512px downsampling and 8px Gaussian low-pass suppress compact photographic points; not exact source subtraction.",
-      "faces": [
-        {
-          "id": "front",
-          "path": "sky/front.webp",
-          "sha256": "4694fe3878fc9781ee87866a1f4848befcd91b43bb7f85d13cb542ce8a5457c5"
-        },
-        {
-          "id": "right",
-          "path": "sky/right.webp",
-          "sha256": "213d9fdbd6a835e6d1e3a2f162691674b36ea1f59234941afc021770455a3eb3"
-        },
-        {
-          "id": "back",
-          "path": "sky/back.webp",
-          "sha256": "1f850dc6daca82790f20345f652746e5464b38d04ea0d7b1a3a6644e4d756b77"
-        },
-        {
-          "id": "left",
-          "path": "sky/left.webp",
-          "sha256": "cbdbd655c85daf987b025fe1136a86113e81a148bc29ec6688f77714ca04ad47"
-        },
-        {
-          "id": "top",
-          "path": "sky/top.webp",
-          "sha256": "663f66e2bab44098d34617a204533df743e7c44cd39c23a48ee6fc227ddf71a8"
-        },
-        {
-          "id": "bottom",
-          "path": "sky/bottom.webp",
-          "sha256": "d0e08cc4cefc2e59cb44016887b6868a6d89065525ed9792e204a94549642667"
-        }
-      ]
     }
   ],
   "qualification": "Local generated assets; no network publication. HYG astrometry is a local stellar neighbourhood, not a full Milky Way stellar census."

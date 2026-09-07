@@ -1,15 +1,16 @@
 import sharp from 'sharp';
 import {fromFile} from 'geotiff';
-import {sampleColorBand} from './scientific-raster.mjs';
+import {sampleColorBand, loadScienceSurface} from './scientific-raster.mjs';
 
-/** Floating-point observations keep native validity and an explicit display stretch. */
+/** Scalar observations keep native georeferencing, validity and display range. */
 export async function prepareFloatObservation(path, entry, policy, width, height) {
   const file = await fromFile(path);
   try {
     const image = await file.getImage(), keys = image.getGeoKeys();
     const origin = image.getOrigin(), resolution = image.getResolution();
     if (image.getWidth() !== entry.width || image.getHeight() !== entry.height ||
-        image.getSamplesPerPixel() !== 1 || image.getSampleFormat(0) !== 3 || image.getSampleByteSize(0) !== 4 ||
+        image.getSamplesPerPixel() !== 1 || image.getSampleFormat(0) !== (policy.kind === 'geotiff-byte-monochrome' ? 1 : 3) ||
+        image.getSampleByteSize(0) !== (policy.kind === 'geotiff-byte-monochrome' ? 1 : 4) ||
         image.getGDALNoData() !== policy.noData || keys.ProjCenterLongGeoKey !== policy.centerLongitude ||
         keys.GeogSemiMajorAxisGeoKey !== entry.projection.referenceRadiusMeters || keys.ProjStdParallel1GeoKey !== 0 ||
         keys.ProjCenterLatGeoKey !== 0 || resolution[0] !== policy.resolutionMeters || resolution[1] !== -policy.resolutionMeters ||
@@ -24,7 +25,9 @@ export async function prepareFloatObservation(path, entry, policy, width, height
     for (let y = 0; y < height; y++) {
       const northing = (90 - (y + 0.5) / height * 180) * Math.PI / 180 * radius;
       for (let x = 0; x < width; x++) {
-        const easting = ((x + 0.5) / width * 360 - policy.centerLongitude) * Math.PI / 180 * radius;
+        let deltaLongitude = (x + 0.5) / width * 360 - policy.centerLongitude;
+        if (policy.wrapLongitude) deltaLongitude = ((deltaLongitude + 180) % 360 + 360) % 360 - 180;
+        const easting = deltaLongitude * Math.PI / 180 * radius;
         const value = sampleColorBand(band, easting, northing), i = y * width + x;
         if (value === null) { missing[i] = 1; continue; }
         const gray = Math.round(255 * Math.max(0, Math.min(1, (value - low) / (high - low))));
@@ -74,4 +77,23 @@ export async function prepareMaskedObservation(path,entry,policy,width,height) {
   const rgb=Buffer.alloc(width*height*3),missing=new Uint8Array(width*height);
   for(let y=0;y<height;y++)for(let x=0;x<width;x++){const i=y*width+x,j=y*width+(x+roll+width)%width;rgb.set(data.subarray(j*4,j*4+3),i*3);missing[i]=data[j*4+3]<255?1:0}
   return {rgb,missing,sourceGeoreference:{origin,resolution},withheldSyntheticPixels};
+}
+
+/** Mapped numeric observations use the same geographic sampling as elevation. */
+export async function prepareIsisObservation(path, entry, policy, width, height) {
+  if (entry.width !== policy.grid.width || entry.height !== policy.grid.height) {
+    throw new Error(`Observed ISIS3 dimensions changed: ${entry.id}`);
+  }
+  const source = await loadScienceSurface('.', {path, format:'isis3', grid:policy.grid, sampling:'bilinear'});
+  const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
+  const [low, high] = policy.displayRange;
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const value = source.sample((x + .5) / width * 360, 90 - (y + .5) / height * 180);
+    const i = y * width + x;
+    if (value === null) { missing[i] = 1; continue; }
+    const gray = Math.round(255 * Math.max(0, Math.min(1, (value - low) / (high - low))));
+    rgb.fill(gray, i * 3, i * 3 + 3);
+  }
+  return {rgb, missing, sourceGeoreference:{origin:policy.grid.origin,
+    resolution:[policy.grid.resolutionMeters, -policy.grid.resolutionMeters]}};
 }

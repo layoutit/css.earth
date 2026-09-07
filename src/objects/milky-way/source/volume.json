@@ -2,12 +2,12 @@
   "schema": "cssearth-volume-recipe@1",
   "grid": {
     "path": "density.ktx2",
-    "sha256": "34ed2cdfdf388b30be441db4e6a94a7a420e0bf6446aafb2f61c60b49a7fc51b",
-    "decodedSha256": "7fea1069144540616e2ef6a42eb19f90a034872fa706e81aa02f5c60063df845",
+    "sha256": "49db3a43576ad1977c97f181c177e970064f4574265b70ce4999c27caa28fe05",
+    "decodedSha256": "16cf24ed3bf1e3f85d4c64be603b47fa68a3dd8fad7839ae7b7ff17c4bd12d01",
     "dimensions": [
-      512,
-      512,
-      64
+      1024,
+      1024,
+      128
     ],
     "encoding": "sqrt-density-unorm8",
     "bounds": {
@@ -21,6 +21,10 @@
         1,
         0.125
       ]
+    },
+    "acquisition": {
+      "path": "acquisition.json",
+      "sha256": "adf168eec41cc62107bdff2b48e15abbb4b8cd0cba9fbb067acacba299ef8cce"
     }
   },
   "material": {
@@ -28,69 +32,78 @@
       {
         "channel": 0,
         "color": [
-          0.85,
-          0.9,
-          1
+          1,
+          0,
+          0
         ],
-        "strength": 3166820
+        "strength": 250
       },
       {
         "channel": 1,
         "color": [
-          0.7,
-          0.82,
+          0,
+          1,
+          0
+        ],
+        "strength": 250
+      },
+      {
+        "channel": 2,
+        "color": [
+          0,
+          0,
           1
         ],
-        "strength": 22392.8
+        "strength": 250
       }
     ],
     "absorption": [
       {
-        "channel": 2,
+        "channel": 3,
         "color": [
-          0.6,
-          0.8,
-          1
+          0.3,
+          0.54,
+          0.85
         ],
-        "strength": 411.561
+        "strength": 200,
+        "decodedPower": 0.7
       }
     ],
-    "radialEmission": {
-      "color": [
-        1,
-        0.84,
-        0.67
-      ],
-      "strength": 6498.02,
-      "flattening": 0.75,
-      "radialScale": 10,
-      "inner": 0.5,
-      "exponent": 0.125,
-      "falloff": 7.669,
-      "radialTaper": [
-        0.75,
-        1
-      ],
-      "verticalTaper": [
-        0.075,
-        0.125
-      ]
-    },
-    "intensityScale": 3.12499992105586e-7,
+    "intensityScale": 1,
     "stepScale": 1,
-    "exposureGain": 128
+    "stepMetric": "source",
+    "exposureGain": 16,
+    "cylinderSupport": {
+      "axis": "z",
+      "radiusSquared": 0.7
+    },
+    "displayColorMatrix": [
+      1,
+      0,
+      0,
+      0,
+      0.951277424,
+      0,
+      0,
+      0,
+      0.709752511
+    ]
   },
   "bake": {
     "sliceCounts": {
-      "x": 128,
-      "y": 128,
+      "x": 256,
+      "y": 256,
       "z": 32
     },
     "unitsPerSourceUnit": 10,
-    "imageWidth": 512,
+    "imageWidth": 1024,
     "samplesPerSlab": 4,
     "cropTransparent": true,
-    "opticalWeight": 1
+    "opticalWeight": 1,
+    "imageEncoding": {
+      "format": "webp",
+      "quality": 90
+    }
   },
   "anchors": [
     {
@@ -104,6 +117,10 @@
   ],
   "provenance": {
     "path": "provenance.json",
-    "sha256": "81e9cc6d4d566245f8f1a9ef6f7f9b6933c4b054c916c1beee7f9970d74fabc7"
+    "sha256": "29c9be057b5070f0011a66216300d6bdee210aef955c034e9022e1f038093a2a"
+  },
+  "sky": {
+    "path": "sky/recipe.json",
+    "sha256": "80c1a317f0c5e125f21d50dcc10ca23d9366bdb81ba8aab36eb2aab2a9dfb4d4"
   }
 }

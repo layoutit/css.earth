@@ -45,7 +45,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
         }
         return Object.freeze({
           id: object.id, name: object.name,
-          apply() {
+          apply({ preserveSidebar = false } = {}) {
             if (signal.aborted || committed) throw new Error('Object content no longer owns this transition.');
             // Shared stylesheet nodes survive; only the outgoing object's
             // exclusive CSS is removed before the incoming CSS becomes active.
@@ -63,6 +63,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
             styles = next.map(({ element }) => element);
             committed = true; signal.removeEventListener('abort', dispose);
             for (const selector of ['.planet-information-panel', '.planet-settings-panel']) {
+              if (preserveSidebar && selector === '.planet-information-panel') continue;
               const target = documentTarget.querySelector(selector), incoming = source.querySelector(selector);
               target.replaceChildren(...[...incoming.childNodes].map(node => documentTarget.importNode(node, true)));
             }

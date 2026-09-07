@@ -12,6 +12,10 @@ Explore the live version: [css.earth](https://css.earth) 🪐
 
 ## How to Build
 
+Use Node.js 24 or Node.js 22.15+ and pnpm 10. Source preparation uses Node's
+[native Zstandard support](https://nodejs.org/api/zlib.html#zlibzstddecompresssyncbuffer-options),
+which is unavailable in earlier Node 22 releases.
+
 Install dependencies and download the prepared browser assets, then start the site:
 
 ```sh
@@ -29,6 +33,26 @@ geometry ranges from the published release when no local mirror is present.
 To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 `pnpm preview`. To regenerate assets from source instead, run
 `pnpm prepare:checkout`; that is the full preparation workflow described below.
+
+## Checks
+
+`pnpm test` runs package, renderer, platform, and shell behavior tests. It does
+not reconstruct bodies or verify the full archive of scientific source files.
+
+`pnpm test:browser` uses the existing server on **4210** for the shared body
+and navigation checks at DPR 1 and DPR 2. It never starts a server or saves a
+screenshot matrix. To check one body, use
+`pnpm test:browser http://localhost:4210 mimas`.
+
+Source acquisition verification (`pnpm acquire:planets -- --verify-only`),
+preparation tests (`pnpm test:preparation`), prepared body data tests
+(`pnpm test:planets`), and extended interaction conformance
+(`pnpm test:browser:conformance`) are separate, explicit commands for changes
+that need them. Source/preparation checks require their declared raw inputs.
+For a camera or lens lifecycle change, focus conformance with
+`pnpm test:browser:conformance http://localhost:4210 mimas`.
+SEO and Earth delivery diagnostics also reuse an existing server; they never
+launch a private Astro instance or rewrite the renderer.
 
 ## How It Works
 

@@ -1,0 +1,48 @@
+name: Shared universe
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: universe-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  universe:
+    name: Prepared universe and shared renderer
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Build shared packages and affected entry points
+        run: |
+          pnpm build:packages
+          pnpm build:renderer
+          pnpm build:preparation
+      - name: Typecheck renderer and preparation
+        run: |
+          pnpm typecheck:renderer
+          pnpm typecheck:preparation
+      - name: Test prepared source, materials and world context
+        run: pnpm test:preparation --universe
+      - name: Test shared scientific source credits
+        run: node --test site/test/scene-sources.test.mjs
+      - name: Test shared environment rendering and camera
+        run: >-
+          pnpm test:renderer
+          volume/ sky/ shell/ stars/ labels/ universe/
+          solar-system/heliocentric-geometry
+          navigation/world-camera
+          navigation/saved-world-camera

@@ -108,9 +108,20 @@ export function createUnboundedMatrixDragControls({
     if (lifetime.disposed) return;
     cadenceFrame = requestFrame(measureCadence);
   };
+  let pointerPosition: { x: number; y: number } | null = null;
+  let surfaceGesture = false;
+  const overSurface = (x: number, y: number) => {
+    if (surfaceFlyToHitTest) return surfaceFlyToHitTest(x, y);
+    const metrics = trackballMetrics();
+    return Math.hypot(x - metrics.centerX, y - metrics.centerY) <= metrics.surfaceRadius;
+  };
   const syncCursor = () => {
     if (lifetime.disposed) return;
-    inputSurface.style.cursor = drag ? "grab" : "";
+    const pressed = pointerId !== null;
+    const surface = pressed ? surfaceGesture : pointerPosition !== null && overSurface(pointerPosition.x, pointerPosition.y);
+    const cursor = runtimePolicy.sceneCursor({ surface, pressed, enabled: drag });
+    // Picking supplies only the hover override; camera input owns the base cursor.
+    inputSurface.style.cursor = cursor ? `var(--object-hover-cursor, ${cursor})` : '';
   };
   const finishInteraction = () => {
     if (!interactionActive) return;
@@ -379,6 +390,8 @@ export function createUnboundedMatrixDragControls({
     if (lifetime.disposed) return;
 
     skyGesture = startsOnSky || tumbleOnly;
+    surfaceGesture = overSurface(event.clientX, event.clientY);
+    pointerPosition = { x: event.clientX, y: event.clientY };
     pointerId = event.pointerId;
     pointerDragging = false;
     previousX = event.clientX;
@@ -399,7 +412,7 @@ export function createUnboundedMatrixDragControls({
       pitch: accumulatedPitch,
       yaw: accumulatedYaw,
     });
-    inputSurface.style.cursor = "grabbing";
+    syncCursor();
     inputSurface.setPointerCapture(event.pointerId);
   };
   const applyPointerSamples = (event: PointerEvent) => {
@@ -494,12 +507,17 @@ export function createUnboundedMatrixDragControls({
     return null;
   };
   const onPointerMove = (event: PointerEvent) => {
+    if (event.isPrimary && event.pointerType !== 'touch') {
+      pointerPosition = { x: event.clientX, y: event.clientY };
+      syncCursor();
+    }
     if (!drag || event.pointerId !== pointerId) return;
     event.preventDefault();
     applyPointerSamples(event);
   };
   const endPointer = (event: PointerEvent) => {
     if (event.pointerId !== pointerId) return;
+    pointerPosition = { x: event.clientX, y: event.clientY };
     const wasDragging = pointerDragging;
     const releaseAge = event.timeStamp - previousPointerTimestamp!;
     const freshRelease = releaseAge >= 0 &&
@@ -588,6 +606,7 @@ export function createUnboundedMatrixDragControls({
     },
     invalidateTrackball() {
       if (pointerId !== null) trackballInvalidated = true;
+      syncCursor();
     },
     stats() {
       return dragControlDiagnostics({ skyGesture, pointerActive: pointerId !== null,

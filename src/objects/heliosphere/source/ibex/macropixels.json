@@ -1,0 +1,1404 @@
+{
+  "schema": "cssearth-ibex-macropixels@1",
+  "referenceFrame": "ecliptic-J2000",
+  "rows": [
+    {
+      "longitudeDeg": 0.0,
+      "latitudeDeg": -85.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 50.0,
+          "heliopauseAu": 150.0
+        },
+        "voyager": {
+          "terminationShockAu": 90.0,
+          "heliosheathThicknessAu": 60.0,
+          "heliopauseAu": 150.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 111.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 156.0
+        }
+      },
+      "correlationUniform100Au": 0.729,
+      "category": 2,
+      "comment": "South Pole"
+    },
+    {
+      "longitudeDeg": 91.0,
+      "latitudeDeg": -62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 180.0
+        },
+        "voyager": {
+          "terminationShockAu": 102.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 182.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 120.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 195.0
+        }
+      },
+      "correlationUniform100Au": 0.228,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 129.0,
+      "latitudeDeg": -62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 180.0
+        },
+        "voyager": {
+          "terminationShockAu": 93.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 173.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 119.0,
+          "heliosheathThicknessAu": 55.0,
+          "heliopauseAu": 174.0
+        }
+      },
+      "correlationUniform100Au": 0.392,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 171.0,
+      "latitudeDeg": -62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 60.0,
+          "heliopauseAu": 160.0
+        },
+        "voyager": {
+          "terminationShockAu": 83.0,
+          "heliosheathThicknessAu": 70.0,
+          "heliopauseAu": 153.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 114.0,
+          "heliosheathThicknessAu": 50.0,
+          "heliopauseAu": 164.0
+        }
+      },
+      "correlationUniform100Au": 0.587,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -147.0,
+      "latitudeDeg": -62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 145.0
+        },
+        "voyager": {
+          "terminationShockAu": 78.0,
+          "heliosheathThicknessAu": 65.0,
+          "heliopauseAu": 143.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 106.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 146.0
+        }
+      },
+      "correlationUniform100Au": 0.804,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -105.0,
+      "latitudeDeg": -62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 135.0
+        },
+        "voyager": {
+          "terminationShockAu": 78.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 123.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 101.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 136.0
+        }
+      },
+      "correlationUniform100Au": 0.854,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -63.0,
+      "latitudeDeg": -62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 30.0,
+          "heliopauseAu": 130.0
+        },
+        "voyager": {
+          "terminationShockAu": 84.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 124.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 102.0,
+          "heliosheathThicknessAu": 30.0,
+          "heliopauseAu": 132.0
+        }
+      },
+      "correlationUniform100Au": 0.801,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -21.0,
+      "latitudeDeg": -62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 135.0
+        },
+        "voyager": {
+          "terminationShockAu": 95.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 135.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 107.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 142.0
+        }
+      },
+      "correlationUniform100Au": 0.692,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 21.0,
+      "latitudeDeg": -62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 85.0,
+          "heliopauseAu": 185.0
+        },
+        "voyager": {
+          "terminationShockAu": 103.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 183.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 114.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 189.0
+        }
+      },
+      "correlationUniform100Au": 0.441,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 58.0,
+      "latitudeDeg": -62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 100.0,
+          "heliopauseAu": 200.0
+        },
+        "voyager": {
+          "terminationShockAu": 106.0,
+          "heliosheathThicknessAu": 95.0,
+          "heliopauseAu": 201.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 118.0,
+          "heliosheathThicknessAu": 85.0,
+          "heliopauseAu": 203.0
+        }
+      },
+      "correlationUniform100Au": 0.357,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 105.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 235.0,
+          "heliopauseAu": 335.0
+        },
+        "voyager": {
+          "terminationShockAu": 117.0,
+          "heliosheathThicknessAu": 225.0,
+          "heliopauseAu": 342.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 125.0,
+          "heliosheathThicknessAu": 220.0,
+          "heliopauseAu": 345.0
+        }
+      },
+      "correlationUniform100Au": 0.937,
+      "category": 3,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 135.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 125.0,
+          "heliopauseAu": 225.0
+        },
+        "voyager": {
+          "terminationShockAu": 101.0,
+          "heliosheathThicknessAu": 125.0,
+          "heliopauseAu": 226.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 122.0,
+          "heliosheathThicknessAu": 105.0,
+          "heliopauseAu": 227.0
+        }
+      },
+      "correlationUniform100Au": 0.712,
+      "category": 4,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 165.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 180.0
+        },
+        "voyager": {
+          "terminationShockAu": 87.0,
+          "heliosheathThicknessAu": 85.0,
+          "heliopauseAu": 172.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 114.0,
+          "heliosheathThicknessAu": 70.0,
+          "heliopauseAu": 184.0
+        }
+      },
+      "correlationUniform100Au": 0.511,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -165.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 145.0
+        },
+        "voyager": {
+          "terminationShockAu": 77.0,
+          "heliosheathThicknessAu": 65.0,
+          "heliopauseAu": 142.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 103.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 148.0
+        }
+      },
+      "correlationUniform100Au": 0.6,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -135.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 25.0,
+          "heliopauseAu": 125.0
+        },
+        "voyager": {
+          "terminationShockAu": 73.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 118.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 94.0,
+          "heliosheathThicknessAu": 30.0,
+          "heliopauseAu": 124.0
+        }
+      },
+      "correlationUniform100Au": 0.822,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -105.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 15.0,
+          "heliopauseAu": 115.0
+        },
+        "voyager": {
+          "terminationShockAu": 75.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 115.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 90.0,
+          "heliosheathThicknessAu": 30.0,
+          "heliopauseAu": 120.0
+        }
+      },
+      "correlationUniform100Au": 0.754,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -75.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 15.0,
+          "heliopauseAu": 115.0
+        },
+        "voyager": {
+          "terminationShockAu": 82.0,
+          "heliosheathThicknessAu": 30.0,
+          "heliopauseAu": 112.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 90.0,
+          "heliosheathThicknessAu": 30.0,
+          "heliopauseAu": 120.0
+        }
+      },
+      "correlationUniform100Au": 0.857,
+      "category": 1,
+      "comment": "V2"
+    },
+    {
+      "longitudeDeg": -45.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 135.0
+        },
+        "voyager": {
+          "terminationShockAu": 94.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 139.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 95.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 140.0
+        }
+      },
+      "correlationUniform100Au": 0.826,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -15.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 65.0,
+          "heliopauseAu": 165.0
+        },
+        "voyager": {
+          "terminationShockAu": 110.0,
+          "heliosheathThicknessAu": 55.0,
+          "heliopauseAu": 165.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 104.0,
+          "heliosheathThicknessAu": 60.0,
+          "heliopauseAu": 164.0
+        }
+      },
+      "correlationUniform100Au": 0.711,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 15.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 145.0,
+          "heliopauseAu": 245.0
+        },
+        "voyager": {
+          "terminationShockAu": 124.0,
+          "heliosheathThicknessAu": 130.0,
+          "heliopauseAu": 254.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 116.0,
+          "heliosheathThicknessAu": 135.0,
+          "heliopauseAu": 251.0
+        }
+      },
+      "correlationUniform100Au": 0.902,
+      "category": 4,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 45.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 190.0,
+          "heliopauseAu": 290.0
+        },
+        "voyager": {
+          "terminationShockAu": 131.0,
+          "heliosheathThicknessAu": 180.0,
+          "heliopauseAu": 311.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 123.0,
+          "heliosheathThicknessAu": 175.0,
+          "heliopauseAu": 298.0
+        }
+      },
+      "correlationUniform100Au": 0.928,
+      "category": 3,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 75.0,
+      "latitudeDeg": -30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 250.0,
+          "heliopauseAu": 350.0
+        },
+        "voyager": {
+          "terminationShockAu": 128.0,
+          "heliosheathThicknessAu": 235.0,
+          "heliopauseAu": 363.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 126.0,
+          "heliosheathThicknessAu": 235.0,
+          "heliopauseAu": 361.0
+        }
+      },
+      "correlationUniform100Au": 0.863,
+      "category": 3,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 105.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 230.0,
+          "heliopauseAu": 330.0
+        },
+        "voyager": {
+          "terminationShockAu": 133.0,
+          "heliosheathThicknessAu": 205.0,
+          "heliopauseAu": 338.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 127.0,
+          "heliosheathThicknessAu": 210.0,
+          "heliopauseAu": 337.0
+        }
+      },
+      "correlationUniform100Au": 0.808,
+      "category": 3,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 135.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 105.0,
+          "heliopauseAu": 205.0
+        },
+        "voyager": {
+          "terminationShockAu": 112.0,
+          "heliosheathThicknessAu": 100.0,
+          "heliopauseAu": 212.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 122.0,
+          "heliosheathThicknessAu": 100.0,
+          "heliopauseAu": 222.0
+        }
+      },
+      "correlationUniform100Au": 0.76,
+      "category": 4,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 165.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 70.0,
+          "heliopauseAu": 170.0
+        },
+        "voyager": {
+          "terminationShockAu": 94.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 169.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 112.0,
+          "heliosheathThicknessAu": 60.0,
+          "heliopauseAu": 172.0
+        }
+      },
+      "correlationUniform100Au": 0.634,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -165.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 175.0
+        },
+        "voyager": {
+          "terminationShockAu": 82.0,
+          "heliosheathThicknessAu": 85.0,
+          "heliopauseAu": 167.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 99.0,
+          "heliosheathThicknessAu": 70.0,
+          "heliopauseAu": 169.0
+        }
+      },
+      "correlationUniform100Au": 0.701,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -135.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 15.0,
+          "heliopauseAu": 115.0
+        },
+        "voyager": {
+          "terminationShockAu": 77.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 117.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 89.0,
+          "heliosheathThicknessAu": 30.0,
+          "heliopauseAu": 119.0
+        }
+      },
+      "correlationUniform100Au": 0.818,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -105.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 20.0,
+          "heliopauseAu": 120.0
+        },
+        "voyager": {
+          "terminationShockAu": 79.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 124.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 85.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 120.0
+        }
+      },
+      "correlationUniform100Au": 0.867,
+      "category": 1,
+      "comment": "Upwind"
+    },
+    {
+      "longitudeDeg": -75.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 135.0
+        },
+        "voyager": {
+          "terminationShockAu": 88.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 133.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 85.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 130.0
+        }
+      },
+      "correlationUniform100Au": 0.916,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -45.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 140.0
+        },
+        "voyager": {
+          "terminationShockAu": 104.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 139.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 90.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 135.0
+        }
+      },
+      "correlationUniform100Au": 0.908,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -15.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 60.0,
+          "heliopauseAu": 160.0
+        },
+        "voyager": {
+          "terminationShockAu": 124.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 164.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 102.0,
+          "heliosheathThicknessAu": 65.0,
+          "heliopauseAu": 167.0
+        }
+      },
+      "correlationUniform100Au": 0.891,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 15.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 145.0,
+          "heliopauseAu": 245.0
+        },
+        "voyager": {
+          "terminationShockAu": 142.0,
+          "heliosheathThicknessAu": 125.0,
+          "heliopauseAu": 267.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 116.0,
+          "heliosheathThicknessAu": 140.0,
+          "heliopauseAu": 256.0
+        }
+      },
+      "correlationUniform100Au": 0.892,
+      "category": 3,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 45.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 175.0,
+          "heliopauseAu": 275.0
+        },
+        "voyager": {
+          "terminationShockAu": 151.0,
+          "heliosheathThicknessAu": 160.0,
+          "heliopauseAu": 311.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 125.0,
+          "heliosheathThicknessAu": 170.0,
+          "heliopauseAu": 295.0
+        }
+      },
+      "correlationUniform100Au": 0.823,
+      "category": 3,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 75.0,
+      "latitudeDeg": 0.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 280.0,
+          "heliopauseAu": 380.0
+        },
+        "voyager": {
+          "terminationShockAu": 148.0,
+          "heliosheathThicknessAu": 245.0,
+          "heliopauseAu": 393.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 128.0,
+          "heliosheathThicknessAu": 255.0,
+          "heliopauseAu": 383.0
+        }
+      },
+      "correlationUniform100Au": 0.783,
+      "category": 3,
+      "comment": "Downwind"
+    },
+    {
+      "longitudeDeg": 105.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 230.0,
+          "heliopauseAu": 330.0
+        },
+        "voyager": {
+          "terminationShockAu": 143.0,
+          "heliosheathThicknessAu": 195.0,
+          "heliopauseAu": 338.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 126.0,
+          "heliosheathThicknessAu": 210.0,
+          "heliopauseAu": 336.0
+        }
+      },
+      "correlationUniform100Au": 0.903,
+      "category": 3,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 135.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 115.0,
+          "heliopauseAu": 215.0
+        },
+        "voyager": {
+          "terminationShockAu": 124.0,
+          "heliosheathThicknessAu": 100.0,
+          "heliopauseAu": 224.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 121.0,
+          "heliosheathThicknessAu": 105.0,
+          "heliopauseAu": 226.0
+        }
+      },
+      "correlationUniform100Au": 0.749,
+      "category": 4,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 165.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 70.0,
+          "heliopauseAu": 170.0
+        },
+        "voyager": {
+          "terminationShockAu": 106.0,
+          "heliosheathThicknessAu": 70.0,
+          "heliopauseAu": 176.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 111.0,
+          "heliosheathThicknessAu": 65.0,
+          "heliopauseAu": 176.0
+        }
+      },
+      "correlationUniform100Au": 0.45,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -165.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 180.0
+        },
+        "voyager": {
+          "terminationShockAu": 94.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 174.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 99.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 179.0
+        }
+      },
+      "correlationUniform100Au": 0.809,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -135.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 140.0
+        },
+        "voyager": {
+          "terminationShockAu": 89.0,
+          "heliosheathThicknessAu": 50.0,
+          "heliopauseAu": 139.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 90.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 135.0
+        }
+      },
+      "correlationUniform100Au": 0.903,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -105.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 135.0
+        },
+        "voyager": {
+          "terminationShockAu": 91.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 136.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 86.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 131.0
+        }
+      },
+      "correlationUniform100Au": 0.944,
+      "category": 1,
+      "comment": "V1"
+    },
+    {
+      "longitudeDeg": -75.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 140.0
+        },
+        "voyager": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 135.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 86.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 131.0
+        }
+      },
+      "correlationUniform100Au": 0.941,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -45.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 50.0,
+          "heliopauseAu": 150.0
+        },
+        "voyager": {
+          "terminationShockAu": 116.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 151.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 92.0,
+          "heliosheathThicknessAu": 60.0,
+          "heliopauseAu": 152.0
+        }
+      },
+      "correlationUniform100Au": 0.938,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -15.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 60.0,
+          "heliopauseAu": 160.0
+        },
+        "voyager": {
+          "terminationShockAu": 135.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 170.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 103.0,
+          "heliosheathThicknessAu": 60.0,
+          "heliopauseAu": 163.0
+        }
+      },
+      "correlationUniform100Au": 0.774,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 15.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 110.0,
+          "heliopauseAu": 210.0
+        },
+        "voyager": {
+          "terminationShockAu": 152.0,
+          "heliosheathThicknessAu": 95.0,
+          "heliopauseAu": 247.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 116.0,
+          "heliosheathThicknessAu": 105.0,
+          "heliopauseAu": 221.0
+        }
+      },
+      "correlationUniform100Au": 0.76,
+      "category": 4,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 45.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 230.0,
+          "heliopauseAu": 330.0
+        },
+        "voyager": {
+          "terminationShockAu": 160.0,
+          "heliosheathThicknessAu": 175.0,
+          "heliopauseAu": 335.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 125.0,
+          "heliosheathThicknessAu": 210.0,
+          "heliopauseAu": 335.0
+        }
+      },
+      "correlationUniform100Au": 0.864,
+      "category": 3,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 75.0,
+      "latitudeDeg": 30.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 230.0,
+          "heliopauseAu": 330.0
+        },
+        "voyager": {
+          "terminationShockAu": 156.0,
+          "heliosheathThicknessAu": 180.0,
+          "heliopauseAu": 336.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 127.0,
+          "heliosheathThicknessAu": 195.0,
+          "heliopauseAu": 322.0
+        }
+      },
+      "correlationUniform100Au": 0.866,
+      "category": 3,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 91.0,
+      "latitudeDeg": 62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 85.0,
+          "heliopauseAu": 185.0
+        },
+        "voyager": {
+          "terminationShockAu": 146.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 191.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 120.0,
+          "heliosheathThicknessAu": 65.0,
+          "heliopauseAu": 185.0
+        }
+      },
+      "correlationUniform100Au": 0.3,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 129.0,
+      "latitudeDeg": 62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 85.0,
+          "heliopauseAu": 185.0
+        },
+        "voyager": {
+          "terminationShockAu": 134.0,
+          "heliosheathThicknessAu": 50.0,
+          "heliopauseAu": 184.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 116.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 191.0
+        }
+      },
+      "correlationUniform100Au": 0.317,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 171.0,
+      "latitudeDeg": 62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 180.0
+        },
+        "voyager": {
+          "terminationShockAu": 120.0,
+          "heliosheathThicknessAu": 70.0,
+          "heliopauseAu": 190.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 107.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 182.0
+        }
+      },
+      "correlationUniform100Au": 0.602,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -147.0,
+      "latitudeDeg": 62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 80.0,
+          "heliopauseAu": 180.0
+        },
+        "voyager": {
+          "terminationShockAu": 112.0,
+          "heliosheathThicknessAu": 70.0,
+          "heliopauseAu": 182.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 99.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 174.0
+        }
+      },
+      "correlationUniform100Au": 0.795,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -105.0,
+      "latitudeDeg": 62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 45.0,
+          "heliopauseAu": 145.0
+        },
+        "voyager": {
+          "terminationShockAu": 112.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 147.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 95.0,
+          "heliosheathThicknessAu": 50.0,
+          "heliopauseAu": 145.0
+        }
+      },
+      "correlationUniform100Au": 0.835,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -63.0,
+      "latitudeDeg": 62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 50.0,
+          "heliopauseAu": 150.0
+        },
+        "voyager": {
+          "terminationShockAu": 122.0,
+          "heliosheathThicknessAu": 30.0,
+          "heliopauseAu": 152.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 97.0,
+          "heliosheathThicknessAu": 50.0,
+          "heliopauseAu": 147.0
+        }
+      },
+      "correlationUniform100Au": 0.836,
+      "category": 1,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": -21.0,
+      "latitudeDeg": 62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 65.0,
+          "heliopauseAu": 165.0
+        },
+        "voyager": {
+          "terminationShockAu": 136.0,
+          "heliosheathThicknessAu": 35.0,
+          "heliopauseAu": 171.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 105.0,
+          "heliosheathThicknessAu": 60.0,
+          "heliopauseAu": 165.0
+        }
+      },
+      "correlationUniform100Au": 0.666,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 21.0,
+      "latitudeDeg": 62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 175.0
+        },
+        "voyager": {
+          "terminationShockAu": 148.0,
+          "heliosheathThicknessAu": 50.0,
+          "heliopauseAu": 198.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 114.0,
+          "heliosheathThicknessAu": 70.0,
+          "heliopauseAu": 184.0
+        }
+      },
+      "correlationUniform100Au": 0.462,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 58.0,
+      "latitudeDeg": 62.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 85.0,
+          "heliopauseAu": 185.0
+        },
+        "voyager": {
+          "terminationShockAu": 151.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 191.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 119.0,
+          "heliosheathThicknessAu": 65.0,
+          "heliopauseAu": 184.0
+        }
+      },
+      "correlationUniform100Au": 0.395,
+      "category": 2,
+      "comment": ""
+    },
+    {
+      "longitudeDeg": 0.0,
+      "latitudeDeg": 85.0,
+      "models": {
+        "uniform100Au": {
+          "terminationShockAu": 100.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 175.0
+        },
+        "voyager": {
+          "terminationShockAu": 135.0,
+          "heliosheathThicknessAu": 40.0,
+          "heliopauseAu": 175.0
+        },
+        "zirnsteinHeerikhuisen": {
+          "terminationShockAu": 107.0,
+          "heliosheathThicknessAu": 75.0,
+          "heliopauseAu": 182.0
+        }
+      },
+      "correlationUniform100Au": 0.646,
+      "category": 2,
+      "comment": "North Pole"
+    }
+  ],
+  "tailSoundingLimitGridIndices": [
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      9,
+      3
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      10,
+      3
+    ],
+    [
+      10,
+      4
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      11,
+      4
+    ],
+    [
+      12,
+      2
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      12,
+      4
+    ]
+  ]
+}

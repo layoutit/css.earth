@@ -139,7 +139,7 @@ export function retainedPresentationFixture(definition, { failAtElement = null }
       contains(child) { return child === this || this.children.some(node => node.contains(child)); },
       closest(selector) { return this.className.split(/\s+/).includes(selector.slice(1)) ? this : this.parentNode?.closest(selector) ?? null; },
       animate(keyframes, options) {
-        const animation = { keyframes, options, currentTime: null, playbackRate: 1, playState: "running",
+        const animation = { keyframes, options, effect: { updateTiming(next) { Object.assign(options, next); } }, currentTime: null, playbackRate: 1, playState: "running",
           play() { this.playState = "running"; }, pause() { this.playState = "paused"; },
           cancel() { this.playState = "idle"; } };
         animations.push(animation); return animation;

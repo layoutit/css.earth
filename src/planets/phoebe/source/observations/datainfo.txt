@@ -1,0 +1,79 @@
+PDS_VERSION_ID                = PDS3
+RECORD_TYPE                   = STREAM
+OBJECT                        = TEXT
+  PUBLICATION_DATE            = 2006-04-01
+  NOTE                        = "Description of the data directory 
+                                 contents for this Cassini ISS Cartographic
+                                 Map Volume."
+END_OBJECT                    = TEXT
+END
+ 
+ 
+                   DATA Directory Contents
+
+
+This data directory contains the cartographic map sheets, the processed tile 
+images used to create the cartographic map sheets, and a simple cyclindrical 
+global mosaic image.
+
+The full cartographic mapping product for a particular target body is 
+composed of one or more cartographic map sheets.  These map sheets are 
+stored in PDF format and are located in the /maps/ subdirectory here.  
+
+A map sheet will contain one or more images of different projections of the 
+body.  These images are stored in PDS VICAR image format and are located in
+the /images/ subdirectory.  The full simple cyclindrical global mosaic image 
+is also stored here.
+
+(see aareadme.txt for information on file formats)
+
+
+
+The filenaming convention for the cartographic map sheets reveals their 
+contents and is defined as follows:
+
+  [satellite abbr]_[scale]_[center lat]_[center lon]_SMN.PDF
+
+  where:
+
+    [satellite abbr] = 2-letter abbreviation for the target body
+    [scale] = image scale given in thousands (K) or millions (M) of meters
+    [center lat] = latitude at the center point of the image
+    [center lon] = longitude at the center point of the image
+
+  examples:
+
+    SE_500K_44N_225W_SMN.PDF (Saturn/Enceladus map sheet centered at 44
+      degrees North latitude and 225 degrees West longitude, taken at 500 
+      kilometers resolution)
+
+    SP_1M_0_0_SMN.PDF (Saturn/Phoebe map sheet centered at the equator 
+      and 0 degrees West longitude taken at 1 million meters resolution)
+
+
+
+The filenaming convention for the tile images reveals their contents and is 
+defined as follows:
+
+  [satellite abbr]_[scale]_[center lat]_[center lon]_[type].IMG
+
+  where:
+
+    [satellite abbr] = 2-letter abbreviation for the target body
+    [scale] = image scale given in thousands (K) or millions (M) of meters
+    [center lat] = latitude at the center point of the image
+    [center lon] = longitude at the center point of the image
+    [type] = projection type (MERCATOR, LAMBERT, STEREO, or SIMP)
+
+  examples:
+
+    SE_500K_43N_135W_LAMBERT.IMG (Saturn/Enceladus tile using Lambert 
+      projection centered at 43 degrees North latitude and 135 degrees West 
+      longitude, taken at 500 kilometers resolution)
+
+    SP_1M_90N_0_STEREO.IMG (Saturn/Phoebe tile using Stereo-graphic 
+      projection centered at the north pole taken at 1 million meters 
+      resolution)
+
+
+

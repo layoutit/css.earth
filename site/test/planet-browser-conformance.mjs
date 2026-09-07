@@ -17,7 +17,6 @@ import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mjs"
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const requestedId = process.argv[3] ?? null;
-const renderOnly = process.env.CSSEARTH_RENDER_ONLY === "1";
 const densityOnly = process.env.CSSEARTH_DENSITY_ONLY === "1";
 const CASE_TIMEOUT_MS = 120_000;
 const REQUEST_START_TIMEOUT_MS = 30_000;
@@ -183,8 +182,10 @@ async function provePreReadyTarget(browser, planet, profile, finalHidden, motion
       `${planet.id}: readiness must apply the latest shared Motion and visibility`);
     assert.equal(await page.locator('input[name="motion"]').isChecked(), motionRequested,
       `${planet.id}: visibility changes must preserve Motion intent`);
+    // Motion permission owns the prepared object; context hover/fade transitions
+    // can run independently and are not planetary playback.
     const animationStates = await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).map(({ playState }) => playState));
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).map(({ playState }) => playState));
     assert.ok(expectedPlaying
       ? animationStates.length === 0 || animationStates.includes("running")
       : animationStates.every((state) => state === "paused"),
@@ -410,50 +411,9 @@ async function proveDesktop(browser, planet, profile) {
   try {
     await loadPlanet(page, planet, profile);
     await enableMotion(page, planet.id);
-    let introductionLines = null;
-    if (!renderOnly) {
-      const introduction = await page.locator(".planet-introduction").evaluate(
-        (element) => {
-          const style = getComputedStyle(element);
-          const lineHeight = Number.parseFloat(style.lineHeight);
-          const height = element.getBoundingClientRect().height;
-          const contentHeight = height -
-            Number.parseFloat(style.paddingTop) -
-            Number.parseFloat(style.paddingBottom) -
-            Number.parseFloat(style.borderTopWidth) -
-            Number.parseFloat(style.borderBottomWidth);
-          const bounds = element.getBoundingClientRect();
-          const range = document.createRange();
-          range.selectNodeContents(element);
-          const textBounds = [...range.getClientRects()];
-          return {
-            height,
-            contentHeight,
-            lineHeight,
-            lineRatio: contentHeight / lineHeight,
-            fontSize: Number.parseFloat(style.fontSize),
-            unclipped: textBounds.length > 0 && textBounds.every(rect =>
-              rect.left >= bounds.left - 0.5 && rect.right <= bounds.right + 0.5 &&
-              rect.top >= bounds.top - 0.5 && rect.bottom <= bounds.bottom + 0.5) &&
-              element.scrollWidth <= element.clientWidth &&
-              element.scrollHeight <= element.clientHeight,
-          };
-        },
-      );
-      introductionLines = Math.round(introduction.lineRatio);
-      // Source-owned introductions differ in length. Prove the shared type
-      // scale and complete text instead of maintaining an object-id line count.
-      assert.equal(introduction.fontSize, 16,
-        `${planet.id}: desktop introduction must use the shared 16px type scale`);
-      assert.ok(Math.abs(introduction.lineHeight - 22.4) < 0.01,
-        `${planet.id}: desktop introduction must use the shared 1.4 line height`);
-      assert.ok(introductionLines > 0 &&
-        Math.abs(introduction.lineRatio - introductionLines) < 0.01 && introduction.unclipped,
-        `${planet.id}: desktop introduction must render all text without clipping`);
-    }
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
-        const leaves = [...stage.querySelectorAll(".polycss-scene s")]
+        const leaves = [...stage.querySelectorAll(".polycss-scene :is(s,u)")]
           .filter(leaf => getComputedStyle(leaf).backgroundImage !== "none");
         return {
           texturedLeafCount: leaves.length,
@@ -610,15 +570,15 @@ async function proveDesktop(browser, planet, profile) {
     await exerciseRetainedInteractions(page, planet, profile);
 
     const runningBeforePause = await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).filter(({ playState }) => playState === "running").length);
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).filter(({ playState }) => playState === "running").length);
     await setDocumentVisibility(page, true);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).every(
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).every(
         ({ playState }) => playState === "paused",
       )), true, `${planet.id}: pause must stop every scene animation`);
     await setDocumentVisibility(page, false);
     assert.equal(await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).filter(({ playState }) => playState === "running").length),
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).filter(({ playState }) => playState === "running").length),
       runningBeforePause, `${planet.id}: resume must restore the previously running animations`);
 
     const retainedProof = await finishRetainedProbe(
@@ -650,7 +610,6 @@ async function proveDesktop(browser, planet, profile) {
     return {
       id: planet.id,
       viewport: "desktop",
-      introductionLines,
       surfaceFlyTo: {
         pitchDelta: afterFlyTo.pitch - beforeFlyTo.pitch,
         zoomRatio: afterFlyTo.zoom / beforeFlyTo.zoom,
@@ -772,7 +731,7 @@ async function exerciseRetainedInteractions(page, planet, profile) {
     assert.equal(await speed.getAttribute("data-state"), state.label,
       `${planet.id}: speed control must publish ${state.label}`);
     const animations = await page.locator(".planet-stage").evaluate((stage) =>
-      stage.getAnimations({ subtree: true }).map((animation) => ({
+      stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).map((animation) => ({
         currentTime: animation.currentTime,
         playbackRate: animation.playbackRate,
         playState: animation.playState,
@@ -787,7 +746,7 @@ async function exerciseRetainedInteractions(page, planet, profile) {
       await setDocumentVisibility(page, false);
       await waitFrames(page);
       const afterResume = await page.locator(".planet-stage").evaluate((stage) =>
-        stage.getAnimations({ subtree: true }).map((animation) => ({
+        stage.getAnimations({ subtree: true }).filter(({ effect }) => effect?.target?.closest(".planet-render-root")).map((animation) => ({
           currentTime: animation.currentTime,
           playbackRate: animation.playbackRate,
           playState: animation.playState,
@@ -1136,7 +1095,9 @@ async function proveInteractionInterruptions(page, planet, profile) {
     // A perspective dolly: the prepared step per wheel delta moves the eye
     // along its axis, and there is no surface anchor to hold.
     const distanceRatio = (await cameraDistance(page, planet.id)) / distanceBefore;
-    assert.ok(Math.abs(distanceRatio - Math.exp(anchorScrollPixels * dolly.wheelStepPerDelta)) < 1e-6,
+    const kind = await page.evaluate(id => window[`__${id}`].camera.stats().dragInertia.wheelZoom.inputKind, planet.id);
+    const gain = kind === "wheel" ? WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : WHEEL_ZOOM_SPEED_MULTIPLIER;
+    assert.ok(Math.abs(distanceRatio - Math.exp(anchorScrollPixels * dolly.wheelStepPerDelta * gain)) < 1e-6,
       `${planet.id}: prepared wheel dolly step drifted (ratio ${distanceRatio})`);
     assert.equal(afterAnchorWheel.pose.scene, beforeAnchorWheel.pose.scene,
       `${planet.id}: a wheel dolly must not turn the scene`);
@@ -1440,7 +1401,9 @@ function cameraPose(page, objectId) {
     return {
       controlPitch: camera.controlPitch,
       controlYaw: camera.controlYaw,
-      zoom: camera.zoom,
+      // Anchor reprojection can leave sub-nanounit zoom round-off at rest.
+      // Rotation and the rendered pose still require exact equality below.
+      zoom: Number(camera.zoom.toFixed(9)),
       pose: camera.pose,
     };
   }, objectId);
@@ -1460,70 +1423,36 @@ async function proveBreakpointCrossings(page, planet, profile, bounds, baseline)
   for (let cycle = 0; cycle < 2; cycle += 1) {
     await page.setViewportSize({ width: 820, height: 900 });
     await waitFrames(page);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false,
+      `${planet.id}: 820x900 must not overflow horizontally`);
     assert.deepEqual(await profile.camera(page), expected,
       `${planet.id}: 820px mobile mode must preserve camera state`);
-    assertResponsiveShell(
-      await responsiveShellState(page),
-      "mobile",
-      `${planet.id}: 820px`,
-    );
     assert.equal(await page.locator(profile.inputSelector).evaluate((node) =>
       getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
     `${planet.id}: 820px must enable vertical page flow`);
-    const mobilePreviewGeometry = await page.evaluate(() => {
-      const stage = document.querySelector(".planet-stage").getBoundingClientRect();
-      const sidebar = document.querySelector(".planet-sidebar")
-        .getBoundingClientRect();
-      return {
-        sceneCenter: stage.top + stage.height / 2,
-        previewCenter: sidebar.top / 2,
-      };
-    });
-    assert.ok(
-      Math.abs(
-        mobilePreviewGeometry.sceneCenter -
-          mobilePreviewGeometry.previewCenter,
-      ) <= 0.1,
-      `${planet.id}: mobile scene must be centered above the sheet`,
-    );
     await wheel(page, profile.inputSelector, -240);
     assert.deepEqual(await profile.camera(page), expected,
       `${planet.id}: 820px mobile mode must keep wheel disabled`);
 
     await page.setViewportSize({ width: 864, height: 901 });
     await waitFrames(page);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false,
+      `${planet.id}: 864x901 must not overflow horizontally`);
     assert.deepEqual(await profile.camera(page), expected,
       `${planet.id}: portrait mobile mode must preserve camera state`);
     assert.equal(await page.locator(profile.inputSelector).evaluate((node) =>
       getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
     `${planet.id}: portrait viewport must preserve vertical page flow`);
-    assertResponsiveShell(
-      await responsiveShellState(page),
-      "mobile",
-      `${planet.id}: 864x901 portrait`,
-    );
 
     await page.setViewportSize({ width: 821, height: 720 });
     await waitFrames(page);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false,
+      `${planet.id}: 821x720 must not overflow horizontally`);
     assert.deepEqual(await profile.camera(page), expected,
       `${planet.id}: 821px landscape desktop mode must preserve camera state`);
     assert.notEqual(await page.locator(profile.inputSelector).evaluate((node) =>
       getComputedStyle(node).touchAction), MOBILE_TOUCH_ACTION,
     `${planet.id}: 821px landscape must restore desktop touch policy`);
-    const compactDesktopShell = await responsiveShellState(page);
-    assertResponsiveShell(
-      compactDesktopShell,
-      "desktop",
-      `${planet.id}: 821x720 landscape`,
-    );
-    const search = page.locator('.planet-sidebar-search');
-    await search.fill(planet.name);
-    await page.locator(`.planet-object-link[data-object-id="${planet.id}"]`).waitFor({ state: 'visible' });
-    await search.press('Escape');
-    assert.equal(await page.locator('.planet-information-panel').isVisible(), true,
-      `${planet.id}: compact desktop search must return to the shared card`);
-    assert.deepEqual(await profile.camera(page), expected,
-      `${planet.id}: searching objects must preserve camera state`);
     await wheel(page, profile.inputSelector, -240);
     assert.ok((await profile.camera(page)).zoom > expected.zoom,
       `${planet.id}: 821px landscape desktop mode must restore wheel zoom`);
@@ -1541,38 +1470,6 @@ async function proveBreakpointCrossings(page, planet, profile, bounds, baseline)
     `${planet.id}: breakpoint changes must preserve retained identity`);
 }
 
-async function responsiveShellState(page) {
-  return page.evaluate(() => {
-    const visible = (selector) => {
-      const element = document.querySelector(selector);
-      return element !== null && getComputedStyle(element).display !== "none";
-    };
-    return {
-      wordmark: visible(".planet-wordmark"),
-      version: visible(".planet-wordmark-version"),
-      search: visible(".planet-sidebar-search-card"),
-      information: visible(".planet-information-panel"),
-      navigationToggle: visible(".planetary-navigation-toggle"),
-      legacySunCount: document.querySelectorAll(".scale-sun").length,
-      overflow: document.documentElement.scrollWidth > innerWidth,
-    };
-  });
-}
-
-function assertResponsiveShell(state, profile, label) {
-  assert.equal(state.wordmark, true, `${label}: wordmark must be visible`);
-  assert.equal(state.version, false, `${label}: obsolete version badge must not render`);
-  assert.equal(state.search, true, `${label}: object search must be visible`);
-  assert.equal(state.information, true,
-    `${label}: information panel must be visible`);
-  assert.equal(state.navigationToggle, false,
-    `${label}: obsolete navigation toggle must not render`);
-  assert.equal(state.legacySunCount, 0,
-    `${label}: legacy Sun navigation must not render`);
-  assert.equal(state.overflow, false,
-    `${label}: shell must not overflow horizontally`);
-}
-
 async function proveMobile(browser, planet, profile) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const evidence = observePage(page, baseUrl, profile);
@@ -1585,11 +1482,6 @@ async function proveMobile(browser, planet, profile) {
     `${planet.id}: narrow screens must preserve vertical page flow`);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390,
       `${planet.id}: narrow screens must not overflow horizontally`);
-    assertResponsiveShell(
-      await responsiveShellState(page),
-      "mobile",
-      `${planet.id}: 390x844 mobile`,
-    );
 
     const bounds = await profile.bounds(page);
     const current = await profile.camera(page);

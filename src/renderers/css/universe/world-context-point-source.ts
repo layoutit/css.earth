@@ -65,9 +65,14 @@ export function worldContextPointAppearance(plan: PreparedWorldContext, field: P
   const gain = worldContextPointSourceGain(camera.distanceM, plan);
   const detail = publication.selectedDetail === true ? worldContextPointSourceFade(diameterPx, plan) : 1;
   const opacity = clamp(publication.opacity ?? 1) * detail;
-  const physicalRadiusPx = Number.isFinite(diameterPx) ? diameterPx / (2 * field.atlas.haloRadii) : 0;
-  return Object.freeze({ x: centre[0], y: centre[1], diameterPx, magnitude: light.magnitude, radiusPx: Math.max(light.radiusPx * gain.radius, physicalRadiusPx),
-    luminance: Math.min(1, light.luminance * gain.brightness),
+  // The atlas radius describes its bright core; its halo extends beyond that.
+  // Combine the projected disc and optical spread smoothly instead of fitting
+  // the whole halo inside the physical photosphere.
+  const physicalRadiusPx = Number.isFinite(diameterPx) ? diameterPx / 2 : 0;
+  const radiusPx = Math.max(field.photometry.minimumRadiusPx, Math.hypot(physicalRadiusPx, light.radiusPx * gain.radius));
+  return Object.freeze({ x: centre[0], y: centre[1], diameterPx, magnitude: light.magnitude, radiusPx,
+    // The focus also serves as a navigation landmark once its physical light is too faint.
+    luminance: Math.max(.65 * worldContextPointSourceFade(diameterPx, plan), Math.min(1, light.luminance * gain.brightness)),
     opacity, colorIndex: nearestAtlasColor(source.color, field.atlas.colors) });
 }
 

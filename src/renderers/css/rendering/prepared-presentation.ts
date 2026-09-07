@@ -1,4 +1,7 @@
 import { createPreparedTextureOverlay, type PreparedTextureSlot } from './prepared-texture-overlay.js';
+import { buildPreparedTree, type PreparedTreeLease } from './prepared-tree.js';
+import { bindPreparedSurfaceHit, type PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
+import { createPreparedFacing, type PreparedFacingPlane } from './prepared-facing.js';
 import type { ObjectSelection } from "../runtime/object-contract.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand } from "./prepared-material.js";
 import type { PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
@@ -39,6 +42,10 @@ export interface PreparedPresentationDefinition {
   camera: Parameters<typeof preparedScenePitch>[1]; tree: PreparedTree; variants: readonly PreparedVariant[]; materials: readonly PreparedMaterialTrack[];
   resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[]; pageLayers?: readonly PreparedPageLayer[];
   animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
+  /** Authored infinite motion, resolved from source CSS during preparation. */
+  motion?: readonly { target: number; id: string; keyframes: { offset: number; transform: string }[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
+  facing?: readonly PreparedFacingPlane[];
+  surfaceHit?: PreparedSurfaceHit;
 }
 export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; }
 export interface PreparedPresentationContext { own(cleanup: () => void): unknown; registerAnimation(animation: Animation, options: PreparedAnimationOptions): unknown; seekAnimation(animation: Animation, time: number): void; }
@@ -54,11 +61,12 @@ export function selectedPreparedVariant(definition: PreparedPresentationDefiniti
   if (!variant) throw new TypeError("The selected presentation was not prepared.");
   return variant;
 }
-export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view }: { selection: ObjectSelection; view: PreparedView; previousPlan?: PreparedPresentationPlan | null }): PreparedPresentationPlan {
+export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view }: { selection: ObjectSelection; view: import('./prepared-material.js').PreparedMaterialView | null; previousPlan?: PreparedPresentationPlan | null }): PreparedPresentationPlan {
   const variant = selectedPreparedVariant(definition, selection);
   const required = new Set(definition.resourceOrder === "materials-first" ? [] : variant.required);
   const prewarm = new Set<string>(), materials: Record<string, PreparedMaterialDemand> = {};
   for (const selected of variant.materials) {
+    if (!view) throw new TypeError('Prepared material demand requires a view.');
     const track = definition.materials.find(track => track.id === selected.track);
     if (!track) throw new TypeError(`Unprepared material track: ${selected.track}.`);
     const state = resolvePreparedMaterialDemand(track, selected, view);
@@ -88,24 +96,9 @@ function writeStyle(element: HTMLElement, name: string, value: string) {
 
 // No geometry, atlas addressing, band grouping, source conversion, or package
 // callbacks enter this builder. The ordered records are final prepared DOM.
-export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition) {
-  const document = stage.ownerDocument, nodes: HTMLElement[] = [], roots: HTMLElement[] = [];
-  for (const record of definition.tree.nodes) {
-    const node = document.createElement(record.tag);
-    nodes.push(node);
-    if (record.parent === -1) { roots.push(node); context.own(() => node.remove()); }
-    if (record.className !== null) node.className = record.className;
-    if (record.style) node.style.cssText = record.style;
-    // Keep property assignment distinct from cssText. Chrome's numeric CSS
-    // parser can otherwise change the original prepared matrix precision.
-    for (const propertyId of record.properties) {
-      const property = definition.tree.properties[propertyId];
-      if (property.custom) node.style.setProperty(property.name, property.value);
-      else writePreparedStyle(node.style, property.name, property.value);
-    }
-    for (const [name, value] of Object.entries(record.attributes)) node.setAttribute(name, value);
-    if (record.parent !== -1) nodes[record.parent].appendChild(node);
-  }
+export function mountPreparedPresentation(stage: HTMLElement, context: PreparedPresentationContext, definition: PreparedPresentationDefinition, preparedTree?: PreparedTreeLease, initialProjection?: import('./physical-projection.js').PhysicalProjection) {
+  const { nodes, roots } = preparedTree ? preparedTree.claim(definition.tree, stage.ownerDocument, context.own)
+    : buildPreparedTree(definition.tree, stage.ownerDocument, context.own);
   const cameraElement = nodes[definition.tree.camera], sceneElement = nodes[definition.tree.scene];
   const owned = () => roots.some(root => root.parentNode === stage);
   const stageBindings = new Map<string, PreparedWrite>();
@@ -126,6 +119,17 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     const previous = stage.classList.contains(name);
     context.own(() => { if (owned()) stage.classList.toggle(name, previous); });
   }
+  const publishFacing = createPreparedFacing(definition.facing ?? [], nodes);
+  if (initialProjection) publishFacing(initialProjection);
+  // Disable CSS-owned motion before attachment. Prepared handles below own its
+  // clock, pause state and disposal without forcing live style discovery.
+  for (const plan of definition.motion ?? []) nodes[plan.target].style.animation = 'none';
+  const motion = (definition.motion ?? []).map(plan => {
+    const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, iterations: Infinity, easing: 'linear', fill: 'both' });
+    animation.id = plan.id;
+    context.registerAnimation(animation, { mode: 'motion', initialTime: 0 });
+    return { animation, plan, duration: plan.duration };
+  });
   // Presentation owns only its prepared roots; application context siblings survive a detail handoff.
   for (const root of roots) stage.appendChild(root);
   if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
@@ -145,6 +149,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const observationSurface = definition.observationSurface ? createPreparedTextureOverlay(definition.observationSurface.slots, nodes) : null;
   return Object.freeze({
     ...(observationSurface ? { observationSurface } : {}), cameraElement, sceneElement,
+    ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
       carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),
@@ -166,9 +171,17 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
           styleWrites++;
         }
       }
+      for (const entry of motion) {
+        const duration = entry.plan.timings.find(timing => Object.entries(timing.when).every(([name, value]) => selection[name] === value))?.duration ?? entry.plan.duration;
+        if (duration !== entry.duration) {
+          (entry.animation.effect as KeyframeEffect).updateTiming({ duration });
+          entry.duration = duration;
+        }
+      }
       selectionPublications++;
     },
     publishFrame({ selection, view, resources, plan }: PreparedFramePublication) {
+      publishFacing(view.projection);
       // The camera's published level of detail (a perspective dolly, see
       // perspective-dolly.mjs); before its first publication the geometry
       // stage applies.

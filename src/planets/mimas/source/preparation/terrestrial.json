@@ -38,7 +38,7 @@
         "format": "geotiff",
         "path": "observations/mimas_radius_g.tif",
         "description": "Cassini terrain model · shaded relief",
-        "title": "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The displayed geometry remains spherical.",
+        "title": "Color shows radial height above the PDS 198.2 km reference sphere, including Mimas’s broad oval shape. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate directional lighting. Cassini SPC terrain model, 2025 release, about 560 m grid spacing. Gray grid marks areas outside the supplied raster; no terrain is invented. The surface follows a simplified version of the released 2025 shape model.",
         "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
         "minimum": -12.5,
         "maximum": 12.5,
@@ -107,7 +107,23 @@
       "defaultControlYawDegrees": 0
     },
     "mapUrl": "/scenes/mimas/mimas-normal-surface@2x.webp",
-    "polesUrl": "/scenes/mimas/mimas-normal-poles@2x.webp"
+    "polesUrl": "/scenes/mimas/mimas-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/mimas_128_o.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 98306,
+        "expectedFaces": 196608
+      },
+      "faceBudget": 2000,
+      "tileSize": 256,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 720,
+        "maximumErrorMeters": 4000
+      }
+    }
   },
   "celestial": {
     "sunSource": "JPL Mimas orbit plus VSOP87 Saturn position and IAU/WGCCRE Mimas rotation"

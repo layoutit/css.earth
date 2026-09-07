@@ -1,38 +1,33 @@
 ---
-import { PLANET_SEARCH_OBJECTS, objectClassificationLabel } from "../planet-search-objects.mjs";
-import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
+import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
+import preparedWorld from "../../src/planets/sun/prepared/world-context.json";
+import PlanetObjectResult from "./PlanetObjectResult.astro";
+import PlanetAccordion from './PlanetAccordion.astro';
 
 interface Props {
   activeObjectId?: string;
 }
 
 const { activeObjectId } = Astro.props;
+// Group registered destinations once at build time. Prepared parents describe
+// moons without duplicating them inside the planet rows.
+const parents = new Map(preparedWorld.bodies.map(body => [body.id, body.orbit?.centerBodyId]));
+const names = new Map(PLANET_SEARCH_OBJECTS.map(object => [object.id, object.name]));
+const types = new Map([
+  ['planet', 'Planets'], ['satellite', 'Moons'], ['dwarf-planet', 'Dwarf planets'],
+  ['star', 'Stars'], ['asteroid', 'Asteroids'],
+]);
+for (const object of PLANET_SEARCH_OBJECTS) if (!types.has(object.classification)) {
+  types.set(object.classification, object.classification.replaceAll('-', ' ') + 's');
+}
+const groups = [...types].map(([type, label]) => ({ type, label,
+  objects: PLANET_SEARCH_OBJECTS.filter(object => object.classification === type),
+})).filter(group => group.objects.length > 0);
 ---
 
-<ul class="planet-object-list">
-  {PLANET_SEARCH_OBJECTS.map((object) => (
-    <li class="planet-object-item" data-object-name={object.name.toLocaleLowerCase("en")}
-      data-object-system-name={object.systemName.toLocaleLowerCase("en")}
-      data-object-classification={object.classification}
-      data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase("en")}>
-      <a
-        class:list={["planet-object-link", { "is-active": object.id === activeObjectId }]}
-        href={object.route}
-        data-object-id={object.id}
-        aria-current={object.id === activeObjectId ? "page" : undefined}
-      >
-        <PlanetNavigationMarker
-          planetId={object.id}
-          color={object.color}
-        />
-        <span class="planet-object-name">{object.name}</span>
-        <span class="planet-object-distance">
-          {object.classification === "star" && object.distanceAu === 0 ? "Our star" : <>
-            <span class="planet-object-distance-value">{object.distanceAu}</span>{" "}
-            <span class="planet-object-distance-unit">AU</span>
-          </>}
-        </span>
-      </a>
-    </li>
-  ))}
-</ul>
+{groups.map(group => <PlanetAccordion name="solar-system-object-types" title={group.label} count={group.objects.length} data-object-type-group={group.type} open={group.type === 'planet'}>
+  <ul class="planet-object-list">
+    {group.objects.map(object => <PlanetObjectResult object={object} activeObjectId={activeObjectId}
+      detail={object.classification === 'satellite' ? names.get(parents.get(object.id)) : undefined} />)}
+  </ul>
+</PlanetAccordion>)}

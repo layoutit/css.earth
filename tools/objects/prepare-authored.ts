@@ -126,6 +126,12 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
     return Object.freeze({ descriptor, sources, ...prepared });
   }
+  if (source(sources, 'shape-model')) {
+    const { prepareShapeModel } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/shape-model/index.mjs')).href);
+    const prepared = await prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
+    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, manifestPath: resolve(outputDirectory, 'runtime-assets.json'), allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
+    return Object.freeze({ descriptor, sources, ...prepared });
+  }
   if (source(sources, 'terrestrial')) {
     const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mjs')).href) as typeof import('./terrestrial-layers/index.mjs');
     const prepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,

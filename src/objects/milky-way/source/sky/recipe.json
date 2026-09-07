@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-sky-recipe@1",
+  "source": {
+    "format": "rgb16f-le-zstd-rows",
+    "width": 8192,
+    "height": 4096,
+    "decodedSha256": "aaa66125271df3d95b857bbbafcb0c7055a58372ff173c1f98af1a0778c5b0f6",
+    "chunks": [
+      {
+        "path": "linear-rgb16f-0.zst",
+        "sha256": "27600bf0acb36ae9b59b849a85b3cd7fa808e0144b95d18078b41aeb6d9e09a5",
+        "firstRow": 0,
+        "rows": 2048
+      },
+      {
+        "path": "linear-rgb16f-1.zst",
+        "sha256": "1f56ae3f8c8f70c67787336d2bee3f7d39a39c9c854d4e02e3855744c0fe0a06",
+        "firstRow": 2048,
+        "rows": 2048
+      }
+    ],
+    "acquisition": {
+      "path": "acquisition.json",
+      "sha256": "a4a91710964507825f8561fa7b8e28844f6b1d1d01dc5ec7413de52005803d89"
+    }
+  },
+  "projection": {
+    "frame": "icrf-j2000",
+    "mapping": "equirectangular-ra-left",
+    "centerRaDegrees": 0
+  },
+  "bake": {
+    "faceSize": 1536,
+    "exposure": 4.5,
+    "transfer": "linear-to-srgb",
+    "webpQuality": 90,
+    "displayGain": 0.12,
+    "shadowFloor": {
+      "blackPoint": 0.04,
+      "fullSignal": 0.12
+    }
+  },
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "8d14c48db5652af0c75b99fdc7675462720621a64103cee3b2a26819a43f8336"
+  },
+  "parallax": {
+    "originM": [
+      0,
+      0,
+      0
+    ],
+    "radiusM": 6.171355162982735e+20
+  }
+}

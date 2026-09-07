@@ -26,6 +26,6 @@ Focused checks:
 ```sh
 node tools/objects/dist/operations.js verify europa
 node --test tests/objects/unit/europa/*.test.mjs
-node tests/objects/browser/europa/smoke-browser.mjs http://127.0.0.1:4210
+pnpm test:browser http://localhost:4210 europa
 node site/test/planet-browser-conformance.mjs http://127.0.0.1:4210 europa
 ```

@@ -913,7 +913,7 @@ reading path:
 | `src/planets/<id>/runtime/client.mjs` | Decode, mount, camera publication, and object lifecycle integration |
 | `src/platform/cubic-sky-contract.test.mjs` | Contract and direction validation |
 | `src/platform/cubic-sky-preparation.test.mjs` | Pixel-treatment validation |
-| `site/test/smoke-browser.mjs` | Real-browser face, contrast, lifecycle, and retained-DOM checks |
+| `site/test/dom-cleanliness-browser.mjs` | Shared browser scene, navigation, and retained-DOM checks |
 
 Some object packages embed the prepared sky plan inside a larger generated
 scene module instead of keeping it in a separate `preparedStarfield.mjs`. The

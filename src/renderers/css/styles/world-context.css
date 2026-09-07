@@ -1,6 +1,6 @@
 /* Shared presentation for the retained, anonymous point and orbit leaves. */
 .prepared-point-field-stars > s,
-.prepared-world-context > s:not([data-context-body]) {
+.prepared-world-context s:not([data-context-body]) {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -15,8 +15,63 @@
   text-decoration: none;
 }
 
-.prepared-world-context > s:not([data-context-body]) {
+.prepared-world-context s:not([data-context-body]) {
   width: 1px;
-  height: 1px;
-  background: #768394;
+  height: var(--context-line-width, 1px);
+  margin-top: calc(var(--context-line-width, 1px) * -.5);
+  transform-origin: 0 50%;
+  background: var(--shell-text, #dfdfdf);
+  pointer-events: var(--context-orbit-pointer-events, none);
+}
+
+.prepared-world-context [data-context-indicator] {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  box-sizing: content-box;
+  padding: 0;
+  box-shadow: inset 0 0 0 var(--context-line-width, 1px) var(--shell-text, #dfdfdf);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.prepared-world-context [data-context-indicator]::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+}
+
+/* A wider hit corridor across the line, without extending its clipped ends. */
+.context-orbit > s::before {
+  content: '';
+  position: absolute;
+  inset: -7px 0;
+}
+
+.context-orbit > s { cursor: pointer; }
+
+[data-context-group] {
+  --context-line-opacity: var(--context-base-line-opacity, .5);
+  --context-label-opacity: var(--context-base-label-opacity, .65);
+}
+
+[data-context-group]:is([data-object-hovered="true"], :focus-within) {
+  --context-line-opacity: .75;
+  --context-label-opacity: 1;
+}
+
+.context-orbit,
+[data-context-indicator] {
+  transition: opacity 120ms ease;
+}
+
+/* Grow around the same center; the camera's percentage translation accounts
+   for the added padding without changing its position or the stroke width. */
+.prepared-world-context [data-context-indicator] {
+  transition: opacity 120ms ease, padding 120ms ease;
+}
+
+[data-context-group][data-object-hovered="true"] > [data-context-indicator] {
+  padding: 2px;
 }

@@ -38,18 +38,23 @@ try {
       document.documentElement.dataset.playing === "false");
 
     const stage = page.locator(".planet-stage");
-    const initial = await stage.evaluate((element) => ({
-      children: element.childElementCount,
-      descendants: element.querySelectorAll("*").length,
-      canvas: element.querySelectorAll("canvas").length,
-      svg: element.querySelectorAll("svg").length,
-    }));
-    assert.deepEqual(initial, {
-      children: 3,
-      descendants: 917,
-      canvas: 0,
-      svg: 0,
+    const initial = await stage.evaluate((element) => {
+      window.__mercuryProductionNodes = [element, ...element.querySelectorAll("*")];
+      return {
+        retainedNodes: window.__mercuryProductionNodes.length,
+        canvas: element.querySelectorAll("canvas").length,
+        svg: element.querySelectorAll("svg").length,
+        shadows: document.querySelector('input[name="shadows"]').checked,
+        materialMode: element.querySelector(".mercury-material").getAttribute("data-material-mode"),
+      };
     });
+    assert.equal(initial.canvas, 0);
+    assert.equal(initial.svg, 0);
+    const assertRetained = async () => assert.equal(await stage.evaluate((element) => {
+      const nodes = [element, ...element.querySelectorAll("*")];
+      return nodes.length === window.__mercuryProductionNodes.length &&
+        nodes.every((node, index) => node === window.__mercuryProductionNodes[index]);
+    }), true, "Interaction preserves the original scene nodes");
     const startupResources = await page.evaluate(() =>
       performance.getEntriesByType("resource").map(({ name }) => name));
     assert.equal(startupResources.some((url) =>
@@ -78,13 +83,7 @@ try {
       assert.equal(await page.locator(
         `button[name="lens"][value="${lens}"]`,
       ).getAttribute("aria-pressed"), "true");
-      assert.deepEqual(await stage.evaluate((element) => ({
-        children: element.childElementCount,
-        descendants: element.querySelectorAll("*").length,
-      })), {
-        children: initial.children,
-        descendants: 917,
-      });
+      await assertRetained();
     }
 
     const beforeDrag = await page.locator(".mercury-scene")
@@ -97,20 +96,22 @@ try {
     assert.notEqual(await page.locator(".mercury-skybox-orientation")
       .evaluate((element) => element.style.transform), beforeSkyDrag);
 
-    const camera = page.locator(".mercury-camera");
-    const material = page.locator(".mercury-material-root");
-    const beforeWheel = await camera.evaluate((element) => element.style.scale);
-    const beforeMaterialWheel = await material.evaluate((element) =>
-      element.style.scale);
+    await page.mouse.down();
+    await page.mouse.up();
+    const distance = () => page.locator(".mercury-camera").evaluate((camera) =>
+      parseFloat(getComputedStyle(camera).perspective) -
+      new DOMMatrix(getComputedStyle(camera.querySelector(".mercury-scene")).transform).m43);
+    const beforeWheel = await distance();
+    assert.ok(Number.isFinite(beforeWheel) && beforeWheel > 0);
     await wheel(page, ".planet-input-surface", -240);
-    assert.notEqual(await camera.evaluate((element) => element.style.scale),
-      beforeWheel);
-    assert.notEqual(await material.evaluate((element) => element.style.scale),
-      beforeMaterialWheel);
-    assert.equal(await camera.evaluate((element) =>
-      element.style.getPropertyValue("--mercury-camera-zoom-scale")), "");
-    assert.equal(await material.evaluate((element) =>
-      element.style.getPropertyValue("--mercury-disc-zoom")), "");
+    await page.waitForFunction((before) => {
+      const camera = document.querySelector(".mercury-camera");
+      const depth = parseFloat(getComputedStyle(camera).perspective) -
+        new DOMMatrix(getComputedStyle(camera.querySelector(".mercury-scene")).transform).m43;
+      return depth > 0 && depth < before;
+    }, beforeWheel);
+    assert.ok(await distance() < beforeWheel, "Wheel zoom moves the physical camera closer");
+    await assertRetained();
 
     const speed = page.locator('input[name="speed"][type="range"]');
     assert.equal(await speed.getAttribute("data-state"), "normal");
@@ -138,16 +139,13 @@ try {
       getComputedStyle(element).transform), "none");
     const shadowlessBackground = await shadowlessMaterial.evaluate((element) =>
       getComputedStyle(element).backgroundImage);
-    const shadowlessNodeCount = await stage.evaluate((element) =>
-      element.querySelectorAll("*").length);
     for (const [deltaX, deltaY] of [[240, -110], [-360, 190], [510, 260]]) {
       await drag(page, ".planet-input-surface", deltaX, deltaY);
       assert.equal(await shadowlessMaterial.getAttribute("data-material-mode"),
         "full-phase-curvature");
       assert.equal(await shadowlessMaterial.evaluate((element) =>
         getComputedStyle(element).backgroundImage), shadowlessBackground);
-      assert.equal(await stage.evaluate((element) =>
-        element.querySelectorAll("*").length), shadowlessNodeCount);
+      await assertRetained();
     }
     assert.match(await page.locator(
       ".mercury-cutaway-body > .mercury-cutaway-outer-pole",
@@ -162,16 +160,18 @@ try {
       }
     });
     await page.waitForFunction(() =>
-      document.querySelector(".planet-stage")?.childElementCount === 3 &&
+      document.documentElement.dataset.ready === "true" &&
       document.documentElement.dataset.playing === "false");
-    await page.waitForFunction(() =>
-      !document.querySelector(".mercury-material")?.dataset.materialMode);
+    await page.waitForFunction((mode) =>
+      document.querySelector(".mercury-material")?.getAttribute("data-material-mode") === mode,
+    initial.materialMode);
+    assert.equal(await page.locator(".polycss-camera").count(), 1);
     assert.equal(await speed.getAttribute("data-state"), "normal");
-    assert.equal(await shadows.isChecked(), true);
+    assert.equal(await shadows.isChecked(), initial.shadows);
     assert.equal(await stage.evaluate((element) =>
-      element.classList.contains("mercury-hide-shadows")), false);
+      element.classList.contains("mercury-hide-shadows")), !initial.shadows);
     assert.equal(await shadowlessMaterial.getAttribute("data-material-mode"),
-      null);
+      initial.materialMode);
 
     const resources = await page.evaluate(() =>
       performance.getEntriesByType("resource").map((entry) => entry.name));
@@ -193,7 +193,7 @@ try {
     assert.deepEqual(problems, []);
     reports.push({
       deviceScaleFactor,
-      retainedNodes: initial.descendants,
+      retainedNodes: initial.retainedNodes,
       selectedPreparedDensity: 2,
       externalRequests: externalRequests.length,
       browserProblems: problems.length,

@@ -29,7 +29,7 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
     forward() { if (index < entries.length - 1) { const entry = entries[++index]; location = new URL(entry.url); const event = new Event('popstate'); event.state = entry.state; windowTarget.dispatchEvent(event); } },
   };
   const objects = ['mercury', 'venus', 'earth'].map(id => ({ id, name: id, route: `/${id}/` }));
-  const stage = { dataset: { objectId: 'mercury' } }, input = {}, renders = new Set(), mounts = [], errors = [], shells = [], preparations = [];
+  const stage = { dataset: { objectId: 'mercury' } }, input = {}, renders = new Set(), mounts = [], errors = [], shells = [], preparations = [], disposedContent = [];
   let maxRendered = 0;
   const factory = id => (nativeStage, options) => {
     assert.equal(nativeStage, stage);
@@ -82,7 +82,7 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
     async loadObject(id) { if (id === 'venus' && factoryGate) await factoryGate.promise; return factory(id); },
     async loadContent(object, { signal }) {
       if (object.id === 'venus' && contentGate) await contentGate.promise;
-      return { id: object.id, apply() { assert.equal(signal.aborted, false); }, dispose() {} };
+      return { id: object.id, apply() { assert.equal(signal.aborted, false); }, dispose() { disposedContent.push(object.id); } };
     },
     navigation: {
       focus,
@@ -91,7 +91,7 @@ function harness({ prepare = async () => ({}), focus = undefined, factoryGate = 
     },
     persistentWorldContext,
   });
-  return { router, windowTarget, documentTarget, media, mounts, shells, renders, errors, writes, entries, preparations,
+  return { router, windowTarget, documentTarget, media, mounts, shells, renders, errors, writes, entries, preparations, disposedContent,
     maxRendered: () => maxRendered };
 }
 
@@ -167,16 +167,34 @@ test('persistent world context is mounted once and follows the active physical n
   assert.deepEqual(events.at(-1), ['destroy']);
 });
 
+test('entering overview on the current object changes selection without invoking focus or restoring the camera', async () => {
+  let focuses = 0;
+  const h = harness({ focus: async () => { focuses++; } });
+  await h.router.settled;
+  const source = h.mounts[0], initial = source.value, restores = source.restores;
+  await h.router.navigate('mercury', { overview: true, preserveView: true, history: 'replace' });
+  assert.equal(focuses, 0);
+  assert.equal(source.restores, restores);
+  assert.equal(source.value, initial);
+  assert.equal(h.mounts.length, 1);
+  assert.equal(h.router.state().selectedObjectId, null);
+  assert.equal(new URL(h.windowTarget.location.href).searchParams.get('overview'), 'solar-system');
+  h.router.destroy();
+});
+
 test('flight retains the source and one shell; target readiness and handoff precede history commit', async () => {
   const flight = deferred(), attached = deferred();
   const h = harness({ prepare: () => flight.promise });
   await h.router.settled;
   h.shells[0].options.onMotionChange(true);
   const selected = h.router.navigate('venus'); await flush();
+  assert.equal(h.router.state().selectedObjectId, 'venus', 'Selection changes before the destination is mounted');
+  assert.equal(h.router.state().activeObjectId, 'mercury', 'The source still owns the departing camera');
+  assert.equal(h.router.state().ready, false, 'A pending selection is not a completed navigation');
   assert.equal(h.renders.size, 1); assert.equal(h.mounts[0].id, 'mercury');
   assert.equal(h.shells.length, 1); assert.equal(h.writes.includes('push'), false);
   assert.equal(h.preparations[0].fromMount, h.mounts[0]);
-  assert.equal(typeof h.preparations[0].toFactory, 'function');
+  assert.equal(typeof await h.preparations[0].toFactory, 'function');
   flight.resolve({ mountOptions: { proof: 'handoff' }, afterMount: () => attached.promise }); await flush();
   assert.deepEqual(h.mounts.map(m => m.id), ['mercury', 'venus']);
   assert.equal(h.mounts[1].options.proof, 'handoff');
@@ -200,7 +218,9 @@ test('rapid Mercury → Venus → Mercury cancels the stale factory without repl
   const first = h.router.navigate('venus'); await flush();
   assert.equal(await h.router.navigate('mercury'), true);
   assert.equal(await first, false);
+  assert.deepEqual(h.disposedContent, ['venus'], 'Cancelled loading releases content without waiting for the factory');
   gate.resolve(); await flush();
+  assert.deepEqual(h.disposedContent, ['venus'], 'Late factory completion cannot dispose content twice');
   assert.deepEqual(h.mounts.map(m => m.id), ['mercury']);
   assert.equal(h.shells.length, 1); assert.equal(h.renders.size, 1);
   assert.equal(h.writes.includes('push'), false); assert.deepEqual(h.errors, []);

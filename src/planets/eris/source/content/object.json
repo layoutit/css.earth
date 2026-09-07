@@ -1,0 +1,132 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "eris",
+  "displayName": "Eris",
+  "title": {
+    "label": "Eris"
+  },
+  "panel": {
+    "introduction": "Eris is a bright, icy dwarf planet in the distant outer Solar System. Its surface is shown using NASA’s illustrative model texture; no spacecraft has mapped it.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Diameter",
+        "value": "2,326 ± 12 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "About 15.8 Earth days"
+      },
+      {
+        "id": "moon-count",
+        "label": "Moons",
+        "value": "1 — Dysnomia"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "About 557 Earth years"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "value": "Consistent with a sphere from a stellar occultation"
+      },
+      {
+        "id": "surface",
+        "label": "Surface coverage",
+        "value": "Unresolved; no terrain map"
+      },
+      {
+        "id": "appearance",
+        "label": "Surface representation",
+        "value": "NASA VTAD illustration; terrain details are not observations"
+      },
+      {
+        "id": "orientation",
+        "label": "Orientation",
+        "value": "Arbitrary display pole and meridian"
+      },
+      {
+        "id": "rings",
+        "label": "Rings",
+        "value": "None known"
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "illustration",
+    "controls": [
+      {
+        "id": "illustration",
+        "label": "Illustrative model",
+        "description": "NASA VTAD · model texture",
+        "title": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+        "qualification": "Illustration; not an observed surface map.",
+        "thumbnail": "illustration-thumbnail.webp",
+        "surface": "surface.webp",
+        "poles": "poles.webp",
+        "source": {
+          "id": "nasa-vtad-eris-model",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/eris-3d-model/"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Eris overview",
+      "href": "https://science.nasa.gov/dwarf-planets/eris/"
+    },
+    {
+      "label": "NASA VTAD",
+      "role": "illustration",
+      "description": "Eris model and illustrative surface texture",
+      "href": "https://science.nasa.gov/resource/eris-3d-model/"
+    },
+    {
+      "label": "Sicardy et al.",
+      "role": "shape",
+      "description": "2010 occultation radius and spherical shape",
+      "href": "https://doi.org/10.1038/nature10550"
+    },
+    {
+      "label": "Bernstein et al.",
+      "role": "rotation",
+      "description": "2023 photometry showing synchronous rotation",
+      "href": "https://arxiv.org/abs/2303.13445"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Sicardy et al. (2011); Bernstein et al. (2023); JPL orbital elements"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/dwarf-planets/eris/",
+      "credit": "NASA Science; newer rotation result from Bernstein et al. (2023)"
+    }
+  }
+}

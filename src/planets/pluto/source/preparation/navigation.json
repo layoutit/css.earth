@@ -15,12 +15,31 @@
   },
   "operations": [
     {
+      "type": "missing-coverage",
+      "kind": "black-fill",
+      "southConnected": true
+    },
+    {
       "type": "resize",
       "width": "tile",
       "height": "tile",
       "fit": "cover",
       "position": "centre",
       "kernel": "lanczos3"
+    },
+    {
+      "type": "ensure-alpha"
+    },
+    {
+      "type": "ellipse-mask",
+      "cx": 0.5,
+      "cy": 0.5,
+      "rx": 0.5,
+      "ry": 0.5,
+      "shading": {
+        "ambient": 0.35,
+        "diffuse": 0.65
+      }
     },
     {
       "type": "png"

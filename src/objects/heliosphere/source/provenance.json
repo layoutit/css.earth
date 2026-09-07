@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-source-provenance@1",
+  "description": "IBEX-derived heliopause from Reisenfeld et al. (2021), the complete original Figure 8 Z–H model/display envelope. Category 3 tail distances are ENA sounding limits, not a measured physical heliopause closure.",
+  "sources": [
+    {
+      "path": "ibex/NOTICE.md",
+      "sha256": "e0fd4a370544085c5544fcf6392ba5bc7038e404f625a7be49279683bc0f28b1",
+      "bytes": 1816
+    },
+    {
+      "path": "ibex/apjsabf658.tar.gz",
+      "sha256": "879656b96640a0fa98642884cf15ee120abcb89fbffaa1c2ab027b810412682d",
+      "bytes": 17671
+    },
+    {
+      "path": "ibex/apjsabf658f8_int.html.gz",
+      "sha256": "6f598f4576ad24a7b53930a4dd6ee92fd143aad32393c5d31f552e38b27bcb1e",
+      "bytes": 1706239
+    },
+    {
+      "path": "ibex/extract.py",
+      "sha256": "99036efdee49c9784ccb4afae791c16ae672ddaab8813f7f47fa6efed7c933a5",
+      "bytes": 5644
+    },
+    {
+      "path": "ibex/heliopause-grid.json",
+      "sha256": "dbae182236b56654eff4552d5f3530af5e556db4853a312c6dc87ba5704e5bb9",
+      "bytes": 8670
+    },
+    {
+      "path": "ibex/macropixels.json",
+      "sha256": "34da7cd1986a8e4db56c9911e1e47ad549200d72a4646643dd64a0010ced6f58",
+      "bytes": 35861
+    },
+    {
+      "path": "LICENSE.GALAXIO-MIT.txt",
+      "sha256": "cb2e341b0397f15586815e1f4c6ccf5395ed14cfe6abc8633677fedfd69516a3",
+      "bytes": 1077,
+      "role": "Original presentation software copyright and permission notice; unchanged bytes, not a license for IBEX data.",
+      "origin": "galaxio/LICENSE"
+    },
+    {
+      "path": "galaxio-heliosphereRenderer.ts.txt",
+      "sha256": "b2af28ae40714152e608e0cbd2952f6c95fd47ddcfda1bd03f18e3b0e691613d",
+      "bytes": 4908,
+      "origin": "galaxio/packages/engine/src/scene/heliosphereRenderer.ts",
+      "role": "Original Galaxio rim-material software reference; active geometry and frame come from the published IBEX model."
+    }
+  ],
+  "publication": {
+    "title": "A Three-dimensional Map of the Heliosphere from IBEX",
+    "doi": "10.3847/1538-4365/abf658",
+    "url": "https://doi.org/10.3847/1538-4365/abf658",
+    "journal": "The Astrophysical Journal Supplement Series 254, 40 (2021)",
+    "authors": [
+      "Daniel B. Reisenfeld",
+      "Maciej Bzowski",
+      "Herbert O. Funsten",
+      "Jacob Heerikhuisen",
+      "Paul H. Janzen",
+      "Marzena A. Kubiak",
+      "David J. McComas",
+      "Nathan A. Schwadron",
+      "Justyna M. Sokół",
+      "Alex Zimorino",
+      "Eric J. Zirnstein"
+    ],
+    "notice": "© 2021. The American Astronomical Society. All rights reserved.",
+    "dataLicense": "No separate license declared in the supplemental ReadMe; no CC-BY or MIT license asserted for the scientific source."
+  },
+  "originals": {
+    "tableArchive": {
+      "url": "https://content.cld.iop.org/journals/0067-0049/254/2/40/1/apjsabf658.tar.gz",
+      "sha256": "879656b96640a0fa98642884cf15ee120abcb89fbffaa1c2ab027b810412682d",
+      "bytes": 17671,
+      "workbook": "Table_heliosphere_dimensions_supplement.xlsx",
+      "workbookSha256": "29a5fd047ac9370eed6365e52542ec8f5dcc9a9d606144f221b292db13818e34",
+      "workbookBytes": 19492
+    },
+    "figure": {
+      "url": "https://content.cld.iop.org/journals/0067-0049/254/2/40/1/apjsabf658_int/apjsabf658f8_int.html",
+      "archiveUrl": "https://content.cld.iop.org/journals/0067-0049/254/2/40/1/apjsabf658_int/apjsabf658_int.tar.gz",
+      "archiveSha256": "92c1da49a96aeb915b6a16ccc4331eaab94aafb182477b7854ba64d46dd6f08e",
+      "archiveBytes": 14771200,
+      "originalHtmlSha256": "283cab7ada16be5d8e729f3d3799fd2fec3c0ef9f26b463c0a4fa9b45729b6cf",
+      "originalHtmlBytes": 5379009,
+      "compression": "Lossless gzip; original uncompressed HTML hash checked before extraction. Publisher JavaScript is never executed."
+    }
+  },
+  "sourceReference": {
+    "observations": "IBEX-Hi ENA observations 2009–2019, correlated with earlier 1 AU solar-wind dynamic pressure; three assumed termination-shock models.",
+    "variant": "Figure 8 cyan surface, trace 0; Zirnstein–Heerikhuisen termination-shock model",
+    "rows": 13,
+    "columns": 7,
+    "coordinateUnit": "AU",
+    "metersPerAu": 149597870700,
+    "frame": "Modified right-handed J2000 ecliptic: +X at longitude 165 degrees; +Y at 255 degrees; +Z north ecliptic pole.",
+    "localToIcrf": "Rx(84381.448 arcseconds) * Rz(165 degrees)",
+    "macroPixelCount": 56,
+    "categoryCounts": {
+      "1": 21,
+      "2": 20,
+      "3": 10,
+      "4": 5
+    },
+    "categoryMeaning": {
+      "1": "Well-constrained upwind estimates, approximate uncertainty ±10 AU.",
+      "2": "Flanks/poles and high-latitude estimates, approximate uncertainty ±15 AU.",
+      "3": "Tail ENA formation-region edge, approximate ±30 AU sounding uncertainty; actual heliopause may be much farther. Not a measured tail closure.",
+      "4": "Five noisy regions manually constrained by neighboring pixels or higher-energy time structure; retained as published."
+    },
+    "crosscheck": {
+      "directlyMatchingGridEntries": 67,
+      "includesRepeatedSeamAndPoles": true,
+      "distanceToleranceAu": 1e-10,
+      "authorInterpolatedHighLatitudeEntries": 24,
+      "polarMacropixelLatitudeDeg": [
+        -85,
+        85
+      ],
+      "publishedPolarVertexLatitudeDeg": [
+        -90,
+        90
+      ]
+    },
+    "tailDisplay": "The complete envelope follows the original published figure. The ten category 3 samples (13 grid entries with seam copies) represent the detectable tail ENA region, not proof of a closed physical heliopause. All source values and categories remain available in macropixels.json."
+  },
+  "approximation": {
+    "geometry": "All 91 coordinates of the complete published 13 by 7 grid remain exact in the scientific source, including repeated poles/seam and category 3 tail values. Offline radial-linear display subdivision uses four segments per original triangle edge. Radius interpolates linearly while direction is normalized; original samples remain fixed and shared edges are welded. This rounds display facets without adding scientific measurements or asserting greater source resolution. Category 3 values retain their sounding-limit classification; the closed display envelope does not locate the physical end of the tail.",
+    "normal": "Area-weighted outward surface normals are prepared on the refined display mesh, including welded source seams and poles. They occupy the retained radialNormals compatibility field for material transport; they are renderer-derived surface normals, not measurements or a Sun-radial science assumption.",
+    "material": "22 nonuniform facing levels in [-1,1]; 2024 sorted corner triples. Every 32px tile evaluates the original rim equation on barycentrically interpolated corner facing values, baking linear-to-sRGB color and alpha. Six prepared corner permutations address the shared sorted bank. Quantization, raster sampling, coarse silhouettes and the interpolation of vertex-facing scalars approximate the original per-pixel shader, particularly near the boundary.",
+    "coverage": "All three triangle edges use exact pixel-area coverage inside a 1.5px transparent atlas inset. Prepared expanded parallelograms map the inset triangle corners to the unchanged physical source vertices. Fractional alpha is 1-(1-opacity)^coverage, so neighboring optical depths combine correctly under ordinary source-over. No runtime clipping, mask, filter or mesh construction.",
+    "atlasDecodedBytes": 8290304,
+    "display": "Current colorLinear [0.5,0.9,0.8], opacity 0.2, rimFadeFacing 0.1, visibility and unitScale 50 preserved. These are presentation choices, not the paper’s photometry or plasma brightness.",
+    "runtime": "Fixed prepared triangle leaves and atlas. Scientific archives, workbook decoding, frame construction and grid triangulation remain offline.",
+    "displaySubdivision": {
+      "method": "radial-linear",
+      "segmentsPerEdge": 4,
+      "sourceTriangleCount": 120,
+      "expectedDisplayTriangleCount": 1920,
+      "scope": "Display interpolation only; original geometry and uncertainty classification remain checked separately."
+    },
+    "bounds": "Conservative Cartesian cube with half-extent equal to the largest original source radius, 383 AU. Positive barycentric radius interpolation cannot exceed that source radius; this encloses the curved display interpolation as well as original samples."
+  },
+  "attribution": "Scientific geometry: Reisenfeld et al. (2021), ApJS 254, 40, DOI 10.3847/1538-4365/abf658, IBEX. Galaxio rim-presentation software derivation: Copyright (c) 2026 Juan Cruz Fortunatti, MIT; see separate unchanged LICENSE.GALAXIO-MIT.txt."
+}

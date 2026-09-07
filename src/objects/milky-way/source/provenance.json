@@ -1,191 +1,186 @@
 {
-  "schema": "cssearth-source-provenance@1",
-  "sources": [
-    {
-      "id": "density",
-      "path": "density.ktx2",
-      "sha256": "34ed2cdfdf388b30be441db4e6a94a7a420e0bf6446aafb2f61c60b49a7fc51b",
-      "bytes": 9868499,
-      "source": "Galaxium / Stellarium Labs SRL, recovered Milky Way procedural model and GPU texture contract",
-      "license": "Reference model: © 2025-present Stellarium Labs SRL. All rights reserved.",
-      "url": "https://galaxium.app/",
-      "built": "2026-09-06",
-      "upstreamRecord": {
-        "key": "textures/milky-way-volume",
-        "path": "textures/milky-way-volume/v6/milky-way-volume.ktx2",
-        "bytes": 9868499,
-        "source": "Galaxium / Stellarium Labs SRL, recovered Milky Way procedural model and GPU texture contract",
-        "license": "Reference model: © 2025-present Stellarium Labs SRL. All rights reserved.",
-        "url": "https://galaxium.app/",
-        "epoch": "",
-        "built": "2026-09-06",
-        "extra": {
-          "synthetic": true,
-          "width": 512,
-          "height": 512,
-          "depth": 64,
-          "format": "VK_FORMAT_R8G8B8A8_UNORM",
-          "colorspace": "linear",
-          "encoding": "sqrt-density-unorm8",
-          "extentKpc": {
-            "x": [
-              -26.800194711215124,
-              26.800194711215124
-            ],
-            "y": [
-              -26.800194711215124,
-              26.800194711215124
-            ],
-            "z": [
-              -3.3500243389018904,
-              3.3500243389018904
-            ]
-          },
-          "channels": {
-            "r": "sqrtDiskDensity",
-            "g": "sqrtStarsDensity",
-            "b": "sqrtDustDensity",
-            "a": "reservedZero"
-          },
-          "galaxiumModel": {
-            "components": {
-              "bulge": {
-                "color": [
-                  1,
-                  0.84,
-                  0.67
-                ],
-                "strength": 6498.02,
-                "z0": 0.75,
-                "r0": 10,
-                "inner": 0.5,
-                "aw": 0,
-                "noise": {
-                  "twirl": 0,
-                  "scale": 0,
-                  "tilt": 0,
-                  "offset": 0
-                }
-              },
-              "disk": {
-                "color": [
-                  0.85,
-                  0.9,
-                  1
-                ],
-                "strength": 3166820,
-                "z0": 0.02,
-                "r0": 0.45,
-                "inner": 0.7,
-                "aw": 0.22,
-                "noise": {
-                  "twirl": 0.12,
-                  "scale": 10,
-                  "tilt": 1,
-                  "offset": 0.1
-                }
-              },
-              "stars": {
-                "color": [
-                  0.7,
-                  0.82,
-                  1
-                ],
-                "strength": 22392.8,
-                "z0": 0.034,
-                "r0": 0.25,
-                "inner": 0.23,
-                "aw": 0.11,
-                "noise": {
-                  "twirl": 0,
-                  "scale": 6,
-                  "tilt": 20,
-                  "offset": 0
-                }
-              },
-              "dust": {
-                "color": [
-                  0.6,
-                  0.8,
-                  1
-                ],
-                "strength": 411.561,
-                "z0": 0.007,
-                "r0": 0.4,
-                "inner": 0.3,
-                "aw": 0.36,
-                "noise": {
-                  "twirl": 0.07,
-                  "scale": 5,
-                  "tilt": 1.5,
-                  "offset": 1
-                }
-              }
-            },
-            "armsRad": [
-              -0.7679449915885925,
-              2.2340199947357178
-            ],
-            "spiral": {
-              "a": 4,
-              "b": -0.7318287491798401,
-              "c": 0.35015732049942017,
-              "coreRadius": 0.19050000607967377
-            },
-            "intensityScale": 3.12499992105586e-7,
-            "stepScale": 1
-          },
-          "radiusM": 826967600000000000000,
-          "orientationXyzw": [
-            -0.48321160272398567,
-            0.19625814748720685,
-            0.6992289190061582,
-            -0.48894625277982323
-          ],
-          "centerOffsetIcrfM": [
-            -13546364515918938000,
-            -215613549495265920000,
-            -119436920667163740000
-          ],
-          "placementFrame": "sol",
-          "sampling": {
-            "coordinates": "index/dimensions*2-1; z*=depth/width",
-            "filter": "linear",
-            "decode": "square RGB after filtering",
-            "radialAxis": "observed native zero; singular shader arithmetic is not assumed portable"
-          },
-          "reference": {
-            "wasmSha256": "8e3115b11fe35929d86d120da20c34213426c3a8eb8727a75ccef1fb16703bc0",
-            "densityShaderSha256": "3cb5b3981723dfb0ab2513ee8be6391f3ebbb912c4d773f7b57a1cdb6096a0aa",
-            "capturedDate": "2026-09-06",
-            "modelSchema": 1
-          }
-        }
-      }
-    }
+  "schema": "cssearth-volume-provenance@1",
+  "title": "OpenSpace Milky Way volume",
+  "kind": "scientific-simulation-adapted-for-visualization",
+  "authors": [
+    "Jon Parker",
+    "Emil Axelsson",
+    "Carter Emmart",
+    "OpenSpace Team"
   ],
-  "status": "Local integration reference. Recovered Galaxium / Stellarium Labs SRL model; all rights reserved. No publication license implied.",
-  "frameDerivation": {
-    "referenceFrame": "sun-icrf",
-    "epochJdTt": 2461286.5,
-    "sourceReferenceFrame": "sol (solar-system barycentre)",
-    "sourceOriginM": [
-      -13546364515918938000,
-      -215613549495265920000,
-      -119436920667163740000
+  "organizations": [
+    "National Astronomical Observatory of Japan (simulation)",
+    "American Museum of Natural History (Dark Universe model)",
+    "OpenSpace Project (volume adaptation)"
+  ],
+  "license": {
+    "spdx": "MIT",
+    "dataLicenseDeclaration": "https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html",
+    "notice": "openspace/LICENSE.md",
+    "note": "The official asset documentation explicitly licenses this volume MIT. The included OpenSpace MIT notice accompanies the pinned asset/shader; no separate data notice is listed by the synchronization response."
+  },
+  "upstream": {
+    "repository": "https://github.com/OpenSpace/OpenSpace",
+    "commit": "9ca759eb5a9f74537708c66842f159f1c4467ab1",
+    "asset": "data/assets/scene/milkyway/milkyway/volume.asset",
+    "shader": "modules/galaxy/shaders/galaxyraycast.glsl",
+    "reader": "modules/volume/rawvolumereader.inl",
+    "readerDeclaration": "modules/volume/rawvolumereader.h",
+    "indexing": "modules/volume/volumeutils.cpp",
+    "raymarch": "shaders/framebuffer/raycastframebuffer_fs.glsl",
+    "sync": {
+      "metadataUrl": "https://liu-se.bigbang.openspaceproject.com/request?identifier=milkyway_volume_data&file_version=1&application_version=1",
+      "identifier": "milkyway_volume_data",
+      "fileVersion": 1,
+      "applicationVersion": 1,
+      "response": "openspace/sync-response.txt",
+      "transport": "HTTPS equivalent of published HTTP CDN URL"
+    },
+    "raw": {
+      "url": "https://liu-se.cdn.openspaceproject.com/files/milkyway/milkyway/volume/1/MilkyWayRGBAVolume1024x1024x128.raw",
+      "sha256": "16cf24ed3bf1e3f85d4c64be603b47fa68a3dd8fad7839ae7b7ff17c4bd12d01",
+      "bytes": 536870912,
+      "dimensions": [
+        1024,
+        1024,
+        128
+      ],
+      "layout": "x-fastest-rgba8",
+      "invertZ": false
+    }
+  },
+  "frame": {
+    "reference": "Galactic J2000 centered on Solar System barycenter",
+    "centerGalacticM": [
+      246880000000000000000,
+      0,
+      0
     ],
-    "sunBarycentricM": [
-      -211772372.76758608,
-      -720607965.0777627,
-      -296413555.3060543
+    "centerIcrfM": [
+      -13547678355555398000,
+      -215634148837188400000,
+      -119449188638666330000
     ],
-    "originM": [
-      -13546364515707167000,
-      -215613549494545320000,
-      -119436920666867320000
+    "rotationOrder": "Rx * Ry * Rz; column vectors",
+    "rotationRadians": [
+      3.141592653589793,
+      3.1248,
+      4.45741
     ],
-    "formula": "originM = sourceOriginM - sunBarycentricAu(epochJdTt) * M_PER_AU",
-    "ephemeris": "@cssearth/astronomy sunBarycentricAu: ICRF position at the shared navigation epoch",
-    "qualification": "Only the frame origin and derived anchors change; the recorded density grid, material and slice geometry remain unchanged."
-  }
+    "fullExtentM": [
+      1.2e+21,
+      1.2e+21,
+      150000000000000000000
+    ],
+    "galacticToIcrf": [
+      -0.05487556041621597,
+      0.4941094278755833,
+      -0.8676661490190049,
+      -0.8734370902348849,
+      -0.44482962996001163,
+      -0.19807637343120094,
+      -0.4838350155487133,
+      0.7469822444972188,
+      0.45598377617506686
+    ],
+    "conversion": "ICRF center minus Sun barycentric position at descriptor epoch; orientation is Galactic-to-ICRF times authored volume rotation."
+  },
+  "transfer": {
+    "channelMeaning": [
+      "red emission",
+      "green emission",
+      "blue emission",
+      "dust absorption"
+    ],
+    "encodedFilter": "clamp-to-edge trilinear RGBA8 UNORM",
+    "rgbExponent": 2,
+    "alphaExponent": 1.4,
+    "emissionMultiply": 250,
+    "absorptionMultiply": 200,
+    "absorptionColor": [
+      0.3,
+      0.54,
+      0.85
+    ],
+    "cylinderSupport": {
+      "axis": "z",
+      "radiusSquared": 0.7,
+      "coordinates": "texture position * 2 - 1"
+    },
+    "pathMetric": "Euclidean distance in normalized texture coordinates; per-axis integration divides by that source-axis extent.",
+    "omitted": "OpenSpace camera-dependent volume fade, per-ray jitter, additive HDR display, and separate MilkyWayPoints/halo star renderer; cssEarth retains its independently sourced star field.",
+    "cssApproximation": "CSS slabs integrate common physical/source distance on all axes to avoid an axis-dependent optical coefficient. OpenSpace instead integrates normalized texture distance; exact additive raymarch photometry is not reproduced. Display exposure gain 16 is applied after integration and balanced against the NASA interior panorama. Display gain is an authored presentation parameter, not a published OpenSpace source parameter.",
+    "cssTextureEncoding": {
+      "format": "WebP",
+      "quality": 90,
+      "alphaQuality": 100,
+      "effort": 5,
+      "smartSubsample": true,
+      "note": "RGB is perceptually compressed; alpha texels are preserved exactly. Source RGBA scientific volume remains lossless and unchanged."
+    },
+    "cssSampling": "256 X/Y slabs and 32 Z slabs have equal physical/source pitch 0.0078125; each Z slab integrates 4 samples at the original 128 source Z texel centres. In-plane texture width remains 1024; no adaptive image resampling.",
+    "cssDisplayColorGrade": {
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0.951277424,
+        0,
+        0,
+        0,
+        0.709752511
+      ],
+      "space": "Ordinary display RGB after exponential transfer; one linear matrix on premultiplied emitted RGB with alpha unchanged. This is not linear-light photometry.",
+      "reference": "NASA original Milky Way-only preview; matched ICRF rays at the Sun, fit independently of luminance.",
+      "calibration": "color-calibration.json",
+      "scope": "Same coefficients for every slab and axis, observer position and distance. No added desaturation; source emission/absorption coefficients and scientific input bytes unchanged."
+    }
+  },
+  "derivative": {
+    "method": "encoded-box-average-round-half-up",
+    "factor": 1,
+    "dimensions": [
+      1024,
+      1024,
+      128
+    ],
+    "encoding": "Original RGBA8 bytes, unchanged",
+    "compression": {
+      "format": "ktx2-rgba8-zstd",
+      "level": 9
+    },
+    "nodeVersion": "22.23.2",
+    "zstdVersion": "1.5.7",
+    "bytes": 43800096,
+    "sha256": "49db3a43576ad1977c97f181c177e970064f4574265b70ce4999c27caa28fe05",
+    "decodedSha256": "16cf24ed3bf1e3f85d4c64be603b47fa68a3dd8fad7839ae7b7ff17c4bd12d01",
+    "error": "Lossless container conversion: decoded bytes are identical to every byte of the original published raw volume; no source averaging or quantization."
+  },
+  "references": [
+    {
+      "path": "openspace/LICENSE.md",
+      "sha256": "a72bc2c9cf5aac70e1b7634fde0af32e0e3a25ca2b7e1e9834fddbeba691a3d5",
+      "bytes": 1148
+    },
+    {
+      "path": "openspace/volume.asset",
+      "sha256": "8c05c396e89b4893641131d96c53c899ce7a7258c0736629b00beaa2d6bf1e21",
+      "bytes": 1838
+    },
+    {
+      "path": "openspace/galaxyraycast.glsl",
+      "sha256": "f27d48a313b980683d5bd7c7cabe0958bdf11f8b22b8e7c2124d9d6d2eb91a90",
+      "bytes": 3788
+    },
+    {
+      "path": "openspace/sync-response.txt",
+      "sha256": "5b0f8456ba998a056bcbd0f0d241df93e3543243037cea74f8e9d717ca13423d",
+      "bytes": 279
+    },
+    {
+      "path": "color-calibration.json",
+      "sha256": "6cd56fff4e746963de9b4432bb6763395f0a2d680e33d5ce268835140493bc59"
+    }
+  ]
 }

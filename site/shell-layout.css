@@ -15,7 +15,6 @@ body[data-object-shell] {
   --explorer-panel-bottom-gap: 16px;
   --explorer-header-panel-gap: 12px;
   --explorer-panel-gap: 8px;
-  --explorer-scene-offset: 170px;
   --explorer-controls-top: calc(var(--explorer-header-top) + var(--explorer-search-height) + var(--explorer-header-panel-gap));
   --explorer-dock-width: calc(var(--explorer-panel-left) + var(--explorer-panel-width));
   --explorer-surface-background: #151515;
@@ -25,7 +24,7 @@ body[data-object-shell] {
 }
 
 :is(
-  .planet-information-panel,
+  .planet-card,
   .explorer-about-panel,
   .planet-sidebar > .explorer-settings-panel
 ) {
@@ -113,15 +112,6 @@ body[data-object-shell] {
     translate: none;
   }
 
-  /* Keep the sky full-viewport while shifting only the scene around the dock. */
-  .planet-stage[data-object-id] > .planet-render-root {
-    inset-inline-start: var(--explorer-scene-offset);
-    inset-inline-end: calc(-1 * var(--explorer-scene-offset));
-  }
-
-  .planet-stage > .planet-directional-sun {
-    translate: var(--explorer-scene-offset) 0;
-  }
 
 }
 

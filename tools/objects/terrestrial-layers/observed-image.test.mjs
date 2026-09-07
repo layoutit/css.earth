@@ -31,3 +31,22 @@ test('byte-map coverage preserves dark observations and rolls longitude without 
     assert.equal(color.sourceMissingPixels,0);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
+
+test('polar-connected coverage preserves enclosed photographic black before resampling', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-polar-map-'));
+  try {
+    const path = join(directory, 'source.png');
+    // The right-hand gap reaches the north via the longitude seam. The enclosed
+    // black pixel is photographed terrain, not missing coverage.
+    await sharp(Buffer.from([0,100,100,100, 0,100,100,0, 100,100,100,100, 100,0,100,100]),
+      {raw:{width:4,height:4,channels:1}}).toColourspace('b-w').png().toFile(path);
+    const entry = {id:'polar',width:4,height:4};
+    const policy = {noData:0,centerLongitude:180,connectedEdge:'north'};
+    const result = await prepareByteObservation(path,entry,policy,4,4);
+    assert.deepEqual([...result.missing], [1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0]);
+    assert.equal(result.rgb[13*3],0);
+    const resized = await prepareByteObservation(path,entry,policy,8,8);
+    assert.equal(resized.missing[7*8+3],0,'Enclosed dark terrain stays valid when resized');
+    await assert.rejects(prepareByteObservation(path,entry,{...policy,connectedEdge:'typo'},4,4));
+  } finally { await rm(directory,{recursive:true,force:true}); }
+});
