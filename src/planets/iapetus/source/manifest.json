@@ -1,0 +1,159 @@
+{
+  "schema": "cssiapetus-authoritative-sources@1",
+  "inputs": [
+    {
+      "credit": "NASA/JPL/Space Science Institute",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-voyager-2008-iapetus",
+      "path": "observations/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
+      "catalog": "https://astrogeology.usgs.gov/search/map/iapetus_cassini_voyager_global_mosaic_803m",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 5760,
+      "height": 2880,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 736000,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "USGS May 2008 Cassini/Voyager mosaic. Exactly zero is GeoTIFF no-data; preserve all other values, including dark terrain. Voyager covers poles and some areas were acquired in Saturnshine. Photographed shading and resolution vary.",
+      "expectedBytes": 16612487,
+      "expectedSha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e"
+    },
+    {
+      "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-iss-2014-iapetus-color",
+      "path": "observations/PIA18436.jpg",
+      "origin": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg",
+      "catalog": "https://www.jpl.nasa.gov/images/pia18436-color-maps-of-iapetus-2014/",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 11741,
+      "height": 5871,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Published global rectangular mosaic without a separate validity mask. Preserve every supplied pixel: the dark leading hemisphere is real surface albedo. Coarse polar coverage, patch seams and residual photographed shading remain.",
+      "expectedBytes": 4989080,
+      "expectedSha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b"
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "e2d1c2cb3ff20d9bce2ea1e8062800915cd6fed88b9536c0cf8a2b1da0b59356",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/catalog.json",
+      "expectedBytes": 3235,
+      "expectedSha256": "e6bb988a21f919d31f3b1bc5efffc92edc5a92d7002a9a52c549c3f262a5a51e",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 1751,
+      "expectedSha256": "97a253269119c064bf6a8b950f5a7c18dc683aa4bb7348b9417cdbe540091e05",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 2003,
+      "expectedSha256": "bffd2f94be9a41913f09cb8469c2bc86b2b16db03f95da3852caf2235fbf2bef",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 962,
+      "expectedSha256": "dd0fa3a2a52f5eaae0c9f61f2bf491ea9d64d09edde25e946104fa42edb10ab5",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 8670,
+      "expectedSha256": "438b5022324ae67e228caaac68fcfc85306251179a9b097a802289e1721266a8",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4294,
+      "expectedSha256": "40dca4aafe3c8a087bb66af545acfcfe1c9077297556b095b64e2549feec3f87",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    }
+  ],
+  "generatedIntermediates": []
+}

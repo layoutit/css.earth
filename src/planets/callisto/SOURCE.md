@@ -74,3 +74,5 @@ Reusable observation masking, projection, lighting, celestial, and retained-scen
 operations live in `tools/objects/terrestrial-layers/`; no package-local executable
 preparer or runtime is required. Run `pnpm build:preparation` before the commands
 above. Omit `--write` from preparation to generate an isolated comparison stage.
+
+Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.

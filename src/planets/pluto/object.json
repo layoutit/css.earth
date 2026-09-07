@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "a59c60409e259ed711667ebf40b7163fe03c4ba3beb9d52578cc9a88389dd0c5"
+  },
   "id": "pluto",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -125,9 +128,6 @@
       "bodyRadiusM": 1188300
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "b456317012f3e8da1219ba910a935334a3ed962d0860caeedd79148114f32303"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

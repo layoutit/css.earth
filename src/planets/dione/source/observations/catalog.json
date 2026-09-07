@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-source-notes@1",
+  "normal": {
+    "url": "https://astrogeology.usgs.gov/search/map/dione_cassini_voyager_global_mosaic_154m",
+    "edition": "2010, as identified by USGS",
+    "coordinates": "Center longitude 0 and x increasing eastward in the GeoTIFF. Roll the 180 E left edge by half a width into 0–360 E; no mirror. USGS labels use west longitude.",
+    "noData": 0
+  },
+  "enhanced": {
+    "url": "https://www.jpl.nasa.gov/images/pia18434-color-maps-of-dione-2014/",
+    "published": "2014-11-04",
+    "coordinates": "0 E left edge, north up. Trailing hemisphere fractures align near 90 E with the rolled monochrome mosaic.",
+    "processing": "Published radiometric calibration, geographic registration and photometric correction by Paul Schenk. Preserve intrinsic hemisphere differences, source seams and residual photographed shading."
+  },
+  "elevation": {
+    "url": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+    "doi": "10.26033/bxx6-g543",
+    "release": "2025-08-28",
+    "version": "1.0",
+    "datumRadiusKm": 561.4,
+    "sourceUnits": "Global grids contain radius from the center in meters; regional products have a different convention and are not used.",
+    "conversion": "height_km = radius_m * 0.001 - 561.4",
+    "resolution": "Approximately 1.58 km; 2222 × 679 equator and 444 × 444 for each pole.",
+    "accuracy": "Producer estimates typical global DTM uncertainty at 1.58–3.17 km, worse where source imagery is coarser.",
+    "processing": "Sample original equatorial and polar geotransforms. Bilinear interpolation only inside measured grids; northwest relief at true height scale. No invented gap filling."
+  },
+  "shape": {
+    "nasaMeanRadiusKm": 562,
+    "renderingSphereKm": 562.5,
+    "monochromeCartographicRadiusKm": 563,
+    "pdsTerrainDatumKm": 561.4,
+    "rendering": "Mean-radius sphere from the astronomy package; terrain changes the image only. Distinct measurement and cartographic reference radii remain explicit."
+  },
+  "landmarks": {
+    "palinurus": {
+      "latitude": -3.3,
+      "longitudeEast": 297,
+      "reference": "https://planetarynames.wr.usgs.gov/Feature/4555"
+    },
+    "janiculumDorsa": {
+      "latitude": 24.6,
+      "longitudeEast": 215.9,
+      "reference": "https://planetarynames.wr.usgs.gov/Feature/14379"
+    }
+  }
+}

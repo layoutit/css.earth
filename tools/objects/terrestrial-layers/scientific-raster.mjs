@@ -20,8 +20,9 @@ export function terrainBrightness(source, longitude, latitude, step, relief) {
   const south = source.sample(longitude, latitude - step);
   if ([west, east, north, south].some(value => value === null)) return 1;
   const distance = relief.referenceRadiusMeters * step * Math.PI / 180;
-  const eastSlope = (east - west) / (2 * distance * Math.cos(latitude * Math.PI / 180));
-  const northSlope = (north - south) / (2 * distance);
+  const heightToMeters = relief.heightToMeters ?? 1;
+  const eastSlope = (east - west) * heightToMeters / (2 * distance * Math.cos(latitude * Math.PI / 180));
+  const northSlope = (north - south) * heightToMeters / (2 * distance);
   const [eastLight, northLight, upLight] = relief.lightDirection;
   const illumination = Math.max(0, (-eastLight * eastSlope - northLight * northSlope + upLight)
     / Math.hypot(eastSlope, northSlope, 1));
@@ -29,21 +30,78 @@ export function terrainBrightness(source, longitude, latitude, step, relief) {
     / (relief.ambient + (1 - relief.ambient) * upLight);
 }
 
+/** Sample the measured grid before applying the authored unit/datum conversion. */
+export function sampleScienceGrid(data, grid, px, py, { sampling = 'nearest', valueTransform } = {}) {
+  if (px < 0 || py < 0 || px >= grid.width || py >= grid.height) return null;
+  const valueAt = (x, y) => {
+    const value = data[y * grid.width + x];
+    return !Number.isFinite(value) || value === grid.noData || Math.abs(value) > (grid.specialValueMagnitude ?? Infinity) ? null : value;
+  };
+  let value;
+  if (sampling === 'bilinear') {
+    // The edge pixel covers its complete cell, but never extends outside the raster.
+    const x = Math.max(0, Math.min(grid.width - 1, px - 0.5));
+    const y = Math.max(0, Math.min(grid.height - 1, py - 0.5));
+    const x0 = Math.floor(x), y0 = Math.floor(y), x1 = Math.min(x0 + 1, grid.width - 1), y1 = Math.min(y0 + 1, grid.height - 1);
+    const values = [valueAt(x0, y0), valueAt(x1, y0), valueAt(x0, y1), valueAt(x1, y1)];
+    if (values.some(v => v === null)) return null;
+    const dx = x - x0, dy = y - y0;
+    value = values[0] * (1 - dx) * (1 - dy) + values[1] * dx * (1 - dy) +
+      values[2] * (1 - dx) * dy + values[3] * dx * dy;
+  } else value = valueAt(Math.floor(px), Math.floor(py));
+  return value === null ? null : value * (valueTransform?.scale ?? 1) + (valueTransform?.offset ?? 0);
+}
+
+/** Spherical source projections, in meters; no display geometry is derived here. */
+export function scienceMapPoint(longitude, latitude, grid) {
+  const radians = Math.PI / 180, radius = grid.referenceRadiusMeters;
+  if (grid.projection === 'polar-stereographic') {
+    const sign = Math.sign(grid.poleLatitude), angle = (longitude - grid.centerLongitude) * radians;
+    const distance = 2 * radius * Math.tan(Math.PI / 4 - sign * latitude * radians / 2);
+    return [distance * Math.sin(angle), -sign * distance * Math.cos(angle)];
+  }
+  return [(longitude - grid.centerLongitude) * radians * radius, latitude * radians * radius];
+}
+
 export async function loadScienceSurface(root, lens) {
+  if (lens.additionalGrids?.length) {
+    const rasters = await Promise.all([lens, ...lens.additionalGrids].map(entry =>
+      loadScienceSurface(root, {...lens, ...entry, additionalGrids: undefined})));
+    return { sample(longitude, latitude) {
+      for (const raster of rasters) {
+        const value = raster.sample(longitude, latitude);
+        if (value !== null) return value;
+      }
+      return null;
+    } };
+  }
   if (lens.format !== 'geotiff') throw new Error(`Unsupported scientific source format: ${lens.format}`);
   const tiff = await fromFile(resolve(root, lens.path));
   try {
     const image = await tiff.getImage(), keys = image.getGeoKeys(), grid = lens.grid;
-    if (image.getWidth() !== grid.width || image.getHeight() !== grid.height ||
-        keys.ProjCenterLongGeoKey !== grid.centerLongitude || keys.GeogSemiMajorAxisGeoKey !== grid.referenceRadiusMeters ||
+    const polar = grid.projection === 'polar-stereographic';
+    const projectionMatches = polar
+      ? keys.ProjCoordTransGeoKey === 15 && keys.ProjNatOriginLatGeoKey === grid.poleLatitude &&
+        keys.ProjStraightVertPoleLongGeoKey === grid.centerLongitude && keys.ProjScaleAtNatOriginGeoKey === 1
+      : keys.ProjCoordTransGeoKey === 17 && keys.ProjCenterLongGeoKey === grid.centerLongitude;
+    if (image.getWidth() !== grid.width || image.getHeight() !== grid.height || !projectionMatches ||
+        keys.GeogSemiMajorAxisGeoKey !== grid.referenceRadiusMeters ||
         image.getGDALNoData() !== grid.noData) throw new Error(`Scientific source grid changed: ${lens.path}`);
+    const origin = image.getOrigin(), resolution = image.getResolution();
+    if (resolution[0] <= 0 || resolution[1] >= 0 || image.getSamplesPerPixel() !== 1 ||
+        (grid.origin && (origin[0] !== grid.origin[0] || origin[1] !== grid.origin[1])) ||
+        (grid.resolutionMeters && (resolution[0] !== grid.resolutionMeters || resolution[1] !== -grid.resolutionMeters)) ||
+        (grid.resolution && (resolution[0] !== grid.resolution[0] || resolution[1] !== grid.resolution[1]))) {
+      throw new Error(`Scientific source georeference changed: ${lens.path}`);
+    }
     const data = await image.readRasters({ interleave: true });
     return { sample(longitude, latitude) {
-      if (Math.abs(latitude) >= grid.withholdLatitudeDegrees) return null;
-      const x = Math.min(grid.width - 1, Math.floor(longitude * (grid.width / 360)));
-      const y = Math.min(grid.height - 1, Math.floor((90 - latitude) * (grid.height / 180)));
-      const value = data[y * grid.width + x];
-      return value === grid.noData ? null : value;
+      if (latitude < -90 || latitude > 90 || Math.abs(latitude) >= grid.withholdLatitudeDegrees) return null;
+      if (grid.latitudeRange && (latitude < grid.latitudeRange[0] || latitude > grid.latitudeRange[1])) return null;
+      const [easting, northing] = scienceMapPoint(longitude, latitude, grid);
+      const x = (easting - origin[0]) / resolution[0];
+      const y = (northing - origin[1]) / resolution[1];
+      return sampleScienceGrid(data, grid, x, y, lens);
     } };
   } finally { await tiff.close(); }
 }

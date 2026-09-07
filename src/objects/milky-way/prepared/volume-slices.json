@@ -4,7 +4,7 @@
       "id": "x-0",
       "axis": "x",
       "sliceIndex": 0,
-      "texturePath": "slices/x/00.png",
+      "texturePath": "slices/x/00.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -57,15 +57,15 @@
         0,
         0
       ],
-      "sha256": "56c4e3463b91e92b84bb8ebfd6e710a3aa86cbedd924d82241bf2980b18d857b",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "x-1",
       "axis": "x",
       "sliceIndex": 1,
-      "texturePath": "slices/x/01.png",
+      "texturePath": "slices/x/01.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -118,15 +118,15 @@
         0,
         0
       ],
-      "sha256": "56c4e3463b91e92b84bb8ebfd6e710a3aa86cbedd924d82241bf2980b18d857b",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "x-2",
       "axis": "x",
       "sliceIndex": 2,
-      "texturePath": "slices/x/02.png",
+      "texturePath": "slices/x/02.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -179,15 +179,15 @@
         0,
         0
       ],
-      "sha256": "56c4e3463b91e92b84bb8ebfd6e710a3aa86cbedd924d82241bf2980b18d857b",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "x-3",
       "axis": "x",
       "sliceIndex": 3,
-      "texturePath": "slices/x/03.png",
+      "texturePath": "slices/x/03.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -240,15 +240,15 @@
         0,
         0
       ],
-      "sha256": "1a16b898fdc615511a5fd71b0631abc7770fffb44912ea83e4d05dbb798b2746",
-      "bytes": 91,
+      "sha256": "e3bb10096a163e1b654cc625642414cb13af0f84852178f96df9226216c167fe",
+      "bytes": 32,
       "alphaCoverage": 1
     },
     {
       "id": "x-4",
       "axis": "x",
       "sliceIndex": 4,
-      "texturePath": "slices/x/04.png",
+      "texturePath": "slices/x/04.webp",
       "widthPx": 71,
       "heightPx": 5,
       "vertices": [
@@ -301,15 +301,15 @@
         0,
         0
       ],
-      "sha256": "6f3f053baf29759a330e2183f10d34859a40ff7ba330d5547cfc920d9ce3a5b1",
-      "bytes": 197,
+      "sha256": "17661a37d36e7021506612c1baa4d48ae352b7f4643e606646cd50c392d3a7a5",
+      "bytes": 82,
       "alphaCoverage": 0.22535211267605634
     },
     {
       "id": "x-5",
       "axis": "x",
       "sliceIndex": 5,
-      "texturePath": "slices/x/05.png",
+      "texturePath": "slices/x/05.webp",
       "widthPx": 130,
       "heightPx": 7,
       "vertices": [
@@ -362,15 +362,15 @@
         0,
         0
       ],
-      "sha256": "c0d8e4f0ee0cff433260f6203fc7ffbe9032c23a79647823ec1196f29c9c0269",
-      "bytes": 557,
+      "sha256": "239a66bcf1e5a8b50b13a605fb9b71f4965d980c460ffceb3d54a556420789b8",
+      "bytes": 220,
       "alphaCoverage": 0.24835164835164836
     },
     {
       "id": "x-6",
       "axis": "x",
       "sliceIndex": 6,
-      "texturePath": "slices/x/06.png",
+      "texturePath": "slices/x/06.webp",
       "widthPx": 145,
       "heightPx": 9,
       "vertices": [
@@ -423,15 +423,15 @@
         0,
         0
       ],
-      "sha256": "daa3013e0f1c0df53409a7eda5162398a7ab30b3074f57997533fb1407608ddf",
-      "bytes": 1458,
+      "sha256": "1f292a04ca66ba20213bad28b97dff216c3ec1f3a45fb9a2a00614e79c558e18",
+      "bytes": 758,
       "alphaCoverage": 0.41455938697318007
     },
     {
       "id": "x-7",
       "axis": "x",
       "sliceIndex": 7,
-      "texturePath": "slices/x/07.png",
+      "texturePath": "slices/x/07.webp",
       "widthPx": 150,
       "heightPx": 10,
       "vertices": [
@@ -484,15 +484,15 @@
         0,
         0
       ],
-      "sha256": "d074239c6ff023379da8610fa4d3b5e38c7985898d225b1a56fdf74cba20bf75",
-      "bytes": 2334,
+      "sha256": "fe05e32b9a5f609b65dfad2c314c4d7cdc4eb98933d9bd52dfed7a4947af5956",
+      "bytes": 1484,
       "alphaCoverage": 0.5353333333333333
     },
     {
       "id": "x-8",
       "axis": "x",
       "sliceIndex": 8,
-      "texturePath": "slices/x/08.png",
+      "texturePath": "slices/x/08.webp",
       "widthPx": 186,
       "heightPx": 12,
       "vertices": [
@@ -545,15 +545,15 @@
         0,
         0
       ],
-      "sha256": "a313910ac82a319e309a6ee660be398b5afb6fe808f4bb9d049d1b1cf67e167f",
-      "bytes": 3047,
+      "sha256": "e2a31fbadd856ab5e90382d5be66c243436b32694c09e7494cce936381c52908",
+      "bytes": 1818,
       "alphaCoverage": 0.5031362007168458
     },
     {
       "id": "x-9",
       "axis": "x",
       "sliceIndex": 9,
-      "texturePath": "slices/x/09.png",
+      "texturePath": "slices/x/09.webp",
       "widthPx": 184,
       "heightPx": 13,
       "vertices": [
@@ -606,15 +606,15 @@
         0,
         0
       ],
-      "sha256": "5eb00a6f2cec25346b39d94f2a1f02e3d6b9ca883c03abe985cf3c15e6f7ba7c",
-      "bytes": 3287,
+      "sha256": "c1998e7d983c86d100858a5cf7db9a72a12d44bc251008f6c9831dec6cba7ccd",
+      "bytes": 1958,
       "alphaCoverage": 0.5505852842809364
     },
     {
       "id": "x-10",
       "axis": "x",
       "sliceIndex": 10,
-      "texturePath": "slices/x/10.png",
+      "texturePath": "slices/x/10.webp",
       "widthPx": 199,
       "heightPx": 13,
       "vertices": [
@@ -667,15 +667,15 @@
         0,
         0
       ],
-      "sha256": "b3d6b2b1989b18a15dedf3e6ee8ad1046d902b20d76ad0d9ffd5f968e8da6d7b",
-      "bytes": 3489,
+      "sha256": "83a6a6117a9880a38b7a94eff7f776cee75bfcb44b558ddc61144ab4e874f9bd",
+      "bytes": 2108,
       "alphaCoverage": 0.5740239659837649
     },
     {
       "id": "x-11",
       "axis": "x",
       "sliceIndex": 11,
-      "texturePath": "slices/x/11.png",
+      "texturePath": "slices/x/11.webp",
       "widthPx": 211,
       "heightPx": 13,
       "vertices": [
@@ -728,15 +728,15 @@
         0,
         0
       ],
-      "sha256": "cb79b6b8529a0e055a164a8aea82bb00467d695ae9b4543923b5ae9689001404",
-      "bytes": 3609,
+      "sha256": "5fedac9ffbecd7120f0a79c4d25ac6a6f8435d59a96332dbf15d10cadf7af812",
+      "bytes": 2210,
       "alphaCoverage": 0.5771053590958805
     },
     {
       "id": "x-12",
       "axis": "x",
       "sliceIndex": 12,
-      "texturePath": "slices/x/12.png",
+      "texturePath": "slices/x/12.webp",
       "widthPx": 224,
       "heightPx": 14,
       "vertices": [
@@ -789,15 +789,15 @@
         0,
         0
       ],
-      "sha256": "4f645ec30ef272f60ae8684aeaca7e6021936d081950c98d7b53bcf32e0c3e86",
-      "bytes": 4024,
+      "sha256": "b734031b74d41e1c255958d00cbfc8db4bee757415edbf150e19a13ccf8c99c4",
+      "bytes": 2458,
       "alphaCoverage": 0.5851403061224489
     },
     {
       "id": "x-13",
       "axis": "x",
       "sliceIndex": 13,
-      "texturePath": "slices/x/13.png",
+      "texturePath": "slices/x/13.webp",
       "widthPx": 249,
       "heightPx": 15,
       "vertices": [
@@ -850,15 +850,15 @@
         0,
         0
       ],
-      "sha256": "6ea5ecd4822c25f4f890735a4d5049a938590d16bab9a4bff7856e370657eaa3",
-      "bytes": 4450,
+      "sha256": "d34ac300adcd5dd4e55062e011b223b4d12dd020e24834fe6f34dde4aa5425a3",
+      "bytes": 2608,
       "alphaCoverage": 0.5298527443105756
     },
     {
       "id": "x-14",
       "axis": "x",
       "sliceIndex": 14,
-      "texturePath": "slices/x/14.png",
+      "texturePath": "slices/x/14.webp",
       "widthPx": 244,
       "heightPx": 15,
       "vertices": [
@@ -911,15 +911,15 @@
         0,
         0
       ],
-      "sha256": "c58ac7aa68936313d3ba84d79f6b8fe9241def9711b3d1da268fa71b3d6fd2c0",
-      "bytes": 4678,
+      "sha256": "55e08da70ef32491a85089b30b02fac9cf97c29174209e289302dcd7ade020fe",
+      "bytes": 2866,
       "alphaCoverage": 0.6008196721311475
     },
     {
       "id": "x-15",
       "axis": "x",
       "sliceIndex": 15,
-      "texturePath": "slices/x/15.png",
+      "texturePath": "slices/x/15.webp",
       "widthPx": 263,
       "heightPx": 17,
       "vertices": [
@@ -972,15 +972,15 @@
         0,
         0
       ],
-      "sha256": "81dc40e73d7a15e9b1f3e9f029f7e635588cc036036dae156d7a78585017c0e4",
-      "bytes": 5596,
+      "sha256": "ae6d4800835308a65b7f70b56bb331411cdc742e1d352bf52cbfe4004015cdcf",
+      "bytes": 3114,
       "alphaCoverage": 0.5164392753299039
     },
     {
       "id": "x-16",
       "axis": "x",
       "sliceIndex": 16,
-      "texturePath": "slices/x/16.png",
+      "texturePath": "slices/x/16.webp",
       "widthPx": 274,
       "heightPx": 17,
       "vertices": [
@@ -1033,15 +1033,15 @@
         0,
         0
       ],
-      "sha256": "549ac4e1c29047a72c34de83bff4e2709da53fef0adb234aaf721e1d28e75d37",
-      "bytes": 5931,
+      "sha256": "7d026f1a20bbc7b943c11d89c2a0d39b6f4a313b2c82fd1a6ecb7918d4034515",
+      "bytes": 3394,
       "alphaCoverage": 0.5079433233147274
     },
     {
       "id": "x-17",
       "axis": "x",
       "sliceIndex": 17,
-      "texturePath": "slices/x/17.png",
+      "texturePath": "slices/x/17.webp",
       "widthPx": 274,
       "heightPx": 18,
       "vertices": [
@@ -1094,15 +1094,15 @@
         0,
         0
       ],
-      "sha256": "6f1b9bf0a4dbd932001bca477b34cc872392a59b1f89b96a33b4d4d5d4eca802",
-      "bytes": 6419,
+      "sha256": "e8ee607822391d0c1356317475fff781f5360c33b41bc7e7c0ab20d93706b370",
+      "bytes": 3596,
       "alphaCoverage": 0.5129764801297648
     },
     {
       "id": "x-18",
       "axis": "x",
       "sliceIndex": 18,
-      "texturePath": "slices/x/18.png",
+      "texturePath": "slices/x/18.webp",
       "widthPx": 296,
       "heightPx": 17,
       "vertices": [
@@ -1155,15 +1155,15 @@
         0,
         0
       ],
-      "sha256": "a7299a4ca0cb849a3f17310a1a655154c94278fca8a43a23f65a06dbfdbd3c40",
-      "bytes": 6945,
+      "sha256": "1c2528acddda6b13d7fab51564cfbd071f308dfd0f222f81b5b8fd7ea7bf6cdf",
+      "bytes": 3972,
       "alphaCoverage": 0.5170906200317965
     },
     {
       "id": "x-19",
       "axis": "x",
       "sliceIndex": 19,
-      "texturePath": "slices/x/19.png",
+      "texturePath": "slices/x/19.webp",
       "widthPx": 301,
       "heightPx": 17,
       "vertices": [
@@ -1216,15 +1216,15 @@
         0,
         0
       ],
-      "sha256": "d8241c024bb256dc4259d768bc116017421542731c95349ae19c5f133700fc4a",
-      "bytes": 6817,
+      "sha256": "b63095a82a7648e4a4f48c8e1485120facd45dc53d1a6855c22a67e0fa7d8907",
+      "bytes": 3770,
       "alphaCoverage": 0.5321477428180574
     },
     {
       "id": "x-20",
       "axis": "x",
       "sliceIndex": 20,
-      "texturePath": "slices/x/20.png",
+      "texturePath": "slices/x/20.webp",
       "widthPx": 299,
       "heightPx": 17,
       "vertices": [
@@ -1277,15 +1277,15 @@
         0,
         0
       ],
-      "sha256": "03db948a1b86f3ecd64dff15c4766352ba0ecbbe5ca411c9834be47d2dfb8cb2",
-      "bytes": 6809,
+      "sha256": "b47fbe7c1387d6c06de95416a01500365b9cfbe642c05bffa4f6f267af67066d",
+      "bytes": 3796,
       "alphaCoverage": 0.5479047806413535
     },
     {
       "id": "x-21",
       "axis": "x",
       "sliceIndex": 21,
-      "texturePath": "slices/x/21.png",
+      "texturePath": "slices/x/21.webp",
       "widthPx": 312,
       "heightPx": 17,
       "vertices": [
@@ -1338,15 +1338,15 @@
         0,
         0
       ],
-      "sha256": "c3fa89e5ab3ea25f521f9387dd794ab1db1ef10cc435625078f78cc806550607",
-      "bytes": 7212,
+      "sha256": "25419bc49bd954ed5217c27adbb5bf110e242df94a5ef126127721a6ba00eddd",
+      "bytes": 4068,
       "alphaCoverage": 0.5177224736048266
     },
     {
       "id": "x-22",
       "axis": "x",
       "sliceIndex": 22,
-      "texturePath": "slices/x/22.png",
+      "texturePath": "slices/x/22.webp",
       "widthPx": 326,
       "heightPx": 19,
       "vertices": [
@@ -1399,15 +1399,15 @@
         0,
         0
       ],
-      "sha256": "14ddb113c844dc59ece4b454e21dbab1b8bee27992843b19a64001516886ad30",
-      "bytes": 7963,
+      "sha256": "d923feec16275034e44898924b7971c9c0734c08d888dc5bdc036098ef0b73da",
+      "bytes": 3896,
       "alphaCoverage": 0.4370358411365838
     },
     {
       "id": "x-23",
       "axis": "x",
       "sliceIndex": 23,
-      "texturePath": "slices/x/23.png",
+      "texturePath": "slices/x/23.webp",
       "widthPx": 322,
       "heightPx": 19,
       "vertices": [
@@ -1460,15 +1460,15 @@
         0,
         0
       ],
-      "sha256": "8b8b2e052e5d563d26871d6ccd64dc21f21f9b403671695e89d9c3482638a344",
-      "bytes": 8291,
+      "sha256": "7fca19f727e23228bbb1b0b19cff6361e2da55b99192d11182fb288467e060c0",
+      "bytes": 3988,
       "alphaCoverage": 0.4275907159202354
     },
     {
       "id": "x-24",
       "axis": "x",
       "sliceIndex": 24,
-      "texturePath": "slices/x/24.png",
+      "texturePath": "slices/x/24.webp",
       "widthPx": 329,
       "heightPx": 18,
       "vertices": [
@@ -1521,15 +1521,15 @@
         0,
         0
       ],
-      "sha256": "c9f31459436f5cd699b18fdecaef94423971ffac84e5ccb7e8cfa6a252da755f",
-      "bytes": 8778,
+      "sha256": "c8a421458ad090640922cd4d6c2a17bd9338533b0cbe9c83245de37a97f3a1e6",
+      "bytes": 4446,
       "alphaCoverage": 0.4552516041877744
     },
     {
       "id": "x-25",
       "axis": "x",
       "sliceIndex": 25,
-      "texturePath": "slices/x/25.png",
+      "texturePath": "slices/x/25.webp",
       "widthPx": 327,
       "heightPx": 19,
       "vertices": [
@@ -1582,15 +1582,15 @@
         0,
         0
       ],
-      "sha256": "1f566dbf54ae084e76b2bdffe029c35143ce0a21f5f60a003136f0015d2dec81",
-      "bytes": 9193,
+      "sha256": "19c8378e9576be027563fa337a4ea2dc76748b2c0c03f06bc53670ba8a64d9de",
+      "bytes": 4314,
       "alphaCoverage": 0.4245935940769355
     },
     {
       "id": "x-26",
       "axis": "x",
       "sliceIndex": 26,
-      "texturePath": "slices/x/26.png",
+      "texturePath": "slices/x/26.webp",
       "widthPx": 332,
       "heightPx": 19,
       "vertices": [
@@ -1643,15 +1643,15 @@
         0,
         0
       ],
-      "sha256": "e5cde268cb04a6f1ab8d3e6e258672d6fa1b5909afad7f7e14ccee2c9d8ac2ac",
-      "bytes": 9667,
+      "sha256": "09905fcd1222ba43ab57b4b6d1b35e31b04b068025fa8466bd5bf37051a459b6",
+      "bytes": 4436,
       "alphaCoverage": 0.4136017755231452
     },
     {
       "id": "x-27",
       "axis": "x",
       "sliceIndex": 27,
-      "texturePath": "slices/x/27.png",
+      "texturePath": "slices/x/27.webp",
       "widthPx": 365,
       "heightPx": 19,
       "vertices": [
@@ -1704,15 +1704,15 @@
         0,
         0
       ],
-      "sha256": "585912d071ba06e18550190d25de7f0060574e38456597f9d96a04d3d874193f",
-      "bytes": 9811,
+      "sha256": "316971f880097a7bbe6072af1c3ec6c21e0fb565c234d6118c951af1de6bde82",
+      "bytes": 4352,
       "alphaCoverage": 0.3927901946647441
     },
     {
       "id": "x-28",
       "axis": "x",
       "sliceIndex": 28,
-      "texturePath": "slices/x/28.png",
+      "texturePath": "slices/x/28.webp",
       "widthPx": 355,
       "heightPx": 18,
       "vertices": [
@@ -1765,15 +1765,15 @@
         0,
         0
       ],
-      "sha256": "876c65f0b1b614a37830a4fd9cc9ee9c30065147ba02c8035199492a469fb26d",
-      "bytes": 9229,
+      "sha256": "ebc63fa2a6a4d0310e5c59b43c046372b9e76b3ae2092747e527c03ab1157490",
+      "bytes": 4556,
       "alphaCoverage": 0.47151799687010953
     },
     {
       "id": "x-29",
       "axis": "x",
       "sliceIndex": 29,
-      "texturePath": "slices/x/29.png",
+      "texturePath": "slices/x/29.webp",
       "widthPx": 359,
       "heightPx": 19,
       "vertices": [
@@ -1826,15 +1826,15 @@
         0,
         0
       ],
-      "sha256": "5e39cbfe1fba124c55881d362f26db1609f3a28b1192f8d11d5ef9319fed2a65",
-      "bytes": 9897,
+      "sha256": "d6e72374e6bc383fb1b826b2c8f45d0ef1462e51f78ef0e5d68d9cd617ef1ca6",
+      "bytes": 4908,
       "alphaCoverage": 0.4937692420466207
     },
     {
       "id": "x-30",
       "axis": "x",
       "sliceIndex": 30,
-      "texturePath": "slices/x/30.png",
+      "texturePath": "slices/x/30.webp",
       "widthPx": 370,
       "heightPx": 20,
       "vertices": [
@@ -1887,15 +1887,15 @@
         0,
         0
       ],
-      "sha256": "64ea2dd21a2a995214a0beb7d6c9b97647441a9b9dc2a7c369e16feb6308d8e6",
-      "bytes": 10191,
+      "sha256": "8f810335970936b6ce57fa0773e8479a5e7059471faa034d432325444805c9ac",
+      "bytes": 4842,
       "alphaCoverage": 0.49148648648648646
     },
     {
       "id": "x-31",
       "axis": "x",
       "sliceIndex": 31,
-      "texturePath": "slices/x/31.png",
+      "texturePath": "slices/x/31.webp",
       "widthPx": 377,
       "heightPx": 25,
       "vertices": [
@@ -1948,15 +1948,15 @@
         0,
         0
       ],
-      "sha256": "dffe99df3ea398d7454e4dc92f7069a44836db02988dfb8f9b58237cbc7f8d94",
-      "bytes": 13817,
+      "sha256": "f03389d2b4e995d8c301ca0665cf6bde82e9a811cede6f03420945c9b00be6e6",
+      "bytes": 5604,
       "alphaCoverage": 0.4068965517241379
     },
     {
       "id": "x-32",
       "axis": "x",
       "sliceIndex": 32,
-      "texturePath": "slices/x/32.png",
+      "texturePath": "slices/x/32.webp",
       "widthPx": 389,
       "heightPx": 25,
       "vertices": [
@@ -2009,15 +2009,15 @@
         0,
         0
       ],
-      "sha256": "bb0668fc77cbaea66a30184a57f5975d6d9ba7d19c0453c3813db0990003fb18",
-      "bytes": 14800,
+      "sha256": "e631cee3d31c46eb05670f45b33c06f44cba4ecb2832dea6b7bb8c857e20b2da",
+      "bytes": 6202,
       "alphaCoverage": 0.4252956298200514
     },
     {
       "id": "x-33",
       "axis": "x",
       "sliceIndex": 33,
-      "texturePath": "slices/x/33.png",
+      "texturePath": "slices/x/33.webp",
       "widthPx": 392,
       "heightPx": 28,
       "vertices": [
@@ -2070,15 +2070,15 @@
         0,
         0
       ],
-      "sha256": "c2dac9d9786a158e251952fcf9e0cb831272a9aa74dc54d6d272111677c25c4e",
-      "bytes": 17741,
+      "sha256": "119a7e4d67f27d6731b53017a4438d18562ad60c32ce31ac2a81bd7a5ba1c0c6",
+      "bytes": 7488,
       "alphaCoverage": 0.41964285714285715
     },
     {
       "id": "x-34",
       "axis": "x",
       "sliceIndex": 34,
-      "texturePath": "slices/x/34.png",
+      "texturePath": "slices/x/34.webp",
       "widthPx": 393,
       "heightPx": 31,
       "vertices": [
@@ -2131,15 +2131,15 @@
         0,
         0
       ],
-      "sha256": "27b215f8ab2b7a8bc8f7f5d5a78138ada8cea8ea1b2b9bc4f6428e2c74d6608b",
-      "bytes": 20105,
+      "sha256": "40e2ab799cd7ba9af20831584f81eed888ef6345d96cfd685a9e0e659ed940a6",
+      "bytes": 8352,
       "alphaCoverage": 0.4085200689485348
     },
     {
       "id": "x-35",
       "axis": "x",
       "sliceIndex": 35,
-      "texturePath": "slices/x/35.png",
+      "texturePath": "slices/x/35.webp",
       "widthPx": 387,
       "heightPx": 33,
       "vertices": [
@@ -2192,15 +2192,15 @@
         0,
         0
       ],
-      "sha256": "d4c0ecde0bd6868d8e49227a9bcc71be750484ddb964c29b09ef123e91d86a37",
-      "bytes": 21672,
+      "sha256": "c1ce220f1aa6b653899c36d638955073a245b9423f054a9d40f3c5513e676dc3",
+      "bytes": 8944,
       "alphaCoverage": 0.4121838540443192
     },
     {
       "id": "x-36",
       "axis": "x",
       "sliceIndex": 36,
-      "texturePath": "slices/x/36.png",
+      "texturePath": "slices/x/36.webp",
       "widthPx": 393,
       "heightPx": 33,
       "vertices": [
@@ -2253,15 +2253,15 @@
         0,
         0
       ],
-      "sha256": "fc33979671f3fdd083f377db50db0e7851e587be9614bc4bdea8fee2b58659e3",
-      "bytes": 21854,
+      "sha256": "ba29337110cbea63da5c1cc1bb6197856b5c5b0ce885625a9d24745da952b2da",
+      "bytes": 9400,
       "alphaCoverage": 0.43349525792273885
     },
     {
       "id": "x-37",
       "axis": "x",
       "sliceIndex": 37,
-      "texturePath": "slices/x/37.png",
+      "texturePath": "slices/x/37.webp",
       "widthPx": 400,
       "heightPx": 35,
       "vertices": [
@@ -2314,15 +2314,15 @@
         0,
         0
       ],
-      "sha256": "06190caab2287731129178d51daca3513d2c8694ca988862e7fb73b9b66ae795",
-      "bytes": 23023,
+      "sha256": "9f8c7038741a3bac83acbbf301870d6b38bfd586f5173123737e1baaddce2569",
+      "bytes": 9468,
       "alphaCoverage": 0.4205714285714286
     },
     {
       "id": "x-38",
       "axis": "x",
       "sliceIndex": 38,
-      "texturePath": "slices/x/38.png",
+      "texturePath": "slices/x/38.webp",
       "widthPx": 393,
       "heightPx": 37,
       "vertices": [
@@ -2375,15 +2375,15 @@
         0,
         0
       ],
-      "sha256": "04c77d452fd7437f5df4acbeb0c22b8cb29611e3ecbf5e93345b415c62bba7f9",
-      "bytes": 24334,
+      "sha256": "b5d433ca034695d8afcbeb021d548ef9d947243eb6af6216c160f5e29b01550a",
+      "bytes": 9828,
       "alphaCoverage": 0.42204800220067396
     },
     {
       "id": "x-39",
       "axis": "x",
       "sliceIndex": 39,
-      "texturePath": "slices/x/39.png",
+      "texturePath": "slices/x/39.webp",
       "widthPx": 404,
       "heightPx": 38,
       "vertices": [
@@ -2436,15 +2436,15 @@
         0,
         0
       ],
-      "sha256": "672619bdbb7790e98762f879f75e78464d8cfa4fb532622d814a5b8492796281",
-      "bytes": 25315,
+      "sha256": "06ac946cd5144531771a0a684744a01c167fff9bcdf8b3b922aba6a9f96d7442",
+      "bytes": 10304,
       "alphaCoverage": 0.4070479416362689
     },
     {
       "id": "x-40",
       "axis": "x",
       "sliceIndex": 40,
-      "texturePath": "slices/x/40.png",
+      "texturePath": "slices/x/40.webp",
       "widthPx": 401,
       "heightPx": 34,
       "vertices": [
@@ -2497,15 +2497,15 @@
         0,
         0
       ],
-      "sha256": "b48c51faecae5d9d470e3f02385526f10d57b15f8cba1840e138afdaf175fdf3",
-      "bytes": 24151,
+      "sha256": "0930d431e4a2d771ae7b5d7b32a7a0197cca59903197cc2096b9f18238f9fb48",
+      "bytes": 10386,
       "alphaCoverage": 0.46479389760891887
     },
     {
       "id": "x-41",
       "axis": "x",
       "sliceIndex": 41,
-      "texturePath": "slices/x/41.png",
+      "texturePath": "slices/x/41.webp",
       "widthPx": 413,
       "heightPx": 34,
       "vertices": [
@@ -2558,15 +2558,15 @@
         0,
         0
       ],
-      "sha256": "55d526161d85982d8268ec70ecb4cfa61a15777a346719802e228e6f424e1e63",
-      "bytes": 25051,
+      "sha256": "99ecf9727ef1d9889b93f387f59a20bcd55b29f5940a23d53ded1c207d3fb5b3",
+      "bytes": 11140,
       "alphaCoverage": 0.4596211365902293
     },
     {
       "id": "x-42",
       "axis": "x",
       "sliceIndex": 42,
-      "texturePath": "slices/x/42.png",
+      "texturePath": "slices/x/42.webp",
       "widthPx": 411,
       "heightPx": 37,
       "vertices": [
@@ -2619,15 +2619,15 @@
         0,
         0
       ],
-      "sha256": "816eb8e621cda42486bebb8cbe922866d3a47cc96abe0c6aa3b07efb6df134da",
-      "bytes": 26493,
+      "sha256": "c7f1e45228cbbc363b1eb66fd40e1c8fc2ac7be6b20f87ba12bd42958717b3e7",
+      "bytes": 11110,
       "alphaCoverage": 0.4232261458538831
     },
     {
       "id": "x-43",
       "axis": "x",
       "sliceIndex": 43,
-      "texturePath": "slices/x/43.png",
+      "texturePath": "slices/x/43.webp",
       "widthPx": 409,
       "heightPx": 38,
       "vertices": [
@@ -2680,15 +2680,15 @@
         0,
         0
       ],
-      "sha256": "972930034b2b20147a86f208413ee2213ac9d02aaa70093d8d065c25e645c42d",
-      "bytes": 26961,
+      "sha256": "214c77ae4626ba075d23faeda21003537cb4cce68e3af00c8b22ba7b42cda8d3",
+      "bytes": 11056,
       "alphaCoverage": 0.4198301376914168
     },
     {
       "id": "x-44",
       "axis": "x",
       "sliceIndex": 44,
-      "texturePath": "slices/x/44.png",
+      "texturePath": "slices/x/44.webp",
       "widthPx": 385,
       "heightPx": 41,
       "vertices": [
@@ -2741,15 +2741,15 @@
         0,
         0
       ],
-      "sha256": "964be8b89738f2625573fdf3d6b12e12cc414e79ab2653dbbd132a77dde6f26d",
-      "bytes": 27361,
+      "sha256": "eb99f9da728c48153db8599661ba608ea418c3fe1867c6cbf2a1093c97fdbce4",
+      "bytes": 11334,
       "alphaCoverage": 0.4290782388343364
     },
     {
       "id": "x-45",
       "axis": "x",
       "sliceIndex": 45,
-      "texturePath": "slices/x/45.png",
+      "texturePath": "slices/x/45.webp",
       "widthPx": 394,
       "heightPx": 42,
       "vertices": [
@@ -2802,15 +2802,15 @@
         0,
         0
       ],
-      "sha256": "1f10c9874b4e90d67a11abef87723244a6a62edf01fd91696524f6483135915c",
-      "bytes": 28747,
+      "sha256": "afe00a6bacc4ea51945cac7fe0a6dc94e31c180679894113c07301f6de70a0ba",
+      "bytes": 12134,
       "alphaCoverage": 0.4273628233019096
     },
     {
       "id": "x-46",
       "axis": "x",
       "sliceIndex": 46,
-      "texturePath": "slices/x/46.png",
+      "texturePath": "slices/x/46.webp",
       "widthPx": 398,
       "heightPx": 42,
       "vertices": [
@@ -2863,15 +2863,15 @@
         0,
         0
       ],
-      "sha256": "59eb92a06cdfc95c842d231574f80145ec82018810eed17f10bc8bb23cf22376",
-      "bytes": 28908,
+      "sha256": "f8398631c21696d7ea1685daad61f3e3ca743e81041b4fa5f66768f239bf23bd",
+      "bytes": 12490,
       "alphaCoverage": 0.44227087820052646
     },
     {
       "id": "x-47",
       "axis": "x",
       "sliceIndex": 47,
-      "texturePath": "slices/x/47.png",
+      "texturePath": "slices/x/47.webp",
       "widthPx": 406,
       "heightPx": 50,
       "vertices": [
@@ -2924,15 +2924,15 @@
         0,
         0
       ],
-      "sha256": "b75c42c5d3eb3b50f464c73c0b0819b76ae05ef529f127b70b5619c0ebfcb3ab",
-      "bytes": 33068,
+      "sha256": "acc4d959145d76feb22637d46668e4a4e487e724a84cb3f58149814a0ed8266e",
+      "bytes": 13090,
       "alphaCoverage": 0.38226600985221676
     },
     {
       "id": "x-48",
       "axis": "x",
       "sliceIndex": 48,
-      "texturePath": "slices/x/48.png",
+      "texturePath": "slices/x/48.webp",
       "widthPx": 426,
       "heightPx": 46,
       "vertices": [
@@ -2985,15 +2985,15 @@
         0,
         0
       ],
-      "sha256": "ccdfc24a5d28149d05efe727c9c8bb0ec3412d42ca9ab2287a1336bc136fd27a",
-      "bytes": 33089,
+      "sha256": "ea066e48899c5e415b4008e5dc1024b2f8d21a73460206d8b794e77621a2e7f6",
+      "bytes": 14280,
       "alphaCoverage": 0.41977954684629515
     },
     {
       "id": "x-49",
       "axis": "x",
       "sliceIndex": 49,
-      "texturePath": "slices/x/49.png",
+      "texturePath": "slices/x/49.webp",
       "widthPx": 430,
       "heightPx": 51,
       "vertices": [
@@ -3046,15 +3046,15 @@
         0,
         0
       ],
-      "sha256": "a38b8e0a45bd134fd3af7e9924d5e27ad4f975b663c55da981e1c61b4d4d77f3",
-      "bytes": 36158,
+      "sha256": "52c84cfb18b74c6c6709b6c297c3d2be87df3b79f2cf94ecfebb2ecec1329100",
+      "bytes": 15012,
       "alphaCoverage": 0.39758321933424534
     },
     {
       "id": "x-50",
       "axis": "x",
       "sliceIndex": 50,
-      "texturePath": "slices/x/50.png",
+      "texturePath": "slices/x/50.webp",
       "widthPx": 434,
       "heightPx": 58,
       "vertices": [
@@ -3107,15 +3107,15 @@
         0,
         0
       ],
-      "sha256": "edacb93f940137cd72da6305df4bc17109f68626ad61d614637e22a33dad3652",
-      "bytes": 40364,
+      "sha256": "28d2167b6f954064a24862629e10d268503a260c0d1ed4b7630ff6bc23d4dc4d",
+      "bytes": 16226,
       "alphaCoverage": 0.3624265056411886
     },
     {
       "id": "x-51",
       "axis": "x",
       "sliceIndex": 51,
-      "texturePath": "slices/x/51.png",
+      "texturePath": "slices/x/51.webp",
       "widthPx": 404,
       "heightPx": 54,
       "vertices": [
@@ -3168,15 +3168,15 @@
         0,
         0
       ],
-      "sha256": "a7ce44a499db21f91c2ad98b86f2b663884f1a59c65cdc951b60be9a43a4477f",
-      "bytes": 37635,
+      "sha256": "c6c930183d68ee6818f842f099a56e3355ef23fbe06de79fff3b4df0d325da13",
+      "bytes": 16830,
       "alphaCoverage": 0.43784378437843785
     },
     {
       "id": "x-52",
       "axis": "x",
       "sliceIndex": 52,
-      "texturePath": "slices/x/52.png",
+      "texturePath": "slices/x/52.webp",
       "widthPx": 408,
       "heightPx": 56,
       "vertices": [
@@ -3229,15 +3229,15 @@
         0,
         0
       ],
-      "sha256": "eace9112e1a1952ad8b5114a78b036d9c2cbadb8e1609b292191586e71bd2d94",
-      "bytes": 38928,
+      "sha256": "26cedc824ed9562e53f4d0458825179ddc517eeb27d6fba6fd49b7c5c9dec3f5",
+      "bytes": 17502,
       "alphaCoverage": 0.4324667366946779
     },
     {
       "id": "x-53",
       "axis": "x",
       "sliceIndex": 53,
-      "texturePath": "slices/x/53.png",
+      "texturePath": "slices/x/53.webp",
       "widthPx": 416,
       "heightPx": 56,
       "vertices": [
@@ -3290,15 +3290,15 @@
         0,
         0
       ],
-      "sha256": "a031dda5c43c59d1f95edaf26bba143ab2be5314c74a23ccb5772716a8046c9b",
-      "bytes": 38822,
+      "sha256": "694f35b062f766e033bf8a8eeeeab3216e45bbcaadc840a2e1ef22db078bf1e0",
+      "bytes": 17604,
       "alphaCoverage": 0.4378434065934066
     },
     {
       "id": "x-54",
       "axis": "x",
       "sliceIndex": 54,
-      "texturePath": "slices/x/54.png",
+      "texturePath": "slices/x/54.webp",
       "widthPx": 420,
       "heightPx": 57,
       "vertices": [
@@ -3351,15 +3351,15 @@
         0,
         0
       ],
-      "sha256": "7f3ecb93d5445b85f76067eb34e9f748acca81e02c048ddeacb318315295c42d",
-      "bytes": 39505,
+      "sha256": "e90e94c8f6de44970a22bce7fd9ee7c55b6d192254982fcf1a56f0ac4003a5a9",
+      "bytes": 17706,
       "alphaCoverage": 0.44068504594820385
     },
     {
       "id": "x-55",
       "axis": "x",
       "sliceIndex": 55,
-      "texturePath": "slices/x/55.png",
+      "texturePath": "slices/x/55.webp",
       "widthPx": 435,
       "heightPx": 60,
       "vertices": [
@@ -3412,15 +3412,15 @@
         0,
         0
       ],
-      "sha256": "5e2663f9f9d9477609611274b8d7d082f7af4a7699befc3b6f4e9fb89667415a",
-      "bytes": 42017,
+      "sha256": "4b85f77b9ec279932d404f2a0add5410a7180e19d8ed12ccba00f5ab19095950",
+      "bytes": 18072,
       "alphaCoverage": 0.4181609195402299
     },
     {
       "id": "x-56",
       "axis": "x",
       "sliceIndex": 56,
-      "texturePath": "slices/x/56.png",
+      "texturePath": "slices/x/56.webp",
       "widthPx": 438,
       "heightPx": 61,
       "vertices": [
@@ -3473,15 +3473,15 @@
         0,
         0
       ],
-      "sha256": "5c0f0e064937a2b8221f292f5926e423185680dbf93268adf0d8ebcad7fa7926",
-      "bytes": 42902,
+      "sha256": "198bed01c0237d65bb965ecc1ffac6f346d63afac0af0e0a9641a75e652c20dc",
+      "bytes": 18656,
       "alphaCoverage": 0.4174713676173366
     },
     {
       "id": "x-57",
       "axis": "x",
       "sliceIndex": 57,
-      "texturePath": "slices/x/57.png",
+      "texturePath": "slices/x/57.webp",
       "widthPx": 440,
       "heightPx": 59,
       "vertices": [
@@ -3534,15 +3534,15 @@
         0,
         0
       ],
-      "sha256": "2288591b50b989f230de8155bed879c692e69f554e76b36651674e6e6e26a899",
-      "bytes": 42316,
+      "sha256": "f619267cc658ae96832aeb02eff2cd611b5dd53d744efab64fd434bd1cca6e4b",
+      "bytes": 18228,
       "alphaCoverage": 0.4272342064714946
     },
     {
       "id": "x-58",
       "axis": "x",
       "sliceIndex": 58,
-      "texturePath": "slices/x/58.png",
+      "texturePath": "slices/x/58.webp",
       "widthPx": 440,
       "heightPx": 56,
       "vertices": [
@@ -3595,15 +3595,15 @@
         0,
         0
       ],
-      "sha256": "394d1b42d043ab89501514136924fd2df47a6cb6809ce8081e9f802695284c70",
-      "bytes": 41191,
+      "sha256": "e01dad396aa4e5e09fb0f85baa7d2ac99eacd9592afcfb17f04cb2fe8aeaba02",
+      "bytes": 18124,
       "alphaCoverage": 0.4524756493506494
     },
     {
       "id": "x-59",
       "axis": "x",
       "sliceIndex": 59,
-      "texturePath": "slices/x/59.png",
+      "texturePath": "slices/x/59.webp",
       "widthPx": 441,
       "heightPx": 56,
       "vertices": [
@@ -3656,15 +3656,15 @@
         0,
         0
       ],
-      "sha256": "caa9dc3f6c18b5d5b1656f1fbaf1945a0d8b1f6b1f88abddbbad2fab98c39c63",
-      "bytes": 41274,
+      "sha256": "a6f360399dbdfdcfe3a6051d46a57e075654933bbcda6fdbe549718b04d61a81",
+      "bytes": 17642,
       "alphaCoverage": 0.4508422416585682
     },
     {
       "id": "x-60",
       "axis": "x",
       "sliceIndex": 60,
-      "texturePath": "slices/x/60.png",
+      "texturePath": "slices/x/60.webp",
       "widthPx": 438,
       "heightPx": 56,
       "vertices": [
@@ -3717,15 +3717,15 @@
         0,
         0
       ],
-      "sha256": "d3a42b610f282c48d2df6f01a7ae08f3726649a9e022de67790d8c8996bcfad8",
-      "bytes": 41463,
+      "sha256": "59524e2f4e052547ab6fbbc8526ff1d4a6b94940ea3011b690642625a61edbba",
+      "bytes": 17758,
       "alphaCoverage": 0.45768101761252444
     },
     {
       "id": "x-61",
       "axis": "x",
       "sliceIndex": 61,
-      "texturePath": "slices/x/61.png",
+      "texturePath": "slices/x/61.webp",
       "widthPx": 417,
       "heightPx": 56,
       "vertices": [
@@ -3778,15 +3778,15 @@
         0,
         0
       ],
-      "sha256": "6504a536e81851adbb1fdcb5ba93c20f189a7169d35271d0c6ba35f0d41e5b89",
-      "bytes": 40632,
+      "sha256": "7b9abdb14d320b94b74c2ecb72e2cbc09b24f648fc863a1d860a7eb64db46d1c",
+      "bytes": 17696,
       "alphaCoverage": 0.4850976361767729
     },
     {
       "id": "x-62",
       "axis": "x",
       "sliceIndex": 62,
-      "texturePath": "slices/x/62.png",
+      "texturePath": "slices/x/62.webp",
       "widthPx": 424,
       "heightPx": 56,
       "vertices": [
@@ -3839,15 +3839,15 @@
         0,
         0
       ],
-      "sha256": "92bbe8c5970c6af5868ac5783bc8c6815211b656a62009d7248c036d4cf22b80",
-      "bytes": 40861,
+      "sha256": "2ca6d4040d197c888c0f0dd7059e324110ef82103132cc403c47688ee568b92f",
+      "bytes": 17504,
       "alphaCoverage": 0.47970013477088946
     },
     {
       "id": "x-63",
       "axis": "x",
       "sliceIndex": 63,
-      "texturePath": "slices/x/63.png",
+      "texturePath": "slices/x/63.webp",
       "widthPx": 422,
       "heightPx": 56,
       "vertices": [
@@ -3900,15 +3900,15 @@
         0,
         0
       ],
-      "sha256": "fa14de697b47eef78fb9c66c6df66848e42748093fae9925e6cdfac159e33cf5",
-      "bytes": 40620,
+      "sha256": "910565ac031be57e89750a2d5a38c37afb28a8f1eda0592ae0731ce442b604aa",
+      "bytes": 17616,
       "alphaCoverage": 0.48798239675016924
     },
     {
       "id": "x-64",
       "axis": "x",
       "sliceIndex": 64,
-      "texturePath": "slices/x/64.png",
+      "texturePath": "slices/x/64.webp",
       "widthPx": 432,
       "heightPx": 56,
       "vertices": [
@@ -3961,15 +3961,15 @@
         0,
         0
       ],
-      "sha256": "8e7899a108a90cdbcbac8c122b97f2d12538f0c88f283ede6fa1f6e7a62ca71f",
-      "bytes": 41206,
+      "sha256": "e1a8a0effaaa622657fe1b8eedb9603126a7559bb036b197e6cf3e168899e189",
+      "bytes": 17750,
       "alphaCoverage": 0.4782572751322751
     },
     {
       "id": "x-65",
       "axis": "x",
       "sliceIndex": 65,
-      "texturePath": "slices/x/65.png",
+      "texturePath": "slices/x/65.webp",
       "widthPx": 434,
       "heightPx": 56,
       "vertices": [
@@ -4022,15 +4022,15 @@
         0,
         0
       ],
-      "sha256": "8ccdc766e8917760f9bf3ff1311ff32038cd59303d26e910dc402033d41af053",
-      "bytes": 41684,
+      "sha256": "2f3257e50f8cbb726d16bec083da919d9cc21ce4e3fa9bc2fad57284074273c3",
+      "bytes": 17624,
       "alphaCoverage": 0.47580645161290325
     },
     {
       "id": "x-66",
       "axis": "x",
       "sliceIndex": 66,
-      "texturePath": "slices/x/66.png",
+      "texturePath": "slices/x/66.webp",
       "widthPx": 413,
       "heightPx": 56,
       "vertices": [
@@ -4083,15 +4083,15 @@
         0,
         0
       ],
-      "sha256": "db31308320c52fc411f5fe597a37940bd4cf59a89b128f076dc451ef8b82be25",
-      "bytes": 40718,
+      "sha256": "0d6bf64910a5369037a2e9eb94c2237d3254f0f971abcc5e95eb1d465a07259a",
+      "bytes": 17500,
       "alphaCoverage": 0.49697336561743344
     },
     {
       "id": "x-67",
       "axis": "x",
       "sliceIndex": 67,
-      "texturePath": "slices/x/67.png",
+      "texturePath": "slices/x/67.webp",
       "widthPx": 436,
       "heightPx": 54,
       "vertices": [
@@ -4144,15 +4144,15 @@
         0,
         0
       ],
-      "sha256": "1c9bb8319361655ccf24338507e9268e12c079e0e27bc38d4f1f1e9e6064f83c",
-      "bytes": 40323,
+      "sha256": "2fcf77d79ebe5015ed3bf60ed6539be844c5fd4c1afc276a123d45a88e172fe9",
+      "bytes": 17294,
       "alphaCoverage": 0.48343527013251786
     },
     {
       "id": "x-68",
       "axis": "x",
       "sliceIndex": 68,
-      "texturePath": "slices/x/68.png",
+      "texturePath": "slices/x/68.webp",
       "widthPx": 432,
       "heightPx": 56,
       "vertices": [
@@ -4205,15 +4205,15 @@
         0,
         0
       ],
-      "sha256": "9d3797f57dc56414c8e0a5183b7efb40b539fe2e8f970293e716559952d3a847",
-      "bytes": 40341,
+      "sha256": "6739a3140986462ea77c6274b93c38941d463ba3abcec636a6fe21428b6d85b5",
+      "bytes": 17456,
       "alphaCoverage": 0.46498842592592593
     },
     {
       "id": "x-69",
       "axis": "x",
       "sliceIndex": 69,
-      "texturePath": "slices/x/69.png",
+      "texturePath": "slices/x/69.webp",
       "widthPx": 430,
       "heightPx": 57,
       "vertices": [
@@ -4266,15 +4266,15 @@
         0,
         0
       ],
-      "sha256": "956eb9b90ad537b0b719c0bbe0d84253f5748e3582e9e83710918489fcbfe4ce",
-      "bytes": 40212,
+      "sha256": "4ebfb63ec05c0258b594162b82c7235cebff41671a703e1505ab01f0f91a57f2",
+      "bytes": 17418,
       "alphaCoverage": 0.44908200734394127
     },
     {
       "id": "x-70",
       "axis": "x",
       "sliceIndex": 70,
-      "texturePath": "slices/x/70.png",
+      "texturePath": "slices/x/70.webp",
       "widthPx": 435,
       "heightPx": 54,
       "vertices": [
@@ -4327,15 +4327,15 @@
         0,
         0
       ],
-      "sha256": "cec9dc615fd84fe518f9a1662163138e807f527dbabe837121449ea0a98c2ebf",
-      "bytes": 38443,
+      "sha256": "10ae863e0b3104cf51f75266068a8591a04f128a6710746627695af9328ccd0b",
+      "bytes": 17448,
       "alphaCoverage": 0.4596424010217114
     },
     {
       "id": "x-71",
       "axis": "x",
       "sliceIndex": 71,
-      "texturePath": "slices/x/71.png",
+      "texturePath": "slices/x/71.webp",
       "widthPx": 436,
       "heightPx": 54,
       "vertices": [
@@ -4388,15 +4388,15 @@
         0,
         0
       ],
-      "sha256": "2f954558c0e65df7d36041e0b0c76d4028b99a2b1d0215c1b3330c22a87fb567",
-      "bytes": 38465,
+      "sha256": "92265f0a7caa5f1af3005f541f75e3286fddca1bfd4bf05d1183ad5150171953",
+      "bytes": 17454,
       "alphaCoverage": 0.45238702004757053
     },
     {
       "id": "x-72",
       "axis": "x",
       "sliceIndex": 72,
-      "texturePath": "slices/x/72.png",
+      "texturePath": "slices/x/72.webp",
       "widthPx": 434,
       "heightPx": 54,
       "vertices": [
@@ -4449,15 +4449,15 @@
         0,
         0
       ],
-      "sha256": "9a40723d0f76a278c00837b8fcad396568a8cf7b71aaa79ad842e81b26649da4",
-      "bytes": 38425,
+      "sha256": "2c2ba243af70962a900a85d26044e1563089099fe1660ea764efe36de84f6a7a",
+      "bytes": 17450,
       "alphaCoverage": 0.4487967229902714
     },
     {
       "id": "x-73",
       "axis": "x",
       "sliceIndex": 73,
-      "texturePath": "slices/x/73.png",
+      "texturePath": "slices/x/73.webp",
       "widthPx": 430,
       "heightPx": 57,
       "vertices": [
@@ -4510,15 +4510,15 @@
         0,
         0
       ],
-      "sha256": "5e842ed5a0fbc8d45209015d4e84d827c6184dfcc6384c9fd5d2da8f56341bc7",
-      "bytes": 40101,
+      "sha256": "bee24479b37ead28a41d3be037ec1577663f963a4b0078334e9e13ab67bdaf87",
+      "bytes": 17628,
       "alphaCoverage": 0.4139126886984904
     },
     {
       "id": "x-74",
       "axis": "x",
       "sliceIndex": 74,
-      "texturePath": "slices/x/74.png",
+      "texturePath": "slices/x/74.webp",
       "widthPx": 442,
       "heightPx": 53,
       "vertices": [
@@ -4571,15 +4571,15 @@
         0,
         0
       ],
-      "sha256": "bafc7ced1b0f94730f52964b0eddb427c9cfab0a129ea91ea6e55e28267b6765",
-      "bytes": 38101,
+      "sha256": "e64611db18957d0780c172fc65347497c09d9e73a7e1f274960820b5e8287be4",
+      "bytes": 17190,
       "alphaCoverage": 0.4219243575514386
     },
     {
       "id": "x-75",
       "axis": "x",
       "sliceIndex": 75,
-      "texturePath": "slices/x/75.png",
+      "texturePath": "slices/x/75.webp",
       "widthPx": 438,
       "heightPx": 57,
       "vertices": [
@@ -4632,15 +4632,15 @@
         0,
         0
       ],
-      "sha256": "3c6de5990bc2daa522b87f3cd812b3fd10ef014c194eabee97c738b9eb153b63",
-      "bytes": 39642,
+      "sha256": "baa9d4b199f0532ab60e75da5aae66dc9d4fb7e5aca2e8bbf3152c7d21364eb4",
+      "bytes": 16942,
       "alphaCoverage": 0.3872066009773292
     },
     {
       "id": "x-76",
       "axis": "x",
       "sliceIndex": 76,
-      "texturePath": "slices/x/76.png",
+      "texturePath": "slices/x/76.webp",
       "widthPx": 434,
       "heightPx": 58,
       "vertices": [
@@ -4693,15 +4693,15 @@
         0,
         0
       ],
-      "sha256": "f40c5e1ab32a7de6b70e524c6040e762dc010a7c1d0628256265fbdf825092ee",
-      "bytes": 38792,
+      "sha256": "cead2a8f9be085e592079ce0c2114344ee42de6fafe707c72177414755a2f4a2",
+      "bytes": 16076,
       "alphaCoverage": 0.37005402828539646
     },
     {
       "id": "x-77",
       "axis": "x",
       "sliceIndex": 77,
-      "texturePath": "slices/x/77.png",
+      "texturePath": "slices/x/77.webp",
       "widthPx": 432,
       "heightPx": 55,
       "vertices": [
@@ -4754,15 +4754,15 @@
         0,
         0
       ],
-      "sha256": "5f7cf5cb5447ec7e6730b169d27f328e2ce383ad0190d9cd48eb3a10db681370",
-      "bytes": 36681,
+      "sha256": "d9166651330c4c5d7c1b58952e9297d66a1d19133435868039d71ccb519c95f0",
+      "bytes": 15250,
       "alphaCoverage": 0.375
     },
     {
       "id": "x-78",
       "axis": "x",
       "sliceIndex": 78,
-      "texturePath": "slices/x/78.png",
+      "texturePath": "slices/x/78.webp",
       "widthPx": 429,
       "heightPx": 50,
       "vertices": [
@@ -4815,15 +4815,15 @@
         0,
         0
       ],
-      "sha256": "149d6759c87a2864695318e3d883464787017f7920431d4950851ace002e2220",
-      "bytes": 34130,
+      "sha256": "c2fb6179d1bc9ae2a2f94b49f621398175a4ce2e9ef61f2995b8ed9b8fa69181",
+      "bytes": 14678,
       "alphaCoverage": 0.39515151515151514
     },
     {
       "id": "x-79",
       "axis": "x",
       "sliceIndex": 79,
-      "texturePath": "slices/x/79.png",
+      "texturePath": "slices/x/79.webp",
       "widthPx": 416,
       "heightPx": 50,
       "vertices": [
@@ -4876,15 +4876,15 @@
         0,
         0
       ],
-      "sha256": "fa7eb65d369a16f6e71d8dad86167689e17bd9a75dc7bc89be6941abe867313f",
-      "bytes": 33450,
+      "sha256": "a2e839f3a3ce6b7aaae1d83ac6696229e30dd04da3e761bf9ed428d688cf5818",
+      "bytes": 13878,
       "alphaCoverage": 0.3883653846153846
     },
     {
       "id": "x-80",
       "axis": "x",
       "sliceIndex": 80,
-      "texturePath": "slices/x/80.png",
+      "texturePath": "slices/x/80.webp",
       "widthPx": 400,
       "heightPx": 46,
       "vertices": [
@@ -4937,15 +4937,15 @@
         0,
         0
       ],
-      "sha256": "89b06c044c9af9d3d292f6e113674bd2c8700584467b248be27c46237e485132",
-      "bytes": 31051,
+      "sha256": "8849bb4dbfe80d89c40f2dd309342ec7912157075dbe776326f9bcf8ae28b369",
+      "bytes": 13406,
       "alphaCoverage": 0.41896739130434785
     },
     {
       "id": "x-81",
       "axis": "x",
       "sliceIndex": 81,
-      "texturePath": "slices/x/81.png",
+      "texturePath": "slices/x/81.webp",
       "widthPx": 430,
       "heightPx": 48,
       "vertices": [
@@ -4998,15 +4998,15 @@
         0,
         0
       ],
-      "sha256": "99a34e1d5752a3a572e291519f85c9bf88f90f824e485192656f95b1e9ae223a",
-      "bytes": 33059,
+      "sha256": "c4e7da251c181c69e14a70da837e272aee80725fbfc061404a36f2d83b3b5128",
+      "bytes": 12866,
       "alphaCoverage": 0.3563953488372093
     },
     {
       "id": "x-82",
       "axis": "x",
       "sliceIndex": 82,
-      "texturePath": "slices/x/82.png",
+      "texturePath": "slices/x/82.webp",
       "widthPx": 426,
       "heightPx": 43,
       "vertices": [
@@ -5059,15 +5059,15 @@
         0,
         0
       ],
-      "sha256": "04ac9265efcccec02098e3e9b4cdcebc10ab584d5e03b7b3e772fb8e7e498851",
-      "bytes": 30266,
+      "sha256": "d7f2851224714fde07ea77151e3092f268ced39fa935165af730aa1b54e21186",
+      "bytes": 12028,
       "alphaCoverage": 0.38639589474833497
     },
     {
       "id": "x-83",
       "axis": "x",
       "sliceIndex": 83,
-      "texturePath": "slices/x/83.png",
+      "texturePath": "slices/x/83.webp",
       "widthPx": 422,
       "heightPx": 37,
       "vertices": [
@@ -5120,15 +5120,15 @@
         0,
         0
       ],
-      "sha256": "57d66128c1bc7a2bc2e777698e5b2fbc9c9e66671ac6de468fe276ae2de017d1",
-      "bytes": 26908,
+      "sha256": "b603cac80bcbb533240b68e60bd6fecb0e9390b38e64d8ddf4c8be1caa517483",
+      "bytes": 11488,
       "alphaCoverage": 0.43883694120660943
     },
     {
       "id": "x-84",
       "axis": "x",
       "sliceIndex": 84,
-      "texturePath": "slices/x/84.png",
+      "texturePath": "slices/x/84.webp",
       "widthPx": 421,
       "heightPx": 39,
       "vertices": [
@@ -5181,15 +5181,15 @@
         0,
         0
       ],
-      "sha256": "4b36e0c659f1fb0f94c7d09a3cdac431c7a885a025a0b6cc6fcb48ba927ade13",
-      "bytes": 27720,
+      "sha256": "70acc34647ad23bfac1e7c7590cde14c909b16b3d406ffca3b64f7e2eb8c65d6",
+      "bytes": 11006,
       "alphaCoverage": 0.4053840063341251
     },
     {
       "id": "x-85",
       "axis": "x",
       "sliceIndex": 85,
-      "texturePath": "slices/x/85.png",
+      "texturePath": "slices/x/85.webp",
       "widthPx": 410,
       "heightPx": 38,
       "vertices": [
@@ -5242,15 +5242,15 @@
         0,
         0
       ],
-      "sha256": "6d0bafcee455df8365e4261b84e9a9c3aa6593768e79b02650ec64ad2e241cb1",
-      "bytes": 26582,
+      "sha256": "01f0eca71e26ff041ecdfdec4883eb4b0cd80449a68753aaa03acd5792fb0b9b",
+      "bytes": 11044,
       "alphaCoverage": 0.4204749679075738
     },
     {
       "id": "x-86",
       "axis": "x",
       "sliceIndex": 86,
-      "texturePath": "slices/x/86.png",
+      "texturePath": "slices/x/86.webp",
       "widthPx": 396,
       "heightPx": 42,
       "vertices": [
@@ -5303,15 +5303,15 @@
         0,
         0
       ],
-      "sha256": "3d7e35510e82b6d46ab519cbae95a2bfea49cdc8eb2d8be385dd980b8c80b643",
-      "bytes": 27704,
+      "sha256": "bc802a90984a5d7c6b8c26939bcd79f90e1593f0125f8ef35fbcd904297fd212",
+      "bytes": 10574,
       "alphaCoverage": 0.3888888888888889
     },
     {
       "id": "x-87",
       "axis": "x",
       "sliceIndex": 87,
-      "texturePath": "slices/x/87.png",
+      "texturePath": "slices/x/87.webp",
       "widthPx": 407,
       "heightPx": 35,
       "vertices": [
@@ -5364,15 +5364,15 @@
         0,
         0
       ],
-      "sha256": "913dbd63c0199f1c5f7ef8c5fd316084ff37cde59ebd88a1b99924546473cc26",
-      "bytes": 24606,
+      "sha256": "269d19b67824c61b08a90125f4c99e9c90599216561c781473db74e1997b3966",
+      "bytes": 10614,
       "alphaCoverage": 0.44963144963144963
     },
     {
       "id": "x-88",
       "axis": "x",
       "sliceIndex": 88,
-      "texturePath": "slices/x/88.png",
+      "texturePath": "slices/x/88.webp",
       "widthPx": 402,
       "heightPx": 37,
       "vertices": [
@@ -5425,15 +5425,15 @@
         0,
         0
       ],
-      "sha256": "021fc16fb2117cc2d84f3fe89dc9054811d316584b94d367e36896d91f3e52de",
-      "bytes": 24695,
+      "sha256": "7cc0326d884e8e1c57cc96fd00a69435a49e4eeb5008bcf1cfd58abf07dd94f6",
+      "bytes": 10214,
       "alphaCoverage": 0.42053247277127875
     },
     {
       "id": "x-89",
       "axis": "x",
       "sliceIndex": 89,
-      "texturePath": "slices/x/89.png",
+      "texturePath": "slices/x/89.webp",
       "widthPx": 400,
       "heightPx": 35,
       "vertices": [
@@ -5486,15 +5486,15 @@
         0,
         0
       ],
-      "sha256": "df83d084488b477ffd94a1b508d7debdd7547fdb7bab07bb4b67cee3a707ba62",
-      "bytes": 23229,
+      "sha256": "959cb5a736d35b365d21366ed4b9468619410ffb743c05aa47046e4e24480ced",
+      "bytes": 9662,
       "alphaCoverage": 0.43664285714285717
     },
     {
       "id": "x-90",
       "axis": "x",
       "sliceIndex": 90,
-      "texturePath": "slices/x/90.png",
+      "texturePath": "slices/x/90.webp",
       "widthPx": 391,
       "heightPx": 35,
       "vertices": [
@@ -5547,15 +5547,15 @@
         0,
         0
       ],
-      "sha256": "ce8c45df70a825050ed8a476fe0b4732c21f7c26a59888a6517a6af955e742a0",
-      "bytes": 22257,
+      "sha256": "4f83a0dec656fd7c96633901c88bee6055c1d8c7928f297f6dc730d7d2fb1cf8",
+      "bytes": 9402,
       "alphaCoverage": 0.4436974789915966
     },
     {
       "id": "x-91",
       "axis": "x",
       "sliceIndex": 91,
-      "texturePath": "slices/x/91.png",
+      "texturePath": "slices/x/91.webp",
       "widthPx": 390,
       "heightPx": 34,
       "vertices": [
@@ -5608,15 +5608,15 @@
         0,
         0
       ],
-      "sha256": "42f0fbce360b8f57583bcc5c64a4f9a6f08242b8bd3f0ebeed66c726ff1ec3bc",
-      "bytes": 21569,
+      "sha256": "9c108576129387398ded18e00ea64a2e4ef9b2b3cb60dc94941d6a988e67a4a4",
+      "bytes": 9156,
       "alphaCoverage": 0.44177978883861235
     },
     {
       "id": "x-92",
       "axis": "x",
       "sliceIndex": 92,
-      "texturePath": "slices/x/92.png",
+      "texturePath": "slices/x/92.webp",
       "widthPx": 395,
       "heightPx": 34,
       "vertices": [
@@ -5669,15 +5669,15 @@
         0,
         0
       ],
-      "sha256": "52d3d1f19b58ab0f00abf415fd0fa7beabec0aac1dde295ba026d6bd0c1cbad9",
-      "bytes": 21422,
+      "sha256": "d9923826c8d4ad72e829de98d7ea5abf431a0c9c5ab297e9183d40f59dd6fa86",
+      "bytes": 8752,
       "alphaCoverage": 0.41399851079672373
     },
     {
       "id": "x-93",
       "axis": "x",
       "sliceIndex": 93,
-      "texturePath": "slices/x/93.png",
+      "texturePath": "slices/x/93.webp",
       "widthPx": 392,
       "heightPx": 30,
       "vertices": [
@@ -5730,15 +5730,15 @@
         0,
         0
       ],
-      "sha256": "d8c257f8400183212a69c999b8438872a8f68d1c30c628369862c532db171d13",
-      "bytes": 18950,
+      "sha256": "d753cf0074b331ae3935f7c27f6680707f6d629e0e5a46fb6dc5b86e20bdbd05",
+      "bytes": 8146,
       "alphaCoverage": 0.44268707482993197
     },
     {
       "id": "x-94",
       "axis": "x",
       "sliceIndex": 94,
-      "texturePath": "slices/x/94.png",
+      "texturePath": "slices/x/94.webp",
       "widthPx": 390,
       "heightPx": 27,
       "vertices": [
@@ -5791,15 +5791,15 @@
         0,
         0
       ],
-      "sha256": "c9a8cb1789fb1cae5e3203ba3cb01b30623388148ec7743c88797fea0149e4e9",
-      "bytes": 17144,
+      "sha256": "3e01d537a3e2af0f7f6dd7ab1aa2441b82a8acbb1eafff8912cea9f7bd21b616",
+      "bytes": 7902,
       "alphaCoverage": 0.4808167141500475
     },
     {
       "id": "x-95",
       "axis": "x",
       "sliceIndex": 95,
-      "texturePath": "slices/x/95.png",
+      "texturePath": "slices/x/95.webp",
       "widthPx": 376,
       "heightPx": 26,
       "vertices": [
@@ -5852,15 +5852,15 @@
         0,
         0
       ],
-      "sha256": "410b1721f61a7f7681c0888185cd06888c60f6a887acefdd6938567be861a3e0",
-      "bytes": 15016,
+      "sha256": "cf6ef911873a008625763c8268e56060650fc7d6ea718a973ae43ce0b255c5dd",
+      "bytes": 6746,
       "alphaCoverage": 0.47933715220949263
     },
     {
       "id": "x-96",
       "axis": "x",
       "sliceIndex": 96,
-      "texturePath": "slices/x/96.png",
+      "texturePath": "slices/x/96.webp",
       "widthPx": 376,
       "heightPx": 22,
       "vertices": [
@@ -5913,15 +5913,15 @@
         0,
         0
       ],
-      "sha256": "bca7e18b6878f593bf17822ea1cdaefaad6ed31b51b5e7edad311c7440eb9c45",
-      "bytes": 12103,
+      "sha256": "1566be37949e48d5458f092079e5491d6dfa7604e61e108b8bc8a1d32a52148e",
+      "bytes": 5940,
       "alphaCoverage": 0.5270793036750484
     },
     {
       "id": "x-97",
       "axis": "x",
       "sliceIndex": 97,
-      "texturePath": "slices/x/97.png",
+      "texturePath": "slices/x/97.webp",
       "widthPx": 368,
       "heightPx": 20,
       "vertices": [
@@ -5974,15 +5974,15 @@
         0,
         0
       ],
-      "sha256": "58a9da13e49e659fa2cdac244b6d5a3f624fdce0142116d21f9c6e391c8d6829",
-      "bytes": 10900,
+      "sha256": "67cd788b114b8e5c06408ada8f602e49bf3d76ad4e96e4b3c8d88bd70ab2628d",
+      "bytes": 5634,
       "alphaCoverage": 0.5569293478260869
     },
     {
       "id": "x-98",
       "axis": "x",
       "sliceIndex": 98,
-      "texturePath": "slices/x/98.png",
+      "texturePath": "slices/x/98.webp",
       "widthPx": 365,
       "heightPx": 18,
       "vertices": [
@@ -6035,15 +6035,15 @@
         0,
         0
       ],
-      "sha256": "49ec6ae53cd64e6f6303b5603f0859590916f9445d89371e05da5ee01a478a54",
-      "bytes": 9939,
+      "sha256": "2771372bcd682e31ae80f622ab41ed74f8a7cf787dd6a994fe624b5805cc10b6",
+      "bytes": 5198,
       "alphaCoverage": 0.5356164383561643
     },
     {
       "id": "x-99",
       "axis": "x",
       "sliceIndex": 99,
-      "texturePath": "slices/x/99.png",
+      "texturePath": "slices/x/99.webp",
       "widthPx": 360,
       "heightPx": 17,
       "vertices": [
@@ -6096,15 +6096,15 @@
         0,
         0
       ],
-      "sha256": "394389cefac5ff06425cdf16b85c90d483bd2188dea94d22b31518e528e13406",
-      "bytes": 9379,
+      "sha256": "b9bfefaf95c5eb3faab5dfb432cc3d962e61507221a51639e6f531a916a57f87",
+      "bytes": 5154,
       "alphaCoverage": 0.5526143790849674
     },
     {
       "id": "x-100",
       "axis": "x",
       "sliceIndex": 100,
-      "texturePath": "slices/x/100.png",
+      "texturePath": "slices/x/100.webp",
       "widthPx": 357,
       "heightPx": 17,
       "vertices": [
@@ -6157,15 +6157,15 @@
         0,
         0
       ],
-      "sha256": "57725ebfa84ba19ea9052d342be643bc0722477f4f45c666258ff69602e233d7",
-      "bytes": 9420,
+      "sha256": "6fb0972277d0153898f042deb267bc27217c5a9fc2b87feeb2227f84ad0ce0c9",
+      "bytes": 5008,
       "alphaCoverage": 0.5173834239578184
     },
     {
       "id": "x-101",
       "axis": "x",
       "sliceIndex": 101,
-      "texturePath": "slices/x/101.png",
+      "texturePath": "slices/x/101.webp",
       "widthPx": 353,
       "heightPx": 18,
       "vertices": [
@@ -6218,15 +6218,15 @@
         0,
         0
       ],
-      "sha256": "963649ec100c9243c0b853475b78b1ef71f52f6a3349cdbeb02fe250e77fe157",
-      "bytes": 9441,
+      "sha256": "f114a5bdb91f75acbd77108e995d19a474d61b8edf32d6ede84fd30613e262dd",
+      "bytes": 4666,
       "alphaCoverage": 0.45026754800125907
     },
     {
       "id": "x-102",
       "axis": "x",
       "sliceIndex": 102,
-      "texturePath": "slices/x/102.png",
+      "texturePath": "slices/x/102.webp",
       "widthPx": 347,
       "heightPx": 17,
       "vertices": [
@@ -6279,15 +6279,15 @@
         0,
         0
       ],
-      "sha256": "e82fb9246ef8b4015a5158667895a2cc7cbd6cbe5c03165b7d990a2bf09d0e09",
-      "bytes": 8127,
+      "sha256": "3b18855c93ef30f5a4c75041811dd0ef21cf94189215dfd30556f4181fc0569b",
+      "bytes": 4148,
       "alphaCoverage": 0.479233768435328
     },
     {
       "id": "x-103",
       "axis": "x",
       "sliceIndex": 103,
-      "texturePath": "slices/x/103.png",
+      "texturePath": "slices/x/103.webp",
       "widthPx": 332,
       "heightPx": 17,
       "vertices": [
@@ -6340,15 +6340,15 @@
         0,
         0
       ],
-      "sha256": "a43822893ffdb8be004a6c9914561599f4df59683f959d6d89739f2e0d66a1e4",
-      "bytes": 7491,
+      "sha256": "8c3b5b9f6ed542c92392d0a89a8d66a18e358beb413a8977b9c5b9fa44d86874",
+      "bytes": 3998,
       "alphaCoverage": 0.5301204819277109
     },
     {
       "id": "x-104",
       "axis": "x",
       "sliceIndex": 104,
-      "texturePath": "slices/x/104.png",
+      "texturePath": "slices/x/104.webp",
       "widthPx": 333,
       "heightPx": 17,
       "vertices": [
@@ -6401,15 +6401,15 @@
         0,
         0
       ],
-      "sha256": "0740696c05158e03767c0d59308baf786a1139ba0ae8987e3cbcee4e5c8a4bfb",
-      "bytes": 7966,
+      "sha256": "5c44a65f01abb05fd2d0f50feb0434de0751a39cbc788df50cdcf905a6a1a797",
+      "bytes": 4352,
       "alphaCoverage": 0.53347465112171
     },
     {
       "id": "x-105",
       "axis": "x",
       "sliceIndex": 105,
-      "texturePath": "slices/x/105.png",
+      "texturePath": "slices/x/105.webp",
       "widthPx": 318,
       "heightPx": 17,
       "vertices": [
@@ -6462,15 +6462,15 @@
         0,
         0
       ],
-      "sha256": "0f7900b2124c900fbe0f5ec7c44539dd0549c5d2989d6bcac9e16629a467f4b8",
-      "bytes": 7635,
+      "sha256": "c679feea2e9439d760d9d251d62a5b63b65433610ba9223cd5db2840bd020f29",
+      "bytes": 4384,
       "alphaCoverage": 0.562708102108768
     },
     {
       "id": "x-106",
       "axis": "x",
       "sliceIndex": 106,
-      "texturePath": "slices/x/106.png",
+      "texturePath": "slices/x/106.webp",
       "widthPx": 317,
       "heightPx": 18,
       "vertices": [
@@ -6523,15 +6523,15 @@
         0,
         0
       ],
-      "sha256": "222f04137b2e9fd142cd3c7517ecc2a2b56e2e8005f2b1e84c5cf1ba0ab96265",
-      "bytes": 8044,
+      "sha256": "0ee66aec10f0acaa1e02a7e800c9c59041cf1cf1c7384c58dad346d8627edcee",
+      "bytes": 4474,
       "alphaCoverage": 0.5387311601822643
     },
     {
       "id": "x-107",
       "axis": "x",
       "sliceIndex": 107,
-      "texturePath": "slices/x/107.png",
+      "texturePath": "slices/x/107.webp",
       "widthPx": 306,
       "heightPx": 17,
       "vertices": [
@@ -6584,15 +6584,15 @@
         0,
         0
       ],
-      "sha256": "11b4ad1115335ad0f8a5c2032e61b003ba83a31f9bfe8e5ea0e82d69e81ad421",
-      "bytes": 7762,
+      "sha256": "89e9eb9a6cb334925efe681002d5b094720deb94777660af408accf11548c5f8",
+      "bytes": 4624,
       "alphaCoverage": 0.5907343329488658
     },
     {
       "id": "x-108",
       "axis": "x",
       "sliceIndex": 108,
-      "texturePath": "slices/x/108.png",
+      "texturePath": "slices/x/108.webp",
       "widthPx": 306,
       "heightPx": 17,
       "vertices": [
@@ -6645,15 +6645,15 @@
         0,
         0
       ],
-      "sha256": "f52b869d22a5778a8ec4f346dcc5774cf66b623019496ab8c1562f91d16faeb8",
-      "bytes": 7530,
+      "sha256": "576702d19c468f7d66da6deaeb99b2f99f65586889d3631edaf354e1ec6ea213",
+      "bytes": 4488,
       "alphaCoverage": 0.5795847750865052
     },
     {
       "id": "x-109",
       "axis": "x",
       "sliceIndex": 109,
-      "texturePath": "slices/x/109.png",
+      "texturePath": "slices/x/109.webp",
       "widthPx": 302,
       "heightPx": 17,
       "vertices": [
@@ -6706,15 +6706,15 @@
         0,
         0
       ],
-      "sha256": "3426878f7c2ffe649205f4e026a4721a3d3e2cda9f2819571e4e3b342b89a22e",
-      "bytes": 7387,
+      "sha256": "71e1008fba3fa41a2a376597bc18e5ce8272dfc57b138d14abaed61a9da1ff42",
+      "bytes": 4410,
       "alphaCoverage": 0.5730424620179198
     },
     {
       "id": "x-110",
       "axis": "x",
       "sliceIndex": 110,
-      "texturePath": "slices/x/110.png",
+      "texturePath": "slices/x/110.webp",
       "widthPx": 288,
       "heightPx": 17,
       "vertices": [
@@ -6767,15 +6767,15 @@
         0,
         0
       ],
-      "sha256": "6686e95b4b9cd9915cba988910ef139574164f46f913a0530bb589d5beed7888",
-      "bytes": 7165,
+      "sha256": "fe3fc76b39e28afb939f39bfac0625dc1c2a8a2e6560952e2d866006ea4637b0",
+      "bytes": 4328,
       "alphaCoverage": 0.5841503267973857
     },
     {
       "id": "x-111",
       "axis": "x",
       "sliceIndex": 111,
-      "texturePath": "slices/x/111.png",
+      "texturePath": "slices/x/111.webp",
       "widthPx": 297,
       "heightPx": 16,
       "vertices": [
@@ -6828,15 +6828,15 @@
         0,
         0
       ],
-      "sha256": "1251e814caf015bd53b9ad352607d4d3b456fbb8fcc88218fd9815633dfbeb1a",
-      "bytes": 6979,
+      "sha256": "2e53e26ed738662fa97126e46f006e1b55924c6bcf7828875e1a3eefc7f187e3",
+      "bytes": 4262,
       "alphaCoverage": 0.5843855218855218
     },
     {
       "id": "x-112",
       "axis": "x",
       "sliceIndex": 112,
-      "texturePath": "slices/x/112.png",
+      "texturePath": "slices/x/112.webp",
       "widthPx": 279,
       "heightPx": 17,
       "vertices": [
@@ -6889,15 +6889,15 @@
         0,
         0
       ],
-      "sha256": "c205a968c7ab5b31c3c0b306aa48f863fdedbe1d2923c18c96e2513d093083e7",
-      "bytes": 6623,
+      "sha256": "3aea882a0edadcc016eee1c255b4600fcd1145a14d0e2bf059eb129f8daa5d41",
+      "bytes": 3926,
       "alphaCoverage": 0.5433270082226439
     },
     {
       "id": "x-113",
       "axis": "x",
       "sliceIndex": 113,
-      "texturePath": "slices/x/113.png",
+      "texturePath": "slices/x/113.webp",
       "widthPx": 258,
       "heightPx": 17,
       "vertices": [
@@ -6950,15 +6950,15 @@
         0,
         0
       ],
-      "sha256": "8fafb45a15628b2ff10fe88e82b6250f914fa567c0d1e4d4accebc0c5945ee91",
-      "bytes": 6097,
+      "sha256": "29e4d1ec0cf04286d48f09f0284334543fb41090dcddd07b7befd12f789a01dc",
+      "bytes": 3612,
       "alphaCoverage": 0.5401276789785682
     },
     {
       "id": "x-114",
       "axis": "x",
       "sliceIndex": 114,
-      "texturePath": "slices/x/114.png",
+      "texturePath": "slices/x/114.webp",
       "widthPx": 231,
       "heightPx": 17,
       "vertices": [
@@ -7011,15 +7011,15 @@
         0,
         0
       ],
-      "sha256": "98cec9c7574ada1f074f74d4155b61aa3641e98deb3f61bfa7c85af4c75dbfc0",
-      "bytes": 5457,
+      "sha256": "c2f1b36706a53528d6ded35e27b6bfdb46bca975df9471f0c4e6410ebd6a7207",
+      "bytes": 3272,
       "alphaCoverage": 0.5393430099312452
     },
     {
       "id": "x-115",
       "axis": "x",
       "sliceIndex": 115,
-      "texturePath": "slices/x/115.png",
+      "texturePath": "slices/x/115.webp",
       "widthPx": 229,
       "heightPx": 17,
       "vertices": [
@@ -7072,15 +7072,15 @@
         0,
         0
       ],
-      "sha256": "48b0dccd1398e0d30aeea3052b0d0bf0a27e6f2d043a201c580951a5cf7f5f7a",
-      "bytes": 5182,
+      "sha256": "9cf5a2771c330ae14ef32d58367d47e028ce654db27bc94f42389c7f15c7b4b0",
+      "bytes": 2996,
       "alphaCoverage": 0.5191369124068842
     },
     {
       "id": "x-116",
       "axis": "x",
       "sliceIndex": 116,
-      "texturePath": "slices/x/116.png",
+      "texturePath": "slices/x/116.webp",
       "widthPx": 231,
       "heightPx": 15,
       "vertices": [
@@ -7133,15 +7133,15 @@
         0,
         0
       ],
-      "sha256": "1b0ff96f1c54e086717c7d17f78f8ca1c4bdec96a2768ab7e9ffc27d2cb76b29",
-      "bytes": 4500,
+      "sha256": "c9416df190fde85006723ef5d50445a415c699ca345e794227881bd4fd8945fa",
+      "bytes": 2728,
       "alphaCoverage": 0.5483405483405484
     },
     {
       "id": "x-117",
       "axis": "x",
       "sliceIndex": 117,
-      "texturePath": "slices/x/117.png",
+      "texturePath": "slices/x/117.webp",
       "widthPx": 213,
       "heightPx": 14,
       "vertices": [
@@ -7194,15 +7194,15 @@
         0,
         0
       ],
-      "sha256": "e3957b49d040e6558651189b7e0fa4616137f55d888abf2a4ecd2e3fa8d82671",
-      "bytes": 4093,
+      "sha256": "f16ae12f5bc77e6d67f3195b2121df229ed33b36ccc18b63cfa87e6a18212c7c",
+      "bytes": 2482,
       "alphaCoverage": 0.5385647216633133
     },
     {
       "id": "x-118",
       "axis": "x",
       "sliceIndex": 118,
-      "texturePath": "slices/x/118.png",
+      "texturePath": "slices/x/118.webp",
       "widthPx": 191,
       "heightPx": 13,
       "vertices": [
@@ -7255,15 +7255,15 @@
         0,
         0
       ],
-      "sha256": "d45a24bd7cb0513e9c697008527fa523f0171b1b79ef65681071a530627ea5ee",
-      "bytes": 3483,
+      "sha256": "ad29d3affcdb8d407af66aed3bfc803be03fb6d044ab453efd85edfbb573aba2",
+      "bytes": 2140,
       "alphaCoverage": 0.585581957309706
     },
     {
       "id": "x-119",
       "axis": "x",
       "sliceIndex": 119,
-      "texturePath": "slices/x/119.png",
+      "texturePath": "slices/x/119.webp",
       "widthPx": 184,
       "heightPx": 13,
       "vertices": [
@@ -7316,15 +7316,15 @@
         0,
         0
       ],
-      "sha256": "bfc5721a401bce4a0848dfc18b459d0871d1a1af18b637166cb108d184ce281f",
-      "bytes": 3186,
+      "sha256": "4ba8e458afcbf34a95ed9642cb8ab94c061de7e303ecf5e11694079d284f2555",
+      "bytes": 1906,
       "alphaCoverage": 0.5096153846153846
     },
     {
       "id": "x-120",
       "axis": "x",
       "sliceIndex": 120,
-      "texturePath": "slices/x/120.png",
+      "texturePath": "slices/x/120.webp",
       "widthPx": 162,
       "heightPx": 11,
       "vertices": [
@@ -7377,15 +7377,15 @@
         0,
         0
       ],
-      "sha256": "68c2c191e1c3a569744be7c67fc39dabc275c116e1ade9972bf6128ea70d6d19",
-      "bytes": 1911,
+      "sha256": "43b824795fd874cc9478b547572b7b4fb386899f497e069bc424cfbb4b695c11",
+      "bytes": 1156,
       "alphaCoverage": 0.48653198653198654
     },
     {
       "id": "x-121",
       "axis": "x",
       "sliceIndex": 121,
-      "texturePath": "slices/x/121.png",
+      "texturePath": "slices/x/121.webp",
       "widthPx": 134,
       "heightPx": 10,
       "vertices": [
@@ -7438,15 +7438,15 @@
         0,
         0
       ],
-      "sha256": "f253f0cc546977eb24a0d08166a4f666b903cb4e65d8a00ebc874e37d03e249c",
-      "bytes": 1295,
+      "sha256": "ebef5f103c2c79c85c83d101a1fe24ea1e6df18a22618d603d9c7cb8a6e0a4dd",
+      "bytes": 624,
       "alphaCoverage": 0.48582089552238805
     },
     {
       "id": "x-122",
       "axis": "x",
       "sliceIndex": 122,
-      "texturePath": "slices/x/122.png",
+      "texturePath": "slices/x/122.webp",
       "widthPx": 120,
       "heightPx": 8,
       "vertices": [
@@ -7499,15 +7499,15 @@
         0,
         0
       ],
-      "sha256": "d6a9c67d3013f8a195010ff61c00a598cd683b8ee65f7bd609c75fb664fba3a4",
-      "bytes": 572,
+      "sha256": "f1341c99ae079a1ff6e27c995a3cf74127483c436c52da564b0dfeb0cbd6a914",
+      "bytes": 278,
       "alphaCoverage": 0.3729166666666667
     },
     {
       "id": "x-123",
       "axis": "x",
       "sliceIndex": 123,
-      "texturePath": "slices/x/123.png",
+      "texturePath": "slices/x/123.webp",
       "widthPx": 78,
       "heightPx": 6,
       "vertices": [
@@ -7560,15 +7560,15 @@
         0,
         0
       ],
-      "sha256": "48f6314a6dc8272f1021fca436c259ec45b9cc60382f084639931ba24e879bc5",
-      "bytes": 219,
+      "sha256": "b24ea8f3533301f62b880cf0ca9646521d610259cc1ec1b91201b68e99080781",
+      "bytes": 74,
       "alphaCoverage": 0.16025641025641027
     },
     {
       "id": "x-124",
       "axis": "x",
       "sliceIndex": 124,
-      "texturePath": "slices/x/124.png",
+      "texturePath": "slices/x/124.webp",
       "widthPx": 3,
       "heightPx": 2,
       "vertices": [
@@ -7621,15 +7621,15 @@
         0,
         0
       ],
-      "sha256": "12ba8089b8791d471b753e15b372ccadb83f41f1abe8e582dd4a6908ec14dc81",
-      "bytes": 101,
+      "sha256": "44bce2451fb026398362cac43fd430d07e9b18a60326b4d97d935ef0365060e1",
+      "bytes": 36,
       "alphaCoverage": 0.3333333333333333
     },
     {
       "id": "x-125",
       "axis": "x",
       "sliceIndex": 125,
-      "texturePath": "slices/x/125.png",
+      "texturePath": "slices/x/125.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -7682,15 +7682,15 @@
         0,
         0
       ],
-      "sha256": "56c4e3463b91e92b84bb8ebfd6e710a3aa86cbedd924d82241bf2980b18d857b",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "x-126",
       "axis": "x",
       "sliceIndex": 126,
-      "texturePath": "slices/x/126.png",
+      "texturePath": "slices/x/126.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -7743,15 +7743,15 @@
         0,
         0
       ],
-      "sha256": "56c4e3463b91e92b84bb8ebfd6e710a3aa86cbedd924d82241bf2980b18d857b",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "x-127",
       "axis": "x",
       "sliceIndex": 127,
-      "texturePath": "slices/x/127.png",
+      "texturePath": "slices/x/127.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -7804,15 +7804,15 @@
         0,
         0
       ],
-      "sha256": "56c4e3463b91e92b84bb8ebfd6e710a3aa86cbedd924d82241bf2980b18d857b",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-0",
       "axis": "y",
       "sliceIndex": 0,
-      "texturePath": "slices/y/00.png",
+      "texturePath": "slices/y/00.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -7865,15 +7865,15 @@
         1,
         0
       ],
-      "sha256": "56c4e3463b91e92b84bb8ebfd6e710a3aa86cbedd924d82241bf2980b18d857b",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-1",
       "axis": "y",
       "sliceIndex": 1,
-      "texturePath": "slices/y/01.png",
+      "texturePath": "slices/y/01.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -7926,15 +7926,15 @@
         1,
         0
       ],
-      "sha256": "acdd92b9f1fa5c9e6fb6792876170aae2bb55d76bdd23cfd2976b61b75d1b4dc",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-2",
       "axis": "y",
       "sliceIndex": 2,
-      "texturePath": "slices/y/02.png",
+      "texturePath": "slices/y/02.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -7987,15 +7987,15 @@
         1,
         0
       ],
-      "sha256": "acdd92b9f1fa5c9e6fb6792876170aae2bb55d76bdd23cfd2976b61b75d1b4dc",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-3",
       "axis": "y",
       "sliceIndex": 3,
-      "texturePath": "slices/y/03.png",
+      "texturePath": "slices/y/03.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -8048,15 +8048,15 @@
         1,
         0
       ],
-      "sha256": "acdd92b9f1fa5c9e6fb6792876170aae2bb55d76bdd23cfd2976b61b75d1b4dc",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-4",
       "axis": "y",
       "sliceIndex": 4,
-      "texturePath": "slices/y/04.png",
+      "texturePath": "slices/y/04.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -8109,15 +8109,15 @@
         1,
         0
       ],
-      "sha256": "3c941781d760b00f5e2e0b17312f5092eafae9a7dfcf6809796f98f1ec2b4165",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-5",
       "axis": "y",
       "sliceIndex": 5,
-      "texturePath": "slices/y/05.png",
+      "texturePath": "slices/y/05.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -8170,15 +8170,15 @@
         1,
         0
       ],
-      "sha256": "8ce47b5b4e93663f730098c9969018e8401c69c30d1b6999f3f962dd81f4e6f6",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-6",
       "axis": "y",
       "sliceIndex": 6,
-      "texturePath": "slices/y/06.png",
+      "texturePath": "slices/y/06.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -8231,15 +8231,15 @@
         1,
         0
       ],
-      "sha256": "8ce47b5b4e93663f730098c9969018e8401c69c30d1b6999f3f962dd81f4e6f6",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-7",
       "axis": "y",
       "sliceIndex": 7,
-      "texturePath": "slices/y/07.png",
+      "texturePath": "slices/y/07.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -8292,15 +8292,15 @@
         1,
         0
       ],
-      "sha256": "3c941781d760b00f5e2e0b17312f5092eafae9a7dfcf6809796f98f1ec2b4165",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-8",
       "axis": "y",
       "sliceIndex": 8,
-      "texturePath": "slices/y/08.png",
+      "texturePath": "slices/y/08.webp",
       "widthPx": 17,
       "heightPx": 1,
       "vertices": [
@@ -8353,15 +8353,15 @@
         1,
         0
       ],
-      "sha256": "1a89477838bac2ecbdd8246b3cfc23aa809aeca1a6fcbd3ec253a41cfc572db3",
-      "bytes": 153,
+      "sha256": "0de5f1e9002ddfc60d46d4cc0e50bf34c220021b9f3aa8bac4abf571cf4b63b0",
+      "bytes": 56,
       "alphaCoverage": 0.23529411764705882
     },
     {
       "id": "y-9",
       "axis": "y",
       "sliceIndex": 9,
-      "texturePath": "slices/y/09.png",
+      "texturePath": "slices/y/09.webp",
       "widthPx": 46,
       "heightPx": 2,
       "vertices": [
@@ -8414,15 +8414,15 @@
         1,
         0
       ],
-      "sha256": "6a380c64bed4378977dffebfb79669ce9e22b3c347d6b66ea8f345f5d2533b81",
-      "bytes": 390,
+      "sha256": "a202ae772bc72392cb424be697c8224488b315d17826e8f6bb87ad8d0409e6fc",
+      "bytes": 78,
       "alphaCoverage": 0.11956521739130435
     },
     {
       "id": "y-10",
       "axis": "y",
       "sliceIndex": 10,
-      "texturePath": "slices/y/10.png",
+      "texturePath": "slices/y/10.webp",
       "widthPx": 106,
       "heightPx": 3,
       "vertices": [
@@ -8475,15 +8475,15 @@
         1,
         0
       ],
-      "sha256": "17203ac9bfbf06561b0141a3b1828b412c0df76e8ebe7b6cda622385eb003654",
-      "bytes": 908,
+      "sha256": "5d13764adf0215f9dab8c189b4f9a9d440e34174b0e848abe6dfbebcc98175f4",
+      "bytes": 110,
       "alphaCoverage": 0.06918238993710692
     },
     {
       "id": "y-11",
       "axis": "y",
       "sliceIndex": 11,
-      "texturePath": "slices/y/11.png",
+      "texturePath": "slices/y/11.webp",
       "widthPx": 123,
       "heightPx": 3,
       "vertices": [
@@ -8536,15 +8536,15 @@
         1,
         0
       ],
-      "sha256": "6cf00146e46a119ae7abe0d3f942fb726a2d22e62e48b7d1a70caa22ff851405",
-      "bytes": 1053,
+      "sha256": "00bfec8b90432414d5e0506413ce7725024cad4173f76183eb9839a6dee545aa",
+      "bytes": 194,
       "alphaCoverage": 0.19241192411924118
     },
     {
       "id": "y-12",
       "axis": "y",
       "sliceIndex": 12,
-      "texturePath": "slices/y/12.png",
+      "texturePath": "slices/y/12.webp",
       "widthPx": 174,
       "heightPx": 5,
       "vertices": [
@@ -8597,15 +8597,15 @@
         1,
         0
       ],
-      "sha256": "a8f02404579740c9772d76b99ed201b52d9a71773329a5d8722584be1ef8cf04",
-      "bytes": 1646,
+      "sha256": "25b30db29f11f49f87aff09d95b0ed8be6393426bc9bcff703c0b9bb80751818",
+      "bytes": 288,
       "alphaCoverage": 0.12988505747126436
     },
     {
       "id": "y-13",
       "axis": "y",
       "sliceIndex": 13,
-      "texturePath": "slices/y/13.png",
+      "texturePath": "slices/y/13.webp",
       "widthPx": 216,
       "heightPx": 5,
       "vertices": [
@@ -8658,15 +8658,15 @@
         1,
         0
       ],
-      "sha256": "0b3ed8b84b93399c7caad4ccda8f10b0c3acb6d302d453c402d94dffdca8959d",
-      "bytes": 1989,
+      "sha256": "939a69c2109eb7265593b55fb363d2d83438eef6d04a63c90681e3a3fb2139dd",
+      "bytes": 478,
       "alphaCoverage": 0.18518518518518517
     },
     {
       "id": "y-14",
       "axis": "y",
       "sliceIndex": 14,
-      "texturePath": "slices/y/14.png",
+      "texturePath": "slices/y/14.webp",
       "widthPx": 227,
       "heightPx": 5,
       "vertices": [
@@ -8719,15 +8719,15 @@
         1,
         0
       ],
-      "sha256": "b28b14bf77d5e51e3c8d10338bc2b4925f40031446339da6d38cb15b5f01634d",
-      "bytes": 2404,
+      "sha256": "8a11042791d59d2edc6a1d7932a98055a9dfe5ac2c9e95958304b0da0c9958d6",
+      "bytes": 804,
       "alphaCoverage": 0.347136563876652
     },
     {
       "id": "y-15",
       "axis": "y",
       "sliceIndex": 15,
-      "texturePath": "slices/y/15.png",
+      "texturePath": "slices/y/15.webp",
       "widthPx": 226,
       "heightPx": 8,
       "vertices": [
@@ -8780,15 +8780,15 @@
         1,
         0
       ],
-      "sha256": "8b418adbd53416776e38514fa2e170e8b009aa655c71397dd41a305cf7af1173",
-      "bytes": 3139,
+      "sha256": "a1e125b7d62d26b88c9430c170c6ce9206204f26a6e72daa2cd630fd1de2ef84",
+      "bytes": 1176,
       "alphaCoverage": 0.30033185840707965
     },
     {
       "id": "y-16",
       "axis": "y",
       "sliceIndex": 16,
-      "texturePath": "slices/y/16.png",
+      "texturePath": "slices/y/16.webp",
       "widthPx": 259,
       "heightPx": 10,
       "vertices": [
@@ -8841,15 +8841,15 @@
         1,
         0
       ],
-      "sha256": "573d9d9df588a0316ec57dad7dde8a55b9963c973cbc6fb5d426d4ab4a65884f",
-      "bytes": 3919,
+      "sha256": "cb5d75913f78808c412a0a9e22a51dc68879d1c4e7f4c9a12ce5c367f890a5a0",
+      "bytes": 1524,
       "alphaCoverage": 0.3193050193050193
     },
     {
       "id": "y-17",
       "axis": "y",
       "sliceIndex": 17,
-      "texturePath": "slices/y/17.png",
+      "texturePath": "slices/y/17.webp",
       "widthPx": 272,
       "heightPx": 10,
       "vertices": [
@@ -8902,15 +8902,15 @@
         1,
         0
       ],
-      "sha256": "89fdf953a8e8e4788a56408535744d9422a5ee6fe7867154b637ed0e976afcc0",
-      "bytes": 4196,
+      "sha256": "e6147170d9b6dc9a82f1ef1dde93319be720498747136f5c4587eea04102e532",
+      "bytes": 1790,
       "alphaCoverage": 0.3863970588235294
     },
     {
       "id": "y-18",
       "axis": "y",
       "sliceIndex": 18,
-      "texturePath": "slices/y/18.png",
+      "texturePath": "slices/y/18.webp",
       "widthPx": 287,
       "heightPx": 11,
       "vertices": [
@@ -8963,15 +8963,15 @@
         1,
         0
       ],
-      "sha256": "ca724cbb3be71973866fefdc06dc7dca716a009a4b47538bf40a2cd2f0f135e2",
-      "bytes": 5081,
+      "sha256": "8d6c8f4e4351e9e3ecc8f4ca83d7e2cf4dcfcd797be38702917de10584ae20b6",
+      "bytes": 2320,
       "alphaCoverage": 0.44155844155844154
     },
     {
       "id": "y-19",
       "axis": "y",
       "sliceIndex": 19,
-      "texturePath": "slices/y/19.png",
+      "texturePath": "slices/y/19.webp",
       "widthPx": 292,
       "heightPx": 13,
       "vertices": [
@@ -9024,15 +9024,15 @@
         1,
         0
       ],
-      "sha256": "e49394d3a2f343e6e48e75f6f4932720200c766f8d28b6e205d678c52ecb2f72",
-      "bytes": 5792,
+      "sha256": "cfdfc99ab2defe1bbb8e82bc2d5f3dc358682a8ae51a91d5aa780494d71a6764",
+      "bytes": 2602,
       "alphaCoverage": 0.45152792413066384
     },
     {
       "id": "y-20",
       "axis": "y",
       "sliceIndex": 20,
-      "texturePath": "slices/y/20.png",
+      "texturePath": "slices/y/20.webp",
       "widthPx": 298,
       "heightPx": 14,
       "vertices": [
@@ -9085,15 +9085,15 @@
         1,
         0
       ],
-      "sha256": "be5095b5156beb2452258606cab40036ec823190aeb89ee21e043b2aa41517a8",
-      "bytes": 6569,
+      "sha256": "bed685ee2f08344ce3b251530db1fc1afc3de5f584616448e0f071940f3b2f98",
+      "bytes": 3156,
       "alphaCoverage": 0.4726749760306807
     },
     {
       "id": "y-21",
       "axis": "y",
       "sliceIndex": 21,
-      "texturePath": "slices/y/21.png",
+      "texturePath": "slices/y/21.webp",
       "widthPx": 299,
       "heightPx": 16,
       "vertices": [
@@ -9146,15 +9146,15 @@
         1,
         0
       ],
-      "sha256": "fab8ad354476bf1075e17a1674a57fcce58447ed863d94eb3a48131cdb1d188d",
-      "bytes": 7303,
+      "sha256": "ea8d0c7c2657fb9d275c7503fc293de51705984ed02e77d6098d1f3d7b40914b",
+      "bytes": 3396,
       "alphaCoverage": 0.4504598662207358
     },
     {
       "id": "y-22",
       "axis": "y",
       "sliceIndex": 22,
-      "texturePath": "slices/y/22.png",
+      "texturePath": "slices/y/22.webp",
       "widthPx": 329,
       "heightPx": 16,
       "vertices": [
@@ -9207,15 +9207,15 @@
         1,
         0
       ],
-      "sha256": "a15b4c2ea99b5f5c83383b3de2a6a5f47e1fbdd7124d355cb454e048d0d7d987",
-      "bytes": 7694,
+      "sha256": "157a4303b9a8489f8e5d59e28ab3430e7e3337e61543e73b84787fd7db753d3a",
+      "bytes": 3734,
       "alphaCoverage": 0.47853343465045595
     },
     {
       "id": "y-23",
       "axis": "y",
       "sliceIndex": 23,
-      "texturePath": "slices/y/23.png",
+      "texturePath": "slices/y/23.webp",
       "widthPx": 325,
       "heightPx": 17,
       "vertices": [
@@ -9268,15 +9268,15 @@
         1,
         0
       ],
-      "sha256": "48a157a5f622fc9347ee6b106d4e77f909949485d69d9939c1723ec44f76785a",
-      "bytes": 8305,
+      "sha256": "2fe1a99fc052de15b4e5afb5be7b0961ab006d75e4e4856a5fabde73b47b4526",
+      "bytes": 4278,
       "alphaCoverage": 0.5185520361990951
     },
     {
       "id": "y-24",
       "axis": "y",
       "sliceIndex": 24,
-      "texturePath": "slices/y/24.png",
+      "texturePath": "slices/y/24.webp",
       "widthPx": 335,
       "heightPx": 19,
       "vertices": [
@@ -9329,15 +9329,15 @@
         1,
         0
       ],
-      "sha256": "7c16fbf18254fe7634499c4ff02b7ed1b969bf895044b3bb064984f476337598",
-      "bytes": 8865,
+      "sha256": "edb442ad81aa4e7452be24e32470d3d6b7022f6af628dd5ca388ea0cdd2c085b",
+      "bytes": 4340,
       "alphaCoverage": 0.5102906520031422
     },
     {
       "id": "y-25",
       "axis": "y",
       "sliceIndex": 25,
-      "texturePath": "slices/y/25.png",
+      "texturePath": "slices/y/25.webp",
       "widthPx": 351,
       "heightPx": 20,
       "vertices": [
@@ -9390,15 +9390,15 @@
         1,
         0
       ],
-      "sha256": "d986299facaeaed7f1d8e33ff13d8a9e9f2803feb0e845fa0bdc6e029bf9f1eb",
-      "bytes": 9691,
+      "sha256": "2e399957cb3af94c28daf54edff8b834d387eaf979fb0a5adf2e5aa7d3c27b47",
+      "bytes": 4764,
       "alphaCoverage": 0.5126780626780627
     },
     {
       "id": "y-26",
       "axis": "y",
       "sliceIndex": 26,
-      "texturePath": "slices/y/26.png",
+      "texturePath": "slices/y/26.webp",
       "widthPx": 360,
       "heightPx": 22,
       "vertices": [
@@ -9451,15 +9451,15 @@
         1,
         0
       ],
-      "sha256": "234310edfa1ab2253d9c938ae9be33cd96886d34122699a0a60e6ee811c8f504",
-      "bytes": 10642,
+      "sha256": "586da9a593ee761296633ce5bd54da329ef1107f83e52e86035710d4965bab94",
+      "bytes": 5138,
       "alphaCoverage": 0.513510101010101
     },
     {
       "id": "y-27",
       "axis": "y",
       "sliceIndex": 27,
-      "texturePath": "slices/y/27.png",
+      "texturePath": "slices/y/27.webp",
       "widthPx": 363,
       "heightPx": 24,
       "vertices": [
@@ -9512,15 +9512,15 @@
         1,
         0
       ],
-      "sha256": "f4e4f2b3ae8fa3394a9d592a1e8ebd64b52c61c2eaf214358c55fec509653c86",
-      "bytes": 12006,
+      "sha256": "8371d37f5d3571f2c0032021411c2327c4a0e0703de7cb763f8f3ab1f943d116",
+      "bytes": 5690,
       "alphaCoverage": 0.5057392102846648
     },
     {
       "id": "y-28",
       "axis": "y",
       "sliceIndex": 28,
-      "texturePath": "slices/y/28.png",
+      "texturePath": "slices/y/28.webp",
       "widthPx": 368,
       "heightPx": 23,
       "vertices": [
@@ -9573,15 +9573,15 @@
         1,
         0
       ],
-      "sha256": "dec5a2a306343e0fbe128f8a39a13680b29f4932b36571bbf6316d160f16582c",
-      "bytes": 12411,
+      "sha256": "10fd832e0eb36a210e337d25241f9b0f3773c304974c7953ddb726d9ee564160",
+      "bytes": 6362,
       "alphaCoverage": 0.5632088846880907
     },
     {
       "id": "y-29",
       "axis": "y",
       "sliceIndex": 29,
-      "texturePath": "slices/y/29.png",
+      "texturePath": "slices/y/29.webp",
       "widthPx": 374,
       "heightPx": 24,
       "vertices": [
@@ -9634,15 +9634,15 @@
         1,
         0
       ],
-      "sha256": "600119e6a5e4dccb8e07ceb1cb278eafd7177cec7ebcfdf4685bdf0c18ee9020",
-      "bytes": 13773,
+      "sha256": "4b89f5579287c310a5933fa639c5d6b7cef5c2ee6bd0e468be926011abefa79d",
+      "bytes": 6874,
       "alphaCoverage": 0.5437834224598931
     },
     {
       "id": "y-30",
       "axis": "y",
       "sliceIndex": 30,
-      "texturePath": "slices/y/30.png",
+      "texturePath": "slices/y/30.webp",
       "widthPx": 386,
       "heightPx": 28,
       "vertices": [
@@ -9695,15 +9695,15 @@
         1,
         0
       ],
-      "sha256": "5fb85369534a22c94962298657b042ec67dc689cff063f19f59172fa0c18a8d3",
-      "bytes": 16418,
+      "sha256": "1295401679b97c332298456d7dacc1d018ea66f3a73177f841abc5e2372754cb",
+      "bytes": 7134,
       "alphaCoverage": 0.4591043671354552
     },
     {
       "id": "y-31",
       "axis": "y",
       "sliceIndex": 31,
-      "texturePath": "slices/y/31.png",
+      "texturePath": "slices/y/31.webp",
       "widthPx": 395,
       "heightPx": 27,
       "vertices": [
@@ -9756,15 +9756,15 @@
         1,
         0
       ],
-      "sha256": "c64dac5c61885020c962c44cf359f931ebb5ef54cbd3c10c5e982274ffafae62",
-      "bytes": 15532,
+      "sha256": "54cf0fee34253c06ae49ca497ea2c5b96b0e5809f67db79f7fe081aac42276fd",
+      "bytes": 7180,
       "alphaCoverage": 0.47248007501172057
     },
     {
       "id": "y-32",
       "axis": "y",
       "sliceIndex": 32,
-      "texturePath": "slices/y/32.png",
+      "texturePath": "slices/y/32.webp",
       "widthPx": 407,
       "heightPx": 29,
       "vertices": [
@@ -9817,15 +9817,15 @@
         1,
         0
       ],
-      "sha256": "3dbb31852dfdbe77f0a0cb887a3e3ee7d6ec434a97aa7ee03dccd1d8f7598406",
-      "bytes": 16717,
+      "sha256": "89fb1c26fc34476b9655c242e32c58afde2d8cb48ddf2fd549f1a3b5a5903f19",
+      "bytes": 7158,
       "alphaCoverage": 0.4342116411081928
     },
     {
       "id": "y-33",
       "axis": "y",
       "sliceIndex": 33,
-      "texturePath": "slices/y/33.png",
+      "texturePath": "slices/y/33.webp",
       "widthPx": 401,
       "heightPx": 26,
       "vertices": [
@@ -9878,15 +9878,15 @@
         1,
         0
       ],
-      "sha256": "4de7a722b8edf153268683cd0cce52c75a8f935a87d867621f78ea53330d0c63",
-      "bytes": 15171,
+      "sha256": "cce34ddc0b3b270bddf0ca1d3e027ca075d3fd6f03248dfd468d2722603cb4e1",
+      "bytes": 7182,
       "alphaCoverage": 0.5026855937080376
     },
     {
       "id": "y-34",
       "axis": "y",
       "sliceIndex": 34,
-      "texturePath": "slices/y/34.png",
+      "texturePath": "slices/y/34.webp",
       "widthPx": 399,
       "heightPx": 28,
       "vertices": [
@@ -9939,15 +9939,15 @@
         1,
         0
       ],
-      "sha256": "6a62a2f7a1c76b216cc1b1a5b927537e5c0c2f69d0dda99cc5979337f54dec9a",
-      "bytes": 16789,
+      "sha256": "2264078b1fb62d84b5e0db23ed6dd1d5ca354a5b1db4fe2bf1c8f905d5b58aae",
+      "bytes": 7478,
       "alphaCoverage": 0.4758324382384533
     },
     {
       "id": "y-35",
       "axis": "y",
       "sliceIndex": 35,
-      "texturePath": "slices/y/35.png",
+      "texturePath": "slices/y/35.webp",
       "widthPx": 406,
       "heightPx": 25,
       "vertices": [
@@ -10000,15 +10000,15 @@
         1,
         0
       ],
-      "sha256": "a9b757e00fa389d506fee234d9643bf96b5349506e41e8d86cb139bc0e6fa119",
-      "bytes": 16343,
+      "sha256": "49d23cbae54a3749447b62b886eeae7a250098c2d22b248ab2b16f66ebf62eb1",
+      "bytes": 8128,
       "alphaCoverage": 0.5279802955665025
     },
     {
       "id": "y-36",
       "axis": "y",
       "sliceIndex": 36,
-      "texturePath": "slices/y/36.png",
+      "texturePath": "slices/y/36.webp",
       "widthPx": 421,
       "heightPx": 25,
       "vertices": [
@@ -10061,15 +10061,15 @@
         1,
         0
       ],
-      "sha256": "5217ac409a78731f4c813ca06a1db76061a3999693e2689e32a0556bb02ec0a4",
-      "bytes": 16717,
+      "sha256": "b07abf4e06cfdc9135cf68c141d83bd1d4732f61ac3a79f8fe9185539afaedb0",
+      "bytes": 8096,
       "alphaCoverage": 0.5092636579572447
     },
     {
       "id": "y-37",
       "axis": "y",
       "sliceIndex": 37,
-      "texturePath": "slices/y/37.png",
+      "texturePath": "slices/y/37.webp",
       "widthPx": 422,
       "heightPx": 33,
       "vertices": [
@@ -10122,15 +10122,15 @@
         1,
         0
       ],
-      "sha256": "6d20f77db3fbfd69648ed10010a59a23cb0605cfced4567c091da9fa0dad34b5",
-      "bytes": 21849,
+      "sha256": "72c773d7e7783b600d72cd74b79ac3608783107ca620261a3bb65543951bd04e",
+      "bytes": 8528,
       "alphaCoverage": 0.39329312078127243
     },
     {
       "id": "y-38",
       "axis": "y",
       "sliceIndex": 38,
-      "texturePath": "slices/y/38.png",
+      "texturePath": "slices/y/38.webp",
       "widthPx": 433,
       "heightPx": 32,
       "vertices": [
@@ -10183,15 +10183,15 @@
         1,
         0
       ],
-      "sha256": "2440c59870964547a4cd2d1bc2bc36a3d6df049af87eed965816e4c2100c07c1",
-      "bytes": 22420,
+      "sha256": "c81d2929d6d76f37794196135e82cc19cc0d92bb93f9e6be61220f2b1d01c01c",
+      "bytes": 9386,
       "alphaCoverage": 0.41519919168591224
     },
     {
       "id": "y-39",
       "axis": "y",
       "sliceIndex": 39,
-      "texturePath": "slices/y/39.png",
+      "texturePath": "slices/y/39.webp",
       "widthPx": 436,
       "heightPx": 36,
       "vertices": [
@@ -10244,15 +10244,15 @@
         1,
         0
       ],
-      "sha256": "6454d9716b42e55e4b42406bda79914d1b16a5277563fa09c8aa9ebe6999b18b",
-      "bytes": 24693,
+      "sha256": "cb3600e90e8d970b228d2f772027ab3a6e30dc88ad11403d29b510cdcc9d40cc",
+      "bytes": 9628,
       "alphaCoverage": 0.3850025484199796
     },
     {
       "id": "y-40",
       "axis": "y",
       "sliceIndex": 40,
-      "texturePath": "slices/y/40.png",
+      "texturePath": "slices/y/40.webp",
       "widthPx": 434,
       "heightPx": 32,
       "vertices": [
@@ -10305,15 +10305,15 @@
         1,
         0
       ],
-      "sha256": "453ef491ea6726740cbe89548799dc4822e761f917861a2136135f348f7506a7",
-      "bytes": 22632,
+      "sha256": "4f3a10de48473f2c8a3dd4635584918898859d9204df14fab26822739ff93b63",
+      "bytes": 10084,
       "alphaCoverage": 0.4591733870967742
     },
     {
       "id": "y-41",
       "axis": "y",
       "sliceIndex": 41,
-      "texturePath": "slices/y/41.png",
+      "texturePath": "slices/y/41.webp",
       "widthPx": 446,
       "heightPx": 37,
       "vertices": [
@@ -10366,15 +10366,15 @@
         1,
         0
       ],
-      "sha256": "4ebad4aa9617218ac88830867251e22c3e6ce3d82ace27e4c5ae3f70c2d45fa8",
-      "bytes": 26621,
+      "sha256": "dd41ee65b9078926f3c1cee7a000f1a1d9ca2d72c33a6d993f29d79cb509054c",
+      "bytes": 10788,
       "alphaCoverage": 0.40734456429523697
     },
     {
       "id": "y-42",
       "axis": "y",
       "sliceIndex": 42,
-      "texturePath": "slices/y/42.png",
+      "texturePath": "slices/y/42.webp",
       "widthPx": 445,
       "heightPx": 39,
       "vertices": [
@@ -10427,15 +10427,15 @@
         1,
         0
       ],
-      "sha256": "8379a1aca361e15c9f282446e4315448363b01e6be0685b8d5fb5ec893e4edbb",
-      "bytes": 28576,
+      "sha256": "bad7a09a536f757ce2ed5829fe43f12cc02c025c22f687e585506278725d9859",
+      "bytes": 11936,
       "alphaCoverage": 0.4118121578795736
     },
     {
       "id": "y-43",
       "axis": "y",
       "sliceIndex": 43,
-      "texturePath": "slices/y/43.png",
+      "texturePath": "slices/y/43.webp",
       "widthPx": 452,
       "heightPx": 44,
       "vertices": [
@@ -10488,15 +10488,15 @@
         1,
         0
       ],
-      "sha256": "030fda87f0dff443866ebf540e81110dfa3bcbad90e3a0b419fb2e891af41b9b",
-      "bytes": 31850,
+      "sha256": "55df48c86efb664d30de1c16e5a1364d9a0975d8191a2c937d7b11bee2f0cbee",
+      "bytes": 12816,
       "alphaCoverage": 0.37736323411102174
     },
     {
       "id": "y-44",
       "axis": "y",
       "sliceIndex": 44,
-      "texturePath": "slices/y/44.png",
+      "texturePath": "slices/y/44.webp",
       "widthPx": 452,
       "heightPx": 51,
       "vertices": [
@@ -10549,15 +10549,15 @@
         1,
         0
       ],
-      "sha256": "b32b2cc03bdcf45f8b1c9a7242434bdb75733fad2a060074610e39e1b190b47a",
-      "bytes": 35021,
+      "sha256": "5ae44d6c54e7f823d51b06cca5c7c419665a1323e54d4ff3aab0c6c138315121",
+      "bytes": 13426,
       "alphaCoverage": 0.33515530105847646
     },
     {
       "id": "y-45",
       "axis": "y",
       "sliceIndex": 45,
-      "texturePath": "slices/y/45.png",
+      "texturePath": "slices/y/45.webp",
       "widthPx": 457,
       "heightPx": 55,
       "vertices": [
@@ -10610,15 +10610,15 @@
         1,
         0
       ],
-      "sha256": "305f075f98b85e4b402a055fbae0b5bd8a63853561e03d1117484baf53d73062",
-      "bytes": 38079,
+      "sha256": "fb70cfb2a5bba0ff16911c454e57b60d89a1b6c3afcea7f6492801e6553e328a",
+      "bytes": 14076,
       "alphaCoverage": 0.32289635965784763
     },
     {
       "id": "y-46",
       "axis": "y",
       "sliceIndex": 46,
-      "texturePath": "slices/y/46.png",
+      "texturePath": "slices/y/46.webp",
       "widthPx": 461,
       "heightPx": 61,
       "vertices": [
@@ -10671,15 +10671,15 @@
         1,
         0
       ],
-      "sha256": "223d25f7b619fb6b361d58cd936e5f4b67fa0226d050f4f33ce0eb46626eae01",
-      "bytes": 40662,
+      "sha256": "734654c875f98c7b7e7c94c317be559cd26c13a16e9ecfecee24a8bd9dcb2197",
+      "bytes": 14456,
       "alphaCoverage": 0.2934106183990612
     },
     {
       "id": "y-47",
       "axis": "y",
       "sliceIndex": 47,
-      "texturePath": "slices/y/47.png",
+      "texturePath": "slices/y/47.webp",
       "widthPx": 459,
       "heightPx": 59,
       "vertices": [
@@ -10732,15 +10732,15 @@
         1,
         0
       ],
-      "sha256": "4230b85c05bbf38ab00b7cabf453f54942f9298a7cabe4b992452bd8ed4bc5d6",
-      "bytes": 39644,
+      "sha256": "d9f70ab9c0f6df28a60144751f707b7bbb0e458a8ad1c1788403a8807bc29a26",
+      "bytes": 14572,
       "alphaCoverage": 0.3081865514567409
     },
     {
       "id": "y-48",
       "axis": "y",
       "sliceIndex": 48,
-      "texturePath": "slices/y/48.png",
+      "texturePath": "slices/y/48.webp",
       "widthPx": 458,
       "heightPx": 54,
       "vertices": [
@@ -10793,15 +10793,15 @@
         1,
         0
       ],
-      "sha256": "946e88594aebb0cf4b0dd17c594b75c944459ea7d8679baf3a0c0d919dd62395",
-      "bytes": 38139,
+      "sha256": "b8d33c7643c410b4e5994ed838e9e37bc92121f797ba7ce6e5a43aab6fd04818",
+      "bytes": 15030,
       "alphaCoverage": 0.33891314895681707
     },
     {
       "id": "y-49",
       "axis": "y",
       "sliceIndex": 49,
-      "texturePath": "slices/y/49.png",
+      "texturePath": "slices/y/49.webp",
       "widthPx": 462,
       "heightPx": 47,
       "vertices": [
@@ -10854,15 +10854,15 @@
         1,
         0
       ],
-      "sha256": "6546c46d87fe670b69c823231a5c811d01fa2a0888770a0127d1cc3dde403117",
-      "bytes": 34871,
+      "sha256": "a82c87165d45894f527fdf6450d61b41219a1064a25967e157cbd5e6d41d3348",
+      "bytes": 15290,
       "alphaCoverage": 0.39587362991618313
     },
     {
       "id": "y-50",
       "axis": "y",
       "sliceIndex": 50,
-      "texturePath": "slices/y/50.png",
+      "texturePath": "slices/y/50.webp",
       "widthPx": 470,
       "heightPx": 50,
       "vertices": [
@@ -10915,15 +10915,15 @@
         1,
         0
       ],
-      "sha256": "747149dde861362a244b2c2994a95b942a1b16e46a79fa17957565a7cc35d866",
-      "bytes": 36923,
+      "sha256": "fbfa04dd3483a3c686bfad5ab077a07cf4ad92f66a85b121c55721b4c71c4a85",
+      "bytes": 15706,
       "alphaCoverage": 0.38365957446808513
     },
     {
       "id": "y-51",
       "axis": "y",
       "sliceIndex": 51,
-      "texturePath": "slices/y/51.png",
+      "texturePath": "slices/y/51.webp",
       "widthPx": 470,
       "heightPx": 50,
       "vertices": [
@@ -10976,15 +10976,15 @@
         1,
         0
       ],
-      "sha256": "c36fee2a5fa2aea6358fba7aab519784506c0682184a412a684e4305f6a3e7af",
-      "bytes": 37332,
+      "sha256": "68d451c1d57dbc39f054124bf547df664c90bc26ccda97c38b57ebaa3fc935c8",
+      "bytes": 16402,
       "alphaCoverage": 0.4003404255319149
     },
     {
       "id": "y-52",
       "axis": "y",
       "sliceIndex": 52,
-      "texturePath": "slices/y/52.png",
+      "texturePath": "slices/y/52.webp",
       "widthPx": 471,
       "heightPx": 51,
       "vertices": [
@@ -11037,15 +11037,15 @@
         1,
         0
       ],
-      "sha256": "41e4478b7d48b323d6bbab818f8b9489dd1866f7b4a28e8015463339bc6ab525",
-      "bytes": 37812,
+      "sha256": "d0207c03d74cc9670f662e62ada213433bf7f428cee9c30ce5bca50e99938bc0",
+      "bytes": 16924,
       "alphaCoverage": 0.40972482411223515
     },
     {
       "id": "y-53",
       "axis": "y",
       "sliceIndex": 53,
-      "texturePath": "slices/y/53.png",
+      "texturePath": "slices/y/53.webp",
       "widthPx": 476,
       "heightPx": 51,
       "vertices": [
@@ -11098,15 +11098,15 @@
         1,
         0
       ],
-      "sha256": "68f50eddb08e8c38275cf7859e500721c687b378f76bff256832caf978c77977",
-      "bytes": 38711,
+      "sha256": "6ea682a8c0b191d0bd2b1d3ed955332ffc3908351dbaf030897f4c19d49dd00d",
+      "bytes": 17600,
       "alphaCoverage": 0.41979733069698466
     },
     {
       "id": "y-54",
       "axis": "y",
       "sliceIndex": 54,
-      "texturePath": "slices/y/54.png",
+      "texturePath": "slices/y/54.webp",
       "widthPx": 475,
       "heightPx": 56,
       "vertices": [
@@ -11159,15 +11159,15 @@
         1,
         0
       ],
-      "sha256": "e1d69a8a3989dc434b66a390f578e3ba5bf27c8f061e9651d849bddfaac071a6",
-      "bytes": 41160,
+      "sha256": "f5ad71ac41065bf9eafdb2615f787afc1bea8e97c891eca2ae5ac2d197ede9f3",
+      "bytes": 17978,
       "alphaCoverage": 0.39804511278195487
     },
     {
       "id": "y-55",
       "axis": "y",
       "sliceIndex": 55,
-      "texturePath": "slices/y/55.png",
+      "texturePath": "slices/y/55.webp",
       "widthPx": 472,
       "heightPx": 54,
       "vertices": [
@@ -11220,15 +11220,15 @@
         1,
         0
       ],
-      "sha256": "56ed49c25efe31de85b7f633eca9de4db1ac96816aa11ae8a4cc72d56fe04b45",
-      "bytes": 40356,
+      "sha256": "7edf2190ec7a3cb993f971fe8568f5d2d8493d66d4d09fb8db37e653987fd2ba",
+      "bytes": 17942,
       "alphaCoverage": 0.42204174513496545
     },
     {
       "id": "y-56",
       "axis": "y",
       "sliceIndex": 56,
-      "texturePath": "slices/y/56.png",
+      "texturePath": "slices/y/56.webp",
       "widthPx": 476,
       "heightPx": 55,
       "vertices": [
@@ -11281,15 +11281,15 @@
         1,
         0
       ],
-      "sha256": "fb5322e48190bdbe4adb899e4d168c44e4ccf7d09fc5492c258eb1ad989c4743",
-      "bytes": 41567,
+      "sha256": "8264ee2dde2e125bb3948e1534c9f550798343881ccaab2b29a0d9e126550833",
+      "bytes": 18160,
       "alphaCoverage": 0.416768525592055
     },
     {
       "id": "y-57",
       "axis": "y",
       "sliceIndex": 57,
-      "texturePath": "slices/y/57.png",
+      "texturePath": "slices/y/57.webp",
       "widthPx": 473,
       "heightPx": 56,
       "vertices": [
@@ -11342,15 +11342,15 @@
         1,
         0
       ],
-      "sha256": "32de7e0133f6c0a2e09f2679396e8c0371dca6ee48734160fcbd06eae453e213",
-      "bytes": 42525,
+      "sha256": "55a50a33d3f4a3e5f422a6a423034832ee6f64f174f9a842064c5a101945f738",
+      "bytes": 18274,
       "alphaCoverage": 0.4201902748414376
     },
     {
       "id": "y-58",
       "axis": "y",
       "sliceIndex": 58,
-      "texturePath": "slices/y/58.png",
+      "texturePath": "slices/y/58.webp",
       "widthPx": 474,
       "heightPx": 54,
       "vertices": [
@@ -11403,15 +11403,15 @@
         1,
         0
       ],
-      "sha256": "adcbfbf49caad51f276a0b2bc827a6c2f9db69a8d09cc1b23b69ca7224b6cc73",
-      "bytes": 41721,
+      "sha256": "71bab0ac66cbe3128bfc5b33b7e50017d6b588112604538ab68fcf4d331221d1",
+      "bytes": 18262,
       "alphaCoverage": 0.4430770432880137
     },
     {
       "id": "y-59",
       "axis": "y",
       "sliceIndex": 59,
-      "texturePath": "slices/y/59.png",
+      "texturePath": "slices/y/59.webp",
       "widthPx": 476,
       "heightPx": 54,
       "vertices": [
@@ -11464,15 +11464,15 @@
         1,
         0
       ],
-      "sha256": "5037b111ab811390087c851576501eb6ad1e5f2b9f8f901b2cf35866fa523086",
-      "bytes": 42048,
+      "sha256": "a0574bc02bb99ebdc88f668547b1c34fae5fad765203b1d05b6a82bb6e10b006",
+      "bytes": 18164,
       "alphaCoverage": 0.446817615935263
     },
     {
       "id": "y-60",
       "axis": "y",
       "sliceIndex": 60,
-      "texturePath": "slices/y/60.png",
+      "texturePath": "slices/y/60.webp",
       "widthPx": 479,
       "heightPx": 55,
       "vertices": [
@@ -11525,15 +11525,15 @@
         1,
         0
       ],
-      "sha256": "58de1dd6fa22a209255253405e76be2417d28d6a19f36f3a0e42bc211f4abf6e",
-      "bytes": 42994,
+      "sha256": "2500d431aac79406f995d7fcf7748877699cf4b6f5a37c7a72fbfd6694b2d130",
+      "bytes": 18108,
       "alphaCoverage": 0.4453216929208578
     },
     {
       "id": "y-61",
       "axis": "y",
       "sliceIndex": 61,
-      "texturePath": "slices/y/61.png",
+      "texturePath": "slices/y/61.webp",
       "widthPx": 480,
       "heightPx": 60,
       "vertices": [
@@ -11586,15 +11586,15 @@
         1,
         0
       ],
-      "sha256": "57b4a1e69ef143665260e483c4294afb0cd36a22146570df200f5afd444a9258",
-      "bytes": 45397,
+      "sha256": "0bcae3324e0f7c898d53aac0198916c40ec496a567a2a8c338f5043bc219ac85",
+      "bytes": 18214,
       "alphaCoverage": 0.410625
     },
     {
       "id": "y-62",
       "axis": "y",
       "sliceIndex": 62,
-      "texturePath": "slices/y/62.png",
+      "texturePath": "slices/y/62.webp",
       "widthPx": 482,
       "heightPx": 58,
       "vertices": [
@@ -11647,15 +11647,15 @@
         1,
         0
       ],
-      "sha256": "5a6ae0ef40827f4aab2ee963e30ae7dcef1c48fa356544943b3e428f4fbb9145",
-      "bytes": 45033,
+      "sha256": "74c04134f71579d95b902f8367727d0f1c1419a6d49e5b58123b1e5e436367ec",
+      "bytes": 18538,
       "alphaCoverage": 0.42867362998998426
     },
     {
       "id": "y-63",
       "axis": "y",
       "sliceIndex": 63,
-      "texturePath": "slices/y/63.png",
+      "texturePath": "slices/y/63.webp",
       "widthPx": 480,
       "heightPx": 56,
       "vertices": [
@@ -11708,15 +11708,15 @@
         1,
         0
       ],
-      "sha256": "2b898ff69b88cb2267eb4a1b689842324626dda8e888a9640919075637609dbd",
-      "bytes": 44394,
+      "sha256": "ffb6e246e588602733b705ca6f646b94b12157b5cd6d72b3f776e4dbf8a3bfa3",
+      "bytes": 18746,
       "alphaCoverage": 0.4497767857142857
     },
     {
       "id": "y-64",
       "axis": "y",
       "sliceIndex": 64,
-      "texturePath": "slices/y/64.png",
+      "texturePath": "slices/y/64.webp",
       "widthPx": 480,
       "heightPx": 56,
       "vertices": [
@@ -11769,15 +11769,15 @@
         1,
         0
       ],
-      "sha256": "a75b4446c4c52e926058d0e1d2f6138ba76d01f878ee4c51ec6f3fb94ef9a4d1",
-      "bytes": 44131,
+      "sha256": "8278d1c5c67990222a003d24880e43c35dfb3291c5f9aa7ff08dbee125fb3098",
+      "bytes": 18612,
       "alphaCoverage": 0.44832589285714286
     },
     {
       "id": "y-65",
       "axis": "y",
       "sliceIndex": 65,
-      "texturePath": "slices/y/65.png",
+      "texturePath": "slices/y/65.webp",
       "widthPx": 481,
       "heightPx": 57,
       "vertices": [
@@ -11830,15 +11830,15 @@
         1,
         0
       ],
-      "sha256": "747c2d2ec7e85ec09d3ee3a5e6df472b34a0d8ec7285fe9b07ee90a16849ee60",
-      "bytes": 44635,
+      "sha256": "bff81f577686ef138ce7b30b62027ec6ea41c25ffaa29c066d3324015b984a42",
+      "bytes": 18302,
       "alphaCoverage": 0.4379399642557537
     },
     {
       "id": "y-66",
       "axis": "y",
       "sliceIndex": 66,
-      "texturePath": "slices/y/66.png",
+      "texturePath": "slices/y/66.webp",
       "widthPx": 475,
       "heightPx": 58,
       "vertices": [
@@ -11891,15 +11891,15 @@
         1,
         0
       ],
-      "sha256": "120fbaf348602db3bbc909f65c72effec3a83073053ced1b3c91df71c71a7e57",
-      "bytes": 45299,
+      "sha256": "450601edad36c5b503be6ad77f4b2bb7b33e6878b349d387fd3fa56840a07caf",
+      "bytes": 18764,
       "alphaCoverage": 0.4386206896551724
     },
     {
       "id": "y-67",
       "axis": "y",
       "sliceIndex": 67,
-      "texturePath": "slices/y/67.png",
+      "texturePath": "slices/y/67.webp",
       "widthPx": 476,
       "heightPx": 56,
       "vertices": [
@@ -11952,15 +11952,15 @@
         1,
         0
       ],
-      "sha256": "ca3160a0988548c7ef7daf40ded46001c02696f32d3fec7da1f3aea9ce90b084",
-      "bytes": 44525,
+      "sha256": "edd26c9a17a3fbb4e2337eaafe9c4ffaa1c55c820c7037d4d06b3081283879e6",
+      "bytes": 18924,
       "alphaCoverage": 0.4455657262905162
     },
     {
       "id": "y-68",
       "axis": "y",
       "sliceIndex": 68,
-      "texturePath": "slices/y/68.png",
+      "texturePath": "slices/y/68.webp",
       "widthPx": 476,
       "heightPx": 56,
       "vertices": [
@@ -12013,15 +12013,15 @@
         1,
         0
       ],
-      "sha256": "320f79201de2d1afe826be4a81882112b68b209854181d3b0fc17569e8353f58",
-      "bytes": 44245,
+      "sha256": "8c28d7a30caf92d96c707d46848b1eeac9b45c15def4cb6bdf9fe9200fa25589",
+      "bytes": 18566,
       "alphaCoverage": 0.4418142256902761
     },
     {
       "id": "y-69",
       "axis": "y",
       "sliceIndex": 69,
-      "texturePath": "slices/y/69.png",
+      "texturePath": "slices/y/69.webp",
       "widthPx": 472,
       "heightPx": 56,
       "vertices": [
@@ -12074,15 +12074,15 @@
         1,
         0
       ],
-      "sha256": "1d4d967239bf8e46f8919ac62fc4215994720e7a05c9388ee844e254f1193270",
-      "bytes": 43577,
+      "sha256": "bdc522c38e582f62c34573ee1faaa274e150251a3c1449e7d9c1ebf08f9e8b69",
+      "bytes": 18558,
       "alphaCoverage": 0.4366298426150121
     },
     {
       "id": "y-70",
       "axis": "y",
       "sliceIndex": 70,
-      "texturePath": "slices/y/70.png",
+      "texturePath": "slices/y/70.webp",
       "widthPx": 473,
       "heightPx": 59,
       "vertices": [
@@ -12135,15 +12135,15 @@
         1,
         0
       ],
-      "sha256": "d46a098cafa1abfd42abbd3d0ff8605861a0fa37436e93123653fbd57fd67873",
-      "bytes": 44272,
+      "sha256": "9ad4a2ffc1f07137d59e5433cf8c1db2e7d76f887296fdb0d125352b8785117d",
+      "bytes": 18450,
       "alphaCoverage": 0.4035546637044469
     },
     {
       "id": "y-71",
       "axis": "y",
       "sliceIndex": 71,
-      "texturePath": "slices/y/71.png",
+      "texturePath": "slices/y/71.webp",
       "widthPx": 468,
       "heightPx": 58,
       "vertices": [
@@ -12196,15 +12196,15 @@
         1,
         0
       ],
-      "sha256": "58cd9e11e8cd1dc777a048902aa499bde76868bf9b96170d532ad6059e254268",
-      "bytes": 43251,
+      "sha256": "a096bb8151d63e305934537a7b8de1f0de4535ff610ae69070150c569cabb42e",
+      "bytes": 18732,
       "alphaCoverage": 0.4096669613910993
     },
     {
       "id": "y-72",
       "axis": "y",
       "sliceIndex": 72,
-      "texturePath": "slices/y/72.png",
+      "texturePath": "slices/y/72.webp",
       "widthPx": 471,
       "heightPx": 56,
       "vertices": [
@@ -12257,15 +12257,15 @@
         1,
         0
       ],
-      "sha256": "71c144124eb62843aba94fb141e983543c9e95295c17b87d9f39c111bbee881f",
-      "bytes": 41735,
+      "sha256": "748830bd64410844033b74b0445a89a70d86d868f5dc6f777486007a30a2f420",
+      "bytes": 18202,
       "alphaCoverage": 0.41003184713375795
     },
     {
       "id": "y-73",
       "axis": "y",
       "sliceIndex": 73,
-      "texturePath": "slices/y/73.png",
+      "texturePath": "slices/y/73.webp",
       "widthPx": 475,
       "heightPx": 53,
       "vertices": [
@@ -12318,15 +12318,15 @@
         1,
         0
       ],
-      "sha256": "ebae5f453fb227f80e6f050a76fa98a2d28f84041aebedfc39f34eb24dc0bddc",
-      "bytes": 40336,
+      "sha256": "3c4a317bdf9d9827ad4a46915164f007de1c8e4015b832debc0a427496d50ed1",
+      "bytes": 17930,
       "alphaCoverage": 0.42065541211519364
     },
     {
       "id": "y-74",
       "axis": "y",
       "sliceIndex": 74,
-      "texturePath": "slices/y/74.png",
+      "texturePath": "slices/y/74.webp",
       "widthPx": 472,
       "heightPx": 54,
       "vertices": [
@@ -12379,15 +12379,15 @@
         1,
         0
       ],
-      "sha256": "179482cb9e76bcf78f243006726124360e1f82a5d797f589d3dedab396092a43",
-      "bytes": 40193,
+      "sha256": "7da6f63204fcc89f8f67e4845f30fae1ac9176f614479f826248fc0c506efa79",
+      "bytes": 17852,
       "alphaCoverage": 0.40364092906465787
     },
     {
       "id": "y-75",
       "axis": "y",
       "sliceIndex": 75,
-      "texturePath": "slices/y/75.png",
+      "texturePath": "slices/y/75.webp",
       "widthPx": 471,
       "heightPx": 52,
       "vertices": [
@@ -12440,15 +12440,15 @@
         1,
         0
       ],
-      "sha256": "b451c1ad8672f12da6b96ae8f41029168908e2e3125bc9b7d83675738601f870",
-      "bytes": 38779,
+      "sha256": "bb14744c8ab10d07aa1ea2662d8e8b808fdea253eee1a6aad4bb38cf1770ad56",
+      "bytes": 17374,
       "alphaCoverage": 0.40894986117916055
     },
     {
       "id": "y-76",
       "axis": "y",
       "sliceIndex": 76,
-      "texturePath": "slices/y/76.png",
+      "texturePath": "slices/y/76.webp",
       "widthPx": 470,
       "heightPx": 53,
       "vertices": [
@@ -12501,15 +12501,15 @@
         1,
         0
       ],
-      "sha256": "5b606b1cf9f03c66e506722b2a51683efd0123d9e8af1b8b3680947cd8d7dfa4",
-      "bytes": 38213,
+      "sha256": "4fcb5cb16d6b71258d83317cbd098f706e6daa07082708af4a0911ca16c4db16",
+      "bytes": 16898,
       "alphaCoverage": 0.39148936170212767
     },
     {
       "id": "y-77",
       "axis": "y",
       "sliceIndex": 77,
-      "texturePath": "slices/y/77.png",
+      "texturePath": "slices/y/77.webp",
       "widthPx": 466,
       "heightPx": 51,
       "vertices": [
@@ -12562,15 +12562,15 @@
         1,
         0
       ],
-      "sha256": "6b8f40743d48558f0abbcfc2b071a1455bf0ee5ccdd31f9d087a30074d3bc274",
-      "bytes": 36849,
+      "sha256": "835109c95bab17946cb8e16e891d26303818da0b369baeb21460f74539d5ba76",
+      "bytes": 16118,
       "alphaCoverage": 0.3858874021711689
     },
     {
       "id": "y-78",
       "axis": "y",
       "sliceIndex": 78,
-      "texturePath": "slices/y/78.png",
+      "texturePath": "slices/y/78.webp",
       "widthPx": 467,
       "heightPx": 45,
       "vertices": [
@@ -12623,15 +12623,15 @@
         1,
         0
       ],
-      "sha256": "c8cc76a6b4bd8c86730ce4e904c45db6a84c5b7426c75b51c9d31bfdcca037c2",
-      "bytes": 34075,
+      "sha256": "a5c25967dc84607ee28f1f9604a809acb513f0533bfd50c85a83ee75a916f43c",
+      "bytes": 15284,
       "alphaCoverage": 0.4183202474423031
     },
     {
       "id": "y-79",
       "axis": "y",
       "sliceIndex": 79,
-      "texturePath": "slices/y/79.png",
+      "texturePath": "slices/y/79.webp",
       "widthPx": 466,
       "heightPx": 46,
       "vertices": [
@@ -12684,15 +12684,15 @@
         1,
         0
       ],
-      "sha256": "27ec08ce8db867ed4f06678005c37070adbacdd5a2544eeb3e850a85b1eaa9df",
-      "bytes": 34749,
+      "sha256": "a92ea97652a287b807656eef93d65238dfe711f1813196e516a5b1ea5d6aca51",
+      "bytes": 15158,
       "alphaCoverage": 0.40348012688934504
     },
     {
       "id": "y-80",
       "axis": "y",
       "sliceIndex": 80,
-      "texturePath": "slices/y/80.png",
+      "texturePath": "slices/y/80.webp",
       "widthPx": 461,
       "heightPx": 50,
       "vertices": [
@@ -12745,15 +12745,15 @@
         1,
         0
       ],
-      "sha256": "397142dca828af62a3b0b256aad63af75968c55c8c5ff29ba3367a4929b0f45b",
-      "bytes": 36370,
+      "sha256": "e88b712cea4ebeaa9ec16bff0dbc93ad3566465c0fd47ee54513c91202b9e259",
+      "bytes": 14838,
       "alphaCoverage": 0.3660303687635575
     },
     {
       "id": "y-81",
       "axis": "y",
       "sliceIndex": 81,
-      "texturePath": "slices/y/81.png",
+      "texturePath": "slices/y/81.webp",
       "widthPx": 456,
       "heightPx": 51,
       "vertices": [
@@ -12806,15 +12806,15 @@
         1,
         0
       ],
-      "sha256": "0de1d44ceb19039da33184a763c47fa3de4888acfcde11f2752c594e36579c09",
-      "bytes": 35666,
+      "sha256": "a7d65a415bdec696f9632d604a0ecf51fb9810d65e1a94cdc585896ae6a371d7",
+      "bytes": 14260,
       "alphaCoverage": 0.35685414516683867
     },
     {
       "id": "y-82",
       "axis": "y",
       "sliceIndex": 82,
-      "texturePath": "slices/y/82.png",
+      "texturePath": "slices/y/82.webp",
       "widthPx": 458,
       "heightPx": 46,
       "vertices": [
@@ -12867,15 +12867,15 @@
         1,
         0
       ],
-      "sha256": "f9d8d7b19532b6a69c37b92546fd7591d53d4a06e72b67fea1372eafcca7dfeb",
-      "bytes": 34082,
+      "sha256": "acf3fd46e532dfd3429aeedbe660ed6f299fe41ea2d1701fb2133c011d3741b2",
+      "bytes": 14114,
       "alphaCoverage": 0.3884089614581356
     },
     {
       "id": "y-83",
       "axis": "y",
       "sliceIndex": 83,
-      "texturePath": "slices/y/83.png",
+      "texturePath": "slices/y/83.webp",
       "widthPx": 452,
       "heightPx": 50,
       "vertices": [
@@ -12928,15 +12928,15 @@
         1,
         0
       ],
-      "sha256": "d969adcdbbd2d02c752c8819278ecda305f97b748d38b175e1c45c47b56e77e8",
-      "bytes": 34983,
+      "sha256": "36c7ff9b7d88d76c3ef1621f3d0c2261119002bd0ca7c0491cff482676a20791",
+      "bytes": 13692,
       "alphaCoverage": 0.3538938053097345
     },
     {
       "id": "y-84",
       "axis": "y",
       "sliceIndex": 84,
-      "texturePath": "slices/y/84.png",
+      "texturePath": "slices/y/84.webp",
       "widthPx": 444,
       "heightPx": 49,
       "vertices": [
@@ -12989,15 +12989,15 @@
         1,
         0
       ],
-      "sha256": "456f30f5aae1862cf389616e7056506af670e224e6deb0ee6d5aa97c4e0b8880",
-      "bytes": 33801,
+      "sha256": "75300b70ae47c748b645693b741dd3cf671270b66c8770a60489767d66b604ce",
+      "bytes": 13176,
       "alphaCoverage": 0.3591193234050377
     },
     {
       "id": "y-85",
       "axis": "y",
       "sliceIndex": 85,
-      "texturePath": "slices/y/85.png",
+      "texturePath": "slices/y/85.webp",
       "widthPx": 447,
       "heightPx": 42,
       "vertices": [
@@ -13050,15 +13050,15 @@
         1,
         0
       ],
-      "sha256": "09c538cc878c03c249abb456a8fd6f29feb89a75e9ecbf7b7f67c54ef6aca5f6",
-      "bytes": 29973,
+      "sha256": "0d10a7841bb2c36f584f6e30e07366d48f467c7b9a207ba3d0996861942a0e1e",
+      "bytes": 11712,
       "alphaCoverage": 0.39149888143176736
     },
     {
       "id": "y-86",
       "axis": "y",
       "sliceIndex": 86,
-      "texturePath": "slices/y/86.png",
+      "texturePath": "slices/y/86.webp",
       "widthPx": 441,
       "heightPx": 42,
       "vertices": [
@@ -13111,15 +13111,15 @@
         1,
         0
       ],
-      "sha256": "f64362ab6c518d8cc0d2595acb549b88ca27cfb70aa984e1b7701b0f114bb3b7",
-      "bytes": 29297,
+      "sha256": "294db789cee6b3149240268c4d0a75a16f126d77957b71ec6ac5aaf6d5138c9a",
+      "bytes": 11306,
       "alphaCoverage": 0.37101824856926896
     },
     {
       "id": "y-87",
       "axis": "y",
       "sliceIndex": 87,
-      "texturePath": "slices/y/87.png",
+      "texturePath": "slices/y/87.webp",
       "widthPx": 436,
       "heightPx": 38,
       "vertices": [
@@ -13172,15 +13172,15 @@
         1,
         0
       ],
-      "sha256": "9e0c847b97b3e28ceb970283d6508aa78cb6d07b4371b6f053809ec54c7319dd",
-      "bytes": 26735,
+      "sha256": "4ba8f53038f3edd33b19ecdb4982357f79ccf407a5c2345e58a11a6c1c2f8539",
+      "bytes": 10940,
       "alphaCoverage": 0.3977547078705939
     },
     {
       "id": "y-88",
       "axis": "y",
       "sliceIndex": 88,
-      "texturePath": "slices/y/88.png",
+      "texturePath": "slices/y/88.webp",
       "widthPx": 434,
       "heightPx": 38,
       "vertices": [
@@ -13233,15 +13233,15 @@
         1,
         0
       ],
-      "sha256": "01781ac21af1e0eca5c782c856f6b3c94f140e3f41de9eac0f9b08ca37d81f55",
-      "bytes": 25426,
+      "sha256": "21c520474128a292a87bdea79d661826a089ba80f2043d387c38b01601609f8a",
+      "bytes": 9810,
       "alphaCoverage": 0.3798811544991511
     },
     {
       "id": "y-89",
       "axis": "y",
       "sliceIndex": 89,
-      "texturePath": "slices/y/89.png",
+      "texturePath": "slices/y/89.webp",
       "widthPx": 432,
       "heightPx": 36,
       "vertices": [
@@ -13294,15 +13294,15 @@
         1,
         0
       ],
-      "sha256": "d4b77785dff14ec6363f05d07a3bfd462d7d8f7414ed682b3d32197c2fde0a79",
-      "bytes": 24620,
+      "sha256": "ab174fc50b5cb0de4f0a0fa6556be4a4f80a2c43ca64eb3e9308a9be79f27fcc",
+      "bytes": 9390,
       "alphaCoverage": 0.3739068930041152
     },
     {
       "id": "y-90",
       "axis": "y",
       "sliceIndex": 90,
-      "texturePath": "slices/y/90.png",
+      "texturePath": "slices/y/90.webp",
       "widthPx": 430,
       "heightPx": 32,
       "vertices": [
@@ -13355,15 +13355,15 @@
         1,
         0
       ],
-      "sha256": "716c6a9c0357940ddadc17fdb4e35fa6de401e7fc6a4ac7327ad010518494bf8",
-      "bytes": 22157,
+      "sha256": "42711aaf89e937d943407c8d71d958b8b5d839544562cad1db0fc2064b3741a8",
+      "bytes": 8866,
       "alphaCoverage": 0.403125
     },
     {
       "id": "y-91",
       "axis": "y",
       "sliceIndex": 91,
-      "texturePath": "slices/y/91.png",
+      "texturePath": "slices/y/91.webp",
       "widthPx": 425,
       "heightPx": 24,
       "vertices": [
@@ -13416,15 +13416,15 @@
         1,
         0
       ],
-      "sha256": "478bb40c94783f5032485f803b67ddeec766955f0d904feb2f661d75ebd619af",
-      "bytes": 16737,
+      "sha256": "7ef0927b46c94304375aa5eae51e61b46ccdb98569151d4ded62939fe201453b",
+      "bytes": 8580,
       "alphaCoverage": 0.5207843137254902
     },
     {
       "id": "y-92",
       "axis": "y",
       "sliceIndex": 92,
-      "texturePath": "slices/y/92.png",
+      "texturePath": "slices/y/92.webp",
       "widthPx": 419,
       "heightPx": 25,
       "vertices": [
@@ -13477,15 +13477,15 @@
         1,
         0
       ],
-      "sha256": "b2cd38d85a26c2b88450fdabee710b4de5d3607d45516057a341cd3459fb4344",
-      "bytes": 17280,
+      "sha256": "3d6ee84046844f79781960b9f28c8a9d9e0e01f4bb5659ff9872da16cd131ab8",
+      "bytes": 8308,
       "alphaCoverage": 0.5067303102625298
     },
     {
       "id": "y-93",
       "axis": "y",
       "sliceIndex": 93,
-      "texturePath": "slices/y/93.png",
+      "texturePath": "slices/y/93.webp",
       "widthPx": 414,
       "heightPx": 25,
       "vertices": [
@@ -13538,15 +13538,15 @@
         1,
         0
       ],
-      "sha256": "1035a89dd368f93700cc9c5828528eaac1550147f336b0ee45fc9ed8e91988fe",
-      "bytes": 16821,
+      "sha256": "4d4c032927a289313949417de3aab0fe0bb3937b78ec03ba961027163d9ceb21",
+      "bytes": 8454,
       "alphaCoverage": 0.5136231884057971
     },
     {
       "id": "y-94",
       "axis": "y",
       "sliceIndex": 94,
-      "texturePath": "slices/y/94.png",
+      "texturePath": "slices/y/94.webp",
       "widthPx": 410,
       "heightPx": 26,
       "vertices": [
@@ -13599,15 +13599,15 @@
         1,
         0
       ],
-      "sha256": "0556c837f1e5530c0f1040a2cc9485ddccc7d129bd44a0708835a44fba8a003e",
-      "bytes": 16584,
+      "sha256": "ef933bc52c3c18696e4b56f8478e4e37f88974c9f261ceb532bc1337b48bf279",
+      "bytes": 7960,
       "alphaCoverage": 0.49915572232645405
     },
     {
       "id": "y-95",
       "axis": "y",
       "sliceIndex": 95,
-      "texturePath": "slices/y/95.png",
+      "texturePath": "slices/y/95.webp",
       "widthPx": 407,
       "heightPx": 29,
       "vertices": [
@@ -13660,15 +13660,15 @@
         1,
         0
       ],
-      "sha256": "6b6cb5873e96e5b9e5ae0e24f05cfc07eab0c6c1d3b4325af00d3569df6ee905",
-      "bytes": 17784,
+      "sha256": "29b3ea9f9b63cfb591f7c4f1b1681eaf1edf205f2b32c8428a8fa83486527212",
+      "bytes": 7742,
       "alphaCoverage": 0.4423451664830975
     },
     {
       "id": "y-96",
       "axis": "y",
       "sliceIndex": 96,
-      "texturePath": "slices/y/96.png",
+      "texturePath": "slices/y/96.webp",
       "widthPx": 404,
       "heightPx": 23,
       "vertices": [
@@ -13721,15 +13721,15 @@
         1,
         0
       ],
-      "sha256": "d120d170f145c39ad7b6429c3d0037649afd61b4d51a96aace07e2ef1654a1d3",
-      "bytes": 13753,
+      "sha256": "e06f4d028876dd85bdf57730224dcd9f3cc146e81c8f557a741fc544401828a4",
+      "bytes": 7152,
       "alphaCoverage": 0.5419715884631942
     },
     {
       "id": "y-97",
       "axis": "y",
       "sliceIndex": 97,
-      "texturePath": "slices/y/97.png",
+      "texturePath": "slices/y/97.webp",
       "widthPx": 386,
       "heightPx": 25,
       "vertices": [
@@ -13782,15 +13782,15 @@
         1,
         0
       ],
-      "sha256": "a38c283c6c3e682d6ddf339ac77837edbc87e0ff055378f703fd6ff6cfc4fa10",
-      "bytes": 14382,
+      "sha256": "5ba4d9ece4556104b6274750b6a92a85334e439e8b182ad631c153c0d677337d",
+      "bytes": 7172,
       "alphaCoverage": 0.5191709844559586
     },
     {
       "id": "y-98",
       "axis": "y",
       "sliceIndex": 98,
-      "texturePath": "slices/y/98.png",
+      "texturePath": "slices/y/98.webp",
       "widthPx": 372,
       "heightPx": 22,
       "vertices": [
@@ -13843,15 +13843,15 @@
         1,
         0
       ],
-      "sha256": "3c1ce345ad5b7910095e511935567c5f965e0e9a1ffb218421c4df0ff8fef357",
-      "bytes": 12872,
+      "sha256": "28da1ab367a846adb9eab40041ea6e7a359d309a3818c64212dcf41461e4893b",
+      "bytes": 7014,
       "alphaCoverage": 0.5863880742913001
     },
     {
       "id": "y-99",
       "axis": "y",
       "sliceIndex": 99,
-      "texturePath": "slices/y/99.png",
+      "texturePath": "slices/y/99.webp",
       "widthPx": 381,
       "heightPx": 22,
       "vertices": [
@@ -13904,15 +13904,15 @@
         1,
         0
       ],
-      "sha256": "134f6ae6d044536df1c9d31eaa4f2e66331bf645a12a908d8c3ef0974018fbed",
-      "bytes": 13036,
+      "sha256": "19f65ddd7c576e51550328e5679efb68a8e5ac82a9b6d1d95e2e33291ccc0346",
+      "bytes": 7046,
       "alphaCoverage": 0.5515390121689334
     },
     {
       "id": "y-100",
       "axis": "y",
       "sliceIndex": 100,
-      "texturePath": "slices/y/100.png",
+      "texturePath": "slices/y/100.webp",
       "widthPx": 375,
       "heightPx": 21,
       "vertices": [
@@ -13965,15 +13965,15 @@
         1,
         0
       ],
-      "sha256": "02c267a0d4720a2a04e736f08981644ee8b82aa33292ef6f58c687f239d8209c",
-      "bytes": 11720,
+      "sha256": "021d858816050a45676597f0501dd4c4b01b603548478413356db2d60e31a0c8",
+      "bytes": 6268,
       "alphaCoverage": 0.5583492063492064
     },
     {
       "id": "y-101",
       "axis": "y",
       "sliceIndex": 101,
-      "texturePath": "slices/y/101.png",
+      "texturePath": "slices/y/101.webp",
       "widthPx": 358,
       "heightPx": 21,
       "vertices": [
@@ -14026,15 +14026,15 @@
         1,
         0
       ],
-      "sha256": "74a893c948725cbd95781154cc226133ea219d60654962b9859f7428309bd5f4",
-      "bytes": 10505,
+      "sha256": "34b297e13f74bd5ecc319f24bacf3523760552c2cca17a726601eead2f69f2b9",
+      "bytes": 5568,
       "alphaCoverage": 0.5559989358872041
     },
     {
       "id": "y-102",
       "axis": "y",
       "sliceIndex": 102,
-      "texturePath": "slices/y/102.png",
+      "texturePath": "slices/y/102.webp",
       "widthPx": 351,
       "heightPx": 22,
       "vertices": [
@@ -14087,15 +14087,15 @@
         1,
         0
       ],
-      "sha256": "70b8085cf025533bfcc7ab5e7edbeacfc1e29dbad47bde1a7d14a3d3d90abb9f",
-      "bytes": 11009,
+      "sha256": "a35f27a93946dfc0d800b392f3bffde448ecbf33cfe7f2b6872ff701b91daddf",
+      "bytes": 5548,
       "alphaCoverage": 0.5147630147630148
     },
     {
       "id": "y-103",
       "axis": "y",
       "sliceIndex": 103,
-      "texturePath": "slices/y/103.png",
+      "texturePath": "slices/y/103.webp",
       "widthPx": 352,
       "heightPx": 21,
       "vertices": [
@@ -14148,15 +14148,15 @@
         1,
         0
       ],
-      "sha256": "13ea3cc10448673cb647520d6708fe335cfc53ef518a107b86286c97b0378b57",
-      "bytes": 10707,
+      "sha256": "2f4b7ce7a47b3a3e8559038bbd08ef517e9685459ec6294a04332e2fd48721fb",
+      "bytes": 5386,
       "alphaCoverage": 0.494724025974026
     },
     {
       "id": "y-104",
       "axis": "y",
       "sliceIndex": 104,
-      "texturePath": "slices/y/104.png",
+      "texturePath": "slices/y/104.webp",
       "widthPx": 346,
       "heightPx": 20,
       "vertices": [
@@ -14209,15 +14209,15 @@
         1,
         0
       ],
-      "sha256": "a425b9d9548270cca63aeaf1fdf067eb73c815f341569574d48bc2eabb384481",
-      "bytes": 9513,
+      "sha256": "42398ab6b670d2c922338645d67b55d023f02c937f6d221374fba45b8abd290f",
+      "bytes": 4688,
       "alphaCoverage": 0.48323699421965316
     },
     {
       "id": "y-105",
       "axis": "y",
       "sliceIndex": 105,
-      "texturePath": "slices/y/105.png",
+      "texturePath": "slices/y/105.webp",
       "widthPx": 351,
       "heightPx": 19,
       "vertices": [
@@ -14270,15 +14270,15 @@
         1,
         0
       ],
-      "sha256": "e87909c8ecdd71fc5eca969ccfca3cad976736e348ed6b9d7c56b04185635c33",
-      "bytes": 8933,
+      "sha256": "2e6d58d21d0d209bde2dfb0a242a700edc4ad34839bbc6d291d0eccb85737614",
+      "bytes": 4234,
       "alphaCoverage": 0.4565901934322987
     },
     {
       "id": "y-106",
       "axis": "y",
       "sliceIndex": 106,
-      "texturePath": "slices/y/106.png",
+      "texturePath": "slices/y/106.webp",
       "widthPx": 316,
       "heightPx": 17,
       "vertices": [
@@ -14331,15 +14331,15 @@
         1,
         0
       ],
-      "sha256": "1191a1ba4eadff2a55188628749903cda5fabeddaffd4f088b81faecb18a2117",
-      "bytes": 8126,
+      "sha256": "13c218ad73255835f7b038e4e75df72cd8ac71c81c4b0e42dbcc0bbe521c9830",
+      "bytes": 4162,
       "alphaCoverage": 0.5210349962769918
     },
     {
       "id": "y-107",
       "axis": "y",
       "sliceIndex": 107,
-      "texturePath": "slices/y/107.png",
+      "texturePath": "slices/y/107.webp",
       "widthPx": 311,
       "heightPx": 16,
       "vertices": [
@@ -14392,15 +14392,15 @@
         1,
         0
       ],
-      "sha256": "e8ddac658699114a135b2292cd38a85f715f8a76ee1d0a0fe4e9f3a595eb5fdc",
-      "bytes": 7554,
+      "sha256": "8080586f970b6fea799e73efc56c3e5b076758e9063187c69851527545cff11b",
+      "bytes": 3788,
       "alphaCoverage": 0.5253215434083601
     },
     {
       "id": "y-108",
       "axis": "y",
       "sliceIndex": 108,
-      "texturePath": "slices/y/108.png",
+      "texturePath": "slices/y/108.webp",
       "widthPx": 298,
       "heightPx": 16,
       "vertices": [
@@ -14453,15 +14453,15 @@
         1,
         0
       ],
-      "sha256": "3d366e18d805150ea5c178856cb0bf91b01f2162a6c44a8e9abb9e39871b41e6",
-      "bytes": 6778,
+      "sha256": "b2bb3e8402a17259c4173d04cc7a13b63385e61526104398e2320b395dd33fec",
+      "bytes": 3302,
       "alphaCoverage": 0.47567114093959734
     },
     {
       "id": "y-109",
       "axis": "y",
       "sliceIndex": 109,
-      "texturePath": "slices/y/109.png",
+      "texturePath": "slices/y/109.webp",
       "widthPx": 280,
       "heightPx": 15,
       "vertices": [
@@ -14514,15 +14514,15 @@
         1,
         0
       ],
-      "sha256": "a28b1daeaebdfeb8d6d4b05513ef7409a9061cd352abf9cf30d711e0b7504363",
-      "bytes": 6380,
+      "sha256": "e54c1a2193027953080cd6f72b881140d8f0111c7172c6b776cbebbc6bcb28cc",
+      "bytes": 3046,
       "alphaCoverage": 0.4666666666666667
     },
     {
       "id": "y-110",
       "axis": "y",
       "sliceIndex": 110,
-      "texturePath": "slices/y/110.png",
+      "texturePath": "slices/y/110.webp",
       "widthPx": 262,
       "heightPx": 13,
       "vertices": [
@@ -14575,15 +14575,15 @@
         1,
         0
       ],
-      "sha256": "e56d05fa6ee1d1e8af57d599637aa2089f49cf75d0dab478d625b442622d66a8",
-      "bytes": 5523,
+      "sha256": "a9246e00c5e7403f208267118a72987ac5b4b2c6331517f6756331c0f4b9d10a",
+      "bytes": 2718,
       "alphaCoverage": 0.47798003523194366
     },
     {
       "id": "y-111",
       "axis": "y",
       "sliceIndex": 111,
-      "texturePath": "slices/y/111.png",
+      "texturePath": "slices/y/111.webp",
       "widthPx": 244,
       "heightPx": 12,
       "vertices": [
@@ -14636,15 +14636,15 @@
         1,
         0
       ],
-      "sha256": "80da8cf99273d3b9ffeaa8a90769b602826a34158b3a8daf99cac83a9d68c728",
-      "bytes": 4556,
+      "sha256": "118167e25105dcefedbfdb3b59215059877402c715f91bdb223c17cb52fd6f62",
+      "bytes": 2238,
       "alphaCoverage": 0.45457650273224043
     },
     {
       "id": "y-112",
       "axis": "y",
       "sliceIndex": 112,
-      "texturePath": "slices/y/112.png",
+      "texturePath": "slices/y/112.webp",
       "widthPx": 229,
       "heightPx": 10,
       "vertices": [
@@ -14697,15 +14697,15 @@
         1,
         0
       ],
-      "sha256": "d75c108600bae81c169edf94786a52cddc8f07977d022f4075f77f220552e6f1",
-      "bytes": 3649,
+      "sha256": "404ab00933a2fcec45596a2cb7dcac372a8dcd020e68448b997f91f1a99f74cf",
+      "bytes": 1702,
       "alphaCoverage": 0.36724890829694323
     },
     {
       "id": "y-113",
       "axis": "y",
       "sliceIndex": 113,
-      "texturePath": "slices/y/113.png",
+      "texturePath": "slices/y/113.webp",
       "widthPx": 213,
       "heightPx": 7,
       "vertices": [
@@ -14758,15 +14758,15 @@
         1,
         0
       ],
-      "sha256": "fd0a2a6e7cc5bb13dcf830d6da793de7e396cdd9df522316372899d5768db0ad",
-      "bytes": 3061,
+      "sha256": "cf3ac69e4cbcf621981333266fc01e85873625228bedb407e43a0d20d862f40d",
+      "bytes": 1420,
       "alphaCoverage": 0.4352783366867874
     },
     {
       "id": "y-114",
       "axis": "y",
       "sliceIndex": 114,
-      "texturePath": "slices/y/114.png",
+      "texturePath": "slices/y/114.webp",
       "widthPx": 209,
       "heightPx": 7,
       "vertices": [
@@ -14819,15 +14819,15 @@
         1,
         0
       ],
-      "sha256": "aecbbe7a0d7126233e6b2005dcab83f59523ec099628665e8e22792e64e34858",
-      "bytes": 2833,
+      "sha256": "e1ab00ed2036d427cc4b71aed303a89545de817c56174aeb5cb27e0fc4580481",
+      "bytes": 1036,
       "alphaCoverage": 0.3342447026657553
     },
     {
       "id": "y-115",
       "axis": "y",
       "sliceIndex": 115,
-      "texturePath": "slices/y/115.png",
+      "texturePath": "slices/y/115.webp",
       "widthPx": 186,
       "heightPx": 5,
       "vertices": [
@@ -14880,15 +14880,15 @@
         1,
         0
       ],
-      "sha256": "5751629c01f3597f931261738216ad69bcfc28c0cff60e9e56b52382081a9c15",
-      "bytes": 1973,
+      "sha256": "7af23c985ec46854b8267aa7ed5818251052a63a57b701385817e5a3aa9dc874",
+      "bytes": 664,
       "alphaCoverage": 0.3387096774193548
     },
     {
       "id": "y-116",
       "axis": "y",
       "sliceIndex": 116,
-      "texturePath": "slices/y/116.png",
+      "texturePath": "slices/y/116.webp",
       "widthPx": 157,
       "heightPx": 5,
       "vertices": [
@@ -14941,15 +14941,15 @@
         1,
         0
       ],
-      "sha256": "7046ad3a3fff18c678f6edc55eeadd354a6a86bb81e26c680479fc531d68ec86",
-      "bytes": 1848,
+      "sha256": "84d96b5459ea86c684b6d1e7a8200c1690ffb9635e02518799ccbc5961800837",
+      "bytes": 530,
       "alphaCoverage": 0.32101910828025476
     },
     {
       "id": "y-117",
       "axis": "y",
       "sliceIndex": 117,
-      "texturePath": "slices/y/117.png",
+      "texturePath": "slices/y/117.webp",
       "widthPx": 139,
       "heightPx": 4,
       "vertices": [
@@ -15002,15 +15002,15 @@
         1,
         0
       ],
-      "sha256": "dc93ae5a679389c943fb99561963960001d190b342bd216cf079fb60a790fe0d",
-      "bytes": 1520,
+      "sha256": "e41f9daf23268bc6463f86bda4e0c8d77d0999ee312352d81591ea482c47549c",
+      "bytes": 362,
       "alphaCoverage": 0.2715827338129496
     },
     {
       "id": "y-118",
       "axis": "y",
       "sliceIndex": 118,
-      "texturePath": "slices/y/118.png",
+      "texturePath": "slices/y/118.webp",
       "widthPx": 125,
       "heightPx": 3,
       "vertices": [
@@ -15063,15 +15063,15 @@
         1,
         0
       ],
-      "sha256": "62f85a0c015de9cbe47a15ae3e3e2fec8584936bc6579071a55ab552bc63830f",
-      "bytes": 1144,
+      "sha256": "522a97b11114801c080b4257d90f75fde95336f790eb3239f33f4c95198ca8db",
+      "bytes": 252,
       "alphaCoverage": 0.256
     },
     {
       "id": "y-119",
       "axis": "y",
       "sliceIndex": 119,
-      "texturePath": "slices/y/119.png",
+      "texturePath": "slices/y/119.webp",
       "widthPx": 44,
       "heightPx": 3,
       "vertices": [
@@ -15124,15 +15124,15 @@
         1,
         0
       ],
-      "sha256": "1c4820bbe5268a3131b58912045a4cac8734ad36e11854e716b875d09573efeb",
-      "bytes": 469,
+      "sha256": "a32825be464add2adf380fe77e5031b643c64f02d214f306d2e9f2d19bb1c21e",
+      "bytes": 98,
       "alphaCoverage": 0.09848484848484848
     },
     {
       "id": "y-120",
       "axis": "y",
       "sliceIndex": 120,
-      "texturePath": "slices/y/120.png",
+      "texturePath": "slices/y/120.webp",
       "widthPx": 39,
       "heightPx": 2,
       "vertices": [
@@ -15185,15 +15185,15 @@
         1,
         0
       ],
-      "sha256": "8c33850fc7e2083c88c2b7d13e1323c119d5186041e94c1b3ca614e1041c8fd1",
-      "bytes": 337,
+      "sha256": "ec4e0ecec23fe4c529b1a833790fb2fa7fb2827194a453e7e956e82ca890533e",
+      "bytes": 74,
       "alphaCoverage": 0.10256410256410256
     },
     {
       "id": "y-121",
       "axis": "y",
       "sliceIndex": 121,
-      "texturePath": "slices/y/121.png",
+      "texturePath": "slices/y/121.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -15246,15 +15246,15 @@
         1,
         0
       ],
-      "sha256": "8ce47b5b4e93663f730098c9969018e8401c69c30d1b6999f3f962dd81f4e6f6",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-122",
       "axis": "y",
       "sliceIndex": 122,
-      "texturePath": "slices/y/122.png",
+      "texturePath": "slices/y/122.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -15307,15 +15307,15 @@
         1,
         0
       ],
-      "sha256": "27ec8e1558e1ca8c623d09ab07616792229ae9b140444341857637dc24570c71",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-123",
       "axis": "y",
       "sliceIndex": 123,
-      "texturePath": "slices/y/123.png",
+      "texturePath": "slices/y/123.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -15368,15 +15368,15 @@
         1,
         0
       ],
-      "sha256": "3c941781d760b00f5e2e0b17312f5092eafae9a7dfcf6809796f98f1ec2b4165",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-124",
       "axis": "y",
       "sliceIndex": 124,
-      "texturePath": "slices/y/124.png",
+      "texturePath": "slices/y/124.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -15429,15 +15429,15 @@
         1,
         0
       ],
-      "sha256": "a4dac2c7794d59e3b1e36d8b1f0f92547cec6472014b3047af07ee5e761c17e0",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-125",
       "axis": "y",
       "sliceIndex": 125,
-      "texturePath": "slices/y/125.png",
+      "texturePath": "slices/y/125.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -15490,15 +15490,15 @@
         1,
         0
       ],
-      "sha256": "acdd92b9f1fa5c9e6fb6792876170aae2bb55d76bdd23cfd2976b61b75d1b4dc",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-126",
       "axis": "y",
       "sliceIndex": 126,
-      "texturePath": "slices/y/126.png",
+      "texturePath": "slices/y/126.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -15551,15 +15551,15 @@
         1,
         0
       ],
-      "sha256": "56c4e3463b91e92b84bb8ebfd6e710a3aa86cbedd924d82241bf2980b18d857b",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "y-127",
       "axis": "y",
       "sliceIndex": 127,
-      "texturePath": "slices/y/127.png",
+      "texturePath": "slices/y/127.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -15612,15 +15612,15 @@
         1,
         0
       ],
-      "sha256": "56c4e3463b91e92b84bb8ebfd6e710a3aa86cbedd924d82241bf2980b18d857b",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "z-0",
       "axis": "z",
       "sliceIndex": 0,
-      "texturePath": "slices/z/00.png",
+      "texturePath": "slices/z/00.webp",
       "widthPx": 1,
       "heightPx": 1,
       "vertices": [
@@ -15673,15 +15673,15 @@
         0,
         -1
       ],
-      "sha256": "0f07e3977be21525b458be5b6aca1c292e1e12442e67f79bdeb496a75b423e88",
-      "bytes": 91,
+      "sha256": "54bdb34ea423475fe0544cacbf32ab4f7e75846b5f25f1296e9bb2d157cd9f77",
+      "bytes": 28,
       "alphaCoverage": 0
     },
     {
       "id": "z-1",
       "axis": "z",
       "sliceIndex": 1,
-      "texturePath": "slices/z/01.png",
+      "texturePath": "slices/z/01.webp",
       "widthPx": 80,
       "heightPx": 123,
       "vertices": [
@@ -15734,15 +15734,15 @@
         0,
         -1
       ],
-      "sha256": "694b668a30c1a2690364d162a2a66dff0fa001b6ee1e6ef5b580e9ee3f6f1484",
-      "bytes": 13044,
+      "sha256": "b8a145b93af3d2690c9235dd014cc97a11823caa8f2bbe6af893bdaec17cbbc0",
+      "bytes": 66,
       "alphaCoverage": 0.0003048780487804878
     },
     {
       "id": "z-2",
       "axis": "z",
       "sliceIndex": 2,
-      "texturePath": "slices/z/02.png",
+      "texturePath": "slices/z/02.webp",
       "widthPx": 112,
       "heightPx": 85,
       "vertices": [
@@ -15795,15 +15795,15 @@
         0,
         -1
       ],
-      "sha256": "19f2089d690f65d1be479a981df4f30803b4126ca9a826af8b739535132af3e2",
-      "bytes": 11802,
+      "sha256": "7f6ccc2cc72fbc41cd55fa27aa0ab9c67f52e0ecdbc7574d0784ed375a4573df",
+      "bytes": 114,
       "alphaCoverage": 0.001995798319327731
     },
     {
       "id": "z-3",
       "axis": "z",
       "sliceIndex": 3,
-      "texturePath": "slices/z/03.png",
+      "texturePath": "slices/z/03.webp",
       "widthPx": 119,
       "heightPx": 112,
       "vertices": [
@@ -15856,15 +15856,15 @@
         0,
         -1
       ],
-      "sha256": "47469f783d2918705f25dbb561f8c859afd065dbee602e8c8a6a76ff4cc86ac6",
-      "bytes": 16254,
+      "sha256": "ec65e0b9867f3192b1e0f6c2c72f4ec973050b14ed814075df602a9a84de2ee2",
+      "bytes": 894,
       "alphaCoverage": 0.11224489795918367
     },
     {
       "id": "z-4",
       "axis": "z",
       "sliceIndex": 4,
-      "texturePath": "slices/z/04.png",
+      "texturePath": "slices/z/04.webp",
       "widthPx": 126,
       "heightPx": 146,
       "vertices": [
@@ -15917,15 +15917,15 @@
         0,
         -1
       ],
-      "sha256": "3932e355a761b8d20fadf8c791bd55838bbac1145c49e4c538d55c33d280af3f",
-      "bytes": 23487,
+      "sha256": "b346aa2ee380b6f8a68c67f156fc08c44811ebbd45f58370e58c9f9a9dc8a12a",
+      "bytes": 2540,
       "alphaCoverage": 0.20123939986953684
     },
     {
       "id": "z-5",
       "axis": "z",
       "sliceIndex": 5,
-      "texturePath": "slices/z/05.png",
+      "texturePath": "slices/z/05.webp",
       "widthPx": 146,
       "heightPx": 165,
       "vertices": [
@@ -15978,15 +15978,15 @@
         0,
         -1
       ],
-      "sha256": "983d483b3ec0e3c0fba697a1d76ead7d1147147d0f84ff55738fd71583eb8216",
-      "bytes": 32708,
+      "sha256": "0116b7a2cc99f4397c0bc3a26af6b37280010c529fafde22835ef6dffc3b42c0",
+      "bytes": 4382,
       "alphaCoverage": 0.2253217102532171
     },
     {
       "id": "z-6",
       "axis": "z",
       "sliceIndex": 6,
-      "texturePath": "slices/z/06.png",
+      "texturePath": "slices/z/06.webp",
       "widthPx": 177,
       "heightPx": 177,
       "vertices": [
@@ -16039,15 +16039,15 @@
         0,
         -1
       ],
-      "sha256": "af58afb974e75054a31c9beeb5a085efd964ec9e067d8f63ee6acb71ec1363c5",
-      "bytes": 44913,
+      "sha256": "19454d673dddf0481e3f477142be9672e9f8d092f9b1535fffcbd9af1256bdff",
+      "bytes": 6908,
       "alphaCoverage": 0.2161256343962463
     },
     {
       "id": "z-7",
       "axis": "z",
       "sliceIndex": 7,
-      "texturePath": "slices/z/07.png",
+      "texturePath": "slices/z/07.webp",
       "widthPx": 214,
       "heightPx": 192,
       "vertices": [
@@ -16100,15 +16100,15 @@
         0,
         -1
       ],
-      "sha256": "2422a022b8c4bf2d4d8b0f601b40ccbae62c295de0f170eca69878b6675bb9b4",
-      "bytes": 61575,
+      "sha256": "577c28acc8aa4fd0ce6c3cf4c395442f87a3ad621ed084a460abb3416cfce39f",
+      "bytes": 9278,
       "alphaCoverage": 0.19840342679127726
     },
     {
       "id": "z-8",
       "axis": "z",
       "sliceIndex": 8,
-      "texturePath": "slices/z/08.png",
+      "texturePath": "slices/z/08.webp",
       "widthPx": 225,
       "heightPx": 197,
       "vertices": [
@@ -16161,15 +16161,15 @@
         0,
         -1
       ],
-      "sha256": "ff9d4143c6bdd7de2a4797086592ed45cc17e15b96a36627f132efe06734d2ce",
-      "bytes": 67728,
+      "sha256": "053b3e280d6a2f6adc5958c549f03aabddb17d8b798d1c90396235b0d4fa7a6a",
+      "bytes": 12312,
       "alphaCoverage": 0.22104906937394248
     },
     {
       "id": "z-9",
       "axis": "z",
       "sliceIndex": 9,
-      "texturePath": "slices/z/09.png",
+      "texturePath": "slices/z/09.webp",
       "widthPx": 230,
       "heightPx": 235,
       "vertices": [
@@ -16222,15 +16222,15 @@
         0,
         -1
       ],
-      "sha256": "2169be0a9b5bfc1d8de2598694c0e934d7534f260e147737baf5abe3b6ce637c",
-      "bytes": 80073,
+      "sha256": "1650f61cb536dda78255e71924a96c3a4f18b9084b08bda509678d202af2a3f0",
+      "bytes": 16924,
       "alphaCoverage": 0.23522664199814985
     },
     {
       "id": "z-10",
       "axis": "z",
       "sliceIndex": 10,
-      "texturePath": "slices/z/10.png",
+      "texturePath": "slices/z/10.webp",
       "widthPx": 241,
       "heightPx": 267,
       "vertices": [
@@ -16283,15 +16283,15 @@
         0,
         -1
       ],
-      "sha256": "7b4567e3ddc06964a2b2d41ad57458266e589bf73f7ca0c933072265579e4ff8",
-      "bytes": 89436,
+      "sha256": "d54cab2eae947ed8d1082257b4a0d41ef4d7af16d5cca1a92c8d834f1906bbc0",
+      "bytes": 24602,
       "alphaCoverage": 0.30077548292849704
     },
     {
       "id": "z-11",
       "axis": "z",
       "sliceIndex": 11,
-      "texturePath": "slices/z/11.png",
+      "texturePath": "slices/z/11.webp",
       "widthPx": 255,
       "heightPx": 302,
       "vertices": [
@@ -16344,15 +16344,15 @@
         0,
         -1
       ],
-      "sha256": "6eddcc587dd29fee22c2c85f7c7d7b70173b1c66248e295a1ad5919279984d86",
-      "bytes": 96413,
+      "sha256": "fd3480642ee03f2fb19df7dea4bc13f00a8faa5b0fc448744284a0ec71ff13d7",
+      "bytes": 34522,
       "alphaCoverage": 0.40688222308791067
     },
     {
       "id": "z-12",
       "axis": "z",
       "sliceIndex": 12,
-      "texturePath": "slices/z/12.png",
+      "texturePath": "slices/z/12.webp",
       "widthPx": 337,
       "heightPx": 332,
       "vertices": [
@@ -16405,15 +16405,15 @@
         0,
         -1
       ],
-      "sha256": "483dde6d5cc7c3dc8641b754dc1054f2491ee505e4e84112b654fccb5f91e205",
-      "bytes": 119545,
+      "sha256": "c7955bc2f11dc01b898b7db721aab95372a518a07ab0364a8d72a2e0d7ed17a5",
+      "bytes": 45774,
       "alphaCoverage": 0.42958778735118514
     },
     {
       "id": "z-13",
       "axis": "z",
       "sliceIndex": 13,
-      "texturePath": "slices/z/13.png",
+      "texturePath": "slices/z/13.webp",
       "widthPx": 421,
       "heightPx": 356,
       "vertices": [
@@ -16466,15 +16466,15 @@
         0,
         -1
       ],
-      "sha256": "c5d520f4b315114475f28f1642d4b627eb2451017356ed7df6c311ae1ef69950",
-      "bytes": 137284,
+      "sha256": "ea4b833337f4febdfef4ae28365d3e9f0f476282bc5f52cc295ce1eb8fe5a000",
+      "bytes": 60638,
       "alphaCoverage": 0.46844724972644053
     },
     {
       "id": "z-14",
       "axis": "z",
       "sliceIndex": 14,
-      "texturePath": "slices/z/14.png",
+      "texturePath": "slices/z/14.webp",
       "widthPx": 456,
       "heightPx": 381,
       "vertices": [
@@ -16527,15 +16527,15 @@
         0,
         -1
       ],
-      "sha256": "3ea33e3807232a456332d9294f16fb083cdcbb554a63ef7d0ae87b00a83a53bc",
-      "bytes": 279399,
+      "sha256": "20a5eb38e21e26206e29d55e5b1aab4ca956e4f4d7c5e39346cb5a0e30a6f92e",
+      "bytes": 158848,
       "alphaCoverage": 0.5723396417553069
     },
     {
       "id": "z-15",
       "axis": "z",
       "sliceIndex": 15,
-      "texturePath": "slices/z/15.png",
+      "texturePath": "slices/z/15.webp",
       "widthPx": 467,
       "heightPx": 415,
       "vertices": [
@@ -16588,15 +16588,15 @@
         0,
         -1
       ],
-      "sha256": "a3b2ab30490801f0ac4237eb079c00a2412e05857341ab6ba397c24ce8be670e",
-      "bytes": 380692,
+      "sha256": "90a65f4571b32ab7e4017235d0cd097abd62bf52694522ed76e2ba3da8586aae",
+      "bytes": 237774,
       "alphaCoverage": 0.671608059647584
     },
     {
       "id": "z-16",
       "axis": "z",
       "sliceIndex": 16,
-      "texturePath": "slices/z/16.png",
+      "texturePath": "slices/z/16.webp",
       "widthPx": 469,
       "heightPx": 432,
       "vertices": [
@@ -16649,15 +16649,15 @@
         0,
         -1
       ],
-      "sha256": "318ebaa019034b00692b04c0cf5770815f93487efdfba033b284be68fcd63350",
-      "bytes": 394918,
+      "sha256": "f0d99a0910698680a4a2ab4a68406e027df788f5d0442a09be67f2be7dda0768",
+      "bytes": 251450,
       "alphaCoverage": 0.6759950248756219
     },
     {
       "id": "z-17",
       "axis": "z",
       "sliceIndex": 17,
-      "texturePath": "slices/z/17.png",
+      "texturePath": "slices/z/17.webp",
       "widthPx": 464,
       "heightPx": 400,
       "vertices": [
@@ -16710,15 +16710,15 @@
         0,
         -1
       ],
-      "sha256": "f798628b7e3ccfc10f599874dec883d344cc12133daa555f01d25d26db7ac580",
-      "bytes": 350431,
+      "sha256": "fb7f95e4dd2f32fff72d1e92a459f925e3bbfa6cb5c30257a54367d0404026a6",
+      "bytes": 207376,
       "alphaCoverage": 0.6302909482758621
     },
     {
       "id": "z-18",
       "axis": "z",
       "sliceIndex": 18,
-      "texturePath": "slices/z/18.png",
+      "texturePath": "slices/z/18.webp",
       "widthPx": 446,
       "heightPx": 371,
       "vertices": [
@@ -16771,15 +16771,15 @@
         0,
         -1
       ],
-      "sha256": "47b178df9fe2613de078b9a7f41b3422c5b3dfcfadacf94a531494501eb66644",
-      "bytes": 190134,
+      "sha256": "3bc596de1799c75ab8a2e30d65a7715ddc9215f0bf74f71c13e8e7a891fe1236",
+      "bytes": 95934,
       "alphaCoverage": 0.4966760542951422
     },
     {
       "id": "z-19",
       "axis": "z",
       "sliceIndex": 19,
-      "texturePath": "slices/z/19.png",
+      "texturePath": "slices/z/19.webp",
       "widthPx": 404,
       "heightPx": 341,
       "vertices": [
@@ -16832,15 +16832,15 @@
         0,
         -1
       ],
-      "sha256": "bc46f14b0f3be0138244b8fdd68a30796aefdef7522871e6490d0e46f4b80378",
-      "bytes": 130605,
+      "sha256": "198349424a6c211e58f39fed31e878b75c8bf86b7e03f8354658fa9b549e0757",
+      "bytes": 49358,
       "alphaCoverage": 0.41334456026247784
     },
     {
       "id": "z-20",
       "axis": "z",
       "sliceIndex": 20,
-      "texturePath": "slices/z/20.png",
+      "texturePath": "slices/z/20.webp",
       "widthPx": 259,
       "heightPx": 315,
       "vertices": [
@@ -16893,15 +16893,15 @@
         0,
         -1
       ],
-      "sha256": "5db38e4ab6c6976c8e1fed22add59ee87ced46d533f0e42b310abb30e15b57cd",
-      "bytes": 97086,
+      "sha256": "fe5f7ed438880ac27bf317f9e482c27a698475f6e5104dd897f0b5e6a36c2d2b",
+      "bytes": 38596,
       "alphaCoverage": 0.4545075687932831
     },
     {
       "id": "z-21",
       "axis": "z",
       "sliceIndex": 21,
-      "texturePath": "slices/z/21.png",
+      "texturePath": "slices/z/21.webp",
       "widthPx": 253,
       "heightPx": 255,
       "vertices": [
@@ -16954,15 +16954,15 @@
         0,
         -1
       ],
-      "sha256": "3135cd0d964a64ad1ec369ea8f16fb321bbcba5ec2ed9a8dac394e80ec98cddd",
-      "bytes": 87417,
+      "sha256": "230171b8cd7ca3986feb9886891eb573e5b991d4d724157d6d27775a61fcbeea",
+      "bytes": 27552,
       "alphaCoverage": 0.3590327830737038
     },
     {
       "id": "z-22",
       "axis": "z",
       "sliceIndex": 22,
-      "texturePath": "slices/z/22.png",
+      "texturePath": "slices/z/22.webp",
       "widthPx": 246,
       "heightPx": 205,
       "vertices": [
@@ -17015,15 +17015,15 @@
         0,
         -1
       ],
-      "sha256": "7e2d40d7b9ec9940c38a26ce908e5ea208a4173debf7846b8c2822bed331cff6",
-      "bytes": 74299,
+      "sha256": "5add7dca8646904bdf246dfc7b28e398e4aa6dd4e9b21bce365d073646a2093b",
+      "bytes": 19562,
       "alphaCoverage": 0.3048383898473131
     },
     {
       "id": "z-23",
       "axis": "z",
       "sliceIndex": 23,
-      "texturePath": "slices/z/23.png",
+      "texturePath": "slices/z/23.webp",
       "widthPx": 238,
       "heightPx": 194,
       "vertices": [
@@ -17076,15 +17076,15 @@
         0,
         -1
       ],
-      "sha256": "d0c4391d3b98aac1a707ac906fa566321c81ba9d083d170c6dbc1c17ab8ebe0e",
-      "bytes": 69758,
+      "sha256": "85a33e25e8fbf7f536708c263677f3140694fbe2e1d13d9288160b38779d664f",
+      "bytes": 13684,
       "alphaCoverage": 0.23245690028588756
     },
     {
       "id": "z-24",
       "axis": "z",
       "sliceIndex": 24,
-      "texturePath": "slices/z/24.png",
+      "texturePath": "slices/z/24.webp",
       "widthPx": 212,
       "heightPx": 178,
       "vertices": [
@@ -17137,15 +17137,15 @@
         0,
         -1
       ],
-      "sha256": "e2bf6c15b96395ed453d0c6efe3ea0f0e4b8512538ee557d7c2af1137c3f54bc",
-      "bytes": 57347,
+      "sha256": "23fac548fbac2da7a26f1853504c84a6f039cda9bf1c42edc35eafbb87ff0b1f",
+      "bytes": 9826,
       "alphaCoverage": 0.2209561161755353
     },
     {
       "id": "z-25",
       "axis": "z",
       "sliceIndex": 25,
-      "texturePath": "slices/z/25.png",
+      "texturePath": "slices/z/25.webp",
       "widthPx": 176,
       "heightPx": 173,
       "vertices": [
@@ -17198,15 +17198,15 @@
         0,
         -1
       ],
-      "sha256": "84d4aa6427d9b2abc43369358957bb4097bd0137d4c8b8bf95eaa6513ec195a7",
-      "bytes": 44232,
+      "sha256": "bdf46a48febb696cfa15282ff1c39a7ad6b9917669e2b24ad8ca144130851707",
+      "bytes": 6966,
       "alphaCoverage": 0.21863504992117708
     },
     {
       "id": "z-26",
       "axis": "z",
       "sliceIndex": 26,
-      "texturePath": "slices/z/26.png",
+      "texturePath": "slices/z/26.webp",
       "widthPx": 135,
       "heightPx": 170,
       "vertices": [
@@ -17259,15 +17259,15 @@
         0,
         -1
       ],
-      "sha256": "365dea55b2d353240895a1bfa27e3676bf578f95f62389df376da99ead4ad037",
-      "bytes": 31857,
+      "sha256": "b27331dd6bf6aa3beb92a29ab210bd61ffdfc9dc14ca3ff998bc14111d56ccba",
+      "bytes": 4284,
       "alphaCoverage": 0.22880174291938998
     },
     {
       "id": "z-27",
       "axis": "z",
       "sliceIndex": 27,
-      "texturePath": "slices/z/27.png",
+      "texturePath": "slices/z/27.webp",
       "widthPx": 114,
       "heightPx": 148,
       "vertices": [
@@ -17320,15 +17320,15 @@
         0,
         -1
       ],
-      "sha256": "0718ea8dd6e68656567d1b617338897e018fd28b1cbcc6455d9c7e4d68bbe765",
-      "bytes": 22187,
+      "sha256": "3f208b8befc0697653362c6b1dcd3b470cce64d6f6eb0422baad9ca38a8f8214",
+      "bytes": 2608,
       "alphaCoverage": 0.21645329540066383
     },
     {
       "id": "z-28",
       "axis": "z",
       "sliceIndex": 28,
-      "texturePath": "slices/z/28.png",
+      "texturePath": "slices/z/28.webp",
       "widthPx": 113,
       "heightPx": 112,
       "vertices": [
@@ -17381,15 +17381,15 @@
         0,
         -1
       ],
-      "sha256": "969affbac42e883638b2b6b735151a998ce3a93a5ec014cab50d66c530d8e84d",
-      "bytes": 15944,
+      "sha256": "cb4825d6e326e49a26930888af13024a245a125adf572598f74956ff1fa5e7d1",
+      "bytes": 940,
       "alphaCoverage": 0.11939001264222503
     },
     {
       "id": "z-29",
       "axis": "z",
       "sliceIndex": 29,
-      "texturePath": "slices/z/29.png",
+      "texturePath": "slices/z/29.webp",
       "widthPx": 104,
       "heightPx": 112,
       "vertices": [
@@ -17442,15 +17442,15 @@
         0,
         -1
       ],
-      "sha256": "93d8dde097013a6f316015d9f5466a5229847141acdfd356e2b4141319ebc616",
-      "bytes": 14984,
+      "sha256": "e232cfc17a48517fca82091a4f9114ce50571b9273cf0682d49a3d4f6d0d5c1b",
+      "bytes": 150,
       "alphaCoverage": 0.002918956043956044
     },
     {
       "id": "z-30",
       "axis": "z",
       "sliceIndex": 30,
-      "texturePath": "slices/z/30.png",
+      "texturePath": "slices/z/30.webp",
       "widthPx": 23,
       "heightPx": 107,
       "vertices": [
@@ -17503,15 +17503,15 @@
         0,
         -1
       ],
-      "sha256": "21a7905d8fe0325d3edfc54a85d6a600ce5fbbf90a077b6fff4b975190202203",
-      "bytes": 4350,
+      "sha256": "945a0f84e7b3fc91ed582a0dec40a3e2f7e5275635be038ec9d29709e8639af9",
+      "bytes": 64,
       "alphaCoverage": 0.002438033319788704
     },
     {
       "id": "z-31",
       "axis": "z",
       "sliceIndex": 31,
-      "texturePath": "slices/z/31.png",
+      "texturePath": "slices/z/31.webp",
       "widthPx": 8,
       "heightPx": 102,
       "vertices": [
@@ -17564,8 +17564,8 @@
         0,
         -1
       ],
-      "sha256": "d906b2e427d50af472224097da10ba511a2ee9a366f566ac476f5c34efb3e91e",
-      "bytes": 1624,
+      "sha256": "baae4901cd79b8e360ec6fc0750b2bad12aa7762ac85a5658fda583aa37c932a",
+      "bytes": 48,
       "alphaCoverage": 0.004901960784313725
     }
   ],

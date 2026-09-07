@@ -38,3 +38,17 @@ for (const id of ['mercury', 'venus']) {
     assert.ok(runtime.heliocentricView);
   });
 }
+
+for (const id of ['mercury', 'saturn']) {
+  test(`${id} downloads its cutaway on selection and then makes it visible`, async () => {
+    const runtime = await readPreparedFixture(id, 'runtime');
+    const target = runtime.tree.nodes.findIndex(n => n.className === `polycss-mesh ${id}-cutaway`);
+    assert.ok(target >= 0);
+    assert.ok(runtime.tree.nodes[target].properties.some(i => runtime.tree.properties[i].name === 'display' && runtime.tree.properties[i].value === 'none'));
+    assert.ok(runtime.assets.startup.every(key => !key.startsWith('interior:')));
+    for (const variant of runtime.variants) {
+      const interior = variant.writes.some(w => w.name === 'data-view' && w.value === 'interior');
+      assert.equal(variant.writes.find(w => w.target === target && w.name === 'display')?.value, interior ? 'block' : 'none');
+    }
+  });
+}

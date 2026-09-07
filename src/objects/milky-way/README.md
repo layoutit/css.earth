@@ -10,7 +10,7 @@ milky-way/
 └── prepared/
     ├── volume.json             Prepared object envelope with PolyCSS leaves
     ├── volume-slices.json      Physical quad and texture intermediates
-    └── slices/{x,y,z}/*.png    Fixed 128 / 128 / 32 external texture bank
+    └── slices/{x,y,z}/*.webp   Fixed 128 / 128 / 32 lossless texture bank
 ```
 
 From the repository root, with Node 22.15+ and pnpm 10.33.0:

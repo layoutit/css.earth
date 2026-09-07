@@ -113,6 +113,12 @@ a preparation dependency only. It is consumed through its own build, which
 regenerates the checked-in `src/platform/solar-geometry.mjs` from it
 bit-for-bit. The browser runtime never loads it.
 
+Surface minimaps are separate prepared WebP images, at most 640 pixels wide
+for the sidebar at DPR 2. Object preparation writes them under
+`prepared/minimaps/`; `pnpm prepare:surface-minimaps` refreshes them from existing
+normalized maps or raster sources. The sidebar never downloads the HD globe map
+for its preview.
+
 After preparation, verify the local source closure or regenerate the browser
 assets with:
 

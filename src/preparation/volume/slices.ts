@@ -6,7 +6,7 @@ import { loadVolumeSource, sampleEncoded, sha256, type VolumeSource } from './so
 import type { Axis, Bounds3, Vector3, RadialEmission, VolumeRecipe } from './config.js';
 export interface VolumeSliceQuad {
   id: string; axis: Axis; sliceIndex: number; texturePath: string; widthPx: number; heightPx: number;
-  /** PNG top-left first: required by PolyCSS's image/projective backend. */
+  /** Image top-left first: required by PolyCSS's image/projective backend. */
   vertices: [Vector3, Vector3, Vector3, Vector3];
   uvs: [[number, number], [number, number], [number, number], [number, number]];
   center: Vector3; normal: Vector3; sha256: string; bytes: number; alphaCoverage: number;
@@ -139,20 +139,20 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
         if (right < left) { left = right = Math.floor(width / 2); top = bottom = Math.floor(height / 2); }
       }
       const croppedWidth = right - left + 1, croppedHeight = bottom - top + 1;
-      const texturePath = `slices/${axis}/${String(index).padStart(2, '0')}.png`, target = resolve(options.outputDirectory, texturePath);
+      const texturePath = `slices/${axis}/${String(index).padStart(2, '0')}.webp`, target = resolve(options.outputDirectory, texturePath);
       await sharp(baked.rgba, { raw: { width, height, channels: 4 } })
-        .extract({ left, top, width: croppedWidth, height: croppedHeight }).png().toFile(target);
+        .extract({ left, top, width: croppedWidth, height: croppedHeight }).webp({ lossless: true, quality: 100, effort: 6 }).toFile(target);
       const uMin = uLower + (uUpper - uLower) * left / width, uMax = uLower + (uUpper - uLower) * (right + 1) / width;
       const vMax = vUpper - (vUpper - vLower) * top / height, vMin = vUpper - (vUpper - vLower) * (bottom + 1) / height;
-      // Image/projective maps PNG corners by vertex order; UV-only flips do not correct it.
+      // Image/projective maps image corners by vertex order; UV-only flips do not correct it.
       const vertices: [Vector3, Vector3, Vector3, Vector3] = [point(axis, depth, uMin, vMax), point(axis, depth, uMax, vMax),
         point(axis, depth, uMax, vMin), point(axis, depth, uMin, vMin)];
       for (const vertex of vertices) for (let i = 0; i < 3; i++) vertex[i] = (vertex[i] ?? 0) * scale;
       const center = point(axis, depth * scale, (uMin + uMax) * scale / 2, (vMin + vMax) * scale / 2);
       const normal: Vector3 = axis === 'x' ? [-1, 0, 0] : axis === 'y' ? [0, 1, 0] : [0, 0, -1];
-      const png = await readFile(target);
+      const image = await readFile(target);
       quads.push({ id: `${axis}-${index}`, axis, sliceIndex: index, texturePath, widthPx: croppedWidth, heightPx: croppedHeight,
-        vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center, normal, sha256: sha256(png), bytes: png.length,
+        vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center, normal, sha256: sha256(image), bytes: image.length,
         alphaCoverage: baked.alphaCoverage * width * height / (croppedWidth * croppedHeight) });
     }
     console.log(`Prepared ${counts[axis]} ${axis.toUpperCase()} scalar-field slabs.`);

@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "10398f1ed1c7a213934c3d15ec77bd71cb92e47b911a03679538291106864095"
+  },
   "id": "venus",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -145,9 +148,6 @@
       }
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "e02f24ad9a0dbf34e71fe8d0af33466f5613107b13adf92e53dbb1d7f408fc0f"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }
