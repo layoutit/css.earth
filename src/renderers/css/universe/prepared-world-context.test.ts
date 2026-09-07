@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { OBJECTS } from '../../../../site/objects.mjs';
@@ -785,4 +785,39 @@ test('billboards straddle the selected detail in camera-depth order without repl
   expect(depth('sun')).toBeLessThan(0);
   expect(all(root)).toEqual(nodes);
   layer.destroy();
+});
+
+test('orbit endpoints follow the rendered circle through growth and shrink without camera publication', () => {
+  let notify: ResizeObserverCallback;
+  let disconnected = false;
+  vi.stubGlobal('ResizeObserver', class {
+    constructor(callback: ResizeObserverCallback) { notify = callback; }
+    observe() {}
+    disconnect() { disconnected = true; }
+  });
+  let layer: ReturnType<typeof mountPreparedWorldContext> | undefined;
+  try {
+    const root = mount(1);
+    layer = mounted.get(root)!;
+    const body = layer.inspect().find(entry => entry.id === 'mercury')!;
+    const nodes = [...body.orbit];
+    const [cx, cy] = body.indicator.style.transform.match(/-?[\d.]+/g)!.map(Number);
+    const gap = () => Math.min(...body.orbit.filter(line => line.style.visibility === '').flatMap(line => {
+      const [dx, dy, , , x, y] = line.style.transform.slice(7, -1).split(',').map(Number);
+      return [Math.hypot(x - cx, y - cy), Math.hypot(x + dx - cx, y + dy - cy)];
+    }));
+    const measurements = all(root).reduce((sum, element) => sum + element.measurements, 0);
+    expect(gap()).toBeCloseTo(8, 3);
+    for (const diameter of [18, 20, 19, 16]) {
+      notify!([{ target: body.indicator, borderBoxSize: [{ inlineSize: diameter, blockSize: diameter }] } as unknown as ResizeObserverEntry], {} as ResizeObserver);
+      expect(gap()).toBeCloseTo(diameter / 2, 3);
+      expect(layer.inspect().find(entry => entry.id === 'mercury')!.orbit).toEqual(nodes);
+    }
+    expect(all(root).reduce((sum, element) => sum + element.measurements, 0)).toBe(measurements);
+    layer.destroy();
+    expect(disconnected).toBe(true);
+  } finally {
+    layer?.destroy();
+    vi.unstubAllGlobals();
+  }
 });

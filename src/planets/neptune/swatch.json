@@ -1,0 +1,53 @@
+{
+  "hex": "#ade7ff",
+  "rgb": [
+    173,
+    231,
+    255
+  ],
+  "colorSpace": "sRGB",
+  "basis": "Disk-integrated spectral color, computed from published reference spectra. Brightness-normalized for a swatch; not an official color or a representation of relative planetary brightness.",
+  "source": {
+    "title": "Payne et al. (2026), A Comprehensive Spectroscopic Reference of the Solar System and Its Application to Exoplanet Direct Imaging",
+    "url": "https://doi.org/10.3847/PSJ/ae2feb",
+    "dataUrl": "https://raw.githubusercontent.com/nasapsg/reference/61d5035b67082bc0a419d87efbe957931c83f0cf/neptune_composite_data.txt",
+    "sha256": "4e238f650799dc3996b22958ff719a687014ff389fd13f4f7909ce385e469b47",
+    "columns": "Column 1: wavelength in micrometres. Column 2: disk-integrated reflectance (I/F apparent albedo for the Earth and Mars PSG model outputs).",
+    "basis": "Composite reference reflectance spectrum from observations."
+  },
+  "conversion": {
+    "observer": {
+      "name": "CIE 1931 2 degree standard observer",
+      "dataUrl": "https://files.cie.co.at/CIE_xyz_1931_2deg.csv",
+      "doi": "https://doi.org/10.25039/CIE.DS.xvudnb9b",
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1"
+    },
+    "illuminant": {
+      "name": "ASTM E490-00 air-mass-zero solar spectral irradiance",
+      "url": "https://nrel.sitefinity.cloud/grid/solar-resource/spectra-astm-e490",
+      "dataUrl": "https://www.nlr.gov/media/docs/libraries/grid/e490_00a_amo.xls?sfvrsn=ce97914b_1",
+      "sha256": "82d5de38f529fcd65d1648e397a1e2d1a8dfaff1e3e701ba5861ed4ab5bc1e7a",
+      "columns": "NewAM0 worksheet, columns A and B: wavelength in micrometres and irradiance in W/m2/micrometre.",
+      "whitePointXy": [
+        0.3235628272,
+        0.3326215753
+      ]
+    },
+    "integration": "Linearly interpolate reflectance and solar irradiance onto the CIE 360-830 nm grid at 1 nm. Integrate reflectance times irradiance times each CIE matching function; normalize to Y=1 for a perfect diffuser. All inputs cover the full integration interval; no extrapolation.",
+    "chromaticAdaptation": "Bradford adaptation from the integrated solar white to the sRGB D65 white (x=0.3127, y=0.3290).",
+    "brightnessNormalization": "Divide all three linear sRGB channels by their maximum, preserving channel ratios; apply the standard sRGB transfer function, multiply by 255, and round half up. No hue adjustment or gamut clipping.",
+    "brightnessNormalizationReference": "https://users.ox.ac.uk/~atmp0035/colorimetry.html",
+    "standard": "https://registry.color.org/rgb-registry/srgb",
+    "implementation": "Colour Science 0.4.7: sd_to_XYZ(method=\"Integration\"), XYZ_to_sRGB(chromatic_adaptation_transform=\"Bradford\", apply_cctf_encoding=False), eotf_inverse_sRGB.",
+    "xyzSolarWhiteY1": [
+      0.3867148738,
+      0.4340310573,
+      0.5939162429
+    ],
+    "linearSrgbD65": [
+      0.2495925511,
+      0.4747307254,
+      0.5937701096
+    ]
+  }
+}

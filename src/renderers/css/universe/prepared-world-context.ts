@@ -40,8 +40,8 @@ function orbitOverlapsLabel(orbits: readonly { segments: readonly OrbitSegment[]
 }
 
 // Clip already-projected chords at the UI marker, preserving the prepared orbit.
-function orbitOutsideMarker(segments: readonly OrbitSegment[], x: number, y: number): readonly OrbitSegment[] {
-  const radiusSquared = (BODY_INDICATOR_DIAMETER / 2) ** 2;
+function orbitOutsideMarker(segments: readonly OrbitSegment[], x: number, y: number, radius: number): readonly OrbitSegment[] {
+  const radiusSquared = radius ** 2;
   const result: OrbitSegment[] = [];
   for (const segment of segments) {
     const [x0, y0, x1, y1, weight] = segment;
@@ -323,9 +323,33 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     const labelNavigation = bindObjectNavigationTarget(label, host);
     const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host) : null;
     return { body, group, sprite, marker, indicator, label, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId)! : null, pieces, navigation, indicatorNavigation, labelNavigation, orbitNavigation,
+      indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
+      orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, previousCount: 0,
       fade: { element: label, target: 0, hideTimer: null } as LabelFadeState };
   });
+  // CSS owns the ring size. Observe its border box only when it changes, and
+  // reclip the cached screen-space chords without republishing the scene.
+  const markerEntries = new Map(bodies.map(entry => [entry.indicator, entry]));
+  const markerResize = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(changes => {
+    if (destroyed) return;
+    for (const change of changes) {
+      const entry = markerEntries.get(change.target as HTMLElement);
+      const box = change.borderBoxSize[0];
+      if (!entry || !box) continue;
+      const radius = Math.max(box.inlineSize, box.blockSize) / 2;
+      if (!(radius > 0) || radius === entry.indicatorRadius) continue;
+      entry.indicatorRadius = radius;
+      const clip = entry.orbitClip;
+      if (!clip) continue;
+      const segments = entry.indicatorShown
+        ? orbitOutsideMarker(clip.segments, clip.x, clip.y, radius) : clip.segments;
+      const update = writePieces(entry.pieces, segments, entry.previousCount);
+      if (update.overflowed) throw new Error('Prepared context line pool overflowed.');
+      entry.previousCount = update.count;
+    }
+  });
+  for (const entry of bodies) markerResize?.observe(entry.indicator, { box: 'border-box' });
   const labels = createLabelDeclutter({ capacity: bodies.length, spacingPixels: 4 });
   const indicators = createLabelDeclutter({ capacity: bodies.length, spacingPixels: 2 });
   const windowTarget = host.ownerDocument.defaultView!;
@@ -473,7 +497,9 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         }
         const orbitVisibility = projected.orbitVisibility;
         if (!entry.orbit) continue;
-        const clipped = orbitVisibility > 0 ? (entry.indicatorShown ? orbitOutsideMarker(segments, x, y) : segments) : [];
+        entry.orbitClip = { segments: orbitVisibility > 0 ? segments : [], x, y };
+        const clipped = entry.indicatorShown
+          ? orbitOutsideMarker(entry.orbitClip.segments, x, y, entry.indicatorRadius) : entry.orbitClip.segments;
         projected.segments = clipped;
       }
       for (const projected of projectedBodies) {
@@ -563,6 +589,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const footprint = compactOrbitFootprint(orbitBounds, width, height);
       backgroundExclusions = footprint ? [...acceptedRects, footprint] : acceptedRects;
     },
-    destroy() { if (!destroyed) { destroyed = true; fader.destroy(); fonts?.removeEventListener('loadingdone', invalidateLabelSizes); labelExclusions = []; backgroundExclusions = []; for (const entry of bodies) { clearHide(entry.fade); entry.navigation.destroy(); entry.indicatorNavigation.destroy(); entry.labelNavigation.destroy(); entry.orbitNavigation?.destroy(); } root.remove(); } },
+    destroy() { if (!destroyed) { destroyed = true; markerResize?.disconnect(); fader.destroy(); fonts?.removeEventListener('loadingdone', invalidateLabelSizes); labelExclusions = []; backgroundExclusions = []; for (const entry of bodies) { clearHide(entry.fade); entry.navigation.destroy(); entry.indicatorNavigation.destroy(); entry.labelNavigation.destroy(); entry.orbitNavigation?.destroy(); } root.remove(); } },
   });
 }

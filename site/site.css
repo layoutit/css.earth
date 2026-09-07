@@ -79,10 +79,7 @@ html:not([data-scene-presented="true"]) .planet-stage { opacity: 0.001; }
   touch-action: none;
 }
 html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; }
-.planet-input-surface:focus-visible {
-  outline: 2px solid rgb(255 255 255 / 72%);
-  outline-offset: -4px;
-}
+.planet-input-surface:focus { outline: none; }
 
 [data-context-label] {
   background: transparent;
@@ -95,10 +92,15 @@ html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; 
   --context-label-opacity: 1;
 }
 
-.prepared-world-context [data-context-indicator="sun"] {
+.prepared-world-context [data-context-group] > [data-context-indicator="sun"] {
+  padding: 2px;
   box-shadow: none;
   border-radius: 0;
   background: url("/navigation/sun-indicator-hexagon.png") center / 100% 100% no-repeat;
+}
+
+.prepared-world-context [data-context-group][data-object-hovered="true"] > [data-context-indicator="sun"] {
+  padding: 4px;
 }
 
 /* Keep prepared title artwork while exposing the heading as ordinary text. */
