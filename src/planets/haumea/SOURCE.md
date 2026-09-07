@@ -1,6 +1,6 @@
 # Haumea
 
-The surface is unresolved. Its displayed color comes from the illustrative [NASA VTAD Haumea 3D model](https://science.nasa.gov/resource/haumea-3d-model/), not spacecraft mapping. There is no distinct observational dataset to offer as a surface lens, so the shared shell exposes no lens selector. No atmospheric layer is depicted.
+The surface is unresolved. Its displayed color comes from the illustrative [NASA VTAD Haumea 3D model](https://science.nasa.gov/resource/haumea-3d-model/), not spacecraft mapping. The Dataset and Surface Lens panels expose it as “Illustrative model,” with the source credit and flat texture preview. No atmospheric layer is depicted.
 
 The triaxial ellipsoid and equatorial ring use the nominal occultation/lightcurve solution in [Ortiz et al. (2017)](https://doi.org/10.1038/nature24051): semiaxes 1,161 × 852 × 513 km; ring radius 2,287 km and width 70 km. The preferred pole is J2000 RA 285.1°, declination −10.6°. This is an inferred shape, not a resolved mesh or unique interior model. Main text and Methods give different uncertainties for the middle axis (4 and 2 km); the nominal value agrees.
 
@@ -9,3 +9,5 @@ The pole is observationally constrained, but the display meridian is arbitrary. 
 Preparation samples the original GLB mesh and UV coordinates, including its polar islands, into the shared projective surface atlas. Only the base-color texture is used; its normal map and PBR material are not reproduced. The NASA model has semiaxes 1,161 × 852 × 569 km; its texture is transferred by normalized surface direction onto the published 1,161 × 852 × 513 km shape. The shared full-phase curvature raster is fitted to the projected triaxial ellipsoid, with its plane inside the retained 3D scene so the foreground ring can occlude it. This is illustrative flood lighting, not a measured reflectance model or a Sun-direction dark hemisphere. The base-color texture is unchanged. Ring gray and fixed opacity are schematic. The ring has no invented bands and remains evenly lit. No separate Shadows control is used.
 
 Preparation: `node tools/objects/dist/prepare-authored.js haumea --write`. Geometry is prepared once: 1,444 body quads + 128 ring quads + one curvature quad = 1,573, below the 2,000-quad budget. Source parameters and acquisition recipes are kept here; the shared astronomy and sky sources supply the environment.
+
+The shared model preparer generates the Dataset thumbnail and a dedicated 640 × 320 Surface Lens preview from the same interpreted latitude/longitude raster, before globe-face reprojection and atlas packing. The preview credits NASA VTAD and links to the original model. It is an illustration, not a measured terrain dataset.

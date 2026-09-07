@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6784b3effc2cc6484fc37aafb4f8d2ec6248e9db1ee61418a529726664e9e7aa"
+    "sha256": "9b5e23453aaa0cc9dd725205ab598f6373377722fc19f446f337545f439ad6d7"
   },
   "properties": {
     "preparation": {
@@ -42,7 +42,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "16809dd0b160d9df6b4c7c6e6ebc92904d806deab803da1cac63465e56cda00b"
+          "sha256": "e6e96882f96b741994b65e14e90cb579ae6638513f0dbc6227312b7d1c43fb3d"
         },
         {
           "id": "acquisition",
@@ -65,7 +65,13 @@
           "id": "body",
           "source": "shape-model",
           "projection": "equirectangular",
-          "lenses": []
+          "lenses": [
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
         }
       ],
       "materials": [

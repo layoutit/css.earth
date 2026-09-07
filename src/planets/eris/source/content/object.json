@@ -60,8 +60,24 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "",
-    "controls": []
+    "defaultLens": "illustration",
+    "controls": [
+      {
+        "id": "illustration",
+        "label": "Illustrative model",
+        "description": "NASA VTAD · model texture",
+        "title": "NASA’s illustrative Eris surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+        "qualification": "Illustration; not an observed surface map.",
+        "thumbnail": "illustration-thumbnail.webp",
+        "surface": "surface.webp",
+        "poles": "poles.webp",
+        "source": {
+          "id": "nasa-vtad-eris-model",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/eris-3d-model/"
+        }
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",
