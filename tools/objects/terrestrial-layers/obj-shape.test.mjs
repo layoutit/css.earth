@@ -26,10 +26,14 @@ test('PDS vertex-facet rows reproduce analytic octahedron intersections', async 
   const faces = ['1 3 5','3 2 5','2 4 5','4 1 5','3 1 6','2 3 6','4 2 6','1 4 6'];
   const text = ['6',...vertices.map((v,i)=>`${i+1} ${v}`),'8',...faces.map((f,i)=>`${i+1} ${f}`)].join('\r\n');
   const mesh = parsePdsVertexFacetShape(text, profile);
+  // Eros and Itokawa publish both counts in the first row; Phoebe separates them.
+  const combined = ['6 8',...vertices.map((v,i)=>`${i+1} ${v}`),...faces.map((f,i)=>`${i+1} ${f}`)].join('\r\n');
+  const combinedMesh = parsePdsVertexFacetShape(combined, profile);
   for (const [lon,lat] of [[0,0],[90,0],[180,0],[270,0],[0,90],[0,-90],[45,30]]) {
     const l=lon*Math.PI/180,p=lat*Math.PI/180;
     const expected=1000/(Math.abs(Math.cos(p)*Math.cos(l))/2+Math.abs(Math.cos(p)*Math.sin(l))/3+Math.abs(Math.sin(p))/4);
     assert.ok(Math.abs(mesh.sample(lon,lat)-expected)<1e-8);
+    assert.equal(combinedMesh.sample(lon,lat), mesh.sample(lon,lat));
   }
   assert.throws(()=>parsePdsVertexFacetShape(text.replace('1 2 0 0','2 2 0 0'),profile),/row/);
   assert.throws(()=>parsePdsVertexFacetShape(text.replace('1 1 3 5','1 1 3 99'),profile),/absent/);

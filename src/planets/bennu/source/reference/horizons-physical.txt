@@ -1,0 +1,59 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+
+Statistical uncertainties not available for object due to:
+  truncated database EST list: +
+
+*******************************************************************************
+ Revised: Aug 11, 2021          101955 Bennu (1999 RQ36)                2101955
+ *SPECIAL*             Soln.date: 2021-Jan-07_11:18:06   # obs: 554 (1999-2020)
+
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2455562.5 ! 2011-Jan-01.00 (TDB)         Residual RMS= .23164
+   EC= .2037450762416414   QR= .8968944004459729   TP= 2455439.14194087
+   OM= 2.060866195696420   W=  66.22306084084298   IN= 6.0349437702479403
+   A= 1.1263910258948120   MA= 101.7039520024729   ADIST= 1.355887651343651
+   PER= 1.19548            N= 0.824461327          ANGMOM= .017873901
+   DAN= 0.99768            DDN= 1.17626            L= 68.16622425
+   B= 5.521044             MOID= .0032228          TP= 2010-Aug-30.6419408992
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .241               ROTPER= 4.2960610
+   H= 20.21                G= -0.031               B-V= 0.64
+                           ALBEDO= .044            STYP= B
+ 
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT= .00000026
+   A1= 0.                  A2= 0.                  A3= 0.
+ Yarkovsky acceleration:
+   RHO= 1191.5349121
+
+ This pre-computed trajectory of asteroid (101955) Bennu, covering 1900 to 
+ 2136 is based on ground-based optical and radar astrometry as well as 
+ pseudo-range measurements from the OSIRIS-REx mission.
+
+ The trajectory accounts for the gravity of the Sun, the planets, Pluto, the 
+ Moon and 343 small-body perturbers, relativistic effect, the Yarkovsky effect,
+ and other solar radiation perturbations. Full details are provided in 
+ Farnocchia et al. (2021): https://doi.org/10.1016/j.icarus.2021.114594
+
+ It may be used to generate ephemerides relative to the SPACECRAFT-BASED Bennu
+ solution by specifying coordinate center as "@2101955", or extended physical
+ ephemerides of Bennu such as sub-observer/solar latitude and longitude.
+
+  Trajectory name                                   Start (TDB)    Stop (TDB)
+  ----------------------------------------------    -----------   -----------
+  sb-101955-118_long                                1900-Jan-01   2135-Oct-01
+
+ Due to the non-standard dynamical models enabled by extensive high-precision
+ spacecraft data, Horizons won't generate new SPK files for Bennu. However, 
+ the final reconstructed mission SPK can be downloaded for use here: 
+
+    https://ssd.jpl.nasa.gov/ftp/xfr/sb-101955-118_long.bsp
+  
+ASTEROID comments: 
+1: soln ref.= JPL#118, PHA  OCC=0       radar(58 delay, 7 Dop.)
+2: source=ORB; See Farnocchia et al. 2021
+*******************************************************************************

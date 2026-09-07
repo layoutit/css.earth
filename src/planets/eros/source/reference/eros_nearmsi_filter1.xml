@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1H00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1H00_1860.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1H00_1950.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:pds="http://pds.nasa.gov/pds4/pds/v1" xmlns:disp="http://pds.nasa.gov/pds4/disp/v1" xmlns:img="http://pds.nasa.gov/pds4/img/v1" xmlns:cart="http://pds.nasa.gov/pds4/cart/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.xsd
+                      http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1H00_1510.xsd
+                      http://pds.nasa.gov/pds4/img/v1 https://pds.nasa.gov/pds4/img/v1/PDS4_IMG_1H00_1860.xsd
+                      http://pds.nasa.gov/pds4/cart/v1 https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1H00_1950.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:eros_global-albedo-maps_golish_2023:data:eros_nearmsi_filter1</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>Eros Global Albedo Maps</title>
+    <information_model_version>1.17.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>D. R. Golish, J. I. Brodbeck, C. Webber, K. J. Becker, C. A. Bennett, D. N. DellaGiustina</author_list>
+      <publication_year>2023</publication_year>
+      <description>Recently, MSI data has been archived (DOI: 10.17189/sv8w-5125) with a new deblurring method applied 
+        (Golish et al., 2023). This method uses the same mathematical foundation as the original, but develops 
+        new blur models and processes the images to avoid edge-artifacts from the Fourier transforms. The new 
+        data has improved qualitative sharpness for all filters, particularly those at extreme wavelengths. 
+        With this new data, we generate global albedo maps for Eros in each of MSI’s seven filters. To enable 
+        color analyses (e.g., color ratios, band depths), we create albedo maps which are corrected to 0° 
+        phase (0° incidence, 0° emission) with per-filter photometric models, rather than 30/30/0 angles 
+        used for the existing published basemaps.       
+      </description>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>1996-02-17T12:00:00.000Z</start_date_time>
+      <stop_date_time>2001-02-28T12:00:00.000Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <description>Derived global albedo maps for Eros in each of seven filters for the Multispectral Imager (MSI).
+      </description>
+      <Science_Facets>
+        <wavelength_range>Visible</wavelength_range>
+        <domain>Surface</domain>
+        <discipline_name>Imaging</discipline_name>
+        <facet1>Grayscale</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>Eros Global Albedo Maps</name>
+      <type>Individual Investigation</type>
+      <Internal_Reference>
+        <lidvid_reference>urn:nasa:pds:context:investigation:mission.near_earth_asteroid_rendezvous::1.2</lidvid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <name>NEAR</name>
+      <description>NEAR EARTH ASTEROID RENDEZVOUS (NEAR) spacecraft</description>
+      <Observing_System_Component>
+        <name>NEAR</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.near</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Multi-Spectral Imager</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:msi.near</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(433) Eros</name>
+      <type>Asteroid</type>
+    </Target_Identification>
+    <Discipline_Area>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Bottom to Top</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <cart:Cartography>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <cart:Spatial_Domain>
+          <cart:Bounding_Coordinates>
+            <cart:west_bounding_coordinate unit="deg">0</cart:west_bounding_coordinate>
+            <cart:east_bounding_coordinate unit="deg">360</cart:east_bounding_coordinate>
+            <cart:north_bounding_coordinate unit="deg">90</cart:north_bounding_coordinate>
+            <cart:south_bounding_coordinate unit="deg">-90</cart:south_bounding_coordinate>
+          </cart:Bounding_Coordinates>
+        </cart:Spatial_Domain>
+        <cart:Spatial_Reference_Information>
+          <cart:Horizontal_Coordinate_System_Definition>
+            <cart:Planar>
+              <cart:Map_Projection>
+                <cart:map_projection_name>Equirectangular</cart:map_projection_name>
+                <cart:Equirectangular>
+                  <cart:latitude_of_projection_origin unit="deg">0</cart:latitude_of_projection_origin>
+                  <cart:standard_parallel_1 unit="deg">0</cart:standard_parallel_1>
+                  <cart:longitude_of_central_meridian unit="deg">180</cart:longitude_of_central_meridian>
+                </cart:Equirectangular>
+              </cart:Map_Projection>
+              <cart:Planar_Coordinate_Information>
+                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                <cart:Coordinate_Representation>
+                  <cart:pixel_resolution_x unit="m/pixel">10</cart:pixel_resolution_x>
+                  <cart:pixel_resolution_y unit="m/pixel">10</cart:pixel_resolution_y>
+                  <cart:pixel_scale_x unit="pixel/deg">29.6705972839036001</cart:pixel_scale_x>
+                  <cart:pixel_scale_y unit="pixel/deg">29.6705972839036001</cart:pixel_scale_y>
+                </cart:Coordinate_Representation>
+              </cart:Planar_Coordinate_Information>
+              <cart:Geo_Transformation>
+                <cart:upperleft_corner_x unit="m">-53410</cart:upperleft_corner_x>
+                <cart:upperleft_corner_y unit="m">26710</cart:upperleft_corner_y>
+              </cart:Geo_Transformation>
+            </cart:Planar>
+            <cart:Geodetic_Model>
+              <cart:latitude_type>Planetocentric</cart:latitude_type>
+              <cart:spheroid_name>EROS</cart:spheroid_name>
+              <cart:a_axis_radius unit="m">17000</cart:a_axis_radius>
+              <cart:b_axis_radius unit="m">17000</cart:b_axis_radius>
+              <cart:c_axis_radius unit="m">17000</cart:c_axis_radius>
+              <cart:longitude_direction>Positive East</cart:longitude_direction>
+            </cart:Geodetic_Model>
+          </cart:Horizontal_Coordinate_System_Definition>
+        </cart:Spatial_Reference_Information>
+      </cart:Cartography>
+    </Discipline_Area>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <doi>10.1016/j.icarus.2023.115536</doi>
+      <reference_text>Golish, D.R., DellaGiustina, D.N., Becker, K.J., Bennett, C.A., Robinson, M., Crombie, M.K., 2023. Blur remediation in NEAR MSI images. Icarus 400, 115536. https://doi.org/10.1016/j.icarus.2023.115536</reference_text>
+      <description>Paper by Golish to describe the blur remediation in NEAR MSI images</description>
+    </External_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>eros_nearmsi_filter1.tif</file_name>
+      <!--Binary file pre-existing PDS4 label. This comment is used by GDAL to avoid deleting the binary file when the label is deleted. Keep it to preserve this behavior.-->
+    </File>
+    <Header>
+      <offset unit="byte">0</offset>
+      <object_length unit="byte">32709</object_length>
+      <parsing_standard_id>TIFF 6.0</parsing_standard_id>
+      <description>TIFF/GeoTIFF header. The TIFF/GeoTIFF format is used throughout the geospatial and science communities to share geographic image data. </description>
+    </Header>
+    <Array_2D_Map>
+      <local_identifier>image</local_identifier>
+      <offset unit="byte">32709</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <Element_Array>
+        <data_type>IEEE754LSBSingle</data_type>
+        <unit>I/F</unit>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>5341</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>10682</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <missing_constant>-3.40282265508890445e+38</missing_constant>
+      </Special_Constants>
+    </Array_2D_Map>
+  </File_Area_Observational>
+</Product_Observational>
