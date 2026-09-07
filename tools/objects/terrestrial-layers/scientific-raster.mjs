@@ -3,6 +3,8 @@ import { fromFile } from 'geotiff';
 import {loadIsis3Raster} from './isis3-raster.mjs';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 import {composeCorrectedColor} from './photometric-observations.mjs';
+import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
+import { loadObjScalarGrid } from './obj-shape.mjs';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value, { minimum, maximum, colors }) {
@@ -68,6 +70,15 @@ export function scienceMapPoint(longitude, latitude, grid) {
 }
 
 export async function loadScienceSurface(root, lens) {
+  if (lens.format === 'pds3-radius-zip') {
+    const raster = await loadPdsScalarGrid(resolve(root, lens.path), lens.grid, lens.sampleGrid);
+    return { sample(longitude, latitude) {
+      if (latitude < -90 || latitude > 90) return null;
+      const value = raster.sample(longitude, latitude);
+      return value === null ? null : value * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0);
+    } };
+  }
+  if (lens.format === 'wavefront-obj-zip') return loadObjScalarGrid(root, lens);
   if (lens.additionalGrids?.length) {
     const rasters = await Promise.all([lens, ...lens.additionalGrids].map(entry =>
       loadScienceSurface(root, {...lens, ...entry, additionalGrids: undefined})));

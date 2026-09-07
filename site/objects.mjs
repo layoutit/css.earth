@@ -1,3 +1,5 @@
+import deimosDescriptor from "../src/planets/deimos/object.json" with { type: "json" };
+import phobosDescriptor from "../src/planets/phobos/object.json" with { type: "json" };
 import oberonDescriptor from "../src/planets/oberon/object.json" with { type: "json" };
 import titaniaDescriptor from "../src/planets/titania/object.json" with { type: "json" };
 import umbrielDescriptor from "../src/planets/umbriel/object.json" with { type: "json" };
@@ -64,6 +66,16 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(marsDescriptor);
     }, marsDescriptor.properties.worldFrame),
+  object("phobos", "Phobos", "satellite", "#99948e", 1.52,
+    "Explore Phobos in 3D with cssEarth. Inspect mapped spacecraft imagery, elevation and the measured irregular shape of Mars’s moon.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(phobosDescriptor);
+    }, phobosDescriptor.properties.worldFrame),
+  object("deimos", "Deimos", "satellite", "#99948e", 1.52,
+    "Explore Deimos in 3D with cssEarth. Inspect mapped spacecraft imagery, elevation and the measured irregular shape of Mars’s moon.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(deimosDescriptor);
+    }, deimosDescriptor.properties.worldFrame),
   object("ceres", "Ceres", "dwarf-planet", "#8e8b86", 2.77,
     "NASA Dawn, USGS, JPL, ESO, and HYG", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

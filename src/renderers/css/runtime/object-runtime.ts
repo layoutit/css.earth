@@ -313,7 +313,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       context.own(() => selection?.destroy());
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
         cubicSky, skyPlan: definition.sky, directionalSun, directionalSunPlan: definition.sun ?? null, heliocentric, worldContext: orbitWorldContext,
-        cameraPlan, objectId: definition.id, requireSun: false,
+        cameraPlan, objectId: definition.id, requireSun: false, preparedSurfaceHitTest: mounted.surfaceHitTest,
         mobilePreviewElement, onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit?.destroy());
       if (latestWorldPublication !== null) publishWorldSnapshot(latestWorldPublication);

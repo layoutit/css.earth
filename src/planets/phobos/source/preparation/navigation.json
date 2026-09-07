@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "phobos",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m",
+    "credit": "Philip Stooke; NASA/JPL; USGS/PDS",
+    "license": "Public-domain NASA mission data and published PDS cartographic product; cite Stooke.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "stooke-mosaic",
+        "ernst-2023-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 310,
+      "latitudeDegrees": 10,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "normal"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 148160,
+    "expectedSha256": "c00f33a022cf0b70a66c888aed7e2f86fa846db946e2af89396e1de1940f74dc"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}
