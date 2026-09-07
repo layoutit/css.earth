@@ -11,11 +11,10 @@ import { projectSphereDrag } from "@cssearth/engine";
 // Two wheel models share one controller. The scale camera zooms and holds the
 // surface point under the cursor (the anchor). A perspective `dolly` moves
 // the eye along its own axis toward the body's centre instead: each wheel
-// event adds deltaY * stepPerDelta to the target log-distance, consumed
+// event adds deltaY * stepPerDelta * input gain to the target log-distance, consumed
 // evenly by the end of the same interval, and no surface anchor exists to
-// hold, so the wheel never turns the scene. The dolly keeps its own prepared
-// gain for every input kind; the shared scroll-distance multipliers belong to
-// the scale camera's response.
+// hold, so the wheel never turns the scene. Both models apply the shared
+// device sensitivity to their prepared base response.
 export const PREPARED_WHEEL_ZOOM = Object.freeze({
   schema: "cssearth-prepared-wheel-zoom@1",
   intervalMilliseconds: 200,
@@ -156,7 +155,8 @@ export function createPreparedWheelZoomControls({
       inputKind = runtimePolicy.wheelZoomInputKind(event, inputKind, previousInputTimestamp);
       previousInputTimestamp = event.timeStamp;
       const origin = frame !== null && direction === nextDirection ? targetDistance! : camera.state.distance;
-      targetDistance = origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta);
+      const inputSpeed = inputKind === "wheel" ? runtimePolicy.WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER : speedMultiplier;
+      targetDistance = origin * Math.exp(event.deltaY * unit * dolly.stepPerDelta * inputSpeed);
     } else if (useScrollDistance) {
       inputKind = runtimePolicy.wheelZoomInputKind(event, inputKind, previousInputTimestamp);
       previousInputTimestamp = event.timeStamp;

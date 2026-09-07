@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+import { readFile } from 'node:fs/promises';
 import type { PreparedCssPointField } from '../stars/types.js';
 import { parsePreparedWorldContext } from './prepared-world-context.js';
 import { mountWorldContextPointSource, worldContextPointAppearance, worldContextPointSourceFade, worldContextPointSourceGain } from './world-context-point-source.js';
@@ -39,7 +40,11 @@ test('point source uses the prepared star photometry, nearest atlas color, and s
   expect(worldContextPointSourceGain(1e14,plan)).toEqual({radius:1,brightness:1});
   const distanceForThirtyPixelDisc=10*Math.sqrt(1+(800/30)**2);
   const near=worldContextPointAppearance(plan,field,world(distanceForThirtyPixelDisc),viewport)!;
-  expect(near.diameterPx).toBeCloseTo(30,10); expect(near.radiusPx*2*field.atlas.haloRadii).toBeCloseTo(30,10);
+  expect(near.diameterPx).toBeCloseTo(30,10);
+  expect(near.radiusPx * 2).toBeGreaterThanOrEqual(near.diameterPx);
+  expect(near.radiusPx * 2).toBeLessThan(near.diameterPx * 1.02);
+  const widerHalo = worldContextPointAppearance(plan, { ...field, atlas: { ...field.atlas, haloRadii: 5 } }, world(distanceForThirtyPixelDisc), viewport)!;
+  expect(widerHalo.radiusPx).toBe(near.radiusPx);
   const distant=worldContextPointAppearance(plan,field,world(10*parsec),viewport)!;
   expect(distant.magnitude).toBeCloseTo(4.832125665882298,12); expect(distant.colorIndex).toBe(0); expect(distant.opacity).toBe(1);
   const distanceForMidpoint=10*Math.sqrt(1+(800/12.25)**2);
@@ -47,6 +52,28 @@ test('point source uses the prepared star photometry, nearest atlas color, and s
   const undetailed=worldContextPointAppearance(plan,field,world(distanceForMidpoint),viewport,{selectedDetail:false})!;
   expect(detailed.opacity).toBeCloseTo(.5,10); expect(undetailed.opacity).toBe(1);
   expect(worldContextPointAppearance(plan,field,world(10*parsec),viewport,{occluder:{positionM:[0,0,5*parsec],radiusM:1}})).toBeNull();
+});
+
+test('the prepared Sun glare strengthens the five-AU view and recedes smoothly without changing its physical disc', async () => {
+  const source = JSON.parse(await readFile(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8'));
+  const solarPlan = parsePreparedWorldContext(source), au = 149597870700;
+  const sample = (distanceAu: number, context = solarPlan) => worldContextPointAppearance(context, field,
+    { ...world(distanceAu * au), epochJdTt: context.frame.epochJdTt }, { ...viewport, focalPixels: 1280 * Math.sqrt(3) / 2 }, { selectedDetail: true })!;
+  const unenhanced = { ...solarPlan, focus: { ...solarPlan.focus, pointSource: {
+    ...solarPlan.focus.pointSource!, proximityEnhancement: undefined,
+  } } };
+  const near = sample(5), plain = sample(5, unenhanced);
+  expect(near.diameterPx).toBe(plain.diameterPx);
+  expect(near.radiusPx).toBeGreaterThan(plain.radiusPx * 1.7);
+  expect(near.radiusPx * 2 * field.atlas.haloRadii).toBeLessThan(16);
+  let previous = sample(1).radiusPx;
+  for (const distanceAu of [2, 5, 10, 20, 50, 100, 300, 1000]) {
+    const appearance = sample(distanceAu);
+    expect(appearance.radiusPx).toBeLessThan(previous);
+    expect(sample(distanceAu * 1.001).radiusPx / appearance.radiusPx).toBeGreaterThan(.995);
+    previous = appearance.radiusPx;
+  }
+  expect(sample(1000).radiusPx).toBe(sample(1000, unenhanced).radiusPx);
 });
 
 test('mount retains one PSF node, activates the actual point hit target, and removes it on destroy', () => {
@@ -62,4 +89,19 @@ test('mount retains one PSF node, activates the actual point hit target, and rem
   layer!.publish(world(10*parsec),viewport,{occluder:{positionM:[0,0,5*parsec],radiusM:1}});
   expect(element.style.visibility).toBe('hidden'); expect(element.style.pointerEvents).toBe('none');
   layer!.destroy(); expect(host.children).not.toContain(element);
+});
+
+
+test('the Sun landmark stays faintly visible beyond the physical photometry limit at maximum zoom', () => {
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
+  const layer = mountWorldContextPointSource({host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan, field, resolveResource: path => path})!;
+  layer.publish(world(plan.camera.maximumDistanceM), viewport, {opacity: .55, selectedDetail: true});
+  expect(layer.element.style.visibility).toBe('');
+  expect(Number(layer.element.style.opacity)).toBeCloseTo(.3575);
+  expect(layer.element.dataset.objectNavigate).toBe('sun');
+  layer.publish(world(plan.camera.maximumDistanceM), viewport, {opacity: .55, selectedDetail: true,
+    occluder: {positionM: [0, 0, plan.camera.maximumDistanceM / 2], radiusM: 10}});
+  expect(layer.element.style.visibility).toBe('hidden');
+  layer.destroy();
 });

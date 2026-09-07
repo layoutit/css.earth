@@ -228,6 +228,7 @@ export function createPerspectiveDolly({
   // Null is the original centred dolly. A world publication adopts a full
   // eye-space centre, retained across drag, wheel and viewport changes.
   let bodyCenter: PositionM | null = null;
+  let zoomOutCentering = false;
   // The zoom alias last set, while the distance still corresponds to it: the
   // alias round trip through the focal length is exact only to floating
   // point, and a camera state set by zoom reads back the same number.
@@ -343,7 +344,20 @@ export function createPerspectiveDolly({
         aliasDistance = cameraState.distance;
       }
       if (bodyCenter !== null && cameraState.distance !== previousDistance) {
-        bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
+        if (zoomOutCentering && cameraState.distance > previousDistance) {
+          // Dolly back along the content-centre ray. Its perpendicular offset
+          // stays fixed in world units, so the body drifts toward the centre
+          // naturally as the user zooms out. There is no separate camera turn.
+          const axisLength = Math.hypot(principalOffset[0], principalOffset[1], focal);
+          const axis: PositionM = [-principalOffset[0] / axisLength, -principalOffset[1] / axisLength, -focal / axisLength];
+          const along = bodyCenter.reduce((sum, value, index) => sum + value * axis[index]!, 0);
+          if (along > 0) {
+            const across: PositionM = [bodyCenter[0] - axis[0] * along,
+              bodyCenter[1] - axis[1] * along, bodyCenter[2] - axis[2] * along];
+            const nextAlong = Math.sqrt(Math.max(0, cameraState.distance ** 2 - Math.hypot(...across) ** 2));
+            bodyCenter = [across[0] + axis[0] * nextAlong, across[1] + axis[1] * nextAlong, across[2] + axis[2] * nextAlong];
+          } else bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
+        } else bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
       }
     },
   });
@@ -355,6 +369,7 @@ export function createPerspectiveDolly({
       return { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] };
     },
     bodyCenter: () => bodyCenter,
+    setZoomOutCentering(enabled: boolean) { zoomOutCentering = enabled; },
     setBodyCenter(next: PositionM) {
       validateWorldPosition(next);
       const distance = Math.hypot(...next);

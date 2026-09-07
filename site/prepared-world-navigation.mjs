@@ -10,29 +10,45 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
     return Boolean(a && b && a.referenceFrame === b.referenceFrame && a.epochJdTt === b.epochJdTt);
   };
   return Object.freeze({ supports,
-    async focus({ objectId, mount, signal, reducedMotion = false }) {
+    async focus({ objectId, mount, signal, reducedMotion = false, targetWorldCamera = null }) {
       const owner = mount?.navigation, frame = frames.get(objectId);
       if (!owner || !frame) throw new TypeError('Object focus requires its mounted prepared camera.');
       const from = owner.capture(), optics = owner.optics();
-      const target = createWorldSelectionTarget(from, frame, optics);
+      const target = targetWorldCamera ?? createWorldSelectionTarget(from, frame, optics);
       const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM: frame.originM });
       await animateWorldFlight({ owner, from, flight,
         anchors: [{ positionM: frame.originM, radiusM: frame.bodyRadiusM }], signal, reducedMotion,
         windowTarget, documentTarget, onPaint(world) { lastCamera = world; } });
       lastCamera = owner.capture(); lastOptics = owner.optics();
     },
-    async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url }) {
+    async prepare({ fromId, toId, fromMount, toFactory, signal, reducedMotion, url, targetWorldCamera = null, preserveView = false }) {
       if (!supports(fromId, toId) || !toFactory.navigation) throw new TypeError('Objects do not share a prepared world frame.');
       const source = fromMount?.navigation;
       const from = source?.capture() ?? lastCamera;
       const optics = source?.optics() ?? lastOptics;
       if (!from || !optics) throw new Error('The drawn world camera is not ready.');
       lastCamera = from; lastOptics = optics;
+      if (preserveView) {
+        const prepared = await toFactory.navigation.prepare({ signal });
+        const release = () => prepared.resources.destroy();
+        if (signal.aborted) { release(); throw cancellationReason(signal); }
+        signal.addEventListener('abort', release, { once: true });
+        // Keep the exact last view while changing the detailed object owner.
+        const checkpoint = source?.capture() ?? lastCamera;
+        return {
+          mountOptions: { preparedResources: prepared.resources, initialWorldCamera: checkpoint },
+          async afterMount(mount) {
+            signal.removeEventListener('abort', release);
+            if (signal.aborted) throw cancellationReason(signal);
+            lastCamera = mount.navigation.capture(); lastOptics = mount.navigation.optics();
+          },
+        };
+      }
       const query = url ? new URL(url).searchParams : null;
       if (query?.getAll('v').length > 1) throw new TypeError('A destination URL may contain only one saved view.');
       const saved = query?.has('v') ? parseSharedView(`v=${query.get('v')}`) : null;
-      const target = saved ? savedWorldCamera(saved, toFactory.navigation.frame, optics)
-        : createWorldSelectionTarget(from, toFactory.navigation.frame, optics);
+      const target = targetWorldCamera ?? (saved ? savedWorldCamera(saved, toFactory.navigation.frame, optics)
+        : createWorldSelectionTarget(from, toFactory.navigation.frame, optics));
       // One numeric flight survives the change of detailed object owner.
       const flight = createSelectionFlight({ from: from.pose, to: target.pose,
         focusPositionM: toFactory.navigation.frame.originM });

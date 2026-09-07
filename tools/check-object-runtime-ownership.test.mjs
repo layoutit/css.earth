@@ -409,3 +409,12 @@ test('descriptor context binding pins both prepared contexts to the shared facto
     })(),
   ]) await assert.rejects(audit(changes), expected);
 });
+
+
+test('shell-only JSON is parsed as data and malformed or executable content is rejected', () => {
+  const inspect = source => inspectObjectRuntimeModule(source, 'site/source/example.json', { shared: true, shellContent: true });
+  assert.equal(inspect('{"label":"Solar System"}').dataOnly, true);
+  for (const invalid of ['{"label":}', 'document.createElement("canvas")']) {
+    assert.equal(inspect(invalid).violations.length, 1);
+  }
+});

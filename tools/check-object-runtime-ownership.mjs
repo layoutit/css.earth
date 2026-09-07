@@ -105,6 +105,10 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
   if ((!shared || shellContent) && preparedData(source)) return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
   let ast;
   try {
+    if (shellContent && file.endsWith('.json')) {
+      JSON.parse(source);
+      return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
+    }
     if (file.endsWith(".astro")) {
       const parsed = parseAstro(source);
       const error = parsed.diagnostics.find(diagnostic => diagnostic.severity === "error");

@@ -14,6 +14,7 @@ export interface RuntimePolicy {
   readonly WHEEL_ZOOM_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER: number;
   readonly WHEEL_ZOOM_USE_SCROLL_DISTANCE: boolean;
+  sceneCursor(state: { surface: boolean; pressed: boolean; enabled: boolean }): string;
   isOrbitDragStart(event: Pick<PointerEvent, 'isPrimary' | 'button'>): boolean;
   wheelZoomInputKind(event: Pick<WheelEvent, 'deltaMode' | 'ctrlKey' | 'deltaX' | 'deltaY' | 'timeStamp'>,
     previousKind?: WheelInputKind | null, previousTimestamp?: number): WheelInputKind;

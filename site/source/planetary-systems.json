@@ -1,0 +1,44 @@
+{
+  "verifiedOn": "2026-09-07",
+  "stellarParameterSource": "https://exoplanetarchive.ipac.caltech.edu/docs/API_PS_columns.html",
+  "stellarParameterTable": "pscomppars",
+  "markerRecipe": "Diameter scales linearly with st_rad (solar radii), using the prepared Sun navigation marker as the reference. Color uses the shared preparation temperatureColor fit from st_teff, an approximate display color rather than spectral radiance.",
+  "unavailable": [
+    {
+      "name": "Proxima Centauri",
+      "distanceLy": 4,
+      "radiusSolar": 0.141,
+      "temperatureK": 2900,
+      "radiusSourceUrl": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A..11M/abstract",
+      "temperatureSourceUrl": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A..11M/abstract",
+      "sourceUrl": "https://science.nasa.gov/exoplanets/big-questions/"
+    },
+    {
+      "name": "TRAPPIST-1",
+      "distanceLy": 40,
+      "radiusSolar": 0.1192,
+      "temperatureK": 2566,
+      "radiusSourceUrl": "https://ui.adsabs.harvard.edu/abs/2021PSJ.....2....1A/abstract",
+      "temperatureSourceUrl": "https://ui.adsabs.harvard.edu/abs/2021PSJ.....2....1A/abstract",
+      "sourceUrl": "https://science.nasa.gov/exoplanets/trappist1/"
+    },
+    {
+      "name": "55 Cancri",
+      "distanceLy": 41,
+      "radiusSolar": 0.98,
+      "temperatureK": 5198,
+      "radiusSourceUrl": "https://ui.adsabs.harvard.edu/abs/2026A&A...705A.190M/abstract",
+      "temperatureSourceUrl": "https://ui.adsabs.harvard.edu/abs/2026A&A...705A.190M/abstract",
+      "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/dim-delights-in-cancer/"
+    },
+    {
+      "name": "HR 8799",
+      "distanceLy": 130,
+      "radiusSolar": 1.49338,
+      "temperatureK": 7400,
+      "radiusSourceUrl": "https://ui.adsabs.harvard.edu/abs/2016AJ....152...28K/abstract",
+      "temperatureSourceUrl": "https://ui.adsabs.harvard.edu/abs/2019A&A...623L..11G/abstract",
+      "sourceUrl": "https://science.nasa.gov/missions/webb/nasas-webb-images-young-giant-exoplanets-detects-carbon-dioxide/"
+    }
+  ]
+}

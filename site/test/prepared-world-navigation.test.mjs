@@ -245,3 +245,52 @@ test('real input interrupts a same-object focus at the last painted camera', asy
   assert.deepEqual(f.navigation.capture(), drawn);
   assert.equal(f.pending, 0);
 });
+
+test('overview preserves the latest drawn camera through slow preparation, without a flight or input interception', async () => {
+  const f = fixture(), bank = deferred();
+  f.factory.navigation.prepare = () => bank.promise;
+  const task = f.start({ preserveView: true });
+  await nextTurn();
+  assert.equal(f.pending, 0, 'No flight frame is scheduled');
+  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+  f.input();
+  const latest = { ...f.navigation.capture(), pose: { positionM: [7e8, 2e8, 3e8], orientationXyzw: [0, 0, 0, 1] } };
+  f.navigation.apply(latest);
+  bank.resolve({ resources: f.resources });
+  const handoff = await task;
+  assert.deepEqual(handoff.mountOptions.initialWorldCamera, latest, 'Snapshot is taken after input during preparation');
+  const paints = f.paints.length;
+  await handoff.afterMount(f.mounted(), { signal: f.controller.signal });
+  assert.equal(f.paints.length, paints, 'Handoff does not write an animated or recentered pose');
+  f.controller.abort();
+  assert.equal(f.resources.destroyed, 0, 'The mounted scene owns its resources');
+});
+
+test('a cancelled preserved-view handoff releases its unmounted resources', async () => {
+  const f = fixture();
+  await f.start({ preserveView: true });
+  f.controller.abort();
+  assert.equal(f.resources.destroyed, 1);
+});
+
+test('overview handoff uses the requested distant camera instead of flying into the Sun', async () => {
+  const f = fixture();
+  const targetWorldCamera = { ...f.navigation.capture(), pose: {
+    positionM: [1e8, 0, 2e8], orientationXyzw: [0, 0, 0, 1],
+  } };
+  const task = f.start({ targetWorldCamera });
+  const handoff = await drainFrames(f, { task });
+  await drainFrames(f, { task: handoff.afterMount(f.mounted(), { signal: f.controller.signal }) });
+  closePose(f.navigation.capture().pose, targetWorldCamera.pose);
+  assertContinuousPaints(f.paints, [f.navigation.frame, f.factory.navigation.frame]);
+});
+
+test('the same object can recenter at overview distance without resetting to its close-up', async () => {
+  const f = fixture();
+  const targetWorldCamera = { ...f.navigation.capture(), pose: {
+    positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1],
+  } };
+  await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { navigation: f.navigation },
+    signal: f.controller.signal, targetWorldCamera }) });
+  closePose(f.navigation.capture().pose, targetWorldCamera.pose);
+});

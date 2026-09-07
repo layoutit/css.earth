@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { wheelWithReceipt } from './wheel-zoom-distance.mjs';
 import preparedVolume from '../../src/objects/milky-way/prepared/volume.json' with { type: 'json' };
+import { OBJECTS } from '../objects.mjs';
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4210';
 const output = resolve('.local/milky-way-integration');
@@ -36,6 +37,11 @@ try {
   snapshots.system = await read(page);
   await page.screenshot({ path: resolve(output, 'solar-system-integrated.png') });
   check('scroll exposes real prepared solar-system orbits', snapshots.system.visibleOrbits > 100 && snapshots.system.scale === 'system');
+  const objectLabels = await page.locator('[data-context-label]').evaluateAll(nodes => nodes.map(node => ({
+    id: node.dataset.contextLabel, visible: getComputedStyle(node).visibility !== 'hidden' && Number(getComputedStyle(node).opacity) > 0,
+  })));
+  check('scene labels belong to prepared objects and remain visible at solar-system scale',
+    objectLabels.some(label => label.visible) && objectLabels.every(label => OBJECTS.some(object => object.id === label.id)));
   check('contextual Sun overlaps the detailed object coordinate centre', await page.evaluate(() => {
     const body = document.querySelector('.polycss-camera').getBoundingClientRect();
     const marker = document.querySelector('[data-context-body="sun"]').getBoundingClientRect();
@@ -51,8 +57,7 @@ try {
     snapshots.stars.starField.consideredCount === 109389 && snapshots.stars.starSlots === 4096 && Number(snapshots.stars.starField.visiblePoints) > 50 &&
     snapshots.stars.starField.individualPoints === snapshots.stars.starField.visiblePoints);
   check('the same galaxy volume remains visible inside the stellar neighbourhood', snapshots.stars.volumeOpacity === 1 && snapshots.initial.volumeOpacity === 1);
-  check('named stars receive visible labels', await page.locator('.prepared-star-label').evaluateAll(nodes => nodes.some(node =>
-    node.textContent && Number(getComputedStyle(node).opacity) > 0)));
+  check('background catalogue stars do not create labels for unavailable objects', await page.locator('.prepared-star-label').count() === 0);
   check('the incompatible photographic background is retired at solar scale', await page.locator('.prepared-context-sky-fade').evaluate(node => getComputedStyle(node).visibility === 'hidden'));
   const nearbyPositions = await starPositions(page);
   await scrollTo(page, 3.085677581491367e15);
