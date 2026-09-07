@@ -135,7 +135,12 @@
       "sky": 0.0326785,
       "volume": 0.0327704
     },
-    "reason": "Lower all interior background regions, with extra suppression of faint NASA image grain. The matched-band display means remain within about 1 percent before final image quantization. Colour fitting remains independent of brightness.",
-    "measurement": "Original NASA preview at 512x256; shadow smoothstep applied per pixel before the original paired Galactic-band patch average. Volume uses actual re-encoded central-ray composite. Quantization and native wide-field differences remain."
+    "reason": "Keep the dim NASA background in the Solar System, then blend into the completed volume image over 100 pc to 5 kpc. Preserve the accepted volume display gain: 0.094 through 1 kpc, rising to 1 at 25 kpc.",
+    "measurement": "The displayedMeans values are historical standalone matched-band measurements, not the luminance of the combined transition. Original NASA preview at 512x256; shadow smoothstep applied per pixel before the original paired Galactic-band patch average. Volume uses actual re-encoded central-ray composite.",
+    "composition": "Complementary completed-image blend t*(B*volume)+(1-t)*NASA. The independent handoff t runs from 100 pc to 5 kpc; B preserves the accepted volume brightness profile. NASA remains opaque underneath.",
+    "handoff": {
+      "fadeStartDistanceM": 3.0856775814913674e+18,
+      "fullDistanceM": 1.5428387907456837e+20
+    }
   }
 }

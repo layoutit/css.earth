@@ -20,7 +20,7 @@ export interface BakedSkyFace extends SkyBasis {
   texturePath: string; widthPx: number; heightPx: number; sha256: string; bytes: number;
   vertices: Vector3[]; uvs: [number, number][];
 }
-export interface BakedSky { faces: BakedSkyFace[]; provenance: unknown; approximation: unknown; }
+export interface BakedSky { faces: BakedSkyFace[]; provenance: unknown; approximation: unknown; parallax?: SkyRecipe['parallax']; }
 /** u runs left→right, v runs bottom→top; values ±1 reach exact cube edges. */
 export function skyRay(basis: SkyBasis, u: number, v: number): Vector3 {
   const ray = basis.forwardIcrf.map((f, i) => f + u * basis.rightIcrf[i]! + v * basis.upIcrf[i]!) as Vector3;
@@ -83,7 +83,7 @@ export async function prepareSkyFaces(options: { sourceDirectory: string; output
       vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]] });
     console.log(`Prepared sky ${basis.id}: ${size}×${size}, ${bytes.length} bytes`);
   }
-  return { faces, provenance, approximation: { sourceProjection: recipe.projection, resampling: 'pixel-center bilinear in linear RGB HALF radiance; periodic RA, clamped declination',
-    display: { ...recipe.bake, photometricCalibration: false }, translation: 'distant celestial directions, observer translation ignored',
+  return { faces, provenance, ...(recipe.parallax ? { parallax: recipe.parallax } : {}), approximation: { sourceProjection: recipe.projection, resampling: 'pixel-center bilinear in linear RGB HALF radiance; periodic RA, clamped declination',
+    display: { ...recipe.bake, photometricCalibration: false }, translation: recipe.parallax ? 'fixed finite panorama cube at authored origin and radius; inferred display depth, not measured source depth' : 'distant celestial directions, observer translation ignored',
     geometry: 'six opaque cube images; exact ICRF bases and source UVs; display transfer fixed offline' } };
 }

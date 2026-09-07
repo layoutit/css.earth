@@ -2,9 +2,9 @@ import { transposeWorldRotation, worldRotationCss, worldRotationFromQuaternion }
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssSky } from './types.js';
-import { validatePreparedCssSky } from './validation.js';
+import { validatePreparedCssSky, validatePreparedSkyParallax } from './validation.js';
 
-/** Transports fixed distant imagery using only the shared physical observer's orientation. */
+/** Transports retained celestial images through the shared physical observer pose. */
 export function mountPreparedCssSky({ host, before, payload: input, resources, resolveResource }: {
   host: HTMLElement; before: Element; payload: PreparedCssSky; resources: PreparedCssVolume['resources']; resolveResource(path: string): string;
 }) {
@@ -29,7 +29,7 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, visible = true): void {
       if (destroyed) return;
       if (world.referenceFrame !== payload.referenceFrame || world.epochJdTt !== payload.epochJdTt) throw new TypeError('Prepared sky and observer reference frames differ.');
-      const transform = preparedSkyCameraTransform(world, viewport);
+      const transform = preparedSkyCameraTransform(world, viewport, payload.parallax);
       root.style.visibility = visible ? 'visible' : 'hidden';
       if (!visible) return;
       const perspective = `${format(viewport.focalPixels)}px`, origin = `calc(50% + ${format(viewport.principalOffsetPixels[0])}px) calc(50% + ${format(viewport.principalOffsetPixels[1])}px)`;
@@ -41,16 +41,24 @@ export function mountPreparedCssSky({ host, before, payload: input, resources, r
   });
 }
 
-export function preparedSkyCameraTransform(world: WorldCameraPose, viewport: WorldCameraViewport): string {
+export function preparedSkyCameraTransform(world: WorldCameraPose, viewport: WorldCameraViewport, parallax?: PreparedCssSky['parallax']): string {
   if (!Number.isFinite(viewport.focalPixels) || viewport.focalPixels <= 0 || viewport.principalOffsetPixels.length !== 2 || !viewport.principalOffsetPixels.every(Number.isFinite) ||
+      !Array.isArray(world.pose.positionM) || world.pose.positionM.length !== 3 || !world.pose.positionM.every(Number.isFinite) ||
       world.pose.orientationXyzw.length !== 4 || !world.pose.orientationXyzw.every(Number.isFinite) || Math.abs(Math.hypot(...world.pose.orientationXyzw) - 1) > 1e-9) {
     throw new TypeError('Prepared sky observer or projection is invalid.');
   }
   const view = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
   // Prepared PolyCSS vertices are [ICRF y, ICRF x, ICRF z]. This is the same
-  // single renderer reflection as the shared volume camera, without parallax.
+  // single renderer reflection as the shared volume camera.
   const rotation = [view[1], view[0], view[2], view[4], view[3], view[5], view[7], view[6], view[8]];
-  return `translate3d(${format(viewport.principalOffsetPixels[0])}px,${format(viewport.principalOffsetPixels[1])}px,${format(viewport.focalPixels)}px) ${worldRotationCss(rotation)}`;
+  const translation = [viewport.principalOffsetPixels[0], viewport.principalOffsetPixels[1], viewport.focalPixels];
+  if (parallax !== undefined) {
+    validatePreparedSkyParallax(parallax);
+    const displacement = world.pose.positionM.map((n, axis) => (n - parallax.originM[axis]) / parallax.metersPerCssPixel);
+    for (let row = 0; row < 3; row++) translation[row] -= view[row * 3] * displacement[0] + view[row * 3 + 1] * displacement[1] + view[row * 3 + 2] * displacement[2];
+    if (!translation.every(Number.isFinite)) throw new TypeError('Prepared sky observer displacement is invalid.');
+  }
+  return `translate3d(${format(translation[0])}px,${format(translation[1])}px,${format(translation[2])}px) ${worldRotationCss(rotation)}`;
 }
 function format(value: number): string { return Math.abs(value) < 1e-9 ? '0' : Number(value.toFixed(6)).toString(); }
 function escapeUrl(value: string): string { return value.replace(/["\\\n\r]/gu, character => `\\${character}`); }

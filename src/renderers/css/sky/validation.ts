@@ -5,11 +5,12 @@ const FACE_IDS = ['px', 'nx', 'py', 'ny', 'pz', 'nz'];
 const NUMBER = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/iu;
 
 export function validatePreparedCssSky(input: unknown, resources: PreparedCssVolume['resources']): PreparedCssSky {
-  const sky = record(input, ['schema', 'referenceFrame', 'epochJdTt', 'radiusUnits', 'faces', 'provenance', 'approximation'], 'sky');
+  const sky = record(input, ['schema', 'referenceFrame', 'epochJdTt', 'radiusUnits', 'faces', 'provenance', 'approximation'], 'sky', ['parallax']);
   if (sky.schema !== 'cssearth-css-sky@1' || typeof sky.referenceFrame !== 'string' || !sky.referenceFrame || !finite(sky.epochJdTt) || !positive(sky.radiusUnits)) {
     throw new TypeError('Prepared sky identity or frame is invalid.');
   }
   if (!Array.isArray(sky.faces) || sky.faces.length !== 6) throw new TypeError('Prepared sky needs six cube faces.');
+  if ('parallax' in sky) validatePreparedSkyParallax(sky.parallax);
   const ids = new Set<string>();
   for (const inputFace of sky.faces) {
     const face = record(inputFace, ['id', 'texturePath', 'widthPx', 'heightPx', 'forwardIcrf', 'rightIcrf', 'upIcrf', 'style'], 'sky face');
@@ -34,14 +35,23 @@ export function validatePreparedCssSky(input: unknown, resources: PreparedCssVol
   return sky as unknown as PreparedCssSky;
 }
 
+export function validatePreparedSkyParallax(input: unknown): NonNullable<PreparedCssSky['parallax']> {
+  const value = record(input, ['originM', 'metersPerCssPixel'], 'sky parallax');
+  if (!Array.isArray(value.originM) || value.originM.length !== 3 || !value.originM.every(finite) || !positive(value.metersPerCssPixel)) {
+    throw new TypeError('Prepared sky parallax origin or scale is invalid.');
+  }
+  return value as unknown as NonNullable<PreparedCssSky['parallax']>;
+}
+
 function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value); }
 function positive(value: unknown): value is number { return finite(value) && value > 0; }
 function integer(value: unknown): value is number { return positive(value) && Number.isSafeInteger(value); }
 function unit(value: unknown): value is number[] { return Array.isArray(value) && value.length === 3 && value.every(finite) && Math.abs(Math.hypot(...value) - 1) < 1e-6; }
 function dot(a: readonly number[], b: readonly number[]): number { return a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!; }
 function imagePath(value: unknown): value is string { return typeof value === 'string' && /^(?:[a-z0-9_][a-z0-9_.-]*\/)*[a-z0-9_][a-z0-9_.-]*\.(?:png|webp)$/iu.test(value); }
-function record(value: unknown, keys: readonly string[], name: string): Record<string, unknown> {
-  if (!value || typeof value !== 'object' || Array.isArray(value) || Object.keys(value).length !== keys.length || Object.keys(value).some(key => !keys.includes(key))) {
+function record(value: unknown, keys: readonly string[], name: string, optional: readonly string[] = []): Record<string, unknown> {
+  if (!value || typeof value !== 'object' || Array.isArray(value) || keys.some(key => !Object.prototype.hasOwnProperty.call(value, key)) ||
+    Object.keys(value).some(key => !keys.includes(key) && !optional.includes(key))) {
     throw new TypeError(`Prepared ${name} has unsupported or missing fields.`);
   }
   return value as Record<string, unknown>;

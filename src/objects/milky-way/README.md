@@ -98,12 +98,15 @@ additive HDR raymarching, stochastic sampling or camera-dependent fade.
 The renderer transports the prepared images and geometry; stars use the
 application's independently prepared star catalog.
 
-The shared display attenuates the completed volume image to 0.094 over opaque
-black through 1 kpc from the common focus, then ramps smoothly in logarithmic
-distance to full brightness at 25 kpc. This provisional display attenuation
-is independent of camera angle and of the NASA-to-volume crossfade. It is
-not HDR exposure or physical photometric calibration; slab transfer, optical
-correction, stars and labels retain their separate behavior.
+The shared display blends two completed images with complementary weights:
+`t * (B * volume) + (1 - t) * NASA`. The handoff `t` rises smoothly from zero
+at 100 pc to one at 5 kpc. The independent volume brightness `B` preserves its
+accepted grade: 0.094 through 1 kpc, rising to one at 25 kpc. Keeping the NASA
+clouds present while the incoming image remains faint prevents the previous
+black gap. NASA remains opaque underneath until the handoff completes.
+Without a prepared sky the backdrop remains black. This is a display blend,
+not HDR exposure or photometric calibration; slab transfer, optical correction,
+stars and labels retain their separate behavior.
 
 Each retained slab has three coincident CSS image elements sharing one texture.
 Their optical contribution compensates for oblique viewing before isolated axis
@@ -140,13 +143,16 @@ application's separately prepared bright stars and labels coexist with it.
 Faint Gaia stars remain in the image; it is not literally star-free.
 
 The cube's authored bases are ICRF directions, independent of the volume's
-Galactic local frame. Each face is a real prepared PolyCSS plane; camera
-translation leaves distant sky directions unchanged. Runtime transports the
-six prepared planes and crossfades toward the OpenSpace volume as the same
-camera travels outward: the handoff starts at 0.1 pc from the shared focus,
-is halfway at 1 pc and finishes at 10 pc. The volume then supplies physical
-translation and changing perspective. This range is a presentation choice,
-not an inferred distance to the panorama; the image contains no depth data.
-Neither cube geometry nor imagery is generated in
-the browser. The NASA source epoch is recorded in provenance; shared camera
-frame metadata uses the volume's Sun-centred ICRF frame and epoch.
+Galactic local frame. Its six prepared PolyCSS planes form one closed shell
+with a 20 kpc half-extent, centered on the Sun. At the Sun it reproduces the
+original angular projection. Shared camera translation then produces parallax
+and shrinking; there is no separate camera or screen-fixed background. The
+handoff finishes by one quarter of the shell radius, before the observer can
+reach a cube face. The images, geometry and decoded bank remain unchanged.
+
+The shell depth is an authored visual approximation: NASA supplies angular
+radiance, not measured cloud depths. It does not align the two sources' different
+dust structures or reproduce physical disocclusion. It avoids copying cloud
+features across independent depth layers. Neither geometry nor imagery is
+generated in the browser. The NASA source epoch stays in provenance; shared
+camera metadata uses the volume's Sun-centered ICRF frame and epoch.
