@@ -8,7 +8,7 @@ import type {
 interface Props {
   preparedContent: PreparedObjectContentDocument;
   preparedControls: {
-    lenses: PreparedObjectContent["lenses"];
+    lenses: PreparedObjectContent["lenses"] | null;
     settings: PreparedObjectContent["settings"];
   };
 }

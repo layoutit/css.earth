@@ -52,6 +52,18 @@ describe('object descriptor boundary', () => {
     expect(() => parseAuthoredRecipe(value)).toThrow();
   });
 
+  it('accepts a triaxial surface without lenses and rejects inverted or zero axes', () => {
+    const source = { schema: 'cssearth-authored-object@1', sources: recipe().sources,
+      surfaces: [{ id: 'body', source: 'raster', projection: 'equirectangular', lenses: [] }] };
+    const shape = { kind: 'ellipsoid', radiusKm: 1161, secondaryRadiusKm: 852, polarRadiusKm: 513 };
+    const parsed = parseAuthoredRecipe({ ...source, shape });
+    expect(parsed.shape).toEqual(shape);
+    expect(parsed.surfaces[0]!.lenses).toEqual([]);
+    for (const secondaryRadiusKm of [0, 500, 1200]) {
+      expect(() => parseAuthoredRecipe({ ...source, shape: { ...shape, secondaryRadiusKm } })).toThrow();
+    }
+  });
+
   it('requires a typed recipe at the authored object boundary', () => {
     expect(() => parseAuthoredObjectDescriptor(descriptor())).toThrow(/properties.recipe/);
   });

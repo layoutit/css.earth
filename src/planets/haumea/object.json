@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "haumea",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "bb29a9e2870a294aea0c7e78d24482fc708b42961d233ef0be8e0dd15980555f"
+  },
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Haumea",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "shape": {
+        "kind": "ellipsoid",
+        "radiusKm": 1161,
+        "secondaryRadiusKm": 852,
+        "polarRadiusKm": 513
+      },
+      "sources": [
+        {
+          "id": "shape-model",
+          "path": "source/preparation/shape-model.json",
+          "sha256": "60f82227a1f198e5c6639e1021cc6a4eb6e677c62d08d7780fca515561138630"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "1a8dea075c8f33eddda26b738ebfaf449b48a538a75b2fcdf73e50b20762dd83"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "ed04e0ea30c4e262527fcfa97718c5f583402ffda9409dcaea54b861e0b99252"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "1ac9085d300170054a4c12d31a61f9ec80f38b887f8336f989f2a4b4498bf865"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "1f635c92818e5ff839af6a183994e5f1ea75c77031f1198ad29b00059190de5e"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "449cf74e1345de447de78e42d74fb6626b9d72a5c0d14f95fcc91828018ea9b3"
+        }
+      ],
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "shape-model",
+          "projection": "equirectangular",
+          "lenses": []
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "shape-model",
+          "model": "lit"
+        }
+      ],
+      "rings": {
+        "source": "shape-model"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5487501697429.015,
+        -4698286149209.781,
+        1797331335450.44
+      ],
+      "presentationToReference": [
+        -0.8364334462528649,
+        -1.3877787807814457e-17,
+        0.5480685084818828,
+        -0.5028430253171388,
+        0.39777715593191365,
+        -0.7674126830517105,
+        -0.21800913255976923,
+        -0.9174820620691818,
+        -0.3327141173767938
+      ],
+      "orbitUpReference": [
+        1.3877787807814457e-17,
+        -0.39777715593191365,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 5047.826086956522,
+      "bodyRadiusM": 1161000
+    }
+  }
+}

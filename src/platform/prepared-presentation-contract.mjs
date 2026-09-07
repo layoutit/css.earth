@@ -232,7 +232,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       }
     }
     record(variant.when, "selection key", ["lensId", ...settings.keys()]);
-    if (!lensIds.includes(variant.when.lensId)) fail("variant must name one declared exclusive lens");
+    if (lensIds.length ? !lensIds.includes(variant.when.lensId) : Object.hasOwn(variant.when, "lensId")) fail("variant must match the declared lens capability");
     for (const [key, value] of Object.entries(variant.when)) if (key !== "lensId") {
       const control = settings.get(key);
       if (control.kind !== "toggle" || typeof value !== "boolean") fail("presentation variants may only bind discrete toggle settings");
@@ -266,7 +266,7 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   }
   const toggleNames = [...new Set(variants.flatMap(variant => Object.keys(variant.when).filter(key => key !== "lensId")))];
   if (toggleNames.length > 12) fail("selection table exceeds bounded toggle combinations");
-  for (const lensId of lensIds) for (let index = 0; index < 2 ** toggleNames.length; index++) {
+  for (const lensId of lensIds.length ? lensIds : [null]) for (let index = 0; index < 2 ** toggleNames.length; index++) {
     const state = { lensId, ...Object.fromEntries(toggleNames.map((name, bit) => [name, !!(index & 2 ** bit)])) };
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }

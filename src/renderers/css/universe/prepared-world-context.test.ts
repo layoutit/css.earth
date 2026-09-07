@@ -66,7 +66,8 @@ function mount(scale: number) {
 
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
-  expect(parsePreparedWorldContext(source).bodies).toHaveLength(15);
+  const authored = JSON.parse(await readFile(new URL('../../../planets/sun/source/navigation/universe.json', import.meta.url), 'utf8')) as { bodies: { id: string }[] };
+  expect(parsePreparedWorldContext(source).bodies.map(body => body.id)).toEqual(authored.bodies.map(body => body.id));
   expect(() => parsePreparedWorldContext({ ...source, focus: { ...(source.focus as Record<string, unknown>), positionM: [1, 0, 0] } })).toThrow('frame origin');
   const camera = source.camera as Record<string, unknown>, presentation = camera.presentation as Record<string, unknown>;
   expect(() => parsePreparedWorldContext({ ...source, camera: { ...camera, presentation: { ...presentation, dolly: { ...(presentation.dolly as Record<string, unknown>), minimumDistanceRadii: 1 } } } })).toThrow('outside the focus');
