@@ -62,6 +62,10 @@ context proxies; they do not claim a newly rendered observation geometry.
 
 The Sun's scene indicator is a project-authored rounded hexagonal outline.
 `prepareSunIndicator` in `tools/prepare-navigation.mjs` rasterizes the numerical
-path to `public/navigation/sun-indicator-hexagon.png` at a fixed 64px resolution for a
-16px UI box. The live scene uses the PNG; its center remains transparent for
-the Sun's separate physical point and glow.
+path to `public/navigation/sun-indicator-hexagon.png` at a fixed 80px resolution for a
+20px UI box. Its stroke uses the authored soft-yellow `display.hex` accent in
+`src/planets/sun/swatch.json`, matching the navigation label. The independent
+spectral swatch remains recorded there with its ASTM E490-00, CIE 1931, and sRGB
+provenance.
+The live scene uses the PNG; its center remains transparent for the Sun's
+separate physical point and glow.

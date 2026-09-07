@@ -3,6 +3,7 @@ import PreparedSidebarCards from "../components/PreparedSidebarCards.astro";
 import ExplorerRail from "../components/ExplorerRail.astro";
 import CssEarthWordmark from "../components/CssEarthWordmark.astro";
 import PlanetaryScale from "../components/PlanetaryScale.astro";
+import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mjs";
 import { requireObject } from "../objects.mjs";
 import { objectSeo } from "../seo.mjs";
@@ -51,6 +52,7 @@ const seo = objectSeo(objectRecord);
     <script is:inline set:html={googleAnalyticsBootstrap}></script>
     <slot name="planet-head" />
     <title>{seo.title}</title>
+    <ObjectSwatchStyles />
   </head>
   <body class="loading" data-object-shell={objectRecord.id}>
     <div class="planet-view-readout" aria-label="View information">
