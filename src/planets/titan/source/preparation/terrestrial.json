@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "titan",
+  "displayName": "Titan",
+  "publicBase": "/scenes/titan/",
+  "distanceAu": 9.58,
+  "raster": {
+    "width": 8192,
+    "height": 4096,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 1024,
+    "surfaceQuality": 90,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 180
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": [
+      {
+        "id": "radar",
+        "consumer": "radar",
+        "format": "pds3-byte-equirectangular",
+        "metadata": {
+          "label": "Radar",
+          "falseColor": false,
+          "coverage": "Observed SAR and HiSAR swaths only; gray grid marks exact source no-data.",
+          "projection": {
+            "type": "Equirectangular",
+            "longitudeDirection": "east",
+            "latitudeType": "planetocentric",
+            "referenceRadiusMeters": 2575000
+          },
+          "interpretation": "Incidence-normalized Ku-band backscatter. Brightness reflects roughness, slopes and material properties; globe lighting is approximate."
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 2575.5,
+    "camera": {
+      "initialScenePitchDegrees": 40,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/titan/titan-normal-surface@2x.webp",
+    "polesUrl": "/scenes/titan/titan-normal-poles@2x.webp"
+  },
+  "celestial": {
+    "sunSource": "JPL Titan orbit and VSOP87 Saturn position, with IAU/WGCCRE rotation"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      190,
+      160,
+      101
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

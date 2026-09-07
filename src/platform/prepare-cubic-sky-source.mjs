@@ -256,13 +256,13 @@ for (const density of [1, 2]) {
       `${objectId}-starfield-${id}-standard${suffix}.webp`;
     await sharp(highContrastPixels, {
       raw: { width: faceSize, height: faceSize, channels: 3 },
-    }).webp({ lossless: true, effort: 6 }).toFile(resolve(
+    }).webp({ quality: 95, effort: 6, smartSubsample: true }).toFile(resolve(
       publicRoot,
       highContrastFileName,
     ));
     await sharp(standardPixels, {
       raw: { width: faceSize, height: faceSize, channels: 3 },
-    }).webp({ lossless: true, effort: 6 }).toFile(resolve(
+    }).webp({ quality: 95, effort: 6, smartSubsample: true }).toFile(resolve(
       publicRoot,
       standardFileName,
     ));

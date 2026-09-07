@@ -1,0 +1,275 @@
+{
+  "schema": "csstethys-authoritative-sources@1",
+  "inputs": [
+    {
+      "credit": "NASA/JPL-Caltech/Space Science Institute",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-iss-2012-tethys",
+      "path": "observations/Tethys_Cassini_mosaic_global_293m.tif",
+      "origin": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif",
+      "catalog": "https://astrogeology.usgs.gov/search/map/tethys_cassini_global_mosaic_293m",
+      "consumers": [
+        "surfaces",
+        "navigation"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 11520,
+      "height": 5760,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 536300,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "GeoTIFF no-data is exactly 0; preserve all other source values. Native image resolution and photographed shading vary.",
+      "expectedBytes": 66401923,
+      "expectedSha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640"
+    },
+    {
+      "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-iss-2014-tethys-color",
+      "path": "observations/PIA18439.jpg",
+      "origin": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18439.jpg",
+      "catalog": "https://www.jpl.nasa.gov/images/pia18439-color-maps-of-tethys-2014/",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 13467,
+      "height": 6734,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 536300,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Published global rectangular display map has no separate validity mask. Preserve original imagery, including dark terrain, photographed shading and source seams.",
+      "expectedBytes": 10809057,
+      "expectedSha256": "aa3c249de2432699157638dae11c6f5c5e22c3dda94dd803af8666269f1a3da4"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-tethys-eq",
+      "path": "observations/tethys_eqradius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqradius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "width": 2222,
+      "height": 679,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 531000,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
+      "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
+      "expectedBytes": 6044029,
+      "expectedSha256": "02b967b03598630765ec61545a7886ee8f4abda45fdae500f5af03358ebf5546"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-tethys-np",
+      "path": "observations/tethys_npradius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npradius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "projection": {
+        "type": "polar-stereographic",
+        "referenceRadiusMeters": 531000,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
+      "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
+      "expectedBytes": 790789,
+      "expectedSha256": "2770434e4d2473c4febac01cd206ffecde17170f05a082942cd3b841a5724453"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+      ],
+      "acquisition": "Download the pinned original through the shared acquisition recipe.",
+      "redistribution": "Retain mission and source-author credits.",
+      "id": "cassini-spc-2025-tethys-sp",
+      "path": "observations/tethys_spradius_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spradius_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "projection": {
+        "type": "polar-stereographic",
+        "referenceRadiusMeters": 531000,
+        "centerLongitude": 0,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
+      "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
+      "expectedBytes": 790789,
+      "expectedSha256": "2f301f3a334665829a2d8dae8342273f2bc77c6ceac1aa88dbc5ed243e869c74"
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 849,
+      "expectedSha256": "502bc3491551dfea7200823e84b0a182ee417840a267f8a8a66ebc5152bca73b",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/catalog.json",
+      "expectedBytes": 2201,
+      "expectedSha256": "45d1ae5f7836b02eaa5052ddca756bb78a81443561affc1e91bee9d71ed4c3ae",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/productdescription.pdf",
+      "expectedBytes": 52481,
+      "expectedSha256": "218932f056d4a1ee3efcd772b8076fe9a09b4af4e68f13bdbf538c83f2da0c7f",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/tethys_eqradius_g.xml",
+      "expectedBytes": 9211,
+      "expectedSha256": "c21944d7875a9f7d15082ab6505ff55b796e9a34924f8ae4232e7d945913c6f2",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/tethys_npradius_g.xml",
+      "expectedBytes": 9251,
+      "expectedSha256": "df9904a94d69c2804322227f32d66fbc28dff0a6936c6a6e6769c3c1212c1cba",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "observations/tethys_spradius_g.xml",
+      "expectedBytes": 9254,
+      "expectedSha256": "b858898852e1e9bdcef72a310e5c0cfb135355e94b05fe784e17dcbf758ea588",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 5143,
+      "expectedSha256": "f356f7507d417d2717098fd2681bb4992fc4d33da694fee2ca7a5c54bf6cdfb7",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1928,
+      "expectedSha256": "7301216b47f25c99c212ba352971718e320b7d8220f7fe8d05d49505031e68c1",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1940,
+      "expectedSha256": "18f7ac40950e4dcb6434b91bb62edc2ba10562cd1f1287954ec609a232827253",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 8496,
+      "expectedSha256": "f4b0655357dbd51b03e1ca70f1e45c8e339d61caaa86821a55327043204dbae0",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3090,
+      "expectedSha256": "ea44513853afbd33861f7cbda1c4e01d01f0ed5a14dbd4e782b4641f644de2c4",
+      "purpose": "Source metadata, license evidence, or authored preparation and content."
+    }
+  ],
+  "generatedIntermediates": []
+}

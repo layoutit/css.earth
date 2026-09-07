@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-source-notes@1",
+  "normal": {
+    "url": "https://astrogeology.usgs.gov/search/map/tethys_cassini_global_mosaic_293m",
+    "release": "June 2012",
+    "coordinates": "Simple cylindrical GeoTIFF centered at 0, left edge 180 E. Raster x increases eastward, while the map labels express west longitude. Roll half-width, do not mirror.",
+    "noData": 0
+  },
+  "enhanced": {
+    "url": "https://www.jpl.nasa.gov/images/pia18439-color-maps-of-tethys-2014/",
+    "published": "2014-11-04",
+    "coordinates": "0 E left edge, north up. Odysseus aligns around 230 E after rolling the monochrome map. No mirror.",
+    "processing": "Published radiometric calibration, geographic registration and photometric correction by Paul Schenk. Preserve residual image shading and resolution differences."
+  },
+  "elevation": {
+    "url": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+    "doi": "10.26033/hpv0-eh61",
+    "release": "2025-08-28",
+    "version": "1.0",
+    "datumRadiusKm": 531,
+    "sourceUnits": "Global GeoTIFFs: radius from center in meters. Regional products use a different height convention and are not used.",
+    "conversion": "height_km = radius_m * 0.001 - 531",
+    "sampling": "Use equatorial equirectangular grid from -55 to +55 degrees and source polar stereographic grids beyond. Never stretch equatorial pixels to the poles.",
+    "resolution": "Approximately 1.5 km; 2222 x 679 equator, 444 x 444 each pole.",
+    "processing": "Bilinear source sampling, northwest cartographic light, true height scale, shared Q90 display atlases."
+  },
+  "shape": {
+    "nasaMeanRadiusKm": 533,
+    "renderingSphereKm": 536.3,
+    "pdsTerrainDatumKm": 531,
+    "rendering": "Shared spherical approximation uses the astronomy package and 2012 map reference radius. No displaced geometry. Keep distinct physical and cartographic reference values."
+  },
+  "landmarks": {
+    "odysseus": {
+      "latitude": 30,
+      "longitudeEast": 230,
+      "reference": "https://pubs.usgs.gov/bul/2129/report.pdf"
+    },
+    "ithacaChasma": {
+      "latitude": -14,
+      "longitudeEast": 353.9,
+      "reference": "https://planetarynames.wr.usgs.gov/Feature/2751"
+    }
+  }
+}

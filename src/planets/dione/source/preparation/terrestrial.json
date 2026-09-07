@@ -1,0 +1,186 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "dione",
+  "displayName": "Dione",
+  "publicBase": "/scenes/dione/",
+  "distanceAu": 9.58,
+  "raster": {
+    "width": 8192,
+    "height": 4096,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 1024,
+    "surfaceQuality": 90,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "channels": "monochrome",
+          "zeroValidity": "all-channels",
+          "noData": 0,
+          "centerLongitude": 0,
+          "resolutionMeters": 153.53443263638
+        }
+      },
+      {
+        "id": "enhanced",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "format": "geotiff",
+        "path": "observations/dione_eqradius_g.tif",
+        "description": "Cassini terrain model · shaded relief",
+        "title": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
+        "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+        "minimum": -7.5,
+        "maximum": 7.5,
+        "colors": [
+          "#2166ac",
+          "#92c5de",
+          "#f7f7f7",
+          "#f4a582",
+          "#b35806"
+        ],
+        "labels": [
+          "−7.5",
+          "0",
+          "+7.5"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "sampling": "bilinear",
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -561.4
+        },
+        "grid": {
+          "width": 2222,
+          "height": 679,
+          "centerLongitude": 180,
+          "referenceRadiusMeters": 561400,
+          "noData": -3.4028226550889045e+38,
+          "specialValueMagnitude": 1e+30,
+          "origin": [
+            -1763690.11572531,
+            538905.313138289
+          ],
+          "resolution": [
+            1587.4798521379928,
+            -1587.3499650612343
+          ],
+          "latitudeRange": [
+            -55,
+            55
+          ]
+        },
+        "relief": {
+          "referenceRadiusMeters": 561400,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.25
+        },
+        "additionalGrids": [
+          {
+            "path": "observations/dione_npradius_g.tif",
+            "grid": {
+              "width": 444,
+              "height": 444,
+              "centerLongitude": 0,
+              "referenceRadiusMeters": 561400,
+              "noData": -3.4028226550889045e+38,
+              "specialValueMagnitude": 1e+30,
+              "origin": [
+                -352738.023145062,
+                352738.023145062
+              ],
+              "resolution": [
+                1588.9100141669458,
+                -1588.9100141669458
+              ],
+              "latitudeRange": [
+                55,
+                90
+              ],
+              "projection": "polar-stereographic",
+              "poleLatitude": 90
+            }
+          },
+          {
+            "path": "observations/dione_spradius_g.tif",
+            "grid": {
+              "width": 444,
+              "height": 444,
+              "centerLongitude": 0,
+              "referenceRadiusMeters": 561400,
+              "noData": -3.4028226550889045e+38,
+              "specialValueMagnitude": 1e+30,
+              "origin": [
+                -352738.023145062,
+                352738.023145062
+              ],
+              "resolution": [
+                1588.9100141669458,
+                -1588.9100141669458
+              ],
+              "latitudeRange": [
+                -90,
+                -55
+              ],
+              "projection": "polar-stereographic",
+              "poleLatitude": -90
+            }
+          }
+        ]
+      }
+    ],
+    "observedColors": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 562.5,
+    "camera": {
+      "initialScenePitchDegrees": 40,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/dione/dione-normal-surface@2x.webp",
+    "polesUrl": "/scenes/dione/dione-normal-poles@2x.webp"
+  },
+  "celestial": {
+    "sunSource": "JPL Dione orbit plus VSOP87 Saturn position and IAU/WGCCRE Dione rotation"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      186,
+      185,
+      177
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

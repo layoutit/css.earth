@@ -1,7 +1,14 @@
+import iapetusDescriptor from "../src/planets/iapetus/object.json" with { type: "json" };
+import rheaDescriptor from "../src/planets/rhea/object.json" with { type: "json" };
 import marsDescriptor from "../src/planets/mars/object.json" with { type: "json" };
 import neptuneDescriptor from "../src/planets/neptune/object.json" with { type: "json" };
 import uranusDescriptor from "../src/planets/uranus/object.json" with { type: "json" };
 import saturnDescriptor from "../src/planets/saturn/object.json" with { type: "json" };
+import enceladusDescriptor from "../src/planets/enceladus/object.json" with { type: "json" };
+import mimasDescriptor from "../src/planets/mimas/object.json" with { type: "json" };
+import tethysDescriptor from "../src/planets/tethys/object.json" with { type: "json" };
+import dioneDescriptor from "../src/planets/dione/object.json" with { type: "json" };
+import titanDescriptor from "../src/planets/titan/object.json" with { type: "json" };
 import jupiterDescriptor from "../src/planets/jupiter/object.json" with { type: "json" };
 import europaDescriptor from "../src/planets/europa/object.json" with { type: "json" };
 import ioDescriptor from "../src/planets/io/object.json" with { type: "json" };
@@ -82,6 +89,41 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(saturnDescriptor);
     }, saturnDescriptor.properties.worldFrame),
+  object("mimas", "Mimas", "satellite", "#aeaba5", 9.58,
+    "Explore Mimas in 3D with cssEarth. Inspect Cassini imagery of Saturn’s cratered moon and its giant Herschel impact basin.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mimasDescriptor);
+    }, mimasDescriptor.properties.worldFrame),
+  object("enceladus", "Enceladus", "satellite", "#d3d7d8", 9.58,
+    "Explore Enceladus in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s fractured icy ocean moon.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(enceladusDescriptor);
+    }, enceladusDescriptor.properties.worldFrame),
+  object("tethys", "Tethys", "satellite", "#bcbbae", 9.58,
+    "Explore Tethys in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s icy moon, Odysseus crater, and Ithaca Chasma.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tethysDescriptor);
+    }, tethysDescriptor.properties.worldFrame),
+  object("dione", "Dione", "satellite", "#bab9b1", 9.58,
+    "Explore Dione in 3D with cssEarth. Inspect Cassini and Voyager imagery and elevation maps of Saturn’s icy moon, its bright cliffs and fractured terrain.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(dioneDescriptor);
+    }, dioneDescriptor.properties.worldFrame),
+  object("rhea", "Rhea", "satellite", "#bebbb0", 9.58,
+    "Explore Rhea in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s icy moon, its impact basins and bright fractures.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(rheaDescriptor);
+    }, rheaDescriptor.properties.worldFrame),
+  object("titan", "Titan", "satellite", "#bca06b", 9.58,
+    "Explore Titan in 3D with cssEarth. See through Saturn’s largest moon’s haze with Cassini near-infrared imagery.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(titanDescriptor);
+    }, titanDescriptor.properties.worldFrame),
+  object("iapetus", "Iapetus", "satellite", "#9a8f7a", 9.58,
+    "Explore Iapetus in 3D with cssEarth. Inspect Cassini imagery of Saturn’s two-toned moon and its equatorial ridge.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(iapetusDescriptor);
+    }, iapetusDescriptor.properties.worldFrame),
   object("uranus", "Uranus", "planet", "#8ec7c9", 19.2,
     "Explore Uranus in 3D with cssEarth. Discover the ice giant that spins on its side, its faint rings, and its system of moons.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

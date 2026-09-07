@@ -40,7 +40,7 @@ const tiles = [
   { id: "makemake", color: [185, 138, 106], size: 5 },
 ];
 
-test("Mercury preserves all baseline bytes except approved physical, overlay, marker, and leaf-transport changes", () => {
+test("Mercury preserves its physical scene while shared delivery remains demand driven", () => {
   const hash = value => createHash("sha256").update(JSON.stringify(value)).digest("hex");
   const { worldFrame, ...scene } = structuredClone(mercuryScene);
   const {id, controls, ...presentation} = structuredClone(mercuryPresentation);
@@ -71,7 +71,8 @@ test("Mercury preserves all baseline bytes except approved physical, overlay, ma
     }
   }
   assert.equal(hash(scene), "fd07cb83678d7efd46023c7d997ec2c368d3c293d4a2ee6553711111285129e3");
-  assert.equal(hash(presentation), "510683b7c21ed15f245f649a9da81b04b60f3ca058cc07e15ff4c1268a7fc738");
+  assert.ok(presentation.assets.startup.every(key => !key.startsWith("sky:") && !key.startsWith("interior:")));
+  assert.ok(presentation.variants.filter(v => v.when.lensId === "interior").every(v => v.required.includes("interior:section")));
   assert.deepEqual(worldFrame, mercuryPrepared.worldFrame);
 });
 

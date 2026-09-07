@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-source-notes@1",
+  "normal": {
+    "url": "https://astrogeology.usgs.gov/search/map/rhea_cassini_voyager_global_mosaic_417m",
+    "edition": "2012-08-16; includes March 2012 Cassini flyby",
+    "coordinates": "Center longitude 180 and origin easting zero. Raster x increases eastward from 180 E. Shared GeoTIFF preparation derives a half-width roll from this actual origin.",
+    "noData": 0,
+    "downloadCorrection": "Catalog mistakenly links the older Rhea_Voyager_mosaic_global_833m.tif. Use the pinned Cassini_Voyager 417m file, whose metadata matches the catalog dimensions, projection radius and pixel size."
+  },
+  "enhanced": {
+    "url": "https://www.jpl.nasa.gov/images/pia18438-color-maps-of-rhea-2014/",
+    "published": "2014-11-04",
+    "coordinates": "0 E left edge, north up. Independent crater positions match after rolling Monochrome.",
+    "processing": "Published radiometric calibration, geographic registration and photometric correction by Paul Schenk. Preserve real hemisphere differences, source seams and residual photographed shading."
+  },
+  "elevation": {
+    "url": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
+    "doi": "10.26033/tqxb-q714",
+    "release": "2025-08-28",
+    "version": "1.0",
+    "datumRadiusKm": 763.5,
+    "sourceUnits": "Radius from center in meters.",
+    "conversion": "height_km = radius_m * 0.001 - 763.5",
+    "resolution": "Approximately 2.15 km; 2222 × 1111 global equirectangular raster.",
+    "accuracy": "Producer estimates typical global DTM uncertainty at 2.15–4.3 km.",
+    "processing": "Honor actual GeoTIFF bounds; bilinear interpolation inside source cells and northwest relief at true height scale. No edge extrapolation.",
+    "sourceImages": "2719 Cassini images, through 2015-02-15.",
+    "notSelected": "The secondary relative-albedo model is coarser than the observations and its producer documents topography and shadow leakage; not added as a redundant lens."
+  },
+  "shape": {
+    "nasaMeanRadiusKm": 764,
+    "renderingSphereKm": 764.5,
+    "monochromeCartographicRadiusKm": 764.1,
+    "pdsTerrainDatumKm": 763.5,
+    "rendering": "Mean-radius sphere from astronomy package; elevation is visualized on the texture. No visible halo for the extremely tenuous exosphere; no unconfirmed rings."
+  },
+  "landmarks": {
+    "tirawa": {
+      "latitude": 34.2,
+      "longitudeEast": 208.3,
+      "reference": "https://planetarynames.wr.usgs.gov/Feature/6026"
+    },
+    "inktomi": {
+      "latitude": -14.1,
+      "longitudeEast": 247.9,
+      "reference": "https://planetarynames.wr.usgs.gov/Feature/14671"
+    }
+  }
+}

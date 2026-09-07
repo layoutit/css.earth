@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "19828366e754c7cda06d548653a69dda52b046c5deec2a6260dc7f470c804b5a"
+  },
   "id": "uranus",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -202,9 +205,6 @@
       "bodyRadiusM": 25559000
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "dc8befd1677a5cd6666757c5308e5bef61bb9d94f1b7405aad68ceef7e1272ed"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "ed08df1886821e115fe4b489ad729bb8a21287146543bb3d624580d699b4557d"
+  },
   "id": "jupiter",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -202,9 +205,6 @@
       "bodyRadiusM": 71492000
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "cc278f32f64865f0defd13562499433a3947e4eea8f3df66cf6a140c9632d753"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }

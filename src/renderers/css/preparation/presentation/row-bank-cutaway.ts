@@ -1,4 +1,4 @@
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedSkyResources, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
+import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedSunResources, preparedResourcePool } from '../../rendering/prepared-object-assets.js';
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 import type { PreparedVariant, PreparedWrite } from '../../rendering/prepared-presentation.js';
 import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.js';
@@ -24,7 +24,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   }
   for (const lens of lenses.controls) if (!/^#[0-9a-f]{6}$/u.test(lens.billboardColor ?? "")) throw new Error(`Object lens ${lens.id} has no prepared billboard colour.`);
   const interiorKeys = ["outerSurface", "outerPoles", "core", "corePoles", "section"];
-  const entries = [...preparedSkyResources(plan.starfield, sun, "warm"),
+  const entries = [...preparedSunResources(sun, "warm"),
     { key: "poles", url: canonicalPreparedAsset(assets.poles), pool: "warm" },
     { key: "shadowless", url: bank.presentations[bank.presentations.length - 1].url, pool: "warm" },
     { key: BILLBOARD_LIGHTING_KEY, url: billboard.url, pool: "warm" },
@@ -48,6 +48,8 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   b.append(null, camera); b.append(camera, scene); b.append(scene, system); b.append(system, body);
   for (const leaf of plan.bodyLeaves) b.append(body, b.leaf(leaf));
   const cutaway = b.mesh(`${ns}-cutaway`), cutawayBody = b.mesh(`${ns}-cutaway-body`); cutawayBody.style.transform = plan.interior.bodyTransform;
+  // A hidden retained subtree must not fetch its cutaway textures on mount.
+  cutaway.style.display = "none";
   texture(cutawayBody, `--${ns}-surface-image`, surfaceUrl); texture(cutawayBody, `--${ns}-poles-image`, polesUrl);
   texture(cutawayBody, `--${ns}-interior-outer-image`, canonicalPreparedAsset(assets.interior.outerSurfaceUrl, assets.interior.outerSurface2xUrl));
   texture(cutawayBody, `--${ns}-interior-outer-poles-image`, canonicalPreparedAsset(assets.interior.outerPolesUrl, assets.interior.outerPoles2xUrl));
@@ -86,6 +88,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
     return { when: { lensId: lens.id, shadows, orbit }, required: interior
       ? [`surface:${lenses.defaultLens}`, "poles", ...interiorKeys.map(name => `interior:${name}`)] : [`surface:${lens.id}`, "poles"],
       writes: [
+        { kind: "style", target: index(cutaway), name: "display", value: interior ? "block" : "none" },
         ...(interior ? [writeTexture(cutawayBody, `--${ns}-surface-image`, `surface:${lenses.defaultLens}`), writeTexture(cutawayBody, `--${ns}-poles-image`, "poles")]
           : [writeTexture(body, `--${ns}-surface-image`, `surface:${lens.id}`), writeTexture(cutawayBody, `--${ns}-surface-image`, `surface:${lens.id}`)]),
         { kind: "attribute", target: -1, name: "data-view", value: interior ? "interior" : null },

@@ -1,6 +1,6 @@
 import{BASE_TILE,worldPositionToCss,createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform}from'@layoutit/polycss';
 import{multiplyPreparedMatrix4,preparedRotationMatrix4,readPreparedMatrix4,serializePreparedMatrix4}from'../../../src/platform/prepared-ellipsoid-projection.mjs';
-import{preparedSkyResources,preparedResourcePool}from'../../../src/platform/prepared-object-assets.mjs';
+import{preparedSunResources,preparedResourcePool}from'../../../src/platform/prepared-object-assets.mjs';
 import{PREPARED_PRESENTATION_SCHEMA}from'../../../src/platform/prepared-presentation-contract.mjs';
 import{prepareCssomDeclarationReads}from'../../prepared-cssom.mjs';
 import{createPreparedNodeTree}from'../../prepared-node-tree.mjs';
@@ -35,7 +35,7 @@ export function prepareNormalizedDiscAddresses(material){
 export async function prepareNormalizedDiscPresentation({config,geometry,materialConfig,sky,sun}){
  if(config?.schema!=='cssearth-normalized-disc-presentation@1'||!geometry?.leaves?.length||!Array.isArray(config.lenses)||!config.lenses.length)throw new TypeError('Invalid normalized-disc presentation.');
  const cameraPlan={...config.camera,materialDepthPresentation:prepareFrontBiasedDiscPlane(config,materialConfig)},depth=cameraPlan.materialDepthPresentation,lighting=prepareNormalizedDiscAddresses(materialConfig),capacity=materialConfig.bank.maximumRetainedRows,namespace=config.namespace;
- const lensKeys=id=>[`surface:${id}`,`poles:${id}`],warm=[...preparedSkyResources(sky,sun,'warm'),...config.radialResources.map(resource=>({key:`rings:${resource.id}`,url:resource.url,pool:'warm'})),{key:'shadowless',url:`${materialConfig.urlPrefix}${materialConfig.shadowlessOutput}`,pool:'warm'}];
+ const lensKeys=id=>[`surface:${id}`,`poles:${id}`],warm=[...preparedSunResources(sun,'warm'),...config.radialResources.map(resource=>({key:`rings:${resource.id}`,url:resource.url,pool:'warm'})),{key:'shadowless',url:`${materialConfig.urlPrefix}${materialConfig.shadowlessOutput}`,pool:'warm'}];
  const entries=[...warm,...config.lenses.flatMap(lens=>['surface','poles'].map(layer=>({key:`${layer}:${lens.id}`,url:lens[layer],pool:'warm'}))),...lighting.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:'lighting'}))];
  const b=createPreparedNodeTree({cssomReads:await prepareCssomDeclarationReads(geometry.leaves.map(leaf=>leaf.style))}),camera=b.element('div','polycss-camera planet-render-root','perspective:1000000px');
  const cameraState=createPolyCamera({zoom:config.initialScene.zoom,rotX:config.initialScene.totalPitchDegrees-materialConfig.systemRotationXDegrees,rotY:0,target:[0,0,0]}).state;

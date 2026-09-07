@@ -1,7 +1,10 @@
 {
-  "schema": "cssearth-object@1",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "825b254a10ec785794eb41f600c9b4b05e2244e855770d89a060b575d1b1757c"
+  },
   "id": "saturn",
-  "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -169,9 +172,6 @@
       "bodyRadiusM": 60268000
     }
   },
-  "prepared": {
-    "format": "cssearth-css-object@4",
-    "url": "prepared/object.json",
-    "sha256": "54a17c4c470feadb5d52b8828cb4ac702f5b02aebd228746a438b728dcc4fe05"
-  }
+  "schema": "cssearth-object@1",
+  "type": "layered-body"
 }
