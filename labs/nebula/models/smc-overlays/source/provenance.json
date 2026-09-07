@@ -1,0 +1,163 @@
+{
+  "schema": "cssearth-nebula-overlay-provenance@1",
+  "recipe": {
+    "path": "labs/nebula/models/image-overlays.json",
+    "sha256": "bbfa5a15d79b23271e1ba92dba463473b9e3ce9de3a0e705e7a81278396b3867"
+  },
+  "frame": {
+    "path": "labs/nebula/models/smc-particles/object.json",
+    "sha256": "88d47c0226495619c25200d7e61a66cfec4a3fe42b081c582840d1939d4b2e07"
+  },
+  "images": [
+    {
+      "input": {
+        "id": "smash-original",
+        "label": "SMASH · original full image",
+        "path": "labs/nebula/sources/smc-smash-full.webp",
+        "sha256": "3ed2fd1ae7729b860f00d2bd7d0c13b6a05f81c8d66e587e626cc4e2bac92698",
+        "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030b/",
+        "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever; image processing: Travis Rector, Mahdi Zamani & Davide de Martin",
+        "license": "CC-BY-4.0",
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            3827,
+            3190
+          ],
+          "referencePixel": [
+            1913.5,
+            1595
+          ],
+          "referenceValueDeg": [
+            13.6618118598,
+            -72.8687942632
+          ],
+          "scaleDeg": [
+            -0.00138788065837,
+            0.00138788065837
+          ],
+          "rotationDeg": 30.12000000000002
+        },
+        "wcsSource": {
+          "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030b.tif",
+          "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
+          "description": "ICRS TAN AVM fields extracted from the pinned publisher TIFF; original reference dimensions retained."
+        },
+        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing."
+      },
+      "sourceDimensions": [
+        3827,
+        3190
+      ],
+      "verticesUnits": [
+        [
+          0.30697678339569134,
+          3.0827097461894732,
+          0
+        ],
+        [
+          -4.573045880767771,
+          -0.03288882680227356,
+          3.1086244689504383e-15
+        ],
+        [
+          -1.9719763620525594,
+          -4.1014109815638955,
+          5.551115123125783e-16
+        ],
+        [
+          2.904169808949381,
+          -0.98001761464019,
+          8.992806499463768e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/smash-original.webp",
+        "width": 2048,
+        "height": 1707,
+        "sha256": "e893505ee791e343d40269e81d6f641d0ed39aef83c9c42cdf8eb8c48bf0ad6e",
+        "bytes": 1925464
+      }
+    },
+    {
+      "input": {
+        "id": "vista-infrared",
+        "label": "VISTA · infrared Y/J/Ks",
+        "path": ".local/nebula-lab/registration/eso1714a.jpg",
+        "sha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
+        "url": "https://cdn.eso.org/images/publicationjpg/eso1714a.jpg",
+        "sourcePageUrl": "https://www.eso.org/public/images/eso1714a/",
+        "credit": "ESO/VISTA VMC",
+        "license": "CC-BY-4.0",
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            43223,
+            38236
+          ],
+          "referencePixel": [
+            21611.5,
+            19118
+          ],
+          "referenceValueDeg": [
+            13.7631652021,
+            -72.9640481752
+          ],
+          "scaleDeg": [
+            -0.000136644159443,
+            0.000136644159443
+          ],
+          "rotationDeg": 1.2000000000000006
+        },
+        "wcsSource": {
+          "url": "https://cdn.eso.org/images/publicationjpg/eso1714a.jpg",
+          "sha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
+          "description": "Publisher AVM from the uncropped publication JPEG; reference dimensions describe the original mosaic."
+        },
+        "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing. Infrared stars need not resemble optical nebulosity."
+      },
+      "sourceDimensions": [
+        4000,
+        3540
+      ],
+      "verticesUnits": [
+        [
+          2.238070937354586,
+          2.4300879117681915,
+          7.716050021144838e-15
+        ],
+        [
+          -4.184851471249388,
+          2.0324093838090875,
+          2.6645352591003757e-15
+        ],
+        [
+          -3.83254356364559,
+          -3.6553773375388023,
+          2.3314683517128287e-15
+        ],
+        [
+          2.595135426696119,
+          -3.2495802266278315,
+          1.3322676295501878e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/vista-infrared.webp",
+        "width": 2048,
+        "height": 1812,
+        "sha256": "c0e1ea97c4c0b11fa3f5af022a7a9ad4b61439d827ca7d6253509ff4ea8a0d69",
+        "bytes": 1844274
+      }
+    }
+  ],
+  "method": "Publisher ICRS TAN WCS rays intersect the observation tangent plane. Full image edges become a fixed PolyCSS projective quad.",
+  "limits": [
+    "Image WCS metadata supplies angular registration; it does not validate the simulation morphology.",
+    "No photograph-derived masks, cutouts, scale fitting or density-driven image warps are applied.",
+    "The flat image plane records one observed projection; it does not assert physical depths for photographed features.",
+    "The 2048px textures are inspection previews; native sources and WCS remain pinned for later processing."
+  ]
+}

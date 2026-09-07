@@ -45,6 +45,11 @@ input[type="range"] { width: 100%; margin: 12px 0 3px; accent-color: #c2ccd8; }
 .model-note { padding-top: 20px; margin-top: 22px; border-top: 1px solid var(--divider); }
 #source-link { font-size: 12px; }
 .source-credit { overflow-wrap: anywhere; }
+.overlay-option { display: grid; grid-template-columns: auto 1fr; gap: 7px 8px; margin: 12px 0 18px; }
+.overlay-option label { grid-column: 2; grid-row: 1; align-self: center; color: var(--text-secondary); }
+.overlay-option input[type="checkbox"] { grid-column: 1; grid-row: 1; margin: 0; align-self: center; }
+.overlay-option input[type="range"] { grid-column: 1 / -1; grid-row: 2; margin: 0; }
+.overlay-detail { grid-column: 1 / -1; margin: 0; color: var(--text-muted); font-size: 11px; }
 
 .lab-workspace { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
 .workspace-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 20px; min-height: 62px; border-bottom: 1px solid var(--divider); }

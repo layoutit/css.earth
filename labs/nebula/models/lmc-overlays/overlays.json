@@ -1,0 +1,79 @@
+{
+  "schema": "cssearth-nebula-overlays@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "originM": [
+      105965308676973530000,
+      533209933280955330000,
+      -1.4303831216834226e+21
+    ],
+    "localToReferenceXyzw": [
+      0.09631989992847079,
+      0.9788280334299664,
+      0.17973685917567428,
+      0.01768669847817273
+    ],
+    "metersPerUnit": 30856775814913670000
+  },
+  "referenceDistanceUnits": 49.590672750490434,
+  "overlays": [
+    {
+      "id": "smash-original",
+      "label": "SMASH · original full image",
+      "texturePath": "prepared/smash-original.webp",
+      "widthPx": 2048,
+      "heightPx": 1987,
+      "sha256": "0aacd67cc1cff5f083827f8e70b2d12356169d97da20368dd86f4218e798ff9c",
+      "bytes": 2113466,
+      "style": {
+        "width": "2048px",
+        "height": "1987px",
+        "transform": "matrix3d(0.057659,-0.189304,0,0.000001,-0.18915,-0.057712,0,-0.000003,0,0,1,0,26.231508,251.653384,0,1)",
+        "backgroundSize": "2048px 1987px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever; image processing: Travis Rector, Mahdi Zamani & Davide de Martin",
+      "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing."
+    },
+    {
+      "id": "vista-infrared",
+      "label": "VISTA · infrared Y/J/Ks",
+      "texturePath": "prepared/vista-infrared.webp",
+      "widthPx": 1833,
+      "heightPx": 2048,
+      "sha256": "d196a9de10c77de7219c6b35ff532f19c5bacac6f4169db62214b48904eb63a0",
+      "bytes": 1802570,
+      "style": {
+        "width": "1833px",
+        "height": "2048px",
+        "transform": "matrix3d(0.015294,-0.181786,0,0.000001,-0.181651,-0.015325,0,-0.000001,0,0,1,0,133.007726,219.668251,0,1)",
+        "backgroundSize": "1833px 2048px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://www.eso.org/public/images/eso1914a/",
+      "credit": "ESO/VMC Survey",
+      "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing. Infrared stars need not resemble optical nebulosity."
+    },
+    {
+      "id": "smash-extracted",
+      "label": "SMASH · previous extracted image",
+      "texturePath": "prepared/smash-extracted.webp",
+      "widthPx": 2048,
+      "heightPx": 1987,
+      "sha256": "1ff8f2e24aba2e84b03f48ff3419a2ab3908ac41bdfdfe47a4d08d638c45446e",
+      "bytes": 677286,
+      "style": {
+        "width": "2048px",
+        "height": "1987px",
+        "transform": "matrix3d(0.057659,-0.189304,0,0.000001,-0.18915,-0.057712,0,-0.000003,0,0,1,0,26.231508,251.653384,0,1)",
+        "backgroundSize": "2048px 1987px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+      "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever; image processing: Travis Rector, Mahdi Zamani & Davide de Martin",
+      "registrationNote": "Previous extraction, using the same full-image WCS footprint. Toggle against the original to inspect removed or truncated signal; this is not an independent observation."
+    }
+  ]
+}

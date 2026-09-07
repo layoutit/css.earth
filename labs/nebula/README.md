@@ -27,9 +27,11 @@ pnpm lab:nebula
 
 Open <http://127.0.0.1:4331/> or the [high-resolution LMC candidate](http://127.0.0.1:4331/?subject=lmc-highres-1024). Other catalogue subjects require their prepared assets to be present; the viewer does not acquire or bake them.
 
+- **[Density view](http://127.0.0.1:4331/?subject=lmc-particles&tab=density)**: rotate the LMC/SMC simulated stellar field, toggle WCS-positioned photographs with independent opacity controls, and compare from the solar observer. Switching back to 3D view keeps the camera. [Preparation and limitations](docs/workflows.md#independent-density-and-image-overlays).
 - [Research plan](docs/research-plan.md): image decomposition, coherent local depth, sampling controls, scientific sources and acceptance criteria. First target: Tarantula.
 - [Automatic structure benchmark](docs/structure-benchmark.md): native Tarantula crop, wavelet/getsf comparisons, retained residuals and detected structures. Open the lab's **Structure benchmark** tab.
 - [Repeatability and coherent depth](docs/coherent-depth.md): the same code on Tarantula and Orion, paired 3D controls, measured coverage and the current morphology limit.
+- [Registration evidence](docs/registration.md): published simulation placement, image WCS and the remaining model/observation mismatch.
 - [Workflows](docs/workflows.md): inspection controls, complete preparation commands and existing experiments.
 - [Source references and credits](sources/README.md): image provenance and registration constraints.
 

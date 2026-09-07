@@ -26,11 +26,11 @@ if (command === 'test') {
     (args.length === 0 || args.includes(name.replace(/\.test\.ts$/, '')))).sort();
   if (!names.length) throw new TypeError('No matching lab tests.');
   execution = ['--test', ...await Promise.all(names.map(compile))];
-} else if (['prepare-particles', 'prepare-master', 'prepare-coherent', 'prepare-prior-window',
+} else if (['browser-overlays', 'prepare-overlays', 'prepare-full-density', 'browser-density', 'prepare-particles', 'prepare-master', 'prepare-coherent', 'prepare-prior-window',
   'prepare-structures', 'getsf-run', 'getsf-install', 'extract', 'acquire-images', 'browser-coherent'].includes(command ?? '')) {
   execution = [await compile(`${command}.ts`), ...args];
 } else {
-  throw new TypeError('Usage: run.ts test [test-name ...] | extract <image> <out> [id] | prepare-particles <recipe.json> <archive.zip> [target-id] | prepare-master <recipe.json> | prepare-coherent <recipe.json> [variant-id] | prepare-prior-window <recipe.json> | prepare-structures <recipe.json> [options] | getsf-install <local-directory> | getsf-run <recipe.json> <installed-getsf> <work-directory> [negative-policy] | acquire-images <recipe.json> | browser-coherent [base-url]');
+  throw new TypeError('Usage: run.ts prepare-full-density <recipe.json> | prepare-overlays <recipe.json> | browser-density [base-url] | test [test-name ...] | extract <image> <out> [id] | prepare-particles <recipe.json> <archive.zip> [target-id] | prepare-master <recipe.json> | prepare-coherent <recipe.json> [variant-id] | prepare-prior-window <recipe.json> | prepare-structures <recipe.json> [options] | getsf-install <local-directory> | getsf-run <recipe.json> <installed-getsf> <work-directory> [negative-policy] | acquire-images <recipe.json> | browser-coherent [base-url]');
 }
 const result = spawnSync(process.execPath, execution, { cwd: root, stdio: 'inherit' });
 if (result.error) throw result.error;

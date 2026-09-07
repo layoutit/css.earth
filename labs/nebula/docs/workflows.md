@@ -53,6 +53,31 @@ pnpm lab:nebula
 
 The archive and imported particles stay in the ignored local cache. The shared experiment recipe pins the archive and decompressed snapshot; per-model source receipts, compressed density grid and prepared CSS banks live under `models/`. The full archive is never a browser dependency. Pass an optional final target id such as `lmc-particles` to rebuild just that experiment.
 
+## Independent density and image overlays
+
+Open [Density](http://127.0.0.1:4331/?subject=lmc-particles&tab=density), then enable an **Image overlay**. Each image has its own opacity slider. LMC offers the full SMASH image, VISTA infrared, and the previous SMASH extraction; SMC offers SMASH and VISTA. Images start off and load only when enabled. **Reference view** places the camera at the solar observer with optical magnification; **Fit cloud** shows the full density bounds. Dragging or dollying explores the actual 3D cloud and its fixed photographic planes, changing the comparison projection.
+
+The neutral grid contains **all 1,620,000 LMC and 225,000 SMC stellar particles**, including the former crop's outer material. Source-to-grid mass is conserved; empty padding covers the smoothing kernel and all six outer faces are zero. The grid is an overview at bounded resolution, with normalized display opacity. Inclusion in the density grid does not imply every faint particle is individually visible after raster quantization. It is simulated stellar mass, not measured gas, dust or luminosity.
+
+The new density uses the paper's observer-coordinate procedure reconstructed from the released snapshot and rounded model centres. The former eye-chosen bar rotation/offset is not used. The paper does not publish its exact numeric transform, so this reconstruction remains approximate. The model/observation centre mismatch is intentionally preserved. See [registration evidence](registration.md).
+
+Images use their publisher's ICRS TAN WCS. Full raster corners are projected onto the observation tangent plane and compiled into fixed PolyCSS image geometry. Images retain their full footprint; no density-driven crop, mask, fitting, or stretch is applied. Original and infrared images share sky coordinates; the extracted comparison inherits the original's footprint. WCS rays are checked against independent Astropy fixtures, including rotated interior and corner points. WCS metadata is not a measured-star residual analysis or proof that simulated morphology matches the photograph.
+
+The intended order is full distribution, observer placement, WCS overlays, visual validation, then image processing and any delivery crop. These inspection assets do not approve a later crop or modify production galaxy imagery.
+
+Rebuild inspection textures from the checked-in scalar grids and pinned photographs, without the simulation archive:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm prepare:volume labs/nebula/models/lmc-full-density
+pnpm prepare:volume labs/nebula/models/smc-full-density
+pnpm lab:nebula:overlays
+pnpm test:lab:nebula
+pnpm lab:nebula
+```
+
+To regenerate the full scalar grids themselves, first run the complete Magellanic particle workflow above with the downloaded archive, then run `pnpm lab:nebula:density`. The full-density recipe verifies the original centred particle bytes and applies the observer transform once, before deriving bounds from every particle. The old photographic candidates remain available in 3D view for comparison; they are not the neutral density source.
+
 ## Full-resolution photographs
 
 The lab includes full-spatial-resolution working references from the publisher's SMASH TIFFs: LMC 6737×6536 and SMC 3827×3190. `sources/reference-images.json` pins the original URLs, bytes, hashes, dimensions, credits and deterministic conversion. `pnpm lab:nebula:images` verifies or downloads the originals into the ignored cache, then recreates the checked-in 8-bit sRGB WebP references. These are lossy display derivatives with no crop or spatial resize, not scientific FITS data. Large reference images load only for source inspection and are not part of the prepared CSS texture banks.

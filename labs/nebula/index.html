@@ -53,6 +53,14 @@
           <button id="all-layers" class="text-button" type="button">Show all layers</button>
           <button id="reset" class="reset-button" type="button">Reset camera</button>
         </fieldset>
+        <fieldset id="overlay-controls" hidden>
+          <legend>Image overlays</legend>
+          <div id="overlay-options"></div>
+          <p id="overlay-status" class="model-note" role="status"></p>
+          <p id="overlay-registration" class="model-note"></p>
+          <button id="reference-view" class="reset-button" type="button">Reference view</button>
+          <button id="fit-cloud" class="reset-button" type="button">Fit cloud</button>
+        </fieldset>
         <p class="interaction-hint">Drag to orbit. Scroll or pinch to zoom.</p>
         <p id="model-note" class="model-note">Depth is modeled from a source image; it is not a measured 3D reconstruction.</p>
         <a id="source-link" hidden target="_blank" rel="noreferrer">Source and credit ↗</a>
@@ -62,6 +70,7 @@
         <div class="workspace-toolbar">
           <div role="tablist" aria-label="View">
             <button id="render-tab" type="button" role="tab" aria-selected="true" aria-controls="render-panel">3D view</button>
+            <button id="density-tab" type="button" role="tab" aria-selected="false" aria-controls="render-panel" tabindex="-1">Density</button>
             <button id="source-tab" type="button" role="tab" aria-selected="false" aria-controls="source-panel" tabindex="-1">Source image</button>
             <button id="structure-tab" type="button" role="tab" aria-selected="false" aria-controls="structure-panel" tabindex="-1">Structure benchmark</button>
           </div>
