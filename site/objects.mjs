@@ -1,3 +1,7 @@
+import rosalindDescriptor from "../src/planets/rosalind/object.json" with { type: "json" };
+import desdemonaDescriptor from "../src/planets/desdemona/object.json" with { type: "json" };
+import cressidaDescriptor from "../src/planets/cressida/object.json" with { type: "json" };
+import biancaDescriptor from "../src/planets/bianca/object.json" with { type: "json" };
 import opheliaDescriptor from "../src/planets/ophelia/object.json" with { type: "json" };
 import cordeliaDescriptor from "../src/planets/cordelia/object.json" with { type: "json" };
 import belindaDescriptor from "../src/planets/belinda/object.json" with { type: "json" };
@@ -85,6 +89,26 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("rosalind", "Rosalind", "satellite", "#a0a0a0", 19.2,
+    "Explore Rosalind, an inner moon of Uranus, through its measured shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(rosalindDescriptor);
+    }, rosalindDescriptor.properties.worldFrame),
+  object("desdemona", "Desdemona", "satellite", "#a0a0a0", 19.2,
+    "Explore Desdemona, an inner moon of Uranus, through its measured shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(desdemonaDescriptor);
+    }, desdemonaDescriptor.properties.worldFrame),
+  object("cressida", "Cressida", "satellite", "#a0a0a0", 19.2,
+    "Explore Cressida, an inner moon of Uranus, through its measured shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(cressidaDescriptor);
+    }, cressidaDescriptor.properties.worldFrame),
+  object("bianca", "Bianca", "satellite", "#a0a0a0", 19.2,
+    "Explore Bianca, an inner moon of Uranus, through its measured shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(biancaDescriptor);
+    }, biancaDescriptor.properties.worldFrame),
   object("ophelia", "Ophelia", "satellite", "#a0a0a0", 19.2,
     "Explore Ophelia, the outer shepherd of Uranus's epsilon ring.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

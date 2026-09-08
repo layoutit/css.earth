@@ -81,7 +81,7 @@ const DAPHNIS_FROM_JD = 2453371.5
 const DAPHNIS_TO_JD = 2458119.5
 const STEP_DAYS = 30
 const DEG = Math.PI / 180
-const RADIAL_FIT_IDS = new Set(['dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia'])
+const RADIAL_FIT_IDS = new Set(['dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia', 'bianca', 'cressida', 'desdemona', 'rosalind'])
 
 // Metis and Adrastea need daily samples: Jupiter's strong J2 makes their
 // osculating mean-motion prediction ambiguous across a five-day sample gap.
@@ -118,6 +118,10 @@ const SATELLITES = [
   ['prometheus', '616', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
   ['pandora', '617', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
   ['pan', '618', '500@699', 'saturn', INNER_SATURN_FROM_JD, INNER_SATURN_TO_JD, 5],
+  ['bianca', '708', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['cressida', '709', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['desdemona', '710', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['rosalind', '713', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['puck', '715', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['portia', '712', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['juliet', '711', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],

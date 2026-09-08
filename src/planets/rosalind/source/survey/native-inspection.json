@@ -1,0 +1,11 @@
+{
+  "opusId": "vg-iss-2-u-c2696148",
+  "imageUrl": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26961XX/C2696148_GEOMED.IMG",
+  "expectedBytes": 2002000,
+  "expectedSha256": "83b55e7848a5f65eab7913218c0a0e32f68df22bc62554dcd359c05ca77040b5",
+  "centerResolutionKmPerNativePixel": 45.93296,
+  "maximumLongDiameterNativePixels": 1.5675018548771948,
+  "surfaceIntercept": null,
+  "inspection": "Actual geometrically corrected calibrated raster and label inspected. Ring/search imagery does not establish a located body surface patch. Finite body-center sampling does not establish that the body intersects the image. No patch or pixel center is inferred.",
+  "disposition": "Excluded from surface mapping. Queries with non-null surface geometry are retained separately; their listed sampling cannot resolve useful terrain."
+}
