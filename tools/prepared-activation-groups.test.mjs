@@ -12,3 +12,12 @@ test('preparation bounds sibling batches without changing retained geometry or s
   assert.deepEqual(groups.flat(), Array.from({ length: 141 }, (_, i) => i + 3).filter(i => i !== 5));
   assert.deepEqual(definition, before);
 });
+
+test('interleaved prepared references form bounded sibling batches, not one frame per leaf', () => {
+  const definition = { tree: { camera: 0, scene: 1, nodes: [{ parent: -1 }, { parent: 0 },
+    { parent: 1 }, { parent: 1 }, ...Array.from({ length: 128 }, (_, i) => ({ parent: 2 + i % 2 }))] }, variants: [] };
+  const groups = prepareActivationGroups(definition);
+  assert.deepEqual(groups.map(group => group.length), [64, 64]);
+  assert.deepEqual(groups[0], Array.from({ length: 64 }, (_, i) => 4 + 2 * i));
+  assert.deepEqual(groups[1], Array.from({ length: 64 }, (_, i) => 5 + 2 * i));
+});

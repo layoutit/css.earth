@@ -91,14 +91,14 @@ export function requireAnimations(value: unknown, tree: PreparedTree, motion = f
     }
   }
 }
-export function requireFacing(value: unknown, tree: PreparedTree): void {
+export function requireFacing(value: unknown, tree: PreparedTree, partitionScenes: readonly number[] = []): void {
   const targets = new Set<number>();
   for (const item of array(value, 'facing planes')) {
     const face = record(item, 'facing plane', ['target', 'plane', 'tolerance']);
     positive(face.tolerance, 'native backface tolerance');
     const target = nodeReference(face.target, tree);
     if ([tree.camera, tree.scene].includes(target) || targets.has(target)) fail('facing target must be a unique prepared leaf');
-    if (!ancestor(target, tree.scene, tree)) fail('facing target must belong to scene');
+    if (![tree.scene, ...partitionScenes].some(scene => ancestor(target, scene, tree))) fail('facing target must belong to scene');
     if (tree.nodes.some(node => node.parent === target)) fail('facing target must be a leaf');
     targets.add(target);
     const plane = array(face.plane, 'facing plane coordinates');

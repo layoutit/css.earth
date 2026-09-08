@@ -406,7 +406,9 @@ async function proveDesktop(browser, planet, profile) {
     await enableMotion(page, planet.id);
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
-        const leaves = [...stage.querySelectorAll(".polycss-scene :is(s,u)")]
+        // All detail leaves belong to the one object camera. Prepared paint
+        // groups need not descend from its reference transform node.
+        const leaves = [...stage.querySelectorAll(":scope > .polycss-camera :is(s,u)")]
           .filter(leaf => getComputedStyle(leaf).backgroundImage !== "none");
         return {
           texturedLeafCount: leaves.length,

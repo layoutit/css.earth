@@ -1,6 +1,7 @@
 import { buildPreparedTree, type PreparedTreeLease } from './prepared-tree.js';
 import { bindPreparedSurfaceHit, type PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
 import { createPreparedFacing, type PreparedFacingPlane } from './prepared-facing.js';
+import { createPreparedDepthPartitions, type PreparedDepthPartitions } from './prepared-depth-partitions.js';
 import type { ObjectSelection } from "../runtime/object-contract.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialDemand } from "./prepared-material.js";
 import type { PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
@@ -45,6 +46,7 @@ export interface PreparedPresentationDefinition {
   /** Authored infinite motion, resolved from source CSS during preparation. */
   motion?: readonly { target: number; id: string; keyframes: { offset: number; transform: string }[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
   facing?: readonly PreparedFacingPlane[];
+  depthPartitions?: PreparedDepthPartitions;
   surfaceHit?: PreparedSurfaceHit;
 }
 export interface PreparedPresentationPlan extends PreparedResourceDemand { required: string[]; prewarm: string[]; materials: Record<string, PreparedMaterialDemand>; pressedLenses: (string | null)[]; navigation?: PreparedSelectionNavigation; }
@@ -124,7 +126,9 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const activate = prepareConnectedActivation(preparedTree && progressiveActivation
     ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own);
   const publishFacing = createPreparedFacing(definition.facing ?? [], nodes);
+  const publishDepth = createPreparedDepthPartitions(definition.depthPartitions, nodes, sceneElement);
   if (initialProjection) publishFacing(initialProjection);
+  if (initialProjection) publishDepth(initialProjection);
   // Disable CSS-owned motion before attachment. Prepared handles below own its
   // clock, pause state and disposal without forcing live style discovery.
   for (const plan of definition.motion ?? []) nodes[plan.target].style.animation = 'none';
@@ -180,6 +184,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       selectionPublications++;
     },
     publishFrame({ selection, view, resources, plan }: PreparedFramePublication) {
+      publishDepth(view.projection);
       publishFacing(view.projection);
       // The camera's published level of detail (a perspective dolly, see
       // perspective-dolly.mjs); before its first publication the geometry

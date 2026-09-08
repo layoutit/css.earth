@@ -602,7 +602,10 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const rank = pickRanks.get(entry)!;
         if (visible && markerOpacity > .1 && !pointSource) {
           const radius = Math.max(2.4, diameter) / 2;
-          pickTargets.push({ element: marker, rank, shape: { kind: 'rect', left: x - radius, top: y - radius, right: x + radius, bottom: y + radius } });
+          // The sprite's transparent square corners are not body pixels. A
+          // large background planet must not steal a foreground surface click
+          // through that empty part of its projected rectangle.
+          pickTargets.push({ element: marker, rank, shape: { kind: 'circle', x, y, radius } });
         }
         indicator.style.visibility = entry.indicatorShown ? '' : 'hidden';
         indicator.style.setProperty('--context-line-width', `${lineWidth}px`);
