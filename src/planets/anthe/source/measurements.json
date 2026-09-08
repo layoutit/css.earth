@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+  "citation": "NASA/JPL nominal size estimate",
+  "semiAxesKm": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "semiAxesUncertaintyKm": null,
+  "referenceRadiusKm": 0.5,
+  "sizeInterpretation": "Nominal estimate; shape unresolved",
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery."
+}

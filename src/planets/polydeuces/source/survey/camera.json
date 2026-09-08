@@ -1,0 +1,23 @@
+{
+  "source": "https://arxiv.org/abs/1912.09192",
+  "table": "Table 7, N1527002576",
+  "method": "Published observer, illumination, north azimuth and center; 5.992 microradian NAC pixel angle. Camera center is retained in published detector coordinates; a one-native-pixel inset plus 55 degree emission/incidence limits withholds uncertain limb samples.",
+  "frame": {
+    "id": "n1527002576",
+    "path": "observations/N1527002576_1_CALIB.IMG",
+    "labelPath": "observations/N1527002576_1_CALIB.LBL",
+    "observerLatitude": -0.51,
+    "observerWestLongitude": 282.09,
+    "sunLatitude": -17.38,
+    "sunWestLongitude": 272.34,
+    "rangeKm": 64087.42,
+    "northAzimuthDegrees": 359.92,
+    "center": [
+      524.1,
+      511.2
+    ],
+    "pixelAngleMicroradians": 5.992,
+    "backgroundMaximum": 0.03,
+    "coverageInsetPixels": 1
+  }
+}

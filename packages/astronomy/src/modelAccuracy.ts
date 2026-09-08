@@ -62,6 +62,9 @@ const VSOP_THEORY_DISCREPANCY_KM: Record<Vsop87BodyKey, number> = {
  * statistical uncertainties.
  */
 const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
+  polydeuces: 939.7293216478489,
+  anthe: 2029.4157931053912,
+  aegaeon: 306.9010577737413,
   bianca: 62.38429913291977,
   cressida: 31.167287112096254,
   desdemona: 99.17274979901151,

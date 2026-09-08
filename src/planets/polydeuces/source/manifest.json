@@ -1,0 +1,246 @@
+{
+  "schema": "csspolydeuces-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "measured-ellipsoid",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 59703,
+      "expectedSha256": "529125f91d71589dda0a4ae68991fc1dace4448dd3bf768bcb13015d19fd053b",
+      "origin": "https://arxiv.org/abs/1912.09192",
+      "credit": "Hedman et al. (2020), Table 1 and Appendix B; cssEarth standard grid",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://arxiv.org/abs/1912.09192"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Ellipsoidal approximation to measured 3.5 × 3.1 × 2.62 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1525.973578806757
+      }
+    },
+    {
+      "id": "cassini-n1527002576",
+      "path": "observations/N1527002576_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "30e586a1594776e581f559be522b2a93643753ad2c5a909350e723f1cd7396c1",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "NASA/PDS scientific data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/PolicyOnUseOfPDSSourcedMaterials.txt"
+      ],
+      "acquisition": "Pinned original PDS download in preparation/acquisition.json.",
+      "redistribution": "Attribute NASA/JPL-Caltech/SSI and the PDS archive. No endorsement.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "coverage": "Original CISSCAL 4.0beta I/F,1024×1024; mapped only within authored illumination and pointing validity.",
+      "width": 1024,
+      "height": 1024,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "survey/camera.json",
+        "referenceRadiusMeters": 1525.973578806757
+      },
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false
+    },
+    {
+      "id": "cassini-n1527002576-label",
+      "path": "observations/N1527002576_1_CALIB.LBL",
+      "expectedBytes": 3858,
+      "expectedSha256": "e97f2e076e4d3e41d9197c51ad4c52ad08f18165d2185404440a5e30914e5555",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL",
+      "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "NASA/PDS scientific data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/documents/policy/PolicyOnUseOfPDSSourcedMaterials.txt"
+      ],
+      "acquisition": "Pinned original PDS download in preparation/acquisition.json.",
+      "redistribution": "Attribute NASA/JPL-Caltech/SSI and the PDS archive. No endorsement.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "coverage": "Original detached PDS label describing calibration, exposure and instrument.",
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "survey/camera.json",
+        "referenceRadiusMeters": 1525.973578806757
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3809,
+      "expectedSha256": "b8b943dd692d115745ebaf75cd5559106c54762baef64f2712b186e6fd6db85b",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 902,
+      "expectedSha256": "ec7178eadcc0a056d0b56acac3e41a4254b3258559aa60d823e4825fcd988c58",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "observations/N1527002576_1.IMG",
+      "expectedBytes": 2127944,
+      "expectedSha256": "5052d1c5f20c840e61f94c751f2969415edcee28283f2ce11acd7ef4bb5c1f00",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "observations/N1527002576_1.LBL",
+      "expectedBytes": 3667,
+      "expectedSha256": "0de76b3cd905ea76c8100273e8845f8db7313d91c92431e405ad57b21660349d",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1570,
+      "expectedSha256": "56a1fb471caf23b514d1174a5596f70800494641e78cfc59a6e7ee8a2bdd3c4a",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1345,
+      "expectedSha256": "7ee818de7746acb2f55cae516e33372b03cabbd260389e320e8faeaa68b8c04f",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 441,
+      "expectedSha256": "0d5aee87b41eff1a6e6c53ad82fd2d5583fd92abe89d58ad8502c6812a67650b",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3442,
+      "expectedSha256": "a31131344012812cd5d5daf52621c631acbedde8fd111811207729b011116e11",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5936,
+      "expectedSha256": "23d5f1acedf85a02bfc4132cf21ebdb0e84f6bac62436de3748c9353515a70bd",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 853,
+      "expectedSha256": "2742782683473f7c509b3347e73dabf8a4b814d1b066391589f0b3570539da04",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/camera.json",
+      "expectedBytes": 841,
+      "expectedSha256": "bab0a8113ddf6442621a18ec4ca0968ef155c721edad6b2a3cce24cee3a98de9",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/native-inspection.json",
+      "expectedBytes": 1576,
+      "expectedSha256": "560245b59f65a4c7e7e1149c249d206da08fb7e51393015ebfc669bf6908495d",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "survey/opus.json",
+      "expectedBytes": 1213,
+      "expectedSha256": "71b1e934394a09e04ac17c47b972adab9d76f1d1828631793a401cce9a780913",
+      "purpose": "Scientific source and authored preparation evidence."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://arxiv.org/abs/1912.09192",
+      "credit": "Hedman et al. (2020), Table 1 and Appendix B; cssEarth standard grid",
+      "license": "MIT display representation from published scientific measurements; retain source citation.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "measured-ellipsoid",
+          "cassini-n1527002576",
+          "cassini-n1527002576-label"
+        ],
+        "size": 512,
+        "longitudeDegrees": 77.91,
+        "latitudeDegrees": -0.51,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 76826,
+      "expectedSha256": "2759bf95149c135394e46cbc0dde99f793a93a98048c2cfe41297b60f78fc97b"
+    }
+  ]
+}
