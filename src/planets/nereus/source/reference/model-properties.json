@@ -1,0 +1,69 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf",
+  "diameterKm": 0.33,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 15.16,
+  "poleEclipticJ2000Degrees": [
+    25,
+    80
+  ],
+  "limitations": "The archived filename contains alt1, but its measured 0.510 × 0.330 × 0.241 km extents identify the paper’s preferred smaller-volume model. Its polar dimension is weakly constrained; a thicker alternative fits comparably. The selected pole is within a 10° uncertainty radius and the period is 15.16 ± 0.04 h. No resolved optical surface map is supplied.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/Nereus_alt1.mod.wf",
+    "vertices": 1148,
+    "faces": 2292,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.116031
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      0.510205,
+      0.330351,
+      0.241219
+    ],
+    "volumeCubicKm": 0.019401719790329626,
+    "volumeEquivalentRadiusKm": 0.16669293993325285,
+    "radialRangeKm": [
+      0.11597504544081887,
+      0.256398
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 2292,
+    "ambiguous": 0,
+    "maxErrorMeters": 1.4210854715202004e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2292,
+    "sourceVertices": 1148,
+    "weldedVertices": 1148,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 3,
+    "estimatedErrorMeters": 2.8152058124542236,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 19346514.866425797
+    }
+  }
+}
