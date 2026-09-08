@@ -96,7 +96,7 @@ html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; 
   padding: 2px;
   box-shadow: none;
   border-radius: 0;
-  background: url("/navigation/sun-indicator-hexagon.png") center / 100% 100% no-repeat;
+  background: url("/navigation/sun-indicator-heptagon.png") center / 100% 100% no-repeat;
 }
 
 .prepared-world-context [data-context-group][data-object-hovered="true"] > [data-context-indicator="sun"] {

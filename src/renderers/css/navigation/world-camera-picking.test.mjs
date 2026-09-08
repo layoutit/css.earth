@@ -84,7 +84,7 @@ function fixture(hitTest = () => false, detailOccludes) {
   const target = new Surface();
   target.dataset.objectNavigate = 'venus'; target.style.pointerEvents = 'auto';
   target.click = () => { selections++; document.addEventListener('pointerdown', () => interrupted++); };
-  return { controls, publications, document, window, target, surface, registry,
+  return { controls, publications, document, window, target, surface, registry, host,
     get selections() { return selections; }, get interrupted() { return interrupted; },
     fire(type, time, data = {}) { now = time; surface.dispatchEvent(new Pointer(type, data)); },
     tick(time) { now = time; const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback(time)); },
@@ -191,6 +191,8 @@ test('blank clicks after the native double-click interval are not swallowed', ()
 
 test('hover uses the same retained target as picking and restores the input cursor', () => {
   const f = fixture(() => true);
+  const hoverChanges = [];
+  f.host.addEventListener('objecthoverchange', () => hoverChanges.push(f.target.dataset.objectHovered));
   f.document.targets = [f.target];
   f.fire('pointermove', 0, { buttons: 0 }); f.tick(1);
   assert.equal(f.target.dataset.objectHovered, 'true');
@@ -200,6 +202,7 @@ test('hover uses the same retained target as picking and restores the input curs
   f.fire('pointermove', 10, { buttons: 0 }); f.tick(11);
   assert.equal(f.target.dataset.objectHovered, undefined);
   assert.equal(cursor(f.surface), 'grab');
+  assert.deepEqual(hoverChanges, ['true', undefined]);
   f.document.targets = [f.target];
   f.target.ariaDisabled = 'true';
   f.fire('pointermove', 20, { buttons: 0 }); f.tick(21);
