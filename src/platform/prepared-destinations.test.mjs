@@ -95,3 +95,22 @@ test("compatible observation navigation retains its selection and the root keeps
   assert.deepEqual(changes, ["country", "city", null]); assert.equal(f.destinations.state(), null);
   f.lifetime.destroy();
 });
+
+for (const operation of ['select', 'reset']) for (const phase of ['ready', 'lens']) {
+  test(`restoration cancels ${operation} while awaiting ${phase} without publishing or moving`, async () => {
+    let release;
+    const gate = new Promise(resolve => { release = resolve; });
+    const changes = [], controller = new AbortController();
+    const f = fixture({ ready: phase === 'ready' ? gate : Promise.resolve(),
+      selectLens: async () => { if (phase === 'lens') await gate; return true; },
+      onChange: entity => changes.push(entity), reset: () => { f.calls.push('reset'); } });
+    try {
+      const options = { signal: controller.signal };
+      const pending = operation === 'select' ? f.destinations.select({ id: 'city', camera: {} }, options) : f.destinations.reset(options);
+      const rejected = assert.rejects(pending, { name: 'AbortError' });
+      await Promise.resolve(); controller.abort(); release(); await rejected;
+      assert.equal(f.destinations.state(), null);
+      assert.deepEqual(changes, []); assert.deepEqual(f.calls, []);
+    } finally { f.lifetime.destroy(); }
+  });
+}

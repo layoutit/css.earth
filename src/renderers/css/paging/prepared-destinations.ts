@@ -22,23 +22,26 @@ export function createPreparedDestinations({ plan, ready, lifetime, selectLens, 
   const assertLive = () => { if (lifetime.disposed) throw new Error('Object was unmounted.'); };
   const store = createStore({ catalog: plan.catalog, signal: controller.signal });
   let selected: DestinationEntity | null = null, revision = 0;
+  const assertCurrent = (request: number, signal?: AbortSignal) => {
+    assertLive(); signal?.throwIfAborted();
+    if (request !== revision) throw new Error('Destination selection was superseded.');
+  };
   return Object.freeze({
     state: () => selected, resolve: store.resolve, search: store.search, stats: store.stats,
-    async select(place: DestinationEntity, { navigate: fly = true } = {}) {
+    async select(place: DestinationEntity, { navigate: fly = true, signal }: { navigate?: boolean; signal?: AbortSignal } = {}) {
       const request = ++revision;
-      await ready; assertLive();
+      await ready; assertCurrent(request, signal);
       if (!retainLens(place) && !await selectLens(plan.defaultLens)) throw new Error('Destination selection was superseded.');
-      assertLive();
-      if (request !== revision) throw new Error('Destination selection was superseded.');
+      assertCurrent(request, signal);
       selected = place; onChange(place);
       return { status: place.status ?? (place.coverage === 'detail' ? plan.statuses.detail : plan.statuses.overview),
         arrival: fly ? navigate(place.camera) : null };
     },
-    async reset({ navigate: fly = true } = {}) {
+    async reset({ navigate: fly = true, signal }: { navigate?: boolean; signal?: AbortSignal } = {}) {
       const request = ++revision;
-      await ready; assertLive();
+      await ready; assertCurrent(request, signal);
       if (!retainLens(plan.rootEntity) && !await selectLens(plan.defaultLens) || request !== revision) return false;
-      assertLive(); selected = null; onChange(null);
+      assertCurrent(request, signal); selected = null; onChange(null);
       return { arrival: fly ? reset() : null };
     },
   });

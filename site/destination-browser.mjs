@@ -16,13 +16,24 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
   let selectionRevision = 0, route = null, unsubscribe = null;
   const introductions = createEntityIntroductionSource();
   let introductionRequest = null;
-  function loadIntroduction(place, request) {
+  function loadIntroduction(place) {
     introductionRequest?.abort(); introductionRequest = new AbortController();
+    const controller = introductionRequest;
     card.introductionLoading();
     introductions.load(place.identifiers, AbortSignal.any([events.signal, introductionRequest.signal]))
       .catch(() => null).then(content => {
-        if (!destroyed && selection === place && request === selectionRevision) card.showIntroduction(content);
+        if (!destroyed && !controller.signal.aborted && selection === place) card.showIntroduction(content);
       });
+  }
+
+  function cancelPendingSelection() {
+    selectionRevision++;
+    detailRequest?.abort();
+    selecting = false;
+    panel.ariaBusy = "false";
+    status.hidden = true;
+    status.textContent = "";
+    for (const button of buttons) button.disabled = false;
   }
 
   function clearRows() {
@@ -67,16 +78,17 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
     if (destroyed || !provider || !place) return;
     const request = ++selectionRevision;
     detailRequest?.abort(); detailRequest = new AbortController();
+    const signal = AbortSignal.any([events.signal, detailRequest.signal]);
     selecting = true;
     for (const button of buttons) button.disabled = true;
     hint.textContent = `Opening ${place.name}…`;
     panel.ariaBusy = "true";
     try {
-      const resolved = await provider.resolve(place.id, AbortSignal.any([events.signal, detailRequest.signal]));
+      const resolved = await provider.resolve(place.id, signal);
       if (destroyed || request !== selectionRevision) return;
       if (!resolved) throw new Error("Unknown destination.");
       place = resolved.entity;
-      const result = await provider.select(place, options);
+      const result = await provider.select(place, { ...options, signal });
       if (destroyed || request !== selectionRevision) return;
       selection = place;
       card.show(place, id => resolved.ancestors.find(entity => entity.id === id));
@@ -87,7 +99,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
       panel.hidden = false;
       onSelected(place);
       route?.write();
-      loadIntroduction(place, request);
+      loadIntroduction(place);
       result.arrival?.then(({ completed }) => {
         if (destroyed || selection !== place || request !== selectionRevision) return;
         // The new entity entry exists now, including with reduced motion.
@@ -110,10 +122,11 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
   async function selectRoot(options) {
     if (!provider) return;
     const request = ++selectionRevision;
-    detailRequest?.abort();
+    detailRequest?.abort(); detailRequest = new AbortController();
+    const signal = AbortSignal.any([events.signal, detailRequest.signal]);
     selecting = true;
     try {
-      const result = await provider.reset(options);
+      const result = await provider.reset({ ...options, signal });
       if (destroyed || request !== selectionRevision || result === false) return;
       selection = null;
       introductionRequest?.abort();
@@ -122,7 +135,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
       result.arrival?.then(() => {
         if (!destroyed && selection === null && request === selectionRevision) provider.saveView?.();
       });
-    } catch { if (!destroyed) status.textContent = "Could not open the parent. Try again."; }
+    } catch { if (!destroyed && request === selectionRevision) status.textContent = "Could not open the parent. Try again."; }
     finally { if (request === selectionRevision) { selecting = false; for (const button of buttons) button.disabled = false; } }
   }
   return Object.freeze({
@@ -137,6 +150,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
       clearRows();
       if (!provider) { root.hidden = true; return; }
       route = createEntityRoute({ windowTarget: documentTarget.defaultView, rootId: card.initial.id,
+        onRestore: cancelPendingSelection,
         restoreView: provider.restoreView, writeUrl: provider.writeRoute, listenHistory: provider.listenHistory ?? true,
         read: () => ({ entityId: selection?.id ?? card.initial.id, lensId: provider.lens().id,
           defaultLens: card.initial.lensIds[0] }),
@@ -146,6 +160,7 @@ export function createDestinationBrowser({ documentTarget, card, onSelected, onR
             if (id === card.initial.id) { if (selection) await selectRoot(options); }
             else if (selection?.id !== id) {
               await select({ id, name: "place" }, options);
+              if (!live()) return;
               if (selection?.id !== id) { status.hidden = false; status.textContent = "This place is unavailable in the current catalogue."; return; }
             }
             if (!live()) return;
