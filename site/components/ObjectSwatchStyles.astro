@@ -16,7 +16,7 @@ const styles = OBJECTS.flatMap(({ id }) => {
   return [`${group} { --shell-text: ${hex}; }`];
 }).join('\n');
 const majorBodyLabelStyles = OBJECTS
-  .filter(({ id, classification }) => id === 'sun' || classification === 'planet')
+  .filter(({ classification }) => classification === 'star' || classification === 'planet')
   .map(({ id }) => `.prepared-world-context [data-context-label="${id}"] { text-transform: uppercase; }`)
   .join('\n');
 const dwarfOrbitStyles = OBJECTS
