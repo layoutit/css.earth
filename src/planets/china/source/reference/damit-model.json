@@ -1,0 +1,82 @@
+{
+  "modelId": 1119,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1119",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4104/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/1119/spin.txt",
+  "modelVersion": "2016-01-04",
+  "lambda": 305,
+  "beta": -49,
+  "periodHours": 5.36863,
+  "nonconvex": false,
+  "sourceMesh": {
+    "vertices": 1021,
+    "triangles": 2038,
+    "signedVolumeSourceUnitsCubed": 0.999999694504531,
+    "volumeEquivalentDiameterSourceUnits": 1.2407008554559444,
+    "boundaryOrNonManifoldEdges": 0,
+    "inconsistentOrientedEdges": 0,
+    "minimumOriginFacingNormalDotSourcePoint": -3.792915567851556e-9,
+    "boundsSourceUnits": [
+      [
+        -0.768752,
+        0.842502
+      ],
+      [
+        -0.587207,
+        0.630437
+      ],
+      [
+        -0.557906,
+        0.664907
+      ]
+    ],
+    "originFacingAnomalies": [
+      {
+        "faceIndex": 1723,
+        "indices": [
+          553,
+          555,
+          554
+        ],
+        "originNormalDot": -3.792915567851556e-9,
+        "areaSourceUnitsSquared": 3.0759590779083624e-9,
+        "vertices": [
+          [
+            0.106668,
+            -0.567956,
+            -0.254554
+          ],
+          [
+            0.116174,
+            -0.565506,
+            -0.259373
+          ],
+          [
+            0.116165,
+            -0.565508,
+            -0.259369
+          ]
+        ]
+      }
+    ],
+    "sourceCoordinatesUnmodified": true,
+    "method": "Independent oriented tetrahedron signed-volume sum over original DAMIT facet list; closed consistently wound two-manifold; origin-facing facet normal anomalies reported separately."
+  },
+  "poleAlternatives": [
+    {
+      "modelId": 1120,
+      "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1120",
+      "lambda": 132,
+      "beta": -46,
+      "periodHours": 5.36863,
+      "epochJd": 2450873,
+      "phaseDegrees": 0,
+      "modelVersion": "2016-01-04",
+      "qualityFlag": ""
+    }
+  ],
+  "selectionReason": "Refreshed all current DAMIT search matches; none has a published calibrated diameter. Retain the lower-id published pole solution without claiming it resolves pole ambiguity.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/161"
+  ]
+}

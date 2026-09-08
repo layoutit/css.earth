@@ -1,0 +1,88 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1144",
+  "modelId": 1144,
+  "modelVersion": "2016-01-04",
+  "diameterKm": 66.5,
+  "diameterInterpretation": "Convex light-curve shape with published thermophysical size calibration: 66.5 ± 0.9 km equivalent diameter. The nominal archived pole differs by 1° from the varied-model fit. Grid marks unavailable surface imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 66.5,
+    "uncertaintyKm": 0.9,
+    "uncertaintyKind": "Reported symmetric VS-TPM uncertainty including varied shape/spin ensemble; not complete shape measurement accuracy",
+    "diameterSemantics": "Volume-equivalent diameter from Hanuš et al. 2018 Table A.3, fit of WISE thermal observations using varied convex shape models from Hanuš et al.2016b",
+    "scaleKmPerSourceUnit": 53.59873207342996,
+    "metersPerSourceUnit": 53598.73207342996,
+    "sourceUrl": "https://arxiv.org/pdf/1803.06116",
+    "reference": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus309,297–337, Table A.3; doi:10.1016/j.icarus.2018.03.016",
+    "publishedPoleEclipticDegrees": [
+      233,
+      49
+    ],
+    "publishedPeriodHours": 18.1191,
+    "limitations": "The displayed nominal DAMIT2016 model has beta50°, while the varied-shape thermophysical table reports beta49° and rounded period18.1191h. This transfer uses the same published shape/pole family, not identical thermophysical ensemble mesh bytes. Only a uniform physical scale is transferred; no thermal terrain or measured albedo map is added.",
+    "visibleDescription": "Convex light-curve shape with published thermophysical size calibration: 66.5 ± 0.9 km equivalent diameter. The nominal archived pole differs by 1° from the varied-model fit. Grid marks unavailable surface imagery; rotational phase is illustrative.",
+    "sourceLabel": "Hanuš et al. (2018), Table A.3"
+  },
+  "periodHours": 18.11914,
+  "poleEclipticJ2000Degrees": [
+    233,
+    50
+  ],
+  "modelLimitations": "The displayed nominal DAMIT2016 model has beta50°, while the varied-shape thermophysical table reports beta49° and rounded period18.1191h. This transfer uses the same published shape/pole family, not identical thermophysical ensemble mesh bytes. Only a uniform physical scale is transferred; no thermal terrain or measured albedo map is added.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/4173/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "unit-volume coordinates",
+    "metersPerUnit": 53598.73207342996,
+    "firstVertexKm": [
+      0.8758032820798455,
+      11.54607806706206,
+      30.660565096552798
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      72.32768342311651,
+      74.95364610359006,
+      60.36701916346648
+    ],
+    "volumeCubicKm": 153979.73157840664,
+    "volumeEquivalentRadiusKm": 33.24999999999998,
+    "radialRangeKm": [
+      27.90545735214586,
+      39.205416875339964
+    ]
+  },
+  "elevation": [
+    -6,
+    6
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 665,
+    "estimatedErrorMeters": 306.03216552734375,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 153681510170434.28
+    }
+  }
+}

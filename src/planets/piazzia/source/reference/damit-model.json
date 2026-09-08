@@ -1,0 +1,31 @@
+{
+  "modelId": 3529,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3529",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/11107/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/11105/IAUspin.txt",
+  "modelVersion": "2019-05-07",
+  "lambda": 131,
+  "beta": -54,
+  "periodHours": 9.47747,
+  "nonconvex": false,
+  "mesh": {
+    "vertices": 574,
+    "faces": 1144,
+    "signedVolumeSourceUnitsCubed": 1.0000000513709053,
+    "volumeEquivalentDiameterSourceUnits": 1.2407010030441106,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      1.336587,
+      1.560978,
+      1.1035469999999998
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 57113.27424758791,
+    "physicalRadiusKm": 23.89
+  },
+  "alternativeModels": [],
+  "selectionReason": "Selected first archived solution from the latest available same-body model set; alternate pole solutions remain equally plausible where published. No unique-pole claim.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/182"
+  ]
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27588%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               588 Achilles (A906 DN)          2026-Sep-08 10:25:34
+Rec #:     588 (+COV) Soln.date: 2026-Jun-05_03:47:59   # obs: 5742 (1906-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458537.5 ! 2019-Feb-23.00 (TDB)         Residual RMS= .19466
+   EC= .1465182198937547   QR= 4.446071789655483   TP= 2460067.1130823842
+   OM= 316.5354753300796   W=  133.3854752238013   IN= 10.31917888526383
+   A= 5.209334157200187    MA= 233.2020189612681   ADIST= 5.972596524744891
+   PER= 11.88999           N= .082895461           ANGMOM= .038838295
+   DAN= 5.66795            DDN= 4.63138            L= 90.3875668
+   B= 7.4802043            MOID= 3.47346997        TP= 2023-May-02.6130823842
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 65.0495            ROTPER= 7.306
+   H= 8.2                  G= .150                 B-V= .755
+                           ALBEDO= .043            STYP= DU
+
+ASTEROID comments: 
+1: soln ref.= JPL#117, OCC=0
+2: source=ORB
+*******************************************************************************

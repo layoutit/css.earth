@@ -1,0 +1,87 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5856",
+  "modelId": 5856,
+  "modelVersion": "2019-10-23",
+  "diameterKm": 21.82,
+  "diameterInterpretation": "Approximate scale from a thermal diameter of 21.82 ± 1.4 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects.",
+  "calibration": {
+    "diameterKm": 21.82,
+    "quotedUncertaintyKm": 1.4,
+    "quantity": "mean radiometric diameter from IRAS flux-based albedo and H",
+    "reference": "IRAS-A-FPA-3-RDR-IMPS-V6.0",
+    "notes": "Quoted 1σ uncertainty derives solely from IRAS flux precision (original label DIAM_UNC). It does not encompass shape/thermal-model/H systematic uncertainty.",
+    "basis": "effective spherical radiometric diameter applied as approximate volume-equivalent size",
+    "assumption": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty.",
+    "methodSystematicFraction": null,
+    "referenceUrl": "https://doi.org/10.26033/pf3k-m168",
+    "uncertaintyKm": 1.4,
+    "scaleKmPerSourceUnit": 17.58683261934102,
+    "sourceUrl": "https://doi.org/10.26033/pf3k-m168",
+    "sourceLabel": "IRAS-A-FPA-3-RDR-IMPS-V6.0",
+    "diameterSemantics": "mean radiometric diameter from IRAS flux-based albedo and H",
+    "limitations": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty. Quoted 1σ uncertainty derives solely from IRAS flux precision (original label DIAM_UNC). It does not encompass shape/thermal-model/H systematic uncertainty.",
+    "visibleDescription": "Approximate scale from a thermal diameter of 21.82 ± 1.4 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects."
+  },
+  "periodHours": 4.6224,
+  "poleEclipticJ2000Degrees": [
+    301,
+    -10
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/62392/shape.txt",
+    "vertices": 562,
+    "faces": 1120,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 17586.83261934102,
+    "firstVertexKm": [
+      -0.8242420843706557,
+      2.8079136960039874,
+      9.765405374876249
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      23.986452380695166,
+      29.573261498881227,
+      19.973453739948695
+    ],
+    "volumeCubicKm": 5439.548596574,
+    "volumeEquivalentRadiusKm": 10.910000000000004,
+    "radialRangeKm": [
+      8.69048685104602,
+      16.076293743757684
+    ]
+  },
+  "elevation": [
+    -3,
+    6
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1120,
+    "sourceVertices": 562,
+    "weldedVertices": 562,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 218.20000000000002,
+    "estimatedErrorMeters": 16.816314697265625,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 5439189683575.685
+    }
+  }
+}

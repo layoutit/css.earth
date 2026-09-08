@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%278888%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              8888 Tartaglia (1994 NT1)        2026-Sep-08 10:26:15
+Rec #:    8888 (+COV) Soln.date: 2026-Jun-05_11:46:54   # obs: 4466 (1980-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458210.5 ! 2018-Apr-02.00 (TDB)         Residual RMS= .24793
+   EC= .09400750891730736  QR= 2.454470642826984   TP= 2458781.7644585297
+   OM= 124.8697319329522   W=  45.91306974966441   IN= 14.10227156159238
+   A= 2.709151198255304    MA= 233.732548999254    ADIST= 2.963831753683623
+   PER= 4.45921            N= .221031519           ANGMOM= .028188406
+   DAN= 2.52036            DDN= 2.87313            L= 169.9062988
+   B= 10.0793933           MOID= 1.48400998        TP= 2019-Oct-25.2644585297
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 6.792              ROTPER= 7.22237
+   H= 13.31                G= .150                 B-V= n.a.
+                           ALBEDO= .052            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#59, OCC=0
+2: source=ORB
+*******************************************************************************

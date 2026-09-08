@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%276000%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS            6000 United Nations (1987 UN)      2026-Sep-08 10:26:14
+Rec #:    6000 (+COV) Soln.date: 2026-Jun-05_09:44:38  # obs: 11035 (1974-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458490.5 ! 2019-Jan-07.00 (TDB)         Residual RMS= .21934
+   EC= .1862537260700158   QR= 2.116066550374636   TP= 2457753.0146435862
+   OM= 52.16250873658525   W=  315.8561337640223   IN= 14.41376177850604
+   A= 2.600400908940697    MA= 173.339289251927    ADIST= 3.084735267506757
+   PER= 4.19342            N= .235040991           ANGMOM= .027254292
+   DAN= 2.21425            DDN= 2.89745            L= 8.9338751
+   B= -9.9835355           MOID= 1.13997996        TP= 2016-Dec-30.5146435862
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 5.5                ROTPER= 3.262
+   H= 12.17                G= .150                 B-V= n.a.
+                           ALBEDO= .211            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#77, OCC=0
+2: source=ORB
+*******************************************************************************

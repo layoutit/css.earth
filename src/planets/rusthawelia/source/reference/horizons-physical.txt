@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271171%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS             1171 Rusthawelia (1930 TA)        2026-Sep-08 10:26:00
+Rec #:    1171 (+COV) Soln.date: 2026-Mar-11_22:46:04  # obs: 11247 (1904-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458344.5 ! 2018-Aug-14.00 (TDB)         Residual RMS= .22363
+   EC= .1922011768572049   QR= 2.57239886226713    TP= 2459266.3344594045
+   OM= 121.6216912405612   W=  291.085668411934    IN= 3.07727791178722
+   A= 3.184454827823394    MA= 200.1162324927463   ADIST= 3.796510793379659
+   PER= 5.68278            N= .173440867           ANGMOM= .030124883
+   DAN= 2.86847            DDN= 3.29463            L= 52.7351274
+   B= -2.8710555           MOID= 1.58448005        TP= 2021-Feb-20.8344594045
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 41.1145            ROTPER= 10.98
+   H= 10.02                G= .150                 B-V= .678
+                           ALBEDO= .029            STYP= P
+
+ASTEROID comments: 
+1: soln ref.= JPL#78, OCC=0
+2: source=ORB
+*******************************************************************************

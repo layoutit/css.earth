@@ -1,0 +1,6 @@
+asteroid_number,prov_desig,comet_desig,mpc_packed_name,absolute_mag,slope_param,mean_jd,n_w1,n_w2,n_w3,n_w4,fit_code,diameter,diameter_err,v_albedo,v_albedo_err,ir_albedo,ir_albedo_err,beaming_param,beaming_param_err,stacked_flag,reference,notes,reference2,type,cntr
+1171,,,01171,9.9000,0.1500,2455245.2073430,12,13,13,13,DVBI,67.9860,1.0910,0.0420,0.0070,0.0610,0.0050,0.8930,0.0420,,Mas14,,MASIEROETAL2014,mainbelt,3969
+1171,,,01171,9.9000,0.1500,2457306.3147976,14,14,0,0,DV--,72.3960,20.3990,0.0400,0.0100,0.0590,0.0250,0.9500,0.2000,,Nug16,,NUGENTETAL2016,mainbelt or mars crossers,165684
+1171,,,01171,9.9000,0.1500,2455539.7254510,10,10,0,0,DV-I,82.2290,1.0040,0.0290,0.0030,0.0460,0.0090,1.0000,0.2000,,Mas12,,MASIEROETAL2012,mainbelt,143137
+1171,,,01171,9.9000,0.1500,2456995.9878454,8,8,0,0,DV--,68.6740,16.7090,0.0430,0.0210,0.0650,0.0550,0.9500,0.2000,,Nug15,,NUGENTETAL2015,mainbelt or mars crossers,156800
+1171,,,01171,9.9000,0.1500,2456818.5080840,7,7,0,0,DV--,71.6060,22.3990,0.0400,0.0500,0.0610,0.1220,0.9500,0.2000,,Nug15,,NUGENTETAL2015,mainbelt or mars crossers,156801

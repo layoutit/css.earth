@@ -1,0 +1,83 @@
+{
+  "modelId": 1189,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1189",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4308/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4306/IAUspin.txt",
+  "version": "2016-01-04",
+  "lambda": 88,
+  "beta": -52,
+  "periodHours": 13.10977,
+  "nonconvex": false,
+  "calibrated": false,
+  "sourceFields": {
+    "ID": "1189",
+    "Asteroid ID": "(26) Proserpina",
+    "Lambda": "88",
+    "Beta": "-52",
+    "Period": "13.10977",
+    "YORP": "",
+    "JD0": "2438803",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "1.18",
+    "LSM Parameter 3": "0.16",
+    "LSM Parameter 4": "-0",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "0 (No)",
+    "Equivalent Diameter": "",
+    "Equivalent Diameter Error": "",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": ""
+  },
+  "originalVolume": 1.0000002492354696,
+  "originalSignedVolume": 1.0000002492354696,
+  "originalVolumeEquivalentDiameter": 1.2407010848743554,
+  "originalUnits": "dimensionless DAMIT source units; uncalibrated model",
+  "vertices": 1022,
+  "faces": 2040,
+  "extentsSourceUnits": [
+    [
+      -0.648488,
+      0.736719
+    ],
+    [
+      -0.714304,
+      0.703785
+    ],
+    [
+      -0.51109,
+      0.52733
+    ]
+  ],
+  "radialRangeSourceUnits": [
+    0.4860087328382074,
+    0.7770681030295865
+  ],
+  "firstVertexSourceUnits": [
+    -0.112063,
+    0.223624,
+    0.513633
+  ],
+  "firstFaceZeroBased": [
+    0,
+    1,
+    2
+  ],
+  "alternatives": [],
+  "selectionReason": "Original full convex model and its observed spin solution retained.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/161"
+  ]
+}

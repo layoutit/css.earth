@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271235%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               1235 Schorria (1931 UJ)         2026-Sep-08 10:26:02
+Rec #:    1235 (+COV) Soln.date: 2025-Oct-31_15:59:38   # obs: 8126 (1931-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458457.5 ! 2018-Dec-05.00 (TDB)         Residual RMS= .22226
+   EC= .1548266430469114   QR= 1.614511087821776   TP= 2458510.0469761798
+   OM= 12.95443028374717   W=  43.79725463996744   IN= 24.99895622819163
+   A= 1.910272105171661    MA= 340.3840677629336   ADIST= 2.206033122521545
+   PER= 2.64029            N= .373302779           ANGMOM= .023488774
+   DAN= 1.67706            DDN= 2.09906            L= 53.9464405
+   B= 17.0068661           MOID= .66046202         TP= 2019-Jan-26.5469761798
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= n.a.               ROTPER= 1265.
+   H= 13.27                G= .150                 B-V= .750
+                           ALBEDO= n.a.            STYP= CX:
+
+ASTEROID comments: 
+1: soln ref.= JPL#56, OCC=0
+2: source=ORB
+*******************************************************************************

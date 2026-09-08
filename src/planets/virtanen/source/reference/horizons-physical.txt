@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271449%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               1449 Virtanen (1938 DO)         2026-Sep-08 10:26:05
+Rec #:    1449 (+COV) Soln.date: 2026-Jun-05_05:29:35   # obs: 6518 (1928-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458338.5 ! 2018-Aug-08.00 (TDB)         Residual RMS= .23124
+   EC= .1418948246524736   QR= 1.907163243154192   TP= 2458238.5399202011
+   OM= 110.7634828959319   W=  132.0358242941619   IN= 6.641861391855554
+   A= 2.222528540725564    MA= 29.73443208057182   ADIST= 2.537893838296936
+   PER= 3.31344            N= .297463069           ANGMOM= .025385658
+   DAN= 2.40642            DDN= 1.98882            L= 242.9912584
+   B= 4.9281183            MOID= .90099102         TP= 2018-Apr-30.0399202011
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 4.6315             ROTPER= 30.495
+   H= 12.09                G= .150                 B-V= n.a.
+                           ALBEDO= .285            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#80, OCC=0
+2: source=ORB
+*******************************************************************************
