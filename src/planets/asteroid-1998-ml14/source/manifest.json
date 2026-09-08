@@ -22,7 +22,7 @@
       "id": "asteroid-1998-ml14-shape",
       "path": "shape/ml14.obj",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/ml14.obj",
-      "credit": "Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225\u20131236; Goldstone, Arecibo and NASA/JPL",
+      "credit": "Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
@@ -64,7 +64,7 @@
       "id": "asteroid-1998-ml14-research-ml14",
       "path": "reference/ml14.pdf",
       "origin": "https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf",
-      "credit": "Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225\u20131236; Goldstone, Arecibo and NASA/JPL",
+      "credit": "Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
       "license": "Original scientific article; source publisher copyright retained.",
       "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
@@ -79,7 +79,7 @@
       "id": "asteroid-1998-ml14-warner-2014",
       "path": "reference/warner-2014.pdf",
       "origin": "https://mpbulletin.org/issues/MPB_41-2.pdf",
-      "credit": "Brian D. Warner (2014), Minor Planet Bulletin41,113\u2013124",
+      "credit": "Brian D. Warner (2014), Minor Planet Bulletin41,113–124",
       "license": "Original scientific publication; publisher copyright retained.",
       "acquisition": "Restore original public PDF unchanged from pinned URL.",
       "redistribution": "Restoration reference only; no article pages are runtime assets.",
@@ -96,7 +96,7 @@
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/ml14.obj",
-      "credit": "Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225\u20131236; Goldstone, Arecibo and NASA/JPL",
+      "credit": "Ostro et al. (2001), Meteoritics & Planetary Science 36, 1225–1236; Goldstone, Arecibo and NASA/JPL",
       "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
       "consumers": [
         "navigation"
@@ -122,8 +122,8 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 10624,
-      "expectedSha256": "eab257502ba5ec42ad0b8975c2ae357c1dd7fad9df1487e6f1a4f42985f03b59"
+      "expectedBytes": 10659,
+      "expectedSha256": "56d8b8537d9e304836bab69f801daa3ba7147595bda491c404d38cff9f568e3a"
     },
     {
       "path": "preparation/acquisition.json",
