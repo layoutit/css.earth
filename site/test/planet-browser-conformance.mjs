@@ -18,6 +18,7 @@ import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mjs"
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const requestedId = process.argv[3] ?? null;
 const densityOnly = process.env.CSSEARTH_DENSITY_ONLY === "1";
+const requestedCases = new Set((process.env.CSSEARTH_CONFORMANCE_CASES ?? "").split(",").filter(Boolean));
 const CASE_TIMEOUT_MS = 120_000;
 const REQUEST_START_TIMEOUT_MS = 30_000;
 const evidenceDirectory = process.env.CSSEARTH_CONFORMANCE_OUTPUT
@@ -71,6 +72,7 @@ try {
 }
 
 async function runCase(planet, name, prove) {
+  if (requestedCases.size && !requestedCases.has(name)) return { id: planet.id, case: name, skipped: true };
   const label = `${planet.id}/${name}`;
   const startedAt = performance.now();
   console.error(`[conformance] START ${label}`);
