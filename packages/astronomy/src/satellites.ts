@@ -57,10 +57,26 @@ const toIcrf = (record: SatelliteRecord, v: Vec3): Vec3 => {
   ]
 }
 
+// Evaluate the prepared phase correction and its derivative together so the
+// position and velocity paths remain consistent.
+function elementsAtEpoch(record: SatelliteRecord, epochJdTt: number): KeplerianElements {
+  const elements = record.elements as KeplerianElements;
+  if (!record.longitudeHarmonics?.length) return elements;
+  let phase = 0, rate = 0;
+  for (const h of record.longitudeHarmonics) {
+    const angle = h.rateRadPerDay * (epochJdTt - h.epochJdTt);
+    phase += h.cosineRad * Math.cos(angle) + h.sineRad * Math.sin(angle);
+    rate += h.rateRadPerDay * (-h.cosineRad * Math.sin(angle) + h.sineRad * Math.cos(angle));
+  }
+  return { ...elements,
+    meanAnomalyAtEpochRad: elements.meanAnomalyAtEpochRad + phase - rate * (epochJdTt - elements.epochJdTt),
+    meanMotionRadPerDay: elements.meanMotionRadPerDay + rate };
+}
+
 /** Position of a moon relative to its planet's centre, in km, on ICRF axes. */
 export const satellitePositionKm = (id: SatelliteId, epochJdTt: number): Vec3 => {
   const record = satelliteRecord(id)
-  const position = toIcrf(record, keplerStateKm(record.elements as KeplerianElements, epochJdTt).positionKm)
+  const position = toIcrf(record, keplerStateKm(elementsAtEpoch(record, epochJdTt), epochJdTt).positionKm)
   const companion = barycentreCompanion(record)
   if (!companion) return position
   const offset = satellitePositionKm(companion.id, epochJdTt)
@@ -83,7 +99,7 @@ export const satelliteStateKm = (
   epochJdTt: number,
 ): { readonly positionKm: Vec3; readonly velocityKmPerDay: Vec3 } => {
   const record = satelliteRecord(id)
-  const state = keplerStateKm(record.elements as KeplerianElements, epochJdTt)
+  const state = keplerStateKm(elementsAtEpoch(record, epochJdTt), epochJdTt)
   const positionKm = toIcrf(record, state.positionKm), velocityKmPerDay = toIcrf(record, state.velocityKmPerDay)
   const companion = barycentreCompanion(record)
   if (!companion) return { positionKm, velocityKmPerDay }

@@ -1,0 +1,66 @@
+{
+  "query": "https://opus.pds-rings.seti.org/opus/api/data.json?planet=Saturn&mission=Cassini&cols=opusid%2CSURFACEGEOpolydeuces_centerresolution1%2CSURFACEGEOpolydeuces_centerphaseangle1&order=SURFACEGEOpolydeuces_centerresolution1&limit=100&SURFACEGEOpolydeuces_centerresolution1=0",
+  "available": 7345,
+  "candidates": [
+    [
+      "co-iss-n1813127275",
+      "0.20858",
+      "121.239"
+    ],
+    [
+      "co-iss-n1813127323",
+      "0.2086",
+      "121.641"
+    ],
+    [
+      "co-iss-n1813127393",
+      "0.20865",
+      "122.293"
+    ],
+    [
+      "co-iss-n1813127463",
+      "0.20874",
+      "122.943"
+    ],
+    [
+      "co-iss-n1813127522",
+      "0.20885",
+      "123.527"
+    ],
+    [
+      "co-iss-n1813127555",
+      "0.20892",
+      "123.839"
+    ],
+    [
+      "co-iss-n1813125704",
+      "0.21726",
+      "106.657"
+    ],
+    [
+      "co-iss-n1813125560",
+      "0.21889",
+      "105.395"
+    ],
+    [
+      "co-iss-n1813125527",
+      "0.21929",
+      "105.1"
+    ],
+    [
+      "co-iss-n1813125494",
+      "0.21969",
+      "104.817"
+    ],
+    [
+      "co-iss-n1813125461",
+      "0.2201",
+      "104.53"
+    ],
+    [
+      "co-iss-n1813129075",
+      "0.2206",
+      "136.778"
+    ]
+  ]
+}

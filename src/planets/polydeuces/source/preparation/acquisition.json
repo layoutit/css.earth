@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1527002576_1_CALIB.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1527002576_1_CALIB.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1527002576_1.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1527002576_1.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1.LBL"
+    }
+  ]
+}
