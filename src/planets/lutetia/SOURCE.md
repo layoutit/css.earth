@@ -4,7 +4,7 @@ The selected [PDS Rosetta Lutetia shape release](https://pdssbn.astro.umd.edu/ho
 
 ## Views and source interpretation
 
-**Shape** uses a uniform neutral display material over the released geometry. It is not a photographic texture, measured albedo, natural color or a claim about small-scale surface brightness. Prepared directional lighting exposes the model's relief. Shadows defaults on; switching it off shows the unlit neutral material.
+**Shape** uses the shared no-imagery grid over the released geometry. It is not a photographic texture, measured albedo, natural color or a claim about small-scale surface brightness. Prepared directional lighting exposes the model's relief. Shadows defaults on; switching it off shows the unlit grid.
 
 **Elevation** colors source radius minus a 49 km reference sphere, in kilometers, from −16 to +16 km. This includes the body's broad irregular shape; it is not height above a gravitational equipotential. The original mesh is sampled on a 721×361 angular grid for this display; that interpolation does not add source measurements. Cartographic relief uses this same scalar field, with a 49,000 m reference radius. Mesh geometry and the scalar map use the same published body frame.
 
@@ -38,6 +38,6 @@ The shared strict `vrml-mesh` reader consumes the original IndexedFaceSet direct
 
 Meshoptimizer 1.2.0 uses ErrorAbsolute and RegularizeLight, with an authored 1,200 m allowance and a 968.252 m library estimate. Independent source/result ray intersections in 8,192 Fibonacci equal-area directions had zero misses; mean/p95/p99/maximum radial deviations were **255.658/650.965/869.988/1453.051 m**. The sampled maximum is larger than the regularized library estimate. Neither is an exhaustive surface-distance bound or a statement of source measurement accuracy. Detailed source topology and fit results are retained in the local qualification output.
 
-Every displayed face is a native PolyCSS `u` raster triangle with a 128 px cell. Existing preparation owns sampling, atlases, lighting, stable leaves, shape targeting, title outlines and marker imagery. The runtime consumes prepared state. Context/navigation use the same 800-face mesh and neutral shape map at 0°E, 35°N, full-phase ambient 0.45 plus diffuse 0.55; these are display choices, not a flyby observation.
+Every displayed face is a native PolyCSS `u` raster triangle with a 128 px cell. Existing preparation owns sampling, atlases, lighting, stable leaves, shape targeting, title outlines and marker imagery. The runtime consumes prepared state. Context/navigation use the same 800-face mesh and shared grid at 0°E, 35°N, full-phase ambient 0.45 plus diffuse 0.55; these are display choices, not a flyby observation.
 
 Restore input pins with `node tools/objects/dist/operations.js acquire lutetia`; verify using `acquire lutetia --verify-only`; prepare using `node tools/objects/dist/prepare-authored.js lutetia --write`. The source mesh, ESO panorama and Inter font each have a direct acquisition operation; source documentation, HYG subset, title outlines and generated context are checked-in pins. Runtime installation uses the separate `runtime-assets.json` inventory.

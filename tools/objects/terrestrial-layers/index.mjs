@@ -53,8 +53,8 @@ export function parseTerrestrialProfile(value) {
   }
   for (const view of value.raster.shapeViews ?? []) {
     if (!/^[a-z][a-z0-9-]*$/.test(view.id) || typeof view.label !== 'string' || !view.label.trim() ||
-        !/^[a-z][a-z0-9-]*$/.test(view.consumer) || !/^#[0-9a-f]{6}$/i.test(view.color) ||
-        !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and an explicit display color.');
+        !/^[a-z][a-z0-9-]*$/.test(view.consumer) ||
+        !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and a source consumer.');
   }
   for (const lens of value.raster.scientific ?? []) {
     const meshGrid = ['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh'].includes(lens.format);
