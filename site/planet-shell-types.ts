@@ -58,6 +58,7 @@ interface Lens {
   thumbnailUrl: string;
   texture?: { url: string; width: number; height: number; minimap?: unknown; attribution?: { label: string; url?: string } };
   description: string;
+  facts?: Fact[];
   title: string;
   legend?: {
     kind: "scale" | "categories";

@@ -1566,7 +1566,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-facts li {
     display: grid;
-    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) minmax(0, 55%);
+    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) fit-content(55%);
     align-items: baseline;
     gap: 8px;
     width: 100%;
@@ -1891,7 +1891,7 @@ details:not([open]) > .planet-panel-summary:focus-visible .planet-panel-heading 
 
   .planet-facts li {
     display: grid;
-    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) minmax(0, 55%);
+    grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) fit-content(55%);
     align-items: baseline;
     gap: 8px;
     width: 100%;

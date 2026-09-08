@@ -28,7 +28,216 @@
         }
       }
     ],
-    "scientific": [],
+    "scientific": [
+      {
+        "id": "albedo",
+        "label": "Albedo",
+        "consumer": "virtis-science",
+        "path": "science/al01_glb_m006_m006_v01.tab",
+        "labelPath": "science/al01_glb_m006_m006_v01.lbl",
+        "format": "pds3-scalar-map",
+        "datasetId": "RO-C-VIRTIS-5-67P-MAPS-V1.0",
+        "productId": "AL01_GLB_M006_M006_V01.LBL",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "stepDegrees": 0.5,
+          "noData": -1,
+          "frame": "cheops-planetocentric-east-positive",
+          "latitudeFirst": 90,
+          "latitudeStep": -0.5
+        },
+        "sampling": "nearest",
+        "sourceUnits": "fraction",
+        "displayUnits": "Fraction",
+        "valueTransform": {
+          "scale": 1,
+          "offset": 0
+        },
+        "minimum": 0,
+        "maximum": 0.1,
+        "colors": [
+          "#201c3e",
+          "#414b7c",
+          "#287d8e",
+          "#57b5a1",
+          "#dfe7a2"
+        ],
+        "surfaceSampling": {
+          "method": "unique-radial-map",
+          "maximumDistanceMeters": 50,
+          "ambiguityReference": {
+            "path": "science/cg_spc_shap5_097k_cart.wrl",
+            "format": "vrml-mesh",
+            "grid": {
+              "expectedVertices": 48420,
+              "expectedFaces": 96834,
+              "metersPerUnit": 1000
+            }
+          }
+        },
+        "sourceValidRange": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "slope",
+        "label": "Spectral slope",
+        "consumer": "virtis-science",
+        "path": "science/sl01_glb_m006_m006_v01.tab",
+        "labelPath": "science/sl01_glb_m006_m006_v01.lbl",
+        "format": "pds3-scalar-map",
+        "datasetId": "RO-C-VIRTIS-5-67P-MAPS-V1.0",
+        "productId": "SL01_GLB_M006_M006_V01.LBL",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "stepDegrees": 0.5,
+          "noData": -1,
+          "frame": "cheops-planetocentric-east-positive",
+          "latitudeFirst": 90,
+          "latitudeStep": -0.5
+        },
+        "sampling": "nearest",
+        "sourceUnits": "nm^-1",
+        "displayUnits": "% / 100 nm",
+        "valueTransform": {
+          "scale": 10000,
+          "offset": 0
+        },
+        "minimum": 0,
+        "maximum": 30,
+        "colors": [
+          "#153e68",
+          "#2c82a0",
+          "#c1c7a0",
+          "#d69258",
+          "#922f39"
+        ],
+        "surfaceSampling": {
+          "method": "unique-radial-map",
+          "maximumDistanceMeters": 50,
+          "ambiguityReference": {
+            "path": "science/cg_spc_shap5_097k_cart.wrl",
+            "format": "vrml-mesh",
+            "grid": {
+              "expectedVertices": 48420,
+              "expectedFaces": 96834,
+              "metersPerUnit": 1000
+            }
+          }
+        }
+      },
+      {
+        "id": "absorption",
+        "label": "3.2 µm absorption",
+        "consumer": "virtis-science",
+        "path": "science/bd01_glb_m006_m006_v01.tab",
+        "labelPath": "science/bd01_glb_m006_m006_v01.lbl",
+        "format": "pds3-scalar-map",
+        "datasetId": "RO-C-VIRTIS-5-67P-MAPS-V1.0",
+        "productId": "BD01_GLB_M006_M006_V01.LBL",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "stepDegrees": 0.5,
+          "noData": -1,
+          "frame": "cheops-planetocentric-east-positive",
+          "latitudeFirst": 90,
+          "latitudeStep": -0.5
+        },
+        "sampling": "nearest",
+        "sourceUnits": "fraction",
+        "displayUnits": "%",
+        "valueTransform": {
+          "scale": 100,
+          "offset": 0
+        },
+        "minimum": 0,
+        "maximum": 25,
+        "colors": [
+          "#242540",
+          "#515990",
+          "#558da5",
+          "#9fc9bf",
+          "#f0e5a9"
+        ],
+        "surfaceSampling": {
+          "method": "unique-radial-map",
+          "maximumDistanceMeters": 50,
+          "ambiguityReference": {
+            "path": "science/cg_spc_shap5_097k_cart.wrl",
+            "format": "vrml-mesh",
+            "grid": {
+              "expectedVertices": 48420,
+              "expectedFaces": 96834,
+              "metersPerUnit": 1000
+            }
+          }
+        },
+        "sourceValidRange": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "ice",
+        "label": "Modeled ice",
+        "consumer": "virtis-science",
+        "path": "science/wi01_glb_m006_m006_v01.tab",
+        "labelPath": "science/wi01_glb_m006_m006_v01.lbl",
+        "format": "pds3-scalar-map",
+        "datasetId": "RO-C-VIRTIS-5-67P-MAPS-V1.0",
+        "productId": "WI01_GLB_M006_M006_V01.LBL",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "stepDegrees": 0.5,
+          "noData": -1,
+          "frame": "cheops-planetocentric-east-positive",
+          "latitudeFirst": -90,
+          "latitudeStep": 0.5
+        },
+        "sampling": "nearest",
+        "sourceUnits": "fraction",
+        "displayUnits": "%",
+        "valueTransform": {
+          "scale": 100,
+          "offset": 0
+        },
+        "minimum": 0,
+        "maximum": 1.5,
+        "colors": [
+          "#292b35",
+          "#455076",
+          "#508da5",
+          "#97d1d2",
+          "#eff9e6"
+        ],
+        "surfaceSampling": {
+          "method": "unique-radial-map",
+          "maximumDistanceMeters": 50,
+          "ambiguityReference": {
+            "path": "science/cg_spc_shap5_097k_cart.wrl",
+            "format": "vrml-mesh",
+            "grid": {
+              "expectedVertices": 48420,
+              "expectedFaces": 96834,
+              "metersPerUnit": 1000
+            }
+          }
+        },
+        "sourceValidRange": [
+          0,
+          1
+        ]
+      }
+    ],
     "observedColors": [],
     "mosaics": [],
     "surfaceObservations": [

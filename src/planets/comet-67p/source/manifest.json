@@ -266,6 +266,279 @@
       "height": 2048,
       "observationDate": "2014-08-06T05:20:22.894",
       "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+    },
+    {
+      "id": "virtis-format",
+      "path": "science/ro_virtis_map_eaicd.asc",
+      "expectedBytes": 27355,
+      "expectedSha256": "a7356044e9fa7223e2a220d1a8e897d32547e4949b6c00b99bf9f25008a34ade",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/document/ro_virtis_map_eaicd.asc",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ]
+    },
+    {
+      "id": "virtis-bibliography",
+      "path": "science/ref.cat",
+      "expectedBytes": 181360,
+      "expectedSha256": "598c5c08fd21f649b7e9a80042a65529d8cde466dee91e1e4fdd479abf4e236a",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/catalog/ref.cat",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ]
+    },
+    {
+      "id": "virtis-shap5-info-asc",
+      "path": "science/shap5-info.asc",
+      "expectedBytes": 12960,
+      "expectedSha256": "4de22f4cda1a240a6b4af466189ac6af51f4ad110661db57c60a2abf4b7d2116",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/SHAP5_MODEL_INFO.ASC",
+      "credit": "ESA/Rosetta; LAM/PSI SPC SHAP5 team; Jorda et al.",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Published ESA PSA reference mesh used only for ambiguity masking; retain shape archive and team attribution.",
+      "consumers": [
+        "virtis-science"
+      ]
+    },
+    {
+      "id": "virtis-cg_spc_shap5_097k_cart-lbl",
+      "path": "science/cg_spc_shap5_097k_cart.lbl",
+      "expectedBytes": 11760,
+      "expectedSha256": "0818a92b1e10e01af3ff0bf746cad0dc4cb1f999e1c1cfd165eae8d698f8efbf",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_LAM_PSI/SHAP5/CG_SPC_SHAP5_097K_CART.LBL",
+      "credit": "ESA/Rosetta; LAM/PSI SPC SHAP5 team; Jorda et al.",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Published ESA PSA reference mesh used only for ambiguity masking; retain shape archive and team attribution.",
+      "consumers": [
+        "virtis-science"
+      ]
+    },
+    {
+      "id": "virtis-cg_spc_shap5_097k_cart-wrl",
+      "path": "science/cg_spc_shap5_097k_cart.wrl",
+      "expectedBytes": 11912468,
+      "expectedSha256": "330e975fc3f263a15efce021733a7d35388e23c3b5a9c142434802aee2941d76",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_LAM_PSI/SHAP5/CG_SPC_SHAP5_097K_CART.WRL",
+      "credit": "ESA/Rosetta; LAM/PSI SPC SHAP5 team; Jorda et al.",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Published ESA PSA reference mesh used only for ambiguity masking; retain shape archive and team attribution.",
+      "consumers": [
+        "virtis-science"
+      ]
+    },
+    {
+      "id": "virtis-albedo",
+      "path": "science/al01_glb_m006_m006_v01.tab",
+      "expectedBytes": 8035200,
+      "expectedSha256": "e5a4ec5aa28af5210a5746f82f23bf253bd1b6eefd0a36434e462ecc575d2def",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/al01_glb_m006_m006_v01.tab",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ],
+      "lensId": "albedo",
+      "label": "Albedo",
+      "falseColor": true,
+      "width": 720,
+      "height": 360,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "frame": "Cheops",
+        "coordinateType": "planetocentric",
+        "stepDegrees": 0.5
+      },
+      "coverage": "Single-scattering albedo describes particle scattering at 550 nm; it is not geometric albedo or a photograph. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors."
+    },
+    {
+      "id": "virtis-albedo-label",
+      "path": "science/al01_glb_m006_m006_v01.lbl",
+      "expectedBytes": 2712,
+      "expectedSha256": "f3b349a479810dcb2dfdaafa0c9690b70c0ab0757199c92899e58d6343a2bbfe",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/al01_glb_m006_m006_v01.lbl",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ]
+    },
+    {
+      "id": "virtis-slope",
+      "path": "science/sl01_glb_m006_m006_v01.tab",
+      "expectedBytes": 8035200,
+      "expectedSha256": "689efa4371d0b4d9f16ce1bc72b94c8c98aaf99488a7d6ce27e4d946724c11b1",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/sl01_glb_m006_m006_v01.tab",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ],
+      "lensId": "slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 720,
+      "height": 360,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "frame": "Cheops",
+        "coordinateType": "planetocentric",
+        "stepDegrees": 0.5
+      },
+      "coverage": "Visible reflectance slope, normalized at 550 nm. Redder colors indicate a steeper red spectrum, not a mineral abundance. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors."
+    },
+    {
+      "id": "virtis-slope-label",
+      "path": "science/sl01_glb_m006_m006_v01.lbl",
+      "expectedBytes": 2741,
+      "expectedSha256": "2ab9fa68ed07c78712cffade0cbc11c29a68acaa3e432ce6fd15d6dd01d442d0",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/sl01_glb_m006_m006_v01.lbl",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ]
+    },
+    {
+      "id": "virtis-absorption",
+      "path": "science/bd01_glb_m006_m006_v01.tab",
+      "expectedBytes": 8035200,
+      "expectedSha256": "00b78b5c28765f16b63999697f3e0f8a3878e21fdbd84d5b47f649681a5e0437",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/bd01_glb_m006_m006_v01.tab",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ],
+      "lensId": "absorption",
+      "label": "3.2 µm absorption",
+      "falseColor": true,
+      "width": 720,
+      "height": 360,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "frame": "Cheops",
+        "coordinateType": "planetocentric",
+        "stepDegrees": 0.5
+      },
+      "coverage": "Depth of the broad 3.2 µm absorption feature relative to its continuum. This is not a direct organic-abundance map. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors."
+    },
+    {
+      "id": "virtis-absorption-label",
+      "path": "science/bd01_glb_m006_m006_v01.lbl",
+      "expectedBytes": 2679,
+      "expectedSha256": "e03cc1ff23f15de2a0c3867a60843f74f7dc0aa7ed87bbb8e13c47241d317041",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/bd01_glb_m006_m006_v01.lbl",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ]
+    },
+    {
+      "id": "virtis-ice",
+      "path": "science/wi01_glb_m006_m006_v01.tab",
+      "expectedBytes": 8035200,
+      "expectedSha256": "24236aa2032d17f829d24e2eddf2e628e1ee824beee48b999223d276da7c9965",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/wi01_glb_m006_m006_v01.tab",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ],
+      "lensId": "ice",
+      "label": "Modeled ice",
+      "falseColor": true,
+      "width": 720,
+      "height": 360,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "frame": "Cheops",
+        "coordinateType": "planetocentric",
+        "stepDegrees": 0.5
+      },
+      "coverage": "Water-ice optical cross-section fraction from an intimate-mixture model with dark terrain and fitted micrometer grains. Zero is valid. This is not bulk ice content; localized ice patches can violate the mixture model. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors."
+    },
+    {
+      "id": "virtis-ice-label",
+      "path": "science/wi01_glb_m006_m006_v01.lbl",
+      "expectedBytes": 2687,
+      "expectedSha256": "7c29cb35ee5281d36a10d6970d28a6206ee7a4ffe5f1e121d6dba5daaec2b09a",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/wi01_glb_m006_m006_v01.lbl",
+      "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
+      "license": "ESA PSA public scientific-data release; retain archive and team attribution",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/08/03/first-release-of-rosetta-comet-phase-data-from-four-orbiter-instruments/"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
+      "consumers": [
+        "virtis-science"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -304,14 +577,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5832,
-      "expectedSha256": "362c4d24204b843dd0e4e8d8cc5b6c3ba21d1d5b461d88af78d9bdfa89f53819",
+      "expectedBytes": 12568,
+      "expectedSha256": "e33972e37428e6cf6ff97dc627e1ce187e221d5fa5c3d1fa2652cc9aa0305612",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3207,
-      "expectedSha256": "fcd7c57b9cc7fcd5e2197e396b2199de229bba0697a01f1e09b5e446f5013340",
+      "expectedBytes": 6749,
+      "expectedSha256": "10c5270efc55d3a588b761ad1af26f340196efd0f95825c37a73cf0b6ab732ea",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
@@ -328,8 +601,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5914,
-      "expectedSha256": "46a30d040bdbae22bce989513e267d8bce3bb1f6f1b2fa56d2e7d143149ff592",
+      "expectedBytes": 11848,
+      "expectedSha256": "afe13551de45e19607f48a60f7bffa25ecc93d1cceab1bbf02ebe89741aa6d93",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
