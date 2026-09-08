@@ -7,8 +7,10 @@ import {chromium} from 'playwright';
 import {serveBuiltFixture} from '../../../../tools/test-built-server.mjs';
 import {prepareLocationPoint} from '../../../../tools/objects/geographic-pages/prepare-location.mjs';
 import {parseSharedView} from '../../../../src/renderers/css/dist/index.js';
-const {values}=parseArgs({options:{built:{type:'string'},output:{type:'string'},dpr:{type:'string',default:'1'},place:{type:'string',default:'buenos-aires'},restore:{type:'boolean',default:false}}});
+import {WHEEL_ZOOM_SPEED_MULTIPLIER} from '../../../../site/runtime-policy.mjs';
+const {values}=parseArgs({options:{built:{type:'string'},output:{type:'string'},dpr:{type:'string',default:'1'},place:{type:'string',default:'buenos-aires'},restore:{type:'boolean',default:false},input:{type:'string',default:'pinch'}}});
 assert.ok(values.built,'--built is required');
+assert.ok(['pinch','wheel'].includes(values.input));
 const dpr=Number(values.dpr);assert.ok([1,2].includes(dpr));
 const storyId=values.place;
 const story={
@@ -60,9 +62,22 @@ try{
  const x=before.bounds.x+before.bounds.width/2,y=before.bounds.y+before.bounds.height/2;
  assert.ok(await page.evaluate(({x,y})=>Boolean(document.elementFromPoint(x,y)?.closest('.planet-input-surface')),{x,y}));
  const touchPoints=span=>[1,2].map((id,i)=>({id,x:x+(i?1:-1)*span/2,y,radiusX:4,radiusY:4,force:1}));
- await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:touchPoints(120)});await pause(100);
- for(let step=1;step<=20;step++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:touchPoints(120+24*step/20)});await pause(30)}
- await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await pause(500);await capture('after-pinch');
+ report.input=values.input;
+ if(values.input==='wheel'){
+  const plan=JSON.parse(await readFile('src/planets/earth/prepared/runtime.json'));
+  const total=-Math.log(1.2)/(plan.camera.dolly.wheelStepPerDelta*WHEEL_ZOOM_SPEED_MULTIPLIER);
+  await page.evaluate(()=>{window.__surfaceWheels=[];addEventListener('wheel',e=>window.__surfaceWheels.push({deltaY:e.deltaY,trusted:e.isTrusted}),{passive:true})});
+  await page.mouse.move(x,y);
+  for(let step=0;step<20;step++){await page.mouse.wheel(0,total*dpr/20);await pause(30)}
+  report.wheelEvents=await page.evaluate(()=>window.__surfaceWheels);
+  assert.ok(report.wheelEvents.every(e=>e.trusted));
+  assert.ok(Math.abs(report.wheelEvents.reduce((sum,e)=>sum+e.deltaY,0)-total)<1e-5,'Delivered wheel deltas must match the calibrated gesture');
+ }else{
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:touchPoints(120)});await pause(100);
+  for(let step=1;step<=20;step++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:touchPoints(120+24*step/20)});await pause(30)}
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+ }
+ await pause(500);await capture('after-zoom');
  const [dragX,dragY]=report.states[1].projected[0].screen;
  await page.mouse.move(dragX,dragY);await page.mouse.down();for(let step=1;step<=20;step++){await page.mouse.move(dragX+100*step/20,dragY);await pause(30)}await pause(140);await page.mouse.up();await pause(300);await capture('after-drag');
  await page.screenshot({path:resolve(output,'after.png')});
