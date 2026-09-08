@@ -1,6 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape} from './obj-shape.mjs';
+import {loadObjShape, loadPdsPlateShape, loadPdsVertexFacetShape,loadPdsRadiusTable} from './obj-shape.mjs';
 
 const rad = Math.PI / 180;
 const dot = (a,b) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
@@ -17,11 +17,17 @@ export function decodeCalibratedCamera(bytes) {
   const field = name => text.match(new RegExp(`(?:^|\\s)${name}=(?:'([^']*)'|([^\\s]+))`))?.slice(1).find(v=>v!==undefined);
   const n = name => Number(field(name));
   const width=n('NS'),height=n('NL'),record=n('RECSIZE'),offset=n('LBLSIZE')+n('NLB')*record;
-  if (field('FORMAT')!=='REAL'||field('ORG')!=='BSQ'||n('NB')!==1||n('NBB')!==0||
-      !['RIEEE','IEEE'].includes(field('REALFMT')) || ![width,height,record,offset].every(v=>Number.isSafeInteger(v)&&v>0)||
-      record!==width*4 || offset+height*record>bytes.length || n('LBLSIZE')>bytes.length || n('NLB')<0) throw new Error('Unsupported calibrated VICAR layout.');
-  const data=new Float32Array(width*height), little=field('REALFMT')==='RIEEE';
-  for(let i=0;i<data.length;i++)data[i]=little?bytes.readFloatLE(offset+4*i):bytes.readFloatBE(offset+4*i);
+  const half=field('FORMAT')==='HALF', size=half?2:4;
+  // Voyager FICOR77 stores signed integers with an explicit I/F multiplier.
+  // The VAX REALFMT field is irrelevant for HALF samples; INTFMT owns them.
+  const scale=half?Number(text.match(/FOR \(I\/F\)\*10000\., MULTIPLY DN VALUE BY\s+([\d.E+-]+)/)?.[1])*1e-4:1;
+  if ((!half&&field('FORMAT')!=='REAL')||field('ORG')!=='BSQ'||n('NB')!==1||n('NBB')!==0||
+      !(scale>0)||!(half?['LOW','HIGH'].includes(field('INTFMT')):['RIEEE','IEEE'].includes(field('REALFMT'))) ||
+      ![width,height,record,offset].every(v=>Number.isSafeInteger(v)&&v>0)||
+      record!==width*size || offset+height*record>bytes.length || n('LBLSIZE')>bytes.length || n('NLB')<0) throw new Error('Unsupported calibrated VICAR layout.');
+  const data=new Float32Array(width*height), little=half?field('INTFMT')==='LOW':field('REALFMT')==='RIEEE';
+  for(let i=0;i<data.length;i++)data[i]=(half?(little?bytes.readInt16LE(offset+2*i):bytes.readInt16BE(offset+2*i)):
+    (little?bytes.readFloatLE(offset+4*i):bytes.readFloatBE(offset+4*i)))*scale;
   return {data,width,height,offset};
 }
 
@@ -95,7 +101,7 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
   const paths=new Set(entries.map(e=>e.path));
   for(const f of recipe.frames)if(!paths.has(f.path)||!paths.has(f.labelPath))throw new Error(`Unpinned camera input: ${f.id}`);
   if(paths.size!==new Set(recipe.frames.flatMap(f=>[f.path,f.labelPath])).size)throw new Error('Unconsumed camera input.');
-  const load=shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
+  const load=shape.format==='pds-radius-table'?loadPdsRadiusTable:shape.format==='pds-plate-model'?loadPdsPlateShape:shape.format==='pds-vertex-facet'?loadPdsVertexFacetShape:loadObjShape;
   const mesh=await load(resolve(sourceDirectory,shape.path),shape.grid),normalAt=smoothNormals(mesh);
   const points=new Float64Array(width*height*3),normals=new Float32Array(points.length),valid=new Uint8Array(width*height);
   for(let y=0;y<height;y++)for(let x=0;x<width;x++){
@@ -108,6 +114,10 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
   // Coarse coverage first; finer images replace only their reliable interior.
   for(const frame of [...recipe.frames].sort((a,b)=>b.rangeKm-a.rangeKm)){
     const image=decodeCalibratedCamera(await readFile(resolve(sourceDirectory,frame.path))),camera=controlledShapeCamera(frame);
+    if(frame.backgroundOffset!==undefined){
+      if(!Number.isFinite(frame.backgroundOffset))throw new Error('Invalid measured camera background offset.');
+      for(let i=0;i<image.data.length;i++)image.data[i]-=frame.backgroundOffset;
+    }
     maskBackground(image,frame.backgroundMaximum??p.backgroundMaximum);
     const entry=entries.find(e=>e.path===frame.path);
     if(entry.width!==image.width||entry.height!==image.height)throw new Error(`Camera dimensions differ from pinned metadata: ${frame.id}`);

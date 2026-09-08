@@ -28,6 +28,18 @@ export const SOLAR_GEOMETRY_EPOCH_LABEL = "2026-09-04T00:00:00 TT";
 export const ASTRONOMICAL_UNIT_KILOMETERS = 149597870.7;
 
 export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
+  // subsolar latitude -19.092°, longitude 131.480°
+  proteus: Object.freeze([
+    -0.6259243386476214,
+    0.7079814400478038,
+    -0.3270795053750318,
+  ]),
+  // subsolar latitude -19.172°, longitude -92.586°
+  larissa: Object.freeze([
+    -0.04261523088323752,
+    -0.943574740975903,
+    -0.32840622754300197,
+  ]),
   // subsolar latitude -7.233°, longitude 59.154°
   daphnis: Object.freeze([
     0.5086562498523666,
@@ -337,6 +349,18 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
 });
 
 export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
+  // pole tilt to the ecliptic 28.962°, Sun ecliptic latitude 1.370°
+  proteus: Object.freeze([
+    0.04945026852785883,
+    0.4817011739029695,
+    0.8749392264626291,
+  ]),
+  // pole tilt to the ecliptic 28.605°, Sun ecliptic latitude 1.369°
+  larissa: Object.freeze([
+    -0.36089620000525874,
+    -0.31459326503335217,
+    0.8779436259905412,
+  ]),
   // pole tilt to the ecliptic 28.050°, Sun ecliptic latitude 2.418°
   daphnis: Object.freeze([
     -0.3020659567491942,
@@ -648,6 +672,18 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
 // The orbit lies in the plane perpendicular to this direction; every
 // direction from the body to another point of its orbit does too.
 export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
+  // orbital inclination to the ecliptic 29.266°, obliquity to the orbit 0.312°
+  proteus: Object.freeze([
+    0.0007001905769155048,
+    -0.005394565475722368,
+    0.9999852040887826,
+  ]),
+  // orbital inclination to the ecliptic 28.566°, obliquity to the orbit 0.053°
+  larissa: Object.freeze([
+    -0.00008526182600238075,
+    -0.0009291226854770407,
+    0.9999995647306336,
+  ]),
   // orbital inclination to the ecliptic 28.051°, obliquity to the orbit 0.002°
   daphnis: Object.freeze([
     -0.000006071874023926005,
@@ -960,6 +996,18 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
 // the epoch, perpendicular to the orbit normal but not to the Sun direction
 // (the flight-path angle is the orbit's eccentricity showing).
 export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
+  // flight-path angle 0.007°
+  proteus: Object.freeze([
+    0.04994625700494368,
+    -0.9987371849461639,
+    -0.0054228052710831864,
+  ]),
+  // flight-path angle 0.030°
+  larissa: Object.freeze([
+    0.15697833831462266,
+    -0.9876016320802595,
+    -0.0009042192143911415,
+  ]),
   // flight-path angle 0.000°
   daphnis: Object.freeze([
     -0.2858227690547567,
@@ -1272,6 +1320,18 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
 // (prime meridian), +Y and +Z (north pole) axes in ICRF, so an ICRF direction
 // is the matrix times a body-fixed direction and the transpose goes back.
 export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
+  // pole RA 299.410°, Dec 42.451°, prime meridian W 29.651°
+  proteus: Object.freeze([
+    0.5930954681939742, -0.7189976346492982, 0.3623260506456647,
+    0.7176295161533349, 0.26805371670017464, -0.6427714076627499,
+    0.36502827719685094, 0.6412406773840356, 0.6749553692761932,
+  ]),
+  // pole RA 299.765°, Dec 42.959°, prime meridian W 253.281°
+  larissa: Object.freeze([
+    0.07429665866511637, 0.9286969368241675, 0.36332080320923993,
+    -0.7093734427256512, 0.3052850438558987, -0.6352876204944178,
+    -0.7009060744969732, -0.2105303814923396, 0.6814746020226531,
+  ]),
   // pole RA 40.590°, Dec 83.540°, prime meridian W 0.000°
   daphnis: Object.freeze([
     -0.6506416895123767, -0.7545632725946915, 0.08543804491951779,
@@ -1586,6 +1646,40 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
 // frame; inclinationDegrees is the same value as
 // BODY_FIXED_ORBIT_NORMAL_DIRECTIONS' orbital inclination comment above.
 export const BODY_ORBITS = Object.freeze({
+  // a 0.00078734 AU, e 0.00047355, perihelion 0.00078696 AU, aphelion 0.00078771 AU
+  proteus: Object.freeze({
+    centerBodyId: "neptune",
+    centerPositionAu: Object.freeze([0.0007859889161932179,0.0000394098577409509,-3.3774797199504413e-7]),
+    semiMajorAxisAu: 0.0007873352590480781,
+    eccentricity: 0.0004735529687852029,
+    heliocentricDistanceAu: 29.87819124924451,
+    perihelionDirection: Object.freeze([
+      -0.9748762246324456,
+      0.2227393014348819,
+      0.0018842087703393184,
+    ]),
+    trueAnomalyDegrees: 15.740642234232782,
+    inclinationDegrees: 29.265670337490462,
+    perihelionAu: 0.0007869624140987267,
+    aphelionAu: 0.0007877081039974296,
+  }),
+  // a 0.00049312 AU, e 0.0035414, perihelion 0.00049138 AU, aphelion 0.00049487 AU
+  larissa: Object.freeze({
+    centerBodyId: "neptune",
+    centerPositionAu: Object.freeze([0.00048526499312003034,0.00007738898663583824,1.1327849180455874e-7]),
+    semiMajorAxisAu: 0.0004931248904720486,
+    eccentricity: 0.003541385264324234,
+    heliocentricDistanceAu: 29.878561470612798,
+    perihelionDirection: Object.freeze([
+      -0.9999345642301236,
+      -0.011439320959480139,
+      -0.00009588482117478538,
+    ]),
+    trueAnomalyDegrees: 8.405665038702303,
+    inclinationDegrees: 28.566068542881247,
+    perihelionAu: 0.0004913785452514593,
+    aphelionAu: 0.0004948712356926379,
+  }),
   // a 0.00091692 AU, e 0.0048355, perihelion 0.00091249 AU, aphelion 0.00092136 AU
   daphnis: Object.freeze({
     centerBodyId: "saturn",
