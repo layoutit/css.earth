@@ -1,0 +1,176 @@
+PDS_VERSION_ID = PDS3                                                         
+LABEL_REVISION_NOTE   = "T. Farnham; 15 Nov 2005                              
+  2007-04-13  A.C.Raugh  Modified DSID for V2.1                               
+  "                                                                           
+RECORD_TYPE  = "FIXED_LENGTH"                                                 
+RECORD_BYTES = 53                                                             
+FILE_RECORDS = 26280                                                          
+                                                                              
+^COUNTS_TABLE       = ("WILD2_PLAN_FULL.TAB",1)                               
+^VERTEX_TABLE       = ("WILD2_PLAN_FULL.TAB",2)                               
+^PLATE_TABLE        = ("WILD2_PLAN_FULL.TAB",8763)                            
+                                                                              
+DATA_SET_ID  = "SDU-C-NAVCAM-5-WILD2-SHAPE-MODEL-V2.1"                        
+PRODUCT_NAME = "PLANETOCENTRIC PLATE MODEL FOR THE FULL SURFACE OF            
+                COMET WILD 2"                                                 
+PRODUCT_ID   = "WILD2-PLANETOCENTRIC-PLATE-MODEL-FULL"                        
+INSTRUMENT_HOST_NAME  = "STARDUST"                                            
+INSTRUMENT_NAME       = "NAVIGATION CAMERA"                                   
+TARGET_NAME           = "81P/WILD 2 (1978 A2)"                                
+START_TIME            = "N/A"                                                 
+STOP_TIME             = "N/A"                                                 
+PRODUCT_CREATION_TIME = 2005-12-12                                            
+                                                                              
+OBJECT     = COUNTS_TABLE                                                     
+  ROWS               = 1                                                      
+  ROW_BYTES          = 53                                                     
+  INTERCHANGE_FORMAT = ASCII                                                  
+  COLUMNS            = 2                                                      
+  DESCRIPTION        = "Table that gives the count of vertices and plates     
+    representing the surface of the numerical shape model of comet Wild 2, as 
+    derived from the Stardust NavCam data.  The shape model comprises         
+    triangular plates and vertices that are specified in a body-fixed         
+    coordinate system."                                                       
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "NUMVERTICES"                                             
+    DESCRIPTION   = "NUMBER OF VERTICES IN SHAPE MODEL"                       
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 8                                                         
+    BYTES         = 5                                                         
+    FORMAT        = "I5"                                                      
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "NUMPLATES"                                               
+    DESCRIPTION   = "NUMBER OF TRIANGULAR PLATES IN SHAPE MODEL"              
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 20                                                        
+    BYTES         = 5                                                         
+    FORMAT        = "I5"                                                      
+  END_OBJECT = COLUMN                                                         
+END_OBJECT = COUNTS_TABLE                                                     
+                                                                              
+OBJECT     = VERTEX_TABLE                                                     
+  ROWS               = 8761                                                   
+  ROW_BYTES          = 53                                                     
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 3                                                      
+  DESCRIPTION        = "Table of vertices of numerical shape model of Comet   
+    Wild 2.  These are the vertices of plates that approximate the surface of 
+    the nucleus.  In this version, the portions of the nucleus that were      
+    hidden or unilluminated during the Stardust encounter are represented     
+    by the best-fitting triaxial ellipsoid (1.350 x 2.002 x 2.607 km).        
+                                                                              
+    Each row of this table contains data for one vertex, in the form of the   
+    the latitude, longitude and distance from the center in a planetocentric  
+    coordinate system.  The row also contains a flag denoting whether the     
+    point comes from the derived shape model (for the visible portions of the 
+    nucleus) or from the assumed best-fitting ellipsoid (for the hidden       
+    portions).  The axes are defined by the best-fitting ellipsoid, with the  
+    posigrade axis at RA=112 deg, dec=-17 deg and the prime meridian defined  
+    by the longest axis of the ellipsoid."                                    
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "COORDINATES"                                             
+    DESCRIPTION   = "The latitude and longitude of the vertex in              
+                     planetocentric coordinates"                              
+    UNIT          = "DEGREES"                                                 
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 1                                                         
+    BYTES         = 30                                                        
+    ITEMS         = 2                                                         
+    ITEM_BYTES    = 15                                                        
+    FORMAT        = "2(F15.4)"                                                
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "DISTANCE"                                                
+    DESCRIPTION   = "The distance of the vertex from the center, in           
+                     planetocentric coordinates"                              
+    UNIT          = "METER"                                                   
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 31                                                        
+    BYTES         = 15                                                        
+    ITEMS         = 1                                                         
+    ITEM_BYTES    = 15                                                        
+    FORMAT        = "(F15.4)"                                                 
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 3                                                         
+    NAME          = "FLAG"                                                    
+    DESCRIPTION   = "Flag denoting the derivation of the data point.          
+                     If 0, this denotes that the point is part of the surface 
+                     as derived in the shape model.  If 1, this denotes that  
+                     the point comes from the assumed triaxial ellipsoid."    
+    DATA_TYPE     = "ASCII"                                                   
+    START_BYTE    = 51                                                        
+    BYTES         = 1                                                         
+    ITEMS         = 1                                                         
+    ITEM_BYTES    = 1                                                         
+    FORMAT        = "(I1)"                                                    
+  END_OBJECT = COLUMN                                                         
+END_OBJECT = VERTEX_TABLE                                                     
+                                                                              
+OBJECT     = PLATE_TABLE                                                      
+  ROWS               = 17518                                                  
+  ROW_BYTES          = 53                                                     
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 2                                                      
+  DESCRIPTION        = "Table of triangular plates of numerical shape model   
+    of Comet Wild 2.  These triangular plates approximate the surface of      
+    the nucleus.                                                              
+                                                                              
+    Each row of this table contains three integer offsets that point to three 
+    vertices from the previous table, and a flag denoting the quality of the  
+    plates.  The three entries are the vertices of one triangular plate       
+    of the shape model.  Each integer is the offset from the first row in the 
+    table of vertices.  An offset of 0 points to the first row in the table   
+    of vertices, an offset of 1 to the second row, and so on.                 
+                                                                              
+    The flag in the last column contains information describing the meaning   
+    of the plate in that entry.  A value of 0 means that all three vertices   
+    were derived from the shape model, and so the plate represents the        
+    derived surface of the nucleus at that point.  A value of 1 denotes that  
+    all three vertices come from the assumed triaxial ellipsoid, and so the   
+    plate represents the ellipsoid's surface.  A value of 2 denotes that one  
+    or two vertices come from the shape model, and the remaining vertices     
+    come from the ellipsoid.  In this case, the plate is simply a connection  
+    between the two segments and has no real physical meaning."               
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "PLATE VERTICES"                                          
+    DESCRIPTION   = "Offsets of the three vertices defining this              
+      triangular plane. The offsets refer to the vertices listed in           
+      the preceding vertex table."                                            
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 1                                                         
+    BYTES         = 30                                                        
+    ITEMS         = 3                                                         
+    ITEM_BYTES    = 10                                                        
+    FORMAT        = "3(I10)"                                                  
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "FLAG"                                                    
+    DESCRIPTION   = "Flag denoting the physical meaning of the plate.         
+      If 0, this denotes that all three vertices come from the derived shape  
+      model.  If 1, all three vertices come from the assumed triaxial         
+      ellipsoid.  If 2, the vertices are a combination of the shape model and 
+      the ellipsoid, and thus the plate has no real physical meaning."        
+    DATA_TYPE     = "ASCII"                                                   
+    START_BYTE    = 36                                                        
+    BYTES         = 1                                                         
+    ITEMS         = 1                                                         
+    ITEM_BYTES    = 1                                                         
+    FORMAT        = "(I1)"                                                    
+  END_OBJECT = COLUMN                                                         
+END_OBJECT = PLATE_TABLE                                                      
+END                                                                           

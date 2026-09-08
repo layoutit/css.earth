@@ -1,0 +1,87 @@
+{
+  "applicationCommit": "bf484759a456ac5812773be51bbbb207a25c5e0c",
+  "objects": [
+    {
+      "id": "comet-103p",
+      "preparedRuntimeSha256": "0cb57d5955a9b0072285eea83df0ee4efebccf53a1953238c41802115cff4b21",
+      "runtimeAssetsSha256": "e612eac1825ddb9516ac423f19d94be059b62163dae15c36283de865a5baa264"
+    },
+    {
+      "id": "comet-9p",
+      "preparedRuntimeSha256": "50d0a8ce0b7268db41b61c931a934f3e1e377568e81a3f9a666e4a5ea7f537b2",
+      "runtimeAssetsSha256": "6aa2684ab52ea5914d7e209291ed4c439be450701387276744c8c8ed32e4a6db"
+    }
+  ],
+  "logs": [
+    {
+      "command": "node --test tools/objects/terrestrial-layers/pds-constraint-map.test.mjs tests/objects/unit/comet-103p/surface.test.mjs tests/objects/unit/comet-9p/surface.test.mjs tests/objects/unit/comet-81p/surface.test.mjs",
+      "path": "output/comet-grid/focused-tests.log",
+      "exitCode": 0,
+      "bytes": 1013,
+      "sha256": "62d02acf23120aac9c749c04d6734e6f59b1e9fabbf2f0abf8cc85ccfebb0f20"
+    },
+    {
+      "command": "pnpm acquire:planets -- --verify-only",
+      "path": "output/comet-grid/source-verify.log",
+      "exitCode": 0,
+      "bytes": 6596,
+      "sha256": "1d6882f28f82eb4cac842aa26de956a34c821a55a75679ff6ae12caced7f4edc"
+    },
+    {
+      "command": "pnpm build",
+      "path": "output/comet-grid/production-build.log",
+      "exitCode": 0,
+      "bytes": 661243,
+      "sha256": "591795f08b1ef4845c941a2162d13ea2ff73670dc97c7ddaf23f69a5324766bc"
+    },
+    {
+      "command": "pnpm test",
+      "path": "output/comet-grid/main-tests.log",
+      "exitCode": 0,
+      "bytes": 99732,
+      "sha256": "081c959056e3a18dae1b787a69cd39b80f24b2020cb772d60feec935ec63ffdf"
+    },
+    {
+      "command": "pnpm test:browser http://127.0.0.1:4258 comet-103p",
+      "path": "output/comet-grid/hartley-dom.log",
+      "exitCode": 0,
+      "bytes": 257,
+      "sha256": "89a91613bc044e2d9ad5b910618d535b868726b15b5e8c7fb40ec84e7359099e"
+    },
+    {
+      "command": "pnpm test:browser http://127.0.0.1:4258 comet-9p",
+      "path": "output/comet-grid/tempel-dom.log",
+      "exitCode": 0,
+      "bytes": 251,
+      "sha256": "4240f846c879dfd7f60ad317f2b1c8cd884e14cb4b4088558b74064b18303e60"
+    },
+    {
+      "command": "node tests/objects/browser/comets/navigation.mjs http://127.0.0.1:4258",
+      "path": "output/comet-grid/navigation-browser.log",
+      "exitCode": 0,
+      "bytes": 96,
+      "sha256": "60eeb323a146e8c4979552dee2b8700d65169d067b78cf7da447104a4ffe463e"
+    },
+    {
+      "command": "node output/comet-grid/capture-views.mjs",
+      "path": "output/comet-grid/visuals.log",
+      "exitCode": 0,
+      "bytes": 87,
+      "sha256": "1eeeb9aafef26009b34dcef4817f7df59ced11ebb6a2f10363d86a5241a2da30"
+    },
+    {
+      "command": "pnpm setup:assets --object=comet-103p",
+      "path": "output/comet-grid/hartley-fresh-install.log",
+      "exitCode": 0,
+      "bytes": 256,
+      "sha256": "35168dd586572913aabe7918839437b0773e070184667f6f68e154d490ee1bb1"
+    },
+    {
+      "command": "pnpm setup:assets --object=comet-9p",
+      "path": "output/comet-grid/tempel-fresh-install.log",
+      "exitCode": 0,
+      "bytes": 252,
+      "sha256": "5e25de57986bfeb651ea95fb26d3d59accf43c0b3292ac7f033c467bbfe6e781"
+    }
+  ]
+}

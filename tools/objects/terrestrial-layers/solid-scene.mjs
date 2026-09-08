@@ -172,7 +172,9 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
         ? [preparedResourcePool('lenses', entries, { retention: 'selection', capacity: 4, concurrency: 2 })] : [])],
     startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
     tree, variants, materials: config.geometry.radialTerrain ? [] : [track], animations: [],
-    ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles } } : {}),
+    ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles,
+      // XYZ source coordinates swap X/Y for CSS: outward faces are clockwise.
+      ...(config.geometry.radialTerrain?.sourceTopology === 'open' ? { frontFace: 'clockwise' } : {}) } } : {}),
     heliocentricView: { plan: plan.heliocentricView,
       bodyMarker: { url: atlasUrl, ...sprite(id), size: 3 },
       systemMarkers: { url: atlasUrl, sun: sprite('sun'),

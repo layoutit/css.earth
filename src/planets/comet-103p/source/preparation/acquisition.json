@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "shape/hartley2_2012_plan.tab",
+      "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    }
+  ]
+}

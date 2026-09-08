@@ -1,0 +1,190 @@
+{
+  "reports": [
+    {
+      "id": "comet-1p",
+      "dpr": 1,
+      "browser": "152.0.7977.76",
+      "headless": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "runtimeSha256": "e352d532ebdd27610c104f78423c5d50a28f92b7d9564e1fcd652ba2777eb6dc",
+      "loaded": [
+        {
+          "filename": "comet-1p-model-surface@2x.webp",
+          "bytes": 82802,
+          "sha256": "8d950b8eb503d9a46884f5862d2cc7265b677d9f8f81b62205b8046d3bf9b3a0"
+        },
+        {
+          "filename": "comet-1p-model-shadow@2x.webp",
+          "bytes": 85752,
+          "sha256": "96376ae1147449ed9b9949aa7670a2b0eaa2691fb0ef021913fc26423b18af10"
+        }
+      ],
+      "captures": [
+        {
+          "name": "model-shadows",
+          "path": "output/comet-intake/halley/visuals-final/comet-1p-dpr-1-model-shadows.png",
+          "actions": "Default historical model view.",
+          "url": "http://127.0.0.1:4258/comet-1p/",
+          "lens": "model",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 4e-06, -2e-06, -350.408, 1)",
+          "sha256": "3c5694d19f23738ad4d065d6a471eca1278d9a124498b3a6b4443d9e23521547",
+          "nativeLeafBounds": {
+            "left": 533.211669921875,
+            "right": 899.7521362304688,
+            "top": 209.13230895996094,
+            "bottom": 807.5206909179688
+          }
+        },
+        {
+          "name": "model-flood",
+          "path": "output/comet-intake/halley/visuals-final/comet-1p-dpr-1-model-flood.png",
+          "actions": "Shadows off.",
+          "url": "http://127.0.0.1:4258/comet-1p/?v=MMZAP83qOhZfj0FCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "lens": "model",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 4e-06, -2e-06, -350.408, 1)",
+          "sha256": "16858e929bd2780ad1a62a168d63f5160303ba1af80c5a9d73ae5f5f391b3301"
+        },
+        {
+          "name": "model-far",
+          "path": "output/comet-intake/halley/visuals-final/comet-1p-dpr-1-model-far.png",
+          "actions": "Four native horizontal 250px drags; Shadows off.",
+          "url": "http://127.0.0.1:4258/comet-1p/?v=MMZAP83qOhZfj0FCxzNAAAAAP8Iihn8XRgu_4jiol1PUqT-5tAqRMvdZAAA",
+          "lens": "model",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.00662737, 0, 0.01887, 0, -0.00645393, 0.0187939, 0.00226669, 0, -0.017732, -0.0068404, 0.00622769, 0, -5e-06, -4e-06, -350.408, 1)",
+          "sha256": "7da9f8f9ca874756e06d68d2e99480edceb3d2aa38be7a5d1e765dc6c197766a"
+        },
+        {
+          "name": "model-alternate-light",
+          "path": "output/comet-intake/halley/visuals-final/comet-1p-dpr-1-model-alternate-light.png",
+          "actions": "Switch lighting at the same camera.",
+          "url": "http://127.0.0.1:4258/comet-1p/?v=MMZAP83qOhZfj0FCxzNAAAAAP8Iihn8XRgu_4jiol1PUqT-5tAqRMvdZAAA",
+          "lens": "model",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.00662737, 0, 0.01887, 0, -0.00645393, 0.0187939, 0.00226669, 0, -0.017732, -0.0068404, 0.00622769, 0, -5e-06, -4e-06, -350.408, 1)",
+          "sha256": "0ff362f6032f64c714319a490e076a608c8496d792f22e585ddd5106c070652e"
+        },
+        {
+          "name": "model-close",
+          "path": "output/comet-intake/halley/visuals-final/comet-1p-dpr-1-model-close.png",
+          "actions": "Native wheel deltaY -150 at 800,450; Shadows on.",
+          "url": "http://127.0.0.1:4258/comet-1p/?v=MMZAKdyC3L5MVkFCxzNAAAAAP8Iihn8XRgu_4jiol1PUqT-5tAqRMvdZAAA",
+          "lens": "model",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.00662737, 0, 0.01887, 0, -0.00645393, 0.0187939, 0.00226669, 0, -0.017732, -0.0068404, 0.00622769, 0, 1.2e-05, 1.1e-05, 597.59, 1)",
+          "sha256": "4f938d2cc2bae7a192b06621e9048cd00a143f392bcc54c3708f70a1e2fd6ecc"
+        },
+        {
+          "name": "model-close-flood",
+          "path": "output/comet-intake/halley/visuals-final/comet-1p-dpr-1-model-close-flood.png",
+          "actions": "Same close camera, Shadows off.",
+          "url": "http://127.0.0.1:4258/comet-1p/?v=MMZAKdyC3L5MVkFCxzNAAAAAP8Iihn8XRgu_4jiol1PUqT-5tAqRMvdZAAA",
+          "lens": "model",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.00662737, 0, 0.01887, 0, -0.00645393, 0.0187939, 0.00226669, 0, -0.017732, -0.0068404, 0.00622769, 0, 1.2e-05, 1.1e-05, 597.59, 1)",
+          "sha256": "4778940c2118135551baa576166859afff2f4e2e0d620463650d5608ee959119"
+        }
+      ],
+      "errors": [],
+      "networkSummary": {
+        "scope": "Chrome HTTP response sizes; includes context/worker requests, excludes transport overhead",
+        "coldResponses": 505,
+        "coldResponseBodyBytes": 27282699,
+        "coldResponseBodyAndHeaderBytes": 27418348,
+        "interactionResponses": 0
+      }
+    },
+    {
+      "id": "comet-1p",
+      "dpr": 2,
+      "browser": "152.0.7977.76",
+      "headless": true,
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "runtimeSha256": "e352d532ebdd27610c104f78423c5d50a28f92b7d9564e1fcd652ba2777eb6dc",
+      "loaded": [
+        {
+          "filename": "comet-1p-model-surface@2x.webp",
+          "bytes": 82802,
+          "sha256": "8d950b8eb503d9a46884f5862d2cc7265b677d9f8f81b62205b8046d3bf9b3a0"
+        },
+        {
+          "filename": "comet-1p-model-shadow@2x.webp",
+          "bytes": 85752,
+          "sha256": "96376ae1147449ed9b9949aa7670a2b0eaa2691fb0ef021913fc26423b18af10"
+        }
+      ],
+      "captures": [
+        {
+          "name": "model-shadows",
+          "path": "output/comet-intake/halley/visuals-final/comet-1p-dpr-2-model-shadows.png",
+          "actions": "Default historical model view.",
+          "url": "http://127.0.0.1:4258/comet-1p/",
+          "lens": "model",
+          "shadows": true,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 4e-06, -2e-06, -350.408, 1)",
+          "sha256": "b291716699bdc47074ab44c2c7e73cad4fcdc04244ef37ef2f3750f0f9924db2",
+          "nativeLeafBounds": {
+            "left": 533.211669921875,
+            "right": 899.7521362304688,
+            "top": 209.13230895996094,
+            "bottom": 807.5206909179688
+          }
+        },
+        {
+          "name": "model-alternate-light",
+          "path": "output/comet-intake/halley/visuals-final/comet-1p-dpr-2-model-alternate-light.png",
+          "actions": "Switch lighting at the same camera.",
+          "url": "http://127.0.0.1:4258/comet-1p/?v=MMZAP83qOhZfj0FCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "lens": "model",
+          "shadows": false,
+          "leaves": 1000,
+          "sceneNodes": 1002,
+          "retained": true,
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 4e-06, -2e-06, -350.408, 1)",
+          "sha256": "e8a5a18f5ee8c38be8e48542299ab927e299ea6516910a63ff51eeff6d1d4d3c"
+        }
+      ],
+      "errors": [],
+      "networkSummary": {
+        "scope": "Chrome HTTP response sizes; includes context/worker requests, excludes transport overhead",
+        "coldResponses": 505,
+        "coldResponseBodyBytes": 27282699,
+        "coldResponseBodyAndHeaderBytes": 27418348,
+        "interactionResponses": 0
+      }
+    }
+  ],
+  "fullLocalReport": {
+    "path": "output/comet-intake/halley/visuals-final/report.json",
+    "sha256": "9f13edb3ba932d8d5a208414f0ca4f90eb62fb6779247cc2cbb60b25409eca3f"
+  }
+}

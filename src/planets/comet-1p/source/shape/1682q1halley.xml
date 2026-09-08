@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd">
+  <Identification_Area>   
+  <logical_identifier>urn:nasa:pds:small_bodies.stooke.shape-models:data:1682q1halley_tab</logical_identifier>  
+    <version_id>1.0</version_id>
+    <title>Stooke Shape Model of 1P/Halley</title>
+    <information_model_version>1.23.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <publication_year>2025</publication_year>
+      <description>Numerical planetocentric shape model of Comet Halley based on data from the Giotto and Vega missions to the comet.</description>
+      <List_Author>
+        <Person>
+          <given_name>Philip</given_name>
+          <family_name>Stooke</family_name>
+        </Person>
+      </List_Author>  
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time xsi:nil="true" nilReason="inapplicable"/>
+      <stop_date_time xsi:nil="true" nilReason="inapplicable"/>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>No Specific Investigation</name>
+      <type>Individual Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <name>Giotto Mission</name>
+      <Observing_System_Component>
+        <name>The Giotto Spacecraft</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:esa:psa:context:instrument_host:spacecraft.gio</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>The Halley Multicolor Camera (HMC) for Giotto</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:esa:psa:context:instrument:gio.hmc</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>    
+    <Observing_System>
+      <name>Vega Mission - Vega 1</name>
+      <Observing_System_Component>
+        <name>The Vega 1 Spacecraft</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.vega1</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>The Television System (TVS) for Vega 1</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:vega1.tvs</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>    
+      <name>Vega Mission - Vega 2</name>
+      <Observing_System_Component>
+        <name>The Vega 2 Spacecraft</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.vega2</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>The Television System (TVS) for Vega 2</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:vega2.tvs</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>        
+    </Observing_System>        
+    <Target_Identification>
+      <name>1P/Halley</name>
+      <type>Comet</type>
+      <Internal_Reference>   
+        <lid_reference>urn:nasa:pds:context:target:comet.1p_halley</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>   
+    </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <doi>10.1016/0019-1035(91)90207-A</doi>
+      <reference_text>Belton, M.J.S., W.H. Julian, A.J. Anderson, and B.E.A. Mueller, The spin state and homogeneity of comet Halley's nucleus, Icarus 93, 183-193, 1991.</reference_text>
+    </External_Reference>  
+  </Reference_List>   
+  <File_Area_Observational>
+    <File>
+      <file_name>1682q1halley.tab</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2016-09-30</creation_date_time>
+      <file_size unit="byte">70226</file_size>
+      <records>2701</records>
+    </File>
+    <Table_Character>
+      <local_identifier>table</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>2701</records>
+      <description>Numerical planetocentric shape model of Comet Halley based on data from the Giotto and Vega missions to the comet. Coordinates are planetocentric, increasing to the west for planetary satellites, and to the east for (prograde) asteroids and comets, as recommended by the IAU Working Group on Cartographic Coordinates. See the data set description for details on the coordinate system. Longitude, and latitude (both integers at 5 degree spacing) and radius measured in km. The radius is estimated to provide limb and terminator fits to the various Giotto and Vega images of the nucleus. Given the extreme shortcomings of the images, the position of the limb or terminator is itself very uncertain in many areas - by 1 km or even more - and the model should be considered extremely uncertain. It is hard to place bounds on these uncertainties, but the absolute uncertainty at any point is probably 500 - 1000 m. The relative point-to-point uncertainties are perhaps on the order of 100 m. Comparison of independent shape models by P. Stooke and P. Thomas for the same bodies (Amalthea, Janus, Epimetheus) suggests that Thomas tends towards models more convex than the likely shapes, and Stooke tends towards models which are too faceted, or which exaggerate the depths of depressions. The convex hull of this shape model is probably as good as the model itself. The shape was derived by Philip Stooke, University of Western Ontario, based on pointing information calculated by Alain Abergel (Institut d'Astrophysique Spatiale, Paris). The assumed rotation state is that of Belton, et al. (1991) [BELTONETAL1991] (Icarus 93, 183), and the coordinate system is as follows: coordinate reference axis = LONG axis north = TOWARDS the 'big end' longitudes are measured such that the central meridian (sub-spacecraft longitude) at the time of the first high resolution Vega 2 image (2:00:30) was 270 degrees. In any use of this model, please credit both Abergel and Stooke appropriately.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>3</fields>
+        <groups>0</groups>
+        <record_length unit="byte">26</record_length>
+        <Field_Character>
+          <name>Longitude</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">3</field_length>
+          <field_format>%3d</field_format>
+          <unit>deg</unit>
+          <description>Body-centered longitude, positive west for planetary satellites and positive east for asteroids and comets.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Latitude</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">8</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">3</field_length>
+          <field_format>%3d</field_format>          
+          <unit>deg</unit>
+          <description>Body-centered latitude.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Radius</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">14</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">11</field_length>
+          <field_format>%11.6f</field_format>
+          <unit>km</unit>
+          <description>Shape model radius for this latitude and longitude. Since the uncertainty in the radius varies across the model, the number of decimal places in the fixed format radius does not correspond to the uncertainty.</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>

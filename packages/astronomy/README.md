@@ -220,6 +220,14 @@ The added inner Neptunian moons use daily Horizons element samples over
 (Naiad),105km(Thalassa),64km(Despina), and55km(Galatea). These are observed
 fit residuals of the shared precessing-ellipse model, not trajectory error bounds.
 
+Comet placement uses Horizons osculating elements at JD 2461286.5 with separate
+geometric vector fixtures. Halley (1P, JPL#75) differs by 1.862 mm at that epoch;
+the maximum measured discrepancy at ±30 days is 557.99 km, under a 642 km
+regression guard and the common 10,000 km nearby-placement budget. This conic
+does not model perturbations or outgassing and has no qualified long-term range.
+Halley's 4.579 km registry radius describes the volume of the historical Stooke
+grid mesh, not a precise observed mean radius. Its display attitude is object-owned.
+
 Nix, Hydra, Kerberos and Styx use daily 2020–2032 element fits about the
 Pluto-system barycentre. Their public position/state APIs still return vectors
 relative to Pluto's physical centre: the generic `barycentreCompanion` record

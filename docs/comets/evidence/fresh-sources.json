@@ -1,0 +1,56 @@
+{
+  "results": [
+    {
+      "id": "comet-67p",
+      "downloaded": [
+        "shape/mtp019.obj",
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf",
+        "reference/navcam-20150720.jpg"
+      ],
+      "restored": {
+        "operationCount": 4
+      },
+      "verified": {
+        "inputCount": 5,
+        "generatedIntermediateCount": 1,
+        "documentCount": 12,
+        "verifiedCount": 18
+      }
+    },
+    {
+      "id": "comet-103p",
+      "downloaded": [
+        "shape/hartley2_2012_plan.tab",
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf"
+      ],
+      "restored": {
+        "operationCount": 3
+      },
+      "verified": {
+        "inputCount": 5,
+        "generatedIntermediateCount": 1,
+        "documentCount": 12,
+        "verifiedCount": 18
+      }
+    },
+    {
+      "id": "comet-9p",
+      "downloaded": [
+        "shape/tempel1_2012_plan.tab",
+        "stars/eso0932a.tif",
+        "presentation/InterVariable.ttf"
+      ],
+      "restored": {
+        "operationCount": 3
+      },
+      "verified": {
+        "inputCount": 5,
+        "generatedIntermediateCount": 1,
+        "documentCount": 12,
+        "verifiedCount": 18
+      }
+    }
+  ]
+}
