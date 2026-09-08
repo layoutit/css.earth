@@ -8,7 +8,7 @@ Every body uses the existing generic object package, shared application shell an
 
 The existing meshoptimizer preparation path reduces the original connected meshes while preserving their closed topology. Every result has 800 native PolyCSS u raster leaves and 128 by 128 px cells. The twelve DAMIT models already containing 800 triangles require no edge collapse. All geometry, surface texels and directional/flood lighting are prepared ahead of runtime. Both DPRs select the same highest-density asset bank.
 
-52 Europa, 9 Metis and 666 Desdemona retain their asteroid numbers in display names to distinguish them from the moons Europa and Metis. Their route IDs are europa-52, metis-9 and desdemona-666. The 1994 CC package explicitly displays Alpha alone; its two satellites are not included. Castalia retains the published northern spin solution and documents the unresolved alternative.
+52 Europa, 9 Metis and 666 Desdemona retain their asteroid numbers in display names to distinguish them from the moons Europa, Metis and Desdemona. Their route IDs are europa-52, metis-9 and desdemona-666. The 1994 CC package explicitly displays Alpha alone; its two satellites are not included. Castalia retains the published northern spin solution and documents the unresolved alternative.
 
 | Number | Body and provenance | Selected source family | Reference diameter (km) | Period (h) |
 | --- | --- | --- | ---: | ---: |
@@ -87,6 +87,6 @@ Runtime assets are installed through the existing runtime-assets.json inventorie
 
 ## Source availability beyond the selected bodies
 
-The [candidate survey](asteroid-candidate-survey.json) records 142 distinct DAMIT targets and the additional mission/radar checks. A missing calibrated mesh is a source gap, not permission to synthesize an ellipsoid or rescale an unrelated model. This record is a dated survey, not a claim that no usable data exists anywhere.
+The [candidate survey](asteroid-candidate-survey.json) records 217 DAMIT targets (142 named and 75 provisional-designation entries) and the additional mission/radar checks. A missing calibrated mesh is a source gap, not permission to synthesize an ellipsoid or rescale an unrelated model. This record is a dated survey, not a claim that no usable data exists anywhere.
 
 Cybele retains its explicitly identified 2017 model rather than relabeling it as the 2023 SPHERE reconstruction. Hektor uses the published convex primary model and does not claim to resolve the bilobed shape or its moon. Phaethon uses the 2018 convex solution. Apophis’s 2026 archive release contains the preliminary 2018 Model B. Donaldjohanson preserves the source authors’ reconstruction of its unseen side; it does not present that region as observed terrain. Per-body source records explain these choices.
