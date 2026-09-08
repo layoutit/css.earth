@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:gbo.ast-8567.radar.shape-model:data:a8567_tab</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>8567 1996 HW1 SHAPE MODEL</title>
+    <information_model_version>1.10.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Magri, C.;Howell, E.S.;Nolan, M.C.;Taylor, P.A.;Fernandez, Y.R.;Mueller, M.;Vervack,
+R.J.;Benner, L.A.M.;Giorgini, J.D.;Ostro, S.J.;Scheeres, D.J.;Hicks, M.D.;Rhoades,
+H.;Somers, J.M.;Gaftonyuk, N.M.;Kouprianov, V.V.;Krugly, Yu.N.;Molotov, I.E.;Busch,
+M.W.;Margot, J.L.;Benishek, V.,Protitch-Benishek, V.;Galad, A.;Higgins, D.;Kusnirak,
+P.;Pray, D.P.</author_list>
+      <publication_year>2016</publication_year>
+      <description>The FACET_TABLE is the second part of   
+        the shape model file providing the linking of vertices into facets.   
+        The integers i1 j1 k1 are the indices of the 3 vertices that form     
+        triangular facet 1, and so on. The triple defines an outward normal to
+     the facet following the right-hand rule.This faceted shape model of asteroid    
+        1996 HW1 is described in Magri et al. (2011) based on radar           
+        observations in 2008 and optical photometric observations from 2005 to
+        2009. The median model resolution is 113m between vertices.           
+                                                                              
+        The model has the format                                              
+                                                                              
+                v x1 y1 z1                                                    
+                v x2 y2 z2                                                    
+                v x3 y3 z3                                                    
+                (etc.)                                                        
+                f i1 j1 k1                                                    
+                f i2 j2 k2                                                    
+                (etc.)                                                        
+                                                                              
+        where the letter 'v' denotes a vertex and the letter 'f' denotes a    
+        triangular facet. The VERTEX_TABLE is the first part, describing the  
+        positions of the vertices of the shape model. The floating point      
+        numbers x1 y1 z1 are the coordinates of vertex 1, and so on (vertices 
+        are implicitly numbered beginning with 1). The origin is the center of
+        mass, and the axes are the principal axes of the shape model.  The    
+        z-axis is the spin axis or positive pole. The units are kilometers.   
+        The linking of vertices into facets is provided in the FACET_TABLE.   
+                                                                              
+        This format is identical to a Wavefront OBJ file, supported by NAIF   
+        mkdsk and most shape meshing and printing software.</description>
+    </Citation_Information>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2020-02-28</modification_date>
+        <version_id>1.0</version_id>
+        <description>Migrated from A8567_TAB in EAR-A-I0037-5-SHAPE8567-V1.0</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2005-06-26Z</start_date_time>
+      <stop_date_time>2009-01-08Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <wavelength_range>Visible</wavelength_range>
+        <wavelength_range>Radio</wavelength_range>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>None</name>
+      <type>Individual Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Arecibo 2380 MHz Radar Receiver</name>
+        <type>Instrument</type>
+        <description>The description for Arecibo 2380 MHz Radar Receiver can be found in the document
+collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.recv_s</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Observatory</name>
+        <type>Observatory</type>
+        <description>The description for Arecibo Observatory can be found in the document collection for
+this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>305-m fixed spherical reflecting antenna at Arecibo Observatory</name>
+        <type>Telescope</type>
+        <description>The description for 305-m fixed spherical reflecting antenna at Arecibo Observatory
+can be found in the document collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Arecibo Planetary Radar Transmitter</name>
+        <type>Instrument</type>
+        <description>The description for Arecibo Planetary Radar Transmitter can be found in the document
+collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.trans_s</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Observatory</name>
+        <type>Observatory</type>
+        <description>The description for Arecibo Observatory can be found in the document collection for
+this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>305-m fixed spherical reflecting antenna at Arecibo Observatory</name>
+        <type>Telescope</type>
+        <description>The description for 305-m fixed spherical reflecting antenna at Arecibo Observatory
+can be found in the document collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Table Mountain Observatory 24-inch CCD camera</name>
+        <type>Instrument</type>
+        <description>The description for Table Mountain Observatory 24-inch CCD camera can be found in the
+document collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:table_mountain.astro_mechanics0m61.ccd</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Table Mountain Observatory</name>
+        <type>Observatory</type>
+        <description>The description for Table Mountain Observatory can be found in the document
+collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.table_mountain</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>61-cm Astro Mechanics Cassegrain/Coude reflector at Table Mountain Observatory</name>
+        <type>Telescope</type>
+        <description>The description for 61-cm Astro Mechanics Cassegrain/Coude reflector at Table
+Mountain Observatory can be found in the document collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:table_mountain.astro_mechanics0m61</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>SBIG ST-8</name>
+        <type>Instrument</type>
+        <description>The description for SBIG ST-8 can be found in the document collection for this
+bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:palmer_divide.old10inch.sbig_st8</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Hunters Hill Observatory</name>
+        <type>Observatory</type>
+        <description>The description for Hunters Hill Observatory can be found in the document collection
+for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.hunters_hill</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Hunters Hill Observatory 0.36-m SCT</name>
+        <type>Telescope</type>
+        <description>The description for Hunters Hill Observatory 0.36-m SCT can be found in the document
+collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:hunters_hill.sct0m36</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <name>OBS14411T1 + I0238</name>
+      <description>CARBUNCLE HILL 0.35M with SBIG ST-8</description>
+      <Observing_System_Component>
+        <name>SBIG ST-8</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:palmer_divide.old10inch.sbig_st8</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <name>OBS14412T1 + I2957</name>
+      <description>CHUGUEVSKAYA STATION [121] 0.7 M with SBIG ST-6</description>
+      <Observing_System_Component>
+        <name>SBIG ST-6</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:simeis.grubb1m.sbig_st-6</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>SBIG ST-6</name>
+        <type>Instrument</type>
+        <description>The description for SBIG ST-6 can be found in the document collection for this
+bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:simeis.grubb1m.sbig_st-6</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Crimean Astrophysical Observatory-Simeis</name>
+        <type>Observatory</type>
+        <description>The description for Crimean Astrophysical Observatory-Simeis can be found in the
+document collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.simeis</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>1-m Grubb reflector</name>
+        <type>Telescope</type>
+        <description>The description for 1-m Grubb reflector can be found in the document collection for
+this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:simeis.grubb1m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <name>OBS078T5 + I2959</name>
+      <description>ONDREJOV OBSERVATORY 0.65 M with APOGEE AP8</description>
+      <Observing_System_Component>
+        <name>APOGEE AP8</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:modra.0m6.ap8</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Apogee AP8</name>
+        <type>Instrument</type>
+        <description>The description for Apogee AP8 can be found in the document collection for this
+bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:modra.0m6.ap8</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Modra</name>
+        <type>Observatory</type>
+        <description>The description for Modra can be found in the document collection for this bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.modra</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Modra 0.6-m</name>
+        <type>Telescope</type>
+        <description>The description for Modra 0.6-m can be found in the document collection for this
+bundle.</description>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:modra.0m6</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(8567) 1996 HW1</name>
+      <type>Asteroid</type>
+    </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <Internal_Reference>
+      <lid_reference>urn:nasa:pds:gbo.ast-8567.radar.shape-model:document:bundle_description</lid_reference>
+      <reference_type>data_to_document</reference_type>
+    </Internal_Reference>
+    <External_Reference>
+      <reference_text>BENISHEK&amp;PROTITC2009</reference_text>
+      <description>Benishek, V. and V. Protitch-Benishek,  
+        CCD photometry of asteroids at the Belgrade Astronomical Observatory: 
+        2008 January - September, Minor Planet Bull. 36, 35, 2009.</description>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>HIGGINSETAL2006</reference_text>
+      <description>Higgins, D., P. Pravec, P. Kusnirak, G. 
+        Masi, A. Galad, and 4 others, Asteroid lightcurve analysis at Hunters 
+        Hill                                                                  
+        Observatory and collaborating stations - Autumn/Winter 2005, Minor    
+        Planet Bull. 33, 8, 2006</description>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>KRUGLYETAL2007</reference_text>
+      <description>Krugly, Yu.N., N.M. Gaftonyuk, I.N.     
+        Belskaya, V.G. Chiorny, V.G. Shevchenko, and 5 others, Kharkiv study  
+        of near-Earth asteroids, A. Milani, G.B. Valsecchi, D. Vokrouhlicky   
+        (Eds.), Near Earth Objects, our Celestial Neighbors: Opportunity and  
+        Risk. Proceedings of IAU Symposium No. 236, Cambridge University      
+        Press, Cambridge, pp. 385 - 390, doi:10.1017/S174392130700347X, 2007</description>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>MAGRIETAL2011</reference_text>
+      <description>Magri, C., E.S. Howell, M.C. Nolan, P.A.
+        Taylor, Y.F. Fernandez, and 21 others, Radar and photometric          
+        observations and shape modeling of contact binary near-Earth asteroid 
+        (8567) 1996 HW1, Icarus, 214, 210-227,                                
+        doi:10.1016/j.icarus.2011.02.019, 2011</description>
+    </External_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>a8567.tab</file_name>
+      <local_identifier>A8567_TAB</local_identifier>
+      <creation_date_time>2017-09-19</creation_date_time>
+      <file_size unit="byte">175224</file_size>
+      <records>4172</records>
+    </File>
+    <Table_Character>
+      <local_identifier>FACET_TABLE</local_identifier>
+      <offset unit="byte">58464</offset>
+      <records>2780</records>
+      <description>The FACET_TABLE is the second part of   
+        the shape model file providing the linking of vertices into facets.   
+        The integers i1 j1 k1 are the indices of the 3 vertices that form     
+        triangular facet 1, and so on. The triple defines an outward normal to
+        the facet following the right-hand rule.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">42</record_length>
+        <Field_Character>
+          <name>FACET_FLAG</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>ASCII_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>An 'f', indicating this record contains 
+        the indices of three vertices defining a single, triangular facet</description>
+        </Field_Character>
+        <Field_Character>
+          <name>VERTEX_1</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">12</field_length>
+          <field_format>%12d</field_format>
+          <description>Index of the first vertex (record number
+        in the preceding table)</description>
+        </Field_Character>
+        <Field_Character>
+          <name>VERTEX_2</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">16</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">12</field_length>
+          <field_format>%12d</field_format>
+          <description>Index of the second vertex (record      
+        number in the preceding table)</description>
+        </Field_Character>
+        <Field_Character>
+          <name>VERTEX_3</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">29</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">12</field_length>
+          <field_format>%12d</field_format>
+          <description>Index of the third vertex (record number
+        in the preceding table)</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>VERTEX_TABLE</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>1392</records>
+      <description>This faceted shape model of asteroid    
+        1996 HW1 is described in Magri et al. (2011) based on radar           
+        observations in 2008 and optical photometric observations from 2005 to
+        2009. The median model resolution is 113m between vertices.           
+                                                                              
+        The model has the format                                              
+                                                                              
+                v x1 y1 z1                                                    
+                v x2 y2 z2                                                    
+                v x3 y3 z3                                                    
+                (etc.)                                                        
+                f i1 j1 k1                                                    
+                f i2 j2 k2                                                    
+                (etc.)                                                        
+                                                                              
+        where the letter 'v' denotes a vertex and the letter 'f' denotes a    
+        triangular facet. The VERTEX_TABLE is the first part, describing the  
+        positions of the vertices of the shape model. The floating point      
+        numbers x1 y1 z1 are the coordinates of vertex 1, and so on (vertices 
+        are implicitly numbered beginning with 1). The origin is the center of
+        mass, and the axes are the principal axes of the shape model.  The    
+        z-axis is the spin axis or positive pole. The units are kilometers.   
+        The linking of vertices into facets is provided in the FACET_TABLE.   
+                                                                              
+        This format is identical to a Wavefront OBJ file, supported by NAIF   
+        mkdsk and most shape meshing and printing software.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">42</record_length>
+        <Field_Character>
+          <name>VERTEX_FLAG</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>ASCII_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>A 'v', indicating this record contains  
+        the coordinates of a vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>X</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">12</field_length>
+          <field_format>%12.6f</field_format>
+          <unit>Kilometer</unit>
+          <description>X coordinate of the vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Y</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">16</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">12</field_length>
+          <field_format>%12.6f</field_format>
+          <unit>Kilometer</unit>
+          <description>Y coordinate of the vertex</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Z</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">29</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">12</field_length>
+          <field_format>%12.6f</field_format>
+          <unit>Kilometer</unit>
+          <description>Z coordinate of the vertex</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>
+

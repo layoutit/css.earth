@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27341843%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  341843 (2008 EV5)            2026-Sep-08 08:25:00
+Rec #:  341843 (+COV) Soln.date: 2026-Apr-24_06:21:52   # obs: 1486 (2008-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458136.5 ! 2018-Jan-18.00 (TDB)         Residual RMS= .24008
+   EC= .08345224018240011  QR= .8783064681390266   TP= 2458139.9082653392
+   OM= 93.3884519776299    W=  234.8326082807916   IN= 7.43693356075285
+   A= .9582768150716078    MA= 356.4190273777784   ADIST= 1.038247162004189
+   PER= .93809             N= 1.050673074          ANGMOM= .016780673
+   DAN= .99965             DDN= .90796             L= 327.9928462
+   B= -6.073804            MOID= .0137116          TP= 2018-Jan-21.4082653392
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .200               ROTPER= 3.725
+   H= 20.05                G= .150                 B-V= n.a.
+                           ALBEDO= .137            STYP= n.a.
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -3.252981287005E-14 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#171, PHA  OCC=0       radar( 8 delay, 0 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************
