@@ -67,7 +67,10 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
       }));
       const handoffTimeS = source && !reducedMotion
         ? detailHandoffTime(flight, from, source.frame, optics) : 0;
-      const approachLimitS = source && !reducedMotion
+      // A replacement can arrive while the previous detail is still activating.
+      // Its retirement must not retire the application's camera progression.
+      const departureOwner = source ?? (presentWorld ? { apply(world) { presentWorld(world, optics); } } : null);
+      const approachLimitS = departureOwner && !reducedMotion
         ? destinationDetailTime(flight, from, targetFrame, optics) : 0;
       const controller = new AbortController();
       const cancel = () => controller.abort(signal.reason ?? cancelled());
@@ -116,8 +119,8 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         // Keep moving with the current owner while the bank loads. Transfer as
         // soon as it is ready and the source is coarse, or hold before the
         // destination proxy would grow into a detailed view.
-        const departure = source && !reducedMotion
-          ? animateWorldFlight({ owner: source, from, flight, anchors, signal: controller.signal,
+        const departure = departureOwner && !reducedMotion
+          ? animateWorldFlight({ owner: departureOwner, from, flight, anchors, signal: controller.signal,
             endElapsedS: approachLimitS,
             stopWhen: elapsed => bankReady && elapsed >= handoffTimeS,
             windowTarget, documentTarget, onPaint })

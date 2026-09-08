@@ -385,3 +385,31 @@ test('real input interrupts a same-object focus at the last painted camera', asy
   assert.deepEqual(f.navigation.capture(), drawn);
   assert.equal(f.pending, 0);
 });
+
+test('replacement departure uses the retained world while its previous detail owner is retired', async () => {
+  const f = fixture(), context = [];
+  f.navigation.apply({ ...f.navigation.capture(), pose: { positionM: [0, 0, 2e8], orientationXyzw: [0, 0, 0, 1] } });
+  const handoff = await drainFrames(f, { task: f.start({ presentWorld: world => context.push(world) }) });
+  handoff.mountOptions.onNavigationReady(f.mounted().navigation);
+  for (let frame = 0; frame < 12; frame++) f.step();
+  const drawn = context.at(-1);
+  f.controller.abort();
+  const retiredPaintCount = f.paints.length, beforeReplacement = context.length;
+  const replacement = new AbortController(), factory = deferred(), phases = [];
+  const task = f.start({ fromId: '1', toId: '0', fromMount: null, toFactory: factory.promise,
+    signal: replacement.signal, presentWorld: world => context.push(world), timing: { mark: phase => phases.push(phase) } });
+  f.step(); f.step();
+  assert.deepEqual(context[beforeReplacement], drawn, 'Replacement starts from the last drawn world pose');
+  assert.notDeepEqual(context.at(-1), drawn, 'Retiring detail must not make motion wait for the next factory');
+  assert.deepEqual(phases, ['first-motion']);
+  assert.equal(f.paints.length, retiredPaintCount, 'The disposed detail owner receives no camera writes');
+  factory.resolve(f.factory);
+  const nextHandoff = await drainFrames(f, { task });
+  const target = createWorldSelectionTarget(drawn, f.navigation.frame, f.navigation.optics());
+  const mount = { navigation: f.navigation };
+  nextHandoff.mountOptions.onNavigationReady(mount.navigation);
+  await drainFrames(f, { task: nextHandoff.afterMount(mount, { signal: replacement.signal }) });
+  closePose(f.navigation.capture().pose, target.pose);
+  assert.equal(f.pending, 0);
+  for (const name of ['pointerdown', 'wheel', 'keydown']) assert.equal(getEventListeners(f.documentTarget, name).length, 0);
+});
