@@ -32,6 +32,7 @@ export function createSceneRouter({
   let mountTask = null;
   let motionEnabled = false;
   let heliosphereEnabled = false;
+  let asteroidOrbitsEnabled = false;
   let scenePaused = true;
   let sceneError = null;
   let sceneState = "loading";
@@ -103,13 +104,17 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner = {};
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, heliosphereEnabled,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, heliosphereEnabled, asteroidOrbitsEnabled,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
           } },
           onHeliosphereChange(next) { if (shellOwner === owner && active) {
             heliosphereEnabled = next === true;
             worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
+          } },
+          onAsteroidOrbitsChange(next) { if (shellOwner === owner && active) {
+            asteroidOrbitsEnabled = next === true;
+            worldContextMount?.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
           } },
         });
       }
@@ -456,6 +461,7 @@ export function createSceneRouter({
         }
         worldContextMount = value;
         value.setHeliosphereEnabled?.(heliosphereEnabled);
+        value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         return value;
       }).catch(error => {
         if (worldContextAbort === controller) worldContextMountTask = null;
