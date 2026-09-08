@@ -1,6 +1,6 @@
 # Asteroid validation
 
-The [65 additions](asteroids.md) use 31 VLT/SPHERE models, 26 DAMIT models, seven NASA/JPL radar models and one Lucy reconstruction. The registry contains 78 asteroids and 148 objects. This record separates evidence for the original 52 additions from the thirteen added at `a73c3efc`.
+The [65 additions](asteroids.md) use 31 VLT/SPHERE models, 26 DAMIT models, seven NASA/JPL radar models and one Lucy reconstruction. The registry contains 78 asteroids and 155 objects. This record separates evidence for the original 52 additions from the thirteen added at `a73c3efc` and the later main-branch reconciliation at `44bced23`.
 
 ![Twelve representative asteroids captured in Chrome with their missing-imagery grids and prepared lighting](asteroids-overview.webp)
 
@@ -72,8 +72,14 @@ The aggregate test run exposed missing orbit-test tolerances for the thirteen ne
 
 The renderer run passed 306 of 307 tests; one five-second timeout passed when its file was rerun in isolation. The platform run passed 772 tests and failed thirty while incoming moon metadata was still being generated. After the build completed, all affected transport, contract, material and ownership checks passed targeted reruns. The shell suite passed all 220 tests. This is a complete set of passing component evidence with focused reruns, not a claim that the initial uninterrupted `pnpm test` command exited successfully.
 
-`pnpm acquire:planets -- --verify-only` still stops on missing pre-existing source inputs, first Ophelia's shared star image and font in this checkout. This is distinct from successful source verification for every added asteroid. The older Sun-specific ownership failure is resolved by the incoming main-branch changes; it is not a current asteroid or shared census failure.
+`pnpm acquire:planets -- --verify-only` still stops on missing main-branch source inputs: first Ophelia's shared star image and font in the earlier checkout, and Aegaeon's after the final main reconciliation. This is distinct from successful source verification for every added asteroid. The older Sun-specific ownership failure is resolved by the incoming main-branch changes; it is not a current asteroid or shared census failure.
 
-Completed checks were reused when the intervening changes did not affect their inputs. Early browser attempts interrupted by missing navigation markers or development rebuilds are retained as failed attempts and are not counted as passes. All 148 final navigation markers and 147 unique Sun world-context entries were prepared before the final browser run.
+Completed checks were reused when the intervening changes did not affect their inputs. Early browser attempts interrupted by missing navigation markers or development rebuilds are retained as failed attempts and are not counted as passes. The thirteen-body run used 148 navigation markers and 147 unique Sun world-context entries.
+
+Seven moons subsequently landed on main. Reconciliation at `44bced23` preserves both sets of bodies and regenerates all 155 navigation markers and 154 non-Sun world-context entries. All 515 astronomy tests and 185 focused registry, control-binding and router tests passed. Static generation of 156 pages and complete asset assembly passed after navigation preparation finished; an earlier static attempt made before the new atlas was published is recorded as a failure, not a passing full build. The live port 4278 temporarily served the validated isolated build during regeneration, then returned to this PR's checkout.
+
+All 104 earlier production transport hashes and all 39 new source/transport/manifest hashes still match the final asteroid bytes. Four additional production mounts of 666 Desdemona and Donaldjohanson passed at DPR 1 and 2 against the reconciled build, including all seven incoming moons in the 155-entry context. These targeted integration checks preserve the validity of the earlier body evidence without rerunning every body suite.
+
+Native search navigation separately opened Desdemona under Moons and 666 Desdemona under Asteroids, preserving one mounted scene. The first attempt omitted opening the matching accordion category and timed out on a hidden link; the corrected native flow passed without a product-code change. Search intentionally preserves the currently open matching category.
 
 Local logs, source-fit reports, restoration and installation receipts, captures, response hashes and traces are retained under `output/asteroids-combined`, `output/asteroids-continuation` and the source-family output directories. Per-body provenance, pinned scientific inputs and reproducible preparation recipes are checked in beside each package.
