@@ -1,0 +1,69 @@
+{
+  "diameterKm": 10.403,
+  "uncertaintyKm": 0.259,
+  "reportedUncertaintyKm": 0.259,
+  "uncertaintyMeaning": "Published statistical/Monte Carlo fit error; excludes the additional systematic term below.",
+  "systematicUncertaintyFraction": 0.1,
+  "systematicUncertaintyKm": 1.0403,
+  "systematicMeaning": "Original publication reports approximately 10% additional systematic uncertainty in diameter. This is a population-level floor, not a shape-specific accuracy guarantee.",
+  "quantity": "NEATM effective spherical diameter at the observing geometry",
+  "sourceUrl": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D77777",
+  "reference": "Masiero et al. (2011), ApJ 741, 68",
+  "referenceUrl": "https://doi.org/10.1088/0004-637X/741/2/68",
+  "selectedRow": {
+    "asteroid_number": "77777",
+    "prov_desig": "2001 QW16",
+    "comet_desig": "",
+    "mpc_packed_name": "77777",
+    "absolute_mag": "13.2000",
+    "slope_param": "0.1500",
+    "mean_jd": "2455327.9074070",
+    "n_w1": "0",
+    "n_w2": "0",
+    "n_w3": "11",
+    "n_w4": "13",
+    "fit_code": "DVB-",
+    "diameter": "10.4030",
+    "diameter_err": "0.2590",
+    "v_albedo": "0.0860",
+    "v_albedo_err": "0.0230",
+    "ir_albedo": "0.1280",
+    "ir_albedo_err": "0.0350",
+    "beaming_param": "1.3550",
+    "beaming_param_err": "0.0480",
+    "stacked_flag": "",
+    "reference": "Mas11",
+    "notes": "",
+    "reference2": "MASIEROETAL2011",
+    "type": "mainbelt",
+    "cntr": "50551"
+  },
+  "alternativeRows": [],
+  "sources": [
+    {
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D77777",
+      "sha256": "d0aa5471e48daaa175101ab6fb902363e5f3e51bdc07833351e02091371fcb45",
+      "bytes": 432
+    },
+    {
+      "url": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+      "sha256": "86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac",
+      "bytes": 18419
+    },
+    {
+      "url": "https://arxiv.org/pdf/1109.4096",
+      "sha256": "cdcbc1bf321e943d01cfe8b46dcf6729a2c100bf67104e85d6aec8d8efbb8f7f",
+      "bytes": 2276528
+    }
+  ],
+  "selectionReason": "Selected fully cryogenic data when available; these data include W3 or W4 thermal measurements. Other survey epochs are retained separately.",
+  "scaleKmPerSourceUnit": 8.384776486769843,
+  "formula": "scaleKmPerSourceUnit = diameterKm / cbrt(6 * signedSourceVolume / pi); meterScale =1000*scaleKmPerSourceUnit. Original shape coordinates are preserved.",
+  "approximate": true,
+  "limitations": [
+    "The thermal effective spherical diameter is used as an approximate volume-equivalent display scale; no joint shape/thermal inversion or independently measured volume is implied.",
+    "Quoted ±0.259 km is the catalog fit error; approximately 10% additional systematic diameter uncertainty applies."
+  ],
+  "sourceLabel": "Masiero et al. (2011), ApJ 741, 68",
+  "visibleDescription": "Approximate scale from a thermal diameter of 10.403 ± 0.259 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects."
+}

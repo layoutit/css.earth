@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272309%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              2309 Mr. Spock (1971 QX1)        2026-Sep-08 10:26:07
+Rec #:    2309 (+COV) Soln.date: 2026-Jun-05_06:23:45   # obs: 5864 (1956-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458556.5 ! 2019-Mar-14.00 (TDB)         Residual RMS= .20984
+   EC= .09219774373097916  QR= 2.733503257773896   TP= 2458922.6334128175
+   OM= 157.2013143279894   W=  272.1534571320337   IN= 10.97958304324487
+   A= 3.011121903362886    MA= 290.9361267789984   ADIST= 3.288740548951875
+   PER= 5.22517            N= .188630348           ANGMOM= .029722948
+   DAN= 2.97522            DDN= 2.99591            L= 69.3948864
+   B= -10.9717327          MOID= 1.77491999        TP= 2020-Mar-14.1334128175
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 9.8535             ROTPER= 6.722
+   H= 11.43                G= .150                 B-V= n.a.
+                           ALBEDO= .144            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#80, OCC=0
+2: source=ORB
+*******************************************************************************

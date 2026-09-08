@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27999%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                999 Zachia (A923 PE)           2026-Sep-08 10:25:49
+Rec #:     999 (+COV) Soln.date: 2026-Jun-05_04:20:17   # obs: 6647 (1923-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458343.5 ! 2018-Aug-13.00 (TDB)         Residual RMS= .21903
+   EC= .2172404400800726   QR= 2.043686256013562   TP= 2457634.2940902342
+   OM= 214.9709780386741   W=  127.9146593823426   IN= 9.760990829397832
+   A= 2.610873581949764    MA= 165.6905173521292   ADIST= 3.178060907885966
+   PER= 4.21878            N= .233628224           ANGMOM= .027131683
+   DAN= 2.8709             DDN= 2.19469            L= 343.2913866
+   B= 7.6865485            MOID= 1.05299997        TP= 2016-Sep-02.7940902342
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 8.424              ROTPER= 22.837
+   H= 10.89                G= .150                 B-V= n.a.
+                           ALBEDO= .226            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#79, OCC=0
+2: source=ORB
+*******************************************************************************

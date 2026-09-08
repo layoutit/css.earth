@@ -1,0 +1,92 @@
+{
+  "modelId": 1152,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1152",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4197/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4195/IAUspin.txt",
+  "version": "2016-01-04",
+  "lambda": 281,
+  "beta": 61,
+  "periodHours": 11.79214,
+  "nonconvex": false,
+  "calibrated": false,
+  "sourceFields": {
+    "ID": "1152",
+    "Asteroid ID": "(482) Petrina",
+    "Lambda": "281",
+    "Beta": "61",
+    "Period": "11.79214",
+    "YORP": "",
+    "JD0": "2444786",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "0.17",
+    "LSM Parameter 3": "0.07",
+    "LSM Parameter 4": "-0.84",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "0 (No)",
+    "Equivalent Diameter": "",
+    "Equivalent Diameter Error": "",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": ""
+  },
+  "originalVolume": 0.9999999888030343,
+  "originalSignedVolume": 0.9999999888030343,
+  "originalVolumeEquivalentDiameter": 1.2407009771681046,
+  "originalUnits": "dimensionless DAMIT source units; uncalibrated model",
+  "vertices": 1022,
+  "faces": 2040,
+  "extentsSourceUnits": [
+    [
+      -0.536465,
+      0.682631
+    ],
+    [
+      -0.779258,
+      0.833414
+    ],
+    [
+      -0.495808,
+      0.497596
+    ]
+  ],
+  "radialRangeSourceUnits": [
+    0.47504278898221364,
+    0.8543836174348148
+  ],
+  "firstVertexSourceUnits": [
+    0.15386,
+    0.25639,
+    0.466694
+  ],
+  "firstFaceZeroBased": [
+    0,
+    1,
+    2
+  ],
+  "alternatives": [
+    {
+      "modelId": 1153,
+      "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1153",
+      "lambda": 94,
+      "beta": 24,
+      "periodHours": 11.7921,
+      "reason": "Original alternative pole solution retained as an unresolved ambiguity; one representative model is displayed."
+    }
+  ],
+  "selectionReason": "One original published model retained for a single body view. Alternative mirror poles remain unresolved, not averaged.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/161"
+  ]
+}

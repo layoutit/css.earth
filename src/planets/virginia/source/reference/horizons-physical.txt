@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2750%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                50 Virginia (A857 TA)          2026-Sep-08 10:25:11
+Rec #:      50 (+COV) Soln.date: 2026-Jun-05_03:05:19   # obs: 9089 (1857-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458146.5 ! 2018-Jan-28.00 (TDB)         Residual RMS= .24541
+   EC= .2859465856224083   QR= 1.89195848442164    TP= 2457907.5998029364
+   OM= 173.5315692104576   W=  200.146595860302    IN= 2.837984189074836
+   A= 2.649603581926396    MA= 54.59454219720721   ADIST= 3.407248679431152
+   PER= 4.313              N= .228524475           ANGMOM= .026831732
+   DAN= 3.32576            DDN= 1.91805            L= 13.6554395
+   B= -.9771156            MOID= .89295101         TP= 2017-Jun-03.0998029364
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 42.037             ROTPER= 14.315
+   H= 9.43                 G= .150                 B-V= .703
+                           ALBEDO= .050            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#156, OCC=0
+2: source=ORB
+*******************************************************************************

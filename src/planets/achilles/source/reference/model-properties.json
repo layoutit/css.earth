@@ -1,0 +1,87 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3934",
+  "modelId": 3934,
+  "modelVersion": "2019-05-07",
+  "diameterKm": 131,
+  "diameterInterpretation": "Occultation-calibrated volume-equivalent diameter: 131 ± 8 km.",
+  "calibration": {
+    "diameterKm": 131,
+    "quotedUncertaintyKm": 8,
+    "quantity": "occultation-constrained volume-equivalent diameter",
+    "reference": "Hanuš et al. (2023), A&A 679, A56, Fig.A.2 and TableB.3",
+    "notes": "2021-11-24 stellar occultation. Existing DAMIT solution in TableB.3 has λ172°,β−5°,P7.30630h, matching selected3934. The paper scales its silhouette to occultation chords; 131±8km is the reported volume-equivalent size.",
+    "basis": "published occultation volume-equivalent diameter of the matching DAMIT model solution",
+    "assumption": "Uniform scale uses the published volume-equivalent diameter with its ±8km uncertainty. The archived file remains unit volume; the paper identifies the same existing DAMIT spin solution. No independent re-fit of occultation chords is performed here.",
+    "methodSystematicFraction": null,
+    "referenceUrl": "https://doi.org/10.1051/0004-6361/202346022",
+    "uncertaintyKm": 8,
+    "scaleKmPerSourceUnit": 105.58546909565929,
+    "sourceUrl": "https://doi.org/10.1051/0004-6361/202346022",
+    "sourceLabel": "Hanuš et al. (2023), A&A 679, A56, Fig.A.2 and TableB.3",
+    "diameterSemantics": "occultation-constrained volume-equivalent diameter",
+    "limitations": "Uniform scale uses the published volume-equivalent diameter with its ±8km uncertainty. The archived file remains unit volume; the paper identifies the same existing DAMIT spin solution. No independent re-fit of occultation chords is performed here. 2021-11-24 stellar occultation. Existing DAMIT solution in TableB.3 has λ172°,β−5°,P7.30630h, matching selected3934. The paper scales its silhouette to occultation chords; 131±8km is the reported volume-equivalent size.",
+    "visibleDescription": "Occultation-calibrated volume-equivalent diameter: 131 ± 8 km."
+  },
+  "periodHours": 7.3063,
+  "poleEclipticJ2000Degrees": [
+    172,
+    -5
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/12316/shape.txt",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 105585.4690956593,
+    "firstVertexKm": [
+      22.580086078921315,
+      14.507337868274492,
+      55.686937841210764
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      138.81659495507435,
+      177.02755387891708,
+      115.38327270039102
+    ],
+    "volumeCubicKm": 1177097.6950335547,
+    "volumeEquivalentRadiusKm": 65.49999999999999,
+    "radialRangeKm": [
+      52.588071104094546,
+      95.25971324680538
+    ]
+  },
+  "elevation": [
+    -20,
+    30
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1310,
+    "estimatedErrorMeters": 206.89854431152344,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1176797187882159.5
+    }
+  }
+}

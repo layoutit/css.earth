@@ -1,0 +1,9 @@
+# Rusthawelia attribution
+
+Shape and spin: Ďurech et al; [DAMIT model 3188, version 2019-05-07](https://damit.cuni.cz/projects/damit/asteroid_models/view/3188). DAMIT content is [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), except where explicitly stated otherwise. Credit the original model authors and the Astronomical Institute of Charles University, Josef Ďurech and Vojtěch Sidorin.
+
+Physical scale: [Masiero et al. (2014), ApJ 791, 121](https://doi.org/10.1088/0004-637X/791/2/121), using the source measurement and its stated uncertainty. The thermal diameter provides an approximate display scale for the independently reconstructed shape; source authors did not produce this combined visualization. Preserve the scale and pole limitations in SOURCE.md and the active lens description.
+
+No agency, archive, author or mission endorsement is implied. Scientific publications retain their original copyright; paper pages are not runtime assets.
+
+Sky: ESO/S. Brunier, CC-BY-4.0 (source/stars/ESO-IMAGE-LICENSE.md). Stars: HYG 4.1, David Nash/Astronexus, CC-BY-SA-4.0 (source/stars/LICENSE.md). Font: Inter Project Authors, SIL OFL 1.1 (source/presentation/LICENSE.INTER-OFL).

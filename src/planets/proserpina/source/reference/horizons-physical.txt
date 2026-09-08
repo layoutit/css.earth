@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2726%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               26 Proserpina (A853 JA)         2026-Sep-08 10:25:07
+Rec #:      26 (+COV) Soln.date: 2026-Jun-05_03:03:24   # obs: 4907 (1861-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457797.5 ! 2017-Feb-13.00 (TDB)         Residual RMS= .30082
+   EC= .09074227051992684  QR= 2.413791612446869   TP= 2458138.6383854174
+   OM= 45.78318738342534   W=  193.9876733762597   IN= 3.563992943729804
+   A= 2.654683632799152    MA= 282.265196479095    ADIST= 2.895575653151434
+   PER= 4.32541            N= .227868826           ANGMOM= .027912093
+   DAN= 2.88703            DDN= 2.41976            L= 239.7448677
+   B= -.8609409            MOID= 1.40248001        TP= 2018-Jan-20.1383854174
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 47.4               ROTPER= 13.11
+   H= 7.48                 G= .150                 B-V= .891
+                           ALBEDO= .1966           STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#161, OCC=0
+2: source=ORB
+*******************************************************************************

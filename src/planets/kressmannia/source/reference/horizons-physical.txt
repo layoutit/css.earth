@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27800%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              800 Kressmannia (A915 FG)        2026-Sep-08 10:25:41
+Rec #:     800 (+COV) Soln.date: 2026-Jun-05_04:04:24   # obs: 6874 (1905-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458408.5 ! 2018-Oct-17.00 (TDB)         Residual RMS= .24138
+   EC= .2017494999385227   QR= 1.750061044239384   TP= 2458931.188952337
+   OM= 325.1693747327115   W=  347.5851102498109   IN= 4.262714855767872
+   A= 2.192370745905706    MA= 201.3001935225283   ADIST= 2.634680447572029
+   PER= 3.24623            N= .303621888           ANGMOM= .02494681
+   DAN= 1.75696            DDN= 2.6192             L= 312.7877675
+   B= -.9156311            MOID= .73553401         TP= 2020-Mar-22.6889523370
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 7.7145             ROTPER= 4.464
+   H= 11.33                G= .150                 B-V= .923
+                           ALBEDO= .243            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#66, OCC=0
+2: source=ORB
+*******************************************************************************

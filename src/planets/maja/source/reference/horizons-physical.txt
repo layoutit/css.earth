@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2766%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  66 Maja (A861 GA)            2026-Sep-08 10:25:15
+Rec #:      66 (+COV) Soln.date: 2026-Jun-05_03:06:47   # obs: 7455 (1861-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457033.5 ! 2015-Jan-11.00 (TDB)         Residual RMS= .24209
+   EC= .1705828319005825   QR= 2.195047683884475   TP= 2456944.5669506742
+   OM= 7.536885453673689   W=  43.99136095313147   IN= 3.046712627301141
+   A= 2.646494150723158    MA= 20.35920661532706   ADIST= 3.097940617561841
+   PER= 4.30541            N= .228927342           ANGMOM= .0275743
+   DAN= 2.28862            DDN= 2.92894            L= 51.4877511
+   B= 2.1155775            MOID= 1.20685995        TP= 2014-Oct-14.0669506742
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 35.91              ROTPER= 9.73509
+   H= 9.53                 G= .150                 B-V= .697
+                           ALBEDO= .016            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#88, OCC=0
+2: source=ORB
+*******************************************************************************

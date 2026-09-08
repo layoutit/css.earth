@@ -1,0 +1,54 @@
+{
+  "modelId": 513,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/513",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2020/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/513/spin.txt",
+  "modelVersion": "2013-02-11",
+  "lambda": 161,
+  "beta": -46,
+  "periodHours": 7.067967,
+  "nonconvex": false,
+  "sourceMesh": {
+    "vertices": 1021,
+    "triangles": 2038,
+    "signedVolumeSourceUnitsCubed": 1.0000001227802775,
+    "volumeEquivalentDiameterSourceUnits": 1.2407010325766683,
+    "boundaryOrNonManifoldEdges": 0,
+    "inconsistentOrientedEdges": 0,
+    "minimumOriginFacingNormalDotSourcePoint": 4.449339886400121e-8,
+    "boundsSourceUnits": [
+      [
+        -0.722356,
+        0.655984
+      ],
+      [
+        -0.694008,
+        0.628832
+      ],
+      [
+        -0.566425,
+        0.561487
+      ]
+    ],
+    "originFacingAnomalies": [],
+    "sourceCoordinatesUnmodified": true,
+    "method": "Independent oriented tetrahedron signed-volume sum over original DAMIT facet list; closed consistently wound two-manifold; origin-facing facet normal anomalies reported separately."
+  },
+  "poleAlternatives": [
+    {
+      "modelId": 514,
+      "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/514",
+      "lambda": 45,
+      "beta": -57,
+      "periodHours": 7.067965,
+      "epochJd": 2444491,
+      "phaseDegrees": 0,
+      "modelVersion": "2013-02-11",
+      "qualityFlag": ""
+    }
+  ],
+  "selectionReason": "Refreshed all current DAMIT search matches; none has a published calibrated diameter. Retain the lower-id published pole solution without claiming it resolves pole ambiguity.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/148"
+  ]
+}

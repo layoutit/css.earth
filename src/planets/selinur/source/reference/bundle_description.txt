@@ -1,0 +1,404 @@
+Description of the NEOWISE Diameters and Albedos bundle V2.0
+============================================================
+
+Bundle Generation Date: 2021-04-15
+Peer Review: NEOWISE Review
+Discipline node: Small Bodies Node
+
+
+Content description for the NEOWISE Diameters and Albedos bundle
+================================================================
+
+Content description for the NEOWISE Diameters and Albedos bundle
+================================================================
+
+This data set is a compilation of the published physical properties
+for minor planets observed by the NEOWISE survey.  Data are separated
+by orbital classification, with a separate file for objects with Main
+Belt orbits that have shown comet-like activity.  These are listed by
+their cometary designations as well as their asteroidal designations,
+if available. Note that some objects in the Centaur list are also
+designated as comets (e.g. (2060) 95P/Chiron).
+
+The NEOWISE survey phases are divided by cryogenic state (for the
+prime mission) and survey year (for the reactivation mission).  The
+Cryogenic survey, using all four infrared bands, was conducted from 14
+January 2010 to 6 August 2010.  The 3-band survey was conducted from 6
+August 2010 to 29 September 2010.  The Post-Cryo survey using the two
+shortest wavelengths was conducted from 29 September 2010 to 1
+February 2011.  The NEOWISE reactivation survey began 13 December
+2013, and the survey is divided into annual data releases every 13
+December.
+
+Each line of the data set provides effective spherical diameter at the
+given observing geometry (in km), visible geometric albedo (V band),
+near-infrared geometric albedo (at a wavelength of 3.4 microns) and
+thermal model beaming parameter.  Thermal model fits were performed
+primarily using the Near-Earth Asteroid Thermal Model (NEATM; Harris
+1998); in a few instances the Fast Rotating Model was used (Lebofsky &
+Spencer, 1989).
+
+Each line has a code identifying which parameters were allowed to vary
+during the least-squares fit.  The number of parameters fit depended
+on the number of WISE bands available, whether each band was dominated
+by thermal emission or reflected sunlight, and the availability of a
+measured absolute magnitude (H).  When measurements in all four WISE
+bands and an H magnitude were available, they were used as
+observations input to the thermal model which performed a
+least-squares minimization using diameter, albedo, infrared albedo and
+beaming parameter as free parameters to be fit.  When fewer
+measurements were available, fewer parameters were fit.  Parameters
+that could not be fit were set to an assumed value as described in the
+associated reference publications.  Assumed values varied by
+population based on the typical value for that parameter for that
+population, as determined for objects where more bands were available.
+The majority of fits are based on single-frame detections.  For the
+remainder, a flag of 'S' indicates that the fit is based on a
+co-moving stack of the predicted positions of the object in the
+NEOWISE data.  For stacks, positions were computed using the IPAC
+Moving Object Search Tool (MOST;
+http://irsa.ipac.caltech.edu/applications/MOST/), and the resulting
+thumbnails were stacked using the Image Co-addition with Optional
+Resolution Enhancement routine (ICORE; Masci 2013).  Extraction of
+photometry for each stack is described in the publication associated
+with the fit.  As this is a different photometric measurement method
+than the standard PSF-fit photometry archived in the single-frame
+detection catalog, fits based on stacked data may include additional
+systematic uncertainties.
+
+The formal designation of each object (asteroid number, comet number,
+or satellite number) is also provided in each line of the tables.  The
+tables include the provisional designation for an object where
+available, MPC packed format names (for comparison with the tables
+published in the referenced articles), absolute magnitude (H) and
+phase parameter (G) from the H-G photometric system (Bowell, et al.,
+1989), mean Julian Date of the observations used for the fit, number
+of detections in each band used for fitting, and a reference code that
+is described in the "references" table.  The listed H and G are the
+measured values at the time of the original publication that were used
+as input to the thermal model.
+
+Objects that were detected at different epochs (and therefore
+different viewing geometries) will have multiple entries in a
+table. Fits for each epoch were computed independently; the individual
+publications describe the criteria for splitting observations into
+separate epochs.  Fits from multiple epochs are included to give users
+an indication of whether an object is more or less likely to be round.
+
+All images obtained by the NEOWISE survey were processed using the
+standard WISE Scan-Frame Pipeline that includes photometric
+calibration and source extraction based on point spread function (PSF)
+fitting.  The pipeline is described in the Explanatory Supplement to
+each WISE and NEOWISE data release (Cutri, et al., 2012; 2015) that is
+hosted with the data at the NASA/IPAC Infrared Science Archive.
+
+Preliminary analysis of fitted physical properties was conducted by the
+NEOWISE team to describe and validate the data set.  In addition to
+the analyses conducted in the papers presenting the fits, other
+analyses comparing the NEOWISE physical properties to external
+data sets include:
+
+-Discussion of the thermal modeling routine and comparison with radar
+ and occultation data (Mainzer et al. 2011a)
+
+-Comparison of NEOWISE physical property fits to those from IRAS
+ (Mainzer et al. 2011b)
+
+-Comparison of NEOWISE physical properties to spectral taxonomic
+ classifications, including albedo distributions of each taxonomic
+ class (Mainzer et al. 2011c)
+
+-Comparison of NEOWISE physical properties to taxonomic
+ classifications based on Sloan Digital Sky Survey colors (Mainzer et
+ al. 2012)
+
+-Comparison of NEOWISE-derived albedos with asteroid polarimetric
+ properties (Masiero et al. 2012)
+
+-Analysis of the accuracy of asteroid diameter determinations using
+ the albedo distributions of Main Belt families (Masiero et al. 2018)
+
+Examples of comparisons by external teams to other data sets or
+independent fits of the NEOWISE data include:
+
+-Comparison of B-type asteroid physical properties from an independent
+ thermal model to the NEOWISE values (Ali-Lagoa et al., 2013)
+
+-Comparison of infrared-derived diameters from IRAS, AKARI, and
+ NEOWISE (Usui et al. 2014)
+
+-Comparison of sizes found via detailed thermophysical models to
+ NEATM-based sizes published by NEOWISE (Hanus et al., 2018)
+
+-Comparison of updated fits of the AKARI data to NEOWISE physical
+ properties (Ali-Lagoa et al., 2018)
+ 
+
+References
+--------------
+
+Ali-Lagoa, V., de Leon, J., Licandro, J., et al., 2013, "Physical
+properties of B-type asteroids from WISE data", A&A, 554, A71.
+
+Ali-Lagoa, V., Muller, T.G., Usui, F., Hasegawa, S., 2018, "The AKARI
+IRC asteroid flux catalogue: updated diameters and albedos ", A&A,
+612, A85.
+
+Bowell, E., Hapke, B., Domingue, D., et al., 1989, "Application of
+photometric models to asteroids", Asteroids II, University of Arizona
+Press, 524.
+
+Cutri, R.M., Wright, E., Conrow, T., et al., 2012, "Explanatory Supplement
+to the WISE All-Sky Data Release Products".
+
+Cutri, R.M., Mainzer, A., Conrow, T., et al., 2015, "Explanatory Supplement
+to the NEOWISE Data Release Products".
+
+Hanus, J., Delbo, M., Durech, J., Ali-Lagoa, V., 2018, "Thermophysical
+modeling of main-belt asteroids from WISE thermal data", Icarus, 309,
+297.
+
+Harris, A.W., 1998, "A Thermal Model for Near-Earth Asteroids", Icarus
+131, 291.
+
+Lebofsky, L.A. & Spencer, J.R., 1989, "Radiometry and a thermal
+modeling of asteroids", Asteroids II, University of Arizona Press, 128.
+
+Mainzer, A., Grav, T., Masiero, J., et al., 2011a, "Thermal Model
+Calibration for Minor Planets Observed with Wide-field Infrared Survey
+Explorer/NEOWISE", ApJ, 736, 100.
+
+Mainzer, A., Grav, T., Masiero, J., et al., 2011b, "Thermal Model
+Calibration for Minor Planets Observed with WISE/NEOWISE: Comparison
+with Infrared Astronomical Satellite", ApJL, 737, 9.
+
+Mainzer, A., Grav, T., Masiero, J., et al., 2011c, "NEOWISE Studies of
+Spectrophotometrically Classified Asteroids: Preliminary Results",
+ApJ, 741, 90.
+
+Mainzer, A., Masiero, J., Grav, T., et al., 2012, "NEOWISE Studies of
+Asteroids with Sloan Photometry: Preliminary Results", ApJ, 745, 7.
+
+Masci, F., 2013, "ICORE: Image Co-addition with Optional Resolution
+Enhancement", arXiv:1301.2718.
+
+Masiero, J., Mainzer, A., Grav, T., et al., 2012 "A Revised Asteroid
+Polarization-Albedo Relationship Using WISE/NEOWISE Data", ApJ, 749,
+104.
+
+Masiero, J., Mainzer, A., Wright, E., 2018, "A Family-Based Method of
+Quantifying NEOWISE diameter errors", AJ, 156, 62.
+
+Usui, F., Hasegawa, S., Ishiguro, M., et al., 2014, "A comparative
+study of asteroid surveys: IRAS, AKARI, and WISE", PASJ, 66, 56.
+
+
+Caveats to the data user
+========================
+
+The quality of underlying photometric data is described in the WISE
+Explanatory Supplement documentation (Cutri et al., 2012; 2015).  The
+quoted error bars for fitted physical properties represent statistical
+uncertainties propagated from the measured data and the assumed error
+bars on the absolute magnitudes (denoted H) and phase curve slope
+parameter (denoted G) drawn from the Minor Planet Center.  As
+discussed in Mainzer et al. (2011b), there are additional minimum
+systematic errors on diameters computed from WISE observations that
+are ???10% 1-sigma for the ensemble of objects, subject to the
+assumption that spherical effective diameters can be computed for
+non-spherical shapes.  This uncertainty propagates to a ~20% relative
+uncertainty in the albedos, subject to the assumption that the
+measurements of the H and G photometric parameters are accurate.
+These should be regarded as minimum errors in cases of good
+signal-to-noise detections when the beaming parameter and the infrared
+albedo can be fitted. It should also be noted that these error
+estimates apply only to objects as distant as Saturn. Objects observed
+by WISE at greater distances (and therefore lower temperatures) may be
+subject to additional errors.
+
+Most objects have ~10 detections spaced roughly evenly over 36 hours;
+thus, averaging over the rotational periods of many objects provides a
+robust measurement of the effective spherical diameter.  However, the
+diameters could be less accurately constrained for objects with fewer
+detections, with spin axes near the line of sight, or with rotation
+periods related by a low integer ratio to the WISE satellite's orbital
+period (resulting in non-random, aliased samples of the light curve).
+Fits of objects at different epochs can mitigate some, but not all, of
+this uncertainty.  Objects indicated with the 'S' stacked flag are
+based on fluxes derived from image co-adds that are co-moving with the
+object's predicted position and may have larger systematic
+uncertainties (e.g. Bauer et al., 2013).
+
+The objects presented here are moving objects with changing
+orbits. Orbit changes are both natural, due to perturbations, and
+caused by improved observational constraints, and thus can change
+dramatically in some cases.  All fits were performed using the
+MPC-published orbit at the time the source papers were written; fits
+have not been updated based on changing orbits for this compilation.
+
+In 2011, a software bug was identified in the NEOWISE thermal modeling
+software; the net effect of this bug was to vary some of the diameters
+by a few percent on average. The magnitude of the shifts was small and
+below the quoted minimum systematic uncertainty in diameter that
+results from using the NEATM, and thus does not materially change the
+conclusions of the affected papers. The effect of the bug in general
+is smaller than the effects of other sources of uncertainty such as
+incomplete coverage of light curve amplitudes.  This bug affects fits
+done before July 2011 when it was fixed.  Reprocessing of the affected
+fits is currently being undertaken.  Readers are advised to consult
+Wright et al. (2018) for details.
+
+For many Main Belt objects without optical followup, an artificial H
+magnitude is included in the MPC orbit catalog.  These values
+originated with a request from the MPC that NEOWISE discoveries
+include a guess of the apparent visible magnitude to provide guidance
+for followup observers.  While the majority of NEOs received later
+followup and this artificial magnitude was subsequently ignored by the
+MPC for calculations of the H absolute magnitude, for many MBAs this
+magnitude has persisted in the observation catalog, and thus has
+resulted in a published H magnitude that is not constrained by optical
+observation.  As these objects tend to have short-arc orbits, and thus
+uncertain heliocentric and geocentric distances at the time of
+observation, diameter fits should be considered to be of lower
+confidence and albedo fits should not be used.  These can be easily
+identified by users as they will only have observations from NEOWISE
+(observatory code C51) in the MPC observation database.  See Masiero
+et al. (2011) and Grav et al. (2011) for further discussion of the
+impact of arc length on fit quality.
+
+References:
+
+Bauer, J.M., Grav, T., Blauvelt, E., et al., 2013, "Centaurs and
+Scattered Disk Objects in the Thermal Infrared: Analysis of
+WISE/NEOWISE Observations", ApJ, 773, 22.
+
+Cutri, R.M., Wright, E., Conrow, T., et al., 2012, "Explanatory Supplement
+to the WISE All-Sky Data Release Products".
+
+Cutri, R.M., Mainzer, A., Conrow, T., et al., 2015, "Explanatory Supplement
+to the NEOWISE Data Release Products".
+
+Grav, T., Mainzer, A., Bauer, J., et al., 2011, "WISE/NEOWISE Observations of
+Jovian Trojans: Preliminary Results", ApJ, 742, 40.
+
+Mainzer, A., Grav, T., Masiero, J., et al., 2011a, "Thermal Model
+Calibration for Minor Planets Observed with Wide-field Infrared Survey
+Explorer/NEOWISE", ApJ, 736, 100.
+
+Mainzer, A., Grav, T., Masiero, J., et al., 2011b, "Thermal Model
+Calibration for Minor Planets Observed with Wide-field Infrared Survey
+Explorer/NEOWISE", ApJ, 736, 100.
+
+Masiero, J., Mainzer, A., Grav, T., et al., 2011, "Main Belt Asteroids
+with WISE/NEOWISE. I. Preliminary Albedos and Diameters", ApJ, 741,
+68.
+
+Wright, E., Mainzer A., Masiero, J., Grav, T., Cutri, R., Bauer, J.,
+2018, "Response to 'An empirical examination of WISE/NEOWISE asteroid
+analysis and results'", arXiv:1811.01454.
+
+
+Caveats to the data user
+========================
+
+The quality of underlying photometric data is described in the WISE
+Explanatory Supplement documentation (Cutri et al., 2012; 2015).  The
+quoted error bars for fitted physical properties represent statistical
+uncertainties propagated from the measured data and the assumed error
+bars on the absolute magnitudes (denoted H) and phase curve slope
+parameter (denoted G) drawn from the Minor Planet Center.  As
+discussed in Mainzer et al. (2011b), there are additional minimum
+systematic errors on diameters computed from WISE observations that
+are [INVALID_PDS_CHARACTER]10% 1-sigma for the ensemble of objects, subject to the
+assumption that spherical effective diameters can be computed for
+non-spherical shapes.  This uncertainty propagates to a ~20% relative
+uncertainty in the albedos, subject to the assumption that the
+measurements of the H and G photometric parameters are accurate.
+These should be regarded as minimum errors in cases of good
+signal-to-noise detections when the beaming parameter and the infrared
+albedo can be fitted. It should also be noted that these error
+estimates apply only to objects as distant as Saturn. Objects observed
+by WISE at greater distances (and therefore lower temperatures) may be
+subject to additional errors.
+
+Most objects have ~10 detections spaced roughly evenly over 36 hours;
+thus, averaging over the rotational periods of many objects provides a
+robust measurement of the effective spherical diameter.  However, the
+diameters could be less accurately constrained for objects with fewer
+detections, with spin axes near the line of sight, or with rotation
+periods related by a low integer ratio to the WISE satellite's orbital
+period (resulting in non-random, aliased samples of the light curve).
+Fits of objects at different epochs can mitigate some, but not all, of
+this uncertainty.  Objects indicated with the 'S' stacked flag are
+based on fluxes derived from image co-adds that are co-moving with the
+object's predicted position and may have larger systematic
+uncertainties (e.g. Bauer et al., 2013).
+
+The objects presented here are moving objects with changing
+orbits. Orbit changes are both natural, due to perturbations, and
+caused by improved observational constraints, and thus can change
+dramatically in some cases.  All fits were performed using the
+MPC-published orbit at the time the source papers were written; fits
+have not been updated based on changing orbits for this compilation.
+
+In 2011, a software bug was identified in the NEOWISE thermal modeling
+software; the net effect of this bug was to vary some of the diameters
+by a few percent on average. The magnitude of the shifts was small and
+below the quoted minimum systematic uncertainty in diameter that
+results from using the NEATM, and thus does not materially change the
+conclusions of the affected papers. The effect of the bug in general
+is smaller than the effects of other sources of uncertainty such as
+incomplete coverage of light curve amplitudes.  This bug affects fits
+done before July 2011 when it was fixed.  Reprocessing of the affected
+fits is currently being undertaken.  Readers are advised to consult
+Wright et al. (2018) for details.
+
+For many Main Belt objects without optical followup, an artificial H
+magnitude is included in the MPC orbit catalog.  These values
+originated with a request from the MPC that NEOWISE discoveries
+include a guess of the apparent visible magnitude to provide guidance
+for followup observers.  While the majority of NEOs received later
+followup and this artificial magnitude was subsequently ignored by the
+MPC for calculations of the H absolute magnitude, for many MBAs this
+magnitude has persisted in the observation catalog, and thus has
+resulted in a published H magnitude that is not constrained by optical
+observation.  As these objects tend to have short-arc orbits, and thus
+uncertain heliocentric and geocentric distances at the time of
+observation, diameter fits should be considered to be of lower
+confidence and albedo fits should not be used.  These can be easily
+identified by users as they will only have observations from NEOWISE
+(observatory code C51) in the MPC observation database.  See Masiero
+et al. (2011) and Grav et al. (2011) for further discussion of the
+impact of arc length on fit quality.
+
+References:
+
+Bauer, J.M., Grav, T., Blauvelt, E., et al., 2013, "Centaurs and
+Scattered Disk Objects in the Thermal Infrared: Analysis of
+WISE/NEOWISE Observations", ApJ, 773, 22.
+
+Cutri, R.M., Wright, E., Conrow, T., et al., 2012, "Explanatory Supplement
+to the WISE All-Sky Data Release Products".
+
+Cutri, R.M., Mainzer, A., Conrow, T., et al., 2015, "Explanatory Supplement
+to the NEOWISE Data Release Products".
+
+Grav, T., Mainzer, A., Bauer, J., et al., 2011, "WISE/NEOWISE Observations of
+Jovian Trojans: Preliminary Results", ApJ, 742, 40.
+
+Mainzer, A., Grav, T., Masiero, J., et al., 2011a, "Thermal Model
+Calibration for Minor Planets Observed with Wide-field Infrared Survey
+Explorer/NEOWISE", ApJ, 736, 100.
+
+Mainzer, A., Grav, T., Masiero, J., et al., 2011b, "Thermal Model
+Calibration for Minor Planets Observed with Wide-field Infrared Survey
+Explorer/NEOWISE", ApJ, 736, 100.
+
+Masiero, J., Mainzer, A., Grav, T., et al., 2011, "Main Belt Asteroids
+with WISE/NEOWISE. I. Preliminary Albedos and Diameters", ApJ, 741,
+68.
+
+Wright, E., Mainzer A., Masiero, J., Grav, T., Cutri, R., Bauer, J.,
+2018, "Response to 'An empirical examination of WISE/NEOWISE asteroid
+analysis and results'", arXiv:1811.01454.
+
