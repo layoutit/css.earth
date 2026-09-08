@@ -72,3 +72,21 @@ test('polar-connected coverage preserves enclosed photographic black before resa
     await assert.rejects(prepareByteObservation(path,entry,{...policy,connectedEdge:'typo'},4,4));
   } finally { await rm(directory,{recursive:true,force:true}); }
 });
+
+test('a declared compressed gray exterior uses connected coverage without erasing isolated terrain', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-gray-exterior-'));
+  try {
+    const path = join(directory, 'source.png');
+    const gray = [78,75,110,110, 79,110,110,81, 110,110,110,110, 110,78,110,110];
+    await sharp(Buffer.from(gray), {raw:{width:4,height:4,channels:1}}).toColourspace('b-w').png().toFile(path);
+    const entry = {id:'gray-exterior',width:4,height:4};
+    const policy = {kind:'image-monochrome-no-data',noData:78,centerLongitude:180,
+      connectedEdge:'north',connectedFillRange:[75,81]};
+    const result = await prepareByteObservation(path,entry,policy,4,4);
+    assert.deepEqual([...result.missing], [1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0]);
+    assert.equal(result.rgb[13*3],78);
+    assert.equal(result.sourceMissingPixels,4);
+    await assert.rejects(prepareByteObservation(path,entry,{...policy,connectedEdge:undefined},4,4),/range/);
+    await assert.rejects(prepareByteObservation(path,entry,{...policy,connectedFillRange:[81,75]},4,4),/range/);
+  } finally { await rm(directory,{recursive:true,force:true}); }
+});

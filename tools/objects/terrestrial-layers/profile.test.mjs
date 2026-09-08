@@ -20,3 +20,14 @@ test('disk normalization rejects unsupported physical or display assumptions',as
   assert.throws(()=>parseTerrestrialProfile(profile),/source-bound/);
  }
 });
+
+test('a shape display requires a source mesh and consumer for the shared no-imagery grid', async () => {
+ const profile=await read('ida');
+ profile.raster.observations=[];profile.raster.scientific=[];
+ profile.raster.shapeViews=[{id:'shape',label:'Shape',consumer:'geometry'}];
+ profile.presentation.defaultLens='shape';
+ assert.equal(parseTerrestrialProfile(profile).presentation.defaultLens,'shape');
+ assert.throws(()=>parseTerrestrialProfile({...profile,geometry:{...profile.geometry,radialTerrain:undefined}}),/pinned mesh/);
+ profile.raster.shapeViews[0].consumer='';
+ assert.throws(()=>parseTerrestrialProfile(profile),/source consumer/);
+});

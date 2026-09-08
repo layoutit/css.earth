@@ -1,0 +1,81 @@
+PDS_VERSION_ID        = PDS3                                                  
+                                                                              
+RECORD_TYPE           = "FIXED_LENGTH"                                        
+RECORD_BYTES          = 32                                                    
+FILE_RECORDS          = 7381                                                  
+                                                                              
+^TABLE                = "253MATHILDE.TAB"                                     
+                                                                              
+DATA_SET_ID           = "NEAR-A-5-COLLECTED-MODELS-V1.0"                      
+PRODUCT_NAME          = "253 MATHILDE SHAPE MODEL NEAR MSI"                   
+PRODUCT_ID            = "NEARMOD-253MATHILDE-200204"                          
+INSTRUMENT_HOST_NAME  = "NEAR EARTH ASTEROID RENDEZVOUS"                      
+INSTRUMENT_NAME       = "MULTI-SPECTRAL IMAGER"                               
+TARGET_NAME           = "253 MATHILDE"                                        
+START_TIME            = 1997-06-25T00:00:00.000                               
+STOP_TIME             = 1997-06-27T23:59:59.999                               
+PRODUCT_CREATION_TIME = 2000-06-01  /* Peer Review Date */                    
+RECORD_FORMAT         = "3(2X,F8.4)"                                          
+                                                                              
+OBJECT     = TABLE                                                            
+  ROWS               = 7381                                                   
+  ROW_BYTES          = 32                                                     
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 3                                                      
+  DESCRIPTION        = "Numerical shape model of asteroid 253                 
+     Mathilde, constructed from NEAR images of Mathilde taken                 
+     June 27, 1997. For further information see [THOMASETAL1999].             
+     (Thomas, et al. 1999, Icarus 140, 17.)                                   
+                                                                              
+     This shape model consists of a grid with points every 3 degrees          
+     in latitude and longitude, with a radius in km associated with           
+     each point.  Coordinate system is arbitrary since no rotation            
+     has been solved, and none observed during encounter.                     
+                                                                              
+     Coordinate axes were selected to be parallel to the J2000                
+     coordinate system, thus the shape model equator is parallel              
+     to the earth's.                                                          
+                                                                              
+     The shape model is incomplete: not all areas were viewed due to          
+     the lack of rotation.  For areas not imaged, the shape model             
+     contains the mean radius value (26.5 km).  This does introduce           
+     some very jagged edges in the model. These are non-physical!!!           
+     Any users should be aware the model contains these artifacts.            
+    "                                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "LATITUDE"                                                
+    UNIT          = "DEGREE"                                                  
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 3                                                         
+    BYTES         = 8                                                         
+    FORMAT        = "F8.4"                                                    
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "LONGITUDE"                                               
+    DESCRIPTION   = "Longitudes are WEST on Mathilde (prograde                
+      rotation)."                                                             
+    UNIT          = "DEGREE"                                                  
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 13                                                        
+    BYTES         = 8                                                         
+    FORMAT        = "F8.4"                                                    
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 3                                                         
+    NAME          = "RADIUS"                                                  
+    DESCRIPTION   = "Shape model radius for this latitude and                 
+      longitude."                                                             
+    UNIT          = "KILOMETER"                                               
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 23                                                        
+    BYTES         = 8                                                         
+    FORMAT        = "F8.4"                                                    
+  END_OBJECT = COLUMN                                                         
+                                                                              
+END_OBJECT = TABLE                                                            
+END                                                                           

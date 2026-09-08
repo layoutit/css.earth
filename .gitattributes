@@ -4,3 +4,17 @@ src/planets/pluto/source/lenses/usgs-dem-metadata.html -whitespace
 src/planets/pluto/source/lenses/usgs-mosaic-metadata.html -whitespace
 src/planets/pluto/source/orbit/jpl-physical.html -whitespace
 src/planets/pluto/source/surface/nasa-color-metadata.html -whitespace
+src/planets/ida/source/reference/** -whitespace
+src/planets/gaspra/source/reference/** -whitespace
+src/planets/mathilde/source/reference/** -whitespace
+src/planets/lutetia/source/reference/** -whitespace
+src/planets/steins/source/reference/** -whitespace
+src/planets/lutetia/source/shape/*.wrl -whitespace
+src/planets/steins/source/shape/*.wrl -whitespace
+
+# Retain original scientific archive text bytes.
+src/planets/didymos/source/reference/** -whitespace
+src/planets/dimorphos/source/reference/** -whitespace
+src/planets/kleopatra/source/reference/** -whitespace
+src/planets/toutatis/source/reference/** -whitespace
+src/planets/toutatis/source/shape/4179toutatis2.tab -whitespace

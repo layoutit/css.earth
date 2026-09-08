@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 69.29679189739551,
+  "declinationDegrees": 43.9031768050122,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 5.385282,
+  "coordinateSystem": "Published MPCD body axes, positive Z north pole, east longitude; arbitrary prime-meridian display phase",
+  "source": "Marchis et al. (2021), Table 2 MPCD ecliptic J2000 pole lambda 74.1 deg, beta 21.6 deg, transformed to equatorial J2000 using obliquity 23.439291111 deg. The public release parameter columns and phase convention were not established; its unlabeled file is retained as evidence and is not silently treated as IAU W."
+}

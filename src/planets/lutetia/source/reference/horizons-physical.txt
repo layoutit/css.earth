@@ -1,0 +1,26 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                21 Lutetia (A852 VA)           2026-Sep-07 16:58:42
+Rec #:      21 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 7110 (1866-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458038.5 ! 2017-Oct-12.00 (TDB)         Residual RMS= .26368
+   EC= .16441745231496     QR= 2.034302249141347   TP= 2458660.8280116157
+   OM= 80.87713173318545   W=  249.9805287486084   IN= 3.063715686871191
+   A= 2.434591596937166    MA= 198.5328256334861   ADIST= 2.834880944732984
+   PER= 3.79881            N= .259456703           ANGMOM= .026475461
+   DAN= 2.51006            DDN= 2.24255            L= 330.8312864
+   B= -2.8784338           MOID= 1.02577996        TP= 2019-Jun-26.3280116157
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= .1134               RAD= 49.                ROTPER= 8.1655
+   H= 7.48                 G= .110                 B-V= .686
+                           ALBEDO= .190            STYP= Xk
+
+ASTEROID comments: 
+1: soln ref.= JPL#146, OCC=0
+2: source=ORB
+*******************************************************************************

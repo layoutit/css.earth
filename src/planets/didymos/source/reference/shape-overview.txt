@@ -1,0 +1,71 @@
+This document contains the high-level overview of the DART Shape Model Didymos v003 Data Collection.
+
+Data Set Overview
+===============================================================================
+This data collection contains a set of digital terrain maps and
+        ancillary information  (slope, magnitude of gravity, etc) for didymos_model_v003.
+        To learn about the model including its quality, see 'Daly et al., 2023.
+        "Successful Kinetic Impact into an Asteroid for Planetary Defense." Nature 1–3.
+        https://doi.org/10.1038/s41586-023-05810-5." See SIS for details on ancillary
+        information provided.
+
+Data
+===============================================================================
+The DART SOC provides digital terrain maps in two formats, OBJ and FITS (image cubes), derived using stereophotoclinometry (SPC).
+SPC combines stereo techniques with photoclinometry to derive the tilt of an asteroid’s surface. This shape modeling technique
+estimates surface tilts at each pixel of a given image by initially using stereo parallax, and a photometric function, to
+constrain a relationship between a surface’s tilt and observed albedo. With this relationship in hand, the tilts of a piece of
+asteroid surface imaged at multiple emission and incidence angles can be obtained via least-squares that best duplicates the input
+images. Once the surface tilts are obtained, the geometric height across each map can be determined by integrating over the tilts
+in a logical manner. These individual terrain maps (called “maplets”) of the surface can then be joined together to produce global
+and local digital terrain models. SPC processing includes the use of asteroid limb and terminator data to initially constrain the
+shape of an asteroid.
+
+For more details on SPC processing see Daly et al., 2023; Gaskell, 2011; Gaskell et al., 2008, 2023; Palmer et al., 2022;
+Weirich et al., 2022.
+
+Shape model PDS4 data product are described as follows:
+1) Digital Terrain Models (DTMs) in OBJ file format, which is a special-case ASCII Table used to describe 3-dimensional shapes.
+
+2) Digital Terrain Models (DTMs) in multi-band FITS files with a single Header Data Unit (HDU) containing header metadata
+records and a data unit containing planes with units appropriate to each geophysical calculation.
+
+3) Shape model ancillary FITS files are derived from SPC-generated DTMs, the process of which is described in detail in
+the dart_shapemodel_sis document.
+
+The shape (digital terrain) model will be named according to the following conventions,
+using all lower-case characters in the filename:
+
+Target + “_” + Coverage Type + “_” + Ground Sample Distance + “mm” + “_SPC_” + Description + “_” +
+			“Center Location” + “_” + “v” + Version + “.” + PDS Type
+
+The Target description provides the name of the asteroid for which the product is provided:
+			dimorphos-> Dimorphos
+			didymos -> Didymos
+
+The Coverage Type will be:
+			g for global
+			l for local (regional). Used for both global tileset and site specific products.
+
+The Ground Sample Distance (resolution) is four digits expressed in millimeters (mm).
+
+The Source/Processing Type is:
+			SPC --> Product generated using stereophotoclinometry
+
+The Description legend is as follows:
+			obj --> Global or local shape model.
+			dtm --> FITS file that contains a complete set of DTM planes.
+			For ancillary FITS files, the description refers to the
+						values that are stored in the binary FITS table.
+						A value is provided for each plate in the
+						corresponding DTM file. Section 5.2.1.4, Table 6
+						of the SIS contains the Description string for
+						the different ancillary products.
+
+An example of the file naming convention is:
+			dimorphos_l_0320mm_spc_dtm _1000n21000_v001.fits
+
+where 1000N represents latitude of 10.00N, 210.00 represents 210.00 East longitude and 00320mm
+is for 320-mm gsd. This product was generated using stereophotoclinometry for target asteroid
+Dimorphos. The DTM means it is a plane-relative DTM. ‘v001’ is the product version number
+without decimal points.

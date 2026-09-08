@@ -11,12 +11,23 @@ export async function prepareByteObservation(path, entry, policy, width, height)
   }
   if (policy.grid) return prepareProjectedByteObservation(path, entry, policy, width, height);
   const source = await sharp(path).toColourspace('srgb').raw().toBuffer();
-  if (policy.connectedEdge !== undefined &&
-      (!['north', 'south'].includes(policy.connectedEdge) || policy.noData !== 0)) {
-    throw new Error('Connected coverage requires a north/south edge and exact black fill.');
+  const fillRange = policy.connectedFillRange;
+  if (fillRange !== undefined && (!policy.connectedEdge || !Array.isArray(fillRange) || fillRange.length !== 2 ||
+      !fillRange.every(v => Number.isInteger(v) && v >= 0 && v <= 255) || fillRange[0] > fillRange[1] ||
+      !(policy.noData >= fillRange[0] && policy.noData <= fillRange[1]))) {
+    throw new Error('Invalid connected source-fill range.');
   }
-  const connected = policy.connectedEdge === undefined ? null : blackFillCoverage(source,
-    { width: entry.width, height: entry.height, channels: 3 },
+  if (policy.connectedEdge !== undefined &&
+      (!['north', 'south'].includes(policy.connectedEdge) || (policy.noData !== 0 && !fillRange))) {
+    throw new Error('Connected coverage requires a north/south edge and a declared fill.');
+  }
+  // A source-owned display map may use a gray exterior compressed as JPEG.
+  // Classify only its declared fill range, then reuse the existing connected
+  // coverage traversal. Interior pixels of the same value remain observations.
+  const fillCandidates = fillRange ? Uint8Array.from({ length: entry.width * entry.height }, (_, i) =>
+    source.subarray(i * 3, i * 3 + 3).every(v => v >= fillRange[0] && v <= fillRange[1]) ? 0 : 255) : source;
+  const connected = policy.connectedEdge === undefined ? null : blackFillCoverage(fillCandidates,
+    { width: entry.width, height: entry.height, channels: fillRange ? 1 : 3 },
     { northConnected: policy.connectedEdge === 'north', southConnected: policy.connectedEdge === 'south' });
   const rgba = Buffer.alloc(entry.width * entry.height * 4);
   let sourceMissingPixels = 0;
