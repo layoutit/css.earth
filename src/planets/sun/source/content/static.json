@@ -12,18 +12,24 @@
     "facts": [
       {
         "id": "radius",
-        "label": "Radius",
+        "label": "Approximate radius",
         "value": "700,000 km"
       },
       {
         "id": "distance-from-earth",
-        "label": "Distance from Earth",
+        "label": "Mean distance from Earth",
         "value": "150 million km"
       },
       {
         "id": "rotation-period",
-        "label": "Rotation period",
-        "value": "25 Earth days"
+        "label": "Equatorial rotation",
+        "value": "About 25 days",
+        "source": {
+          "url": "https://science.nasa.gov/sun/facts/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "galactic-orbit",
@@ -39,13 +45,13 @@
       },
       {
         "id": "solar-system-mass",
-        "label": "Solar system mass",
-        "value": "99.8%"
+        "label": "Share of system mass",
+        "value": "About 99.8%"
       },
       {
         "id": "photosphere-temperature",
         "label": "Photosphere temperature",
-        "value": "5,500°C"
+        "value": "5,500 °C"
       },
       {
         "id": "core-temperature",
@@ -53,9 +59,26 @@
         "value": "15 million °C"
       },
       {
+        "id": "activity-cycle",
+        "label": "Activity cycle",
+        "value": "About 11 years",
+        "source": {
+          "url": "https://science.nasa.gov/heliophysics/focus-areas/solar-science/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
         "id": "magnetic-cycle",
         "label": "Magnetic cycle",
-        "value": "About 11 years"
+        "value": "About 22 years",
+        "source": {
+          "url": "https://science.nasa.gov/heliophysics/focus-areas/solar-science/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       }
     ]
   },
@@ -79,7 +102,7 @@
           "id": "photosphere",
           "label": "Photosphere",
           "thumbnailUrl": "/scenes/sun/sun-lens-photosphere.webp",
-          "description": "HMI continuum",
+          "description": "Colorized HMI continuum mosaic for Carrington Rotation 2311, 12 May–9 June 2026. It combines different observation dates; limb normalization and polar continuation are prepared display adjustments.",
           "title": "NASA SDO/HMI CR2311 central-meridian continuum mosaic with source-derived limb normalization and qualified polar continuation",
           "detail": "Continuum"
         },
@@ -87,7 +110,7 @@
           "id": "magnetic",
           "label": "Magnetic field",
           "thumbnailUrl": "/scenes/sun/sun-lens-magnetic.webp",
-          "description": "HMI radial field",
+          "description": "False-color HMI radial magnetic field for Carrington Rotation 2311, 12 May–9 June 2026. A synoptic mosaic, not a simultaneous photograph; weak and strong fields use a nonlinear color scale.",
           "legend": {
             "kind": "scale",
             "title": "Radial magnetic field",
@@ -172,7 +195,7 @@
           "id": "chromosphere",
           "label": "Chromosphere",
           "thumbnailUrl": "/scenes/sun/sun-lens-chromosphere.webp",
-          "description": "AIA at 304 Å",
+          "description": "False-color AIA 304 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026.",
           "legend": {
             "kind": "scale",
             "title": "Relative EUV intensity",
@@ -256,7 +279,7 @@
           "id": "corona",
           "label": "Corona",
           "thumbnailUrl": "/scenes/sun/sun-lens-corona.webp",
-          "description": "AIA at 171 Å",
+          "description": "False-color AIA 171 Å synoptic mosaic, 12 May–9 June 2026. Missing samples use latitude continuation. The stationary off-limb image is a separate observation from 27 May 2026.",
           "legend": {
             "kind": "scale",
             "title": "Relative EUV intensity",

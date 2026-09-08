@@ -9,12 +9,24 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "252.3 km"
+        "value": "252.1 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "9.58 AU (mean)"
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
@@ -24,20 +36,32 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "32.9 hours"
+        "value": "32.9 hours · synchronous"
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Saturn",
+        "label": "Mean distance from Saturn",
         "value": "About 238,000 km"
       },
       {
-        "id": "atmosphere",
+        "id": "atmosphere-composition",
         "label": "Gaseous envelope",
         "value": "A tenuous plume of water vapor and other gases"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.610 ± 0.004 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -50,7 +74,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini ISS · clear filter",
+        "description": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
         "title": "Schenk and McKinnon (2024) controlled mosaic. Original 100 m grid delivered at about 197 m per equatorial texel. Source resolution and photographed shadows vary; globe Shadows add approximate lighting. Gray grid marks source no-data.",
         "thumbnail": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
         "surface": "enceladus-normal-surface@2x.webp",
@@ -63,7 +87,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Cassini terrain model · shaded relief",
+        "description": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies.",
         "title": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies.",
         "thumbnail": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
         "surface": "enceladus-elevation-surface@2x.webp",

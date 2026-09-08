@@ -164,11 +164,11 @@
     },
     {
       "id": "thermal",
-      "label": "Thermal",
-      "shortLabel": "IR",
-      "filter": "VIMS/CIRS",
-      "wavelength": "1.19-1000 um",
-      "sourceKind": "cassini-informed-thermal-model",
+      "label": "Thermal illustration",
+      "shortLabel": "Model",
+      "filter": "Schematic",
+      "wavelength": "Illustration",
+      "sourceKind": "schematic-morphology-illustration",
       "sourceFiles": [],
       "sourceUrls": [
         "https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/",
@@ -262,8 +262,8 @@
       ],
       "ringMethod": "broad source-derived spectral response over unchanged prepared OpenSpace radial morphology",
       "fineRingQualification": "D, G, E and unresolved ringlets retain the visible-light morphology because the Hubble frames do not resolve a complete replacement profile",
-      "thermalAuthority": "Cassini VIMS PIA17469 infrared response and Cassini CIRS atmospheric and ring thermal measurements",
-      "thermalMethod": "prepared source-informed thermal response over the synchronized visible-light morphology; not a direct global temperature retrieval"
+      "thermalAuthority": "Illustration inspired by Cassini infrared imagery; not Cassini measurement data",
+      "thermalMethod": "Authored morphology-based illustration; color does not measure infrared brightness or temperature"
     }
   },
   "controlOrder": [
@@ -314,8 +314,8 @@
     "exponent": 0.84
   },
   "qualifications": {
-    "morphology": "Cassini VIMS/CIRS-informed thermal false color over prepared high-resolution morphology; not a direct global temperature retrieval",
-    "morphologyDetail": "prepared Cassini-informed cloud-window and latitude response over lossless DPR morphology",
+    "morphology": "Schematic thermal-style illustration made from visible-light morphology and authored cloud-window/latitude patterns; no measured infrared, temperature or thermal-response map.",
+    "morphologyDetail": "Visible-light luminance and authored spatial patterns; decorative relative intensity, without instrument units or a measurement epoch.",
     "scalarDetail": "intact rotation A, lossless DPR surfaces, bounded visible-detail pansharpening"
   }
 }

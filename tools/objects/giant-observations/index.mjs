@@ -8,7 +8,8 @@ import {verifyObservationSources} from '../giant-layers/observations.mjs';
 import {latitudeRasterBands} from '../giant-layers/geometry.mjs';
 import {validateRelativePath} from '../material-composition/recipe.mjs';
 import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from './polar-continuation.mjs';
-import {completeScalarCoverage,finitePercentiles,falseColorMap} from './scalar-coverage.mjs';
+import {measureScalarCoverage,finitePercentiles,falseColorMap} from './scalar-coverage.mjs';
+import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-coverage.mjs';
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 
 export function parseObservedPolarRecipe(config) {
@@ -20,12 +21,12 @@ export function parseObservedPolarRecipe(config) {
   const ids=new Set(),outputs=new Set(),pinned=new Set(config.sourcePins.map(pin=>pin.path));
   const source=path=>{validateRelativePath(path);if(!pinned.has(path))throw new TypeError('Every observed polar source must be pinned.');};
   for(const lens of config.lenses) {
-    if(!/^[a-z][a-z0-9-]*$/.test(lens.id)||ids.has(lens.id)||!['rgb-polar-structure','scalar-harmonic-poles'].includes(lens.operation))throw new TypeError('Invalid observed polar lens operation.');
+    if(!/^[a-z][a-z0-9-]*$/.test(lens.id)||ids.has(lens.id)||!['rgb-polar-structure','scalar-observed-gaps'].includes(lens.operation))throw new TypeError('Invalid observed polar lens operation.');
     ids.add(lens.id);source(lens.source);
     for(const filename of Object.values(lens.files)){validateRelativePath(filename);if(outputs.has(filename))throw new TypeError('Observed polar outputs must be unique.');outputs.add(filename);}
-    for(const detail of Object.values(lens.polarDetails)){source(detail.structure.path);if(detail.palette)source(detail.palette.path);}
+    for(const detail of Object.values(lens.polarDetails??{})){source(detail.structure.path);if(detail.palette)source(detail.palette.path);}
     if(lens.operation==='rgb-polar-structure'&&(!Number.isInteger(lens.coverage.columnStride)||lens.coverage.columnStride<1))throw new TypeError('Invalid observed RGB coverage stride.');
-    if(lens.operation==='scalar-harmonic-poles'&&(!Array.isArray(lens.palette)||lens.palette.length<2||!Number.isInteger(lens.scalar.edgeTransitionRows)||lens.scalar.edgeTransitionRows<2))throw new TypeError('Invalid scalar continuation parameters.');
+    if(lens.operation==='scalar-observed-gaps'&&(!Array.isArray(lens.palette)||lens.palette.length<2||lens.scalar.noData!==0||lens.scalar.coverage!=='polar-connected-zero'||Object.keys(lens.polarDetails??{}).length>0))throw new TypeError('Invalid measured scalar parameters.');
   }
   return config;
 }
@@ -71,15 +72,14 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
     } else {
       const scalar=readFitsPrimary(bytes);
       if(scalar.bitpix!==lens.scalar.bitpix||scalar.width!==lens.scalar.width||scalar.height!==lens.scalar.height)throw new Error('Pinned scalar polar dimensions changed.');
-      const complete=completeScalarCoverage(scalar,lens.scalar);
-      sourceRange=finitePercentiles(complete.values,...lens.scalar.percentiles,lens.scalar.minimumCoverageFraction);
+      const measuredSource=measureScalarCoverage(scalar,lens.scalar);
+      sourceRange=finitePercentiles(measuredSource.values,...lens.scalar.percentiles,lens.scalar.minimumCoverageFraction,measuredSource.missing);
       if(!(sourceRange[1]>sourceRange[0]))throw new Error('Scalar observation has no measured dynamic range.');
-      const rgba=falseColorMap(complete,lens.palette,...sourceRange);
-      source2x=await sharp(rgba,{raw:{width:complete.width,height:complete.height,channels:4}}).resize(width*2,height*2,{fit:'fill'}).raw().toBuffer({resolveWithObject:true});
-      source1x=await sharp(source2x.data,{raw:source2x.info}).resize(width,height,{fit:'fill'}).raw().toBuffer({resolveWithObject:true});
-      for(const[pole,detail]of Object.entries(lens.polarDetails))details[pole]={...detail,structure:await load(detail.structure),palette:source2x};
-      measured={firstMeasuredRow:complete.firstMeasuredRow,lastMeasuredRow:complete.lastMeasuredRow};
-      polar=preparePolarContinuationAtlas({source:source2x,tileSize:polarTileSize*2,...measured,measuredHeight:complete.height,polarDetails:details,...lens.continuation});
+      const original={data:falseColorMap(measuredSource,lens.palette,...sourceRange),info:{width:scalar.width,height:scalar.height,channels:4},missing:measuredSource.missing};
+      source2x=resizeObservedRgb(original,width*2,height*2);
+      source1x=resizeObservedRgb(original,width,height);
+      measured={firstMeasuredRow:measuredSource.firstMeasuredRow,lastMeasuredRow:measuredSource.lastMeasuredRow,sourceMissingPixels:measuredSource.sourceMissingPixels};
+      polar=prepareMeasuredPolarAtlas(original,polarTileSize*2,{projection:'latitude-linear',...lens.projection});
     }
     maps.set(lens.id,{data:source2x.data,...source2x.info});
     coverage[lens.id]={...measured,...Object.fromEntries(Object.entries(polar).filter(([key])=>key!=='data'))};

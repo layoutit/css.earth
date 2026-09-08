@@ -316,9 +316,6 @@ test("keeps lens descriptions source-bound in the object model", async () => {
   const saturnSource = await saturn.source("content");
   const descriptions = Object.fromEntries(saturnPanel.lenses.controls.map(({ id, description }) => [id, description]));
   assert.deepEqual(descriptions, Object.fromEntries(saturnSource.lenses.controls.map(({ id, description }) => [id, description])));
-  assert.equal(descriptions.normal, "Visible color");
-  assert.equal(descriptions.ultraviolet, "Hubble at 225 nm");
-  assert.equal(descriptions.thermal, "Cassini infrared");
 });
 
 function createFakeDocument() {
