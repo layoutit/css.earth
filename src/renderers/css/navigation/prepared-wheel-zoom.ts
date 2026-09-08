@@ -187,6 +187,25 @@ export function createPreparedWheelZoomControls({
   }
   return Object.freeze({
     stop,
+    pinch: guard((scale: number, center: { x: number; y: number }) => {
+      if (!(scale > 0) || ![scale, center.x, center.y].every(Number.isFinite)) return;
+      stop();
+      if (dolly !== null) {
+        rotate({ controlPitchDelta: 0, controlYawDelta: 0,
+          distance: distanceOrigin + (camera.state.distance - distanceOrigin) / scale });
+      } else {
+        const previousZoom = camera.state.zoom;
+        const zoom = clamp(previousZoom * scale, minimumZoom, maximumZoom);
+        const trackball = trackballMetrics();
+        const ratio = zoom / previousZoom;
+        const rotation = ratio < 1 ? zoomOutRayRotation(trackball, center, ratio) : projectSphereDrag({
+          ...trackball, radius: trackball.surfaceRadius, previousX: center.x, previousY: center.y,
+          currentX: trackball.centerX + (center.x - trackball.centerX) / ratio,
+          currentY: trackball.centerY + (center.y - trackball.centerY) / ratio,
+        });
+        rotate({ controlPitchDelta: 0, controlYawDelta: 0, zoom, rotation });
+      }
+    }),
     update(options: ControlsUpdate = {}) {
       if (disposed) return;
       if (options.wheel !== undefined) enabled = Boolean(options.wheel);

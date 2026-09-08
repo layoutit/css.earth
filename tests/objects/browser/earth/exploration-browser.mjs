@@ -15,6 +15,7 @@ const dpr=Number(option('dpr','1')), cycles=Number(option('cycles','2'));
 const journey=option('journey',cycles===0?'first-city-visit':'extended-exploration');
 assert.ok(['first-city-visit','extended-exploration','polar-exploration'].includes(journey));
 const viewport={width:Number(option('width','1440')),height:Number(option('height','1000'))};
+const touch=option('touch',String(viewport.width<=820||viewport.width<viewport.height))==='true';
 assert.ok(Number.isInteger(viewport.width)&&viewport.width>=800&&viewport.width<=1920&&Number.isInteger(viewport.height)&&viewport.height>=600&&viewport.height<=1400);
 const cpuRate=Number(option('cpu-rate','1')),networkProfile=option('network','none');
 assert.ok([1,2,4,6].includes(cpuRate)&&['none','constrained-broadband'].includes(networkProfile));
@@ -39,7 +40,7 @@ await writeFile(resolve(output,'captured-harness.mjs'),harnessSource);
 const fixture=await serveBuiltFixture(built);
 const browser=await chromium.launch({channel:'chrome',headless:true,args:[...fixture.launchArgs,
   ...(chromeGraphite==='disabled'?['--disable-skia-graphite']:[])]});
-const context=await browser.newContext({viewport,deviceScaleFactor:dpr,...(record?{recordVideo:{dir:output,size:viewport}}:{})});
+const context=await browser.newContext({viewport,deviceScaleFactor:dpr,hasTouch:touch,...(record?{recordVideo:{dir:output,size:viewport}}:{})});
 const page=await context.newPage(), cdp=await context.newCDPSession(page), browserCdp=await browser.newBrowserCDPSession();
 let mergeHead=null;
 try{mergeHead=execFileSync('git',['rev-parse','MERGE_HEAD'],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim()}catch{}
@@ -52,7 +53,8 @@ const report={schema:'cssearth-exploration@1',output,built,dpr,cycles,record,tra
     chromeGraphite,gpuDetail,diagnosticVolumeClip,
     emulation:{cpuRate,networkProfile,network:emulatedNetwork,applied:'Before initial navigation; reapplied after offline recovery'},
     transport:'Local HTTPS production build, normal browser cache, real public assets; no response routes or application camera writes',
-    input:'Paced scripted Chrome mouse/keyboard; driver wheel deltas multiplied by emulated DPR to deliver the same CSS-pixel gesture',
+    input:touch?'Emulated Chrome touch pinch and drag on the map; mouse/keyboard card controls and wheel page scrolling. Pinch spans stay between 120 and 240 CSS pixels.'
+      :'Paced scripted Chrome mouse/keyboard; driver wheel deltas multiplied by emulated DPR to deliver the same CSS-pixel gesture',
     qualification:`Not a physical trackpad, phone or native-renderer parity measurement.${chromeGraphite==='disabled'?' Non-default Chrome graphics backend: diagnostic only, not default-browser qualification.':''}${diagnosticVolumeClip?' Injected viewport clipping on volume projections: diagnostic candidate, not unchanged-build qualification.':''}`},
   visualStatus:screenshots||record?'unreviewed':'not-recorded',
   observers:{sampleIntervalMs:250,screenshots,memoryDumps,video:record,
@@ -89,6 +91,11 @@ await context.addInitScript(()=>{
   requestAnimationFrame(frame);
   new PerformanceObserver(list=>{for(const e of list.getEntries())p.tasks.push({at:e.startTime,ms:e.duration,phase:p.phase})}).observe({type:'longtask',buffered:true});
   addEventListener('wheel',e=>p.wheels.push({at:performance.now(),deltaY:e.deltaY,phase:p.phase,sceneTarget:!!e.target.closest?.('.planet-input-surface'),trusted:e.isTrusted}),{passive:true});
+  p.touches=[];
+  for(const type of ['pointerdown','pointermove','pointerup','pointercancel'])addEventListener(type,e=>{
+    if(e.pointerType==='touch')p.touches.push({type,at:performance.now(),phase:p.phase,pointerId:e.pointerId,
+      sceneTarget:!!e.target.closest?.('.planet-input-surface'),trusted:e.isTrusted});
+  },{capture:true,passive:true});
   const create=URL.createObjectURL,revoke=URL.revokeObjectURL,decode=HTMLImageElement.prototype.decode;
   URL.createObjectURL=function(blob){const url=create.call(this,blob);p.live.set(url,blob.size);p.blobs.push({kind:'create',at:performance.now(),url,bytes:blob.size});return url};
   URL.revokeObjectURL=function(url){p.live.delete(url);p.blobs.push({kind:'revoke',at:performance.now(),url});return revoke.call(this,url)};
@@ -212,6 +219,15 @@ const drag=async(dx,dy=20)=>{
   await revealScene();
   assert.ok(await sceneHit({x:pointer.x+dx,y:pointer.y+dy}),'The drag must finish on the visible map');
   const before=(await state()).transform;
+  if(touch){
+    const point=(x,y)=>[{id:1,x,y,radiusX:4,radiusY:4,force:1}];
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:point(pointer.x,pointer.y)});await look(90);
+    for(let i=1;i<=30;i++){const t=(1-Math.cos(Math.PI*i/30))/2;
+      await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:point(pointer.x+dx*t,pointer.y+dy*t)});await look(28);}
+    await look(90);await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+    assert.notEqual((await state()).transform,before,'The touch drag must actually move the camera');
+    return;
+  }
   await page.mouse.move(pointer.x,pointer.y,{steps:12});await page.mouse.down();await look(90);
   for(let i=1;i<=30;i++){const t=(1-Math.cos(Math.PI*i/30))/2;await page.mouse.move(pointer.x+dx*t,pointer.y+dy*t);await look(28)}
   await look(90);await page.mouse.up();
@@ -219,6 +235,24 @@ const drag=async(dx,dy=20)=>{
 };
 const wheel=async(total,steps=20)=>{
   await revealScene();const before=(await state()).transform;
+  if(touch){
+    const first=await page.evaluate(()=>window.__exploration.touches.length);
+    const gestures=Math.ceil(Math.abs(total/400)/Math.log(2)),scale=Math.exp(-total/400/gestures);
+    const startSpan=scale>1?120:240,endSpan=startSpan*scale;
+    for(const dx of [-120,120])assert.ok(await sceneHit({x:pointer.x+dx,y:pointer.y}),'Both pinch points must hit the map');
+    const points=span=>[1,2].map((id,i)=>({id,x:pointer.x+(i?1:-1)*span/2,y:pointer.y,radiusX:4,radiusY:4,force:1}));
+    for(let gesture=0;gesture<gestures;gesture++){
+      await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:points(startSpan)});await look(90);
+      for(let i=1;i<=steps;i++){const t=(1-Math.cos(Math.PI*i/steps))/2;
+        await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:points(startSpan+(endSpan-startSpan)*t)});await look(35);}
+      await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await look(120);
+    }
+    const delivered=await page.evaluate(first=>window.__exploration.touches.slice(first),first);
+    assert.ok(delivered.length>0&&delivered.every(event=>event.trusted&&event.sceneTarget),'Pinch input must reach the map');
+    assert.ok(delivered.every(event=>event.type!=='pointercancel'),'The browser must not take over map pinch');
+    assert.notEqual((await state()).transform,before,'Pinch must actually move the camera');
+    return;
+  }
   const first=await page.evaluate(()=>window.__exploration.wheels.length);
   await page.mouse.move(pointer.x,pointer.y,{steps:12});
   const weights=Array.from({length:steps},(_,i)=>Math.sin(Math.PI*(i+1)/(steps+1))),sum=weights.reduce((a,b)=>a+b,0);
@@ -339,7 +373,7 @@ finally{
   await context.setOffline(false).catch(()=>{});
   if(tracing)await stopTrace();
   cleanup('capture-metrics');
-  report.metrics=await page.evaluate(()=>{const p=window.__exploration;return {frames:p.frames,tasks:p.tasks,samples:p.samples,wheels:p.wheels,marks:p.marks,blobs:p.blobs,decodes:p.decodes,searches:p.searches}}).catch(()=>null);
+  report.metrics=await page.evaluate(()=>{const p=window.__exploration;return {frames:p.frames,tasks:p.tasks,samples:p.samples,wheels:p.wheels,touches:p.touches,marks:p.marks,blobs:p.blobs,decodes:p.decodes,searches:p.searches}}).catch(()=>null);
   report.network=[...requests.values()];report.contextNetwork=[...contextRequests.values()];
   report.scripts=[...new Map(fixture.requests.filter(r=>r.sha256).map(r=>[r.path,r])).values()];
   for(const script of report.scripts)assert.equal(script.sha256,createHash('sha256').update(await readFile(resolve(built,`.${script.path}`))).digest('hex'));

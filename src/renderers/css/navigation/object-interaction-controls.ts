@@ -1,6 +1,7 @@
 import { createSceneLifetime } from "@cssearth/engine";
 import { createUnboundedMatrixDragControls as createMatrixDragControls } from './camera-input.js';
 import { createPreparedWheelZoomControls as createWheelZoomControls } from './prepared-wheel-zoom.js';
+import { createTouchPinchControls } from './touch-pinch.js';
 import { googleEarthInteractionTrackball, googleEarthDirectAngularDegreesPerTrackballRadius, directPitchResponseForZoom } from "@cssearth/engine";
 import { errorMessage } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
@@ -81,18 +82,29 @@ export function createObjectInteractionControls({
     dolly,
   });
   lifetime.onDispose(() => wheelControls.destroy());
+  const pinchControls = createTouchPinchControls({
+    inputSurface,
+    onStart() { dragControls.stop(); wheelControls.stop(); onStart(); },
+    onScale: (scale, center) => wheelControls.pinch(scale, center),
+    onEnd,
+    onError: fail,
+  });
+  lifetime.onDispose(() => pinchControls.destroy());
   return Object.freeze({
     update(options: ControlsUpdate) {
       if (lifetime.disposed) return;
       wheelControls.update(options);
       dragControls.update(options);
+      pinchControls.update(options);
     },
     stop() {
+      pinchControls.stop();
       wheelControls.stop();
       dragControls.stop();
     },
     flyTo(options: DestinationMotion) {
       if (lifetime.disposed) return Promise.resolve({ completed: false });
+      pinchControls.stop();
       wheelControls.stop();
       return dragControls.flyTo(options);
     },

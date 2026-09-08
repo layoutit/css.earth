@@ -5,11 +5,11 @@ import { createPreparedWheelZoomControls } from './prepared-wheel-zoom.js';
 
 afterEach(() => vi.unstubAllGlobals());
 
-function fixture() {
+function fixture(dolly = { stepPerDelta: .006 }) {
   vi.stubGlobal('HTMLElement', Surface);
   const surface = new Surface(), camera = { state: { zoom: 1, distance: 1000 } };
   const controls = createPreparedWheelZoomControls({ inputSurface: surface, camera, runtimePolicy,
-    minimumZoom: .001, maximumZoom: 4, dolly: { stepPerDelta: .006 },
+    minimumZoom: .001, maximumZoom: 4, dolly,
     trackballMetrics() { throw new Error('Physical zoom must not acquire a surface anchor'); },
     rotate(value) { camera.state.distance = value.distance; },
   });
@@ -54,4 +54,20 @@ test('reversing or stopping a trackpad gesture drops unfinished zoom immediately
   expect(f.surface.frames.size).toBe(0);
   f.controls.destroy();
   expect(f.surface.listenerCount()).toBe(0);
+});
+
+test('touch pinch preserves the prepared distance origin while ordinary page scrolling stays disabled', () => {
+  const f = fixture({ stepPerDelta: .006, distanceOrigin: 900 });
+  f.controls.update({ wheel: false });
+  f.surface.dispatch('wheel', { deltaY: -100, timeStamp: 0 });
+  f.surface.tick(300);
+  expect(f.camera.state.distance).toBe(1000);
+  f.controls.pinch(2, { x: 100, y: 100 });
+  expect(f.camera.state.distance).toBe(950);
+  f.controls.pinch(.5, { x: 100, y: 100 });
+  expect(f.camera.state.distance).toBe(1000);
+  expect(f.surface.frames.size).toBe(0);
+  f.controls.destroy();
+  f.controls.pinch(2, { x: 100, y: 100 });
+  expect(f.camera.state.distance).toBe(1000);
 });
