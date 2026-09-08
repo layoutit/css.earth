@@ -1,0 +1,216 @@
+{
+  "schema": "cssnaiad-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "measured-shape",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 18278,
+      "expectedSha256": "06397011cc1d3bb859e2f761fcb0cc3c4d6a885f3ded29d1aca3cf5260c07ec8",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Erich Karkoschka (2003) measured axes; cssEarth ellipsoid representation",
+      "license": "MIT representation of published scientific dimensions",
+      "licenseEvidence": [
+        "https://doi.org/10.1016/S0019-1035(03)00002-2"
+      ],
+      "acquisition": "Checked-in analytic radius table; formula and axes in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 29000
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 135,
+      "expectedSha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "cssEarth standard no-coverage indicator",
+      "license": "MIT display representation from public NASA/NAIF scientific parameters",
+      "licenseEvidence": [
+        "https://naif.jpl.nasa.gov/naif/rules.html"
+      ],
+      "acquisition": "Checked in; radius formula, dimensions and material bytes are specified in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 29000
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3685,
+      "expectedSha256": "4f26aea9b799965fb84edf3750991dedc2ac3e339f52c8f98ad86ccd5244e1b7",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 981,
+      "expectedSha256": "b404a559dbdf12a2dfa41f45d7a0347ed8b5346958fd2b967776e3c5b411d8d8",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1264,
+      "expectedSha256": "d3b50fb906328c61779fda8dd9c2a403759dba337b20c9976743b196b0a3c83d",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2332,
+      "expectedSha256": "db3ecab28e79b622a78a8134f807e711b2214f6f97bb9b695c350fe22bf8073c",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3896,
+      "expectedSha256": "a67c4662b8d9eb6dc6693700b15811dfb4392a35fffc990fe901a8c1e33cb7cf",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "shape/horizons-physical.txt",
+      "expectedBytes": 839,
+      "expectedSha256": "ccfca1e62ac99fecb257cd9161996c03be942c30835d31585765b2f3ceb291e0",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "shape/publication.json",
+      "expectedBytes": 433,
+      "expectedSha256": "86c1f154042f810947d4fa328422beeb58ba0f8cf7bd247fa2a91a6c807db217",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 848,
+      "expectedSha256": "101c77d8c15edaef036747eb27208c8fd700e5663acc6c06e0699987f0cf32fb",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/1134547-metadata.json",
+      "expectedBytes": 14746,
+      "expectedSha256": "6e4556e1fedf15d087a28acaa7568edded7d4c7abcfab1b22c9788271efd1c89",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/1135231-metadata.json",
+      "expectedBytes": 11536,
+      "expectedSha256": "d085eb934a1bcb1ba93cee2f094bfd02ecaefb03b0f0a0ebf732ce8ea1cea3a9",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/voyager-search.json",
+      "expectedBytes": 1141,
+      "expectedSha256": "312483533d25c3b7befb87173638e3718b9d57275585db5e1cb465722cc8394e",
+      "purpose": "Naiad scientific source or authored preparation evidence."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Karkoschka (2003) dimensions; cssEarth shape visualization",
+      "license": "Public PDS scientific data; retain mission and model attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "measured-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 40,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 56797,
+      "expectedSha256": "f612c59b04891514790af7d35ae79b3a48211adc17f78bded12907745ea43290"
+    }
+  ]
+}

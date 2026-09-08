@@ -16,7 +16,7 @@ const project = bodyCenter => projectHeliocentricView(runtimeDefinition.heliocen
   focal: 900, principalOffset: [0,0], viewportWidth: 1000, viewportHeight: 800,
 }).body;
 
-function fixture(hitTest = () => false) {
+function fixture(hitTest = () => false, detailOccludes) {
   let now = 0, nextFrame = 0;
   const frames = new Map(), publications = [], window = new EventTarget(), document = new EventTarget();
   Object.assign(window, { requestAnimationFrame(callback) { frames.set(++nextFrame, callback); return nextFrame; },
@@ -80,7 +80,7 @@ function fixture(hitTest = () => false) {
       sceneMatrix: [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),
     surfaceFlyToState: () => ({ zoom: 1, minimumZoom: .5, maximumZoom: 4 }), surfaceFlyToHitTest: hitTest,
     rotate: value => publications.push(value) });
-  let unbind = bindWorldCameraPicking(surface, host, readBounds), selections = 0, interrupted = 0;
+  let unbind = bindWorldCameraPicking(surface, host, readBounds, detailOccludes), selections = 0, interrupted = 0;
   const target = new Surface();
   target.dataset.objectNavigate = 'venus'; target.style.pointerEvents = 'auto';
   target.click = () => { selections++; document.addEventListener('pointerdown', () => interrupted++); };
@@ -88,7 +88,7 @@ function fixture(hitTest = () => false) {
     get selections() { return selections; }, get interrupted() { return interrupted; },
     fire(type, time, data = {}) { now = time; surface.dispatchEvent(new Pointer(type, data)); },
     tick(time) { now = time; const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback(time)); },
-    handoff() { unbind(); unbind = bindWorldCameraPicking(surface, host, readBounds); },
+    handoff() { unbind(); unbind = bindWorldCameraPicking(surface, host, readBounds, detailOccludes); },
     destroy() { controls.destroy(); unbind(); },
   };
 }
@@ -137,6 +137,26 @@ test('a real close-body second press keeps its permitted surface flight and rele
   f.tick(150); f.tick(900);
   assert.ok(f.publications.length > 0);
   assert.equal(f.controls.stats().surfaceFlyTo.starts, 1); f.destroy();
+});
+
+test('a background target overlapping detailed surface pixels cannot steal hover or surface double-click', () => {
+  let occluded = true;
+  const f = fixture(() => true, () => occluded);
+  f.document.targets = [f.target];
+  f.fire('pointermove', 0, { buttons: 0 }); f.tick(1);
+  assert.equal(f.target.dataset.objectHovered, undefined);
+  assert.equal(cursor(f.surface), 'grab');
+  firstClick(f); secondClick(f);
+  assert.equal(f.selections, 0);
+  assert.equal(f.controls.stats().surfaceFlyTo.starts, 1);
+  // The same retained background target remains navigable outside the surface,
+  // and in overview where no detailed geometry occludes it.
+  occluded = false;
+  f.fire('pointermove', 600, { buttons: 0 }); f.tick(601);
+  assert.equal(f.target.dataset.objectHovered, 'true');
+  f.fire('pointerdown', 650); f.fire('pointerup', 670); f.fire('click', 670);
+  assert.equal(f.selections, 1);
+  f.destroy();
 });
 
 test('an object double-click selects once across owner handoff and cannot interrupt or start a surface flight', () => {

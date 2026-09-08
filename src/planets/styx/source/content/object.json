@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "styx",
+  "displayName": "Styx",
+  "panel": {
+    "introduction": "Styx is the innermost of Pluto’s four small moons. New Horizons revealed an elongated body, but too little surface detail for a map.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Equivalent radius",
+        "value": "About 3.5 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Dimensions",
+        "value": "About 10.6 × 6.0 × 5.3 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Pluto–Charon",
+        "value": "About 20.16 days"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from system center",
+        "value": "About 42,656 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "About 3.24 days"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Hubble Space Telescope · 2012"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
+        "title": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
+        "detail": "Measured axes",
+        "thumbnail": "/scenes/styx/styx-model-thumbnail.webp",
+        "surface": "styx-model-surface@2x.webp",
+        "poles": "styx-model-poles@2x.webp",
+        "source": {
+          "id": "measured-shape",
+          "path": "../manifest.json",
+          "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Styx overview",
+      "href": "https://science.nasa.gov/dwarf-planets/pluto/moons/styx/"
+    },
+    {
+      "label": "Porter et al. (2025)",
+      "role": "surface",
+      "description": "Updated dimensions and unresolved spin pole",
+      "href": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
+    },
+    {
+      "label": "NASA/JHUAPL/SwRI; PDS",
+      "role": "observations",
+      "description": "New Horizons calibrated LORRI archive",
+      "href": "https://pds-smallbodies.astro.umd.edu/data_sb/missions/newhorizons/index.shtml"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/styx/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Porter, Verbiscer and Canup (2025); Weaver et al. (2016)"
+    }
+  }
+}

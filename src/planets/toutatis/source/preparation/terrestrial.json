@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "toutatis",
+  "displayName": "Toutatis",
+  "publicBase": "/scenes/toutatis/",
+  "distanceAu": 2.543055738919472,
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "surfaceQuality": 90,
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 1.224,
+    "camera": {
+      "initialScenePitchDegrees": 46.741573033707866,
+      "defaultControlYawDegrees": 240,
+      "framingScale": 0.8
+    },
+    "mapUrl": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
+    "polesUrl": "/scenes/toutatis/toutatis-shape-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/4179toutatis2.tab",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 20000,
+        "expectedFaces": 39996
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 50,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Pinned JPL Horizons heliocentric elements; fixed arbitrary display orientation because Toutatis has non-principal-axis tumbling; directional lighting is illustrative"
+  },
+  "presentation": {
+    "defaultLens": "shape",
+    "pointColor": [
+      170,
+      170,
+      170
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

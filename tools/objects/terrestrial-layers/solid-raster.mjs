@@ -9,6 +9,7 @@ import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../
 import { colorForValue, loadScienceSurface, paintScienceSurface, prepareObservedColor } from './scientific-raster.mjs';
 import {prepareMaskedObservation, prepareFloatObservation, prepareIsisObservation} from './observed-geotiff.mjs';
 import { prepareByteObservation } from './observed-image.mjs';
+import { prepareFitsObservation } from './observed-fits.mjs';
 import { prepareControlledOrthographicMosaic } from './controlled-orthographic-mosaic.mjs';
 import { prepareShapeCameraMosaic } from './shape-camera-mosaic.mjs';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mjs';
@@ -32,6 +33,7 @@ function surfaceEncoding(config) {
 
 export async function readObservation(sourceDirectory, entry, validity, width, height) {
   const path = resolve(sourceDirectory, entry.path);
+  if (validity.kind === 'fits-byte-monochrome') return prepareFitsObservation(path, entry, validity, width, height);
   if (validity.kind === 'pds3-byte-monochrome') return preparePdsByteMosaic(sourceDirectory, [entry], width, height, validity);
   if (validity.kind === 'isis3-float-monochrome') return prepareIsisObservation(path, entry, validity, width, height);
   if (['geotiff-float-monochrome', 'geotiff-byte-monochrome'].includes(validity.kind)) return prepareFloatObservation(path, entry, validity, width, height);
@@ -103,6 +105,16 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       ...(recipe.monochromeBase&&!recipe.reportComposition?{monochromePixels}:{}),
       ...(observation.sourceGeoreference ? { sourceGeoreference: observation.sourceGeoreference } : {}),
     }));
+  }
+  for (const view of config.raster.shapeViews ?? []) {
+    const entries = await source.validateGroup(view.consumer);
+    const entry = entries.find(input => input.path === config.geometry.radialTerrain.path);
+    if (!entry) throw new Error('Shape display is not bound to the rendered source mesh.');
+    const rgb = Buffer.alloc(width * height * 3);
+    const missingImagery = new Uint8Array(width * height).fill(1);
+    surfaces.push(await packSurface(view.id, rgb, missingImagery, { label: view.label,
+      appearance: 'Shared no-imagery grid over source geometry; not observed surface color or albedo.',
+      source: { id: entry.id, sha256: entry.expectedSha256 } }));
   }
   for (const recipe of config.raster.mosaics ?? []) {
     const tiles = await source.validateGroup(recipe.consumer);

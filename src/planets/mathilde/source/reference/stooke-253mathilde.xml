@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:small_bodies.stooke.shape-models:data:253mathilde_tab</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>Stooke Shape Model of 253 Mathilde</title>
+    <information_model_version>1.23.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <publication_year>2025</publication_year>
+        <description>Numerical shape model of asteroid 253 Mathilde, based on data from the NEAR mission.</description>
+        <List_Author>
+          <Person>
+            <given_name>Philip</given_name>
+            <family_name>Stooke</family_name>
+          </Person>
+        </List_Author>  
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+    <start_date_time xsi:nil="true" nilReason="inapplicable"/>
+    <stop_date_time xsi:nil="true" nilReason="inapplicable"/>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>No Specific Investigation</name>
+      <type>Individual Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <name>Near Earth Asteroid Rendezvous Mission</name>
+      <Observing_System_Component>
+        <name>The Near-Earth Asteroid Rendezvous (NEAR) Shoemaker Spacecraft</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.near</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+    </Observing_System_Component>
+    <Observing_System_Component>
+      <name>The Multi-Spectral Imager (MSI) for the NEAR Shoemaker</name>
+      <type>Instrument</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:instrument:msi.near</lid_reference>
+        <reference_type>is_instrument</reference_type>
+      </Internal_Reference>
+    </Observing_System_Component>
+    </Observing_System>        
+    <Target_Identification>
+      <name>253 Mathilde</name>
+      <type>Asteroid</type>
+      <Internal_Reference>   
+        <lid_reference>urn:nasa:pds:context:target:asteroid.253_mathilde</lid_reference>
+        <reference_type>data_to_target</reference_type>
+        </Internal_Reference>   
+    </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <Internal_Reference>
+      <lidvid_reference>urn:nasa:pds:near_collected_models:data:253mathilde::1.0</lidvid_reference>
+      <reference_type>data_to_derived_product</reference_type>
+      <comment>NEAR MSI team shape model</comment>
+    </Internal_Reference>
+    <External_Reference> 
+      <doi>10.1006/icar.1999.6121</doi>
+      <reference_text>Thomas, P.C., Veverka, J., Bell, J.F., Clark, B.E., Carcich, B., Joseph, J., Robinson, M., McFadden, L.A., Malin, M.C., Chapman, C.R., Merline, W., Murchie, S. 1999. Mathilde: Size, Shape, and Geology. Icarus 140, 17-27.</reference_text>
+    </External_Reference>  
+  </Reference_List>   
+  <File_Area_Observational>
+    <File>
+      <file_name>253mathilde.tab</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2016-09-30</creation_date_time>
+      <file_size unit="byte">70226</file_size>
+      <records>2701</records>
+    </File>
+    <Table_Character>
+      <local_identifier>table</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>2701</records>
+      <description>Numerical shape model of asteroid 253 Mathilde, based on data from the NEAR mission. Coordinates are planetocentric, increasing to the west for planetary satellites, and to the east for (prograde) asteroids and comets, as recommended by the IAU Working Group on Cartographic Coordinates. See the data set description for details on the coordinate system. The NEAR MSI team shape model (urn:nasa:pds:near_collected_models:data_msi:253mathilde) contains artifacts where missing values were replaced with the value for the mean radius. These artifacts interfere with computer renderings of the shape. Here, a different version of the shape, initially supplied by Peter Thomas and modified for use with different software, is made available. This version of the Mathilde shape model was modified to remove the obvious artifacts in Thomas's version. It does not change any of Thomas's real data points (except that to run in my software it had to be sampled at 5 degree intervals of latitude and longitude, Thomas's was at 3 degree spacing) but it smooths over the bad areas. Since all of the large craters had shadows filling their floors, this modified version also tries to make the crater floors look more realistic. The changes are purely esthetic in nature, but the artifacts are so bad that they are necessary to get any real use out of the Small Body Mapping Tool visualization. Thomas described the original shape model (Thomas et al. 1999). In that paper three different variations on the shape are described, varying in how they treat the non-imaged area. Thomas provided the middle (least extreme) version of the shape. Stooke resampled it from 3 degree spacing to 5 degree spacing and made minor modifications. The rotation state of Mathilde was unknown at the time, and an arbitrary rotation axis (parallel to Earth's axis) was used by Thomas. Therefore the model is not oriented as most shape models are with the shortest axis corresponding with the model axis and the prime meridian at one end of the long axis. This shape model consists of a grid with points every 5 degrees in latitude and longitude, with a radius in km associated with each point. The model is planetocentric. The prime meridian is arbitrarily placed.</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>3</fields>
+        <groups>0</groups>
+        <record_length unit="byte">26</record_length>
+        <Field_Character>
+          <name>Longitude</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">3</field_length>
+          <field_format>%3d</field_format>
+          <unit>deg</unit>
+          <description>Body-centered longitude, positive west for planetary satellites and positive east for asteroids and comets.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Latitude</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">8</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">3</field_length>
+          <field_format>%3d</field_format>          
+          <unit>deg</unit>
+          <description>Body-centered latitude.</description>
+        </Field_Character>
+        <Field_Character>
+          <name>Radius</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">14</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">11</field_length>
+          <field_format>%11.6f</field_format>
+          <unit>km</unit>
+          <description>Shape model radius for this latitude and
+        longitude. Since the uncertainty in the radius varies across the     
+        model, the number of decimal places in the fixed format radius does   
+        not correspond to the uncertainty.</description>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>

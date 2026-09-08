@@ -27,6 +27,12 @@ test('an unpartitionable surface keeps its native depth space', () => {
   assert.equal(partitionSurface([triangle, triangle, triangle], 1).groups.length, 1);
 });
 
+test('a partially separable surface cannot bypass the per-group face budget', () => {
+  const source = { surfaceHit: { triangles: octants.flatMap(face => Array.from({ length: 65 }, () => face)) } };
+  assert.ok(partitionSurface(source.surfaceHit.triangles).groups.length > 1);
+  assert.equal(prepareDepthPartitions(source, {}), source);
+});
+
 test('compilation retains every original leaf and remaps selection, facing and activation ownership together', () => {
   const triangles = octants.flatMap(face => Array.from({ length: 16 }, () => face));
   const node = (parent, className, style = '') => ({ parent, className, style, tag: 'div', properties: [], attributes: {} });

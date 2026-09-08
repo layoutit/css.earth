@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "phase": "arbitrary-display-phase",
+  "rightAscensionDegrees": 196,
+  "declinationDegrees": 61,
+  "displayMeridianDegrees": 0,
+  "source": "https://doi.org/10.1126/science.aae0030",
+  "coordinateSystem": "ICRF; historical illustrative pole from Weaver et al. (2016), Table 2",
+  "qualification": "The 2025 Porter, Verbiscer and Canup fit finds no converged pole for Styx and lists four possibilities. This static display orientation retains the historical 2016 pole solely to illustrate the shape; the prime meridian is arbitrary. No uniquely measured orientation or spin-phase ephemeris is claimed.",
+  "qualificationSource": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
+  "reportedPeriodDays": 3.24,
+  "reportedPeriodUncertaintyDays": 0.07
+}

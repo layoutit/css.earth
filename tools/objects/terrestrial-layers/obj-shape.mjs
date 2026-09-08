@@ -18,6 +18,40 @@ export async function loadObjShape(path, profile) {
   return parseObjShape(text, profile);
 }
 
+/** STL releases repeat vertices per facet. Weld exact source coordinates before
+ * the common mesh simplifier; retain positions, winding and explicit units. */
+export async function loadStlShape(path, profile) {
+  const bytes = await readFile(path);
+  return parseStlShape(profile.compression === 'gzip' ? gunzipSync(bytes) : bytes, profile);
+}
+
+export function parseStlShape(bytes, profile) {
+  const data = Buffer.from(bytes), vertices = [], indices = [], ids = new Map();
+  const addFace = points => {
+    if (points.length !== 3 || points.some(v => v.length !== 3 || !v.every(Number.isFinite))) throw new Error('Invalid STL facet.');
+    indices.push(points.map(v => {
+      const key = v.join(',');
+      if (!ids.has(key)) {
+        ids.set(key, vertices.length);
+        vertices.push(v.map(n => n * profile.metersPerUnit));
+      }
+      return ids.get(key);
+    }));
+  };
+  if (data.length >= 84 && data.length === 84 + data.readUInt32LE(80) * 50) {
+    for (let offset = 84; offset < data.length; offset += 50) {
+      addFace([0,1,2].map(i => [0,1,2].map(j => data.readFloatLE(offset + 12 + i * 12 + j * 4))));
+    }
+  } else {
+    const text = data.toString('utf8');
+    if (!/^\s*solid\b/.test(text) || !/endsolid\b/.test(text)) throw new Error('Invalid STL document.');
+    for (const facet of text.matchAll(/facet\s+normal\b[\s\S]*?endfacet/g)) {
+      addFace(Array.from(facet[0].matchAll(/\bvertex\s+([^\r\n]+)/g), m => m[1].trim().split(/\s+/).map(Number)));
+    }
+  }
+  return radialShape(vertices, indices, profile);
+}
+
 /** PDS vertex-facet tables retain their explicit row ids and kilometre units. */
 export async function loadPdsVertexFacetShape(path, profile) {
   return parsePdsVertexFacetShape(await readFile(path, 'utf8'), profile);
@@ -27,6 +61,85 @@ export async function loadPdsVertexFacetShape(path, profile) {
  * vertices and explicitly indexed triangles. Keep the released topology and units. */
 export async function loadPdsPlateShape(path, profile) {
   return parsePdsPlateShape(await readFile(path, 'utf8'), profile);
+}
+
+/** Rosetta's PDS VRML releases wrap one body-fixed triangular surface in viewer
+ * material, lighting and scripts. Read only that untransformed IndexedFaceSet;
+ * viewer code is never evaluated and does not define the scientific frame. */
+export async function loadVrmlShape(path, profile) {
+  return parseVrmlShape(await readFile(path, 'utf8'), profile);
+}
+
+export function parseVrmlShape(text, profile) {
+  if (!/^#VRML V2\.0 utf8\s/.test(text)) throw new Error('Unsupported VRML shape header.');
+  const source = text.replace(/#[^\r\n]*/g, '').trim();
+  const mesh = /^Shape\s*\{\s*geometry\s+IndexedFaceSet\s*\{\s*coord\s+Coordinate\s*\{\s*point\s*\[([^\]]*)\]\s*\}\s*(?:solid\s+(?:TRUE|FALSE)\s*)?coordIndex\s*\[([^\]]*)\]\s*\}/.exec(source);
+  if (!mesh || (source.match(/\bIndexedFaceSet\s*\{/g) ?? []).length !== 1) {
+    throw new Error('Expected one untransformed VRML triangle surface.');
+  }
+  const tokens = value => value.trim().split(/[\s,]+/);
+  const points = tokens(mesh[1]);
+  if (points.length !== profile.expectedVertices * 3 || points.some(value =>
+    !/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/.test(value) || !Number.isFinite(Number(value)))) {
+    throw new Error('VRML coordinate dimensions or values changed.');
+  }
+  const facets = tokens(mesh[2]);
+  if (facets.length !== profile.expectedFaces * 4 || facets.some((value, index) =>
+    index % 4 === 3 ? value !== '-1' : !/^\d+$/.test(value))) {
+    throw new Error('VRML faces must be zero-based triangles terminated by -1.');
+  }
+  const vertices = Array.from({ length: profile.expectedVertices }, (_, i) =>
+    points.slice(i * 3, i * 3 + 3).map(value => Number(value) * profile.metersPerUnit));
+  const indices = Array.from({ length: profile.expectedFaces }, (_, i) =>
+    facets.slice(i * 4, i * 4 + 3).map(Number));
+  return radialShape(vertices, indices, profile);
+}
+
+/** PDS longitude/latitude/radius tables preserve their authored origin. The
+ * regular grid defines the connectivity; duplicated seam/pole rows are welded. */
+export async function loadPdsRadiusTable(path, profile) {
+  return parsePdsRadiusTable(await readFile(path, 'utf8'), profile);
+}
+
+export function parsePdsRadiusTable(text, profile) {
+  const { stepDegrees: step, longitudeDirection } = profile;
+  if (!(step > 0 && step <= 90) || 180 % step ||
+      !['east-positive', 'west-positive'].includes(longitudeDirection)) throw new Error('Invalid radius table grid.');
+  const rows = text.trim().split(/\r?\n/).map(row => row.trim().split(/\s+/).map(Number));
+  const nx = 360 / step, ny = 180 / step, radii = new Map();
+  if (rows.length !== (nx + 1) * (ny + 1)) throw new Error('Radius table dimensions changed.');
+  for (const row of rows) {
+    const [lon, lat, radius] = row;
+    if (row.length !== 3 || !row.every(Number.isFinite) || !(radius > 0) ||
+        lon < 0 || lon > 360 || lat < -90 || lat > 90 || lon % step || (lat + 90) % step) throw new Error('Invalid radius table row.');
+    const key = `${lon},${lat}`;
+    if (radii.has(key)) throw new Error('Duplicate radius table row.');
+    radii.set(key, radius);
+  }
+  const positions = [], indices = [], ids = new Map();
+  const at = (x, y) => {
+    const lon = x * step, lat = -90 + y * step;
+    const key = Math.abs(lat) === 90 ? `pole,${lat}` : `${x % nx},${y}`;
+    const radius = radii.get(`${lon},${lat}`), prior = ids.get(key);
+    if (prior !== undefined) {
+      if (Math.abs(Math.hypot(...positions[prior]) / profile.metersPerUnit - radius) > 1e-6) throw new Error('Inconsistent radius table seam or pole.');
+      return prior;
+    }
+    const l = lon * Math.PI / 180 * (longitudeDirection === 'west-positive' ? -1 : 1), p = lat * Math.PI / 180;
+    const id = positions.length;
+    positions.push([Math.cos(p) * Math.cos(l), Math.cos(p) * Math.sin(l), Math.sin(p)].map(v => v * radius * profile.metersPerUnit));
+    ids.set(key, id);
+    return id;
+  };
+  for (let x = 0; x < nx; x++) for (let y = 0; y < ny; y++) {
+    const a = at(x,y), b = at(x+1,y), c = at(x+1,y+1), d = at(x,y+1);
+    for (const f of [[a,b,c],[a,c,d]]) if (new Set(f).size === 3) {
+      const [v,w,z] = f.map(i => positions[i]);
+      if (dot(v,cross(sub(w,v),sub(z,v))) < 0) f.reverse();
+      indices.push(f);
+    }
+  }
+  return radialShape(positions, indices, profile);
 }
 
 export function parsePdsPlateShape(text, profile) {
@@ -57,7 +170,7 @@ export function parsePdsVertexFacetShape(text, profile) {
 /** Sample a bounded scientific grid from the source mesh. A facet-support
  * column can withhold regions whose detailed SPC solution is absent. */
 export async function loadShapeScalarGrid(root, lens) {
-  const load = lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
+  const load = lens.format === 'stl' ? loadStlShape : lens.format === 'pds-radius-table' ? loadPdsRadiusTable : lens.format === 'vrml-mesh' ? loadVrmlShape : lens.format === 'pds-plate-model' ? loadPdsPlateShape : lens.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape : loadObjShape;
   const mesh = await load(resolve(root, lens.path), lens.grid);
   const { width = 721, height = 361 } = lens.sampleGrid ?? {};
   if (![width,height].every(n => Number.isInteger(n) && n >= 3 && n <= 4097)) throw new Error('Invalid shape sampling grid.');

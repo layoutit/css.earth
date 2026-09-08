@@ -1,6 +1,7 @@
 import { prepareActivationGroups } from './prepared-activation-groups.mjs';
 
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+const MAXIMUM_DEPTH_LEAVES = 64;
 
 /** Recover the unchanged authoring topology before recompilation. The original
  * branch and every original leaf survive in the transport; only generated
@@ -54,7 +55,7 @@ export function restoreDepthSource(definition) {
 /** Preparation only. Existing source edges supply separating planes. A face
  * crossing a plane disqualifies that split: geometry and texture bytes survive
  * unchanged. Unpartitionable meshes keep their original 3D presentation. */
-export function partitionSurface(triangles, maximumLeaves = 64) {
+export function partitionSurface(triangles, maximumLeaves = MAXIMUM_DEPTH_LEAVES) {
   const normals = new Map();
   for (const points of triangles) for (let edge = 0; edge < 3; edge++) {
     const a = points[edge], b = points[(edge + 1) % 3];
@@ -97,7 +98,9 @@ export function partitionSurface(triangles, maximumLeaves = 64) {
 export function prepareDepthPartitions(definition, surface) {
   if (!surface) return definition;
   const { groups, order } = partitionSurface(definition.surfaceHit.triangles);
-  if (groups.length < 2 || groups.length > 128) return definition;
+  // A partial split still leaves Chrome with an unbounded sorting context.
+  // Qualify the whole surface against the budget, never just its small pieces.
+  if (groups.length < 2 || groups.length > 128 || groups.some(group => group.length > MAXIMUM_DEPTH_LEAVES)) return definition;
   const { nodes: original, camera, scene } = definition.tree;
   const chain = [];
   for (let id = surface.target; id !== camera; id = original[id].parent) chain.unshift(id);

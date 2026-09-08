@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-measured-rotation@1",
+  "rightAscensionDegrees": 257.2200135641331,
+  "declinationDegrees": -15.178437514809135,
+  "primeMeridianDegrees": 13.42275391479872,
+  "spinDegreesPerDay": -701.486587,
+  "referenceEpochJdTt": 2461286.5,
+  "source": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+  "coordinateSystem": "IAU_PORTIA; ICRF equatorial pole, east-positive right-handed body frame",
+  "qualification": "IAU/WGCCRE BODY712 pole and prime meridian, including PCK periodic terms evaluated at the shared 2026-09-03 TT display epoch with SPICE. This authored linear rotation retains the reported secular spin rate; it freezes the small periodic terms after that epoch. No arbitrary display phase.",
+  "pckBaseElements": {
+    "raDegrees": 257.31,
+    "decDegrees": -15.18,
+    "wDegrees": 25.03,
+    "wRateDegreesPerDay": -701.486587,
+    "raPeriodicAmplitudeDegrees": -0.09,
+    "decPeriodicAmplitudeDegrees": 0.09,
+    "wPeriodicAmplitudeDegrees": -0.02
+  }
+}

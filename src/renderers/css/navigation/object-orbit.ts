@@ -124,8 +124,6 @@ export function createRetainedCubicSkyOrbit({
     throw new TypeError("Shared retained cubic-sky orbit is invalid.");
   }
   const lifetime = createSceneLifetime();
-  if (perspectiveCamera) lifetime.onDispose(bindWorldCameraPicking(inputSurface, stage,
-    viewport ? () => viewport.read(cameraPlan.projection!.cssPerspective).bounds : undefined));
   let constructing = true;
   const retireFailure = (error: unknown) => {
     if (constructing) throw error;
@@ -311,6 +309,22 @@ export function createRetainedCubicSkyOrbit({
     });
     publish();
   };
+  const surfaceHitTest = perspective ? (clientX: number, clientY: number) => {
+    if (preparedSurfaceHitTest && stage.dataset.lod !== 'marker' && stage.dataset.lod !== 'billboard') return preparedSurfaceHitTest(clientX, clientY);
+    const body = projected?.body;
+    if (!body) return false;
+    const marker = heliocentric?.marker ?? null;
+    const markerBounds = marker !== null && !marker.hidden && Number(marker.style.opacity) > 0
+      ? marker.getBoundingClientRect() : null;
+    const radius = worldContext?.bodyRadiusUnits ?? heliocentric?.plan.units.bodyRadiusUnits;
+    const cameraBounds = cameraPlan.projection ? viewport?.read(cameraPlan.projection.cssPerspective).bounds : null;
+    return hitsProjectedBody(clientX, clientY, body, cameraBounds ?? cameraElement.getBoundingClientRect(), markerBounds,
+      projected && radius ? { focalPixels: projected.focal,
+        principalOffsetPixels: [projected.principalOffset[0]!, projected.principalOffset[1]!], bodyRadiusUnits: radius } : undefined);
+  } : null;
+  if (surfaceHitTest) lifetime.onDispose(bindWorldCameraPicking(inputSurface, stage,
+    viewport ? () => viewport.read(cameraPlan.projection!.cssPerspective).bounds : undefined,
+    (x, y) => stage.dataset.lod === 'geometry' && surfaceHitTest(x, y)));
   const controls = createObjectInteractionControls({
     inputSurface,
     runtimePolicy,
@@ -326,19 +340,7 @@ export function createRetainedCubicSkyOrbit({
     rotate: publishCameraDelta,
     minimumZoom: minimumZoom(),
     maximumZoom: maximumZoom(),
-    surfaceFlyToHitTest: perspective ? (clientX, clientY) => {
-      if (preparedSurfaceHitTest && stage.dataset.lod !== 'marker' && stage.dataset.lod !== 'billboard') return preparedSurfaceHitTest(clientX, clientY);
-      const body = projected?.body;
-      if (!body) return false;
-      const marker = heliocentric?.marker ?? null;
-      const markerBounds = marker !== null && !marker.hidden && Number(marker.style.opacity) > 0
-        ? marker.getBoundingClientRect() : null;
-      const radius = worldContext?.bodyRadiusUnits ?? heliocentric?.plan.units.bodyRadiusUnits;
-      const cameraBounds = cameraPlan.projection ? viewport?.read(cameraPlan.projection.cssPerspective).bounds : null;
-      return hitsProjectedBody(clientX, clientY, body, cameraBounds ?? cameraElement.getBoundingClientRect(), markerBounds,
-        projected && radius ? { focalPixels: projected.focal,
-          principalOffsetPixels: [projected.principalOffset[0]!, projected.principalOffset[1]!], bodyRadiusUnits: radius } : undefined);
-    } : null,
+    surfaceFlyToHitTest: surfaceHitTest,
     // The prepared wheel dolly: the eye moves along its axis, with no
     // surface anchor to hold.
     dolly: perspective

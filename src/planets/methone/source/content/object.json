@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "methone",
+  "displayName": "Methone",
+  "panel": {
+    "introduction": "Methone is a tiny, egg-shaped moon between Mimas and Enceladus. Cassini found an exceptionally smooth surface with a darker oval on its leading side.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "About 1.45 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Dimensions",
+        "value": "3.88 × 2.58 × 2.42 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 1.01 days"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Saturn",
+        "value": "About 194,000 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Cassini imaging team · 2004"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
+        "title": "Cassini’s 2012 clear-filter image at about 27 m/pixel, projected onto the measured ellipsoid. Approximate illumination correction preserves the darker leading-side oval; gray grid marks unavailable coverage. Methone is exceptionally smooth at this resolution. Tiny isolated source-image spots may be detector artifacts.",
+        "detail": "Cassini ISS",
+        "thumbnail": "/scenes/methone/methone-normal-thumbnail.webp",
+        "surface": "methone-normal-surface@2x.webp",
+        "poles": "methone-normal-poles@2x.webp",
+        "source": {
+          "id": "n1716192103_1",
+          "path": "../manifest.json",
+          "url": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1716192103"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Methone overview",
+      "href": "https://science.nasa.gov/saturn/moons/methone/"
+    },
+    {
+      "label": "Thomas et al.",
+      "role": "surface",
+      "description": "Measured ellipsoid and albedo pattern",
+      "href": "https://www.lpi.usra.edu/meetings/lpsc2013/pdf/1598.pdf"
+    },
+    {
+      "label": "NASA/JPL/SSI; PDS",
+      "role": "observations",
+      "description": "Cassini ISS calibrated observation",
+      "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/methone/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Thomas et al. (2013); NAIF PCK00011"
+    }
+  }
+}

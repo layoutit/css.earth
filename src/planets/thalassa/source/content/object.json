@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "thalassa",
+  "displayName": "Thalassa",
+  "panel": {
+    "introduction": "Thalassa is a small, unusually flattened moon close to Neptune. Voyager 2 barely resolved its disk; this view shows its measured shape with a grid where surface imagery is unavailable.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Reference radius",
+        "value": "40 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Dimensions",
+        "value": "About 108×100×52 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Neptune",
+        "value": "About 7.48 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Neptune",
+        "value": "About 50,074 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation",
+        "value": "Synchronous reference model"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 imaging team · August 1989"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
+        "title": "A flattened ellipsoid using the 54×50×26 km semi-axes measured by Karkoschka (2003) from Voyager 2 observations. Thalassa is only a few pixels across in the available images, often with motion trails, so those pixels cannot supply a registered terrain map. The standard gray grid marks unavailable surface imagery. Shared lighting describes the model shape; no craters or photographic detail are invented.",
+        "detail": "Measured axes",
+        "thumbnail": "/scenes/thalassa/thalassa-model-thumbnail.webp",
+        "surface": "thalassa-model-surface@2x.webp",
+        "poles": "thalassa-model-poles@2x.webp",
+        "source": {
+          "id": "measured-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Thalassa overview",
+      "href": "https://science.nasa.gov/neptune/moons/thalassa/"
+    },
+    {
+      "label": "Karkoschka (2003)",
+      "role": "surface",
+      "description": "Voyager measurements of Neptune’s inner moon shapes",
+      "href": "https://doi.org/10.1016/S0019-1035(03)00002-2"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Voyager ISS archive",
+      "href": "https://pds-rings.seti.org/voyager/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/neptune/moons/thalassa/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Karkoschka (2003); IAU/WGCCRE; JPL Horizons"
+    }
+  }
+}

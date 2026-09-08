@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
-import { mkdir, rename, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { stripTypeScriptTypes } from "node:module";
 import { chromium } from "playwright";
 
 import { OBJECTS } from "../objects.mjs";
@@ -18,6 +19,12 @@ import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mjs"
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const requestedId = process.argv[3] ?? null;
 const densityOnly = process.env.CSSEARTH_DENSITY_ONLY === "1";
+const requestedCases = new Set((process.env.CSSEARTH_CONFORMANCE_CASES ?? "").split(",").filter(Boolean));
+// The coordinate oracle is the current source picker, also when the tested
+// server is an immutable production build without Vite's /src module routes.
+const surfaceHitModuleUrl = `data:text/javascript;base64,${Buffer.from(stripTypeScriptTypes(
+  await readFile(resolve('src/renderers/css/navigation/prepared-surface-hit.ts'), 'utf8'),
+)).toString('base64')}`;
 const CASE_TIMEOUT_MS = 120_000;
 const REQUEST_START_TIMEOUT_MS = 30_000;
 const evidenceDirectory = process.env.CSSEARTH_CONFORMANCE_OUTPUT
@@ -39,6 +46,7 @@ const browser = await chromium.launch({
   channel: process.env.PLAYWRIGHT_CHANNEL ?? "chrome",
 });
 const reports = [];
+const surfaceHitPlans = new Map();
 try {
   for (const planet of selected) {
     const profile = await loadPlanetBrowserProfile(planet);
@@ -70,6 +78,7 @@ try {
 }
 
 async function runCase(planet, name, prove) {
+  if (requestedCases.size && !requestedCases.has(name)) return { id: planet.id, case: name, skipped: true };
   const label = `${planet.id}/${name}`;
   const startedAt = performance.now();
   console.error(`[conformance] START ${label}`);
@@ -628,7 +637,7 @@ async function surfaceFlyCoordinates(page) {
   const viewport = page.viewportSize();
   const outsideOffset = size * 0.4;
   const direction = viewport.width - centerX > outsideOffset + 2 ? 1 : -1;
-  return Object.freeze({
+  const coordinates = {
     surface: Object.freeze({
       x: centerX + direction * size * 0.11,
       y: centerY + size * 0.11,
@@ -637,7 +646,37 @@ async function surfaceFlyCoordinates(page) {
       x: centerX + direction * outsideOffset,
       y: centerY,
     }),
-  });
+  };
+  const id = await page.locator('.planet-stage').getAttribute('data-object-id');
+  if (!surfaceHitPlans.has(id)) {
+    const prepared = JSON.parse(await readFile(resolve(`src/planets/${id}/prepared/runtime.json`), 'utf8'));
+    surfaceHitPlans.set(id, prepared.surfaceHit ?? null);
+  }
+  const surfaceHit = surfaceHitPlans.get(id);
+  if (surfaceHit) {
+    // An irregular silhouette can leave the old fixed disc sample in empty
+    // space. Use the same prepared-triangle picker as native input.
+    coordinates.surface = await page.evaluate(async ({ id, hit, preferred, moduleUrl }) => {
+      const { bindPreparedSurfaceHit } = await import(moduleUrl);
+      const camera = document.querySelector('.polycss-camera');
+      const scene = document.querySelector('.polycss-scene');
+      if (scene.querySelectorAll(`.${id}-body`).length !== 1 || document.querySelectorAll('.polycss-scene').length !== 1) {
+        throw new Error('Surface qualification requires one retained body and scene');
+      }
+      const pick = bindPreparedSurfaceHit(hit, scene.querySelector(`.${id}-body`), scene, camera);
+      const box = camera.getBoundingClientRect(), size = Math.min(box.width, box.height);
+      const candidates = [preferred];
+      for (const y of [.06, -.06, .12, -.12, .2, -.2, 0]) for (const x of [.06, -.06, .12, -.12, .2, -.2, 0]) {
+        candidates.push({ x: box.x + box.width / 2 + size * x, y: box.y + box.height / 2 + size * y });
+      }
+      const point = candidates.find(p => p.x > 0 && p.x < innerWidth && p.y > 0 && p.y < innerHeight &&
+        !document.elementFromPoint(p.x, p.y)?.closest('.planet-sidebar,button,a,input,summary') &&
+        [[0, 0], [-4, 0], [4, 0], [0, -4], [0, 4]].every(([x, y]) => pick(p.x + x, p.y + y)));
+      if (!point) throw new Error(`No visible prepared surface point for ${id}`);
+      return point;
+    }, { id, hit: surfaceHit, preferred: coordinates.surface, moduleUrl: surfaceHitModuleUrl });
+  }
+  return Object.freeze(coordinates);
 }
 
 async function beginRetainedProbe(page) {
@@ -1197,17 +1236,17 @@ async function proveInteractionInterruptions(page, planet, profile) {
     pitch: bounds.defaultPitch,
     zoom: bounds.defaultZoom,
   });
-  let flyCoordinates = await surfaceFlyCoordinates(page);
   await showInteractionPhase(page, "Drag, coast, then double-click fly-to");
   await drag(page, profile.inputSelector, 90, 150);
   assert.equal((await interactionStats(page, planet.id)).activeMode, "inertia",
     `${planet.id}: the fly-to sequence must begin during coast`);
   const poseBeforeFly = await cameraPose(page, planet.id);
-  await page.mouse.dblclick(
-    flyCoordinates.surface.x,
-    flyCoordinates.surface.y,
-    { delay: 45 },
-  );
+  let flyCoordinates = await surfaceFlyCoordinates(page);
+  await page.mouse.move(flyCoordinates.surface.x, flyCoordinates.surface.y);
+  await page.mouse.down({ clickCount: 1 });
+  await page.mouse.up({ clickCount: 1 });
+  await page.mouse.down({ clickCount: 2 });
+  await page.mouse.up({ clickCount: 2 });
   await waitFrames(page);
   const activeFly = await interactionStats(page, planet.id);
   assert.equal(activeFly.activeMode, "fly-to",

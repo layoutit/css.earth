@@ -205,3 +205,56 @@ residual at the six independent vector epochs is 1.021 km (regression guard
 2 km); this is a sampled residual, not a universal accuracy bound. The
 Pluto-centred child frame uses the same unit/containment rule as other moons.
 Pluto's existing heliocentric elements target its centre, not its barycentre.
+
+The DART additions use the same source-fitted conics. Didymos, Kleopatra, and Toutatis have maximum ±30-day heliocentric vector residuals of 131, 241, and 330 km respectively (fitted JD 2461286.5, 2026-09-03). Dimorphos is a satellite of Didymos, fitted over JD 2461256.5–2461316.5 to the post-impact DART s547 relative trajectory; six independent samples measure a maximum 0.054003 km position residual and 3.135% radial residual. Its orbit is strongly perturbed, so this compact 60-day fit is not a long-term satellite theory. Source shape radii describe encounter/reconstruction meshes, not a new post-impact shape measurement.
+
+The four inner Jovian moons use the same Horizons-fitted precessing ellipse.
+Amalthea and Thebe use the 1900–2100 fit; Metis and Adrastea use daily samples
+over 2020–2032 because their osculating phase cannot be unwrapped at the older
+coarse cadence. Independent fixture maximum residuals are 1,267.43 km
+(Amalthea), 530.07 km (Thebe), 972.87 km (Adrastea), and 946.81 km (Metis).
+These are fit residuals, not measured orbital uncertainties.
+
+The added inner Neptunian moons use daily Horizons element samples over
+2020–2032. Maximum residuals at six independent fixture epochs are238km
+(Naiad),105km(Thalassa),64km(Despina), and55km(Galatea). These are observed
+fit residuals of the shared precessing-ellipse model, not trajectory error bounds.
+
+Nix, Hydra, Kerberos and Styx use daily 2020–2032 element fits about the
+Pluto-system barycentre. Their public position/state APIs still return vectors
+relative to Pluto's physical centre: the generic `barycentreCompanion` record
+adds Charon's mass-weighted displacement to both position and velocity. Frame
+bounds include that offset. Independent Pluto-centred fixture maximum residuals
+are 94.36 km (Nix), 47.05 km (Hydra), 125.18 km (Kerberos), and 388.06 km
+(Styx); regression guards add 15 percent. These describe the compact fit, not observed uncertainties.
+Shape orientation is separately authored by each object; no synchronous spin
+or current pole/prime-meridian ephemeris is inferred for these moons.
+
+
+Puck, Portia, Juliet, Belinda, Cordelia and Ophelia use daily 2020–2032
+Horizons element fits. Their maximum residuals at six independent epochs are
+46.43, 92.47, 119.87, 28.49, 0.46 and 2.02 km, respectively. The displayed
+shape radii for the five prolate bodies are volume-equivalent, not the
+projected radii reported by the imaging fits. Cordelia and Ophelia use the
+ring-dynamics GM estimates from [French et al. (2024), Table 3 footnote b](https://arxiv.org/abs/2401.04634).
+A GM of zero for the other four means no mass contribution is modeled; it is
+not a measurement of zero mass.
+
+Methone and Pallene use daily 2005–2018 Cassini-era Horizons fits because the
+available SAT415 ephemerides stop in January 2018. Maximum residuals at six
+independent epochs inside that window are 17,510.67 km and 27.65 km. Their
+positions at the application's 2026 epoch are unqualified extrapolations;
+those in-window residuals do not bound the later error. Their source-image
+camera registration uses the archived acquisition epochs, independently of
+the illustrative frozen surface orientation used by the scene.
+
+### Slow longitude libration
+
+Polydeuces, Anthe and Aegaeon retain the shared precessing-ellipse model with
+three prepared harmonic terms in mean longitude. `tools/lib/fit-libration.mjs`
+fits those terms jointly with the linear longitude trend to daily JPL Horizons
+samples over 2020–2032. The compact model represents slow resonant motion; it
+is not an N-body integration or a qualified extrapolation outside that interval.
+Position and velocity evaluate the same phase correction and its derivative.
+Worst residuals at the six independent fixture epochs are 940 km, 2030 km and
+307 km respectively. These are sampled fit errors, not universal error bounds.

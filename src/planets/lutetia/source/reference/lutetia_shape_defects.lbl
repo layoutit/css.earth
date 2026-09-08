@@ -1,0 +1,21 @@
+PDS_VERSION_ID           = PDS3                                               
+RECORD_TYPE              = STREAM                                             
+DATA_SET_ID              = "RO-A-OSINAC/OSIWAC-5-LUTETIA-SHAPE-V1.0"          
+PRODUCT_ID               = "PDSSBN-SHAPE-MODEL-DEFECTS"                       
+PRODUCT_CREATION_TIME    = 2013-07-16                                         
+PRODUCT_NAME             = "IMAGES OF LUTETIA SHAPE MODEL DEFECTS"            
+                                                                              
+^PNG_DOCUMENT            = {"LUTETIA_SEAM.PNG",                               
+                            "LUTETIA_HOLES.PNG"}                              
+                                                                              
+OBJECT                   = PNG_DOCUMENT                                       
+  DOCUMENT_NAME            = "IMAGES OF LUTETIA SHAPE MODEL DEFECTS"          
+  DOCUMENT_TOPIC_TYPE      = "FIGURES"                                        
+  DOCUMENT_FORMAT          = PNG                                              
+  INTERCHANGE_FORMAT       = BINARY                                           
+  PUBLICATION_DATE         = 2013-07-16                                       
+  DESCRIPTION              = "Images showing the discontinuous seam           
+                              and the 'holes' in the Lutetia shape model"     
+END_OBJECT               = PNG_DOCUMENT                                       
+                                                                              
+END                                                                           

@@ -1,0 +1,26 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                2867 Steins (1969 VC)          2026-Sep-07 16:58:42
+Rec #:    2867 (+COV) Soln.date: 2026-Jun-05_07:00:44   # obs: 8587 (1951-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458554.5 ! 2019-Mar-12.00 (TDB)         Residual RMS= .22757
+   EC= .1460048707216255   QR= 2.018508307377024   TP= 2458855.4127495522
+   OM= 55.36691510045181   W=  250.9824295142045   IN= 9.93513455071291
+   A= 2.363606346423384    MA= 278.3827529770127   ADIST= 2.708704385469743
+   PER= 3.63388            N= .271232266           ANGMOM= .026163145
+   DAN= 2.42877            DDN= 2.20816            L= 306.0810472
+   B= -9.3878103           MOID= 1.02840996        TP= 2020-Jan-06.9127495522
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 2.58               ROTPER= 6.049
+   H= 13.13                G= .150                 B-V= n.a.
+                           ALBEDO= .300            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#97, OCC=0
+2: source=ORB
+*******************************************************************************

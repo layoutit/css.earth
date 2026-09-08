@@ -21,10 +21,10 @@
     "prose-project-link": "*.md: the [Galaxio](repo) project link -> [cssEarth](repo)",
     "prose-pipeline-writer-path": "*.md: the Python writer's path inside the upstream pipeline/ (absent here) -> `formats/catalog.py` of the external catalogue pipeline (not part of this repository)",
     "prose-pipeline-directory": "*.md: \"A Python writer lives in the repo's `pipeline/`\" (absent here) -> the external catalogue pipeline (not part of this repository)",
-    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md §2 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
+    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md \u00a72 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
     "prose-claude-symlink": "AGENTS.md: drop the sentence announcing the CLAUDE.md symlink, which is not mirrored (EXCLUDED_FILES)",
     "code-project-url": "src/modelAccuracy.ts: PROJECT_SOURCE_URL string literal, the upstream ARCHITECTURE.md -> this package's AGENTS.md in the cssEarth repository (a documentation URL; no behaviour change)",
-    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio … convention/definition' sourceLabel string literals -> 'cssEarth …' (labels only; no behaviour change)"
+    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio \u2026 convention/definition' sourceLabel string literals -> 'cssEarth \u2026' (labels only; no behaviour change)"
   },
   "rewrittenFiles": {
     "package.json": [
@@ -34,8 +34,8 @@
   },
   "excludedFiles": {},
   "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mjs (tools/prepare-solar-geometry.mjs first). A catalog consumer would be wired the same way.",
-  "fileCount": 31,
-  "byteCount": 379560,
+  "fileCount": 30,
+  "byteCount": 376028,
   "files": {
     "package.json": {
       "sha256": "a00c3ed14ee3f66a083a1f07a68bc2d02006f65c301dc467127a2b8cd1d5ea92",
@@ -98,10 +98,6 @@
     "src/rotation.test.ts": {
       "sha256": "19f275611fff9f11a7d2643ef2bf927dd76187e632449c7bb230006982ff83bd",
       "bytes": 11071
-    },
-    "src/satellites.ts": {
-      "sha256": "d0b443d5fa51dea9337770dc5ca0ed02f4292776b8f05009c43b6870757dbfd0",
-      "bytes": 3532
     },
     "src/solarSystem.ts": {
       "sha256": "983b41b3be353feeb5d9cc71669acf2d3a02611f62b3f27fb2e5de9378b0a658",
@@ -174,6 +170,7 @@
     "CLAUDE.md",
     "README.md",
     "src/__fixtures__/horizons.asteroids.ts",
+    "src/__fixtures__/horizons.moons-and-small-bodies-2.ts",
     "src/__fixtures__/horizons.moons-and-small-bodies.ts",
     "src/__fixtures__/horizons.planetary.ts",
     "src/__fixtures__/horizons.ts",
@@ -195,8 +192,10 @@
     "src/index.ts",
     "src/modelAccuracy.test.ts",
     "src/modelAccuracy.ts",
+    "src/rotation-neptune.ts",
     "src/rotation.ts",
     "src/satellites.test.ts",
+    "src/satellites.ts",
     "src/solarSystem.test.ts",
     "tools/fetch-fixtures.mjs",
     "tools/fetch-rotation-fixtures.mjs",
@@ -287,6 +286,10 @@
     "tools/fetch-rotation-fixtures.mjs": {
       "sha256": "d0c6d852bf20d0a71228d18e5afd7056835e4c74858b327dae093f4be7621d46",
       "bytes": 4911
+    },
+    "src/satellites.ts": {
+      "sha256": "d0b443d5fa51dea9337770dc5ca0ed02f4292776b8f05009c43b6870757dbfd0",
+      "bytes": 3532
     }
   }
 }

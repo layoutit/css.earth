@@ -1,0 +1,92 @@
+Description of the Galileo SSI Ida Radiometrically Calibrated Images bundle V1.0
+===================================================================================
+
+Note: This bundle was migrated to PDS4 from the PDS3 data set GO-A-SSI-3-IDA-CALIMAGES-V1.0.  For PDS3 data sets migrated to PDS4, the following text is taken from the data set description and confidence level note of the PDS3 data set catalog file. In these cases, some details may not be correct as a description of the PDS4 bundle.
+
+
+This dataset includes the Galileo Orbiter Solid State Imaging data on the asteroid 243 Ida.  The raw data have already been archived in PDS with the data set name 'Galileo Imaging (SSI) Asteroid, Earth and Moon Experiment Data Records' and can be found by searching on the data set identification 'GO-A/E-SSI-2-REDR-V1.0'. Only those images in which Ida actually appears have been included here. Images in both FITS and ISIS Cube format are provided.
+
+
+Processing of the ISIS Cube Format Files
+========================================
+
+The raw images were converted from VICAR format to FITS format using the image reduction package IRAF.  The image prefix tables, telemetry tables, and bad data value headers were removed from the raw images.  All relevant label keywords describing the image have been retained in the raw image labels.
+
+The images in this archive were converted from FITS format to ISIS cube format using GLLSSI2ISIS, and radiometrically calibrated using GLLSSICAL. GLLSSICAL was the tool provided in the original, raw data delivery for calibration of Galileo SSI images. GLLSSI2ISIS inputs were the raw image file name and the output image file name for the ISIS format image. GLLSSICAL inputs were image file name in the ISIS format created by GLLSSI2ISIS, units = IOF, scale=1. The GLLSSICAL output was the file name for the radiometrically calibrated image in ISIS cube format.
+
+Description of the ISIS software can be found in:
+
+Anderson, J.A., 2008. ISIS camera model design, 39th LPSC (Houston), p. Abstract #2159, Lunar and Planetary Institute.
+
+Anderson, J.A., Sides, S.C., Sotesz, D.L., Sucharski, T.L., Beker, K.J., 2004. Modernization of the integrated software for imagers and spectrometers, 35th LPSC (Houston), p. Abstract #2039, Lunar and Planetary Institute.
+
+
+Processing of the FITS Format Files
+===================================
+
+The raw images were converted from VICAR format to FITS format using the image reduction package IRAF.  The image prefix tables, telemetry tables, and bad data value headers were removed from the raw images.  All relevant label keywords describing the image have been retained in the raw image labels.
+
+The images in this archive were converted from FITS format to ISIS cube format using GLLSSI2ISIS, and radiometrically calibrated using GLLSSICAL. GLLSSICAL was the tool provided in the original, raw data delivery for calibration of Galileo SSI images. GLLSSI2ISIS inputs were the raw image file name and the output image file name for the ISIS format image. GLLSSICAL inputs were image file name in the ISIS format created by GLLSSI2ISIS, units = IOF, scale=1. The GLLSSICAL output was the file name for the radiometrically calibrated image in ISIS cube format. The radiometrically calibrated ISIS cube format images were converted to FITS format using the ISIS routine ISIS2FITS. ISIS2FITS inputs were the radiometrically calibrated image file name (in ISIS cube format), bittype=32, minpercent=0.5, maxpercent=99.5, info=Nominal (nominal fits header). The ISIS2FITS output was the radiometrically calibrated image in FITS format.
+
+Description of the ISIS software can be found in:
+
+Anderson, J.A., Sides, S.C., Sotesz, D.L., Sucharski, T.L., Beker, K.J., 2004. Modernization of the integrated software for imagers and spectrometers, 35th LPSC (Houston), p. Abstract #2039, Lunar and Planetary Institute.
+
+
+Radiometric Calibration Description
+===================================
+
+The GLLSSICAL program performs the following processing steps on each pixel:
+
+1. The radiometric correction is applied:
+       e = z(d - dc)
+   where:
+       z is retrieved from the Radiometric File.
+       d is the DN.
+       dc is retrieved from the Dark-Current File.
+
+  2. The output pixel is scaled to I/F using the following equation:
+       r = e * (S1/(A1(t-to))) * (K/Ko)(D/5.2)^2
+   where:
+       S1 = filter-dependent conversion factor from ft-Lamberts to I/F units for a reference distance of 5.2 AU from the Sun.
+       A1 = output picture scale factor.
+       t  = commanded exposure time of the input image(msec).
+       to = line-dependent shutter offset.
+       K  = system gain constant for the gain-state of the image.
+       Ko = system gain constant for the calibration file gain-state.
+       D  = target distance from the Sun (in AU).
+
+The output DN is usually in the range of 0.0 to 1.0. If the uneven bit weighting correction is enabled, the input DN values (d) will be corrected for uneven-bit-weighting due to the ADC. If the input dark-current file is in byte format (i.e. an individual dark-current frame), then the correction will be applied to the dark-current as well. The current correction table was supplied by Herb Breneman, 2 Mar 89, and is based on 1975 calibration data. This application outputs LRS for any negative I/F values that are encountered.
+
+
+Data
+====
+
+The data are included in a series of files with filenames of the form *rcal_XXX.FIT, where * denotes the spacecraft clock start count, rcal denotes the image has been radiometrically calibrated, and XXX denotes the filter name where:
+
+Filter Name       XXX
+CLEAR             clr
+RED               red
+GREEN             gre
+VIOLET            vio
+IR-7560           ir7
+IR-8890           ir8
+IR-9680           ir9
+
+The filename of the original, raw files were the last four digits of the spacecraft clock start count.
+
+The general table, color-set_id.tab, denotes which images were acquired at similar viewing conditions but in separate filters, thus constituting a color image set. The table includes image file name, filter name, and a designator for which color set the image belongs. Images with the same designator value (A-F) belong to the same color image set.
+
+Filter response curves taken from Klaasen et al. 1997 are included in the document directory.
+
+Both FITS and CUBE files are 2.6MB in size, giving 169MB each for the FITS and CUBE file subdirectories. The corresponding image labels are 4 KB each, giving 260KB each for the label subdirectories.
+
+K.P. Klaasen, M.J.S. Belton, H.H. Brenenman, A.S. McEwen, M.E. Davies, R.J. Sullivan, C.R. Clark, G. Neukum, C.M. Heffernan, A.P. Harch, J.M. Kaufman, W.J. Merline, L.R. Gaddis, W.F. Cunningham, P. Helfenstein, T.R. Colvin. Inflight performance characteristics, calibration, and utilization of the Galileo solid-state imaging camera, Opt. Eng.36(11) 3001-3027 (November 1997).
+
+
+Confidence Level Overview
+=========================
+
+This dataset includes only those Galileo SSI images in which 243 Ida actually appears. No viable camera kernels for the time frame in which the Ida images were acquired were included in the original PDS archive. These kernels are used by GLLSSICAL to convert raw values to reflectance. A work around was used in which GLLSSICAL was set to assume nadir pointing for all images. This produces negligible errors in radiometric values, but disables any calculations of viewing and illumination conditions.
+
+Several images include saturated lines (rows of pixels) and pixels. These were present in the original raw images and not removed in the radiometric calibration process. Only those pixels on the asteroid contain meaningful data, though some saturated pixels may be found on the asteroid. No extrapolations were made to remove erroneous data so that future users can determine which were viable pixels and which were not.

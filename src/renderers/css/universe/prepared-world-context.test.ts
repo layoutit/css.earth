@@ -347,14 +347,16 @@ test('orbit and circle keep a one-pixel stroke across zoom and physical system s
     expect(strokeAt(Math.sqrt(64 * 512))).toBe(1);
     expect(strokeAt(64)).toBeCloseTo(1);
     expect(strokeAt(24)).toBe(1);
-    expect(layer.inspect().find(body => body.id === 'mercury')!.orbit.some(piece => piece.style.visibility === '')).toBe(true);
+    const crowded = layer.inspect().find(body => body.id === 'mercury')!;
+    expect(crowded.indicator.style.visibility).toBe('hidden');
+    expect(crowded.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
     expect(strokeAt(8)).toBe(1);
     expect(layer.inspect().find(body => body.id === 'mercury')!.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
     layer.destroy();
   }
 });
 
-test('visible labels keep clearance from every orbit, including other bodies orbits', () => {
+test('planet labels remain visible when their placement crosses an orbit', () => {
   const root = mount(1), layer = mounted.get(root)!;
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
@@ -362,6 +364,7 @@ test('visible labels keep clearance from every orbit, including other bodies orb
   const visible = layer.inspect().filter(body => body.label.style.visibility === '');
   const lines = layer.inspect().flatMap(body => body.orbit).filter(line => line.style.visibility === '');
   expect(visible.length).toBeGreaterThan(0);
+  let crossings = 0;
   for (const { label } of visible) {
     const [lx, ly] = label.style.transform.match(/-?[\d.]+/g)!.map(Number);
     const width = label.textContent!.length * 6, height = 14;
@@ -375,9 +378,10 @@ test('visible labels keep clearance from every orbit, including other bodies orb
           enter = Math.max(enter, Math.min(a, b)); leave = Math.min(leave, Math.max(a, b));
         }
       }
-      expect(enter > leave, `${label.textContent} intersects an orbit`).toBe(true);
+      if (enter <= leave) crossings++;
     }
   }
+  expect(crossings).toBeGreaterThan(0);
   layer.destroy();
 });
 
@@ -499,19 +503,19 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
 });
 
 
-test('the Sun caption hides while crowded and returns below the marker as the view widens', () => {
+test('the Sun caption stays below its marker as orbit strokes cross during zoom', () => {
   const root = mount(1), layer = mounted.get(root)!;
   const label = find(root, 'contextLabel', 'sun');
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: {positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1]} },
     {focalPixels: 400, principalOffsetPixels: [0, 0]});
   publish(1200);
-  expect(label.style.visibility).toBe('hidden');
+  expect(label.style.visibility).toBe('');
   publish(4000);
   expect(label.style.visibility).toBe('');
   expect(label.style.transform).toBe('translate(-9px,12px)');
   publish(1200);
-  expect(label.style.visibility).toBe('hidden');
+  expect(label.style.visibility).toBe('');
   publish(8000);
   expect(label.style.visibility).toBe('');
   expect(label.style.transform).toBe('translate(-9px,12px)');
@@ -520,11 +524,11 @@ test('the Sun caption hides while crowded and returns below the marker as the vi
 
 test.each([
   { reason: 'an orbit clears the visible stroke', y: 81.5, extent: 200, weight: 1, shown: true },
-  { reason: 'a visible orbit crosses the text', y: 50, extent: 200, weight: 1, shown: false },
+  { reason: 'a visible orbit crosses the text', y: 50, extent: 200, weight: 1, shown: true },
   { reason: 'the crossing orbit trail is faded away', y: 50, extent: 200, weight: .01, shown: true },
-  { reason: 'a small resolved orbit still crosses the text', y: 50, extent: 65, weight: 1, shown: false },
+  { reason: 'a small resolved orbit still crosses the text', y: 50, extent: 65, weight: 1, shown: true },
   { reason: 'the orbit is unresolved at this zoom', y: 10, extent: 10, weight: 1, shown: true },
-])('the fixed Sun caption respects visible space when $reason', ({ y, extent, weight, shown }) => {
+])('the Sun caption remains readable across orbit strokes when $reason', ({ y, extent, weight, shown }) => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1), body = source.bodies[0], positionM = [-extent, -extent, 0];
@@ -563,14 +567,15 @@ test('switching to the Solar System card immediately reveals the Sun ring withou
 });
 
 
-test('crowded body markers hide without suppressing their resolved orbit paths', () => {
+test.each([true, false])('crowding couples closed orbit visibility to its circle while trails remain independent (closed=%s)', closed => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
   const context = parsePreparedWorldContext({ ...source, bodies: source.bodies.map((body, index) => {
     const positionM = [20 + index * 10, 0, 0];
     return { ...body, radiusM: .1, positionM, orbit: { ...body.orbit,
-      verticesM: [positionM, [0,500,0], [-500,0,0], [0,-500,0], [500,0,0], [0,500,0], [-500,0,0], [0,-500,0]] } };
+      verticesM: [positionM, [0,500,0], [-500,0,0], [0,-500,0], [500,0,0], [0,500,0], [-500,0,0], [0,-500,0]],
+      trail: closed ? body.orbit!.trail : body.orbit!.trail.map(() => .75) } };
   }) });
   const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
     plan: context, sprites: {sun: sprite, mercury: sprite, venus: sprite} });
@@ -585,7 +590,7 @@ test('crowded body markers hide without suppressing their resolved orbit paths',
       expect(element.style.visibility).toBe('hidden');
       expect(element.style.pointerEvents).toBe('none');
     }
-    expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
+    expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(!closed);
   }
   publish(100);
   for (const body of entries.slice(1)) {
@@ -641,8 +646,8 @@ test('one retained focus label and locator survive system retirement at their ph
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   const camera = (distance: number) => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } });
-  // At intermediate distance the still-resolved orbit crosses the caption.
-  for (const [distance, locatorOpacity, captionVisible] of [[50, 0, false], [Math.sqrt(1000 * 10000), 1, false], [8000, 1, true], [1e21, 1, true], [50, 0, false]] as const) {
+  // The caption remains visible when the intermediate orbit crosses it.
+  for (const [distance, locatorOpacity, captionVisible] of [[50, 0, false], [Math.sqrt(1000 * 10000), 1, true], [8000, 1, true], [1e21, 1, true], [50, 0, false]] as const) {
     layer.publish(camera(distance!), viewport);
     document.defaultView.advance(200);
     if (locatorOpacity) expect(locator.style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
@@ -747,7 +752,7 @@ test('a background star label inside the orbit footprint is excluded even outsid
   const backgroundText = { left: -10, top: -30, right: 10, bottom: -20 };
   expect(layer.labelExclusionRects().every(rect => !labelRectsOverlap(backgroundText, rect))).toBe(true);
   expect(layer.backgroundExclusionRects().some(rect => labelRectsOverlap(backgroundText, rect))).toBe(true);
-  expect(layer.inspect().find(body => body.id === 'sun')!.label.style.visibility).toBe('hidden');
+  expect(layer.inspect().find(body => body.id === 'sun')!.label.style.visibility).toBe('');
   // Close orbits clip the viewport; they must not claim the entire background.
   layer.publish({ ...camera, pose: { ...camera.pose, positionM: [0, 0, 50] } }, viewport);
   expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());

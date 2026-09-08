@@ -26,6 +26,7 @@ output/playwright/
 # licenses, configuration, and authored source modules remain tracked.
 src/planets/*/source/**/*.csv
 src/planets/*/source/**/*.fits
+src/planets/*/source/**/*.fit
 src/planets/*/source/**/*.gif
 src/planets/*/source/**/*.glb
 src/planets/*/source/**/*.IMG.gz
@@ -58,3 +59,10 @@ src/planets/*/source/**/*.IMG
 src/planets/*/source/**/*.tab
 src/planets/*/source/**/*.obj
 src/planets/*/source/**/*.bds
+
+# Reacquirable released STL shape models.
+src/planets/*/source/**/*.stl.gz
+
+# Pinned mission attitude kernels restored by body acquisition recipes.
+src/planets/*/source/**/*.bc
+src/planets/*/source/**/*.bpc

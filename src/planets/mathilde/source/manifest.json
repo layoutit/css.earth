@@ -1,0 +1,322 @@
+{
+  "schema": "cssmathilde-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "mathilde-visualization-shape",
+      "path": "shape/stooke-253mathilde.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab",
+      "credit": "NASA/JHUAPL/NEAR MSI; P. C. Thomas; P. Stooke and J. Pfau",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original restored by source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain"
+      ],
+      "width": 73,
+      "height": 37,
+      "projection": {
+        "kind": "planetocentric-radius-grid",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 26400
+      },
+      "coverage": "Published visualization shape: Thomas nominal model resampled to 5 degrees; Stooke smoothed unobserved areas and aesthetically modified shadowed crater floors. Not wholly measured terrain.",
+      "expectedBytes": 70226,
+      "expectedSha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720"
+    },
+    {
+      "id": "mathilde-observed-shape",
+      "path": "shape/253mathilde.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab",
+      "credit": "NASA/JHUAPL/NEAR MSI; P. C. Thomas; P. Stooke and J. Pfau",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original restored by source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "width": 121,
+      "height": 61,
+      "projection": {
+        "kind": "planetocentric-radius-grid",
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 26400
+      },
+      "coverage": "Incomplete Thomas measured-region radius model; exact 26.5 km unobserved placeholders are masked before interpolation. The coordinate axes and prime meridian are arbitrary.",
+      "expectedBytes": 236192,
+      "expectedSha256": "0b4acb5a2bc47697b9bb4d7c1e2a6a42e330bda3b241c10da2376c2a19ebae66"
+    },
+    {
+      "id": "mathilde-normal",
+      "path": "maps/matcyl1.jpg",
+      "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg",
+      "credit": "NASA/JHUAPL/NEAR MSI; P. C. Thomas; P. Stooke and J. Pfau",
+      "license": "Public domain",
+      "acquisition": "Pinned original restored by source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 3600,
+      "height": 1800,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "centerLongitude": 180,
+        "referenceRadiusMeters": 26400
+      },
+      "coverage": "Partial NEAR photomosaic by Stooke and Pfau at 10 pixels per degree. Map registration matches Thomas annotated FITS (west 360 left to 0 right). Missing exterior uses connected gray-fill heuristic 78±3 after sRGB decode; this is not an authoritative coverage mask. Photographed shadows and extensive display processing remain.",
+      "licenseEvidence": [
+        "reference/stooke-map-guide.html"
+      ],
+      "expectedBytes": 330486,
+      "expectedSha256": "67437ac67da5fa50723b657d472191131d7cebe7d62358270e5c03c1bb98181e"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "acquisition": "Pinned original restored by source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "title"
+      ],
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg",
+      "credit": "NASA/JHUAPL/NEAR MSI; P. C. Thomas; P. Stooke and J. Pfau",
+      "license": "Public domain",
+      "expectedBytes": 107673,
+      "expectedSha256": "3816437f78c1357a251b65c37b030054586e2b944b94532618878cc9277e642e",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "mathilde-normal",
+          "mathilde-visualization-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 180,
+        "latitudeDegrees": 25,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 9597,
+      "expectedSha256": "b5d5021f12c09b29f5170351a59ba02f536287083fba045d0fb1eaab5aeb3022"
+    },
+    {
+      "path": "maps/253mathm.fit",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 374400,
+      "expectedSha256": "e4516a7e5277a621f60f1988813467eaf4bb143ad482dea74aa412176e07087c"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 2536,
+      "expectedSha256": "50bc55ef788b3df6bbf93a70b9813b83b6b8eb2a15282458e542be1497ca41ff"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 1296,
+      "expectedSha256": "5181ff924ac1d2b44bb6685f5b0279d783e1691ee3627f772871311143180d57"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 524,
+      "expectedSha256": "0a5c6d1ff3db821094c474bc169c9f2ff17436fe3c3f7872031342e91f902f31"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 3678,
+      "expectedSha256": "408085c4d91e5a7bb8968695a4fb99839d8a16be9b9dd63272c6e5955bd5e954"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 4573,
+      "expectedSha256": "bc0ad4d85957a05b3adf7b2863eb9f96b8ee238a400544d3e1ecb235589200bd"
+    },
+    {
+      "path": "reference/253mathilde-legacy.lbl",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 6480,
+      "expectedSha256": "b1cb6c72fe80f670a62c5bc29df830b01be436eaa7d2745a903169236ceef7e6"
+    },
+    {
+      "path": "reference/253mathilde.xml",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 5629,
+      "expectedSha256": "8f3cc5c2ced16d91db6a07d2b547e91023e067e5def9314d477abf3f1b021b91"
+    },
+    {
+      "path": "reference/253mathimg.tab",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 1900,
+      "expectedSha256": "f0ad2894719b09efbcde47e27074fcdc68f3afddd7b852d920ea26d2e357b6b0"
+    },
+    {
+      "path": "reference/253mathimg.xml",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 9040,
+      "expectedSha256": "a23e17406a9bdc3221cd5ac678432242ba13ea4fea03a98e5fb66afd61b12995"
+    },
+    {
+      "path": "reference/253mathm-legacy.lbl",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 3200,
+      "expectedSha256": "a47e6fb56dd3ae2dc92cf3594a52ec82f2fd7c4869543b5d16bdb52e3dd150f1"
+    },
+    {
+      "path": "reference/253mathm.xml",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 6403,
+      "expectedSha256": "1605243a72816c8db93854e6bd1f6d9e80e539626e0307798a1f46e6392168ad"
+    },
+    {
+      "path": "reference/bundle_description.txt",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 8495,
+      "expectedSha256": "e9e95c6166d77a94f475da744fc1ff828f020f455eb5eda6b725334300bb735d"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 1322,
+      "expectedSha256": "39648732b1283cf8b939a7a979b9998b1e5bb557f78485012ad0ccf2edfa62fc"
+    },
+    {
+      "path": "reference/matcyl2.jpg",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 625699,
+      "expectedSha256": "962f006af83d8c7da373baea829b6e4c4bce843b2778c61fb58b2eb05caac4f5"
+    },
+    {
+      "path": "reference/stooke-253mathilde.xml",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 8533,
+      "expectedSha256": "1490838df80d8b5c21f985d459d13b7dacde9f7934044db6d696303c2297ab14"
+    },
+    {
+      "path": "reference/stooke-bundle-description.txt",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 5105,
+      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+    },
+    {
+      "path": "reference/stooke-data-index.html",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 1230,
+      "expectedSha256": "dc948ce1990ba668cc621abb01b0c5e213a4fa9b85b8d0cadb50f87d5ee63cd0"
+    },
+    {
+      "path": "reference/stooke-map-guide.html",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 55559,
+      "expectedSha256": "721a2e655e7a39d9e800204b33914150c8df04b068ad9cc3e4cd782393aeeace"
+    },
+    {
+      "path": "reference/stooke-mapindex.tab",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 38880,
+      "expectedSha256": "ae74da29036ac2d4ff84aea829fa6cf63311234abadb0de95295407372a6a048"
+    },
+    {
+      "path": "reference/stooke-mathilde-index.html",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 5507,
+      "expectedSha256": "eb58c6beb76c0a5914126f30265bd13e8ce54b3c540a10a40db99ffc4d877ecb"
+    },
+    {
+      "path": "reference/stooke-root.html",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 1958,
+      "expectedSha256": "77fb524c957b5d1607d6f13215b667a06d0fbe6cc0abbe59e448c95e4c391735"
+    },
+    {
+      "path": "reference/thomas-document-index.html",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 14070,
+      "expectedSha256": "858e4fecb634d71d15f5cb26dc07b2f29bb0de83b676deb89e9153a37846f20a"
+    },
+    {
+      "path": "reference/thomas-root.html",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 1413,
+      "expectedSha256": "922e36209c4a271fb1c4134157489b6e5ab2006de1384037137a76e2a8a3cef8"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source label, survey evidence or authored package input.",
+      "expectedBytes": 89774,
+      "expectedSha256": "7898287cb9d92e1e04f8cc83f3fee9206439527dd0183dfc82f01f39f10a37c3"
+    }
+  ]
+}

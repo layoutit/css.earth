@@ -1,0 +1,157 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "stars/eso0932a.tif",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1496910582_1_CALIB.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1496910582_1_CALIB.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geometry/05157_05162ra.bc",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ck/05157_05162ra.bc"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geometry/10289_10294ra.bc",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ck/10289_10294ra.bc"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geometry/cas00172.tsc",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/sclk/cas00172.tsc"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geometry/cas_iss_v10.ti",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geometry/cas_rocks_v18.tf",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/fk/cas_rocks_v18.tf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geometry/cas_v43.tf",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/fk/cas_v43.tf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geometry/naif0012.tls",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geometry/pallene_mst2013.bpc",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/pck/pallene_mst2013.bpc"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "geometry/pck00011.tpc",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1496910582_1.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1496910582_1.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1665947247_1.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2066/data/1665902448_1665976443/N1665947247_1.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1665947247_1.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/COISS_2xxx/COISS_2066/data/1665902448_1665976443/N1665947247_1.LBL"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1665947247_1_CALIB.IMG",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2066/data/1665902448_1665976443/N1665947247_1_CALIB.IMG"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "observations/N1665947247_1_CALIB.LBL",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2066/data/1665902448_1665976443/N1665947247_1_CALIB.LBL"
+    }
+  ]
+}
