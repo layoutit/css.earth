@@ -34,3 +34,13 @@ test('PDS4 zero-based plate topology supports external camera and shadow rays',(
   assert.equal(mesh.intersect([5000,0,0],[-1,0,0],2500),null);
   assert.throws(()=>parsePdsPlateShape(text,{...profile,indexBase:1}),/absent/);
 });
+
+test('Voyager geometric images use signed HALF pixels and their FICOR I/F scale',()=>{
+  for(const endian of ['LOW','HIGH']){
+    const b=Buffer.alloc(516);b.write(`LBLSIZE=512 FORMAT='HALF' ORG='BSQ' NS=2 NL=1 NB=1 NBB=0 NLB=0 RECSIZE=4 INTFMT='${endian}' REALFMT='VAX' LABEL3='FOR (I/F)*10000., MULTIPLY DN VALUE BY 2.00000'`);
+    [-30,500].forEach((v,i)=>endian==='LOW'?b.writeInt16LE(v,512+2*i):b.writeInt16BE(v,512+2*i));
+    const im=decodeCalibratedCamera(b);assert.ok(Math.abs(im.data[0]+.006)<1e-8);assert.ok(Math.abs(im.data[1]-.1)<1e-8);
+    const uncalibrated=Buffer.from(b);uncalibrated.write('X',uncalibrated.indexOf('FOR (I/F)'));
+    assert.throws(()=>decodeCalibratedCamera(uncalibrated),/layout/);
+  }
+});
