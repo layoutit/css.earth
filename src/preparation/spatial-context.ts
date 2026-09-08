@@ -63,7 +63,7 @@ export interface OrbitalState {
   readonly eccentricity: number;
   readonly trueAnomalyRadians: number;
 }
-export interface WorldContextBodyFact { readonly radiusM: number; }
+export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail'; }
 export interface PreparedWorldContext {
   readonly schema: 'cssearth-world-context@1';
   readonly sky: { readonly sceneRegistration: string };
@@ -142,7 +142,9 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     const verticesM = freeze(Array.from({ length: source.orbit.segments }, (_, index) => index === 0 ? copy(state.positionM) : ellipse(centre, state.perihelionDirection, motion, state.semiMajorAxisM, minor,
       eccentric + index * 2 * Math.PI / source.orbit.segments)));
     return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
-      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, trail: trailWeights(source.orbit.segments, source.orbit.trail) }) });
+      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, trail: fact.orbitStyle === 'closed'
+        ? freeze(Array.from({ length: source.orbit.segments }, () => 1))
+        : trailWeights(source.orbit.segments, source.orbit.trail) }) });
   });
   return freeze({ schema: 'cssearth-world-context@1', sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM }), bodies: freeze(bodies), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }

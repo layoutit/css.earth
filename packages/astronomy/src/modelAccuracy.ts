@@ -111,6 +111,7 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   puck: 46.42767332013248,
   methone: 17510.670766114912,
   pallene: 27.64911948293053,
+  dimorphos: 0.054002378820475615,
 }
 
 const AU_KM = M_PER_AU / M_PER_KM

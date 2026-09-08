@@ -4,6 +4,7 @@ import { SATELLITE_ELEMENTS_SATURN } from './satelliteElements.data.saturn.js'
 import { SATELLITE_ELEMENTS_URANUS } from './satelliteElements.data.uranus.js'
 import { SATELLITE_ELEMENTS_NEPTUNE } from './satelliteElements.data.neptune.js'
 import { SATELLITE_ELEMENTS_PLUTO } from './satelliteElements.data.pluto.js'
+import { SATELLITE_ELEMENTS_DIDYMOS } from './satelliteElements.data.didymos.js'
 
 // GENERATED FILE — do not edit by hand.
 //
@@ -51,6 +52,7 @@ export const SATELLITE_ELEMENTS = {
   ...SATELLITE_ELEMENTS_URANUS,
   ...SATELLITE_ELEMENTS_NEPTUNE,
   ...SATELLITE_ELEMENTS_PLUTO,
+  ...SATELLITE_ELEMENTS_DIDYMOS,
 } as const satisfies Record<string, SatelliteRecord>
 
 export type SatelliteId = keyof typeof SATELLITE_ELEMENTS

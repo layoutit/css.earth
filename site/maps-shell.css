@@ -103,6 +103,8 @@
   content: "";
 }
 
+.planet-sidebar [data-solar-system-results] .planet-object-list::before { content: none; }
+
 .planet-sidebar .maps-object-results .planet-object-link {
   position: relative;
   z-index: 1;

@@ -59,7 +59,7 @@ async function prepareMercurySystem(overrides = {}) {
 
 test("satellite parent frames contain both close and distant moon orbits without changing physical positions", async () => {
   const astronomy = await loadAstronomyPackage();
-  for (const id of ["moon", "io", "europa", "ganymede", "callisto"]) {
+  for (const id of ["moon", "io", "europa", "ganymede", "callisto", "dimorphos"]) {
     const frame = prepareEclipticPresentationFrame(id);
     const kilometersPerUnit = astronomy.BODIES[id].meanRadiusKm / 230;
     const system = await preparePlanetarySystem({ bodyId: id, presentationFrame: frame, kilometersPerUnit });

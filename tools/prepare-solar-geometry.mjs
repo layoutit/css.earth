@@ -114,6 +114,8 @@ const entries = BODIES.map((body) => {
   const parentPosition = isSatellite
     ? DWARF_PLANET_IDS.includes(parent)
       ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+      : ASTEROID_IDS.includes(parent)
+      ? keplerStateKm(asteroidElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : systemBarycentreHeliocentricAu(VSOP87A_KEY[parent] ?? parent, EPOCH_JD_TT) : null;
   const mu = isSatellite
     ? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
