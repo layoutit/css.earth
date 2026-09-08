@@ -329,4 +329,29 @@ loading behavior. Scripted Chrome input does not qualify a physical trackpad.
 
 Complete the same PR with continuous cold/warm globe-to-region-to-city exploration, reversals, interrupted travel, delayed/failing imagery and metadata, offline recovery, lens/history changes and sustained revisits. Run real Chrome at DPR 1/2; label narrow viewport and CPU/network emulation honestly. Capture visible checkpoints and videos separately from performance measurements so screenshot overhead is not blamed on the application.
 
+The corrected continuous route at `394a3508` completed 56 actions at each of DPR
+1 and 2 in Chrome 152 on an Apple M3 Max. Both runs preserved one scene, retained
+DOM identity, card-owned lenses, history and offline recovery. The DPR 1 run
+without video, screenshots or memory dumps measured an 18.6 ms interaction
+callback p95 and 51.8 ms maximum; its three frame intervals over 100 ms occurred
+during startup. The DPR 2 run captured still checkpoints: its five interaction
+callbacks over 100 ms occurred in screenshot checkpoint phases, so those
+measurements do not establish an observer-free DPR 2 performance result.
+
+The same 56-action route also passed at 800 × 900, DPR 2, with emulated touch,
+4× CPU slowdown, 10 Mbps downstream, 1 Mbps upstream and 150 ms network latency.
+It delivered 760 touch pointer events and retained the same scene DOM. Without
+video, screenshots or memory dumps, its interaction callback p95 was 52.4 ms,
+maximum 413 ms and search-result callback p95 138 ms. Twenty-five interaction
+callback intervals exceeded 100 ms, including a 413 ms interval on return to
+Earth. Functional recovery passed; smooth performance on this constrained
+profile is not established. This is browser emulation, not a physical phone.
+
+Visual qualification fails at a close Longyearbyen view. The flight reaches its
+destination and fine image requests can finish while large rectangles remain
+coarse, blank or stretched. Successful loading and functional assertions do not
+close this failure. Earlier recordings that repeatedly interrupted flights also
+do not prove geographic coverage. The failing polar view remains active work
+before the sustained journey can be called complete.
+
 Run source verification, tests, build and OBJECTS-derived browser conformance appropriate to the final changes. Refresh delivery-cost scenarios from actual request/cache behavior. A stable metadata selection can still have blocked directories, and representative coverage does not establish worldwide valid pixels, physical-device behavior or provider availability. Merge and deployment remain the user's decisions.
