@@ -112,8 +112,8 @@
               0.1190037618003177,
               0.596664958469161,
               -1479.567248000351,
-              -0.000002639112449735194,
-              -0.0000012871658418376004,
+              -2.639112449735194e-06,
+              -1.2871658418376004e-06,
               1
             ]
           },
@@ -157,6 +157,171 @@
           },
           "registrationNote": "Widest candidate: 6000 × 6000 pixels across 24°, with full pixel coverage. NASA WISE infrared data, display colors by CDS (not visible-light color). ~14.6 arcsec/pixel sampling. Rectangular atlas color/brightness seams cross the LMC: preview only, not approved for cloud processing. FITS orientation verified; independent star-field alignment pending. The shared saved user-authored model fit is applied for display only; it does not validate WISE-to-SMASH or simulation alignment.",
           "maxPixels": 6000
+        },
+        {
+          "id": "dss2-wide-optical",
+          "label": "DSS2 · 24° wide optical",
+          "path": ".local/nebula-lab/wide-dss2/dss2-color-lmc-24deg-6000.jpg",
+          "sha256": "add16f9657563bde2b7e10320edc2cd12b419202624bcb192be2f5781797ce70",
+          "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
+          "sourcePageUrl": "https://doi.org/10.26093/cds/aladin/ht9n-7r",
+          "credit": "Digitized Sky Survey - STScI/NASA, Colored & Healpixed by CDS",
+          "license": "ODbL-1.0",
+          "maxPixels": 6000,
+          "wcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6000,
+              6000
+            ],
+            "referencePixel": [
+              3000.0,
+              3000.0
+            ],
+            "referenceValueDeg": [
+              78.76,
+              -69.19
+            ],
+            "scaleDeg": [
+              -0.0040595312971682,
+              0.0040595312971682
+            ],
+            "rotationDeg": 0.0
+          },
+          "wcsSource": {
+            "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
+            "sha256": "a72fa01bce7c3f05b7d17b6ec4eff58afd5a1302594e89a230bda45dc0b4c92d",
+            "description": "Exact ICRS TAN WCS from the matching CDS HiPS2FITS color FITS; JPEG/FITS orientation verified. See source/dss2-wide-receipt.json."
+          },
+          "registrationNote": "Survey WCS placement across a 24° field. Photographic plate seams, foreground stars and uneven backgrounds remain; use for coverage comparison before reconstruction. This is not calibrated diffuse emission. The same saved image-to-density visual fit is applied as for SMASH. Import and alignment preview only; cloud processing awaits explicit approval."
+        },
+        {
+          "id": "horalek-widefield",
+          "label": "Horálek · optical wide field",
+          "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+          "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
+          "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2547a.jpg",
+          "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
+          "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+          "license": "CC-BY-4.0",
+          "registration": {
+            "referenceWcs": {
+              "projection": "TAN",
+              "coordinateFrame": "ICRS",
+              "referenceDimension": [
+                6737,
+                6536
+              ],
+              "referencePixel": [
+                3368.5,
+                3268
+              ],
+              "referenceValueDeg": [
+                78.7957840796,
+                -71.566506171
+              ],
+              "scaleDeg": [
+                -0.00138784675876,
+                0.00138784675876
+              ],
+              "rotationDeg": -16.920000000000027
+            },
+            "referenceWidthPx": 6737,
+            "referenceHeightPx": 6536,
+            "imageToReferenceMatrix": [
+              -0.9925301807308614,
+              0.47532659519967235,
+              5752.612114776925,
+              -0.4729033967977122,
+              -0.9970462494720148,
+              5409.185308143818,
+              2.3045914082800085e-07,
+              -4.331845136939875e-07,
+              1.0
+            ]
+          },
+          "registrationNote": "Measured registration to SMASH using 592 unique point sources; 198 held out of final fit, median 0.59 SMASH pixels and P90 1.12 pixels (4.996 arcsec/pixel). Homography is an approximation; validated point hull covers 60.2% of source raster, outer area extrapolated. No per-pixel distances or simulation correspondence implied. The same saved image-to-density visual fit is applied as for SMASH. Import and alignment preview only; cloud processing awaits explicit approval.",
+          "wcsSource": {
+            "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+            "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+            "description": "Registered to discrete stars in the pinned full-size SMASH image, whose publisher ICRS TAN AVM supplies the sky anchor. Exact correspondences, held-out residuals and source hull recorded in registration receipt."
+          },
+          "wcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6582,
+              4388
+            ],
+            "referencePixel": [
+              3291.5,
+              2193.5
+            ],
+            "referenceValueDeg": [
+              80.019642727,
+              -69.3725614263
+            ],
+            "scaleDeg": [
+              -0.00152846329107676,
+              0.00153282698541333
+            ],
+            "rotationDeg": -170.2376608393
+          },
+          "maxPixels": 4096
+        },
+        {
+          "id": "smash-dr2-wide-mosaic",
+          "label": "SMASH DR2 · wider optical mosaic",
+          "path": ".local/nebula-lab/smash-mosaic/smash-lmc-author-mosaic.jpg",
+          "sha256": "fed588625354f48632d0433975f635f5aaf58999ed40b9316c11384dfb44a53a",
+          "url": "https://raw.githubusercontent.com/SMASHsurvey/smashsurvey.github.io/e759f028d2edc199c60003f2e0c666f20eb0f9b5/assets/smash_lmc_small.jpg",
+          "sourcePageUrl": "https://smashsurvey.github.io/",
+          "credit": "SMASH survey / D. Nidever et al.; CTIO/NOIRLab/NSF/AURA",
+          "license": "Public survey distribution; retain institutional and paper credit. Image-specific license not declared; see source/smash-mosaic-acquisition.json.",
+          "registration": {
+            "referenceWcs": {
+              "projection": "TAN",
+              "coordinateFrame": "ICRS",
+              "referenceDimension": [
+                6737,
+                6536
+              ],
+              "referencePixel": [
+                3368.5,
+                3268
+              ],
+              "referenceValueDeg": [
+                78.7957840796,
+                -71.566506171
+              ],
+              "scaleDeg": [
+                -0.00138784675876,
+                0.00138784675876
+              ],
+              "rotationDeg": -16.920000000000027
+            },
+            "referenceWidthPx": 6737,
+            "referenceHeightPx": 6536,
+            "imageToReferenceMatrix": [
+              2.5496682244605435,
+              -0.6511023921242473,
+              -756.3050986817066,
+              0.638098978801953,
+              2.5403077521072284,
+              -3365.643085895814,
+              -7.914618911678029e-07,
+              -3.6857204504082364e-06,
+              1.0
+            ]
+          },
+          "wcsSource": {
+            "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+            "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+            "description": "SMASH publisher AVM is the sky anchor. 20,661 matched point identities; 6,887 held out; P90 1.82 native reference pixels. Central 30% matched hull, outer field extrapolated. See source/smash-mosaic-registration.json."
+          },
+          "registrationNote": "4111 × 5000 optical mosaic from the SMASH survey team. Wider irregular field footprint; black regions are missing observations, not zero light. 20,661 star matches to current SMASH; 6,887 held out, P90 1.82 SMASH pixels (~9.1 arcsec). Central 30% verified; outer placement extrapolated. Shared saved image-to-density visual fit applied. Visible exposure/field seams retained. Catalogue preview only; no cloud processing.",
+          "maxPixels": 5000
         }
       ],
       "alignment": {

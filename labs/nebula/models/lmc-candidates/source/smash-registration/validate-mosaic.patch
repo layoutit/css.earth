@@ -1,0 +1,48 @@
+--- validate-image-registration.py
++++ validate-mosaic.py
+@@ -187,7 +187,8 @@
+         dump(out / (name + '-star-centroids.json'), {'coordinateConvention': CONVENTION, 'image': provenance[name], 'method': 'positive Gaussian high-pass sigma=4 working pixels; 7px local maxima >7/255; positive 5x5 weighted centroid; strongest 70000 maximum', 'count': len(stars), 'nativePixelCentres': native_points.tolist(), 'workingPeakHighpass': stars[:, 2].tolist()})
+         cv2.imwrite(str(out / (name + '-star-map.png')), np.round(hp.clip(0, 255)).astype('uint8'))
+     print('STAR_MAPS_WRITTEN', len(s), len(r), flush=True)
+-    hseed, seed_report = seed(shp, rhp)
++    seed_report = json.loads((out / 'independent-seed.json').read_text())
++    hseed = np.array(seed_report.pop('homography'))
+     print('DESCRIPTOR_SEED', seed_report, flush=True)
+     predicted = transform(s[:, :2], hseed)
+     tree = cKDTree(r[:, :2])
+@@ -228,8 +229,8 @@
+     hn /= hn[2, 2]
+     xn, yn = transform(x, resize_matrix(source.shape, sn)), transform(y, resize_matrix(reference.shape, rn))
+     residual = np.linalg.norm(transform(xn, hn) - yn, axis=1)
+-    publisher = topix(tosky(xn, source_wcs, sn), reference_wcs, rn)
+-    publisher_residual = np.linalg.norm(publisher - yn, axis=1)
++    publisher = topix(tosky(xn, source_wcs, sn), reference_wcs, rn) if source_wcs else None
++    publisher_residual = np.linalg.norm(publisher - yn, axis=1) if source_wcs else None
+     hull = float(ConvexHull(xn).volume / (sn[0] * sn[1]))
+     heldout_hull = float(ConvexHull(xn[~train]).volume / (sn[0] * sn[1]))
+     controls = {}
+@@ -267,13 +268,13 @@
+                'descriptorSeed': seed_report, 'uniqueMatchedStars': len(x), 'trainingCount': int(train.sum()), 'trainingInlierCount': int(fit_inliers.sum()), 'heldOutCount': int((~train).sum()),
+                'heldOutResidualReferenceNativePixels': stats, 'matchedSourceHullFraction': hull, 'heldOutSourceHullFraction': heldout_hull,
+                'matchedSourceBoundingBoxNativePixels': [xn.min(axis=0).tolist(), xn.max(axis=0).tolist()],
+-               'publisherWcs': {'pass': bool(np.percentile(publisher_residual, 90) < 3), 'residualReferenceNativePixels': residual_stats(publisher_residual)},
++               'publisherWcs': {'available': False, 'pass': False, 'reason': 'No published WCS for this source; no angular extent inferred from field-union description.'} if source_wcs is None else {'pass': bool(np.percentile(publisher_residual, 90) < 3), 'residualReferenceNativePixels': residual_stats(publisher_residual)},
+                'verifiedRegistration': {'referenceWcs': reference_wcs, 'referenceWidthPx': rn[1], 'referenceHeightPx': rn[0], 'imageToReferenceMatrix': hn.ravel().tolist()},
+                'localScaleReferencePixelsPerSourcePixel': scales.tolist(), 'localRotationDeg': float(np.rad2deg(np.arctan2(jacobian[1, 0], jacobian[0, 0]))),
+                'jacobianDeterminantsCentreAndCorners': determinant_samples, 'negativeControls': controls,
+                'limitations': ['SMASH publisher AVM is the sky anchor; no absolute catalogue solution.', 'Infrared/optical display composite point-source identities; not photometric or spectroscopic identities.', 'All final held-out points excluded from RANSAC and final least squares; their candidate discovery uses the shared descriptor seed and a 5 working-pixel association window.', 'Registration is empirically verified within the matched hull; outer corners are extrapolated.', 'Publication image may retain mosaic/projective distortions; residuals describe this image pair only.']}
+     dump(out / 'direction-gate.json', receipt)
+-    dump(out / 'matched-stars.json', {'coordinateConvention': CONVENTION, 'sourceNativePixelCentres': xn.tolist(), 'referenceNativePixelCentres': yn.tolist(), 'sourceCentroidIndices': source_indices.tolist(), 'referenceCentroidIndices': reference_indices.tolist(), 'training': train.tolist(), 'fitInliers': fit_inliers.tolist(), 'surroundingStarPatternCorrelation': scores.tolist(), 'fitResidualReferenceNativePixels': residual.tolist(), 'publisherWcsResidualReferenceNativePixels': publisher_residual.tolist()})
++    dump(out / 'matched-stars.json', {'coordinateConvention': CONVENTION, 'sourceNativePixelCentres': xn.tolist(), 'referenceNativePixelCentres': yn.tolist(), 'sourceCentroidIndices': source_indices.tolist(), 'referenceCentroidIndices': reference_indices.tolist(), 'training': train.tolist(), 'fitInliers': fit_inliers.tolist(), 'surroundingStarPatternCorrelation': scores.tolist(), 'fitResidualReferenceNativePixels': residual.tolist(), 'publisherWcsResidualReferenceNativePixels': publisher_residual.tolist() if source_wcs is not None else None})
+     # Evidence only: original colour remains intact in these contact patches.
+     warped = cv2.warpPerspective(source, h, (reference.shape[1], reference.shape[0]))
+     view = cv2.addWeighted(reference, .5, warped, .5, 0)
+@@ -295,7 +296,7 @@
+             patch = cv2.resize(patch, (160, 160))
+             cv2.drawMarker(patch, (80, 80), (0, 220, 255), cv2.MARKER_CROSS, 12, 1)
+             sheet[row*180+20:row*180+180, col*320+side*160:col*320+(side+1)*160] = patch
+-        cv2.putText(sheet, f'heldout #{k}: VISTA | SMASH  {residual[k]:.2f}px', (col*320+3, row*180+14), cv2.FONT_HERSHEY_SIMPLEX, .33, (255,255,255), 1)
++        cv2.putText(sheet, f'heldout #{k}: mosaic | SMASH  {residual[k]:.2f}px', (col*320+3, row*180+14), cv2.FONT_HERSHEY_SIMPLEX, .33, (255,255,255), 1)
+     cv2.imwrite(str(out / 'heldout-star-contact-sheet.jpg'), sheet)
+     print('DIRECTION_GATE', receipt['status'], 'stars', len(x), 'heldout', stats, 'hull', hull, 'controls', shifted, flush=True)
+ 

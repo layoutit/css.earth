@@ -1,0 +1,110 @@
+{
+  "schema": "cssearth-fixed-wcs-star-check@1",
+  "pass": true,
+  "source": {
+    "path": ".local/nebula-lab/wide-dss2/dss2-color-lmc-24deg-6000.jpg",
+    "sha256": "add16f9657563bde2b7e10320edc2cd12b419202624bcb192be2f5781797ce70",
+    "wcs": {
+      "projection": "TAN",
+      "coordinateFrame": "ICRS",
+      "referenceDimension": [
+        6000,
+        6000
+      ],
+      "referencePixel": [
+        3000.0,
+        3000.0
+      ],
+      "referenceValueDeg": [
+        78.76,
+        -69.19
+      ],
+      "scaleDeg": [
+        -0.0040595312971682,
+        0.0040595312971682
+      ],
+      "rotationDeg": 0.0
+    },
+    "nativeDimensions": [
+      6000,
+      6000
+    ]
+  },
+  "reference": {
+    "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
+    "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+    "wcs": {
+      "projection": "TAN",
+      "coordinateFrame": "ICRS",
+      "referenceDimension": [
+        6737,
+        6536
+      ],
+      "referencePixel": [
+        3368.5,
+        3268
+      ],
+      "referenceValueDeg": [
+        78.7957840796,
+        -71.566506171
+      ],
+      "scaleDeg": [
+        -0.00138784675876,
+        0.00138784675876
+      ],
+      "rotationDeg": -16.920000000000027
+    },
+    "nativeDimensions": [
+      6737,
+      6536
+    ]
+  },
+  "coordinateConvention": "Zero-based top-left raster pixel centres; edges at -.5 and size-.5. Resize: x_native=(x_work+.5)*native_width/work_width-.5, likewise y. AVM/FITS: x_fits=(x_native+.5)*reference_width/native_width+.5; y_fits=reference_height+.5-(y_native+.5)*reference_height/native_height. Row-major homography maps source native centres to reference native centres.",
+  "method": "Fixed supplied WCS only; compact local-maximum centroids; unique point identities confirmed by surrounding high-pass star patterns with correlation >0.35; no source positions used to fit or correct the WCS.",
+  "refitted": false,
+  "uniqueMatchedStars": 566,
+  "fixedWcsResidualNativeSmashPixels": {
+    "median": 3.071040072972341,
+    "p90": 5.874280531773843,
+    "max": 6.730709670718427
+  },
+  "approximateResidualNativeDssPixels": {
+    "median": 1.0499076615740999,
+    "p90": 2.0082616931063675,
+    "max": 2.301052243932021
+  },
+  "matchedSourceHullFraction": 0.11944161895441595,
+  "negativeControls": [
+    {
+      "offsetWorkingReferencePixels": [
+        40,
+        0
+      ],
+      "nearbyCandidates": 1863,
+      "confirmedPatterns": 0
+    },
+    {
+      "offsetWorkingReferencePixels": [
+        0,
+        40
+      ],
+      "nearbyCandidates": 1896,
+      "confirmedPatterns": 0
+    },
+    {
+      "offsetWorkingReferencePixels": [
+        100,
+        -70
+      ],
+      "nearbyCandidates": 1803,
+      "confirmedPatterns": 0
+    }
+  ],
+  "limitations": [
+    "Only the region overlapping the smaller SMASH source is independently checked; wider DSS footprint remains governed by its published WCS.",
+    "DSS2 is a photographic display composite at about 14.6 arcsec/pixel; this is a direction and coarse positional check, not high precision astrometry.",
+    "Candidate identities were discovered within 5 working SMASH pixels of the fixed WCS prediction.",
+    "No model-particle alignment is inferred."
+  ],
+  "cloudProcessingPerformed": false
+}

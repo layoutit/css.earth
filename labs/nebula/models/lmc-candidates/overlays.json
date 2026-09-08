@@ -119,6 +119,108 @@
       "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
       "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
       "registrationNote": "Widest candidate: 6000 × 6000 pixels across 24°, with full pixel coverage. NASA WISE infrared data, display colors by CDS (not visible-light color). ~14.6 arcsec/pixel sampling. Rectangular atlas color/brightness seams cross the LMC: preview only, not approved for cloud processing. FITS orientation verified; independent star-field alignment pending. The shared saved user-authored model fit is applied for display only; it does not validate WISE-to-SMASH or simulation alignment."
+    },
+    {
+      "id": "dss2-wide-optical",
+      "label": "DSS2 · 24° wide optical",
+      "texturePath": "prepared/dss2-wide-optical.webp",
+      "widthPx": 6000,
+      "heightPx": 6000,
+      "sha256": "32615b2bd3c035eb947b45d292365e6fe5424391423e8952e26f7e92ca2f87a6",
+      "bytes": 3208688,
+      "pivotCssPx": [
+        0.08784019075619652,
+        -0.0878401907564239,
+        0
+      ],
+      "style": {
+        "width": "6000px",
+        "height": "6000px",
+        "transform": "matrix3d(0,-0.1756803815124602,0,0,-0.1756803815124602,-3.789561257387201e-17,0,5.392692719531728e-20,0,0,1,0,527.1289847281369,526.9533043466243,0,1)",
+        "backgroundSize": "6000px 6000px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://doi.org/10.26093/cds/aladin/ht9n-7r",
+      "credit": "Digitized Sky Survey - STScI/NASA, Colored & Healpixed by CDS",
+      "registrationNote": "Survey WCS placement across a 24° field. Photographic plate seams, foreground stars and uneven backgrounds remain; use for coverage comparison before reconstruction. This is not calibrated diffuse emission. The same saved image-to-density visual fit is applied as for SMASH. Import and alignment preview only; cloud processing awaits explicit approval.",
+      "initialPlacement": {
+        "x": 1.5626367397788687,
+        "y": 2.1726510201541025,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "initialOpacity": 0.29
+    },
+    {
+      "id": "horalek-widefield",
+      "label": "Horálek · optical wide field",
+      "texturePath": "prepared/horalek-widefield.webp",
+      "widthPx": 4096,
+      "heightPx": 2731,
+      "initialPlacement": {
+        "x": 0.6184424860783384,
+        "y": 2.3793520276221836,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "initialOpacity": 0.29,
+      "sha256": "ada2c5d4b6f75f24ca37f1446e6ccb98993e4c996ce6ab0da5d662722ec1d046",
+      "bytes": 3353640,
+      "pivotCssPx": [
+        -8.03350461469553,
+        19.190441087820926,
+        0
+      ],
+      "style": {
+        "width": "4096px",
+        "height": "2731px",
+        "transform": "matrix3d(0.01575616692084678,0.10526343914580555,0,6.268016950525346e-7,0.10553448347095629,-0.016029371113261956,0,0.0000010695309106364078,0,0,1,0,-184.43151666398347,-174.44831487943384,0,1)",
+        "backgroundSize": "4096px 2731px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
+      "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "registrationNote": "Measured registration to SMASH using 592 unique point sources; 198 held out of final fit, median 0.59 SMASH pixels and P90 1.12 pixels (4.996 arcsec/pixel). Homography is an approximation; validated point hull covers 60.2% of source raster, outer area extrapolated. No per-pixel distances or simulation correspondence implied. The same saved image-to-density visual fit is applied as for SMASH. Import and alignment preview only; cloud processing awaits explicit approval."
+    },
+    {
+      "id": "smash-dr2-wide-mosaic",
+      "label": "SMASH DR2 · wider optical mosaic",
+      "texturePath": "prepared/smash-dr2-wide-mosaic.webp",
+      "widthPx": 4111,
+      "heightPx": 5000,
+      "sha256": "06aa4f8efd7333a409401687e77d3afbdce7e7236742798729adce053e2e02cc",
+      "bytes": 7517784,
+      "pivotCssPx": [
+        -173.2353446847684,
+        9.292569421988643,
+        0
+      ],
+      "style": {
+        "width": "4111px",
+        "height": "5000px",
+        "transform": "matrix3d(0.007932910585864667,-0.1571805210263328,0,-6.43458323334858e-7,-0.15663401933301838,-0.00797617179092598,0,-0.000006294228428385918,0,0,1,0,204.99868903539547,352.1590453644263,0,1)",
+        "backgroundSize": "4111px 5000px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://smashsurvey.github.io/",
+      "credit": "SMASH survey / D. Nidever et al.; CTIO/NOIRLab/NSF/AURA",
+      "registrationNote": "4111 × 5000 optical mosaic from the SMASH survey team. Wider irregular field footprint; black regions are missing observations, not zero light. 20,661 star matches to current SMASH; 6,887 held out, P90 1.82 SMASH pixels (~9.1 arcsec). Central 30% verified; outer placement extrapolated. Shared saved image-to-density visual fit applied. Visible exposure/field seams retained. Catalogue preview only; no cloud processing.",
+      "initialPlacement": {
+        "x": -3.406941334625095,
+        "y": -4.122109194291484,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "initialOpacity": 0.29
     }
   ]
 }

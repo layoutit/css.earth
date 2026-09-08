@@ -19,4 +19,4 @@ The archived alignment catalogue also contains `dss2-wide-optical`, a 6000 × 60
 
 Use DSS2 as wider calibrated context and retain SMASH for higher-quality central detail. Before either becomes a joint reconstruction input, assess foreground/background separation, plate seams, passband and tone differences, and overlap behavior. Rebuild analysis and delivery resolution separately if sharper reconstructed cloud detail is required.
 
-The active LMC Alignment selector now uses the [review shortlist](image-candidates.md): SMASH, corrected VISTA and WISE. DSS2 and the other earlier comparisons remain archived; no reconstruction was replaced.
+The active LMC Alignment selector now uses the [review shortlist](image-candidates.md): SMASH, corrected VISTA, WISE, DSS2, Horálek and the wider published SMASH mosaic. DSS2 and Horálek have been restored to the active comparison catalogue; no reconstruction was replaced.

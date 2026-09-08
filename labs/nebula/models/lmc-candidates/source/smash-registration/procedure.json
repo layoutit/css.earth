@@ -1,0 +1,110 @@
+{
+  "schema": "cssearth-registration-procedure@1",
+  "workingDirectory": "repository root",
+  "pythonExecutable": ".local/nebula-lab/registration/venv/bin/python",
+  "dependencies": {
+    "opencv-python-headless": "4.11.0.86",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "astropy": "6.0.1"
+  },
+  "scripts": [
+    {
+      "path": "labs/nebula/src/validate-image-registration.py",
+      "sha256": "c618151fc317a19eba8308b24e28ee20ae1bcb6e1a2d3b107e80fcb5c8044e50"
+    },
+    {
+      "path": ".local/nebula-lab/smash-mosaic/registration/find-seed.py",
+      "sha256": "c29e93d83803a851b9e15b594f1cc638b3387b13eeaec26544b109db8d460574"
+    },
+    {
+      "path": ".local/nebula-lab/smash-mosaic/registration/validate-mosaic.py",
+      "sha256": "b36e8a897a01b7ad99c46b535adc88c8248c7b94036223f8987baea12bf5270b"
+    },
+    {
+      "path": ".local/nebula-lab/smash-mosaic/registration/verify-outskirts-dss2.py",
+      "sha256": "b8eb1f01738bc0e344d67a31dd04cb631863fb815e39995753c3464c00c7242c"
+    },
+    {
+      "path": ".local/nebula-lab/smash-mosaic/registration/recipe.json",
+      "sha256": "6b9b8399394eea5a862d9a75b59bbd31a89d09dcd3bf534cadb2c2668d90787f"
+    }
+  ],
+  "inputs": [
+    {
+      "path": ".local/nebula-lab/smash-mosaic/smash-lmc-author-mosaic.jpg",
+      "sha256": "fed588625354f48632d0433975f635f5aaf58999ed40b9316c11384dfb44a53a",
+      "url": "https://smashsurvey.github.io/assets/smash_lmc_small.jpg"
+    },
+    {
+      "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
+      "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+      "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif"
+    },
+    {
+      "path": ".local/nebula-lab/wide-dss2/dss2-color-lmc-24deg-6000.jpg",
+      "sha256": "add16f9657563bde2b7e10320edc2cd12b419202624bcb192be2f5781797ce70",
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg"
+    }
+  ],
+  "commands": [
+    [
+      ".local/nebula-lab/registration/venv/bin/python",
+      ".local/nebula-lab/smash-mosaic/registration/find-seed.py"
+    ],
+    [
+      ".local/nebula-lab/registration/venv/bin/python",
+      ".local/nebula-lab/smash-mosaic/registration/validate-mosaic.py",
+      "--source",
+      ".local/nebula-lab/smash-mosaic/smash-lmc-author-mosaic.jpg",
+      "--reference",
+      ".local/nebula-lab/source-originals/noirlab2030a.tif",
+      "--source-id",
+      "smash-author-mosaic",
+      "--recipe",
+      ".local/nebula-lab/smash-mosaic/registration/recipe.json",
+      "--output",
+      ".local/nebula-lab/smash-mosaic/registration"
+    ],
+    [
+      ".local/nebula-lab/registration/venv/bin/python",
+      ".local/nebula-lab/smash-mosaic/registration/verify-outskirts-dss2.py"
+    ]
+  ],
+  "expectedPositiveSignals": [
+    "STAR_MAPS_WRITTEN before registration",
+    "DIRECTION_GATE pass with 20661 identities and 6887 held out",
+    "dss2-outskirts-check.json records pass:false; it is an external crosscheck, not a homography refit"
+  ],
+  "notes": [
+    "First seed uses 4000-pixel source and 2400-pixel reference star-only high-pass maps; 8894 coherent descriptors seed the fit.",
+    "Native source homography is fitted only from confirmed point centroids; 6887 points withheld from final fitting.",
+    "No cloud processing or scene baking occurs in these commands.",
+    "Keep helpers beside receipts when copying this evidence."
+  ],
+  "observedPythonVersion": "3.9.6",
+  "packaging": {
+    "baseValidatorPath": "labs/nebula/src/validate-image-registration.py",
+    "baseValidatorSha256": "c618151fc317a19eba8308b24e28ee20ae1bcb6e1a2d3b107e80fcb5c8044e50",
+    "reconstructedHelperPath": ".local/nebula-lab/smash-mosaic/registration/validate-mosaic.py",
+    "reconstructedHelperSha256": "b36e8a897a01b7ad99c46b535adc88c8248c7b94036223f8987baea12bf5270b",
+    "patchFile": "validate-mosaic.patch",
+    "patchSha256": "56e590e75b686b7f01b897fc790c916c30c7e9792a56f0f9682c35555362fb89",
+    "preservedFiles": [
+      {
+        "file": "find-seed.py",
+        "sha256": "c29e93d83803a851b9e15b594f1cc638b3387b13eeaec26544b109db8d460574"
+      },
+      {
+        "file": "verify-outskirts-dss2.py",
+        "sha256": "b8eb1f01738bc0e344d67a31dd04cb631863fb815e39995753c3464c00c7242c"
+      },
+      {
+        "file": "recipe.json",
+        "sha256": "6b9b8399394eea5a862d9a75b59bbd31a89d09dcd3bf534cadb2c2668d90787f"
+      }
+    ],
+    "referenceRecipePath": "labs/nebula/models/image-overlays.json",
+    "referenceRecipeSha256": "db0d13d217f6db0fe0a410d4a3cfd330bbaa7e5976260f465c279d479cdc827c"
+  }
+}

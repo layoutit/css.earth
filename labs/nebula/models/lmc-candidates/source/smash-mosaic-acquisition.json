@@ -1,0 +1,83 @@
+{
+  "schema": "cssearth-nebula-image-source-receipt@1",
+  "id": "smash-dr2-wide-mosaic",
+  "label": "SMASH DR2 \u00b7 wider optical mosaic",
+  "sourcePage": "https://smashsurvey.github.io/",
+  "institutionalPage": "https://datalab.noirlab.edu/data/smash",
+  "paper": {
+    "doi": "10.3847/1538-3881/abceb7",
+    "url": "https://arxiv.org/html/2011.13943v1",
+    "figure": 2,
+    "credit": "CTIO/NOIRLab/NSF/AURA"
+  },
+  "artifacts": [
+    {
+      "url": "https://smashsurvey.github.io/assets/smash_lmc_small.jpg",
+      "path": ".local/nebula-lab/smash-mosaic/smash-lmc-author-mosaic.jpg",
+      "bytes": 10050596,
+      "sha256": "fed588625354f48632d0433975f635f5aaf58999ed40b9316c11384dfb44a53a",
+      "dimensions": [
+        4111,
+        5000
+      ],
+      "immutableUrl": "https://raw.githubusercontent.com/SMASHsurvey/smashsurvey.github.io/e759f028d2edc199c60003f2e0c666f20eb0f9b5/assets/smash_lmc_small.jpg"
+    },
+    {
+      "url": "https://content.datalab.noirlab.edu/uploads/smash_lmc_small_2_17e8a7a52a.jpg",
+      "path": ".local/nebula-lab/smash-mosaic/smash-lmc-noirlab-mosaic.jpg",
+      "bytes": 584552,
+      "sha256": "8b2fdedc58e6665666a5f53506430b09b00245b087be13d9769a361fd5412c36",
+      "dimensions": [
+        1500,
+        1824
+      ]
+    }
+  ],
+  "footprint": {
+    "kind": "irregular union of observed DECam fields with detector gaps",
+    "publishedApproximateExtentDeg": [
+      15,
+      18.5
+    ],
+    "publishedFieldCount": 68,
+    "deepFields": 25,
+    "shallowFields": 43,
+    "shallowExposureSeconds": 60,
+    "scope": "The extent is the survey-page description of the main-body field mosaic, not a solved WCS rectangle or guaranteed filled coverage. Black areas outside detector footprints are no-data, not measured zero light."
+  },
+  "wcs": {
+    "status": "not embedded",
+    "registrationRequired": true,
+    "method": "Match observed stars against our existing calibrated SMASH image/astronomical catalog and validate held-out matches. Do not fit the photo to the simulation morphology or derive exact WCS from approximate15x18.5extent."
+  },
+  "image": {
+    "format": "JPEG",
+    "dimensionPreservation": "Original downloaded4111x5000pixels; no upscaling or image content alteration.1400px preview is only a review derivative.",
+    "color": "Published three-color survey mosaic. Exact channel assignment/stretch not specified on source page; do not infer from2016HiPS.",
+    "nativeSurveySeeingArcsec": {
+      "u": 1.22,
+      "g": 1.13,
+      "r": 1.01,
+      "i": 0.95,
+      "z": 0.9
+    },
+    "previewSampling": "Not yet astrometrically solved; cannot claim native~1arcsec resolving power for this5000px wide preview."
+  },
+  "verification": {
+    "visuallyInspected": true,
+    "content": "Wider irregular field mosaic including outskirts, clearly distinct from the cropped9degree publicity photograph. Visible detector gaps and brightness transitions retained.",
+    "noirlabCopyComparison": "Independent1500x1824NOIRLab-hosted copy is the same wide scene. Resampled RGB correlations against author5000px file:0.99527,0.99526,0.99214.",
+    "metadata": "No EXIF, XMP or FITS WCS in downloaded JPEG.",
+    "prohibitedProcessingPerformed": false
+  },
+  "license": {
+    "status": "Publicly distributed author/survey image with institutional credit; no image-specific machine-readable license found in JPEG/source page. Retain paper and official survey provenance; do not assign the arXiv manuscript license to the survey JPEG."
+  },
+  "alternativeHips": {
+    "url": "https://datalab.noirlab.edu/HiPS/smash/allsky_RGB",
+    "status": "Live but not selected",
+    "reason": "Properties report2016-12-02release, beforeDR2. Legacy source generation starts withSMC and concatenatesDR1-erafields; not evidence of fullDR2LMCcoverage.",
+    "propertiesPath": ".local/nebula-lab/smash-mosaic/hips-properties.txt"
+  },
+  "processingStatus": "Alignment preview acquired only. No star removal, decomposition, volume bake or recipe/UI mutation."
+}
