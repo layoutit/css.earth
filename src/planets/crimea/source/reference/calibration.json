@@ -1,0 +1,98 @@
+{
+  "diameterKm": 29.179,
+  "uncertaintyKm": 0.155,
+  "reportedUncertaintyKm": 0.155,
+  "uncertaintyMeaning": "Published statistical/Monte Carlo fit error; excludes the additional systematic term below.",
+  "systematicUncertaintyFraction": 0.1,
+  "systematicUncertaintyKm": 2.9179,
+  "systematicMeaning": "Original publication reports approximately 10% additional systematic uncertainty in diameter. This is a population-level floor, not a shape-specific accuracy guarantee.",
+  "quantity": "NEATM effective spherical diameter at the observing geometry",
+  "sourceUrl": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1140",
+  "reference": "Masiero et al. (2014), ApJ 791, 121",
+  "referenceUrl": "https://doi.org/10.1088/0004-637X/791/2/121",
+  "selectedRow": {
+    "asteroid_number": "1140",
+    "prov_desig": "",
+    "comet_desig": "",
+    "mpc_packed_name": "01140",
+    "absolute_mag": "10.2800",
+    "slope_param": "0.1500",
+    "mean_jd": "2455411.0559415",
+    "n_w1": "11",
+    "n_w2": "11",
+    "n_w3": "11",
+    "n_w4": "11",
+    "fit_code": "DVBI",
+    "diameter": "29.1790",
+    "diameter_err": "0.1550",
+    "v_albedo": "0.1600",
+    "v_albedo_err": "0.0230",
+    "ir_albedo": "0.4480",
+    "ir_albedo_err": "0.0500",
+    "beaming_param": "0.9080",
+    "beaming_param_err": "0.0030",
+    "stacked_flag": "",
+    "reference": "Mas14",
+    "notes": "",
+    "reference2": "MASIEROETAL2014",
+    "type": "mainbelt",
+    "cntr": "3940"
+  },
+  "alternativeRows": [
+    {
+      "asteroid_number": "1140",
+      "prov_desig": "",
+      "comet_desig": "",
+      "mpc_packed_name": "01140",
+      "absolute_mag": "10.2800",
+      "slope_param": "0.1500",
+      "mean_jd": "2455241.5338965",
+      "n_w1": "11",
+      "n_w2": "11",
+      "n_w3": "11",
+      "n_w4": "11",
+      "fit_code": "DVBI",
+      "diameter": "28.5150",
+      "diameter_err": "0.4940",
+      "v_albedo": "0.1680",
+      "v_albedo_err": "0.0270",
+      "ir_albedo": "0.4740",
+      "ir_albedo_err": "0.0570",
+      "beaming_param": "0.8420",
+      "beaming_param_err": "0.0180",
+      "stacked_flag": "",
+      "reference": "Mas14",
+      "notes": "",
+      "reference2": "MASIEROETAL2014",
+      "type": "mainbelt",
+      "cntr": "3941"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1140",
+      "sha256": "fb3bc0bf62b9890a29aa2b8c6e0d54a04da560bc05c2dd536e8420285aa2fc7e",
+      "bytes": 579
+    },
+    {
+      "url": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+      "sha256": "86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac",
+      "bytes": 18419
+    },
+    {
+      "url": "https://arxiv.org/pdf/1406.6645",
+      "sha256": "6cec5824e942b6f3abea47934c4ab127445fd89a587308f36ddf167c94c5b500",
+      "bytes": 969599
+    }
+  ],
+  "selectionReason": "Retained the published four-band fit selected by the JPL SBDB physical field; separate apparition fits are retained as alternatives, without averaging.",
+  "scaleKmPerSourceUnit": 23.51815766988845,
+  "formula": "scaleKmPerSourceUnit = diameterKm / cbrt(6 * signedSourceVolume / pi); meterScale =1000*scaleKmPerSourceUnit. Original shape coordinates are preserved.",
+  "approximate": true,
+  "limitations": [
+    "The thermal effective spherical diameter is used as an approximate volume-equivalent display scale; no joint shape/thermal inversion or independently measured volume is implied.",
+    "Quoted ±0.155 km is the catalog fit error; approximately 10% additional systematic diameter uncertainty applies."
+  ],
+  "sourceLabel": "Masiero et al. (2014), ApJ 791, 121",
+  "visibleDescription": "Approximate scale from a thermal diameter of 29.179 ± 0.155 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects."
+}

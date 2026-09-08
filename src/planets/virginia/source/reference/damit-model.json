@@ -1,0 +1,94 @@
+{
+  "modelId": 12738,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12738",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/129413/shape.txt",
+  "spinUrl": null,
+  "version": "2024-04-09",
+  "lambda": 295,
+  "beta": 47,
+  "periodHours": 14.31233,
+  "nonconvex": false,
+  "calibrated": false,
+  "sourceFields": {
+    "ID": "12738",
+    "Asteroid ID": "(50) Virginia",
+    "Lambda": "295",
+    "Beta": "47",
+    "Period": "14.31233",
+    "YORP": "",
+    "JD0": "2449977",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "0.51",
+    "LSM Parameter 3": "0.1",
+    "LSM Parameter 4": "-0.97",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "0 (No)",
+    "Equivalent Diameter": "",
+    "Equivalent Diameter Error": "",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2024-04-09",
+    "Comment": "",
+    "Created": "2023-05-23 07:55:54",
+    "Modified": "2024-04-09 13:23:59"
+  },
+  "originalVolume": 1.0000000995128715,
+  "originalSignedVolume": 1.0000000995128715,
+  "originalVolumeEquivalentDiameter": 1.2407010229540378,
+  "originalUnits": "dimensionless DAMIT source units; uncalibrated model",
+  "vertices": 1022,
+  "faces": 2040,
+  "extentsSourceUnits": [
+    [
+      -0.706291,
+      0.695068
+    ],
+    [
+      -0.678382,
+      0.751095
+    ],
+    [
+      -0.546322,
+      0.543903
+    ]
+  ],
+  "radialRangeSourceUnits": [
+    0.5187634031097413,
+    0.7828334367092402
+  ],
+  "firstVertexSourceUnits": [
+    -0.05284,
+    0.089695,
+    0.537847
+  ],
+  "firstFaceZeroBased": [
+    0,
+    1,
+    2
+  ],
+  "alternatives": [
+    {
+      "modelId": 12739,
+      "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12739",
+      "lambda": 112,
+      "beta": 41,
+      "periodHours": 14.31233,
+      "reason": "Original alternative pole solution retained as an unresolved ambiguity; one representative model is displayed."
+    }
+  ],
+  "selectionReason": "One original published model retained for a single body view. Alternative mirror poles remain unresolved, not averaged.",
+  "poleUncertaintyDegrees": 10,
+  "periodUncertaintyHours": 0.00005,
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/672"
+  ]
+}

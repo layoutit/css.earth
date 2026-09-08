@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271095%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                1095 Tulipa (1926 GS)          2026-Sep-08 10:25:53
+Rec #:    1095 (+COV) Soln.date: 2026-Jun-05_04:28:53   # obs: 7836 (1926-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458103.5 ! 2017-Dec-16.00 (TDB)         Residual RMS= .22368
+   EC= .0220111764799339   QR= 2.958608876630086   TP= 2458952.3300417797
+   OM= 178.5387183231484   W=  342.7359449150361   IN= 10.02938577160519
+   A= 3.025197022171677    MA= 201.0010269598033   ADIST= 3.091785167713268
+   PER= 5.26185            N= .18731544            ANGMOM= .029912523
+   DAN= 2.96148            DDN= 3.08865            L= 161.5231349
+   B= -2.9626223           MOID= 1.96477997        TP= 2020-Apr-12.8300417797
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 13.9375            ROTPER= 2.78721
+   H= 10.43                G= .150                 B-V= .720
+                           ALBEDO= .146            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#72, OCC=0
+2: source=ORB
+*******************************************************************************

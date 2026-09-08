@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27888%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               888 Parysatis (A918 CE)         2026-Sep-08 10:25:42
+Rec #:     888 (+COV) Soln.date: 2026-Jun-05_04:10:59   # obs: 5747 (1906-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458065.5 ! 2017-Nov-08.00 (TDB)         Residual RMS= .21707
+   EC= .1929320727926649   QR= 2.188275446895446   TP= 2457305.26605677
+   OM= 124.0020546191668   W=  297.9104774716703   IN= 13.83752608593631
+   A= 2.711389429719315    MA= 167.827637934745    ADIST= 3.234503412543184
+   PER= 4.46474            N= .220757886           ANGMOM= .027793311
+   DAN= 2.39424            DDN= 2.86962            L= 62.6162716
+   B= -12.2014349          MOID= 1.23918998        TP= 2015-Oct-09.7660567700
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 22.3745            ROTPER= 5.9314
+   H= 9.36                 G= .150                 B-V= .879
+                           ALBEDO= .139            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#76, OCC=0
+2: source=ORB
+*******************************************************************************

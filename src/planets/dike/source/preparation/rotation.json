@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": -116.50508242177969,
+  "declinationDegrees": 29.90953073447171,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 18.11914,
+  "coordinateSystem": "Original DAMIT co-rotating Cartesian frame, +Z spin pole and +X reference meridian; east-positive longitude; arbitrary display phase",
+  "source": "DAMIT model 1144, version 2016-01-04: ecliptic J2000 pole (233, 50) degrees; period 18.11914 hours; equatorial conversion with obliquity23.439291111 degrees. The displayed nominal DAMIT2016 model has beta50°, while the varied-shape thermophysical table reports beta49° and rounded period18.1191h. This transfer uses the same published shape/pole family, not identical thermophysical ensemble mesh bytes. Only a uniform physical scale is transferred; no thermal terrain or measured albedo map is added."
+}
