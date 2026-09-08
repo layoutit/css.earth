@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272100%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              2100 Ra-Shalom (1978 RA)         2026-Sep-08 08:21:10
+Rec #:    2100 (+COV) Soln.date: 2026-Sep-01_06:20:55   # obs: 4237 (1975-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458326.5 ! 2018-Jul-27.00 (TDB)         Residual RMS= .27255
+   EC= .4365138373726492   QR= .4688408641318015   TP= 2458313.8418985172
+   OM= 170.8162388539027   W=  356.0597318422377   IN= 15.75348578559053
+   A= .8320361620696248    MA= 16.43839242753817   ADIST= 1.195231460007448
+   PER= .75896             N= 1.298645966          ANGMOM= .014117217
+   DAN= .46918             DDN= 1.19305            L= 167.0235319
+   B= -1.0689979           MOID= .150244           TP= 2018-Jul-14.3418985172
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 1.15               ROTPER= 19.797
+   H= 16.24                G= .120                 B-V= .712
+                           ALBEDO= .130            STYP= Xc
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -5.138563210494E-15 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#507, OCC=0           radar( 9 delay, 2 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************

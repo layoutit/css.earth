@@ -34,7 +34,7 @@ export interface BodyData {
 export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
 /** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
-export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis' | 'pallas' | 'hygiea' | 'juno' | 'psyche' | 'interamnia' | 'davida' | 'sylvia' | 'eunomia' | 'euphrosyne' | 'bamberga' | 'fortuna' | 'themis' | 'amphitrite' | 'egeria' | 'elektra' | 'iris' | 'hebe' | 'eugenia' | 'daphne' | 'eleonora' | 'nemesis' | 'kalliope' | 'nemausa' | 'parthenope' | 'melpomene' | 'julia' | 'victoria' | 'urania' | 'flora' | 'europa-52' | 'metis-9' | 'camilla' | 'thisbe' | 'doris' | 'hermione' | 'diotima' | 'herculina' | 'nausikaa' | 'astraea' | 'irene' | 'nysa' | 'sappho' | 'betulia' | 'castalia' | 'asteroid-1998-wt24' | 'asteroid-1994-cc' | 'fides' | 'penelope' | 'alphonsina' | 'angelina' | 'ganymed' | 'moshup' | 'cybele' | 'aurora' | 'palma' | 'thule' | 'hektor' | 'hekate' | 'phaethon' | 'harmonia' | 'panopaea' | 'desdemona-666' | 'asteroid-1950-da' | 'apophis' | 'donaldjohanson' | 'geographos' | 'bacchus' | 'mithra' | 'nereus' | 'golevka' | 'yorp'
+export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis' | 'pallas' | 'hygiea' | 'juno' | 'psyche' | 'interamnia' | 'davida' | 'sylvia' | 'eunomia' | 'euphrosyne' | 'bamberga' | 'fortuna' | 'themis' | 'amphitrite' | 'egeria' | 'elektra' | 'iris' | 'hebe' | 'eugenia' | 'daphne' | 'eleonora' | 'nemesis' | 'kalliope' | 'nemausa' | 'parthenope' | 'melpomene' | 'julia' | 'victoria' | 'urania' | 'flora' | 'europa-52' | 'metis-9' | 'camilla' | 'thisbe' | 'doris' | 'hermione' | 'diotima' | 'herculina' | 'nausikaa' | 'astraea' | 'irene' | 'nysa' | 'sappho' | 'betulia' | 'castalia' | 'asteroid-1998-wt24' | 'asteroid-1994-cc' | 'fides' | 'penelope' | 'alphonsina' | 'angelina' | 'ganymed' | 'moshup' | 'cybele' | 'aurora' | 'palma' | 'thule' | 'hektor' | 'hekate' | 'phaethon' | 'harmonia' | 'panopaea' | 'desdemona-666' | 'asteroid-1950-da' | 'apophis' | 'donaldjohanson' | 'geographos' | 'bacchus' | 'mithra' | 'nereus' | 'golevka' | 'yorp' | 'asteroid-1996-hw1' | 'asteroid-2008-ev5' | 'ra-shalom' | 'asteroid-1992-sk' | 'asteroid-1998-ml14' | 'asteroid-2002-ce26'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId
 
 export const PLANET_IDS: readonly PlanetId[] = [
@@ -49,7 +49,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 ]
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
-export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis', 'pallas', 'hygiea', 'juno', 'psyche', 'interamnia', 'davida', 'sylvia', 'eunomia', 'euphrosyne', 'bamberga', 'fortuna', 'themis', 'amphitrite', 'egeria', 'elektra', 'iris', 'hebe', 'eugenia', 'daphne', 'eleonora', 'nemesis', 'kalliope', 'nemausa', 'parthenope', 'melpomene', 'julia', 'victoria', 'urania', 'flora', 'europa-52', 'metis-9', 'camilla', 'thisbe', 'doris', 'hermione', 'diotima', 'herculina', 'nausikaa', 'astraea', 'irene', 'nysa', 'sappho', 'betulia', 'castalia', 'asteroid-1998-wt24', 'asteroid-1994-cc', 'fides', 'penelope', 'alphonsina', 'angelina', 'ganymed', 'moshup', 'cybele', 'aurora', 'palma', 'thule', 'hektor', 'hekate', 'phaethon', 'harmonia', 'panopaea', 'desdemona-666', 'asteroid-1950-da', 'apophis', 'donaldjohanson', 'geographos', 'bacchus', 'mithra', 'nereus', 'golevka', 'yorp']
+export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis', 'pallas', 'hygiea', 'juno', 'psyche', 'interamnia', 'davida', 'sylvia', 'eunomia', 'euphrosyne', 'bamberga', 'fortuna', 'themis', 'amphitrite', 'egeria', 'elektra', 'iris', 'hebe', 'eugenia', 'daphne', 'eleonora', 'nemesis', 'kalliope', 'nemausa', 'parthenope', 'melpomene', 'julia', 'victoria', 'urania', 'flora', 'europa-52', 'metis-9', 'camilla', 'thisbe', 'doris', 'hermione', 'diotima', 'herculina', 'nausikaa', 'astraea', 'irene', 'nysa', 'sappho', 'betulia', 'castalia', 'asteroid-1998-wt24', 'asteroid-1994-cc', 'fides', 'penelope', 'alphonsina', 'angelina', 'ganymed', 'moshup', 'cybele', 'aurora', 'palma', 'thule', 'hektor', 'hekate', 'phaethon', 'harmonia', 'panopaea', 'desdemona-666', 'asteroid-1950-da', 'apophis', 'donaldjohanson', 'geographos', 'bacchus', 'mithra', 'nereus', 'golevka', 'yorp', 'asteroid-1996-hw1', 'asteroid-2008-ev5', 'ra-shalom', 'asteroid-1992-sk', 'asteroid-1998-ml14', 'asteroid-2002-ce26']
 
 const body = (
   id: BodyId,
@@ -180,6 +180,14 @@ export const BODIES: Record<BodyId, BodyData> = {
   'nereus': body('nereus', 'Nereus', '4660;', 0.165, 0, 'sun'),
   'golevka': body('golevka', 'Golevka', '6489;', 0.265, 0, 'sun'),
   'yorp': body('yorp', 'YORP', '54509;', 0.0564, 0, 'sun'),
+
+  // Published radar-model scales; use a documented primary mass where available.
+  'asteroid-1996-hw1': body('asteroid-1996-hw1', '1996 HW1', '8567;', 1.01, 0, 'sun'),
+  'asteroid-2008-ev5': body('asteroid-2008-ev5', '2008 EV5', '341843;', 0.2, 0, 'sun'),
+  'ra-shalom': body('ra-shalom', 'Ra-Shalom', '2100;', 1.15, 0, 'sun'),
+  'asteroid-1992-sk': body('asteroid-1992-sk', '1992 SK', '10115;', 0.5, 0, 'sun'),
+  'asteroid-1998-ml14': body('asteroid-1998-ml14', '1998 ML14', '52760;', 0.5, 0, 'sun'),
+  'asteroid-2002-ce26': body('asteroid-2002-ce26', '2002 CE26 Primary', '276049;', 1.73, 0.0000013014885, 'sun'),
 
   mercury: body('mercury', 'Mercury', '199', 2439.4, 22031.86855, 'sun'),
   venus: body('venus', 'Venus', '299', 6051.84, 324858.592, 'sun'),

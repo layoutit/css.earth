@@ -337,5 +337,29 @@ export const ASTEROID_ELEMENTS = {
   "yorp": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2754509%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 150482651.6631127, "eccentricity": 0.2299951924582535, "inclinationRad": 0.4139362427423481, "ascendingNodeRad": 6.214447141265594, "argumentOfPeriapsisRad": 3.504377012988238, "meanAnomalyAtEpochRad": 0.8654961463891322, "meanMotionRadPerDay": 0.017050609438239467 }
+  },
+  "asteroid-1996-hw1": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%278567%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 306037585.4157183, "eccentricity": 0.4490685284946572, "inclinationRad": 0.26191714293659735, "ascendingNodeRad": 0.028853688602948558, "argumentOfPeriapsisRad": 6.157780547325961, "meanAnomalyAtEpochRad": 0.8841525300844015, "meanMotionRadPerDay": 0.005879053459785368 }
+  },
+  "asteroid-2008-ev5": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27341843%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 143577616.0667615, "eccentricity": 0.0828800047302379, "inclinationRad": 0.42117663655421655, "ascendingNodeRad": 0.32210695160815733, "argumentOfPeriapsisRad": 5.448991216816984, "meanAnomalyAtEpochRad": 1.0934839572301236, "meanMotionRadPerDay": 0.018295296507001884 }
+  },
+  "ra-shalom": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272100%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 124470402.9243467, "eccentricity": 0.4365106962261013, "inclinationRad": 0.14414953641574615, "ascendingNodeRad": 0.30840529287483287, "argumentOfPeriapsisRad": 2.6125269498813846, "meanAnomalyAtEpochRad": 4.546982406744021, "meanMotionRadPerDay": 0.022665766815009106 }
+  },
+  "asteroid-1992-sk": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2710115%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 186779686.4970777, "eccentricity": 0.3248516821300541, "inclinationRad": 0.6744351391599289, "ascendingNodeRad": 0.06525711461089014, "argumentOfPeriapsisRad": 4.177631734886265, "meanAnomalyAtEpochRad": 3.650232277284146, "meanMotionRadPerDay": 0.012330341256813877 }
+  },
+  "asteroid-1998-ml14": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2752760%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 360161009.230983, "eccentricity": 0.6240363397529566, "inclinationRad": 0.4487995979839473, "ascendingNodeRad": 6.247648869910913, "argumentOfPeriapsisRad": 0.014485005572017602, "meanAnomalyAtEpochRad": 2.9329719904638982, "meanMotionRadPerDay": 0.0046049457436286795 }
+  },
+  "asteroid-2002-ce26": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27276049%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 334042291.1333261, "eccentricity": 0.5610838659845838, "inclinationRad": 0.4507937916808576, "ascendingNodeRad": 2.5890356921397797, "argumentOfPeriapsisRad": 4.2682788444815785, "meanAnomalyAtEpochRad": 3.5031430288431356, "meanMotionRadPerDay": 0.005155459492967321 }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>

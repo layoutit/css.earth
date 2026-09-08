@@ -1,0 +1,36 @@
+{
+  "checked": "2026-09-08",
+  "scope": "Bounded primary study, source archive and complementary observations survey. No resolved optical texture located among these candidates.",
+  "candidates": [
+    {
+      "url": "https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj",
+      "adds": "Original full source radar shape",
+      "status": "included",
+      "reason": "The unmodified source has 2000 vertices and 3996 faces. Original kilometer coordinates are retained."
+    },
+    {
+      "url": "https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf",
+      "adds": "Published physical properties, radar/lightcurve constraints and model uncertainty",
+      "status": "included",
+      "reason": "Half the 400 ± 50 m equivalent diameter in Busch et al. (2011), Table 2. The archived mesh has a 405.2 m volume-equivalent diameter and is not rescaled to the rounded published value."
+    },
+    {
+      "url": "https://experts.azregents.edu/en/publications/corrigendum-to-radar-observations-and-the-shape-of-near-earth-ast/",
+      "adds": "Busch et al. (2019) corrigendum",
+      "status": "included as qualification",
+      "reason": "Corrects the December 21 Goldstone delay-Doppler image resolution to 0.125 microseconds by 1.003 Hz. The authors state that the paper results are unaffected. It does not revise the adopted mesh or spin."
+    },
+    {
+      "url": "https://arxiv.org/abs/1310.6715",
+      "adds": "WISE thermophysical constraints (Ali-Lagoa et al., 2013)",
+      "status": "excluded from spatial lenses",
+      "reason": "Disk-integrated thermal fits infer effective diameter, thermal inertia and grain-size ranges. These are not resolved regolith imagery or a spatial temperature map; the radar vertices are not silently rescaled to the thermal-fit diameter."
+    },
+    {
+      "url": "https://echo.jpl.nasa.gov/asteroids/2008EV5/2008ev5.html",
+      "adds": "Arecibo/Goldstone radar images and VLBA spin sense",
+      "status": "included as qualification",
+      "reason": "VLBA speckle tracking distinguishes the retrograde solution. The north pole is poorly constrained; alternative flattening and facet-scale structures fit the data. Radar images cannot be used as a photographic texture."
+    }
+  ]
+}

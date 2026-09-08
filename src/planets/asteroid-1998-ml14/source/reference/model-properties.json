@@ -1,0 +1,75 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/1998ML14/ostro.etal.2001.1998ml14.pdf",
+  "diameterKm": 1,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 14.83,
+  "poleEclipticJ2000Degrees": null,
+  "limitations": "The archived 1998 model observations did not determine a unique spin pole. Later 2013 photometry supersedes its 14.83 h modeling period with 14.28 h. This view retains the historical geometry, fixed arbitrary display axes and illustrative lighting, not a current attitude. Radar reconstruction constrains broad shape but supplies no registered optical texture.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/ml14.obj",
+    "vertices": 512,
+    "faces": 1020,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.479871
+    ],
+    "firstFaceZeroBased": [
+      248,
+      1,
+      278
+    ],
+    "extentsKm": [
+      0.9718450000000001,
+      1.035823,
+      0.974371
+    ],
+    "volumeCubicKm": 0.5112361510964633,
+    "volumeEquivalentRadiusKm": 0.4960334709048324,
+    "radialRangeKm": [
+      0.40250241398282316,
+      0.5984864422307327
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 1020,
+    "ambiguous": 0,
+    "maxErrorMeters": 2.2737367544323206e-13,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1020,
+    "sourceVertices": 512,
+    "weldedVertices": 512,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 10,
+    "estimatedErrorMeters": 9.744677543640137,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 511433957.5789307
+    }
+  },
+  "surfaceSampling": {
+    "method": "closest-source-point",
+    "maximumDistanceMeters": 10
+  },
+  "periodInterpretation": "Historical 1998 radar-model fitting period, 14.83 ± 0.15 h; not propagated.",
+  "photometricPeriodHours": 14.28,
+  "photometricPeriodUncertaintyHours": 0.01,
+  "orientationQualification": "The archived 1998 radar reconstruction has no determined inertial spin pole. Use the existing fixed arbitrary display frame; optional directional lighting is illustrative. The historical modeling period and newer photometric period are recorded as information only, and neither is propagated into a current attitude.",
+  "updatedResearch": "Warner (2014), Minor Planet Bulletin 41(2), 113–124; 2013 photometry gives 14.28 ± 0.01 h. Sharkey et al. (2016), DPS 48 abstract 326.02, reports that new radar data reject the old 14.83 h model period; the updated numeric mesh/pole have not been acquired."
+}
