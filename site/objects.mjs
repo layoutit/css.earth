@@ -171,8 +171,39 @@ import sunDescriptor from "../src/planets/sun/object.json" with { type: "json" }
 import mercuryDescriptor from "../src/planets/mercury/object.json" with { type: "json" };
 import venusDescriptor from "../src/planets/venus/object.json" with { type: "json" };
 import { defineObject, defineObjects } from "./object-schema.mjs";
+import comet67pDescriptor from "../src/planets/comet-67p/object.json" with { type: "json" };
+
+import comet103pDescriptor from "../src/planets/comet-103p/object.json" with { type: "json" };
+import comet9pDescriptor from "../src/planets/comet-9p/object.json" with { type: "json" };
+import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { type: "json" };
+import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("comet-1p", "Halley", "comet", "#b8b6b2", 17.859,
+    "Explore Halley's historical Giotto/Vega shape model, with its uncertainty made explicit.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet1pDescriptor);
+    }, comet1pDescriptor.properties.worldFrame),
+  object("comet-81p", "Wild 2", "comet", "#b8b6b2", 3.450,
+    "Explore Wild 2's observed Stardust terrain, preserving its real coverage gaps.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet81pDescriptor);
+    }, comet81pDescriptor.properties.worldFrame),
+  object("comet-103p", "Hartley 2", "comet", "#b8b6b2", 3.477,
+    "Explore Hartley 2's published EPOXI nucleus model and its source constraints.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet103pDescriptor);
+    }, comet103pDescriptor.properties.worldFrame),
+  object("comet-9p", "Tempel 1", "comet", "#b8b6b2", 3.305,
+    "Explore Tempel 1's published nucleus model from Deep Impact and Stardust-NExT.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet9pDescriptor);
+    }, comet9pDescriptor.properties.worldFrame),
+  object("comet-67p", "67P", "comet", "#b8b6b2", 3.46,
+    "Explore the measured nucleus of comet 67P/Churyumov–Gerasimenko from Rosetta.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet67pDescriptor);
+    }, comet67pDescriptor.properties.worldFrame),
   object("ymir", "Ymir", "satellite", "#a0a0a0", 9.58,
     "Explore Ymir, a moon of Saturn, through its source-constrained shape approximation.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

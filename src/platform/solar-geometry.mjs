@@ -103,6 +103,36 @@ export const BODY_POSITION_PROVENANCE = Object.freeze({
 });
 
 export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
+  // subsolar latitude -3.078°, longitude -146.367°
+  "comet-1p": Object.freeze([
+    -0.8314038789769338,
+    -0.5530680131290328,
+    -0.05369695406270505,
+  ]),
+  // subsolar latitude 13.340°, longitude 3.289°
+  "comet-81p": Object.freeze([
+    0.9714171958662209,
+    0.05581919266273402,
+    0.23072245080591736,
+  ]),
+  // subsolar latitude -34.985°, longitude 75.286°
+  "comet-103p": Object.freeze([
+    0.20809934464334395,
+    0.7924347984274502,
+    -0.5733600552883477,
+  ]),
+  // subsolar latitude -9.522°, longitude -51.465°
+  "comet-9p": Object.freeze([
+    0.6144123314121324,
+    -0.7714490560648468,
+    -0.1654201949743888,
+  ]),
+  // subsolar latitude 50.605°, longitude -64.425°
+  "comet-67p": Object.freeze([
+    0.27397465132768517,
+    -0.5724759175044317,
+    0.7727931251682643,
+  ]),
   // subsolar latitude 1.492°, longitude -1.423°
   ymir: Object.freeze([
     0.9993524182920644,
@@ -1126,6 +1156,36 @@ export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
 });
 
 export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
+  // pole tilt to the ecliptic 23.439°, Sun ecliptic latitude 16.347°
+  "comet-1p": Object.freeze([
+    -0.3977771559319137,
+    -2.4356826039297786e-17,
+    0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 128.385°, Sun ecliptic latitude 2.547°
+  "comet-81p": Object.freeze([
+    0.14900994532232423,
+    0.769562103543298,
+    -0.6209429965665547,
+  ]),
+  // pole tilt to the ecliptic 36.522°, Sun ecliptic latitude 0.833°
+  "comet-103p": Object.freeze([
+    0.2757193415423388,
+    0.5274032651239312,
+    0.803632155053589,
+  ]),
+  // pole tilt to the ecliptic 6.527°, Sun ecliptic latitude -7.948°
+  "comet-9p": Object.freeze([
+    0.10295230366189435,
+    0.04819197732487611,
+    0.9935181711937772,
+  ]),
+  // pole tilt to the ecliptic 48.495°, Sun ecliptic latitude 3.015°
+  "comet-67p": Object.freeze([
+    -0.13995457024081862,
+    0.7357019374707092,
+    0.6626879940594611,
+  ]),
   // pole tilt to the ecliptic 175.000°, Sun ecliptic latitude 2.353°
   ymir: Object.freeze([
     0.06560839643392923,
@@ -2151,6 +2211,36 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS = Object.freeze({
 // The orbit lies in the plane perpendicular to this direction; every
 // direction from the body to another point of its orbit does too.
 export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
+  // orbital inclination to the ecliptic 162.188°, obliquity to the orbit 159.332°
+  "comet-1p": Object.freeze([
+    0.2353843342230547,
+    -0.26300270779642004,
+    -0.9356408450330288,
+  ]),
+  // orbital inclination to the ecliptic 3.239°, obliquity to the orbit 127.272°
+  "comet-81p": Object.freeze([
+    0.0984603886371733,
+    0.7896587554139926,
+    -0.6055944202743624,
+  ]),
+  // orbital inclination to the ecliptic 13.599°, obliquity to the orbit 35.423°
+  "comet-103p": Object.freeze([
+    0.04464701586488276,
+    0.5778863723569216,
+    0.8148950758340108,
+  ]),
+  // orbital inclination to the ecliptic 10.474°, obliquity to the orbit 16.268°
+  "comet-9p": Object.freeze([
+    0.279630746237578,
+    0.016866827900103798,
+    0.9599594553288193,
+  ]),
+  // orbital inclination to the ecliptic 3.866°, obliquity to the orbit 51.136°
+  "comet-67p": Object.freeze([
+    -0.19453562574763628,
+    0.7539409487671099,
+    0.6274782355485533,
+  ]),
   // orbital inclination to the ecliptic 172.449°, obliquity to the orbit 8.093°
   ymir: Object.freeze([
     0.0407776328817772,
@@ -3177,6 +3267,36 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS = Object.freeze({
 // the epoch, perpendicular to the orbit normal but not to the Sun direction
 // (the flight-path angle is the orbit's eccentricity showing).
 export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
+  // flight-path angle -24.672°
+  "comet-1p": Object.freeze([
+    0.11036140669785802,
+    -0.9492306816134393,
+    0.2945869531994845,
+  ]),
+  // flight-path angle -11.569°
+  "comet-81p": Object.freeze([
+    -0.01678646714624615,
+    0.6097827294363497,
+    0.7923908362682544,
+  ]),
+  // flight-path angle 10.785°
+  "comet-103p": Object.freeze([
+    0.9208864664489269,
+    -0.34001843070580606,
+    0.19067139977345982,
+  ]),
+  // flight-path angle -26.090°
+  "comet-9p": Object.freeze([
+    -0.39238041062219386,
+    -0.9105275616140802,
+    0.13029648077011038,
+  ]),
+  // flight-path angle -36.113°
+  "comet-67p": Object.freeze([
+    -0.5994038233073015,
+    -0.5977384631262481,
+    0.5323756064134235,
+  ]),
   // flight-path angle 0.384°
   ymir: Object.freeze([
     -0.5709064022608417,
@@ -4203,6 +4323,36 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
 // (prime meridian), +Y and +Z (north pole) axes in ICRF, so an ICRF direction
 // is the matrix times a body-fixed direction and the transpose goes back.
 export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
+  // pole RA 0.000°, Dec 90.000°, prime meridian W 0.000°
+  "comet-1p": Object.freeze([
+    6.123233995736766e-17, -1, 0,
+    1, 6.123233995736766e-17, 0,
+    0, 0, 1,
+  ]),
+  // pole RA 112.000°, Dec -17.000°, prime meridian W 0.000°
+  "comet-81p": Object.freeze([
+    -0.9271838545667874, -0.1095243683173873, -0.3582380668987478,
+    -0.374606593415912, 0.27108232415108957, 0.8866703297743583,
+    0, 0.9563047559630355, -0.29237170472273666,
+  ]),
+  // pole RA 226.120°, Dec 39.370°, prime meridian W 0.000°
+  "comet-103p": Object.freeze([
+    0.7207931106757862, 0.43968311369797763, -0.5358507731926633,
+    -0.6931502662499119, 0.45721768376226307, -0.5572205111558146,
+    0, 0.773065811677067, 0.634325823860323,
+  ]),
+  // pole RA 255.000°, Dec 64.500°, prime meridian W 0.000°
+  "comet-9p": Object.freeze([
+    0.9659258262890683, 0.23360626141901802, -0.1114244709819618,
+    -0.2588190451025207, 0.8718304365819928, -0.41584178691116563,
+    0, 0.4305110968082952, 0.9025852843498606,
+  ]),
+  // pole RA 69.400°, Dec 64.100°, prime meridian W 0.000°
+  "comet-67p": Object.freeze([
+    -0.9360595357389733, -0.316501891782863, 0.15368506124541406,
+    0.3518416484047018, -0.8420396369391681, 0.40887247922942466,
+    0, 0.4368017883677023, 0.8995577789551803,
+  ]),
   // pole RA 99.494°, Dec -70.144°, prime meridian W 0.000°
   ymir: Object.freeze([
     -0.9863040093639219, -0.15513176936633125, -0.056022631551222175,
@@ -5231,6 +5381,81 @@ export const BODY_FIXED_TO_ICRF_MATRICES = Object.freeze({
 // frame; inclinationDegrees is the same value as
 // BODY_FIXED_ORBIT_NORMAL_DIRECTIONS' orbital inclination comment above.
 export const BODY_ORBITS = Object.freeze({
+  // a 17.859 AU, e 0.96802, perihelion 0.57110 AU, aphelion 35.148 AU
+  "comet-1p": Object.freeze({
+    semiMajorAxisAu: 17.859422957019614,
+    eccentricity: 0.9680223772462755,
+    heliocentricDistanceAu: 35.02481432113787,
+    perihelionDirection: Object.freeze([
+      -0.8236428069877649,
+      -0.5650416112843727,
+      -0.048378755817765594,
+    ]),
+    trueAnomalyDegrees: 180.87249452572053,
+    inclinationDegrees: 162.1877856656459,
+    perihelionAu: 0.5711018899187803,
+    aphelionAu: 35.14774402412045,
+  }),
+  // a 3.4502 AU, e 0.53811, perihelion 1.5936 AU, aphelion 5.3068 AU
+  "comet-81p": Object.freeze({
+    semiMajorAxisAu: 3.4501886283376497,
+    eccentricity: 0.5381149425868346,
+    heliocentricDistanceAu: 5.208754441825018,
+    perihelionDirection: Object.freeze([
+      0.9170569154737416,
+      0.16429884297628122,
+      0.36333525011818246,
+    ]),
+    trueAnomalyDegrees: 190.3126665907952,
+    inclinationDegrees: 3.2388908211813123,
+    perihelionAu: 1.5935905726859858,
+    aphelionAu: 5.306786683989314,
+  }),
+  // a 3.4766 AU, e 0.69307, perihelion 1.0671 AU, aphelion 5.8861 AU
+  "comet-103p": Object.freeze({
+    semiMajorAxisAu: 3.476595139721899,
+    eccentricity: 0.6930749113295185,
+    heliocentricDistanceAu: 5.838367019621968,
+    perihelionDirection: Object.freeze([
+      0.12424391596819935,
+      0.8061634504643526,
+      -0.5785014610874345,
+    ]),
+    trueAnomalyDegrees: 175.12109590671227,
+    inclinationDegrees: 13.59900317561244,
+    perihelionAu: 1.067054271530509,
+    aphelionAu: 5.886136007913289,
+  }),
+  // a 3.3053 AU, e 0.46509, perihelion 1.7680 AU, aphelion 4.8425 AU
+  "comet-9p": Object.freeze({
+    semiMajorAxisAu: 3.305281880191289,
+    eccentricity: 0.4650861803327189,
+    heliocentricDistanceAu: 3.862104583602603,
+    perihelionDirection: Object.freeze([
+      -0.08597712510240278,
+      -0.995388765404642,
+      0.04253398247693429,
+    ]),
+    trueAnomalyDegrees: 224.92511665524586,
+    inclinationDegrees: 10.473642084445649,
+    perihelionAu: 1.768040955610175,
+    aphelionAu: 4.842522804772403,
+  }),
+  // a 3.4590 AU, e 0.64950, perihelion 1.2124 AU, aphelion 5.7056 AU
+  "comet-67p": Object.freeze({
+    semiMajorAxisAu: 3.4589915855182207,
+    eccentricity: 0.6495006066897402,
+    heliocentricDistanceAu: 4.627481174608107,
+    perihelionDirection: Object.freeze([
+      -0.21768373911923547,
+      -0.6569310166622188,
+      0.7218416925269782,
+    ]),
+    trueAnomalyDegrees: 209.0411066195525,
+    inclinationDegrees: 3.8661736783742993,
+    perihelionAu: 1.21237445218943,
+    aphelionAu: 5.705608718847011,
+  }),
   // a 0.15453 AU, e 0.31081, perihelion 0.10650 AU, aphelion 0.20257 AU
   ymir: Object.freeze({
     centerBodyId: "saturn",

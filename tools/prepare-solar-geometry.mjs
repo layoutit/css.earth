@@ -33,17 +33,19 @@ import { loadSceneEpochEphemeris } from "../packages/astronomy/tools/scene-ephem
 // 2026-09-03T00:00:00 TT.
 const EPOCH_JD_TT = 2461286.5;
 const EPOCH_LABEL = "2026-09-03T00:00:00 TT";
+const sourceKey = id => /^[a-z][a-z0-9]*$/.test(id) ? id : JSON.stringify(id);
 
 // VSOP87A supplies the Earth-Moon barycentre. Add the independently retained
 // Horizons Earth-relative-to-EMB state so Earth and its Moon use Earth's centre.
 const VSOP87A_KEY = Object.freeze({ earth: "emb" });
 
 const BODIES = OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite", "asteroid"].includes(body.classification)).map(body => body.id);
+  ["planet", "dwarf-planet", "satellite", "asteroid", "comet"].includes(body.classification)).map(body => body.id);
 
 const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
   ASTEROID_IDS, asteroidElements,
+  COMET_IDS, cometElements,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
   systemBarycentreHeliocentricAu,
   systemBarycentreVelocityAuPerDay,
@@ -133,7 +135,8 @@ const entries = BODIES.map((body) => {
     : GM_SUN_AU3_PER_DAY2;
   const kepler = DWARF_PLANET_IDS.includes(body)
     ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT)
-    : ASTEROID_IDS.includes(body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT) : null;
+    : ASTEROID_IDS.includes(body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT)
+    : COMET_IDS.includes(body) ? keplerStateKm(cometElements(body), EPOCH_JD_TT) : null;
   const heliocentricAu = isSatellite
     ? parentPosition.map((value, index) => value + moonPosition[index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
     ? kepler.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
@@ -305,7 +308,7 @@ ${
   entries.map(({ body, direction, subsolarLatitudeDegrees, subsolarLongitudeDegrees }) =>
     `  // subsolar latitude ${subsolarLatitudeDegrees.toFixed(3)}°, ` +
     `longitude ${subsolarLongitudeDegrees.toFixed(3)}°\n` +
-    `  ${body.includes("-") ? JSON.stringify(body) : body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     direction.map((component) => `    ${component},\n`).join("") +
     `  ]),`).join("\n")
 }
@@ -316,7 +319,7 @@ ${
   entries.map(({ body, eclipticNorth, poleTiltDegrees, sunEclipticLatitudeDegrees }) =>
     `  // pole tilt to the ecliptic ${poleTiltDegrees.toFixed(3)}°, ` +
     `Sun ecliptic latitude ${sunEclipticLatitudeDegrees.toFixed(3)}°\n` +
-    `  ${body.includes("-") ? JSON.stringify(body) : body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     eclipticNorth.map((component) => `    ${component},\n`).join("") +
     `  ]),`).join("\n")
 }
@@ -329,7 +332,7 @@ ${
   entries.map(({ body, orbitNormal, orbitInclinationDegrees, obliquityToOrbitDegrees }) =>
     `  // orbital inclination to the ecliptic ${orbitInclinationDegrees.toFixed(3)}°, ` +
     `obliquity to the orbit ${obliquityToOrbitDegrees.toFixed(3)}°\n` +
-    `  ${body.includes("-") ? JSON.stringify(body) : body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     orbitNormal.map((component) => `    ${component},\n`).join("") +
     `  ]),`).join("\n")
 }
@@ -342,7 +345,7 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
 ${
   entries.map(({ body, orbitalVelocity, flightPathAngleDegrees }) =>
     `  // flight-path angle ${flightPathAngleDegrees.toFixed(3)}°\n` +
-    `  ${body.includes("-") ? JSON.stringify(body) : body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     orbitalVelocity.map((component) => `    ${component},\n`).join("") +
     `  ]),`).join("\n")
 }
@@ -357,7 +360,7 @@ ${
     `  // pole RA ${poleRightAscensionDegrees.toFixed(3)}°, ` +
     `Dec ${poleDeclinationDegrees.toFixed(3)}°, ` +
     `prime meridian W ${primeMeridianDegrees.toFixed(3)}°\n` +
-    `  ${body.includes("-") ? JSON.stringify(body) : body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     [0, 3, 6].map((row) =>
       `    ${matrix.slice(row, row + 3).join(", ")},\n`).join("") +
     `  ]),`).join("\n")
@@ -388,7 +391,7 @@ ${
   ) =>
     `  // a ${semiMajorAxisAu.toPrecision(5)} AU, e ${eccentricity.toPrecision(5)}, ` +
     `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu.toPrecision(5)} AU\n` +
-    `  ${body.includes("-") ? JSON.stringify(body) : body}: Object.freeze({\n` +
+    `  ${sourceKey(body)}: Object.freeze({\n` +
     (parent === "sun" ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n`) +
     `    semiMajorAxisAu: ${semiMajorAxisAu},\n` +
     `    eccentricity: ${eccentricity},\n` +

@@ -1,0 +1,71 @@
+{
+  "id": "comet-81p",
+  "origin": "http://127.0.0.1:4258",
+  "browser": "152.0.7977.76",
+  "headless": true,
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "dpr": 1,
+  "runtimeSha256": "0f4513deaa1958f089e6f3d139a10424c39cf21c72a45e34d0a5eea7e08c112f",
+  "loaded": [
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-surface@2x.webp",
+      "bytes": 163714,
+      "sha256": "1dd349acde47f6b257e1ba869bfcce54ab45280e7753645c906ebe40491f2c6f"
+    },
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-shadow@2x.webp",
+      "bytes": 131344,
+      "sha256": "bb2a61b3b1ac755248269938829ac9dc600d8d66651fb58b3d5998789e6ac269"
+    },
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-shadow@2x.webp",
+      "bytes": 131344,
+      "sha256": "bb2a61b3b1ac755248269938829ac9dc600d8d66651fb58b3d5998789e6ac269"
+    }
+  ],
+  "captures": [
+    {
+      "name": "81p-front-shadows",
+      "actions": "Default production view.",
+      "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 6e-06, 0, 116.839, 1)",
+      "shadows": true,
+      "bodyLeaves": 996,
+      "sha256": "3275c669cc342e9e77b41b9cfeda75df5e46f84a801b4a28aa0074c04aef57d1"
+    },
+    {
+      "name": "81p-front-flood",
+      "actions": "Toggle Shadows off through the existing control.",
+      "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 6e-06, 0, 116.839, 1)",
+      "shadows": false,
+      "bodyLeaves": 996,
+      "sha256": "7a7034e54c8c929c8b52c009439f14a5c8af6a68d7edea0a7bd2c7e05866e29e"
+    },
+    {
+      "name": "81p-close-flood",
+      "actions": "One native wheel gesture: deltaY -450, pointer at 800,450.",
+      "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 0, 0, 834.148, 1)",
+      "shadows": false,
+      "bodyLeaves": 996,
+      "sha256": "5005e69c76c919baabf245960360199163055168b2bd5749c94d3705be5cbff8"
+    },
+    {
+      "name": "81p-open-side",
+      "actions": "Four native horizontal 250-pixel drags, matching open-surface browser view 4; Shadows off.",
+      "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -3e-06, 0, 116.839, 1)",
+      "shadows": false,
+      "bodyLeaves": 996,
+      "sha256": "9ca99733cdc408f16b407e6690146a010ccfd1a0b038731b6afedc0c1e5fccd8"
+    }
+  ],
+  "errors": [],
+  "nonBodyResponses": [
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-surface@2x.webp",
+      "status": 304,
+      "kind": "not-modified"
+    }
+  ]
+}

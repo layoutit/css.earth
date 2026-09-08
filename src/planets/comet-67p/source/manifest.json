@@ -1,0 +1,210 @@
+{
+  "schema": "csscomet-67p-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "mtp019",
+      "path": "shape/mtp019.obj",
+      "expectedBytes": 5157570,
+      "expectedSha256": "e90fd0b7d86bc826cf967e2e0234a945c55be7dfd2f710c00e11ed953b14f801",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
+      "credit": "ESA/Rosetta/NAVCAM; ESA/RMOC",
+      "license": "CC BY-SA 3.0 IGO",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/11/30/new-comet-shape-model/"
+      ],
+      "acquisition": "Restore the exact source URL; validate its byte count and SHA-256.",
+      "redistribution": "Retain ESA/Rosetta/NAVCAM credits and the CC BY-SA 3.0 IGO notice.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 174,
+      "expectedSha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth neutral model material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "redistribution": "Authored neutral material under the repository MIT license.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1650
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "navcam-20150720",
+      "path": "reference/navcam-20150720.jpg",
+      "expectedBytes": 261157,
+      "expectedSha256": "f27f66c3beb75662a33ba121487bdf5fa89e8f66c798d086e366e19f31841d1c",
+      "origin": "https://blogs.esa.int/rosetta/files/2015/07/ESA_ROSETTA_NAVCAM_20150720.jpg",
+      "credit": "ESA/Rosetta/NAVCAM",
+      "license": "CC BY-SA 3.0 IGO",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/07/28/cometwatch-20-july/"
+      ],
+      "consumers": [
+        "observation-reference"
+      ],
+      "acquisition": "Download the original 1024 by 1024 NAVCAM JPEG linked by CometWatch.",
+      "redistribution": "Retain ESA/Rosetta/NAVCAM attribution and share-alike notice.",
+      "observationDate": "2015-07-20",
+      "interpretation": "Original display image; observer range 171 km and image scale 14.5 m/pixel. Qualitative observational reference, not a registered surface texture."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "expectedBytes": 97023,
+      "expectedSha256": "d8d3b35ca214168bf1c46f4d2fc754ae56c2d40d2f07a6e10528d9d9995c8295",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
+      "credit": "ESA/Rosetta/NAVCAM; ESA/RMOC",
+      "license": "CC BY-SA 3.0 IGO",
+      "licenseEvidence": [
+        "https://blogs.esa.int/rosetta/2015/11/30/new-comet-shape-model/"
+      ],
+      "acquisition": "Checked-in derived context image; regenerated and hash-verified by the radial snapshot recipe.",
+      "redistribution": "Retain ESA/Rosetta/NAVCAM credits and the CC BY-SA 3.0 IGO notice.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "mtp019",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 90,
+        "latitudeDegrees": 25,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4189,
+      "expectedSha256": "622ff147c41819c582fd76565a676baaa3e872cab067b86282f9b199b467cc8e",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1003,
+      "expectedSha256": "dafa875a518c67433a1196a2ab5f4bf5d873db2c1d3eb48760d3bf9394c3ac38",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1605,
+      "expectedSha256": "0a1cfd5e36ed20952e13dd186a287bd0d7ccd88ddc50590b8e350ea312f75794",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 373,
+      "expectedSha256": "d613eb532ebaef00c4383d40c6fbc1504e40a54189be9cb11df06560c58d0e23",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3209,
+      "expectedSha256": "6b2cbe939f77163ce251f19f202c79a2b681ea0918caf10dbc55fcc7ff3d5b2d",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 33,
+      "expectedSha256": "52d70435e15a859e8654ab7f16e7a0bd10bcae3a8a6dfadf67c714d3895bd831",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 1891,
+      "expectedSha256": "0c0128fe1e9725ed171c686769fd0ee04628b1c24f34cbf4e90907976e3ece7d",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/esa-model-info.asc",
+      "expectedBytes": 6720,
+      "expectedSha256": "37225e4dc3d91371f4d46648b15ff44ee5b75ab508a1dd4ad81430db0c68e535",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/mtp019.lbl",
+      "expectedBytes": 12320,
+      "expectedSha256": "0150d1b50e42f381a4d09d5e5e767039214a384cdd0821122e348357f43b6ea9",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "67P source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 852,
+      "expectedSha256": "2ce36045e88ea1d460028ce456a330a45481c840c619eb9504eeb9a0d9e687df",
+      "purpose": "67P source evidence or authored preparation input."
+    }
+  ]
+}
