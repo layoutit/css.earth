@@ -16,6 +16,7 @@ import { loadRadialTerrain, prepareRadialMaterials } from './radial-terrain.mjs'
 import { prepareAffineLayers } from './affine-preparation.mjs';
 import { validateRadialTableProfile } from './pds-radial-table.mjs';
 import { validateFitsObservationPolicy } from './observed-fits.mjs';
+import { validateGeoSurfaceRecipe } from './observed-geo-surface.mjs';
 
 export function parseTerrestrialProfile(value) {
   if (value?.schema === 'cssearth-terrestrial-preparation@1' && value.kind === 'affine-photographic-atmosphere') {
@@ -40,9 +41,10 @@ export function parseTerrestrialProfile(value) {
       !Number.isSafeInteger(value.lighting?.frameSize) || value.lighting.frameSize <= 0 ||
       !Number.isSafeInteger(value.lighting.frameCount) || value.lighting.frameCount < 2 ||
       !Number.isSafeInteger(value.lighting.columns) || value.lighting.columns <= 0 || value.lighting.frameCount % value.lighting.columns ||
-      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.mosaics ?? []), ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
+      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.mosaics ?? []), ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? []), ...(value.raster.surfaceObservations ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
+  for (const recipe of value.raster.surfaceObservations ?? []) validateGeoSurfaceRecipe(recipe, value.geometry.radialTerrain);
   if (value.raster.surfaceQuality !== undefined &&
       (!Number.isInteger(value.raster.surfaceQuality) || value.raster.surfaceQuality < 1 || value.raster.surfaceQuality > 100)) {
     throw new TypeError('Surface WebP quality must be an integer from 1 to 100.');
