@@ -41,6 +41,8 @@ jobs:
           node --test tools/objects/material-composition/coplanar-raster.test.mjs
       - name: Test shared scientific source credits
         run: node --test site/test/scene-sources.test.mjs
+      - name: Test search ownership during flight
+        run: node --test site/test/shell-lifetime.test.mjs
       - name: Enforce activation preparation for every registered object
         run: node --test tools/prepared-activation-groups.test.mjs tools/prepared-activation-registry.test.mjs
       - name: Test shared environment rendering and camera

@@ -55,6 +55,10 @@ runtime receives the final image and affine leaves. The shape-model adapter uses
 this for its uniform ring (128 source faces become 16 tiles). Curved surfaces and
 textured/noncoplanar faces retain their original representation.
 
+Search is owned by the user's current browsing interaction. A completed flight
+or overview transition updates the selected body without replacing a newer
+query; choosing a result or dismissing search relinquishes that ownership.
+
 ## Verification
 
 After the normal package/renderer build and `pnpm prepare:object-json`:
@@ -62,6 +66,7 @@ After the normal package/renderer build and `pnpm prepare:object-json`:
 ```sh
 node --test tools/prepared-activation-registry.test.mjs
 node --test tools/prepared-activation-transport.test.mjs
+HOPS=30 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:navigation-stress:matrix
 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
 DPR=2 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
 node site/test/flight-registry-browser.mjs http://127.0.0.1:4210
@@ -89,3 +94,11 @@ selection needed the sidebar. An input probe rejects any DOM hit-test fallback.
 Run recordings separately from builds and other tests; an overloaded harness is
 functional evidence only. Compare matching drag phases and count complete
 presentation events, rather than treating RAF timing as delivered-frame proof.
+
+The seeded stress matrix uses six different starting planets, alternating DPR 1
+and 2. Each document chains 30 selections, with long curved drags, fine wheel
+bursts and reversals, dataset changes, native marker/label/orbit clicks, rapid
+supersession, and wheel/drag/Escape interruption. Artifacts retain seeds, action
+coordinates, camera state, source revision, Chrome traces, and diagnostics.
+A failed chain remains failed; reloads, competing selections, lost retained
+nodes, wrong destinations, and application errors are not counted as coverage.
