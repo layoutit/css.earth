@@ -1,0 +1,19 @@
+{
+  "entries": [
+    {
+      "image": "n1832830863",
+      "observationTime": "2016-01-30T06:36:45.819",
+      "centerSamplingKm": 0.71396,
+      "phaseDegrees": 49.725,
+      "products": [
+        "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1832736346_1832863717/N1832830863_1_CALIB.IMG",
+        "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1832736346_1832863717/N1832830863_1_CALIB.LBL"
+      ],
+      "inspectedRaster": {
+        "expectedBytes": 4202496,
+        "expectedSha256": "b5cba9a0759704016e1a25a7b0302b52eb85775b353a58ebf9187c4b671c9d64"
+      }
+    }
+  ],
+  "decision": "The finest archive sampling is about 0.714 km/pixel, only about 1.4 pixels across the nominal moon diameter. Actual full calibrated raster was inspected; detections do not establish a resolved surface map. Hedman et al. explicitly report unresolved shape and size."
+}

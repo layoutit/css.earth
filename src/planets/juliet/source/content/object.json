@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "juliet",
+  "displayName": "Juliet",
+  "panel": {
+    "introduction": "Juliet is an elongated inner moon of Uranus, discovered by Voyager 2. Its long axis is modeled as pointing toward the planet.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Equivalent radius",
+        "value": "About 46.8 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Modeled dimensions",
+        "value": "About 150 × 74 × 74 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Uranus",
+        "value": "About 11.8 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Uranus",
+        "value": "About 64,358 km"
+      },
+      {
+        "id": "shape",
+        "label": "Shape interpretation",
+        "value": "Prolate spheroid; third axis assumed"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 · January 3, 1986"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "A published 150 × 74 × 74 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager resolves only a few pixels across Juliet, so the gray grid marks missing mapped surface coverage; it is not photographed terrain.",
+        "title": "A published 150 × 74 × 74 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager resolves only a few pixels across Juliet, so the gray grid marks missing mapped surface coverage; it is not photographed terrain.",
+        "detail": "Published shape",
+        "thumbnail": "/scenes/juliet/juliet-model-thumbnail.webp",
+        "surface": "juliet-model-surface@2x.webp",
+        "poles": "juliet-model-poles@2x.webp",
+        "source": {
+          "id": "measured-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1006/icar.2001.6596"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Juliet discovery and naming",
+      "href": "https://science.nasa.gov/uranus/moons/juliet/"
+    },
+    {
+      "label": "Karkoschka (2001)",
+      "role": "surface",
+      "description": "Adopted prolate dimensions and photometry",
+      "href": "https://doi.org/10.1006/icar.2001.6596"
+    },
+    {
+      "label": "French et al. (2024)",
+      "role": "physical",
+      "description": "Reported shape uncertainties",
+      "href": "https://arxiv.org/abs/2401.04634"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Voyager ISS archive",
+      "href": "https://pds-rings.seti.org/voyager/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/uranus/moons/juliet/",
+      "credit": "NASA Science; discovery and naming only"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Karkoschka (2001); French et al. (2024)"
+    }
+  }
+}

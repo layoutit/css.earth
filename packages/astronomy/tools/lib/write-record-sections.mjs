@@ -28,7 +28,22 @@ export function writeRecordSections(destination, source, kind) {
   const base = destination.pathname.split('/').at(-1).replace(/\.ts$/, '');
   const imports = [], spreads = [];
   const type = kind === 'satellites' ? 'SatelliteRecord' : 'HorizonsFixture';
+  // Keep complete records together as the catalog grows past one source file.
+  // The conservative body budget leaves room for generated headers and imports.
+  const chunks = [];
   for (const [group, records] of sections) {
+    let chunk = [], lines = 0, part = 1;
+    for (const record of records) {
+      const count = record.split('\n').length;
+      if (chunk.length && lines + count > 560) {
+        chunks.push([part === 1 ? group : `${group}-${part}`, chunk]);
+        chunk = []; lines = 0; part++;
+      }
+      chunk.push(record); lines += count;
+    }
+    chunks.push([part === 1 ? group : `${group}-${part}`, chunk]);
+  }
+  for (const [group, records] of chunks) {
     const name = `${symbol}_${group.replaceAll('-', '_').toUpperCase()}`;
     const file = `${base}.${group}.ts`;
     const header = source.slice(0, source.indexOf('import type'));

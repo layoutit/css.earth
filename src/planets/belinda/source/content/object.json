@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "belinda",
+  "displayName": "Belinda",
+  "panel": {
+    "introduction": "Belinda is an elongated inner moon of Uranus, discovered in Voyager 2 images in 1986. Its changing brightness supports a shape about twice as long as it is wide. It travels around Uranus in roughly fifteen hours.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Volume-equivalent model radius",
+        "value": "40.3 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Approximate dimensions",
+        "value": "128 × 64 × 64 km (prolate model)"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Uranus",
+        "value": "About 15.0 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Uranus",
+        "value": "About 75,255 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 · 1986"
+      },
+      {
+        "id": "uncertainty",
+        "label": "Projected equivalent radius",
+        "value": "45 ± 8 km"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "A prolate ellipsoid fitted to Voyager measurements and Hubble photometry. Its long axis is twice the short axis; the equal short axes are a source assumption. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the approximate shape.",
+        "title": "A prolate ellipsoid fitted to Voyager measurements and Hubble photometry. Its long axis is twice the short axis; the equal short axes are a source assumption. Gray grid marks unavailable registered surface imagery. Shared lighting reveals the approximate shape.",
+        "detail": "Measured shape",
+        "thumbnail": "/scenes/belinda/belinda-model-thumbnail.webp",
+        "surface": "belinda-model-surface@2x.webp",
+        "poles": "belinda-model-poles@2x.webp",
+        "source": {
+          "id": "karkoschka-belinda-prolate",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1006/icar.2001.6596"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Belinda overview",
+      "href": "https://science.nasa.gov/uranus/moons/belinda/"
+    },
+    {
+      "label": "Karkoschka (2001)",
+      "role": "shape",
+      "description": "Measured prolate shape and Hubble photometry",
+      "href": "https://doi.org/10.1006/icar.2001.6596"
+    },
+    {
+      "label": "French et al. (2024)",
+      "role": "uncertainty",
+      "description": "Shape measurements and uncertainties, Table 3",
+      "href": "https://arxiv.org/abs/2401.04634"
+    },
+    {
+      "label": "NASA/PDS",
+      "role": "observations",
+      "description": "Voyager Uranus archive",
+      "href": "https://pds-rings.seti.org/voyager/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/uranus/moons/belinda/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Karkoschka (2001), Table IV; French et al. (2024), Table 3; NASA/NAIF PCK00011"
+    }
+  }
+}

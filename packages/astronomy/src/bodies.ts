@@ -61,6 +61,13 @@ const body = (
 ): BodyData => ({ id, name, horizonsCode, meanRadiusKm, gravitationalParameterKm3PerS2, parent })
 
 export const BODIES: Record<BodyId, BodyData> = {
+  polydeuces: body('polydeuces', 'Polydeuces', '634', 1.525973578806757, 0, 'saturn'),
+  anthe: body('anthe', 'Anthe', '649', 0.5, 0, 'saturn'),
+  aegaeon: body('aegaeon', 'Aegaeon', '653', 0.327106631018859, 0, 'saturn'),
+  bianca: body('bianca', 'Bianca', '708', 25.67646409198381, 0, 'uranus'),
+  cressida: body('cressida', 'Cressida', '709', 39.78509749046438, 0.01227, 'uranus'),
+  desdemona: body('desdemona', 'Desdemona', '710', 32.01203974041056, 0, 'uranus'),
+  rosalind: body('rosalind', 'Rosalind', '713', 35.99999999999999, 0, 'uranus'),
   sun: body('sun', 'Sun', '10', 695700, 132712440041.93938, null),
   // JPL Horizons physical block, solution JPL#36 (2021-Apr-13), retrieved 2026-09-07.
   vesta: body('vesta', 'Vesta', '4;', 261.385, 17.28828, 'sun'),
@@ -108,6 +115,10 @@ export const BODIES: Record<BodyId, BodyData> = {
   adrastea: body('adrastea', 'Adrastea', '515', 8.2, 0.0001, 'jupiter'),
   metis: body('metis', 'Metis', '516', 21.5, 0.0025, 'jupiter'),
 
+  // No measured GM is supplied for these small moons; zero means omitted mass.
+  // Radii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.
+  methone: body('methone', 'Methone', '632', 1.45, 0, 'saturn'),
+  pallene: body('pallene', 'Pallene', '633', 2.23, 0, 'saturn'),
   mimas: body('mimas', 'Mimas', '601', 198.8, 2.503489, 'saturn'),
   enceladus: body('enceladus', 'Enceladus', '602', 252.3, 7.210367, 'saturn'),
   tethys: body('tethys', 'Tethys', '603', 536.3, 41.21, 'saturn'),
@@ -133,6 +144,15 @@ export const BODIES: Record<BodyId, BodyData> = {
   pandora: body('pandora', 'Pandora', '617', 40.6, 0.00926, 'saturn'),
   pan: body('pan', 'Pan', '618', 14, 0.00028, 'saturn'),
 
+  puck: body('puck', 'Puck', '715', 81, 0, 'uranus'),
+  // Volume-equivalent radii of Karkoschka's published prolate shape fits.
+  portia: body('portia', 'Portia', '712', 67.64856167757256, 0, 'uranus'),
+  juliet: body('juliet', 'Juliet', '711', 46.82612683898881, 0, 'uranus'),
+  belinda: body('belinda', 'Belinda', '714', 40.317473596635935, 0, 'uranus'),
+  // Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.
+  // https://arxiv.org/abs/2401.04634; same published prolate radii as above.
+  cordelia: body('cordelia', 'Cordelia', '706', 20.082988502465085, 0.00406, 'uranus'),
+  ophelia: body('ophelia', 'Ophelia', '707', 21.361102076705983, 0.00238, 'uranus'),
   miranda: body('miranda', 'Miranda', '705', 235.7, 4.3, 'uranus'),
   ariel: body('ariel', 'Ariel', '701', 578.9, 83.43, 'uranus'),
   umbriel: body('umbriel', 'Umbriel', '702', 584.7, 85.4, 'uranus'),
@@ -149,6 +169,12 @@ export const BODIES: Record<BodyId, BodyData> = {
   galatea: body('galatea', 'Galatea', '806', 88, 0.1899, 'neptune'),
 
   charon: body('charon', 'Charon', '901', 606, 106.10, 'pluto'),
+  // PLU060 Horizons GMs (2024); radii match the sourced display shapes.
+  // Nix/Hydra: Porter released meshes. Kerberos/Styx: Porter2025 fitted volumes.
+  nix: body('nix', 'Nix', '902', 18.265603887767425, 0.001496, 'pluto'),
+  hydra: body('hydra', 'Hydra', '903', 18.11455731342771, 0.00201, 'pluto'),
+  kerberos: body('kerberos', 'Kerberos', '904', 4.75, 0.00006038, 'pluto'),
+  styx: body('styx', 'Styx', '905', 3.5, 0.0000405, 'pluto'),
 
   // Dwarf planets. `horizonsCode` is the exact string this package's Horizons
   // queries use (`generate-dwarf-planets.mjs`, `fetch-fixtures.mjs`) — for
