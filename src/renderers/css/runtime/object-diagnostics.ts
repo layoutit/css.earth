@@ -1,3 +1,4 @@
+import { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';
 import type { ObjectRuntimeDefinition, ObjectRuntimeView, PageLayerRuntime } from "./object-runtime-types.js";
 import type { ObjectSelection } from "./object-contract.js";
 import type { SceneLifetime } from "@cssearth/engine";
@@ -22,6 +23,7 @@ export function publishObjectDiagnostics({ stage, definition, mounted, orbit, cu
       const target = stage.ownerDocument.defaultView, key = `__${definition.id}`;
       if (!target) throw new Error("Object diagnostics require the mounted window.");
       const nodes = Object.freeze([...stage.querySelectorAll("*")]);
+      let geometry: ReturnType<typeof createRetainedGeometrySnapshot> | null = null;
       const observe = () => mounted.observe();
       const settings = (kind?: "toggle" | "cycle") => () => {
         const current = selection.state().committed ?? initialSelection;
@@ -78,7 +80,7 @@ export function publishObjectDiagnostics({ stage, definition, mounted, orbit, cu
           retainedSunMarkerCount: heliocentric?.retainedSunMarkerCount ?? 0,
           retainedCaptionCount: heliocentric?.retainedCaptionCount ?? 0,
           runtimeDomGrowth: false, runtimeDomGrowthPolicy: "none" }),
-        runtime: Object.freeze({ lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
+        runtime: Object.freeze({ geometry: () => (geometry ??= createRetainedGeometrySnapshot(nodes))(), lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection.state, controls: controls.stats, view: getCurrentView,
           presentation: () => Object.freeze({ ...observe().presentation }),
           pages: () => Object.freeze(Object.fromEntries([...pageLayers].map(([id, layer]) => [id, layer.stats()]))) }),
