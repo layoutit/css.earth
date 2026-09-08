@@ -110,6 +110,27 @@ test('persistent world context is mounted once and follows the active physical n
   assert.deepEqual(events.at(-1), ['destroy']);
 });
 
+test('flight overlays follow the pending request through success and failure, while recentering keeps them visible', async () => {
+  let visible = true, flight = deferred();
+  const h = harness({ prepare: () => flight.promise, persistentWorldContext: { async mount() {
+    return { selectObject() {}, publish() {}, destroy() {},
+      setNavigationIndicatorsVisible(value) { visible = value; } };
+  } } });
+  await h.router.settled;
+  const selected = h.router.navigate('venus'); await flush();
+  assert.equal(visible, false);
+  flight.resolve({}); assert.equal(await selected, true);
+  assert.equal(visible, true);
+  flight = deferred();
+  const failed = h.router.navigate('mercury'); await flush();
+  assert.equal(visible, false);
+  flight.reject(new Error('Prepared asset unavailable'));
+  assert.equal(await failed, false); assert.equal(visible, true);
+  await h.router.navigate('venus', { overview: true, preserveView: true });
+  assert.equal(visible, true);
+  h.router.destroy();
+});
+
 test('entering overview on the current object changes selection without invoking focus or restoring the camera', async () => {
   let focuses = 0;
   const h = harness({ focus: async () => { focuses++; } });

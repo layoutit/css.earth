@@ -171,7 +171,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
               >
                 <img
                   class="planet-lens-texture"
-                  src={lens.texture.url}
+                  data-surface-preview-src={lens.texture.url}
                   width={lens.texture.width}
                   height={lens.texture.height}
                   alt={lens.description}
@@ -182,7 +182,6 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
                 {lens.texture.minimap && <>
                   {[-1, 0, 1].map(() => <span
                     class="planet-minimap-viewport"
-                    style={`background-image: url(${JSON.stringify(lens.texture.url)})`}
                     aria-hidden="true"
                     hidden
                   ></span>)}

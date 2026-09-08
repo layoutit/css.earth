@@ -8,6 +8,7 @@ import type { HeliocentricProjection,PreparedPlanetarySystem } from './heliocent
 import type { Vector2,VisibleRect,Matrix3 } from './types.js';
 import type { Sprite,SystemMarkers } from './heliocentric-sprites.js';
 import { bindObjectNavigationTarget, supportsObjectNavigation } from './heliocentric-navigation.js';
+import { screenPicking, type ScreenPickTarget } from '../navigation/screen-picking.js';
 const LABEL_OWNER_STAR = 3;
 export interface StarCaptionPolicy extends LabelMetrics {poolSize:number;maxAlpha:number;maxAlphaStep:number;}
 export interface CaptionPlan {policy:LabelPolicy;names:Readonly<Record<string,string>>;stars?:{policy:StarCaptionPolicy;records:readonly (CatalogueStar & {id:string})[];exposure:ExposureOptions};}
@@ -18,6 +19,7 @@ interface CaptionField {policy:LabelPolicy;group:HTMLDivElement;elements:HTMLEle
 interface CaptionMount {host:HTMLElement;celestialRoot:HTMLElement;labels:CaptionPlan;objectId:string;markerSprite:Sprite;system:PreparedPlanetarySystem|null;systemMarkers:SystemMarkers|null;getMarkerOpacity:()=>string|null;getSunMarkerOpacity:()=>number;getSunMarkerHidden:()=>boolean;}
 export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,markerSprite,system,systemMarkers,getMarkerOpacity,getSunMarkerOpacity,getSunMarkerHidden}:CaptionMount) {
   const document = host.ownerDocument;
+  const picking = screenPicking(host);
   let skyView: {matrix:string;rotation:Matrix3;exposure:Partial<ExposureOptions>|null} | null = null;
   let labelFrame: number | null = null;
   let lastProjection: HeliocentricProjection | null = null;
@@ -148,10 +150,18 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
               candidate: labelField.stars.candidate, accepted: labelField.stars.accepted,
               slots: labelField.stars.pool.slots.map(slot => ({ ...slot, anchor: [...slot.anchor] })) }) : null,
           }); },
-    destroy() {destroyed=true;for(const target of navigation)target.destroy();if(labelFrame!==null)host.ownerDocument.defaultView!.cancelAnimationFrame(labelFrame);},
+    destroy() {destroyed=true;picking.remove(group);for(const target of navigation)target.destroy();if(labelFrame!==null)host.ownerDocument.defaultView!.cancelAnimationFrame(labelFrame);},
   });
   function publishCaptions(projection:HeliocentricProjection, visibleRect:VisibleRect|null = null) {
     const field = labelField;
+    const picks: ScreenPickTarget[] = [];
+    const publishTarget = (element: HTMLElement, target: CaptionCandidate | undefined) => {
+      if (!target) return;
+      const [x, y] = target.anchor;
+      picks.push({ element, rank: 1000 + picks.length, shape: { kind: 'rect',
+        left: x - target.box.widthPx / 2, right: x + target.box.widthPx / 2,
+        top: y - target.box.topOffsetPx, bottom: y - target.box.bottomOffsetPx } });
+    };
     field.visibleRect = visibleRect;
     if (!field.measured) {
       // Once: the retained measuring elements' widths, per cap height.
@@ -229,6 +239,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       const visible = slot.occupant !== null && slot.alpha > 0;
       const target = visible ? accepted.find(candidate => candidate.key === slot.occupant) : undefined;
       stars.navigation.update(target?.id ?? null, target?.text);
+      publishTarget(element, target);
       if (visible) {
         if (element.textContent !== slot.text) element.textContent = slot.text;
         element.dataset.occupant = slot.occupant!;
@@ -246,6 +257,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
       const target = !hidden && slot.occupant !== null && visibleBodies.has(slot.occupant)
         ? candidates.find(candidate => candidate.key === slot.occupant && candidate.owner === LABEL_OWNER_BODY) : undefined;
       navigation[index].update(target?.id ?? null, target?.text);
+      publishTarget(element, target);
       if (!hidden) {
         if (published.text !== slot.text) {
           element.textContent = slot.text;
@@ -269,6 +281,7 @@ export function createHeliocentricCaptions({host,celestialRoot,labels,objectId,m
         published.hidden = hidden;
       }
     }
+    picking.publish(group, picks);
     // Both caption populations finish their bounded fades after camera input
     // stops, including frames with no eligible star caption at all.
     if (labelFrame === null && (field.pool.slots.some(slot => slot.alpha !== slot.target) ||
