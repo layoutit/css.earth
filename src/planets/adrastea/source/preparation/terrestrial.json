@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "adrastea",
+  "displayName": "Adrastea",
+  "publicBase": "/scenes/adrastea/",
+  "distanceAu": 5.2,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "consumer": "model-surface",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "Source-constrained ellipsoid; a neutral uniform material shows geometry only. No mapped terrain is claimed."
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 8.2,
+    "camera": {
+      "initialScenePitchDegrees": -21.896362143852418,
+      "defaultControlYawDegrees": -119.4965884361338
+    },
+    "mapUrl": "/scenes/adrastea/adrastea-model-surface@2x.webp",
+    "polesUrl": "/scenes/adrastea/adrastea-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ellipsoid.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 614,
+        "expectedFaces": 1224,
+        "stepDegrees": 10,
+        "longitudeDirection": "east-positive"
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 480,
+        "maximumErrorMeters": 160,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Jupiter-system ephemeris and IAU/WGCCRE rotation; sourced PCK ellipsoid axes."
+  },
+  "presentation": {
+    "defaultLens": "model",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "semiAxesKm": [
+    10,
+    8,
+    7
+  ],
+  "axesFrame": "PCK body fixed: X toward Jupiter, Y along orbit, Z north",
+  "model": "Triaxial ellipsoid approximation; no resolved terrain",
+  "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+  "radiusFormula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/10)^2+(cos(lat)*sin(lon)/8)^2+(sin(lat)/7)^2)",
+  "samplingStepDegrees": 10,
+  "units": "km",
+  "material": {
+    "path": "material/neutral.png",
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "size": [
+      64,
+      32
+    ],
+    "interpretation": "Neutral display brightness, not measured surface color or albedo."
+  }
+}
