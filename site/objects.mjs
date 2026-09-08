@@ -1,3 +1,8 @@
+import opheliaDescriptor from "../src/planets/ophelia/object.json" with { type: "json" };
+import cordeliaDescriptor from "../src/planets/cordelia/object.json" with { type: "json" };
+import belindaDescriptor from "../src/planets/belinda/object.json" with { type: "json" };
+import julietDescriptor from "../src/planets/juliet/object.json" with { type: "json" };
+import portiaDescriptor from "../src/planets/portia/object.json" with { type: "json" };
 import palleneDescriptor from "../src/planets/pallene/object.json" with { type: "json" };
 import methoneDescriptor from "../src/planets/methone/object.json" with { type: "json" };
 import puckDescriptor from "../src/planets/puck/object.json" with { type: "json" };
@@ -80,6 +85,31 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("ophelia", "Ophelia", "satellite", "#a0a0a0", 19.2,
+    "Explore Ophelia, the outer shepherd of Uranus's epsilon ring.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(opheliaDescriptor);
+    }, opheliaDescriptor.properties.worldFrame),
+  object("cordelia", "Cordelia", "satellite", "#a0a0a0", 19.2,
+    "Explore Cordelia, the inner shepherd of Uranus's epsilon ring.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(cordeliaDescriptor);
+    }, cordeliaDescriptor.properties.worldFrame),
+  object("belinda", "Belinda", "satellite", "#a0a0a0", 19.2,
+    "Explore Belinda through its published prolate shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(belindaDescriptor);
+    }, belindaDescriptor.properties.worldFrame),
+  object("juliet", "Juliet", "satellite", "#a0a0a0", 19.2,
+    "Explore Juliet through its published prolate shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(julietDescriptor);
+    }, julietDescriptor.properties.worldFrame),
+  object("portia", "Portia", "satellite", "#a0a0a0", 19.2,
+    "Explore Portia through its published prolate shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(portiaDescriptor);
+    }, portiaDescriptor.properties.worldFrame),
   object("pallene", "Pallene", "satellite", "#a0a0a0", 9.58,
     "Explore Pallene with Cassini imagery and its measured shape.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "juliet",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-ellipsoid-context",
+    "path": "presentation/context.png",
+    "origin": "https://doi.org/10.1006/icar.2001.6596",
+    "credit": "Karkoschka (2001) prolate dimensions; cssEarth shape visualization",
+    "license": "MIT representation of scientific dimensions; retain attribution.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "measured-shape",
+        "model-surface"
+      ],
+      "size": 512,
+      "longitudeDegrees": 40,
+      "latitudeDegrees": 20,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "model"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 52201,
+    "expectedSha256": "f0dc8145f54f9c262b07af04d2b2009d7ff9b90f075e82fea4277b32eea93fb6"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

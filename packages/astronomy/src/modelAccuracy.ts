@@ -111,6 +111,11 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   puck: 46.42767332013248,
   methone: 17510.670766114912,
   pallene: 27.64911948293053,
+  belinda: 28.493677463456997,
+  juliet: 119.87199717537884,
+  portia: 92.4705283027405,
+  cordelia: 0.4561261348117766,
+  ophelia: 2.0127049908729133,
   dimorphos: 0.054002378820475615,
 }
 
@@ -163,7 +168,7 @@ ACCURACY_BY_FRAME.set(
     'sun',
     'Eight-planet mass-weighted barycentric correction',
     'fit-residual',
-    164.71019094004845,
+    164.71005177851123,
     VSOP87A_VALID_FROM_JD,
     VSOP87A_VALID_TO_JD,
     'JPL Horizons DE441 Sun-to-SSB vector fixtures',

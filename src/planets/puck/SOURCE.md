@@ -38,6 +38,6 @@ Surveyed 2026-09-08:
 
 The checked-in radius table samples the stated reference sphere every 5°. The shared radial preparer simplifies 5,040 triangles to **480 native PolyCSS `u` leaves**, one closed component with Euler characteristic 2. Its estimated simplifier error is 1.38 km under the 1.5 km setting; this is a display simplification metric, not a scientific shape-accuracy claim.
 
-Original image and label, Inter font and ESO starfield are restorable through the pinned acquisition plan. The small reference table, geometry kernels, source evidence and generated context portrait are checked in. The portrait is reproducible with the shared radial-snapshot recipe in `preparation/navigation.json`. The actual Puck title outlines are generated from the pinned font.
+Original image and label, SEDR pointing kernel, Inter font and ESO starfield are restorable through the pinned acquisition plan. The small reference table, other geometry kernels, source evidence and generated context portrait are checked in. The portrait is reproducible with the shared radial-snapshot recipe in `preparation/navigation.json`. The actual Puck title outlines are generated from the pinned font.
 
 `node tools/objects/dist/operations.js acquire puck --verify-only` verifies source closure. `node tools/objects/dist/prepare-authored.js puck --write` uses the common authored preparation. `pnpm setup:assets --object=puck` installs the published assets. The coordinating task owns browser qualification on the shared server.

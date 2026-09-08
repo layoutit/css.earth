@@ -85,6 +85,11 @@ const TOLERANCE_KM: Record<SatelliteId, number> = {
   puck: 54,
   methone: 20138,
   pallene: 32,
+  belinda: 33,
+  juliet: 138,
+  portia: 107,
+  cordelia: 1,
+  ophelia: 3,
   dimorphos: .06,
 }
 

@@ -36,9 +36,9 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "model",
+    "defaultLens": "normal",
     "labels": {
-      "model": "Shape model"
+      "normal": "Monochrome"
     },
     "controls": [
       {
@@ -46,7 +46,7 @@
         "label": "Monochrome",
         "description": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
         "title": "Cassini’s low-phase 2005 clear-filter image contributes only its reliable interior, from a disc roughly 8 × 12 native pixels across. Approximate per-observation illumination normalization preserves coarse brightness, not recovered fine terrain or calibrated albedo. Gray grid marks unavailable coverage. The underlying ellipsoid uses measured Cassini dimensions.",
-        "detail": "Cassini · coarse observed patch",
+        "detail": "Cassini ISS",
         "thumbnail": "/scenes/pallene/pallene-normal-thumbnail.webp",
         "surface": "pallene-normal-surface@2x.webp",
         "poles": "pallene-normal-poles@2x.webp",
