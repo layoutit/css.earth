@@ -1,0 +1,2621 @@
+{
+  "implementationCommit": "e060613b2a10a475091c74190fe3908ad3cdf5bb",
+  "date": "2026-09-08T16:50:18.531Z",
+  "registry": {
+    "baseCommit": "1588a643e6c323879f9debae438440f5e6045e4e",
+    "objects": 176,
+    "asteroids": 90,
+    "comets": 5,
+    "contextBodies": 175,
+    "changedPriorBodies": []
+  },
+  "checks": {
+    "sourceVerification": {
+      "command": "pnpm acquire:planets -- --verify-only",
+      "passed": true,
+      "objects": 176,
+      "laterChange": "The ML14 citation verification date changed afterward; its complete 22-entry source closure was verified again with the existing operations command."
+    },
+    "bodyChecks": {
+      "sourceTestsPassed": 24,
+      "preparedPackageTestsPassed": 6,
+      "integrationNote": "The first merged package run preceded world-context regeneration; all six context failures passed after the combined context was prepared."
+    },
+    "requiredSuite": {
+      "command": "pnpm test",
+      "initialExitCode": 1,
+      "packageTestsPassed": 634,
+      "rendererTestsPassed": 337,
+      "platformInitial": {
+        "tests": 1406,
+        "passed": 1403,
+        "failed": 3
+      },
+      "initialFailures": [
+        "Two registry-wide audit files exceeded Node's default 4 GiB heap.",
+        "ML14's photometric-period citation lacked its checked date."
+      ],
+      "focusedResolution": {
+        "auditCommand": "NODE_OPTIONS=--max-old-space-size=8192 node --test --test-concurrency=1 tools/check-object-runtime-ownership.test.mjs tools/check-prepared-leaf-layouts.test.mjs",
+        "auditTestsPassed": 54,
+        "factsheetCommand": "node --test tools/prepare-factsheets.test.mjs",
+        "factsheetTestsPassed": 2,
+        "remainingShellCommand": "NODE_OPTIONS=--max-old-space-size=8192 pnpm test:shell",
+        "shellTestsPassed": 234,
+        "allFailuresResolved": true,
+        "fullSuiteRerun": false
+      }
+    },
+    "productionBuild": {
+      "command": "pnpm build",
+      "fullPrebuildPassed": true,
+      "pages": 177,
+      "initialExitCode": 1,
+      "initialFailure": "Haumea's pre-existing local ring.webp was 44 bytes instead of its pinned 14,158 bytes. The old file was preserved; the normal asset installer restored the pinned release (1 download, 32 reused).",
+      "finalStaticCommand": "pnpm exec astro build",
+      "finalStaticPassed": true,
+      "finalAssemblyCommand": "pnpm assemble:planets",
+      "finalAssemblyPassed": true,
+      "assembledObjects": 176
+    },
+    "browser": {
+      "command": "pnpm test:browser http://127.0.0.1:4278 <id>, for each of the six new objects",
+      "passed": true,
+      "dprs": [
+        1,
+        2
+      ],
+      "cases": 12,
+      "delivery": "Headless Chrome with production files supplied through the existing Playwright response-interception workflow; no extra server.",
+      "additionalChecks": [
+        "Both lenses",
+        "Shadows off by default and both toggle states",
+        "Native mouse drag",
+        "Retained 800 u raster triangles",
+        "One mounted object scene",
+        "Only selected-body scene assets",
+        "Solar System accordion",
+        "HW1 mobile framing"
+      ]
+    }
+  },
+  "installation": {
+    "root": "/tmp/cssEarth-radar-next-install-b6d1a6f6",
+    "commit": "e060613b2a10a475091c74190fe3908ad3cdf5bb",
+    "records": [
+      {
+        "id": "asteroid-1996-hw1",
+        "sourcePath": "shape/1996hw1.obj",
+        "originalGeometryAbsent": true,
+        "preparedObjectSha256": "73142f6bea1800bc2a0b7e04194d101fd72a9571f36c9374ed0731c65e3bd628"
+      },
+      {
+        "id": "asteroid-2008-ev5",
+        "sourcePath": "shape/2008ev5.obj",
+        "originalGeometryAbsent": true,
+        "preparedObjectSha256": "2c25ab675adb7647408a371d2959f4bbc99c30b3427492db517f83d8c15120ec"
+      },
+      {
+        "id": "ra-shalom",
+        "sourcePath": "shape/rashalom.obj",
+        "originalGeometryAbsent": true,
+        "preparedObjectSha256": "89e810baa2973ee46308abc1e85a1a8d858397c09d693934fefd998fa4d86c84"
+      },
+      {
+        "id": "asteroid-1992-sk",
+        "sourcePath": "shape/sk.obj",
+        "originalGeometryAbsent": true,
+        "preparedObjectSha256": "cc70a95ecac6f7c812f9929b865b0e0c870b4316f6a9217f9ee24db4406cb88a"
+      },
+      {
+        "id": "asteroid-1998-ml14",
+        "sourcePath": "shape/ml14.obj",
+        "originalGeometryAbsent": true,
+        "preparedObjectSha256": "b807b0eceec937ff09f234df790b075a70736b722fde1895e7f6719cd4dcf42e"
+      },
+      {
+        "id": "asteroid-2002-ce26",
+        "sourcePath": "shape/ce26.obj",
+        "originalGeometryAbsent": true,
+        "preparedObjectSha256": "54ba134d0415c66cc6cc22b2d247c7cdd3734920354f948afc19b005869f17dc"
+      }
+    ],
+    "installationCommit": "b6d1a6f6e8761dbdcdd9a2a236b730524514d49c",
+    "citationFollowup": "After the normal installation, updated five ML14 citation/provenance files to c9b50816 and rebuilt static pages. Dependencies, scene payloads, geometry and runtime inventories are unchanged.",
+    "runtimeBrowserBuildCommit": "c9b50816e2b55155745b8a6fd3ca6ba58703072f",
+    "sourcePackagingFollowup": "Added two already-pinned CSV spin tables and their body-local ignore exceptions. Updated the fresh checkout; runtime/build inputs and all prepared assets are byte-identical to the browser-verified revision.",
+    "steps": [
+      {
+        "name": "fresh-install",
+        "command": [
+          "pnpm",
+          "install",
+          "--frozen-lockfile"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-runtime-install",
+        "command": [
+          "pnpm",
+          "setup:assets",
+          "--object=asteroid-1996-hw1",
+          "--object=asteroid-2008-ev5",
+          "--object=ra-shalom",
+          "--object=asteroid-1992-sk",
+          "--object=asteroid-1998-ml14",
+          "--object=asteroid-2002-ce26"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-build",
+        "command": [
+          "pnpm",
+          "exec",
+          "astro",
+          "build"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-assemble-asteroid-1996-hw1",
+        "command": [
+          "node",
+          "tools/objects/dist/operations.js",
+          "assemble",
+          "asteroid-1996-hw1"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-assemble-asteroid-2008-ev5",
+        "command": [
+          "node",
+          "tools/objects/dist/operations.js",
+          "assemble",
+          "asteroid-2008-ev5"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-assemble-ra-shalom",
+        "command": [
+          "node",
+          "tools/objects/dist/operations.js",
+          "assemble",
+          "ra-shalom"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-assemble-asteroid-1992-sk",
+        "command": [
+          "node",
+          "tools/objects/dist/operations.js",
+          "assemble",
+          "asteroid-1992-sk"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-assemble-asteroid-1998-ml14",
+        "command": [
+          "node",
+          "tools/objects/dist/operations.js",
+          "assemble",
+          "asteroid-1998-ml14"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-assemble-asteroid-2002-ce26",
+        "command": [
+          "node",
+          "tools/objects/dist/operations.js",
+          "assemble",
+          "asteroid-2002-ce26"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-final-citation-build",
+        "command": [
+          "pnpm",
+          "exec",
+          "astro",
+          "build"
+        ],
+        "exitCode": 0
+      },
+      {
+        "name": "fresh-final-assembly",
+        "command": "Existing operations.js assemble for all six additions",
+        "exitCode": 0
+      }
+    ],
+    "assetsDownloaded": 210,
+    "assetsReused": 0,
+    "totalInstallBytes": 47809188,
+    "freshMountsPassed": 12,
+    "delivery": "Production buffers fulfilled by Playwright local interception, including workers, and hash-verified. No additional HTTP server was opened. These are uncompressed response-body bytes, not wire-transfer timing."
+  },
+  "navigation": [
+    {
+      "dpr": 1,
+      "delivery": "production build served via local response interception; existing server unchanged",
+      "id": "sun",
+      "sceneCount": 1,
+      "bodyIds": [
+        "sun",
+        "mercury",
+        "venus",
+        "earth",
+        "moon",
+        "mars",
+        "phobos",
+        "deimos",
+        "eros",
+        "itokawa",
+        "bennu",
+        "ryugu",
+        "vesta",
+        "ceres",
+        "jupiter",
+        "io",
+        "europa",
+        "ganymede",
+        "callisto",
+        "saturn",
+        "mimas",
+        "enceladus",
+        "tethys",
+        "dione",
+        "rhea",
+        "titan",
+        "iapetus",
+        "phoebe",
+        "uranus",
+        "miranda",
+        "ariel",
+        "umbriel",
+        "titania",
+        "oberon",
+        "neptune",
+        "triton",
+        "pluto",
+        "charon",
+        "haumea",
+        "makemake",
+        "eris",
+        "pan",
+        "atlas",
+        "prometheus",
+        "pandora",
+        "janus",
+        "epimetheus",
+        "hyperion",
+        "ida",
+        "gaspra",
+        "mathilde",
+        "lutetia",
+        "steins",
+        "helene",
+        "telesto",
+        "calypso",
+        "daphnis",
+        "didymos",
+        "dimorphos",
+        "kleopatra",
+        "toutatis",
+        "proteus",
+        "larissa",
+        "amalthea",
+        "thebe",
+        "metis",
+        "adrastea",
+        "naiad",
+        "thalassa",
+        "despina",
+        "galatea",
+        "pallas",
+        "hygiea",
+        "juno",
+        "psyche",
+        "interamnia",
+        "davida",
+        "sylvia",
+        "eunomia",
+        "euphrosyne",
+        "bamberga",
+        "fortuna",
+        "themis",
+        "amphitrite",
+        "egeria",
+        "elektra",
+        "iris",
+        "hebe",
+        "eugenia",
+        "daphne",
+        "eleonora",
+        "nemesis",
+        "kalliope",
+        "nemausa",
+        "parthenope",
+        "melpomene",
+        "julia",
+        "victoria",
+        "urania",
+        "flora",
+        "europa-52",
+        "metis-9",
+        "camilla",
+        "thisbe",
+        "doris",
+        "hermione",
+        "diotima",
+        "herculina",
+        "nausikaa",
+        "astraea",
+        "irene",
+        "nysa",
+        "sappho",
+        "betulia",
+        "castalia",
+        "asteroid-1998-wt24",
+        "asteroid-1994-cc",
+        "fides",
+        "penelope",
+        "alphonsina",
+        "angelina",
+        "ganymed",
+        "moshup",
+        "styx",
+        "nix",
+        "kerberos",
+        "hydra",
+        "puck",
+        "methone",
+        "pallene",
+        "portia",
+        "juliet",
+        "belinda",
+        "cordelia",
+        "ophelia",
+        "cybele",
+        "aurora",
+        "palma",
+        "thule",
+        "hektor",
+        "hekate",
+        "phaethon",
+        "harmonia",
+        "panopaea",
+        "desdemona-666",
+        "asteroid-1950-da",
+        "apophis",
+        "donaldjohanson",
+        "bianca",
+        "cressida",
+        "desdemona",
+        "rosalind",
+        "polydeuces",
+        "anthe",
+        "aegaeon",
+        "geographos",
+        "bacchus",
+        "mithra",
+        "nereus",
+        "golevka",
+        "yorp",
+        "nereid",
+        "himalia",
+        "siarnaq",
+        "ymir",
+        "comet-67p",
+        "comet-103p",
+        "comet-9p",
+        "comet-81p",
+        "comet-1p",
+        "asteroid-1996-hw1",
+        "asteroid-2008-ev5",
+        "ra-shalom",
+        "asteroid-1992-sk",
+        "asteroid-1998-ml14",
+        "asteroid-2002-ce26"
+      ],
+      "asteroidLinks": [
+        {
+          "id": "moshup",
+          "href": "/moshup/"
+        },
+        {
+          "id": "asteroid-1998-wt24",
+          "href": "/asteroid-1998-wt24/"
+        },
+        {
+          "id": "ra-shalom",
+          "href": "/ra-shalom/"
+        },
+        {
+          "id": "apophis",
+          "href": "/apophis/"
+        },
+        {
+          "id": "asteroid-2008-ev5",
+          "href": "/asteroid-2008-ev5/"
+        },
+        {
+          "id": "yorp",
+          "href": "/yorp/"
+        },
+        {
+          "id": "castalia",
+          "href": "/castalia/"
+        },
+        {
+          "id": "bacchus",
+          "href": "/bacchus/"
+        },
+        {
+          "id": "bennu",
+          "href": "/bennu/"
+        },
+        {
+          "id": "ryugu",
+          "href": "/ryugu/"
+        },
+        {
+          "id": "geographos",
+          "href": "/geographos/"
+        },
+        {
+          "id": "asteroid-1992-sk",
+          "href": "/asteroid-1992-sk/"
+        },
+        {
+          "id": "phaethon",
+          "href": "/phaethon/"
+        },
+        {
+          "id": "itokawa",
+          "href": "/itokawa/"
+        },
+        {
+          "id": "eros",
+          "href": "/eros/"
+        },
+        {
+          "id": "nereus",
+          "href": "/nereus/"
+        },
+        {
+          "id": "asteroid-1994-cc",
+          "href": "/asteroid-1994-cc/"
+        },
+        {
+          "id": "didymos",
+          "href": "/didymos/"
+        },
+        {
+          "id": "asteroid-1950-da",
+          "href": "/asteroid-1950-da/"
+        },
+        {
+          "id": "asteroid-1996-hw1",
+          "href": "/asteroid-1996-hw1/"
+        },
+        {
+          "id": "betulia",
+          "href": "/betulia/"
+        },
+        {
+          "id": "flora",
+          "href": "/flora/"
+        },
+        {
+          "id": "mithra",
+          "href": "/mithra/"
+        },
+        {
+          "id": "gaspra",
+          "href": "/gaspra/"
+        },
+        {
+          "id": "asteroid-2002-ce26",
+          "href": "/asteroid-2002-ce26/"
+        },
+        {
+          "id": "harmonia",
+          "href": "/harmonia/"
+        },
+        {
+          "id": "melpomene",
+          "href": "/melpomene/"
+        },
+        {
+          "id": "sappho",
+          "href": "/sappho/"
+        },
+        {
+          "id": "victoria",
+          "href": "/victoria/"
+        },
+        {
+          "id": "vesta",
+          "href": "/vesta/"
+        },
+        {
+          "id": "steins",
+          "href": "/steins/"
+        },
+        {
+          "id": "urania",
+          "href": "/urania/"
+        },
+        {
+          "id": "nemausa",
+          "href": "/nemausa/"
+        },
+        {
+          "id": "donaldjohanson",
+          "href": "/donaldjohanson/"
+        },
+        {
+          "id": "iris",
+          "href": "/iris/"
+        },
+        {
+          "id": "metis-9",
+          "href": "/metis-9/"
+        },
+        {
+          "id": "nausikaa",
+          "href": "/nausikaa/"
+        },
+        {
+          "id": "asteroid-1998-ml14",
+          "href": "/asteroid-1998-ml14/"
+        },
+        {
+          "id": "nysa",
+          "href": "/nysa/"
+        },
+        {
+          "id": "hebe",
+          "href": "/hebe/"
+        },
+        {
+          "id": "lutetia",
+          "href": "/lutetia/"
+        },
+        {
+          "id": "fortuna",
+          "href": "/fortuna/"
+        },
+        {
+          "id": "parthenope",
+          "href": "/parthenope/"
+        },
+        {
+          "id": "golevka",
+          "href": "/golevka/"
+        },
+        {
+          "id": "toutatis",
+          "href": "/toutatis/"
+        },
+        {
+          "id": "julia",
+          "href": "/julia/"
+        },
+        {
+          "id": "amphitrite",
+          "href": "/amphitrite/"
+        },
+        {
+          "id": "egeria",
+          "href": "/egeria/"
+        },
+        {
+          "id": "astraea",
+          "href": "/astraea/"
+        },
+        {
+          "id": "irene",
+          "href": "/irene/"
+        },
+        {
+          "id": "desdemona-666",
+          "href": "/desdemona-666/"
+        },
+        {
+          "id": "panopaea",
+          "href": "/panopaea/"
+        },
+        {
+          "id": "eunomia",
+          "href": "/eunomia/"
+        },
+        {
+          "id": "fides",
+          "href": "/fides/"
+        },
+        {
+          "id": "mathilde",
+          "href": "/mathilde/"
+        },
+        {
+          "id": "ganymed",
+          "href": "/ganymed/"
+        },
+        {
+          "id": "juno",
+          "href": "/juno/"
+        },
+        {
+          "id": "penelope",
+          "href": "/penelope/"
+        },
+        {
+          "id": "angelina",
+          "href": "/angelina/"
+        },
+        {
+          "id": "bamberga",
+          "href": "/bamberga/"
+        },
+        {
+          "id": "alphonsina",
+          "href": "/alphonsina/"
+        },
+        {
+          "id": "eugenia",
+          "href": "/eugenia/"
+        },
+        {
+          "id": "nemesis",
+          "href": "/nemesis/"
+        },
+        {
+          "id": "thisbe",
+          "href": "/thisbe/"
+        },
+        {
+          "id": "daphne",
+          "href": "/daphne/"
+        },
+        {
+          "id": "herculina",
+          "href": "/herculina/"
+        },
+        {
+          "id": "pallas",
+          "href": "/pallas/"
+        },
+        {
+          "id": "kleopatra",
+          "href": "/kleopatra/"
+        },
+        {
+          "id": "eleonora",
+          "href": "/eleonora/"
+        },
+        {
+          "id": "ida",
+          "href": "/ida/"
+        },
+        {
+          "id": "kalliope",
+          "href": "/kalliope/"
+        },
+        {
+          "id": "psyche",
+          "href": "/psyche/"
+        },
+        {
+          "id": "interamnia",
+          "href": "/interamnia/"
+        },
+        {
+          "id": "diotima",
+          "href": "/diotima/"
+        },
+        {
+          "id": "hekate",
+          "href": "/hekate/"
+        },
+        {
+          "id": "europa-52",
+          "href": "/europa-52/"
+        },
+        {
+          "id": "doris",
+          "href": "/doris/"
+        },
+        {
+          "id": "elektra",
+          "href": "/elektra/"
+        },
+        {
+          "id": "themis",
+          "href": "/themis/"
+        },
+        {
+          "id": "hygiea",
+          "href": "/hygiea/"
+        },
+        {
+          "id": "aurora",
+          "href": "/aurora/"
+        },
+        {
+          "id": "davida",
+          "href": "/davida/"
+        },
+        {
+          "id": "euphrosyne",
+          "href": "/euphrosyne/"
+        },
+        {
+          "id": "palma",
+          "href": "/palma/"
+        },
+        {
+          "id": "cybele",
+          "href": "/cybele/"
+        },
+        {
+          "id": "hermione",
+          "href": "/hermione/"
+        },
+        {
+          "id": "sylvia",
+          "href": "/sylvia/"
+        },
+        {
+          "id": "camilla",
+          "href": "/camilla/"
+        },
+        {
+          "id": "thule",
+          "href": "/thule/"
+        },
+        {
+          "id": "hektor",
+          "href": "/hektor/"
+        }
+      ],
+      "asteroidOrbits": "off",
+      "checked": false,
+      "visits": [
+        {
+          "id": "asteroid-1996-hw1",
+          "sceneCount": 1,
+          "url": "http://127.0.0.1:4278/asteroid-1996-hw1/?v=QEa-QsfUi0OVgj30clYEGJN1wBihZOI15dtBQsczQAAAAL_EhK8VL0PUv9wLHw6QO8Y_03KrH3bCBAAA"
+        },
+        {
+          "id": "ra-shalom",
+          "sceneCount": 1,
+          "url": "http://127.0.0.1:4278/ra-shalom/?v=QMa9_eVxqfvnbT4E1dLQ5WBBwBaa0vRpPhFBQsczQAAAAD-dcoCyCZ4yP8EEmSGnz6Q_b51pA-2e4gAA"
+        },
+        {
+          "id": "asteroid-1998-ml14",
+          "sceneCount": 1,
+          "url": "http://127.0.0.1:4278/asteroid-1998-ml14/?v=QEY-I3vEBBiTdb4gsQYtjU_fwAOoBVWqI7hBQsczQAAAAD9_6J9lyY7AP4Gx4KdJjHM_5W1K8U5OjQAA"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "dpr": 2,
+      "delivery": "production build served via local response interception; existing server unchanged",
+      "id": "sun",
+      "sceneCount": 1,
+      "bodyIds": [
+        "sun",
+        "mercury",
+        "venus",
+        "earth",
+        "moon",
+        "mars",
+        "phobos",
+        "deimos",
+        "eros",
+        "itokawa",
+        "bennu",
+        "ryugu",
+        "vesta",
+        "ceres",
+        "jupiter",
+        "io",
+        "europa",
+        "ganymede",
+        "callisto",
+        "saturn",
+        "mimas",
+        "enceladus",
+        "tethys",
+        "dione",
+        "rhea",
+        "titan",
+        "iapetus",
+        "phoebe",
+        "uranus",
+        "miranda",
+        "ariel",
+        "umbriel",
+        "titania",
+        "oberon",
+        "neptune",
+        "triton",
+        "pluto",
+        "charon",
+        "haumea",
+        "makemake",
+        "eris",
+        "pan",
+        "atlas",
+        "prometheus",
+        "pandora",
+        "janus",
+        "epimetheus",
+        "hyperion",
+        "ida",
+        "gaspra",
+        "mathilde",
+        "lutetia",
+        "steins",
+        "helene",
+        "telesto",
+        "calypso",
+        "daphnis",
+        "didymos",
+        "dimorphos",
+        "kleopatra",
+        "toutatis",
+        "proteus",
+        "larissa",
+        "amalthea",
+        "thebe",
+        "metis",
+        "adrastea",
+        "naiad",
+        "thalassa",
+        "despina",
+        "galatea",
+        "pallas",
+        "hygiea",
+        "juno",
+        "psyche",
+        "interamnia",
+        "davida",
+        "sylvia",
+        "eunomia",
+        "euphrosyne",
+        "bamberga",
+        "fortuna",
+        "themis",
+        "amphitrite",
+        "egeria",
+        "elektra",
+        "iris",
+        "hebe",
+        "eugenia",
+        "daphne",
+        "eleonora",
+        "nemesis",
+        "kalliope",
+        "nemausa",
+        "parthenope",
+        "melpomene",
+        "julia",
+        "victoria",
+        "urania",
+        "flora",
+        "europa-52",
+        "metis-9",
+        "camilla",
+        "thisbe",
+        "doris",
+        "hermione",
+        "diotima",
+        "herculina",
+        "nausikaa",
+        "astraea",
+        "irene",
+        "nysa",
+        "sappho",
+        "betulia",
+        "castalia",
+        "asteroid-1998-wt24",
+        "asteroid-1994-cc",
+        "fides",
+        "penelope",
+        "alphonsina",
+        "angelina",
+        "ganymed",
+        "moshup",
+        "styx",
+        "nix",
+        "kerberos",
+        "hydra",
+        "puck",
+        "methone",
+        "pallene",
+        "portia",
+        "juliet",
+        "belinda",
+        "cordelia",
+        "ophelia",
+        "cybele",
+        "aurora",
+        "palma",
+        "thule",
+        "hektor",
+        "hekate",
+        "phaethon",
+        "harmonia",
+        "panopaea",
+        "desdemona-666",
+        "asteroid-1950-da",
+        "apophis",
+        "donaldjohanson",
+        "bianca",
+        "cressida",
+        "desdemona",
+        "rosalind",
+        "polydeuces",
+        "anthe",
+        "aegaeon",
+        "geographos",
+        "bacchus",
+        "mithra",
+        "nereus",
+        "golevka",
+        "yorp",
+        "nereid",
+        "himalia",
+        "siarnaq",
+        "ymir",
+        "comet-67p",
+        "comet-103p",
+        "comet-9p",
+        "comet-81p",
+        "comet-1p",
+        "asteroid-1996-hw1",
+        "asteroid-2008-ev5",
+        "ra-shalom",
+        "asteroid-1992-sk",
+        "asteroid-1998-ml14",
+        "asteroid-2002-ce26"
+      ],
+      "asteroidLinks": [
+        {
+          "id": "moshup",
+          "href": "/moshup/"
+        },
+        {
+          "id": "asteroid-1998-wt24",
+          "href": "/asteroid-1998-wt24/"
+        },
+        {
+          "id": "ra-shalom",
+          "href": "/ra-shalom/"
+        },
+        {
+          "id": "apophis",
+          "href": "/apophis/"
+        },
+        {
+          "id": "asteroid-2008-ev5",
+          "href": "/asteroid-2008-ev5/"
+        },
+        {
+          "id": "yorp",
+          "href": "/yorp/"
+        },
+        {
+          "id": "castalia",
+          "href": "/castalia/"
+        },
+        {
+          "id": "bacchus",
+          "href": "/bacchus/"
+        },
+        {
+          "id": "bennu",
+          "href": "/bennu/"
+        },
+        {
+          "id": "ryugu",
+          "href": "/ryugu/"
+        },
+        {
+          "id": "geographos",
+          "href": "/geographos/"
+        },
+        {
+          "id": "asteroid-1992-sk",
+          "href": "/asteroid-1992-sk/"
+        },
+        {
+          "id": "phaethon",
+          "href": "/phaethon/"
+        },
+        {
+          "id": "itokawa",
+          "href": "/itokawa/"
+        },
+        {
+          "id": "eros",
+          "href": "/eros/"
+        },
+        {
+          "id": "nereus",
+          "href": "/nereus/"
+        },
+        {
+          "id": "asteroid-1994-cc",
+          "href": "/asteroid-1994-cc/"
+        },
+        {
+          "id": "didymos",
+          "href": "/didymos/"
+        },
+        {
+          "id": "asteroid-1950-da",
+          "href": "/asteroid-1950-da/"
+        },
+        {
+          "id": "asteroid-1996-hw1",
+          "href": "/asteroid-1996-hw1/"
+        },
+        {
+          "id": "betulia",
+          "href": "/betulia/"
+        },
+        {
+          "id": "flora",
+          "href": "/flora/"
+        },
+        {
+          "id": "mithra",
+          "href": "/mithra/"
+        },
+        {
+          "id": "gaspra",
+          "href": "/gaspra/"
+        },
+        {
+          "id": "asteroid-2002-ce26",
+          "href": "/asteroid-2002-ce26/"
+        },
+        {
+          "id": "harmonia",
+          "href": "/harmonia/"
+        },
+        {
+          "id": "melpomene",
+          "href": "/melpomene/"
+        },
+        {
+          "id": "sappho",
+          "href": "/sappho/"
+        },
+        {
+          "id": "victoria",
+          "href": "/victoria/"
+        },
+        {
+          "id": "vesta",
+          "href": "/vesta/"
+        },
+        {
+          "id": "steins",
+          "href": "/steins/"
+        },
+        {
+          "id": "urania",
+          "href": "/urania/"
+        },
+        {
+          "id": "nemausa",
+          "href": "/nemausa/"
+        },
+        {
+          "id": "donaldjohanson",
+          "href": "/donaldjohanson/"
+        },
+        {
+          "id": "iris",
+          "href": "/iris/"
+        },
+        {
+          "id": "metis-9",
+          "href": "/metis-9/"
+        },
+        {
+          "id": "nausikaa",
+          "href": "/nausikaa/"
+        },
+        {
+          "id": "asteroid-1998-ml14",
+          "href": "/asteroid-1998-ml14/"
+        },
+        {
+          "id": "nysa",
+          "href": "/nysa/"
+        },
+        {
+          "id": "hebe",
+          "href": "/hebe/"
+        },
+        {
+          "id": "lutetia",
+          "href": "/lutetia/"
+        },
+        {
+          "id": "fortuna",
+          "href": "/fortuna/"
+        },
+        {
+          "id": "parthenope",
+          "href": "/parthenope/"
+        },
+        {
+          "id": "golevka",
+          "href": "/golevka/"
+        },
+        {
+          "id": "toutatis",
+          "href": "/toutatis/"
+        },
+        {
+          "id": "julia",
+          "href": "/julia/"
+        },
+        {
+          "id": "amphitrite",
+          "href": "/amphitrite/"
+        },
+        {
+          "id": "egeria",
+          "href": "/egeria/"
+        },
+        {
+          "id": "astraea",
+          "href": "/astraea/"
+        },
+        {
+          "id": "irene",
+          "href": "/irene/"
+        },
+        {
+          "id": "desdemona-666",
+          "href": "/desdemona-666/"
+        },
+        {
+          "id": "panopaea",
+          "href": "/panopaea/"
+        },
+        {
+          "id": "eunomia",
+          "href": "/eunomia/"
+        },
+        {
+          "id": "fides",
+          "href": "/fides/"
+        },
+        {
+          "id": "mathilde",
+          "href": "/mathilde/"
+        },
+        {
+          "id": "ganymed",
+          "href": "/ganymed/"
+        },
+        {
+          "id": "juno",
+          "href": "/juno/"
+        },
+        {
+          "id": "penelope",
+          "href": "/penelope/"
+        },
+        {
+          "id": "angelina",
+          "href": "/angelina/"
+        },
+        {
+          "id": "bamberga",
+          "href": "/bamberga/"
+        },
+        {
+          "id": "alphonsina",
+          "href": "/alphonsina/"
+        },
+        {
+          "id": "eugenia",
+          "href": "/eugenia/"
+        },
+        {
+          "id": "nemesis",
+          "href": "/nemesis/"
+        },
+        {
+          "id": "thisbe",
+          "href": "/thisbe/"
+        },
+        {
+          "id": "daphne",
+          "href": "/daphne/"
+        },
+        {
+          "id": "herculina",
+          "href": "/herculina/"
+        },
+        {
+          "id": "pallas",
+          "href": "/pallas/"
+        },
+        {
+          "id": "kleopatra",
+          "href": "/kleopatra/"
+        },
+        {
+          "id": "eleonora",
+          "href": "/eleonora/"
+        },
+        {
+          "id": "ida",
+          "href": "/ida/"
+        },
+        {
+          "id": "kalliope",
+          "href": "/kalliope/"
+        },
+        {
+          "id": "psyche",
+          "href": "/psyche/"
+        },
+        {
+          "id": "interamnia",
+          "href": "/interamnia/"
+        },
+        {
+          "id": "diotima",
+          "href": "/diotima/"
+        },
+        {
+          "id": "hekate",
+          "href": "/hekate/"
+        },
+        {
+          "id": "europa-52",
+          "href": "/europa-52/"
+        },
+        {
+          "id": "doris",
+          "href": "/doris/"
+        },
+        {
+          "id": "elektra",
+          "href": "/elektra/"
+        },
+        {
+          "id": "themis",
+          "href": "/themis/"
+        },
+        {
+          "id": "hygiea",
+          "href": "/hygiea/"
+        },
+        {
+          "id": "aurora",
+          "href": "/aurora/"
+        },
+        {
+          "id": "davida",
+          "href": "/davida/"
+        },
+        {
+          "id": "euphrosyne",
+          "href": "/euphrosyne/"
+        },
+        {
+          "id": "palma",
+          "href": "/palma/"
+        },
+        {
+          "id": "cybele",
+          "href": "/cybele/"
+        },
+        {
+          "id": "hermione",
+          "href": "/hermione/"
+        },
+        {
+          "id": "sylvia",
+          "href": "/sylvia/"
+        },
+        {
+          "id": "camilla",
+          "href": "/camilla/"
+        },
+        {
+          "id": "thule",
+          "href": "/thule/"
+        },
+        {
+          "id": "hektor",
+          "href": "/hektor/"
+        }
+      ],
+      "asteroidOrbits": "off",
+      "checked": false,
+      "visits": [
+        {
+          "id": "asteroid-1996-hw1",
+          "sceneCount": 1,
+          "url": "http://127.0.0.1:4278/asteroid-1996-hw1/?v=QEa-QsfUi0OVgj30clYEGJN1wBihZOI15dtBQsczQAAAAL_EhK8VL0PUv9wLHw6QO8Y_03KrH3bCBAAA"
+        },
+        {
+          "id": "ra-shalom",
+          "sceneCount": 1,
+          "url": "http://127.0.0.1:4278/ra-shalom/?v=QMa9_eVxqfvnbT4E1dLQ5WBBwBaa0vRpPhFBQsczQAAAAD-dcoCyCZ4yP8EEmSGnz6Q_b51pA-2e4gAA"
+        },
+        {
+          "id": "asteroid-1998-ml14",
+          "sceneCount": 1,
+          "url": "http://127.0.0.1:4278/asteroid-1998-ml14/?v=QEY-I3vEBBiTdb4gsQYtjU_fwAOoBVWqI7hBQsczQAAAAD9_6J9lyY7AP4Gx4KdJjHM_5W1K8U5OjQAA"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "bodies": [
+    {
+      "id": "asteroid-1996-hw1",
+      "sourceTriangles": 2780,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "f40ee6ba66abccd5393f991fdfe240b54df49c31559e07a431760996024d2996",
+      "preparedObjectSha256": "73142f6bea1800bc2a0b7e04194d101fd72a9571f36c9374ed0731c65e3bd628",
+      "defaultShadows": false,
+      "depthGroups": 4,
+      "assetCount": 35,
+      "installBytes": 8005366,
+      "canonicalAssetPathsIdenticalAcrossDprs": true,
+      "freshNonDocumentResponsesMatchPrimary": true,
+      "htmlVersionDifferences": [
+        {
+          "dpr": 1,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "2d98564198d282911994f68d4520f37bb7a228e41b4e8e3d917eb8833ebc7d82",
+          "freshSha256": "de83df9d659958ef5a85a90e09b85e7fa79ad5ff1ebdba1bacc3f6dc7f5b0297"
+        },
+        {
+          "dpr": 2,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "2d98564198d282911994f68d4520f37bb7a228e41b4e8e3d917eb8833ebc7d82",
+          "freshSha256": "de83df9d659958ef5a85a90e09b85e7fa79ad5ff1ebdba1bacc3f6dc7f5b0297"
+        }
+      ],
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59317222
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 177596
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 362878
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 325176
+            }
+          }
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59317222
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 177596
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 362878
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 325176
+            }
+          }
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "asteroid-1996-hw1-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 312126
+        },
+        {
+          "filename": "asteroid-1996-hw1-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 362878
+        },
+        {
+          "filename": "asteroid-1996-hw1-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 177596
+        },
+        {
+          "filename": "asteroid-1996-hw1-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 221278
+        }
+      ]
+    },
+    {
+      "id": "asteroid-2008-ev5",
+      "sourceTriangles": 3996,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9",
+      "preparedObjectSha256": "2c25ab675adb7647408a371d2959f4bbc99c30b3427492db517f83d8c15120ec",
+      "defaultShadows": false,
+      "depthGroups": 3,
+      "assetCount": 35,
+      "installBytes": 8233822,
+      "canonicalAssetPathsIdenticalAcrossDprs": true,
+      "freshNonDocumentResponsesMatchPrimary": true,
+      "htmlVersionDifferences": [
+        {
+          "dpr": 1,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "48dead4518a334710b95133188957a8616248a00dbc9435c58d2a597d96c7b1a",
+          "freshSha256": "0fb95b89554d9e4d89909b58106dd918b8af5f1616fcc62104803de39c9fd143"
+        },
+        {
+          "dpr": 2,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "48dead4518a334710b95133188957a8616248a00dbc9435c58d2a597d96c7b1a",
+          "freshSha256": "0fb95b89554d9e4d89909b58106dd918b8af5f1616fcc62104803de39c9fd143"
+        }
+      ],
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59303194
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 167362
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 510070
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 412960
+            }
+          }
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59303194
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 167362
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 510070
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 412960
+            }
+          }
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "asteroid-2008-ev5-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 388460
+        },
+        {
+          "filename": "asteroid-2008-ev5-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 510070
+        },
+        {
+          "filename": "asteroid-2008-ev5-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 167362
+        },
+        {
+          "filename": "asteroid-2008-ev5-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 234248
+        }
+      ]
+    },
+    {
+      "id": "ra-shalom",
+      "sourceTriangles": 2292,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "ca9286eb9d89d384f3d7860a78a78ce94d7a22f6e5c5071f04349729684ada2d",
+      "preparedObjectSha256": "89e810baa2973ee46308abc1e85a1a8d858397c09d693934fefd998fa4d86c84",
+      "defaultShadows": false,
+      "depthGroups": 2,
+      "assetCount": 35,
+      "installBytes": 8015302,
+      "canonicalAssetPathsIdenticalAcrossDprs": true,
+      "freshNonDocumentResponsesMatchPrimary": true,
+      "htmlVersionDifferences": [
+        {
+          "dpr": 1,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "e358dbe81b97ea084978463ec4625d47b32c69a1469bb83ecf63f2ea167fadfc",
+          "freshSha256": "a35bd32a18668a7eb7f5d67720d7a11c1723e6effaa0ccd88702323dccd21fcf"
+        },
+        {
+          "dpr": 2,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "e358dbe81b97ea084978463ec4625d47b32c69a1469bb83ecf63f2ea167fadfc",
+          "freshSha256": "a35bd32a18668a7eb7f5d67720d7a11c1723e6effaa0ccd88702323dccd21fcf"
+        }
+      ],
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59256321
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 164938
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 413586
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 306828
+            }
+          }
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59256321
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 164938
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 413586
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 306828
+            }
+          }
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "ra-shalom-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 290054
+        },
+        {
+          "filename": "ra-shalom-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 413586
+        },
+        {
+          "filename": "ra-shalom-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 164938
+        },
+        {
+          "filename": "ra-shalom-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 214196
+        }
+      ]
+    },
+    {
+      "id": "asteroid-1992-sk",
+      "sourceTriangles": 1016,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "c5edada6befa4cad50d4f73a2a11ff1e1dede7728bd3d39fb21c9de2974fe05c",
+      "preparedObjectSha256": "cc70a95ecac6f7c812f9929b865b0e0c870b4316f6a9217f9ee24db4406cb88a",
+      "defaultShadows": false,
+      "depthGroups": 5,
+      "assetCount": 35,
+      "installBytes": 7788142,
+      "canonicalAssetPathsIdenticalAcrossDprs": true,
+      "freshNonDocumentResponsesMatchPrimary": true,
+      "htmlVersionDifferences": [
+        {
+          "dpr": 1,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "047d02940834318f6d77bf018afded77b8541eb05a87e0bdca24b7ff8c4c7d1f",
+          "freshSha256": "4652ac77e4b8aa806aa169a3b82530bb164b26efaf19eef5d70f4b0ec9f58258"
+        },
+        {
+          "dpr": 2,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "047d02940834318f6d77bf018afded77b8541eb05a87e0bdca24b7ff8c4c7d1f",
+          "freshSha256": "4652ac77e4b8aa806aa169a3b82530bb164b26efaf19eef5d70f4b0ec9f58258"
+        }
+      ],
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59266100
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 165868
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 293980
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 200114
+            }
+          }
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59266100
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 165868
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 293980
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 200114
+            }
+          }
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "asteroid-1992-sk-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 188160
+        },
+        {
+          "filename": "asteroid-1992-sk-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 293980
+        },
+        {
+          "filename": "asteroid-1992-sk-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 165868
+        },
+        {
+          "filename": "asteroid-1992-sk-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 208566
+        }
+      ]
+    },
+    {
+      "id": "asteroid-1998-ml14",
+      "sourceTriangles": 1020,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "8166bb5a7f6d8baa5cc82cec22304c011202f1254a403be1ff19eba0abfe6abe",
+      "preparedObjectSha256": "b807b0eceec937ff09f234df790b075a70736b722fde1895e7f6719cd4dcf42e",
+      "defaultShadows": false,
+      "depthGroups": 3,
+      "assetCount": 35,
+      "installBytes": 7863726,
+      "canonicalAssetPathsIdenticalAcrossDprs": true,
+      "freshNonDocumentResponsesMatchPrimary": true,
+      "htmlVersionDifferences": [
+        {
+          "dpr": 1,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "be17e635022d279d34b2c7a35b9beb5500f833e54dcf57e67cfcb68f146de617",
+          "freshSha256": "d23a6c9be0dec89d7bf6b54ff0edb19a9720d141207703df67ecdcca0bc3dba1"
+        },
+        {
+          "dpr": 2,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "be17e635022d279d34b2c7a35b9beb5500f833e54dcf57e67cfcb68f146de617",
+          "freshSha256": "d23a6c9be0dec89d7bf6b54ff0edb19a9720d141207703df67ecdcca0bc3dba1"
+        }
+      ],
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59265076
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 154422
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 345938
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 242006
+            }
+          }
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59265076
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 154422
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 345938
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 242006
+            }
+          }
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "asteroid-1998-ml14-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 221438
+        },
+        {
+          "filename": "asteroid-1998-ml14-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 345938
+        },
+        {
+          "filename": "asteroid-1998-ml14-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 154422
+        },
+        {
+          "filename": "asteroid-1998-ml14-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 208362
+        }
+      ]
+    },
+    {
+      "id": "asteroid-2002-ce26",
+      "sourceTriangles": 2292,
+      "preparedTriangles": 800,
+      "sourceGeometrySha256": "4b625ea6906aba4d5828836c44d733ca4ad8c2a501739dc74f305ef84bb42c12",
+      "preparedObjectSha256": "54ba134d0415c66cc6cc22b2d247c7cdd3734920354f948afc19b005869f17dc",
+      "defaultShadows": false,
+      "depthGroups": 8,
+      "assetCount": 35,
+      "installBytes": 7902830,
+      "canonicalAssetPathsIdenticalAcrossDprs": true,
+      "freshNonDocumentResponsesMatchPrimary": true,
+      "htmlVersionDifferences": [
+        {
+          "dpr": 1,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "579acf008339b636aa8904831df2d4d4ac0e9af68d413c2649308b4eca0d5fde",
+          "freshSha256": "fb967d3a6979185fe6fbc41ecf40d7defa1fb5b6436a5124fff8d57bd398712f"
+        },
+        {
+          "dpr": 2,
+          "primary": "v0.382",
+          "fresh": "v0.383",
+          "onlyDifference": "Git-derived About version string",
+          "primarySha256": "579acf008339b636aa8904831df2d4d4ac0e9af68d413c2649308b4eca0d5fde",
+          "freshSha256": "fb967d3a6979185fe6fbc41ecf40d7defa1fb5b6436a5124fff8d57bd398712f"
+        }
+      ],
+      "browser": [
+        {
+          "dpr": 1,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59329462
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 159358
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 351038
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 252770
+            }
+          }
+        },
+        {
+          "dpr": 2,
+          "browser": "152.0.7977.76",
+          "leafCount": 800,
+          "tags": [
+            "U"
+          ],
+          "sizing": [
+            "raster"
+          ],
+          "retained": true,
+          "activeScenes": 1,
+          "nativeMouseDrag": true,
+          "errors": [],
+          "responseBodyTotals": {
+            "cold": {
+              "requests": 606,
+              "verifiedBodyBytes": 59329462
+            },
+            "shadow:shape": {
+              "requests": 1,
+              "verifiedBodyBytes": 159358
+            },
+            "lens:elevation": {
+              "requests": 1,
+              "verifiedBodyBytes": 351038
+            },
+            "shadow:elevation": {
+              "requests": 2,
+              "verifiedBodyBytes": 252770
+            }
+          }
+        }
+      ],
+      "atlas": [
+        {
+          "filename": "asteroid-2002-ce26-elevation-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 238654
+        },
+        {
+          "filename": "asteroid-2002-ce26-elevation-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 351038
+        },
+        {
+          "filename": "asteroid-2002-ce26-shape-shadow@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 159358
+        },
+        {
+          "filename": "asteroid-2002-ce26-shape-surface@2x.webp",
+          "width": 2048,
+          "height": 6400,
+          "decodedRgbaBytes": 52428800,
+          "installBytes": 221742
+        }
+      ]
+    }
+  ],
+  "sourceRestoration": {
+    "root": "/tmp/cssEarth-radar-next-install-b6d1a6f6",
+    "normalAcquire": true,
+    "geometryInitiallyAbsent": true,
+    "reports": [
+      {
+        "id": "asteroid-1996-hw1",
+        "exitCode": 0,
+        "command": "node tools/objects/dist/operations.js acquire asteroid-1996-hw1",
+        "inputs": [
+          {
+            "path": "stars/eso0932a.tif",
+            "bytes": 29082084,
+            "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+          },
+          {
+            "path": "shape/1996hw1.obj",
+            "bytes": 83069,
+            "sha256": "f40ee6ba66abccd5393f991fdfe240b54df49c31559e07a431760996024d2996"
+          },
+          {
+            "path": "presentation/InterVariable.ttf",
+            "bytes": 862936,
+            "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+          },
+          {
+            "path": "reference/1996hw1.pdf",
+            "bytes": 3069644,
+            "sha256": "f75956f9f1cbfe74213979e71615a2a71ce8a280f4a189e02b210b826bda3129"
+          }
+        ]
+      },
+      {
+        "id": "asteroid-2008-ev5",
+        "exitCode": 0,
+        "command": "node tools/objects/dist/operations.js acquire asteroid-2008-ev5",
+        "inputs": [
+          {
+            "path": "stars/eso0932a.tif",
+            "bytes": 29082084,
+            "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+          },
+          {
+            "path": "shape/2008ev5.obj",
+            "bytes": 120483,
+            "sha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9"
+          },
+          {
+            "path": "presentation/InterVariable.ttf",
+            "bytes": 862936,
+            "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+          },
+          {
+            "path": "reference/2008ev5.pdf",
+            "bytes": 1610259,
+            "sha256": "da32aca932a661196050a3078126c930778a5673b625ad389b0c3fa49d5c7fcc"
+          }
+        ]
+      },
+      {
+        "id": "ra-shalom",
+        "exitCode": 0,
+        "command": "node tools/objects/dist/operations.js acquire ra-shalom",
+        "inputs": [
+          {
+            "path": "stars/eso0932a.tif",
+            "bytes": 29082084,
+            "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+          },
+          {
+            "path": "shape/rashalom.obj",
+            "bytes": 67284,
+            "sha256": "ca9286eb9d89d384f3d7860a78a78ce94d7a22f6e5c5071f04349729684ada2d"
+          },
+          {
+            "path": "presentation/InterVariable.ttf",
+            "bytes": 862936,
+            "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+          },
+          {
+            "path": "reference/rashalom.pdf",
+            "bytes": 2440297,
+            "sha256": "36447f3728e28c8a7b63a70617ad08b8e3a70e58f6920708b6fabedbb10fe1a5"
+          }
+        ]
+      },
+      {
+        "id": "asteroid-1992-sk",
+        "exitCode": 0,
+        "command": "node tools/objects/dist/operations.js acquire asteroid-1992-sk",
+        "inputs": [
+          {
+            "path": "stars/eso0932a.tif",
+            "bytes": 29082084,
+            "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+          },
+          {
+            "path": "shape/sk.obj",
+            "bytes": 29083,
+            "sha256": "c5edada6befa4cad50d4f73a2a11ff1e1dede7728bd3d39fb21c9de2974fe05c"
+          },
+          {
+            "path": "presentation/InterVariable.ttf",
+            "bytes": 862936,
+            "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+          },
+          {
+            "path": "reference/sk.pdf",
+            "bytes": 1193012,
+            "sha256": "2833d983fef4e8425134ce588f800f6ee9cebd8cf4ef050b65bec8af0dff2324"
+          },
+          {
+            "path": "reference/sk-spin-2022.pdf",
+            "bytes": 1821019,
+            "sha256": "f8b7a3d1890e36fb852d49ddd807ba1c24bcc2c0119078dfaa01ad9469d78b6b"
+          }
+        ]
+      },
+      {
+        "id": "asteroid-1998-ml14",
+        "exitCode": 0,
+        "command": "node tools/objects/dist/operations.js acquire asteroid-1998-ml14",
+        "inputs": [
+          {
+            "path": "stars/eso0932a.tif",
+            "bytes": 29082084,
+            "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+          },
+          {
+            "path": "shape/ml14.obj",
+            "bytes": 29003,
+            "sha256": "8166bb5a7f6d8baa5cc82cec22304c011202f1254a403be1ff19eba0abfe6abe"
+          },
+          {
+            "path": "presentation/InterVariable.ttf",
+            "bytes": 862936,
+            "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+          },
+          {
+            "path": "reference/ml14.pdf",
+            "bytes": 5047547,
+            "sha256": "b304439c2fd6a8770ba70719c4b286117ab6cf6be1c1717e094f2f0c6770bb3e"
+          },
+          {
+            "path": "reference/warner-2014.pdf",
+            "bytes": 21762404,
+            "sha256": "a2032ef0a45802f42038619c2ec531fc40d5a45a0a0337bb2c2501d7b174cc96"
+          }
+        ]
+      },
+      {
+        "id": "asteroid-2002-ce26",
+        "exitCode": 0,
+        "command": "node tools/objects/dist/operations.js acquire asteroid-2002-ce26",
+        "inputs": [
+          {
+            "path": "stars/eso0932a.tif",
+            "bytes": 29082084,
+            "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+          },
+          {
+            "path": "shape/ce26.obj",
+            "bytes": 67313,
+            "sha256": "4b625ea6906aba4d5828836c44d733ca4ad8c2a501739dc74f305ef84bb42c12"
+          },
+          {
+            "path": "presentation/InterVariable.ttf",
+            "bytes": 862936,
+            "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+          },
+          {
+            "path": "reference/ce26.pdf",
+            "bytes": 1256386,
+            "sha256": "63e598717e6dc6f124d2bc564b07338253e04b51cc0d47024a668260a0f204b5"
+          }
+        ]
+      }
+    ]
+  },
+  "geometryRetention": {
+    "baseCommit": "1588a643e6c323879f9debae438440f5e6045e4e",
+    "existingEntriesChecked": 1043,
+    "allUnchanged": true
+  },
+  "mainRuntimeRetention": {
+    "objectsCompared": 170,
+    "changedObjects": 161,
+    "onlyChangedField": "heliocentricView navigation marker indices and counts",
+    "otherFieldsUnchanged": true
+  },
+  "livePreview": {
+    "base": "http://127.0.0.1:4278",
+    "pid": "95029",
+    "owner": "PID  PPID  PGID COMMAND\n95029     1 95029 /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node tools/preview.mjs --port 4278",
+    "cwd": "p95029\nfcwd\nn/Users/ekrof/fed/cssEarth-asteroids-large",
+    "records": [
+      {
+        "id": "asteroid-1996-hw1",
+        "url": "http://127.0.0.1:4278/asteroid-1996-hw1/",
+        "status": 200,
+        "bytes": 3274757,
+        "sha256": "2d98564198d282911994f68d4520f37bb7a228e41b4e8e3d917eb8833ebc7d82"
+      },
+      {
+        "id": "asteroid-2008-ev5",
+        "url": "http://127.0.0.1:4278/asteroid-2008-ev5/",
+        "status": 200,
+        "bytes": 3274907,
+        "sha256": "48dead4518a334710b95133188957a8616248a00dbc9435c58d2a597d96c7b1a"
+      },
+      {
+        "id": "ra-shalom",
+        "url": "http://127.0.0.1:4278/ra-shalom/",
+        "status": 200,
+        "bytes": 3275383,
+        "sha256": "e358dbe81b97ea084978463ec4625d47b32c69a1469bb83ecf63f2ea167fadfc"
+      },
+      {
+        "id": "asteroid-1992-sk",
+        "url": "http://127.0.0.1:4278/asteroid-1992-sk/",
+        "status": 200,
+        "bytes": 3274804,
+        "sha256": "047d02940834318f6d77bf018afded77b8541eb05a87e0bdca24b7ff8c4c7d1f"
+      },
+      {
+        "id": "asteroid-1998-ml14",
+        "url": "http://127.0.0.1:4278/asteroid-1998-ml14/",
+        "status": 200,
+        "bytes": 3274822,
+        "sha256": "be17e635022d279d34b2c7a35b9beb5500f833e54dcf57e67cfcb68f146de617"
+      },
+      {
+        "id": "asteroid-2002-ce26",
+        "url": "http://127.0.0.1:4278/asteroid-2002-ce26/",
+        "status": 200,
+        "bytes": 3278641,
+        "sha256": "579acf008339b636aa8904831df2d4d4ac0e9af68d413c2649308b4eca0d5fde"
+      }
+    ]
+  },
+  "drag": {
+    "browser": "152.0.7977.76",
+    "viewport": {
+      "width": 1505,
+      "height": 1237
+    },
+    "gesture": "Native mouse drag from (675,620) to (925,685) over 2.5 seconds",
+    "lens": "Shape",
+    "shadows": true,
+    "reference": "Pallas, on the same build, viewport, browser, DPR and gesture",
+    "qualification": "Short local traces at each default view. Observed draw cadence and draw time do not establish GPU residency or performance at every pose or hardware.",
+    "cases": [
+      {
+        "id": "pallas",
+        "dpr": 1,
+        "observedDrawCadenceFps": 59.05533163220545,
+        "drawP95Ms": 3.567,
+        "drawCpuP95Ms": 3.555,
+        "largestPassQuads": 355,
+        "preparedHashes": {
+          "prepared/object.json": "5d7b88aa37fb48c6420ce25fa34481888cff51aa826bf373d550e9848e512b65",
+          "prepared/scene.json": "784982687ae983afaef43071ed31422289cc998687223b2b8f609fea3f503475",
+          "runtime-assets.json": "e0329c21b0457be97d895719bada2e4c02405357d06cd30075bccdcfe505ef10"
+        },
+        "traceSha256": "08819b674c5aaa8a02f565e24ba42fa6ca8c5c2411198ee277828e9090d8f143"
+      },
+      {
+        "id": "pallas",
+        "dpr": 2,
+        "observedDrawCadenceFps": 59.059009190389965,
+        "drawP95Ms": 3.617,
+        "drawCpuP95Ms": 3.614,
+        "largestPassQuads": 354,
+        "preparedHashes": {
+          "prepared/object.json": "5d7b88aa37fb48c6420ce25fa34481888cff51aa826bf373d550e9848e512b65",
+          "prepared/scene.json": "784982687ae983afaef43071ed31422289cc998687223b2b8f609fea3f503475",
+          "runtime-assets.json": "e0329c21b0457be97d895719bada2e4c02405357d06cd30075bccdcfe505ef10"
+        },
+        "traceSha256": "3ebabd61314e9b0d80bf3228f0688c1730ea269d876c24f7a4534df7fb49ace3"
+      },
+      {
+        "id": "asteroid-1996-hw1",
+        "dpr": 1,
+        "observedDrawCadenceFps": 59.12235874842266,
+        "drawP95Ms": 8.735,
+        "drawCpuP95Ms": 8.831,
+        "largestPassQuads": 351,
+        "preparedHashes": {
+          "prepared/object.json": "73142f6bea1800bc2a0b7e04194d101fd72a9571f36c9374ed0731c65e3bd628",
+          "prepared/scene.json": "0b1433a9bd2a4e6d6c43426b13450a837e27dff61e579a55a2be15902a959fa4",
+          "runtime-assets.json": "5884e0f543e48e9e87d4a055d8b1025a7204a9642a3024c474b4eb92b11a3116"
+        },
+        "traceSha256": "f4f73aca9cd9d6e6e556180f8c97fb37557696dc8b3e245952909bae98cc3e13"
+      },
+      {
+        "id": "asteroid-1996-hw1",
+        "dpr": 2,
+        "observedDrawCadenceFps": 58.98140320253098,
+        "drawP95Ms": 8.79,
+        "drawCpuP95Ms": 8.777,
+        "largestPassQuads": 351,
+        "preparedHashes": {
+          "prepared/object.json": "73142f6bea1800bc2a0b7e04194d101fd72a9571f36c9374ed0731c65e3bd628",
+          "prepared/scene.json": "0b1433a9bd2a4e6d6c43426b13450a837e27dff61e579a55a2be15902a959fa4",
+          "runtime-assets.json": "5884e0f543e48e9e87d4a055d8b1025a7204a9642a3024c474b4eb92b11a3116"
+        },
+        "traceSha256": "5de7d3ec1989ad3ebcf993df6453cc886d48716904c5ce5aa9242e89965be149"
+      },
+      {
+        "id": "asteroid-2008-ev5",
+        "dpr": 1,
+        "observedDrawCadenceFps": 58.97740403087491,
+        "drawP95Ms": 7.556,
+        "drawCpuP95Ms": 7.542,
+        "largestPassQuads": 348,
+        "preparedHashes": {
+          "prepared/object.json": "2c25ab675adb7647408a371d2959f4bbc99c30b3427492db517f83d8c15120ec",
+          "prepared/scene.json": "332436ed9facde70c978f722556f59c61d0cb06fede9fb23dcb2d98177ad65bc",
+          "runtime-assets.json": "f520abc0937aed7a14c3f9ef80c71c7377dac631781dffaca97a400870fe02da"
+        },
+        "traceSha256": "a542b8ae5eedf72cd4acd1831e49a3e148aa45d9809bc97eaf11d9ad9a40738c"
+      },
+      {
+        "id": "asteroid-2008-ev5",
+        "dpr": 2,
+        "observedDrawCadenceFps": 58.982657494753504,
+        "drawP95Ms": 7.469,
+        "drawCpuP95Ms": 7.46,
+        "largestPassQuads": 348,
+        "preparedHashes": {
+          "prepared/object.json": "2c25ab675adb7647408a371d2959f4bbc99c30b3427492db517f83d8c15120ec",
+          "prepared/scene.json": "332436ed9facde70c978f722556f59c61d0cb06fede9fb23dcb2d98177ad65bc",
+          "runtime-assets.json": "f520abc0937aed7a14c3f9ef80c71c7377dac631781dffaca97a400870fe02da"
+        },
+        "traceSha256": "fa0c7bcf5ad24d11c45ef6cd0efabbf4f98fdecedf0cb0f08d4efbd269ef4823"
+      },
+      {
+        "id": "ra-shalom",
+        "dpr": 1,
+        "observedDrawCadenceFps": 59.39447137072497,
+        "drawP95Ms": 10.931,
+        "drawCpuP95Ms": 10.996,
+        "largestPassQuads": 378,
+        "preparedHashes": {
+          "prepared/object.json": "89e810baa2973ee46308abc1e85a1a8d858397c09d693934fefd998fa4d86c84",
+          "prepared/scene.json": "fdc20e8fd50f786e6f2db847a3763be903567ef73ea3a5aabaa5aa24f916d284",
+          "runtime-assets.json": "5137828a41dda521ec7b2258731d9800dbc221ee972923f8ae79ca5f76296b1e"
+        },
+        "traceSha256": "44326781d1b93e1e3889e96dab004564fbfd627f4f8a3cd63799263211ffccd1"
+      },
+      {
+        "id": "ra-shalom",
+        "dpr": 2,
+        "observedDrawCadenceFps": 59.00195188045753,
+        "drawP95Ms": 10.864,
+        "drawCpuP95Ms": 10.889,
+        "largestPassQuads": 378,
+        "preparedHashes": {
+          "prepared/object.json": "89e810baa2973ee46308abc1e85a1a8d858397c09d693934fefd998fa4d86c84",
+          "prepared/scene.json": "fdc20e8fd50f786e6f2db847a3763be903567ef73ea3a5aabaa5aa24f916d284",
+          "runtime-assets.json": "5137828a41dda521ec7b2258731d9800dbc221ee972923f8ae79ca5f76296b1e"
+        },
+        "traceSha256": "59199514d81b7095d0dc164504e11a18db7b9fd99df79c8a2f8400abd62563a9"
+      },
+      {
+        "id": "asteroid-1992-sk",
+        "dpr": 1,
+        "observedDrawCadenceFps": 58.9936644004925,
+        "drawP95Ms": 9.842,
+        "drawCpuP95Ms": 9.85,
+        "largestPassQuads": 397,
+        "preparedHashes": {
+          "prepared/object.json": "cc70a95ecac6f7c812f9929b865b0e0c870b4316f6a9217f9ee24db4406cb88a",
+          "prepared/scene.json": "98d2b0abc11dd3bd3ab0a7c61be18441ab181e2d4b97ac5984b008e258285271",
+          "runtime-assets.json": "84134f39457d1988130176685ac1c4ceacbeb063a262c61d0cb834d1d80ce1d7"
+        },
+        "traceSha256": "e8cc31eab54a7da39f42411d3698cd3f53fcde0aa1e696d7ace60428a9dbe836"
+      },
+      {
+        "id": "asteroid-1992-sk",
+        "dpr": 2,
+        "observedDrawCadenceFps": 58.960726941586536,
+        "drawP95Ms": 9.11,
+        "drawCpuP95Ms": 9.319,
+        "largestPassQuads": 398,
+        "preparedHashes": {
+          "prepared/object.json": "cc70a95ecac6f7c812f9929b865b0e0c870b4316f6a9217f9ee24db4406cb88a",
+          "prepared/scene.json": "98d2b0abc11dd3bd3ab0a7c61be18441ab181e2d4b97ac5984b008e258285271",
+          "runtime-assets.json": "84134f39457d1988130176685ac1c4ceacbeb063a262c61d0cb834d1d80ce1d7"
+        },
+        "traceSha256": "6bbe18cb924c837132f98fd9beb8e4e1cf2430581b92a12cb210c09484dd071f"
+      },
+      {
+        "id": "asteroid-1998-ml14",
+        "dpr": 1,
+        "observedDrawCadenceFps": 59.398685972324344,
+        "drawP95Ms": 7.324,
+        "drawCpuP95Ms": 7.307,
+        "largestPassQuads": 348,
+        "preparedHashes": {
+          "prepared/object.json": "b807b0eceec937ff09f234df790b075a70736b722fde1895e7f6719cd4dcf42e",
+          "prepared/scene.json": "71c311c7ad03425bbbb15d22d88fac5d209f64e6aca3f144ef931180855744a6",
+          "runtime-assets.json": "072ec3c61022a01123e09f04b6130cc7d1ea3687bcd42473af7dc64c78c4a1af"
+        },
+        "traceSha256": "e1c2d3cf42dfb45b0840cd2c09e6f30858608bdc921b0f6a9cbac4f59791a75f"
+      },
+      {
+        "id": "asteroid-1998-ml14",
+        "dpr": 2,
+        "observedDrawCadenceFps": 58.98481120917553,
+        "drawP95Ms": 7.298,
+        "drawCpuP95Ms": 7.28,
+        "largestPassQuads": 348,
+        "preparedHashes": {
+          "prepared/object.json": "b807b0eceec937ff09f234df790b075a70736b722fde1895e7f6719cd4dcf42e",
+          "prepared/scene.json": "71c311c7ad03425bbbb15d22d88fac5d209f64e6aca3f144ef931180855744a6",
+          "runtime-assets.json": "072ec3c61022a01123e09f04b6130cc7d1ea3687bcd42473af7dc64c78c4a1af"
+        },
+        "traceSha256": "ca9e3b3e52ab6ec0953c57bb8a397b56453810d6945b0e4d5d889567a6c0c698"
+      },
+      {
+        "id": "asteroid-2002-ce26",
+        "dpr": 1,
+        "observedDrawCadenceFps": 59.45848879694679,
+        "drawP95Ms": 3.858,
+        "drawCpuP95Ms": 3.893,
+        "largestPassQuads": 346,
+        "preparedHashes": {
+          "prepared/object.json": "54ba134d0415c66cc6cc22b2d247c7cdd3734920354f948afc19b005869f17dc",
+          "prepared/scene.json": "e72aa716dc5c6fbff5bf81b26bb51267d2af541e018f99daa2c1a8a0650191ed",
+          "runtime-assets.json": "57675448f6036ddf26bbc1705de85dc721c8ef58d10dea24732b2bcdecb292b0"
+        },
+        "traceSha256": "540af3ee97eb93a5610c996d87a5c2f90856893a5f7646187b58ef61c53656fd"
+      },
+      {
+        "id": "asteroid-2002-ce26",
+        "dpr": 2,
+        "observedDrawCadenceFps": 58.586510754475455,
+        "drawP95Ms": 3.838,
+        "drawCpuP95Ms": 3.869,
+        "largestPassQuads": 346,
+        "preparedHashes": {
+          "prepared/object.json": "54ba134d0415c66cc6cc22b2d247c7cdd3734920354f948afc19b005869f17dc",
+          "prepared/scene.json": "e72aa716dc5c6fbff5bf81b26bb51267d2af541e018f99daa2c1a8a0650191ed",
+          "runtime-assets.json": "57675448f6036ddf26bbc1705de85dc721c8ef58d10dea24732b2bcdecb292b0"
+        },
+        "traceSha256": "c71658c0b51761bd82b13f0fb4a7f499415c992ac288aa74ef4940cecd1a37c4"
+      }
+    ]
+  },
+  "visuals": {
+    "defaultGrid": "docs/asteroids-radar-expansion.webp",
+    "inspected": [
+      "All six Shape views with Shadows off",
+      "All six Elevation views with Shadows on",
+      "HW1 mobile framing"
+    ],
+    "mobile": {
+      "id": "asteroid-1996-hw1",
+      "browser": "152.0.7977.76",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 2,
+      "errors": []
+    }
+  }
+}
