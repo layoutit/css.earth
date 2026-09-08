@@ -193,5 +193,5 @@ export function sampleGeo(frame, matrix, pointKm, { maximumSeparationMeters, max
   const gains = ids.map(i => photometry ? lommelSeeligerGain(planes.INCIDENCE_ANGLE_IMAGE[i], planes.EMISSION_ANGLE_IMAGE[i], photometry) : 1);
   if (gains.some(gain => gain === null)) return { reason: 'photometry' };
   return { radiance: ids.reduce((sum, id, i) => sum + planes.IMAGE[id] * weights[i] * gains[i], 0), separationMeters,
-    gain: Math.max(...gains) };
+    gain: Math.max(...gains), maximumEmissionDegrees: Math.max(...ids.map(i => planes.EMISSION_ANGLE_IMAGE[i])) * 180 / Math.PI };
 }
