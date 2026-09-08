@@ -221,6 +221,74 @@
         "scale": 3
       },
       "initialOpacity": 0.29
+    },
+    {
+      "id": "ciel-austral-optical",
+      "label": "Ciel Austral · optical + emission lines",
+      "texturePath": "prepared/ciel-austral-optical.webp",
+      "widthPx": 8192,
+      "heightPx": 8078,
+      "sha256": "82e06a09d4200bcb2b69645e8cbf7c4ce51db8c47f75bf328009110f0dbe25cd",
+      "bytes": 36438886,
+      "pivotCssPx": [
+        30.01456508137558,
+        20.59877682235388,
+        0
+      ],
+      "style": {
+        "width": "8192px",
+        "height": "8078px",
+        "transform": "matrix3d(-0.0007590743453213152,-0.033427135223209496,0,-1.0978563192673705e-7,-0.03336419501248202,0.000785153691870572,0,-1.6437755213803398e-7,0,0,1,0,167.84829294906623,154.32214807793088,0,1)",
+        "backgroundSize": "8192px 8078px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://www.cielaustral.com/galerie/photo95.htm",
+      "credit": "Team Ciel Austral — J. C. Canonne, N. Outters, P. Bernhard, D. Chaplain, L. Bourgon",
+      "registrationNote": "14,400 × 14,200 author original; 8192-pixel inspection preview. RHaVBO: optical RGB enhanced with emission-line data, from the APOD-featured Ciel Austral project; this is its optical color variant. 4,418 matched SMASH stars; 1,473 held out, P90 2.02 SMASH pixels, 74.1% matched hull; remaining outer area extrapolated. Shared saved image-to-density visual fit applied, not a physical simulation registration. Detailed central field, not full stellar outskirts. Comparison candidate only; no cloud processing.",
+      "initialPlacement": {
+        "x": 1.5784376507778726,
+        "y": 3.8535198246289712,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "initialOpacity": 0.29
+    },
+    {
+      "id": "naztronomy-optical",
+      "label": "Naztronomy · optical · 3K preview",
+      "texturePath": "prepared/naztronomy-optical.webp",
+      "widthPx": 3074,
+      "heightPx": 3163,
+      "sha256": "35560e5b3eaa7924ef40efe007505f5913d13bdd4b1618d0b60e4cf75b8feba7",
+      "bytes": 5778172,
+      "pivotCssPx": [
+        14.596854522466355,
+        29.85953283930403,
+        0
+      ],
+      "style": {
+        "width": "3074px",
+        "height": "3163px",
+        "transform": "matrix3d(0.005044684380637338,-0.09120921671024501,0,3.7355547964211114e-7,-0.09104449583262585,-0.0049295526771829905,0,5.854411931604301e-7,0,0,1,0,150.85194050869404,177.88897667753355,0,1)",
+        "backgroundSize": "3074px 3163px",
+        "backgroundPosition": "0px 0px"
+      },
+      "sourcePageUrl": "https://www.naztronomy.com/post/71-hour-12-panel-260-megapixel-mosaic-of-the-large-magellanic-cloud",
+      "credit": "Nazmus Nasir / Naztronomy; Kagga Kamma Remote Observatory",
+      "registrationNote": "3,074 × 3,163 author-hosted 0.25× preview; the advertised 160 MP AstroBin version was unavailable. Author page labels RGB, while the retained footer mentions dual narrowband; colors are a processed optical composite. 4,861 matched SMASH stars; 1,621 held out, P90 0.66 SMASH pixels; 73.9% matched hull, outer area extrapolated. Shared saved image-to-density visual fit applied. Catalogue comparison only; no cloud processing.",
+      "initialPlacement": {
+        "x": 0.8182042163296774,
+        "y": 3.517961474325079,
+        "z": 0,
+        "rotationX": 0,
+        "rotationY": 0,
+        "rotationZ": 39,
+        "scale": 3
+      },
+      "initialOpacity": 0.29
     }
   ]
 }

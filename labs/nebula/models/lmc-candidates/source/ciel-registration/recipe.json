@@ -1,0 +1,36 @@
+{
+  "targets": [
+    {
+      "images": [
+        {
+          "id": "ciel-austral-optical",
+          "wcs": null
+        },
+        {
+          "id": "smash-original",
+          "wcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6737,
+              6536
+            ],
+            "referencePixel": [
+              3368.5,
+              3268
+            ],
+            "referenceValueDeg": [
+              78.7957840796,
+              -71.566506171
+            ],
+            "scaleDeg": [
+              -0.00138784675876,
+              0.00138784675876
+            ],
+            "rotationDeg": -16.920000000000027
+          }
+        }
+      ]
+    }
+  ]
+}

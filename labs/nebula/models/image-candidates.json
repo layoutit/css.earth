@@ -112,8 +112,8 @@
               0.1190037618003177,
               0.596664958469161,
               -1479.567248000351,
-              -2.639112449735194e-06,
-              -1.2871658418376004e-06,
+              -0.000002639112449735194,
+              -0.0000012871658418376004,
               1
             ]
           },
@@ -176,8 +176,8 @@
               6000
             ],
             "referencePixel": [
-              3000.0,
-              3000.0
+              3000,
+              3000
             ],
             "referenceValueDeg": [
               78.76,
@@ -187,7 +187,7 @@
               -0.0040595312971682,
               0.0040595312971682
             ],
-            "rotationDeg": 0.0
+            "rotationDeg": 0
           },
           "wcsSource": {
             "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
@@ -236,9 +236,9 @@
               -0.4729033967977122,
               -0.9970462494720148,
               5409.185308143818,
-              2.3045914082800085e-07,
-              -4.331845136939875e-07,
-              1.0
+              2.3045914082800085e-7,
+              -4.331845136939875e-7,
+              1
             ]
           },
           "registrationNote": "Measured registration to SMASH using 592 unique point sources; 198 held out of final fit, median 0.59 SMASH pixels and P90 1.12 pixels (4.996 arcsec/pixel). Homography is an approximation; validated point hull covers 60.2% of source raster, outer area extrapolated. No per-pixel distances or simulation correspondence implied. The same saved image-to-density visual fit is applied as for SMASH. Import and alignment preview only; cloud processing awaits explicit approval.",
@@ -310,9 +310,9 @@
               0.638098978801953,
               2.5403077521072284,
               -3365.643085895814,
-              -7.914618911678029e-07,
-              -3.6857204504082364e-06,
-              1.0
+              -7.914618911678029e-7,
+              -0.0000036857204504082364,
+              1
             ]
           },
           "wcsSource": {
@@ -322,6 +322,112 @@
           },
           "registrationNote": "4111 × 5000 optical mosaic from the SMASH survey team. Wider irregular field footprint; black regions are missing observations, not zero light. 20,661 star matches to current SMASH; 6,887 held out, P90 1.82 SMASH pixels (~9.1 arcsec). Central 30% verified; outer placement extrapolated. Shared saved image-to-density visual fit applied. Visible exposure/field seams retained. Catalogue preview only; no cloud processing.",
           "maxPixels": 5000
+        },
+        {
+          "id": "ciel-austral-optical",
+          "label": "Ciel Austral · optical + emission lines",
+          "path": ".local/nebula-lab/amateur-candidates/ciel-austral/photo95fb.jpg",
+          "sha256": "70691426d5c57b19bbd539ee2d48a51590f3ee9a388fea8abca280b286bde109",
+          "url": "https://www.cielaustral.com/galerie/photo95fb.jpg",
+          "sourcePageUrl": "https://www.cielaustral.com/galerie/photo95.htm",
+          "credit": "Team Ciel Austral — J. C. Canonne, N. Outters, P. Bernhard, D. Chaplain, L. Bourgon",
+          "license": "Copyright Team Ciel Austral; no open reuse license found on the author page. APOD explicitly credits image copyright to the authors.",
+          "registration": {
+            "referenceWcs": {
+              "projection": "TAN",
+              "coordinateFrame": "ICRS",
+              "referenceDimension": [
+                6737,
+                6536
+              ],
+              "referencePixel": [
+                3368.5,
+                3268
+              ],
+              "referenceValueDeg": [
+                78.7957840796,
+                -71.566506171
+              ],
+              "scaleDeg": [
+                -0.00138784675876,
+                0.00138784675876
+              ],
+              "rotationDeg": -16.920000000000027
+            },
+            "referenceWidthPx": 6737,
+            "referenceHeightPx": 6536,
+            "imageToReferenceMatrix": [
+              0.3016441793451983,
+              -0.09883686206088145,
+              2226.8443190392154,
+              0.09947913427837395,
+              0.3018408307613066,
+              -1805.6111123004694,
+              -5.690303454969923e-8,
+              2.2483620945215482e-7,
+              1
+            ]
+          },
+          "wcsSource": {
+            "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+            "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+            "description": "Star registration to the pinned original SMASH image, whose publisher AVM supplies the sky anchor. See source/ciel-austral-registration.json."
+          },
+          "registrationNote": "14,400 × 14,200 author original; 8192-pixel inspection preview. RHaVBO: optical RGB enhanced with emission-line data, from the APOD-featured Ciel Austral project; this is its optical color variant. 4,418 matched SMASH stars; 1,473 held out, P90 2.02 SMASH pixels, 74.1% matched hull; remaining outer area extrapolated. Shared saved image-to-density visual fit applied, not a physical simulation registration. Detailed central field, not full stellar outskirts. Comparison candidate only; no cloud processing.",
+          "maxPixels": 8192
+        },
+        {
+          "id": "naztronomy-optical",
+          "label": "Naztronomy · optical · 3K preview",
+          "path": ".local/nebula-lab/amateur-candidates/naztronomy/naztronomy-optical.jpg",
+          "sha256": "72722af6da33f19b6d807ed583408fb39c9ecf91694dc8a42428197605d760a2",
+          "url": "https://wp.naztronomy.com/wp/wp-content/uploads/2026/04/LMC_RGB_0.25x.jpg",
+          "sourcePageUrl": "https://www.naztronomy.com/post/71-hour-12-panel-260-megapixel-mosaic-of-the-large-magellanic-cloud",
+          "credit": "Nazmus Nasir / Naztronomy; Kagga Kamma Remote Observatory",
+          "license": "Copyright Naztronomy; no open reuse license identified. Original embedded image credit retained. See source/naztronomy-source.json.",
+          "registration": {
+            "referenceWcs": {
+              "projection": "TAN",
+              "coordinateFrame": "ICRS",
+              "referenceDimension": [
+                6737,
+                6536
+              ],
+              "referencePixel": [
+                3368.5,
+                3268
+              ],
+              "referenceValueDeg": [
+                78.7957840796,
+                -71.566506171
+              ],
+              "scaleDeg": [
+                -0.00138784675876,
+                0.00138784675876
+              ],
+              "rotationDeg": -16.920000000000027
+            },
+            "referenceWidthPx": 6737,
+            "referenceHeightPx": 6536,
+            "imageToReferenceMatrix": [
+              1.4832257564443856,
+              -0.35694316342096083,
+              1768.3059640104268,
+              0.3640963203923395,
+              1.4836140277343823,
+              -1646.866379009894,
+              2.825573920312436e-7,
+              0.0000021142304889638075,
+              1
+            ]
+          },
+          "wcsSource": {
+            "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+            "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+            "description": "Star registration to the pinned original SMASH image, whose publisher AVM supplies the sky anchor. See source/naztronomy-direction-gate.json."
+          },
+          "registrationNote": "3,074 × 3,163 author-hosted 0.25× preview; the advertised 160 MP AstroBin version was unavailable. Author page labels RGB, while the retained footer mentions dual narrowband; colors are a processed optical composite. 4,861 matched SMASH stars; 1,621 held out, P90 0.66 SMASH pixels; 73.9% matched hull, outer area extrapolated. Shared saved image-to-density visual fit applied. Catalogue comparison only; no cloud processing.",
+          "maxPixels": 8192
         }
       ],
       "alignment": {

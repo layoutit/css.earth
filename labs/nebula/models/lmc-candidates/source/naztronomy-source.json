@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-nebula-image-source-receipt@1",
+  "id": "naztronomy-optical",
+  "sourcePage": "https://www.naztronomy.com/post/71-hour-12-panel-260-megapixel-mosaic-of-the-large-magellanic-cloud",
+  "astrobinPage": "https://app.astrobin.com/i/7thh0y",
+  "mediaRecordUrl": "https://www.naztronomy.com/wp/wp-json/wp/v2/media?search=LMC_RGB_0.25x",
+  "mediaRecordId": 852,
+  "publishedOriginalImage": "LMC_RGB_0.25x.jpg",
+  "artifact": {
+    "url": "https://wp.naztronomy.com/wp/wp-content/uploads/2026/04/LMC_RGB_0.25x.jpg",
+    "path": ".local/nebula-lab/amateur-candidates/naztronomy/naztronomy-optical.jpg",
+    "bytes": 6856445,
+    "sha256": "72722af6da33f19b6d807ed583408fb39c9ecf91694dc8a42428197605d760a2",
+    "dimensions": [
+      3074,
+      3163
+    ],
+    "metadata": [
+      "jfif",
+      "jfif_version",
+      "dpi",
+      "jfif_unit",
+      "jfif_density",
+      "exif",
+      "icc_profile"
+    ],
+    "exif": {
+      "20752": "b'\\x01'",
+      "20753": "3780",
+      "770": "sRGB IEC61966-2.1",
+      "20754": "3780"
+    }
+  },
+  "credit": "Naztronomy; observations with Dave and Chris at Kagga Kamma Remote Observatory, South Africa",
+  "license": {
+    "status": "Copyright retained by photographer; no explicit redistribution license found on the source page or public media record.",
+    "sourceFooter": "Copyright \u00a92011\u2013Naztronomy"
+  },
+  "sourceClaims": {
+    "publishedFullMosaicMegapixels": 160,
+    "uncroppedProjectMegapixels": 260,
+    "integration": "71h10m",
+    "equipment": [
+      "AskarSQA85",
+      "QHYCCD QHY268ProC",
+      "ProxiskyUMi20S"
+    ],
+    "authorCaption": "Large Magellanic Cloud in full Broadband(RGB).",
+    "embeddedFooter": "Large Magellanic Cloud12Panel RGB+Dual Narrowband Mosaic",
+    "captionDiscrepancy": "Page labels the selected file broadbandRGB but the embedded footer mentions dual narrowband. Exact band composition is not independently established; use neutral optical label.",
+    "downloadedResolution": "Author quarter-scale derivative3074\u00d73163(~9.72MP), not the160MP native mosaic. AstroBin returned403; no private or authenticated access was attempted."
+  },
+  "verification": {
+    "sourceDownloaded": true,
+    "previewVisuallyInspected": true,
+    "heldoutContactSheetVisuallyInspected": true,
+    "nativeWcsAvailable": false,
+    "registrationPass": true,
+    "matchedStars": 4861,
+    "heldoutStars": 1621,
+    "matchedHullFraction": 0.7385215036137114,
+    "heldoutResidualSmashNativePixels": {
+      "median": 0.30445824894472007,
+      "p90": 0.6626044949113059,
+      "max": 1.8139811399319983
+    },
+    "registrationFile": "naztronomy-direction-gate.json",
+    "replayDirectory": "naztronomy-registration",
+    "noCloudProcessing": true,
+    "creditStripRetained": true
+  },
+  "limits": [
+    "Registration is empirically verified within the matched hull; outer corners extrapolate.",
+    "Image-to-image alignment uses SMASH publisher AVM as sky anchor. It does not establish physical agreement with the simulated density.",
+    "This source remains a cropped optical field, not complete observed coverage of the extended simulated stellar outskirts."
+  ]
+}

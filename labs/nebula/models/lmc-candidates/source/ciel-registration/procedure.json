@@ -1,0 +1,79 @@
+{
+  "schema": "cssearth-registration-procedure@1",
+  "candidateId": "ciel-austral-optical",
+  "workingDirectory": "repository root",
+  "pythonExecutable": ".local/nebula-lab/registration/venv/bin/python",
+  "observedPythonVersion": "3.9.6",
+  "dependencies": {
+    "opencv-python-headless": "4.11.0.86",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "astropy": "6.0.1"
+  },
+  "packaging": {
+    "baseValidatorPath": "labs/nebula/src/validate-image-registration.py",
+    "baseValidatorSha256": "c618151fc317a19eba8308b24e28ee20ae1bcb6e1a2d3b107e80fcb5c8044e50",
+    "reconstructedHelperPath": ".local/nebula-lab/amateur-candidates/ciel-austral/registration/validate-ciel.py",
+    "reconstructedHelperSha256": "35e612587ecb9e1d6161e9d3536c13b03c26aec5abe8fa93769cb20d2ca790b2",
+    "patchFile": "validate-ciel.patch",
+    "patchSha256": "4d0b8c35d2b3a098326dc6b9ed0b8b808cddac4149340aa829115487a545c5a5",
+    "preservedFiles": [
+      {
+        "file": "recipe.json",
+        "sha256": "34b946928fa42915863d993e9bfe6811c05219f3695dcec2ee955a1b236af9e3"
+      }
+    ],
+    "referenceRecipePath": "labs/nebula/models/lmc-candidates/source/ciel-registration/recipe.json",
+    "referenceRecipeSha256": "34b946928fa42915863d993e9bfe6811c05219f3695dcec2ee955a1b236af9e3"
+  },
+  "inputs": [
+    {
+      "path": ".local/nebula-lab/amateur-candidates/ciel-austral/photo95fb.jpg",
+      "sha256": "70691426d5c57b19bbd539ee2d48a51590f3ee9a388fea8abca280b286bde109",
+      "url": "https://www.cielaustral.com/galerie/photo95fb.jpg"
+    },
+    {
+      "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
+      "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+      "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif"
+    }
+  ],
+  "commands": [
+    [
+      ".local/nebula-lab/registration/venv/bin/python",
+      ".local/nebula-lab/amateur-candidates/ciel-austral/registration/validate-ciel.py",
+      "--source",
+      ".local/nebula-lab/amateur-candidates/ciel-austral/photo95fb.jpg",
+      "--reference",
+      ".local/nebula-lab/source-originals/noirlab2030a.tif",
+      "--source-id",
+      "ciel-austral-optical",
+      "--recipe",
+      ".local/nebula-lab/amateur-candidates/ciel-austral/registration/recipe.json",
+      "--output",
+      ".local/nebula-lab/amateur-candidates/ciel-austral/registration"
+    ]
+  ],
+  "expectedEvidence": {
+    "pass": true,
+    "uniqueMatchedStars": 4418,
+    "heldOutCount": 1473,
+    "heldOutP90SmashPixels": 2.015208063540263,
+    "matchedSourceHullFraction": 0.740594178119875,
+    "shiftedControlConfirmations": [
+      0,
+      0,
+      0
+    ]
+  },
+  "expectedPositiveSignals": [
+    "STAR_MAPS_WRITTEN before registration",
+    "DIRECTION_GATE pass with 4418 matched stars and 1473 held out"
+  ],
+  "notes": [
+    "No source WCS is published; the patch records its absence instead of inventing sky coordinates.",
+    "All matching thresholds, held-out fitting and negative-control gates remain unchanged from the pinned shared validator.",
+    "Matched source hull is 74.1%; outer 25.9% is extrapolated.",
+    "No cloud processing or scene baking is included."
+  ]
+}

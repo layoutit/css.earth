@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-source-image-receipt@1",
+  "source": {
+    "path": ".local/nebula-lab/amateur-candidates/ciel-austral/photo95fb.jpg",
+    "url": "https://www.cielaustral.com/galerie/photo95fb.jpg",
+    "sha256": "70691426d5c57b19bbd539ee2d48a51590f3ee9a388fea8abca280b286bde109",
+    "bytes": 91701377,
+    "dimensions": [
+      14400,
+      14200
+    ],
+    "variant": "RHaVBO with TEC160",
+    "exifOrientation": null,
+    "exifOrientationPresent": false,
+    "colorSpace": "sRGB"
+  },
+  "sourcePageUrl": "https://www.cielaustral.com/galerie/photo95.htm",
+  "apodContextUrl": "https://apod.nasa.gov/apod/ap190503.html",
+  "credit": "Team Ciel Austral \u2014 J. C. Canonne, N. Outters, P. Bernhard, D. Chaplain, L. Bourgon",
+  "license": "Copyright Team Ciel Austral; no open reuse license found on the author page. APOD explicitly credits image copyright to the authors.",
+  "licenseEvidence": [
+    {
+      "url": "https://apod.nasa.gov/apod/ap190503.html",
+      "statement": "Image Credit & Copyright: Team Ciel Austral; author names follow."
+    },
+    {
+      "url": "https://www.cielaustral.com/galerie/photo95.htm",
+      "statement": "Author gallery labels this version RHaVBO; no explicit open license stated."
+    }
+  ],
+  "limitations": [
+    "Broadband optical colors include narrowband line enhancement; not unmodified natural-color photometry.",
+    "The APOD page discusses the same project but displays a different color version; the pinned candidate is the author RHaVBO file.",
+    "No WCS assumed from APOD approximate angular coverage."
+  ],
+  "cloudProcessingPerformed": false,
+  "pageEvidence": [
+    {
+      "path": ".local/nebula-lab/amateur-candidates/ciel-austral/author-page.html",
+      "sha256": "55ca6a17682cb3fc7ae13d6c8d6747abbafe047668151495d9c0507e4271a848"
+    },
+    {
+      "path": ".local/nebula-lab/amateur-candidates/ciel-austral/apod-page.html",
+      "sha256": "4e675c187834024550444a625142868984f7b67158e717e6b5446910f7e39795"
+    }
+  ],
+  "inspectedPreview": {
+    "path": ".local/nebula-lab/amateur-candidates/ciel-austral/source-preview.jpg",
+    "sha256": "17dbb69a8bf08056e1b902851b47eb355fb6a17e1d822ed8e4612467e2200964",
+    "observations": "Full field preserved; broadly optical star colors with stronger red/pink line emission. RHaVBO includes narrowband enhancement, not calibrated natural-color photometry."
+  },
+  "registration": {
+    "gatePath": "labs/nebula/models/lmc-candidates/source/ciel-austral-registration.json",
+    "gateSha256": "1388e7739c02e81a92cbdd7e39cd7ef33b4a271202d46689e1ed0665c90577a8",
+    "pass": true
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "schema": "cssearth-image-direction-gate@1",
+  "status": "pass",
+  "pass": true,
+  "gates": {
+    "atLeast30Identities": true,
+    "atLeast10HeldOut": true,
+    "sourceHullAtLeast25Percent": true,
+    "heldOutP90Under3ReferenceNativePixels": true,
+    "nonReflectedAcrossImage": true,
+    "identityCountOver5xScrambledControls": true,
+    "allWrongTransformsMedianOver100ReferencePixels": true
+  },
+  "imageSha256": "72722af6da33f19b6d807ed583408fb39c9ecf91694dc8a42428197605d760a2",
+  "coordinateConvention": "Zero-based top-left raster pixel centres; edges at -.5 and size-.5. Resize: x_native=(x_work+.5)*native_width/work_width-.5, likewise y. AVM/FITS: x_fits=(x_native+.5)*reference_width/native_width+.5; y_fits=reference_height+.5-(y_native+.5)*reference_height/native_height. Row-major homography maps source native centres to reference native centres.",
+  "source": {
+    "path": ".local/nebula-lab/amateur-candidates/naztronomy/naztronomy-optical.jpg",
+    "sha256": "72722af6da33f19b6d807ed583408fb39c9ecf91694dc8a42428197605d760a2",
+    "nativeDimensions": [
+      3074,
+      3163
+    ],
+    "workingDimensions": [
+      3074,
+      3163
+    ],
+    "wcs": null
+  },
+  "reference": {
+    "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
+    "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+    "nativeDimensions": [
+      6737,
+      6536
+    ],
+    "workingDimensions": [
+      5000,
+      4851
+    ],
+    "wcs": {
+      "projection": "TAN",
+      "coordinateFrame": "ICRS",
+      "referenceDimension": [
+        6737,
+        6536
+      ],
+      "referencePixel": [
+        3368.5,
+        3268
+      ],
+      "referenceValueDeg": [
+        78.7957840796,
+        -71.566506171
+      ],
+      "scaleDeg": [
+        -0.00138784675876,
+        0.00138784675876
+      ],
+      "rotationDeg": -16.920000000000027
+    }
+  },
+  "starMapsExtractedBeforeRegistration": true,
+  "cloudProcessingPerformed": false,
+  "descriptorSeed": {
+    "rawMatches": 6125,
+    "coherentMatches": 2620,
+    "reflectionRequired": false,
+    "sourceWorkingDimension": 3000,
+    "referenceWorkingDimension": 3500,
+    "ratioThreshold": 0.9
+  },
+  "uniqueMatchedStars": 4861,
+  "trainingCount": 3240,
+  "trainingInlierCount": 3231,
+  "heldOutCount": 1621,
+  "heldOutResidualReferenceNativePixels": {
+    "median": 0.30445824894472007,
+    "p90": 0.6626044949113059,
+    "max": 1.8139811399319983
+  },
+  "matchedSourceHullFraction": 0.7385215036137114,
+  "heldOutSourceHullFraction": 0.7374550036730806,
+  "matchedSourceBoundingBoxNativePixels": [
+    [
+      4.674109821310276,
+      363.31455118038934
+    ],
+    [
+      3068.2449759147685,
+      3082.564757386
+    ]
+  ],
+  "publisherWcs": {
+    "available": false,
+    "pass": false,
+    "reason": "No published WCS for this source; no angular extent inferred from field-union description."
+  },
+  "verifiedRegistration": {
+    "referenceWcs": {
+      "projection": "TAN",
+      "coordinateFrame": "ICRS",
+      "referenceDimension": [
+        6737,
+        6536
+      ],
+      "referencePixel": [
+        3368.5,
+        3268
+      ],
+      "referenceValueDeg": [
+        78.7957840796,
+        -71.566506171
+      ],
+      "scaleDeg": [
+        -0.00138784675876,
+        0.00138784675876
+      ],
+      "rotationDeg": -16.920000000000027
+    },
+    "referenceWidthPx": 6737,
+    "referenceHeightPx": 6536,
+    "imageToReferenceMatrix": [
+      1.4832257564443856,
+      -0.35694316342096083,
+      1768.3059640104268,
+      0.3640963203923395,
+      1.4836140277343823,
+      -1646.866379009894,
+      2.825573920312436e-07,
+      2.1142304889638075e-06,
+      1.0
+    ]
+  },
+  "localScaleReferencePixelsPerSourcePixel": [
+    1.5206167841490157,
+    1.5192304472853566
+  ],
+  "localRotationDeg": 13.787888327011789,
+  "jacobianDeterminantsCentreAndCorners": [
+    2.310167317132329,
+    2.3364494341645354,
+    2.3303718029029823,
+    2.2842779143416756,
+    2.290195723705416
+  ],
+  "negativeControls": {
+    "mirror-x": {
+      "median": 4052.512744437319,
+      "p90": 4553.232625906695,
+      "max": 4667.551906622607
+    },
+    "mirror-y": {
+      "median": 1714.1795991245085,
+      "p90": 4168.065638351693,
+      "max": 4564.66152851665
+    },
+    "rotate-90": {
+      "median": 3230.2210818484245,
+      "p90": 3995.0708977554546,
+      "max": 4586.186976950246
+    },
+    "rotate-180": {
+      "median": 4570.878626930953,
+      "p90": 5657.776882929426,
+      "max": 6487.013434089975
+    },
+    "scale-0.9": {
+      "median": 228.2144429082643,
+      "p90": 281.9243146615882,
+      "max": 322.537213346658
+    },
+    "scale-1.1": {
+      "median": 228.31623496700104,
+      "p90": 281.8550264550207,
+      "max": 322.64707101056473
+    },
+    "scrambled-shifts": [
+      {
+        "offsetWorkingReferencePixels": [
+          40,
+          0
+        ],
+        "nearbyCandidates": 2440,
+        "patternMatchesAbove035": 0
+      },
+      {
+        "offsetWorkingReferencePixels": [
+          0,
+          40
+        ],
+        "nearbyCandidates": 2546,
+        "patternMatchesAbove035": 0
+      },
+      {
+        "offsetWorkingReferencePixels": [
+          100,
+          -70
+        ],
+        "nearbyCandidates": 2319,
+        "patternMatchesAbove035": 0
+      }
+    ]
+  },
+  "limitations": [
+    "SMASH publisher AVM is the sky anchor; no absolute catalogue solution.",
+    "Infrared/optical display composite point-source identities; not photometric or spectroscopic identities.",
+    "All final held-out points excluded from RANSAC and final least squares; their candidate discovery uses the shared descriptor seed and a 5 working-pixel association window.",
+    "Registration is empirically verified within the matched hull; outer corners are extrapolated.",
+    "Publication image may retain mosaic/projective distortions; residuals describe this image pair only."
+  ]
+}

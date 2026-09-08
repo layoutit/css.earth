@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
     "path": "labs/nebula/models/image-candidates.json",
-    "sha256": "4ae1afd0f936d33789b571d28ff8fa2c3df84ccc579e9df5acc1f085215d4b5f"
+    "sha256": "4474790b042bab7cd4f577aeee6f41005ab637af3c6e9be7ad78bfd72ab40cef"
   },
   "frame": {
     "path": "labs/nebula/models/lmc-particles/object.json",
@@ -534,6 +534,182 @@
         "height": 5000,
         "sha256": "06aa4f8efd7333a409401687e77d3afbdce7e7236742798729adce053e2e02cc",
         "bytes": 7517784
+      }
+    },
+    {
+      "input": {
+        "id": "ciel-austral-optical",
+        "label": "Ciel Austral · optical + emission lines",
+        "path": ".local/nebula-lab/amateur-candidates/ciel-austral/photo95fb.jpg",
+        "sha256": "70691426d5c57b19bbd539ee2d48a51590f3ee9a388fea8abca280b286bde109",
+        "url": "https://www.cielaustral.com/galerie/photo95fb.jpg",
+        "sourcePageUrl": "https://www.cielaustral.com/galerie/photo95.htm",
+        "credit": "Team Ciel Austral — J. C. Canonne, N. Outters, P. Bernhard, D. Chaplain, L. Bourgon",
+        "license": "Copyright Team Ciel Austral; no open reuse license found on the author page. APOD explicitly credits image copyright to the authors.",
+        "registration": {
+          "referenceWcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6737,
+              6536
+            ],
+            "referencePixel": [
+              3368.5,
+              3268
+            ],
+            "referenceValueDeg": [
+              78.7957840796,
+              -71.566506171
+            ],
+            "scaleDeg": [
+              -0.00138784675876,
+              0.00138784675876
+            ],
+            "rotationDeg": -16.920000000000027
+          },
+          "referenceWidthPx": 6737,
+          "referenceHeightPx": 6536,
+          "imageToReferenceMatrix": [
+            0.3016441793451983,
+            -0.09883686206088145,
+            2226.8443190392154,
+            0.09947913427837395,
+            0.3018408307613066,
+            -1805.6111123004694,
+            -5.690303454969923e-8,
+            2.2483620945215482e-7,
+            1
+          ]
+        },
+        "wcsSource": {
+          "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+          "description": "Star registration to the pinned original SMASH image, whose publisher AVM supplies the sky anchor. See source/ciel-austral-registration.json."
+        },
+        "registrationNote": "14,400 × 14,200 author original; 8192-pixel inspection preview. RHaVBO: optical RGB enhanced with emission-line data, from the APOD-featured Ciel Austral project; this is its optical color variant. 4,418 matched SMASH stars; 1,473 held out, P90 2.02 SMASH pixels, 74.1% matched hull; remaining outer area extrapolated. Shared saved image-to-density visual fit applied, not a physical simulation registration. Detailed central field, not full stellar outskirts. Comparison candidate only; no cloud processing.",
+        "maxPixels": 8192
+      },
+      "sourceDimensions": [
+        14400,
+        14200
+      ],
+      "verticesUnits": [
+        [
+          3.0864429615586175,
+          3.356965858981325,
+          -6.328271240363392e-15
+        ],
+        [
+          -2.392410521060859,
+          3.2355090182424764,
+          5.329070518200751e-15
+        ],
+        [
+          -2.268461774089622,
+          -2.162536642044391,
+          9.325873406851315e-15
+        ],
+        [
+          3.2175648092781053,
+          -2.0360570490268817,
+          3.885780586188048e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/ciel-austral-optical.webp",
+        "width": 8192,
+        "height": 8078,
+        "sha256": "82e06a09d4200bcb2b69645e8cbf7c4ce51db8c47f75bf328009110f0dbe25cd",
+        "bytes": 36438886
+      }
+    },
+    {
+      "input": {
+        "id": "naztronomy-optical",
+        "label": "Naztronomy · optical · 3K preview",
+        "path": ".local/nebula-lab/amateur-candidates/naztronomy/naztronomy-optical.jpg",
+        "sha256": "72722af6da33f19b6d807ed583408fb39c9ecf91694dc8a42428197605d760a2",
+        "url": "https://wp.naztronomy.com/wp/wp-content/uploads/2026/04/LMC_RGB_0.25x.jpg",
+        "sourcePageUrl": "https://www.naztronomy.com/post/71-hour-12-panel-260-megapixel-mosaic-of-the-large-magellanic-cloud",
+        "credit": "Nazmus Nasir / Naztronomy; Kagga Kamma Remote Observatory",
+        "license": "Copyright Naztronomy; no open reuse license identified. Original embedded image credit retained. See source/naztronomy-source.json.",
+        "registration": {
+          "referenceWcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6737,
+              6536
+            ],
+            "referencePixel": [
+              3368.5,
+              3268
+            ],
+            "referenceValueDeg": [
+              78.7957840796,
+              -71.566506171
+            ],
+            "scaleDeg": [
+              -0.00138784675876,
+              0.00138784675876
+            ],
+            "rotationDeg": -16.920000000000027
+          },
+          "referenceWidthPx": 6737,
+          "referenceHeightPx": 6536,
+          "imageToReferenceMatrix": [
+            1.4832257564443856,
+            -0.35694316342096083,
+            1768.3059640104268,
+            0.3640963203923395,
+            1.4836140277343823,
+            -1646.866379009894,
+            2.825573920312436e-7,
+            0.0000021142304889638075,
+            1
+          ]
+        },
+        "wcsSource": {
+          "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+          "description": "Star registration to the pinned original SMASH image, whose publisher AVM supplies the sky anchor. See source/naztronomy-direction-gate.json."
+        },
+        "registrationNote": "3,074 × 3,163 author-hosted 0.25× preview; the advertised 160 MP AstroBin version was unavailable. Author page labels RGB, while the retained footer mentions dual narrowband; colors are a processed optical composite. 4,861 matched SMASH stars; 1,621 held out, P90 0.66 SMASH pixels; 73.9% matched hull, outer area extrapolated. Shared saved image-to-density visual fit applied. Catalogue comparison only; no cloud processing.",
+        "maxPixels": 8192
+      },
+      "sourceDimensions": [
+        3074,
+        3163
+      ],
+      "verticesUnits": [
+        [
+          3.5577795335506712,
+          3.0170388101738808,
+          1.7763568394002505e-15
+        ],
+        [
+          -2.0474120470002615,
+          3.323369748693404,
+          6.217248937900877e-15
+        ],
+        [
+          -2.354542842264043,
+          -2.4250136140404215,
+          9.103828801926284e-15
+        ],
+        [
+          3.2399364772199633,
+          -2.737367075364058,
+          1.9984014443252818e-15
+        ]
+      ],
+      "output": {
+        "texturePath": "prepared/naztronomy-optical.webp",
+        "width": 3074,
+        "height": 3163,
+        "sha256": "35560e5b3eaa7924ef40efe007505f5913d13bdd4b1618d0b60e4cf75b8feba7",
+        "bytes": 5778172
       }
     }
   ],
