@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "acfb70d9e104a2da9645385ccd7e691112d5c1179d5c069305975f4ddf54c0e4"
+          "sha256": "0f3768df85d757cac3ae857d9293260e46edc7e90605c6f3fee063974591635b"
         },
         {
           "id": "rotation",
@@ -113,6 +113,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f9116583e985596ed24f07cfa1a98ac2c72d746b0aaa9e06a906717541700995"
+    "sha256": "019a167151e4de923ebf54210f14144187eaa5614cdaf483a0e4f8f6935c31df"
   }
 }
