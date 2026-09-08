@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 40.57815780620991,
+  "declinationDegrees": 83.53745027635604,
+  "phase": "arbitrary-display-phase",
+  "displayMeridianDegrees": 0,
+  "source": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/pck/aegaeon_mst2013.bpc",
+  "coordinateSystem": "ICRF/J2000",
+  "qualification": "Frozen historical Aegaeon pole from the mission BPC at 2015-12-19T12:32:14.886 UTC, arbitrary display meridian; not a current spin prediction."
+}

@@ -61,6 +61,9 @@ const body = (
 ): BodyData => ({ id, name, horizonsCode, meanRadiusKm, gravitationalParameterKm3PerS2, parent })
 
 export const BODIES: Record<BodyId, BodyData> = {
+  polydeuces: body('polydeuces', 'Polydeuces', '634', 1.525973578806757, 0, 'saturn'),
+  anthe: body('anthe', 'Anthe', '649', 0.5, 0, 'saturn'),
+  aegaeon: body('aegaeon', 'Aegaeon', '653', 0.327106631018859, 0, 'saturn'),
   bianca: body('bianca', 'Bianca', '708', 25.67646409198381, 0, 'uranus'),
   cressida: body('cressida', 'Cressida', '709', 39.78509749046438, 0.01227, 'uranus'),
   desdemona: body('desdemona', 'Desdemona', '710', 32.01203974041056, 0, 'uranus'),
