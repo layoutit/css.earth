@@ -79,10 +79,10 @@ and images; it does not derive geometry, rasters, atlases or source indices.
 
 The existing pager selects complete local replacement groups. Ready regions can
 publish independently; unrelated metadata cannot hold all imagery back. A
-covering ancestor survives until its own replacement is ready. Known children
-can load even while sibling metadata remains unknown; those pending branches
-keep their lineage and ancestor coverage. Coarse subtree bounds continue to
-include polar detail that their own images may not contain.
+covering ancestor survives until its own replacement is ready. Metadata admission
+prioritizes covering branches before deeper detail, so fine records cannot
+indefinitely crowd out adjacent coarse coverage. Coarse subtree bounds continue
+to include polar detail that their own images may not contain.
 
 Base imagery has 512 retained slots, at most 256 displayed pieces, a 128 MiB
 conservative decoded reservation and a separate 96-directory / 12 MiB metadata

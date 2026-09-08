@@ -156,6 +156,7 @@ function selectFacePages(plan: PreparedPagePlan, pages: ReadonlyMap<string, Prep
 function selectWmtsTree(plan: PreparedPagePlan,pages: ReadonlyMap<string, PreparedPage>,matrix: readonly number[],scale: number,viewport: PageViewport,projected=new Map<string, Entry>(),refinementBudget?: FineRefinementBudget): PageSelection{
   const directories=new Map<string, PreparedReference>(),capacity=Math.floor(plan.poolSize/2),byteCapacity=Math.floor(plan.maximumDecodedBytes/2);
   const directoryPriority=new Map<string, number>();
+  const directoryLevel=new Map<string, number>();
   const inspect=(key: string): Entry=>{
     const node=pages.get(key);if(!node)throw new Error(`Missing prepared WMTS tree node ${key}.`);
     if(!projected.has(key)){
@@ -185,6 +186,7 @@ function selectWmtsTree(plan: PreparedPagePlan,pages: ReadonlyMap<string, Prepar
       const key=preparedReferenceKey(ref);
       directories.set(key,ref);
       directoryPriority.set(key,Math.min(directoryPriority.get(key)??Infinity,centreDistance(entry)));
+      directoryLevel.set(key,Math.min(directoryLevel.get(key)??Infinity,entry.node.level));
     }
     return next;
   };
@@ -216,10 +218,7 @@ function selectWmtsTree(plan: PreparedPagePlan,pages: ReadonlyMap<string, Prepar
       const childGroups=entry.node.children.map(key=>visit(key,next,lineage));
       const deeper=childGroups.flat();
       if(deeper.length<=capacity&&deeper.reduce((s,p)=>s+p.node.width*p.node.height*4,0)<=byteCapacity){
-        // Known children can load while siblings await metadata. Pending groups
-        // retain their lineage, so the existing fallback/publication policy
-        // keeps covering ancestors until those branches are ready too.
-        return deeper;
+        if(pending.length===pendingStart || !own.length)return deeper;
       }else{
         constrained = true;
       }
@@ -290,10 +289,13 @@ function selectWmtsTree(plan: PreparedPagePlan,pages: ReadonlyMap<string, Prepar
   // Tree order is geographic, not visual priority. Rank the final bounded cut
   // after refinement, then keep every image's prepared pieces together.
   selected.sort(closestFirst);
-  const ordered=new Map(selected.flatMap(entry=>entry.path.map(ref=>[preparedReferenceKey(ref),ref])));
-  for(const [key,ref] of [...directories].sort(([a],[b])=>directoryPriority.get(a)!-directoryPriority.get(b)!))if(!ordered.has(key))ordered.set(key,ref);
+  // Discover covering branches before spending the metadata allowance on deep
+  // detail. Otherwise one refined branch can starve an adjacent coarse stub
+  // indefinitely, leaving its shared ancestor visible over the whole region.
+  const ordered=[...directories].sort(([a],[b])=>directoryLevel.get(a)!-directoryLevel.get(b)! ||
+    directoryPriority.get(a)!-directoryPriority.get(b)!).map(([,ref])=>ref);
   const groups=wmtsGroups(selected);
-  return {keys:groups.flatMap(group=>group.pages),groups:[...groups,...pending],directories:[...ordered.values()],fallbacks,selectionScale:plan.selectionScale??1};
+  return {keys:groups.flatMap(group=>group.pages),groups:[...groups,...pending],directories:ordered,fallbacks,selectionScale:plan.selectionScale??1};
 }
 
 function wmtsGroups(selected: WmtsEntry[]): PageGroup[]{

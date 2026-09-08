@@ -1,37 +1,11 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { projectCityPage, selectCityPages } from './city-page-selection.js';
-import { selectPageFallbacks, selectPagePublication } from './page-publication.js';
 import type { PreparedBounds, PreparedPage, PreparedPagePlan, PageViewport } from './types.js';
 
 const identity=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
 const translate=(x:number,y:number,z:number)=>[...identity.slice(0,12),x,y,z,1];
 const square:PreparedBounds={corners:[[-10,-10,0],[10,-10,0],[10,10,0],[-10,10,0]],normal:[0,0,1]};
-
-test('known WMTS children publish while a sibling directory remains unavailable',()=>{
-  const image=(key:string,level:number):PreparedPage=>({...square,key,level,children:[],url:key,width:256,height:256,
-    maximumCssSpan:1,sha256:'a'.repeat(64),coarseKey:'root',frameMatrix:identity.join(','),textureMatrix:identity.join(',')});
-  const parentImage=image('parent-image',5),childImage=image('child-image',6);
-  const parent={...parentImage,key:'parent',url:'',pages:[parentImage.key],children:['known','pending']};
-  const known={...childImage,key:'known',url:'',pages:[childImage.key]};
-  const directory={url:'/pending.pack',bytes:100,sha256:'b'.repeat(64)};
-  const pending={...childImage,key:'pending',url:'',pages:[],stub:true,directory};
-  const nodes=new Map([parentImage,childImage,parent,known,pending].map(n=>[n.key,n]));
-  const plan={topology:'wmts-quadtree@1',roots:[parent],poolSize:8,maximumDecodedBytes:8*256*256*4} as PreparedPagePlan;
-  const view={width:800,height:600,projection:{focalPixels:800,principalOffsetPixels:[0,0] as const}};
-  const selection=selectCityPages(plan,nodes,translate(0,0,-100),1,view);
-  assert.deepEqual(selection.keys,['child-image'],'An unrelated unavailable directory must not discard known detail');
-  assert.ok(selection.groups!.some(g=>g.key==='pending'&&g.pending&&g.lineage.includes('parent')));
-  assert.deepEqual(selection.directories,[directory]);
-  const limits={pages:8,bytes:8*256*256*4};
-  const fallbacks=selectPageFallbacks(selection.groups!,nodes,[],limits,()=>true);
-  assert.deepEqual(fallbacks.map(g=>g.key),['parent'],'A cold partial cut still requests covering imagery');
-  const slots=[{key:'parent-image',ready:true,published:true,decodedBytes:256*256*4,group:fallbacks[0]},
-    {key:'child-image',ready:true,published:false,decodedBytes:256*256*4,group:selection.groups!.find(g=>g.key==='known')!}];
-  const publication=selectPagePublication(selection.groups!,slots,limits,fallbacks);
-  assert.ok(publication.publish.includes('child-image'));
-  assert.ok(!publication.release.includes('parent-image'),'Pending coverage retains its ancestor');
-});
 const viewport:PageViewport={width:800,height:600,projection:{focalPixels:800,principalOffsetPixels:[-70,30]}};
 
 test('page bounds use physical focal/depth and principal point instead of affine million-pixel perspective',()=>{
@@ -120,4 +94,23 @@ test('detail images and pending directories follow the view centre across tree b
   assert.deepEqual(new Set(shifted.keys),new Set(result.keys),'Priority changes preserve the visible cut');
   for(const tile of tiles)pages.set(tile.key,{...tile,pages:[],stub:true});
   assert.deepEqual(select().directories,result.directories,'Undiscovered detail has the same centre priority');
+});
+
+test('coarse coverage metadata is admitted before a central branch spends the budget on deeper detail',()=>{
+  const ref=(name:string)=>({url:`/${name}.pack`,bytes:100,sha256:'b'.repeat(64)});
+  const coarseRef=ref('coarse'),fineRef=ref('fine'),detailRef=ref('detail');
+  const image:PreparedPage={...square,key:'image',level:10,children:[],url:'/image.png',width:256,height:256,
+    maximumCssSpan:1,sha256:'a'.repeat(64),coarseKey:'root',frameMatrix:identity.join(','),textureMatrix:identity.join(',')};
+  const fine={...image,key:'fine',url:'',pages:['image'],children:['detail'],directory:fineRef};
+  const detail={...image,key:'detail',level:11,url:'',pages:[],stub:true,directory:detailRef};
+  const coarse={...image,key:'coarse',level:8,url:'',pages:[],stub:true,directory:coarseRef,
+    corners:square.corners.map(([x,y,z])=>[x+30,y,z] as const)};
+  const plan={topology:'wmts-quadtree@1',roots:[fine,coarse],poolSize:8,maximumDecodedBytes:8*256*256*4} as PreparedPagePlan;
+  const pages=new Map([image,fine,detail,coarse].map(n=>[n.key,n]));
+  const view={width:800,height:600,projection:{focalPixels:800,principalOffsetPixels:[0,0] as const}};
+  const selected=selectCityPages(plan,pages,translate(0,0,-100),1,view);
+  assert.deepEqual(selected.keys,['image'],'Available imagery remains selected while adjacent coverage is discovered');
+  assert.deepEqual(selected.directories,[coarseRef,fineRef,detailRef],
+    'A fixed metadata allowance must discover covering branches before retaining deeper central detail');
+  assert.ok(selected.groups!.some(group=>group.key==='coarse'&&group.pending));
 });
