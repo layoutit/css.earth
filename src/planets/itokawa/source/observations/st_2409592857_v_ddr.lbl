@@ -1,0 +1,83 @@
+PDS_VERSION_ID                     = PDS3                                     
+                                                                              
+DATA_SET_ID                        = "HAY-A-AMICA-3-AMICAGEOM-V1.0"           
+PRODUCT_NAME                       = "20050926:ST_2409592857_V_DDR.IMG"       
+PRODUCT_ID                         = "20050926_ST_2409592857_V_DDR_IMG"       
+INSTRUMENT_HOST_ID                 = "HAY"                                    
+INSTRUMENT_HOST_NAME               = "HAYABUSA"                               
+INSTRUMENT_ID                      = "AMICA"                                  
+INSTRUMENT_NAME                    = "ASTEROID MULTI-BAND IMAGING CAMERA"     
+TARGET_NAME                        = "25143 ITOKAWA"                          
+TARGET_TYPE                        = "ASTEROID"                               
+START_TIME                         = 2005-09-26T11:20:07                      
+STOP_TIME                          = 2005-09-26T11:20:07                      
+PRODUCT_TYPE                       = DDR                                      
+PRODUCT_CREATION_TIME              = 2012-01-31T14:50:21                      
+FILTER_NAME                        = "V"                                      
+EXPOSURE_DURATION                  = .087 <SECOND>                            
+                                                                              
+TARGET_DISTANCE                    = 7.75078 <KILOMETER>                      
+LONGITUDE                          = 177.07243 <DEGREE>                       
+LATITUDE                           = -6.61691 <DEGREE>                        
+CELESTIAL_NORTH_CLOCK_ANGLE        = 206.11633 <DEGREE>                       
+BODY_POLE_CLOCK_ANGLE              = 86.84868 <DEGREE>                        
+HAY:BODY_POLE_ASPECT_ANGLE         = 90.76931 <DEGREE>                        
+SUB_SOLAR_AZIMUTH                  = 81.36883 <DEGREE>                        
+RIGHT_ASCENSION                    = 178.34719 <DEGREE>                       
+DECLINATION                        = 1.54690 <DEGREE>                         
+RA_DEC_REF_PIXEL                   = (512,512)                                
+SUB_SOLAR_LONGITUDE                = -143.99570 <DEGREE>                      
+SUB_SOLAR_LATITUDE                 = 1.67378 <DEGREE>                         
+INCIDENCE_ANGLE                    = 40.24462 <DEGREE>                        
+EMISSION_ANGLE                     = 31.62939 <DEGREE>                        
+PHASE_ANGLE                        = 9.56289 <DEGREE>                         
+SOLAR_ELONGATION                   = 171.35740 <DEGREE>                       
+SUB_SPACECRAFT_LONGITUDE           = -153.49328 <DEGREE>                      
+SUB_SPACECRAFT_LATITUDE            = 0.54178 <DEGREE>                         
+TARGET_CENTER_DISTANCE             = 7.965313 <KILOMETER>                     
+X_OFFSET                           = 31.1                                     
+Y_OFFSET                           = 159.7                                    
+HAY:BODY_POLE_SUN_ANGLE            = 172.62936 <DEGREE>                       
+TARGET_HELIOCENTRIC_DISTANCE       = 161660482.29061 <KILOMETER>              
+SPACECRAFT_SOLAR_DISTANCE          = 161660490.14525 <KILOMETER>              
+                                                                              
+                                                                              
+/* This DDR label describes one data file:                               */   
+/* 1. A multiple-band backplane image file with wavelength-independent,  */   
+/* spatial pixel-dependent geometric and timing information.             */   
+                                                                              
+OBJECT                       = FILE                                           
+  ^IMAGE                     = "st_2409592857_v_ddr.img"                      
+  RECORD_TYPE                = FIXED_LENGTH                                   
+  RECORD_BYTES               = 4096                                           
+  FILE_RECORDS               = 16384                                          
+                                                                              
+  OBJECT                     = IMAGE                                          
+    LINES                    = 1024                                           
+    LINE_SAMPLES             = 1024                                           
+    SAMPLE_TYPE              = IEEE_REAL                                      
+    SAMPLE_BITS              = 32                                             
+    CORE_NULL                = 16#F49DC5AE#                                   
+    BANDS                    = 16                                             
+    BAND_STORAGE_TYPE        = BAND_SEQUENTIAL                                
+    BAND_NAME                = ("Pixel value",                                
+                                "x coordinate of center of pixel, km",        
+                                "y coordinate of center of pixel, km",        
+                                "z coordinate of center of pixel, km",        
+                                "Latitude, deg",                              
+                                "Longitude, deg",                             
+                                "Distance from center of body, km",           
+                                "Incidence angle, deg",                       
+                                "Emission angle, deg",                        
+                                "Phase angle, deg",                           
+                                "Horizontal pixel scale, km per pixel",       
+                                "Vertical pixel scale, km per pixel",         
+                                "Slope, deg",                                 
+                                "Elevation, m",                               
+                                "Gravitational acceleration, m/s^2",          
+                                "Gravitational potential, J/kg")              
+                                                                              
+  END_OBJECT                 = IMAGE                                          
+END_OBJECT                   = FILE                                           
+                                                                              
+END                                                                           

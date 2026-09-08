@@ -27,6 +27,78 @@
       ],
       "path": "shape/lutetia_025k_cart.wrl",
       "url": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "observations/n20100710t154047674id4df22.img",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/naif0012.tls",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/ROS_V33.TF",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/former_versions/ROS_V33.TF"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/ROS_OSIRIS_V15.TI",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/ik/former_versions/ROS_OSIRIS_V15.TI"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/ROS_LUTETIA_RSOC_V03.TPC",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/pck/ROS_LUTETIA_RSOC_V03.TPC"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/ROS_LUTETIA_RSOC_V03.TF",
+      "url": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/ROS_LUTETIA_RSOC_V03.TF"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/osiris-boresight.pdf",
+      "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSIWAC/RO-C-OSIWAC-5-ESC2-67P-M15-GEO-V2.0/DOCUMENT/CALIB/BORESIGHT_V01.PDF"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/osiris-photometry.pdf",
+      "url": "https://arxiv.org/pdf/1710.01356"
     }
   ]
 }

@@ -23,6 +23,11 @@
           "projection": "equirectangular",
           "lenses": [
             {
+              "id": "llorri",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "shape",
               "source": "content",
               "material": "lighting"
@@ -46,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "191ee2168a81e40bc7737b282efaf589cf3e833145a7f435f4ef53f72568a693"
+          "sha256": "67f8aac95c694d927968a12a22f9f131689774a060ec322d34bd589cf92c396e"
         },
         {
           "id": "rotation",
@@ -56,7 +61,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "1d974eaeaf6f46174b6a8a8b76f453b74b2897b59597bbef7c4536630e93bda0"
+          "sha256": "e0a5c596673c540c150a9593916184623d17bbf4edef8bde5b83d112bf511a29"
         },
         {
           "id": "title",
@@ -71,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "e294342dfa702e4efdfa9abc2db332e64a13f3e957fd1934867f41346ad8da4a"
+          "sha256": "6d051e079932bc28935173e413c0f048ce250d4568cb6877c1459bc2dd1770b6"
         }
       ]
     },
@@ -108,6 +113,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4cdf8dc6e9b7739f646ff469d819c6e510f8465fbb91bcd2e36439e63f0c334e"
+    "sha256": "ffaccd686b1528681c59a8c0fa4cae4912b6e70c3ec3407c39896c51d9875943"
   }
 }

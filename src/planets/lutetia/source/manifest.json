@@ -59,6 +59,146 @@
       ],
       "expectedBytes": 862936,
       "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "lutetia-observations-n20100710t154047674id4df22-img",
+      "path": "observations/n20100710t154047674id4df22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 37775872,
+      "expectedSha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd"
+    },
+    {
+      "id": "lutetia-reference-naif0012-tls",
+      "path": "reference/naif0012.tls",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+    },
+    {
+      "id": "lutetia-reference-ROS_V33-TF",
+      "path": "reference/ROS_V33.TF",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/former_versions/ROS_V33.TF",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 237356,
+      "expectedSha256": "f6101b9c71fbcb8f0805a32b29631e8a20676f860e0eeff4a951649d77753bb1"
+    },
+    {
+      "id": "lutetia-reference-ROS_OSIRIS_V15-TI",
+      "path": "reference/ROS_OSIRIS_V15.TI",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/ik/former_versions/ROS_OSIRIS_V15.TI",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 23016,
+      "expectedSha256": "92efe258f66d12b6b4cddfeadab158e8d1e28d838669dc8d8520442cf46e9587"
+    },
+    {
+      "id": "lutetia-reference-ROS_LUTETIA_RSOC_V03-TPC",
+      "path": "reference/ROS_LUTETIA_RSOC_V03.TPC",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/pck/ROS_LUTETIA_RSOC_V03.TPC",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 3482,
+      "expectedSha256": "b4d42ae56a08391ff72c7d6ac3a9f6f2c6ecddcdf3f081c862f0919e23ce0b6f"
+    },
+    {
+      "id": "lutetia-reference-ROS_LUTETIA_RSOC_V03-TF",
+      "path": "reference/ROS_LUTETIA_RSOC_V03.TF",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/ROSETTA/kernels/fk/ROS_LUTETIA_RSOC_V03.TF",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 2041,
+      "expectedSha256": "88b7ad6e1bc04dd6ebca124c771c2780d6f33c348acd0f8aa914cca428056346"
+    },
+    {
+      "id": "lutetia-reference-osiris-boresight-pdf",
+      "path": "reference/osiris-boresight.pdf",
+      "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/OSIWAC/RO-C-OSIWAC-5-ESC2-67P-M15-GEO-V2.0/DOCUMENT/CALIB/BORESIGHT_V01.PDF",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 801308,
+      "expectedSha256": "3f3b07c90b8180d0a7212b1679844765cc8672b8b8f50ed4e686f24139ac5318"
+    },
+    {
+      "id": "lutetia-reference-osiris-photometry-pdf",
+      "path": "reference/osiris-photometry.pdf",
+      "origin": "https://arxiv.org/pdf/1710.01356",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 14720439,
+      "expectedSha256": "5d7264ac14a57179b7c381c92aab7756993624deb58cf70a6936b0ceb00b9b9b"
+    },
+    {
+      "id": "lutetia-preparation-camera-json",
+      "path": "preparation/camera.json",
+      "origin": "Authored source-bound camera profile",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 1240,
+      "expectedSha256": "1f769499fd728829262741e3686092566b21e065af70fba582ca9a3bf2d7ee70"
+    },
+    {
+      "id": "lutetia-observations-osiris-camera-json",
+      "path": "observations/osiris-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "osiris-observation"
+      ],
+      "expectedBytes": 5070,
+      "expectedSha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac"
     }
   ],
   "generatedIntermediates": [
@@ -92,14 +232,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 9409,
-      "expectedSha256": "1e464fdeeb0d6e71ea1dbf65c23282446f94afa149063509d6f9bc16a045fc03"
+      "expectedBytes": 10795,
+      "expectedSha256": "5eb092317540fdd65b8e87ed2a8e49edfb1d64d050cb2a7bcd9cacf387ef296f"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 794,
-      "expectedSha256": "b9036b172d090b12bd12553d47bdb35c8202c3aec18828a485659ebf7b4777f4"
+      "expectedBytes": 2822,
+      "expectedSha256": "69db1ad3e533ad0cc456d970ed03ca0dab9e119e8ef9750b98b2a3803ab0c277"
     },
     {
       "path": "preparation/navigation.json",
@@ -116,8 +256,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 2962,
-      "expectedSha256": "654784a3dea9403dac555a7aebff9e16f5fbaf313fd4a4cc77377a78caa56cd9"
+      "expectedBytes": 4407,
+      "expectedSha256": "f8fa382b781f86ec40f30e1f70c8c9b8f36ca5395bc6a44a006f3d822081e913"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
