@@ -7,6 +7,11 @@ CSS triangle leaves** and a single **Historical model** view, visibly labelled
 **Highly uncertain**. The shared shell supplies navigation, drag, zoom, Shadows
 and Orbit controls.
 
+The subsequent [Giotto encounter-image intake](HALLEY-GIOTTO.md) decodes seven
+pinned original frames but leaves the photographic lens unqualified: the
+binding to Stooke body coordinates and usable surface coverage remain
+unresolved. It changes no application or prepared scene assets.
+
 ![Halley with flood lighting](evidence/halley-flood.png)
 
 ## Scientific scope
