@@ -19,13 +19,13 @@
         "consumer": "model-surface",
         "validity": {
           "kind": "image-rgb-no-data",
-          "noData": null,
+          "noData": 160,
           "centerLongitude": 180
         },
         "metadata": {
           "label": "Shape model",
           "modeled": true,
-          "coverage": "Source-constrained ellipsoid; a neutral uniform material shows geometry only. No mapped terrain is claimed."
+          "coverage": "Source-constrained ellipsoid with no observed surface coverage; the standard gray cartographic grid identifies the untextured shape model."
         }
       }
     ],
