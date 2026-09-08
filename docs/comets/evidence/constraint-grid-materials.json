@@ -1,0 +1,32 @@
+{
+  "reports": [
+    {
+      "id": "comet-103p",
+      "base": "12d655287809ea14f371692e4ca305cb987a75de",
+      "previousConstraintPngSha256": "2bc3bb039f99930fd7cfca38520ac030c2e1ba4280ee2f6cc71e5b1849be4d12",
+      "width": 512,
+      "height": 256,
+      "pixelCounts": {
+        "stereo": 60213,
+        "limb": 39113,
+        "poor": 31746
+      },
+      "stereoAndLimbPixelsUnchanged": true,
+      "poorPixelsMatchSharedGridInBothViews": true
+    },
+    {
+      "id": "comet-9p",
+      "base": "12d655287809ea14f371692e4ca305cb987a75de",
+      "previousConstraintPngSha256": "81416f47ecc6f8f6beb51f23a349b14f57969fe7fc4453603afeae50a78ff984",
+      "width": 512,
+      "height": 256,
+      "pixelCounts": {
+        "stereo": 91244,
+        "limb": 11750,
+        "poor": 28078
+      },
+      "stereoAndLimbPixelsUnchanged": true,
+      "poorPixelsMatchSharedGridInBothViews": true
+    }
+  ]
+}

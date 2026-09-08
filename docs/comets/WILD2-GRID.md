@@ -25,6 +25,6 @@ Both body atlases remain 1,024 × 3,968 pixels, totaling 32,505,856 calculated R
 
 ## Other comets
 
-Hartley 2 and Tempel 1 have explicit PDS flags for stereo control (1), limb silhouette (2), and regions not constrained by either method (3). Flag 3 is a suitable candidate for the same grid with a **poorly constrained** label; it is not identical to Wild 2's ellipsoid completion. Their existing source-constraint lenses remain unchanged in this update. Their vertex counts are not surface-area percentages.
+Hartley 2 and Tempel 1 have explicit PDS flags for stereo control (1), limb silhouette (2), and regions not constrained by either method (3). The subsequent [constraint-grid update](CONSTRAINT-GRIDS.md) applies the grid to flag 3 in both existing views, with a **poorly constrained** label. That category is not identical to Wild 2's ellipsoid completion, and vertex counts are not surface-area percentages.
 
 The selected 67P MTP019 documentation describes full-nucleus coverage. Its OBJ supplies no equivalent per-region coverage flags, so no grid boundary is inferred from visual smoothness or simplification. 67P remains unchanged.

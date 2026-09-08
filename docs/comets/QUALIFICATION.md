@@ -1,6 +1,6 @@
 # Qualification record
 
-Wild 2 now uses the closed, completed PDS model at 992 leaves. [WILD2-COMPLETION.md](WILD2-COMPLETION.md) records its current source, geometry, browser, delivery and drag checks and supersedes the original Wild 2 evidence below. The other three comet models are unchanged.
+Wild 2 uses the closed, completed PDS model at 992 leaves; [its completion record](WILD2-COMPLETION.md) and [estimated-region grid update](WILD2-GRID.md) supersede the original Wild 2 evidence below. Hartley 2 and Tempel 1 now mark their source-flagged poorly constrained regions with the [shared grid in both views](CONSTRAINT-GRIDS.md), retaining 1,000 leaves each. 67P is unchanged. The original qualification below remains historical evidence for unchanged geometry and behavior, not the latest material hashes.
 
 ## Original four-comet qualification
 
