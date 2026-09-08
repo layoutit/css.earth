@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271140%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                1140 Crimea (1929 YC)          2026-Sep-08 10:25:59
+Rec #:    1140 (+COV) Soln.date: 2026-Jun-05_04:32:53   # obs: 9841 (1935-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458059.5 ! 2017-Nov-02.00 (TDB)         Residual RMS= .20669
+   EC= .1130582614494657   QR= 2.45780418098666    TP= 2457699.63923069
+   OM= 72.13957488689621   W=  310.1342305456421   IN= 14.1357888908636
+   A= 2.771099920275794    MA= 76.88830715605057   ADIST= 3.084395659564929
+   PER= 4.61303            N= .213661265           ANGMOM= .028452081
+   DAN= 2.54986            DDN= 2.95071            L= 23.1441294
+   B= -10.7611771          MOID= 1.4878            TP= 2016-Nov-07.1392306900
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 14.5895            ROTPER= 9.77
+   H= 9.94                 G= .150                 B-V= .916
+                           ALBEDO= .160            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#75, OCC=0
+2: source=ORB
+*******************************************************************************

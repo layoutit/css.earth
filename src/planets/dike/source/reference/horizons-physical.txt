@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2799%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  99 Dike (A868 KA)            2026-Sep-08 10:14:28
+Rec #:      99 (+COV) Soln.date: 2026-Jun-05_03:09:04   # obs: 5603 (1915-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457638.5 ! 2016-Sep-07.00 (TDB)         Residual RMS= .1945
+   EC= .1949125350069944   QR= 2.145626569115129   TP= 2457520.201056798
+   OM= 41.53058267764576   W=  195.4192766268209   IN= 13.84867031477846
+   A= 2.665085052757305    MA= 26.79898394750224   ADIST= 3.184543536399481
+   PER= 4.35086            N= .226536123           ANGMOM= .027543972
+   DAN= 3.15703            DDN= 2.1583             L= 236.5220998
+   B= -3.6488093           MOID= 1.13695002        TP= 2016-May-11.7010567980
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 33.677             ROTPER= 18.127
+   H= 9.46                 G= .150                 B-V= .703
+                           ALBEDO= .065            STYP= Xk
+
+ASTEROID comments: 
+1: soln ref.= JPL#140, OCC=0
+2: source=ORB
+*******************************************************************************

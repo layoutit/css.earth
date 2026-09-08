@@ -1,0 +1,83 @@
+{
+  "modelId": 10666,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10666",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/94365/shape.txt",
+  "spinUrl": null,
+  "version": "2022-11-29",
+  "lambda": 64,
+  "beta": -13,
+  "periodHours": 9.4596,
+  "nonconvex": false,
+  "calibrated": false,
+  "sourceFields": {
+    "ID": "10666",
+    "Asteroid ID": "(323) Brucia",
+    "Lambda": "64",
+    "Beta": "-13",
+    "Period": "9.4596",
+    "YORP": "",
+    "JD0": "2456885",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "0.5",
+    "LSM Parameter 3": "0.1",
+    "LSM Parameter 4": "-0.65",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "",
+    "Equivalent Diameter": "",
+    "Equivalent Diameter Error": "",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2022-11-29",
+    "Comment": "",
+    "Created": "2023-05-23 07:50:56",
+    "Modified": "2023-05-23 07:50:56"
+  },
+  "originalVolume": 0.9999997259521002,
+  "originalSignedVolume": 0.9999997259521002,
+  "originalVolumeEquivalentDiameter": 1.2407008684616236,
+  "originalUnits": "dimensionless DAMIT source units; uncalibrated model",
+  "vertices": 574,
+  "faces": 1144,
+  "extentsSourceUnits": [
+    [
+      -0.818188,
+      0.840017
+    ],
+    [
+      -0.631462,
+      0.651556
+    ],
+    [
+      -0.471825,
+      0.601549
+    ]
+  ],
+  "radialRangeSourceUnits": [
+    0.4505471720930007,
+    0.9405747276755845
+  ],
+  "firstVertexSourceUnits": [
+    0.049412,
+    0.109722,
+    0.58499
+  ],
+  "firstFaceZeroBased": [
+    0,
+    1,
+    2
+  ],
+  "alternatives": [],
+  "selectionReason": "Original full convex model and its observed spin solution retained.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/665"
+  ]
+}

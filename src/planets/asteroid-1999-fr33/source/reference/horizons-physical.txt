@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2780000%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  80000 (1999 FR33)            2026-Sep-08 10:26:19
+Rec #:   80000 (+COV) Soln.date: 2026-Mar-13_10:45:07   # obs: 3145 (1999-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458534.5 ! 2019-Feb-20.00 (TDB)         Residual RMS= .21578
+   EC= .08408566598733871  QR= 2.724821717868156   TP= 2459468.3790976466
+   OM= 167.9503730309163   W=  164.0387653498178   IN= 9.818337815282554
+   A= 2.974974423569278    MA= 180.6217121679135   ADIST= 3.2251271292704
+   PER= 5.13137            N= .192078705           ANGMOM= .0295653
+   DAN= 3.21375            DDN= 2.73299            L= 332.211253
+   B= 2.6877056            MOID= 1.71765995        TP= 2021-Sep-10.8790976466
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 2.877              ROTPER= n.a.
+   H= 13.87                G= .150                 B-V= n.a.
+                           ALBEDO= .147            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#52, OCC=0
+2: source=ORB
+*******************************************************************************

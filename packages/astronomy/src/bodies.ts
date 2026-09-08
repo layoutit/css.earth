@@ -34,7 +34,7 @@ export interface BodyData {
 export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
 /** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
-export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis' | 'pallas' | 'hygiea' | 'juno' | 'psyche' | 'interamnia' | 'davida' | 'sylvia' | 'eunomia' | 'euphrosyne' | 'bamberga' | 'fortuna' | 'themis' | 'amphitrite' | 'egeria' | 'elektra' | 'iris' | 'hebe' | 'eugenia' | 'daphne' | 'eleonora' | 'nemesis' | 'kalliope' | 'nemausa' | 'parthenope' | 'melpomene' | 'julia' | 'victoria' | 'urania' | 'flora' | 'europa-52' | 'metis-9' | 'camilla' | 'thisbe' | 'doris' | 'hermione' | 'diotima' | 'herculina' | 'nausikaa' | 'astraea' | 'irene' | 'nysa' | 'sappho' | 'betulia' | 'castalia' | 'asteroid-1998-wt24' | 'asteroid-1994-cc' | 'fides' | 'penelope' | 'alphonsina' | 'angelina' | 'ganymed' | 'moshup' | 'cybele' | 'aurora' | 'palma' | 'thule' | 'hektor' | 'hekate' | 'phaethon' | 'harmonia' | 'panopaea' | 'desdemona-666' | 'asteroid-1950-da' | 'apophis' | 'donaldjohanson' | 'geographos' | 'bacchus' | 'mithra' | 'nereus' | 'golevka' | 'yorp' | 'asteroid-1996-hw1' | 'asteroid-2008-ev5' | 'ra-shalom' | 'asteroid-1992-sk' | 'asteroid-1998-ml14' | 'asteroid-2002-ce26'
+export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins' | 'didymos' | 'kleopatra' | 'toutatis' | 'pallas' | 'hygiea' | 'juno' | 'psyche' | 'interamnia' | 'davida' | 'sylvia' | 'eunomia' | 'euphrosyne' | 'bamberga' | 'fortuna' | 'themis' | 'amphitrite' | 'egeria' | 'elektra' | 'iris' | 'hebe' | 'eugenia' | 'daphne' | 'eleonora' | 'nemesis' | 'kalliope' | 'nemausa' | 'parthenope' | 'melpomene' | 'julia' | 'victoria' | 'urania' | 'flora' | 'europa-52' | 'metis-9' | 'camilla' | 'thisbe' | 'doris' | 'hermione' | 'diotima' | 'herculina' | 'nausikaa' | 'astraea' | 'irene' | 'nysa' | 'sappho' | 'betulia' | 'castalia' | 'asteroid-1998-wt24' | 'asteroid-1994-cc' | 'fides' | 'penelope' | 'alphonsina' | 'angelina' | 'ganymed' | 'moshup' | 'cybele' | 'aurora' | 'palma' | 'thule' | 'hektor' | 'hekate' | 'phaethon' | 'harmonia' | 'panopaea' | 'desdemona-666' | 'asteroid-1950-da' | 'apophis' | 'donaldjohanson' | 'geographos' | 'bacchus' | 'mithra' | 'nereus' | 'golevka' | 'yorp' | 'asteroid-1996-hw1' | 'asteroid-2008-ev5' | 'ra-shalom' | 'asteroid-1992-sk' | 'asteroid-1998-ml14' | 'asteroid-2002-ce26' | 'dike' | 'massalia' | 'proserpina' | 'polyhymnia' | 'leukothea' | 'virginia' | 'echo' | 'maja' | 'juewa' | 'bertha' | 'lucia' | 'brucia' | 'badenia' | 'ducrosa' | 'gyptis' | 'petrina' | 'veritas' | 'gryphia' | 'selinur' | 'achilles' | 'musa' | 'auravictrix' | 'transvaalia' | 'moskva' | 'kressmannia' | 'parysatis' | 'rosalinde' | 'susi' | 'hidalgo' | 'zachia' | 'piazzia' | 'tulipa' | 'reinmuthia' | 'china' | 'crimea' | 'rusthawelia' | 'schorria' | 'silvretta' | 'virtanen' | 'mr-spock' | 'educatio' | 'hopi' | 'schaber' | 'iau' | 'united-nations' | 'tartaglia' | 'raup' | 'asteroid-2001-qw16' | 'asteroid-1999-fr33'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId | CometId
 export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p' | 'comet-1p'
 
@@ -50,7 +50,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 ]
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
-export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis', 'pallas', 'hygiea', 'juno', 'psyche', 'interamnia', 'davida', 'sylvia', 'eunomia', 'euphrosyne', 'bamberga', 'fortuna', 'themis', 'amphitrite', 'egeria', 'elektra', 'iris', 'hebe', 'eugenia', 'daphne', 'eleonora', 'nemesis', 'kalliope', 'nemausa', 'parthenope', 'melpomene', 'julia', 'victoria', 'urania', 'flora', 'europa-52', 'metis-9', 'camilla', 'thisbe', 'doris', 'hermione', 'diotima', 'herculina', 'nausikaa', 'astraea', 'irene', 'nysa', 'sappho', 'betulia', 'castalia', 'asteroid-1998-wt24', 'asteroid-1994-cc', 'fides', 'penelope', 'alphonsina', 'angelina', 'ganymed', 'moshup', 'cybele', 'aurora', 'palma', 'thule', 'hektor', 'hekate', 'phaethon', 'harmonia', 'panopaea', 'desdemona-666', 'asteroid-1950-da', 'apophis', 'donaldjohanson', 'geographos', 'bacchus', 'mithra', 'nereus', 'golevka', 'yorp', 'asteroid-1996-hw1', 'asteroid-2008-ev5', 'ra-shalom', 'asteroid-1992-sk', 'asteroid-1998-ml14', 'asteroid-2002-ce26']
+export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins', 'didymos', 'kleopatra', 'toutatis', 'pallas', 'hygiea', 'juno', 'psyche', 'interamnia', 'davida', 'sylvia', 'eunomia', 'euphrosyne', 'bamberga', 'fortuna', 'themis', 'amphitrite', 'egeria', 'elektra', 'iris', 'hebe', 'eugenia', 'daphne', 'eleonora', 'nemesis', 'kalliope', 'nemausa', 'parthenope', 'melpomene', 'julia', 'victoria', 'urania', 'flora', 'europa-52', 'metis-9', 'camilla', 'thisbe', 'doris', 'hermione', 'diotima', 'herculina', 'nausikaa', 'astraea', 'irene', 'nysa', 'sappho', 'betulia', 'castalia', 'asteroid-1998-wt24', 'asteroid-1994-cc', 'fides', 'penelope', 'alphonsina', 'angelina', 'ganymed', 'moshup', 'cybele', 'aurora', 'palma', 'thule', 'hektor', 'hekate', 'phaethon', 'harmonia', 'panopaea', 'desdemona-666', 'asteroid-1950-da', 'apophis', 'donaldjohanson', 'geographos', 'bacchus', 'mithra', 'nereus', 'golevka', 'yorp', 'asteroid-1996-hw1', 'asteroid-2008-ev5', 'ra-shalom', 'asteroid-1992-sk', 'asteroid-1998-ml14', 'asteroid-2002-ce26', 'dike', 'massalia', 'proserpina', 'polyhymnia', 'leukothea', 'virginia', 'echo', 'maja', 'juewa', 'bertha', 'lucia', 'brucia', 'badenia', 'ducrosa', 'gyptis', 'petrina', 'veritas', 'gryphia', 'selinur', 'achilles', 'musa', 'auravictrix', 'transvaalia', 'moskva', 'kressmannia', 'parysatis', 'rosalinde', 'susi', 'hidalgo', 'zachia', 'piazzia', 'tulipa', 'reinmuthia', 'china', 'crimea', 'rusthawelia', 'schorria', 'silvretta', 'virtanen', 'mr-spock', 'educatio', 'hopi', 'schaber', 'iau', 'united-nations', 'tartaglia', 'raup', 'asteroid-2001-qw16', 'asteroid-1999-fr33']
 export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p', 'comet-1p']
 
 const body = (
@@ -203,6 +203,59 @@ export const BODIES: Record<BodyId, BodyData> = {
   'asteroid-1992-sk': body('asteroid-1992-sk', '1992 SK', '10115;', 0.5, 0, 'sun'),
   'asteroid-1998-ml14': body('asteroid-1998-ml14', '1998 ML14', '52760;', 0.5, 0, 'sun'),
   'asteroid-2002-ce26': body('asteroid-2002-ce26', '2002 CE26 Primary', '276049;', 1.73, 0.0000013014885, 'sun'),
+
+  // Published shape models with documented physical size calibration.
+  'dike': body('dike', 'Dike', '99;', 33.25, 0, 'sun'),
+
+  // Published shape models with documented physical size calibration.
+  'massalia': body('massalia', 'Massalia', '20;', 73.5, 0, 'sun'),
+  'proserpina': body('proserpina', 'Proserpina', '26;', 43.725, 0, 'sun'),
+  'polyhymnia': body('polyhymnia', 'Polyhymnia', '33;', 26.99, 0, 'sun'),
+  'leukothea': body('leukothea', 'Leukothea', '35;', 55.74, 0, 'sun'),
+  'virginia': body('virginia', 'Virginia', '50;', 42.185, 0, 'sun'),
+  'echo': body('echo', 'Echo', '60;', 29.475, 0, 'sun'),
+  'maja': body('maja', 'Maja', '66;', 35.895, 0, 'sun'),
+  'juewa': body('juewa', 'Juewa', '139;', 83.345, 0, 'sun'),
+  'bertha': body('bertha', 'Bertha', '154;', 92.915, 0, 'sun'),
+  'lucia': body('lucia', 'Lucia', '222;', 26.41, 0, 'sun'),
+  'brucia': body('brucia', 'Brucia', '323;', 18.645, 0, 'sun'),
+  'badenia': body('badenia', 'Badenia', '333;', 34.865, 0, 'sun'),
+  'ducrosa': body('ducrosa', 'Ducrosa', '400;', 17.05, 0, 'sun'),
+  'gyptis': body('gyptis', 'Gyptis', '444;', 83.015, 0, 'sun'),
+  'petrina': body('petrina', 'Petrina', '482;', 22.1, 0, 'sun'),
+  'veritas': body('veritas', 'Veritas', '490;', 59.4015, 0, 'sun'),
+  'gryphia': body('gryphia', 'Gryphia', '496;', 7.2015, 0, 'sun'),
+  'selinur': body('selinur', 'Selinur', '500;', 20.414, 0, 'sun'),
+  'achilles': body('achilles', 'Achilles', '588;', 65.5, 0, 'sun'),
+  'musa': body('musa', 'Musa', '600;', 12.5575, 0, 'sun'),
+  'auravictrix': body('auravictrix', 'Auravictrix', '700;', 8.2105, 0, 'sun'),
+  'transvaalia': body('transvaalia', 'Transvaalia', '715;', 12.729, 0, 'sun'),
+  'moskva': body('moskva', 'Moskva', '787;', 15.981, 0, 'sun'),
+  'kressmannia': body('kressmannia', 'Kressmannia', '800;', 7.7145, 0, 'sun'),
+  'parysatis': body('parysatis', 'Parysatis', '888;', 22.3745, 0, 'sun'),
+  'rosalinde': body('rosalinde', 'Rosalinde', '900;', 9.809, 0, 'sun'),
+  'susi': body('susi', 'Susi', '933;', 10.91, 0, 'sun'),
+  'hidalgo': body('hidalgo', 'Hidalgo', '944;', 30.7, 0, 'sun'),
+  'zachia': body('zachia', 'Zachia', '999;', 8.424, 0, 'sun'),
+  'piazzia': body('piazzia', 'Piazzia', '1000;', 23.89, 0, 'sun'),
+  'tulipa': body('tulipa', 'Tulipa', '1095;', 13.9375, 0, 'sun'),
+  'reinmuthia': body('reinmuthia', 'Reinmuthia', '1111;', 12.19, 0, 'sun'),
+  'china': body('china', 'China', '1125;', 13.042, 0, 'sun'),
+  'crimea': body('crimea', 'Crimea', '1140;', 14.5895, 0, 'sun'),
+  'rusthawelia': body('rusthawelia', 'Rusthawelia', '1171;', 33.993, 0, 'sun'),
+  'schorria': body('schorria', 'Schorria', '1235;', 2.775, 0, 'sun'),
+  'silvretta': body('silvretta', 'Silvretta', '1317;', 13.1965, 0, 'sun'),
+  'virtanen': body('virtanen', 'Virtanen', '1449;', 4.6315, 0, 'sun'),
+  'mr-spock': body('mr-spock', 'Mr. Spock', '2309;', 9.8535, 0, 'sun'),
+  'educatio': body('educatio', 'Educatio', '2440;', 3.293, 0, 'sun'),
+  'hopi': body('hopi', 'Hopi', '2938;', 9.6335, 0, 'sun'),
+  'schaber': body('schaber', 'Schaber', '3333;', 13.269, 0, 'sun'),
+  'iau': body('iau', 'IAU', '5000;', 2.121, 0, 'sun'),
+  'united-nations': body('united-nations', 'United Nations', '6000;', 5.5, 0, 'sun'),
+  'tartaglia': body('tartaglia', 'Tartaglia', '8888;', 6.792, 0, 'sun'),
+  'raup': body('raup', 'Raup', '9165;', 2.4195, 0, 'sun'),
+  'asteroid-2001-qw16': body('asteroid-2001-qw16', '2001 QW16', '77777;', 5.2015, 0, 'sun'),
+  'asteroid-1999-fr33': body('asteroid-1999-fr33', '1999 FR33', '80000;', 2.877, 0, 'sun'),
 
   mercury: body('mercury', 'Mercury', '199', 2439.4, 22031.86855, 'sun'),
   venus: body('venus', 'Venus', '299', 6051.84, 324858.592, 'sun'),

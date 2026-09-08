@@ -1,0 +1,98 @@
+{
+  "diameterKm": 19.267,
+  "uncertaintyKm": 0.147,
+  "reportedUncertaintyKm": 0.147,
+  "uncertaintyMeaning": "Published statistical/Monte Carlo fit error; excludes the additional systematic term below.",
+  "systematicUncertaintyFraction": 0.1,
+  "systematicUncertaintyKm": 1.9267,
+  "systematicMeaning": "Original publication reports approximately 10% additional systematic uncertainty in diameter. This is a population-level floor, not a shape-specific accuracy guarantee.",
+  "quantity": "NEATM effective spherical diameter at the observing geometry",
+  "sourceUrl": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2938",
+  "reference": "Masiero et al. (2014), ApJ 791, 121",
+  "referenceUrl": "https://doi.org/10.1088/0004-637X/791/2/121",
+  "selectedRow": {
+    "asteroid_number": "2938",
+    "prov_desig": "",
+    "comet_desig": "",
+    "mpc_packed_name": "02938",
+    "absolute_mag": "11.6000",
+    "slope_param": "0.1500",
+    "mean_jd": "2455289.2084190",
+    "n_w1": "12",
+    "n_w2": "14",
+    "n_w3": "14",
+    "n_w4": "14",
+    "fit_code": "DVBI",
+    "diameter": "19.2670",
+    "diameter_err": "0.1470",
+    "v_albedo": "0.1090",
+    "v_albedo_err": "0.0170",
+    "ir_albedo": "0.2330",
+    "ir_albedo_err": "0.0100",
+    "beaming_param": "0.7570",
+    "beaming_param_err": "0.0130",
+    "stacked_flag": "",
+    "reference": "Mas14",
+    "notes": "",
+    "reference2": "MASIEROETAL2014",
+    "type": "mainbelt",
+    "cntr": "5367"
+  },
+  "alternativeRows": [
+    {
+      "asteroid_number": "2938",
+      "prov_desig": "",
+      "comet_desig": "",
+      "mpc_packed_name": "02938",
+      "absolute_mag": "11.5000",
+      "slope_param": "0.1500",
+      "mean_jd": "2456897.1975822",
+      "n_w1": "14",
+      "n_w2": "14",
+      "n_w3": "0",
+      "n_w4": "0",
+      "fit_code": "DV--",
+      "diameter": "25.5110",
+      "diameter_err": "4.5870",
+      "v_albedo": "0.1150",
+      "v_albedo_err": "0.0470",
+      "ir_albedo": "0.1720",
+      "ir_albedo_err": "0.1210",
+      "beaming_param": "0.9500",
+      "beaming_param_err": "0.2000",
+      "stacked_flag": "",
+      "reference": "Nug15",
+      "notes": "",
+      "reference2": "NUGENTETAL2015",
+      "type": "mainbelt or mars crossers",
+      "cntr": "157482"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2938",
+      "sha256": "67a8ce556363d5c74f5c9638f180d4785e78d6921af32c3598dea36d7fb97ad8",
+      "bytes": 595
+    },
+    {
+      "url": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+      "sha256": "86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac",
+      "bytes": 18419
+    },
+    {
+      "url": "https://arxiv.org/pdf/1406.6645",
+      "sha256": "6cec5824e942b6f3abea47934c4ab127445fd89a587308f36ddf167c94c5b500",
+      "bytes": 969599
+    }
+  ],
+  "selectionReason": "Selected fully cryogenic data when available; these data include W3 or W4 thermal measurements. Other survey epochs are retained separately.",
+  "scaleKmPerSourceUnit": 15.529124539544721,
+  "formula": "scaleKmPerSourceUnit = diameterKm / cbrt(6 * signedSourceVolume / pi); meterScale =1000*scaleKmPerSourceUnit. Original shape coordinates are preserved.",
+  "approximate": true,
+  "limitations": [
+    "The thermal effective spherical diameter is used as an approximate volume-equivalent display scale; no joint shape/thermal inversion or independently measured volume is implied.",
+    "Quoted ±0.147 km is the catalog fit error; approximately 10% additional systematic diameter uncertainty applies."
+  ],
+  "sourceLabel": "Masiero et al. (2014), ApJ 791, 121",
+  "visibleDescription": "Approximate scale from a thermal diameter of 19.267 ± 0.147 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects."
+}

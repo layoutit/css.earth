@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273333%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               3333 Schaber (1980 TG5)         2026-Sep-08 10:26:11
+Rec #:    3333 (+COV) Soln.date: 2026-Jun-05_07:26:30   # obs: 7306 (1964-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458642.5 ! 2019-Jun-08.00 (TDB)         Residual RMS= .22581
+   EC= .221329136133442    QR= 2.439232533263064   TP= 2458351.3037334178
+   OM= 231.1662632024611   W=  66.23107657506769   IN= 11.96658718606023
+   A= 3.132559142062723    MA= 51.76556491414804   ADIST= 3.825885750862381
+   PER= 5.54443            N= .177768642           ANGMOM= .029690971
+   DAN= 2.73512            DDN= 3.27089            L= 296.9295614
+   B= 10.9384413           MOID= 1.45318997        TP= 2018-Aug-20.8037334178
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 13.269             ROTPER= 10.971
+   H= 11.96                G= .150                 B-V= n.a.
+                           ALBEDO= .048            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#76, OCC=0
+2: source=ORB
+*******************************************************************************

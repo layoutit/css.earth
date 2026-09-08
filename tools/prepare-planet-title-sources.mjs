@@ -53,7 +53,7 @@ export function createPlanetTitleSource(label, font) {
   if (!font || typeof font.layout !== "function") {
     throw new TypeError("Planet title generation requires a loaded font.");
   }
-  if (typeof label !== "string" || !/^[A-Za-z0-9]+(?:[ /–-][A-Za-z0-9]+)*$/u.test(label)) {
+  if (typeof label !== "string" || !/^[A-Za-z0-9]+(?:\.?[ /–-][A-Za-z0-9]+)*$/u.test(label)) {
     throw new TypeError("Planet title label is invalid.");
   }
 
