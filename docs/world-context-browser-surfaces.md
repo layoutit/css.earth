@@ -415,3 +415,38 @@ All 18 computed-style and full-double matrix comparisons are exact; image
 channel differences are recorded alongside the restored-baseline repeat.
 Separate-page and strict-zero-raster attempts remain in neighboring evidence
 directories and are not asserted as pixel-identical qualifications.
+
+The same-catalog `minimap-direct-grid` capture at `324c86b8` is synchronized
+(recorder `72f73785-c07a-494a-abc9-4dcc79caa790`, trace/video anchor drift -110 us,
+video PTS error below 0.50 ms). It has no application errors, HMR or identity
+replacement. Its 5–5,000 AU band has 210/585 intervals above 25 ms, p95 33.4 ms;
+maximum movement interval is 33.5 ms. Style time totals 5,419 ms, compared with
+6,924 ms in `orbit-demand-integrated`. This is an observation, not an attributed
+22% speedup: recorded orientation is constant in both runs and machine load
+varies. The target is still unmet. Raw synchronized file hashes are in each
+run's `synchronization.json`.
+
+## Preparation-owned minimap point range
+
+The minimap now prepares a separate ordering of source-point indices by X.
+Two binary searches select the conservative X slab of the current view sphere;
+only those candidates undergo the existing exact 3D marker-inset test. A retained
+visible set hides departures. Marker DOM order, colors, opacity, image content,
+projection, clock and update cadence stay unchanged. There is no runtime sorting,
+new scene, worker protocol or approximate point substitution.
+
+Regeneration also incorporates the already-merged 227-body context: 2,275 points
+including 2,048 catalog stars. It adds the missing 66 body markers, not extra
+rendered object scenes. `galaxy.png` is byte-identical after regeneration.
+
+Three focused tests verify source-index completeness/current body membership,
+inclusive duplicate boundaries and exact sphere membership for 200 off-origin
+views across 20 orders of magnitude. The real module comparison uses the same
+refreshed artifact for baseline and candidate: all 18 DPR 1/2 views have identical
+visible computed styles, retained 2,382-node identity and pixel-identical images
+(`output/playwright/minimap-point-range-parity/`).
+
+A work census over 379 recorded physical views reduces candidate point tests from
+862,225 to 246,049. In the 242 views with minimap range below 1e16 m, it reduces
+550,550 to 32,598 (94.1%). These count reductions are not a frame-rate claim.
+The input and per-view counts are in `output/playwright/minimap-point-range-work.json`.

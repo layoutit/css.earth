@@ -1,6 +1,7 @@
 import prepared from './prepared.json' with { type: 'json' };
 import { worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
 import './minimap.css';
+import { minimapPointRange } from './point-range.mjs';
 
 // Spatial overview, published by the same camera as the main world.
 // No second scene/camera, navigation writes, ephemeris work, or runtime geometry.
@@ -25,6 +26,7 @@ export function mountSpaceMinimap(documentTarget) {
   });
   const rings = [...root.querySelectorAll('.space-minimap-ring[data-radius-m]')];
   const galaxy = root.querySelector('.space-minimap-galaxy');
+  let visiblePoints = new Set();
   let focus = prepared.defaultFocus, lastView = '', lastGridTransform = '', destroyed = false;
   return {
     selectObject(frame) { focus = { positionM: frame.originM, radiusM: frame.bodyRadiusM }; lastView = ''; },
@@ -70,7 +72,11 @@ export function mountSpaceMinimap(documentTarget) {
         ring.style.opacity = String(Math.min(1, (fraction - .08) / .06, (1 - fraction) / .08));
       }
       let visibleBodies = 0, visibleStars = 0;
-      for (let index = 0; index < dots.length; index++) {
+      const previousVisible = visiblePoints;
+      visiblePoints = new Set();
+      const [first, end] = minimapPointRange(prepared.points, prepared.pointOrderX, centerM[0], rangeM);
+      for (let entry = first; entry < end; entry++) {
+        const index = prepared.pointOrderX[entry];
         const point = prepared.points[index], dot = dots[index];
         const delta = point.positionM.map((value, axis) => value - centerM[axis]);
         // Bound the 3D neighborhood independently of the middle plane's tilt.
@@ -81,6 +87,7 @@ export function mountSpaceMinimap(documentTarget) {
         const hidden = fraction >= 1;
         if (dot.hidden !== hidden) dot.hidden = hidden;
         if (hidden) continue;
+        visiblePoints.add(index);
         const eye = rotate(referenceToCamera, delta);
         const x = eye[0] * scale, y = eye[1] * scale;
         dot.style.transform = `translate(${x}px,${y}px)`;
@@ -88,6 +95,9 @@ export function mountSpaceMinimap(documentTarget) {
           : ['planet', 'star'].includes(point.classification) ? 1 : .85;
         dot.style.opacity = String(opacity * Math.min(1, (1 - fraction) / .06));
         if (point.classification === 'catalog-star') visibleStars++; else visibleBodies++;
+      }
+      for (const index of previousVisible) {
+        if (!visiblePoints.has(index)) dots[index].hidden = true;
       }
       root.dataset.visibleBodies = String(visibleBodies);
       root.dataset.visibleStars = String(visibleStars);
