@@ -1,0 +1,225 @@
+{
+  "schema": "csslutetia-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "lutetia-shape",
+      "path": "shape/lutetia_025k_cart.wrl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
+      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 49000
+      },
+      "coverage": "Closed published model: image-derived northern terrain joined to lightcurve/adaptive-optics constrained unseen regions; source seams and local defects remain.",
+      "expectedBytes": 2954640,
+      "expectedSha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
+      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 49730,
+      "expectedSha256": "3ab427165de147f2f982c1c5f0f5bcc7c826cce7a3123e84aeaba74d18af7a06",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "lutetia-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 8344,
+      "expectedSha256": "c68be17cd31cb60916a75c6d91adce351ee64dfe0813be6a60d99dcc70901892"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 794,
+      "expectedSha256": "b9036b172d090b12bd12553d47bdb35c8202c3aec18828a485659ebf7b4777f4"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1337,
+      "expectedSha256": "b71d1da30d64cfa171888023c8d0741eeccc2fca183d94372a5a667606eb4c66"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 419,
+      "expectedSha256": "ac51093359c7090b9af0c940126b79a71ebe29471c1d4de2d62b390a79bcea82"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 2990,
+      "expectedSha256": "1d64029e2509e778df1600dabd68288e29f7f1ed4a7baa7455ba40e81f32515e"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 3488,
+      "expectedSha256": "66b61e0c640562a0355f525012460c85856f1710da801f2882a3439c0d6aaeed"
+    },
+    {
+      "path": "reference/dataset.cat",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 14720,
+      "expectedSha256": "38385e9b54b1dbd93fc4d2c751fb7ddff721ddc5fefcc733ea121f99b48993fb"
+    },
+    {
+      "path": "reference/esa-coverage.html",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 11728,
+      "expectedSha256": "5b1e5f775b2e4424e6ae81d2952ddacf19f87a258f20b520b67b6923e230e086"
+    },
+    {
+      "path": "reference/esa-coverage.jpg",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 700991,
+      "expectedSha256": "68906de5b12f11022030d1a783308f5735cc7045686b84f3777b14f01fa9ff46"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1289,
+      "expectedSha256": "f4cfa64a0c0decbd32561f2f9aa84911489f66a6704316fc464ca72bc3796acf"
+    },
+    {
+      "path": "reference/lutetia_025k_cart.lbl",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 10000,
+      "expectedSha256": "cc31291601551f5f3555c7a5ec3ca93dbb48319eaa76726fc9ff3ecab7f52a24"
+    },
+    {
+      "path": "reference/lutetia_0n0e.png",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 80177,
+      "expectedSha256": "59854cccb0e49ffac99fd6e91012610ccb8693e498a4468d6e5fb59e2feb4702"
+    },
+    {
+      "path": "reference/lutetia_90n.png",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 136033,
+      "expectedSha256": "49ad0789054d26dc054df9312bb1e954e5e75d518968c082c6f2a35a23cc1cda"
+    },
+    {
+      "path": "reference/lutetia_rotation.pdf",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1090650,
+      "expectedSha256": "c7b362305104aaaa578d10f2aa5295995312428e7daf88418e3012a2004962a7"
+    },
+    {
+      "path": "reference/lutetia_shape_defects.lbl",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 1680,
+      "expectedSha256": "c978d10512ea99e42ddad8bdd705edb4b189c527a149c0a6b0c5614f41632e8c"
+    },
+    {
+      "path": "reference/osiris-example-label.txt",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 27648,
+      "expectedSha256": "5111f7ea57a1b54fa3b03c9b3cf15659b6ed361d9995d3dda9c07355911132f9"
+    },
+    {
+      "path": "reference/osiris-str-refl-dataset.cat",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 5935,
+      "expectedSha256": "9c300606cc8fabe1372ab7bb22586ed2d0205e09be403ae69a7dcafddd00479a"
+    },
+    {
+      "path": "reference/plate_shape_definition.asc",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 6640,
+      "expectedSha256": "cc775dc2d1d15cedb26b4badbeb777f480689510fa34652b75cdc6ba85ef677a"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 89773,
+      "expectedSha256": "f613473b1e268a1f3f2b29ea43c0b2c76c921b85b9904fb8c2c0263f8cf8e4f6"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    }
+  ]
+}

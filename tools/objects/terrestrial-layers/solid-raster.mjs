@@ -106,6 +106,16 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       ...(observation.sourceGeoreference ? { sourceGeoreference: observation.sourceGeoreference } : {}),
     }));
   }
+  for (const view of config.raster.shapeViews ?? []) {
+    const entries = await source.validateGroup(view.consumer);
+    const entry = entries.find(input => input.path === config.geometry.radialTerrain.path);
+    if (!entry) throw new Error('Shape display is not bound to the rendered source mesh.');
+    const color = Buffer.from(view.color.slice(1), 'hex');
+    const rgb = Buffer.alloc(width * height * 3, color);
+    surfaces.push(await packSurface(view.id, rgb, null, { label: view.label,
+      appearance: 'Uniform display color for source shape; not observed surface color or albedo.',
+      source: { id: entry.id, sha256: entry.expectedSha256 } }));
+  }
   for (const recipe of config.raster.mosaics ?? []) {
     const tiles = await source.validateGroup(recipe.consumer);
     if (recipe.photometry?.consumer) await source.validateGroup(recipe.photometry.consumer);

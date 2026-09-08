@@ -34,7 +34,7 @@ export interface BodyData {
 export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune'
 /** Dwarf-planet centre positions use their own heliocentric element sources. */
 export type DwarfPlanetId = 'pluto' | 'ceres' | 'eris' | 'haumea' | 'makemake'
-export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde'
+export type AsteroidId = 'vesta' | 'eros' | 'itokawa' | 'bennu' | 'ryugu' | 'ida' | 'gaspra' | 'mathilde' | 'lutetia' | 'steins'
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | DwarfPlanetId | AsteroidId
 
 export const PLANET_IDS: readonly PlanetId[] = [
@@ -49,7 +49,7 @@ export const PLANET_IDS: readonly PlanetId[] = [
 ]
 
 export const DWARF_PLANET_IDS: readonly DwarfPlanetId[] = ['pluto', 'ceres', 'eris', 'haumea', 'makemake']
-export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde']
+export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 'bennu', 'ryugu', 'ida', 'gaspra', 'mathilde', 'lutetia', 'steins']
 
 const body = (
   id: BodyId,
@@ -72,6 +72,8 @@ export const BODIES: Record<BodyId, BodyData> = {
   ida: body('ida', 'Ida', '243;', 16, 0.00275, 'sun'),
   gaspra: body('gaspra', 'Gaspra', '951;', 6.1, 0, 'sun'),
   mathilde: body('mathilde', 'Mathilde', '253;', 26.4, 0.00689, 'sun'),
+  lutetia: body('lutetia', 'Lutetia', '21;', 49, 0.1134, 'sun'),
+  steins: body('steins', 'Steins', '2867;', 2.58, 0, 'sun'),
 
   mercury: body('mercury', 'Mercury', '199', 2439.4, 22031.86855, 'sun'),
   venus: body('venus', 'Venus', '299', 6051.84, 324858.592, 'sun'),
