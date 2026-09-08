@@ -450,3 +450,35 @@ A work census over 379 recorded physical views reduces candidate point tests fro
 862,225 to 246,049. In the 242 views with minimap range below 1e16 m, it reduces
 550,550 to 32,598 (94.1%). These count reductions are not a frame-rate claim.
 The input and per-view counts are in `output/playwright/minimap-point-range-work.json`.
+
+`minimap-indexed-catalog` at `1ba6be57` completes the same native wheel tape with
+all three synchronized artifacts (recorder `4b70204d-cc0d-4979-836e-5a800f6b7f0a`).
+Clock-anchor drift is 54 us and maximum video PTS error is 1.50 ms. Document,
+world and input identities survive; one detailed camera remains mounted; errors,
+HMR and trace data loss are absent. This run includes the refreshed 66 additional
+minimap markers, unlike the preceding direct-grid capture.
+
+The system band has 156/578 intervals over 25 ms (27.0%), p95 33.4 ms. Whole-route
+maximum interval is 133.3 ms. Main-thread movement totals include 5,363 ms style,
+1,172 ms layout, 915 ms paint and **4,625 ms layerization**, in addition to
+10,460 ms inclusive animation callbacks. Workstation load was lower than the
+previous run, so this is not a controlled percentage speedup. It confirms the
+remaining browser rendering work and does not establish smooth playback.
+
+## Shared stylesheet ownership and check boundaries
+
+The minimap stylesheet belongs to the shared Astro shell, alongside the other
+scene styles, so it loads before client mounting and pure runtime imports stay
+usable by Node-based router checks. The merged main's CSS import in the minimap
+JavaScript produced `ERR_UNKNOWN_FILE_EXTENSION` in three test files; moving that
+import fixes those module-loading failures. The range/source-membership tests now
+run in the shared-universe CI workflow.
+
+The initial aggregate shell run completed with 197 passing / 8 failing checks.
+In addition to those CSS import failures, it reported stale Dimorphos prepared
+transport, missing YORP source marker image and missing Dike prepared object data.
+After the stylesheet change, the selected router/shell/minimap/recorder suite
+executes and its only failure is the missing Dike prepared object. Thirteen
+focused minimap, recorder and surface-map checks passed before that move. These
+are local generated-input limits, not a claim of aggregate object readiness;
+there was no bulk asset copy, source substitution or ignored-output cleanup.
