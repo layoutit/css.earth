@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-nebula-wide-survey-receipt@1",
+  "id": "dss2-color-lmc-24deg-6000",
+  "label": "DSS2 color · 24° LMC field",
+  "survey": {
+    "id": "CDS/P/DSS2/color",
+    "title": "DSS colored",
+    "doi": "10.26093/cds/aladin/ht9n-7r",
+    "recordUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDSS2%2Fcolor&get=record&fmt=json",
+    "sourcePageUrl": "https://doi.org/10.26093/cds/aladin/ht9n-7r",
+    "description": "CDS color composition of DSS2 red and blue scanned photographic plates; green is the mean of the red and blue components.",
+    "credit": "Digitized Sky Survey - STScI/NASA, Colored & Healpixed by CDS",
+    "license": "ODbL-1.0",
+    "copyrightUrl": "http://archive.stsci.edu/dss/copyright.html",
+    "acknowledgement": "The Digitized Sky Surveys were produced at the Space Telescope Science Institute under U.S. Government grant NAG W-2166. The images are based on photographic data from the Oschin Schmidt Telescope and UK Schmidt Telescope; CDS produced the color HiPS composition.",
+    "passbands": {
+      "red": "POSS-II F, AAO-SES, SR and SERC-ER plates",
+      "blue": "POSS-II J and SERC-J/EJ plates",
+      "green": "mean of red and blue"
+    }
+  },
+  "request": {
+    "serviceDocumentationUrl": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
+    "endpoint": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
+    "parameters": {
+      "hips": "CDS/P/DSS2/color",
+      "width": 6000,
+      "height": 6000,
+      "projection": "TAN",
+      "fov": 24,
+      "coordsys": "icrs",
+      "ra": 78.76,
+      "dec": -69.19
+    },
+    "centerSource": {
+      "path": "labs/nebula/models/lmc-particles/object.json",
+      "sha256": "423c2444c51f62f69870f77c698ea68c487724688b6654877f0f683f7f35175a",
+      "description": "ICRF direction computed from properties.volume.originM; RA 78.76°, Dec -69.19°."
+    }
+  },
+  "artifacts": [
+    {
+      "role": "native-wcs-color-fits",
+      "path": ".local/nebula-lab/wide-dss2/dss2-color-lmc-24deg-6000.fits",
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
+      "sha256": "a72fa01bce7c3f05b7d17b6ec4eff58afd5a1302594e89a230bda45dc0b4c92d",
+      "bytes": 144002880,
+      "dimensions": [6000, 6000, 4],
+      "bitpix": 8,
+      "dataOffsetBytes": 2880
+    },
+    {
+      "role": "browser-rgb-jpeg",
+      "path": ".local/nebula-lab/wide-dss2/dss2-color-lmc-24deg-6000.jpg",
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
+      "sha256": "add16f9657563bde2b7e10320edc2cd12b419202624bcb192be2f5781797ce70",
+      "bytes": 2505207,
+      "dimensions": [6000, 6000],
+      "colorSpace": "sRGB",
+      "channels": 3
+    }
+  ],
+  "downloadedBytes": 146508087,
+  "wcs": {
+    "projection": "TAN",
+    "coordinateFrame": "ICRS",
+    "referenceDimension": [6000, 6000],
+    "referencePixel": [3000.0, 3000.0],
+    "referenceValueDeg": [78.76, -69.19],
+    "scaleDeg": [-0.0040595312971682, 0.0040595312971682],
+    "rotationDeg": 0.0,
+    "axisFieldOfViewDeg": 24.0,
+    "fitsHeader": {
+      "WCSAXES": 2,
+      "CTYPE1": "RA---TAN",
+      "CTYPE2": "DEC--TAN",
+      "CUNIT1": "deg",
+      "CUNIT2": "deg",
+      "RADESYS": "ICRS",
+      "LONPOLE": 180.0,
+      "LATPOLE": -69.19
+    },
+    "fitsEdgeCornersDeg": [
+      {"pixel": [0.5, 0.5], "ra": 132.37240630214816, "dec": -75.3554231407276},
+      {"pixel": [6000.5, 0.5], "ra": 25.13847313539653, "dec": -75.35239496625994},
+      {"pixel": [6000.5, 6000.5], "ra": 57.76596289415442, "dec": -55.371263520735916},
+      {"pixel": [0.5, 6000.5], "ra": 99.74764964777653, "dec": -55.37240945730545}
+    ],
+    "rasterOrientation": "The JPEG is top-left raster order; it matches the FITS RGB planes after reversing FITS axis 2 (Y). Use the FITS-convention referencePixel and positive Y scale with the overlay pipeline's existing raster-to-FITS Y reversal.",
+    "wcsSource": {
+      "artifactRole": "native-wcs-color-fits",
+      "description": "Native WCS written by the CDS HiPS2FITS service for the same survey, dimensions, center, field, and projection as the JPEG."
+    }
+  },
+  "verification": {
+    "fitsPayloadBytes": 144000000,
+    "alphaMin": 254,
+    "alphaMax": 255,
+    "alphaNonzeroFraction": 1.0,
+    "fullyBlankRows": 0,
+    "fullyBlankColumns": 0,
+    "exactBlackRgbFraction": 0.005396222222222222,
+    "orientationCheck": "A 300x300 nearest-neighbor sample of JPEG versus FITS showed same-channel correlations 0.894, 0.903, 0.915 only after FITS Y reversal; mean absolute differences were 2.25, 2.14, 2.34 DN.",
+    "coverageAssessment": "No alpha holes or fully blank rows/columns. The rendered field has conspicuous photographic plate seams, vignetting, and color/brightness discontinuities; use it as a wide scientific alignment comparison, not as the detail image or a seamless photometric mosaic.",
+    "publisherCaveat": "The CDS record states that three missing red plates use STScI DSSColor JPEG pixels and eleven missing blue plates, mainly in the Galactic plane, are red-only. The requested LMC cutout itself has no alpha holes."
+  },
+  "recommendation": "Add the JPEG as an Alignment-only wide comparison. Retain SMASH as the central higher-resolution detail layer; do not use this plate composite as a cloud reconstruction source without explicit seam/background correction."
+}
