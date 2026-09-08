@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-nebula-image-placement@1",
+  "subjectId": "lmc-particles",
+  "overlayCatalogue": "labs/nebula/models/lmc-overlays/overlays.json",
+  "imageId": "smash-original",
+  "positionKpc": {
+    "x": -1.2,
+    "y": -1.7,
+    "z": 0
+  },
+  "rotationDegrees": {
+    "x": 0,
+    "y": 0,
+    "z": 39
+  },
+  "scale": 3,
+  "opacity": 0.29
+}
