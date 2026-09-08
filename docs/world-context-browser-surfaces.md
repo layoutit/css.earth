@@ -387,3 +387,31 @@ initial full-scene comparisons are therefore not claimed as all-DPR parity; one
 DPR 2 image differs by up to three levels. The exact-history replay above is the
 renderer equivalence evidence. The first replay sampled its 200 ms label fade
 before it had settled and is excluded; the qualified replay waits 500 ms.
+
+## Direct minimap transform publication after main integration
+
+Main `c61d1bf9` is integrated at `bc30df6a`; its world context contains 227
+bodies / 226 orbits. The merged minimap artifact still contains 2,209 points
+(2,048 stars and 161 bodies). The following pair deliberately holds that artifact
+fixed; it is not comparable as an identical catalog to the earlier 178-body runs.
+
+The minimap previously wrote its grid rotation as an inherited custom property
+on the root, although only the grid consumes it. Publish `transform` directly to
+the retained grid and skip identical matrices. Point projection, ring dimensions,
+opacity, clipping, source data and the galaxy image stay unchanged. Static
+responsive variables remain CSS-owned.
+
+Chrome's direct matrix fast parser rounds coefficients that variable substitution
+preserved. A constant `calc(number)` for the first matrix coefficient preserves
+the full numeric parser for the grid; the existing galaxy matrix is unchanged.
+The plain direct assignment was rejected after a same-page typed-matrix probe
+proved its precision loss. This avoids changing raster alignment as a side effect
+of moving the publication owner.
+
+Evidence: `output/playwright/minimap-direct-precision-complete/` replays the
+recorded system, stellar and galactic views plus orientation changes, at DPR 1/2.
+It compares baseline → direct → restored on the same retained 2,316 elements.
+All 18 computed-style and full-double matrix comparisons are exact; image
+channel differences are recorded alongside the restored-baseline repeat.
+Separate-page and strict-zero-raster attempts remain in neighboring evidence
+directories and are not asserted as pixel-identical qualifications.

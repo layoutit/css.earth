@@ -13,6 +13,7 @@ export function mountSpaceMinimap(documentTarget) {
   root.setAttribute('aria-label', 'Local space minimap, following the main camera position, orientation and zoom.');
   root.innerHTML = `<div class="space-minimap-shell" aria-hidden="true"><div class="space-minimap-content"><div class="space-minimap-galaxy" hidden></div><div class="space-minimap-world">${prepared.gridMarkup}</div><div class="space-minimap-points">${prepared.pointMarkup}</div></div></div>`;
   overlays.append(root);
+  const grid = root.querySelector('.space-minimap-world');
   const dots = [...root.querySelectorAll('.space-minimap-dot')];
   const markerRadii = new Map();
   const dotRadii = dots.map(dot => {
@@ -24,7 +25,7 @@ export function mountSpaceMinimap(documentTarget) {
   });
   const rings = [...root.querySelectorAll('.space-minimap-ring[data-radius-m]')];
   const galaxy = root.querySelector('.space-minimap-galaxy');
-  let focus = prepared.defaultFocus, lastView = '', destroyed = false;
+  let focus = prepared.defaultFocus, lastView = '', lastGridTransform = '', destroyed = false;
   return {
     selectObject(frame) { focus = { positionM: frame.originM, radiusM: frame.bodyRadiusM }; lastView = ''; },
     publish(world, viewport) {
@@ -48,7 +49,13 @@ export function mountSpaceMinimap(documentTarget) {
       const galaxyFade = Math.max(0, Math.min(1, Math.log(rangeM / prepared.galaxy.fadeStartM) / Math.log(prepared.galaxy.fullM / prepared.galaxy.fadeStartM)));
       const plane = galaxyFade > 0 ? prepared.galaxy.planeToReference : prepared.diagramToReference;
       const diagramToCamera = multiply(referenceToCamera, plane);
-      root.style.setProperty('--map-rotation', cssMatrix(diagramToCamera));
+      // The grid alone consumes this matrix. An inherited custom property on
+      // the root can invalidate unrelated retained points when it changes.
+      const gridTransform = cssMatrix(diagramToCamera, true);
+      if (gridTransform !== lastGridTransform) {
+        grid.style.transform = gridTransform;
+        lastGridTransform = gridTransform;
+      }
       root.dataset.radiusM = String(rangeM);
       root.dataset.centerM = centerM.join(',');
       root.dataset.scope = galaxyFade > 0 ? 'galaxy' : rangeM > 1e16 ? 'stellar' : 'system';
@@ -104,6 +111,9 @@ function multiply(a, b) {
   return [0, 1, 2].flatMap(row => [0, 1, 2].map(col =>
     a[row * 3] * b[col] + a[row * 3 + 1] * b[3 + col] + a[row * 3 + 2] * b[6 + col]));
 }
-function cssMatrix(m) {
-  return `matrix3d(${[m[0], m[3], m[6], 0, m[1], m[4], m[7], 0, m[2], m[5], m[8], 0, 0, 0, 0, 1].join(',')})`;
+function cssMatrix(m, preservePrecision = false) {
+  // Keep the precision of the former variable-substituted grid matrix. Chrome
+  // rounds direct matrix tokens on its fast parser; calc uses full precision.
+  const first = preservePrecision ? `calc(${m[0]})` : m[0];
+  return `matrix3d(${[first, m[3], m[6], 0, m[1], m[4], m[7], 0, m[2], m[5], m[8], 0, 0, 0, 0, 1].join(',')})`;
 }
