@@ -1,0 +1,30 @@
+{
+  "schema": "cssearth-size-approximation@1",
+  "source": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+  "citation": "JPL Solar System Dynamics, Planetary Satellite Physical Parameters",
+  "meanRadiusKm": 170,
+  "meanRadiusUncertaintyKm": 25,
+  "referenceRadiusKm": 170,
+  "gmKm3S2": 0,
+  "gmInterpretation": "Unmodeled mass, not physical zero",
+  "semiAxesKm": [
+    170,
+    170,
+    170
+  ],
+  "semiAxesInterpretation": "Equal axes are an illustrative sphere from the mean radius, not three measured axes",
+  "formula": "r(lon,lat)=meanRadiusKm",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Spherical size approximation using JPL’s 170 ± 25 km mean radius. The true shape is not reconstructed. The gray grid marks unmapped surface; it is not photographed terrain."
+}

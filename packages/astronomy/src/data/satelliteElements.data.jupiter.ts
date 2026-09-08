@@ -10,6 +10,28 @@
 import type { SatelliteRecord } from './satelliteElements.data.js'
 
 export const SATELLITE_ELEMENTS_JUPITER = {
+  himalia: {
+    parent: 'jupiter',
+    horizonsCode: '506',
+    longitudeHarmonics: [{"rateRadPerDay":0.0025118460436452713,"cosineRad":-0.011222365652612825,"sineRad":0.0032712158808157286,"epochJdTt":2461039.5},{"rateRadPerDay":0.022223734526850135,"cosineRad":-0.007404710967593478,"sineRad":0.0034346352775274165,"epochJdTt":2461039.5},{"rateRadPerDay":0.04723892555096029,"cosineRad":0.007653414959790313,"sineRad":-0.0018838723196811947,"epochJdTt":2461039.5}],
+    fitFromJdTdb: 2458849.5,
+    fitToJdTdb: 2463232.5,
+    fitStepDays: 5,
+    poleRightAscensionRad: -1.185698022572,
+    poleDeclinationRad: 0.701000623167,
+    elements: {
+      epochJdTt: 2451545,
+      semiMajorAxisKm: 11451414.65,
+      eccentricity: 0.15374142601,
+      inclinationRad: 0.026595174262,
+      ascendingNodeRad: -3.076149632449,
+      argumentOfPeriapsisRad: 3.560308400444,
+      meanAnomalyAtEpochRad: -181.279000325133,
+      meanMotionRadPerDay: 0.025022373660937,
+      ascendingNodeRateRadPerDay: -0.00097811795245349,
+      argumentOfPeriapsisRateRadPerDay: 0.001039096103296593,
+    },
+  },
   io: {
     parent: 'jupiter',
     horizonsCode: '501',

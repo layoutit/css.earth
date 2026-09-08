@@ -1,6 +1,6 @@
 # Himalia source survey
 
-Status: source qualification in progress. No prepared scene or surface lens is registered yet.
+Status: size-model presentation implemented; photographic surface mapping is unqualified.
 
 ## Physical interpretation
 
@@ -10,24 +10,20 @@ Status: source qualification in progress. No prepared scene or surface lens is r
 - [The 2018 occultation report](https://meetingorganizer.copernicus.org/EPSC-DPS2019/EPSC-DPS2019-1909-1.pdf) constrains an elliptical projected outline larger than the Cassini estimate. Resolve its final analysis and coordinate definitions before choosing geometry; a projected ellipse does not determine the unseen third axis.
 - Pole, rotational phase and complete shape remain unqualified. Do not fill missing axes by silently copying an observed axis.
 
-## Candidate views
+## Image and dataset survey
 
-| Source | What it can add | Current disposition |
-| --- | --- | --- |
-| [Cassini ISS archive](https://pds-rings.seti.org/cassini/iss/), OPUS query in `source/survey/opus.json` | Original frames, calibration and geometry | Unresolved: inspect native products and filter metadata before mapping imagery. |
-| Finest returned Cassini frame `co-iss-n1355869401` | Approximately 26.60 km/pixel sampling at a 69.12° phase angle | Unresolved: only several pixels span the disc, so pointing, limb coverage and photographed shading matter. |
-| Cassini press image | Identifies the observation and its limitations | Reference only; the enlarged inset is not a higher-resolution texture. |
-| Stellar occultation analysis | Projected size and shape constraints | Physical geometry candidate; not a surface map and not yet a full 3D model. |
+- [Cassini ISS/PDS](https://pds-rings.seti.org/cassini/iss/): 93 catalog matches, first 12 retained in `source/survey/opus.json`. The finest-distance N1355869401 calibrated native frame was inspected: CL1/CB3, 8.2-second exposure, approximately 26.60 km/pixel. This long exposure is not a securely registered disc; camera pointing, limb interpretation and the unknown 3D shape remain unresolved. Exact raster hash and original label are retained.
+- [Denk et al. (2026), section 4.3.3 and Figure 20](https://refubium.fu-berlin.de/bitstream/handle/fub188/51747/11214_2026_Article_1263.pdf?sequence=1) analyzes Cassini's shorter exposures in seven filters: approximately 4–6 pixels span the disc, without unambiguous surface spots. Color photometry is integrated context, not a defensible spatial color/composition lens. The same review finds New Horizons' 2007 images barely resolved. Neither supplies a qualified terrain map for this package.
+- The 2018 occultation constrains a projected ellipse. It does not determine the third axis or a unique pole, so this package does not invent an elongated 3D shape from it. No registered DEM or mapped geology release was qualified.
 
-The query returned 93 matching catalog entries on 2026-09-08. This is an archive
-search result, not a count of usable images. Its first 12 records are retained.
-A broader release/paper survey, including other spacecraft observations, and
-native image inspection are still required.
+## Included model and shared behavior
 
-## Implementation boundary
+The Shape model dataset shows a spherical **size approximation** from JPL's mean radius, not a measured spherical shape. The entire surface uses the ordinary shared missing-data grid. The active lens visibly discloses the approximation and absent mapping. No terrain, albedo, rings or atmosphere are invented.
 
-Use the generic object adapter, shared lighting and standard missing-data grid.
-Only add imagery after its sampling, valid coverage and camera registration
-are established. Source restoration, an independently checked orbital fit,
-a qualified display orientation and real-browser review remain implementation
-work. A model-only view must disclose the missing shape or surface information.
+The radius table is reproducible with `r(lon, lat) = meanRadiusKm` on the checked-in 5° grid. Meshoptimizer produces 480 native triangle leaves, below the 2,000-leaf budget. Its geometric simplification tolerance is not measurement uncertainty. Shared Flood lighting is the default; directional Shadows remains available. Minimap, thumbnail and context billboard derive from the same model.
+
+The display pole uses the fitted orbital normal with an arbitrary meridian. This is an illustration convention, not a measured spin pole, synchronous rotation or current landmark phase. Orbital position is separately fitted from JPL Horizons over 2020–2032; the six independent fractional-day vectors in the astronomy fixtures measure residuals rather than a universal accuracy bound. Extrapolation outside that interval is not qualified.
+
+Source inputs and authored documents are pinned in `source/manifest.json`. External preparation inputs are restored by `preparation/acquisition.json`. Archive images surveyed but not used to bake assets are recorded as evidence rather than required runtime downloads.
+
+At the six committed reference epochs, the maximum position residual is 645,824 km. This is about 5.6% of the fitted semimajor axis: a coarse orbit preview, not precision tracking. The existing prepared slow-longitude correction reduces the error but does not represent all solar perturbations.

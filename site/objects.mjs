@@ -1,3 +1,5 @@
+import himaliaDescriptor from "../src/planets/himalia/object.json" with { type: "json" };
+import nereidDescriptor from "../src/planets/nereid/object.json" with { type: "json" };
 import aegaeonDescriptor from "../src/planets/aegaeon/object.json" with { type: "json" };
 import antheDescriptor from "../src/planets/anthe/object.json" with { type: "json" };
 import polydeucesDescriptor from "../src/planets/polydeuces/object.json" with { type: "json" };
@@ -92,6 +94,16 @@ import venusDescriptor from "../src/planets/venus/object.json" with { type: "jso
 import { defineObject, defineObjects } from "./object-schema.mjs";
 
 export const OBJECTS = defineObjects([
+  object("himalia", "Himalia", "satellite", "#a0a0a0", 5.2,
+    "Explore Himalia, a moon of Jupiter, through its source-backed size model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(himaliaDescriptor);
+    }, himaliaDescriptor.properties.worldFrame),
+  object("nereid", "Nereid", "satellite", "#a0a0a0", 30.07,
+    "Explore Nereid, a moon of Neptune, through its source-backed size model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(nereidDescriptor);
+    }, nereidDescriptor.properties.worldFrame),
   object("aegaeon", "Aegaeon", "satellite", "#a0a0a0", 9.58,
     "Explore Aegaeon, a small moon of Saturn, through its measured shape.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
