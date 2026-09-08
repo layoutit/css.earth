@@ -65,7 +65,7 @@
 }
 
 .scale-stop:focus-visible {
-  outline: 1px solid var(--shell-text);
+  outline: 1px solid var(--shell-focus);
   outline-offset: -1px;
 }
 

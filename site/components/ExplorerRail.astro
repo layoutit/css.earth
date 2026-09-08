@@ -10,7 +10,8 @@ const { objectId } = Astro.props;
 
 <nav class="explorer-rail" aria-label="Explorer">
   <button
-    class="explorer-rail-button explorer-rail-explore"
+    class="explorer-rail-explore"
+    hidden
     type="button"
     aria-label="Solar System"
     aria-controls={`${objectId}-object-browser`}
@@ -21,25 +22,23 @@ const { objectId } = Astro.props;
     </span>
   </button>
   <button
-    class="explorer-rail-button explorer-rail-about"
+    class="planet-toolbar-action explorer-rail-about"
     type="button"
     aria-label="About"
+    title="About"
     aria-controls={`${objectId}-about`}
     aria-pressed="false"
   >
-    <span class="explorer-rail-icon">
-      <MaterialSymbol name="help" />
-    </span>
+    <MaterialSymbol name="help" />
   </button>
   <button
-    class="explorer-rail-button planet-settings-action"
+    class="planet-toolbar-action planet-settings-action"
     type="button"
     aria-label="Settings"
+    title="Settings"
     aria-controls={`${objectId}-settings`}
     aria-pressed="false"
   >
-    <span class="explorer-rail-icon">
-      <MaterialSymbol name="settings" />
-    </span>
+    <MaterialSymbol name="settings" />
   </button>
 </nav>
