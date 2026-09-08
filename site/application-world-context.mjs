@@ -1,3 +1,4 @@
+import { mountSpaceMinimap } from './minimap/minimap.mjs';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
 import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
@@ -62,6 +63,7 @@ function loadApplicationUniverse() {
 export function createApplicationWorldContext() {
   return {
     async mount({ stage, signal }) {
+      const target = stage.ownerDocument.defaultView;
       const prepared = await loadApplicationUniverse();
       if (signal?.aborted) throw signal.reason;
       const resources = prepareObjectResources(prepared.assets, { signal });
@@ -70,7 +72,7 @@ export function createApplicationWorldContext() {
         if (signal?.aborted) throw signal.reason;
         const layer = prepared.mount(stage);
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
-        const target = stage.ownerDocument.defaultView;
+        const minimap = mountSpaceMinimap(stage.ownerDocument);
         const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect }) : null;
         if (diagnostics) target.__cssEarthUniverse = diagnostics;
         let heliosphereEnabled = false, publication = null, destroyed = false;
@@ -78,8 +80,13 @@ export function createApplicationWorldContext() {
           if (destroyed) return;
           publication = { world, viewport };
           layer.publish(world, viewport, { heliosphere: heliosphereEnabled });
+          minimap.publish(world, viewport);
         };
         return { ...layer, viewport, publish,
+          selectObject(id, frame) {
+            layer.selectObject(id, frame);
+            minimap.selectObject(frame);
+          },
           setAsteroidOrbitsEnabled(enabled) {
             if (!destroyed) layer.setHiddenOrbits(enabled === true ? [] : asteroidIds);
           },
@@ -94,6 +101,7 @@ export function createApplicationWorldContext() {
           destroy() {
             destroyed = true; publication = null;
             if (diagnostics && target.__cssEarthUniverse === diagnostics) delete target.__cssEarthUniverse;
+            minimap.destroy();
             viewport.destroy(); layer.destroy(); resources.destroy();
           },
         };
