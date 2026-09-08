@@ -412,8 +412,8 @@
     {
       "id": "mercury-object-content",
       "path": "content/object.json",
-      "expectedSha256": "7892ae509369e1ef2039767c701f4b25ebef7a9b5d138ac5c7158a9f634bc579",
-      "expectedBytes": 12680,
+      "expectedSha256": "7d1ba284ef62d1037cf1698bf188033887b066fc18715ac768e750c6cf45dc04",
+      "expectedBytes": 15093,
       "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -564,6 +564,13 @@
       "expectedBytes": 699,
       "expectedSha256": "63bcfe99e99570bf9f8869485c181dcb28688530763e9c32eaf76174cf76f88f",
       "purpose": "CC-BY-4.0 attribution and reproducibility route for the DLR MESSENGER MASCS derived spectrum."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1434,
+      "expectedSha256": "a16802b765a74431dd446798afb9c0234cd8663156d194a78c2d3de674f6ebcd"
     }
   ]
 }

@@ -30,8 +30,8 @@
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "1.458 AU (mean)"
+        "label": "Solar semimajor axis",
+        "value": "1.458 AU"
       },
       {
         "id": "orbital-period",
@@ -44,7 +44,19 @@
         "value": "5.27 hours"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.25",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-08",
+          "path": "source/reference/horizons-physical.txt"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -53,7 +65,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "NEAR MSI · corrected 550 nm albedo",
+        "description": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
         "title": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
         "thumbnail": "/scenes/eros/eros-normal-thumbnail.webp",
         "surface": "eros-normal-surface@2x.webp",
@@ -68,8 +80,8 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Source shape · radial height",
-        "title": "Color shows radius minus a 8420 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified.",
+        "description": "Color shows radius minus a 8420 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
+        "title": "Color shows radius minus a 8420 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
         "thumbnail": "/scenes/eros/eros-elevation-thumbnail.webp",
         "surface": "eros-elevation-surface@2x.webp",
         "poles": "eros-elevation-surface@2x.webp",

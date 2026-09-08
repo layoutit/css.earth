@@ -1,0 +1,45 @@
+{
+  "modelId": 1842,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1842",
+  "fields": {
+    "ID": "1842",
+    "Asteroid ID": "(14) Irene",
+    "Lambda": "91",
+    "Beta": "-15",
+    "Period": "15.02987",
+    "YORP": "",
+    "JD0": "2434741",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "153",
+    "Equivalent Diameter Error": "6",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-09-21",
+    "Comment": "",
+    "Created": "2017-09-21 14:26:25",
+    "Modified": "2017-09-21 14:32:11"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1121/AO.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1122/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1123/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1124/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/171"
+  ]
+}

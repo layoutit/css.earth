@@ -345,8 +345,8 @@
     {
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 11871,
-      "expectedSha256": "ebaa31d18566865ac42d29b0b70e7025b8ffc8861ac8fa7e517a129a8e947008",
+      "expectedBytes": 14631,
+      "expectedSha256": "9ef85e32e9285bad639a0891ac9c4e46279da100e32b6d806001424d89495dac",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -510,6 +510,13 @@
       "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
       "expectedBytes": 1271,
       "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1340,
+      "expectedSha256": "f44e1f69eadcbc9d132e594f75013934416a5044bf5b71b120fb191d72c05c6f"
     }
   ]
 }

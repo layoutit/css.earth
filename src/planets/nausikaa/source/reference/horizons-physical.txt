@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27192%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               192 Nausikaa (A879 DA)          2026-Sep-07 21:00:19
+Rec #:     192 (+COV) Soln.date: 2026-Jun-05_03:15:56   # obs: 6258 (1879-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457931.5 ! 2017-Jun-27.00 (TDB)         Residual RMS= .26484
+   EC= .2451602851327527   QR= 1.815167713792562   TP= 2458606.2255659774
+   OM= 343.2343828151074   W=  30.25587006979149   IN= 6.806154838620007
+   A= 2.404706162170857    MA= 181.6643308132928   ADIST= 2.994244610549151
+   PER= 3.72908            N= .264308451           ANGMOM= .025861425
+   DAN= 1.86519            DDN= 2.86739            L= 13.3142038
+   B= 3.4233429            MOID= .81770098         TP= 2019-May-02.7255659774
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 49.388             ROTPER= 13.625
+   H= 7.21                 G= .030                 B-V= .927
+                           ALBEDO= .327            STYP= Sl
+
+ASTEROID comments: 
+1: soln ref.= JPL#140, OCC=0           radar( 1 delay, 0 Dop.)
+2: source=ORB
+*******************************************************************************

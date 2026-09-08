@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2766391%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               66391 Moshup (1999 KW4)         2026-Sep-07 22:26:27
+Rec #:   66391 (+COV) Soln.date: 2026-Apr-20_06:20:49   # obs: 3871 (1998-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2452275.5 ! 2002-Jan-01.00 (TDB)         Residual RMS= .32474
+   EC= .6885444827344509   QR= .200012982608846    TP= 2452360.4644702743
+   OM= 244.9407383839948   W=  192.5827587848109   IN= 38.89527270972491
+   A= .642187957898057     MA= 197.2772813027653   ADIST= 1.084362933187268
+   PER= .51464             N= 1.915185467          ANGMOM= .009996933
+   DAN= 1.02969            DDN= .20199             L= 74.796012
+   B= -7.8619944           MOID= .0145283          TP= 2002-Mar-26.9644702743
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .6585              ROTPER= 2.7645
+   H= 16.64                G= .150                 B-V= n.a.
+                           ALBEDO= n.a.            STYP= S:
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -6.11133430084E-15  A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#368, PHA  OCC=0       radar(37 delay, 0 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************

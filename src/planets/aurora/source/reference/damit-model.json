@@ -1,0 +1,46 @@
+{
+  "modelId": 1830,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1830",
+  "fields": {
+    "ID": "1830",
+    "Asteroid ID": "(94) Aurora",
+    "Lambda": "55",
+    "Beta": "11",
+    "Period": "7.226189",
+    "YORP": "",
+    "JD0": "2444116",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "198",
+    "Equivalent Diameter Error": "4",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "3.5",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-06-13",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:39",
+    "Modified": "2017-06-19 13:24:48"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1070/AO.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1071/occ.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1072/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1073/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1074/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/169"
+  ]
+}

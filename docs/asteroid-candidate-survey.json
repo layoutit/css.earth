@@ -1,0 +1,2801 @@
+{
+  "surveyDate": "2026-09-08",
+  "discoveryIndex": "https://en.wikipedia.org/wiki/List_of_exceptional_asteroids",
+  "scope": "142 named targets and 75 provisional-designation entries from the discovery index checked against DAMIT, plus targeted mission/radar source checks. This is a dated archive survey, not proof that no other model exists or a claim to have qualified every non-asteroid entry.",
+  "damitTargets": 217,
+  "includedInThisPR": 65,
+  "damit": [
+    {
+      "number": 5,
+      "name": "Astraea",
+      "status": "included",
+      "package": "astraea",
+      "models": [
+        {
+          "id": 104,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/104",
+          "calibrated": true,
+          "diameterKm": "115",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/123",
+            "https://damit.cuni.cz/projects/damit/references/view/139",
+            "https://damit.cuni.cz/projects/damit/references/view/149"
+          ]
+        },
+        {
+          "id": 1816,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1816",
+          "calibrated": true,
+          "diameterKm": "112",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/169"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "name": "Irene",
+      "status": "included",
+      "package": "irene",
+      "models": [
+        {
+          "id": 309,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/309",
+          "calibrated": true,
+          "diameterKm": "149",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/141",
+            "https://damit.cuni.cz/projects/damit/references/view/149"
+          ]
+        },
+        {
+          "id": 1842,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1842",
+          "calibrated": true,
+          "diameterKm": "153",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/171"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "name": "Massalia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 118,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/118",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/103"
+          ]
+        },
+        {
+          "id": 119,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/119",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/103"
+          ]
+        },
+        {
+          "id": 16321,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16321",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": []
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "name": "Proserpina",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1189,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1189",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "name": "Polyhymnia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 5163,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5163",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/670"
+          ]
+        },
+        {
+          "id": 5164,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5164",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/670"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "name": "Leukothea",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 867,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/867",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        },
+        {
+          "id": 868,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/868",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "name": "Fides",
+      "status": "included",
+      "package": "fides",
+      "models": [
+        {
+          "id": 311,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/311",
+          "calibrated": true,
+          "diameterKm": "118",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/141",
+            "https://damit.cuni.cz/projects/damit/references/view/149"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "name": "Harmonia",
+      "status": "included",
+      "package": "harmonia",
+      "models": [
+        {
+          "id": 313,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/313",
+          "calibrated": true,
+          "diameterKm": "123",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/141",
+            "https://damit.cuni.cz/projects/damit/references/view/149"
+          ]
+        },
+        {
+          "id": 1855,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1855",
+          "calibrated": true,
+          "diameterKm": "111",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/171"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "name": "Nysa",
+      "status": "included",
+      "package": "nysa",
+      "models": [
+        {
+          "id": 133,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/133",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/104",
+            "https://damit.cuni.cz/projects/damit/references/view/126"
+          ]
+        },
+        {
+          "id": 16324,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16324",
+          "calibrated": true,
+          "diameterKm": "75",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/682"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "name": "Doris",
+      "status": "included",
+      "package": "doris",
+      "models": [
+        {
+          "id": 936,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/936",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        },
+        {
+          "id": 1845,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1845",
+          "calibrated": true,
+          "diameterKm": "210",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/171"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "name": "Virginia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 12738,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12738",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/672"
+          ]
+        },
+        {
+          "id": 12739,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12739",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/672"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "name": "Echo",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1695,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1695",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/162"
+          ]
+        },
+        {
+          "id": 1696,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1696",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/162"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 64,
+      "name": "Angelina",
+      "status": "included",
+      "package": "angelina",
+      "models": [
+        {
+          "id": 288,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/288",
+          "calibrated": true,
+          "diameterKm": "51",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/139"
+          ]
+        },
+        {
+          "id": 289,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/289",
+          "calibrated": true,
+          "diameterKm": "52",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/139"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 65,
+      "name": "Cybele",
+      "status": "included",
+      "package": "cybele",
+      "models": [
+        {
+          "id": 783,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/783",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/156"
+          ]
+        },
+        {
+          "id": 1843,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1843",
+          "calibrated": true,
+          "diameterKm": "313",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/171"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 66,
+      "name": "Maja",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1233,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1233",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        },
+        {
+          "id": 1234,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1234",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 70,
+      "name": "Panopaea",
+      "status": "included",
+      "package": "panopaea",
+      "models": [
+        {
+          "id": 6171,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
+          "calibrated": true,
+          "diameterKm": "128",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/667"
+          ]
+        },
+        {
+          "id": 6172,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6172",
+          "calibrated": true,
+          "diameterKm": "127",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/667"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 77,
+      "name": "Frigga",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 80,
+      "name": "Sappho",
+      "status": "included",
+      "package": "sappho",
+      "models": [
+        {
+          "id": 145,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/145",
+          "calibrated": true,
+          "diameterKm": "67",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/123",
+            "https://damit.cuni.cz/projects/damit/references/view/139",
+            "https://damit.cuni.cz/projects/damit/references/view/149"
+          ]
+        },
+        {
+          "id": 1832,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1832",
+          "calibrated": true,
+          "diameterKm": "61",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/169"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 88,
+      "name": "Thisbe",
+      "status": "included",
+      "package": "thisbe",
+      "models": [
+        {
+          "id": 149,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/149",
+          "calibrated": true,
+          "diameterKm": "204",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/106",
+            "https://damit.cuni.cz/projects/damit/references/view/139",
+            "https://damit.cuni.cz/projects/damit/references/view/149"
+          ]
+        },
+        {
+          "id": 1821,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1821",
+          "calibrated": true,
+          "diameterKm": "220",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/169"
+          ]
+        },
+        {
+          "id": 5926,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5926",
+          "calibrated": true,
+          "diameterKm": "218",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/660"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 90,
+      "name": "90",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 94,
+      "name": "Aurora",
+      "status": "included",
+      "package": "aurora",
+      "models": [
+        {
+          "id": 302,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/302",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/140"
+          ]
+        },
+        {
+          "id": 303,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/303",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/140"
+          ]
+        },
+        {
+          "id": 1830,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1830",
+          "calibrated": true,
+          "diameterKm": "198",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/169"
+          ]
+        },
+        {
+          "id": 1831,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1831",
+          "calibrated": true,
+          "diameterKm": "203",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/169"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 99,
+      "name": "Dike",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1144,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1144",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 100,
+      "name": "Hekate",
+      "status": "included",
+      "package": "hekate",
+      "models": [
+        {
+          "id": 3088,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3088",
+          "calibrated": true,
+          "diameterKm": "87",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/179"
+          ]
+        },
+        {
+          "id": 3089,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3089",
+          "calibrated": true,
+          "diameterKm": "90",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/179"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 107,
+      "name": "Camilla",
+      "status": "included",
+      "package": "camilla",
+      "models": [
+        {
+          "id": 151,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/151",
+          "calibrated": true,
+          "diameterKm": "214",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/106",
+            "https://damit.cuni.cz/projects/damit/references/view/122",
+            "https://damit.cuni.cz/projects/damit/references/view/139",
+            "https://damit.cuni.cz/projects/damit/references/view/149"
+          ]
+        },
+        {
+          "id": 1813,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1813",
+          "calibrated": true,
+          "diameterKm": "260",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/169"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 111,
+      "name": "Ate",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 121,
+      "name": "Hermione",
+      "status": "included",
+      "package": "hermione",
+      "models": [
+        {
+          "id": 155,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/155",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/131"
+          ]
+        },
+        {
+          "id": 156,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/156",
+          "calibrated": true,
+          "diameterKm": "200",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/171",
+            "https://damit.cuni.cz/projects/damit/references/view/131"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 139,
+      "name": "Juewa",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 5985,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5985",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/662"
+          ]
+        },
+        {
+          "id": 5986,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5986",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/662"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 141,
+      "name": "141",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 154,
+      "name": "Bertha",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 939,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/939",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        },
+        {
+          "id": 940,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/940",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 192,
+      "name": "Nausikaa",
+      "status": "included",
+      "package": "nausikaa",
+      "models": [
+        {
+          "id": 1864,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1864",
+          "calibrated": true,
+          "diameterKm": "94",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/103",
+            "https://damit.cuni.cz/projects/damit/references/view/112"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 200,
+      "name": "200",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 201,
+      "name": "Penelope",
+      "status": "included",
+      "package": "penelope",
+      "models": [
+        {
+          "id": 180,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/180",
+          "calibrated": true,
+          "diameterKm": "85",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/106",
+            "https://damit.cuni.cz/projects/damit/references/view/149"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 222,
+      "name": "Lucia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 523,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/523",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        },
+        {
+          "id": 524,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/524",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 259,
+      "name": "259",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 279,
+      "name": "Thule",
+      "status": "included",
+      "package": "thule",
+      "models": [
+        {
+          "id": 16313,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16313",
+          "calibrated": true,
+          "diameterKm": "116",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/678"
+          ]
+        },
+        {
+          "id": 16314,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16314",
+          "calibrated": true,
+          "diameterKm": "117",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/678"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 288,
+      "name": "Glauke",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 300,
+      "name": "Geraldina",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 323,
+      "name": "Brucia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 10666,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10666",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 330,
+      "name": "Adalberta",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 333,
+      "name": "Badenia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 3298,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3298",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/182"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 372,
+      "name": "Palma",
+      "status": "included",
+      "package": "palma",
+      "models": [
+        {
+          "id": 298,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/298",
+          "calibrated": true,
+          "diameterKm": "187",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/139",
+            "https://damit.cuni.cz/projects/damit/references/view/141"
+          ]
+        },
+        {
+          "id": 299,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/299",
+          "calibrated": true,
+          "diameterKm": "198",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/139",
+            "https://damit.cuni.cz/projects/damit/references/view/141"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 375,
+      "name": "375",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 400,
+      "name": "Ducrosa",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 352,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/352",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/141"
+          ]
+        },
+        {
+          "id": 353,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/353",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/141"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 423,
+      "name": "Diotima",
+      "status": "included",
+      "package": "diotima",
+      "models": [
+        {
+          "id": 217,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/217",
+          "calibrated": true,
+          "diameterKm": "194",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/112",
+            "https://damit.cuni.cz/projects/damit/references/view/113",
+            "https://damit.cuni.cz/projects/damit/references/view/149"
+          ]
+        },
+        {
+          "id": 1836,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1836",
+          "calibrated": true,
+          "diameterKm": "209",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/167"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 444,
+      "name": "Gyptis",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 5394,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5394",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        },
+        {
+          "id": 5395,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5395",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 451,
+      "name": "451",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 482,
+      "name": "Petrina",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1152,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1152",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        },
+        {
+          "id": 1153,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1153",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 490,
+      "name": "Veritas",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 833,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/833",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        },
+        {
+          "id": 834,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/834",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 496,
+      "name": "Gryphia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 6121,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6121",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/662"
+          ]
+        },
+        {
+          "id": 6122,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6122",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/662"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 500,
+      "name": "Selinur",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 5480,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5480",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 525,
+      "name": "Adelaide",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 532,
+      "name": "Herculina",
+      "status": "included",
+      "package": "herculina",
+      "models": [
+        {
+          "id": 222,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/222",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/103"
+          ]
+        },
+        {
+          "id": 1814,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1814",
+          "calibrated": true,
+          "diameterKm": "189",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/169"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 555,
+      "name": "Norma",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 588,
+      "name": "Achilles",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 3934,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3934",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/182"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 600,
+      "name": "Musa",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 504,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/504",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        },
+        {
+          "id": 505,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/505",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 624,
+      "name": "Hektor",
+      "status": "included",
+      "package": "hektor",
+      "models": [
+        {
+          "id": 232,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/232",
+          "calibrated": true,
+          "diameterKm": "175",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/163",
+            "https://damit.cuni.cz/projects/damit/references/view/104"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 666,
+      "name": "Desdemona",
+      "status": "included",
+      "package": "desdemona-666",
+      "models": [
+        {
+          "id": 6218,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6218",
+          "calibrated": true,
+          "diameterKm": "28.4",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/664"
+          ]
+        },
+        {
+          "id": 6219,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6219",
+          "calibrated": true,
+          "diameterKm": "28.3",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/664"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 700,
+      "name": "Auravictrix",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1654,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1654",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/162"
+          ]
+        },
+        {
+          "id": 1655,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1655",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/162"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 702,
+      "name": "702",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 715,
+      "name": "Transvaalia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 3722,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3722",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/182"
+          ]
+        },
+        {
+          "id": 3723,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3723",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/182"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 719,
+      "name": "Albert",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 777,
+      "name": "Gutemberga",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 787,
+      "name": "Moskva",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 515,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/515",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        },
+        {
+          "id": 516,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/516",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 800,
+      "name": "Kressmannia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 382,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/382",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/141"
+          ]
+        },
+        {
+          "id": 383,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/383",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/141"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 846,
+      "name": "Lipperta",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 864,
+      "name": "Aase",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 888,
+      "name": "Parysatis",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 5820,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5820",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        },
+        {
+          "id": 5821,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5821",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 900,
+      "name": "Rosalinde",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 561,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/561",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        },
+        {
+          "id": 562,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/562",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 912,
+      "name": "Maritima",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 925,
+      "name": "Alphonsina",
+      "status": "included",
+      "package": "alphonsina",
+      "models": [
+        {
+          "id": 301,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/301",
+          "calibrated": true,
+          "diameterKm": "58",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/139",
+            "https://damit.cuni.cz/projects/damit/references/view/141"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 933,
+      "name": "Susi",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 5856,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5856",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        },
+        {
+          "id": 5857,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5857",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 935,
+      "name": "Clivia",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 944,
+      "name": "Hidalgo",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1057,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1057",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 999,
+      "name": "Zachia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 5901,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5901",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        },
+        {
+          "id": 5902,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5902",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1000,
+      "name": "Piazzia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 3529,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3529",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/182"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1036,
+      "name": "Ganymed",
+      "status": "included",
+      "package": "ganymed",
+      "models": [
+        {
+          "id": 261,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/261",
+          "calibrated": true,
+          "diameterKm": "36",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/163",
+            "https://damit.cuni.cz/projects/damit/references/view/103"
+          ]
+        },
+        {
+          "id": 1849,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1849",
+          "calibrated": true,
+          "diameterKm": "39",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/171"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1078,
+      "name": "Mentha",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 1090,
+      "name": "Sumida",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 1095,
+      "name": "Tulipa",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1779,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1779",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/168"
+          ]
+        },
+        {
+          "id": 1780,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1780",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/168"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1111,
+      "name": "Reinmuthia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 678,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/678",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        },
+        {
+          "id": 679,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/679",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1125,
+      "name": "China",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1119,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1119",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        },
+        {
+          "id": 1120,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1120",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1140,
+      "name": "Crimea",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 403,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/403",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/141"
+          ]
+        },
+        {
+          "id": 404,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/404",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/141"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1171,
+      "name": "Rusthawelia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 3188,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3188",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/182"
+          ]
+        },
+        {
+          "id": 3189,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3189",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/182"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1235,
+      "name": "Schorria",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 5955,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5955",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/662"
+          ]
+        },
+        {
+          "id": 5956,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5956",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/662"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1317,
+      "name": "Silvretta",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 513,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/513",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        },
+        {
+          "id": 514,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/514",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/148"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1373,
+      "name": "Cincinnati",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 1449,
+      "name": "Virtanen",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1175,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1175",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        },
+        {
+          "id": 1176,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1176",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 1566,
+      "name": "Icarus",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 2000,
+      "name": "Herschel",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 2060,
+      "name": "Chiron",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 2222,
+      "name": "Lermontov",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 2309,
+      "name": "Mr. Spock",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 4874,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4874",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        },
+        {
+          "id": 4875,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4875",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2440,
+      "name": "Educatio",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 9541,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9541",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        },
+        {
+          "id": 9542,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9542",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 2675,
+      "name": "Tolkien",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 2938,
+      "name": "Hopi",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 10234,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10234",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3000,
+      "name": "Leonardo",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 3200,
+      "name": "Phaethon",
+      "status": "included",
+      "package": "phaethon",
+      "models": [
+        {
+          "id": 4394,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4394",
+          "calibrated": true,
+          "diameterKm": "5.1",
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/164",
+            "https://damit.cuni.cz/projects/damit/references/view/646"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3333,
+      "name": "Schaber",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 10836,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10836",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3753,
+      "name": "Cruithne",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 3789,
+      "name": "Zhongguo",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 4000,
+      "name": "Hipparchus",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 4015,
+      "name": "Wilson\u2013Harrington",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 4444,
+      "name": "Escher",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 4524,
+      "name": "Barklajdetolli",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 5000,
+      "name": "IAU",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 12740,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12740",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 5261,
+      "name": "Eureka",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 5535,
+      "name": "Annefrank",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 5555,
+      "name": "Wimberly",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 6000,
+      "name": "United Nations",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 1154,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1154",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/161"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 6478,
+      "name": "Gault",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 6666,
+      "name": "Fr\u00f6",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 7000,
+      "name": "Curie",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 7777,
+      "name": "Consadole",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 7968,
+      "name": "Elst\u2013Pizarro",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 8000,
+      "name": "Isaac Newton",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 8888,
+      "name": "Tartaglia",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 15683,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/15683",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 9000,
+      "name": "Hal",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 9165,
+      "name": "Raup",
+      "status": "unscaled models only",
+      "models": [
+        {
+          "id": 5835,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/658"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 9969,
+      "name": "Braille",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 9999,
+      "name": "Wiles",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 10000,
+      "name": "Myriostos",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 11111,
+      "name": "Repunit",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 11885,
+      "name": "Summanus",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 20461,
+      "name": "Dioretsa",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 22222,
+      "name": "Hodios",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 30000,
+      "name": "Camenzind",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 50719,
+      "name": "Elizabethgriffin",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 52246,
+      "name": "Donaldjohanson",
+      "status": "included",
+      "package": "donaldjohanson",
+      "models": []
+    },
+    {
+      "number": 55555,
+      "name": "DNA",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 60000,
+      "name": "Miminko",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 60558,
+      "name": "Echeclus",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 69230,
+      "name": "Hermes",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 98943,
+      "name": "Torifune",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 99942,
+      "name": "99942",
+      "status": "included",
+      "package": "apophis",
+      "models": []
+    },
+    {
+      "number": 100000,
+      "name": "Astronautica",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 118401,
+      "name": "LINEAR",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 152830,
+      "name": "Dinkinesh",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 200000,
+      "name": "Danielparrott",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 343158,
+      "name": "Marsyas",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 367943,
+      "name": "Duende",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 471325,
+      "name": "Taowu",
+      "status": "no model returned",
+      "models": []
+    },
+    {
+      "number": 514107,
+      "name": "Ka\u02bbepaoka\u02bb\u0101wela",
+      "status": "no model returned",
+      "models": []
+    }
+  ],
+  "additional": [
+    {
+      "number": 29075,
+      "name": "1950 DA",
+      "status": "included",
+      "package": "asteroid-1950-da",
+      "source": "https://echo.jpl.nasa.gov/asteroids/shapes/1950DA_RetrogradeModel.wf",
+      "note": "Published retrograde radar solution selected; 2014 Yarkovsky evidence rejects the prograde alternative."
+    },
+    {
+      "number": 99942,
+      "name": "Apophis",
+      "status": "included",
+      "package": "apophis",
+      "source": "https://sbn.psi.edu/pds/resource/apophis_shape.html",
+      "note": "2026 archive release of the 2018 preliminary Model B; original scale and published tumbling state."
+    },
+    {
+      "number": 52246,
+      "name": "Donaldjohanson",
+      "status": "included",
+      "package": "donaldjohanson",
+      "source": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/dsk/lcy_donj_k548_iso20m_v10.bds",
+      "note": "Original DLR/Lucy global DSK; observed and source-reconstructed regions disclosed; fixed display orientation."
+    },
+    {
+      "name": "1998 KY26",
+      "status": "deferred: newer model not openly downloadable in checked sources",
+      "source": "https://www.nature.com/articles/s41467-025-63697-4",
+      "note": "2025 work revises size and period. Data availability offers generated datasets on request. Do not relabel or rescale the superseded public 30 m radar mesh."
+    },
+    {
+      "number": 98943,
+      "name": "Torifune",
+      "status": "deferred: original calibrated mesh not located",
+      "source": "https://arxiv.org/html/2607.03276v1",
+      "note": "2026 pre-flyby study says the CDS identifier will be supplied on acceptance. No post-flyby scientific mesh download located in the checked JAXA release."
+    },
+    {
+      "number": 152830,
+      "name": "Dinkinesh",
+      "status": "deferred: original scientific mesh download not located",
+      "source": "https://pds-smallbodies.astro.umd.edu/data_sb/missions/lucy/index.shtml",
+      "note": "Scientific papers describe reconstruction; checked mission data and both current/PDS Lucy DSK indexes did not expose it. Images and third-party simulator models are not substituted."
+    },
+    {
+      "number": 1566,
+      "name": "Icarus",
+      "status": "deferred: original mesh download not located",
+      "source": "https://mel.epss.ucla.edu/jlm/publications/Greenberg17.aj153.Icarus.pdf",
+      "note": "Radar study describes the shape; no author mesh located in the checked JPL index. Dimensions alone are not a replacement."
+    },
+    {
+      "number": 69230,
+      "name": "Hermes",
+      "status": "deferred: original mesh download not located",
+      "source": "https://mel.epss.ucla.edu/jlm/research/NEAs/Hermes/index.html",
+      "note": "Published binary radar observations do not supply a qualified original mesh in the checked pages."
+    },
+    {
+      "number": 9969,
+      "name": "Braille",
+      "status": "deferred: original global mesh not located",
+      "source": "https://pds-smallbodies.astro.umd.edu/data_sb/missions/ds1/index.shtml",
+      "note": "Mission imagery and approximate shape studies were found; no pinned original closed scientific mesh was qualified."
+    },
+    {
+      "number": 5535,
+      "name": "Annefrank",
+      "status": "deferred: original global mesh not located",
+      "source": "https://pds-smallbodies.astro.umd.edu/data_sb/missions/stardust/index.shtml",
+      "note": "Flyby imaging alone is not a complete source mesh; no original closed reconstruction was qualified."
+    },
+    {
+      "number": 285263,
+      "name": "1998 QE2",
+      "status": "deferred: original scientific mesh download not located",
+      "source": "https://www.hou.usra.edu/meetings/lpsc2026/pdf/1939.pdf",
+      "note": "The 2026 LPSC abstract updates the primary and describes a bilobed secondary. The checked abstract and JPL downloadable-model index do not provide the original mesh. Figures are not substituted for data."
+    },
+    {
+      "number": 357439,
+      "name": "2004 BL86",
+      "status": "deferred: original scientific mesh download not located",
+      "source": "https://echo.jpl.nasa.gov/asteroids/2004BL86/2004BL86_planning.html",
+      "additionalSource": "https://arxiv.org/abs/1509.07122",
+      "note": "Radar imagery and published physical characterization are available. No original closed mesh download was qualified in the checked JPL index or source papers."
+    }
+  ],
+  "damitNamedTargets": 142,
+  "damitProvisionalTargets": 75,
+  "provisionalDamit": [
+    {
+      "number": 39546,
+      "designation": "1992 DT5",
+      "query": "https://damit.cuni.cz/?q=39546",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 75482,
+      "designation": "1999 XC173",
+      "query": "https://damit.cuni.cz/?q=75482",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 152680,
+      "designation": "1998 KJ9",
+      "query": "https://damit.cuni.cz/?q=152680",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 153814,
+      "designation": "2001 WN5",
+      "query": "https://damit.cuni.cz/?q=153814",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 162058,
+      "designation": "1997 AE12",
+      "query": "https://damit.cuni.cz/?q=162058",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 219774,
+      "designation": "2001 YY145",
+      "query": "https://damit.cuni.cz/?q=219774",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2010 JL88",
+      "query": "https://damit.cuni.cz/?q=2010%20JL88",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2014 RC",
+      "query": "https://damit.cuni.cz/?q=2014%20RC",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2010 TD54",
+      "query": "https://damit.cuni.cz/?q=2010%20TD54",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2008 HJ",
+      "query": "https://damit.cuni.cz/?q=2008%20HJ",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 5496,
+      "designation": "1973 NA",
+      "query": "https://damit.cuni.cz/?q=5496",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 101429,
+      "designation": "1998 VF31",
+      "query": "https://damit.cuni.cz/?q=101429",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 121514,
+      "designation": "1999 UJ7",
+      "query": "https://damit.cuni.cz/?q=121514",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 127546,
+      "designation": "2002 XU93",
+      "query": "https://damit.cuni.cz/?q=127546",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 196256,
+      "designation": "2003 EH1",
+      "query": "https://damit.cuni.cz/?q=196256",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 311999,
+      "designation": "2007 NS2",
+      "query": "https://damit.cuni.cz/?q=311999",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 336756,
+      "designation": "2010 NV1",
+      "query": "https://damit.cuni.cz/?q=336756",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 342842,
+      "designation": "2008 YB3",
+      "query": "https://damit.cuni.cz/?q=342842",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 434620,
+      "designation": "2005 VD",
+      "query": "https://damit.cuni.cz/?q=434620",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 468861,
+      "designation": "2013 LU28",
+      "query": "https://damit.cuni.cz/?q=468861",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 709487,
+      "designation": "2013 BL76",
+      "query": "https://damit.cuni.cz/?q=709487",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2008 TC3",
+      "query": "https://damit.cuni.cz/?q=2008%20TC3",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 528219,
+      "designation": "2008 KV42",
+      "query": "https://damit.cuni.cz/?q=528219",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2005 VX3",
+      "query": "https://damit.cuni.cz/?q=2005%20VX3",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2017 SV13",
+      "query": "https://damit.cuni.cz/?q=2017%20SV13",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 65407,
+      "designation": "2002 RP120",
+      "query": "https://damit.cuni.cz/?q=65407",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2000 DG8",
+      "query": "https://damit.cuni.cz/?q=2000%20DG8",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2010 BK118",
+      "query": "https://damit.cuni.cz/?q=2010%20BK118",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 612093,
+      "designation": "1999 LE31",
+      "query": "https://damit.cuni.cz/?q=612093",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2006 RJ2",
+      "query": "https://damit.cuni.cz/?q=2006%20RJ2",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2006 BZ8",
+      "query": "https://damit.cuni.cz/?q=2006%20BZ8",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2006 LM1",
+      "query": "https://damit.cuni.cz/?q=2006%20LM1",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2013 LA2",
+      "query": "https://damit.cuni.cz/?q=2013%20LA2",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 385250,
+      "designation": "2001 DH47",
+      "query": "https://damit.cuni.cz/?q=385250",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 614689,
+      "designation": "2020 XL5",
+      "query": "https://damit.cuni.cz/?q=614689",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 706765,
+      "designation": "2010 TK7",
+      "query": "https://damit.cuni.cz/?q=706765",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 816688,
+      "designation": "2011 SC191",
+      "query": "https://damit.cuni.cz/?q=816688",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2011 UN63",
+      "query": "https://damit.cuni.cz/?q=2011%20UN63",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2011 SL25",
+      "query": "https://damit.cuni.cz/?q=2011%20SL25",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 33342,
+      "designation": "1998 WT24",
+      "query": "https://damit.cuni.cz/?q=33342",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 40000,
+      "designation": "1998 HZ87",
+      "query": "https://damit.cuni.cz/?q=40000",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 70000,
+      "designation": "1998 XX6",
+      "query": "https://damit.cuni.cz/?q=70000",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 136617,
+      "designation": "1994 CC",
+      "query": "https://damit.cuni.cz/?q=136617",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 285263,
+      "designation": "1998 QE2",
+      "query": "https://damit.cuni.cz/?q=285263",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 357439,
+      "designation": "2004 BL86",
+      "query": "https://damit.cuni.cz/?q=357439",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2006 VW139",
+      "query": "https://damit.cuni.cz/?q=2006%20VW139",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 29075,
+      "designation": "1950 DA",
+      "query": "https://damit.cuni.cz/?q=29075",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 433953,
+      "designation": "1997 XR2",
+      "query": "https://damit.cuni.cz/?q=433953",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "1998 KY26",
+      "query": "https://damit.cuni.cz/?q=1998%20KY26",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2002 AA29",
+      "query": "https://damit.cuni.cz/?q=2002%20AA29",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2004 FH",
+      "query": "https://damit.cuni.cz/?q=2004%20FH",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "1986 QK1",
+      "query": "https://damit.cuni.cz/?q=1986%20QK1",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 4596,
+      "designation": "1981 QB",
+      "query": "https://damit.cuni.cz/?q=4596",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 33333,
+      "designation": "1998 SP66",
+      "query": "https://damit.cuni.cz/?q=33333",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 44444,
+      "designation": "1998 UZ19",
+      "query": "https://damit.cuni.cz/?q=44444",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 66666,
+      "designation": "1999 TL9",
+      "query": "https://damit.cuni.cz/?q=66666",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 77777,
+      "designation": "2001 QW16",
+      "query": "https://damit.cuni.cz/?q=77777",
+      "status": "only uncalibrated models found in DAMIT",
+      "models": [
+        {
+          "id": 15015,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/15015",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 80000,
+      "designation": "1999 FR33",
+      "query": "https://damit.cuni.cz/?q=80000",
+      "status": "only uncalibrated models found in DAMIT",
+      "models": [
+        {
+          "id": 15145,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/15145",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        },
+        {
+          "id": 15146,
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/15146",
+          "calibrated": false,
+          "diameterKm": null,
+          "references": [
+            "https://damit.cuni.cz/projects/damit/references/view/665"
+          ]
+        }
+      ]
+    },
+    {
+      "number": 88888,
+      "designation": "2001 SE288",
+      "query": "https://damit.cuni.cz/?q=88888",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 90000,
+      "designation": "2002 TK102",
+      "query": "https://damit.cuni.cz/?q=90000",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 99999,
+      "designation": "1981 FP",
+      "query": "https://damit.cuni.cz/?q=99999",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 111111,
+      "designation": "2001 VO84",
+      "query": "https://damit.cuni.cz/?q=111111",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 222222,
+      "designation": "2000 FK15",
+      "query": "https://damit.cuni.cz/?q=222222",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 300000,
+      "designation": "2006 UW30",
+      "query": "https://damit.cuni.cz/?q=300000",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 333333,
+      "designation": "2001 RC3",
+      "query": "https://damit.cuni.cz/?q=333333",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 400000,
+      "designation": "2006 DK190",
+      "query": "https://damit.cuni.cz/?q=400000",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 444444,
+      "designation": "2006 CL67",
+      "query": "https://damit.cuni.cz/?q=444444",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 555555,
+      "designation": "2014 AG4",
+      "query": "https://damit.cuni.cz/?q=555555",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 600000,
+      "designation": "2011 EG29",
+      "query": "https://damit.cuni.cz/?q=600000",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 666666,
+      "designation": "2010 SR59",
+      "query": "https://damit.cuni.cz/?q=666666",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 700000,
+      "designation": "1994 UX10",
+      "query": "https://damit.cuni.cz/?q=700000",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 777777,
+      "designation": "2009 HB115",
+      "query": "https://damit.cuni.cz/?q=777777",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": 800000,
+      "designation": "2013 YN87",
+      "query": "https://damit.cuni.cz/?q=800000",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2013 ND15",
+      "query": "https://damit.cuni.cz/?q=2013%20ND15",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    },
+    {
+      "number": null,
+      "designation": "2019 UO14",
+      "query": "https://damit.cuni.cz/?q=2019%20UO14",
+      "status": "no matching model found in DAMIT",
+      "models": []
+    }
+  ]
+}

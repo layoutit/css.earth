@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2730%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 30 Urania (A854 OA)           2026-Sep-07 20:33:00
+Rec #:      30 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 4904 (1860-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458014.5 ! 2017-Sep-18.00 (TDB)         Residual RMS= .28098
+   EC= .1272645851666821   QR= 2.064345645351172   TP= 2458493.1690975651
+   OM= 307.4831512301909   W=  87.41470361731355   IN= 2.095567920080909
+   A= 2.365373984216554    MA= 230.3150016561341   ADIST= 2.666402323081935
+   PER= 3.63796            N= .270928286           ANGMOM= .026241314
+   DAN= 2.31378            DDN= 2.3405             L= 34.8961271
+   B= 2.0934341            MOID= 1.07123995        TP= 2019-Jan-09.6690975651
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 46.3935            ROTPER= 13.686
+   H= 7.57                 G= .150                 B-V= .873
+                           ALBEDO= .192            STYP= Sl
+
+ASTEROID comments: 
+1: soln ref.= JPL#152, OCC=0
+2: source=ORB
+*******************************************************************************

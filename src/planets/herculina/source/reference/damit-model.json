@@ -1,0 +1,46 @@
+{
+  "modelId": 1814,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1814",
+  "fields": {
+    "ID": "1814",
+    "Asteroid ID": "(532) Herculina",
+    "Lambda": "103",
+    "Beta": "11",
+    "Period": "9.404937",
+    "YORP": "",
+    "JD0": "2434744.6",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "189",
+    "Equivalent Diameter Error": "4",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-06-19",
+    "Comment": "",
+    "Created": "2017-06-19 13:04:38",
+    "Modified": "2017-06-19 13:31:15"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/699/AO.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/700/occ.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/701/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/702/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/703/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/169"
+  ]
+}

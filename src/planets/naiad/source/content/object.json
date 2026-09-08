@@ -4,17 +4,17 @@
   "id": "naiad",
   "displayName": "Naiad",
   "panel": {
-    "introduction": "Naiad is Neptune\u2019s innermost moon. Its elongated shape is inferred from Voyager observations; the grid marks the absence of a usable surface map.",
+    "introduction": "Naiad is Neptune’s innermost moon. Its elongated shape is inferred from Voyager observations; the grid marks the absence of a usable surface map.",
     "facts": [
       {
         "id": "radius",
         "label": "Reference mean radius",
-        "value": "29 \u00b1 6 km"
+        "value": "29 ± 6 km"
       },
       {
         "id": "dimensions",
         "label": "Dimensions",
-        "value": "About 96 \u00d7 60 \u00d7 52 km"
+        "value": "About 96 × 60 × 52 km"
       },
       {
         "id": "orbital-period",
@@ -23,18 +23,18 @@
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Neptune",
+        "label": "Mean distance from Neptune",
         "value": "About 48,200 km"
       },
       {
         "id": "rotation-period",
-        "label": "Rotation",
+        "label": "Rotation period",
         "value": "Modeled as synchronous"
       },
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Voyager Science Team \u00b7 1989"
+        "value": "Voyager Science Team · 1989"
       }
     ],
     "moreFacts": []
@@ -49,8 +49,8 @@
       {
         "id": "model",
         "label": "Shape model",
-        "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 \u00d7 30 \u00d7 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
-        "title": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 \u00d7 30 \u00d7 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
+        "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
+        "title": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
         "detail": "Measured axes",
         "thumbnail": "/scenes/naiad/naiad-model-thumbnail.webp",
         "surface": "naiad-model-surface@2x.webp",

@@ -9,12 +9,24 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "208 km"
+        "value": "208 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "30.07 AU (system mean)"
+        "label": "System solar semimajor axis",
+        "value": "30.070 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
@@ -23,12 +35,12 @@
       },
       {
         "id": "rotation-period",
-        "label": "Rotation",
+        "label": "Rotation period",
         "value": "Synchronous with its orbit"
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Neptune",
+        "label": "Mean distance from Neptune",
         "value": "About 117,674 km"
       },
       {
@@ -50,7 +62,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
+        "description": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed. Fine grain is largely source-image noise and must not be interpreted as resolved terrain.",
         "title": "Voyager 2 clear-filter imagery registered to the PDS Stooke shape. Measured sky-background subtraction and bounded illumination correction reduce photographed shading. Gray grid marks unavailable or unreliable samples. The distant hemisphere and cast shadows are not reconstructed.",
         "detail": "Voyager 2",
         "thumbnail": "/scenes/proteus/proteus-normal-thumbnail.webp",

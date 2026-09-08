@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2718%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               18 Melpomene (A852 MA)          2026-Sep-07 20:32:56
+Rec #:      18 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 6749 (1852-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458045.5 ! 2017-Oct-19.00 (TDB)         Residual RMS= .33073
+   EC= .2187988585458478   QR= 1.792941587035013   TP= 2457657.0519194677
+   OM= 150.4669468135473   W=  227.8230748717177   IN= 10.13348933785746
+   A= 2.295108765071151    MA= 110.1113649817104   ADIST= 2.79727594310729
+   PER= 3.47707            N= .283464819           ANGMOM= .025429073
+   DAN= 2.56154            DDN= 1.90533            L= 17.8414636
+   B= -7.4919174           MOID= .80958003         TP= 2016-Sep-25.5519194677
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 69.797             ROTPER= 11.57
+   H= 6.35                 G= .250                 B-V= .854
+                           ALBEDO= .181            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#140, OCC=0
+2: source=ORB
+*******************************************************************************

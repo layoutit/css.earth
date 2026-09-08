@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2719%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                19 Fortuna (A852 QA)           2026-Sep-07 20:32:36
+Rec #:      19 (+COV) Soln.date: 2026-Jun-05_03:03:25   # obs: 9643 (1852-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457986.5 ! 2017-Aug-21.00 (TDB)         Residual RMS= .24393
+   EC= .1587471487652944   QR= 2.05424505691568    TP= 2457836.7296938724
+   OM= 211.1426093270234   W=  182.0995419078789   IN= 1.573882697567835
+   A= 2.441887779519163    MA= 38.68487868192557   ADIST= 2.829530502122646
+   PER= 3.8159             N= .258294716           ANGMOM= .02654006
+   DAN= 2.82917            DDN= 2.05443            L= 33.2413599
+   B= -.0576531            MOID= 1.05922997        TP= 2017-Mar-24.2296938724
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 100.               ROTPER= 7.4432
+   H= 7.49                 G= .100                 B-V= .719
+                           ALBEDO= .037            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#170, OCC=0
+2: source=ORB
+*******************************************************************************

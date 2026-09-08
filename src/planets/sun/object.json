@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "570def8c9d6c12a5f73454622132e737b953ba3f177547dda4663a1ac5426eb0"
+    "sha256": "6f89f9ca668d38132970492b8ce2a637c3a73df0e1c3e917a340649513f12406"
   },
   "id": "sun",
   "properties": {
@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/static.json",
-          "sha256": "ddedfb97fa34017778c261ab69e09f816840523ffbb0fbbf6307abaa5a329ca9"
+          "sha256": "10d97bafceacd0707aa10e7635e8eea43c6645eff95b3781164984fbfe2db9b7"
         },
         {
           "id": "title",
@@ -66,7 +66,7 @@
         {
           "id": "world-context",
           "path": "source/navigation/universe.json",
-          "sha256": "21df7b533f08302002175e317661b49a62a5cf40176b20fa185c653996d8cea7"
+          "sha256": "17c12e6ada47279ae8cf35c86633c6d61c14fd3665063b1e32e5a30a7965b2ef"
         }
       ],
       "shape": {

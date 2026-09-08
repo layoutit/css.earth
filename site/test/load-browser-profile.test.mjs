@@ -28,7 +28,7 @@ function profile(withLenses = false) {
   };
 }
 
-const sharedSettings = Object.freeze([{ name: "motion", kind: "toggle" }, { name: "skyContrast", kind: "toggle" }, { name: "heliosphere", kind: "toggle" }]);
+const sharedSettings = Object.freeze([{ name: "motion", kind: "toggle" }, { name: "skyContrast", kind: "toggle" }, { name: "heliosphere", kind: "toggle" }, { name: "asteroidOrbits", kind: "toggle" }]);
 function snapshot(controls = emptyControls) {
   const objectSettings = controls.settings?.controls ?? [];
   const speed = objectSettings.find(({ name }) => name === "speed");
@@ -42,7 +42,7 @@ function snapshot(controls = emptyControls) {
     settings: [sharedSettings[0],
       ...(speed ? [{ name: speed.name, kind: speed.kind }] : []),
       ...(shadows ? [{ name: shadows.name, kind: shadows.kind }] : []),
-      sharedSettings[1], sharedSettings[2],
+      sharedSettings[1], sharedSettings[2], sharedSettings[3],
       ...remaining.map(({ name, kind }) => ({ name, kind }))],
   };
 }

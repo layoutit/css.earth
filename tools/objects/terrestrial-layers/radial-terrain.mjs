@@ -3,7 +3,9 @@ import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
-import { loadStlShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable } from './obj-shape.mjs';
+import { loadStlShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable, closestTrianglePoint } from './obj-shape.mjs';
+import { createSourceSurfacePainter } from './scientific-raster.mjs';
+import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
 import { loadPdsRadialTable } from './pds-radial-table.mjs';
 import { createRasterEmitter } from './solid-raster.mjs';
@@ -203,6 +205,20 @@ export function shadeRadialFaces(faces) {
   return faces;
 }
 
+/** Shared by the retained atlas and prepare-only context image. Coordinates
+ * enter in display units and are immediately restored to physical metres. */
+export function createRadialScienceColorSampler(sourceSurface, lens, config) {
+  const paint = createSourceSurfacePainter(lens);
+  const metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
+  return point => {
+    const sample = sourceSurface.samplePoint(point.map(n => n * metersPerUnit));
+    if (sample) return { ...sample, color: paint(sample) };
+    const longitude = Math.atan2(point[1], point[0]) * 180 / Math.PI;
+    const latitude = Math.atan2(point[2], Math.hypot(point[0], point[1])) * 180 / Math.PI;
+    return { color: missingCoverageColor(longitude, latitude, 360 / config.raster.width) };
+  };
+}
+
 /** Bake opaque triangle rasters, coordinates and fixed-epoch Sun illumination. The
  * renderer switches between these prepared banks through ordinary variants.
  */
@@ -212,6 +228,13 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   for (const surface of surfaces) {
     const { data: map, info } = await sharp(resolve(publicDirectory, surface.map.url.split('/').at(-1))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     const flood = Buffer.alloc(width * height * 4), shadow = Buffer.alloc(width * height * 4);
+    const sourceSurface = radial.scientificSurfaces?.get(surface.id);
+    const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
+    const sampleScience = scientific && createRadialScienceColorSampler(sourceSurface, scientific, config);
+    const transfer = sourceSurface && { sampledTexels: 0, withheldTexels: 0, maximumDistanceMeters: 0,
+      includesAtlasBleed: true, triangleInteriorTexels: 0, withheldTriangleInteriorTexels: 0,
+      maximumAcceptedDistanceMeters: scientific.surfaceSampling.maximumDistanceMeters,
+      method: 'Closest full-source triangle point in 3D; source barycentric radius and normal. No radial branch selection.' };
     for (const { face, rect, geometry, matrix: m } of radial.plans) {
       const [a, b, c] = face.vertices, ab = sub(b, a), ac = sub(c, a), aa = dot(ab, ab), bb = dot(ac, ac), abac = dot(ab, ac);
       const denominator = aa * bb - abac * abac;
@@ -225,12 +248,36 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         // raster so antialiasing never samples a transparent triangle edge.
         const normal = unit(face.vertexNormals[0].map((n, i) => n * (1 - u - v) + face.vertexNormals[1][i] * u + face.vertexNormals[2][i] * v));
         // Fixed-epoch directional illumination is baked in the body's frame.
-        const illumination = .12 + .88 * Math.max(0, dot(normal, sunDirection));
+        let illumination = .12 + .88 * Math.max(0, dot(normal, sunDirection));
         const lon = (Math.atan2(point[1], point[0]) / (2 * Math.PI) + 1) % 1;
         const lat = Math.atan2(point[2], Math.hypot(point[0], point[1]));
         const sx = lon * info.width - .5, sy = Math.max(0, Math.min(info.height - 1, (.5 - lat / Math.PI) * info.height - .5));
         const x0 = (Math.floor(sx) + info.width) % info.width, x1 = (x0 + 1) % info.width, y0 = Math.floor(sy), y1 = Math.min(info.height - 1, y0 + 1), tx = sx - Math.floor(sx), ty = sy - y0;
         const offset = ((rect.y + py) * width + rect.x + px) * 4;
+        if (sourceSurface) {
+          // Clamp the raster bleed to this retained triangle, never to an
+          // unrelated surface beyond its edge. Runtime primitive coverage is
+          // unchanged; source projection and color are entirely prepared here.
+          const clamped = closestTrianglePoint(point, a, ab, ac).point;
+          const sample = sampleScience(clamped);
+          transfer.sampledTexels++;
+          const interior = u >= 0 && v >= 0 && u + v <= 1;
+          if (interior) transfer.triangleInteriorTexels++;
+          const color = sample.color;
+          if (sample.radius !== undefined) {
+            illumination = .12 + .88 * Math.max(0, dot(sample.normal, sunDirection));
+            transfer.maximumDistanceMeters = Math.max(transfer.maximumDistanceMeters, sample.distanceMeters);
+          } else {
+            transfer.withheldTexels++;
+            if (interior) transfer.withheldTriangleInteriorTexels++;
+          }
+          for (let channel = 0; channel < 3; channel++) {
+            flood[offset + channel] = color[channel];
+            shadow[offset + channel] = Math.round(color[channel] * illumination);
+          }
+          flood[offset + 3] = shadow[offset + 3] = 255;
+          continue;
+        }
         for (let channel = 0; channel < 3; channel++) {
           const top = map[(y0 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y0 * info.width + x1) * 4 + channel] * tx;
           const bottom = map[(y1 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y1 * info.width + x1) * 4 + channel] * tx;
@@ -245,12 +292,16 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw: { width, height, channels: 4 } }), encoding);
     surface.polesUrl = surface.surface.url;
     surface.layout = { kind: 'triangle-atlas', width, height, tileSize, faceCount: radial.faces.length };
+    if (transfer) surface.surfaceSampling.transfer = transfer;
   }
   for (const entry of source.manifest.generatedIntermediates.filter(entry =>
     entry.generator === 'tools/objects/terrestrial-layers/radial-snapshot.mjs')) {
     const surface = surfaces.find(surface => surface.id === entry.recipe?.lensId);
     if (!surface) throw new TypeError('Radial snapshot requires a prepared source lens.');
+    const science = radial.scientificSurfaces?.get(surface.id);
+    const lens = science && config.raster.scientific.find(lens => lens.id === surface.id);
     const png = await renderRadialSnapshot({ ...entry.recipe, faces: radial.faces,
+      ...(science ? { sampleSurface: createRadialScienceColorSampler(science, lens, config) } : {}),
       map: resolve(publicDirectory, surface.map.url.split('/').at(-1)) });
     source.assertBytes(entry, png);
   }

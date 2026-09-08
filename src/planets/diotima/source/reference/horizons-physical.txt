@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27423%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                423 Diotima (A896 XA)          2026-Sep-07 21:00:16
+Rec #:     423 (+COV) Soln.date: 2026-Jun-05_03:34:53  # obs: 10197 (1899-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458193.5 ! 2018-Mar-16.00 (TDB)         Residual RMS= .21263
+   EC= .03655001030825841  QR= 2.956232794640249   TP= 2458260.7139814841
+   OM= 69.37370137074006   W=  198.5557636382617   IN= 11.24350485419274
+   A= 3.068382195516037    MA= 347.6746427875619   ADIST= 3.180531596391825
+   PER= 5.37492            N= .183374901           ANGMOM= .030112436
+   DAN= 3.17427            DDN= 2.96166            L= 267.597074
+   B= -3.5573574           MOID= 1.94168997        TP= 2018-May-22.2139814841
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 87.9295            ROTPER= 4.775
+   H= 7.39                 G= .150                 B-V= .668
+                           ALBEDO= .067            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#154, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -120,7 +120,7 @@ export async function preparePresentationBindings(definition, root, { onDepthRes
         // or material variables. Only the common stage/camera publishers may
         // affect these static groups; unsupported local owners keep native depth.
         if (definition.viewBindings.some(binding => affected.has(binding.target))) return rejectDepth('frame-owned local binding');
-        // A closed static surface is one independent presentation. Siblings,
+        // A static surface must be one independent presentation. Siblings,
         // animated shells and layered geometry keep their original depth space.
         for (const node of nodes[definition.tree.scene].querySelectorAll('*')) {
           const id = index.get(node);

@@ -1,6 +1,14 @@
 # General prepared visibility ordering
 
-This qualification describes the 90-body snapshot at PR head 15227a0e, before the next main integration. It must not be presented as a benchmark of a later registry. PR #27 remains a draft; the operator owns the merge.
+PR #27 remains a draft; the operator owns the merge. The matched browser measurements below describe the 90-body snapshot based on 15227a0e. They are not benchmarks of the later registry.
+
+## Current main integration
+
+Main `1a5c996862115e1a2947052c3973ae279b59e2f1` has 155 bodies and 123 triangle surface contracts. Preparation accepts 85 surfaces; 27 have every group within the 64-face packing target. The independent oracle checks 427,632 rays, including 8,932 with multiple front-facing hits, without an order disagreement. Thirty-eight triangle contracts fail the source-face/rendered-leaf correspondence gate and retain native depth. The other 32 bodies have different presentation contracts and are unchanged by this compiler.
+
+The [registry coverage report](prepared-depth-coverage.json) records each result, original face count, emitted group sizes, added wrapper count and final payload hash. Every checked runtime was compared deeply against the complete transported data, and all 155 payloads matched their descriptor hashes. Restoring each accepted source branch recovers its entire original definition, including geometry and assets.
+
+Integration preserves main's asteroid orbit controls and epoch-correct physical frames. Epoch refresh first restores the canonical preparation branch, updates its original physical carrier, then allows the shared compiler to regenerate projection groups. It does not update duplicate carriers independently or add a runtime epoch repair.
 
 ## Architecture
 
@@ -8,7 +16,7 @@ Preparation builds a fixed face-priority graph using source triangles oriented b
 
 This follows the fixed face-priority and cluster approach described in [Sutherland, Sproull and Schumacker (1974)](https://doi.org/10.1145/356625.356626). The application combines that approach with its existing source-edge partitioner. The robust predicate dependency is preparation-only.
 
-## Coverage and constraints
+## Earlier 90-body coverage and constraints
 
 The registry audit found 37 compilable surfaces, of which 24 have every group at or below 64 faces. Previously only Deimos, Phobos and Phoebe qualified. The other accepted surfaces preserve irreducible native cores; 64 is a packing target, not a universal bound. Eligibility comes from the source geometry, rendered facing, CSS cascade and binding ownership; there is no body allowlist.
 

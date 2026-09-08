@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": -64.84028157553483,
+  "declinationDegrees": 31.65886262805248,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 27.0703,
+  "coordinateSystem": "Unmodified DAMIT co-rotating Cartesian frame; positive Z is the north pole; positive X defines the meridian; east-positive longitude; arbitrary display phase",
+  "source": "DAMIT model 3088, version 2019-06-24: ecliptic J2000 lambda 306 deg, beta 52 deg, period 27.0703 h; equatorial J2000 conversion uses obliquity 23.439291111 deg. The original model page and DAMIT frame documentation are pinned. The display does not claim the source epoch phase."
+}

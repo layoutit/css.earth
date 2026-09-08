@@ -33,7 +33,7 @@ remapped during preparation. There is still exactly one `.polycss-camera` and
 one `.polycss-scene`; carriers are presentation children, not extra controllers
 or independently mounted objects.
 
-Preparation rejects unclosed/layered surfaces, unsupported transforms, local
+Preparation rejects layered surfaces, unsupported transforms, local
 frame-owned properties and motion, or a source triangle that does not match its
 render leaf. It compares the complete computed CSS cascade before and after
 compilation for every dataset and geometry/billboard/marker LOD. Unsupported
@@ -201,9 +201,12 @@ new names is not the next optimization.
 An early spatial-cut prototype increased Deimos from 1,216 to 3,160 triangles at
 a 64-leaf target and produced visible seam risk. Another flattening experiment
 reduced compositor time but transferred cost to style and used incorrect depth.
-Both were rejected. The implemented compiler accepts only separating planes
-that preserve every original face. The 64-leaf limit bounds every emitted group;
-if any region cannot meet it, the entire surface keeps its original layout.
+Both were rejected. The original compiler accepted only separating planes
+that preserve every original face, and rejected surfaces with any remainder
+larger than 64 leaves. The generalized compiler keeps that geometry-preserving
+rule, but adds fixed visibility priorities and leaves unsplittable cycles in
+native 3D groups. It records those larger cores instead of discarding all useful
+partitions or promising a universal 64-leaf bound.
 
 ## Reproduction and evidence
 
