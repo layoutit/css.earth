@@ -34,7 +34,7 @@
       "consumers": [
         "surfaces"
       ],
-      "coverage": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 4 September 2026 epoch.",
+      "coverage": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
@@ -137,7 +137,7 @@
     {
       "path": "content/object.json",
       "expectedBytes": 4189,
-      "expectedSha256": "b521cf961ce29b629d42c2658a7b2574a1c6993b01652eb5ddaa2518471fe6ff",
+      "expectedSha256": "622ff147c41819c582fd76565a676baaa3e872cab067b86282f9b199b467cc8e",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
@@ -161,7 +161,7 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 3209,
-      "expectedSha256": "52bf7f8a5ccc79e4938cd4acf6c2a8c915244f500013a06816bd5846c3e950af",
+      "expectedSha256": "6b2cbe939f77163ce251f19f202c79a2b681ea0918caf10dbc55fcc7ff3d5b2d",
       "purpose": "67P source evidence or authored preparation input."
     },
     {
