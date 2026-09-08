@@ -71,6 +71,8 @@ Required accounting: `original color = diffuse color + compact residual color` e
 
 Compact nebular knots may resemble stars. Crowded blends, saturated stars, broad wings, diffraction spikes and edge sources can remain. Inspect original/diffuse/residual together at native resolution; inspect bright knots and faint outskirts specifically. Reject a trial that hollows out nebular structure, even if its arithmetic closes. Neither detection coordinates nor removed light determine stellar membership or depth.
 
+**Stronger removal must address the measured rejection cause.** The initial LMC trial rejected many undersampled stars at `minimumSigma=0.65`. Native field, bright-nebula and bar comparisons supported lowering that recipe value to `0.25`, retaining every other shape and mask limit. Increasing the profile threshold created zero-covariance cores; broadly relaxing shapes and enlarging masks produced patchy dark interpolation. Those alternatives were rejected. The selected change removes more small compact sources without claiming to solve broad halos or completely unresolved single-pixel peaks. The recipe-driven regression checks a small star alongside a filament and broad nebula; removing the recipe override makes that check fail.
+
 ## 4. Check useful color and coverage
 
 - Compare all components with the same declared global tone curve. Retain untuned native products. The lab's brightness/gamma/levels controls are inspection settings, not new source measurements.

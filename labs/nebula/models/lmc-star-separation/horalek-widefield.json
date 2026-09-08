@@ -10,7 +10,8 @@
   },
   "outputDirectory": ".local/nebula-lab/star-separation/horalek-widefield",
   "parameters": {
-    "maximumDetections": 1000000
+    "maximumDetections": 1000000,
+    "minimumSigma": 0.25
   },
   "preview": {
     "maxDimension": 1200,

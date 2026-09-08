@@ -11,7 +11,7 @@
     "dtype": "uint8"
   },
   "sourceSha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
-  "recipeSha256": "5b8057367005c7eaba3791c172871047f12158b84fca41b2e880e94487511765",
+  "recipeSha256": "4fdc6f42b0ef059fb854d574026ed0441718cf70f7595085402e21555cab36ae",
   "scriptSha256": "0dfaa6eb36a60fb1543233f660430a312b2a766104692bbd77f840eaff18b96e",
   "parameters": {
     "detectionSigma": 2,
@@ -20,7 +20,7 @@
     "maximumDetections": 250000,
     "tileSize": 768,
     "minimumPeak": 0.035,
-    "minimumSigma": 0.65,
+    "minimumSigma": 0.25,
     "maximumSigma": 3.5,
     "maximumElongation": 1.55,
     "maximumMaskRadius": 12,
@@ -37,12 +37,12 @@
   "detectionsWrittenBeforeSeparation": true,
   "detectionsInput": null,
   "detectedCount": 128895,
-  "acceptedCount": 48970,
+  "acceptedCount": 58386,
   "rejected": {
-    "non-psf-width-or-elongation": 56800,
+    "non-psf-width-or-elongation": 47376,
     "edge-neighborhood": 1259,
     "extended-or-connected-profile": 5140,
-    "non-psf-profile": 2405,
+    "non-psf-profile": 2413,
     "low-compact-contrast": 14321
   },
   "verification": {
@@ -52,16 +52,16 @@
       6000,
       6000
     ],
-    "maskPixels": 2064900,
+    "maskPixels": 2284595,
     "sourceChannelTotals": [
       49124209,
       80845505,
       214824279
     ],
     "diffuseChannelTotals": [
-      35864712,
-      66222471,
-      204760627
+      34640956,
+      64940522,
+      203532409
     ],
     "diffusePercentileFractions": [
       0,
@@ -79,16 +79,16 @@
         0,
         2,
         16,
-        61,
+        58,
         255
       ],
       [
         0,
         0,
         1,
-        4,
-        19,
-        72,
+        3,
+        18,
+        69,
         255
       ],
       [
@@ -97,7 +97,7 @@
         5,
         7,
         19,
-        70,
+        67,
         255
       ]
     ],
@@ -129,29 +129,29 @@
       "bytes": 555664
     },
     "diffuse.png": {
-      "sha256": "412f0978e0376010e3d06eb0bebd738f413ff842cecc9f446e18d80330722059",
-      "bytes": 20305790
+      "sha256": "1044f3f7f8f6678ee9b75e28d5f4299fda068edc3c0af705be03b8655f2f4b56",
+      "bytes": 20038158
     },
     "stars.png": {
-      "sha256": "4bedfbf64b0a26e2bcf14fd97c9b71c4ac63edf23c032587ae31b2ccd9708cd4",
-      "bytes": 4608277
+      "sha256": "edbf0f203d96138feab5cf4ff110c691fb36790191f91b55f0fdfd1364896c2a",
+      "bytes": 5054859
     },
     "star-mask.png": {
-      "sha256": "0fe0c6f637a38be833c574577aed2f0c73449839014d6c092a34a6e01a3d5a0f",
-      "bytes": 1335891
+      "sha256": "f892aecbf20929802758c37bc0b08ae7b4c78e2a3df968fec89e162ead5cfe3c",
+      "bytes": 1481816
     },
     "accepted-stars.json": {
-      "sha256": "aa4f643a56e0b12198b2417f4190b8ec66c8b76ed25d7cecef6c72e0ac1b4b22",
-      "bytes": 10916628
+      "sha256": "f4be1a1f22ca9dfe852f84774f5c3bb215a0b20a077aa79c0a0b84a6a7efda94",
+      "bytes": 13016243
     },
     "comparison.png": {
-      "sha256": "073d493759630874d5859b66e31da6e81f61f57ccab8675de2d75dc81348c447",
-      "bytes": 2794424
+      "sha256": "afd18cb1ffd0bc0b7366626f5557727a423c587a52efdad6debf111994fbfc19",
+      "bytes": 2851506
     }
   },
-  "elapsedSeconds": 35.137,
+  "elapsedSeconds": 35.861,
   "delivery": {
-    "sourceReceiptSha256": "6773c7944d18c840764decb8cc9ab1723de27ca5f1f262d5e6ff0acab9cf75cd",
+    "sourceReceiptSha256": "a929002c400d178f6bd80abab66305e162be1c1d82ed982a2a0d29d55621385d",
     "scriptSha256": "3173cd9f6152ca0440ebbdddda652935ee6c582af6da3773d0419c23121fb198",
     "layers": [
       {
@@ -160,7 +160,7 @@
         "texturePath": "labs/nebula/models/lmc-star-separation/prepared/wise-wide-infrared-diffuse.webp",
         "widthPx": 4096,
         "heightPx": 4096,
-        "sha256": "2c02003d58b26752faf9a2f39985e2a734e5fc919ccbd7633f1d1b71f96fdf6f"
+        "sha256": "0eb9e4e66e16231913f963c9385fc2fa23622b86f8607c095fa5dbaa65930f12"
       },
       {
         "id": "stars",
@@ -168,7 +168,7 @@
         "texturePath": "labs/nebula/models/lmc-star-separation/prepared/wise-wide-infrared-stars.webp",
         "widthPx": 4096,
         "heightPx": 4096,
-        "sha256": "94ca315e05d8f184b09eeef1dcf5af4a84027ed917f4da1f34e49be59ce2b2d6"
+        "sha256": "79862245d5009deb930b4796f0489114725081f0979e915540545eacfed8c62d"
       }
     ],
     "note": "Full source extent, reduced delivery sampling only. Original sky geometry and placement reused. No crop, tone change or 3D reconstruction."

@@ -55,6 +55,23 @@ class StarSeparationTests(unittest.TestCase):
         np.testing.assert_array_equal(diffuse, image)
         self.assertFalse(stars.any())
 
+    def test_selected_recipes_remove_undersampled_stars_and_preserve_extended_light(self):
+        yy, xx = np.mgrid[:129, :161]
+        extended = .07 + .2 * np.exp(-((yy - 95) / 1.7) ** 2)
+        extended += .3 * np.exp(-((xx - 117) ** 2 + (yy - 49) ** 2) / (2 * 8 ** 2))
+        point = .65 * np.exp(-((xx - 43.2) ** 2 + (yy - 33.15) ** 2) / (2 * .5 ** 2))
+        source = np.rint((extended + point) * 255).astype(np.uint8)
+        for image_id in ('vista-infrared', 'horalek-widefield', 'wise-wide-infrared'):
+            recipe = json.loads((Path(__file__).parent.parent / 'models/lmc-star-separation' / (image_id + '.json')).read_text())
+            settings = separation.parameters(recipe['parameters'])
+            diffuse, stars, mask, accepted, _ = separation.separate(source, [[43, 33], [117, 49], [66, 95]], settings)
+            self.assertEqual(len(accepted), 1, image_id)
+            self.assertGreater(int(stars[33, 43]), 130, image_id)
+            np.testing.assert_array_equal(source[:, 85:], diffuse[:, 85:])
+            np.testing.assert_array_equal(source[85:], diffuse[85:])
+            np.testing.assert_array_equal(source[mask == 0], diffuse[mask == 0])
+            self.assertEqual(separation.verify(source, diffuse, stars, mask)['maximumReconstructionErrorCodeValues'], 0)
+
     def test_sixteen_bit_grid_channels_alpha_and_recombination(self):
         source = field(np.uint16)
         source = np.dstack([source, np.full(source.shape[:2], 65535, np.uint16)])

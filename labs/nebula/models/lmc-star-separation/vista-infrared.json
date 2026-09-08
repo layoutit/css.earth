@@ -10,7 +10,8 @@
   },
   "outputDirectory": ".local/nebula-lab/star-separation/vista-infrared",
   "parameters": {
-    "maximumDetections": 2000000
+    "maximumDetections": 2000000,
+    "minimumSigma": 0.25
   },
   "preview": {
     "maxDimension": 1200,

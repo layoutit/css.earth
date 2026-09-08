@@ -9,17 +9,17 @@
     {
       "id": "vista-infrared",
       "recipe": "labs/nebula/models/lmc-star-separation/vista-infrared.json",
-      "recipeSha256": "9bc9ac98c30f55c2ea081d2ab1da2581f58ebdedb67c6c20fed74bff92462804"
+      "recipeSha256": "c713b261eceae35123e9ce0180d69850e1bf2024a3410207e2c4d3ba91b17f20"
     },
     {
       "id": "horalek-widefield",
       "recipe": "labs/nebula/models/lmc-star-separation/horalek-widefield.json",
-      "recipeSha256": "4c2e8b716612dfa45cf0661a9b5a146654b4d6ebb1840ea50b46c83140d827e0"
+      "recipeSha256": "20a44ec9288030a85ef7ad1bc6395639224ec807963cad6fb4d33e3b01bc567f"
     },
     {
       "id": "wise-wide-infrared",
       "recipe": "labs/nebula/models/lmc-star-separation/wise-wide-infrared.json",
-      "recipeSha256": "5b8057367005c7eaba3791c172871047f12158b84fca41b2e880e94487511765"
+      "recipeSha256": "4fdc6f42b0ef059fb854d574026ed0441718cf70f7595085402e21555cab36ae"
     }
   ]
 }

@@ -6,7 +6,7 @@ VISTA, Horálek optical and WISE infrared were selected for processing after ali
 
 - Original downloads and native pixel grids are pinned in each recipe. All three inputs decode to 8-bit RGB. VISTA and Horálek embed the sRGB IEC61966-2.1 profile; the WISE JPEG is untagged. Separation preserves their encoded samples without an ICC conversion; generated PNGs are untagged and delivery previews use sRGB. A differently profiled source needs an explicit color-managed master and new hash before reuse.
 - [The alignment report](../lmc-candidates/source/alignment-report.json) binds source hashes and the exact active homographies/WCS. The batch driver validates **all selections before starting any separation**, including the underlying gate hashes and current image-catalogue geometry.
-- Detection threshold and profile gates are identical across the three recipes. VISTA and Horálek exceeded the initial 250,000-candidate workspace; Horálek now has an explicit capacity of 1,000,000. VISTA also exceeded that capacity: a full-grid audit found 1,736,457 distinct maxima with zero tied/adjacent plateau duplicates, so its final capacity is 2,000,000. No detections are silently dropped and no acceptance threshold was relaxed.
+- Detection threshold and profile gates are identical across the three recipes. VISTA and Horálek exceeded the initial 250,000-candidate workspace; Horálek now has an explicit capacity of 1,000,000. VISTA also exceeded that capacity: a full-grid audit found 1,736,457 distinct maxima with zero tied/adjacent plateau duplicates, so its capacity is 2,000,000. No detections are silently dropped. The stronger-removal revision lowers only `minimumSigma` from the default 0.65 to 0.25 native pixels; detection, maximum width, elongation, correlation, connected-profile and mask limits remain unchanged.
 - Comparison sheets use exposure 1 and gamma 1 on every component. Native color is not globally brightened, darkened or normalized. Interactive lab tone controls remain available.
 - No crop, density cutoff, global median output, sky subtraction, volume assignment or new 3D bake occurs.
 
@@ -55,15 +55,17 @@ These checks do not make the output a scientifically star-free nebula. Local int
 
 ## Recorded outcome
 
-All three full native runs completed. Diffuse + compact residual reproduce source color exactly, pixels outside accepted masks are unchanged, and native PNG round trips are exact. These are processing checks, not acceptance of a new 3D cloud.
+All three full native runs completed. Diffuse + compact residual reproduce source color exactly, pixels outside accepted masks are unchanged, and native PNG round trips are exact. The stronger results also preserve every pixel contribution previously assigned to the compact residual. VISTA accepts 5.19× as many profiles, WISE 19.2% more, and Horálek 4.5% more. The improvement is source-dependent: broader/blended stars still dominate the remaining optical field. These are processing checks, not acceptance of a new 3D cloud.
 
-| Source | Detected peaks | Accepted compact profiles | Accepted mask area |
-|---|---:|---:|---:|
-| VISTA | 1,736,457 | 92,404 | 5.27% |
-| Horálek | 330,036 | 63,579 | 19.69% |
-| WISE | 128,895 | 48,970 | 5.74% |
+| Source | Detected peaks | Previous accepted profiles | Stronger accepted profiles | Mask area |
+|---|---:|---:|---:|---:|
+| VISTA | 1,736,457 | 92,404 | 479,231 | 12.03% |
+| Horálek | 330,036 | 63,579 | 66,443 | 19.91% |
+| WISE | 128,895 | 48,970 | 58,386 | 6.35% |
 
-Overview and native-detail inspection show compact light removed while bright/broad/crowded stars remain. Horálek's inspected emission structure is retained; WISE's original atlas seams remain visible. VISTA is still heavily populated with fine stellar light. **These are conservative comparison trials, not final star-free textures.** The next decision is which source and separation quality to develop before assigning new depth.
+Overview and native-detail inspection show compact light removed while bright/broad/crowded stars remain. Horálek's inspected emission structure is retained; WISE's original atlas seams remain visible. **These are comparison trials, not final star-free textures.** The next decision is which source and separation quality to develop before assigning new depth.
+
+For the stronger-removal revision, VISTA native crops showed 261 → 1,904 accepted compact profiles in an outer field, 259 → 679 around bright nebulosity, and 219 → 548 in the bar after lowering only the minimum width. Raising the profile threshold instead produced more zero-covariance cores; broader shape/mask trials introduced dark patches and were rejected. The selected setting preserves the existing broad-nebula boundary. A regression reads all three actual recipes, removes an undersampled star and requires adjacent extended emission and all pixels outside accepted masks to remain exact. Restoring the old minimum makes that test fail. These comparisons establish the bounded improvement; they do not establish foreground membership or complete star removal.
 
 The six 4096-pixel-bounded WebPs are display previews derived from the native lossless outputs. Keep the originals and derived layers together when evaluating color; the residual's isolated light often needs an inspection exposure adjustment.
 

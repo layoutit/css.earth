@@ -11,7 +11,7 @@
     "dtype": "uint8"
   },
   "sourceSha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
-  "recipeSha256": "4c2e8b716612dfa45cf0661a9b5a146654b4d6ebb1840ea50b46c83140d827e0",
+  "recipeSha256": "20a44ec9288030a85ef7ad1bc6395639224ec807963cad6fb4d33e3b01bc567f",
   "scriptSha256": "0dfaa6eb36a60fb1543233f660430a312b2a766104692bbd77f840eaff18b96e",
   "parameters": {
     "detectionSigma": 2,
@@ -20,7 +20,7 @@
     "maximumDetections": 1000000,
     "tileSize": 768,
     "minimumPeak": 0.035,
-    "minimumSigma": 0.65,
+    "minimumSigma": 0.25,
     "maximumSigma": 3.5,
     "maximumElongation": 1.55,
     "maximumMaskRadius": 12,
@@ -37,12 +37,12 @@
   "detectionsWrittenBeforeSeparation": true,
   "detectionsInput": null,
   "detectedCount": 330036,
-  "acceptedCount": 63579,
+  "acceptedCount": 66443,
   "rejected": {
-    "non-psf-width-or-elongation": 79071,
+    "non-psf-width-or-elongation": 76205,
     "extended-or-connected-profile": 104718,
     "edge-neighborhood": 5211,
-    "non-psf-profile": 3698,
+    "non-psf-profile": 3700,
     "low-compact-contrast": 73759
   },
   "verification": {
@@ -52,16 +52,16 @@
       6582,
       4388
     ],
-    "maskPixels": 5685997,
+    "maskPixels": 5749919,
     "sourceChannelTotals": [
       1967874217,
       1849619728,
       1975216714
     ],
     "diffuseChannelTotals": [
-      1912944855,
-      1787793008,
-      1912467764
+      1912642618,
+      1787456834,
+      1912117391
     ],
     "diffusePercentileFractions": [
       0,
@@ -129,29 +129,29 @@
       "bytes": 953271
     },
     "diffuse.png": {
-      "sha256": "25ea1572f85f20aaf1e665bb6f53dc6c82734933bc5818149dbc4343c52dd2a1",
-      "bytes": 42580570
+      "sha256": "fd86857dac0755ebd420a48b0b2f37d6ad413f10961850760d3c8abf01ac8cc6",
+      "bytes": 42559764
     },
     "stars.png": {
-      "sha256": "9ad825fbabed229d3d2d3567ff9a12820feb45429f331299c601b3bee0ac7cef",
-      "bytes": 12787145
+      "sha256": "eeedc03d1cc0e32f8ef9dd45ff79260a31ac0ce3d3c169d78b4ac4c397065b99",
+      "bytes": 12944185
     },
     "star-mask.png": {
-      "sha256": "6935d2649ec19b166979e5d6a931af4b31e7902cd9896d8f3f7c4d8cfd440588",
-      "bytes": 1881915
+      "sha256": "9487b8290a04c801606ec34de5e3869cd0ffee3177de63bf6f61261a4a0f8cbe",
+      "bytes": 1920731
     },
     "accepted-stars.json": {
-      "sha256": "c0a7c9f6453b3fd190a28e83674ae5b1446bf73ac2daf02db28b0b224c878499",
-      "bytes": 14161137
+      "sha256": "58958e710d0ae57fe5cc0ad9333454b0f1274c6e302e070ddba18f0767afd283",
+      "bytes": 14800097
     },
     "comparison.png": {
-      "sha256": "bdd7830e69705c0359fb07f11c372aa369a961742b4aa84dcb18772e4dd37686",
-      "bytes": 5355074
+      "sha256": "5a234cea751a15cd2873254fc054ec9d0b60d59237992d2866bf0e6edae9ffbd",
+      "bytes": 5396416
     }
   },
-  "elapsedSeconds": 73.263,
+  "elapsedSeconds": 73.33,
   "delivery": {
-    "sourceReceiptSha256": "b7db32fe2ff8fdf2e2a90da6989d2b5e8cf36d1f0d5cd1f570ee5731177886d9",
+    "sourceReceiptSha256": "f5c0385de3fb6622b1a6fdaff0191c9d135e30df4211399c0662d769c1db74ae",
     "scriptSha256": "3173cd9f6152ca0440ebbdddda652935ee6c582af6da3773d0419c23121fb198",
     "layers": [
       {
@@ -160,7 +160,7 @@
         "texturePath": "labs/nebula/models/lmc-star-separation/prepared/horalek-widefield-diffuse.webp",
         "widthPx": 4096,
         "heightPx": 2731,
-        "sha256": "3795f7d2e3264bfa3ffea3fdbf277210f2c7bcd4d95a59ce069e8e879ca06249"
+        "sha256": "f00be77ee2e1bb8c3d4db56dce6b6496ab9ecd83b614d93f2ce7bda58862e4f0"
       },
       {
         "id": "stars",
@@ -168,7 +168,7 @@
         "texturePath": "labs/nebula/models/lmc-star-separation/prepared/horalek-widefield-stars.webp",
         "widthPx": 4096,
         "heightPx": 2731,
-        "sha256": "6d491381a20c737abc59748e4b9ff7b7f46ba0a9c231c5da380cf2d55c584c33"
+        "sha256": "d44481ad19e1cef1b119ff79c7e5b3ffe541cd92ae79c168d1ea40ea8eec1302"
       }
     ],
     "note": "Full source extent, reduced delivery sampling only. Original sky geometry and placement reused. No crop, tone change or 3D reconstruction."

@@ -9,7 +9,9 @@
     ]
   },
   "outputDirectory": ".local/nebula-lab/star-separation/wise-wide-infrared",
-  "parameters": {},
+  "parameters": {
+    "minimumSigma": 0.25
+  },
   "preview": {
     "maxDimension": 1200,
     "exposure": 1,
