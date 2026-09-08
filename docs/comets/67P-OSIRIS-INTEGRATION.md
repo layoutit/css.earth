@@ -75,8 +75,9 @@ The added runtime payload consists of two 1024 × 4032 WebP banks and one
 | `comet-67p-osiris-shadow@2x.webp` | `70e1d5a46f7d8d8d40805bfacc8c3ed719837fa11b17f8444db5bd28da02536a` |
 | `comet-67p-osiris-thumbnail.webp` | `a6b4ced4aae9b778f41c5e4243026065ea606b25c71fc7d1e8a9845dd507d64f` |
 
-The [production receipt](evidence/osiris-production-proof.json) binds the exact
-prepared bytes, browser-loaded image banks, source geometry and captures:
+The initial [production receipt](evidence/osiris-production-proof.json) binds the
+170-object snapshot's exact prepared bytes, browser-loaded image banks, source
+geometry and captures. Current-main integration evidence follows below.
 
 - Source acquisition verification passed for all 170 objects; final 67P verification passed after the lighting adjustment.
 - `pnpm test` passed: package and renderer tests, 1,400 platform tests and 234 shell tests. The initial run exposed a missing multi-lens race declaration; it was fixed and the whole suite rerun green.
@@ -95,6 +96,34 @@ sequences. Both retained their entire scene, made zero interaction requests,
 and reported zero console/page errors. This is one headless workload on the
 recorded hardware, not a guarantee across devices or trajectories. Raw compressed
 traces remain under `output/comet-performance/osiris-dpr-{1,2}/`.
+
+## Integration with current main
+
+The implementation was rebased onto `ddee157bf4eb9b0afee98fbb9fe8f7f400073fb0`
+after PR #46 added six radar asteroids. Official preparation regenerated 67P's
+navigation marker bindings for the 176-object registry. The original geometry
+and both OSIRIS image banks remain byte-identical to the verified version above.
+Existing transports were reused only where the official marker binder produced
+the exact complete payload hash pinned by incoming main; the six new objects
+were generated with the official preparer.
+
+The [current-main receipt](evidence/osiris-main-integration.json) binds implementation
+commit `eff3ed5d1ae8ca6da5a8542101eebe95abf717ee` to the final prepared and loaded
+bytes. Source verification for all 176 objects, the production build, 31 focused
+tests, and 67P's production browser checks at DPR 1 and 2 passed. The fresh lens
+captures again retained all 1,000 body leaves, with zero geometry/topology
+mutations, browser errors or drag requests. Both DPRs loaded the same 2x banks.
+The full unit suite and all-object browser sweep above remain evidence for the
+preceding 170-object snapshot; those full suites were not repeated after rebase.
+
+Fresh [DPR 1](evidence/osiris-main-dpr-1-trace.json) and
+[DPR 2](evidence/osiris-main-dpr-2-trace.json) traces retained all 52,340 scene
+nodes with zero interaction requests or errors. DrawFrame median/p95 spacing
+was 16.689/17.615 ms and 16.687/17.726 ms respectively, with zero
+dropped-without-presentation sequences in both runs. These are the same bounded
+headless Chrome workload described above. Raw traces and captures remain under
+`output/comet-performance/osiris-main-dpr-{1,2}/` and
+`output/playwright/67p-osiris-product-main-dpr*`.
 
 ![Original OSIRIS radiance display and the production observation lens, with differing perspective and illumination normalization explicitly labeled.](evidence/osiris-observation-comparison.png)
 

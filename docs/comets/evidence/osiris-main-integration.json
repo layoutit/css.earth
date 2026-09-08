@@ -1,0 +1,294 @@
+{
+  "schema": "cssearth-osiris-main-integration@1",
+  "capturedAt": "2026-09-08T17:35:42.929141+00:00",
+  "implementationRevision": "eff3ed5d1ae8ca6da5a8542101eebe95abf717ee",
+  "mainBaseRevision": "ddee157bf4eb9b0afee98fbb9fe8f7f400073fb0",
+  "registryObjects": 176,
+  "integration": "Rebased onto PR #46. Official preparation regenerated 67P marker bindings for the 176-object registry. Geometry, observations and image banks are unchanged.",
+  "gates": [
+    {
+      "command": "pnpm acquire:planets -- --verify-only",
+      "scope": "all 176 objects",
+      "result": "PASS"
+    },
+    {
+      "command": "pnpm --config.enable-pre-post-scripts=false build",
+      "scope": "176-object production build after official package/object preparation; redundant full-registry prebuild skipped",
+      "result": "PASS"
+    },
+    {
+      "command": "Focused Node test run (main-focused-tests.log)",
+      "scope": "31 tests covering OSIRIS decoding/quality/photometry, terrestrial profiles, 67P geometry and trace spans, shared browser profiles, and marker bindings",
+      "result": "PASS"
+    },
+    {
+      "command": "pnpm test:browser http://127.0.0.1:53134 comet-67p",
+      "scope": "67P production DOM cleanliness and retained interaction, DPR 1 and 2",
+      "result": "PASS"
+    },
+    {
+      "command": "Playwright CLI osiris-capture.js (output prefix only changed to product-main)",
+      "scope": "production model/OSIRIS switching, lighting states and drag at DPR 1 and 2",
+      "result": "PASS"
+    },
+    {
+      "command": "node tests/objects/browser/comet-67p/drag-trace.mjs http://127.0.0.1:53134 <dpr> output/comet-performance/osiris-main-dpr-<dpr> comet-67p osiris <source-view-token>",
+      "scope": "fresh production CDP traces at DPR 1 and 2",
+      "result": "PASS"
+    }
+  ],
+  "earlierFullGates": {
+    "receipt": "docs/comets/evidence/osiris-production-proof.json",
+    "scope": "Full pnpm test, 340 all-object/DPR browser cases and two navigation sequences passed on the preceding 170-object snapshot. Those full suites were not repeated after the six-object upstream expansion."
+  },
+  "transport": {
+    "policy": "Reuse an existing prepared transport only when the official marker binder yields the exact entire payload hash already pinned by incoming main. Otherwise run the full generator.",
+    "existingObjectHashesMatched": 169,
+    "receipt": {
+      "path": "output/comet-intake/67p-rosetta/main-transport-receipt.json",
+      "bytes": 20457,
+      "sha256": "b2db7487b2260ac7afd90b767010e1562ad7119df3317815a946d4ed954c2793"
+    },
+    "newObjectsOfficiallyPrepared": [
+      {
+        "path": "src/planets/asteroid-1996-hw1/prepared/object.json",
+        "bytes": 6637399,
+        "sha256": "73142f6bea1800bc2a0b7e04194d101fd72a9571f36c9374ed0731c65e3bd628"
+      },
+      {
+        "path": "src/planets/asteroid-2008-ev5/prepared/object.json",
+        "bytes": 6608057,
+        "sha256": "2c25ab675adb7647408a371d2959f4bbc99c30b3427492db517f83d8c15120ec"
+      },
+      {
+        "path": "src/planets/ra-shalom/prepared/object.json",
+        "bytes": 6581914,
+        "sha256": "89e810baa2973ee46308abc1e85a1a8d858397c09d693934fefd998fa4d86c84"
+      },
+      {
+        "path": "src/planets/asteroid-1992-sk/prepared/object.json",
+        "bytes": 6598862,
+        "sha256": "cc70a95ecac6f7c812f9929b865b0e0c870b4316f6a9217f9ee24db4406cb88a"
+      },
+      {
+        "path": "src/planets/asteroid-1998-ml14/prepared/object.json",
+        "bytes": 6596026,
+        "sha256": "b807b0eceec937ff09f234df790b075a70736b722fde1895e7f6719cd4dcf42e"
+      },
+      {
+        "path": "src/planets/asteroid-2002-ce26/prepared/object.json",
+        "bytes": 6644741,
+        "sha256": "54ba134d0415c66cc6cc22b2d247c7cdd3734920354f948afc19b005869f17dc"
+      }
+    ]
+  },
+  "sourceAndGeometry": [
+    {
+      "path": "src/planets/comet-67p/prepared/terrain.json",
+      "bytes": 462794,
+      "sha256": "8aba261c2cd7e48af0461b79c36208d20d5155aa3de821bc46e3bd6c1a6660f8",
+      "identicalTo": "7ce4702a7c1cdbb6c0985dac9791b86a50264279"
+    },
+    {
+      "path": "src/planets/comet-67p/prepared/scene.json",
+      "bytes": 6569563,
+      "sha256": "f9dcb4ecc53a1444c6e554f58ea480720a66703eda7eb9fc7900d6d76ad5ca05",
+      "identicalTo": "7ce4702a7c1cdbb6c0985dac9791b86a50264279"
+    }
+  ],
+  "prepared": [
+    {
+      "path": "src/planets/comet-67p/prepared/object.json",
+      "bytes": 6789506,
+      "sha256": "1d3eea82f651a40b9c7dfb761e09613627829f7a42a203d70ce520bc5c2e774d"
+    },
+    {
+      "path": "src/planets/comet-67p/prepared/runtime.json",
+      "bytes": 6789388,
+      "sha256": "f7dbfce944c12dd8eb4618505906f1373f523cf610f5ae7e90c880bac4bb10cc"
+    },
+    {
+      "path": "src/planets/comet-67p/runtime-assets.json",
+      "bytes": 5991,
+      "sha256": "823c2b35b746c0962e6dbc19340212763ba14c61678348315f995000d57a1394"
+    }
+  ],
+  "browser": [
+    {
+      "browser": "152.0.7977.76",
+      "dpr": 1,
+      "route": "http://127.0.0.1:53134/comet-67p/?v=MEZAJAAAAAAAAEFCxzNAAAAAv3CJ9rubliQ_zyhNNcVTtz_ekKuUb_YiAAA",
+      "finalUrl": "http://127.0.0.1:53134/comet-67p/?v=MEZAJAAAAAAAAEFCxzNAAAAAP8yaEjh_5Ts_1ckpkUixsL-_QZpCpnyvAAA",
+      "shadows": [
+        {
+          "url": "http://127.0.0.1:53134/scenes/comet-67p/comet-67p-osiris-shadow@2x.webp",
+          "bytes": 361028,
+          "sha256": "70e1d5a46f7d8d8d40805bfacc8c3ed719837fa11b17f8444db5bd28da02536a"
+        }
+      ],
+      "flood": [
+        {
+          "url": "http://127.0.0.1:53134/scenes/comet-67p/comet-67p-osiris-surface@2x.webp",
+          "bytes": 513442,
+          "sha256": "79c63db7373b3d73748ec8d6151b483a0e11da9b2f13f001227e4a7c8bef0b37"
+        }
+      ],
+      "beforeDrag": "matrix3d(-0.010876, 0.0045137, -0.016166, 0, -0.0047864, 0.0176293, 0.00814244, 0, 0.0160873, 0.00829671, -0.00850661, 0, -1e-06, 1e-06, -146.859, 1)",
+      "afterDrag": "matrix3d(-0.0174065, 0.0064278, 0.00746309, 0, 0.00975271, 0.0133678, 0.0112333, 0, -0.00137799, 0.0134159, -0.0147687, 0, 1e-06, -2e-06, -146.859, 1)",
+      "dragRequests": [],
+      "errors": [],
+      "devicePixelRatio": 1,
+      "leaves": 1000,
+      "retained": true,
+      "leafMutations": 344,
+      "geometryMutations": 0,
+      "geometryRetained": true,
+      "changedStyleProperties": [
+        "visibility"
+      ],
+      "treeMutations": 0,
+      "forbiddenElements": 0,
+      "forbiddenStyles": false,
+      "nativeBevel": true,
+      "production": true,
+      "scenes": 1,
+      "legend": "osiris"
+    },
+    {
+      "browser": "152.0.7977.76",
+      "dpr": 2,
+      "route": "http://127.0.0.1:53134/comet-67p/?v=MEZAJAAAAAAAAEFCxzNAAAAAv3CJ9rubliQ_zyhNNcVTtz_ekKuUb_YiAAA",
+      "finalUrl": "http://127.0.0.1:53134/comet-67p/?v=MEZAJAAAAAAAAEFCxzNAAAAAP8yaEjh_5Ts_1ckpkUixsL-_QZpCpnyvAAA",
+      "shadows": [
+        {
+          "url": "http://127.0.0.1:53134/scenes/comet-67p/comet-67p-osiris-shadow@2x.webp",
+          "bytes": 361028,
+          "sha256": "70e1d5a46f7d8d8d40805bfacc8c3ed719837fa11b17f8444db5bd28da02536a"
+        }
+      ],
+      "flood": [
+        {
+          "url": "http://127.0.0.1:53134/scenes/comet-67p/comet-67p-osiris-surface@2x.webp",
+          "bytes": 513442,
+          "sha256": "79c63db7373b3d73748ec8d6151b483a0e11da9b2f13f001227e4a7c8bef0b37"
+        }
+      ],
+      "beforeDrag": "matrix3d(-0.010876, 0.0045137, -0.016166, 0, -0.0047864, 0.0176293, 0.00814244, 0, 0.0160873, 0.00829671, -0.00850661, 0, -1e-06, 1e-06, -146.859, 1)",
+      "afterDrag": "matrix3d(-0.0174065, 0.0064278, 0.00746309, 0, 0.00975271, 0.0133678, 0.0112333, 0, -0.00137799, 0.0134159, -0.0147687, 0, 1e-06, -2e-06, -146.859, 1)",
+      "dragRequests": [],
+      "errors": [],
+      "devicePixelRatio": 2,
+      "leaves": 1000,
+      "retained": true,
+      "leafMutations": 344,
+      "geometryMutations": 0,
+      "geometryRetained": true,
+      "changedStyleProperties": [
+        "visibility"
+      ],
+      "treeMutations": 0,
+      "forbiddenElements": 0,
+      "forbiddenStyles": false,
+      "nativeBevel": true,
+      "production": true,
+      "scenes": 1,
+      "legend": "osiris"
+    }
+  ],
+  "captures": [
+    {
+      "path": "output/playwright/67p-osiris-product-main-dpr1-flood.png",
+      "bytes": 743020,
+      "sha256": "01c9f17ba996a68f8d6260ccbfc664343008015888a27f931846d92ae89dbc76"
+    },
+    {
+      "path": "output/playwright/67p-osiris-product-main-dpr1-shadows.png",
+      "bytes": 601887,
+      "sha256": "ffc4b7a69ed029eb76515b3bc1c7f3f9f07643291d00eb4222d8431872721a2a"
+    },
+    {
+      "path": "output/playwright/67p-osiris-product-main-dpr1-turned.png",
+      "bytes": 611629,
+      "sha256": "6f4954178881e981ccf0a85bd442967d8538de11a21211f29585e56ee4cd1ecb"
+    },
+    {
+      "path": "output/playwright/67p-osiris-product-main-dpr2-flood.png",
+      "bytes": 2070637,
+      "sha256": "1e1a720aa8357a9b2255ac67ecd3d0e9364f56f4bf2bd566e0c25e9749868d04"
+    },
+    {
+      "path": "output/playwright/67p-osiris-product-main-dpr2-shadows.png",
+      "bytes": 1597678,
+      "sha256": "77842fe14d39085be6f38ba8cc701f77673e4e1ba13d8c4e152a119f4980b820"
+    },
+    {
+      "path": "output/playwright/67p-osiris-product-main-dpr2-turned.png",
+      "bytes": 1635854,
+      "sha256": "c79609014fe87068dcbc8bbecd8b2d027e01316b19403cf169ec008f073b386a"
+    }
+  ],
+  "traces": [
+    {
+      "path": "docs/comets/evidence/osiris-main-dpr-1-trace.json",
+      "bytes": 14983,
+      "sha256": "198df58fea56de983c8ae1574a888500498f168ed3e4655a9b7d7f49a51395be"
+    },
+    {
+      "path": "docs/comets/evidence/osiris-main-dpr-2-trace.json",
+      "bytes": 14982,
+      "sha256": "9f22bcdb2f6d4e2e1fd87da171d068cd41c8422289bd2f3e89254a0c1fe7c67a"
+    }
+  ],
+  "logs": [
+    {
+      "path": "output/comet-intake/67p-rosetta/main-final-source-verify.log",
+      "bytes": 15285,
+      "sha256": "11d86f7365d1fdf4643f821bae058d3442309e2416118060c076ec4482fd357f"
+    },
+    {
+      "path": "output/comet-intake/67p-rosetta/main-final-build.log",
+      "bytes": 1125935,
+      "sha256": "84df526774e3397fbaef0036db8c97064bd9804d182d33c1f6568d01b42cfec8"
+    },
+    {
+      "path": "output/comet-intake/67p-rosetta/main-focused-tests.log",
+      "bytes": 3024,
+      "sha256": "de4eda90cc9133bcd4d740ba235270e04dee7fd86453daa6233ca58b215479a0"
+    },
+    {
+      "path": "output/comet-intake/67p-rosetta/main-final-body-browser.log",
+      "bytes": 255,
+      "sha256": "03825ea252d21893f7ee0890a2111bb718828e51095cffef6e457840a8de95d1"
+    },
+    {
+      "path": "output/comet-intake/67p-rosetta/main-product-capture.log",
+      "bytes": 9940,
+      "sha256": "81d5b9ef95286071a5fc79f0a924d91a7017fb903959b580fd040759da817384"
+    },
+    {
+      "path": "output/comet-intake/67p-rosetta/main-drag-dpr-1.log",
+      "bytes": 5284,
+      "sha256": "71a16892b6cac96343f030da47e8a9ab0454c29703b59d17e44f8dc0ec9a45f5"
+    },
+    {
+      "path": "output/comet-intake/67p-rosetta/main-drag-dpr-2.log",
+      "bytes": 5282,
+      "sha256": "34dee84a2114b1c644a33c4ef61af3d3cb38b239c6bcd266b475a5ad2b64f534"
+    },
+    {
+      "path": "output/comet-intake/67p-rosetta/main-new-object-json.log",
+      "bytes": 1079,
+      "sha256": "df09bb105dcd24eb6528a7d499f8545974b9b893d4340a076a7c7dc4209eb3cb"
+    },
+    {
+      "path": "output/comet-intake/67p-rosetta/main-new-assets.log",
+      "bytes": 293,
+      "sha256": "bc051315ce332e00352099373fbe754b9d742eed076d0b054ada695d2c06e597"
+    },
+    {
+      "path": "output/comet-intake/67p-rosetta/main-transport-receipt.json",
+      "bytes": 20457,
+      "sha256": "b2db7487b2260ac7afd90b767010e1562ad7119df3317815a946d4ed954c2793"
+    }
+  ]
+}
