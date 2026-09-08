@@ -95,6 +95,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
           setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
           setNavigationIndicatorsVisible(visible: boolean) { spatial!.setNavigationIndicatorsVisible(visible); focusPoint?.setNavigationEnabled(visible); },
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
+          setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
           inspect() {
             return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(),
               foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });

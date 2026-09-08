@@ -87,7 +87,7 @@ export async function prepareNavigation({
     }));
     const generatedTargets = new Set(changes.map(({ target }) => target));
     const obsolete = [...descriptors.flatMap(({ planetId }) => [`${planetId}.webp`, `${planetId}-context.webp`]),
-      "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp"];
+      "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp", "sun-indicator-hexagon.png"];
     changes.push(...[...new Set(obsolete)].map((filename) => ({ target: resolve(outputRoot, filename) })).filter(({ target }) => !generatedTargets.has(target)));
     changes.push({ source: stagedPresentation, target: presentationPath });
     await mkdir(outputRoot, { recursive: true });
@@ -489,23 +489,23 @@ export async function prepareSunIndicator({
   const swatch = JSON.parse(await readFile(resolve(projectRoot, "src/planets/sun/swatch.json"), "utf8"));
   const hex = swatch.display?.hex ?? swatch.hex;
   if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error("Invalid Sun swatch.");
-  const points = Array.from({ length: 6 }, (_, index) => {
-    const angle = index * Math.PI / 3;
+  const points = Array.from({ length: 7 }, (_, index) => {
+    const angle = index * Math.PI * 2 / 7 - Math.PI / 2;
     const radius = 9.1;
     return [10 + Math.cos(angle) * radius, 10 + Math.sin(angle) * radius];
   });
   const inset = (point, neighbour) => point.map((value, axis) => value + (neighbour[axis] - value) * .12);
   const rounded = points.map((point, index) => ({ point,
-    before: inset(point, points[(index + 5) % 6]), after: inset(point, points[(index + 1) % 6]),
+    before: inset(point, points[(index + 6) % 7]), after: inset(point, points[(index + 1) % 7]),
   }));
   const xy = point => point.map(value => value.toFixed(4)).join(" ");
   const path = `M ${xy(rounded[0].before)} ` + rounded.map(({ point, after }, index) =>
-    `Q ${xy(point)} ${xy(after)} L ${xy(rounded[(index + 1) % 6].before)}`).join(" ") + " Z";
+    `Q ${xy(point)} ${xy(after)} L ${xy(rounded[(index + 1) % 7].before)}`).join(" ") + " Z";
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 20 20">` +
     `<path d="${path}" fill="none" stroke="${hex}" stroke-width="1.5" stroke-linejoin="round"/>` +
     `<circle cx="10" cy="10" r="1" fill="${hex}"/></svg>`;
   await mkdir(outputRoot, { recursive: true });
-  await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, "sun-indicator-hexagon.png"));
+  await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, "sun-indicator-heptagon.png"));
 }
 
 async function loadObjectDescriptor(planetId, projectRoot) {
