@@ -117,6 +117,7 @@ const SATELLITES = [
   ['oberon', '704', '500@799', 'uranus'],
   ['triton', '801', '500@899', 'neptune'],
   ['proteus', '808', '500@899', 'neptune'],
+  ['larissa', '807', '500@899', 'neptune'],
   ['charon', '901', '500@999', 'pluto'],
 ]
 
