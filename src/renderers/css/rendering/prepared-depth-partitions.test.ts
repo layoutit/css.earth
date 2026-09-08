@@ -26,3 +26,16 @@ test('camera publication preserves carriers and changes prepared ordering only a
   nodes[0].hidden = false; publish(projection(10));
   expect(nodes[2].hidden).toBe(false);
 });
+
+test('fixed prepared priorities are applied once while camera transforms keep publishing', () => {
+  const nodes = Array.from({ length: 5 }, () => ({ style: {}, hidden: false }) as HTMLElement);
+  const publish = createPreparedDepthPartitions({ groups: [{ root: 1, scene: 2 }, { root: 3, scene: 4 }],
+    order: { sequence: [{ group: 1 }, { group: 0 }] } }, nodes, nodes[0]);
+  const projection = physicalProjectionFromCamera([1,0,0,0,1,0,0,0,1], [0,0,-100], 1,
+    { focalPixels: 600, principalOffsetPixels: [0,0] });
+  nodes[0].style.transform = 'scale(1)'; publish(projection);
+  expect(nodes[1].style.zIndex).toBe('1'); expect(nodes[3].style.zIndex).toBe('0');
+  Object.defineProperty(nodes[1].style, 'zIndex', { set() { throw new Error('Repeated fixed priority write'); } });
+  nodes[0].style.transform = 'scale(2)'; publish(projection);
+  expect(nodes[2].style.transform).toBe('scale(2)'); expect(nodes[4].style.transform).toBe('scale(2)');
+});

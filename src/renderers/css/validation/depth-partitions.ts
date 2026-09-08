@@ -23,6 +23,11 @@ export function requireDepthPartitions(value: unknown, tree: PreparedTree): numb
       const group = integer(entry.group, 'depth group index');
       if (group >= groups.length || ordered.has(group)) fail('depth order requires each group exactly once');
       ordered.add(group);
+    } else if (Object.hasOwn(entry, 'sequence')) {
+      record(entry, 'depth sequence', ['sequence']);
+      const sequence = array(entry.sequence, 'depth sequence');
+      if (sequence.length < 2 || sequence.length > groups.length) fail('depth sequence requires 2 to group-count entries');
+      for (const child of sequence) visit(child, depth + 1);
     } else {
       record(entry, 'depth split', ['plane', 'back', 'front']);
       const plane = numbers(entry.plane, 'depth plane', 4);

@@ -2,6 +2,7 @@
 // Reload the same URL on both sides before comparing, so serialization precision
 // cannot masquerade as a renderer difference. No camera APIs set a test pose.
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { scrollToDistance } from './wheel-zoom-distance.mjs';
@@ -16,7 +17,21 @@ const browser = await chromium.launch({ headless: true, executablePath: process.
 const options = { viewport: { width: 1995, height: 1236 }, deviceScaleFactor: dpr };
 const reference = await browser.newPage(options), candidate = await browser.newPage(options);
 const report = { origin, referenceOrigin, dpr, browser: browser.version(), frames: [], errors: [] };
-for (const page of [reference, candidate]) page.on('pageerror', error => report.errors.push(error.message));
+const prepared = new Map(), pending = [];
+for (const page of [reference, candidate]) {
+  page.on('pageerror', error => report.errors.push(error.message));
+  page.on('response', response => {
+    if (response.status() >= 400) report.errors.push(`${response.status()} ${response.url()}`);
+    if (!/\/object\.[^/]+\.json$/.test(response.url())) return;
+    pending.push(response.body().then(bytes => {
+      const payload = JSON.parse(bytes);
+      prepared.set(`${new URL(response.url()).origin}:${payload.id}`, {
+        sha256: createHash('sha256').update(bytes).digest('hex'), groups: payload.data.depthPartitions?.groups.length ?? 0,
+        faces: payload.data.surfaceHit?.triangles.length ?? 0,
+      });
+    }));
+  });
+}
 async function ready(page) {
   await page.waitForFunction(() => window.__cssEarth?.error || window.__cssEarth?.ready, null, { timeout: 40000 });
   assert.equal(await page.evaluate(() => window.__cssEarth.error), null);
@@ -35,10 +50,12 @@ try {
     const initial = await camera(reference);
     await scrollToDistance(reference, initial.distanceKilometers * initial.silhouetteRadius / 350);
     const nearDistance = (await camera(reference)).distanceKilometers;
-    let lens = 'normal';
+    const lenses = await reference.locator('button[name="lens"]').evaluateAll(nodes => nodes.map(node => node.value));
+    const defaultLens = await reference.locator('.planet-stage').getAttribute('data-lens');
+    let lens = defaultLens;
     for (const action of ['near', 'orbit', 'dataset', 'marker', 'return', 'resize']) {
       if (action === 'orbit') await drag();
-      if (action === 'dataset') lens = 'elevation';
+      if (action === 'dataset') lens = lenses.find(value => value !== defaultLens) ?? defaultLens;
       if (action === 'marker') await scrollToDistance(reference, nearDistance * 200);
       if (action === 'return') await scrollToDistance(reference, nearDistance);
       if (action === 'resize') { await reference.setViewportSize({ width: 1280, height: 800 }); await candidate.setViewportSize({ width: 1280, height: 800 }); }
@@ -48,13 +65,17 @@ try {
       await candidate.goto(url.replace(referenceOrigin, origin)); await ready(candidate);
       // Saved view URLs encode the camera. Apply the dataset through its real
       // control on both pages after reloading that camera.
-      if (lens !== 'normal') for (const page of [reference, candidate]) {
+      if (lens !== defaultLens) for (const page of [reference, candidate]) {
         await page.locator(`button[name="lens"][value="${lens}"]`).click();
         await page.locator(`button[name="lens"][value="${lens}"][aria-pressed="true"]`).waitFor();
         await page.locator('.planet-lenses[aria-busy="false"]').waitFor();
         await page.waitForTimeout(250);
       }
       const before = await camera(reference), after = await camera(candidate);
+      await Promise.all(pending);
+      const source = prepared.get(`${referenceOrigin}:${id}`), loaded = prepared.get(`${origin}:${id}`);
+      assert.ok(source && loaded, 'Both actual prepared payloads must be identified');
+      assert.equal(loaded.faces, source.faces, 'Every original source face survives');
       assert.deepEqual(after, before, `${id} ${action}: both builds must use exactly the same camera`);
       const index = report.frames.length, filename = `${String(index).padStart(6, '0')}.png`;
       await reference.screenshot({ path: `${output}/reference/${filename}` });
@@ -68,10 +89,10 @@ try {
           images: [...new Set([...root.querySelectorAll(`.${id}-body > u`)].map(node => getComputedStyle(node).backgroundImage))],
           lens: document.querySelector('.planet-stage').dataset.lens };
       }, id);
-      assert.equal(publication.sceneCount, 1); assert.equal(publication.sharedCamera, true); assert.equal(publication.groups, 32);
+      assert.equal(publication.sceneCount, 1); assert.equal(publication.sharedCamera, true); assert.equal(publication.groups, loaded.groups);
       assert.ok(publication.images.every(image => image !== 'none'));
       assert.equal(publication.lens, lens);
-      report.frames.push({ index, id, action, url, camera: before, publication });
+      report.frames.push({ index, id, action, url, camera: before, publication, source, loaded, lenses });
       console.log(`PAIRED VIEW ${id} ${action} DPR ${dpr}`);
     }
   }
