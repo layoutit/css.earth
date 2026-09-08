@@ -3,9 +3,10 @@
 This pass addresses the 28 unique findings from the prerelease review at
 `1e0670a5869c2270d0824f5b7fb37a55d92f77ba`. It also includes the unpublished
 factsheet pass on which that review was based. The repair branch starts from
-main `3eaf498d0c64981b3b1e2224aacc3e48b2dd9dd2`, preserving its 83 registered
+main `3eaf498d0c64981b3b1e2224aacc3e48b2dd9dd2` and incorporates
+`a133fe30cf419f4bd2200872a18a29e46328483d`, preserving all 87 registered
 bodies. Four reviewed but unmerged asteroid snapshots remain in their own PR.
-The twelve newly merged moons are preserved, not claimed to have received the
+The sixteen newly merged moons are preserved, not claimed to have received the
 previous 75-body scientific audit.
 
 ## Measurement and rendering corrections
@@ -66,6 +67,26 @@ hover titles are supplementary.
 
 See [factsheet conventions](factsheets.md) for quantity definitions, rounding,
 source pins and reproducible publication of facts and editorial metadata.
+
+## Reproducing the numerical checks
+
+`node --test tools/prepare-solar-geometry.test.mjs` checks the prepared fixed-epoch
+positions against the pinned Horizons responses and rejects mismatched epochs.
+`pnpm test:preparation` includes the irregular-surface regressions and a decoded
+atlas pixel that would previously have sampled the wrong surface.
+
+With pinned shape inputs installed and NumPy available, run
+`python3 tools/objects/terrestrial-layers/verify-source-surface.py` to independently
+compare the regression fixtures against every triangle of the full source meshes.
+This verifier imports no product projection code. It covers nine source-coordinate
+anchors, including Itokawa, Ryugu, Eros and Bennu. The retained display terrain
+is unchanged by the correction.
+
+The prepared atlas checks additionally recovered a physical source query from an
+actual retained leaf and decoded pixel in each body. Independent projection and
+palette calculations agreed within 1, 1, 2 and 1 RGB levels respectively. These
+are bounded regression witnesses, not an assertion that every texel was
+independently validated.
 
 ## Limits
 

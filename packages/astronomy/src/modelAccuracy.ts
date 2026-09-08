@@ -62,6 +62,10 @@ const VSOP_THEORY_DISCREPANCY_KM: Record<Vsop87BodyKey, number> = {
  * statistical uncertainties.
  */
 const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
+  bianca: 62.38429913291977,
+  cressida: 31.167287112096254,
+  desdemona: 99.17274979901151,
+  rosalind: 90.45546017581691,
   phobos: 1395.0463862179204,
   deimos: 112.87860276333798,
   io: 305.340674039755,
@@ -168,7 +172,7 @@ ACCURACY_BY_FRAME.set(
     'sun',
     'Eight-planet mass-weighted barycentric correction',
     'fit-residual',
-    164.71005177851123,
+    164.70978663615983,
     VSOP87A_VALID_FROM_JD,
     VSOP87A_VALID_TO_JD,
     'JPL Horizons DE441 Sun-to-SSB vector fixtures',

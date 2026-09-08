@@ -13,6 +13,7 @@ src/planets/lutetia/source/shape/*.wrl -whitespace
 src/planets/steins/source/shape/*.wrl -whitespace
 
 # Retain original scientific archive text bytes.
+packages/astronomy/source/scene-epoch/*.txt -whitespace
 src/planets/didymos/source/reference/** -whitespace
 src/planets/dimorphos/source/reference/** -whitespace
 src/planets/kleopatra/source/reference/** -whitespace
