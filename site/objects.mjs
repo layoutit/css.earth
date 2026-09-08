@@ -1,6 +1,8 @@
 import idaDescriptor from "../src/planets/ida/object.json" with { type: "json" };
 import gaspraDescriptor from "../src/planets/gaspra/object.json" with { type: "json" };
 import mathildeDescriptor from "../src/planets/mathilde/object.json" with { type: "json" };
+import lutetiaDescriptor from "../src/planets/lutetia/object.json" with { type: "json" };
+import steinsDescriptor from "../src/planets/steins/object.json" with { type: "json" };
 import panDescriptor from "../src/planets/pan/object.json" with { type: "json" };
 import atlasDescriptor from "../src/planets/atlas/object.json" with { type: "json" };
 import prometheusDescriptor from "../src/planets/prometheus/object.json" with { type: "json" };
@@ -117,6 +119,16 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(mathildeDescriptor);
     }, mathildeDescriptor.properties.worldFrame),
+  object("lutetia", "Lutetia", "asteroid", "#aaaaaa", 2.435,
+    "Explore Lutetia with its Rosetta shape model and source-derived elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(lutetiaDescriptor);
+    }, lutetiaDescriptor.properties.worldFrame),
+  object("steins", "Steins", "asteroid", "#aaaaaa", 2.363,
+    "Explore Steins with a Rosetta photomosaic, its irregular shape and mapped elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(steinsDescriptor);
+    }, steinsDescriptor.properties.worldFrame),
   object("vesta", "Vesta", "asteroid", "#a49c8d", 2.36,
     "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

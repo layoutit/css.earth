@@ -352,5 +352,93 @@ export const ASTEROID_FIXTURES = {
         ]
       }
     ]
+  },
+  "lutetia": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2721%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -10145342.89713673,
+          -301008207.4144275,
+          -132975704.0851793
+        ],
+        "velocity": [
+          1803722.976460485,
+          211127.9868568779,
+          -10609.13400939928
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          43863261.47780407,
+          -290865850.4419727,
+          -131598106.7870185
+        ],
+        "velocity": [
+          1788945.079513078,
+          466307.5167006067,
+          103473.2667724836
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          96691810.22012243,
+          -272996637.855691,
+          -126723727.109092
+        ],
+        "velocity": [
+          1724282.158650198,
+          724727.0434470284,
+          221877.7617853696
+        ]
+      }
+    ]
+  },
+  "steins": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272867%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -258383132.6542709,
+          -211569931.3213299,
+          -75558817.31568363
+        ],
+        "velocity": [
+          1282384.048792132,
+          -909067.6016125507,
+          -716699.6686075729
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -217130807.4467449,
+          -236340490.7048531,
+          -96121511.54294573
+        ],
+        "velocity": [
+          1464489.525211774,
+          -737275.9101003566,
+          -650807.5259189806
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -170749779.2594551,
+          -255510968.483007,
+          -114403915.9152981
+        ],
+        "velocity": [
+          1622965.085210304,
+          -535989.7397985235,
+          -564607.3526293344
+        ]
+      }
+    ]
   }
 } as const

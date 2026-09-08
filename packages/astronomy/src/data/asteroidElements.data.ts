@@ -105,5 +105,31 @@ export const ASTEROID_ELEMENTS = {
       "meanAnomalyAtEpochRad": 5.117847950673388,
       "meanMotionRadPerDay": 0.0039942360281778645
     }
+  },
+  "lutetia": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2721%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 364208318.1601056,
+      "eccentricity": 0.164793711438368,
+      "inclinationRad": 0.42074609249306666,
+      "ascendingNodeRad": 0.129576148031942,
+      "argumentOfPeriapsisRad": 5.653201103528145,
+      "meanAnomalyAtEpochRad": 5.604337396766025,
+      "meanMotionRadPerDay": 0.004528399866387203
+    }
+  },
+  "steins": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272867%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 353530724.3909022,
+      "eccentricity": 0.1468217649089243,
+      "inclinationRad": 0.5262091008737869,
+      "ascendingNodeRad": 0.2859848524182343,
+      "argumentOfPeriapsisRad": 5.097274036108311,
+      "meanAnomalyAtEpochRad": 5.214100931795791,
+      "meanMotionRadPerDay": 0.004735096288897001
+    }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>

@@ -40,7 +40,7 @@ export function parseTerrestrialProfile(value) {
       !Number.isSafeInteger(value.lighting?.frameSize) || value.lighting.frameSize <= 0 ||
       !Number.isSafeInteger(value.lighting.frameCount) || value.lighting.frameCount < 2 ||
       !Number.isSafeInteger(value.lighting.columns) || value.lighting.columns <= 0 || value.lighting.frameCount % value.lighting.columns ||
-      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.mosaics ?? []), ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
+      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.mosaics ?? []), ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
   if (value.raster.surfaceQuality !== undefined &&
@@ -51,8 +51,13 @@ export function parseTerrestrialProfile(value) {
       (typeof value.celestial.sunQualification !== 'string' || !value.celestial.sunQualification.trim())) {
     throw new TypeError('Authored Sun qualification must explain the source frame.');
   }
+  for (const view of value.raster.shapeViews ?? []) {
+    if (!/^[a-z][a-z0-9-]*$/.test(view.id) || typeof view.label !== 'string' || !view.label.trim() ||
+        !/^[a-z][a-z0-9-]*$/.test(view.consumer) || !/^#[0-9a-f]{6}$/i.test(view.color) ||
+        !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and an explicit display color.');
+  }
   for (const lens of value.raster.scientific ?? []) {
-    const meshGrid = ['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model'].includes(lens.format);
+    const meshGrid = ['wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh'].includes(lens.format);
     const tableGrid = lens.format === 'pds-radial-table';
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
@@ -64,7 +69,7 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+    if (!['geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
         (!meshGrid && !tableGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
