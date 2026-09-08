@@ -2,6 +2,12 @@ import ymirDescriptor from "../src/planets/ymir/object.json" with { type: "json"
 import siarnaqDescriptor from "../src/planets/siarnaq/object.json" with { type: "json" };
 import himaliaDescriptor from "../src/planets/himalia/object.json" with { type: "json" };
 import nereidDescriptor from "../src/planets/nereid/object.json" with { type: "json" };
+import geographosDescriptor from "../src/planets/geographos/object.json" with { type: "json" };
+import bacchusDescriptor from "../src/planets/bacchus/object.json" with { type: "json" };
+import mithraDescriptor from "../src/planets/mithra/object.json" with { type: "json" };
+import nereusDescriptor from "../src/planets/nereus/object.json" with { type: "json" };
+import golevkaDescriptor from "../src/planets/golevka/object.json" with { type: "json" };
+import yorpDescriptor from "../src/planets/yorp/object.json" with { type: "json" };
 import donaldjohansonDescriptor from "../src/planets/donaldjohanson/object.json" with { type: "json" };
 import apophisDescriptor from "../src/planets/apophis/object.json" with { type: "json" };
 import asteroid1950daDescriptor from "../src/planets/asteroid-1950-da/object.json" with { type: "json" };
@@ -822,6 +828,42 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(donaldjohansonDescriptor);
     }, donaldjohansonDescriptor.properties.worldFrame),
+
+  object("geographos", "Geographos", "asteroid", "#aaaaaa", 1.245645513766084,
+    "Explore Geographos in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(geographosDescriptor);
+    }, geographosDescriptor.properties.worldFrame),
+
+  object("bacchus", "Bacchus", "asteroid", "#aaaaaa", 1.0774720987446262,
+    "Explore Bacchus in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bacchusDescriptor);
+    }, bacchusDescriptor.properties.worldFrame),
+
+  object("mithra", "Mithra", "asteroid", "#aaaaaa", 2.2052023543749892,
+    "Explore Mithra in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(mithraDescriptor);
+    }, mithraDescriptor.properties.worldFrame),
+
+  object("nereus", "Nereus", "asteroid", "#aaaaaa", 1.485139038607293,
+    "Explore Nereus in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(nereusDescriptor);
+    }, nereusDescriptor.properties.worldFrame),
+
+  object("golevka", "Golevka", "asteroid", "#aaaaaa", 2.4737870762656686,
+    "Explore Golevka in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(golevkaDescriptor);
+    }, golevkaDescriptor.properties.worldFrame),
+
+  object("yorp", "YORP", "asteroid", "#aaaaaa", 1.0059143954320515,
+    "Explore YORP in 3D with its published radar shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(yorpDescriptor);
+    }, yorpDescriptor.properties.worldFrame),
 
   object("vesta", "Vesta", "asteroid", "#a49c8d", 2.36,
     "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.", async () => {

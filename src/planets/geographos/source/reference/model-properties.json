@@ -1,0 +1,71 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/hudson-ostro_1999_geo_icarus.pdf",
+  "diameterKm": 2.568084,
+  "diameterInterpretation": "Twice the volume-equivalent radius computed from the archived mesh; this describes the model, not a newly measured physical mean diameter.",
+  "periodHours": 5.223327,
+  "poleEclipticJ2000Degrees": [
+    55,
+    -46
+  ],
+  "limitations": "The 1994 equatorial radar geometry leaves north–south ambiguity: local feature latitudes and thickness are model-dependent. This view retains the archived 1999 radar model; the reference radius is derived from this mesh volume and is not an independently measured physical mean radius. No resolved optical surface map is supplied.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj",
+    "vertices": 2048,
+    "faces": 4092,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      0.807763
+    ],
+    "firstFaceZeroBased": [
+      0,
+      863,
+      988
+    ],
+    "extentsKm": [
+      5.052589,
+      2.028125,
+      2.1451410000000006
+    ],
+    "volumeCubicKm": 8.868010549153729,
+    "volumeEquivalentRadiusKm": 1.2840419049757388,
+    "radialRangeKm": [
+      0.6994881985737859,
+      2.6830774167523144
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 4092,
+    "ambiguous": 2,
+    "maxErrorMeters": 72.28033824968793,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 4092,
+    "sourceVertices": 2048,
+    "weldedVertices": 2048,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 30,
+    "estimatedErrorMeters": 29.385833740234375,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 8764291135.246899
+    }
+  },
+  "referenceRadiusKm": 1.284042,
+  "radiusInterpretation": "Volume-equivalent radius computed from the unmodified JPL archive mesh. The source paper gives a model-volume upper bound; no catalog diameter is imposed on the vertices."
+}

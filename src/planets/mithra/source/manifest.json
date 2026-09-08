@@ -1,0 +1,204 @@
+{
+  "schema": "cssmithra-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "mithra-shape",
+      "path": "shape/Mithra.v1.PA.prograde.mod.obj",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/Mithra.v1.PA.prograde.mod.obj",
+      "credit": "Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 845
+      },
+      "coverage": "This is the archived prograde principal-axis model. The source research also permits a nearly mirrored retrograde solution; the pole and rotational sense are not unique. Near-pole-on observations constrain its unobserved southern shape less strongly. The period is 67.5 ± 6.0 h; a small non-principal-axis component was not excluded. No resolved optical surface map is supplied.",
+      "expectedBytes": 186529,
+      "expectedSha256": "b38955afe05b2e941d5d8306fc5b644e09f3b125fbb493c8d25326f5d5b81b7e"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "mithra-research-mithra",
+      "path": "reference/mithra.pdf",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/4486_Mithra/brozovic.etal.2010.mithra.pdf",
+      "credit": "Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy",
+      "license": "Original scientific article; source publisher copyright retained.",
+      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
+      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 2758066,
+      "expectedSha256": "b63153cc1414bc21f1707d9d79094aba1d0f6ef0be1a7d607220d65f1c8b96d4"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/Mithra.v1.PA.prograde.mod.obj",
+      "credit": "Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 71414,
+      "expectedSha256": "684209212ce7415640f6457ecb2c6b6d4934beb736cbd705573d32a89f67101f",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "mithra-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 9101,
+      "expectedSha256": "da9f7b761085df39214eb9e68c2bce9b3d1227e97ddfd2829f74549296878b4f"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1004,
+      "expectedSha256": "baec20ec2b7814206465761a04420b6c388dbcfa6a2c50e4588563eb150db628"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1346,
+      "expectedSha256": "6b9b87bbcabb6f443171a41f2a9c786a4ae52b208d226e53cdb31b5c8f37ffab"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 998,
+      "expectedSha256": "030d18c509e894a484c140b63a1f6821fec2b790dc90c33b32d8e7b9fb19009d"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 3113,
+      "expectedSha256": "dccdb6b26748b66282dea55ff90f7b50e7bc55729906958373014654d8322387"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 3450,
+      "expectedSha256": "0ed90568bbff11ecb7e0ecf771400c05d75bacf123b7078b8c9bb82a0cee5451"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7355,
+      "expectedSha256": "c1abd074b138c5c08077802d28559668769477257b72035c44fd75928774e3d5"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1427,
+      "expectedSha256": "0a1dc884316072f29a8d970a3542bd42790c8f962a40d5306398bd3b9a5cb449"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 6645,
+      "expectedSha256": "b620af3a25ee2b627fb858a845dfceceaefb5c4432c51214ea2316a56f7f444a"
+    },
+    {
+      "path": "reference/jpl-shape-index.html",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2608,
+      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2033,
+      "expectedSha256": "bcb1e8fc34f242e8213ad4ee3b78f0cd338018d76aabc2bde8eb526274da620f"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 144975,
+      "expectedSha256": "0b85761620a89776681a91705e5d6ee225ecbf38adf0a1a356f3a3dc31ea0003"
+    },
+    {
+      "path": "reference/scalar-anchors.json",
+      "purpose": "Independent full-source scalar correspondence anchors and coverage checks.",
+      "expectedBytes": 5838,
+      "expectedSha256": "367269a04ce85ee859172b2deca2e044f5c8ce1dcaed86c2a1d0eb284a29d9bc"
+    }
+  ]
+}
