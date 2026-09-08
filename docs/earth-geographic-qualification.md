@@ -1,28 +1,43 @@
 # Geographic feature qualification
 
-The candidate integrates main `7b311eb3` (161 registered bodies) in merge
-`0294ed14`. All reviewed implementation defects are repaired, but final
-qualification remains open. PR 6 stays draft; no merge or deployment is claimed.
+Earth zoom is verified on production candidate `eac10e8b`, which integrates main
+through `c61d1bf9` with 227 registered bodies. The actual city-entry route exposed
+an integration defect: searching for Buenos Aires called a removed destination
+`setOpen` method and threw before displaying results. Removing that obsolete
+call restores the existing city search and zoom route.
 
-The [current gate receipt](evidence/earth-exploration/regroup-status.json) records:
+The [fresh zoom receipt](evidence/earth-exploration/takeover-zoom.json) records a
+passing production build and real headless Chrome runs at DPR 1 and 2. Both use
+the same compiled application bytes and cover globe, regional and city views,
+then an additional 8x close-up: approximately 4 km altitude with a 200 m scale
+bar. Requested 1.2x wheel gestures measure 1.200005–1.206663x; reversing restores
+1.0x. The largest error on an 80 px drag is 0.0889 CSS pixels. A map grab stops a
+real destination flight without later resumption. Both runs have no application
+errors, failed HTTP responses or visible imagery warnings at the measured views.
+Canceled requests are recorded separately. This is Chrome-generated input, not
+physical-trackpad or display-presentation evidence.
 
-- Full source verification for all 161 bodies, renderer typechecking, all 358
-  renderer tests and 54 focused navigation/shell tests pass.
-- Earth and Deimos each pass all 13 browser conformance cases, including DPR 1
-  and 2, on the integrated development application.
-- The complete production build, full aggregate and all-body built-browser
-  gates must run again. The earlier 155-body build and DOM passes are preserved
-  with their actual scope. Its aggregate run had two compatibility-import
-  failures; the import is corrected, but a full rerun remains required.
-- Main changes activation, viewport and picking ownership, so Earth
-  entity/history/recovery, input and teardown evidence also needs refreshing.
+![Production Buenos Aires close-up](evidence/earth-exploration/takeover-zoom-closeup.png)
 
-Local free disk space has fallen below the workstation's 25 GiB minimum for
-large materialization. The full build is paused pending space; source files,
-build output and captured evidence have not been deleted. This is an execution
-blocker, not a passing qualification or an application readiness verdict.
+PR 6 remains draft: zoom qualification is complete for these finite cases, while
+B16's broader merge assessment remains open. The full aggregate rerun was
+interrupted when the user redirected priority to the actual zoom. Current-candidate
+full source/preparation gates, all-body built-browser coverage and refreshed
+geographic fault/history/ownership checks remain incomplete. Main has advanced
+beyond the integrated snapshot; no merge or deployment is claimed.
 
-## Current repairs and focused evidence
+The earlier audit memory failure is repaired: it retained roughly 4 GB of
+prepared source text across the registry. A bounded text cache now preserves all
+source digests and rejects changed rereads. The 227-body audit passes with a
+768 MB heap limit, and its two regression suites pass 55 tests. Those checks
+precede the one-line city-search repair and do not substitute for a full current
+aggregate pass. The old disk blocker has cleared; no cleanup was performed.
+
+The [previous gate receipt](evidence/earth-exploration/regroup-status.json) retains
+its historical 161-body scope. Earlier measurements below keep their original
+candidate identities and are not relabeled as new zoom or merge-readiness proof.
+
+## Earlier repairs and focused evidence
 
 - A canceled destination can no longer replace a newer Back/Forward restoration
   or publish an extra history entry after its detail request completes.
