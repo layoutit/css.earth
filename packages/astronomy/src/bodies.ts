@@ -61,6 +61,10 @@ const body = (
 ): BodyData => ({ id, name, horizonsCode, meanRadiusKm, gravitationalParameterKm3PerS2, parent })
 
 export const BODIES: Record<BodyId, BodyData> = {
+  bianca: body('bianca', 'Bianca', '708', 25.67646409198381, 0, 'uranus'),
+  cressida: body('cressida', 'Cressida', '709', 39.78509749046438, 0.01227, 'uranus'),
+  desdemona: body('desdemona', 'Desdemona', '710', 32.01203974041056, 0, 'uranus'),
+  rosalind: body('rosalind', 'Rosalind', '713', 35.99999999999999, 0, 'uranus'),
   sun: body('sun', 'Sun', '10', 695700, 132712440041.93938, null),
   // JPL Horizons physical block, solution JPL#36 (2021-Apr-13), retrieved 2026-09-07.
   vesta: body('vesta', 'Vesta', '4;', 261.385, 17.28828, 'sun'),
