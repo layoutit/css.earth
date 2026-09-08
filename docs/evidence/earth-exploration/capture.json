@@ -1,0 +1,28 @@
+{
+  "applicationCommit": "eb53bfebc58362807a8ef554efede203b5381045",
+  "captureHead": "c97d7a599ee81e21e249d1a369c5bfe93be7ae6c",
+  "browser": "152.0.7977.76",
+  "dpr": 1,
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "sourceVideoSha256": "0f7ffda393f7240d22142e8fa248dd34b2aa9e2a8a29a3154a82e4628b84e6c2",
+  "harnessSha256": "52d90870533323b5b83044ff5c8840e9ac6781accf99508b8e4521510e02c376",
+  "command": "node tests/objects/browser/earth/exploration-browser.mjs --journey=continuous-exploration --cycles=6 --dpr=1 --record=true --trace=true --trace-kind=memory --memory-dumps=true --memory-checkpoints=globe,1-revisit,2-revisit,3-revisit,4-revisit,5-revisit,6-revisit,final --screenshots=false --output=<new-run-directory>",
+  "images": [
+    {
+      "file": "longyearbyen-after-six-cycles.png",
+      "sha256": "3d50ab55cd68ab1928f17f792ff8f8ad5efdd6c8f2356259ad652042622e3b50",
+      "videoSeconds": 345.346,
+      "checkpoint": "6-polar"
+    },
+    {
+      "file": "buenos-aires-noise-after-six-cycles.png",
+      "sha256": "fac47673c6a8290f45d6fc4f173f10f5b18b15cc0724d36717bce968482f997c",
+      "videoSeconds": 399.414,
+      "checkpoint": "final"
+    }
+  ],
+  "qualification": "Frames sampled at checkpoint elapsed time plus 0.3 seconds. Video seek points are approximate alignment, not identical to DOM sampling instants. These are unretouched frames from a lossy Chrome video, not source-pixel or native-renderer parity evidence. The route, final card/lens and served application hashes were independently checked. Source credits remain in the captured interface."
+}

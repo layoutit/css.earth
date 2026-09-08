@@ -189,6 +189,8 @@ The normal atlas, retained releases and long-session request counts are material
 cost inputs. Terrascope service capacity remains an external dependency; direct
 API access does not establish unlimited free service.
 
-Merge, deployment, physical-device qualification and any absolute monthly spend
-limit remain separate decisions. [PR #6](https://github.com/layoutit/cssEarth/pull/6)
+[Current qualification, reviewed frames and delivery scenarios](earth-geographic-qualification.md)
+record the measured implementation and its limits. Merge, deployment,
+physical-device qualification and any absolute monthly spend limit remain
+separate decisions. [PR #6](https://github.com/layoutit/cssEarth/pull/6)
 is the review and delivery record for this feature.

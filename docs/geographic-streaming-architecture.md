@@ -2,7 +2,7 @@
 
 The shared application shell owns the selected entity and its explicit lenses. The existing prepared-map pager owns geographic detail and drawable coverage. One geographic image owner manages transport, decoding and bounded reuse, and the retained CSS renderer applies prepared image handles and transforms.
 
-Local publication/loading and shared image reuse are implemented. The global coarse release is published and integrated; its metadata preserves the original fine selection in 28 recorded views. Production browser journeys use its public assets through the normal transport. Final visual and sustained performance qualification remain open. Controlled native-memory results and the remaining browser-owned residency are reported below.
+Local publication/loading and shared image reuse are implemented. The global coarse release is published and integrated; its metadata preserves the original fine selection in 28 recorded views. Production browser journeys use its public assets through the normal transport. Continuous visual, timing and native-memory evidence is recorded in [geographic qualification](earth-geographic-qualification.md), including final-gate status and browser-owned residency limits.
 
 ## Ownership
 
@@ -81,21 +81,31 @@ The 6 September 2026 comparison used real Chrome 152 on an Apple M3 Max, a 1440 
 
 At the ninth return, the original transport had created 1,245 / 1,317 blob identities; shared ownership had created 118 / 121. The shared images retained approximately 9.6 / 9.9 MB of encoded bytes within the existing layer scopes. Final visible page keys and imagery hashes matched at both DPRs. City/noise map pixels matched in the saved-view comparison; globe differences were zero pixels at DPR 1 and six at DPR 2, with no source-image change.
 
-These controls do not represent the default atmosphere-enabled application's total residency. With shared image ownership and the zoom cutoff, that application's sampled image-cache peaks were 2.56 / 2.49 GB and still fluctuated during globe travel. Earth-to-Mars teardown returned allocator accounting to approximately 236 MB for the remaining Mars scene. These are Chrome allocator measurements, not physical RAM or a hard application-controlled GPU limit. Uninterrupted travel and its worst presentation intervals remain a separate qualification.
+These controls do not represent the default atmosphere-enabled application's total residency. With shared image ownership and the zoom cutoff, that application's sampled image-cache peaks were 2.56 / 2.49 GB and still fluctuated during globe travel. Earth-to-Mars teardown returned allocator accounting to approximately 236 MB for the remaining Mars scene. These are Chrome allocator measurements, not physical RAM or a hard application-controlled GPU limit. These earlier controls are separate from the final uninterrupted exploration measurements in [geographic qualification](earth-geographic-qualification.md).
 
 ## Coarse-to-fine representation
 
 The current fine WMTS release remains unchanged. At regional views, a selected cut can require more CSS pieces than the display limit. Loading policy alone cannot make those same pieces fit.
 
-Prototype a bounded coarse backing in accepted face coordinates using existing preparation functions and pinned RGB samples. Start with backing that remains beneath opaque fine detail. Measure its residency together with displayed and incoming detail, and inspect transparency, apron overlap and depth order. Only prepare regional retirement relationships where measured budget pressure requires reclaiming backing. Existing face identifiers and crops help preparation, but bounding rectangles alone do not prove pixel coverage.
+Preparation builds bounded coarse backing in accepted face coordinates from
+pinned RGB samples. It remains beneath opaque fine detail and shares residency
+with displayed and incoming pages. Prepared retirement relationships let complete
+fine groups reclaim covering backing where capacity requires it. Face identifiers
+and crops help preparation; bounding rectangles alone do not prove pixel coverage.
 
 Normal backing belongs to base imagery. The current observation-overview path suspends normal detail, so that lifecycle cannot be reused unchanged for backing intended to support the detail. Preserve explicit observation ownership and clearing.
 
-The polar bridge needs a measured endpoint: existing preparation omits cap pieces below WMTS L10, and the first available cap cut may still exceed capacity. Adding only L0–L4 ancestors does not resolve this. Keep coarse coverage until an affordable fine cut exists, including cap/band transitions and both hemispheres; beyond source coverage, retain the accepted base. Include actual antimeridian crossings, not only a stationary view near the dateline.
+Prepared cap pieces begin at WMTS L10, and the first available cap cut can exceed
+capacity. Coarse coverage survives until an affordable fine cut exists, including
+cap/band transitions and both hemispheres. Beyond source coverage, the accepted
+base remains visible.
 
-Begin with one regular seam, one cap/band seam and an antimeridian transition. Compare retained backing with regional retirement only where needed. Verify source/result/difference frames at DPR 1/2, continuous replacement, metadata admission, image count, piece count, simultaneous reservations and release size before global expansion. Do not duplicate the 25 GB fine geometry release or acquire the whole raw imagery dataset.
+The qualification below covers regular boundaries, cap/band boundaries and
+actual antimeridian crossings at DPR 1/2. It records source/result/difference
+frames, continuous replacement, admission and residency. The 25 GB fine geometry
+release is reused, and preparation does not acquire the whole raw imagery dataset.
 
-### Implemented prototype and qualification boundary
+### Coverage policy and qualification
 
 Unconditionally reserving backing reduced fine detail under the existing display
 ceiling: one captured regular view fell from 254 fine pieces to 217. Conditional
@@ -158,7 +168,7 @@ Demand reserves the old displayed cut and the complete incoming required cut
 before admitting optional backing or ancestors. Optional coverage cannot consume
 the capacity needed to finish the replacement that releases the old view. Empty
 prepared images do not enter the ancestor demand. Nonempty polar backing remains
-until an affordable covered cut is available; the prototype does not infer polar
+until an affordable covered cut is available; the publisher does not infer polar
 replacement from regular-face relationships.
 
 Preparation also removes transparent image margins while retaining the existing
@@ -310,7 +320,11 @@ not deploy the site or qualify the complete browser journey.
 
 Cesium's source is a useful reference. Its quadtree can execute without a WebGL provider, but its private traversal assumes geographic child construction, terrain fills in some partial-readiness cases, and selection history committed before display callbacks. Prepared topology, CSS-pixel error and hard publication admission need additional semantics. An npm export does not make those private assumptions a supported prepared-page contract.
 
-There is no mandatory Cesium dependency. Consider a pinned extraction only if a real prepared coarse/fine fixture demonstrates that it removes substantial selection/fallback policy, records what actually publishes and requires no second selector to repair its output. Otherwise maintain the existing prepared-map owner. Bundle size or WebGL elsewhere in the package is not the deciding factor.
+Geographic traversal remains in the prepared-map pager. The shared minimap and
+view readout use pinned Cesium core mathematics and the licensed helpers under
+`site/vendor`; they do not mount a Cesium renderer. The separate Cesium oracle
+compares imagery, requests and pending work. It does not own product selection,
+publication or the CSS camera.
 
 Reference inspected: CesiumJS commit `488b114e16f5879f5d51456640aae67850a715c0`, particularly [QuadtreePrimitive](https://github.com/CesiumGS/cesium/blob/488b114e16f5879f5d51456640aae67850a715c0/packages/engine/Source/Scene/QuadtreePrimitive.js). If code or tests are copied/adapted, preserve applicable licenses/notices and mark modifications; keep data-provider attribution separate. Source research does not warrant branding the application Cesium-powered. [License](https://github.com/CesiumGS/cesium/blob/488b114e16f5879f5d51456640aae67850a715c0/LICENSE.md).
 
@@ -327,49 +341,34 @@ river drag, and noise/imagery comparisons with viewing pauses. Use `--dpr=2` for
 the same CSS-pixel gestures at DPR 2. Recordings retain original timing and
 loading behavior. Scripted Chrome input does not qualify a physical trackpad.
 
-Complete the same PR with continuous cold/warm globe-to-region-to-city exploration, reversals, interrupted travel, delayed/failing imagery and metadata, offline recovery, lens/history changes and sustained revisits. Run real Chrome at DPR 1/2; label narrow viewport and CPU/network emulation honestly. Capture visible checkpoints and videos separately from performance measurements so screenshot overhead is not blamed on the application.
+The continuous qualification covers search corrections, interrupted travel,
+parent/history navigation, lens changes, zoom and drag during downloads, offline
+recovery and sustained revisits. The final polar candidate completes six cycles
+and 140 actions at each DPR, with native-memory traces; separate observer-free
+desktop runs supply timing measurements. A narrow viewport uses explicitly
+labeled CPU/network and touch emulation.
 
-The corrected continuous route at `394a3508` completed 56 actions at each of DPR
-1 and 2 in Chrome 152 on an Apple M3 Max. Both runs preserved one scene, retained
-DOM identity, card-owned lenses, history and offline recovery. The DPR 1 run
-without video, screenshots or memory dumps measured an 18.6 ms interaction
-callback p95 and 51.8 ms maximum; its three frame intervals over 100 ms occurred
-during startup. The DPR 2 run captured still checkpoints: its five interaction
-callbacks over 100 ms occurred in screenshot checkpoint phases, so those
-measurements do not establish an observer-free DPR 2 performance result.
+[Geographic qualification](earth-geographic-qualification.md) records the current
+application and harness identities, reviewed visual checkpoints, measured native
+residency, repository gates, invalid attempts and remaining limits. Earlier
+prototype and nine-cycle measurements above retain their original scope; they do
+not replace the final candidate's evidence.
 
-The same 56-action route also passed at 800 × 900, DPR 2, with emulated touch,
-4× CPU slowdown, 10 Mbps downstream, 1 Mbps upstream and 150 ms network latency.
-It delivered 760 touch pointer events and retained the same scene DOM. Without
-video, screenshots or memory dumps, its interaction callback p95 was 52.4 ms,
-maximum 413 ms and search-result callback p95 138 ms. Twenty-five interaction
-callback intervals exceeded 100 ms, including a 413 ms interval on return to
-Earth. Functional recovery passed; smooth performance on this constrained
-profile is not established. This is browser emulation, not a physical phone.
+To reproduce the continuous route without screenshot/video/memory observers:
 
-The close Longyearbyen failure was reduced to two captured faces: a ready detail
-tile disappeared when an overlapping original surface face was present. Uniform
-rescaling of CSS coordinates about the perspective eye restored that tile while
-preserving its screen projection. Surface cameras now use their existing bounded
-zoom for that rendering scale; physical camera state and paging coordinates stay
-unchanged. CSS hit distances are converted back for drag and ruler measurements.
-This changes neither prepared geometry nor provider images.
+```sh
+node tests/objects/browser/earth/exploration-browser.mjs \
+  --journey=continuous-exploration --cycles=2 --dpr=1 \
+  --record=false --trace=false --screenshots=false \
+  --output=output/playwright/continuous-dpr1
+```
 
-At `eb53bfeb`, the built DPR 2 route passes all 56 actions and its reviewed polar
-checkpoints display the previously hidden central detail. Incoming edge tiles
-still refine during the route. Focused polar pinch/wheel checks at DPR 1/2
-measured 1.19997× for a requested 1.2× zoom and 99.9875 pixels for a 100-pixel drag.
-The DPR 2 saved view restored with zero pixel error, and ruler scale stayed correct.
-The observer-light DPR 1 route also passes 56 actions, with an 18.5 ms interaction
-callback p95, a 55.3 ms maximum and no interaction callbacks over 100 ms. All 328
-renderer checks, renderer type checking and the 72-page build pass. These focused
-results do not complete sustained visual/native-resource qualification or turn
-the earlier interruption-heavy recordings into geographic coverage proof.
+Use a fresh output directory for each run. Use `--dpr=2` for the other density,
+`--cycles=6 --trace=true --record=false` for a bounded native-memory run, or
+`--record=true --trace=false` for a separate visual recording. Avoid concurrent
+preparation or browser jobs during performance measurement.
 
-The conditioned candidate also completes the same 56 actions under the constrained
-touch profile: callback p95 45.4 ms, maximum 147.2 ms, search-result p95 126.3 ms,
-and 12 interaction callbacks over 100 ms. Functional touch recovery passes;
-that profile still has visible timing limitations. The earlier 413 ms result and
-this single later run do not establish a controlled performance improvement.
-
-Run source verification, tests, build and OBJECTS-derived browser conformance appropriate to the final changes. Refresh delivery-cost scenarios from actual request/cache behavior. A stable metadata selection can still have blocked directories, and representative coverage does not establish worldwide valid pixels, physical-device behavior or provider availability. Merge and deployment remain the user's decisions.
+Representative coverage does not establish worldwide valid pixels,
+physical-device behavior or provider availability. Source closure, application
+behavior and hosting deployment have separate verification boundaries. Merge
+and deployment remain the user's decisions.
