@@ -242,3 +242,15 @@ update p95 1.446 ms. Its retained-node and shared-camera assertions pass. Eviden
 `output/depth-prototype/final-deimos-2/`. The table above remains the original
 matched before/after matrix; this is a final-build confirmation, not a substituted
 baseline pair.
+
+After integration with main `000b67d7`, runtime commit `4eb2caa7` serves the
+90-object registry and packaged runtime SHA-256
+`8e5aadc50a8a35509d2cc2738db51642dae908dfcc24df73a2f559871efa0953`.
+An isolated Deimos DPR 2 confirmation on those bytes records draw-pass p95
+4.415 ms, 1 dropped-only sequence among 183, animation callback p95 2.761 ms
+and style-update p95 1.479 ms. The native drag takes 3.057 seconds, retains all
+nodes and the shared camera, and records no application/HTTP errors. Its final
+surface capture was inspected. Evidence: `integration-deimos-2/` and
+`integration-depth-metrics.json` under `output/depth-prototype/`.
+The earlier matched matrix used 52 objects on both sides; this 90-object result
+is an integration confirmation, not a newly matched before/after pair.

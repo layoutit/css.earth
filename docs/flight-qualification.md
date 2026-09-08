@@ -212,3 +212,19 @@ LOD. Hover and activation share this rule; outside the detailed surface and in
 overview, context targets remain navigable. No second hit mesh or body-specific
 exception was added. The renderer suite passes all 331 tests, including native
 double-click/hover regression coverage, and renderer typecheck passes.
+
+The rebuilt integration passes all 13 Phobos conformance cases, including the
+previously failing sequence at DPR 1 and 2 (`depth-integration-phobos-fixed/`).
+Styx passes DPR 1/2 on the first integration build and DPR 2 again after the
+shared picking correction (`depth-integration-styx-fixed/`). The final typed
+loader and Sun source-closure checks pass after the input change. These are
+focused final-runtime checks; the earlier full platform suite is not relabeled
+as a 90-object aggregate run.
+
+The requested native journey also passes at DPR 2 on `4eb2caa7`: wide system →
+Mars, close zoom/drag → Venus, drag → overview → Makemake, then drag. It keeps
+world/input/document identity, finishes ready with one scene, and records no
+application or HTTP errors (`output/playwright/natural-depth-integration-2/`).
+That browser closes before the final isolated Deimos timing confirmation begins.
+Its measured result and actual served bundle hash are recorded in the
+architecture document. PR #27 stays a draft and the operator retains merge control.
