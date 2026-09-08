@@ -28,6 +28,11 @@ export interface SpatialContextPreparationOptions {
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
   const source = parseWorldContextSource(JSON.parse(await readFile(options.sourcePath, 'utf8')));
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
+  // The application registry owns classification; preparation bakes its orbit presentation.
+  const { OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mjs')).href) as {
+    OBJECTS: readonly { id: string; classification: string }[];
+  };
+  const planetIds = new Set(OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
   if (source.frame.epochJdTt !== geometry.SOLAR_GEOMETRY_EPOCH_JD_TT) throw new TypeError('World context and solar geometry epochs differ.');
   const auM = geometry.ASTRONOMICAL_UNIT_KILOMETERS * M_PER_KM;
   const objectsDirectory = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
@@ -46,7 +51,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const radiusM = await preparedRadius(body.id, positionM, source.frame.referenceFrame,
       source.frame.epochJdTt, resolve(objectsDirectory, body.id, 'object.json')) ?? (data ? data.meanRadiusKm * M_PER_KM : undefined);
     if (radiusM === undefined) throw new TypeError(`World context lacks a physical radius for ${body.id}.`);
-    facts[body.id] = { radiusM };
+    facts[body.id] = { radiusM, orbitStyle: planetIds.has(body.id) ? 'closed' : 'trail' };
   }
   for (const body of source.bodies) {
     const state = states[body.id]!;

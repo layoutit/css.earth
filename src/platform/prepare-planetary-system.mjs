@@ -78,6 +78,9 @@ export const SYSTEM_ORBIT_SEGMENTS = 120;
 export const GEOMETRIC_ALBEDO = Object.freeze({
   mercury: 0.142, venus: 0.689, earth: 0.434, mars: 0.170,
   jupiter: 0.538, saturn: 0.499, uranus: 0.488, neptune: 0.442,
+  // Didymos system visible geometric albedo 0.15 ± 0.02: Daly et al. (2023),
+  // https://www.nature.com/articles/s41586-023-05810-5; approximate point photometry.
+  didymos: 0.15,
   pluto: 0.52, ceres: 0.09, eris: 0.96, haumea: 0.80, makemake: 0.81, vesta: 0.4228,
 });
 
@@ -170,10 +173,14 @@ export async function preparePlanetarySystem({
     return scale(toSun, -BODY_ORBITS[id].heliocentricDistanceAu);
   };
 
+  // A satellite's heliocentric asteroid parent is required even when the
+  // caller did not request additional context asteroids.
+  const centerBodyId = BODY_ORBITS[bodyId].centerBodyId;
+  if (ASTEROID_IDS.includes(centerBodyId) && !smallBodies.includes(centerBodyId)) smallBodies.push(centerBodyId);
   const satelliteObserver = ![...bodies, ...dwarfPlanets, ...smallBodies].includes(bodyId);
   const observerUnitMeters = satelliteObserver ? M_PER_KM / 10 : M_PER_KM;
   const parent = satelliteObserver ? BODY_ORBITS[bodyId].centerBodyId : null;
-  if (satelliteObserver && ![...bodies, ...dwarfPlanets].includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
+  if (satelliteObserver && ![...bodies, ...dwarfPlanets, ...smallBodies].includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
   const observerPositionKm = satelliteObserver ? scale(
     applyMatrix(BODY_FIXED_TO_ICRF_MATRICES[bodyId], BODY_ORBITS[bodyId].centerPositionAu),
     -ASTRONOMICAL_UNIT_KILOMETERS) : null;

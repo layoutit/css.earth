@@ -77,11 +77,12 @@ describe('the body table', () => {
 
   it('lists exactly the moons the satellite data carries, plus the Moon', () => {
     expect(moonsOf('earth')).toEqual(['moon'])
+    expect(moonsOf('didymos')).toEqual(['dimorphos'])
     expect(moonsOf('mercury')).toEqual([])
     expect(moonsOf('venus')).toEqual([])
     const fromSatellites = SATELLITE_IDS.filter((id) => SATELLITE_ELEMENTS[id].parent === 'jupiter')
     expect(moonsOf('jupiter')).toEqual(fromSatellites)
-    const total = [...PLANET_IDS, ...DWARF_PLANET_IDS].flatMap((planet) => moonsOf(planet))
+    const total = [...PLANET_IDS, ...DWARF_PLANET_IDS, ...ASTEROID_IDS].flatMap((parent) => moonsOf(parent))
     expect(total.length).toBe(SATELLITE_IDS.length + 1)
     for (const planet of [...PLANET_IDS, ...DWARF_PLANET_IDS].filter(id => id !== 'earth')) {
       expect(moonsOf(planet)).toEqual(SATELLITE_IDS.filter(id => SATELLITE_ELEMENTS[id].parent === planet))

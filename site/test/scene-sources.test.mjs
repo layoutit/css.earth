@@ -31,6 +31,7 @@ test('every shared route retains its object sources and the actual environment c
   for (const object of OBJECTS) {
     const content = JSON.parse(await readFile(new URL(`../../src/planets/${object.id}/prepared/content.json`, import.meta.url), 'utf8'));
     const sources = sceneSources(content.resources), byLabel = new Map(sources.map(source => [source.label, source]));
+    for (const source of sources) assert.ok(source.role?.trim(), `${object.id}: ${source.label} needs an attribution category`);
     for (const source of content.resources) {
       const retiredPhoto = /^https?:\/\/(?:www\.)?eso\.org\/public\/images\/eso0932a\/?(?:[?#].*)?$/u.test(source.href);
       assert.equal(sources.some(candidate => candidate.href === source.href), !retiredPhoto, `${object.id}: ${source.label}`);
