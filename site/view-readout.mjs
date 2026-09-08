@@ -40,7 +40,7 @@ export function viewScale(metersPerPixel, maxWidth = 80) {
   return { label: `${number.format(value)} ${unit}`, pixels: maxWidth, measurePixels };
 }
 
-export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes }) {
+export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes, surface }) {
   const camera = minimapCamera({ eye: eyeM.map(value => value / radiusM), rotation, view, axes: axes ?? referenceAxes });
   const pick = x => {
     const point = camera.pickEllipsoid({ x, y: .5 }, Ellipsoid.UNIT_SPHERE);
@@ -60,8 +60,12 @@ export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes }
     metersPerPixel = -dot(eyeM, forward) / focalPixels;
     scaleTitle = 'Scale at the distance of the selected object';
   }
+  if (surface?.metersPerPixel > 0) {
+    metersPerPixel = surface.metersPerPixel;
+    scaleTitle = 'Surface scale at the center of the rendered view';
+  }
   return {
-    altitudeM: Math.max(0, Math.hypot(...eyeM) - radiusM),
+    altitudeM: surface?.altitudeM ?? Math.max(0, Math.hypot(...eyeM) - radiusM),
     coordinates: center && axes ? {
       latitude: Math.asin(Math.max(-1, Math.min(1, center.z / Math.hypot(center.x, center.y, center.z)))) * 180 / Math.PI,
       longitude: Math.atan2(center.y, center.x) * 180 / Math.PI,
@@ -97,14 +101,19 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
     const map = maps.find(map => !map.closest('[data-lens-details]')?.hidden) ?? maps[0];
     const surface = surfaceMapContext(configs.get(map), camera, documentTarget, windowTarget);
     const world = navigation.capture(), optics = navigation.optics();
+    const paintedSurface = navigation.surfaceMetrics?.();
     dateGroup.hidden = !Number.isFinite(world.epochJdTt);
     write(date, formatViewDate(world.epochJdTt));
     const value = measureView({
       eyeM: world.pose.positionM.map((x, i) => x - navigation.frame.originM[i]),
       radiusM: navigation.frame.bodyRadiusM, rotation: worldRotationFromQuaternion(world.pose.orientationXyzw),
-      view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes,
+      view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes, surface: paintedSurface,
     });
     const distance = viewDistance(world, navigation.frame, overviewScope);
+    if (paintedSurface && overviewScope !== 'milky-way') {
+      distance.meters = value.altitudeM;
+      distance.title = "Camera altitude above the selected object's prepared surface";
+    }
     write(altitude, formatViewDistance(distance.meters));
     if (distanceLabel) write(distanceLabel, distance.label);
     if (distanceGroup) distanceGroup.title = distance.title;

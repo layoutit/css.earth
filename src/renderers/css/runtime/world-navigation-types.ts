@@ -7,6 +7,7 @@ export interface ObjectWorldNavigation {
   capture(): WorldCameraPose;
   apply(pose: WorldCameraPose): void;
   setZoomOutCentering?(enabled: boolean): void;
+  surfaceMetrics?(): { altitudeM: number; metersPerPixel: number | null } | null;
   optics(): WorldCameraViewport & { framingRadiusPixels: number;
     detailHandoffDiameterPixels: number };
   subscribe(listener: ObjectWorldNavigationListener): () => void;

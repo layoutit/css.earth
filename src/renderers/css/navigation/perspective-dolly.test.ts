@@ -3,6 +3,42 @@ import { createPerspectiveDolly, levelOfDetailFor } from './perspective-dolly.js
 import scene from '../../../planets/mercury/prepared/scene.json';
 import earth from '../../../planets/earth/prepared/runtime.json';
 
+it('prepared clearance follows a changed face inside the enclosing sphere and preserves the world-camera ray', () => {
+  const width = 1440, height = 1000, focal = 1247;
+  const view = { getComputedStyle: () => ({ perspective: `${focal}px`, perspectiveOrigin: `${width/2}px ${height/2}px` }) };
+  const make = () => ({ style: {}, ownerDocument: { defaultView: view },
+    getBoundingClientRect: () => ({ width, height, x: 0, y: 0, left: 0, top: 0 }) });
+  let groundRadius = 80;
+  const preparedSurface = Object.assign(() => true, { radialDistance: () => groundRadius / earth.camera.sceneScale });
+  const dolly = createPerspectiveDolly({ cameraPlan: earth.camera, heliocentric: null, preparedSurface,
+    worldContext: { frame: { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0],
+      presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 100 },
+      bodyRadiusUnits: 100, kilometersPerUnit: .001, maximumExtentUnits: 1e8 },
+    cameraElement: make(), skyElement: make(), stage: make(), sceneElement: { style: {} },
+  } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
+  const identity = { m11: 1, m21: 0, m31: 0, m12: 0, m22: 1, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;
+  dolly.setBodyCenter([54, 0, -72]);
+  dolly.publish(identity, 'none');
+  expect(dolly.camera.state.distance).toBe(90);
+  expect(dolly.wheelDolly.distanceOrigin).toBeCloseTo(80, 12);
+  dolly.camera.update({ distance: 85 });
+  dolly.publish(identity, 'none');
+  expect(dolly.camera.state.distance).toBe(85);
+  groundRadius = 87; // A drag can bring a higher retained face under the eye.
+  dolly.publish(identity, 'none');
+  expect(dolly.camera.state.distance).toBeGreaterThan(87);
+  expect(dolly.camera.state.distance).toBeLessThan(87.000001);
+  expect(dolly.bodyCenter()![0] / dolly.bodyCenter()![2]).toBeCloseTo(-.75, 12);
+  dolly.camera.update({ distance: 0 });
+  expect(dolly.camera.state.distance).toBeGreaterThan(87);
+  expect(dolly.publish(identity, 'none').projection.eyeFromScene.every(Number.isFinite)).toBe(true);
+  groundRadius = 80;
+  dolly.centerBody();
+  dolly.refreshSurface(identity);
+  dolly.camera.update({ distance: 85 });
+  expect(dolly.camera.state.distance).toBe(85, 'Restoring a lower face cannot clamp to the previous face');
+});
+
   it('crossfades geometry, billboard and marker without hiding the finer stage early', () => {
     const lod = { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20,
       billboardFullDiscPixels: 14, markerFadeStartDiscPixels: 8, markerFullDiscPixels: 4.5 };

@@ -8,6 +8,7 @@ import { presentWorldCamera, worldCameraFromCenteredPresentation, worldCameraFro
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import { scaleWorldPosition, validateWorldPosition } from './world-camera-math.js';
 import type { mountRetainedHeliocentricView } from '../solar-system/heliocentric-view-runtime.js';
+import type { PreparedSurfaceHitTest } from './prepared-surface-hit.js';
 export interface PerspectiveWorldContext {
   readonly frame: PreparedWorldCameraFrame;
   readonly bodyRadiusUnits: number;
@@ -19,7 +20,7 @@ export interface PerspectiveWorldContext {
   readonly sceneRegistration?: string;
   readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 }
-export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; }
+export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; preparedSurface?: PreparedSurfaceHitTest; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; }
 export type PerspectiveDolly = ReturnType<typeof createPerspectiveDolly>;
 import {
   distanceForSilhouetteRadius,
@@ -180,6 +181,7 @@ export function createPerspectiveDolly({
   cameraPlan: unvalidatedCameraPlan,
   heliocentric,
   worldContext,
+  preparedSurface,
   cameraElement,
   sceneElement,
   skyElement,
@@ -198,6 +200,7 @@ export function createPerspectiveDolly({
   }
   const levelOfDetail = cameraPlan.levelOfDetail;
   const surfaceDolly = cameraPlan.dolly.distanceOrigin === 'surface';
+  let surfaceDistanceOrigin = bodyRadius;
   const framingReferenceZoom = worldContext?.framingReferenceZoom ?? cameraPlan.defaultZoom;
   if (!(framingReferenceZoom > 0)) throw new TypeError('Perspective framing reference zoom must be positive.');
   if (worldContext && (Math.abs(worldContext.frame.metersPerUnit / (kilometersPerUnit * 1000) - 1) > 1e-9 ||
@@ -319,7 +322,7 @@ export function createPerspectiveDolly({
   // A close surface can fill the image after the off-axis limb stops forming
   // a bounded ellipse. Its silhouette alias must not become a physical wall.
   const minimumDistance = () => surfaceDolly
-    ? cameraPlan.dolly.minimumDistanceRadii * bodyRadius
+    ? surfaceDistanceOrigin + (cameraPlan.dolly.minimumDistanceRadii - 1) * bodyRadius
     : minimumFramingDistance();
   const clampDistance = (distance: number) =>
     clamp(distance, minimumDistance(), maximumDistance);
@@ -377,6 +380,22 @@ export function createPerspectiveDolly({
     },
   });
 
+  const refreshSurface = (sceneMatrix: DOMMatrix) => {
+    if (surfaceDolly && preparedSurface) {
+      const direction = bodyCenter === null ? [principalOffset[0], principalOffset[1], focal] as const
+        : [-bodyCenter[0], -bodyCenter[1], -bodyCenter[2]] as const;
+      const radius = preparedSurface.radialDistance(sceneMatrix, direction);
+      if (!(radius !== null && radius > 0)) throw new Error('Prepared surface has no radial camera boundary.');
+      surfaceDistanceOrigin = radius * cameraPlan.sceneScale;
+      if (cameraState.distance < minimumDistance()) {
+        const previousDistance = cameraState.distance;
+        cameraState.distance = minimumDistance();
+        if (bodyCenter) bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
+        aliasZoom = null;
+      }
+    }
+  };
+
   return Object.freeze({
     camera,
     measure,
@@ -384,11 +403,21 @@ export function createPerspectiveDolly({
       return { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] };
     },
     bodyCenter: () => bodyCenter,
+    refreshSurface,
+    surfaceMetrics() {
+      if (!surfaceDolly || !preparedSurface) return null;
+      const bounds = cameraElement.getBoundingClientRect(), x = bounds.x + bounds.width / 2, y = bounds.y + bounds.height / 2;
+      const a = preparedSurface.point(x - .5, y), b = preparedSurface.point(x + .5, y);
+      return { altitudeM: Math.max(0, cameraState.distance - surfaceDistanceOrigin) * kilometersPerUnit * 1000,
+        metersPerPixel: a && b ? Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]) * kilometersPerUnit * 1000 : null };
+    },
     setZoomOutCentering(enabled: boolean) { zoomOutCentering = enabled; },
     setBodyCenter(next: PositionM) {
       validateWorldPosition(next);
       const distance = Math.hypot(...next);
-      if (distance <= bodyRadius) throw new RangeError('The world camera is inside the focused body.');
+      // Prepared surfaces enforce their real clearance at publication, with
+      // the incoming orientation. An enclosing sphere is not their surface.
+      if (distance <= (surfaceDolly && preparedSurface ? 0 : bodyRadius)) throw new RangeError('The world camera is inside the focused body.');
       bodyCenter = [next[0], next[1], next[2]];
       cameraState.distance = distance;
       aliasZoom = null;
@@ -399,7 +428,7 @@ export function createPerspectiveDolly({
     minimumZoom,
     maximumZoom,
     wheelDolly: Object.freeze({ stepPerDelta: cameraPlan.dolly.wheelStepPerDelta,
-      distanceOrigin: cameraPlan.dolly.distanceOrigin === 'surface' ? bodyRadius : 0 }),
+      get distanceOrigin() { return surfaceDolly ? surfaceDistanceOrigin : 0; } }),
     // Re-clamps the distance after the viewport (and so the focal length)
     // changed.
     reclamp() {
@@ -421,6 +450,7 @@ export function createPerspectiveDolly({
     // scale must be uniform in three dimensions: a 2D scale() leaves the
     // body's depth unscaled, which a real perspective camera notices.
     publish(sceneMatrix: DOMMatrix, scenePresentation: string) {
+      refreshSurface(sceneMatrix);
       const distance = cameraState.distance;
       const rotation = rotationFromMatrix3d(sceneMatrix);
       const viewport = { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] as const };
@@ -537,6 +567,7 @@ export function createPerspectiveDolly({
         // Pointer samples are re-based to the centre: tumble everywhere.
         tumbleOnly: cameraPlan.drag?.model === "screen-axis-tumble",
         ...(cameraPlan.drag?.model === "surface-grab" && projectedBody ? {
+          ...(preparedSurface ? { surfacePointRadius: preparedSurface.surfacePointRadius } : {}),
           surfaceSphere: { radius: bodyRadius, center: [projectedBody.translate[0] - principalOffset[0],
             projectedBody.translate[1] - principalOffset[1], projectedBody.translate[2] - focal] },
         } : {}),

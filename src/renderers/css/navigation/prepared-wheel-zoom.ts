@@ -75,7 +75,9 @@ export function createPreparedWheelZoomControls({
   let previousInputTimestamp = -Infinity;
   let events = 0;
   let frames = 0;
-  const distanceOrigin = dolly?.distanceOrigin ?? 0;
+  // Freeze one origin for a wheel burst; a later gesture may face another
+  // prepared plane after travel, drag, or a restored physical camera.
+  let distanceOrigin = dolly?.distanceOrigin ?? 0;
 
   const stop = () => {
     if (frame !== null) cancelFrame(frame);
@@ -153,6 +155,7 @@ export function createPreparedWheelZoomControls({
     const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2
       ? inputSurface.clientHeight || windowTarget.innerHeight || 800 : 1;
     if (dolly !== null) {
+      if (frame === null || direction !== nextDirection) distanceOrigin = dolly.distanceOrigin ?? 0;
       inputKind = runtimePolicy.wheelZoomInputKind(event, inputKind, previousInputTimestamp);
       previousInputTimestamp = event.timeStamp;
       const origin = frame !== null && direction === nextDirection ? targetDistance! : camera.state.distance;
@@ -191,6 +194,7 @@ export function createPreparedWheelZoomControls({
       if (!(scale > 0) || ![scale, center.x, center.y].every(Number.isFinite)) return;
       stop();
       if (dolly !== null) {
+        distanceOrigin = dolly.distanceOrigin ?? 0;
         rotate({ controlPitchDelta: 0, controlYawDelta: 0,
           distance: distanceOrigin + (camera.state.distance - distanceOrigin) / scale });
       } else {

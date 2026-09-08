@@ -7,6 +7,7 @@ import type { PreparedMaterialTrack } from '../rendering/prepared-material.js';
 import type { ObjectControls } from '../runtime/object-contract.js';
 import type { CameraPlan } from '../navigation/types.js';
 import { parsePreparedPagePlan } from '../paging/capabilities.js';
+import { validateSurfaceDiscs } from '../navigation/prepared-surface-hit.js';
 
 export function requireVariants(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>, tracks: readonly PreparedMaterialTrack[], controls: ObjectControls, camera: CameraPlan): asserts value is readonly PreparedVariant[] {
   const variants = array(value, 'selection variants'); if (!variants.length) fail('selection variants are empty');
@@ -107,10 +108,11 @@ export function requireFacing(value: unknown, tree: PreparedTree): void {
 export function requireOptionalPresentation(plan: Record<string, unknown>, tree: PreparedTree, controls: ObjectControls): void {
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [];
   if (plan.surfaceHit !== undefined) {
-    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles']);
+    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles', 'discs']);
     if (!ancestor(nodeReference(hit.target, tree), tree.scene, tree)) fail('surface hit target must belong to scene');
     const triangles = array(hit.triangles, 'surface hit triangles');
     if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
+    validateSurfaceDiscs(hit.discs, triangles.length);
     for (const input of triangles) {
       const triangle = array(input, 'surface triangle');
       if (triangle.length !== 3) fail('surface triangle needs three points');

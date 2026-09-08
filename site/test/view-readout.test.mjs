@@ -36,6 +36,13 @@ test('surface ruler measures the front surface, not the center plane', () => {
   assert.match(value.scaleTitle, /surface/);
 });
 
+test('prepared surface measurements remain valid inside the enclosing reference sphere', () => {
+  const value = measureView({ ...state, eyeM: [0, 0, 999000], surface: { altitudeM: 26000, metersPerPixel: 25 } });
+  assert.equal(value.altitudeM, 26000);
+  assert.deepEqual(value.scale, { label: '2 km', pixels: 80, measurePixels: 80 });
+  assert.match(value.scaleTitle, /rendered view/);
+});
+
 test('looking away supplies no invented surface coordinates or behind-camera ruler', () => {
   const value = measureView({ ...state, rotation: [-1, 0, 0, 0, 1, 0, 0, 0, -1] });
   assert.equal(value.coordinates, null);

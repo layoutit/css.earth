@@ -5,6 +5,21 @@ import { createPreparedWheelZoomControls } from './prepared-wheel-zoom.js';
 
 afterEach(() => vi.unstubAllGlobals());
 
+test('travel changes the prepared surface origin for the next wheel or pinch gesture', () => {
+  let ground = 900;
+  const f = fixture({ stepPerDelta: .006, get distanceOrigin() { return ground; } });
+  f.controls.pinch(2, { x: 100, y: 100 });
+  expect(f.camera.state.distance).toBe(950);
+  ground = 800;
+  f.controls.pinch(2, { x: 100, y: 100 });
+  expect(f.camera.state.distance).toBe(875);
+  ground = 700;
+  f.surface.dispatch('wheel', { deltaY: 1, timeStamp: 0 });
+  f.surface.tick(200);
+  expect(f.camera.state.distance).toBeCloseTo(700 + 175 * Math.exp(.006 * runtimePolicy.WHEEL_ZOOM_SPEED_MULTIPLIER), 10);
+  f.controls.destroy();
+});
+
 function fixture(dolly = { stepPerDelta: .006 }) {
   vi.stubGlobal('HTMLElement', Surface);
   const surface = new Surface(), camera = { state: { zoom: 1, distance: 1000 } };

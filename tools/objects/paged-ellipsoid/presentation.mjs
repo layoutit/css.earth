@@ -4,6 +4,7 @@ import { prepareCssomDeclarationReads } from "../../prepared-cssom.mjs";
 import { createPreparedNodeTree } from "../../prepared-node-tree.mjs";
 import { prepareMaterialTracks } from "../../prepare-materials.mjs";
 import { surfaceBankInventory } from "./surface-banks.mjs";
+import { preparePagedSurfaceHit } from '../geographic-pages/prepare-surface-hit.mjs';
 
 export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, city, geographic, controls }) {
  const cameraPlan=config.camera;
@@ -113,6 +114,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
     tree,variants,materials:tracks,viewBindings:[materialCounter,cutawayCounter].map(node=>({kind:"counter-rotation",target:index(node),systemTransform:null})),animations:[],
     motionFrame:[index(system),index(body.surface[0])],
+    surfaceHit:preparePagedSurfaceHit(plan,index(body.surface[0])),
     observationSurface:{slots:[...Array.from({length:pages},(_,i)=>({id:`surface:${i}`,bindings:body.surface.map(node=>({target:index(node),name:`--${config.namespace}-surface-page-${i}`}))})),
       {id:"poles",bindings:body.polar.map(node=>({target:index(node),name:`--${config.namespace}-poles-texture`}))}]},
     pageLayers:[{id:"city",plan:city,lensIds:[controls.lenses.defaultLens]},{id:"geographic",geographic:true,plan:config.geographic.observation,lensIds:[controls.lenses.defaultLens]}]

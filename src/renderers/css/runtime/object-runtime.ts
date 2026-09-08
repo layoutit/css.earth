@@ -186,6 +186,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     const navigation: ObjectWorldNavigation | undefined = worldFrame ? Object.freeze({ frame: worldFrame,
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
+      surfaceMetrics() { return getOrbit().surfaceMetrics(); },
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0]) { if (!lifetime.disposed) { setAllowed(false); getOrbit().applyWorldCamera(pose, worldFrame); } },
       optics() {
         const state = getOrbit().state();

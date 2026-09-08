@@ -372,11 +372,17 @@ export function createUnboundedMatrixDragControls({
   };
   const onPointerDown = (event: PointerEvent) => {
     if (!drag || pointerId !== null || !runtimePolicy.isOrbitDragStart(event)) return;
-    const measuredTrackball = trackballMetrics();
+    let measuredTrackball = trackballMetrics();
     if (!isTrackballMetrics(measuredTrackball)) {
       throw new TypeError("Unbounded matrix drag trackball is invalid.");
     }
-    const startsOnSky = measuredTrackball.surfaceSphere ?
+    const preparedRadius = measuredTrackball.surfacePointRadius?.(event.clientX, event.clientY);
+    if (preparedRadius !== undefined && preparedRadius !== null && measuredTrackball.surfaceSphere) {
+      // Preserve the radius of the point actually grabbed. Its pointer rays
+      // then rotate that same point, rather than a larger enclosing sphere.
+      measuredTrackball = { ...measuredTrackball, surfaceSphere: { ...measuredTrackball.surfaceSphere, radius: preparedRadius } };
+    }
+    const startsOnSky = preparedRadius !== undefined ? preparedRadius === null : measuredTrackball.surfaceSphere ?
       physicalSurfacePoint(event.clientX, event.clientY, measuredTrackball, measuredTrackball.surfaceSphere) === null : Math.hypot(
       event.clientX - measuredTrackball.centerX,
       event.clientY - measuredTrackball.centerY,
@@ -442,9 +448,13 @@ export function createUnboundedMatrixDragControls({
         }
       }
       if (trackballInvalidated) {
-        const measuredTrackball = trackballMetrics();
+        let measuredTrackball = trackballMetrics();
         if (!isTrackballMetrics(measuredTrackball)) {
           throw new TypeError("Unbounded matrix drag trackball is invalid.");
+        }
+        const radius = measuredTrackball.surfacePointRadius?.(previousX, previousY);
+        if (radius !== undefined && radius !== null && measuredTrackball.surfaceSphere) {
+          measuredTrackball = { ...measuredTrackball, surfaceSphere: { ...measuredTrackball.surfaceSphere, radius } };
         }
         activeTrackball = measuredTrackball;
         trackballInvalidated = false;

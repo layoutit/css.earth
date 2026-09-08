@@ -222,10 +222,20 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
   }
   if (plan.surfaceHit !== undefined) {
     const hit = plan.surfaceHit;
-    record(hit, 'surface hit', ['target', 'triangles']); node(hit.target);
+    record(hit, 'surface hit', ['target', 'triangles', 'discs']); node(hit.target);
     if (!ancestor(hit.target, tree.scene)) fail('surface hit target must belong to scene');
     const triangles = array(hit.triangles, 'surface hit triangles');
     if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
+    let discEnd = 0;
+    if (hit.discs !== undefined) for (const disc of array(hit.discs, 'surface discs')) {
+      record(disc, 'surface disc', ['firstTriangle', 'triangleCount', 'center', 'axisU', 'axisV']);
+      if (!Number.isSafeInteger(disc.firstTriangle) || disc.firstTriangle < discEnd || !Number.isSafeInteger(disc.triangleCount) ||
+          disc.triangleCount < 1 || disc.firstTriangle + disc.triangleCount > triangles.length ||
+          [disc.center, disc.axisU, disc.axisV].some(point => !Array.isArray(point) || point.length !== 3 || point.some(n => !Number.isFinite(n)))) fail('invalid surface disc');
+      const [u, v] = [disc.axisU, disc.axisV];
+      if (!(Math.hypot(u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]) > 0)) fail('degenerate surface disc');
+      discEnd = disc.firstTriangle + disc.triangleCount;
+    }
     for (const triangle of triangles) {
       if (!Array.isArray(triangle) || triangle.length !== 3 || triangle.some(point =>
         !Array.isArray(point) || point.length !== 3 || point.some(n => !Number.isFinite(n)))) fail('surface hit requires finite prepared triangles');

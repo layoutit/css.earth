@@ -18,13 +18,14 @@ import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } f
 import type { PositionM } from '@cssearth/engine';
 import { bindWorldCameraPicking } from './world-camera-picking.js';
 import { hitsProjectedBody } from './world-camera-hit.js';
+import type { PreparedSurfaceHitTest } from './prepared-surface-hit.js';
 import { prepareSurfaceTargetRotation } from './surface-target.js';
 import { worldRotationCss } from './world-camera-math.js';
 import type { PhysicalProjection } from '../rendering/physical-projection.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & Partial<ReturnType<PerspectiveDolly['state']>>;
 export interface OrbitPublication extends CameraAngles { sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; sunPresentation: SunProjection | ReturnType<RetainedDirectionalSun['state']> | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection?: PhysicalProjection; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; stageViewport?: WorldCameraViewport; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
-export interface RetainedOrbitOptions { preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
+export interface RetainedOrbitOptions { preparedSurfaceHitTest?: PreparedSurfaceHitTest; stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
 export interface OrbitServices extends InteractionServices { createPolyCamera?: typeof createPolyCamera; createCubicSkyCameraOrientation?: typeof createCubicSkyCameraOrientation; bindResponsiveOrbitPolicy?: RuntimePolicy['bindResponsiveOrbitPolicy']; selectPreparedResponsiveZoom?: typeof selectPreparedResponsiveZoom; createPerspectiveDolly?: typeof createPerspectiveDolly; HTMLElement?: typeof HTMLElement; matchMedia?: (query: string) => MediaQueryList; MutationObserver?: typeof MutationObserver; }
 export type RetainedCubicSkyOrbit = ReturnType<typeof createRetainedCubicSkyOrbit>;
 import { createPreparedCameraPublisher } from "../rendering/prepared-camera-runtime.js";
@@ -142,7 +143,7 @@ export function createRetainedCubicSkyOrbit({
   // prepared PolyCSS state.
   const perspective = perspectiveCamera ? createPerspectiveDolly({
     cameraPlan, heliocentric, worldContext, cameraElement, sceneElement,
-    skyElement: cubicSky.root, stage,
+    skyElement: cubicSky.root, stage, preparedSurface: preparedSurfaceHitTest,
   }) : null;
   const requireWorldPerspective = (frame: PreparedWorldCameraFrame) => {
     if (!perspective || !skyTracksScene) throw new TypeError('This object has no physical world camera.');
@@ -411,6 +412,7 @@ export function createRetainedCubicSkyOrbit({
     mobilePageFlow: () => inputPolicy.mobile,
     initialResponsiveZoom: () => initialResponsiveZoom,
     currentResponsiveZoom: () => responsiveFit.zoom,
+    surfaceMetrics: () => perspective?.surfaceMetrics() ?? null,
     setZoomOutCentering(enabled: boolean) { perspective?.setZoomOutCentering(enabled); },
     captureWorldCamera(frame: PreparedWorldCameraFrame): WorldCameraPose {
       const physical = requireWorldPerspective(frame);
@@ -492,11 +494,6 @@ export function createRetainedCubicSkyOrbit({
       safeCamera.update({
         ...(controlPitch === undefined ? {} : { rotX: controlPitch }),
         ...(controlYaw === undefined ? {} : { rotY: controlYaw }),
-        ...(distanceKilometers !== undefined
-          ? { distanceKilometers }
-          : distance !== undefined
-            ? { distance }
-            : zoom === undefined ? {} : { zoom }),
       });
       if (pose !== undefined) {
         orientation.restore(pose);
@@ -506,6 +503,13 @@ export function createRetainedCubicSkyOrbit({
           controlYaw: safeCamera.state.rotY,
         });
       }
+      // A restored pose may face a lower prepared plane. Establish that
+      // boundary before applying its saved distance, not the previous face's.
+      perspective?.refreshSurface(orientation.sceneMatrix());
+      safeCamera.update({
+        ...(distanceKilometers !== undefined ? { distanceKilometers }
+          : distance !== undefined ? { distance } : zoom === undefined ? {} : { zoom }),
+      });
       if (bodyCenterKilometers !== undefined && perspective) {
         const scale = heliocentric?.plan.units.kilometersPerUnit ?? worldContext!.kilometersPerUnit;
         perspective.setBodyCenter([bodyCenterKilometers[0] / scale, bodyCenterKilometers[1] / scale, bodyCenterKilometers[2] / scale]);

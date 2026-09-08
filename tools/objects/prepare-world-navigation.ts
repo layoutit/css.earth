@@ -57,6 +57,15 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     referenceViewDirection: direction.prepareSunReferenceViewDirection({ bodyId: descriptor.id,
       initialScenePitchDegrees: camera.initialScenePitchDegrees, defaultControlYawDegrees: camera.defaultControlYawDegrees, sceneDirection: localDirection }) } : definition.sun;
   const viewBindings = prepareWorldNavigationBindings(definition.viewBindings, sources);
+  // Metadata-only finalization also upgrades an existing prepared page release.
+  // The geographic geometry preparer owns these faces; no imagery is rebuilt.
+  if (descriptor.recipe.paging !== undefined) {
+    const { preparePagedSurfaceHit } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/geographic-pages/prepare-surface-hit.mjs')).href);
+    const scene = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/scene.json'), 'utf8'));
+    const carrier = definition.pageLayers?.find((layer: Input) => !layer.geographic)?.carrier;
+    if (!Number.isSafeInteger(carrier)) throw new TypeError('Paged navigation requires its retained surface carrier.');
+    definition = { ...definition, surfaceHit: preparePagedSurfaceHit(scene, carrier) };
+  }
   const prepared = preparePhysicalMaterialTracks({ definition: { ...definition, camera, sky, sun, viewBindings }, ...authored, sources,
     physicalShape: { equatorialRadiusM: bodyRadiusM, polarRadiusM: (descriptor.recipe.shape.polarRadiusKm ?? descriptor.recipe.shape.radiusKm) * 1000 } });
   return { definition: prepared, frame,

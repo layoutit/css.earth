@@ -11,6 +11,7 @@ export interface TrackballMetrics {
   angularDegreesPerTrackballRadius?: number; pitchResponse?: number;
   tumbleOnly?: boolean; sceneMatrix?: string | readonly number[];
   surfaceSphere?: { center: readonly number[]; radius: number };
+  surfacePointRadius?: (clientX: number, clientY: number) => number | null;
 }
 export interface WheelDolly { stepPerDelta: number; distanceOrigin?: number; }
 export interface CameraUpdate { rotX?: number; rotY?: number; zoom?: number; distance?: number; distanceKilometers?: number; }
