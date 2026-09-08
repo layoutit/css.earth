@@ -1,78 +1,121 @@
 # Entity selection
 
-The selected entity supplies the content of one shared card. Its kind is descriptive metadata: planets, cities, countries, provinces, regions and craters do not get separate card implementations.
+One shared card presents the selected entity. Its kind is metadata: a city,
+country or province does not introduce another shell or renderer. `OBJECTS` owns
+renderable body packages; Argentina and Buenos Aires use the mounted Earth
+scene. Selecting another body replaces that scene through the existing router.
+The title, facts, sources, lens controls and parent links use retained shell nodes.
 
-`PlanetShell.astro` renders the existing title, Factsheet, chart and gallery sections, lens controls and resources once. `entity-card.mjs` publishes prepared content into those retained elements. The same card, title, facts and lens nodes survive navigation among entities in a scene. Parent links use the same entity IDs and selection path as search.
+Every card owns its lenses explicitly. Earth exposes **Visible color** and
+**Night lights**. Buenos Aires exposes **Visible color** and **Daytime noise**;
+other geographic cards expose **Visible color**. Changing cards clears the active
+observation. Dataset extent, geographic containment and parentage never grant
+lens ownership. The prepared WorldCover Land cover package and its provenance
+remain available to maintainers, but it is excluded from the current product.
 
-An entity provides an ID, name, kind, parent ID, prepared camera destination, facts, resources and applicable lens IDs. A prepared vector title is optional; other names use the planetary title's pinned Inter face and scale. Sections without content are hidden. A new entity kind requires data, not a new shell or type-specific renderer.
+The query encodes the shared camera; the fragment identifies the entity and
+lens. Restoration loads the selected record and applicable observation, then
+restores the saved camera without a destination flight. Back/Forward reuse the
+mounted scene within Earth. Parent links use the same IDs, selection and history
+owner as search. Superseded flights cannot overwrite a newer history entry.
+Invalid IDs never fabricate a card or scene; an invalid camera token does not
+prevent a valid entity selection.
 
-The rendered scene and the selected entity have separate identities. `OBJECTS` continues to own the renderable body packages and the application mounts one scene at a time. Earth, Argentina and Buenos Aires all use the same Earth scene. Selecting another body routes to its registered scene and supplies that entity's card to the same shell.
+## Sources and coverage
 
-Lens availability is enforced by the shared runtime as well as the visible controls. Each entity declares applicable lens IDs and optional pinned geographic lens descriptors. Every card explicitly owns its lenses. Changing cards clears the active observation even if another card references the same prepared package. Dataset extent and parentage never grant lens ownership. Root entities use the same reference mechanism; their existing history identity is unchanged. Selecting a lens does not start another destination flight.
+The pinned GeoNames catalogue has 38,252 records: 34,135 populated places, 252
+countries/territories and 3,865 first-order administrative divisions. The country
+count includes two explicitly historical records. The cities15000 snapshot is
+not every settlement. All original IDs remain valid. City parents follow exact
+country/ADM1 codes; 23 cities with an unmatched ADM1 retain their verified country
+parent. Buenos Aires city belongs to its federal district, not Buenos Aires province.
 
-The current Earth card exposes Visible color and Night lights. Buenos Aires additionally exposes its local Daytime noise lens. The prepared Land cover implementation and its source records remain in the repository, but Land cover is excluded from the current Earth card. Package support does not imply that a dataset is exposed in the product.
+Natural Earth and GeoNames shapes supply optional camera framing. A missing or
+conflicting geometry join preserves the source entity and its location point;
+726 administrative divisions and four countries have point views. Framing
+extents are not rendered borders. The contract supports additional entity kinds
+when their data and provenance are supplied; it does not include every crater,
+mountain or administrative level.
 
-Geographic observations are separate data packages. A descriptor in the selected entity identifies a versioned JSON package by byte length and SHA-256. The package supplies source identity, year, units, license, qualification, coverage, legend and prepared geographic page records. The loader fetches it only when selected, verifies its identity and capacity, selects the declared base surface, then publishes its pages. A failed request leaves the base usable and provides an explicit retry. Switching away aborts pending transport and clears every overlay binding. Released images may remain available for bounded reuse under the mounted scene's [shared image ownership](geographic-streaming-architecture.md#resource-limits); scene teardown releases them all. No dataset-specific selection variant or overlay geometry is included in Earth's startup presentation.
+Introductions use a generic Wikimedia lookup. A pinned Wikidata identity owns
+the lookup when available; otherwise the client resolves and verifies the exact
+GeoNames claim. The English Wikipedia article must match that identity. The
+API's two-sentence plain-text excerpt is displayed unchanged with article,
+contributors and CC BY-SA 4.0 attribution. Ambiguous or unavailable identities
+leave the introduction empty. Requests cancel on navigation and successful
+results use a bounded cache. No authored place descriptions or live geocoder are
+hidden in the runtime.
 
-One retained overlay pool belongs to the mounted scene: 32 slots, at most three concurrent image loads and 128 MiB of reserved decoded pixels. Eight retained lens rows and sixteen legend rows per option bound shell capacity independently of catalogue size. The flat package format admits at most sixteen independent prepared tiles, reserving half the pool for replacement. Indexed packages instead load hash-pinned directory ranges and choose a bounded viewport cut from their prepared tree. WorldCover land cover reuses the existing regular and polar geometry release without copying its packs; binding an admitted provider URL template changes transport addresses only. Buenos Aires noise retains its original sixteen prepared images and geographic matrices. Base imagery keeps its independent pool.
+Place coverage and imagery coverage are separate. Visible color combines the
+prepared global base with regional backing and direct Terrascope WorldCover
+2021 imagery. The prepared fine geometry covers the admitted provider
+footprints within Web Mercator, including prepared polar pieces. Outside source
+coverage the retained base remains usable. Footprint coverage does not certify
+every source pixel; water, source gaps and finite-resolution fallbacks remain
+possible. This feature does not supply terrain, buildings or survey accuracy.
 
-The URL carries the selected entity and lens in its fragment, alongside the shared camera token in its query. Restoration holds camera URL publication while the entity and lens load, then applies the saved pose without starting a destination flight. Links without a saved camera use the prepared destination. Back/Forward within a body reuse its retained scene; returning from another planet through history remounts one Earth scene and restores that selection and camera. Invalid or unavailable IDs do not create fabricated cards or scenes; an invalid camera token does not prevent entity selection.
+The Buenos Aires observation uses the pinned APrA daytime-noise source and its
+original sixteen prepared images and matrices. The shared card presents its
+source, units and legend. It is a historical model, not live sensor data.
+See [Earth source records](../src/planets/earth/SOURCE.md) for licenses, source
+versions, acquisition recipes and coverage qualifications.
 
-The shared navigation history owner assigns distinct entries to object, entity and lens selections. The entity route delegates its writes and restoration to that owner, keeping the mounted session's URL current. It saves the departing camera before a destination selection and publishes the final pose when its flight completes. That completion does not wait for the 150 ms drag debounce, so immediate Back/Forward retains the arrived parent view. Superseded flight completions cannot publish into a newer navigation entry. Saved-view restoration continues to hold those writes until the incoming camera is restored. Selecting another object clears the departed place/lens fragment; explicit incoming links retain their own identity.
+## Transport and retained rendering
 
-Entity transport uses independently hash-pinned gzip packs: a 143,279-byte directory, a lazy 4,741,271-byte search index and 299 detail shards (at most 18,543 bytes compressed each). The index contains 538,314 distinct aliases for 38,252 records and preserves every original city alias. Direct links load only their record and ancestors. Repeated sources and lens descriptors live once in the directory. Detail residency is capped at 16 shards and 4 MiB of verified decoded payload; search and directory have separate 20 MiB and 2 MiB admission caps. The expanded search index decodes to 17,995,357 bytes. A lazy module worker owns verified decoding, index queries and the detail cache. The UI receives up to eight result labels or the selected card and its ancestors. Canceled queries finish promptly. Successive queries share the in-progress directory and search-index acquisition, so typing corrections do not repeatedly restart those fixed downloads. Leaving the scene terminates the worker, pending acquisition and its cache. These counters describe payload bytes, not JavaScript heap overhead. No planet's initial view fetches these packs or a geographic lens package.
+Search is prepared ahead of runtime. A lazy worker verifies and decodes a
+143,279-byte directory, a 4,741,271-byte compressed search index and requested
+detail shards. The index contains 538,314 aliases. Queries return at most eight
+labels; direct links load their record and ancestors without downloading search.
+The 299 detail shards are at most 18,543 compressed bytes each. Detail residency
+is bounded by sixteen shards and 4 MiB of decoded payload; directory and search
+have separate 2 MiB and 20 MiB admission limits. These are payload limits, not
+JavaScript heap ceilings. Leaving Earth terminates the worker and its transport.
 
-The base Earth atlas is delivered as 49 full-width shelf strips per lens. Chrome previously blocked compositor commits while decoding a 4096 × 3952 WebP during a flight. Preparation now preserves the original seven-page source encoding, splits its decoded pixels into strips and verifies the lossless outputs. The largest strip is 4096 × 712. Density, camera, geographic frames and every visible source pixel remain unchanged; no runtime raster preparation is added. Lens replacement keeps the complete old palette until the new palette is decoded, with two image loads at a time.
+Observations load only when selected. Their descriptors pin local packages by
+length and SHA-256, including source identity, coverage, units, legend and
+prepared page references. An indexed observation requests verified directory
+ranges from the existing geometry release. Runtime transports prepared geometry
+and images; it does not derive geometry, rasters, atlases or source indices.
 
-This has a delivery tradeoff: the normal atlas grows from 6,476,100 to 45,956,184 encoded bytes; its full decoded footprint is approximately 381 MB, similar to the original packing. Topography and night lights are separate on-demand banks of 32,920,184 and 11,446,468 bytes. These are base-surface costs, separate from the bounded city/observation paging pools. The download increase must remain visible in delivery measurements. Regenerate all five exterior/cutaway atlas banks with `node src/planets/earth/tools/prepare-assets.mjs --atlases-only`; this does not rebuild global geometry.
+The existing pager selects complete local replacement groups. Ready regions can
+publish independently; unrelated metadata cannot hold all imagery back. A
+covering ancestor survives until its own replacement is ready. Known children
+can load even while sibling metadata remains unknown; those pending branches
+keep their lineage and ancestor coverage. Coarse subtree bounds continue to
+include polar detail that their own images may not contain.
 
-`entity-performance-browser.mjs <origin> --capture=metrics --dpr=1 --repetitions=3` records cold/warm search, flight, observation and pan frame intervals without recording overhead. Repeat at DPR 2; add `--with-land-cover` to measure land-cover activation, dragging, page replacement and returning to noise after the accepted journey. Use `--capture=trace` for trace/video attribution and inspect frames surrounding both the longest main-thread tasks and the longest presentation intervals. `surface-delivery-browser.mjs <origin> <pinned-reference-directory>` compares the current surface against explicitly hash-verified earlier assets and the compiled presentation in isolated browser contexts, retaining images and absolute diffs at both DPRs.
+Base imagery has 512 retained slots, at most 256 displayed pieces, a 128 MiB
+conservative decoded reservation and a separate 96-directory / 12 MiB metadata
+allowance. Observation paging has 32 slots, three image loads and a 128 MiB
+allowance including any overview. Both reserve capacity for replacement.
+Shared native image ownership deduplicates resources across pages and revisits;
+idle reuse yields to current demand and expires after two minutes. Teardown
+clears bindings, decode owners and blobs. Chrome's internal caches and total
+process memory are separate from these application limits.
 
-Earlier 6 September 2026 measurements used real Chrome 152 on an Apple M3 Max (36 GiB), a 1440 × 1000 viewport, no CPU/network throttling and three cold/three warm repetitions per DPR, separately from other qualification jobs. These scenarios settle between actions; they do not qualify uninterrupted stress or sustained native image residency. A warm run uses a reloaded document in the same browser context, with resident search primed and the ordinary HTTP cache; it does not reuse the original document. Trace/video runs are separate because recording has overhead.
+The regional backing release is approximately 374 MB; the existing 25.344 GB
+fine geometry release is reused unchanged. Prepared retirement relationships
+allow backing to yield capacity only where complete fine coverage is proven.
+No catalogue-wide prefetch or raw-world raster download is required. See
+[geographic streaming](geographic-streaming-architecture.md) for selection,
+publication, source receipts and native-memory qualification.
 
-| Measurement | Accepted POC, DPR 1 / 2 | Earlier measured implementation, DPR 1 / 2 |
-| --- | ---: | ---: |
-| Worst warm interaction frame | 266.7 / 133.3 ms | 50 / 50 ms |
-| Largest individual warm scenario frame p95 | 66.6 / 66.7 ms | 16.8 / 33.3 ms |
-| Warm search input to ready-result frame p95 | Not recorded | 44.9 / 45.1 ms |
+The full-density base atlas has a separate cost: Visible color is delivered in
+49 lossless shelf strips totaling 45,956,184 encoded bytes and approximately
+381 MB decoded. This preserves the accepted source pixels while avoiding one
+large image decode during travel. Night lights is a separate on-demand
+11,446,468-byte bank. These base-atlas costs must not be hidden inside the small
+paging budgets or described as free. Atmosphere stops requesting material above
+its prepared zoom cutoff and resumes when returning to globe scale.
 
-Those warm flight, noise, land-cover and drag scenarios had no observed UI long tasks (50 ms threshold) or frame intervals over 100 ms. The cold search action took 313–329 ms, including worker transport/decode and automation, with no long task during search. The result applies to those measured actions: one-time document mounting still produced tasks up to 203 ms, and refresh frames reached 216.7 ms. Physical-phone and display-latency performance remain unproven. The initial baseline recorded search action wall time rather than input-to-frame time, so those two measurements are not presented as equivalent.
+## Maintainer workflow
 
-Introductions use one generic Wikimedia source lookup. Prepared records carry GeoNames and, where supplied by the source, Wikidata identifiers. A prepared Wikidata link owns the article lookup; administrative records receive that link only after their GeoNames ID, country and administrative code agree with the pinned Natural Earth feature. Without an explicit link, the client discovers a unique Wikidata item through the exact GeoNames claim and verifies that claim. Both paths follow the English Wikipedia sitelink and check the article's Wikidata identity. This accommodates an administrative region and settlement sharing one article even when Wikidata lists only the settlement's GeoNames ID. It displays the API's two-sentence plain-text excerpt unchanged. No place names or authored descriptions are encoded in this lookup. Missing or ambiguous identities leave the introduction empty. Requests run only after selection, cancel on navigation, and successful excerpts have a bounded in-memory cache. Article, contributors and CC BY-SA 4.0 links use the existing Resources section; the source receipt retains the identity method, page ID, revision and retrieval time. Scene assets and preparation remain independent of this editorial content transport.
+Restore the checkout's exact runtime assets with `pnpm setup:assets`. Normal
+object preparation runs through `pnpm prepare:planets -- --object=earth`; it uses
+the declared source recipe and pinned geometry, not a new worldwide geometry
+build. Source changes require explicit intake and updated integrity receipts.
 
-The Earth catalogue contains 34,135 populated places, 252 country/territory records and 3,865 first-order administrative divisions from pinned GeoNames tables. The country count includes two explicitly marked historical entities. Existing city and country IDs and camera destinations remain unchanged. City parents use the exact country and ADM1 codes: 23 cities whose ADM1 codes are absent from the pinned table retain their verified country parent. Preparation enumerates these exceptions, historical records and alternate country codes in `.prepared/entity-hierarchy.json`.
-
-GeoNames owns identity, administrative classification and parentage. Natural Earth geometry supplies optional navigation framing only when its GeoNames ID, country and administrative codes agree unambiguously. Existing country views retain their accepted Natural Earth 1:110m framing; added countries use GeoNames country shapes. A missing or conflicting geometry join never removes a source entity: 726 administrative divisions and four countries use the source location point. Principal-area extents frame the largest source polygon; they are not rendered borders or a claim that every territory fits in the view. Buenos Aires city belongs to the separately identified federal district, not to Buenos Aires province. The APrA noise lens remains scoped to the city. Deeper administrative levels, other region definitions and craters can use this same entity contract when their sources are supplied.
-
-`node src/planets/earth/tools/prepare-places.mjs` verifies all pinned source bytes, prepares the hierarchy and writes its coverage receipt. `--verify-only` verifies the source snapshot without writing outputs. `administrative-browser.mjs <origin> --dpr=1` compares sampled source facts, parents, navigation and published camera endpoints with the real shared card; repeat at DPR 2. Source pinning and bounded administrative acquisition are documented in Earth's `SOURCE.md`.
-
-Verification: `src/planets/earth/test/selection-cards-browser.mjs` exercises Earth → Argentina → Buenos Aires → noise → parent → Tokyo → Earth in real Chrome at DPR 1 and 2, including mobile. It checks one card, stable scene/card nodes, applicable lenses, no extra flight, startup network exclusion and bounded overlay residency. Its second sequence exercises Back/Forward, refresh, another planet, missing coverage and request failure/retry, with videos and per-run performance/resource receipts. Run it with `pnpm test:browser:earth-entities`; shared conformance and per-object browser checks remain separate commands. Unit tests cover package identity, oversize rejection, cancellation, reuse with another data identity, compressed transport and source polygon/texel agreement.
-
-`node src/planets/earth/test/hierarchy-browser.mjs <origin>` adds country → ADM1 → city paths in Argentina, Japan and Nigeria at desktop DPR 1/2 and mobile DPR 2 emulation. It records duplicate-name results, source identity, immediate parent history, introduction outage, rapid parent replacement and the original Buenos Aires/noise link. `entity-search-browser.mjs <origin>` exercises cold-search cancellation while dragging, then fifty mixed city/ADM1/country selections and worker teardown, retaining payload and collected-heap measurements separately.
-
-`node src/planets/earth/test/land-cover-browser.mjs <origin> --global --dpr=1` checks 27 source-backed views: continental detail, coasts, globe-face boundaries, the dateline, high latitudes and nine reproducible catalogue samples (seed 260906). Repeat at DPR 2. It verifies the exact received image bytes against each published page, every opaque provider pixel against the official category palette, source/year/license/legend and sampled source-backed camera viewpoints. The Earth card remains selected throughout land-cover coverage checks; card identities and parents are checked separately. Source-color screenshots disable atmosphere through its existing control; ordinary journey recordings retain the default atmosphere. Broad views can use the prepared overview, and source no-data remains explicitly qualified. These samples do not prove every worldwide pixel or a physical phone.
-
-The aggregate project checks are `pnpm acquire:planets -- --verify-only`, `pnpm test`, `pnpm build` and `pnpm test:browser <origin>`. The last command runs every registered object's smoke suite followed by full shared browser conformance, including real Chrome DPR 1 and 2. Set `CSSEARTH_CONFORMANCE_OUTPUT=output/playwright/<new-run>` to retain its report and density recordings. Run performance measurements separately, without competing preparation or browser suites.
-
-The observation inventory is prepared from `src/planets/earth/source/observations.json`. A dataset supplies one source scope, preparation module, package descriptor and asset inventory. Land cover belongs only to the Earth card; Daytime noise belongs only to the Buenos Aires card. Both declare explicit entity IDs. These scopes describe card ownership, separately from a viewport containing source pixels. Descriptors are interned once in the destination directory. Source records, joins, palettes and geometry do not enter the shared shell or runtime logic.
-
-The WorldCover package is 14,457 bytes. Its separately verified root directory is 208,852 compressed bytes / 1,633,722 decoded bytes, referencing 458 roots in the existing geometry release. Runtime directory residency is limited to 32 ranges and 8 MiB of declared decoded metadata, with 2 MiB per range and three simultaneous directory loads. The fixed root directory is counted separately. Keys, parent levels, expected subtree roots, image addresses, source version, hash/byte sizes and traversal depth are checked before use.
-
-A whole-world overview uses the existing globe texture slots, adding no scene nodes. Fifty immutable lossless textures total 206,548 encoded bytes and 24,870,912 decoded bytes. They are prepared from 64 pinned level-3 provider PNGs (504,618 received bytes) with nearest-category sampling. Alpha gaps expose the existing base texture through ordinary CSS backgrounds. The overview uses the same source year, legend and observation ID as direct provider detail. Its bank loads only after selection, with three loads at a time, and publishes as a complete group. Overview and detail together are admitted within the 128 MiB observation bound; the base atlas remains a separate cost. While the overview is published, ordinary base-detail paging is suspended so it cannot cover the observation. Its retained pool resumes for normal imagery and local observations such as noise.
-
-Viewport selection preserves complete prepared replacement groups and refines them into remaining slots. If a complete visible cut cannot fit, the overview remains visible; broad dateline and polar views can therefore show the overview even when closer views have detail. This is a finite-resolution fallback, not evidence of absent source data. Each complete tile group can publish as soon as it decodes. Its previous parent remains visible until all selected replacement children are ready; zooming out replaces previous children together when their parent is ready. Unavailable metadata preserves related covering groups rather than declaring the branch empty, and does not block imagery loading elsewhere. Unrelated tiles do not delay each other. The displayed groups stay within half the pool and decoded-byte budget, reserving the remainder for the next view. Obsolete work aborts, and leaving the body releases both metadata and textures.
-
-`node tests/objects/browser/earth/card-lens-ownership-browser.mjs --built-dir=dist --dpr=1 --record=false` verifies the built app through visible controls: Earth owns Visible color and Night lights; Buenos Aires owns Visible color and noise; country, region and other city cards expose Visible color. It checks the actual prepared base-texture bindings, Back/Forward, rejected cross-card and retired Land cover links, rapid planet-to-city selection and retained DOM. Repeat with `--dpr=2`; `--output=<directory>` selects the evidence folder. Add `--visual` to wait for base imagery before screenshots, or `--record=true` to record. The ordinary ownership check does not wait for every base tile, and its screenshots do not establish settled imagery coverage or performance.
-
-`global-observation-browser.mjs <origin> --dpr=1` records Earth → country → region → city → noise using the same card and scene nodes; repeat with `--dpr=2`. It checks lazy package requests, explicit card ownership, release on navigation, and history restoration. `geographic-paging-browser.mjs <origin> --dpr=1|2` records a longer journey through Buenos Aires, Tokyo, Lagos, countryside, the dateline and high latitudes, including actual pointer/wheel input, rapid replacement, noise switching and body teardown. It samples the observation image and metadata limits each animation frame and verifies complete current cuts and retained identity. Index/source/overview transport validation is covered by `land-cover-lens.test.mjs`, `geographic-surface-runtime.test.mjs` and `geographic-lens-runtime.test.mjs`. Release, delivery-cost and final performance qualification remain separate checks.
-
-`land-cover-browser.mjs <origin> --dpr=1|2` qualifies the visible observation against received provider bytes: every published detail blob has the same SHA-256 and byte count as its source response; all opaque source pixels use the eleven official colors. Real scene screenshots also contain those exact colors with the existing Atmosphere control off. Ordinary journey recordings retain the default atmosphere, which can tint colors slightly. The source and legend remain in the shared card. The same probe checks the accepted noise image and geometry records against `105c159b` and verifies noise remains specific to Buenos Aires. These are representative checks; they do not establish complete worldwide valid-pixel coverage.
-
-## Dataset releases
-
-The observation inventory also declares each dataset's source consumer, pinned documents and preparation command. `prepared-local` observations such as noise produce all displayed images from a checked-in snapshot. `versioned-provider` observations such as land cover prepare the descriptor, coverage and small overview locally, then request versioned provider detail images directly. A release pins those local outputs; it cannot guarantee that a provider will preserve every remotely served pixel indefinitely.
-
-Both observations use the same maintainer workflow:
+Observations share one release workflow:
 
 ```sh
 pnpm datasets acquire --object=earth
@@ -83,34 +126,69 @@ pnpm datasets publish --object=earth --dry-run
 pnpm datasets publish --object=earth
 ```
 
-`acquire` restores missing source files from the checkout's pinned Git snapshots and verifies their declared bytes and hashes. Existing edited or corrupt files fail verification without being overwritten. Updating a source snapshot is a separate, explicit intake using its documented publisher acquisition recipe; `acquire` does not silently select a newer export. No command above downloads raw worldwide rasters or rebuilds the global geometry release.
+`acquire` restores exact pinned source bytes. Edited or corrupt existing files
+fail verification instead of being overwritten. `--dataset=buenos-aires-noise`
+or `--dataset=worldcover-land-cover` limits intake/preparation; validation and
+publication include the complete shared Earth asset closure. Preparing the
+retained Land cover package does not expose it in the product.
 
-Use `--dataset=buenos-aires-noise` or `--dataset=worldcover-land-cover` to limit source verification/acquisition and preparation. Preparation then refreshes the shared observation registry, entity references, presentation and asset inventory. Validation and publication always include the complete Earth runtime asset closure, so a dataset release includes its common dependencies. The generated release JSON is deterministic, sorted and addressed by its full SHA-256 under `dataset-releases/earth/`. Its local copy and publication receipt are in Earth's `.prepared/data-releases/` directory.
+Publication uses the existing authenticated uploader, reuses byte-verified
+objects and writes the content-addressed release manifest last. Interrupted
+publication resumes; same-size corruption is not accepted through HEAD alone.
+A release pins prepared local outputs, not every future response from a
+versioned third-party imagery URL. There is no mutable latest pointer.
 
-The dry run lists missing assets, their hashes and bytes, and the number of reusable objects. Publication uses the existing authenticated R2 uploader, writes only missing content-addressed files, and verifies every referenced object's full bytes before uploading the release manifest last. Repeating an interrupted publication resumes from the successfully stored objects. A same-size corrupted object blocks release; it is never accepted through a HEAD response alone. Releases have no mutable `latest` pointer and old assets are retained.
-
-Install an exact release into an owned output directory with:
+Install an exact data release into an owned directory with:
 
 ```sh
 pnpm datasets install --object=earth --release=<full-release-sha256> --output=<owned-directory>
 ```
 
-The installer checks the manifest hash, validates filenames and installs only byte-verified files under `scenes/earth/`. Repeating the command reuses matching local files. Installing a prior hash restores that prior data inventory. For an application rollback, use the corresponding Git checkout and a fresh output directory: restoring data alone does not replace the application's compiled presentation or remove newer, now-unreferenced files. `pnpm setup:assets` remains the all-object checkout setup command. Asset publication does not merge the PR or deploy the application.
+Application rollback also needs the corresponding Git checkout and a fresh
+output directory. Data installation does not replace compiled application code.
+Publishing assets does not deploy the site or merge its PR.
 
-## Delivery and cost
+## Verification and delivery
 
-After building, run `pnpm test:earth-delivery` (or pass `--built-dir=<owned-built-directory>`). The test starts an owned HTTPS fixture, maps `css.earth` to that local server only inside its isolated Chrome process, and serves unchanged files. It uses the configured application origin for R2 CORS, without request interception or a local geometry middleware. A temporary certificate is trusted by its public-key hash only inside that browser. The certificate and server are removed when the test ends. This exercises the production transport path without deploying the app.
+The normal repository gates are `pnpm acquire:planets -- --verify-only`,
+`pnpm test`, `pnpm build` and `pnpm test:browser <origin>`. Use real Chrome at
+DPR 1 and 2. Focused built-app entry points are:
 
-The receipt records cold/warm journeys at DPR 1 and 2, raw request sizes and cancellations, provider/R2 headers, ranged responses, normal browser cache behavior, actual application bytes served, production script hashes, retained DOM and observed blob/heap peaks. Application files have an explicit fixture cache policy and are uncompressed; their CDN latency and eventual hosting headers are not measured. Application delivery, R2 geometry, provider imagery and editorial APIs are reported separately. Browser cache hits are not CDN hits, and cache reuse varies with eviction and timing.
+```sh
+node tests/objects/browser/earth/card-lens-ownership-browser.mjs --built-dir=dist --dpr=1 --record=false
+node tests/objects/browser/earth/exploration-browser.mjs --built=dist --journey=continuous-exploration --cycles=2 --dpr=1 --trace=false --output=<new-run-directory>
+node tests/objects/browser/earth/global-recovery-browser.mjs --built-dir=dist --dpr=1
+pnpm test:earth-delivery --built-dir=dist
+```
 
-Generate an editable cost model with `node src/planets/earth/tools/delivery-cost-report.mjs <delivery-report.json>`. Prices, free-tier availability, traffic, retained storage and assumed CDN hit rates are in `docs/earth-delivery-assumptions.json`. The report includes the existing geometry release, current object inventories, the retained POC inventory and the integrated coarse release pin when present as a reproducible storage basis; it is not a live bucket inventory or account invoice. It counts browser-cache requests and aborted attempts conservatively and models 100, 1,000 and 10,000 daily sessions. Longer sessions can issue more requests. The monthly dollar ceiling remains unspecified.
+Repeat the relevant browser cases at DPR 2. Exploration follows the visible
+flight to the destination and then applies input immediately; it does not wait
+for imagery between routine actions. It also deliberately interrupts flights,
+corrects search, switches lenses/parents/history, goes offline, retries and
+revisits. Its receipts retain exact served script hashes, action logs, network
+lifecycle, screenshots and video. Separate runs without screenshots, video or
+memory dumps measure observer overhead. A selected place label alone does not
+prove geographic arrival or imagery coverage.
 
-On 6 September 2026, the measured nine-view journey initiated up to 700 R2 requests and 155 provider attempts in a cold run. The built application served 86.19 MB cold; warm application delivery varied from 0.87 to 50.32 MB across the two runs. The normal atlas alone is 45.96 MB. Observed blob residency peaked at 9.43 MB encoded, separate from decoded image accounting. The observation's 128 MiB decoded budget and metadata limits are qualified by the dedicated per-frame paging probe; the full normal base atlas is approximately 381 MB decoded. There is no prefetch proportional to the worldwide catalogue or raw raster size.
+Built fixtures serve unchanged compiled files over local HTTPS while imagery
+and geometry use the real public services. Their `css.earth` mapping applies
+only inside the isolated test browser. This proves the production transport
+path without deploying the application. Local uncompressed fixture startup is
+not a production-hosting latency claim. Fault-injection runs qualify recovery,
+not cache or performance behavior. CPU/network emulation is not physical phone
+or trackpad evidence.
 
-Warm page replacement initiated up to 758 R2 requests and 175 provider attempts, slightly more than the cold runs. The default cost model uses the higher observed cold/warm request count for each service; the separate client-byte estimate retains its editable cache mix. With 26.346 GB of modeled stored data and the free allowance available, 10,000 daily sessions cost approximately $4.94/month at 90% assumed CDN hits or $78.74 with none. These are R2 storage/read estimates. They exclude account-wide usage, taxes, domain fees and other metered services. R2 egress is free; Pages static requests are free when they do not invoke Functions. [R2 pricing](https://developers.cloudflare.com/r2/pricing/), [Pages pricing](https://developers.cloudflare.com/pages/functions/pricing/).
+Delivery receipts separate application, R2 geometry, provider imagery and
+editorial API requests, including cancellations and browser-cache reuse. Generate
+the editable traffic model with
+`node tools/objects/geographic-pages/operations/delivery-cost-report.mjs <delivery-report.json>`.
+[Delivery assumptions](earth-delivery-assumptions.json) record dated unit prices,
+cache assumptions and 100/1,000/10,000 daily-session scenarios. They are not a
+live account invoice, a monthly budget commitment or a provider capacity promise.
+The normal atlas, retained releases and long-session request counts are material
+cost inputs. Terrascope service capacity remains an external dependency; direct
+API access does not establish unlimited free service.
 
-The same traffic model reaches 1.75 million provider image attempts per day. Terrascope's reviewed documentation establishes no numeric quota or capacity promise, and its terms prohibit degrading open services through high load. Direct API access is therefore an upstream capacity dependency even when modeled Cloudflare charges are low. The transport allows three concurrent observation images, deduplicates an in-flight provider URL and retries transient failures at most twice, honoring `Retry-After` up to 30 seconds; longer delays require an explicit later retry. Missing or unavailable source data leaves a usable base view and truthful status. [MapProxy service](https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html), [Terrascope terms](https://terrascope.be/en/terms-use).
-
-For a clean built-app check, run `pnpm build`, then `node tools/prepare-built-fixture.mjs --output=<new-owned-directory>`. The fixture copies compiled application files, installs Earth's declared assets from their immutable public URLs, verifies every file against the build and tests reuse. It contains no source or geometry mirror. Existing output directories are rejected to preserve other work. Filesystem cloning is used where available to reduce local disk use.
-
-`node src/planets/earth/test/global-recovery-browser.mjs --built-dir=<fixture-directory> --dpr=1` exercises a saved Buenos Aires/noise link, Back/Forward and reload, then corrupt packages, root directories, geometry ranges and provider tiles, unavailable geometry, and a provider outage. Each failure is followed by a successful retry. Repeat with `--dpr=2`. The final journey performs fifty entity, lens and body transitions and observes actual pagehide cleanup. It records a video, screenshots, compiled script hashes, retained DOM, blob teardown and the collected main-page V8 heap after remounts. The fault fixtures use request interception and are not cache/performance measurements. Worker heap/residency, total image/GPU memory and physical devices have separate qualifications.
+Merge, deployment, physical-device qualification and any absolute monthly spend
+limit remain separate decisions. [PR #6](https://github.com/layoutit/cssEarth/pull/6)
+is the review and delivery record for this feature.

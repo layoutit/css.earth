@@ -130,7 +130,7 @@ explicitly historical entities) and 3,865 ADM1 records. Their 4,117 location
 records were extracted from the September 6 GeoNames `allCountries.zip` stream;
 the compressed and decoded archive hashes, code-table filter and retained subset
 hash are recorded in `source/places/manifest.json`. Only the 1.93 MB compressed
-subset is checked in. `node src/planets/earth/tools/acquire-administrative-records.mjs`
+subset is checked in. `node tools/objects/geographic-pages/operations/acquire-administrative-records.mjs --object=earth`
 verifies it without downloading the archive. Explicit `--reacquire` streams the
 publisher ZIP through a CRC-checking decoder with bounded input, line and subset
 sizes; a changed upstream snapshot fails instead of replacing the pin. The full
@@ -153,7 +153,7 @@ The generated `.prepared/entity-hierarchy.json` enumerates those records, point
 views, conflicting geometry joins, historical entities and alternate country
 codes. Its preparation report stays out of the browser payload.
 
-`tools/prepare-places.mjs` verifies source hashes, normalizes names and aliases,
+`tools/objects/geographic-pages/places.mjs`, called by the declared Earth preparation recipe, verifies source hashes, normalizes names and aliases,
 and prepares camera controls against the accepted Earth face projection. It
 writes content-addressed directory, search and detail packs with encoded/decoded
 hashes and sizes. Direct links fetch the directory, selected detail shard and
@@ -175,7 +175,7 @@ emulation is not physical-device proof. Reports and actual screenshots are in
 
 `source/land-cover/` pins the 2021 v200 product identity, the Terrascope MapProxy
 WMTS capabilities, the official QGIS color legend and the observed empty-image
-sentinel. The global land-cover lens uses this source through the shared observation package and existing card.
+sentinel. The retained land-cover package uses this source through the shared observation contract; it is excluded from the current Earth card.
 The provider's `esa-worldcover-map-10m-2021-v2_map` is a categorical RGB map, not
 the numerical classification raster. The eleven labels/colors come from the
 symbology linked by the official data-access page, not an authored color scale.

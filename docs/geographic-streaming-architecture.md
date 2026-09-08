@@ -17,7 +17,7 @@ flowchart TD
   P -->|complete local swaps| D[Retained CSS slots]
 ```
 
-- Keep one shared shell, generic object adapter and mounted object scene. Entity kind does not create a new renderer or card. Every card owns its lenses: land cover belongs to Earth and the noise observation belongs to Buenos Aires. Camera position selects base imagery detail independently of card identity.
+- Keep one shared shell, generic object adapter and mounted object scene. Entity kind does not create a new renderer or card. Earth exposes Visible color and Night lights; Buenos Aires owns the noise observation. The retained Land cover package is excluded from the current product. Camera position selects base imagery detail independently of card identity.
 - Reuse the existing object and geographic lens lifetime for cancellation, dataset revisions, clearing old observations and teardown. Do not add a second dataset session or general layer manager.
 - The prepared `pageLayers` order owns painting between page layers. Resolution only orders pages within their own layer. The shared mount transports both ranks into CSS's integer stacking order, so an observation at level zero still paints after high-resolution base imagery. Replacing a geographic package keeps its mounted layer rank; image arrival order and slot reuse cannot change it.
 - `pnpm test:browser:earth-noise` exercises that rule against the production build in real Chrome at DPR 1/2. It compares visible road marks with the same loaded observation in isolation, restores every visibility property, and verifies unchanged page identities, styles, bounds and camera. This visual check is part of `pnpm test:browser`; published-page counts alone do not prove an observation remains visible.
