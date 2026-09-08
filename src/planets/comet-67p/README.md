@@ -29,4 +29,4 @@ pnpm test:browser http://127.0.0.1:4257 comet-67p
 pnpm test:browser:conformance http://127.0.0.1:4257 comet-67p
 ```
 
-Delivery and browser evidence are recorded in [QUALIFICATION.md](QUALIFICATION.md).
+Delivery and browser evidence are recorded in [shared qualification record](../../../docs/comets/QUALIFICATION.md).
