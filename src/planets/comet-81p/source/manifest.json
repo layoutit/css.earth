@@ -37,31 +37,38 @@
     },
     {
       "id": "model-surface",
-      "path": "material/neutral.png",
-      "expectedBytes": 174,
-      "expectedSha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
+      "path": "material/model-coverage.png",
+      "expectedBytes": 6258,
+      "expectedSha256": "cbe16ca5372858e816d725a210beed6c5b7a7a614dfb028240d061448fbf766b",
       "origin": "https://github.com/layoutit/cssEarth",
-      "credit": "cssEarth neutral model material",
+      "credit": "NASA/Stardust/PDS plate provenance; cssEarth gray coverage grid",
       "license": "MIT",
       "licenseEvidence": [
         "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
       ],
-      "acquisition": "Checked-in 64 by 32 RGB PNG, every pixel #b8b6b2.",
+      "acquisition": "Checked-in coverage material, reproduced from the original PDS plate flags during preparation.",
       "redistribution": "Authored neutral material under the repository MIT license.",
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus; the unseen side uses the archive’s fitted ellipsoid and joining faces. The smooth far side is estimated, not observed terrain. Neutral gray is a model material, not albedo. Orientation is fixed at an arbitrary phase.",
+      "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 1917.1067262613963
       },
-      "width": 64,
-      "height": 32,
+      "width": 512,
+      "height": 256,
       "lensId": "model",
       "label": "Completed shape model",
-      "falseColor": false
+      "falseColor": false,
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "recipe": {
+        "kind": "plate-coverage",
+        "width": 512,
+        "height": 256,
+        "observedColor": "#b8b6b2"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -102,8 +109,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 101746,
-      "expectedSha256": "62204e270a2d7ec62f1903775a4197b8fc6aad0e859f0a5d9f3f7851323338e0",
+      "expectedBytes": 104636,
+      "expectedSha256": "2ea23b6844dd6fd019679402137e2dbc825214bd480ebae53d1c82a9493e821a",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab",
       "credit": "Farnham, Duxbury and Li (2005); NASA/Stardust/PDS",
       "license": "PDS public scientific archive",
@@ -134,8 +141,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4089,
-      "expectedSha256": "cbd1f1424de32a361cf9934ed85c512ed67c6e8ea7252a7cff9adb847819ebce",
+      "expectedBytes": 4098,
+      "expectedSha256": "a658489cfcea9ceea93a61b9b6827b58c98c0876d99fad3e9338a621d6882798",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -147,7 +154,7 @@
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1622,
-      "expectedSha256": "4436c47cf04e4783e3e268db6a5c77db0acc4cfa3257806907f103b96f4c5bee",
+      "expectedSha256": "902d7be140066756dc5d525a9a3ddff18bdc961f2d31297570289cfaec7e3b04",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {
@@ -158,8 +165,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3389,
-      "expectedSha256": "555ff5608fcbea4b13b397ee44c9188c698c4c536fec6a7cb53e0fd96aa103b3",
+      "expectedBytes": 3387,
+      "expectedSha256": "1d686044de538323756d0a67e05153eaac3b44c0dd398a9bac011b3d1cba37f8",
       "purpose": "Wild 2 source evidence or authored preparation input."
     },
     {

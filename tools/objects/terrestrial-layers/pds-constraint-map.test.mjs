@@ -3,6 +3,7 @@ import test from 'node:test';
 import sharp from 'sharp';
 import { parsePdsPlanetocentricShape } from './obj-shape.mjs';
 import { preparePdsConstraintMap } from './pds-constraint-map.mjs';
+import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 
 const table = `6 8
 -90 0 1 3
@@ -30,6 +31,20 @@ test('PDS comet plates preserve zero-indexed connectivity, units and every sourc
   assert.ok(Math.abs(mesh.positions[5][2] - 6000) < 1e-9);
   assert.throws(() => parsePdsPlanetocentricShape(table.replace('0 90 3 2', '0 90 3 4'), profile), /constraint flag/);
   assert.throws(() => parsePdsPlanetocentricShape(table.replace('\n0 2 1\n', '\n0 2 6\n'), profile), /connectivity/);
+});
+
+test('plate coverage preserves observed black and grids both ellipsoid and joining plates', async () => {
+  const recipe = { kind: 'plate-coverage', width: 64, height: 32, observedColor: '#000000' };
+  const mesh = { indices: [[0, 1, 2], [0, 2, 3], [0, 3, 1]], faceProvenance: [0, 1, 2],
+    hit: longitude => ({ faceId: Math.floor(longitude / 120) }) };
+  const { data, info } = await sharp(await preparePdsConstraintMap(mesh, recipe)).raw().toBuffer({ resolveWithObject: true });
+  const sharedGrid = paintMissingCoverage(Buffer.alloc(data.length), info, new Uint8Array(info.width * info.height).fill(1));
+  for (let y = 0; y < info.height; y++) for (const x of [10, 32, 53]) {
+    const i = (y * info.width + x) * 3;
+    assert.deepEqual(data.subarray(i, i + 3), x === 10 ? Buffer.alloc(3) : sharedGrid.subarray(i, i + 3));
+  }
+  await assert.rejects(preparePdsConstraintMap({ ...mesh, hit: () => null }, recipe), /Missing PDS plate coverage/);
+  await assert.rejects(preparePdsConstraintMap({ ...mesh, faceProvenance: [0, 1, 3] }, recipe), /Invalid PDS plate coverage/);
 });
 test('constraint colors wrap east longitude and retain source pole flags without category interpolation', async () => {
   const mesh = parsePdsPlanetocentricShape(table, profile);

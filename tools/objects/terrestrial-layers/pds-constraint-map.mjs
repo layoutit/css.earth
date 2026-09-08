@@ -1,8 +1,11 @@
 import sharp from 'sharp';
+import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 
 /** Map the archive's categorical vertex flags, with nearest-grid sampling.
  * Colours are an authored legend, never a surface photograph or albedo map. */
-export async function preparePdsConstraintMap(mesh, { width, height, stepDegrees, colors }) {
+export async function preparePdsConstraintMap(mesh, recipe) {
+  if (recipe.kind === 'plate-coverage') return preparePlateCoverage(mesh, recipe);
+  const { width, height, stepDegrees, colors } = recipe;
   if (!Number.isInteger(width) || width !== height * 2 || width < 16 || width > 4096 ||
       !(stepDegrees > 0) || 180 % stepDegrees || !mesh.coordinates || !mesh.constraintFlags ||
       ![1, 2, 3].every(flag => /^#[0-9a-f]{6}$/i.test(colors?.[flag]))) throw new TypeError('Invalid PDS constraint map recipe.');
@@ -22,4 +25,28 @@ export async function preparePdsConstraintMap(mesh, { width, height, stepDegrees
     palette[flag].copy(data, (y * width + x) * 3);
   }
   return sharp(data, { raw: { width, height, channels: 3 } }).png().toBuffer();
+}
+
+/** Source plate flags own the coverage boundary. The shared gap grid marks
+ * both the fitted ellipsoid and its artificial joins, never observed terrain.
+ * Sampling and painting happen before any material filtering or lighting. */
+async function preparePlateCoverage(mesh, { width, height, observedColor }) {
+  if (!Number.isInteger(width) || !Number.isInteger(height) || width !== height * 2 || width < 16 || width > 4096 ||
+      !/^#[0-9a-f]{6}$/i.test(observedColor) || typeof mesh.hit !== 'function' ||
+      !mesh.faceProvenance?.length || mesh.faceProvenance.length !== mesh.indices?.length ||
+      mesh.faceProvenance.some(flag => ![0, 1, 2].includes(flag))) throw new TypeError('Invalid PDS plate coverage recipe.');
+  const color = Buffer.from(observedColor.slice(1), 'hex');
+  const data = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const longitude = (x + .5) * 360 / width, latitude = 90 - (y + .5) * 180 / height;
+    const hit = mesh.hit(longitude, latitude);
+    if (!hit || !Number.isInteger(hit.faceId) || mesh.faceProvenance[hit.faceId] === undefined) {
+      throw new Error(`Missing PDS plate coverage at ${longitude},${latitude}.`);
+    }
+    const i = y * width + x;
+    color.copy(data, i * 3);
+    missing[i] = Number(mesh.faceProvenance[hit.faceId] !== 0);
+  }
+  const raw = { width, height, channels: 3 };
+  return sharp(paintMissingCoverage(data, raw, missing), { raw }).png().toBuffer();
 }

@@ -4,8 +4,26 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadPdsPlateShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
 import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import { preparePdsConstraintMap } from '../../../../tools/objects/terrestrial-layers/pds-constraint-map.mjs';
 const root = resolve(import.meta.dirname, '../../../../src/planets/comet-81p');
 const json = async path => JSON.parse(await readFile(resolve(root, path)));
+
+test('Wild 2 coverage material reproduces from plate flags and registers every source plate center', async () => {
+  const profile = (await json('source/preparation/terrestrial.json')).geometry.radialTerrain;
+  const mesh = await loadPdsPlateShape(resolve(root, 'source', profile.path), profile.grid);
+  const material = (await json('source/manifest.json')).inputs.find(input => input.id === 'model-surface');
+  assert.equal(material.recipe.kind, 'plate-coverage');
+  assert.deepEqual(await preparePdsConstraintMap(mesh, material.recipe), await readFile(resolve(root, 'source', material.path)));
+  for (const [i, triangle] of mesh.indices.entries()) {
+    const center = [0, 1, 2].map(axis => triangle.reduce((sum, vertex) => sum + mesh.positions[vertex][axis], 0) / 3);
+    const longitude = Math.atan2(center[1], center[0]) * 180 / Math.PI;
+    const latitude = Math.atan2(center[2], Math.hypot(center[0], center[1])) * 180 / Math.PI;
+    const hit = mesh.hit(longitude, latitude);
+    assert.ok(hit);
+    assert.equal(mesh.faceProvenance[hit.faceId] === 0, mesh.faceProvenance[i] === 0,
+      'radial material projection must not exchange observed terrain and estimated plates at source centers');
+  }
+});
 
 test('Wild 2 closes the nucleus using published completion vertices and retains source provenance', async () => {
   const config = await json('source/preparation/terrestrial.json'), profile = config.geometry.radialTerrain;

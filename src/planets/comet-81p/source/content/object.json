@@ -4,7 +4,7 @@
   "id": "comet-81p",
   "displayName": "Wild 2",
   "panel": {
-    "introduction": "81P/Wild 2 was visited by Stardust in 2004. This completed NASA PDS model combines measured terrain on about half the nucleus with a fitted ellipsoid on the unseen side. The smooth far side is an estimate.",
+    "introduction": "81P/Wild 2 was visited by Stardust in 2004. This completed NASA PDS model combines measured terrain on about half the nucleus with a fitted ellipsoid on the unseen side. The gray grid marks the estimated surface and its joins.",
     "facts": [
       {
         "id": "mission",
@@ -19,7 +19,7 @@
       {
         "id": "coverage",
         "label": "Terrain coverage",
-        "value": "About half observed; unseen side completed with a fitted ellipsoid"
+        "value": "About half observed; gray grid marks the estimated completion"
       },
       {
         "id": "resolution",
@@ -31,7 +31,7 @@
       {
         "id": "rendering",
         "label": "Presentation",
-        "value": "Completed PDS shape model: measured terrain covers about half the nucleus; the unseen side uses the archive’s fitted ellipsoid and joining faces. The smooth far side is estimated, not observed terrain. Neutral gray is a model material, not albedo. Orientation is fixed at an arbitrary phase."
+        "value": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
       },
       {
         "id": "scale",
@@ -50,9 +50,9 @@
       {
         "id": "model",
         "label": "Completed shape model",
-        "description": "Completed PDS shape model: measured terrain covers about half the nucleus; the unseen side uses the archive’s fitted ellipsoid and joining faces. The smooth far side is estimated, not observed terrain. Neutral gray is a model material, not albedo. Orientation is fixed at an arbitrary phase.",
-        "title": "Completed PDS shape model: measured terrain covers about half the nucleus; the unseen side uses the archive’s fitted ellipsoid and joining faces. The smooth far side is estimated, not observed terrain. Neutral gray is a model material, not albedo. Orientation is fixed at an arbitrary phase.",
-        "detail": "Measured + estimated",
+        "description": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
+        "title": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
+        "detail": "Grid = estimated",
         "thumbnail": "/scenes/comet-81p/comet-81p-model-thumbnail.webp",
         "surface": "comet-81p-model-surface@2x.webp",
         "poles": "comet-81p-model-poles@2x.webp",
