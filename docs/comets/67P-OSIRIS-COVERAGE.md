@@ -61,11 +61,50 @@ observations do not provide a global photographic map.
 
 ## Verification
 
-Final prepared-asset, source-index and matched browser evidence will be recorded
-here after the production bake and checks complete. The accepted baseline uses
-surface bank SHA-256 `79c63db7373b3d73748ec8d6151b483a0e11da9b2f13f001227e4a7c8bef0b37`.
-Six baseline camera views and actual loaded bytes are retained under
-`output/comet-intake/67p-coverage/` and `output/playwright/67p-coverage-before-*`.
+[The evidence record](evidence/osiris-coverage.json) binds source restoration,
+prepared hashes, camera calibration, overlap gains, source-index counts and
+browser readbacks. [Six matched views](evidence/osiris-coverage-comparison.png)
+show the previous image bank, the mosaic, and absolute RGB differences. Each
+pair uses the same production renderer, camera matrix, geometry, viewport and
+DPR; the original bank was restored from its content-addressed public URL.
+Both image hashes are checked before every capture. This is an atlas comparison,
+not a native-renderer parity claim.
+
+The final atlas accepts 1,016,054 of 1,782,240 triangle-interior texels (57.01%).
+This differs from the 56.04% area estimate because atlas texels weight each face's
+raster layout rather than its physical area. The four selected-source counts
+are 250,119, 266,512, 308,502 and 190,921 in chronological order. Display gains
+are 1.0000, 1.0190, 1.0807 and 1.1630. The separate 348,217-byte source-index
+JSON decodes losslessly to 4,128,768 one-byte codes, including atlas bleed.
+Geometry and the default model banks remain byte-for-byte unchanged.
+
+On the 176-object mosaic snapshot, source verification and the full production
+build passed. `NODE_OPTIONS=--max-old-space-size=8192 pnpm test` passed package,
+renderer, all 1,430 platform and all 234 shell tests. The initial unmodified
+command exhausted Node's default 4 GiB heap in two registry-wide audits; no
+assertion or tolerance was changed. All 352 object/DPR DOM cases, both six-hop
+navigation sequences, and all 13 67P conformance cases passed. Conformance used
+the development server because its harness requires development diagnostics;
+the DOM sweep and the dedicated retained-mosaic captures used the production
+build. The source/mosaic checks also cover valid darkness, disconnected overlap
+fits, excessive gains, source identity and the lossless provenance raster.
+
+Main then added Kiviuq and Albiorix in `554c9811`. The merge regenerated 67P's
+shared marker binding through official preparation. The other compiled
+transports were serialized only when their bytes matched the checked-in hashes;
+all 178 passed. Final integration passed global source verification, package
+tests, 34 focused source/geometry/marker tests, runtime ownership and leaf-layout
+checks for 67P and both moons, and a production build using those verified
+transports. Six production object/DPR cases passed for the three affected
+objects. The final 67P capture again proves 1,000 retained facets, unchanged
+geometry, identical high-density image banks at DPR 1 and 2, both lighting
+states, no runtime errors and no requests during the drag.
+
+The full aggregate suites were not repeated after the two-object registry
+expansion; the preceding full passes and final focused integration checks are
+recorded separately. The six newly required source files passed fresh public
+restoration. All three changed runtime assets were published, and all 34 67P
+inventory files passed a clean public installation with byte/hash verification.
 
 Image credit: ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA,
 CC BY-SA 4.0. RMOC geometry retains CC BY-SA 3.0 IGO. See the package NOTICE.
