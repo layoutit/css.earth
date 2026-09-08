@@ -4,7 +4,7 @@ The selected [PDS Rosetta Lutetia shape release](https://pdssbn.astro.umd.edu/ho
 
 ## Views and source interpretation
 
-**Shape** uses a uniform neutral display material over the released geometry. It is not a photographic texture, measured albedo, natural color or a claim about small-scale surface brightness. Prepared flood and optional Shadows lighting expose the model's relief.
+**Shape** uses a uniform neutral display material over the released geometry. It is not a photographic texture, measured albedo, natural color or a claim about small-scale surface brightness. Prepared directional lighting exposes the model's relief. Shadows defaults on; switching it off shows the unlit neutral material.
 
 **Elevation** colors source radius minus a 49 km reference sphere, in kilometers, from −16 to +16 km. This includes the body's broad irregular shape; it is not height above a gravitational equipotential. The original mesh is sampled on a 721×361 angular grid for this display; that interpolation does not add source measurements. Cartographic relief uses this same scalar field, with a 49,000 m reference radius. Mesh geometry and the scalar map use the same published body frame.
 
