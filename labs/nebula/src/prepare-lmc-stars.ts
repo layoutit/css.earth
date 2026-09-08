@@ -67,11 +67,11 @@ export function prepareCatalogue(table: string, frame: DensityVolumeFrame, wcs: 
     const colorIndexBv = Number.isFinite(b) ? b - magnitude : null;
     const rgb = catalogueColor(NaN, colorIndexBv ?? NaN);
     // Authored point exposure/size, not physical stellar diameter or calibrated radiance.
-    const relativeFlux = 10 ** (-.4 * (magnitude - 9));
+    const relativeFlux = 10 ** (-.4 * (magnitude - 10));
     stars.push({ id: `Bonanos2009:${name}`, raDeg, decDeg, magnitude, colorIndexBv,
       spectralType: line.slice(273, 305).trim(), positionUnits, cloudSignal, cloudPartIds,
-      sizePx: Math.min(3, .9 + 1.8 * relativeFlux ** .25),
-      colorCss: '#' + rgb.map(v => v.toString(16).padStart(2, '0')).join(''), opacity: Math.min(1, .25 + .75 * relativeFlux ** .2) });
+      sizePx: Math.min(4, Math.max(.65, 4 * relativeFlux ** .25)),
+      colorCss: '#' + rgb.map(v => v.toString(16).padStart(2, '0')).join(''), opacity: .35 + .65 * Math.min(1, relativeFlux ** .2) });
   }
   return stars.sort((a, b) => a.magnitude - b.magnitude || a.id.localeCompare(b.id));
 }

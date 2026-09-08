@@ -111,6 +111,21 @@ test('parser rejects mismatched frames, nonfinite geometry, duplicate identifier
     (v: PreparedLmcStars) => {v.stars[0].cloudPartIds = [];},
   ]) {const changed=structuredClone(p);mutate(changed);assert.throws(()=>parsePreparedLmcStars(changed,p.frame));}
 });
+test('published magnitude drives a visible diameter and light hierarchy in the prepared catalogue', async () => {
+  const { stars } = await load();
+  function assertHierarchy(points: typeof stars) {
+    const sorted = [...points].sort((a, b) => a.magnitude - b.magnitude);
+    assert.ok(sorted[0].sizePx / sorted.at(-1)!.sizePx > 3, 'Bright and faint stars need distinct diameters');
+    for (let i = 1; i < sorted.length; i++) {
+      assert.ok(sorted[i-1].sizePx >= sorted[i].sizePx);
+      assert.ok(sorted[i-1].opacity >= sorted[i].opacity);
+    }
+    const light = (s: typeof stars[number]) => s.sizePx ** 2 * s.opacity;
+    assert.ok(light(sorted[0]) / light(sorted.at(-1)!) > 20, 'Bright stars need visibly more integrated light');
+  }
+  assertHierarchy(stars);
+  assert.throws(() => assertHierarchy(stars.map(s => ({ ...s, sizePx: 2 }))), /distinct diameters/);
+});
 class Element {
   style: any = {}; dataset: any = {}; children: Element[] = []; parent?: Element; clientWidth=1000;clientHeight=800;
   ownerDocument = { createElement: () => new Element() };
@@ -134,6 +149,18 @@ test('actual catalogue projects through shared camera as retained CSS points, wi
     close(y,-2000*s.positionUnits[1]/(radius+s.positionUnits[2])-s.sizePx/2,1e-8);
     assert.ok(!/filter:|gradient|mask:|blend-mode|clip-path/.test(node.style.cssText));
   }
+  for (const scale of [.5, 2, 3]) {
+    mount.setSize(scale); mount.publish(frame);
+    payload.stars.forEach((s, i) => {
+      const node = root.children[i], size = s.sizePx * scale;
+      close(parseFloat(node.style.width), size); close(parseFloat(node.style.height), size);
+      if (node.style.visibility === 'hidden') return;
+      const [x,y] = node.style.transform.slice(10,-1).split(',').map((v: string) => parseFloat(v));
+      close(x + size / 2, 2000*s.positionUnits[0]/(radius+s.positionUnits[2]), 1e-8);
+      close(y + size / 2, -2000*s.positionUnits[1]/(radius+s.positionUnits[2]), 1e-8);
+    });
+  }
+  for (const invalid of [NaN, Infinity, 0, 3.1]) assert.throws(() => mount.setSize(invalid));
   mount.setVisible(false); assert.equal(root.style.display,'none');mount.setVisible(true);mount.publish(frame);
   assert.deepEqual(root.children,initial);assert.equal(mount.count,943);
   mount.destroy(); assert.equal(host.children.length,0);

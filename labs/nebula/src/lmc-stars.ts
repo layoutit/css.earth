@@ -58,7 +58,7 @@ export function mountPreparedLmcStars({ host, payload, before = null }: {
     root.append(node); return node;
   });
   host.insertBefore(root, before);
-  let enabled = true, destroyed = false, visibleCount = 0;
+  let enabled = true, destroyed = false, visibleCount = 0, sizeScale = 1;
   const support = new Float64Array(payload.stars.length).fill(1);
   const publish = ({ world, viewport }: { world: WorldCameraPose; viewport: WorldCameraViewport }) => {
     if (destroyed) return;
@@ -72,12 +72,13 @@ export function mountPreparedLmcStars({ host, payload, before = null }: {
     visibleCount = 0;
     payload.stars.forEach((star, index) => {
       const p = projectPreparedPoint(star.positionUnits, local.positionUnits, rotation, focal, ox, oy), node = nodes[index]!;
-      const shown = support[index]! > 0 && p.depth > 0 && Math.abs(p.x) < halfWidth + star.sizePx && Math.abs(p.y) < halfHeight + star.sizePx;
+      const size = star.sizePx * sizeScale;
+      const shown = support[index]! > 0 && p.depth > 0 && Math.abs(p.x) < halfWidth + size && Math.abs(p.y) < halfHeight + size;
       node.style.visibility = shown ? '' : 'hidden';
       if (shown) {
         visibleCount++;
         // CSS Y and the parent east-left reflection follow the same convention as the existing point renderer.
-        node.style.transform = `translate(${p.x - star.sizePx / 2}px,${p.y - star.sizePx / 2}px)`;
+        node.style.transform = `translate(${p.x - size / 2}px,${p.y - size / 2}px)`;
       }
     });
     root.dataset.visibleStars = String(enabled ? visibleCount : 0);
@@ -85,6 +86,13 @@ export function mountPreparedLmcStars({ host, payload, before = null }: {
   return Object.freeze({ root, count: payload.stars.length,
     magnitudeRange: [Math.min(...payload.stars.map(s => s.magnitude)), Math.max(...payload.stars.map(s => s.magnitude))] as [number, number],
     publish,
+    setSize(value: number) {
+      if (!Number.isFinite(value) || value < .5 || value > 3) throw new TypeError('Star size must be between 50% and 300%.');
+      sizeScale = value;
+      payload.stars.forEach((star, index) => {
+        nodes[index]!.style.width = nodes[index]!.style.height = `${star.sizePx * sizeScale}px`;
+      });
+    },
     setCloudSupport(filter: CloudDensityFilter, partIds: readonly string[]) {
       const valid = validateCloudDensityFilter(filter), selected = new Set(partIds);
       payload.stars.forEach((star, index) => {

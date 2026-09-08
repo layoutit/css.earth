@@ -31,7 +31,9 @@ All sampling and image processing run in the local Node preparation service, not
 
 Oblique sightlines mix different photo columns, which can make the result brighter and less saturated. The source textures have similar saturation across all three banks. Brightness attenuation can reduce the extra light, but cannot restore the mixed colors; see [the measured color diagnosis](view-direction-color.md).
 
-Bright catalog stars have a separate on/off switch and brightness control. Their sky positions come from the cited catalog; their depths sample the overlap of actual reconstructed cloud emission and simulation stellar density along those sightlines. They occupy modeled cloud volume rather than its fitted plane. This display placement does not recover individual distances or establish physical membership in emitting structures.
+Bright catalog stars have separate on/off, brightness and size controls. Published V magnitude drives both prepared diameter and opacity: the current sample spans approximately 1–3.9 pixels at 100% size. The visible Size slider scales diameters from 50–300% without moving star centers. These are display sizes, not physical stellar diameters. All three controls are saved per reconstruction; older saved settings retain their brightness and start at 100% size.
+
+Their sky positions come from the cited catalog; their depths sample the overlap of actual reconstructed cloud emission and simulation stellar density along those sightlines. They occupy modeled cloud volume rather than its fitted plane. This display placement does not recover individual distances or establish physical membership in emitting structures.
 
 Stars follow the same projected cutoff and edge softness as their cloud support, including the complementary removed-signal preview. Hiding all supporting structures hides a star; restoring them restores the retained point. Their positions stay fixed. Cloud brightness and star brightness remain independent.
 

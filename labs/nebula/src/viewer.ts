@@ -576,7 +576,11 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   return Object.freeze({ setSubject, reset: () => currentMode === 'density' ? referenceView() : reset(), loadOverlayCatalogue, setOverlay, setOverlayPlacement, getOverlayState,
     referenceView, fitCloud, applyToneResources, applyCloudDensityResources,
     getStars: () => starInfo,
-    setStars(options: CloudStarOptions) { if (starLayer) { starLayer.setVisible(options.enabled); starLayer.root.style.opacity = String(options.brightness); } },
+    setStars(options: CloudStarOptions) {
+      if (!starLayer) return;
+      starLayer.setVisible(options.enabled); starLayer.root.style.opacity = String(options.brightness);
+      starLayer.setSize(options.size); publish();
+    },
     getCloudParts: () => cloud?.catalogue ?? null,
     setCloudSelection(ids: readonly string[]) {
       if (!cloud) throw new Error('This reconstruction has no prepared contribution bank.');
