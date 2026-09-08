@@ -124,3 +124,45 @@ and this follow-up continues separately from the merged PR.
 Merged main `c6850e28` is integrated in follow-up commit `a47ced48`. All source
 and prepared asset files hashed by the integrated Sun-route capture match after
 that integration; newly merged 67P assets are outside this route.
+
+## Further experiments excluded from the follow-up
+
+Static layer probes tested retiring zero-weight volume axes, retiring zero-opacity
+optical copies, and making the inner 3D anchors nonempty. Axis retirement did not
+reduce content-layer count or area. Zero-opacity copy retirement removed only
+non-content layers, and nonempty inner anchors added layers without reducing
+content area. No product changes from these probes were retained. Camera/view and
+published-style snapshots accompany the nonempty-anchor checks; those snapshots
+were stationary during each comparison. These are static diagnostic probes, not
+timed performance traces.
+
+Published Menger also declares `will-change: transform` on its moving scene root.
+A browser-only test of that declaration on the three volume scene roots preserved
+the static images but did not improve the timed route. Its synchronized capture,
+`surface-root-promotion`, has recorder ID
+`75055ede-273c-4b89-a3a2-ea0aa9063342`, no errors/HMR/trace loss, 58 microseconds
+of clock drift, and video PTS error below 0.50 ms. Planetary-band rAF intervals over
+25 ms increased from 111/565 in the integrated candidate to 150/567; the maximum
+interval remained 100 ms. Injected CSS is recorded explicitly in its report.
+This is not a product change. Promoting the completed projection's opacity also
+added a full-viewport content layer in static probes and did not stabilize every
+rotated image.
+
+A DOM-owned layer census at galaxy distance attributes 515 retained content layers
+to the detailed Sun, 56 to the active volume, four to the sky, and two to other
+content. The detailed Sun remains visible/block in CSS at marker LOD, with its
+scene translated to approximately -1.1e15 CSS pixels. These are retained
+compositor-layer counts and unscaled bounds, not counts of actually painted
+pixels or GPU memory measurements.
+
+The missing retirement cannot be repaired with a simple display switch. A native
+zoom/image probe removes 515 content layers by hiding the detailed roots, but at
+2.89 px physical Sun diameter the image changes by up to 232 channel levels. At
+0.0723 px the maximum difference is two levels. Camera/view state is identical
+before and after each toggle. The existing point-source proxy therefore does not
+fully replace the detail's appearance at the generic marker-stage boundary.
+The probe is excluded. A future shared representation handoff must preserve the
+photosphere/proxy transition, node identity, resource closure and re-entry; this
+PR does not hide visible geometry to claim a frame-rate gain. Evidence is under
+`output/playwright/detail-retirement-probe/` and
+`output/playwright/volume-layer-owners/`.
