@@ -26,6 +26,7 @@ export function createWorldContextObjectRuntime({ definition, context, frame }: 
     worldContext: { frame: selectedFrame, bodyRadiusUnits: selectedFrame.bodyRadiusM / selectedFrame.metersPerUnit,
       kilometersPerUnit: selectedFrame.metersPerUnit / 1000,
       maximumExtentUnits: plan.camera.maximumDistanceM / selectedFrame.metersPerUnit,
+      detailRetirement: { originM: plan.focus.positionM, distanceM: plan.volume.fullDistanceM },
       framingReferenceZoom: isFocus ? plan.camera.framingReferenceZoom
         : definition.camera.defaultZoom * definition.camera.logicalBodyDiameter / 2 /
           (selectedFrame.bodyRadiusM / selectedFrame.metersPerUnit),

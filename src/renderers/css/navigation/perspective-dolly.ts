@@ -18,6 +18,9 @@ export interface PerspectiveWorldContext {
   readonly framingReferenceZoom?: number;
   /** Optional authored cubic-sky registration for a physical observer. */
   readonly sceneRegistration?: string;
+  /** The enclosing prepared context has no contribution beyond this distance.
+   * This only retires unresolved detail, never a nearby resolved object. */
+  readonly detailRetirement?: { readonly originM: PositionM; readonly distanceM: number };
   readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 }
 export interface PerspectiveDollyOptions { cameraPlan: CameraPlan; heliocentric: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; skyElement: HTMLElement; stage: HTMLElement; viewport?: CameraViewport; }
@@ -196,6 +199,11 @@ export function createPerspectiveDolly({
       !cameraElement?.style || !sceneElement?.style || !skyElement ||
       (heliocentric !== null && !heliocentric.sunRoot?.style) || !stage) {
     throw new TypeError("Perspective dolly requires a prepared physical camera context.");
+  }
+  const retirement = worldContext?.detailRetirement;
+  if (retirement && (!(retirement.distanceM > 0) || !Number.isFinite(retirement.distanceM) ||
+      retirement.originM.length !== 3 || !retirement.originM.every(Number.isFinite))) {
+    throw new TypeError('Detail retirement requires a finite prepared context extent.');
   }
   const levelOfDetail = cameraPlan.levelOfDetail;
   const framingReferenceZoom = worldContext?.framingReferenceZoom ?? cameraPlan.defaultZoom;
@@ -466,7 +474,6 @@ export function createPerspectiveDolly({
         publishedSceneTransform = transform;
         transformWrites += 1;
       }
-      sceneElement.hidden = projection === null ? false : !projection.body.visible;
       if (projection && heliocentric) {
         heliocentric.setOrbitOpacity(orbitLineOpacity(
           cameraPlan.orbitLineFade,
@@ -487,6 +494,13 @@ export function createPerspectiveDolly({
       );
       projectedBody = projection?.body ?? genericBody ?? null;
       if (projectedBody) lod = levelOfDetailFor(levelOfDetail, projectedBody.silhouetteDiameter);
+      // The enclosing context owns its far-scale handoff. A marker LOD alone
+      // does not mean an opaque proxy covers this mesh. Wait until the context
+      // has fully retired, and keep nearby resolved detail even outside it.
+      const contextRetired = retirement && publishedWorld && lod.stage === 'marker' &&
+        Math.hypot(...publishedWorld.pose.positionM.map((value, axis) => value - retirement.originM[axis]!)) >= retirement.distanceM;
+      const hidden = Boolean(contextRetired || (projection && !projection.body.visible));
+      if (sceneElement.hidden !== hidden) sceneElement.hidden = hidden;
       // Raw prepared scene coordinates to the physical eye. Overlay and page
       // consumers compose their own retained body transforms after this matrix.
       const scale = cameraPlan.sceneScale;

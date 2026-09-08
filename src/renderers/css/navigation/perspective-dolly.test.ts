@@ -109,3 +109,46 @@ it('overview centering preserves the current view and only converges while dolly
   dolly.camera.update({ distance: dolly.camera.state.distance * 2 });
   expect(dolly.bodyCenter()).toEqual([200, 0, 2000], 'A body behind the eye cannot jump across the camera');
 });
+
+
+it('retires only unresolved detail after its enclosing context ends, and restores the same scene', () => {
+  const view = { getComputedStyle: () => ({ perspective: '1247px', perspectiveOrigin: '720px 450px' }) };
+  const make = () => ({ style: {}, ownerDocument: { defaultView: view },
+    getBoundingClientRect: () => ({ width: 1440, height: 900, x: 0, y: 0, left: 0, top: 0 }) });
+  let hidden = false, visibilityWrites = 0;
+  const element = { style: {} as Record<string, string>, get hidden() { return hidden; },
+    set hidden(value: boolean) { hidden = value; visibilityWrites++; } };
+  const frame = { referenceFrame: 'test', epochJdTt: 1, originM: [1e8, 0, 0],
+    presentationToReference: [1,0,0,0,1,0,0,0,1], metersPerUnit: 1, bodyRadiusM: 100 };
+  const create = (originM: number[]) => createPerspectiveDolly({ cameraPlan: scene.camera, heliocentric: null,
+    worldContext: { frame: { ...frame, originM }, bodyRadiusUnits: 100, kilometersPerUnit: .001,
+      maximumExtentUnits: 1e9, detailRetirement: { originM: frame.originM, distanceM: 1e7 } },
+    cameraElement: make(), skyElement: make(), stage: make(), sceneElement: element,
+  } as unknown as Parameters<typeof createPerspectiveDolly>[0]);
+  const dolly = create(frame.originM);
+  const identity = { m11: 1, m21: 0, m31: 0, m12: 0, m22: 1, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;
+  dolly.setBodyCenter([0, 0, -1e6]);
+  expect(dolly.publish(identity, 'rotateZ(0deg)').levelOfDetail!.stage).toBe('marker');
+  expect(hidden).toBe(false, 'Marker LOD is not proof of a complete proxy');
+  dolly.setBodyCenter([0, 0, -1e7]);
+  const far = dolly.publish(identity, 'rotateZ(0deg)');
+  expect(hidden).toBe(true);
+  expect(visibilityWrites).toBe(1);
+  const firstTransform = element.style.transform;
+  dolly.setBodyCenter([0, 0, -2e7]);
+  const further = dolly.publish(identity, 'rotateZ(0deg)');
+  expect(element.style.transform).not.toBe(firstTransform);
+  expect(further.projection.eyeFromScene[14]).toBe(-2e7);
+  expect(far.projection.eyeFromScene[14]).toBe(-1e7);
+  expect(visibilityWrites).toBe(1, 'Hidden camera publication does not churn visibility');
+  dolly.setBodyCenter([0, 0, -1e6]);
+  dolly.publish(identity, 'rotateZ(0deg)');
+  expect(hidden).toBe(false);
+  expect(visibilityWrites).toBe(2);
+  // An object outside this context's extent can still fill the viewport.
+  // Its local detail must not be retired just because the focus is far away.
+  const outside = create([1e10, 0, 0]);
+  outside.setBodyCenter([0, 0, -1200]);
+  expect(outside.publish(identity, 'rotateZ(0deg)').levelOfDetail!.stage).toBe('geometry');
+  expect(hidden).toBe(false);
+});
