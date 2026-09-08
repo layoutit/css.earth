@@ -494,7 +494,7 @@ finally{
   const searchCallbacks=(report.metrics?.searches??[]).filter(query=>query.outcome==='results').map(query=>query.inputToCallbackMs).sort((a,b)=>a-b);
   report.summary={functionalPassed:report.functionalPassed,visualStatus:report.visualStatus,
     traceStatus:!trace?'not-recorded':!report.traceFile?'invalid-phase-not-reached':report.traceDataLoss?'invalid-data-loss':'captured-awaiting-analysis',
-    actions:report.actions.length,interactionCallbackP95:callbacks[Math.floor(callbacks.length*.95)],interactionCallbackMax:callbacks.at(-1),interactionCallbacksOver100:callbacks.filter(ms=>ms>100).length,searchResultCallbackP95:searchCallbacks[Math.floor(searchCallbacks.length*.95)],frameP95:intervals[Math.floor(intervals.length*.95)],worstFrame:intervals.at(-1),framesOver100:intervals.filter(ms=>ms>100).length,pageErrors:report.errors.length};
+    actions:report.actions.length,frameCallbackIntervalP95:callbacks[Math.floor(callbacks.length*.95)],frameCallbackIntervalMax:callbacks.at(-1),frameCallbackIntervalsOver100:callbacks.filter(ms=>ms>100).length,searchResultCallbackP95:searchCallbacks[Math.floor(searchCallbacks.length*.95)],frameP95:intervals[Math.floor(intervals.length*.95)],worstFrame:intervals.at(-1),framesOver100:intervals.filter(ms=>ms>100).length,pageErrors:report.errors.length};
   await writeFile(resolve(output,'report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({output,...report.summary,error:report.error}));
 }
 if(!report.functionalPassed)process.exitCode=1;

@@ -1,190 +1,54 @@
-import assert from "node:assert/strict";
-import { mkdir, writeFile } from "node:fs/promises";
-import { chromium } from "playwright";
-
-const base = process.argv[2] ?? "http://127.0.0.1:4228";
-const selectedCase = process.argv.find(arg => arg.startsWith("--case="))?.slice(7);
-const output = new URL(`../../../../output/playwright/selection-cards-${Date.now()}/`, import.meta.url);
-await mkdir(output, { recursive: true });
-const browser = await chromium.launch({ channel: "chrome", headless: true });
-const report = { base, browser: browser.version(), selectedCase: selectedCase ?? null, cases: [] };
-try {
-  for (const [label, viewport, dpr, mobile] of [
-    ["desktop-1", { width: 1440, height: 1000 }, 1, false],
-    ["desktop-2", { width: 1440, height: 1000 }, 2, false],
-    ["mobile-2", { width: 390, height: 844 }, 2, true],
-  ].filter(([label]) => !selectedCase || label === selectedCase)) {
-    const context = await browser.newContext({ viewport, deviceScaleFactor: dpr, isMobile: mobile, hasTouch: mobile,
-      recordVideo: { dir: output.pathname, size: viewport } });
-    const page = await context.newPage(), errors = [], record = { label, dpr, screenshots: [], errors };
-    report.cases.push(record);
-    page.on("pageerror", error => errors.push(error.message));
-    const requests = []; page.on("request", request => requests.push(request.url()));
-    const cdp = await context.newCDPSession(page); await cdp.send("Performance.enable");
-    record.network = { requests };
-    await page.addInitScript(() => {
-      window.__journeyMetrics = { longTasks: [], peaks: {} };
-      new PerformanceObserver(list => { for(const entry of list.getEntries()) window.__journeyMetrics.longTasks.push(entry.duration); }).observe({type:"longtask",buffered:true});
-      setInterval(() => {
-        for(const [id, stats] of Object.entries(window.__earth?.runtime.pages() ?? {})) {
-          const peak = window.__journeyMetrics.peaks[id] ??= {loads:0,decodedBytes:0,retained:0,poolSize:stats.poolSize,byteBound:stats.decodedPageByteBound};
-          peak.loads = Math.max(peak.loads,stats.activeLoads); peak.decodedBytes = Math.max(peak.decodedBytes,stats.reservedDecodedBytes);
-          peak.retained = Math.max(peak.retained,stats.retained.length);
-        }
-      },100);
-    });
-    const settlePages = layer => page.waitForFunction(layer => {
-      const s=window.__earth.runtime.pages()[layer];
-      return !s.pendingSelection && !s.activeLoads && !s.index.activeLoads && s.desired.length > 0 && s.desired.every(key=>s.retained.some(slot=>slot.key===key&&slot.published));
-    },layer,{timeout:120000}).catch(async error => {
-      record.unsettled = { layer, pages: await page.evaluate(() => window.__earth.runtime.pages()) };
-      console.error(JSON.stringify({ label, unsettled: record.unsettled })); throw error;
-    });
-    const settleNoise = async () => { await settlePages("geographic"); await settlePages("city"); };
-    const saveMetrics = async name => {
-      const metrics = await page.evaluate(() => window.__journeyMetrics);
-      for (const peak of Object.values(metrics.peaks)) { assert.ok(peak.retained<=peak.poolSize); assert.ok(peak.decodedBytes<=peak.byteBound); }
-      (record.metrics ??= []).push({name,...metrics,performance:(await cdp.send("Performance.getMetrics")).metrics});
-    };
-    const capture = async name => {
-      const path = new URL(`${label}-${name}.png`, output).pathname;
-      await page.screenshot({ path }); record.screenshots.push({ name, path });
-    };
-    const flight = () => page.waitForFunction(() => document.querySelector("[data-entity-card]").ariaBusy !== "true" && !window.__earth.camera.stats().dragInertia.destinationFlyTo.active);
-    const savedCamera = () => page.evaluate(() => {
-      const { zoom, pose } = window.__earth.camera.state();
-      return { zoom, matrix: pose.scene.slice(9, -1).split(",").map(Number) };
-    });
-    const verifyCamera = async expected => {
-      const actual = await savedCamera();
-      assert.ok(Math.abs(actual.zoom - expected.zoom) < 1e-6, "History restores the saved zoom");
-      actual.matrix.forEach((value, index) => assert.ok(Math.abs(value - expected.matrix[index]) < 1e-6, "History restores the saved camera pose"));
-    };
-    const select = async (name, id) => {
-      await page.locator(".planet-sidebar-search").fill(name);
-      await page.locator(`[data-destination-id="${id}"]`).click();
-      await page.waitForFunction(id => document.querySelector("[data-entity-card]").dataset.entityId === id, id);
-      await flight();
-      await page.waitForFunction(() => document.querySelector("[data-entity-card]").dataset.introductionState === "ready", null, { timeout: 20000 });
-      assert.equal(await page.locator(".planet-destination-status").isVisible(), false);
-      assert.ok((await page.locator(".planet-introduction").innerText()).length > 40);
-      const provenance = JSON.parse(await page.locator("[data-entity-card]").getAttribute("data-introduction-source"));
-      assert.match(provenance.wikidata, /^Q\d+$/u);
-      assert.ok(provenance.revision > 0);
-      assert.equal(await page.locator('.planet-resource-row[href="' + provenance.url + '"]').count(), 1);
-      assert.equal(await page.locator("[data-entity-card]").count(), 1);
-      assert.equal(await page.locator("[data-entity-card]").isVisible(), true);
-      assert.equal(await page.locator('.planet-stage').count(), 1);
-    };
-    const noise = page.locator('button[name="lens"][value="buenos-aires-noise"]');
-    try {
-      await page.goto(`${base}/earth/`); await page.waitForFunction(() => window.__earth?.ready);
-      await page.evaluate(() => { window.__cardScene = document.querySelector(".planet-stage"); window.__cardNodes = [...document.querySelector("[data-entity-card]").querySelectorAll("*")]; });
-      assert.equal(await noise.isVisible(), false);
-      assert.equal(await page.evaluate(() => window.__earth.selectLens("buenos-aires-noise")), false);
-      assert.equal(requests.some(url=>url.includes("/scenes/earth/geographic-lens-") || url.includes("earth-noise-day-")),false);
-      await capture("01-earth");
-      await select("Argentina", "country:AR");
-      assert.equal(await noise.isVisible(), false);
-      assert.equal(await page.locator(".planet-title").getAttribute("aria-label"), "Argentina");
-      await capture("02-argentina");
-      await select("Buenos Aires", "3435910");
-      assert.equal(await noise.isVisible(), true);
-      assert.equal(await page.locator('[data-entity-parent="country:AR"]').textContent(), "Argentina");
-      assert.equal(requests.some(url=>url.includes("/scenes/earth/geographic-lens-")),false);
-      await settlePages("city"); await capture("03-buenos-aires");
-      const cityCamera = await page.evaluate(() => window.__earth.camera.state());
-      await noise.click();
-      await page.waitForFunction(() => {
-        const state = window.__earth.runtime.pages().geographic;
-        return state.desired.length > 0 && !state.pendingSelection && !state.activeLoads &&
-          state.desired.every(key => state.retained.some(slot => slot.key === key && slot.published));
-      }, null, { timeout: 90000 });
-      assert.equal(await noise.getAttribute("aria-pressed"), "true");
-      assert.equal(await page.evaluate(() => window.__earth.camera.stats().dragInertia.destinationFlyTo.active), false, "A local lens must not start another flight");
-      assert.deepEqual(await page.evaluate(() => window.__earth.camera.state()), cityCamera);
-      assert.equal(await page.evaluate(() => window.__earth.selectLens("topography")), false, "Planet lenses cannot replace a place lens inside the place card");
-      await settleNoise();
-      await capture("04-buenos-aires-noise");
-      await page.locator('button[name="lens"][value="normal"]').click();
-      await page.waitForFunction(() => window.__earth.lens().id === "normal");
-      assert.equal(await page.locator('[data-lens-legend="buenos-aires-noise"]').isVisible(), false);
-      await noise.click(); await page.waitForFunction(() => window.__earth.lens().id === "buenos-aires-noise");
-      await page.locator('[data-entity-parent="country:AR"]').click(); await flight();
-      await page.waitForFunction(() => window.__earth.runtime.destination()?.id === "country:AR");
-      assert.equal(await page.evaluate(() => window.__earth.lens().id), "normal");
-      assert.equal(await noise.isVisible(), false);
-      await select("Tokyo", "1850147");
-      assert.equal(await noise.isVisible(), false);
-      assert.equal(await page.evaluate(() => window.__earth.selectLens("buenos-aires-noise")), false);
-      assert.deepEqual(await page.locator('[data-lens-option]:not([hidden]) button[name="lens"]').evaluateAll(buttons => buttons.map(button => button.value)), ["normal"]);
-      await settlePages("city"); await capture("05-tokyo");
-      await page.locator('[data-entity-parent="earth"]').click();
-      await page.waitForFunction(() => document.querySelector("[data-entity-card]").dataset.entityId === "earth"); await flight();
-      assert.equal(await page.locator(".planet-information-panel").isVisible(), true);
-      assert.equal(await noise.isVisible(), false);
-      assert.equal(await page.evaluate(() => window.__earth.runtime.destination()), null);
-      await page.locator('.planet-lenses').evaluate(panel => { panel.open = true; });
-      await page.locator('button[name="lens"][value="topography"]').click();
-      await page.waitForFunction(() => window.__earth.lens().id === "topography");
-      record.cardRetained = await page.evaluate(() => [...document.querySelector("[data-entity-card]").querySelectorAll("*")].every((node,index) => node === window.__cardNodes[index]));
-      assert.equal(record.cardRetained, true);
-      record.retained = await page.evaluate(() => window.__cardScene === document.querySelector(".planet-stage") && window.__earth.assertStableDomIdentity());
-      assert.equal(record.retained, true);
-      await saveMetrics("retained-city-journey");
-      await select("Buenos Aires", "3435910"); await noise.click(); await settleNoise();
-      const surface = await page.locator(".planet-input-surface").boundingBox();
-      const pointer = { x: surface.x + surface.width * 0.7, y: surface.y + surface.height * 0.4 };
-      await page.mouse.move(pointer.x, pointer.y); await page.mouse.down();
-      await page.mouse.move(pointer.x + 12, pointer.y + 8, { steps: 10 }); await page.mouse.up();
-      await page.waitForFunction(() => !window.__earth.camera.stats().dragInertia.active);
-      await page.waitForTimeout(250);
-      const retainedCamera = await savedCamera();
-      assert.ok(new URL(page.url()).searchParams.has("v"), "City selection shares the camera URL");
-      assert.ok(page.url().includes("place=3435910&lens=buenos-aires-noise"));
-      await page.goBack(); await page.waitForFunction(()=>window.__earth.lens().id==="normal");
-      assert.equal(await page.locator("[data-entity-card]").getAttribute("data-entity-id"),"3435910");
-      await page.goForward(); await settleNoise();
-      await verifyCamera(retainedCamera);
-      assert.equal(await page.evaluate(()=>window.__earth.assertStableDomIdentity()),true);
-      await page.reload();
-      await page.waitForFunction(()=>window.__earth?.ready && document.querySelector("[data-entity-card]").dataset.entityId==="3435910");
-      await flight(); await settleNoise();
-      await verifyCamera(retainedCamera);
-      await capture("06-restored-after-refresh");
-      await page.locator(".planet-sidebar-search").fill("Mars");
-      await page.locator('.planet-object-browser a[href="/mars/"]').click();
-      await page.waitForFunction(()=>window.__mars?.ready);
-      assert.equal(await page.locator(".planet-stage").count(),1);
-      await page.goBack();
-      await page.waitForFunction(()=>window.__earth?.ready && document.querySelector("[data-entity-card]").dataset.entityId==="3435910");
-      await flight(); await settleNoise();
-      await verifyCamera(retainedCamera);
-      await capture("07-returned-from-mars");
-      const normal=page.locator('button[name="lens"][value="normal"]');
-      await normal.click();
-      await context.route("**/geographic-lens-*.json",route=>route.fulfill({status:503,body:"Temporarily unavailable"}));
-      await noise.click(); await page.waitForFunction(()=>window.__earth.runtime.geographicLens().status==="error");
-      assert.match(await page.locator('[data-lens-legend="buenos-aires-noise"] [role="status"]').innerText(),/retry/);
-      assert.equal(await page.evaluate(()=>window.__earth.runtime.pages().geographic.retained.length),0);
-      await capture("08-recoverable-lens-failure");
-      await context.unroute("**/geographic-lens-*.json"); await noise.click(); await settleNoise();
-      await page.evaluate(()=>window.__earth.setView({zoom:8}));
-      await page.waitForFunction(()=>window.__earth.runtime.geographicLens().status==="no-coverage");
-      assert.equal(await page.evaluate(()=>window.__earth.runtime.pages().geographic.retained.length),0);
-      await select("Buenos Aires", "3435910"); await noise.click(); await settleNoise();
-      await page.locator('[data-geographic-attribution]').filter({visible:true}).scrollIntoViewIfNeeded();
-      if (mobile) assert.ok(await page.locator(".explorer-shell-header").evaluate(header => header.getBoundingClientRect().bottom <= 0), "The mobile header must scroll clear of the card and source text");
-      await capture("09-source-and-legend");
-      await saveMetrics("history-refresh-recovery");
-      record.history = {back:true,forward:true,refresh:true,returnFromPlanet:true,retry:true,noCoverage:true};
-      assert.deepEqual(errors, []); record.passed = true;
-    } catch (error) { record.error = error.stack; console.error(error); throw error; } finally {
-      await context.close(); record.video = await page.video().path();
-    }
-  }
-  report.passed = report.cases.length > 0 && report.cases.every(record => record.passed);
-} finally {
-  await browser.close(); await writeFile(new URL("report.json", output), JSON.stringify(report, null, 2));
-  console.log(JSON.stringify({ output: output.pathname, passed: report.passed ?? false, cases: report.cases.map(({label, passed}) => ({label, passed})) }));
-}
+import assert from 'node:assert/strict';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {chromium} from 'playwright';
+import {serveBuiltFixture} from '../../../../tools/test-built-server.mjs';
+const option=(name,fallback)=>process.argv.find(a=>a.startsWith(`--${name}=`))?.slice(name.length+3)??fallback;
+const built=resolve(option('built-dir','dist')),output=resolve(option('output',`output/playwright/selection-cards-${Date.now()}`));await mkdir(output,{recursive:true});
+const report={head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),built,output,
+ qualification:'Production cards, source introductions, hierarchy, lens ownership and history through visible browser controls. Dedicated recovery/input harnesses cover faults and surface movement. No development globals or application camera writes.',
+ harnessSha256:createHash('sha256').update(await readFile(new URL(import.meta.url))).digest('hex'),cases:[]};
+const fixture=await serveBuiltFixture(built);let browser;
+try{
+ browser=await chromium.launch({channel:'chrome',headless:true,args:fixture.launchArgs});report.browser=browser.version();
+ for(const dpr of option('dpr','1,2').split(',').map(Number)){
+  assert.ok([1,2].includes(dpr));const context=await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:dpr}),page=await context.newPage();
+  const row={dpr,checks:[],errors:[]};report.cases.push(row);page.on('pageerror',e=>row.errors.push(e.message));
+  const waitCard=async id=>{await page.waitForFunction(id=>document.documentElement.dataset.ready==='true'&&document.querySelector('[data-entity-card]')?.dataset.entityId===id&&document.querySelector('[data-entity-card]').ariaBusy!=='true',id,{timeout:90000});await page.waitForTimeout(1600);};
+  const lenses=()=>page.locator('[data-lens-option]:visible button[name="lens"]').evaluateAll(nodes=>nodes.map(n=>n.value));
+  const select=async(query,id,expected)=>{
+   await page.locator('.planet-sidebar-search').fill(query);await page.locator(`[data-destination-id="${id}"]:visible`).click();await waitCard(id);
+   assert.deepEqual(await lenses(),expected);
+   await page.waitForFunction(()=>['ready','unavailable'].includes(document.querySelector('[data-entity-card]').dataset.introductionState),null,{timeout:25000});
+   const intro=await page.locator('[data-entity-card]').evaluate(card=>({state:card.dataset.introductionState,source:card.dataset.introductionSource,text:card.querySelector('.planet-introduction')?.textContent}));
+   assert.equal(intro.state,'ready','This source-backed test requires the real introduction service');const source=JSON.parse(intro.source);assert.match(source.wikidata,/^Q\d+$/);assert.ok(source.revision>0&&intro.text.length>40);
+   assert.equal(await page.locator('.planet-resource-row').filter({has:page.locator(`a[href="${source.url}"]`)}).count()+await page.locator(`.planet-resource-row[href="${source.url}"]`).count(),1);
+   row.checks.push({id,lenses:expected,introduction:{...source,text:intro.text}});
+  };
+  try{
+   await page.goto(fixture.url+'/earth/');await waitCard('earth');assert.deepEqual(await lenses(),['normal','night-lights']);
+   await page.evaluate(()=>{window.__cardIdentity=document.querySelector('[data-entity-card]');window.__sceneIdentity=document.querySelector('.polycss-scene');});
+   await select('Argentina','country:AR',['normal']);await select('Buenos Aires','3435910',['normal','buenos-aires-noise']);
+   assert.equal(await page.locator('[data-entity-parent="country:AR"]').textContent(),'Argentina');
+   const parents=await page.locator('[data-entity-parent]').evaluateAll(nodes=>nodes.map(n=>({id:n.dataset.entityParent,name:n.textContent})));assert.ok(parents.some(p=>p.id.startsWith('adm1:')));row.parents=parents;
+   const noise=page.locator('button[name="lens"][value="buenos-aires-noise"]');await noise.click();
+   await page.waitForFunction(()=>document.querySelector('button[value="buenos-aires-noise"]')?.getAttribute('aria-pressed')==='true');
+   await page.waitForFunction(()=>[...document.querySelectorAll('[data-city-page]')].some(n=>n.dataset.cityPage.startsWith('noise-')&&n.style.visibility==='visible'),null,{timeout:90000});
+   await page.mouse.move(1000,500);await page.mouse.wheel(0,dpr);await page.waitForTimeout(500);
+   const saved=page.url();row.saved=saved;await page.screenshot({path:resolve(output,`dpr${dpr}-noise.png`)});
+   await select('Tokyo','1850147',['normal']);await page.goBack();await waitCard('3435910');
+   assert.equal(new URL(page.url()).search,new URL(saved).search);assert.equal(await noise.getAttribute('aria-pressed'),'true');
+   await page.locator('[data-entity-parent="country:AR"]').click();await waitCard('country:AR');assert.deepEqual(await lenses(),['normal']);
+   await page.locator('[data-entity-parent="earth"]').click();await waitCard('earth');assert.deepEqual(await lenses(),['normal','night-lights']);
+   await page.locator('button[name="lens"][value="night-lights"]').click();await page.waitForFunction(()=>document.querySelector('button[value="night-lights"]').getAttribute('aria-pressed')==='true');
+   assert.equal(await page.evaluate(()=>window.__cardIdentity===document.querySelector('[data-entity-card]')&&window.__sceneIdentity===document.querySelector('.polycss-scene')),true);
+   await page.goto(saved);await waitCard('3435910');assert.equal(await noise.getAttribute('aria-pressed'),'true');assert.equal(new URL(page.url()).search,new URL(saved).search);
+   assert.equal(await page.evaluate(()=>Boolean(window.__earth)),false);assert.equal(await page.locator('.polycss-scene').count(),1);assert.deepEqual(row.errors,[]);row.passed=true;
+   console.log(JSON.stringify({dpr,passed:true,cards:row.checks.length}));
+  }finally{await context.close();}
+ }
+ report.passed=true;
+}catch(e){report.error=e.stack;process.exitCode=1;}
+finally{report.scripts=[...new Map(fixture.requests.filter(r=>r.sha256).map(r=>[r.path,r])).values()];for(const r of report.scripts)assert.equal(r.sha256,createHash('sha256').update(await readFile(resolve(built,'.'+r.path))).digest('hex'));await browser?.close();await fixture.close();report.closed=true;await writeFile(resolve(output,'report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({output,passed:report.passed??false,error:report.error}));}

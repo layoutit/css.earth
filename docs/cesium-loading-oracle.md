@@ -3,8 +3,10 @@
 This development harness compares cssEarth's prepared map owner with Cesium's
 actual imagery and quadtree pipeline. A shared timeline connects camera state,
 network requests, pending work, readiness, fallback, publication and captures.
-Cesium is a reference renderer inside `tools/cesium-oracle`; it is not an
-application dependency or an alternative cssEarth renderer.
+Cesium's renderer is used inside `tools/cesium-oracle`. The application also
+uses `@cesium/engine` Core math and licensed helpers for the surface minimap
+and view readout. cssEarth owns its prepared traversal and CSS rendering; the
+Cesium renderer is not mounted in the product.
 
 ```sh
 pnpm oracle:cesium --dpr=1
