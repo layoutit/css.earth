@@ -217,6 +217,8 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     const frame = OBJECTS.find(object => object.id === body.id)!.worldFrame!;
     expect(body.radiusM, `${body.id} context must match the selectable detail radius`).toBe(frame.bodyRadiusM);
     expect(body.positionM, `${body.id} context must match the selectable detail origin`).toEqual(frame.originM);
+    expect(body.orbit?.bounds, `${body.id} orbit bounds are owned by preparation`).toBeDefined();
+    expect(body.orbit?.activeChords).toEqual(body.orbit?.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
   }
   expect(() => parsePreparedWorldContext({ ...source, focus: { ...(source.focus as Record<string, unknown>), positionM: [1, 0, 0] } })).toThrow('frame origin');
   const camera = source.camera as Record<string, unknown>, presentation = camera.presentation as Record<string, unknown>;
@@ -228,6 +230,10 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   for (const orbit of [{ ...(body.orbit as object), centerBodyId: 'unprepared-parent' },
     { ...(body.orbit as object), centerPositionM: [1, 0, 0] },
     { ...(body.orbit as object), centerBodyId: undefined },
+    { ...(body.orbit as object), bounds: { centerM: [0, 0, 0], radiusM: 1 } },
+    { ...(body.orbit as object), bounds: { centerM: [0, 0, 0], radiusM: Infinity } },
+    { ...(body.orbit as object), activeChords: [] },
+    { ...(body.orbit as object), activeChords: [0, 0] },
     { ...(body.orbit as object), runtimeEphemeris: true }]) {
     expect(() => parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit }, ...bodies.slice(1)] })).toThrow();
   }
@@ -366,6 +372,32 @@ test('projects retained markers, culls focus-occluded bodies, and keeps physical
   }
   expect(nearMercury.style.transform).toBe(find(far, 'contextBody', 'mercury').style.transform);
   expect(nearOrbit.length).toBe(mounted.get(far)!.inspect().find(body => body.id === 'mercury')!.orbit.filter(element => element.style.visibility === '').length);
+});
+
+test('camera updates retain fixed stroke styles and only publish changed orbit picking policy', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const orbit = find(root, 'contextOrbit', 'mercury');
+  const indicator = find(root, 'contextIndicator', 'mercury');
+  const orbitWrites = vi.spyOn(orbit.style, 'setProperty');
+  const indicatorWrites = vi.spyOn(indicator.style, 'setProperty');
+  const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [30, -20] });
+  publish(1100); publish(1200);
+  expect(orbitWrites).not.toHaveBeenCalled(); expect(indicatorWrites).not.toHaveBeenCalled();
+  expect(orbit.dataset.objectNavigate).toBe('mercury');
+  layer.setHiddenOrbits(['mercury']);
+  expect(orbitWrites.mock.calls).toEqual([['--context-orbit-pointer-events', 'none']]);
+  expect(orbit.dataset.objectNavigate).toBeUndefined(); orbitWrites.mockClear();
+  publish(1250);
+  expect(orbitWrites).not.toHaveBeenCalled();
+  layer.setHiddenOrbits([]);
+  expect(orbitWrites.mock.calls).toEqual([['--context-orbit-pointer-events', 'auto']]);
+  orbitWrites.mockClear();
+  layer.setNavigationIndicatorsVisible(false); layer.setNavigationIndicatorsVisible(true);
+  expect(orbitWrites.mock.calls).toEqual([['--context-orbit-pointer-events', 'none'], ['--context-orbit-pointer-events', 'auto']]);
+  expect(orbit.dataset.objectNavigate).toBe('mercury');
+  layer.destroy();
 });
 
 test('orbit chords stop at the circular indicator on both sides of the centered body', () => {
@@ -522,6 +554,65 @@ test('the Sun circle and label remain visible after all planetary context fades 
     expect(layer.inspect().flatMap(body => body.orbit).every(piece => piece.style.visibility === 'hidden')).toBe(true);
   }
   expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
+test('retired bodies stop receiving zoom writes and resume with current picking after indicator toggles', () => {
+  const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
+  const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
+  const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } }, viewport);
+  const mercury = layer.inspect().find(body => body.id === 'mercury')!;
+  publish(1e31); root.ownerDocument.defaultView.advance(200);
+  const writes: string[] = [];
+  const group = find(root, 'contextGroup', 'mercury');
+  for (const node of [group, ...all(group)]) for (const key of Object.keys(node.style)) {
+    let value = node.style[key];
+    if (typeof value !== 'string') continue;
+    Object.defineProperty(node.style, key, { get: () => value, set: next => { writes.push(key); value = next; }, configurable: true });
+  }
+  publish(2e31); publish(3e31);
+  expect(writes).toEqual([]);
+  expect(find(root, 'contextLabel', 'sun').dataset.objectNavigate).toBe('sun');
+  expect(mercury.indicator.dataset.objectNavigate).toBeUndefined();
+  expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());
+  publish(1000);
+  expect(writes.length).toBeGreaterThan(0);
+  expect(mercury.indicator.dataset.objectNavigate).toBe('mercury');
+  expect(mercury.orbit.some(piece => piece.style.visibility === '')).toBe(true);
+  // Hiding overlays before retirement must not restore their old visible state
+  // when the controls are re-enabled at galaxy distance.
+  layer.setNavigationIndicatorsVisible(false); publish(1e31); publish(2e31);
+  layer.setNavigationIndicatorsVisible(true);
+  expect(mercury.indicator.style.visibility).toBe('hidden');
+  expect(mercury.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
+  expect(mercury.label.dataset.objectNavigate).toBeUndefined();
+  publish(1000);
+  expect(mercury.indicator.dataset.objectNavigate).toBe('mercury');
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
+test('dolly motion leaves depth styles untouched while selection and rotation still reorder retained groups', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  let writes = 0;
+  for (const id of ['sun', 'mercury', 'venus']) {
+    const style = find(root, 'contextGroup', id).style;
+    let zIndex = style.zIndex;
+    Object.defineProperty(style, 'zIndex', { get: () => zIndex, set: value => { writes++; zIndex = value; } });
+  }
+  const publish = (distance: number, orientationXyzw = [0, 0, 0, 1]) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  for (const distance of [200, 2000, 1e8, 2e8]) publish(distance);
+  expect(writes).toBe(0);
+  layer.selectObject('venus'); publish(2000);
+  expect(writes).toBeGreaterThan(0);
+  expect(find(root, 'contextGroup', 'venus').style.zIndex).toBe('0');
+  expect(Number(find(root, 'contextGroup', 'sun').style.zIndex)).toBeGreaterThan(3);
+  writes = 0; publish(3000); expect(writes).toBe(0);
+  publish(-3000, [0, 1, 0, 0]);
+  expect(writes).toBeGreaterThan(0);
+  expect(Number(find(root, 'contextGroup', 'sun').style.zIndex)).toBeLessThan(0);
   layer.destroy();
 });
 

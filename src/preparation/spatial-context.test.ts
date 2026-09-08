@@ -93,6 +93,12 @@ test('satellite ellipses are translated to their parent with exact prepared cent
   assert.deepEqual(orbit.centerPositionM, states.parent!.positionM);
   assert.equal(orbit.centerBodyId, 'parent');
   assert.deepEqual(orbit.verticesM[0], [1007, 0, 0]);
+  assert(orbit.bounds.radiusM > 0);
+  assert.deepEqual(orbit.activeChords, orbit.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+  for (const index of orbit.activeChords) for (const vertex of [orbit.verticesM[index]!, orbit.verticesM[(index + 1) % orbit.verticesM.length]!]) {
+    assert(Math.hypot(...vertex.map((value, axis) => value - orbit.bounds.centerM[axis]!)) <= orbit.bounds.radiusM,
+      'prepared bound includes every active endpoint and therefore its convex chords');
+  }
   assert(Math.abs(orbit.verticesM[8]![0] - 987) < 1e-10, 'apocentre must remain around the parent, not the global origin');
   for (const [x, y, z] of orbit.verticesM) {
     assert(Math.abs(((x - 997) / 10) ** 2 + (y / Math.sqrt(91)) ** 2 - 1) < 1e-12);

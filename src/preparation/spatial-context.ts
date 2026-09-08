@@ -70,7 +70,8 @@ export interface PreparedWorldContext {
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number };
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
-    readonly orbit: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[] } }[];
+    readonly orbit: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
+      readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[] } }[];
   readonly camera: WorldContextSource['camera'];
   readonly system: WorldContextSource['system'];
   readonly volume: WorldContextSource['volume'];
@@ -141,10 +142,17 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
       Math.sqrt(1 + state.eccentricity) * Math.cos(state.trueAnomalyRadians / 2));
     const verticesM = freeze(Array.from({ length: source.orbit.segments }, (_, index) => index === 0 ? copy(state.positionM) : ellipse(centre, state.perihelionDirection, motion, state.semiMajorAxisM, minor,
       eccentric + index * 2 * Math.PI / source.orbit.segments)));
+    const trail = fact.orbitStyle === 'closed' ? freeze(Array.from({ length: source.orbit.segments }, () => 1))
+      : trailWeights(source.orbit.segments, source.orbit.trail);
+    const activeChords = freeze(trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+    // Enclose the actual authored trail, including the pinned ephemeris vertex.
+    // A sphere containing its endpoints also contains every active chord.
+    const endpoints = activeChords.length ? activeChords.flatMap(index => [verticesM[index]!, verticesM[(index + 1) % verticesM.length]!]) : verticesM;
+    const centerM = [0, 1, 2].map(axis => (Math.min(...endpoints.map(v => v[axis]!)) + Math.max(...endpoints.map(v => v[axis]!))) / 2) as unknown as Vector3;
+    const bounds = freeze({ centerM: copy(centerM), radiusM: Math.max(...endpoints.map(vertex =>
+      Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON) });
     return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
-      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, trail: fact.orbitStyle === 'closed'
-        ? freeze(Array.from({ length: source.orbit.segments }, () => 1))
-        : trailWeights(source.orbit.segments, source.orbit.trail) }) });
+      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords }) });
   });
   return freeze({ schema: 'cssearth-world-context@1', sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM }), bodies: freeze(bodies), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }

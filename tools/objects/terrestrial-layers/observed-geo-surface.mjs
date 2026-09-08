@@ -1,11 +1,27 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, fitCamera, project, sampleGeo, lommelSeeligerGain } from './osiris-geo.mjs';
+import { sampleTrianglePoints, fitObservationLevels, selectObservation } from './observation-mosaic.mjs';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mjs';
 
 const safePath = path => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.split(/[\\/]/).includes('..');
 const positive = value => Number.isFinite(value) && value > 0;
 export function validateGeoSurfaceRecipe(recipe, geometry) {
+  if (recipe.frames !== undefined) {
+    const frames = recipe.frames, levels = recipe.levelMatching;
+    if (!Array.isArray(frames) || frames.length < 2 || frames.length > 8 || recipe.path !== undefined ||
+        recipe.qualityPath !== undefined || recipe.startTime !== undefined || recipe.selection !== 'lowest-emission' ||
+        !levels || !Number.isInteger(levels.samplesPerTriangle) || levels.samplesPerTriangle < 4 || levels.samplesPerTriangle > 64 ||
+        !Number.isInteger(levels.minimumPairs) || levels.minimumPairs < 64 || levels.minimumPairs > 10000 ||
+        !positive(levels.maximumLogMad) || levels.maximumLogMad > .3 || !positive(levels.maximumGain) || levels.maximumGain < 1 || levels.maximumGain > 1.5 ||
+        frames.some(frame => !frame || !/^[a-z][a-z0-9-]*$/.test(frame.id) || Object.keys(frame).some(key => !['id', 'path', 'qualityPath', 'startTime'].includes(key))) ||
+        new Set(frames.map(frame => frame.id)).size !== frames.length || new Set(frames.flatMap(frame => [frame.path, frame.qualityPath])).size !== frames.length * 2) {
+      throw new TypeError('Invalid source-bound georeferenced observation mosaic.');
+    }
+    for (const frame of frames) validateGeoSurfaceRecipe({ ...recipe, ...frame, id: recipe.id, frames: undefined, selection: undefined, levelMatching: undefined }, geometry);
+    return;
+  }
+  if (recipe.selection !== undefined || recipe.levelMatching !== undefined) throw new TypeError('Invalid source-bound observation selection.');
   const policy = recipe.transfer, photometry = recipe.photometry;
   if (recipe.format !== 'osiris-geo' || !/^[a-z][a-z0-9-]*$/.test(recipe.id) || !/^[a-z][a-z0-9-]*$/.test(recipe.consumer) ||
       !safePath(recipe.path) || !safePath(recipe.qualityPath) || recipe.path === recipe.qualityPath ||
@@ -44,7 +60,7 @@ export function calibrateGeoCamera(frame) {
     maximumResidualPixels: maximum, rmsResidualPixels: Math.sqrt(squared / count) };
 }
 
-export async function loadGeoObservationSurface({ sourceDirectory, source, recipe, radial, config }) {
+async function loadSingleGeoObservationSurface({ sourceDirectory, source, recipe, radial, config }) {
   validateGeoSurfaceRecipe(recipe, config.geometry.radialTerrain);
   const entries = await source.validateGroup(recipe.consumer);
   if (entries.length !== 2 || ![recipe.path, recipe.qualityPath].every(path => entries.some(e => e.path === path))) {
@@ -90,19 +106,56 @@ export async function loadGeoObservationSurface({ sourceDirectory, source, recip
     const ray = radial.grid.intersect(eye, delta.map(n => n / distance), distance + policy.visibilityToleranceMeters);
     if (!ray || Math.abs(ray.radius - distance) > policy.visibilityToleranceMeters) return missing('occluded');
     const gray = Math.round(Math.max(0, Math.min(1, (sampled.radiance - low) / (high - low))) * 255);
-    return { color: [gray, gray, gray], distanceMeters: hit.distanceMeters, separationMeters: sampled.separationMeters, gain: sampled.gain };
+    return { color: [gray, gray, gray], distanceMeters: hit.distanceMeters, separationMeters: sampled.separationMeters, gain: sampled.gain,
+      radiance: sampled.radiance, maximumEmissionDegrees: sampled.maximumEmissionDegrees };
   }
-  function preview(width, height) {
-    const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
-    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-      const lon = (x + .5) * 360 / width, lat = 90 - (y + .5) * 180 / height;
-      const hit = radial.grid.hit(lon, lat, true), index = y * width + x;
-      if (!hit) { missing[index] = 1; continue; }
-      const longitude = lon * Math.PI / 180, latitude = lat * Math.PI / 180, r = hit.radius / metersPerUnit;
-      const point = [r * Math.cos(latitude) * Math.cos(longitude), r * Math.cos(latitude) * Math.sin(longitude), r * Math.sin(latitude)];
-      const sample = samplePoint(point); rgb.set(sample.color, index * 3); missing[index] = sample.reason ? 1 : 0;
-    }
-    return { rgb, missing };
-  }
+  const preview = (width, height) => previewGeoSurface(samplePoint, radial, config, width, height);
   return { samplePoint, preview, report };
+}
+
+function previewGeoSurface(samplePoint, radial, config, width, height) {
+  const metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
+  const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const lon = (x + .5) * 360 / width, lat = 90 - (y + .5) * 180 / height;
+    const hit = radial.grid.hit(lon, lat, true), index = y * width + x;
+    if (!hit) { missing[index] = 1; continue; }
+    const longitude = lon * Math.PI / 180, latitude = lat * Math.PI / 180, r = hit.radius / metersPerUnit;
+    const point = [r * Math.cos(latitude) * Math.cos(longitude), r * Math.cos(latitude) * Math.sin(longitude), r * Math.sin(latitude)];
+    const sample = samplePoint(point); rgb.set(sample.color, index * 3); missing[index] = sample.reason ? 1 : 0;
+  }
+  return { rgb, missing };
+}
+
+export async function loadGeoObservationSurface(options) {
+  const { sourceDirectory, source, recipe, radial, config } = options;
+  validateGeoSurfaceRecipe(recipe, config.geometry.radialTerrain);
+  if (!recipe.frames) return loadSingleGeoObservationSurface(options);
+  const entries = await source.validateGroup(recipe.consumer), paths = recipe.frames.flatMap(frame => [frame.path, frame.qualityPath]);
+  if (entries.length !== paths.length || !paths.every(path => entries.some(entry => entry.path === path))) throw new Error('Mosaic must consume every exact pinned image and quality companion.');
+  const observations = [];
+  for (const frame of recipe.frames) {
+    observations.push(await loadSingleGeoObservationSurface({ sourceDirectory, radial, config,
+      recipe: { ...recipe, ...frame, id: recipe.id, frames: undefined, selection: undefined, levelMatching: undefined },
+      source: { validateGroup: async () => entries.filter(entry => [frame.path, frame.qualityPath].includes(entry.path)) } }));
+  }
+  const points = sampleTrianglePoints(radial.faces, recipe.levelMatching.samplesPerTriangle);
+  const samples = observations.map(observation => points.map(point => observation.samplePoint(point)));
+  const levels = fitObservationLevels(samples, recipe.levelMatching);
+  const display = observations[0].report.display;
+  const report = { camera: observations[0].report.camera,
+    frames: observations.map((observation, index) => ({ id: recipe.frames[index].id, startTime: recipe.frames[index].startTime,
+      filter: recipe.filter, ...observation.report })),
+    sourceIds: entries.map(entry => ({ id: entry.id, sha256: entry.expectedSha256 })),
+    selection: recipe.selection, levelMatching: { ...recipe.levelMatching, ...levels, sampledPoints: points.length },
+    display: { ...display, referenceFrame: recipe.frames[0].id },
+    previewPolicy: observations[0].report.previewPolicy };
+  const samplePoint = point => {
+    const values = observations.map(observation => observation.samplePoint(point)), index = selectObservation(values);
+    if (index < 0) return { ...values[0], reason: 'no-qualified-observation' };
+    const value = values[index], radiance = value.radiance * levels.gains[index];
+    const gray = Math.round(Math.max(0, Math.min(1, (radiance - display.low) / (display.high - display.low))) * 255);
+    return { ...value, color: [gray, gray, gray], radiance, frameId: recipe.frames[index].id, frameIndex: index };
+  };
+  return { samplePoint, report, preview: (width, height) => previewGeoSurface(samplePoint, radial, config, width, height) };
 }

@@ -2,6 +2,26 @@ import { clipSegmentToRectangle, eyeFraction, lerp, splitVisible } from './helio
 import type { Vector3 } from './types.js';
 import type { OrbitSegment } from './heliocentric-view.js';
 
+/** Conservative projected bounds for a prepared sphere. A near-plane crossing
+ * requires the exact chord path. Otherwise its enclosing eye-space cube bounds
+ * every projected chord, including viewport clipping and the existing fade. */
+export function orbitBoundsMayContribute(center: Vector3, radius: number, focal: number,
+  offset: readonly number[], near: number, clipX: number, clipY: number, minimumExtent: number): boolean {
+  // Account for subtraction/rotation roundoff at large world coordinates.
+  const margin = Math.max(radius, ...center.map(Math.abs), 1) * Number.EPSILON * 32;
+  const r = radius + margin, front = -center[2] - r, back = -center[2] + r;
+  if (back <= near) return false;
+  if (front <= near) return true;
+  const left = offset[0] + focal * Math.min((center[0] - r) / front, (center[0] - r) / back);
+  const right = offset[0] + focal * Math.max((center[0] + r) / front, (center[0] + r) / back);
+  const top = offset[1] + focal * Math.min((center[1] - r) / front, (center[1] - r) / back);
+  const bottom = offset[1] + focal * Math.max((center[1] + r) / front, (center[1] + r) / back);
+  const epsilon = Math.max(1, Math.abs(left), Math.abs(right), Math.abs(top), Math.abs(bottom)) * Number.EPSILON * 32;
+  const width = Math.min(clipX, right + epsilon) - Math.max(-clipX, left - epsilon);
+  const height = Math.min(clipY, bottom + epsilon) - Math.max(-clipY, top - epsilon);
+  return width >= 0 && height >= 0 && Math.max(width, height) > minimumExtent;
+}
+
 /** Project prepared chords into a bounded retained line pool; never derive an orbit. */
 export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude, near, clipX, clipY }: {
   toEye(point: Vector3): Vector3;
@@ -13,13 +33,18 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   clipX: number;
   clipY: number;
 }) {
-  return (vertices: readonly Vector3[], trail: readonly number[]): readonly OrbitSegment[] => {
-    const eyes = vertices.map(toEye);
+  return (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[]): readonly OrbitSegment[] => {
+    const eyes = activeChords ? null : vertices.map(toEye);
     const segments: OrbitSegment[] = [];
-    for (let index = 0; index < eyes.length; index++) {
+    let lastEndIndex = -1, lastEnd: Vector3 | null = null;
+    for (let ordinal = 0; ordinal < (activeChords?.length ?? vertices.length); ordinal++) {
+      const index = activeChords?.[ordinal] ?? ordinal;
       const weight = trail[index];
       if (!(weight > 0)) continue;
-      let start = eyes[index], end = eyes[(index + 1) % eyes.length];
+      const next = (index + 1) % vertices.length;
+      let start = eyes ? eyes[index] : lastEndIndex === index ? lastEnd! : toEye(vertices[index]);
+      let end = eyes ? eyes[next] : toEye(vertices[next]);
+      lastEndIndex = next; lastEnd = end;
       let startDepth = -start[2], endDepth = -end[2];
       if (startDepth <= near && endDepth <= near) continue;
       if (startDepth <= near) {
