@@ -41,6 +41,14 @@ test("keeps unknown facts in their authored order", () => {
   assert.deepEqual(orderFacts(facts), facts);
 });
 
+test("prioritizes a satellite's own orbit over its parent's solar orbit", () => {
+  const facts = ["radius", "distance-from-sun", "orbital-period", "rotation-period", "distance-from-parent", "dimensions", "discovery"]
+    .map(id => ({ id, label: id, value: "source-backed value" }));
+  assert.deepEqual(orderFacts(facts).slice(0, 4).map(fact => fact.id),
+    ["distance-from-parent", "radius", "orbital-period", "rotation-period"]);
+  assert.equal(orderFacts(facts).length, facts.length);
+});
+
 test("rejects facts without unique semantic ids", () => {
   assert.throws(
     () => orderFacts([{ label: "Distance", value: "58 million km" }]),

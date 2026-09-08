@@ -395,3 +395,17 @@ test("catalog is local and astronomy source sections survive sync", () => {
   }
   assert.equal(isOwnedFile(astronomy, "src/frames.ts"), false);
 });
+
+test('local fixed-epoch science inputs survive upstream refresh without being attributed to the mirrored commit', async () => {
+  const astronomy = targetFor('astronomy');
+  const manifest = JSON.parse(await readFile(join(astronomy.dest, 'source/scene-epoch/manifest.json'), 'utf8'));
+  for (const file of ['tools/scene-ephemeris.mjs', 'tools/acquire-scene-ephemeris.mjs',
+    'source/scene-epoch/README.md', 'source/scene-epoch/manifest.json',
+    ...manifest.records.map(record => `source/scene-epoch/${record.path}`)]) {
+    assert.ok(existsSync(join(astronomy.dest, file)), file);
+    assert.ok(locallyMaintainedFile(astronomy, file), file);
+    assert.ok(isOwnedFile(astronomy, file), file);
+    assert.ok(!Object.hasOwn((await readProvenance(astronomy)).files, file), 'local source is not an upstream copy');
+  }
+  assert.equal(locallyMaintainedFile(astronomy, 'source/unrelated-model.txt'), false);
+});

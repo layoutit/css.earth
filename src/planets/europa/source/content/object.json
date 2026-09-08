@@ -26,35 +26,71 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "1,560.8 km"
+        "value": "1,560.8 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "5.2 AU (mean)"
+        "label": "System solar semimajor axis",
+        "value": "5.203 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbit around Jupiter",
-        "value": "3.53 Earth days"
+        "value": "3.55 days · sidereal",
+        "source": {
+          "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
+          "label": "PDS/IAU sidereal rate",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "3.53 Earth days"
+        "value": "3.55 days · synchronous",
+        "source": {
+          "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
+          "label": "PDS/IAU sidereal rate",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Jupiter",
+        "label": "Mean distance from Jupiter",
         "value": "About 671,000 km"
       },
       {
-        "id": "atmosphere",
+        "id": "atmosphere-composition",
         "label": "Atmosphere",
         "value": "Tenuous oxygen"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "3.013 ± 0.002 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -63,7 +99,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Voyager and Galileo visible-light mosaic",
+        "description": "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate.",
         "title": "USGS Voyager/Galileo mosaic. Source resolution varies from about 200 m to 20 km per pixel. Gray grid marks documented no-data and its resampled boundary. Original image shading remains; globe lighting is approximate.",
         "thumbnail": "/scenes/europa/europa-normal-thumbnail.webp",
         "surface": "europa-normal-surface@2x.webp",
@@ -77,7 +113,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "Galileo color over monochrome",
+        "description": "Galileo enhanced color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving color ratios. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
         "title": "Galileo enhanced color: 756 nm → red, 559 nm → green, 404 nm → blue, at 1.4–1.6 km per pixel. Color covers part of the surface. A correction for each observation reduces broad photographed shading; oblique views retain observed monochrome. Overall brightness is matched to the monochrome base, preserving color ratios. Photographed shadows and seams can remain; added globe lighting is approximate. Gray grid marks gaps in both sources.",
         "thumbnail": "/scenes/europa/europa-enhanced-thumbnail.webp",
         "surface": "europa-enhanced-surface@2x.webp",

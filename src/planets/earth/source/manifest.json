@@ -547,8 +547,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 11928,
-      "expectedSha256": "00f8acff9effacf94c37f4707a1cb49bb86494603c198e2a8e0b670146888968",
+      "expectedBytes": 14422,
+      "expectedSha256": "90d8c8d7e6a84a9e955f432464cee71c9b4154c1b6167ef1d4bb1c6466badb0d",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -586,6 +586,13 @@
       "expectedBytes": 20651,
       "expectedSha256": "23257f353d3af2e8c445a00e160b59add4a9b3266206b031d01e4646d7b3ac8d",
       "purpose": "Authored source acquisition and exact pinned derived-record restoration."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1222,
+      "expectedSha256": "bfb96ae17afec52f4f872930edf7b0a64734e408987c524f93150eb777b003f7"
     }
   ]
 }

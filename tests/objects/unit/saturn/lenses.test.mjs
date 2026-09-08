@@ -40,15 +40,15 @@ test('ships optional material lenses as exact single-atlas variants',async()=>{
   assert.equal(runtime.variants[lens.id].runtimeAtlas.assetUrl,'/scenes/saturn/'+lens.materialPreparationFile);
  }
 });
-test('ships source-backed canonical observation surfaces',()=>{
+test('distinguishes observational surfaces from the schematic thermal illustration',()=>{
  for(const lens of lenses.controls.filter(lens=>lens.falseColor)){
   assert.match(lens.surface2xUrl,/@2x\.webp$/);assert.equal(lens.detailCarrierUrl,'/scenes/saturn/saturn-surface.jpg');
   assert.equal(lens.falseColorPalette.length,3);assert.ok(lens.materialGain>0&&lens.materialGain<=1);
   if(lens.id==='thermal'){
-   assert.equal(lens.sourceModel,'cassini-informed-thermal-model');
-   assert.equal(lens.detailPreparation,'prepared Cassini-informed cloud-window and latitude response over lossless DPR morphology');
+   assert.equal(lens.sourceModel,'schematic-morphology-illustration');
+   assert.match(lens.detailPreparation,/Visible-light luminance and authored spatial patterns/);
    assert.equal(lens.maximumDetailScale,1);assert.equal(lens.sourceFiles.length,0);assert.equal(lens.sourceUrls.length,2);
-   assert.match(lens.qualification,/not a direct global temperature retrieval/);
+   assert.match(lens.qualification,/Schematic/);assert.match(lens.qualification,/no measured infrared/);assert.equal(lens.filter,'Schematic');assert.equal(lens.label,'Thermal illustration');
   }else{
    assert.equal(lens.sourceModel,'hubble-global-map');
    assert.equal(lens.detailPreparation,'intact rotation A, lossless DPR surfaces, bounded visible-detail pansharpening');
@@ -72,6 +72,6 @@ test('declares canonical prepared lens resources and exclusive cross-section sel
   const cutaway=reduceObjectSelection(selected,{kind:'lens',id:'cross-section'});
   assert.equal(cutaway.lensId,'cross-section');assert.equal(Object.hasOwn(cutaway,'interior'),false);
   const cutawayPlan=resolvePreparedPresentation(definition,{selection:cutaway,view});
-  assert.deepEqual(cutawayPlan.pressedLenses,['cross-section']);assert.ok(cutawayPlan.required.includes('surface:normal'));assert.ok(cutawayPlan.required.includes('interior-material:normal-no-shadows'));
+  assert.deepEqual(cutawayPlan.pressedLenses,['cross-section']);assert.ok(cutawayPlan.required.includes('surface:normal'));assert.ok(cutawayPlan.required.some(key=>/^interior-material:normal-no-shadows(?::row:\d+)?$/.test(key)));
  }
 });

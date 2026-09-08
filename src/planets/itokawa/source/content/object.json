@@ -30,8 +30,8 @@
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "1.323 AU (mean)"
+        "label": "Solar semimajor axis",
+        "value": "1.323 AU"
       },
       {
         "id": "orbital-period",
@@ -53,8 +53,8 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Source shape · radial height",
-        "title": "Color shows radius minus a 165 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified.",
+        "description": "Color shows radius minus a 165 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
+        "title": "Color shows radius minus a 165 m reference sphere, including the body's broad irregular shape. This is not gravitational height or an image observation. Brightness adds cartographic relief from the full source model; Shadows adds approximate fixed-epoch Sun lighting. Fine terrain is represented in the map while the displayed silhouette is simplified. Values follow the nearest corresponding point on the full source shape within the display mesh’s simplification allowance. This is radial height, not gravitational height; flat previews withhold overlapping radial surfaces.",
         "thumbnail": "/scenes/itokawa/itokawa-elevation-thumbnail.webp",
         "surface": "itokawa-elevation-surface@2x.webp",
         "poles": "itokawa-elevation-surface@2x.webp",

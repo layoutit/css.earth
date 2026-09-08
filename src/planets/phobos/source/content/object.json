@@ -9,12 +9,24 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "11.08 km"
+        "value": "11.08 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "1.52 AU (system mean)"
+        "label": "System solar semimajor axis",
+        "value": "1.524 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
@@ -28,16 +40,28 @@
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Mars",
+        "label": "Mean distance from Mars",
         "value": "About 9,376 km"
       },
       {
         "id": "discovery",
         "label": "Discovery",
-        "value": "Asaph Hall \u00b7 1877"
+        "value": "Asaph Hall · 1877"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.87 ± 0.08 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -50,8 +74,8 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Stooke\u2019s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
-        "title": "Stooke\u2019s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
+        "description": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
+        "title": "Stooke’s DLR-controlled multi-mission mosaic. Source detail varies; photographed shadows and source-authored seam adjustments remain.",
         "detail": "Multi-mission mosaic",
         "thumbnail": "/scenes/phobos/phobos-normal-thumbnail.webp",
         "surface": "phobos-normal-surface@2x.webp",
@@ -82,7 +106,7 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "\u22123.5",
+            "−3.5",
             "0",
             "3.5"
           ],

@@ -456,8 +456,8 @@
     {
       "id": "jupiter-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 11884,
-      "expectedSha256": "4058707356f87760a57ff70a1a97758e49a1595da7ef921c439380ee14ec3690",
+      "expectedBytes": 15253,
+      "expectedSha256": "353dceefd91c1f8f0984ec95c1b450f3d5fd15f3c92c7894bcc06f9b7084b456",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -540,8 +540,8 @@
     {
       "id": "jupiter-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 11054,
-      "expectedSha256": "b29fc8270ed0e63241efc8d3ae6c0bea7cd8c2ddaa7193fa258c67a0bf2b3040",
+      "expectedBytes": 9094,
+      "expectedSha256": "d8a911e3846681784e60075353af9b8763044210fc75846087c50c41c6733894",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and NASA/ESA Hubble, NASA Juno source authorities identified in the recipe",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -615,6 +615,13 @@
       "expectedSha256": "1523c12492df572ccfb3300d4c559e7bd45c8bde70b0a7a8a97c0a56ce4b9738",
       "expectedBytes": 1271,
       "purpose": "ESO eso0932a provenance, visible credit, and CC-BY-4.0 license record"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1553,
+      "expectedSha256": "4ec463a524a4803db1601a02d908d886fb486f498514cca5302ccbf5c72982d4"
     }
   ]
 }

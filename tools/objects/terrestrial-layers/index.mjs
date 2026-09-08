@@ -89,6 +89,15 @@ export function parseTerrestrialProfile(value) {
         (lens.coverage && [lens.coverage.path,lens.coverage.member].some(p => typeof p !== 'string' || p.startsWith('/') || p.split('/').includes('..'))))) {
       throw new TypeError('Invalid sourced mesh grid.');
     }
+    if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
+        !Number.isFinite(lens.surfaceSampling.maximumDistanceMeters) || !(lens.surfaceSampling.maximumDistanceMeters > 0) ||
+        lens.path !== value.geometry.radialTerrain?.path ||
+        lens.format !== value.geometry.radialTerrain?.format ||
+        JSON.stringify(lens.grid) !== JSON.stringify(value.geometry.radialTerrain?.grid) ||
+        value.geometry.radialTerrain?.simplification?.method !== 'source-meshoptimizer' ||
+        lens.surfaceSampling.maximumDistanceMeters > value.geometry.radialTerrain.simplification.maximumErrorMeters)) {
+      throw new TypeError('Source surface sampling must match the retained mesh and its simplification-distance bound.');
+    }
   }
   const observationIds = new Set();
   for (const observation of value.raster.observations) {
@@ -219,7 +228,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   const context = { sourceDirectory, publicDirectory, outputDirectory, config, source };
   if (config.kind === 'affine-photographic-atmosphere') return prepareAffineLayers({...context,prepareContent});
   const radial = await loadRadialTerrain(context);
-  const surfaces = await prepareSolidRasters(context);
+  const surfaces = await prepareSolidRasters({ ...context, radial });
   const raster = await prepareSolidMaterial({ ...context, surfaces });
   if (radial) {
     await prepareRadialMaterials({ ...context, radial, surfaces, sunDirection: requireBodyFixedSunDirection(config.namespace) });

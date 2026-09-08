@@ -355,7 +355,7 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 4511,
-      "expectedSha256": "dfde182e10762c6304bc054bcd653aae99947a81b4cb66c1d1465ed122485769",
+      "expectedSha256": "d5bbb1f85e50f6fd5ced773093faa5d369179e553df255dd3e659febaa6c2712",
       "purpose": "Authored source-informed capability preparation recipe."
     },
     {
@@ -366,8 +366,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 10416,
-      "expectedSha256": "fdfd85a044740c892885f2eed15ef969282c08cf3137680862ffd4b2bbf86529",
+      "expectedBytes": 13116,
+      "expectedSha256": "fc92417953152dfee46e3ac129ace24800b259b8fe69d67e1be5021eb2f31d8b",
       "purpose": "Authored source-informed capability preparation recipe."
     },
     {
@@ -399,6 +399,13 @@
       "expectedBytes": 589,
       "expectedSha256": "702386b207e2023e88a60464d62d3a0181b929f5f2decede44a86814a5e7ac93",
       "purpose": "Exact unconsumed historical delivery bytes retained outside production runtime closure."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1211,
+      "expectedSha256": "7fa4fd761e8d9ae033e9c1e0a6ccdb1ea0ce38239744af0554f8af0d3f50da87"
     }
   ]
 }

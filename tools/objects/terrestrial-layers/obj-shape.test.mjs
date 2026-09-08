@@ -1,11 +1,46 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseObjShape, parseVrmlShape } from './obj-shape.mjs';
+import { parseObjShape, parseVrmlShape, closestTrianglePoint, createShapeSurfaceSampler } from './obj-shape.mjs';
 
 // An octahedron has analytic radial intersections, including vertices and edges.
 const octahedron = 'v 2 0 0\nv -2 0 0\nv 0 3 0\nv 0 -3 0\nv 0 0 4\nv 0 0 -4\n'+
   'f 1 3 5\nf 3 2 5\nf 2 4 5\nf 4 1 5\nf 3 1 6\nf 2 3 6\nf 4 2 6\nf 1 4 6\n';
 const profile = {metersPerUnit:1000,expectedVertices:6,expectedFaces:8};
+
+test('closest source point preserves barycentric geometry, edges and physical distance bounds', () => {
+  const mesh = parseObjShape(octahedron, profile);
+  const a=[2000,0,0],ab=[-2000,3000,0],ac=[-2000,0,4000];
+  const onFace=[1000,750,1000], n=[12,8,6].map(x=>x/Math.sqrt(244));
+  const point=onFace.map((x,i)=>x+20*n[i]);
+  const hit=mesh.closestPoint(point,21);
+  hit.point.forEach((x,i)=>assert.ok(Math.abs(x-onFace[i])<1e-9));
+  assert.ok(Math.abs(hit.distanceMeters-20)<1e-9);
+  assert.deepEqual(closestTrianglePoint([2200,-100,0],a,ab,ac),{point:a,barycentric:[1,0,0]});
+  assert.equal(mesh.closestPoint(point,19),null,'No projection beyond the declared physical allowance');
+  const result=createShapeSurfaceSampler(mesh,{surfaceSampling:{method:'closest-source-point',maximumDistanceMeters:21},valueTransform:{scale:.001,offset:-1}}).samplePoint(point);
+  assert.ok(Math.abs(result.value-(Math.hypot(...onFace)/1000-1))<1e-12);
+});
+
+test('two surfaces on a ray keep different source heights, while a flat preview withholds ambiguity', () => {
+  // Two closed cubes, one around the origin and another farther along +X.
+  // Their shared longitude has three distinct positive intersections. A radial
+  // sampler assigns x=1 to both bodies; closest 3D correspondence cannot do so.
+  const vertices=[],faces=[];
+  for(const center of [0,4]) {
+    const offset=vertices.length;
+    vertices.push(...[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]].map(([x,y,z])=>[x+center,y,z]));
+    faces.push(...[[0,2,1],[0,3,2],[4,5,6],[4,6,7],[0,1,5],[0,5,4],[1,2,6],[1,6,5],[2,3,7],[2,7,6],[3,0,4],[3,4,7]].map(f=>f.map(i=>i+offset+1)));
+  }
+  const text=vertices.map(v=>'v '+v.join(' ')).concat(faces.map(f=>'f '+f.join(' '))).join('\n');
+  const mesh=parseObjShape(text,{metersPerUnit:1,expectedVertices:16,expectedFaces:24});
+  assert.equal(mesh.sample(0,0),1);
+  assert.equal(mesh.hit(0,0,true),null);
+  const sampler=createShapeSurfaceSampler(mesh,{surfaceSampling:{method:'closest-source-point',maximumDistanceMeters:.2},valueTransform:{scale:1,offset:-1}});
+  assert.equal(sampler.samplePoint([1.1,0,0]).value,0);
+  assert.equal(sampler.samplePoint([4.9,0,0]).value,4);
+  assert.equal(mesh.closestPoint([2,0,0],1.1),null,'Equidistant distinct source surfaces do not establish correspondence');
+  assert.ok(mesh.hit(180,0,true),'Coincident triangles at a source edge are one surface, not an ambiguity');
+});
 const vrmlOctahedron = `#VRML V2.0 utf8
 Shape { geometry IndexedFaceSet { coord Coordinate { point [
   2e0 0 0, -2 0 0, 0 3 0, 0 -3 0, 0 0 4, 0 0 -4
