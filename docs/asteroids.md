@@ -1,5 +1,7 @@
 # Exceptional asteroid coverage
 
+The subsequent [six-body radar expansion](asteroids-radar.md) brings current coverage to 84 asteroids. The record below describes the preceding 65-body addition.
+
 This addition selects 65 bodies from the [list of exceptional asteroids](https://en.wikipedia.org/wiki/List_of_exceptional_asteroids) for which original calibrated shape models and source-specific orientation evidence could be pinned. Per-body source notes below identify the exact model, authors, frame, reduction error, limitations and restoration path. The list is a discovery index; the underlying research and original data supply the physical properties.
 
 The [validation record](asteroids-validation.md) includes browser examples, fresh-install evidence, measured drag traces and the remaining aggregate-check limitations.
