@@ -64,6 +64,7 @@
 // claim. A precessing ellipse cannot represent a real satellite orbit; what the
 // test proves is that the propagator reproduces JPL data to within the residual
 // the fit leaves, at epochs the fit did not see.
+import { fitLibration } from './lib/fit-libration.mjs'
 import { writeRecordSections } from './lib/write-record-sections.mjs'
 import { elementsUrl, horizons, parseElements } from './lib/horizons.mjs'
 import { HEADER, shortest } from './lib/sources.mjs'
@@ -81,12 +82,17 @@ const DAPHNIS_FROM_JD = 2453371.5
 const DAPHNIS_TO_JD = 2458119.5
 const STEP_DAYS = 30
 const DEG = Math.PI / 180
-const RADIAL_FIT_IDS = new Set(['dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia', 'bianca', 'cressida', 'desdemona', 'rosalind'])
+const RADIAL_FIT_IDS = new Set(['polydeuces', 'anthe', 'aegaeon', 'dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia', 'bianca', 'cressida', 'desdemona', 'rosalind'])
 
 // Metis and Adrastea need daily samples: Jupiter's strong J2 makes their
 // osculating mean-motion prediction ambiguous across a five-day sample gap.
 // id, Horizons target code, Horizons centre, parent body id, optional fit window and cadence
+const LIBRATION_FIT_IDS = new Set(['polydeuces', 'anthe', 'aegaeon'])
 const SATELLITES = [
+  ['polydeuces', '634', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['anthe', '649', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['aegaeon', '653', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+
   ['phobos', '401', '500@499', 'mars'],
   ['deimos', '402', '500@499', 'mars'],
   ['io', '501', '500@599', 'jupiter'],
@@ -362,7 +368,13 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
     }
     lambda.push(placed)
   }
-  const lambdaFit = fitLine(days, lambda)
+  const line = fitLine(days, lambda)
+  const lambdaFit = LIBRATION_FIT_IDS.has(id) ? fitLibration(days, lambda, line) : line
+  const longitudeHarmonics = lambdaFit.harmonics
+  const correction = day => (longitudeHarmonics ?? []).reduce((sum, h) => {
+    const a = h.rateRadPerDay * (day + J2000 - h.epochJdTt)
+    return sum + h.cosineRad * Math.cos(a) + h.sineRad * Math.sin(a)
+  }, 0)
   const meanAnomalyAtEpochRad = lambdaFit.intercept - apsis.phaseAtEpoch
   const meanMotionRadPerDay = lambdaFit.slope - apsis.rate
 
@@ -379,7 +391,7 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
       const row = rows[i]
       const referenceEccentricAnomaly = solveKepler(row.meanAnomalyDeg * DEG, row.eccentricity)
       const referenceRadiusKm = row.semiMajorAxisKm * (1 - row.eccentricity * Math.cos(referenceEccentricAnomaly))
-      const fittedMeanAnomaly = meanAnomalyAtEpochRad + meanMotionRadPerDay * days[i]
+      const fittedMeanAnomaly = meanAnomalyAtEpochRad + meanMotionRadPerDay * days[i] + correction(days[i])
       const fittedEccentricAnomaly = solveKepler(fittedMeanAnomaly, eccentricity)
       const fittedRadiusPerKm = 1 - eccentricity * Math.cos(fittedEccentricAnomaly)
       const coefficient = fittedRadiusPerKm / referenceRadiusKm
@@ -389,7 +401,7 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
     semiMajorAxisKm = numerator / denominator
   }
   const worstLambdaResidual = Math.max(
-    ...lambda.map((value, i) => Math.abs(value - (lambdaFit.intercept + lambdaFit.slope * days[i]))),
+    ...lambda.map((value, i) => Math.abs(value - (lambdaFit.intercept + lambdaFit.slope * days[i] + correction(days[i])))),
   )
 
   results.push({
@@ -414,13 +426,14 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
     meanAnomalyAtEpochRad,
     meanMotionRadPerDay,
     worstLambdaResidual,
+    longitudeHarmonics,
   })
 }
 
 const entry = (r) => `  ${r.id}: {
     parent: '${r.parent}',
     horizonsCode: '${r.command}',${r.barycentreCompanion ? `\n    barycentreCompanion: '${r.barycentreCompanion}',` : ''}
-    fitFromJdTdb: ${r.fitFromJdTdb},
+${r.longitudeHarmonics ? `    longitudeHarmonics: ${JSON.stringify(r.longitudeHarmonics)},\n` : ''}    fitFromJdTdb: ${r.fitFromJdTdb},
     fitToJdTdb: ${r.fitToJdTdb},
     fitStepDays: ${r.fitStepDays},
     poleRightAscensionRad: ${shortest(r.poleRightAscensionRad, 1e-12)},
@@ -446,6 +459,8 @@ const out = `${HEADER(
 import type { KeplerianElements } from '../kepler.js'
 
 export interface SatelliteRecord {
+  /** Prepared slow libration in mean longitude; fitted inside the stated interval. */
+  readonly longitudeHarmonics?: readonly { readonly rateRadPerDay: number; readonly cosineRad: number; readonly sineRad: number; readonly epochJdTt: number }[]
   /** Body id of the planet this moon orbits. */
   readonly parent: string
   /** Horizons target code, so a fixture can be re-fetched without guessing. */
