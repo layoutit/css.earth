@@ -1,0 +1,247 @@
+{
+  "schema": "csscomet-9p-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "pds-shape",
+      "path": "shape/tempel1_2012_plan.tab",
+      "expectedBytes": 1634142,
+      "expectedSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
+      "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/dataset.shtml"
+      ],
+      "acquisition": "Download the original PDS table; verify exact bytes and SHA-256.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "shape"
+      ]
+    },
+    {
+      "id": "model-surface",
+      "path": "material/model-coverage.png",
+      "expectedBytes": 7580,
+      "expectedSha256": "b5a1d39f0f0b7453507a01ba1507958be6ec0a8090ac3f2cc6abc783d9a75add",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "Farnham & Thomas (2013), NASA PDS flags; cssEarth coverage material",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in material, reproduced from the original PDS constraint flags during preparation.",
+      "redistribution": "Authored neutral material under the repository MIT license.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2830
+      },
+      "width": 512,
+      "height": 256,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "recipe": {
+        "width": 512,
+        "height": 256,
+        "stepDegrees": 2,
+        "colors": {
+          "1": "#b8b6b2",
+          "2": "#b8b6b2",
+          "3": "#b8b6b2"
+        },
+        "gridFlags": [
+          3
+        ]
+      }
+    },
+    {
+      "id": "constraint-surface",
+      "path": "material/constraints.png",
+      "expectedBytes": 7711,
+      "expectedSha256": "4d5d83e2c82109d4747de00e22df1ef50f862f85a66330ed7c5ce4d8873221dd",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
+      "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/dataset.shtml"
+      ],
+      "acquisition": "Checked-in categorical map, reproduced from the original PDS flags during preparation.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "constraints",
+      "label": "Source constraints",
+      "falseColor": true,
+      "width": 512,
+      "height": 256,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2830
+      },
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "recipe": {
+        "width": 512,
+        "height": 256,
+        "stepDegrees": 2,
+        "colors": {
+          "1": "#b8b6b2",
+          "2": "#578dba",
+          "3": "#b8b6b2"
+        },
+        "gridFlags": [
+          3
+        ]
+      }
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "expectedBytes": 77009,
+      "expectedSha256": "c5f29901da5a74f1009082cc29548a2b87cdb15c9fdcc3a11aab529ff4f2ff9a",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
+      "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/dataset.shtml"
+      ],
+      "acquisition": "Checked-in derived context image; reproduced and hash-verified by preparation.",
+      "redistribution": "Public scientific data; retain dataset identification and author attribution.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "pds-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 15,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5798,
+      "expectedSha256": "8599bdaf5632fd9ccc6aa0d61ef3c2e5b7c664bb2e41096221f687395079a90b",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 737,
+      "expectedSha256": "513ceb65e401f32b408149aa3f568dd18627826b5387c4fd990547ff158de110",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1624,
+      "expectedSha256": "4a9775255e083e8ca3bca4e995a1bf5f2bd0d479520afc06e75912ec7172d2d7",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 407,
+      "expectedSha256": "0b095c218de9507ce7c95a006f17b4cf8346e20ec9743c294f5fe5657040655a",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 4649,
+      "expectedSha256": "22220e8df3b1bd565b853c9e3c21a4daa38259308ffd9b3cdf5aeff8349eed46",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 41,
+      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3446,
+      "expectedSha256": "221a3d3352f0f326de337017b175028c31bf753069b9176ba83267de55cefb59",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/dataset.cat",
+      "expectedBytes": 17440,
+      "expectedSha256": "24887b4f6f74ffb68e705bb132d24fbae83088fd2444ef0e3208ad7e69ead138",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/tempel1_2012_plan.lbl",
+      "expectedBytes": 12720,
+      "expectedSha256": "a8ceea25c3526ebb30f12adc6daf9d19551d34a87d13064338ca295e07c61e69",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "d3d973560809865e2a94fd5f50fedabbbbb65f6b39d3f9df13bff887a41d18a8",
+      "purpose": "9P/Tempel 1 source evidence or authored preparation input."
+    }
+  ]
+}
