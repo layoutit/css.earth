@@ -10,7 +10,7 @@ Source: NASA PDS `urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004
 - DRACO and LICIACube imagery contributes to the source model. Individual calibrated images require registered camera projection, coverage and photometry to become surface imagery; they are not silently used as global textures.
 - Released SPC relative-albedo FITS is a per-facet binary table with uncertainty, not the existing cylindrical FITS image capability. A value or sigma alone does not establish uniform observed coverage. This view is deferred pending a qualified facet-table material preparation path.
 - Gravity, slope and other ancillary FITS fields are scientifically distinct from radius. They are deferred rather than mislabeled as elevation.
-- Shape uses a neutral material and prepared directional lighting. Elevation uses source radius minus 75 m in meters, with cartographic relief; it is not measured impact displacement or height above an equipotential.
+- Shape uses the shared no-imagery grid and prepared directional lighting. Elevation uses source radius minus 75 m in meters, with cartographic relief; it is not measured impact displacement or height above an equipotential.
 
 ## Geometry and lighting
 
