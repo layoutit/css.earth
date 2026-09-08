@@ -9,9 +9,13 @@ test('Haumea retains its measured triaxial shape and ring within the actual leaf
   const descriptor = parseAuthoredObjectDescriptor(await json('object.json'));
   assert.deepEqual(descriptor.recipe.shape, { kind: 'ellipsoid', radiusKm: 1161, secondaryRadiusKm: 852, polarRadiusKm: 513 });
   const scene = await json('prepared/scene.json');
-  assert.equal(scene.bodyLeaves.length + scene.ringLeaves.length, 1572);
+  assert.equal(scene.bodyLeaves.length, 1444);
+  assert.equal(scene.ringCoverage.sourceFaceCount, 128);
+  assert.equal(scene.ringCoverage.sourceFaces.length, 128);
+  assert.equal(scene.ringCoverage.preparedTileCount, scene.ringLeaves.length);
+  assert.equal(scene.ringLeaves.length, 16);
   const runtime = await json('prepared/runtime.json');
-  assert.equal(runtime.tree.nodes.filter(node => node.tag === 's').length, 1573);
+  assert.equal(runtime.tree.nodes.filter(node => node.tag === 's').length, 1461);
   assert.ok(runtime.tree.nodes.filter(node => node.tag === 's').length <= 2000);
   assert.deepEqual([scene.model.ring.innerRadiusKm, scene.model.ring.outerRadiusKm], [2252, 2322]);
 });

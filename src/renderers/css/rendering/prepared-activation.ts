@@ -21,7 +21,9 @@ export function prepareConnectedActivation(groups: readonly (readonly HTMLElemen
       frame = null;
       if (disposed) { done(); return; }
       for (const entry of entries[index++]) entry.node.style.display = entry.display;
-      if (index === entries.length) done();
+      // Give the final batch a rendering opportunity before readiness. Calling
+      // the continuation here stacks handoff work onto that batch's first frame.
+      if (index === entries.length) frame = window!.requestAnimationFrame(() => { frame = null; done(); });
       else frame = window!.requestAnimationFrame(next);
     }
     if (disposed) done();

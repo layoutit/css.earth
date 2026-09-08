@@ -89,11 +89,11 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Billboards share the detail stage, so a nearer body can cover the selected detail.
         spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites });
-        focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource });
+        focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,
           setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
-          setNavigationIndicatorsVisible(visible: boolean) { spatial!.setNavigationIndicatorsVisible(visible); },
+          setNavigationIndicatorsVisible(visible: boolean) { spatial!.setNavigationIndicatorsVisible(visible); focusPoint?.setNavigationEnabled(visible); },
           inspect() {
             return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(),
               foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });

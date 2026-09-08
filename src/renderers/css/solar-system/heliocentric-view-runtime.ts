@@ -12,6 +12,7 @@ import type {SpriteWithUrl,SystemMarkers,PhaseAtlas} from './heliocentric-sprite
 import type {HeliocentricViewPlan,HeliocentricProjection,HeliocentricProjectionInput,TrailSpans,OrbitSegment} from './heliocentric-view.js';
 import type {ExposureOptions} from "@cssearth/engine";
 import { bindObjectNavigationTarget } from './heliocentric-navigation.js';
+import { screenPicking, type ScreenPickTarget } from '../navigation/screen-picking.js';
 export interface HeliocentricMountOptions {host:HTMLElement;before?:HTMLElement|null;plan:HeliocentricViewPlan;objectId:string;sunImageUrl:string;markerSprite:SpriteWithUrl;systemMarkers?:SystemMarkers|null;labels?:CaptionPlan|null;orbitPoolSpare?:number;systemPoolSpare?:number;}
 export type RetainedHeliocentricView = ReturnType<typeof mountRetainedHeliocentricView>;
 
@@ -123,6 +124,7 @@ export function mountRetainedHeliocentricView({
   const systemGroup = document.createElement("div");
   systemGroup.className = `planet-heliocentric-system ${objectId}-planetary-system`;
   const systemMarkerGroup = document.createElement("div");
+  const picking = screenPicking(host);
   systemMarkerGroup.className = "planet-heliocentric-system-markers";
   const systemPieces: HTMLElement[] = [];
   const systemMarkerElements = new Map<string,HTMLElement>();
@@ -384,6 +386,7 @@ export function mountRetainedHeliocentricView({
       if (destroyed) return;
       destroyed = true;
       captions?.destroy();
+      picking.remove(systemMarkerGroup);
       for (const { navigation } of systemHitTargets.values()) navigation.destroy();
       sunRoot.remove();
       overlay.remove();
@@ -445,6 +448,7 @@ export function mountRetainedHeliocentricView({
     if (systemMarkers === null || phaseAtlas === null) return;
     const projected = projection.system;
     if (projected === null) {
+      picking.publish(systemMarkerGroup, []);
       // Invisible: hide whatever was active and write nothing else.
       activeSystemPieceCount = writePieces(systemPieces, [], activeSystemPieceCount).count;
       for (const [id, element] of systemMarkerElements) setMarkerHidden(id, element, true);
@@ -452,6 +456,7 @@ export function mountRetainedHeliocentricView({
       return;
     }
     const segments:OrbitSegment[] = [];
+    const picks: ScreenPickTarget[] = [];
     for (const body of projected.bodies) {
       for (const segment of body.orbitSegments) segments.push(segment);
       const element = systemMarkerElements.get(body.id)!;
@@ -462,6 +467,8 @@ export function mountRetainedHeliocentricView({
       target.element.style.visibility = selectable ? '' : 'hidden';
       if (selectable && state.screen) {
         const hitSize = Math.max(20, state.diameterPx);
+        picks.push({ element: target.element, rank: picks.length,
+          shape: { kind: 'circle', x: state.screen[0], y: state.screen[1], radius: hitSize / 2 } });
         const size = `${formatNumber(hitSize)}px`;
         if (target.element.style.width !== size) {
           target.element.style.width = size;
@@ -496,6 +503,7 @@ export function mountRetainedHeliocentricView({
       setMarkerHidden(body.id, element, !state.visible);
     }
     visibleSystemMarkerCount = projected.bodies.filter((body) => body.marker.visible).length;
+    picking.publish(systemMarkerGroup, picks);
     const result = writePieces(systemPieces, segments, activeSystemPieceCount);
     activeSystemPieceCount = result.count;
     if (result.overflowed) systemOverflowCount += 1;

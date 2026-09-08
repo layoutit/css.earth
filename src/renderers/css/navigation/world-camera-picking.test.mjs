@@ -6,6 +6,7 @@ import runtimeDefinition from '../../../../src/planets/mercury/prepared/runtime.
 import { projectHeliocentricView } from '../solar-system/heliocentric-view.ts';
 import { hitsProjectedBody } from './world-camera-hit.ts';
 import { bindWorldCameraPicking } from './world-camera-picking.ts';
+import { screenPicking } from './screen-picking.ts';
 import { createUnboundedMatrixDragControls } from './camera-input.ts';
 
 afterEach(() => vi.unstubAllGlobals());
@@ -61,20 +62,33 @@ function fixture(hitTest = () => false) {
   vi.stubGlobal('HTMLElement', Surface);
   vi.stubGlobal('PointerEvent', Pointer);
   const surface = new Surface(), host = new Surface();
+  const registry = screenPicking(host);
+  let targets = [];
+  Object.defineProperty(document, 'targets', { get: () => targets, set(value) {
+    targets = value;
+    registry.publish(document, value.flatMap(element => {
+      const direct = element.dataset.objectNavigate && element.style.pointerEvents === 'auto';
+      const orbit = element.parentElement?.closest('[data-context-orbit]');
+      const target = direct ? element : orbit?.dataset.objectNavigate && Number(element.style.opacity || 1) > .1 ? orbit : null;
+      return target ? [{ element: target, rank: 0, shape: { kind: 'rect', left: -100, top: -100, right: 100, bottom: 100 } }] : [];
+    }));
+  } });
+  document.elementsFromPoint = () => { throw new Error('Input must not search rendered DOM'); };
+  const readBounds = () => ({ left: bounds.x, top: bounds.y, width: bounds.width, height: bounds.height });
   const controls = createUnboundedMatrixDragControls({ inputSurface: surface, runtimePolicy,
     trackballMetrics: () => ({ centerX: 500, centerY: 400, radius: 250, surfaceRadius: 250, focalLength: 900,
       sceneMatrix: [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1] }),
     surfaceFlyToState: () => ({ zoom: 1, minimumZoom: .5, maximumZoom: 4 }), surfaceFlyToHitTest: hitTest,
     rotate: value => publications.push(value) });
-  let unbind = bindWorldCameraPicking(surface, host), selections = 0, interrupted = 0;
+  let unbind = bindWorldCameraPicking(surface, host, readBounds), selections = 0, interrupted = 0;
   const target = new Surface();
   target.dataset.objectNavigate = 'venus'; target.style.pointerEvents = 'auto';
   target.click = () => { selections++; document.addEventListener('pointerdown', () => interrupted++); };
-  return { controls, publications, document, window, target, surface,
+  return { controls, publications, document, window, target, surface, registry,
     get selections() { return selections; }, get interrupted() { return interrupted; },
     fire(type, time, data = {}) { now = time; surface.dispatchEvent(new Pointer(type, data)); },
     tick(time) { now = time; const callbacks = [...frames.values()]; frames.clear(); callbacks.forEach(callback => callback(time)); },
-    handoff() { unbind(); unbind = bindWorldCameraPicking(surface, host); },
+    handoff() { unbind(); unbind = bindWorldCameraPicking(surface, host, readBounds); },
     destroy() { controls.destroy(); unbind(); },
   };
 }
@@ -158,22 +172,22 @@ test('blank clicks after the native double-click interval are not swallowed', ()
 test('hover uses the same retained target as picking and restores the input cursor', () => {
   const f = fixture(() => true);
   f.document.targets = [f.target];
-  f.fire('pointermove', 0, { buttons: 0 });
+  f.fire('pointermove', 0, { buttons: 0 }); f.tick(1);
   assert.equal(f.target.dataset.objectHovered, 'true');
   assert.equal(cursor(f.surface), 'pointer');
   assert.equal(f.selections, 0);
   f.document.targets = [];
-  f.fire('pointermove', 10, { buttons: 0 });
+  f.fire('pointermove', 10, { buttons: 0 }); f.tick(11);
   assert.equal(f.target.dataset.objectHovered, undefined);
   assert.equal(cursor(f.surface), 'grab');
   f.document.targets = [f.target];
   f.target.ariaDisabled = 'true';
-  f.fire('pointermove', 20, { buttons: 0 });
+  f.fire('pointermove', 20, { buttons: 0 }); f.tick(21);
   assert.equal(f.target.dataset.objectHovered, undefined);
   f.target.ariaDisabled = 'false';
-  f.fire('pointermove', 30, { buttons: 0, pointerType: 'touch' });
+  f.fire('pointermove', 30, { buttons: 0, pointerType: 'touch' }); f.tick(31);
   assert.equal(f.target.dataset.objectHovered, undefined);
-  f.fire('pointermove', 40, { buttons: 0 });
+  f.fire('pointermove', 40, { buttons: 0 }); f.tick(41);
   f.destroy();
   assert.equal(f.target.dataset.objectHovered, undefined);
   assert.equal(f.surface.style.cursor, undefined);
@@ -185,7 +199,7 @@ test('hover uses the same retained target as picking and restores the input curs
 test('sky and surface hover cursors follow the physical hit and both use grabbing during a drag', () => {
   let bodyVisible = true;
   const f = fixture(x => bodyVisible && x < 600);
-  f.fire('pointermove', 0, { buttons: 0, clientX: 750 });
+  f.fire('pointermove', 0, { buttons: 0, clientX: 750 }); f.tick(1);
   assert.equal(cursor(f.surface), 'crosshair');
   f.fire('pointerdown', 10, { clientX: 750 });
   f.fire('pointermove', 20, { clientX: 550 });
@@ -198,7 +212,7 @@ test('sky and surface hover cursors follow the physical hit and both use grabbin
   assert.equal(cursor(f.surface), 'grabbing');
   f.fire('pointerup', 60, { clientX: 750 });
   assert.equal(cursor(f.surface), 'crosshair');
-  f.fire('pointermove', 70, { buttons: 0, clientX: 550 });
+  f.fire('pointermove', 70, { buttons: 0, clientX: 550 }); f.tick(71);
   assert.equal(cursor(f.surface), 'grab');
   bodyVisible = false;
   f.controls.invalidateTrackball();
@@ -210,13 +224,13 @@ test('sky and surface hover cursors follow the physical hit and both use grabbin
 
 test('hover clears before a drag and on leaving the scene', () => {
   const f = fixture(); f.document.targets = [f.target];
-  f.fire('pointermove', 0, { buttons: 0 });
+  f.fire('pointermove', 0, { buttons: 0 }); f.tick(1);
   f.fire('pointerdown', 10);
   assert.equal(f.target.dataset.objectHovered, undefined);
   f.fire('pointermove', 20, { buttons: 1, clientX: 580 });
   assert.equal(f.target.dataset.objectHovered, undefined);
   f.fire('pointerup', 30);
-  f.fire('pointermove', 40, { buttons: 0 });
+  f.fire('pointermove', 40, { buttons: 0 }); f.tick(41);
   assert.equal(f.target.dataset.objectHovered, 'true');
   f.fire('pointerleave', 50, { buttons: 0 });
   assert.equal(f.target.dataset.objectHovered, undefined);
@@ -238,18 +252,18 @@ test('label, circle and visible orbit share hover, pointer cursor and single-cli
   circle.dataset.objectNavigate = 'venus'; circle.style.pointerEvents = 'auto';
   for (const target of [f.target, circle, chord]) {
     f.document.targets = [target];
-    f.fire('pointermove', 0, { buttons: 0 });
+    f.fire('pointermove', 0, { buttons: 0 }); f.tick(1);
     assert.equal(group.dataset.objectHovered, 'true');
     assert.equal(cursor(f.surface), 'pointer');
   }
   firstClick(f);
   assert.equal(f.selections, 1);
   assert.equal(group.dataset.objectHovered, undefined);
-  f.document.targets = [chord]; f.fire('pointermove', 30, { buttons: 0 });
-  f.document.targets = []; f.fire('pointermove', 40, { buttons: 0 });
+  f.document.targets = [chord]; f.fire('pointermove', 30, { buttons: 0 }); f.tick(31);
+  f.document.targets = []; f.fire('pointermove', 40, { buttons: 0 }); f.tick(41);
   assert.equal(group.dataset.objectHovered, undefined);
   f.document.group = group; f.target.parentElement = null;
-  f.document.targets = [f.target]; f.fire('pointermove', 50, { buttons: 0 });
+  f.document.targets = [f.target]; f.fire('pointermove', 50, { buttons: 0 }); f.tick(51);
   assert.equal(group.dataset.objectHovered, 'true', 'the separate Sun point can highlight its context owner');
   f.destroy();
 });
@@ -264,5 +278,23 @@ test('faded orbit chords and empty orbit groups cannot select a body', () => {
     firstClick(f);
     assert.equal(f.selections, 0);
   }
+  f.destroy();
+});
+
+
+test('hover coalesces pointer events and follows the latest published targets while stationary', () => {
+  const f = fixture();
+  const pick = vi.spyOn(f.registry, 'pick');
+  f.document.targets = [f.target];
+  f.fire('pointermove', 1, { buttons: 0 });
+  f.fire('pointermove', 2, { buttons: 0 });
+  f.fire('pointermove', 3, { buttons: 0 });
+  assert.equal(pick.mock.calls.length, 0);
+  f.tick(16);
+  assert.equal(pick.mock.calls.length, 1);
+  assert.equal(f.target.dataset.objectHovered, 'true');
+  f.document.targets = [];
+  f.tick(32);
+  assert.equal(f.target.dataset.objectHovered, undefined);
   f.destroy();
 });

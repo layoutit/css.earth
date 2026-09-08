@@ -5,6 +5,6 @@ export const browserProfile = createObjectBrowserProfile({ id: "makemake", contr
   audit: {
     preparedAssetPairs: [{ one: "/scenes/makemake/makemake-directional-sun.webp", two: "/scenes/makemake/makemake-directional-sun@2x.webp" }],
     canonicalPreparedAssets: ["/scenes/makemake/surface.webp", "/scenes/makemake/poles.webp", "/scenes/makemake/lighting.webp"],
-    retained: { lensIds: [], allowedMountSelectors: [] },
+    retained: { lensIds: ['illustration'], allowedMountSelectors: [] },
   },
 });
