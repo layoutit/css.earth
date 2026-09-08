@@ -141,3 +141,27 @@ test('prepared volume descriptor and external PNG bank form a complete pinned cl
   }
   assert(!bytes.includes(Buffer.from('data:image/')), 'Production payload must reference external PNGs');
 });
+
+
+test('volume compilation omits only lossless-alpha empty slabs, preserving every nonempty PolyCSS leaf', async () => {
+  const { compileCssVolume } = await import('./volume.js');
+  const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
+  const { parseVolumeRecipe } = await import('../../../preparation/volume/config.js');
+  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('../../../preparation/volume/slices.js').VolumeSlices;
+  const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way/object.json', 'utf8')));
+  const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way/source/volume.json', 'utf8')));
+  const options = { id: descriptor.id, frame: descriptor.volume, recipe, slices };
+  const empty = slices.quads.filter(quad => quad.alphaCoverage === 0);
+  assert(empty.length > 0, 'the real prepared bank must exercise empty-slab exclusion');
+  for (const quad of empty) {
+    const rgba = await sharp(resolve('src/objects/milky-way/prepared', quad.texturePath)).ensureAlpha().raw().toBuffer();
+    for (let offset = 3; offset < rgba.length; offset += 4) assert.equal(rgba[offset], 0, `${quad.id} must have zero decoded alpha`);
+  }
+  const complete = compileCssVolume({ ...options, slices: { ...slices, quads: slices.quads.map(quad => ({ ...quad, alphaCoverage: 1 })) } });
+  const sparse = compileCssVolume(options);
+  const omittedIds = new Set(empty.map(quad => quad.id)), omittedPaths = new Set(empty.map(quad => quad.texturePath));
+  assert.deepEqual(sparse.stacks, complete.stacks.map(stack => ({ ...stack, leaves: stack.leaves.filter(leaf => !omittedIds.has(leaf.id)) })));
+  assert.deepEqual(sparse.resources, complete.resources.filter(resource => !omittedPaths.has(resource.path)));
+  const faint = compileCssVolume({ ...options, slices: { ...slices, quads: slices.quads.map(quad => ({ ...quad, alphaCoverage: Number.MIN_VALUE })) } });
+  assert.deepEqual(faint, complete, 'no nonzero coverage threshold may remove a faint slab');
+});

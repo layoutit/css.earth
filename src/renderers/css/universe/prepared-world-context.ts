@@ -340,7 +340,9 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     const orbitRoot = host.ownerDocument.createElement('div');
     orbitRoot.className = 'context-orbit';
     orbitRoot.dataset.contextOrbit = body.id;
-    orbitRoot.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+    // Keep a nonempty centered anchor for overflow painting; an orbit fade
+    // must not allocate an otherwise empty viewport-sized surface.
+    orbitRoot.style.cssText = 'position:absolute;left:50%;top:50%;width:1px;height:1px;margin:-.5px 0 0 -.5px;pointer-events:none';
     orbitRoot.style.setProperty('--context-line-width', `${CONTEXT_LINE_WIDTH}px`);
     orbitRoot.style.setProperty('--context-orbit-pointer-events', 'none');
     if (orbit) group.appendChild(orbitRoot);
