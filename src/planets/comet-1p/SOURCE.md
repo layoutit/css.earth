@@ -79,3 +79,14 @@ vectors at the prepared epoch and ±30 days, not claimed as a long-term ephemeri
 | [Belton et al. (1991)](https://doi.org/10.1016/0019-1035(91)90207-A), referenced by the source label | Historical rotation assumptions inform the shape source. No current attitude propagation is implemented. |
 
 This package contains the nucleus model only; no coma, tail or outgassing scene.
+
+## Giotto encounter-image intake
+
+The [pinned candidate manifest](candidates/giotto-hmc.json) and
+[intake report](../../../docs/comets/HALLEY-GIOTTO.md) retain a reproducible
+seven-frame survey from the original PDS SBN release, including its separate
+FITS geometry headers. Raster decoding and calibration are verified; a
+camera solution tied to this Stooke body frame and a surface-only coverage mask
+are not established. No photographic surface lens is qualified. Candidate
+retrieval pins are outside the preparation recipe; downloaded image data and
+diagnostic image derivatives remain local under `output/`.
