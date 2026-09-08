@@ -51,6 +51,7 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
       inputSurface.style.removeProperty('--object-hover-cursor');
     }
     hovered = target;
+    host.dispatchEvent(new Event('objecthoverchange'));
   };
   let hoverPoint: PointerEvent | null = null, hoverFrame: number | null = null;
   const scheduleHover = () => {

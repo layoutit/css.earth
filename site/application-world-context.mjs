@@ -83,6 +83,9 @@ export function createApplicationWorldContext() {
           setAsteroidOrbitsEnabled(enabled) {
             if (!destroyed) layer.setHiddenOrbits(enabled === true ? [] : asteroidIds);
           },
+          setAsteroidLabelsEnabled(enabled) {
+            if (!destroyed) layer.setHiddenLabels(enabled === true ? [] : asteroidIds);
+          },
           setHeliosphereEnabled(enabled) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;
             heliosphereEnabled = enabled === true;
