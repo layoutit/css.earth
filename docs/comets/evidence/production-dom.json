@@ -1,0 +1,2238 @@
+{
+  "browser": "152.0.7977.76",
+  "reports": [
+    {
+      "object": "comet-103p",
+      "density": 1,
+      "initial": {
+        "nodes": 23400,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1000,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "comet-9p",
+      "density": 1,
+      "initial": {
+        "nodes": 23400,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1000,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "comet-67p",
+      "density": 1,
+      "initial": {
+        "nodes": 23400,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1000,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "amalthea",
+      "density": 1,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "thebe",
+      "density": 1,
+      "initial": {
+        "nodes": 23100,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 700,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "metis",
+      "density": 1,
+      "initial": {
+        "nodes": 22880,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "adrastea",
+      "density": 1,
+      "initial": {
+        "nodes": 22880,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "proteus",
+      "density": 1,
+      "initial": {
+        "nodes": 23500,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1100,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "larissa",
+      "density": 1,
+      "initial": {
+        "nodes": 23000,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 600,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "daphnis",
+      "density": 1,
+      "initial": {
+        "nodes": 22800,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 400,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "calypso",
+      "density": 1,
+      "initial": {
+        "nodes": 23000,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 600,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "telesto",
+      "density": 1,
+      "initial": {
+        "nodes": 23000,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 600,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "helene",
+      "density": 1,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "sun",
+      "density": 1,
+      "initial": {
+        "nodes": 22913,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 514,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "mercury",
+      "density": 1,
+      "initial": {
+        "nodes": 23302,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 898,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "venus",
+      "density": 1,
+      "initial": {
+        "nodes": 22849,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 450,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "earth",
+      "density": 1,
+      "initial": {
+        "nodes": 24465,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 690,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "moon",
+      "density": 1,
+      "initial": {
+        "nodes": 22866,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "mars",
+      "density": 1,
+      "initial": {
+        "nodes": 22918,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 517,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ryugu",
+      "density": 1,
+      "initial": {
+        "nodes": 23190,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 790,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "bennu",
+      "density": 1,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "itokawa",
+      "density": 1,
+      "initial": {
+        "nodes": 23194,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 794,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "eros",
+      "density": 1,
+      "initial": {
+        "nodes": 23196,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 796,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "vesta",
+      "density": 1,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "phobos",
+      "density": 1,
+      "initial": {
+        "nodes": 23616,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1216,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "deimos",
+      "density": 1,
+      "initial": {
+        "nodes": 23616,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1216,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ceres",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "jupiter",
+      "density": 1,
+      "initial": {
+        "nodes": 23190,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 789,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "io",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "europa",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ganymede",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "callisto",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "saturn",
+      "density": 1,
+      "initial": {
+        "nodes": 23365,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 937,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "pan",
+      "density": 1,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "atlas",
+      "density": 1,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "prometheus",
+      "density": 1,
+      "initial": {
+        "nodes": 23120,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 720,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "pandora",
+      "density": 1,
+      "initial": {
+        "nodes": 23040,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 640,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "janus",
+      "density": 1,
+      "initial": {
+        "nodes": 23120,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 720,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "epimetheus",
+      "density": 1,
+      "initial": {
+        "nodes": 23120,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 720,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "hyperion",
+      "density": 1,
+      "initial": {
+        "nodes": 23600,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1200,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "mimas",
+      "density": 1,
+      "initial": {
+        "nodes": 23120,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 720,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "enceladus",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "tethys",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "dione",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "rhea",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "titan",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "iapetus",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "phoebe",
+      "density": 1,
+      "initial": {
+        "nodes": 23616,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1216,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "uranus",
+      "density": 1,
+      "initial": {
+        "nodes": 23465,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1063,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "miranda",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ariel",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "umbriel",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "titania",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "oberon",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "neptune",
+      "density": 1,
+      "initial": {
+        "nodes": 23127,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 726,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "triton",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "pluto",
+      "density": 1,
+      "initial": {
+        "nodes": 22866,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "charon",
+      "density": 1,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "haumea",
+      "density": 1,
+      "initial": {
+        "nodes": 23972,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1573,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "makemake",
+      "density": 1,
+      "initial": {
+        "nodes": 22851,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "eris",
+      "density": 1,
+      "initial": {
+        "nodes": 22851,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "comet-103p",
+      "density": 2,
+      "initial": {
+        "nodes": 23400,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1000,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "comet-9p",
+      "density": 2,
+      "initial": {
+        "nodes": 23400,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1000,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "comet-67p",
+      "density": 2,
+      "initial": {
+        "nodes": 23400,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1000,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "amalthea",
+      "density": 2,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "thebe",
+      "density": 2,
+      "initial": {
+        "nodes": 23100,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 700,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "metis",
+      "density": 2,
+      "initial": {
+        "nodes": 22880,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "adrastea",
+      "density": 2,
+      "initial": {
+        "nodes": 22880,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 480,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "proteus",
+      "density": 2,
+      "initial": {
+        "nodes": 23500,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1100,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "larissa",
+      "density": 2,
+      "initial": {
+        "nodes": 23000,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 600,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "daphnis",
+      "density": 2,
+      "initial": {
+        "nodes": 22800,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 400,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "calypso",
+      "density": 2,
+      "initial": {
+        "nodes": 23000,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 600,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "telesto",
+      "density": 2,
+      "initial": {
+        "nodes": 23000,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 600,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "helene",
+      "density": 2,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "sun",
+      "density": 2,
+      "initial": {
+        "nodes": 22913,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 514,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "mercury",
+      "density": 2,
+      "initial": {
+        "nodes": 23302,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 898,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "venus",
+      "density": 2,
+      "initial": {
+        "nodes": 22849,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 450,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "earth",
+      "density": 2,
+      "initial": {
+        "nodes": 24465,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 690,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "moon",
+      "density": 2,
+      "initial": {
+        "nodes": 22866,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "mars",
+      "density": 2,
+      "initial": {
+        "nodes": 22918,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 517,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ryugu",
+      "density": 2,
+      "initial": {
+        "nodes": 23190,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 790,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "bennu",
+      "density": 2,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "itokawa",
+      "density": 2,
+      "initial": {
+        "nodes": 23194,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 794,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "eros",
+      "density": 2,
+      "initial": {
+        "nodes": 23196,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 796,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "vesta",
+      "density": 2,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "phobos",
+      "density": 2,
+      "initial": {
+        "nodes": 23616,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1216,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "deimos",
+      "density": 2,
+      "initial": {
+        "nodes": 23616,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1216,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ceres",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "jupiter",
+      "density": 2,
+      "initial": {
+        "nodes": 23190,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 789,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "io",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "europa",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ganymede",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "callisto",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "saturn",
+      "density": 2,
+      "initial": {
+        "nodes": 23365,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 937,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "pan",
+      "density": 2,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "atlas",
+      "density": 2,
+      "initial": {
+        "nodes": 23200,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "prometheus",
+      "density": 2,
+      "initial": {
+        "nodes": 23120,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 720,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "pandora",
+      "density": 2,
+      "initial": {
+        "nodes": 23040,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 640,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "janus",
+      "density": 2,
+      "initial": {
+        "nodes": 23120,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 720,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "epimetheus",
+      "density": 2,
+      "initial": {
+        "nodes": 23120,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 720,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "hyperion",
+      "density": 2,
+      "initial": {
+        "nodes": 23600,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1200,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "mimas",
+      "density": 2,
+      "initial": {
+        "nodes": 23120,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 720,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "enceladus",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "tethys",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "dione",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "rhea",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "titan",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "iapetus",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "phoebe",
+      "density": 2,
+      "initial": {
+        "nodes": 23616,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1216,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "uranus",
+      "density": 2,
+      "initial": {
+        "nodes": 23465,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1063,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "miranda",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ariel",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "umbriel",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "titania",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "oberon",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "neptune",
+      "density": 2,
+      "initial": {
+        "nodes": 23127,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 726,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "triton",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "pluto",
+      "density": 2,
+      "initial": {
+        "nodes": 22866,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "charon",
+      "density": 2,
+      "initial": {
+        "nodes": 22852,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "haumea",
+      "density": 2,
+      "initial": {
+        "nodes": 23972,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1573,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "makemake",
+      "density": 2,
+      "initial": {
+        "nodes": 22851,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "eris",
+      "density": 2,
+      "initial": {
+        "nodes": 22851,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 452,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    }
+  ],
+  "navigation": [
+    {
+      "density": 1,
+      "visits": [
+        {
+          "object": "saturn",
+          "nodes": 23365,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "mercury",
+          "nodes": 23302,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "earth",
+          "nodes": 24465,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "saturn",
+          "nodes": 23365,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "mercury",
+          "nodes": 23302,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "earth",
+          "nodes": 24465,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        }
+      ],
+      "maxScenes": 1
+    },
+    {
+      "density": 2,
+      "visits": [
+        {
+          "object": "saturn",
+          "nodes": 23365,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "mercury",
+          "nodes": 23302,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "earth",
+          "nodes": 24465,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "saturn",
+          "nodes": 23365,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "mercury",
+          "nodes": 23302,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        },
+        {
+          "object": "earth",
+          "nodes": 24465,
+          "scenes": 1,
+          "width": 1440,
+          "height": 900,
+          "perspective": 1247.08,
+          "styleCount": 3,
+          "loadedSheets": true,
+          "retained": true,
+          "universeRetained": true
+        }
+      ],
+      "maxScenes": 1
+    }
+  ],
+  "problems": []
+}
