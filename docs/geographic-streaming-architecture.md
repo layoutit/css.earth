@@ -347,11 +347,29 @@ callback intervals exceeded 100 ms, including a 413 ms interval on return to
 Earth. Functional recovery passed; smooth performance on this constrained
 profile is not established. This is browser emulation, not a physical phone.
 
-Visual qualification fails at a close Longyearbyen view. The flight reaches its
-destination and fine image requests can finish while large rectangles remain
-coarse, blank or stretched. Successful loading and functional assertions do not
-close this failure. Earlier recordings that repeatedly interrupted flights also
-do not prove geographic coverage. The failing polar view remains active work
-before the sustained journey can be called complete.
+The close Longyearbyen failure was reduced to two captured faces: a ready detail
+tile disappeared when an overlapping original surface face was present. Uniform
+rescaling of CSS coordinates about the perspective eye restored that tile while
+preserving its screen projection. Surface cameras now use their existing bounded
+zoom for that rendering scale; physical camera state and paging coordinates stay
+unchanged. CSS hit distances are converted back for drag and ruler measurements.
+This changes neither prepared geometry nor provider images.
+
+At `eb53bfeb`, the built DPR 2 route passes all 56 actions and its reviewed polar
+checkpoints display the previously hidden central detail. Incoming edge tiles
+still refine during the route. Focused polar pinch/wheel checks at DPR 1/2
+measured 1.19997× for a requested 1.2× zoom and 99.9875 pixels for a 100-pixel drag.
+The DPR 2 saved view restored with zero pixel error, and ruler scale stayed correct.
+The observer-light DPR 1 route also passes 56 actions, with an 18.5 ms interaction
+callback p95, a 55.3 ms maximum and no interaction callbacks over 100 ms. All 328
+renderer checks, renderer type checking and the 72-page build pass. These focused
+results do not complete sustained visual/native-resource qualification or turn
+the earlier interruption-heavy recordings into geographic coverage proof.
+
+The conditioned candidate also completes the same 56 actions under the constrained
+touch profile: callback p95 45.4 ms, maximum 147.2 ms, search-result p95 126.3 ms,
+and 12 interaction callbacks over 100 ms. Functional touch recovery passes;
+that profile still has visible timing limitations. The earlier 413 ms result and
+this single later run do not establish a controlled performance improvement.
 
 Run source verification, tests, build and OBJECTS-derived browser conformance appropriate to the final changes. Refresh delivery-cost scenarios from actual request/cache behavior. A stable metadata selection can still have blocked directories, and representative coverage does not establish worldwide valid pixels, physical-device behavior or provider availability. Merge and deployment remain the user's decisions.
