@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%276489%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               6489 Golevka (1991 JX)          2026-Sep-08 06:30:54
+Rec #:    6489 (+COV) Soln.date: 2022-Dec-20_14:07:28   # obs: 1017 (1991-2015)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2452413.5 ! 2002-May-19.00 (TDB)         Residual RMS= .3589
+   EC= .6051896111299258   QR= .9883219389666285   TP= 2452808.2425294677
+   OM= 211.1243017895301   W=  66.56347298401046   IN= 2.276154591271521
+   A= 2.503282504280477    MA= 261.7679522336765   ADIST= 4.018243069594325
+   PER= 3.96071            N= .248850936           ANGMOM= .021666753
+   DAN= 1.27866            DDN= 2.08936            L= 277.6712673
+   B= 2.0882877            MOID= .0281669          TP= 2003-Jun-17.7425294677
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .265               ROTPER= 6.026
+   H= 19.22                G= .150                 B-V= n.a.
+                           ALBEDO= .151            STYP= Q
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -1.218508373313E-14 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#107, PHA  OCC=0       radar(20 delay,20 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************
