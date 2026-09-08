@@ -86,6 +86,7 @@ HOPS=30 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:navigation-stress:matrix
 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
 DPR=2 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
 ORIGIN=http://127.0.0.1:4221 node site/test/replacement-flight-browser.mjs
+ORIGIN=http://127.0.0.1:4221 node site/test/natural-navigation-browser.mjs
 node site/test/flight-registry-browser.mjs http://127.0.0.1:4210
 node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 mars
 DPR=2 node site/test/flight-activation-browser.mjs http://127.0.0.1:4210 saturn

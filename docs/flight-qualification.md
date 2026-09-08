@@ -74,3 +74,29 @@ The broader source/preparation gate remains incomplete: this checkout lacks
 pinned inputs and the preparation suite also reports separate assertions.
 The production-shaped build and focused renderer/platform/shell/package checks
 are useful evidence, not substitutes for that gate. The PR remains a draft.
+
+## Natural three-destination journey
+
+The operator's shorter route ran on the same application build: start at a wide
+solar-system view, scroll inward and click Mars, make a small close zoom and drag,
+select Venus using sidebar search because it is outside that view, drag Venus,
+scroll outward through the Sun overview handoff, click Makemake in the scene,
+and drag its surface. No diagnostic camera writes or rapid supersessions were
+used. All three destinations and the overview handoff completed, with retained
+world/input/document identity and no recorded application or HTTP errors.
+
+Reproduce with `ORIGIN=http://127.0.0.1:4221 node site/test/natural-navigation-browser.mjs`.
+The completed run is `output/playwright/natural-835070bb-v2/`; the earlier attempt
+required Venus to be visible and failed that harness precondition. Its browser
+was still closing during the start of the completed run, so these are diagnostic
+observations, not an isolated before/after performance comparison.
+
+Navigation first-motion publication was 24 ms for Mars and about 30 ms for Venus
+and Makemake. After excluding the deliberate hover before clicking, Mars's active
+flight had a maximum complete-presentation gap of 35 ms. Venus had a 117 ms gap
+about 87 ms after its first motion, before its detail handoff at 517 ms. Makemake's
+largest gaps were at the end of approach; unchanging or subpixel motion must be
+distinguished before treating those as dropped animation. Close drags had p95
+complete-presentation gaps of 18.27 ms (Mars), 22.39 ms (Venus), and 18.34 ms
+(Makemake). The Venus departure is the next focused reproduction; this recording
+does not establish its cause or claim the remaining stalls are fixed.
