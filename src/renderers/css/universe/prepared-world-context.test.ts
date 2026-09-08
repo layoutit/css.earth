@@ -146,6 +146,66 @@ test('hidden orbit selection leaves other orbits intact and retains the same bod
   layer.destroy();
 });
 
+test('hidden labels keep circles pickable and hover reveals only that label and orbit without camera movement', () => {
+  const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
+  const clock = root.ownerDocument.defaultView, host = root.parentNode!;
+  const circle = find(root, 'contextIndicator', 'mercury');
+  const label = find(root, 'contextLabel', 'mercury');
+  const orbit = find(root, 'contextOrbit', 'mercury');
+  const other = find(root, 'contextOrbit', 'venus');
+  const sunLabel = find(root, 'contextLabel', 'sun');
+  layer.setHiddenOrbits(['mercury', 'venus']);
+  layer.setHiddenLabels(['mercury', 'venus']);
+  clock.advance(200);
+  expect(label.style.visibility).toBe('hidden');
+  expect(circle.style.visibility).toBe('');
+  expect(circle.dataset.objectNavigate).toBe('mercury');
+  expect(sunLabel.style.visibility).toBe('');
+  circle.dataset.objectHovered = 'true';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  clock.advance(16); clock.advance(200);
+  expect(label.style.visibility).toBe('');
+  expect(label.dataset.objectNavigate).toBe('mercury');
+  expect(orbit.style.opacity).not.toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(all(orbit).some(piece => piece.tagName === 's' && piece.style.visibility === '' &&
+    piece.parentNode?.style.display === 'contents')).toBe(true);
+  // A temporarily revealed orbit cannot keep itself hovered after leaving the circle.
+  expect(orbit.dataset.objectNavigate).toBeUndefined();
+  expect(orbit.style.getPropertyValue('--context-orbit-pointer-events')).toBe('none');
+  expect(other.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  delete circle.dataset.objectHovered;
+  host.dispatchEvent(new Event('objecthoverchange'));
+  clock.advance(16); clock.advance(200);
+  expect(label.style.visibility).toBe('hidden');
+  expect(orbit.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  expect(circle.dataset.objectNavigate).toBe('mercury');
+  layer.setHiddenLabels([]); clock.advance(200);
+  expect(label.style.visibility).toBe('');
+  expect(orbit.style.opacity).toBe('calc(0 * var(--context-line-opacity, 1))');
+  layer.setHiddenOrbits([]);
+  layer.setHiddenLabels(['mercury']); clock.advance(200);
+  expect(label.style.visibility).toBe('hidden');
+  expect(orbit.dataset.objectNavigate).toBe('mercury');
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+  host.dispatchEvent(new Event('objecthoverchange'));
+  expect(clock.frames.size).toBe(0);
+});
+
+test('keyboard focus also reveals a hidden label and orbit, then retires them on blur', () => {
+  const root = mount(1), layer = mounted.get(root)!, host = root.parentNode!;
+  const circle = find(root, 'contextIndicator', 'mercury'), label = find(root, 'contextLabel', 'mercury');
+  const clock = root.ownerDocument.defaultView;
+  layer.setHiddenOrbits(['mercury']); layer.setHiddenLabels(['mercury']);
+  Object.assign(root.ownerDocument, { activeElement: circle });
+  host.dispatchEvent(new Event('focusin')); clock.advance(16); clock.advance(200);
+  expect(label.style.visibility).toBe('');
+  Object.assign(root.ownerDocument, { activeElement: null });
+  host.dispatchEvent(new Event('focusout')); clock.advance(16); clock.advance(200);
+  expect(label.style.visibility).toBe('hidden');
+  layer.destroy();
+});
+
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   expect(parsePreparedWorldContext(source).bodies.map(body => body.id).sort())

@@ -27,7 +27,7 @@ function fixture(options = {}) {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-orbits-setting"]) {
+    ".planet-motion-setting", ".planet-sky-contrast-setting", ".planet-heliosphere-setting", ".planet-asteroid-orbits-setting", ".planet-asteroid-labels-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -67,6 +67,27 @@ test('Asteroids Orbits starts off and retains its independent preference across 
       shell.setObject({ id, name: id, apply() {} });
       assert.equal(toggle.checked, enabled);
       assert.equal(f.documentTarget.body.dataset.asteroidOrbits, enabled ? 'on' : 'off');
+      assert.equal(f.selectors.get('.planet-heliosphere-setting').checked, false);
+    }
+  }
+  assert.deepEqual(changes, [true, false]);
+  shell.destroy();
+  toggle.dispatchEvent(new Event('change'));
+  assert.deepEqual(changes, [true, false]);
+  assert.ok(f.elements.every(element => element.listeners.size === 0));
+});
+
+test('Asteroid Labels starts off and retains its independent preference across body navigation', () => {
+  const changes = [], f = fixture({ onAsteroidLabelsChange: value => changes.push(value) }), shell = f.mount();
+  const toggle = f.selectors.get('.planet-asteroid-labels-setting');
+  assert.equal(toggle.checked, false);
+  assert.equal(f.documentTarget.body.dataset.asteroidLabels, 'off');
+  for (const enabled of [true, false]) {
+    toggle.checked = enabled; toggle.dispatchEvent(new Event('change'));
+    for (const id of ['itokawa', 'sun', 'saturn']) {
+      shell.setObject({ id, name: id, apply() {} });
+      assert.equal(toggle.checked, enabled);
+      assert.equal(f.documentTarget.body.dataset.asteroidLabels, enabled ? 'on' : 'off');
       assert.equal(f.selectors.get('.planet-heliosphere-setting').checked, false);
     }
   }
